@@ -2,7 +2,7 @@ extends Node
 ## Save / load (Handoff §78, kickoff §19). Saves the whole GameState.data plus the exact scene
 ## and player position, never "just the scene".
 
-const DIR := "user://saves"
+var DIR := "user://saves"
 const AUTOSAVE_SLOT := 0
 
 signal saved(slot: int)

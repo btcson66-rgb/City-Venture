@@ -20,6 +20,7 @@ func _args() -> Dictionary:
 
 
 func _run() -> void:
+	SaveSystem.DIR = "user://test_saves"
 	var args := _args()
 	var filter: String = args.get("filter", "")
 	var files: Array = []

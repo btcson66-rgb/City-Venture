@@ -46,7 +46,11 @@ static func accept(cid: String) -> Dictionary:
 	c["status"] = "active"
 	c["accepted"] = Clock.now()
 	c["due"] = Clock.now() + int(c["delivery_days"]) * Clock.DAY
-	c["location"] = Ecommerce.default_stock_location()
+	var best := Ecommerce.default_stock_location()
+	for loc in Ecommerce.stock_locations():
+		if Ecommerce.stock(loc, c["product"]) > Ecommerce.stock(best, c["product"]):
+			best = loc
+	c["location"] = best
 	c["history"].append({"t": Clock.now(), "by": c["seller"], "text": "Accepted."})
 	if float(c["upfront_rate"]) > 0.0:
 		var up := snappedf(float(c["total"]) * float(c["upfront_rate"]), 0.01)
