@@ -23,6 +23,7 @@ static func create_offer(t: Dictionary) -> String:
 		"penalty_rate": float(t.get("penalty_rate", 0.05)), "quality_req": t.get("quality_req", "No defects on arrival"),
 		"upfront_rate": float(t.get("upfront_rate", 0.0)), "currency": "AUD", "settlement": "bank_transfer",
 		"status": "offered", "offered": Clock.now(), "expires": Clock.now() + int(t.get("expires_days", 2)) * Clock.DAY,
+		"tag": str(t.get("tag", "")),
 		"patience": int(DataDB.companies.get(t["buyer"], {}).get("negotiation", {}).get("patience", 1)),
 		"history": [{"t": Clock.now(), "by": t["buyer"], "text": I18n.t("Offer: %d × %s @ %s, Net %d") % [qty, I18n.t(p.get("name", "")), Fmt.money(price), int(t.get("payment_terms_days", 30))]}],
 	}
@@ -30,6 +31,20 @@ static func create_offer(t: Dictionary) -> String:
 	Sim.schedule(int(c["expires"]), "con.expire", {"id": cid})
 	EventBus.contract_changed.emit(cid)
 	return cid
+
+
+## Story hooks: a tagged contract ("big_contract") sets <tag>_accepted / _declined / _delivered / _paid.
+static func _tag(c: Dictionary, what: String) -> void:
+	var tag := str(c.get("tag", ""))
+	if tag == "":
+		return
+	GameState.set_flag(tag + "_" + what)
+	if what in ["accepted", "declined"]:
+		GameState.set_flag(tag + "_decided")
+
+
+static func contact_npc(c: Dictionary) -> String:
+	return str(DataDB.companies.get(c["buyer"], {}).get("contact_npc", "harbor_point"))
 
 
 static func can_trade() -> bool:
@@ -58,6 +73,7 @@ static func accept(cid: String) -> Dictionary:
 		Ledger.post(c["seller"], I18n.t("Deposit received from %s (%s)") % [GameState.entity_name(c["buyer"]), cid],
 			[{"acct": "cash", "dr": up}, {"acct": "deferred_revenue", "cr": up}], {"type": "contract", "id": cid})
 	Sim.schedule(int(c["due"]), "con.due", {"id": cid})
+	_tag(c, "accepted")
 	GameState.timeline(I18n.t("Signed contract %s with %s: %s.") % [cid, GameState.entity_name(c["buyer"]), Fmt.money(c["total"])], "business")
 	EventBus.contract_changed.emit(cid)
 	return {"ok": true}
@@ -69,6 +85,7 @@ static func reject(cid: String) -> void:
 		return
 	c["status"] = "rejected"
 	c["history"].append({"t": Clock.now(), "by": GameState.business_entity(), "text": "Declined."})
+	_tag(c, "declined")
 	EventBus.contract_changed.emit(cid)
 
 
@@ -118,7 +135,15 @@ static func can_deliver(cid: String) -> bool:
 	var c: Dictionary = C().get(cid, {})
 	if c.is_empty() or c["status"] != "active":
 		return false
-	return Ecommerce.stock(c["location"], c["product"]) >= int(c["qty"])
+	return stock_for(c) >= int(c["qty"])
+
+
+## Units of the contract's product across every stock location (a big order can ship from two).
+static func stock_for(c: Dictionary) -> int:
+	var n := 0
+	for loc in Ecommerce.stock_locations():
+		n += Ecommerce.stock(loc, c["product"])
+	return n
 
 
 ## Deliver the whole contract quantity from its stock location. Caller advances packing time.
@@ -126,13 +151,26 @@ static func deliver(cid: String) -> Dictionary:
 	var c: Dictionary = C().get(cid, {})
 	if c.is_empty() or c["status"] != "active":
 		return {"ok": false, "error": "Nothing to deliver."}
-	var loc: String = c["location"]
 	var qty := int(c["qty"])
-	if Ecommerce.stock(loc, c["product"]) < qty:
-		return {"ok": false, "error": I18n.t("You need %d in stock at %s (have %d).") % [qty, Ecommerce.location_name(loc), Ecommerce.stock(loc, c["product"])]}
-	var uc := Ecommerce.avg_cost(loc, c["product"])
-	var cogs := snappedf(uc * qty, 0.01)
-	Ecommerce.inv(loc)[c["product"]]["qty"] = Ecommerce.stock(loc, c["product"]) - qty
+	if stock_for(c) < qty:
+		return {"ok": false, "error": I18n.t("You need %d in stock (have %d).") % [qty, stock_for(c)]}
+	# pick from the signing location first, then anywhere else
+	var locs: Array = [c["location"]]
+	for l2 in Ecommerce.stock_locations():
+		if not l2 in locs:
+			locs.append(l2)
+	var left := qty
+	var cogs := 0.0
+	for loc in locs:
+		var take := mini(left, Ecommerce.stock(loc, c["product"]))
+		if take <= 0:
+			continue
+		cogs += Ecommerce.avg_cost(loc, c["product"]) * take
+		Ecommerce.inv(loc)[c["product"]]["qty"] = Ecommerce.stock(loc, c["product"]) - take
+		left -= take
+		if left <= 0:
+			break
+	cogs = snappedf(cogs, 0.01)
 	var total := float(c["total"])
 	var up := float(c.get("upfront_paid", 0.0))
 	var late := Clock.now() > int(c["due"])
@@ -155,6 +193,7 @@ static func deliver(cid: String) -> Dictionary:
 	Sim.cancel("con.due", "id", cid)
 	Sim.schedule(int(c["pay_due"]), "con.pay", {"id": cid})
 	GameState.inc_stat("contracts_delivered")
+	_tag(c, "delivered")
 	GameState.inc_stat("revenue_total", total)
 	EventBus.contract_changed.emit(cid)
 	return {"ok": true, "receivable": c["receivable"]}
@@ -173,10 +212,11 @@ static func handle(kind: String, p: Dictionary) -> void:
 			if c["status"] == "offered":
 				c["status"] = "expired"
 				c["history"].append({"t": Clock.now(), "by": c["buyer"], "text": "Offer expired."})
+				_tag(c, "declined")
 				EventBus.contract_changed.emit(c["id"])
 		"con.due":
 			if c["status"] == "active":
-				GameState.add_message("harbor_point", I18n.t("Hey — the %d %s were due today. Still coming?") % [int(c["qty"]), I18n.t(DataDB.product(c["product"])["name"]).to_lower()])
+				GameState.add_message(contact_npc(c), I18n.t("Hey — the %d %s were due today. Still coming?") % [int(c["qty"]), I18n.t(DataDB.product(c["product"])["name"]).to_lower()])
 				EventBus.notify.emit(I18n.t("Contract %s is overdue. Late penalty %s applies.") % [c["id"], Fmt.pct(c["penalty_rate"])], "bad", "contracts")
 		"con.pay":
 			if c["status"] == "delivered":
@@ -185,8 +225,34 @@ static func handle(kind: String, p: Dictionary) -> void:
 					[{"acct": "cash", "dr": amt}, {"acct": "accounts_receivable", "cr": amt}], {"type": "contract", "id": c["id"]})
 				c["status"] = "paid"
 				c["history"].append({"t": Clock.now(), "by": c["buyer"], "text": I18n.t("Paid %s.") % Fmt.money(amt)})
+				_tag(c, "paid")
 				EventBus.notify.emit(I18n.t("%s paid invoice %s: %s") % [GameState.entity_name(c["buyer"]), c["id"], Fmt.money(amt)], "good", "cash")
 				EventBus.contract_changed.emit(c["id"])
+
+
+## Invoice discounting: the buyer pays a delivered invoice now, minus a discount (default 3%).
+static func early_payment(cid: String, rate := 0.03) -> Dictionary:
+	var c: Dictionary = C().get(cid, {})
+	if c.is_empty() or c["status"] != "delivered":
+		return {"ok": false, "error": "Only a delivered, unpaid invoice can be paid early."}
+	var amt := float(c["receivable"])
+	var disc := snappedf(amt * rate, 0.01)
+	Ledger.post(c["seller"], I18n.t("Early payment from %s (%s), %s discount") % [GameState.entity_name(c["buyer"]), cid, Fmt.pct(rate)],
+		[{"acct": "cash", "dr": amt - disc}, {"acct": "exp:bank_fees", "dr": disc}, {"acct": "accounts_receivable", "cr": amt}], {"type": "contract", "id": cid})
+	c["status"] = "paid"
+	c["history"].append({"t": Clock.now(), "by": c["buyer"], "text": I18n.t("Paid early: %s (discount %s).") % [Fmt.money(amt - disc), Fmt.money(disc)]})
+	Sim.cancel("con.pay", "id", cid)
+	GameState.set_flag("early_payment_agreed")
+	_tag(c, "paid")
+	EventBus.contract_changed.emit(cid)
+	return {"ok": true, "cash": amt - disc, "discount": disc}
+
+
+static func by_tag(tag: String) -> Dictionary:
+	for c in C().values():
+		if c.get("tag", "") == tag:
+			return c
+	return {}
 
 
 static func open_list() -> Array:

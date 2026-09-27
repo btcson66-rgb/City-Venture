@@ -209,9 +209,15 @@ func _tab_finance() -> void:
 	cp.add_child(UIK.kv("Stock on the way", Fmt.money(Ledger.balance(be, "inventory_in_transit")), Art.C_SKY))
 	cp.add_child(UIK.kv("Parcels out for delivery", Fmt.money(Ledger.balance(be, "goods_out")), Art.C_SKY))
 	cp.add_child(UIK.kv("Deposits", Fmt.money(Ledger.balance(be, "deposits")), Art.C_SKY))
+	if Bank.debt(be) > 0.0:
+		cp.add_child(UIK.kv("Bank loans", Fmt.money(-Bank.debt(be)), Art.C_RED))
+	if Staff.wages_owed() > 0.0 and be == Staff.entity():
+		cp.add_child(UIK.kv("Wages owed to staff", Fmt.money(-Staff.wages_owed()), Art.C_RED))
+	cp.add_child(UIK.kv("Credit score", "%d · %s" % [Bank.credit(), I18n.t(Bank.credit_band())], Art.C_SKY, 7))
 	var reps: Array = GameState.data["reports"]["month_closes"]
 	if not reps.is_empty():
 		cp.add_child(UIK.button(I18n.t("Open last month close (%s)") % MonthClose.label_of(reps[-1]), func(): UIRoot.open_modal(MonthCloseModal.new(reps[-1]))))
+	_forecast(be)
 	_section("Recent transactions")
 	for e in Ledger.entries(be, 14):
 		var row := UIK.hbox(4)
@@ -222,6 +228,47 @@ func _tab_finance() -> void:
 		var c := Ledger.entry_cash(e)
 		row.add_child(UIK.label(Fmt.money(c, true) if absf(c) > 0.001 else "non-cash", 7, UIK.money_color(c) if absf(c) > 0.001 else Art.C_DIM, true))
 		content.add_child(row)
+
+
+## Week-by-week cash forecast: revenue isn't cash until it lands, and payroll comes every Friday.
+func _forecast(be: String) -> void:
+	GameState.set_flag("cash_forecast_viewed")
+	if StoryEngine.St().get("chapter", "") == "ch6_cash_is_oxygen":
+		GameState.set_flag("forecast_checked_ch6")
+	var fc := Forecast.weekly(be)
+	_section("Cash forecast · next 9 weeks")
+	var fn := int(fc["first_negative"])
+	var msg := I18n.t("Cash stays positive for the next 9 weeks (lowest %s).") % Fmt.money0(float(fc["low"])) if fn < 0 else \
+		I18n.t("Cash runs out in week %d (lowest %s). Borrow, raise, cut costs or get paid sooner.") % [fn + 1, Fmt.money0(float(fc["low"]))]
+	content.add_child(UIK.wrap(msg, 8, Art.C_GREEN if fn < 0 else Art.C_RED, 480))
+	var grid := GridContainer.new()
+	grid.columns = 5
+	grid.add_theme_constant_override("h_separation", 12)
+	content.add_child(grid)
+	for h in ["Week of", "Money in", "Money out", "Cash at end", "Biggest item"]:
+		grid.add_child(UIK.label(h, 6, Art.C_DIM, true))
+	for r in fc["rows"]:
+		grid.add_child(UIK.label(Clock.fmt_short(int(r["start"])), 7, Art.C_MUTED))
+		grid.add_child(UIK.label(Fmt.money0(float(r["in"])), 7, Art.C_GREEN))
+		grid.add_child(UIK.label(Fmt.money0(-float(r["out"])), 7, Art.C_RED))
+		grid.add_child(UIK.label(Fmt.money0(float(r["end"])), 7, UIK.money_color(float(r["end"])), true))
+		var big := ""
+		var bv := 0.0
+		for k in r["items"]:
+			if absf(float(r["items"][k])) > absf(bv):
+				bv = float(r["items"][k])
+				big = str(k)
+		grid.add_child(UIK.label((I18n.t(big) + " " + Fmt.money0(bv)) if big != "" else "", 6, Art.C_MUTED))
+	content.add_child(UIK.label(I18n.t("Includes payroll, rent, loans, supplier bills, invoices due and estimated ShopLane sales (%s/day). Excludes restocking.") % Fmt.money0(float(fc["run_rate"])), 6, Art.C_DIM))
+	if not GameState.flag("costs_cut"):
+		var cb := UIK.button("Cut costs: pause ads, cheaper living", func():
+			Ecommerce.pause_all_ads()
+			GameState.data["living"]["reduced"] = true
+			GameState.set_flag("costs_cut")
+			UIRoot.toast("Ads paused and living costs cut. Growth slows; cash lasts longer.", "info", "cash")
+			rebuild())
+		cb.name = "CutCosts"
+		content.add_child(cb)
 
 
 # ============================================================== SALES
@@ -679,8 +726,9 @@ func _tab_contracts() -> void:
 			counter_price = 0.0
 			rebuild()))
 	elif k["status"] == "active":
-		var have := Ecommerce.stock(k["location"], k["product"])
-		right.add_child(UIK.label(I18n.t("Stock at %s: %d / %d needed") % [Ecommerce.location_name(k["location"]), have, int(k["qty"])], 8, Art.C_GREEN if have >= int(k["qty"]) else Art.C_RED, true))
+		var have := Contracts.stock_for(k)
+		right.add_child(UIK.label(I18n.t("In stock (all locations): %d / %d needed") % [have, int(k["qty"])], 8, Art.C_GREEN if have >= int(k["qty"]) else Art.C_RED, true))
+		right.add_child(UIK.label(I18n.t("Due %s") % Clock.fmt_datetime(int(k["due"])), 7, Art.C_GOLD if Clock.now() < int(k["due"]) else Art.C_RED))
 		var db := UIK.button(I18n.t("Pack & deliver %d units (B2B freight $40)") % int(k["qty"]), func():
 			var r := Contracts.deliver(k["id"])
 			if not r["ok"]:
@@ -695,6 +743,14 @@ func _tab_contracts() -> void:
 	elif k["status"] == "delivered":
 		right.add_child(UIK.label(I18n.t("Invoice %s · due %s") % [Fmt.money(k["receivable"]), Clock.fmt_short(int(k["pay_due"]))], 8, Art.C_GOLD, true))
 		right.add_child(UIK.wrap("Revenue is booked. The cash isn't here yet.", 7, Art.C_SKY, 220))
+		if int(k["payment_terms_days"]) >= 30:
+			var ep := UIK.button(I18n.t("Ask for early payment (−3%%: %s now)") % Fmt.money0(float(k["receivable"]) * 0.97), func():
+				var r := Contracts.early_payment(k["id"])
+				if r["ok"]:
+					UIRoot.toast(I18n.t("%s paid early: %s in the bank.") % [GameState.entity_name(k["buyer"]), Fmt.money(r["cash"])], "good", "cash")
+				rebuild())
+			ep.name = "EarlyPayment"
+			right.add_child(ep)
 
 
 # ============================================================== FREELANCE

@@ -92,6 +92,9 @@ static func complete_objective(id: String) -> void:
 
 
 static func check() -> void:
+	# saves that finished the June sandbox before chapters 4–6 existed carry on into Chapter 4
+	if St().get("chapter", "") == "ch3_open_for_business" and "goal_month" in St()["done"] and not chapter_def("ch4_growing_pains").is_empty():
+		start_chapter("ch4_growing_pains")
 	var changed := true
 	var guard := 0
 	while changed and guard < 20:
@@ -132,6 +135,8 @@ static func active_objectives() -> Array:
 
 static func run_actions(actions: Array) -> void:
 	for a in actions:
+		if a.has("if") and not Cond.eval(str(a["if"])):
+			continue
 		match a.get("do", ""):
 			"dialogue":
 				UIRoot.queue_dialogue(a["id"])
@@ -142,6 +147,8 @@ static func run_actions(actions: Array) -> void:
 					GameState.add_message(a["from"], fill(a["text"]))
 			"set_flag":
 				GameState.set_flag(a["flag"], a.get("value", true))
+			"flag_reset":
+				GameState.set_flag(a["flag"], false)
 			"start":
 				start_objective(a["objective"])
 			"complete":
@@ -151,9 +158,12 @@ static func run_actions(actions: Array) -> void:
 			"toast":
 				EventBus.notify.emit(fill(a["text"]), a.get("kind", "info"), a.get("icon", "info"))
 			"event":
+				# one-off story events never queue twice (a fallback timer and a conversation can both fire them)
+				var guard := "event_done:" + str(a["id"])
 				if int(a.get("delay_min", 0)) > 0:
-					Sim.schedule(Clock.now() + int(a["delay_min"]), "evt.trigger", {"id": a["id"], "ctx": a.get("ctx", {})})
-				else:
+					Sim.schedule(Clock.now() + int(a["delay_min"]), "evt.trigger", {"id": a["id"], "ctx": a.get("ctx", {}), "story_once": true})
+				elif not GameState.flag(guard) and not EventEngine._queued(a["id"]):
+					GameState.set_flag(guard)
 					EventEngine.trigger(a["id"], a.get("ctx", {}))
 			"chapter":
 				start_chapter(a["id"])

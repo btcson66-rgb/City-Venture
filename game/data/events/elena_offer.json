@@ -1,0 +1,45 @@
+{
+ "id": "elena_offer",
+ "category": "finance",
+ "status": "active",
+ "presentation": {
+  "channel": "phone",
+  "speaker": "elena",
+  "title": "Elena Park wants in",
+  "icon": "finance",
+  "lines": [
+   "Elena Park, Northlight Capital.",
+   "I'll put $40,000 into {company} for 20% of it. Today, if you like.",
+   "Money now, a partner forever. Your call."
+  ]
+ },
+ "choices": [
+  {
+   "id": "accept",
+   "label": "Take $40,000 for 20%",
+   "detail": "Cash in the company now, no repayments. You own 80% from here on.",
+   "effects": [
+    {
+     "op": "equity_investment",
+     "amount": 40000,
+     "stake": 0.2,
+     "investor": "elena",
+     "memo": "Northlight Capital — equity investment (20%)"
+    }
+   ],
+   "outcome": "Elena: \"Welcome to the portfolio. I'll want monthly numbers.\""
+  },
+  {
+   "id": "decline",
+   "label": "Not now",
+   "detail": "Keep 100%. Find the cash another way.",
+   "effects": [
+    {
+     "op": "set_flag",
+     "flag": "elena_declined"
+    }
+   ],
+   "outcome": "Elena: \"Smart founders say no more than yes. Offer stands for a while.\""
+  }
+ ]
+}

@@ -267,6 +267,252 @@
      "text": "Look at you. A whole company. Drinks on {company}?"
     }
    ]
+  },
+  {
+   "id": "ch4_growing_pains",
+   "title": "CHAPTER 4 — GROWING PAINS",
+   "subtitle": "Too many orders. Not enough hours.",
+   "next": "ch5_big_contract",
+   "objectives": [
+    {
+     "id": "ch4_employer",
+     "main": true,
+     "goal": "Growing Pains",
+     "text": "Register {company} as an employer (City Hall permits kiosk, Civic Center)",
+     "complete_when": [
+      "flag:employer_registered"
+     ],
+     "target": {
+      "building": "city_hall",
+      "action": "permits_info"
+     },
+     "on_start": [
+      {
+       "do": "message",
+       "from": "maya",
+       "text": "You packed boxes until 1 AM again, didn't you. You need help. Like, a person."
+      }
+     ]
+    },
+    {
+     "id": "ch4_post",
+     "main": true,
+     "goal": "Growing Pains",
+     "text": "Post your first job ad (Company OS → People)",
+     "complete_when": [
+      "stat:jobs_posted>=1"
+     ],
+     "target": {
+      "action": "open_company_os"
+     }
+    },
+    {
+     "id": "ch4_hire",
+     "main": true,
+     "goal": "Growing Pains",
+     "text": "Hire your first employee (applicants reply within a day)",
+     "complete_when": [
+      "stat:hires>=1"
+     ],
+     "target": {
+      "action": "open_company_os"
+     }
+    },
+    {
+     "id": "ch4_payroll",
+     "main": true,
+     "goal": "Growing Pains",
+     "text": "Make your first payroll: keep cash in the company for Friday 17:00",
+     "complete_when": [
+      "stat:payrolls_run>=1"
+     ]
+    },
+    {
+     "id": "ch4_forecast",
+     "main": true,
+     "goal": "Growing Pains",
+     "text": "Revenue isn't cash: check the cash forecast (Company OS → Finance)",
+     "complete_when": [
+      "flag:cash_forecast_viewed"
+     ],
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": [
+      {
+       "do": "flag_reset",
+       "flag": "cash_forecast_viewed"
+      }
+     ]
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "message",
+     "from": "maya",
+     "text": "A payroll. You're somebody's boss now. That's terrifying. Proud of you."
+    }
+   ]
+  },
+  {
+   "id": "ch5_big_contract",
+   "title": "CHAPTER 5 — THE BIG CONTRACT",
+   "subtitle": "Daniel buys by the pallet.",
+   "next": "ch6_cash_is_oxygen",
+   "objectives": [
+    {
+     "id": "ch5_meet",
+     "main": true,
+     "goal": "The Big Contract",
+     "text": "Meet Daniel Wong at Nexus Co-work (Thursdays 17:00–20:00)",
+     "complete_when": [
+      "flag:big_contract_offered"
+     ],
+     "target": {
+      "building": "nexus_cowork"
+     },
+     "on_start": [
+      {
+       "do": "message",
+       "from": "daniel",
+       "text": "Daniel Wong, Crestline. You're doing real volume now. Let's talk. Nexus Co-work, Thursday after 5."
+      },
+      {
+       "do": "event",
+       "id": "crestline_big_offer",
+       "delay_min": 8640
+      }
+     ]
+    },
+    {
+     "id": "ch5_decide",
+     "main": true,
+     "goal": "The Big Contract",
+     "text": "Crestline's offer is in Company OS → Contracts: accept, counter or decline",
+     "complete_when": [
+      "flag:big_contract_decided"
+     ],
+     "target": {
+      "action": "open_company_os"
+     }
+    },
+    {
+     "id": "ch5_stock",
+     "main": true,
+     "goal": "The Big Contract",
+     "text": "Get 800 desk lamps in stock or on the way (cash, supplier terms, a Nexus Bank loan or an investor)",
+     "complete_when": [
+      "contract_ready:big_contract || flag:big_contract_declined"
+     ],
+     "target": {
+      "action": "open_company_os"
+     }
+    },
+    {
+     "id": "ch5_deliver",
+     "main": true,
+     "goal": "The Big Contract",
+     "text": "Deliver Crestline's lamps before the deadline (Company OS → Contracts)",
+     "complete_when": [
+      "flag:big_contract_delivered || flag:big_contract_declined"
+     ],
+     "target": {
+      "action": "open_company_os"
+     }
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "message",
+     "from": "daniel",
+     "text": "Received. Accounts payable will process your invoice. Net 60, as agreed.",
+     "if": "flag:big_contract_delivered"
+    },
+    {
+     "do": "message",
+     "from": "maya",
+     "text": "You passed on the big one? Honestly, respect. Growth that kills you isn't growth.",
+     "if": "flag:big_contract_declined"
+    }
+   ]
+  },
+  {
+   "id": "ch6_cash_is_oxygen",
+   "title": "CHAPTER 6 — CASH IS OXYGEN",
+   "subtitle": "Profit on paper. Payroll on Friday.",
+   "next": "",
+   "objectives": [
+    {
+     "id": "ch6_forecast",
+     "main": true,
+     "goal": "Cash Is Oxygen",
+     "text": "Check the cash forecast: does {company} make it to the next big payment?",
+     "complete_when": [
+      "flag:forecast_checked_ch6"
+     ],
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": [
+      {
+       "do": "message",
+       "from": "marcus",
+       "text": "Marcus Reed here. Big invoices on long terms are how profitable companies run out of cash. My door's open, weekdays 1 to 4."
+      },
+      {
+       "do": "event",
+       "id": "elena_offer",
+       "delay_min": 1440
+      }
+     ]
+    },
+    {
+     "id": "ch6_bridge",
+     "main": true,
+     "goal": "Cash Is Oxygen",
+     "text": "Bridge the gap: a bank loan, an investor, cutting costs or early payment",
+     "complete_when": [
+      "flag:loan_taken || flag:investor_elena || flag:costs_cut || flag:early_payment_agreed || forecast_ok"
+     ],
+     "target": {
+      "building": "nexus_bank"
+     }
+    },
+    {
+     "id": "ch6_collect",
+     "main": true,
+     "goal": "Cash Is Oxygen",
+     "text": "Collect the money Crestline owes you",
+     "complete_when": [
+      "flag:big_contract_paid || flag:big_contract_declined"
+     ]
+    },
+    {
+     "id": "ch6_close",
+     "main": true,
+     "goal": "Cash Is Oxygen",
+     "text": "Close a month with cash in the bank",
+     "complete_when": [
+      "flag:ch6_month_in_black"
+     ]
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "message",
+     "from": "maya",
+     "text": "You survived the cash crunch. Most people don't even know they're in one."
+    },
+    {
+     "do": "start",
+     "objective": "goal_growth"
+    },
+    {
+     "do": "timeline",
+     "text": "Came through the cash crunch.",
+     "kind": "milestone"
+    }
+   ]
   }
  ],
  "side": [
@@ -297,6 +543,21 @@
    "text": "Run {company} through month-end (June 30)",
    "complete_when": [
     "stat:month_closes>=1"
+   ],
+   "on_complete": [
+    {
+     "do": "chapter",
+     "id": "ch4_growing_pains"
+    }
+   ]
+  },
+  {
+   "id": "goal_growth",
+   "main": true,
+   "goal": "Sandbox",
+   "text": "Grow {company}: $40,000 revenue in a month (more chapters are coming)",
+   "complete_when": [
+    "stat:best_month_revenue>=40000"
    ]
   }
  ]

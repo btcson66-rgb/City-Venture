@@ -16,6 +16,11 @@ static func eval(expr: String, ctx := {}) -> bool:
 	expr = expr.strip_edges()
 	if expr == "":
 		return true
+	if expr.contains(" || "):
+		for part in expr.split(" || "):
+			if eval(part, ctx):
+				return true
+		return false
 	if expr.begins_with("!"):
 		return not eval(expr.substr(1), ctx)
 	if expr.begins_with("flag:"):
@@ -31,7 +36,18 @@ static func eval(expr: String, ctx := {}) -> bool:
 		return expr.substr(13) in GameState.data["story"]["chapters_done"]
 	if expr.begins_with("objective_done:"):
 		return expr.substr(15) in GameState.data["story"]["done"]
+	if expr.begins_with("contract_ready:"):
+		# enough units in stock or on the way for a tagged contract (or it's already delivered)
+		var c := Contracts.by_tag(expr.substr(15))
+		if c.is_empty():
+			return false
+		if c["status"] in ["delivered", "paid"]:
+			return true
+		var have := Ecommerce.available_anywhere(c["product"]) + Ecommerce.incoming_units_of(c["product"])
+		return c["status"] == "active" and have >= int(c["qty"])
 	match expr:
+		"forecast_ok":
+			return Forecast.ok(GameState.business_entity())
 		"company_registered":
 			return GameState.company_id() != ""
 		"has_ads":

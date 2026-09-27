@@ -27,9 +27,16 @@
  ],
  "dialogue": [
   {
+   "when": [
+    "objective_done:ch4_forecast",
+    "!flag:big_contract_offered"
+   ],
+   "conversation": "daniel_big_deal"
+  },
+  {
    "when": [],
    "conversation": "daniel_cameo"
   }
  ],
- "phone_contact": false
+ "phone_contact": true
 }

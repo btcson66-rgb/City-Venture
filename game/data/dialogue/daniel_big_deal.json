@@ -1,0 +1,27 @@
+{
+ "id": "daniel_big_deal",
+ "with": "daniel",
+ "nodes": {
+  "start": [
+   {
+    "who": "daniel",
+    "text": "There you are. Crestline's autumn range needs desk lamps."
+   },
+   {
+    "who": "daniel",
+    "expr": "thinking",
+    "text": "Eight hundred of them. Twenty-eight dollars each. Net 60."
+   },
+   {
+    "who": "daniel",
+    "text": "It's a lot of lamps for a small company. Think about the cash, not the headline."
+   }
+  ]
+ },
+ "on_end": [
+  {
+   "do": "event",
+   "id": "crestline_big_offer"
+  }
+ ]
+}

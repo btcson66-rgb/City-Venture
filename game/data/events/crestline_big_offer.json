@@ -1,0 +1,45 @@
+{
+ "id": "crestline_big_offer",
+ "category": "customer",
+ "status": "active",
+ "presentation": {
+  "channel": "phone",
+  "speaker": "daniel",
+  "title": "Crestline wants 800 lamps",
+  "icon": "contracts",
+  "lines": [
+   "Daniel Wong, Crestline Retail.",
+   "800 LED desk lamps for our autumn range. $28 each: $22,400.",
+   "Delivery in 21 days, Net 60. Strict SLA: late is 10% off."
+  ]
+ },
+ "choices": [
+  {
+   "id": "review",
+   "label": "Send the contract. I'll review it.",
+   "detail": "Accept, counter or decline in Company OS → Contracts. The catch is working capital (you pay for the lamps now and get paid in 60 days) and space (home holds 600 units, Suite 2B 1,500).",
+   "effects": [
+    {
+     "op": "create_contract_offer",
+     "template": {
+      "buyer": "crestline_retail",
+      "product": "desk_lamp",
+      "qty": 800,
+      "unit_price": 28.0,
+      "delivery_days": 21,
+      "payment_terms_days": 60,
+      "penalty_rate": 0.1,
+      "quality_req": "No defects on arrival · delivered by the due date",
+      "expires_days": 5,
+      "tag": "big_contract"
+     }
+    },
+    {
+     "op": "set_flag",
+     "flag": "big_contract_offered"
+    }
+   ],
+   "outcome": "Daniel: \"Paperwork's in your Company OS. Five days to decide.\""
+  }
+ ]
+}

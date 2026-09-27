@@ -164,4 +164,9 @@ static func choose(iid: String, choice_id: String) -> Dictionary:
 
 static func handle(kind: String, p: Dictionary) -> void:
 	if kind == "evt.trigger":
+		if p.get("story_once", false):
+			var guard := "event_done:" + str(p["id"])
+			if GameState.flag(guard) or _queued(p["id"]):
+				return
+			GameState.set_flag(guard)
 		trigger(p["id"], p.get("ctx", {}))

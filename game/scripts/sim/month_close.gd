@@ -64,6 +64,9 @@ static func run(year: int, month: int) -> Dictionary:
 		rep["entities"][e] = compute(e, t0, t1)
 	GameState.data["reports"]["month_closes"].append(rep)
 	var main: Dictionary = rep["entities"][ents[-1]]
+	GameState.data["stats"]["best_month_revenue"] = maxf(GameState.stat("best_month_revenue"), float(main["revenue"]))
+	if StoryEngine.St().get("chapter", "") == "ch6_cash_is_oxygen" and float(main["cash_close"]) >= 0.0:
+		GameState.set_flag("ch6_month_in_black")
 	GameState.timeline(I18n.t("Closed %s: business profit %s, cash %s.") % [label_of(rep), Fmt.money0(main["business_profit"]), Fmt.money0(main["cash_close"])], "milestone")
 	GameState.inc_stat("month_closes")
 	var _unused := d

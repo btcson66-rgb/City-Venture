@@ -235,6 +235,14 @@ static func incoming_units(loc := "") -> int:
 	return n
 
 
+static func incoming_units_of(product_id: String) -> int:
+	var n := 0
+	for po in E()["purchase_orders"].values():
+		if po["status"] == "in_transit" and po["product"] == product_id:
+			n += int(po["qty"])
+	return n
+
+
 static func inventory_value(entity: String) -> float:
 	return Ledger.balance(entity, "inventory")
 
