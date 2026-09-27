@@ -26,6 +26,7 @@ func run() -> void:
 		await _video_epilogue()
 	else:
 		await _month()
+		await _chapters_4_to_6()
 	await _save_load()
 	bot.step("Summary")
 	var be := GameState.business_entity()
@@ -99,6 +100,10 @@ func _pick_choice(inst: Dictionary) -> String:
 			return "ride"
 		"low_cash_warning":
 			return "reduce"
+		"crestline_big_offer":
+			return "review"
+		"elena_offer":
+			return "decline"   # the walkthrough bridges the gap with a bank loan instead
 	return DataDB.events[inst["id"]]["choices"][0]["id"]
 
 
@@ -498,6 +503,16 @@ func _careers() -> void:
 		await bot.wait(0.6)
 		await bot.shot("freelance_gig")
 		bot.expect(int(Careers.F()["gigs"][oid]["done"]) >= 2, "put hours into a freelance gig")
+	bot.step("Careers — start a SaaS product")
+	await bot.click_named("Tab_saas")
+	await bot.wait(0.4)
+	await bot.shot("saas_ideas")
+	await bot.click_named("Saas_freelancer_invoicing")
+	await bot.wait(0.4)
+	await bot.click_named("SaasCode")
+	await bot.wait(0.5)
+	await bot.shot("saas_building")
+	bot.expect(Saas.active() and float(Saas.S()["dev_done"]) >= 2.0, "started building a SaaS product (%d dev h)" % int(Saas.S()["dev_done"]))
 	await close_modal()
 	await exit_building()
 
@@ -552,6 +567,138 @@ func _month() -> void:
 	await bot.wait(0.5)
 	await bot.shot("company_os_finance_july")
 	await close_modal()
+
+
+## Hold T (fast-forward) in the world until pred() or timeout.
+func ff_until(pred: Callable, timeout := 60.0) -> bool:
+	Input.action_press("fast_forward")
+	var ok: bool = await bot.until(pred, timeout)
+	Input.action_release("fast_forward")
+	await bot.wait(0.3)
+	return ok
+
+
+func _home_laptop(tab: String) -> void:
+	await open_os_at(func(n): return n.action == "open_company_os", "laptop")
+	await bot.click_named("Tab_" + tab)
+	await bot.wait(0.5)
+
+
+func _is_weekday() -> bool:
+	return Clock.weekday() >= 1 and Clock.weekday() <= 5
+
+
+func _chapters_4_to_6() -> void:
+	await popups()
+	bot.expect(StoryEngine.St()["chapter"] == "ch4_growing_pains", "Chapter 4 started after the June close")
+	# ---------------------------------------------------------------- chapter 4
+	bot.step("Chapter 4 — register as an employer at City Hall")
+	if not _is_weekday() or Clock.hour() >= 15:
+		await pass_time_at_home(func(): return _is_weekday() and Clock.hour() < 12, 4, true)
+	await exit_building()
+	await metro_to("civic_center")
+	if Clock.minute_of_day() < 9 * 60 + 5:
+		await ff_until(func(): return Clock.minute_of_day() >= 9 * 60 + 5, 30.0)
+	await enter_building("city_hall")
+	await bot.use_action("permits_info")
+	await bot.wait(0.6)
+	await bot.shot("permits_kiosk")
+	await bot.click_named("RegisterEmployer")
+	await bot.wait(0.5)
+	await close_modal()
+	bot.expect(Staff.employer_registered(), "registered as an employer")
+	bot.step("Chapter 4 — post a job, hire, first payroll")
+	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")
+	await _home_laptop("people")
+	await bot.shot("people_tab")
+	await bot.click_named("Post_support")
+	await bot.wait(0.4)
+	await close_modal()
+	bot.expect(GameState.stat("jobs_posted") >= 1.0, "job ad posted")
+	await pass_time_at_home(func(): return not Staff.S()["applicants"].is_empty(), 6)
+	await _home_laptop("people")
+	await bot.shot("applicants")
+	var apps: Array = Staff.S()["applicants"]
+	if not apps.is_empty():
+		await bot.click_named("Hire_" + str(apps[0]["id"]))
+		await bot.wait(0.4)
+	await close_modal()
+	bot.expect(Staff.count() >= 1, "hired the first employee (%s)" % (Staff.people()[0]["name"] if Staff.count() > 0 else "—"))
+	await pass_time_at_home(func(): return GameState.stat("payrolls_run") >= 1.0, 8, true)
+	bot.expect(GameState.stat("payrolls_run") >= 1.0, "first payroll paid")
+	await _home_laptop("finance")
+	await bot.shot("cash_forecast")
+	await close_modal()
+	await bot.wait(1.0)
+	await popups()
+	bot.expect("ch4_growing_pains" in StoryEngine.St()["chapters_done"], "Chapter 4 complete")
+	# ---------------------------------------------------------------- chapter 5
+	bot.step("Chapter 5 — Crestline's offer")
+	await pass_time_at_home(func(): return not Contracts.by_tag("big_contract").is_empty(), 9, true)
+	var c := Contracts.by_tag("big_contract")
+	bot.expect(not c.is_empty(), "Crestline offered the big contract")
+	await _home_laptop("contracts")
+	await bot.shot("big_contract_offer")
+	await bot.click_named("AcceptContract", 3.0)
+	await bot.wait(0.5)
+	await close_modal()
+	bot.expect(GameState.flag("big_contract_accepted"), "accepted Crestline's contract")
+	bot.step("Chapter 5 — borrow from Marcus Reed at Nexus Bank")
+	await pass_time_at_home(func(): return _is_weekday() and Clock.hour() < 12, 4, true)
+	await exit_building()
+	await metro_to("financial")
+	if Clock.minute_of_day() < 13 * 60 + 5:
+		await ff_until(func(): return Clock.minute_of_day() >= 13 * 60 + 5, 60.0)
+	await enter_building("nexus_bank")
+	await bot.use(func(n): return n.action == "talk" and str(n.params.get("npc", "")) == "marcus", "Marcus Reed")
+	await dialogue()
+	await bot.until(func(): return UIRoot.top_modal() is LoanModal, 3.0)
+	await bot.wait(0.4)
+	await bot.shot("loan_offer")
+	await bot.click_named("Amt_50", 2.0)
+	await bot.click_named("Term_12", 2.0)
+	await bot.click_named("TakeLoan", 2.0)
+	await bot.wait(0.5)
+	await bot.shot("loan_taken")
+	await close_modal()
+	bot.expect(GameState.flag("loan_taken"), "took a Nexus Bank loan (debt %s)" % Fmt.money(Bank.debt(GameState.business_entity())))
+	bot.step("Chapter 5 — order the lamps and deliver")
+	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")
+	await _home_laptop("contracts")
+	await bot.click_named("FillContract", 3.0)
+	await bot.wait(0.5)
+	await bot.shot("contract_restock")
+	await close_modal()
+	await pass_time_at_home(func(): return Contracts.can_deliver(c["id"]), 6)
+	await _home_laptop("contracts")
+	await bot.click_named("DeliverContract", 3.0)
+	await bot.wait(0.6)
+	await bot.shot("big_contract_delivered")
+	await close_modal()
+	bot.expect(GameState.flag("big_contract_delivered"), "delivered 800 lamps to Crestline")
+	await bot.wait(1.0)
+	await popups()
+	bot.expect("ch5_big_contract" in StoryEngine.St()["chapters_done"], "Chapter 5 complete")
+	# ---------------------------------------------------------------- chapter 6
+	bot.step("Chapter 6 — forecast, early payment, month in the black")
+	await _home_laptop("finance")
+	await bot.shot("cash_forecast_ch6")
+	await bot.click_named("Tab_contracts")
+	await bot.wait(0.4)
+	await bot.click_named("EarlyPayment", 3.0)
+	await bot.wait(0.5)
+	await bot.shot("early_payment")
+	await close_modal()
+	bot.expect(GameState.flag("big_contract_paid"), "Crestline paid early (3% discount)")
+	await pass_time_at_home(func(): return GameState.flag("ch6_month_in_black") or GameState.data["reports"]["month_closes"].size() >= 2, 20, true)
+	await bot.wait(1.0)
+	await popups()
+	bot.expect("ch6_cash_is_oxygen" in StoryEngine.St()["chapters_done"], "Chapter 6 complete")
+	bot.expect(Ledger.check_balanced(), "ledger balanced after chapters 4–6")
 
 
 func _video_epilogue() -> void:

@@ -1,20 +1,18 @@
 {
  "id": "saas",
  "name": "SaaS / Software",
- "status": "planned",
+ "status": "active",
  "tier": "p0",
- "module": "",
- "pitch": "Take client projects, then build a product people pay for every month.",
- "starting_capital_min": 500,
+ "module": "saas",
+ "pitch": "Build it once, sell it every month. Development hours now, subscribers later: price, churn and servers decide if it works.",
+ "starting_capital_min": 0,
  "revenue_models": [
-  "client_projects",
   "subscriptions"
  ],
  "cost_types": [
+  "dev_time",
   "servers",
-  "support",
-  "salaries",
-  "ads"
+  "marketing"
  ],
  "growth_paths": [
   "enterprise",

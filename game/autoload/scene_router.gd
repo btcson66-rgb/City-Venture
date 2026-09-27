@@ -51,6 +51,7 @@ func _fade(cb: Callable, minutes := 0) -> void:
 
 # ------------------------------------------------------------------ front-end
 func go_menu() -> void:
+	Sound.music("menu")
 	Clock.world_active = false
 	UIRoot.set_hud_visible(false)
 	UIRoot.close_all()
@@ -103,6 +104,7 @@ func _enter(kind: String, id: String, spawn: String, facing: String, pos := Vect
 	if f == "":
 		f = "down" if kind == "district" else "up"
 	_set_scene(scene)
+	Sound.music_for_scene(kind, id)
 	scene.spawn_player(p, f)
 	if kind == "district":
 		var cam := scene.player.camera

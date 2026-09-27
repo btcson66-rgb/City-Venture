@@ -152,13 +152,56 @@ After Ch3 the slice continues as a sandbox until Month Close (June 30 → July 1
 | month ended | Month Close modal; timeline "First month closed: profit $X, cash $Y" |
 | cash < warning | `low_cash_warning` |
 
-## 7. Chapters beyond the slice (Planned)
+## 7. Chapters 4–6 (Implemented, build 0.1.3)
+
+The June sandbox goal (`goal_month`) starts Chapter 4 when the first month close runs. Saves that already finished
+June are bridged into Chapter 4 automatically. The chapters are data in `data/story/chapters.json`, and every
+objective has a guide-arrow `target`.
+
+### CHAPTER 4 — GROWING PAINS ("Too many orders. Not enough hours.")
+| # | Objective | Completes when | Systems |
+|---|-----------|----------------|---------|
+| 1 | Register as an employer at the City Hall permits kiosk | `flag:employer_registered` | `PermitsModal`, `Staff.register_employer` ($150) |
+| 2 | Post a job ad (Company OS → People) | `stat:jobs_posted>=1` | `Staff.post_job` ($40). 3 applicants arrive about 18 h later |
+| 3 | Hire the first employee | `stat:hires>=1` | Applicants carry skill, salary ask and a trait. The hire starts the next day at 9:00 |
+| 4 | First payroll (Friday 17:00) | `stat:payrolls_run>=1` | A missed payroll becomes `wages_payable` and hurts morale. Three missed payrolls in a row mean insolvency |
+| 5 | Revenue isn't cash: open the cash forecast | `flag:cash_forecast_viewed` (reset when the step starts) | `Forecast.weekly` in Company OS → Finance |
+
+### CHAPTER 5 — THE BIG CONTRACT ("Daniel buys by the pallet.")
+Daniel Wong texts, then waits at Nexus Co-work on Thursdays 17:00–20:00 (`daniel_big_deal`). If the player doesn't
+come, the offer arrives by phone after 6 days (`crestline_big_offer`, a one-off story event guarded against
+double-firing). The contract is tagged `big_contract`: **800 LED desk lamps at $28 = $22,400, delivery in 21 days,
+Net 60, 10% late penalty.** The handoff's example was $420,000; the order is scaled to the slice economy, where it
+is still more than a month of revenue.
+
+| # | Objective | Completes when |
+|---|-----------|----------------|
+| 1 | Meet Daniel | `flag:big_contract_offered` |
+| 2 | Accept, counter or decline | `flag:big_contract_decided` (accepting, declining or letting it expire) |
+| 3 | Get 800 lamps in stock or on the way (cash, supplier terms, bank loan, investor) | `contract_ready:big_contract \|\| flag:big_contract_declined` |
+| 4 | Deliver before the deadline | `flag:big_contract_delivered \|\| flag:big_contract_declined` |
+
+The pressure is real. Home stores 600 units and Suite 2B 1,500, so the order can ship from several locations. The
+lamps cost about $9,200 up front and the money comes back 60 days later. The contract screen offers a one-click
+"Order the missing units" (cheapest supplier, location with space, optional supplier terms).
+
+### CHAPTER 6 — CASH IS OXYGEN ("Profit on paper. Payroll on Friday.")
+| # | Objective | Completes when |
+|---|-----------|----------------|
+| 1 | Check the forecast | `flag:forecast_checked_ch6` |
+| 2 | Bridge the gap | `flag:loan_taken \|\| flag:investor_elena \|\| flag:costs_cut \|\| flag:early_payment_agreed \|\| forecast_ok` |
+| 3 | Collect from Crestline | `flag:big_contract_paid \|\| flag:big_contract_declined` |
+| 4 | Close a month with cash in the bank | `flag:ch6_month_in_black` (set by the month close during Chapter 6) |
+
+The options are real systems. **Marcus Reed** (Nexus Bank, weekdays 13–16) lends on cash flow and collateral
+(`Bank`). **Elena Park** offers $40,000 for 20% (`elena_offer`, which dilutes the cap table). **Cut costs** pauses ads
+and cuts living costs. **Early payment** discounts the Crestline invoice by 3% for cash now. After Chapter 6 the
+sandbox goal is $40,000 revenue in a month.
+
+## 8. Chapters beyond (Planned)
 
 | Chapter | Key content | Phase |
 |---------|-------------|-------|
-| Ch4 Growing Pains | too many orders, packing capacity, first hire, Revenue ≠ Cash | P1 |
-| Ch5 The Big Contract | Daniel Wong $420,000 Net 60 strict SLA; Accept/Reject/Counter | P1 |
-| Ch6 Cash Is Oxygen | Bank loan / investor (Elena Park) / cut / delay / sell / renegotiate | P1 |
 | Ch7 Supply Shock | Year 3 world event, industry-specific impacts | P1–P2 |
 | Ch8 Green Shift | opt-in energy opportunities | P3 |
 | Ch9 Clearing Crisis | "Payment still pending." First settlement comparison (Lina Zhao) | P2 |

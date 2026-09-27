@@ -77,6 +77,12 @@ func _businesses() -> void:
 				var go2 := UIK.button("Start freelancing", _start_freelance, "primary")
 				go2.name = "StartFreelance"
 				det.add_child(go2)
+		"saas":
+			det.add_child(UIK.wrap("Pick a product idea and build it in Company OS → SaaS: development hours first, subscribers after launch. Hire developers to build faster.", 8, Art.C_WHITE, 300))
+			if Saas.active():
+				det.add_child(UIK.label(I18n.t("✓ You're building %s.") % str(Saas.idea().get("name", "")), 9, Art.C_GREEN, true))
+			else:
+				det.add_child(UIK.label("Start from any laptop: Company OS → SaaS.", 8, Art.C_GOLD, true))
 		_:
 			det.add_child(UIK.wrap(I18n.t("Not in this build. %s is planned for %s — it will play differently, not just a new icon.") % [I18n.t(d["name"]), "P1–P3" if d["tier"] == "p0" else "a later expansion"], 8, Art.C_GOLD, 300))
 

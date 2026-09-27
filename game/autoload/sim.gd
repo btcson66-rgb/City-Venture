@@ -102,6 +102,7 @@ func _on_hour(t: int, h: int) -> void:
 	EventEngine.on_hour(t, h)
 	Careers.on_hour(t, h)
 	Staff.on_hour(t, h)
+	Saas.on_hour(t, h)
 	_request_story_check()
 
 

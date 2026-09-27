@@ -18,11 +18,11 @@ msgstr "  （現在無法）"
 msgid "  (staff discount)"
 msgstr "  （員工折扣）"
 
-#: scripts/ui/modals/company_os.gd:307
+#: scripts/ui/modals/company_os.gd:304
 msgid "  Ads/day"
 msgstr "  每日廣告"
 
-#: scripts/ui/modals/company_os.gd:205
+#: scripts/ui/modals/company_os.gd:202
 msgid "  of which on hold (<2 days)"
 msgstr "  其中保留中（未滿 2 天）"
 
@@ -38,7 +38,7 @@ msgstr "  ·  營業 %s–%s"
 msgid "  …and %d more"
 msgstr "  ……還有 %d 筆"
 
-#: scripts/ui/modals/company_os.gd:840
+#: scripts/ui/modals/company_os.gd:863
 msgid " (late: -20%)"
 msgstr "（遲交：-20%）"
 
@@ -66,11 +66,11 @@ msgstr " ltd"
 msgid " today"
 msgstr " 今日"
 
-#: scripts/ui/modals/company_os.gd:674
+#: scripts/ui/modals/company_os.gd:671
 msgid " · %d%% upfront"
 msgstr " · 預付 %d%%"
 
-#: scripts/ui/modals/company_os.gd:460
+#: scripts/ui/modals/company_os.gd:457
 msgid " · Net"
 msgstr " · 票期"
 
@@ -106,19 +106,19 @@ msgstr "月租 $1,600，押金一個月。租約要用公司名義簽。"
 msgid "$30,000. A laptop. A phone. A city."
 msgstr "$30,000。一台筆電。一支手機。一座城市。"
 
-#: scripts/ui/modals/company_os.gd:799
+#: scripts/ui/modals/company_os.gd:822
 msgid "%d / %d h · due %s · %s · pays %s"
 msgstr "%d / %d 小時 · 截止 %s · %s · 付款：%s"
 
-#: scripts/ui/modals/company_os.gd:486
+#: scripts/ui/modals/company_os.gd:483
 msgid "%d / %d units"
 msgstr "%d / %d 件"
 
-#: scripts/ui/modals/company_os.gd:800
+#: scripts/ui/modals/company_os.gd:823
 msgid "%d days after delivery"
 msgstr "交件後 %d 天"
 
-#: scripts/ui/modals/company_os.gd:673
+#: scripts/ui/modals/company_os.gd:670
 msgid "%d days after signing"
 msgstr "簽約後 %d 天"
 
@@ -126,7 +126,7 @@ msgstr "簽約後 %d 天"
 msgid "%d h %d min"
 msgstr "%d 小時 %d 分"
 
-#: scripts/ui/modals/company_os.gd:815
+#: scripts/ui/modals/company_os.gd:838
 msgid "%d h · %d days · %s"
 msgstr "%d 小時 · %d 天內 · %s"
 
@@ -136,33 +136,33 @@ msgstr "%d 分鐘"
 
 #: scripts/ui/modals/loan_modal.gd:52
 msgid "%d months"
-msgstr ""
+msgstr "%d 個月"
 
 #: scripts/ui/modals/job_modal.gd:50
 msgid "%d more shift(s) to %s"
 msgstr "再做 %d 班升為%s"
 
-#: scripts/ui/modals/company_os.gd:140
+#: scripts/ui/modals/company_os.gd:137
 msgid "%d order%s waiting to be packed — packing table (home or office)."
 msgstr "%d 筆訂單%s等待打包——到打包桌（家裡或辦公室）。"
 
 #: scripts/world/actions.gd:198
 msgid "%d orders waiting to be packed. I'm on it."
-msgstr ""
+msgstr "還有 %d 筆訂單等著打包，我正在處理。"
 
 #: scripts/sim/staff.gd:331
 msgid "%d people applied for %s. Review them in Company OS → People."
-msgstr ""
+msgstr "有 %d 個人應徵%s。到 Company OS →「人員」看看。"
 
 #: scripts/ui/modals/lease_modal.gd:23
 msgid "%d units"
 msgstr "%d 件"
 
-#: scripts/ui/modals/company_os.gd:718
+#: scripts/ui/modals/company_os.gd:715
 msgid "%d%% upfront"
 msgstr "預付 %d%%"
 
-#: scripts/ui/modals/company_os.gd:416
+#: scripts/ui/modals/company_os.gd:413
 msgid "%d/%d units incl. incoming"
 msgstr "%d/%d 件（含在途）"
 
@@ -176,27 +176,35 @@ msgstr "%s（個人賣家）"
 
 #: scripts/sim/staff.gd:224
 msgid "%s (support) handled a return on %s: %s."
-msgstr ""
+msgstr "%s（客服）處理了 %s 的退貨：%s。"
+
+#: scripts/ui/modals/company_os.gd:914
+msgid "%s IS LIVE"
+msgstr "%s 上線了"
+
+#: scripts/sim/saas.gd:177
+msgid "%s ads"
+msgstr "%s 廣告"
 
 #: scripts/sim/insolvency.gd:28
 msgid "%s became insolvent: %s"
-msgstr ""
+msgstr "%s 無力償債：%s"
 
 #: scripts/sim/staff.gd:253
 msgid "%s booked the courier: %d parcels (%s)."
-msgstr ""
+msgstr "%s 叫了快遞：%d 件包裹（%s）。"
 
 #: scripts/sim/insolvency.gd:29
 msgid "%s can't pay its debts. You have to decide what happens next."
-msgstr ""
+msgstr "%s 付不出債務了，你必須決定接下來怎麼做。"
 
 #: scripts/sim/insolvency.gd:151
 msgid "%s closed: final distribution"
-msgstr ""
+msgstr "%s 已結束營業：最後分配"
 
 #: scripts/sim/insolvency.gd:149
 msgid "%s closed: final distribution, rest of the investment written off"
-msgstr ""
+msgstr "%s 已結束營業：最後分配，其餘投資認列損失"
 
 #: scripts/world/actions.gd:74
 msgid "%s is already registered (%s)."
@@ -212,23 +220,23 @@ msgstr "%s 目前沒開。營業時間 %s–%s，%s。"
 
 #: scripts/ui/modals/loan_modal.gd:106
 msgid "%s is in the company account. First payment in 30 days."
-msgstr ""
+msgstr "%s 已匯入公司帳戶。30 天後開始還第一期。"
 
-#: scripts/ui/modals/company_os.gd:603
+#: scripts/ui/modals/company_os.gd:600
 msgid "%s joins tomorrow at 9:00."
-msgstr ""
+msgstr "%s 明天 9:00 報到。"
 
 #: scripts/ui/modals/loan_modal.gd:79
 msgid "%s on %s"
-msgstr ""
+msgstr "%s，%s 扣款"
 
 #: scripts/sim/careers.gd:267
 msgid "%s paid %s."
 msgstr "%s 付款 %s。"
 
-#: scripts/ui/modals/company_os.gd:750
+#: scripts/ui/modals/company_os.gd:760
 msgid "%s paid early: %s in the bank."
-msgstr ""
+msgstr "%s 提前付款了：%s 已入帳。"
 
 #: scripts/sim/contracts.gd:229
 msgid "%s paid invoice %s: %s"
@@ -236,23 +244,39 @@ msgstr "%s 已支付發票 %s：%s"
 
 #: scripts/sim/forecast.gd:65
 msgid "%s pays"
-msgstr ""
+msgstr "%s 付款"
 
 #: scripts/sim/staff.gd:316
 msgid "%s quit."
-msgstr ""
+msgstr "%s 離職了。"
 
 #: scripts/sim/staff.gd:64
 msgid "%s registered as an employer."
-msgstr ""
+msgstr "%s 完成雇主登記。"
 
 #: scripts/sim/staff.gd:315
 msgid "%s resigned from %s."
-msgstr ""
+msgstr "%s 從%s離職了。"
 
 #: scripts/sim/staff.gd:317
 msgid "%s resigned."
-msgstr ""
+msgstr "%s 辭職了。"
+
+#: scripts/sim/saas.gd:175
+msgid "%s servers"
+msgstr "%s 伺服器"
+
+#: scripts/sim/saas.gd:89
+msgid "%s shipped a new feature: %s."
+msgstr "%s 推出新功能：%s。"
+
+#: scripts/sim/saas.gd:88
+msgid "%s shipped: %s."
+msgstr "%s 推出：%s。"
+
+#: scripts/sim/saas.gd:172
+msgid "%s subscriptions — %d users"
+msgstr "%s 訂閱收入——%d 位用戶"
 
 #: scripts/frontend/main_menu.gd:53
 msgid "%s · %s · Day %d"
@@ -261,6 +285,10 @@ msgstr "%s · %s · 第 %d 天"
 #: scripts/sim/living.gd:63
 msgid "%s — monthly"
 msgstr "%s——月租"
+
+#: scripts/ui/modals/company_os.gd:927
+msgid "%s/month each"
+msgstr "每人每月 %s"
 
 #: scripts/sim/ecommerce.gd:95
 msgid "%s: %d × %s (prepaid)"
@@ -282,13 +310,13 @@ msgstr "%s：收到了，謝謝！已收到 %s 的發票。"
 msgid "%s: We had to cancel the project. We won't be paying for it."
 msgstr "%s：我們只好取消這個案子，不會付款。"
 
-#: scripts/ui/modals/company_os.gd:144
+#: scripts/ui/modals/company_os.gd:141
 msgid "%s: only %d left. Restock in Operations."
 msgstr "%s：只剩 %d 件。到「營運」補貨。"
 
-#: scripts/ui/modals/company_os.gd:620
+#: scripts/ui/modals/company_os.gd:617
 msgid "%s–%s/week"
-msgstr ""
+msgstr "每週 %s–%s"
 
 #: data/events/customer_return_first.json
 msgid "(Order {order} — {product})"
@@ -297,6 +325,10 @@ msgstr "（訂單 {order}——{product}）"
 #: data/events/customer_return.json
 msgid "(Order {order} — {product}, {price})"
 msgstr "（訂單 {order}——{product}，{price}）"
+
+#: scripts/ui/modals/company_os.gd:926
+msgid "+%d / −%d last 7 days"
+msgstr "近 7 天 +%d / −%d"
 
 #: data/events/supplier_price_increase.json
 msgid "+15% still applies here. Compare suppliers in Company OS."
@@ -314,7 +346,7 @@ msgstr "，預付 %d%%"
 msgid "...Kind of."
 msgstr "……算是吧。"
 
-#: scripts/ui/modals/company_os.gd:135
+#: scripts/ui/modals/company_os.gd:132
 msgid "0 · Solo"
 msgstr "0 · 單人"
 
@@ -336,7 +368,7 @@ msgstr "創辦人巷 22 號 2B 室"
 
 #: scripts/sim/bank.gd:88
 msgid "3 × last 30 days' gross profit"
-msgstr ""
+msgstr "近 30 天毛利 × 3"
 
 #: data/events/customer_return.json
 msgid "30% partial refund"
@@ -344,19 +376,19 @@ msgstr "部分退款 30%"
 
 #: scripts/sim/bank.gd:94
 msgid "50% of stock at cost"
-msgstr ""
+msgstr "庫存成本的 50%"
 
 #: scripts/sim/bank.gd:92
 msgid "60% of signed contracts"
-msgstr ""
+msgstr "已簽合約的 60%"
 
 #: scripts/sim/bank.gd:90
 msgid "70% of money owed to you"
-msgstr ""
+msgstr "應收帳款的 70%"
 
 #: data/events/crestline_big_offer.json
 msgid "800 LED desk lamps for our autumn range. $28 each: $22,400."
-msgstr ""
+msgstr "秋季系列要 800 盞 LED 檯燈，每盞 $28，總共 $22,400。"
 
 #: data/jobs/bank_teller.json
 msgid "A bakery owner asks for a loan. Sofia asks for three months of books. You see why."
@@ -368,9 +400,9 @@ msgstr "一款在鮮活的現代城市裡經營事業的模擬 RPG。"
 
 #: scripts/ui/modals/insolvency_modal.gd:29
 msgid "A company can fail. You don't. Pick what happens next:"
-msgstr ""
+msgstr "公司可以失敗，你不會。選擇接下來怎麼做："
 
-#: scripts/ui/modals/company_os.gd:150
+#: scripts/ui/modals/company_os.gd:147
 msgid "A contract offer is waiting in Contracts."
 msgstr "「合約」裡有一份報價在等你。"
 
@@ -384,7 +416,7 @@ msgstr "有會員問哪裡找便宜的供應商，你介紹他去找 Ken。"
 
 #: data/story/chapters.json
 msgid "A payroll. You're somebody's boss now. That's terrifying. Proud of you."
-msgstr ""
+msgstr "發薪水了。你現在是別人的老闆了，好可怕。以你為榮。"
 
 #: scripts/ui/modals/lease_modal.gd:25
 msgid "A real office: your company name on the door and the sign, a proper desk for Company OS, and a stockroom so boxes stop living in your apartment. It's also %s every month whether you sell anything or not."
@@ -414,7 +446,7 @@ msgstr "執行中"
 msgid "AM"
 msgstr "上午"
 
-#: scripts/ui/modals/company_os.gd:461
+#: scripts/ui/modals/company_os.gd:458
 msgid "ARRIVES "
 msgstr "到貨 "
 
@@ -430,7 +462,7 @@ msgstr "ATM——查餘額"
 msgid "AUD"
 msgstr "AUD"
 
-#: scripts/ui/modals/company_os.gd:675
+#: scripts/ui/modals/company_os.gd:672
 msgid "AUD (Aurelia dollar)"
 msgstr "AUD（奧瑞莉亞幣）"
 
@@ -442,13 +474,13 @@ msgstr "奧瑞莉亞市"
 msgid "AWAITING PICKUP"
 msgstr "等待收件"
 
-#: scripts/ui/modals/company_os.gd:697 scripts/ui/modals/company_os.gd:819
+#: scripts/ui/modals/company_os.gd:694 scripts/ui/modals/company_os.gd:842
 msgid "Accept"
 msgstr "接受"
 
 #: data/events/crestline_big_offer.json
 msgid "Accept, counter or decline in Company OS → Contracts. The catch is working capital (you pay for the lamps now and get paid in 60 days) and space (home holds 600 units, Suite 2B 1,500)."
-msgstr ""
+msgstr "到 Company OS →「合約」接受、還價或拒絕。難處在營運資金（現在就要付錢進燈，60 天後才收款）和空間（家裡放得下 600 件，2B 辦公室 1,500 件）。"
 
 #: scripts/sim/contracts.gd:69
 msgid "Accepted."
@@ -468,15 +500,19 @@ msgstr "創辦人增資"
 
 #: scripts/sim/forecast.gd:100
 msgid "Ads"
-msgstr ""
+msgstr "廣告"
 
-#: scripts/ui/modals/company_os.gd:268
+#: scripts/ui/modals/company_os.gd:265
 msgid "Ads paused and living costs cut. Growth slows; cash lasts longer."
-msgstr ""
+msgstr "廣告已暫停、生活開銷已縮減。成長會變慢，但現金撐得更久。"
 
 #: data/events/ad_cost_spike.json
 msgid "Ads paused."
 msgstr "廣告已暫停。"
+
+#: scripts/ui/modals/company_os.gd:944
+msgid "Ads/day"
+msgstr "每日廣告"
 
 #: data/regions/zenkai.json
 msgid "Advanced Tech & Manufacturing"
@@ -508,9 +544,9 @@ msgstr "Alex Chen"
 
 #: scripts/world/actions.gd:198
 msgid "All packed. The courier comes at 16:00."
-msgstr ""
+msgstr "都打包好了，快遞 16:00 來收。"
 
-#: scripts/ui/modals/company_os.gd:159
+#: scripts/ui/modals/company_os.gd:156
 msgid "All quiet. Go outside."
 msgstr "一切平靜。出去走走吧。"
 
@@ -524,7 +560,7 @@ msgstr "杏眼"
 
 #: scripts/sim/staff.gd:57
 msgid "Already registered as an employer."
-msgstr ""
+msgstr "已經完成雇主登記了。"
 
 #: data/products/phone_stand.json
 msgid "Aluminium Phone Stand"
@@ -532,7 +568,7 @@ msgstr "鋁合金手機架"
 
 #: data/economy/staff.json
 msgid "Ambitious: works harder, expects a raise within two months."
-msgstr ""
+msgstr "有企圖心：做得更拚，兩個月內會期待加薪。"
 
 #: data/npcs/ana.json
 msgid "Ana"
@@ -548,15 +584,15 @@ msgstr "Ana：「都辦好了，恭喜。再去 Nexus 銀行開個企業帳戶�
 
 #: data/economy/staff.json
 msgid "Answers customers and settles returns for you (replace if in stock, otherwise refund)."
-msgstr ""
+msgstr "回覆客人、幫你處理退貨（有庫存就換貨，否則退款）。"
 
 #: scripts/ui/modals/job_modal.gd:29
 msgid "Any time %s–%s, %s · one shift a day"
 msgstr "%s–%s 隨時可上班，%s · 每天一班"
 
-#: scripts/ui/modals/company_os.gd:581
+#: scripts/ui/modals/company_os.gd:578
 msgid "Applicants for %s:"
-msgstr ""
+msgstr "%s 的應徵者："
 
 #: autoload/clock.gd:14
 msgid "Apr"
@@ -578,9 +614,9 @@ msgstr "收到就裂了。"
 msgid "Arrived late and scratched."
 msgstr "晚到還有刮痕。"
 
-#: scripts/ui/modals/company_os.gd:747
+#: scripts/ui/modals/company_os.gd:757
 msgid "Ask for early payment (−3%%: %s now)"
-msgstr ""
+msgstr "請對方提前付款（折 3%%：現在拿 %s）"
 
 #: data/character/options.json
 msgid "Auburn"
@@ -608,7 +644,7 @@ msgstr "奧瑞莉亞市政廳"
 
 #: data/npcs/jobs_board.json
 msgid "Aurelia Jobs"
-msgstr ""
+msgstr "奧瑞莉亞人力銀行"
 
 #: scripts/ui/modals/metro_modal.gd:10
 msgid "Aurelia Metro — %s"
@@ -634,7 +670,7 @@ msgstr "自動存檔：每晚睡覺時。"
 msgid "Average quality."
 msgstr "品質普通。"
 
-#: scripts/ui/modals/company_os.gd:489
+#: scripts/ui/modals/company_os.gd:486
 msgid "Avg cost"
 msgstr "平均成本"
 
@@ -642,7 +678,7 @@ msgstr "平均成本"
 msgid "Aviation"
 msgstr "航空"
 
-#: scripts/ui/modals/company_os.gd:396
+#: scripts/ui/modals/company_os.gd:393
 msgid "Awaiting courier"
 msgstr "等待快遞"
 
@@ -676,17 +712,17 @@ msgstr "包包"
 
 #: scripts/ui/modals/loan_modal.gd:78
 msgid "Balance"
-msgstr ""
+msgstr "餘額"
 
 #: scripts/ui/phone_ui.gd:120
 msgid "Bank"
 msgstr "銀行"
 
-#: scripts/ui/modals/company_os.gd:213
+#: scripts/ui/modals/company_os.gd:210
 msgid "Bank loans"
-msgstr ""
+msgstr "銀行貸款"
 
-#: data/economy/settlement_methods.json scripts/ui/modals/company_os.gd:675
+#: data/economy/settlement_methods.json scripts/ui/modals/company_os.gd:672
 msgid "Bank transfer"
 msgstr "銀行轉帳"
 
@@ -700,7 +736,7 @@ msgstr "咖啡師"
 
 #: scripts/ui/modals/loan_modal.gd:25
 msgid "Base rate %s"
-msgstr ""
+msgstr "基準利率 %s"
 
 #: data/buildings/byte_and_bean.json
 msgid "Bean & Byte"
@@ -724,15 +760,15 @@ msgstr "品質較好的居家用品。最低訂購量較高。"
 
 #: scripts/sim/bank.gd:106
 msgid "Between $1,000 and %s."
-msgstr ""
+msgstr "金額需在 $1,000 到 %s 之間。"
 
 #: data/regions/northridge.json
 msgid "Big consumer market"
 msgstr "龐大的消費市場"
 
-#: scripts/ui/modals/company_os.gd:248
+#: scripts/ui/modals/company_os.gd:245
 msgid "Biggest item"
-msgstr ""
+msgstr "最大項目"
 
 #: data/character/options.json
 msgid "Black"
@@ -768,11 +804,11 @@ msgstr "有膽。我喜歡。"
 
 #: scripts/ui/modals/loan_modal.gd:59
 msgid "Borrow %s"
-msgstr ""
+msgstr "借 %s"
 
 #: scripts/sim/bank.gd:121
 msgid "Borrowed %s from Nexus Bank (%d months, %s APR)."
-msgstr ""
+msgstr "向 Nexus 銀行借了 %s（%d 個月，年利率 %s）。"
 
 #: data/economy/marketplace.json
 msgid "Bought two by mistake."
@@ -784,7 +820,7 @@ msgstr "跨鏈橋漏洞"
 
 #: data/story/chapters.json
 msgid "Bridge the gap: a bank loan, an investor, cutting costs or early payment"
-msgstr ""
+msgstr "撐過資金缺口：銀行貸款、投資人、縮減開支或提前收款"
 
 #: data/economy/marketplace.json
 msgid "Broken. Seller wouldn't help."
@@ -810,13 +846,33 @@ msgstr "預算維持不變。"
 msgid "Build a cash-flow spreadsheet for %s"
 msgstr "幫 %s 做現金流量表"
 
+#: scripts/ui/modals/company_os.gd:872
+msgid "Build a software product"
+msgstr "打造軟體產品"
+
 #: data/economy/freelance.json
 msgid "Build an investor pitch deck for %s"
 msgstr "幫 %s 做投資人簡報"
 
+#: scripts/ui/modals/company_os.gd:873
+msgid "Build it once, sell it every month. Development hours now (you at a laptop, plus developers you hire), subscribers later. Price, churn and servers decide whether it works."
+msgstr "做一次，每個月都能賣。先投入開發工時（你用筆電寫，加上你聘的工程師），上線後才有訂閱用戶。價格、流失率和伺服器成本決定成敗。"
+
+#: data/businesses/saas.json
+msgid "Build it once, sell it every month. Development hours now, subscribers later: price, churn and servers decide if it works."
+msgstr "做一次，每個月都能賣。先投入開發工時，之後才有訂閱用戶：價格、流失率和伺服器成本決定成敗。"
+
+#: scripts/ui/modals/company_os.gd:885
+msgid "Build this"
+msgstr "做這個"
+
+#: scripts/ui/modals/company_os.gd:894
+msgid "Building %s"
+msgstr "開發中：%s"
+
 #: data/economy/staff.json
 msgid "Builds software. Each developer adds dev hours to your SaaS product every workday."
-msgstr ""
+msgstr "開發軟體。每位工程師每個工作天都會為你的 SaaS 產品增加開發工時。"
 
 #: data/character/options.json
 msgid "Bun"
@@ -852,9 +908,9 @@ msgstr "公司毛利超過了一個月的房租。"
 
 #: scripts/ui/modals/bank_modal.gd:47
 msgid "Business lending · credit %d"
-msgstr ""
+msgstr "企業貸款 · 信用分數 %d"
 
-#: scripts/ui/modals/company_os.gd:194 scripts/ui/modals/month_close_modal.gd:34
+#: scripts/ui/modals/company_os.gd:191 scripts/ui/modals/month_close_modal.gd:34
 msgid "Business profit"
 msgstr "營業利潤"
 
@@ -868,9 +924,9 @@ msgstr "事業"
 
 #: scripts/world/actions.gd:191
 msgid "Busy day. All good."
-msgstr ""
+msgstr "今天很忙，一切順利。"
 
-#: scripts/ui/modals/company_os.gd:444
+#: scripts/ui/modals/company_os.gd:441
 msgid "Buy %s"
 msgstr "購買 %s"
 
@@ -890,7 +946,7 @@ msgstr "批貨進來、網路上賣。在有人按下「購買」之前，你的
 msgid "Buy your first stock (Company OS → Operations). Laptop at home or a co-work desk."
 msgstr "進第一批貨（Company OS → 營運）。用家裡的筆電或共享辦公桌。"
 
-#: scripts/ui/modals/company_os.gd:671
+#: scripts/ui/modals/company_os.gd:668
 msgid "Buyer"
 msgstr "買方"
 
@@ -904,21 +960,21 @@ msgstr "平頭"
 
 #: scripts/ui/modals/company_os.gd:30
 msgid "CALLED"
-msgstr ""
+msgstr "已催收"
 
 #: scripts/ui/modals/company_os.gd:31
 msgid "CANCELLED"
-msgstr ""
+msgstr "已取消"
 
 #: scripts/ui/modals/company_os.gd:25
 msgid "CARRIED"
 msgstr "攜帶中"
 
-#: scripts/ui/modals/company_os.gd:129
+#: scripts/ui/modals/company_os.gd:126
 msgid "CASH"
 msgstr "現金"
 
-#: scripts/ui/modals/company_os.gd:202
+#: scripts/ui/modals/company_os.gd:199
 msgid "CASH POSITION"
 msgstr "現金部位"
 
@@ -936,15 +992,19 @@ msgstr "第三章——正式開業"
 
 #: data/story/chapters.json
 msgid "CHAPTER 4 — GROWING PAINS"
-msgstr ""
+msgstr "第四章——成長的痛"
 
 #: data/story/chapters.json
 msgid "CHAPTER 5 — THE BIG CONTRACT"
-msgstr ""
+msgstr "第五章——大合約"
 
 #: data/story/chapters.json
 msgid "CHAPTER 6 — CASH IS OXYGEN"
-msgstr ""
+msgstr "第六章——現金就是氧氣"
+
+#: scripts/ui/modals/company_os.gd:928
+msgid "CHURN"
+msgstr "流失率"
 
 #: scripts/frontend/main_menu.gd:27 scripts/frontend/main_menu.gd:30
 msgid "CITY VENTURE"
@@ -952,7 +1012,7 @@ msgstr "CITY VENTURE"
 
 #: scripts/ui/modals/company_os.gd:30
 msgid "CLOSED"
-msgstr ""
+msgstr "已結清"
 
 #: scripts/ui/modals/month_close_modal.gd:27
 msgid "COGS"
@@ -962,11 +1022,11 @@ msgstr "銷貨成本"
 msgid "COMPANY OS"
 msgstr "COMPANY OS"
 
-#: scripts/ui/modals/company_os.gd:134
+#: scripts/ui/modals/company_os.gd:131
 msgid "COMPANY VALUE"
 msgstr "公司價值"
 
-#: scripts/ui/modals/company_os.gd:706
+#: scripts/ui/modals/company_os.gd:703
 msgid "COUNTER-OFFER"
 msgstr "還價"
 
@@ -1000,7 +1060,7 @@ msgstr "打給我。或傳訊息。隨便。"
 
 #: data/story/chapters.json
 msgid "Came through the cash crunch."
-msgstr ""
+msgstr "撐過了現金危機。"
 
 #: data/businesses/media.json
 msgid "Campaigns, creators and reputation."
@@ -1018,9 +1078,9 @@ msgstr "一週內能交貨嗎？"
 msgid "Can't do that."
 msgstr "沒辦法這樣做。"
 
-#: scripts/ui/modals/company_os.gd:579
+#: scripts/ui/modals/company_os.gd:576
 msgid "Can't hire yet: %s."
-msgstr ""
+msgstr "還不能聘人：%s。"
 
 #: scripts/ui/modals/job_modal.gd:62
 msgid "Can't start a shift now: %s."
@@ -1040,7 +1100,7 @@ msgstr "注資給 %s"
 
 #: data/economy/staff.json
 msgid "Careful: fewer mistakes, fewer returns."
-msgstr ""
+msgstr "細心：出錯少，退貨少。"
 
 #: scripts/ui/modals/pack_ship_modal.gd:52
 msgid "Carry them to PostPoint yourself (cheaper, costs your time)"
@@ -1052,27 +1112,27 @@ msgstr "攜帶 %d 件包裹%s"
 
 #: data/story/chapters.json
 msgid "Cash Is Oxygen"
-msgstr ""
+msgstr "現金就是氧氣"
 
-#: scripts/ui/modals/company_os.gd:248
+#: scripts/ui/modals/company_os.gd:245
 msgid "Cash at end"
-msgstr ""
+msgstr "週末現金"
 
-#: scripts/ui/modals/company_os.gd:239
+#: scripts/ui/modals/company_os.gd:236
 msgid "Cash forecast · next 9 weeks"
-msgstr ""
+msgstr "現金預測 · 未來 9 週"
 
-#: scripts/ui/modals/company_os.gd:203 scripts/ui/modals/info_modal.gd:51
+#: scripts/ui/modals/company_os.gd:200 scripts/ui/modals/info_modal.gd:51
 msgid "Cash in bank"
 msgstr "銀行現金"
 
 #: scripts/ui/modals/insolvency_modal.gd:24
 msgid "Cash in the company"
-msgstr ""
+msgstr "公司現金"
 
 #: data/events/elena_offer.json
 msgid "Cash in the company now, no repayments. You own 80% from here on."
-msgstr ""
+msgstr "現金立刻進公司，不用還。從此你持有 80%。"
 
 #: data/events/low_cash_warning.json
 msgid "Cash is running low"
@@ -1082,13 +1142,13 @@ msgstr "現金快不夠了"
 msgid "Cash now, big loss on inventory."
 msgstr "馬上拿到現金，但庫存大虧。"
 
-#: scripts/ui/modals/company_os.gd:242
+#: scripts/ui/modals/company_os.gd:239
 msgid "Cash runs out in week %d (lowest %s). Borrow, raise, cut costs or get paid sooner."
-msgstr ""
+msgstr "第 %d 週現金會用完（最低 %s）。去借錢、找投資、縮減開支或提早收款。"
 
-#: scripts/ui/modals/company_os.gd:241
+#: scripts/ui/modals/company_os.gd:238
 msgid "Cash stays positive for the next 9 weeks (lowest %s)."
-msgstr ""
+msgstr "未來 9 週現金都是正的（最低 %s）。"
 
 #: scripts/ui/modals/month_close_modal.gd:44
 msgid "Cash — end of month"
@@ -1106,6 +1166,10 @@ msgstr "中央線"
 msgid "Central Station"
 msgstr "中央車站"
 
+#: data/economy/saas.json
+msgid "Chairly"
+msgstr "Chairly"
+
 #: data/buildings/riverside_apartment.json
 msgid "Change outfit"
 msgstr "換衣服"
@@ -1122,6 +1186,10 @@ msgstr "混亂只是沒做試算表的成長。"
 msgid "Chaotic."
 msgstr "一團亂。"
 
+#: scripts/ui/modals/company_os.gd:954
+msgid "Cheaper brings more signups; features and support keep people subscribed. Servers cost more as you grow."
+msgstr "越便宜註冊越多；功能和客服能留住用戶。規模越大，伺服器越貴。"
+
 #: data/events/customer_return_first.json
 msgid "Cheaper now. Expect a lukewarm review."
 msgstr "眼前比較省。評價大概不冷不熱。"
@@ -1136,13 +1204,13 @@ msgstr "去看看創業佈告欄。大家會貼供應商、案子，什麼都有
 
 #: data/story/chapters.json
 msgid "Check the cash forecast: does {company} make it to the next big payment?"
-msgstr ""
+msgstr "看看現金預測：{company} 撐得到下一筆大款項入帳嗎？"
 
 #: data/story/chapters.json
 msgid "Check your phone (Tab)"
 msgstr "看看手機（Tab）"
 
-#: scripts/ui/modals/business_board.gd:125
+#: scripts/ui/modals/business_board.gd:131
 msgid "Chose a first business: ecommerce."
 msgstr "選了第一門生意：電商。"
 
@@ -1180,7 +1248,7 @@ msgstr "客戶"
 
 #: scripts/sim/forecast.gd:69
 msgid "Client payment"
-msgstr ""
+msgstr "客戶付款"
 
 #: scripts/sim/careers.gd:264
 msgid "Client payment — %s"
@@ -1200,11 +1268,11 @@ msgstr "關閉"
 
 #: data/story/chapters.json
 msgid "Close a month with cash in the bank"
-msgstr ""
+msgstr "月結時帳上還有現金"
 
 #: scripts/ui/modals/insolvency_modal.gd:50
 msgid "Close the company: sell off, pay what we can, start again"
-msgstr ""
+msgstr "結束公司：變賣資產、盡量還債、重新開始"
 
 #: scripts/world/door_trigger.gd:39
 msgid "Closed"
@@ -1212,7 +1280,7 @@ msgstr "休息中"
 
 #: scripts/sim/insolvency.gd:164
 msgid "Closed %s. Stock sold for %s; %s of debt written off. Starting again."
-msgstr ""
+msgstr "%s 結束營業。庫存賣了 %s；%s 的債務被註銷。重新出發。"
 
 #: scripts/sim/month_close.gd:70
 msgid "Closed %s: business profit %s, cash %s."
@@ -1220,7 +1288,7 @@ msgstr "%s 結算：營業利潤 %s，現金 %s。"
 
 #: scripts/ui/modals/insolvency_modal.gd:60
 msgid "Closing statement"
-msgstr ""
+msgstr "結算明細"
 
 #: data/world/years.json
 msgid "Co-working vacancies near zero in Startup Hub."
@@ -1229,6 +1297,14 @@ msgstr "新創園區的共享辦公空間幾乎滿租。"
 #: data/city/aurelia.json
 msgid "Co-working, incubators and a very caffeinated founder scene."
 msgstr "共享辦公室、育成中心，還有一群咖啡因過量的創辦人。"
+
+#: scripts/ui/modals/company_os.gd:949
+msgid "Code a feature for %d hours"
+msgstr "寫新功能 %d 小時"
+
+#: scripts/ui/modals/company_os.gd:904
+msgid "Code for %d hours"
+msgstr "寫程式 %d 小時"
 
 #: scripts/world/actions.gd:179
 msgid "Coffee"
@@ -1248,11 +1324,11 @@ msgstr "咖啡——%s。喝起來是可能性的味道。"
 
 #: data/story/chapters.json
 msgid "Collect the money Crestline owes you"
-msgstr ""
+msgstr "收回 Crestline 欠你的錢"
 
 #: scripts/sim/bank.gd:84
 msgid "Come back when %s has %d days of statements, or a signed contract."
-msgstr ""
+msgstr "等 %s 有 %d 天的帳務紀錄，或拿到一張簽好的合約再來。"
 
 #: data/dialogue/jun_first.json
 msgid "Coming up."
@@ -1314,7 +1390,7 @@ msgstr "法規複雜"
 msgid "Consumer"
 msgstr "消費"
 
-#: scripts/ui/modals/company_os.gd:632
+#: scripts/ui/modals/company_os.gd:629
 msgid "Contacts"
 msgstr "聯絡人"
 
@@ -1338,7 +1414,7 @@ msgstr "合約 %s 已逾期。將收取 %s 的逾期罰款。"
 msgid "Contracts"
 msgstr "合約"
 
-#: scripts/ui/modals/company_os.gd:190
+#: scripts/ui/modals/company_os.gd:187
 msgid "Cost of goods sold"
 msgstr "銷貨成本"
 
@@ -1356,7 +1432,7 @@ msgstr "我可以貸款嗎？"
 
 #: scripts/world/actions.gd:191
 msgid "Could use a bit more support around here."
-msgstr ""
+msgstr "這裡有點需要更多支援。"
 
 #: data/jobs/bank_teller.json
 msgid "Count cash, open accounts and watch how the bank judges small businesses."
@@ -1390,27 +1466,27 @@ msgstr "快遞 · 經濟 3 天（%s）"
 msgid "Courier · Express 1d (%s)"
 msgstr "快遞 · 快捷 1 天（%s）"
 
-#: scripts/ui/modals/company_os.gd:216
+#: scripts/ui/modals/company_os.gd:213
 msgid "Credit score"
-msgstr ""
+msgstr "信用分數"
 
 #: scripts/ui/modals/loan_modal.gd:22
 msgid "Credit score %d · %s"
-msgstr ""
+msgstr "信用分數 %d · %s"
 
 #: scripts/ui/modals/insolvency_modal.gd:69
 msgid "Credit score now %d. Bank loans pause for 90 days. You can register a new company at City Hall whenever you're ready."
-msgstr ""
+msgstr "信用分數現在是 %d。90 天內不能申請銀行貸款。準備好了隨時可以到市政廳登記新公司。"
 
 #: data/events/crestline_big_offer.json
 msgid "Crestline wants 800 lamps"
-msgstr ""
+msgstr "Crestline 要 800 盞燈"
 
 #: data/story/chapters.json
 msgid "Crestline's offer is in Company OS → Contracts: accept, counter or decline"
-msgstr ""
+msgstr "Crestline 的報價在 Company OS →「合約」：接受、還價或拒絕"
 
-#: scripts/ui/modals/company_os.gd:675
+#: scripts/ui/modals/company_os.gd:672
 msgid "Currency"
 msgstr "幣別"
 
@@ -1424,11 +1500,11 @@ msgstr "客人"
 
 #: data/economy/staff.json
 msgid "Customer Support"
-msgstr ""
+msgstr "客服人員"
 
-#: scripts/ui/modals/company_os.gd:264
+#: scripts/ui/modals/company_os.gd:261
 msgid "Cut costs: pause ads, cheaper living"
-msgstr ""
+msgstr "縮減開支：暫停廣告、降低生活費"
 
 #: data/events/low_cash_warning.json
 msgid "Cut spending (pause ads, cheaper living)"
@@ -1440,9 +1516,9 @@ msgstr "已婉拒"
 
 #: scripts/ui/modals/company_os.gd:30
 msgid "DEFAULTED"
-msgstr ""
+msgstr "違約"
 
-#: scripts/ui/modals/company_os.gd:26 scripts/ui/modals/company_os.gd:461
+#: scripts/ui/modals/company_os.gd:26 scripts/ui/modals/company_os.gd:458
 msgid "DELIVERED"
 msgstr "已送達"
 
@@ -1460,11 +1536,11 @@ msgstr "Daniel Wong"
 
 #: data/events/crestline_big_offer.json
 msgid "Daniel Wong, Crestline Retail."
-msgstr ""
+msgstr "我是 Crestline 零售的 Daniel Wong。"
 
 #: data/story/chapters.json
 msgid "Daniel Wong, Crestline. You're doing real volume now. Let's talk. Nexus Co-work, Thursday after 5."
-msgstr ""
+msgstr "Crestline 的 Daniel Wong。你現在的量做起來了，談談吧。週四下午 5 點後，Nexus 共享辦公室。"
 
 #: data/dialogue/daniel_cameo.json
 msgid "Daniel Wong. Crestline Retail — buying side."
@@ -1472,11 +1548,11 @@ msgstr "Daniel Wong。Crestline Retail 採購部。"
 
 #: data/story/chapters.json
 msgid "Daniel buys by the pallet."
-msgstr ""
+msgstr "Daniel 都是整棧板在買。"
 
 #: data/events/crestline_big_offer.json
 msgid "Daniel: \"Paperwork's in your Company OS. Five days to decide.\""
-msgstr ""
+msgstr "Daniel：「文件在你的 Company OS 裡，五天內決定。」"
 
 #: data/npcs/dara.json
 msgid "Dara"
@@ -1532,11 +1608,11 @@ msgstr "成交。寄過來吧。"
 
 #: scripts/ui/modals/insolvency_modal.gd:66
 msgid "Debt written off"
-msgstr ""
+msgstr "註銷的債務"
 
 #: scripts/sim/insolvency.gd:125
 msgid "Debt written off in liquidation — %s"
-msgstr ""
+msgstr "清算時註銷的債務——%s"
 
 #: autoload/clock.gd:14
 msgid "Dec"
@@ -1546,7 +1622,7 @@ msgstr "12月"
 msgid "Decide where {company} works: home, a co-work desk, or Suite 2B (Startup Hub)"
 msgstr "決定 {company} 在哪裡辦公：家裡、共享辦公桌，或 2B 室（新創園區）"
 
-#: scripts/ui/modals/company_os.gd:170
+#: scripts/ui/modals/company_os.gd:167
 msgid "Decided to run the company from home for now."
 msgstr "決定先在家經營公司。"
 
@@ -1554,11 +1630,11 @@ msgstr "決定先在家經營公司。"
 msgid "Decision"
 msgstr "決定"
 
-#: scripts/ui/modals/company_os.gd:152
+#: scripts/ui/modals/company_os.gd:149
 msgid "Decision pending: %s"
 msgstr "待決定：%s"
 
-#: scripts/ui/modals/company_os.gd:704
+#: scripts/ui/modals/company_os.gd:701
 msgid "Decline"
 msgstr "拒絕"
 
@@ -1576,13 +1652,13 @@ msgstr "供應鏈深厚"
 
 #: data/story/chapters.json
 msgid "Deliver Crestline's lamps before the deadline (Company OS → Contracts)"
-msgstr ""
+msgstr "在期限前把燈交給 Crestline（Company OS →「合約」）"
 
-#: scripts/ui/modals/company_os.gd:411
+#: scripts/ui/modals/company_os.gd:408
 msgid "Deliver to:"
 msgstr "送貨到："
 
-#: scripts/ui/modals/company_os.gd:840
+#: scripts/ui/modals/company_os.gd:863
 msgid "Delivered and invoiced: %s."
 msgstr "已交件並開立發票：%s。"
 
@@ -1590,7 +1666,7 @@ msgstr "已交件並開立發票：%s。"
 msgid "Delivered%s. Invoice %s due in %d days."
 msgstr "已交貨%s。發票 %s，%d 天後到期。"
 
-#: scripts/ui/modals/company_os.gd:738
+#: scripts/ui/modals/company_os.gd:735
 msgid "Delivered. Invoice %s due in %d days."
 msgstr "已交貨。發票 %s，%d 天後到期。"
 
@@ -1598,13 +1674,13 @@ msgstr "已交貨。發票 %s，%d 天後到期。"
 msgid "Delivered: %d × %s → %s"
 msgstr "已到貨：%d × %s → %s"
 
-#: scripts/ui/modals/company_os.gd:673
+#: scripts/ui/modals/company_os.gd:670
 msgid "Delivery"
 msgstr "交貨"
 
 #: data/events/crestline_big_offer.json
 msgid "Delivery in 21 days, Net 60. Strict SLA: late is 10% off."
-msgstr ""
+msgstr "21 天內交貨，60 天付款。服務條款很嚴：遲交扣 10%。"
 
 #: data/events/viral_mention.json
 msgid "Demand ×3 for 3 days. Stock is the bottleneck."
@@ -1618,7 +1694,7 @@ msgstr "押金"
 msgid "Deposit received from %s (%s)"
 msgstr "收到 %s 的訂金（%s）"
 
-#: scripts/ui/modals/company_os.gd:211
+#: scripts/ui/modals/company_os.gd:208
 msgid "Deposits"
 msgstr "押金"
 
@@ -1638,7 +1714,7 @@ msgstr "辦公桌 · 2B 室"
 msgid "Desks"
 msgstr "辦公桌"
 
-#: scripts/ui/modals/business_board.gd:113
+#: scripts/ui/modals/business_board.gd:119
 msgid "Details / apply"
 msgstr "詳情／應徵"
 
@@ -1690,9 +1766,9 @@ msgstr "%d 個%s已經送到%s。別讓它們一直堆著。"
 msgid "Dropping off? Economy's three days, Express is one."
 msgstr "要寄件？經濟件三天，快捷件一天。"
 
-#: scripts/ui/modals/company_os.gd:731
+#: scripts/ui/modals/company_os.gd:728
 msgid "Due %s"
-msgstr ""
+msgstr "截止 %s"
 
 #: scripts/frontend/arrival_scene.gd:71
 msgid "E / click to skip"
@@ -1702,7 +1778,7 @@ msgstr "E／點擊略過"
 msgid "E / click ›"
 msgstr "E／點擊 ›"
 
-#: scripts/ui/modals/company_os.gd:133
+#: scripts/ui/modals/company_os.gd:130
 msgid "EMPLOYEES"
 msgstr "員工"
 
@@ -1724,7 +1800,7 @@ msgstr "耳機、檯燈、水瓶、手機架。最低訂購量就是最低訂購
 
 #: scripts/sim/contracts.gd:240
 msgid "Early payment from %s (%s), %s discount"
-msgstr ""
+msgstr "%s 提前付款（%s），折扣 %s"
 
 #: data/story/chapters.json
 msgid "Earn Your First Dollar"
@@ -1738,7 +1814,7 @@ msgstr "賺到你的第一塊錢。"
 msgid "Ecommerce"
 msgstr "電商"
 
-#: scripts/ui/modals/business_board.gd:126
+#: scripts/ui/modals/business_board.gd:132
 msgid "Ecommerce it is. Order stock from a laptop or a desk."
 msgstr "就做電商。用筆電或辦公桌下單進貨。"
 
@@ -1756,7 +1832,7 @@ msgstr "經濟件 · 3 天——%s"
 
 #: data/dialogue/daniel_big_deal.json
 msgid "Eight hundred of them. Twenty-eight dollars each. Net 60."
-msgstr ""
+msgstr "八百盞，每盞 28 美元，60 天付款。"
 
 #: data/regions/lumina.json data/regions/zenkai.json
 msgid "Electronics"
@@ -1764,23 +1840,23 @@ msgstr "電子"
 
 #: data/npcs/elena.json
 msgid "Elena Park"
-msgstr ""
+msgstr "Elena Park"
 
 #: data/events/elena_offer.json
 msgid "Elena Park wants in"
-msgstr ""
+msgstr "Elena Park 想投資"
 
 #: data/dialogue/elena_cameo.json data/events/elena_offer.json
 msgid "Elena Park, Northlight Capital."
-msgstr ""
+msgstr "我是 Northlight Capital 的 Elena Park。"
 
 #: data/events/elena_offer.json
 msgid "Elena: \"Smart founders say no more than yes. Offer stands for a while.\""
-msgstr ""
+msgstr "Elena：「聰明的創辦人說不的次數比說好多。這個條件會保留一陣子。」"
 
 #: data/events/elena_offer.json
 msgid "Elena: \"Welcome to the portfolio. I'll want monthly numbers.\""
-msgstr ""
+msgstr "Elena：「歡迎加入投資組合。我每個月都要看數字。」"
 
 #: data/regions/karu.json
 msgid "Emerging Market"
@@ -1788,11 +1864,11 @@ msgstr "新興市場"
 
 #: scripts/ui/modals/permits_modal.gd:25
 msgid "Employer registration & payroll"
-msgstr ""
+msgstr "雇主登記與薪資"
 
 #: scripts/sim/staff.gd:62
 msgid "Employer registration — %s"
-msgstr ""
+msgstr "雇主登記——%s"
 
 #: data/businesses/energy.json data/regions/almeria.json
 msgid "Energy"
@@ -1808,7 +1884,7 @@ msgstr "進入 %s"
 
 #: scripts/sim/effects.gd:80
 msgid "Equity investment"
-msgstr ""
+msgstr "股權投資"
 
 #: scripts/ui/hud.gd:111
 msgid "Esc"
@@ -1816,7 +1892,7 @@ msgstr "Esc"
 
 #: scripts/sim/forecast.gd:97
 msgid "Estimated sales"
-msgstr ""
+msgstr "預估銷售"
 
 #: scripts/ui/hud.gd:216
 msgid "Evening"
@@ -1852,11 +1928,15 @@ msgstr "跟描述一模一樣。出貨很快。"
 
 #: scripts/sim/bank.gd:32
 msgid "Excellent"
-msgstr ""
+msgstr "優良"
 
 #: scripts/ui/tutorial.gd:282
 msgid "Exit"
 msgstr "出口"
+
+#: scripts/ui/modals/company_os.gd:931
+msgid "Expected signups: %.1f/day · features shipped: %d · next feature %d / %d h"
+msgstr "預估註冊：每天 %.1f 位 · 已推出功能：%d · 下一個功能 %d / %d 小時"
 
 #: data/economy/shipping.json
 msgid "Express"
@@ -1924,7 +2004,7 @@ msgstr "透過進口代理拿到工廠價。交期長、最低訂購量大、瑕
 
 #: scripts/sim/bank.gd:32
 msgid "Fair"
-msgstr ""
+msgstr "普通"
 
 #: scripts/ui/modals/pause_menu.gd:25
 msgid "Fast"
@@ -1936,7 +2016,7 @@ msgstr "成長快速"
 
 #: data/economy/staff.json
 msgid "Fast: +30% work output."
-msgstr ""
+msgstr "手腳快：工作產出 +30%。"
 
 #: autoload/clock.gd:14
 msgid "Feb"
@@ -1948,7 +2028,7 @@ msgstr "陰柔"
 
 #: scripts/sim/insolvency.gd:140
 msgid "Final distribution to the founder"
-msgstr ""
+msgstr "最後分配給創辦人"
 
 #: data/regions/auroria.json scripts/ui/modals/company_os.gd:6
 msgid "Finance"
@@ -2048,11 +2128,11 @@ msgstr "創辦人出資（開戶存款）"
 
 #: scripts/sim/insolvency.gd:49
 msgid "Founder rescue capital"
-msgstr ""
+msgstr "創辦人紓困資金"
 
-#: scripts/ui/modals/company_os.gd:531
+#: scripts/ui/modals/company_os.gd:528
 msgid "Founder · does everything nobody else does"
-msgstr ""
+msgstr "創辦人 · 別人不做的都你做"
 
 #: data/jobs/barista.json
 msgid "Free coffee at Bloom Coffee while you work there."
@@ -2070,7 +2150,7 @@ msgstr "接案"
 msgid "Freelance Consulting"
 msgstr "自由接案顧問"
 
-#: scripts/ui/modals/company_os.gd:759
+#: scripts/ui/modals/company_os.gd:782
 msgid "Freelance consulting"
 msgstr "自由接案顧問"
 
@@ -2080,19 +2160,19 @@ msgstr "五"
 
 #: data/economy/staff.json
 msgid "Friendly: lifts everyone's morale a little each week."
-msgstr ""
+msgstr "友善：每週讓大家的士氣都好一點。"
 
 #: data/economy/staff.json
 msgid "Fulfilment Assistant"
-msgstr ""
+msgstr "出貨助理"
 
-#: scripts/ui/modals/company_os.gd:391
+#: scripts/ui/modals/company_os.gd:388
 msgid "Fulfilment pipeline"
 msgstr "出貨流程"
 
 #: data/story/chapters.json
 msgid "Get 800 desk lamps in stock or on the way (cash, supplier terms, a Nexus Bank loan or an investor)"
-msgstr ""
+msgstr "備齊 800 盞檯燈（有庫存或在路上都算）：用現金、供應商帳期、Nexus 銀行貸款或投資人"
 
 #: data/story/chapters.json
 msgid "Get the parcel delivered to your customer"
@@ -2116,11 +2196,11 @@ msgstr "要做點屬於自己的東西。"
 
 #: scripts/sim/bank.gd:32
 msgid "Good"
-msgstr ""
+msgstr "良好"
 
 #: data/dialogue/marcus_lending.json
 msgid "Good answer. Come back before you need it."
-msgstr ""
+msgstr "好答案。在需要之前就來找我。"
 
 #: data/economy/marketplace.json
 msgid "Good for the price."
@@ -2154,7 +2234,7 @@ msgstr "綠色"
 msgid "Grin"
 msgstr "咧嘴笑"
 
-#: scripts/ui/modals/company_os.gd:191 scripts/ui/modals/info_modal.gd:50 scripts/ui/modals/month_close_modal.gd:28
+#: scripts/ui/modals/company_os.gd:188 scripts/ui/modals/info_modal.gd:50 scripts/ui/modals/month_close_modal.gd:28
 msgid "Gross profit"
 msgstr "毛利"
 
@@ -2164,11 +2244,11 @@ msgstr "毛利夠付一個月房租了。"
 
 #: data/story/chapters.json
 msgid "Grow {company}: $40,000 revenue in a month (more chapters are coming)"
-msgstr ""
+msgstr "讓 {company} 成長：單月營收達到 $40,000（更多章節製作中）"
 
 #: data/story/chapters.json
 msgid "Growing Pains"
-msgstr ""
+msgstr "成長的痛"
 
 #: data/dialogue/maya_cafe.json
 msgid "Growing."
@@ -2248,7 +2328,7 @@ msgstr "心形"
 
 #: data/dialogue/marcus_lending.json
 msgid "Here's what your books support. Borrow what you need, not what you're offered."
-msgstr ""
+msgstr "這是你的帳目撐得起的額度。借你需要的，不是借我給的上限。"
 
 #: scripts/sim/contracts.gd:219
 msgid "Hey — the %d %s were due today. Still coming?"
@@ -2260,7 +2340,7 @@ msgstr "嗨！歡迎來到 Nexus。第一次來？"
 
 #: scripts/sim/insolvency.gd:163
 msgid "Hey. I heard. Most founders I know closed something before the thing that worked. Dinner's on me."
-msgstr ""
+msgstr "嘿，我聽說了。我認識的創辦人大多收掉過一間公司，才做出成功的那個。晚餐我請。"
 
 #: data/events/unexpected_large_order.json
 msgid "Hi! Rosa from Harbor Point Fitness."
@@ -2282,17 +2362,21 @@ msgstr "品質門檻高"
 msgid "High-paid talent"
 msgstr "高薪人才"
 
-#: scripts/ui/modals/company_os.gd:598
+#: scripts/ui/modals/company_os.gd:595
 msgid "Hire"
-msgstr ""
+msgstr "聘用"
+
+#: scripts/ui/modals/company_os.gd:919
+msgid "Hire a Software Developer (People tab) to build while you do other things."
+msgstr "聘一位軟體工程師（「人員」分頁），你做別的事時他會繼續開發。"
 
 #: data/story/chapters.json
 msgid "Hire your first employee (applicants reply within a day)"
-msgstr ""
+msgstr "聘用你的第一位員工（應徵者一天內會回覆）"
 
 #: scripts/sim/staff.gd:140
 msgid "Hired %s as %s."
-msgstr ""
+msgstr "聘用 %s 擔任%s。"
 
 #: scripts/sim/careers.gd:78
 msgid "Hired as %s at %s."
@@ -2302,9 +2386,9 @@ msgstr "受聘為%s（%s）。"
 msgid "Hired! You're now a %s at %s."
 msgstr "錄取了！你現在是%s（%s）。"
 
-#: scripts/ui/modals/company_os.gd:575
+#: scripts/ui/modals/company_os.gd:572
 msgid "Hiring"
-msgstr ""
+msgstr "徵才"
 
 #: scripts/ui/modals/pause_menu.gd:28
 msgid "Hold T to fast-forward time in the world."
@@ -2320,13 +2404,13 @@ msgstr "本地市場"
 
 #: scripts/sim/forecast.gd:38
 msgid "Home rent"
-msgstr ""
+msgstr "房租"
 
-#: scripts/ui/modals/company_os.gd:155
+#: scripts/ui/modals/company_os.gd:152
 msgid "Home rent %s due on the 14th."
 msgstr "房租 %s，14 號到期。"
 
-#: scripts/ui/modals/company_os.gd:198
+#: scripts/ui/modals/company_os.gd:195
 msgid "Home rent + living"
 msgstr "房租＋生活費"
 
@@ -2336,7 +2420,7 @@ msgstr "很誠實。我欣賞。"
 
 #: scripts/world/actions.gd:191
 msgid "Honestly? I'm looking at other jobs."
-msgstr ""
+msgstr "老實說？我在看其他工作了。"
 
 #: data/dialogue/maya_intro.json
 msgid "Honestly? No idea."
@@ -2364,15 +2448,15 @@ msgstr "最近拚得怎樣？"
 
 #: data/dialogue/elena_cameo.json
 msgid "I invest in companies, not ideas. Register one and we'll talk."
-msgstr ""
+msgstr "我投資公司，不投資點子。先登記一間公司再來談。"
 
 #: scripts/ui/modals/loan_modal.gd:35
 msgid "I lend on cash flow and collateral: gross profit, money owed to you, signed contracts and stock."
-msgstr ""
+msgstr "我看現金流和擔保品放款：毛利、應收帳款、已簽合約和庫存。"
 
 #: data/dialogue/marcus_lending.json
 msgid "I lend on cash flow and collateral: gross profit, money owed to you, signed contracts, stock."
-msgstr ""
+msgstr "我看現金流和擔保品放款：毛利、應收帳款、已簽合約、庫存。"
 
 #: data/dialogue/marcus_loan.json
 msgid "I lend on cash flow, not on ideas."
@@ -2392,7 +2476,7 @@ msgstr "我去看看別的供應商。"
 
 #: data/events/elena_offer.json
 msgid "I'll put $40,000 into {company} for 20% of it. Today, if you like."
-msgstr ""
+msgstr "我出 $40,000 投資 {company}，換 20% 股份。你願意的話今天就可以。"
 
 #: data/dialogue/maya_intro.json
 msgid "I'm starting a company."
@@ -2404,7 +2488,7 @@ msgstr "運送中"
 
 #: scripts/ui/modals/company_os.gd:31
 msgid "INVOICED"
-msgstr ""
+msgstr "已開發票"
 
 #: data/story/chapters.json
 msgid "If this is real, make it real. City Hall does registrations. Civic Center."
@@ -2412,7 +2496,7 @@ msgstr "如果是認真的，就讓它成真。市政廳可以登記公司。在
 
 #: data/dialogue/elena_intro.json
 msgid "If you ever need to grow faster than your cash allows, call me."
-msgstr ""
+msgstr "如果你想成長得比現金允許的還快，打給我。"
 
 #: data/regions/karu.json
 msgid "Immature institutions"
@@ -2422,23 +2506,23 @@ msgstr "制度尚未成熟"
 msgid "Import permits & customs"
 msgstr "進口許可與海關"
 
-#: scripts/ui/modals/company_os.gd:775
+#: scripts/ui/modals/company_os.gd:798
 msgid "In progress"
 msgstr "進行中"
 
-#: scripts/ui/modals/company_os.gd:730
+#: scripts/ui/modals/company_os.gd:727
 msgid "In stock (all locations): %d / %d needed"
-msgstr ""
+msgstr "庫存（所有地點）：%d / 需要 %d"
 
-#: scripts/ui/modals/company_os.gd:396 scripts/ui/phone_ui.gd:252
+#: scripts/ui/modals/company_os.gd:393 scripts/ui/phone_ui.gd:252
 msgid "In transit"
 msgstr "運送中"
 
-#: scripts/ui/modals/company_os.gd:262
+#: scripts/ui/modals/company_os.gd:259
 msgid "Includes payroll, rent, loans, supplier bills, invoices due and estimated ShopLane sales (%s/day). Excludes restocking."
-msgstr ""
+msgstr "包含薪資、租金、貸款、供應商帳單、到期應收款，以及預估的 ShopLane 銷售（每天 %s）。不含補貨。"
 
-#: scripts/ui/modals/company_os.gd:489
+#: scripts/ui/modals/company_os.gd:486
 msgid "Incoming"
 msgstr "在途"
 
@@ -2460,7 +2544,7 @@ msgstr "保溫水瓶"
 
 #: scripts/ui/modals/loan_modal.gd:41
 msgid "Interest (APR)"
-msgstr ""
+msgstr "利率（年）"
 
 #: scripts/ui/modals/company_os.gd:9
 msgid "International"
@@ -2482,15 +2566,15 @@ msgstr "國際電匯"
 msgid "Inventory"
 msgstr "庫存"
 
-#: scripts/ui/modals/company_os.gd:511
+#: scripts/ui/modals/company_os.gd:508
 msgid "Inventory is cash you can't spend. The ledger values it at average cost; a liquidator pays about 40% of that."
 msgstr "庫存就是花不掉的現金。帳上用平均成本計價；清倉商大約只付四成。"
 
 #: scripts/sim/effects.gd:79
 msgid "Investors buy shares in a registered company."
-msgstr ""
+msgstr "投資人只能入股已登記的公司。"
 
-#: scripts/ui/modals/company_os.gd:744
+#: scripts/ui/modals/company_os.gd:754
 msgid "Invoice %s · due %s"
 msgstr "發票 %s · %s 到期"
 
@@ -2502,11 +2586,15 @@ msgstr "%s 已付款（%s）"
 msgid "Invoice — %s"
 msgstr "發票——%s"
 
-#: scripts/ui/modals/company_os.gd:832
+#: scripts/ui/modals/company_os.gd:855
 msgid "Invoiced, not yet paid"
 msgstr "已開發票，尚未收款"
 
-#: scripts/ui/modals/company_os.gd:206
+#: data/economy/saas.json
+msgid "Invoices and payment reminders for freelancers."
+msgstr "給接案者的開發票與催款工具。"
+
+#: scripts/ui/modals/company_os.gd:203
 msgid "Invoices receivable"
 msgstr "應收發票"
 
@@ -2516,7 +2604,7 @@ msgstr "現在是%s。睡覺還太早——但可以小睡一下。"
 
 #: data/dialogue/daniel_big_deal.json
 msgid "It's a lot of lamps for a small company. Think about the cash, not the headline."
-msgstr ""
+msgstr "對小公司來說燈很多。想想現金，別只看總金額。"
 
 #: data/economy/marketplace.json
 msgid "It's okay."
@@ -2530,13 +2618,13 @@ msgstr "1月"
 msgid "Jewelry"
 msgstr "飾品"
 
-#: scripts/ui/modals/company_os.gd:608
+#: scripts/ui/modals/company_os.gd:605
 msgid "Job ad for %s is live. Applicants usually reply within a day."
-msgstr ""
+msgstr "%s 的徵才廣告已上線，應徵者通常一天內會回覆。"
 
 #: scripts/sim/staff.gd:90
 msgid "Job ad — %s"
-msgstr ""
+msgstr "徵才廣告——%s"
 
 #: autoload/clock.gd:14
 msgid "Jul"
@@ -2560,7 +2648,7 @@ msgstr "卡魯"
 
 #: data/events/elena_offer.json
 msgid "Keep 100%. Find the cash another way."
-msgstr ""
+msgstr "保留 100%，用別的方法找錢。"
 
 #: data/events/low_cash_warning.json
 msgid "Keep going"
@@ -2604,7 +2692,7 @@ msgstr "Ken：「聰明。明天出貨。」"
 
 #: scripts/ui/modals/company_os.gd:30
 msgid "LATE"
-msgstr ""
+msgstr "逾期"
 
 #: scripts/ui/modals/business_board.gd:46
 msgid "LATER"
@@ -2618,7 +2706,7 @@ msgstr "LED 檯燈"
 msgid "LEGEND"
 msgstr "圖例"
 
-#: scripts/ui/modals/company_os.gd:298
+#: scripts/ui/modals/company_os.gd:295
 msgid "LIVE"
 msgstr "販售中"
 
@@ -2648,15 +2736,23 @@ msgstr "筆電 · 咖啡廳"
 
 #: scripts/sim/bank.gd:175
 msgid "Late payment fee — loan %s"
-msgstr ""
+msgstr "遲繳手續費——貸款 %s"
 
-#: scripts/ui/modals/company_os.gd:675
+#: scripts/ui/modals/company_os.gd:672
 msgid "Late penalty"
 msgstr "逾期罰款"
 
 #: scripts/sim/living.gd:52
 msgid "Late rent fee"
 msgstr "房租滯納金"
+
+#: scripts/ui/modals/company_os.gd:909
+msgid "Launch at %s/month"
+msgstr "以每月 %s 上線"
+
+#: scripts/sim/saas.gd:102
+msgid "Launched %s at %s/month."
+msgstr "%s 上線，每月 %s。"
 
 #: data/regions/lumina.json
 msgid "Lead times"
@@ -2704,11 +2800,11 @@ msgstr "傳承"
 
 #: scripts/sim/staff.gd:154
 msgid "Let %s go."
-msgstr ""
+msgstr "資遣了 %s。"
 
-#: scripts/ui/modals/company_os.gd:567
+#: scripts/ui/modals/company_os.gd:564
 msgid "Let go"
-msgstr ""
+msgstr "資遣"
 
 #: data/jobs/city_clerk.json
 msgid "Licensing Officer"
@@ -2724,19 +2820,19 @@ msgstr "淺色"
 
 #: scripts/sim/insolvency.gd:122
 msgid "Liquidation payment — %s"
-msgstr ""
+msgstr "清算還款——%s"
 
-#: scripts/ui/modals/company_os.gd:385
+#: scripts/ui/modals/company_os.gd:382
 msgid "Listed %s at %s. Took %s."
 msgstr "已上架%s，售價 %s。花了 %s。"
 
-#: scripts/ui/modals/company_os.gd:284
+#: scripts/ui/modals/company_os.gd:281
 msgid "Listings on ShopLane (10% fee · weekly payout)"
 msgstr "ShopLane 上架商品（抽成 10% · 每週撥款）"
 
 #: scripts/sim/forecast.gd:42
 msgid "Living costs"
-msgstr ""
+msgstr "生活開銷"
 
 #: data/events/low_cash_warning.json
 msgid "Living costs drop to $18/day. Sales slow down."
@@ -2748,27 +2844,27 @@ msgstr "讀取最新存檔"
 
 #: scripts/sim/bank.gd:148
 msgid "Loan %s repaid in full."
-msgstr ""
+msgstr "貸款 %s 已全部還清。"
 
 #: scripts/sim/bank.gd:149
 msgid "Loan %s repaid in full. Your credit score went up."
-msgstr ""
+msgstr "貸款 %s 已全部還清，你的信用分數上升了。"
 
 #: scripts/sim/bank.gd:133
 msgid "Loan %s — extra repayment"
-msgstr ""
+msgstr "貸款 %s——額外還款"
 
 #: scripts/sim/bank.gd:161
 msgid "Loan %s — monthly payment"
-msgstr ""
+msgstr "貸款 %s——每月還款"
 
 #: scripts/sim/forecast.gd:49
 msgid "Loan payment"
-msgstr ""
+msgstr "貸款還款"
 
 #: scripts/ui/modals/insolvency_modal.gd:45
 msgid "Loan restructured. Payments are smaller; the bank is watching."
-msgstr ""
+msgstr "貸款已重整。每期還款變少了，但銀行在盯著你。"
 
 #: data/suppliers/tradelink_wholesale.json
 msgid "Local wholesaler. Reliable, not the cheapest."
@@ -2840,19 +2936,31 @@ msgstr "豪景高地"
 
 #: scripts/ui/modals/loan_modal.gd:33
 msgid "MARCUS REED"
-msgstr ""
+msgstr "MARCUS REED"
 
-#: scripts/ui/modals/company_os.gd:128
+#: scripts/ui/modals/company_os.gd:125
 msgid "MONTHLY PROFIT"
 msgstr "本月利潤"
 
-#: scripts/ui/modals/company_os.gd:127
+#: scripts/ui/modals/company_os.gd:124
 msgid "MONTHLY REVENUE"
 msgstr "本月營收"
 
-#: scripts/ui/modals/company_os.gd:439
+#: scripts/ui/modals/company_os.gd:436
 msgid "MOQ %d · %dd · %s duds"
 msgstr "最低 %d 件 · %d 天 · 瑕疵 %s"
+
+#: scripts/ui/modals/company_os.gd:927
+msgid "MRR"
+msgstr "月經常性收入"
+
+#: scripts/ui/modals/company_os.gd:883
+msgid "MVP %d dev hours · typical price %s/month · market ~%d customers · churn ~%d%%/month"
+msgstr "MVP 需要 %d 開發小時 · 一般價格每月 %s · 市場約 %d 位客戶 · 流失率每月約 %d%%"
+
+#: scripts/ui/modals/company_os.gd:901
+msgid "MVP: %d / %d dev hours · your team adds %.1f h per workday"
+msgstr "MVP：%d / %d 開發小時 · 你的團隊每個工作天增加 %.1f 小時"
 
 #: scripts/ui/modals/business_board.gd:59
 msgid "Main costs"
@@ -2868,7 +2976,7 @@ msgstr "正式成立公司。或者不要。"
 
 #: data/story/chapters.json
 msgid "Make your first payroll: keep cash in the company for Friday 17:00"
-msgstr ""
+msgstr "發第一次薪水：週五 17:00 前公司帳上要有錢"
 
 #: data/businesses/manufacturing.json data/regions/lumina.json
 msgid "Manufacturing"
@@ -2892,23 +3000,23 @@ msgstr "Marcus Reed"
 
 #: data/story/chapters.json
 msgid "Marcus Reed here. Big invoices on long terms are how profitable companies run out of cash. My door's open, weekdays 1 to 4."
-msgstr ""
+msgstr "我是 Marcus Reed。帳期很長的大筆發票，正是賺錢的公司會沒現金的原因。平日下午 1 到 4 點，我的門是開著的。"
 
 #: scripts/ui/modals/loan_modal.gd:63
 msgid "Marcus Reed signs loans in person (weekdays 13:00–16:00, Nexus Bank)."
-msgstr ""
+msgstr "Marcus Reed 親自簽貸款（平日 13:00–16:00，Nexus 銀行）。"
 
 #: data/dialogue/marcus_loan.json
 msgid "Marcus Reed. I run business lending here."
 msgstr "Marcus Reed。我負責這裡的企業貸款。"
 
-#: scripts/ui/modals/company_os.gd:317
+#: scripts/ui/modals/company_os.gd:314
 msgid "Market ~%s · expect ~%.1f orders/day · %d views · %d orders · in stock %d · unit margin after fee+shipping ≈ %s"
 msgstr "市價約 %s · 預估每日約 %.1f 筆 · %d 次瀏覽 · %d 筆訂單 · 庫存 %d · 扣除抽成與運費後單件利潤 ≈ %s"
 
 #: data/economy/staff.json
 msgid "Marketing Associate"
-msgstr ""
+msgstr "行銷專員"
 
 #: data/character/options.json
 msgid "Masculine"
@@ -2926,7 +3034,7 @@ msgstr "法規成熟"
 msgid "May"
 msgstr "5月"
 
-#: data/npcs/maya.json scripts/ui/modals/company_os.gd:642
+#: data/npcs/maya.json scripts/ui/modals/company_os.gd:639
 msgid "Maya"
 msgstr "Maya"
 
@@ -2936,7 +3044,7 @@ msgstr "Maya：「好好享受你的 15 分鐘成名時刻，大明星。」"
 
 #: data/dialogue/marcus_loan.json
 msgid "Maybe. Register a company, open an account with us, and give it a couple of weeks."
-msgstr ""
+msgstr "也許。先登記公司、在我們這裡開戶，再經營幾週。"
 
 #: data/regions/northridge.json
 msgid "Media"
@@ -2948,7 +3056,7 @@ msgstr "媒體／廣告"
 
 #: data/story/chapters.json
 msgid "Meet Daniel Wong at Nexus Co-work (Thursdays 17:00–20:00)"
-msgstr ""
+msgstr "到 Nexus 共享辦公室見 Daniel Wong（每週四 17:00–20:00）"
 
 #: scripts/ui/hud.gd:111
 msgid "Menu"
@@ -3012,19 +3120,19 @@ msgstr "收入來源"
 
 #: data/dialogue/elena_intro.json
 msgid "Money from me isn't free. It's a slice of everything you'll ever build."
-msgstr ""
+msgstr "我的錢不是免費的。它是你將來打造的一切的一部分。"
 
-#: scripts/ui/modals/company_os.gd:248
+#: scripts/ui/modals/company_os.gd:245
 msgid "Money in"
-msgstr ""
+msgstr "流入"
 
 #: data/events/elena_offer.json
 msgid "Money now, a partner forever. Your call."
-msgstr ""
+msgstr "錢是現在的，合夥人是一輩子的。你決定。"
 
-#: scripts/ui/modals/company_os.gd:248
+#: scripts/ui/modals/company_os.gd:245
 msgid "Money out"
-msgstr ""
+msgstr "流出"
 
 #: scripts/ui/modals/month_close_modal.gd:10
 msgid "Month Close — %s"
@@ -3040,7 +3148,7 @@ msgstr "自由座月租（$350）"
 
 #: scripts/ui/modals/loan_modal.gd:56
 msgid "Monthly payment"
-msgstr ""
+msgstr "每月還款"
 
 #: scripts/ui/modals/lease_modal.gd:21
 msgid "Monthly rent"
@@ -3050,9 +3158,9 @@ msgstr "月租"
 msgid "Mon–Fri"
 msgstr "週一至週五"
 
-#: scripts/ui/modals/company_os.gd:561
+#: scripts/ui/modals/company_os.gd:558
 msgid "Morale %d"
-msgstr ""
+msgstr "士氣 %d"
 
 #: scripts/frontend/character_creator.gd:148
 msgid "More outfits (Executive, Luxury Citywear, Travel, Formal) and accessories (hats, bags, jewellery, watches) come with the wardrobe & clothing store — planned."
@@ -3082,7 +3190,7 @@ msgstr "Okafor 先生（房東）"
 msgid "NAME"
 msgstr "名字"
 
-#: scripts/ui/modals/company_os.gd:680
+#: scripts/ui/modals/company_os.gd:677
 msgid "NEGOTIATION"
 msgstr "議價"
 
@@ -3112,21 +3220,21 @@ msgstr "藏青挑染"
 
 #: scripts/ui/modals/permits_modal.gd:26
 msgid "Needed before you hire anyone. Payroll runs every Friday at 17:00 from the company account."
-msgstr ""
+msgstr "聘人之前必須登記。每週五 17:00 從公司帳戶發薪。"
 
-#: scripts/ui/modals/company_os.gd:690
+#: scripts/ui/modals/company_os.gd:687
 msgid "Needs a registered company to sign."
 msgstr "需要登記公司才能簽約。"
 
-#: scripts/ui/modals/company_os.gd:136
+#: scripts/ui/modals/company_os.gd:133
 msgid "Needs attention"
 msgstr "需要注意"
 
-#: scripts/ui/modals/company_os.gd:448 scripts/ui/modals/company_os.gd:714
+#: scripts/ui/modals/company_os.gd:445 scripts/ui/modals/company_os.gd:711
 msgid "Net %d"
 msgstr "票期 %d 天"
 
-#: scripts/ui/modals/company_os.gd:674
+#: scripts/ui/modals/company_os.gd:671
 msgid "Net %d%s"
 msgstr "票期 %d 天%s"
 
@@ -3164,15 +3272,15 @@ msgstr "Nexus 銀行"
 
 #: scripts/sim/bank.gd:209
 msgid "Nexus Bank called loan %s and it could not be repaid."
-msgstr ""
+msgstr "Nexus 銀行要求貸款 %s 立即清償，但還不出來。"
 
 #: scripts/sim/bank.gd:186
 msgid "Nexus Bank called loan %s. %s due in 7 days."
-msgstr ""
+msgstr "Nexus 銀行要求貸款 %s 立即清償：7 天內須還 %s。"
 
 #: scripts/sim/bank.gd:115
 msgid "Nexus Bank loan %s: %s over %d months at %s"
-msgstr ""
+msgstr "Nexus 銀行貸款 %s：%s，%d 個月，年利率 %s"
 
 #: data/jobs/bank_teller.json
 msgid "Nexus Bank waives your overdraft fees while you work there."
@@ -3184,7 +3292,7 @@ msgstr "Nexus 銀行——"
 
 #: scripts/ui/modals/loan_modal.gd:14
 msgid "Nexus Bank — Business lending"
-msgstr ""
+msgstr "Nexus 銀行——企業貸款"
 
 #: data/buildings/nexus_cowork.json scripts/ui/modals/registration_modal.gd:42
 msgid "Nexus Co-work"
@@ -3224,9 +3332,9 @@ msgstr "不做任何改變。"
 
 #: scripts/sim/insolvency.gd:88
 msgid "No company to close."
-msgstr ""
+msgstr "沒有可以結束的公司。"
 
-#: scripts/ui/modals/company_os.gd:656
+#: scripts/ui/modals/company_os.gd:653
 msgid "No contracts yet. B2B customers want invoices from a registered company — and they usually pay later (Net 30)."
 msgstr "還沒有合約。B2B 客戶要登記公司開的發票——而且通常比較晚付款（票期 30 天）。"
 
@@ -3240,25 +3348,25 @@ msgstr "到貨無瑕疵"
 
 #: data/events/crestline_big_offer.json
 msgid "No defects on arrival · delivered by the due date"
-msgstr ""
+msgstr "到貨無瑕疵 · 期限內交貨"
 
-#: scripts/ui/modals/company_os.gd:540
+#: scripts/ui/modals/company_os.gd:537
 msgid "No employees yet. Every order is packed by you, which is why time matters."
-msgstr ""
+msgstr "還沒有員工。每筆訂單都是你自己打包，所以時間很重要。"
 
-#: scripts/ui/modals/company_os.gd:778
+#: scripts/ui/modals/company_os.gd:801
 msgid "No gigs in progress. Pick one below."
 msgstr "目前沒有進行中的案子，從下面挑一個。"
 
-#: scripts/ui/modals/company_os.gd:287
+#: scripts/ui/modals/company_os.gd:284
 msgid "No listings yet."
 msgstr "還沒有上架商品。"
 
-#: scripts/ui/modals/company_os.gd:157
+#: scripts/ui/modals/company_os.gd:154
 msgid "No listings yet. Buy stock (Operations), then list it (Sales)."
 msgstr "還沒有上架商品。先進貨（營運），再上架（銷售）。"
 
-#: scripts/ui/modals/company_os.gd:808
+#: scripts/ui/modals/company_os.gd:831
 msgid "No new offers. More arrive every morning at 8:00."
 msgstr "沒有新案子。每天早上 8:00 會有新的。"
 
@@ -3269,6 +3377,10 @@ msgstr "櫃檯沒有人。"
 #: scripts/ui/modals/dropoff_modal.gd:27
 msgid "No pickup fee when you bring them in."
 msgstr "自己拿來寄就不用收件費。"
+
+#: scripts/sim/saas.gd:71
+msgid "No product yet."
+msgstr "還沒有產品。"
 
 #: data/events/unexpected_large_order.json
 msgid "No risk. No revenue."
@@ -3284,7 +3396,7 @@ msgstr "沒有這個決定。"
 
 #: scripts/sim/staff.gd:148 scripts/sim/staff.gd:162
 msgid "No such employee."
-msgstr ""
+msgstr "找不到這位員工。"
 
 #: scripts/sim/careers.gd:217
 msgid "No such gig in progress."
@@ -3292,7 +3404,11 @@ msgstr "沒有這個進行中的案子。"
 
 #: scripts/sim/bank.gd:129
 msgid "No such loan."
-msgstr ""
+msgstr "找不到這筆貸款。"
+
+#: scripts/sim/contracts.gd:266
+msgid "No supplier carries this product."
+msgstr "沒有供應商賣這個商品。"
 
 #: scripts/world/actions.gd:76
 msgid "Nobody at the counter. Registration: Mon–Fri 9:00–17:00."
@@ -3304,7 +3420,7 @@ msgstr "無"
 
 #: scripts/ui/modals/loan_modal.gd:70
 msgid "None."
-msgstr ""
+msgstr "沒有。"
 
 #: scripts/ui/modals/pause_menu.gd:25
 msgid "Normal"
@@ -3326,11 +3442,15 @@ msgstr "現金不夠。需要 %s。"
 msgid "Not enough space there (%d units max)."
 msgstr "那裡放不下（最多 %d 件）。"
 
+#: scripts/sim/contracts.gd:276
+msgid "Not enough storage for %d more units (most free space: %d). Lease Suite 2B for 1,500 units."
+msgstr "放不下再多 %d 件（最多只剩 %d 件空間）。租下 2B 辦公室可以放 1,500 件。"
+
 #: data/economy/marketplace.json
 msgid "Not great. Feels cheap."
 msgstr "不太好。感覺很廉價。"
 
-#: scripts/ui/modals/business_board.gd:81
+#: scripts/ui/modals/business_board.gd:87
 msgid "Not in this build. %s is planned for %s — it will play differently, not just a new icon."
 msgstr "這個版本還沒有。%s 預計在 %s 推出——玩法會完全不同，不只是換個圖示。"
 
@@ -3344,11 +3464,11 @@ msgstr "顏色跟想像的不一樣。"
 
 #: data/dialogue/marcus_lending.json
 msgid "Not today."
-msgstr ""
+msgstr "今天先不用。"
 
 #: scripts/sim/bank.gd:69
 msgid "Not while a loan is in arrears."
-msgstr ""
+msgstr "有逾期貸款時不行。"
 
 #: scripts/sim/ecommerce.gd:523
 msgid "Nothing packed here."
@@ -3366,6 +3486,10 @@ msgstr "沒有要交的貨。"
 msgid "Nothing to drop off. Pack orders at your packing table and choose 'Carry to PostPoint'."
 msgstr "沒有要寄的東西。先到打包桌打包，再選「自己拿去 PostPoint」。"
 
+#: scripts/sim/saas.gd:96
+msgid "Nothing to launch."
+msgstr "沒有可以上線的產品。"
+
 #: scripts/sim/ecommerce.gd:686
 msgid "Nothing to resolve."
 msgstr "沒有需要處理的事。"
@@ -3377,6 +3501,10 @@ msgstr "這裡只顯示通知。\n要管理請到辦公桌：Company OS。"
 #: autoload/clock.gd:14
 msgid "Nov"
 msgstr "11月"
+
+#: scripts/ui/modals/company_os.gd:914
+msgid "Now the real work starts: keep them subscribed."
+msgstr "真正的工作現在才開始：讓用戶持續訂閱。"
 
 #: scripts/ui/modals/company_os.gd:28
 msgid "OFFERED"
@@ -3444,7 +3572,7 @@ msgstr "上班族正裝"
 
 #: scripts/sim/insolvency.gd:108 scripts/ui/modals/insolvency_modal.gd:63
 msgid "Office deposit returned"
-msgstr ""
+msgstr "辦公室押金退回"
 
 #: data/events/supplier_price_increase.json
 msgid "Okay. Keep supplying me."
@@ -3462,7 +3590,7 @@ msgstr "舊城區"
 msgid "On"
 msgstr "開"
 
-#: scripts/ui/modals/company_os.gd:489
+#: scripts/ui/modals/company_os.gd:486
 msgid "On hand"
 msgstr "現貨"
 
@@ -3474,6 +3602,10 @@ msgstr "多花一件商品＋快捷運費。"
 msgid "One used van. Every hour and every litre counts."
 msgstr "一台二手廂型車。每小時、每公升油都要算。"
 
+#: data/economy/saas.json
+msgid "Online booking for hair and beauty salons."
+msgstr "給美髮美容店的線上預約系統。"
+
 #: data/regulations/company_registration_aurelia.json
 msgid "Online retail (ecommerce)"
 msgstr "網路零售（電商）"
@@ -3484,7 +3616,7 @@ msgstr "網路零售消費年增 14%。"
 
 #: scripts/sim/contracts.gd:237
 msgid "Only a delivered, unpaid invoice can be paid early."
-msgstr ""
+msgstr "只有已交貨、尚未付款的發票能提前付款。"
 
 #: scripts/ui/modals/city_map_modal.gd:145 scripts/ui/modals/city_map_modal.gd:71
 msgid "Open"
@@ -3496,7 +3628,7 @@ msgstr "到 Nexus 銀行幫 {company} 開企業帳戶（金融區）"
 
 #: scripts/sim/bank.gd:64
 msgid "Open a business account with us first."
-msgstr ""
+msgstr "請先在我們這裡開公司帳戶。"
 
 #: scripts/ui/modals/bank_modal.gd:38
 msgid "Open account with %s"
@@ -3510,7 +3642,7 @@ msgstr "幫 %s 開戶並存入創辦人資金。你的庫存和 ShopLane 餘額�
 msgid "Open for Business"
 msgstr "正式開業"
 
-#: scripts/ui/modals/company_os.gd:219
+#: scripts/ui/modals/company_os.gd:216
 msgid "Open last month close (%s)"
 msgstr "查看上月結算（%s）"
 
@@ -3530,6 +3662,10 @@ msgstr "營運成本"
 msgid "Operations"
 msgstr "營運"
 
+#: scripts/ui/modals/company_os.gd:745
+msgid "Order %d more from %s (%s)"
+msgstr "追加訂購 %d 件，向 %s（%s）"
+
 #: data/buildings/byte_and_bean.json
 msgid "Order an oat latte ($5.20)"
 msgstr "點杯燕麥拿鐵（$5.20）"
@@ -3542,7 +3678,11 @@ msgstr "點杯咖啡（$4.50）"
 msgid "Order through TradeLink on your laptop. Two days to your door."
 msgstr "用筆電在 TradeLink 下單。兩天送到你家門口。"
 
-#: scripts/ui/modals/company_os.gd:471
+#: scripts/ui/modals/company_os.gd:775
+msgid "Ordered %d × %s to %s. Arrives %s."
+msgstr "已訂購 %d × %s 送到 %s，%s 到貨。"
+
+#: scripts/ui/modals/company_os.gd:468
 msgid "Ordered %d × %s — %s. Arrives %s."
 msgstr "已訂購 %d × %s——%s。預計 %s 到貨。"
 
@@ -3576,7 +3716,7 @@ msgstr "總覽"
 
 #: scripts/ui/modals/insolvency_modal.gd:25
 msgid "Owed (bank, wages, suppliers)"
-msgstr ""
+msgstr "欠款（銀行、薪資、供應商）"
 
 #: scripts/ui/modals/month_close_modal.gd:45
 msgid "Owed to you (ShopLane + invoices)"
@@ -3602,21 +3742,21 @@ msgstr "已付款"
 msgid "PARTIAL REFUND"
 msgstr "部分退款"
 
-#: scripts/ui/modals/company_os.gd:298
+#: scripts/ui/modals/company_os.gd:295
 msgid "PAUSED"
 msgstr "暫停"
 
-#: scripts/ui/modals/company_os.gd:298
+#: scripts/ui/modals/company_os.gd:295
 msgid "PAUSED · CAP"
 msgstr "暫停 · 已達上限"
 
-#: scripts/ui/modals/company_os.gd:132
+#: scripts/ui/modals/company_os.gd:129
 msgid "PAYABLE"
 msgstr "應付"
 
 #: scripts/ui/modals/permits_modal.gd:14
 msgid "PERMITS & REGISTRATIONS (AURELIA)"
-msgstr ""
+msgstr "許可與登記（奧瑞莉亞）"
 
 #: scripts/ui/hud.gd:83
 msgid "PERSONAL"
@@ -3642,7 +3782,7 @@ msgstr "升職了"
 msgid "Pack %d order%s (%s)"
 msgstr "打包 %d 筆訂單%s（%s）"
 
-#: scripts/ui/modals/company_os.gd:732
+#: scripts/ui/modals/company_os.gd:729
 msgid "Pack & deliver %d units (B2B freight $40)"
 msgstr "打包並交貨 %d 件（B2B 貨運 $40）"
 
@@ -3650,7 +3790,7 @@ msgstr "打包並交貨 %d 件（B2B 貨運 $40）"
 msgid "Pack the order at your packing table, then ship it"
 msgstr "到打包桌打包訂單，然後出貨"
 
-#: scripts/ui/modals/company_os.gd:396
+#: scripts/ui/modals/company_os.gd:393
 msgid "Packed"
 msgstr "已打包"
 
@@ -3670,7 +3810,7 @@ msgstr "已打包訂單 %s"
 msgid "Packed, not shipped"
 msgstr "已打包未出貨"
 
-#: scripts/ui/modals/company_os.gd:404
+#: scripts/ui/modals/company_os.gd:401
 msgid "Packing happens at a packing table where the stock is. Ship by courier (fee, no walk) or carry to PostPoint."
 msgstr "要在有庫存的打包桌打包。可以叫快遞（要付費，不用跑）或自己拿去 PostPoint。"
 
@@ -3684,7 +3824,7 @@ msgstr "打包桌——%s"
 
 #: data/economy/staff.json
 msgid "Packs orders at the office every workday and books the courier at 16:00. Needs stock at Suite 2B."
-msgstr ""
+msgstr "每個工作天在辦公室打包訂單，16:00 叫快遞。庫存要放在 2B 辦公室。"
 
 #: scripts/sim/contracts.gd:227
 msgid "Paid %s."
@@ -3692,7 +3832,7 @@ msgstr "已付款 %s。"
 
 #: scripts/sim/contracts.gd:243
 msgid "Paid early: %s (discount %s)."
-msgstr ""
+msgstr "提前付款：%s（折扣 %s）。"
 
 #: scripts/sim/ecommerce.gd:130
 msgid "Paid supplier invoice %s: %s"
@@ -3700,13 +3840,17 @@ msgstr "已付供應商發票 %s：%s"
 
 #: scripts/ui/modals/insolvency_modal.gd:65
 msgid "Paid — %s"
-msgstr ""
+msgstr "已付——%s"
+
+#: data/economy/saas.json
+msgid "Paidly"
+msgstr "Paidly"
 
 #: data/jobs/parcel_sorter.json
 msgid "Parcel Sorter"
 msgstr "包裹分揀員"
 
-#: scripts/ui/modals/company_os.gd:210
+#: scripts/ui/modals/company_os.gd:207
 msgid "Parcels out for delivery"
 msgstr "配送中的包裹"
 
@@ -3730,7 +3874,7 @@ msgstr "部分退款 30%% %s：%s"
 msgid "Partial refund sent."
 msgstr "部分退款已送出。"
 
-#: scripts/ui/modals/company_os.gd:314
+#: scripts/ui/modals/company_os.gd:311
 msgid "Pause"
 msgstr "暫停"
 
@@ -3748,13 +3892,13 @@ msgstr "薪資"
 
 #: scripts/ui/modals/loan_modal.gd:86
 msgid "Pay off"
-msgstr ""
+msgstr "一次還清"
 
 #: scripts/ui/modals/loan_modal.gd:79
 msgid "Payment"
-msgstr ""
+msgstr "還款"
 
-#: scripts/ui/modals/company_os.gd:674
+#: scripts/ui/modals/company_os.gd:671
 msgid "Payment terms"
 msgstr "付款條件"
 
@@ -3764,23 +3908,23 @@ msgstr "撥款已送出：%s 匯入你的%s帳戶。"
 
 #: scripts/sim/forecast.gd:22
 msgid "Payroll"
-msgstr ""
+msgstr "薪資"
 
 #: scripts/sim/staff.gd:300
 msgid "Payroll bounced: not enough cash for %s. Your team is owed %s."
-msgstr ""
+msgstr "薪水發不出來：現金不夠付 %s。公司欠團隊 %s。"
 
 #: scripts/sim/staff.gd:292
 msgid "Payroll owed (not paid) — %d people"
-msgstr ""
+msgstr "應付薪資（未發）——%d 人"
 
 #: scripts/sim/staff.gd:289
 msgid "Payroll paid: %s."
-msgstr ""
+msgstr "薪水已發：%s。"
 
 #: scripts/sim/staff.gd:276
 msgid "Payroll — %d people"
-msgstr ""
+msgstr "薪資——%d 人"
 
 #: data/city/aurelia.json
 msgid "Penthouses, clubs, fine dining."
@@ -3818,7 +3962,7 @@ msgstr "個人上限"
 msgid "Personal checking"
 msgstr "個人活存"
 
-#: scripts/ui/modals/company_os.gd:148
+#: scripts/ui/modals/company_os.gd:145
 msgid "Personal seller cap: %s of %s used this month."
 msgstr "個人賣家上限：本月已用 %s／%s。"
 
@@ -3833,6 +3977,10 @@ msgstr "手機"
 #: data/story/chapters.json
 msgid "Photograph your product and list it on ShopLane (Company OS → Sales)"
 msgstr "拍商品照，在 ShopLane 上架（Company OS → 銷售）"
+
+#: scripts/ui/modals/business_board.gd:81
+msgid "Pick a product idea and build it in Company OS → SaaS: development hours first, subscribers after launch. Hire developers to build faster."
+msgstr "挑一個產品點子，在 Company OS →「SaaS」開發：先投入開發工時，上線後才有訂閱用戶。聘工程師能做得更快。"
 
 #: data/economy/freelance.json
 msgid "Plan a month of social posts for %s"
@@ -3854,10 +4002,6 @@ msgstr "規劃中（P1）"
 msgid "Planned (P2)"
 msgstr "規劃中（P2）"
 
-#: scripts/ui/modals/company_os.gd:84
-msgid "Planned (P2/P3)"
-msgstr "規劃中（P2/P3）"
-
 #: scripts/ui/modals/permits_modal.gd:37
 msgid "Planned (P3)"
 msgstr "規劃中（P3）"
@@ -3869,6 +4013,10 @@ msgstr "規劃中的車站（P1）："
 #: scripts/ui/modals/wardrobe_modal.gd:41
 msgid "Planned: "
 msgstr "規劃中："
+
+#: scripts/ui/modals/company_os.gd:82
+msgid "Planned: %s"
+msgstr "規劃中：%s"
 
 #: data/dialogue/jun_first.json
 msgid "Please."
@@ -3884,7 +4032,7 @@ msgstr "馬尾"
 
 #: scripts/sim/bank.gd:32
 msgid "Poor"
-msgstr ""
+msgstr "差"
 
 #: scripts/ui/modals/city_map_modal.gd:104
 msgid "Pop. 3.2M · 62 km² · 5 Metro lines"
@@ -3902,17 +4050,17 @@ msgstr "白皙"
 msgid "Ports"
 msgstr "港口"
 
-#: scripts/ui/modals/company_os.gd:610
+#: scripts/ui/modals/company_os.gd:607
 msgid "Post a job ad (%s). Applicants arrive within a day."
-msgstr ""
+msgstr "刊登徵才廣告（%s），一天內會有人應徵。"
 
-#: scripts/ui/modals/company_os.gd:623
+#: scripts/ui/modals/company_os.gd:620
 msgid "Post job"
-msgstr ""
+msgstr "刊登職缺"
 
 #: data/story/chapters.json
 msgid "Post your first job ad (Company OS → People)"
-msgstr ""
+msgstr "刊登第一則徵才廣告（Company OS →「人員」）"
 
 #: data/buildings/postpoint_riverside.json
 msgid "PostPoint"
@@ -3954,7 +4102,7 @@ msgstr "按 M 打開城市地圖。沿著「→」標誌走出街道邊緣可到
 msgid "Press Tab, or click Phone at the top right, to read your messages."
 msgstr "按 Tab，或點右上角的「手機」，查看訊息。"
 
-#: scripts/ui/modals/company_os.gd:303
+#: scripts/ui/modals/company_os.gd:300 scripts/ui/modals/company_os.gd:935
 msgid "Price"
 msgstr "售價"
 
@@ -3982,7 +4130,7 @@ msgstr "在市政廳處理許可與登記。只有平日上班，收入穩定。
 msgid "Processing time"
 msgstr "處理時間"
 
-#: scripts/ui/modals/company_os.gd:489 scripts/ui/modals/company_os.gd:671
+#: scripts/ui/modals/company_os.gd:486 scripts/ui/modals/company_os.gd:668
 msgid "Product"
 msgstr "商品"
 
@@ -3992,7 +4140,7 @@ msgstr "扣除生活費後利潤"
 
 #: data/story/chapters.json
 msgid "Profit on paper. Payroll on Friday."
-msgstr ""
+msgstr "帳面有賺錢，週五要發薪水。"
 
 #: scripts/ui/modals/month_close_modal.gd:53
 msgid "Profit this month: %s. Cash moved by %s. The gap (%s) is sitting in stock, in ShopLane's hands, or in unpaid invoices."
@@ -4010,15 +4158,15 @@ msgstr "不動產"
 msgid "Pull shots behind Jun's counter and learn how regulars decide what to buy."
 msgstr "在 Jun 的吧台後面煮咖啡，觀察熟客怎麼決定要買什麼。"
 
-#: scripts/ui/modals/company_os.gd:451
+#: scripts/ui/modals/company_os.gd:448
 msgid "Purchase orders"
 msgstr "採購單"
 
 #: scripts/ui/modals/insolvency_modal.gd:30
 msgid "Put in %s of your own money"
-msgstr ""
+msgstr "拿出自己的 %s"
 
-#: scripts/ui/modals/company_os.gd:675
+#: scripts/ui/modals/company_os.gd:672
 msgid "Quality"
 msgstr "品質"
 
@@ -4026,7 +4174,7 @@ msgstr "品質"
 msgid "Quality variance"
 msgstr "品質不穩"
 
-#: scripts/ui/modals/company_os.gd:672
+#: scripts/ui/modals/company_os.gd:669
 msgid "Quantity"
 msgstr "數量"
 
@@ -4046,7 +4194,7 @@ msgstr "辭職"
 msgid "Quit to title"
 msgstr "回到標題畫面"
 
-#: scripts/ui/modals/company_os.gd:131
+#: scripts/ui/modals/company_os.gd:128
 msgid "RECEIVABLE"
 msgstr "應收"
 
@@ -4060,7 +4208,7 @@ msgstr "已拒絕"
 
 #: scripts/ui/modals/permits_modal.gd:28
 msgid "REGISTERED"
-msgstr ""
+msgstr "已登記"
 
 #: scripts/ui/modals/company_os.gd:29
 msgid "REJECTED"
@@ -4078,9 +4226,9 @@ msgstr "已換貨"
 msgid "RETURN REQUESTED"
 msgstr "申請退貨"
 
-#: scripts/ui/modals/company_os.gd:564
+#: scripts/ui/modals/company_os.gd:561
 msgid "Raise +8%"
-msgstr ""
+msgstr "加薪 8%"
 
 #: data/events/viral_mention.json
 msgid "Raise the price 15%"
@@ -4106,7 +4254,7 @@ msgstr "看看公告欄"
 msgid "Read: 'Small Business Lending'"
 msgstr "閱讀：《小型企業貸款》"
 
-#: scripts/ui/modals/company_os.gd:326
+#: scripts/ui/modals/company_os.gd:323
 msgid "Ready to list (you have these in hand)"
 msgstr "可上架（這些你手上有貨）"
 
@@ -4116,21 +4264,21 @@ msgstr "房地產"
 
 #: scripts/ui/modals/insolvency_modal.gd:62
 msgid "Receivables sold (80%)"
-msgstr ""
+msgstr "應收帳款出售（80%）"
 
 #: scripts/sim/insolvency.gd:98
 msgid "Receivables sold to a collector (80%)"
-msgstr ""
+msgstr "應收帳款以 80% 賣給催收公司"
 
 #: data/story/chapters.json
 msgid "Received. Accounts payable will process your invoice. Net 60, as agreed."
-msgstr ""
+msgstr "收到了。應付帳款部會處理你的發票，照約定 60 天付款。"
 
-#: scripts/ui/modals/company_os.gd:351
+#: scripts/ui/modals/company_os.gd:348
 msgid "Recent orders"
 msgstr "最近訂單"
 
-#: scripts/ui/modals/company_os.gd:221
+#: scripts/ui/modals/company_os.gd:218
 msgid "Recent transactions"
 msgstr "最近交易"
 
@@ -4166,7 +4314,7 @@ msgstr "退款已送出。{customer}：「謝啦，感謝。」"
 msgid "Refunded."
 msgstr "已退款。"
 
-#: scripts/ui/modals/company_os.gd:189 scripts/ui/modals/month_close_modal.gd:26
+#: scripts/ui/modals/company_os.gd:186 scripts/ui/modals/month_close_modal.gd:26
 msgid "Refunds"
 msgstr "退款"
 
@@ -4188,7 +4336,7 @@ msgstr "登記並付款"
 
 #: scripts/ui/modals/permits_modal.gd:30
 msgid "Register (%s)"
-msgstr ""
+msgstr "登記（%s）"
 
 #: scripts/sim/company.gd:83
 msgid "Register a company at City Hall first."
@@ -4196,11 +4344,11 @@ msgstr "請先到市政廳登記公司。"
 
 #: scripts/sim/staff.gd:55
 msgid "Register a company first."
-msgstr ""
+msgstr "請先登記公司。"
 
 #: scripts/ui/modals/permits_modal.gd:35
 msgid "Register the company first."
-msgstr ""
+msgstr "請先登記公司。"
 
 #: data/story/chapters.json
 msgid "Register your company at City Hall (Civic Center, take the Metro)"
@@ -4212,7 +4360,7 @@ msgstr "請先登記公司。"
 
 #: data/story/chapters.json
 msgid "Register {company} as an employer (City Hall permits kiosk, Civic Center)"
-msgstr ""
+msgstr "幫 {company} 辦雇主登記（市政中心，市政廳許可服務機）"
 
 #: scripts/ui/modals/registration_modal.gd:38
 msgid "Registered address"
@@ -4220,7 +4368,7 @@ msgstr "登記地址"
 
 #: scripts/ui/modals/permits_modal.gd:54
 msgid "Registered as an employer (%s). You can post jobs in Company OS → People."
-msgstr ""
+msgstr "雇主登記完成（%s）。可以到 Company OS →「人員」刊登職缺了。"
 
 #: data/regions/almeria.json data/regions/auroria.json data/regions/karu.json data/regions/lumina.json
 msgid "Registered company + international banking (P2)"
@@ -4232,7 +4380,7 @@ msgstr "公司登記櫃檯"
 
 #: scripts/ui/modals/permits_modal.gd:16
 msgid "Registration counter · %s"
-msgstr ""
+msgstr "登記櫃台 · %s"
 
 #: scripts/ui/modals/registration_modal.gd:48
 msgid "Registration fee"
@@ -4242,7 +4390,7 @@ msgstr "登記規費"
 msgid "Registration no. %s · Founded %s"
 msgstr "登記字號 %s · 成立於 %s"
 
-#: scripts/ui/modals/company_os.gd:175
+#: scripts/ui/modals/company_os.gd:172
 msgid "Registration: "
 msgstr "公司登記："
 
@@ -4256,11 +4404,11 @@ msgstr "這裡的法規是經營條件，不是考題：每一條都有成本、
 
 #: data/economy/staff.json
 msgid "Reliable: morale drops half as fast."
-msgstr ""
+msgstr "可靠：士氣下降速度減半。"
 
 #: scripts/sim/forecast.gd:32
 msgid "Rent"
-msgstr ""
+msgstr "租金"
 
 #: scripts/ui/phone_ui.gd:215
 msgid "Rent $1,250 due the 14th"
@@ -4296,7 +4444,7 @@ msgstr "到處都在漲房租。賣點大家真的需要的東西吧。"
 
 #: scripts/ui/modals/loan_modal.gd:83
 msgid "Repay %s"
-msgstr ""
+msgstr "還 %s"
 
 #: data/events/customer_return_first.json
 msgid "Replacement on its way. {customer}: \"Oh — nice. Didn't expect that.\""
@@ -4322,19 +4470,19 @@ msgstr "回報問題（F12）"
 msgid "Reports"
 msgstr "報表"
 
-#: scripts/ui/modals/company_os.gd:774
+#: scripts/ui/modals/company_os.gd:797
 msgid "Reputation %.1f · rate about %s/h · %d delivered · %d late"
 msgstr "信譽 %.1f · 時薪約 %s · 已交件 %d · 遲交 %d"
 
 #: scripts/sim/insolvency.gd:48
 msgid "Rescue capital into %s"
-msgstr ""
+msgstr "注資紓困 %s"
 
 #: data/city/aurelia.json
 msgid "Research and talent."
 msgstr "研究與人才。"
 
-#: scripts/ui/modals/company_os.gd:489
+#: scripts/ui/modals/company_os.gd:486
 msgid "Reserved"
 msgstr "已保留"
 
@@ -4352,13 +4500,13 @@ msgstr "回覆"
 
 #: scripts/ui/modals/insolvency_modal.gd:40
 msgid "Restructure the loan with Nexus Bank (24 months, +3% interest, credit hit)"
-msgstr ""
+msgstr "和 Nexus 銀行重整貸款（24 個月，利率 +3%，信用受損）"
 
 #: scripts/sim/insolvency.gd:69
 msgid "Restructuring fee — loan %s"
-msgstr ""
+msgstr "重整手續費——貸款 %s"
 
-#: scripts/ui/modals/company_os.gd:314 scripts/ui/modals/pause_menu.gd:12
+#: scripts/ui/modals/company_os.gd:311 scripts/ui/modals/pause_menu.gd:12
 msgid "Resume"
 msgstr "恢復"
 
@@ -4372,19 +4520,19 @@ msgstr "退貨申請"
 
 #: scripts/ui/modals/insolvency_modal.gd:67
 msgid "Returned to you"
-msgstr ""
+msgstr "退還給你"
 
-#: scripts/ui/modals/company_os.gd:188 scripts/ui/modals/month_close_modal.gd:25
+#: scripts/ui/modals/company_os.gd:185 scripts/ui/modals/month_close_modal.gd:25
 msgid "Revenue"
 msgstr "營收"
 
-#: scripts/ui/modals/company_os.gd:745
+#: scripts/ui/modals/company_os.gd:755
 msgid "Revenue is booked. The cash isn't here yet."
 msgstr "營收已入帳。但錢還沒進來。"
 
 #: data/story/chapters.json
 msgid "Revenue isn't cash: check the cash forecast (Company OS → Finance)"
-msgstr ""
+msgstr "營收不等於現金：看看現金預測（Company OS →「財務」）"
 
 #: data/events/unexpected_large_order.json
 msgid "Review terms in Company OS → Contracts. Accept, counter or decline there."
@@ -4462,7 +4610,7 @@ msgstr "圓框眼鏡"
 msgid "Route Planner"
 msgstr "路線規劃員"
 
-#: scripts/ui/modals/company_os.gd:168
+#: scripts/ui/modals/company_os.gd:165
 msgid "Run it from home for now"
 msgstr "先在家經營"
 
@@ -4476,11 +4624,15 @@ msgstr "讓 {company} 撐到月底（6月30日）"
 
 #: data/economy/staff.json
 msgid "Runs socials and promotions: more shoppers see every listing."
-msgstr ""
+msgstr "經營社群和促銷：讓更多買家看到你的每個商品。"
 
 #: data/events/viral_mention.json
 msgid "Rush-order {moq} more (1-day, +20% cost)"
 msgstr "急單再訂 {moq} 件（1 天到貨，成本 +20%）"
+
+#: scripts/ui/modals/company_os.gd:930
+msgid "SERVERS"
+msgstr "伺服器"
 
 #: scripts/ui/modals/company_os.gd:26
 msgid "SHIPPED"
@@ -4490,7 +4642,7 @@ msgstr "已出貨"
 msgid "SIDE"
 msgstr "側面"
 
-#: scripts/ui/modals/company_os.gd:135
+#: scripts/ui/modals/company_os.gd:132
 msgid "STAGE"
 msgstr "階段"
 
@@ -4510,11 +4662,15 @@ msgstr "新創園區 →"
 msgid "STATEMENT"
 msgstr "對帳單"
 
+#: scripts/ui/modals/company_os.gd:926
+msgid "SUBSCRIBERS"
+msgstr "訂閱用戶"
+
 #: scripts/world/interior.gd:237
 msgid "SUITE 2B\nAVAILABLE"
 msgstr "2B 室\n招租中"
 
-#: data/regions/northridge.json
+#: data/regions/northridge.json scripts/ui/modals/company_os.gd:8
 msgid "SaaS"
 msgstr "SaaS"
 
@@ -4578,11 +4734,11 @@ msgstr "角落潦草寫著：「利潤是觀點，現金是事實。」"
 msgid "Sell all stock to a liquidator (40% of cost)"
 msgstr "把庫存全賣給清倉商（成本的 40%）"
 
-#: scripts/ui/modals/company_os.gd:760
+#: scripts/ui/modals/company_os.gd:783
 msgid "Sell your time: clients post small projects every morning. Accept a gig, work it here in 2-hour sessions, deliver before the deadline and invoice. Payment follows the client's terms. On-time work earns stars; stars raise your rate."
 msgstr "出賣你的時間：客戶每天早上會張貼小案子。接案後在這裡以每次 2 小時的方式工作，截止前交件並開立發票，依客戶的付款條件收款。準時交件能累積星等，星等越高時薪越高。"
 
-#: scripts/ui/modals/company_os.gd:671
+#: scripts/ui/modals/company_os.gd:668
 msgid "Seller"
 msgstr "賣方"
 
@@ -4598,7 +4754,7 @@ msgstr "寄一個新的"
 msgid "Send a replacement (express)"
 msgstr "寄一個新的（快捷）"
 
-#: scripts/ui/modals/company_os.gd:720
+#: scripts/ui/modals/company_os.gd:717
 msgid "Send counter-offer"
 msgstr "送出還價"
 
@@ -4608,7 +4764,7 @@ msgstr "把合約寄給我，我看看。"
 
 #: data/events/crestline_big_offer.json
 msgid "Send the contract. I'll review it."
-msgstr ""
+msgstr "把合約寄來，我看看。"
 
 #: data/jobs/city_clerk.json
 msgid "Senior Officer"
@@ -4618,17 +4774,17 @@ msgstr "資深承辦員"
 msgid "Sep"
 msgstr "9月"
 
-#: scripts/ui/modals/company_os.gd:675
+#: scripts/ui/modals/company_os.gd:672
 msgid "Settlement"
 msgstr "結算方式"
 
-#: scripts/ui/modals/company_os.gd:570
+#: scripts/ui/modals/company_os.gd:567
 msgid "Severance paid: %s."
-msgstr ""
+msgstr "已付資遣費：%s。"
 
 #: scripts/sim/staff.gd:150
 msgid "Severance — %s"
-msgstr ""
+msgstr "資遣費——%s"
 
 #: scripts/ui/tutorial.gd:14
 msgid "Shift"
@@ -4658,7 +4814,7 @@ msgstr "寄出 %d 件包裹%s——%s。"
 msgid "Shipping"
 msgstr "運費"
 
-#: scripts/ui/modals/company_os.gd:343
+#: scripts/ui/modals/company_os.gd:340
 msgid "Shoot photos myself & list (1 h 20 min)"
 msgstr "自己拍照並上架（1 小時 20 分）"
 
@@ -4666,7 +4822,7 @@ msgstr "自己拍照並上架（1 小時 20 分）"
 msgid "ShopLane"
 msgstr "ShopLane"
 
-#: scripts/ui/modals/company_os.gd:131
+#: scripts/ui/modals/company_os.gd:128
 msgid "ShopLane + invoices"
 msgstr "ShopLane＋發票"
 
@@ -4682,7 +4838,7 @@ msgstr "ShopLane 賣家"
 msgid "ShopLane ads: %s"
 msgstr "ShopLane 廣告：%s"
 
-#: scripts/ui/modals/company_os.gd:204
+#: scripts/ui/modals/company_os.gd:201
 msgid "ShopLane balance (paid Mondays)"
 msgstr "ShopLane 餘額（每週一撥款）"
 
@@ -4714,11 +4870,11 @@ msgstr "收到 ShopLane 撥款：%s"
 msgid "ShopLane pending"
 msgstr "ShopLane 待撥款"
 
-#: scripts/ui/modals/company_os.gd:282
+#: scripts/ui/modals/company_os.gd:279
 msgid "ShopLane personal seller cap"
 msgstr "ShopLane 個人賣家上限"
 
-#: scripts/ui/modals/company_os.gd:146
+#: scripts/ui/modals/company_os.gd:143
 msgid "ShopLane personal seller cap reached — register a company at City Hall."
 msgstr "已達 ShopLane 個人賣家上限——到市政廳登記公司。"
 
@@ -4744,11 +4900,11 @@ msgstr "俐落短髮"
 
 #: scripts/ui/modals/insolvency_modal.gd:26
 msgid "Shortfall"
-msgstr ""
+msgstr "資金缺口"
 
 #: data/dialogue/marcus_lending.json
 msgid "Show me what you can do."
-msgstr ""
+msgstr "讓我看看你能借多少。"
 
 #: data/character/options.json
 msgid "Side part"
@@ -4774,13 +4930,13 @@ msgstr "坐到辦公桌——Company OS"
 msgid "Sit down at your desk and open Company OS as {company}"
 msgstr "坐到辦公桌前，以 {company} 的身分打開 Company OS"
 
-#: scripts/ui/modals/company_os.gd:558
+#: scripts/ui/modals/company_os.gd:555
 msgid "Skill %d/5 · %s/week · %s"
-msgstr ""
+msgstr "能力 %d/5 · 每週 %s · %s"
 
-#: scripts/ui/modals/company_os.gd:596
+#: scripts/ui/modals/company_os.gd:593
 msgid "Skill %d/5 · asks %s/week · %s"
-msgstr ""
+msgstr "能力 %d/5 · 希望週薪 %s · %s"
 
 #: scripts/frontend/character_creator.gd:130
 msgid "Skin tone"
@@ -4860,7 +5016,7 @@ msgstr "軟體"
 
 #: data/economy/staff.json
 msgid "Software Developer"
-msgstr ""
+msgstr "軟體工程師"
 
 #: data/businesses/energy.json
 msgid "Solar installs to grid-scale. Policy-driven."
@@ -4872,7 +5028,7 @@ msgstr "賣給清倉商：%d × %s（成本的 %d%%）"
 
 #: scripts/sim/effects.gd:87
 msgid "Sold %d%% of %s for %s."
-msgstr ""
+msgstr "賣出 %d%% 的 %s 股份，換得 %s。"
 
 #: data/events/low_cash_warning.json
 msgid "Sold inventory to a liquidator to stay afloat."
@@ -4902,7 +5058,7 @@ msgstr "抱歉——這單我接不了。"
 msgid "Sort, scan and stack the neighbourhood's parcels. You'll see how shipping really works."
 msgstr "分揀、掃描、堆疊附近的包裹。你會看到物流實際上怎麼運作。"
 
-#: scripts/ui/modals/company_os.gd:486
+#: scripts/ui/modals/company_os.gd:483
 msgid "Space"
 msgstr "空間"
 
@@ -4934,9 +5090,13 @@ msgstr "站到人或物品旁邊，畫面下方出現提示時，按 E 或直接
 msgid "Start an ecommerce side business"
 msgstr "開始經營電商副業"
 
-#: scripts/ui/modals/business_board.gd:77 scripts/ui/modals/company_os.gd:761
+#: scripts/ui/modals/business_board.gd:77 scripts/ui/modals/company_os.gd:784
 msgid "Start freelancing"
 msgstr "開始接案"
+
+#: scripts/ui/modals/business_board.gd:85
+msgid "Start from any laptop: Company OS → SaaS."
+msgstr "從任何一台筆電開始：Company OS →「SaaS」。"
 
 #: scripts/frontend/character_creator.gd:104
 msgid "Start in Aurelia  →"
@@ -4944,7 +5104,11 @@ msgstr "前往奧瑞莉亞  →"
 
 #: scripts/ui/modals/insolvency_modal.gd:70
 msgid "Start over"
-msgstr ""
+msgstr "重新開始"
+
+#: scripts/sim/saas.gd:60
+msgid "Started building %s, a SaaS product."
+msgstr "開始開發 SaaS 產品 %s。"
 
 #: scripts/sim/careers.gd:153
 msgid "Started freelancing as a consultant."
@@ -4958,7 +5122,7 @@ msgstr "新創休閒"
 msgid "Startup Hub"
 msgstr "新創園區"
 
-#: scripts/ui/modals/company_os.gd:208
+#: scripts/ui/modals/company_os.gd:205
 msgid "Stock (at cost)"
 msgstr "庫存（成本）"
 
@@ -4970,7 +5134,7 @@ msgstr "庫存（成本）"
 msgid "Stock here: "
 msgstr "這裡的庫存："
 
-#: scripts/ui/modals/company_os.gd:209
+#: scripts/ui/modals/company_os.gd:206
 msgid "Stock on the way"
 msgstr "在途庫存"
 
@@ -4980,7 +5144,15 @@ msgstr "到貨：%s"
 
 #: scripts/ui/modals/insolvency_modal.gd:61
 msgid "Stock sold to a liquidator (40% of cost)"
-msgstr ""
+msgstr "庫存賣給清算商（成本的 40%）"
+
+#: data/economy/saas.json
+msgid "Stock tracking for small online shops (you know the pain)."
+msgstr "給小網店的庫存管理（你懂那種痛）。"
+
+#: data/economy/saas.json
+msgid "Stockroom"
+msgstr "Stockroom"
 
 #: data/economy/marketplace.json
 msgid "Stopped working after a day."
@@ -5002,7 +5174,7 @@ msgstr "嚴格的消費者保護"
 msgid "Studio Lumen"
 msgstr "Studio Lumen"
 
-#: scripts/ui/modals/company_os.gd:346
+#: scripts/ui/modals/company_os.gd:343
 msgid "Studio Lumen photos ($120) & list"
 msgstr "找 Studio Lumen 拍照（$120）並上架"
 
@@ -5022,7 +5194,7 @@ msgstr "2B 室。採光好，40 平方公尺，後面有倉庫。"
 msgid "Sun"
 msgstr "日"
 
-#: scripts/ui/modals/company_os.gd:207
+#: scripts/ui/modals/company_os.gd:204
 msgid "Supplier bills payable"
 msgstr "應付供應商帳款"
 
@@ -5032,7 +5204,7 @@ msgstr "供應商沒有這個商品。"
 
 #: scripts/sim/forecast.gd:61
 msgid "Supplier invoice"
-msgstr ""
+msgstr "供應商帳單"
 
 #: scripts/sim/ecommerce.gd:128
 msgid "Supplier invoice paid: %s"
@@ -5042,7 +5214,7 @@ msgstr "已付供應商發票：%s"
 msgid "Supplier price increase"
 msgstr "供應商漲價"
 
-#: scripts/ui/modals/company_os.gd:405
+#: scripts/ui/modals/company_os.gd:402
 msgid "Suppliers"
 msgstr "供應商"
 
@@ -5058,7 +5230,7 @@ msgstr "供應鏈依賴"
 msgid "Sure. Name, business type, address. $300 fee."
 msgstr "好。公司名稱、營業項目、地址。規費 $300。"
 
-#: scripts/ui/modals/company_os.gd:187
+#: scripts/ui/modals/company_os.gd:184
 msgid "THIS MONTH (P&L) · "
 msgstr "本月損益 · "
 
@@ -5076,7 +5248,7 @@ msgstr "Tab"
 
 #: data/events/elena_offer.json
 msgid "Take $40,000 for 20%"
-msgstr ""
+msgstr "以 20% 股份換 $40,000"
 
 #: data/buildings/city_hall.json
 msgid "Take a number"
@@ -5085,10 +5257,6 @@ msgstr "抽號碼牌"
 #: data/dialogue/ana_register.json
 msgid "Take a number whenever you're ready."
 msgstr "準備好了就抽號碼牌。"
-
-#: data/businesses/saas.json
-msgid "Take client projects, then build a product people pay for every month."
-msgstr "先接案，再做出一個大家願意每月付費的產品。"
 
 #: scripts/ui/modals/job_modal.gd:71
 msgid "Take the job"
@@ -5114,13 +5282,13 @@ msgstr "小麥色"
 msgid "Tasks"
 msgstr "任務"
 
-#: scripts/ui/modals/company_os.gd:538
+#: scripts/ui/modals/company_os.gd:535
 msgid "Team"
-msgstr ""
+msgstr "團隊"
 
-#: scripts/ui/modals/company_os.gd:533
+#: scripts/ui/modals/company_os.gd:530
 msgid "Team: %d · payroll %s / week (Fridays 17:00)"
-msgstr ""
+msgstr "團隊：%d 人 · 每週薪資 %s（週五 17:00）"
 
 #: data/regions/northridge.json
 msgid "Tech & Media"
@@ -5156,7 +5324,7 @@ msgstr "謝謝"
 
 #: scripts/sim/staff.gd:127
 msgid "That applicant has moved on."
-msgstr ""
+msgstr "這位應徵者已經找到別的工作了。"
 
 #: scripts/sim/event_engine.gd:158
 msgid "That didn't work."
@@ -5180,11 +5348,15 @@ msgstr "早上 8 點的尖峰：四十杯澳白，外加一次燕麥奶危機。
 
 #: data/story/chapters.json
 msgid "The Big Contract"
-msgstr ""
+msgstr "大合約"
 
 #: data/world/years.json
 msgid "The Green Shift"
 msgstr "綠色轉型"
+
+#: scripts/sim/saas.gd:98
+msgid "The MVP needs %d more dev hours."
+msgstr "MVP 還需要 %d 開發小時。"
 
 #: data/world/years.json
 msgid "The Opportunity"
@@ -5196,7 +5368,7 @@ msgstr "帳戶已經開好了。"
 
 #: scripts/sim/insolvency.gd:66
 msgid "The bank won't restructure with this credit history."
-msgstr ""
+msgstr "以這種信用紀錄，銀行不願意重整。"
 
 #: scripts/ui/tutorial.gd:19
 msgid "The clock runs while you walk. Hold T to fast-forward. Shops keep opening hours; sleep in your bed to end the day."
@@ -5204,15 +5376,15 @@ msgstr "走動時時間會流逝。按住 T 可以快轉。商店有營業時間
 
 #: scripts/ui/modals/insolvency_modal.gd:10
 msgid "The company can't pay its debts"
-msgstr ""
+msgstr "公司付不出債務"
 
 #: scripts/ui/modals/insolvency_modal.gd:35
 msgid "The company is solvent again. Your savings took the hit."
-msgstr ""
+msgstr "公司恢復償債能力了，代價是你的積蓄。"
 
 #: scripts/sim/staff.gd:61
 msgid "The employer registration fee is %s."
-msgstr ""
+msgstr "雇主登記費是 %s。"
 
 #: scripts/sim/living.gd:73
 msgid "The landlord needs a registered company on the lease."
@@ -5236,13 +5408,13 @@ msgstr "你在這！"
 
 #: data/dialogue/daniel_big_deal.json
 msgid "There you are. Crestline's autumn range needs desk lamps."
-msgstr ""
+msgstr "你來了。Crestline 的秋季系列需要檯燈。"
 
 #: scripts/sim/insolvency.gd:64
 msgid "There's no bank loan to restructure."
-msgstr ""
+msgstr "沒有可以重整的銀行貸款。"
 
-#: scripts/ui/modals/company_os.gd:723
+#: scripts/ui/modals/company_os.gd:720
 msgid "They agreed to your terms. Accept to sign."
 msgstr "對方同意你的條件。按接受就能簽約。"
 
@@ -5254,7 +5426,7 @@ msgstr "商品留給對方。評價不會太好。"
 msgid "They need an invoice from a registered company."
 msgstr "對方需要登記公司開立的發票。"
 
-#: scripts/ui/modals/company_os.gd:725
+#: scripts/ui/modals/company_os.gd:722
 msgid "They walked away."
 msgstr "對方放棄了。"
 
@@ -5298,11 +5470,11 @@ msgstr "人生紀錄"
 msgid "Tip: register a company before ShopLane caps you. Everyone learns that one the hard way."
 msgstr "提醒你：在 ShopLane 限制你之前先把公司登記好。每個人都是吃過虧才學會的。"
 
-#: scripts/ui/modals/company_os.gd:396 scripts/ui/phone_ui.gd:250
+#: scripts/ui/modals/company_os.gd:393 scripts/ui/phone_ui.gd:250
 msgid "To pack"
 msgstr "待打包"
 
-#: scripts/ui/modals/company_os.gd:806
+#: scripts/ui/modals/company_os.gd:829
 msgid "Today's offers"
 msgstr "今日案子"
 
@@ -5316,21 +5488,21 @@ msgstr "Tom：「現在是你的了。招牌已經掛在門口。」"
 
 #: data/story/chapters.json
 msgid "Too many orders. Not enough hours."
-msgstr ""
+msgstr "訂單太多，時間不夠。"
 
 #: data/economy/marketplace.json
 msgid "Took a while to arrive."
 msgstr "等了好一陣子才到。"
 
-#: scripts/ui/modals/company_os.gd:672
+#: scripts/ui/modals/company_os.gd:669
 msgid "Total"
 msgstr "總額"
 
 #: scripts/ui/modals/loan_modal.gd:57
 msgid "Total interest"
-msgstr ""
+msgstr "總利息"
 
-#: scripts/ui/modals/company_os.gd:510
+#: scripts/ui/modals/company_os.gd:507
 msgid "Total stock value (books)"
 msgstr "庫存總值（帳面）"
 
@@ -5374,13 +5546,13 @@ msgstr "教學完成！金色箭頭會繼續指向你的目標（可在暫停選
 msgid "Tutorial skipped. You can replay it from the pause menu (Esc)."
 msgstr "已略過教學。可以在暫停選單（Esc）重新播放。"
 
-#: scripts/ui/modals/company_os.gd:842
+#: scripts/ui/modals/company_os.gd:865
 msgid "Two focused hours. %s"
 msgstr "專心工作了兩小時。%s"
 
 #: scripts/sim/bank.gd:185
 msgid "Two missed payments. The bank has called loan %s: %s is due in full within 7 days."
-msgstr ""
+msgstr "連續兩期沒繳。銀行要求貸款 %s 立即清償：7 天內須全額還 %s。"
 
 #: data/events/viral_mention.json
 msgid "Uh. Did you see this??"
@@ -5390,7 +5562,7 @@ msgstr "呃。你看到這個了嗎？？"
 msgid "Unexpected large order"
 msgstr "意外的大訂單"
 
-#: scripts/ui/modals/company_os.gd:672
+#: scripts/ui/modals/company_os.gd:669
 msgid "Unit price"
 msgstr "單價"
 
@@ -5402,6 +5574,10 @@ msgstr "大學城"
 msgid "Unknown choice."
 msgstr "未知的選項。"
 
+#: scripts/sim/saas.gd:54
+msgid "Unknown idea."
+msgstr "未知的點子。"
+
 #: scripts/sim/careers.gd:72
 msgid "Unknown job."
 msgstr "找不到這份工作。"
@@ -5412,11 +5588,15 @@ msgstr "未知的物件。"
 
 #: scripts/ui/modals/loan_modal.gd:40
 msgid "Up to"
-msgstr ""
+msgstr "最高"
 
 #: data/events/low_cash_warning.json
 msgid "Upcoming: {upcoming}."
 msgstr "即將支出：{upcoming}。"
+
+#: scripts/sim/saas.gd:85
+msgid "Update"
+msgstr "更新"
 
 #: data/buildings/riverside_apartment.json
 msgid "Use laptop — Company OS"
@@ -5438,7 +5618,7 @@ msgstr "互動"
 msgid "VERTICAL SLICE 001 · art converted from concept boards · %s"
 msgstr "垂直切片 001 · 美術由概念圖轉換 · %s"
 
-#: scripts/ui/modals/company_os.gd:489
+#: scripts/ui/modals/company_os.gd:486
 msgid "Value"
 msgstr "價值"
 
@@ -5448,7 +5628,7 @@ msgstr "去新創園區的 Nexus 共享辦公室（往東走）"
 
 #: scripts/ui/modals/loan_modal.gd:37
 msgid "WHAT YOUR BOOKS SUPPORT"
-msgstr ""
+msgstr "你的帳目撐得起的額度"
 
 #: scripts/ui/modals/company_os.gd:29
 msgid "WITHDRAWN"
@@ -5456,23 +5636,23 @@ msgstr "已撤回"
 
 #: scripts/ui/modals/company_os.gd:30
 msgid "WRITTEN OFF"
-msgstr ""
+msgstr "已註銷"
 
-#: scripts/ui/modals/company_os.gd:197 scripts/ui/modals/month_close_modal.gd:36
+#: scripts/ui/modals/company_os.gd:194 scripts/ui/modals/month_close_modal.gd:36
 msgid "Wages from your job"
 msgstr "兼職薪資"
 
 #: scripts/sim/insolvency.gd:177
 msgid "Wages owed paid"
-msgstr ""
+msgstr "已付清積欠薪資"
 
-#: scripts/ui/modals/company_os.gd:215
+#: scripts/ui/modals/company_os.gd:212
 msgid "Wages owed to staff"
-msgstr ""
+msgstr "積欠員工薪資"
 
-#: scripts/ui/modals/company_os.gd:535
+#: scripts/ui/modals/company_os.gd:532
 msgid "Wages owed to your team: %s"
-msgstr ""
+msgstr "積欠團隊薪資：%s"
 
 #: scripts/sim/careers.gd:127
 msgid "Wages — %s shift at %s"
@@ -5520,7 +5700,7 @@ msgstr "手錶"
 
 #: scripts/sim/bank.gd:62
 msgid "We lend to registered companies."
-msgstr ""
+msgstr "我們只借錢給已登記的公司。"
 
 #: data/events/unexpected_large_order.json
 msgid "We want 120 insulated bottles for our members. $21 each, Net 30."
@@ -5534,9 +5714,9 @@ msgstr "我們會找別家。還是謝謝。"
 msgid "Wed"
 msgstr "三"
 
-#: scripts/ui/modals/company_os.gd:248
+#: scripts/ui/modals/company_os.gd:245
 msgid "Week of"
-msgstr ""
+msgstr "週次"
 
 #: scripts/sim/careers.gd:79
 msgid "Welcome aboard! Shifts are 4 hours, any time we're open. Come by the staff door when you're ready."
@@ -5548,7 +5728,7 @@ msgstr "歡迎光臨 Nexus 銀行。有什麼需要幫忙的？"
 
 #: scripts/ui/modals/insolvency_modal.gd:23
 msgid "What happened: %s"
-msgstr ""
+msgstr "發生了什麼：%s"
 
 #: data/dialogue/jun_first.json
 msgid "Whatever's strongest."
@@ -5556,9 +5736,9 @@ msgstr "最濃的那種。"
 
 #: scripts/world/actions.gd:193
 msgid "When are we getting paid? Rent's due."
-msgstr ""
+msgstr "什麼時候發薪水？房租要繳了。"
 
-#: scripts/ui/modals/company_os.gd:167
+#: scripts/ui/modals/company_os.gd:164
 msgid "Where does %s work from? A co-work desk ($350/mo) or Suite 2B ($1,600/mo) in Startup Hub — or right here, for free."
 msgstr "%s 要在哪裡辦公？新創園區的共享辦公桌（$350／月）或 2B 室（$1,600／月）——或是就在這裡，免費。"
 
@@ -5578,7 +5758,7 @@ msgstr "無線耳機"
 msgid "Withdrawal from %s"
 msgstr "從 %s 提款"
 
-#: scripts/ui/modals/company_os.gd:803
+#: scripts/ui/modals/company_os.gd:826
 msgid "Work 2 h"
 msgstr "工作 2 小時"
 
@@ -5594,7 +5774,7 @@ msgstr "到自由座工作——Company OS"
 msgid "Work on your laptop — Company OS"
 msgstr "用筆電工作——Company OS"
 
-#: scripts/ui/modals/business_board.gd:119
+#: scripts/ui/modals/business_board.gd:125
 msgid "Work shifts on site: walk to the workplace's staff door and press E."
 msgstr "要到現場上班：走到工作地點的員工通道按 E。"
 
@@ -5624,7 +5804,7 @@ msgstr "你的工作"
 
 #: scripts/ui/modals/loan_modal.gd:67
 msgid "YOUR LOANS"
-msgstr ""
+msgstr "你的貸款"
 
 #: data/dialogue/maya_intro.json
 msgid "Yeah."
@@ -5636,7 +5816,7 @@ msgstr "對。先看看。"
 
 #: scripts/sim/staff.gd:88
 msgid "You already have a job ad running."
-msgstr ""
+msgstr "你已經有一則徵才廣告在刊登中。"
 
 #: scripts/sim/careers.gd:200
 msgid "You already have as many gigs as you can handle."
@@ -5696,7 +5876,7 @@ msgstr "你看起來在盤算什麼。"
 
 #: scripts/sim/contracts.gd:156
 msgid "You need %d in stock (have %d)."
-msgstr ""
+msgstr "需要 %d 件庫存（目前 %d 件）。"
 
 #: scripts/sim/living.gd:80
 msgid "You need %s (first month%s)."
@@ -5720,11 +5900,11 @@ msgstr "你欠別人（供應商）"
 
 #: data/story/chapters.json
 msgid "You packed boxes until 1 AM again, didn't you. You need help. Like, a person."
-msgstr ""
+msgstr "你又打包到凌晨一點了對吧。你需要幫手，我是說，一個人。"
 
 #: data/story/chapters.json
 msgid "You passed on the big one? Honestly, respect. Growth that kills you isn't growth."
-msgstr ""
+msgstr "你推掉那張大單了？說真的，佩服。會害死你的成長不叫成長。"
 
 #: scripts/frontend/arrival_scene.gd:97
 msgid "You quit your job. You have savings, a laptop, a phone — and a lease."
@@ -5736,17 +5916,21 @@ msgstr "你為提案之夜排椅子。兩位創辦人整晚都在吵定價。"
 
 #: data/story/chapters.json
 msgid "You survived the cash crunch. Most people don't even know they're in one."
-msgstr ""
+msgstr "你撐過了現金危機。很多人連自己在危機裡都不知道。"
 
 #: scripts/sim/insolvency.gd:46
 msgid "You'd need %s of your own money."
-msgstr ""
+msgstr "你需要拿出自己的 %s。"
 
-#: scripts/ui/modals/business_board.gd:132
+#: scripts/ui/modals/business_board.gd:138
 msgid "You're a freelance consultant now. Today's gigs are in Company OS → Freelance."
 msgstr "你現在是自由接案顧問了。今天的案子在 Company OS → 接案。"
 
-#: scripts/ui/modals/company_os.gd:396
+#: scripts/sim/saas.gd:48
+msgid "You're already building a product."
+msgstr "你已經在開發一個產品了。"
+
+#: scripts/ui/modals/company_os.gd:393
 msgid "You're carrying"
 msgstr "你攜帶中"
 
@@ -5780,7 +5964,7 @@ msgstr "人口年輕"
 
 #: scripts/sim/bank.gd:87
 msgid "Your books don't support a loan yet. Show me more gross profit."
-msgstr ""
+msgstr "你的帳目還撐不起一筆貸款。先做出更多毛利。"
 
 #: scripts/ui/tutorial.gd:21
 msgid "Your business runs from any laptop: home desk, café table or co-work hot desk. Walk up to one and press E."
@@ -5792,7 +5976,7 @@ msgstr "你決定。"
 
 #: scripts/sim/bank.gd:66
 msgid "Your credit history needs time to recover."
-msgstr ""
+msgstr "你的信用紀錄需要時間恢復。"
 
 #: scripts/ui/modals/cowork_desk_modal.gd:19
 msgid "Your day pass is active today."
@@ -5810,7 +5994,7 @@ msgstr "目標顯示在左上角，金色箭頭會帶路：直接走進門就能
 msgid "Your home market"
 msgstr "你的本地市場"
 
-#: scripts/ui/modals/business_board.gd:113
+#: scripts/ui/modals/business_board.gd:119
 msgid "Your job · details"
 msgstr "你的工作 · 詳情"
 
@@ -5820,7 +6004,7 @@ msgstr "你的商品頁被灌爆了。"
 
 #: scripts/sim/bank.gd:188
 msgid "Your payment on loan %s bounced. We'll try again in 3 days. It's cheaper to call me before this happens."
-msgstr ""
+msgstr "你的貸款 %s 扣款失敗，3 天後會再扣一次。下次先打給我會比較便宜。"
 
 #: scripts/sim/living.gd:121
 msgid "Your personal account"
@@ -5828,7 +6012,7 @@ msgstr "你的個人帳戶"
 
 #: scripts/ui/modals/insolvency_modal.gd:27
 msgid "Your personal cash"
-msgstr ""
+msgstr "你的個人現金"
 
 #: scripts/ui/tutorial.gd:15
 msgid "Your phone"
@@ -5838,7 +6022,7 @@ msgstr "你的手機"
 msgid "Your time is the inventory. Take client gigs, work them at any laptop, invoice, get paid. Reputation raises your rate."
 msgstr "你的時間就是庫存。接客戶的案子，在任何筆電上完成，開發票、收款。信譽越好，時薪越高。"
 
-#: scripts/ui/modals/company_os.gd:687
+#: scripts/ui/modals/company_os.gd:684
 msgid "Your unit cost ≈ %s → gross margin %s"
 msgstr "你的單位成本 ≈ %s → 毛利 %s"
 
@@ -5846,11 +6030,11 @@ msgstr "你的單位成本 ≈ %s → 毛利 %s"
 msgid "Zenkai"
 msgstr "禪海"
 
-#: scripts/ui/modals/business_board.gd:81
+#: scripts/ui/modals/business_board.gd:87
 msgid "a later expansion"
 msgstr "之後的擴充"
 
-#: data/businesses/ecommerce.json data/businesses/saas.json
+#: data/businesses/ecommerce.json
 msgid "ads"
 msgstr "廣告"
 
@@ -5878,7 +6062,7 @@ msgstr "銀行主管"
 msgid "battery"
 msgstr "電池"
 
-#: scripts/ui/modals/company_os.gd:134
+#: scripts/ui/modals/company_os.gd:131
 msgid "book value"
 msgstr "帳面價值"
 
@@ -5886,7 +6070,7 @@ msgstr "帳面價值"
 msgid "boutique firm"
 msgstr "精品事務所"
 
-#: scripts/ui/modals/company_os.gd:128
+#: scripts/ui/modals/company_os.gd:125
 msgid "business only"
 msgstr "僅計公司"
 
@@ -5905,10 +6089,6 @@ msgstr "充電"
 #: data/businesses/media.json
 msgid "client fees"
 msgstr "客戶費用"
-
-#: data/businesses/saas.json
-msgid "client projects"
-msgstr "客戶專案"
 
 #: scripts/sim/careers.gd:110
 msgid "closed now"
@@ -5932,7 +6112,7 @@ msgstr "社群經理"
 
 #: scripts/sim/insolvency.gd:159
 msgid "company closed"
-msgstr ""
+msgstr "公司結束"
 
 #: data/businesses/real_estate.json
 msgid "construction"
@@ -5954,6 +6134,10 @@ msgstr "經銷據點"
 msgid "delivery fees"
 msgstr "外送費"
 
+#: data/businesses/saas.json
+msgid "dev time"
+msgstr "開發時間"
+
 #: data/businesses/real_estate.json
 msgid "development"
 msgstr "開發"
@@ -5962,7 +6146,7 @@ msgstr "開發"
 msgid "drivers"
 msgstr "司機"
 
-#: scripts/ui/modals/company_os.gd:673
+#: scripts/ui/modals/company_os.gd:670
 msgid "due "
 msgstr "到期 "
 
@@ -6010,7 +6194,7 @@ msgstr "接案客戶"
 msgid "freight forwarding"
 msgstr "貨運承攬"
 
-#: scripts/ui/modals/company_os.gd:642
+#: scripts/ui/modals/company_os.gd:639
 msgid "friend (phone)"
 msgstr "朋友（手機）"
 
@@ -6034,7 +6218,7 @@ msgstr "徵人中——詢問這份工作"
 msgid "hotel group"
 msgstr "飯店集團"
 
-#: scripts/ui/modals/company_os.gd:129
+#: scripts/ui/modals/company_os.gd:126
 msgid "in the bank"
 msgstr "銀行存款"
 
@@ -6064,7 +6248,7 @@ msgstr "庫存"
 
 #: data/npcs/jobs_board.json
 msgid "job board"
-msgstr ""
+msgstr "徵才平台"
 
 #: data/businesses/cafe.json data/businesses/hotel.json data/businesses/manufacturing.json
 msgid "labor"
@@ -6076,11 +6260,11 @@ msgstr "租賃專員"
 
 #: scripts/sim/bank.gd:182
 msgid "loan called"
-msgstr ""
+msgstr "貸款被催收"
 
 #: scripts/sim/bank.gd:146
 msgid "loan repaid"
-msgstr ""
+msgstr "貸款還清"
 
 #: data/businesses/real_estate.json
 msgid "luxury"
@@ -6094,9 +6278,13 @@ msgstr "維修"
 msgid "margin"
 msgstr "價差"
 
-#: scripts/ui/modals/company_os.gd:336
+#: scripts/ui/modals/company_os.gd:333
 msgid "market ~%s"
 msgstr "市價約 %s"
+
+#: data/businesses/saas.json
+msgid "marketing"
+msgstr "行銷"
 
 #: data/businesses/manufacturing.json
 msgid "materials"
@@ -6108,13 +6296,13 @@ msgstr "媒體集團"
 
 #: scripts/sim/bank.gd:96
 msgid "minus existing debt"
-msgstr ""
+msgstr "扣除既有債務"
 
 #: scripts/sim/bank.gd:178
 msgid "missed payment"
-msgstr ""
+msgstr "未繳款"
 
-#: scripts/ui/modals/company_os.gd:127
+#: scripts/ui/modals/company_os.gd:124
 msgid "month to date"
 msgstr "本月累計"
 
@@ -6124,17 +6312,17 @@ msgstr "需要座位方案"
 
 #: scripts/sim/staff.gd:79
 msgid "needs an office (lease Suite 2B)"
-msgstr ""
+msgstr "需要辦公室（租下 2B 辦公室）"
 
-#: scripts/ui/modals/company_os.gd:815
+#: scripts/ui/modals/company_os.gd:838
 msgid "net %d"
 msgstr "%d 天付款"
 
 #: scripts/sim/bank.gd:118
 msgid "new credit"
-msgstr ""
+msgstr "新增信貸"
 
-#: scripts/ui/modals/company_os.gd:135
+#: scripts/ui/modals/company_os.gd:132
 msgid "no buffs, just scale"
 msgstr "沒有加成，只有規模"
 
@@ -6146,7 +6334,7 @@ msgstr "尚無評價"
 msgid "not hired here"
 msgstr "你沒有在這裡工作"
 
-#: scripts/ui/modals/company_os.gd:175
+#: scripts/ui/modals/company_os.gd:172
 msgid "not registered (personal seller)"
 msgstr "未登記（個人賣家）"
 
@@ -6162,7 +6350,7 @@ msgstr "沒有要寄的"
 msgid "oem orders"
 msgstr "代工訂單"
 
-#: scripts/ui/modals/company_os.gd:800
+#: scripts/ui/modals/company_os.gd:823
 msgid "on delivery"
 msgstr "交件時"
 
@@ -6172,11 +6360,11 @@ msgstr "員工免費"
 
 #: scripts/sim/bank.gd:167
 msgid "on-time payment"
-msgstr ""
+msgstr "準時還款"
 
 #: scripts/sim/staff.gd:73
 msgid "open a business bank account first"
-msgstr ""
+msgstr "先開公司銀行帳戶"
 
 #: data/businesses/manufacturing.json
 msgid "overseas plant"
@@ -6186,13 +6374,17 @@ msgstr "海外工廠"
 msgid "own brand"
 msgstr "自有品牌"
 
-#: scripts/ui/modals/company_os.gd:815
+#: scripts/ui/modals/company_os.gd:838
 msgid "paid on delivery"
 msgstr "交件即付款"
 
 #: scripts/ui/phone_ui.gd:258
 msgid "paused: cap"
 msgstr "暫停：已達上限"
+
+#: scripts/ui/modals/company_os.gd:928 scripts/ui/modals/company_os.gd:930
+msgid "per month"
+msgstr "每月"
 
 #: data/businesses/ecommerce.json
 msgid "platform fees"
@@ -6216,11 +6408,11 @@ msgstr "品管"
 
 #: scripts/sim/staff.gd:71
 msgid "register a company first"
-msgstr ""
+msgstr "先登記公司"
 
 #: scripts/sim/staff.gd:75
 msgid "register as an employer at City Hall"
-msgstr ""
+msgstr "到市政廳辦雇主登記"
 
 #: data/npcs/ana.json
 msgid "registration clerk"
@@ -6258,10 +6450,6 @@ msgstr "退貨"
 msgid "rooms"
 msgstr "客房"
 
-#: data/businesses/saas.json
-msgid "salaries"
-msgstr "薪資"
-
 #: data/businesses/automotive.json
 msgid "sales"
 msgstr "銷售"
@@ -6272,7 +6460,7 @@ msgstr "第二家店"
 
 #: scripts/sim/staff.gd:225
 msgid "sent a replacement"
-msgstr ""
+msgstr "寄出換貨"
 
 #: data/businesses/saas.json
 msgid "servers"
@@ -6286,9 +6474,9 @@ msgstr "運費"
 msgid "solar farm"
 msgstr "太陽能電廠"
 
-#: scripts/ui/modals/company_os.gd:559
+#: scripts/ui/modals/company_os.gd:556
 msgid "starts tomorrow 9:00"
-msgstr ""
+msgstr "明天 9:00 報到"
 
 #: data/businesses/cafe.json
 msgid "store sales"
@@ -6302,10 +6490,6 @@ msgstr "訂閱"
 msgid "supplier rep — TradeLink Wholesale"
 msgstr "供應商業務——TradeLink 批發"
 
-#: data/businesses/saas.json
-msgid "support"
-msgstr "客服"
-
 #: data/businesses/media.json
 msgid "talent"
 msgstr "人才"
@@ -6316,17 +6500,17 @@ msgstr "櫃檯已關"
 
 #: scripts/sim/staff.gd:77
 msgid "the team is full"
-msgstr ""
+msgstr "團隊已滿"
 
 #: scripts/sim/insolvency.gd:191
 msgid "three payrolls in a row went unpaid"
-msgstr ""
+msgstr "連續三次發不出薪水"
 
 #: data/businesses/consulting.json
 msgid "time"
 msgstr "時間"
 
-#: scripts/ui/modals/company_os.gd:132
+#: scripts/ui/modals/company_os.gd:129
 msgid "to suppliers"
 msgstr "給供應商"
 
@@ -6344,7 +6528,7 @@ msgstr "空置"
 
 #: data/npcs/elena.json
 msgid "venture investor — Northlight Capital"
-msgstr ""
+msgstr "創投——Northlight Capital"
 
 #: data/businesses/international_trade.json data/businesses/logistics.json
 msgid "warehouse"
@@ -6360,11 +6544,11 @@ msgstr "{company}"
 
 #: data/dialogue/marcus_lending.json
 msgid "{company}. I've read your statements."
-msgstr ""
+msgstr "{company}。我看過你們的帳務紀錄了。"
 
 #: data/dialogue/elena_intro.json
 msgid "{company}. I've seen your ShopLane numbers."
-msgstr ""
+msgstr "{company}。我看過你在 ShopLane 的數字。"
 
 #: data/events/customer_return_first.json
 msgid "{customer} left a 1★ review."
@@ -6410,6 +6594,10 @@ msgstr "• 運價指數：%.2f（1.00 = 正常）。"
 msgid "• ShopLane fee 10%%. Payouts every Monday."
 msgstr "• ShopLane 抽成 10%%。每週一撥款。"
 
+#: scripts/ui/modals/company_os.gd:750
+msgid "…or on supplier credit terms"
+msgstr "……或用供應商帳期"
+
 #: data/districts/financial.json
 msgid "← CIVIC CENTER"
 msgstr "← 市政中心"
@@ -6445,6 +6633,10 @@ msgstr "● 本版本開放"
 #: scripts/ui/modals/city_map_modal.gd:60
 msgid "● Planned (P1+)"
 msgstr "● 規劃中（P1 之後）"
+
+#: scripts/ui/modals/business_board.gd:83
+msgid "✓ You're building %s."
+msgstr "✓ 你正在開發 %s。"
 
 #: scripts/ui/modals/business_board.gd:75
 msgid "✓ You're freelancing. Find gigs in Company OS."

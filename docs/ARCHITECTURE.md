@@ -149,6 +149,30 @@ orders_this_hour ~ Poisson(λ_day × hourly_weight[h])      capped by available 
 
 Personal-seller accounts have a monthly sales cap (data: `marketplace.personal_seller_cap`). Crossing it pauses listings until the player registers a company. This is the real-world reason the story moves the player to City Hall.
 
+### Other business modules (build 0.1.3)
+
+| Module | Script | Loop | Money |
+|--------|--------|------|-------|
+| Freelance consulting | `sim/careers.gd` | Daily gig offers → 2 h work sessions at a laptop → deliver → invoice on 0/7/14-day terms. Reputation moves the rate | `accounts_receivable` → `cash`, `revenue` |
+| Part-time jobs | `sim/careers.gd` | 4 h on-site shifts during opening hours, 3-rank promotions, one perk per job | `wages` (personal income) |
+| SaaS | `sim/saas.gd` | Idea → MVP dev hours (founder sessions + developers) → launch → daily signups (price elasticity × quality × marketing × word of mouth × market room) and churn (features and support lower it) | Daily subscription `revenue` net of a 3% processor fee, `exp:servers`, `exp:advertising` |
+
+### People, banking, insolvency (build 0.1.3)
+
+- `sim/staff.gd`: employer registration, job ads, applicants, Friday payroll (`exp:payroll`; shortfalls go to
+  `wages_payable`), morale and resignations. Roles do real work: the packer packs at Suite 2B and books the courier,
+  support settles returns, the marketer multiplies demand, the developer adds SaaS dev hours. Staff appear at
+  `staff_spots` in the office.
+- `sim/bank.gd`: credit score (300–850). The loan offer comes from the books: 3 × trailing 30-day gross profit,
+  70% of receivables, 60% of signed contracts and 50% of stock, minus existing debt. Loans amortise every 30 days
+  (`exp:interest` + `loan_payable`). A missed payment costs a late fee and credit; two in a row call the loan; an
+  unpaid call makes the company insolvent.
+- `sim/insolvency.gd`: rescue with personal savings, restructure the loan, or close the company. Closing liquidates
+  stock at 40%, sells receivables at 80%, ends leases, lets staff go, pays wages → bank → suppliers, writes off
+  the rest, returns what's left to the founder, hits credit and pauses lending for 90 days. The founder can
+  register a new company (new id; the old books are kept).
+- `sim/forecast.gd`: 9-week cash forecast from scheduled and contracted flows plus a 14-day sales run rate.
+
 ## 8. Contract system
 
 `scripts/sim/contract_system.gd`. A contract is always `{buyer_entity, seller_entity, lines[], unit_price, total, delivery_due, payment_terms_days, penalty_rate, quality_req, currency, settlement_method, status}`.

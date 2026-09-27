@@ -248,6 +248,35 @@ static func early_payment(cid: String, rate := 0.03) -> Dictionary:
 	return {"ok": true, "cash": amt - disc, "discount": disc}
 
 
+## What to order to cover a contract: missing units rounded up to the cheapest supplier's MOQ,
+## delivered to the stock location with the most free space. {} if nothing is missing.
+static func restock_plan(c: Dictionary) -> Dictionary:
+	var short := int(c["qty"]) - stock_for(c) - Ecommerce.incoming_units_of(c["product"])
+	if short <= 0:
+		return {}
+	var best := {}
+	for sid in DataDB.suppliers:
+		var o := Ecommerce.offer(sid, c["product"])
+		if o.is_empty():
+			continue
+		var uc := Ecommerce.unit_cost(sid, c["product"])
+		if best.is_empty() or uc < float(best["uc"]):
+			best = {"supplier": sid, "uc": uc, "moq": int(o["moq"])}
+	if best.is_empty():
+		return {"error": "No supplier carries this product."}
+	var qty := int(ceil(float(short) / best["moq"])) * int(best["moq"])
+	var loc := ""
+	var room := -1
+	for l in Ecommerce.stock_locations():
+		var free := Ecommerce.location_capacity(l) - Ecommerce.total_units_at(l) - Ecommerce.incoming_units(l)
+		if free > room:
+			room = free
+			loc = l
+	if room < qty:
+		return {"error": I18n.t("Not enough storage for %d more units (most free space: %d). Lease Suite 2B for 1,500 units.") % [qty, maxi(0, room)]}
+	return {"supplier": best["supplier"], "qty": qty, "location": loc, "cost": snappedf(float(best["uc"]) * qty, 0.01)}
+
+
 static func by_tag(tag: String) -> Dictionary:
 	for c in C().values():
 		if c.get("tag", "") == tag:

@@ -5,7 +5,7 @@ extends Modal
 
 const TABS := [["overview", "Overview", "company"], ["finance", "Finance", "finance"], ["sales", "Sales", "orders"],
 	["operations", "Operations", "parcel"], ["inventory", "Inventory", "inventory"], ["people", "People", "people"],
-	["contracts", "Contracts", "contracts"], ["freelance", "Freelance", "tasks"]]
+	["contracts", "Contracts", "contracts"], ["freelance", "Freelance", "tasks"], ["saas", "SaaS", "laptop"]]
 const PLANNED := [["Property", "home"], ["International", "world"], ["Reports", "tasks"]]
 
 var terminal := "laptop"
@@ -76,13 +76,10 @@ func build() -> void:
 			b.text = I18n.t(b.text) + " ●"
 		nav.add_child(b)
 	nav.add_child(UIK.sep())
+	var planned: Array = []
 	for p in PLANNED:
-		var b2 := UIK.button(p[0], Callable(), "tab")
-		b2.icon = Art.icon(p[1])
-		b2.alignment = HORIZONTAL_ALIGNMENT_LEFT
-		b2.disabled = true
-		b2.tooltip_text = "Planned (P2/P3)"
-		nav.add_child(b2)
+		planned.append(I18n.t(p[0]))
+	nav.add_child(UIK.wrap(I18n.t("Planned: %s") % " · ".join(planned), 6, Art.C_DIM, 94))
 	content = UIK.vbox(3)
 	var sc := UIK.scroll(content, Vector2(500, 272))
 	sc.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -740,6 +737,19 @@ func _tab_contracts() -> void:
 		db.name = "DeliverContract"
 		db.disabled = have < int(k["qty"])
 		right.add_child(db)
+		var plan := Contracts.restock_plan(k)
+		if not plan.is_empty():
+			if plan.has("error"):
+				right.add_child(UIK.wrap(I18n.t(str(plan["error"])), 7, Art.C_RED, 220))
+			else:
+				var fb := UIK.button(I18n.t("Order %d more from %s (%s)") % [int(plan["qty"]), I18n.t(str(DataDB.supplier(plan["supplier"]).get("name", ""))), Fmt.money0(float(plan["cost"]))], func():
+					_fill(k, false), "primary")
+				fb.name = "FillContract"
+				right.add_child(fb)
+				if Ecommerce.can_use_net_terms(plan["supplier"]):
+					var ft := UIK.button("…or on supplier credit terms", func(): _fill(k, true))
+					ft.name = "FillContractTerms"
+					right.add_child(ft)
 	elif k["status"] == "delivered":
 		right.add_child(UIK.label(I18n.t("Invoice %s · due %s") % [Fmt.money(k["receivable"]), Clock.fmt_short(int(k["pay_due"]))], 8, Art.C_GOLD, true))
 		right.add_child(UIK.wrap("Revenue is booked. The cash isn't here yet.", 7, Art.C_SKY, 220))
@@ -751,6 +761,19 @@ func _tab_contracts() -> void:
 				rebuild())
 			ep.name = "EarlyPayment"
 			right.add_child(ep)
+
+
+func _fill(k: Dictionary, terms: bool) -> void:
+	var plan := Contracts.restock_plan(k)
+	if plan.is_empty() or plan.has("error"):
+		return
+	var r := Ecommerce.buy(plan["supplier"], k["product"], int(plan["qty"]), plan["location"], terms)
+	if not r["ok"]:
+		UIRoot.toast(I18n.t(str(r["error"])), "bad", "warning")
+	else:
+		Clock.advance(10)
+		UIRoot.toast(I18n.t("Ordered %d × %s to %s. Arrives %s.") % [int(plan["qty"]), I18n.t(DataDB.product(k["product"])["name"]), Ecommerce.location_name(plan["location"]), Clock.fmt_short(int(r["eta"]))], "good", "parcel")
+	rebuild()
 
 
 # ============================================================== FREELANCE
@@ -841,3 +864,92 @@ func _work_gig(gid: String) -> void:
 	else:
 		UIRoot.toast(I18n.t("Two focused hours. %s") % Clock.fmt_time(), "info", "clock")
 	rebuild()
+
+
+# ============================================================== SAAS
+func _tab_saas() -> void:
+	if not Saas.active():
+		_section("Build a software product")
+		content.add_child(UIK.wrap("Build it once, sell it every month. Development hours now (you at a laptop, plus developers you hire), subscribers later. Price, churn and servers decide whether it works.", 8, Art.C_WHITE, 480))
+		for i in Saas.ideas():
+			var p := UIK.panel("ui/card", 4)
+			content.add_child(p)
+			var h := UIK.hbox(6)
+			p.add_child(h)
+			var v := UIK.vbox(0)
+			v.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			h.add_child(v)
+			v.add_child(UIK.label("%s · %s" % [str(i["name"]), I18n.t(str(i["pitch"]))], 8, Art.C_WHITE, true))
+			v.add_child(UIK.label(I18n.t("MVP %d dev hours · typical price %s/month · market ~%d customers · churn ~%d%%/month") % [int(i["dev_hours"]), Fmt.money0(float(i["ref_price"])), int(i["market"]), int(float(i["base_churn"]) * 100)], 7, Art.C_MUTED))
+			var iid: String = i["id"]
+			var b := UIK.button("Build this", func():
+				Saas.start(iid)
+				rebuild(), "primary")
+			b.name = "Saas_" + iid
+			h.add_child(b)
+		return
+	var s := Saas.S()
+	var i := Saas.idea()
+	if not Saas.launched():
+		_section(I18n.t("Building %s") % str(i["name"]))
+		var bar := ProgressBar.new()
+		bar.max_value = Saas.dev_needed()
+		bar.value = float(s["dev_done"])
+		bar.show_percentage = false
+		bar.custom_minimum_size = Vector2(460, 8)
+		content.add_child(bar)
+		content.add_child(UIK.label(I18n.t("MVP: %d / %d dev hours · your team adds %.1f h per workday") % [int(s["dev_done"]), int(Saas.dev_needed()), Staff.dev_hours_per_day()], 8, Art.C_WHITE, true))
+		var row := UIK.hbox(6)
+		content.add_child(row)
+		var cb := UIK.button(I18n.t("Code for %d hours") % int(Saas.cfg().get("founder_session_hours", 2)), func():
+			Saas.add_dev(float(Saas.cfg().get("founder_session_hours", 2)), true)
+			rebuild(), "primary")
+		cb.name = "SaasCode"
+		row.add_child(cb)
+		var lb := UIK.button(I18n.t("Launch at %s/month") % Fmt.money0(float(s["price"])), func():
+			var r := Saas.launch()
+			if not r["ok"]:
+				UIRoot.toast(I18n.t(str(r["error"])), "warn", "laptop")
+			else:
+				UIRoot.show_chapter_card(I18n.t("%s IS LIVE") % str(i["name"]).to_upper(), I18n.t("Now the real work starts: keep them subscribed."))
+			rebuild(), "primary" if float(s["dev_done"]) >= Saas.dev_needed() else "")
+		lb.name = "SaasLaunch"
+		lb.disabled = float(s["dev_done"]) < Saas.dev_needed()
+		row.add_child(lb)
+		content.add_child(UIK.label("Hire a Software Developer (People tab) to build while you do other things.", 7, Art.C_MUTED))
+		return
+	var g := GridContainer.new()
+	g.columns = 4
+	g.add_theme_constant_override("h_separation", 4)
+	g.add_theme_constant_override("v_separation", 4)
+	content.add_child(g)
+	_kpi(g, I18n.t("SUBSCRIBERS"), str(int(s["subs"])), Art.C_WHITE, I18n.t("+%d / −%d last 7 days") % [Saas.last_days(7, "new"), Saas.last_days(7, "lost")])
+	_kpi(g, "MRR", Fmt.money0(Saas.mrr()), Art.C_GREEN, I18n.t("%s/month each") % Fmt.money0(float(s["price"])))
+	_kpi(g, I18n.t("CHURN"), Fmt.pct(Saas.monthly_churn(), 1), Art.C_GOLD, I18n.t("per month"))
+	var srv := float(Saas.cfg().get("server_base_month", 40)) + float(Saas.cfg().get("server_per_user_month", 0.35)) * int(s["subs"])
+	_kpi(g, I18n.t("SERVERS"), Fmt.money0(srv), Art.C_RED, I18n.t("per month"))
+	content.add_child(UIK.label(I18n.t("Expected signups: %.1f/day · features shipped: %d · next feature %d / %d h") % [Saas.signup_rate(), int(s["features"]),
+		int(s["feature_progress"]), int(Saas.cfg().get("feature_hours", 80))], 7, Art.C_MUTED, true))
+	var pr := UIK.hbox(4)
+	content.add_child(pr)
+	pr.add_child(UIK.label("Price", 8, Art.C_MUTED))
+	var pm := UIK.button("−$5", func(): Saas.set_price(float(s["price"]) - 5.0); rebuild())
+	pm.name = "SaasPriceDown"
+	pr.add_child(pm)
+	pr.add_child(UIK.label(Fmt.money0(float(s["price"])), 9, Art.C_WHITE, true))
+	var pp := UIK.button("+$5", func(): Saas.set_price(float(s["price"]) + 5.0); rebuild())
+	pp.name = "SaasPriceUp"
+	pr.add_child(pp)
+	pr.add_child(UIK.expand())
+	pr.add_child(UIK.label("Ads/day", 8, Art.C_MUTED))
+	for a in [0.0, 10.0, 25.0, 50.0]:
+		var ab := UIK.button(Fmt.money0(a), func(): Saas.set_ads(a); rebuild(), "tab_active" if is_equal_approx(float(s["ads_per_day"]), a) else "tab")
+		ab.name = "SaasAds_%d" % int(a)
+		pr.add_child(ab)
+	var cb2 := UIK.button(I18n.t("Code a feature for %d hours") % int(Saas.cfg().get("founder_session_hours", 2)), func():
+		Saas.add_dev(float(Saas.cfg().get("founder_session_hours", 2)), true)
+		rebuild())
+	cb2.name = "SaasCode"
+	content.add_child(cb2)
+	content.add_child(UIK.wrap("Cheaper brings more signups; features and support keep people subscribed. Servers cost more as you grow.", 7, Art.C_SKY, 480))
+

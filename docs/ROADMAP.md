@@ -67,6 +67,14 @@ Headless unit tests (sim), integration tests (scenes), walkthrough bot (full flo
 ### Dependencies
 P0 ledger/contracts/events stable; art manifest P1 rows.
 
+### Status (build 0.1.3)
+- **Implemented:** SaaS (build → launch → subscriptions, churn, servers, features); People (hiring, weekly payroll,
+  capacity, morale, resignations); Bank (loans from the books, credit score, missed payments, called loans);
+  Chapters 4–6 with Elena Park's offer; formal bankruptcy flow (rescue / restructure / close → restart); also part-time
+  jobs and freelance consulting.
+- **Still planned:** new districts (they need art from the visuals track), Metro network expansion, vehicles,
+  wardrobe store, audio pass, event library expansion.
+
 ### Acceptance criteria
 SaaS plays differently from Ecommerce (no shared income formula). Payroll can be missed and has consequences. A loan changes cash and creates debt service. Ch4–6 are playable. Bankruptcy recovery loop is playable.
 
