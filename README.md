@@ -31,6 +31,9 @@ godot --headless --path game res://tests/test_runner.tscn                  # uni
 godot --headless --path game -- --bot=walkthrough --out=/tmp/wt            # full slice played by real input
 ```
 
+- Tester packages: `tools/package_release.sh` builds `dist/CityVenture-<version>-{Windows,macOS,Linux,Web}.zip`.
+  Each zip includes a bilingual tester guide, and the web zip can be uploaded to itch.io as an HTML game.
+  Testers press **F12** (web: Esc → Report a problem) to save a screenshot, save file and log for a bug report.
 - QA report: [`docs/QA_REPORT.md`](docs/QA_REPORT.md) · evidence: [`evidence/vs001/`](evidence/vs001/)
 - Art is generated/converted by code in `tools/art/` (`concepts.py` converts the approved concept boards in
   `docs/reference/concept_boards/` into game-ready sprites; see the art manifest for what is converted vs generated).

@@ -85,6 +85,19 @@ judge game feel, pacing, or whether a first-time player understands what to do. 
 | Layout with CJK fonts | **PASS** | Implemented | The CJK fallback makes lines taller. Negative font spacing gives the height back, so English keeps its original metrics. Month Close now scrolls instead of pushing its button off-screen. The regression was caught by the bot |
 | Mixed-language records | Known limitation | — | Phone messages, timeline and ledger memos keep the language that was active when they were written |
 
+## Tester build 0.1.1-test1 (for sharing with playtesters)
+
+| Package | Size | Verified here | Status |
+|---------|------|---------------|--------|
+| Windows (`CityVenture.exe`, single file) | 45 MB zip | Runs under Wine 9 (Mesa llvmpipe OpenGL 4.5) and shows the main menu. **Not yet run on real Windows hardware** | PARTIAL |
+| Web (single-threaded, needs no special server headers) | 20 MB zip | Headless Chromium (WebGL2): menu → 繁體中文 → character creator → apartment, player moves, no console errors. Firefox/Safari not tested | PASS (Chromium) |
+| macOS (universal, ad-hoc signed `.app`) | 74 MB zip | Built and bundle structure checked (executable bit, signature, Info.plist). **Not run on a Mac** | Blocked (no Mac here) |
+| Linux | 38 MB zip | Runs under Xvfb | PASS |
+
+Each package includes a tester guide in Chinese and English (install steps including SmartScreen/Gatekeeper, controls,
+suggested route, what to report, save paths, known issues). **F12 bug report** saves a screenshot, the current save, the
+log and an info sheet, then opens the folder; the web build downloads these files instead. The shots tour checks that F12 writes the report.
+
 ## Bugs found by the evidence runs (fixed before the final run)
 
 | Bug | How it showed up | Fix | Guard |
