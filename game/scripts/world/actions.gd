@@ -84,7 +84,7 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 		"atm":
 			UIRoot.open_modal(BankModal.new(true))
 		"loans_info":
-			UIRoot.open_modal(InfoModal.loans())
+			UIRoot.open_modal(LoanModal.new(false))
 		"lease_office":
 			UIRoot.open_modal(LeaseModal.new("suite_2b"))
 		"cowork_desk":
@@ -95,11 +95,13 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 			var n := GameState.randi_range(12, 40)
 			UIRoot.toast(I18n.t("Ticket A-%d. Now serving A-%d.") % [n, n - GameState.randi_range(0, 3)], "info", "civic")
 		"permits_info":
-			UIRoot.open_modal(InfoModal.permits())
+			UIRoot.open_modal(PermitsModal.new())
 		"metro":
 			UIRoot.open_modal(MetroModal.new(str(params.get("station", ""))))
 		"work_shift":
 			UIRoot.open_modal(JobModal.new(str(params.get("job", ""))))
+		"talk_staff":
+			_talk_staff(str(params.get("staff", "")))
 		_:
 			push_warning("Actions: unknown action " + action)
 	var _u := source
@@ -149,6 +151,12 @@ static func _talk(npc_id: String) -> void:
 					follow = func(): UIRoot.open_modal(BankModal.new())
 				"lease_office":
 					follow = func(): UIRoot.open_modal(LeaseModal.new("suite_2b"))
+				"loan_office":
+					GameState.set_flag("wants_loan_offer", false)
+					follow = func():
+						if GameState.flag("wants_loan_offer"):
+							GameState.set_flag("wants_loan_offer", false)
+							UIRoot.open_modal(LoanModal.new(true))
 				"dropoff_parcels":
 					follow = func(): run("dropoff_parcels", {})
 			if d.get("action", "") == "register_company":
@@ -173,3 +181,19 @@ static func _buy_after_talk(p: Dictionary) -> void:
 	if p.has("flag"):
 		GameState.set_flag(p["flag"])
 	UIRoot.toast(I18n.t("Coffee — %s.") % Fmt.money(price), "info", "coffee")
+
+
+static func _talk_staff(sid: String) -> void:
+	var p: Dictionary = Staff.S()["people"].get(sid, {})
+	if p.is_empty():
+		return
+	var mo := int(p["morale"])
+	var line := "Busy day. All good." if mo >= 60 else ("Could use a bit more support around here." if mo >= 35 else "Honestly? I'm looking at other jobs.")
+	if Staff.wages_owed() > 0.0:
+		line = "When are we getting paid? Rent's due."
+	match str(p["role"]):
+		"packer":
+			var q := Ecommerce.orders_with(["placed"], "suite_2b").size()
+			if mo >= 35 and Staff.wages_owed() <= 0.0:
+				line = I18n.t("%d orders waiting to be packed. I'm on it.") % q if q > 0 else I18n.t("All packed. The courier comes at 16:00.")
+	UIRoot.toast("%s: %s" % [str(p["name"]).get_slice(" ", 0), I18n.t(line)], "msg", "people")

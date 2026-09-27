@@ -153,6 +153,14 @@ func _process(_delta: float) -> void:
 	if not dialogue_queue.is_empty():
 		play_dialogue(dialogue_queue.pop_front())
 		return
+	if Insolvency.active():
+		var open := false
+		for m in modal_layer.get_children():
+			if m is InsolvencyModal:
+				open = true
+		if not open:
+			open_modal(InsolvencyModal.new())
+		return
 	if not _pending_reports.is_empty():
 		open_modal(MonthCloseModal.new(_pending_reports.pop_front()))
 		return

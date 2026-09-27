@@ -13,9 +13,10 @@ extends RefCounted
 
 const EXPENSE_CATEGORIES := ["advertising", "shipping", "platform_fees", "packaging", "photography", "registration",
 	"rent_office", "coworking", "inventory_writeoff", "bank_fees", "late_fees", "rent_home", "living", "coffee", "transport",
-	"penalties", "other"]
+	"penalties", "payroll", "recruiting", "interest", "servers", "other"]
 const OPEX_BUSINESS := ["advertising", "shipping", "platform_fees", "packaging", "photography", "registration",
-	"rent_office", "coworking", "inventory_writeoff", "bank_fees", "late_fees", "penalties", "other"]
+	"rent_office", "coworking", "inventory_writeoff", "bank_fees", "late_fees", "penalties", "payroll", "recruiting", "interest",
+	"servers", "other"]
 const PERSONAL := ["rent_home", "living", "coffee", "transport"]
 
 

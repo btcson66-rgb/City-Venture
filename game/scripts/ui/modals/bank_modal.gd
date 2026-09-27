@@ -44,7 +44,9 @@ func build() -> void:
 			th.add_child(UIK.button("→ Company $1,000", func(): _xfer("player", cid, 1000.0)))
 			th.add_child(UIK.button("← Draw $500", func(): _xfer(cid, "player", 500.0)))
 			left.add_child(th)
-			left.add_child(UIK.wrap("Loans need three months of statements (Planned: P1).", 7, Art.C_DIM, 196))
+			var lb := UIK.button(I18n.t("Business lending · credit %d") % Bank.credit(), func(): UIRoot.open_modal(LoanModal.new(false)))
+			lb.name = "Lending"
+			left.add_child(lb)
 	var right := UIK.vbox(2)
 	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	cols.add_child(right)

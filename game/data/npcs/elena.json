@@ -1,0 +1,41 @@
+{
+ "id": "elena",
+ "name": "Elena Park",
+ "role": "venture investor — Northlight Capital",
+ "appearance": {
+  "presentation": "feminine",
+  "face": "oval",
+  "hair": "bob",
+  "hair_color": "black",
+  "skin": "s2",
+  "eye_shape": "almond",
+  "eye_color": "dark",
+  "brows": "arched",
+  "mouth": "small",
+  "accessory": "none"
+ },
+ "outfit": "office_professional",
+ "outfit_tints": {},
+ "schedule": [
+  {
+   "days": "wed",
+   "from": "15:00",
+   "to": "18:00",
+   "location": "interior:nexus_cowork",
+   "spot": "lounge"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [
+    "company_registered"
+   ],
+   "conversation": "elena_intro"
+  },
+  {
+   "when": [],
+   "conversation": "elena_cameo"
+  }
+ ],
+ "phone_contact": true
+}

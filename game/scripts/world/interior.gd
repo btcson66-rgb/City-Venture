@@ -9,6 +9,7 @@ var bdef: Dictionary = {}
 var stock_holder: Node2D
 var company_sign: Label
 var ambient: Array = []
+var staff_nodes := {}
 
 
 func build(building_id: String) -> void:
@@ -190,6 +191,40 @@ func _add_company_sign(p: Dictionary) -> void:
 	panel.add_child(company_sign)
 	refresh_company_sign()
 	EventBus.world_refresh.connect(refresh_company_sign)
+
+
+## Employees at work in this room (offices with `staff_spots`, and only while the lease is yours).
+func refresh_named_npcs() -> void:
+	super.refresh_named_npcs()
+	var spots: Dictionary = def.get("staff_spots", {})
+	if spots.is_empty():
+		return
+	var want := {}
+	if Living.has_lease(str(def.get("property", ""))):
+		var used := {"packer": 0, "desk": 0}
+		for p in Staff.people():
+			if not Staff.is_working(p):
+				continue
+			var kind := "packer" if p["role"] == "packer" and spots.has("packer") else "desk"
+			var list: Array = spots.get(kind, [])
+			if int(used[kind]) >= list.size():
+				continue
+			var at: Array = list[int(used[kind])]
+			used[kind] = int(used[kind]) + 1
+			want[p["id"]] = {"p": p, "pos": Vector2(float(at[0]), float(at[1])), "face": "left" if kind == "packer" else "up"}
+	for sid in staff_nodes.keys():
+		if not want.has(sid):
+			if is_instance_valid(staff_nodes[sid]):
+				staff_nodes[sid].leave()
+			staff_nodes.erase(sid)
+	for sid in want:
+		if staff_nodes.has(sid):
+			continue
+		var n := StaffNPC.new()
+		n.setup(want[sid]["p"], want[sid]["face"])
+		n.position = want[sid]["pos"]
+		entities.add_child(n)
+		staff_nodes[sid] = n
 
 
 func refresh_company_sign() -> void:

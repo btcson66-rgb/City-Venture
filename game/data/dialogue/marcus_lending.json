@@ -1,0 +1,50 @@
+{
+ "id": "marcus_lending",
+ "with": "marcus",
+ "nodes": {
+  "start": [
+   {
+    "who": "marcus",
+    "text": "{company}. I've read your statements."
+   },
+   {
+    "who": "marcus",
+    "expr": "thinking",
+    "text": "I lend on cash flow and collateral: gross profit, money owed to you, signed contracts, stock."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Show me what you can do.",
+      "next": "offer",
+      "set": "wants_loan_offer"
+     },
+     {
+      "text": "Not today.",
+      "next": "bye"
+     }
+    ]
+   }
+  ],
+  "offer": [
+   {
+    "who": "marcus",
+    "text": "Here's what your books support. Borrow what you need, not what you're offered."
+   }
+  ],
+  "bye": [
+   {
+    "who": "marcus",
+    "expr": "happy",
+    "text": "Good answer. Come back before you need it."
+   }
+  ]
+ },
+ "on_end": [
+  {
+   "do": "set_flag",
+   "flag": "met_marcus"
+  }
+ ]
+}

@@ -27,6 +27,14 @@
  ],
  "dialogue": [
   {
+   "when": [
+    "company_registered",
+    "flag:business_account_opened"
+   ],
+   "conversation": "marcus_lending",
+   "action": "loan_office"
+  },
+  {
    "when": [],
    "conversation": "marcus_loan"
   }

@@ -70,6 +70,21 @@ static func apply(e: Dictionary, ctx: Dictionary) -> Dictionary:
 		"reduce_spending":
 			Ecommerce.pause_all_ads()
 			GameState.data["living"]["reduced"] = true
+		"equity_investment":
+			# an investor buys `stake` of the company for `amount`: cash in, equity up, founder diluted
+			var amt := _num(e.get("amount", 0), ctx)
+			var stake := float(e.get("stake", 0.1))
+			var who: String = e.get("investor", "investor")
+			if GameState.company_id() == "":
+				return {"ok": false, "error": "Investors buy shares in a registered company."}
+			Ledger.post(GameState.company_id(), EventEngine.fill(e.get("memo", "Equity investment"), ctx), [{"acct": "cash", "dr": amt}, {"acct": "equity", "cr": amt}], {"type": "investment"})
+			var cap: Dictionary = GameState.data.get("cap_table", {"founder": 1.0})
+			for k in cap:
+				cap[k] = float(cap[k]) * (1.0 - stake)
+			cap[who] = float(cap.get(who, 0.0)) + stake
+			GameState.data["cap_table"] = cap
+			GameState.set_flag("investor_" + who)
+			GameState.timeline(I18n.t("Sold %d%% of %s for %s.") % [int(round(stake * 100)), GameState.business_display_name(), Fmt.money0(amt)], "milestone")
 		"set_flag":
 			GameState.set_flag(e["flag"], e.get("value", true))
 		"message":

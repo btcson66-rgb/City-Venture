@@ -57,6 +57,10 @@ static func register(name: String, business_type: String, address: String) -> Di
 	if Ledger.cash("player") < fee:
 		return {"ok": false, "error": I18n.t("The registration fee is %s.") % Fmt.money(fee)}
 	var cid := "co_" + slug(name)
+	var k := 2
+	while GameState.data["entities"].has(cid):   # a closed company keeps its books; a restart gets a fresh id
+		cid = "co_%s_%d" % [slug(name), k]
+		k += 1
 	var n := name.strip_edges()
 	if not n.to_lower().ends_with(" ltd") and not n.to_lower().ends_with(" inc") and not n.to_lower().ends_with(" co"):
 		pass

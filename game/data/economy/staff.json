@@ -1,0 +1,115 @@
+{
+ "payroll_weekday": 5,
+ "payroll_hour": 17,
+ "work_hours": [
+  9,
+  17
+ ],
+ "employer_registration_fee": 150,
+ "job_ad_fee": 40,
+ "applicant_delay_hours": 18,
+ "applicants": 3,
+ "severance_weeks": 1,
+ "max_staff": 6,
+ "morale_start": 70,
+ "roles": {
+  "packer": {
+   "name": "Fulfilment Assistant",
+   "salary_week": [
+    520,
+    680
+   ],
+   "needs_office": true,
+   "desc": "Packs orders at the office every workday and books the courier at 16:00. Needs stock at Suite 2B."
+  },
+  "support": {
+   "name": "Customer Support",
+   "salary_week": [
+    540,
+    700
+   ],
+   "needs_office": false,
+   "desc": "Answers customers and settles returns for you (replace if in stock, otherwise refund)."
+  },
+  "marketer": {
+   "name": "Marketing Associate",
+   "salary_week": [
+    600,
+    800
+   ],
+   "needs_office": false,
+   "desc": "Runs socials and promotions: more shoppers see every listing."
+  },
+  "developer": {
+   "name": "Software Developer",
+   "salary_week": [
+    900,
+    1250
+   ],
+   "needs_office": false,
+   "desc": "Builds software. Each developer adds dev hours to your SaaS product every workday."
+  }
+ },
+ "traits": [
+  {
+   "id": "reliable",
+   "desc": "Reliable: morale drops half as fast."
+  },
+  {
+   "id": "fast",
+   "desc": "Fast: +30% work output."
+  },
+  {
+   "id": "friendly",
+   "desc": "Friendly: lifts everyone's morale a little each week."
+  },
+  {
+   "id": "ambitious",
+   "desc": "Ambitious: works harder, expects a raise within two months."
+  },
+  {
+   "id": "careful",
+   "desc": "Careful: fewer mistakes, fewer returns."
+  }
+ ],
+ "first_names": [
+  "Kai",
+  "Mei",
+  "Leo",
+  "Ava",
+  "Noah",
+  "Iris",
+  "Ravi",
+  "Lena",
+  "Omar",
+  "Yuki",
+  "Theo",
+  "Nina",
+  "Sam",
+  "Hana",
+  "Luis",
+  "Zoe",
+  "Ben",
+  "Aria",
+  "Jae",
+  "Tess"
+ ],
+ "last_names": [
+  "Chen",
+  "Park",
+  "Silva",
+  "Novak",
+  "Tan",
+  "Okoro",
+  "Lam",
+  "Ferreira",
+  "Ito",
+  "Kowalski",
+  "Reyes",
+  "Hughes",
+  "Wu",
+  "Sato",
+  "Mendes",
+  "Clarke"
+ ]
+}

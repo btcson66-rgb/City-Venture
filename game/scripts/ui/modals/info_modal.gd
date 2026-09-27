@@ -43,25 +43,6 @@ static func news() -> InfoModal:
 	return make("News board", "info", ls)
 
 
-static func loans() -> InfoModal:
-	return make("Nexus Bank — Small Business Lending", "bank", [
-		"# What we look at", "• Three months of business statements", "• Cash flow, not ideas", "• Registered company + business account",
-		"---", "Loans are not available in this build (Planned: P1 — Aurelia expansion).",
-		"Talk to Marcus Reed (weekday afternoons) if you want to be first in line."])
-
-
-static func permits() -> InfoModal:
-	var ls: Array = ["# Permits & regulations (Aurelia)"]
-	ls.append(["Company registration", "Available here · $300", Art.C_GREEN])
-	ls.append(["Import permits & customs", "Planned (P2)", Art.C_DIM])
-	ls.append(["Food handling licence", "Planned (P3)", Art.C_DIM])
-	ls.append(["Employer registration / payroll", "Planned (P1)", Art.C_DIM])
-	ls.append(["Data protection registration", "Planned (P1)", Art.C_DIM])
-	ls.append("---")
-	ls.append("Regulations here are operating conditions, not quizzes: each one has a cost, a process, and a reason.")
-	return make("City Hall — Permits", "civic", ls)
-
-
 static func whiteboard() -> InfoModal:
 	var be := GameState.business_entity()
 	var cur := MonthClose.current(be)

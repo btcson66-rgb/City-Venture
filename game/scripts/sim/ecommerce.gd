@@ -341,7 +341,7 @@ static func ad_factor(l: Dictionary) -> float:
 
 
 static func demand_mult(product_id: String) -> float:
-	var m := 1.0
+	var m := 1.0 + Staff.demand_boost()
 	var t := Clock.now()
 	for d in E()["demand_mods"]:
 		if int(d["until"]) > t and (d.get("product", "*") == "*" or d["product"] == product_id):
@@ -478,9 +478,11 @@ static func orders_with(statuses: Array, loc := "") -> Array:
 
 
 ## Pack every placed order whose stock is at `loc`. Returns number packed. Caller advances time.
-static func pack_orders(loc: String) -> int:
+static func pack_orders(loc: String, max_n := -1) -> int:
 	var n := 0
 	for o in orders_with(["placed"], loc):
+		if max_n >= 0 and n >= max_n:
+			break
 		if stock(loc, o["product"]) < int(o["qty"]):
 			continue
 		var l := inv(loc)
@@ -662,6 +664,8 @@ static func _h_return_request(p: Dictionary) -> void:
 	o["return"] = {"reason": reason, "t": Clock.now()}
 	GameState.inc_stat("returns_requested")
 	EventBus.return_requested.emit(o["id"])
+	if GameState.flag("first_issue_resolved") and Staff.auto_resolve_return(o["id"]):
+		return
 	var ev := "customer_return" if GameState.flag("first_issue_resolved") else "customer_return_first"
 	EventEngine.trigger(ev, {"order": o["id"], "customer": o["customer"], "product": I18n.t(DataDB.product(o["product"])["name"]),
 		"product_id": o["product"], "price": Fmt.money(o["unit_price"]), "reason": reason})

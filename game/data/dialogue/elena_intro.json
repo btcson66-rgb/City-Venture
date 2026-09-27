@@ -1,0 +1,27 @@
+{
+ "id": "elena_intro",
+ "with": "elena",
+ "nodes": {
+  "start": [
+   {
+    "who": "elena",
+    "text": "{company}. I've seen your ShopLane numbers."
+   },
+   {
+    "who": "elena",
+    "expr": "thinking",
+    "text": "Money from me isn't free. It's a slice of everything you'll ever build."
+   },
+   {
+    "who": "elena",
+    "text": "If you ever need to grow faster than your cash allows, call me."
+   }
+  ]
+ },
+ "on_end": [
+  {
+   "do": "set_flag",
+   "flag": "met_elena"
+  }
+ ]
+}

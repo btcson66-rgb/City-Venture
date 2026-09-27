@@ -27,6 +27,8 @@ const STATUS_TEXT := {
 	"refunded": "REFUNDED", "replaced": "REPLACED", "partial_refund": "PARTIAL REFUND", "refused": "REFUSED",
 	"disputed": "DISPUTED", "offered": "OFFERED", "countered": "COUNTERED", "active": "ACTIVE", "paid": "PAID",
 	"rejected": "REJECTED", "expired": "EXPIRED", "withdrawn": "WITHDRAWN", "overdue": "OVERDUE", "declined": "DECLINED",
+	"late": "LATE", "called": "CALLED", "defaulted": "DEFAULTED", "closed": "CLOSED", "written_off": "WRITTEN OFF",
+	"invoiced": "INVOICED", "cancelled": "CANCELLED",
 }
 
 
@@ -469,18 +471,117 @@ func _tab_people() -> void:
 	var h := UIK.hbox(8)
 	card.add_child(h)
 	var pv := PortraitView.new()
-	pv.custom_minimum_size = Vector2(48, 48)
-	pv.size = Vector2(48, 48)
+	pv.custom_minimum_size = Vector2(40, 40)
+	pv.size = Vector2(40, 40)
 	pv.setup_character(p["appearance"], p.get("outfit", "startup_casual"))
 	pv.set_expr("happy")
 	h.add_child(pv)
 	var v := UIK.vbox(1)
 	h.add_child(v)
-	v.add_child(UIK.label(p["name"], 10, Art.C_WHITE, true))
-	v.add_child(UIK.label("Founder · does everything", 8, Art.C_MUTED))
-	v.add_child(UIK.label("Salary: none yet. Your runway is your savings.", 7, Art.C_DIM))
+	var nm := UIK.label(p["name"], 10, Art.C_WHITE, true)
+	nm.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+	v.add_child(nm)
+	v.add_child(UIK.label("Founder · does everything nobody else does", 8, Art.C_MUTED))
+	var ws := Staff.weekly_payroll()
+	v.add_child(UIK.label(I18n.t("Team: %d · payroll %s / week (Fridays 17:00)") % [Staff.count(), Fmt.money0(ws)], 7, Art.C_SKY, true))
+	if Staff.wages_owed() > 0.0:
+		v.add_child(UIK.label(I18n.t("Wages owed to your team: %s") % Fmt.money(Staff.wages_owed()), 7, Art.C_RED, true))
 	content.add_child(card)
-	content.add_child(UIK.wrap("Hiring, payroll and staff capacity arrive in P1 (Aurelia expansion). For now every order is packed by you — which is why time matters.", 8, Art.C_GOLD, 480))
+	# team
+	_section("Team")
+	if Staff.people().is_empty():
+		content.add_child(UIK.label("No employees yet. Every order is packed by you, which is why time matters.", 7, Art.C_DIM))
+	for e in Staff.people():
+		var row := UIK.panel("ui/card", 4)
+		content.add_child(row)
+		var rh := UIK.hbox(6)
+		row.add_child(rh)
+		var epv := PortraitView.new()
+		epv.custom_minimum_size = Vector2(28, 28)
+		epv.size = Vector2(28, 28)
+		epv.setup_character(e["appearance"], e.get("outfit", "startup_casual"))
+		rh.add_child(epv)
+		var ev := UIK.vbox(0)
+		ev.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		rh.add_child(ev)
+		var en := UIK.label("%s · %s" % [e["name"], I18n.t(str(Staff.role_def(e["role"]).get("name", e["role"])))], 8, Art.C_WHITE, true)
+		en.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+		ev.add_child(en)
+		var started: bool = Clock.now() >= int(e.get("start", 0))
+		ev.add_child(UIK.label(I18n.t("Skill %d/5 · %s/week · %s") % [int(e["skill"]), Fmt.money0(float(e["salary_week"])),
+			I18n.t(_trait_text(str(e.get("trait", "")))) if started else I18n.t("starts tomorrow 9:00")], 7, Art.C_MUTED))
+		var mo := int(e["morale"])
+		ev.add_child(UIK.label(I18n.t("Morale %d") % mo + "  " + "■".repeat(int(mo / 10.0)) + "□".repeat(10 - int(mo / 10.0)), 7,
+			Art.C_GREEN if mo >= 60 else (Art.C_GOLD if mo >= 35 else Art.C_RED), true))
+		var eid: String = e["id"]
+		var rb := UIK.button(I18n.t("Raise +8%"), func(): Staff.give_raise(eid); rebuild())
+		rb.name = "Raise_" + eid
+		rh.add_child(rb)
+		var lb := UIK.button("Let go", func():
+			var r := Staff.let_go(eid)
+			if r["ok"]:
+				UIRoot.toast(I18n.t("Severance paid: %s.") % Fmt.money(r["severance"]), "info", "people")
+			rebuild())
+		lb.name = "LetGo_" + eid
+		rh.add_child(lb)
+	# hiring
+	_section("Hiring")
+	var why := Staff.hire_block()
+	var st := Staff.S()
+	if why != "":
+		content.add_child(UIK.label(I18n.t("Can't hire yet: %s.") % I18n.t(why), 8, Art.C_GOLD, true))
+	elif not st["applicants"].is_empty():
+		content.add_child(UIK.label(I18n.t("Applicants for %s:") % I18n.t(str(Staff.role_def(st["applicants"][0]["role"])["name"])), 8, Art.C_WHITE, true))
+		for a in st["applicants"]:
+			var ar := UIK.hbox(6)
+			content.add_child(ar)
+			var apv := PortraitView.new()
+			apv.custom_minimum_size = Vector2(24, 24)
+			apv.size = Vector2(24, 24)
+			apv.setup_character(a["appearance"], a.get("outfit", "startup_casual"))
+			ar.add_child(apv)
+			var al := UIK.vbox(0)
+			al.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			ar.add_child(al)
+			var an := UIK.label(str(a["name"]), 8, Art.C_WHITE, true)
+			an.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+			al.add_child(an)
+			al.add_child(UIK.label(I18n.t("Skill %d/5 · asks %s/week · %s") % [int(a["skill"]), Fmt.money0(float(a["salary_week"])), I18n.t(_trait_text(str(a.get("trait", ""))))], 7, Art.C_MUTED))
+			var aid: String = a["id"]
+			var hb := UIK.button("Hire", func():
+				var r := Staff.hire(aid)
+				if not r["ok"]:
+					UIRoot.toast(I18n.t(str(r["error"])), "warn", "lock")
+				else:
+					UIRoot.toast(I18n.t("%s joins tomorrow at 9:00.") % r["person"]["name"], "good", "people")
+				rebuild(), "primary")
+			hb.name = "Hire_" + aid
+			ar.add_child(hb)
+	elif not st["posting"].is_empty():
+		content.add_child(UIK.label(I18n.t("Job ad for %s is live. Applicants usually reply within a day.") % I18n.t(str(Staff.role_def(st["posting"]["role"])["name"])), 8, Art.C_SKY))
+	else:
+		content.add_child(UIK.label(I18n.t("Post a job ad (%s). Applicants arrive within a day.") % Fmt.money0(float(Staff.cfg().get("job_ad_fee", 40))), 7, Art.C_MUTED))
+		var roles: Dictionary = Staff.cfg().get("roles", {})
+		for rid in roles:
+			var rr := UIK.hbox(6)
+			content.add_child(rr)
+			var rd: Dictionary = roles[rid]
+			var rv := UIK.vbox(0)
+			rv.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			rr.add_child(rv)
+			var sal: Array = rd["salary_week"]
+			rv.add_child(UIK.label(I18n.t(str(rd["name"])) + "  ·  " + I18n.t("%s–%s/week") % [Fmt.money0(float(sal[0])), Fmt.money0(float(sal[1]))], 8, Art.C_WHITE, true))
+			rv.add_child(UIK.wrap(I18n.t(str(rd["desc"])), 7, Art.C_MUTED, 360))
+			var rwhy := Staff.hire_block(rid)
+			var pb := UIK.button("Post job", func():
+				var r := Staff.post_job(rid)
+				if not r["ok"]:
+					UIRoot.toast(I18n.t(str(r["error"])), "warn", "lock")
+				rebuild(), "primary" if rwhy == "" else "")
+			pb.name = "Post_" + str(rid)
+			pb.disabled = rwhy != ""
+			pb.tooltip_text = I18n.t(rwhy)
+			rr.add_child(pb)
 	_section("Contacts")
 	for nid in DataDB.npcs:
 		var n := DataDB.npc(nid)
@@ -492,6 +593,13 @@ func _tab_people() -> void:
 		content.add_child(UIK.kv(n["name"], n.get("role", ""), Art.C_WHITE, 8))
 	if not GameState.data["npcs"].has("maya"):
 		content.add_child(UIK.kv("Maya", "friend (phone)", Art.C_WHITE, 8))
+
+
+func _trait_text(tid: String) -> String:
+	for t in Staff.cfg().get("traits", []):
+		if t["id"] == tid:
+			return str(t["desc"])
+	return ""
 
 
 # ============================================================== CONTRACTS

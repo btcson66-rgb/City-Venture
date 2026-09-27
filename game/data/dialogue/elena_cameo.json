@@ -1,0 +1,23 @@
+{
+ "id": "elena_cameo",
+ "with": "elena",
+ "nodes": {
+  "start": [
+   {
+    "who": "elena",
+    "text": "Elena Park, Northlight Capital."
+   },
+   {
+    "who": "elena",
+    "expr": "thinking",
+    "text": "I invest in companies, not ideas. Register one and we'll talk."
+   }
+  ]
+ },
+ "on_end": [
+  {
+   "do": "set_flag",
+   "flag": "met_elena"
+  }
+ ]
+}
