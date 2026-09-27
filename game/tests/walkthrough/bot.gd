@@ -40,6 +40,8 @@ func _run() -> void:
 			await _shots()
 		"walkthrough":
 			await Walkthrough.new(self).run()
+		"trailer":
+			await Trailer.new(self).run()
 	_finish()
 
 

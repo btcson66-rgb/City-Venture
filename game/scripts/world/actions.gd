@@ -30,6 +30,11 @@ static func lock_reason(action: String, params: Dictionary) -> String:
 		"dropoff_parcels":
 			if Ecommerce.carried_count() == 0:
 				return "nothing to drop off"
+		"work_shift":
+			var jid := str(params.get("job", ""))
+			if Careers.current_job() != jid:
+				return "hiring — ask about the job"
+			return Careers.shift_block(jid)
 	return ""
 
 
@@ -93,6 +98,8 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 			UIRoot.open_modal(InfoModal.permits())
 		"metro":
 			UIRoot.open_modal(MetroModal.new(str(params.get("station", ""))))
+		"work_shift":
+			UIRoot.open_modal(JobModal.new(str(params.get("job", ""))))
 		_:
 			push_warning("Actions: unknown action " + action)
 	var _u := source
@@ -110,13 +117,13 @@ static func _buy_item(params: Dictionary) -> void:
 				first_conv = d["conversation"]
 				break
 	var buy := func():
-		var price := float(params.get("price", 4.5))
+		var price := 0.0 if _staff_coffee(params) else float(params.get("price", 4.5))
 		Ledger.expense("player", "coffee", price, "%s — %s" % [str(params.get("item", "coffee")).capitalize(), DataDB.building(params.get("building", "")).get("name", "")], {"type": "purchase"})
 		Clock.advance(int(params.get("minutes", 10)))
 		if params.has("flag"):
 			GameState.set_flag(params["flag"])
 		GameState.inc_stat("coffees")
-		UIRoot.toast(I18n.t("Coffee — %s. Tastes like possibility.") % Fmt.money(price), "info", "coffee")
+		UIRoot.toast(I18n.t("Coffee — %s. Tastes like possibility.") % (Fmt.money(price) if price > 0 else I18n.t("on the house (staff)")), "info", "coffee")
 	if first_conv != "":
 		UIRoot.play_dialogue(first_conv, buy)
 	else:
@@ -153,9 +160,15 @@ static func _talk(npc_id: String) -> void:
 	UIRoot.toast(I18n.t("%s is busy.") % def.get("name", npc_id), "info", "people")
 
 
+## Baristas drink free at their own café (job perk).
+static func _staff_coffee(p: Dictionary) -> bool:
+	return Careers.has_perk("free_coffee") and str(p.get("building", "")) == str(Careers.job_def(Careers.current_job()).get("building", ""))
+
+
 static func _buy_after_talk(p: Dictionary) -> void:
-	var price := float(p.get("price", 4.5))
-	Ledger.expense("player", "coffee", price, "Coffee", {"type": "purchase"})
+	var price := 0.0 if _staff_coffee(p) else float(p.get("price", 4.5))
+	if price > 0:
+		Ledger.expense("player", "coffee", price, "Coffee", {"type": "purchase"})
 	Clock.advance(int(p.get("minutes", 10)))
 	if p.has("flag"):
 		GameState.set_flag(p["flag"])

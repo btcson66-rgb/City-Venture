@@ -4,6 +4,15 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
 謝謝你幫忙測試！這是一款在現代城市裡創業、經營公司的像素風模擬 RPG。
 目前是「垂直切片」測試版：可以完整玩到第一章到第三章（開始電商、賺到第一塊錢、登記公司、月結）。
 
+這一版新增（依第一輪測試回饋）：
+  ・新手教學：左上角有一步一步的教學卡片，金色箭頭會指向下一個目標。
+    每個房間的出口都有發光的「出口」地墊，街道邊緣有「→ 區名」標示。
+  ・自動存檔：換場景、每 15 秒、切換分頁或關閉視窗時都會自動存。網頁版重新整理後按「繼續」即可。
+  ・更多職涯：5 種兼職工作（咖啡師、包裹分揀員、社群接待、市政廳辦事員、實習櫃員），
+    可升職、每份工作都有實用福利；另外可以「自由接案」當顧問接案子賺錢。
+  ・修正亂碼：NPC 名字被翻成月份（Jun→6月）、看不清楚的名牌、咖啡店菜單字擠在一起、
+    網頁版缺字變成方框（✕ ⚑ ▸ 和表情符號）。
+
 ------------------------------------------------------------
 一、怎麼開始
 ------------------------------------------------------------
@@ -32,9 +41,9 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
 二、操作
 ------------------------------------------------------------
   移動            WASD 或 方向鍵（按住 Shift 跑步）
-  互動／對話       E 或 空白鍵（走到東西旁邊會出現提示）
-  手機            Tab
-  城市地圖         M
+  互動／對話       E 或 空白鍵（走到東西旁邊會出現提示，也可以直接點提示）
+  手機            Tab（或點右上角「手機」按鈕）
+  城市地圖         M（或點右上角「地圖」按鈕）
   暫停／關閉視窗    Esc（暫停選單可以存檔、讀檔、調整一天長度、切換語言）
   快轉時間         在城市裡按住 T
   回報問題         F12（網頁版請用 Esc →「回報問題」）
@@ -50,11 +59,14 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
   → 拍照上架 → 等訂單 → 到打包桌打包出貨 → 賺到第一塊錢 → 處理客人退貨
   → 搭捷運到「市政中心」登記公司 → 到「金融區」Nexus 銀行開公司帳戶
   → 決定在哪裡辦公 → 一路經營到 6 月底，看「月結」報表。
+  想換個玩法：到 Nexus 共享辦公室的「創業佈告欄」→「兼職工作」應徵，
+  再到工作地點的「員工通道」按 E 上班；或在 Company OS →「接案」開始自由接案。
+  教學可以按「略過」，之後在暫停選單（Esc）可以重新播放，也可以關掉金色箭頭。
 
 ------------------------------------------------------------
 四、我們最想知道
 ------------------------------------------------------------
-  ・哪裡卡住、不知道下一步要做什麼？
+  ・哪裡卡住、不知道下一步要做什麼？新手教學和金色箭頭夠清楚嗎？
   ・哪裡覺得無聊、太慢、太難或太簡單？
   ・財務數字（利潤、現金、應收）看得懂嗎？「賺了錢但現金變少」有讓你理解為什麼嗎？
   ・翻譯哪裡怪怪的、字太小、字被切掉？
@@ -76,7 +88,8 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
   Mac：    ~/Library/Application Support/CityVenture/
   Linux：  ~/.local/share/CityVenture/
   網頁版：  存在瀏覽器裡（清除瀏覽資料會一起刪掉）
-  每晚睡覺會自動存檔，也可以在手機或暫停選單手動存。想重新開始：主選單按「新遊戲」。
+  遊戲會自動存檔（換場景、每 15 秒、切換分頁或關閉視窗時），主選單按「繼續」接著玩。
+  也可以在手機或暫停選單手動存到其他欄位。想重新開始：主選單按「新遊戲」。
 
 ------------------------------------------------------------
 七、已知問題（不用回報）
@@ -95,6 +108,12 @@ CITY VENTURE — Test build {VERSION} ({DATE})  ·  English
 Thanks for testing! This build plays Chapters 1–3: start an online shop, earn your first dollar,
 register a company, and run it to the month-end report.
 
+NEW IN THIS BUILD: step-by-step tutorial card and a gold guide arrow to your goal · glowing EXIT mats and
+street-edge signs · autosave on every scene change, every 15 s and when the tab/window closes (web: refresh,
+then Continue) · 5 part-time jobs with promotions and perks (Business Board → Part-time jobs) and freelance
+consulting gigs (Company OS → Freelance) · garbled-text fixes (NPC "Jun" shown as a month, tiny name tags,
+the café menu board, missing glyphs on the web).
+
 START
   Windows 10/11: unzip first, then run CityVenture.exe. If "Windows protected your PC" appears,
     click "More info" → "Run anyway" (the test build isn't code-signed yet).
@@ -105,14 +124,15 @@ START
   Linux: ./CityVenture.x86_64 (chmod +x if needed).   Web: open the link you were given in desktop Chrome/Edge/Firefox.
 
 CONTROLS
-  WASD/arrows move (Shift runs) · E/Space interact · Tab phone · M map · Esc pause/close
+  WASD/arrows move (Shift runs) · E/Space interact (or click the prompt) · Tab phone · M map · Esc pause/close
+  The Phone / Map / Menu buttons at the top right can be clicked too. Skip or replay the tutorial in the pause menu.
   Hold T to fast-forward · F12 report a problem (web: Esc → Report a problem)
   Language: bottom-right of the main menu, or in the pause menu.
 
 REPORTING
   Press F12 when something goes wrong. The game saves a screenshot, your save and the log, and opens
   the folder. Write what happened at the bottom of info.txt, zip the folder and send it to whoever
-  invited you. Saves: Windows %APPDATA%\CityVenture · macOS ~/Library/Application Support/CityVenture ·
+  invited you. The game autosaves; Continue on the main menu picks up where you were. Saves: Windows %APPDATA%\CityVenture · macOS ~/Library/Application Support/CityVenture ·
   Linux ~/.local/share/CityVenture.
 
 KNOWN ISSUES: no audio yet · placeholder character art · no touch controls · old messages keep the

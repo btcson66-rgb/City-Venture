@@ -1,0 +1,36 @@
+{
+ "id": "bank_teller",
+ "name": "Teller Trainee",
+ "employer": "Nexus Bank",
+ "building": "nexus_bank",
+ "boss": "sofia",
+ "shift_hours": 4,
+ "blurb": "Count cash, open accounts and watch how the bank judges small businesses.",
+ "ranks": [
+  {
+   "title": "Teller Trainee",
+   "wage": 20,
+   "shifts": 0
+  },
+  {
+   "title": "Teller",
+   "wage": 23,
+   "shifts": 5
+  },
+  {
+   "title": "Personal Banker",
+   "wage": 28,
+   "shifts": 12
+  }
+ ],
+ "perk": {
+  "id": "no_overdraft_fee",
+  "desc": "Nexus Bank waives your overdraft fees while you work there."
+ },
+ "lines": [
+  "Your drawer balances to the cent. Sofia pretends not to be impressed.",
+  "A bakery owner asks for a loan. Sofia asks for three months of books. You see why.",
+  "You learn the difference between revenue and cash, the hard way, on someone else's account.",
+  "Quiet morning. You read the small-business lending policy twice."
+ ]
+}

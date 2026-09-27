@@ -157,6 +157,18 @@
     ],
     "label": "Read: 'Small Business Lending'",
     "action": "loans_info"
+   },
+   {
+    "id": "job_bank_teller",
+    "at": [
+     300,
+     106
+    ],
+    "label": "Staff door — work a shift",
+    "action": "work_shift",
+    "params": {
+     "job": "bank_teller"
+    }
    }
   ],
   "npc_spots": {

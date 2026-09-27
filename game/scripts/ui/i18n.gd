@@ -111,8 +111,11 @@ static func _apply_fonts(loc: String) -> void:
 	# keeps its original metrics; Chinese keeps a little extra room for the taller glyphs.
 	var top := -1 if loc.begins_with("zh") else -2
 	var bottom := -1
+	# Pixelify has no arrows, checkmarks or stars: title text falls back to Inter before the CJK fonts
+	var title_fb: Array[Font] = [Art.font_body]
+	title_fb.append_array(fb)
 	for v in [UIK.body_font(), UIK.bold_font(), UIK.title_font()]:
 		var fv := v as FontVariation
-		fv.fallbacks = fb
+		fv.fallbacks = title_fb if v == UIK.title_font() else fb
 		fv.set_spacing(TextServer.SPACING_TOP, top)
 		fv.set_spacing(TextServer.SPACING_BOTTOM, bottom)

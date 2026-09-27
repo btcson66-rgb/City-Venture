@@ -361,14 +361,16 @@ def cafe_counter():
 
 
 def menu_board():
-    im = new(58, 30)
-    rect(im, 0, 0, 57, 29, (96, 70, 50))
-    rect(im, 2, 2, 55, 27, (38, 44, 42))
+    # 3x5 glyphs need a 1px gap between rows (6px pitch) or the lines fuse into noise.
+    im = new(66, 34)
+    rect(im, 0, 0, 65, 33, (96, 70, 50))
+    rect(im, 2, 2, 63, 31, (38, 44, 42))
     draw_text(im, 5, 4, "MENU", (244, 226, 170))
+    hline(im, 5, 60, 10, (70, 80, 76))
     items = [("FLAT WHITE", "4.5"), ("LATTE", "4.8"), ("COLD BREW", "5.0")]
     for i, (a, b) in enumerate(items):
-        draw_text(im, 5, 11 + i * 5, a[:9], (230, 230, 222))
-        draw_text(im, 44, 11 + i * 5, b, (244, 200, 120))
+        draw_text(im, 5, 13 + i * 6, a, (230, 230, 222))
+        draw_text(im, 61 - text_width(b), 13 + i * 6, b, (244, 200, 120))
     return im
 
 

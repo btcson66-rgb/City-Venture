@@ -25,6 +25,7 @@ static func compute(entity: String, t0: int, t1: int) -> Dictionary:
 			personal[c] = v2
 			personal_total += v2
 	var other_income := -float(mv.get("other_income", 0.0))
+	var wages := -float(mv.get("wages", 0.0))   # part-time job pay (personal income, not business profit)
 	var business_profit := net_rev - cogs - opex_total + other_income
 	var cash_open := Ledger.balance_at(entity, "cash", t0)
 	var cash_close := Ledger.balance_at(entity, "cash", t1)
@@ -42,7 +43,7 @@ static func compute(entity: String, t0: int, t1: int) -> Dictionary:
 		"rent": float(opex.get("rent_office", 0.0)) + float(personal.get("rent_home", 0.0)),
 		"rent_office": float(opex.get("rent_office", 0.0)), "rent_home": float(personal.get("rent_home", 0.0)),
 		"personal": personal, "personal_total": personal_total, "other_income": other_income,
-		"business_profit": business_profit, "profit": business_profit - personal_total,
+		"business_profit": business_profit, "profit": business_profit + wages - personal_total, "wages": wages,
 		"cash_open": cash_open, "cash_close": cash_close, "cash_change": cash_close - cash_open, "owner_moves": owner_moves,
 		"ar": Ledger.balance_at(entity, "marketplace_balance", t1) + Ledger.balance_at(entity, "accounts_receivable", t1),
 		"ap": -Ledger.balance_at(entity, "accounts_payable", t1),

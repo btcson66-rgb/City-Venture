@@ -41,6 +41,11 @@ static func registration() -> Dictionary:
 	return DataDB.regulations.get("company_registration_aurelia", {})
 
 
+## Registration fee after the City Hall clerk's staff discount.
+static func registration_fee() -> float:
+	return snappedf(float(registration().get("fee", 300)) * (1.0 - Careers.perk_value("registration_discount")), 0.01)
+
+
 static func register(name: String, business_type: String, address: String) -> Dictionary:
 	if GameState.company_id() != "":
 		return {"ok": false, "error": "You already own a registered company."}
@@ -48,7 +53,7 @@ static func register(name: String, business_type: String, address: String) -> Di
 	if err != "":
 		return {"ok": false, "error": err}
 	var reg := registration()
-	var fee := float(reg.get("fee", 300))
+	var fee := registration_fee()
 	if Ledger.cash("player") < fee:
 		return {"ok": false, "error": I18n.t("The registration fee is %s.") % Fmt.money(fee)}
 	var cid := "co_" + slug(name)

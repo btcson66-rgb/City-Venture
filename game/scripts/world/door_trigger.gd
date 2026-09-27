@@ -4,6 +4,9 @@ extends Area2D
 
 var building_id := ""
 var _cool := 0.0
+var _hint: PanelContainer
+var _hint_label: Label
+var _center := Vector2.ZERO
 
 
 func setup(bid: String, r: Rect2) -> void:
@@ -17,10 +20,27 @@ func setup(bid: String, r: Rect2) -> void:
 	cs.position = r.position + r.size / 2.0
 	add_child(cs)
 	body_entered.connect(_on_enter)
+	# "walk in to enter" chip that appears when the player comes close to the door
+	_center = r.get_center()
+	_hint = UIK.name_tag("")
+	_hint.z_index = 20
+	_hint_label = _hint.get_child(0) as Label
+	_hint.modulate.a = 0.0
+	add_child(_hint)
 
 
 func _process(delta: float) -> void:
 	_cool = maxf(0.0, _cool - delta)
+	var pl := get_tree().get_first_node_in_group("player") as Node2D
+	var near := pl != null and pl.global_position.distance_to(global_position + _center) < 44.0
+	if near and _hint.modulate.a < 0.05:
+		var st := SceneRouter.building_open(building_id)
+		var nm := I18n.t(str(DataDB.building(building_id).get("name", building_id)))
+		_hint_label.text = ("▲ " + I18n.t("Enter %s") % nm) if st["open"] else (nm + " · " + I18n.t("Closed"))
+		_hint_label.add_theme_color_override("font_color", Color(1.0, 0.86, 0.42) if st["open"] else Color(1.0, 0.55, 0.5))
+		_hint.reset_size()
+		_hint.position = _center + Vector2(-_hint.size.x / 2.0, -46)
+	_hint.modulate.a = move_toward(_hint.modulate.a, 1.0 if near else 0.0, delta * 5.0)
 
 
 func _on_enter(body: Node) -> void:

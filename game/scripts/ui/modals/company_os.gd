@@ -5,7 +5,7 @@ extends Modal
 
 const TABS := [["overview", "Overview", "company"], ["finance", "Finance", "finance"], ["sales", "Sales", "orders"],
 	["operations", "Operations", "parcel"], ["inventory", "Inventory", "inventory"], ["people", "People", "people"],
-	["contracts", "Contracts", "contracts"]]
+	["contracts", "Contracts", "contracts"], ["freelance", "Freelance", "tasks"]]
 const PLANNED := [["Property", "home"], ["International", "world"], ["Reports", "tasks"]]
 
 var terminal := "laptop"
@@ -191,6 +191,8 @@ func _tab_finance() -> void:
 		pl.add_child(UIK.kv("  " + str(k).replace("_", " ").capitalize(), Fmt.money(-float(cur["opex"][k])), Art.C_RED, 7))
 	pl.add_child(UIK.kv("Business profit", Fmt.money(cur["business_profit"]), UIK.money_color(cur["business_profit"]), 9, true))
 	if be == "player":
+		if float(cur.get("wages", 0.0)) > 0.0:
+			pl.add_child(UIK.kv("Wages from your job", Fmt.money(cur["wages"]), Art.C_GREEN, 7))
 		pl.add_child(UIK.kv("Home rent + living", Fmt.money(-cur["personal_total"]), Art.C_RED, 7))
 	var cp := UIK.vbox(1)
 	cp.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -585,3 +587,93 @@ func _tab_contracts() -> void:
 	elif k["status"] == "delivered":
 		right.add_child(UIK.label(I18n.t("Invoice %s · due %s") % [Fmt.money(k["receivable"]), Clock.fmt_short(int(k["pay_due"]))], 8, Art.C_GOLD, true))
 		right.add_child(UIK.wrap("Revenue is booked. The cash isn't here yet.", 7, Art.C_SKY, 220))
+
+
+# ============================================================== FREELANCE
+func _tab_freelance() -> void:
+	if not Careers.freelance_active():
+		_section("Freelance consulting")
+		content.add_child(UIK.wrap("Sell your time: clients post small projects every morning. Accept a gig, work it here in 2-hour sessions, deliver before the deadline and invoice. Payment follows the client's terms. On-time work earns stars; stars raise your rate.", 8, Art.C_WHITE, 480))
+		var go := UIK.button("Start freelancing", func():
+			Careers.start_freelance()
+			rebuild(), "primary")
+		go.name = "StartFreelance"
+		content.add_child(go)
+		return
+	Careers.refresh_offers()
+	var f := Careers.F()
+	var head := UIK.hbox(8)
+	content.add_child(head)
+	var full := roundi(Careers.rep())
+	var stars := "★".repeat(full) + "☆".repeat(5 - full)
+	head.add_child(UIK.label(stars, 10, Art.C_GOLD, true))
+	head.add_child(UIK.label(I18n.t("Reputation %.1f · rate about %s/h · %d delivered · %d late") % [Careers.rep(), Fmt.money0(Careers.hourly_rate()), int(f["done"]), int(f["late"])], 7, Art.C_MUTED, true))
+	_section("In progress")
+	var act := Careers.active_gigs()
+	if act.is_empty():
+		content.add_child(UIK.label("No gigs in progress. Pick one below.", 7, Art.C_DIM))
+	for g in act:
+		var p := UIK.panel("ui/card", 4)
+		content.add_child(p)
+		var v := UIK.vbox(1)
+		p.add_child(v)
+		var r1 := UIK.hbox(4)
+		v.add_child(r1)
+		var t := UIK.label(Careers.gig_title(g), 8, Art.C_WHITE, true)
+		t.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+		r1.add_child(t)
+		r1.add_child(UIK.expand())
+		r1.add_child(UIK.chip(status_text(g["status"]), Art.C_RED if g["status"] == "late" else Art.C_SKY))
+		var bar := ProgressBar.new()
+		bar.max_value = float(g["hours"])
+		bar.value = float(g["done"])
+		bar.show_percentage = false
+		bar.custom_minimum_size = Vector2(300, 5)
+		v.add_child(bar)
+		var r2 := UIK.hbox(6)
+		v.add_child(r2)
+		r2.add_child(UIK.label(I18n.t("%d / %d h · due %s · %s · pays %s") % [int(g["done"]), int(g["hours"]), Clock.fmt_datetime(int(g["due"])),
+			Fmt.money0(float(g["fee"])), I18n.t("on delivery") if int(g["terms"]) == 0 else I18n.t("%d days after delivery") % int(g["terms"])], 7, Art.C_MUTED))
+		r2.add_child(UIK.expand())
+		var gid: String = g["id"]
+		var wb := UIK.button(I18n.t("Work 2 h"), func(): _work_gig(gid), "primary")
+		wb.name = "Work_" + gid
+		r2.add_child(wb)
+	_section("Today's offers")
+	if f["offers"].is_empty():
+		content.add_child(UIK.label("No new offers. More arrive every morning at 8:00.", 7, Art.C_DIM))
+	for o in f["offers"]:
+		var row := UIK.hbox(6)
+		content.add_child(row)
+		var ol := UIK.wrap(Careers.gig_title(o), 8, Art.C_WHITE, 250)
+		ol.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+		row.add_child(ol)
+		row.add_child(UIK.label(I18n.t("%d h · %d days · %s") % [int(o["hours"]), int(o["days"]), I18n.t("paid on delivery") if int(o["terms"]) == 0 else I18n.t("net %d") % int(o["terms"])], 7, Art.C_MUTED))
+		row.add_child(UIK.expand())
+		row.add_child(UIK.label(Fmt.money0(float(o["fee"])), 9, Art.C_GREEN, true))
+		var oid: String = o["id"]
+		var ab := UIK.button("Accept", func():
+			var r := Careers.accept(oid)
+			if not r["ok"]:
+				UIRoot.toast(I18n.t(str(r["error"])), "warn", "lock")
+			rebuild())
+		ab.name = "Accept_" + oid
+		row.add_child(ab)
+	var owed := 0.0
+	for g2 in f["gigs"].values():
+		if g2["status"] == "invoiced":
+			owed += float(g2["invoiced"])
+	if owed > 0.0:
+		content.add_child(UIK.sep())
+		content.add_child(UIK.kv("Invoiced, not yet paid", Fmt.money(owed), Art.C_GOLD))
+
+
+func _work_gig(gid: String) -> void:
+	var r := Careers.work_on(gid)
+	if not r["ok"]:
+		UIRoot.toast(I18n.t(str(r["error"])), "warn", "lock")
+	elif r["delivered"]:
+		UIRoot.toast(I18n.t("Delivered and invoiced: %s.") % Fmt.money(r["fee"]) + (I18n.t(" (late: -20%)") if r["late"] else ""), "good" if not r["late"] else "warn", "check")
+	else:
+		UIRoot.toast(I18n.t("Two focused hours. %s") % Clock.fmt_time(), "info", "clock")
+	rebuild()

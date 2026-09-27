@@ -4,9 +4,65 @@ extends Node
 
 var DIR := "user://saves"
 const AUTOSAVE_SLOT := 0
+## Continuous autosave: every scene change, every AUTOSAVE_EVERY real seconds of play when something
+## moved, when the window loses focus or closes, and (web) when the tab is hidden or reloaded — a
+## refresh never costs more than a few seconds of play.
+const AUTOSAVE_EVERY := 15.0
 
 signal saved(slot: int)
 signal loaded(slot: int)
+
+var autosave_enabled := true
+var _since := 0.0
+var _last_sig := ""
+var _js_cbs: Array = []   # JavaScriptBridge callbacks must stay referenced
+
+
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	if OS.has_feature("web"):
+		_hook_web_lifecycle()
+
+
+func _process(delta: float) -> void:
+	_since += delta
+	if _since >= AUTOSAVE_EVERY:
+		_since = 0.0
+		autosave_if_changed()
+
+
+func _notification(what: int) -> void:
+	if what in [NOTIFICATION_WM_CLOSE_REQUEST, NOTIFICATION_APPLICATION_FOCUS_OUT, NOTIFICATION_APPLICATION_PAUSED, NOTIFICATION_WM_GO_BACK_REQUEST]:
+		autosave_if_changed()
+
+
+func _hook_web_lifecycle() -> void:
+	var cb := JavaScriptBridge.create_callback(func(_args): autosave_if_changed())
+	_js_cbs.append(cb)
+	var doc = JavaScriptBridge.get_interface("document")
+	var win = JavaScriptBridge.get_interface("window")
+	if doc != null:
+		doc.addEventListener("visibilitychange", cb)
+	if win != null:
+		win.addEventListener("pagehide", cb)
+		win.addEventListener("beforeunload", cb)
+
+
+## True while there is a live game world whose state is safe to snapshot.
+func can_autosave() -> bool:
+	return autosave_enabled and GameState.has_game() and Clock.world_active and not SceneRouter.transitioning \
+		and SceneRouter.world_scene() != null
+
+
+func autosave_if_changed() -> void:
+	if not can_autosave():
+		return
+	var ws := SceneRouter.world_scene()
+	var pos: Vector2 = ws.player.position if ws.player != null else Vector2.ZERO
+	var sig := "%d|%s|%d|%d|%d" % [Clock.now(), ws.scene_id, int(pos.x), int(pos.y), int(GameState.data["ledger"]["seq"])]
+	if sig == _last_sig:
+		return
+	autosave()
 
 
 func _path(slot: int) -> String:
@@ -93,7 +149,13 @@ func load_and_enter(slot: int) -> bool:
 
 
 func autosave() -> void:
-	save(AUTOSAVE_SLOT)
+	if not GameState.has_game():
+		return
+	_since = 0.0
+	if save(AUTOSAVE_SLOT):
+		var ws := SceneRouter.world_scene()
+		var pos: Vector2 = ws.player.position if ws != null and ws.player != null else Vector2.ZERO
+		_last_sig = "%d|%s|%d|%d|%d" % [Clock.now(), ws.scene_id if ws != null else "", int(pos.x), int(pos.y), int(GameState.data["ledger"]["seq"])]
 
 
 func _migrate(d: Dictionary) -> Dictionary:

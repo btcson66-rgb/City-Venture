@@ -39,7 +39,7 @@ func _ready() -> void:
 	t.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	header.add_child(t)
 	if closable:
-		var x := UIK.button("✕", close)
+		var x := UIK.button("×", close)
 		x.name = "Close"
 		x.custom_minimum_size = Vector2(18, 16)
 		header.add_child(x)

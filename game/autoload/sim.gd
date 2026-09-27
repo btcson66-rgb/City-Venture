@@ -85,6 +85,8 @@ func _dispatch(kind: String, p: Dictionary) -> void:
 			Living.handle(kind, p)
 		"story":
 			StoryEngine.handle(kind, p)
+		"car":
+			Careers.handle(kind, p)
 		_:
 			push_warning("Sim: unknown scheduled kind " + kind)
 
@@ -94,6 +96,7 @@ func _on_hour(t: int, h: int) -> void:
 	Contracts.on_hour(t, h)
 	Living.on_hour(t, h)
 	EventEngine.on_hour(t, h)
+	Careers.on_hour(t, h)
 	_request_story_check()
 
 

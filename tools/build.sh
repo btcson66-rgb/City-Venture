@@ -1,9 +1,13 @@
 #!/bin/bash
-# Build CITY VENTURE: regenerate placeholder art, import, run tests, export Windows (+ Linux smoke build).
+# Build CITY VENTURE: import, run tests, export Windows (+ Linux smoke build).
+# Committed art in game/assets is the source of truth (it may be hand-made; see docs/ART_HANDOFF.md).
+# REGEN_ART=1 tools/build.sh regenerates the procedural/converted art first and OVERWRITES game/assets.
 set -e
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
-python3 tools/art/gen_placeholders.py
+if [ "${REGEN_ART:-0}" = "1" ]; then
+  python3 tools/art/gen_placeholders.py
+fi
 python3 tools/gen_districts.py
 python3 tools/i18n_extract.py --check      # regenerate .po catalogues; fail on untranslated text
 cd game

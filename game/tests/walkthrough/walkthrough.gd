@@ -20,6 +20,8 @@ func run() -> void:
 	await _chapter1()
 	await _chapter2()
 	await _chapter3()
+	if not bot.video_mode:
+		await _careers()
 	if bot.video_mode:
 		await _video_epilogue()
 	else:
@@ -449,6 +451,55 @@ func _chapter3() -> void:
 	bot.expect("ch3_open_for_business" in GameState.data["story"]["chapters_done"], "Chapter 3 complete")
 	await exit_building()
 	await bot.shot("startup_hub_office_sign")
+
+
+func _careers() -> void:
+	bot.step("Careers — part-time job at Nexus Co-work")
+	await enter_building("nexus_cowork")
+	await bot.use_action("business_board")
+	await bot.wait(0.6)
+	await bot.click_named("Page_jobs")
+	await bot.wait(0.5)
+	await bot.shot("business_board_jobs")
+	await bot.click_named("Job_cowork_host")
+	await bot.wait(0.5)
+	await bot.click_named("ApplyJob")
+	await bot.wait(0.4)
+	await bot.shot("job_hired")
+	await close_modal()
+	await bot.wait(0.3)
+	await close_modal()
+	bot.expect(Careers.current_job() == "cowork_host", "hired as a community host")
+	var cash := Ledger.cash("player")
+	var why := Careers.shift_block("cowork_host")
+	if why == "":
+		await bot.use_action("work_shift")
+		await bot.wait(0.6)
+		await bot.shot("job_shift")
+		await bot.click_named("WorkShift")
+		await bot.wait(1.8)
+		bot.expect(Ledger.cash("player") - cash >= 72.0 - 0.01, "a 4-hour shift paid wages (%s)" % Fmt.money(Ledger.cash("player") - cash))
+	else:
+		bot.log_line("  (no shift now: %s)" % why)
+	bot.step("Careers — freelance gig at a hot desk")
+	await open_os_at(func(n): return n.action == "open_company_os", "hot desk")
+	await bot.click_named("Tab_freelance")
+	await bot.wait(0.4)
+	await bot.click_named("StartFreelance")
+	await bot.wait(0.5)
+	var offers: Array = Careers.F()["offers"]
+	if offers.is_empty():
+		bot.fail("no freelance offers")
+	else:
+		var oid: String = offers[0]["id"]
+		await bot.click_named("Accept_" + oid)
+		await bot.wait(0.4)
+		await bot.click_named("Work_" + oid)
+		await bot.wait(0.6)
+		await bot.shot("freelance_gig")
+		bot.expect(int(Careers.F()["gigs"][oid]["done"]) >= 2, "put hours into a freelance gig")
+	await close_modal()
+	await exit_building()
 
 
 func _month() -> void:

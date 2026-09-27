@@ -137,7 +137,7 @@ func _home() -> void:
 	var pend := EventEngine.pending()
 	if not pend.is_empty():
 		content.add_child(UIK.sep())
-		var t := UIK.wrap(I18n.t("⚑ %s needs a decision") % I18n.t(DataDB.events[pend[0]["id"]].get("presentation", {}).get("title", "Something")), 7, Art.C_GOLD, 128)
+		var t := UIK.wrap(I18n.t("◆ %s needs a decision") % I18n.t(DataDB.events[pend[0]["id"]].get("presentation", {}).get("title", "Something")), 7, Art.C_GOLD, 128)
 		content.add_child(t)
 		content.add_child(UIK.button("Respond", func(): close(); UIRoot.show_decision(EventEngine.next_pending()), "primary"))
 

@@ -1,0 +1,107 @@
+{
+ "offer_hour": 8,
+ "offers_base": 3,
+ "max_active": 3,
+ "rep_start": 3.0,
+ "base_rate": 30,
+ "rate_per_star": 7,
+ "session_hours": 2,
+ "late_penalty": 0.2,
+ "cancel_after_days_late": 3,
+ "terms_days": [
+  0,
+  7,
+  14
+ ],
+ "clients": [
+  "Harbor Candle Co.",
+  "Crumb & Co. Bakery",
+  "Riverside Bike Works",
+  "Studio Nine Yoga",
+  "Lantern Books",
+  "Kuro Ramen",
+  "Fresh+ Market",
+  "Pixel Pup Grooming",
+  "Nori Tea House",
+  "Atlas Movers",
+  "Bright Smile Dental",
+  "Greenleaf Florist"
+ ],
+ "templates": [
+  {
+   "id": "copy",
+   "title": "Write product descriptions for %s",
+   "hours": [
+    4,
+    8
+   ]
+  },
+  {
+   "id": "sheet",
+   "title": "Build a cash-flow spreadsheet for %s",
+   "hours": [
+    6,
+    10
+   ]
+  },
+  {
+   "id": "audit",
+   "title": "Audit the online store of %s",
+   "hours": [
+    5,
+    9
+   ]
+  },
+  {
+   "id": "social",
+   "title": "Plan a month of social posts for %s",
+   "hours": [
+    6,
+    12
+   ]
+  },
+  {
+   "id": "pricing",
+   "title": "Review the prices of %s",
+   "hours": [
+    4,
+    7
+   ]
+  },
+  {
+   "id": "suppliers",
+   "title": "Find three backup suppliers for %s",
+   "hours": [
+    6,
+    10
+   ]
+  },
+  {
+   "id": "launch",
+   "title": "Plan the product launch of %s",
+   "hours": [
+    10,
+    16
+   ],
+   "min_rep": 3.5
+  },
+  {
+   "id": "books",
+   "title": "Clean up the books of %s",
+   "hours": [
+    8,
+    14
+   ],
+   "min_rep": 3.0
+  },
+  {
+   "id": "pitch",
+   "title": "Build an investor pitch deck for %s",
+   "hours": [
+    12,
+    18
+   ],
+   "min_rep": 4.0
+  }
+ ]
+}

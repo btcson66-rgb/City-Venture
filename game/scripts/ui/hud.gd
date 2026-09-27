@@ -17,6 +17,10 @@ var prompt_panel: PanelContainer
 var prompt_label: Label
 var minimap: Minimap
 var phone_hint: Label
+var phone_btn: Button
+var quick: VBoxContainer
+var money_panel: PanelContainer
+var save_chip: HBoxContainer
 var parcels_label: Label
 var loc_label: Label
 var today_label: Label
@@ -87,16 +91,31 @@ func _ready() -> void:
 	var cl := UIK.vbox(0)
 	co_row.add_child(cl)
 	co_name = UIK.label("", 6, Art.C_DIM, true)
+	co_name.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	cl.add_child(co_name)
 	co_label = UIK.title("", 10, Art.C_GREEN)
 	cl.add_child(co_label)
-	# phone hint + parcels
-	phone_hint = UIK.label("", 7, Art.C_MUTED, true)
-	phone_hint.position = Vector2(640 - 132, 74)
-	add_child(phone_hint)
+	money_panel = mp
+	# quick bar: phone / map / menu as real buttons on a solid chip, so they read over any scene and can
+	# be tapped (touch builds) as well as reached by key
+	quick = UIK.vbox(2)
+	quick.position = Vector2(640 - 136, 58)
+	add_child(quick)
+	var qrow := UIK.hbox(2)
+	quick.add_child(qrow)
+	quick.alignment = BoxContainer.ALIGNMENT_END
+	qrow.alignment = BoxContainer.ALIGNMENT_END
+	phone_btn = _quick_button("phone", "Phone", "Tab", func(): UIRoot.toggle_phone())
+	qrow.add_child(phone_btn)
+	qrow.add_child(_quick_button("map", "Map", "M", func(): UIRoot.open_map()))
+	qrow.add_child(_quick_button("settings", "Menu", "Esc", func(): UIRoot.open_pause()))
+	phone_hint = UIK.label("", 7, Art.C_GOLD, true)
+	phone_hint.visible = false
+	phone_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	quick.add_child(phone_hint)
 	parcels_label = UIK.label("", 7, Art.C_GOLD, true)
-	parcels_label.position = Vector2(640 - 132, 84)
-	add_child(parcels_label)
+	parcels_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	quick.add_child(parcels_label)
 	# minimap
 	var mmp := UIK.panel("ui/panel_glass", 3)
 	mmp.position = Vector2(640 - 132, 360 - 84)
@@ -110,6 +129,13 @@ func _ready() -> void:
 	# prompt
 	prompt_panel = UIK.panel("ui/panel", 5)
 	prompt_panel.visible = false
+	prompt_panel.mouse_filter = Control.MOUSE_FILTER_STOP
+	prompt_panel.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	prompt_panel.gui_input.connect(func(ev: InputEvent):
+		if (ev is InputEventMouseButton and ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT) or (ev is InputEventScreenTouch and ev.pressed):
+			var pl := get_tree().get_first_node_in_group("player")
+			if pl != null:
+				pl.interact_now())
 	add_child(prompt_panel)
 	var ph := UIK.hbox(5)
 	prompt_panel.add_child(ph)
@@ -118,9 +144,58 @@ func _ready() -> void:
 	ph.add_child(key)
 	prompt_label = UIK.label("", 8, Art.C_WHITE, true)
 	ph.add_child(prompt_label)
+	# autosave tick (so players can trust that a refresh / crash keeps their progress)
+	save_chip = UIK.hbox(2)
+	save_chip.modulate.a = 0.0
+	save_chip.add_child(UIK.icon("save", 8))
+	save_chip.add_child(UIK.label("Saved", 6, Art.C_MUTED, true))
+	add_child(save_chip)
+	SaveSystem.saved.connect(_on_saved)
 	EventBus.cash_changed.connect(_on_cash)
 	EventBus.objective_changed.connect(refresh)
 	EventBus.message_received.connect(func(_a, _b): refresh())
+
+
+func _quick_button(icon_name: String, text: String, key: String, cb: Callable) -> Button:
+	var b := Button.new()
+	b.focus_mode = Control.FOCUS_NONE
+	b.add_theme_stylebox_override("normal", UIK.flat(Color(0.05, 0.08, 0.15, 0.88), Color(0.45, 0.55, 0.75, 0.55), 1, 2))
+	b.add_theme_stylebox_override("hover", UIK.flat(Color(0.1, 0.15, 0.26, 0.95), Art.C_GOLD, 1, 2))
+	b.add_theme_stylebox_override("pressed", UIK.flat(Color(0.1, 0.15, 0.26, 0.95), Art.C_GOLD, 1, 2))
+	b.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	var h := UIK.hbox(2)
+	h.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	h.position = Vector2(3, 2)
+	b.add_child(h)
+	h.add_child(UIK.icon(icon_name, 8))
+	var l := UIK.label(text, 6, Art.C_WHITE, true)
+	l.name = "Text"
+	h.add_child(l)
+	var kc := PanelContainer.new()
+	var ks := UIK.flat(Color(0.85, 0.88, 0.95, 0.9), Color(0, 0, 0, 0), 0, 1)
+	ks.content_margin_left = 2
+	ks.content_margin_right = 2
+	ks.content_margin_top = 0
+	ks.content_margin_bottom = 0
+	kc.add_theme_stylebox_override("panel", ks)
+	kc.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var kl := UIK.label(key, 5, Art.C_NAVY_800, true)
+	kl.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+	kc.add_child(kl)
+	h.add_child(kc)
+	b.pressed.connect(cb)
+	_fit_quick.call_deferred(b, h)
+	return b
+
+
+func _fit_quick(b: Button, h: HBoxContainer) -> void:
+	h.reset_size()
+	b.custom_minimum_size = h.get_combined_minimum_size() + Vector2(6, 4)
+
+
+func relabel() -> void:
+	for b in quick.get_child(0).get_children():
+		_fit_quick.call_deferred(b, b.get_child(0))
 
 
 func set_prompt(text: String) -> void:
@@ -160,8 +235,11 @@ func _process(_d: float) -> void:
 		co_label.text = Fmt.money(cc)
 		co_label.add_theme_color_override("font_color", Art.C_GREEN if cc >= 1500 else (Art.C_GOLD if cc >= 0 else Art.C_RED))
 	var unread := GameState.unread_messages()
-	phone_hint.text = I18n.t("[Tab] Phone") + (I18n.t("  ● %d new") % unread if unread > 0 else "") + (I18n.t("   ⚑ decision") if not EventEngine.pending().is_empty() else "")
-	phone_hint.add_theme_color_override("font_color", Art.C_GOLD if unread > 0 or not EventEngine.pending().is_empty() else Art.C_MUTED)
+	var pending := not EventEngine.pending().is_empty()
+	phone_hint.text = ((I18n.t("● %d new") % unread) if unread > 0 else "") + ((I18n.t("   ◆ decision")) if pending else "")
+	phone_hint.visible = phone_hint.text != ""
+	phone_btn.modulate = Color(1, 1, 1) if unread == 0 and not pending else Color(1.0, 0.92, 0.6).lerp(Color(1, 1, 1), 0.5 + 0.5 * sin(Time.get_ticks_msec() / 180.0))
+	quick.position = Vector2(640 - 6 - quick.size.x, money_panel.position.y + money_panel.size.y + 3)
 	var cc2 := Ecommerce.carried_count()
 	parcels_label.text = (I18n.t("Carrying %d parcel%s") % [cc2, I18n.pl(cc2)]) if cc2 > 0 else ""
 
@@ -176,6 +254,17 @@ func refresh() -> void:
 	var ws := SceneRouter.world_scene()
 	if ws != null:
 		loc_label.text = (I18n.t(DataDB.districts[ws.scene_id]["name"]) if ws.kind == "district" else I18n.t(DataDB.building(ws.scene_id).get("name", ""))).to_upper()
+
+
+func _on_saved(slot: int) -> void:
+	if slot != SaveSystem.AUTOSAVE_SLOT or not visible:
+		return
+	save_chip.reset_size()
+	save_chip.position = Vector2(640 - 8 - save_chip.size.x, 360 - 97)
+	var tw := create_tween()
+	tw.tween_property(save_chip, "modulate:a", 1.0, 0.15)
+	tw.tween_interval(1.0)
+	tw.tween_property(save_chip, "modulate:a", 0.0, 0.6)
 
 
 func _on_cash(entity: String, delta: float) -> void:

@@ -98,6 +98,26 @@ Each package includes a tester guide in Chinese and English (install steps inclu
 suggested route, what to report, save paths, known issues). **F12 bug report** saves a screenshot, the current save, the
 log and an info sheet, then opens the folder; the web build downloads these files instead. The shots tour checks that F12 writes the report.
 
+## Playtest round 1 → build 0.1.2-test2
+
+The product owner played the web build and reported five problems. Each one, and what was done about it:
+
+| Feedback | Cause found | Fix | Status | Verified by |
+|----------|-------------|-----|--------|-------------|
+| "Not enough of a tutorial; I didn't know walking to the door takes you outside" | Hints were only the objective text and the prompt | **Tutorial card** (8 steps: move, phone, leave a room, follow the goal, use things, time, map, Company OS). Each step completes when the player does it. Progress is saved; Skip, and Replay in the pause menu. **Gold guide arrow** to the current objective, routed through room exits, street edges and the Metro. It shows as an edge pointer when the target is off screen and can be turned off in the pause menu. **Always-on exit markers**: a glowing EXIT mat in every room, "District →" chevrons at street edges, and "▲ Enter X / Closed" chips at doors. Phone / Map / Menu are clickable HUD buttons, and the interaction prompt can be clicked | Implemented | Walkthrough screenshots `07_apartment_arrival`, `09_riverside_outside_home` (en + zh). Chromium web run (`screenshots/web/`) |
+| "Some text inside buildings is garbled" | ① The NPC name **Jun** was also the msgid for the month "Jun", so Chinese showed **6月** over his head. ② Name tags used the pixel title font at 5 px ("Maya" read as "Moyo"). ③ The café menu board had 3×5 glyphs with no gap between rows, cut to 9 letters. ④ The "[Tab] Phone" hint had no background and drew over walls and windows. ⑤ **✕ ⚑ ▸ and three emoji are in none of the bundled fonts.** Desktop borrows them from the OS; the web build has no system fonts, so they showed as boxes. ⑥ Window light beams spilled outside the room | ① "Jun" maps to itself; player, company and NPC names are never run through the catalogue. ② Name chips in bold Inter with a dark backing, shown only when the player is near (so they don't cover wall signs). ③ Board redrawn at 66×34 with spaced rows. ④ Replaced by the button bar. ⑤ Swapped for glyphs the fonts have (× › ◆), emoji removed. Titles now fall back to Inter before the CJK fonts. A script checks every character in code, data and translations against the fonts: 0 missing. ⑥ Beams clipped to the room | Implemented | zh_TW interior screenshots, font coverage scan |
+| "Refreshing the page mid-game made me start over" | Autosave ran only when sleeping and when the world began | **Continuous autosave** to slot 0: every scene change, every 15 s of play when something changed, on window focus-out/close, and on web `visibilitychange` / `pagehide` / `beforeunload`. A "Saved" tick shows by the minimap | Implemented | **Chromium test:** new game → walk outside → reload the page → Continue is enabled ("Alex Chen · Day 1") → the game resumes on the Riverside street with the tutorial on the same step. At most about 15 s of play is lost |
+| "Too few careers to choose from" | Only ecommerce was playable | **5 part-time jobs** (Barista, Parcel Sorter, Community Host, Records Clerk, Teller Trainee). Each has a 3-rank promotion ladder with wage raises, 4-hour shifts worked on site during opening hours (one per day), and one real perk (free coffee, 15% shipping discount, free hot desk, half-price registration, no overdraft fees). **Freelance consulting** is now an active business: gigs each morning, work at any laptop in 2-hour sessions, deliver, invoice (receivable), paid on 0/7/14-day terms. Reputation 0–5★ moves the rate and unlocks bigger gigs; late work costs 20% and stars, abandoned work is cancelled unpaid. Wages appear in Month Close and Company OS | Implemented | Unit tests `test_careers.gd` (7 tests: pay, opening hours, promotion, perks, gig invoice → payment, cancellation). Walkthrough "Careers" steps (hire, shift, gig) in both languages |
+| "Still not happy with the visuals" | Art is procedural or converted from the concept boards (see Known issues) | Not changed on this track. The owner plans to hand visuals to Codex. [`docs/ART_HANDOFF.md`](ART_HANDOFF.md) gives the swap contract (paths, sizes, metadata, text rules), and `tools/build.sh` no longer regenerates art unless `REGEN_ART=1`, so hand-made art is not overwritten | Planned (art track) | — |
+
+**Regression runs for 0.1.2-test2:** unit tests **38/38**. Full rendered walkthroughs in English and 繁體中文:
+RESULTS_PLACEHOLDER
+
+Two bugs were caught by these runs before release. ① The job modal awaited a fade after closing itself; the
+coroutine died with the modal, so no wages were paid and **the screen stayed black**. The shift now runs on the
+persistent UI root. ② The trailer's interact shot targeted Jun's talk spot, which sits inside the counter; the shot
+now walks to the counter front.
+
 ## Bugs found by the evidence runs (fixed before the final run)
 
 | Bug | How it showed up | Fix | Guard |
@@ -113,6 +133,7 @@ log and an info sheet, then opens the folder; the web build downloads these file
   sprites, and `tools/art/concepts.py` does that. A pixel artist should still produce the final assets. Two pieces of board
   text were changed to match game data: the cafe is now "Bean & Byte", and City Hall's "Riverdale" sign reads "Aurelia".
 - **No audio.** There is no music or SFX in the slice yet.
-- **Only a bot has played the slice.** Balance, game feel and onboarding clarity have not been judged by a person.
+- **One human playtest so far** (the product owner, web build, first chapter). Balance and game feel beyond Chapter 1
+  have only been exercised by the bot.
 - **Planned, not built:** hiring and payroll (P1), overseas play (P2), Property / International / Reports tabs,
   bankruptcy, and the stablecoin settlement layer (simulation only, when it arrives).

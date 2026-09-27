@@ -5,7 +5,7 @@ extends Area2D
 var def: Dictionary = {}
 
 
-func setup(d: Dictionary, _scene: Node) -> void:
+func setup(d: Dictionary, scene: Node) -> void:
 	def = d
 	collision_layer = 0
 	collision_mask = 1
@@ -17,6 +17,14 @@ func setup(d: Dictionary, _scene: Node) -> void:
 	cs.position = Vector2(float(r[0]) + float(r[2]) / 2.0, float(r[1]) + float(r[3]) / 2.0)
 	add_child(cs)
 	body_entered.connect(_on_enter)
+	# visible "way out" sign on the road at this edge
+	var ws := scene as WorldScene
+	var right: bool = ws == null or float(r[0]) > ws.size_px.x / 2.0
+	var dname := I18n.t(str(DataDB.districts.get(d["to"], {}).get("name", d["to"])))
+	var mark := ExitMarker.new()
+	mark.setup(Rect2(float(r[0]), float(r[1]), float(r[2]), float(r[3])), Vector2.RIGHT if right else Vector2.LEFT,
+		(dname + " →") if right else ("← " + dname))
+	add_child(mark)
 
 
 func _on_enter(body: Node) -> void:

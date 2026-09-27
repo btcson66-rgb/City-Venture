@@ -116,7 +116,7 @@ static func _h_po_arrive(p: Dictionary) -> void:
 	EventBus.notify.emit(I18n.t("Delivered: %d × %s → %s") % [int(po["qty"]), pname, location_name(po["location"])], "good", "parcel")
 	var contact: String = DataDB.supplier(po["supplier"]).get("contact_npc", "")
 	if contact != "":
-		GameState.add_message(contact, I18n.t("Dropped %d %s at %s. Don't let them sit around 👍") % [int(po["qty"]), pname.to_lower(), location_name(po["location"])])
+		GameState.add_message(contact, I18n.t("Dropped %d %s at %s. Don't let them sit around.") % [int(po["qty"]), pname.to_lower(), location_name(po["location"])])
 	EventBus.po_arrived.emit(po["id"])
 
 
@@ -551,7 +551,7 @@ static func dropoff_carried(method: String) -> Dictionary:
 		if o.is_empty():
 			continue
 		entity = o["entity"]
-		var c := ship_cost(o, method)
+		var c := ship_cost(o, method) * (1.0 - Careers.perk_value("ship_discount"))
 		total += c
 		o["ship"] = {"method": method, "cost": c, "mode": "dropoff"}
 		_ship(o)

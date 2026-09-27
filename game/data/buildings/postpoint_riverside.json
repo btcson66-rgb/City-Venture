@@ -63,6 +63,18 @@
     ],
     "label": "Drop off parcels",
     "action": "dropoff_parcels"
+   },
+   {
+    "id": "job_parcel_sorter",
+    "at": [
+     200,
+     104
+    ],
+    "label": "Staff door — work a shift",
+    "action": "work_shift",
+    "params": {
+     "job": "parcel_sorter"
+    }
    }
   ],
   "npc_spots": {

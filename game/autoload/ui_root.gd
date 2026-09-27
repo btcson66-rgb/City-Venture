@@ -3,6 +3,7 @@ extends CanvasLayer
 
 var root: Control
 var hud: HUD
+var tutorial: Tutorial
 var dialogue: DialogueBox
 var phone: PhoneUI
 var modal_layer: Control
@@ -26,6 +27,8 @@ func _ready() -> void:
 	hud = HUD.new()
 	root.add_child(hud)
 	hud.visible = false
+	tutorial = Tutorial.new()
+	root.add_child(tutorial)
 	dialogue = DialogueBox.new()
 	root.add_child(dialogue)
 	phone = PhoneUI.new()
@@ -169,15 +172,47 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("phone") and not dialogue.active and modal_layer.get_child_count() == 0:
 		get_viewport().set_input_as_handled()
-		if phone.is_open:
-			phone.close()
-		else:
-			phone.open()
+		toggle_phone()
 	elif event.is_action_pressed("map") and not is_blocking():
 		get_viewport().set_input_as_handled()
-		open_modal(CityMapModal.new(false))
+		open_map()
 	elif event.is_action_pressed("pause") and not is_blocking():
 		get_viewport().set_input_as_handled()
+		open_pause()
+
+
+## Part-time job shift: fade out, four hours pass, wages paid, fade in with what happened.
+func work_shift_flow(job_id: String) -> void:
+	await fade_out(0.35)
+	var r := Careers.work_shift(job_id)
+	await fade_in(0.35)
+	if not r["ok"]:
+		toast(I18n.t(str(r["error"])), "warn", "lock")
+		return
+	toast(str(r["moment"]), "info", "clock")
+	toast(I18n.t("Shift done: +%s wages.") % Fmt.money(r["pay"]), "good", "cash")
+	if r["promoted"]:
+		show_chapter_card(I18n.t("PROMOTED"), I18n.t(str(r["title"])))
+	SaveSystem.autosave_if_changed()
+
+
+## Shared by the keys and the HUD quick-bar buttons.
+func toggle_phone() -> void:
+	if dialogue.active or modal_layer.get_child_count() > 0 or SceneRouter.transitioning:
+		return
+	if phone.is_open:
+		phone.close()
+	else:
+		phone.open()
+
+
+func open_map() -> void:
+	if not is_blocking() and not SceneRouter.transitioning:
+		open_modal(CityMapModal.new(false))
+
+
+func open_pause() -> void:
+	if not is_blocking() and not SceneRouter.transitioning:
 		open_modal(PauseMenu.new())
 
 
@@ -323,6 +358,7 @@ func show_location_card(kind: String, id: String) -> void:
 ## Rebuild text that was formatted at build time (objective, location) after a language switch.
 func language_changed() -> void:
 	hud.refresh()
+	hud.relabel()
 	title_refresh_all()
 
 

@@ -13,7 +13,10 @@
      "text": "Check your phone (Tab)",
      "complete_when": [
       "flag:maya_intro_done"
-     ]
+     ],
+     "target": {
+      "phone": true
+     }
     },
     {
      "id": "ch1_outside",
@@ -22,7 +25,10 @@
      "text": "Head outside and look around Riverside",
      "complete_when": [
       "visited:riverside"
-     ]
+     ],
+     "target": {
+      "district": "riverside"
+     }
     },
     {
      "id": "ch1_coffee",
@@ -31,7 +37,11 @@
      "text": "Grab a coffee at Bloom Coffee",
      "complete_when": [
       "flag:bought_coffee_bloom_coffee"
-     ]
+     ],
+     "target": {
+      "building": "bloom_coffee",
+      "action": "buy_item"
+     }
     },
     {
      "id": "ch1_cowork",
@@ -40,7 +50,10 @@
      "text": "Visit Nexus Co-work in Startup Hub (walk east)",
      "complete_when": [
       "visited:nexus_cowork"
-     ]
+     ],
+     "target": {
+      "building": "nexus_cowork"
+     }
     },
     {
      "id": "ch1_board",
@@ -49,7 +62,11 @@
      "text": "Check the Business Board and pick a first business",
      "complete_when": [
       "flag:business_chosen"
-     ]
+     ],
+     "target": {
+      "building": "nexus_cowork",
+      "action": "business_board"
+     }
     }
    ],
    "on_complete": [
@@ -62,7 +79,7 @@
     {
      "do": "message",
      "from": "maya",
-     "text": "Buy low. Sell less low. Got it 😂",
+     "text": "Buy low. Sell less low. Got it, haha.",
      "delay_min": 22
     }
    ]
@@ -80,7 +97,10 @@
      "text": "Buy your first stock (Company OS → Operations). Laptop at home or a co-work desk.",
      "complete_when": [
       "stat:purchase_orders>=1"
-     ]
+     ],
+     "target": {
+      "action": "open_company_os"
+     }
     },
     {
      "id": "ch2_stock",
@@ -98,7 +118,10 @@
      "text": "Photograph your product and list it on ShopLane (Company OS → Sales)",
      "complete_when": [
       "stat:listings_active>=1"
-     ]
+     ],
+     "target": {
+      "action": "open_company_os"
+     }
     },
     {
      "id": "ch2_order",
@@ -116,7 +139,10 @@
      "text": "Pack the order at your packing table, then ship it",
      "complete_when": [
       "stat:orders_shipped>=1"
-     ]
+     ],
+     "target": {
+      "action": "pack_orders"
+     }
     },
     {
      "id": "ch2_first_dollar",
@@ -155,7 +181,10 @@
      "text": "Deal with an unhappy customer (check your phone)",
      "complete_when": [
       "flag:first_issue_resolved"
-     ]
+     ],
+     "target": {
+      "phone": true
+     }
     }
    ]
   },
@@ -186,7 +215,11 @@
        "text": "FYI personal seller accounts cap out at $2,500/month on ShopLane. Registered businesses don't.",
        "delay_min": 240
       }
-     ]
+     ],
+     "target": {
+      "building": "city_hall",
+      "action": "register_company"
+     }
     },
     {
      "id": "ch3_bank",
@@ -195,7 +228,11 @@
      "text": "Open a business account for {company} at Nexus Bank (Financial District)",
      "complete_when": [
       "flag:business_account_opened"
-     ]
+     ],
+     "target": {
+      "building": "nexus_bank",
+      "action": "bank_counter"
+     }
     },
     {
      "id": "ch3_workspace",
@@ -213,7 +250,10 @@
      "text": "Sit down at your desk and open Company OS as {company}",
      "complete_when": [
       "flag:company_os_opened_as_company"
-     ]
+     ],
+     "target": {
+      "action": "open_company_os"
+     }
     }
    ],
    "on_complete": [

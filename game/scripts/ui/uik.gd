@@ -152,7 +152,8 @@ static func ignore_mouse(n: Node) -> void:
 static func world_label(text: String, size := 6, color := Color(1, 1, 1)) -> Label:
 	var l := Label.new()
 	l.text = text
-	l.add_theme_font_override("font", title_font())
+	# Pixelify is illegible below 7px (letters fuse: "Maya" reads "Moyo"); small world text uses bold Inter.
+	l.add_theme_font_override("font", title_font() if size >= 7 else bold_font())
 	l.add_theme_font_size_override("font_size", size)
 	l.add_theme_color_override("font_color", color)
 	l.add_theme_color_override("font_outline_color", Color8(12, 18, 30))
@@ -162,6 +163,24 @@ static func world_label(text: String, size := 6, color := Color(1, 1, 1)) -> Lab
 	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	l.clip_text = false
 	return l
+
+
+## Floating name chip over a character. Proper names are never run through the translation catalogue
+## (the NPC "Jun" once rendered as the month "6月").
+static func name_tag(text: String) -> PanelContainer:
+	var p := PanelContainer.new()
+	var sb := flat(Color(0.05, 0.08, 0.14, 0.78), Color(1, 1, 1, 0.18), 1, 2)
+	sb.content_margin_left = 3
+	sb.content_margin_right = 3
+	sb.content_margin_top = 0
+	sb.content_margin_bottom = 0
+	p.add_theme_stylebox_override("panel", sb)
+	p.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var l := label(text, 6, Color8(250, 250, 255), true)
+	l.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	p.add_child(l)
+	return p
 
 
 static func button(text: String, cb: Callable = Callable(), style := "", min_w := 0.0) -> Button:

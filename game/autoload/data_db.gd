@@ -3,7 +3,7 @@ extends Node
 ## Content is data-driven (Handoff §73): scene scripts only reference ids.
 
 const FOLDERS := ["businesses", "products", "suppliers", "companies", "npcs", "buildings", "districts",
-	"regions", "regulations", "events", "dialogue", "properties"]
+	"regions", "regulations", "events", "dialogue", "properties", "jobs"]
 
 var businesses := {}
 var products := {}
@@ -17,6 +17,7 @@ var regulations := {}
 var events := {}
 var dialogue := {}
 var properties := {}
+var jobs := {}
 var economy := {}      # marketplace, shipping, living, settlement_methods
 var city := {}
 var story := {}
@@ -194,6 +195,18 @@ func validate() -> Array:
 					ok = true
 		if not ok:
 			errs.append("event %s has no money/inventory/option effect" % eid)
+	for jid in jobs:
+		var j: Dictionary = jobs[jid]
+		if not buildings.has(j.get("building", "")):
+			errs.append("job %s at unknown building %s" % [jid, j.get("building")])
+		if not npcs.has(j.get("boss", "")):
+			errs.append("job %s has unknown boss %s" % [jid, j.get("boss")])
+		var found := false
+		for it in buildings.get(j.get("building", ""), {}).get("interior", {}).get("interactables", []):
+			if it.get("action", "") == "work_shift" and it.get("params", {}).get("job", "") == jid:
+				found = true
+		if not found:
+			errs.append("job %s has no work_shift spot in its building" % jid)
 	for ch in story.get("chapters", []):
 		for ob in ch.get("objectives", []):
 			for a in ob.get("on_complete", []) + ob.get("on_start", []):

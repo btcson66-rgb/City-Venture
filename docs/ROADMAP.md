@@ -127,4 +127,7 @@ milestones. The engine choice is in [`ENGINE_DECISION.md`](ENGINE_DECISION.md): 
 | iOS build (StoreKit, Game Center, iCloud saves) | **Blocked** (needs macOS + Xcode + Apple Developer account) | TestFlight build |
 | Android build (Play Billing) | Planned | Internal testing track |
 | Store compliance (privacy labels, age rating, simulated crypto disclosure) | Planned | App Review guidelines checklist signed off |
-| Human playtests (onboarding, balance) | Planned | 5+ first-time players, 30-minute sessions, notes filed |
+| Onboarding tutorial + goal guidance | **Implemented** (0.1.2-test2) | Tutorial card, gold guide arrow, EXIT mats and edge signs. Needs confirming with first-time players |
+| Continuous autosave (incl. web refresh) | **Implemented** (0.1.2-test2) | Chromium reload test passes; at most about 15 s of play lost |
+| Careers beyond ecommerce | **Implemented** (0.1.2-test2): 5 part-time jobs + freelance consulting | Unit tests + walkthrough. SaaS (P1) is still the next full business |
+| Human playtests (onboarding, balance) | **In progress** (round 1: product owner) | 5+ first-time players, 30-minute sessions, notes filed |

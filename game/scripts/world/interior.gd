@@ -42,6 +42,9 @@ func build(building_id: String) -> void:
 	add_solid(Rect2(0, size_px.y - 3, cx - door_w / 2.0, 12))
 	add_solid(Rect2(cx + door_w / 2.0, size_px.y - 3, size_px.x, 12))
 	add_prop({"sprite": "door_mat", "x": cx - 16, "y": size_px.y - 10, "floor": true})
+	var mark := ExitMarker.new()
+	mark.setup(Rect2(cx - 16, size_px.y - 10, 32, 9), Vector2.DOWN, I18n.t("EXIT"))
+	back_layer.add_child(mark)
 	var ex := InteriorExit.new()
 	ex.setup(building_id, Rect2(cx - door_w / 2.0, size_px.y - 2, door_w, 10))
 	add_child(ex)
@@ -162,7 +165,13 @@ func _decorate_walls(wt: int, ht: int) -> void:
 func _light_spill(x: float, w: float) -> void:
 	var poly := Polygon2D.new()
 	var y0 := float(WALL_ROWS * T)
-	poly.polygon = PackedVector2Array([Vector2(x + 4, y0), Vector2(x + w - 4, y0), Vector2(x + w + 22, y0 + 46), Vector2(x + 18, y0 + 46)])
+	var beam := PackedVector2Array([Vector2(x + 4, y0), Vector2(x + w - 4, y0), Vector2(x + w + 22, y0 + 46), Vector2(x + 18, y0 + 46)])
+	# a beam from a window near the right wall must not spill past the room's edge
+	var room := PackedVector2Array([Vector2(0, y0), Vector2(size_px.x, y0), Vector2(size_px.x, size_px.y), Vector2(0, size_px.y)])
+	var clipped := Geometry2D.intersect_polygons(beam, room)
+	if clipped.is_empty():
+		return
+	poly.polygon = clipped[0]
 	poly.color = Color(1.0, 0.96, 0.84, 0.13)
 	back_layer.add_child(poly)
 	light_nodes.append({"node": poly, "interior": true, "day_only": true})

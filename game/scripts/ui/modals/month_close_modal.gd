@@ -32,7 +32,9 @@ func build() -> void:
 		v.add_child(UIK.kv("Other operating expense", Fmt.money(-other_opex), Art.C_RED))
 		v.add_child(UIK.kv("Rent (office)", Fmt.money(-e["rent_office"]), Art.C_RED))
 		v.add_child(UIK.kv("Business profit", Fmt.money(e["business_profit"]), UIK.money_color(e["business_profit"]), 9, true))
-		if float(e["personal_total"]) > 0.0:
+		if float(e.get("wages", 0.0)) > 0.0:
+			v.add_child(UIK.kv("Wages from your job", Fmt.money(e["wages"]), Art.C_GREEN))
+		if float(e["personal_total"]) > 0.0 or float(e.get("wages", 0.0)) > 0.0:
 			v.add_child(UIK.kv("Rent (home) + living", Fmt.money(-e["personal_total"]), Art.C_RED))
 			v.add_child(UIK.kv("Profit after life costs", Fmt.money(e["profit"]), UIK.money_color(e["profit"]), 8, true))
 		v.add_child(UIK.sep())

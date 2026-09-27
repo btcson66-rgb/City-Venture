@@ -1,0 +1,37 @@
+{
+ "id": "city_clerk",
+ "name": "Records Clerk",
+ "employer": "City Hall",
+ "building": "city_hall",
+ "boss": "ana",
+ "shift_hours": 4,
+ "blurb": "Process permits and registrations at City Hall. Weekdays only, steady pay.",
+ "ranks": [
+  {
+   "title": "Records Clerk",
+   "wage": 19,
+   "shifts": 0
+  },
+  {
+   "title": "Licensing Officer",
+   "wage": 22,
+   "shifts": 5
+  },
+  {
+   "title": "Senior Officer",
+   "wage": 26,
+   "shifts": 12
+  }
+ ],
+ "perk": {
+  "id": "registration_discount",
+  "value": 0.5,
+  "desc": "Half-price company registration fees."
+ },
+ "lines": [
+  "A food-truck owner needs four permits. You find the one form that covers all of them.",
+  "Ana shows you the queue trick: ticket numbers are a suggestion.",
+  "You file three hundred registrations. You now know every business on your street.",
+  "Budget season. Everyone is very polite and very tired."
+ ]
+}

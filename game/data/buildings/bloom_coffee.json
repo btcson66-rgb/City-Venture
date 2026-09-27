@@ -37,7 +37,7 @@
    },
    {
     "sprite": "menu_board",
-    "x": 40,
+    "x": 18,
     "y": 8,
     "wall": true
    },
@@ -79,7 +79,7 @@
    },
    {
     "sprite": "hanging_light",
-    "x": 84,
+    "x": 90,
     "y": 0,
     "wall": true,
     "glow": true
@@ -237,6 +237,18 @@
     "action": "open_company_os",
     "params": {
      "terminal": "cafe"
+    }
+   },
+   {
+    "id": "job_barista",
+    "at": [
+     160,
+     104
+    ],
+    "label": "Staff door — work a shift",
+    "action": "work_shift",
+    "params": {
+     "job": "barista"
     }
    }
   ],

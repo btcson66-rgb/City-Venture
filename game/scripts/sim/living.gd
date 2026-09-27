@@ -29,7 +29,7 @@ static func on_hour(t: int, h: int) -> void:
 				_charge_lease(pid, ls)
 	if h == 23:
 		for ent in _entities():
-			if Ledger.cash(ent) < 0.0:
+			if Ledger.cash(ent) < 0.0 and not (ent == "player" and Careers.has_perk("no_overdraft_fee")):
 				Ledger.expense(ent, "bank_fees", float(cfg().get("overdraft_fee", 35)), "Overdraft fee", {"type": "fee"})
 	if h >= 8 and h <= 22:
 		check_solvency()
@@ -102,7 +102,7 @@ static func buy_day_pass() -> Dictionary:
 
 
 static func has_desk_access() -> bool:
-	return has_lease("nexus_cowork_desk") or int(D().get("day_pass", -1)) == Clock.day_index()
+	return has_lease("nexus_cowork_desk") or int(D().get("day_pass", -1)) == Clock.day_index() or Careers.has_perk("desk_access")
 
 
 static func check_solvency() -> void:

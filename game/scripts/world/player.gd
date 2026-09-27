@@ -96,8 +96,15 @@ func _facing_vec() -> Vector2:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") and focus != null and can_move():
 		get_viewport().set_input_as_handled()
-		rig.set_walking(false)
-		var target: Node = focus
-		UIRoot.set_prompt("")
-		focus = null
-		target.activate(self)
+		interact_now()
+
+
+## Use whatever is in reach (the E key, or a click/tap on the on-screen prompt).
+func interact_now() -> void:
+	if focus == null or not can_move():
+		return
+	rig.set_walking(false)
+	var target: Node = focus
+	UIRoot.set_prompt("")
+	focus = null
+	target.activate(self)

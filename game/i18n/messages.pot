@@ -5,27 +5,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: scripts/ui/hud.gd:163
-msgid "   ⚑ decision"
+#: scripts/ui/hud.gd:239
+msgid "   ◆ decision"
 msgstr ""
 
 #: scripts/ui/modals/decision_modal.gd:56
 msgid "  (not possible now)"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:256
+#: scripts/ui/modals/registration_modal.gd:48
+msgid "  (staff discount)"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:258
 msgid "  Ads/day"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:201
+#: scripts/ui/modals/company_os.gd:203
 msgid "  of which on hold (<2 days)"
 msgstr ""
 
-#: scripts/ui/hud.gd:138
+#: scripts/ui/hud.gd:213
 msgid "  ·  DAY %d"
 msgstr ""
 
-#: autoload/ui_root.gd:285
+#: autoload/ui_root.gd:320
 msgid "  ·  Open %s–%s"
 msgstr ""
 
@@ -33,19 +37,19 @@ msgstr ""
 msgid "  …and %d more"
 msgstr ""
 
-#: scripts/ui/hud.gd:163
-msgid "  ● %d new"
+#: scripts/ui/modals/company_os.gd:676
+msgid " (late: -20%)"
 msgstr ""
 
 #: scripts/sim/living.gd:80
 msgid " + deposit"
 msgstr ""
 
-#: scripts/sim/company.gd:56
+#: scripts/sim/company.gd:61
 msgid " co"
 msgstr ""
 
-#: scripts/sim/company.gd:56
+#: scripts/sim/company.gd:61
 msgid " inc"
 msgstr ""
 
@@ -53,19 +57,19 @@ msgstr ""
 msgid " late (penalty %s)"
 msgstr ""
 
-#: scripts/sim/company.gd:56
+#: scripts/sim/company.gd:61
 msgid " ltd"
 msgstr ""
 
-#: scripts/ui/hud.gd:149
+#: scripts/ui/hud.gd:224
 msgid " today"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:517
+#: scripts/ui/modals/company_os.gd:519
 msgid " · %d%% upfront"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:409
+#: scripts/ui/modals/company_os.gd:411
 msgid " · Net"
 msgstr ""
 
@@ -93,6 +97,14 @@ msgstr ""
 msgid "# What we look at"
 msgstr ""
 
+#: scripts/ui/modals/job_modal.gd:28
+msgid "$%d / hour · %s per 4-hour shift"
+msgstr ""
+
+#: scripts/ui/modals/job_modal.gd:45
+msgid "$%d/h · from %d shifts"
+msgstr ""
+
 #: data/dialogue/tom_office.json
 msgid "$1,600 a month, one month deposit. Lease has to be in a company name."
 msgstr ""
@@ -101,11 +113,19 @@ msgstr ""
 msgid "$30,000. A laptop. A phone. A city."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:435
+#: scripts/ui/modals/company_os.gd:635
+msgid "%d / %d h · due %s · %s · pays %s"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:437
 msgid "%d / %d units"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:516
+#: scripts/ui/modals/company_os.gd:636
+msgid "%d days after delivery"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:518
 msgid "%d days after signing"
 msgstr ""
 
@@ -113,8 +133,16 @@ msgstr ""
 msgid "%d h %d min"
 msgstr ""
 
+#: scripts/ui/modals/company_os.gd:651
+msgid "%d h · %d days · %s"
+msgstr ""
+
 #: scripts/sim/fmt.gd:46
 msgid "%d min"
+msgstr ""
+
+#: scripts/ui/modals/job_modal.gd:50
+msgid "%d more shift(s) to %s"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:138
@@ -125,11 +153,11 @@ msgstr ""
 msgid "%d units"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:561
+#: scripts/ui/modals/company_os.gd:563
 msgid "%d%% upfront"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:365
+#: scripts/ui/modals/company_os.gd:367
 msgid "%d/%d units incl. incoming"
 msgstr ""
 
@@ -141,16 +169,20 @@ msgstr ""
 msgid "%s (personal seller)"
 msgstr ""
 
-#: scripts/world/actions.gd:69
+#: scripts/world/actions.gd:74
 msgid "%s is already registered (%s)."
 msgstr ""
 
-#: scripts/world/actions.gd:153
+#: scripts/world/actions.gd:160
 msgid "%s is busy."
 msgstr ""
 
-#: autoload/scene_router.gd:162
+#: autoload/scene_router.gd:163
 msgid "%s is closed. Open %s–%s, %s."
+msgstr ""
+
+#: scripts/sim/careers.gd:267
+msgid "%s paid %s."
 msgstr ""
 
 #: scripts/sim/contracts.gd:188
@@ -171,6 +203,18 @@ msgstr ""
 
 #: scripts/sim/ecommerce.gd:91
 msgid "%s: %d × %s on Net %d"
+msgstr ""
+
+#: scripts/sim/careers.gd:248
+msgid "%s: It's late, so we've knocked 20%% off. Invoice for %s noted."
+msgstr ""
+
+#: scripts/sim/careers.gd:247
+msgid "%s: Received, thanks! Invoice for %s noted."
+msgstr ""
+
+#: scripts/sim/careers.gd:284
+msgid "%s: We had to cancel the project. We won't be paying for it."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:142
@@ -205,6 +249,10 @@ msgstr ""
 msgid "0 · Solo"
 msgstr ""
 
+#: data/jobs/parcel_sorter.json
+msgid "15% off PostPoint drop-off shipping for your own parcels."
+msgstr ""
+
 #: data/events/customer_return.json
 msgid "1★ review, dispute risk."
 msgstr ""
@@ -221,6 +269,10 @@ msgstr ""
 msgid "30% partial refund"
 msgstr ""
 
+#: data/jobs/bank_teller.json
+msgid "A bakery owner asks for a loan. Sofia asks for three months of books. You see why."
+msgstr ""
+
 #: scripts/frontend/main_menu.gd:36
 msgid "A business-simulation RPG in a living, modern city."
 msgstr ""
@@ -229,8 +281,24 @@ msgstr ""
 msgid "A contract offer is waiting in Contracts."
 msgstr ""
 
+#: data/jobs/city_clerk.json
+msgid "A food-truck owner needs four permits. You find the one form that covers all of them."
+msgstr ""
+
+#: data/jobs/cowork_host.json
+msgid "A member asks where to find cheap suppliers. You point them to Ken."
+msgstr ""
+
 #: scripts/ui/modals/lease_modal.gd:25
 msgid "A real office: your company name on the door and the sign, a proper desk for Company OS, and a stockroom so boxes stop living in your apartment. It's also %s every month whether you sell anything or not."
+msgstr ""
+
+#: data/jobs/barista.json
+msgid "A regular tells you she only buys what she can see on the counter. Noted."
+msgstr ""
+
+#: data/jobs/parcel_sorter.json
+msgid "A seller drops off twenty parcels with no labels. You feel their pain."
 msgstr ""
 
 #: scripts/ui/modals/wardrobe_modal.gd:36
@@ -249,7 +317,7 @@ msgstr ""
 msgid "AM"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:410
+#: scripts/ui/modals/company_os.gd:412
 msgid "ARRIVES "
 msgstr ""
 
@@ -265,7 +333,7 @@ msgstr ""
 msgid "AUD"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:518
+#: scripts/ui/modals/company_os.gd:520
 msgid "AUD (Aurelia dollar)"
 msgstr ""
 
@@ -277,7 +345,7 @@ msgstr ""
 msgid "AWAITING PICKUP"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:540
+#: scripts/ui/modals/company_os.gd:542 scripts/ui/modals/company_os.gd:655
 msgid "Accept"
 msgstr ""
 
@@ -293,7 +361,7 @@ msgstr ""
 msgid "Ad prices spike"
 msgstr ""
 
-#: scripts/sim/company.gd:97
+#: scripts/sim/company.gd:102
 msgid "Additional founder capital"
 msgstr ""
 
@@ -309,7 +377,7 @@ msgstr ""
 msgid "Advertising"
 msgstr ""
 
-#: scripts/ui/hud.gd:141
+#: scripts/ui/hud.gd:216
 msgid "Afternoon · Sunny"
 msgstr ""
 
@@ -349,8 +417,16 @@ msgstr ""
 msgid "Ana"
 msgstr ""
 
+#: data/jobs/city_clerk.json
+msgid "Ana shows you the queue trick: ticket numbers are a suggestion."
+msgstr ""
+
 #: scripts/ui/modals/registration_modal.gd:24
 msgid "Ana: \"All done. Congratulations. Open a business account at Nexus Bank and you're set.\""
+msgstr ""
+
+#: scripts/ui/modals/job_modal.gd:29
+msgid "Any time %s–%s, %s · one shift a day"
 msgstr ""
 
 #: autoload/clock.gd:14
@@ -375,6 +451,10 @@ msgstr ""
 
 #: data/character/options.json
 msgid "Auburn"
+msgstr ""
+
+#: data/economy/freelance.json
+msgid "Audit the online store of %s"
 msgstr ""
 
 #: autoload/clock.gd:14
@@ -421,7 +501,7 @@ msgstr ""
 msgid "Average quality."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:438
+#: scripts/ui/modals/company_os.gd:440
 msgid "Avg cost"
 msgstr ""
 
@@ -429,7 +509,7 @@ msgstr ""
 msgid "Aviation"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:345
+#: scripts/ui/modals/company_os.gd:347
 msgid "Awaiting courier"
 msgstr ""
 
@@ -465,12 +545,16 @@ msgstr ""
 msgid "Bank"
 msgstr ""
 
-#: data/economy/settlement_methods.json scripts/ui/modals/company_os.gd:518
+#: data/economy/settlement_methods.json scripts/ui/modals/company_os.gd:520
 msgid "Bank transfer"
 msgstr ""
 
 #: data/city/aurelia.json
 msgid "Banks, towers, investors, lawyers."
+msgstr ""
+
+#: data/jobs/barista.json
+msgid "Barista"
 msgstr ""
 
 #: data/buildings/byte_and_bean.json
@@ -549,8 +633,20 @@ msgstr ""
 msgid "Budget raised."
 msgstr ""
 
+#: data/jobs/city_clerk.json
+msgid "Budget season. Everyone is very polite and very tired."
+msgstr ""
+
 #: data/events/ad_cost_spike.json
 msgid "Budget unchanged."
+msgstr ""
+
+#: data/economy/freelance.json
+msgid "Build a cash-flow spreadsheet for %s"
+msgstr ""
+
+#: data/economy/freelance.json
+msgid "Build an investor pitch deck for %s"
 msgstr ""
 
 #: data/character/options.json
@@ -561,7 +657,7 @@ msgstr ""
 msgid "Business Board"
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:9
+#: scripts/ui/modals/business_board.gd:12
 msgid "Business Board — Nexus Co-work"
 msgstr ""
 
@@ -593,7 +689,11 @@ msgstr ""
 msgid "Business type"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:393
+#: scripts/ui/modals/business_board.gd:20
+msgid "Businesses"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:395
 msgid "Buy %s"
 msgstr ""
 
@@ -602,7 +702,7 @@ msgid "Buy a day pass ($15)"
 msgstr ""
 
 #: data/story/chapters.json
-msgid "Buy low. Sell less low. Got it 😂"
+msgid "Buy low. Sell less low. Got it, haha."
 msgstr ""
 
 #: data/businesses/ecommerce.json
@@ -613,7 +713,7 @@ msgstr ""
 msgid "Buy your first stock (Company OS → Operations). Laptop at home or a co-work desk."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:514
+#: scripts/ui/modals/company_os.gd:516
 msgid "Buyer"
 msgstr ""
 
@@ -633,7 +733,7 @@ msgstr ""
 msgid "CASH"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:198
+#: scripts/ui/modals/company_os.gd:200
 msgid "CASH POSITION"
 msgstr ""
 
@@ -665,7 +765,7 @@ msgstr ""
 msgid "COMPANY VALUE"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:549
+#: scripts/ui/modals/company_os.gd:551
 msgid "COUNTER-OFFER"
 msgstr ""
 
@@ -681,6 +781,10 @@ msgstr ""
 msgid "Cafe / Food"
 msgstr ""
 
+#: data/jobs/barista.json
+msgid "Café Manager"
+msgstr ""
+
 #: scripts/ui/modals/sleep_modal.gd:15
 msgid "Call it a day? You'll wake up at 7:00 AM. The game autosaves."
 msgstr ""
@@ -689,7 +793,7 @@ msgstr ""
 msgid "Call me when you can do volume."
 msgstr ""
 
-#: autoload/scene_router.gd:78
+#: autoload/scene_router.gd:79
 msgid "Call me. Or text. Or whatever."
 msgstr ""
 
@@ -697,7 +801,7 @@ msgstr ""
 msgid "Campaigns, creators and reputation."
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:41
+#: scripts/ui/modals/business_board.gd:60
 msgid "Can grow into"
 msgstr ""
 
@@ -709,6 +813,10 @@ msgstr ""
 msgid "Can't do that."
 msgstr ""
 
+#: scripts/ui/modals/job_modal.gd:62
+msgid "Can't start a shift now: %s."
+msgstr ""
+
 #: scripts/ui/modals/metro_modal.gd:61 scripts/ui/modals/registration_modal.gd:52
 msgid "Cancel"
 msgstr ""
@@ -717,7 +825,7 @@ msgstr ""
 msgid "Capital contributed in kind by founder"
 msgstr ""
 
-#: scripts/sim/company.gd:81
+#: scripts/sim/company.gd:86
 msgid "Capital injected into %s"
 msgstr ""
 
@@ -725,11 +833,11 @@ msgstr ""
 msgid "Carry them to PostPoint yourself (cheaper, costs your time)"
 msgstr ""
 
-#: scripts/ui/hud.gd:166
+#: scripts/ui/hud.gd:244
 msgid "Carrying %d parcel%s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:199 scripts/ui/modals/info_modal.gd:70
+#: scripts/ui/modals/company_os.gd:201 scripts/ui/modals/info_modal.gd:70
 msgid "Cash in bank"
 msgstr ""
 
@@ -741,11 +849,11 @@ msgstr ""
 msgid "Cash now, big loss on inventory."
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:42
+#: scripts/ui/modals/month_close_modal.gd:44
 msgid "Cash — end of month"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:39
+#: scripts/ui/modals/month_close_modal.gd:41
 msgid "Cash — start of month"
 msgstr ""
 
@@ -789,7 +897,7 @@ msgstr ""
 msgid "Check your phone (Tab)"
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:61
+#: scripts/ui/modals/business_board.gd:125
 msgid "Chose a first business: ecommerce."
 msgstr ""
 
@@ -813,19 +921,39 @@ msgstr ""
 msgid "Civic Center"
 msgstr ""
 
+#: data/economy/freelance.json
+msgid "Clean up the books of %s"
+msgstr ""
+
 #: data/world/years.json
 msgid "Clearing Crisis"
+msgstr ""
+
+#: data/npcs/client.json
+msgid "Client"
+msgstr ""
+
+#: scripts/sim/careers.gd:264
+msgid "Client payment — %s"
+msgstr ""
+
+#: scripts/ui/modals/business_board.gd:73
+msgid "Clients post small projects every morning. Accept one, put the hours in at any laptop (Company OS → Freelance), deliver before the deadline and get paid on the client's terms. On-time work raises your stars and your rate."
 msgstr ""
 
 #: data/regions/solterra.json
 msgid "Climate"
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:55 scripts/ui/modals/city_map_modal.gd:112 scripts/ui/modals/cowork_desk_modal.gd:27 scripts/ui/modals/info_modal.gd:29
+#: scripts/ui/modals/business_board.gd:30 scripts/ui/modals/city_map_modal.gd:112 scripts/ui/modals/cowork_desk_modal.gd:27 scripts/ui/modals/info_modal.gd:29
 msgid "Close"
 msgstr ""
 
-#: scripts/sim/month_close.gd:66
+#: scripts/world/door_trigger.gd:39
+msgid "Closed"
+msgstr ""
+
+#: scripts/sim/month_close.gd:67
 msgid "Closed %s: business profit %s, cash %s."
 msgstr ""
 
@@ -837,15 +965,19 @@ msgstr ""
 msgid "Co-working, incubators and a very caffeinated founder scene."
 msgstr ""
 
-#: scripts/world/actions.gd:158
+#: scripts/world/actions.gd:171
 msgid "Coffee"
 msgstr ""
 
-#: scripts/world/actions.gd:162
+#: data/jobs/cowork_host.json
+msgid "Coffee machine, printer, Wi-Fi: you fix all three before lunch."
+msgstr ""
+
+#: scripts/world/actions.gd:175
 msgid "Coffee — %s."
 msgstr ""
 
-#: scripts/world/actions.gd:119
+#: scripts/world/actions.gd:126
 msgid "Coffee — %s. Tastes like possibility."
 msgstr ""
 
@@ -861,8 +993,20 @@ msgstr ""
 msgid "Commodity prices"
 msgstr ""
 
+#: data/jobs/cowork_host.json
+msgid "Community Host"
+msgstr ""
+
+#: data/jobs/cowork_host.json
+msgid "Community Manager"
+msgstr ""
+
 #: scripts/ui/modals/bank_modal.gd:55
 msgid "Company"
+msgstr ""
+
+#: scripts/ui/tutorial.gd:21
+msgid "Company OS"
 msgstr ""
 
 #: scripts/ui/modals/registration_modal.gd:28
@@ -881,7 +1025,7 @@ msgstr ""
 msgid "Company registration"
 msgstr ""
 
-#: scripts/sim/company.gd:61
+#: scripts/sim/company.gd:66
 msgid "Company registration fee — %s"
 msgstr ""
 
@@ -893,15 +1037,11 @@ msgstr ""
 msgid "Complex regulation"
 msgstr ""
 
-#: data/businesses/consulting.json
-msgid "Consulting"
-msgstr ""
-
 #: data/regions/karu.json
 msgid "Consumer"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:482
+#: scripts/ui/modals/company_os.gd:484
 msgid "Contacts"
 msgstr ""
 
@@ -909,7 +1049,7 @@ msgstr ""
 msgid "Containers, customs, freight."
 msgstr ""
 
-#: scripts/frontend/main_menu.gd:47 scripts/ui/modals/month_close_modal.gd:52
+#: scripts/frontend/main_menu.gd:47 scripts/ui/modals/month_close_modal.gd:54
 msgid "Continue"
 msgstr ""
 
@@ -941,6 +1081,10 @@ msgstr ""
 msgid "Could I get a loan?"
 msgstr ""
 
+#: data/jobs/bank_teller.json
+msgid "Count cash, open accounts and watch how the bank judges small businesses."
+msgstr ""
+
 #: scripts/sim/contracts.gd:84
 msgid "Counter: %s/unit, Net %d%s"
 msgstr ""
@@ -969,7 +1113,7 @@ msgstr ""
 msgid "Courier · Express 1d (%s)"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:518
+#: scripts/ui/modals/company_os.gd:520
 msgid "Currency"
 msgstr ""
 
@@ -989,7 +1133,7 @@ msgstr ""
 msgid "DECLINED"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:26 scripts/ui/modals/company_os.gd:410
+#: scripts/ui/modals/company_os.gd:26 scripts/ui/modals/company_os.gd:412
 msgid "DELIVERED"
 msgstr ""
 
@@ -1049,6 +1193,10 @@ msgstr ""
 msgid "Day pass is $15. Or $350 a month for a hot desk."
 msgstr ""
 
+#: scripts/sim/careers.gd:280
+msgid "Deadline missed: %s. Deliver soon, the fee drops."
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Deal with an unhappy customer (check your phone)"
 msgstr ""
@@ -1077,7 +1225,7 @@ msgstr ""
 msgid "Decision pending: %s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:547
+#: scripts/ui/modals/company_os.gd:549
 msgid "Decline"
 msgstr ""
 
@@ -1093,15 +1241,19 @@ msgstr ""
 msgid "Deep supplier base"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:360
+#: scripts/ui/modals/company_os.gd:362
 msgid "Deliver to:"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:676
+msgid "Delivered and invoiced: %s."
 msgstr ""
 
 #: scripts/sim/contracts.gd:154
 msgid "Delivered%s. Invoice %s due in %d days."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:580
+#: scripts/ui/modals/company_os.gd:582
 msgid "Delivered. Invoice %s due in %d days."
 msgstr ""
 
@@ -1109,7 +1261,7 @@ msgstr ""
 msgid "Delivered: %d × %s → %s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:516
+#: scripts/ui/modals/company_os.gd:518
 msgid "Delivery"
 msgstr ""
 
@@ -1125,8 +1277,12 @@ msgstr ""
 msgid "Deposit received from %s (%s)"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:207
+#: scripts/ui/modals/company_os.gd:209
 msgid "Deposits"
+msgstr ""
+
+#: data/jobs/parcel_sorter.json
+msgid "Depot Supervisor"
 msgstr ""
 
 #: data/regions/auroria.json
@@ -1139,6 +1295,10 @@ msgstr ""
 
 #: scripts/ui/modals/lease_modal.gd:24
 msgid "Desks"
+msgstr ""
+
+#: scripts/ui/modals/business_board.gd:113
+msgid "Details / apply"
 msgstr ""
 
 #: data/world/years.json
@@ -1182,7 +1342,7 @@ msgid "Drop off parcels"
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:119
-msgid "Dropped %d %s at %s. Don't let them sit around 👍"
+msgid "Dropped %d %s at %s. Don't let them sit around."
 msgstr ""
 
 #: data/dialogue/dara_postpoint.json
@@ -1193,8 +1353,8 @@ msgstr ""
 msgid "E / click to skip"
 msgstr ""
 
-#: scripts/ui/dialogue_box.gd:65
-msgid "E / click ▸"
+#: scripts/ui/dialogue_box.gd:66
+msgid "E / click ›"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:131
@@ -1203,6 +1363,10 @@ msgstr ""
 
 #: data/character/options.json
 msgid "EXECUTIVE"
+msgstr ""
+
+#: scripts/world/interior.gd:46
+msgid "EXIT"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:29
@@ -1225,7 +1389,7 @@ msgstr ""
 msgid "Ecommerce"
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:62
+#: scripts/ui/modals/business_board.gd:126
 msgid "Ecommerce it is. Order stock from a laptop or a desk."
 msgstr ""
 
@@ -1261,8 +1425,20 @@ msgstr ""
 msgid "Energy price swings"
 msgstr ""
 
-#: scripts/ui/hud.gd:141
+#: scripts/world/door_trigger.gd:39
+msgid "Enter %s"
+msgstr ""
+
+#: scripts/ui/hud.gd:111
+msgid "Esc"
+msgstr ""
+
+#: scripts/ui/hud.gd:216
 msgid "Evening"
+msgstr ""
+
+#: data/jobs/parcel_sorter.json
+msgid "Evening cut-off: everything out by 19:00, and it is."
 msgstr ""
 
 #: scripts/sim/effects.gd:22
@@ -1273,12 +1449,24 @@ msgstr ""
 msgid "Event income"
 msgstr ""
 
+#: data/jobs/cowork_host.json
+msgid "Events Lead"
+msgstr ""
+
+#: scripts/ui/tutorial.gd:16
+msgid "Every room's exit is the glowing EXIT mat at the bottom. Walk onto it to go outside."
+msgstr ""
+
 #: data/regions/aurelia.json
 msgid "Everything starts here"
 msgstr ""
 
 #: data/economy/marketplace.json
 msgid "Exactly as described. Fast shipping."
+msgstr ""
+
+#: scripts/ui/tutorial.gd:275
+msgid "Exit"
 msgstr ""
 
 #: data/economy/shipping.json
@@ -1307,10 +1495,6 @@ msgstr ""
 
 #: data/districts/civic_center.json
 msgid "FINANCIAL →"
-msgstr ""
-
-#: scripts/ui/modals/business_board.gd:20
-msgid "FIRST BUSINESS (P0)"
 msgstr ""
 
 #: data/character/options.json
@@ -1381,6 +1565,10 @@ msgstr ""
 msgid "Find supply, find buyers, move goods across borders."
 msgstr ""
 
+#: data/economy/freelance.json
+msgid "Find three backup suppliers for %s"
+msgstr ""
+
 #: data/story/chapters.json
 msgid "First Customer"
 msgstr ""
@@ -1421,6 +1609,10 @@ msgstr ""
 msgid "Flight"
 msgstr ""
 
+#: scripts/ui/tutorial.gd:17
+msgid "Follow the gold arrow"
+msgstr ""
+
 #: data/regions/solterra.json
 msgid "Food"
 msgstr ""
@@ -1445,28 +1637,52 @@ msgstr ""
 msgid "Found it cheaper elsewhere."
 msgstr ""
 
-#: scripts/sim/company.gd:64
+#: scripts/sim/company.gd:69
 msgid "Founded %s (registration %s)."
 msgstr ""
 
-#: scripts/sim/company.gd:82
+#: scripts/sim/company.gd:87
 msgid "Founder capital (opening deposit)"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:478
+#: scripts/ui/modals/company_os.gd:480
 msgid "Founder · does everything"
+msgstr ""
+
+#: data/jobs/barista.json
+msgid "Free coffee at Bloom Coffee while you work there."
+msgstr ""
+
+#: data/jobs/cowork_host.json
+msgid "Free hot-desk access at Nexus Co-work while you work there."
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:8
+msgid "Freelance"
+msgstr ""
+
+#: data/businesses/consulting.json
+msgid "Freelance Consulting"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:595
+msgid "Freelance consulting"
 msgstr ""
 
 #: autoload/clock.gd:13
 msgid "Fri"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:340
+#: scripts/ui/modals/company_os.gd:342
 msgid "Fulfilment pipeline"
 msgstr ""
 
 #: data/story/chapters.json
 msgid "Get the parcel delivered to your customer"
+msgstr ""
+
+#: scripts/ui/tutorial.gd:20
+msgid "Getting around the city"
 msgstr ""
 
 #: data/world/years.json
@@ -1533,6 +1749,14 @@ msgstr ""
 msgid "Growth market"
 msgstr ""
 
+#: scripts/ui/modals/pause_menu.gd:38
+msgid "Guide arrow"
+msgstr ""
+
+#: scripts/ui/modals/job_modal.gd:24
+msgid "HIRING"
+msgstr ""
+
 #: data/character/options.json
 msgid "HOME"
 msgstr ""
@@ -1551,6 +1775,10 @@ msgstr ""
 
 #: data/dialogue/jun_first.json
 msgid "Half my regulars found work there. Just walk east."
+msgstr ""
+
+#: data/jobs/city_clerk.json
+msgid "Half-price company registration fees."
 msgstr ""
 
 #: data/city/aurelia.json
@@ -1613,7 +1841,15 @@ msgstr ""
 msgid "High-paid talent"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:481
+#: scripts/sim/careers.gd:78
+msgid "Hired as %s at %s."
+msgstr ""
+
+#: scripts/ui/modals/job_modal.gd:80
+msgid "Hired! You're now a %s at %s."
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:483
 msgid "Hiring, payroll and staff capacity arrive in P1 (Aurelia expansion). For now every order is packed by you — which is why time matters."
 msgstr ""
 
@@ -1633,7 +1869,7 @@ msgstr ""
 msgid "Home rent %s due on the 14th."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:194
+#: scripts/ui/modals/company_os.gd:196
 msgid "Home rent + living"
 msgstr ""
 
@@ -1701,11 +1937,15 @@ msgstr ""
 msgid "Import permits & customs"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:345 scripts/ui/phone_ui.gd:252
+#: scripts/ui/modals/company_os.gd:611
+msgid "In progress"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:347 scripts/ui/phone_ui.gd:252
 msgid "In transit"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:438
+#: scripts/ui/modals/company_os.gd:440
 msgid "Incoming"
 msgstr ""
 
@@ -1745,11 +1985,11 @@ msgstr ""
 msgid "Inventory"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:460
+#: scripts/ui/modals/company_os.gd:462
 msgid "Inventory is cash you can't spend. The ledger values it at average cost; a liquidator pays about 40% of that."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:586
+#: scripts/ui/modals/company_os.gd:588
 msgid "Invoice %s · due %s"
 msgstr ""
 
@@ -1757,7 +1997,15 @@ msgstr ""
 msgid "Invoice paid by %s (%s)"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:202
+#: scripts/sim/careers.gd:233
+msgid "Invoice — %s"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:668
+msgid "Invoiced, not yet paid"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:204
 msgid "Invoices receivable"
 msgstr ""
 
@@ -1837,7 +2085,7 @@ msgstr ""
 msgid "Ken: \"Smart. Shipping tomorrow.\""
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:27
+#: scripts/ui/modals/business_board.gd:46
 msgid "LATER"
 msgstr ""
 
@@ -1849,7 +2097,7 @@ msgstr ""
 msgid "LEGEND"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:247
+#: scripts/ui/modals/company_os.gd:249
 msgid "LIVE"
 msgstr ""
 
@@ -1877,7 +2125,7 @@ msgstr ""
 msgid "Laptop · café table"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:518
+#: scripts/ui/modals/company_os.gd:520
 msgid "Late penalty"
 msgstr ""
 
@@ -1909,6 +2157,10 @@ msgstr ""
 msgid "Leases must be in a registered company's name."
 msgstr ""
 
+#: scripts/ui/tutorial.gd:16
+msgid "Leaving a room"
+msgstr ""
+
 #: data/npcs/lee.json
 msgid "Lee"
 msgstr ""
@@ -1917,8 +2169,16 @@ msgstr ""
 msgid "Left earbud's dead. Out of the box."
 msgstr ""
 
+#: scripts/sim/careers.gd:88
+msgid "Left the job at %s."
+msgstr ""
+
 #: data/world/years.json
 msgid "Legacy"
+msgstr ""
+
+#: data/jobs/city_clerk.json
+msgid "Licensing Officer"
 msgstr ""
 
 #: scripts/ui/phone_ui.gd:263
@@ -1929,11 +2189,11 @@ msgstr ""
 msgid "Light"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:334
+#: scripts/ui/modals/company_os.gd:336
 msgid "Listed %s at %s. Took %s."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:233
+#: scripts/ui/modals/company_os.gd:235
 msgid "Listings on ShopLane (10% fee · weekly payout)"
 msgstr ""
 
@@ -2025,11 +2285,11 @@ msgstr ""
 msgid "MONTHLY REVENUE"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:388
+#: scripts/ui/modals/company_os.gd:390
 msgid "MOQ %d · %dd · %s duds"
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:40
+#: scripts/ui/modals/business_board.gd:59
 msgid "Main costs"
 msgstr ""
 
@@ -2049,6 +2309,10 @@ msgstr ""
 msgid "Manufacturing & Logistics"
 msgstr ""
 
+#: scripts/ui/hud.gd:110
+msgid "Map"
+msgstr ""
+
 #: autoload/clock.gd:14
 msgid "Mar"
 msgstr ""
@@ -2061,7 +2325,7 @@ msgstr ""
 msgid "Marcus Reed. I run business lending here."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:266
+#: scripts/ui/modals/company_os.gd:268
 msgid "Market ~%s · expect ~%.1f orders/day · %d views · %d orders · in stock %d · unit margin after fee+shipping ≈ %s"
 msgstr ""
 
@@ -2081,12 +2345,12 @@ msgstr ""
 msgid "May"
 msgstr ""
 
-#: data/npcs/maya.json scripts/ui/modals/company_os.gd:492
+#: data/npcs/maya.json scripts/ui/modals/company_os.gd:494
 msgid "Maya"
 msgstr ""
 
 #: data/events/viral_mention.json
-msgid "Maya: \"Enjoy your 15 minutes 😎\""
+msgid "Maya: \"Enjoy your 15 minutes, superstar.\""
 msgstr ""
 
 #: data/dialogue/marcus_loan.json
@@ -2101,6 +2365,10 @@ msgstr ""
 msgid "Media / Advertising"
 msgstr ""
 
+#: scripts/ui/hud.gd:111
+msgid "Menu"
+msgstr ""
+
 #: scripts/ui/phone_ui.gd:120 scripts/ui/phone_ui.gd:169
 msgid "Messages"
 msgstr ""
@@ -2109,11 +2377,11 @@ msgstr ""
 msgid "Messy"
 msgstr ""
 
-#: scripts/world/district.gd:60
+#: scripts/ui/tutorial.gd:323 scripts/world/district.gd:60
 msgid "Metro"
 msgstr ""
 
-#: autoload/scene_router.gd:193
+#: autoload/scene_router.gd:194
 msgid "Metro fare to %s"
 msgstr ""
 
@@ -2125,7 +2393,7 @@ msgstr ""
 msgid "Metro — %s Station"
 msgstr ""
 
-#: scripts/sim/company.gd:78
+#: scripts/sim/company.gd:83
 msgid "Minimum opening deposit is $500."
 msgstr ""
 
@@ -2133,12 +2401,16 @@ msgstr ""
 msgid "Minimum order is %d units."
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:38
+#: scripts/ui/modals/business_board.gd:57
 msgid "Minimum starting capital"
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:401
 msgid "Missed a sale: %s is out of stock."
+msgstr ""
+
+#: scripts/ui/modals/business_board.gd:25
+msgid "Mix and match: run a business and keep a job."
 msgstr ""
 
 #: data/regions/aurelia.json
@@ -2149,7 +2421,7 @@ msgstr ""
 msgid "Mon"
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:39
+#: scripts/ui/modals/business_board.gd:58
 msgid "Money comes from"
 msgstr ""
 
@@ -2169,7 +2441,7 @@ msgstr ""
 msgid "Monthly rent"
 msgstr ""
 
-#: autoload/scene_router.gd:161
+#: autoload/scene_router.gd:162 scripts/ui/modals/job_modal.gd:30
 msgid "Mon–Fri"
 msgstr ""
 
@@ -2177,7 +2449,7 @@ msgstr ""
 msgid "More outfits (Executive, Luxury Citywear, Travel, Formal) and accessories (hats, bags, jewellery, watches) come with the wardrobe & clothing store — planned."
 msgstr ""
 
-#: scripts/ui/hud.gd:141
+#: scripts/ui/hud.gd:216
 msgid "Morning · Sunny"
 msgstr ""
 
@@ -2189,6 +2461,10 @@ msgstr ""
 msgid "Moved to Aurelia City with $%s in savings."
 msgstr ""
 
+#: scripts/ui/tutorial.gd:14
+msgid "Moving around"
+msgstr ""
+
 #: data/npcs/landlord.json
 msgid "Mr. Okafor (landlord)"
 msgstr ""
@@ -2197,11 +2473,11 @@ msgstr ""
 msgid "NAME"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:523
+#: scripts/ui/modals/company_os.gd:525
 msgid "NEGOTIATION"
 msgstr ""
 
-#: autoload/ui_root.gd:302
+#: autoload/ui_root.gd:337
 msgid "NEW LOCATION"
 msgstr ""
 
@@ -2225,7 +2501,7 @@ msgstr ""
 msgid "Navy dye"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:533
+#: scripts/ui/modals/company_os.gd:535
 msgid "Needs a registered company to sign."
 msgstr ""
 
@@ -2233,11 +2509,11 @@ msgstr ""
 msgid "Needs attention"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:397 scripts/ui/modals/company_os.gd:557
+#: scripts/ui/modals/company_os.gd:399 scripts/ui/modals/company_os.gd:559
 msgid "Net %d"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:517
+#: scripts/ui/modals/company_os.gd:519
 msgid "Net %d%s"
 msgstr ""
 
@@ -2273,6 +2549,10 @@ msgstr ""
 msgid "Nexus Bank"
 msgstr ""
 
+#: data/jobs/bank_teller.json
+msgid "Nexus Bank waives your overdraft fees while you work there."
+msgstr ""
+
 #: scripts/ui/modals/bank_modal.gd:12
 msgid "Nexus Bank — "
 msgstr ""
@@ -2305,7 +2585,7 @@ msgstr ""
 msgid "Nexus Co-work, over in Startup Hub. They've got a board — suppliers, gigs, whatever."
 msgstr ""
 
-#: scripts/ui/hud.gd:141
+#: scripts/ui/hud.gd:216
 msgid "Night"
 msgstr ""
 
@@ -2317,7 +2597,7 @@ msgstr ""
 msgid "No changes."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:499
+#: scripts/ui/modals/company_os.gd:501
 msgid "No contracts yet. B2B customers want invoices from a registered company — and they usually pay later (Net 30)."
 msgstr ""
 
@@ -2329,7 +2609,11 @@ msgstr ""
 msgid "No defects on arrival"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:236
+#: scripts/ui/modals/company_os.gd:614
+msgid "No gigs in progress. Pick one below."
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:238
 msgid "No listings yet."
 msgstr ""
 
@@ -2337,7 +2621,11 @@ msgstr ""
 msgid "No listings yet. Buy stock (Operations), then list it (Sales)."
 msgstr ""
 
-#: scripts/world/actions.gd:104
+#: scripts/ui/modals/company_os.gd:644
+msgid "No new offers. More arrive every morning at 8:00."
+msgstr ""
+
+#: scripts/world/actions.gd:111
 msgid "No one's behind the counter."
 msgstr ""
 
@@ -2357,7 +2645,11 @@ msgstr ""
 msgid "No such decision."
 msgstr ""
 
-#: scripts/world/actions.gd:71
+#: scripts/sim/careers.gd:217
+msgid "No such gig in progress."
+msgstr ""
+
+#: scripts/world/actions.gd:76
 msgid "Nobody at the counter. Registration: Mon–Fri 9:00–17:00."
 msgstr ""
 
@@ -2373,7 +2665,7 @@ msgstr ""
 msgid "Northridge"
 msgstr ""
 
-#: scripts/sim/company.gd:94
+#: scripts/sim/company.gd:99
 msgid "Not enough cash."
 msgstr ""
 
@@ -2389,7 +2681,7 @@ msgstr ""
 msgid "Not great. Feels cheap."
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:54
+#: scripts/ui/modals/business_board.gd:81
 msgid "Not in this build. %s is planned for %s — it will play differently, not just a new icon."
 msgstr ""
 
@@ -2413,7 +2705,7 @@ msgstr ""
 msgid "Nothing to deliver."
 msgstr ""
 
-#: scripts/world/actions.gd:63
+#: scripts/world/actions.gd:68
 msgid "Nothing to drop off. Pack orders at your packing table and choose 'Carry to PostPoint'."
 msgstr ""
 
@@ -2473,6 +2765,10 @@ msgstr ""
 msgid "Of course you are."
 msgstr ""
 
+#: scripts/ui/modals/pause_menu.gd:41
+msgid "Off"
+msgstr ""
+
 #: data/events/customer_return_first.json
 msgid "Offer 30% back, they keep it"
 msgstr ""
@@ -2501,7 +2797,11 @@ msgstr ""
 msgid "Old Town"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:438
+#: scripts/ui/modals/pause_menu.gd:40
+msgid "On"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:440
 msgid "On hand"
 msgstr ""
 
@@ -2541,11 +2841,11 @@ msgstr ""
 msgid "Open for Business"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:210
+#: scripts/ui/modals/company_os.gd:212
 msgid "Open last month close (%s)"
 msgstr ""
 
-#: scripts/sim/company.gd:86
+#: scripts/sim/company.gd:91
 msgid "Opened a business account at Nexus Bank with %s of founder capital."
 msgstr ""
 
@@ -2573,7 +2873,7 @@ msgstr ""
 msgid "Order through TradeLink on your laptop. Two days to your door."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:420
+#: scripts/ui/modals/company_os.gd:422
 msgid "Ordered %d × %s — %s. Arrives %s."
 msgstr ""
 
@@ -2605,15 +2905,15 @@ msgstr ""
 msgid "Overview"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:43
+#: scripts/ui/modals/month_close_modal.gd:45
 msgid "Owed to you (ShopLane + invoices)"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:41
+#: scripts/ui/modals/month_close_modal.gd:43
 msgid "Owner money in / out"
 msgstr ""
 
-#: scripts/sim/company.gd:99
+#: scripts/sim/company.gd:104
 msgid "Owner withdrawal"
 msgstr ""
 
@@ -2629,11 +2929,11 @@ msgstr ""
 msgid "PARTIAL REFUND"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:247
+#: scripts/ui/modals/company_os.gd:249
 msgid "PAUSED"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:247
+#: scripts/ui/modals/company_os.gd:249
 msgid "PAUSED · CAP"
 msgstr ""
 
@@ -2641,7 +2941,7 @@ msgstr ""
 msgid "PAYABLE"
 msgstr ""
 
-#: scripts/ui/hud.gd:79
+#: scripts/ui/hud.gd:83
 msgid "PERSONAL"
 msgstr ""
 
@@ -2657,11 +2957,15 @@ msgstr ""
 msgid "PM"
 msgstr ""
 
+#: autoload/ui_root.gd:195
+msgid "PROMOTED"
+msgstr ""
+
 #: scripts/ui/modals/pack_ship_modal.gd:31
 msgid "Pack %d order%s (%s)"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:574
+#: scripts/ui/modals/company_os.gd:576
 msgid "Pack & deliver %d units (B2B freight $40)"
 msgstr ""
 
@@ -2669,7 +2973,7 @@ msgstr ""
 msgid "Pack the order at your packing table, then ship it"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:345
+#: scripts/ui/modals/company_os.gd:347
 msgid "Packed"
 msgstr ""
 
@@ -2689,7 +2993,7 @@ msgstr ""
 msgid "Packed, not shipped"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:353
+#: scripts/ui/modals/company_os.gd:355
 msgid "Packing happens at a packing table where the stock is. Ship by courier (fee, no walk) or carry to PostPoint."
 msgstr ""
 
@@ -2709,12 +3013,24 @@ msgstr ""
 msgid "Paid supplier invoice %s: %s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:206
+#: data/jobs/parcel_sorter.json
+msgid "Parcel Sorter"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:208
 msgid "Parcels out for delivery"
 msgstr ""
 
 #: data/city/aurelia.json
 msgid "Parks, cafes and a waterfront lifestyle. Your first home."
+msgstr ""
+
+#: scripts/ui/modals/job_modal.gd:12
+msgid "Part-time job — %s"
+msgstr ""
+
+#: scripts/ui/modals/business_board.gd:20
+msgid "Part-time jobs"
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:705
@@ -2725,7 +3041,7 @@ msgstr ""
 msgid "Partial refund sent."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:263
+#: scripts/ui/modals/company_os.gd:265
 msgid "Pause"
 msgstr ""
 
@@ -2737,7 +3053,11 @@ msgstr ""
 msgid "Paused"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:517
+#: scripts/ui/modals/job_modal.gd:28
+msgid "Pay"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:519
 msgid "Payment terms"
 msgstr ""
 
@@ -2753,6 +3073,10 @@ msgstr ""
 msgid "People"
 msgstr ""
 
+#: scripts/ui/modals/job_modal.gd:31
+msgid "Perk"
+msgstr ""
+
 #: data/buildings/city_hall.json
 msgid "Permits & regulations"
 msgstr ""
@@ -2761,8 +3085,12 @@ msgstr ""
 msgid "Personal"
 msgstr ""
 
-#: scripts/sim/month_close.gd:38
+#: scripts/sim/month_close.gd:39
 msgid "Personal / sole proprietor"
+msgstr ""
+
+#: data/jobs/bank_teller.json
+msgid "Personal Banker"
 msgstr ""
 
 #: scripts/ui/phone_ui.gd:255
@@ -2781,8 +3109,20 @@ msgstr ""
 msgid "Personal seller limit reached. Your listings are paused until next month — or until you register a business."
 msgstr ""
 
+#: scripts/ui/hud.gd:108
+msgid "Phone"
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Photograph your product and list it on ShopLane (Company OS → Sales)"
+msgstr ""
+
+#: data/economy/freelance.json
+msgid "Plan a month of social posts for %s"
+msgstr ""
+
+#: data/economy/freelance.json
+msgid "Plan the product launch of %s"
 msgstr ""
 
 #: scripts/ui/modals/city_map_modal.gd:71
@@ -2857,7 +3197,7 @@ msgstr ""
 msgid "PostPoint — drop-off"
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:44
+#: scripts/ui/modals/business_board.gd:64
 msgid "Posted by Ken (TradeLink Wholesale): \"Earbuds $18, lamps $11.50, bottles $6.80, phone stands $3.40. MOQs apply. Order via laptop.\""
 msgstr ""
 
@@ -2873,7 +3213,15 @@ msgstr ""
 msgid "Presentation"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:252
+#: scripts/ui/tutorial.gd:20
+msgid "Press M for the city map. Walk off the edge of a street (follow the → signs) to reach the next district, or ride the Metro."
+msgstr ""
+
+#: scripts/ui/tutorial.gd:15
+msgid "Press Tab, or click Phone at the top right, to read your messages."
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:254
 msgid "Price"
 msgstr ""
 
@@ -2885,35 +3233,51 @@ msgstr ""
 msgid "Priya"
 msgstr ""
 
-#: autoload/ui_root.gd:263
+#: data/jobs/cowork_host.json
+msgid "Priya hands you the event calendar. It's full."
+msgstr ""
+
+#: autoload/ui_root.gd:298
 msgid "Problem report saved (screenshot + save + log). Send this folder to whoever invited you to test: %s"
+msgstr ""
+
+#: data/jobs/city_clerk.json
+msgid "Process permits and registrations at City Hall. Weekdays only, steady pay."
 msgstr ""
 
 #: scripts/ui/modals/registration_modal.gd:49
 msgid "Processing time"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:438 scripts/ui/modals/company_os.gd:514
+#: scripts/ui/modals/company_os.gd:440 scripts/ui/modals/company_os.gd:516
 msgid "Product"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:37
+#: scripts/ui/modals/month_close_modal.gd:39
 msgid "Profit after life costs"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:51
+#: scripts/ui/modals/month_close_modal.gd:53
 msgid "Profit this month: %s. Cash moved by %s. The gap (%s) is sitting in stock, in ShopLane's hands, or in unpaid invoices."
+msgstr ""
+
+#: scripts/sim/careers.gd:136
+msgid "Promoted to %s at %s."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:9
 msgid "Property"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:400
+#: data/jobs/barista.json
+msgid "Pull shots behind Jun's counter and learn how regulars decide what to buy."
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:402
 msgid "Purchase orders"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:518
+#: scripts/ui/modals/company_os.gd:520
 msgid "Quality"
 msgstr ""
 
@@ -2921,15 +3285,23 @@ msgstr ""
 msgid "Quality variance"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:515
+#: scripts/ui/modals/company_os.gd:517
 msgid "Quantity"
+msgstr ""
+
+#: data/jobs/bank_teller.json
+msgid "Quiet morning. You read the small-business lending policy twice."
 msgstr ""
 
 #: scripts/frontend/main_menu.gd:54
 msgid "Quit"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:40
+#: scripts/ui/modals/job_modal.gd:63
+msgid "Quit job"
+msgstr ""
+
+#: scripts/ui/modals/pause_menu.gd:49
 msgid "Quit to title"
 msgstr ""
 
@@ -2985,7 +3357,7 @@ msgstr ""
 msgid "Read: 'Small Business Lending'"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:275
+#: scripts/ui/modals/company_os.gd:277
 msgid "Ready to list (you have these in hand)"
 msgstr ""
 
@@ -2993,11 +3365,11 @@ msgstr ""
 msgid "Real Estate"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:300
+#: scripts/ui/modals/company_os.gd:302
 msgid "Recent orders"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:211
+#: scripts/ui/modals/company_os.gd:213
 msgid "Recent transactions"
 msgstr ""
 
@@ -3007,6 +3379,10 @@ msgstr ""
 
 #: data/buildings/nexus_cowork.json
 msgid "Reception — desks & day passes"
+msgstr ""
+
+#: data/jobs/city_clerk.json
+msgid "Records Clerk"
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:689
@@ -3049,7 +3425,7 @@ msgstr ""
 msgid "Register & pay"
 msgstr ""
 
-#: scripts/sim/company.gd:74
+#: scripts/sim/company.gd:79
 msgid "Register a company at City Hall first."
 msgstr ""
 
@@ -3097,7 +3473,7 @@ msgstr ""
 msgid "Rent $1,250 due the 14th"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:36
+#: scripts/ui/modals/month_close_modal.gd:38
 msgid "Rent (home) + living"
 msgstr ""
 
@@ -3137,7 +3513,11 @@ msgstr ""
 msgid "Replacement shipped."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:37
+#: scripts/ui/modals/pause_menu.gd:42
+msgid "Replay tutorial"
+msgstr ""
+
+#: scripts/ui/modals/pause_menu.gd:46
 msgid "Report a problem (F12)"
 msgstr ""
 
@@ -3145,11 +3525,15 @@ msgstr ""
 msgid "Reports"
 msgstr ""
 
+#: scripts/ui/modals/company_os.gd:610
+msgid "Reputation %.1f · rate about %s/h · %d delivered · %d late"
+msgstr ""
+
 #: data/city/aurelia.json
 msgid "Research and talent."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:438
+#: scripts/ui/modals/company_os.gd:440
 msgid "Reserved"
 msgstr ""
 
@@ -3165,7 +3549,7 @@ msgstr ""
 msgid "Respond"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:263 scripts/ui/modals/pause_menu.gd:12
+#: scripts/ui/modals/company_os.gd:265 scripts/ui/modals/pause_menu.gd:12
 msgid "Resume"
 msgstr ""
 
@@ -3181,12 +3565,16 @@ msgstr ""
 msgid "Revenue"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:587
+#: scripts/ui/modals/company_os.gd:589
 msgid "Revenue is booked. The cash isn't here yet."
 msgstr ""
 
 #: data/events/unexpected_large_order.json
 msgid "Review terms in Company OS → Contracts. Accept, counter or decline there."
+msgstr ""
+
+#: data/economy/freelance.json
+msgid "Review the prices of %s"
 msgstr ""
 
 #: data/events/viral_mention.json
@@ -3253,8 +3641,16 @@ msgstr ""
 msgid "Round glasses"
 msgstr ""
 
+#: data/jobs/parcel_sorter.json
+msgid "Route Planner"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:166
 msgid "Run it from home for now"
+msgstr ""
+
+#: data/jobs/cowork_host.json
+msgid "Run the front desk at Nexus: check in members, set up events, meet everyone."
 msgstr ""
 
 #: data/story/chapters.json
@@ -3277,6 +3673,10 @@ msgstr ""
 msgid "STAGE"
 msgstr ""
 
+#: scripts/ui/modals/business_board.gd:39
+msgid "START NOW"
+msgstr ""
+
 #: data/character/options.json
 msgid "STARTUP CASUAL"
 msgstr ""
@@ -3289,7 +3689,7 @@ msgstr ""
 msgid "STATEMENT"
 msgstr ""
 
-#: scripts/world/interior.gd:193
+#: scripts/world/interior.gd:202
 msgid "SUITE 2B\nAVAILABLE"
 msgstr ""
 
@@ -3301,7 +3701,7 @@ msgstr ""
 msgid "SaaS / Software"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:479
+#: scripts/ui/modals/company_os.gd:481
 msgid "Salary: none yet. Your runway is your savings."
 msgstr ""
 
@@ -3341,6 +3741,10 @@ msgstr ""
 msgid "Save to slot %d"
 msgstr ""
 
+#: scripts/ui/hud.gd:151
+msgid "Saved"
+msgstr ""
+
 #: scripts/ui/modals/pause_menu.gd:16 scripts/ui/phone_ui.gd:278
 msgid "Saved to slot %d."
 msgstr ""
@@ -3357,7 +3761,11 @@ msgstr ""
 msgid "Sell all stock to a liquidator (40% of cost)"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:514
+#: scripts/ui/modals/company_os.gd:596
+msgid "Sell your time: clients post small projects every morning. Accept a gig, work it here in 2-hour sessions, deliver before the deadline and invoice. Payment follows the client's terms. On-time work earns stars; stars raise your rate."
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:516
 msgid "Seller"
 msgstr ""
 
@@ -3373,7 +3781,7 @@ msgstr ""
 msgid "Send a replacement (express)"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:563
+#: scripts/ui/modals/company_os.gd:565
 msgid "Send counter-offer"
 msgstr ""
 
@@ -3381,12 +3789,36 @@ msgstr ""
 msgid "Send me the contract. I'll look."
 msgstr ""
 
+#: data/jobs/city_clerk.json
+msgid "Senior Officer"
+msgstr ""
+
 #: autoload/clock.gd:14
 msgid "Sep"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:518
+#: scripts/ui/modals/company_os.gd:520
 msgid "Settlement"
+msgstr ""
+
+#: scripts/ui/tutorial.gd:14
+msgid "Shift"
+msgstr ""
+
+#: data/jobs/barista.json
+msgid "Shift Lead"
+msgstr ""
+
+#: autoload/ui_root.gd:193
+msgid "Shift done: +%s wages."
+msgstr ""
+
+#: scripts/ui/modals/job_modal.gd:29
+msgid "Shifts"
+msgstr ""
+
+#: scripts/ui/modals/job_modal.gd:47
+msgid "Shifts worked: %d"
 msgstr ""
 
 #: scripts/ui/modals/dropoff_modal.gd:34
@@ -3397,7 +3829,7 @@ msgstr ""
 msgid "Shipping"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:292
+#: scripts/ui/modals/company_os.gd:294
 msgid "Shoot photos myself & list (1 h 20 min)"
 msgstr ""
 
@@ -3421,7 +3853,7 @@ msgstr ""
 msgid "ShopLane ads: %s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:200
+#: scripts/ui/modals/company_os.gd:202
 msgid "ShopLane balance (paid Mondays)"
 msgstr ""
 
@@ -3429,7 +3861,7 @@ msgstr ""
 msgid "ShopLane dispute lost %s: forced refund + $15 fee"
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:45
+#: scripts/ui/modals/business_board.gd:65
 msgid "ShopLane marketplace: 10% fee, weekly payouts, personal sellers capped at $2,500/month."
 msgstr ""
 
@@ -3453,7 +3885,7 @@ msgstr ""
 msgid "ShopLane pending"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:231
+#: scripts/ui/modals/company_os.gd:233
 msgid "ShopLane personal seller cap"
 msgstr ""
 
@@ -3509,6 +3941,10 @@ msgstr ""
 msgid "Skin tone"
 msgstr ""
 
+#: scripts/ui/tutorial.gd:63
+msgid "Skip"
+msgstr ""
+
 #: data/buildings/riverside_apartment.json
 msgid "Sleep"
 msgstr ""
@@ -3527,6 +3963,10 @@ msgstr ""
 
 #: scripts/ui/modals/pause_menu.gd:25
 msgid "Slow"
+msgstr ""
+
+#: data/jobs/barista.json
+msgid "Slow afternoon. You wipe tables and watch who comes back twice."
 msgstr ""
 
 #: data/character/options.json
@@ -3549,7 +3989,7 @@ msgstr ""
 msgid "Smile"
 msgstr ""
 
-#: autoload/scene_router.gd:77 data/dialogue/maya_intro.json
+#: autoload/scene_router.gd:78 data/dialogue/maya_intro.json
 msgid "So you actually quit?"
 msgstr ""
 
@@ -3605,7 +4045,11 @@ msgstr ""
 msgid "Sorry — can't take it on."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:435
+#: data/jobs/parcel_sorter.json
+msgid "Sort, scan and stack the neighbourhood's parcels. You'll see how shipping really works."
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:437
 msgid "Space"
 msgstr ""
 
@@ -3625,12 +4069,28 @@ msgstr ""
 msgid "Stablecoin settlement (simulated)"
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:49
+#: data/buildings/bloom_coffee.json data/buildings/city_hall.json data/buildings/nexus_bank.json data/buildings/nexus_cowork.json
+msgid "Staff door — work a shift"
+msgstr ""
+
+#: scripts/ui/tutorial.gd:18
+msgid "Stand next to a person or object. When a prompt appears at the bottom, press E or click it."
+msgstr ""
+
+#: scripts/ui/modals/business_board.gd:69
 msgid "Start an ecommerce side business"
+msgstr ""
+
+#: scripts/ui/modals/business_board.gd:77 scripts/ui/modals/company_os.gd:597
+msgid "Start freelancing"
 msgstr ""
 
 #: scripts/frontend/character_creator.gd:104
 msgid "Start in Aurelia  →"
+msgstr ""
+
+#: scripts/sim/careers.gd:153
+msgid "Started freelancing as a consultant."
 msgstr ""
 
 #: data/character/options.json
@@ -3641,15 +4101,15 @@ msgstr ""
 msgid "Startup Hub"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:204
+#: scripts/ui/modals/company_os.gd:206
 msgid "Stock (at cost)"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:573
+#: scripts/ui/modals/company_os.gd:575
 msgid "Stock at %s: %d / %d needed"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:45
+#: scripts/ui/modals/month_close_modal.gd:47
 msgid "Stock at cost"
 msgstr ""
 
@@ -3657,7 +4117,7 @@ msgstr ""
 msgid "Stock here: "
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:205
+#: scripts/ui/modals/company_os.gd:207
 msgid "Stock on the way"
 msgstr ""
 
@@ -3685,7 +4145,7 @@ msgstr ""
 msgid "Studio Lumen"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:295
+#: scripts/ui/modals/company_os.gd:297
 msgid "Studio Lumen photos ($120) & list"
 msgstr ""
 
@@ -3705,7 +4165,7 @@ msgstr ""
 msgid "Sun"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:203
+#: scripts/ui/modals/company_os.gd:205
 msgid "Supplier bills payable"
 msgstr ""
 
@@ -3721,7 +4181,7 @@ msgstr ""
 msgid "Supplier price increase"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:354
+#: scripts/ui/modals/company_os.gd:356
 msgid "Suppliers"
 msgstr ""
 
@@ -3745,6 +4205,14 @@ msgstr ""
 msgid "TRAVEL"
 msgstr ""
 
+#: scripts/ui/tutorial.gd:221
+msgid "TUTORIAL %d/%d"
+msgstr ""
+
+#: scripts/ui/hud.gd:108 scripts/ui/tutorial.gd:15
+msgid "Tab"
+msgstr ""
+
 #: data/buildings/city_hall.json
 msgid "Take a number"
 msgstr ""
@@ -3757,11 +4225,19 @@ msgstr ""
 msgid "Take client projects, then build a product people pay for every month."
 msgstr ""
 
+#: scripts/ui/modals/job_modal.gd:71
+msgid "Take the job"
+msgstr ""
+
 #: data/dialogue/ana_register.json
 msgid "Takes about 45 minutes to process."
 msgstr ""
 
-#: scripts/world/named_npc.gd:22
+#: scripts/ui/modals/job_modal.gd:70
+msgid "Taking this job means leaving %s."
+msgstr ""
+
+#: scripts/world/named_npc.gd:23
 msgid "Talk to %s"
 msgstr ""
 
@@ -3783,6 +4259,14 @@ msgstr ""
 
 #: data/regions/zenkai.json
 msgid "Tech competition"
+msgstr ""
+
+#: data/jobs/bank_teller.json
+msgid "Teller"
+msgstr ""
+
+#: data/jobs/bank_teller.json
+msgid "Teller Trainee"
 msgstr ""
 
 #: data/buildings/nexus_bank.json
@@ -3809,8 +4293,16 @@ msgstr ""
 msgid "That name is already registered in Aurelia."
 msgstr ""
 
+#: scripts/sim/careers.gd:210
+msgid "That offer is gone."
+msgstr ""
+
 #: scripts/sim/ecommerce.gd:62
 msgid "That supplier doesn't sell this."
+msgstr ""
+
+#: data/jobs/barista.json
+msgid "The 8 AM rush: forty flat whites and one oat-milk emergency."
 msgstr ""
 
 #: data/world/years.json
@@ -3821,8 +4313,12 @@ msgstr ""
 msgid "The Opportunity"
 msgstr ""
 
-#: scripts/sim/company.gd:76
+#: scripts/sim/company.gd:81
 msgid "The account is already open."
+msgstr ""
+
+#: scripts/ui/tutorial.gd:19
+msgid "The clock runs while you walk. Hold T to fast-forward. Shops keep opening hours; sleep in your bed to end the day."
 msgstr ""
 
 #: scripts/sim/living.gd:73
@@ -3833,11 +4329,11 @@ msgstr ""
 msgid "The liquidator's van is on its way."
 msgstr ""
 
-#: scripts/sim/company.gd:53
+#: scripts/sim/company.gd:58
 msgid "The registration fee is %s."
 msgstr ""
 
-#: scripts/world/actions.gd:76
+#: scripts/world/actions.gd:81
 msgid "The teller window is closed."
 msgstr ""
 
@@ -3845,7 +4341,7 @@ msgstr ""
 msgid "There you are!"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:566
+#: scripts/ui/modals/company_os.gd:568
 msgid "They agreed to your terms. Accept to sign."
 msgstr ""
 
@@ -3857,7 +4353,7 @@ msgstr ""
 msgid "They need an invoice from a registered company."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:568
+#: scripts/ui/modals/company_os.gd:570
 msgid "They walked away."
 msgstr ""
 
@@ -3865,7 +4361,7 @@ msgstr ""
 msgid "Thick"
 msgstr ""
 
-#: scripts/world/actions.gd:42
+#: scripts/world/actions.gd:47
 msgid "This is Suite 2B's desk. Talk to Tom about leasing it."
 msgstr ""
 
@@ -3877,12 +4373,20 @@ msgstr ""
 msgid "This offer is no longer open."
 msgstr ""
 
+#: data/jobs/parcel_sorter.json
+msgid "Three hundred parcels, one broken scanner. Dara fixes it with a paperclip."
+msgstr ""
+
 #: autoload/clock.gd:13
 msgid "Thu"
 msgstr ""
 
-#: scripts/world/actions.gd:91
+#: scripts/world/actions.gd:96
 msgid "Ticket A-%d. Now serving A-%d."
+msgstr ""
+
+#: scripts/ui/tutorial.gd:19
+msgid "Time and opening hours"
 msgstr ""
 
 #: scripts/ui/phone_ui.gd:121
@@ -3893,8 +4397,12 @@ msgstr ""
 msgid "Tip: register a company before ShopLane caps you. Everyone learns that one the hard way."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:345 scripts/ui/phone_ui.gd:250
+#: scripts/ui/modals/company_os.gd:347 scripts/ui/phone_ui.gd:250
 msgid "To pack"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:642
+msgid "Today's offers"
 msgstr ""
 
 #: data/npcs/tom.json
@@ -3909,11 +4417,11 @@ msgstr ""
 msgid "Took a while to arrive."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:515
+#: scripts/ui/modals/company_os.gd:517
 msgid "Total"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:459
+#: scripts/ui/modals/company_os.gd:461
 msgid "Total stock value (books)"
 msgstr ""
 
@@ -3937,7 +4445,7 @@ msgstr ""
 msgid "TradeLink Wholesale"
 msgstr ""
 
-#: scripts/sim/company.gd:96
+#: scripts/sim/company.gd:101
 msgid "Transfer to %s"
 msgstr ""
 
@@ -3949,6 +4457,18 @@ msgstr ""
 msgid "Tue"
 msgstr ""
 
+#: scripts/ui/tutorial.gd:204
+msgid "Tutorial complete. The gold arrow keeps pointing at your goal (turn it off in the pause menu)."
+msgstr ""
+
+#: scripts/ui/tutorial.gd:106
+msgid "Tutorial skipped. You can replay it from the pause menu (Esc)."
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:678
+msgid "Two focused hours. %s"
+msgstr ""
+
 #: data/events/viral_mention.json
 msgid "Uh. Did you see this??"
 msgstr ""
@@ -3957,7 +4477,7 @@ msgstr ""
 msgid "Unexpected large order"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:515
+#: scripts/ui/modals/company_os.gd:517
 msgid "Unit price"
 msgstr ""
 
@@ -3967,6 +4487,10 @@ msgstr ""
 
 #: scripts/sim/ecommerce.gd:715
 msgid "Unknown choice."
+msgstr ""
+
+#: scripts/sim/careers.gd:72
+msgid "Unknown job."
 msgstr ""
 
 #: scripts/sim/living.gd:70
@@ -3989,11 +4513,15 @@ msgstr ""
 msgid "Used cars, rentals, maybe an EV brand one day."
 msgstr ""
 
+#: scripts/ui/tutorial.gd:18
+msgid "Using things"
+msgstr ""
+
 #: scripts/frontend/main_menu.gd:55
 msgid "VERTICAL SLICE 001 · art converted from concept boards · %s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:438
+#: scripts/ui/modals/company_os.gd:440
 msgid "Value"
 msgstr ""
 
@@ -4003,6 +4531,14 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:29
 msgid "WITHDRAWN"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:195 scripts/ui/modals/month_close_modal.gd:36
+msgid "Wages from your job"
+msgstr ""
+
+#: scripts/sim/careers.gd:127
+msgid "Wages — %s shift at %s"
 msgstr ""
 
 #: data/story/chapters.json
@@ -4021,7 +4557,11 @@ msgstr ""
 msgid "Walk between neighbouring districts, or take the Metro from any station."
 msgstr ""
 
-#: autoload/scene_router.gd:188
+#: scripts/ui/tutorial.gd:14
+msgid "Walk with WASD or the arrow keys. Hold Shift to run."
+msgstr ""
+
+#: autoload/scene_router.gd:189
 msgid "Walking to %s… (%d min)"
 msgstr ""
 
@@ -4053,6 +4593,10 @@ msgstr ""
 msgid "Wed"
 msgstr ""
 
+#: scripts/sim/careers.gd:79
+msgid "Welcome aboard! Shifts are 4 hours, any time we're open. Come by the staff door when you're ready."
+msgstr ""
+
 #: data/dialogue/sofia_account.json
 msgid "Welcome to Nexus Bank. How can I help?"
 msgstr ""
@@ -4077,8 +4621,16 @@ msgstr ""
 msgid "Wireless Earbuds"
 msgstr ""
 
-#: scripts/sim/company.gd:100
+#: scripts/sim/company.gd:105
 msgid "Withdrawal from %s"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:639
+msgid "Work 2 h"
+msgstr ""
+
+#: scripts/ui/modals/job_modal.gd:57
+msgid "Work a 4-hour shift (+%s)"
 msgstr ""
 
 #: data/buildings/nexus_cowork.json
@@ -4087,6 +4639,10 @@ msgstr ""
 
 #: data/buildings/bloom_coffee.json data/buildings/byte_and_bean.json
 msgid "Work on your laptop — Company OS"
+msgstr ""
+
+#: scripts/ui/modals/business_board.gd:119
+msgid "Work shifts on site: walk to the workplace's staff door and press E."
 msgstr ""
 
 #: scripts/ui/phone_ui.gd:122
@@ -4101,8 +4657,16 @@ msgstr ""
 msgid "World map"
 msgstr ""
 
+#: data/economy/freelance.json
+msgid "Write product descriptions for %s"
+msgstr ""
+
 #: scripts/ui/modals/world_map_modal.gd:100
 msgid "YOUR HOME MARKET"
+msgstr ""
+
+#: scripts/ui/modals/job_modal.gd:24
+msgid "YOUR JOB"
 msgstr ""
 
 #: data/dialogue/maya_intro.json
@@ -4113,12 +4677,20 @@ msgstr ""
 msgid "Yeah. Just looking."
 msgstr ""
 
-#: scripts/sim/company.gd:46
+#: scripts/sim/careers.gd:200
+msgid "You already have as many gigs as you can handle."
+msgstr ""
+
+#: scripts/sim/company.gd:51
 msgid "You already own a registered company."
 msgstr ""
 
 #: scripts/sim/living.gd:75
 msgid "You already rent this."
+msgstr ""
+
+#: scripts/sim/careers.gd:75
+msgid "You already work here."
 msgstr ""
 
 #: scripts/ui/modals/city_map_modal.gd:145 scripts/ui/modals/city_map_modal.gd:71
@@ -4133,8 +4705,28 @@ msgstr ""
 msgid "You can't do that right now."
 msgstr ""
 
+#: data/jobs/city_clerk.json
+msgid "You file three hundred registrations. You now know every business on your street."
+msgstr ""
+
 #: scripts/ui/modals/cowork_desk_modal.gd:17
 msgid "You have a monthly desk."
+msgstr ""
+
+#: data/jobs/bank_teller.json
+msgid "You learn the difference between revenue and cash, the hard way, on someone else's account."
+msgstr ""
+
+#: data/jobs/barista.json
+msgid "You learn the milk steamer's moods. Jun nods, approvingly."
+msgstr ""
+
+#: data/jobs/parcel_sorter.json
+msgid "You learn which box sizes the couriers hate. Useful."
+msgstr ""
+
+#: scripts/ui/modals/job_modal.gd:65
+msgid "You left the job at %s."
 msgstr ""
 
 #: data/dialogue/jun_first.json
@@ -4149,7 +4741,7 @@ msgstr ""
 msgid "You need %s (first month%s)."
 msgstr ""
 
-#: scripts/world/actions.gd:39
+#: scripts/world/actions.gd:44
 msgid "You need a day pass or a desk plan. Ask at reception."
 msgstr ""
 
@@ -4157,11 +4749,11 @@ msgstr ""
 msgid "You need the product in hand to photograph it."
 msgstr ""
 
-#: scripts/sim/company.gd:80
+#: scripts/sim/company.gd:85
 msgid "You only have %s personally."
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:44
+#: scripts/ui/modals/month_close_modal.gd:46
 msgid "You owe (suppliers)"
 msgstr ""
 
@@ -4169,7 +4761,15 @@ msgstr ""
 msgid "You quit your job. You have savings, a laptop, a phone — and a lease."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:345
+#: data/jobs/cowork_host.json
+msgid "You set up chairs for a pitch night. Two founders argue about pricing the whole time."
+msgstr ""
+
+#: scripts/ui/modals/business_board.gd:132
+msgid "You're a freelance consultant now. Today's gigs are in Company OS → Freelance."
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:347
 msgid "You're carrying"
 msgstr ""
 
@@ -4185,6 +4785,10 @@ msgstr ""
 msgid "You're trending"
 msgstr ""
 
+#: scripts/sim/careers.gd:137
+msgid "You've earned it: you're our new %s. New rate: $%d an hour."
+msgstr ""
+
 #: scripts/sim/ecommerce.gd:448
 msgid "You've sold %s of your %s personal seller limit this month. Register a business to lift it."
 msgstr ""
@@ -4197,6 +4801,10 @@ msgstr ""
 msgid "Young population"
 msgstr ""
 
+#: scripts/ui/tutorial.gd:21
+msgid "Your business runs from any laptop: home desk, café table or co-work hot desk. Walk up to one and press E."
+msgstr ""
+
 #: data/events/low_cash_warning.json
 msgid "Your call."
 msgstr ""
@@ -4205,8 +4813,20 @@ msgstr ""
 msgid "Your day pass is active today."
 msgstr ""
 
+#: data/jobs/bank_teller.json
+msgid "Your drawer balances to the cent. Sofia pretends not to be impressed."
+msgstr ""
+
+#: scripts/ui/tutorial.gd:17
+msgid "Your goal is at the top left. The gold arrow shows the way: walk into a door to go inside."
+msgstr ""
+
 #: scripts/ui/modals/world_map_modal.gd:74
 msgid "Your home market"
+msgstr ""
+
+#: scripts/ui/modals/business_board.gd:113
+msgid "Your job · details"
 msgstr ""
 
 #: data/events/viral_mention.json
@@ -4217,11 +4837,15 @@ msgstr ""
 msgid "Your personal account"
 msgstr ""
 
-#: data/businesses/consulting.json
-msgid "Your time is the inventory."
+#: scripts/ui/tutorial.gd:15
+msgid "Your phone"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:530
+#: data/businesses/consulting.json
+msgid "Your time is the inventory. Take client gigs, work them at any laptop, invoice, get paid. Reputation raises your rate."
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:532
 msgid "Your unit cost ≈ %s → gross margin %s"
 msgstr ""
 
@@ -4229,11 +4853,7 @@ msgstr ""
 msgid "Zenkai"
 msgstr ""
 
-#: scripts/ui/hud.gd:163
-msgid "[Tab] Phone"
-msgstr ""
-
-#: scripts/ui/modals/business_board.gd:54
+#: scripts/ui/modals/business_board.gd:81
 msgid "a later expansion"
 msgstr ""
 
@@ -4243,6 +4863,10 @@ msgstr ""
 
 #: data/businesses/media.json
 msgid "agency"
+msgstr ""
+
+#: scripts/sim/careers.gd:107
+msgid "already worked today"
 msgstr ""
 
 #: data/businesses/saas.json
@@ -4293,6 +4917,10 @@ msgstr ""
 msgid "client projects"
 msgstr ""
 
+#: scripts/sim/careers.gd:110
+msgid "closed now"
+msgstr ""
+
 #: data/businesses/real_estate.json
 msgid "commercial"
 msgstr ""
@@ -4337,7 +4965,7 @@ msgstr ""
 msgid "drivers"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:516
+#: scripts/ui/modals/company_os.gd:518
 msgid "due "
 msgstr ""
 
@@ -4361,6 +4989,10 @@ msgstr ""
 msgid "ev startup"
 msgstr ""
 
+#: scripts/ui/modals/job_modal.gd:30
+msgid "every day"
+msgstr ""
+
 #: data/businesses/consulting.json
 msgid "fees"
 msgstr ""
@@ -4373,11 +5005,15 @@ msgstr ""
 msgid "franchise"
 msgstr ""
 
+#: data/npcs/client.json
+msgid "freelance client"
+msgstr ""
+
 #: data/businesses/logistics.json
 msgid "freight forwarding"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:492
+#: scripts/ui/modals/company_os.gd:494
 msgid "friend (phone)"
 msgstr ""
 
@@ -4387,6 +5023,14 @@ msgstr ""
 
 #: data/businesses/international_trade.json
 msgid "fx"
+msgstr ""
+
+#: scripts/ui/modals/job_modal.gd:56
+msgid "go to the workplace to work a shift"
+msgstr ""
+
+#: scripts/world/actions.gd:36
+msgid "hiring — ask about the job"
 msgstr ""
 
 #: data/businesses/hotel.json
@@ -4441,7 +5085,7 @@ msgstr ""
 msgid "margin"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:285
+#: scripts/ui/modals/company_os.gd:287
 msgid "market ~%s"
 msgstr ""
 
@@ -4461,12 +5105,20 @@ msgstr ""
 msgid "needs a desk pass"
 msgstr ""
 
+#: scripts/ui/modals/company_os.gd:651
+msgid "net %d"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:133
 msgid "no buffs, just scale"
 msgstr ""
 
 #: scripts/sim/fmt.gd:54
 msgid "no reviews"
+msgstr ""
+
+#: scripts/sim/careers.gd:105
+msgid "not hired here"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:173
@@ -4485,12 +5137,24 @@ msgstr ""
 msgid "oem orders"
 msgstr ""
 
+#: scripts/ui/modals/company_os.gd:636
+msgid "on delivery"
+msgstr ""
+
+#: scripts/world/actions.gd:126
+msgid "on the house (staff)"
+msgstr ""
+
 #: data/businesses/manufacturing.json
 msgid "overseas plant"
 msgstr ""
 
 #: data/businesses/ecommerce.json data/businesses/international_trade.json data/businesses/manufacturing.json
 msgid "own brand"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:651
+msgid "paid on delivery"
 msgstr ""
 
 #: scripts/ui/phone_ui.gd:258
@@ -4577,10 +5241,6 @@ msgstr ""
 msgid "solar farm"
 msgstr ""
 
-#: data/businesses/consulting.json
-msgid "staff"
-msgstr ""
-
 #: data/businesses/cafe.json
 msgid "store sales"
 msgstr ""
@@ -4611,6 +5271,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:130
 msgid "to suppliers"
+msgstr ""
+
+#: scripts/sim/careers.gd:114
+msgid "too late for a full shift"
 msgstr ""
 
 #: data/businesses/cafe.json
@@ -4705,8 +5369,16 @@ msgstr ""
 msgid "→ Company $1,000"
 msgstr ""
 
+#: scripts/ui/phone_ui.gd:140
+msgid "◆ %s needs a decision"
+msgstr ""
+
 #: scripts/ui/modals/city_map_modal.gd:61
 msgid "◆ You are here"
+msgstr ""
+
+#: scripts/ui/hud.gd:239
+msgid "● %d new"
 msgstr ""
 
 #: scripts/ui/modals/city_map_modal.gd:59
@@ -4717,10 +5389,10 @@ msgstr ""
 msgid "● Planned (P1+)"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:140
-msgid "⚑ %s needs a decision"
+#: scripts/ui/modals/business_board.gd:75
+msgid "✓ You're freelancing. Find gigs in Company OS."
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:47
+#: scripts/ui/modals/business_board.gd:67
 msgid "✓ You're running this."
 msgstr ""

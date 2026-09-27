@@ -46,6 +46,7 @@ func _fade(cb: Callable, minutes := 0) -> void:
 	await get_tree().process_frame
 	await UIRoot.fade_in(0.3)
 	transitioning = false
+	SaveSystem.autosave_if_changed()
 
 
 # ------------------------------------------------------------------ front-end

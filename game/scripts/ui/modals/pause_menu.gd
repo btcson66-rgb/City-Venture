@@ -5,7 +5,7 @@ extends Modal
 func _init() -> void:
 	title_text = "Paused"
 	icon_name = "settings"
-	panel_size = Vector2(300, 268)
+	panel_size = Vector2(300, 300)
 
 
 func build() -> void:
@@ -34,6 +34,15 @@ func build() -> void:
 		b.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 		lang.add_child(b)
 	body.add_child(lang)
+	var help := UIK.hbox(4)
+	help.add_child(UIK.label("Guide arrow", 8, Art.C_MUTED))
+	var on := Tutorial.guide_enabled()
+	help.add_child(UIK.button("On", func(): UIRoot.tutorial.set_guide(true); rebuild(), "tab_active" if on else "tab"))
+	help.add_child(UIK.button("Off", func(): UIRoot.tutorial.set_guide(false); rebuild(), "tab" if on else "tab_active"))
+	help.add_child(UIK.button("Replay tutorial", func():
+		UIRoot.tutorial.restart()
+		close()))
+	body.add_child(help)
 	body.add_child(UIK.button("Report a problem (F12)", func():
 		close()
 		UIRoot.report_problem()))
