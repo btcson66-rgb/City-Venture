@@ -1,0 +1,86 @@
+class_name Cond
+extends RefCounted
+## Tiny condition DSL shared by story objectives and events.
+##   flag:x  !flag:x  visited:x  stat:name>=n  day>=n  cash<n  company_registered  !company_registered
+##   has_ads  best_rating>=4.2  weekday:mon  hour>=h  has_stock  chapter_done:id  objective_done:id
+
+
+static func all(conds: Array, ctx := {}) -> bool:
+	for c in conds:
+		if not eval(str(c), ctx):
+			return false
+	return true
+
+
+static func eval(expr: String, ctx := {}) -> bool:
+	expr = expr.strip_edges()
+	if expr == "":
+		return true
+	if expr.begins_with("!"):
+		return not eval(expr.substr(1), ctx)
+	if expr.begins_with("flag:"):
+		return GameState.flag(expr.substr(5))
+	if expr.begins_with("visited:"):
+		return GameState.visited(expr.substr(8))
+	if expr.begins_with("weekday:"):
+		return Clock.WEEKDAYS[Clock.weekday()].to_lower() == expr.substr(8).to_lower().left(3)
+	if expr.begins_with("chapter_done:"):
+		return expr.substr(13) in GameState.data["story"]["chapters_done"]
+	if expr.begins_with("objective_done:"):
+		return expr.substr(15) in GameState.data["story"]["done"]
+	match expr:
+		"company_registered":
+			return GameState.company_id() != ""
+		"has_ads":
+			return Ecommerce.total_ad_budget() > 0.0
+		"has_stock":
+			return Ecommerce.total_units() > 0
+	var m := _cmp(expr)
+	if m.is_empty():
+		push_warning("Cond: cannot parse " + expr)
+		return false
+	var lhs := _value(m["name"], ctx)
+	var rhs := float(m["value"])
+	match m["op"]:
+		">=":
+			return lhs >= rhs
+		"<=":
+			return lhs <= rhs
+		">":
+			return lhs > rhs
+		"<":
+			return lhs < rhs
+		"==":
+			return is_equal_approx(lhs, rhs)
+		"!=":
+			return not is_equal_approx(lhs, rhs)
+	return false
+
+
+static func _cmp(expr: String) -> Dictionary:
+	for op in [">=", "<=", "==", "!=", ">", "<"]:
+		var i := expr.find(op)
+		if i > 0:
+			return {"name": expr.left(i).strip_edges(), "op": op, "value": expr.substr(i + op.length()).strip_edges()}
+	return {}
+
+
+static func _value(name: String, ctx: Dictionary) -> float:
+	if name.begins_with("stat:"):
+		return GameState.stat(name.substr(5))
+	match name:
+		"day":
+			return Clock.day_index()
+		"hour":
+			return Clock.hour()
+		"cash":
+			return Ledger.cash(ctx.get("entity", GameState.business_entity()))
+		"personal_cash":
+			return Ledger.cash("player")
+		"best_rating":
+			var best := 0.0
+			for l in GameState.data["ecommerce"]["listings"].values():
+				if int(l.get("rating_n", 0)) >= 3:
+					best = maxf(best, Ecommerce.rating(l))
+			return best
+	return GameState.stat(name)

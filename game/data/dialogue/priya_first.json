@@ -1,0 +1,56 @@
+{
+ "id": "priya_first",
+ "with": "priya",
+ "nodes": {
+  "start": [
+   {
+    "who": "priya",
+    "expr": "happy",
+    "text": "Hey! Welcome to Nexus. First time?"
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Yeah. Just looking.",
+      "next": "a"
+     },
+     {
+      "text": "I need somewhere to work.",
+      "next": "b"
+     }
+    ]
+   }
+  ],
+  "a": [
+   {
+    "who": "priya",
+    "text": "Look away. Coffee's free, wifi's fast, board's by the window."
+   },
+   {
+    "goto": "end"
+   }
+  ],
+  "b": [
+   {
+    "who": "priya",
+    "text": "Day pass is $15. Or $350 a month for a hot desk."
+   },
+   {
+    "goto": "end"
+   }
+  ],
+  "end": [
+   {
+    "who": "priya",
+    "text": "Check the Business Board. People post suppliers, gigs, all sorts."
+   }
+  ]
+ },
+ "on_end": [
+  {
+   "do": "set_flag",
+   "flag": "met_priya"
+  }
+ ]
+}

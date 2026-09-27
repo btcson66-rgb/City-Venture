@@ -1,0 +1,93 @@
+{
+ "id": "customer_return_first",
+ "category": "customer",
+ "status": "active",
+ "trigger": {
+  "when": "on_signal",
+  "signal": "return_requested"
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "customer",
+  "title": "First unhappy customer",
+  "icon": "warning",
+  "lines": [
+   "{customer}: {reason}",
+   "{customer}: I paid {price} for this.",
+   "(Order {order} — {product})"
+  ]
+ },
+ "choices": [
+  {
+   "id": "refund",
+   "label": "Refund in full, take it back",
+   "detail": "Lose the sale + return label. Rating stays safe.",
+   "effects": [
+    {
+     "op": "refund_order"
+    },
+    {
+     "op": "set_flag",
+     "flag": "first_issue_resolved"
+    },
+    {
+     "op": "timeline",
+     "text": "First return: refunded {customer} in full."
+    }
+   ],
+   "outcome": "Refund sent. {customer}: \"Thanks. Appreciate it.\""
+  },
+  {
+   "id": "replace",
+   "label": "Send a replacement (express)",
+   "detail": "Costs one more unit + express shipping. Likely a 5★ review.",
+   "requires": [
+    "has_stock"
+   ],
+   "effects": [
+    {
+     "op": "replace_order"
+    },
+    {
+     "op": "set_flag",
+     "flag": "first_issue_resolved"
+    },
+    {
+     "op": "timeline",
+     "text": "First return: shipped {customer} a replacement."
+    }
+   ],
+   "outcome": "Replacement on its way. {customer}: \"Oh — nice. Didn't expect that.\""
+  },
+  {
+   "id": "partial",
+   "label": "Offer 30% back, they keep it",
+   "detail": "Cheaper now. Expect a lukewarm review.",
+   "effects": [
+    {
+     "op": "partial_refund"
+    },
+    {
+     "op": "set_flag",
+     "flag": "first_issue_resolved"
+    }
+   ],
+   "outcome": "{customer}: \"...Fine. I guess.\""
+  },
+  {
+   "id": "refuse",
+   "label": "Refuse — it worked when it left",
+   "detail": "No cost today. 1★ review, and they might open a dispute.",
+   "effects": [
+    {
+     "op": "refuse_return"
+    },
+    {
+     "op": "set_flag",
+     "flag": "first_issue_resolved"
+    }
+   ],
+   "outcome": "{customer} left a 1★ review."
+  }
+ ]
+}

@@ -1,0 +1,126 @@
+{
+ "id": "byte_and_bean",
+ "name": "Byte & Bean",
+ "district": "startup_hub",
+ "type": "cafe",
+ "hours": {
+  "open": "07:00",
+  "close": "19:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "byte_bean",
+  "x": 432,
+  "sign": "BYTE & BEAN"
+ },
+ "interior": {
+  "size": [
+   20,
+   13
+  ],
+  "floor": "checker",
+  "wall": "wood_panel",
+  "ambient": "cafe",
+  "props": [
+   {
+    "sprite": "logo_bytebean",
+    "x": 110,
+    "y": 8,
+    "wall": true
+   },
+   {
+    "sprite": "window_day",
+    "x": 250,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "cafe_counter",
+    "x": 40,
+    "y": 50
+   },
+   {
+    "sprite": "cafe_table",
+    "x": 200,
+    "y": 100
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 182,
+    "y": 96,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_table",
+    "x": 260,
+    "y": 100
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 286,
+    "y": 96,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_table",
+    "x": 230,
+    "y": 160
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 212,
+    "y": 156,
+    "solid": false
+   },
+   {
+    "sprite": "plant_big",
+    "x": 8,
+    "y": 120
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 90,
+    "y": 0,
+    "wall": true,
+    "glow": true
+   }
+  ],
+  "interactables": [
+   {
+    "id": "counter",
+    "at": [
+     88,
+     102
+    ],
+    "label": "Order an oat latte ($5.20)",
+    "action": "buy_item",
+    "params": {
+     "item": "coffee",
+     "price": 5.2,
+     "minutes": 10,
+     "npc": "lee",
+     "flag": "bought_coffee_byte_and_bean"
+    }
+   },
+   {
+    "id": "table",
+    "at": [
+     222,
+     134
+    ],
+    "label": "Work on your laptop — Company OS",
+    "action": "open_company_os",
+    "params": {
+     "terminal": "cafe"
+    }
+   }
+  ],
+  "npc_spots": {
+   "counter": [
+    88,
+    62
+   ]
+  }
+ }
+}

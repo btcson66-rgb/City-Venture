@@ -1,0 +1,165 @@
+{
+ "id": "riverside_apartment",
+ "name": "Riverside Tower",
+ "district": "riverside",
+ "type": "home",
+ "hours": {
+  "open": "00:00",
+  "close": "24:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "riverside_tower",
+  "x": 176,
+  "sign": "RIVERSIDE TOWER"
+ },
+ "interior": {
+  "size": [
+   24,
+   15
+  ],
+  "floor": "wood_warm",
+  "wall": "plaster_warm",
+  "ambient": "home",
+  "property": "riverside_studio",
+  "props": [
+   {
+    "sprite": "window_day",
+    "x": 132,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "window_day",
+    "x": 222,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "bed",
+    "x": 12,
+    "y": 50
+   },
+   {
+    "sprite": "wardrobe",
+    "x": 60,
+    "y": 12
+   },
+   {
+    "sprite": "bookshelf",
+    "x": 96,
+    "y": 14
+   },
+   {
+    "sprite": "desk_laptop",
+    "x": 150,
+    "y": 38
+   },
+   {
+    "sprite": "chair",
+    "x": 164,
+    "y": 62,
+    "solid": false
+   },
+   {
+    "sprite": "plant",
+    "x": 206,
+    "y": 34
+   },
+   {
+    "sprite": "fridge",
+    "x": 284,
+    "y": 20
+   },
+   {
+    "sprite": "kitchen",
+    "x": 312,
+    "y": 20
+   },
+   {
+    "sprite": "rug",
+    "x": 130,
+    "y": 130,
+    "floor": true
+   },
+   {
+    "sprite": "coffee_table",
+    "x": 146,
+    "y": 144
+   },
+   {
+    "sprite": "sofa",
+    "x": 138,
+    "y": 180
+   },
+   {
+    "sprite": "tv",
+    "x": 30,
+    "y": 150
+   },
+   {
+    "sprite": "packing_table",
+    "x": 300,
+    "y": 150
+   },
+   {
+    "sprite": "plant_big",
+    "x": 352,
+    "y": 190
+   }
+  ],
+  "stock_display": {
+   "location": "riverside_studio",
+   "x": 300,
+   "y": 112,
+   "cols": 5
+  },
+  "interactables": [
+   {
+    "id": "laptop",
+    "at": [
+     172,
+     76
+    ],
+    "label": "Use laptop — Company OS",
+    "action": "open_company_os",
+    "params": {
+     "terminal": "home_laptop"
+    }
+   },
+   {
+    "id": "bed",
+    "at": [
+     34,
+     104
+    ],
+    "label": "Sleep",
+    "action": "sleep"
+   },
+   {
+    "id": "wardrobe",
+    "at": [
+     76,
+     70
+    ],
+    "label": "Change outfit",
+    "action": "change_outfit"
+   },
+   {
+    "id": "packing",
+    "at": [
+     322,
+     186
+    ],
+    "label": "Packing table",
+    "action": "pack_orders",
+    "params": {
+     "location": "riverside_studio"
+    }
+   }
+  ],
+  "npc_spots": {}
+ }
+}

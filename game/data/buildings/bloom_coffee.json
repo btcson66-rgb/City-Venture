@@ -1,0 +1,241 @@
+{
+ "id": "bloom_coffee",
+ "name": "Bloom Coffee",
+ "district": "riverside",
+ "type": "cafe",
+ "hours": {
+  "open": "07:00",
+  "close": "20:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "bloom_block",
+  "x": 368,
+  "sign": "BLOOM COFFEE"
+ },
+ "interior": {
+  "size": [
+   26,
+   16
+  ],
+  "floor": "wood_warm",
+  "wall": "brick",
+  "ambient": "cafe",
+  "props": [
+   {
+    "sprite": "menu_board",
+    "x": 40,
+    "y": 8,
+    "wall": true
+   },
+   {
+    "sprite": "logo_bloom",
+    "x": 152,
+    "y": 8,
+    "wall": true
+   },
+   {
+    "sprite": "cork_board",
+    "x": 232,
+    "y": 8,
+    "wall": true
+   },
+   {
+    "sprite": "window_day",
+    "x": 306,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "window_day",
+    "x": 358,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "cafe_counter",
+    "x": 60,
+    "y": 50
+   },
+   {
+    "sprite": "display_case",
+    "x": 166,
+    "y": 60
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 84,
+    "y": 0,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 130,
+    "y": 0,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 280,
+    "y": 40,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 340,
+    "y": 40,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "plant_big",
+    "x": 8,
+    "y": 50
+   },
+   {
+    "sprite": "plant_big",
+    "x": 386,
+    "y": 50
+   },
+   {
+    "sprite": "cafe_table",
+    "x": 60,
+    "y": 160
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 42,
+    "y": 156,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 86,
+    "y": 156,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_table",
+    "x": 140,
+    "y": 160
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 122,
+    "y": 156,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 166,
+    "y": 156,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_table",
+    "x": 260,
+    "y": 120
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 242,
+    "y": 116,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 286,
+    "y": 116,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_table",
+    "x": 330,
+    "y": 130
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 356,
+    "y": 126,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_table",
+    "x": 290,
+    "y": 196
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 272,
+    "y": 192,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 316,
+    "y": 192,
+    "solid": false
+   },
+   {
+    "sprite": "rug_small",
+    "x": 190,
+    "y": 210,
+    "floor": true
+   }
+  ],
+  "interactables": [
+   {
+    "id": "counter",
+    "at": [
+     108,
+     102
+    ],
+    "label": "Order coffee ($4.50)",
+    "action": "buy_item",
+    "params": {
+     "item": "coffee",
+     "price": 4.5,
+     "minutes": 10,
+     "npc": "jun",
+     "flag": "bought_coffee_bloom_coffee"
+    }
+   },
+   {
+    "id": "news",
+    "at": [
+     260,
+     54
+    ],
+    "label": "Read the news board",
+    "action": "read_news"
+   },
+   {
+    "id": "table",
+    "at": [
+     272,
+     150
+    ],
+    "label": "Work on your laptop — Company OS",
+    "action": "open_company_os",
+    "params": {
+     "terminal": "cafe"
+    }
+   }
+  ],
+  "npc_spots": {
+   "counter": [
+    108,
+    62
+   ],
+   "table_2": [
+    330,
+    168
+   ]
+  }
+ }
+}

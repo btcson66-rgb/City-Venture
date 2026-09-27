@@ -1,0 +1,75 @@
+{
+ "id": "postpoint_riverside",
+ "name": "PostPoint",
+ "district": "riverside",
+ "type": "parcel",
+ "hours": {
+  "open": "08:00",
+  "close": "21:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "postpoint",
+  "x": 704,
+  "sign": "POSTPOINT"
+ },
+ "interior": {
+  "size": [
+   18,
+   12
+  ],
+  "floor": "tile_white",
+  "wall": "white_modern",
+  "ambient": "shop",
+  "props": [
+   {
+    "sprite": "logo_postpoint",
+    "x": 100,
+    "y": 8,
+    "wall": true
+   },
+   {
+    "sprite": "parcel_shelf",
+    "x": 10,
+    "y": 20
+   },
+   {
+    "sprite": "parcel_shelf",
+    "x": 230,
+    "y": 20
+   },
+   {
+    "sprite": "postpoint_counter",
+    "x": 104,
+    "y": 52
+   },
+   {
+    "sprite": "plant",
+    "x": 250,
+    "y": 150
+   },
+   {
+    "sprite": "brochure_stand",
+    "x": 20,
+    "y": 140
+   }
+  ],
+  "interactables": [
+   {
+    "id": "counter",
+    "at": [
+     144,
+     104
+    ],
+    "label": "Drop off parcels",
+    "action": "dropoff_parcels"
+   }
+  ],
+  "npc_spots": {
+   "counter": [
+    144,
+    64
+   ]
+  }
+ }
+}

@@ -1,0 +1,153 @@
+{
+ "id": "nexus_bank",
+ "name": "Nexus Bank",
+ "district": "financial",
+ "type": "bank",
+ "hours": {
+  "open": "09:00",
+  "close": "16:00",
+  "days": "mon,tue,wed,thu,fri"
+ },
+ "exterior": {
+  "sprite": "nexus_bank",
+  "x": 240,
+  "sign": "NEXUS BANK"
+ },
+ "interior": {
+  "size": [
+   30,
+   16
+  ],
+  "floor": "marble",
+  "wall": "marble_wall",
+  "ambient": "bank",
+  "props": [
+   {
+    "sprite": "window_day",
+    "x": 20,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "logo_nexus_bank",
+    "x": 196,
+    "y": 8,
+    "wall": true
+   },
+   {
+    "sprite": "window_day",
+    "x": 410,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "bank_counter",
+    "x": 168,
+    "y": 54
+   },
+   {
+    "sprite": "atm",
+    "x": 36,
+    "y": 50
+   },
+   {
+    "sprite": "atm",
+    "x": 64,
+    "y": 50
+   },
+   {
+    "sprite": "brochure",
+    "x": 126,
+    "y": 62
+   },
+   {
+    "sprite": "queue_barrier",
+    "x": 168,
+    "y": 130
+   },
+   {
+    "sprite": "queue_barrier",
+    "x": 264,
+    "y": 130
+   },
+   {
+    "sprite": "waiting_sofa",
+    "x": 50,
+    "y": 180
+   },
+   {
+    "sprite": "exec_desk",
+    "x": 370,
+    "y": 120
+   },
+   {
+    "sprite": "office_chair",
+    "x": 394,
+    "y": 100,
+    "solid": false
+   },
+   {
+    "sprite": "filing_cabinet",
+    "x": 444,
+    "y": 56
+   },
+   {
+    "sprite": "plant_big",
+    "x": 8,
+    "y": 56
+   },
+   {
+    "sprite": "plant_big",
+    "x": 456,
+    "y": 200
+   },
+   {
+    "sprite": "rug_navy",
+    "x": 210,
+    "y": 180,
+    "floor": true
+   }
+  ],
+  "interactables": [
+   {
+    "id": "teller",
+    "at": [
+     240,
+     106
+    ],
+    "label": "Teller — business banking",
+    "action": "bank_counter"
+   },
+   {
+    "id": "atm",
+    "at": [
+     50,
+     96
+    ],
+    "label": "ATM — balances",
+    "action": "atm"
+   },
+   {
+    "id": "brochure",
+    "at": [
+     134,
+     98
+    ],
+    "label": "Read: 'Small Business Lending'",
+    "action": "loans_info"
+   }
+  ],
+  "npc_spots": {
+   "teller": [
+    240,
+    64
+   ],
+   "exec": [
+    402,
+    112
+   ]
+  }
+ }
+}

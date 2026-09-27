@@ -1,0 +1,67 @@
+{
+ "id": "unexpected_large_order",
+ "category": "customer",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "stat:orders_delivered>=3",
+   "day>=16",
+   "company_registered"
+  ],
+  "chance": 0.5,
+  "once": true,
+  "earliest_day": 16
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "harbor_point",
+  "title": "Unexpected large order",
+  "icon": "contracts",
+  "lines": [
+   "Hi! Rosa from Harbor Point Fitness.",
+   "We want 120 insulated bottles for our members. $21 each, Net 30.",
+   "Can you deliver within a week?"
+  ]
+ },
+ "choices": [
+  {
+   "id": "review",
+   "label": "Send me the contract. I'll look.",
+   "detail": "Review terms in Company OS → Contracts. Accept, counter or decline there.",
+   "effects": [
+    {
+     "op": "create_contract_offer",
+     "template": {
+      "buyer": "harbor_point_fitness",
+      "product": "water_bottle",
+      "qty": 120,
+      "unit_price": 21.0,
+      "delivery_days": 7,
+      "payment_terms_days": 30,
+      "penalty_rate": 0.05,
+      "quality_req": "No defects on arrival",
+      "expires_days": 2
+     }
+    },
+    {
+     "op": "set_flag",
+     "flag": "large_order_offered"
+    }
+   ],
+   "outcome": "Rosa: \"Sent! Contract's in your Company OS.\""
+  },
+  {
+   "id": "pass",
+   "label": "Sorry — can't take it on.",
+   "detail": "No risk. No revenue.",
+   "effects": [
+    {
+     "op": "set_flag",
+     "flag": "large_order_declined"
+    }
+   ],
+   "outcome": "Rosa: \"No worries. Maybe next time.\""
+  }
+ ]
+}

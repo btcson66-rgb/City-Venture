@@ -1,0 +1,83 @@
+{
+ "id": "viral_mention",
+ "category": "market",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "best_rating>=4.2",
+   "stat:orders_delivered>=8"
+  ],
+  "chance": 0.14,
+  "once": true
+ },
+ "bind": {
+  "product": "best_seller",
+  "supplier": "most_used"
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "maya",
+  "title": "You're trending",
+  "icon": "star",
+  "lines": [
+   "Uh. Did you see this??",
+   "Some creator with 400k followers just posted your {product_lower}.",
+   "Your listing's getting hammered."
+  ]
+ },
+ "choices": [
+  {
+   "id": "rush",
+   "label": "Rush-order {moq} more (1-day, +20% cost)",
+   "detail": "Demand ×3 for 3 days. Stock is the bottleneck.",
+   "requires": [
+    "cash>={moq_cost_v}"
+   ],
+   "effects": [
+    {
+     "op": "demand_mod",
+     "mult": 3.0,
+     "days": 3
+    },
+    {
+     "op": "rush_order",
+     "qty": "moq",
+     "lead_days": 1,
+     "cost_mult": 1.2
+    }
+   ],
+   "outcome": "Ken: \"Rush order. Tomorrow. You owe me a coffee.\""
+  },
+  {
+   "id": "raise_price",
+   "label": "Raise the price 15%",
+   "detail": "Ride the wave with better margins.",
+   "effects": [
+    {
+     "op": "demand_mod",
+     "mult": 3.0,
+     "days": 3
+    },
+    {
+     "op": "listing_mod",
+     "price_mult": 1.15
+    }
+   ],
+   "outcome": "Price raised."
+  },
+  {
+   "id": "ride",
+   "label": "Ride it out",
+   "detail": "No changes.",
+   "effects": [
+    {
+     "op": "demand_mod",
+     "mult": 3.0,
+     "days": 3
+    }
+   ],
+   "outcome": "Maya: \"Enjoy your 15 minutes 😎\""
+  }
+ ]
+}

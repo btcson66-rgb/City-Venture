@@ -1,0 +1,65 @@
+{
+ "id": "jun_first",
+ "with": "jun",
+ "nodes": {
+  "start": [
+   {
+    "who": "jun",
+    "text": "New face. Flat white?"
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Please.",
+      "next": "a"
+     },
+     {
+      "text": "Whatever's strongest.",
+      "next": "b"
+     }
+    ]
+   }
+  ],
+  "a": [
+   {
+    "who": "jun",
+    "text": "Coming up."
+   },
+   {
+    "goto": "end"
+   }
+  ],
+  "b": [
+   {
+    "who": "jun",
+    "text": "Double ristretto. Brave."
+   },
+   {
+    "goto": "end"
+   }
+  ],
+  "end": [
+   {
+    "who": "jun",
+    "expr": "thinking",
+    "text": "You look like you're plotting something."
+   },
+   {
+    "who": "jun",
+    "text": "Nexus Co-work, over in Startup Hub. They've got a board — suppliers, gigs, whatever."
+   },
+   {
+    "who": "jun",
+    "expr": "happy",
+    "text": "Half my regulars found work there. Just walk east."
+   }
+  ]
+ },
+ "on_end": [
+  {
+   "do": "set_flag",
+   "flag": "met_jun"
+  }
+ ]
+}

@@ -1,0 +1,86 @@
+{
+ "id": "supplier_price_increase",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "stat:purchase_orders>=1",
+   "day>=10"
+  ],
+  "chance": 0.22,
+  "cooldown_days": 18,
+  "once": false,
+  "earliest_day": 10
+ },
+ "bind": {
+  "product": "best_seller",
+  "supplier": "most_used"
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "ken",
+  "title": "Supplier price increase",
+  "icon": "warning",
+  "lines": [
+   "Heads up. Factory just raised prices.",
+   "{product} goes up 15% from Monday. Nothing I can do.",
+   "Current: {unit_cost}/unit, MOQ {moq}."
+  ]
+ },
+ "choices": [
+  {
+   "id": "accept",
+   "label": "Okay. Keep supplying me.",
+   "detail": "+15% unit cost for 30 days. Margins shrink.",
+   "effects": [
+    {
+     "op": "supplier_price_mod",
+     "mult": 1.15,
+     "days": 30,
+     "from_days": 1
+    }
+   ],
+   "outcome": "Ken: \"Appreciate it.\""
+  },
+  {
+   "id": "stock_up",
+   "label": "Lock in {moq} more at today's price",
+   "detail": "Spend {moq_cost} now, then the increase applies.",
+   "requires": [
+    "cash>={moq_cost_v}"
+   ],
+   "effects": [
+    {
+     "op": "purchase",
+     "qty": "moq"
+    },
+    {
+     "op": "supplier_price_mod",
+     "mult": 1.15,
+     "days": 30,
+     "from_days": 1
+    }
+   ],
+   "outcome": "Ken: \"Smart. Shipping tomorrow.\""
+  },
+  {
+   "id": "shop_around",
+   "label": "I'll look at other suppliers.",
+   "detail": "+15% still applies here. Compare suppliers in Company OS.",
+   "effects": [
+    {
+     "op": "supplier_price_mod",
+     "mult": 1.15,
+     "days": 30,
+     "from_days": 1
+    },
+    {
+     "op": "set_flag",
+     "flag": "considering_new_supplier"
+    }
+   ],
+   "outcome": "Ken: \"Fair. Door's open.\""
+  }
+ ]
+}

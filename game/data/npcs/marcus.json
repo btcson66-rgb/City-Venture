@@ -1,0 +1,35 @@
+{
+ "id": "marcus",
+ "name": "Marcus Reed",
+ "role": "bank executive",
+ "appearance": {
+  "presentation": "masculine",
+  "face": "square",
+  "hair": "side_part",
+  "hair_color": "silver",
+  "skin": "s5",
+  "eye_shape": "narrow",
+  "eye_color": "dark",
+  "brows": "thick",
+  "mouth": "neutral",
+  "accessory": "none"
+ },
+ "outfit": "business_suit",
+ "outfit_tints": {},
+ "schedule": [
+  {
+   "days": "mon,tue,wed,thu,fri",
+   "from": "13:00",
+   "to": "16:00",
+   "location": "interior:nexus_bank",
+   "spot": "exec"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [],
+   "conversation": "marcus_loan"
+  }
+ ],
+ "phone_contact": false
+}

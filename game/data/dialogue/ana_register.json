@@ -1,0 +1,42 @@
+{
+ "id": "ana_register",
+ "with": "ana",
+ "nodes": {
+  "start": [
+   {
+    "who": "ana",
+    "text": "Next! Hi. What can I do for you?"
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "I want to register a company.",
+      "next": "reg"
+     },
+     {
+      "text": "Just looking.",
+      "next": "bye"
+     }
+    ]
+   }
+  ],
+  "reg": [
+   {
+    "who": "ana",
+    "text": "Sure. Name, business type, address. $300 fee."
+   },
+   {
+    "who": "ana",
+    "expr": "thinking",
+    "text": "Takes about 45 minutes to process."
+   }
+  ],
+  "bye": [
+   {
+    "who": "ana",
+    "text": "Take a number whenever you're ready."
+   }
+  ]
+ }
+}

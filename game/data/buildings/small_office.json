@@ -1,0 +1,157 @@
+{
+ "id": "small_office",
+ "name": "22 Founders Lane",
+ "district": "startup_hub",
+ "type": "office",
+ "hours": {
+  "open": "08:00",
+  "close": "20:00",
+  "days": "all",
+  "always_if_lease": "suite_2b"
+ },
+ "exterior": {
+  "sprite": "suite_building",
+  "x": 768,
+  "sign": "22 FOUNDERS LANE"
+ },
+ "interior": {
+  "size": [
+   24,
+   15
+  ],
+  "floor": "wood_dark",
+  "wall": "brick",
+  "ambient": "office",
+  "property": "suite_2b",
+  "props": [
+   {
+    "sprite": "whiteboard",
+    "x": 40,
+    "y": 6,
+    "wall": true
+   },
+   {
+    "sprite": "window_day",
+    "x": 150,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "window_day",
+    "x": 206,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "company_sign",
+    "x": 270,
+    "y": 10,
+    "wall": true
+   },
+   {
+    "sprite": "bookshelf",
+    "x": 330,
+    "y": 58
+   },
+   {
+    "sprite": "exec_desk",
+    "x": 150,
+    "y": 70
+   },
+   {
+    "sprite": "office_chair",
+    "x": 174,
+    "y": 52,
+    "solid": false
+   },
+   {
+    "sprite": "monitor_desk",
+    "x": 30,
+    "y": 120
+   },
+   {
+    "sprite": "office_chair",
+    "x": 38,
+    "y": 152,
+    "solid": false
+   },
+   {
+    "sprite": "rug_navy",
+    "x": 150,
+    "y": 150,
+    "floor": true
+   },
+   {
+    "sprite": "plant_big",
+    "x": 8,
+    "y": 50
+   },
+   {
+    "sprite": "plant_big",
+    "x": 352,
+    "y": 196
+   },
+   {
+    "sprite": "packing_table",
+    "x": 292,
+    "y": 150
+   },
+   {
+    "sprite": "filing_cabinet",
+    "x": 300,
+    "y": 58
+   }
+  ],
+  "stock_display": {
+   "location": "suite_2b",
+   "x": 292,
+   "y": 112,
+   "cols": 5
+  },
+  "interactables": [
+   {
+    "id": "desk",
+    "at": [
+     182,
+     112
+    ],
+    "label": "Sit at your desk — Company OS",
+    "action": "open_company_os",
+    "params": {
+     "terminal": "office",
+     "requires": "lease:suite_2b"
+    }
+   },
+   {
+    "id": "whiteboard",
+    "at": [
+     72,
+     54
+    ],
+    "label": "Whiteboard",
+    "action": "whiteboard"
+   },
+   {
+    "id": "packing",
+    "at": [
+     314,
+     186
+    ],
+    "label": "Packing table",
+    "action": "pack_orders",
+    "params": {
+     "location": "suite_2b",
+     "requires": "lease:suite_2b"
+    }
+   }
+  ],
+  "npc_spots": {
+   "agent": [
+    110,
+    100
+   ]
+  }
+ }
+}

@@ -1,0 +1,124 @@
+{
+ "id": "maya_intro",
+ "channel": "phone",
+ "with": "maya",
+ "nodes": {
+  "start": [
+   {
+    "who": "maya",
+    "text": "So you actually quit?"
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Yeah.",
+      "next": "yeah"
+     },
+     {
+      "text": "...Kind of.",
+      "next": "kind"
+     }
+    ]
+   }
+  ],
+  "yeah": [
+   {
+    "who": "maya",
+    "text": "Okay. Wow."
+   },
+   {
+    "goto": "now"
+   }
+  ],
+  "kind": [
+   {
+    "who": "maya",
+    "text": "\"Kind of.\" You're in Aurelia with a suitcase."
+   },
+   {
+    "goto": "now"
+   }
+  ],
+  "now": [
+   {
+    "who": "maya",
+    "text": "So... now what?"
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "I'm starting a company.",
+      "next": "a",
+      "set": "maya_tone_bold"
+     },
+     {
+      "text": "Looking around first.",
+      "next": "b"
+     },
+     {
+      "text": "Gonna build something of my own.",
+      "next": "c"
+     },
+     {
+      "text": "Honestly? No idea.",
+      "next": "d"
+     }
+    ]
+   }
+  ],
+  "a": [
+   {
+    "who": "maya",
+    "text": "Bold. Love it."
+   },
+   {
+    "goto": "end"
+   }
+  ],
+  "b": [
+   {
+    "who": "maya",
+    "text": "Smart. Don't sign anything on day one."
+   },
+   {
+    "goto": "end"
+   }
+  ],
+  "c": [
+   {
+    "who": "maya",
+    "text": "Of course you are."
+   },
+   {
+    "goto": "end"
+   }
+  ],
+  "d": [
+   {
+    "who": "maya",
+    "text": "Honest. I respect it."
+   },
+   {
+    "goto": "end"
+   }
+  ],
+  "end": [
+   {
+    "who": "maya",
+    "text": "Bloom Coffee's right downstairs. Best flat white in Riverside."
+   },
+   {
+    "who": "maya",
+    "text": "Go see your city."
+   }
+  ]
+ },
+ "on_end": [
+  {
+   "do": "set_flag",
+   "flag": "maya_intro_done"
+  }
+ ]
+}

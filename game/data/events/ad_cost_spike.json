@@ -1,0 +1,75 @@
+{
+ "id": "ad_cost_spike",
+ "category": "market",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "has_ads",
+   "day>=8"
+  ],
+  "chance": 0.2,
+  "cooldown_days": 15
+ },
+ "bind": {
+  "product": "best_seller"
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "shoplane",
+  "title": "Ad prices spike",
+  "icon": "finance",
+  "lines": [
+   "ShopLane Ads: a big brand campaign is bidding up placements.",
+   "Cost per click +40% for the next 7 days."
+  ]
+ },
+ "choices": [
+  {
+   "id": "keep",
+   "label": "Keep my budget",
+   "detail": "Same spend, ~30% fewer clicks.",
+   "effects": [
+    {
+     "op": "ad_price_mod",
+     "mult": 1.4,
+     "days": 7
+    }
+   ],
+   "outcome": "Budget unchanged."
+  },
+  {
+   "id": "raise",
+   "label": "Raise {product} ads 40%",
+   "detail": "Keep reach, spend more.",
+   "effects": [
+    {
+     "op": "ad_price_mod",
+     "mult": 1.4,
+     "days": 7
+    },
+    {
+     "op": "listing_mod",
+     "ad_budget_mult": 1.4
+    }
+   ],
+   "outcome": "Budget raised."
+  },
+  {
+   "id": "pause",
+   "label": "Pause all ads for now",
+   "detail": "Save cash. Sales will dip.",
+   "effects": [
+    {
+     "op": "ad_price_mod",
+     "mult": 1.4,
+     "days": 7
+    },
+    {
+     "op": "pause_ads"
+    }
+   ],
+   "outcome": "Ads paused."
+  }
+ ]
+}

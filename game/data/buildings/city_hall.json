@@ -1,0 +1,134 @@
+{
+ "id": "city_hall",
+ "name": "Aurelia City Hall",
+ "district": "civic_center",
+ "type": "civic",
+ "hours": {
+  "open": "09:00",
+  "close": "17:00",
+  "days": "mon,tue,wed,thu,fri"
+ },
+ "exterior": {
+  "sprite": "city_hall",
+  "x": 288,
+  "sign": "AURELIA CITY HALL"
+ },
+ "interior": {
+  "size": [
+   32,
+   17
+  ],
+  "floor": "marble",
+  "wall": "marble_wall",
+  "ambient": "civic",
+  "props": [
+   {
+    "sprite": "logo_city_hall",
+    "x": 40,
+    "y": 8,
+    "wall": true
+   },
+   {
+    "sprite": "seal",
+    "x": 240,
+    "y": 6,
+    "wall": true
+   },
+   {
+    "sprite": "window_day",
+    "x": 380,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "window_day",
+    "x": 440,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "civic_counter",
+    "x": 184,
+    "y": 56
+   },
+   {
+    "sprite": "ticket_machine",
+    "x": 140,
+    "y": 62
+   },
+   {
+    "sprite": "info_kiosk",
+    "x": 400,
+    "y": 92
+   },
+   {
+    "sprite": "bench_civic",
+    "x": 90,
+    "y": 170
+   },
+   {
+    "sprite": "bench_civic",
+    "x": 190,
+    "y": 170
+   },
+   {
+    "sprite": "bench_civic",
+    "x": 290,
+    "y": 170
+   },
+   {
+    "sprite": "plant_big",
+    "x": 8,
+    "y": 56
+   },
+   {
+    "sprite": "plant_big",
+    "x": 484,
+    "y": 56
+   },
+   {
+    "sprite": "rug_navy",
+    "x": 224,
+    "y": 200,
+    "floor": true
+   }
+  ],
+  "interactables": [
+   {
+    "id": "counter",
+    "at": [
+     256,
+     108
+    ],
+    "label": "Registration counter",
+    "action": "register_company"
+   },
+   {
+    "id": "ticket",
+    "at": [
+     149,
+     100
+    ],
+    "label": "Take a number",
+    "action": "take_number"
+   },
+   {
+    "id": "kiosk",
+    "at": [
+     411,
+     130
+    ],
+    "label": "Permits & regulations",
+    "action": "permits_info"
+   }
+  ],
+  "npc_spots": {
+   "clerk": [
+    256,
+    66
+   ]
+  }
+ }
+}

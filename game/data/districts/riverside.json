@@ -1,0 +1,821 @@
+{
+ "id": "riverside",
+ "name": "Riverside",
+ "size_tiles": [
+  120,
+  48
+ ],
+ "music": "day_city",
+ "ground": [
+  {
+   "type": "plaza_alt",
+   "rect": [
+    0,
+    0,
+    120,
+    20
+   ]
+  },
+  {
+   "type": "sidewalk",
+   "rect": [
+    0,
+    20,
+    120,
+    4
+   ]
+  },
+  {
+   "type": "curb_top",
+   "rect": [
+    0,
+    24,
+    120,
+    1
+   ]
+  },
+  {
+   "type": "road",
+   "rect": [
+    0,
+    25,
+    120,
+    5
+   ]
+  },
+  {
+   "type": "road_dash_h",
+   "rect": [
+    0,
+    27,
+    120,
+    1
+   ],
+   "step": 2
+  },
+  {
+   "type": "curb_bottom",
+   "rect": [
+    0,
+    30,
+    120,
+    1
+   ]
+  },
+  {
+   "type": "sidewalk",
+   "rect": [
+    0,
+    31,
+    120,
+    3
+   ]
+  },
+  {
+   "type": "grass",
+   "rect": [
+    0,
+    34,
+    120,
+    7
+   ]
+  },
+  {
+   "type": "boards",
+   "rect": [
+    0,
+    37,
+    120,
+    2
+   ]
+  },
+  {
+   "type": "grass_flowers",
+   "rect": [
+    10,
+    34,
+    6,
+    2
+   ]
+  },
+  {
+   "type": "grass_flowers",
+   "rect": [
+    70,
+    39,
+    8,
+    2
+   ]
+  },
+  {
+   "type": "water_edge",
+   "rect": [
+    0,
+    41,
+    120,
+    1
+   ]
+  },
+  {
+   "type": "water",
+   "rect": [
+    0,
+    42,
+    120,
+    6
+   ]
+  },
+  {
+   "type": "water_alt",
+   "rect": [
+    0,
+    44,
+    120,
+    1
+   ],
+   "step": 3
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    22,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    62,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    98,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "plaza",
+   "rect": [
+    52,
+    34,
+    14,
+    3
+   ]
+  }
+ ],
+ "buildings": [
+  "riverside_apartment",
+  "bloom_coffee",
+  "postpoint_riverside"
+ ],
+ "fillers": [
+  {
+   "sprite": "riverside_walkup",
+   "x": 32
+  },
+  {
+   "sprite": "riverside_shops",
+   "x": 544
+  },
+  {
+   "sprite": "apartment_mid",
+   "x": 832
+  },
+  {
+   "sprite": "brick_shops",
+   "x": 1008
+  },
+  {
+   "sprite": "office_slab",
+   "x": 1168
+  },
+  {
+   "sprite": "glass_tower",
+   "x": 1360
+  },
+  {
+   "sprite": "riverside_walkup",
+   "x": 1536
+  },
+  {
+   "sprite": "riverside_shops",
+   "x": 1680
+  }
+ ],
+ "props": [
+  {
+   "sprite": "lamp",
+   "x": 100,
+   "y": 298,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp",
+   "x": 300,
+   "y": 298,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp",
+   "x": 500,
+   "y": 298,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp",
+   "x": 700,
+   "y": 298,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp",
+   "x": 900,
+   "y": 298,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp",
+   "x": 1100,
+   "y": 298,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp",
+   "x": 1300,
+   "y": 298,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp",
+   "x": 1500,
+   "y": 298,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp",
+   "x": 1700,
+   "y": 298,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_tall",
+   "x": 150,
+   "y": 324,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_tall",
+   "x": 610,
+   "y": 324,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_tall",
+   "x": 1310,
+   "y": 324,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "umbrella_table",
+   "x": 400,
+   "y": 340,
+   "solid": [
+    8,
+    26,
+    16,
+    6
+   ]
+  },
+  {
+   "sprite": "umbrella_table",
+   "x": 470,
+   "y": 340,
+   "solid": [
+    8,
+    26,
+    16,
+    6
+   ]
+  },
+  {
+   "sprite": "cafe_board",
+   "x": 532,
+   "y": 334,
+   "solid": [
+    2,
+    14,
+    10,
+    4
+   ]
+  },
+  {
+   "sprite": "bike",
+   "x": 830,
+   "y": 344,
+   "solid": [
+    2,
+    14,
+    28,
+    4
+   ]
+  },
+  {
+   "sprite": "trash_bin",
+   "x": 340,
+   "y": 344,
+   "solid": [
+    1,
+    12,
+    10,
+    4
+   ]
+  },
+  {
+   "sprite": "trash_bin",
+   "x": 1020,
+   "y": 344,
+   "solid": [
+    1,
+    12,
+    10,
+    4
+   ]
+  },
+  {
+   "sprite": "planter",
+   "x": 250,
+   "y": 352,
+   "solid": [
+    1,
+    14,
+    30,
+    8
+   ]
+  },
+  {
+   "sprite": "planter",
+   "x": 1250,
+   "y": 352,
+   "solid": [
+    1,
+    14,
+    30,
+    8
+   ]
+  },
+  {
+   "sprite": "digital_sign",
+   "x": 1150,
+   "y": 326,
+   "solid": [
+    6,
+    32,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "direction_sign",
+   "x": 1850,
+   "y": 326,
+   "solid": [
+    11,
+    34,
+    6,
+    4
+   ],
+   "label": "STARTUP HUB →"
+  },
+  {
+   "sprite": "hydrant",
+   "x": 660,
+   "y": 356,
+   "solid": [
+    1,
+    8,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "parking_meter",
+   "x": 960,
+   "y": 352,
+   "solid": [
+    1,
+    16,
+    6,
+    4
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 200,
+   "y": 546,
+   "solid": [
+    1,
+    10,
+    30,
+    6
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 560,
+   "y": 546,
+   "solid": [
+    1,
+    10,
+    30,
+    6
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 1400,
+   "y": 546,
+   "solid": [
+    1,
+    10,
+    30,
+    6
+   ]
+  },
+  {
+   "sprite": "fountain",
+   "x": 880,
+   "y": 540,
+   "solid": [
+    4,
+    20,
+    56,
+    16
+   ]
+  },
+  {
+   "sprite": "flower_bed",
+   "x": 300,
+   "y": 560,
+   "solid": [
+    0,
+    6,
+    32,
+    8
+   ]
+  },
+  {
+   "sprite": "flower_bed",
+   "x": 1180,
+   "y": 560,
+   "solid": [
+    0,
+    6,
+    32,
+    8
+   ]
+  },
+  {
+   "sprite": "bus_stop",
+   "x": 1560,
+   "y": 506,
+   "solid": [
+    2,
+    30,
+    44,
+    8
+   ]
+  },
+  {
+   "sprite": "billboard",
+   "x": 1720,
+   "y": 480,
+   "solid": [
+    28,
+    50,
+    8,
+    4
+   ]
+  },
+  {
+   "sprite": "tree_round",
+   "x": 60,
+   "y": 548,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_round",
+   "x": 330,
+   "y": 548,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_round",
+   "x": 640,
+   "y": 548,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_round",
+   "x": 760,
+   "y": 548,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_round",
+   "x": 1060,
+   "y": 548,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_round",
+   "x": 1260,
+   "y": 548,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_round",
+   "x": 1500,
+   "y": 548,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_round",
+   "x": 1640,
+   "y": 548,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_round",
+   "x": 1800,
+   "y": 548,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_round_b",
+   "x": 470,
+   "y": 590,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_round_b",
+   "x": 1320,
+   "y": 590,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp",
+   "x": 260,
+   "y": 572,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp",
+   "x": 760,
+   "y": 572,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp",
+   "x": 1260,
+   "y": 572,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp",
+   "x": 1760,
+   "y": 572,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  }
+ ],
+ "metro": {
+  "station": "riverside",
+  "x": 1000,
+  "y": 548
+ },
+ "exits": [
+  {
+   "id": "east",
+   "rect": [
+    1904,
+    320,
+    16,
+    244
+   ],
+   "to": "startup_hub",
+   "spawn": "from_riverside",
+   "walk_min": 12
+  }
+ ],
+ "spawns": {
+  "from_startup_hub": [
+   1880,
+   430
+  ],
+  "metro": [
+   1040,
+   630
+  ]
+ },
+ "bounds": {
+  "top": 322,
+  "bottom": 652
+ },
+ "traffic": [
+  {
+   "y": 424,
+   "dir": -1,
+   "density": 0.9
+  },
+  {
+   "y": 478,
+   "dir": 1,
+   "density": 0.9
+  }
+ ],
+ "ped_paths": [
+  {
+   "y": 350,
+   "x0": 20,
+   "x1": 1900
+  },
+  {
+   "y": 362,
+   "x0": 20,
+   "x1": 1900
+  },
+  {
+   "y": 506,
+   "x0": 20,
+   "x1": 1900
+  },
+  {
+   "y": 608,
+   "x0": 20,
+   "x1": 1900
+  }
+ ],
+ "ambient_density": {
+  "morning": 10,
+  "afternoon": 12,
+  "evening": 10,
+  "night": 4
+ },
+ "minimap_color": "#5f8a5a"
+}

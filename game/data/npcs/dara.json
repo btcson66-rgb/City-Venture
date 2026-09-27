@@ -1,0 +1,36 @@
+{
+ "id": "dara",
+ "name": "Dara",
+ "role": "PostPoint clerk",
+ "appearance": {
+  "presentation": "neutral",
+  "face": "heart",
+  "hair": "messy",
+  "hair_color": "rose",
+  "skin": "s4",
+  "eye_shape": "wide",
+  "eye_color": "brown",
+  "brows": "soft",
+  "mouth": "small",
+  "accessory": "none"
+ },
+ "outfit": "courier",
+ "outfit_tints": {},
+ "schedule": [
+  {
+   "days": "all",
+   "from": "08:00",
+   "to": "21:00",
+   "location": "interior:postpoint_riverside",
+   "spot": "counter"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [],
+   "conversation": "dara_postpoint",
+   "action": "dropoff_parcels"
+  }
+ ],
+ "phone_contact": false
+}

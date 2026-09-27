@@ -1,0 +1,17 @@
+{
+ "id": "sofia_account",
+ "with": "sofia",
+ "nodes": {
+  "start": [
+   {
+    "who": "sofia",
+    "text": "Welcome to Nexus Bank. How can I help?"
+   },
+   {
+    "who": "sofia",
+    "expr": "thinking",
+    "text": "For a business account I'll need your registration and an opening deposit. Minimum $500."
+   }
+  ]
+ }
+}

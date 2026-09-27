@@ -1,0 +1,49 @@
+{
+ "id": "marcus_loan",
+ "with": "marcus",
+ "nodes": {
+  "start": [
+   {
+    "who": "marcus",
+    "text": "Marcus Reed. I run business lending here."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Could I get a loan?",
+      "next": "loan"
+     },
+     {
+      "text": "Just saying hi.",
+      "next": "hi"
+     }
+    ]
+   }
+  ],
+  "loan": [
+   {
+    "who": "marcus",
+    "expr": "thinking",
+    "text": "Maybe. Bring me three months of statements."
+   },
+   {
+    "who": "marcus",
+    "text": "I lend on cash flow, not on ideas."
+   }
+  ],
+  "hi": [
+   {
+    "who": "marcus",
+    "expr": "happy",
+    "text": "Good. Banks like people before they need us."
+   }
+  ]
+ },
+ "on_end": [
+  {
+   "do": "set_flag",
+   "flag": "met_marcus"
+  }
+ ]
+}

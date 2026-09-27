@@ -1,0 +1,25 @@
+{
+ "id": "logistics",
+ "name": "Logistics",
+ "status": "planned",
+ "tier": "p0",
+ "module": "",
+ "pitch": "One used van. Every hour and every litre counts.",
+ "starting_capital_min": 12000,
+ "revenue_models": [
+  "delivery_fees",
+  "contracts"
+ ],
+ "cost_types": [
+  "fuel",
+  "maintenance",
+  "drivers",
+  "insurance"
+ ],
+ "growth_paths": [
+  "fleet",
+  "warehouse",
+  "freight_forwarding"
+ ],
+ "icon": "ui/icons/parcel"
+}

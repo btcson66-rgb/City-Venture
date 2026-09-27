@@ -1,0 +1,36 @@
+{
+ "id": "sofia",
+ "name": "Sofia",
+ "role": "relationship banker",
+ "appearance": {
+  "presentation": "feminine",
+  "face": "oval",
+  "hair": "ponytail",
+  "hair_color": "auburn",
+  "skin": "s2",
+  "eye_shape": "almond",
+  "eye_color": "green",
+  "brows": "arched",
+  "mouth": "neutral",
+  "accessory": "none"
+ },
+ "outfit": "business_suit",
+ "outfit_tints": {},
+ "schedule": [
+  {
+   "days": "mon,tue,wed,thu,fri",
+   "from": "09:00",
+   "to": "16:00",
+   "location": "interior:nexus_bank",
+   "spot": "teller"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [],
+   "conversation": "sofia_account",
+   "action": "bank_counter"
+  }
+ ],
+ "phone_contact": false
+}

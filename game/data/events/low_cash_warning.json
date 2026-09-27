@@ -1,0 +1,64 @@
+{
+ "id": "low_cash_warning",
+ "category": "finance",
+ "status": "active",
+ "trigger": {
+  "when": "on_signal",
+  "signal": "solvency"
+ },
+ "presentation": {
+  "channel": "modal",
+  "speaker": "bank",
+  "title": "Cash is running low",
+  "icon": "warning",
+  "lines": [
+   "{entity_name}: {cash}.",
+   "Upcoming: {upcoming}.",
+   "Overdraft costs $35 a night. Nothing's over — but something has to give."
+  ]
+ },
+ "choices": [
+  {
+   "id": "liquidate",
+   "label": "Sell all stock to a liquidator (40% of cost)",
+   "detail": "Cash now, big loss on inventory.",
+   "effects": [
+    {
+     "op": "liquidate_inventory",
+     "rate": 0.4
+    },
+    {
+     "op": "timeline",
+     "text": "Sold inventory to a liquidator to stay afloat."
+    }
+   ],
+   "outcome": "The liquidator's van is on its way."
+  },
+  {
+   "id": "reduce",
+   "label": "Cut spending (pause ads, cheaper living)",
+   "detail": "Living costs drop to $18/day. Sales slow down.",
+   "effects": [
+    {
+     "op": "reduce_spending"
+    }
+   ],
+   "outcome": "Belt tightened."
+  },
+  {
+   "id": "continue",
+   "label": "Keep going",
+   "detail": "Your call.",
+   "effects": [
+    {
+     "op": "none"
+    },
+    {
+     "op": "set_flag",
+     "flag": "ignored_cash_warning"
+    }
+   ],
+   "outcome": ""
+  }
+ ]
+}

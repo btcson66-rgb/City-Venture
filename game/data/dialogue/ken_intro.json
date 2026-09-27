@@ -1,0 +1,27 @@
+{
+ "id": "ken_intro",
+ "with": "ken",
+ "nodes": {
+  "start": [
+   {
+    "who": "ken",
+    "text": "Ken. TradeLink Wholesale."
+   },
+   {
+    "who": "ken",
+    "text": "Earbuds, lamps, bottles, phone stands. MOQs are MOQs, don't haggle me on those."
+   },
+   {
+    "who": "ken",
+    "expr": "happy",
+    "text": "Order through TradeLink on your laptop. Two days to your door."
+   }
+  ]
+ },
+ "on_end": [
+  {
+   "do": "set_flag",
+   "flag": "met_ken"
+  }
+ ]
+}

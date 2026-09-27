@@ -1,0 +1,36 @@
+{
+ "id": "lee",
+ "name": "Lee",
+ "role": "barista",
+ "appearance": {
+  "presentation": "neutral",
+  "face": "round",
+  "hair": "ponytail",
+  "hair_color": "navy",
+  "skin": "s2",
+  "eye_shape": "round",
+  "eye_color": "gray",
+  "brows": "soft",
+  "mouth": "smile",
+  "accessory": "none"
+ },
+ "outfit": "barista",
+ "outfit_tints": {},
+ "schedule": [
+  {
+   "days": "all",
+   "from": "07:00",
+   "to": "19:00",
+   "location": "interior:byte_and_bean",
+   "spot": "counter"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [],
+   "conversation": "barista_bytebean",
+   "action": "coffee"
+  }
+ ],
+ "phone_contact": false
+}

@@ -1,0 +1,201 @@
+{
+ "id": "aurelia",
+ "name": "Aurelia City",
+ "population": 3200000,
+ "area_km2": 62,
+ "districts": [
+  {
+   "id": "riverside",
+   "name": "Riverside",
+   "status": "active",
+   "map_pos": [
+    362,
+    262
+   ],
+   "icon": "river",
+   "blurb": "Parks, cafes and a waterfront lifestyle. Your first home."
+  },
+  {
+   "id": "startup_hub",
+   "name": "Startup Hub",
+   "status": "active",
+   "map_pos": [
+    500,
+    205
+   ],
+   "icon": "startup",
+   "blurb": "Co-working, incubators and a very caffeinated founder scene."
+  },
+  {
+   "id": "civic_center",
+   "name": "Civic Center",
+   "status": "active",
+   "map_pos": [
+    392,
+    132
+   ],
+   "icon": "civic",
+   "blurb": "City Hall, permits, registration, public services."
+  },
+  {
+   "id": "financial",
+   "name": "Financial District",
+   "status": "active",
+   "map_pos": [
+    292,
+    180
+   ],
+   "icon": "financial",
+   "blurb": "Banks, towers, investors, lawyers."
+  },
+  {
+   "id": "shopping_street",
+   "name": "Shopping Street",
+   "status": "planned",
+   "map_pos": [
+    128,
+    190
+   ],
+   "icon": "shop",
+   "blurb": "Retail, dining, nightlife."
+  },
+  {
+   "id": "harbor",
+   "name": "Harbor",
+   "status": "planned",
+   "map_pos": [
+    292,
+    318
+   ],
+   "icon": "bank",
+   "blurb": "Containers, customs, freight."
+  },
+  {
+   "id": "residential",
+   "name": "Residential District",
+   "status": "planned",
+   "map_pos": [
+    150,
+    92
+   ],
+   "icon": "home",
+   "blurb": "Schools, parks, families."
+  },
+  {
+   "id": "luxury_heights",
+   "name": "Luxury Heights",
+   "status": "planned",
+   "map_pos": [
+    318,
+    58
+   ],
+   "icon": "star",
+   "blurb": "Penthouses, clubs, fine dining."
+  },
+  {
+   "id": "airport",
+   "name": "International Airport",
+   "status": "planned",
+   "map_pos": [
+    548,
+    70
+   ],
+   "icon": "world",
+   "blurb": "Domestic, international, cargo, private aviation."
+  },
+  {
+   "id": "old_town",
+   "name": "Old Town",
+   "status": "planned",
+   "map_pos": [
+    228,
+    118
+   ],
+   "icon": "home",
+   "blurb": "Low rents, old shops, art."
+  },
+  {
+   "id": "university",
+   "name": "University District",
+   "status": "planned",
+   "map_pos": [
+    590,
+    150
+   ],
+   "icon": "info",
+   "blurb": "Research and talent."
+  },
+  {
+   "id": "industrial",
+   "name": "Industrial Zone",
+   "status": "planned",
+   "map_pos": [
+    44,
+    150
+   ],
+   "icon": "company",
+   "blurb": "Factories and materials."
+  }
+ ],
+ "metro": {
+  "fare": 2.8,
+  "lines": [
+   {
+    "id": "M1",
+    "name": "Central Line",
+    "color": "#e05a4f",
+    "stations": [
+     "civic_center",
+     "financial",
+     "riverside"
+    ]
+   },
+   {
+    "id": "M2",
+    "name": "Riverside Line",
+    "color": "#4d8ad6",
+    "stations": [
+     "riverside",
+     "startup_hub"
+    ]
+   },
+   {
+    "id": "M3",
+    "name": "Harbor Line",
+    "color": "#5fb06e",
+    "stations": [
+     "harbor",
+     "riverside"
+    ]
+   },
+   {
+    "id": "M4",
+    "name": "Airport Line",
+    "color": "#e2b452",
+    "stations": [
+     "financial",
+     "airport"
+    ]
+   },
+   {
+    "id": "M5",
+    "name": "Loop Line",
+    "color": "#966ec4",
+    "stations": [
+     "startup_hub",
+     "civic_center",
+     "luxury_heights",
+     "shopping_street"
+    ]
+   }
+  ],
+  "travel_min": {
+   "riverside>startup_hub": 6,
+   "riverside>civic_center": 12,
+   "riverside>financial": 10,
+   "startup_hub>civic_center": 9,
+   "startup_hub>financial": 8,
+   "civic_center>financial": 5
+  }
+ }
+}

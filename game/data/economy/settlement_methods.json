@@ -1,0 +1,13 @@
+{
+  "methods": [
+    {"id": "bank_transfer", "name": "Bank transfer", "speed_days": 1, "fee_rate": 0.0, "fixed_fee": 0.0, "status": "active",
+     "risks": {"technical": "low", "counterparty": "low", "regulatory": "low"}},
+    {"id": "marketplace_payout", "name": "ShopLane payout", "speed_days": 7, "fee_rate": 0.0, "fixed_fee": 0.0, "status": "active",
+     "risks": {"technical": "low", "counterparty": "platform", "regulatory": "low"}},
+    {"id": "international_wire", "name": "International wire", "speed_days": 3, "fee_rate": 0.01, "fixed_fee": 25.0, "status": "planned",
+     "available_from": {"phase": "P2"}},
+    {"id": "stablecoin_settlement", "name": "Stablecoin settlement (simulated)", "speed_days": 0, "fee_rate": 0.002, "fixed_fee": 1.0,
+     "status": "planned", "available_from": {"phase": "P2", "flag": "clearing_crisis_started"},
+     "risks": {"technical": "medium", "counterparty": "issuer / depeg", "regulatory": "evolving", "operational": "wallet & key management"}}
+  ]
+}

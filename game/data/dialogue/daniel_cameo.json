@@ -1,0 +1,27 @@
+{
+ "id": "daniel_cameo",
+ "with": "daniel",
+ "nodes": {
+  "start": [
+   {
+    "who": "daniel",
+    "text": "Daniel Wong. Crestline Retail — buying side."
+   },
+   {
+    "who": "daniel",
+    "expr": "thinking",
+    "text": "Small sellers are cute. I buy by the pallet."
+   },
+   {
+    "who": "daniel",
+    "text": "Call me when you can do volume."
+   }
+  ]
+ },
+ "on_end": [
+  {
+   "do": "set_flag",
+   "flag": "met_daniel"
+  }
+ ]
+}

@@ -1,0 +1,10 @@
+{
+  "methods": [
+    {"id": "economy", "name": "Economy", "cost": {"small": 4.2, "medium": 6.8}, "transit_days": 3},
+    {"id": "express", "name": "Express", "cost": {"small": 8.9, "medium": 12.5}, "transit_days": 1}
+  ],
+  "pickup": {"courier_fee_per_batch": 6.0, "pickup_delay_min": 120},
+  "dropoff": {"building": "postpoint_riverside"},
+  "b2b_freight": {"flat_fee": 40.0, "transit_days": 1},
+  "pack_minutes_per_order": 8
+}

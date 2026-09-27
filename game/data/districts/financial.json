@@ -1,0 +1,388 @@
+{
+ "id": "financial",
+ "name": "Financial District",
+ "size_tiles": [
+  80,
+  44
+ ],
+ "music": "financial",
+ "ground": [
+  {
+   "type": "plaza_alt",
+   "rect": [
+    0,
+    0,
+    80,
+    20
+   ]
+  },
+  {
+   "type": "sidewalk",
+   "rect": [
+    0,
+    20,
+    80,
+    4
+   ]
+  },
+  {
+   "type": "curb_top",
+   "rect": [
+    0,
+    24,
+    80,
+    1
+   ]
+  },
+  {
+   "type": "road",
+   "rect": [
+    0,
+    25,
+    80,
+    5
+   ]
+  },
+  {
+   "type": "road_dash_h",
+   "rect": [
+    0,
+    27,
+    80,
+    1
+   ],
+   "step": 2
+  },
+  {
+   "type": "curb_bottom",
+   "rect": [
+    0,
+    30,
+    80,
+    1
+   ]
+  },
+  {
+   "type": "sidewalk",
+   "rect": [
+    0,
+    31,
+    80,
+    3
+   ]
+  },
+  {
+   "type": "plaza",
+   "rect": [
+    0,
+    34,
+    80,
+    10
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    30,
+    25,
+    3,
+    5
+   ]
+  }
+ ],
+ "buildings": [
+  "nexus_bank"
+ ],
+ "fillers": [
+  {
+   "sprite": "finance_tower",
+   "x": 32
+  },
+  {
+   "sprite": "glass_tower",
+   "x": 480
+  },
+  {
+   "sprite": "finance_tower",
+   "x": 672
+  },
+  {
+   "sprite": "office_slab",
+   "x": 880
+  },
+  {
+   "sprite": "glass_tower",
+   "x": 1072
+  }
+ ],
+ "props": [
+  {
+   "sprite": "lamp",
+   "x": 140,
+   "y": 298,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp",
+   "x": 440,
+   "y": 298,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp",
+   "x": 640,
+   "y": 298,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp",
+   "x": 840,
+   "y": 298,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp",
+   "x": 1040,
+   "y": 298,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp",
+   "x": 1240,
+   "y": 298,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "digital_sign",
+   "x": 620,
+   "y": 326,
+   "solid": [
+    6,
+    32,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "direction_sign",
+   "x": 40,
+   "y": 326,
+   "solid": [
+    11,
+    34,
+    6,
+    4
+   ],
+   "label": "← CIVIC CENTER"
+  },
+  {
+   "sprite": "planter",
+   "x": 250,
+   "y": 600,
+   "solid": [
+    1,
+    14,
+    30,
+    8
+   ]
+  },
+  {
+   "sprite": "planter",
+   "x": 450,
+   "y": 600,
+   "solid": [
+    1,
+    14,
+    30,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 700,
+   "y": 580,
+   "solid": [
+    1,
+    10,
+    30,
+    6
+   ]
+  },
+  {
+   "sprite": "billboard",
+   "x": 1100,
+   "y": 520,
+   "solid": [
+    28,
+    50,
+    8,
+    4
+   ]
+  },
+  {
+   "sprite": "tree_round",
+   "x": 120,
+   "y": 560,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_round",
+   "x": 560,
+   "y": 560,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_round",
+   "x": 980,
+   "y": 560,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_tall",
+   "x": 300,
+   "y": 640,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_tall",
+   "x": 1180,
+   "y": 640,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  }
+ ],
+ "metro": {
+  "station": "financial",
+  "x": 880,
+  "y": 560
+ },
+ "exits": [
+  {
+   "id": "west",
+   "rect": [
+    0,
+    320,
+    16,
+    244
+   ],
+   "to": "civic_center",
+   "spawn": "from_financial",
+   "walk_min": 6
+  }
+ ],
+ "spawns": {
+  "from_civic_center": [
+   40,
+   430
+  ],
+  "metro": [
+   920,
+   642
+  ]
+ },
+ "bounds": {
+  "top": 322,
+  "bottom": 690
+ },
+ "traffic": [
+  {
+   "y": 424,
+   "dir": -1,
+   "density": 1.0
+  },
+  {
+   "y": 478,
+   "dir": 1,
+   "density": 1.0
+  }
+ ],
+ "ped_paths": [
+  {
+   "y": 350,
+   "x0": 20,
+   "x1": 1260
+  },
+  {
+   "y": 362,
+   "x0": 20,
+   "x1": 1260
+  },
+  {
+   "y": 506,
+   "x0": 20,
+   "x1": 1260
+  },
+  {
+   "y": 600,
+   "x0": 20,
+   "x1": 1260
+  }
+ ],
+ "ambient_density": {
+  "morning": 12,
+  "afternoon": 12,
+  "evening": 6,
+  "night": 2
+ },
+ "minimap_color": "#4a5a80"
+}

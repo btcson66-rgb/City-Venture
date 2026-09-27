@@ -1,0 +1,422 @@
+{
+ "id": "civic_center",
+ "name": "Civic Center",
+ "size_tiles": [
+  80,
+  44
+ ],
+ "music": "civic",
+ "ground": [
+  {
+   "type": "plaza_alt",
+   "rect": [
+    0,
+    0,
+    80,
+    20
+   ]
+  },
+  {
+   "type": "sidewalk",
+   "rect": [
+    0,
+    20,
+    80,
+    4
+   ]
+  },
+  {
+   "type": "curb_top",
+   "rect": [
+    0,
+    24,
+    80,
+    1
+   ]
+  },
+  {
+   "type": "road",
+   "rect": [
+    0,
+    25,
+    80,
+    5
+   ]
+  },
+  {
+   "type": "road_dash_h",
+   "rect": [
+    0,
+    27,
+    80,
+    1
+   ],
+   "step": 2
+  },
+  {
+   "type": "curb_bottom",
+   "rect": [
+    0,
+    30,
+    80,
+    1
+   ]
+  },
+  {
+   "type": "sidewalk",
+   "rect": [
+    0,
+    31,
+    80,
+    3
+   ]
+  },
+  {
+   "type": "plaza",
+   "rect": [
+    0,
+    34,
+    80,
+    10
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    16,
+    34,
+    16,
+    5
+   ],
+   "step": 2
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    34,
+    25,
+    3,
+    5
+   ]
+  }
+ ],
+ "buildings": [
+  "city_hall"
+ ],
+ "fillers": [
+  {
+   "sprite": "civic_annex",
+   "x": 64
+  },
+  {
+   "sprite": "office_slab",
+   "x": 592
+  },
+  {
+   "sprite": "brick_shops",
+   "x": 800
+  },
+  {
+   "sprite": "glass_tower",
+   "x": 976
+  }
+ ],
+ "props": [
+  {
+   "sprite": "lamp",
+   "x": 40,
+   "y": 298,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp",
+   "x": 240,
+   "y": 298,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp",
+   "x": 560,
+   "y": 298,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp",
+   "x": 760,
+   "y": 298,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp",
+   "x": 960,
+   "y": 298,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp",
+   "x": 1160,
+   "y": 298,
+   "glow": true,
+   "solid": [
+    3,
+    40,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "flagpole",
+   "x": 270,
+   "y": 258,
+   "solid": [
+    0,
+    58,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "flagpole",
+   "x": 556,
+   "y": 258,
+   "solid": [
+    0,
+    58,
+    6,
+    6
+   ]
+  },
+  {
+   "sprite": "fountain",
+   "x": 384,
+   "y": 560,
+   "solid": [
+    4,
+    20,
+    56,
+    16
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 240,
+   "y": 580,
+   "solid": [
+    1,
+    10,
+    30,
+    6
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 560,
+   "y": 580,
+   "solid": [
+    1,
+    10,
+    30,
+    6
+   ]
+  },
+  {
+   "sprite": "direction_sign",
+   "x": 1220,
+   "y": 326,
+   "solid": [
+    11,
+    34,
+    6,
+    4
+   ],
+   "label": "FINANCIAL →"
+  },
+  {
+   "sprite": "flower_bed",
+   "x": 330,
+   "y": 620,
+   "solid": [
+    0,
+    6,
+    32,
+    8
+   ]
+  },
+  {
+   "sprite": "flower_bed",
+   "x": 470,
+   "y": 620,
+   "solid": [
+    0,
+    6,
+    32,
+    8
+   ]
+  },
+  {
+   "sprite": "tree_round",
+   "x": 180,
+   "y": 560,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_round",
+   "x": 700,
+   "y": 560,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_round",
+   "x": 900,
+   "y": 560,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_round",
+   "x": 1100,
+   "y": 560,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_round_b",
+   "x": 100,
+   "y": 640,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_round_b",
+   "x": 1200,
+   "y": 640,
+   "solid": [
+    12,
+    38,
+    8,
+    6
+   ]
+  }
+ ],
+ "metro": {
+  "station": "civic_center",
+  "x": 820,
+  "y": 560
+ },
+ "exits": [
+  {
+   "id": "east",
+   "rect": [
+    1264,
+    320,
+    16,
+    244
+   ],
+   "to": "financial",
+   "spawn": "from_civic_center",
+   "walk_min": 6
+  }
+ ],
+ "spawns": {
+  "from_financial": [
+   1240,
+   430
+  ],
+  "metro": [
+   860,
+   642
+  ]
+ },
+ "bounds": {
+  "top": 322,
+  "bottom": 690
+ },
+ "traffic": [
+  {
+   "y": 424,
+   "dir": -1,
+   "density": 0.6
+  },
+  {
+   "y": 478,
+   "dir": 1,
+   "density": 0.6
+  }
+ ],
+ "ped_paths": [
+  {
+   "y": 350,
+   "x0": 20,
+   "x1": 1260
+  },
+  {
+   "y": 506,
+   "x0": 20,
+   "x1": 1260
+  },
+  {
+   "y": 600,
+   "x0": 20,
+   "x1": 1260
+  }
+ ],
+ "ambient_density": {
+  "morning": 8,
+  "afternoon": 9,
+  "evening": 5,
+  "night": 2
+ },
+ "minimap_color": "#8a8470"
+}

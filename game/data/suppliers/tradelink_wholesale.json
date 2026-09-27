@@ -1,0 +1,10 @@
+{"id": "tradelink_wholesale", "name": "TradeLink Wholesale", "region": "aurelia", "contact_npc": "ken",
+ "blurb": "Local wholesaler. Reliable, not the cheapest.",
+ "offers": [
+  {"product": "wireless_earbuds", "unit_cost": 18.0, "moq": 50, "lead_days": 2, "defect_rate": 0.05},
+  {"product": "desk_lamp", "unit_cost": 11.5, "moq": 40, "lead_days": 2, "defect_rate": 0.03},
+  {"product": "water_bottle", "unit_cost": 6.8, "moq": 60, "lead_days": 2, "defect_rate": 0.02},
+  {"product": "phone_stand", "unit_cost": 3.4, "moq": 80, "lead_days": 2, "defect_rate": 0.02}
+ ],
+ "payment_terms": "prepay",
+ "net_terms_for_companies": {"days": 15, "requires": ["company_registered"]}}

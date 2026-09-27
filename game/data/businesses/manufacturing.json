@@ -1,0 +1,24 @@
+{
+ "id": "manufacturing",
+ "name": "Manufacturing",
+ "status": "planned",
+ "tier": "p0",
+ "module": "",
+ "pitch": "Small OEM runs. Yield, downtime, defects.",
+ "starting_capital_min": 40000,
+ "revenue_models": [
+  "oem_orders"
+ ],
+ "cost_types": [
+  "materials",
+  "equipment",
+  "labor",
+  "qc"
+ ],
+ "growth_paths": [
+  "automation",
+  "own_brand",
+  "overseas_plant"
+ ],
+ "icon": "ui/icons/company"
+}

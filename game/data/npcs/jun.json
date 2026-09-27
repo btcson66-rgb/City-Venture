@@ -1,0 +1,42 @@
+{
+ "id": "jun",
+ "name": "Jun",
+ "role": "barista",
+ "appearance": {
+  "presentation": "masculine",
+  "face": "square",
+  "hair": "short_neat",
+  "hair_color": "black",
+  "skin": "s4",
+  "eye_shape": "narrow",
+  "eye_color": "dark",
+  "brows": "thick",
+  "mouth": "neutral",
+  "accessory": "none"
+ },
+ "outfit": "barista",
+ "outfit_tints": {},
+ "schedule": [
+  {
+   "days": "all",
+   "from": "07:00",
+   "to": "20:00",
+   "location": "interior:bloom_coffee",
+   "spot": "counter"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [
+    "!flag:met_jun"
+   ],
+   "conversation": "jun_first",
+   "action": "coffee"
+  },
+  {
+   "when": [],
+   "conversation": "jun_chat"
+  }
+ ],
+ "phone_contact": false
+}

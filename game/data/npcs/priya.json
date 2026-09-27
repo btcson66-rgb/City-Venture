@@ -1,0 +1,41 @@
+{
+ "id": "priya",
+ "name": "Priya",
+ "role": "community manager",
+ "appearance": {
+  "presentation": "feminine",
+  "face": "heart",
+  "hair": "long",
+  "hair_color": "dark_brown",
+  "skin": "s5",
+  "eye_shape": "wide",
+  "eye_color": "brown",
+  "brows": "arched",
+  "mouth": "grin",
+  "accessory": "glasses_round"
+ },
+ "outfit": "office_professional",
+ "outfit_tints": {},
+ "schedule": [
+  {
+   "days": "all",
+   "from": "08:00",
+   "to": "20:00",
+   "location": "interior:nexus_cowork",
+   "spot": "desk"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [
+    "!flag:met_priya"
+   ],
+   "conversation": "priya_first"
+  },
+  {
+   "when": [],
+   "conversation": "priya_chat"
+  }
+ ],
+ "phone_contact": true
+}

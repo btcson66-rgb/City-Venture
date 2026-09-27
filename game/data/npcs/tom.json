@@ -1,0 +1,36 @@
+{
+ "id": "tom",
+ "name": "Tom",
+ "role": "leasing agent",
+ "appearance": {
+  "presentation": "masculine",
+  "face": "oval",
+  "hair": "short_neat",
+  "hair_color": "blonde",
+  "skin": "s1",
+  "eye_shape": "round",
+  "eye_color": "blue",
+  "brows": "straight",
+  "mouth": "smile",
+  "accessory": "none"
+ },
+ "outfit": "business_suit",
+ "outfit_tints": {},
+ "schedule": [
+  {
+   "days": "mon,tue,wed,thu,fri,sat",
+   "from": "09:00",
+   "to": "18:00",
+   "location": "interior:small_office",
+   "spot": "agent"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [],
+   "conversation": "tom_office",
+   "action": "lease_office"
+  }
+ ],
+ "phone_contact": false
+}

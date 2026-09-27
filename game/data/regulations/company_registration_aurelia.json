@@ -1,0 +1,25 @@
+{
+ "id": "company_registration_aurelia",
+ "office": "city_hall",
+ "fee": 300,
+ "processing_min": 45,
+ "fields": [
+  "company_name",
+  "business_type",
+  "address"
+ ],
+ "business_types": [
+  {
+   "id": "retail_online",
+   "name": "Online retail (ecommerce)",
+   "business": "ecommerce"
+  }
+ ],
+ "unlocks": [
+  "business_bank_account",
+  "office_lease",
+  "b2b_contracts",
+  "seller_cap_lifted",
+  "supplier_net_terms"
+ ]
+}

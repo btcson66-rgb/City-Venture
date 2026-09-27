@@ -1,0 +1,68 @@
+{
+ "id": "customer_return",
+ "category": "customer",
+ "status": "active",
+ "trigger": {
+  "when": "on_signal",
+  "signal": "return_requested"
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "customer",
+  "title": "Return request",
+  "icon": "warning",
+  "lines": [
+   "{customer}: {reason}",
+   "(Order {order} — {product}, {price})"
+  ]
+ },
+ "choices": [
+  {
+   "id": "refund",
+   "label": "Refund + take it back",
+   "detail": "Lose the sale + return label.",
+   "effects": [
+    {
+     "op": "refund_order"
+    }
+   ],
+   "outcome": "Refunded."
+  },
+  {
+   "id": "replace",
+   "label": "Send a replacement",
+   "detail": "One unit + express shipping.",
+   "requires": [
+    "has_stock"
+   ],
+   "effects": [
+    {
+     "op": "replace_order"
+    }
+   ],
+   "outcome": "Replacement shipped."
+  },
+  {
+   "id": "partial",
+   "label": "30% partial refund",
+   "detail": "They keep it. Meh review.",
+   "effects": [
+    {
+     "op": "partial_refund"
+    }
+   ],
+   "outcome": "Partial refund sent."
+  },
+  {
+   "id": "refuse",
+   "label": "Refuse",
+   "detail": "1★ review, dispute risk.",
+   "effects": [
+    {
+     "op": "refuse_return"
+    }
+   ],
+   "outcome": "Refused."
+  }
+ ]
+}

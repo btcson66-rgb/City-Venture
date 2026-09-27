@@ -1,0 +1,223 @@
+{
+ "id": "nexus_cowork",
+ "name": "Nexus Co-work",
+ "district": "startup_hub",
+ "type": "coworking",
+ "hours": {
+  "open": "07:00",
+  "close": "22:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "nexus_cowork",
+  "x": 224,
+  "sign": "NEXUS CO-WORK"
+ },
+ "interior": {
+  "size": [
+   30,
+   18
+  ],
+  "floor": "concrete",
+  "wall": "white_modern",
+  "ambient": "office",
+  "props": [
+   {
+    "sprite": "window_day",
+    "x": 20,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "logo_cowork",
+    "x": 150,
+    "y": 8,
+    "wall": true
+   },
+   {
+    "sprite": "cork_board",
+    "x": 330,
+    "y": 8,
+    "wall": true
+   },
+   {
+    "sprite": "window_day",
+    "x": 410,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "exec_desk",
+    "x": 200,
+    "y": 62
+   },
+   {
+    "sprite": "water_cooler",
+    "x": 296,
+    "y": 24
+   },
+   {
+    "sprite": "printer",
+    "x": 270,
+    "y": 36
+   },
+   {
+    "sprite": "monitor_desk",
+    "x": 40,
+    "y": 110
+   },
+   {
+    "sprite": "office_chair",
+    "x": 48,
+    "y": 142,
+    "solid": false
+   },
+   {
+    "sprite": "office_chair",
+    "x": 78,
+    "y": 142,
+    "solid": false
+   },
+   {
+    "sprite": "monitor_desk",
+    "x": 124,
+    "y": 110
+   },
+   {
+    "sprite": "office_chair",
+    "x": 132,
+    "y": 142,
+    "solid": false
+   },
+   {
+    "sprite": "office_chair",
+    "x": 162,
+    "y": 142,
+    "solid": false
+   },
+   {
+    "sprite": "monitor_desk",
+    "x": 40,
+    "y": 186
+   },
+   {
+    "sprite": "office_chair",
+    "x": 48,
+    "y": 218,
+    "solid": false
+   },
+   {
+    "sprite": "office_chair",
+    "x": 78,
+    "y": 218,
+    "solid": false
+   },
+   {
+    "sprite": "monitor_desk",
+    "x": 124,
+    "y": 186
+   },
+   {
+    "sprite": "office_chair",
+    "x": 132,
+    "y": 218,
+    "solid": false
+   },
+   {
+    "sprite": "glass_wall",
+    "x": 250,
+    "y": 110
+   },
+   {
+    "sprite": "phone_booth",
+    "x": 440,
+    "y": 52
+   },
+   {
+    "sprite": "lockers",
+    "x": 440,
+    "y": 120
+   },
+   {
+    "sprite": "lounge_sofa",
+    "x": 320,
+    "y": 190
+   },
+   {
+    "sprite": "lounge_sofa",
+    "x": 392,
+    "y": 190
+   },
+   {
+    "sprite": "coffee_table",
+    "x": 352,
+    "y": 236
+   },
+   {
+    "sprite": "plant_big",
+    "x": 8,
+    "y": 50
+   },
+   {
+    "sprite": "plant_big",
+    "x": 456,
+    "y": 240
+   },
+   {
+    "sprite": "rug_navy",
+    "x": 330,
+    "y": 226,
+    "floor": true
+   }
+  ],
+  "interactables": [
+   {
+    "id": "reception",
+    "at": [
+     232,
+     106
+    ],
+    "label": "Reception — desks & day passes",
+    "action": "cowork_desk"
+   },
+   {
+    "id": "hotdesk",
+    "at": [
+     72,
+     160
+    ],
+    "label": "Work at a hot desk — Company OS",
+    "action": "open_company_os",
+    "params": {
+     "terminal": "cowork",
+     "requires": "desk_access"
+    }
+   },
+   {
+    "id": "board",
+    "at": [
+     358,
+     54
+    ],
+    "label": "Business Board",
+    "action": "business_board"
+   }
+  ],
+  "npc_spots": {
+   "desk": [
+    232,
+    64
+   ],
+   "lounge": [
+    346,
+    196
+   ],
+   "lounge2": [
+    418,
+    196
+   ]
+  }
+ }
+}

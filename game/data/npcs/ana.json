@@ -1,0 +1,36 @@
+{
+ "id": "ana",
+ "name": "Ana",
+ "role": "registration clerk",
+ "appearance": {
+  "presentation": "feminine",
+  "face": "round",
+  "hair": "bun",
+  "hair_color": "brown",
+  "skin": "s2",
+  "eye_shape": "round",
+  "eye_color": "hazel",
+  "brows": "soft",
+  "mouth": "smile",
+  "accessory": "glasses_square"
+ },
+ "outfit": "civic_staff",
+ "outfit_tints": {},
+ "schedule": [
+  {
+   "days": "mon,tue,wed,thu,fri",
+   "from": "09:00",
+   "to": "17:00",
+   "location": "interior:city_hall",
+   "spot": "clerk"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [],
+   "conversation": "ana_register",
+   "action": "register_company"
+  }
+ ],
+ "phone_contact": false
+}

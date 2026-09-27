@@ -1,0 +1,43 @@
+{
+ "id": "maya_cafe",
+ "with": "maya",
+ "nodes": {
+  "start": [
+   {
+    "who": "maya",
+    "expr": "happy",
+    "text": "There you are!"
+   },
+   {
+    "who": "maya",
+    "text": "How's the empire?"
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Growing.",
+      "next": "a"
+     },
+     {
+      "text": "Chaotic.",
+      "next": "b"
+     }
+    ]
+   }
+  ],
+  "a": [
+   {
+    "who": "maya",
+    "text": "Don't forget to eat."
+   }
+  ],
+  "b": [
+   {
+    "who": "maya",
+    "expr": "thinking",
+    "text": "Chaos is just growth without a spreadsheet."
+   }
+  ]
+ }
+}
