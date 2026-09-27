@@ -192,6 +192,7 @@ func toast(text: String, kind := "info", icon := "info") -> void:
 	h.add_child(UIK.icon(icon, 12))
 	var l := UIK.wrap(text, 8, col, 270)
 	h.add_child(l)
+	UIK.ignore_mouse(p)
 	toast_box.add_child(p)
 	while toast_box.get_child_count() > 4:
 		var old := toast_box.get_child(0)
@@ -229,6 +230,7 @@ func show_chapter_card(title: String, subtitle := "") -> void:
 	s.position = Vector2(0, 170)
 	s.size = Vector2(640, 14)
 	c.add_child(s)
+	UIK.ignore_mouse(c)
 	card_layer.add_child(c)
 	c.modulate.a = 0.0
 	var tw := c.create_tween()
@@ -278,6 +280,7 @@ func show_location_card(kind: String, id: String) -> void:
 	v.add_child(UIK.title(title, 11))
 	if sub != "":
 		v.add_child(UIK.wrap(sub, 7, Art.C_SKY, 192))
+	UIK.ignore_mouse(p)
 	# below modals: a management screen opened right away should cover it
 	root.add_child(p)
 	root.move_child(p, modal_layer.get_index())

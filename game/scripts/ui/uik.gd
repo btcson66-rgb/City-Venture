@@ -140,6 +140,15 @@ static func wrap(text: String, size := 8, color := Art.C_WHITE, width := 200.0) 
 
 
 ## Crisp text placed in the world (signs, name tags).
+## Make a purely informational widget (toast, card) transparent to the mouse, children included,
+## so it can never swallow a click meant for the UI underneath.
+static func ignore_mouse(n: Node) -> void:
+	if n is Control:
+		(n as Control).mouse_filter = Control.MOUSE_FILTER_IGNORE
+	for c in n.get_children():
+		ignore_mouse(c)
+
+
 static func world_label(text: String, size := 6, color := Color(1, 1, 1)) -> Label:
 	var l := Label.new()
 	l.text = text

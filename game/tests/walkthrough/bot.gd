@@ -197,11 +197,23 @@ func click_named(name: String, timeout_s := 5.0) -> bool:
 	var ok := await until(func(): return button_named(name) != null, timeout_s)
 	if not ok:
 		fail("button '%s' not found" % name)
+		_diagnose(name)
 		return false
 	var b := button_named(name)
 	log_line("  click [%s] %s" % [name, b.text.replace("\n", " ").left(50)])
 	await click(b)
 	return true
+
+
+## Context for a failed lookup: what is on screen and whether the button exists at all.
+func _diagnose(name: String) -> void:
+	var m = UIRoot.top_modal()
+	log_line("      diag: modal=%s dialogue=%s phone=%s" % [m.get_class() + ":" + str(m.get_script().get_global_name()) if m != null else "none",
+		str(UIRoot.dialogue.active), str(UIRoot.phone.is_open)])
+	var prefix := name.split("_")[0]
+	for n in get_tree().root.find_children(prefix + "*", "Button", true, false):
+		var b := n as Button
+		log_line("      diag: %s visible=%s disabled=%s" % [b.name, str(b.is_visible_in_tree()), str(b.disabled)])
 
 
 func click_text(txt: String, timeout_s := 5.0) -> bool:
