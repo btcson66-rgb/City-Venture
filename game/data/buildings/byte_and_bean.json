@@ -1,6 +1,6 @@
 {
  "id": "byte_and_bean",
- "name": "Byte & Bean",
+ "name": "Bean & Byte",
  "district": "startup_hub",
  "type": "cafe",
  "hours": {
@@ -11,14 +11,14 @@
  "exterior": {
   "sprite": "byte_bean",
   "x": 452,
-  "sign": "BYTE & BEAN"
+  "sign": "BEAN & BYTE"
  },
  "interior": {
   "size": [
    20,
    13
   ],
-  "floor": "checker",
+  "floor": "wood_cafe",
   "wall": "wood_panel",
   "ambient": "cafe",
   "props": [
@@ -96,6 +96,25 @@
     "y": 0,
     "wall": true,
     "glow": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 214,
+    "y": 40,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 268,
+    "y": 40,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "plant_bank",
+    "x": 292,
+    "y": 150
    }
   ],
   "interactables": [

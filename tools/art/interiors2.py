@@ -716,7 +716,7 @@ def interior_props():
         "logo_cowork": lambda: logo_wall("NEXUS  WORK - MEET - CREATE", (28, 46, 92), (230, 240, 255)),
         "logo_bloom": lambda: logo_wall("BLOOM COFFEE", (38, 66, 50), (230, 244, 220)),
         "logo_postpoint": lambda: logo_wall("POSTPOINT", (190, 84, 66), (255, 244, 230)),
-        "logo_bytebean": lambda: logo_wall("BYTE & BEAN", (30, 30, 36), (240, 220, 180)),
+        "logo_bytebean": lambda: logo_wall("BEAN & BYTE", (30, 30, 36), (240, 220, 180)),
         "window_day": lambda: window(False, 52, 42, 1), "window_night": lambda: window(True, 52, 42, 1),
         "framed_art": lambda: framed_art(1), "framed_art_b": lambda: framed_art(5), "sconce": sconce,
     }

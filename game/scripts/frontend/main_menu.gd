@@ -6,10 +6,22 @@ extends Control
 func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	theme = UIK.theme()
-	add_child(Skyline.new())
-	var shade := ColorRect.new()
-	shade.color = Color(0.03, 0.06, 0.12, 0.35)
-	shade.set_anchors_preset(Control.PRESET_FULL_RECT)
+	add_child(Backdrop.make("backdrops/menu"))
+	# navy wash on the left third so the title and buttons read over the street scene
+	var g := Gradient.new()
+	g.set_color(0, Color(0.035, 0.07, 0.15, 0.92))
+	g.set_color(1, Color(0.035, 0.07, 0.15, 0.0))
+	g.add_point(0.45, Color(0.035, 0.07, 0.15, 0.72))
+	var gt := GradientTexture2D.new()
+	gt.gradient = g
+	gt.width = 64
+	gt.height = 4
+	var shade := TextureRect.new()
+	shade.texture = gt
+	shade.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	shade.stretch_mode = TextureRect.STRETCH_SCALE
+	shade.position = Vector2.ZERO
+	shade.size = Vector2(380, 360)
 	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(shade)
 	var shadow := UIK.title("CITY VENTURE", 40, Color8(20, 40, 90))
@@ -40,6 +52,6 @@ func _ready() -> void:
 		var sm := SaveSystem.summary(slot)
 		box.add_child(UIK.label("%s · %s · Day %d" % [sm.get("name", ""), sm.get("company", ""), int(sm.get("day", 0))], 7, Art.C_MUTED))
 	box.add_child(UIK.button("Quit", func(): get_tree().quit(), "", 150))
-	var ver := UIK.label("VERTICAL SLICE 001 · placeholder pixel art · %s" % ProjectSettings.get_setting("application/config/version", ""), 7, Art.C_DIM)
+	var ver := UIK.label("VERTICAL SLICE 001 · art converted from concept boards · %s" % ProjectSettings.get_setting("application/config/version", ""), 7, Art.C_DIM)
 	ver.position = Vector2(8, 346)
 	add_child(ver)

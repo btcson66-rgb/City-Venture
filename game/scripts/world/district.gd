@@ -11,6 +11,10 @@ var cars: Array = []
 var peds: Array = []
 var _ped_rng := RandomNumberGenerator.new()
 var _density_acc := 0.0
+var sky_layer: CanvasLayer
+var sky_day: Sprite2D
+var sky_night: Sprite2D
+const SKY_PARALLAX := 0.55
 
 
 func build(district_id: String) -> void:
@@ -22,6 +26,7 @@ func build(district_id: String) -> void:
 	init_nav()
 	for g in def.get("ground", []):
 		paint(g["type"], g["rect"], int(g.get("step", 1)))
+	_build_sky()
 	# north edge: building fronts / back of the block are not walkable
 	var b: Dictionary = def.get("bounds", {"top": 322, "bottom": size_px.y - 8})
 	add_solid(Rect2(0, 0, size_px.x, float(b["top"]) - 2.0))
@@ -199,8 +204,45 @@ func _spawn_pedestrians(initial: bool) -> void:
 		peds.append(p)
 
 
+## Sky + distant skyline (converted from the concept boards' skyline banners) behind the block.
+## Lives on its own CanvasLayer so the world's day/night CanvasModulate doesn't flatten it; it is
+## tinted and cross-faded to the night skyline here instead, with a slow parallax.
+func _build_sky() -> void:
+	var rows := int(BASE_Y / T)
+	for y in rows:
+		for x in range(0, int(def["size_tiles"][0])):
+			ground.erase_cell(Vector2i(x, y))
+	sky_layer = CanvasLayer.new()
+	sky_layer.layer = -1
+	sky_layer.follow_viewport_enabled = true
+	add_child(sky_layer)
+	sky_day = Sprite2D.new()
+	sky_day.texture = Art.tex("backdrops/skyline_day")
+	sky_night = Sprite2D.new()
+	sky_night.texture = Art.tex("backdrops/skyline_night")
+	for sp in [sky_day, sky_night]:
+		if sp.texture == null:
+			continue
+		sp.centered = false
+		sp.position = Vector2(0, BASE_Y + 2 - sp.texture.get_height())
+		sky_layer.add_child(sp)
+	_update_sky()
+
+
+func _update_sky() -> void:
+	if sky_day == null or not is_inside_tree():
+		return
+	var cam_left := -get_viewport().get_canvas_transform().origin.x
+	for sp in [sky_day, sky_night]:
+		sp.position.x = cam_left * SKY_PARALLAX
+	var nf := Clock.night_factor()
+	sky_day.modulate = Color(1, 1, 1).lerp(Color(1.0, 0.78, 0.66), clampf(nf * 2.0, 0.0, 1.0))
+	sky_night.modulate.a = clampf((nf - 0.35) / 0.4, 0.0, 1.0)
+
+
 func _process(delta: float) -> void:
 	super._process(delta)
+	_update_sky()
 	_density_acc += delta
 	if _density_acc > 3.0:
 		_density_acc = 0.0

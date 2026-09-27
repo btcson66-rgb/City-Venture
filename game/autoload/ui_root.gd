@@ -230,6 +230,62 @@ func show_chapter_card(title: String, subtitle := "") -> void:
 	tw.tween_callback(c.queue_free)
 
 
+## First-visit establishing card (art converted from the concept boards), bottom-left, non-blocking.
+func show_location_card(kind: String, id: String) -> void:
+	var tex: Texture2D = null
+	if ResourceLoader.exists("res://assets/cards/%s.png" % id):
+		tex = Art.tex("cards/" + id)
+	var title := id
+	var sub := ""
+	if kind == "district":
+		var dd := DataDB.district_def_in_city(id)
+		title = str(dd.get("name", id))
+		sub = str(dd.get("blurb", ""))
+	else:
+		var b := DataDB.building(id)
+		title = str(b.get("name", id))
+		var did := str(b.get("district", ""))
+		var hrs: Dictionary = b.get("hours", {})
+		var open_s := str(hrs.get("open", ""))
+		sub = str(DataDB.districts.get(did, {}).get("name", ""))
+		if open_s != "" and open_s != "00:00":
+			sub += "  ·  Open %s–%s" % [open_s, str(hrs.get("close", ""))]
+		if tex == null and ResourceLoader.exists("res://assets/cards/%s.png" % did):
+			tex = Art.tex("cards/" + did)
+	for old in get_tree().get_nodes_in_group("location_card"):
+		old.queue_free()
+	var p := UIK.panel("ui/panel_glass", 4)
+	p.name = "LocationCard"
+	p.add_to_group("location_card")
+	p.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var v := UIK.vbox(2)
+	p.add_child(v)
+	if tex != null:
+		var img := TextureRect.new()
+		img.texture = tex
+		img.custom_minimum_size = Vector2(192, 108)
+		img.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		v.add_child(img)
+	v.add_child(UIK.label("NEW LOCATION", 6, Art.C_GOLD, true))
+	v.add_child(UIK.title(title, 11))
+	if sub != "":
+		v.add_child(UIK.wrap(sub, 7, Art.C_SKY, 192))
+	# below modals: a management screen opened right away should cover it
+	root.add_child(p)
+	root.move_child(p, modal_layer.get_index())
+	p.reset_size()
+	await get_tree().process_frame
+	if not is_instance_valid(p):
+		return
+	var y := 360.0 - 8.0 - p.size.y
+	p.position = Vector2(-p.size.x - 10, y)
+	var tw := p.create_tween()
+	tw.tween_property(p, "position:x", 6.0, 0.35).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tw.tween_interval(5.0)
+	tw.tween_property(p, "position:x", -p.size.x - 10, 0.35).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	tw.tween_callback(p.queue_free)
+
+
 func fade_out(t := 0.3) -> void:
 	var tw := create_tween()
 	tw.tween_property(fade, "modulate:a", 1.0, t)

@@ -205,7 +205,7 @@ GROUND_TILES = [
     ("garden", tile_garden), ("road_edge_top", lambda: tile_asphalt("edge_top")),
     ("road_edge_bottom", lambda: tile_asphalt("edge_bottom")), ("parking", lambda: tile_asphalt("parking")),
 ]
-FLOORS = ["wood_warm", "wood_dark", "tile_white", "checker", "carpet_navy", "marble", "concrete"]
+FLOORS = ["wood_warm", "wood_dark", "wood_cafe", "tile_white", "checker", "carpet_navy", "marble", "concrete"]
 WALLS = ["plaster_warm", "brick", "navy_panel", "wood_panel", "marble_wall", "white_modern", "concrete_wall"]
 
 
@@ -538,7 +538,7 @@ BUILDINGS = {
                        "sign_text": "22 FOUNDERS LANE"},
     "byte_bean": {"w": 128, "floors": 1, "floor_h": 36, "ground_h": 60, "mat": "wood", "window": "punched",
                   "ground": "cafe", "awning": (60, 60, 70), "stripes": False, "sign_col": (30, 30, 36), "roof": "green",
-                  "sign_text": "BYTE & BEAN"},
+                  "sign_text": "BEAN & BYTE"},
     "nexus_bank": {"w": 208, "floors": 3, "floor_h": 40, "ground_h": 64, "mat": "stone", "window": "punched",
                    "win_w": 14, "win_h": 26, "win_gap": 14, "ground": "civic", "roof": "ac", "door_w": 24, "door_h": 32,
                    "sign_text": "NEXUS BANK"},
@@ -1285,7 +1285,7 @@ INTERIOR_PROPS = {
     "logo_nexus_bank": lambda: ip_logo_wall("NEXUS BANK"), "logo_city_hall": lambda: ip_logo_wall("CITY OF AURELIA", (46, 60, 96)),
     "logo_cowork": lambda: ip_logo_wall("NEXUS  WORK - MEET - CREATE", (30, 50, 96)),
     "logo_bloom": lambda: ip_logo_wall("BLOOM COFFEE", (38, 64, 48)), "logo_postpoint": lambda: ip_logo_wall("POSTPOINT", (180, 80, 64)),
-    "logo_bytebean": lambda: ip_logo_wall("BYTE & BEAN", (30, 30, 36)),
+    "logo_bytebean": lambda: ip_logo_wall("BEAN & BYTE", (30, 30, 36)),
     "civic_counter": lambda: ip_counter(144, (46, 60, 96), (236, 232, 224)), "ticket_machine": ip_ticket_machine,
     "seal": ip_seal, "parcel_shelf": ip_parcel_shelf, "postpoint_counter": lambda: ip_counter(80, (180, 80, 64)),
     "window_day": lambda: ip_window(False, 48, 40, 1), "window_night": lambda: ip_window(True, 48, 40, 1),

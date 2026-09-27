@@ -211,8 +211,8 @@ def t_soil():
 
 def t_floor(kind):
     rnd = random.Random(hash(kind) % 1000)
-    if kind == "wood_warm" or kind == "wood_dark":
-        base = (178, 126, 84) if kind == "wood_warm" else (122, 86, 60)
+    if kind in ("wood_warm", "wood_dark", "wood_cafe"):
+        base = {"wood_warm": (178, 126, 84), "wood_dark": (122, 86, 60), "wood_cafe": (150, 100, 66)}[kind]
         im = new(T, T, base)
         for i, y in enumerate(range(0, T, 4)):
             c = jitter(base, rnd, 0.07)

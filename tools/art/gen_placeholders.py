@@ -24,4 +24,11 @@ try:
     if want("maps"): maps.generate(OUT)
 except ImportError:
     pass
+# Board conversion last: it overrides procedural props/furniture/windows with sprites converted from
+# the approved concept boards and adds backdrops, map art and location cards (see concepts.py).
+try:
+    import concepts
+    if want("concepts"): concepts.generate(OUT)
+except ImportError as e:
+    print("concepts: skipped (%s) - pip install -r tools/requirements.txt" % e)
 print("done ->", OUT)

@@ -31,6 +31,7 @@ func build(building_id: String) -> void:
 	move_child(bg, 0)
 	paint("wall_" + str(def.get("wall", "plaster_warm")), [0, 0, wt, WALL_ROWS])
 	paint("floor_" + str(def.get("floor", "wood_warm")), [0, WALL_ROWS, wt, ht - WALL_ROWS])
+	_continuous_floor()
 	_decorate_walls(wt, ht)
 	# collisions: walls + edges, with a door gap at the bottom centre
 	var door_w := 32.0
@@ -67,6 +68,21 @@ func build(building_id: String) -> void:
 	_spawn_ambient()
 	update_lighting()
 	refresh_named_npcs()
+
+
+## Large non-repeating floor image over the tile grid when one exists for this material.
+func _continuous_floor() -> void:
+	var path := "res://assets/interiors/floor_%s.png" % str(def.get("floor", "wood_warm"))
+	if not ResourceLoader.exists(path):
+		return
+	var fs := Sprite2D.new()
+	fs.texture = load(path)
+	fs.centered = false
+	fs.region_enabled = true
+	fs.region_rect = Rect2(0, 0, size_px.x, size_px.y - WALL_ROWS * T)
+	fs.position = Vector2(0, WALL_ROWS * T)
+	back_layer.add_child(fs)
+	back_layer.move_child(fs, 0)
 
 
 func _decorate_walls(wt: int, ht: int) -> void:
@@ -116,7 +132,7 @@ func _decorate_walls(wt: int, ht: int) -> void:
 	back_layer.add_child(ao)
 	# baseboard + side frame so the room reads as a diorama
 	var base := ColorRect.new()
-	base.color = Color8(60, 48, 40) if def.get("floor", "") in ["wood_warm", "wood_dark"] else Color8(90, 96, 110)
+	base.color = Color8(60, 48, 40) if def.get("floor", "") in ["wood_warm", "wood_dark", "wood_cafe"] else Color8(90, 96, 110)
 	base.position = Vector2(0, WALL_ROWS * T - 2)
 	base.size = Vector2(wt * T, 2)
 	back_layer.add_child(base)

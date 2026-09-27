@@ -377,6 +377,9 @@ func talk_through_dialogue(max_lines := 30, choose_first := true) -> void:
 func _shots() -> void:
 	await shot("main_menu")
 	GameState.new_game({"name": "Shot Tour", "seed": 3})
+	SceneRouter._set_scene(ArrivalScene.new())
+	await wait(6.2)
+	await shot("arrival")
 	for d in ["riverside", "startup_hub", "civic_center", "financial"]:
 		for b in DataDB.districts[d]["buildings"]:
 			SceneRouter._enter("district", d, "door_" + b, "down")
@@ -385,6 +388,14 @@ func _shots() -> void:
 		SceneRouter._enter("district", d, "metro", "down")
 		await wait(0.6)
 		await shot("district_" + d + "_south")
+	UIRoot.open_modal(CityMapModal.new(false))
+	await wait(0.4)
+	await shot("city_map")
+	UIRoot.close_all()
+	UIRoot.open_modal(WorldMapModal.new())
+	await wait(0.4)
+	await shot("world_map")
+	UIRoot.close_all()
 	for b in DataDB.buildings:
 		SceneRouter._enter("interior", b, "door", "up")
 		await wait(0.8)

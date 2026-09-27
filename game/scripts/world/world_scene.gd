@@ -132,26 +132,33 @@ func _nearest_free(c: Vector2i) -> Vector2i:
 func add_prop(p: Dictionary, parent: Node = null) -> Node2D:
 	var sprite_path: String = p["sprite"]
 	var folder := "interiors/" if kind == "interior" else "props/"
-	var tex := Art.tex(folder + sprite_path)
+	var key := folder + sprite_path
+	var tex := Art.tex(key)
 	if tex == null:
-		tex = Art.tex("props/" + sprite_path)
+		key = "props/" + sprite_path
+		tex = Art.tex(key)
 	if tex == null:
 		return null
 	var holder := Node2D.new()
 	var s := Sprite2D.new()
 	s.texture = tex
 	s.centered = false
-	var h := tex.get_height()
-	var w := tex.get_width()
+	# board-converted art may overhang its design footprint (top/left); placement uses the footprint
+	var sm: Dictionary = DataDB.sprite_meta.get(key, {})
+	var top := int(sm.get("top", 0))
+	var left := int(sm.get("left", 0))
+	var h := tex.get_height() - top
+	var w := int(sm.get("dw", tex.get_width()))
 	var wall: bool = p.get("wall", false)
 	var floor_decal: bool = p.get("floor", false)
 	if wall or floor_decal:
 		holder.position = Vector2(float(p["x"]), float(p["y"]))
+		s.offset = Vector2(-left, -top)
 		holder.add_child(s)
 		(parent if parent != null else back_layer).add_child(holder)
 	else:
 		holder.position = Vector2(float(p["x"]), float(p["y"]) + h)
-		s.offset = Vector2(0, -h)
+		s.offset = Vector2(-left, -h - top)
 		if kind == "interior":
 			var sh := Sprite2D.new()
 			sh.texture = Art.tex("effects/shadow")
@@ -166,7 +173,10 @@ func add_prop(p: Dictionary, parent: Node = null) -> Node2D:
 	if p.get("glow", false):
 		var g := Sprite2D.new()
 		g.texture = Art.tex("effects/glow_small" if kind == "interior" else "effects/glow_warm")
-		g.position = Vector2(w / 2.0 + (5.0 if sprite_path.begins_with("lamp") else 0.0), (8.0 if sprite_path.begins_with("lamp") else float(h) - 4.0) - (float(h) if not (wall or floor_decal) else 0.0))
+		if sm.has("glow"):
+			g.position = Vector2(float(sm["glow"][0]), float(sm["glow"][1]) - (float(h) if not (wall or floor_decal) else 0.0))
+		else:
+			g.position = Vector2(w / 2.0 + (5.0 if sprite_path.begins_with("lamp") else 0.0), (8.0 if sprite_path.begins_with("lamp") else float(h) - 4.0) - (float(h) if not (wall or floor_decal) else 0.0))
 		var mat := CanvasItemMaterial.new()
 		mat.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
 		g.material = mat

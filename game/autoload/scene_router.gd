@@ -116,8 +116,11 @@ func _enter(kind: String, id: String, spawn: String, facing: String, pos := Vect
 	Clock.world_active = true
 	UIRoot.set_hud_visible(true)
 	UIRoot.on_scene_changed(scene)
+	var first_visit := not GameState.visited(id)
 	GameState.mark_visited(id)
 	EventBus.location_entered.emit(kind, id)
+	if first_visit:
+		UIRoot.show_location_card(kind, id)
 
 
 func _frame_interior(scene: WorldScene) -> void:

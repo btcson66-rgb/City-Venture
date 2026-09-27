@@ -20,6 +20,73 @@ from font3x5 import draw_text, draw_text_centered, text_width
 
 SKY_REFLECT = (178, 214, 242)
 
+# ------------------------------------------------------------------ concept-board textures
+# Glass reflects the Board-G day skyline, and shop/office glass shows the Board-H/C interiors, so the
+# facades carry the same painted detail as the concept boards (falls back to flat paint without OpenCV).
+_TEX: dict = {}
+_REF_OFF = [0, 0]
+BOARD_INTERIORS = {
+    "office": [("H", (16, 157, 380, 362)), ("H", (533, 157, 885, 362)), ("H", (16, 797, 393, 992))],
+    "lobby": [("H", (533, 157, 885, 362)), ("H", (16, 472, 383, 690))],
+    "bank": [("H", (16, 472, 383, 690))],
+    "civic": [("H", (16, 472, 383, 690))],
+    "cafe": [("H", (518, 472, 835, 690)), ("C", (736, 300, 1000, 500))],
+    "shop": [("H", (515, 797, 850, 990)), ("H", (518, 472, 835, 690))],
+    "home": [("H", (1025, 157, 1330, 362)), ("H", (967, 797, 1318, 965))],
+}
+TEX_H = 48
+
+
+def board_tex():
+    if "reflect" in _TEX or "none" in _TEX:
+        return _TEX
+    try:
+        import numpy as np
+        import cv2
+        import concepts as C
+        sky = C.crop("G", (700, 2, 1330, 128))
+        sky = np.concatenate([sky, sky[:, ::-1]], 1)
+        _TEX["reflect"] = cv2.resize(sky, (sky.shape[1] * 110 // sky.shape[0], 110), interpolation=cv2.INTER_AREA)
+        for k, lst in BOARD_INTERIORS.items():
+            ims = []
+            for key, box in lst:
+                im = C.crop(key, box)
+                ims.append(cv2.resize(im, (im.shape[1] * TEX_H // im.shape[0], TEX_H), interpolation=cv2.INTER_AREA))
+            _TEX["in_" + k] = ims
+    except Exception as e:  # pragma: no cover
+        print("facades: board textures unavailable (%s); using flat paint" % e)
+        _TEX["none"] = True
+    return _TEX
+
+
+ROOF_PLANTS = [("C", (1084, 859, 1121, 916)), ("G", (1086, 932, 1128, 985)), ("G", (1128, 925, 1164, 984)),
+               ("C", (1130, 846, 1168, 890)), ("C", (1170, 846, 1199, 890)), ("G", (1227, 965, 1282, 1010)),
+               ("C", (822, 966, 866, 1029))]
+
+
+def roof_plants():
+    """Board-converted potted plants/planters for roof edges and ledges (RGBA PIL images, ~16px tall)."""
+    if "plants" in _TEX:
+        return _TEX["plants"]
+    out = []
+    try:
+        from PIL import Image
+        import concepts as C
+        for key, box in ROOF_PLANTS:
+            art = C._cut(key, box, largest=1.0)
+            h = 18
+            w = max(4, round(art.shape[1] * h / art.shape[0]))
+            out.append(Image.fromarray(C._finish(C.downscale(art, (w, h)), 24, 0.4)))
+    except Exception as e:  # pragma: no cover
+        print("facades: roof plants unavailable (%s)" % e)
+    _TEX["plants"] = out
+    return out
+
+
+def set_reflect_offset(seed):
+    _REF_OFF[0] = (seed * 97) % 600
+    _REF_OFF[1] = (seed * 31) % 30
+
 
 # ------------------------------------------------------------------ primitives
 def poly(img, pts, col):
@@ -70,6 +137,25 @@ def pane_interior(img, lt, x0, y0, x1, y1, rnd, kind="office", lit=True, day_dim
     if x1 - x0 < 3 or y1 - y0 < 4:
         return
     h = y1 - y0 + 1
+    tex = board_tex()
+    ims = tex.get("in_" + kind)
+    if ims:
+        im = ims[rnd.randrange(len(ims))]
+        w = x1 - x0 + 1
+        ox = rnd.randint(0, max(0, im.shape[1] - w - 1))
+        oy = int(max(0, TEX_H - h) * 0.55)
+        for y in range(y0, y1 + 1):
+            sy = oy + (y - y0) if h <= TEX_H else (y - y0) * TEX_H // h
+            row = im[min(TEX_H - 1, sy)]
+            for x in range(x0, x1 + 1):
+                c = row[min(im.shape[1] - 1, ox + x - x0)]
+                put(img, x, y, (min(255, int(c[0] * day_dim)), min(255, int(c[1] * day_dim)), min(255, int(c[2] * day_dim)), 255))
+        if lit and lt is not None:
+            for y in range(y0, y1 + 1):
+                t = (y - y0) / max(1, h)
+                for x in range(x0, x1 + 1):
+                    put(lt, x, y, (255, int(210 - 30 * t), int(140 - 40 * t), int(215 - 50 * t)))
+        return
     wall = {"office": (214, 206, 190), "home": (226, 196, 160), "shop": (240, 214, 170), "lobby": (236, 214, 176),
             "cafe": (196, 150, 110), "civic": (214, 206, 190), "bank": (200, 196, 190)}.get(kind, (214, 206, 190))
     ceil = shade(wall, 0.72)
@@ -125,11 +211,19 @@ def pane_interior(img, lt, x0, y0, x1, y1, rnd, kind="office", lit=True, day_dim
 def glass_over(img, x0, y0, x1, y1, tint=(70, 120, 180), a=0.42, rnd=None, reflect=True):
     """Tinted glass with a vertical sky gradient and diagonal reflection streaks."""
     h = y1 - y0 + 1
+    ref = board_tex().get("reflect")
     for y in range(y0, y1 + 1):
         t = (y - y0) / max(1, h)
         c = mix(lighten(tint, 0.55), shade(tint, 0.85), t)
+        if ref is not None:
+            rrow = ref[(y + _REF_OFF[1]) % ref.shape[0]]
         for x in range(x0, x1 + 1):
-            blend_px(img, x, y, c, min(0.95, a * (1.25 - 0.35 * t)))
+            if ref is not None:
+                rc = rrow[(x + _REF_OFF[0]) % ref.shape[1]]
+                cc = mix((int(rc[0]), int(rc[1]), int(rc[2])), tint, 0.3)
+                blend_px(img, x, y, cc, min(0.95, a * 1.15 * (1.2 - 0.3 * t)))
+            else:
+                blend_px(img, x, y, c, min(0.95, a * (1.25 - 0.35 * t)))
     if reflect:
         off = (rnd.randint(0, 20) if rnd else 0)
         for k in range(x0 - h - off, x1 + 1, 17):
@@ -313,6 +407,13 @@ class B:
 
     def bush(self, x, y, s):
         img = self.img
+        plants = roof_plants()
+        if plants:
+            p = plants[self.rnd.randrange(len(plants))]
+            if s < 8:
+                p = p.resize((max(3, p.width * 12 // 16), 12), 0)
+            img.alpha_composite(p, (int(x), int(y - p.height + 2)))
+            return
         m = Mask(img.width, img.height).ellipse(x, y - s, x + s + 4, y)
         shaded(img, m, ramp(PAL["leaf_400"]), 0, 0, sh_depth=2)
         m2 = Mask(img.width, img.height).ellipse(x + 2, y - s + 1, x + s // 2 + 3, y - s // 2)
@@ -484,6 +585,7 @@ def steps(b, x0, x1, y, n=3):
 
 # ------------------------------------------------------------------ building styles
 def build(bid, spec):
+    set_reflect_offset(sum(ord(ch) for ch in bid))
     style = spec["style"]
     W = spec["w"]
     D = spec.get("depth", 22)
@@ -697,7 +799,7 @@ SPECS = {
     "suite_building": dict(style="brick", w=144, depth=20, floors=3, fh=36, gh=58, mat="brick", ww=24, wh=24, ground="lobby",
                            gmat="navy_panel", roof="green", lit=0.55, kind="office", sign_text="22 FOUNDERS LANE"),
     "byte_bean": dict(style="plaster", w=128, depth=18, floors=1, fh=34, gh=62, mat="wood", ground="cafe", awning=(52, 52, 62),
-                      stripes=False, sign_col=(28, 28, 34), roof="green", sign_text="BYTE & BEAN", kind="home"),
+                      stripes=False, sign_col=(28, 28, 34), roof="green", sign_text="BEAN & BYTE", kind="home"),
     "nexus_bank": dict(style="stone", w=208, depth=26, floors=3, fh=40, gh=66, mat="limestone", ww=16, wh=28, gap=14,
                        ground="civic", roof="ac", dw=26, dh=32, sign_text="NEXUS BANK", lit=0.4,
                        brands=[("logo", "nexus", 96, 14, 14, (226, 186, 90), (34, 44, 70))]),

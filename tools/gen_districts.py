@@ -31,9 +31,15 @@ LABELS = {
 
 
 def prop_size(name):
+    """Design (footprint) size: board-converted sprites may overhang it (assets/sprite_meta.json)."""
     from PIL import Image
     im = Image.open(os.path.join(PROPS, name + ".png"))
-    return im.width, im.height
+    m = SPRITE_META.get("props/" + name, {})
+    return int(m.get("dw", im.width)), int(m.get("dh", im.height - int(m.get("top", 0))))
+
+
+SPRITE_META = json.load(open(os.path.join(os.path.dirname(PROPS), "sprite_meta.json"))) \
+    if os.path.exists(os.path.join(os.path.dirname(PROPS), "sprite_meta.json")) else {}
 
 
 def P(name, x, base_y, solid=None, **kw):

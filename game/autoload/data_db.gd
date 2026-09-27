@@ -23,6 +23,7 @@ var story := {}
 var world := {}
 var character := {}
 var buildings_meta := {}
+var sprite_meta := {}     # board-converted sprites that overhang their design footprint
 var tiles := {}
 var loaded := false
 
@@ -50,6 +51,8 @@ func load_all() -> void:
 	character = _read("res://data/character/options.json")
 	buildings_meta = _read("res://assets/buildings/buildings_meta.json")
 	tiles = _read("res://assets/tiles/atlas.json")
+	if FileAccess.file_exists("res://assets/sprite_meta.json"):
+		sprite_meta = _read("res://assets/sprite_meta.json")
 	loaded = true
 
 
