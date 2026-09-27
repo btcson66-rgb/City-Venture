@@ -30,7 +30,7 @@ Evidence lives in [`evidence/vs001/`](../evidence/vs001/):
 
 | Run | Result |
 |-----|--------|
-| Unit tests | 26/26 PASS |
+| Unit tests | 26/26 PASS at evidence time. 30/30 after localization (+4 i18n tests) |
 | Walkthrough, headless (full slice + month close + save/load) | **0 failures**, 707 s. In-game Jun 1 → Jul 1 (month close ran). 297 orders delivered. Save → reload restored cash, time and location. Ledger balanced |
 | Walkthrough, rendered at 1280×720 with screenshots | **0 failures**, 769 s, 88 screenshots in `screenshots/walkthrough/` |
 | Scenery tour | 28 screenshots in `screenshots/tour/` (menu, creator, arrival, every district and interior, City/World Map, dusk, night) |
@@ -72,6 +72,18 @@ judge game feel, pacing, or whether a first-time player understands what to do. 
 | 27 | Evidence folders + QA report | **PASS** | — | This file and `evidence/vs001/` |
 | 29 | 5–10 min uncut gameplay video from New Game through Company OS | **PASS** | — | `evidence/vs001/videos/vs001_gameplay_uncut.mp4`, 8:01. New Game → Creator → Arrival → Apartment → Riverside → Bloom Coffee → Startup Hub → Nexus Co-work → Business Board → buy stock → list → first order → pack/ship → first dollar → customer return → City Hall registration → Nexus Bank → Suite 2B → Company OS → a working day → save/reload |
 | — | Windows build | **PARTIAL** | Exported | `tools/build.sh` exports `build/windows/CityVenture.exe` (embedded pck). It was **not run on Windows**: there is no Windows machine in this environment. The Linux export of the same project was smoke-tested |
+
+## Localization (added after the evidence run, at the product owner's request)
+
+| Requirement | Result | Status | Evidence / notes |
+|-------------|--------|--------|------------------|
+| Chinese version | **PASS** | Implemented | 1,175 strings in Traditional Chinese (zh_TW), covering UI, dialogue, events, story, products, places and NPC roles. Simplified Chinese (zh_CN) is generated with OpenCC tw2sp. `tools/i18n_extract.py --check` reports 0 missing |
+| Language switch | **PASS** | Implemented | Main menu and pause menu: English / 繁體中文 / 简体中文. Switches instantly, saved to `user://settings.cfg`, defaults to the OS locale |
+| Full playthrough in Chinese | **PASS** | — | Rendered walkthrough with `--lang=zh_TW`: **0 failures** (Jun 1 → Jul 1, registration, contract, month close, save/load). `logs/walkthrough_rendered_zh_TW.txt`, `screenshots/zh_TW/` |
+| Translation quality | **PARTIAL** | — | Written for natural, short Taiwanese Mandarin, but **not proofread by a native editor**. zh_CN is machine-converted and still needs a Mainland-Chinese pass before release |
+| Chinese names | **PASS** | Implemented | Player and company names can be typed in Chinese (e.g. 「河光商行」), and the font falls back to Noto CJK in every language. Unit test `test_chinese_company_name_registers` |
+| Layout with CJK fonts | **PASS** | Implemented | The CJK fallback makes lines taller. Negative font spacing gives the height back, so English keeps its original metrics. Month Close now scrolls instead of pushing its button off-screen. The regression was caught by the bot |
+| Mixed-language records | Known limitation | — | Phone messages, timeline and ledger memos keep the language that was active when they were written |
 
 ## Bugs found by the evidence runs (fixed before the final run)
 

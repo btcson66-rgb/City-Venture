@@ -14,7 +14,8 @@ func _init(r: Dictionary) -> void:
 
 func build() -> void:
 	var cols := UIK.hbox(10)
-	body.add_child(cols)
+	# scrolls if a language's taller line height (or more entities) would push the footer off-screen
+	body.add_child(UIK.scroll(cols, Vector2(500, 226)))
 	for eid in rep["entities"]:
 		var e: Dictionary = rep["entities"][eid]
 		var v := UIK.vbox(1)

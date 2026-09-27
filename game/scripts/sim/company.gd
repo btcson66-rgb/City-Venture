@@ -11,15 +11,22 @@ static func slug(name: String) -> String:
 	for ch in s:
 		if (ch >= "a" and ch <= "z") or (ch >= "0" and ch <= "9"):
 			out += ch
+		elif ch.unicode_at(0) >= 0x2E80:
+			# CJK and other scripts: keep the id ASCII-safe with the code point ("河光" -> "u6cb3u5149")
+			out += "u%x" % ch.unicode_at(0)
 		elif out != "" and not out.ends_with("_"):
 			out += "_"
-	return out.trim_suffix("_").left(24)
+	return out.trim_suffix("_").left(40)
 
 
 static func validate_name(name: String) -> String:
 	var n := name.strip_edges()
-	if n.length() < 3:
-		return "Company names need at least 3 characters."
+	var cjk := false
+	for ch in n:
+		if ch.unicode_at(0) >= 0x2E80:
+			cjk = true
+	if n.length() < (2 if cjk else 3):
+		return "Company names need at least 3 characters." if not cjk else "Company names need at least 2 characters."
 	if n.length() > 28:
 		return "Keep it under 28 characters."
 	if slug(n) == "":

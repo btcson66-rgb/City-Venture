@@ -108,3 +108,23 @@ Player company ↔ player company contracts (quotes, counters, OEM, logistics, f
 
 ### Dependencies
 Single-player economy complete and stable (§70). **Not started before P3 ships.**
+
+---
+
+## Commercial release track (runs alongside P1–P2)
+
+The product owner wants to sell the game and ship it on the App Store. This track is independent of the content
+milestones. The engine choice is in [`ENGINE_DECISION.md`](ENGINE_DECISION.md): stay on Godot 4.x.
+
+| Item | Status | Acceptance |
+|------|--------|-----------|
+| Localization: English · 繁體中文 · 简体中文, switchable in game | **Implemented** (VS001+) | `tools/i18n_extract.py --check` reports 0 missing. Full walkthrough passes in zh_TW. Native-speaker proofread still **Planned** |
+| Final art (pixel artist repaints the converted/generated assets) | Planned | Every row in ART_ASSET_MANIFEST marked Final |
+| Audio (music + SFX, commercially licensed) | Planned | Menu, city ambience per district and day part, UI and interaction SFX |
+| Touch controls + mobile UI scale | Planned | Tap-to-walk, on-screen interact button, 44 pt touch targets, safe areas, iPhone and iPad layouts |
+| Performance budget | Planned | 60 fps on a 2020-class iPhone. Simulation stress test (10 companies, 5k orders/day) in CI |
+| Steam build (GodotSteam: achievements, cloud saves) | Planned | Steamworks review passed |
+| iOS build (StoreKit, Game Center, iCloud saves) | **Blocked** (needs macOS + Xcode + Apple Developer account) | TestFlight build |
+| Android build (Play Billing) | Planned | Internal testing track |
+| Store compliance (privacy labels, age rating, simulated crypto disclosure) | Planned | App Review guidelines checklist signed off |
+| Human playtests (onboarding, balance) | Planned | 5+ first-time players, 30-minute sessions, notes filed |

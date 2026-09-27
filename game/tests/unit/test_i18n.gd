@@ -51,3 +51,9 @@ func test_language_switch_does_not_touch_game_data() -> void:
 	_with("zh_TW", func():
 		runner.eq(DataDB.product("wireless_earbuds")["name"], name_before, "data stays English under zh_TW")
 		runner.check(Ecommerce.buy("tradelink_wholesale", "wireless_earbuds", 50)["ok"], "gameplay works in Chinese"))
+
+
+func test_chinese_company_name_registers() -> void:
+	runner.eq(Company.validate_name("河光商行"), "", "Chinese company name is valid")
+	runner.check(Company.slug("河光商行").begins_with("u"), "ASCII-safe id for a Chinese name")
+	runner.check(Company.slug("Riverlight Goods") == "riverlight_goods", "English ids unchanged")

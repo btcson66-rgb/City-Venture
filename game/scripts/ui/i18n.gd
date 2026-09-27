@@ -106,6 +106,13 @@ static func _apply_fonts(loc: String) -> void:
 			_fonts[k] = load(CJK_FONTS[k])
 		if _fonts.has(k):
 			fb.append(_fonts[k])
-	for f in [Art.font_body, Art.font_title, UIK.body_font(), UIK.bold_font(), UIK.title_font()]:
-		if f != null:
-			f.fallbacks = fb
+	# The CJK fallback raises every line's height (Godot takes the tallest font in the chain), which would
+	# push English layouts ~30% taller. Negative spacing on the UI fonts pulls the line box back: English
+	# keeps its original metrics; Chinese keeps a little extra room for the taller glyphs.
+	var top := -1 if loc.begins_with("zh") else -2
+	var bottom := -1
+	for v in [UIK.body_font(), UIK.bold_font(), UIK.title_font()]:
+		var fv := v as FontVariation
+		fv.fallbacks = fb
+		fv.set_spacing(TextServer.SPACING_TOP, top)
+		fv.set_spacing(TextServer.SPACING_BOTTOM, bottom)

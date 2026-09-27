@@ -41,11 +41,11 @@ msgstr ""
 msgid " + deposit"
 msgstr ""
 
-#: scripts/sim/company.gd:49
+#: scripts/sim/company.gd:56
 msgid " co"
 msgstr ""
 
-#: scripts/sim/company.gd:49
+#: scripts/sim/company.gd:56
 msgid " inc"
 msgstr ""
 
@@ -53,7 +53,7 @@ msgstr ""
 msgid " late (penalty %s)"
 msgstr ""
 
-#: scripts/sim/company.gd:49
+#: scripts/sim/company.gd:56
 msgid " ltd"
 msgstr ""
 
@@ -293,7 +293,7 @@ msgstr ""
 msgid "Ad prices spike"
 msgstr ""
 
-#: scripts/sim/company.gd:90
+#: scripts/sim/company.gd:97
 msgid "Additional founder capital"
 msgstr ""
 
@@ -305,7 +305,7 @@ msgstr ""
 msgid "Advanced Tech & Manufacturing"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:28
+#: scripts/ui/modals/month_close_modal.gd:29
 msgid "Advertising"
 msgstr ""
 
@@ -585,7 +585,7 @@ msgstr ""
 msgid "Business gross profit passed one month of rent."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:192 scripts/ui/modals/month_close_modal.gd:33
+#: scripts/ui/modals/company_os.gd:192 scripts/ui/modals/month_close_modal.gd:34
 msgid "Business profit"
 msgstr ""
 
@@ -653,7 +653,7 @@ msgstr ""
 msgid "CITY VENTURE"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:26
+#: scripts/ui/modals/month_close_modal.gd:27
 msgid "COGS"
 msgstr ""
 
@@ -717,7 +717,7 @@ msgstr ""
 msgid "Capital contributed in kind by founder"
 msgstr ""
 
-#: scripts/sim/company.gd:74
+#: scripts/sim/company.gd:81
 msgid "Capital injected into %s"
 msgstr ""
 
@@ -741,11 +741,11 @@ msgstr ""
 msgid "Cash now, big loss on inventory."
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:41
+#: scripts/ui/modals/month_close_modal.gd:42
 msgid "Cash — end of month"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:38
+#: scripts/ui/modals/month_close_modal.gd:39
 msgid "Cash — start of month"
 msgstr ""
 
@@ -869,7 +869,11 @@ msgstr ""
 msgid "Company name"
 msgstr ""
 
-#: scripts/sim/company.gd:22
+#: scripts/sim/company.gd:29
+msgid "Company names need at least 2 characters."
+msgstr ""
+
+#: scripts/sim/company.gd:29
 msgid "Company names need at least 3 characters."
 msgstr ""
 
@@ -877,7 +881,7 @@ msgstr ""
 msgid "Company registration"
 msgstr ""
 
-#: scripts/sim/company.gd:54
+#: scripts/sim/company.gd:61
 msgid "Company registration fee — %s"
 msgstr ""
 
@@ -905,7 +909,7 @@ msgstr ""
 msgid "Containers, customs, freight."
 msgstr ""
 
-#: scripts/frontend/main_menu.gd:47 scripts/ui/modals/month_close_modal.gd:51
+#: scripts/frontend/main_menu.gd:47 scripts/ui/modals/month_close_modal.gd:52
 msgid "Continue"
 msgstr ""
 
@@ -1441,11 +1445,11 @@ msgstr ""
 msgid "Found it cheaper elsewhere."
 msgstr ""
 
-#: scripts/sim/company.gd:57
+#: scripts/sim/company.gd:64
 msgid "Founded %s (registration %s)."
 msgstr ""
 
-#: scripts/sim/company.gd:75
+#: scripts/sim/company.gd:82
 msgid "Founder capital (opening deposit)"
 msgstr ""
 
@@ -1509,7 +1513,7 @@ msgstr ""
 msgid "Grin"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:189 scripts/ui/modals/info_modal.gd:69 scripts/ui/modals/month_close_modal.gd:27
+#: scripts/ui/modals/company_os.gd:189 scripts/ui/modals/info_modal.gd:69 scripts/ui/modals/month_close_modal.gd:28
 msgid "Gross profit"
 msgstr ""
 
@@ -1797,7 +1801,7 @@ msgstr ""
 msgid "Keep going"
 msgstr ""
 
-#: scripts/sim/company.gd:24
+#: scripts/sim/company.gd:31
 msgid "Keep it under 28 characters."
 msgstr ""
 
@@ -2121,7 +2125,7 @@ msgstr ""
 msgid "Metro — %s Station"
 msgstr ""
 
-#: scripts/sim/company.gd:71
+#: scripts/sim/company.gd:78
 msgid "Minimum opening deposit is $500."
 msgstr ""
 
@@ -2369,7 +2373,7 @@ msgstr ""
 msgid "Northridge"
 msgstr ""
 
-#: scripts/sim/company.gd:87
+#: scripts/sim/company.gd:94
 msgid "Not enough cash."
 msgstr ""
 
@@ -2541,7 +2545,7 @@ msgstr ""
 msgid "Open last month close (%s)"
 msgstr ""
 
-#: scripts/sim/company.gd:79
+#: scripts/sim/company.gd:86
 msgid "Opened a business account at Nexus Bank with %s of founder capital."
 msgstr ""
 
@@ -2577,7 +2581,7 @@ msgstr ""
 msgid "Orders waiting to be packed: %d"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:31
+#: scripts/ui/modals/month_close_modal.gd:32
 msgid "Other operating expense"
 msgstr ""
 
@@ -2601,15 +2605,15 @@ msgstr ""
 msgid "Overview"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:42
+#: scripts/ui/modals/month_close_modal.gd:43
 msgid "Owed to you (ShopLane + invoices)"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:40
+#: scripts/ui/modals/month_close_modal.gd:41
 msgid "Owner money in / out"
 msgstr ""
 
-#: scripts/sim/company.gd:92
+#: scripts/sim/company.gd:99
 msgid "Owner withdrawal"
 msgstr ""
 
@@ -2889,11 +2893,11 @@ msgstr ""
 msgid "Product"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:36
+#: scripts/ui/modals/month_close_modal.gd:37
 msgid "Profit after life costs"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:50
+#: scripts/ui/modals/month_close_modal.gd:51
 msgid "Profit this month: %s. Cash moved by %s. The gap (%s) is sitting in stock, in ShopLane's hands, or in unpaid invoices."
 msgstr ""
 
@@ -3021,7 +3025,7 @@ msgstr ""
 msgid "Refunded."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:187 scripts/ui/modals/month_close_modal.gd:25
+#: scripts/ui/modals/company_os.gd:187 scripts/ui/modals/month_close_modal.gd:26
 msgid "Refunds"
 msgstr ""
 
@@ -3041,7 +3045,7 @@ msgstr ""
 msgid "Register & pay"
 msgstr ""
 
-#: scripts/sim/company.gd:67
+#: scripts/sim/company.gd:74
 msgid "Register a company at City Hall first."
 msgstr ""
 
@@ -3089,11 +3093,11 @@ msgstr ""
 msgid "Rent $1,250 due the 14th"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:35
+#: scripts/ui/modals/month_close_modal.gd:36
 msgid "Rent (home) + living"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:32
+#: scripts/ui/modals/month_close_modal.gd:33
 msgid "Rent (office)"
 msgstr ""
 
@@ -3165,7 +3169,7 @@ msgstr ""
 msgid "Return request"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:186 scripts/ui/modals/month_close_modal.gd:24
+#: scripts/ui/modals/company_os.gd:186 scripts/ui/modals/month_close_modal.gd:25
 msgid "Revenue"
 msgstr ""
 
@@ -3381,7 +3385,7 @@ msgstr ""
 msgid "Shipped %d parcel%s — %s."
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:29 scripts/ui/modals/world_map_modal.gd:116
+#: scripts/ui/modals/month_close_modal.gd:30 scripts/ui/modals/world_map_modal.gd:116
 msgid "Shipping"
 msgstr ""
 
@@ -3637,7 +3641,7 @@ msgstr ""
 msgid "Stock at %s: %d / %d needed"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:44
+#: scripts/ui/modals/month_close_modal.gd:45
 msgid "Stock at cost"
 msgstr ""
 
@@ -3785,7 +3789,7 @@ msgstr ""
 msgid "That didn't work."
 msgstr ""
 
-#: scripts/sim/company.gd:29
+#: scripts/sim/company.gd:36
 msgid "That name is already registered in Aurelia."
 msgstr ""
 
@@ -3801,7 +3805,7 @@ msgstr ""
 msgid "The Opportunity"
 msgstr ""
 
-#: scripts/sim/company.gd:69
+#: scripts/sim/company.gd:76
 msgid "The account is already open."
 msgstr ""
 
@@ -3813,7 +3817,7 @@ msgstr ""
 msgid "The liquidator's van is on its way."
 msgstr ""
 
-#: scripts/sim/company.gd:46
+#: scripts/sim/company.gd:53
 msgid "The registration fee is %s."
 msgstr ""
 
@@ -3917,7 +3921,7 @@ msgstr ""
 msgid "TradeLink Wholesale"
 msgstr ""
 
-#: scripts/sim/company.gd:89
+#: scripts/sim/company.gd:96
 msgid "Transfer to %s"
 msgstr ""
 
@@ -3961,7 +3965,7 @@ msgstr ""
 msgid "Use laptop — Company OS"
 msgstr ""
 
-#: scripts/sim/company.gd:26
+#: scripts/sim/company.gd:33
 msgid "Use letters or numbers."
 msgstr ""
 
@@ -4057,7 +4061,7 @@ msgstr ""
 msgid "Wireless Earbuds"
 msgstr ""
 
-#: scripts/sim/company.gd:93
+#: scripts/sim/company.gd:100
 msgid "Withdrawal from %s"
 msgstr ""
 
@@ -4093,7 +4097,7 @@ msgstr ""
 msgid "Yeah. Just looking."
 msgstr ""
 
-#: scripts/sim/company.gd:39
+#: scripts/sim/company.gd:46
 msgid "You already own a registered company."
 msgstr ""
 
@@ -4137,11 +4141,11 @@ msgstr ""
 msgid "You need the product in hand to photograph it."
 msgstr ""
 
-#: scripts/sim/company.gd:73
+#: scripts/sim/company.gd:80
 msgid "You only have %s personally."
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:43
+#: scripts/ui/modals/month_close_modal.gd:44
 msgid "You owe (suppliers)"
 msgstr ""
 

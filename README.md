@@ -6,6 +6,7 @@ A modern pixel-art business-life RPG. Build · Live · Connect · Grow.
 - **Spec readback:** [`docs/CITY_VENTURE_SPEC_READBACK.md`](docs/CITY_VENTURE_SPEC_READBACK.md)
 - **Audit:** [`docs/CURRENT_PROJECT_AUDIT.md`](docs/CURRENT_PROJECT_AUDIT.md)
 - **Architecture:** [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) · **Roadmap:** [`docs/ROADMAP.md`](docs/ROADMAP.md)
+- **Engine decision & store path:** [`docs/ENGINE_DECISION.md`](docs/ENGINE_DECISION.md) · **QA:** [`docs/QA_REPORT.md`](docs/QA_REPORT.md)
 - **Data schema:** [`docs/GAME_DATA_SCHEMA.md`](docs/GAME_DATA_SCHEMA.md) · **Art manifest:** [`docs/ART_ASSET_MANIFEST.md`](docs/ART_ASSET_MANIFEST.md) · **Story:** [`docs/STORY_IMPLEMENTATION.md`](docs/STORY_IMPLEMENTATION.md)
 
 Engine: Godot 4.5.x (project in `game/`).

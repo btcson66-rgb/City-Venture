@@ -67,8 +67,14 @@ func popups() -> void:
 		elif m is MonthCloseModal:
 			await bot.wait(1.5)
 			await bot.shot("month_close_report")
-			await bot.click_text("Continue")
+			var cont: Button = m.footer.get_child(m.footer.get_child_count() - 1) if m.footer.get_child_count() > 0 else null
+			bot.log_line("  click [month close] %s" % (cont.text if cont else "—"))
+			await bot.click(cont)
 			await bot.wait(0.4)
+			if is_instance_valid(m) and UIRoot.top_modal() == m:
+				var hov: Control = bot.get_viewport().gui_get_hovered_control()
+				bot.fail("month close did not close (pending %d, hovered %s)" % [UIRoot._pending_reports.size(), str(hov.get_path()) if hov else "none"])
+				m.close()
 		else:
 			return
 

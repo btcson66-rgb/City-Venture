@@ -42,11 +42,11 @@ msgstr "  ● %d 則新訊息"
 msgid " + deposit"
 msgstr "＋押金"
 
-#: scripts/sim/company.gd:49
+#: scripts/sim/company.gd:56
 msgid " co"
 msgstr " co"
 
-#: scripts/sim/company.gd:49
+#: scripts/sim/company.gd:56
 msgid " inc"
 msgstr " inc"
 
@@ -54,7 +54,7 @@ msgstr " inc"
 msgid " late (penalty %s)"
 msgstr "（逾期，罰款 %s）"
 
-#: scripts/sim/company.gd:49
+#: scripts/sim/company.gd:56
 msgid " ltd"
 msgstr " ltd"
 
@@ -294,7 +294,7 @@ msgstr "配件"
 msgid "Ad prices spike"
 msgstr "廣告價格飆漲"
 
-#: scripts/sim/company.gd:90
+#: scripts/sim/company.gd:97
 msgid "Additional founder capital"
 msgstr "創辦人增資"
 
@@ -306,7 +306,7 @@ msgstr "廣告已暫停。"
 msgid "Advanced Tech & Manufacturing"
 msgstr "先進科技與製造"
 
-#: scripts/ui/modals/month_close_modal.gd:28
+#: scripts/ui/modals/month_close_modal.gd:29
 msgid "Advertising"
 msgstr "廣告"
 
@@ -586,7 +586,7 @@ msgstr "企業金融"
 msgid "Business gross profit passed one month of rent."
 msgstr "公司毛利超過了一個月的房租。"
 
-#: scripts/ui/modals/company_os.gd:192 scripts/ui/modals/month_close_modal.gd:33
+#: scripts/ui/modals/company_os.gd:192 scripts/ui/modals/month_close_modal.gd:34
 msgid "Business profit"
 msgstr "營業利潤"
 
@@ -654,7 +654,7 @@ msgstr "第三章——正式開業"
 msgid "CITY VENTURE"
 msgstr "CITY VENTURE"
 
-#: scripts/ui/modals/month_close_modal.gd:26
+#: scripts/ui/modals/month_close_modal.gd:27
 msgid "COGS"
 msgstr "銷貨成本"
 
@@ -718,7 +718,7 @@ msgstr "取消"
 msgid "Capital contributed in kind by founder"
 msgstr "創辦人實物出資"
 
-#: scripts/sim/company.gd:74
+#: scripts/sim/company.gd:81
 msgid "Capital injected into %s"
 msgstr "注資給 %s"
 
@@ -742,11 +742,11 @@ msgstr "現金快不夠了"
 msgid "Cash now, big loss on inventory."
 msgstr "馬上拿到現金，但庫存大虧。"
 
-#: scripts/ui/modals/month_close_modal.gd:41
+#: scripts/ui/modals/month_close_modal.gd:42
 msgid "Cash — end of month"
 msgstr "現金——月底"
 
-#: scripts/ui/modals/month_close_modal.gd:38
+#: scripts/ui/modals/month_close_modal.gd:39
 msgid "Cash — start of month"
 msgstr "現金——月初"
 
@@ -870,7 +870,11 @@ msgstr "公司"
 msgid "Company name"
 msgstr "公司名稱"
 
-#: scripts/sim/company.gd:22
+#: scripts/sim/company.gd:29
+msgid "Company names need at least 2 characters."
+msgstr "公司名稱至少要 2 個字。"
+
+#: scripts/sim/company.gd:29
 msgid "Company names need at least 3 characters."
 msgstr "公司名稱至少要 3 個字。"
 
@@ -878,7 +882,7 @@ msgstr "公司名稱至少要 3 個字。"
 msgid "Company registration"
 msgstr "公司登記"
 
-#: scripts/sim/company.gd:54
+#: scripts/sim/company.gd:61
 msgid "Company registration fee — %s"
 msgstr "公司登記規費——%s"
 
@@ -906,7 +910,7 @@ msgstr "聯絡人"
 msgid "Containers, customs, freight."
 msgstr "貨櫃、海關、貨運。"
 
-#: scripts/frontend/main_menu.gd:47 scripts/ui/modals/month_close_modal.gd:51
+#: scripts/frontend/main_menu.gd:47 scripts/ui/modals/month_close_modal.gd:52
 msgid "Continue"
 msgstr "繼續"
 
@@ -1442,11 +1446,11 @@ msgstr "開企業帳戶需要公司登記和開戶存款。最低 $500。"
 msgid "Found it cheaper elsewhere."
 msgstr "別家比較便宜。"
 
-#: scripts/sim/company.gd:57
+#: scripts/sim/company.gd:64
 msgid "Founded %s (registration %s)."
 msgstr "成立 %s（登記字號 %s）。"
 
-#: scripts/sim/company.gd:75
+#: scripts/sim/company.gd:82
 msgid "Founder capital (opening deposit)"
 msgstr "創辦人出資（開戶存款）"
 
@@ -1510,7 +1514,7 @@ msgstr "綠色"
 msgid "Grin"
 msgstr "咧嘴笑"
 
-#: scripts/ui/modals/company_os.gd:189 scripts/ui/modals/info_modal.gd:69 scripts/ui/modals/month_close_modal.gd:27
+#: scripts/ui/modals/company_os.gd:189 scripts/ui/modals/info_modal.gd:69 scripts/ui/modals/month_close_modal.gd:28
 msgid "Gross profit"
 msgstr "毛利"
 
@@ -1798,7 +1802,7 @@ msgstr "卡魯"
 msgid "Keep going"
 msgstr "繼續撐"
 
-#: scripts/sim/company.gd:24
+#: scripts/sim/company.gd:31
 msgid "Keep it under 28 characters."
 msgstr "請在 28 個字以內。"
 
@@ -2122,7 +2126,7 @@ msgstr "捷運 · 5 條路線"
 msgid "Metro — %s Station"
 msgstr "捷運——%s站"
 
-#: scripts/sim/company.gd:71
+#: scripts/sim/company.gd:78
 msgid "Minimum opening deposit is $500."
 msgstr "開戶最低存款是 $500。"
 
@@ -2370,7 +2374,7 @@ msgstr "一般"
 msgid "Northridge"
 msgstr "北嶺"
 
-#: scripts/sim/company.gd:87
+#: scripts/sim/company.gd:94
 msgid "Not enough cash."
 msgstr "現金不夠。"
 
@@ -2542,7 +2546,7 @@ msgstr "正式開業"
 msgid "Open last month close (%s)"
 msgstr "查看上月結算（%s）"
 
-#: scripts/sim/company.gd:79
+#: scripts/sim/company.gd:86
 msgid "Opened a business account at Nexus Bank with %s of founder capital."
 msgstr "在 Nexus 銀行開了企業帳戶，創辦人出資 %s。"
 
@@ -2578,7 +2582,7 @@ msgstr "已訂購 %d × %s——%s。預計 %s 到貨。"
 msgid "Orders waiting to be packed: %d"
 msgstr "待打包訂單：%d"
 
-#: scripts/ui/modals/month_close_modal.gd:31
+#: scripts/ui/modals/month_close_modal.gd:32
 msgid "Other operating expense"
 msgstr "其他營業費用"
 
@@ -2602,15 +2606,15 @@ msgstr "透支手續費"
 msgid "Overview"
 msgstr "總覽"
 
-#: scripts/ui/modals/month_close_modal.gd:42
+#: scripts/ui/modals/month_close_modal.gd:43
 msgid "Owed to you (ShopLane + invoices)"
 msgstr "別人欠你（ShopLane＋發票）"
 
-#: scripts/ui/modals/month_close_modal.gd:40
+#: scripts/ui/modals/month_close_modal.gd:41
 msgid "Owner money in / out"
 msgstr "業主資金投入／提領"
 
-#: scripts/sim/company.gd:92
+#: scripts/sim/company.gd:99
 msgid "Owner withdrawal"
 msgstr "業主提款"
 
@@ -2890,11 +2894,11 @@ msgstr "處理時間"
 msgid "Product"
 msgstr "商品"
 
-#: scripts/ui/modals/month_close_modal.gd:36
+#: scripts/ui/modals/month_close_modal.gd:37
 msgid "Profit after life costs"
 msgstr "扣除生活費後利潤"
 
-#: scripts/ui/modals/month_close_modal.gd:50
+#: scripts/ui/modals/month_close_modal.gd:51
 msgid "Profit this month: %s. Cash moved by %s. The gap (%s) is sitting in stock, in ShopLane's hands, or in unpaid invoices."
 msgstr "本月利潤：%s。現金變動：%s。中間的差額（%s）躺在庫存裡、在 ShopLane 手上，或在還沒收的發票裡。"
 
@@ -3022,7 +3026,7 @@ msgstr "退款已送出。{customer}：「謝啦，感謝。」"
 msgid "Refunded."
 msgstr "已退款。"
 
-#: scripts/ui/modals/company_os.gd:187 scripts/ui/modals/month_close_modal.gd:25
+#: scripts/ui/modals/company_os.gd:187 scripts/ui/modals/month_close_modal.gd:26
 msgid "Refunds"
 msgstr "退款"
 
@@ -3042,7 +3046,7 @@ msgstr "已拒絕。"
 msgid "Register & pay"
 msgstr "登記並付款"
 
-#: scripts/sim/company.gd:67
+#: scripts/sim/company.gd:74
 msgid "Register a company at City Hall first."
 msgstr "請先到市政廳登記公司。"
 
@@ -3090,11 +3094,11 @@ msgstr "這裡的法規是經營條件，不是考題：每一條都有成本、
 msgid "Rent $1,250 due the 14th"
 msgstr "房租 $1,250，14 號到期"
 
-#: scripts/ui/modals/month_close_modal.gd:35
+#: scripts/ui/modals/month_close_modal.gd:36
 msgid "Rent (home) + living"
 msgstr "房租（住家）＋生活費"
 
-#: scripts/ui/modals/month_close_modal.gd:32
+#: scripts/ui/modals/month_close_modal.gd:33
 msgid "Rent (office)"
 msgstr "房租（辦公室）"
 
@@ -3166,7 +3170,7 @@ msgstr "零售、餐飲、夜生活。"
 msgid "Return request"
 msgstr "退貨申請"
 
-#: scripts/ui/modals/company_os.gd:186 scripts/ui/modals/month_close_modal.gd:24
+#: scripts/ui/modals/company_os.gd:186 scripts/ui/modals/month_close_modal.gd:25
 msgid "Revenue"
 msgstr "營收"
 
@@ -3382,7 +3386,7 @@ msgstr "結算方式"
 msgid "Shipped %d parcel%s — %s."
 msgstr "寄出 %d 件包裹%s——%s。"
 
-#: scripts/ui/modals/month_close_modal.gd:29 scripts/ui/modals/world_map_modal.gd:116
+#: scripts/ui/modals/month_close_modal.gd:30 scripts/ui/modals/world_map_modal.gd:116
 msgid "Shipping"
 msgstr "運費"
 
@@ -3638,7 +3642,7 @@ msgstr "庫存（成本）"
 msgid "Stock at %s: %d / %d needed"
 msgstr "%s的庫存：%d / 需要 %d"
 
-#: scripts/ui/modals/month_close_modal.gd:44
+#: scripts/ui/modals/month_close_modal.gd:45
 msgid "Stock at cost"
 msgstr "庫存（成本）"
 
@@ -3786,7 +3790,7 @@ msgstr "謝謝"
 msgid "That didn't work."
 msgstr "沒有成功。"
 
-#: scripts/sim/company.gd:29
+#: scripts/sim/company.gd:36
 msgid "That name is already registered in Aurelia."
 msgstr "這個名稱在奧瑞莉亞已經被登記了。"
 
@@ -3802,7 +3806,7 @@ msgstr "綠色轉型"
 msgid "The Opportunity"
 msgstr "機會之年"
 
-#: scripts/sim/company.gd:69
+#: scripts/sim/company.gd:76
 msgid "The account is already open."
 msgstr "帳戶已經開好了。"
 
@@ -3814,7 +3818,7 @@ msgstr "房東要求用登記過的公司簽租約。"
 msgid "The liquidator's van is on its way."
 msgstr "清倉商的貨車在路上了。"
 
-#: scripts/sim/company.gd:46
+#: scripts/sim/company.gd:53
 msgid "The registration fee is %s."
 msgstr "登記規費是 %s。"
 
@@ -3918,7 +3922,7 @@ msgstr "貿易樞紐"
 msgid "TradeLink Wholesale"
 msgstr "TradeLink 批發"
 
-#: scripts/sim/company.gd:89
+#: scripts/sim/company.gd:96
 msgid "Transfer to %s"
 msgstr "轉帳給 %s"
 
@@ -3962,7 +3966,7 @@ msgstr "即將支出：{upcoming}。"
 msgid "Use laptop — Company OS"
 msgstr "用筆電——Company OS"
 
-#: scripts/sim/company.gd:26
+#: scripts/sim/company.gd:33
 msgid "Use letters or numbers."
 msgstr "請使用文字或數字。"
 
@@ -4058,7 +4062,7 @@ msgstr "大眼"
 msgid "Wireless Earbuds"
 msgstr "無線耳機"
 
-#: scripts/sim/company.gd:93
+#: scripts/sim/company.gd:100
 msgid "Withdrawal from %s"
 msgstr "從 %s 提款"
 
@@ -4094,7 +4098,7 @@ msgstr "嗯。"
 msgid "Yeah. Just looking."
 msgstr "對。先看看。"
 
-#: scripts/sim/company.gd:39
+#: scripts/sim/company.gd:46
 msgid "You already own a registered company."
 msgstr "你已經有一間登記的公司了。"
 
@@ -4138,11 +4142,11 @@ msgstr "你需要日票或座位方案。到櫃檯問問。"
 msgid "You need the product in hand to photograph it."
 msgstr "商品要在手上才能拍照。"
 
-#: scripts/sim/company.gd:73
+#: scripts/sim/company.gd:80
 msgid "You only have %s personally."
 msgstr "你個人只有 %s。"
 
-#: scripts/ui/modals/month_close_modal.gd:43
+#: scripts/ui/modals/month_close_modal.gd:44
 msgid "You owe (suppliers)"
 msgstr "你欠別人（供應商）"
 
