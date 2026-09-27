@@ -36,6 +36,8 @@ func build() -> void:
 			v.add_child(UIK.kv("Profit after life costs", Fmt.money(e["profit"]), UIK.money_color(e["profit"]), 8, true))
 		v.add_child(UIK.sep())
 		v.add_child(UIK.kv("Cash — start of month", Fmt.money(e["cash_open"])))
+		if absf(float(e.get("owner_moves", 0.0))) > 0.01:
+			v.add_child(UIK.kv("Owner money in / out", Fmt.money(e["owner_moves"], true), Art.C_SKY))
 		v.add_child(UIK.kv("Cash — end of month", Fmt.money(e["cash_close"]), UIK.money_color(e["cash_close"]), 9, true))
 		v.add_child(UIK.kv("Owed to you (ShopLane + invoices)", Fmt.money(e["ar"]), Art.C_GOLD))
 		v.add_child(UIK.kv("You owe (suppliers)", Fmt.money(e["ap"]), Art.C_GOLD))

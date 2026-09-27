@@ -28,6 +28,12 @@ static func compute(entity: String, t0: int, t1: int) -> Dictionary:
 	var business_profit := net_rev - cogs - opex_total + other_income
 	var cash_open := Ledger.balance_at(entity, "cash", t0)
 	var cash_close := Ledger.balance_at(entity, "cash", t1)
+	# owner money in/out during the period (arrival savings, founder capital) - not operating cash
+	var owner_moves := 0.0
+	for je in Ledger.entries(entity, 100000):
+		var tt := int(je["t"])
+		if tt >= t0 and tt < t1 and str(je.get("source", {}).get("type", "")) in ["opening", "capital", "transfer"]:
+			owner_moves += Ledger.entry_cash(je)
 	return {
 		"entity": entity, "name": GameState.entity_name(entity) if entity != "player" else "Personal / sole proprietor",
 		"revenue": revenue, "refunds": refunds, "net_revenue": net_rev, "cogs": cogs, "gross_profit": net_rev - cogs,
@@ -37,7 +43,7 @@ static func compute(entity: String, t0: int, t1: int) -> Dictionary:
 		"rent_office": float(opex.get("rent_office", 0.0)), "rent_home": float(personal.get("rent_home", 0.0)),
 		"personal": personal, "personal_total": personal_total, "other_income": other_income,
 		"business_profit": business_profit, "profit": business_profit - personal_total,
-		"cash_open": cash_open, "cash_close": cash_close, "cash_change": cash_close - cash_open,
+		"cash_open": cash_open, "cash_close": cash_close, "cash_change": cash_close - cash_open, "owner_moves": owner_moves,
 		"ar": Ledger.balance_at(entity, "marketplace_balance", t1) + Ledger.balance_at(entity, "accounts_receivable", t1),
 		"ap": -Ledger.balance_at(entity, "accounts_payable", t1),
 		"inventory": Ledger.balance_at(entity, "inventory", t1) + Ledger.balance_at(entity, "inventory_in_transit", t1) + Ledger.balance_at(entity, "goods_out", t1),

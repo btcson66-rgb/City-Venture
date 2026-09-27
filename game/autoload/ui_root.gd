@@ -120,7 +120,20 @@ func play_dialogue(id: String, done := Callable()) -> void:
 func _process(_delta: float) -> void:
 	# toasts sit at the top in the world; while a management screen is open they drop to the bottom
 	# edge so they never cover a modal's title bar
-	var ty := 8.0 if modal_layer.get_child_count() == 0 else 352.0 - toast_box.size.y
+	# toasts sit at the top in the world. With a screen open, only the newest one shows, tucked under
+	# the panel when there is room, so it never stacks over choices or report lines.
+	var tm := top_modal()
+	var n := toast_box.get_child_count()
+	for i in n:
+		(toast_box.get_child(i) as Control).visible = tm == null or i == n - 1
+	var ty := 8.0
+	if tm != null:
+		var th := toast_box.get_combined_minimum_size().y
+		var pb := 352.0
+		var md := tm as Modal
+		if md != null and md.panel != null:
+			pb = md.panel.position.y + md.panel.size.y
+		ty = pb + 3.0 if pb + 3.0 + th <= 358.0 else 358.0 - th
 	toast_box.position.y = lerpf(toast_box.position.y, ty, 0.35)
 	# a first-visit card never sits on top of a conversation or a management screen
 	var busy := dialogue.active or modal_layer.get_child_count() > 0 or phone.is_open
