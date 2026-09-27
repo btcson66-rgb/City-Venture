@@ -160,7 +160,7 @@ func _process(_d: float) -> void:
 		co_label.text = Fmt.money(cc)
 		co_label.add_theme_color_override("font_color", Art.C_GREEN if cc >= 1500 else (Art.C_GOLD if cc >= 0 else Art.C_RED))
 	var unread := GameState.unread_messages()
-	phone_hint.text = I18n.t("[Tab] Phone") + (I18n.t("  ● %d new") % unread if unread > 0 else "") + ("   ⚑ decision" if not EventEngine.pending().is_empty() else "")
+	phone_hint.text = I18n.t("[Tab] Phone") + (I18n.t("  ● %d new") % unread if unread > 0 else "") + (I18n.t("   ⚑ decision") if not EventEngine.pending().is_empty() else "")
 	phone_hint.add_theme_color_override("font_color", Art.C_GOLD if unread > 0 or not EventEngine.pending().is_empty() else Art.C_MUTED)
 	var cc2 := Ecommerce.carried_count()
 	parcels_label.text = (I18n.t("Carrying %d parcel%s") % [cc2, I18n.pl(cc2)]) if cc2 > 0 else ""

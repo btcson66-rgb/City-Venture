@@ -115,7 +115,9 @@ static func next_pending() -> Dictionary:
 static func fill(text: String, ctx: Dictionary) -> String:
 	text = I18n.t(text)  # translate the template first, then drop the values in
 	for k in ctx:
-		text = text.replace("{" + str(k) + "}", str(ctx[k]))
+		var v = ctx[k]
+		# values that are data text (a return reason, a product name) translate too; names/amounts pass through
+		text = text.replace("{" + str(k) + "}", I18n.t(v) if v is String else str(v))
 	text = text.replace("{company}", GameState.business_display_name())
 	text = text.replace("{player}", str(GameState.data["player"]["name"]))
 	return text

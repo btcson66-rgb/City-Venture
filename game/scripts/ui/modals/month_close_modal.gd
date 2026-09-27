@@ -43,7 +43,9 @@ func build() -> void:
 		v.add_child(UIK.kv("You owe (suppliers)", Fmt.money(e["ap"]), Art.C_GOLD))
 		v.add_child(UIK.kv("Stock at cost", Fmt.money(e["inventory"]), Art.C_SKY))
 	var main: Dictionary = rep["entities"].values()[-1]
-	var diff := float(main["profit"]) - float(main["cash_change"])
+	# compare profit with the cash the business itself generated (owner money in/out is not profit)
+	var op_cash := float(main["cash_change"]) - float(main.get("owner_moves", 0.0))
+	var diff := float(main["profit"]) - op_cash
 	body.add_child(UIK.sep())
-	body.add_child(UIK.wrap(I18n.t("Profit this month: %s. Cash moved by %s. The gap (%s) is sitting in stock, in ShopLane's hands, or in unpaid invoices.") % [Fmt.money(main["profit"]), Fmt.money(main["cash_change"], true), Fmt.money(diff)], 8, Art.C_SKY, 490))
+	body.add_child(UIK.wrap(I18n.t("Profit this month: %s. Cash moved by %s. The gap (%s) is sitting in stock, in ShopLane's hands, or in unpaid invoices.") % [Fmt.money(main["profit"]), Fmt.money(op_cash, true), Fmt.money(diff)], 8, Art.C_SKY, 490))
 	footer.add_child(UIK.button("Continue", close, "primary", 80))

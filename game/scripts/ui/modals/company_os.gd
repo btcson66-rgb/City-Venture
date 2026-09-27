@@ -20,6 +20,20 @@ var new_price := {}
 var deliver_to := ""
 
 
+## Order / contract status chips (ids stay English in data; shown translated).
+const STATUS_TEXT := {
+	"placed": "PLACED", "packed": "PACKED", "awaiting_pickup": "AWAITING PICKUP", "carried": "CARRIED",
+	"shipped": "SHIPPED", "in_transit": "IN TRANSIT", "delivered": "DELIVERED", "return_requested": "RETURN REQUESTED",
+	"refunded": "REFUNDED", "replaced": "REPLACED", "partial_refund": "PARTIAL REFUND", "refused": "REFUSED",
+	"disputed": "DISPUTED", "offered": "OFFERED", "countered": "COUNTERED", "active": "ACTIVE", "paid": "PAID",
+	"rejected": "REJECTED", "expired": "EXPIRED", "withdrawn": "WITHDRAWN", "overdue": "OVERDUE", "declined": "DECLINED",
+}
+
+
+static func status_text(s: String) -> String:
+	return I18n.t(STATUS_TEXT.get(s, s.replace("_", " ").to_upper()))
+
+
 func _init(term: String) -> void:
 	terminal = term
 	panel_size = Vector2(624, 344)
@@ -57,7 +71,7 @@ func build() -> void:
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		b.name = "Tab_" + t[0]
 		if t[0] == "contracts" and _open_offers() > 0:
-			b.text += " ●"
+			b.text = I18n.t(b.text) + " ●"
 		nav.add_child(b)
 	nav.add_child(UIK.sep())
 	for p in PLANNED:
@@ -84,7 +98,7 @@ func _open_offers() -> int:
 
 
 func _section(t: String) -> void:
-	content.add_child(UIK.label(t.to_upper(), 7, Art.C_DIM, true))
+	content.add_child(UIK.label(I18n.t(t).to_upper(), 7, Art.C_DIM, true))
 
 
 func _kpi(grid: GridContainer, label: String, value: String, col := Art.C_WHITE, sub := "") -> void:
@@ -293,7 +307,7 @@ func _tab_sales() -> void:
 		t.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(t)
 		row.add_child(UIK.label(Fmt.money(o["unit_price"]), 7, Art.C_WHITE))
-		row.add_child(UIK.chip(str(o["status"]).replace("_", " ").to_upper(), _status_col(o["status"])))
+		row.add_child(UIK.chip(status_text(str(o["status"])), _status_col(o["status"])))
 		if o.has("review"):
 			row.add_child(UIK.label("★".repeat(int(o["review"]["stars"])), 7, Art.C_GOLD))
 		content.add_child(row)
@@ -488,7 +502,7 @@ func _tab_contracts() -> void:
 		sel_contract = list[0]["id"]
 	var h := UIK.hbox(4)
 	for c in list:
-		h.add_child(UIK.button("%s · %s" % [c["id"], str(c["status"]).to_upper()], func(): sel_contract = c["id"]; counter_price = 0.0; rebuild(), "tab_active" if sel_contract == c["id"] else "tab"))
+		h.add_child(UIK.button("%s · %s" % [c["id"], status_text(str(c["status"]))], func(): sel_contract = c["id"]; counter_price = 0.0; rebuild(), "tab_active" if sel_contract == c["id"] else "tab"))
 	content.add_child(h)
 	var k: Dictionary = GameState.data["contracts"][sel_contract]
 	var cols := UIK.hbox(10)
