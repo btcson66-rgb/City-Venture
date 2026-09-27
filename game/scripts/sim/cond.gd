@@ -2,7 +2,7 @@ class_name Cond
 extends RefCounted
 ## Tiny condition DSL shared by story objectives and events.
 ##   flag:x  !flag:x  visited:x  stat:name>=n  day>=n  cash<n  company_registered  !company_registered
-##   has_ads  best_rating>=4.2  weekday:mon  hour>=h  has_stock  chapter_done:id  objective_done:id
+##   has_ads  best_rating>=4.2  weekday:mon  hour>=h  has_stock  has_stock:product_id  chapter_done:id  objective_done:id
 
 
 static func all(conds: Array, ctx := {}) -> bool:
@@ -24,6 +24,9 @@ static func eval(expr: String, ctx := {}) -> bool:
 		return GameState.visited(expr.substr(8))
 	if expr.begins_with("weekday:"):
 		return Clock.WEEKDAYS[Clock.weekday()].to_lower() == expr.substr(8).to_lower().left(3)
+	if expr.begins_with("has_stock:"):
+		# unreserved units of one product somewhere the player can ship from
+		return Ecommerce.best_location(expr.substr(10)) != ""
 	if expr.begins_with("chapter_done:"):
 		return expr.substr(13) in GameState.data["story"]["chapters_done"]
 	if expr.begins_with("objective_done:"):

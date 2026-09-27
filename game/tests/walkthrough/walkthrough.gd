@@ -7,6 +7,7 @@ extends RefCounted
 
 var bot
 var shots_taken := {}
+var _tried := {}
 
 
 func _init(b) -> void:
@@ -45,6 +46,16 @@ func popups() -> void:
 			var inst: Dictionary = m.inst
 			await bot.shot("decision_" + str(inst["id"]))
 			var pick := _pick_choice(inst)
+			# a decision that is still open after we answered it is a bug: report it, then try another choice
+			var tried: Array = _tried.get(inst["iid"], [])
+			if not tried.is_empty():
+				bot.expect(false, "decision %s stayed open after choosing '%s'" % [inst["id"], tried.back()])
+				for c in DataDB.events[inst["id"]]["choices"]:
+					if not c["id"] in tried and EventEngine.choice_available(c, inst["ctx"]):
+						pick = c["id"]
+						break
+			tried.append(pick)
+			_tried[inst["iid"]] = tried
 			bot.log_line("  decision %s → %s" % [inst["id"], pick])
 			if not await bot.click_named("Choice_" + pick, 3.0):
 				await bot.click_text("", 1.0)
@@ -65,7 +76,11 @@ func popups() -> void:
 func _pick_choice(inst: Dictionary) -> String:
 	match str(inst["id"]):
 		"customer_return_first", "customer_return":
-			return "replace" if Ecommerce.total_units() > 0 else "refund"
+			var rep := {}
+			for c in DataDB.events[inst["id"]]["choices"]:
+				if c["id"] == "replace":
+					rep = c
+			return "replace" if EventEngine.choice_available(rep, inst["ctx"]) else "refund"
 		"supplier_price_increase":
 			return "accept"
 		"unexpected_large_order":

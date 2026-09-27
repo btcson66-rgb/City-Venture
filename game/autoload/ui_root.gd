@@ -122,6 +122,10 @@ func _process(_delta: float) -> void:
 	# edge so they never cover a modal's title bar
 	var ty := 8.0 if modal_layer.get_child_count() == 0 else 352.0 - toast_box.size.y
 	toast_box.position.y = lerpf(toast_box.position.y, ty, 0.35)
+	# a first-visit card never sits on top of a conversation or a management screen
+	var busy := dialogue.active or modal_layer.get_child_count() > 0 or phone.is_open
+	for c in get_tree().get_nodes_in_group("location_card"):
+		c.visible = not busy
 	if not GameState.has_game() or not _hud_wanted or SceneRouter.transitioning:
 		return
 	if Input.is_action_pressed("fast_forward") and not is_blocking():

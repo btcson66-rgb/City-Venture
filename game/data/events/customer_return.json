@@ -33,7 +33,7 @@
    "label": "Send a replacement",
    "detail": "One unit + express shipping.",
    "requires": [
-    "has_stock"
+    "has_stock:{product_id}"
    ],
    "effects": [
     {
