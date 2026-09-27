@@ -110,8 +110,11 @@ The product owner played the web build and reported five problems. Each one, and
 | "Too few careers to choose from" | Only ecommerce was playable | **5 part-time jobs** (Barista, Parcel Sorter, Community Host, Records Clerk, Teller Trainee). Each has a 3-rank promotion ladder with wage raises, 4-hour shifts worked on site during opening hours (one per day), and one real perk (free coffee, 15% shipping discount, free hot desk, half-price registration, no overdraft fees). **Freelance consulting** is now an active business: gigs each morning, work at any laptop in 2-hour sessions, deliver, invoice (receivable), paid on 0/7/14-day terms. Reputation 0–5★ moves the rate and unlocks bigger gigs; late work costs 20% and stars, abandoned work is cancelled unpaid. Wages appear in Month Close and Company OS | Implemented | Unit tests `test_careers.gd` (7 tests: pay, opening hours, promotion, perks, gig invoice → payment, cancellation). Walkthrough "Careers" steps (hire, shift, gig) in both languages |
 | "Still not happy with the visuals" | Art is procedural or converted from the concept boards (see Known issues) | Not changed on this track. The owner plans to hand visuals to Codex. [`docs/ART_HANDOFF.md`](ART_HANDOFF.md) gives the swap contract (paths, sizes, metadata, text rules), and `tools/build.sh` no longer regenerates art unless `REGEN_ART=1`, so hand-made art is not overwritten | Planned (art track) | — |
 
-**Regression runs for 0.1.2-test2:** unit tests **38/38**. Full rendered walkthroughs in English and 繁體中文:
-RESULTS_PLACEHOLDER
+**Regression runs for 0.1.2-test2:** unit tests **41/41** (`test-reports/unit.xml`; new: `test_careers.gd` 7,
+`test_onboarding.gd` 3). Full rendered walkthroughs from New Game to the July month close, now including the Careers
+steps (hire at the Business Board, work a 4-hour shift for $72.00, accept a freelance gig and work 2 h), pass in both
+languages: **English 0 failures (787 s)** and **繁體中文 0 failures (821 s)**. Logs: `logs/walkthrough_0.1.2-test2_*.txt`.
+Screenshots: `screenshots/test2_en/`, `screenshots/test2_zh_TW/`, `screenshots/web/`.
 
 Two bugs were caught by these runs before release. ① The job modal awaited a fade after closing itself; the
 coroutine died with the modal, so no wages were paid and **the screen stayed black**. The shift now runs on the

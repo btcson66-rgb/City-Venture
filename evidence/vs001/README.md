@@ -14,6 +14,10 @@ by hand. Read the results in [`docs/QA_REPORT.md`](../../docs/QA_REPORT.md).
 | `screenshots/walkthrough/` | Numbered frames taken along the walkthrough (creator, arrival, districts, interiors, Company OS, decisions, month close, after load) | rendered walkthrough |
 | `screenshots/tour/` | Menu, creator, arrival, every district and interior, City/World Map, dusk and night | `--bot=shots` |
 | `videos/vs001_gameplay_uncut.mp4` | One uncut take, recorded frame by frame by Godot Movie Maker at 30 fps | `--write-movie … --fixed-fps 30` |
+| `logs/walkthrough_0.1.2-test2_{en,zh_TW}.txt` | Build 0.1.2-test2 regression runs, rendered: the full slice plus the Careers steps (job shift, freelance gig). 0 failures in both languages | `--bot=walkthrough --lang=…` |
+| `screenshots/test2_en/`, `screenshots/test2_zh_TW/` | Tutorial card, gold guide arrow, EXIT mat, Business Board jobs, job modal, freelance tab, fixed café interior | same runs, and `--bot=shots` |
+| `screenshots/web/` | Chromium test of the web build: new game → walk outside → **reload page** → Continue resumes in the same place. `refresh_test.playwright.js` is the script | Playwright + Chromium |
+| `../../docs/media/trailer_{zh,en}.mp4` | 33 s trailer / first-play tutorial (2.4 MB each), recorded by the trailer bot | `--bot=trailer`, `tools/media/make_trailer.sh` |
 
 The bot drives the game only through input. It uses movement actions, `E` at interactables, mouse clicks at a button's
 on-screen position, and key events to type into text fields. If a key event doesn't register headless, it sets the text directly and

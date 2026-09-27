@@ -33,6 +33,7 @@ var _completing := false
 var _guide_on := true
 var _target := {}          # {pos: Vector2 (world), label: String}
 var _target_scene := ""
+var _guide: Control
 
 
 func _ready() -> void:
@@ -72,6 +73,12 @@ func _ready() -> void:
 	v.add_child(body)
 	keys_row = UIK.hbox(2)
 	v.add_child(keys_row)
+	# the guide arrow draws above the card, so a target behind the card still shows its label
+	_guide = Control.new()
+	_guide.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_guide.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(_guide)
+	_guide.draw.connect(_draw_guide)
 	EventBus.interacted.connect(func(_a, _b): _seen("interact"))
 
 
@@ -127,7 +134,7 @@ func set_guide(on: bool) -> void:
 	cfg.load(SETTINGS)
 	cfg.set_value("general", "guide", on)
 	cfg.save(SETTINGS)
-	queue_redraw()
+	_guide.queue_redraw()
 
 
 # ------------------------------------------------------------------ per frame
@@ -157,7 +164,7 @@ func _process(delta: float) -> void:
 	card.position = Vector2(6, (op.position.y + op.size.y + 4) if op.visible else 42.0)
 	# guide
 	_target = _resolve(ws) if _guide_on and not blocked else {}
-	queue_redraw()
+	_guide.queue_redraw()
 
 
 func _track(ws: WorldScene, _delta: float) -> void:
@@ -346,7 +353,7 @@ static func _next_hop(from: String, to: String) -> String:
 
 
 # ------------------------------------------------------------------ drawing
-func _draw() -> void:
+func _draw_guide() -> void:
 	if _target.is_empty():
 		return
 	var xf := get_viewport().get_canvas_transform()
@@ -359,19 +366,19 @@ func _draw() -> void:
 	if view.has_point(sp):
 		var y := sp.y - 22.0 - 4.0 * absf(sin(_t * 3.2))
 		var pulse := 0.5 + 0.5 * sin(_t * 4.0)
-		draw_arc(sp, 7.0 + pulse * 3.0, 0, TAU, 28, Color(gold, 0.35 + 0.4 * (1.0 - pulse)), 1.5)
+		_guide.draw_arc(sp, 7.0 + pulse * 3.0, 0, TAU, 28, Color(gold, 0.35 + 0.4 * (1.0 - pulse)), 1.5)
 		var pts := PackedVector2Array([Vector2(-4, -9), Vector2(4, -9), Vector2(4, -3), Vector2(8, -3), Vector2(0, 5), Vector2(-8, -3), Vector2(-4, -3)])
 		var arrow := PackedVector2Array()
 		for p in pts:
 			arrow.append(p + Vector2(sp.x, y))
-		draw_colored_polygon(arrow, gold)
+		_guide.draw_colored_polygon(arrow, gold)
 		arrow.append(arrow[0])
-		draw_polyline(arrow, ink, 1.0)
+		_guide.draw_polyline(arrow, ink, 1.0)
 		if label != "":
 			var w := font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, 7).x
 			var lp := Vector2(sp.x - w / 2.0, y - 13)
-			draw_rect(Rect2(lp + Vector2(-3, -8), Vector2(w + 6, 11)), Color(0.05, 0.08, 0.15, 0.85))
-			draw_string(font, lp, label, HORIZONTAL_ALIGNMENT_LEFT, -1, 7, gold)
+			_guide.draw_rect(Rect2(lp + Vector2(-3, -8), Vector2(w + 6, 11)), Color(0.05, 0.08, 0.15, 0.85))
+			_guide.draw_string(font, lp, label, HORIZONTAL_ALIGNMENT_LEFT, -1, 7, gold)
 		return
 	# off screen: clamp to the edge and point outwards
 	var c := Vector2(320, 180)
@@ -386,13 +393,13 @@ func _draw() -> void:
 	ep += dir * bob
 	var side := dir.orthogonal()
 	var tri := PackedVector2Array([ep + dir * 8.0, ep - dir * 4.0 + side * 7.0, ep - dir * 4.0 - side * 7.0])
-	draw_colored_polygon(tri, gold)
+	_guide.draw_colored_polygon(tri, gold)
 	tri.append(tri[0])
-	draw_polyline(tri, ink, 1.0)
+	_guide.draw_polyline(tri, ink, 1.0)
 	if label != "":
 		var w2 := font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, 7).x
 		var lp2 := ep - dir * 16.0 - Vector2(w2 / 2.0, -3)
 		lp2.x = clampf(lp2.x, 4, 640 - 4 - w2)
 		lp2.y = clampf(lp2.y, 12, 360 - 6)
-		draw_rect(Rect2(lp2 + Vector2(-3, -8), Vector2(w2 + 6, 11)), Color(0.05, 0.08, 0.15, 0.85))
-		draw_string(font, lp2, label, HORIZONTAL_ALIGNMENT_LEFT, -1, 7, gold)
+		_guide.draw_rect(Rect2(lp2 + Vector2(-3, -8), Vector2(w2 + 6, 11)), Color(0.05, 0.08, 0.15, 0.85))
+		_guide.draw_string(font, lp2, label, HORIZONTAL_ALIGNMENT_LEFT, -1, 7, gold)

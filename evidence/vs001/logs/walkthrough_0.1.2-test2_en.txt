@@ -1,0 +1,546 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+ALSA lib conf.c:5204:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+ALSA lib conf.c:5204:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+ALSA lib conf.c:5204:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5727:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2721:(snd_pcm_open_noupdate) Unknown PCM default
+ERROR: Condition "status < 0" is true. Returning: ERR_CANT_OPEN
+   at: init_output_device (drivers/alsa/audio_driver_alsa.cpp:90)
+WARNING: All audio drivers failed, falling back to the dummy driver.
+     at: initialize (servers/audio_server.cpp:244)
+
+   0.1s STEP Main menu → New Game
+   1.7s   shot 01_main_menu.png
+   1.7s   click [NewGame] New Game
+   3.0s STEP Character Creator
+   3.1s   shot 02_creator_default.png
+   3.1s   click [Tab_hair] Hair
+   3.3s   click [Next_hair] ▶
+   3.8s   click [Tab_face] Face
+   4.0s   click [Next_face] ▶
+   4.2s   click [Next_eye_shape] ▶
+   4.4s   click [Tab_body] Body
+   4.6s   click [Next_presentation] ▶
+   5.3s   shot 03_creator_customised.png
+   5.3s   click [Tab_outfit] Outfit
+   5.4s   click "Startup Casual"
+   6.3s   ok  appearance changed from default (short_neat)
+   6.4s   shot 04_creator_final.png
+   6.4s   click [Start] Start in Aurelia  →
+   6.5s [Sun, Jun 1 2:00 PM] STEP Arrival sequence
+   9.0s [Sun, Jun 1 2:00 PM]   shot 05_arrival_train.png
+  12.6s [Sun, Jun 1 2:00 PM]   shot 06_arrival_phone.png
+  17.7s [Sun, Jun 1 2:01 PM]   ok  spawned in the Riverside apartment
+  17.7s [Sun, Jun 1 2:01 PM]   ok  starting cash $30,000
+  17.7s [Sun, Jun 1 2:01 PM]   ok  name saved
+  19.3s [Sun, Jun 1 2:03 PM]   shot 07_apartment_arrival.png
+  19.3s [Sun, Jun 1 2:03 PM] STEP Chapter 1 — phone & Maya
+  22.6s [Sun, Jun 1 2:07 PM]   shot 08_phone_home.png
+  22.6s [Sun, Jun 1 2:07 PM]   click [App_messages] Messages 2
+  23.2s [Sun, Jun 1 2:07 PM]   click [Thread_maya] Maya  ● Call me. Or text. Or whate
+  25.4s [Sun, Jun 1 2:07 PM]   choose "› Yeah."
+  28.6s [Sun, Jun 1 2:07 PM]   choose "› I'm starting a company."
+  33.2s [Sun, Jun 1 2:07 PM]   ok  Maya conversation done
+  33.2s [Sun, Jun 1 2:07 PM] STEP Head outside
+  36.2s [Sun, Jun 1 2:13 PM]   ok  walked back outside
+  36.2s [Sun, Jun 1 2:13 PM]   ok  visited Riverside
+  36.3s [Sun, Jun 1 2:13 PM]   shot 09_riverside_outside_home.png
+  36.3s [Sun, Jun 1 2:13 PM] STEP Bloom Coffee
+  39.6s [Sun, Jun 1 2:18 PM]   ok  entered Bloom Coffee
+  39.7s [Sun, Jun 1 2:18 PM]   shot 10_bloom_coffee_inside.png
+  41.4s [Sun, Jun 1 2:20 PM]   use "Order coffee ($4.50)"
+  43.4s [Sun, Jun 1 2:20 PM]   choose "› Please."
+  49.5s [Sun, Jun 1 2:31 PM]   ok  bought a coffee from Jun
+  52.6s [Sun, Jun 1 2:37 PM]   ok  walked back outside
+  52.6s [Sun, Jun 1 2:37 PM] STEP Walk east to Startup Hub
+  54.1s [Sun, Jun 1 2:39 PM]   shot 11_riverside_street.png
+  66.7s [Sun, Jun 1 3:10 PM]   ok  walked to Startup Hub
+  66.8s [Sun, Jun 1 3:10 PM]   shot 12_startup_hub_arrive.png
+  66.8s [Sun, Jun 1 3:10 PM] STEP Nexus Co-work
+  70.8s [Sun, Jun 1 3:16 PM]   ok  entered Nexus Co-work
+  71.0s [Sun, Jun 1 3:16 PM]   shot 13_cowork_inside.png
+  72.7s [Sun, Jun 1 3:19 PM]   use "Reception — desks & day passes"
+  75.4s [Sun, Jun 1 3:19 PM]   choose "› Yeah. Just looking."
+  80.9s [Sun, Jun 1 3:19 PM]   click [DayPass] Buy a day pass ($15)
+  82.1s [Sun, Jun 1 3:19 PM] STEP Business Board
+  83.9s [Sun, Jun 1 3:22 PM]   use "Business Board"
+  84.7s [Sun, Jun 1 3:22 PM]   shot 14_business_board.png
+  84.7s [Sun, Jun 1 3:22 PM]   click [Biz_saas] ○ SaaS / Software
+  85.5s [Sun, Jun 1 3:22 PM]   shot 15_business_board_planned_saas.png
+  85.5s [Sun, Jun 1 3:22 PM]   click [Biz_ecommerce] ● Ecommerce
+  85.8s [Sun, Jun 1 3:22 PM]   click [StartEcommerce] Start an ecommerce side business
+  87.4s [Sun, Jun 1 3:22 PM]   ok  picked ecommerce as first business
+  90.0s [Sun, Jun 1 3:26 PM]   ok  Chapter 1 complete
+  90.0s [Sun, Jun 1 3:26 PM] STEP Chapter 2 — buy stock at a hot desk (Company OS)
+  93.4s [Sun, Jun 1 3:31 PM]   use "Work at a hot desk — Company OS"
+  94.1s [Sun, Jun 1 3:31 PM]   shot 16_company_os_overview_personal.png
+  94.1s [Sun, Jun 1 3:31 PM]   click [Tab_operations] Operations
+  95.1s [Sun, Jun 1 3:31 PM]   shot 17_company_os_suppliers.png
+  95.1s [Sun, Jun 1 3:31 PM]   click [Buy_tradelink_wholesale_wireless_earbuds] Buy $900
+  95.9s [Sun, Jun 1 3:41 PM]   click [Buy_tradelink_wholesale_water_bottle] Buy $408
+  96.7s [Sun, Jun 1 3:51 PM]   click [Buy_tradelink_wholesale_desk_lamp] Buy $460
+  97.5s [Sun, Jun 1 4:01 PM]   click [Buy_tradelink_wholesale_phone_stand] Buy $272
+  98.3s [Sun, Jun 1 4:11 PM]   ok  placed purchase orders (MOQ, prepaid): 4 POs, cash $27,940.50
+  98.4s [Sun, Jun 1 4:11 PM]   shot 18_company_os_purchase_orders.png
+  98.9s [Sun, Jun 1 4:11 PM] STEP Home to wait for stock
+ 102.5s [Sun, Jun 1 4:17 PM]   ok  walked back outside
+ 106.5s [Sun, Jun 1 4:35 PM]   ok  walked to Riverside
+ 122.4s [Sun, Jun 1 4:59 PM]   ok  entered Riverside Tower
+ 124.6s [Sun, Jun 1 5:03 PM]   use "Sleep"
+ 125.2s [Sun, Jun 1 5:03 PM]   click [Nap] Nap for 2 hours
+ 127.1s [Sun, Jun 1 7:04 PM]   use "Sleep"
+ 127.7s [Sun, Jun 1 7:04 PM]   click [Sleep] Sleep until 7:00 AM
+ 129.9s [Mon, Jun 2 7:01 AM]   use "Sleep"
+ 130.6s [Mon, Jun 2 7:01 AM]   click [Nap] Nap for 2 hours
+ 132.4s [Mon, Jun 2 9:02 AM]   use "Sleep"
+ 133.0s [Mon, Jun 2 9:02 AM]   click [Nap] Nap for 2 hours
+ 135.0s [Mon, Jun 2 11:03 AM]   use "Sleep"
+ 135.6s [Mon, Jun 2 11:03 AM]   click [Nap] Nap for 2 hours
+ 137.8s [Mon, Jun 2 1:04 PM]   use "Sleep"
+ 138.4s [Mon, Jun 2 1:04 PM]   click [Nap] Nap for 2 hours
+ 140.4s [Mon, Jun 2 3:05 PM]   use "Sleep"
+ 141.0s [Mon, Jun 2 3:05 PM]   click [Nap] Nap for 2 hours
+ 142.9s [Mon, Jun 2 5:06 PM]   use "Sleep"
+ 143.5s [Mon, Jun 2 5:06 PM]   click [Nap] Nap for 2 hours
+ 145.3s [Mon, Jun 2 7:07 PM]   use "Sleep"
+ 145.9s [Mon, Jun 2 7:07 PM]   click [Sleep] Sleep until 7:00 AM
+ 148.0s [Tue, Jun 3 7:01 AM]   use "Sleep"
+ 148.6s [Tue, Jun 3 7:01 AM]   click [Nap] Nap for 2 hours
+ 150.3s [Tue, Jun 3 9:02 AM]   use "Sleep"
+ 151.0s [Tue, Jun 3 9:02 AM]   click [Nap] Nap for 2 hours
+ 152.8s [Tue, Jun 3 11:03 AM]   use "Sleep"
+ 153.4s [Tue, Jun 3 11:03 AM]   click [Nap] Nap for 2 hours
+ 155.2s [Tue, Jun 3 1:04 PM]   use "Sleep"
+ 155.9s [Tue, Jun 3 1:04 PM]   click [Nap] Nap for 2 hours
+ 157.7s [Tue, Jun 3 3:05 PM]   use "Sleep"
+ 158.3s [Tue, Jun 3 3:05 PM]   click [Nap] Nap for 2 hours
+ 159.9s [Tue, Jun 3 5:05 PM]   ok  stock delivered to the apartment
+ 160.6s [Tue, Jun 3 5:06 PM]   shot 19_apartment_with_stock.png
+ 160.6s [Tue, Jun 3 5:06 PM] STEP List products on ShopLane
+ 162.1s [Tue, Jun 3 5:09 PM]   use "Use laptop — Company OS"
+ 162.8s [Tue, Jun 3 5:09 PM]   click [Tab_sales] Sales
+ 163.5s [Tue, Jun 3 5:09 PM]   shot 20_company_os_sales_ready.png
+ 163.5s [Tue, Jun 3 5:09 PM]   click [ListSelf_wireless_earbuds] Shoot photos myself & list (1 h 20 min)
+ 164.2s [Tue, Jun 3 6:29 PM]   click [ListSelf_water_bottle] Shoot photos myself & list (1 h 20 min)
+ 165.0s [Tue, Jun 3 7:49 PM]   click [ListSelf_desk_lamp] Shoot photos myself & list (1 h 20 min)
+ 165.7s [Tue, Jun 3 9:09 PM]   click [ListSelf_phone_stand] Shoot photos myself & list (1 h 20 min)
+ 166.5s [Tue, Jun 3 10:29 PM]   click [AdPlus_wireless_earbuds] +
+ 167.3s [Tue, Jun 3 10:29 PM]   shot 21_company_os_listings_live.png
+ 167.3s [Tue, Jun 3 10:29 PM]   ok  listings live
+ 167.7s [Tue, Jun 3 10:29 PM] STEP First order → pack → ship
+ 169.8s [Tue, Jun 3 10:32 PM]   use "Packing table"
+ 170.6s [Tue, Jun 3 10:32 PM]   shot 22_packing_table.png
+ 170.6s [Tue, Jun 3 10:32 PM]   click [Pack] Pack 3 orders (24 min)
+ 171.5s [Tue, Jun 3 10:56 PM]   click [CourierExpress] Courier · Express 1d ($43.50)
+ 172.8s [Tue, Jun 3 10:56 PM]   ok  first order came in
+ 172.8s [Tue, Jun 3 10:56 PM]   ok  handed to the courier (pickup booked)
+ 172.8s [Tue, Jun 3 10:56 PM] STEP Delivery → first dollar
+ 176.0s [Tue, Jun 3 11:01 PM]   use "Sleep"
+ 176.6s [Tue, Jun 3 11:01 PM]   click [Sleep] Sleep until 7:00 AM
+ 178.9s [Wed, Jun 4 7:01 AM]   use "Sleep"
+ 179.5s [Wed, Jun 4 7:01 AM]   click [Nap] Nap for 2 hours
+ 181.4s [Wed, Jun 4 9:02 AM]   use "Sleep"
+ 182.0s [Wed, Jun 4 9:02 AM]   click [Nap] Nap for 2 hours
+ 186.6s [Wed, Jun 4 11:07 AM]   use "Packing table"
+ 187.4s [Wed, Jun 4 11:07 AM]   click [Pack] Pack 5 orders (40 min)
+ 188.4s [Wed, Jun 4 11:47 AM]   click [CourierExpress] Courier · Express 1d ($50.50)
+ 192.9s [Wed, Jun 4 11:52 AM]   use "Sleep"
+ 193.5s [Wed, Jun 4 11:52 AM]   click [Nap] Nap for 2 hours
+ 198.2s [Wed, Jun 4 1:57 PM]   use "Packing table"
+ 199.0s [Wed, Jun 4 1:57 PM]   click [Pack] Pack 3 orders (24 min)
+ 200.0s [Wed, Jun 4 2:21 PM]   click [CourierExpress] Courier · Express 1d ($32.70)
+ 204.3s [Wed, Jun 4 2:26 PM]   use "Sleep"
+ 205.0s [Wed, Jun 4 2:26 PM]   click [Nap] Nap for 2 hours
+ 209.6s [Wed, Jun 4 4:31 PM]   use "Packing table"
+ 210.3s [Wed, Jun 4 4:31 PM]   click [Pack] Pack 2 orders (16 min)
+ 211.4s [Wed, Jun 4 4:47 PM]   click [CourierExpress] Courier · Express 1d ($23.80)
+ 215.8s [Wed, Jun 4 4:52 PM]   use "Sleep"
+ 216.3s [Wed, Jun 4 4:52 PM]   click [Nap] Nap for 2 hours
+ 221.0s [Wed, Jun 4 6:57 PM]   use "Packing table"
+ 221.7s [Wed, Jun 4 6:57 PM]   click [Pack] Pack 2 orders (16 min)
+ 222.7s [Wed, Jun 4 7:13 PM]   click [CourierExpress] Courier · Express 1d ($23.80)
+ 227.1s [Wed, Jun 4 7:18 PM]   use "Sleep"
+ 227.7s [Wed, Jun 4 7:18 PM]   click [Sleep] Sleep until 7:00 AM
+ 232.8s [Thu, Jun 5 7:05 AM]   use "Packing table"
+ 233.5s [Thu, Jun 5 7:05 AM]   click [Pack] Pack 5 orders (40 min)
+ 234.5s [Thu, Jun 5 7:45 AM]   click [CourierExpress] Courier · Express 1d ($64.90)
+ 235.8s [Thu, Jun 5 7:45 AM]   ok  first order delivered (Earn Your First Dollar)
+ 235.8s [Thu, Jun 5 7:45 AM]   revenue booked $80.97 · ShopLane balance $72.87 · cash $27,551.70
+ 235.9s [Thu, Jun 5 7:45 AM]   shot 23_first_dollar.png
+ 235.9s [Thu, Jun 5 7:45 AM] STEP First customer issue
+ 238.9s [Thu, Jun 5 7:50 AM]   use "Sleep"
+ 239.5s [Thu, Jun 5 7:50 AM]   click [Nap] Nap for 2 hours
+ 244.2s [Thu, Jun 5 9:55 AM]   use "Packing table"
+ 244.9s [Thu, Jun 5 9:55 AM]   click [Pack] Pack 2 orders (16 min)
+ 245.9s [Thu, Jun 5 10:11 AM]   click [CourierExpress] Courier · Express 1d ($23.80)
+ 250.2s [Thu, Jun 5 10:16 AM]   use "Sleep"
+ 250.9s [Thu, Jun 5 10:16 AM]   click [Nap] Nap for 2 hours
+ 252.7s [Thu, Jun 5 12:17 PM]   use "Sleep"
+ 253.3s [Thu, Jun 5 12:17 PM]   click [Nap] Nap for 2 hours
+ 255.1s [Thu, Jun 5 2:18 PM]   use "Sleep"
+ 255.7s [Thu, Jun 5 2:18 PM]   click [Nap] Nap for 2 hours
+ 260.5s [Thu, Jun 5 4:23 PM]   use "Packing table"
+ 261.2s [Thu, Jun 5 4:23 PM]   click [Pack] Pack 2 orders (16 min)
+ 262.1s [Thu, Jun 5 4:39 PM]   click [CourierExpress] Courier · Express 1d ($27.40)
+ 266.5s [Thu, Jun 5 4:44 PM]   use "Sleep"
+ 267.2s [Thu, Jun 5 4:44 PM]   click [Nap] Nap for 2 hours
+ 271.8s [Thu, Jun 5 6:49 PM]   use "Packing table"
+ 272.5s [Thu, Jun 5 6:49 PM]   click [Pack] Pack 4 orders (32 min)
+ 273.5s [Thu, Jun 5 7:21 PM]   click [CourierExpress] Courier · Express 1d ($45.20)
+ 277.8s [Thu, Jun 5 7:26 PM]   use "Sleep"
+ 278.5s [Thu, Jun 5 7:26 PM]   click [Sleep] Sleep until 7:00 AM
+ 280.4s [Fri, Jun 6 7:00 AM]   shot 24_decision_customer_return_first.png
+ 280.4s [Fri, Jun 6 7:00 AM]   decision customer_return_first → replace
+ 280.4s [Fri, Jun 6 7:00 AM]   click [Choice_replace] Send a replacement (express)
+ 281.8s [Fri, Jun 6 7:00 AM]   shot 25_decision_outcome_customer_return_first.png
+ 281.8s [Fri, Jun 6 7:00 AM]   click "OK"
+ 285.5s [Fri, Jun 6 7:05 AM]   use "Packing table"
+ 286.2s [Fri, Jun 6 7:05 AM]   click [Pack] Pack 7 orders (56 min)
+ 287.1s [Fri, Jun 6 8:01 AM]   click [CourierExpress] Courier · Express 1d ($79.10)
+ 288.4s [Fri, Jun 6 8:01 AM]   ok  resolved the first customer issue
+ 290.4s [Fri, Jun 6 8:04 AM]   ok  Chapter 2 complete
+ 290.4s [Fri, Jun 6 8:04 AM] STEP Chapter 3 — wait for a weekday morning
+ 293.0s [Fri, Jun 6 8:09 AM]   ok  walked back outside
+ 293.0s [Fri, Jun 6 8:09 AM] STEP Metro to Civic Center → City Hall
+ 301.4s [Fri, Jun 6 8:22 AM]   use "Metro — Riverside Station"
+ 302.4s [Fri, Jun 6 8:22 AM]   shot 26_metro_civic_center.png
+ 302.4s [Fri, Jun 6 8:22 AM]   click [Go_civic_center] Civic Center  ·  12 min
+ 303.5s [Fri, Jun 6 8:35 AM]   ok  took the Metro to Civic Center
+ 303.6s [Fri, Jun 6 8:35 AM]   shot 27_civic_center.png
+ 312.8s [Fri, Jun 6 9:11 AM]   ok  entered Aurelia City Hall
+ 312.9s [Fri, Jun 6 9:11 AM]   shot 28_city_hall_inside.png
+ 314.4s [Fri, Jun 6 9:13 AM]   use "Registration counter"
+ 316.5s [Fri, Jun 6 9:13 AM]   choose "› I want to register a company."
+ 319.9s [Fri, Jun 6 9:13 AM]   shot 29_registration_form.png
+ 319.9s [Fri, Jun 6 9:13 AM]   click [Submit] Register & pay
+ 321.0s [Fri, Jun 6 9:58 AM]   shot 30_registration_done.png
+ 321.0s [Fri, Jun 6 9:58 AM]   click "Thanks"
+ 321.2s [Fri, Jun 6 9:58 AM]   ok  registered Riverlight Goods
+ 322.6s [Fri, Jun 6 10:00 AM]   shot 31_decision_low_cash_warning.png
+ 322.6s [Fri, Jun 6 10:00 AM]   decision low_cash_warning → reduce
+ 322.6s [Fri, Jun 6 10:00 AM]   click [Choice_reduce] Cut spending (pause ads, cheaper living)
+ 324.0s [Fri, Jun 6 10:00 AM]   shot 32_decision_outcome_low_cash_warning.png
+ 324.0s [Fri, Jun 6 10:00 AM]   click "OK"
+ 326.1s [Fri, Jun 6 10:03 AM]   ok  walked back outside
+ 326.1s [Fri, Jun 6 10:03 AM] STEP Walk to the Financial District → Nexus Bank
+ 335.6s [Fri, Jun 6 10:24 AM]   ok  walked to Financial District
+ 339.9s [Fri, Jun 6 10:30 AM]   ok  entered Nexus Bank
+ 340.0s [Fri, Jun 6 10:30 AM]   shot 33_bank_inside.png
+ 341.4s [Fri, Jun 6 10:32 AM]   use "Teller — business banking"
+ 342.2s [Fri, Jun 6 10:32 AM]   click "$15,000"
+ 342.5s [Fri, Jun 6 10:32 AM]   click [OpenAccount] Open account with $15,000
+ 343.6s [Fri, Jun 6 11:02 AM]   shot 34_bank_account_opened.png
+ 344.1s [Fri, Jun 6 11:02 AM]   ok  business account opened with founder capital
+ 346.7s [Fri, Jun 6 11:07 AM]   ok  walked back outside
+ 346.7s [Fri, Jun 6 11:07 AM] STEP Metro to Startup Hub → lease Suite 2B
+ 353.5s [Fri, Jun 6 11:17 AM]   use "Metro — Financial District Station"
+ 354.5s [Fri, Jun 6 11:17 AM]   shot 35_metro_startup_hub.png
+ 354.5s [Fri, Jun 6 11:17 AM]   click [Go_startup_hub] Startup Hub  ·  8 min
+ 355.6s [Fri, Jun 6 11:26 AM]   ok  took the Metro to Startup Hub
+ 360.6s [Fri, Jun 6 11:34 AM]   ok  entered 22 Founders Lane
+ 360.8s [Fri, Jun 6 11:34 AM]   shot 36_suite_2b_tour.png
+ 362.1s [Fri, Jun 6 11:36 AM]   use "Talk to Tom"
+ 366.7s [Fri, Jun 6 11:36 AM]   click [SignLease] Sign the lease
+ 367.9s [Fri, Jun 6 11:36 AM]   ok  leased Suite 2B
+ 368.6s [Fri, Jun 6 11:37 AM]   shot 37_suite_2b_company_sign.png
+ 368.6s [Fri, Jun 6 11:37 AM] STEP Sit at the desk → Company OS as the company
+ 369.6s [Fri, Jun 6 11:38 AM]   use "Sit at your desk — Company OS"
+ 370.9s [Fri, Jun 6 11:39 AM]   shot 38_company_os_as_company.png
+ 370.9s [Fri, Jun 6 11:39 AM]   click [Tab_finance] Finance
+ 371.7s [Fri, Jun 6 11:39 AM]   shot 39_company_os_finance.png
+ 371.7s [Fri, Jun 6 11:39 AM]   click [Tab_inventory] Inventory
+ 372.4s [Fri, Jun 6 11:39 AM]   shot 40_company_os_inventory.png
+ 375.9s [Fri, Jun 6 11:44 AM]   ok  Chapter 3 complete
+ 378.2s [Fri, Jun 6 11:48 AM]   ok  walked back outside
+ 378.4s [Fri, Jun 6 11:48 AM]   shot 41_startup_hub_office_sign.png
+ 378.4s [Fri, Jun 6 11:48 AM] STEP Careers — part-time job at Nexus Co-work
+ 384.7s [Fri, Jun 6 11:58 AM]   ok  entered Nexus Co-work
+ 387.5s [Fri, Jun 6 12:02 PM]   use "Business Board"
+ 388.2s [Fri, Jun 6 12:02 PM]   click [Page_jobs] Part-time jobs
+ 389.1s [Fri, Jun 6 12:02 PM]   shot 42_business_board_jobs.png
+ 389.1s [Fri, Jun 6 12:02 PM]   click [Job_cowork_host] Details / apply
+ 389.8s [Fri, Jun 6 12:02 PM]   click [ApplyJob] Take the job
+ 390.6s [Fri, Jun 6 12:02 PM]   shot 43_job_hired.png
+ 392.1s [Fri, Jun 6 12:02 PM]   ok  hired as a community host
+ 393.3s [Fri, Jun 6 12:04 PM]   use "Staff door — work a shift"
+ 394.1s [Fri, Jun 6 12:04 PM]   shot 44_job_shift.png
+ 394.1s [Fri, Jun 6 12:04 PM]   click [WorkShift] Work a 4-hour shift (+$72.00)
+ 396.2s [Fri, Jun 6 4:04 PM]   ok  a 4-hour shift paid wages ($72.00)
+ 396.2s [Fri, Jun 6 4:04 PM] STEP Careers — freelance gig at a hot desk
+ 396.3s [Fri, Jun 6 4:04 PM]   shot 45_decision_customer_return.png
+ 396.3s [Fri, Jun 6 4:04 PM]   decision customer_return → replace
+ 396.3s [Fri, Jun 6 4:04 PM]   click [Choice_replace] Send a replacement
+ 397.8s [Fri, Jun 6 4:04 PM]   shot 46_decision_outcome_customer_return.png
+ 397.8s [Fri, Jun 6 4:04 PM]   click "OK"
+ 401.0s [Fri, Jun 6 4:08 PM]   use "Work at a hot desk — Company OS"
+ 401.6s [Fri, Jun 6 4:08 PM]   click [Tab_freelance] Freelance
+ 402.3s [Fri, Jun 6 4:08 PM]   click [StartFreelance] Start freelancing
+ 403.1s [Fri, Jun 6 4:08 PM]   click [Accept_G1] Accept
+ 403.9s [Fri, Jun 6 4:08 PM]   click [Work_G1] Work 2 h
+ 405.0s [Fri, Jun 6 6:08 PM]   shot 47_freelance_gig.png
+ 405.0s [Fri, Jun 6 6:08 PM]   ok  put hours into a freelance gig
+ 409.0s [Fri, Jun 6 6:14 PM]   ok  walked back outside
+ 409.0s [Fri, Jun 6 6:14 PM] STEP Run the company to month-end
+ 413.1s [Fri, Jun 6 6:32 PM]   ok  walked to Riverside
+ 429.0s [Fri, Jun 6 6:56 PM]   ok  entered Riverside Tower
+ 431.1s [Fri, Jun 6 6:59 PM]   use "Sleep"
+ 431.8s [Fri, Jun 6 7:00 PM]   click [Sleep] Sleep until 7:00 AM
+ 433.6s [Sat, Jun 7 7:00 AM]   shot 48_decision_customer_return.png
+ 433.6s [Sat, Jun 7 7:00 AM]   decision customer_return → replace
+ 433.6s [Sat, Jun 7 7:00 AM]   click [Choice_replace] Send a replacement
+ 435.1s [Sat, Jun 7 7:00 AM]   shot 49_decision_outcome_customer_return.png
+ 435.1s [Sat, Jun 7 7:00 AM]   click "OK"
+ 435.7s [Sat, Jun 7 7:00 AM]   shot 50_decision_customer_return.png
+ 435.7s [Sat, Jun 7 7:00 AM]   decision customer_return → replace
+ 435.7s [Sat, Jun 7 7:00 AM]   click [Choice_replace] Send a replacement
+ 437.1s [Sat, Jun 7 7:00 AM]   shot 51_decision_outcome_customer_return.png
+ 437.1s [Sat, Jun 7 7:00 AM]   click "OK"
+ 440.9s [Sat, Jun 7 7:05 AM]   use "Packing table"
+ 441.6s [Sat, Jun 7 7:05 AM]   click [Pack] Pack 17 orders (2 h 16 min)
+ 442.6s [Sat, Jun 7 9:21 AM]   click [CourierExpress] Courier · Express 1d ($175.30)
+ 447.0s [Sat, Jun 7 9:26 AM]   use "Sleep"
+ 447.6s [Sat, Jun 7 9:26 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 452.5s [Sun, Jun 8 7:05 AM]   use "Packing table"
+ 453.3s [Sun, Jun 8 7:05 AM]   click [Pack] Pack 10 orders (1 h 20 min)
+ 454.2s [Sun, Jun 8 8:25 AM]   click [CourierExpress] Courier · Express 1d ($98.60)
+ 458.6s [Sun, Jun 8 8:30 AM]   use "Sleep"
+ 459.2s [Sun, Jun 8 8:30 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 464.1s [Mon, Jun 9 7:05 AM]   use "Packing table"
+ 464.8s [Mon, Jun 9 7:05 AM]   click [Pack] Pack 13 orders (1 h 44 min)
+ 465.8s [Mon, Jun 9 8:49 AM]   click [CourierExpress] Courier · Express 1d ($132.50)
+ 470.1s [Mon, Jun 9 8:54 AM]   use "Sleep"
+ 470.8s [Mon, Jun 9 8:54 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 475.7s [Tue, Jun 10 7:05 AM]   use "Packing table"
+ 476.4s [Tue, Jun 10 7:05 AM]   click [Pack] Pack 9 orders (1 h 12 min)
+ 477.4s [Tue, Jun 10 8:17 AM]   click [CourierExpress] Courier · Express 1d ($89.70)
+ 481.8s [Tue, Jun 10 8:22 AM]   use "Sleep"
+ 482.4s [Tue, Jun 10 8:22 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 484.3s [Wed, Jun 11 7:00 AM]   shot 52_decision_customer_return.png
+ 484.3s [Wed, Jun 11 7:00 AM]   decision customer_return → replace
+ 484.3s [Wed, Jun 11 7:00 AM]   click [Choice_replace] Send a replacement
+ 485.7s [Wed, Jun 11 7:00 AM]   shot 53_decision_outcome_customer_return.png
+ 485.7s [Wed, Jun 11 7:00 AM]   click "OK"
+ 489.4s [Wed, Jun 11 7:05 AM]   use "Packing table"
+ 490.1s [Wed, Jun 11 7:05 AM]   click [Pack] Pack 6 orders (48 min)
+ 491.0s [Wed, Jun 11 7:53 AM]   click [CourierExpress] Courier · Express 1d ($59.40)
+ 495.5s [Wed, Jun 11 7:58 AM]   use "Sleep"
+ 496.1s [Wed, Jun 11 7:58 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 501.1s [Thu, Jun 12 7:05 AM]   use "Packing table"
+ 501.8s [Thu, Jun 12 7:05 AM]   click [Pack] Pack 13 orders (1 h 44 min)
+ 502.7s [Thu, Jun 12 8:49 AM]   click [CourierExpress] Courier · Express 1d ($125.30)
+ 507.2s [Thu, Jun 12 8:54 AM]   use "Sleep"
+ 507.8s [Thu, Jun 12 8:54 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 509.7s [Fri, Jun 13 7:00 AM]   shot 54_decision_viral_mention.png
+ 509.7s [Fri, Jun 13 7:00 AM]   decision viral_mention → ride
+ 509.7s [Fri, Jun 13 7:00 AM]   click [Choice_ride] Ride it out
+ 511.2s [Fri, Jun 13 7:00 AM]   shot 55_decision_outcome_viral_mention.png
+ 511.2s [Fri, Jun 13 7:00 AM]   click "OK"
+ 514.9s [Fri, Jun 13 7:05 AM]   use "Packing table"
+ 515.6s [Fri, Jun 13 7:05 AM]   click [Pack] Pack 12 orders (1 h 36 min)
+ 516.6s [Fri, Jun 13 8:41 AM]   click [CourierExpress] Courier · Express 1d ($116.40)
+ 521.1s [Fri, Jun 13 8:46 AM]   use "Sleep"
+ 521.7s [Fri, Jun 13 8:46 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 526.7s [Sat, Jun 14 7:05 AM]   use "Packing table"
+ 527.4s [Sat, Jun 14 7:05 AM]   click [Pack] Pack 14 orders (1 h 52 min)
+ 528.4s [Sat, Jun 14 8:57 AM]   click [CourierExpress] Courier · Express 1d ($134.20)
+ 532.8s [Sat, Jun 14 9:02 AM]   use "Sleep"
+ 533.4s [Sat, Jun 14 9:02 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 538.4s [Sun, Jun 15 7:05 AM]   use "Packing table"
+ 539.1s [Sun, Jun 15 7:05 AM]   click [Pack] Pack 21 orders (2 h 48 min)
+ 540.1s [Sun, Jun 15 9:53 AM]   click [CourierExpress] Courier · Express 1d ($207.30)
+ 543.4s [Sun, Jun 15 9:56 AM]   use "Use laptop — Company OS"
+ 544.0s [Sun, Jun 15 9:56 AM]   click [Tab_operations] Operations
+ 544.3s [Sun, Jun 15 9:56 AM]   click [DeliverTo_riverside_studio] Riverside Tower, Unit 
+ 544.7s [Sun, Jun 15 9:56 AM]   click [Buy_tradelink_wholesale_water_bottle] Buy $408
+ 547.2s [Sun, Jun 15 10:09 AM]   use "Sleep"
+ 547.9s [Sun, Jun 15 10:09 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 552.9s [Mon, Jun 16 7:05 AM]   use "Packing table"
+ 553.6s [Mon, Jun 16 7:05 AM]   click [Pack] Pack 21 orders (2 h 48 min)
+ 554.6s [Mon, Jun 16 9:53 AM]   click [CourierExpress] Courier · Express 1d ($203.70)
+ 557.9s [Mon, Jun 16 9:56 AM]   use "Use laptop — Company OS"
+ 558.6s [Mon, Jun 16 9:56 AM]   click [Tab_operations] Operations
+ 558.8s [Mon, Jun 16 9:56 AM]   click [DeliverTo_riverside_studio] Riverside Tower, Unit 
+ 559.2s [Mon, Jun 16 9:56 AM]   click [Buy_tradelink_wholesale_water_bottle] Buy $408
+ 561.9s [Mon, Jun 16 10:09 AM]   use "Sleep"
+ 562.5s [Mon, Jun 16 10:09 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 567.6s [Tue, Jun 17 7:05 AM]   use "Packing table"
+ 568.3s [Tue, Jun 17 7:05 AM]   click [Pack] Pack 4 orders (32 min)
+ 569.2s [Tue, Jun 17 7:37 AM]   click [CourierExpress] Courier · Express 1d ($48.80)
+ 572.5s [Tue, Jun 17 7:40 AM]   use "Use laptop — Company OS"
+ 573.1s [Tue, Jun 17 7:40 AM]   click [Tab_operations] Operations
+ 573.4s [Tue, Jun 17 7:40 AM]   click [DeliverTo_riverside_studio] Riverside Tower, Unit 
+ 573.8s [Tue, Jun 17 7:40 AM]   click [Buy_tradelink_wholesale_water_bottle] Buy $408
+ 576.5s [Tue, Jun 17 7:53 AM]   use "Sleep"
+ 577.1s [Tue, Jun 17 7:53 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 579.0s [Wed, Jun 18 7:00 AM]   shot 56_decision_supplier_price_increase.png
+ 579.0s [Wed, Jun 18 7:00 AM]   decision supplier_price_increase → accept
+ 579.0s [Wed, Jun 18 7:00 AM]   click [Choice_accept] Okay. Keep supplying me.
+ 580.5s [Wed, Jun 18 7:00 AM]   shot 57_decision_outcome_supplier_price_increase.png
+ 580.5s [Wed, Jun 18 7:00 AM]   click "OK"
+ 581.1s [Wed, Jun 18 7:00 AM]   shot 58_decision_customer_return.png
+ 581.1s [Wed, Jun 18 7:00 AM]   decision customer_return → replace
+ 581.1s [Wed, Jun 18 7:00 AM]   click [Choice_replace] Send a replacement
+ 582.5s [Wed, Jun 18 7:00 AM]   shot 59_decision_outcome_customer_return.png
+ 582.5s [Wed, Jun 18 7:00 AM]   click "OK"
+ 583.2s [Wed, Jun 18 7:00 AM]   shot 60_decision_customer_return.png
+ 583.2s [Wed, Jun 18 7:00 AM]   decision customer_return → replace
+ 583.2s [Wed, Jun 18 7:00 AM]   click [Choice_replace] Send a replacement
+ 584.6s [Wed, Jun 18 7:00 AM]   shot 61_decision_outcome_customer_return.png
+ 584.6s [Wed, Jun 18 7:00 AM]   click "OK"
+ 585.3s [Wed, Jun 18 7:00 AM]   shot 62_decision_unexpected_large_order.png
+ 585.3s [Wed, Jun 18 7:00 AM]   decision unexpected_large_order → review
+ 585.3s [Wed, Jun 18 7:00 AM]   click [Choice_review] Send me the contract. I'll look.
+ 586.7s [Wed, Jun 18 7:00 AM]   shot 63_decision_outcome_unexpected_large_order.png
+ 586.7s [Wed, Jun 18 7:00 AM]   click "OK"
+ 587.4s [Wed, Jun 18 7:00 AM]   shot 64_decision_customer_return.png
+ 587.4s [Wed, Jun 18 7:00 AM]   decision customer_return → replace
+ 587.4s [Wed, Jun 18 7:00 AM]   click [Choice_replace] Send a replacement
+ 588.8s [Wed, Jun 18 7:00 AM]   shot 65_decision_outcome_customer_return.png
+ 588.8s [Wed, Jun 18 7:00 AM]   click "OK"
+ 592.5s [Wed, Jun 18 7:05 AM]   use "Packing table"
+ 593.2s [Wed, Jun 18 7:05 AM]   click [Pack] Pack 15 orders (2 h)
+ 594.1s [Wed, Jun 18 9:05 AM]   click [CourierExpress] Courier · Express 1d ($139.50)
+ 597.5s [Wed, Jun 18 9:08 AM]   use "Use laptop — Company OS"
+ 598.2s [Wed, Jun 18 9:08 AM]   click [Tab_contracts] Contracts ●
+ 599.0s [Wed, Jun 18 9:08 AM]   shot 66_contract_offer.png
+ 599.0s [Wed, Jun 18 9:08 AM]   click [AcceptContract] Accept
+ 601.9s [Wed, Jun 18 9:11 AM]   use "Sleep"
+ 602.5s [Wed, Jun 18 9:11 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 604.4s [Thu, Jun 19 7:00 AM]   shot 67_decision_customer_return.png
+ 604.4s [Thu, Jun 19 7:00 AM]   decision customer_return → replace
+ 604.4s [Thu, Jun 19 7:00 AM]   click [Choice_replace] Send a replacement
+ 605.8s [Thu, Jun 19 7:00 AM]   shot 68_decision_outcome_customer_return.png
+ 605.8s [Thu, Jun 19 7:00 AM]   click "OK"
+ 609.5s [Thu, Jun 19 7:05 AM]   use "Packing table"
+ 610.3s [Thu, Jun 19 7:05 AM]   click [Pack] Pack 8 orders (1 h 4 min)
+ 611.2s [Thu, Jun 19 8:09 AM]   click [CourierExpress] Courier · Express 1d ($88.00)
+ 614.5s [Thu, Jun 19 8:12 AM]   use "Use laptop — Company OS"
+ 615.2s [Thu, Jun 19 8:12 AM]   click [Tab_operations] Operations
+ 615.5s [Thu, Jun 19 8:12 AM]   click [DeliverTo_riverside_studio] Riverside Tower, Unit 
+ 615.9s [Thu, Jun 19 8:12 AM]   click [Buy_tradelink_wholesale_water_bottle] Buy $408
+ 616.3s [Thu, Jun 19 8:22 AM]   click [Tab_contracts] Contracts
+ 617.0s [Thu, Jun 19 8:22 AM]   click [DeliverContract] Pack & deliver 120 units (B2B freight $40)
+ 617.9s [Thu, Jun 19 9:52 AM]   shot 69_contract_delivered.png
+ 620.0s [Thu, Jun 19 9:54 AM]   use "Sleep"
+ 620.6s [Thu, Jun 19 9:55 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 622.5s [Fri, Jun 20 7:00 AM]   shot 70_decision_customer_return.png
+ 622.5s [Fri, Jun 20 7:00 AM]   decision customer_return → replace
+ 622.5s [Fri, Jun 20 7:00 AM]   click [Choice_replace] Send a replacement
+ 623.9s [Fri, Jun 20 7:00 AM]   shot 71_decision_outcome_customer_return.png
+ 623.9s [Fri, Jun 20 7:00 AM]   click "OK"
+ 627.5s [Fri, Jun 20 7:05 AM]   use "Packing table"
+ 628.2s [Fri, Jun 20 7:05 AM]   click [Pack] Pack 11 orders (1 h 28 min)
+ 629.2s [Fri, Jun 20 8:33 AM]   click [CourierExpress] Courier · Express 1d ($103.90)
+ 632.4s [Fri, Jun 20 8:36 AM]   use "Use laptop — Company OS"
+ 633.1s [Fri, Jun 20 8:36 AM]   click [Tab_operations] Operations
+ 633.3s [Fri, Jun 20 8:36 AM]   click [DeliverTo_riverside_studio] Riverside Tower, Unit 
+ 633.7s [Fri, Jun 20 8:36 AM]   click [Buy_tradelink_wholesale_wireless_earbuds] Buy $900
+ 636.3s [Fri, Jun 20 8:49 AM]   use "Sleep"
+ 636.9s [Fri, Jun 20 8:49 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 638.9s [Sat, Jun 21 7:00 AM]   shot 72_decision_customer_return.png
+ 638.9s [Sat, Jun 21 7:00 AM]   decision customer_return → refund
+ 638.9s [Sat, Jun 21 7:00 AM]   click [Choice_refund] Refund + take it back
+ 640.3s [Sat, Jun 21 7:00 AM]   shot 73_decision_outcome_customer_return.png
+ 640.3s [Sat, Jun 21 7:00 AM]   click "OK"
+ 644.0s [Sat, Jun 21 7:05 AM]   use "Packing table"
+ 644.7s [Sat, Jun 21 7:05 AM]   click [Pack] Pack 11 orders (1 h 28 min)
+ 645.8s [Sat, Jun 21 8:33 AM]   click [CourierExpress] Courier · Express 1d ($103.90)
+ 649.1s [Sat, Jun 21 8:36 AM]   use "Use laptop — Company OS"
+ 649.7s [Sat, Jun 21 8:36 AM]   click [Tab_operations] Operations
+ 650.0s [Sat, Jun 21 8:36 AM]   click [DeliverTo_riverside_studio] Riverside Tower, Unit 
+ 650.4s [Sat, Jun 21 8:36 AM]   click [Buy_tradelink_wholesale_wireless_earbuds] Buy $900
+ 653.0s [Sat, Jun 21 8:49 AM]   use "Sleep"
+ 653.6s [Sat, Jun 21 8:49 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 658.6s [Sun, Jun 22 7:05 AM]   use "Packing table"
+ 659.3s [Sun, Jun 22 7:05 AM]   click [Pack] Pack 3 orders (24 min)
+ 660.3s [Sun, Jun 22 7:29 AM]   click [CourierExpress] Courier · Express 1d ($32.70)
+ 663.6s [Sun, Jun 22 7:32 AM]   use "Use laptop — Company OS"
+ 664.2s [Sun, Jun 22 7:32 AM]   click [Tab_operations] Operations
+ 664.5s [Sun, Jun 22 7:32 AM]   click [DeliverTo_riverside_studio] Riverside Tower, Unit 
+ 664.9s [Sun, Jun 22 7:32 AM]   click [Buy_tradelink_wholesale_wireless_earbuds] Buy $900
+ 667.6s [Sun, Jun 22 7:45 AM]   use "Sleep"
+ 668.2s [Sun, Jun 22 7:45 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 673.2s [Mon, Jun 23 7:05 AM]   use "Packing table"
+ 674.0s [Mon, Jun 23 7:05 AM]   click [Pack] Pack 2 orders (16 min)
+ 675.0s [Mon, Jun 23 7:21 AM]   click [CourierExpress] Courier · Express 1d ($23.80)
+ 679.4s [Mon, Jun 23 7:26 AM]   use "Sleep"
+ 680.0s [Mon, Jun 23 7:26 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 681.9s [Tue, Jun 24 7:00 AM]   shot 74_decision_customer_return.png
+ 681.9s [Tue, Jun 24 7:00 AM]   decision customer_return → replace
+ 681.9s [Tue, Jun 24 7:00 AM]   click [Choice_replace] Send a replacement
+ 683.3s [Tue, Jun 24 7:00 AM]   shot 75_decision_outcome_customer_return.png
+ 683.3s [Tue, Jun 24 7:00 AM]   click "OK"
+ 687.0s [Tue, Jun 24 7:05 AM]   use "Packing table"
+ 687.8s [Tue, Jun 24 7:05 AM]   click [Pack] Pack 2 orders (16 min)
+ 688.7s [Tue, Jun 24 7:21 AM]   click [CourierExpress] Courier · Express 1d ($23.80)
+ 693.1s [Tue, Jun 24 7:26 AM]   use "Sleep"
+ 693.7s [Tue, Jun 24 7:26 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 695.6s [Wed, Jun 25 7:00 AM]   shot 76_decision_customer_return.png
+ 695.6s [Wed, Jun 25 7:00 AM]   decision customer_return → replace
+ 695.6s [Wed, Jun 25 7:00 AM]   click [Choice_replace] Send a replacement
+ 697.1s [Wed, Jun 25 7:00 AM]   shot 77_decision_outcome_customer_return.png
+ 697.1s [Wed, Jun 25 7:00 AM]   click "OK"
+ 700.7s [Wed, Jun 25 7:05 AM]   use "Packing table"
+ 701.4s [Wed, Jun 25 7:05 AM]   click [Pack] Pack 6 orders (48 min)
+ 702.4s [Wed, Jun 25 7:53 AM]   click [CourierExpress] Courier · Express 1d ($59.40)
+ 706.8s [Wed, Jun 25 7:58 AM]   use "Sleep"
+ 707.4s [Wed, Jun 25 7:58 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 712.4s [Thu, Jun 26 7:05 AM]   use "Packing table"
+ 713.1s [Thu, Jun 26 7:05 AM]   click [Pack] Pack 4 orders (32 min)
+ 714.1s [Thu, Jun 26 7:37 AM]   click [CourierExpress] Courier · Express 1d ($41.60)
+ 718.5s [Thu, Jun 26 7:42 AM]   use "Sleep"
+ 719.2s [Thu, Jun 26 7:42 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 721.1s [Fri, Jun 27 7:00 AM]   shot 78_decision_customer_return.png
+ 721.1s [Fri, Jun 27 7:00 AM]   decision customer_return → replace
+ 721.1s [Fri, Jun 27 7:00 AM]   click [Choice_replace] Send a replacement
+ 722.6s [Fri, Jun 27 7:00 AM]   shot 79_decision_outcome_customer_return.png
+ 722.6s [Fri, Jun 27 7:00 AM]   click "OK"
+ 726.2s [Fri, Jun 27 7:05 AM]   use "Packing table"
+ 726.9s [Fri, Jun 27 7:05 AM]   click [Pack] Pack 5 orders (40 min)
+ 727.9s [Fri, Jun 27 7:45 AM]   click [CourierExpress] Courier · Express 1d ($50.50)
+ 732.3s [Fri, Jun 27 7:50 AM]   use "Sleep"
+ 732.9s [Fri, Jun 27 7:50 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 738.0s [Sat, Jun 28 7:05 AM]   use "Packing table"
+ 738.7s [Sat, Jun 28 7:05 AM]   click [Pack] Pack 7 orders (56 min)
+ 739.7s [Sat, Jun 28 8:01 AM]   click [CourierExpress] Courier · Express 1d ($68.30)
+ 744.2s [Sat, Jun 28 8:06 AM]   use "Sleep"
+ 744.8s [Sat, Jun 28 8:06 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 749.8s [Sun, Jun 29 7:05 AM]   use "Packing table"
+ 750.5s [Sun, Jun 29 7:05 AM]   click [Pack] Pack 6 orders (48 min)
+ 751.4s [Sun, Jun 29 7:53 AM]   click [CourierExpress] Courier · Express 1d ($59.40)
+ 755.9s [Sun, Jun 29 7:58 AM]   use "Sleep"
+ 756.5s [Sun, Jun 29 7:58 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 761.6s [Mon, Jun 30 7:05 AM]   use "Packing table"
+ 762.3s [Mon, Jun 30 7:05 AM]   click [Pack] Pack 3 orders (24 min)
+ 763.2s [Mon, Jun 30 7:29 AM]   click [CourierExpress] Courier · Express 1d ($32.70)
+ 767.7s [Mon, Jun 30 7:34 AM]   use "Sleep"
+ 768.4s [Mon, Jun 30 7:34 AM]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 771.8s [Tue, Jul 1 7:00 AM]   shot 80_month_close_report.png
+ 771.8s [Tue, Jul 1 7:00 AM]   click [month close] Continue
+ 772.5s [Tue, Jul 1 7:00 AM]   shot 81_decision_customer_return.png
+ 772.5s [Tue, Jul 1 7:00 AM]   decision customer_return → replace
+ 772.5s [Tue, Jul 1 7:00 AM]   click [Choice_replace] Send a replacement
+ 773.9s [Tue, Jul 1 7:00 AM]   shot 82_decision_outcome_customer_return.png
+ 773.9s [Tue, Jul 1 7:00 AM]   click "OK"
+ 777.7s [Tue, Jul 1 7:05 AM]   use "Packing table"
+ 778.4s [Tue, Jul 1 7:05 AM]   click [Pack] Pack 4 orders (32 min)
+ 779.4s [Tue, Jul 1 7:37 AM]   click [CourierExpress] Courier · Express 1d ($41.60)
+ 781.6s [Tue, Jul 1 7:39 AM]   ok  month close ran (June)
+ 783.7s [Tue, Jul 1 7:42 AM]   use "Use laptop — Company OS"
+ 784.3s [Tue, Jul 1 7:42 AM]   click [Tab_finance] Finance
+ 785.2s [Tue, Jul 1 7:42 AM]   shot 83_company_os_finance_july.png
+ 785.7s [Tue, Jul 1 7:42 AM] STEP Save → reload → same state
+ 786.6s [Tue, Jul 1 7:44 AM]   ok  cash restored after load
+ 786.6s [Tue, Jul 1 7:44 AM]   ok  time restored after load
+ 786.6s [Tue, Jul 1 7:44 AM]   ok  location restored (riverside_apartment)
+ 786.8s [Tue, Jul 1 7:44 AM]   shot 84_after_load.png
+ 786.8s [Tue, Jul 1 7:44 AM] STEP Summary
+ 786.8s [Tue, Jul 1 7:44 AM]   business entity co_riverlight_goods cash $9,623.21 · personal $10,384.10 · orders delivered 255 · chapters done ["ch1_arrival", "ch2_first_customer", "ch3_open_for_business"]
+ 786.8s [Tue, Jul 1 7:44 AM]   ok  ledger balanced at the end
+ 786.8s [Tue, Jul 1 7:44 AM] BOT FINISHED — 0 failure(s) · 786.8s real
