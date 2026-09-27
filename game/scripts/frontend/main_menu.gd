@@ -50,8 +50,19 @@ func _ready() -> void:
 	box.add_child(cont)
 	if slot >= 0:
 		var sm := SaveSystem.summary(slot)
-		box.add_child(UIK.label("%s · %s · Day %d" % [sm.get("name", ""), sm.get("company", ""), int(sm.get("day", 0))], 7, Art.C_MUTED))
+		box.add_child(UIK.label(I18n.t("%s · %s · Day %d") % [sm.get("name", ""), sm.get("company", ""), int(sm.get("day", 0))], 7, Art.C_MUTED))
 	box.add_child(UIK.button("Quit", func(): get_tree().quit(), "", 150))
-	var ver := UIK.label("VERTICAL SLICE 001 · art converted from concept boards · %s" % ProjectSettings.get_setting("application/config/version", ""), 7, Art.C_DIM)
+	var ver := UIK.label(I18n.t("VERTICAL SLICE 001 · art converted from concept boards · %s") % ProjectSettings.get_setting("application/config/version", ""), 7, Art.C_DIM)
 	ver.position = Vector2(8, 346)
 	add_child(ver)
+	# language: English / 繁體中文 / 简体中文 (saved in user://settings.cfg)
+	var lang := UIK.hbox(4)
+	lang.position = Vector2(466, 330)
+	add_child(lang)
+	lang.add_child(UIK.icon("world", 12))
+	for l in I18n.LOCALES:
+		var code: String = l[0]
+		var b := UIK.button(l[1], func(): I18n.set_locale(code); SceneRouter.go_menu(), "tab_active" if I18n.locale().begins_with(code) else "tab")
+		b.name = "Lang_" + code
+		b.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+		lang.add_child(b)

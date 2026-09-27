@@ -7,7 +7,7 @@ var pid := ""
 func _init(property_id: String) -> void:
 	pid = property_id
 	var p: Dictionary = DataDB.properties.get(pid, {})
-	title_text = "Lease — " + str(p.get("name", pid))
+	title_text = I18n.t("Lease — ") + I18n.t(str(p.get("name", pid)))
 	icon_name = "company"
 	panel_size = Vector2(380, 210)
 
@@ -20,9 +20,9 @@ func build() -> void:
 		return
 	body.add_child(UIK.kv("Monthly rent", Fmt.money(float(p["monthly_rent"])), Art.C_GOLD, 9, true))
 	body.add_child(UIK.kv("Deposit", Fmt.money(float(p["monthly_rent"]) * float(p.get("deposit_months", 0)))))
-	body.add_child(UIK.kv("Storage", "%d units" % int(p.get("capacity", {}).get("inventory_units", 0))))
+	body.add_child(UIK.kv("Storage", I18n.t("%d units") % int(p.get("capacity", {}).get("inventory_units", 0))))
 	body.add_child(UIK.kv("Desks", "%d" % int(p.get("capacity", {}).get("staff", 0))))
-	body.add_child(UIK.wrap("A real office: your company name on the door and the sign, a proper desk for Company OS, and a stockroom so boxes stop living in your apartment. It's also %s every month whether you sell anything or not." % Fmt.money0(float(p["monthly_rent"])), 8, Art.C_MUTED, 360))
+	body.add_child(UIK.wrap(I18n.t("A real office: your company name on the door and the sign, a proper desk for Company OS, and a stockroom so boxes stop living in your apartment. It's also %s every month whether you sell anything or not.") % Fmt.money0(float(p["monthly_rent"])), 8, Art.C_MUTED, 360))
 	var lb := UIK.button("Sign the lease", _sign, "primary")
 	lb.name = "SignLease"
 	if GameState.company_id() == "":

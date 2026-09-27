@@ -159,7 +159,7 @@ func building_open(bid: String) -> Dictionary:
 	if day_ok and m >= o and m < c:
 		return {"open": true}
 	var dtxt := "daily" if days == "all" else ("Mon–Fri" if days == "mon,tue,wed,thu,fri" else days.replace(",", "/"))
-	return {"open": false, "reason": "%s is closed. Open %s–%s, %s." % [b.get("name", bid), h.get("open", ""), h.get("close", ""), dtxt]}
+	return {"open": false, "reason": I18n.t("%s is closed. Open %s–%s, %s.") % [b.get("name", bid), h.get("open", ""), h.get("close", ""), dtxt]}
 
 
 func enter_building(bid: String) -> void:
@@ -185,12 +185,12 @@ func exit_building(bid: String) -> void:
 func walk_to_district(to: String, spawn: String, minutes: int) -> void:
 	if transitioning:
 		return
-	EventBus.notify.emit("Walking to %s… (%d min)" % [DataDB.districts[to]["name"], minutes], "info", "walk")
+	EventBus.notify.emit(I18n.t("Walking to %s… (%d min)") % [I18n.t(DataDB.districts[to]["name"]), minutes], "info", "walk")
 	_fade(func(): _enter("district", to, spawn, ""), minutes)
 
 
 func metro_travel(to_district: String, minutes: int, fare: float) -> void:
-	Ledger.expense("player", "transport", fare, "Metro fare to %s" % DataDB.districts[to_district]["name"], {"type": "metro"})
+	Ledger.expense("player", "transport", fare, I18n.t("Metro fare to %s") % I18n.t(DataDB.districts[to_district]["name"]), {"type": "metro"})
 	GameState.inc_stat("metro_rides")
 	_fade(func(): _enter("district", to_district, "metro", "down"), minutes)
 

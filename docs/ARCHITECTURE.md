@@ -190,6 +190,33 @@ Each objective has `complete_when` conditions (tiny condition DSL shared with ev
 - Day/Night: `CanvasModulate` gradient driven by `Clock`, window-light overlays, lamp glow sprites.
 - UI: pixel 9-slice panels and 16 px icons on the Neo-Civic palette (Dark Navy / Blue / White / Muted Gray; Green = positive cash, Red = risk, Gold = premium, Purple = luxury).
 
+## 13a. Localization (English · 繁體中文 · 简体中文)
+
+- **Source language is English, and it is the only language in data and saves.** Game logic never compares
+  translated text. That is why switching language mid-game can't break anything, and a save made in one
+  language loads in any other.
+- **Runtime**: Godot `TranslationServer` with gettext catalogues `game/i18n/zh_TW.po` and `zh_CN.po`.
+  `I18n` (`scripts/ui/i18n.gd`) loads them at boot, picks the locale, and saves the choice to `user://settings.cfg`.
+  The locale comes from `--lang=` if given, otherwise the saved setting, otherwise the OS locale. You can switch it
+  from the main menu and from the pause menu.
+- **What gets translated where**:
+  - Plain `Label`/`Button` text is auto-translated by Godot on an exact match. This covers static UI and data names shown on their own.
+  - Templates are translated *before* values are inserted: `I18n.t("Pack %d order%s (%s)") % […]`.
+    `EventEngine.fill()` does the same for data templates like `{customer}: {reason}`.
+  - Data names used inside sentences are wrapped: `I18n.t(DataDB.product(id)["name"])`. Lists go through `I18n.join()`.
+  - English plurals go through `I18n.pl(n)`, which returns nothing in Chinese. Dates and times use `Clock.fmt_*`,
+    which gives `6月1日（週日）`, `下午 2:00` and `2031年6月` in Chinese.
+- **Fonts**: Noto Sans TC/SC (SIL OFL, subset to Big5 + GB2312) are set as fallbacks under Inter/Pixelify.
+  The order changes with the locale so Traditional and Simplified glyph shapes stay correct.
+- **Workflow**:
+  - `python3 tools/i18n_extract.py` scans GDScript literals and the display keys in `data/**/*.json`. It writes
+    `messages.pot`, then builds the `.po` files from `tools/i18n/zh_TW.json`. `zh_CN` is converted with OpenCC `tw2sp`,
+    and `tools/i18n/zh_CN.json` can override single entries.
+  - `--check` fails the build on any untranslated string.
+  - `tests/unit/test_i18n.gd` checks that the catalogues load, that templates keep their placeholders, and that
+    dates, plurals and switching language leave game data untouched.
+- **Runtime records** (phone messages, the timeline, ledger memos) are written in the language active when they happen.
+
 ## 14. Testing strategy
 
 | Layer | How |

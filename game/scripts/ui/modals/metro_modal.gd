@@ -7,7 +7,7 @@ var from := ""
 
 func _init(station: String) -> void:
 	from = station
-	title_text = "Aurelia Metro — %s" % DataDB.districts.get(station, {}).get("name", station)
+	title_text = I18n.t("Aurelia Metro — %s") % I18n.t(DataDB.districts.get(station, {}).get("name", station))
 	icon_name = "metro"
 	panel_size = Vector2(460, 260)
 
@@ -42,13 +42,13 @@ func build() -> void:
 	var v := UIK.vbox(3)
 	v.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	h.add_child(v)
-	v.add_child(UIK.label("DESTINATIONS · fare %s" % Fmt.money(float(DataDB.city["metro"]["fare"])), 7, Art.C_DIM, true))
+	v.add_child(UIK.label(I18n.t("DESTINATIONS · fare %s") % Fmt.money(float(DataDB.city["metro"]["fare"])), 7, Art.C_DIM, true))
 	for d in DataDB.city["districts"]:
 		if d["id"] == from:
 			continue
 		if d["status"] != "active":
 			continue
-		var b := UIK.button("%s  ·  %d min" % [d["name"], _minutes(d["id"])], _go.bind(d["id"]))
+		var b := UIK.button(I18n.t("%s  ·  %d min") % [I18n.t(d["name"]), _minutes(d["id"])], _go.bind(d["id"]))
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		b.name = "Go_" + d["id"]
 		v.add_child(b)
@@ -56,8 +56,8 @@ func build() -> void:
 	var planned := []
 	for d in DataDB.city["districts"]:
 		if d["status"] != "active":
-			planned.append(d["name"])
-	v.add_child(UIK.wrap("Planned stations (P1): " + ", ".join(planned), 7, Art.C_DIM, 210))
+			planned.append(I18n.t(d["name"]))
+	v.add_child(UIK.wrap(I18n.t("Planned stations (P1): ") + ", ".join(planned), 7, Art.C_DIM, 210))
 	footer.add_child(UIK.button("Cancel", close))
 
 

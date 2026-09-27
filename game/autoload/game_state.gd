@@ -65,7 +65,7 @@ func new_game(setup: Dictionary) -> void:
 	Ledger.post("player", "Opening balance — savings", [
 		{"acct": "cash", "dr": float(living.get("start_cash", 30000))},
 		{"acct": "equity", "cr": float(living.get("start_cash", 30000))}], {"type": "opening"})
-	timeline("Moved to Aurelia City with $%s in savings." % Fmt.money0(float(living.get("start_cash", 30000))))
+	timeline(I18n.t("Moved to Aurelia City with $%s in savings.") % Fmt.money0(float(living.get("start_cash", 30000))))
 
 
 func pack_rng() -> void:
@@ -172,7 +172,7 @@ func business_display_name() -> String:
 	var c := company_id()
 	if c != "":
 		return entity_name(c)
-	return "%s (personal seller)" % data["player"]["name"]
+	return I18n.t("%s (personal seller)") % data["player"]["name"]
 
 
 # ------------------------------------------------------------------ messages / timeline

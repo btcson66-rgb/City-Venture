@@ -16,10 +16,10 @@ func _ready() -> void:
 
 
 func prompt_text() -> String:
-	var t := label
+	var t := I18n.t(label)
 	var lock := Actions.lock_reason(action, params)
 	if lock != "":
-		t += "  ·  " + lock
+		t += "  ·  " + I18n.t(lock)
 	return t
 
 

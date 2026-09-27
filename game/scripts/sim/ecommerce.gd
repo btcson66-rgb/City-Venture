@@ -61,18 +61,18 @@ static func buy(supplier_id: String, product_id: String, qty: int, location := "
 	if o.is_empty():
 		return {"ok": false, "error": "That supplier doesn't sell this."}
 	if qty < int(o["moq"]):
-		return {"ok": false, "error": "Minimum order is %d units." % int(o["moq"])}
+		return {"ok": false, "error": I18n.t("Minimum order is %d units.") % int(o["moq"])}
 	if location == "":
 		location = default_stock_location()
 	var cap := location_capacity(location)
 	if total_units_at(location) + incoming_units(location) + qty > cap:
-		return {"ok": false, "error": "Not enough space there (%d units max)." % cap}
+		return {"ok": false, "error": I18n.t("Not enough space there (%d units max).") % cap}
 	var entity := GameState.business_entity()
 	var uc := snappedf(unit_cost(supplier_id, product_id) * cost_mult, 0.01)
 	var total := snappedf(uc * qty, 0.01)
 	var terms := use_terms and can_use_net_terms(supplier_id)
 	if not terms and Ledger.cash(entity) < total:
-		return {"ok": false, "error": "Not enough cash. You need %s." % Fmt.money(total)}
+		return {"ok": false, "error": I18n.t("Not enough cash. You need %s.") % Fmt.money(total)}
 	var e := E()
 	e["counters"]["po"] = int(e["counters"]["po"]) + 1
 	var po_id := "PO-%d" % int(e["counters"]["po"])
@@ -84,20 +84,20 @@ static func buy(supplier_id: String, product_id: String, qty: int, location := "
 		"placed": Clock.now(), "eta": eta, "location": location, "status": "in_transit", "entity": entity,
 		"terms": "net" if terms else "prepay", "defect_rate": float(o.get("defect_rate", 0.0))}
 	e["purchase_orders"][po_id] = po
-	var sup_name: String = DataDB.supplier(supplier_id).get("name", supplier_id)
+	var sup_name: String = I18n.t(DataDB.supplier(supplier_id).get("name", supplier_id))
 	if terms:
 		var days := int(DataDB.supplier(supplier_id)["net_terms_for_companies"]["days"])
 		po["due"] = Clock.now() + days * Clock.DAY
-		Ledger.post(entity, "%s: %d × %s on Net %d" % [sup_name, qty, DataDB.product(product_id)["name"], days],
+		Ledger.post(entity, I18n.t("%s: %d × %s on Net %d") % [sup_name, qty, I18n.t(DataDB.product(product_id)["name"]), days],
 			[{"acct": "inventory_in_transit", "dr": total}, {"acct": "accounts_payable", "cr": total}], {"type": "po", "id": po_id})
 		Sim.schedule(int(po["due"]), "eco.ap_due", {"po": po_id})
 	else:
-		Ledger.post(entity, "%s: %d × %s (prepaid)" % [sup_name, qty, DataDB.product(product_id)["name"]],
+		Ledger.post(entity, I18n.t("%s: %d × %s (prepaid)") % [sup_name, qty, I18n.t(DataDB.product(product_id)["name"])],
 			[{"acct": "inventory_in_transit", "dr": total}, {"acct": "cash", "cr": total}], {"type": "po", "id": po_id})
 	Sim.schedule(eta, "eco.po_arrive", {"po": po_id})
 	GameState.inc_stat("purchase_orders")
 	if int(GameState.stat("purchase_orders")) == 1:
-		GameState.timeline("First inventory order: %d × %s from %s." % [qty, DataDB.product(product_id)["name"], sup_name], "business")
+		GameState.timeline(I18n.t("First inventory order: %d × %s from %s.") % [qty, I18n.t(DataDB.product(product_id)["name"]), sup_name], "business")
 	EventBus.po_placed.emit(po_id)
 	return {"ok": true, "po_id": po_id, "total": total, "eta": eta}
 
@@ -109,14 +109,14 @@ static func _h_po_arrive(p: Dictionary) -> void:
 	po["status"] = "delivered"
 	po["arrived"] = Clock.now()
 	_add_stock(po["location"], po["product"], int(po["qty"]), float(po["unit_cost"]), float(po["defect_rate"]))
-	Ledger.post(po["entity"], "Stock received: %s" % po["id"],
+	Ledger.post(po["entity"], I18n.t("Stock received: %s") % po["id"],
 		[{"acct": "inventory", "dr": po["total"]}, {"acct": "inventory_in_transit", "cr": po["total"]}], {"type": "po", "id": po["id"]})
 	GameState.inc_stat("stock_received")
-	var pname: String = DataDB.product(po["product"])["name"]
-	EventBus.notify.emit("Delivered: %d × %s → %s" % [int(po["qty"]), pname, location_name(po["location"])], "good", "parcel")
+	var pname: String = I18n.t(DataDB.product(po["product"])["name"])
+	EventBus.notify.emit(I18n.t("Delivered: %d × %s → %s") % [int(po["qty"]), pname, location_name(po["location"])], "good", "parcel")
 	var contact: String = DataDB.supplier(po["supplier"]).get("contact_npc", "")
 	if contact != "":
-		GameState.add_message(contact, "Dropped %d %s at %s. Don't let them sit around 👍" % [int(po["qty"]), pname.to_lower(), location_name(po["location"])])
+		GameState.add_message(contact, I18n.t("Dropped %d %s at %s. Don't let them sit around 👍") % [int(po["qty"]), pname.to_lower(), location_name(po["location"])])
 	EventBus.po_arrived.emit(po["id"])
 
 
@@ -125,9 +125,9 @@ static func _h_ap_due(p: Dictionary) -> void:
 	if po.is_empty() or po.get("paid", false):
 		return
 	po["paid"] = true
-	Ledger.post(po["entity"], "Supplier invoice paid: %s" % po["id"],
+	Ledger.post(po["entity"], I18n.t("Supplier invoice paid: %s") % po["id"],
 		[{"acct": "accounts_payable", "dr": po["total"]}, {"acct": "cash", "cr": po["total"]}], {"type": "ap", "id": po["id"]})
-	EventBus.notify.emit("Paid supplier invoice %s: %s" % [po["id"], Fmt.money(po["total"])], "info", "bank")
+	EventBus.notify.emit(I18n.t("Paid supplier invoice %s: %s") % [po["id"], Fmt.money(po["total"])], "info", "bank")
 
 
 # ================================================================ inventory
@@ -138,7 +138,7 @@ static func default_stock_location() -> String:
 
 
 static func location_name(loc: String) -> String:
-	return DataDB.properties.get(loc, {}).get("name", loc)
+	return I18n.t(DataDB.properties.get(loc, {}).get("name", loc))
 
 
 static func location_capacity(loc: String) -> int:
@@ -257,8 +257,8 @@ static func create_listing(product_id: String, price: float, photo: String) -> D
 	if photo == "studio":
 		var cost := float(mk().get("studio_photo_cost", 120))
 		if Ledger.cash(entity) < cost:
-			return {"ok": false, "error": "Studio photos cost %s." % Fmt.money(cost)}
-		Ledger.expense(entity, "photography", cost, "Studio Lumen product photos: %s" % p["name"], {"type": "photo", "id": product_id})
+			return {"ok": false, "error": I18n.t("Studio photos cost %s.") % Fmt.money(cost)}
+		Ledger.expense(entity, "photography", cost, I18n.t("Studio Lumen product photos: %s") % I18n.t(p["name"]), {"type": "photo", "id": product_id})
 	var l := listing_for(product_id)
 	if l.is_empty():
 		E()["counters"]["listing"] = int(E()["counters"]["listing"]) + 1
@@ -268,7 +268,7 @@ static func create_listing(product_id: String, price: float, photo: String) -> D
 		E()["listings"][lid] = l
 		GameState.inc_stat("listings_created")
 		if int(GameState.stat("listings_created")) == 1:
-			GameState.timeline("First ShopLane listing: %s at %s." % [p["name"], Fmt.money(price)], "business")
+			GameState.timeline(I18n.t("First ShopLane listing: %s at %s.") % [I18n.t(p["name"]), Fmt.money(price)], "business")
 	else:
 		l["price"] = price
 		if photo == "studio" or l["photo"] != "studio":
@@ -398,7 +398,7 @@ static func _h_order_place(p: Dictionary) -> void:
 		GameState.inc_stat("missed_sales")
 		l["missed"] = int(l.get("missed", 0)) + 1
 		if int(l["missed"]) == 1 or int(l["missed"]) % 5 == 0:
-			EventBus.notify.emit("Missed a sale: %s is out of stock." % DataDB.product(l["product"])["name"], "warn", "warning")
+			EventBus.notify.emit(I18n.t("Missed a sale: %s is out of stock.") % I18n.t(DataDB.product(l["product"])["name"]), "warn", "warning")
 		return
 	var e := E()
 	e["counters"]["order"] = int(e["counters"]["order"]) + 1
@@ -415,7 +415,7 @@ static func _h_order_place(p: Dictionary) -> void:
 	var mkey := Clock.month_key()
 	e["month_gmv"][mkey] = float(e["month_gmv"].get(mkey, 0.0)) + float(o["unit_price"])
 	GameState.inc_stat("orders_placed")
-	EventBus.notify.emit("New order %s — %s — %s" % [oid, DataDB.product(o["product"])["name"], Fmt.money(o["unit_price"])], "good", "orders")
+	EventBus.notify.emit(I18n.t("New order %s — %s — %s") % [oid, I18n.t(DataDB.product(o["product"])["name"]), Fmt.money(o["unit_price"])], "good", "orders")
 	EventBus.order_placed.emit(oid)
 	_check_cap()
 
@@ -445,7 +445,7 @@ static func _check_cap() -> void:
 	var notified: Dictionary = E()["cap_notified"]
 	if g >= seller_cap() * 0.8 and not notified.has(mkey + "_80"):
 		notified[mkey + "_80"] = true
-		GameState.add_message("shoplane", "You've sold %s of your %s personal seller limit this month. Register a business to lift it." % [Fmt.money0(g), Fmt.money0(seller_cap())])
+		GameState.add_message("shoplane", I18n.t("You've sold %s of your %s personal seller limit this month. Register a business to lift it.") % [Fmt.money0(g), Fmt.money0(seller_cap())])
 		GameState.set_flag("seller_cap_warned")
 	if g >= seller_cap() and not notified.has(mkey + "_100"):
 		notified[mkey + "_100"] = true
@@ -490,7 +490,7 @@ static func pack_orders(loc: String) -> int:
 		o["status"] = "packed"
 		o["packed"] = Clock.now()
 		var pack := float(DataDB.product(o["product"]).get("packaging_cost", 0.5))
-		Ledger.post(o["entity"], "Packed order %s" % o["id"], [
+		Ledger.post(o["entity"], I18n.t("Packed order %s") % o["id"], [
 			{"acct": "goods_out", "dr": cost}, {"acct": "inventory", "cr": cost},
 			{"acct": "exp:packaging", "dr": pack}, {"acct": "cash", "cr": pack}], {"type": "order", "id": o["id"]})
 		EventBus.order_packed.emit(o["id"])
@@ -516,7 +516,7 @@ static func courier_pickup(loc: String, method: String) -> Dictionary:
 	for o in packed:
 		total += ship_cost(o, method)
 	var entity: String = packed[0]["entity"]
-	Ledger.expense(entity, "shipping", total, "Courier pickup: %d parcels (%s)" % [packed.size(), DataDB.ship_method(method)["name"]], {"type": "ship"})
+	Ledger.expense(entity, "shipping", total, I18n.t("Courier pickup: %d parcels (%s)") % [packed.size(), I18n.t(DataDB.ship_method(method)["name"])], {"type": "ship"})
 	var t := Clock.now() + int(DataDB.shipping()["pickup"]["pickup_delay_min"])
 	for o in packed:
 		o["status"] = "awaiting_pickup"
@@ -557,7 +557,7 @@ static func dropoff_carried(method: String) -> Dictionary:
 		_ship(o)
 	carry.clear()
 	if entity != "":
-		Ledger.expense(entity, "shipping", total, "PostPoint drop-off: %d parcels (%s)" % [ids.size(), DataDB.ship_method(method)["name"]], {"type": "ship"})
+		Ledger.expense(entity, "shipping", total, I18n.t("PostPoint drop-off: %d parcels (%s)") % [ids.size(), I18n.t(DataDB.ship_method(method)["name"])], {"type": "ship"})
 	return {"ok": true, "count": ids.size(), "cost": total}
 
 
@@ -569,7 +569,7 @@ static func _h_pickup(p: Dictionary) -> void:
 			_ship(o)
 			n += 1
 	if n > 0:
-		EventBus.notify.emit("Courier picked up %d parcel%s." % [n, "s" if n > 1 else ""], "info", "parcel")
+		EventBus.notify.emit(I18n.t("Courier picked up %d parcel%s.") % [n, I18n.pl(n)], "info", "parcel")
 
 
 static func _ship(o: Dictionary) -> void:
@@ -591,8 +591,8 @@ static func _h_deliver(p: Dictionary) -> void:
 	o["delivered"] = Clock.now()
 	var price := snappedf(float(o["unit_price"]) * int(o["qty"]), 0.01)
 	var fee := snappedf(price * float(mk().get("fee_rate", 0.1)), 0.01)
-	var pname: String = DataDB.product(o["product"])["name"]
-	Ledger.post(o["entity"], "Sale delivered %s: %d × %s @ %s" % [o["id"], int(o["qty"]), pname, Fmt.money(o["unit_price"])], [
+	var pname: String = I18n.t(DataDB.product(o["product"])["name"])
+	Ledger.post(o["entity"], I18n.t("Sale delivered %s: %d × %s @ %s") % [o["id"], int(o["qty"]), pname, Fmt.money(o["unit_price"])], [
 		{"acct": "marketplace_balance", "dr": price}, {"acct": "revenue", "cr": price},
 		{"acct": "cogs", "dr": float(o.get("cogs", 0.0))}, {"acct": "goods_out", "cr": float(o.get("cogs", 0.0))},
 		{"acct": "exp:platform_fees", "dr": fee}, {"acct": "marketplace_balance", "cr": fee}], {"type": "order", "id": o["id"]})
@@ -600,7 +600,7 @@ static func _h_deliver(p: Dictionary) -> void:
 	GameState.inc_stat("orders_delivered")
 	GameState.inc_stat("revenue_total", price)
 	if int(GameState.stat("orders_delivered")) == 1:
-		GameState.timeline("First sale: %s bought %s for %s." % [o["customer"], pname, Fmt.money(price)], "milestone")
+		GameState.timeline(I18n.t("First sale: %s bought %s for %s.") % [o["customer"], pname, Fmt.money(price)], "milestone")
 	EventBus.order_delivered.emit(o["id"])
 	# after-sale: returns & reviews
 	var p_ret := 0.8 if o.get("defective", false) else float(DataDB.product(o["product"]).get("return_base_rate", 0.03))
@@ -640,7 +640,7 @@ static func post_review(o: Dictionary, stars: int) -> void:
 		l["rating_n"] = int(l["rating_n"]) + 1
 	GameState.inc_stat("reviews")
 	EventBus.review_posted.emit(o["id"], stars)
-	EventBus.notify.emit("New review %s: %s \"%s\"" % [o["id"], "★".repeat(stars), o["review"]["text"]], "good" if stars >= 4 else "bad", "star")
+	EventBus.notify.emit(I18n.t("New review %s: %s \"%s\"") % [o["id"], "★".repeat(stars), I18n.t(o["review"]["text"])], "good" if stars >= 4 else "bad", "star")
 
 
 static func _h_review(p: Dictionary) -> void:
@@ -663,7 +663,7 @@ static func _h_return_request(p: Dictionary) -> void:
 	GameState.inc_stat("returns_requested")
 	EventBus.return_requested.emit(o["id"])
 	var ev := "customer_return" if GameState.flag("first_issue_resolved") else "customer_return_first"
-	EventEngine.trigger(ev, {"order": o["id"], "customer": o["customer"], "product": DataDB.product(o["product"])["name"],
+	EventEngine.trigger(ev, {"order": o["id"], "customer": o["customer"], "product": I18n.t(DataDB.product(o["product"])["name"]),
 		"product_id": o["product"], "price": Fmt.money(o["unit_price"]), "reason": reason})
 
 
@@ -675,7 +675,7 @@ static func resolve_return(order_id: String, choice: String) -> Dictionary:
 	var price := float(o["unit_price"]) * int(o["qty"])
 	var fee := float(o.get("fee", 0.0))
 	var ent: String = o["entity"]
-	var pname: String = DataDB.product(o["product"])["name"]
+	var pname: String = I18n.t(DataDB.product(o["product"])["name"])
 	match choice:
 		"refund":
 			var lines := [{"acct": "refunds", "dr": price}, {"acct": "marketplace_balance", "cr": price},
@@ -686,23 +686,23 @@ static func resolve_return(order_id: String, choice: String) -> Dictionary:
 				# resellable: back into stock, reverse the COGS
 				_add_stock(o["location"], o["product"], int(o["qty"]), float(o.get("cogs", 0.0)) / maxi(1, int(o["qty"])), 0.0)
 				lines += [{"acct": "inventory", "dr": float(o.get("cogs", 0.0))}, {"acct": "cogs", "cr": float(o.get("cogs", 0.0))}]
-			Ledger.post(ent, "Refund %s: %s (return label paid)" % [order_id, pname], lines, {"type": "return", "id": order_id})
+			Ledger.post(ent, I18n.t("Refund %s: %s (return label paid)") % [order_id, pname], lines, {"type": "return", "id": order_id})
 			o["status"] = "refunded"
 		"replace":
 			var loc := best_location(o["product"])
 			if loc == "":
-				return {"ok": false, "error": "No %s in stock to send." % pname}
+				return {"ok": false, "error": I18n.t("No %s in stock to send.") % pname}
 			var uc := avg_cost(loc, o["product"])
 			inv(loc)[o["product"]]["qty"] = stock(loc, o["product"]) - 1
 			var ship := ship_cost(o, "express")
-			Ledger.post(ent, "Replacement sent %s: %s (express)" % [order_id, pname], [
+			Ledger.post(ent, I18n.t("Replacement sent %s: %s (express)") % [order_id, pname], [
 				{"acct": "cogs", "dr": uc}, {"acct": "inventory", "cr": uc},
 				{"acct": "exp:shipping", "dr": ship}, {"acct": "cash", "cr": ship}], {"type": "return", "id": order_id})
 			o["status"] = "replaced"
 			Sim.schedule(Clock.now() + Clock.DAY + 120, "eco.review_fixed", {"order": order_id, "stars": 5})
 		"partial":
 			var amt := snappedf(price * 0.3, 0.01)
-			Ledger.post(ent, "Partial refund 30%% %s: %s" % [order_id, pname],
+			Ledger.post(ent, I18n.t("Partial refund 30%% %s: %s") % [order_id, pname],
 				[{"acct": "refunds", "dr": amt}, {"acct": "marketplace_balance", "cr": amt}], {"type": "return", "id": order_id})
 			o["status"] = "partial_refund"
 			Sim.schedule(Clock.now() + 600, "eco.review_fixed", {"order": order_id, "stars": 3})
@@ -729,12 +729,12 @@ static func _h_dispute(p: Dictionary) -> void:
 		return
 	var price := float(o["unit_price"]) * int(o["qty"])
 	var ent: String = o["entity"]
-	Ledger.post(ent, "ShopLane dispute lost %s: forced refund + $15 fee" % o["id"], [
+	Ledger.post(ent, I18n.t("ShopLane dispute lost %s: forced refund + $15 fee") % o["id"], [
 		{"acct": "refunds", "dr": price}, {"acct": "exp:platform_fees", "dr": 15.0}, {"acct": "marketplace_balance", "cr": price + 15.0}],
 		{"type": "dispute", "id": o["id"]})
 	o["status"] = "disputed"
-	GameState.add_message("shoplane", "Buyer %s opened a dispute on order %s. We refunded them and charged a $15 dispute fee." % [o["customer"], o["id"]])
-	EventBus.notify.emit("Dispute lost on %s: −%s" % [o["id"], Fmt.money(price + 15.0)], "bad", "warning")
+	GameState.add_message("shoplane", I18n.t("Buyer %s opened a dispute on order %s. We refunded them and charged a $15 dispute fee.") % [o["customer"], o["id"]])
+	EventBus.notify.emit(I18n.t("Dispute lost on %s: −%s") % [o["id"], Fmt.money(price + 15.0)], "bad", "warning")
 
 
 # ================================================================ money: payouts & ads
@@ -762,10 +762,10 @@ static func payout(entity: String) -> float:
 	if amt > 0.0:
 		Ledger.post(entity, "ShopLane weekly payout", [{"acct": "cash", "dr": amt}, {"acct": "marketplace_balance", "cr": amt}], {"type": "payout"})
 		GameState.inc_stat("payouts")
-		EventBus.notify.emit("ShopLane payout received: %s" % Fmt.money(amt), "good", "cash")
-		GameState.add_message("shoplane", "Payout sent: %s to your %s account." % [Fmt.money(amt), "business" if entity != "player" else "personal"])
+		EventBus.notify.emit(I18n.t("ShopLane payout received: %s") % Fmt.money(amt), "good", "cash")
+		GameState.add_message("shoplane", I18n.t("Payout sent: %s to your %s account.") % [Fmt.money(amt), "business" if entity != "player" else "personal"])
 		if int(GameState.stat("payouts")) == 1:
-			GameState.timeline("First payout from ShopLane: %s." % Fmt.money(amt), "business")
+			GameState.timeline(I18n.t("First payout from ShopLane: %s.") % Fmt.money(amt), "business")
 	elif bal < -0.01:
 		Ledger.post(entity, "ShopLane negative balance charged to card", [{"acct": "marketplace_balance", "dr": -bal}, {"acct": "cash", "cr": -bal}], {"type": "payout"})
 	return amt
@@ -775,7 +775,7 @@ static func _charge_ads() -> void:
 	for l in E()["listings"].values():
 		var b := float(l.get("ad_budget", 0.0))
 		if b > 0.0 and l.get("active", false):
-			Ledger.expense(GameState.business_entity(), "advertising", b, "ShopLane ads: %s" % DataDB.product(l["product"])["name"], {"type": "ads", "id": l["id"]})
+			Ledger.expense(GameState.business_entity(), "advertising", b, I18n.t("ShopLane ads: %s") % I18n.t(DataDB.product(l["product"])["name"]), {"type": "ads", "id": l["id"]})
 
 
 static func _expire_mods() -> void:
@@ -813,7 +813,7 @@ static func liquidate_all(rate: float) -> float:
 			var value := snappedf(q * float(it["avg_cost"]), 0.01)
 			var cash_in := snappedf(value * rate, 0.01)
 			it["qty"] = int(it["qty"]) - q
-			Ledger.post(GameState.business_entity(), "Sold %d × %s to liquidator (%d%% of cost)" % [q, DataDB.product(pid)["name"], int(rate * 100)], [
+			Ledger.post(GameState.business_entity(), I18n.t("Sold %d × %s to liquidator (%d%% of cost)") % [q, I18n.t(DataDB.product(pid)["name"]), int(rate * 100)], [
 				{"acct": "cash", "dr": cash_in}, {"acct": "exp:inventory_writeoff", "dr": value - cash_in}, {"acct": "inventory", "cr": value}],
 				{"type": "liquidation"})
 			raised += cash_in
@@ -843,7 +843,7 @@ static func transfer_business_to(company: String) -> void:
 		else:
 			lines_player.append({"acct": "investments", "cr": -total})
 			lines_co.append({"acct": "equity", "dr": -total})
-		Ledger.post("player", "Business assets contributed to %s (in kind)" % GameState.entity_name(company), lines_player, {"type": "capital"})
+		Ledger.post("player", I18n.t("Business assets contributed to %s (in kind)") % GameState.entity_name(company), lines_player, {"type": "capital"})
 		Ledger.post(company, "Capital contributed in kind by founder", lines_co, {"type": "capital"})
 	for o in E()["orders"].values():
 		if o["status"] in OPEN_STATUSES or o["status"] == "return_requested" or o["status"] == "delivered":

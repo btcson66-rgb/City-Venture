@@ -38,7 +38,7 @@ static func start_chapter(id: String) -> void:
 	if c.is_empty():
 		return
 	St()["chapter"] = id
-	GameState.timeline("%s" % c.get("title", id), "chapter")
+	GameState.timeline(I18n.t(c.get("title", id)), "chapter")
 	UIRoot.show_chapter_card(c.get("title", id), c.get("subtitle", ""))
 	var obs: Array = c.get("objectives", [])
 	if not obs.is_empty():
@@ -83,7 +83,7 @@ static func complete_objective(id: String) -> void:
 				all_done = false
 		if all_done and not ch in St()["chapters_done"]:
 			St()["chapters_done"].append(ch)
-			GameState.timeline("Completed %s." % c.get("title", ch), "chapter")
+			GameState.timeline(I18n.t("Completed %s.") % c.get("title", ch), "chapter")
 			EventBus.chapter_completed.emit(ch)
 			run_actions(c.get("on_complete", []))
 			if c.get("next", "") != "":

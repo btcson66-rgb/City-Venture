@@ -56,7 +56,7 @@ func build(district_id: String) -> void:
 	if not m.is_empty():
 		var mp := {"sprite": "metro_entrance", "x": m["x"], "y": m["y"], "solid": [6, 20, 68, 34]}
 		var holder := _add_metro(mp)
-		add_interactable(Vector2(float(m["x"]) + 40, float(m["y"]) + 66), "Metro — %s Station" % def["name"], "metro", {"station": m["station"]}, 26.0)
+		add_interactable(Vector2(float(m["x"]) + 40, float(m["y"]) + 66), I18n.t("Metro — %s Station") % I18n.t(def["name"]), "metro", {"station": m["station"]}, 26.0)
 		poi.append({"pos": Vector2(float(m["x"]) + 40, float(m["y"]) + 60), "icon": "metro", "label": "Metro"})
 		var _u := holder
 	# exits
@@ -65,7 +65,7 @@ func build(district_id: String) -> void:
 		area.setup(ex, self)
 		add_child(area)
 		var r: Array = ex["rect"]
-		poi.append({"pos": Vector2(float(r[0]) + float(r[2]) / 2.0, float(r[1]) + float(r[3]) / 2.0), "icon": "arrow_right", "label": DataDB.districts[ex["to"]]["name"]})
+		poi.append({"pos": Vector2(float(r[0]) + float(r[2]) / 2.0, float(r[1]) + float(r[3]) / 2.0), "icon": "arrow_right", "label": I18n.t(DataDB.districts[ex["to"]]["name"])})
 	for k in def.get("spawns", {}):
 		var s: Array = def["spawns"][k]
 		spawns[k] = Vector2(float(s[0]), float(s[1]))
@@ -130,7 +130,7 @@ func _add_building(sprite: String, x: float, bid: String, bd: Dictionary) -> voi
 		add_child(trig)
 		spawns["door_" + bid] = Vector2(dx, BASE_Y + 22)
 		var icon := "home" if bd.get("type", "") == "home" else ("coffee" if bd.get("type", "") == "cafe" else ("bank" if bd.get("type", "") == "bank" else ("civic" if bd.get("type", "") == "civic" else ("parcel" if bd.get("type", "") == "parcel" else "company"))))
-		poi.append({"pos": Vector2(dx, BASE_Y), "icon": icon, "label": bd.get("name", bid), "building": bid})
+		poi.append({"pos": Vector2(dx, BASE_Y), "icon": icon, "label": I18n.t(bd.get("name", bid)), "building": bid})
 
 
 static var _shadow: Texture2D

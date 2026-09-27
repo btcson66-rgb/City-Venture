@@ -68,7 +68,7 @@ func build() -> void:
 		var v := UIK.vbox(0)
 		v.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		hb.add_child(v)
-		var tl := UIK.label(r["name"].to_upper(), 7, Art.C_GOLD if home else Art.C_WHITE, true)
+		var tl := UIK.label(I18n.t(r["name"]).to_upper(), 7, Art.C_GOLD if home else Art.C_WHITE, true)
 		tl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		v.add_child(tl)
 		var st := UIK.label("Your home market" if home else str(r["archetype"]), 6, Art.C_SKY)
@@ -103,11 +103,11 @@ func build() -> void:
 	var c2 := UIK.vbox(0)
 	c2.custom_minimum_size = Vector2(210, 0)
 	row.add_child(c2)
-	c2.add_child(UIK.wrap("Industries: " + ", ".join(r2["industries"]), 6, Art.C_WHITE, 206))
+	c2.add_child(UIK.wrap(I18n.t("Industries: ") + I18n.join(r2["industries"]), 6, Art.C_WHITE, 206))
 	if not r2["strengths"].is_empty():
-		c2.add_child(UIK.wrap("+ " + ", ".join(r2["strengths"]), 6, Art.C_GREEN, 206))
+		c2.add_child(UIK.wrap("+ " + I18n.join(r2["strengths"]), 6, Art.C_GREEN, 206))
 	if not r2["risks"].is_empty():
-		c2.add_child(UIK.wrap("− " + ", ".join(r2["risks"]), 6, Art.C_RED, 206))
+		c2.add_child(UIK.wrap("− " + I18n.join(r2["risks"]), 6, Art.C_RED, 206))
 	var c3 := UIK.vbox(1)
 	c3.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(c3)

@@ -7,7 +7,7 @@ var rep: Dictionary
 
 func _init(r: Dictionary) -> void:
 	rep = r
-	title_text = "Month Close — %s" % r.get("label", "")
+	title_text = I18n.t("Month Close — %s") % MonthClose.label_of(r)
 	icon_name = "finance"
 	panel_size = Vector2(520, 320)
 
@@ -20,7 +20,7 @@ func build() -> void:
 		var v := UIK.vbox(1)
 		v.custom_minimum_size = Vector2(240, 0)
 		cols.add_child(v)
-		v.add_child(UIK.label(str(e["name"]).to_upper(), 8, Art.C_GOLD, true))
+		v.add_child(UIK.label(I18n.t(str(e["name"])).to_upper(), 8, Art.C_GOLD, true))
 		v.add_child(UIK.kv("Revenue", Fmt.money(e["revenue"])))
 		v.add_child(UIK.kv("Refunds", Fmt.money(-e["refunds"]), Art.C_RED))
 		v.add_child(UIK.kv("COGS", Fmt.money(-e["cogs"]), Art.C_RED))
@@ -45,5 +45,5 @@ func build() -> void:
 	var main: Dictionary = rep["entities"].values()[-1]
 	var diff := float(main["profit"]) - float(main["cash_change"])
 	body.add_child(UIK.sep())
-	body.add_child(UIK.wrap("Profit this month: %s. Cash moved by %s. The gap (%s) is sitting in stock, in ShopLane's hands, or in unpaid invoices." % [Fmt.money(main["profit"]), Fmt.money(main["cash_change"], true), Fmt.money(diff)], 8, Art.C_SKY, 490))
+	body.add_child(UIK.wrap(I18n.t("Profit this month: %s. Cash moved by %s. The gap (%s) is sitting in stock, in ShopLane's hands, or in unpaid invoices.") % [Fmt.money(main["profit"]), Fmt.money(main["cash_change"], true), Fmt.money(diff)], 8, Art.C_SKY, 490))
 	footer.add_child(UIK.button("Continue", close, "primary", 80))

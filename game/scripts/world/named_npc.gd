@@ -19,7 +19,7 @@ func setup(id: String, scene: Node) -> void:
 	rig.setup(def.get("appearance", {}), def.get("outfit", "casual_tee"), tints)
 	rig.set_dir("down")
 	interact = Interactable.new()
-	interact.label = "Talk to %s" % def.get("name", id)
+	interact.label = I18n.t("Talk to %s") % def.get("name", id)
 	interact.action = "talk"
 	interact.params = {"npc": id}
 	interact.radius = 30.0

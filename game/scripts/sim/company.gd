@@ -43,7 +43,7 @@ static func register(name: String, business_type: String, address: String) -> Di
 	var reg := registration()
 	var fee := float(reg.get("fee", 300))
 	if Ledger.cash("player") < fee:
-		return {"ok": false, "error": "The registration fee is %s." % Fmt.money(fee)}
+		return {"ok": false, "error": I18n.t("The registration fee is %s.") % Fmt.money(fee)}
 	var cid := "co_" + slug(name)
 	var n := name.strip_edges()
 	if not n.to_lower().ends_with(" ltd") and not n.to_lower().ends_with(" inc") and not n.to_lower().ends_with(" co"):
@@ -51,10 +51,10 @@ static func register(name: String, business_type: String, address: String) -> Di
 	GameState.data["entities"][cid] = {"id": cid, "name": n, "kind": "company", "type": business_type, "address": address,
 		"founded": Clock.now(), "bank_account": false, "seller_account": "business", "registration_no": "AUR-%06d" % (GameState.randi_range(100000, 999999))}
 	GameState.data["company"] = cid
-	Ledger.expense("player", "registration", fee, "Company registration fee — %s" % n, {"type": "registration"})
+	Ledger.expense("player", "registration", fee, I18n.t("Company registration fee — %s") % n, {"type": "registration"})
 	GameState.set_flag("company_registered")
 	Ecommerce.lift_cap()
-	GameState.timeline("Founded %s (registration %s)." % [n, GameState.data["entities"][cid]["registration_no"]], "milestone")
+	GameState.timeline(I18n.t("Founded %s (registration %s).") % [n, GameState.data["entities"][cid]["registration_no"]], "milestone")
 	EventBus.company_registered.emit(cid)
 	EventBus.world_refresh.emit()
 	return {"ok": true, "company": cid}
@@ -70,13 +70,13 @@ static func open_business_account(capital: float) -> Dictionary:
 	if capital < 500.0:
 		return {"ok": false, "error": "Minimum opening deposit is $500."}
 	if Ledger.cash("player") < capital:
-		return {"ok": false, "error": "You only have %s personally." % Fmt.money(Ledger.cash("player"))}
-	Ledger.post("player", "Capital injected into %s" % GameState.entity_name(cid), [{"acct": "investments", "dr": capital}, {"acct": "cash", "cr": capital}], {"type": "capital"})
+		return {"ok": false, "error": I18n.t("You only have %s personally.") % Fmt.money(Ledger.cash("player"))}
+	Ledger.post("player", I18n.t("Capital injected into %s") % GameState.entity_name(cid), [{"acct": "investments", "dr": capital}, {"acct": "cash", "cr": capital}], {"type": "capital"})
 	Ledger.post(cid, "Founder capital (opening deposit)", [{"acct": "cash", "dr": capital}, {"acct": "equity", "cr": capital}], {"type": "capital"})
 	GameState.data["entities"][cid]["bank_account"] = true
 	GameState.set_flag("business_account_opened")
 	Ecommerce.transfer_business_to(cid)
-	GameState.timeline("Opened a business account at Nexus Bank with %s of founder capital." % Fmt.money0(capital), "business")
+	GameState.timeline(I18n.t("Opened a business account at Nexus Bank with %s of founder capital.") % Fmt.money0(capital), "business")
 	EventBus.world_refresh.emit()
 	return {"ok": true}
 
@@ -86,11 +86,11 @@ static func transfer(from_ent: String, to_ent: String, amount: float) -> Diction
 	if amount <= 0.0 or Ledger.cash(from_ent) < amount:
 		return {"ok": false, "error": "Not enough cash."}
 	if from_ent == "player":
-		Ledger.post("player", "Transfer to %s" % GameState.entity_name(to_ent), [{"acct": "investments", "dr": amount}, {"acct": "cash", "cr": amount}], {"type": "transfer"})
+		Ledger.post("player", I18n.t("Transfer to %s") % GameState.entity_name(to_ent), [{"acct": "investments", "dr": amount}, {"acct": "cash", "cr": amount}], {"type": "transfer"})
 		Ledger.post(to_ent, "Additional founder capital", [{"acct": "cash", "dr": amount}, {"acct": "equity", "cr": amount}], {"type": "transfer"})
 	else:
 		Ledger.post(from_ent, "Owner withdrawal", [{"acct": "equity", "dr": amount}, {"acct": "cash", "cr": amount}], {"type": "transfer"})
-		Ledger.post("player", "Withdrawal from %s" % GameState.entity_name(from_ent), [{"acct": "cash", "dr": amount}, {"acct": "investments", "cr": amount}], {"type": "transfer"})
+		Ledger.post("player", I18n.t("Withdrawal from %s") % GameState.entity_name(from_ent), [{"acct": "cash", "dr": amount}, {"acct": "investments", "cr": amount}], {"type": "transfer"})
 	return {"ok": true}
 
 

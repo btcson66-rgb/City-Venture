@@ -180,7 +180,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_message(from_id: String, text: String) -> void:
 	if not _hud_wanted:
 		return
-	var n: String = DataDB.npc(from_id).get("name", from_id)
+	var n: String = I18n.t(DataDB.npc(from_id).get("name", from_id))
 	toast("%s: %s" % [n, text.left(70) + ("…" if text.length() > 70 else "")], "msg", "mail")
 
 
@@ -270,9 +270,9 @@ func show_location_card(kind: String, id: String) -> void:
 		var did := str(b.get("district", ""))
 		var hrs: Dictionary = b.get("hours", {})
 		var open_s := str(hrs.get("open", ""))
-		sub = str(DataDB.districts.get(did, {}).get("name", ""))
+		sub = str(I18n.t(DataDB.districts.get(did, {}).get("name", "")))
 		if open_s != "" and open_s != "00:00":
-			sub += "  ·  Open %s–%s" % [open_s, str(hrs.get("close", ""))]
+			sub += I18n.t("  ·  Open %s–%s") % [open_s, str(hrs.get("close", ""))]
 		if tex == null and ResourceLoader.exists("res://assets/cards/%s.png" % did):
 			tex = Art.tex("cards/" + did)
 	for old in get_tree().get_nodes_in_group("location_card"):
@@ -308,6 +308,18 @@ func show_location_card(kind: String, id: String) -> void:
 	tw.tween_interval(5.0)
 	tw.tween_property(p, "position:x", -p.size.x - 10, 0.35).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 	tw.tween_callback(p.queue_free)
+
+
+## Rebuild text that was formatted at build time (objective, location) after a language switch.
+func language_changed() -> void:
+	hud.refresh()
+	title_refresh_all()
+
+
+func title_refresh_all() -> void:
+	for m in modal_layer.get_children():
+		if m is Modal and not m is PauseMenu:
+			(m as Modal).rebuild()
 
 
 func fade_out(t := 0.3) -> void:

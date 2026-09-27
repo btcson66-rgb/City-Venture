@@ -58,7 +58,7 @@ static func bind(d: Dictionary) -> Dictionary:
 		if best == "":
 			return {}
 		ctx["product_id"] = best
-		ctx["product"] = DataDB.product(best)["name"]
+		ctx["product"] = I18n.t(DataDB.product(best)["name"])
 		ctx["product_lower"] = str(ctx["product"]).to_lower()
 	if b.has("supplier"):
 		var counts := {}
@@ -74,7 +74,7 @@ static func bind(d: Dictionary) -> Dictionary:
 		if sup == "":
 			return {}
 		ctx["supplier_id"] = sup
-		ctx["supplier"] = DataDB.supplier(sup)["name"]
+		ctx["supplier"] = I18n.t(DataDB.supplier(sup)["name"])
 		var o := Ecommerce.offer(sup, ctx.get("product_id", ""))
 		if not o.is_empty():
 			ctx["moq"] = int(o["moq"])
@@ -113,6 +113,7 @@ static func next_pending() -> Dictionary:
 
 
 static func fill(text: String, ctx: Dictionary) -> String:
+	text = I18n.t(text)  # translate the template first, then drop the values in
 	for k in ctx:
 		text = text.replace("{" + str(k) + "}", str(ctx[k]))
 	text = text.replace("{company}", GameState.business_display_name())

@@ -66,7 +66,7 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 		"register_company":
 			if GameState.company_id() != "":
 				var e: Dictionary = GameState.data["entities"][GameState.company_id()]
-				UIRoot.toast("%s is already registered (%s)." % [e["name"], e.get("registration_no", "")], "info", "civic")
+				UIRoot.toast(I18n.t("%s is already registered (%s).") % [e["name"], e.get("registration_no", "")], "info", "civic")
 			elif not npc_present("ana"):
 				UIRoot.toast("Nobody at the counter. Registration: Mon–Fri 9:00–17:00.", "warn", "lock")
 			else:
@@ -88,7 +88,7 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 			UIRoot.open_modal(InfoModal.whiteboard())
 		"take_number":
 			var n := GameState.randi_range(12, 40)
-			UIRoot.toast("Ticket A-%d. Now serving A-%d." % [n, n - GameState.randi_range(0, 3)], "info", "civic")
+			UIRoot.toast(I18n.t("Ticket A-%d. Now serving A-%d.") % [n, n - GameState.randi_range(0, 3)], "info", "civic")
 		"permits_info":
 			UIRoot.open_modal(InfoModal.permits())
 		"metro":
@@ -116,7 +116,7 @@ static func _buy_item(params: Dictionary) -> void:
 		if params.has("flag"):
 			GameState.set_flag(params["flag"])
 		GameState.inc_stat("coffees")
-		UIRoot.toast("Coffee — %s. Tastes like possibility." % Fmt.money(price), "info", "coffee")
+		UIRoot.toast(I18n.t("Coffee — %s. Tastes like possibility.") % Fmt.money(price), "info", "coffee")
 	if first_conv != "":
 		UIRoot.play_dialogue(first_conv, buy)
 	else:
@@ -150,7 +150,7 @@ static func _talk(npc_id: String) -> void:
 			UIRoot.play_dialogue(d["conversation"], follow)
 			GameState.data["npcs"][npc_id] = {"met": true}
 			return
-	UIRoot.toast("%s is busy." % def.get("name", npc_id), "info", "people")
+	UIRoot.toast(I18n.t("%s is busy.") % def.get("name", npc_id), "info", "people")
 
 
 static func _buy_after_talk(p: Dictionary) -> void:
@@ -159,4 +159,4 @@ static func _buy_after_talk(p: Dictionary) -> void:
 	Clock.advance(int(p.get("minutes", 10)))
 	if p.has("flag"):
 		GameState.set_flag(p["flag"])
-	UIRoot.toast("Coffee — %s." % Fmt.money(price), "info", "coffee")
+	UIRoot.toast(I18n.t("Coffee — %s.") % Fmt.money(price), "info", "coffee")

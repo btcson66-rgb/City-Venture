@@ -143,23 +143,37 @@ func day_part(t := -1) -> String:
 	return "night"
 
 
+const WEEKDAYS_ZH := ["日", "一", "二", "三", "四", "五", "六"]
+
+
 func fmt_time(t := -1) -> String:
 	if t < 0:
 		t = now()
 	var m := t % DAY
 	var h := int(m / 60)
 	var mm := m % 60
-	var ap := "AM" if h < 12 else "PM"
 	var h12 := h % 12
 	if h12 == 0:
 		h12 = 12
-	return "%d:%02d %s" % [h12, mm, ap]
+	if I18n.is_zh():
+		return "%s %d:%02d" % ["上午" if h < 12 else "下午", h12, mm]
+	return "%d:%02d %s" % [h12, mm, "AM" if h < 12 else "PM"]
+
+
+func month_name(m: int) -> String:
+	return ("%d月" % m) if I18n.is_zh() else MONTHS[m - 1]
+
+
+func fmt_month(y: int, m: int) -> String:
+	return ("%d年%d月" % [y, m]) if I18n.is_zh() else "%s %d" % [MONTHS[m - 1], y]
 
 
 func fmt_date(t := -1) -> String:
 	if t < 0:
 		t = now()
 	var d := date_at(t)
+	if I18n.is_zh():
+		return "%d月%d日（週%s）" % [int(d["month"]), int(d["day"]), WEEKDAYS_ZH[int(d["weekday"])]]
 	return "%s, %s %d" % [WEEKDAYS[int(d["weekday"])], MONTHS[int(d["month"]) - 1], int(d["day"])]
 
 
@@ -169,6 +183,8 @@ func fmt_datetime(t := -1) -> String:
 
 func fmt_short(t: int) -> String:
 	var d := date_at(t)
+	if I18n.is_zh():
+		return "%d月%d日 %s" % [int(d["month"]), int(d["day"]), fmt_time(t)]
 	return "%s %d %s" % [MONTHS[int(d["month"]) - 1], int(d["day"]), fmt_time(t)]
 
 

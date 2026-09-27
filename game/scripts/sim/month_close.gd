@@ -63,10 +63,18 @@ static func run(year: int, month: int) -> Dictionary:
 		rep["entities"][e] = compute(e, t0, t1)
 	GameState.data["reports"]["month_closes"].append(rep)
 	var main: Dictionary = rep["entities"][ents[-1]]
-	GameState.timeline("Closed %s: business profit %s, cash %s." % [rep["label"], Fmt.money0(main["business_profit"]), Fmt.money0(main["cash_close"])], "milestone")
+	GameState.timeline(I18n.t("Closed %s: business profit %s, cash %s.") % [label_of(rep), Fmt.money0(main["business_profit"]), Fmt.money0(main["cash_close"])], "milestone")
 	GameState.inc_stat("month_closes")
 	var _unused := d
 	return rep
+
+
+## Display label for a report ("Jun 2031" / "2031年6月"), rebuilt in the current language.
+static func label_of(r: Dictionary) -> String:
+	var p := str(r.get("period", ""))
+	if p.length() == 7:
+		return Clock.fmt_month(int(p.left(4)), int(p.right(2)))
+	return str(r.get("label", ""))
 
 
 static func current(entity: String) -> Dictionary:

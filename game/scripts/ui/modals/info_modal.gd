@@ -32,13 +32,13 @@ func build() -> void:
 static func news() -> InfoModal:
 	Clock.advance(5)
 	var y := DataDB.year_def(int(GameState.data["world"]["year"]))
-	var ls: Array = ["# AURELIA DAILY · Year %d — %s" % [int(y.get("year", 1)), y.get("name", "")]]
+	var ls: Array = [I18n.t("# AURELIA DAILY · Year %d — %s") % [int(y.get("year", 1)), y.get("name", "")]]
 	for h in y.get("headlines", []):
 		ls.append("• " + str(h))
 	ls.append("---")
 	ls.append("# MARKET NOTES")
-	ls.append("• Base rate: %s. Credit is cheap — for now." % Fmt.pct(float(y.get("interest_rate", 0.025)), 1))
-	ls.append("• Shipping index: %.2f (1.00 = normal)." % float(y.get("shipping_index", 1.0)))
+	ls.append(I18n.t("• Base rate: %s. Credit is cheap — for now.") % Fmt.pct(float(y.get("interest_rate", 0.025)), 1))
+	ls.append(I18n.t("• Shipping index: %.2f (1.00 = normal).") % float(y.get("shipping_index", 1.0)))
 	ls.append("• ShopLane fee 10%%. Payouts every Monday.")
 	return make("News board", "info", ls)
 

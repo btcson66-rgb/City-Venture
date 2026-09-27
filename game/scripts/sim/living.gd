@@ -45,22 +45,22 @@ static func _entities() -> Array:
 static func pay_home_rent() -> void:
 	var rent := float(cfg().get("home_rent", 1250))
 	var before := Ledger.cash("player")
-	var mname: String = Clock.MONTHS[int(Clock.date()["month"]) - 1]
-	Ledger.expense("player", "rent_home", rent, "Rent — Riverside Tower 7C (%s)" % mname, {"type": "rent"})
+	var mname: String = Clock.month_name(int(Clock.date()["month"]))
+	Ledger.expense("player", "rent_home", rent, I18n.t("Rent — Riverside Tower 7C (%s)") % mname, {"type": "rent"})
 	D()["rent_history"].append({"t": Clock.now(), "amount": rent, "late": before < rent})
 	if before < rent:
 		Ledger.expense("player", "late_fees", float(cfg().get("late_rent_fee", 75)), "Late rent fee", {"type": "fee"})
-		GameState.add_message("landlord", "Rent bounced. I've added the $%d late fee. Please sort it out this week." % int(cfg().get("late_rent_fee", 75)))
+		GameState.add_message("landlord", I18n.t("Rent bounced. I've added the $%d late fee. Please sort it out this week.") % int(cfg().get("late_rent_fee", 75)))
 		EventBus.notify.emit("Rent paid into overdraft. Late fee charged.", "bad", "home")
 	else:
-		EventBus.notify.emit("Rent paid: %s" % Fmt.money(rent), "info", "home")
+		EventBus.notify.emit(I18n.t("Rent paid: %s") % Fmt.money(rent), "info", "home")
 	GameState.inc_stat("rent_paid")
 
 
 static func _charge_lease(pid: String, ls: Dictionary) -> void:
 	var prop: Dictionary = DataDB.properties.get(pid, {})
 	var cat := "rent_office" if prop.get("kind", "") == "office" else "coworking"
-	Ledger.expense(ls["entity"], cat, float(ls["rent"]), "%s — monthly" % prop.get("name", pid), {"type": "lease", "id": pid})
+	Ledger.expense(ls["entity"], cat, float(ls["rent"]), I18n.t("%s — monthly") % I18n.t(prop.get("name", pid)), {"type": "lease", "id": pid})
 
 
 ## Sign a lease. Office: deposit + first month. Co-work desk: first month.
@@ -77,14 +77,14 @@ static func lease(pid: String) -> Dictionary:
 	var rent := float(prop["monthly_rent"])
 	var deposit := rent * float(prop.get("deposit_months", 0))
 	if Ledger.cash(ent) < rent + deposit:
-		return {"ok": false, "error": "You need %s (first month%s)." % [Fmt.money(rent + deposit), " + deposit" if deposit > 0 else ""]}
+		return {"ok": false, "error": I18n.t("You need %s (first month%s).") % [Fmt.money(rent + deposit), " + deposit" if deposit > 0 else ""]}
 	var cat := "rent_office" if prop["kind"] == "office" else "coworking"
 	var lines := [{"acct": "exp:" + cat, "dr": rent}, {"acct": "cash", "cr": rent + deposit}]
 	if deposit > 0:
 		lines.append({"acct": "deposits", "dr": deposit})
-	Ledger.post(ent, "Lease signed: %s" % prop["name"], lines, {"type": "lease", "id": pid})
+	Ledger.post(ent, I18n.t("Lease signed: %s") % I18n.t(prop["name"]), lines, {"type": "lease", "id": pid})
 	D()["leases"][pid] = {"rent": rent, "day": int(Clock.date()["day"]), "since": Clock.now(), "entity": ent}
-	GameState.timeline("Leased %s for %s/month." % [prop["name"], Fmt.money0(rent)], "business")
+	GameState.timeline(I18n.t("Leased %s for %s/month.") % [I18n.t(prop["name"]), Fmt.money0(rent)], "business")
 	EventBus.world_refresh.emit()
 	return {"ok": true}
 

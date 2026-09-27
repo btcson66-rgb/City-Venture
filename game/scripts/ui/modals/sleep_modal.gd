@@ -17,7 +17,7 @@ func build() -> void:
 		b.name = "Sleep"
 		body.add_child(b)
 	else:
-		body.add_child(UIK.wrap("It's %s. Too early to sleep — but you could nap." % Clock.fmt_time(), 9, Art.C_WHITE, 310))
+		body.add_child(UIK.wrap(I18n.t("It's %s. Too early to sleep — but you could nap.") % Clock.fmt_time(), 9, Art.C_WHITE, 310))
 		var n := UIK.button("Nap for 2 hours", _nap)
 		n.name = "Nap"
 		body.add_child(n)
@@ -45,5 +45,5 @@ func _sleep() -> void:
 	GameState.inc_stat("nights_slept")
 	SaveSystem.autosave()
 	await UIRoot.fade_in(0.6)
-	UIRoot.toast("Good morning. %s." % Clock.fmt_date(), "info", "sun")
+	UIRoot.toast(I18n.t("Good morning. %s.") % Clock.fmt_date(), "info", "sun")
 	close()

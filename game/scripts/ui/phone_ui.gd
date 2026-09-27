@@ -117,7 +117,7 @@ func _home() -> void:
 	grid.add_theme_constant_override("h_separation", 4)
 	grid.add_theme_constant_override("v_separation", 4)
 	var unread := GameState.unread_messages()
-	var apps := [["messages", "mail", "Messages" + (" %d" % unread if unread > 0 else "")], ["bank", "bank", "Bank"], ["tasks", "tasks", "Tasks"],
+	var apps := [["messages", "mail", I18n.t("Messages") + (" %d" % unread if unread > 0 else "")], ["bank", "bank", "Bank"], ["tasks", "tasks", "Tasks"],
 		["map", "map", "City"], ["shoplane", "orders", "ShopLane"], ["timeline", "calendar", "Timeline"],
 		["world", "world", "World"], ["save", "save", "Save"], ["close", "close", "Close"]]
 	for a in apps:
@@ -137,7 +137,7 @@ func _home() -> void:
 	var pend := EventEngine.pending()
 	if not pend.is_empty():
 		content.add_child(UIK.sep())
-		var t := UIK.wrap("⚑ %s needs a decision" % DataDB.events[pend[0]["id"]].get("presentation", {}).get("title", "Something"), 7, Art.C_GOLD, 128)
+		var t := UIK.wrap(I18n.t("⚑ %s needs a decision") % I18n.t(DataDB.events[pend[0]["id"]].get("presentation", {}).get("title", "Something")), 7, Art.C_GOLD, 128)
 		content.add_child(t)
 		content.add_child(UIK.button("Respond", func(): close(); UIRoot.show_decision(EventEngine.next_pending()), "primary"))
 
@@ -172,7 +172,7 @@ func _messages() -> void:
 		var unread: int = GameState.data["messages"].filter(func(x): return x["from"] == from and not x.get("read", false)).size()
 		var b := UIK.button("", _open_thread.bind(from))
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
-		b.text = "%s%s\n%s" % [DataDB.npc(from).get("name", from), "  ●" if unread > 0 else "", str(m["text"]).left(26)]
+		b.text = "%s%s\n%s" % [I18n.t(DataDB.npc(from).get("name", from)), "  ●" if unread > 0 else "", str(m["text"]).left(26)]
 		b.add_theme_font_size_override("font_size", 7)
 		b.custom_minimum_size = Vector2(126, 24)
 		b.name = "Thread_" + from
@@ -192,7 +192,7 @@ func _open_thread(from: String) -> void:
 
 
 func _thread() -> void:
-	_header(DataDB.npc(thread_with).get("name", thread_with))
+	_header(I18n.t(DataDB.npc(thread_with).get("name", thread_with)))
 	for m in GameState.data["messages"]:
 		if m["from"] != thread_with:
 			continue
@@ -256,7 +256,7 @@ func _shoplane() -> void:
 	content.add_child(UIK.sep())
 	for l in GameState.data["ecommerce"]["listings"].values():
 		var st := "live" if l["active"] else ("paused: cap" if l.get("paused_reason", "") == "seller_cap" else "paused")
-		content.add_child(UIK.wrap("%s · %s · %s · %s" % [DataDB.product(l["product"])["name"], Fmt.money(l["price"]), Fmt.stars(Ecommerce.rating(l)), st], 6, Art.C_WHITE, 124))
+		content.add_child(UIK.wrap("%s · %s · %s · %s" % [I18n.t(DataDB.product(l["product"])["name"]), Fmt.money(l["price"]), Fmt.stars(Ecommerce.rating(l)), st], 6, Art.C_WHITE, 124))
 
 
 func _timeline() -> void:
@@ -272,10 +272,10 @@ func _save() -> void:
 	_header("Save game")
 	for s in [1, 2, 3]:
 		var sm := SaveSystem.summary(s)
-		var label := "Slot %d — %s" % [s, ("Day %d · %s" % [int(sm.get("day", 0)), Fmt.money0(float(sm.get("cash", 0)))]) if not sm.is_empty() else "empty"]
+		var label := I18n.t("Slot %d — %s") % [s, (I18n.t("Day %d · %s") % [int(sm.get("day", 0)), Fmt.money0(float(sm.get("cash", 0)))]) if not sm.is_empty() else "empty"]
 		var b := UIK.button(label, func():
 			if SaveSystem.save(s):
-				UIRoot.toast("Saved to slot %d." % s, "good", "save")
+				UIRoot.toast(I18n.t("Saved to slot %d.") % s, "good", "save")
 				_render())
 		b.name = "Save_%d" % s
 		b.add_theme_font_size_override("font_size", 7)

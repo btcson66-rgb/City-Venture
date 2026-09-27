@@ -53,7 +53,7 @@ func build() -> void:
 		b.name = "Choice_" + str(c["id"])
 		row.add_child(b)
 		if c.has("detail"):
-			row.add_child(UIK.label("    " + EventEngine.fill(c["detail"], inst["ctx"]) + ("" if avail else "  (not possible now)"), 7, Art.C_MUTED))
+			row.add_child(UIK.label("    " + EventEngine.fill(c["detail"], inst["ctx"]) + ("" if avail else I18n.t("  (not possible now)")), 7, Art.C_MUTED))
 		body.add_child(row)
 
 

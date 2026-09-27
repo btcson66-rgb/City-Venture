@@ -9,7 +9,7 @@ var stmt_entity := "player"
 
 func _init(is_atm := false) -> void:
 	atm = is_atm
-	title_text = "Nexus Bank — " + ("ATM" if atm else "Business banking")
+	title_text = I18n.t("Nexus Bank — ") + ("ATM" if atm else "Business banking")
 	icon_name = "bank"
 	panel_size = Vector2(440, 270)
 
@@ -30,12 +30,12 @@ func build() -> void:
 		if cid == "":
 			left.add_child(UIK.wrap("Sofia: \"Business accounts need a registered company. City Hall, Civic Center — then come back.\"", 8, Art.C_MUTED, 196))
 		elif not GameState.flag("business_account_opened"):
-			left.add_child(UIK.wrap("Open an account for %s and move founder capital in. Your stock and ShopLane balance move with it." % GameState.entity_name(cid), 8, Art.C_WHITE, 196))
+			left.add_child(UIK.wrap(I18n.t("Open an account for %s and move founder capital in. Your stock and ShopLane balance move with it.") % GameState.entity_name(cid), 8, Art.C_WHITE, 196))
 			var h := UIK.hbox(3)
 			for amt in [2000.0, 5000.0, 10000.0, 15000.0]:
 				h.add_child(UIK.button(Fmt.money0(amt), func(): capital = amt; rebuild(), "tab_active" if is_equal_approx(capital, amt) else "tab"))
 			left.add_child(h)
-			var ob := UIK.button("Open account with %s" % Fmt.money0(capital), _open, "primary")
+			var ob := UIK.button(I18n.t("Open account with %s") % Fmt.money0(capital), _open, "primary")
 			ob.name = "OpenAccount"
 			left.add_child(ob)
 		else:
@@ -76,7 +76,7 @@ func _open() -> void:
 		UIRoot.toast(r["error"], "bad", "warning")
 		return
 	Clock.advance(30)
-	UIRoot.toast("Business account opened. %s now runs on its own books." % GameState.entity_name(GameState.company_id()), "good", "bank")
+	UIRoot.toast(I18n.t("Business account opened. %s now runs on its own books.") % GameState.entity_name(GameState.company_id()), "good", "bank")
 	rebuild()
 
 

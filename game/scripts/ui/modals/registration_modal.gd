@@ -20,7 +20,7 @@ func build() -> void:
 		var cid := GameState.company_id()
 		var e: Dictionary = GameState.data["entities"][cid]
 		body.add_child(UIK.title(e["name"], 16, Art.C_GOLD))
-		body.add_child(UIK.label("Registration no. %s · Founded %s" % [e["registration_no"], Clock.fmt_date(int(e["founded"]))], 8, Art.C_MUTED))
+		body.add_child(UIK.label(I18n.t("Registration no. %s · Founded %s") % [e["registration_no"], Clock.fmt_date(int(e["founded"]))], 8, Art.C_MUTED))
 		body.add_child(UIK.wrap("Ana: \"All done. Congratulations. Open a business account at Nexus Bank and you're set.\"", 9, Art.C_WHITE, 390))
 		body.add_child(UIK.wrap("ShopLane seller cap lifted · B2B contracts unlocked · office leases unlocked · supplier net terms unlocked", 7, Art.C_GREEN, 390))
 		footer.add_child(UIK.button("Thanks", close, "primary", 80))
@@ -34,7 +34,7 @@ func build() -> void:
 	body.add_child(name_edit)
 	body.add_child(UIK.label("Business type", 8, Art.C_MUTED, true))
 	for t in reg.get("business_types", []):
-		body.add_child(UIK.label("  ● " + t["name"], 8, Art.C_WHITE))
+		body.add_child(UIK.label("  ● " + I18n.t(t["name"]), 8, Art.C_WHITE))
 	body.add_child(UIK.label("Registered address", 8, Art.C_MUTED, true))
 	var ah := UIK.hbox(4)
 	var opts := [["Riverside Tower 7C (home)", "Riverside Tower 7C, Riverside"]]

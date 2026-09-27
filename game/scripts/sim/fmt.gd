@@ -43,13 +43,13 @@ static func pct(v: float, digits := 0) -> String:
 
 static func duration_min(m: int) -> String:
 	if m < 60:
-		return "%d min" % m
+		return I18n.t("%d min") % m
 	if m % 60 == 0:
-		return "%d h" % (m / 60)
-	return "%d h %d min" % [m / 60, m % 60]
+		return I18n.t("%d h") % (m / 60)
+	return I18n.t("%d h %d min") % [m / 60, m % 60]
 
 
 static func stars(v: float) -> String:
 	if v <= 0.0:
-		return "no reviews"
+		return I18n.t("no reviews")
 	return "%.1f★" % v

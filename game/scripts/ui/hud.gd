@@ -135,7 +135,7 @@ func _process(_d: float) -> void:
 	if not visible or not GameState.has_game():
 		return
 	time_label.text = Clock.fmt_time()
-	date_label.text = Clock.fmt_date().to_upper() + "  ·  DAY %d" % Clock.day_index()
+	date_label.text = Clock.fmt_date().to_upper() + I18n.t("  ·  DAY %d") % Clock.day_index()
 	var nf := Clock.night_factor()
 	part_icon.texture = Art.icon("moon" if nf > 0.5 else "sun")
 	part_label.text = {"morning": "Morning · Sunny", "afternoon": "Afternoon · Sunny", "evening": "Evening", "night": "Night"}.get(Clock.day_part(), "")
@@ -146,7 +146,7 @@ func _process(_d: float) -> void:
 		for ent in (["player", GameState.business_entity()] if GameState.business_entity() != "player" else ["player"]):
 			_delta += Ledger.operating_cash_since(ent, day0)
 	var delta := _delta
-	today_label.text = ("▲ " if delta >= 0 else "▼ ") + Fmt.money(absf(delta)) + " today"
+	today_label.text = ("▲ " if delta >= 0 else "▼ ") + Fmt.money(absf(delta)) + I18n.t(" today")
 	today_label.add_theme_color_override("font_color", Art.C_GREEN if delta >= 0 else Art.C_RED)
 	ff_label.visible = Clock.fast_forward and not Clock.is_paused()
 	var pc := Ledger.cash("player")
@@ -160,10 +160,10 @@ func _process(_d: float) -> void:
 		co_label.text = Fmt.money(cc)
 		co_label.add_theme_color_override("font_color", Art.C_GREEN if cc >= 1500 else (Art.C_GOLD if cc >= 0 else Art.C_RED))
 	var unread := GameState.unread_messages()
-	phone_hint.text = "[Tab] Phone" + ("  ● %d new" % unread if unread > 0 else "") + ("   ⚑ decision" if not EventEngine.pending().is_empty() else "")
+	phone_hint.text = I18n.t("[Tab] Phone") + (I18n.t("  ● %d new") % unread if unread > 0 else "") + ("   ⚑ decision" if not EventEngine.pending().is_empty() else "")
 	phone_hint.add_theme_color_override("font_color", Art.C_GOLD if unread > 0 or not EventEngine.pending().is_empty() else Art.C_MUTED)
 	var cc2 := Ecommerce.carried_count()
-	parcels_label.text = ("Carrying %d parcel%s" % [cc2, "s" if cc2 != 1 else ""]) if cc2 > 0 else ""
+	parcels_label.text = (I18n.t("Carrying %d parcel%s") % [cc2, I18n.pl(cc2)]) if cc2 > 0 else ""
 
 
 func refresh() -> void:
@@ -171,11 +171,11 @@ func refresh() -> void:
 		return
 	var o := StoryEngine.main_objective()
 	obj_panel.visible = not o.is_empty()
-	goal_label.text = str(o.get("goal", "")).to_upper()
+	goal_label.text = I18n.t(str(o.get("goal", ""))).to_upper()
 	obj_label.text = o.get("text", "")
 	var ws := SceneRouter.world_scene()
 	if ws != null:
-		loc_label.text = (DataDB.districts[ws.scene_id]["name"] if ws.kind == "district" else DataDB.building(ws.scene_id).get("name", "")).to_upper()
+		loc_label.text = (I18n.t(DataDB.districts[ws.scene_id]["name"]) if ws.kind == "district" else I18n.t(DataDB.building(ws.scene_id).get("name", ""))).to_upper()
 
 
 func _on_cash(entity: String, delta: float) -> void:

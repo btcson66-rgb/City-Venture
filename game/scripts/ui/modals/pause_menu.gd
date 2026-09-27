@@ -5,15 +5,15 @@ extends Modal
 func _init() -> void:
 	title_text = "Paused"
 	icon_name = "settings"
-	panel_size = Vector2(260, 220)
+	panel_size = Vector2(300, 244)
 
 
 func build() -> void:
 	body.add_child(UIK.button("Resume", close, "primary"))
 	for s in [1, 2, 3]:
-		body.add_child(UIK.button("Save to slot %d" % s, func():
+		body.add_child(UIK.button(I18n.t("Save to slot %d") % s, func():
 			SaveSystem.save(s)
-			UIRoot.toast("Saved to slot %d." % s, "good", "save")))
+			UIRoot.toast(I18n.t("Saved to slot %d.") % s, "good", "save")))
 	var lb := UIK.button("Load last save", func():
 		var s := SaveSystem.latest_slot()
 		if s >= 0:
@@ -26,6 +26,14 @@ func build() -> void:
 		sp.add_child(UIK.button(opt[1], func(): Clock.speed = opt[0]; rebuild(), "tab_active" if is_equal_approx(Clock.speed, opt[0]) else "tab"))
 	body.add_child(sp)
 	body.add_child(UIK.label("Hold T to fast-forward time in the world.", 7, Art.C_DIM))
+	var lang := UIK.hbox(4)
+	lang.add_child(UIK.label("Language", 8, Art.C_MUTED))
+	for l in I18n.LOCALES:
+		var code: String = l[0]
+		var b := UIK.button(l[1], func(): I18n.set_locale(code); UIRoot.language_changed(); rebuild(), "tab_active" if I18n.locale().begins_with(code) else "tab")
+		b.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+		lang.add_child(b)
+	body.add_child(lang)
 	body.add_child(UIK.button("Quit to title", func():
 		close()
 		SceneRouter.go_menu()))

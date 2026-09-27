@@ -7,6 +7,7 @@ func _ready() -> void:
 
 
 func _start() -> void:
+	I18n.init()
 	var errs := DataDB.validate()
 	for e in errs:
 		push_error("Data: " + str(e))

@@ -25,7 +25,7 @@ func build() -> void:
 		if b["tier"] != "p0" and not shown_future:
 			shown_future = true
 			list.add_child(UIK.label("LATER", 7, Art.C_DIM, true))
-		var btn := UIK.button(("● " if b["status"] == "active" else "○ ") + b["name"], func(): selected = b["id"]; rebuild(), "tab_active" if selected == b["id"] else "tab")
+		var btn := UIK.button(("● " if b["status"] == "active" else "○ ") + I18n.t(b["name"]), func(): selected = b["id"]; rebuild(), "tab_active" if selected == b["id"] else "tab")
 		btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		btn.name = "Biz_" + b["id"]
 		list.add_child(btn)
@@ -36,9 +36,9 @@ func build() -> void:
 	det.add_child(UIK.title(d["name"], 13, Art.C_WHITE))
 	det.add_child(UIK.wrap(d["pitch"], 9, Art.C_SKY, 290))
 	det.add_child(UIK.kv("Minimum starting capital", Fmt.money0(float(d["starting_capital_min"]))))
-	det.add_child(UIK.kv("Money comes from", ", ".join(d["revenue_models"]).replace("_", " ")))
-	det.add_child(UIK.kv("Main costs", ", ".join(d["cost_types"]).replace("_", " ")))
-	det.add_child(UIK.kv("Can grow into", ", ".join(d["growth_paths"]).replace("_", " ")))
+	det.add_child(UIK.kv("Money comes from", I18n.join(d["revenue_models"], true)))
+	det.add_child(UIK.kv("Main costs", I18n.join(d["cost_types"], true)))
+	det.add_child(UIK.kv("Can grow into", I18n.join(d["growth_paths"], true)))
 	if selected == "ecommerce":
 		det.add_child(UIK.sep())
 		det.add_child(UIK.wrap("Posted by Ken (TradeLink Wholesale): \"Earbuds $18, lamps $11.50, bottles $6.80, phone stands $3.40. MOQs apply. Order via laptop.\"", 8, Art.C_WHITE, 290))
@@ -51,7 +51,7 @@ func build() -> void:
 			det.add_child(go)
 	else:
 		det.add_child(UIK.sep())
-		det.add_child(UIK.wrap("Not in this build. %s is planned for %s — it will play differently, not just a new icon." % [d["name"], "P1–P3" if d["tier"] == "p0" else "a later expansion"], 8, Art.C_GOLD, 290))
+		det.add_child(UIK.wrap(I18n.t("Not in this build. %s is planned for %s — it will play differently, not just a new icon.") % [I18n.t(d["name"]), "P1–P3" if d["tier"] == "p0" else "a later expansion"], 8, Art.C_GOLD, 290))
 	footer.add_child(UIK.button("Close", close))
 
 

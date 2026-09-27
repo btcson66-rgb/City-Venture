@@ -36,9 +36,9 @@ func build() -> void:
 	v.add_child(UIK.label("ACCESSORY", 7, Art.C_DIM, true))
 	var ah := UIK.hbox(3)
 	for a in DataDB.character.get("accessories", []):
-		ah.add_child(UIK.button(a["name"].left(10), _set_acc.bind(a["id"]), "tab_active" if a["id"] == p["appearance"].get("accessory", "none") else "tab"))
+		ah.add_child(UIK.button(I18n.t(a["name"]).left(10), _set_acc.bind(a["id"]), "tab_active" if a["id"] == p["appearance"].get("accessory", "none") else "tab"))
 	v.add_child(ah)
-	v.add_child(UIK.label("Planned: " + ", ".join(DataDB.character.get("outfits_planned", [])), 6, Art.C_DIM))
+	v.add_child(UIK.label(I18n.t("Planned: ") + I18n.join(DataDB.character.get("outfits_planned", [])), 6, Art.C_DIM))
 
 
 func _set_outfit(id: String) -> void:

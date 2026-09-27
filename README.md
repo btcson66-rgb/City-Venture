@@ -16,6 +16,9 @@ Engine: Godot 4.5.x (project in `game/`).
 godot --path game                       # play (1280×720 window, 640×360 pixel canvas)
 ```
 
+Languages: English · 繁體中文 · 简体中文. Switch them on the main menu or in the pause menu (Esc), or start with
+`godot --path game -- --lang=zh_TW`. Translations are in `tools/i18n/zh_TW.json`; run `python3 tools/i18n_extract.py --check`.
+
 Controls: WASD/arrows walk (Shift run) · E/Space interact · Tab phone · M city map · hold T fast-forward · Esc pause/close.
 
 ## Build, test, evidence

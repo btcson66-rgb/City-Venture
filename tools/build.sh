@@ -5,6 +5,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 python3 tools/art/gen_placeholders.py
 python3 tools/gen_districts.py
+python3 tools/i18n_extract.py --check      # regenerate .po catalogues; fail on untranslated text
 cd game
 godot --headless --path . --import
 godot --headless --path . res://tests/test_runner.tscn -- --junit="$ROOT/evidence/vs001/test-reports/unit.xml"
