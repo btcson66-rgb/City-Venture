@@ -20,7 +20,8 @@ func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	var dim := ColorRect.new()
-	dim.color = Color(0.03, 0.06, 0.12, dim_alpha)
+	# full-screen management screens get an almost opaque backing so the world doesn't show through
+	dim.color = Color(0.03, 0.06, 0.12, maxf(dim_alpha, 0.88) if panel_size.x >= 560.0 else dim_alpha)
 	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(dim)
 	panel = UIK.panel("ui/panel", 8)

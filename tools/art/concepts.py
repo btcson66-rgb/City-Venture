@@ -650,6 +650,7 @@ def generate(assets_dir: str) -> None:
     bd = os.path.join(assets_dir, "backdrops")
     save(cover("C", (736, 172, 1438, 508), (752, 360)), os.path.join(bd, "menu.png"))
     save(arrival_backdrop(), os.path.join(bd, "arrival.png"))
+    save(cover("H", (1165, 800, 1318, 965), (200, 250), colors=96, sharpen=0.2), os.path.join(bd, "wardrobe.png"))
     save(skyline_strip(SKY_DAY, top=(92, 150, 226)), os.path.join(bd, "skyline_day.png"))
     save(skyline_strip(SKY_NIGHT, top=(14, 18, 44)), os.path.join(bd, "skyline_night.png"))
     for cid, (k, b, fix) in CARDS.items():

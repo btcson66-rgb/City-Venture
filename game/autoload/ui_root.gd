@@ -118,6 +118,10 @@ func play_dialogue(id: String, done := Callable()) -> void:
 
 
 func _process(_delta: float) -> void:
+	# toasts sit at the top in the world; while a management screen is open they drop to the bottom
+	# edge so they never cover a modal's title bar
+	var ty := 8.0 if modal_layer.get_child_count() == 0 else 352.0 - toast_box.size.y
+	toast_box.position.y = lerpf(toast_box.position.y, ty, 0.35)
 	if not GameState.has_game() or not _hud_wanted or SceneRouter.transitioning:
 		return
 	if Input.is_action_pressed("fast_forward") and not is_blocking():

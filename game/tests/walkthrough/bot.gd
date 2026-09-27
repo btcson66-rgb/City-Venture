@@ -376,6 +376,9 @@ func talk_through_dialogue(max_lines := 30, choose_first := true) -> void:
 # ------------------------------------------------------------------ simple screenshot tour
 func _shots() -> void:
 	await shot("main_menu")
+	SceneRouter._set_scene(CharacterCreator.new())
+	await wait(0.8)
+	await shot("creator")
 	GameState.new_game({"name": "Shot Tour", "seed": 3})
 	SceneRouter._set_scene(ArrivalScene.new())
 	await wait(6.2)

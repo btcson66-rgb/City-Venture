@@ -756,7 +756,13 @@ def build(bid, spec):
         steps(b, 6, W - 7, base - 8, 3)
         glass_door(b, dx, dy - 8, dw, dh)
         meta_door_shift = 8
-        sign = [dx - 26, gy + 2, dw + 52, 7]
+        # Board-G style name plate: navy panel with a gold rule (text is drawn in-game)
+        sx0, sx1 = max(4, dx - 34), min(W - 5, dx + dw + 34)
+        rect(img, sx0, gy, sx1, gy + 11, (30, 44, 82))
+        hline(img, sx0, sx1, gy, (206, 170, 92))
+        hline(img, sx0, sx1, gy + 11, (206, 170, 92))
+        hline(img, sx0 + 1, sx1 - 1, gy + 1, (46, 64, 112))
+        sign = [sx0, gy + 1, sx1 - sx0, 10]
         dy = dy - 8
     # entrance shadow, ground contact
     b.ground_shadow()

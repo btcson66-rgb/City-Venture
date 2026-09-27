@@ -115,7 +115,7 @@ func _add_building(sprite: String, x: float, bid: String, bd: Dictionary) -> voi
 	if bid == "small_office" and GameState.company_id() != "" and Living.has_lease("suite_2b"):
 		text = GameState.entity_name(GameState.company_id()).to_upper() + " · 2B"
 	if typeof(sg) == TYPE_ARRAY and text != "":
-		var lb := UIK.world_label(text, 7 if float(sg[3]) >= 9 else 5, Color8(250, 244, 226))
+		var lb := UIK.world_label(text, 8 if float(sg[3]) >= 10 and float(sg[2]) >= 70 else (7 if float(sg[3]) >= 9 else 5), Color8(250, 244, 226))
 		lb.position = Vector2(float(sg[0]), float(sg[1]) - h + 2 + (0.0 if float(sg[3]) >= 9 else -1.0))
 		lb.size = Vector2(float(sg[2]), float(sg[3]))
 		holder.add_child(lb)

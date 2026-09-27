@@ -15,6 +15,8 @@ var _t := 0.0
 var _frame := 0
 var _layers: Array[Sprite2D] = []
 var _shadow: Sprite2D
+var _group: CanvasGroup
+static var _outline_mat: ShaderMaterial
 var appearance: Dictionary = {}
 var outfit := "startup_casual"
 
@@ -22,6 +24,8 @@ var outfit := "startup_casual"
 func _ready() -> void:
 	if _shadow == null:
 		_make_shadow()
+	if _group != null:
+		_outline_material()
 
 
 func _make_shadow() -> void:
@@ -42,6 +46,14 @@ func setup(app: Dictionary, outfit_id: String, tints := {}) -> void:
 	_layers.clear()
 	if _shadow == null:
 		_make_shadow()
+	if _group == null:
+		# layers render into one group so the outline hugs the whole silhouette, not each layer
+		_group = CanvasGroup.new()
+		_group.name = "Body"
+		_group.fit_margin = 3.0
+		_group.clear_margin = 3.0
+		_group.material = _outline_material()
+		add_child(_group)
 	for L in Art.character_layers(app, outfit_id, tints):
 		var s := Sprite2D.new()
 		s.texture = Art.tex(L["tex"])
@@ -51,9 +63,19 @@ func setup(app: Dictionary, outfit_id: String, tints := {}) -> void:
 		s.offset = -FEET
 		s.modulate = L["tint"]
 		s.name = L["name"]
-		add_child(s)
+		_group.add_child(s)
 		_layers.append(s)
 	_apply()
+
+
+func _outline_material() -> ShaderMaterial:
+	if _outline_mat == null:
+		_outline_mat = ShaderMaterial.new()
+		_outline_mat.shader = load("res://shaders/char_outline.gdshader")
+	if is_inside_tree():
+		var sc := get_viewport().get_final_transform().get_scale().x
+		_outline_mat.set_shader_parameter("px_scale", maxf(1.0, roundf(sc)))
+	return _outline_mat
 
 
 func set_dir(d: String) -> void:

@@ -11,6 +11,7 @@ var rig: CharacterRig
 var portrait: PortraitView
 var dir_idx := 0
 var expr_idx := 0
+var views_rigs: Array = []
 var options_box: VBoxContainer
 var tab_box: HBoxContainer
 const DIRS := ["down", "right", "up", "left"]
@@ -25,45 +26,55 @@ func _ready() -> void:
 	bg.color = Art.C_NAVY_900
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(bg)
-	var grid := ColorRect.new()
-	grid.color = Color8(20, 34, 54)
-	grid.position = Vector2(14, 44)
-	grid.size = Vector2(200, 250)
-	add_child(grid)
-	for i in range(0, 200, 16):
-		var ln := ColorRect.new()
-		ln.color = Color8(28, 44, 68)
-		ln.position = Vector2(14 + i, 44)
-		ln.size = Vector2(1, 250)
-		add_child(ln)
-	for j in range(0, 250, 16):
-		var ln2 := ColorRect.new()
-		ln2.color = Color8(28, 44, 68)
-		ln2.position = Vector2(14, 44 + j)
-		ln2.size = Vector2(200, 1)
-		add_child(ln2)
+	# preview: Board H wardrobe room behind a Board A-style FRONT / SIDE / BACK sheet
+	var room := TextureRect.new()
+	room.texture = Art.tex("backdrops/wardrobe")
+	room.position = Vector2(14, 44)
+	room.size = Vector2(200, 250)
+	room.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	room.stretch_mode = TextureRect.STRETCH_SCALE
+	add_child(room)
+	var wash := ColorRect.new()
+	wash.color = Color(0.03, 0.06, 0.13, 0.5)
+	wash.position = room.position
+	wash.size = room.size
+	add_child(wash)
+	var floor_band := ColorRect.new()
+	floor_band.color = Color(0.03, 0.06, 0.13, 0.55)
+	floor_band.position = Vector2(14, 230)
+	floor_band.size = Vector2(200, 64)
+	add_child(floor_band)
 	add_child(_at(UIK.title("CREATE YOUR CHARACTER", 14), Vector2(14, 12)))
 	add_child(_at(UIK.label("Looks only. Your business choices decide everything else.", 8, Art.C_SKY), Vector2(230, 18)))
 	stage = Node2D.new()
-	stage.position = Vector2(84, 270)
-	stage.scale = Vector2(4, 4)
+	stage.position = Vector2(0, 0)
 	add_child(stage)
-	rig = CharacterRig.new()
-	stage.add_child(rig)
-	var pf := ColorRect.new()
-	pf.color = Art.C_NAVY_600
-	pf.position = Vector2(144, 50)
-	pf.size = Vector2(66, 66)
+	var views := [["down", "FRONT"], ["right", "SIDE"], ["up", "BACK"]]
+	for i in views.size():
+		var holder := Node2D.new()
+		holder.position = Vector2(50 + i * 64, 284)
+		holder.scale = Vector2(2, 2)
+		stage.add_child(holder)
+		var r := CharacterRig.new()
+		r.name = "View_" + views[i][1]
+		holder.add_child(r)
+		views_rigs.append([r, views[i][0]])
+		var lb := UIK.label(views[i][1], 6, Art.C_SKY, true)
+		lb.position = Vector2(18 + i * 64, 285)
+		lb.size = Vector2(64, 8)
+		lb.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		add_child(lb)
+	rig = views_rigs[0][0]
+	var pf := UIK.panel("ui/panel_glass", 2)
+	pf.position = Vector2(56, 48)
 	add_child(pf)
 	portrait = PortraitView.new()
-	portrait.position = Vector2(145, 51)
-	portrait.size = Vector2(64, 64)
-	add_child(portrait)
+	portrait.custom_minimum_size = Vector2(112, 112)
+	portrait.size = Vector2(112, 112)
+	pf.add_child(portrait)
 	var rot := UIK.hbox(3)
-	rot.position = Vector2(20, 272)
-	rot.add_child(UIK.button("◀", func(): dir_idx = (dir_idx + 3) % 4; _refresh()))
-	rot.add_child(UIK.button("▶", func(): dir_idx = (dir_idx + 1) % 4; _refresh()))
-	rot.add_child(UIK.button("Expression", func(): expr_idx = (expr_idx + 1) % 4; _refresh()))
+	rot.position = Vector2(56, 166)
+	rot.add_child(UIK.button("Expression ▶", func(): expr_idx = (expr_idx + 1) % 4; _refresh(), "", 116))
 	add_child(rot)
 	add_child(_at(UIK.label("NAME", 7, Art.C_DIM, true), Vector2(14, 300)))
 	name_edit = LineEdit.new()
@@ -102,8 +113,9 @@ func _at(c: Control, p: Vector2) -> Control:
 
 
 func _refresh() -> void:
-	rig.setup(app, outfit)
-	rig.set_dir(DIRS[dir_idx])
+	for vr in views_rigs:
+		vr[0].setup(app, outfit)
+		vr[0].set_dir(vr[1])
 	portrait.setup_character(app, outfit)
 	portrait.set_expr(EXPRS[expr_idx])
 	UIK.clear(tab_box)

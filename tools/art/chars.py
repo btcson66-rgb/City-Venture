@@ -626,8 +626,18 @@ def draw_p_head(face):
     shaded(img, ears_m, GRAY_SKIN, 0, 0, hi=False)
     hm = p_head(face)
     shaded(img, hm, GRAY_SKIN, 0, 0, sh_depth=2)
-    # nose + cheek
-    put(img, 32, 37, GRAY_SKIN[1]); put(img, 33, 38, GRAY_SKIN[1])
+    # form shading: right cheek/jaw in shadow, soft shadow under the fringe, nose
+    for x, y in list(hm.pixels()):
+        if x >= 43 and y >= 26:
+            put(img, x, y, GRAY_SKIN[1])
+        elif 20 <= y <= 21 and 16 <= x <= 47:
+            put(img, x, y, GRAY_SKIN[1])
+    put(img, 33, 36, GRAY_SKIN[1]); put(img, 33, 37, GRAY_SKIN[1]); put(img, 32, 38, GRAY_SKIN[1])
+    # clean outline around head + ears (tinted with the skin -> warm dark line)
+    sil = hm.copy().union(ears_m)
+    for x, y in list(sil.pixels()):
+        if any(not sil.get(x + dx, y + dy) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))):
+            put(img, x, y, (70, 70, 70, 255))
     return img
 
 
@@ -664,15 +674,17 @@ def draw_p_eyes(shape):
             ix0 = min(ix0, x + 6 - iw + 1)
             for yy in range(top + 1, top + h):
                 for xx in range(ix0, ix0 + iw):
-                    g = 215 if yy < top + 1 + (h - 1) // 2 else 160
-                    if yy == top + h - 1:
-                        g = 190
+                    # anime-style iris: deep at the top under the lash, glowing toward the bottom
+                    k = (yy - top - 1) / max(1, h - 2)
+                    g = int(120 + 120 * k)
                     put(iris, xx, yy - up, (g, g, g))
             # pupil + highlight
             px0 = ix0 + 1
             rect(lash, px0, top + 2 - up, px0 + (1 if ex_name != "surprised" else 0), top + min(h - 1, 4) - up, (28, 22, 34))
             put(lash, ix0, top + 1 - up + 1, WHITE)
             put(lash, ix0 + 1, top + 1 - up + 1, WHITE) if shape in ("round", "wide") else None
+            if h >= 5:  # second, smaller sparkle low in the iris
+                put(lash, ix0 + iw - 1, top + h - 2 - up, (255, 255, 255, 220))
             # upper lash line (thicker) + corners
             hline(lash, x, x + 7, top, LASH)
             hline(lash, x + 1, x + 6, top - 1 if shape != "narrow" else top, LASH)
@@ -713,6 +725,13 @@ def draw_p_mouth(style):
     img = psheet(4)
     for e, ex_name in enumerate(EXPR):
         ox = e * PW
+        # cheek blush (untinted layer, soft pink)
+        a = 110 if ex_name == "happy" else 70
+        for cx in (ox + 21, ox + 39):
+            for dx in range(4):
+                put(img, cx + dx, 37, (236, 120, 120, a))
+            for dx in (1, 2):
+                put(img, cx + dx, 38, (236, 120, 120, a // 2))
         x, y = ox + 29, 43
         if ex_name == "happy" or (ex_name == "neutral" and style == "grin"):
             rect(img, x - 1, y, x + 6, y + 2, LIP_DARK)

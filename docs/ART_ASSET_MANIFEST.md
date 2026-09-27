@@ -4,6 +4,39 @@ Style: **NEO-CIVIC PIXEL REALISM** (Handoff §37–§50, §83–§85; concept bo
 Grid: 16 px environment tiles. Characters are 32×48 frames. Nearest-neighbor scaling at 2×/3× (base 640×360).
 Palette anchors: see `CITY_VENTURE_SPEC_READBACK.md` §F. Placeholders come from `tools/art/gen_placeholders.py` into `game/assets/`, one file per row below, so final art replaces them 1:1 by path.
 
+### Status after Art Pass v3 (feedback: "still not good enough — match the boards' style, content and quality")
+
+Art Pass v3 turns the approved concept boards themselves into game-ready assets, as Handoff §83 requires for AI concept
+art ("must be converted into consistent game-ready sprites"). The conversion is code, not hand edits:
+`tools/art/concepts.py` crops each asset from `docs/reference/concept_boards/`, keys out the board background
+(border-connected flood region + de-fringe), downsamples in premultiplied alpha onto the game's pixel grid, snaps to a
+per-asset palette, and darkens the silhouette edge. Where the converted art is bigger than the old footprint, the overhang
+is written to `game/assets/sprite_meta.json` so placement data and collisions keep working. Everything regenerates with
+`python3 tools/art/gen_placeholders.py` (needs `pip install -r tools/requirements.txt`).
+
+| Area | Source board(s) | What is in the game now | Status |
+|------|-----------------|--------------------------|--------|
+| Street props: lamps, banner lamps, trees (3), planters, flower boxes, bins, digital kiosk, Metro pylon, A-frame, cone, bollard, bench | C "Props & Environment", G "Architectural details", A "Pixel style" | Converted sprites replace the procedural ones 1:1 by name | CONV |
+| Interior furniture: desks, office/leather chairs, monitor desks, whiteboard, bookshelf, plants, exec desk, sofas, bed, coffee table, TV, kitchen, ATM, brochure stand, queue barrier, waiting sofa, café tables/chairs/armchair, display case, pendant lights, filing cabinet, lockers, phone booth, lounge sofa, community table, server rack, ticket machine, info kiosk; bank/civic/café counters (composites) | H prop strips, A | Converted sprites | CONV |
+| Interior windows (day/night, normal/wide) | G day skyline banner, D dusk skyline banner | Window frames show the board skyline | CONV + GEN frame |
+| Interior floors (wood warm/dark/café, marble, concrete) | Board H palette | Continuous 512×320 non-repeating floors | GEN v3 |
+| Building facades | G skyline (glass reflections), H/C interiors (storefront + office glass), C/G plants (roof edges) | Procedural volumes from v2, now textured with board content | GEN v3 + CONV textures |
+| District sky | G day banner, D dusk banner | Parallax skyline behind every block, day→dusk→night cross-fade | CONV |
+| Main menu backdrop | C "Mixed-use Neighborhood (Day)" | Full-bleed, slow pan | CONV |
+| Arrival backdrop | D skyline banner | Dusk skyline + generated river reflection; train/bridge drawn in-game | CONV + GEN |
+| City Map screen | F "Main City Map (Isometric)" | Board map; district labels redrawn as live in-game buttons over the board's label spots | CONV |
+| City Map district images | F district marker tiles, C/F/G/H panels | Info-panel pictures | CONV |
+| World Map screen | E "World Map" | Board map; region labels redrawn in-game; Aurelia pin added | CONV |
+| Region previews | E "Region Preview" | Thumbnails in labels and the info strip | CONV |
+| Location cards (first visit) | C, F, G, H panels | Riverside, Financial, Startup Hub, Civic Center, City Hall, Nexus Bank, Riverside Tower, Bloom Coffee, Bean & Byte, Nexus Co-work, Suite 2B | CONV (City Hall sign re-lettered "AURELIA") |
+| Character sprites | — | Procedural rig from v1/v2; v3 adds a whole-silhouette outline shader (`shaders/char_outline.gdshader`) | GEN v2 + outline |
+| Portraits | — | v3 adds form shading, head outline, anime-style iris gradient + sparkle, cheek blush | GEN v3 |
+
+Legend addition: **CONV** means the asset is converted from the approved concept boards by `concepts.py`. It has a consistent
+grid and palette, but it is **not final hand-finished art**. The boards are AI concept images, and a pixel artist should
+repaint the final assets. Board text that clashed with game data was fixed: the cafe is now "Bean & Byte" (Board H) and City
+Hall's "Riverdale" sign now reads "Aurelia". Characters are still the weakest area compared with the boards.
+
 ### Status after Art Pass v2 (feedback: "too simple — needs design sense, use the boards")
 
 | Area | Generator | What changed vs v1 | Status |
