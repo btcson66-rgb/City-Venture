@@ -70,7 +70,7 @@ def pane_interior(img, lt, x0, y0, x1, y1, rnd, kind="office", lit=True, day_dim
     if x1 - x0 < 3 or y1 - y0 < 4:
         return
     h = y1 - y0 + 1
-    wall = {"office": (214, 206, 190), "home": (226, 196, 160), "shop": (232, 214, 186), "lobby": (220, 212, 200),
+    wall = {"office": (214, 206, 190), "home": (226, 196, 160), "shop": (240, 214, 170), "lobby": (236, 214, 176),
             "cafe": (196, 150, 110), "civic": (214, 206, 190), "bank": (200, 196, 190)}.get(kind, (214, 206, 190))
     ceil = shade(wall, 0.72)
     wall_d = shade(wall, day_dim)
@@ -127,9 +127,9 @@ def glass_over(img, x0, y0, x1, y1, tint=(70, 120, 180), a=0.42, rnd=None, refle
     h = y1 - y0 + 1
     for y in range(y0, y1 + 1):
         t = (y - y0) / max(1, h)
-        c = mix(lighten(tint, 0.35), tint, t)
+        c = mix(lighten(tint, 0.55), shade(tint, 0.85), t)
         for x in range(x0, x1 + 1):
-            blend_px(img, x, y, c, a * (1.15 - 0.3 * t))
+            blend_px(img, x, y, c, min(0.95, a * (1.25 - 0.35 * t)))
     if reflect:
         off = (rnd.randint(0, 20) if rnd else 0)
         for k in range(x0 - h - off, x1 + 1, 17):
@@ -143,11 +143,11 @@ def glass_over(img, x0, y0, x1, y1, tint=(70, 120, 180), a=0.42, rnd=None, refle
             blend_px(img, x, y0, (230, 244, 255), 0.35)
 
 
-def window_unit(img, lt, x, y, w, h, frame, rnd, kind="office", lit_p=0.55, sill=True, reveal=True, mullion=True, tint=(70, 120, 180)):
+def window_unit(img, lt, x, y, w, h, frame, rnd, kind="office", lit_p=0.55, sill=True, reveal=True, mullion=True, tint=(62, 124, 200), day_dim=0.6, alpha=0.52):
     rect(img, x, y, x + w - 1, y + h - 1, frame)
     lit = rnd.random() < lit_p
-    pane_interior(img, lt, x + 1, y + 1, x + w - 2, y + h - 2, rnd, kind, lit)
-    glass_over(img, x + 1, y + 1, x + w - 2, y + h - 2, tint, 0.38, rnd)
+    pane_interior(img, lt, x + 1, y + 1, x + w - 2, y + h - 2, rnd, kind, lit, day_dim)
+    glass_over(img, x + 1, y + 1, x + w - 2, y + h - 2, tint, alpha, rnd)
     if reveal:
         hline(img, x + 1, x + w - 2, y + 1, shade(frame, 0.7))
         vline(img, x + 1, y + 1, y + h - 2, shade(frame, 0.75))
@@ -388,8 +388,8 @@ def display_window(b, x0, x1, y0, y1, kind="shop", tint=(90, 130, 170), frame=(4
     x = x0 + 1
     while x < x1:
         xe = min(x1 - 1, x + seg - 2)
-        pane_interior(img, b.lt, x, y0 + 1, xe, y1 - 1, b.rnd, kind, True, 0.9)
-        glass_over(img, x, y0 + 1, xe, y1 - 1, tint, 0.3, b.rnd)
+        pane_interior(img, b.lt, x, y0 + 1, xe, y1 - 1, b.rnd, kind, True, 1.05)
+        glass_over(img, x, y0 + 1, xe, y1 - 1, (120, 170, 210), 0.18, b.rnd)
         x = xe + 2
     hline(img, x0, x1, y1, lighten(frame, 0.4))
 
@@ -515,8 +515,8 @@ def build(bid, spec):
             b.slab(fy - 4, (200, 206, 214), 2)
             x = 2
             while x + pane_w <= W - 2:
-                window_unit(img, b.lt, x, fy, pane_w, fh - 6, (44, 52, 70), rnd, "office", spec.get("lit", 0.6),
-                            sill=False, reveal=False, mullion=False, tint=(60, 110, 180))
+                window_unit(img, b.lt, x, fy, pane_w, fh - 6, (40, 50, 70), rnd, "office", spec.get("lit", 0.6),
+                            sill=False, reveal=False, mullion=False, tint=spec.get("tint", (58, 122, 204)), day_dim=0.5, alpha=0.62)
                 x += pane_w + 1
             if spec.get("fins"):
                 for fx in range(2, W - 2, pane_w * 2 + 2):
@@ -615,8 +615,8 @@ def build(bid, spec):
         x = lx0 + 1
         while x < lx1:
             xe = min(lx1 - 1, x + 12)
-            pane_interior(img, b.lt, x, gy + 13, xe, base - 2, rnd, "lobby", True, 0.9)
-            glass_over(img, x, gy + 13, xe, base - 2, (80, 120, 170), 0.3, rnd)
+            pane_interior(img, b.lt, x, gy + 13, xe, base - 2, rnd, "lobby", True, 1.05)
+            glass_over(img, x, gy + 13, xe, base - 2, (110, 160, 210), 0.22, rnd)
             x = xe + 2
         canopy(b, dx - 14, dx + dw + 13, dy - 8, 8)
         glass_door(b, dx, dy, dw, dh)
@@ -669,7 +669,7 @@ def build(bid, spec):
             rect(img, x, y, x + 20, y + h, col)
             hline(img, x, x + 20, y, lighten(col, 0.3))
             vline(img, x + 20, y, y + h, shade(col, 0.6))
-            logo(b, br[5], x + 4, y + 6, 12, (255, 255, 255))
+            logo(b, br[5], x + 4, y + 8, 12, br[6] if len(br) > 6 else (255, 255, 255))
     meta["door"] = [dx, dy, dw, dh]
     meta["sign"] = sign
     meta["sign_text"] = spec.get("sign_text", "")
@@ -693,7 +693,7 @@ SPECS = {
                          brands=[("logo", "nexus", 168, 30, 14, (240, 244, 255), (30, 50, 100))]),
     "horizon_labs": dict(style="glass", w=176, depth=26, floors=4, fh=36, gh=60, roof="terrace", pane=12, fins=True, lit=0.7,
                          ground="lobby", gmat="dark_panel", sign_text="HORIZON LABS",
-                         brands=[("pylon", 148, 40, 60, (236, 240, 244), "horizon")]),
+                         brands=[("pylon", 148, 40, 60, (240, 243, 247), "horizon", (46, 98, 196))]),
     "suite_building": dict(style="brick", w=144, depth=20, floors=3, fh=36, gh=58, mat="brick", ww=24, wh=24, ground="lobby",
                            gmat="navy_panel", roof="green", lit=0.55, kind="office", sign_text="22 FOUNDERS LANE"),
     "byte_bean": dict(style="plaster", w=128, depth=18, floors=1, fh=34, gh=62, mat="wood", ground="cafe", awning=(52, 52, 62),

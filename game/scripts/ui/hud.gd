@@ -19,7 +19,11 @@ var minimap: Minimap
 var phone_hint: Label
 var parcels_label: Label
 var loc_label: Label
+var today_label: Label
+var part_label: Label
 var _last_cash := {}
+var _delta_t := -1
+var _delta := 0.0
 
 
 func _ready() -> void:
@@ -41,6 +45,8 @@ func _ready() -> void:
 	tv.add_child(trow)
 	time_label = UIK.title("", 11)
 	trow.add_child(time_label)
+	part_label = UIK.label("", 7, Art.C_SKY, true)
+	trow.add_child(part_label)
 	ff_label = UIK.label("▶▶", 7, Art.C_GOLD, true)
 	trow.add_child(ff_label)
 	# objective
@@ -73,6 +79,8 @@ func _ready() -> void:
 	ml.add_child(UIK.label("PERSONAL", 6, Art.C_DIM, true))
 	cash_label = UIK.title("", 11, Art.C_GREEN)
 	ml.add_child(cash_label)
+	today_label = UIK.label("", 6, Art.C_GREEN, true)
+	ml.add_child(today_label)
 	co_row = UIK.hbox(4)
 	mv.add_child(co_row)
 	co_row.add_child(UIK.icon("company", 14))
@@ -130,6 +138,16 @@ func _process(_d: float) -> void:
 	date_label.text = Clock.fmt_date().to_upper() + "  ·  DAY %d" % Clock.day_index()
 	var nf := Clock.night_factor()
 	part_icon.texture = Art.icon("moon" if nf > 0.5 else "sun")
+	part_label.text = {"morning": "Morning · Sunny", "afternoon": "Afternoon · Sunny", "evening": "Evening", "night": "Night"}.get(Clock.day_part(), "")
+	if _delta_t != Clock.now():
+		_delta_t = Clock.now()
+		var day0 := Clock.now() - Clock.minute_of_day()
+		_delta = 0.0
+		for ent in (["player", GameState.business_entity()] if GameState.business_entity() != "player" else ["player"]):
+			_delta += float(Ledger.movements(ent, day0, Clock.now() + 1).get("cash", 0.0))
+	var delta := _delta
+	today_label.text = ("▲ " if delta >= 0 else "▼ ") + Fmt.money(absf(delta)) + " today"
+	today_label.add_theme_color_override("font_color", Art.C_GREEN if delta >= 0 else Art.C_RED)
 	ff_label.visible = Clock.fast_forward and not Clock.is_paused()
 	var pc := Ledger.cash("player")
 	cash_label.text = Fmt.money(pc)

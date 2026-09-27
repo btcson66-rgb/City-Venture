@@ -22,23 +22,39 @@ def nine(w, h, fill_c, border, hi=None, sh=None, cut=True, alpha=255):
     return im
 
 
+def grad_panel(w, h, top, bottom, border, hi, alpha=246, accent=None):
+    """Board A style panel: vertical gradient, 1px border, lit top edge, cut corners."""
+    im = new(w, h)
+    for y in range(1, h - 1):
+        c = mix(top, bottom, (y - 1) / max(1, h - 3))
+        hline(im, 1, w - 2, y, tuple(c) + (alpha,))
+    hline(im, 1, w - 2, 0, border)
+    hline(im, 1, w - 2, h - 1, shade(border, 0.7))
+    vline(im, 0, 1, h - 2, border)
+    vline(im, w - 1, 1, h - 2, shade(border, 0.8))
+    hline(im, 2, w - 3, 1, hi)
+    if accent:
+        hline(im, 3, 8, 0, accent)
+    return im
+
+
 def gen_panels(out):
     P = {}
-    P["panel"] = nine(24, 24, PAL["navy_800"], PAL["navy_500"], PAL["navy_600"], PAL["navy_900"], alpha=246)
-    P["panel_glass"] = nine(24, 24, PAL["navy_900"], PAL["navy_600"], PAL["navy_700"], None, alpha=214)
+    P["panel"] = grad_panel(24, 24, (24, 40, 64), (12, 22, 38), (66, 96, 146), (96, 132, 190), 248, (120, 170, 240))
+    P["panel_glass"] = grad_panel(24, 24, (20, 34, 56), (10, 18, 32), (58, 84, 128), (80, 112, 160), 222)
     P["inset"] = nine(16, 16, PAL["navy_900"], PAL["navy_700"], None, None)
     P["header"] = nine(16, 16, PAL["navy_700"], PAL["navy_600"], lighten(PAL["navy_700"], 0.12), None)
-    P["button"] = nine(16, 16, PAL["navy_600"], PAL["blue_500"], lighten(PAL["navy_600"], 0.18), shade(PAL["navy_600"], 0.7))
-    P["button_hover"] = nine(16, 16, PAL["blue_500"], PAL["blue_300"], lighten(PAL["blue_500"], 0.2), shade(PAL["blue_500"], 0.7))
+    P["button"] = grad_panel(16, 16, (46, 68, 108), (30, 46, 76), (70, 110, 176), (100, 140, 206), 255)
+    P["button_hover"] = grad_panel(16, 16, (72, 120, 196), (46, 88, 158), (132, 180, 240), (170, 206, 250), 255)
     P["button_pressed"] = nine(16, 16, PAL["navy_700"], PAL["blue_400"], shade(PAL["navy_700"], 0.8), None)
     P["button_disabled"] = nine(16, 16, (40, 46, 60), (64, 70, 86), None, None)
-    P["button_primary"] = nine(16, 16, (54, 132, 90), (111, 207, 128), (80, 170, 116), (36, 90, 60))
-    P["button_primary_hover"] = nine(16, 16, (70, 160, 108), (160, 230, 170), (100, 190, 130), (40, 100, 70))
+    P["button_primary"] = grad_panel(16, 16, (70, 160, 104), (40, 112, 70), (120, 210, 140), (160, 232, 176), 255)
+    P["button_primary_hover"] = grad_panel(16, 16, (90, 186, 124), (54, 136, 88), (170, 240, 184), (200, 250, 210), 255)
     P["button_danger"] = nine(16, 16, (150, 64, 56), (224, 104, 83), (180, 84, 72), (100, 40, 36))
     P["tab"] = nine(16, 16, PAL["navy_800"], PAL["navy_600"], None, None)
-    P["tab_active"] = nine(16, 16, PAL["blue_500"], PAL["blue_300"], lighten(PAL["blue_500"], 0.2), None)
+    P["tab_active"] = grad_panel(16, 16, (64, 116, 196), (40, 82, 150), (132, 180, 240), (170, 206, 250), 255)
     P["tooltip"] = nine(16, 16, (240, 242, 246), PAL["navy_500"], None, None)
-    P["card"] = nine(16, 16, PAL["navy_700"], PAL["navy_600"], lighten(PAL["navy_700"], 0.08), None)
+    P["card"] = grad_panel(16, 16, (32, 48, 76), (22, 34, 56), (52, 74, 112), (70, 98, 144), 255)
     P["card_gold"] = nine(16, 16, PAL["navy_700"], PAL["gold_500"], None, None)
     P["bar_bg"] = nine(8, 8, PAL["navy_900"], PAL["navy_600"], None, None)
     P["bar_fill"] = nine(8, 8, PAL["blue_400"], PAL["blue_300"], lighten(PAL["blue_400"], 0.3), None)

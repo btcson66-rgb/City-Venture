@@ -97,6 +97,13 @@ func _add_building(sprite: String, x: float, bid: String, bd: Dictionary) -> voi
 	light_nodes.append({"node": lt, "interior": false})
 	entities.add_child(holder)
 	building_nodes[bid if bid != "" else sprite + str(x)] = holder
+	# soft contact shadow the facade casts onto the sidewalk
+	var sh := Sprite2D.new()
+	sh.texture = _shadow_tex()
+	sh.centered = false
+	sh.position = Vector2(x, BASE_Y + 1)
+	sh.scale = Vector2(float(w) / 4.0, 1.0)
+	back_layer.add_child(sh)
 	# sign text
 	var sg = meta.get("sign", null)
 	var text: String = str(bd.get("exterior", {}).get("sign", meta.get("sign_text", "")))
@@ -119,6 +126,24 @@ func _add_building(sprite: String, x: float, bid: String, bd: Dictionary) -> voi
 		spawns["door_" + bid] = Vector2(dx, BASE_Y + 22)
 		var icon := "home" if bd.get("type", "") == "home" else ("coffee" if bd.get("type", "") == "cafe" else ("bank" if bd.get("type", "") == "bank" else ("civic" if bd.get("type", "") == "civic" else ("parcel" if bd.get("type", "") == "parcel" else "company"))))
 		poi.append({"pos": Vector2(dx, BASE_Y), "icon": icon, "label": bd.get("name", bid), "building": bid})
+
+
+static var _shadow: Texture2D
+
+
+static func _shadow_tex() -> Texture2D:
+	if _shadow == null:
+		var g := Gradient.new()
+		g.set_color(0, Color(0.06, 0.09, 0.16, 0.34))
+		g.set_color(1, Color(0.06, 0.09, 0.16, 0.0))
+		var gt := GradientTexture2D.new()
+		gt.gradient = g
+		gt.width = 4
+		gt.height = 12
+		gt.fill_from = Vector2(0, 0)
+		gt.fill_to = Vector2(0, 1)
+		_shadow = gt
+	return _shadow
 
 
 func _add_metro(mp: Dictionary) -> Node2D:

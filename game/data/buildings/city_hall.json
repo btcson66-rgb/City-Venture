@@ -10,7 +10,7 @@
  },
  "exterior": {
   "sprite": "city_hall",
-  "x": 288,
+  "x": 210,
   "sign": "AURELIA CITY HALL"
  },
  "interior": {
@@ -22,6 +22,26 @@
   "wall": "marble_wall",
   "ambient": "civic",
   "props": [
+   {
+    "sprite": "framed_art",
+    "x": 330,
+    "y": 10,
+    "wall": true
+   },
+   {
+    "sprite": "sconce",
+    "x": 296,
+    "y": 14,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "sconce",
+    "x": 200,
+    "y": 14,
+    "wall": true,
+    "glow": true
+   },
    {
     "sprite": "logo_city_hall",
     "x": 40,

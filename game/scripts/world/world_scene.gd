@@ -152,6 +152,13 @@ func add_prop(p: Dictionary, parent: Node = null) -> Node2D:
 	else:
 		holder.position = Vector2(float(p["x"]), float(p["y"]) + h)
 		s.offset = Vector2(0, -h)
+		if kind == "interior":
+			var sh := Sprite2D.new()
+			sh.texture = Art.tex("effects/shadow")
+			sh.scale = Vector2(maxf(0.5, w / 22.0), 1.2)
+			sh.position = Vector2(w / 2.0, -1)
+			sh.modulate = Color(1, 1, 1, 0.8)
+			holder.add_child(sh)
 		holder.add_child(s)
 		(parent if parent != null else entities).add_child(holder)
 	if p.has("night"):
@@ -159,7 +166,7 @@ func add_prop(p: Dictionary, parent: Node = null) -> Node2D:
 	if p.get("glow", false):
 		var g := Sprite2D.new()
 		g.texture = Art.tex("effects/glow_small" if kind == "interior" else "effects/glow_warm")
-		g.position = Vector2(w / 2.0, (8.0 if sprite_path == "lamp" else float(h) - 4.0) - (float(h) if not (wall or floor_decal) else 0.0))
+		g.position = Vector2(w / 2.0 + (5.0 if sprite_path.begins_with("lamp") else 0.0), (8.0 if sprite_path.begins_with("lamp") else float(h) - 4.0) - (float(h) if not (wall or floor_decal) else 0.0))
 		var mat := CanvasItemMaterial.new()
 		mat.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
 		g.material = mat
@@ -221,8 +228,12 @@ func update_lighting() -> void:
 		var n: CanvasItem = l["node"]
 		if not is_instance_valid(n):
 			continue
+		if l.get("day_only", false):
+			n.modulate = Color(1, 1, 1, 1.0 - nf)
+			continue
 		var a := 0.55 if l["interior"] else clampf(nf * 1.3, 0.0, 1.0)
-		n.modulate = Color(inv.r, inv.g, inv.b, a)
+		# warm the additive light so windows read amber, not pink-white
+		n.modulate = Color(inv.r, inv.g * 0.9, inv.b * 0.62, a)
 	var night := nf > 0.55
 	for ns in night_sprites:
 		var s: Sprite2D = ns["node"]

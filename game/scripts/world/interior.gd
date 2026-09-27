@@ -49,6 +49,8 @@ func build(building_id: String) -> void:
 		if p["sprite"] == "company_sign":
 			_add_company_sign(p)
 			continue
+		if p.has("night"):
+			_light_spill(float(p["x"]), 52.0)
 		add_prop(p)
 	for it in def.get("interactables", []):
 		var a: Array = it["at"]
@@ -68,6 +70,50 @@ func build(building_id: String) -> void:
 
 
 func _decorate_walls(wt: int, ht: int) -> void:
+	var W := wt * T
+	var wall_kind: String = def.get("wall", "plaster_warm")
+	# wainscot: lower wall panel with a trim line (not on brick / glass walls)
+	if wall_kind in ["plaster_warm", "white_modern", "marble_wall", "navy_panel"]:
+		var wc := Color8(150, 110, 76) if wall_kind == "plaster_warm" else (Color8(206, 200, 190) if wall_kind == "white_modern" else Color8(190, 180, 164))
+		if wall_kind == "navy_panel":
+			wc = Color8(30, 42, 68)
+		var wain := ColorRect.new()
+		wain.color = wc
+		wain.position = Vector2(0, WALL_ROWS * T - 16)
+		wain.size = Vector2(W, 14)
+		back_layer.add_child(wain)
+		for x in range(0, W, 24):
+			var pl := ColorRect.new()
+			pl.color = wc.darkened(0.12)
+			pl.position = Vector2(x + 3, WALL_ROWS * T - 13)
+			pl.size = Vector2(18, 9)
+			back_layer.add_child(pl)
+		var tr := ColorRect.new()
+		tr.color = wc.lightened(0.25)
+		tr.position = Vector2(0, WALL_ROWS * T - 17)
+		tr.size = Vector2(W, 1)
+		back_layer.add_child(tr)
+	# crown moulding
+	var crown := ColorRect.new()
+	crown.color = Color(1, 1, 1, 0.18)
+	crown.position = Vector2(0, 2)
+	crown.size = Vector2(W, 1)
+	back_layer.add_child(crown)
+	# floor ambient occlusion along the wall base
+	var g := Gradient.new()
+	g.set_color(0, Color(0.05, 0.06, 0.1, 0.32))
+	g.set_color(1, Color(0.05, 0.06, 0.1, 0.0))
+	var gt := GradientTexture2D.new()
+	gt.gradient = g
+	gt.width = 4
+	gt.height = 14
+	gt.fill_to = Vector2(0, 1)
+	var ao := Sprite2D.new()
+	ao.texture = gt
+	ao.centered = false
+	ao.position = Vector2(0, WALL_ROWS * T)
+	ao.scale = Vector2(W / 4.0, 1)
+	back_layer.add_child(ao)
 	# baseboard + side frame so the room reads as a diorama
 	var base := ColorRect.new()
 	base.color = Color8(60, 48, 40) if def.get("floor", "") in ["wood_warm", "wood_dark"] else Color8(90, 96, 110)
@@ -95,6 +141,15 @@ func _decorate_walls(wt: int, ht: int) -> void:
 	bottom2.position = Vector2(wt * T / 2.0 + 16, ht * T)
 	bottom2.size = Vector2(wt * T / 2.0 - 16 + 4, 4)
 	add_child(bottom2)
+
+
+func _light_spill(x: float, w: float) -> void:
+	var poly := Polygon2D.new()
+	var y0 := float(WALL_ROWS * T)
+	poly.polygon = PackedVector2Array([Vector2(x + 4, y0), Vector2(x + w - 4, y0), Vector2(x + w + 22, y0 + 46), Vector2(x + 18, y0 + 46)])
+	poly.color = Color(1.0, 0.96, 0.84, 0.13)
+	back_layer.add_child(poly)
+	light_nodes.append({"node": poly, "interior": true, "day_only": true})
 
 
 func _add_company_sign(p: Dictionary) -> void:

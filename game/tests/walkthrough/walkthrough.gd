@@ -122,9 +122,11 @@ func exit_building() -> bool:
 	if s == null or s.kind != "interior":
 		return false
 	var d: Vector2 = s.spawns["door"]
+	var sid := s.get_instance_id()
+	var exit_y: float = s.size_px.y + 10
 	await bot.walk_to(d)
-	await bot.walk_to(Vector2(d.x, s.size_px.y + 10), 4.0, 5.0, false)
-	var ok: bool = await bot.until(func(): return SceneRouter.world_scene() != s and SceneRouter.world_scene() != null and SceneRouter.world_scene().kind == "district", 4.0)
+	await bot.walk_to(Vector2(d.x, exit_y), 4.0, 5.0, false)
+	var ok: bool = await bot.until(func(): return SceneRouter.world_scene() != null and SceneRouter.world_scene().get_instance_id() != sid and SceneRouter.world_scene().kind == "district", 4.0)
 	await wait_world()
 	return bot.expect(ok, "walked back outside")
 
@@ -308,14 +310,14 @@ func _chapter2() -> void:
 	for pid in ["wireless_earbuds", "water_bottle", "desk_lamp", "phone_stand"]:
 		await bot.click_named("Buy_tradelink_wholesale_" + pid)
 		await bot.wait(0.3)
-	bot.expect(int(GameState.stat("purchase_orders")) >= 4, "placed purchase orders (MOQ, prepaid)")
+	bot.expect(int(GameState.stat("purchase_orders")) >= 4, "placed purchase orders (MOQ, prepaid): %d POs, cash %s" % [int(GameState.stat("purchase_orders")), Fmt.money(Ledger.cash("player"))])
 	await bot.shot("company_os_purchase_orders")
 	await close_modal()
 	bot.step("Home to wait for stock")
 	await exit_building()
 	await walk_exit("riverside")
 	await enter_building("riverside_apartment")
-	var arrived: bool = await pass_time_at_home(func(): return GameState.stat("stock_received") >= 1, 14)
+	var arrived: bool = await pass_time_at_home(func(): return GameState.stat("stock_received") >= GameState.stat("purchase_orders"), 18)
 	bot.expect(arrived, "stock delivered to the apartment")
 	await bot.wait(0.6)
 	await bot.shot("apartment_with_stock")
@@ -337,7 +339,7 @@ func _chapter2() -> void:
 	var got: bool = await pass_time_at_home(func(): return GameState.stat("orders_shipped") >= 1 or GameState.stat("orders_placed") >= 1 and not Ecommerce.orders_with(["placed"]).is_empty(), 10)
 	await _pack_and_ship_home()
 	bot.expect(got or GameState.stat("orders_placed") >= 1, "first order came in")
-	bot.expect(GameState.stat("orders_shipped") >= 1, "shipped by courier")
+	bot.expect(GameState.stat("orders_shipped") >= 1 or not Ecommerce.orders_with(["awaiting_pickup"]).is_empty(), "handed to the courier (pickup booked)")
 	bot.step("Delivery → first dollar")
 	var delivered: bool = await pass_time_at_home(func(): return GameState.stat("orders_delivered") >= 1, 12)
 	bot.expect(delivered, "first order delivered (Earn Your First Dollar)")

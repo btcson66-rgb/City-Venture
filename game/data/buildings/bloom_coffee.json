@@ -10,7 +10,7 @@
  },
  "exterior": {
   "sprite": "bloom_block",
-  "x": 368,
+  "x": 396,
   "sign": "BLOOM COFFEE"
  },
  "interior": {
@@ -22,6 +22,19 @@
   "wall": "brick",
   "ambient": "cafe",
   "props": [
+   {
+    "sprite": "sconce",
+    "x": 290,
+    "y": 16,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "framed_art",
+    "x": 112,
+    "y": 12,
+    "wall": true
+   },
    {
     "sprite": "menu_board",
     "x": 40,

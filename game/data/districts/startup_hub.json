@@ -144,304 +144,934 @@
  "fillers": [
   {
    "sprite": "office_slab",
-   "x": 32
+   "x": 20
   },
   {
    "sprite": "horizon_labs",
-   "x": 576
+   "x": 608
   },
   {
    "sprite": "glass_tower",
-   "x": 928
+   "x": 987
   },
   {
    "sprite": "apartment_mid",
-   "x": 1104
+   "x": 1188
   },
   {
    "sprite": "office_slab",
-   "x": 1280
-  },
-  {
-   "sprite": "glass_tower",
-   "x": 1472
+   "x": 1376
   }
  ],
  "props": [
   {
-   "sprite": "lamp",
-   "x": 60,
-   "y": 298,
-   "glow": true,
+   "sprite": "tree_round_b",
+   "x": 28,
+   "y": 290,
    "solid": [
-    3,
-    40,
-    6,
+    28,
+    84,
+    8,
     6
-   ]
+   ],
+   "_gen": true
   },
   {
-   "sprite": "lamp",
-   "x": 260,
-   "y": 298,
-   "glow": true,
+   "sprite": "tree_round",
+   "x": 188,
+   "y": 290,
    "solid": [
-    3,
-    40,
-    6,
+    28,
+    84,
+    8,
     6
-   ]
+   ],
+   "_gen": true
   },
   {
-   "sprite": "lamp",
-   "x": 460,
-   "y": 298,
-   "glow": true,
+   "sprite": "tree_round",
+   "x": 348,
+   "y": 290,
    "solid": [
-    3,
-    40,
-    6,
+    28,
+    84,
+    8,
     6
-   ]
+   ],
+   "_gen": true
   },
   {
-   "sprite": "lamp",
-   "x": 660,
-   "y": 298,
-   "glow": true,
+   "sprite": "lamp_banner",
+   "x": 452,
+   "y": 312,
    "solid": [
-    3,
-    40,
     6,
-    6
-   ]
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_gen": true
   },
   {
-   "sprite": "lamp",
-   "x": 860,
-   "y": 298,
-   "glow": true,
+   "sprite": "lamp_banner",
+   "x": 612,
+   "y": 312,
    "solid": [
-    3,
-    40,
     6,
-    6
-   ]
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_gen": true
   },
   {
-   "sprite": "lamp",
-   "x": 1060,
-   "y": 298,
-   "glow": true,
+   "sprite": "lamp_banner",
+   "x": 772,
+   "y": 312,
    "solid": [
-    3,
-    40,
     6,
-    6
-   ]
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_gen": true
   },
   {
-   "sprite": "lamp",
-   "x": 1260,
-   "y": 298,
-   "glow": true,
+   "sprite": "lamp_banner",
+   "x": 932,
+   "y": 312,
    "solid": [
-    3,
-    40,
     6,
-    6
-   ]
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_gen": true
   },
   {
-   "sprite": "lamp",
-   "x": 1460,
-   "y": 298,
-   "glow": true,
+   "sprite": "tree_round_b",
+   "x": 988,
+   "y": 290,
    "solid": [
-    3,
-    40,
-    6,
+    28,
+    84,
+    8,
     6
-   ]
+   ],
+   "_gen": true
   },
   {
-   "sprite": "lamp",
-   "x": 1660,
-   "y": 298,
-   "glow": true,
+   "sprite": "tree_round",
+   "x": 1148,
+   "y": 290,
    "solid": [
-    3,
-    40,
-    6,
+    28,
+    84,
+    8,
     6
-   ]
+   ],
+   "_gen": true
   },
   {
-   "sprite": "business_board",
-   "x": 396,
-   "y": 556,
+   "sprite": "tree_round",
+   "x": 1308,
+   "y": 290,
+   "solid": [
+    28,
+    84,
+    8,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "lamp_banner",
+   "x": 1412,
+   "y": 312,
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_gen": true
+  },
+  {
+   "sprite": "tree_round_b",
+   "x": 1468,
+   "y": 290,
+   "solid": [
+    28,
+    84,
+    8,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "lamp_banner",
+   "x": 1572,
+   "y": 312,
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_gen": true
+  },
+  {
+   "sprite": "tree_round",
+   "x": 1628,
+   "y": 290,
+   "solid": [
+    28,
+    84,
+    8,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "lamp_banner",
+   "x": 1732,
+   "y": 312,
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 28,
+   "y": 370,
    "solid": [
     2,
-    40,
-    36,
-    8
+    11,
+    4,
+    3
    ],
-   "interact": {
-    "label": "Business Board",
-    "action": "business_board"
-   }
+   "_gen": true
   },
   {
-   "sprite": "umbrella_table",
-   "x": 440,
-   "y": 340,
+   "sprite": "bollard",
+   "x": 64,
+   "y": 370,
    "solid": [
-    8,
-    26,
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 136,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 172,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 208,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 244,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 280,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 352,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 388,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 424,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 460,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 496,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 568,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 604,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 640,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 676,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 748,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 784,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 820,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 856,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 928,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 964,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 1000,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 1036,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 1108,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 1144,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 1180,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 1216,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 1288,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 1324,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 1360,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 1396,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 1432,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 1504,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 1540,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 1576,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 1612,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 1648,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 1684,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 1720,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 1756,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "planter_small",
+   "x": 282,
+   "y": 320,
+   "solid": [
+    1,
+    14,
+    22,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "planter_small",
+   "x": 340,
+   "y": 320,
+   "solid": [
+    1,
+    14,
+    22,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "umbrella_table_blue",
+   "x": 540,
+   "y": 328,
+   "solid": [
+    10,
+    30,
     16,
     6
-   ]
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "umbrella_table_blue",
+   "x": 580,
+   "y": 328,
+   "solid": [
+    10,
+    30,
+    16,
+    6
+   ],
+   "_gen": true
   },
   {
    "sprite": "cafe_board",
-   "x": 520,
-   "y": 334,
+   "x": 486,
+   "y": 324,
    "solid": [
     2,
-    14,
-    10,
+    16,
+    12,
     4
-   ]
+   ],
+   "_gen": true
   },
   {
-   "sprite": "bike",
-   "x": 200,
-   "y": 346,
+   "sprite": "planter_small",
+   "x": 458,
+   "y": 322,
    "solid": [
-    2,
+    1,
     14,
-    28,
-    4
-   ]
-  },
-  {
-   "sprite": "bike",
-   "x": 236,
-   "y": 346,
-   "solid": [
-    2,
-    14,
-    28,
-    4
-   ]
-  },
-  {
-   "sprite": "digital_sign",
-   "x": 720,
-   "y": 326,
-   "solid": [
-    6,
-    32,
-    8,
+    22,
     6
-   ]
+   ],
+   "_gen": true
   },
   {
-   "sprite": "digital_sign",
-   "x": 1240,
-   "y": 326,
+   "sprite": "planter_small",
+   "x": 848,
+   "y": 320,
    "solid": [
-    6,
-    32,
-    8,
+    1,
+    14,
+    22,
     6
-   ]
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "planter_small",
+   "x": 906,
+   "y": 320,
+   "solid": [
+    1,
+    14,
+    22,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "planter_small",
+   "x": 1106,
+   "y": 324,
+   "solid": [
+    1,
+    12,
+    16,
+    5
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "trash_bin",
+   "x": 1305,
+   "y": 324,
+   "solid": [
+    1,
+    12,
+    16,
+    5
+   ],
+   "_gen": true
   },
   {
    "sprite": "direction_sign",
    "x": 40,
-   "y": 326,
+   "y": 308,
    "solid": [
-    11,
-    34,
+    18,
+    44,
     6,
     4
    ],
-   "label": "← RIVERSIDE"
+   "label": "← RIVERSIDE",
+   "_gen": true
   },
   {
-   "sprite": "trash_bin",
-   "x": 910,
-   "y": 344,
+   "sprite": "digital_sign",
+   "x": 936,
+   "y": 304,
    "solid": [
-    1,
-    12,
-    10,
-    4
+    4,
+    38,
+    14,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "business_board",
+   "x": 396,
+   "y": 552,
+   "interact": {
+    "label": "Business Board",
+    "action": "business_board"
+   },
+   "_base": 608,
+   "solid": [
+    2,
+    44,
+    40,
+    8
    ]
   },
   {
    "sprite": "planter",
    "x": 300,
-   "y": 600,
+   "y": 594,
+   "_base": 624,
    "solid": [
     1,
-    14,
-    30,
+    18,
+    34,
     8
    ]
   },
   {
    "sprite": "planter",
    "x": 500,
-   "y": 600,
+   "y": 594,
+   "_base": 624,
    "solid": [
     1,
-    14,
-    30,
+    18,
+    34,
     8
    ]
   },
   {
    "sprite": "planter",
    "x": 1500,
-   "y": 600,
+   "y": 594,
+   "_base": 624,
    "solid": [
     1,
-    14,
-    30,
+    18,
+    34,
     8
    ]
   },
   {
    "sprite": "bench",
    "x": 600,
-   "y": 560,
+   "y": 558,
+   "_base": 580,
    "solid": [
     1,
-    10,
-    30,
-    6
+    12,
+    34,
+    7
    ]
   },
   {
    "sprite": "bench",
    "x": 1300,
-   "y": 560,
+   "y": 558,
+   "_base": 580,
    "solid": [
     1,
-    10,
-    30,
-    6
+    12,
+    34,
+    7
    ]
   },
   {
    "sprite": "billboard",
    "x": 1560,
-   "y": 520,
+   "y": 516,
+   "_base": 576,
    "solid": [
-    28,
-    50,
+    30,
+    54,
     8,
     4
    ]
@@ -449,21 +1079,23 @@
   {
    "sprite": "flower_bed",
    "x": 980,
-   "y": 620,
+   "y": 618,
+   "_base": 636,
    "solid": [
     0,
-    6,
-    32,
+    8,
+    36,
     8
    ]
   },
   {
    "sprite": "tree_round",
    "x": 120,
-   "y": 560,
+   "y": 516,
+   "_base": 608,
    "solid": [
-    12,
-    38,
+    28,
+    84,
     8,
     6
    ]
@@ -471,10 +1103,11 @@
   {
    "sprite": "tree_round",
    "x": 700,
-   "y": 560,
+   "y": 516,
+   "_base": 608,
    "solid": [
-    12,
-    38,
+    28,
+    84,
     8,
     6
    ]
@@ -482,10 +1115,11 @@
   {
    "sprite": "tree_round",
    "x": 900,
-   "y": 560,
+   "y": 516,
+   "_base": 608,
    "solid": [
-    12,
-    38,
+    28,
+    84,
     8,
     6
    ]
@@ -493,10 +1127,11 @@
   {
    "sprite": "tree_round",
    "x": 1400,
-   "y": 560,
+   "y": 516,
+   "_base": 608,
    "solid": [
-    12,
-    38,
+    28,
+    84,
     8,
     6
    ]
@@ -504,10 +1139,11 @@
   {
    "sprite": "tree_round",
    "x": 1650,
-   "y": 560,
+   "y": 516,
+   "_base": 608,
    "solid": [
-    12,
-    38,
+    28,
+    84,
     8,
     6
    ]
@@ -515,10 +1151,11 @@
   {
    "sprite": "tree_round_b",
    "x": 180,
-   "y": 640,
+   "y": 596,
+   "_base": 688,
    "solid": [
-    12,
-    38,
+    28,
+    84,
     8,
     6
    ]
@@ -526,10 +1163,11 @@
   {
    "sprite": "tree_round_b",
    "x": 820,
-   "y": 640,
+   "y": 596,
+   "_base": 688,
    "solid": [
-    12,
-    38,
+    28,
+    84,
     8,
     6
    ]
@@ -537,10 +1175,11 @@
   {
    "sprite": "tree_round_b",
    "x": 1720,
-   "y": 640,
+   "y": 596,
+   "_base": 688,
    "solid": [
-    12,
-    38,
+    28,
+    84,
     8,
     6
    ]
@@ -548,38 +1187,161 @@
   {
    "sprite": "lamp",
    "x": 350,
-   "y": 592,
+   "y": 568,
    "glow": true,
+   "_base": 640,
    "solid": [
-    3,
-    40,
     6,
-    6
+    66,
+    5,
+    4
    ]
   },
   {
    "sprite": "lamp",
    "x": 850,
-   "y": 592,
+   "y": 568,
    "glow": true,
+   "_base": 640,
    "solid": [
-    3,
-    40,
     6,
-    6
+    66,
+    5,
+    4
    ]
   },
   {
    "sprite": "lamp",
    "x": 1350,
-   "y": 592,
+   "y": 568,
    "glow": true,
+   "_base": 640,
    "solid": [
-    3,
-    40,
     6,
-    6
+    66,
+    5,
+    4
    ]
+  },
+  {
+   "sprite": "hedge",
+   "x": 8,
+   "y": 708,
+   "solid": [
+    0,
+    12,
+    48,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "hedge",
+   "x": 188,
+   "y": 708,
+   "solid": [
+    0,
+    12,
+    48,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "hedge",
+   "x": 368,
+   "y": 708,
+   "solid": [
+    0,
+    12,
+    48,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "hedge",
+   "x": 548,
+   "y": 708,
+   "solid": [
+    0,
+    12,
+    48,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "hedge",
+   "x": 728,
+   "y": 708,
+   "solid": [
+    0,
+    12,
+    48,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "hedge",
+   "x": 908,
+   "y": 708,
+   "solid": [
+    0,
+    12,
+    48,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "hedge",
+   "x": 1088,
+   "y": 708,
+   "solid": [
+    0,
+    12,
+    48,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "hedge",
+   "x": 1268,
+   "y": 708,
+   "solid": [
+    0,
+    12,
+    48,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "hedge",
+   "x": 1448,
+   "y": 708,
+   "solid": [
+    0,
+    12,
+    48,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "hedge",
+   "x": 1628,
+   "y": 708,
+   "solid": [
+    0,
+    12,
+    48,
+    6
+   ],
+   "_gen": true
   }
  ],
  "metro": {

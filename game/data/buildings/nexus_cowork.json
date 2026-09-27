@@ -10,7 +10,7 @@
  },
  "exterior": {
   "sprite": "nexus_cowork",
-  "x": 224,
+  "x": 226,
   "sign": "NEXUS CO-WORK"
  },
  "interior": {
@@ -22,6 +22,18 @@
   "wall": "white_modern",
   "ambient": "office",
   "props": [
+   {
+    "sprite": "framed_art",
+    "x": 250,
+    "y": 12,
+    "wall": true
+   },
+   {
+    "sprite": "framed_art_b",
+    "x": 100,
+    "y": 12,
+    "wall": true
+   },
    {
     "sprite": "window_day",
     "x": 20,

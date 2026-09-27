@@ -356,7 +356,10 @@ static func lambda_day(l: Dictionary) -> float:
 	var pf := pow(float(p["ref_price"]) / price, float(p["elasticity"]))
 	pf = clampf(pf, 0.05, 3.0)
 	var photo_f := float(mk().get("photo_factor", {}).get(l.get("photo", "self"), 1.0))
-	return float(p["base_daily_demand"]) * pf * rating_factor(l) * photo_f * ad_factor(l) * demand_mult(l["product"])
+	var fresh := 1.0
+	if Clock.now() - int(l.get("created", 0)) < int(mk().get("new_listing_days", 3)) * Clock.DAY:
+		fresh = float(mk().get("new_listing_boost", 1.6))   # marketplaces promote new listings
+	return float(p["base_daily_demand"]) * pf * rating_factor(l) * photo_f * ad_factor(l) * demand_mult(l["product"]) * fresh
 
 
 static func on_hour(t: int, h: int) -> void:

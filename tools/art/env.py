@@ -210,8 +210,10 @@ WALLS = ["plaster_warm", "brick", "navy_panel", "wood_panel", "marble_wall", "wh
 
 
 def gen_tiles(out):
-    names = [n for n, _ in GROUND_TILES] + ["floor_" + f for f in FLOORS] + ["wall_" + w for w in WALLS]
-    fns = [f for _, f in GROUND_TILES] + [(lambda k=f: tile_floor(k)) for f in FLOORS] + [(lambda k=w: tile_wall(k)) for w in WALLS]
+    import street
+    gt = street.ground_tiles()
+    names = [n for n, _ in gt] + ["floor_" + f for f in FLOORS] + ["wall_" + w for w in WALLS]
+    fns = [f for _, f in gt] + [(lambda k=f: street.t_floor(k)) for f in FLOORS] + [(lambda k=w: street.t_wall(k)) for w in WALLS]
     cols = 8
     rows = (len(names) + cols - 1) // cols
     atlas = new(cols * T, rows * T)
@@ -1442,11 +1444,16 @@ def gen_products(out):
 
 
 def generate(out):
+    import facades
+    import street
     gen_tiles(out)
-    gen_buildings(out)
-    for k, fn in STREET_PROPS.items():
+    facades.generate(out)
+    for k, fn in street.street_props().items():
         save(fn(), f"{out}/props/{k}.png")
-    for k, fn in INTERIOR_PROPS.items():
+    import interiors2
+    props = dict(INTERIOR_PROPS)
+    props.update(interiors2.interior_props())
+    for k, fn in props.items():
         save(fn(), f"{out}/interiors/{k}.png")
     gen_vehicles(out)
     gen_products(out)

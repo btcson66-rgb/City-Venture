@@ -11,7 +11,7 @@
  },
  "exterior": {
   "sprite": "suite_building",
-  "x": 768,
+  "x": 816,
   "sign": "22 FOUNDERS LANE"
  },
  "interior": {
@@ -24,6 +24,12 @@
   "ambient": "office",
   "property": "suite_2b",
   "props": [
+   {
+    "sprite": "framed_art",
+    "x": 120,
+    "y": 12,
+    "wall": true
+   },
    {
     "sprite": "whiteboard",
     "x": 40,

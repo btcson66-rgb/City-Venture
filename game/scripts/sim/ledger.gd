@@ -87,9 +87,13 @@ static func balance_at(entity: String, acct: String, t: int) -> float:
 ## Sum of movement per account for entries with t0 <= t < t1.
 static func movements(entity: String, t0: int, t1: int) -> Dictionary:
 	var out := {}
-	for e in _L()["journal"]:
+	var j: Array = _L()["journal"]
+	for i in range(j.size() - 1, -1, -1):
+		var e: Dictionary = j[i]
 		var t := int(e["t"])
-		if t < t0 or t >= t1 or e["entity"] != entity:
+		if t < t0:
+			break
+		if t >= t1 or e["entity"] != entity:
 			continue
 		for l in e["lines"]:
 			out[l["acct"]] = float(out.get(l["acct"], 0.0)) + float(l.get("dr", 0.0)) - float(l.get("cr", 0.0))

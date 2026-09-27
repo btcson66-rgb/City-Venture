@@ -104,6 +104,9 @@ func until(pred: Callable, timeout_s := 10.0) -> bool:
 
 # ------------------------------------------------------------------ screenshots
 func shot(name: String) -> void:
+	if DisplayServer.get_name() == "headless":
+		log_line("  (shot %s skipped: headless)" % name)
+		return
 	await RenderingServer.frame_post_draw
 	var img := get_viewport().get_texture().get_image()
 	if img == null or img.is_empty():
@@ -157,6 +160,12 @@ func button_text(txt: String) -> Button:
 func click(b: Button) -> bool:
 	if b == null:
 		return false
+	var sc: Node = b.get_parent()
+	while sc != null and not sc is ScrollContainer:
+		sc = sc.get_parent()
+	if sc != null:
+		(sc as ScrollContainer).ensure_control_visible(b)
+		await frames(3)
 	var center := b.get_global_rect().get_center()
 	var screen := get_viewport().get_final_transform() * center
 	var mv := InputEventMouseMotion.new()
@@ -366,14 +375,24 @@ func _shots() -> void:
 	await shot("main_menu")
 	GameState.new_game({"name": "Shot Tour", "seed": 3})
 	for d in ["riverside", "startup_hub", "civic_center", "financial"]:
+		for b in DataDB.districts[d]["buildings"]:
+			SceneRouter._enter("district", d, "door_" + b, "down")
+			await wait(1.0)
+			await shot("district_%s_%s" % [d, b])
 		SceneRouter._enter("district", d, "metro", "down")
-		await wait(1.0)
-		await shot("district_" + d)
+		await wait(0.6)
+		await shot("district_" + d + "_south")
 	for b in DataDB.buildings:
 		SceneRouter._enter("interior", b, "door", "up")
 		await wait(0.8)
 		await shot("interior_" + b)
-	Clock.advance(9 * 60)
+	Clock.advance(5 * 60)
 	SceneRouter._enter("district", "riverside", "door_bloom_coffee", "down")
 	await wait(1.0)
+	await shot("riverside_dusk")
+	Clock.advance(4 * 60)
+	await wait(0.5)
 	await shot("riverside_night")
+	SceneRouter._enter("district", "startup_hub", "door_nexus_cowork", "down")
+	await wait(1.0)
+	await shot("startup_hub_night")
