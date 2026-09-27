@@ -1368,7 +1368,29 @@ def v_front(kind, back=False):
     return body, det
 
 
+def metro_train():
+    w, h = 124, 40
+    body = canvas(w, h)
+    rect(body, 2, 6, w - 3, h - 8, (214, 220, 230))
+    hline(body, 2, w - 3, 6, (244, 248, 252))
+    rect(body, 0, 10, 2, h - 10, (200, 206, 216))
+    rect(body, w - 3, 10, w - 1, h - 10, (200, 206, 216))
+    for x in range(8, w - 12, 14):
+        rect(body, x, 11, x + 10, 20, (46, 62, 90))
+        hline(body, x + 1, x + 9, 12, (140, 180, 220))
+        rect(body, x + 1, 13, x + 9, 19, (255, 214, 150))
+    rect(body, 2, 23, w - 3, 25, (46, 98, 196))
+    hline(body, 2, w - 3, 27, (224, 104, 83))
+    for x in (w // 2 - 6, w // 2 + 2):
+        rect(body, x, 12, x + 3, h - 9, (70, 80, 100))
+    rect(body, 2, h - 8, w - 3, h - 6, (60, 64, 76))
+    for cx in (14, 30, w - 30, w - 14):
+        rect(body, cx - 4, h - 6, cx + 4, h - 3, (30, 30, 36))
+    return body
+
+
 def gen_vehicles(out):
+    save(metro_train(), f"{out}/vehicles/metro_train.png")
     for k in ("sedan", "compact", "taxi", "van", "bus"):
         b, d = v_side(k)
         save(b, f"{out}/vehicles/{k}_side_body.png"); save(d, f"{out}/vehicles/{k}_side_detail.png")

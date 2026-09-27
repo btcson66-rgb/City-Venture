@@ -19,7 +19,10 @@ func run() -> void:
 	await _chapter1()
 	await _chapter2()
 	await _chapter3()
-	await _month()
+	if bot.video_mode:
+		await _video_epilogue()
+	else:
+		await _month()
 	await _save_load()
 	bot.step("Summary")
 	var be := GameState.business_entity()
@@ -477,6 +480,28 @@ func _month() -> void:
 	await bot.wait(0.5)
 	await bot.shot("company_os_finance_july")
 	await close_modal()
+
+
+func _video_epilogue() -> void:
+	bot.step("A working day at Suite 2B (video epilogue)")
+	# stock in the office, a courier run, and a look at the numbers
+	if bot.button_named("Close") != null:
+		await close_modal()
+	await bot.walk_to(Vector2(1000, 450), 6.0, 20.0)
+	await bot.wait(1.5)
+	await bot.shot("startup_hub_afternoon")
+	await walk_exit("riverside")
+	await enter_building("riverside_apartment")
+	await pass_time_at_home(func(): return Clock.hour() >= 19 or Clock.hour() < 6, 4)
+	await _pack_and_ship_home()
+	await open_os_at(func(n): return n.action == "open_company_os", "laptop")
+	await bot.click_named("Tab_finance")
+	await bot.wait(2.5)
+	await bot.click_named("Tab_sales")
+	await bot.wait(2.5)
+	await close_modal()
+	await pass_time_at_home(func(): return false, 1, true)
+	await bot.wait(1.0)
 
 
 func _save_load() -> void:

@@ -100,6 +100,20 @@ static func movements(entity: String, t0: int, t1: int) -> Dictionary:
 	return out
 
 
+## Operating cash flow since t0 (ignores opening balances and owner capital moves).
+static func operating_cash_since(entity: String, t0: int) -> float:
+	var v := 0.0
+	var j: Array = _L()["journal"]
+	for i in range(j.size() - 1, -1, -1):
+		var e: Dictionary = j[i]
+		if int(e["t"]) < t0:
+			break
+		if e["entity"] != entity or str(e.get("source", {}).get("type", "")) in ["opening", "capital", "transfer"]:
+			continue
+		v += entry_cash(e)
+	return v
+
+
 static func lifetime_gross_profit(entity: String) -> float:
 	var b: Dictionary = _L()["balances"].get(entity, {})
 	return -float(b.get("revenue", 0.0)) - float(b.get("refunds", 0.0)) - float(b.get("cogs", 0.0))

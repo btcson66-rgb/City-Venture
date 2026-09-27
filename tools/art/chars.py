@@ -776,16 +776,90 @@ def p_hair_masks(style):
     return back, front
 
 
+def _lock(img, pts, rng, cover=None):
+    """Paint one hair lock (polygon) with a left-lit gradient, dark tip and strand line."""
+    m = Mask(PW, PH).poly(pts)
+    rows = {}
+    for x, y in m.pixels():
+        rows.setdefault(y, []).append(x)
+    ys = sorted(rows)
+    if not ys:
+        return m
+    y0, y1 = ys[0], ys[-1]
+    tip_y = max(pts, key=lambda p: abs(p[1] - (pts[0][1] + pts[1][1]) / 2))[1]
+    for y, xs in rows.items():
+        a, b = min(xs), max(xs)
+        for x in xs:
+            t = (x - a) / max(1, b - a)
+            if t < 0.3:
+                g = 238
+            elif t < 0.7:
+                g = 208
+            else:
+                g = 168
+            # darker toward the tip
+            dt = abs(y - tip_y) / max(1, (y1 - y0))
+            if dt < 0.25:
+                g = int(g * 0.86)
+            put(img, x, y, (g, g, g, 255))
+    return m
+
+
+def _lock_set(style, rng):
+    L = []
+    if style == "messy":
+        crown = (32, 20)
+        import math
+        for i, ang in enumerate([200, 222, 244, 266, 288, 310, 334]):
+            a = math.radians(ang + rng.uniform(-6, 6))
+            r0, r1 = 12, 22 + rng.randint(0, 4)
+            bx, by = crown[0] + math.cos(a) * r0, crown[1] + math.sin(a) * r0
+            tx, ty = crown[0] + math.cos(a) * r1, crown[1] + math.sin(a) * r1 - 2
+            px, py = -math.sin(a) * 5, math.cos(a) * 5
+            L.append([(bx - px, by - py), (bx + px, by + py), (tx, ty)])
+        for i, (x, tip) in enumerate([(17, 30), (24, 29), (31, 27), (38, 30), (45, 31)]):
+            L.append([(x - 4, 14), (x + 5, 14), (x + rng.randint(-3, 2), tip)])
+        L.append([(12, 16), (18, 16), (11, 36)])
+        L.append([(46, 16), (52, 16), (53, 36)])
+    elif style in ("short_neat", "side_part"):
+        part = 24 if style == "side_part" else 30
+        for i, x in enumerate(range(14, 50, 5)):
+            tip_y = 25 if style == "short_neat" else (31 if x < part + 6 else 22)
+            L.append([(x - 3, 11), (x + 4, 11), (x - (4 if x < part else -3), tip_y)])
+        L.append([(12, 14), (17, 14), (12, 33)])
+        L.append([(47, 14), (52, 14), (51, 31)])
+    elif style in ("bob", "long", "ponytail", "bun"):
+        for x in range(16, 49, 5):
+            L.append([(x - 3, 12), (x + 4, 12), (x + rng.randint(-1, 1), 25 + rng.randint(0, 2))])
+        if style in ("bob", "long"):
+            L.append([(9, 18), (17, 18), (11, 50)])
+            L.append([(46, 18), (54, 18), (52, 50)])
+    return L
+
+
 def draw_p_hair(style):
+    import random as _r
+    rng = _r.Random(hash(style) % 997)
     b_img = psheet(1)
     f_img = psheet(1)
     bm, fm = p_hair_masks(style)
-    shaded(b_img, bm, shade_ramp(GRAY_HAIR, 0.85), 0, 0, sh_depth=2)
-    shaded(f_img, fm, GRAY_HAIR, 0, 0, sh_depth=2)
-    for x, y in list(fm.pixels()):
-        if (x * 5 + y * 2) % 9 == 0 and fm.get(x, y - 1) and fm.get(x, y + 2) and fm.get(x - 1, y) and fm.get(x + 1, y):
-            put(f_img, x, y, GRAY_HAIR[1])
-            put(f_img, x, y + 1, GRAY_HAIR[1])
+    shaded(b_img, bm, shade_ramp(GRAY_HAIR, 0.8), 0, 0, sh_depth=2)
+    # dark under-layer gives volume behind the locks
+    shaded(f_img, fm, ((64, 64, 64), (150, 150, 150), (182, 182, 182), (214, 214, 214)), 0, 0, sh_depth=2)
+    union = fm.copy()
+    for pts in _lock_set(style, rng):
+        union.union(_lock(f_img, pts, rng))
+    # outline the combined silhouette
+    for x, y in list(union.pixels()):
+        if any(not union.get(x + dx, y + dy) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))):
+            put(f_img, x, y, (58, 58, 58, 255))
+    # glossy highlight ring across the crown
+    if style != "buzz":
+        for x in range(18, 46):
+            y = 9 + int(((x - 32) / 14.0) ** 2 * 4)
+            for dy in (0, 1):
+                if union.get(x, y + dy) and (x + dy) % 5 != 0:
+                    put(f_img, x, y + dy, (252, 252, 252, 255))
     return b_img, f_img
 
 

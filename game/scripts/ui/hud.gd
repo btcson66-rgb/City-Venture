@@ -144,7 +144,7 @@ func _process(_d: float) -> void:
 		var day0 := Clock.now() - Clock.minute_of_day()
 		_delta = 0.0
 		for ent in (["player", GameState.business_entity()] if GameState.business_entity() != "player" else ["player"]):
-			_delta += float(Ledger.movements(ent, day0, Clock.now() + 1).get("cash", 0.0))
+			_delta += Ledger.operating_cash_since(ent, day0)
 	var delta := _delta
 	today_label.text = ("▲ " if delta >= 0 else "▼ ") + Fmt.money(absf(delta)) + " today"
 	today_label.add_theme_color_override("font_color", Art.C_GREEN if delta >= 0 else Art.C_RED)

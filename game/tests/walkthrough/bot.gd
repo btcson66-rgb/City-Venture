@@ -14,6 +14,7 @@ var step_name := ""
 var quit_at_end := true
 var t0 := 0
 var popup_handler: Callable
+var video_mode := false
 
 
 func _ready() -> void:
@@ -23,6 +24,8 @@ func _ready() -> void:
 			out_dir = a.substr(6)
 		if a == "--no-quit":
 			quit_at_end = false
+		if a == "--video":
+			video_mode = true
 	if out_dir == "":
 		out_dir = ProjectSettings.globalize_path("user://bot")
 	DirAccess.make_dir_recursive_absolute(out_dir + "/screenshots")

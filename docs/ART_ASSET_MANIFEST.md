@@ -4,6 +4,20 @@ Style: **NEO-CIVIC PIXEL REALISM** (Handoff §37–§50, §83–§85; concept bo
 Grid: 16 px environment tiles. Characters are 32×48 frames. Nearest-neighbor scaling at 2×/3× (base 640×360).
 Palette anchors: see `CITY_VENTURE_SPEC_READBACK.md` §F. Placeholders come from `tools/art/gen_placeholders.py` into `game/assets/`, one file per row below, so final art replaces them 1:1 by path.
 
+### Status after Art Pass v2 (feedback: "too simple — needs design sense, use the boards")
+
+| Area | Generator | What changed vs v1 | Status |
+|------|-----------|--------------------|--------|
+| Building facades | `tools/art/facades.py` | Oblique 3/4 volume (side wall + roof plane), rooftop greenery/equipment/terraces, glass with lit interiors + sky reflections, floor slabs, canopies with downlights, awnings, sign bands, brand pylons/banners, wall lamps, night light overlays | Placeholder (GEN v2) |
+| Street layer | `tools/art/street.py`, `tools/gen_districts.py` | Stone pavers, granite curbs, textured asphalt, 64×92 clustered trees with grates, banner lamps, curb bollards, planters, café terraces, bus shelter, wayfinding, hedges, river railing; facade contact shadows | Placeholder (GEN v2) |
+| Interiors | `tools/art/interiors2.py` + `interior.gd` | Detailed furniture, wainscoting, crown moulding, floor AO, window light spill, furniture contact shadows, framed art, sconces | Placeholder (GEN v2) |
+| Portraits | `tools/art/chars.py` | Lock-based hair with glossy highlight ring | Placeholder (GEN v2) |
+| Character sprites | `tools/art/chars.py` | Unchanged since v1 besides hair spikes — next art task | Placeholder (GEN v1) |
+| UI kit | `tools/art/ui.py` | Board A gradient panels, lit borders, gradient buttons/tabs | Placeholder (GEN v2) |
+
+None of these are final art. They are deliberately built on the final grid, scale and palette so a
+pixel artist can replace each PNG 1:1.
+
 Placeholder column legend:
 - **GEN** — generated placeholder is in the build. It follows the grid, scale and palette, but it is not final art.
 - **—** — no placeholder yet (not needed by the P0 slice).
