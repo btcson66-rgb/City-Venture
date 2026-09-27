@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="test_compile" tests="1" failures="0">
+    <testcase classname="test_compile" name="test_all_scripts_compile" time="0.114"></testcase>
+  </testsuite>
+  <testsuite name="test_economy" tests="13" failures="0">
+    <testcase classname="test_economy" name="test_data_is_valid" time="0.001"></testcase>
+    <testcase classname="test_economy" name="test_opening_balance_and_double_entry" time="0.000"></testcase>
+    <testcase classname="test_economy" name="test_moq_and_cash_checks" time="0.000"></testcase>
+    <testcase classname="test_economy" name="test_po_arrives_into_inventory" time="0.031"></testcase>
+    <testcase classname="test_economy" name="test_listing_requires_stock_and_price_moves_demand" time="0.028"></testcase>
+    <testcase classname="test_economy" name="test_order_to_delivery_profit_is_not_cash" time="0.057"></testcase>
+    <testcase classname="test_economy" name="test_weekly_payout_moves_balance_to_cash" time="0.086"></testcase>
+    <testcase classname="test_economy" name="test_dropoff_at_postpoint" time="0.023"></testcase>
+    <testcase classname="test_economy" name="test_return_refund_and_replacement" time="0.051"></testcase>
+    <testcase classname="test_economy" name="test_replacement_needs_stock_of_that_product" time="0.047"></testcase>
+    <testcase classname="test_economy" name="test_month_close_report" time="0.366"></testcase>
+    <testcase classname="test_economy" name="test_rent_due_day_14" time="0.115"></testcase>
+    <testcase classname="test_economy" name="test_seller_cap_pauses_until_registration" time="0.024"></testcase>
+  </testsuite>
+  <testsuite name="test_systems" tests="12" failures="0">
+    <testcase classname="test_systems" name="test_registration_creates_company_and_moves_books" time="0.020"></testcase>
+    <testcase classname="test_systems" name="test_invalid_company_names" time="0.000"></testcase>
+    <testcase classname="test_systems" name="test_contract_counter_deliver_and_net30" time="0.272"></testcase>
+    <testcase classname="test_systems" name="test_contract_needs_registered_company" time="0.000"></testcase>
+    <testcase classname="test_systems" name="test_supplier_price_increase_event" time="0.031"></testcase>
+    <testcase classname="test_systems" name="test_every_event_changes_something" time="0.001"></testcase>
+    <testcase classname="test_systems" name="test_low_cash_warning_is_not_game_over" time="0.022"></testcase>
+    <testcase classname="test_systems" name="test_reduce_spending_option" time="0.000"></testcase>
+    <testcase classname="test_systems" name="test_story_chapter_one_progression" time="0.008"></testcase>
+    <testcase classname="test_systems" name="test_save_load_round_trip" time="0.036"></testcase>
+    <testcase classname="test_systems" name="test_character_options_are_cosmetic_only" time="0.000"></testcase>
+    <testcase classname="test_systems" name="test_crypto_not_available_in_year_one" time="0.000"></testcase>
+  </testsuite>
+</testsuites>

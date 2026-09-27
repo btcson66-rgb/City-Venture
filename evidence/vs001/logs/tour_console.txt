@@ -1,0 +1,46 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+ALSA lib conf.c:5204:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+ALSA lib conf.c:5204:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+ALSA lib conf.c:5204:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5727:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2721:(snd_pcm_open_noupdate) Unknown PCM default
+ERROR: Condition "status < 0" is true. Returning: ERR_CANT_OPEN
+   at: init_output_device (drivers/alsa/audio_driver_alsa.cpp:90)
+WARNING: All audio drivers failed, falling back to the dummy driver.
+     at: initialize (servers/audio_server.cpp:244)
+
+   0.3s   shot 01_main_menu.png
+   1.1s   shot 02_creator.png
+   7.3s [Sun, Jun 1 2:00 PM]   shot 03_arrival.png
+   8.3s [Sun, Jun 1 2:01 PM]   shot 04_district_riverside_riverside_apartment.png
+   9.4s [Sun, Jun 1 2:03 PM]   shot 05_district_riverside_bloom_coffee.png
+  10.4s [Sun, Jun 1 2:04 PM]   shot 06_district_riverside_postpoint_riverside.png
+  10.9s [Sun, Jun 1 2:05 PM]   shot 07_district_riverside_south.png
+  12.0s [Sun, Jun 1 2:06 PM]   shot 08_district_startup_hub_nexus_cowork.png
+  13.0s [Sun, Jun 1 2:08 PM]   shot 09_district_startup_hub_byte_and_bean.png
+  14.0s [Sun, Jun 1 2:10 PM]   shot 10_district_startup_hub_small_office.png
+  14.6s [Sun, Jun 1 2:10 PM]   shot 11_district_startup_hub_south.png
+  15.6s [Sun, Jun 1 2:12 PM]   shot 12_district_civic_center_city_hall.png
+  16.2s [Sun, Jun 1 2:13 PM]   shot 13_district_civic_center_south.png
+  17.3s [Sun, Jun 1 2:14 PM]   shot 14_district_financial_nexus_bank.png
+  17.9s [Sun, Jun 1 2:15 PM]   shot 15_district_financial_south.png
+  18.3s [Sun, Jun 1 2:15 PM]   shot 16_city_map.png
+  18.7s [Sun, Jun 1 2:15 PM]   shot 17_world_map.png
+  19.5s [Sun, Jun 1 2:16 PM]   shot 18_interior_bloom_coffee.png
+  20.3s [Sun, Jun 1 2:17 PM]   shot 19_interior_byte_and_bean.png
+  21.1s [Sun, Jun 1 2:18 PM]   shot 20_interior_city_hall.png
+  21.9s [Sun, Jun 1 2:19 PM]   shot 21_interior_nexus_bank.png
+  22.7s [Sun, Jun 1 2:21 PM]   shot 22_interior_nexus_cowork.png
+  23.5s [Sun, Jun 1 2:22 PM]   shot 23_interior_postpoint_riverside.png
+  24.4s [Sun, Jun 1 2:23 PM]   shot 24_interior_riverside_apartment.png
+  25.1s [Sun, Jun 1 2:24 PM]   shot 25_interior_small_office.png
+  26.2s [Sun, Jun 1 7:26 PM]   shot 26_riverside_dusk.png
+  26.7s [Sun, Jun 1 11:26 PM]   shot 27_riverside_night.png
+  27.7s [Sun, Jun 1 11:28 PM]   shot 28_startup_hub_night.png
+  27.7s [Sun, Jun 1 11:28 PM] BOT FINISHED — 0 failure(s) · 27.7s real

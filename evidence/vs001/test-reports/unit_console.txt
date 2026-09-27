@@ -1,0 +1,31 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+  PASS test_compile.gd::test_all_scripts_compile (114 ms)
+  PASS test_economy.gd::test_data_is_valid (1 ms)
+  PASS test_economy.gd::test_opening_balance_and_double_entry (0 ms)
+  PASS test_economy.gd::test_moq_and_cash_checks (0 ms)
+  PASS test_economy.gd::test_po_arrives_into_inventory (31 ms)
+  PASS test_economy.gd::test_listing_requires_stock_and_price_moves_demand (28 ms)
+  PASS test_economy.gd::test_order_to_delivery_profit_is_not_cash (57 ms)
+  PASS test_economy.gd::test_weekly_payout_moves_balance_to_cash (86 ms)
+  PASS test_economy.gd::test_dropoff_at_postpoint (23 ms)
+  PASS test_economy.gd::test_return_refund_and_replacement (51 ms)
+  PASS test_economy.gd::test_replacement_needs_stock_of_that_product (47 ms)
+  PASS test_economy.gd::test_month_close_report (366 ms)
+  PASS test_economy.gd::test_rent_due_day_14 (115 ms)
+  PASS test_economy.gd::test_seller_cap_pauses_until_registration (24 ms)
+  PASS test_systems.gd::test_registration_creates_company_and_moves_books (20 ms)
+  PASS test_systems.gd::test_invalid_company_names (0 ms)
+  PASS test_systems.gd::test_contract_counter_deliver_and_net30 (272 ms)
+  PASS test_systems.gd::test_contract_needs_registered_company (0 ms)
+  PASS test_systems.gd::test_supplier_price_increase_event (31 ms)
+  PASS test_systems.gd::test_every_event_changes_something (1 ms)
+  PASS test_systems.gd::test_low_cash_warning_is_not_game_over (22 ms)
+  PASS test_systems.gd::test_reduce_spending_option (0 ms)
+  PASS test_systems.gd::test_story_chapter_one_progression (8 ms)
+  PASS test_systems.gd::test_save_load_round_trip (36 ms)
+  PASS test_systems.gd::test_character_options_are_cosmetic_only (0 ms)
+  PASS test_systems.gd::test_crypto_not_available_in_year_one (0 ms)
+
+26/26 tests passed in 1.4s
+JUnit report: /home/user/City-Venture/evidence/vs001/test-reports/unit.xml
