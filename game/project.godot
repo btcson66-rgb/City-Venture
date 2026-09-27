@@ -5,12 +5,14 @@ config_version=5
 
 config/name="CITY VENTURE"
 config/description="A modern pixel-art business-life RPG. Build - Live - Connect - Grow."
-config/version="0.1.0-vs001"
+config/version="0.1.1-test1"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="CityVenture"
+config/icon="res://assets/ui/app_icon.png"
 run/main_scene="res://scenes/boot.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 boot_splash/bg_color=Color(0.051, 0.106, 0.169, 1)
 boot_splash/show_image=false
-config/icon="res://assets/ui/icons/company.png"
 
 [autoload]
 
@@ -46,6 +48,7 @@ common/physics_ticks_per_second=60
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/vram_compression/import_etc2_astc=true
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 2d/snap/snap_2d_transforms_to_pixel=true

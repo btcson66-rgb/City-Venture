@@ -19,7 +19,7 @@ func _setup_input() -> void:
 	var map := {
 		"move_left": [KEY_A, KEY_LEFT], "move_right": [KEY_D, KEY_RIGHT], "move_up": [KEY_W, KEY_UP], "move_down": [KEY_S, KEY_DOWN],
 		"run": [KEY_SHIFT], "interact": [KEY_E, KEY_SPACE, KEY_ENTER], "phone": [KEY_TAB, KEY_P], "map": [KEY_M],
-		"pause": [KEY_ESCAPE], "fast_forward": [KEY_T], "company_os_hint": [KEY_C],
+		"pause": [KEY_ESCAPE], "fast_forward": [KEY_T], "company_os_hint": [KEY_C], "bug_report": [KEY_F12],
 	}
 	for a in map:
 		if not InputMap.has_action(a):

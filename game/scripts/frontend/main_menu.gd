@@ -55,6 +55,10 @@ func _ready() -> void:
 	var ver := UIK.label(I18n.t("VERTICAL SLICE 001 · art converted from concept boards · %s") % ProjectSettings.get_setting("application/config/version", ""), 7, Art.C_DIM)
 	ver.position = Vector2(8, 346)
 	add_child(ver)
+	# in a browser F12 opens the developer tools, so web testers report from the pause menu
+	var hint := UIK.label("Test build: Esc → Report a problem." if OS.has_feature("web") else "Test build: press F12 any time to report a problem.", 7, Art.C_SKY)
+	hint.position = Vector2(8, 334)
+	add_child(hint)
 	# language: English / 繁體中文 / 简体中文 (saved in user://settings.cfg)
 	var lang := UIK.hbox(4)
 	lang.position = Vector2(466, 330)

@@ -1,0 +1,28 @@
+CITY VENTURE 網頁版 — 給主辦人：怎麼放到網路上讓大家用瀏覽器玩
+============================================================
+
+這個 zip 就是完整的網頁版遊戲（單執行緒版本，不需要特殊伺服器設定）。
+最簡單的方法是放到 itch.io（免費），可以設成「只有拿到連結＋密碼的人才能玩」。
+
+【itch.io 步驟】
+  1. 到 https://itch.io 註冊／登入 → 右上角頭像 →「Upload new project」。
+  2. Title：CITY VENTURE Test（隨意）。
+  3. Kind of project：選「HTML」。
+  4. Uploads：上傳這個 zip（不用解壓縮），上傳完勾選「This file will be played in the browser」。
+  5. Embed options：
+       Viewport dimensions：1280 × 720
+       勾選「Click to launch in fullscreen」或「Fullscreen button」（建議都開）
+       「SharedArrayBuffer support」不用勾。
+  6. Visibility & access：
+       選「Restricted」只給指定帳號，或選「Public」並在下方設定密碼（Password protected）。
+  7. Save & view page → 把網址（和密碼）傳給測試者。
+
+【其他方式】
+  任何能放靜態網頁的地方都可以（Netlify Drop、GitHub Pages、自己的主機）：
+  把 zip 解壓縮後整個資料夾上傳，打開 index.html 所在的網址即可。
+  注意：直接在電腦上雙擊 index.html 無法執行，一定要透過網址開啟。
+
+【測試者要知道】
+  ・請用電腦版 Chrome／Edge／Firefox。手機還不支援。
+  ・網頁版回報問題：Esc →「回報問題」，瀏覽器會下載截圖、資訊和存檔三個檔案。
+  ・存檔存在瀏覽器裡，換瀏覽器或清除資料就會不見。

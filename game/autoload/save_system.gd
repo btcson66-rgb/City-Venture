@@ -39,6 +39,11 @@ func summary(slot: int) -> Dictionary:
 
 
 func save(slot := 1) -> bool:
+	return save_to(_path(slot), slot)
+
+
+## Write the current game to any path (slots, or a copy attached to a bug report).
+func save_to(path: String, slot := -1) -> bool:
 	if not GameState.has_game():
 		return false
 	SceneRouter.capture_location()
@@ -53,13 +58,14 @@ func save(slot := 1) -> bool:
 		"chapter": d["story"].get("chapter", ""),
 	}
 	var payload := {"format": GameState.SAVE_FORMAT, "summary": summary_d, "data": d}
-	var f := FileAccess.open(_path(slot), FileAccess.WRITE)
+	var f := FileAccess.open(path, FileAccess.WRITE)
 	if f == null:
-		push_error("SaveSystem: cannot write " + _path(slot))
+		push_error("SaveSystem: cannot write " + path)
 		return false
 	f.store_string(JSON.stringify(payload))
 	f.close()
-	saved.emit(slot)
+	if slot >= 0:
+		saved.emit(slot)
 	return true
 
 

@@ -26,7 +26,7 @@ msgstr "  其中保留中（未满 2 天）"
 msgid "  ·  DAY %d"
 msgstr "  ·  第 %d 天"
 
-#: autoload/ui_root.gd:275
+#: autoload/ui_root.gd:285
 msgid "  ·  Open %s–%s"
 msgstr "  ·  营业 %s–%s"
 
@@ -2202,7 +2202,7 @@ msgstr "名字"
 msgid "NEGOTIATION"
 msgstr "议价"
 
-#: autoload/ui_root.gd:292
+#: autoload/ui_root.gd:302
 msgid "NEW LOCATION"
 msgstr "新地点"
 
@@ -2886,6 +2886,10 @@ msgstr "已涨价。"
 msgid "Priya"
 msgstr "Priya"
 
+#: autoload/ui_root.gd:263
+msgid "Problem report saved (screenshot + save + log). Send this folder to whoever invited you to test: %s"
+msgstr "已存下问题回报（截屏＋存盘＋记录）。请把这个文件夹传给邀请你测试的人：%s"
+
 #: scripts/ui/modals/registration_modal.gd:49
 msgid "Processing time"
 msgstr "处理时间"
@@ -2926,7 +2930,7 @@ msgstr "数量"
 msgid "Quit"
 msgstr "离开"
 
-#: scripts/ui/modals/pause_menu.gd:37
+#: scripts/ui/modals/pause_menu.gd:40
 msgid "Quit to title"
 msgstr "回到标题画面"
 
@@ -3133,6 +3137,10 @@ msgstr "已寄出替换品 %s：%s（快捷）"
 #: data/events/customer_return.json
 msgid "Replacement shipped."
 msgstr "新品已寄出。"
+
+#: scripts/ui/modals/pause_menu.gd:37
+msgid "Report a problem (F12)"
+msgstr "回报问题（F12）"
 
 #: scripts/ui/modals/company_os.gd:9
 msgid "Reports"
@@ -3781,6 +3789,14 @@ msgstr "科技竞争"
 #: data/buildings/nexus_bank.json
 msgid "Teller — business banking"
 msgstr "柜台——企业金融"
+
+#: scripts/frontend/main_menu.gd:59
+msgid "Test build: Esc → Report a problem."
+msgstr "测试版：按 Esc →「回报问题」。"
+
+#: scripts/frontend/main_menu.gd:59
+msgid "Test build: press F12 any time to report a problem."
+msgstr "测试版：遇到问题随时按 F12 回报。"
 
 #: scripts/ui/modals/registration_modal.gd:26
 msgid "Thanks"

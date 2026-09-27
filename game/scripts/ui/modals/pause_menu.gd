@@ -5,7 +5,7 @@ extends Modal
 func _init() -> void:
 	title_text = "Paused"
 	icon_name = "settings"
-	panel_size = Vector2(300, 244)
+	panel_size = Vector2(300, 268)
 
 
 func build() -> void:
@@ -34,6 +34,9 @@ func build() -> void:
 		b.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 		lang.add_child(b)
 	body.add_child(lang)
+	body.add_child(UIK.button("Report a problem (F12)", func():
+		close()
+		UIRoot.report_problem()))
 	body.add_child(UIK.button("Quit to title", func():
 		close()
 		SceneRouter.go_menu()))

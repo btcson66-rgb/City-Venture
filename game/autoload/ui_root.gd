@@ -161,6 +161,10 @@ func _process(_delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("bug_report"):
+		get_viewport().set_input_as_handled()
+		report_problem()
+		return
 	if not GameState.has_game() or not _hud_wanted or SceneRouter.transitioning:
 		return
 	if event.is_action_pressed("phone") and not dialogue.active and modal_layer.get_child_count() == 0:
@@ -251,6 +255,12 @@ func show_chapter_card(title: String, subtitle := "") -> void:
 	tw.tween_interval(2.6)
 	tw.tween_property(c, "modulate:a", 0.0, 0.8)
 	tw.tween_callback(c.queue_free)
+
+
+## Tester bug report (F12). Works on the menu and in game.
+func report_problem() -> void:
+	var path: String = await BugReport.capture(get_tree())
+	toast(I18n.t("Problem report saved (screenshot + save + log). Send this folder to whoever invited you to test: %s") % path, "good", "info")
 
 
 ## First-visit establishing card (art converted from the concept boards), bottom-left, non-blocking.

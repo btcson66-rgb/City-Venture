@@ -71,7 +71,7 @@ def unescape(s: str) -> str:
 def extract() -> dict:
     ids: dict[str, set] = {}
     files = [f for f in glob.glob(os.path.join(GAME, "**", "*.gd"), recursive=True)
-             if "/tests/" not in f and not f.endswith(("i18n.gd", "data_db.gd"))]
+             if "/tests/" not in f and not f.endswith(("i18n.gd", "data_db.gd", "bug_report.gd"))]
     for f in sorted(files):
         rel = os.path.relpath(f, GAME)
         for n, line in enumerate(open(f, encoding="utf-8"), 1):

@@ -388,6 +388,8 @@ func talk_through_dialogue(max_lines := 30, choose_first := true) -> void:
 # ------------------------------------------------------------------ simple screenshot tour
 func _shots() -> void:
 	await shot("main_menu")
+	var rep: String = await BugReport.capture(get_tree())
+	expect(FileAccess.file_exists(rep + "/info.txt"), "F12 bug report written (%s)" % rep)
 	SceneRouter._set_scene(CharacterCreator.new())
 	await wait(0.8)
 	await shot("creator")
