@@ -1,0 +1,221 @@
+# CITY VENTURE — Game Data Schema
+
+All content lives in `game/data/` as JSON, loaded by `DataDB` at boot.
+Conventions:
+- `id` is a `snake_case` string, unique within its folder.
+- Money is a float in the entity's currency (Aurelia Dollar, `AUD$`, displayed as `$`).
+- Time durations are in **game minutes** (`*_min`) or **days** (`*_days`).
+- `status` on definitions: `active` (in this build) or `planned` (defined, not playable. The UI must say so).
+- Text shown to players lives in `text`/`lines` fields so it can be localised later.
+
+`DataDB.validate()` checks everything marked **(ref)**.
+
+---
+
+## 1. Definitions (static content)
+
+### 1.1 Businesses — `data/businesses/<id>.json`
+```json
+{
+  "id": "ecommerce", "name": "Ecommerce", "status": "active", "module": "ecommerce",
+  "tier": "p0", "pitch": "Buy wholesale, sell online. Inventory is cash sitting in boxes.",
+  "starting_capital_min": 1500,
+  "revenue_models": ["product_sales"],
+  "cost_types": ["inventory", "ads", "shipping", "returns", "platform_fees"],
+  "growth_paths": ["own_brand", "retail", "international"],
+  "unlock": {"requires": []}
+}
+```
+
+### 1.2 Products — `data/products/<id>.json`
+```json
+{
+  "id": "wireless_earbuds", "name": "Wireless Earbuds", "category": "electronics",
+  "ref_price": 42.0, "price_min": 20.0, "price_max": 80.0,
+  "base_daily_demand": 2.4, "elasticity": 1.6,
+  "return_base_rate": 0.06, "review_rate": 0.45,
+  "ship_class": "small", "packaging_cost": 0.60,
+  "sprite": "props/product_earbuds"
+}
+```
+
+### 1.3 Suppliers — `data/suppliers/<id>.json`
+```json
+{
+  "id": "tradelink_wholesale", "name": "TradeLink Wholesale", "region": "aurelia", "contact_npc": "ken_supplier",
+  "offers": [
+    {"product": "wireless_earbuds", "unit_cost": 18.0, "moq": 50, "lead_days": 3,
+     "defect_rate": 0.05, "payment_terms": "prepay"}
+  ],
+  "net_terms_for_companies": {"days": 15, "requires": ["company_registered"]}
+}
+```
+`product` (ref → products).
+
+### 1.4 Marketplaces / Shipping — `data/economy/*.json`
+```json
+// marketplace.json
+{"id":"shoplane","name":"ShopLane","fee_rate":0.10,"payout_weekday":1,"payout_hour":9,
+ "payout_hold_days":2,"personal_seller_cap":2500,"return_window_days":7,
+ "hourly_weights":[...24 floats...]}
+// shipping.json
+{"methods":[{"id":"economy","name":"Economy","cost":{"small":4.2,"medium":6.8},"transit_days":3},
+            {"id":"express","name":"Express","cost":{"small":8.9,"medium":12.5},"transit_days":1}],
+ "pickup":{"courier_fee_per_batch":6.0,"pickup_delay_min":120},
+ "dropoff":{"location":"postpoint_riverside"}}
+// living.json
+{"start_cash":30000,"home_rent":1250,"rent_first_due_day":14,"daily_living":32,"reduced_daily_living":18,
+ "overdraft_fee":35,"late_rent_fee":75,"low_cash_warning":1500}
+```
+
+### 1.5 Settlement methods — `data/economy/settlement_methods.json`
+`{id, name, speed_days, fee_rate, fixed_fee, risks{technical, counterparty, regulatory}, available_from{year, flag}}`
+The slice ships only `bank_transfer` and `marketplace_payout`. `stablecoin_*` rails are **Planned (P2)** and gated on `flag:clearing_crisis_started`.
+
+### 1.6 Companies (NPC) — `data/companies/<id>.json`
+```json
+{"id":"harbor_point_fitness","name":"Harbor Point Fitness","kind":"npc","industry":"fitness",
+ "negotiation":{"min_price_factor":0.9,"max_terms_days":45,"patience":2}}
+```
+The player's company is created at runtime as entity `co_<slug>` with the same shape plus `founded`, `type`, `address`.
+
+### 1.7 NPCs — `data/npcs/<id>.json`
+```json
+{
+  "id": "maya", "name": "Maya", "role": "friend",
+  "appearance": {"presentation":"feminine","face":"oval","hair":"bob","hair_color":"#3b2a24", "...": "..."},
+  "outfit": "startup_casual",
+  "schedule": [
+    {"days":"sat,sun","from":"10:00","to":"16:00","location":"interior:bloom_coffee","spot":"table_2"}
+  ],
+  "dialogue": [{"when":["flag:ch1_started"],"conversation":"maya_cafe_weekend"}],
+  "phone_contact": true
+}
+```
+`location` is `interior:<building_id>` or `district:<district_id>`, and `spot` is a named marker in that layout.
+
+### 1.8 Buildings — `data/buildings/<id>.json`
+```json
+{
+  "id": "bloom_coffee", "name": "Bloom Coffee", "district": "riverside", "type": "cafe",
+  "hours": {"open":"07:00","close":"20:00","days":"all"},
+  "exterior": {"sprite":"buildings/mixed_use_bloom","x":512,"y":160,"door":{"x":64,"y":142},"sign":"Bloom Coffee"},
+  "interior": {
+    "size":[26,16], "floor":"wood_warm", "wall":"cafe_brick", "window_view":"riverside",
+    "spawns":{"door":[208,236]},
+    "props":[{"sprite":"interiors/cafe_counter","x":40,"y":64,"solid":[0,20,96,20]}],
+    "interactables":[
+      {"id":"order_coffee","at":[80,110],"label":"Order Coffee","action":"buy_item","params":{"item":"coffee","price":4.5,"minutes":10}},
+      {"id":"news_board","at":[300,90],"label":"Read News","action":"read_news"}
+    ],
+    "npc_spots":{"counter":[88,72],"table_2":[260,160]}
+  }
+}
+```
+`action` values form a closed vocabulary implemented by `scripts/world/actions.gd`: `open_company_os`, `sleep`, `change_outfit`, `buy_item`, `read_news`, `business_board`, `pack_orders`, `dropoff_parcels`, `register_company`, `bank_counter`, `atm`, `lease_office`, `rent_desk`, `talk`, `metro`, `exit`.
+
+### 1.9 Districts — `data/districts/<id>.json`
+```json
+{
+  "id":"riverside","name":"Riverside","size_tiles":[112,60],
+  "ground":[{"type":"grass","rect":[0,0,112,60]},{"type":"road_h","rect":[0,30,112,4]}],
+  "buildings":["riverside_apartment","bloom_coffee","postpoint_riverside"],
+  "props":[{"sprite":"props/tree_round","x":300,"y":400}],
+  "exits":[{"id":"to_startup_hub","rect":[1784,480,8,64],"to":"district:startup_hub","spawn":"from_riverside","walk_min":12}],
+  "spawns":{"arrival":[640,520],"from_startup_hub":[1760,510]},
+  "traffic":[{"lane":"h","y":492,"dir":1,"density":0.5}],
+  "pedestrian_paths":[[[40,470],[1760,470]]],
+  "metro":{"station":"riverside","at":[900,450]},
+  "ambient_density":{"morning":8,"afternoon":10,"evening":9,"night":3}
+}
+```
+
+### 1.10 City and Metro — `data/city/aurelia.json`
+`{id, name, population, districts[{id, name, status, map_pos, blurb}], metro{lines[{id,name,color,stations[]}], travel_min{a->b}, fare}}`
+
+### 1.11 Regions (World Map) — `data/regions/<id>.json`
+`{id, name, archetype, industries[], strengths[], risks[], flight_hours_from_aurelia, shipping_days_from_aurelia, entry_requirement, status}`.
+All 7 overseas markets are defined with `status: planned`.
+
+### 1.12 Regulations — `data/regulations/<id>.json`
+```json
+{"id":"company_registration_aurelia","office":"city_hall","fee":300,"processing_min":45,
+ "fields":["company_name","business_type","address"],
+ "unlocks":["business_bank_account","office_lease","b2b_contracts","seller_cap_lifted","supplier_net_terms"]}
+```
+
+### 1.13 Events — `data/events/<id>.json`
+```json
+{
+  "id":"supplier_price_increase","category":"supply","status":"active",
+  "trigger":{"when":"daily","conditions":["stat:purchase_orders>=1","day>=6"],"chance":0.18,"cooldown_days":20,"once":false},
+  "bind":{"supplier":"most_used","product":"best_seller"},
+  "presentation":{"channel":"phone","speaker":"ken_supplier","lines":["Heads up.","Factory raised prices. {product} goes up 15% from Monday."]},
+  "choices":[
+    {"id":"accept","label":"Fine. Keep the order flowing.","effects":[{"op":"supplier_price_mod","mult":1.15,"days":30}]},
+    {"id":"stock_up","label":"Lock in {moq} more at today's price","requires":["cash>={moq_cost}"],
+     "effects":[{"op":"purchase","qty":"moq","price":"current"},{"op":"supplier_price_mod","mult":1.15,"days":30}]},
+    {"id":"switch","label":"I'll look at other suppliers.","effects":[{"op":"supplier_price_mod","mult":1.15,"days":30},{"op":"set_flag","flag":"considering_new_supplier"}]}
+  ]
+}
+```
+Validator rule: every event must have at least one choice whose effects touch money, inventory or options (`cash`, `purchase`, `refund_order`, `inventory_delta`, `supplier_price_mod`, `create_contract_offer`, `listing_mod`, `ad_price_mod`).
+
+### 1.14 Story — `data/story/chapters.json`, `data/dialogue/<id>.json`
+```json
+{"chapters":[{"id":"ch1_arrival","title":"CHAPTER 1 — ARRIVAL","objectives":[
+  {"id":"ch1_check_phone","text":"Check your phone","complete_when":["flag:phone_opened"],
+   "on_complete":[{"do":"start","objective":"ch1_go_outside"}]}
+]}]}
+```
+Dialogue:
+```json
+{"id":"maya_intro","lines":[
+  {"who":"maya","text":"So you actually quit?"},
+  {"who":"player","choices":[{"text":"Yeah.","set":"maya_tone_direct","next":"a"},{"text":"...Maybe.","next":"b"}]}
+]}
+```
+
+### 1.15 Vehicles — `data/vehicles/<id>.json` (Planned P1)
+`{id, name, class: used_compact|sedan|suv|sports|luxury, price, running_cost_day, travel_time_factor, capacity, sprite}`
+
+### 1.16 Properties — `data/properties/<id>.json`
+`{id, name, district, kind: home|office|coworking_desk|warehouse, monthly_rent, deposit_months, requires[], capacity{inventory_units, staff}}`
+The slice uses `riverside_studio` (home), `nexus_cowork_desk`, and `startup_hub_suite_2b` (small office).
+
+### 1.17 World economy — `data/world/years.json`
+`{years:[{year:1,name:"The Opportunity",interest_rate:0.025,shipping_index:1.0,events:[...]},{year:5,name:"Clearing Crisis",...}]}`
+Only Year 1 is active in the slice. The rest is Planned.
+
+### 1.18 Character creator options — `data/character/options.json`
+`{presentations[], face_shapes[], hairstyles[], hair_colors[], skin_tones[], eye_shapes[], eye_colors[], eyebrows[], mouths[], outfits[]}`. Each option is `{id, name, layer?, color?}`. **No option has any gameplay field. The validator rejects keys like `bonus`, `stat` and `modifier`.**
+
+---
+
+## 2. Runtime state (save file)
+
+```
+data.player            {name, appearance{presentation,face,hair,hair_color,skin,eye_shape,eye_color,brows,mouth},
+                        outfit, home:"riverside_studio", location{kind,id,x,y,facing}, flags{}}
+data.clock             {minutes: int (since 2031-06-01 00:00), speed: float}
+data.entities.<id>     {id, name, kind: person|company|npc_company, founded?, type?, address?, bank_account: bool,
+                        properties[], seller_account{type: personal|business, month_gmv}}
+data.ledger            {seq, journal:[{n, t, entity, memo, source{type,id}, lines:[{acct, dr, cr}]}]}
+data.ecommerce         {listings{id:{product, price, photo, ad_budget, active, created, views, orders, rating_sum, rating_n}},
+                        orders{id:{product, qty, unit_price, customer, placed, status, location, ship{method,cost,shipped,eta},
+                                   delivered, payout_batch, return{reason, status}, review}},
+                        purchase_orders{id:{supplier, product, qty, unit_cost, total, placed, eta, location, status, terms}},
+                        inventory{location:{product:{qty, avg_cost, defective}}},
+                        parcels{location: [order_ids packed awaiting dropoff]},
+                        supplier_mods[{supplier, product, mult, until}], counters{order_seq, po_seq}}
+data.contracts.<id>    {buyer, seller, product, qty, unit_price, total, delivery_due, payment_terms_days,
+                        penalty_rate, quality_req, currency, settlement, status, history[]}
+data.events            {queue[], active?, history[{id, t, choice}], cooldowns{id: until}}
+data.story             {chapter, active[], done[], flags{}}
+data.npcs.<id>         {met, relationship, convo_done[]}
+data.timeline          [{t, text, kind}]
+data.reports           {month_closes:[{period, entities:{id:{revenue, refunds, cogs, gross, opex{...}, rent, profit,
+                                        cash_open, cash_close, ar, ap, inventory}}}]}
+data.world             {year, macro{interest_rate, shipping_index}, modifiers[]}
+data.rng               {seed, state}
+```

@@ -1,0 +1,110 @@
+# CITY VENTURE — Roadmap
+
+> Priority order for every milestone (kickoff §30): **Game Feel → Core Loop → World Navigation → Business Depth → Story Integration → Visual Cohesion → Stability → Additional Content.**
+> Every milestone ships a **playable build**, automated tests, a scripted gameplay walkthrough and an evidence folder. A human playtest is required before a milestone is called done.
+> Status per item: Implemented · Mocked · Placeholder · Planned · Blocked.
+
+---
+
+## P0 — Vertical Slice (`CITY-VENTURE-VERTICAL-SLICE-001`)
+
+### Scope
+
+| Area | Content |
+|------|---------|
+| Flow | Boot → Main Menu → New Game → Character Creator → Arrival sequence → Riverside Apartment |
+| Character | Name; Face Shape, Hairstyle, Hair Color, Skin Tone, Eye Shape, Eye Color, Eyebrows, Mouth; Presentation Masculine / Feminine / Neutral; outfits Startup Casual, Office Professional, Home. All cosmetic. |
+| World | Aurelia: **Riverside** and **Startup Hub** (full walkable districts), **Civic Center** and **Financial District** (compact walkable blocks). Walking exits between districts, Metro stub, City Map screen, World Map screen (overseas locked, P2). |
+| Interiors | Apartment, Bloom Coffee (Riverside), Nexus Co-work (Startup Hub), Small Office (Startup Hub), Nexus Bank (Financial), City Hall (Civic), PostPoint parcel shop (Riverside) |
+| Living city | Ambient pedestrians on schedules, traffic lanes, named NPCs with schedules and dialogue, shop hours, day/night |
+| Business | Ecommerce end to end: suppliers, wholesale cost, MOQ, purchase orders, lead time, inventory by location, photography, listing, pricing, ads, demand model, orders, packing, courier vs drop-off shipping, delivery, reviews, returns, refunds, weekly marketplace payouts |
+| Finance | Double-entry ledger, AR/AP, personal vs company entities, rent, living costs, Month Close report |
+| Company | Registration at City Hall (name, type, address, fee), business bank account + capital injection at Nexus Bank, Small Office lease, company name on Company OS, contracts, office sign and Timeline |
+| Company OS | Opened only from Apartment laptop, Co-work desk or Small Office desk. Tabs: Overview, Finance, Sales, Operations, Inventory, People, Contracts |
+| Story | Chapter 1 Arrival, Chapter 2 First Customer, Chapter 3 Open for Business |
+| Events | Customer Return, Supplier Price Increase, Unexpected Large Order (B2B contract, Net terms), Ad Cost Spike, Viral Mention |
+| Failure | Low-cash warning → Sell inventory to liquidator / Reduce spending / Continue. Overdraft and late fees, never game over. |
+| Save | Manual and autosave. Character, appearance, date and time, cash and ledger, position, inventory, orders, company, contracts, story, NPC state, timeline |
+| Time | Continuous clock, day parts, sleep, hold-to-fast-forward, open/closed hours |
+| Art | Generated Neo-Civic placeholder pixel art for all of the above |
+
+### Dependencies
+Godot 4.5.1 · export templates · placeholder generator · no external services.
+
+### Acceptance criteria
+Handoff §93 Definition of Done, all 18 items, plus kickoff §6–§29. In particular:
+1. A new player can go New Game → Creator → Apartment → walk outside → Cafe → Co-work → pick Ecommerce → buy inventory → list → first sale → register company → Company OS without dev tools.
+2. Each of the 6 required interiors is entered by walking through a door, and each function is used by walking to an interactable.
+3. First revenue comes from a specific order (units × price), and the payout arrives later as cash.
+4. Month Close shows Revenue, COGS, OpEx, Rent, Advertising, Shipping, Refunds, Profit and Cash, and Profit differs from Δcash when AR/AP exist.
+5. At least 3 dynamic events change money, inventory or options.
+6. Cash near 0 triggers a warning with recovery options. No game over.
+7. Save → quit → load restores the exact state and position.
+8. Every UI/visual element uses the pixel palette and theme. No default gray Godot UI.
+
+### Tests
+Headless unit tests (sim), integration tests (scenes), walkthrough bot (full flow), save round trip, 30-day soak (simulate a month with the bot's policy and assert invariants: ledger balances, no negative inventory, month close reconciles).
+
+### Evidence
+`evidence/vs001/`: screenshots of every scene and state, a 5–10 minute uncut walkthrough video from New Game, test logs and reports, the Windows build, and `docs/QA_REPORT.md` with PASS / PARTIAL / FAIL per criterion.
+
+---
+
+## P1 — Aurelia Expansion
+
+### Scope
+- Districts: Shopping Street, Harbor, Old Town, Residential, University (walkable). Metro becomes a real network (5 lines, timed rides, stations).
+- Second industry: **SaaS** (client contract → build → deliver → subscription MRR/churn/servers). It reuses Contract, Payment, Office and Hiring with different logic (§90).
+- **People**: hiring, salaries, payroll day, staff capacity (packing, support), resignation events.
+- **Bank**: loans (Marcus Reed), credit history, interest, covenant-like conditions.
+- Vehicles: used compact/sedan purchase, driving changes travel time, parking, running costs.
+- Chapters 4–6 (Growing Pains, The Big Contract with Daniel Wong $420k Net 60, Cash Is Oxygen), and Elena Park (VC) offers.
+- Event library expansion (staff, finance, market categories §32).
+- Formal bankruptcy flow (§2.7): company closure → liquidation → downgrade home → credit damage → restart.
+- Wardrobe/customization room, clothing store, more outfits (Executive, Luxury Citywear, Travel, Formal).
+- Audio pass (§86–87).
+
+### Dependencies
+P0 ledger/contracts/events stable; art manifest P1 rows.
+
+### Acceptance criteria
+SaaS plays differently from Ecommerce (no shared income formula). Payroll can be missed and has consequences. A loan changes cash and creates debt service. Ch4–6 are playable. Bankruptcy recovery loop is playable.
+
+### Tests / Evidence
+As P0, plus a 3-month soak and a bankruptcy scenario test.
+
+---
+
+## P2 — World / Overseas
+
+### Scope
+- **World Map** becomes playable: 7 markets, Airport interior, commercial flights (schedules, time cost), Harbor shipping routes.
+- FX, customs, import duties, overseas suppliers (Lumina, Zenkai), international trade basics, overseas branch.
+- Settlement methods: Bank Wire, Payment Processor, Letter of Credit, Escrow. **Year 5 Clearing Crisis**, and only then the simulated stablecoin rail with full risk modelling (Ch9–Ch10). Bridge Exploit (Ch11), Regulation Wave.
+- Lina Zhao, Omar Haddad.
+
+### Dependencies
+P1 bank/loans, contract currency and settlement fields (already in schema).
+
+### Acceptance criteria
+Crypto never appears before the Clearing Crisis trigger. Every rail shows its trade-offs. The bridge exploit can hurt a player who chose that rail. No real-world wallet, chain or money integration.
+
+---
+
+## P3 — More Industries / Holdings
+
+### Scope
+Food/Cafe, Logistics, Manufacturing, Real Estate (player buildings appear on the city map, e.g. VENTURE TOWER), then Consulting, International Trade, Media, Hotel, Automotive, Energy. Second company, holding group, internal contracts and transfer pricing. Property purchase, housing ladder to Penthouse/Villa, decoration, luxury cars, private jet (travel time plus real costs). Life Timeline and Legacy screen.
+
+### Acceptance criteria
+Each industry passes the "really different gameplay" check (§91). Holdings consolidate correctly in the ledger.
+
+---
+
+## P4 — Enterprise Network (multiplayer expansion)
+
+### Scope
+Player company ↔ player company contracts (quotes, counters, OEM, logistics, franchise, licence, JV), built on the entity-symmetric contract system. No pay-to-win: paid content = new gameplay only.
+
+### Dependencies
+Single-player economy complete and stable (§70). **Not started before P3 ships.**

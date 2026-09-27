@@ -1,0 +1,201 @@
+# CITY VENTURE — Architecture
+
+> Engine: **Godot 4.5.1**, GDScript, `gl_compatibility` renderer, 2D, Windows Desktop first.
+> Status vocabulary used across all docs: **Implemented · Mocked · Placeholder · Planned · Blocked**.
+
+## 1. Guiding constraints (from the Master Handoff)
+
+| Constraint | Architectural consequence |
+|------------|---------------------------|
+| The city is the game (§0, §3) | The main loop runs in `District` / `Interior` scenes. No Dashboard scene exists at the top level. |
+| Company OS only via a terminal (§52) | `CompanyOS` is a modal UI that can only be opened by an `Interactable` whose action is `open_company_os`. |
+| Every dollar has a source (§2.3) | All money moves through a double-entry **Ledger**. No system may write to a cash balance directly. |
+| Data-driven (§73) | Content lives in `game/data/**.json` and is loaded by `DataDB`. Scene scripts only read ids. |
+| No stat buffs (§2.1) | The Player record holds appearance and identity only. The sim never reads player attributes. |
+| Future multiplayer (§70) | Contracts are between `CompanyEntity` ids, never "player vs npc". The player's company is one entity among others. |
+| Crypto is late-game simulation (§2.6, kickoff §24) | Settlement rails are data (`settlement_methods`). The slice has no rail beyond bank/marketplace. No external wallet/chain code exists anywhere. |
+
+## 2. Repository layout
+
+```
+/docs                      Specs, readback, audit, architecture, roadmap, schema, manifests, QA
+/docs/reference            Master Handoff + concept boards (source of truth)
+/tools
+  /art/gen_placeholders.py Deterministic Neo-Civic placeholder pixel-art generator
+  run_tests.sh             Headless unit + integration tests → evidence/test-reports
+  capture.sh               Xvfb + Movie Maker walkthrough capture → evidence/videos, screenshots
+  build_windows.sh         Windows Desktop export
+/game                      Godot project root (project.godot)
+  /autoload                Singletons (see §4)
+  /data                    JSON content (see GAME_DATA_SCHEMA.md)
+  /assets                  PNG sprites (generated placeholders now, final art later) + fonts
+  /scenes                  Minimal .tscn wrappers; most node trees are built by scripts from data
+  /scripts
+    /sim                   Pure simulation (no Node dependency beyond RefCounted) — unit-testable
+    /world                 Player, NPC, vehicles, district/interior builders, interactables
+    /ui                    HUD, phone, dialogue, Company OS, creator, city/world map, modals
+  /tests                   Headless test runner, unit tests, scripted walkthrough bot
+/evidence                  screenshots/ videos/ logs/ test-reports/ (per milestone)
+```
+
+## 3. Scene hierarchy
+
+```
+Boot (autoload init, DataDB load, settings)
+ └─ MainMenu ──────────── New Game / Continue / Quit
+     └─ CharacterCreator  (appearance + outfit + name; cosmetic only)
+         └─ Arrival       (train cutscene → phone: balance / rent)
+             └─ WORLD LOOP ─────────────────────────────────────────────┐
+                 ├─ District(id)   Riverside / Startup Hub / Civic Center / Financial District
+                 │    ├─ Ground TileMapLayer (built from district JSON)
+                 │    ├─ YSort world: buildings, props, player, NPCs, vehicles
+                 │    ├─ Doors → Interior(id)   Exits → District(id)   Metro → CityMap
+                 │    └─ Day/Night modulate + light overlays
+                 ├─ Interior(id)   Apartment / Bloom Coffee / Co-work / Small Office / Bank / City Hall …
+                 │    ├─ Room (floor, walls, windows w/ skyline), furniture w/ collision
+                 │    ├─ Interactables → contextual UI (Company OS, Bank counter, Registration, Wardrobe…)
+                 │    └─ Scheduled NPCs
+                 ├─ CityMap        (Metro / map app; district labels, travel times)
+                 └─ WorldMap       (Aurelia + 7 markets; overseas travel = Planned P2)
+UIRoot (CanvasLayer autoload, above everything)
+ ├─ HUD            money · date/time · objective · minimap · interaction prompt
+ ├─ Dialogue box   portrait + short lines + choices
+ ├─ Phone          Messages · Bank · Objectives · Map · Seller app notifications · Save
+ ├─ Modal stack    Company OS, event decisions, month close, warnings, registration forms
+ └─ Toasts         notifications (order received, payout, rent due)
+```
+
+`SceneRouter.go_to(kind, id, spawn)` performs fade → free old scene → build new scene from data → place player at the named spawn → fade in. The current `{kind, id, position, facing}` is stored in `GameState` so a save can restore the exact spot.
+
+## 4. Autoload singletons
+
+| Autoload | Responsibility |
+|----------|----------------|
+| `DataDB` | Loads every JSON file under `res://data/` into typed dictionaries by id. Validates ids and references at boot (fails loudly in tests). |
+| `EventBus` | Global signals (`order_placed`, `order_delivered`, `cash_changed`, `location_entered`, `interacted`, `day_started`, `month_closed`, `flag_set`, …). |
+| `GameState` | The single source of truth: one JSON-serialisable `Dictionary` (`GameState.data`). Owns the RNG seed/state. |
+| `Clock` | Game time (minutes since epoch), day parts, pause stack, time scale, sleep/advance. Emits `minute_tick`, `hour_tick`, `day_started`, `month_ended`. |
+| `Sim` | Owns the simulation services and routes clock ticks to them: `Ledger`, `EcommerceSim`, `ContractSystem`, `EventEngine`, `StoryEngine`, `NPCDirector`, `Timeline`, `LivingCosts`, `SolvencyMonitor`. |
+| `SaveSystem` | Save/load slots (`user://saves/slot_N.json`), autosave on sleep, versioned migration hook. |
+| `SceneRouter` | Scene transitions and spawn points. |
+| `UIRoot` | Screen-space UI (§3). |
+| `Art` | Texture cache, character-layer composition, palette constants. |
+
+## 5. State management
+
+- `GameState.data` holds **everything that must survive a save**. Nodes never keep authoritative state: they read from `GameState` and write through sim services.
+- Sim services are `RefCounted` classes that take `data` (and `DataDB`) as input. They are deterministic given the RNG state, which lives inside `data.rng` so a reload continues the same random stream.
+- Scene nodes subscribe to `EventBus` to refresh visuals, for example inventory boxes in the apartment scale with stock.
+- Pause model: `Clock.push_pause(reason)` / `pop_pause(reason)`. Dialogue, Company OS, menus and decisions pause the world clock. Actions that take time (packing, photographing, travelling) call `Clock.advance(minutes)` explicitly, so management can never happen "for free" in zero time.
+
+Top-level shape of `GameState.data`, detailed in GAME_DATA_SCHEMA.md §2:
+
+```
+meta{version, created, playtime_s}
+player{name, appearance{...}, outfit, home_id, location{kind,id,x,y,facing}, flags{}}
+clock{minutes, speed}
+entities{ "player":{...personal}, "co_<id>":{company}, npc companies... }
+ledger{journal[], seq}
+ecommerce{listings{}, orders{}, purchase_orders{}, inventory{loc:{product:{qty,avg_cost,defective}}}, marketplace{...}, supplier_mods[]}
+contracts{}
+events{active[], history[], cooldowns{}}
+story{chapter, objectives{}, flags{}, completed[]}
+npcs{ id:{relationship, dialogue_state, met} }
+timeline[]
+reports{month_closes[]}
+world{year, market_modifiers{}, macro{interest_rate}}
+rng{seed, state}
+```
+
+## 6. Economy engine — the Ledger
+
+A small double-entry bookkeeping engine (`scripts/sim/ledger.gd`).
+
+- **Entities**: `player` (personal finances plus the sole-proprietor business before registration) and `co_<slug>` (a registered company). NPC companies are also entities, so contracts are symmetric.
+- **Accounts per entity**: `cash`, `marketplace_balance` (receivable from the platform), `accounts_receivable`, `inventory`, `accounts_payable`, `equity`, `revenue`, `refunds` (contra-revenue), `cogs`, and `expense:<category>` for `advertising`, `shipping`, `platform_fees`, `packaging`, `photography`, `rent_home`, `rent_office`, `coworking`, `living`, `registration`, `inventory_writeoff`, `bank_fees` and `late_fees`.
+- `post(entity, date, memo, lines[], source)` must balance (Σdebit = Σcredit), or it asserts.
+- **Profit ≠ Cash is structural.** A delivered order posts `Dr marketplace_balance / Cr revenue` and `Dr cogs / Cr inventory`. Cash only moves at the weekly payout (`Dr cash / Cr marketplace_balance`, less fees). A B2B contract invoice posts to `accounts_receivable`, collected at Net N. Supplier net terms post to `accounts_payable`.
+- **Month Close** (`month_close.gd`): for each entity, aggregates the period's journal lines into Revenue, Refunds, COGS, Gross Profit, operating expenses by category, Rent, Profit, opening/closing Cash, AR, AP and Inventory. The result is stored in `reports.month_closes` and shown in a modal and in Company OS → Finance.
+
+## 7. Business engine
+
+`BusinessEngine` dispatches to one module per industry, keyed by `data/businesses/<id>.json → "module"`. The Vertical Slice implements `ecommerce`. The other five P0 industries have definitions marked `"status": "planned"` and are shown on the Business Board as unavailable in this build. They are never stubbed as fake income.
+
+### EcommerceSim (`scripts/sim/ecommerce_sim.gd`)
+
+```
+Supplier offer (data) ──buy (≥MOQ, prepay | net terms)──▶ PurchaseOrder ──lead_days──▶ Inventory@location
+Inventory ──photograph (time)──▶ Listing(price, photo_quality, ad_budget)
+Listing ──hourly demand model──▶ Order(placed)
+Order ──pack @ inventory location (time)──▶ packed ──courier pickup | PostPoint drop-off──▶ shipped
+shipped ──transit days (method)──▶ delivered ──▶ revenue + COGS recognised; marketplace balance ↑
+delivered ──return window──▶ return_requested ──▶ refund (+ restock | write-off)
+delivered ──p(review)──▶ review (stars from quality, speed, value) ──▶ listing rating
+Monday 09:00 payout: eligible marketplace balance − platform fees ──▶ cash
+Daily 00:00: ad spend charged
+```
+
+Demand model (per active listing, per hour of the shopping curve):
+
+```
+λ_day = base_daily_demand
+      × (ref_price / price) ^ elasticity          (clamped)
+      × rating_factor(avg_stars, n_reviews)
+      × photo_factor(photo_quality)
+      × ad_factor(ad_budget)                       (diminishing returns)
+      × world/event multipliers (data)
+orders_this_hour ~ Poisson(λ_day × hourly_weight[h])      capped by available stock
+```
+
+Personal-seller accounts have a monthly sales cap (data: `marketplace.personal_seller_cap`). Crossing it pauses listings until the player registers a company. This is the real-world reason the story moves the player to City Hall.
+
+## 8. Contract system
+
+`scripts/sim/contract_system.gd`. A contract is always `{buyer_entity, seller_entity, lines[], unit_price, total, delivery_due, payment_terms_days, penalty_rate, quality_req, currency, settlement_method, status}`.
+Lifecycle: `offered → (accept | reject | counter → offered′) → active → fulfilled → invoiced (AR) → paid | late → closed` with penalties posted through the Ledger. NPC counterparties decide counters with a data-driven acceptance function (`min_price`, `max_terms`, `patience`). Nothing assumes the counterparty is an NPC, which keeps the Enterprise Network boundary open (P4).
+
+## 9. Event engine
+
+`scripts/sim/event_engine.gd`. Events are JSON definitions (`data/events/*.json`):
+
+- `trigger`: `{when: daily|hourly|on_signal, signal?, conditions[], chance, cooldown_days, once, earliest_day}`
+- `bind`: selectors that pick context such as `order: latest_delivered`, `supplier: current_for_best_seller` and `product`.
+- `presentation`: channel (`phone` | `in_person` | `email`), speaker npc, short lines.
+- `choices[]`: `{label, requires[], effects[]}`.
+
+Effects are a closed vocabulary executed by `effects.gd`: `cash`, `refund_order`, `ship_replacement`, `inventory_delta`, `rating_delta`, `supplier_price_mod`, `create_contract_offer`, `set_flag`, `schedule_event`, `timeline`, `message` and so on.
+
+Every event must change at least one of money, inventory or future options. Pure-dialogue events are rejected by the schema validator (kickoff §17).
+
+## 10. Story engine
+
+`scripts/sim/story_engine.gd`. Chapters → objectives, all from `data/story/chapters.json`.
+Each objective has `complete_when` conditions (tiny condition DSL shared with events: `flag:x`, `visited:bloom_coffee`, `stat:orders_delivered>=1`, `company_registered`, `day>=14`) and `on_start` / `on_complete` action lists (`dialogue`, `message`, `set_flag`, `start_objective`, `timeline`, `unlock`). The HUD shows the active main objective. Dialogue lives in `data/dialogue/*.json` and is kept short, natural and modern (kickoff §31).
+
+## 11. World state, NPC state
+
+- **World state**: `world.year` (Year 1 = 2031, "The Opportunity"), macro variables (interest rate, shipping index) and active market modifiers. Year-based world events (Supply Shock, Clearing Crisis, …) are defined in data but only Year 1 content is active in the slice.
+- **NPC state**: named NPCs (`data/npcs`) have `schedule[]` (time window → location + spot), `role`, `dialogue` entry points by story state, and `relationship` (a number that changes dialogue options, never a business buff). `NPCDirector` spawns named NPCs into the current scene when their schedule says they are there, plus ambient pedestrians and traffic whose density depends on district and time of day.
+- **Buildings** have `hours` (open/closed). A closed door shows the hours and refuses entry, except the player's own home and office.
+
+## 12. Save system
+
+`SaveSystem.save(slot)` writes `{format: 1, saved_at, summary{name, company, date, cash, location}, data: GameState.data}` as JSON. Load validates the format version, runs migrations, replaces `GameState.data`, restores the clock and routes to the saved scene and position. Autosave happens on sleep. Tests verify the round trip (save → load → equal state) and continued simulation after a load.
+
+## 13. Rendering and presentation
+
+- Base resolution **640×360**, `canvas_items` stretch, `keep` aspect, nearest filtering, 2D transform snapping. Default window 1280×720 (2×), and 1920×1080 renders at 3×.
+- Characters: layered 32×48 frames (body/skin, face details, hair back/front, outfit, accessories), three directions (down, side, up) × four walk frames. Hair, skin and eye colours use `modulate` on grayscale-ramp layers so a small number of sheets produces the whole creator space.
+- Environment: 16 px tile grid. Buildings are pre-composed modular facades with a separate night-lights overlay.
+- Day/Night: `CanvasModulate` gradient driven by `Clock`, window-light overlays, lamp glow sprites.
+- UI: pixel 9-slice panels and 16 px icons on the Neo-Civic palette (Dark Navy / Blue / White / Muted Gray; Green = positive cash, Red = risk, Gold = premium, Purple = luxury).
+
+## 14. Testing strategy
+
+| Layer | How |
+|-------|-----|
+| Data | `DataDB.validate()` checks ids, cross-references and required fields. Run at boot and in tests. |
+| Sim unit tests | `tests/unit/*.gd` run headless with no scenes: ledger balancing, demand, PO/MOQ, pack/ship/deliver, payouts (Profit ≠ Cash), returns/refunds, reviews, month close, events, contracts, solvency, save round trip. |
+| Integration | `tests/integration/*.gd` boots real scenes headless: router, doors, interactables, closed hours, Company OS gating. |
+| Walkthrough bot | `tests/walkthrough/bot.gd` drives the real game with synthetic input events (movement actions and mouse clicks on UI) through New Game → Creator → Apartment → City → Cafe → Co-work → Business → First Sale → Registration → Company OS → Month Close. Run headless for PASS/FAIL, and under Xvfb + Movie Maker for the video. |
+| Human playtest | Needs a human. Tracked in `QA_REPORT.md` and never marked PASS by the agent. |
