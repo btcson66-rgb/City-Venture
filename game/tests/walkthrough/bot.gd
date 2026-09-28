@@ -42,6 +42,8 @@ func _run() -> void:
 			await Walkthrough.new(self).run()
 		"trailer":
 			await Trailer.new(self).run()
+		"screens":
+			await _screens()
 	_finish()
 
 
@@ -388,6 +390,77 @@ func talk_through_dialogue(max_lines := 30, choose_first := true) -> void:
 
 
 # ------------------------------------------------------------------ simple screenshot tour
+## Screens the walkthrough doesn't reach, from a saved end-of-June company (the trailer fixture):
+## a big-contract decision, staff in the office, the loan desk, SaaS after launch, insolvency and the
+## closing statement, the pause menu with audio settings.
+func _screens() -> void:
+	DirAccess.make_dir_recursive_absolute(SaveSystem.DIR)
+	var f := FileAccess.open(SaveSystem._path(9), FileAccess.WRITE)
+	f.store_string(FileAccess.get_file_as_string("res://tests/walkthrough/fixtures/trailer_state.json"))
+	f.close()
+	SaveSystem.load_data(9)
+	while Clock.hour() != 10:
+		Clock.advance(60)
+	UIRoot._suppress_decisions = true
+	EventEngine.S()["queue"].clear()
+	SceneRouter._enter("interior", "small_office", "door", "up")
+	UIRoot.set_hud_visible(true)
+	await wait(0.8)
+	# the Crestline decision (long detail text must wrap)
+	var inst := EventEngine.trigger("crestline_big_offer", {})
+	UIRoot.open_modal(DecisionModal.new(inst))
+	await wait(0.6)
+	await shot("screen_decision_big_contract")
+	UIRoot.close_all()
+	# staff at work in the office
+	Staff.register_employer()
+	for role in ["packer", "developer", "marketer"]:
+		Staff.post_job(role)
+		Clock.advance(19 * 60)
+		Staff.hire(Staff.S()["applicants"][0]["id"])
+	while not (Clock.weekday() >= 1 and Clock.weekday() <= 5 and Clock.hour() == 11):
+		Clock.advance(60)
+	SceneRouter._enter("interior", "small_office", "door", "up")
+	await wait(1.6)
+	await shot("screen_staff_in_office")
+	UIRoot.open_modal(CompanyOS.new("office"))
+	await wait(0.3)
+	await click_named("Tab_people", 2.0)
+	await wait(0.4)
+	await shot("screen_people_team")
+	UIRoot.close_all()
+	# SaaS after launch
+	Saas.start("salon_booking")
+	Saas.add_dev(Saas.dev_needed(), false)
+	Saas.launch()
+	Clock.advance(21 * Clock.DAY)
+	UIRoot.open_modal(CompanyOS.new("office"))
+	await wait(0.3)
+	await click_named("Tab_saas", 2.0)
+	await wait(0.4)
+	await shot("screen_saas_live")
+	UIRoot.close_all()
+	UIRoot.open_modal(LoanModal.new(true))
+	await wait(0.4)
+	await shot("screen_loan_desk")
+	UIRoot.close_all()
+	UIRoot.open_modal(PauseMenu.new())
+	await wait(0.4)
+	await shot("screen_pause_audio")
+	UIRoot.close_all()
+	# insolvency and the closing statement
+	Insolvency.begin(GameState.company_id(), I18n.t("three payrolls in a row went unpaid"))
+	await wait(0.8)
+	await shot("screen_insolvency")
+	var m = UIRoot.top_modal()
+	if m is InsolvencyModal:
+		await click_named("CloseCompany", 2.0)
+		await wait(0.5)
+		await shot("screen_closing_statement")
+	expect(GameState.company_id() == "", "company closed from the insolvency screen")
+	expect(Ledger.check_balanced(), "ledger balanced after closing")
+
+
 func _shots() -> void:
 	await shot("main_menu")
 	var rep: String = await BugReport.capture(get_tree())

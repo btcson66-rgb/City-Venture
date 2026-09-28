@@ -7,7 +7,7 @@ extends Node
 const SETTINGS := "user://settings.cfg"
 const SFX := ["click", "open", "close", "notify", "cash", "spend", "success", "fanfare", "error", "phone", "door", "page"]
 
-var music_volume := 0.7
+var music_volume := 0.8
 var sfx_volume := 0.8
 var _a: AudioStreamPlayer
 var _b: AudioStreamPlayer
@@ -120,7 +120,7 @@ func music(track: String) -> void:
 		_a.stream = s
 		_a.volume_db = -40.0
 		_a.play()
-		tw.tween_property(_a, "volume_db", -6.0, 1.2)
+		tw.tween_property(_a, "volume_db", -1.0, 1.2)
 	tw.chain().tween_callback(func(): if old != _a: old.stop())
 
 

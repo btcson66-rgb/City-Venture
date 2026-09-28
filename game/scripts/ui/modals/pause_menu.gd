@@ -45,7 +45,7 @@ func build() -> void:
 		var ah := UIK.hbox(3)
 		ah.add_child(UIK.label(row[0], 8, Art.C_MUTED))
 		var cur: float = Sound.music_volume if row[1] == "music" else Sound.sfx_volume
-		for lv in [[0.0, "Off"], [0.35, "Low"], [0.7, "Mid"], [1.0, "High"]]:
+		for lv in [[0.0, "Off"], [0.4, "Low"], [0.8, "Mid"], [1.0, "High"]]:
 			var key: String = row[1]
 			var b := UIK.button(lv[1], func():
 				if key == "music":

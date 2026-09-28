@@ -1,0 +1,35 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+ALSA lib conf.c:5204:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+ALSA lib conf.c:5204:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+ALSA lib conf.c:5204:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5727:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2721:(snd_pcm_open_noupdate) Unknown PCM default
+ERROR: Condition "status < 0" is true. Returning: ERR_CANT_OPEN
+   at: init_output_device (drivers/alsa/audio_driver_alsa.cpp:90)
+WARNING: All audio drivers failed, falling back to the dummy driver.
+     at: initialize (servers/audio_server.cpp:244)
+
+   1.5s [7月1日（週二） 上午 10:34]   shot 01_screen_decision_big_contract.png
+   3.2s [7月4日（週五） 上午 11:36]   shot 02_screen_staff_in_office.png
+   3.4s [7月4日（週五） 上午 11:36]   click [Tab_people] People
+   4.2s [7月4日（週五） 上午 11:36]   shot 03_screen_people_team.png
+   5.0s [7月25日（週五） 上午 11:36]   click [Tab_saas] SaaS
+   5.7s [7月25日（週五） 上午 11:36]   shot 04_screen_saas_live.png
+   6.2s [7月25日（週五） 上午 11:36]   shot 05_screen_loan_desk.png
+   6.5s [7月25日（週五） 上午 11:36]   shot 06_screen_pause_audio.png
+   7.4s [7月25日（週五） 上午 11:36]   shot 07_screen_insolvency.png
+   7.4s [7月25日（週五） 上午 11:36]   click [CloseCompany] Close the company: sell off, pay what we can, star
+   8.2s [7月25日（週五） 上午 11:36]   shot 08_screen_closing_statement.png
+   8.2s [7月25日（週五） 上午 11:36]   ok  company closed from the insolvency screen
+   8.2s [7月25日（週五） 上午 11:36]   ok  ledger balanced after closing
+   8.2s [7月25日（週五） 上午 11:36] BOT FINISHED — 0 failure(s) · 8.2s real
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+     at: cleanup (core/object/object.cpp:2514)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:795)

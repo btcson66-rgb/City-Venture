@@ -2,9 +2,13 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
 ============================================================
 
 謝謝你幫忙測試！這是一款在現代城市裡創業、經營公司的像素風模擬 RPG。
-目前是「垂直切片」測試版：可以完整玩到第一章到第三章（開始電商、賺到第一塊錢、登記公司、月結）。
+目前可以完整玩到第一章到第六章（開始電商、賺到第一塊錢、登記公司、月結、聘員工、大合約、現金危機）。
 
-這一版新增（依第一輪測試回饋）：
+0.1.3 新增：第四～六章（聘員工與發薪、Crestline 大合約、現金危機）、員工系統、
+  銀行貸款與信用分數、破產與重新開始、SaaS 軟體事業、背景音樂與音效（暫停選單可調音量）、
+  Company OS「財務」裡的每週現金預測。
+
+0.1.2 新增（依第一輪測試回饋）：
   ・新手教學：左上角有一步一步的教學卡片，金色箭頭會指向下一個目標。
     每個房間的出口都有發光的「出口」地墊，街道邊緣有「→ 區名」標示。
   ・自動存檔：換場景、每 15 秒、切換分頁或關閉視窗時都會自動存。網頁版重新整理後按「繼續」即可。
@@ -94,7 +98,7 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
 ------------------------------------------------------------
 七、已知問題（不用回報）
 ------------------------------------------------------------
-  ・還沒有音樂和音效。
+  ・音樂和音效是程式產生的暫代版本。
   ・角色和部分美術是暫代圖，之後會由美術重畫。
   ・手機、平板還不能玩（沒有觸控操作）。
   ・手機訊息和帳目紀錄會保留「當時」的語言，切換語言後舊紀錄不會跟著變。
@@ -105,8 +109,9 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
 ============================================================
 CITY VENTURE — Test build {VERSION} ({DATE})  ·  English
 ============================================================
-Thanks for testing! This build plays Chapters 1–3: start an online shop, earn your first dollar,
-register a company, and run it to the month-end report.
+Thanks for testing! This build plays Chapters 1–6: start an online shop, earn your first dollar, register a
+company, close a month, hire staff, land Crestline's big contract and survive the cash crunch. Also playable:
+part-time jobs, freelance consulting and a SaaS product.
 
 NEW IN THIS BUILD: step-by-step tutorial card and a gold guide arrow to your goal · glowing EXIT mats and
 street-edge signs · autosave on every scene change, every 15 s and when the tab/window closes (web: refresh,
@@ -135,5 +140,5 @@ REPORTING
   invited you. The game autosaves; Continue on the main menu picks up where you were. Saves: Windows %APPDATA%\CityVenture · macOS ~/Library/Application Support/CityVenture ·
   Linux ~/.local/share/CityVenture.
 
-KNOWN ISSUES: no audio yet · placeholder character art · no touch controls · old messages keep the
+KNOWN ISSUES: placeholder (generated) music and sound · placeholder character art · no touch controls · old messages keep the
 language they were written in · translations not yet proofread.

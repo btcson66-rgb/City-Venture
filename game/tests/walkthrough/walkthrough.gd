@@ -673,7 +673,7 @@ func _chapters_4_to_6() -> void:
 	await bot.wait(0.5)
 	await bot.shot("contract_restock")
 	await close_modal()
-	await pass_time_at_home(func(): return Contracts.can_deliver(c["id"]), 6)
+	await pass_time_at_home(func(): return Contracts.can_deliver(c["id"]), 12, true)
 	await _home_laptop("contracts")
 	await bot.click_named("DeliverContract", 3.0)
 	await bot.wait(0.6)

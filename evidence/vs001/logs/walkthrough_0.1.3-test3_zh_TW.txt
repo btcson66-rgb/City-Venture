@@ -1,0 +1,828 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+ALSA lib conf.c:5204:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+ALSA lib conf.c:5204:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+ALSA lib conf.c:5204:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5727:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2721:(snd_pcm_open_noupdate) Unknown PCM default
+ERROR: Condition "status < 0" is true. Returning: ERR_CANT_OPEN
+   at: init_output_device (drivers/alsa/audio_driver_alsa.cpp:90)
+WARNING: All audio drivers failed, falling back to the dummy driver.
+     at: initialize (servers/audio_server.cpp:244)
+
+   0.1s STEP Main menu → New Game
+   1.7s   shot 01_main_menu.png
+   1.7s   click [NewGame] New Game
+   3.0s STEP Character Creator
+   3.1s   shot 02_creator_default.png
+   3.1s   click [Tab_hair] Hair
+   3.3s   click [Next_hair] ▶
+   3.8s   click [Tab_face] Face
+   4.0s   click [Next_face] ▶
+   4.2s   click [Next_eye_shape] ▶
+   4.3s   click [Tab_body] Body
+   4.6s   click [Next_presentation] ▶
+   5.3s   shot 03_creator_customised.png
+   5.3s   click [Tab_outfit] Outfit
+   5.5s   click "Startup Casual"
+   6.3s   ok  appearance changed from default (short_neat)
+   6.4s   shot 04_creator_final.png
+   6.4s   click [Start] Start in Aurelia  →
+   6.6s [6月1日（週日） 下午 2:00] STEP Arrival sequence
+   9.1s [6月1日（週日） 下午 2:00]   shot 05_arrival_train.png
+  12.7s [6月1日（週日） 下午 2:00]   shot 06_arrival_phone.png
+  17.7s [6月1日（週日） 下午 2:01]   ok  spawned in the Riverside apartment
+  17.7s [6月1日（週日） 下午 2:01]   ok  starting cash $30,000
+  17.7s [6月1日（週日） 下午 2:01]   ok  name saved
+  19.3s [6月1日（週日） 下午 2:03]   shot 07_apartment_arrival.png
+  19.3s [6月1日（週日） 下午 2:03] STEP Chapter 1 — phone & Maya
+  22.6s [6月1日（週日） 下午 2:07]   shot 08_phone_home.png
+  22.6s [6月1日（週日） 下午 2:07]   click [App_messages] 訊息 2
+  23.2s [6月1日（週日） 下午 2:07]   click [Thread_maya] Maya  ● Call me. Or text. Or whate
+  25.4s [6月1日（週日） 下午 2:07]   choose "› 嗯。"
+  28.5s [6月1日（週日） 下午 2:07]   choose "› 我要開公司。"
+  32.1s [6月1日（週日） 下午 2:07]   ok  Maya conversation done
+  32.1s [6月1日（週日） 下午 2:07] STEP Head outside
+  35.3s [6月1日（週日） 下午 2:13]   ok  walked back outside
+  35.3s [6月1日（週日） 下午 2:13]   ok  visited Riverside
+  35.5s [6月1日（週日） 下午 2:13]   shot 09_riverside_outside_home.png
+  35.5s [6月1日（週日） 下午 2:13] STEP Bloom Coffee
+  38.8s [6月1日（週日） 下午 2:18]   ok  entered Bloom Coffee
+  38.9s [6月1日（週日） 下午 2:18]   shot 10_bloom_coffee_inside.png
+  40.7s [6月1日（週日） 下午 2:21]   use "Order coffee ($4.50)"
+  42.8s [6月1日（週日） 下午 2:21]   choose "› 麻煩了。"
+  48.2s [6月1日（週日） 下午 2:32]   ok  bought a coffee from Jun
+  51.3s [6月1日（週日） 下午 2:38]   ok  walked back outside
+  51.3s [6月1日（週日） 下午 2:38] STEP Walk east to Startup Hub
+  52.9s [6月1日（週日） 下午 2:40]   shot 11_riverside_street.png
+  65.5s [6月1日（週日） 下午 3:11]   ok  walked to Startup Hub
+  65.7s [6月1日（週日） 下午 3:11]   shot 12_startup_hub_arrive.png
+  65.7s [6月1日（週日） 下午 3:11] STEP Nexus Co-work
+  69.6s [6月1日（週日） 下午 3:17]   ok  entered Nexus Co-work
+  69.7s [6月1日（週日） 下午 3:17]   shot 13_cowork_inside.png
+  71.4s [6月1日（週日） 下午 3:20]   use "Reception — desks & day passes"
+  74.2s [6月1日（週日） 下午 3:20]   choose "› 對。先看看。"
+  77.4s [6月1日（週日） 下午 3:20]   click [DayPass] Buy a day pass ($15)
+  78.5s [6月1日（週日） 下午 3:20] STEP Business Board
+  80.2s [6月1日（週日） 下午 3:23]   use "Business Board"
+  81.1s [6月1日（週日） 下午 3:23]   shot 14_business_board.png
+  81.1s [6月1日（週日） 下午 3:23]   click [Biz_saas] ● SaaS／軟體
+  81.9s [6月1日（週日） 下午 3:23]   shot 15_business_board_planned_saas.png
+  81.9s [6月1日（週日） 下午 3:23]   click [Biz_ecommerce] ● 電商
+  82.2s [6月1日（週日） 下午 3:23]   click [StartEcommerce] Start an ecommerce side business
+  83.8s [6月1日（週日） 下午 3:23]   ok  picked ecommerce as first business
+  86.4s [6月1日（週日） 下午 3:27]   ok  Chapter 1 complete
+  86.4s [6月1日（週日） 下午 3:27] STEP Chapter 2 — buy stock at a hot desk (Company OS)
+  89.8s [6月1日（週日） 下午 3:32]   use "Work at a hot desk — Company OS"
+  90.5s [6月1日（週日） 下午 3:32]   shot 16_company_os_overview_personal.png
+  90.5s [6月1日（週日） 下午 3:32]   click [Tab_operations] Operations
+  91.4s [6月1日（週日） 下午 3:32]   shot 17_company_os_suppliers.png
+  91.4s [6月1日（週日） 下午 3:32]   click [Buy_tradelink_wholesale_wireless_earbuds] 購買 $900
+  92.3s [6月1日（週日） 下午 3:42]   click [Buy_tradelink_wholesale_water_bottle] 購買 $408
+  93.2s [6月1日（週日） 下午 3:52]   click [Buy_tradelink_wholesale_desk_lamp] 購買 $460
+  94.0s [6月1日（週日） 下午 4:02]   click [Buy_tradelink_wholesale_phone_stand] 購買 $272
+  95.0s [6月1日（週日） 下午 4:12]   ok  placed purchase orders (MOQ, prepaid): 4 POs, cash $27,940.50
+  95.1s [6月1日（週日） 下午 4:12]   shot 18_company_os_purchase_orders.png
+  95.7s [6月1日（週日） 下午 4:12] STEP Home to wait for stock
+  99.1s [6月1日（週日） 下午 4:18]   ok  walked back outside
+ 103.1s [6月1日（週日） 下午 4:36]   ok  walked to Riverside
+ 119.1s [6月1日（週日） 下午 5:00]   ok  entered Riverside Tower
+ 121.2s [6月1日（週日） 下午 5:03]   use "Sleep"
+ 121.9s [6月1日（週日） 下午 5:03]   click [Nap] Nap for 2 hours
+ 123.7s [6月1日（週日） 下午 7:04]   use "Sleep"
+ 124.4s [6月1日（週日） 下午 7:04]   click [Sleep] Sleep until 7:00 AM
+ 126.5s [6月2日（週一） 上午 7:01]   use "Sleep"
+ 127.1s [6月2日（週一） 上午 7:01]   click [Nap] Nap for 2 hours
+ 129.0s [6月2日（週一） 上午 9:02]   use "Sleep"
+ 129.6s [6月2日（週一） 上午 9:02]   click [Nap] Nap for 2 hours
+ 131.4s [6月2日（週一） 上午 11:03]   use "Sleep"
+ 132.0s [6月2日（週一） 上午 11:03]   click [Nap] Nap for 2 hours
+ 133.9s [6月2日（週一） 下午 1:04]   use "Sleep"
+ 134.5s [6月2日（週一） 下午 1:04]   click [Nap] Nap for 2 hours
+ 136.4s [6月2日（週一） 下午 3:05]   use "Sleep"
+ 137.0s [6月2日（週一） 下午 3:05]   click [Nap] Nap for 2 hours
+ 138.8s [6月2日（週一） 下午 5:06]   use "Sleep"
+ 139.5s [6月2日（週一） 下午 5:06]   click [Nap] Nap for 2 hours
+ 141.3s [6月2日（週一） 下午 7:07]   use "Sleep"
+ 141.9s [6月2日（週一） 下午 7:07]   click [Sleep] Sleep until 7:00 AM
+ 144.0s [6月3日（週二） 上午 7:01]   use "Sleep"
+ 144.6s [6月3日（週二） 上午 7:01]   click [Nap] Nap for 2 hours
+ 146.5s [6月3日（週二） 上午 9:02]   use "Sleep"
+ 147.2s [6月3日（週二） 上午 9:02]   click [Nap] Nap for 2 hours
+ 148.9s [6月3日（週二） 上午 11:03]   use "Sleep"
+ 149.6s [6月3日（週二） 上午 11:03]   click [Nap] Nap for 2 hours
+ 151.5s [6月3日（週二） 下午 1:04]   use "Sleep"
+ 152.1s [6月3日（週二） 下午 1:04]   click [Nap] Nap for 2 hours
+ 153.7s [6月3日（週二） 下午 3:04]   ok  stock delivered to the apartment
+ 154.4s [6月3日（週二） 下午 3:05]   shot 19_apartment_with_stock.png
+ 154.4s [6月3日（週二） 下午 3:05] STEP List products on ShopLane
+ 155.9s [6月3日（週二） 下午 3:08]   use "Use laptop — Company OS"
+ 156.5s [6月3日（週二） 下午 3:08]   click [Tab_sales] Sales
+ 157.4s [6月3日（週二） 下午 3:08]   shot 20_company_os_sales_ready.png
+ 157.4s [6月3日（週二） 下午 3:08]   click [ListSelf_wireless_earbuds] Shoot photos myself & list (1 h 20 min)
+ 158.2s [6月3日（週二） 下午 4:28]   click [ListSelf_water_bottle] Shoot photos myself & list (1 h 20 min)
+ 159.0s [6月3日（週二） 下午 5:48]   click [ListSelf_desk_lamp] Shoot photos myself & list (1 h 20 min)
+ 159.8s [6月3日（週二） 下午 7:08]   click [ListSelf_phone_stand] Shoot photos myself & list (1 h 20 min)
+ 160.7s [6月3日（週二） 下午 8:28]   click [AdPlus_wireless_earbuds] +
+ 161.7s [6月3日（週二） 下午 8:28]   shot 21_company_os_listings_live.png
+ 161.7s [6月3日（週二） 下午 8:28]   ok  listings live
+ 162.3s [6月3日（週二） 下午 8:28] STEP First order → pack → ship
+ 164.4s [6月3日（週二） 下午 8:31]   use "Packing table"
+ 165.2s [6月3日（週二） 下午 8:31]   shot 22_packing_table.png
+ 165.2s [6月3日（週二） 下午 8:31]   click [Pack] 打包 3 筆訂單（24 分鐘）
+ 166.2s [6月3日（週二） 下午 8:55]   click [CourierExpress] 快遞 · 快捷 1 天（$36.30）
+ 167.5s [6月3日（週二） 下午 8:55]   ok  first order came in
+ 167.5s [6月3日（週二） 下午 8:55]   ok  handed to the courier (pickup booked)
+ 167.5s [6月3日（週二） 下午 8:55] STEP Delivery → first dollar
+ 170.7s [6月3日（週二） 下午 9:00]   use "Sleep"
+ 171.3s [6月3日（週二） 下午 9:00]   click [Sleep] Sleep until 7:00 AM
+ 176.3s [6月4日（週三） 上午 7:05]   use "Packing table"
+ 177.0s [6月4日（週三） 上午 7:05]   click [Pack] 打包 5 筆訂單（40 分鐘）
+ 178.1s [6月4日（週三） 上午 7:45]   click [CourierExpress] 快遞 · 快捷 1 天（$50.50）
+ 182.5s [6月4日（週三） 上午 7:50]   use "Sleep"
+ 183.1s [6月4日（週三） 上午 7:50]   click [Nap] Nap for 2 hours
+ 185.0s [6月4日（週三） 上午 9:51]   use "Sleep"
+ 185.6s [6月4日（週三） 上午 9:51]   click [Nap] Nap for 2 hours
+ 190.3s [6月4日（週三） 上午 11:56]   use "Packing table"
+ 191.0s [6月4日（週三） 上午 11:56]   click [Pack] 打包 1 筆訂單（8 分鐘）
+ 192.0s [6月4日（週三） 下午 12:04]   click [CourierExpress] 快遞 · 快捷 1 天（$14.90）
+ 196.5s [6月4日（週三） 下午 12:09]   use "Sleep"
+ 197.1s [6月4日（週三） 下午 12:09]   click [Nap] Nap for 2 hours
+ 201.8s [6月4日（週三） 下午 2:14]   use "Packing table"
+ 202.6s [6月4日（週三） 下午 2:14]   click [Pack] 打包 1 筆訂單（8 分鐘）
+ 203.6s [6月4日（週三） 下午 2:22]   click [CourierExpress] 快遞 · 快捷 1 天（$14.90）
+ 208.0s [6月4日（週三） 下午 2:27]   use "Sleep"
+ 208.6s [6月4日（週三） 下午 2:27]   click [Nap] Nap for 2 hours
+ 213.3s [6月4日（週三） 下午 4:32]   use "Packing table"
+ 214.0s [6月4日（週三） 下午 4:32]   click [Pack] 打包 1 筆訂單（8 分鐘）
+ 215.0s [6月4日（週三） 下午 4:40]   click [CourierExpress] 快遞 · 快捷 1 天（$18.50）
+ 219.4s [6月4日（週三） 下午 4:45]   use "Sleep"
+ 220.0s [6月4日（週三） 下午 4:45]   click [Nap] Nap for 2 hours
+ 224.8s [6月4日（週三） 下午 6:50]   use "Packing table"
+ 225.5s [6月4日（週三） 下午 6:50]   click [Pack] 打包 1 筆訂單（8 分鐘）
+ 226.5s [6月4日（週三） 下午 6:58]   click [CourierExpress] 快遞 · 快捷 1 天（$14.90）
+ 230.9s [6月4日（週三） 下午 7:03]   use "Sleep"
+ 231.6s [6月4日（週三） 下午 7:03]   click [Sleep] Sleep until 7:00 AM
+ 236.6s [6月5日（週四） 上午 7:05]   use "Packing table"
+ 237.3s [6月5日（週四） 上午 7:05]   click [Pack] 打包 2 筆訂單（16 分鐘）
+ 238.3s [6月5日（週四） 上午 7:21]   click [CourierExpress] 快遞 · 快捷 1 天（$23.80）
+ 239.6s [6月5日（週四） 上午 7:21]   ok  first order delivered (Earn Your First Dollar)
+ 239.6s [6月5日（週四） 上午 7:21]   revenue booked $165.94 · ShopLane balance $149.34 · cash $27,621.80
+ 239.7s [6月5日（週四） 上午 7:21]   shot 23_first_dollar.png
+ 239.7s [6月5日（週四） 上午 7:21] STEP First customer issue
+ 242.7s [6月5日（週四） 上午 7:26]   use "Sleep"
+ 243.3s [6月5日（週四） 上午 7:26]   click [Nap] Nap for 2 hours
+ 248.0s [6月5日（週四） 上午 9:31]   use "Packing table"
+ 248.8s [6月5日（週四） 上午 9:31]   click [Pack] 打包 3 筆訂單（24 分鐘）
+ 249.8s [6月5日（週四） 上午 9:55]   click [CourierExpress] 快遞 · 快捷 1 天（$39.90）
+ 254.2s [6月5日（週四） 上午 10:00]   use "Sleep"
+ 254.8s [6月5日（週四） 上午 10:00]   click [Nap] Nap for 2 hours
+ 259.5s [6月5日（週四） 下午 12:05]   use "Packing table"
+ 260.2s [6月5日（週四） 下午 12:05]   click [Pack] 打包 2 筆訂單（16 分鐘）
+ 261.2s [6月5日（週四） 下午 12:21]   click [CourierExpress] 快遞 · 快捷 1 天（$27.40）
+ 265.7s [6月5日（週四） 下午 12:26]   use "Sleep"
+ 266.3s [6月5日（週四） 下午 12:26]   click [Nap] Nap for 2 hours
+ 271.0s [6月5日（週四） 下午 2:31]   use "Packing table"
+ 271.7s [6月5日（週四） 下午 2:31]   click [Pack] 打包 2 筆訂單（16 分鐘）
+ 272.7s [6月5日（週四） 下午 2:47]   click [CourierExpress] 快遞 · 快捷 1 天（$23.80）
+ 277.2s [6月5日（週四） 下午 2:52]   use "Sleep"
+ 277.8s [6月5日（週四） 下午 2:52]   click [Nap] Nap for 2 hours
+ 282.6s [6月5日（週四） 下午 4:57]   use "Packing table"
+ 283.3s [6月5日（週四） 下午 4:57]   click [Pack] 打包 2 筆訂單（16 分鐘）
+ 284.4s [6月5日（週四） 下午 5:13]   click [CourierExpress] 快遞 · 快捷 1 天（$23.80）
+ 289.0s [6月5日（週四） 下午 5:18]   use "Sleep"
+ 289.6s [6月5日（週四） 下午 5:18]   click [Nap] Nap for 2 hours
+ 294.3s [6月5日（週四） 下午 7:23]   use "Packing table"
+ 295.0s [6月5日（週四） 下午 7:23]   click [Pack] 打包 3 筆訂單（24 分鐘）
+ 296.0s [6月5日（週四） 下午 7:47]   click [CourierExpress] 快遞 · 快捷 1 天（$36.30）
+ 300.4s [6月5日（週四） 下午 7:52]   use "Sleep"
+ 301.1s [6月5日（週四） 下午 7:52]   click [Sleep] Sleep until 7:00 AM
+ 303.0s [6月6日（週五） 上午 7:00]   shot 24_decision_customer_return_first.png
+ 303.0s [6月6日（週五） 上午 7:00]   decision customer_return_first → replace
+ 303.0s [6月6日（週五） 上午 7:00]   click [Choice_replace] 寄一個新的（快捷）
+ 304.5s [6月6日（週五） 上午 7:00]   shot 25_decision_outcome_customer_return_first.png
+ 304.5s [6月6日（週五） 上午 7:00]   click "OK"
+ 308.1s [6月6日（週五） 上午 7:05]   use "Packing table"
+ 308.8s [6月6日（週五） 上午 7:05]   click [Pack] 打包 8 筆訂單（1 小時 4 分）
+ 309.8s [6月6日（週五） 上午 8:09]   click [CourierExpress] 快遞 · 快捷 1 天（$80.80）
+ 311.1s [6月6日（週五） 上午 8:09]   ok  resolved the first customer issue
+ 313.2s [6月6日（週五） 上午 8:12]   ok  Chapter 2 complete
+ 313.2s [6月6日（週五） 上午 8:12] STEP Chapter 3 — wait for a weekday morning
+ 315.8s [6月6日（週五） 上午 8:17]   ok  walked back outside
+ 315.8s [6月6日（週五） 上午 8:17] STEP Metro to Civic Center → City Hall
+ 324.2s [6月6日（週五） 上午 8:30]   use "捷運——河濱區站"
+ 325.2s [6月6日（週五） 上午 8:30]   shot 26_metro_civic_center.png
+ 325.2s [6月6日（週五） 上午 8:30]   click [Go_civic_center] 市政中心  ·  12 分鐘
+ 326.4s [6月6日（週五） 上午 8:43]   ok  took the Metro to Civic Center
+ 326.5s [6月6日（週五） 上午 8:43]   shot 27_civic_center.png
+ 335.0s [6月6日（週五） 上午 9:11]   ok  entered Aurelia City Hall
+ 335.1s [6月6日（週五） 上午 9:11]   shot 28_city_hall_inside.png
+ 336.7s [6月6日（週五） 上午 9:13]   use "Registration counter"
+ 338.8s [6月6日（週五） 上午 9:13]   choose "› 我要登記公司。"
+ 342.2s [6月6日（週五） 上午 9:13]   shot 29_registration_form.png
+ 342.2s [6月6日（週五） 上午 9:13]   click [Submit] Register & pay
+ 343.3s [6月6日（週五） 上午 9:58]   shot 30_registration_done.png
+ 343.3s [6月6日（週五） 上午 9:58]   click "Thanks"
+ 343.5s [6月6日（週五） 上午 9:58]   ok  registered Riverlight Goods
+ 344.9s [6月6日（週五） 上午 10:00]   shot 31_decision_low_cash_warning.png
+ 344.9s [6月6日（週五） 上午 10:00]   decision low_cash_warning → reduce
+ 344.9s [6月6日（週五） 上午 10:00]   click [Choice_reduce] 縮減開支（暫停廣告、生活從簡）
+ 346.4s [6月6日（週五） 上午 10:00]   shot 32_decision_outcome_low_cash_warning.png
+ 346.4s [6月6日（週五） 上午 10:00]   click "OK"
+ 348.5s [6月6日（週五） 上午 10:04]   ok  walked back outside
+ 348.5s [6月6日（週五） 上午 10:04] STEP Walk to the Financial District → Nexus Bank
+ 358.1s [6月6日（週五） 上午 10:24]   ok  walked to Financial District
+ 362.3s [6月6日（週五） 上午 10:30]   ok  entered Nexus Bank
+ 362.4s [6月6日（週五） 上午 10:30]   shot 33_bank_inside.png
+ 363.7s [6月6日（週五） 上午 10:32]   use "Teller — business banking"
+ 364.6s [6月6日（週五） 上午 10:32]   click "$15,000"
+ 365.0s [6月6日（週五） 上午 10:32]   click [OpenAccount] 存入 $15,000 開戶
+ 366.4s [6月6日（週五） 上午 11:02]   shot 34_bank_account_opened.png
+ 366.9s [6月6日（週五） 上午 11:02]   ok  business account opened with founder capital
+ 369.5s [6月6日（週五） 上午 11:07]   ok  walked back outside
+ 369.5s [6月6日（週五） 上午 11:07] STEP Metro to Startup Hub → lease Suite 2B
+ 376.3s [6月6日（週五） 上午 11:17]   use "捷運——金融區站"
+ 377.4s [6月6日（週五） 上午 11:17]   shot 35_metro_startup_hub.png
+ 377.4s [6月6日（週五） 上午 11:17]   click [Go_startup_hub] 新創園區  ·  8 分鐘
+ 378.5s [6月6日（週五） 上午 11:26]   ok  took the Metro to Startup Hub
+ 383.6s [6月6日（週五） 上午 11:34]   ok  entered 22 Founders Lane
+ 383.7s [6月6日（週五） 上午 11:34]   shot 36_suite_2b_tour.png
+ 385.1s [6月6日（週五） 上午 11:36]   use "和 Tom 說話"
+ 387.6s [6月6日（週五） 上午 11:36]   click [SignLease] Sign the lease
+ 388.8s [6月6日（週五） 上午 11:36]   ok  leased Suite 2B
+ 389.5s [6月6日（週五） 上午 11:37]   shot 37_suite_2b_company_sign.png
+ 389.5s [6月6日（週五） 上午 11:37] STEP Sit at the desk → Company OS as the company
+ 390.5s [6月6日（週五） 上午 11:39]   use "Sit at your desk — Company OS"
+ 391.9s [6月6日（週五） 上午 11:39]   shot 38_company_os_as_company.png
+ 391.9s [6月6日（週五） 上午 11:39]   click [Tab_finance] Finance
+ 392.8s [6月6日（週五） 上午 11:39]   shot 39_company_os_finance.png
+ 392.8s [6月6日（週五） 上午 11:39]   click [Tab_inventory] Inventory
+ 393.6s [6月6日（週五） 上午 11:39]   shot 40_company_os_inventory.png
+ 397.1s [6月6日（週五） 上午 11:44]   ok  Chapter 3 complete
+ 399.5s [6月6日（週五） 上午 11:48]   ok  walked back outside
+ 399.6s [6月6日（週五） 上午 11:48]   shot 41_startup_hub_office_sign.png
+ 399.6s [6月6日（週五） 上午 11:48] STEP Careers — part-time job at Nexus Co-work
+ 406.0s [6月6日（週五） 上午 11:58]   ok  entered Nexus Co-work
+ 408.8s [6月6日（週五） 下午 12:02]   use "Business Board"
+ 409.5s [6月6日（週五） 下午 12:02]   click [Page_jobs] Part-time jobs
+ 410.4s [6月6日（週五） 下午 12:02]   shot 42_business_board_jobs.png
+ 410.4s [6月6日（週五） 下午 12:02]   click [Job_cowork_host] 詳情／應徵
+ 411.3s [6月6日（週五） 下午 12:02]   click [ApplyJob] Take the job
+ 412.2s [6月6日（週五） 下午 12:02]   shot 43_job_hired.png
+ 413.7s [6月6日（週五） 下午 12:02]   ok  hired as a community host
+ 414.9s [6月6日（週五） 下午 12:04]   use "Staff door — work a shift"
+ 415.8s [6月6日（週五） 下午 12:04]   shot 44_job_shift.png
+ 415.8s [6月6日（週五） 下午 12:04]   click [WorkShift] 上班 4 小時（+$72.00）
+ 417.8s [6月6日（週五） 下午 4:06]   ok  a 4-hour shift paid wages ($72.00)
+ 417.8s [6月6日（週五） 下午 4:06] STEP Careers — freelance gig at a hot desk
+ 420.6s [6月6日（週五） 下午 4:10]   use "Work at a hot desk — Company OS"
+ 421.2s [6月6日（週五） 下午 4:10]   click [Tab_freelance] Freelance
+ 421.9s [6月6日（週五） 下午 4:10]   click [StartFreelance] Start freelancing
+ 422.9s [6月6日（週五） 下午 4:10]   click [Accept_G1] Accept
+ 423.8s [6月6日（週五） 下午 4:10]   click [Work_G1] 工作 2 小時
+ 425.0s [6月6日（週五） 下午 6:10]   shot 45_freelance_gig.png
+ 425.0s [6月6日（週五） 下午 6:10]   ok  put hours into a freelance gig
+ 425.0s [6月6日（週五） 下午 6:10] STEP Careers — start a SaaS product
+ 425.0s [6月6日（週五） 下午 6:10]   click [Tab_saas] SaaS
+ 425.8s [6月6日（週五） 下午 6:10]   shot 46_saas_ideas.png
+ 425.8s [6月6日（週五） 下午 6:10]   click [Saas_freelancer_invoicing] Build this
+ 426.6s [6月6日（週五） 下午 6:10]   click [SaasCode] 寫程式 2 小時
+ 427.7s [6月6日（週五） 下午 8:10]   shot 47_saas_building.png
+ 427.7s [6月6日（週五） 下午 8:10]   ok  started building a SaaS product (2 dev h)
+ 431.7s [6月6日（週五） 下午 8:16]   ok  walked back outside
+ 431.7s [6月6日（週五） 下午 8:16] STEP Run the company to month-end
+ 435.8s [6月6日（週五） 下午 8:34]   ok  walked to Riverside
+ 451.7s [6月6日（週五） 下午 8:58]   ok  entered Riverside Tower
+ 453.9s [6月6日（週五） 下午 9:02]   use "Sleep"
+ 454.5s [6月6日（週五） 下午 9:02]   click [Sleep] Sleep until 7:00 AM
+ 456.5s [6月7日（週六） 上午 7:00]   shot 48_decision_customer_return.png
+ 456.5s [6月7日（週六） 上午 7:00]   decision customer_return → replace
+ 456.5s [6月7日（週六） 上午 7:00]   click [Choice_replace] 寄一個新的
+ 458.0s [6月7日（週六） 上午 7:00]   shot 49_decision_outcome_customer_return.png
+ 458.0s [6月7日（週六） 上午 7:00]   click "OK"
+ 461.7s [6月7日（週六） 上午 7:05]   use "Packing table"
+ 462.4s [6月7日（週六） 上午 7:05]   click [Pack] 打包 15 筆訂單（2 h）
+ 463.5s [6月7日（週六） 上午 9:05]   click [CourierExpress] 快遞 · 快捷 1 天（$146.70）
+ 468.0s [6月7日（週六） 上午 9:10]   use "Sleep"
+ 468.6s [6月7日（週六） 上午 9:10]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 470.5s [6月8日（週日） 上午 7:00]   shot 50_decision_customer_return.png
+ 470.5s [6月8日（週日） 上午 7:00]   decision customer_return → replace
+ 470.5s [6月8日（週日） 上午 7:00]   click [Choice_replace] 寄一個新的
+ 471.9s [6月8日（週日） 上午 7:00]   shot 51_decision_outcome_customer_return.png
+ 471.9s [6月8日（週日） 上午 7:00]   click "OK"
+ 475.7s [6月8日（週日） 上午 7:05]   use "Packing table"
+ 476.4s [6月8日（週日） 上午 7:05]   click [Pack] 打包 14 筆訂單（1 小時 52 分）
+ 477.4s [6月8日（週日） 上午 8:57]   click [CourierExpress] 快遞 · 快捷 1 天（$134.20）
+ 481.8s [6月8日（週日） 上午 9:02]   use "Sleep"
+ 482.4s [6月8日（週日） 上午 9:02]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 487.5s [6月9日（週一） 上午 7:05]   use "Packing table"
+ 488.2s [6月9日（週一） 上午 7:05]   click [Pack] 打包 6 筆訂單（48 分鐘）
+ 489.2s [6月9日（週一） 上午 7:53]   click [CourierExpress] 快遞 · 快捷 1 天（$66.60）
+ 493.6s [6月9日（週一） 上午 7:58]   use "Sleep"
+ 494.3s [6月9日（週一） 上午 7:58]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 496.2s [6月10日（週二） 上午 7:00]   shot 52_decision_viral_mention.png
+ 496.2s [6月10日（週二） 上午 7:00]   decision viral_mention → ride
+ 496.2s [6月10日（週二） 上午 7:00]   click [Choice_ride] 順其自然
+ 497.7s [6月10日（週二） 上午 7:00]   shot 53_decision_outcome_viral_mention.png
+ 497.7s [6月10日（週二） 上午 7:00]   click "OK"
+ 501.5s [6月10日（週二） 上午 7:05]   use "Packing table"
+ 502.2s [6月10日（週二） 上午 7:05]   click [Pack] 打包 11 筆訂單（1 小時 28 分）
+ 503.2s [6月10日（週二） 上午 8:33]   click [CourierExpress] 快遞 · 快捷 1 天（$111.10）
+ 507.7s [6月10日（週二） 上午 8:38]   use "Sleep"
+ 508.3s [6月10日（週二） 上午 8:38]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 510.3s [6月11日（週三） 上午 7:00]   shot 54_decision_customer_return.png
+ 510.3s [6月11日（週三） 上午 7:00]   decision customer_return → replace
+ 510.3s [6月11日（週三） 上午 7:00]   click [Choice_replace] 寄一個新的
+ 511.7s [6月11日（週三） 上午 7:00]   shot 55_decision_outcome_customer_return.png
+ 511.7s [6月11日（週三） 上午 7:00]   click "OK"
+ 515.4s [6月11日（週三） 上午 7:05]   use "Packing table"
+ 516.1s [6月11日（週三） 上午 7:05]   click [Pack] 打包 21 筆訂單（2 小時 48 分）
+ 517.1s [6月11日（週三） 上午 9:53]   click [CourierExpress] 快遞 · 快捷 1 天（$200.10）
+ 521.6s [6月11日（週三） 上午 9:58]   use "Sleep"
+ 522.2s [6月11日（週三） 上午 9:58]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 527.2s [6月12日（週四） 上午 7:05]   use "Packing table"
+ 528.0s [6月12日（週四） 上午 7:05]   click [Pack] 打包 11 筆訂單（1 小時 28 分）
+ 529.0s [6月12日（週四） 上午 8:33]   click [CourierExpress] 快遞 · 快捷 1 天（$111.10）
+ 530.4s [6月12日（週四） 上午 8:33]   shot 56_decision_customer_return.png
+ 530.4s [6月12日（週四） 上午 8:33]   decision customer_return → replace
+ 530.4s [6月12日（週四） 上午 8:33]   click [Choice_replace] 寄一個新的
+ 531.8s [6月12日（週四） 上午 8:33]   shot 57_decision_outcome_customer_return.png
+ 531.8s [6月12日（週四） 上午 8:33]   click "OK"
+ 535.5s [6月12日（週四） 上午 8:38]   use "Sleep"
+ 536.1s [6月12日（週四） 上午 8:38]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 541.1s [6月13日（週五） 上午 7:05]   use "Packing table"
+ 541.8s [6月13日（週五） 上午 7:05]   click [Pack] 打包 20 筆訂單（2 小時 40 分）
+ 542.8s [6月13日（週五） 上午 9:45]   click [CourierExpress] 快遞 · 快捷 1 天（$194.80）
+ 547.2s [6月13日（週五） 上午 9:50]   use "Sleep"
+ 547.8s [6月13日（週五） 上午 9:50]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 549.8s [6月14日（週六） 上午 7:00]   shot 58_decision_customer_return.png
+ 549.8s [6月14日（週六） 上午 7:00]   decision customer_return → replace
+ 549.8s [6月14日（週六） 上午 7:00]   click [Choice_replace] 寄一個新的
+ 551.2s [6月14日（週六） 上午 7:00]   shot 59_decision_outcome_customer_return.png
+ 551.2s [6月14日（週六） 上午 7:00]   click "OK"
+ 554.9s [6月14日（週六） 上午 7:05]   use "Packing table"
+ 555.6s [6月14日（週六） 上午 7:05]   click [Pack] 打包 8 筆訂單（1 小時 4 分）
+ 556.6s [6月14日（週六） 上午 8:09]   click [CourierExpress] 快遞 · 快捷 1 天（$77.20）
+ 561.1s [6月14日（週六） 上午 8:14]   use "Sleep"
+ 561.6s [6月14日（週六） 上午 8:14]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 566.7s [6月15日（週日） 上午 7:05]   use "Packing table"
+ 567.4s [6月15日（週日） 上午 7:05]   click [Pack] 打包 9 筆訂單（1 小時 12 分）
+ 568.4s [6月15日（週日） 上午 8:17]   click [CourierExpress] 快遞 · 快捷 1 天（$89.70）
+ 572.8s [6月15日（週日） 上午 8:22]   use "Sleep"
+ 573.5s [6月15日（週日） 上午 8:22]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 575.4s [6月16日（週一） 上午 7:00]   shot 60_decision_supplier_price_increase.png
+ 575.4s [6月16日（週一） 上午 7:00]   decision supplier_price_increase → accept
+ 575.4s [6月16日（週一） 上午 7:00]   click [Choice_accept] 好。繼續跟你進貨。
+ 576.9s [6月16日（週一） 上午 7:00]   shot 61_decision_outcome_supplier_price_increase.png
+ 576.9s [6月16日（週一） 上午 7:00]   click "OK"
+ 577.6s [6月16日（週一） 上午 7:00]   shot 62_decision_customer_return.png
+ 577.6s [6月16日（週一） 上午 7:00]   decision customer_return → replace
+ 577.6s [6月16日（週一） 上午 7:00]   click [Choice_replace] 寄一個新的
+ 579.1s [6月16日（週一） 上午 7:00]   shot 63_decision_outcome_customer_return.png
+ 579.1s [6月16日（週一） 上午 7:00]   click "OK"
+ 582.8s [6月16日（週一） 上午 7:05]   use "Packing table"
+ 583.6s [6月16日（週一） 上午 7:05]   click [Pack] 打包 7 筆訂單（56 分鐘）
+ 584.6s [6月16日（週一） 上午 8:01]   click [CourierExpress] 快遞 · 快捷 1 天（$71.90）
+ 589.2s [6月16日（週一） 上午 8:06]   use "Sleep"
+ 589.8s [6月16日（週一） 上午 8:06]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 594.9s [6月17日（週二） 上午 7:05]   use "Packing table"
+ 595.6s [6月17日（週二） 上午 7:05]   click [Pack] 打包 12 筆訂單（1 小時 36 分）
+ 596.6s [6月17日（週二） 上午 8:41]   click [CourierExpress] 快遞 · 快捷 1 天（$127.20）
+ 600.0s [6月17日（週二） 上午 8:44]   use "Use laptop — Company OS"
+ 600.7s [6月17日（週二） 上午 8:44]   click [Tab_operations] Operations
+ 601.0s [6月17日（週二） 上午 8:44]   click [DeliverTo_riverside_studio] 河濱大樓 7C
+ 601.6s [6月17日（週二） 上午 8:44]   click [Buy_tradelink_wholesale_water_bottle] 購買 $408
+ 604.4s [6月17日（週二） 上午 8:57]   use "Sleep"
+ 605.0s [6月17日（週二） 上午 8:57]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 607.0s [6月18日（週三） 上午 7:00]   shot 64_decision_customer_return.png
+ 607.0s [6月18日（週三） 上午 7:00]   decision customer_return → replace
+ 607.0s [6月18日（週三） 上午 7:00]   click [Choice_replace] 寄一個新的
+ 608.5s [6月18日（週三） 上午 7:00]   shot 65_decision_outcome_customer_return.png
+ 608.5s [6月18日（週三） 上午 7:00]   click "OK"
+ 612.3s [6月18日（週三） 上午 7:05]   use "Packing table"
+ 613.0s [6月18日（週三） 上午 7:05]   click [Pack] 打包 9 筆訂單（1 小時 12 分）
+ 614.1s [6月18日（週三） 上午 8:17]   click [CourierExpress] 快遞 · 快捷 1 天（$86.10）
+ 617.4s [6月18日（週三） 上午 8:20]   use "Use laptop — Company OS"
+ 618.1s [6月18日（週三） 上午 8:20]   click [Tab_operations] Operations
+ 618.5s [6月18日（週三） 上午 8:20]   click [DeliverTo_riverside_studio] 河濱大樓 7C
+ 619.1s [6月18日（週三） 上午 8:20]   click [Buy_tradelink_wholesale_water_bottle] 購買 $408
+ 621.9s [6月18日（週三） 上午 8:33]   use "Sleep"
+ 622.5s [6月18日（週三） 上午 8:33]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 624.4s [6月19日（週四） 上午 7:00]   shot 66_decision_unexpected_large_order.png
+ 624.4s [6月19日（週四） 上午 7:00]   decision unexpected_large_order → review
+ 624.4s [6月19日（週四） 上午 7:00]   click [Choice_review] 把合約寄給我，我看看。
+ 625.9s [6月19日（週四） 上午 7:00]   shot 67_decision_outcome_unexpected_large_order.png
+ 625.9s [6月19日（週四） 上午 7:00]   click "OK"
+ 626.6s [6月19日（週四） 上午 7:00]   shot 68_decision_customer_return.png
+ 626.6s [6月19日（週四） 上午 7:00]   decision customer_return → replace
+ 626.6s [6月19日（週四） 上午 7:00]   click [Choice_replace] 寄一個新的
+ 628.1s [6月19日（週四） 上午 7:00]   shot 69_decision_outcome_customer_return.png
+ 628.1s [6月19日（週四） 上午 7:00]   click "OK"
+ 631.8s [6月19日（週四） 上午 7:05]   use "Packing table"
+ 632.6s [6月19日（週四） 上午 7:05]   click [Pack] 打包 9 筆訂單（1 小時 12 分）
+ 633.6s [6月19日（週四） 上午 8:17]   click [CourierExpress] 快遞 · 快捷 1 天（$89.70）
+ 637.0s [6月19日（週四） 上午 8:20]   use "Use laptop — Company OS"
+ 637.6s [6月19日（週四） 上午 8:20]   click [Tab_operations] Operations
+ 637.9s [6月19日（週四） 上午 8:20]   click [DeliverTo_riverside_studio] 河濱大樓 7C
+ 638.5s [6月19日（週四） 上午 8:20]   click [Buy_tradelink_wholesale_water_bottle] 購買 $408
+ 639.0s [6月19日（週四） 上午 8:30]   click [Buy_tradelink_wholesale_wireless_earbuds] 購買 $900
+ 639.6s [6月19日（週四） 上午 8:40]   click [Tab_contracts] 合約 ●
+ 640.6s [6月19日（週四） 上午 8:40]   shot 70_contract_offer.png
+ 640.6s [6月19日（週四） 上午 8:40]   click [AcceptContract] Accept
+ 643.7s [6月19日（週四） 上午 8:43]   use "Sleep"
+ 644.3s [6月19日（週四） 上午 8:43]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 646.2s [6月20日（週五） 上午 7:00]   shot 71_decision_customer_return.png
+ 646.2s [6月20日（週五） 上午 7:00]   decision customer_return → replace
+ 646.2s [6月20日（週五） 上午 7:00]   click [Choice_replace] 寄一個新的
+ 647.6s [6月20日（週五） 上午 7:00]   shot 72_decision_outcome_customer_return.png
+ 647.6s [6月20日（週五） 上午 7:00]   click "OK"
+ 651.3s [6月20日（週五） 上午 7:05]   use "Packing table"
+ 652.0s [6月20日（週五） 上午 7:05]   click [Pack] 打包 3 筆訂單（24 分鐘）
+ 653.0s [6月20日（週五） 上午 7:29]   click [CourierExpress] 快遞 · 快捷 1 天（$36.30）
+ 656.4s [6月20日（週五） 上午 7:32]   use "Use laptop — Company OS"
+ 657.0s [6月20日（週五） 上午 7:32]   click [Tab_operations] Operations
+ 657.4s [6月20日（週五） 上午 7:32]   click [DeliverTo_riverside_studio] 河濱大樓 7C
+ 657.9s [6月20日（週五） 上午 7:32]   click [Buy_tradelink_wholesale_water_bottle] 購買 $408
+ 658.4s [6月20日（週五） 上午 7:42]   click [Buy_tradelink_wholesale_water_bottle] 購買 $408
+ 659.0s [6月20日（週五） 上午 7:52]   click [Buy_tradelink_wholesale_wireless_earbuds] 購買 $900
+ 659.5s [6月20日（週五） 上午 8:02]   click [Tab_contracts] Contracts
+ 662.4s [6月20日（週五） 上午 8:05]   use "Sleep"
+ 663.0s [6月20日（週五） 上午 8:05]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 668.0s [6月21日（週六） 上午 7:05]   use "Packing table"
+ 668.7s [6月21日（週六） 上午 7:05]   click [Pack] 打包 7 筆訂單（56 分鐘）
+ 669.7s [6月21日（週六） 上午 8:01]   click [CourierExpress] 快遞 · 快捷 1 天（$68.30）
+ 672.9s [6月21日（週六） 上午 8:04]   use "Use laptop — Company OS"
+ 673.6s [6月21日（週六） 上午 8:04]   click [Tab_operations] Operations
+ 674.0s [6月21日（週六） 上午 8:04]   click [DeliverTo_riverside_studio] 河濱大樓 7C
+ 674.6s [6月21日（週六） 上午 8:04]   click [Buy_tradelink_wholesale_water_bottle] 購買 $408
+ 675.2s [6月21日（週六） 上午 8:14]   click [Buy_tradelink_wholesale_wireless_earbuds] 購買 $900
+ 675.8s [6月21日（週六） 上午 8:24]   click [Tab_contracts] Contracts
+ 676.5s [6月21日（週六） 上午 8:24]   click [DeliverContract] 打包並交貨 120 件（B2B 貨運 $40）
+ 677.4s [6月21日（週六） 上午 9:54]   shot 73_contract_delivered.png
+ 679.6s [6月21日（週六） 上午 9:57]   use "Sleep"
+ 680.2s [6月21日（週六） 上午 9:57]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 685.2s [6月22日（週日） 上午 7:05]   use "Packing table"
+ 685.9s [6月22日（週日） 上午 7:05]   click [Pack] 打包 3 筆訂單（24 分鐘）
+ 687.0s [6月22日（週日） 上午 7:29]   click [CourierExpress] 快遞 · 快捷 1 天（$39.90）
+ 691.4s [6月22日（週日） 上午 7:34]   use "Sleep"
+ 692.1s [6月22日（週日） 上午 7:34]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 697.1s [6月23日（週一） 上午 7:05]   use "Packing table"
+ 697.8s [6月23日（週一） 上午 7:05]   click [Pack] 打包 10 筆訂單（1 小時 20 分）
+ 698.8s [6月23日（週一） 上午 8:25]   click [CourierExpress] 快遞 · 快捷 1 天（$98.60）
+ 703.2s [6月23日（週一） 上午 8:30]   use "Sleep"
+ 703.9s [6月23日（週一） 上午 8:30]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 705.8s [6月24日（週二） 上午 7:00]   shot 74_decision_customer_return.png
+ 705.9s [6月24日（週二） 上午 7:00]   decision customer_return → replace
+ 705.9s [6月24日（週二） 上午 7:00]   click [Choice_replace] 寄一個新的
+ 707.4s [6月24日（週二） 上午 7:00]   shot 75_decision_outcome_customer_return.png
+ 707.4s [6月24日（週二） 上午 7:00]   click "OK"
+ 711.1s [6月24日（週二） 上午 7:05]   use "Packing table"
+ 711.8s [6月24日（週二） 上午 7:05]   click [Pack] 打包 10 筆訂單（1 小時 20 分）
+ 712.8s [6月24日（週二） 上午 8:25]   click [CourierExpress] 快遞 · 快捷 1 天（$102.20）
+ 717.4s [6月24日（週二） 上午 8:30]   use "Sleep"
+ 718.0s [6月24日（週二） 上午 8:30]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 722.9s [6月25日（週三） 上午 7:05]   use "Packing table"
+ 723.6s [6月25日（週三） 上午 7:05]   click [Pack] 打包 3 筆訂單（24 分鐘）
+ 724.6s [6月25日（週三） 上午 7:29]   click [CourierExpress] 快遞 · 快捷 1 天（$36.30）
+ 729.2s [6月25日（週三） 上午 7:34]   use "Sleep"
+ 729.8s [6月25日（週三） 上午 7:34]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 734.9s [6月26日（週四） 上午 7:05]   use "Packing table"
+ 735.6s [6月26日（週四） 上午 7:05]   click [Pack] 打包 6 筆訂單（48 分鐘）
+ 736.6s [6月26日（週四） 上午 7:53]   click [CourierExpress] 快遞 · 快捷 1 天（$63.00）
+ 741.0s [6月26日（週四） 上午 7:58]   use "Sleep"
+ 741.6s [6月26日（週四） 上午 7:58]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 746.6s [6月27日（週五） 上午 7:05]   use "Packing table"
+ 747.3s [6月27日（週五） 上午 7:05]   click [Pack] 打包 2 筆訂單（16 分鐘）
+ 748.3s [6月27日（週五） 上午 7:21]   click [CourierExpress] 快遞 · 快捷 1 天（$31.00）
+ 752.8s [6月27日（週五） 上午 7:26]   use "Sleep"
+ 753.4s [6月27日（週五） 上午 7:26]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 755.3s [6月28日（週六） 上午 7:00]   shot 76_decision_customer_return.png
+ 755.3s [6月28日（週六） 上午 7:00]   decision customer_return → refund
+ 755.3s [6月28日（週六） 上午 7:00]   click [Choice_refund] 退款＋收回商品
+ 756.8s [6月28日（週六） 上午 7:00]   shot 77_decision_outcome_customer_return.png
+ 756.8s [6月28日（週六） 上午 7:00]   click "OK"
+ 760.5s [6月28日（週六） 上午 7:05]   use "Packing table"
+ 761.2s [6月28日（週六） 上午 7:05]   click [Pack] 打包 6 筆訂單（48 分鐘）
+ 762.2s [6月28日（週六） 上午 7:53]   click [CourierExpress] 快遞 · 快捷 1 天（$59.40）
+ 766.7s [6月28日（週六） 上午 7:58]   use "Sleep"
+ 767.4s [6月28日（週六） 上午 7:58]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 772.4s [6月29日（週日） 上午 7:05]   use "Packing table"
+ 773.1s [6月29日（週日） 上午 7:05]   click [Pack] 打包 7 筆訂單（56 分鐘）
+ 774.1s [6月29日（週日） 上午 8:01]   click [CourierExpress] 快遞 · 快捷 1 天（$68.30）
+ 778.6s [6月29日（週日） 上午 8:06]   use "Sleep"
+ 779.2s [6月29日（週日） 上午 8:06]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 784.1s [6月30日（週一） 上午 7:05]   use "Packing table"
+ 784.9s [6月30日（週一） 上午 7:05]   click [Pack] 打包 8 筆訂單（1 小時 4 分）
+ 785.9s [6月30日（週一） 上午 8:09]   click [CourierExpress] 快遞 · 快捷 1 天（$77.20）
+ 790.4s [6月30日（週一） 上午 8:14]   use "Sleep"
+ 791.0s [6月30日（週一） 上午 8:14]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 794.5s [7月1日（週二） 上午 7:00]   shot 78_month_close_report.png
+ 794.5s [7月1日（週二） 上午 7:00]   click [month close] Continue
+ 798.3s [7月1日（週二） 上午 7:05]   use "Packing table"
+ 799.0s [7月1日（週二） 上午 7:05]   click [Pack] 打包 5 筆訂單（40 分鐘）
+ 800.0s [7月1日（週二） 上午 7:45]   click [CourierExpress] 快遞 · 快捷 1 天（$50.50）
+ 802.3s [7月1日（週二） 上午 7:47]   ok  month close ran (June)
+ 804.4s [7月1日（週二） 上午 7:50]   use "Use laptop — Company OS"
+ 805.1s [7月1日（週二） 上午 7:50]   click [Tab_finance] Finance
+ 806.0s [7月1日（週二） 上午 7:50]   shot 79_company_os_finance_july.png
+ 806.5s [7月1日（週二） 上午 7:50]   ok  Chapter 4 started after the June close
+ 806.5s [7月1日（週二） 上午 7:50] STEP Chapter 4 — register as an employer at City Hall
+ 809.4s [7月1日（週二） 上午 7:55]   ok  walked back outside
+ 817.6s [7月1日（週二） 上午 8:08]   use "捷運——河濱區站"
+ 818.6s [7月1日（週二） 上午 8:08]   shot 80_metro_civic_center.png
+ 818.7s [7月1日（週二） 上午 8:08]   click [Go_civic_center] 市政中心  ·  12 分鐘
+ 819.7s [7月1日（週二） 上午 8:21]   ok  took the Metro to Civic Center
+ 830.9s [7月1日（週二） 上午 9:16]   ok  entered Aurelia City Hall
+ 833.0s [7月1日（週二） 上午 9:20]   use "Permits & regulations"
+ 833.9s [7月1日（週二） 上午 9:20]   shot 81_permits_kiosk.png
+ 833.9s [7月1日（週二） 上午 9:20]   click [RegisterEmployer] 登記（$150）
+ 835.2s [7月1日（週二） 上午 9:40]   ok  registered as an employer
+ 835.2s [7月1日（週二） 上午 9:40] STEP Chapter 4 — post a job, hire, first payroll
+ 838.5s [7月1日（週二） 上午 9:46]   ok  walked back outside
+ 844.6s [7月1日（週二） 上午 9:55]   use "捷運——市政中心站"
+ 845.7s [7月1日（週二） 上午 9:55]   shot 82_metro_riverside.png
+ 845.7s [7月1日（週二） 上午 9:55]   click [Go_riverside] 河濱區  ·  12 分鐘
+ 846.7s [7月1日（週二） 上午 10:08]   ok  took the Metro to Riverside
+ 855.9s [7月1日（週二） 上午 10:22]   ok  entered Riverside Tower
+ 857.6s [7月1日（週二） 上午 10:24]   use "Use laptop — Company OS"
+ 858.3s [7月1日（週二） 上午 10:24]   click [Tab_people] People
+ 859.2s [7月1日（週二） 上午 10:24]   shot 83_people_tab.png
+ 859.2s [7月1日（週二） 上午 10:24]   click [Post_support] Post job
+ 860.4s [7月1日（週二） 上午 10:24]   ok  job ad posted
+ 862.1s [7月1日（週二） 上午 10:27]   use "Sleep"
+ 862.7s [7月1日（週二） 上午 10:27]   click [Nap] Nap for 2 hours
+ 867.3s [7月1日（週二） 下午 12:32]   use "Packing table"
+ 868.0s [7月1日（週二） 下午 12:32]   click [Pack] 打包 2 筆訂單（16 分鐘）
+ 869.0s [7月1日（週二） 下午 12:48]   click [CourierExpress] 快遞 · 快捷 1 天（$23.80）
+ 873.4s [7月1日（週二） 下午 12:53]   use "Sleep"
+ 874.0s [7月1日（週二） 下午 12:53]   click [Nap] Nap for 2 hours
+ 875.8s [7月1日（週二） 下午 2:54]   use "Sleep"
+ 876.4s [7月1日（週二） 下午 2:54]   click [Nap] Nap for 2 hours
+ 881.1s [7月1日（週二） 下午 4:59]   use "Packing table"
+ 881.8s [7月1日（週二） 下午 4:59]   click [Pack] 打包 3 筆訂單（24 分鐘）
+ 882.8s [7月1日（週二） 下午 5:23]   click [CourierExpress] 快遞 · 快捷 1 天（$32.70）
+ 887.2s [7月1日（週二） 下午 5:28]   use "Sleep"
+ 887.8s [7月1日（週二） 下午 5:28]   click [Nap] Nap for 2 hours
+ 892.5s [7月1日（週二） 下午 7:33]   use "Packing table"
+ 893.2s [7月1日（週二） 下午 7:33]   click [Pack] 打包 1 筆訂單（8 分鐘）
+ 894.2s [7月1日（週二） 下午 7:41]   click [CourierExpress] 快遞 · 快捷 1 天（$14.90）
+ 898.6s [7月1日（週二） 下午 7:46]   use "Sleep"
+ 899.1s [7月1日（週二） 下午 7:46]   click [Sleep] Sleep until 7:00 AM
+ 901.1s [7月2日（週三） 上午 7:00]   shot 84_decision_customer_return.png
+ 901.1s [7月2日（週三） 上午 7:00]   decision customer_return → replace
+ 901.1s [7月2日（週三） 上午 7:00]   click [Choice_replace] 寄一個新的
+ 902.6s [7月2日（週三） 上午 7:00]   shot 85_decision_outcome_customer_return.png
+ 902.6s [7月2日（週三） 上午 7:00]   click "OK"
+ 903.2s [7月2日（週三） 上午 7:00]   shot 86_decision_customer_return.png
+ 903.2s [7月2日（週三） 上午 7:00]   decision customer_return → replace
+ 903.2s [7月2日（週三） 上午 7:00]   click [Choice_replace] 寄一個新的
+ 904.7s [7月2日（週三） 上午 7:00]   shot 87_decision_outcome_customer_return.png
+ 904.7s [7月2日（週三） 上午 7:00]   click "OK"
+ 908.4s [7月2日（週三） 上午 7:05]   use "Packing table"
+ 909.1s [7月2日（週三） 上午 7:05]   click [Pack] 打包 1 筆訂單（8 分鐘）
+ 910.1s [7月2日（週三） 上午 7:13]   click [CourierExpress] 快遞 · 快捷 1 天（$14.90）
+ 913.4s [7月2日（週三） 上午 7:16]   use "Use laptop — Company OS"
+ 914.0s [7月2日（週三） 上午 7:16]   click [Tab_people] People
+ 914.9s [7月2日（週三） 上午 7:16]   shot 88_applicants.png
+ 914.9s [7月2日（週三） 上午 7:16]   click [Hire_E1] Hire
+ 916.2s [7月2日（週三） 上午 7:16]   ok  hired the first employee (Ravi Hughes)
+ 917.9s [7月2日（週三） 上午 7:19]   use "Sleep"
+ 918.5s [7月2日（週三） 上午 7:19]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 923.5s [7月3日（週四） 上午 7:05]   use "Packing table"
+ 924.2s [7月3日（週四） 上午 7:05]   click [Pack] 打包 9 筆訂單（1 小時 12 分）
+ 925.2s [7月3日（週四） 上午 8:17]   click [CourierExpress] 快遞 · 快捷 1 天（$86.10）
+ 929.8s [7月3日（週四） 上午 8:22]   use "Sleep"
+ 930.4s [7月3日（週四） 上午 8:22]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 935.3s [7月4日（週五） 上午 7:05]   use "Packing table"
+ 936.1s [7月4日（週五） 上午 7:05]   click [Pack] 打包 8 筆訂單（1 小時 4 分）
+ 937.1s [7月4日（週五） 上午 8:09]   click [CourierExpress] 快遞 · 快捷 1 天（$77.20）
+ 941.5s [7月4日（週五） 上午 8:14]   use "Sleep"
+ 942.1s [7月4日（週五） 上午 8:14]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 947.1s [7月5日（週六） 上午 7:05]   use "Packing table"
+ 947.9s [7月5日（週六） 上午 7:05]   click [Pack] 打包 10 筆訂單（1 小時 20 分）
+ 948.9s [7月5日（週六） 上午 8:25]   click [CourierExpress] 快遞 · 快捷 1 天（$95.00）
+ 950.1s [7月5日（週六） 上午 8:25]   ok  first payroll paid
+ 952.2s [7月5日（週六） 上午 8:28]   use "Use laptop — Company OS"
+ 952.9s [7月5日（週六） 上午 8:28]   click [Tab_finance] Finance
+ 953.8s [7月5日（週六） 上午 8:28]   shot 89_cash_forecast.png
+ 955.3s [7月5日（週六） 上午 8:30]   ok  Chapter 4 complete
+ 955.3s [7月5日（週六） 上午 8:30] STEP Chapter 5 — Crestline's offer
+ 957.2s [7月5日（週六） 上午 8:32]   use "Sleep"
+ 957.8s [7月5日（週六） 上午 8:32]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 962.8s [7月6日（週日） 上午 7:05]   use "Packing table"
+ 963.6s [7月6日（週日） 上午 7:05]   click [Pack] 打包 8 筆訂單（1 小時 4 分）
+ 964.6s [7月6日（週日） 上午 8:09]   click [CourierExpress] 快遞 · 快捷 1 天（$77.20）
+ 969.1s [7月6日（週日） 上午 8:14]   use "Sleep"
+ 969.8s [7月6日（週日） 上午 8:14]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 974.8s [7月7日（週一） 上午 7:05]   use "Packing table"
+ 975.5s [7月7日（週一） 上午 7:05]   click [Pack] 打包 6 筆訂單（48 分鐘）
+ 976.5s [7月7日（週一） 上午 7:53]   click [CourierExpress] 快遞 · 快捷 1 天（$59.40）
+ 980.9s [7月7日（週一） 上午 7:58]   use "Sleep"
+ 981.5s [7月7日（週一） 上午 7:58]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 986.5s [7月8日（週二） 上午 7:05]   use "Packing table"
+ 987.2s [7月8日（週二） 上午 7:05]   click [Pack] 打包 7 筆訂單（56 分鐘）
+ 988.2s [7月8日（週二） 上午 8:01]   click [CourierExpress] 快遞 · 快捷 1 天（$68.30）
+ 992.7s [7月8日（週二） 上午 8:06]   use "Sleep"
+ 993.3s [7月8日（週二） 上午 8:06]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+ 998.3s [7月9日（週三） 上午 7:05]   use "Packing table"
+ 999.0s [7月9日（週三） 上午 7:05]   click [Pack] 打包 4 筆訂單（32 分鐘）
+1000.0s [7月9日（週三） 上午 7:37]   click [CourierExpress] 快遞 · 快捷 1 天（$41.60）
+1004.4s [7月9日（週三） 上午 7:42]   use "Sleep"
+1005.0s [7月9日（週三） 上午 7:42]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1010.0s [7月10日（週四） 上午 7:05]   use "Packing table"
+1010.7s [7月10日（週四） 上午 7:05]   click [Pack] 打包 8 筆訂單（1 小時 4 分）
+1011.8s [7月10日（週四） 上午 8:09]   click [CourierExpress] 快遞 · 快捷 1 天（$77.20）
+1016.3s [7月10日（週四） 上午 8:14]   use "Sleep"
+1016.9s [7月10日（週四） 上午 8:14]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1021.9s [7月11日（週五） 上午 7:05]   use "Packing table"
+1022.7s [7月11日（週五） 上午 7:05]   click [Pack] 打包 5 筆訂單（40 分鐘）
+1023.7s [7月11日（週五） 上午 7:45]   click [CourierExpress] 快遞 · 快捷 1 天（$50.50）
+1028.2s [7月11日（週五） 上午 7:50]   use "Sleep"
+1028.8s [7月11日（週五） 上午 7:50]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1030.8s [7月12日（週六） 上午 7:00]   shot 90_decision_crestline_big_offer.png
+1030.8s [7月12日（週六） 上午 7:00]   decision crestline_big_offer → review
+1030.8s [7月12日（週六） 上午 7:00]   click [Choice_review] 把合約寄來，我看看。
+1032.3s [7月12日（週六） 上午 7:00]   shot 91_decision_outcome_crestline_big_offer.png
+1032.3s [7月12日（週六） 上午 7:00]   click "OK"
+1033.0s [7月12日（週六） 上午 7:00]   shot 92_decision_supplier_price_increase.png
+1033.0s [7月12日（週六） 上午 7:00]   decision supplier_price_increase → accept
+1033.0s [7月12日（週六） 上午 7:00]   click [Choice_accept] 好。繼續跟你進貨。
+1034.5s [7月12日（週六） 上午 7:00]   shot 93_decision_outcome_supplier_price_increase.png
+1034.5s [7月12日（週六） 上午 7:00]   click "OK"
+1038.2s [7月12日（週六） 上午 7:05]   use "Packing table"
+1039.0s [7月12日（週六） 上午 7:05]   click [Pack] 打包 4 筆訂單（32 分鐘）
+1040.0s [7月12日（週六） 上午 7:37]   click [CourierExpress] 快遞 · 快捷 1 天（$41.60）
+1041.3s [7月12日（週六） 上午 7:37]   ok  Crestline offered the big contract
+1043.3s [7月12日（週六） 上午 7:40]   use "Use laptop — Company OS"
+1044.0s [7月12日（週六） 上午 7:40]   click [Tab_contracts] 合約 ●
+1044.9s [7月12日（週六） 上午 7:40]   shot 94_big_contract_offer.png
+1044.9s [7月12日（週六） 上午 7:40]   click [AcceptContract] Accept
+1046.3s [7月12日（週六） 上午 7:40]   ok  accepted Crestline's contract
+1046.3s [7月12日（週六） 上午 7:40] STEP Chapter 5 — borrow from Marcus Reed at Nexus Bank
+1048.0s [7月12日（週六） 上午 7:43]   use "Sleep"
+1048.6s [7月12日（週六） 上午 7:43]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1053.7s [7月13日（週日） 上午 7:05]   use "Packing table"
+1054.4s [7月13日（週日） 上午 7:05]   click [Pack] 打包 3 筆訂單（24 分鐘）
+1055.5s [7月13日（週日） 上午 7:29]   click [CourierExpress] 快遞 · 快捷 1 天（$32.70）
+1060.0s [7月13日（週日） 上午 7:34]   use "Sleep"
+1060.6s [7月13日（週日） 上午 7:34]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1065.7s [7月14日（週一） 上午 7:05]   use "Packing table"
+1066.5s [7月14日（週一） 上午 7:05]   click [Pack] 打包 2 筆訂單（16 分鐘）
+1067.5s [7月14日（週一） 上午 7:21]   click [CourierExpress] 快遞 · 快捷 1 天（$23.80）
+1071.5s [7月14日（週一） 上午 7:26]   ok  walked back outside
+1079.7s [7月14日（週一） 上午 7:38]   use "捷運——河濱區站"
+1080.8s [7月14日（週一） 上午 7:38]   shot 95_metro_financial.png
+1080.8s [7月14日（週一） 上午 7:38]   click [Go_financial] 金融區  ·  10 分鐘
+1081.9s [7月14日（週一） 上午 7:49]   ok  took the Metro to Financial District
+1116.2s [7月14日（週一） 下午 1:17]   ok  entered Nexus Bank
+1118.4s [7月14日（週一） 下午 1:21]   use "和 Marcus Reed 說話"
+1121.6s [7月14日（週一） 下午 1:21]   choose "› 讓我看看你能借多少。"
+1123.6s [7月14日（週一） 下午 1:21]   shot 96_loan_offer.png
+1123.7s [7月14日（週一） 下午 1:21]   click [Amt_50] $15,000
+1123.9s [7月14日（週一） 下午 1:21]   click [Term_12] 12 個月
+1124.3s [7月14日（週一） 下午 1:21]   click [TakeLoan] 借 $15,000
+1125.3s [7月14日（週一） 下午 1:51]   shot 97_loan_taken.png
+1125.8s [7月14日（週一） 下午 1:51]   ok  took a Nexus Bank loan (debt $15,000.00)
+1125.8s [7月14日（週一） 下午 1:51] STEP Chapter 5 — order the lamps and deliver
+1129.0s [7月14日（週一） 下午 1:57]   ok  walked back outside
+1135.8s [7月14日（週一） 下午 2:07]   use "捷運——金融區站"
+1136.9s [7月14日（週一） 下午 2:07]   shot 98_metro_riverside.png
+1136.9s [7月14日（週一） 下午 2:07]   click [Go_riverside] 河濱區  ·  10 分鐘
+1138.0s [7月14日（週一） 下午 2:18]   ok  took the Metro to Riverside
+1147.1s [7月14日（週一） 下午 2:32]   ok  entered Riverside Tower
+1148.8s [7月14日（週一） 下午 2:34]   use "Use laptop — Company OS"
+1149.4s [7月14日（週一） 下午 2:34]   click [Tab_contracts] Contracts
+1150.1s [7月14日（週一） 下午 2:34]   click [FillContract] 追加訂購 800 件，向 TradeLink 批發（$9,200）
+1151.1s [7月14日（週一） 下午 2:44]   shot 99_contract_restock.png
+1153.3s [7月14日（週一） 下午 2:47]   use "Sleep"
+1153.9s [7月14日（週一） 下午 2:47]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1158.9s [7月15日（週二） 上午 7:05]   use "Packing table"
+1159.6s [7月15日（週二） 上午 7:05]   click [Pack] 打包 4 筆訂單（32 分鐘）
+1160.7s [7月15日（週二） 上午 7:37]   click [CourierExpress] 快遞 · 快捷 1 天（$41.60）
+1165.1s [7月15日（週二） 上午 7:42]   use "Sleep"
+1165.7s [7月15日（週二） 上午 7:42]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1170.7s [7月16日（週三） 上午 7:05]   use "Packing table"
+1171.4s [7月16日（週三） 上午 7:05]   click [Pack] 打包 8 筆訂單（1 小時 4 分）
+1172.5s [7月16日（週三） 上午 8:09]   click [CourierExpress] 快遞 · 快捷 1 天（$77.20）
+1176.9s [7月16日（週三） 上午 8:14]   use "Sleep"
+1177.5s [7月16日（週三） 上午 8:14]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1182.6s [7月17日（週四） 上午 7:05]   use "Packing table"
+1183.3s [7月17日（週四） 上午 7:05]   click [Pack] 打包 3 筆訂單（24 分鐘）
+1184.3s [7月17日（週四） 上午 7:29]   click [CourierExpress] 快遞 · 快捷 1 天（$32.70）
+1187.6s [7月17日（週四） 上午 7:32]   use "Use laptop — Company OS"
+1188.2s [7月17日（週四） 上午 7:32]   click [Tab_contracts] Contracts
+1189.0s [7月17日（週四） 上午 7:32]   click [DeliverContract] 打包並交貨 800 件（B2B 貨運 $40）
+1190.1s [7月17日（週四） 上午 9:02]   shot 100_big_contract_delivered.png
+1190.6s [7月17日（週四） 上午 9:02]   ok  delivered 800 lamps to Crestline
+1191.6s [7月17日（週四） 上午 9:04]   ok  Chapter 5 complete
+1191.6s [7月17日（週四） 上午 9:04] STEP Chapter 6 — forecast, early payment, month in the black
+1192.0s [7月17日（週四） 上午 9:04]   use "Use laptop — Company OS"
+1192.6s [7月17日（週四） 上午 9:04]   click [Tab_finance] Finance
+1193.7s [7月17日（週四） 上午 9:04]   shot 101_cash_forecast_ch6.png
+1193.7s [7月17日（週四） 上午 9:04]   click [Tab_contracts] Contracts
+1194.3s [7月17日（週四） 上午 9:04]   click [EarlyPayment] 請對方提前付款（折 3%：現在拿 $21,728）
+1195.4s [7月17日（週四） 上午 9:04]   shot 102_early_payment.png
+1195.9s [7月17日（週四） 上午 9:04]   ok  Crestline paid early (3% discount)
+1197.5s [7月17日（週四） 上午 9:07]   use "Sleep"
+1198.1s [7月17日（週四） 上午 9:07]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1203.2s [7月18日（週五） 上午 7:05]   use "Packing table"
+1203.9s [7月18日（週五） 上午 7:05]   click [Pack] 打包 4 筆訂單（32 分鐘）
+1204.9s [7月18日（週五） 上午 7:37]   click [CourierExpress] 快遞 · 快捷 1 天（$41.60）
+1209.4s [7月18日（週五） 上午 7:42]   use "Sleep"
+1210.0s [7月18日（週五） 上午 7:42]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1212.0s [7月19日（週六） 上午 7:00]   shot 103_decision_elena_offer.png
+1212.0s [7月19日（週六） 上午 7:00]   decision elena_offer → decline
+1212.0s [7月19日（週六） 上午 7:00]   click [Choice_decline] 先不要
+1213.5s [7月19日（週六） 上午 7:00]   shot 104_decision_outcome_elena_offer.png
+1213.5s [7月19日（週六） 上午 7:00]   click "OK"
+1217.2s [7月19日（週六） 上午 7:05]   use "Packing table"
+1218.0s [7月19日（週六） 上午 7:05]   click [Pack] 打包 2 筆訂單（16 分鐘）
+1219.0s [7月19日（週六） 上午 7:21]   click [CourierExpress] 快遞 · 快捷 1 天（$23.80）
+1223.5s [7月19日（週六） 上午 7:26]   use "Sleep"
+1224.1s [7月19日（週六） 上午 7:26]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1229.1s [7月20日（週日） 上午 7:05]   use "Packing table"
+1229.8s [7月20日（週日） 上午 7:05]   click [Pack] 打包 7 筆訂單（56 分鐘）
+1230.8s [7月20日（週日） 上午 8:01]   click [CourierExpress] 快遞 · 快捷 1 天（$68.30）
+1235.2s [7月20日（週日） 上午 8:06]   use "Sleep"
+1235.9s [7月20日（週日） 上午 8:06]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1240.9s [7月21日（週一） 上午 7:05]   use "Packing table"
+1241.6s [7月21日（週一） 上午 7:05]   click [Pack] 打包 7 筆訂單（56 分鐘）
+1242.6s [7月21日（週一） 上午 8:01]   click [CourierExpress] 快遞 · 快捷 1 天（$68.30）
+1247.0s [7月21日（週一） 上午 8:06]   use "Sleep"
+1247.7s [7月21日（週一） 上午 8:06]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1252.7s [7月22日（週二） 上午 7:05]   use "Packing table"
+1253.4s [7月22日（週二） 上午 7:05]   click [Pack] 打包 6 筆訂單（48 分鐘）
+1254.4s [7月22日（週二） 上午 7:53]   click [CourierExpress] 快遞 · 快捷 1 天（$59.40）
+1258.8s [7月22日（週二） 上午 7:58]   use "Sleep"
+1259.4s [7月22日（週二） 上午 7:58]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1264.5s [7月23日（週三） 上午 7:05]   use "Packing table"
+1265.2s [7月23日（週三） 上午 7:05]   click [Pack] 打包 13 筆訂單（1 小時 44 分）
+1266.3s [7月23日（週三） 上午 8:49]   click [CourierExpress] 快遞 · 快捷 1 天（$121.70）
+1270.7s [7月23日（週三） 上午 8:54]   use "Sleep"
+1271.3s [7月23日（週三） 上午 8:54]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1276.4s [7月24日（週四） 上午 7:05]   use "Packing table"
+1277.1s [7月24日（週四） 上午 7:05]   click [Pack] 打包 6 筆訂單（48 分鐘）
+1278.1s [7月24日（週四） 上午 7:53]   click [CourierExpress] 快遞 · 快捷 1 天（$59.40）
+1282.6s [7月24日（週四） 上午 7:58]   use "Sleep"
+1283.2s [7月24日（週四） 上午 7:58]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1288.2s [7月25日（週五） 上午 7:05]   use "Packing table"
+1288.9s [7月25日（週五） 上午 7:05]   click [Pack] 打包 12 筆訂單（1 小時 36 分）
+1290.0s [7月25日（週五） 上午 8:41]   click [CourierExpress] 快遞 · 快捷 1 天（$112.80）
+1294.5s [7月25日（週五） 上午 8:46]   use "Sleep"
+1295.1s [7月25日（週五） 上午 8:46]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1300.2s [7月26日（週六） 上午 7:05]   use "Packing table"
+1300.9s [7月26日（週六） 上午 7:05]   click [Pack] 打包 4 筆訂單（32 分鐘）
+1301.9s [7月26日（週六） 上午 7:37]   click [CourierExpress] 快遞 · 快捷 1 天（$41.60）
+1306.3s [7月26日（週六） 上午 7:42]   use "Sleep"
+1306.9s [7月26日（週六） 上午 7:42]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1311.9s [7月27日（週日） 上午 7:05]   use "Packing table"
+1312.7s [7月27日（週日） 上午 7:05]   click [Pack] 打包 7 筆訂單（56 分鐘）
+1313.7s [7月27日（週日） 上午 8:01]   click [CourierExpress] 快遞 · 快捷 1 天（$68.30）
+1318.2s [7月27日（週日） 上午 8:06]   use "Sleep"
+1318.8s [7月27日（週日） 上午 8:06]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1323.8s [7月28日（週一） 上午 7:05]   use "Packing table"
+1324.6s [7月28日（週一） 上午 7:05]   click [Pack] 打包 5 筆訂單（40 分鐘）
+1325.6s [7月28日（週一） 上午 7:45]   click [CourierExpress] 快遞 · 快捷 1 天（$50.50）
+1330.0s [7月28日（週一） 上午 7:50]   use "Sleep"
+1330.6s [7月28日（週一） 上午 7:50]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1335.9s [7月29日（週二） 上午 7:05]   use "Packing table"
+1336.7s [7月29日（週二） 上午 7:06]   click [Pack] 打包 7 筆訂單（56 分鐘）
+1337.7s [7月29日（週二） 上午 8:02]   click [CourierExpress] 快遞 · 快捷 1 天（$68.30）
+1342.2s [7月29日（週二） 上午 8:07]   use "Sleep"
+1342.9s [7月29日（週二） 上午 8:07]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1347.9s [7月30日（週三） 上午 7:05]   use "Packing table"
+1348.7s [7月30日（週三） 上午 7:05]   click [Pack] 打包 5 筆訂單（40 分鐘）
+1349.7s [7月30日（週三） 上午 7:45]   click [CourierExpress] 快遞 · 快捷 1 天（$50.50）
+1354.1s [7月30日（週三） 上午 7:50]   use "Sleep"
+1354.7s [7月30日（週三） 上午 7:50]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1359.8s [7月31日（週四） 上午 7:05]   use "Packing table"
+1360.5s [7月31日（週四） 上午 7:05]   click [Pack] 打包 5 筆訂單（40 分鐘）
+1361.6s [7月31日（週四） 上午 7:45]   click [CourierExpress] 快遞 · 快捷 1 天（$50.50）
+1366.2s [7月31日（週四） 上午 7:50]   use "Sleep"
+1366.8s [7月31日（週四） 上午 7:50]   click [Sleep] Sleep until tomorrow 7:00 AM anyway
+1370.4s [8月1日（週五） 上午 7:00]   shot 105_month_close_report.png
+1370.4s [8月1日（週五） 上午 7:00]   click [month close] Continue
+1374.1s [8月1日（週五） 上午 7:05]   use "Packing table"
+1374.8s [8月1日（週五） 上午 7:05]   click [Pack] 打包 7 筆訂單（56 分鐘）
+1375.8s [8月1日（週五） 上午 8:01]   click [CourierExpress] 快遞 · 快捷 1 天（$68.30）
+1378.1s [8月1日（週五） 上午 8:03]   ok  Chapter 6 complete
+1378.1s [8月1日（週五） 上午 8:03]   ok  ledger balanced after chapters 4–6
+1378.1s [8月1日（週五） 上午 8:03] STEP Save → reload → same state
+1379.1s [8月1日（週五） 上午 8:04]   ok  cash restored after load
+1379.1s [8月1日（週五） 上午 8:04]   ok  time restored after load
+1379.1s [8月1日（週五） 上午 8:04]   ok  location restored (riverside_apartment)
+1379.1s [8月1日（週五） 上午 8:04]   shot 106_after_load.png
+1379.1s [8月1日（週五） 上午 8:04] STEP Summary
+1379.1s [8月1日（週五） 上午 8:04]   business entity co_riverlight_goods cash $36,404.07 · personal $8,579.30 · orders delivered 438 · chapters done ["ch1_arrival", "ch2_first_customer", "ch3_open_for_business", "ch4_growing_pains", "ch5_big_contract", "ch6_cash_is_oxygen"]
+1379.1s [8月1日（週五） 上午 8:04]   ok  ledger balanced at the end
+1379.1s [8月1日（週五） 上午 8:04] BOT FINISHED — 0 failure(s) · 1379.1s real
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+     at: cleanup (core/object/object.cpp:2514)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:795)
+exit 0

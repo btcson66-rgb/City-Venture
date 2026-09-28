@@ -53,8 +53,18 @@ func build() -> void:
 		b.name = "Choice_" + str(c["id"])
 		row.add_child(b)
 		if c.has("detail"):
-			row.add_child(UIK.label("    " + EventEngine.fill(c["detail"], inst["ctx"]) + ("" if avail else I18n.t("  (not possible now)")), 7, Art.C_MUTED))
+			var dl := UIK.wrap(EventEngine.fill(c["detail"], inst["ctx"]) + ("" if avail else I18n.t("  (not possible now)")), 7, Art.C_MUTED, 370)
+			var pad := MarginContainer.new()
+			pad.add_theme_constant_override("margin_left", 10)
+			pad.add_child(dl)
+			row.add_child(pad)
 		body.add_child(row)
+
+
+func _process(_d: float) -> void:
+	# a long decision grows downwards; keep the panel on screen
+	if panel != null and panel.size.y > panel_size.y:
+		panel.position.y = maxf(4.0, (360.0 - panel.size.y) / 2.0)
 
 
 func _pick(cid: String) -> void:

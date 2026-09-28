@@ -20,6 +20,22 @@ Engine: Godot 4.5.x (project in `game/`).
   Maker, then encoded by `tools/media/make_trailer.sh`. The music is code-generated (`tools/media/make_music.py`) and is a
   placeholder until a licensed track is chosen.
 
+## What's new in 0.1.3-test3
+
+- **Chapters 4–6:** Growing Pains (register as an employer, hire, first payroll, cash forecast), The Big Contract
+  (Daniel Wong's Crestline order: 800 lamps, Net 60, strict SLA), Cash Is Oxygen (bank loan, Elena Park's equity
+  offer, cost cuts or early payment; collect; close a month in the black).
+- **People:** job ads, applicants with skill, salary and traits, weekly payroll, morale and resignations. Staff do real
+  work (packing and courier booking, returns, marketing, software) and appear in the office.
+- **Nexus Bank lending:** the offer comes from your books, with credit score, monthly payments, late fees and called loans.
+- **Bankruptcy isn't game over:** rescue the company with savings, restructure the loan, or close the company and
+  start again.
+- **SaaS:** a second full business. Build an MVP with dev hours, launch, then manage subscribers, MRR, churn,
+  servers and features.
+- **Audio:** music that follows the place and time of day, plus sound effects, with volume in the pause menu.
+  Generated placeholder audio (`tools/media/make_game_audio.py`).
+- **Cash forecast:** a week-by-week view of cash in Company OS → Finance.
+
 ## What's new in 0.1.2-test2 (playtest round 1)
 
 - **New-player tutorial:** step cards, a gold arrow to the current goal, glowing EXIT mats and street-edge signs,

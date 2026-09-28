@@ -98,6 +98,21 @@ Each package includes a tester guide in Chinese and English (install steps inclu
 suggested route, what to report, save paths, known issues). **F12 bug report** saves a screenshot, the current save, the
 log and an info sheet, then opens the folder; the web build downloads these files instead. The shots tour checks that F12 writes the report.
 
+## Build 0.1.3-test3 — P1 systems and Chapters 4–6
+
+| Feature | Result | Status | Evidence |
+|---------|--------|--------|----------|
+| Staff: employer registration, job ads, applicants, weekly payroll, wages owed, morale, resignations; packer / support / marketer / developer do real work; staff at their desks | **PASS** | Implemented | `test_staff.gd` (6). Walkthrough: register at the City Hall kiosk, post a job, hire, first Friday payroll |
+| Nexus Bank lending: offer from the books, credit score, amortising payments, late fees, called loans | **PASS** | Implemented | `test_bank.gd`. Walkthrough: Marcus Reed's loan (screenshot `loan_offer`) |
+| Insolvency: rescue / restructure / close the company and start again | **PASS** | Implemented | `test_bank.gd` (called loan → insolvency; restructure; close → liquidation, write-off, new company). Screens bot: insolvency screen → Close company → closing statement (`screenshots/test3_screens/`) |
+| Investor (Elena Park, $40k for 20%) | **PASS** (logic) | Implemented | `test_investor_buys_a_stake`. The walkthrough declines her on purpose |
+| Chapters 4–6 | **PASS** | Implemented | `test_story_growth.gd` plays all three chapters at logic level. Walkthrough plays them with real input: **English 0 failures (1,390 s) and 繁體中文 0 failures (1,379 s)**: employer registration at City Hall, job ad → hire, first Friday payroll, forecast, Crestline offer → accept, Marcus Reed loan ($15,000 / 12 months), 800 lamps ordered and delivered, early payment, month close in the black on Aug 1 (`logs/walkthrough_0.1.3-test3_*.txt`, `screenshots/test3_en/`, `screenshots/test3_zh_TW/`) |
+| Cash forecast (9 weeks) | **PASS** | Implemented | Screenshots `cash_forecast`, `cash_forecast_ch6` |
+| SaaS: build → launch → subscribers, MRR, churn, servers, features, pricing | **PASS** (logic) | Implemented | `test_saas.gd` (3). Walkthrough starts a product and codes a session. Long-run balance (months of subscribers) has not been tuned by play |
+| Audio: scene music with crossfade, SFX, volume settings | **PARTIAL** | Implemented (placeholder assets) | Generated loops at −15 to −18 LUFS with seamless loop points. Verified the game outputs sound by capturing the mix with Movie Maker (main menu, 14 s: −27.5 LUFS before the level was raised to about −21 LUFS). Not yet judged by ear by a person; licensed audio still Planned |
+
+Unit tests: **58/58**. Translations: zh_TW 1,668/1,668.
+
 ## Playtest round 1 → build 0.1.2-test2
 
 The product owner played the web build and reported five problems. Each one, and what was done about it:

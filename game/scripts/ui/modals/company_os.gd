@@ -725,6 +725,9 @@ func _tab_contracts() -> void:
 	elif k["status"] == "active":
 		var have := Contracts.stock_for(k)
 		right.add_child(UIK.label(I18n.t("In stock (all locations): %d / %d needed") % [have, int(k["qty"])], 8, Art.C_GREEN if have >= int(k["qty"]) else Art.C_RED, true))
+		var coming := Ecommerce.incoming_units_of(k["product"])
+		if coming > 0 and have < int(k["qty"]):
+			right.add_child(UIK.label(I18n.t("On the way from suppliers: %d") % coming, 7, Art.C_SKY, true))
 		right.add_child(UIK.label(I18n.t("Due %s") % Clock.fmt_datetime(int(k["due"])), 7, Art.C_GOLD if Clock.now() < int(k["due"]) else Art.C_RED))
 		var db := UIK.button(I18n.t("Pack & deliver %d units (B2B freight $40)") % int(k["qty"]), func():
 			var r := Contracts.deliver(k["id"])

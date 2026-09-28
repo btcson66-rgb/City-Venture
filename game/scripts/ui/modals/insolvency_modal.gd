@@ -27,7 +27,8 @@ func build() -> void:
 	body.add_child(UIK.kv("Your personal cash", Fmt.money(Ledger.cash("player")), Art.C_WHITE, 8))
 	body.add_child(UIK.sep())
 	body.add_child(UIK.wrap("A company can fail. You don't. Pick what happens next:", 8, Art.C_SKY, 440))
-	var b1 := UIK.button(I18n.t("Put in %s of your own money") % Fmt.money0(Insolvency.shortfall(ent)), func():
+	var need := Insolvency.shortfall(ent)
+	var b1 := UIK.button(I18n.t("Put in %s of your own money") % Fmt.money0(need) if need > 0.0 else I18n.t("Pay what's owed from company cash and carry on"), func():
 		var r := Insolvency.rescue_with_savings()
 		if not r["ok"]:
 			UIRoot.toast(I18n.t(str(r["error"])), "warn", "warning")

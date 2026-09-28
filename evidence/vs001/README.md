@@ -17,6 +17,8 @@ by hand. Read the results in [`docs/QA_REPORT.md`](../../docs/QA_REPORT.md).
 | `logs/walkthrough_0.1.2-test2_{en,zh_TW}.txt` | Build 0.1.2-test2 regression runs, rendered: the full slice plus the Careers steps (job shift, freelance gig). 0 failures in both languages | `--bot=walkthrough --lang=…` |
 | `screenshots/test2_en/`, `screenshots/test2_zh_TW/` | Tutorial card, gold guide arrow, EXIT mat, Business Board jobs, job modal, freelance tab, fixed café interior | same runs, and `--bot=shots` |
 | `screenshots/web/` | Chromium test of the web build: new game → walk outside → **reload page** → Continue resumes in the same place. `refresh_test.playwright.js` is the script | Playwright + Chromium |
+| `logs/walkthrough_0.1.3-test3_{en,zh_TW}.txt` | Build 0.1.3-test3: the full slice, careers and SaaS, then Chapters 4–6 with real input (employer registration, hire, payroll, forecast, Crestline, Marcus's loan, delivery, early payment, August close). 0 failures in both languages | `--bot=walkthrough` |
+| `screenshots/test3_en/`, `screenshots/test3_zh_TW/`, `screenshots/test3_screens/` | New 0.1.3 screens: permits kiosk, People tab and applicants, cash forecast, Crestline decision, loan desk, contract restock and delivery, early payment, SaaS, staff at their desks, insolvency and the closing statement, pause menu with audio | walkthroughs, `--bot=screens` |
 | `../../docs/media/trailer_{zh,en}.mp4` | 33 s trailer / first-play tutorial (2.4 MB each), recorded by the trailer bot | `--bot=trailer`, `tools/media/make_trailer.sh` |
 
 The bot drives the game only through input. It uses movement actions, `E` at interactables, mouse clicks at a button's
