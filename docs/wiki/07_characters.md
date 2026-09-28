@@ -37,7 +37,7 @@
 - 單張圖層 64×64；**表情圖層是 256×64 的長條，4 格 64×64**，依序為：
   `neutral` 平靜 · `happy` 開心 · `thinking` 思考 · `surprised` 驚訝。
 - 圖層順序（`portrait_layers`）：後髮 → 頭 `head_<face>` → 衣領 `outfit_<outfit>` → 眼白 → 虹膜 → 眉毛 → 嘴 → 前髮。
-- **頭像的配件層**：程式已接好，放進 `portraits/acc_glasses_round`、`acc_glasses_square`（64×64）就會出現。目前還沒有圖，所以 Ana、Daniel、Priya 走路時戴眼鏡，對話頭像上卻沒有（等 A5）。
+- **頭像的配件層**：`portraits/acc_glasses_round`、`acc_glasses_square`（64×64）已由 A5 補齊；Ana、Daniel、Priya 的對話頭像現在和走路圖一樣戴眼鏡。
 - **頭像衣領細節**：`portraits/outfit_<o>_detail.png`（64×64，不染色），畫在染色衣領上面，程式已接好。
 - 沒有外觀的聯絡人（銀行、ShopLane、房東、客人）顯示成**圖示頭像**：深藍底加一個 16×16 圖示（`bank`、`orders`、`home`、`people`，其他用 `info`）。
 
@@ -54,15 +54,15 @@
 | 部位 | 選項（id） | 圖層檔案 | 美術 |
 |------|-----------|----------|------|
 | 外型 Presentation | `masculine` 陽剛 · `feminine` 陰柔 · `neutral` 中性 | 決定 body 和 outfit 的體型版本 | A1 走路圖已更新 |
-| 臉型 | `round` 圓 · `oval` 橢圓 · `square` 方 · `heart` 心形 | `body_<pres>_<face>`（12 張）· `portraits/head_<face>`（4 張） | A1 走路圖已更新；頭像 A5 待辦 |
-| 髮型 | `messy` 亂髮 · `short_neat` 短俐落 · `buzz` 平頭 · `side_part` 旁分 · `bob` 鮑伯 · `long` 長髮 · `ponytail` 馬尾 · `bun` 包頭 | `hair_<style>_back/_front`（16 張，走路和頭像各一套） | A1 走路圖已更新；頭像 A5 待辦 |
+| 臉型 | `round` 圓 · `oval` 橢圓 · `square` 方 · `heart` 心形 | `body_<pres>_<face>`（12 張）· `portraits/head_<face>`（4 張） | A1 走路圖、A5 頭像已更新 |
+| 髮型 | `messy` 亂髮 · `short_neat` 短俐落 · `buzz` 平頭 · `side_part` 旁分 · `bob` 鮑伯 · `long` 長髮 · `ponytail` 馬尾 · `bun` 包頭 | `hair_<style>_back/_front`（16 張，走路和頭像各一套） | A1 走路圖、A5 頭像已更新 |
 | 髮色 | black · dark_brown · brown · auburn · blonde · silver · navy（染）· rose（染） | 染色，色碼見 [01 美術方向](01_art_direction.md) | — |
 | 膚色 | s1 Porcelain · s2 Light · s3 Warm · s4 Tan · s5 Brown · s6 Deep | 染色 | — |
-| 眼型 | `round` · `almond` 杏眼 · `narrow` 細長 · `wide` 大眼 | `eyes_<shape>` + `iris_<shape>`（走路 8 張、頭像 8 張） | A1 走路圖已檢查；頭像 A5 待辦 |
+| 眼型 | `round` · `almond` 杏眼 · `narrow` 細長 · `wide` 大眼 | `eyes_<shape>` + `iris_<shape>`（走路 8 張、頭像 8 張） | A1 走路圖、A5 頭像已檢查 |
 | 瞳色 | brown · dark · hazel · green · blue · gray | 染色 | — |
-| 眉毛 | `straight` 平 · `arched` 挑 · `thick` 濃 · `soft` 柔 | `brows_<style>` | A1 走路圖已檢查；頭像 A5 待辦 |
-| 嘴 | `smile` 微笑 · `neutral` 平 · `grin` 露齒笑 · `small` 小嘴 | `mouth_<style>` | A1 走路圖已檢查；頭像 A5 待辦 |
-| 服裝 | `startup_casual` · `office_professional` · `home` | 見下方服裝表 | A1 走路圖已更新；頭像 A5 待辦 |
+| 眉毛 | `straight` 平 · `arched` 挑 · `thick` 濃 · `soft` 柔 | `brows_<style>` | A1 走路圖、A5 頭像已檢查 |
+| 嘴 | `smile` 微笑 · `neutral` 平 · `grin` 露齒笑 · `small` 小嘴 | `mouth_<style>` | A1 走路圖、A5 頭像已檢查 |
+| 服裝 | `startup_casual` · `office_professional` · `home` | 見下方服裝表 | A1 走路圖、A5 頭像已更新 |
 | 配件 | `none` · `glasses_round` 圓框眼鏡 · `glasses_square` 方框眼鏡 · `backpack` 後背包 | `acc_<id>` | A1 走路圖已檢查 |
 
 規劃中（捏臉畫面已經寫明「之後在衣櫃和服飾店開放」）：
@@ -102,8 +102,8 @@ R1 已交：`business_suit_top_detail`、`courier_top_detail`（三體型各一�
 
 | id | 名稱 | 狀態 | 備註 |
 |----|------|------|------|
-| `glasses_round` | 圓框眼鏡 | 已實作 · CODEX | 頭像缺，`需接線` |
-| `glasses_square` | 方框眼鏡 | 已實作 · CODEX | 頭像缺，`需接線` |
+| `glasses_round` | 圓框眼鏡 | 已實作 · CODEX A5 | 走路圖和頭像均有，程式已接好 |
+| `glasses_square` | 方框眼鏡 | 已實作 · CODEX A5 | 走路圖和頭像均有，程式已接好 |
 | `backpack` | 後背包 | 已實作 · CODEX | 背面要看得到整個包 |
 | `hat_cap` / `hat_beanie` / `hard_hat` | 帽子 | 規劃中 P1 | 帽子會蓋住前髮，**需要每個髮型的「戴帽」版本**，或帽子畫成遮住頭頂的形狀 |
 | `bag_tote` / `bag_briefcase` / `bag_crossbody` | 包包 | 規劃中 P1 | 側面要看得出是手提或斜背 |
@@ -138,6 +138,8 @@ R1 已交：`business_suit_top_detail`、`courier_top_detail`（三體型各一�
 |------|------|
 | Neutral 平靜 · Happy 開心 · Thinking 思考 · Surprised 驚訝 | 已實作（頭像長條的 4 格） |
 | Confident 自信 · Determined 堅定 · Cheerful 愉快 · Excited 興奮 · Relaxed 放鬆 · Serious 嚴肅 | 規劃中 P1：長條加長到 10 格（640×64）· `需接線` |
+
+A5 已重製四種現有表情並補上眼鏡；12 位具名 NPC 的頭像和四表情組合預覽見 `evidence/2026-09-28_a5_portraits/`。此批維持 64×64 單格與 256×64 四格格式。
 
 ---
 
