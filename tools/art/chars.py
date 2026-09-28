@@ -9,7 +9,7 @@ grayscale ramp and coloured in-engine with `modulate`.
 """
 from __future__ import annotations
 
-from pixel import (Mask, new, shaded, fill, put, rect, hline, vline, save, ramp, hexc,
+from pixel import (Mask, new, shaded as pixel_shaded, fill, put, rect, hline, vline, save, ramp, hexc,
                    shade, lighten, GRAY_SKIN, GRAY_HAIR, GRAY_CLOTH, PAL)
 
 FW, FH = 32, 48
@@ -26,23 +26,34 @@ LIP_DARK = (104, 52, 58)
 WHITE = (250, 250, 252)
 
 
+def shaded(img, mask, colors, ox=0, oy=0, **kwargs):
+    """Let the game's composite outline shader draw the outside contour once.
+
+    An outline on every transparent clothing and body layer made their seams
+    look like square black bands after the layers were stacked in Godot.
+    """
+    pixel_shaded(img, mask, colors, ox, oy, outline=False, **kwargs)
+
+
 # ------------------------------------------------------------ pose/geometry
 def pose(d, f):
-    step = f in (1, 3)
+    # Contact / passing / opposite contact / passing.  Each cell has a
+    # distinct silhouette while frame 0 remains a comfortable idle frame.
     return {
-        "bob": -1 if step else 0,
-        "lift_l": 2 if f == 1 else 0,
-        "lift_r": 2 if f == 3 else 0,
-        "swing": {0: 0, 1: 1, 2: 0, 3: -1}[f],
+        "bob": (0, -1, 0, -1)[f],
+        "lift_l": (0, 2, 0, 0)[f],
+        "lift_r": (0, 0, 0, 2)[f],
+        "swing": (0, 2, 0, -2)[f],
+        "stride": (0, 1, -1, 1)[f],
     }
 
 
 def torso_x(pres):
     if pres == "masculine":
-        return (9, 22), (10, 21)
+        return (7, 24), (11, 20)
     if pres == "feminine":
-        return (10, 21), (11, 20)
-    return (10, 21), (10, 21)
+        return (11, 20), (12, 19)
+    return (9, 22), (11, 20)
 
 
 def head_mask(face, d, bob):
@@ -96,50 +107,61 @@ def body_parts(pres, d, f):
     feet = []
     if d in ("down", "up"):
         neck.rect(14, 17 + b, 17, 20 + b)
-        # A soft shoulder-to-waist taper reads as a jacket/body at 1x instead
-        # of the old straight rectangular column.
+        hip0, hip1 = ((10, 21) if pres == "masculine" else
+                      (9, 22) if pres == "feminine" else (10, 21))
         torso.poly([(sx0 + 2, 20 + b), (sx1 - 2, 20 + b),
-                    (sx1, 22 + b), (sx1, 27 + b), (wx1, 31 + b),
-                    (20, 33 + b), (11, 33 + b), (wx0, 31 + b),
-                    (sx0, 27 + b), (sx0, 22 + b)])
+                    (sx1, 22 + b), (sx1, 25 + b), (wx1 + 1, 29 + b),
+                    (hip1, 32 + b), (hip1 - 1, 33 + b),
+                    (hip0 + 1, 33 + b), (hip0, 32 + b),
+                    (wx0 - 1, 29 + b), (sx0, 25 + b), (sx0, 22 + b)])
         sw = p["swing"] if d == "down" else -p["swing"]
         # left arm (screen left)
         la_end = 30 + b - sw
         ra_end = 30 + b + sw
-        arms.poly([(sx0 - 1, 21 + b), (sx0 - 3, 23 + b),
-                   (sx0 - 3, la_end), (sx0 - 1, la_end),
-                   (sx0, 25 + b)])
-        arms.poly([(sx1 + 1, 21 + b), (sx1 + 3, 23 + b),
-                   (sx1 + 3, ra_end), (sx1 + 1, ra_end),
-                   (sx1, 25 + b)])
+        arms.poly([(sx0, 21 + b), (sx0 - 2, 22 + b),
+                   (sx0 - 3, 25 + b), (sx0 - 2, la_end),
+                   (sx0, la_end), (sx0 + 1, 26 + b)])
+        arms.poly([(sx1, 21 + b), (sx1 + 2, 22 + b),
+                   (sx1 + 3, 25 + b), (sx1 + 2, ra_end),
+                   (sx1, ra_end), (sx1 - 1, 26 + b)])
         hands.rect(sx0 - 3, la_end + 1, sx0 - 1, la_end + 3)
         hands.rect(sx1 + 1, ra_end + 1, sx1 + 3, ra_end + 3)
-        for (x0, x1, lift) in ((11, 15, p["lift_l"]), (16, 20, p["lift_r"])):
+        for i, (x0, x1, lift) in enumerate(((11, 15, p["lift_l"]), (16, 20, p["lift_r"]))):
+            shift = ((-1, 1)[i] if f == 2 else
+                     (1, -1)[i] if f == 1 else
+                     (-1, 1)[i] if f == 3 else (0, 0)[i])
             lm = Mask(FW, FH).poly([(x0, 32 + b), (x1, 32 + b),
-                                    (x1, 40 - lift), (x1 - 1, 44 - lift),
-                                    (x0 + 1, 44 - lift), (x0, 40 - lift)])
+                                    (x1 + shift, 40 - lift), (x1 + shift - 1, 44 - lift),
+                                    (x0 + shift + 1, 44 - lift), (x0 + shift, 40 - lift)])
             legs.append(lm)
-            fm = Mask(FW, FH).rect(x0 - (1 if x0 == 11 else 0), 43 - lift, x1 + (1 if x1 == 20 else 0), 46 - lift)
+            fm = Mask(FW, FH).ellipse(x0 + shift - 1, 43 - lift,
+                                    x1 + shift + 1, 46 - lift)
             feet.append(fm)
     else:
         neck.rect(14, 17 + b, 17, 20 + b)
-        torso.poly([(12, 20 + b), (19, 20 + b), (21, 23 + b),
-                    (20, 29 + b), (19, 33 + b), (12, 33 + b),
-                    (11, 29 + b), (11, 23 + b)])
+        side_front = 21 if pres == "masculine" else 20
+        torso.poly([(13, 20 + b), (18, 20 + b), (side_front, 22 + b),
+                    (side_front, 26 + b), (19, 30 + b), (20, 32 + b),
+                    (18, 33 + b), (12, 33 + b), (11, 30 + b),
+                    (12, 26 + b), (11, 23 + b)])
         if pres == "feminine":
             torso.px(12, 27 + b, 0).px(19, 27 + b, 0)
         s = p["swing"]
-        # stride: frame1 leg A forward, frame3 leg B forward
-        if f in (1, 3):
-            front = (15, 19)
-            back = (11, 15)
-        else:
-            front = (13, 17)
-            back = (14, 18)
-        bm = Mask(FW, FH).rect(back[0], 32 + b, back[1], 44)
-        fm = Mask(FW, FH).rect(front[0], 32 + b, front[1], 44)
+        # Two legs pass each other rather than translating the whole sprite.
+        back, front = (
+            ((13, 16), (15, 18)),  # comfortable idle/contact
+            ((8, 12), (20, 23)),   # right leg advances
+            ((16, 19), (12, 15)),  # legs pass one another
+            ((19, 22), (9, 12)),   # left leg advances
+        )[f]
+        bm = Mask(FW, FH).poly([(12, 32 + b), (16, 32 + b),
+                                (back[1], 43), (back[0], 43)])
+        fm = Mask(FW, FH).poly([(16, 32 + b), (19, 32 + b),
+                                (front[1], 43 - p["lift_r"]),
+                                (front[0], 43 - p["lift_r"])])
         legs = [bm, fm]
-        feet = [Mask(FW, FH).rect(back[0], 43, back[1] + 2, 46), Mask(FW, FH).rect(front[0], 43, front[1] + 2, 46)]
+        feet = [Mask(FW, FH).ellipse(back[0], 43, back[1] + 3, 46),
+                Mask(FW, FH).ellipse(front[0], 43 - p["lift_r"], front[1] + 3, 46 - p["lift_r"])]
         ax = 14 + 2 * s
         arms.rect(14, 21 + b, 17, 24 + b)
         arms.poly([(14, 24 + b), (17, 24 + b), (17 + 2 * s, 30 + b), (14 + 2 * s, 30 + b)])
@@ -295,34 +317,41 @@ def hair_masks(style, d, b):
             return back, front
         front.union(cap)
         if style == "messy":
-            for sx, top in ((9, 3), (12, 1), (16, 2), (19, 3)):
-                front.poly([(sx, Y(5)), (sx + 4, Y(5)), (sx + 2, Y(top))])
-            front.poly([(9, Y(8)), (13, Y(8)), (11, Y(11))])
-            front.poly([(13, Y(8)), (17, Y(8)), (15, Y(10))])
-            front.poly([(17, Y(8)), (22, Y(8)), (20, Y(11))])
+            for sx, top in ((8, 4), (11, 1), (15, 2), (19, 1), (22, 4)):
+                front.poly([(sx, Y(6)), (sx + 3, Y(6)), (sx + 2, Y(top))])
+            front.poly([(9, Y(8)), (14, Y(8)), (11, Y(12))])
+            front.poly([(14, Y(8)), (18, Y(8)), (16, Y(10))])
+            front.poly([(18, Y(8)), (23, Y(8)), (20, Y(11))])
             front.rect(8, Y(8), 9, Y(13)).rect(22, Y(8), 23, Y(13))
         elif style == "short_neat":
-            front.rect(9, Y(8), 22, Y(8))
-            front.rect(8, Y(6), 9, Y(12)).rect(22, Y(6), 23, Y(12))
-            front.rect(10, Y(2), 21, Y(3))
+            front.poly([(9, Y(7)), (11, Y(3)), (14, Y(2)), (21, Y(3)),
+                        (23, Y(6)), (22, Y(8)), (9, Y(9))])
+            front.rect(8, Y(7), 9, Y(11)).rect(22, Y(6), 23, Y(11))
         elif style == "side_part":
-            front.poly([(9, Y(8)), (17, Y(8)), (11, Y(11)), (9, Y(11))])
+            front.poly([(9, Y(7)), (17, Y(7)), (12, Y(12)), (9, Y(11))])
+            front.poly([(14, Y(5)), (21, Y(4)), (23, Y(8)), (20, Y(9))])
             front.rect(8, Y(7), 9, Y(12)).rect(22, Y(7), 23, Y(11))
-            front.rect(10, Y(2), 20, Y(3))
+            front.ellipse(10, Y(1), 21, Y(6))
         elif style in ("bob", "long"):
-            front.rect(9, Y(8), 22, Y(9))
-            front.rect(7, Y(6), 9, Y(17)).rect(22, Y(6), 24, Y(17))
+            front.poly([(9, Y(8)), (19, Y(7)), (22, Y(10)),
+                        (20, Y(11)), (12, Y(10))])
+            front.ellipse(7, Y(5), 11, Y(18)).ellipse(21, Y(5), 25, Y(18))
             if style == "long":
-                back.rect(8, Y(10), 23, Y(27))
-                back.poly([(8, Y(27)), (23, Y(27)), (21, Y(29)), (10, Y(29))])
+                back.poly([(8, Y(10)), (23, Y(10)), (24, Y(25)),
+                           (22, Y(29)), (19, Y(31)), (12, Y(30)),
+                           (8, Y(27))])
+                front.ellipse(7, Y(12), 11, Y(27)).ellipse(21, Y(12), 25, Y(27))
         elif style == "ponytail":
-            front.rect(9, Y(8), 22, Y(8))
+            front.poly([(9, Y(7)), (17, Y(6)), (22, Y(8)), (18, Y(9)), (10, Y(8))])
             front.rect(8, Y(6), 9, Y(12)).rect(22, Y(6), 23, Y(12))
-            back.rect(23, Y(9), 25, Y(19))
+            back.ellipse(23, Y(8), 27, Y(13))
+            back.poly([(24, Y(12)), (27, Y(13)), (26, Y(22)),
+                       (23, Y(25)), (22, Y(20))])
         elif style == "bun":
             front.rect(9, Y(8), 22, Y(8))
             front.rect(8, Y(6), 9, Y(11)).rect(22, Y(6), 23, Y(11))
-            front.ellipse(12, Y(0), 19, Y(5))
+            front.ellipse(12, Y(0), 19, Y(6))
+            front.ellipse(9, Y(3), 13, Y(7))
         return back, front
     if d == "up":
         cap = cap_base.copy().intersect(Mask(FW, FH).rect(0, 0, 31, Y(16)))
@@ -334,13 +363,14 @@ def hair_masks(style, d, b):
                 front.poly([(sx, Y(5)), (sx + 4, Y(5)), (sx + 2, Y(top))])
             front.poly([(10, Y(15)), (21, Y(15)), (18, Y(18)), (13, Y(18))])
         elif style == "bob":
-            front.rect(7, Y(8), 24, Y(18))
+            front.ellipse(7, Y(5), 24, Y(19))
         elif style == "long":
-            front.rect(8, Y(8), 23, Y(28))
-            front.poly([(8, Y(28)), (23, Y(28)), (21, Y(30)), (10, Y(30))])
+            front.poly([(8, Y(8)), (23, Y(8)), (24, Y(26)),
+                        (21, Y(31)), (10, Y(31)), (7, Y(26))])
         elif style == "ponytail":
-            front.rect(14, Y(14), 17, Y(26))
-            front.ellipse(13, Y(12), 18, Y(16))
+            front.ellipse(12, Y(12), 19, Y(19))
+            front.poly([(14, Y(17)), (18, Y(17)), (19, Y(27)),
+                        (17, Y(30)), (14, Y(27))])
         elif style == "bun":
             front.ellipse(12, Y(0), 19, Y(5))
         return back, front
@@ -361,14 +391,17 @@ def hair_masks(style, d, b):
     elif style == "side_part":
         front.poly([(15, Y(8)), (22, Y(8)), (22, Y(10))])
     elif style == "bob":
-        front.rect(8, Y(8), 14, Y(17))
+        front.ellipse(7, Y(6), 15, Y(18))
         front.rect(16, Y(8), 21, Y(9))
     elif style == "long":
         front.rect(16, Y(8), 21, Y(9))
-        back.rect(8, Y(10), 14, Y(28))
+        back.poly([(8, Y(9)), (14, Y(9)), (15, Y(26)),
+                   (12, Y(30)), (7, Y(27))])
     elif style == "ponytail":
         front.rect(16, Y(8), 21, Y(8))
-        back.poly([(9, Y(9)), (11, Y(9)), (9, Y(22)), (6, Y(20))])
+        back.ellipse(7, Y(8), 13, Y(15))
+        back.poly([(8, Y(13)), (12, Y(13)), (10, Y(25)),
+                   (6, Y(23))])
     elif style == "bun":
         front.ellipse(8, Y(1), 14, Y(7))
     return back, front
@@ -511,9 +544,12 @@ def draw_outfit(oid, pres):
                 for yy in range(20 + b, 30 + b):
                     w = max(0, 2 - (yy - 20 - b) // 4)
                     hline(top, ox + cx - 1 - w, ox + cx + w, oy + yy, inner)
-                # lapels
-                put(top, ox + cx - 3, oy + 21 + b, tr[0]); put(top, ox + cx + 2, oy + 21 + b, tr[0])
-                put(top, ox + cx - 2, oy + 24 + b, tr[0]); put(top, ox + cx + 1, oy + 24 + b, tr[0])
+                # A wide V reads as tailoring even at the native game scale.
+                fill(top, Mask(FW, FH).poly([(11, 20 + b), (15, 27 + b),
+                                             (13, 26 + b), (10, 22 + b)]), tr[1], ox, oy)
+                fill(top, Mask(FW, FH).poly([(20, 20 + b), (17, 27 + b),
+                                             (19, 26 + b), (21, 22 + b)]), tr[1], ox, oy)
+                put(top, ox + cx - 3, oy + 21 + b, tr[3]); put(top, ox + cx + 2, oy + 21 + b, tr[3])
                 vline(top, ox + cx - 1, oy + 30 + b, oy + 33 + b, tr[0])
                 if kind == "suit":
                     vline(top, ox + cx - 1, oy + 21 + b, oy + 27 + b, spec["tie"]); vline(top, ox + cx, oy + 21 + b, oy + 27 + b, shade(spec["tie"], 0.8))
@@ -543,10 +579,18 @@ def draw_outfit(oid, pres):
                 vm = Mask(FW, FH).rect(11, 22 + b, 20, 32 + b)
                 vm.subtract(Mask(FW, FH).poly([(14, 21 + b), (17, 21 + b), (16, 26 + b), (15, 26 + b)]))
                 shaded(top, vm, ramp(spec["vest"], 0.5, 0.8, 0.15), ox, oy)
+                rect(top, ox + 18, oy + 23 + b, ox + 21, oy + 26 + b, (235, 239, 243))
+                hline(top, ox + 19, ox + 20, oy + 24 + b, spec["badge"] if "badge" in spec else (77, 138, 214))
                 put(top, ox + 15, oy + 29 + b, (220, 220, 230))
             elif kind == "polo":
                 rect(top, ox + cx - 2, oy + 20 + b, ox + cx + 1, oy + 21 + b, shade(spec["top_col"], 0.75))
                 vline(top, ox + cx, oy + 21 + b, oy + 23 + b, shade(spec["top_col"], 0.65))
+                # A crossbody strap and large dark waist pouch identify couriers.
+                for yy in range(23 + b, 31 + b):
+                    put(top, ox + 19 - (yy - 23 - b) // 2, oy + yy, (54, 63, 70))
+                rect(top, ox + 10, oy + 29 + b, ox + 16, oy + 34 + b, (42, 55, 62))
+                rect(top, ox + 11, oy + 30 + b, ox + 15, oy + 31 + b, (79, 99, 103))
+                put(top, ox + 13, oy + 32 + b, (220, 178, 91))
             elif kind == "tee":
                 hline(top, ox + cx - 2, ox + cx + 1, oy + 20 + b, GRAY_CLOTH[1])
         elif d == "up":
@@ -565,12 +609,20 @@ def draw_outfit(oid, pres):
             if kind == "shirt":
                 vline(top, ox + 18, oy + 21 + b, oy + 25 + b, spec["lanyard"])
                 rect(top, ox + 18, oy + 26 + b, ox + 19, oy + 28 + b, spec["badge"])
+            if kind == "polo":
+                vline(top, ox + 19, oy + 21 + b, oy + 29 + b, (54, 63, 70))
+                rect(top, ox + 11, oy + 29 + b, ox + 16, oy + 34 + b, (42, 55, 62))
+                put(top, ox + 13, oy + 30 + b, (220, 178, 91))
             if kind == "apron_tee":
                 am = Mask(FW, FH).rect(16, 24 + b, 20, 37)
                 shaded(top, am, ramp(spec["apron"], 0.5, 0.82, 0.15), ox, oy)
             if kind == "vest":
                 vm = Mask(FW, FH).rect(12, 22 + b, 19, 32 + b)
                 shaded(top, vm, ramp(spec["vest"], 0.5, 0.8, 0.15), ox, oy)
+                rect(top, ox + 17, oy + 23 + b, ox + 20, oy + 26 + b, (235, 239, 243))
+            if kind == "polo":
+                vline(top, ox + 14, oy + 22 + b, oy + 29 + b, (54, 63, 70))
+                rect(top, ox + 10, oy + 29 + b, ox + 14, oy + 33 + b, (42, 55, 62))
             if kind == "hoodie":
                 hm = Mask(FW, FH).ellipse(9, 18 + b, 15, 24 + b)
                 shaded(top, hm, shade_ramp(tr, 0.92), ox, oy)

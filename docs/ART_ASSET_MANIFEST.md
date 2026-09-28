@@ -8,6 +8,21 @@ Palette anchors: see `CITY_VENTURE_SPEC_READBACK.md` §F. Placeholders come from
 
 The current playable screens received new menu and arrival illustrations, refined layered character and portrait art, and a shared UI skin pass. The asset interface and game design remain unchanged. Source images, conversion commands, rendered screenshots, QA results, and remaining art limits are recorded in [`evidence/visual_art_pass_2026_09_28/README.md`](../evidence/visual_art_pass_2026_09_28/README.md). The v3 status table below continues to describe the other converted world assets.
 
+### A1 walking character art (2026-09-28)
+
+All 128 `game/assets/characters/*.png` sheets were reviewed and regenerated on the
+original 128×144 canvas. Body presentations have distinct shoulder and waist
+profiles, eight hair shapes have different front/side/back silhouettes, the
+nine outfits retain their tintable layers, and the four side-walk frames now
+exchange the leading foot. The generated interior outlines were removed from
+the separate layers; Godot's existing composite outline shader still defines
+the assembled character. This softens the boxed look without changing game
+design, character data, frame dimensions, names, or nearest-neighbor display.
+The A1 comparison, 12-NPC lineup, and QA record are in
+[`evidence/2026-09-28_a1_characters/README.md`](../evidence/2026-09-28_a1_characters/README.md).
+Portraits remain in A5. Elena's data-driven appearance difference is Claude
+program-wiring item #18.
+
 ### Status after Art Pass v3 (feedback: "still not good enough — match the boards' style, content and quality")
 
 Art Pass v3 turns the approved concept boards themselves into game-ready assets, as Handoff §83 requires for AI concept

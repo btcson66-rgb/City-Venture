@@ -52,17 +52,17 @@
 
 | 部位 | 選項（id） | 圖層檔案 | 美術 |
 |------|-----------|----------|------|
-| 外型 Presentation | `masculine` 陽剛 · `feminine` 陰柔 · `neutral` 中性 | 決定 body 和 outfit 的體型版本 | CODEX |
-| 臉型 | `round` 圓 · `oval` 橢圓 · `square` 方 · `heart` 心形 | `body_<pres>_<face>`（12 張）· `portraits/head_<face>`（4 張） | CODEX |
-| 髮型 | `messy` 亂髮 · `short_neat` 短俐落 · `buzz` 平頭 · `side_part` 旁分 · `bob` 鮑伯 · `long` 長髮 · `ponytail` 馬尾 · `bun` 包頭 | `hair_<style>_back/_front`（16 張，走路和頭像各一套） | CODEX |
+| 外型 Presentation | `masculine` 陽剛 · `feminine` 陰柔 · `neutral` 中性 | 決定 body 和 outfit 的體型版本 | A1 走路圖已更新 |
+| 臉型 | `round` 圓 · `oval` 橢圓 · `square` 方 · `heart` 心形 | `body_<pres>_<face>`（12 張）· `portraits/head_<face>`（4 張） | A1 走路圖已更新；頭像 A5 待辦 |
+| 髮型 | `messy` 亂髮 · `short_neat` 短俐落 · `buzz` 平頭 · `side_part` 旁分 · `bob` 鮑伯 · `long` 長髮 · `ponytail` 馬尾 · `bun` 包頭 | `hair_<style>_back/_front`（16 張，走路和頭像各一套） | A1 走路圖已更新；頭像 A5 待辦 |
 | 髮色 | black · dark_brown · brown · auburn · blonde · silver · navy（染）· rose（染） | 染色，色碼見 [01 美術方向](01_art_direction.md) | — |
 | 膚色 | s1 Porcelain · s2 Light · s3 Warm · s4 Tan · s5 Brown · s6 Deep | 染色 | — |
-| 眼型 | `round` · `almond` 杏眼 · `narrow` 細長 · `wide` 大眼 | `eyes_<shape>` + `iris_<shape>`（走路 8 張、頭像 8 張） | CODEX |
+| 眼型 | `round` · `almond` 杏眼 · `narrow` 細長 · `wide` 大眼 | `eyes_<shape>` + `iris_<shape>`（走路 8 張、頭像 8 張） | A1 走路圖已檢查；頭像 A5 待辦 |
 | 瞳色 | brown · dark · hazel · green · blue · gray | 染色 | — |
-| 眉毛 | `straight` 平 · `arched` 挑 · `thick` 濃 · `soft` 柔 | `brows_<style>` | CODEX |
-| 嘴 | `smile` 微笑 · `neutral` 平 · `grin` 露齒笑 · `small` 小嘴 | `mouth_<style>` | CODEX |
-| 服裝 | `startup_casual` · `office_professional` · `home` | 見下方服裝表 | CODEX |
-| 配件 | `none` · `glasses_round` 圓框眼鏡 · `glasses_square` 方框眼鏡 · `backpack` 後背包 | `acc_<id>` | CODEX |
+| 眉毛 | `straight` 平 · `arched` 挑 · `thick` 濃 · `soft` 柔 | `brows_<style>` | A1 走路圖已檢查；頭像 A5 待辦 |
+| 嘴 | `smile` 微笑 · `neutral` 平 · `grin` 露齒笑 · `small` 小嘴 | `mouth_<style>` | A1 走路圖已檢查；頭像 A5 待辦 |
+| 服裝 | `startup_casual` · `office_professional` · `home` | 見下方服裝表 | A1 走路圖已更新；頭像 A5 待辦 |
+| 配件 | `none` · `glasses_round` 圓框眼鏡 · `glasses_square` 方框眼鏡 · `backpack` 後背包 | `acc_<id>` | A1 走路圖已檢查 |
 
 規劃中（捏臉畫面已經寫明「之後在衣櫃和服飾店開放」）：
 
