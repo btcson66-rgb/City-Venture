@@ -264,6 +264,73 @@ Claude 線同時做完了下方[程式接線清單](#程式接線清單)的大�
 
 **數量**：一個姿勢要 128 張（全部圖層，加上 R1 的細節層）。建議用 `tools/art/chars.py` 產生，不要手畫每一張。
 
+**R3 美術交件（2026-09-28）**：原有 128 個走路圖層與 R1 的 6 個細節圖層，每層製作 `sit`、`idle`、`phone`、`interact`、`carry`，共 670 張 128×144 PNG；所有新增圖都有 Godot `.png.import`。玩家／NPC 的排程和動作切換仍由 Claude 線維護。以下識別符為新姿勢圖的完整素材索引（同名的 3 種體型共用列）。
+
+| 圖層識別符 | 五種姿勢資產識別符 |
+|---|---|
+| `almond` | `almond_sit`, `almond_idle`, `almond_phone`, `almond_interact`, `almond_carry` |
+| `arched` | `arched_sit`, `arched_idle`, `arched_phone`, `arched_interact`, `arched_carry` |
+| `backpack` | `backpack_sit`, `backpack_idle`, `backpack_phone`, `backpack_interact`, `backpack_carry` |
+| `barista_bottom` | `barista_bottom_sit`, `barista_bottom_idle`, `barista_bottom_phone`, `barista_bottom_interact`, `barista_bottom_carry` |
+| `barista_shoes` | `barista_shoes_sit`, `barista_shoes_idle`, `barista_shoes_phone`, `barista_shoes_interact`, `barista_shoes_carry` |
+| `barista_top` | `barista_top_sit`, `barista_top_idle`, `barista_top_phone`, `barista_top_interact`, `barista_top_carry` |
+| `bob_back` | `bob_back_sit`, `bob_back_idle`, `bob_back_phone`, `bob_back_interact`, `bob_back_carry` |
+| `bob_front` | `bob_front_sit`, `bob_front_idle`, `bob_front_phone`, `bob_front_interact`, `bob_front_carry` |
+| `bun_back` | `bun_back_sit`, `bun_back_idle`, `bun_back_phone`, `bun_back_interact`, `bun_back_carry` |
+| `bun_front` | `bun_front_sit`, `bun_front_idle`, `bun_front_phone`, `bun_front_interact`, `bun_front_carry` |
+| `business_suit_bottom` | `business_suit_bottom_sit`, `business_suit_bottom_idle`, `business_suit_bottom_phone`, `business_suit_bottom_interact`, `business_suit_bottom_carry` |
+| `business_suit_shoes` | `business_suit_shoes_sit`, `business_suit_shoes_idle`, `business_suit_shoes_phone`, `business_suit_shoes_interact`, `business_suit_shoes_carry` |
+| `business_suit_top` | `business_suit_top_sit`, `business_suit_top_idle`, `business_suit_top_phone`, `business_suit_top_interact`, `business_suit_top_carry` |
+| `business_suit_top_detail` | `business_suit_top_detail_sit`, `business_suit_top_detail_idle`, `business_suit_top_detail_phone`, `business_suit_top_detail_interact`, `business_suit_top_detail_carry` |
+| `buzz_back` | `buzz_back_sit`, `buzz_back_idle`, `buzz_back_phone`, `buzz_back_interact`, `buzz_back_carry` |
+| `buzz_front` | `buzz_front_sit`, `buzz_front_idle`, `buzz_front_phone`, `buzz_front_interact`, `buzz_front_carry` |
+| `casual_jacket_bottom` | `casual_jacket_bottom_sit`, `casual_jacket_bottom_idle`, `casual_jacket_bottom_phone`, `casual_jacket_bottom_interact`, `casual_jacket_bottom_carry` |
+| `casual_jacket_shoes` | `casual_jacket_shoes_sit`, `casual_jacket_shoes_idle`, `casual_jacket_shoes_phone`, `casual_jacket_shoes_interact`, `casual_jacket_shoes_carry` |
+| `casual_jacket_top` | `casual_jacket_top_sit`, `casual_jacket_top_idle`, `casual_jacket_top_phone`, `casual_jacket_top_interact`, `casual_jacket_top_carry` |
+| `casual_tee_bottom` | `casual_tee_bottom_sit`, `casual_tee_bottom_idle`, `casual_tee_bottom_phone`, `casual_tee_bottom_interact`, `casual_tee_bottom_carry` |
+| `casual_tee_shoes` | `casual_tee_shoes_sit`, `casual_tee_shoes_idle`, `casual_tee_shoes_phone`, `casual_tee_shoes_interact`, `casual_tee_shoes_carry` |
+| `casual_tee_top` | `casual_tee_top_sit`, `casual_tee_top_idle`, `casual_tee_top_phone`, `casual_tee_top_interact`, `casual_tee_top_carry` |
+| `civic_staff_bottom` | `civic_staff_bottom_sit`, `civic_staff_bottom_idle`, `civic_staff_bottom_phone`, `civic_staff_bottom_interact`, `civic_staff_bottom_carry` |
+| `civic_staff_shoes` | `civic_staff_shoes_sit`, `civic_staff_shoes_idle`, `civic_staff_shoes_phone`, `civic_staff_shoes_interact`, `civic_staff_shoes_carry` |
+| `civic_staff_top` | `civic_staff_top_sit`, `civic_staff_top_idle`, `civic_staff_top_phone`, `civic_staff_top_interact`, `civic_staff_top_carry` |
+| `courier_bottom` | `courier_bottom_sit`, `courier_bottom_idle`, `courier_bottom_phone`, `courier_bottom_interact`, `courier_bottom_carry` |
+| `courier_shoes` | `courier_shoes_sit`, `courier_shoes_idle`, `courier_shoes_phone`, `courier_shoes_interact`, `courier_shoes_carry` |
+| `courier_top` | `courier_top_sit`, `courier_top_idle`, `courier_top_phone`, `courier_top_interact`, `courier_top_carry` |
+| `courier_top_detail` | `courier_top_detail_sit`, `courier_top_detail_idle`, `courier_top_detail_phone`, `courier_top_detail_interact`, `courier_top_detail_carry` |
+| `glasses_round` | `glasses_round_sit`, `glasses_round_idle`, `glasses_round_phone`, `glasses_round_interact`, `glasses_round_carry` |
+| `glasses_square` | `glasses_square_sit`, `glasses_square_idle`, `glasses_square_phone`, `glasses_square_interact`, `glasses_square_carry` |
+| `grin` | `grin_sit`, `grin_idle`, `grin_phone`, `grin_interact`, `grin_carry` |
+| `heart` | `heart_sit`, `heart_idle`, `heart_phone`, `heart_interact`, `heart_carry` |
+| `home_bottom` | `home_bottom_sit`, `home_bottom_idle`, `home_bottom_phone`, `home_bottom_interact`, `home_bottom_carry` |
+| `home_shoes` | `home_shoes_sit`, `home_shoes_idle`, `home_shoes_phone`, `home_shoes_interact`, `home_shoes_carry` |
+| `home_top` | `home_top_sit`, `home_top_idle`, `home_top_phone`, `home_top_interact`, `home_top_carry` |
+| `long_back` | `long_back_sit`, `long_back_idle`, `long_back_phone`, `long_back_interact`, `long_back_carry` |
+| `long_front` | `long_front_sit`, `long_front_idle`, `long_front_phone`, `long_front_interact`, `long_front_carry` |
+| `messy_back` | `messy_back_sit`, `messy_back_idle`, `messy_back_phone`, `messy_back_interact`, `messy_back_carry` |
+| `messy_front` | `messy_front_sit`, `messy_front_idle`, `messy_front_phone`, `messy_front_interact`, `messy_front_carry` |
+| `narrow` | `narrow_sit`, `narrow_idle`, `narrow_phone`, `narrow_interact`, `narrow_carry` |
+| `office_professional_bottom` | `office_professional_bottom_sit`, `office_professional_bottom_idle`, `office_professional_bottom_phone`, `office_professional_bottom_interact`, `office_professional_bottom_carry` |
+| `office_professional_shoes` | `office_professional_shoes_sit`, `office_professional_shoes_idle`, `office_professional_shoes_phone`, `office_professional_shoes_interact`, `office_professional_shoes_carry` |
+| `office_professional_top` | `office_professional_top_sit`, `office_professional_top_idle`, `office_professional_top_phone`, `office_professional_top_interact`, `office_professional_top_carry` |
+| `oval` | `oval_sit`, `oval_idle`, `oval_phone`, `oval_interact`, `oval_carry` |
+| `ponytail_back` | `ponytail_back_sit`, `ponytail_back_idle`, `ponytail_back_phone`, `ponytail_back_interact`, `ponytail_back_carry` |
+| `ponytail_front` | `ponytail_front_sit`, `ponytail_front_idle`, `ponytail_front_phone`, `ponytail_front_interact`, `ponytail_front_carry` |
+| `round` | `round_sit`, `round_idle`, `round_phone`, `round_interact`, `round_carry` |
+| `short_neat_back` | `short_neat_back_sit`, `short_neat_back_idle`, `short_neat_back_phone`, `short_neat_back_interact`, `short_neat_back_carry` |
+| `short_neat_front` | `short_neat_front_sit`, `short_neat_front_idle`, `short_neat_front_phone`, `short_neat_front_interact`, `short_neat_front_carry` |
+| `side_part_back` | `side_part_back_sit`, `side_part_back_idle`, `side_part_back_phone`, `side_part_back_interact`, `side_part_back_carry` |
+| `side_part_front` | `side_part_front_sit`, `side_part_front_idle`, `side_part_front_phone`, `side_part_front_interact`, `side_part_front_carry` |
+| `small` | `small_sit`, `small_idle`, `small_phone`, `small_interact`, `small_carry` |
+| `smile` | `smile_sit`, `smile_idle`, `smile_phone`, `smile_interact`, `smile_carry` |
+| `soft` | `soft_sit`, `soft_idle`, `soft_phone`, `soft_interact`, `soft_carry` |
+| `square` | `square_sit`, `square_idle`, `square_phone`, `square_interact`, `square_carry` |
+| `startup_casual_bottom` | `startup_casual_bottom_sit`, `startup_casual_bottom_idle`, `startup_casual_bottom_phone`, `startup_casual_bottom_interact`, `startup_casual_bottom_carry` |
+| `startup_casual_shoes` | `startup_casual_shoes_sit`, `startup_casual_shoes_idle`, `startup_casual_shoes_phone`, `startup_casual_shoes_interact`, `startup_casual_shoes_carry` |
+| `startup_casual_top` | `startup_casual_top_sit`, `startup_casual_top_idle`, `startup_casual_top_phone`, `startup_casual_top_interact`, `startup_casual_top_carry` |
+| `straight` | `straight_sit`, `straight_idle`, `straight_phone`, `straight_interact`, `straight_carry` |
+| `thick` | `thick_sit`, `thick_idle`, `thick_phone`, `thick_interact`, `thick_carry` |
+| `wide` | `wide_sit`, `wide_idle`, `wide_phone`, `wide_interact`, `wide_carry` |
+
 ### R4 新 PNG 要連同 `.png.import` 一起提交
 
 專案有把 `*.png.import` 納入版本控制。新增圖檔後請先跑 `godot --headless --path game --import`，再把產生的 `.import` 一起 commit。不然別台電腦第一次開啟時會找不到圖。

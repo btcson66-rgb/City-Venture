@@ -42,6 +42,18 @@ tile, checker and navy carpet. Seven wall tiles retain their atlas coordinates.
 See [`evidence/2026-09-28_a2_interiors/README.md`](../evidence/2026-09-28_a2_interiors/README.md)
 for the eight room comparisons and remaining visual limits.
 
+### R3 layered character poses (2026-09-28)
+
+The 128 A1 walk layers and six R1 outfit detail layers each have five new
+128×144 pose sheets: `sit`, `idle`, `phone`, `interact`, and `carry` (670 PNGs).
+The first four poses use a two-frame cycle; carrying retains four frames.
+All sheets keep the original 32×48 frame alignment and three directions,
+and every new PNG has a Godot `.png.import` companion. The art script is
+`tools/art/r3_poses.py`. Composite comparisons and QA details are in
+[`evidence/2026-09-28_r3_poses/README.md`](../evidence/2026-09-28_r3_poses/README.md).
+The existing game test expecting missing sit art now requires an update on
+Claude's gameplay track.
+
 ### Status after Art Pass v3 (feedback: "still not good enough — match the boards' style, content and quality")
 
 Art Pass v3 turns the approved concept boards themselves into game-ready assets, as Handoff §83 requires for AI concept
