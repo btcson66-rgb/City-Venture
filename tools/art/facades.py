@@ -324,7 +324,9 @@ class B:
     def side(self, y_top, mat_col, windows=None, lit_p=0.5, kind="office", glass=False):
         W, D, img = self.W, self.D, self.img
         dy = D // 2
-        poly(img, [(W, y_top), (W + D - 1, y_top - dy), (W + D - 1, self.base - dy), (W, self.base)], shade(mat_col, 0.66))
+        # The receding wall receives less light, but keeps material detail at
+        # the game's small render scale (about 20% below the front facade).
+        poly(img, [(W, y_top), (W + D - 1, y_top - dy), (W + D - 1, self.base - dy), (W, self.base)], shade(mat_col, 0.8))
         # vertical texture
         for x in range(W + 2, W + D, 4):
             k = (x - W) / D
@@ -479,7 +481,9 @@ def sign_band(b, x0, x1, y, h, col, text=None, text_col=(250, 244, 226), glow=Tr
     hline(img, x0, x1, y + h - 1, shade(col, 0.6))
     if glow:
         for x in range(x0 + 2, x1 - 1):
-            put(b.lt, x, y + h // 2, (255, 236, 190, 70))
+            # Perimeter light frames the live translated lettering without
+            # running a glowing line through the glyphs.
+            put(b.lt, x, y + h - 1, (255, 236, 190, 70))
 
 
 def display_window(b, x0, x1, y0, y1, kind="shop", tint=(90, 130, 170), frame=(40, 46, 60)):
@@ -497,6 +501,12 @@ def display_window(b, x0, x1, y0, y1, kind="shop", tint=(90, 130, 170), frame=(4
 
 def glass_door(b, x, y, w, h):
     img = b.img
+    # Deep recess and bright jambs make the entrance readable in both day and
+    # night scenes, without moving the door rectangle used for interaction.
+    rect(img, x - 2, y - 3, x + w + 1, y + h - 1, (28, 35, 48))
+    hline(img, x - 2, x + w + 1, y - 3, (176, 184, 196))
+    vline(img, x - 2, y - 2, y + h - 1, (146, 158, 172))
+    vline(img, x + w + 1, y - 2, y + h - 1, (84, 96, 112))
     rect(img, x, y, x + w - 1, y + h - 1, (38, 42, 54))
     pane_interior(img, b.lt, x + 1, y + 1, x + w // 2 - 1, y + h - 1, b.rnd, "lobby", True, 0.95)
     pane_interior(img, b.lt, x + w // 2 + 1, y + 1, x + w - 2, y + h - 1, b.rnd, "lobby", True, 0.95)
@@ -504,6 +514,8 @@ def glass_door(b, x, y, w, h):
     vline(img, x + w // 2, y, y + h - 1, (38, 42, 54))
     rect(img, x + w // 2 - 2, y + h // 2 - 2, x + w // 2 - 2, y + h // 2 + 2, (220, 220, 226))
     rect(img, x + w // 2 + 2, y + h // 2 - 2, x + w // 2 + 2, y + h // 2 + 2, (220, 220, 226))
+    hline(img, x, x + w - 1, y + h - 2, (26, 34, 47))
+    rect(b.lt, x + w // 2 - 2, y - 2, x + w // 2 + 2, y - 1, (255, 220, 150, 130))
 
 
 def wall_lamp(b, x, y):
@@ -858,7 +870,10 @@ def metro_entrance():
 def generate(out):
     metas = {}
     for bid, spec in SPECS.items():
-        img, lt, meta = build(bid, spec)
+        # A consistent night occupancy mix across the 17 facade designs.
+        # The deterministic per-building RNG distributes roughly 60% lit
+        # upper windows and 40% dark; ground-floor businesses stay active.
+        img, lt, meta = build(bid, {**spec, "lit": 0.6})
         save(img, f"{out}/buildings/{bid}.png")
         save(lt, f"{out}/buildings/{bid}_lights.png")
         metas[bid] = meta

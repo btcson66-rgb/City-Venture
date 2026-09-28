@@ -56,6 +56,15 @@ second-pass pose repair eliminates the documented idle seams, phone/interact
 detachment and carry silhouette faults. `tools/qa/pose_check.py` reports OK;
 evidence is in [`evidence/2026-09-28_r3_pose_fixes/README.md`](../evidence/2026-09-28_r3_pose_fixes/README.md).
 
+### A3 building facades and night overlays (2026-09-28)
+
+The 18 existing facades and their night overlays were regenerated from
+`tools/art/facades.py` with clearer recessed doors, softer side-wall contrast,
+plain sign interiors and a seeded ~60% lit upper-window distribution. The
+geometry, door/sign rectangles and `buildings_meta.json` are unchanged.
+Four playable districts were captured both day and night before and after;
+see [`evidence/2026-09-28_a3_facades/README.md`](../evidence/2026-09-28_a3_facades/README.md).
+
 ### Status after Art Pass v3 (feedback: "still not good enough — match the boards' style, content and quality")
 
 Art Pass v3 turns the approved concept boards themselves into game-ready assets, as Handoff §83 requires for AI concept
