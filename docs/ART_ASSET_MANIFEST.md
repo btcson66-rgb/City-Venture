@@ -65,6 +65,16 @@ geometry, door/sign rectangles and `buildings_meta.json` are unchanged.
 Four playable districts were captured both day and night before and after;
 see [`evidence/2026-09-28_a3_facades/README.md`](../evidence/2026-09-28_a3_facades/README.md).
 
+### A4 street props and ground tiles (2026-09-28)
+
+The 28 existing street props have gentler interior colour transitions while
+retaining each sprite's dimensions and alpha outline. Repeated hedge, bollard,
+railing, cone and meter sprites are quieter. Twenty-three ground-atlas cells
+have broader sidewalk pavers, reduced asphalt noise and calm, seam-free water.
+Interior floor/wall cells, atlas indices and `sprite_meta.json` are unchanged.
+Source: `tools/art/street.py` plus `tools/art/a4_streets.py`. See
+[`evidence/2026-09-28_a4_streets/README.md`](../evidence/2026-09-28_a4_streets/README.md).
+
 ### Status after Art Pass v3 (feedback: "still not good enough — match the boards' style, content and quality")
 
 Art Pass v3 turns the approved concept boards themselves into game-ready assets, as Handoff §83 requires for AI concept

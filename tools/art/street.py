@@ -42,19 +42,16 @@ def shadow_ellipse(img, cx, cy, rx, ry, a=90):
 def t_pavers(seed=0, base=(214, 208, 196)):
     rnd = random.Random(seed)
     im = new(T, T, base)
-    # running-bond 8x4 stones
-    for row in range(4):
-        y0 = row * 4
-        off = 4 if row % 2 else 0
-        for x0 in range(-off, T, 8):
-            c = jitter(base, rnd, 0.05)
-            rect(im, max(0, x0), y0, min(T - 1, x0 + 7), y0 + 3, c)
-            hline(im, max(0, x0), min(T - 1, x0 + 6), y0, lighten(c, 0.12))
-            hline(im, max(0, x0), min(T - 1, x0 + 7), y0 + 3, shade(c, 0.84))
-            if 0 <= x0 + 7 < T:
-                vline(im, x0 + 7, y0, y0 + 3, shade(c, 0.8))
-    for _ in range(3):
-        put(im, rnd.randrange(T), rnd.randrange(T), shade(base, 0.9))
+    # Broader running-bond pavers read as stone rather than a tiny brick grid.
+    # Edge values align when this 16x16 cell is repeated horizontally.
+    for row in range(2):
+        y0 = row * 8
+        c = jitter(base, rnd, 0.025)
+        rect(im, 0, y0, T - 1, y0 + 7, c)
+        hline(im, 0, T - 1, y0 + 7, shade(c, 0.91))
+        hline(im, 0, T - 1, y0, lighten(c, 0.045))
+        sx = 7 if row == 0 else 15
+        vline(im, sx, y0 + 1, y0 + 6, shade(c, 0.91))
     return im
 
 
@@ -72,24 +69,23 @@ def t_slab(seed=0, base=(222, 214, 198)):
 
 def t_asphalt(kind="plain", seed=1):
     rnd = random.Random(seed)
-    base = (72, 78, 90)
+    base = (66, 73, 87)
     im = new(T, T, base)
     for y in range(T):
         for x in range(T):
             r = rnd.random()
-            if r < 0.22:
-                put(im, x, y, (80, 86, 98))
-            elif r < 0.36:
-                put(im, x, y, (64, 70, 82))
-    if kind == "plain" and seed % 3 == 0:
-        for i in range(5):
-            put(im, 3 + i, 9 + (i % 2), (56, 60, 70))
+            if r < 0.10:
+                put(im, x, y, (71, 78, 91))
+            elif r < 0.18:
+                put(im, x, y, (62, 69, 83))
     white = (236, 234, 222)
     if kind == "dash_h":
         rect(im, 1, 7, 12, 8, white)
         for x in range(1, 13):
             if rnd.random() < 0.15:
                 put(im, x, 7 + rnd.randint(0, 1), (200, 200, 194))
+    elif kind == "dash_v":
+        rect(im, 7, 1, 8, 12, white)
     elif kind == "cross_h":
         for x in (1, 7, 13):
             rect(im, x, 0, min(T - 1, x + 3), T - 1, white)
@@ -141,11 +137,11 @@ def t_grass(v=0):
     for y in range(T):
         for x in range(T):
             r = rnd.random()
-            if r < 0.2:
-                put(im, x, y, (122, 168, 86))
-            elif r < 0.34:
-                put(im, x, y, (88, 130, 66))
-    for _ in range(7):
+            if r < 0.12:
+                put(im, x, y, (116, 160, 84))
+            elif r < 0.20:
+                put(im, x, y, (94, 138, 72))
+    for _ in range(3):
         x, y = rnd.randrange(T), rnd.randrange(1, T)
         put(im, x, y, (140, 184, 96))
         put(im, x, y - 1, (122, 168, 86))
@@ -162,18 +158,15 @@ def t_hedge_ground():
 
 def t_water(v=0):
     rnd = random.Random(70 + v)
-    im = new(T, T, (58, 118, 180))
+    im = new(T, T, (53, 111, 172))
     for y in range(T):
         for x in range(T):
-            if rnd.random() < 0.18:
-                put(im, x, y, (50, 104, 166))
-    for _ in range(3):
-        x, y = rnd.randrange(12), rnd.randrange(T)
-        hline(im, x, x + 3, y, (104, 164, 214))
-        put(im, x + 1, y - 1 if y > 0 else y, (140, 190, 230))
+            if rnd.random() < 0.06:
+                put(im, x, y, (55, 113, 174))
+    # Rare highlights belong to the alternate cell. The base water remains
+    # deliberately calm so arbitrary tile repetition has no visible cadence.
     if v == 1:
-        put(im, 5, 5, (230, 244, 255))
-        put(im, 11, 12, (230, 244, 255))
+        hline(im, 5, 8, 5, (71, 130, 188))
     return im
 
 
@@ -326,7 +319,7 @@ def ground_tiles():
         ("grass", lambda: t_grass(0)), ("grass_flowers", lambda: t_grass(1)),
         ("sidewalk", lambda: t_pavers(1)), ("sidewalk_alt", lambda: t_pavers(2, (194, 188, 178))),
         ("road", lambda: t_asphalt("plain", 1)), ("road_dash_h", lambda: t_asphalt("dash_h", 2)),
-        ("road_dash_v", lambda: t_asphalt("plain", 4)), ("crosswalk_h", lambda: t_asphalt("cross_h", 5)),
+        ("road_dash_v", lambda: t_asphalt("dash_v", 4)), ("crosswalk_h", lambda: t_asphalt("cross_h", 5)),
         ("crosswalk_v", lambda: t_asphalt("cross_v", 6)), ("curb_top", lambda: t_curb(True)),
         ("curb_bottom", lambda: t_curb(False)), ("water", lambda: t_water(0)),
         ("water_alt", lambda: t_water(1)), ("water_edge", t_water_edge),
