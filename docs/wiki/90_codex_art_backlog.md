@@ -154,6 +154,8 @@ A1 圖層與實機對照見 [`evidence/2026-09-28_a1_characters/README.md`](../.
 
 **驗收**：標籤位置（`aurelia.json`、`regions/*.json` 的 `board`）留素底；構圖改了就一起改座標；地點卡上沒有文字。
 
+**A6 美術交件（2026-09-28，含 R2）**：15 張城市地圖、9 張世界地圖、12 張地點卡已重製。主圖保留原參考圖與所有 `board.label`／`board.pin` 座標，清空預印標籤與英文地圖說明；Riverside 旗幟、辦公室口號、菜單及海報改成圖示或材質，保留 R2 允許的品牌招牌。新增 PostPoint 專屬卡與 `.png.import`。原尺寸不變，製作腳本 `tools/art/a6_maps_cards.py`，前後與遊戲截圖見 `evidence/2026-09-28_a6_maps_cards/`。
+
 ### A7 UI 圖示與 App 圖示
 
 | 交付 | 檔案 | 數量 |

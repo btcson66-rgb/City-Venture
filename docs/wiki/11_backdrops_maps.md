@@ -52,20 +52,20 @@ Codex 的原始素材在 `docs/art_sources/menu_v2_source.png`、`arrival_v2_sou
 
 | 檔案 | 地點 | 美術 |
 |------|------|------|
-| `riverside` | Riverside 區 | CONV |
-| `startup_hub` | Startup Hub 區 | CONV |
-| `civic_center` | Civic Center 區 | CONV |
-| `financial` | Financial 區 | CONV |
-| `riverside_apartment` | Riverside Tower | CONV |
-| `bloom_coffee` | Bloom Coffee | CONV |
-| `byte_and_bean` | Bean & Byte | CONV |
-| `nexus_cowork` | Nexus Co-work | CONV |
-| `small_office` | 22 Founders Lane | CONV |
-| `nexus_bank` | Nexus Bank | CONV |
-| `city_hall` | Aurelia City Hall（招牌已改成 AURELIA） | CONV |
-| `postpoint_riverside` | PostPoint | **缺**，目前用 `riverside` 代替 · P0 `新增` |
+| `riverside` | Riverside 區 | CODEX A6（R2：旗幟無標語） |
+| `startup_hub` | Startup Hub 區 | CODEX A6 |
+| `civic_center` | Civic Center 區 | CODEX A6 |
+| `financial` | Financial 區 | CODEX A6 |
+| `riverside_apartment` | Riverside Tower | CODEX A6 |
+| `bloom_coffee` | Bloom Coffee | CODEX A6 |
+| `byte_and_bean` | Bean & Byte | CODEX A6 |
+| `nexus_cowork` | Nexus Co-work | CODEX A6 |
+| `small_office` | 22 Founders Lane | CODEX A6 |
+| `nexus_bank` | Nexus Bank | CODEX A6 |
+| `city_hall` | Aurelia City Hall | CODEX A6（圖上不印地點名） |
+| `postpoint_riverside` | PostPoint | CODEX A6（專屬卡，無字包裹圖示） |
 
-**規劃**：每個新區域一張，每棟新的可進入建築一張（清單見 [03](03_districts.md) 和 [04](04_buildings.md)），檔名等於 id。構圖：3/4 角度的建築或室內的「招牌畫面」，**不要有文字**。
+**製作規則**：每個新區域一張，每棟新的可進入建築一張（清單見 [03](03_districts.md) 和 [04](04_buildings.md)），檔名等於 id。構圖：3/4 角度的建築或室內的「招牌畫面」。A6 移除標語、海報、菜單與可翻譯的地點名稱；R2 明確允許的品牌識別招牌保留。卡片上的地點名稱和營業時間仍由程式畫。
 
 ---
 
@@ -73,9 +73,9 @@ Codex 的原始素材在 `docs/art_sources/menu_v2_source.png`、`arrival_v2_sou
 
 | 檔案 | 尺寸 | 用在 | 美術 |
 |------|------|------|------|
-| `board` | 458×305 | 城市地圖視窗的主圖（手機 City App、地圖快捷鍵） | CONV（Board F） |
-| `aurelia_map` | 640×360 | 捷運視窗的背景 | CONV（Board F） |
-| `i_<district>` | 144×90 | 選到某區時，右側資訊欄的區域照片（13 張） | CONV |
+| `board` | 458×305 | 城市地圖視窗的主圖（手機 City App、地圖快捷鍵） | CODEX A6（Board F，標籤區無字） |
+| `aurelia_map` | 640×360 | 捷運視窗的背景 | CODEX A6（深藍無字街道／河道底圖，路線由程式疊加） |
+| `i_<district>` | 144×90 | 選到某區時，右側資訊欄的區域照片（13 張） | CODEX A6 |
 
 13 張區域照片：`i_riverside` · `i_startup_hub` · `i_civic_center` · `i_financial` · `i_shopping_street` · `i_harbor` · `i_residential` · `i_luxury_heights` · `i_airport` · `i_old_town` · `i_university` · `i_industrial` · `i_metro`
 
@@ -96,9 +96,9 @@ Codex 的原始素材在 `docs/art_sources/menu_v2_source.png`、`arrival_v2_sou
 
 | 檔案 | 尺寸 | 用在 | 美術 |
 |------|------|------|------|
-| `board` | 600×255 | 世界地圖視窗的主圖 | CONV（Board E） |
+| `board` | 600×255 | 世界地圖視窗的主圖 | CODEX A6（Board E，標籤區無字） |
 | `world_map` | 640×360 | 保留（程式目前沒用到） | GEN |
-| `r_<region>` | 64×40 | 每個市場的縮圖，出現在標籤和資訊欄（8 張） | CONV（Board E） |
+| `r_<region>` | 64×40 | 每個市場的縮圖，出現在標籤和資訊欄（8 張） | CODEX A6（Board E） |
 
 8 張市場縮圖：`r_aurelia` · `r_northridge` · `r_auroria` · `r_lumina` · `r_zenkai` · `r_solterra` · `r_almeria` · `r_karu`。每一區的視覺關鍵詞見 [02 世界觀](02_world_lore.md)。
 
