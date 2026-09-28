@@ -707,11 +707,17 @@ def build(bid, spec):
         gmat = spec.get("gmat", mat)
         cladding(img, 0, gy, W - 1, base - 1, gmat, rnd)
         sgn_col = spec.get("sign_col", (34, 44, 62))
-        sign_band(b, 4, W - 5, gy + 4, 12, sgn_col)
-        sign = [6, gy + 5, W - 12, 10]
+        if spec.get("sign_text") or spec.get("player_sign"):
+            sign_band(b, 4, W - 5, gy + 4, 12, sgn_col)
+            sign = [6, gy + 5, W - 12, 10]
+        else:
+            # Unnamed shopping rows use a decorative fascia, never a blank sign.
+            hline(img, 4, W - 5, gy + 5, lighten(sgn_col, 0.35))
+            hline(img, 4, W - 5, gy + 14, shade(sgn_col, 0.78))
         if spec.get("logo"):
             logo(b, spec["logo"], W - 20, gy + 5, 9, spec.get("logo_col", (240, 240, 230)))
-            sign = [6, gy + 5, W - 28, 10]
+            if sign is not None:
+                sign = [6, gy + 5, W - 28, 10]
         aw_y = gy + 18
         if spec.get("awning"):
             awning(b, 4, W - 5, aw_y, spec["awning"], spec.get("stripes", True))
@@ -790,6 +796,50 @@ def build(bid, spec):
         hline(img, sx0 + 1, sx1 - 1, gy + 1, (46, 64, 112))
         sign = [sx0, gy + 1, sx1 - sx0, 10]
         dy = dy - 8
+    # Shopping Street detail pass: each storefront has its own readable use.
+    if bid == "threadline_apparel":
+        for cx, coat in ((25,(46,63,91)), (121,(206,164,131)), (145,(69,83,112))):
+            rect(img, cx-2, gy+30, cx+2, gy+34, (222,195,168))
+            poly(img, [(cx-5,gy+35),(cx+5,gy+35),(cx+8,base-10),(cx-8,base-10)],coat)
+            hline(img,cx-7,cx+7,base-9,(91,69,58))
+            rect(img,cx-6,base-8,cx+6,base-7,(156,129,98))
+        hline(b.lt,8,W-9,gy+21,(255,224,177,105))
+    elif bid == "crestline_flagship":
+        for x in (6, W-10):
+            vline(img,x,gy+13,base-2,(192,155,91))
+            vline(b.lt,x,gy+13,base-2,(236,185,109,80))
+        # Raised ridge mark, kept separate from runtime name text.
+        poly(img,[(W//2-13,gy-17),(W//2,gy-25),(W//2+13,gy-17)],(195,163,97))
+        poly(img,[(W//2-8,gy-17),(W//2,gy-22),(W//2+8,gy-17)],(236,211,156))
+    elif bid == "lantern_bistro":
+        for x in (16,35,W-35,W-16):
+            vline(img,x,gy+17,gy+25,(72,58,53))
+            rect(img,x-3,gy+25,x+3,gy+34,(207,127,83))
+            rect(b.lt,x-3,gy+25,x+3,gy+34,(255,177,99,120))
+        for x in (24,W-26):
+            rect(img,x-7,base-11,x+7,base-9,(92,64,52))
+            vline(img,x,base-8,base-2,(72,58,53))
+    elif bid == "popup_unit":
+        # Key-shaped rental pictogram on glass; the player supplies the name.
+        rect(img,19,gy+30,33,gy+47,(240,242,228))
+        rect(img,23,gy+36,29,gy+38,(77,111,135))
+        vline(img,26,gy+39,gy+43,(77,111,135))
+    elif bid == "retail_arcade":
+        for x in (18,58,98,138):
+            rect(img,x-13,gy+27,x+13,base-4,(43,55,69))
+            rect(img,x-11,gy+32,x+11,base-5,(102,151,172))
+            hline(img,x-9,x+9,gy+33,(191,207,201))
+            rect(img,x-14,gy+24,x+14,gy+28,(192,177,153))
+    elif bid == "shop_row_awning":
+        for x,col in ((5,(199,115,125)),(W//3,(103,152,125)),(2*W//3,(94,135,179))):
+            awning(b,x,min(W-5,x+W//3-3),gy+19,col,False,7)
+    elif bid == "cinema_front":
+        for x in range(12,W-10,11):
+            rect(img,x,gy+20,x+2,gy+22,(234,201,126))
+            rect(b.lt,x,gy+20,x+2,gy+22,(255,220,148,115))
+        for x in (28,50,72,94,116,138):
+            rect(img,x,gy+29,x+12,gy+47,(51,61,86))
+            rect(img,x+2,gy+32,x+10,gy+43,(176,103,129))
     # entrance shadow, ground contact
     b.ground_shadow()
     # brand pieces
@@ -851,6 +901,25 @@ SPECS = {
     "finance_tower": dict(style="glass", w=176, depth=30, floors=9, fh=30, gh=62, roof="ac", pane=11, fins=True, lit=0.55,
                           ground="lobby", gmat="navy_panel", sign_text="ARC CAPITAL", sign_width=68,
                           brands=[("banner", 150, 60, 44, (46, 70, 130), "ARC")]),
+    "threadline_apparel": dict(style="plaster", w=160, depth=22, floors=2, fh=45, gh=61, mat="white",
+                                ground="shop", gmat="navy_panel", awning=(44,51,67), stripes=False,
+                                sign_text="THREADLINE", sign_col=(30,35,46), lit=0.6),
+    "crestline_flagship": dict(style="glass", w=235, depth=25, floors=3, fh=40, gh=66,
+                                ground="lobby", gmat="navy_panel", sign_col=(32,43,77),
+                                sign_text="CRESTLINE", sign_width=136, lit=0.6),
+    "lantern_bistro": dict(style="brick", w=144, depth=20, floors=2, fh=36, gh=60, mat="red_brick",
+                           ground="cafe", awning=(130,72,58), stripes=False,
+                           sign_text="LANTERN BISTRO", sign_col=(50,35,37), lit=0.6),
+    "popup_unit": dict(style="plaster", w=112, depth=18, floors=1, fh=35, gh=60, mat="white",
+                       ground="shop", gmat="white", awning=(225,224,211), stripes=False,
+                       sign_text="", player_sign=True, sign_col=(225,225,216), lit=0.6),
+    "retail_arcade": dict(style="stone", w=176, depth=24, floors=2, fh=45, gh=70, mat="sand",
+                          ground="lobby", gmat="limestone", lit=0.6),
+    "shop_row_awning": dict(style="brick", w=144, depth=20, floors=2, fh=34, gh=58, mat="brick",
+                             ground="shop", awning=(158,106,112), stripes=False, lit=0.6),
+    "cinema_front": dict(style="stone", w=176, depth=24, floors=3, fh=38, gh=66, mat="cream",
+                         ground="shop", gmat="navy_panel", awning=(40,49,72), stripes=False,
+                         sign_text="AURELIA CINEMA", sign_col=(40,45,67), lit=0.6),
 }
 
 

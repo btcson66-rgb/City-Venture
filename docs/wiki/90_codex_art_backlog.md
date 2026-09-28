@@ -197,6 +197,8 @@ A1 圖層與實機對照見 [`evidence/2026-09-28_a1_characters/README.md`](../.
 | **B9** | 品牌與商品 | 13 個公司標誌、3 個 SaaS logo、4 張商品照（手機隨手拍版和專業攝影版） | [08](08_items.md) |
 | **B10** | 專屬 NPC | `characters/npc_<id>.png` 和 `portraits/npc_<id>.png`：Maya、Marcus、Daniel、Elena、Priya、Jun | [07](07_characters.md#專屬-npc-美術程式已接好) |
 
+**B1 美術起步（2026-09-29）**：已先交購物街七棟立面與夜燈、Threadline 六件室內家具、三色市集攤 `props/market_stall_rose.png`、`props/market_stall_sage.png`、`props/market_stall_cream.png`、`props/string_lights.png`（string lights 串燈及 `_lights`）、花攤、長花台、腳踏車架；尺寸與碰撞 metadata 同步。五套服裝、配件與 Nina 仍待 B1 後續交件；遊戲區域資料與互動接線由 Claude 線負責。對比圖與驗收記錄見 `evidence/2026-09-29_b1_shopping_street_start/`。
+
 每一批的驗收標準和 A 批一樣，另外還要：
 
 - [ ] 新區域的所有建築、物件、地磚都放在同一張對比截圖裡，確認風格一致
