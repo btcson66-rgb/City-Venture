@@ -73,9 +73,8 @@ func build() -> void:
 		v.add_child(tl)
 		var st := UIK.label("Your home market" if home else str(r["archetype"]), 6, Art.C_SKY)
 		st.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		st.clip_text = true
-		st.custom_minimum_size.x = b.size.x - (44.0 if not home else 6.0)
 		v.add_child(st)
+		UIK.fit_card.call_deferred(b, hb, Rect2(a, z - a), Vector2(4, 4))
 		if home:
 			_home = Control.new()
 			_home.mouse_filter = Control.MOUSE_FILTER_IGNORE

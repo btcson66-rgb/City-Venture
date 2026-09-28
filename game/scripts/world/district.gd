@@ -77,6 +77,23 @@ func build(district_id: String) -> void:
 	refresh_named_npcs()
 
 
+## Keep a sign's text on its painted board: step the font down until the text fits the board's width, and if it
+## still doesn't, let it overflow evenly on both sides. A Label only grows right and down, which slid long names
+## like "RIVERSIDE TOWER" off their boards and dropped tall fonts below them.
+func _fit_sign(lb: Label, board: Rect2) -> void:
+	if not is_instance_valid(lb):
+		return
+	var fs := lb.get_theme_font_size("font_size")
+	while lb.get_minimum_size().x > board.size.x + 2.0 and fs > 5:
+		fs -= 1
+		lb.add_theme_font_override("font", UIK.title_font() if fs >= 7 else UIK.bold_font())
+		lb.add_theme_font_size_override("font_size", fs)
+	var need := lb.get_minimum_size()
+	var sz := Vector2(maxf(board.size.x, need.x), maxf(board.size.y, need.y))
+	lb.size = sz
+	lb.position = board.position + (board.size - sz) / 2.0
+
+
 func _add_building(sprite: String, x: float, bid: String, bd: Dictionary) -> void:
 	var meta: Dictionary = DataDB.buildings_meta.get(sprite, {})
 	var tex := Art.tex("buildings/" + sprite)
@@ -117,9 +134,11 @@ func _add_building(sprite: String, x: float, bid: String, bd: Dictionary) -> voi
 		text = GameState.entity_name(GameState.company_id()).to_upper() + " · 2B"
 	if typeof(sg) == TYPE_ARRAY and text != "":
 		var lb := UIK.world_label(text, 8 if float(sg[3]) >= 10 and float(sg[2]) >= 70 else (7 if float(sg[3]) >= 9 else 5), Color8(250, 244, 226))
-		lb.position = Vector2(float(sg[0]), float(sg[1]) - h + 2 + (0.0 if float(sg[3]) >= 9 else -1.0))
-		lb.size = Vector2(float(sg[2]), float(sg[3]))
+		var board := Rect2(float(sg[0]), float(sg[1]) - h + 2, float(sg[2]), float(sg[3]))
+		lb.position = board.position
+		lb.size = board.size   # a Label won't go below its minimum size, so keep the board rect separately
 		holder.add_child(lb)
+		_fit_sign.call_deferred(lb, board)   # after translation, which changes the width
 		if bid != "":
 			sign_labels[bid] = lb
 	# door → interior

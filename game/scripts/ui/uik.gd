@@ -149,6 +149,24 @@ static func ignore_mouse(n: Node) -> void:
 		ignore_mouse(c)
 
 
+## Grow a map label card so its content fits, keeping it centred on its painted spot `keep` and inside the map.
+## Call deferred, once the card is in the tree and its text translated (names like "International Airport"
+## and German-length translations otherwise get clipped).
+static func fit_card(card: Control, content: Control, keep: Rect2, pad := Vector2(6, 4)) -> void:
+	if not is_instance_valid(card) or not is_instance_valid(content):
+		return
+	var need := content.get_combined_minimum_size() + pad
+	var sz := Vector2(maxf(keep.size.x, need.x), maxf(keep.size.y, need.y))
+	var pos := keep.position + (keep.size - sz) / 2.0
+	var parent := card.get_parent() as Control
+	if parent != null and parent.size.x > 0.0:
+		pos.x = clampf(pos.x, 0.0, maxf(0.0, parent.size.x - sz.x))
+		pos.y = clampf(pos.y, 0.0, maxf(0.0, parent.size.y - sz.y))
+	card.custom_minimum_size = sz
+	card.size = sz
+	card.position = pos
+
+
 static func world_label(text: String, size := 6, color := Color(1, 1, 1)) -> Label:
 	var l := Label.new()
 	l.text = text

@@ -211,9 +211,8 @@ func refresh_named_npcs() -> void:
 				continue
 			var at: Array = list[int(used[kind])]
 			used[kind] = int(used[kind]) + 1
-			# the packer should use "interact"; its side-view art still shows the bare torso (wiki 90, R3 fixes)
 			want[p["id"]] = {"p": p, "pos": Vector2(float(at[0]), float(at[1])), "face": "left" if kind == "packer" else "up",
-				"pose": "idle" if kind == "packer" else "sit"}
+				"pose": "interact" if kind == "packer" else "sit"}
 			if kind == "desk":
 				var seat := seat_near(want[p["id"]]["pos"], 24.0)
 				if seat.is_empty() or _seat_claimed(seat["pos"], want):

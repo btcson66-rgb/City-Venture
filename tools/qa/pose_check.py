@@ -21,8 +21,7 @@ from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 CH = os.path.join(ROOT, "game", "assets", "characters")
-# frames the game actually plays per pose (scripts/world/character_rig.gd → POSES); check both breathing frames
-# even while the rig holds one, so the art is ready when it goes back to two
+# frames the game plays per pose; keep in step with scripts/world/character_rig.gd → POSES ("" = walk)
 POSES = {"": 4, "sit": 2, "idle": 2, "phone": 2, "interact": 2, "carry": 4}
 DIRS = ("down", "side", "up")
 _cache = {}

@@ -139,12 +139,11 @@ func _label_card(r: Rect2, title: String, sub: String, icon: String, accent: Col
 	hb.add_child(v)
 	var t := UIK.label(title, 7, Art.C_WHITE, true)
 	t.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	t.clip_text = true
-	t.custom_minimum_size.x = r.size.x - 18
 	v.add_child(t)
 	var s := UIK.label(sub, 6, Art.C_GOLD if sub == "You are here" else (Art.C_GREEN if sub == "Open" else Art.C_MUTED))
 	s.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	v.add_child(s)
+	UIK.fit_card.call_deferred(b, hb, r, Vector2(6, 4))
 	return b
 
 
