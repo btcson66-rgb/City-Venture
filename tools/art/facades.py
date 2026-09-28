@@ -734,8 +734,15 @@ def build(bid, spec):
             x = xe + 2
         canopy(b, dx - 14, dx + dw + 13, dy - 8, 8)
         glass_door(b, dx, dy, dw, dh)
-        sign = [dx - 12, gy + 2, dw + 24, 9]
-        sign_band(b, sign[0], sign[0] + sign[2] - 1, sign[1] - 1, 11, spec.get("sign_col", (30, 36, 50)))
+        if spec.get("sign_text"):
+            width = spec.get("sign_width", dw + 24)
+            sign = [(W - width) // 2, gy + 2, width, 9]
+            sign_band(b, sign[0], sign[0] + sign[2] - 1, sign[1] - 1, 11, spec.get("sign_col", (30, 36, 50)))
+        else:
+            # Unnamed offices have an entrance canopy with lit soffit, not an empty name board.
+            hline(img, dx - 13, dx + dw + 12, dy - 9, (148, 174, 192))
+            for lamp_x in (dx - 7, dx + dw + 6):
+                rect(b.lt, lamp_x, dy - 7, lamp_x + 2, dy - 6, (248, 214, 154, 180))
         if spec.get("planters", True):
             planter_box(b, 4, base - 1, 18)
             planter_box(b, W - 22, base - 1, 18)
@@ -752,7 +759,12 @@ def build(bid, spec):
         rect(img, dx + 2, dy + 2, dx + dw - 3, dy + dh // 2, (150, 190, 220))
         put(img, dx + dw - 4, dy + dh // 2 + 3, (230, 200, 120))
         wall_lamp(b, dx - 5, dy + 2)
-        sign = [dx - 12, dy - 14, dw + 24, 8]
+        if bid == "riverside_walkup":
+            # The walk-up entrance uses its masonry lintel as an address plate.
+            rect(img, dx + dw + 5, dy - 4, dx + dw + 10, dy + 2, (214, 196, 161))
+            rect(img, dx + dw + 7, dy - 2, dx + dw + 8, dy, (72, 87, 102))
+        else:
+            sign = [dx - 12, dy - 14, dw + 24, 8]
     elif gk == "civic":
         cladding(img, 0, gy, W - 1, base - 1, mat, rnd)
         rect(img, 4, gy + 1, W - 5, gy + 9, lighten(mc, 0.08))
@@ -769,7 +781,9 @@ def build(bid, spec):
         glass_door(b, dx, dy - 8, dw, dh)
         meta_door_shift = 8
         # Board-G style name plate: navy panel with a gold rule (text is drawn in-game)
-        sx0, sx1 = max(4, dx - 34), min(W - 5, dx + dw + 34)
+        sign_width = spec.get("sign_width", dw + 68)
+        sx0 = max(4, (W - sign_width) // 2)
+        sx1 = min(W - 5, sx0 + sign_width)
         rect(img, sx0, gy, sx1, gy + 11, (30, 44, 82))
         hline(img, sx0, sx1, gy, (206, 170, 92))
         hline(img, sx0, sx1, gy + 11, (206, 170, 92))
@@ -799,7 +813,7 @@ def build(bid, spec):
 SPECS = {
     "riverside_tower": dict(style="residential", w=176, depth=26, floors=6, fh=32, gh=58, mat="cream", balcony=True,
                             ww=20, wh=18, gap=12, ground="lobby", gmat="limestone", roof="green", lit=0.55, kind="home",
-                            sign_text="RIVERSIDE TOWER", sign_col=(40, 54, 80)),
+                            sign_text="RIVERSIDE TOWER", sign_width=90, sign_col=(40, 54, 80)),
     "bloom_block": dict(style="brick", w=160, depth=22, floors=2, fh=36, gh=62, mat="brick", ground="cafe", awning=(62, 120, 78),
                         sign_col=(38, 66, 50), roof="green", flowerbox=True, logo="leaf", logo_col=(210, 240, 200), sign_text="BLOOM COFFEE"),
     "postpoint": dict(style="plaster", w=112, depth=18, floors=1, fh=34, gh=60, mat="white", ground="shop", awning=(46, 98, 176),
@@ -809,20 +823,20 @@ SPECS = {
     "riverside_shops": dict(style="plaster", w=144, depth=20, floors=2, fh=34, gh=58, mat="sand", ground="shop", awning=(190, 120, 60),
                             roof="green", sign_text="FRESH+ MARKET", sign_col=(56, 110, 68), ac_units=True),
     "nexus_cowork": dict(style="loft", w=192, depth=24, floors=3, fh=38, gh=62, mat="concrete", ground="lobby", gmat="navy_panel",
-                         roof="terrace", sign_text="NEXUS CO-WORK", sign_col=(28, 48, 96), lit=0.7,
+                         roof="terrace", sign_text="NEXUS CO-WORK", sign_width=80, sign_col=(28, 48, 96), lit=0.7,
                          brands=[("logo", "nexus", 168, 30, 14, (240, 244, 255), (30, 50, 100))]),
     "horizon_labs": dict(style="glass", w=176, depth=26, floors=4, fh=36, gh=60, roof="terrace", pane=12, fins=True, lit=0.7,
-                         ground="lobby", gmat="dark_panel", sign_text="HORIZON LABS",
+                         ground="lobby", gmat="dark_panel", sign_text="HORIZON LABS", sign_width=74,
                          brands=[("pylon", 148, 40, 60, (240, 243, 247), "horizon", (46, 98, 196))]),
     "suite_building": dict(style="brick", w=144, depth=20, floors=3, fh=36, gh=58, mat="brick", ww=24, wh=24, ground="lobby",
-                           gmat="navy_panel", roof="green", lit=0.55, kind="office", sign_text="22 FOUNDERS LANE"),
+                           gmat="navy_panel", roof="green", lit=0.55, kind="office", sign_text="22 FOUNDERS LANE", sign_width=96),
     "byte_bean": dict(style="plaster", w=128, depth=18, floors=1, fh=34, gh=62, mat="wood", ground="cafe", awning=(52, 52, 62),
                       stripes=False, sign_col=(28, 28, 34), roof="green", sign_text="BEAN & BYTE", kind="home"),
     "nexus_bank": dict(style="stone", w=208, depth=26, floors=3, fh=40, gh=66, mat="limestone", ww=16, wh=28, gap=14,
                        ground="civic", roof="ac", dw=26, dh=32, sign_text="NEXUS BANK", lit=0.4,
                        brands=[("logo", "nexus", 96, 14, 14, (226, 186, 90), (34, 44, 70))]),
     "city_hall": dict(style="civic", w=256, depth=28, floors=2, fh=44, gh=72, mat="limestone", ww=16, wh=30, gap=14,
-                      ground="civic", roof="green", dw=30, dh=34, sign_text="AURELIA CITY HALL", lit=0.4,
+                      ground="civic", roof="green", dw=30, dh=34, sign_text="AURELIA CITY HALL", sign_width=102, lit=0.4,
                       brands=[("logo", "civic", 120, 8, 16, (226, 186, 90))]),
     "glass_tower": dict(style="glass", w=160, depth=28, floors=8, fh=32, gh=58, roof="ac", pane=10, lit=0.5, ground="lobby",
                         gmat="dark_panel", planters=False),
@@ -833,9 +847,9 @@ SPECS = {
     "brick_shops": dict(style="brick", w=144, depth=20, floors=2, fh=34, gh=58, mat="brick", ground="shop", awning=(176, 62, 54),
                         roof="ac", sign_text="KURO RAMEN", sign_col=(40, 28, 28), flowerbox=True, kind="home"),
     "civic_annex": dict(style="stone", w=160, depth=22, floors=3, fh=36, gh=58, mat="cream", ww=14, wh=24, ground="lobby",
-                        gmat="limestone", roof="ac", sign_text="TAX OFFICE"),
+                        gmat="limestone", roof="ac", sign_text="TAX OFFICE", sign_width=63),
     "finance_tower": dict(style="glass", w=176, depth=30, floors=9, fh=30, gh=62, roof="ac", pane=11, fins=True, lit=0.55,
-                          ground="lobby", gmat="navy_panel", sign_text="ARC CAPITAL",
+                          ground="lobby", gmat="navy_panel", sign_text="ARC CAPITAL", sign_width=68,
                           brands=[("banner", 150, 60, 44, (46, 70, 130), "ARC")]),
 }
 

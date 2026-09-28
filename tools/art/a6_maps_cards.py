@@ -57,7 +57,9 @@ def city_board() -> Image.Image:
     # The reference board also paints an English city-statistics box.
     glass_panel(im, (362, 252, 457, 304))
     # Metro Station is a runtime shortcut without a district board.label.
-    glass_panel(im, (339, 194, 456, 230))
+    metro = data.get("board_extra", {}).get("metro", {}).get("label")
+    if metro:
+        glass_panel(im, source_rect_to_asset(metro, CITY_MAP_BOX, CITY_MAP_SIZE, pad=1))
     return im
 
 
@@ -70,8 +72,12 @@ def world_board() -> Image.Image:
             glass_panel(im, source_rect_to_asset(label, WORLD_MAP_BOX, WORLD_MAP_SIZE, pad=1))
     # Replace the concept board's English tagline with ocean texture so no
     # unused empty label box remains in the bottom-left corner.
-    sea = im.crop((2, 188, 145, 220)).transpose(Image.Transpose.FLIP_TOP_BOTTOM)
-    im.paste(sea, (2, 222))
+    # Fill the obsolete tagline with neighbouring sea, then feather its edge.
+    # A photographic clone avoids another large, detectable flat navy patch.
+    arr = np.asarray(im).copy()
+    mask = np.zeros((im.height, im.width), np.uint8)
+    cv2.rectangle(mask, (0, 220), (148, 255), 255, -1)
+    im = Image.fromarray(cv2.inpaint(arr, mask, 9, cv2.INPAINT_TELEA))
     return im
 
 
@@ -139,14 +145,21 @@ def clean_card(card_id: str, board: str, box) -> Image.Image:
     # Re-establish architectural sign surfaces over areas with broad lettering.
     d = ImageDraw.Draw(im, "RGBA")
     if card_id == "byte_and_bean":
-        d.rectangle((38, 36, 113, 50), fill=(211, 174, 145, 240))
+        d.polygon([(38, 36), (113, 34), (113, 50), (38, 51)], fill=(166, 124, 91, 248))
+        d.line((39, 38, 112, 36), fill=(226, 184, 134, 255), width=2)
         for left, right in ((95, 129), (130, 159)):
-            d.rectangle((left, 7, right, 54), fill=(30, 35, 47, 245))
-            for y in (18, 29, 40):
-                d.ellipse((left + 8, y, left + 12, y + 4), fill=(210, 166, 98, 255))
+            d.polygon([(left, 8), (right, 6), (right-1, 53), (left+1, 55)], fill=(24, 32, 39, 251))
+            d.line((left+2, 10, right-3, 8), fill=(124, 104, 80, 255), width=2)
+            d.arc((left+8, 16, left+19, 27), 0, 180, fill=(234, 201, 151, 255), width=2)
+            d.line((left+9, 22, left+18, 22), fill=(234, 201, 151, 255), width=2)
+            for y, length, col in ((33, 15, (191, 145, 101, 255)), (39, 20, (113, 153, 137, 255)), (45, 12, (223, 187, 130, 255))):
+                d.rounded_rectangle((left+7, y, left+7+length, y+2), radius=1, fill=col)
     elif card_id in ("city_hall", "civic_center"):
-        d.polygon([(99, 20), (132, 18), (132, 39), (99, 40)], fill=(220, 203, 174, 246))
-        d.line((103, 34, 128, 33), fill=(164, 147, 126, 255), width=1)
+        d.polygon([(99, 20), (132, 18), (132, 39), (99, 40)], fill=(214, 200, 178, 249))
+        d.line((100, 22, 131, 20), fill=(248, 231, 194, 255), width=2)
+        d.ellipse((107, 23, 123, 37), outline=(154, 125, 77, 255), width=2)
+        d.polygon([(115, 25), (111, 32), (119, 32)], fill=(154, 125, 77, 255))
+        d.line((104, 39, 129, 38), fill=(143, 129, 111, 255), width=1)
     elif card_id == "financial":
         for b in ((47, 19, 66, 65), (71, 21, 87, 66), (92, 52, 109, 79)):
             d.rectangle(b, fill=(32, 97, 181, 252))
@@ -160,10 +173,24 @@ def clean_card(card_id: str, board: str, box) -> Image.Image:
         d.arc((15, 20, 24, 31), 0, 180, fill=(227, 243, 255, 255), width=2)
         d.arc((15, 26, 24, 38), 0, 180, fill=(227, 243, 255, 255), width=2)
     elif card_id == "small_office":
-        d.polygon([(32, 22), (112, 19), (119, 55), (31, 58)], fill=(232, 219, 195, 249))
-        d.line((62, 47, 77, 39, 90, 43, 107, 29), fill=(66, 105, 166, 255), width=2)
+        d.polygon([(31, 22), (113, 18), (120, 56), (30, 59)], fill=(95, 100, 102, 255))
+        d.polygon([(34, 24), (111, 21), (117, 53), (33, 56)], fill=(231, 228, 212, 253))
+        d.line((34, 25, 110, 22), fill=(252, 250, 237, 255), width=2)
+        d.line((32, 58, 120, 55), fill=(70, 73, 77, 255), width=2)
+        for x, y, col in ((43, 29, (239, 199, 106, 255)), (57, 33, (117, 174, 176, 255)), (46, 42, (222, 151, 122, 255))):
+            d.polygon([(x,y),(x+8,y-1),(x+9,y+7),(x,y+8)], fill=col)
+            d.line((x+2,y+3,x+6,y+3), fill=(100, 107, 103, 255), width=1)
+        d.line((68, 48, 76, 42, 84, 44, 93, 35, 104, 39), fill=(56, 99, 164, 255), width=2, joint="curve")
+        for x,y in ((76,42),(93,35),(104,39)):
+            d.ellipse((x-1,y-1,x+1,y+1), fill=(52, 88, 146, 255))
     elif card_id == "startup_hub":
-        d.polygon([(152, 42), (188, 40), (188, 77), (152, 79)], fill=(225, 218, 194, 247))
+        d.polygon([(151, 42), (188, 39), (186, 78), (153, 81)], fill=(59, 91, 132, 250))
+        d.polygon([(154, 43), (166, 42), (164, 79), (153, 80)], fill=(88, 132, 166, 248))
+        d.polygon([(167, 42), (177, 41), (177, 78), (164, 79)], fill=(40, 74, 121, 248))
+        d.line((152, 43, 188, 40), fill=(169, 198, 210, 255), width=2)
+        d.line((155, 51, 160, 60, 155, 72), fill=(120, 161, 183, 210), width=2)
+        d.line((180, 46, 184, 57, 180, 74), fill=(16, 49, 90, 180), width=2)
+        d.polygon([(171, 53), (164, 66), (178, 65)], fill=(227, 218, 185, 255))
     return im
 
 

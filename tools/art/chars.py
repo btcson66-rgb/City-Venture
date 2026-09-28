@@ -1013,6 +1013,8 @@ def draw_p_outfit(oid):
     elif kind == "vest":
         fill(img, Mask(PW, PH).poly([(14, 56), (27, 52), (31, 63), (12, 63)]), spec["vest"])
         fill(img, Mask(PW, PH).poly([(49, 56), (36, 52), (32, 63), (51, 63)]), spec["vest"])
+        rect(img, 39, 56, 45, 59, (234, 238, 234))
+        hline(img, 40, 43, 57, spec.get("badge", (77, 138, 214)))
     elif kind == "polo":
         fill(img, Mask(PW, PH).poly([(24, 49), (31, 54), (27, 56)]), shade(spec["top_col"], 0.78))
         fill(img, Mask(PW, PH).poly([(39, 49), (32, 54), (36, 56)]), shade(spec["top_col"], 0.78))
@@ -1032,13 +1034,20 @@ def split_outfit_material(oid, pres):
     original = draw_outfit(oid, pres)
     portrait = draw_p_outfit(oid)
     old_top, old_bottom = spec["top_col"], spec["bottom_col"]
+    cloth_key = "apron" if oid == "barista" else "vest" if oid == "civic_staff" else None
+    old_extra = spec.get(cloth_key) if cloth_key else None
     try:
-        spec["top_col"] = (232, 232, 232)
-        spec["bottom_col"] = (232, 232, 232)
+        if cloth_key:
+            spec[cloth_key] = (232, 232, 232)
+        else:
+            spec["top_col"] = (232, 232, 232)
+            spec["bottom_col"] = (232, 232, 232)
         neutral = draw_outfit(oid, pres)
         neutral_portrait = draw_p_outfit(oid)
     finally:
         spec["top_col"], spec["bottom_col"] = old_top, old_bottom
+        if cloth_key:
+            spec[cloth_key] = old_extra
 
     def separate(full, cloth):
         fabric = new(*full.size)

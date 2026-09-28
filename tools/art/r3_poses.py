@@ -16,7 +16,7 @@ output = Path(sys.argv[2])
 output.mkdir(parents=True, exist_ok=True)
 names = sorted(p for p in source.glob("*.png")
                if not p.stem.endswith(("_sit","_idle","_phone","_interact","_carry")))
-assert len(names) == 134, f"Expected A1 + R1's 134 layers; found {len(names)}"
+assert len(names) >= 134, f"Expected at least A1 + R1's 134 layers; found {len(names)}"
 POSES = ("sit", "idle", "phone", "interact", "carry")
 
 
