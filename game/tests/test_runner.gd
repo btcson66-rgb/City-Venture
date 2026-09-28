@@ -58,6 +58,8 @@ func _run() -> void:
 
 
 func _fresh_game() -> void:
+	# tests assert on English text; a Chinese OS locale (or test_i18n restoring it) must not leak in
+	TranslationServer.set_locale("en")
 	Clock.clear_pauses()
 	Clock.world_active = false
 	GameState.new_game({"name": "Test Founder", "seed": 12345})
