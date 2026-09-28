@@ -4,6 +4,10 @@ This page is for whoever takes over the visuals: Codex, another agent, or a pixe
 art without touching game code. Gameplay, content and systems stay with the Claude Code track, and the game already
 reads every image by file path. You can change the pictures and the game keeps working.
 
+**Start with the game wiki: [`docs/wiki/`](wiki/README.md).** It lists every asset with its size, use and status, plans
+the planned districts, buildings, interiors, characters and items, and gives the prioritized art backlog in
+[`docs/wiki/90_codex_art_backlog.md`](wiki/90_codex_art_backlog.md). This page stays as the short technical summary.
+
 ## Ground rules
 
 1. **Committed PNGs are the source of truth.** `tools/build.sh` no longer regenerates art. The procedural generator
@@ -32,7 +36,7 @@ reads every image by file path. You can change the pictures and the game keeps w
 | `portraits/` | Dialogue portraits, layered the same way | 256×64 strips (see `portrait_view.gd`) |
 | `buildings/` | Street facades plus `_lights` night overlays (same size) | Any size. `buildings_meta.json`: `size`, `front_w`, `depth`, `door` [x,y,w,h], `sign` [x,y,w,h], `sign_text` |
 | `interiors/` | Furniture, counters, wall decor, floors (`floor_*.png` are large seamless images) | Any size. Footprint and overhang in `sprite_meta.json` (`dw`, `dh`, `left`) |
-| `props/` | Street furniture, trees, product sprites (`product_*.png`) | Any size, bottom-centre anchored |
+| `props/` | Street furniture, trees, product sprites (`product_*.png`) | Any size. The district data's `x, y` is the footprint's top-left; draw order uses the bottom edge |
 | `tiles/` | 16×16 ground/wall tiles | `atlas.png` + `atlas.json` (name → cell) |
 | `vehicles/` | Cars/bus: `_body` (tinted) + `_detail` layers, per direction | Same size per pair |
 | `backdrops/` | Menu (752×360, slow pan), arrival (640×360), skyline strips (1300×320) | — |

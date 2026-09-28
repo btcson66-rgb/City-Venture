@@ -1,0 +1,144 @@
+# 04 建築外觀
+
+所有立面在 `game/assets/buildings/`。每棟有兩張圖：
+
+- `<facade>.png`：本體
+- `<facade>_lights.png`：夜間燈光疊圖，同尺寸，只畫亮的部分
+
+位置資料在 `buildings_meta.json`：
+
+| 欄位 | 意思 |
+|------|------|
+| `size` [w, h] | 圖片尺寸 |
+| `front_w` | 正面寬度；右邊剩下的是側牆 |
+| `depth` | 側牆寬（= `size.w − front_w`） |
+| `door` [x, y, w, h] | 門的位置。玩家走到這裡按 E 進門，程式也會在這裡畫出入口標記 |
+| `sign` [x, y, w, h] | 招牌區。程式在這裡畫 `sign_text`（可翻譯）。**美術只畫空白招牌底** |
+| `sign_text` | 招牌文字（英文原文，遊戲內會翻譯） |
+
+改了尺寸或門的位置，就要改 `buildings_meta.json`，然後跑 `python3 tools/gen_districts.py` 重排街區。
+
+---
+
+## 可進入的建築（已實作）
+
+| 立面 id | 建築 id | 名稱 | 區域 | 尺寸 | 正面 / 側牆 | 門 | 招牌區 | 美術 | 視覺設定 |
+|---------|---------|------|------|------|-------------|----|--------|------|----------|
+| `riverside_tower` | `riverside_apartment` | Riverside Tower | Riverside | 202×291 | 176 / 26 | 77,257 22×30 | 65,231 46×9 | CONV+GEN v3 | 玩家的家。零售裙樓，上面是陽台住宅，暖色室內光，屋頂綠化（Board G「Apartment Tower」） |
+| `bloom_block` | `bloom_coffee` | Bloom Coffee | Riverside | 182×173 | 160 / 22 | 69,139 22×30 | 6,112 132×10 | CONV+GEN v3 | 紅磚混合使用建築。一樓咖啡店：綠色招牌、條紋雨遮、大玻璃看得到客人；樓上住宅，屋頂有盆栽 |
+| `postpoint` | `postpoint_riverside` | PostPoint | Riverside | 130×131 | 112 / 18 | 45,97 22×30 | 6,72 100×10 | CONV+GEN v3 | 小型物流門市。紅白配色，櫥窗裡有紙箱和秤 |
+| `nexus_cowork` | `nexus_cowork` | Nexus Co-work | Startup Hub | 216×216 | 192 / 24 | 85,182 22×30 | 73,152 46×9 | CONV+GEN v3 | 白色現代建築、大面玻璃，看得到工作中的人；屋頂露台和植物（Board H「NEXUS – Work · Meet · Create」） |
+| `byte_bean` | `byte_and_bean` | Bean & Byte | Startup Hub | 146×133 | 128 / 18 | 53,99 22×30 | 6,72 116×10 | CONV+GEN v3 | 木作門面的科技咖啡店，棕色配青綠 |
+| `suite_building` | `small_office` | 22 Founders Lane | Startup Hub | 164×204 | 144 / 20 | 61,170 22×30 | 49,144 46×9 | CONV+GEN v3 | 紅磚小辦公樓。租下 Suite 2B 後，招牌區改顯示「玩家公司名 · 2B」（程式畫） |
+| `nexus_bank` | `nexus_bank` | Nexus Bank | Financial | 234×227 | 208 / 26 | 91,183 26×32 | 57,158 94×10 | CONV+GEN v3 | 米色石材、列柱、玻璃大門，屋頂金色「N」（Board G「Bank」） |
+| `city_hall` | `city_hall` | Aurelia City Hall | Civic Center | 284×202 | 256 / 28 | 113,156 30×34 | 79,127 98×10 | CONV+GEN v3 | 石材加玻璃、旗幟、台階和廣場（Board G「City Hall」）。最寬的建築 |
+
+## 填充建築（不能進入）
+
+| 立面 id | 尺寸 | 正面 / 側牆 | 招牌文字 | 出現在 | 美術 | 視覺設定 |
+|---------|------|-------------|----------|--------|------|----------|
+| `riverside_walkup` | 146×189 | 128 / 18 | （無） | Riverside ×2 | CONV+GEN v3 | 四層無電梯老公寓，窗台花箱 |
+| `riverside_shops` | 164×164 | 144 / 20 | FRESH+ MARKET | Riverside | CONV+GEN v3 | 社區超市，水果攤擺到門口 |
+| `apartment_mid` | 182×251 | 160 / 22 | （無） | Riverside、Startup Hub | CONV+GEN v3 | 中層公寓，陽台欄杆 |
+| `brick_shops` | 164×164 | 144 / 20 | KURO RAMEN | Riverside、Civic | CONV+GEN v3 | 紅磚店面，拉麵店的布簾 |
+| `office_slab` | 200×290 | 176 / 24 | （無） | 四區都有 | CONV+GEN v3 | 方正的中高層辦公樓 |
+| `glass_tower` | 188×356 | 160 / 28 | （無） | 四區都有 | CONV+GEN v3 | 藍色玻璃帷幕高樓，會反射天空 |
+| `horizon_labs` | 202×245 | 176 / 26 | HORIZON LABS | Startup Hub | CONV+GEN v3 | 新創大樓：玻璃、露台、植物。**P1 改成可進入**（辦公第 3 階） |
+| `civic_annex` | 182×205 | 160 / 22 | TAX OFFICE | Civic Center | CONV+GEN v3 | 市政附屬大樓。**P2 改成可進入**，成為稅務局 |
+| `finance_tower` | 206×375 | 176 / 30 | ARC CAPITAL | Financial ×2 | CONV+GEN v3 | 全城最高的建築，深色玻璃加石材基座。**P3 玩家總部**可以租其中一層 |
+| `metro_entrance` | 88×70 | 88 / 0 | （無） | 四區都有 | CONV+GEN v3 | 捷運入口：往下的樓梯、M 字標誌柱、玻璃雨棚。門 28,36 32×26 |
+
+> 注意：招牌文字（FRESH+ MARKET、KURO RAMEN、ARC CAPITAL）是填充建築的店名，也是世界觀的一部分。它們都是虛構的名字。
+
+---
+
+## 規劃中的建築
+
+尺寸是**建議值**，照同一類現有建築抓。定稿時照實際尺寸填 `buildings_meta.json` 即可。每棟都要交本體加 `_lights`。
+
+### Shopping Street（P1）
+
+| 立面 id | 名稱 | 可進入 | 建議尺寸 | 招牌文字 | 視覺設定 |
+|---------|------|--------|----------|----------|----------|
+| `threadline_apparel` | Threadline | ✓ | 182×190 | THREADLINE | 兩層服飾店：大櫥窗裡有 3 個假人穿不同服裝（Executive、Citywear、Formal），黑色門框，暖白燈 |
+| `crestline_flagship` | Crestline | ✓ | 260×230 | CRESTLINE | 三層百貨：海軍藍配金色門框、旋轉門、樓層櫥窗，山脊線標誌做成金屬浮雕（無字） |
+| `lantern_bistro` | Lantern Bistro | ✓ | 164×170 | LANTERN BISTRO | 暖色小餐館：門口一排燈籠形吊燈、戶外座位、黑板立牌（無字） |
+| `popup_unit` | Pop-up Unit 5 | ✓ | 130×131 | （玩家店名，程式畫） | 白色空店面、大玻璃、「招租」貼紙（用符號，不寫字）。租下後變成玩家的店 |
+| `retail_arcade` | 騎樓商場 | ✗ | 200×200 | （無） | 拱形騎樓下一排小店 |
+| `shop_row_awning` | 雨遮店排 | ✗ | 164×164 | （無） | 三間小店，雨遮顏色各不同 |
+| `cinema_front` | 電影院 | ✗ | 200×220 | AURELIA CINEMA | 裝飾藝術風格門面、燈泡邊框的片名看板（看板內容用色塊） |
+
+### Harbor（P1）
+
+| 立面 id | 名稱 | 可進入 | 建議尺寸 | 招牌文字 | 視覺設定 |
+|---------|------|--------|----------|----------|----------|
+| `pier7_warehouse` | Pier 7 Warehouse | ✓ | 280×190 | PIER 7 | 藍灰波浪鐵皮、三個捲門（一個開著看得到棧板）、裝卸平台、外牆大號「7」 |
+| `customs_house` | Aurelia Customs House | ✓ | 240×220 | CUSTOMS HOUSE | 老港務大樓：紅磚加白色石材、鐘、旗杆 |
+| `haddad_trading` | Haddad Trading | ✓ | 164×200 | HADDAD TRADING | 港邊改建的倉庫辦公室：鐵窗框、室內暖光、門口擺著樣品木箱 |
+| `harbor_point_fitness` | Harbor Point Fitness | ✓ | 182×173 | HARBOR POINT | 青綠色健身房：落地窗看得到跑步機，屋頂有浪花圖形 |
+| `warehouse_shed` | 倉庫棚 | ✗ | 220×150 | （無） | 低矮大倉庫 |
+| `cold_store` | 冷凍倉 | ✗ | 200×170 | （無） | 白色隔熱板、冷凝機組、藍色燈 |
+| `container_stack` | 貨櫃堆 | ✗ | 180×120 | （無） | 三層貨櫃，紅藍綠黃 |
+| `crane_gantry` | 岸邊吊車 | ✗ | 160×360 | （無） | 高大的紅白吊車剪影，放在最後面 |
+
+### Old Town（P1）
+
+| 立面 id | 名稱 | 可進入 | 建議尺寸 | 招牌文字 | 視覺設定 |
+|---------|------|--------|----------|----------|----------|
+| `old_town_studio` | Old Town Studios | ✓ | 146×189 | （無） | 三層老公寓，外露鐵梯，窗戶小，便宜但溫馨 |
+| `okafor_lettings` | Okafor Lettings | ✓ | 130×150 | OKAFOR LETTINGS | 老式租屋行：櫥窗貼滿房屋照片（色塊），綠色木門 |
+| `gallery_nine` | Gallery Nine | ✓ | 164×180 | GALLERY NINE | 白牆大窗的藝廊，裡面掛著幾幅色塊畫 |
+| `ember_print` | Ember Print | ✓ | 130×140 | EMBER PRINT | 印刷行：門口堆著紙捲，櫥窗有海報樣張（無字） |
+| `corner_workshop` | Corner Workshop | ✓ | 146×150 | （玩家店名） | 轉角工坊：捲門、工作台、工具牆 |
+| `rowhouse_brick` | 紅磚連棟屋 | ✗ | 164×180 | （無） | |
+| `arcade_arches` | 拱廊 | ✗ | 200×160 | （無） | |
+| `clock_tower` | 鐘樓 | ✗ | 90×320 | （無） | 老城地標，鐘面沒有數字 |
+
+### Residential（P1）
+
+| 立面 id | 名稱 | 可進入 | 建議尺寸 | 招牌文字 | 視覺設定 |
+|---------|------|--------|----------|----------|----------|
+| `maple_court` | Maple Court | ✓ | 200×260 | MAPLE COURT | 六層公寓，陽台有植物和晾衣，門口有楓樹 |
+| `freshmart` | FreshMart | ✓ | 200×150 | FRESHMART | 超市：自動門、購物車排、蔬果看板（無字） |
+| `community_center` | 社區中心 | ✓ | 182×170 | COMMUNITY CENTER | 低矮木構建築、公佈欄、兒童畫 |
+| `apartment_balcony` | 陽台公寓 | ✗ | 182×240 | （無） | |
+| `townhouse_row` | 連棟透天 | ✗ | 200×150 | （無） | 三戶，門口有腳踏車和盆栽 |
+| `school_front` | 小學 | ✗ | 240×170 | （無） | 圍牆、校門、操場一角 |
+
+### University（P1）
+
+| 立面 id | 名稱 | 可進入 | 建議尺寸 | 招牌文字 | 視覺設定 |
+|---------|------|--------|----------|----------|----------|
+| `aurelia_institute` | Aurelia Institute of Technology | ✓ | 300×240 | AURELIA INSTITUTE | 紅磚古典主館：列柱、三角楣、中央大門、兩側長窗 |
+| `innovation_lab` | Innovation Lab | ✓ | 220×230 | INNOVATION LAB | 玻璃立方體研究大樓，看得到實驗桌和螢幕 |
+| `lecture_hall` | 講堂 | ✗ | 200×180 | （無） | |
+| `library_front` | 圖書館 | ✗ | 220×200 | （無） | |
+| `dorm_block` | 宿舍 | ✗ | 182×250 | （無） | 窗戶掛著旗子和毛巾 |
+
+### 其他區域（P2–P3）
+
+| 立面 id | 名稱 | 區域 | 優先 | 視覺設定 |
+|---------|------|------|------|----------|
+| `northlight_capital` | Northlight Capital | Financial | P1 | 低調的白色石材小樓，北極星浮雕，門口兩盆橄欖樹 |
+| `launchpad_accelerator` | Launchpad | Startup Hub | P1 | 改建工廠：鋸齒屋頂、大鋼窗、火箭塗鴉（無字） |
+| `quay_residences` | The Quay Residences | Riverside | P3 | 河岸玻璃高級公寓，每層有大陽台 |
+| `terminal_international` | 國際航廈 | Airport | P2 | 大片曲面玻璃屋頂 |
+| `cargo_terminal` | 貨運站 | Airport | P2 | 巨大機棚、貨盤 |
+| `private_aviation` | 私人航空 | Airport | P3 | 小巧、低調、黑色玻璃 |
+| `skyline_penthouse` | 頂樓豪宅大樓 | Luxury Heights | P3 | 細長玻璃塔，頂樓有泳池發光 |
+| `hillside_villa` | 山坡別墅 | Luxury Heights | P3 | 白色平頂、木格柵、樹 |
+| `meridian_club` | Meridian Club | Luxury Heights | P3 | 深綠石材、黃銅門、門僮 |
+| `crown_motors` | Crown Motors | Luxury Heights | P3 | 玻璃展示間，裡面有兩台車 |
+| `aurum_dining` | Aurum | Luxury Heights | P3 | 黑金色系、窗內燭光 |
+| `factory_unit` | 廠房 | Industrial | P3 | 鋸齒屋頂、裝卸口、白色蒸氣 |
+| `solaris_energy` | Solaris Energy | Industrial | P3 | 屋頂和牆面都是太陽能板 |
+| `materials_yard` | 原料場 | Industrial | P3 | 圍籬、砂石堆、鋼材 |
+| `venture_tower` | VENTURE TOWER（玩家的大樓） | Financial | P3 | 房地產業的終點：玩家自己的摩天樓，招牌是玩家公司名 |
+
+## 立面的品質要求
+
+- 門必須一眼看得出是門（深色開口加門框加門燈），不要被植物擋住。
+- 招牌區留**素面**底板，程式會畫字。底板顏色要讓白字或金字看得清楚。
+- 側牆（`depth`）比正面暗 15–25%，保持光源在左上。
+- `_lights` 疊圖只畫發光的東西：窗戶（大約 60% 亮、40% 暗，不要全亮）、招牌燈條、門燈、屋頂燈。
+- 同一區的建築高度要有高低變化，天際線才不會像一排牙齒。
