@@ -289,7 +289,15 @@ func _tab_sales() -> void:
 		card.add_child(v)
 		var h1 := UIK.hbox(6)
 		var ic := TextureRect.new()
-		ic.texture = Art.tex(str(p.get("icon", "props/product_parcel")))
+		# the listing's photo (products/<id>_photo = Studio Lumen, _photo_raw = your own) once the art exists
+		var shot := Art.opt_tex("products/%s_%s" % [str(l["product"]), "photo" if l.get("photo", "") == "studio" else "photo_raw"])
+		if shot != null:
+			ic.texture = shot
+			ic.custom_minimum_size = Vector2(32, 32)
+			ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		else:
+			ic.texture = Art.tex(str(p.get("icon", "props/product_parcel")))
 		h1.add_child(ic)
 		h1.add_child(UIK.label(p["name"], 9, Art.C_WHITE, true))
 		h1.add_child(UIK.chip("LIVE" if l["active"] else ("PAUSED · CAP" if l.get("paused_reason", "") == "seller_cap" else "PAUSED"), Art.C_GREEN if l["active"] else Art.C_GOLD))
@@ -870,6 +878,20 @@ func _work_gig(gid: String) -> void:
 
 
 # ============================================================== SAAS
+## The product's app icon (logos/saas_<idea>.png, 32x32) once the art exists.
+func _saas_logo(parent: Control, idea_id: String) -> void:
+	var t := Art.opt_tex("logos/saas_" + idea_id)
+	if t == null:
+		return
+	var r := TextureRect.new()
+	r.name = "SaasLogo"
+	r.texture = t
+	r.custom_minimum_size = Vector2(24, 24)
+	r.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	r.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	parent.add_child(r)
+
+
 func _tab_saas() -> void:
 	if not Saas.active():
 		_section("Build a software product")
@@ -879,6 +901,7 @@ func _tab_saas() -> void:
 			content.add_child(p)
 			var h := UIK.hbox(6)
 			p.add_child(h)
+			_saas_logo(h, str(i["id"]))
 			var v := UIK.vbox(0)
 			v.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			h.add_child(v)
@@ -925,7 +948,10 @@ func _tab_saas() -> void:
 	g.columns = 4
 	g.add_theme_constant_override("h_separation", 4)
 	g.add_theme_constant_override("v_separation", 4)
-	content.add_child(g)
+	var top := UIK.hbox(6)
+	content.add_child(top)
+	_saas_logo(top, str(s["idea"]))
+	top.add_child(g)
 	_kpi(g, I18n.t("SUBSCRIBERS"), str(int(s["subs"])), Art.C_WHITE, I18n.t("+%d / −%d last 7 days") % [Saas.last_days(7, "new"), Saas.last_days(7, "lost")])
 	_kpi(g, "MRR", Fmt.money0(Saas.mrr()), Art.C_GREEN, I18n.t("%s/month each") % Fmt.money0(float(s["price"])))
 	_kpi(g, I18n.t("CHURN"), Fmt.pct(Saas.monthly_churn(), 1), Art.C_GOLD, I18n.t("per month"))

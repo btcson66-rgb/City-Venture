@@ -17,7 +17,7 @@ func setup(id: String, scene: Node) -> void:
 	var tints := {}
 	for k in def.get("outfit_tints", {}):
 		tints[k] = Color(def["outfit_tints"][k])
-	rig.setup(def.get("appearance", {}), def.get("outfit", "casual_tee"), tints)
+	rig.setup(def.get("appearance", {}), def.get("outfit", "casual_tee"), tints, id)
 	rig.set_dir("down")
 	interact = Interactable.new()
 	interact.label = I18n.t("Talk to %s") % def.get("name", id)

@@ -18,6 +18,7 @@ const C_GOLD := Color8(226, 180, 82)
 const C_PURPLE := Color8(170, 130, 214)
 
 var _cache := {}
+var _absent := {}
 var font_title: FontFile
 var font_body: FontFile
 
@@ -40,6 +41,25 @@ func tex(path: String) -> Texture2D:
 	return t
 
 
+## True when an optional art file exists, without the missing-texture warning. New art from the visuals track
+## (logos, chapter cards, poses, NPC sheets...) shows up as soon as the file is committed; until then callers
+## keep their current look.
+func has_tex(path: String) -> bool:
+	if _cache.has(path):
+		return _cache[path] != null
+	if _absent.has(path):
+		return false
+	var ok := ResourceLoader.exists("res://assets/" + path + ".png")
+	if not ok:
+		_absent[path] = true   # characters spawn all day; don't hit the filesystem for the same missing pose again
+	return ok
+
+
+## tex() for optional art: null when the file isn't there yet (no warning).
+func opt_tex(path: String) -> Texture2D:
+	return tex(path) if has_tex(path) else null
+
+
 func icon(name: String) -> Texture2D:
 	return tex("ui/icons/" + name)
 
@@ -53,7 +73,13 @@ func opt_color(group: String, id: String, fallback := Color.WHITE) -> Color:
 
 ## Resolve an appearance dictionary into layer textures + tints for CharacterRig.
 ## outfit_tints: optional {"top": Color, "bottom": Color} for tintable NPC outfits.
-func character_layers(app: Dictionary, outfit: String, outfit_tints := {}) -> Array:
+## Optional art, used when the file exists:
+##  - characters/npc_<npc_id>: a hand-made full sheet for a named NPC, replaces the layered rig
+##  - outfit_<o>_<pres>_top_detail / _bottom_detail: untinted details (shirt, tie, badge, bag) drawn over the
+##    tinted fabric, so one suit can be charcoal on Marcus and navy on Daniel
+func character_layers(app: Dictionary, outfit: String, outfit_tints := {}, npc_id := "") -> Array:
+	if npc_id != "" and has_tex("characters/npc_" + npc_id):
+		return [{"tex": "characters/npc_" + npc_id, "tint": Color.WHITE, "name": "npc"}]
 	var pres: String = app.get("presentation", "masculine")
 	var face: String = app.get("face", "round")
 	var hair: String = app.get("hair", "messy")
@@ -64,9 +90,14 @@ func character_layers(app: Dictionary, outfit: String, outfit_tints := {}) -> Ar
 	var L: Array = []
 	L.append({"tex": "characters/hair_%s_back" % hair, "tint": hc, "name": "hair_back"})
 	L.append({"tex": "characters/body_%s_%s" % [pres, face], "tint": sc, "name": "body"})
-	L.append({"tex": "characters/outfit_%s_%s_bottom" % [outfit, pres], "tint": outfit_tints.get("bottom", Color.WHITE), "name": "bottom"})
-	L.append({"tex": "characters/outfit_%s_%s_shoes" % [outfit, pres], "tint": Color.WHITE, "name": "shoes"})
-	L.append({"tex": "characters/outfit_%s_%s_top" % [outfit, pres], "tint": outfit_tints.get("top", Color.WHITE), "name": "top"})
+	var base := "characters/outfit_%s_%s" % [outfit, pres]
+	L.append({"tex": base + "_bottom", "tint": outfit_tints.get("bottom", Color.WHITE), "name": "bottom"})
+	if has_tex(base + "_bottom_detail"):
+		L.append({"tex": base + "_bottom_detail", "tint": Color.WHITE, "name": "bottom_detail"})
+	L.append({"tex": base + "_shoes", "tint": Color.WHITE, "name": "shoes"})
+	L.append({"tex": base + "_top", "tint": outfit_tints.get("top", Color.WHITE), "name": "top"})
+	if has_tex(base + "_top_detail"):
+		L.append({"tex": base + "_top_detail", "tint": Color.WHITE, "name": "top_detail"})
 	L.append({"tex": "characters/eyes_%s" % eyes, "tint": Color.WHITE, "name": "eyes"})
 	L.append({"tex": "characters/iris_%s" % eyes, "tint": ec, "name": "iris"})
 	L.append({"tex": "characters/brows_%s" % app.get("brows", "straight"), "tint": hc, "name": "brows"})
@@ -80,22 +111,35 @@ func character_layers(app: Dictionary, outfit: String, outfit_tints := {}) -> Ar
 	return L
 
 
-func portrait_layers(app: Dictionary, outfit: String, outfit_tints := {}) -> Array:
+## Portrait layers. Optional art, used when the file exists: portraits/npc_<npc_id> (a hand-made 4-expression
+## strip that replaces the layers), portraits/outfit_<o>_detail (untinted collar details) and
+## portraits/acc_<accessory> (glasses on the portrait, 64x64).
+func portrait_layers(app: Dictionary, outfit: String, outfit_tints := {}, npc_id := "") -> Array:
+	if npc_id != "" and has_tex("portraits/npc_" + npc_id):
+		return [{"tex": "portraits/npc_" + npc_id, "tint": Color.WHITE, "frames": 4}]
 	var hc: Color = app.get("_hair_color_c", opt_color("hair_colors", app.get("hair_color", "brown"), Color8(120, 82, 54)))
 	var sc: Color = app.get("_skin_c", opt_color("skin_tones", app.get("skin", "s2"), Color8(248, 208, 176)))
 	var ec: Color = app.get("_eye_c", opt_color("eye_colors", app.get("eye_color", "brown"), Color8(120, 80, 52)))
 	var hair: String = app.get("hair", "messy")
 	var eyes: String = app.get("eye_shape", "round")
-	return [
+	var L: Array = [
 		{"tex": "portraits/hair_%s_back" % hair, "tint": hc, "frames": 1},
 		{"tex": "portraits/head_%s" % app.get("face", "round"), "tint": sc, "frames": 1},
 		{"tex": "portraits/outfit_%s" % outfit, "tint": outfit_tints.get("top", Color.WHITE), "frames": 1},
+	]
+	if has_tex("portraits/outfit_%s_detail" % outfit):
+		L.append({"tex": "portraits/outfit_%s_detail" % outfit, "tint": Color.WHITE, "frames": 1})
+	L.append_array([
 		{"tex": "portraits/eyes_%s" % eyes, "tint": Color.WHITE, "frames": 4},
 		{"tex": "portraits/iris_%s" % eyes, "tint": ec, "frames": 4},
 		{"tex": "portraits/brows_%s" % app.get("brows", "straight"), "tint": hc, "frames": 4},
 		{"tex": "portraits/mouth_%s" % app.get("mouth", "smile"), "tint": Color.WHITE, "frames": 4},
 		{"tex": "portraits/hair_%s_front" % hair, "tint": hc, "frames": 1},
-	]
+	])
+	var acc: String = app.get("accessory", "none")
+	if acc != "none" and has_tex("portraits/acc_" + acc):
+		L.append({"tex": "portraits/acc_" + acc, "tint": Color.WHITE, "frames": 1})
+	return L
 
 
 ## Deterministic random appearance for ambient NPCs.

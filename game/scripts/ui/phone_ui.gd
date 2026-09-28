@@ -47,6 +47,7 @@ func open() -> void:
 	visible = true
 	app = "home"
 	Clock.push_pause("phone")
+	_player_pose("phone")
 	GameState.set_flag("phone_opened")
 	_render()
 	var h: Control = get_child(0)
@@ -58,6 +59,14 @@ func close() -> void:
 	is_open = false
 	visible = false
 	Clock.pop_pause("phone")
+	_player_pose("")
+
+
+## The player looks at their phone while it's open (once the pose art exists).
+func _player_pose(p: String) -> void:
+	var pl := get_tree().get_first_node_in_group("player")
+	if pl != null and pl.get("rig") is CharacterRig:
+		(pl.rig as CharacterRig).set_pose(p)
 
 
 func _unhandled_input(event: InputEvent) -> void:

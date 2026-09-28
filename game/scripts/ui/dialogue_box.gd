@@ -132,9 +132,9 @@ func _set_speaker(who: String, expr: String) -> void:
 			var tints := {}
 			for k in d.get("outfit_tints", {}):
 				tints[k] = Color(d["outfit_tints"][k])
-			portrait.setup_character(d["appearance"], d.get("outfit", "casual_tee"), tints)
+			portrait.setup_character(d["appearance"], d.get("outfit", "casual_tee"), tints, who)
 		else:
-			portrait.setup_icon({"shoplane": "orders", "bank": "bank", "landlord": "home", "customer": "people"}.get(who, "info"))
+			portrait.setup_icon({"shoplane": "orders", "bank": "bank", "landlord": "home", "customer": "people"}.get(who, "info"), str(d.get("logo", "")))
 	portrait.set_expr(expr)
 
 

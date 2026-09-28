@@ -14,6 +14,7 @@ func setup(rng: RandomNumberGenerator) -> void:
 	var outfits := ["casual_tee", "casual_jacket", "business_suit", "office_professional", "startup_casual"]
 	rig.setup(Art.random_appearance(rng), outfits[rng.randi_range(0, outfits.size() - 1)], Art.random_outfit_tints(rng))
 	rig.set_dir(["down", "left", "right", "up"][rng.randi_range(0, 3)])
+	rig.set_pose("sit")   # they are placed on chairs, benches and sofas
 	_t = rng.randf_range(3.0, 9.0)
 
 

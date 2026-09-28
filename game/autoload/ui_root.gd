@@ -266,10 +266,23 @@ func toast(text: String, kind := "info", icon := "info") -> void:
 	tw.tween_callback(p.queue_free)
 
 
-func show_chapter_card(title: String, subtitle := "") -> void:
+## Title band across the screen. `art` (a 640x360 illustration, e.g. backdrops/chapter_3) fills the screen
+## behind the band when that file exists.
+func show_chapter_card(title: String, subtitle := "", art := "") -> void:
 	var c := Control.new()
+	c.name = "ChapterCard"
 	c.set_anchors_preset(Control.PRESET_FULL_RECT)
 	c.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var pic := Art.opt_tex(art) if art != "" else null
+	if pic != null:
+		var bg := TextureRect.new()
+		bg.name = "Art"
+		bg.texture = pic
+		bg.position = Vector2.ZERO
+		bg.size = Vector2(640, 360)
+		bg.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		bg.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+		c.add_child(bg)
 	var band := ColorRect.new()
 	band.color = Color(0.03, 0.07, 0.14, 0.85)
 	band.position = Vector2(0, 130)
@@ -295,7 +308,7 @@ func show_chapter_card(title: String, subtitle := "") -> void:
 	c.modulate.a = 0.0
 	var tw := c.create_tween()
 	tw.tween_property(c, "modulate:a", 1.0, 0.5)
-	tw.tween_interval(2.6)
+	tw.tween_interval(3.6 if pic != null else 2.6)
 	tw.tween_property(c, "modulate:a", 0.0, 0.8)
 	tw.tween_callback(c.queue_free)
 

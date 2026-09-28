@@ -211,7 +211,8 @@ func refresh_named_npcs() -> void:
 				continue
 			var at: Array = list[int(used[kind])]
 			used[kind] = int(used[kind]) + 1
-			want[p["id"]] = {"p": p, "pos": Vector2(float(at[0]), float(at[1])), "face": "left" if kind == "packer" else "up"}
+			want[p["id"]] = {"p": p, "pos": Vector2(float(at[0]), float(at[1])), "face": "left" if kind == "packer" else "up",
+				"pose": "interact" if kind == "packer" else "sit"}
 	for sid in staff_nodes.keys():
 		if not want.has(sid):
 			if is_instance_valid(staff_nodes[sid]):
@@ -221,7 +222,7 @@ func refresh_named_npcs() -> void:
 		if staff_nodes.has(sid):
 			continue
 		var n := StaffNPC.new()
-		n.setup(want[sid]["p"], want[sid]["face"])
+		n.setup(want[sid]["p"], want[sid]["face"], want[sid]["pose"])
 		n.position = want[sid]["pos"]
 		entities.add_child(n)
 		staff_nodes[sid] = n

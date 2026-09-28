@@ -85,14 +85,19 @@ The player's company is created at runtime as entity `co_<slug>` with the same s
   "id": "maya", "name": "Maya", "role": "friend",
   "appearance": {"presentation":"feminine","face":"oval","hair":"bob","hair_color":"#3b2a24", "...": "..."},
   "outfit": "startup_casual",
+  "outfit_tints": {"top":"#c8843e","bottom":"#3a3c48"},
   "schedule": [
-    {"days":"sat,sun","from":"10:00","to":"16:00","location":"interior:bloom_coffee","spot":"table_2"}
+    {"days":"sat,sun","from":"10:00","to":"16:00","location":"interior:bloom_coffee","spot":"table_2","pose":"sit"}
   ],
   "dialogue": [{"when":["flag:ch1_started"],"conversation":"maya_cafe_weekend"}],
   "phone_contact": true
 }
 ```
 `location` is `interior:<building_id>` or `district:<district_id>`, and `spot` is a named marker in that layout.
+`pose` (optional, default `idle`) is one of `CharacterRig.POSES` and only shows once the pose art exists.
+`outfit_tints` multiply the tintable fabric layers.
+Contacts without an `appearance` (`"phone_only": true`) may set `"logo": "<id>"`. Their avatar then uses
+`assets/logos/<id>.png` when that file exists, and a UI icon otherwise.
 
 ### 1.8 Buildings — `data/buildings/<id>.json`
 ```json

@@ -10,10 +10,10 @@ var expr := "neutral"
 var icon_mode := ""
 
 
-func setup_character(app: Dictionary, outfit: String, tints := {}) -> void:
+func setup_character(app: Dictionary, outfit: String, tints := {}, npc_id := "") -> void:
 	icon_mode = ""
 	_clear()
-	_layers = Art.portrait_layers(app, outfit, tints)
+	_layers = Art.portrait_layers(app, outfit, tints, npc_id)
 	for L in _layers:
 		var r := TextureRect.new()
 		r.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -26,7 +26,8 @@ func setup_character(app: Dictionary, outfit: String, tints := {}) -> void:
 	set_expr(expr)
 
 
-func setup_icon(name: String) -> void:
+## Icon avatar for contacts without a face. A company logo (logos/<logo>.png, 32x32) wins when it exists.
+func setup_icon(name: String, logo := "") -> void:
 	_clear()
 	icon_mode = name
 	var bg := ColorRect.new()
@@ -35,14 +36,16 @@ func setup_icon(name: String) -> void:
 	add_child(bg)
 	_rects.append(bg)
 	var r := TextureRect.new()
-	r.texture = Art.icon(name)
+	var lt := Art.opt_tex("logos/" + logo) if logo != "" else null
+	r.texture = lt if lt != null else Art.icon(name)
 	r.set_anchors_preset(Control.PRESET_FULL_RECT)
 	r.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	r.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	r.offset_left = 12
-	r.offset_top = 12
-	r.offset_right = -12
-	r.offset_bottom = -12
+	var m := 6 if lt != null else 12
+	r.offset_left = m
+	r.offset_top = m
+	r.offset_right = -m
+	r.offset_bottom = -m
 	add_child(r)
 	_rects.append(r)
 

@@ -8,12 +8,13 @@ var rig: CharacterRig
 var name_tag: PanelContainer
 
 
-func setup(p: Dictionary, facing := "up") -> void:
+func setup(p: Dictionary, facing := "up", pose := "sit") -> void:
 	staff_id = p["id"]
 	rig = CharacterRig.new()
 	add_child(rig)
 	rig.setup(p["appearance"], p.get("outfit", "startup_casual"))
 	rig.set_dir(facing)
+	rig.set_pose(pose)   # desk staff sit, the packer works the table (once the pose art exists)
 	var it := Interactable.new()
 	it.label = I18n.t("Talk to %s") % str(p["name"]).get_slice(" ", 0)
 	it.action = "talk_staff"

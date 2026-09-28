@@ -20,6 +20,16 @@ func _init(i: Dictionary) -> void:
 func build() -> void:
 	var pres: Dictionary = def.get("presentation", {})
 	var who: String = pres.get("speaker", "")
+	# event illustration (events/<id>.png, 160x90) once the art exists
+	var art := Art.opt_tex("events/" + str(inst["id"]))
+	if art != null and outcome == "":
+		var pic := TextureRect.new()
+		pic.name = "EventArt"
+		pic.texture = art
+		pic.custom_minimum_size = Vector2(160, 90)
+		pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		body.add_child(pic)
 	var h := UIK.hbox(8)
 	body.add_child(h)
 	if who != "" and DataDB.npc(who).has("appearance"):
@@ -30,7 +40,7 @@ func build() -> void:
 		var tints := {}
 		for k in d.get("outfit_tints", {}):
 			tints[k] = Color(d["outfit_tints"][k])
-		pv.setup_character(d["appearance"], d.get("outfit", "casual_tee"), tints)
+		pv.setup_character(d["appearance"], d.get("outfit", "casual_tee"), tints, who)
 		pv.set_expr("thinking")
 		h.add_child(pv)
 	var v := UIK.vbox(2)

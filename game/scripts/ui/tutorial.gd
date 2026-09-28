@@ -367,13 +367,18 @@ func _draw_guide() -> void:
 		var y := sp.y - 22.0 - 4.0 * absf(sin(_t * 3.2))
 		var pulse := 0.5 + 0.5 * sin(_t * 4.0)
 		_guide.draw_arc(sp, 7.0 + pulse * 3.0, 0, TAU, 28, Color(gold, 0.35 + 0.4 * (1.0 - pulse)), 1.5)
-		var pts := PackedVector2Array([Vector2(-4, -9), Vector2(4, -9), Vector2(4, -3), Vector2(8, -3), Vector2(0, 5), Vector2(-8, -3), Vector2(-4, -3)])
-		var arrow := PackedVector2Array()
-		for p in pts:
-			arrow.append(p + Vector2(sp.x, y))
-		_guide.draw_colored_polygon(arrow, gold)
-		arrow.append(arrow[0])
-		_guide.draw_polyline(arrow, ink, 1.0)
+		var art := Art.opt_tex("effects/guide_arrow")   # 64x16: four 16x16 frames, once the art exists
+		if art != null:
+			var f := int(_t * 6.0) % 4
+			_guide.draw_texture_rect_region(art, Rect2(sp.x - 8, y - 11, 16, 16), Rect2(f * 16, 0, 16, 16))
+		else:
+			var pts := PackedVector2Array([Vector2(-4, -9), Vector2(4, -9), Vector2(4, -3), Vector2(8, -3), Vector2(0, 5), Vector2(-8, -3), Vector2(-4, -3)])
+			var arrow := PackedVector2Array()
+			for p in pts:
+				arrow.append(p + Vector2(sp.x, y))
+			_guide.draw_colored_polygon(arrow, gold)
+			arrow.append(arrow[0])
+			_guide.draw_polyline(arrow, ink, 1.0)
 		if label != "":
 			var w := font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, 7).x
 			var lp := Vector2(sp.x - w / 2.0, y - 13)

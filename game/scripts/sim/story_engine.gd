@@ -39,7 +39,8 @@ static func start_chapter(id: String) -> void:
 		return
 	St()["chapter"] = id
 	GameState.timeline(I18n.t(c.get("title", id)), "chapter")
-	UIRoot.show_chapter_card(c.get("title", id), c.get("subtitle", ""))
+	# ch3_open_for_business → backdrops/chapter_3 (the illustration shows once the art exists)
+	UIRoot.show_chapter_card(c.get("title", id), c.get("subtitle", ""), "backdrops/chapter_" + id.get_slice("_", 0).trim_prefix("ch"))
 	var obs: Array = c.get("objectives", [])
 	if not obs.is_empty():
 		start_objective(obs[0]["id"])

@@ -12,7 +12,8 @@ Codex 第一輪（`codex/visual-art-pass-01`，已合併）的效果，在同一
 |------|------|------|
 | 主選單背景 `menu` | 重畫：街景更乾淨，旗幟改用符號 | ✅ 明顯變好 |
 | 抵達背景 `arrival` | 重畫：河岸天際線、橋、倒影 | ✅ 明顯變好 |
-| 角色走路圖、頭像 | 細部修整：衣褶、縫線、陰影 | ⚠️ 遊戲裡 1× 幾乎看不出差別 |
+| 角色走路圖 | 第一輪只修細節；**A1（已合併）**重畫了輪廓、體型、鞋子和走路 4 格 | ✅ A1 明顯變好 |
+| 角色頭像 | 細部修整 | ⚠️ 等 A5 |
 | UI 面板和按鈕 | 小幅修整 | ⚠️ 小幅進步 |
 | 街景、建築、室內、地圖 | 沒動（仍是 v3 從概念板轉換的版本） | ❌ 下一輪的重點 |
 
@@ -176,7 +177,7 @@ A1 圖層與實機對照見 [`evidence/2026-09-28_a1_characters/README.md`](../.
 | **B7** | 氣氛插圖 | 章節標題卡 1–6、`skyline_dusk`、公司結束後的 `insolvency` 畫面 | [11](11_backdrops_maps.md) |
 | **B8** | 角色姿勢 | 坐、搬箱、講電話、伸手互動、站立呼吸（每個姿勢要涵蓋 A1 的全部圖層） | [07](07_characters.md#姿勢與動畫) |
 | **B9** | 品牌與商品 | 13 個公司標誌、3 個 SaaS logo、4 張商品照（手機隨手拍版和專業攝影版） | [08](08_items.md) |
-| **B10** | 專屬 NPC | `characters/npc_<id>.png` 和 `portraits/npc_<id>.png`：Maya、Marcus、Daniel、Elena、Priya、Jun | [07](07_characters.md#專屬-npc-美術規劃--需接線) |
+| **B10** | 專屬 NPC | `characters/npc_<id>.png` 和 `portraits/npc_<id>.png`：Maya、Marcus、Daniel、Elena、Priya、Jun | [07](07_characters.md#專屬-npc-美術程式已接好) |
 
 每一批的驗收標準和 A 批一樣，另外還要：
 
@@ -189,30 +190,125 @@ A1 圖層與實機對照見 [`evidence/2026-09-28_a1_characters/README.md`](../.
 
 ---
 
+## A1 驗收後的新需求（2026-09-28，Claude 線）
+
+A1 已合併（`codex/art-batch-a1-characters` → `claude/exciting-bardeen-y71ixv`）。驗收結果：
+
+- 單元測試 58/58
+- 截圖巡禮 28 張，0 失敗
+- `wiki_check` 通過
+- 12 位 NPC 並排都認得出來，體型、鞋子、走路格明顯進步 ✅
+
+Claude 線同時做完了下方[程式接線清單](#程式接線清單)的大部分項目。**這些檔名現在只要放進 `game/assets/` 就會自動出現在遊戲裡**，不用再等程式。
+
+下一批請依這個順序：**R1 → A2 → R2（併入 A6）→ R3**。
+
+### R1 服裝拆成「可染色布料＋不染色細節」★ 優先
+
+**為什麼**：`business_suit`（西裝）和 `courier`（快遞）現在是**全彩**，程式的染色只能讓它們變暗，沒辦法換顏色。所以：
+
+- Daniel、Marcus、Sofia、Tom 四個人穿一模一樣的藍西裝紅領帶
+- 路人的西裝被隨機染成奇怪的深色
+
+**做法**：布料畫成灰階（可染色）；襯衫、領帶、名牌、腰包、鈕扣、掛繩放到另一個圖層（全彩，不染色）。程式已經接好，有檔案就會畫在布料上面。
+
+| 檔案 | 內容 |
+|------|------|
+| `characters/outfit_<o>_<pres>_top.png` | 改成灰階布料（外套、襯衫本體） |
+| `characters/outfit_<o>_<pres>_top_detail.png` | **新增**：領帶、襯衫領、名牌、鈕扣、腰包背帶（全彩） |
+| `characters/outfit_<o>_<pres>_bottom.png` | 改成灰階布料 |
+| `characters/outfit_<o>_<pres>_bottom_detail.png` | **新增**（有需要才做）：皮帶、口袋、腰包 |
+| `portraits/outfit_<o>_detail.png` | **新增**：頭像衣領的細節（64×64，全彩） |
+
+**範圍**：先做 `business_suit` 和 `courier`，各 3 種體型。有餘力再做 `barista`（圍裙）和 `civic_staff`（名牌）。
+
+**驗收**：用下面四種顏色染西裝，四個人要一眼分得出來，而且領帶、襯衫的顏色不能被染到。圖交了之後，Claude 線會把這些顏色寫進 NPC 資料：
+
+| NPC | 西裝顏色 | NPC | 西裝顏色 |
+|-----|---------|-----|---------|
+| Marcus | 炭灰 `#3a3d44` | Tom | 淺灰 `#b8bcc4` |
+| Daniel | 海軍藍 `#2c3e66` | Sofia | 酒紅 `#6e2e3a` |
+
+快遞服要用 PostPoint 紅 `#d0503c` 染 Dara。
+
+### R2 地點卡不能有文字（併入 A6）
+
+`cards/riverside.png` 河岸步道的旗幟上有英文標語「CLEANER CITIES BRIGHTER LIVES」，翻譯不了。請在 A6 重繪時，一起檢查其他 10 張地點卡：
+
+- 標語、海報、路牌上的字全部改成符號或色塊
+- 品牌招牌（例如 Nexus 的 logo 牆）可以保留
+
+### R3 姿勢圖（程式已接好，B8 的正式規格）
+
+程式規則：每個圖層各自有一張姿勢圖，**全部圖層都到齊才會切換**；缺一張就維持走路圖，所以不會出現半套。
+
+- **檔名**：`<圖層名>_<姿勢>.png`
+  - 例如 `body_feminine_oval_sit.png`、`hair_bob_front_sit.png`、`outfit_barista_neutral_top_sit.png`
+  - 細節層也要有，例如 `outfit_business_suit_masculine_top_detail_sit.png`
+- **尺寸**：和走路圖一樣是 **128×144**，32×48 格，3 列方向（下、側、上）
+- **影格數**：
+
+| 姿勢 | 用到的影格 | 速度 | 遊戲裡誰會用 |
+|------|-----------|------|-------------|
+| `sit` 坐 | 前 2 格（打字或呼吸） | 慢 | 咖啡店和共享辦公的客人、辦公桌的員工，以及 Maya、Ken、Elena、Daniel、Marcus |
+| `idle` 站立呼吸 | 前 2 格 | 慢 | 櫃台後的 NPC（Jun、Lee、Priya、Ana、Sofia、Dara、Tom） |
+| `phone` 講電話 | 前 2 格 | 慢 | 玩家打開手機時 |
+| `interact` 伸手 | 前 2 格 | 快 | 打包桌的出貨員工 |
+| `carry` 搬箱 | 4 格（取代走路） | 同走路 | 預留給搬貨 |
+
+**優先順序**：`sit` 最優先，它在畫面上出現最多次。然後依序是 `idle`、`phone`、`interact`、`carry`。
+
+**數量**：一個姿勢要 128 張（全部圖層，加上 R1 的細節層）。建議用 `tools/art/chars.py` 產生，不要手畫每一張。
+
+### R4 新 PNG 要連同 `.png.import` 一起提交
+
+專案有把 `*.png.import` 納入版本控制。新增圖檔後請先跑 `godot --headless --path game --import`，再把產生的 `.import` 一起 commit。不然別台電腦第一次開啟時會找不到圖。
+
+### R5 現在放進去就會出現的檔案
+
+| 檔案 | 在遊戲哪裡出現 | 規格 |
+|------|---------------|------|
+| `characters/npc_<id>.png`（加上 `_<姿勢>`） | 該 NPC 的走路圖，取代分層組合 | 128×144 |
+| `portraits/npc_<id>.png` | 該 NPC 的對話頭像 | 256×64（4 表情） |
+| `portraits/acc_glasses_round.png`、`acc_glasses_square.png` | 戴眼鏡角色的頭像 | 64×64 |
+| `logos/<id>.png` | 手機訊息和對話裡無臉聯絡人的頭像：`nexus`、`shoplane`、`client_generic`、`aurelia_jobs`、`studio_lumen`、`harbor_point_fitness` | 32×32 |
+| `logos/saas_<idea>.png` | Company OS → SaaS：選產品清單和營運儀表板 | 32×32 |
+| `products/<id>_photo.png` / `_photo_raw.png` | ShopLane 上架卡的商品照（攝影棚版 / 自己拍版） | 64×64 |
+| `events/<event_id>.png` | 事件決策視窗的上方插圖 | 160×90 |
+| `backdrops/chapter_<1–6>.png` | 章節開始的全螢幕標題卡背景 | 640×360 |
+| `backdrops/insolvency.png` | 公司結束後按「重新開始」的畫面 | 640×360 |
+| `backdrops/skyline_dusk.png` | 街區黃昏的天際線（白天和夜晚之間） | 1300×320 |
+| `backdrops/skyline_<district>_<day/dusk/night>.png` | 某一區專屬的天際線（例如港區） | 1300×320 |
+| `effects/guide_arrow.png` | 取代程式畫的金色目標箭頭 | 64×16（4 格 16×16） |
+
+---
+
 ## 程式接線清單
 
-以下是**光交圖不夠**、需要改程式才會出現在遊戲裡的項目。Claude 線負責，狀態全部是「規劃中」。Codex 交了圖之後，在 PR 說明裡列出對應的項目即可。
+以下是**光交圖不夠**、需要改程式才會出現在遊戲裡的項目。Claude 線負責。✅ 表示已接好：檔案放進去就會出現。
 
-| # | 項目 | 需要的程式改動 | 對應美術 |
-|---|------|---------------|---------|
-| 1 | 頭像眼鏡 | `Art.portrait_layers` 加配件層 | A5 |
-| 2 | 專屬 NPC 圖 | 有 `npc_<id>.png` 時取代分層組合 | B10 |
-| 3 | 更多表情 | 表情長條從 4 格改成 10 格，對話資料加表情標記 | 表情 P1 |
-| 4 | 角色姿勢 | `CharacterRig` 支援 sit、carry、phone、interact、idle | B8 |
-| 5 | 新服裝和配件 | `options.json` 加選項，衣櫃和 Threadline 購買流程 | B1 |
-| 6 | 新區域 | 區域和建築資料、`gen_districts.py` 排版、捷運站開放 | B2–B6 |
-| 7 | 黃昏天際線 | 街區天空改成三段交叉 | B7 |
-| 8 | 章節標題卡 | 章節開始時顯示全螢幕插圖 | B7 |
-| 9 | 公司結束畫面 | 破產流程的最後一步顯示插圖 | B7 |
-| 10 | 公司標誌 | 手機訊息、合約、供應商清單改用 `logos/` | B9 |
-| 11 | SaaS logo | Company OS SaaS 分頁 | B9 |
-| 12 | 商品照 | 上架頁顯示；Studio Lumen 拍照前後切換 | B9 |
-| 13 | 事件插圖 | 決策視窗加插圖欄位 | C |
-| 14 | 文件插圖 | 登記、租約、合約、貸款完成時顯示 | C |
-| 15 | 手機 App 圖示、Company OS 外框 | `phone_ui.gd`、`company_os.gd` 換皮 | A7 之後 |
-| 16 | 目標引導箭頭 | tutorial 改用 `effects/guide_arrow` | A8 |
-| 17 | 天氣 | 下雨系統：雨、水窪反光、雨聲 | P1 特效 |
-| 18 | Elena 外型 | 改 `data/npcs/elena.json`，拉開和 Maya 的差異 | A1 |
+| # | 項目 | 程式改動 | 對應美術 | 狀態 |
+|---|------|---------|---------|------|
+| 1 | 頭像眼鏡 | `Art.portrait_layers` 讀 `portraits/acc_<配件>` | A5 | ✅ 已接好 |
+| 2 | 專屬 NPC 圖 | 有 `characters/npc_<id>`、`portraits/npc_<id>` 時取代分層組合 | B10 | ✅ 已接好 |
+| 3 | 更多表情 | 表情長條從 4 格改成 10 格，對話資料加表情標記 | 表情 P1 | 規劃中 |
+| 4 | 角色姿勢 | `CharacterRig.set_pose()`：sit、idle、phone、interact、carry；NPC、員工、客人、玩家手機都已套用 | B8 / R3 | ✅ 已接好 |
+| 5 | 新服裝和配件 | `options.json` 加選項，衣櫃和 Threadline 購買流程 | B1 | 規劃中 |
+| 6 | 新區域 | 區域和建築資料、`gen_districts.py` 排版、捷運站開放 | B2–B6 | 規劃中 |
+| 7 | 黃昏天際線 | 街區天空改成日、黃昏、夜三段交叉，也支援各區專屬天際線 | B7 | ✅ 已接好 |
+| 8 | 章節標題卡 | `backdrops/chapter_<n>` 當標題卡背景 | B7 | ✅ 已接好 |
+| 9 | 公司結束畫面 | 按「重新開始」後顯示 `backdrops/insolvency` 加「重新出發」標題 | B7 | ✅ 已接好 |
+| 10 | 公司標誌 | 對話和手機的無臉聯絡人已改用 `logos/`（NPC 資料的 `logo` 欄位） | B9 | ✅ 對話頭像已接好；合約、供應商清單規劃中 |
+| 11 | SaaS logo | Company OS SaaS 分頁 | B9 | ✅ 已接好 |
+| 12 | 商品照 | 上架卡依 Studio Lumen 或自己拍，顯示 `_photo` 或 `_photo_raw` | B9 | ✅ 已接好 |
+| 13 | 事件插圖 | 決策視窗上方顯示 `events/<id>` | C | ✅ 已接好 |
+| 14 | 文件插圖 | 登記、租約、合約、貸款完成時顯示 | C | 規劃中 |
+| 15 | 手機 App 圖示、Company OS 外框 | `phone_ui.gd`、`company_os.gd` 換皮 | A7 之後 | 規劃中 |
+| 16 | 目標引導箭頭 | tutorial 有 `effects/guide_arrow` 就改畫圖 | A8 | ✅ 已接好 |
+| 17 | 天氣 | 下雨系統：雨、水窪反光、雨聲 | P1 特效 | 規劃中 |
+| 18 | Elena 外型 | Elena 改成心形臉、旁分髮、細長眼、平眉，白外套配深色褲 | A1 | ✅ 已完成 |
+| 19 | 服裝細節層 | `outfit_*_top_detail` / `_bottom_detail`、`portraits/outfit_*_detail` 畫在染色布料上 | R1 | ✅ 已接好（等 R1 的圖；圖到了再寫入 NPC 西裝顏色） |
+| 20 | NPC 辨識度 | Ken 改穿 TradeLink 藍外套（不再和 Dara 撞衫）；Maya 外套改成暖芥末色；Priya 蜜桃色襯衫 | A1 | ✅ 已完成 |
 
 ## 交件檢查表（每個 PR 都貼一份）
 

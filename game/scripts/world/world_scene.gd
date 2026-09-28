@@ -298,6 +298,8 @@ func refresh_named_npcs() -> void:
 		var npc := NamedNPC.new()
 		npc.setup(nid, self)
 		npc.position = pos
+		# schedule `pose`: "sit" on sofas and tables, else "idle" behind counters (shown once the pose art exists)
+		npc.rig.set_pose(str(want[nid].get("pose", "idle")))
 		entities.add_child(npc)
 		named_npcs[nid] = npc
 

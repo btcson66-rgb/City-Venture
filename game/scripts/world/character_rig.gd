@@ -2,15 +2,20 @@ class_name CharacterRig
 extends Node2D
 ## Layered 32x48 character (body, face, hair, outfit, accessory). Origin = feet.
 ## Sheet layout: 4 frames × 3 rows (down, side, up). Left = side flipped.
+## Poses: every layer may have a `<layer>_<pose>.png` sheet in the same layout. A pose is shown only when every
+## layer of this character has one, so half-finished pose art never mixes with walk frames.
 
 const FRAME_W := 32
 const FRAME_H := 48
 const FEET := Vector2(16, 46)
 const ROWS := {"down": 0, "side": 1, "up": 2}
+## frames used per pose and their speed; "carry" replaces the walk cycle, the others are for standing still
+const POSES := {"sit": [2, 1.5], "idle": [2, 1.2], "phone": [2, 1.0], "interact": [2, 4.0], "carry": [4, 8.0]}
 
 var dir := "down"
 var walking := false
 var anim_speed := 8.0
+var pose := ""
 var _t := 0.0
 var _frame := 0
 var _layers: Array[Sprite2D] = []
@@ -38,7 +43,7 @@ func _make_shadow() -> void:
 	move_child(_shadow, 0)
 
 
-func setup(app: Dictionary, outfit_id: String, tints := {}) -> void:
+func setup(app: Dictionary, outfit_id: String, tints := {}, npc_id := "") -> void:
 	appearance = app
 	outfit = outfit_id
 	for l in _layers:
@@ -54,9 +59,10 @@ func setup(app: Dictionary, outfit_id: String, tints := {}) -> void:
 		_group.clear_margin = 3.0
 		_group.material = _outline_material()
 		add_child(_group)
-	for L in Art.character_layers(app, outfit_id, tints):
+	for L in Art.character_layers(app, outfit_id, tints, npc_id):
 		var s := Sprite2D.new()
 		s.texture = Art.tex(L["tex"])
+		s.set_meta("tex", L["tex"])
 		s.hframes = 4
 		s.vframes = 3
 		s.centered = false
@@ -65,7 +71,38 @@ func setup(app: Dictionary, outfit_id: String, tints := {}) -> void:
 		s.name = L["name"]
 		_group.add_child(s)
 		_layers.append(s)
+	var want := pose
+	pose = ""
+	set_pose(want)
 	_apply()
+
+
+## True when every layer has `<layer>_<p>` art.
+func has_pose(p: String) -> bool:
+	if p == "" or _layers.is_empty():
+		return p == ""
+	for s in _layers:
+		if not Art.has_tex(str(s.get_meta("tex")) + "_" + p):
+			return false
+	return true
+
+
+## Switch to a pose ("" = plain walk sheets). Returns false, and keeps the walk sheets, when the art isn't there.
+func set_pose(p: String) -> bool:
+	if p != "" and not POSES.has(p):
+		return false
+	var ok := has_pose(p)
+	var target := p if ok else ""
+	if target == pose:
+		return ok
+	pose = target
+	for s in _layers:
+		var base := str(s.get_meta("tex"))
+		s.texture = Art.tex(base + "_" + pose if pose != "" else base)
+	_frame = 0
+	_t = 0.0
+	_apply()
+	return ok
 
 
 func _outline_material() -> ShaderMaterial:
@@ -85,6 +122,8 @@ func set_dir(d: String) -> void:
 
 
 func set_walking(w: bool) -> void:
+	if w and pose != "" and pose != "carry":
+		set_pose("")   # standing poses end when the character moves off
 	if w != walking:
 		walking = w
 		if not w:
@@ -94,12 +133,20 @@ func set_walking(w: bool) -> void:
 
 
 func _process(delta: float) -> void:
-	if walking:
-		_t += delta * anim_speed
-		var f := int(_t) % 4
-		if f != _frame:
-			_frame = f
-			_apply()
+	var frames := 4
+	var speed := anim_speed
+	if pose != "":
+		frames = int(POSES[pose][0])
+		speed = float(POSES[pose][1])
+	elif not walking:
+		return
+	if pose == "carry" and not walking:
+		return
+	_t += delta * speed
+	var f := int(_t) % frames
+	if f != _frame:
+		_frame = f
+		_apply()
 
 
 func _apply() -> void:

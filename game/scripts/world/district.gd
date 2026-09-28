@@ -13,6 +13,7 @@ var _ped_rng := RandomNumberGenerator.new()
 var _density_acc := 0.0
 var sky_layer: CanvasLayer
 var sky_day: Sprite2D
+var sky_dusk: Sprite2D
 var sky_night: Sprite2D
 const SKY_PARALLAX := 0.55
 
@@ -217,26 +218,36 @@ func _build_sky() -> void:
 	sky_layer.follow_viewport_enabled = true
 	add_child(sky_layer)
 	sky_day = Sprite2D.new()
-	sky_day.texture = Art.tex("backdrops/skyline_day")
+	sky_day.texture = _sky_tex("day")
+	sky_dusk = Sprite2D.new()
+	sky_dusk.texture = _sky_tex("dusk")
 	sky_night = Sprite2D.new()
-	sky_night.texture = Art.tex("backdrops/skyline_night")
-	for sp in [sky_day, sky_night]:
-		if sp.texture == null:
-			continue
+	sky_night.texture = _sky_tex("night")
+	for sp in [sky_day, sky_dusk, sky_night]:
 		sp.centered = false
-		sp.position = Vector2(0, BASE_Y + 2 - sp.texture.get_height())
-		sky_layer.add_child(sp)
+		if sp.texture != null:
+			sp.position = Vector2(0, BASE_Y + 2 - sp.texture.get_height())
+		sky_layer.add_child(sp)   # added even without art so nothing is left orphaned
 	_update_sky()
+
+
+## A district's own skyline (backdrops/skyline_<district>_<part>) wins over the shared one; dusk is optional.
+func _sky_tex(part: String) -> Texture2D:
+	var own := Art.opt_tex("backdrops/skyline_%s_%s" % [str(def.get("id", "")), part])
+	if own != null:
+		return own
+	return Art.opt_tex("backdrops/skyline_dusk") if part == "dusk" else Art.tex("backdrops/skyline_" + part)
 
 
 func _update_sky() -> void:
 	if sky_day == null or not is_inside_tree():
 		return
 	var cam_left := -get_viewport().get_canvas_transform().origin.x
-	for sp in [sky_day, sky_night]:
+	for sp in [sky_day, sky_dusk, sky_night]:
 		sp.position.x = cam_left * SKY_PARALLAX
 	var nf := Clock.night_factor()
 	sky_day.modulate = Color(1, 1, 1).lerp(Color(1.0, 0.78, 0.66), clampf(nf * 2.0, 0.0, 1.0))
+	sky_dusk.modulate.a = clampf(nf / 0.4, 0.0, 1.0)   # day → dusk, then night fades in over it
 	sky_night.modulate.a = clampf((nf - 0.35) / 0.4, 0.0, 1.0)
 
 

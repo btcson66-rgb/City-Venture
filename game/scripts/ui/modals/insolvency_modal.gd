@@ -68,6 +68,8 @@ func _statement() -> void:
 	body.add_child(UIK.kv("Returned to you", Fmt.money(float(report.get("returned", 0.0))), Art.C_GREEN, 8))
 	body.add_child(UIK.sep())
 	body.add_child(UIK.wrap(I18n.t("Credit score now %d. Bank loans pause for 90 days. You can register a new company at City Hall whenever you're ready.") % Bank.credit(), 8, Art.C_SKY, 440))
-	var b := UIK.button("Start over", close, "primary", 90)
+	var b := UIK.button("Start over", func():
+		close()
+		UIRoot.show_chapter_card("A fresh start", "A company can fail. You don't.", "backdrops/insolvency"), "primary", 90)
 	b.name = "StartOver"
 	footer.add_child(b)
