@@ -51,8 +51,10 @@ All sheets keep the original 32×48 frame alignment and three directions,
 and every new PNG has a Godot `.png.import` companion. The art script is
 `tools/art/r3_poses.py`. Composite comparisons and QA details are in
 [`evidence/2026-09-28_r3_poses/README.md`](../evidence/2026-09-28_r3_poses/README.md).
-The existing game test expecting missing sit art now requires an update on
-Claude's gameplay track.
+Claude has updated the original missing-sit test after R3 acceptance. The
+second-pass pose repair eliminates the documented idle seams, phone/interact
+detachment and carry silhouette faults. `tools/qa/pose_check.py` reports OK;
+evidence is in [`evidence/2026-09-28_r3_pose_fixes/README.md`](../evidence/2026-09-28_r3_pose_fixes/README.md).
 
 ### Status after Art Pass v3 (feedback: "still not good enough — match the boards' style, content and quality")
 

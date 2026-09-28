@@ -336,7 +336,9 @@ hole       247  idle f2 ×120, carry down f3 / side f2 / up f3 ×27, phone f2（
 | F5 | `carry` 側面，手臂往上翹 | 全部 `_top_carry` 第 2 列 | 手臂像 V 字形的角，豎在箱子上方；應該是兩手扶著箱子兩側 |
 | F6 | `carry` 背面仍看得到整個箱子 | `_shoes_carry` 第 3 列 | 從背後看，箱子應該被身體擋住，只露出兩側邊緣 |
 
-**驗收**：`python3 tools/qa/pose_check.py` 回報 `pose_check: OK`，或只剩你在 PR 說明逐項解釋過、確定是誤報的項目。
+  **驗收**：`python3 tools/qa/pose_check.py` 回報 `pose_check: OK`，或只剩你在 PR 說明逐項解釋過、確定是誤報的項目。
+
+  **美術修正交件（2026-09-28）**：五種姿勢的圖層重新產生並消除斷層、透明縫、側面露膚及飄離碎片。`pose_check: OK`；Godot 匯入、67/67 單元測試、28 張截圖巡禮 0 失敗。圖層與組合預覽見 `evidence/2026-09-28_r3_pose_fixes/`。`idle`／`phone` 恢復兩格播放和出貨員工恢復 `interact` 仍屬下方 Claude 線程式接線 #22。
 
 **修正後 Claude 線會做的事**：`idle` 和 `phone` 恢復成 2 格動畫（現在暫時只播第 1 格，免得畫面閃出斷線）；出貨員工改回 `interact`（現在暫時用 `idle`）。
 

@@ -40,19 +40,9 @@ def remap(frame: Image.Image, pose: str, direction: int, tick: int) -> Image.Ima
                         nx += round((y - 34) * .47)
                     else:
                         nx += -2 if x < 16 else 2
-            elif pose == "idle":
-                if tick and 5 <= y < 31:
-                    ny = y - 1
-            elif pose == "phone":
-                if tick and y < 19:
-                    ny = y - 1
-            elif pose == "interact":
-                if tick and y < 19:
-                    nx = x + 1
-            elif pose == "carry":
-                # Follow the existing four-frame contact cycle with less bounce.
-                if y < 19 and tick in (1,3):
-                    ny = y + 1
+            # Standing actions retain the whole walking silhouette. Moving
+            # only a rectangular torso or head band leaves a transparent seam
+            # through the layered composite at the 32x48 target scale.
             if 0 <= nx < 32 and 0 <= ny < 48:
                 target[nx,ny] = pixel
     return out
@@ -66,27 +56,28 @@ def action(frame: Image.Image, name: str, pose: str, direction: int, tick: int) 
     shoes = name.startswith("outfit_") and name.endswith("_shoes")
     if not (skin or sleeve or trousers or shoes):
         return
-    if pose in ("phone","interact"):
-        # Retire the straight right arm, then place the sleeve and hand together.
-        if skin or sleeve:
-            if direction == 1:
-                d.rectangle((16,22,21,34), fill=(0,0,0,0))
-            else:
-                d.rectangle((23,23,30,35), fill=(0,0,0,0))
+    if pose == "idle":
+        if sleeve and tick:
+            # A restrained two-frame breath, expressed by shifting the chest
+            # highlight instead of tearing the waistline open.
+            c = frame.getpixel((16, 24))
+            if c[3]:
+                d.point((16, 23), fill=c)
+    elif pose in ("phone","interact"):
         if sleeve:
             c = next((frame.getpixel((x,24)) for x in (11,12,17)
                       if frame.getpixel((x,24))[3] == 255), (90,90,110,255))
             if pose == "phone":
-                points = [(21,22),(23,21),(24,16),(22,15)] if direction != 1 else [(16,22),(20,20),(22,16)]
-                d.line(points, fill=c, width=3)
+                points = [(22,26),(25,24),(26,20),(24,17)] if direction != 1 else [(19,26),(22,24),(23,20),(21,17)]
+                d.line(points, fill=c, width=4)
             else:
-                d.line([(21,22),(25,22),(29,21)] if direction != 1
-                       else [(17,22),(23,22),(29,21)], fill=c, width=3)
+                d.line([(22,27),(26,25),(30,24)] if direction != 1
+                       else [(19,27),(24,25),(30,24)], fill=c, width=4)
         if skin:
             if pose == "phone":
-                d.rounded_rectangle((21,12,24,16), radius=1, fill=(238,238,238,255))
+                d.rounded_rectangle((23 if direction != 1 else 20,15,25 if direction != 1 else 22,18), radius=1, fill=(238,238,238,255))
             else:
-                d.rounded_rectangle((28,20,31,24), radius=1, fill=(238,238,238,255))
+                d.rounded_rectangle((28,23,31,26), radius=1, fill=(238,238,238,255))
     elif pose == "sit":
         if trousers:
             c = next((frame.getpixel((x,37)) for x in (13,18,11,20)
@@ -108,16 +99,38 @@ def action(frame: Image.Image, name: str, pose: str, direction: int, tick: int) 
         if shoes:
             # Shoes are the existing untinted outfit layer. A low-held carton
             # stays brown even for a player wearing tintable clothes.
-            d.polygon([(9,34),(16,31),(24,34),(17,37)], fill="#ebc58c")
-            d.polygon([(9,34),(17,37),(17,43),(9,40)], fill="#bd8758")
-            d.polygon([(17,37),(24,34),(24,40),(17,43)], fill="#d4a36d")
-            d.line((12,33,21,36), fill="#fbdfa5", width=2)
-            d.line((17,37,17,42), fill="#f0c786", width=2)
+            if direction == 2:
+                # Back view: the carton is behind the torso. Only its narrow
+                # outer edges remain visible beside the forearms.
+                d.rounded_rectangle((9,32,11,38), radius=1, fill="#bd8758")
+                d.rounded_rectangle((22,32,24,38), radius=1, fill="#d4a36d")
+            else:
+                shift = (0, 1, 0, -1)[tick if tick < 2 else 0]
+                d.polygon([(9+shift,34),(16+shift,31),(24+shift,34),(17+shift,37)], fill="#ebc58c")
+                d.polygon([(9+shift,34),(17+shift,37),(17+shift,43),(9+shift,40)], fill="#bd8758")
+                d.polygon([(17+shift,37),(24+shift,34),(24+shift,40),(17+shift,43)], fill="#d4a36d")
+                d.line((12+shift,33,21+shift,36), fill="#fbdfa5", width=2)
+                d.line((17+shift,37,17+shift,42), fill="#f0c786", width=2)
         if sleeve:
             c = next((frame.getpixel((x,25)) for x in (12,18)
                       if frame.getpixel((x,25))[3] == 255), (90,90,110,255))
-            d.line((8,25,10,33), fill=c, width=3)
-            d.line((24,25,22,33), fill=c, width=3)
+            d.line((10,27,11,34), fill=c, width=4)
+            d.line((23,27,22,34), fill=c, width=4)
+
+
+def close_single_pixel_seams(frame: Image.Image, walk: Image.Image) -> None:
+    """Keep new pose layers no more perforated than their walk counterpart."""
+    def seam_rows(im: Image.Image) -> dict[int, list[int]]:
+        alpha = im.getchannel("A").load()
+        return {y: [x for x in range(32) if not alpha[x,y] and alpha[x,y-1] and alpha[x,y+1]]
+                for y in range(1,47)}
+
+    baseline = max((len(xs) for xs in seam_rows(walk).values()), default=0)
+    for y, xs in seam_rows(frame).items():
+        if len(xs) < baseline + 4:
+            continue
+        for x in xs:
+            frame.putpixel((x,y), frame.getpixel((x,y-1)))
 
 
 for path in names:
@@ -132,6 +145,8 @@ for path in names:
                 src = sheet.crop((src_frame*32,direction*48,src_frame*32+32,direction*48+48))
                 sprite = remap(src,pose,direction,tick)
                 action(sprite,path.stem,pose,direction,tick)
+                walk = sheet.crop((0,direction*48,32,direction*48+48))
+                close_single_pixel_seams(sprite, walk)
                 result.paste(sprite,(frame*32,direction*48))
         result.save(output / f"{path.stem}_{pose}.png", optimize=True)
 print(f"R3: {len(names)} layers × {len(POSES)} poses = {len(names)*len(POSES)} sheets")
