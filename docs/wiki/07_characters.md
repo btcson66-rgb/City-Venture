@@ -74,6 +74,8 @@
 
 每套服裝要交 **3 種體型 × 3 件（top、bottom、shoes）= 9 張走路圖**，加 **1 張頭像衣領**（64×64）。
 
+R1 已交：`business_suit_top_detail`、`courier_top_detail`（三體型各一張）將全彩襯衫、領帶、腰包等放到灰階布料上方；頭像使用 `business_suit_detail`、`courier_detail`。褲裝沒有全彩細節，因此不建立空白的 `bottom_detail`。四色西裝與 PostPoint 紅的驗收圖在 `evidence/2026-09-28_r1_outfit_details/`；NPC 染色值待 Claude 線寫入資料。
+
 | id | 名稱 | 誰穿 | 視覺設定 | 狀態 |
 |----|------|------|----------|------|
 | `startup_casual` | Startup Casual | 主角預設、員工（打包、行銷） | 休閒西裝外套、素 T、牛仔褲、白球鞋（Board A「Default」） | 已實作 · CODEX |

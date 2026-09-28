@@ -1021,6 +1021,46 @@ def draw_p_outfit(oid):
     return img
 
 
+def split_outfit_material(oid, pres):
+    """Separate dyeable fabric from unchanged, full-colour trim.
+
+    Render the same outfit with its original palette and a neutral cloth
+    palette. Pixels that change belong to the cloth mask; pixels that stay
+    identical are painted details. This preserves every silhouette and seam.
+    """
+    spec = OUTFITS[oid]
+    original = draw_outfit(oid, pres)
+    portrait = draw_p_outfit(oid)
+    old_top, old_bottom = spec["top_col"], spec["bottom_col"]
+    try:
+        spec["top_col"] = (232, 232, 232)
+        spec["bottom_col"] = (232, 232, 232)
+        neutral = draw_outfit(oid, pres)
+        neutral_portrait = draw_p_outfit(oid)
+    finally:
+        spec["top_col"], spec["bottom_col"] = old_top, old_bottom
+
+    def separate(full, cloth):
+        fabric = new(*full.size)
+        detail = new(*full.size)
+        for y in range(full.height):
+            for x in range(full.width):
+                a, b = full.getpixel((x, y)), cloth.getpixel((x, y))
+                if a[3] == 0:
+                    continue
+                if a[:3] != b[:3]:
+                    fabric.putpixel((x, y), b)
+                else:
+                    detail.putpixel((x, y), a)
+        return fabric, detail
+
+    top, top_detail = separate(original[0], neutral[0])
+    bottom, bottom_detail = separate(original[1], neutral[1])
+    neck, neck_detail = separate(portrait, neutral_portrait)
+    return (top, top_detail, bottom, bottom_detail, original[2],
+            neck, neck_detail)
+
+
 # ------------------------------------------------------------ main
 def generate(out):
     import os
@@ -1047,11 +1087,21 @@ def generate(out):
         save(pb, f"{p}/hair_{s}_back.png"); save(pf, f"{p}/hair_{s}_front.png")
     for oid in OUTFITS:
         for pres in PRESENTATIONS:
-            t, b, s = draw_outfit(oid, pres)
+            if oid in ("business_suit", "courier"):
+                t, td, b, bd, s, neck, nd = split_outfit_material(oid, pres)
+                save(td, f"{c}/outfit_{oid}_{pres}_top_detail.png")
+                if bd.getchannel("A").getbbox():
+                    save(bd, f"{c}/outfit_{oid}_{pres}_bottom_detail.png")
+            else:
+                t, b, s = draw_outfit(oid, pres)
             save(t, f"{c}/outfit_{oid}_{pres}_top.png")
             save(b, f"{c}/outfit_{oid}_{pres}_bottom.png")
             save(s, f"{c}/outfit_{oid}_{pres}_shoes.png")
-        save(draw_p_outfit(oid), f"{p}/outfit_{oid}.png")
+        if oid in ("business_suit", "courier"):
+            save(neck, f"{p}/outfit_{oid}.png")
+            save(nd, f"{p}/outfit_{oid}_detail.png")
+        else:
+            save(draw_p_outfit(oid), f"{p}/outfit_{oid}.png")
     for g in ("round", "square"):
         save(draw_glasses(g), f"{c}/acc_glasses_{g}.png")
     save(draw_backpack(), f"{c}/acc_backpack.png")

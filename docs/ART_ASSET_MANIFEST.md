@@ -23,6 +23,15 @@ The A1 comparison, 12-NPC lineup, and QA record are in
 Portraits remain in A5. Elena's data-driven appearance difference is Claude
 program-wiring item #18.
 
+### R1 dyeable outfit layers (2026-09-28)
+
+`business_suit` and `courier` now separate grayscale top and bottom fabric
+from full-colour top details for all three presentations. Each also has a
+grayscale portrait collar with an untinted `outfit_<id>_detail` overlay.
+The six new walking detail sheets and two new portrait detail images retain
+the existing dimensions and art paths. Four suit colours and PostPoint red
+are reviewed in [`evidence/2026-09-28_r1_outfit_details/README.md`](../evidence/2026-09-28_r1_outfit_details/README.md).
+
 ### Status after Art Pass v3 (feedback: "still not good enough — match the boards' style, content and quality")
 
 Art Pass v3 turns the approved concept boards themselves into game-ready assets, as Handoff §83 requires for AI concept

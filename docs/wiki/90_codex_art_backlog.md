@@ -229,7 +229,9 @@ Claude 線同時做完了下方[程式接線清單](#程式接線清單)的大�
 | Marcus | 炭灰 `#3a3d44` | Tom | 淺灰 `#b8bcc4` |
 | Daniel | 海軍藍 `#2c3e66` | Sofia | 酒紅 `#6e2e3a` |
 
-快遞服要用 PostPoint 紅 `#d0503c` 染 Dara。
+  快遞服要用 PostPoint 紅 `#d0503c` 染 Dara。
+
+  **美術交件（R1）**：西裝與快遞的 3 種體型已拆出灰階 `top`／`bottom` 和全彩 `top_detail`，頭像衣領也分為灰階與全彩；褲裝沒有額外全彩細節，因此不建立空白 `bottom_detail`。四色西裝和 PostPoint 紅的組合驗收見 `evidence/2026-09-28_r1_outfit_details/`。NPC 染色資料由 Claude 線接手。
 
 ### R2 地點卡不能有文字（併入 A6）
 
