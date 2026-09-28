@@ -26,10 +26,10 @@ Both were generated with the built-in image tool, inspected, and converted to th
 
 ## Verification
 
-- Godot 4.7.2 local import completed; the project specifies Godot 4.5.x, so this is a compatibility check, not a release-engine certification.
-- Rendered `--bot=shots` tour completed with **28 screenshots and 0 bot failures**. Six representative captures are in this directory: main menu, creator, arrival, city map, startup office, and night street.
+- Godot **4.5.1** (the project's target engine) and 4.7.2 both imported the revised art successfully.
+- Rendered `--bot=shots` tour on Godot 4.5.1 completed with **28 screenshots and 0 bot failures**. Six representative 4.5.1 captures are in this directory: main menu, creator, arrival, city map, startup office, and night street. A separate 4.7.2 run also produced 28 screenshots and 0 bot failures.
 - All **173** layered character/portrait PNGs have the required sheet sizes; the two backdrops are 752×360 and 640×360.
-- Local unit suite under Godot 4.7.2: **57/58 passed**. `test_systems.gd::test_registration_creates_company_and_moves_books` failed at `timeline entry`. No simulation source was changed in this art branch; this failure was not investigated as an art issue.
+- Local unit suite under **both Godot 4.5.1 and 4.7.2: 57/58 passed**. `test_systems.gd::test_registration_creates_company_and_moves_books` failed at `timeline entry` on both. No simulation source, game data, or tests changed in this art branch; this failure was not investigated as an art issue.
 
 ## Review boundary
 
