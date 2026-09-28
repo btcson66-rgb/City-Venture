@@ -47,6 +47,8 @@
 | `navy_panel` | （備用） | |
 | `concrete_wall` | （備用） | |
 
+**A2 美術更新（2026-09-28）**：現有五張 512×320 地板保留較細的原始紋理並柔化色階；新增 `floor_tile_white.png`、`floor_checker.png`、`floor_carpet_navy.png` 三張同尺寸地板。七款牆磚已在 atlas 的原格位更新，家具與牆磚的尺寸、佔位資料不變。八個現有室內場景的改前／改後實機畫面及日夜窗戶見 `evidence/2026-09-28_a2_interiors/`。
+
 ---
 
 ## 已完成的室內（8 個）

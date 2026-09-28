@@ -32,6 +32,16 @@ The six new walking detail sheets and two new portrait detail images retain
 the existing dimensions and art paths. Four suit colours and PostPoint red
 are reviewed in [`evidence/2026-09-28_r1_outfit_details/README.md`](../evidence/2026-09-28_r1_outfit_details/README.md).
 
+### A2 interior art (2026-09-28)
+
+The 68 existing furnishings retain their dimensions and placement contract.
+Seven key objects were redrawn: bank and civic counters, menu board, laptop
+desk, packing table, wardrobe and stock box. Five existing floor panoramas
+receive gentle colour smoothing; three new 512×320 floor panoramas cover white
+tile, checker and navy carpet. Seven wall tiles retain their atlas coordinates.
+See [`evidence/2026-09-28_a2_interiors/README.md`](../evidence/2026-09-28_a2_interiors/README.md)
+for the eight room comparisons and remaining visual limits.
+
 ### Status after Art Pass v3 (feedback: "still not good enough — match the boards' style, content and quality")
 
 Art Pass v3 turns the approved concept boards themselves into game-ready assets, as Handoff §83 requires for AI concept
