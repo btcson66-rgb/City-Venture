@@ -96,26 +96,36 @@ def body_parts(pres, d, f):
     feet = []
     if d in ("down", "up"):
         neck.rect(14, 17 + b, 17, 20 + b)
-        torso.rect(sx0 + 1, 20 + b, sx1 - 1, 20 + b)
-        torso.rect(sx0, 21 + b, sx1, 26 + b)
-        torso.rect(wx0, 27 + b, wx1, 30 + b)
-        torso.rect(10, 31 + b, 21, 33 + b)
+        # A soft shoulder-to-waist taper reads as a jacket/body at 1x instead
+        # of the old straight rectangular column.
+        torso.poly([(sx0 + 2, 20 + b), (sx1 - 2, 20 + b),
+                    (sx1, 22 + b), (sx1, 27 + b), (wx1, 31 + b),
+                    (20, 33 + b), (11, 33 + b), (wx0, 31 + b),
+                    (sx0, 27 + b), (sx0, 22 + b)])
         sw = p["swing"] if d == "down" else -p["swing"]
         # left arm (screen left)
         la_end = 30 + b - sw
         ra_end = 30 + b + sw
-        arms.rect(sx0 - 3, 21 + b, sx0 - 1, la_end)
-        arms.rect(sx1 + 1, 21 + b, sx1 + 3, ra_end)
+        arms.poly([(sx0 - 1, 21 + b), (sx0 - 3, 23 + b),
+                   (sx0 - 3, la_end), (sx0 - 1, la_end),
+                   (sx0, 25 + b)])
+        arms.poly([(sx1 + 1, 21 + b), (sx1 + 3, 23 + b),
+                   (sx1 + 3, ra_end), (sx1 + 1, ra_end),
+                   (sx1, 25 + b)])
         hands.rect(sx0 - 3, la_end + 1, sx0 - 1, la_end + 3)
         hands.rect(sx1 + 1, ra_end + 1, sx1 + 3, ra_end + 3)
         for (x0, x1, lift) in ((11, 15, p["lift_l"]), (16, 20, p["lift_r"])):
-            lm = Mask(FW, FH).rect(x0, 32 + b, x1, 44 - lift)
+            lm = Mask(FW, FH).poly([(x0, 32 + b), (x1, 32 + b),
+                                    (x1, 40 - lift), (x1 - 1, 44 - lift),
+                                    (x0 + 1, 44 - lift), (x0, 40 - lift)])
             legs.append(lm)
             fm = Mask(FW, FH).rect(x0 - (1 if x0 == 11 else 0), 43 - lift, x1 + (1 if x1 == 20 else 0), 46 - lift)
             feet.append(fm)
     else:
         neck.rect(14, 17 + b, 17, 20 + b)
-        torso.rect(11 if pres == "masculine" else 12, 20 + b, 20, 33 + b)
+        torso.poly([(12, 20 + b), (19, 20 + b), (21, 23 + b),
+                    (20, 29 + b), (19, 33 + b), (12, 33 + b),
+                    (11, 29 + b), (11, 23 + b)])
         if pres == "feminine":
             torso.px(12, 27 + b, 0).px(19, 27 + b, 0)
         s = p["swing"]
@@ -376,10 +386,20 @@ def draw_hair(style):
             bm = Mask(FW, FH)
         shaded(back_img, bm, GRAY_HAIR, ox, oy, sh_depth=2)
         shaded(front_img, fm, GRAY_HAIR, ox, oy, sh_depth=1)
-        # strand accents
-        for x, y in list(fm.pixels()):
-            if (x * 7 + y * 3) % 11 == 0 and fm.get(x, y + 1) and fm.get(x, y - 1) and fm.get(x - 1, y) and fm.get(x + 1, y):
-                put(front_img, ox + x, oy + y, GRAY_HAIR[1])
+        # Draw directional locks instead of scattered single-pixel noise.
+        # These remain grayscale so every hair tint keeps the same highlights.
+        if style != "buzz":
+            locks = ([(12, 4), (13, 5), (18, 4), (19, 5)] if d != "side"
+                     else [(13, 4), (14, 5), (18, 5)])
+            for x, y in locks:
+                yy = y + b
+                if fm.get(x, yy) and fm.get(x, yy + 1):
+                    put(front_img, ox + x, oy + yy, GRAY_HAIR[3])
+                    put(front_img, ox + x + 1, oy + yy + 1, GRAY_HAIR[2])
+        if d == "up" and style in ("long", "bob", "ponytail"):
+            for y in (12 + b, 17 + b, 22 + b):
+                if fm.get(16, y):
+                    put(front_img, ox + 16, oy + y, GRAY_HAIR[1])
     return back_img, front_img
 
 
@@ -440,6 +460,12 @@ def draw_outfit(oid, pres):
                 pm = lm.copy().intersect(Mask(FW, FH).rect(0, 0, 31, 42))
                 rr = br if not (d == "side" and i == 0) else shade_ramp(br, 0.88)
                 shaded(bottom, pm, rr, ox, oy)
+                bb = pm.bbox()
+                if bb and bb[3] - bb[1] >= 7:
+                    # Small fabric fold and inside-leg shadow, kept off the hem.
+                    put(bottom, ox + bb[0] + 1, oy + bb[1] + 3, br[3])
+                    vline(bottom, ox + bb[2] - 1, oy + bb[1] + 5,
+                          oy + min(bb[3] - 2, bb[1] + 8), br[0])
             if spec["bottom"] == "joggers":
                 for lm in P["legs"]:
                     bb = lm.bbox()
@@ -463,6 +489,7 @@ def draw_outfit(oid, pres):
             bb = fm.bbox()
             if bb:
                 hline(shoes, ox + bb[0] + 1, ox + bb[2] - 2, oy + bb[3] - 1, spec["sole"])
+                hline(shoes, ox + bb[0] + 2, ox + bb[2] - 2, oy + bb[1] + 1, sr[3])
         # ---------------- top
         torso = P["torso"].copy()
         sleeves = P["arms"].copy()
@@ -548,6 +575,19 @@ def draw_outfit(oid, pres):
                 hm = Mask(FW, FH).ellipse(9, 18 + b, 15, 24 + b)
                 shaded(top, hm, shade_ramp(tr, 0.92), ox, oy)
         shaded(top, sleeves, tr, ox, oy)
+        # Cloth seams and shallow folds create a readable material break while
+        # preserving the dyeable grayscale layers used by character creation.
+        if d == "down":
+            put(top, ox + 11, oy + 25 + b, tr[3])
+            put(top, ox + 20, oy + 26 + b, tr[0])
+            hline(top, ox + 13, ox + 15, oy + 31 + b, tr[0])
+            hline(top, ox + 17, ox + 19, oy + 32 + b, tr[2])
+        elif d == "side":
+            vline(top, ox + 12, oy + 26 + b, oy + 29 + b, tr[0])
+            put(top, ox + 19, oy + 25 + b, tr[3])
+        else:
+            hline(top, ox + 13, ox + 18, oy + 30 + b, tr[0])
+            put(top, ox + 12, oy + 24 + b, tr[3])
         if d == "down" and kind in ("blazer", "suit", "shirt", "hoodie", "jacket"):
             bb = P["arms"].bbox()
     return top, bottom, shoes
@@ -626,13 +666,20 @@ def draw_p_head(face):
     shaded(img, ears_m, GRAY_SKIN, 0, 0, hi=False)
     hm = p_head(face)
     shaded(img, hm, GRAY_SKIN, 0, 0, sh_depth=2)
-    # form shading: right cheek/jaw in shadow, soft shadow under the fringe, nose
+    # Form shading: under the fringe and along one cheek, with a small plane of
+    # reflected light on the other. All values stay tintable with skin choice.
     for x, y in list(hm.pixels()):
         if x >= 43 and y >= 26:
             put(img, x, y, GRAY_SKIN[1])
         elif 20 <= y <= 21 and 16 <= x <= 47:
             put(img, x, y, GRAY_SKIN[1])
+        elif 17 <= x <= 19 and 32 <= y <= 38:
+            put(img, x, y, GRAY_SKIN[3])
+        elif 39 <= x <= 42 and 39 <= y <= 42:
+            put(img, x, y, GRAY_SKIN[2])
     put(img, 33, 36, GRAY_SKIN[1]); put(img, 33, 37, GRAY_SKIN[1]); put(img, 32, 38, GRAY_SKIN[1])
+    hline(img, 30, 31, 37, GRAY_SKIN[3])
+    hline(img, 27, 37, 48, GRAY_SKIN[1])
     # clean outline around head + ears (tinted with the skin -> warm dark line)
     sil = hm.copy().union(ears_m)
     for x, y in list(sil.pixels()):
@@ -858,7 +905,9 @@ def _lock_set(style, rng):
 
 def draw_p_hair(style):
     import random as _r
-    rng = _r.Random(hash(style) % 997)
+    # Python's hash() is process-randomized; a stable seed makes generated
+    # portrait layers reproducible across artists' machines and build runs.
+    rng = _r.Random(sum((i + 1) * ord(c) for i, c in enumerate(style)))
     b_img = psheet(1)
     f_img = psheet(1)
     bm, fm = p_hair_masks(style)
@@ -872,13 +921,13 @@ def draw_p_hair(style):
     for x, y in list(union.pixels()):
         if any(not union.get(x + dx, y + dy) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))):
             put(f_img, x, y, (58, 58, 58, 255))
-    # glossy highlight ring across the crown
+    # Broken soft highlight along the crown; hard white bands read as plastic
+    # when the 64px portrait is shown at 2x.
     if style != "buzz":
         for x in range(18, 46):
             y = 9 + int(((x - 32) / 14.0) ** 2 * 4)
-            for dy in (0, 1):
-                if union.get(x, y + dy) and (x + dy) % 5 != 0:
-                    put(f_img, x, y + dy, (252, 252, 252, 255))
+            if union.get(x, y) and x % 7 not in (0, 1):
+                put(f_img, x, y, (228, 228, 228, 255))
     return b_img, f_img
 
 

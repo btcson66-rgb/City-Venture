@@ -23,7 +23,7 @@ def nine(w, h, fill_c, border, hi=None, sh=None, cut=True, alpha=255):
 
 
 def grad_panel(w, h, top, bottom, border, hi, alpha=246, accent=None):
-    """Board A style panel: vertical gradient, 1px border, lit top edge, cut corners."""
+    """Board A style panel: restrained pixel bevel and lit, cut corners."""
     im = new(w, h)
     for y in range(1, h - 1):
         c = mix(top, bottom, (y - 1) / max(1, h - 3))
@@ -33,18 +33,28 @@ def grad_panel(w, h, top, bottom, border, hi, alpha=246, accent=None):
     vline(im, 0, 1, h - 2, border)
     vline(im, w - 1, 1, h - 2, shade(border, 0.8))
     hline(im, 2, w - 3, 1, hi)
+    # The doubled left and lower edge gives every 9-slice surface the same
+    # tactile glass/metal frame seen in the approved interface board.
+    vline(im, 1, 3, h - 4, shade(hi, 0.58))
+    vline(im, w - 2, 3, h - 4, shade(border, 0.58))
+    hline(im, 3, w - 4, h - 2, shade(bottom, 1.28))
+    put(im, 1, 1, shade(border, 0.72))
+    put(im, w - 2, 1, shade(border, 0.72))
+    put(im, 1, h - 2, shade(border, 0.72))
+    put(im, w - 2, h - 2, shade(border, 0.72))
     if accent:
-        hline(im, 3, 8, 0, accent)
+        hline(im, 3, min(w - 4, 9), 0, accent)
+        put(im, min(w - 3, 10), 1, shade(accent, 0.75))
     return im
 
 
 def gen_panels(out):
     P = {}
-    P["panel"] = grad_panel(24, 24, (24, 40, 64), (12, 22, 38), (66, 96, 146), (96, 132, 190), 248, (120, 170, 240))
-    P["panel_glass"] = grad_panel(24, 24, (20, 34, 56), (10, 18, 32), (58, 84, 128), (80, 112, 160), 222)
+    P["panel"] = grad_panel(24, 24, (25, 43, 69), (11, 23, 41), (68, 105, 159), (114, 161, 220), 250, (128, 189, 245))
+    P["panel_glass"] = grad_panel(24, 24, (23, 40, 65), (11, 21, 39), (63, 99, 150), (104, 149, 207), 235)
     P["inset"] = nine(16, 16, PAL["navy_900"], PAL["navy_700"], None, None)
     P["header"] = nine(16, 16, PAL["navy_700"], PAL["navy_600"], lighten(PAL["navy_700"], 0.12), None)
-    P["button"] = grad_panel(16, 16, (46, 68, 108), (30, 46, 76), (70, 110, 176), (100, 140, 206), 255)
+    P["button"] = grad_panel(16, 16, (48, 74, 119), (29, 49, 83), (77, 121, 188), (129, 171, 222), 255)
     P["button_hover"] = grad_panel(16, 16, (72, 120, 196), (46, 88, 158), (132, 180, 240), (170, 206, 250), 255)
     P["button_pressed"] = nine(16, 16, PAL["navy_700"], PAL["blue_400"], shade(PAL["navy_700"], 0.8), None)
     P["button_disabled"] = nine(16, 16, (40, 46, 60), (64, 70, 86), None, None)
@@ -54,7 +64,7 @@ def gen_panels(out):
     P["tab"] = nine(16, 16, PAL["navy_800"], PAL["navy_600"], None, None)
     P["tab_active"] = grad_panel(16, 16, (64, 116, 196), (40, 82, 150), (132, 180, 240), (170, 206, 250), 255)
     P["tooltip"] = nine(16, 16, (240, 242, 246), PAL["navy_500"], None, None)
-    P["card"] = grad_panel(16, 16, (32, 48, 76), (22, 34, 56), (52, 74, 112), (70, 98, 144), 255)
+    P["card"] = grad_panel(16, 16, (33, 53, 83), (20, 36, 61), (62, 94, 139), (98, 142, 194), 255)
     P["card_gold"] = nine(16, 16, PAL["navy_700"], PAL["gold_500"], None, None)
     P["bar_bg"] = nine(8, 8, PAL["navy_900"], PAL["navy_600"], None, None)
     P["bar_fill"] = nine(8, 8, PAL["blue_400"], PAL["blue_300"], lighten(PAL["blue_400"], 0.3), None)
@@ -70,19 +80,28 @@ def gen_panels(out):
     m.rect(8, 0, w - 9, h - 1).rect(0, 8, w - 1, h - 9)
     for (cx, cy) in ((8, 8), (w - 9, 8), (8, h - 9), (w - 9, h - 9)):
         m.ellipse(cx - 8, cy - 8, cx + 8, cy + 8)
-    shaded(ph, m, ((14, 18, 26), (30, 34, 44), (40, 44, 56), (70, 76, 92)), 0, 0)
+    shaded(ph, m, ((10, 21, 38), (21, 40, 66), (39, 69, 110), (93, 141, 196)), 0, 0)
     for x, y in Mask(w, h).rect(7, 16, w - 8, h - 17).pixels():
         put(ph, x, y, (0, 0, 0, 0))
-    rect(ph, w // 2 - 14, 6, w // 2 + 13, 9, (20, 22, 30))
-    put(ph, w // 2 + 18, 7, (60, 80, 120))
-    rect(ph, w // 2 - 16, h - 11, w // 2 + 15, h - 10, (90, 96, 110))
+    hline(ph, 10, w - 11, 15, (111, 162, 214))
+    hline(ph, 10, w - 11, h - 17, (54, 87, 132))
+    vline(ph, 7, 18, h - 20, (91, 140, 196))
+    rect(ph, w // 2 - 14, 6, w // 2 + 13, 9, (7, 20, 38))
+    hline(ph, w // 2 - 11, w // 2 + 10, 7, (68, 99, 139))
+    put(ph, w // 2 + 18, 7, (105, 182, 230))
+    rect(ph, w // 2 - 16, h - 11, w // 2 + 15, h - 10, (111, 162, 214))
+    put(ph, 7, 13, (183, 218, 248)); put(ph, w - 8, 13, (183, 218, 248))
     save(ph, f"{out}/ui/phone_frame.png")
     # dialogue portrait frame 72x72
     pf = new(72, 72)
-    box(pf, 0, 0, 71, 71, PAL["navy_700"], PAL["blue_400"], None, None)
+    box(pf, 0, 0, 71, 71, PAL["navy_700"], (79, 131, 193), None, None)
     for x, y in Mask(72, 72).rect(4, 4, 67, 67).pixels():
         put(pf, x, y, (0, 0, 0, 0))
-    hline(pf, 2, 69, 2, PAL["blue_300"])
+    hline(pf, 2, 69, 2, (173, 214, 245))
+    hline(pf, 7, 64, 69, (41, 79, 132))
+    for x in (2, 68):
+        for y in (2, 68):
+            rect(pf, x, y, x + 1, y + 1, (226, 180, 82))
     save(pf, f"{out}/ui/portrait_frame.png")
 
 

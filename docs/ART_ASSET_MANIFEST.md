@@ -4,6 +4,10 @@ Style: **NEO-CIVIC PIXEL REALISM** (Handoff §37–§50, §83–§85; concept bo
 Grid: 16 px environment tiles. Characters are 32×48 frames. Nearest-neighbor scaling at 2×/3× (base 640×360).
 Palette anchors: see `CITY_VENTURE_SPEC_READBACK.md` §F. Placeholders come from `tools/art/gen_placeholders.py` into `game/assets/`, one file per row below, so final art replaces them 1:1 by path.
 
+### Codex visual art pass (2026-09-28)
+
+The current playable screens received new menu and arrival illustrations, refined layered character and portrait art, and a shared UI skin pass. The asset interface and game design remain unchanged. Source images, conversion commands, rendered screenshots, QA results, and remaining art limits are recorded in [`evidence/visual_art_pass_2026_09_28/README.md`](../evidence/visual_art_pass_2026_09_28/README.md). The v3 status table below continues to describe the other converted world assets.
+
 ### Status after Art Pass v3 (feedback: "still not good enough — match the boards' style, content and quality")
 
 Art Pass v3 turns the approved concept boards themselves into game-ready assets, as Handoff §83 requires for AI concept
