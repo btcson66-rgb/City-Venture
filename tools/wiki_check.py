@@ -20,7 +20,9 @@ WIKI = os.path.join(ROOT, "docs", "wiki")
 # Layered character/portrait files are documented by their parts, e.g. outfit_barista_feminine_top.png is covered
 # when `barista` and `feminine` appear; hair_bob_back.png when `bob` appears.
 LAYER_PREFIXES = ("body_", "hair_", "eyes_", "iris_", "brows_", "mouth_", "outfit_", "acc_", "head_")
-LAYER_SUFFIXES = ("_back", "_front", "_top", "_bottom", "_shoes")
+LAYER_SUFFIXES = ("_detail", "_back", "_front", "_top", "_bottom", "_shoes")
+# pose sheets (<layer>_<pose>.png) are covered by their layer plus the pose name (07_characters.md lists the poses)
+POSES = ("sit", "idle", "phone", "interact", "carry")
 PRESENTATIONS = ("masculine", "feminine", "neutral")
 
 
@@ -65,7 +67,10 @@ def asset_gaps(words: set) -> tuple:
         if name.endswith("_lights"):
             name = name[: -len("_lights")]
         if folder in ("characters", "portraits"):
-            ok = all(p in words for p in layer_parts(name))
+            pose = next((p for p in POSES if name.endswith("_" + p)), "")
+            if pose:
+                name = name[: -len(pose) - 1]
+            ok = all(p in words for p in layer_parts(name)) and (pose == "" or pose in words)
         else:
             ok = name in words
         if not ok:

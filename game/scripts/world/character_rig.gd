@@ -9,8 +9,10 @@ const FRAME_W := 32
 const FRAME_H := 48
 const FEET := Vector2(16, 46)
 const ROWS := {"down": 0, "side": 1, "up": 2}
-## frames used per pose and their speed; "carry" replaces the walk cycle, the others are for standing still
-const POSES := {"sit": [2, 1.5], "idle": [2, 1.2], "phone": [2, 1.0], "interact": [2, 4.0], "carry": [4, 8.0]}
+## frames used per pose and their speed; "carry" replaces the walk cycle, the others are for standing still.
+## idle and phone hold their first frame for now: the second frame of the R3 art has a 1 px gap across the body
+## (docs/wiki/90_codex_art_backlog.md, R3 fixes). Set them back to 2 when the fixed sheets land.
+const POSES := {"sit": [2, 1.5], "idle": [1, 1.2], "phone": [1, 1.0], "interact": [2, 4.0], "carry": [4, 8.0]}
 
 var dir := "down"
 var walking := false

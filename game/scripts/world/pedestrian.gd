@@ -21,7 +21,7 @@ func setup(s: Node, p: Dictionary, rng: RandomNumberGenerator, initial: bool) ->
 	var outfits := ["casual_tee", "casual_tee", "casual_jacket", "casual_jacket", "business_suit", "office_professional", "startup_casual", "home"]
 	var app := Art.random_appearance(rng)
 	var of: String = outfits[rng.randi_range(0, outfits.size() - 1)]
-	rig.setup(app, of, Art.random_outfit_tints(rng))
+	rig.setup(app, of, Art.random_outfit_tints(rng, of))
 	dir = 1 if rng.randf() < 0.5 else -1
 	speed = rng.randf_range(28.0, 44.0)
 	var x0 := float(p["x0"])

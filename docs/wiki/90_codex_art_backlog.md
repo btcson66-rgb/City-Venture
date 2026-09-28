@@ -13,11 +13,14 @@ Codex 第一輪（`codex/visual-art-pass-01`，已合併）的效果，在同一
 | 主選單背景 `menu` | 重畫：街景更乾淨，旗幟改用符號 | ✅ 明顯變好 |
 | 抵達背景 `arrival` | 重畫：河岸天際線、橋、倒影 | ✅ 明顯變好 |
 | 角色走路圖 | 第一輪只修細節；**A1（已合併）**重畫了輪廓、體型、鞋子和走路 4 格 | ✅ A1 明顯變好 |
+| 西裝、快遞服 | **R1（已合併）**：布料可染色，領帶和襯衫另外一層 | ✅ 四位穿西裝的 NPC 分得出來 |
+| 室內 | **A2（已合併）**：家具色階統一；銀行、市政櫃台分開；菜單板改成圖示；新增 3 款地板、7 款牆 | ✅ 明顯變好 |
+| 角色姿勢 | **R3（已合併）**：坐、站、講電話、伸手、搬箱，134 層 × 5 姿勢 | ⚠️ 坐姿可以用；其他姿勢有瑕疵，見 [R3 修正](#r3-修正--優先) |
 | 角色頭像 | 細部修整 | ⚠️ 等 A5 |
 | UI 面板和按鈕 | 小幅修整 | ⚠️ 小幅進步 |
-| 街景、建築、室內、地圖 | 沒動（仍是 v3 從概念板轉換的版本） | ❌ 下一輪的重點 |
+| 街景、建築、地圖 | 沒動（仍是 v3 從概念板轉換的版本） | ❌ 下一輪的重點 |
 
-**結論**：背景圖已經到位。玩家實際花最多時間看的是**角色、室內和街道**，這三塊還是轉換品質。第二輪的重心要放在那裡。
+**結論**：背景、角色和室內都到位了。剩下玩家常看到的是**街道和建築**（A3、A4），以及地圖（A6）。
 
 ## 工作方式
 
@@ -34,6 +37,7 @@ Codex 第一輪（`codex/visual-art-pass-01`，已合併）的效果，在同一
    godot --headless --path game res://tests/test_runner.tscn        # 全部通過
    godot --path game -- --bot=shots --out=/tmp/shots                 # 截圖巡禮，0 失敗
    python3 tools/wiki_check.py                                        # wiki 和檔案一致
+   python3 tools/qa/pose_check.py                                     # 有動角色圖時：姿勢圖沒有斷線、碎片、露膚
    ```
 6. 把**改前 / 改後**的對比截圖放進 `evidence/<日期>_<批次>/`，附一份 README：改了哪些檔、為什麼、還剩什麼問題。
 
@@ -264,72 +268,7 @@ Claude 線同時做完了下方[程式接線清單](#程式接線清單)的大�
 
 **數量**：一個姿勢要 128 張（全部圖層，加上 R1 的細節層）。建議用 `tools/art/chars.py` 產生，不要手畫每一張。
 
-**R3 美術交件（2026-09-28）**：原有 128 個走路圖層與 R1 的 6 個細節圖層，每層製作 `sit`、`idle`、`phone`、`interact`、`carry`，共 670 張 128×144 PNG；所有新增圖都有 Godot `.png.import`。玩家／NPC 的排程和動作切換仍由 Claude 線維護。以下識別符為新姿勢圖的完整素材索引（同名的 3 種體型共用列）。
-
-| 圖層識別符 | 五種姿勢資產識別符 |
-|---|---|
-| `almond` | `almond_sit`, `almond_idle`, `almond_phone`, `almond_interact`, `almond_carry` |
-| `arched` | `arched_sit`, `arched_idle`, `arched_phone`, `arched_interact`, `arched_carry` |
-| `backpack` | `backpack_sit`, `backpack_idle`, `backpack_phone`, `backpack_interact`, `backpack_carry` |
-| `barista_bottom` | `barista_bottom_sit`, `barista_bottom_idle`, `barista_bottom_phone`, `barista_bottom_interact`, `barista_bottom_carry` |
-| `barista_shoes` | `barista_shoes_sit`, `barista_shoes_idle`, `barista_shoes_phone`, `barista_shoes_interact`, `barista_shoes_carry` |
-| `barista_top` | `barista_top_sit`, `barista_top_idle`, `barista_top_phone`, `barista_top_interact`, `barista_top_carry` |
-| `bob_back` | `bob_back_sit`, `bob_back_idle`, `bob_back_phone`, `bob_back_interact`, `bob_back_carry` |
-| `bob_front` | `bob_front_sit`, `bob_front_idle`, `bob_front_phone`, `bob_front_interact`, `bob_front_carry` |
-| `bun_back` | `bun_back_sit`, `bun_back_idle`, `bun_back_phone`, `bun_back_interact`, `bun_back_carry` |
-| `bun_front` | `bun_front_sit`, `bun_front_idle`, `bun_front_phone`, `bun_front_interact`, `bun_front_carry` |
-| `business_suit_bottom` | `business_suit_bottom_sit`, `business_suit_bottom_idle`, `business_suit_bottom_phone`, `business_suit_bottom_interact`, `business_suit_bottom_carry` |
-| `business_suit_shoes` | `business_suit_shoes_sit`, `business_suit_shoes_idle`, `business_suit_shoes_phone`, `business_suit_shoes_interact`, `business_suit_shoes_carry` |
-| `business_suit_top` | `business_suit_top_sit`, `business_suit_top_idle`, `business_suit_top_phone`, `business_suit_top_interact`, `business_suit_top_carry` |
-| `business_suit_top_detail` | `business_suit_top_detail_sit`, `business_suit_top_detail_idle`, `business_suit_top_detail_phone`, `business_suit_top_detail_interact`, `business_suit_top_detail_carry` |
-| `buzz_back` | `buzz_back_sit`, `buzz_back_idle`, `buzz_back_phone`, `buzz_back_interact`, `buzz_back_carry` |
-| `buzz_front` | `buzz_front_sit`, `buzz_front_idle`, `buzz_front_phone`, `buzz_front_interact`, `buzz_front_carry` |
-| `casual_jacket_bottom` | `casual_jacket_bottom_sit`, `casual_jacket_bottom_idle`, `casual_jacket_bottom_phone`, `casual_jacket_bottom_interact`, `casual_jacket_bottom_carry` |
-| `casual_jacket_shoes` | `casual_jacket_shoes_sit`, `casual_jacket_shoes_idle`, `casual_jacket_shoes_phone`, `casual_jacket_shoes_interact`, `casual_jacket_shoes_carry` |
-| `casual_jacket_top` | `casual_jacket_top_sit`, `casual_jacket_top_idle`, `casual_jacket_top_phone`, `casual_jacket_top_interact`, `casual_jacket_top_carry` |
-| `casual_tee_bottom` | `casual_tee_bottom_sit`, `casual_tee_bottom_idle`, `casual_tee_bottom_phone`, `casual_tee_bottom_interact`, `casual_tee_bottom_carry` |
-| `casual_tee_shoes` | `casual_tee_shoes_sit`, `casual_tee_shoes_idle`, `casual_tee_shoes_phone`, `casual_tee_shoes_interact`, `casual_tee_shoes_carry` |
-| `casual_tee_top` | `casual_tee_top_sit`, `casual_tee_top_idle`, `casual_tee_top_phone`, `casual_tee_top_interact`, `casual_tee_top_carry` |
-| `civic_staff_bottom` | `civic_staff_bottom_sit`, `civic_staff_bottom_idle`, `civic_staff_bottom_phone`, `civic_staff_bottom_interact`, `civic_staff_bottom_carry` |
-| `civic_staff_shoes` | `civic_staff_shoes_sit`, `civic_staff_shoes_idle`, `civic_staff_shoes_phone`, `civic_staff_shoes_interact`, `civic_staff_shoes_carry` |
-| `civic_staff_top` | `civic_staff_top_sit`, `civic_staff_top_idle`, `civic_staff_top_phone`, `civic_staff_top_interact`, `civic_staff_top_carry` |
-| `courier_bottom` | `courier_bottom_sit`, `courier_bottom_idle`, `courier_bottom_phone`, `courier_bottom_interact`, `courier_bottom_carry` |
-| `courier_shoes` | `courier_shoes_sit`, `courier_shoes_idle`, `courier_shoes_phone`, `courier_shoes_interact`, `courier_shoes_carry` |
-| `courier_top` | `courier_top_sit`, `courier_top_idle`, `courier_top_phone`, `courier_top_interact`, `courier_top_carry` |
-| `courier_top_detail` | `courier_top_detail_sit`, `courier_top_detail_idle`, `courier_top_detail_phone`, `courier_top_detail_interact`, `courier_top_detail_carry` |
-| `glasses_round` | `glasses_round_sit`, `glasses_round_idle`, `glasses_round_phone`, `glasses_round_interact`, `glasses_round_carry` |
-| `glasses_square` | `glasses_square_sit`, `glasses_square_idle`, `glasses_square_phone`, `glasses_square_interact`, `glasses_square_carry` |
-| `grin` | `grin_sit`, `grin_idle`, `grin_phone`, `grin_interact`, `grin_carry` |
-| `heart` | `heart_sit`, `heart_idle`, `heart_phone`, `heart_interact`, `heart_carry` |
-| `home_bottom` | `home_bottom_sit`, `home_bottom_idle`, `home_bottom_phone`, `home_bottom_interact`, `home_bottom_carry` |
-| `home_shoes` | `home_shoes_sit`, `home_shoes_idle`, `home_shoes_phone`, `home_shoes_interact`, `home_shoes_carry` |
-| `home_top` | `home_top_sit`, `home_top_idle`, `home_top_phone`, `home_top_interact`, `home_top_carry` |
-| `long_back` | `long_back_sit`, `long_back_idle`, `long_back_phone`, `long_back_interact`, `long_back_carry` |
-| `long_front` | `long_front_sit`, `long_front_idle`, `long_front_phone`, `long_front_interact`, `long_front_carry` |
-| `messy_back` | `messy_back_sit`, `messy_back_idle`, `messy_back_phone`, `messy_back_interact`, `messy_back_carry` |
-| `messy_front` | `messy_front_sit`, `messy_front_idle`, `messy_front_phone`, `messy_front_interact`, `messy_front_carry` |
-| `narrow` | `narrow_sit`, `narrow_idle`, `narrow_phone`, `narrow_interact`, `narrow_carry` |
-| `office_professional_bottom` | `office_professional_bottom_sit`, `office_professional_bottom_idle`, `office_professional_bottom_phone`, `office_professional_bottom_interact`, `office_professional_bottom_carry` |
-| `office_professional_shoes` | `office_professional_shoes_sit`, `office_professional_shoes_idle`, `office_professional_shoes_phone`, `office_professional_shoes_interact`, `office_professional_shoes_carry` |
-| `office_professional_top` | `office_professional_top_sit`, `office_professional_top_idle`, `office_professional_top_phone`, `office_professional_top_interact`, `office_professional_top_carry` |
-| `oval` | `oval_sit`, `oval_idle`, `oval_phone`, `oval_interact`, `oval_carry` |
-| `ponytail_back` | `ponytail_back_sit`, `ponytail_back_idle`, `ponytail_back_phone`, `ponytail_back_interact`, `ponytail_back_carry` |
-| `ponytail_front` | `ponytail_front_sit`, `ponytail_front_idle`, `ponytail_front_phone`, `ponytail_front_interact`, `ponytail_front_carry` |
-| `round` | `round_sit`, `round_idle`, `round_phone`, `round_interact`, `round_carry` |
-| `short_neat_back` | `short_neat_back_sit`, `short_neat_back_idle`, `short_neat_back_phone`, `short_neat_back_interact`, `short_neat_back_carry` |
-| `short_neat_front` | `short_neat_front_sit`, `short_neat_front_idle`, `short_neat_front_phone`, `short_neat_front_interact`, `short_neat_front_carry` |
-| `side_part_back` | `side_part_back_sit`, `side_part_back_idle`, `side_part_back_phone`, `side_part_back_interact`, `side_part_back_carry` |
-| `side_part_front` | `side_part_front_sit`, `side_part_front_idle`, `side_part_front_phone`, `side_part_front_interact`, `side_part_front_carry` |
-| `small` | `small_sit`, `small_idle`, `small_phone`, `small_interact`, `small_carry` |
-| `smile` | `smile_sit`, `smile_idle`, `smile_phone`, `smile_interact`, `smile_carry` |
-| `soft` | `soft_sit`, `soft_idle`, `soft_phone`, `soft_interact`, `soft_carry` |
-| `square` | `square_sit`, `square_idle`, `square_phone`, `square_interact`, `square_carry` |
-| `startup_casual_bottom` | `startup_casual_bottom_sit`, `startup_casual_bottom_idle`, `startup_casual_bottom_phone`, `startup_casual_bottom_interact`, `startup_casual_bottom_carry` |
-| `startup_casual_shoes` | `startup_casual_shoes_sit`, `startup_casual_shoes_idle`, `startup_casual_shoes_phone`, `startup_casual_shoes_interact`, `startup_casual_shoes_carry` |
-| `startup_casual_top` | `startup_casual_top_sit`, `startup_casual_top_idle`, `startup_casual_top_phone`, `startup_casual_top_interact`, `startup_casual_top_carry` |
-| `straight` | `straight_sit`, `straight_idle`, `straight_phone`, `straight_interact`, `straight_carry` |
-| `thick` | `thick_sit`, `thick_idle`, `thick_phone`, `thick_interact`, `thick_carry` |
-| `wide` | `wide_sit`, `wide_idle`, `wide_phone`, `wide_interact`, `wide_carry` |
+**R3 美術交件（2026-09-28）**：原有 128 個走路圖層與 R1 的 6 個細節圖層，每層製作 `sit`、`idle`、`phone`、`interact`、`carry`，共 670 張 128×144 PNG；所有新增圖都有 Godot `.png.import`。玩家／NPC 的排程和動作切換仍由 Claude 線維護。檔名規則見上方；`tools/wiki_check.py` 會把 `<圖層>_<姿勢>` 算在它的圖層底下，不必逐一列出。
 
 ### R4 新 PNG 要連同 `.png.import` 一起提交
 
@@ -351,6 +290,61 @@ Claude 線同時做完了下方[程式接線清單](#程式接線清單)的大�
 | `backdrops/skyline_dusk.png` | 街區黃昏的天際線（白天和夜晚之間） | 1300×320 |
 | `backdrops/skyline_<district>_<day/dusk/night>.png` | 某一區專屬的天際線（例如港區） | 1300×320 |
 | `effects/guide_arrow.png` | 取代程式畫的金色目標箭頭 | 64×16（4 格 16×16） |
+
+---
+
+## R1、A2、R3 驗收後的新需求（2026-09-28，Claude 線，第二輪）
+
+R1、A2、R3 三批（PR #3、#4、#5）都已合併到 `claude/exciting-bardeen-y71ixv`。驗收結果：
+
+| 批次 | 結果 |
+|------|------|
+| R1 | ✅ Marcus 炭灰、Daniel 海軍藍、Sofia 酒紅、Tom 淺灰、Dara PostPoint 紅，已寫入 NPC 資料。路人的西裝也改成隨機西裝色，上下身同色 |
+| A2 | ✅ 八個室內都明顯變好。銀行和市政廳的櫃台終於不一樣了；菜單板沒有字了 |
+| R3 | ⚠️ `sit` 可以直接用，已在遊戲裡上線。`idle`、`phone`、`interact`、`carry` 有瑕疵，見下方 R3 修正 |
+
+R3 的舊測試已改寫，現在 67/67 通過。
+
+Claude 線同時修好了「坐在哪裡」的問題：客人以前坐在椅子左邊、被椅子蓋住，而且會在椅子上轉來轉去。現在會坐在椅子正中間、面向桌子；沙發和長椅面向前方。經理座位（桌子後面、面向大廳的椅子）留給員工和 NPC。
+
+**請依這個順序**：**R3 修正 → A3 建築立面 → A4 街道和地磚 → A6 地圖與地點卡（含 R2）→ A5 頭像**。
+
+### R3 修正 ★ 優先
+
+我寫了一個檢查工具，用和遊戲**完全相同**的方式疊圖，把每套服裝 × 3 體型 × 5 姿勢 × 3 方向 × 每一格都檢查一遍：
+
+```bash
+python3 tools/qa/pose_check.py           # 摘要，有問題時結束碼為 1
+python3 tools/qa/pose_check.py --list    # 列出每一筆
+```
+
+目前結果：
+
+```
+gap         81  idle down f2 ×27, idle side f2 ×27, idle up f2 ×27
+float      105  idle 各方向 f2 ×81, phone side ×12, interact side ×12
+skin        54  interact side f1 ×27, interact side f2 ×27
+hole       247  idle f2 ×120, carry down f3 / side f2 / up f3 ×27, phone f2（身體 24 層、頭髮 8 層）
+```
+
+| # | 問題 | 在哪裡 | 看起來像 |
+|---|------|--------|---------|
+| F1 | `idle` 第 2 格在 y=30 整排透明 | 全部 120 個身體、服裝、配件圖層，3 個方向 | 呼吸的那一格，人從腰部斷成上下兩截 |
+| F2 | `phone` 第 2 格有 1 px 透明縫 | 24 個身體圖層和 8 個頭髮圖層（例如 `hair_long_*_phone`） | 長髮上橫過一條細線，舉手的手臂變成 1 px 的線 |
+| F3 | `interact` 側面，上衣沒蓋住軀幹 | 27 套服裝 × 體型的 `_top_interact` 第 2 列 | 側面伸手時看起來沒穿上衣 |
+| F4 | `phone`、`interact` 側面，細節層脫離身體 | `business_suit`、`courier` 的 `_top_detail_phone` / `_interact` 第 2 列 | 領帶或腰包的 3–4 px 碎片飄在身體外面 |
+| F5 | `carry` 側面，手臂往上翹 | 全部 `_top_carry` 第 2 列 | 手臂像 V 字形的角，豎在箱子上方；應該是兩手扶著箱子兩側 |
+| F6 | `carry` 背面仍看得到整個箱子 | `_shoes_carry` 第 3 列 | 從背後看，箱子應該被身體擋住，只露出兩側邊緣 |
+
+**驗收**：`python3 tools/qa/pose_check.py` 回報 `pose_check: OK`，或只剩你在 PR 說明逐項解釋過、確定是誤報的項目。
+
+**修正後 Claude 線會做的事**：`idle` 和 `phone` 恢復成 2 格動畫（現在暫時只播第 1 格，免得畫面閃出斷線）；出貨員工改回 `interact`（現在暫時用 `idle`）。
+
+### R6 其他小事（有空再做，不擋進度）
+
+- **A2**：銀行和市政廳大理石地板的紋路很大、對比很低，看起來像地圖上的雲。可以縮小紋路、提高一點對比。
+- **R1 延伸**：`barista` 圍裙和 `civic_staff` 名牌也拆成「可染色布料＋細節」。之後 Jun 和 Lee 可以穿不同顏色的圍裙。
+- **wiki**：姿勢圖不必逐一列在 wiki 裡。`wiki_check` 已經把 `<圖層>_<姿勢>` 算在圖層底下，我把那張 64 列的清單拿掉了。
 
 ---
 
@@ -378,8 +372,10 @@ Claude 線同時做完了下方[程式接線清單](#程式接線清單)的大�
 | 16 | 目標引導箭頭 | tutorial 有 `effects/guide_arrow` 就改畫圖 | A8 | ✅ 已接好 |
 | 17 | 天氣 | 下雨系統：雨、水窪反光、雨聲 | P1 特效 | 規劃中 |
 | 18 | Elena 外型 | Elena 改成心形臉、旁分髮、細長眼、平眉，白外套配深色褲 | A1 | ✅ 已完成 |
-| 19 | 服裝細節層 | `outfit_*_top_detail` / `_bottom_detail`、`portraits/outfit_*_detail` 畫在染色布料上 | R1 | ✅ 已接好（等 R1 的圖；圖到了再寫入 NPC 西裝顏色） |
+| 19 | 服裝細節層 | `outfit_*_top_detail` / `_bottom_detail`、`portraits/outfit_*_detail` 畫在染色布料上 | R1 | ✅ 已完成：四位 NPC 的西裝和 Dara 的快遞服已上色；路人西裝用西裝色 |
 | 20 | NPC 辨識度 | Ken 改穿 TradeLink 藍外套（不再和 Dara 撞衫）；Maya 外套改成暖芥末色；Priya 蜜桃色襯衫 | A1 | ✅ 已完成 |
+| 21 | 座位 | `Interior.seats()`：坐在椅子正中間、面向最近的桌子；沙發面向前方；經理座位不給客人坐；坐著的 NPC 和員工會對齊到最近的座位 | R3 | ✅ 已完成 |
+| 22 | 姿勢暫時退回 | `idle` 和 `phone` 只播第 1 格；出貨員工用 `idle` 代替 `interact` | R3 修正 | ⏳ 等 R3 修正後恢復 |
 
 ## 交件檢查表（每個 PR 都貼一份）
 
@@ -391,6 +387,7 @@ Claude 線同時做完了下方[程式接線清單](#程式接線清單)的大�
 - [ ] 單元測試全部通過（貼最後一行）
 - [ ] --bot=shots 截圖巡禮 0 失敗
 - [ ] python3 tools/wiki_check.py 通過
+- [ ] 有動角色圖時：python3 tools/qa/pose_check.py 通過
 - [ ] evidence/<日期>_<批次>/ 有改前/改後對比和 README
 - [ ] wiki 對應條目的「美術」狀態已更新
 - [ ] 需要程式接線的項目已列在 PR 說明

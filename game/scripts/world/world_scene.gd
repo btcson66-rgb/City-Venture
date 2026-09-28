@@ -299,7 +299,13 @@ func refresh_named_npcs() -> void:
 		npc.setup(nid, self)
 		npc.position = pos
 		# schedule `pose`: "sit" on sofas and tables, else "idle" behind counters (shown once the pose art exists)
-		npc.rig.set_pose(str(want[nid].get("pose", "idle")))
+		var pose := str(want[nid].get("pose", "idle"))
+		if pose == "sit" and has_method("seat_near"):
+			var seat: Dictionary = call("seat_near", pos, 48.0)
+			if not seat.is_empty():
+				npc.position = seat["pos"]
+				npc.rig.set_dir(str(seat["dir"]))
+		npc.rig.set_pose(pose)
 		entities.add_child(npc)
 		named_npcs[nid] = npc
 

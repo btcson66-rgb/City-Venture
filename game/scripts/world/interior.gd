@@ -69,9 +69,9 @@ func build(building_id: String) -> void:
 		refresh_stock()
 		EventBus.po_arrived.connect(func(_x): refresh_stock())
 		EventBus.order_packed.connect(func(_x): refresh_stock())
-	_spawn_ambient()
 	update_lighting()
 	refresh_named_npcs()
+	_spawn_ambient()   # after the named NPCs and staff, so customers don't take their seats
 
 
 ## Large non-repeating floor image over the tile grid when one exists for this material.
@@ -211,8 +211,16 @@ func refresh_named_npcs() -> void:
 				continue
 			var at: Array = list[int(used[kind])]
 			used[kind] = int(used[kind]) + 1
+			# the packer should use "interact"; its side-view art still shows the bare torso (wiki 90, R3 fixes)
 			want[p["id"]] = {"p": p, "pos": Vector2(float(at[0]), float(at[1])), "face": "left" if kind == "packer" else "up",
-				"pose": "interact" if kind == "packer" else "sit"}
+				"pose": "idle" if kind == "packer" else "sit"}
+			if kind == "desk":
+				var seat := seat_near(want[p["id"]]["pos"], 24.0)
+				if seat.is_empty() or _seat_claimed(seat["pos"], want):
+					want[p["id"]]["pose"] = "idle"   # more staff than office chairs: they work standing, never sit on air
+				else:
+					want[p["id"]]["pos"] = seat["pos"]
+					want[p["id"]]["face"] = seat["dir"]
 	for sid in staff_nodes.keys():
 		if not want.has(sid):
 			if is_instance_valid(staff_nodes[sid]):
@@ -277,17 +285,96 @@ func _spawn_ambient() -> void:
 	rng.seed = hash(scene_id) + Clock.day_index() * 31 + Clock.hour()
 	if Clock.hour() < 8 or Clock.hour() >= 21:
 		n = mini(n, 1)
-	var seats: Array = []
-	for p in def.get("props", []):
-		if str(p["sprite"]).contains("chair") or str(p["sprite"]).contains("bench") or str(p["sprite"]).contains("sofa"):
-			seats.append(Vector2(float(p["x"]) + 8, float(p["y"]) + 20))
-	seats.shuffle()
-	for i in mini(n, seats.size()):
+	var free: Array = seats().filter(func(s): return not s["staff"] and not _seat_taken(s["pos"]))
+	# deterministic shuffle so a revisit in the same hour shows the same customers
+	for i in range(free.size() - 1, 0, -1):
+		var j := rng.randi_range(0, i)
+		var tmp = free[i]
+		free[i] = free[j]
+		free[j] = tmp
+	for i in mini(n, free.size()):
 		var a := AmbientPerson.new()
-		a.setup(rng)
-		a.position = seats[i]
+		a.setup(rng, str(free[i]["dir"]))
+		a.position = free[i]["pos"]
 		entities.add_child(a)
 		ambient.append(a)
+
+
+## Where people sit: every chair, stool, bench and sofa, as {pos, dir}. `pos` is the sitter's feet, centred on the
+## seat and just in front of it so they draw over the furniture; chairs face the nearest table or desk, benches
+## and sofas face the room.
+func seats() -> Array:
+	var tables: Array = []
+	for p in def.get("props", []):
+		var s := str(p["sprite"])
+		if not p.get("wall", false) and (s.contains("table") or s.contains("desk") or s.contains("counter")):
+			tables.append(_prop_rect(p))
+	var out: Array = []
+	for p in def.get("props", []):
+		var s := str(p["sprite"])
+		if p.get("wall", false) or not (s.contains("chair") or s.contains("bench") or s.contains("sofa") or s == "stool"):
+			continue
+		var r := _prop_rect(p)
+		var face := "down"
+		var staff := false
+		if not (s.contains("sofa") or s.contains("bench")):
+			face = _face_toward_nearest(r, tables)
+			staff = face == "down"   # a chair behind a desk, facing the room: the banker's, not a customer's
+		out.append({"pos": Vector2(roundf(r.get_center().x), r.end.y + 1.0), "dir": face, "sprite": s, "staff": staff})
+	return out
+
+
+## Nearest seat within `radius` of `at`, or {} (named NPCs and staff with a sitting pose snap onto it).
+func seat_near(at: Vector2, radius: float) -> Dictionary:
+	var best := {}
+	var bd := radius
+	for s in seats():
+		var d: float = (s["pos"] as Vector2).distance_to(at)
+		if d <= bd:
+			bd = d
+			best = s
+	return best
+
+
+func _seat_claimed(pos: Vector2, want: Dictionary) -> bool:
+	for w in want.values():
+		if w.get("pose", "") == "sit" and (w["pos"] as Vector2).distance_to(pos) < 1.0:
+			return true
+	return false
+
+
+func _seat_taken(pos: Vector2) -> bool:
+	for n in named_npcs.values() + staff_nodes.values():
+		if is_instance_valid(n) and (n as Node2D).position.distance_to(pos) < 6.0:
+			return true
+	return false
+
+
+## A prop's footprint in room pixels (sprite_meta overhang excluded), matching add_prop's placement.
+func _prop_rect(p: Dictionary) -> Rect2:
+	var key := "interiors/" + str(p["sprite"])
+	var tex := Art.tex(key)
+	var sm: Dictionary = DataDB.sprite_meta.get(key, {})
+	var w := float(sm.get("dw", tex.get_width() if tex != null else 16))
+	var h := float((tex.get_height() if tex != null else 16) - int(sm.get("top", 0)))
+	return Rect2(float(p["x"]), float(p["y"]), w, h)
+
+
+func _face_toward_nearest(r: Rect2, tables: Array) -> String:
+	var c := r.get_center()
+	var best: Rect2
+	var bd := 64.0
+	for t in tables:
+		var d := (t as Rect2).get_center().distance_to(c)
+		if d < bd:
+			bd = d
+			best = t
+	if bd >= 64.0:
+		return "down"
+	var v := best.get_center() - c
+	if absf(v.x) > absf(v.y):
+		return "right" if v.x > 0 else "left"
+	return "down" if v.y > 0 else "up"
 
 
 func npc_spot(spot: String) -> Vector2:

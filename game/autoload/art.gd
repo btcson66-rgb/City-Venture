@@ -159,10 +159,19 @@ func random_appearance(rng: RandomNumberGenerator) -> Dictionary:
 	return app
 
 
+## No skin-like tans here: a tan tee on a seated customer reads as a bare chest.
 const CLOTH_TINTS := [Color8(70, 110, 170), Color8(200, 90, 80), Color8(90, 150, 110), Color8(230, 200, 120), Color8(140, 110, 180),
-	Color8(60, 60, 70), Color8(220, 220, 226), Color8(120, 150, 190), Color8(190, 140, 100), Color8(100, 100, 120)]
+	Color8(60, 60, 70), Color8(220, 220, 226), Color8(120, 150, 190), Color8(70, 140, 140), Color8(100, 100, 120)]
 
 
-func random_outfit_tints(rng: RandomNumberGenerator) -> Dictionary:
+## Suits come in suit colours, jacket and trousers matching (the fabric is dyeable since art batch R1).
+const SUIT_TINTS := [Color8(58, 61, 68), Color8(44, 62, 102), Color8(184, 188, 196), Color8(110, 46, 58), Color8(92, 74, 60),
+	Color8(34, 36, 42), Color8(120, 124, 134)]
+
+
+func random_outfit_tints(rng: RandomNumberGenerator, outfit := "") -> Dictionary:
+	if outfit == "business_suit":
+		var c: Color = SUIT_TINTS[rng.randi_range(0, SUIT_TINTS.size() - 1)]
+		return {"top": c, "bottom": c}
 	return {"top": CLOTH_TINTS[rng.randi_range(0, CLOTH_TINTS.size() - 1)],
 		"bottom": [Color8(60, 80, 130), Color8(50, 52, 60), Color8(120, 110, 100), Color8(80, 90, 110)][rng.randi_range(0, 3)]}
