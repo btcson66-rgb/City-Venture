@@ -4,6 +4,16 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
 謝謝你幫忙測試！這是一款在現代城市裡創業、經營公司的像素風模擬 RPG。
 目前可以完整玩到第一章到第六章（開始電商、賺到第一塊錢、登記公司、月結、聘員工、大合約、現金危機）。
 
+0.1.4 新增：
+  ・購物街開放：從市政中心往西走，或搭捷運 M5。週末（六、日 9–18 點）有市集，晚上有串燈。
+  ・Threadline 服飾店：可以買五套新衣服（主管、城市精品、旅行、晚宴、現場工作），
+    在試衣間或家裡的衣櫃換上。店員 Nina 每天 10–21 點在。只影響外觀。
+  ・Lantern Bistro 餐廳（點招牌套餐）、Crestline 百貨旗艦店（第 5 章交貨後看得到你的檯燈）、
+    快閃店面（目前只能看租約公告）。
+  ・畫面大改版：角色、室內、建築、街道、頭像、地圖、圖示、車輛都重畫過；
+    角色會坐下、講電話、搬箱子；河面有波光；招牌字不再跑出招牌外。
+  ・修正：進入建築時偶爾會被推到門外。
+
 0.1.3 新增：第四～六章（聘員工與發薪、Crestline 大合約、現金危機）、員工系統、
   銀行貸款與信用分數、破產與重新開始、SaaS 軟體事業、背景音樂與音效（暫停選單可調音量）、
   Company OS「財務」裡的每週現金預測。
@@ -39,7 +49,7 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
 
 【網頁版】 由主辦人提供網址，用電腦版 Chrome／Edge／Firefox 開啟即可（手機還不支援）。
 
-電腦需求：近 10 年內的一般電腦即可（顯示卡支援 OpenGL 3.3）。遊戲目前沒有音樂音效。
+電腦需求：近 10 年內的一般電腦即可（顯示卡支援 OpenGL 3.3）。
 
 ------------------------------------------------------------
 二、操作
@@ -63,6 +73,7 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
   → 拍照上架 → 等訂單 → 到打包桌打包出貨 → 賺到第一塊錢 → 處理客人退貨
   → 搭捷運到「市政中心」登記公司 → 到「金融區」Nexus 銀行開公司帳戶
   → 決定在哪裡辦公 → 一路經營到 6 月底，看「月結」報表。
+  有空可以逛逛購物街：從市政中心往西走，到 Threadline 買件衣服、週末看看市集。
   想換個玩法：到 Nexus 共享辦公室的「創業佈告欄」→「兼職工作」應徵，
   再到工作地點的「員工通道」按 E 上班；或在 Company OS →「接案」開始自由接案。
   教學可以按「略過」，之後在暫停選單（Esc）可以重新播放，也可以關掉金色箭頭。
@@ -99,7 +110,9 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
 七、已知問題（不用回報）
 ------------------------------------------------------------
   ・音樂和音效是程式產生的暫代版本。
-  ・角色和部分美術是暫代圖，之後會由美術重畫。
+  ・購物街五套新衣服目前用現有衣服換色代替（例如「主管」看起來像深色西裝），
+    Crestline 百貨和 Lantern Bistro 的家具也是暫代，正式圖畫好後會換上。
+  ・購物街和店家還沒有地點卡照片（第一次進去時左下角只有文字）。
   ・手機、平板還不能玩（沒有觸控操作）。
   ・手機訊息和帳目紀錄會保留「當時」的語言，切換語言後舊紀錄不會跟著變。
   ・中文翻譯還沒經過編輯校稿；簡體中文是自動轉換的。
@@ -113,7 +126,13 @@ Thanks for testing! This build plays Chapters 1–6: start an online shop, earn 
 company, close a month, hire staff, land Crestline's big contract and survive the cash crunch. Also playable:
 part-time jobs, freelance consulting and a SaaS product.
 
-NEW IN THIS BUILD: step-by-step tutorial card and a gold guide arrow to your goal · glowing EXIT mats and
+NEW IN 0.1.4: Shopping Street is open (walk west from Civic Center, or take metro M5), with a weekend market
+(Sat/Sun 09-18) and string lights at night · Threadline: buy five new outfits and change in the fitting room or
+your wardrobe at home (looks only) · Lantern Bistro, Crestline's flagship (your lamps on show after Chapter 5),
+Pop-up Unit 5 · redrawn art everywhere: characters sit, phone and carry boxes; interiors, facades, streets,
+portraits, maps, icons and vehicles · fix: entering a building could push you back out of the door.
+
+EARLIER: step-by-step tutorial card and a gold guide arrow to your goal · glowing EXIT mats and
 street-edge signs · autosave on every scene change, every 15 s and when the tab/window closes (web: refresh,
 then Continue) · 5 part-time jobs with promotions and perks (Business Board → Part-time jobs) and freelance
 consulting gigs (Company OS → Freelance) · garbled-text fixes (NPC "Jun" shown as a month, tiny name tags,
@@ -140,5 +159,6 @@ REPORTING
   invited you. The game autosaves; Continue on the main menu picks up where you were. Saves: Windows %APPDATA%\CityVenture · macOS ~/Library/Application Support/CityVenture ·
   Linux ~/.local/share/CityVenture.
 
-KNOWN ISSUES: placeholder (generated) music and sound · placeholder character art · no touch controls · old messages keep the
+KNOWN ISSUES: placeholder (generated) music and sound · the five new outfits and the Crestline/Bistro furniture use
+stand-in art for now · Shopping Street has no location-card photos yet · no touch controls · old messages keep the
 language they were written in · translations not yet proofread.
