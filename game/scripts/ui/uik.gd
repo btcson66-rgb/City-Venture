@@ -33,6 +33,26 @@ static func title_font() -> Font:
 	return _title_font
 
 
+static var _num_font: FontVariation
+
+
+## Headline numbers (money, clock, scores). Pixelify's 5 is drawn exactly like its S ("$29,985" read "$29,98S"),
+## so any title with a digit in it is set in heavy Inter instead.
+static func num_font() -> Font:
+	if _num_font == null:
+		_num_font = FontVariation.new()
+		_num_font.base_font = Art.font_body
+		_num_font.variation_opentype = {"wght": 760}
+	return _num_font
+
+
+static func has_digit(t: String) -> bool:
+	for c in t:
+		if c >= "0" and c <= "9":
+			return true
+	return false
+
+
 static func tex_box(path: String, margin := 6, content := 5) -> StyleBoxTexture:
 	var sb := StyleBoxTexture.new()
 	sb.texture = Art.tex(path)
@@ -126,9 +146,9 @@ static func label(text: String, size := 8, color := Art.C_WHITE, bold := false) 
 	return l
 
 
-static func title(text: String, size := 12, color := Art.C_WHITE) -> Label:
+static func title(text: String, size := 12, color := Art.C_WHITE, numeric := false) -> Label:
 	var l := label(text, size, color)
-	l.add_theme_font_override("font", title_font())
+	l.add_theme_font_override("font", num_font() if numeric or has_digit(text) else title_font())
 	return l
 
 
@@ -171,7 +191,7 @@ static func world_label(text: String, size := 6, color := Color(1, 1, 1)) -> Lab
 	var l := Label.new()
 	l.text = text
 	# Pixelify is illegible below 7px (letters fuse: "Maya" reads "Moyo"); small world text uses bold Inter.
-	l.add_theme_font_override("font", title_font() if size >= 7 else bold_font())
+	l.add_theme_font_override("font", (num_font() if has_digit(text) else title_font()) if size >= 7 else bold_font())
 	l.add_theme_font_size_override("font_size", size)
 	l.add_theme_color_override("font_color", color)
 	l.add_theme_color_override("font_outline_color", Color8(12, 18, 30))

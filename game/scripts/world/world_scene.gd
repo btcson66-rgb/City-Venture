@@ -225,8 +225,12 @@ func add_prop(p: Dictionary, parent: Node = null) -> Node2D:
 		if typeof(solid) == TYPE_ARRAY:
 			r = Rect2(float(p["x"]) + float(solid[0]), float(p["y"]) + float(solid[1]), float(solid[2]), float(solid[3]))
 		else:
-			var band := minf(14.0, h * 0.4)
-			r = Rect2(float(p["x"]) + 1, float(p["y"]) + h - band, w - 2, band)
+			# the bottom band of the sprite, only as wide as what is drawn there (a tree's trunk, a plant's pot),
+			# so the player doesn't bump into empty air beside a prop
+			var band := int(clampf(h * 0.35, 4.0, 10.0))
+			var fp := _footprint(key, tex, left, w, band)
+			var inset := 1.0 if fp.y - fp.x > 6.0 else 0.0
+			r = Rect2(float(p["x"]) + fp.x + inset, float(p["y"]) + h - band, maxf(3.0, fp.y - fp.x - 2.0 * inset), band)
 		body = add_solid(r)
 	if p.has("show"):
 		timed_props.append({"node": holder, "body": body, "show": p["show"]})
@@ -240,6 +244,32 @@ func add_prop(p: Dictionary, parent: Node = null) -> Node2D:
 		var it: Dictionary = p["interact"]
 		add_interactable(Vector2(float(p["x"]) + w / 2.0, float(p["y"]) + h + 6), str(it["label"]), str(it["action"]), it.get("params", {}), 26.0)
 	return holder
+
+
+static var _foot_cache := {}
+
+
+## Where a sprite's bottom `band` rows are actually drawn, as [x0, x1) in footprint coordinates (0..w).
+func _footprint(key: String, tex: Texture2D, left: int, w: int, band: int) -> Vector2:
+	var ck := "%s|%d" % [key, band]
+	if _foot_cache.has(ck):
+		return _foot_cache[ck]
+	var out := Vector2(0, w)
+	var img := tex.get_image() if tex != null else null
+	if img != null:
+		if img.is_compressed():
+			img.decompress()
+		var x0 := w
+		var x1 := -1
+		for y in range(maxi(0, img.get_height() - band), img.get_height()):
+			for x in range(maxi(0, left), mini(img.get_width(), left + w)):
+				if img.get_pixel(x, y).a > 0.5:
+					x0 = mini(x0, x - left)
+					x1 = maxi(x1, x - left)
+		if x1 >= x0:
+			out = Vector2(x0, x1 + 1)
+	_foot_cache[ck] = out
+	return out
 
 
 func add_interactable(pos: Vector2, label: String, action: String, params := {}, radius := 22.0) -> Interactable:

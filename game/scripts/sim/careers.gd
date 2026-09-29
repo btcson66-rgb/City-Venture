@@ -99,6 +99,18 @@ static func perk_value(perk_id: String) -> float:
 	return float(job_def(current_job()).get("perk", {}).get("value", 0.0)) if has_perk(perk_id) else 0.0
 
 
+## A shift is the job's full length, or runs until closing time when you come in late (at least MIN_SHIFT_H).
+const MIN_SHIFT_H := 2
+
+
+static func shift_hours_now(id: String) -> int:
+	var j := job_def(id)
+	var full := int(j.get("shift_hours", 4))
+	var h: Dictionary = DataDB.building(str(j["building"])).get("hours", {})
+	var close_m := Clock.parse_hm(str(h.get("close", "24:00")))
+	return clampi((close_m - Clock.minute_of_day()) / 60, 0, full)
+
+
 ## Why a shift can't be worked right now ("" = it can).
 static func shift_block(id: String) -> String:
 	if current_job() != id:
@@ -108,10 +120,8 @@ static func shift_block(id: String) -> String:
 	var j := job_def(id)
 	if not SceneRouter.building_open(str(j["building"]))["open"]:
 		return "closed now"
-	var h: Dictionary = DataDB.building(str(j["building"])).get("hours", {})
-	var close_m := Clock.parse_hm(str(h.get("close", "24:00")))
-	if Clock.minute_of_day() + int(j.get("shift_hours", 4)) * 60 > close_m:
-		return "too late for a full shift"
+	if shift_hours_now(id) < MIN_SHIFT_H:
+		return "too late for a shift today"
 	return ""
 
 
@@ -119,9 +129,11 @@ static func shift_block(id: String) -> String:
 const COUNTS_FROM := 0.4
 
 
-## Pay for a shift played at `score` (0..1): 60% of the wage is guaranteed, the rest is earned.
-static func pay_for(id: String, score: float) -> float:
-	return snappedf(shift_pay(id) * (0.6 + 0.4 * clampf(score, 0.0, 1.0)), 0.01)
+## Pay for a shift of `hours` (default: the full shift) played at `score` (0..1): 60% of the wage is guaranteed,
+## the rest is earned.
+static func pay_for(id: String, score: float, hours := -1) -> float:
+	var base := shift_pay(id) if hours < 0 else wage(id) * hours
+	return snappedf(base * (0.6 + 0.4 * clampf(score, 0.0, 1.0)), 0.01)
 
 
 ## Work one shift (played as a minigame, see MiniGames): time passes, pay follows the score, tips on top, and a
@@ -132,8 +144,9 @@ static func work_shift(id: String, score := 1.0, tips := 0.0) -> Dictionary:
 		return {"ok": false, "error": why}
 	var j := job_def(id)
 	var before := rank_index(id)
-	var pay := pay_for(id, score) + snappedf(tips, 0.01)
-	Clock.advance(int(j.get("shift_hours", 4)) * 60)
+	var hours := shift_hours_now(id)
+	var pay := pay_for(id, score, hours) + snappedf(tips, 0.01)
+	Clock.advance(hours * 60)
 	Ledger.post("player", I18n.t("Wages — %s shift at %s") % [I18n.t(str(rank(id)["title"])), I18n.t(str(j["employer"]))],
 		[{"acct": "cash", "dr": pay}, {"acct": "wages", "cr": pay}], {"type": "wages", "job": id})
 	var counted := score >= COUNTS_FROM
@@ -147,7 +160,7 @@ static func work_shift(id: String, score := 1.0, tips := 0.0) -> Dictionary:
 	if promoted:
 		GameState.timeline(I18n.t("Promoted to %s at %s.") % [I18n.t(str(rank(id)["title"])), I18n.t(str(j["employer"]))], "career")
 		GameState.add_message(str(j["boss"]), I18n.t("You've earned it: you're our new %s. New rate: $%d an hour.") % [I18n.t(str(rank(id)["title"])), int(wage(id))])
-	return {"ok": true, "pay": pay, "moment": moment, "promoted": promoted, "title": str(rank(id)["title"]), "counted": counted}
+	return {"ok": true, "pay": pay, "hours": hours, "moment": moment, "promoted": promoted, "title": str(rank(id)["title"]), "counted": counted}
 
 
 # ============================================================== freelance consulting

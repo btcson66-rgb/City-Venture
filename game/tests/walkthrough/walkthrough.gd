@@ -491,6 +491,7 @@ func _careers() -> void:
 	bot.expect(Careers.current_job() == "cowork_host", "hired as a community host")
 	var cash := Ledger.cash("player")
 	var why := Careers.shift_block("cowork_host")
+	var hrs := Careers.shift_hours_now("cowork_host")
 	if why == "":
 		await bot.use_action("work_shift")
 		await bot.wait(0.6)
@@ -499,7 +500,7 @@ func _careers() -> void:
 		await bot.until(func(): return not (UIRoot.top_modal() is MiniGame), 5.0)   # the shift is played
 		await bot.wait(1.8)
 		var paid := Ledger.cash("player") - cash
-		bot.expect(paid >= Careers.pay_for("cowork_host", MiniGames.auto) - 0.01, "a 4-hour shift paid by how it went (%s)" % Fmt.money(paid))
+		bot.expect(paid >= Careers.pay_for("cowork_host", MiniGames.auto, hrs) - 0.01, "a %d-hour shift paid by how it went (%s)" % [hrs, Fmt.money(paid)])
 	else:
 		bot.log_line("  (no shift now: %s)" % why)
 	bot.step("Careers — freelance gig at a hot desk")

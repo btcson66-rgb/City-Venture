@@ -60,6 +60,8 @@ func go_menu() -> void:
 	Clock.world_active = false
 	UIRoot.set_hud_visible(false)
 	UIRoot.close_all()
+	for t in UIRoot.toast_box.get_children():   # the last game's notifications don't follow you to the title
+		t.queue_free()
 	_set_scene(MainMenu.new())
 
 

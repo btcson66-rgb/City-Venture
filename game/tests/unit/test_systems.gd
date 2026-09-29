@@ -175,7 +175,10 @@ func test_save_load_round_trip() -> void:
 	runner.eq(GameState.data["player"]["name"], "Test Founder", "character restored")
 	runner.eq(GameState.data["player"]["location"]["id"], "riverside", "position restored")
 	runner.eq(GameState.data["player"]["appearance"]["hair"], GameState.default_appearance()["hair"], "appearance restored")
-	runner.check(_deep_eq(JSON.parse_string(before), GameState.data), "state identical after round trip")
+	runner.eq(SaveSystem.current_slot(), 3, "a loaded game keeps saving to the slot it came from")
+	var expect: Dictionary = JSON.parse_string(before)
+	expect["meta"]["slot"] = 3
+	runner.check(_deep_eq(expect, GameState.data), "state identical after round trip")
 	# the simulation keeps running after a load
 	Clock.advance(60 * 48)
 	runner.check(Ledger.check_balanced(), "balanced after continuing")
@@ -194,3 +197,24 @@ func test_crypto_not_available_in_year_one() -> void:
 		if str(m["id"]).begins_with("stablecoin"):
 			runner.eq(m["status"], "planned", "stablecoin rail is not active in the slice")
 	runner.check(not GameState.flag("clearing_crisis_started"), "no clearing crisis in year 1")
+
+
+func test_a_new_game_never_overwrites_another_save() -> void:
+	var first := SaveSystem.current_slot()
+	runner.check(first in SaveSystem.GAME_SLOTS, "a new game gets a game slot (%d)" % first)
+	runner.check(SaveSystem.save(first), "first game saved")
+	var name1 := str(GameState.data["player"]["name"])
+	GameState.new_game({"name": "Second Founder", "seed": 2})
+	var second := SaveSystem.current_slot()
+	runner.check(second != first, "the second game gets its own slot (%d vs %d)" % [second, first])
+	runner.check(SaveSystem.save(second), "second game saved")
+	runner.eq(str(SaveSystem.summary(first).get("name", "")), name1, "the first game is still there")
+	runner.check(SaveSystem.save_list().size() >= 2, "both games are listed")
+	# replacing a save keeps a backup copy
+	SaveSystem.next_slot = first
+	GameState.new_game({"name": "Third Founder", "seed": 3})
+	runner.eq(SaveSystem.current_slot(), first, "the chosen slot is reused")
+	runner.check(not SaveSystem.has_save(first), "the old file moved out of the slot")
+	runner.check(DirAccess.get_files_at(SaveSystem.DIR + "/replaced").size() >= 1, "and into saves/replaced/")
+	for s in [first, second]:
+		DirAccess.remove_absolute(SaveSystem._path(s))

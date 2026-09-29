@@ -86,7 +86,14 @@ func test_teller_counts_the_fewest_notes() -> void:
 
 func test_typing_output_scales_with_the_score() -> void:
 	var g := TypingGame.new("saas", "salon_booking", 2.0)
-	runner.check(g.lines.size() >= 2, "a snippet to type")
+	runner.check(g.lines.size() >= 2, "a snippet on screen")
+	runner.check(g.rounds >= 1 and g.rounds <= TypingGame.MAX_LINES, "only a couple of lines to type (%d)" % g.rounds)
+	for i in 40:
+		var pick := TypingGame.pick_lines(g.lines)
+		var n := 0
+		for k in pick:
+			n += str(g.lines[k]).strip_edges().length()
+		runner.check(pick.size() == 1 or n <= TypingGame.MAX_CHARS, "short enough to stay a game (%d chars)" % n)
 	g.points = float(g.rounds)
 	runner.check(absf(float(g.extra_result()["hours"]) - 2.5) < 0.01, "perfect typing: 1.25x the session")
 	g.points = 0.0
@@ -131,3 +138,24 @@ func test_tutorial_steps_are_well_formed() -> void:
 func test_no_way_to_skip_time() -> void:
 	runner.check(not ("fast_forward" in Clock), "the clock has no fast-forward")
 	runner.check(not InputMap.has_action("fast_forward"), "no fast-forward key")
+
+
+func test_the_guided_first_venture_has_no_waits() -> void:
+	GameState.data["tutorial"] = {"step": 8, "seen": {}, "off": false, "v": Tutorial.VERSION}
+	runner.check(Tutorial.first_venture_active(), "a new player is on the guided first venture")
+	var r := Ecommerce.buy("tradelink_wholesale", "phone_stand", 80)
+	runner.check(r["ok"], "first stock bought")
+	runner.eq(int(GameState.stat("stock_received")), 1, "and delivered on the spot")
+	# the first parcel crosses town in minutes, not days
+	var loc := Ecommerce.default_stock_location()
+	var o := {"id": "F1", "product": "phone_stand", "qty": 1, "status": "carried", "location": loc, "entity": "player",
+		"customer": "Rin T.", "unit_price": 14.0, "placed": Clock.now(), "ship": {"method": "economy", "cost": 4.0, "mode": "dropoff"}}
+	GameState.data["ecommerce"]["orders"]["F1"] = o
+	Ecommerce._ship(o)
+	runner.check(int(o["ship"]["eta"]) - Clock.now() <= 40, "the first delivery is quick")
+	# after the guided venture, stock takes its normal time again
+	GameState.data["tutorial"]["step"] = Tutorial.STEPS.size()
+	runner.check(not Tutorial.first_venture_active(), "the guided venture is over")
+	var r2 := Ecommerce.buy("tradelink_wholesale", "phone_stand", 80)
+	runner.check(int(r2["eta"]) - Clock.now() >= 12 * 60, "later stock takes its time")
+	runner.eq(int(GameState.stat("stock_received")), 1, "not delivered yet")

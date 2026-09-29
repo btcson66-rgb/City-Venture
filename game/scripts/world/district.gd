@@ -91,7 +91,7 @@ func _fit_sign(lb: Label, board: Rect2) -> void:
 	var fs := lb.get_theme_font_size("font_size")
 	while lb.get_minimum_size().x > board.size.x + 2.0 and fs > 5:
 		fs -= 1
-		lb.add_theme_font_override("font", UIK.title_font() if fs >= 7 else UIK.bold_font())
+		lb.add_theme_font_override("font", (UIK.num_font() if UIK.has_digit(lb.text) else UIK.title_font()) if fs >= 7 else UIK.bold_font())
 		lb.add_theme_font_size_override("font_size", fs)
 	var need := lb.get_minimum_size()
 	var sz := Vector2(maxf(board.size.x, need.x), maxf(board.size.y, need.y))
@@ -138,6 +138,7 @@ func _add_building(sprite: String, x: float, bid: String, bd: Dictionary) -> voi
 	if bid == "small_office" and GameState.company_id() != "" and Living.has_lease("suite_2b"):
 		text = GameState.entity_name(GameState.company_id()).to_upper() + " · 2B"
 	if typeof(sg) == TYPE_ARRAY and text != "":
+		text = I18n.t(text)   # generic signs translate (RIVERSIDE TOWER → 河濱大樓); brand names stay as painted
 		var lb := UIK.world_label(text, 8 if float(sg[3]) >= 10 and float(sg[2]) >= 70 else (7 if float(sg[3]) >= 9 else 5), Color8(250, 244, 226))
 		var board := Rect2(float(sg[0]), float(sg[1]) - h + 2, float(sg[2]), float(sg[3]))
 		lb.position = board.position

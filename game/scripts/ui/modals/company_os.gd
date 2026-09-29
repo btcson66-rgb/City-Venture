@@ -657,7 +657,7 @@ func _tab_people() -> void:
 		var met: bool = GameState.data["npcs"].has(nid) or GameState.flag("met_" + nid)
 		if not met:
 			continue
-		content.add_child(UIK.kv(n["name"], n.get("role", ""), Art.C_WHITE, 8))
+		content.add_child(UIK.kv(n["name"], I18n.t(str(n.get("role", ""))), Art.C_WHITE, 8))
 	if not GameState.data["npcs"].has("maya"):
 		content.add_child(UIK.kv("Maya", "friend (phone)", Art.C_WHITE, 8))
 

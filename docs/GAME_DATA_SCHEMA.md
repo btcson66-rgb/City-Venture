@@ -243,7 +243,10 @@ data.player            {name, appearance{presentation,face,hair,hair_color,skin,
                         outfit, wardrobe[outfit ids owned], home:"riverside_studio", location{kind,id,x,y,facing}, flags{}}
                         (saves without `wardrobe` get the three starter outfits plus the one being worn)
 data.clock             {minutes: int (since 2031-06-01 00:00), speed: float}   (no fast-forward; speed is Slow 1.0 or Normal 1.5)
-data.tutorial          {v: 2, step, seen{}, off}   (the guided first venture; v1 saves restart at step 0 and skip what's done)
+data.meta              {format, version, created_unix, playtime_s, slot}   (slot: the save slot this game lives and autosaves in,
+                        1–6; 0 = a game from before 0.1.6. A loaded game keeps saving to the slot it came from)
+data.tutorial          {v: 3, step, seen{}, off}   (the guided first venture; older versions restart at step 0 and skip
+                        what's done. While it runs, the first stock, order, pickup and delivery come within minutes)
 data.help_seen         {key: true}
 data.entities.<id>     {id, name, kind: person|company|npc_company, founded?, type?, address?, bank_account: bool,
                         properties[], seller_account{type: personal|business, month_gmv}}

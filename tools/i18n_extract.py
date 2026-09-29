@@ -26,7 +26,7 @@ SKIP_LINE = re.compile(r'push_warning|push_error|print\(|log_line|assert\(|get_n
 DATA_KEYS = {"name", "text", "label", "detail", "outcome", "lines", "risks", "strengths", "industries", "goal", "blurb",
              "pitch", "title", "archetype", "entry_requirement", "role", "outfits_planned", "accessories_planned",
              "headlines", "return_reasons_defective", "return_reasons_normal", "subtitle", "category", "quality_req",
-             "sub", "1", "2", "3", "4", "5", "reason", "hint", "desc", "description", "item"}
+             "sub", "1", "2", "3", "4", "5", "reason", "hint", "desc", "description", "item", "sign", "sign_text"}
 DATA_ID_KEYS = {"revenue_models", "cost_types", "growth_paths"}   # snake_case ids shown as words
 SKIP_DATA_FILES = ("companies/",)                # company names stay as they are (NPC names map to themselves)
 SKIP_KEYS_IN = {"economy/marketplace.json": {"customer_first_names", "customer_last_initials"}}
@@ -81,7 +81,12 @@ def extract() -> dict:
                 v = unescape(lit)
                 if is_text(v):
                     ids.setdefault(v, set()).add("%s:%d" % (rel, n))
-    for f in sorted(glob.glob(os.path.join(GAME, "data", "**", "*.json"), recursive=True)):
+    # facade sign texts live with the building art (read, never written: assets/ is the art track's)
+    data_files = sorted(glob.glob(os.path.join(GAME, "data", "**", "*.json"), recursive=True)) + \
+        [os.path.join(GAME, "assets", "buildings", "buildings_meta.json")]
+    for f in data_files:
+        if not os.path.exists(f):
+            continue
         rel = os.path.relpath(f, os.path.join(GAME, "data"))
         if rel.startswith(SKIP_DATA_FILES):
             continue
@@ -97,6 +102,8 @@ def extract() -> dict:
                     walk(v, key)
             elif isinstance(o, str) and key in DATA_KEYS and is_text(o):
                 ids.setdefault(o, set()).add("data/" + rel)
+            elif isinstance(o, str) and key == "role" and rel.startswith("npcs/") and o.strip():
+                ids.setdefault(o, set()).add("data/" + rel)   # one-word roles ("barista", "friend") are shown too
             elif isinstance(o, str) and key in DATA_ID_KEYS:
                 ids.setdefault(o.replace("_", " "), set()).add("data/" + rel)
         walk(json.load(open(f, encoding="utf-8")), "")

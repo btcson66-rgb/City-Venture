@@ -33,9 +33,16 @@ func test_hire_work_shift_and_get_paid() -> void:
 func test_shift_needs_opening_hours() -> void:
 	Careers.hire("barista")
 	Clock.advance_to(Clock.at_day_time(0, 17 * 60))
-	runner.eq(Careers.shift_block("barista"), "too late for a full shift", "17:00 + 4 h is past closing")
+	runner.eq(Careers.shift_block("barista"), "", "coming in at 17:00 still works a shift")
+	runner.eq(Careers.shift_hours_now("barista"), 3, "until closing at 20:00")
+	var cash := Ledger.cash("player")
+	runner.check(Careers.work_shift("barista", 1.0)["ok"], "the short shift is worked")
+	runner.check(absf(Ledger.cash("player") - cash - Careers.wage("barista") * 3) < 0.01, "paid for 3 hours")
+	runner.eq(Clock.hour(), 20, "and it ends at closing time")
+	Clock.advance_to(Clock.at_day_time(1, 18 * 60 + 30))
+	runner.eq(Careers.shift_block("barista"), "too late for a shift today", "18:30 leaves less than 2 hours")
 	Careers.hire("city_clerk")
-	runner.eq(Careers.shift_block("city_clerk"), "closed now", "City Hall is shut on Sunday evening")
+	runner.eq(Careers.shift_block("city_clerk"), "closed now", "City Hall is shut in the evening")
 
 
 func test_promotion_raises_wage() -> void:

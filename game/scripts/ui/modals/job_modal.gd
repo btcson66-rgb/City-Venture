@@ -56,7 +56,8 @@ func build() -> void:
 		var here := SceneRouter.world_scene() != null and SceneRouter.world_scene().scene_id == str(j["building"])
 		if not here:
 			why = "go to the workplace to work a shift"
-		var b := UIK.button(I18n.t("Start a 4-hour shift (up to +%s)") % Fmt.money(Careers.shift_pay(job_id)), _work, "primary")
+		var hrs := Careers.shift_hours_now(job_id) if Careers.shift_block(job_id) == "" else int(j.get("shift_hours", 4))
+		var b := UIK.button(I18n.t("Start a %d-hour shift (up to +%s)") % [hrs, Fmt.money(Careers.pay_for(job_id, 1.0, hrs))], _work, "primary")
 		b.name = "WorkShift"
 		b.disabled = why != ""
 		footer.add_child(b)

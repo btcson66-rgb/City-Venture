@@ -17,10 +17,17 @@ func _ready() -> void:
 	add_to_group("player")
 	collision_layer = 1
 	collision_mask = 2
+	# top-down: no floors or ceilings, slide along everything
+	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
+	wall_min_slide_angle = 0.0
+	safe_margin = 0.5
+	# a flat capsule for the feet: rounded ends glide past corners where a box would catch
 	var shape := CollisionShape2D.new()
-	var rect := RectangleShape2D.new()
-	rect.size = Vector2(10, 5)
-	shape.shape = rect
+	var cap := CapsuleShape2D.new()
+	cap.radius = 2.5
+	cap.height = 10.0
+	shape.shape = cap
+	shape.rotation = PI / 2.0
 	shape.position = Vector2(0, -2)
 	add_child(shape)
 	rig = CharacterRig.new()
@@ -61,8 +68,33 @@ func _physics_process(_delta: float) -> void:
 		rig.set_dir(facing)
 		rig.anim_speed = 12.0 if speed > WALK_SPEED else 8.0
 	rig.set_walking(moving)
+	var before := global_position
 	move_and_slide()
+	if moving and global_position.distance_to(before) < speed * _delta * 0.25:
+		_corner_slide(v, speed * _delta)
 	_update_focus()
+
+
+const CORNER_REACH := 7.0
+
+
+## Pushing straight into the edge of a doorway, a table corner or a gap between props: if a few pixels to one side
+## the way is clear, slide over to it instead of stopping dead.
+func _corner_slide(v: Vector2, step: float) -> void:
+	var dir := Vector2.ZERO
+	if absf(v.x) > absf(v.y) * 2.0:
+		dir = Vector2(signf(v.x), 0)
+	elif absf(v.y) > absf(v.x) * 2.0:
+		dir = Vector2(0, signf(v.y))
+	if dir == Vector2.ZERO:
+		return
+	var side := Vector2(absf(dir.y), absf(dir.x))
+	for d in range(1, int(CORNER_REACH) + 1):
+		for sgn in [-1.0, 1.0]:
+			var off: Vector2 = side * float(d) * sgn
+			if not test_move(global_transform, off) and not test_move(global_transform.translated(off), dir * 2.0):
+				move_and_collide(side * sgn * minf(float(d), step))
+				return
 
 
 func _update_focus() -> void:

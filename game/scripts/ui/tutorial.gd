@@ -11,7 +11,7 @@ extends Control
 
 const SETTINGS := "user://settings.cfg"
 const HOME := "riverside_apartment"
-const VERSION := 2
+const VERSION := 3
 ## id · title · text (how to do it) · then, on their own line (not player text, so tools/i18n_extract.py skips it):
 ## done (Cond, or seen:<x>) · target (world arrow; omitted = the story objective's, {} = none) · ui (buttons to highlight
 ## on open screens, in order; "name*" = prefix, "hud:phone" = the Phone button) · then keys, and the coach's line for the
@@ -50,31 +50,19 @@ const STEPS := [
 		"done": "seen:os", "target": {"building": "nexus_cowork", "action": "open_company_os"},
 		"keys": ["E"]},
 	{"id": "buy", "title": "Buy your first stock",
-		"text": "In Company OS open Operations and press Buy next to a product. Start small: phone stands are cheap and sell steadily. You pay now; the stock arrives in about two days.",
+		"text": "In Company OS open Operations and press Buy next to a product. Start small: phone stands are cheap and sell steadily. Your first order is delivered right away; after that, stock takes a couple of days.",
 		"done": "stat:purchase_orders>=1", "target": {"building": "nexus_cowork", "action": "open_company_os"}, "ui": ["Buy_tradelink_wholesale_phone_stand", "Buy_*", "Tab_operations"],
 		"keys": [], "hints": ["Buy phone stands", "Buy this product", "Open Operations"]},
-	{"id": "job", "title": "Earn while you wait",
-		"text": "Stock takes two days. Meanwhile, get a part-time job: on the Business Board open Part-time jobs and take one. Barista at Bloom Coffee is next door to home.",
-		"done": "has_job", "target": {"building": "nexus_cowork", "action": "business_board"}, "ui": ["ApplyJob", "Job_barista", "Page_jobs"],
-		"keys": [], "hints": ["Take the job", "Barista: see the job", "Open Part-time jobs"]},
-	{"id": "shift", "title": "Work a shift",
-		"text": "Go to your workplace and press E at the staff door, then start a shift. You do the work yourself: the better it goes, the more you earn. Too late for a 4-hour shift today? Sleep, and work one tomorrow morning.",
-		"done": "stat:shifts_worked>=1", "target": {"job": true}, "ui": ["StartGame", "WorkShift"],
-		"keys": ["E"], "hints": ["Start working", "Start the shift"]},
-	{"id": "sleep", "title": "End the day",
-		"text": "After 7 PM, go home and sleep in your bed. Deliveries and orders keep moving overnight. If your stock isn't in yet tomorrow, work another shift.",
-		"done": "stat:stock_received>=1", "target": {"building": HOME, "action": "sleep"}, "ui": ["Sleep"],
-		"keys": [], "hint": "Sleep until morning"},
 	{"id": "shoot", "title": "Photograph and list",
-		"text": "Your stock is here. Open Company OS on the laptop at home, go to Sales and press 'Shoot photos myself & list'. Better photos sell more.",
-		"done": "stat:listings_active>=1", "target": {"building": HOME, "action": "open_company_os"}, "ui": ["StartGame", "ListSelf_*", "Tab_sales"],
+		"text": "Your stock is here. In Company OS go to Sales and press 'Shoot photos myself & list': set up the shot and take the photo yourself. Better photos sell more.",
+		"done": "stat:listings_active>=1", "target": {"os": true}, "ui": ["StartGame", "ListSelf_*", "Tab_sales"],
 		"keys": [], "hints": ["Start the shoot", "Shoot the photos yourself", "Open Sales"]},
-	{"id": "order", "title": "Wait for an order",
-		"text": "Your listing is live on ShopLane. Orders arrive during the day and your phone tells you. Work a shift or explore meanwhile.",
-		"done": "stat:orders_placed>=1", "target": {},
+	{"id": "order", "title": "Your first order",
+		"text": "Your listing is live on ShopLane. Your first order comes in within a few minutes, and your phone will buzz. Head home meanwhile: your packing table is there.",
+		"done": "stat:orders_placed>=1", "target": {"building": HOME, "action": "pack_orders"},
 		"keys": []},
 	{"id": "pack", "title": "Pack the order",
-		"text": "You have an order! Go home to your packing table and press E. Pack it by hand: box, padding, tape, label.",
+		"text": "You have an order! Go to your packing table at home and press E. Pack it by hand: box, padding, tape, label.",
 		"done": "stat:orders_packed>=1", "target": {"building": HOME, "action": "pack_orders"}, "ui": ["StartGame", "Pack"],
 		"keys": ["E"], "hints": ["Start packing", "Pack the order"]},
 	{"id": "ship", "title": "Send it off",
@@ -86,9 +74,21 @@ const STEPS := [
 		"done": "stat:orders_shipped>=1", "target": {"building": "postpoint_riverside", "action": "dropoff_parcels"}, "ui": ["DropEconomy"],
 		"keys": ["E"], "hint": "Hand it in"},
 	{"id": "paid", "title": "Getting paid",
-		"text": "It's on its way. When it's delivered, the sale lands in your ShopLane balance, and ShopLane pays out to your bank every few days (Company OS → Finance).",
+		"text": "It's on its way. This first delivery takes a few minutes; later ones take 1–3 days. When it arrives, the sale lands in your ShopLane balance, and ShopLane pays out to your bank every week (Company OS → Finance).",
 		"done": "stat:orders_delivered>=1", "target": {},
 		"keys": []},
+	{"id": "job", "title": "Earn on the side",
+		"text": "Your first sale is done! Money comes in faster with a part-time job too. Bloom Coffee is hiring: go to its staff door, press E and take the barista job. (More jobs are on the Business Board.)",
+		"done": "has_job", "target": {"building": "bloom_coffee", "action": "work_shift"}, "ui": ["ApplyJob", "Job_barista"],
+		"keys": ["E"], "hints": ["Take the job", "Barista: see the job"]},
+	{"id": "shift", "title": "Work a shift",
+		"text": "Press E at the staff door and start a shift. You do the work yourself: the better it goes, the more you earn. Came in late? The shift runs until closing time. Less than 2 hours left? Sleep, and work tomorrow.",
+		"done": "stat:shifts_worked>=1", "target": {"job": true}, "ui": ["StartGame", "WorkShift"],
+		"keys": ["E"], "hints": ["Start working", "Start the shift"]},
+	{"id": "sleep", "title": "End the day",
+		"text": "After 7 PM, go home and sleep in your bed. Overnight your listing keeps selling and deliveries keep moving. Tomorrow, the city is yours.",
+		"done": "stat:nights_slept>=1", "target": {"building": HOME, "action": "sleep"}, "ui": ["Sleep"],
+		"keys": [], "hint": "Sleep until morning"},
 ]
 
 var card: PanelContainer
@@ -109,6 +109,7 @@ var _coach_hint := ""
 var _coach_step := ""        # "FIRST VENTURE 9/18 · Buy your first stock", above the hint
 var _coach_i := -1          # which of the step's ui entries was found
 var _coach_target: Control
+var _nudged := false
 
 
 func _ready() -> void:
@@ -168,8 +169,8 @@ func st() -> Dictionary:
 		t = {"step": 0, "seen": {}, "off": not fresh, "v": VERSION}
 		GameState.data["tutorial"] = t
 	elif int(t.get("v", 1)) < VERSION:
-		# the old 8-step card: restart on the guided script (it skips whatever is already done), unless this player
-		# already got a first order delivered: they've been through the loop, so don't walk them through it again
+		# an older script: restart on this one (it skips whatever is already done), unless this player already got a
+		# first order delivered: they've been through the loop, so don't walk them through it again
 		t["step"] = STEPS.size() if GameState.stat("orders_delivered") >= 1 else 0
 		t["v"] = VERSION
 	return t
@@ -179,6 +180,17 @@ func _seen(what: String) -> void:
 	var s := st()
 	if not s.is_empty():
 		s["seen"][what] = true
+
+
+## True while a new player is on the guided first venture. The simulation uses it to skip the waits a first-timer
+## can't do anything about: the first stock arrives at once, the first order comes minutes after listing, the courier
+## is quick and the first parcel is delivered within the hour.
+static func first_venture_active() -> bool:
+	if not GameState.has_game():
+		return false
+	var t: Dictionary = GameState.data.get("tutorial", {})
+	return not t.is_empty() and not bool(t.get("off", false)) and int(t.get("step", 0)) < STEPS.size() \
+		and int(t.get("v", 1)) >= VERSION
 
 
 func is_active() -> bool:
@@ -248,6 +260,10 @@ func _process(delta: float) -> void:
 		_show_step(int(st()["step"]))
 		if not _completing and step_done(s):
 			_complete_step(_step_t < 0.2)
+		elif s["id"] == "phone":
+			_nudge_maya()
+		elif s["id"] == "order":
+			_first_order()
 	else:
 		card.visible = false
 	var op := UIRoot.hud.obj_panel
@@ -299,6 +315,29 @@ func _complete_step(instant := false) -> void:
 	_step_t = 0.0
 	_completing = false
 	SaveSystem.autosave_if_changed()
+
+
+## The phone step needs a message to read. A game continued after Maya's messages were already opened (or quit halfway
+## through her call) has nothing new to show, so she texts again: a fresh unread message the player can open.
+func _nudge_maya() -> void:
+	if _step_t < 3.0 or UIRoot.phone.is_open or UIRoot.dialogue.active or UIRoot.is_blocking():
+		return
+	var unread: bool = GameState.data["messages"].any(func(m): return m["from"] == "maya" and not m.get("read", false))
+	if unread or _nudged:
+		return
+	_nudged = true     # once per session: enough to put a fresh message on the phone
+	GameState.add_message("maya", "Hey, did you get my messages? Call me when you can.")
+
+
+## The guided first order comes in a few minutes after the first listing goes live (normally orders follow demand).
+func _first_order() -> void:
+	if bool(st()["seen"].get("first_order", false)) or GameState.stat("orders_placed") >= 1:
+		return
+	for l in Ecommerce.E()["listings"].values():
+		if l.get("active", false):
+			_seen("first_order")
+			Sim.schedule(Clock.now() + GameState.randi_range(8, 15), "eco.order_place", {"listing": l["id"]})
+			return
 
 
 ## The whole loop is done: say so, and show what else there is.
@@ -421,7 +460,8 @@ func _draw_coach() -> void:
 	var w1 := small.get_string_size(_coach_step, HORIZONTAL_ALIGNMENT_LEFT, -1, 6).x if _coach_step != "" else 0.0
 	var w := maxf(font.get_string_size(_coach_hint, HORIZONTAL_ALIGNMENT_LEFT, -1, 8).x, w1)
 	var h := 22.0 if _coach_step != "" else 13.0
-	var below := r.end.y + 10 + h < 356
+	# buttons in the lower half get the bubble above them: toasts sit just under an open screen's footer
+	var below := r.get_center().y < 200.0 or r.position.y - 10.0 - h < 4.0
 	var bob := 2.0 * sin(_t * 6.0)
 	var tip := Vector2(r.get_center().x, (r.end.y + 3 + bob) if below else (r.position.y - 3 - bob))
 	var dirv := 1.0 if below else -1.0
@@ -453,6 +493,14 @@ func _resolve(ws: WorldScene) -> Dictionary:
 			if jid == "":
 				return {}
 			tgt = {"building": str(Careers.job_def(jid)["building"]), "action": "work_shift"}
+			if Careers.shift_block(jid) in ["too late for a shift today", "closed now", "already worked today"]:
+				tgt = {"building": HOME, "action": "sleep"}   # nothing to do there today: go home and sleep
+		if tgt.get("os", false):
+			# the nearest Company OS: one in this room, the co-work desk while a pass is valid, or the laptop at home
+			var here := _interactable(ws, "open_company_os")
+			if not here.is_empty():
+				return here
+			tgt = {"building": "nexus_cowork" if Living.has_desk_access() else HOME, "action": "open_company_os"}
 	else:
 		var o := StoryEngine.main_objective()
 		tgt = o.get("target", {})
@@ -496,10 +544,13 @@ func _interactable(ws: WorldScene, action: String) -> Dictionary:
 				best = n
 	if best == null:
 		return {}
-	var lb := str(best.label)
-	if lb.contains("—"):
-		lb = lb.get_slice("—", 0).strip_edges()
-	return {"pos": best.global_position, "label": I18n.t(lb)}
+	# "Reception — desks & day passes": translate the whole label, then keep the part before the dash
+	var lb := I18n.t(str(best.label))
+	for dash in ["——", "—"]:
+		if lb.contains(dash):
+			lb = lb.get_slice(dash, 0).strip_edges()
+			break
+	return {"pos": best.global_position, "label": lb}
 
 
 func _route_to_building(ws: WorldScene, bid: String, action: String) -> Dictionary:

@@ -21,7 +21,9 @@ func build() -> void:
 		if typeof(l) == TYPE_ARRAY:
 			v.add_child(UIK.kv(str(l[0]), str(l[1]), l[2] if l.size() > 2 else Art.C_WHITE))
 		elif str(l).begins_with("# "):
-			v.add_child(UIK.label(str(l).substr(2), 8, Art.C_GOLD, true))
+			# the catalogue has the whole line ("# YOU DID THE WHOLE LOOP"): translate it, then drop the marker
+			var hd := I18n.t(str(l))
+			v.add_child(UIK.label(hd.substr(2) if hd.begins_with("# ") else I18n.t(str(l).substr(2)), 8, Art.C_GOLD, true))
 		elif str(l) == "---":
 			v.add_child(UIK.sep())
 		else:
@@ -34,7 +36,8 @@ func build() -> void:
 static func first_venture() -> InfoModal:
 	var m := make("Your first business loop", "star", [
 		"# YOU DID THE WHOLE LOOP",
-		"Buy stock → work a job while it travels → shoot and list → sell → pack → ship → get paid.",
+		"Buy stock → shoot and list → sell → pack → ship → get paid. Then a job on the side, a shift, and a night's sleep.",
+		"From now on the city runs at its own pace: stock takes a couple of days, and parcels 1–3 days to arrive.",
 		"---",
 		"# FROM HERE IT'S YOUR CALL",
 		"• Grow the shop: more products, better photos, ads (Company OS → Sales).",

@@ -99,6 +99,10 @@ static func buy(supplier_id: String, product_id: String, qty: int, location := "
 	if int(GameState.stat("purchase_orders")) == 1:
 		GameState.timeline(I18n.t("First inventory order: %d × %s from %s.") % [qty, I18n.t(DataDB.product(product_id)["name"]), sup_name], "business")
 	EventBus.po_placed.emit(po_id)
+	if Tutorial.first_venture_active() and int(GameState.stat("purchase_orders")) == 1:
+		# a new seller's first order is dropped off the same afternoon, so the guided first venture never stalls
+		po["eta"] = Clock.now()
+		_h_po_arrive({"po": po_id})
 	return {"ok": true, "po_id": po_id, "total": total, "eta": eta}
 
 
@@ -552,6 +556,8 @@ static func courier_pickup(loc: String, method: String) -> Dictionary:
 	var entity: String = packed[0]["entity"]
 	Ledger.expense(entity, "shipping", total, I18n.t("Courier pickup: %d parcels (%s)") % [packed.size(), I18n.t(DataDB.ship_method(method)["name"])], {"type": "ship"})
 	var t := Clock.now() + int(DataDB.shipping()["pickup"]["pickup_delay_min"])
+	if Tutorial.first_venture_active() and GameState.stat("orders_shipped") < 1:
+		t = Clock.now() + 10   # the guided first parcel: the courier is round the corner
 	for o in packed:
 		o["status"] = "awaiting_pickup"
 		o["ship"] = {"method": method, "cost": ship_cost(o, method), "mode": "courier"}
@@ -613,6 +619,8 @@ static func _ship(o: Dictionary) -> void:
 	var eta := Clock.now() + int(m.get("transit_days", 3)) * Clock.DAY + GameState.randi_range(-240, 240)
 	if not bool(o.get("label_ok", true)):
 		eta += 2 * Clock.DAY   # wrong label: it goes to the wrong address first
+	if Tutorial.first_venture_active() and GameState.stat("orders_delivered") < 1:
+		eta = Clock.now() + (40 if not bool(o.get("label_ok", true)) else 20)   # the guided first parcel: across town
 	o["ship"]["eta"] = eta
 	Sim.schedule(eta, "eco.deliver", {"order": o["id"]})
 	GameState.inc_stat("orders_shipped")

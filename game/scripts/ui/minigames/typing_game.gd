@@ -1,14 +1,18 @@
 class_name TypingGame
 extends MiniGame
 ## Do the work yourself at the keyboard: type out the code for your SaaS product, or build the spreadsheet a consulting
-## client is paying for. One line per round. Accuracy and speed decide how much the session gets done
-## (`hours` in the result: 0.5×–1.25× the session's nominal hours).
+## client is paying for. The whole snippet is on screen; you type its key lines (at most MAX_LINES, one per round),
+## the rest is already written: a short burst of real typing, not a shift at the keyboard. Accuracy and speed decide
+## how much the session gets done (`hours` in the result: 0.5×–1.25× the session's nominal hours).
 ## Texts: data/minigames/typing.json (code and formulas stay in English, as you would really type them).
 
 const CHAR_W := 6.6
 const LINE_H := 15.0
+const MAX_LINES := 2
+const MAX_CHARS := 64        # a second line is only added while the two stay this short
 
 var lines: Array = []
+var todo: Array = []          # indices of the lines the player types
 var base_hours := 2.0
 var li := 0                   # line being typed
 var col := 0                  # next character in it
@@ -34,13 +38,14 @@ func _init(mode := "saas", key := "", hours := 2.0, heading := "") -> void:
 	if pool.is_empty():
 		pool = [["print(\"hello, Aurelia\")"]]
 	lines = pool[randi() % pool.size()]
-	rounds = lines.size()
+	todo = pick_lines(lines)
+	rounds = todo.size()
 	round_time = 0.0
 	title_text = heading if heading != "" else ("Coding session" if mode == "saas" else "Client work")
 
 
 func intro_lines() -> Array:
-	return ["Type the text exactly as shown, line by line. The next character to type is highlighted.",
+	return ["Type the bright lines exactly as shown (the grey ones are already written). The next character to type is highlighted.",
 		"Leading spaces are filled in for you, and a run of spaces takes one press. A wrong key flashes red; just type the right one.",
 		"Accuracy and speed decide how much of the work gets done in this session.",
 		"Using a Chinese input method? Switch the keyboard to English input first."]
@@ -50,8 +55,28 @@ func round_name() -> String:
 	return "Line %d / %d"
 
 
+## The lines worth typing: skip bare brackets and blank lines, start somewhere random, stop at MAX_LINES/MAX_CHARS.
+static func pick_lines(ls: Array) -> Array:
+	var real: Array = []
+	for i in ls.size():
+		if str(ls[i]).strip_edges().length() > 3:
+			real.append(i)
+	if real.is_empty():
+		return [0]
+	var k := randi() % real.size()
+	var out: Array = [real[k]]
+	var chars := str(ls[real[k]]).strip_edges().length()
+	while out.size() < MAX_LINES and k + 1 < real.size():
+		k += 1
+		chars += str(ls[real[k]]).strip_edges().length()
+		if chars > MAX_CHARS:
+			break
+		out.append(real[k])
+	return out
+
+
 func build_round() -> void:
-	li = round_i
+	li = int(todo[round_i])
 	col = 0
 	errors = 0
 	typed = 0
@@ -137,10 +162,11 @@ func _draw_view() -> void:
 	for i in range(first, mini(lines.size(), first + 11)):
 		var s := str(lines[i])
 		var y := 14.0 + (i - first) * LINE_H
+		var mine := todo.has(i)
 		for c in s.length():
 			var x := 6.0 + c * CHAR_W
-			var colr := Color(0.55, 0.6, 0.7)
-			if i < li:
+			var colr := Color(0.92, 0.94, 1.0) if mine else Color(0.42, 0.46, 0.56)   # to type / already written
+			if mine and i < li:
 				colr = Color(0.45, 0.85, 0.55)
 			elif i == li:
 				if c < col:

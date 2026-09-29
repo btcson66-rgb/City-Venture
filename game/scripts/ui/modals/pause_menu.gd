@@ -11,20 +11,17 @@ func _init() -> void:
 func build() -> void:
 	body.add_child(UIK.button("Resume", close, "primary"))
 	var sv := UIK.hbox(3)
-	sv.add_child(UIK.label("Save to slot", 8, Art.C_MUTED))
-	for s in [1, 2, 3]:
-		var b := UIK.button(str(s), func():
-			SaveSystem.save(s)
-			UIRoot.toast(I18n.t("Saved to slot %d.") % s, "good", "save"))
-		b.name = "SaveSlot_%d" % s
-		b.custom_minimum_size = Vector2(28, 0)
-		sv.add_child(b)
+	var sn := UIK.button("Save now", func():
+		SaveSystem.autosave()
+		UIRoot.toast(I18n.t("Saved (slot %d).") % SaveSystem.current_slot(), "good", "save"))
+	sn.name = "SaveNow"
+	sv.add_child(sn)
+	sv.add_child(UIK.label(I18n.t("This game autosaves to slot %d.") % SaveSystem.current_slot(), 7, Art.C_DIM))
 	sv.add_child(UIK.expand())
-	var lb := UIK.button("Load last save", func():
-		var s := SaveSystem.latest_slot()
-		if s >= 0:
-			close()
-			SaveSystem.load_and_enter(s))
+	var lb := UIK.button("Load a game", func():
+		close()
+		UIRoot.open_modal(SaveListModal.new("load")))
+	lb.name = "LoadGame"
 	sv.add_child(lb)
 	body.add_child(sv)
 	var sp := UIK.hbox(4)

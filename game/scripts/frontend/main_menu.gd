@@ -40,7 +40,8 @@ func _ready() -> void:
 	box.position = Vector2(44, 132)
 	box.custom_minimum_size = Vector2(150, 0)
 	add_child(box)
-	var ng := UIK.button("New Game", func(): SceneRouter.go_creator(), "primary", 150)
+	# a new game always gets its own save slot: it never overwrites the game you were playing
+	var ng := UIK.button("New Game", _new_game, "primary", 150)
 	ng.name = "NewGame"
 	box.add_child(ng)
 	var slot := SaveSystem.latest_slot()
@@ -50,7 +51,14 @@ func _ready() -> void:
 	box.add_child(cont)
 	if slot >= 0:
 		var sm := SaveSystem.summary(slot)
-		box.add_child(UIK.label(I18n.t("%s · %s · Day %d") % [sm.get("name", ""), sm.get("company", ""), int(sm.get("day", 0))], 7, Art.C_MUTED))
+		var last := UIK.label(I18n.t("%s · %s · Day %d") % [sm.get("name", ""), sm.get("company", ""), int(sm.get("day", 0))], 7, Art.C_MUTED)
+		last.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+		box.add_child(last)
+	var saves := SaveSystem.save_list().size()
+	var lg := UIK.button(I18n.t("Load game (%d)") % saves, func(): UIRoot.open_modal(SaveListModal.new("load")), "", 150)
+	lg.name = "LoadGame"
+	lg.disabled = saves == 0
+	box.add_child(lg)
 	box.add_child(UIK.button("Quit", func(): get_tree().quit(), "", 150))
 	var ver := UIK.label(I18n.t("VERTICAL SLICE 001 · art converted from concept boards · %s") % ProjectSettings.get_setting("application/config/version", ""), 7, Art.C_DIM)
 	ver.position = Vector2(8, 346)
@@ -70,3 +78,11 @@ func _ready() -> void:
 		b.name = "Lang_" + code
 		b.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 		lang.add_child(b)
+
+
+func _new_game() -> void:
+	if SaveSystem.free_slot() >= 0:
+		SaveSystem.next_slot = -1
+		SceneRouter.go_creator()
+	else:
+		UIRoot.open_modal(SaveListModal.new("replace"))

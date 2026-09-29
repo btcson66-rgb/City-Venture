@@ -44,7 +44,7 @@ func build() -> void:
 	grid.add_theme_constant_override("h_separation", 3)
 	grid.add_theme_constant_override("v_separation", 3)
 	for o in items:
-		var tag := I18n.t("owned") if Wardrobe.owns(o["id"]) else Fmt.money0(float(o["price"]))
+		var tag := I18n.t("Owned") if Wardrobe.owns(o["id"]) else Fmt.money0(float(o["price"]))
 		var b := UIK.button("%s · %s" % [I18n.t(o["name"]), tag], _select.bind(o["id"]), "tab_active" if o["id"] == sel else "tab", 150)
 		b.name = "Item_" + o["id"]
 		grid.add_child(b)

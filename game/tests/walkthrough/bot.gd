@@ -15,6 +15,12 @@ var quit_at_end := true
 var t0 := 0
 var popup_handler: Callable
 var video_mode := false
+# English audit (Chinese runs): every on-screen text with English words that aren't names or kept brands
+var audit_on := false
+var audit := {}
+var _allowed := {}
+var _audit_t := 0.0
+var _word_re := RegEx.create_from_string("[A-Za-z][A-Za-z'’]+")
 
 
 func _ready() -> void:
@@ -33,7 +39,76 @@ func _ready() -> void:
 		out_dir = ProjectSettings.globalize_path("user://bot")
 	DirAccess.make_dir_recursive_absolute(out_dir + "/screenshots")
 	t0 = Time.get_ticks_msec()
+	if I18n.locale().begins_with("zh"):
+		_audit_setup()
 	call_deferred("_run")
+
+
+# ------------------------------------------------------------------ English audit
+## Words that may appear in the Chinese UI: whatever the translations themselves keep in Latin letters (brands like
+## Bloom Coffee, ShopLane, Company OS), people's names, key names.
+func _audit_setup() -> void:
+	audit_on = true
+	var tr = JSON.parse_string(FileAccess.get_file_as_string(ProjectSettings.globalize_path("res://").path_join("../tools/i18n/zh_TW.json")))
+	if typeof(tr) == TYPE_DICTIONARY:
+		for v in tr.values():
+			for m in _word_re.search_all(str(v)):
+				_allowed[m.get_string()] = true
+	for n in DataDB.npcs.values():
+		for w in str(n.get("name", "")).split(" "):
+			_allowed[w] = true
+	var mk: Dictionary = DataDB._read("res://data/economy/marketplace.json")
+	for w in mk.get("customer_first_names", []):
+		_allowed[str(w)] = true
+	for w in ["Tab", "Esc", "WASD", "Shift", "F12", "OK", "Guide", "Tour", "Collision", "Check", "Test", "Founder", "Alex", "Rivera",
+			"Riverlight", "Goods", "Co", "LLC", "Ltd", "Inc"]:
+		_allowed[w] = true
+
+
+func _process(delta: float) -> void:
+	if not audit_on:
+		return
+	_audit_t += delta
+	if _audit_t < 0.5:
+		return
+	_audit_t = 0.0
+	# text the tutorial draws itself (arrow label, coach bubble) isn't in any Label
+	var tut := UIRoot.tutorial
+	for dt in [str(tut._target.get("label", "")), tut._coach_hint, tut._coach_step]:
+		_audit_one(dt, null)
+	for c in get_tree().root.find_children("*", "Control", true, false):
+		var ctl := c as Control
+		if not ctl.is_visible_in_tree() or ctl is LineEdit:
+			continue
+		var t := ""
+		if ctl is Label:
+			t = (ctl as Label).text
+		elif ctl is Button:
+			t = (ctl as Button).text
+		elif ctl is RichTextLabel:
+			t = (ctl as RichTextLabel).get_parsed_text()
+		if t == "":
+			continue
+		if ctl.can_auto_translate():
+			t = ctl.atr(t)   # what is actually drawn: the text property keeps the English msgid
+		_audit_one(t, ctl)
+
+
+func _audit_one(t: String, ctl: Control) -> void:
+	if t == "":
+		return
+	var bad: Array = []
+	for m in _word_re.search_all(t):
+		var w := m.get_string()
+		if not _allowed.has(w) and not _allowed.has(w.capitalize()):
+			bad.append(w)
+	if bad.is_empty():
+		return
+	if not audit.has(t):
+		var ws := SceneRouter.world_scene()
+		var tm := UIRoot.top_modal()
+		audit[t] = {"words": bad, "scene": ws.scene_id if ws != null else "", "screen": (tm.get_script().get_global_name() if tm != null and tm.get_script() != null else ""),
+			"node": str(ctl.get_path()).right(80) if ctl != null else "(drawn)", "step": step_name}
 
 
 func _run() -> void:
@@ -52,6 +127,8 @@ func _run() -> void:
 			await _minigames()
 		"tutorial":
 			await _tutorial_tour()
+		"solids":
+			await _solids()
 	_finish()
 
 
@@ -65,6 +142,12 @@ func _finish() -> void:
 	if res:
 		res.store_string(JSON.stringify({"failures": failures, "steps": log_lines.size(), "screenshots": shot_n}, "  "))
 		res.close()
+	if audit_on:
+		var af := FileAccess.open(out_dir + "/english_audit.json", FileAccess.WRITE)
+		if af:
+			af.store_string(JSON.stringify(audit, "  ", true))
+			af.close()
+		log_line("English audit: %d on-screen text(s) with untranslated words" % audit.size())
 	if quit_at_end:
 		get_tree().quit(0 if failures.is_empty() else 1)
 
@@ -467,6 +550,21 @@ func _screens() -> void:
 		await shot("screen_closing_statement")
 	expect(GameState.company_id() == "", "company closed from the insolvency screen")
 	expect(Ledger.check_balanced(), "ledger balanced after closing")
+	UIRoot.close_all()
+	# saved games: two games side by side, and the title screen lists both
+	SaveSystem.save(2)
+	GameState.new_game({"name": "Second Founder", "seed": 8})
+	var second := SaveSystem.current_slot()
+	SaveSystem.save(second)
+	expect(second != 2 and SaveSystem.has_save(2), "a new game didn't touch the first save (slot %d vs 2)" % second)
+	SceneRouter.go_menu()
+	await wait(1.0)
+	await shot("screen_title_saves")
+	await click_named("LoadGame", 2.0)
+	await wait(0.6)
+	await shot("screen_load_game")
+	expect(button_named("Load_2") != null and button_named("Load_%d" % second) != null, "both games can be loaded")
+	UIRoot.close_all()
 
 
 func _shots() -> void:
@@ -629,8 +727,8 @@ func _minigames() -> void:
 	await click_named("Seal", 1.0)
 	expect(pk.points > 0.9, "a well packed order scores high (%.2f)" % pk.points)
 	await _mg_finish(pk, "pack")
-	var ty: TypingGame = await _mg_open(TypingGame.new("saas", "salon_booking", 2.0, "Coding session — Glow Book"), "typing")
-	var line := str(ty.lines[0])
+	var ty: TypingGame = await _mg_open(TypingGame.new("saas", "salon_booking", 2.0, I18n.t("Coding session — %s") % "Glow Book"), "typing")
+	var line := str(ty.lines[ty.li])
 	for c in line.substr(ty.col):
 		var ev := InputEventKey.new()
 		ev.pressed = true
@@ -641,7 +739,7 @@ func _minigames() -> void:
 		if ty.round_i > 0:
 			break
 	await wait(0.2)
-	expect(ty.round_i >= 1, "typing a whole line moves on to the next")
+	expect(ty.round_i >= 1 or ty.phase == "results", "typing a whole line moves on to the next")
 	await _mg_finish(ty, "typing")
 
 
@@ -703,18 +801,125 @@ func _tutorial_tour() -> void:
 	await wait(0.6)
 	await shot("tut_os_buy")
 	await click_named("Buy_tradelink_wholesale_phone_stand", 2.0)
-	UIRoot.close_all()
-	await wait(1.8)
-	expect(_tut_step() == "job", "after buying stock: get a job while it travels (%s)" % _tut_step())
-	UIRoot.open_modal(BusinessBoard.new())
-	await wait(0.6)
-	await click_named("Page_jobs", 2.0)
-	await wait(0.6)
-	await shot("tut_jobs")
-	UIRoot.close_all()
-	Careers.hire("barista")
 	await wait(1.6)
-	SceneRouter._enter("district", "riverside", "door_bloom_coffee", "down")
+	expect(_tut_step() == "shoot", "the first stock arrives at once: list it (%s)" % _tut_step())
+	expect(GameState.stat("stock_received") >= 1, "stock delivered on the spot")
+	await shot("tut_os_sales")
+	await click_named("Tab_sales", 2.0)
+	await wait(0.6)
+	await click_named("ListSelf_phone_stand", 2.0)
+	await until(func(): return UIRoot.top_modal() is MiniGame, 3.0)
+	await until(func(): return not (UIRoot.top_modal() is MiniGame), 8.0)   # the photo shoot, autoplayed
+	await wait(0.8)
+	UIRoot.close_all()
+	await wait(1.6)
+	expect(_tut_step() == "order", "listed: wait for the first order (%s)" % _tut_step())
+	SceneRouter._enter("interior", "riverside_apartment", "door", "up")
+	await wait(1.4)
+	await shot("tut_order_wait")
+	var got := await until(func(): return GameState.stat("orders_placed") >= 1, 25.0)
+	expect(got, "the first order comes in within minutes")
+	await wait(1.6)
+	expect(_tut_step() == "pack", "pack it (%s)" % _tut_step())
+	await use_action("pack_orders")
+	await wait(0.6)
+	await shot("tut_pack")
+	await click_named("Pack", 3.0)
+	await until(func(): return not (UIRoot.top_modal() is MiniGame), 8.0)
+	await wait(1.4)
+	expect(_tut_step() == "ship", "then send it (%s)" % _tut_step())
+	await shot("tut_ship")
+	await click_named("Carry", 3.0)
+	await wait(0.4)
+	UIRoot.close_all()
+	await wait(1.4)
+	expect(_tut_step() == "dropoff", "carry it to PostPoint (%s)" % _tut_step())
+	SceneRouter._enter("interior", "postpoint_riverside", "door", "up")
 	await wait(2.0)
-	await shot("tut_to_shift")
+	await use_action("dropoff_parcels")
+	await wait(0.6)
+	await shot("tut_dropoff")
+	await click_named("DropEconomy", 3.0)
+	await wait(0.4)
+	UIRoot.close_all()
+	await wait(1.4)
+	expect(_tut_step() == "paid", "on its way (%s)" % _tut_step())
+	got = await until(func(): return GameState.stat("orders_delivered") >= 1, 30.0)
+	expect(got, "the first parcel is delivered within minutes")
+	await wait(1.6)
+	expect(_tut_step() == "job", "first sale done: now a job on the side (%s)" % _tut_step())
+	SceneRouter._enter("interior", "bloom_coffee", "door", "up")
+	await wait(2.0)
+	await shot("tut_job_door")
+	await use_action("work_shift")
+	await wait(0.6)
+	await click_named("ApplyJob", 3.0)
+	await wait(1.6)
+	expect(_tut_step() == "shift", "hired: work a shift (%s)" % _tut_step())
+	await shot("tut_shift_ready")
+	if Careers.shift_block("barista") == "":
+		await click_named("WorkShift", 3.0)
+		await until(func(): return UIRoot.top_modal() is MiniGame, 3.0)
+		await until(func(): return not (UIRoot.top_modal() is MiniGame), 12.0)   # the barista shift, autoplayed
+		await wait(2.4)
+	else:
+		log_line("  (shift blocked: %s)" % Careers.shift_block("barista"))
+	UIRoot.close_all()
+	await wait(1.0)
+	log_line("  after the shift: %s, step %s" % [Clock.fmt_datetime(), _tut_step()])
+	if _tut_step() == "sleep":
+		while Clock.hour() < 19:
+			Clock.advance(30)
+		SceneRouter._enter("interior", "riverside_apartment", "door", "up")
+		await wait(1.6)
+		await shot("tut_sleep")
+		await use_action("sleep")
+		await wait(0.6)
+		await click_named("Sleep", 3.0)
+		await wait(3.0)
+		await shot("tut_graduate")
+		expect(UIRoot.top_modal() is InfoModal, "the first venture ends with the what's-next card")
+		expect(not UIRoot.tutorial.is_active(), "the guided first venture is complete")
 	log_line("  tutorial at step %s" % _tut_step())
+
+
+# ------------------------------------------------------------------ collision check
+## Draws every solid (red) over a few busy scenes, and walks the player into a doorway edge to check corner sliding.
+func _solids() -> void:
+	GameState.new_game({"name": "Collision Check", "seed": 5})
+	GameState.data["tutorial"] = {"step": 99, "seen": {}, "off": true, "v": 3}
+	UIRoot.set_hud_visible(true)
+	await SceneRouter.begin_world()
+	await wait(1.0)
+	GameState.set_flag("maya_intro_done")
+	for sc in [["interior", "riverside_apartment", "door"], ["interior", "bloom_coffee", "door"], ["interior", "nexus_cowork", "door"],
+			["interior", "threadline_apparel", "door"], ["district", "riverside", "door_bloom_coffee"], ["district", "startup_hub", "door_nexus_cowork"]]:
+		SceneRouter._enter(sc[0], sc[1], sc[2], "down")
+		await wait(1.6)
+		var ws := scene()
+		var ov := _SolidOverlay.new()
+		ov.rects = ws.solids.duplicate()
+		ov.z_index = 50
+		ws.add_child(ov)
+		await wait(0.3)
+		await shot("solids_%s" % sc[1])
+	# corner sliding: walk up into the co-work, starting 4 px off the door's centre line, and expect to get in
+	SceneRouter._enter("district", "startup_hub", "door_nexus_cowork", "down")
+	await wait(1.4)
+	var d: Vector2 = scene().spawns["door_nexus_cowork"]
+	player().global_position = Vector2(d.x + 4, d.y + 26)
+	await wait(0.2)
+	Input.action_press("move_up")
+	var ok := await until(func(): return scene() != null and scene().scene_id == "nexus_cowork", 4.0)
+	Input.action_release("move_up")
+	expect(ok, "walking straight up at a doorway lets you in, even slightly off-centre")
+
+
+class _SolidOverlay:
+	extends Node2D
+	var rects: Array = []
+
+	func _draw() -> void:
+		for r in rects:
+			draw_rect(r, Color(1, 0, 0, 0.35))
+			draw_rect(r, Color(1, 0.2, 0.2, 0.9), false, 1.0)

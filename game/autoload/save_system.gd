@@ -3,7 +3,10 @@ extends Node
 ## and player position, never "just the scene".
 
 var DIR := "user://saves"
+## Every game lives in its own slot and autosaves there, so starting a new game never touches another one.
+## Slot 0 is where games from before 0.1.6 autosaved; they keep saving there when continued.
 const AUTOSAVE_SLOT := 0
+const GAME_SLOTS := [1, 2, 3, 4, 5, 6]
 ## Continuous autosave: every scene change, every AUTOSAVE_EVERY real seconds of play when something
 ## moved, when the window loses focus or closes, and (web) when the tab is hidden or reloaded — a
 ## refresh never costs more than a few seconds of play.
@@ -13,6 +16,7 @@ signal saved(slot: int)
 signal loaded(slot: int)
 
 var autosave_enabled := true
+var next_slot := -1        # the slot the title screen picked for the next new game (when every slot is taken)
 var _since := 0.0
 var _last_sig := ""
 var _js_cbs: Array = []   # JavaScriptBridge callbacks must stay referenced
@@ -73,10 +77,60 @@ func has_save(slot: int) -> bool:
 	return FileAccess.file_exists(_path(slot))
 
 
+## The slot the game in memory saves to.
+func current_slot() -> int:
+	if not GameState.has_game():
+		return -1
+	return int(GameState.data.get("meta", {}).get("slot", AUTOSAVE_SLOT))
+
+
+func free_slot() -> int:
+	for s in GAME_SLOTS:
+		if not has_save(s):
+			return s
+	return -1
+
+
+## Called when a new game is created: the slot it will live in. The title screen asks before a save is replaced
+## (next_slot); a replaced save is moved to saves/replaced/, never deleted.
+func claim_slot() -> int:
+	var s := next_slot if next_slot >= 0 else free_slot()
+	next_slot = -1
+	if s < 0:
+		var oldest := INF
+		for g in GAME_SLOTS:
+			var t := float(summary(g).get("saved_unix", 0))
+			if t < oldest:
+				oldest = t
+				s = g
+	if has_save(s):
+		backup(s)
+	return s
+
+
+## Move a slot's file into saves/replaced/ (kept, just out of the list).
+func backup(slot: int) -> void:
+	var dir := DIR + "/replaced"
+	DirAccess.make_dir_recursive_absolute(dir)
+	DirAccess.rename_absolute(_path(slot), "%s/slot_%d_%d.json" % [dir, slot, int(Time.get_unix_time_from_system())])
+
+
+## Every saved game, newest first: [{slot, summary}].
+func save_list() -> Array:
+	var out: Array = []
+	for s in [AUTOSAVE_SLOT] + GAME_SLOTS:
+		if has_save(s):
+			var sm := summary(s)
+			if not sm.is_empty():
+				out.append({"slot": s, "summary": sm})
+	out.sort_custom(func(a, b): return float(a["summary"].get("saved_unix", 0)) > float(b["summary"].get("saved_unix", 0)))
+	return out
+
+
 func latest_slot() -> int:
 	var best := -1
 	var best_t := -1.0
-	for s in range(0, 4):
+	for s in [AUTOSAVE_SLOT] + GAME_SLOTS:
 		if has_save(s):
 			var sm := summary(s)
 			if float(sm.get("saved_unix", 0)) > best_t:
@@ -134,6 +188,7 @@ func load_data(slot: int) -> bool:
 		push_error("SaveSystem: incompatible save")
 		return false
 	GameState.data = _migrate(d["data"])
+	GameState.data["meta"]["slot"] = slot     # carry on saving where this game was loaded from
 	GameState.unpack_rng()
 	Clock.clear_pauses()
 	loaded.emit(slot)
@@ -152,7 +207,7 @@ func autosave() -> void:
 	if not GameState.has_game():
 		return
 	_since = 0.0
-	if save(AUTOSAVE_SLOT):
+	if save(current_slot()):
 		var ws := SceneRouter.world_scene()
 		var pos: Vector2 = ws.player.position if ws != null and ws.player != null else Vector2.ZERO
 		_last_sig = "%d|%s|%d|%d|%d" % [Clock.now(), ws.scene_id if ws != null else "", int(pos.x), int(pos.y), int(GameState.data["ledger"]["seq"])]

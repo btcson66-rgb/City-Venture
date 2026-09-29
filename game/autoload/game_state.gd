@@ -28,7 +28,7 @@ func new_game(setup: Dictionary) -> void:
 	var sd: Dictionary = living.get("start_date", {"year": 2031, "month": 6, "day": 1})
 	data = {
 		"meta": {"format": SAVE_FORMAT, "version": ProjectSettings.get_setting("application/config/version", "dev"),
-			"created_unix": Time.get_unix_time_from_system(), "playtime_s": 0.0},
+			"created_unix": Time.get_unix_time_from_system(), "playtime_s": 0.0, "slot": SaveSystem.claim_slot()},
 		"player": {
 			"name": setup.get("name", "Alex"),
 			"appearance": setup.get("appearance", default_appearance()),
@@ -177,6 +177,7 @@ func business_display_name() -> String:
 
 # ------------------------------------------------------------------ messages / timeline
 func add_message(from_id: String, text: String) -> void:
+	text = I18n.t(text)   # a plain English line becomes the player's language; already-translated text passes through
 	data["messages"].append({"t": Clock.now(), "from": from_id, "text": text, "read": false})
 	EventBus.message_received.emit(from_id, text)
 

@@ -4,6 +4,21 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
 謝謝你幫忙測試！這是一款在現代城市裡創業、經營公司的像素風模擬 RPG。
 目前可以完整玩到第一章到第六章（開始電商、賺到第一塊錢、登記公司、月結、聘員工、大合約、現金危機）。
 
+0.1.6 新增（依你的第二次試玩回饋）：
+  ・存檔不會再不見：每場遊戲有自己的存檔欄位，按「新遊戲」會開新欄位，不會蓋掉舊的。
+    標題畫面多了「讀取存檔」，可以選任何一場繼續玩。欄位都滿時會先問你要取代哪一個，
+    被取代的存檔會移到備份資料夾，不會刪掉。
+  ・新手教學不用等：第一次進貨馬上送到，上架後幾分鐘就有第一筆訂單，寄出後幾分鐘就送達。
+    流程改成：進貨 → 拍照上架 → 第一筆訂單 → 打包 → 寄出 → 收錢 → 兼差打工 → 上一個班 → 睡覺，
+    第一天就能跑完。教學結束後，進貨和寄送才恢復正常天數。
+  ・Maya 的訊息：重開遊戲時如果訊息已經讀過，Maya 會再傳一則新訊息，教學可以接著走。
+  ・打字小遊戲變短：只要打程式裡最關鍵的一兩行，其餘已經寫好（灰色）。
+  ・數字 5：標題字型的 5 很像 S，現在所有含數字的標題（金額、時間、分數）改用清楚的字型。
+  ・走路更順：腳底碰撞改成圓角，卡到門邊或桌角時會自動滑開；桌子、樹、路樁只擋實際的底座。
+  ・來晚了也能上班：離打烊不到 4 小時時，會上到打烊為止（按時數給薪），不到 2 小時才不能上班。
+  ・中文版裡的英文：訊息通知、箭頭標籤、街上招牌、完成教學的卡片標題、聯絡人職稱、
+    服飾店「已擁有」等都翻譯了。
+
 0.1.5 新增（依你的試玩回饋）：
   ・新手引導改成「第一次創業」：一步一步帶你跑完整個流程（進貨 → 等貨時打工 → 拍照上架 →
     打包 → 寄出 → 收到錢），跑完才放手讓你自由發展。
@@ -78,9 +93,10 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
 ------------------------------------------------------------
   跟著左上角的「第一次創業」卡片走，它會一步一步告訴你要做什麼、按哪個按鈕。大致流程：
   建立角色 → 看手機 → 出門到 Bloom Coffee 買咖啡 → 往東走到「新創園區」的 Nexus 共享辦公室
-  → 買日票 → 看「創業佈告欄」選電商 → 打開 Company OS 進貨 → 等貨時去應徵兼職、上一個班（小遊戲）
-  → 晚上回家睡覺 → 貨到了自己拍照上架（小遊戲）→ 等訂單 → 到打包桌親手打包（小遊戲）→ 寄出
-  → 賺到第一塊錢 → 處理客人退貨
+  → 買日票 → 看「創業佈告欄」選電商 → 打開 Company OS 進貨（馬上送到）→ 自己拍照上架（小遊戲）
+  → 幾分鐘後第一筆訂單 → 回家到打包桌親手打包（小遊戲）→ 寄出 → 收到錢
+  → 到 Bloom Coffee 員工通道接咖啡師的工作、上一個班（小遊戲）→ 晚上回家睡覺
+  → 之後自由發展：處理客人退貨
   → 搭捷運到「市政中心」登記公司 → 到「金融區」Nexus 銀行開公司帳戶
   → 決定在哪裡辦公 → 一路經營到 6 月底，看「月結」報表。
   有空可以逛逛購物街：從市政中心往西走，到 Threadline 買件衣服、週末看看市集。
@@ -135,6 +151,14 @@ CITY VENTURE — Test build {VERSION} ({DATE})  ·  English
 Thanks for testing! This build plays Chapters 1–6: start an online shop, earn your first dollar, register a
 company, close a month, hire staff, land Crestline's big contract and survive the cash crunch. Also playable:
 part-time jobs, freelance consulting and a SaaS product.
+
+NEW IN 0.1.6: every game has its own save slot, so New Game never overwrites the game you were playing; the title
+screen lists all saves (Load game) and asks before replacing one (the old file is kept in a backup folder) · the
+guided first venture has no waiting: the first stock arrives at once, the first order minutes after listing, the
+first parcel is delivered within the hour; the job and the first shift come after the first sale · typing sessions
+are a couple of key lines, not the whole file · headline numbers use a clear font (the pixel 5 looked like an S) ·
+smoother walking: rounded feet, sliding round corners, props block only where they stand · a late shift runs until
+closing time · untranslated English in the Chinese UI fixed (notifications, arrow labels, street signs, headings).
 
 NEW IN 0.1.5: a guided "first venture" walks you through the whole loop (buy stock, work a part-time shift while it
 travels, shoot and list, pack, ship, get paid) before setting you free; a bigger gold arrow, and the button to press is

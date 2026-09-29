@@ -46,7 +46,7 @@ func _ready() -> void:
 	tv.add_child(date_label)
 	var trow := UIK.hbox(4)
 	tv.add_child(trow)
-	time_label = UIK.title("", 11)
+	time_label = UIK.title("", 11, Art.C_WHITE, true)
 	trow.add_child(time_label)
 	part_label = UIK.label("", 7, Art.C_SKY, true)
 	trow.add_child(part_label)
@@ -78,7 +78,7 @@ func _ready() -> void:
 	var ml := UIK.vbox(0)
 	mh.add_child(ml)
 	ml.add_child(UIK.label("PERSONAL", 6, Art.C_DIM, true))
-	cash_label = UIK.title("", 11, Art.C_GREEN)
+	cash_label = UIK.title("", 11, Art.C_GREEN, true)
 	ml.add_child(cash_label)
 	today_label = UIK.label("", 6, Art.C_GREEN, true)
 	ml.add_child(today_label)
@@ -90,7 +90,7 @@ func _ready() -> void:
 	co_name = UIK.label("", 6, Art.C_DIM, true)
 	co_name.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	cl.add_child(co_name)
-	co_label = UIK.title("", 10, Art.C_GREEN)
+	co_label = UIK.title("", 10, Art.C_GREEN, true)
 	cl.add_child(co_label)
 	money_panel = mp
 	# quick bar: phone / map / menu as real buttons on a solid chip, so they read over any scene and can
@@ -253,7 +253,7 @@ func refresh() -> void:
 
 
 func _on_saved(slot: int) -> void:
-	if slot != SaveSystem.AUTOSAVE_SLOT or not visible:
+	if slot != SaveSystem.current_slot() or not visible:
 		return
 	save_chip.reset_size()
 	save_chip.position = Vector2(640 - 8 - save_chip.size.x, 360 - 97)

@@ -181,7 +181,7 @@ func _messages() -> void:
 		var unread: int = GameState.data["messages"].filter(func(x): return x["from"] == from and not x.get("read", false)).size()
 		var b := UIK.button("", _open_thread.bind(from))
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
-		b.text = "%s%s\n%s" % [I18n.t(DataDB.npc(from).get("name", from)), "  ●" if unread > 0 else "", str(m["text"]).left(26)]
+		b.text = "%s%s\n%s" % [I18n.t(DataDB.npc(from).get("name", from)), "  ●" if unread > 0 else "", I18n.t(str(m["text"])).left(26)]
 		b.add_theme_font_size_override("font_size", 7)
 		b.custom_minimum_size = Vector2(126, 24)
 		b.name = "Thread_" + from
@@ -209,7 +209,7 @@ func _thread() -> void:
 		var v := UIK.vbox(0)
 		p.add_child(v)
 		v.add_child(UIK.label(Clock.fmt_short(int(m["t"])), 6, Art.C_DIM))
-		v.add_child(UIK.wrap(str(m["text"]), 7, Art.C_WHITE, 118))
+		v.add_child(UIK.wrap(I18n.t(str(m["text"])), 7, Art.C_WHITE, 118))
 		content.add_child(p)
 
 
@@ -279,14 +279,11 @@ func _timeline() -> void:
 
 func _save() -> void:
 	_header("Save game")
-	for s in [1, 2, 3]:
-		var sm := SaveSystem.summary(s)
-		var label := I18n.t("Slot %d — %s") % [s, (I18n.t("Day %d · %s") % [int(sm.get("day", 0)), Fmt.money0(float(sm.get("cash", 0)))]) if not sm.is_empty() else "empty"]
-		var b := UIK.button(label, func():
-			if SaveSystem.save(s):
-				UIRoot.toast(I18n.t("Saved to slot %d.") % s, "good", "save")
-				_render())
-		b.name = "Save_%d" % s
-		b.add_theme_font_size_override("font_size", 7)
-		content.add_child(b)
-	content.add_child(UIK.label("Autosave: every night you sleep.", 6, Art.C_DIM))
+	var b := UIK.button("Save now", func():
+		SaveSystem.autosave()
+		UIRoot.toast(I18n.t("Saved (slot %d).") % SaveSystem.current_slot(), "good", "save")
+		_render(), "primary")
+	b.name = "SaveNow"
+	b.add_theme_font_size_override("font_size", 7)
+	content.add_child(b)
+	content.add_child(UIK.wrap(I18n.t("This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen.") % SaveSystem.current_slot(), 6, Art.C_DIM, 124))
