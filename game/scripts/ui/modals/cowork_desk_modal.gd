@@ -5,6 +5,7 @@ extends Modal
 func _init() -> void:
 	title_text = "Nexus Co-work — Reception"
 	icon_name = "people"
+	help_key = "cowork_desk"
 	panel_size = Vector2(360, 190)
 
 

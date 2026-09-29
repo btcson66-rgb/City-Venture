@@ -41,6 +41,7 @@ func _init(term: String) -> void:
 	panel_size = Vector2(624, 344)
 	title_text = "COMPANY OS"
 	icon_name = "laptop"
+	help_key = "os_overview"
 
 
 func _ready() -> void:
@@ -89,7 +90,9 @@ func build() -> void:
 
 func _set_tab(t: String) -> void:
 	tab = t
+	help_key = "os_" + t   # the ? button explains the tab you're on
 	rebuild()
+	Help.show_once.call_deferred(help_key)
 
 
 func _open_offers() -> int:
@@ -381,14 +384,25 @@ func _status_col(s: String) -> Color:
 
 
 func _list(pid: String, photo: String) -> void:
-	var r := Ecommerce.create_listing(pid, float(new_price.get(pid, 20.0)), photo)
+	if photo == "self":
+		# you shoot the photos yourself: set up the table, frame it, press the shutter
+		MiniGames.play(PhotoShootGame.new(pid), func(res: Dictionary):
+			if not res.get("aborted", false):
+				_do_list(pid, "self", float(res.get("score", 0.6))))
+		return
+	_do_list(pid, photo, -1.0)
+
+
+func _do_list(pid: String, photo: String, photo_q: float) -> void:
+	var r := Ecommerce.create_listing(pid, float(new_price.get(pid, 20.0)), photo, photo_q)
 	if not r["ok"]:
 		UIRoot.toast(r["error"], "bad", "warning")
 		return
 	var mins := int(DataDB.marketplace().get("listing_minutes", 20)) + (int(DataDB.marketplace().get("self_photo_minutes", 60)) if photo == "self" else 0)
 	Clock.advance(mins)
 	UIRoot.toast(I18n.t("Listed %s at %s. Took %s.") % [I18n.t(DataDB.product(pid)["name"]), Fmt.money(new_price[pid]), Fmt.duration_min(mins)], "good", "orders")
-	rebuild()
+	if is_inside_tree():
+		rebuild()
 
 
 # ============================================================== OPERATIONS
@@ -866,15 +880,37 @@ func _tab_freelance() -> void:
 		content.add_child(UIK.kv("Invoiced, not yet paid", Fmt.money(owed), Art.C_GOLD))
 
 
+## You write the code yourself: a typing session (TypingGame) decides how much of the 2 hours got done.
+func _code_session() -> void:
+	var h := float(Saas.cfg().get("founder_session_hours", 2))
+	var heading := I18n.t("Coding session — %s") % str(Saas.idea().get("name", ""))
+	MiniGames.play(TypingGame.new("saas", str(Saas.S().get("idea", "")), h, heading), func(res: Dictionary):
+		if res.get("aborted", false):
+			return
+		Saas.add_dev(float(res.get("hours", h)), true, h)
+		UIRoot.toast(I18n.t("Coding session done: %.1f hours of work.") % float(res.get("hours", h)), "good", "laptop")
+		if is_inside_tree():
+			rebuild())
+
+
 func _work_gig(gid: String) -> void:
-	var r := Careers.work_on(gid)
+	var g: Dictionary = Careers.F()["gigs"].get(gid, {})
+	var h := float(Careers.session_hours())
+	MiniGames.play(TypingGame.new("freelance", "", h, Careers.gig_title(g) if not g.is_empty() else "Client work"), func(res: Dictionary):
+		if not res.get("aborted", false):
+			_apply_gig(gid, float(res.get("hours", h))))
+
+
+func _apply_gig(gid: String, progress: float) -> void:
+	var r := Careers.work_on(gid, progress)
 	if not r["ok"]:
 		UIRoot.toast(I18n.t(str(r["error"])), "warn", "lock")
 	elif r["delivered"]:
 		UIRoot.toast(I18n.t("Delivered and invoiced: %s.") % Fmt.money(r["fee"]) + (I18n.t(" (late: -20%)") if r["late"] else ""), "good" if not r["late"] else "warn", "check")
 	else:
-		UIRoot.toast(I18n.t("Two focused hours. %s") % Clock.fmt_time(), "info", "clock")
-	rebuild()
+		UIRoot.toast(I18n.t("Two focused hours: %.1f hours of the work done. %s") % [progress, Clock.fmt_time()], "info", "clock")
+	if is_inside_tree():
+		rebuild()
 
 
 # ============================================================== SAAS
@@ -927,9 +963,7 @@ func _tab_saas() -> void:
 		content.add_child(UIK.label(I18n.t("MVP: %d / %d dev hours · your team adds %.1f h per workday") % [int(s["dev_done"]), int(Saas.dev_needed()), Staff.dev_hours_per_day()], 8, Art.C_WHITE, true))
 		var row := UIK.hbox(6)
 		content.add_child(row)
-		var cb := UIK.button(I18n.t("Code for %d hours") % int(Saas.cfg().get("founder_session_hours", 2)), func():
-			Saas.add_dev(float(Saas.cfg().get("founder_session_hours", 2)), true)
-			rebuild(), "primary")
+		var cb := UIK.button(I18n.t("Code for %d hours") % int(Saas.cfg().get("founder_session_hours", 2)), _code_session, "primary")
 		cb.name = "SaasCode"
 		row.add_child(cb)
 		var lb := UIK.button(I18n.t("Launch at %s/month") % Fmt.money0(float(s["price"])), func():
@@ -975,9 +1009,7 @@ func _tab_saas() -> void:
 		var ab := UIK.button(Fmt.money0(a), func(): Saas.set_ads(a); rebuild(), "tab_active" if is_equal_approx(float(s["ads_per_day"]), a) else "tab")
 		ab.name = "SaasAds_%d" % int(a)
 		pr.add_child(ab)
-	var cb2 := UIK.button(I18n.t("Code a feature for %d hours") % int(Saas.cfg().get("founder_session_hours", 2)), func():
-		Saas.add_dev(float(Saas.cfg().get("founder_session_hours", 2)), true)
-		rebuild())
+	var cb2 := UIK.button(I18n.t("Code a feature for %d hours") % int(Saas.cfg().get("founder_session_hours", 2)), _code_session)
 	cb2.name = "SaasCode"
 	content.add_child(cb2)
 	content.add_child(UIK.wrap("Cheaper brings more signups; features and support keep people subscribed. Servers cost more as you grow.", 7, Art.C_SKY, 480))

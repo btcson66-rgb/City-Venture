@@ -11,6 +11,7 @@ var page := "business"
 func _init() -> void:
 	title_text = "Business Board — Nexus Co-work"
 	icon_name = "tasks"
+	help_key = "business_board"
 	panel_size = Vector2(520, 300)
 
 

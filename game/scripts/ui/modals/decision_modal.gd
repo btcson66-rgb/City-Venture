@@ -13,6 +13,7 @@ func _init(i: Dictionary) -> void:
 	var pres: Dictionary = def.get("presentation", {})
 	title_text = pres.get("title", "Decision")
 	icon_name = pres.get("icon", "warning")
+	help_key = "decision"
 	panel_size = Vector2(400, 230)
 	closable = false
 

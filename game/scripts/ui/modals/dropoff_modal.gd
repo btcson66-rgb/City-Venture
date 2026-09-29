@@ -5,6 +5,7 @@ extends Modal
 func _init() -> void:
 	title_text = "PostPoint — drop-off"
 	icon_name = "parcel"
+	help_key = "dropoff"
 	panel_size = Vector2(360, 170)
 
 

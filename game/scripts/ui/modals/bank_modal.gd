@@ -11,6 +11,7 @@ func _init(is_atm := false) -> void:
 	atm = is_atm
 	title_text = I18n.t("Nexus Bank — ") + ("ATM" if atm else "Business banking")
 	icon_name = "bank"
+	help_key = "bank"
 	panel_size = Vector2(440, 270)
 
 

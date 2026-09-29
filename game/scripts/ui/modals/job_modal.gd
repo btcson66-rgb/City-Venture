@@ -11,6 +11,7 @@ func _init(id: String) -> void:
 	var j := Careers.job_def(id)
 	title_text = I18n.t("Part-time job — %s") % I18n.t(str(j.get("employer", "")))
 	icon_name = "people"
+	help_key = "job"
 	panel_size = Vector2(420, 262)
 
 
@@ -45,6 +46,7 @@ func build() -> void:
 		v.add_child(UIK.label(I18n.t("$%d/h · from %d shifts") % [int(r["wage"]), int(r["shifts"])], 6, Art.C_MUTED))
 		ladder.add_child(p)
 	body.add_child(UIK.label(I18n.t("Shifts worked: %d") % Careers.shifts(job_id), 7, Art.C_MUTED, true))
+	body.add_child(UIK.label("You do the work yourself: the better the shift goes, the more you earn (60% of the wage is guaranteed).", 7, Art.C_SKY))
 	var nr := Careers.next_rank(job_id)
 	if not nr.is_empty():
 		body.add_child(UIK.label(I18n.t("%d more shift(s) to %s") % [int(nr["shifts"]) - Careers.shifts(job_id), I18n.t(str(nr["title"]))], 7, Art.C_SKY))
@@ -54,7 +56,7 @@ func build() -> void:
 		var here := SceneRouter.world_scene() != null and SceneRouter.world_scene().scene_id == str(j["building"])
 		if not here:
 			why = "go to the workplace to work a shift"
-		var b := UIK.button(I18n.t("Work a 4-hour shift (+%s)") % Fmt.money(Careers.shift_pay(job_id)), _work, "primary")
+		var b := UIK.button(I18n.t("Start a 4-hour shift (up to +%s)") % Fmt.money(Careers.shift_pay(job_id)), _work, "primary")
 		b.name = "WorkShift"
 		b.disabled = why != ""
 		footer.add_child(b)

@@ -3,6 +3,7 @@ extends Modal
 ## Simple readable content: news board, loan brochure, permits kiosk, whiteboard.
 
 var lines: Array = []
+var ok_text := "Close"
 
 
 static func make(t: String, ic: String, ls: Array, size := Vector2(380, 220)) -> InfoModal:
@@ -26,7 +27,27 @@ func build() -> void:
 		else:
 			v.add_child(UIK.wrap(str(l), 8, Art.C_WHITE, 350))
 	body.add_child(UIK.scroll(v, Vector2(360, panel_size.y - 70)))
-	footer.add_child(UIK.button("Close", close, "", 70))
+	footer.add_child(UIK.button(ok_text, close, "primary" if ok_text != "Close" else "", 70))
+
+
+## Shown when the guided first venture is done: what the player just did, and what else there is.
+static func first_venture() -> InfoModal:
+	var m := make("Your first business loop", "star", [
+		"# YOU DID THE WHOLE LOOP",
+		"Buy stock → work a job while it travels → shoot and list → sell → pack → ship → get paid.",
+		"---",
+		"# FROM HERE IT'S YOUR CALL",
+		"• Grow the shop: more products, better photos, ads (Company OS → Sales).",
+		"• Make it official: register a company at City Hall (Civic Center), then open a business account at Nexus Bank.",
+		"• Keep your job and get promoted, or switch jobs: Business Board → Part-time jobs.",
+		"• Take consulting work you do yourself: Company OS → Freelance.",
+		"• Build a software product: SaaS on the Business Board.",
+		"• Explore: Shopping Street is west of Civic Center.",
+		"---",
+		"Every screen has a ? button in its top corner that explains how it works. The gold arrow keeps pointing at your story goal."],
+		Vector2(430, 262))
+	m.ok_text = "Let's go"
+	return m
 
 
 static func news() -> InfoModal:

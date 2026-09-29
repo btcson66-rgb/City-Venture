@@ -9,6 +9,7 @@ func _init(property_id: String) -> void:
 	var p: Dictionary = DataDB.properties.get(pid, {})
 	title_text = I18n.t("Lease — ") + I18n.t(str(p.get("name", pid)))
 	icon_name = "company"
+	help_key = "lease"
 	panel_size = Vector2(380, 210)
 
 

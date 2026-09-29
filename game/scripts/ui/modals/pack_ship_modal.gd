@@ -10,6 +10,7 @@ func _init(loc: String) -> void:
 	location = loc
 	title_text = I18n.t("Packing table — %s") % Ecommerce.location_name(loc)
 	icon_name = "parcel"
+	help_key = "packing"
 	panel_size = Vector2(420, 250)
 
 
@@ -56,14 +57,26 @@ func build() -> void:
 	footer.add_child(UIK.button("Done", close, "", 70))
 
 
+## You pack by hand (PackGame): each order's quality follows it to the customer.
 func _pack() -> void:
-	var n := Ecommerce.pack_orders(location)
+	var waiting := Ecommerce.orders_with(["placed"], location).filter(func(o): return Ecommerce.stock(location, str(o["product"])) >= int(o["qty"]))
+	if waiting.is_empty():
+		UIRoot.toast("Nothing to pack here: is the stock at this location?", "warn", "warning")
+		return
+	MiniGames.play(PackGame.new(waiting), func(res: Dictionary):
+		if not res.get("aborted", false):
+			_packed(res.get("quality", {})))
+
+
+func _packed(quality: Dictionary) -> void:
+	var n := Ecommerce.pack_orders(location, -1, quality)
 	if n > 0:
 		Clock.advance(int(DataDB.shipping().get("pack_minutes_per_order", 8)) * n)
 		UIRoot.toast(I18n.t("Packed %d order%s.") % [n, I18n.pl(n)], "good", "parcel")
 	else:
 		UIRoot.toast("Nothing packed — is the stock at this location?", "warn", "warning")
-	rebuild()
+	if is_inside_tree():
+		rebuild()
 
 
 func _courier(method: String) -> void:

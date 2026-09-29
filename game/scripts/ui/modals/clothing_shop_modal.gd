@@ -16,6 +16,7 @@ func _init(store_id := "threadline_apparel") -> void:
 	store = store_id
 	title_text = str(DataDB.building(store).get("name", "Store"))
 	icon_name = "shirt"
+	help_key = "clothing_shop"
 	panel_size = Vector2(452, 238)
 
 

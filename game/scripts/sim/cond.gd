@@ -3,6 +3,7 @@ extends RefCounted
 ## Tiny condition DSL shared by story objectives and events.
 ##   flag:x  !flag:x  visited:x  stat:name>=n  day>=n  cash<n  company_registered  !company_registered
 ##   has_ads  best_rating>=4.2  weekday:mon  hour>=h  has_stock  has_stock:product_id  chapter_done:id  objective_done:id
+##   has_job  desk_access  carrying_parcels
 
 
 static func all(conds: Array, ctx := {}) -> bool:
@@ -54,6 +55,12 @@ static func eval(expr: String, ctx := {}) -> bool:
 			return Ecommerce.total_ad_budget() > 0.0
 		"has_stock":
 			return Ecommerce.total_units() > 0
+		"has_job":
+			return Careers.current_job() != ""
+		"desk_access":
+			return Living.has_desk_access()
+		"carrying_parcels":
+			return Ecommerce.carried_count() > 0
 	var m := _cmp(expr)
 	if m.is_empty():
 		push_warning("Cond: cannot parse " + expr)

@@ -4,6 +4,15 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
 謝謝你幫忙測試！這是一款在現代城市裡創業、經營公司的像素風模擬 RPG。
 目前可以完整玩到第一章到第六章（開始電商、賺到第一塊錢、登記公司、月結、聘員工、大合約、現金危機）。
 
+0.1.5 新增（依你的試玩回饋）：
+  ・新手引導改成「第一次創業」：一步一步帶你跑完整個流程（進貨 → 等貨時打工 → 拍照上架 →
+    打包 → 寄出 → 收到錢），跑完才放手讓你自由發展。
+    金色箭頭放大了；任何視窗打開時，要按的按鈕會出現金色閃框和「按這裡」。
+  ・工作要親手做：5 種兼職、自己拍商品照、打包訂單、寫程式、接案，全部改成小遊戲。
+    做得越好賺越多，拍得越好的照片賣得越好，打包不確實會壓壞、貼錯標籤會晚到。
+  ・時間不能加速：拿掉按住 T 快轉、小睡 2 小時、「快」的一天長度。晚上 7 點後才能睡覺。
+  ・每個畫面都會說明自己：第一次打開會跳出說明卡，之後按標題列的「?」可以再看。
+
 0.1.4 新增：
   ・購物街開放：從市政中心往西走，或搭捷運 M5。週末（六、日 9–18 點）有市集，晚上有串燈。
   ・Threadline 服飾店：可以買五套新衣服（主管、城市精品、旅行、晚宴、現場工作），
@@ -59,7 +68,6 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
   手機            Tab（或點右上角「手機」按鈕）
   城市地圖         M（或點右上角「地圖」按鈕）
   暫停／關閉視窗    Esc（暫停選單可以存檔、讀檔、調整一天長度、切換語言）
-  快轉時間         在城市裡按住 T
   回報問題         F12（網頁版請用 Esc →「回報問題」）
 
   語言：主選單右下角可以切換 English／繁體中文／简体中文，遊戲中也能在暫停選單切換。
@@ -67,10 +75,11 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
 ------------------------------------------------------------
 三、建議怎麼玩（約 30–60 分鐘）
 ------------------------------------------------------------
-  跟著左上角的「目標」走就可以。大致流程：
+  跟著左上角的「第一次創業」卡片走，它會一步一步告訴你要做什麼、按哪個按鈕。大致流程：
   建立角色 → 看手機 → 出門到 Bloom Coffee 買咖啡 → 往東走到「新創園區」的 Nexus 共享辦公室
-  → 看「創業佈告欄」選電商 → 用筆電（或辦公桌）打開 Company OS 進貨 → 睡覺等貨到
-  → 拍照上架 → 等訂單 → 到打包桌打包出貨 → 賺到第一塊錢 → 處理客人退貨
+  → 買日票 → 看「創業佈告欄」選電商 → 打開 Company OS 進貨 → 等貨時去應徵兼職、上一個班（小遊戲）
+  → 晚上回家睡覺 → 貨到了自己拍照上架（小遊戲）→ 等訂單 → 到打包桌親手打包（小遊戲）→ 寄出
+  → 賺到第一塊錢 → 處理客人退貨
   → 搭捷運到「市政中心」登記公司 → 到「金融區」Nexus 銀行開公司帳戶
   → 決定在哪裡辦公 → 一路經營到 6 月底，看「月結」報表。
   有空可以逛逛購物街：從市政中心往西走，到 Threadline 買件衣服、週末看看市集。
@@ -126,6 +135,12 @@ Thanks for testing! This build plays Chapters 1–6: start an online shop, earn 
 company, close a month, hire staff, land Crestline's big contract and survive the cash crunch. Also playable:
 part-time jobs, freelance consulting and a SaaS product.
 
+NEW IN 0.1.5: a guided "first venture" walks you through the whole loop (buy stock, work a part-time shift while it
+travels, shoot and list, pack, ship, get paid) before setting you free; a bigger gold arrow, and the button to press is
+highlighted on every screen · work is played, not skipped: 5 part-time jobs, product photos, packing, coding and
+freelance work are minigames, and how well you do matters · no fast-forward, no naps; sleep from 7 PM · every screen
+explains itself the first time, with a ? button to read it again.
+
 NEW IN 0.1.4: Shopping Street is open (walk west from Civic Center, or take metro M5), with a weekend market
 (Sat/Sun 09-18) and string lights at night · Threadline: buy five new outfits and change in the fitting room or
 your wardrobe at home (looks only) · Lantern Bistro, Crestline's flagship (your lamps on show after Chapter 5),
@@ -150,7 +165,7 @@ START
 CONTROLS
   WASD/arrows move (Shift runs) · E/Space interact (or click the prompt) · Tab phone · M map · Esc pause/close
   The Phone / Map / Menu buttons at the top right can be clicked too. Skip or replay the tutorial in the pause menu.
-  Hold T to fast-forward · F12 report a problem (web: Esc → Report a problem)
+  F12 report a problem (web: Esc → Report a problem)
   Language: bottom-right of the main menu, or in the pause menu.
 
 REPORTING

@@ -15,6 +15,7 @@ var _pin: Control
 func _init(_travel: bool) -> void:
 	title_text = "Aurelia City"
 	icon_name = "map"
+	help_key = "city_map"
 	panel_size = Vector2(632, 352)
 
 

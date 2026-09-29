@@ -1,0 +1,130 @@
+extends RefCounted
+## Hands-on work: shifts pay by how they went, photos and packing quality follow the product, every help key exists,
+## and time can't be skipped.
+
+var runner
+
+
+func test_shift_pay_follows_the_score() -> void:
+	var full := Careers.shift_pay("barista")
+	runner.check(absf(Careers.pay_for("barista", 1.0) - full) < 0.01, "a perfect shift pays the full wage")
+	runner.check(absf(Careers.pay_for("barista", 0.0) - full * 0.6) < 0.01, "60% is guaranteed")
+
+
+func test_a_bad_shift_pays_less_and_does_not_count_toward_promotion() -> void:
+	Careers.hire("barista")
+	while not (Clock.hour() == 9):
+		Clock.advance(60)
+	var r := Careers.work_shift("barista", 0.2, 0.0)
+	runner.check(r["ok"], "shift worked")
+	runner.check(not r["counted"], "a 20% shift doesn't count toward promotion")
+	runner.eq(Careers.shifts("barista"), 0, "no promotion progress")
+	Clock.advance(24 * 60)
+	while not (Clock.hour() == 9):
+		Clock.advance(60)
+	var cash := Ledger.cash("player")
+	var r2 := Careers.work_shift("barista", 1.0, 3.0)
+	runner.check(r2["counted"], "a good shift counts")
+	runner.check(absf(Ledger.cash("player") - cash - (Careers.shift_pay("barista") + 3.0)) < 0.01, "full pay plus tips")
+	runner.check(Ledger.check_balanced(), "ledger balanced")
+
+
+func test_your_own_photos_move_demand() -> void:
+	var l := {"photo": "self", "photo_q": 1.0}
+	runner.check(absf(Ecommerce.photo_factor(l) - 1.1) < 0.001, "a great shoot beats the default")
+	l["photo_q"] = 0.0
+	runner.check(absf(Ecommerce.photo_factor(l) - 0.7) < 0.001, "a bad one costs sales")
+	runner.check(Ecommerce.photo_factor({"photo": "studio"}) > 1.1, "studio photos stay the best")
+
+
+func test_photo_shoot_rates_the_setup() -> void:
+	var g := PhotoShootGame.new("desk_lamp")
+	g.backdrop = "wood"
+	g.light = "window"
+	g.zoom = 5.0
+	g.pos = PhotoShootGame.FRAME / 2.0 - Vector2(40, 40)
+	var good: float = g.rate(1.0)["score"]
+	runner.check(good >= 0.85, "suitable backdrop, soft light, well framed, sharp (%.2f)" % good)
+	g.light = "ceiling"
+	g.pos = Vector2(-60, 20)
+	var bad: float = g.rate(0.2)["score"]
+	runner.check(bad < 0.5, "harsh light, cut off, blurry (%.2f)" % bad)
+	g.free()
+
+
+func test_pack_quality_follows_the_order() -> void:
+	var loc := "riverside_studio"
+	Ecommerce._add_stock(loc, "phone_stand", 5, 2.0, 0.0)
+	var o := {"id": "T1", "product": "phone_stand", "qty": 1, "status": "placed", "location": loc, "entity": "player", "customer": "Rin Tanaka",
+		"unit_price": 14.0, "placed": Clock.now()}
+	GameState.data["ecommerce"]["orders"]["T1"] = o
+	var n := Ecommerce.pack_orders(loc, -1, {"T1": {"q": 0.4, "label_ok": false}})
+	runner.eq(n, 1, "packed")
+	runner.check(absf(float(o["pack_q"]) - 0.4) < 0.001, "pack quality kept on the order")
+	runner.check(not bool(o["label_ok"]), "wrong label kept on the order")
+
+
+func test_barista_orders_follow_the_house_rules() -> void:
+	var g := BaristaGame.new()
+	for i in 60:
+		g.rng.seed = i
+		g.round_i = 0
+		g.stage = Control.new()
+		g.build_round()
+		if g.want["drink"] == "americano":
+			runner.check(g.want["milk"] == "none", "americano without milk")
+		if g.want["drink"] == "flat_white":
+			runner.check(g.want["shots"] == "2", "flat white is a double")
+		g.stage.free()
+	g.free()
+
+
+func test_teller_counts_the_fewest_notes() -> void:
+	runner.eq(TellerCashGame.fewest(187), 7, "$187 = 100 + 50 + 20 + 10 + 5 + 1 + 1")
+	runner.eq(TellerCashGame.fewest(40), 2, "$40 = 20 + 20")
+
+
+func test_typing_output_scales_with_the_score() -> void:
+	var g := TypingGame.new("saas", "salon_booking", 2.0)
+	runner.check(g.lines.size() >= 2, "a snippet to type")
+	g.points = float(g.rounds)
+	runner.check(absf(float(g.extra_result()["hours"]) - 2.5) < 0.01, "perfect typing: 1.25x the session")
+	g.points = 0.0
+	runner.check(absf(float(g.extra_result()["hours"]) - 1.0) < 0.01, "worst case: half the session")
+	g.free()
+
+
+func test_every_screen_help_key_has_a_card() -> void:
+	for f in DirAccess.get_files_at("res://scripts/ui/modals"):
+		if not f.ends_with(".gd"):
+			continue
+		var src := FileAccess.get_file_as_string("res://scripts/ui/modals/" + f)
+		var i := src.find("help_key = \"")
+		while i >= 0:
+			var key := src.substr(i + 12, src.find("\"", i + 12) - i - 12)
+			if not key.ends_with("_"):   # "os_" + tab: the Company OS tabs are checked below
+				runner.check(Help.has(key), "%s: help card '%s' exists" % [f, key])
+			i = src.find("help_key = \"", i + 1)
+	for t in ["overview", "operations", "sales", "inventory", "finance", "people", "contracts", "freelance", "saas"]:
+		runner.check(Help.has("os_" + t), "Company OS tab %s has a help card" % t)
+
+
+func test_tutorial_steps_are_well_formed() -> void:
+	var ids := {}
+	for s in Tutorial.STEPS:
+		runner.check(str(s.get("title", "")) != "" and str(s.get("text", "")) != "", "%s has a title and instructions" % s["id"])
+		runner.check(str(s.get("done", "")) != "", "%s knows when it's done" % s["id"])
+		runner.check(not ids.has(s["id"]), "%s is unique" % s["id"])
+		ids[s["id"]] = true
+		var tg: Dictionary = s.get("target", {})
+		if tg.has("building"):
+			runner.check(DataDB.buildings.has(tg["building"]), "%s points at a real building" % s["id"])
+	var tut := Tutorial.new()
+	runner.check(tut.is_active(), "a new game starts the guided first venture")
+	runner.check(not tut.step_done(Tutorial.STEPS[8]), "buying stock isn't done at the start")
+	tut.free()
+
+
+func test_no_way_to_skip_time() -> void:
+	runner.check(not ("fast_forward" in Clock), "the clock has no fast-forward")
+	runner.check(not InputMap.has_action("fast_forward"), "no fast-forward key")

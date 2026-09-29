@@ -9,6 +9,7 @@ func _init(r: Dictionary) -> void:
 	rep = r
 	title_text = I18n.t("Month Close — %s") % MonthClose.label_of(r)
 	icon_name = "finance"
+	help_key = "month_close"
 	panel_size = Vector2(520, 320)
 
 

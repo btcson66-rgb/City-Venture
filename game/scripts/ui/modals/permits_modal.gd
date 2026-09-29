@@ -7,6 +7,7 @@ extends Modal
 func _init() -> void:
 	title_text = "City Hall — Permits"
 	icon_name = "civic"
+	help_key = "permits"
 	panel_size = Vector2(420, 250)
 
 

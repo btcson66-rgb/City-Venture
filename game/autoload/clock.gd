@@ -14,8 +14,7 @@ const WEEKDAYS := ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 const MONTHS := ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 var speed := 1.5            ## game minutes per real second (≈ 11 real minutes per waking day)
-var fast_forward := false
-var ff_multiplier := 8.0
+## No fast-forward (design): time passes as you live it, by working a shift, or by sleeping at night.
 var world_active := false   ## set by SceneRouter when a world scene is live
 var _pauses := {}
 var _acc := 0.0
@@ -60,7 +59,7 @@ func _process(delta: float) -> void:
 	if is_paused():
 		_acc = 0.0
 		return
-	_acc += delta * speed * (ff_multiplier if fast_forward else 1.0)
+	_acc += delta * speed
 	var steps := int(_acc)
 	if steps > 0:
 		_acc -= steps

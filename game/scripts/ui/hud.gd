@@ -5,7 +5,6 @@ extends Control
 var time_label: Label
 var date_label: Label
 var part_icon: TextureRect
-var ff_label: Label
 var cash_label: Label
 var co_row: HBoxContainer
 var co_label: Label
@@ -51,8 +50,6 @@ func _ready() -> void:
 	trow.add_child(time_label)
 	part_label = UIK.label("", 7, Art.C_SKY, true)
 	trow.add_child(part_label)
-	ff_label = UIK.label("▶▶", 7, Art.C_GOLD, true)
-	trow.add_child(ff_label)
 	# objective
 	obj_panel = UIK.panel("ui/panel_glass", 5)
 	obj_panel.position = Vector2(6, 42)
@@ -223,7 +220,6 @@ func _process(_d: float) -> void:
 	var delta := _delta
 	today_label.text = ("▲ " if delta >= 0 else "▼ ") + Fmt.money(absf(delta)) + I18n.t(" today")
 	today_label.add_theme_color_override("font_color", Art.C_GREEN if delta >= 0 else Art.C_RED)
-	ff_label.visible = Clock.fast_forward and not Clock.is_paused()
 	var pc := Ledger.cash("player")
 	cash_label.text = Fmt.money(pc)
 	cash_label.add_theme_color_override("font_color", Art.C_GREEN if pc >= 1500 else (Art.C_GOLD if pc >= 0 else Art.C_RED))

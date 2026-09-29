@@ -228,6 +228,12 @@ Only Year 1 is active in the slice. The rest is Planned.
 `portraits/outfit_<id>.png` (portrait) exists, when the real art takes over by itself. `npc_tops` (optional) varies the
 colour on passers-by.
 
+### 1.19 Help cards and minigame texts — `data/help/help.json`, `data/minigames/typing.json`
+`help.json`: `{key: {title, lines[]}}`. A Modal with `help_key` shows its card the first time it opens (not while the
+guided first venture runs) and keeps a ? button in its header. Company OS uses `os_<tab>`.
+`typing.json`: `{saas: {<idea_id>: [[line, ...], ...], _generic: [...]}, freelance: [[line, ...], ...]}`. Code and
+spreadsheet formulas stay in English, as they would really be typed.
+
 ---
 
 ## 2. Runtime state (save file)
@@ -236,13 +242,16 @@ colour on passers-by.
 data.player            {name, appearance{presentation,face,hair,hair_color,skin,eye_shape,eye_color,brows,mouth},
                         outfit, wardrobe[outfit ids owned], home:"riverside_studio", location{kind,id,x,y,facing}, flags{}}
                         (saves without `wardrobe` get the three starter outfits plus the one being worn)
-data.clock             {minutes: int (since 2031-06-01 00:00), speed: float}
+data.clock             {minutes: int (since 2031-06-01 00:00), speed: float}   (no fast-forward; speed is Slow 1.0 or Normal 1.5)
+data.tutorial          {v: 2, step, seen{}, off}   (the guided first venture; v1 saves restart at step 0 and skip what's done)
+data.help_seen         {key: true}
 data.entities.<id>     {id, name, kind: person|company|npc_company, founded?, type?, address?, bank_account: bool,
                         properties[], seller_account{type: personal|business, month_gmv}}
 data.ledger            {seq, journal:[{n, t, entity, memo, source{type,id}, lines:[{acct, dr, cr}]}]}
-data.ecommerce         {listings{id:{product, price, photo, ad_budget, active, created, views, orders, rating_sum, rating_n}},
+data.ecommerce         {listings{id:{product, price, photo, photo_q (your own shoot, 0..1), ad_budget, active, created, views, orders, rating_sum, rating_n}},
                         orders{id:{product, qty, unit_price, customer, placed, status, location, ship{method,cost,shipped,eta},
-                                   delivered, payout_batch, return{reason, status}, review}},
+                                   delivered, payout_batch, return{reason, status}, review,
+                                   pack_q, label_ok, damaged}},   (pack_q/label_ok from the packing minigame)
                         purchase_orders{id:{supplier, product, qty, unit_cost, total, placed, eta, location, status, terms}},
                         inventory{location:{product:{qty, avg_cost, defective}}},
                         parcels{location: [order_ids packed awaiting dropoff]},

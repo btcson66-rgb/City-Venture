@@ -9,6 +9,7 @@ var icon_name := ""
 var panel_size := Vector2(420, 250)
 var closable := true
 var dim_alpha := 0.55
+var help_key := ""           # data/help/help.json: shown the first time, and behind the ? button (Help)
 var panel: PanelContainer
 var body: VBoxContainer
 var header: HBoxContainer
@@ -38,6 +39,11 @@ func _ready() -> void:
 	var t := UIK.title(title_text, 12)
 	t.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	header.add_child(t)
+	if help_key != "":
+		var hb := UIK.button("?", func(): Help.open(help_key))
+		hb.name = "Help"
+		hb.custom_minimum_size = Vector2(18, 16)
+		header.add_child(hb)
 	if closable:
 		var x := UIK.button("×", close)
 		x.name = "Close"
@@ -52,6 +58,8 @@ func _ready() -> void:
 	outer.add_child(footer)
 	build()
 	_built = true
+	if help_key != "":
+		Help.show_once.call_deferred(help_key)
 
 
 ## Override: fill `body` and `footer`.

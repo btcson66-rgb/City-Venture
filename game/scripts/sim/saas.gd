@@ -66,12 +66,14 @@ static func dev_needed() -> float:
 
 
 ## Put development hours in (founder at a laptop, or the dev team each workday).
-static func add_dev(hours: float, by_founder := false) -> Dictionary:
+## Add development hours. A founder session also passes time on the clock: `clock_hours` (the session length), or
+## `hours` when not given; the typing minigame decides how many hours of work the session produced.
+static func add_dev(hours: float, by_founder := false, clock_hours := -1.0) -> Dictionary:
 	if not active():
 		return {"ok": false, "error": "No product yet."}
 	var s := S()
 	if by_founder:
-		Clock.advance(int(round(hours * 60)))
+		Clock.advance(int(round((clock_hours if clock_hours >= 0.0 else hours) * 60)))
 		GameState.inc_stat("saas_founder_hours", hours)
 	if not launched():
 		s["dev_done"] = minf(dev_needed(), float(s["dev_done"]) + hours)

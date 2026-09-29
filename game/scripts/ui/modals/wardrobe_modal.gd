@@ -9,6 +9,7 @@ var preview: CharacterRig
 func _init() -> void:
 	title_text = "Wardrobe"
 	icon_name = "shirt"
+	help_key = "wardrobe"
 	panel_size = Vector2(380, 214)
 
 

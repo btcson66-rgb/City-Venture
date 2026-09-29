@@ -9,6 +9,7 @@ func _init(station: String) -> void:
 	from = station
 	title_text = I18n.t("Aurelia Metro — %s") % I18n.t(DataDB.districts.get(station, {}).get("name", station))
 	icon_name = "metro"
+	help_key = "metro"
 	panel_size = Vector2(460, 260)
 
 

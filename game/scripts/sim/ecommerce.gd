@@ -256,7 +256,8 @@ static func listing_for(product_id: String) -> Dictionary:
 
 
 ## Create (or re-shoot) a listing. photo = "self" | "studio". Time cost is applied by the caller (UI) via Clock.advance.
-static func create_listing(product_id: String, price: float, photo: String) -> Dictionary:
+## photo_q: how good your own photos came out (PhotoShootGame, 0..1); -1 = not shot in the minigame.
+static func create_listing(product_id: String, price: float, photo: String, photo_q := -1.0) -> Dictionary:
 	if total_units_at_any(product_id) <= 0:
 		return {"ok": false, "error": "You need the product in hand to photograph it."}
 	var p := DataDB.product(product_id)
@@ -273,6 +274,8 @@ static func create_listing(product_id: String, price: float, photo: String) -> D
 		var lid := "L%d" % int(E()["counters"]["listing"])
 		l = {"id": lid, "product": product_id, "price": price, "photo": photo, "ad_budget": 0.0, "active": true,
 			"created": Clock.now(), "views": 0, "orders": 0, "rating_sum": 0.0, "rating_n": 0, "paused_reason": ""}
+		if photo == "self" and photo_q >= 0.0:
+			l["photo_q"] = photo_q
 		E()["listings"][lid] = l
 		GameState.inc_stat("listings_created")
 		if int(GameState.stat("listings_created")) == 1:
@@ -281,6 +284,8 @@ static func create_listing(product_id: String, price: float, photo: String) -> D
 		l["price"] = price
 		if photo == "studio" or l["photo"] != "studio":
 			l["photo"] = photo
+			if photo == "self" and photo_q >= 0.0:
+				l["photo_q"] = photo_q
 		l["active"] = true
 		l["paused_reason"] = ""
 	EventBus.listing_changed.emit(l["id"])
@@ -363,7 +368,7 @@ static func lambda_day(l: Dictionary) -> float:
 	var price := maxf(1.0, float(l["price"]))
 	var pf := pow(float(p["ref_price"]) / price, float(p["elasticity"]))
 	pf = clampf(pf, 0.05, 3.0)
-	var photo_f := float(mk().get("photo_factor", {}).get(l.get("photo", "self"), 1.0))
+	var photo_f := photo_factor(l)
 	var fresh := 1.0
 	if Clock.now() - int(l.get("created", 0)) < int(mk().get("new_listing_days", 3)) * Clock.DAY:
 		fresh = float(mk().get("new_listing_boost", 1.6))   # marketplaces promote new listings
@@ -485,8 +490,23 @@ static func orders_with(statuses: Array, loc := "") -> Array:
 	return out
 
 
+## How much the listing photo helps: studio photos are fixed; your own depend on how the shoot went.
+static func photo_factor(l: Dictionary) -> float:
+	if l.get("photo", "self") == "self" and l.has("photo_q"):
+		return lerpf(0.7, 1.1, clampf(float(l["photo_q"]), 0.0, 1.0))
+	return float(mk().get("photo_factor", {}).get(l.get("photo", "self"), 1.0))
+
+
 ## Pack every placed order whose stock is at `loc`. Returns number packed. Caller advances time.
-static func pack_orders(loc: String, max_n := -1) -> int:
+## quality: order id → {q, label_ok} from the packing minigame; orders beyond the
+## ones packed by hand get the session's average. Staff packers pass nothing (they pack well).
+static func pack_orders(loc: String, max_n := -1, quality := {}) -> int:
+	var avg := 0.85
+	if not quality.is_empty():
+		avg = 0.0
+		for v in quality.values():
+			avg += float(v["q"])
+		avg /= quality.size()
 	var n := 0
 	for o in orders_with(["placed"], loc):
 		if max_n >= 0 and n >= max_n:
@@ -499,6 +519,10 @@ static func pack_orders(loc: String, max_n := -1) -> int:
 		o["cogs"] = cost
 		o["status"] = "packed"
 		o["packed"] = Clock.now()
+		if not quality.is_empty():
+			var qv: Dictionary = quality.get(str(o["id"]), {"q": avg, "label_ok": true})
+			o["pack_q"] = float(qv["q"])
+			o["label_ok"] = bool(qv["label_ok"])
 		var pack := float(DataDB.product(o["product"]).get("packaging_cost", 0.5))
 		Ledger.post(o["entity"], I18n.t("Packed order %s") % o["id"], [
 			{"acct": "goods_out", "dr": cost}, {"acct": "inventory", "cr": cost},
@@ -587,6 +611,8 @@ static func _ship(o: Dictionary) -> void:
 	o["status"] = "shipped"
 	o["ship"]["shipped"] = Clock.now()
 	var eta := Clock.now() + int(m.get("transit_days", 3)) * Clock.DAY + GameState.randi_range(-240, 240)
+	if not bool(o.get("label_ok", true)):
+		eta += 2 * Clock.DAY   # wrong label: it goes to the wrong address first
 	o["ship"]["eta"] = eta
 	Sim.schedule(eta, "eco.deliver", {"order": o["id"]})
 	GameState.inc_stat("orders_shipped")
@@ -612,6 +638,11 @@ static func _h_deliver(p: Dictionary) -> void:
 	if int(GameState.stat("orders_delivered")) == 1:
 		GameState.timeline(I18n.t("First sale: %s bought %s for %s.") % [o["customer"], pname, Fmt.money(price)], "milestone")
 	EventBus.order_delivered.emit(o["id"])
+	# after-sale: poorly padded parcels arrive broken sometimes (the packing minigame's quality)
+	var pq := float(o.get("pack_q", 1.0))
+	if pq < 0.6 and not o.get("defective", false) and GameState.randf() < (0.6 - pq) * 1.2:
+		o["defective"] = true
+		o["damaged"] = true
 	# after-sale: returns & reviews
 	var p_ret := 0.8 if o.get("defective", false) else float(DataDB.product(o["product"]).get("return_base_rate", 0.03))
 	if GameState.flag("force_next_return") or GameState.randf() < p_ret:

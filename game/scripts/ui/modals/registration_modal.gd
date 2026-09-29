@@ -11,6 +11,7 @@ var done := false
 func _init() -> void:
 	title_text = "Business Registration — City of Aurelia"
 	icon_name = "civic"
+	help_key = "registration"
 	panel_size = Vector2(420, 250)
 
 

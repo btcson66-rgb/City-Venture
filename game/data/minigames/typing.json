@@ -1,0 +1,99 @@
+{
+ "_about": "Texts for the typing minigame (TypingGame). Code and spreadsheet formulas stay in English: they are what you would really type.",
+ "saas": {
+  "salon_booking": [
+   [
+    "def book(slot, client):",
+    "    if slot.taken:",
+    "        return error(\"slot taken\")",
+    "    slot.client = client",
+    "    slot.taken = True",
+    "    send_sms(client.phone, slot.time)",
+    "    return ok(slot)"
+   ],
+   [
+    "SELECT stylist, COUNT(*) AS visits",
+    "FROM bookings",
+    "WHERE day >= '2031-06-01'",
+    "GROUP BY stylist",
+    "ORDER BY visits DESC;"
+   ],
+   [
+    "function freeSlots(day) {",
+    "  return slots.filter(s =>",
+    "    s.day === day && !s.taken",
+    "  );",
+    "}"
+   ]
+  ],
+  "freelancer_invoicing": [
+   [
+    "def invoice_total(items, tax=0.08):",
+    "    subtotal = sum(i.qty * i.rate for i in items)",
+    "    return round(subtotal * (1 + tax), 2)"
+   ],
+   [
+    "SELECT client, SUM(amount) AS owed",
+    "FROM invoices",
+    "WHERE paid = false",
+    "GROUP BY client;"
+   ],
+   [
+    "function isOverdue(inv, today) {",
+    "  const due = inv.sent + inv.terms;",
+    "  return !inv.paid && today > due;",
+    "}"
+   ]
+  ],
+  "shop_inventory": [
+   [
+    "def reorder_needed(item):",
+    "    days_left = item.stock / max(1, item.daily_sales)",
+    "    return days_left < item.lead_days + 2"
+   ],
+   [
+    "UPDATE stock",
+    "SET qty = qty - 1",
+    "WHERE sku = 'LAMP-01'",
+    "  AND qty > 0;"
+   ],
+   [
+    "function lowStock(items) {",
+    "  return items.filter(i => i.qty < i.min);",
+    "}"
+   ]
+  ],
+  "_generic": [
+   [
+    "def health_check():",
+    "    db.ping()",
+    "    return {\"status\": \"ok\"}"
+   ]
+  ]
+ },
+ "freelance": [
+  [
+   "Revenue      =SUM(B2:B13)",
+   "COGS         =SUM(C2:C13)",
+   "Gross margin =(B14-C14)/B14",
+   "Break-even   =D2/(1-E14)"
+  ],
+  [
+   "Price  24.00  26.00  28.00",
+   "Units  410    372    330",
+   "Sales  =B1*B2  =C1*C2  =D1*D2"
+  ],
+  [
+   "Rent 1800",
+   "Staff 5200",
+   "Ads 640",
+   "Runway =Cash/SUM(B1:B3)"
+  ],
+  [
+   "Q1 12480",
+   "Q2 13920",
+   "Q3 15110",
+   "Growth =(B3-B1)/B1"
+  ]
+ ]
+}

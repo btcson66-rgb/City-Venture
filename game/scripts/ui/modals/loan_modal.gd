@@ -13,6 +13,7 @@ func _init(with_officer := false) -> void:
 	officer = with_officer
 	title_text = "Nexus Bank — Business lending"
 	icon_name = "bank"
+	help_key = "loans"
 	panel_size = Vector2(470, 300)
 
 

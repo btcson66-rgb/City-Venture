@@ -1,24 +1,93 @@
 class_name Tutorial
 extends Control
-## New-player onboarding and goal guidance.
-##  • Tutorial card: a short, ordered list of "how to play" steps (move, phone, leave a room, follow the
-##    goal, use things, time, map, Company OS). Each step completes by doing it; a step the player has
-##    already done completes on its own. Progress lives in the save (GameState.data["tutorial"]).
-##  • Guide arrow: points at the current main objective's `target` (data/story/chapters.json). On
-##    screen it bounces over the spot; off screen it sits on the screen edge with the place's name.
-##    Routes through room exits, street edges and the Metro. Toggle in the pause menu (settings.cfg).
+## The guided first venture: a new player is walked through one whole business loop, step by step, before being set
+## free. Arrival → coffee → co-work → pick e-commerce → buy stock → take a part-time job and work a shift while the
+## stock travels → sleep → shoot photos and list → first order → pack it by hand → ship it → get paid.
+##  • Card (top left): what to do now and how. A step completes by doing it; steps already done are skipped.
+##  • Gold arrow (in the world): where to go. On screen it bounces over the spot; off screen it sits on the screen edge
+##    with the place's name. Routes through room exits, street edges and the Metro. Toggle in the pause menu.
+##  • Coach (over any open screen): a pulsing frame around the exact button to press, with a one-line hint.
+## Progress lives in the save (GameState.data["tutorial"]). Every other screen explains itself with Help (the ? button).
 
 const SETTINGS := "user://settings.cfg"
 const HOME := "riverside_apartment"
+const VERSION := 2
+## id · title · text (how to do it) · then, on their own line (not player text, so tools/i18n_extract.py skips it):
+## done (Cond, or seen:<x>) · target (world arrow; omitted = the story objective's, {} = none) · ui (buttons to highlight
+## on open screens, in order; "name*" = prefix, "hud:phone" = the Phone button) · then keys and hint (the coach's line).
 const STEPS := [
-	{"id": "move", "title": "Moving around", "text": "Walk with WASD or the arrow keys. Hold Shift to run.", "keys": ["W", "A", "S", "D", "Shift"]},
-	{"id": "phone", "title": "Your phone", "text": "Press Tab, or click Phone at the top right, to read your messages.", "keys": ["Tab"]},
-	{"id": "exit", "title": "Leaving a room", "text": "Every room's exit is the glowing EXIT mat at the bottom. Walk onto it to go outside.", "keys": []},
-	{"id": "follow", "title": "Follow the gold arrow", "text": "Your goal is at the top left. The gold arrow shows the way: walk into a door to go inside.", "keys": []},
-	{"id": "interact", "title": "Using things", "text": "Stand next to a person or object. When a prompt appears at the bottom, press E or click it.", "keys": ["E"]},
-	{"id": "time", "title": "Time and opening hours", "text": "The clock runs while you walk. Hold T to fast-forward. Shops keep opening hours; sleep in your bed to end the day.", "keys": ["T"]},
-	{"id": "map", "title": "Getting around the city", "text": "Press M for the city map. Walk off the edge of a street (follow the → signs) to reach the next district, or ride the Metro.", "keys": ["M"]},
-	{"id": "os", "title": "Company OS", "text": "Your business runs from any laptop: home desk, café table or co-work hot desk. Walk up to one and press E.", "keys": ["E"], "after_flag": "business_chosen"},
+	{"id": "move", "title": "Moving around",
+		"text": "Walk with WASD or the arrow keys. Hold Shift to run.",
+		"done": "seen:move", "target": {},
+		"keys": ["W", "A", "S", "D", "Shift"]},
+	{"id": "phone", "title": "Your phone",
+		"text": "Your phone is buzzing. Press Tab (or click Phone, top right) and read Maya's message.",
+		"done": "flag:maya_intro_done", "target": {}, "ui": ["Thread_maya", "App_messages", "hud:phone"],
+		"keys": ["Tab"], "hint": "Open this"},
+	{"id": "exit", "title": "Going outside",
+		"text": "Walk onto the glowing EXIT mat at the bottom of the room to go outside.",
+		"done": "visited:riverside", "target": {"exit": true},
+		"keys": []},
+	{"id": "coffee", "title": "Your first coffee",
+		"text": "Follow the gold arrow to Bloom Coffee and walk in through the door. At the counter, press E to order.",
+		"done": "flag:bought_coffee_bloom_coffee",
+		"keys": ["E"]},
+	{"id": "east", "title": "To Startup Hub",
+		"text": "Walk east along the street (→). Past the end of Riverside is Startup Hub, where founders work.",
+		"done": "visited:startup_hub", "target": {"district": "startup_hub"},
+		"keys": []},
+	{"id": "cowork", "title": "A place to work",
+		"text": "Go into Nexus Co-work. At reception, press E and buy a Day Pass ($15): it lets you use a desk and its computer today.",
+		"done": "desk_access", "target": {"building": "nexus_cowork", "action": "cowork_desk"}, "ui": ["DayPass"],
+		"keys": ["E"], "hint": "Buy a Day Pass"},
+	{"id": "board", "title": "Choose a business",
+		"text": "Walk to the Business Board and press E. Choose E-commerce: you buy products wholesale and sell them online.",
+		"done": "flag:business_chosen", "target": {"building": "nexus_cowork", "action": "business_board"}, "ui": ["StartEcommerce", "Biz_ecommerce", "Page_business"],
+		"keys": ["E"], "hint": "Pick E-commerce"},
+	{"id": "os", "title": "Your business computer",
+		"text": "Sit at a hot desk and press E to open Company OS. Everything about your business happens here.",
+		"done": "seen:os", "target": {"building": "nexus_cowork", "action": "open_company_os"},
+		"keys": ["E"]},
+	{"id": "buy", "title": "Buy your first stock",
+		"text": "In Company OS open Operations and press Buy next to a product. Start small: phone stands are cheap and sell steadily. You pay now; the stock arrives in about two days.",
+		"done": "stat:purchase_orders>=1", "target": {"building": "nexus_cowork", "action": "open_company_os"}, "ui": ["Buy_tradelink_wholesale_phone_stand", "Buy_*", "Tab_operations"],
+		"keys": [], "hint": "Press here"},
+	{"id": "job", "title": "Earn while you wait",
+		"text": "Stock takes two days. Meanwhile, get a part-time job: on the Business Board open Part-time jobs and take one. Barista at Bloom Coffee is next door to home.",
+		"done": "has_job", "target": {"building": "nexus_cowork", "action": "business_board"}, "ui": ["ApplyJob", "Job_barista", "Page_jobs"],
+		"keys": [], "hint": "Press here"},
+	{"id": "shift", "title": "Work a shift",
+		"text": "Go to your workplace and press E at the staff door, then start a shift. You do the work yourself: the better it goes, the more you earn. Too late for a 4-hour shift today? Sleep, and work one tomorrow morning.",
+		"done": "stat:shifts_worked>=1", "target": {"job": true}, "ui": ["StartGame", "WorkShift"],
+		"keys": ["E"], "hint": "Start the shift"},
+	{"id": "sleep", "title": "End the day",
+		"text": "After 7 PM, go home and sleep in your bed. Deliveries and orders keep moving overnight. If your stock isn't in yet tomorrow, work another shift.",
+		"done": "stat:stock_received>=1", "target": {"building": HOME, "action": "sleep"}, "ui": ["Sleep"],
+		"keys": [], "hint": "Sleep until morning"},
+	{"id": "shoot", "title": "Photograph and list",
+		"text": "Your stock is here. Open Company OS on the laptop at home, go to Sales and press 'Shoot photos myself & list'. Better photos sell more.",
+		"done": "stat:listings_active>=1", "target": {"building": HOME, "action": "open_company_os"}, "ui": ["StartGame", "ListSelf_*", "Tab_sales"],
+		"keys": [], "hint": "Press here"},
+	{"id": "order", "title": "Wait for an order",
+		"text": "Your listing is live on ShopLane. Orders arrive during the day and your phone tells you. Work a shift or explore meanwhile.",
+		"done": "stat:orders_placed>=1", "target": {},
+		"keys": []},
+	{"id": "pack", "title": "Pack the order",
+		"text": "You have an order! Go home to your packing table and press E. Pack it by hand: box, padding, tape, label.",
+		"done": "stat:orders_packed>=1", "target": {"building": HOME, "action": "pack_orders"}, "ui": ["StartGame", "Pack"],
+		"keys": ["E"], "hint": "Pack it"},
+	{"id": "ship", "title": "Send it off",
+		"text": "At the packing table, choose how it leaves: book the courier (it collects from home) or carry it to PostPoint yourself (cheaper, costs your time).",
+		"done": "stat:orders_shipped>=1 || carrying_parcels", "target": {"building": HOME, "action": "pack_orders"}, "ui": ["CourierEconomy", "Carry"],
+		"keys": [], "hint": "Choose one"},
+	{"id": "dropoff", "title": "Drop it at PostPoint",
+		"text": "You're carrying the parcel. Walk to PostPoint in Riverside and hand it over at the counter.",
+		"done": "stat:orders_shipped>=1", "target": {"building": "postpoint_riverside", "action": "dropoff_parcels"}, "ui": ["DropEconomy"],
+		"keys": ["E"], "hint": "Hand it in"},
+	{"id": "paid", "title": "Getting paid",
+		"text": "It's on its way. When it's delivered, the sale lands in your ShopLane balance, and ShopLane pays out to your bank every few days (Company OS → Finance).",
+		"done": "stat:orders_delivered>=1", "target": {},
+		"keys": []},
 ]
 
 var card: PanelContainer
@@ -32,8 +101,11 @@ var _moved := 0.0
 var _completing := false
 var _guide_on := true
 var _target := {}          # {pos: Vector2 (world), label: String}
-var _target_scene := ""
 var _guide: Control
+var _coach: Control         # drawn on UIRoot.coach_layer, above open screens
+var _coach_rect := Rect2()
+var _coach_hint := ""
+var _coach_target: Control
 
 
 func _ready() -> void:
@@ -43,13 +115,13 @@ func _ready() -> void:
 	if cfg.load(SETTINGS) == OK:
 		_guide_on = bool(cfg.get_value("general", "guide", true))
 	card = PanelContainer.new()
-	var sb := UIK.flat(Color(0.05, 0.08, 0.15, 0.93), Art.C_GOLD, 1, 3)
+	var sb := UIK.flat(Color(0.05, 0.08, 0.15, 0.95), Art.C_GOLD, 1, 3)
 	sb.content_margin_left = 6
 	sb.content_margin_right = 6
 	sb.content_margin_top = 4
 	sb.content_margin_bottom = 4
 	card.add_theme_stylebox_override("panel", sb)
-	card.custom_minimum_size = Vector2(196, 0)
+	card.custom_minimum_size = Vector2(214, 0)
 	card.visible = false
 	add_child(card)
 	var v := UIK.vbox(2)
@@ -68,7 +140,7 @@ func _ready() -> void:
 	skip.add_theme_stylebox_override("hover", UIK.flat(Color(1, 1, 1, 0.08), Art.C_GOLD, 1, 2))
 	skip.add_theme_color_override("font_color", Art.C_MUTED)
 	hr.add_child(skip)
-	body = UIK.wrap("", 8, Art.C_WHITE, 184)
+	body = UIK.wrap("", 8, Art.C_WHITE, 202)
 	body.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	v.add_child(body)
 	keys_row = UIK.hbox(2)
@@ -86,11 +158,18 @@ func _ready() -> void:
 func st() -> Dictionary:
 	if not GameState.has_game():
 		return {}
-	if not GameState.data.has("tutorial"):
+	var t: Dictionary = GameState.data.get("tutorial", {})
+	if t.is_empty():
 		# saves from before the tutorial existed: only new-ish games get it
 		var fresh: bool = str(GameState.data["story"].get("chapter", "")) in ["", "ch1_arrival"]
-		GameState.data["tutorial"] = {"step": 0, "seen": {}, "off": not fresh}
-	return GameState.data["tutorial"]
+		t = {"step": 0, "seen": {}, "off": not fresh, "v": VERSION}
+		GameState.data["tutorial"] = t
+	elif int(t.get("v", 1)) < VERSION:
+		# the old 8-step card: restart on the guided script (it skips whatever is already done), unless this player
+		# already got a first order delivered: they've been through the loop, so don't walk them through it again
+		t["step"] = STEPS.size() if GameState.stat("orders_delivered") >= 1 else 0
+		t["v"] = VERSION
+	return t
 
 
 func _seen(what: String) -> void:
@@ -102,6 +181,10 @@ func _seen(what: String) -> void:
 func is_active() -> bool:
 	var s := st()
 	return not s.is_empty() and not bool(s.get("off", false)) and int(s.get("step", 0)) < STEPS.size()
+
+
+func current() -> Dictionary:
+	return STEPS[int(st()["step"])] if is_active() else {}
 
 
 func skip_all() -> void:
@@ -116,7 +199,7 @@ func skip_all() -> void:
 func restart() -> void:
 	if not GameState.has_game():
 		return
-	GameState.data["tutorial"] = {"step": 0, "seen": {}, "off": false}
+	GameState.data["tutorial"] = {"step": 0, "seen": {}, "off": false, "v": VERSION}
 	_moved = 0.0
 	_step_t = 0.0
 
@@ -140,31 +223,36 @@ func set_guide(on: bool) -> void:
 # ------------------------------------------------------------------ per frame
 func _process(delta: float) -> void:
 	_t += delta
+	if _coach == null and UIRoot.coach_layer != null:
+		_coach = Control.new()
+		_coach.set_anchors_preset(Control.PRESET_FULL_RECT)
+		_coach.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		UIRoot.coach_layer.add_child(_coach)
+		_coach.draw.connect(_draw_coach)
 	var ws := SceneRouter.world_scene()
 	var live := GameState.has_game() and UIRoot.hud.visible and ws != null and not SceneRouter.transitioning
 	visible = live
+	if _coach != null:
+		_coach.visible = live
 	if not live:
 		return
 	_track(ws, delta)
 	var blocked := UIRoot.is_blocking()
-	# card
 	if is_active():
-		var i := int(st()["step"])
-		var s: Dictionary = STEPS[i]
-		var gated: bool = s.has("after_flag") and not GameState.flag(str(s["after_flag"]))
-		card.visible = not blocked and not gated
-		if not gated:
-			_step_t += delta
-			_show_step(i)
-			if not _completing and _step_done(str(s["id"]), ws):
-				_complete_step()
+		var s := current()
+		card.visible = not blocked
+		_step_t += delta
+		_show_step(int(st()["step"]))
+		if not _completing and step_done(s):
+			_complete_step(_step_t < 0.2)
 	else:
 		card.visible = false
 	var op := UIRoot.hud.obj_panel
 	card.position = Vector2(6, (op.position.y + op.size.y + 4) if op.visible else 42.0)
-	# guide
+	# the world arrow, and the coach on open screens
 	_target = _resolve(ws) if _guide_on and not blocked else {}
 	_guide.queue_redraw()
+	_update_coach()
 
 
 func _track(ws: WorldScene, _delta: float) -> void:
@@ -179,12 +267,6 @@ func _track(ws: WorldScene, _delta: float) -> void:
 		_seen("phone")
 	if ws.kind == "district":
 		_seen("exit")
-		if ws.scene_id != "riverside":
-			_seen("map")
-	elif ws.scene_id != HOME:
-		_seen("follow")
-	if Clock.fast_forward:
-		_seen("time")
 	var tm := UIRoot.top_modal()
 	if tm is CityMapModal:
 		_seen("map")
@@ -192,27 +274,33 @@ func _track(ws: WorldScene, _delta: float) -> void:
 		_seen("os")
 
 
-func _step_done(id: String, _ws: WorldScene) -> bool:
-	if bool(st()["seen"].get(id, false)):
-		return true
-	# reading-only steps move on by themselves after a while
-	return id == "time" and _step_t > 14.0
+func step_done(s: Dictionary) -> bool:
+	var d := str(s.get("done", ""))
+	if d.begins_with("seen:"):
+		return bool(st()["seen"].get(d.substr(5), false))
+	return d != "" and Cond.eval(d)
 
 
-func _complete_step() -> void:
+func _complete_step(instant := false) -> void:
 	_completing = true
-	head.text = "✓ " + head.text
-	head.add_theme_color_override("font_color", Art.C_GREEN)
-	await get_tree().create_timer(0.9).timeout
+	if not instant:
+		head.text = "✓ " + head.text
+		head.add_theme_color_override("font_color", Art.C_GREEN)
+		await get_tree().create_timer(0.9).timeout
 	var s := st()
 	if not s.is_empty():
 		s["step"] = int(s["step"]) + 1
 		if int(s["step"]) >= STEPS.size():
-			UIRoot.toast(I18n.t("Tutorial complete. The gold arrow keeps pointing at your goal (turn it off in the pause menu)."), "good", "check")
+			_graduate()
 	head.add_theme_color_override("font_color", Art.C_GOLD)
 	_step_t = 0.0
 	_completing = false
 	SaveSystem.autosave_if_changed()
+
+
+## The whole loop is done: say so, and show what else there is.
+func _graduate() -> void:
+	UIRoot.open_modal(InfoModal.first_venture())
 
 
 var _shown := -1
@@ -225,18 +313,18 @@ func _show_step(i: int) -> void:
 	_shown = i
 	_shown_loc = I18n.locale()
 	var s: Dictionary = STEPS[i]
-	head.text = (I18n.t("TUTORIAL %d/%d") % [mini(i + 1, STEPS.size()), STEPS.size()]) + "  ·  " + I18n.t(str(s["title"]))
+	head.text = (I18n.t("FIRST VENTURE %d/%d") % [mini(i + 1, STEPS.size()), STEPS.size()]) + "  ·  " + I18n.t(str(s["title"]))
 	body.text = I18n.t(str(s["text"]))
 	for c in keys_row.get_children():
 		c.queue_free()
-	for k in s["keys"]:
+	for k in s.get("keys", []):
 		var kc := PanelContainer.new()
 		kc.add_theme_stylebox_override("panel", UIK.tex_box("ui/prompt_key", 2, 2))
 		var kl := UIK.label(" %s " % I18n.t(str(k)), 7, Art.C_NAVY_800, true)
 		kl.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 		kc.add_child(kl)
 		keys_row.add_child(kc)
-	keys_row.visible = not s["keys"].is_empty()
+	keys_row.visible = not s.get("keys", []).is_empty()
 	_fit_card.call_deferred()
 
 
@@ -244,16 +332,106 @@ func _fit_card() -> void:
 	card.reset_size()
 
 
+# ------------------------------------------------------------------ coach: the button to press on an open screen
+func _update_coach() -> void:
+	_coach_rect = Rect2()
+	_coach_hint = ""
+	if is_active() and _guide_on:
+		var s := current()
+		var c := _find_ui(s.get("ui", []))
+		if c != null:
+			if c != _coach_target:
+				_coach_target = c
+				_scroll_to(c)
+			_coach_rect = c.get_global_rect()
+			_coach_hint = I18n.t(str(s.get("hint", s["title"])))
+	if _coach != null:
+		_coach.queue_redraw()
+
+
+## A highlighted button inside a scrolling list is scrolled into view once.
+func _scroll_to(c: Control) -> void:
+	var p := c.get_parent()
+	while p != null and not (p is ScrollContainer):
+		p = p.get_parent()
+	if p is ScrollContainer:
+		(p as ScrollContainer).ensure_control_visible.call_deferred(c)
+
+
+func _find_ui(names: Array) -> Control:
+	var roots: Array = []
+	var tm := UIRoot.top_modal()
+	if tm != null:
+		roots.append(tm)
+	elif UIRoot.phone.is_open:
+		roots.append(UIRoot.phone)
+	for n in names:
+		var name := str(n)
+		if name == "hud:phone":
+			if roots.is_empty() and not UIRoot.dialogue.active and UIRoot.hud.phone_btn != null:
+				return UIRoot.hud.phone_btn
+			continue
+		for r in roots:
+			var c := _find_named(r, name)
+			if c != null:
+				return c
+	return null
+
+
+func _find_named(root: Node, name: String) -> Control:
+	var prefix := name.ends_with("*")
+	var key := name.trim_suffix("*")
+	for c in root.find_children("*", "Control", true, false):
+		var cn := str(c.name)
+		if (cn.begins_with(key) if prefix else cn == key) and (c as Control).is_visible_in_tree():
+			if c is BaseButton and (c as BaseButton).disabled:
+				continue
+			return c
+	return null
+
+
+func _draw_coach() -> void:
+	if _coach_rect.size == Vector2.ZERO:
+		return
+	var gold := Color(1.0, 0.8, 0.26)
+	var pulse := 0.5 + 0.5 * sin(_t * 5.0)
+	var r := _coach_rect.grow(2.0 + pulse * 2.0)
+	_coach.draw_rect(r, Color(gold, 0.9), false, 2.0)
+	_coach.draw_rect(r.grow(2.0), Color(gold, 0.25 + 0.3 * pulse), false, 1.0)
+	# a hint pill with an arrow, below the button (or above it near the bottom of the screen)
+	var font := UIK.bold_font()
+	var w := font.get_string_size(_coach_hint, HORIZONTAL_ALIGNMENT_LEFT, -1, 8).x
+	var below := r.end.y + 20 < 350
+	var bob := 2.0 * sin(_t * 6.0)
+	var tip := Vector2(r.get_center().x, (r.end.y + 3 + bob) if below else (r.position.y - 3 - bob))
+	var dirv := 1.0 if below else -1.0
+	var tri := PackedVector2Array([tip, tip + Vector2(-5, 7 * dirv), tip + Vector2(5, 7 * dirv)])
+	_coach.draw_colored_polygon(tri, gold)
+	var pill := Rect2(Vector2(clampf(tip.x - w / 2.0 - 5, 4, 636 - w - 10), tip.y + (7 * dirv if below else -7 - 13)), Vector2(w + 10, 13))
+	_coach.draw_rect(pill, gold)
+	_coach.draw_string(font, pill.position + Vector2(5, 10), _coach_hint, HORIZONTAL_ALIGNMENT_LEFT, -1, 8, Color(0.1, 0.07, 0.02))
+
+
 # ------------------------------------------------------------------ guide target
 func _resolve(ws: WorldScene) -> Dictionary:
 	if not GameState.has_game():
 		return {}
 	var tgt := {}
-	# the tutorial's "leave the room" step points at the exit even before the story asks
-	if is_active() and str(STEPS[int(st()["step"])]["id"]) == "exit" and ws.kind == "interior":
-		return _exit_of(ws)
-	var o := StoryEngine.main_objective()
-	tgt = o.get("target", {})
+	var s := current()
+	if not s.is_empty() and s.has("target"):
+		tgt = s["target"]
+		if tgt.is_empty():
+			return {}
+		if tgt.get("exit", false):
+			return _exit_of(ws) if ws.kind == "interior" else {}
+		if tgt.get("job", false):
+			var jid := Careers.current_job()
+			if jid == "":
+				return {}
+			tgt = {"building": str(Careers.job_def(jid)["building"]), "action": "work_shift"}
+	else:
+		var o := StoryEngine.main_objective()
+		tgt = o.get("target", {})
 	if tgt.is_empty() or tgt.get("phone", false):
 		return {}
 	if tgt.has("building"):
@@ -358,32 +536,34 @@ func _draw_guide() -> void:
 		return
 	var xf := get_viewport().get_canvas_transform()
 	var sp: Vector2 = xf * (_target["pos"] as Vector2)
-	var view := Rect2(Vector2(14, 14), Vector2(640 - 28, 360 - 28))
+	var view := Rect2(Vector2(16, 16), Vector2(640 - 32, 360 - 32))
 	var gold := Color(1.0, 0.8, 0.26)
 	var ink := Color(0.1, 0.07, 0.02)
 	var font := UIK.bold_font()
 	var label := str(_target.get("label", ""))
 	if view.has_point(sp):
-		var y := sp.y - 22.0 - 4.0 * absf(sin(_t * 3.2))
+		var y := sp.y - 30.0 - 6.0 * absf(sin(_t * 3.2))
 		var pulse := 0.5 + 0.5 * sin(_t * 4.0)
-		_guide.draw_arc(sp, 7.0 + pulse * 3.0, 0, TAU, 28, Color(gold, 0.35 + 0.4 * (1.0 - pulse)), 1.5)
+		# a pulsing ring on the spot, and a big bouncing arrow over it
+		_guide.draw_arc(sp, 9.0 + pulse * 5.0, 0, TAU, 32, Color(gold, 0.45 + 0.45 * (1.0 - pulse)), 2.0)
+		_guide.draw_arc(sp, 4.0, 0, TAU, 16, Color(gold, 0.9), 2.0)
 		var art := Art.opt_tex("effects/guide_arrow")   # 64x16: four 16x16 frames, once the art exists
 		if art != null:
 			var f := int(_t * 6.0) % 4
-			_guide.draw_texture_rect_region(art, Rect2(sp.x - 8, y - 11, 16, 16), Rect2(f * 16, 0, 16, 16))
+			_guide.draw_texture_rect_region(art, Rect2(sp.x - 14, y - 18, 28, 28), Rect2(f * 16, 0, 16, 16))
 		else:
-			var pts := PackedVector2Array([Vector2(-4, -9), Vector2(4, -9), Vector2(4, -3), Vector2(8, -3), Vector2(0, 5), Vector2(-8, -3), Vector2(-4, -3)])
+			var pts := PackedVector2Array([Vector2(-6, -16), Vector2(6, -16), Vector2(6, -6), Vector2(13, -6), Vector2(0, 9), Vector2(-13, -6), Vector2(-6, -6)])
 			var arrow := PackedVector2Array()
 			for p in pts:
 				arrow.append(p + Vector2(sp.x, y))
 			_guide.draw_colored_polygon(arrow, gold)
 			arrow.append(arrow[0])
-			_guide.draw_polyline(arrow, ink, 1.0)
+			_guide.draw_polyline(arrow, ink, 1.5)
 		if label != "":
-			var w := font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, 7).x
-			var lp := Vector2(sp.x - w / 2.0, y - 13)
-			_guide.draw_rect(Rect2(lp + Vector2(-3, -8), Vector2(w + 6, 11)), Color(0.05, 0.08, 0.15, 0.85))
-			_guide.draw_string(font, lp, label, HORIZONTAL_ALIGNMENT_LEFT, -1, 7, gold)
+			var w := font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, 8).x
+			var lp := Vector2(sp.x - w / 2.0, y - 22)
+			_guide.draw_rect(Rect2(lp + Vector2(-4, -9), Vector2(w + 8, 13)), gold)
+			_guide.draw_string(font, lp + Vector2(0, 1), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 8, ink)
 		return
 	# off screen: clamp to the edge and point outwards
 	var c := Vector2(320, 180)
@@ -394,17 +574,17 @@ func _draw_guide() -> void:
 	if absf(dir.y) > 0.001:
 		k = minf(k, ((view.end.y if dir.y > 0 else view.position.y) - c.y) / dir.y)
 	var ep := c + dir * k
-	var bob := 2.0 * sin(_t * 5.0)
+	var bob := 3.0 * sin(_t * 5.0)
 	ep += dir * bob
 	var side := dir.orthogonal()
-	var tri := PackedVector2Array([ep + dir * 8.0, ep - dir * 4.0 + side * 7.0, ep - dir * 4.0 - side * 7.0])
+	var tri := PackedVector2Array([ep + dir * 12.0, ep - dir * 6.0 + side * 10.0, ep - dir * 6.0 - side * 10.0])
 	_guide.draw_colored_polygon(tri, gold)
 	tri.append(tri[0])
-	_guide.draw_polyline(tri, ink, 1.0)
+	_guide.draw_polyline(tri, ink, 1.5)
 	if label != "":
-		var w2 := font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, 7).x
-		var lp2 := ep - dir * 16.0 - Vector2(w2 / 2.0, -3)
-		lp2.x = clampf(lp2.x, 4, 640 - 4 - w2)
-		lp2.y = clampf(lp2.y, 12, 360 - 6)
-		_guide.draw_rect(Rect2(lp2 + Vector2(-3, -8), Vector2(w2 + 6, 11)), Color(0.05, 0.08, 0.15, 0.85))
-		_guide.draw_string(font, lp2, label, HORIZONTAL_ALIGNMENT_LEFT, -1, 7, gold)
+		var w2 := font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, 8).x
+		var lp2 := ep - dir * 22.0 - Vector2(w2 / 2.0, -3)
+		lp2.x = clampf(lp2.x, 6, 640 - 6 - w2)
+		lp2.y = clampf(lp2.y, 14, 360 - 8)
+		_guide.draw_rect(Rect2(lp2 + Vector2(-4, -9), Vector2(w2 + 8, 13)), gold)
+		_guide.draw_string(font, lp2 + Vector2(0, 1), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 8, ink)

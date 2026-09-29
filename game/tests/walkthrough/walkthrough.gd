@@ -67,6 +67,13 @@ func popups() -> void:
 				await bot.shot("decision_outcome_" + str(inst["id"]))
 				await bot.click_text("OK")
 			await bot.wait(0.4)
+		elif m is InfoModal:
+			bot.log_line("  info card: %s" % str(m.title_text))
+			await bot.shot("info_" + str(m.title_text).to_lower().replace(" ", "_").left(24))
+			await bot.click_text(str(m.ok_text), 2.0)
+			await bot.wait(0.3)
+			if is_instance_valid(m) and UIRoot.top_modal() == m:
+				m.close()
 		elif m is MonthCloseModal:
 			await bot.wait(1.5)
 			await bot.shot("month_close_report")
@@ -191,19 +198,26 @@ func once_shot(name: String) -> void:
 		await bot.shot(name)
 
 
-## Nap/sleep in the apartment until pred() or max_naps.
+## Let time pass at home until pred() or `max_naps` rounds. The game has no naps or fast-forward: in the evening the bot
+## sleeps in the bed; during the day the harness moves the clock 2 hours (a player would work a shift or wait).
+## sleep_only: go straight to the night's sleep.
 func pass_time_at_home(pred: Callable, max_naps := 12, sleep_only := false) -> bool:
 	for i in max_naps:
 		await popups()
 		if pred.call():
 			return true
-		await bot.use_action("sleep")
-		await bot.wait(0.5)
-		if not sleep_only and bot.button_named("Nap") != null and Clock.hour() < 19:
-			await bot.click_named("Nap")
-		else:
+		var evening := Clock.hour() >= 19 or Clock.hour() < 5
+		if not evening and sleep_only:
+			Clock.advance(19 * 60 - Clock.minute_of_day())
+			evening = true
+		if evening:
+			await bot.use_action("sleep")
+			await bot.wait(0.5)
 			await bot.click_named("Sleep")
-		await bot.until(func(): return UIRoot.top_modal() == null or UIRoot.top_modal() is DecisionModal or UIRoot.top_modal() is MonthCloseModal, 8.0)
+			await bot.until(func(): return UIRoot.top_modal() == null or UIRoot.top_modal() is DecisionModal or UIRoot.top_modal() is MonthCloseModal, 8.0)
+		else:
+			bot.log_line("  (harness) wait 2 h")
+			Clock.advance(120)
 		await bot.wait(0.6)
 		await _pack_and_ship_home()
 	await popups()
@@ -220,6 +234,7 @@ func _pack_and_ship_home() -> void:
 	await bot.wait(0.6)
 	await once_shot("packing_table")
 	await bot.click_named("Pack", 3.0)
+	await bot.until(func(): return not (UIRoot.top_modal() is MiniGame), 5.0)   # packed by hand (PackGame)
 	await bot.wait(0.8)
 	await bot.click_named("CourierExpress", 3.0)
 	await bot.wait(0.6)
@@ -360,6 +375,7 @@ func _chapter2() -> void:
 	for pid in ["wireless_earbuds", "water_bottle", "desk_lamp", "phone_stand"]:
 		if Ecommerce.total_units_at_any(pid) > 0 and Ecommerce.listing_for(pid).is_empty():
 			await bot.click_named("ListSelf_" + pid)
+			await bot.until(func(): return not (UIRoot.top_modal() is MiniGame), 5.0)   # the photo shoot
 			await bot.wait(0.4)
 	await bot.click_named("AdPlus_wireless_earbuds", 2.0)
 	await bot.wait(0.4)
@@ -393,9 +409,7 @@ func _chapter3() -> void:
 	await metro_to("civic_center")
 	await bot.shot("civic_center")
 	if Clock.hour() < 9:
-		Input.action_press("fast_forward")
-		await bot.until(func(): return Clock.hour() >= 9, 40.0)
-		Input.action_release("fast_forward")
+		await ff_until(func(): return Clock.hour() >= 9)
 	await enter_building("city_hall")
 	await bot.shot("city_hall_inside")
 	await bot.use_action("register_company", "registration counter")
@@ -482,8 +496,10 @@ func _careers() -> void:
 		await bot.wait(0.6)
 		await bot.shot("job_shift")
 		await bot.click_named("WorkShift")
+		await bot.until(func(): return not (UIRoot.top_modal() is MiniGame), 5.0)   # the shift is played
 		await bot.wait(1.8)
-		bot.expect(Ledger.cash("player") - cash >= 72.0 - 0.01, "a 4-hour shift paid wages (%s)" % Fmt.money(Ledger.cash("player") - cash))
+		var paid := Ledger.cash("player") - cash
+		bot.expect(paid >= Careers.pay_for("cowork_host", MiniGames.auto) - 0.01, "a 4-hour shift paid by how it went (%s)" % Fmt.money(paid))
 	else:
 		bot.log_line("  (no shift now: %s)" % why)
 	bot.step("Careers — freelance gig at a hot desk")
@@ -500,6 +516,7 @@ func _careers() -> void:
 		await bot.click_named("Accept_" + oid)
 		await bot.wait(0.4)
 		await bot.click_named("Work_" + oid)
+		await bot.until(func(): return not (UIRoot.top_modal() is MiniGame), 5.0)   # typing the client's spreadsheet
 		await bot.wait(0.6)
 		await bot.shot("freelance_gig")
 		bot.expect(int(Careers.F()["gigs"][oid]["done"]) >= 2, "put hours into a freelance gig")
@@ -510,6 +527,7 @@ func _careers() -> void:
 	await bot.click_named("Saas_freelancer_invoicing")
 	await bot.wait(0.4)
 	await bot.click_named("SaasCode")
+	await bot.until(func(): return not (UIRoot.top_modal() is MiniGame), 5.0)   # typing the code
 	await bot.wait(0.5)
 	await bot.shot("saas_building")
 	bot.expect(Saas.active() and float(Saas.S()["dev_done"]) >= 2.0, "started building a SaaS product (%d dev h)" % int(Saas.S()["dev_done"]))
@@ -569,13 +587,15 @@ func _month() -> void:
 	await close_modal()
 
 
-## Hold T (fast-forward) in the world until pred() or timeout.
-func ff_until(pred: Callable, timeout := 60.0) -> bool:
-	Input.action_press("fast_forward")
-	var ok: bool = await bot.until(pred, timeout)
-	Input.action_release("fast_forward")
+## Test harness: move the clock 5 minutes at a time until pred() (the game has no fast-forward; a player would wait,
+## walk around or work in the meantime).
+func ff_until(pred: Callable, _timeout := 60.0) -> bool:
+	var guard := 0
+	while not pred.call() and guard < 24 * 60:
+		Clock.advance(5)
+		guard += 5
 	await bot.wait(0.3)
-	return ok
+	return pred.call()
 
 
 func _home_laptop(tab: String) -> void:

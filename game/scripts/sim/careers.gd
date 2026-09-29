@@ -115,18 +115,30 @@ static func shift_block(id: String) -> String:
 	return ""
 
 
-## Work one shift: time passes, wage is paid, promotion may follow.
-static func work_shift(id: String) -> Dictionary:
+## A shift at or above this score counts toward promotion.
+const COUNTS_FROM := 0.4
+
+
+## Pay for a shift played at `score` (0..1): 60% of the wage is guaranteed, the rest is earned.
+static func pay_for(id: String, score: float) -> float:
+	return snappedf(shift_pay(id) * (0.6 + 0.4 * clampf(score, 0.0, 1.0)), 0.01)
+
+
+## Work one shift (played as a minigame, see MiniGames): time passes, pay follows the score, tips on top, and a
+## shift that went well enough counts toward promotion.
+static func work_shift(id: String, score := 1.0, tips := 0.0) -> Dictionary:
 	var why := shift_block(id)
 	if why != "":
 		return {"ok": false, "error": why}
 	var j := job_def(id)
 	var before := rank_index(id)
-	var pay := shift_pay(id)
+	var pay := pay_for(id, score) + snappedf(tips, 0.01)
 	Clock.advance(int(j.get("shift_hours", 4)) * 60)
 	Ledger.post("player", I18n.t("Wages — %s shift at %s") % [I18n.t(str(rank(id)["title"])), I18n.t(str(j["employer"]))],
 		[{"acct": "cash", "dr": pay}, {"acct": "wages", "cr": pay}], {"type": "wages", "job": id})
-	C()["shifts"][id] = shifts(id) + 1
+	var counted := score >= COUNTS_FROM
+	if counted:
+		C()["shifts"][id] = shifts(id) + 1
 	C()["last_shift_day"] = Clock.day_index()
 	GameState.inc_stat("shifts_worked")
 	var lines: Array = j.get("lines", [])
@@ -135,7 +147,7 @@ static func work_shift(id: String) -> Dictionary:
 	if promoted:
 		GameState.timeline(I18n.t("Promoted to %s at %s.") % [I18n.t(str(rank(id)["title"])), I18n.t(str(j["employer"]))], "career")
 		GameState.add_message(str(j["boss"]), I18n.t("You've earned it: you're our new %s. New rate: $%d an hour.") % [I18n.t(str(rank(id)["title"])), int(wage(id))])
-	return {"ok": true, "pay": pay, "moment": moment, "promoted": promoted, "title": str(rank(id)["title"])}
+	return {"ok": true, "pay": pay, "moment": moment, "promoted": promoted, "title": str(rank(id)["title"]), "counted": counted}
 
 
 # ============================================================== freelance consulting
@@ -210,16 +222,23 @@ static func accept(offer_id: String) -> Dictionary:
 	return {"ok": false, "error": "That offer is gone."}
 
 
-## Put one work session (2 h) into a gig at a laptop.
-static func work_on(gig_id: String) -> Dictionary:
+static func session_hours() -> int:
+	return int(cfg().get("session_hours", 2))
+
+
+## Put one work session (2 h on the clock) into a gig at a laptop. `progress` is how much of it got done (the typing
+## minigame's result, 0.5x-1.25x the session); -1 = the whole session.
+static func work_on(gig_id: String, progress := -1.0) -> Dictionary:
 	var g: Dictionary = F()["gigs"].get(gig_id, {})
 	if g.is_empty() or not g["status"] in ["active", "late"]:
 		return {"ok": false, "error": "No such gig in progress."}
-	var h := mini(int(cfg().get("session_hours", 2)), int(g["hours"]) - int(g["done"]))
-	Clock.advance(h * 60)
-	g["done"] = int(g["done"]) + h
+	var left := float(g["hours"]) - float(g["done"])
+	var clock_h := mini(session_hours(), int(ceil(left)))
+	var h := minf(left, float(clock_h) if progress < 0.0 else progress)
+	Clock.advance(clock_h * 60)
+	g["done"] = float(g["done"]) + h
 	GameState.inc_stat("gig_hours", h)
-	if int(g["done"]) >= int(g["hours"]):
+	if float(g["done"]) >= float(g["hours"]) - 0.01:
 		return _deliver(g)
 	return {"ok": true, "delivered": false, "hours": h}
 

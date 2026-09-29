@@ -26,6 +26,9 @@ func _ready() -> void:
 			quit_at_end = false
 		if a == "--video":
 			video_mode = true
+	# bots play the minigames at a fixed quality and skip first-open help cards (both covered by their own checks)
+	Help.auto = false
+	MiniGames.auto = 0.85
 	if out_dir == "":
 		out_dir = ProjectSettings.globalize_path("user://bot")
 	DirAccess.make_dir_recursive_absolute(out_dir + "/screenshots")
@@ -44,6 +47,11 @@ func _run() -> void:
 			await Trailer.new(self).run()
 		"screens":
 			await _screens()
+		"minigames":
+			MiniGames.auto = -1.0
+			await _minigames()
+		"tutorial":
+			await _tutorial_tour()
 	_finish()
 
 
@@ -531,3 +539,182 @@ func _shots() -> void:
 	await wait(0.6)
 	expect(Wardrobe.wearing() == "executive", "wearing Executive")
 	await shot("threadline_wearing_executive")
+
+
+# ------------------------------------------------------------------ minigames (hands-on work)
+func _mg_open(g: MiniGame, name: String) -> MiniGame:
+	var res := {}
+	MiniGames.play(g, func(r): res.merge(r))
+	await wait(0.4)
+	await shot("mg_%s_intro" % name)
+	await click_named("StartGame", 2.0)
+	await wait(0.4)
+	return g
+
+
+func _mg_finish(g: MiniGame, name: String, q := 0.8) -> void:
+	await shot("mg_%s_play" % name)
+	if is_instance_valid(g) and g.phase == "play":
+		g.round_i = g.rounds - 1
+		g.points = q * (g.rounds - 1)
+		g.award(q)
+		g.next_round()
+	await wait(0.4)
+	await shot("mg_%s_results" % name)
+	await click_named("FinishGame", 2.0)
+	await wait(0.3)
+	expect(UIRoot.top_modal() == null or not (UIRoot.top_modal() is MiniGame), "%s closed after its results" % name)
+
+
+func _minigames() -> void:
+	GameState.new_game({"name": "Mini Games", "seed": 5})
+	SceneRouter._enter("interior", "bloom_coffee", "door", "up")
+	UIRoot.set_hud_visible(true)
+	await wait(1.0)
+	# barista: build one drink by hand
+	var b: BaristaGame = await _mg_open(BaristaGame.new(), "barista")
+	for f in [["Size", b.want["size"]], ["Drink", b.want["drink"]], ["Milk", b.want["milk"]], ["Shots", b.want["shots"]]]:
+		await click_named("%s_%s" % [f[0], f[1]], 1.0)
+	await shot("mg_barista_built")
+	await click_named("Serve", 1.0)
+	await wait(0.3)
+	expect(b.points >= 0.99, "a correctly built drink scores full points (%.2f)" % b.points)
+	await _mg_finish(b, "barista")
+	var ps: ParcelSortGame = await _mg_open(ParcelSortGame.new(), "parcels")
+	await click_named("Bin_" + str(ps.parcel["bin"]), 1.0)
+	expect(ps.points > 0.6, "sorting a parcel into the right bin scores")
+	await _mg_finish(ps, "parcels")
+	var ch: CoworkHostGame = await _mg_open(CoworkHostGame.new(), "cowork")
+	await click_named("Desk_" + str(ch.visitors[0]["answer"]), 1.0)
+	expect(ch.points > 0.7, "handling a visitor right scores")
+	await _mg_finish(ch, "cowork")
+	var cf: ClerkFormsGame = await _mg_open(ClerkFormsGame.new(), "clerk")
+	if str(cf.form["bad"]) == "":
+		await click_named("Approve", 1.0)
+	else:
+		await click_named("Field_" + str(cf.form["bad"]), 1.0)
+		await shot("mg_clerk_marked")
+		await click_named("Reject", 1.0)
+	expect(cf.points >= 0.99, "the right call on a form scores full points")
+	await _mg_finish(cf, "clerk")
+	var tc: TellerCashGame = await _mg_open(TellerCashGame.new(), "teller")
+	var left := tc.amount
+	for d in TellerCashGame.NOTES:
+		while left >= d:
+			await click_named("Note_%d" % d, 1.0)
+			left -= d
+	await shot("mg_teller_counted")
+	await click_named("HandOver", 1.0)
+	expect(tc.points >= 0.99, "an exact, tidy withdrawal scores full points")
+	await _mg_finish(tc, "teller")
+	var ph: PhotoShootGame = await _mg_open(PhotoShootGame.new("desk_lamp"), "photo")
+	await click_named("Backdrop_wood", 1.0)
+	await click_named("ZoomIn", 1.0)
+	await wait(0.3)
+	await shot("mg_photo_setup")
+	await _mg_finish(ph, "photo")
+	var orders := []
+	for i in 3:
+		orders.append({"id": "O10%d" % i, "product": ["wireless_earbuds", "desk_lamp", "water_bottle"][i], "qty": 1, "customer": "Rin Tanaka"})
+	var pk: PackGame = await _mg_open(PackGame.new(orders), "pack")
+	await click_named("Box_" + pk.need_box(), 1.0)
+	for i in 5:
+		await click_named("Pad", 1.0)
+	for i in 3:
+		await click_named("Seam_%d" % i, 1.0)
+	for i in pk.labels.size():
+		if pk.labels[i]["ok"]:
+			await click_named("Label_%d" % i, 1.0)
+	await shot("mg_pack_ready")
+	await click_named("Seal", 1.0)
+	expect(pk.points > 0.9, "a well packed order scores high (%.2f)" % pk.points)
+	await _mg_finish(pk, "pack")
+	var ty: TypingGame = await _mg_open(TypingGame.new("saas", "salon_booking", 2.0, "Coding session — Glow Book"), "typing")
+	var line := str(ty.lines[0])
+	for c in line.substr(ty.col):
+		var ev := InputEventKey.new()
+		ev.pressed = true
+		ev.unicode = c.unicode_at(0)
+		ev.keycode = KEY_SPACE if c == " " else KEY_A
+		Input.parse_input_event(ev)
+		await frames(1)
+		if ty.round_i > 0:
+			break
+	await wait(0.2)
+	expect(ty.round_i >= 1, "typing a whole line moves on to the next")
+	await _mg_finish(ty, "typing")
+
+
+# ------------------------------------------------------------------ the guided first venture, as the player sees it
+func _tut_step() -> String:
+	return str(UIRoot.tutorial.current().get("id", "done"))
+
+
+func _tutorial_tour() -> void:
+	GameState.new_game({"name": "Guide Tour", "seed": 4})
+	UIRoot.set_hud_visible(true)
+	await SceneRouter.begin_world()
+	await wait(2.0)
+	UIRoot.tutorial._seen("move")
+	await wait(1.6)
+	expect(_tut_step() == "phone", "step 2 is the phone (%s)" % _tut_step())
+	await shot("tut_phone_button")
+	UIRoot.toggle_phone()
+	await wait(0.6)
+	await shot("tut_phone_open")
+	UIRoot.phone.close()
+	GameState.set_flag("maya_intro_done")
+	UIRoot.dialogue_queue.clear()
+	await wait(1.6)
+	await shot("tut_exit")
+	SceneRouter._enter("district", "riverside", "door_riverside_apartment", "down")
+	await wait(2.2)
+	await shot("tut_riverside_arrow")
+	GameState.set_flag("bought_coffee_bloom_coffee")
+	await wait(1.6)
+	await shot("tut_walk_east")
+	SceneRouter._enter("district", "startup_hub", "door_nexus_cowork", "down")
+	await wait(1.4)
+	GameState.set_flag("met_priya")
+	SceneRouter._enter("interior", "nexus_cowork", "door", "up")
+	await wait(2.0)
+	expect(_tut_step() == "cowork", "at the co-work: buy a day pass (%s)" % _tut_step())
+	await shot("tut_cowork_arrow")
+	UIRoot.open_modal(CoworkDeskModal.new())
+	await wait(0.8)
+	await shot("tut_cowork_daypass")
+	await click_named("DayPass", 2.0)
+	await wait(0.4)
+	UIRoot.close_all()
+	await wait(1.6)
+	UIRoot.open_modal(BusinessBoard.new())
+	await wait(0.8)
+	await shot("tut_board")
+	await click_named("Biz_ecommerce", 2.0)
+	await wait(0.4)
+	await shot("tut_board_ecommerce")
+	await click_named("StartEcommerce", 2.0)
+	UIRoot.close_all()
+	await wait(1.6)
+	UIRoot.open_modal(CompanyOS.new("cowork"))
+	await wait(1.6)
+	await shot("tut_os_overview")
+	await click_named("Tab_operations", 2.0)
+	await wait(0.6)
+	await shot("tut_os_buy")
+	await click_named("Buy_tradelink_wholesale_phone_stand", 2.0)
+	UIRoot.close_all()
+	await wait(1.8)
+	expect(_tut_step() == "job", "after buying stock: get a job while it travels (%s)" % _tut_step())
+	UIRoot.open_modal(BusinessBoard.new())
+	await wait(0.6)
+	await click_named("Page_jobs", 2.0)
+	await wait(0.6)
+	await shot("tut_jobs")
+	UIRoot.close_all()
+	Careers.hire("barista")
+	await wait(1.6)
+	SceneRouter._enter("district", "riverside", "door_bloom_coffee", "down")
+	await wait(2.0)
+	await shot("tut_to_shift")
+	log_line("  tutorial at step %s" % _tut_step())

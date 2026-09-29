@@ -4,6 +4,7 @@ extends CanvasLayer
 var root: Control
 var hud: HUD
 var tutorial: Tutorial
+var coach_layer: Control
 var dialogue: DialogueBox
 var phone: PhoneUI
 var modal_layer: Control
@@ -37,6 +38,11 @@ func _ready() -> void:
 	modal_layer.set_anchors_preset(Control.PRESET_FULL_RECT)
 	modal_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	root.add_child(modal_layer)
+	# the tutorial's coach draws here: above the phone and any open screen, so it can point at the button to press
+	coach_layer = Control.new()
+	coach_layer.set_anchors_preset(Control.PRESET_FULL_RECT)
+	coach_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(coach_layer)
 	toast_box = UIK.vbox(3)
 	toast_box.position = Vector2(170, 8)
 	toast_box.custom_minimum_size = Vector2(300, 0)
@@ -144,10 +150,6 @@ func _process(_delta: float) -> void:
 		c.visible = not busy
 	if not GameState.has_game() or not _hud_wanted or SceneRouter.transitioning:
 		return
-	if Input.is_action_pressed("fast_forward") and not is_blocking():
-		Clock.fast_forward = true
-	else:
-		Clock.fast_forward = false
 	if is_blocking():
 		return
 	if not dialogue_queue.is_empty():
@@ -190,15 +192,30 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 ## Part-time job shift: fade out, four hours pass, wages paid, fade in with what happened.
+## A shift is played: the job's minigame opens, and its score sets the pay (see Careers.work_shift).
 func work_shift_flow(job_id: String) -> void:
+	var g := MiniGames.for_job(job_id)
+	if g == null:
+		_finish_shift(job_id, {"score": 1.0})
+		return
+	MiniGames.play(g, func(res: Dictionary):
+		if res.get("aborted", false):
+			toast("You left before the shift was done. No pay, and no time lost.", "warn", "clock")
+			return
+		_finish_shift(job_id, res))
+
+
+func _finish_shift(job_id: String, res: Dictionary) -> void:
 	await fade_out(0.35)
-	var r := Careers.work_shift(job_id)
+	var r := Careers.work_shift(job_id, float(res.get("score", 1.0)), float(res.get("tips", 0.0)))
 	await fade_in(0.35)
 	if not r["ok"]:
 		toast(I18n.t(str(r["error"])), "warn", "lock")
 		return
 	toast(str(r["moment"]), "info", "clock")
-	toast(I18n.t("Shift done: +%s wages.") % Fmt.money(r["pay"]), "good", "cash")
+	toast(I18n.t("Shift done: +%s (wages and tips).") % Fmt.money(r["pay"]), "good", "cash")
+	if not r.get("counted", true):
+		toast("A rough shift: it doesn't count toward your next promotion.", "warn", "people")
 	if r["promoted"]:
 		show_chapter_card(I18n.t("PROMOTED"), I18n.t(str(r["title"])))
 	SaveSystem.autosave_if_changed()

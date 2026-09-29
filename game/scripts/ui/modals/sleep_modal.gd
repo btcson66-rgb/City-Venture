@@ -5,6 +5,7 @@ extends Modal
 func _init() -> void:
 	title_text = "Bed"
 	icon_name = "sleep"
+	help_key = "sleep"
 	panel_size = Vector2(330, 150)
 
 
@@ -17,22 +18,9 @@ func build() -> void:
 		b.name = "Sleep"
 		body.add_child(b)
 	else:
-		body.add_child(UIK.wrap(I18n.t("It's %s. Too early to sleep — but you could nap.") % Clock.fmt_time(), 9, Art.C_WHITE, 310))
-		var n := UIK.button("Nap for 2 hours", _nap)
-		n.name = "Nap"
-		body.add_child(n)
-		var b2 := UIK.button("Sleep until tomorrow 7:00 AM anyway", _sleep)
-		b2.name = "Sleep"
-		body.add_child(b2)
+		# no naps: the day is for living it (work a shift, run the business); the bed is for the night
+		body.add_child(UIK.wrap(I18n.t("It's %s. You're not tired yet: the bed is for the night, from 7:00 PM. Waiting for something? Work a shift or tidy up the business meanwhile.") % Clock.fmt_time(), 9, Art.C_WHITE, 310))
 	footer.add_child(UIK.button("Not now", close))
-
-
-func _nap() -> void:
-	visible = false
-	await UIRoot.fade_out(0.4)
-	Clock.advance(120)
-	await UIRoot.fade_in(0.4)
-	close()
 
 
 func _sleep() -> void:

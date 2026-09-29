@@ -29,10 +29,10 @@ func build() -> void:
 	body.add_child(sv)
 	var sp := UIK.hbox(4)
 	sp.add_child(UIK.label("Day length", 8, Art.C_MUTED))
-	for opt in [[1.0, "Slow"], [1.5, "Normal"], [2.5, "Fast"]]:
+	for opt in [[1.0, "Slow"], [1.5, "Normal"]]:
 		sp.add_child(UIK.button(opt[1], func(): Clock.speed = opt[0]; rebuild(), "tab_active" if is_equal_approx(Clock.speed, opt[0]) else "tab"))
 	body.add_child(sp)
-	body.add_child(UIK.label("Hold T to fast-forward time in the world.", 7, Art.C_DIM))
+	body.add_child(UIK.label("Time only moves forward by living it: working a shift, or sleeping at night.", 7, Art.C_DIM))
 	var lang := UIK.hbox(4)
 	lang.add_child(UIK.label("Language", 8, Art.C_MUTED))
 	for l in I18n.LOCALES:
