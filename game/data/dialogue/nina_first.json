@@ -1,0 +1,61 @@
+{
+ "id": "nina_first",
+ "with": "nina",
+ "nodes": {
+  "start": [
+   {
+    "who": "nina",
+    "expr": "happy",
+    "text": "Welcome to Threadline. I'm Nina. Tape measure's for later."
+   },
+   {
+    "who": "nina",
+    "text": "Five looks this season: Executive, Luxury Citywear, Travel, Formal Evening, and Logistics for the warehouse days."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Just looking.",
+      "next": "a"
+     },
+     {
+      "text": "I've got a meeting that matters.",
+      "next": "b"
+     }
+    ]
+   }
+  ],
+  "a": [
+   {
+    "who": "nina",
+    "text": "Look all you like. The mirror's honest, I'm honest-ish."
+   },
+   {
+    "goto": "end"
+   }
+  ],
+  "b": [
+   {
+    "who": "nina",
+    "expr": "thinking",
+    "text": "Then Executive. People decide in the first four seconds. Make them count."
+   },
+   {
+    "goto": "end"
+   }
+  ],
+  "end": [
+   {
+    "who": "nina",
+    "text": "Anything you buy goes in your wardrobe at home. The fitting room's at the back."
+   }
+  ]
+ },
+ "on_end": [
+  {
+   "do": "set_flag",
+   "flag": "met_nina"
+  }
+ ]
+}

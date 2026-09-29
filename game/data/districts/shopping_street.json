@@ -1,18 +1,18 @@
 {
- "id": "civic_center",
- "name": "Civic Center",
+ "id": "shopping_street",
+ "name": "Shopping Street",
  "size_tiles": [
-  80,
+  90,
   44
  ],
- "music": "civic",
+ "music": "day_city",
  "ground": [
   {
    "type": "plaza_alt",
    "rect": [
     0,
     0,
-    80,
+    90,
     20
    ]
   },
@@ -21,7 +21,7 @@
    "rect": [
     0,
     20,
-    80,
+    90,
     4
    ]
   },
@@ -30,7 +30,7 @@
    "rect": [
     0,
     24,
-    80,
+    90,
     1
    ]
   },
@@ -39,7 +39,7 @@
    "rect": [
     0,
     25,
-    80,
+    90,
     5
    ]
   },
@@ -48,7 +48,7 @@
    "rect": [
     0,
     27,
-    80,
+    90,
     1
    ],
    "step": 2
@@ -58,7 +58,7 @@
    "rect": [
     0,
     30,
-    80,
+    90,
     1
    ]
   },
@@ -67,33 +67,32 @@
    "rect": [
     0,
     31,
-    80,
+    90,
     3
-   ]
-  },
-  {
-   "type": "plaza",
-   "rect": [
-    0,
-    34,
-    80,
-    10
    ]
   },
   {
    "type": "plaza_alt",
    "rect": [
-    16,
+    0,
     34,
-    16,
-    5
-   ],
-   "step": 2
+    90,
+    10
+   ]
   },
   {
    "type": "crosswalk_h",
    "rect": [
-    34,
+    22,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    62,
     25,
     3,
     5
@@ -101,24 +100,23 @@
   }
  ],
  "buildings": [
-  "city_hall"
+  "threadline_apparel",
+  "lantern_bistro",
+  "crestline_flagship",
+  "popup_unit"
  ],
  "fillers": [
   {
-   "sprite": "civic_annex",
+   "sprite": "retail_arcade",
    "x": 20
   },
   {
-   "sprite": "office_slab",
-   "x": 506
+   "sprite": "cinema_front",
+   "x": 587
   },
   {
-   "sprite": "brick_shops",
-   "x": 718
-  },
-  {
-   "sprite": "glass_tower",
-   "x": 891
+   "sprite": "shop_row_awning",
+   "x": 1071
   }
  ],
  "props": [
@@ -135,19 +133,6 @@
    "_gen": true
   },
   {
-   "sprite": "lamp_banner",
-   "x": 132,
-   "y": 312,
-   "solid": [
-    6,
-    66,
-    5,
-    4
-   ],
-   "glow": true,
-   "_gen": true
-  },
-  {
    "sprite": "tree_round",
    "x": 188,
    "y": 290,
@@ -157,19 +142,6 @@
     8,
     6
    ],
-   "_gen": true
-  },
-  {
-   "sprite": "lamp_banner",
-   "x": 292,
-   "y": 312,
-   "solid": [
-    6,
-    66,
-    5,
-    4
-   ],
-   "glow": true,
    "_gen": true
   },
   {
@@ -185,19 +157,6 @@
    "_gen": true
   },
   {
-   "sprite": "lamp_banner",
-   "x": 452,
-   "y": 312,
-   "solid": [
-    6,
-    66,
-    5,
-    4
-   ],
-   "glow": true,
-   "_gen": true
-  },
-  {
    "sprite": "tree_round_b",
    "x": 508,
    "y": 290,
@@ -210,15 +169,29 @@
    "_gen": true
   },
   {
-   "sprite": "tree_round",
-   "x": 668,
-   "y": 290,
+   "sprite": "lamp_banner",
+   "x": 612,
+   "y": 312,
    "solid": [
-    28,
-    84,
-    8,
-    6
+    6,
+    66,
+    5,
+    4
    ],
+   "glow": true,
+   "_gen": true
+  },
+  {
+   "sprite": "lamp_banner",
+   "x": 772,
+   "y": 312,
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
    "_gen": true
   },
   {
@@ -261,6 +234,31 @@
   {
    "sprite": "tree_round",
    "x": 1148,
+   "y": 290,
+   "solid": [
+    28,
+    84,
+    8,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "lamp_banner",
+   "x": 1252,
+   "y": 312,
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_gen": true
+  },
+  {
+   "sprite": "tree_round",
+   "x": 1308,
    "y": 290,
    "solid": [
     28,
@@ -356,7 +354,7 @@
   },
   {
    "sprite": "bollard",
-   "x": 316,
+   "x": 352,
    "y": 370,
    "solid": [
     2,
@@ -404,18 +402,6 @@
   },
   {
    "sprite": "bollard",
-   "x": 496,
-   "y": 370,
-   "solid": [
-    2,
-    11,
-    4,
-    3
-   ],
-   "_gen": true
-  },
-  {
-   "sprite": "bollard",
    "x": 532,
    "y": 370,
    "solid": [
@@ -440,7 +426,7 @@
   },
   {
    "sprite": "bollard",
-   "x": 640,
+   "x": 604,
    "y": 370,
    "solid": [
     2,
@@ -452,7 +438,7 @@
   },
   {
    "sprite": "bollard",
-   "x": 676,
+   "x": 640,
    "y": 370,
    "solid": [
     2,
@@ -477,6 +463,18 @@
   {
    "sprite": "bollard",
    "x": 748,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 784,
    "y": 370,
    "solid": [
     2,
@@ -524,7 +522,7 @@
   },
   {
    "sprite": "bollard",
-   "x": 928,
+   "x": 964,
    "y": 370,
    "solid": [
     2,
@@ -584,18 +582,6 @@
   },
   {
    "sprite": "bollard",
-   "x": 1144,
-   "y": 370,
-   "solid": [
-    2,
-    11,
-    4,
-    3
-   ],
-   "_gen": true
-  },
-  {
-   "sprite": "bollard",
    "x": 1180,
    "y": 370,
    "solid": [
@@ -631,8 +617,44 @@
    "_gen": true
   },
   {
-   "sprite": "bike",
-   "x": 129,
+   "sprite": "bollard",
+   "x": 1324,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 1360,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
+   "x": 1396,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "planter_small",
+   "x": 139,
    "y": 324,
    "solid": [
     1,
@@ -643,56 +665,68 @@
    "_gen": true
   },
   {
-   "sprite": "planter",
-   "x": 268,
-   "y": 316,
+   "sprite": "planter_small",
+   "x": 266,
+   "y": 320,
    "solid": [
     1,
-    18,
-    34,
-    8
+    14,
+    22,
+    6
    ],
    "_gen": true
   },
   {
-   "sprite": "planter",
-   "x": 374,
-   "y": 316,
+   "sprite": "planter_small",
+   "x": 324,
+   "y": 320,
    "solid": [
     1,
-    18,
-    34,
-    8
+    14,
+    22,
+    6
    ],
    "_gen": true
   },
   {
-   "sprite": "flagpole",
-   "x": 242,
-   "y": 278,
+   "sprite": "umbrella_table",
+   "x": 511,
+   "y": 328,
    "solid": [
-    1,
-    60,
-    6,
-    5
+    10,
+    30,
+    16,
+    6
    ],
    "_gen": true
   },
   {
-   "sprite": "flagpole",
-   "x": 418,
-   "y": 278,
+   "sprite": "umbrella_table",
+   "x": 551,
+   "y": 328,
    "solid": [
-    1,
-    60,
-    6,
-    5
+    10,
+    30,
+    16,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "cafe_board",
+   "x": 457,
+   "y": 324,
+   "solid": [
+    2,
+    16,
+    12,
+    4
    ],
    "_gen": true
   },
   {
    "sprite": "trash_bin",
-   "x": 810,
+   "x": 714,
    "y": 324,
    "solid": [
     1,
@@ -703,21 +737,44 @@
    "_gen": true
   },
   {
-   "sprite": "direction_sign",
-   "x": 40,
-   "y": 308,
+   "sprite": "planter_small",
+   "x": 875,
+   "y": 320,
    "solid": [
-    18,
-    44,
-    6,
-    4
+    1,
+    14,
+    22,
+    6
    ],
-   "label": "← SHOPPING ST",
+   "_gen": true
+  },
+  {
+   "sprite": "planter_small",
+   "x": 933,
+   "y": 320,
+   "solid": [
+    1,
+    14,
+    22,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bike_rack",
+   "x": 1318,
+   "y": 328,
+   "solid": [
+    1,
+    20,
+    52,
+    5
+   ],
    "_gen": true
   },
   {
    "sprite": "direction_sign",
-   "x": 1210,
+   "x": 1370,
    "y": 308,
    "solid": [
     18,
@@ -725,12 +782,12 @@
     6,
     4
    ],
-   "label": "FINANCIAL →",
+   "label": "CIVIC CENTER →",
    "_gen": true
   },
   {
    "sprite": "digital_sign",
-   "x": 680,
+   "x": 760,
    "y": 304,
    "solid": [
     4,
@@ -741,136 +798,320 @@
    "_gen": true
   },
   {
-   "sprite": "fountain",
-   "x": 384,
-   "y": 556,
-   "_base": 600,
+   "sprite": "lamp",
+   "x": 380,
+   "y": 532,
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_base": 604
+  },
+  {
+   "sprite": "lamp",
+   "x": 508,
+   "y": 532,
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_base": 604
+  },
+  {
+   "sprite": "lamp",
+   "x": 636,
+   "y": 532,
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_base": 604
+  },
+  {
+   "sprite": "string_lights",
+   "x": 390,
+   "y": 540,
+   "overhead": true,
+   "_base": 572
+  },
+  {
+   "sprite": "string_lights",
+   "x": 518,
+   "y": 540,
+   "overhead": true,
+   "_base": 572
+  },
+  {
+   "sprite": "market_stall_rose",
+   "x": 394,
+   "y": 611,
+   "solid": [
+    2,
+    27,
+    56,
+    10
+   ],
+   "show": {
+    "days": "sat,sun",
+    "from": "09:00",
+    "to": "18:00"
+   },
+   "_base": 648
+  },
+  {
+   "sprite": "market_stall_sage",
+   "x": 510,
+   "y": 611,
+   "solid": [
+    2,
+    27,
+    56,
+    10
+   ],
+   "show": {
+    "days": "sat,sun",
+    "from": "09:00",
+    "to": "18:00"
+   },
+   "_base": 648
+  },
+  {
+   "sprite": "market_stall_cream",
+   "x": 626,
+   "y": 611,
+   "solid": [
+    2,
+    27,
+    56,
+    10
+   ],
+   "show": {
+    "days": "sat,sun",
+    "from": "09:00",
+    "to": "18:00"
+   },
+   "_base": 648
+  },
+  {
+   "sprite": "lamp",
+   "x": 900,
+   "y": 532,
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_base": 604
+  },
+  {
+   "sprite": "lamp",
+   "x": 1028,
+   "y": 532,
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_base": 604
+  },
+  {
+   "sprite": "lamp",
+   "x": 1156,
+   "y": 532,
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_base": 604
+  },
+  {
+   "sprite": "string_lights",
+   "x": 910,
+   "y": 540,
+   "overhead": true,
+   "_base": 572
+  },
+  {
+   "sprite": "string_lights",
+   "x": 1038,
+   "y": 540,
+   "overhead": true,
+   "_base": 572
+  },
+  {
+   "sprite": "market_stall_sage",
+   "x": 914,
+   "y": 611,
+   "solid": [
+    2,
+    27,
+    56,
+    10
+   ],
+   "show": {
+    "days": "sat,sun",
+    "from": "09:00",
+    "to": "18:00"
+   },
+   "_base": 648
+  },
+  {
+   "sprite": "market_stall_cream",
+   "x": 1030,
+   "y": 611,
+   "solid": [
+    2,
+    27,
+    56,
+    10
+   ],
+   "show": {
+    "days": "sat,sun",
+    "from": "09:00",
+    "to": "18:00"
+   },
+   "_base": 648
+  },
+  {
+   "sprite": "market_stall_rose",
+   "x": 1146,
+   "y": 611,
+   "solid": [
+    2,
+    27,
+    56,
+    10
+   ],
+   "show": {
+    "days": "sat,sun",
+    "from": "09:00",
+    "to": "18:00"
+   },
+   "_base": 648
+  },
+  {
+   "sprite": "kiosk_flower",
+   "x": 700,
+   "y": 611,
    "solid": [
     4,
-    22,
-    60,
-    16
-   ]
+    18,
+    32,
+    11
+   ],
+   "_base": 640
   },
   {
    "sprite": "bench",
-   "x": 240,
-   "y": 578,
-   "_base": 600,
+   "x": 740,
+   "y": 662,
    "solid": [
     1,
     12,
     34,
     7
-   ]
+   ],
+   "_base": 684
   },
   {
    "sprite": "bench",
+   "x": 792,
+   "y": 662,
+   "solid": [
+    1,
+    12,
+    34,
+    7
+   ],
+   "_base": 684
+  },
+  {
+   "sprite": "bench",
+   "x": 1230,
+   "y": 662,
+   "solid": [
+    1,
+    12,
+    34,
+    7
+   ],
+   "_base": 684
+  },
+  {
+   "sprite": "planter_long",
    "x": 560,
-   "y": 578,
-   "_base": 600,
+   "y": 669,
+   "solid": [
+    2,
+    4,
+    72,
+    11
+   ],
+   "_base": 684
+  },
+  {
+   "sprite": "planter_long",
+   "x": 1120,
+   "y": 669,
+   "solid": [
+    2,
+    4,
+    72,
+    11
+   ],
+   "_base": 684
+  },
+  {
+   "sprite": "bike_rack",
+   "x": 1290,
+   "y": 590,
    "solid": [
     1,
     12,
-    34,
-    7
-   ]
-  },
-  {
-   "sprite": "flower_bed",
-   "x": 330,
-   "y": 618,
-   "_base": 636,
-   "solid": [
-    0,
-    8,
-    36,
-    8
-   ]
-  },
-  {
-   "sprite": "flower_bed",
-   "x": 470,
-   "y": 618,
-   "_base": 636,
-   "solid": [
-    0,
-    8,
-    36,
-    8
-   ]
+    52,
+    10
+   ],
+   "_base": 612
   },
   {
    "sprite": "tree_round",
-   "x": 180,
-   "y": 516,
-   "_base": 608,
+   "x": 40,
+   "y": 534,
    "solid": [
     28,
     84,
     8,
     6
-   ]
+   ],
+   "_base": 626
   },
   {
    "sprite": "tree_round",
-   "x": 700,
-   "y": 516,
-   "_base": 608,
+   "x": 1360,
+   "y": 534,
    "solid": [
     28,
     84,
     8,
     6
-   ]
-  },
-  {
-   "sprite": "tree_round",
-   "x": 900,
-   "y": 516,
-   "_base": 608,
-   "solid": [
-    28,
-    84,
-    8,
-    6
-   ]
-  },
-  {
-   "sprite": "tree_round",
-   "x": 1100,
-   "y": 516,
-   "_base": 608,
-   "solid": [
-    28,
-    84,
-    8,
-    6
-   ]
-  },
-  {
-   "sprite": "tree_round_b",
-   "x": 100,
-   "y": 596,
-   "_base": 688,
-   "solid": [
-    28,
-    84,
-    8,
-    6
-   ]
-  },
-  {
-   "sprite": "tree_round_b",
-   "x": 1200,
-   "y": 596,
-   "_base": 688,
-   "solid": [
-    28,
-    84,
-    8,
-    6
-   ]
+   ],
+   "_base": 626
   },
   {
    "sprite": "hedge",
@@ -955,51 +1196,47 @@
     6
    ],
    "_gen": true
+  },
+  {
+   "sprite": "hedge",
+   "x": 1268,
+   "y": 668,
+   "solid": [
+    0,
+    12,
+    48,
+    6
+   ],
+   "_gen": true
   }
  ],
  "metro": {
-  "station": "civic_center",
-  "x": 820,
+  "station": "shopping_street",
+  "x": 180,
   "y": 560
  },
  "exits": [
   {
-   "id": "west",
-   "rect": [
-    0,
-    320,
-    16,
-    244
-   ],
-   "to": "shopping_street",
-   "spawn": "from_civic_center",
-   "walk_min": 8
-  },
-  {
    "id": "east",
    "rect": [
-    1264,
+    1424,
     320,
     16,
     244
    ],
-   "to": "financial",
-   "spawn": "from_civic_center",
-   "walk_min": 6
+   "to": "civic_center",
+   "spawn": "from_shopping_street",
+   "walk_min": 8
   }
  ],
  "spawns": {
-  "from_financial": [
-   1240,
+  "from_civic_center": [
+   1400,
    430
   ],
   "metro": [
-   860,
+   220,
    642
-  ],
-  "from_shopping_street": [
-   40,
-   430
   ]
  },
  "bounds": {
@@ -1010,36 +1247,59 @@
   {
    "y": 424,
    "dir": -1,
-   "density": 0.6
+   "density": 0.7
   },
   {
    "y": 478,
    "dir": 1,
-   "density": 0.6
+   "density": 0.7
   }
  ],
  "ped_paths": [
   {
    "y": 350,
    "x0": 20,
-   "x1": 1260
+   "x1": 1420
+  },
+  {
+   "y": 362,
+   "x0": 20,
+   "x1": 1420
   },
   {
    "y": 506,
    "x0": 20,
-   "x1": 1260
+   "x1": 1420
   },
   {
-   "y": 600,
+   "y": 590,
+   "x0": 300,
+   "x1": 1420
+  },
+  {
+   "y": 664,
    "x0": 20,
-   "x1": 1260
+   "x1": 1420
   }
  ],
  "ambient_density": {
   "morning": 8,
-  "afternoon": 9,
-  "evening": 5,
-  "night": 2
+  "afternoon": 16,
+  "evening": 14,
+  "night": 5
  },
- "minimap_color": "#8a8470"
+ "ped_outfits": [
+  "luxury_citywear",
+  "luxury_citywear",
+  "luxury_citywear",
+  "casual_jacket",
+  "casual_jacket",
+  "casual_tee",
+  "casual_tee",
+  "startup_casual",
+  "office_professional",
+  "business_suit",
+  "home"
+ ],
+ "minimap_color": "#8a5a78"
 }

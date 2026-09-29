@@ -25,6 +25,7 @@ var night_sprites: Array = []   # [{node, day_tex, night_tex}]
 var light_nodes: Array = []     # additive light sprites (alpha by night)
 var named_npcs := {}
 var poi: Array = []      # minimap points {pos, icon, label}
+var timed_props: Array = []   # [{node, body, show}] props that are only out at certain times (market stalls)
 var _npc_refresh_acc := 0.0
 
 
@@ -83,7 +84,7 @@ func init_nav() -> void:
 	nav.update()
 
 
-func add_solid(r: Rect2) -> void:
+func add_solid(r: Rect2) -> StaticBody2D:
 	var body := StaticBody2D.new()
 	body.collision_layer = 2
 	body.collision_mask = 0
@@ -102,6 +103,7 @@ func add_solid(r: Rect2) -> void:
 			for cx in range(int(floor(g.position.x / NAV_CELL)), int(ceil(g.end.x / NAV_CELL))):
 				if nav.is_in_boundsv(Vector2i(cx, cy)):
 					nav.set_point_solid(Vector2i(cx, cy), true)
+	return body
 
 
 func find_path(from: Vector2, to: Vector2) -> PackedVector2Array:
@@ -128,21 +130,43 @@ func _nearest_free(c: Vector2i) -> Vector2i:
 	return c
 
 
+## Texture key a prop draws with: its `sprite` in this scene's folder (interiors/ or props/), else in props/, else its
+## `fallback` sprite. Lets data name furniture that is still being drawn and show a stand-in until the file lands.
+## "" when none exists.
+func prop_key(p: Dictionary) -> String:
+	var folder := "interiors/" if kind == "interior" else "props/"
+	for sp in [str(p["sprite"]), str(p.get("fallback", ""))]:
+		if sp == "":
+			continue
+		for key in [folder + sp, "props/" + sp]:
+			if Art.has_tex(key):
+				return key
+	return ""
+
+
 ## Place a sprite prop whose data position is its top-left. Returns the y-sorted holder.
+## Optional keys: `if` (a Cond string: the prop is only placed when it holds), `show` ({days, from, to}: out only then,
+## e.g. weekend market stalls), `overhead` (drawn above people, no collision: string lights), `fallback` (stand-in
+## sprite while `sprite` has no art), `unless_art` (skip once that texture exists: a stand-in detail the real art
+## draws itself), `glow`, `night`, `label`, `interact`, `solid`, `tint`. A `<sprite>_lights.png` next to the sprite
+## glows at night like building windows.
 func add_prop(p: Dictionary, parent: Node = null) -> Node2D:
+	if p.has("if") and not Cond.all([str(p["if"])]):
+		return null
+	if p.has("unless_art") and Art.has_tex(str(p["unless_art"])):
+		return null
 	var sprite_path: String = p["sprite"]
 	var folder := "interiors/" if kind == "interior" else "props/"
-	var key := folder + sprite_path
-	var tex := Art.tex(key)
-	if tex == null:
-		key = "props/" + sprite_path
-		tex = Art.tex(key)
-	if tex == null:
+	var key := prop_key(p)
+	if key == "":
 		return null
+	var tex := Art.tex(key)
 	var holder := Node2D.new()
 	var s := Sprite2D.new()
 	s.texture = tex
 	s.centered = false
+	if p.has("tint"):
+		s.modulate = Color(str(p["tint"]))   # greyscale props dyed per placement (Threadline's mannequins)
 	# board-converted art may overhang its design footprint (top/left); placement uses the footprint
 	var sm: Dictionary = DataDB.sprite_meta.get(key, {})
 	var top := int(sm.get("top", 0))
@@ -151,11 +175,12 @@ func add_prop(p: Dictionary, parent: Node = null) -> Node2D:
 	var w := int(sm.get("dw", tex.get_width()))
 	var wall: bool = p.get("wall", false)
 	var floor_decal: bool = p.get("floor", false)
-	if wall or floor_decal:
+	var overhead: bool = p.get("overhead", false)
+	if wall or floor_decal or overhead:
 		holder.position = Vector2(float(p["x"]), float(p["y"]))
 		s.offset = Vector2(-left, -top)
 		holder.add_child(s)
-		(parent if parent != null else back_layer).add_child(holder)
+		(parent if parent != null else (fx_layer if overhead else back_layer)).add_child(holder)
 	else:
 		holder.position = Vector2(float(p["x"]), float(p["y"]) + h)
 		s.offset = Vector2(-left, -h - top)
@@ -170,6 +195,16 @@ func add_prop(p: Dictionary, parent: Node = null) -> Node2D:
 		(parent if parent != null else entities).add_child(holder)
 	if p.has("night"):
 		night_sprites.append({"node": s, "day": tex, "night": Art.tex(folder + str(p["night"]))})
+	if Art.has_tex(key + "_lights"):
+		var lt := Sprite2D.new()
+		lt.texture = Art.tex(key + "_lights")
+		lt.centered = false
+		lt.offset = s.offset
+		var lmat := CanvasItemMaterial.new()
+		lmat.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
+		lt.material = lmat
+		holder.add_child(lt)
+		light_nodes.append({"node": lt, "interior": false})
 	if p.get("glow", false):
 		var g := Sprite2D.new()
 		g.texture = Art.tex("effects/glow_small" if kind == "interior" else "effects/glow_warm")
@@ -184,14 +219,18 @@ func add_prop(p: Dictionary, parent: Node = null) -> Node2D:
 		light_nodes.append({"node": g, "interior": kind == "interior"})
 	# collision (default: bottom band of the sprite)
 	var solid = p.get("solid", null)
-	if not wall and not floor_decal and not (typeof(solid) == TYPE_BOOL and solid == false):
+	var body: StaticBody2D = null
+	if not wall and not floor_decal and not overhead and not (typeof(solid) == TYPE_BOOL and solid == false):
 		var r: Rect2
 		if typeof(solid) == TYPE_ARRAY:
 			r = Rect2(float(p["x"]) + float(solid[0]), float(p["y"]) + float(solid[1]), float(solid[2]), float(solid[3]))
 		else:
 			var band := minf(14.0, h * 0.4)
 			r = Rect2(float(p["x"]) + 1, float(p["y"]) + h - band, w - 2, band)
-		add_solid(r)
+		body = add_solid(r)
+	if p.has("show"):
+		timed_props.append({"node": holder, "body": body, "show": p["show"]})
+		_apply_timed(timed_props[-1])
 	if p.has("label"):
 		var lb := UIK.world_label(str(p["label"]), 5)
 		lb.position = Vector2(2, -h + 3)
@@ -257,6 +296,29 @@ func _process(delta: float) -> void:
 	if _npc_refresh_acc > 1.0:
 		_npc_refresh_acc = 0.0
 		refresh_named_npcs()
+		for tp in timed_props:
+			_apply_timed(tp)
+
+
+## True when now falls in a {days: "all" | "sat,sun" | ..., from: "HH:MM", to: "HH:MM"} window.
+static func in_window(w: Dictionary) -> bool:
+	var days := str(w.get("days", "all"))
+	var wd: String = Clock.WEEKDAYS[Clock.weekday()].to_lower()
+	if days != "all" and not wd in days.split(","):
+		return false
+	var m := Clock.minute_of_day()
+	return m >= Clock.parse_hm(str(w.get("from", "00:00"))) and m < Clock.parse_hm(str(w.get("to", "24:00")))
+
+
+## Stalls are packed away outside their hours: hidden and walk-through (NPC paths still keep clear of the spot).
+func _apply_timed(tp: Dictionary) -> void:
+	var on := in_window(tp["show"])
+	var n: Node2D = tp["node"]
+	if is_instance_valid(n) and n.visible != on:
+		n.visible = on
+	var b: StaticBody2D = tp["body"]
+	if b != null and is_instance_valid(b):
+		b.collision_layer = 2 if on else 0
 
 
 ## Named NPCs present here right now according to their schedules.
@@ -272,6 +334,8 @@ func npcs_scheduled_here() -> Dictionary:
 				continue
 			var days: String = str(s.get("days", "all"))
 			if days != "all" and not wd in days.split(","):
+				continue
+			if s.has("if") and not Cond.all([str(s["if"])]):
 				continue
 			if m >= Clock.parse_hm(s["from"]) and m < Clock.parse_hm(s["to"]):
 				out[nid] = s

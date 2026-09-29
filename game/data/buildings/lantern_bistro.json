@@ -1,0 +1,181 @@
+{
+ "id": "lantern_bistro",
+ "name": "Lantern Bistro",
+ "district": "shopping_street",
+ "type": "restaurant",
+ "hours": {
+  "open": "11:00",
+  "close": "23:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "lantern_bistro",
+  "x": 415,
+  "sign": "LANTERN BISTRO"
+ },
+ "interior": {
+  "size": [
+   22,
+   14
+  ],
+  "floor": "checker",
+  "wall": "brick",
+  "ambient": "cafe",
+  "props": [
+   {
+    "sprite": "menu_board",
+    "x": 24,
+    "y": 6,
+    "wall": true
+   },
+   {
+    "sprite": "window_day",
+    "x": 250,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "framed_art_b",
+    "x": 200,
+    "y": 12,
+    "wall": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 110,
+    "y": 0,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 214,
+    "y": 40,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 286,
+    "y": 40,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "kitchen_pass",
+    "fallback": "kitchen",
+    "x": 120,
+    "y": 34
+   },
+   {
+    "sprite": "bar_counter",
+    "fallback": "cafe_counter",
+    "x": 16,
+    "y": 52
+   },
+   {
+    "sprite": "dining_table",
+    "fallback": "cafe_table",
+    "x": 212,
+    "y": 100
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 194,
+    "y": 96,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 238,
+    "y": 96,
+    "solid": false
+   },
+   {
+    "sprite": "dining_table",
+    "fallback": "cafe_table",
+    "x": 284,
+    "y": 100
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 266,
+    "y": 96,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 310,
+    "y": 96,
+    "solid": false
+   },
+   {
+    "sprite": "dining_table",
+    "fallback": "cafe_table",
+    "x": 212,
+    "y": 160
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 194,
+    "y": 156,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 238,
+    "y": 156,
+    "solid": false
+   },
+   {
+    "sprite": "dining_table",
+    "fallback": "cafe_table",
+    "x": 284,
+    "y": 160
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 266,
+    "y": 156,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 310,
+    "y": 156,
+    "solid": false
+   },
+   {
+    "sprite": "plant_big",
+    "x": 4,
+    "y": 170
+   },
+   {
+    "sprite": "plant",
+    "x": 320,
+    "y": 46
+   }
+  ],
+  "interactables": [
+   {
+    "id": "counter",
+    "at": [
+     66,
+     106
+    ],
+    "label": "Order the house special ($22)",
+    "action": "buy_item",
+    "params": {
+     "item": "meal",
+     "name": "House special",
+     "price": 22.0,
+     "minutes": 50,
+     "category": "dining",
+     "flag": "ate_at_lantern_bistro"
+    }
+   }
+  ],
+  "npc_spots": {}
+ }
+}

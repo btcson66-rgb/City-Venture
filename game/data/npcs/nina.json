@@ -1,0 +1,46 @@
+{
+ "id": "nina",
+ "name": "Nina",
+ "role": "Threadline stylist",
+ "appearance": {
+  "presentation": "neutral",
+  "face": "oval",
+  "hair": "bun",
+  "hair_color": "blonde",
+  "skin": "s2",
+  "eye_shape": "wide",
+  "eye_color": "blue",
+  "brows": "arched",
+  "mouth": "smile",
+  "accessory": "none"
+ },
+ "outfit": "luxury_citywear",
+ "outfit_tints": {
+  "top": "#3a3a42"
+ },
+ "schedule": [
+  {
+   "days": "all",
+   "from": "10:00",
+   "to": "21:00",
+   "location": "interior:threadline_apparel",
+   "spot": "counter",
+   "pose": "idle"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [
+    "!flag:met_nina"
+   ],
+   "conversation": "nina_first",
+   "action": "clothing_shop"
+  },
+  {
+   "when": [],
+   "conversation": "nina_chat",
+   "action": "clothing_shop"
+  }
+ ],
+ "phone_contact": false
+}

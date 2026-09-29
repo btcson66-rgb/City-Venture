@@ -242,13 +242,86 @@
    "category": "HOME"
   }
  ],
- "outfits_planned": [
-  "EXECUTIVE",
-  "LOGISTICS / SITE",
-  "LUXURY CITYWEAR",
-  "TRAVEL",
-  "FORMAL EVENING"
+ "outfits_shop": [
+  {
+   "id": "executive",
+   "name": "Executive",
+   "price": 640,
+   "store": "threadline_apparel",
+   "blurb": "A sharp three-piece in midnight wool. Pocket square included.",
+   "stand_in": {
+    "outfit": "business_suit",
+    "tints": {
+     "top": "#23263a",
+     "bottom": "#23263a"
+    }
+   }
+  },
+  {
+   "id": "luxury_citywear",
+   "name": "Luxury Citywear",
+   "price": 520,
+   "store": "threadline_apparel",
+   "blurb": "Long camel coat, fine knit, leather boots. Aurelia in autumn.",
+   "stand_in": {
+    "outfit": "casual_jacket",
+    "tints": {
+     "top": "#9c6a44",
+     "bottom": "#2e2a2c"
+    }
+   },
+   "npc_tops": [
+    "#9c6a44",
+    "#3a3a42",
+    "#2c3550",
+    "#5e2a33",
+    "#6b6f5a"
+   ]
+  },
+  {
+   "id": "travel",
+   "name": "Travel",
+   "price": 240,
+   "store": "threadline_apparel",
+   "blurb": "Light down jacket, cross-body bag, shoes you can run a terminal in.",
+   "stand_in": {
+    "outfit": "casual_jacket",
+    "tints": {
+     "top": "#5f6e44",
+     "bottom": "#3d4250"
+    }
+   }
+  },
+  {
+   "id": "formal_evening",
+   "name": "Formal Evening",
+   "price": 780,
+   "store": "threadline_apparel",
+   "blurb": "Black tie. For galas, launches and the night you sign the big one.",
+   "stand_in": {
+    "outfit": "business_suit",
+    "tints": {
+     "top": "#15161c",
+     "bottom": "#15161c"
+    }
+   }
+  },
+  {
+   "id": "logistics_site",
+   "name": "Logistics / Site",
+   "price": 120,
+   "store": "threadline_apparel",
+   "blurb": "Hi-vis vest, work trousers, steel-toe boots. For warehouse days.",
+   "stand_in": {
+    "outfit": "courier",
+    "tints": {
+     "top": "#e8742a",
+     "bottom": "#3c4048"
+    }
+   }
+  }
  ],
+ "outfits_planned": [],
  "accessories": [
   {
    "id": "none",

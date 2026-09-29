@@ -13,11 +13,11 @@ extends RefCounted
 
 const EXPENSE_CATEGORIES := ["advertising", "shipping", "platform_fees", "packaging", "photography", "registration",
 	"rent_office", "coworking", "inventory_writeoff", "bank_fees", "late_fees", "rent_home", "living", "coffee", "transport",
-	"penalties", "payroll", "recruiting", "interest", "servers", "other"]
+	"clothing", "dining", "penalties", "payroll", "recruiting", "interest", "servers", "other"]
 const OPEX_BUSINESS := ["advertising", "shipping", "platform_fees", "packaging", "photography", "registration",
 	"rent_office", "coworking", "inventory_writeoff", "bank_fees", "late_fees", "penalties", "payroll", "recruiting", "interest",
 	"servers", "other"]
-const PERSONAL := ["rent_home", "living", "coffee", "transport"]
+const PERSONAL := ["rent_home", "living", "coffee", "transport", "clothing", "dining"]
 
 
 static func _L() -> Dictionary:

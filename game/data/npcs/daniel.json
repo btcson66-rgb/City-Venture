@@ -27,6 +27,15 @@
    "location": "interior:nexus_cowork",
    "spot": "lounge2",
    "pose": "sit"
+  },
+  {
+   "days": "sat,sun",
+   "from": "11:00",
+   "to": "16:00",
+   "location": "interior:crestline_flagship",
+   "spot": "floor",
+   "pose": "idle",
+   "if": "flag:big_contract_offered"
   }
  ],
  "dialogue": [

@@ -103,7 +103,7 @@
   {
    "id": "shopping_street",
    "name": "Shopping Street",
-   "status": "planned",
+   "status": "active",
    "map_pos": [
     128,
     190
@@ -351,7 +351,11 @@
    "riverside>financial": 10,
    "startup_hub>civic_center": 9,
    "startup_hub>financial": 8,
-   "civic_center>financial": 5
+   "civic_center>financial": 5,
+   "shopping_street>civic_center": 7,
+   "shopping_street>startup_hub": 11,
+   "shopping_street>financial": 9,
+   "shopping_street>riverside": 15
   }
  },
  "board_extra": {

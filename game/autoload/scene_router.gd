@@ -32,6 +32,11 @@ func _setup_input() -> void:
 
 func _set_scene(n: Node) -> void:
 	if current != null and is_instance_valid(current):
+		# take it out of the physics world now: queue_free alone leaves the old walls in place until the end of the
+		# frame, and a physics step in between shoves the new player out of them (spawned inside a room, pushed
+		# 120 px down past its bottom wall)
+		if current.get_parent() == holder:
+			holder.remove_child(current)
 		current.queue_free()
 	current = n
 	holder.add_child(n)

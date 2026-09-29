@@ -146,7 +146,7 @@ msgstr "再做 %d 班升為%s"
 msgid "%d order%s waiting to be packed — packing table (home or office)."
 msgstr "%d 筆訂單%s等待打包——到打包桌（家裡或辦公室）。"
 
-#: scripts/world/actions.gd:198
+#: scripts/world/actions.gd:249
 msgid "%d orders waiting to be packed. I'm on it."
 msgstr "還有 %d 筆訂單等著打包，我正在處理。"
 
@@ -186,6 +186,10 @@ msgstr "%s 上線了"
 msgid "%s ads"
 msgstr "%s 廣告"
 
+#: scripts/world/actions.gd:170
+msgid "%s at %s — %s."
+msgstr "%s（%s）——%s。"
+
 #: scripts/sim/insolvency.gd:28
 msgid "%s became insolvent: %s"
 msgstr "%s 無力償債：%s"
@@ -206,15 +210,15 @@ msgstr "%s 已結束營業：最後分配"
 msgid "%s closed: final distribution, rest of the investment written off"
 msgstr "%s 已結束營業：最後分配，其餘投資認列損失"
 
-#: scripts/world/actions.gd:74
+#: scripts/world/actions.gd:84
 msgid "%s is already registered (%s)."
 msgstr "%s 已經登記過了（%s）。"
 
-#: scripts/world/actions.gd:168
+#: scripts/world/actions.gd:219
 msgid "%s is busy."
 msgstr "%s 在忙。"
 
-#: autoload/scene_router.gd:165
+#: autoload/scene_router.gd:170
 msgid "%s is closed. Open %s–%s, %s."
 msgstr "%s 目前沒開。營業時間 %s–%s，%s。"
 
@@ -438,7 +442,11 @@ msgstr "一位熟客說她只買看得到、擺在櫃檯上的東西。記下來
 msgid "A seller drops off twenty parcels with no labels. You feel their pain."
 msgstr "一個賣家拿來二十個沒貼標籤的包裹。你完全懂那種痛。"
 
-#: scripts/ui/modals/wardrobe_modal.gd:36
+#: data/character/options.json
+msgid "A sharp three-piece in midnight wool. Pocket square included."
+msgstr "午夜藍羊毛三件式，剪裁俐落，附口袋巾。"
+
+#: scripts/ui/modals/wardrobe_modal.gd:56
 msgid "ACCESSORY"
 msgstr "配件"
 
@@ -550,7 +558,7 @@ msgstr "Alex"
 msgid "Alex Chen"
 msgstr "Alex Chen"
 
-#: scripts/world/actions.gd:198
+#: scripts/world/actions.gd:249
 msgid "All packed. The courier comes at 16:00."
 msgstr "都打包好了，快遞 16:00 來收。"
 
@@ -597,6 +605,10 @@ msgstr "回覆客人、幫你處理退貨（有庫存就換貨，否則退款）
 #: scripts/ui/modals/job_modal.gd:29
 msgid "Any time %s–%s, %s · one shift a day"
 msgstr "%s–%s 隨時可上班，%s · 每天一班"
+
+#: data/dialogue/nina_first.json
+msgid "Anything you buy goes in your wardrobe at home. The fitting room's at the back."
+msgstr "買的衣服都會放進你家的衣櫃。試衣間在最裡面。"
 
 #: scripts/ui/modals/company_os.gd:586
 msgid "Applicants for %s:"
@@ -706,6 +718,10 @@ msgstr "創業  ·  生活  ·  連結  ·  成長"
 msgid "Back"
 msgstr "返回"
 
+#: data/dialogue/nina_chat.json
+msgid "Back again. The rails are where you left them."
+msgstr "又來啦。衣架都還在你上次看的地方。"
+
 #: data/dialogue/jun_chat.json
 msgid "Back again. The usual?"
 msgstr "又來啦。老樣子？"
@@ -783,6 +799,10 @@ msgid "Black"
 msgstr "黑色"
 
 #: data/character/options.json
+msgid "Black tie. For galas, launches and the night you sign the big one."
+msgstr "正式黑領結。適合晚宴、發表會，還有簽下大案子的那一晚。"
+
+#: data/character/options.json
 msgid "Blonde"
 msgstr "金色"
 
@@ -818,9 +838,17 @@ msgstr "借 %s"
 msgid "Borrowed %s from Nexus Bank (%d months, %s APR)."
 msgstr "向 Nexus 銀行借了 %s（%d 個月，年利率 %s）。"
 
+#: scripts/sim/wardrobe.gd:69
+msgid "Bought the %s outfit at %s."
+msgstr "買了 %s 服裝（%s）。"
+
 #: data/economy/marketplace.json
 msgid "Bought two by mistake."
 msgstr "不小心買了兩個。"
+
+#: scripts/ui/modals/clothing_shop_modal.gd:86
+msgid "Bought: %s. It's in your wardrobe."
+msgstr "已購買：%s。已放進你的衣櫃。"
 
 #: data/world/years.json
 msgid "Bridge Exploit"
@@ -837,6 +865,10 @@ msgstr "壞掉了，賣家不處理。"
 #: data/character/options.json
 msgid "Brown"
 msgstr "棕色"
+
+#: data/buildings/threadline_apparel.json
+msgid "Browse the Threadline collection"
+msgstr "逛逛 Threadline 本季系列"
 
 #: data/events/ad_cost_spike.json
 msgid "Budget raised."
@@ -930,7 +962,7 @@ msgstr "營業項目"
 msgid "Businesses"
 msgstr "事業"
 
-#: scripts/world/actions.gd:191
+#: scripts/world/actions.gd:242
 msgid "Busy day. All good."
 msgstr "今天很忙，一切順利。"
 
@@ -953,6 +985,10 @@ msgstr "批貨進來、網路上賣。在有人按下「購買」之前，你的
 #: data/story/chapters.json
 msgid "Buy your first stock (Company OS → Operations). Laptop at home or a co-work desk."
 msgstr "進第一批貨（Company OS → 營運）。用家裡的筆電或共享辦公桌。"
+
+#: scripts/ui/modals/clothing_shop_modal.gd:64
+msgid "Buy — %s"
+msgstr "購買——%s"
 
 #: scripts/ui/modals/company_os.gd:676
 msgid "Buyer"
@@ -1018,6 +1054,10 @@ msgstr "流失率"
 msgid "CITY VENTURE"
 msgstr "CITY VENTURE"
 
+#: data/districts/shopping_street.json
+msgid "CIVIC CENTER →"
+msgstr "市政中心 →"
+
 #: scripts/ui/modals/company_os.gd:30
 msgid "CLOSED"
 msgstr "已結清"
@@ -1062,7 +1102,7 @@ msgstr "今天就到這裡？你會在早上 7:00 起床。遊戲會自動存檔
 msgid "Call me when you can do volume."
 msgstr "等你有量了再打給我。"
 
-#: autoload/scene_router.gd:80
+#: autoload/scene_router.gd:85
 msgid "Call me. Or text. Or whatever."
 msgstr "打給我。或傳訊息。隨便。"
 
@@ -1270,7 +1310,7 @@ msgstr "客戶每天早上會張貼小案子。接下一個，在任何筆電上
 msgid "Climate"
 msgstr "氣候"
 
-#: scripts/ui/modals/business_board.gd:30 scripts/ui/modals/city_map_modal.gd:112 scripts/ui/modals/cowork_desk_modal.gd:27 scripts/ui/modals/info_modal.gd:29
+#: scripts/ui/modals/business_board.gd:30 scripts/ui/modals/city_map_modal.gd:112 scripts/ui/modals/clothing_shop_modal.gd:26 scripts/ui/modals/clothing_shop_modal.gd:56
 msgid "Close"
 msgstr "關閉"
 
@@ -1314,7 +1354,7 @@ msgstr "寫新功能 %d 小時"
 msgid "Code for %d hours"
 msgstr "寫程式 %d 小時"
 
-#: scripts/world/actions.gd:179
+#: scripts/world/actions.gd:230
 msgid "Coffee"
 msgstr "咖啡"
 
@@ -1322,11 +1362,11 @@ msgstr "咖啡"
 msgid "Coffee machine, printer, Wi-Fi: you fix all three before lunch."
 msgstr "咖啡機、印表機、Wi-Fi：午餐前你三個都修好了。"
 
-#: scripts/world/actions.gd:183
+#: scripts/world/actions.gd:234
 msgid "Coffee — %s."
 msgstr "咖啡——%s。"
 
-#: scripts/world/actions.gd:128
+#: scripts/world/actions.gd:138
 msgid "Coffee — %s. Tastes like possibility."
 msgstr "咖啡——%s。喝起來是可能性的味道。"
 
@@ -1438,7 +1478,7 @@ msgstr "多花一件商品＋快捷運費。很可能拿到五星。"
 msgid "Could I get a loan?"
 msgstr "我可以貸款嗎？"
 
-#: scripts/world/actions.gd:191
+#: scripts/world/actions.gd:242
 msgid "Could use a bit more support around here."
 msgstr "這裡有點需要更多支援。"
 
@@ -1486,9 +1526,17 @@ msgstr "信用分數 %d · %s"
 msgid "Credit score now %d. Bank loans pause for 90 days. You can register a new company at City Hall whenever you're ready."
 msgstr "信用分數現在是 %d。90 天內不能申請銀行貸款。準備好了隨時可以到市政廳登記新公司。"
 
+#: data/buildings/crestline_flagship.json
+msgid "Crestline Flagship"
+msgstr "Crestline 旗艦店"
+
 #: data/events/crestline_big_offer.json
 msgid "Crestline wants 800 lamps"
 msgstr "Crestline 要 800 盞燈"
+
+#: data/buildings/crestline_flagship.json
+msgid "Crestline's autumn lighting range. One shelf is still empty."
+msgstr "Crestline 的秋季燈具系列。有一層架子還空著。"
 
 #: data/story/chapters.json
 msgid "Crestline's offer is in Company OS → Contracts: accept, counter or decline"
@@ -1790,10 +1838,6 @@ msgstr "E／點擊 ›"
 msgid "EMPLOYEES"
 msgstr "員工"
 
-#: data/character/options.json
-msgid "EXECUTIVE"
-msgstr "主管"
-
 #: scripts/world/interior.gd:47
 msgid "EXIT"
 msgstr "出口"
@@ -1938,6 +1982,10 @@ msgstr "跟描述一模一樣。出貨很快。"
 msgid "Excellent"
 msgstr "優良"
 
+#: data/character/options.json
+msgid "Executive"
+msgstr "主管"
+
 #: scripts/ui/tutorial.gd:282
 msgid "Exit"
 msgstr "出口"
@@ -1973,10 +2021,6 @@ msgstr "眉毛"
 #: data/districts/civic_center.json
 msgid "FINANCIAL →"
 msgstr "金融區 →"
-
-#: data/character/options.json
-msgid "FORMAL EVENING"
-msgstr "晚宴正裝"
 
 #: scripts/frontend/character_creator.gd:52
 msgid "FRONT"
@@ -2094,6 +2138,14 @@ msgstr "第一筆銷售：%s 買了%s，%s。"
 msgid "First unhappy customer"
 msgstr "第一位不滿意的客人"
 
+#: data/buildings/threadline_apparel.json
+msgid "Fitting room — change outfit"
+msgstr "試衣間——換衣服"
+
+#: data/dialogue/nina_first.json
+msgid "Five looks this season: Executive, Luxury Citywear, Travel, Formal Evening, and Logistics for the warehouse days."
+msgstr "這季有五種造型：主管、城市精品、旅行、晚宴，還有倉庫日穿的現場工作服。"
+
 #: scripts/ui/modals/world_map_modal.gd:114
 msgid "Flight"
 msgstr "飛行"
@@ -2121,6 +2173,10 @@ msgstr "人流 × 轉換率 × 客單價。房租可不會休息。"
 #: data/dialogue/sofia_account.json
 msgid "For a business account I'll need your registration and an opening deposit. Minimum $500."
 msgstr "開企業帳戶需要公司登記和開戶存款。最低 $500。"
+
+#: data/character/options.json
+msgid "Formal Evening"
+msgstr "晚宴"
 
 #: data/economy/marketplace.json
 msgid "Found it cheaper elsewhere."
@@ -2354,6 +2410,10 @@ msgstr "嘿，我聽說了。我認識的創辦人大多收掉過一間公司，
 msgid "Hi! Rosa from Harbor Point Fitness."
 msgstr "嗨！我是 Harbor Point 健身房的 Rosa。"
 
+#: data/character/options.json
+msgid "Hi-vis vest, work trousers, steel-toe boots. For warehouse days."
+msgstr "反光背心、工作褲、鋼頭靴。倉庫日專用。"
+
 #: scripts/ui/modals/pause_menu.gd:48
 msgid "High"
 msgstr "高"
@@ -2430,7 +2490,7 @@ msgstr "房租＋生活費"
 msgid "Honest. I respect it."
 msgstr "很誠實。我欣賞。"
 
-#: scripts/world/actions.gd:191
+#: scripts/world/actions.gd:242
 msgid "Honestly? I'm looking at other jobs."
 msgstr "老實說？我在看其他工作了。"
 
@@ -2449,6 +2509,10 @@ msgstr "自由座——月租"
 #: data/businesses/hotel.json
 msgid "Hotel / Tourism"
 msgstr "飯店／觀光"
+
+#: data/buildings/lantern_bistro.json
+msgid "House special"
+msgstr "招牌套餐"
 
 #: data/dialogue/maya_cafe.json
 msgid "How's the empire?"
@@ -2493,6 +2557,10 @@ msgstr "我出 $40,000 投資 {company}，換 20% 股份。你願意的話今天
 #: data/dialogue/maya_intro.json
 msgid "I'm starting a company."
 msgstr "我要開公司。"
+
+#: data/dialogue/nina_first.json
+msgid "I've got a meeting that matters."
+msgstr "我有個很重要的會議。"
 
 #: scripts/ui/modals/company_os.gd:26
 msgid "IN TRANSIT"
@@ -2646,7 +2714,7 @@ msgstr "7月"
 msgid "Jun"
 msgstr "Jun"
 
-#: data/dialogue/ana_register.json
+#: data/dialogue/ana_register.json data/dialogue/nina_first.json
 msgid "Just looking."
 msgstr "只是看看。"
 
@@ -2722,17 +2790,13 @@ msgstr "圖例"
 msgid "LIVE"
 msgstr "販售中"
 
-#: data/character/options.json
-msgid "LOGISTICS / SITE"
-msgstr "物流／工地"
-
-#: data/character/options.json
-msgid "LUXURY CITYWEAR"
-msgstr "精品街頭"
-
 #: scripts/ui/modals/pause_menu.gd:37
 msgid "Language"
 msgstr "語言"
+
+#: data/buildings/lantern_bistro.json
+msgid "Lantern Bistro"
+msgstr "Lantern Bistro 小酒館"
 
 #: data/character/options.json
 msgid "Lanyard"
@@ -2830,6 +2894,10 @@ msgstr "人生紀錄"
 msgid "Light"
 msgstr "淺色"
 
+#: data/character/options.json
+msgid "Light down jacket, cross-body bag, shoes you can run a terminal in."
+msgstr "輕羽絨外套、斜背包，還有能在航廈裡奔跑的鞋。"
+
 #: scripts/sim/insolvency.gd:122
 msgid "Liquidation payment — %s"
 msgstr "清算還款——%s"
@@ -2891,8 +2959,24 @@ msgid "Logistics"
 msgstr "物流"
 
 #: data/character/options.json
+msgid "Logistics / Site"
+msgstr "現場工作"
+
+#: data/character/options.json
 msgid "Long"
 msgstr "長髮"
+
+#: data/character/options.json
+msgid "Long camel coat, fine knit, leather boots. Aurelia in autumn."
+msgstr "駝色長大衣、細針織衫、皮靴。秋天的 Aurelia。"
+
+#: data/dialogue/nina_first.json
+msgid "Look all you like. The mirror's honest, I'm honest-ish."
+msgstr "慢慢看。鏡子很誠實，我大概也算誠實。"
+
+#: data/buildings/crestline_flagship.json
+msgid "Look at the lighting display"
+msgstr "看看燈具展示台"
 
 #: data/story/chapters.json
 msgid "Look at you. A whole company. Drinks on {company}?"
@@ -2945,6 +3029,10 @@ msgstr "Lumina Direct（進口代理）"
 #: data/regions/auroria.json
 msgid "Luxury"
 msgstr "精品"
+
+#: data/character/options.json
+msgid "Luxury Citywear"
+msgstr "城市精品"
 
 #: data/city/aurelia.json
 msgid "Luxury Heights"
@@ -3090,11 +3178,11 @@ msgstr "訊息"
 msgid "Messy"
 msgstr "蓬亂"
 
-#: scripts/ui/tutorial.gd:330 scripts/world/district.gd:61
+#: scripts/ui/tutorial.gd:330 scripts/world/district.gd:63
 msgid "Metro"
 msgstr "捷運"
 
-#: autoload/scene_router.gd:196
+#: autoload/scene_router.gd:201
 msgid "Metro fare to %s"
 msgstr "捷運車資：往%s"
 
@@ -3102,7 +3190,7 @@ msgstr "捷運車資：往%s"
 msgid "Metro · 5 lines"
 msgstr "捷運 · 5 條路線"
 
-#: scripts/world/district.gd:60
+#: scripts/world/district.gd:62
 msgid "Metro — %s Station"
 msgstr "捷運——%s站"
 
@@ -3178,7 +3266,7 @@ msgstr "每月還款"
 msgid "Monthly rent"
 msgstr "月租"
 
-#: autoload/scene_router.gd:164 scripts/ui/modals/job_modal.gd:30
+#: autoload/scene_router.gd:169 scripts/ui/modals/job_modal.gd:30
 msgid "Mon–Fri"
 msgstr "週一至週五"
 
@@ -3187,8 +3275,12 @@ msgid "Morale %d"
 msgstr "士氣 %d"
 
 #: scripts/frontend/character_creator.gd:148
-msgid "More outfits (Executive, Luxury Citywear, Travel, Formal) and accessories (hats, bags, jewellery, watches) come with the wardrobe & clothing store — planned."
-msgstr "更多服裝（主管、精品街頭、旅行、正裝）和配件（帽子、包包、飾品、手錶）將隨衣帽間與服飾店推出——規劃中。"
+msgid "More outfits (Executive, Luxury Citywear, Travel, Formal Evening, Logistics) are sold at Threadline on Shopping Street. Accessories (hats, bags, jewellery, watches) — planned."
+msgstr "更多服裝（主管、城市精品、旅行、晚宴、現場工作）在購物街的 Threadline 販售。配件（帽子、包包、首飾、手錶）——規劃中。"
+
+#: scripts/ui/modals/wardrobe_modal.gd:62
+msgid "More outfits at Threadline, Shopping Street."
+msgstr "更多服裝在購物街的 Threadline。"
 
 #: scripts/ui/hud.gd:216
 msgid "Morning · Sunny"
@@ -3350,6 +3442,10 @@ msgstr "新創園區那邊有間 Nexus 共享辦公室。他們有個佈告欄�
 msgid "Night"
 msgstr "夜晚"
 
+#: data/npcs/nina.json
+msgid "Nina"
+msgstr "Nina"
+
 #: scripts/sim/ecommerce.gd:706
 msgid "No %s in stock to send."
 msgstr "沒有%s的庫存可以寄。"
@@ -3398,7 +3494,11 @@ msgstr "還沒有上架商品。先進貨（營運），再上架（銷售）。
 msgid "No new offers. More arrive every morning at 8:00."
 msgstr "沒有新案子。每天早上 8:00 會有新的。"
 
-#: scripts/world/actions.gd:113
+#: scripts/world/actions.gd:150
+msgid "No one's at the till."
+msgstr "櫃台沒有人。"
+
+#: scripts/world/actions.gd:123
 msgid "No one's behind the counter."
 msgstr "櫃檯沒有人。"
 
@@ -3438,7 +3538,7 @@ msgstr "找不到這筆貸款。"
 msgid "No supplier carries this product."
 msgstr "沒有供應商賣這個商品。"
 
-#: scripts/world/actions.gd:76
+#: scripts/world/actions.gd:86
 msgid "Nobody at the counter. Registration: Mon–Fri 9:00–17:00."
 msgstr "櫃檯沒人。公司登記：週一至週五 9:00–17:00。"
 
@@ -3457,6 +3557,10 @@ msgstr "一般"
 #: data/regions/northridge.json
 msgid "Northridge"
 msgstr "北嶺"
+
+#: scripts/sim/wardrobe.gd:57
+msgid "Not enough cash"
+msgstr "現金不足"
 
 #: scripts/sim/bank.gd:132 scripts/sim/company.gd:103
 msgid "Not enough cash."
@@ -3486,6 +3590,10 @@ msgstr "這個版本還沒有。%s 預計在 %s 推出——玩法會完全不�
 msgid "Not now"
 msgstr "先不要"
 
+#: scripts/sim/wardrobe.gd:53
+msgid "Not sold here"
+msgstr "這裡沒賣"
+
 #: data/economy/marketplace.json
 msgid "Not the colour I expected."
 msgstr "顏色跟想像的不一樣。"
@@ -3497,6 +3605,10 @@ msgstr "今天先不用。"
 #: scripts/sim/bank.gd:69
 msgid "Not while a loan is in arrears."
 msgstr "有逾期貸款時不行。"
+
+#: scripts/ui/modals/clothing_shop_modal.gd:25
+msgid "Nothing on the rails today."
+msgstr "今天衣架上沒有東西。"
 
 #: scripts/sim/ecommerce.gd:523
 msgid "Nothing packed here."
@@ -3510,7 +3622,7 @@ msgstr "沒有打包到——庫存在這裡嗎？"
 msgid "Nothing to deliver."
 msgstr "沒有要交的貨。"
 
-#: scripts/world/actions.gd:68
+#: scripts/world/actions.gd:78
 msgid "Nothing to drop off. Pack orders at your packing table and choose 'Carry to PostPoint'."
 msgstr "沒有要寄的東西。先到打包桌打包，再選「自己拿去 PostPoint」。"
 
@@ -3550,7 +3662,7 @@ msgstr "好"
 msgid "OPEN IN THIS BUILD"
 msgstr "本版本開放"
 
-#: scripts/ui/modals/wardrobe_modal.gd:32
+#: scripts/ui/modals/wardrobe_modal.gd:44
 msgid "OUTFIT"
 msgstr "服裝"
 
@@ -3706,6 +3818,10 @@ msgstr "點杯燕麥拿鐵（$5.20）"
 msgid "Order coffee ($4.50)"
 msgstr "點杯咖啡（$4.50）"
 
+#: data/buildings/lantern_bistro.json
+msgid "Order the house special ($22)"
+msgstr "點招牌套餐（$22）"
+
 #: data/dialogue/ken_intro.json
 msgid "Order through TradeLink on your laptop. Two days to your door."
 msgstr "用筆電在 TradeLink 下單。兩天送到你家門口。"
@@ -3753,6 +3869,10 @@ msgstr "欠款（銀行、薪資、供應商）"
 #: scripts/ui/modals/month_close_modal.gd:45
 msgid "Owed to you (ShopLane + invoices)"
 msgstr "別人欠你（ShopLane＋發票）"
+
+#: scripts/sim/wardrobe.gd:55
+msgid "Owned"
+msgstr "已擁有"
 
 #: scripts/ui/modals/month_close_modal.gd:43
 msgid "Owner money in / out"
@@ -4046,10 +4166,6 @@ msgstr "規劃中（P3）"
 msgid "Planned stations (P1): "
 msgstr "規劃中的車站（P1）："
 
-#: scripts/ui/modals/wardrobe_modal.gd:41
-msgid "Planned: "
-msgstr "規劃中："
-
 #: scripts/ui/modals/company_os.gd:82
 msgid "Planned: %s"
 msgstr "規劃中：%s"
@@ -4069,6 +4185,14 @@ msgstr "馬尾"
 #: scripts/sim/bank.gd:32
 msgid "Poor"
 msgstr "差"
+
+#: data/buildings/popup_unit.json
+msgid "Pop-up Unit 5"
+msgstr "快閃店面 5 號"
+
+#: data/buildings/popup_unit.json
+msgid "Pop-up Unit 5: short leases for shops and cafés. Leasing opens with the retail business (planned)."
+msgstr "快閃店面 5 號：短期出租給商店和咖啡店。零售業開放後才能承租（規劃中）。"
 
 #: scripts/ui/modals/city_map_modal.gd:104
 msgid "Pop. 3.2M · 62 km² · 5 Metro lines"
@@ -4138,7 +4262,7 @@ msgstr "按 M 打開城市地圖。沿著「→」標誌走出街道邊緣可到
 msgid "Press Tab, or click Phone at the top right, to read your messages."
 msgstr "按 Tab，或點右上角的「手機」，查看訊息。"
 
-#: scripts/ui/modals/company_os.gd:308 scripts/ui/modals/company_os.gd:964
+#: scripts/ui/modals/clothing_shop_modal.gd:54 scripts/ui/modals/company_os.gd:308 scripts/ui/modals/company_os.gd:964
 msgid "Price"
 msgstr "售價"
 
@@ -4281,6 +4405,10 @@ msgstr "隨機"
 #: data/world/years.json
 msgid "Rates stay low as startup filings hit a record."
 msgstr "利率維持低檔，新創登記數創新高。"
+
+#: data/buildings/popup_unit.json
+msgid "Read the lease notice"
+msgstr "看租約公告"
 
 #: data/buildings/bloom_coffee.json
 msgid "Read the news board"
@@ -4930,7 +5058,7 @@ msgstr "ShopLane 每週撥款"
 msgid "ShopLane: personal seller limit reached this month."
 msgstr "ShopLane：本月已達個人賣家上限。"
 
-#: data/city/aurelia.json
+#: data/city/aurelia.json data/districts/shopping_street.json
 msgid "Shopping Street"
 msgstr "購物街"
 
@@ -5030,7 +5158,7 @@ msgstr "聰明。第一天什麼都別簽。"
 msgid "Smile"
 msgstr "微笑"
 
-#: autoload/scene_router.gd:79 data/dialogue/maya_intro.json
+#: autoload/scene_router.gd:84 data/dialogue/maya_intro.json
 msgid "So you actually quit?"
 msgstr "真的辭了？"
 
@@ -5206,6 +5334,10 @@ msgstr "用一天就壞了。"
 msgid "Storage"
 msgstr "倉儲"
 
+#: scripts/sim/wardrobe.gd:66 scripts/ui/modals/clothing_shop_modal.gd:17
+msgid "Store"
+msgstr "商店"
+
 #: data/character/options.json
 msgid "Straight"
 msgstr "平眉"
@@ -5274,13 +5406,13 @@ msgstr "供應鏈依賴"
 msgid "Sure. Name, business type, address. $300 fee."
 msgstr "好。公司名稱、營業項目、地址。規費 $300。"
 
+#: scripts/ui/modals/clothing_shop_modal.gd:40
+msgid "THE COLLECTION"
+msgstr "本季系列"
+
 #: scripts/ui/modals/company_os.gd:184
 msgid "THIS MONTH (P&L) · "
 msgstr "本月損益 · "
-
-#: data/character/options.json
-msgid "TRAVEL"
-msgstr "旅行"
 
 #: scripts/ui/tutorial.gd:228
 msgid "TUTORIAL %d/%d"
@@ -5442,9 +5574,13 @@ msgstr "清倉商的貨車在路上了。"
 msgid "The registration fee is %s."
 msgstr "登記規費是 %s。"
 
-#: scripts/world/actions.gd:81
+#: scripts/world/actions.gd:91
 msgid "The teller window is closed."
 msgstr "櫃檯窗口已關閉。"
+
+#: data/dialogue/nina_first.json
+msgid "Then Executive. People decide in the first four seconds. Make them count."
+msgstr "那就選主管系列。別人在頭四秒就決定對你的印象，好好把握。"
 
 #: data/dialogue/maya_cafe.json
 msgid "There you are!"
@@ -5478,7 +5614,7 @@ msgstr "對方放棄了。"
 msgid "Thick"
 msgstr "濃眉"
 
-#: scripts/world/actions.gd:47
+#: scripts/world/actions.gd:50
 msgid "This is Suite 2B's desk. Talk to Tom about leasing it."
 msgstr "這是 2B 室的辦公桌。想租的話找 Tom 談。"
 
@@ -5490,6 +5626,14 @@ msgstr "本月營收"
 msgid "This offer is no longer open."
 msgstr "這個報價已經失效。"
 
+#: data/buildings/threadline_apparel.json
+msgid "Threadline"
+msgstr "Threadline"
+
+#: data/npcs/nina.json
+msgid "Threadline stylist"
+msgstr "Threadline 造型師"
+
 #: data/jobs/parcel_sorter.json
 msgid "Three hundred parcels, one broken scanner. Dara fixes it with a paperclip."
 msgstr "三百個包裹，一台壞掉的掃描器。Dara 用一根迴紋針修好了。"
@@ -5498,7 +5642,7 @@ msgstr "三百個包裹，一台壞掉的掃描器。Dara 用一根迴紋針修�
 msgid "Thu"
 msgstr "四"
 
-#: scripts/world/actions.gd:96
+#: scripts/world/actions.gd:106
 msgid "Ticket A-%d. Now serving A-%d."
 msgstr "號碼 A-%d。目前叫號 A-%d。"
 
@@ -5577,6 +5721,10 @@ msgstr "轉帳給 %s"
 #: scripts/ui/modals/bank_modal.gd:42
 msgid "Transfers"
 msgstr "轉帳"
+
+#: data/character/options.json
+msgid "Travel"
+msgstr "旅行"
 
 #: autoload/clock.gd:13
 msgid "Tue"
@@ -5722,11 +5870,11 @@ msgstr "相鄰的區域可以走路，也可以從任一捷運站搭車。"
 msgid "Walk with WASD or the arrow keys. Hold Shift to run."
 msgstr "用 WASD 或方向鍵走路，按住 Shift 可以跑步。"
 
-#: autoload/scene_router.gd:191
+#: autoload/scene_router.gd:196
 msgid "Walking to %s… (%d min)"
 msgstr "走路前往%s……（%d 分鐘）"
 
-#: scripts/ui/modals/wardrobe_modal.gd:9
+#: scripts/ui/modals/wardrobe_modal.gd:10
 msgid "Wardrobe"
 msgstr "衣櫃"
 
@@ -5754,6 +5902,14 @@ msgstr "我們想幫會員訂 120 個保溫水瓶。每個 $21，票期 30 天�
 msgid "We'll source elsewhere. Thanks anyway."
 msgstr "我們會找別家。還是謝謝。"
 
+#: scripts/ui/modals/clothing_shop_modal.gd:58
+msgid "Wear it now"
+msgstr "現在換上"
+
+#: scripts/ui/modals/clothing_shop_modal.gd:58
+msgid "Wearing it"
+msgstr "正在穿"
+
 #: autoload/clock.gd:13
 msgid "Wed"
 msgstr "三"
@@ -5770,6 +5926,10 @@ msgstr "歡迎加入！每班 4 小時，營業時間內隨時可以來。準備
 msgid "Welcome to Nexus Bank. How can I help?"
 msgstr "歡迎光臨 Nexus 銀行。有什麼需要幫忙的？"
 
+#: data/dialogue/nina_first.json
+msgid "Welcome to Threadline. I'm Nina. Tape measure's for later."
+msgstr "歡迎來到 Threadline。我是 Nina。皮尺等一下再用。"
+
 #: scripts/ui/modals/insolvency_modal.gd:23
 msgid "What happened: %s"
 msgstr "發生了什麼：%s"
@@ -5778,7 +5938,7 @@ msgstr "發生了什麼：%s"
 msgid "Whatever's strongest."
 msgstr "最濃的那種。"
 
-#: scripts/world/actions.gd:193
+#: scripts/world/actions.gd:244
 msgid "When are we getting paid? Rent's due."
 msgstr "什麼時候發薪水？房租要繳了。"
 
@@ -5926,7 +6086,7 @@ msgstr "需要 %d 件庫存（目前 %d 件）。"
 msgid "You need %s (first month%s)."
 msgstr "需要 %s（首月租金%s）。"
 
-#: scripts/world/actions.gd:44
+#: scripts/world/actions.gd:47
 msgid "You need a day pass or a desk plan. Ask at reception."
 msgstr "你需要日票或座位方案。到櫃檯問問。"
 
@@ -6006,6 +6166,10 @@ msgstr "年輕消費者"
 msgid "Young population"
 msgstr "人口年輕"
 
+#: data/buildings/crestline_flagship.json
+msgid "Your LED desk lamps, on Crestline's shelf. Eight hundred of them left through your door."
+msgstr "你的 LED 檯燈上了 Crestline 的貨架。八百盞都是從你家門口出去的。"
+
 #: scripts/sim/bank.gd:87
 msgid "Your books don't support a loan yet. Show me more gross profit."
 msgstr "你的帳目還撐不起一筆貸款。先做出更多毛利。"
@@ -6017,6 +6181,10 @@ msgstr "任何一台筆電都能經營你的事業：家裡書桌、咖啡廳桌
 #: data/events/low_cash_warning.json
 msgid "Your call."
 msgstr "你決定。"
+
+#: scripts/ui/modals/clothing_shop_modal.gd:55
+msgid "Your cash"
+msgstr "你的現金"
 
 #: scripts/sim/bank.gd:66
 msgid "Your credit history needs time to recover."
@@ -6254,7 +6422,7 @@ msgstr "匯差"
 msgid "go to the workplace to work a shift"
 msgstr "要到工作地點才能上班"
 
-#: scripts/world/actions.gd:36
+#: scripts/world/actions.gd:39
 msgid "hiring — ask about the job"
 msgstr "徵人中——詢問這份工作"
 
@@ -6370,6 +6538,10 @@ msgstr "新增信貸"
 msgid "no buffs, just scale"
 msgstr "沒有加成，只有規模"
 
+#: scripts/world/actions.gd:32
+msgid "no one at the till"
+msgstr "櫃台沒人"
+
 #: scripts/sim/fmt.gd:54
 msgid "no reviews"
 msgstr "尚無評價"
@@ -6386,7 +6558,7 @@ msgstr "未登記（個人賣家）"
 msgid "not your office (yet)"
 msgstr "（還）不是你的辦公室"
 
-#: scripts/world/actions.gd:32
+#: scripts/world/actions.gd:35
 msgid "nothing to drop off"
 msgstr "沒有要寄的"
 
@@ -6398,7 +6570,7 @@ msgstr "代工訂單"
 msgid "on delivery"
 msgstr "交件時"
 
-#: scripts/world/actions.gd:128
+#: scripts/world/actions.gd:138
 msgid "on the house (staff)"
 msgstr "員工免費"
 
@@ -6653,6 +6825,10 @@ msgstr "← 提領 $500"
 #: data/districts/startup_hub.json
 msgid "← RIVERSIDE"
 msgstr "← 河濱區"
+
+#: data/districts/civic_center.json
+msgid "← SHOPPING ST"
+msgstr "← 購物街"
 
 #: scripts/ui/modals/bank_modal.gd:44
 msgid "→ Company $1,000"

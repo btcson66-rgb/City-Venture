@@ -145,7 +145,7 @@ func _refresh() -> void:
 				h.add_child(UIK.button(o["name"], func(): outfit = o["id"]; _refresh(), "tab_active" if outfit == o["id"] else "tab"))
 			options_box.add_child(h)
 			_cycle("Accessory", "accessories", "accessory")
-			options_box.add_child(UIK.wrap("More outfits (Executive, Luxury Citywear, Travel, Formal) and accessories (hats, bags, jewellery, watches) come with the wardrobe & clothing store — planned.", 7, Art.C_DIM, 380))
+			options_box.add_child(UIK.wrap("More outfits (Executive, Luxury Citywear, Travel, Formal Evening, Logistics) are sold at Threadline on Shopping Street. Accessories (hats, bags, jewellery, watches) — planned.", 7, Art.C_DIM, 380))
 
 
 func _lbl(t: String) -> Label:

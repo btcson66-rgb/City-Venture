@@ -1,0 +1,70 @@
+{
+ "id": "popup_unit",
+ "name": "Pop-up Unit 5",
+ "district": "shopping_street",
+ "type": "retail_space",
+ "hours": {
+  "open": "09:00",
+  "close": "21:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "popup_unit",
+  "x": 1242,
+  "sign": "UNIT 5 · TO LET"
+ },
+ "interior": {
+  "size": [
+   16,
+   11
+  ],
+  "floor": "concrete",
+  "wall": "white_modern",
+  "ambient": "",
+  "props": [
+   {
+    "sprite": "window_day",
+    "x": 150,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "box",
+    "x": 30,
+    "y": 70
+   },
+   {
+    "sprite": "box",
+    "x": 46,
+    "y": 74
+   },
+   {
+    "sprite": "box",
+    "x": 38,
+    "y": 60
+   },
+   {
+    "sprite": "box",
+    "x": 200,
+    "y": 120
+   }
+  ],
+  "interactables": [
+   {
+    "id": "notice",
+    "at": [
+     128,
+     80
+    ],
+    "label": "Read the lease notice",
+    "action": "look",
+    "params": {
+     "icon": "shop",
+     "text": "Pop-up Unit 5: short leases for shops and cafés. Leasing opens with the retail business (planned)."
+    }
+   }
+  ],
+  "npc_spots": {}
+ }
+}

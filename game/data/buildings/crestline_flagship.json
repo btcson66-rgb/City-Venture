@@ -1,0 +1,182 @@
+{
+ "id": "crestline_flagship",
+ "name": "Crestline Flagship",
+ "district": "shopping_street",
+ "type": "retail",
+ "hours": {
+  "open": "10:00",
+  "close": "21:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "crestline_flagship",
+  "x": 798,
+  "sign": "CRESTLINE"
+ },
+ "interior": {
+  "size": [
+   30,
+   16
+  ],
+  "floor": "marble",
+  "wall": "white_modern",
+  "ambient": "shop",
+  "props": [
+   {
+    "sprite": "window_wide_day",
+    "x": 40,
+    "y": 2,
+    "wall": true,
+    "night": "window_wide_night"
+   },
+   {
+    "sprite": "window_wide_day",
+    "x": 344,
+    "y": 2,
+    "wall": true,
+    "night": "window_wide_night"
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 180,
+    "y": 0,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 284,
+    "y": 0,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "escalator",
+    "x": 400,
+    "y": 14
+   },
+   {
+    "sprite": "plant_bank",
+    "x": 6,
+    "y": 40
+   },
+   {
+    "sprite": "retail_shelf",
+    "fallback": "shoe_shelf",
+    "x": 150,
+    "y": 34
+   },
+   {
+    "sprite": "retail_shelf",
+    "fallback": "shoe_shelf",
+    "x": 250,
+    "y": 34
+   },
+   {
+    "sprite": "clothing_rack",
+    "x": 40,
+    "y": 84
+   },
+   {
+    "sprite": "clothing_rack",
+    "x": 40,
+    "y": 150
+   },
+   {
+    "sprite": "mannequin",
+    "x": 128,
+    "y": 112,
+    "tint": "#2c3e66"
+   },
+   {
+    "sprite": "mannequin",
+    "x": 156,
+    "y": 112,
+    "tint": "#b8bcc4"
+   },
+   {
+    "sprite": "display_table",
+    "fallback": "clothing_rack",
+    "x": 344,
+    "y": 84
+   },
+   {
+    "sprite": "lamp_display",
+    "fallback": "coffee_table",
+    "x": 224,
+    "y": 126,
+    "if": "!flag:big_contract_delivered"
+   },
+   {
+    "sprite": "lamp_display_stocked",
+    "fallback": "coffee_table",
+    "x": 224,
+    "y": 126,
+    "if": "flag:big_contract_delivered"
+   },
+   {
+    "sprite": "product_desk_lamp",
+    "x": 226,
+    "y": 116,
+    "overhead": true,
+    "if": "flag:big_contract_delivered",
+    "unless_art": "interiors/lamp_display_stocked"
+   },
+   {
+    "sprite": "product_desk_lamp",
+    "x": 250,
+    "y": 116,
+    "overhead": true,
+    "if": "flag:big_contract_delivered",
+    "unless_art": "interiors/lamp_display_stocked"
+   },
+   {
+    "sprite": "waiting_sofa",
+    "x": 120,
+    "y": 196
+   },
+   {
+    "sprite": "checkout_counter",
+    "x": 318,
+    "y": 170
+   },
+   {
+    "sprite": "checkout_counter",
+    "x": 404,
+    "y": 170
+   },
+   {
+    "sprite": "plant_bank",
+    "x": 6,
+    "y": 200
+   }
+  ],
+  "interactables": [
+   {
+    "id": "lighting",
+    "at": [
+     244,
+     162
+    ],
+    "label": "Look at the lighting display",
+    "action": "look",
+    "params": {
+     "icon": "star",
+     "text": "Crestline's autumn lighting range. One shelf is still empty.",
+     "alt": [
+      {
+       "if": "flag:big_contract_delivered",
+       "text": "Your LED desk lamps, on Crestline's shelf. Eight hundred of them left through your door."
+      }
+     ]
+    }
+   }
+  ],
+  "npc_spots": {
+   "floor": [
+    276,
+    150
+   ]
+  }
+ }
+}

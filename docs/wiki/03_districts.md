@@ -72,7 +72,7 @@
 | 可進入建築 | `city_hall` Aurelia City Hall |
 | 填充建築 | `civic_annex` · `office_slab` · `brick_shops` · `glass_tower` |
 | 街道物件 | 旗桿 ×2、噴水池、樹 ×14、樹籬 ×7、花圃 ×2、長椅 ×2、護柱 ×30 |
-| 出口 | 東 → Financial |
+| 出口 | 西 → Shopping Street · 東 → Financial |
 | 捷運 | M1、M5 |
 | 規劃 | 填充建築 `civic_annex` 的招牌已經是 TAX OFFICE；P2 讓它可以進入，成為 `tax_office` 稅務局（見 [04](04_buildings.md)） |
 
@@ -92,26 +92,30 @@
 | 捷運 | M1、M4 |
 | 規劃 | P1 加入 `northlight_capital` Elena 的創投辦公室；P3 玩家總部可以搬到 `finance_tower` |
 
+### Shopping Street 購物街 · `shopping_street`
+
+| 項目 | 內容 |
+|------|------|
+| 狀態 | 已實作（2026-09-29）· 美術 Codex B1 起步：七棟立面、街道物件、Threadline 家具。**Crestline 和 Lantern Bistro 室內用現有家具暫代**；五套服裝用現有服裝換色暫代（見 [07](07_characters.md#服裝)） |
+| 尺寸 | 90×44 格 |
+| 氣質 | 雨遮、櫥窗、串燈。晚上是暖色招牌（**克制，不是霓虹**），週末有市集攤位 |
+| 主色 | `#E2649A` 玫瑰 |
+| 小地圖色 | `#8A5A78` |
+| 地面 | 上廣場 → 人行道 → 馬路（2 條斑馬線）→ 人行道 → **市集廣場**（`plaza_alt`） |
+| 可進入建築 | `threadline_apparel` Threadline 服飾店（買衣服、試衣間換裝，店員 Nina）· `lantern_bistro` Lantern Bistro（點招牌套餐 $22，計入「餐飲」支出）· `crestline_flagship` Crestline 旗艦店（第 5 章交貨後展示台上有玩家的 LED 檯燈；Daniel 在接洽大訂單後週末 11–16 點會在店裡）· `popup_unit` Pop-up Unit 5（空店面，看租約公告；承租是規劃中 P3） |
+| 填充建築 | `retail_arcade` 騎樓商場 · `cinema_front` 電影院 · `shop_row_awning` 雨遮店排 |
+| 街道物件 | 市集攤 `market_stall_rose` / `_sage` / `_cream` 各 2（**週六、週日 09–18 點才擺出來**，其他時間收起、可以穿過）、串燈 `string_lights` ×4（晚上發光，掛在 6 支路燈 `lamp` 之間）、花攤 `kiosk_flower`、長花台 `planter_long` ×2、腳踏車架 `bike_rack` ×2、長椅 ×3、北側人行道的樹、旗燈、護柱、盆栽、餐廳洋傘桌 |
+| 路人 | 多穿 Luxury Citywear（大衣顏色會變） |
+| 出口 | 東 → Civic Center（步行 8 分鐘；Civic Center 西側新增出口） |
+| 捷運 | M5 |
+| 音樂 | 資料欄位 `day_city`（規劃：輕快 city pop，晚上轉 lounge） |
+| 規劃 | `street_performer_spot` 街頭藝人；地點卡照片 `locations/i_shopping_street`；Pop-up 承租（P3） |
+
 ---
 
 ## 規劃中的區域
 
 以下是**設定稿**，程式和美術都還沒做。每區都照上面的版型：一排建築、兩線道、一條特色帶。每區需要的美術清單在最後的「每區交付清單」。
-
-### Shopping Street 購物街 · `shopping_street` · P1
-
-| 項目 | 設定 |
-|------|------|
-| 一句話 | 零售、餐廳、夜生活 |
-| 主色 | `#E2649A` 玫瑰 |
-| 氣質 | 行人徒步街加一段馬路。雨遮、櫥窗、串燈。晚上是暖色招牌（**克制，不是霓虹**），週末有市集攤位 |
-| 特色帶 | 徒步廣場＋週末市集（攤位白天出現、晚上收起） |
-| 可進入建築 | `threadline_apparel` Threadline 服飾店（**衣櫃系統**：買 Executive、Luxury Citywear、Travel、Formal 服裝）· `crestline_flagship` Crestline 百貨旗艦店（Daniel 公司的門市，看得到玩家的檯燈上架）· `lantern_bistro` Lantern Bistro 餐廳 · `popup_unit` Pop-up Unit 5 可租的快閃店面（P3 零售/咖啡業） |
-| 填充建築 | `retail_arcade` 騎樓商場 · `shop_row_awning` 雨遮店排 · `cinema_front` 電影院門面 |
-| 新街道物件 | `market_stall` 市集攤（3 色）、`string_lights` 串燈（夜間發光）、`kiosk_flower` 花攤、`planter_long` 長花台、`bike_rack` 腳踏車架、`street_performer_spot` 街頭藝人位置標記（放 NPC 用，無圖） |
-| NPC | Nina（Threadline 店員） |
-| 捷運 | M5 |
-| 音樂 | 輕快 city pop，晚上轉 lounge |
 
 ### Harbor 港區 · `harbor` · P1
 

@@ -12,6 +12,10 @@ var ambient: Array = []
 var staff_nodes := {}
 
 
+func _init() -> void:
+	kind = "interior"   # before build(): seats() and prop lookups work on a room that is only data (tests)
+
+
 func build(building_id: String) -> void:
 	kind = "interior"
 	scene_id = building_id
@@ -272,6 +276,10 @@ func _spawn_ambient() -> void:
 	match str(bdef.get("type", "")):
 		"cafe":
 			n = 3
+		"restaurant":
+			n = 4
+		"retail":
+			n = 2
 		"coworking":
 			n = 5
 		"bank":
@@ -351,8 +359,8 @@ func _seat_taken(pos: Vector2) -> bool:
 
 ## A prop's footprint in room pixels (sprite_meta overhang excluded), matching add_prop's placement.
 func _prop_rect(p: Dictionary) -> Rect2:
-	var key := "interiors/" + str(p["sprite"])
-	var tex := Art.tex(key)
+	var key := prop_key(p)   # the sprite add_prop actually draws (props/ products, stand-ins for undrawn furniture)
+	var tex := Art.opt_tex(key) if key != "" else null
 	var sm: Dictionary = DataDB.sprite_meta.get(key, {})
 	var w := float(sm.get("dw", tex.get_width() if tex != null else 16))
 	var h := float((tex.get_height() if tex != null else 16) - int(sm.get("top", 0)))

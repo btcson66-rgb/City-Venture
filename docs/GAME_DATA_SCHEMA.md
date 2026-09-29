@@ -95,6 +95,8 @@ The player's company is created at runtime as entity `co_<slug>` with the same s
 ```
 `location` is `interior:<building_id>` or `district:<district_id>`, and `spot` is a named marker in that layout.
 `pose` (optional, default `idle`) is one of `CharacterRig.POSES` and only shows once the pose art exists.
+`if` (optional) is a condition string (`scripts/sim/cond.gd`). The NPC only keeps that slot while it holds, e.g. Daniel
+minds the Crestline floor on weekends only once `flag:big_contract_offered` is set.
 `outfit_tints` multiply the tintable fabric layers.
 Contacts without an `appearance` (`"phone_only": true`) may set `"logo": "<id>"`. Their avatar then uses
 `assets/logos/<id>.png` when that file exists, and a UI icon otherwise.
@@ -117,7 +119,25 @@ Contacts without an `appearance` (`"phone_only": true`) may set `"logo": "<id>"`
   }
 }
 ```
-`action` values form a closed vocabulary implemented by `scripts/world/actions.gd`: `open_company_os`, `sleep`, `change_outfit`, `buy_item`, `read_news`, `business_board`, `pack_orders`, `dropoff_parcels`, `register_company`, `bank_counter`, `atm`, `lease_office`, `rent_desk`, `talk`, `metro`, `exit`.
+`action` values form a closed vocabulary implemented by `scripts/world/actions.gd`: `open_company_os`, `sleep`, `change_outfit`, `clothing_shop`, `buy_item`, `look`, `read_news`, `business_board`, `pack_orders`, `dropoff_parcels`, `register_company`, `bank_counter`, `atm`, `lease_office`, `rent_desk`, `talk`, `metro`, `exit`.
+
+- `buy_item` with `item: "coffee"` is the café flow. Any other `item` is a meal or purchase: `{item, name, price, minutes, category, flag?}`, paid from personal cash into `exp:<category>` (`dining` for Lantern Bistro).
+- `clothing_shop` opens the store's rails (`ClothingShopModal`) for the building it sits in. `{npc, first?}`: needs the clerk present, and plays the `first` conversation until `met_<npc>` is set.
+- `look` shows a line of text: `{text, icon?, alt: [{if, text}]}`. The first `alt` whose condition holds wins.
+
+`type` sets the minimap icon and how many ambient customers sit down: `cafe` 3, `restaurant` 4, `retail` 2 (on its sofas and benches), `coworking` 5, `bank` 2, `civic` 3, `parcel` 1.
+
+Prop keys (districts and interiors): `sprite`, `x`, `y` (top-left of the design footprint), `solid` (`false` or `[x,y,w,h]`), `wall`, `floor`, `glow`, `night`, `label`, `interact`, plus:
+
+- `if`: a condition. The prop is only placed while it holds (the LED lamps on Crestline's display after `flag:big_contract_delivered`).
+- `show`: `{days, from, to}`. Out only in that window, hidden and walk-through otherwise (weekend market stalls).
+- `overhead`: drawn above people, no collision (string lights).
+- `tint`: `#rrggbb` dye for a greyscale prop (Threadline's mannequins).
+- `fallback`: the sprite to draw while `sprite` has no art yet. Data can name furniture that is still being drawn
+  (Crestline's `retail_shelf`, Lantern Bistro's `dining_table`) and it swaps in when the file lands.
+- `unless_art`: a texture key. The prop is skipped once that texture exists (the loose lamps on Crestline's stand-in
+  display, which `lamp_display_stocked` draws itself).
+- A `<sprite>_lights.png` next to the prop's image glows at night like building windows.
 
 ### 1.9 Districts — `data/districts/<id>.json`
 ```json
@@ -131,9 +151,12 @@ Contacts without an `appearance` (`"phone_only": true`) may set `"logo": "<id>"`
   "traffic":[{"lane":"h","y":492,"dir":1,"density":0.5}],
   "pedestrian_paths":[[[40,470],[1760,470]]],
   "metro":{"station":"riverside","at":[900,450]},
-  "ambient_density":{"morning":8,"afternoon":10,"evening":9,"night":3}
+  "ambient_density":{"morning":8,"afternoon":10,"evening":9,"night":3},
+  "ped_outfits":["luxury_citywear","casual_jacket","casual_tee"]
 }
 ```
+`ped_outfits` (optional) is the pool passers-by dress from (Shopping Street leans to Luxury Citywear).
+Building fronts, fillers and street dressing are laid out by `tools/gen_districts.py <district>` from real sprite widths.
 
 ### 1.10 City and Metro — `data/city/aurelia.json`
 `{id, name, population, districts[{id, name, status, map_pos, blurb}], metro{lines[{id,name,color,stations[]}], travel_min{a->b}, fare}}`
@@ -193,7 +216,17 @@ The slice uses `riverside_studio` (home), `nexus_cowork_desk`, and `startup_hub_
 Only Year 1 is active in the slice. The rest is Planned.
 
 ### 1.18 Character creator options — `data/character/options.json`
-`{presentations[], face_shapes[], hairstyles[], hair_colors[], skin_tones[], eye_shapes[], eye_colors[], eyebrows[], mouths[], outfits[]}`. Each option is `{id, name, layer?, color?}`. **No option has any gameplay field. The validator rejects keys like `bonus`, `stat` and `modifier`.**
+`{presentations[], face_shapes[], hairstyles[], hair_colors[], skin_tones[], eye_shapes[], eye_colors[], eyebrows[], mouths[], outfits[], outfits_shop[]}`. Each option is `{id, name, layer?, color?}`. **No option has any gameplay field. The validator rejects keys like `bonus`, `stat` and `modifier`.**
+
+`outfits` are the creator's starters. `outfits_shop` are sold in stores:
+```json
+{"id":"executive","name":"Executive","price":640,"store":"threadline_apparel","blurb":"...",
+ "stand_in":{"outfit":"business_suit","tints":{"top":"#23263a","bottom":"#23263a"}},
+ "npc_tops":["#9c6a44","#3a3a42"]}
+```
+`stand_in` is what the outfit draws as until `characters/outfit_<id>_<presentation>_top.png` (walk) or
+`portraits/outfit_<id>.png` (portrait) exists, when the real art takes over by itself. `npc_tops` (optional) varies the
+colour on passers-by.
 
 ---
 
@@ -201,7 +234,8 @@ Only Year 1 is active in the slice. The rest is Planned.
 
 ```
 data.player            {name, appearance{presentation,face,hair,hair_color,skin,eye_shape,eye_color,brows,mouth},
-                        outfit, home:"riverside_studio", location{kind,id,x,y,facing}, flags{}}
+                        outfit, wardrobe[outfit ids owned], home:"riverside_studio", location{kind,id,x,y,facing}, flags{}}
+                        (saves without `wardrobe` get the three starter outfits plus the one being worn)
 data.clock             {minutes: int (since 2031-06-01 00:00), speed: float}
 data.entities.<id>     {id, name, kind: person|company|npc_company, founded?, type?, address?, bank_account: bool,
                         properties[], seller_account{type: personal|business, month_gmv}}

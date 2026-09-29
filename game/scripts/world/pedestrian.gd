@@ -18,7 +18,9 @@ func setup(s: Node, p: Dictionary, rng: RandomNumberGenerator, initial: bool) ->
 	_rng = rng
 	rig = CharacterRig.new()
 	add_child(rig)
-	var outfits := ["casual_tee", "casual_tee", "casual_jacket", "casual_jacket", "business_suit", "office_professional", "startup_casual", "home"]
+	var outfits: Array = ["casual_tee", "casual_tee", "casual_jacket", "casual_jacket", "business_suit", "office_professional", "startup_casual", "home"]
+	if s is District and s.def.has("ped_outfits"):
+		outfits = s.def["ped_outfits"]   # each district's crowd: shoppers on Shopping Street, suits downtown
 	var app := Art.random_appearance(rng)
 	var of: String = outfits[rng.randi_range(0, outfits.size() - 1)]
 	rig.setup(app, of, Art.random_outfit_tints(rng, of))

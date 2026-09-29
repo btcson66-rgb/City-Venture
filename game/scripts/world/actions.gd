@@ -27,6 +27,9 @@ static func lock_reason(action: String, params: Dictionary) -> String:
 		"bank_counter":
 			if not npc_present("sofia"):
 				return "teller closed"
+		"clothing_shop":
+			if params.has("npc") and not npc_present(str(params["npc"])):
+				return "no one at the till"
 		"dropoff_parcels":
 			if Ecommerce.carried_count() == 0:
 				return "nothing to drop off"
@@ -53,8 +56,15 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 			UIRoot.open_modal(SleepModal.new())
 		"change_outfit":
 			UIRoot.open_modal(WardrobeModal.new())
+		"clothing_shop":
+			_clothing_shop(params)
+		"look":
+			_look(params)
 		"buy_item":
-			_buy_item(params)
+			if str(params.get("item", "coffee")) == "coffee":
+				_buy_item(params)
+			else:
+				_buy_meal(params)
 		"talk":
 			_talk(str(params.get("npc", "")))
 		"read_news":
@@ -132,6 +142,44 @@ static func _buy_item(params: Dictionary) -> void:
 		buy.call()
 
 
+## A store's rails: the clerk (`npc`) says hello the first time, then the shop opens.
+static func _clothing_shop(params: Dictionary) -> void:
+	var npc := str(params.get("npc", ""))
+	var store := str(params.get("building", "threadline_apparel"))
+	if npc != "" and not npc_present(npc):
+		UIRoot.toast("No one's at the till.", "warn", "lock")
+		return
+	var open_shop := func(): UIRoot.open_modal(ClothingShopModal.new(store))
+	var first := str(params.get("first", ""))
+	if first != "" and not GameState.flag("met_" + npc):
+		UIRoot.play_dialogue(first, open_shop)
+	else:
+		open_shop.call()
+
+
+## A meal or anything that isn't coffee: pay, spend the time, done. Params: item, price, minutes, category, flag.
+static func _buy_meal(params: Dictionary) -> void:
+	var price := float(params.get("price", 20.0))
+	var what := I18n.t(str(params.get("name", str(params.get("item", "meal")).capitalize())))
+	var where := I18n.t(str(DataDB.building(str(params.get("building", ""))).get("name", "")))
+	Ledger.expense("player", str(params.get("category", "dining")), price, "%s — %s" % [what, where], {"type": "purchase"})
+	Clock.advance(int(params.get("minutes", 45)))
+	if params.has("flag"):
+		GameState.set_flag(params["flag"])
+	GameState.inc_stat("meals")
+	UIRoot.toast(I18n.t("%s at %s — %s.") % [what, where, Fmt.money(price)], "info", "coffee")
+
+
+## Read a sign or look at something. Params: text, and optional alt: [{if, text}] (first match wins).
+static func _look(params: Dictionary) -> void:
+	var text := str(params.get("text", ""))
+	for a in params.get("alt", []):
+		if Cond.all([str(a["if"])]):
+			text = str(a["text"])
+			break
+	UIRoot.toast(StoryEngine.fill(I18n.t(text)), "msg", str(params.get("icon", "info")))
+
+
 static func _talk(npc_id: String) -> void:
 	var def := DataDB.npc(npc_id)
 	for d in def.get("dialogue", []):
@@ -159,6 +207,9 @@ static func _talk(npc_id: String) -> void:
 							UIRoot.open_modal(LoanModal.new(true))
 				"dropoff_parcels":
 					follow = func(): run("dropoff_parcels", {})
+				"clothing_shop":
+					var store := _scene().scene_id if _scene() != null else "threadline_apparel"
+					follow = func(): UIRoot.open_modal(ClothingShopModal.new(store))
 			if d.get("action", "") == "register_company":
 				run("register_company", {})
 				return

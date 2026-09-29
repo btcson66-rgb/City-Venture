@@ -1,0 +1,152 @@
+{
+ "id": "threadline_apparel",
+ "name": "Threadline",
+ "district": "shopping_street",
+ "type": "retail",
+ "hours": {
+  "open": "10:00",
+  "close": "21:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "threadline_apparel",
+  "x": 226,
+  "sign": "THREADLINE"
+ },
+ "interior": {
+  "size": [
+   24,
+   14
+  ],
+  "floor": "wood_dark",
+  "wall": "white_modern",
+  "ambient": "shop",
+  "props": [
+   {
+    "sprite": "window_wide_day",
+    "x": 96,
+    "y": 2,
+    "wall": true,
+    "night": "window_wide_night"
+   },
+   {
+    "sprite": "framed_art",
+    "x": 46,
+    "y": 14,
+    "wall": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 150,
+    "y": 0,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 250,
+    "y": 0,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "plant_big",
+    "x": 4,
+    "y": 36
+   },
+   {
+    "sprite": "shoe_shelf",
+    "x": 200,
+    "y": 34
+   },
+   {
+    "sprite": "mirror_full",
+    "x": 292,
+    "y": 30
+   },
+   {
+    "sprite": "fitting_room",
+    "x": 330,
+    "y": 30
+   },
+   {
+    "sprite": "clothing_rack",
+    "x": 36,
+    "y": 64
+   },
+   {
+    "sprite": "clothing_rack",
+    "x": 36,
+    "y": 132
+   },
+   {
+    "sprite": "clothing_rack",
+    "x": 110,
+    "y": 96
+   },
+   {
+    "sprite": "clothing_rack",
+    "x": 214,
+    "y": 96
+   },
+   {
+    "sprite": "mannequin",
+    "x": 118,
+    "y": 150,
+    "tint": "#9aa3c4"
+   },
+   {
+    "sprite": "mannequin",
+    "x": 146,
+    "y": 150,
+    "tint": "#c89a70"
+   },
+   {
+    "sprite": "mannequin",
+    "x": 226,
+    "y": 150,
+    "tint": "#6f7466"
+   },
+   {
+    "sprite": "checkout_counter",
+    "x": 290,
+    "y": 150
+   },
+   {
+    "sprite": "plant_big",
+    "x": 4,
+    "y": 170
+   }
+  ],
+  "interactables": [
+   {
+    "id": "rails",
+    "at": [
+     142,
+     152
+    ],
+    "label": "Browse the Threadline collection",
+    "action": "clothing_shop",
+    "params": {
+     "npc": "nina",
+     "first": "nina_first"
+    }
+   },
+   {
+    "id": "fitting_room",
+    "at": [
+     354,
+     110
+    ],
+    "label": "Fitting room — change outfit",
+    "action": "change_outfit"
+   }
+  ],
+  "npc_spots": {
+   "counter": [
+    330,
+    160
+   ]
+  }
+ }
+}

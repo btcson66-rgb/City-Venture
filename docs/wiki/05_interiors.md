@@ -172,14 +172,16 @@
 | `finance_tower_hq` | Arc Tower 28F 總部 | 4 | 40×18 | **`exec_desk_premium`**、**`boardroom_table`**、**`reception_logo_wall`**、`carpet_navy`、`window_wide_night` | 30 |
 | `logistics_control_room` | 物流控制室 | P3 | 24×14 | **`control_screens`**（大型螢幕牆，內容用色塊）、`monitor_desk` ×4 | 4 |
 
-### Shopping Street（P1）
+### Shopping Street（已實作 · 2026-09-29）
+
+四間都能進去。**Threadline 的家具全部是 Codex B1 正式圖。**其他三間先用現有家具暫代，粗體的新家具到位後替換：Crestline 用衣架、鞋架、假人、小茶几（燈具展示台暫代）；Lantern Bistro 用咖啡店的桌椅、吧台和廚房；Pop-up 是放了幾個紙箱的空房。
 
 | id | 名稱 | 大小（格） | 地板 / 牆 | 家具 | 互動 | NPC |
 |----|------|-----------|-----------|------|------|-----|
-| `threadline_apparel` | Threadline | 24×14 | wood_dark / white_modern | **`clothing_rack`** ×4、**`mannequin`** ×3（可換裝色）、**`fitting_room`**、**`checkout_counter`**、**`mirror_full`**、**`shoe_shelf`**、`plant_big` | 買衣服（Executive、Luxury Citywear、Travel、Formal Evening、Logistics/Site）、試穿 | Nina |
-| `crestline_flagship` | Crestline 旗艦店 | 30×16 | marble / white_modern | **`retail_shelf`** ×4、**`display_table`**、**`checkout_counter`** ×2、**`escalator`**（背景）、**`lamp_display`**（玩家的檯燈陳列）| 看自己的商品上架（第 5 章之後）、和 Daniel 見面 | Daniel（週末） |
-| `lantern_bistro` | Lantern Bistro | 22×14 | checker / brick | **`dining_table`** ×4、**`bar_counter`**、**`kitchen_pass`**、`hanging_light` ×4、`menu_board`、`plant` | 吃飯（生活費）、和 NPC 約飯 | 服務生（路人） |
-| `popup_unit` | Pop-up Unit 5 | 16×11 | concrete / white_modern | 空房 → 租下後：**`retail_shelf`**、**`checkout_counter`**、`box` | 開實體店（P3） | — |
+| `threadline_apparel` | Threadline | 24×14 | wood_dark / white_modern | **`clothing_rack`** ×4、**`mannequin`** ×3（可換裝色）、**`fitting_room`**、**`checkout_counter`**、**`mirror_full`**、**`shoe_shelf`**、`plant_big` | 已實作：逛衣架 → 買衣服（Executive、Luxury Citywear、Travel、Formal Evening、Logistics/Site）· 試衣間換裝 | Nina（10–21） |
+| `crestline_flagship` | Crestline 旗艦店 | 30×16 | marble / white_modern | **`retail_shelf`** ×4、**`display_table`**、**`checkout_counter`** ×2、**`escalator`**（背景）、**`lamp_display`**（玩家的檯燈陳列）| 已實作：看燈具展示台（第 5 章交貨後出現玩家的 LED 檯燈）· 週末和 Daniel 見面 | Daniel（接洽大訂單後，週六日 11–16） |
+| `lantern_bistro` | Lantern Bistro | 22×14 | checker / brick | **`dining_table`** ×4、**`bar_counter`**、**`kitchen_pass`**、`hanging_light` ×4、`menu_board`、`plant` | 已實作：點招牌套餐 $22（50 分鐘，計入「餐飲」）· 規劃：和 NPC 約飯 | 用餐客人（路人）；服務生規劃中 |
+| `popup_unit` | Pop-up Unit 5 | 16×11 | concrete / white_modern | 空房 → 租下後：**`retail_shelf`**、**`checkout_counter`**、`box` | 已實作：看租約公告 · 規劃：開實體店（P3） | — |
 
 ### Harbor（P1–P2）
 

@@ -3,6 +3,8 @@ extends WorldScene
 ## A walkable city district built entirely from data/districts/<id>.json.
 
 const BASE_Y := 320.0   # building fronts meet the north sidewalk here
+const POI_ICONS := {"home": "home", "cafe": "coffee", "restaurant": "coffee", "bank": "bank", "civic": "civic", "parcel": "parcel",
+	"retail": "shop", "retail_space": "shop"}
 
 var def: Dictionary = {}
 var building_nodes := {}
@@ -15,6 +17,8 @@ var sky_layer: CanvasLayer
 var sky_day: Sprite2D
 var sky_dusk: Sprite2D
 var sky_night: Sprite2D
+var sparkles: Array[Sprite2D] = []
+var _sparkle_t := 0.0
 const SKY_PARALLAX := 0.55
 
 
@@ -28,6 +32,7 @@ func build(district_id: String) -> void:
 	for g in def.get("ground", []):
 		paint(g["type"], g["rect"], int(g.get("step", 1)))
 	_build_sky()
+	_add_water_sparkles()
 	# north edge: building fronts / back of the block are not walkable
 	var b: Dictionary = def.get("bounds", {"top": 322, "bottom": size_px.y - 8})
 	add_solid(Rect2(0, 0, size_px.x, float(b["top"]) - 2.0))
@@ -149,7 +154,7 @@ func _add_building(sprite: String, x: float, bid: String, bd: Dictionary) -> voi
 		trig.setup(bid, Rect2(dx - float(door[2]) / 2.0 + 2, BASE_Y - 1, float(door[2]) - 4, 9))
 		add_child(trig)
 		spawns["door_" + bid] = Vector2(dx, BASE_Y + 22)
-		var icon := "home" if bd.get("type", "") == "home" else ("coffee" if bd.get("type", "") == "cafe" else ("bank" if bd.get("type", "") == "bank" else ("civic" if bd.get("type", "") == "civic" else ("parcel" if bd.get("type", "") == "parcel" else "company"))))
+		var icon: String = POI_ICONS.get(str(bd.get("type", "")), "company")
 		poi.append({"pos": Vector2(dx, BASE_Y), "icon": icon, "label": I18n.t(bd.get("name", bid)), "building": bid})
 
 
@@ -270,9 +275,50 @@ func _update_sky() -> void:
 	sky_night.modulate.a = clampf((nf - 0.35) / 0.4, 0.0, 1.0)
 
 
+## Glints on open water (effects/water_sparkle: 4 frames of 16x8). Each flashes through its frames, then rests, on its
+## own clock; softer at night.
+func _add_water_sparkles() -> void:
+	var tex := Art.opt_tex("effects/water_sparkle")
+	if tex == null:
+		return
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash(scene_id + "_water")
+	var mat := CanvasItemMaterial.new()
+	mat.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
+	for g in def.get("ground", []):
+		if not str(g["type"]) in ["water", "water_alt"]:
+			continue
+		var r: Array = g["rect"]
+		var area := Rect2(float(r[0]) * T, float(r[1]) * T, float(r[2]) * T, float(r[3]) * T)
+		for i in int(area.size.x * area.size.y / 9000.0):
+			var s := Sprite2D.new()
+			s.texture = tex
+			s.hframes = 4
+			s.material = mat
+			s.position = (area.position + Vector2(rng.randf() * area.size.x, rng.randf() * area.size.y)).round()
+			s.set_meta("phase", rng.randf() * 12.0)
+			s.visible = false
+			back_layer.add_child(s)
+			sparkles.append(s)
+
+
+func _update_sparkles(delta: float) -> void:
+	if sparkles.is_empty():
+		return
+	_sparkle_t += delta
+	var a := lerpf(0.9, 0.45, Clock.night_factor())
+	for s in sparkles:
+		var step := int(_sparkle_t * 7.0 + float(s.get_meta("phase"))) % 12   # 4 frames lit, 8 dark
+		s.visible = step < 4
+		if s.visible:
+			s.frame = step
+			s.modulate.a = a
+
+
 func _process(delta: float) -> void:
 	super._process(delta)
 	_update_sky()
+	_update_sparkles(delta)
 	_density_acc += delta
 	if _density_acc > 3.0:
 		_density_acc = 0.0

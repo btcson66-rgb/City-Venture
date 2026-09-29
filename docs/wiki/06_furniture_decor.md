@@ -315,9 +315,9 @@
 | `garage_door` | 車庫門 | 64×48 | 5 | 通往車庫 |
 | `library_wall` | 書牆 | 96×48 | 5 | 牆面 |
 | `hot_plate` | 電爐 | 24×20 | 0 | 老城套房 |
-| `clothing_rack` | 衣架 | 40×48 | 更衣室、服飾店 | 換衣服 |
-| `mirror_full` | 全身鏡 | 20×44 | 更衣室、服飾店 | 試穿 |
-| `shoe_shelf` | 鞋架 | 36×32 | 更衣室、服飾店 | 裝飾 |
+| `clothing_rack` | 衣架 | 40×48 | 更衣室、服飾店 | **B1 已交、已接**（Threadline 逛衣架、Crestline） |
+| `mirror_full` | 全身鏡 | 20×44 | 更衣室、服飾店 | **B1 已交、已接**（Threadline） |
+| `shoe_shelf` | 鞋架 | 36×32 | 更衣室、服飾店 | **B1 已交、已接**（Threadline、Crestline） |
 
 ### 辦公升級組（P1–P3）
 
@@ -336,9 +336,9 @@
 
 | id | 名稱 | 建議尺寸 | 用在 |
 |----|------|----------|------|
-| `mannequin` | 假人（灰階，可染色） | 20×48 | Threadline |
-| `fitting_room` | 試衣間（布簾） | 40×56 | Threadline |
-| `checkout_counter` | 結帳櫃台 | 64×40 | Threadline、Crestline、FreshMart、快閃店 |
+| `mannequin` | 假人（灰階，可染色） | 20×48 | Threadline（**B1 已交、已接**，擺放時用 `tint` 染色）、Crestline 暫用 |
+| `fitting_room` | 試衣間（布簾） | 40×56 | Threadline（**B1 已交、已接**） |
+| `checkout_counter` | 結帳櫃台 | 64×40 | Threadline、Crestline（**B1 已交、已接**）、FreshMart、快閃店 |
 | `retail_shelf` | 商品貨架 | 48×48 | Crestline、快閃店 |
 | `display_table` | 陳列桌 | 48×32 | Crestline |
 | `lamp_display` | 檯燈陳列架 | 48×48 | Crestline（放玩家的 LED 檯燈） |
@@ -407,11 +407,11 @@
 
 | id | 名稱 | 建議尺寸 | 區域 | 備註 |
 |----|------|----------|------|------|
-| `market_stall` | 市集攤位 | 48×48 | Shopping Street | 3 種雨棚色：`_red` `_green` `_blue` |
-| `string_lights` | 串燈 | 96×16 | Shopping Street、Old Town | 晚上發光 |
-| `kiosk_flower` | 花攤 | 40×40 | Shopping Street | |
-| `planter_long` | 長花台 | 64×24 | Shopping Street | |
-| `bike_rack` | 腳踏車架 | 40×20 | Shopping Street、University | |
+| `market_stall` | 市集攤位 | 48×48 | Shopping Street | **B1 已交、已接**：`market_stall_rose` / `_sage` / `_cream`（64×50），週末 09–18 擺出 |
+| `string_lights` | 串燈 | 96×16 | Shopping Street、Old Town | **B1 已交、已接**（128×32 加 `_lights`，掛在路燈之間，畫在行人上方） |
+| `kiosk_flower` | 花攤 | 40×40 | Shopping Street | **B1 已交、已接** |
+| `planter_long` | 長花台 | 64×24 | Shopping Street | **B1 已交、已接** |
+| `bike_rack` | 腳踏車架 | 40×20 | Shopping Street、University | **B1 已交、已接** |
 | `container_red` / `_blue` / `_green` | 貨櫃 | 96×40 | Harbor | 可疊 |
 | `pallet_stack` | 棧板堆 | 32×24 | Harbor | |
 | `crate` | 木箱 | 16×16 | Harbor | |

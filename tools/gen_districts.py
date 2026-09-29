@@ -23,11 +23,17 @@ ROWS = {
                     "apartment_mid", "office_slab"],
     "civic_center": ["civic_annex", "@city_hall", "office_slab", "brick_shops", "glass_tower"],
     "financial": ["finance_tower", "@nexus_bank", "glass_tower", "finance_tower", "office_slab"],
+    "shopping_street": ["retail_arcade", "@threadline_apparel", "@lantern_bistro", "cinema_front", "@crestline_flagship",
+                        "shop_row_awning", "@popup_unit"],
 }
 LABELS = {
     "riverside": {"east": "STARTUP HUB →"}, "startup_hub": {"west": "← RIVERSIDE"},
-    "civic_center": {"east": "FINANCIAL →"}, "financial": {"west": "← CIVIC CENTER"},
+    "civic_center": {"east": "FINANCIAL →", "west": "← SHOPPING ST"}, "financial": {"west": "← CIVIC CENTER"},
+    "shopping_street": {"east": "CIVIC CENTER →"},
 }
+# weekend market (Shopping Street): stalls are out Sat/Sun 09:00-18:00, packed away otherwise
+MARKET_HOURS = {"days": "sat,sun", "from": "09:00", "to": "18:00"}
+STALLS = ["market_stall_rose", "market_stall_sage", "market_stall_cream"]
 
 
 def prop_size(name):
@@ -114,6 +120,15 @@ def layout(did):
             props.append(P("planter_small", dx + 18, 342, [1, 14, 22, 6]))
         elif typ == "parcel":
             props.append(P("bike", dx + 26, 348, [2, 14, 32, 5]))
+        elif typ == "retail":
+            props.append(P("planter_small", dx - 40, 342, [1, 14, 22, 6]))
+            props.append(P("planter_small", dx + 18, 342, [1, 14, 22, 6]))
+        elif typ == "restaurant":
+            props.append(P("umbrella_table", dx + 24, 366, [10, 30, 16, 6]))
+            props.append(P("umbrella_table", dx + 64, 366, [10, 30, 16, 6]))
+            props.append(P("cafe_board", dx - 30, 346, [2, 16, 12, 4]))
+        elif typ == "retail_space":
+            props.append(P("bike_rack", dx + 20, 350, [1, 20, 52, 5]))
         elif typ in ("bank", "civic"):
             props.append(P("planter", dx - 70, 346, [1, 18, 34, 8]))
             props.append(P("planter", dx + 36, 346, [1, 18, 34, 8]))
@@ -153,6 +168,8 @@ def layout(did):
         if sol:
             np["solid"] = sol
         props.append(np)
+    if did == "shopping_street":
+        props += market_square()
     # river railing / hedges along the park
     if did == "riverside":
         for rx in range(0, width, 64):
@@ -170,6 +187,29 @@ def layout(did):
     return len(props)
 
 
+def market_square():
+    """Shopping Street's south plaza: two market runs under string lights, a flower kiosk, benches and planters."""
+    out = []
+    for x0 in (380, 900):
+        for i in range(3):   # lamp posts carrying two spans of string lights
+            out.append(P("lamp", x0 + i * 128, 604, [6, 66, 5, 4], glow=True, _base=604))
+        for i in range(2):
+            out.append({"sprite": "string_lights", "x": x0 + 10 + i * 128, "y": 540, "overhead": True, "_base": 572})
+        for i in range(3):
+            st = P(STALLS[(i + (x0 // 900)) % 3], x0 + 14 + i * 116, 648, [2, 27, 56, 10], show=MARKET_HOURS)
+            st["_base"] = 648
+            out.append(st)
+    out.append(dict(P("kiosk_flower", 700, 640, [4, 18, 32, 11]), _base=640))
+    for bx in (740, 792, 1230):
+        out.append(dict(P("bench", bx, 684, [1, 12, 34, 7]), _base=684))
+    for px in (560, 1120):
+        out.append(dict(P("planter_long", px, 684, [2, 4, 72, 11]), _base=684))
+    out.append(dict(P("bike_rack", 1290, 612, [1, 12, 52, 10]), _base=612))
+    for tx in (40, 1360):
+        out.append(dict(P("tree_round", tx, 626, [28, 84, 8, 6]), _base=626))
+    return out
+
+
 # heights of the v1 props (for re-anchoring legacy south-side dressing)
 OLD_H = {"tree_round": 48, "tree_round_b": 48, "tree_tall": 56, "lamp": 48, "bench": 20, "planter": 24, "trash_bin": 18,
          "bike": 20, "metro_sign": 40, "cafe_board": 20, "umbrella_table": 36, "bus_stop": 44, "billboard": 56,
@@ -181,5 +221,6 @@ SOLIDS = {"tree_round": [28, 84, 8, 6], "tree_round_b": [28, 84, 8, 6], "tree_ta
           "flagpole": [0, 60, 6, 6], "fountain": [4, 22, 60, 16], "flower_bed": [0, 8, 36, 8], "metro_sign": [3, 42, 12, 6]}
 
 if __name__ == "__main__":
-    for did in ROWS:
+    import sys
+    for did in (sys.argv[1:] or ROWS):
         print(did, layout(did), "props")

@@ -87,6 +87,9 @@ func character_layers(app: Dictionary, outfit: String, outfit_tints := {}, npc_i
 	var sc: Color = app.get("_skin_c", opt_color("skin_tones", app.get("skin", "s2"), Color8(248, 208, 176)))
 	var ec: Color = app.get("_eye_c", opt_color("eye_colors", app.get("eye_color", "brown"), Color8(120, 80, 52)))
 	var eyes: String = app.get("eye_shape", "round")
+	var r := _resolve_outfit(outfit, "characters/outfit_%s_" + pres + "_top", outfit_tints)
+	outfit = r[0]
+	outfit_tints = r[1]
 	var L: Array = []
 	L.append({"tex": "characters/hair_%s_back" % hair, "tint": hc, "name": "hair_back"})
 	L.append({"tex": "characters/body_%s_%s" % [pres, face], "tint": sc, "name": "body"})
@@ -103,11 +106,10 @@ func character_layers(app: Dictionary, outfit: String, outfit_tints := {}, npc_i
 	L.append({"tex": "characters/brows_%s" % app.get("brows", "straight"), "tint": hc, "name": "brows"})
 	L.append({"tex": "characters/mouth_%s" % app.get("mouth", "smile"), "tint": Color.WHITE, "name": "mouth"})
 	L.append({"tex": "characters/hair_%s_front" % hair, "tint": hc, "name": "hair_front"})
+	# any accessory with a sheet (glasses, backpack today; hats, bags, watches, badges, headsets as their art lands)
 	var acc: String = app.get("accessory", "none")
-	if acc.begins_with("glasses_"):
+	if acc != "none" and has_tex("characters/acc_" + acc):
 		L.append({"tex": "characters/acc_" + acc, "tint": Color.WHITE, "name": "acc"})
-	elif acc == "backpack":
-		L.append({"tex": "characters/acc_backpack", "tint": Color.WHITE, "name": "acc"})
 	return L
 
 
@@ -122,6 +124,9 @@ func portrait_layers(app: Dictionary, outfit: String, outfit_tints := {}, npc_id
 	var ec: Color = app.get("_eye_c", opt_color("eye_colors", app.get("eye_color", "brown"), Color8(120, 80, 52)))
 	var hair: String = app.get("hair", "messy")
 	var eyes: String = app.get("eye_shape", "round")
+	var r := _resolve_outfit(outfit, "portraits/outfit_%s", outfit_tints)
+	outfit = r[0]
+	outfit_tints = r[1]
 	var L: Array = [
 		{"tex": "portraits/hair_%s_back" % hair, "tint": hc, "frames": 1},
 		{"tex": "portraits/head_%s" % app.get("face", "round"), "tint": sc, "frames": 1},
@@ -140,6 +145,22 @@ func portrait_layers(app: Dictionary, outfit: String, outfit_tints := {}, npc_id
 	if acc != "none" and has_tex("portraits/acc_" + acc):
 		L.append({"tex": "portraits/acc_" + acc, "tint": Color.WHITE, "frames": 1})
 	return L
+
+
+## Outfits sold before their art exists (options.json → outfits_shop[].stand_in) are drawn as a tinted existing
+## outfit, so Threadline works now and the real sheets take over as soon as `probe % outfit` exists.
+## Explicit tints win over the stand-in's. Returns [outfit, tints].
+func _resolve_outfit(outfit: String, probe: String, tints: Dictionary) -> Array:
+	if has_tex(probe % outfit):
+		return [outfit, tints]
+	var st: Dictionary = DataDB.character_option("outfits_shop", outfit).get("stand_in", {})
+	if st.is_empty():
+		return [outfit, tints]
+	var t := {}
+	for k in st.get("tints", {}):
+		t[k] = Color(st["tints"][k])
+	t.merge(tints, true)
+	return [str(st["outfit"]), t]
 
 
 ## Deterministic random appearance for ambient NPCs.
@@ -170,6 +191,11 @@ const SUIT_TINTS := [Color8(58, 61, 68), Color8(44, 62, 102), Color8(184, 188, 1
 
 
 func random_outfit_tints(rng: RandomNumberGenerator, outfit := "") -> Dictionary:
+	var shop := DataDB.character_option("outfits_shop", outfit)
+	if not shop.is_empty():
+		# store-bought looks keep their own colours; `npc_tops` lets passers-by vary the coat
+		var tops: Array = shop.get("npc_tops", [])
+		return {} if tops.is_empty() else {"top": Color(str(tops[rng.randi_range(0, tops.size() - 1)]))}
 	if outfit == "business_suit":
 		var c: Color = SUIT_TINTS[rng.randi_range(0, SUIT_TINTS.size() - 1)]
 		return {"top": c, "bottom": c}

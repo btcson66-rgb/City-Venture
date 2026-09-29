@@ -36,7 +36,7 @@
 | `startup_hub` | Startup Hub 新創園區 | 已實作 | 共享辦公、育成中心、很多咖啡因的創業者 |
 | `civic_center` | Civic Center 市政中心 | 已實作 | 市政廳、許可、公司登記、公共服務 |
 | `financial` | Financial District 金融區 | 已實作 | 銀行、高樓、投資人、律師 |
-| `shopping_street` | Shopping Street 購物街 | 規劃中 P1 | 零售、餐廳、夜生活 |
+| `shopping_street` | Shopping Street 購物街 | 已實作 | 零售、餐廳、夜生活 |
 | `harbor` | Harbor 港區 | 規劃中 P1 | 貨櫃、海關、貨運 |
 | `old_town` | Old Town 老城區 | 規劃中 P1 | 低租金、老店、藝術 |
 | `residential` | Residential 住宅區 | 規劃中 P1 | 學校、公園、家庭 |

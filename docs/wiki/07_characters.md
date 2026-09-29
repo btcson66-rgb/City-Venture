@@ -65,9 +65,11 @@
 | 服裝 | `startup_casual` · `office_professional` · `home` | 見下方服裝表 | A1 走路圖、A5 頭像已更新 |
 | 配件 | `none` · `glasses_round` 圓框眼鏡 · `glasses_square` 方框眼鏡 · `backpack` 後背包 | `acc_<id>` | A1 走路圖已檢查 |
 
-規劃中（捏臉畫面已經寫明「之後在衣櫃和服飾店開放」）：
+**衣櫃系統（2026-09-29 已實作）**：捏臉只給三套起始服裝。其他服裝在購物街的 Threadline 買（`options.json` → `outfits_shop`），買了放進衣櫃（`player.wardrobe`），在家的衣櫃或 Threadline 試衣間換上。只影響外觀，不改任何數值。美術還沒到的服裝用 `stand_in`（現有服裝加顏色）暫代；`characters/outfit_<id>_<體型>_top.png` 一出現就自動換成正式圖，頭像看 `portraits/outfit_<id>.png`。
 
-- 服裝：EXECUTIVE、LOGISTICS / SITE、LUXURY CITYWEAR、TRAVEL、FORMAL EVENING
+仍在規劃中：
+
+- 服裝的正式美術（B1）：Executive、Logistics / Site、Luxury Citywear、Travel、Formal Evening
 - 配件分頁：帽子、包包、首飾、手錶、識別證
 
 ### 服裝
@@ -87,11 +89,11 @@ R1 已交：`business_suit_top_detail`、`courier_top_detail`（三體型各一�
 | `courier` | 快遞 | Dara、Ken | Polo 衫、工作褲、腰包 | 已實作 · CODEX |
 | `casual_jacket` | 休閒外套 | Maya、路人 | 短夾克（可染色） | 已實作 · CODEX |
 | `casual_tee` | 休閒 T 恤 | 路人、客人 | T 恤（可染色）、休閒褲 | 已實作 · CODEX |
-| `executive` | Executive 主管 | 主角（衣櫃） | 剪裁俐落的三件式、口袋巾、手錶 | 規劃中 P1 · `新增` |
-| `logistics_site` | Logistics / Site 現場 | 主角、倉管、工人 | 反光背心、工作靴、安全帽（配件） | 規劃中 P1 · `新增` |
-| `luxury_citywear` | Luxury Citywear 城市精品 | 主角 | 長版大衣、高領毛衣、皮靴（Board A「Casual City」高級版） | 規劃中 P1 · `新增` |
-| `travel` | Travel 旅行 | 主角（出國） | 輕羽絨、斜背包、休閒鞋 | 規劃中 P2 · `新增` |
-| `formal_evening` | Formal Evening 晚宴 | 主角 | 燕尾服或晚禮服 | 規劃中 P1 · `新增` |
+| `executive` | Executive 主管 | 主角（Threadline $640） | 剪裁俐落的三件式、口袋巾、手錶 | 已實作 · **美術暫代**（`business_suit` 午夜藍 `#23263A`）· 等 B1 |
+| `logistics_site` | Logistics / Site 現場 | 主角（Threadline $120）、倉管、工人 | 反光背心、工作靴、安全帽（配件） | 已實作 · **美術暫代**（`courier` 橘 `#E8742A`）· 等 B1 |
+| `luxury_citywear` | Luxury Citywear 城市精品 | 主角（Threadline $520）、Nina、購物街路人 | 長版大衣、高領毛衣、皮靴（Board A「Casual City」高級版） | 已實作 · **美術暫代**（`casual_jacket` 駝色 `#9C6A44`；路人大衣 5 色）· 等 B1 |
+| `travel` | Travel 旅行 | 主角（Threadline $240；出國） | 輕羽絨、斜背包、休閒鞋 | 已實作 · **美術暫代**（`casual_jacket` 橄欖綠 `#5F6E44`）· 等 B1 |
+| `formal_evening` | Formal Evening 晚宴 | 主角（Threadline $780） | 燕尾服或晚禮服 | 已實作 · **美術暫代**（`business_suit` 黑 `#15161C`）· 等 B1 |
 | `student` | 學生 | 大學區路人 | 帽 T、後背包、帆布鞋 | 規劃中 P1 · `新增` |
 | `athleisure` | 運動休閒 | 健身房、慢跑路人、Rosa | 運動外套、緊身褲、跑鞋 | 規劃中 P1 · `新增` |
 | `chef_waiter` | 餐飲制服 | 餐廳員工 | 白色廚師服或黑背心 | 規劃中 P1 · `新增` |
@@ -159,7 +161,8 @@ A5 已重製四種現有表情並補上眼鏡；12 位具名 NPC 的頭像和四
 | `marcus` | Marcus Reed | Nexus Bank 高階主管 | 陽剛 · 方臉 · 銀色旁分 · s5 · 細長眼 · 濃眉 · 平嘴 | `business_suit` | 銀行經理桌，週一到五 13–16 | 傳統金融的代表，**不是反派**。銀髮、手錶、三件式、沉穩 |
 | `tom` | Tom | 租賃仲介 | 陽剛 · 橢圓臉 · 金色短髮 · s1 · 圓眼藍瞳 · 平眉 · 微笑 | `business_suit` | 22 Founders Lane，週一到六 9–18 | 業務笑容，手上一串鑰匙，西裝有點太亮 |
 | `dara` | Dara | PostPoint 店員 | 中性 · 心形臉 · 玫瑰色亂髮 · s4 · 大眼 · 柔眉 · 小嘴 | `courier` | PostPoint 櫃台，每天 8–21 | 手腳很快。耳後夾一支筆，手上掃描槍 |
-| `daniel` | Daniel Wong | Crestline 採購 | 陽剛 · 橢圓臉 · 黑色旁分 · s3 · 杏眼 · 平眉 · 平嘴 · 方框眼鏡 | `business_suit` | Co-work 休息區，週四 17–20 | 第 5 章大訂單的人。精明、有禮、拿著皮革資料夾。大訂單也可能拖垮現金流 |
+| `daniel` | Daniel Wong | Crestline 採購 | 陽剛 · 橢圓臉 · 黑色旁分 · s3 · 杏眼 · 平眉 · 平嘴 · 方框眼鏡 | `business_suit` | Co-work 休息區，週四 17–20；接洽大訂單後，週六日 11–16 也在 Crestline 旗艦店 | 第 5 章大訂單的人。精明、有禮、拿著皮革資料夾。大訂單也可能拖垮現金流 |
+| `nina` | Nina | Threadline 造型師 | 中性 · 橢圓臉 · 金色包頭 · s2 · 大眼藍瞳 · 挑眉 · 微笑 | `luxury_citywear`（炭灰大衣 `#3A3A42`；服裝美術到位前以 `casual_jacket` 暫代） | Threadline 櫃台，每天 10–21 | 衣櫃系統的導覽員。脖子掛皮尺，手上別針墊。第一次逛衣架時打招呼（`nina_first`） |
 | `elena` | Elena Park | Northlight Capital 創投 | 陰柔 · 心形臉 · 黑色旁分 · s2 · 細長眼 · 平眉 · 小嘴 | `office_professional`（冷白外套 `#DFE6F0`、深色褲 `#2F3340`） | Co-work 休息區，週三 15–18 | 冷靜、快、條件不一定划算，玩家可以拒絕。白色西裝外套、極簡耳環 |
 
 > 已解決（2026-09-28）：Maya 和 Elena 原本外型幾乎一樣，現在 Elena 改成心形臉、黑色旁分、細長眼、平眉，穿冷白外套；Maya 維持鮑伯頭，換成暖芥末色外套。
@@ -196,7 +199,9 @@ A5 已重製四種現有表情並補上眼鏡；12 位具名 NPC 的頭像和四
 
 外型全部隨機，服裝從 `casual_tee`、`casual_jacket`、`business_suit`、`office_professional`、`startup_casual` 挑，上衣和褲子隨機染色。各區的密度依時段變化。
 
-**規劃**：各區路人有傾向。金融區多西裝；大學區多 `student`；港區多 `logistics_site`；購物街多 `luxury_citywear` 和提購物袋的路人；住宅區有推嬰兒車、遛狗的人（需要新的配件或道具）。
+各區可以設定路人服裝（區域資料的 `ped_outfits`）：**購物街已實作**，多穿 `luxury_citywear`。
+
+**規劃**：金融區多西裝；大學區多 `student`；港區多 `logistics_site`；購物街加提購物袋的路人；住宅區有推嬰兒車、遛狗的人（需要新的配件或道具）。
 
 ---
 
@@ -211,7 +216,6 @@ A5 已重製四種現有表情並補上眼鏡；12 位具名 NPC 的頭像和四
 | `victor` | Victor Hale | 大型企業家 | P2–P3 | 陽剛 · 方臉 · 銀色短髮 · s1 · 細長眼灰瞳 · 平眉 · 平嘴 | `executive` | 可能是客戶、對手、收購者或夥伴，**不能固定成反派**。高、瘦、訂製西裝、沒有多餘表情 |
 | `rosa` | Rosa Lim | Harbor Point Fitness 老闆 | P1 | 陰柔 · 圓臉 · 黑色馬尾 · s3 · 圓眼深瞳 · 平眉 · 露齒笑 | `athleisure` | 精力旺盛、殺價很兇、很講信用。運動外套、毛巾掛脖子 |
 | `okafor` | Mr. Okafor | 房東 | P1 | 陽剛 · 圓臉 · 灰白平頭 · s6 · 圓眼深瞳 · 濃眉 · 微笑 | 開襟毛衣（`civic_staff` 暫代） | 老城的老派房東：公正、嘮叨、記得每個房客的生日。老花眼鏡 |
-| `nina` | Nina | Threadline 店員 | P1 | 中性 · 橢圓臉 · 金色包頭 · s2 · 大眼藍瞳 · 挑眉 · 微笑 | `luxury_citywear` | 衣櫃系統的導覽員。脖子掛皮尺，手上別針墊 |
 | `ines` | Ines Duarte | 海關官員 | P2 | 陰柔 · 方臉 · 棕色包頭 · s4 · 細長眼 · 濃眉 · 平嘴 | `uniform_officer` | 公事公辦，但會提醒你漏了哪張文件 |
 | `hana` | Prof. Hana Sato | 大學研究室主持人 | P1 | 陰柔 · 橢圓臉 · 銀色鮑伯 · s2 · 圓眼深瞳 · 柔眉 · 微笑 · 圓框眼鏡 | `lab_coat` | 研發合作、介紹實習生。實驗袍口袋插著三支筆 |
 | `kai` | Kai Moreno | Aurelia Daily 記者 | P1 | 中性 · 心形臉 · 棕色亂髮 · s3 · 大眼榛瞳 · 平眉 · 露齒笑 | `casual_jacket` | 「Viral Mention」事件和新聞頭條的人。相機背帶、記者證 |

@@ -145,7 +145,7 @@ msgstr ""
 msgid "%d order%s waiting to be packed — packing table (home or office)."
 msgstr ""
 
-#: scripts/world/actions.gd:198
+#: scripts/world/actions.gd:249
 msgid "%d orders waiting to be packed. I'm on it."
 msgstr ""
 
@@ -185,6 +185,10 @@ msgstr ""
 msgid "%s ads"
 msgstr ""
 
+#: scripts/world/actions.gd:170
+msgid "%s at %s — %s."
+msgstr ""
+
 #: scripts/sim/insolvency.gd:28
 msgid "%s became insolvent: %s"
 msgstr ""
@@ -205,15 +209,15 @@ msgstr ""
 msgid "%s closed: final distribution, rest of the investment written off"
 msgstr ""
 
-#: scripts/world/actions.gd:74
+#: scripts/world/actions.gd:84
 msgid "%s is already registered (%s)."
 msgstr ""
 
-#: scripts/world/actions.gd:168
+#: scripts/world/actions.gd:219
 msgid "%s is busy."
 msgstr ""
 
-#: autoload/scene_router.gd:165
+#: autoload/scene_router.gd:170
 msgid "%s is closed. Open %s–%s, %s."
 msgstr ""
 
@@ -437,7 +441,11 @@ msgstr ""
 msgid "A seller drops off twenty parcels with no labels. You feel their pain."
 msgstr ""
 
-#: scripts/ui/modals/wardrobe_modal.gd:36
+#: data/character/options.json
+msgid "A sharp three-piece in midnight wool. Pocket square included."
+msgstr ""
+
+#: scripts/ui/modals/wardrobe_modal.gd:56
 msgid "ACCESSORY"
 msgstr ""
 
@@ -549,7 +557,7 @@ msgstr ""
 msgid "Alex Chen"
 msgstr ""
 
-#: scripts/world/actions.gd:198
+#: scripts/world/actions.gd:249
 msgid "All packed. The courier comes at 16:00."
 msgstr ""
 
@@ -595,6 +603,10 @@ msgstr ""
 
 #: scripts/ui/modals/job_modal.gd:29
 msgid "Any time %s–%s, %s · one shift a day"
+msgstr ""
+
+#: data/dialogue/nina_first.json
+msgid "Anything you buy goes in your wardrobe at home. The fitting room's at the back."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:586
@@ -705,6 +717,10 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
+#: data/dialogue/nina_chat.json
+msgid "Back again. The rails are where you left them."
+msgstr ""
+
 #: data/dialogue/jun_chat.json
 msgid "Back again. The usual?"
 msgstr ""
@@ -782,6 +798,10 @@ msgid "Black"
 msgstr ""
 
 #: data/character/options.json
+msgid "Black tie. For galas, launches and the night you sign the big one."
+msgstr ""
+
+#: data/character/options.json
 msgid "Blonde"
 msgstr ""
 
@@ -817,8 +837,16 @@ msgstr ""
 msgid "Borrowed %s from Nexus Bank (%d months, %s APR)."
 msgstr ""
 
+#: scripts/sim/wardrobe.gd:69
+msgid "Bought the %s outfit at %s."
+msgstr ""
+
 #: data/economy/marketplace.json
 msgid "Bought two by mistake."
+msgstr ""
+
+#: scripts/ui/modals/clothing_shop_modal.gd:86
+msgid "Bought: %s. It's in your wardrobe."
 msgstr ""
 
 #: data/world/years.json
@@ -835,6 +863,10 @@ msgstr ""
 
 #: data/character/options.json
 msgid "Brown"
+msgstr ""
+
+#: data/buildings/threadline_apparel.json
+msgid "Browse the Threadline collection"
 msgstr ""
 
 #: data/events/ad_cost_spike.json
@@ -929,7 +961,7 @@ msgstr ""
 msgid "Businesses"
 msgstr ""
 
-#: scripts/world/actions.gd:191
+#: scripts/world/actions.gd:242
 msgid "Busy day. All good."
 msgstr ""
 
@@ -951,6 +983,10 @@ msgstr ""
 
 #: data/story/chapters.json
 msgid "Buy your first stock (Company OS → Operations). Laptop at home or a co-work desk."
+msgstr ""
+
+#: scripts/ui/modals/clothing_shop_modal.gd:64
+msgid "Buy — %s"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:676
@@ -1017,6 +1053,10 @@ msgstr ""
 msgid "CITY VENTURE"
 msgstr ""
 
+#: data/districts/shopping_street.json
+msgid "CIVIC CENTER →"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:30
 msgid "CLOSED"
 msgstr ""
@@ -1061,7 +1101,7 @@ msgstr ""
 msgid "Call me when you can do volume."
 msgstr ""
 
-#: autoload/scene_router.gd:80
+#: autoload/scene_router.gd:85
 msgid "Call me. Or text. Or whatever."
 msgstr ""
 
@@ -1269,7 +1309,7 @@ msgstr ""
 msgid "Climate"
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:30 scripts/ui/modals/city_map_modal.gd:112 scripts/ui/modals/cowork_desk_modal.gd:27 scripts/ui/modals/info_modal.gd:29
+#: scripts/ui/modals/business_board.gd:30 scripts/ui/modals/city_map_modal.gd:112 scripts/ui/modals/clothing_shop_modal.gd:26 scripts/ui/modals/clothing_shop_modal.gd:56
 msgid "Close"
 msgstr ""
 
@@ -1313,7 +1353,7 @@ msgstr ""
 msgid "Code for %d hours"
 msgstr ""
 
-#: scripts/world/actions.gd:179
+#: scripts/world/actions.gd:230
 msgid "Coffee"
 msgstr ""
 
@@ -1321,11 +1361,11 @@ msgstr ""
 msgid "Coffee machine, printer, Wi-Fi: you fix all three before lunch."
 msgstr ""
 
-#: scripts/world/actions.gd:183
+#: scripts/world/actions.gd:234
 msgid "Coffee — %s."
 msgstr ""
 
-#: scripts/world/actions.gd:128
+#: scripts/world/actions.gd:138
 msgid "Coffee — %s. Tastes like possibility."
 msgstr ""
 
@@ -1437,7 +1477,7 @@ msgstr ""
 msgid "Could I get a loan?"
 msgstr ""
 
-#: scripts/world/actions.gd:191
+#: scripts/world/actions.gd:242
 msgid "Could use a bit more support around here."
 msgstr ""
 
@@ -1485,8 +1525,16 @@ msgstr ""
 msgid "Credit score now %d. Bank loans pause for 90 days. You can register a new company at City Hall whenever you're ready."
 msgstr ""
 
+#: data/buildings/crestline_flagship.json
+msgid "Crestline Flagship"
+msgstr ""
+
 #: data/events/crestline_big_offer.json
 msgid "Crestline wants 800 lamps"
+msgstr ""
+
+#: data/buildings/crestline_flagship.json
+msgid "Crestline's autumn lighting range. One shelf is still empty."
 msgstr ""
 
 #: data/story/chapters.json
@@ -1789,10 +1837,6 @@ msgstr ""
 msgid "EMPLOYEES"
 msgstr ""
 
-#: data/character/options.json
-msgid "EXECUTIVE"
-msgstr ""
-
 #: scripts/world/interior.gd:47
 msgid "EXIT"
 msgstr ""
@@ -1937,6 +1981,10 @@ msgstr ""
 msgid "Excellent"
 msgstr ""
 
+#: data/character/options.json
+msgid "Executive"
+msgstr ""
+
 #: scripts/ui/tutorial.gd:282
 msgid "Exit"
 msgstr ""
@@ -1971,10 +2019,6 @@ msgstr ""
 
 #: data/districts/civic_center.json
 msgid "FINANCIAL →"
-msgstr ""
-
-#: data/character/options.json
-msgid "FORMAL EVENING"
 msgstr ""
 
 #: scripts/frontend/character_creator.gd:52
@@ -2093,6 +2137,14 @@ msgstr ""
 msgid "First unhappy customer"
 msgstr ""
 
+#: data/buildings/threadline_apparel.json
+msgid "Fitting room — change outfit"
+msgstr ""
+
+#: data/dialogue/nina_first.json
+msgid "Five looks this season: Executive, Luxury Citywear, Travel, Formal Evening, and Logistics for the warehouse days."
+msgstr ""
+
 #: scripts/ui/modals/world_map_modal.gd:114
 msgid "Flight"
 msgstr ""
@@ -2119,6 +2171,10 @@ msgstr ""
 
 #: data/dialogue/sofia_account.json
 msgid "For a business account I'll need your registration and an opening deposit. Minimum $500."
+msgstr ""
+
+#: data/character/options.json
+msgid "Formal Evening"
 msgstr ""
 
 #: data/economy/marketplace.json
@@ -2353,6 +2409,10 @@ msgstr ""
 msgid "Hi! Rosa from Harbor Point Fitness."
 msgstr ""
 
+#: data/character/options.json
+msgid "Hi-vis vest, work trousers, steel-toe boots. For warehouse days."
+msgstr ""
+
 #: scripts/ui/modals/pause_menu.gd:48
 msgid "High"
 msgstr ""
@@ -2429,7 +2489,7 @@ msgstr ""
 msgid "Honest. I respect it."
 msgstr ""
 
-#: scripts/world/actions.gd:191
+#: scripts/world/actions.gd:242
 msgid "Honestly? I'm looking at other jobs."
 msgstr ""
 
@@ -2447,6 +2507,10 @@ msgstr ""
 
 #: data/businesses/hotel.json
 msgid "Hotel / Tourism"
+msgstr ""
+
+#: data/buildings/lantern_bistro.json
+msgid "House special"
 msgstr ""
 
 #: data/dialogue/maya_cafe.json
@@ -2491,6 +2555,10 @@ msgstr ""
 
 #: data/dialogue/maya_intro.json
 msgid "I'm starting a company."
+msgstr ""
+
+#: data/dialogue/nina_first.json
+msgid "I've got a meeting that matters."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:26
@@ -2645,7 +2713,7 @@ msgstr ""
 msgid "Jun"
 msgstr ""
 
-#: data/dialogue/ana_register.json
+#: data/dialogue/ana_register.json data/dialogue/nina_first.json
 msgid "Just looking."
 msgstr ""
 
@@ -2721,16 +2789,12 @@ msgstr ""
 msgid "LIVE"
 msgstr ""
 
-#: data/character/options.json
-msgid "LOGISTICS / SITE"
-msgstr ""
-
-#: data/character/options.json
-msgid "LUXURY CITYWEAR"
-msgstr ""
-
 #: scripts/ui/modals/pause_menu.gd:37
 msgid "Language"
+msgstr ""
+
+#: data/buildings/lantern_bistro.json
+msgid "Lantern Bistro"
 msgstr ""
 
 #: data/character/options.json
@@ -2829,6 +2893,10 @@ msgstr ""
 msgid "Light"
 msgstr ""
 
+#: data/character/options.json
+msgid "Light down jacket, cross-body bag, shoes you can run a terminal in."
+msgstr ""
+
 #: scripts/sim/insolvency.gd:122
 msgid "Liquidation payment — %s"
 msgstr ""
@@ -2890,7 +2958,23 @@ msgid "Logistics"
 msgstr ""
 
 #: data/character/options.json
+msgid "Logistics / Site"
+msgstr ""
+
+#: data/character/options.json
 msgid "Long"
+msgstr ""
+
+#: data/character/options.json
+msgid "Long camel coat, fine knit, leather boots. Aurelia in autumn."
+msgstr ""
+
+#: data/dialogue/nina_first.json
+msgid "Look all you like. The mirror's honest, I'm honest-ish."
+msgstr ""
+
+#: data/buildings/crestline_flagship.json
+msgid "Look at the lighting display"
 msgstr ""
 
 #: data/story/chapters.json
@@ -2943,6 +3027,10 @@ msgstr ""
 
 #: data/regions/auroria.json
 msgid "Luxury"
+msgstr ""
+
+#: data/character/options.json
+msgid "Luxury Citywear"
 msgstr ""
 
 #: data/city/aurelia.json
@@ -3089,11 +3177,11 @@ msgstr ""
 msgid "Messy"
 msgstr ""
 
-#: scripts/ui/tutorial.gd:330 scripts/world/district.gd:61
+#: scripts/ui/tutorial.gd:330 scripts/world/district.gd:63
 msgid "Metro"
 msgstr ""
 
-#: autoload/scene_router.gd:196
+#: autoload/scene_router.gd:201
 msgid "Metro fare to %s"
 msgstr ""
 
@@ -3101,7 +3189,7 @@ msgstr ""
 msgid "Metro · 5 lines"
 msgstr ""
 
-#: scripts/world/district.gd:60
+#: scripts/world/district.gd:62
 msgid "Metro — %s Station"
 msgstr ""
 
@@ -3177,7 +3265,7 @@ msgstr ""
 msgid "Monthly rent"
 msgstr ""
 
-#: autoload/scene_router.gd:164 scripts/ui/modals/job_modal.gd:30
+#: autoload/scene_router.gd:169 scripts/ui/modals/job_modal.gd:30
 msgid "Mon–Fri"
 msgstr ""
 
@@ -3186,7 +3274,11 @@ msgid "Morale %d"
 msgstr ""
 
 #: scripts/frontend/character_creator.gd:148
-msgid "More outfits (Executive, Luxury Citywear, Travel, Formal) and accessories (hats, bags, jewellery, watches) come with the wardrobe & clothing store — planned."
+msgid "More outfits (Executive, Luxury Citywear, Travel, Formal Evening, Logistics) are sold at Threadline on Shopping Street. Accessories (hats, bags, jewellery, watches) — planned."
+msgstr ""
+
+#: scripts/ui/modals/wardrobe_modal.gd:62
+msgid "More outfits at Threadline, Shopping Street."
 msgstr ""
 
 #: scripts/ui/hud.gd:216
@@ -3349,6 +3441,10 @@ msgstr ""
 msgid "Night"
 msgstr ""
 
+#: data/npcs/nina.json
+msgid "Nina"
+msgstr ""
+
 #: scripts/sim/ecommerce.gd:706
 msgid "No %s in stock to send."
 msgstr ""
@@ -3397,7 +3493,11 @@ msgstr ""
 msgid "No new offers. More arrive every morning at 8:00."
 msgstr ""
 
-#: scripts/world/actions.gd:113
+#: scripts/world/actions.gd:150
+msgid "No one's at the till."
+msgstr ""
+
+#: scripts/world/actions.gd:123
 msgid "No one's behind the counter."
 msgstr ""
 
@@ -3437,7 +3537,7 @@ msgstr ""
 msgid "No supplier carries this product."
 msgstr ""
 
-#: scripts/world/actions.gd:76
+#: scripts/world/actions.gd:86
 msgid "Nobody at the counter. Registration: Mon–Fri 9:00–17:00."
 msgstr ""
 
@@ -3455,6 +3555,10 @@ msgstr ""
 
 #: data/regions/northridge.json
 msgid "Northridge"
+msgstr ""
+
+#: scripts/sim/wardrobe.gd:57
+msgid "Not enough cash"
 msgstr ""
 
 #: scripts/sim/bank.gd:132 scripts/sim/company.gd:103
@@ -3485,6 +3589,10 @@ msgstr ""
 msgid "Not now"
 msgstr ""
 
+#: scripts/sim/wardrobe.gd:53
+msgid "Not sold here"
+msgstr ""
+
 #: data/economy/marketplace.json
 msgid "Not the colour I expected."
 msgstr ""
@@ -3495,6 +3603,10 @@ msgstr ""
 
 #: scripts/sim/bank.gd:69
 msgid "Not while a loan is in arrears."
+msgstr ""
+
+#: scripts/ui/modals/clothing_shop_modal.gd:25
+msgid "Nothing on the rails today."
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:523
@@ -3509,7 +3621,7 @@ msgstr ""
 msgid "Nothing to deliver."
 msgstr ""
 
-#: scripts/world/actions.gd:68
+#: scripts/world/actions.gd:78
 msgid "Nothing to drop off. Pack orders at your packing table and choose 'Carry to PostPoint'."
 msgstr ""
 
@@ -3549,7 +3661,7 @@ msgstr ""
 msgid "OPEN IN THIS BUILD"
 msgstr ""
 
-#: scripts/ui/modals/wardrobe_modal.gd:32
+#: scripts/ui/modals/wardrobe_modal.gd:44
 msgid "OUTFIT"
 msgstr ""
 
@@ -3705,6 +3817,10 @@ msgstr ""
 msgid "Order coffee ($4.50)"
 msgstr ""
 
+#: data/buildings/lantern_bistro.json
+msgid "Order the house special ($22)"
+msgstr ""
+
 #: data/dialogue/ken_intro.json
 msgid "Order through TradeLink on your laptop. Two days to your door."
 msgstr ""
@@ -3751,6 +3867,10 @@ msgstr ""
 
 #: scripts/ui/modals/month_close_modal.gd:45
 msgid "Owed to you (ShopLane + invoices)"
+msgstr ""
+
+#: scripts/sim/wardrobe.gd:55
+msgid "Owned"
 msgstr ""
 
 #: scripts/ui/modals/month_close_modal.gd:43
@@ -4045,10 +4165,6 @@ msgstr ""
 msgid "Planned stations (P1): "
 msgstr ""
 
-#: scripts/ui/modals/wardrobe_modal.gd:41
-msgid "Planned: "
-msgstr ""
-
 #: scripts/ui/modals/company_os.gd:82
 msgid "Planned: %s"
 msgstr ""
@@ -4067,6 +4183,14 @@ msgstr ""
 
 #: scripts/sim/bank.gd:32
 msgid "Poor"
+msgstr ""
+
+#: data/buildings/popup_unit.json
+msgid "Pop-up Unit 5"
+msgstr ""
+
+#: data/buildings/popup_unit.json
+msgid "Pop-up Unit 5: short leases for shops and cafés. Leasing opens with the retail business (planned)."
 msgstr ""
 
 #: scripts/ui/modals/city_map_modal.gd:104
@@ -4137,7 +4261,7 @@ msgstr ""
 msgid "Press Tab, or click Phone at the top right, to read your messages."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:308 scripts/ui/modals/company_os.gd:964
+#: scripts/ui/modals/clothing_shop_modal.gd:54 scripts/ui/modals/company_os.gd:308 scripts/ui/modals/company_os.gd:964
 msgid "Price"
 msgstr ""
 
@@ -4279,6 +4403,10 @@ msgstr ""
 
 #: data/world/years.json
 msgid "Rates stay low as startup filings hit a record."
+msgstr ""
+
+#: data/buildings/popup_unit.json
+msgid "Read the lease notice"
 msgstr ""
 
 #: data/buildings/bloom_coffee.json
@@ -4929,7 +5057,7 @@ msgstr ""
 msgid "ShopLane: personal seller limit reached this month."
 msgstr ""
 
-#: data/city/aurelia.json
+#: data/city/aurelia.json data/districts/shopping_street.json
 msgid "Shopping Street"
 msgstr ""
 
@@ -5029,7 +5157,7 @@ msgstr ""
 msgid "Smile"
 msgstr ""
 
-#: autoload/scene_router.gd:79 data/dialogue/maya_intro.json
+#: autoload/scene_router.gd:84 data/dialogue/maya_intro.json
 msgid "So you actually quit?"
 msgstr ""
 
@@ -5205,6 +5333,10 @@ msgstr ""
 msgid "Storage"
 msgstr ""
 
+#: scripts/sim/wardrobe.gd:66 scripts/ui/modals/clothing_shop_modal.gd:17
+msgid "Store"
+msgstr ""
+
 #: data/character/options.json
 msgid "Straight"
 msgstr ""
@@ -5273,12 +5405,12 @@ msgstr ""
 msgid "Sure. Name, business type, address. $300 fee."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:184
-msgid "THIS MONTH (P&L) · "
+#: scripts/ui/modals/clothing_shop_modal.gd:40
+msgid "THE COLLECTION"
 msgstr ""
 
-#: data/character/options.json
-msgid "TRAVEL"
+#: scripts/ui/modals/company_os.gd:184
+msgid "THIS MONTH (P&L) · "
 msgstr ""
 
 #: scripts/ui/tutorial.gd:228
@@ -5441,8 +5573,12 @@ msgstr ""
 msgid "The registration fee is %s."
 msgstr ""
 
-#: scripts/world/actions.gd:81
+#: scripts/world/actions.gd:91
 msgid "The teller window is closed."
+msgstr ""
+
+#: data/dialogue/nina_first.json
+msgid "Then Executive. People decide in the first four seconds. Make them count."
 msgstr ""
 
 #: data/dialogue/maya_cafe.json
@@ -5477,7 +5613,7 @@ msgstr ""
 msgid "Thick"
 msgstr ""
 
-#: scripts/world/actions.gd:47
+#: scripts/world/actions.gd:50
 msgid "This is Suite 2B's desk. Talk to Tom about leasing it."
 msgstr ""
 
@@ -5489,6 +5625,14 @@ msgstr ""
 msgid "This offer is no longer open."
 msgstr ""
 
+#: data/buildings/threadline_apparel.json
+msgid "Threadline"
+msgstr ""
+
+#: data/npcs/nina.json
+msgid "Threadline stylist"
+msgstr ""
+
 #: data/jobs/parcel_sorter.json
 msgid "Three hundred parcels, one broken scanner. Dara fixes it with a paperclip."
 msgstr ""
@@ -5497,7 +5641,7 @@ msgstr ""
 msgid "Thu"
 msgstr ""
 
-#: scripts/world/actions.gd:96
+#: scripts/world/actions.gd:106
 msgid "Ticket A-%d. Now serving A-%d."
 msgstr ""
 
@@ -5575,6 +5719,10 @@ msgstr ""
 
 #: scripts/ui/modals/bank_modal.gd:42
 msgid "Transfers"
+msgstr ""
+
+#: data/character/options.json
+msgid "Travel"
 msgstr ""
 
 #: autoload/clock.gd:13
@@ -5721,11 +5869,11 @@ msgstr ""
 msgid "Walk with WASD or the arrow keys. Hold Shift to run."
 msgstr ""
 
-#: autoload/scene_router.gd:191
+#: autoload/scene_router.gd:196
 msgid "Walking to %s… (%d min)"
 msgstr ""
 
-#: scripts/ui/modals/wardrobe_modal.gd:9
+#: scripts/ui/modals/wardrobe_modal.gd:10
 msgid "Wardrobe"
 msgstr ""
 
@@ -5753,6 +5901,14 @@ msgstr ""
 msgid "We'll source elsewhere. Thanks anyway."
 msgstr ""
 
+#: scripts/ui/modals/clothing_shop_modal.gd:58
+msgid "Wear it now"
+msgstr ""
+
+#: scripts/ui/modals/clothing_shop_modal.gd:58
+msgid "Wearing it"
+msgstr ""
+
 #: autoload/clock.gd:13
 msgid "Wed"
 msgstr ""
@@ -5769,6 +5925,10 @@ msgstr ""
 msgid "Welcome to Nexus Bank. How can I help?"
 msgstr ""
 
+#: data/dialogue/nina_first.json
+msgid "Welcome to Threadline. I'm Nina. Tape measure's for later."
+msgstr ""
+
 #: scripts/ui/modals/insolvency_modal.gd:23
 msgid "What happened: %s"
 msgstr ""
@@ -5777,7 +5937,7 @@ msgstr ""
 msgid "Whatever's strongest."
 msgstr ""
 
-#: scripts/world/actions.gd:193
+#: scripts/world/actions.gd:244
 msgid "When are we getting paid? Rent's due."
 msgstr ""
 
@@ -5925,7 +6085,7 @@ msgstr ""
 msgid "You need %s (first month%s)."
 msgstr ""
 
-#: scripts/world/actions.gd:44
+#: scripts/world/actions.gd:47
 msgid "You need a day pass or a desk plan. Ask at reception."
 msgstr ""
 
@@ -6005,6 +6165,10 @@ msgstr ""
 msgid "Young population"
 msgstr ""
 
+#: data/buildings/crestline_flagship.json
+msgid "Your LED desk lamps, on Crestline's shelf. Eight hundred of them left through your door."
+msgstr ""
+
 #: scripts/sim/bank.gd:87
 msgid "Your books don't support a loan yet. Show me more gross profit."
 msgstr ""
@@ -6015,6 +6179,10 @@ msgstr ""
 
 #: data/events/low_cash_warning.json
 msgid "Your call."
+msgstr ""
+
+#: scripts/ui/modals/clothing_shop_modal.gd:55
+msgid "Your cash"
 msgstr ""
 
 #: scripts/sim/bank.gd:66
@@ -6253,7 +6421,7 @@ msgstr ""
 msgid "go to the workplace to work a shift"
 msgstr ""
 
-#: scripts/world/actions.gd:36
+#: scripts/world/actions.gd:39
 msgid "hiring — ask about the job"
 msgstr ""
 
@@ -6369,6 +6537,10 @@ msgstr ""
 msgid "no buffs, just scale"
 msgstr ""
 
+#: scripts/world/actions.gd:32
+msgid "no one at the till"
+msgstr ""
+
 #: scripts/sim/fmt.gd:54
 msgid "no reviews"
 msgstr ""
@@ -6385,7 +6557,7 @@ msgstr ""
 msgid "not your office (yet)"
 msgstr ""
 
-#: scripts/world/actions.gd:32
+#: scripts/world/actions.gd:35
 msgid "nothing to drop off"
 msgstr ""
 
@@ -6397,7 +6569,7 @@ msgstr ""
 msgid "on delivery"
 msgstr ""
 
-#: scripts/world/actions.gd:128
+#: scripts/world/actions.gd:138
 msgid "on the house (staff)"
 msgstr ""
 
@@ -6651,6 +6823,10 @@ msgstr ""
 
 #: data/districts/startup_hub.json
 msgid "← RIVERSIDE"
+msgstr ""
+
+#: data/districts/civic_center.json
+msgid "← SHOPPING ST"
 msgstr ""
 
 #: scripts/ui/modals/bank_modal.gd:44
