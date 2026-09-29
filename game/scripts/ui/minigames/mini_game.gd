@@ -262,7 +262,7 @@ static func choice_row(label: String, options: Array, current: String, on_pick: 
 
 ## Flash a short line at the bottom of the panel ("✓ Correct", "✗ Wrong box"); survives the next round's rebuild.
 func flash(text: String, good: bool) -> void:
-	var l := UIK.label(text, 11, Art.C_GREEN if good else Art.C_RED, true)
+	var l := UIK.label(I18n.t(text), 11, Art.C_GREEN if good else Art.C_RED, true)   # already-translated text passes through
 	l.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	l.position = panel.position + Vector2(14, panel_size.y - 26)
 	l.z_index = 5

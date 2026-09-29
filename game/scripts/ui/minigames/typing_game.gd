@@ -151,7 +151,9 @@ func _draw_view() -> void:
 				else:
 					colr = Color(0.92, 0.94, 1.0)
 			if s[c] != " ":
-				view.draw_char(font, Vector2(x, y), s[c], 10, colr)
+				# the body font isn't monospaced: centre each glyph in its cell so "fil" doesn't read as "f il"
+				var cw := font.get_char_size(s.unicode_at(c), 10).x
+				view.draw_char(font, Vector2(x + (CHAR_W - cw) / 2.0, y), s[c], 10, colr)
 			elif i == li and c == col:
 				view.draw_rect(Rect2(x, y + 1, CHAR_W - 1, 1), Color(0.08, 0.08, 0.1))
 

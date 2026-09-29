@@ -55,11 +55,12 @@ static func _name(list: Array, id: String) -> String:
 
 ## Read like an order ticket: "Latte, Large cup, Oat milk, Double shot".
 func order_text() -> String:
-	var t := _name(DRINKS, want["drink"]) + I18n.t(", ") + _name(SIZES, want["size"])
+	var sep := "、" if I18n.locale().begins_with("zh") else ", "
+	var t := _name(DRINKS, want["drink"]) + sep + _name(SIZES, want["size"])
 	if want["milk"] != "none":
-		t += I18n.t(", ") + _name(MILKS, want["milk"])
+		t += sep + _name(MILKS, want["milk"])
 	if want["shots"] == "2" and want["drink"] != "flat_white":
-		t += I18n.t(", ") + _name(SHOTS, "2")
+		t += sep + _name(SHOTS, "2")
 	return t
 
 
@@ -78,7 +79,7 @@ func _layout() -> void:
 	var who := UIK.label(str(want["who"]), 8, Color8(110, 80, 50), true)
 	who.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	bv.add_child(who)
-	var ot := UIK.wrap("“%s”" % order_text(), 10, Color8(40, 30, 24), 170)
+	var ot := UIK.wrap(("「%s」" if I18n.locale().begins_with("zh") else "“%s”") % order_text(), 10, Color8(40, 30, 24), 170)
 	ot.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	bv.add_child(ot)
 	left.add_child(bubble)

@@ -119,6 +119,9 @@ func test_tutorial_steps_are_well_formed() -> void:
 		var tg: Dictionary = s.get("target", {})
 		if tg.has("building"):
 			runner.check(DataDB.buildings.has(tg["building"]), "%s points at a real building" % s["id"])
+		if s.has("hints"):
+			runner.eq(s["hints"].size(), s.get("ui", []).size(), "%s has one coach line per highlighted button" % s["id"])
+	runner.eq(Tutorial.coach_hint(Tutorial.STEPS[8], 2), "Open Operations", "the coach names the button it frames")
 	var tut := Tutorial.new()
 	runner.check(tut.is_active(), "a new game starts the guided first venture")
 	runner.check(not tut.step_done(Tutorial.STEPS[8]), "buying stock isn't done at the start")

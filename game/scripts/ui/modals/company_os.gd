@@ -130,9 +130,10 @@ func _tab_overview() -> void:
 	var ar := Ledger.balance(be, "marketplace_balance") + Ledger.balance(be, "accounts_receivable")
 	_kpi(g, "RECEIVABLE", Fmt.money0(ar), Art.C_GOLD, "ShopLane + invoices")
 	_kpi(g, "PAYABLE", Fmt.money0(-Ledger.balance(be, "accounts_payable")), Art.C_GOLD, "to suppliers")
-	_kpi(g, "EMPLOYEES", "1", Art.C_WHITE, "you")
+	var staff := Staff.count()
+	_kpi(g, "PEOPLE", str(1 + staff), Art.C_WHITE, (I18n.t("you + %d staff") % staff) if staff > 0 else I18n.t("just you"))
 	_kpi(g, "COMPANY VALUE", Fmt.money0(Company.company_value()), Art.C_SKY, "book value")
-	_kpi(g, "STAGE", "0 · Solo", Art.C_WHITE, "no buffs, just scale")
+	_kpi(g, "ORDERS DELIVERED", str(int(GameState.stat("orders_delivered"))), Art.C_WHITE, "all time")
 	_section("Needs attention")
 	var alerts: Array = []
 	var to_pack := Ecommerce.orders_with(["placed"]).size()
@@ -172,7 +173,7 @@ func _tab_overview() -> void:
 		b.name = "HomeWorkspace"
 		content.add_child(b)
 	content.add_child(UIK.sep())
-	content.add_child(UIK.label(I18n.t("Registration: ") + (("%s · %s" % [GameState.entity_name(GameState.company_id()), GameState.data["entities"][GameState.company_id()]["registration_no"]]) if GameState.company_id() != "" else "not registered (personal seller)"), 7, Art.C_MUTED))
+	content.add_child(UIK.label(I18n.t("Registration: ") + (("%s · %s" % [GameState.entity_name(GameState.company_id()), GameState.data["entities"][GameState.company_id()]["registration_no"]]) if GameState.company_id() != "" else I18n.t("not registered (personal seller)")), 7, Art.C_MUTED))
 
 
 # ============================================================== FINANCE

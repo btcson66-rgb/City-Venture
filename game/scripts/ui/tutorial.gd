@@ -14,7 +14,8 @@ const HOME := "riverside_apartment"
 const VERSION := 2
 ## id · title · text (how to do it) · then, on their own line (not player text, so tools/i18n_extract.py skips it):
 ## done (Cond, or seen:<x>) · target (world arrow; omitted = the story objective's, {} = none) · ui (buttons to highlight
-## on open screens, in order; "name*" = prefix, "hud:phone" = the Phone button) · then keys and hint (the coach's line).
+## on open screens, in order; "name*" = prefix, "hud:phone" = the Phone button) · then keys, and the coach's line for the
+## highlighted button: "hints" (one per ui entry) or a single "hint".
 const STEPS := [
 	{"id": "move", "title": "Moving around",
 		"text": "Walk with WASD or the arrow keys. Hold Shift to run.",
@@ -23,7 +24,7 @@ const STEPS := [
 	{"id": "phone", "title": "Your phone",
 		"text": "Your phone is buzzing. Press Tab (or click Phone, top right) and read Maya's message.",
 		"done": "flag:maya_intro_done", "target": {}, "ui": ["Thread_maya", "App_messages", "hud:phone"],
-		"keys": ["Tab"], "hint": "Open this"},
+		"keys": ["Tab"], "hints": ["Read Maya's message", "Open Messages", "Open your phone"]},
 	{"id": "exit", "title": "Going outside",
 		"text": "Walk onto the glowing EXIT mat at the bottom of the room to go outside.",
 		"done": "visited:riverside", "target": {"exit": true},
@@ -43,7 +44,7 @@ const STEPS := [
 	{"id": "board", "title": "Choose a business",
 		"text": "Walk to the Business Board and press E. Choose E-commerce: you buy products wholesale and sell them online.",
 		"done": "flag:business_chosen", "target": {"building": "nexus_cowork", "action": "business_board"}, "ui": ["StartEcommerce", "Biz_ecommerce", "Page_business"],
-		"keys": ["E"], "hint": "Pick E-commerce"},
+		"keys": ["E"], "hints": ["Start this business", "Pick E-commerce", "Open Businesses"]},
 	{"id": "os", "title": "Your business computer",
 		"text": "Sit at a hot desk and press E to open Company OS. Everything about your business happens here.",
 		"done": "seen:os", "target": {"building": "nexus_cowork", "action": "open_company_os"},
@@ -51,15 +52,15 @@ const STEPS := [
 	{"id": "buy", "title": "Buy your first stock",
 		"text": "In Company OS open Operations and press Buy next to a product. Start small: phone stands are cheap and sell steadily. You pay now; the stock arrives in about two days.",
 		"done": "stat:purchase_orders>=1", "target": {"building": "nexus_cowork", "action": "open_company_os"}, "ui": ["Buy_tradelink_wholesale_phone_stand", "Buy_*", "Tab_operations"],
-		"keys": [], "hint": "Press here"},
+		"keys": [], "hints": ["Buy phone stands", "Buy this product", "Open Operations"]},
 	{"id": "job", "title": "Earn while you wait",
 		"text": "Stock takes two days. Meanwhile, get a part-time job: on the Business Board open Part-time jobs and take one. Barista at Bloom Coffee is next door to home.",
 		"done": "has_job", "target": {"building": "nexus_cowork", "action": "business_board"}, "ui": ["ApplyJob", "Job_barista", "Page_jobs"],
-		"keys": [], "hint": "Press here"},
+		"keys": [], "hints": ["Take the job", "Barista: see the job", "Open Part-time jobs"]},
 	{"id": "shift", "title": "Work a shift",
 		"text": "Go to your workplace and press E at the staff door, then start a shift. You do the work yourself: the better it goes, the more you earn. Too late for a 4-hour shift today? Sleep, and work one tomorrow morning.",
 		"done": "stat:shifts_worked>=1", "target": {"job": true}, "ui": ["StartGame", "WorkShift"],
-		"keys": ["E"], "hint": "Start the shift"},
+		"keys": ["E"], "hints": ["Start working", "Start the shift"]},
 	{"id": "sleep", "title": "End the day",
 		"text": "After 7 PM, go home and sleep in your bed. Deliveries and orders keep moving overnight. If your stock isn't in yet tomorrow, work another shift.",
 		"done": "stat:stock_received>=1", "target": {"building": HOME, "action": "sleep"}, "ui": ["Sleep"],
@@ -67,7 +68,7 @@ const STEPS := [
 	{"id": "shoot", "title": "Photograph and list",
 		"text": "Your stock is here. Open Company OS on the laptop at home, go to Sales and press 'Shoot photos myself & list'. Better photos sell more.",
 		"done": "stat:listings_active>=1", "target": {"building": HOME, "action": "open_company_os"}, "ui": ["StartGame", "ListSelf_*", "Tab_sales"],
-		"keys": [], "hint": "Press here"},
+		"keys": [], "hints": ["Start the shoot", "Shoot the photos yourself", "Open Sales"]},
 	{"id": "order", "title": "Wait for an order",
 		"text": "Your listing is live on ShopLane. Orders arrive during the day and your phone tells you. Work a shift or explore meanwhile.",
 		"done": "stat:orders_placed>=1", "target": {},
@@ -75,11 +76,11 @@ const STEPS := [
 	{"id": "pack", "title": "Pack the order",
 		"text": "You have an order! Go home to your packing table and press E. Pack it by hand: box, padding, tape, label.",
 		"done": "stat:orders_packed>=1", "target": {"building": HOME, "action": "pack_orders"}, "ui": ["StartGame", "Pack"],
-		"keys": ["E"], "hint": "Pack it"},
+		"keys": ["E"], "hints": ["Start packing", "Pack the order"]},
 	{"id": "ship", "title": "Send it off",
 		"text": "At the packing table, choose how it leaves: book the courier (it collects from home) or carry it to PostPoint yourself (cheaper, costs your time).",
 		"done": "stat:orders_shipped>=1 || carrying_parcels", "target": {"building": HOME, "action": "pack_orders"}, "ui": ["CourierEconomy", "Carry"],
-		"keys": [], "hint": "Choose one"},
+		"keys": [], "hints": ["Courier collects it (or carry it)", "Carry it to PostPoint"]},
 	{"id": "dropoff", "title": "Drop it at PostPoint",
 		"text": "You're carrying the parcel. Walk to PostPoint in Riverside and hand it over at the counter.",
 		"done": "stat:orders_shipped>=1", "target": {"building": "postpoint_riverside", "action": "dropoff_parcels"}, "ui": ["DropEconomy"],
@@ -105,6 +106,8 @@ var _guide: Control
 var _coach: Control         # drawn on UIRoot.coach_layer, above open screens
 var _coach_rect := Rect2()
 var _coach_hint := ""
+var _coach_step := ""        # "FIRST VENTURE 9/18 · Buy your first stock", above the hint
+var _coach_i := -1          # which of the step's ui entries was found
 var _coach_target: Control
 
 
@@ -336,6 +339,7 @@ func _fit_card() -> void:
 func _update_coach() -> void:
 	_coach_rect = Rect2()
 	_coach_hint = ""
+	_coach_step = ""
 	if is_active() and _guide_on:
 		var s := current()
 		var c := _find_ui(s.get("ui", []))
@@ -344,9 +348,19 @@ func _update_coach() -> void:
 				_coach_target = c
 				_scroll_to(c)
 			_coach_rect = c.get_global_rect()
-			_coach_hint = I18n.t(str(s.get("hint", s["title"])))
+			_coach_hint = I18n.t(coach_hint(s, _coach_i))
+			# an open screen hides the card, so the bubble says which step this is
+			_coach_step = (I18n.t("FIRST VENTURE %d/%d") % [int(st()["step"]) + 1, STEPS.size()]) + "  ·  " + I18n.t(str(s["title"]))
 	if _coach != null:
 		_coach.queue_redraw()
+
+
+## The coach's line for the step's i-th highlighted button.
+static func coach_hint(s: Dictionary, i: int) -> String:
+	var hs: Array = s.get("hints", [])
+	if i >= 0 and i < hs.size():
+		return str(hs[i])
+	return str(s.get("hint", s["title"]))
 
 
 ## A highlighted button inside a scrolling list is scrolled into view once.
@@ -365,8 +379,9 @@ func _find_ui(names: Array) -> Control:
 		roots.append(tm)
 	elif UIRoot.phone.is_open:
 		roots.append(UIRoot.phone)
-	for n in names:
-		var name := str(n)
+	for i in names.size():
+		var name := str(names[i])
+		_coach_i = i
 		if name == "hud:phone":
 			if roots.is_empty() and not UIRoot.dialogue.active and UIRoot.hud.phone_btn != null:
 				return UIRoot.hud.phone_btn
@@ -375,6 +390,7 @@ func _find_ui(names: Array) -> Control:
 			var c := _find_named(r, name)
 			if c != null:
 				return c
+	_coach_i = -1
 	return null
 
 
@@ -398,18 +414,26 @@ func _draw_coach() -> void:
 	var r := _coach_rect.grow(2.0 + pulse * 2.0)
 	_coach.draw_rect(r, Color(gold, 0.9), false, 2.0)
 	_coach.draw_rect(r.grow(2.0), Color(gold, 0.25 + 0.3 * pulse), false, 1.0)
-	# a hint pill with an arrow, below the button (or above it near the bottom of the screen)
+	# a hint bubble with an arrow, below the button (or above it near the bottom of the screen):
+	# the step on a small line, then what this button does
 	var font := UIK.bold_font()
-	var w := font.get_string_size(_coach_hint, HORIZONTAL_ALIGNMENT_LEFT, -1, 8).x
-	var below := r.end.y + 20 < 350
+	var small := Art.font_body
+	var w1 := small.get_string_size(_coach_step, HORIZONTAL_ALIGNMENT_LEFT, -1, 6).x if _coach_step != "" else 0.0
+	var w := maxf(font.get_string_size(_coach_hint, HORIZONTAL_ALIGNMENT_LEFT, -1, 8).x, w1)
+	var h := 22.0 if _coach_step != "" else 13.0
+	var below := r.end.y + 10 + h < 356
 	var bob := 2.0 * sin(_t * 6.0)
 	var tip := Vector2(r.get_center().x, (r.end.y + 3 + bob) if below else (r.position.y - 3 - bob))
 	var dirv := 1.0 if below else -1.0
 	var tri := PackedVector2Array([tip, tip + Vector2(-5, 7 * dirv), tip + Vector2(5, 7 * dirv)])
 	_coach.draw_colored_polygon(tri, gold)
-	var pill := Rect2(Vector2(clampf(tip.x - w / 2.0 - 5, 4, 636 - w - 10), tip.y + (7 * dirv if below else -7 - 13)), Vector2(w + 10, 13))
+	var pill := Rect2(Vector2(clampf(tip.x - w / 2.0 - 5, 4, 636 - w - 10), tip.y + (7 * dirv if below else -7 - h)), Vector2(w + 10, h))
 	_coach.draw_rect(pill, gold)
-	_coach.draw_string(font, pill.position + Vector2(5, 10), _coach_hint, HORIZONTAL_ALIGNMENT_LEFT, -1, 8, Color(0.1, 0.07, 0.02))
+	var y := pill.position.y
+	if _coach_step != "":
+		_coach.draw_string(small, Vector2(pill.position.x + 5, y + 8), _coach_step, HORIZONTAL_ALIGNMENT_LEFT, -1, 6, Color(0.3, 0.2, 0.04))
+		y += 9
+	_coach.draw_string(font, Vector2(pill.position.x + 5, y + 10), _coach_hint, HORIZONTAL_ALIGNMENT_LEFT, -1, 8, Color(0.1, 0.07, 0.02))
 
 
 # ------------------------------------------------------------------ guide target

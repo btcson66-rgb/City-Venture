@@ -105,7 +105,7 @@ func _hand() -> void:
 		right += 1
 		var best := tray.size() <= fewest(amount)
 		award(1.0 if best else 0.8)
-		flash("✓ Exact" + ("" if best else I18n.t(" (fewer notes would be tidier)")), true)
+		flash(I18n.t("✓ Exact") + ("" if best else I18n.t(" (fewer notes would be tidier)")), true)
 	else:
 		award(0.0)
 		flash(I18n.t("✗ Till error: you handed over %s") % Fmt.money0(total()), false)
