@@ -246,7 +246,7 @@ func _on_message(from_id: String, text: String) -> void:
 		return
 	var n: String = I18n.t(DataDB.npc(from_id).get("name", from_id))
 	text = I18n.t(text)
-	toast("%s: %s" % [n, text.left(70) + ("…" if text.length() > 70 else "")], "msg", "mail")
+	toast(("%s：%s" if I18n.is_zh() else "%s: %s") % [n, text.left(70) + ("…" if text.length() > 70 else "")], "msg", "mail")
 
 
 # ------------------------------------------------------------------ toasts & cards
