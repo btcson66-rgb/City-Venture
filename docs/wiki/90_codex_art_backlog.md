@@ -459,7 +459,7 @@ orphan    world_map 左下角 (50,236)–(145,254) 有一塊補丁，上面沒�
 - **五套服裝的美術還沒到**，目前用現有服裝換色暫代：Executive 和 Formal Evening 用 `business_suit`，Luxury Citywear 和 Travel 用 `casual_jacket`，Logistics 用 `courier`。正式圖一放進 `characters/` 就會自動換上，不用改程式。
 - 順便修了一個舊 bug：從街上進室內時，舊場景的牆會多留一幀，偶爾把玩家推出房間外（實測被推到門外 120 px）。現在換場景時會先把舊場景移出物理世界。
 
-**請依這個順序**：**R8 → B1 續**。之後開始 B2（港區）。
+**請依這個順序**：**R8 → B1 續**。之後開始 B2（港區）。PR #11–#14 已經合併，請從 `claude/exciting-bardeen-y71ixv` 開新分支接著做。
 
 ### R8 小修正（半天以內的量）
 
