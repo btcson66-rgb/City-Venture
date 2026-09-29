@@ -51,7 +51,10 @@ func _ready() -> void:
 	box.add_child(cont)
 	if slot >= 0:
 		var sm := SaveSystem.summary(slot)
-		var last := UIK.label(I18n.t("%s · %s · Day %d") % [sm.get("name", ""), sm.get("company", ""), int(sm.get("day", 0))], 7, Art.C_MUTED)
+		var nm := str(sm.get("name", ""))
+		var co := str(sm.get("company", ""))
+		var who := nm if co == "" or co.begins_with(nm) else "%s · %s" % [nm, co]   # a personal seller's shop is their name
+		var last := UIK.label(who + "  ·  " + I18n.t("Day %d") % int(sm.get("day", 0)), 7, Art.C_MUTED)
 		last.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 		box.add_child(last)
 	var saves := SaveSystem.save_list().size()

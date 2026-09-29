@@ -18,6 +18,17 @@ const OPEX_BUSINESS := ["advertising", "shipping", "platform_fees", "packaging",
 	"rent_office", "coworking", "inventory_writeoff", "bank_fees", "late_fees", "penalties", "payroll", "recruiting", "interest",
 	"servers", "other"]
 const PERSONAL := ["rent_home", "living", "coffee", "transport", "clothing", "dining"]
+## How each expense category reads on a report (translated through the catalogue).
+const CATEGORY_NAMES := {"advertising": "Advertising", "shipping": "Shipping", "platform_fees": "Platform fees",
+	"packaging": "Packaging", "photography": "Photography", "registration": "Registration fees", "rent_office": "Office rent",
+	"coworking": "Co-working", "inventory_writeoff": "Inventory write-off", "bank_fees": "Bank fees", "late_fees": "Late fees",
+	"rent_home": "Home rent", "living": "Living costs", "coffee": "Coffee", "transport": "Transport", "clothing": "Clothing",
+	"dining": "Dining", "penalties": "Penalties", "payroll": "Payroll", "recruiting": "Recruiting", "interest": "Interest",
+	"servers": "Servers", "other": "Other"}
+
+
+static func category_name(k: String) -> String:
+	return I18n.t(str(CATEGORY_NAMES.get(k, k.replace("_", " ").capitalize())))
 
 
 static func _L() -> Dictionary:

@@ -120,7 +120,7 @@ static func _h_po_arrive(p: Dictionary) -> void:
 	EventBus.notify.emit(I18n.t("Delivered: %d × %s → %s") % [int(po["qty"]), pname, location_name(po["location"])], "good", "parcel")
 	var contact: String = DataDB.supplier(po["supplier"]).get("contact_npc", "")
 	if contact != "":
-		GameState.add_message(contact, I18n.t("Dropped %d %s at %s. Don't let them sit around.") % [int(po["qty"]), pname.to_lower(), location_name(po["location"])])
+		GameState.add_message(contact, I18n.t("Dropped %d %s at %s. Don't let them sit around.") % [int(po["qty"]), pname if I18n.is_zh() else pname.to_lower(), location_name(po["location"])])
 	EventBus.po_arrived.emit(po["id"])
 
 
@@ -814,7 +814,7 @@ static func payout(entity: String) -> float:
 		Ledger.post(entity, "ShopLane weekly payout", [{"acct": "cash", "dr": amt}, {"acct": "marketplace_balance", "cr": amt}], {"type": "payout"})
 		GameState.inc_stat("payouts")
 		EventBus.notify.emit(I18n.t("ShopLane payout received: %s") % Fmt.money(amt), "good", "cash")
-		GameState.add_message("shoplane", I18n.t("Payout sent: %s to your %s account.") % [Fmt.money(amt), "business" if entity != "player" else "personal"])
+		GameState.add_message("shoplane", (I18n.t("Payout sent: %s to your business account.") if entity != "player" else I18n.t("Payout sent: %s to your personal account.")) % Fmt.money(amt))
 		if int(GameState.stat("payouts")) == 1:
 			GameState.timeline(I18n.t("First payout from ShopLane: %s.") % Fmt.money(amt), "business")
 	elif bal < -0.01:

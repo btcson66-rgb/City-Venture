@@ -9,7 +9,7 @@ var stmt_entity := "player"
 
 func _init(is_atm := false) -> void:
 	atm = is_atm
-	title_text = I18n.t("Nexus Bank — ") + ("ATM" if atm else "Business banking")
+	title_text = I18n.t("Nexus Bank — ") + I18n.t("ATM" if atm else "Business banking")
 	icon_name = "bank"
 	help_key = "bank"
 	panel_size = Vector2(440, 270)

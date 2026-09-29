@@ -216,7 +216,7 @@ static func handle(kind: String, p: Dictionary) -> void:
 				EventBus.contract_changed.emit(c["id"])
 		"con.due":
 			if c["status"] == "active":
-				GameState.add_message(contact_npc(c), I18n.t("Hey — the %d %s were due today. Still coming?") % [int(c["qty"]), I18n.t(DataDB.product(c["product"])["name"]).to_lower()])
+				GameState.add_message(contact_npc(c), I18n.t("Hey — the %d %s were due today. Still coming?") % [int(c["qty"]), I18n.t(DataDB.product(c["product"])["name"]) if I18n.is_zh() else I18n.t(DataDB.product(c["product"])["name"]).to_lower()])
 				EventBus.notify.emit(I18n.t("Contract %s is overdue. Late penalty %s applies.") % [c["id"], Fmt.pct(c["penalty_rate"])], "bad", "contracts")
 		"con.pay":
 			if c["status"] == "delivered":

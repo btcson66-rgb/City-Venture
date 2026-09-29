@@ -191,7 +191,7 @@ func _tab_finance() -> void:
 	pl.add_child(UIK.kv("Cost of goods sold", Fmt.money(-cur["cogs"]), Art.C_RED))
 	pl.add_child(UIK.kv("Gross profit", Fmt.money(cur["gross_profit"]), UIK.money_color(cur["gross_profit"]), 8, true))
 	for k in cur["opex"]:
-		pl.add_child(UIK.kv("  " + str(k).replace("_", " ").capitalize(), Fmt.money(-float(cur["opex"][k])), Art.C_RED, 7))
+		pl.add_child(UIK.kv("  " + Ledger.category_name(str(k)), Fmt.money(-float(cur["opex"][k])), Art.C_RED, 7))
 	pl.add_child(UIK.kv("Business profit", Fmt.money(cur["business_profit"]), UIK.money_color(cur["business_profit"]), 9, true))
 	if be == "player":
 		if float(cur.get("wages", 0.0)) > 0.0:
@@ -227,7 +227,7 @@ func _tab_finance() -> void:
 		m.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(m)
 		var c := Ledger.entry_cash(e)
-		row.add_child(UIK.label(Fmt.money(c, true) if absf(c) > 0.001 else "non-cash", 7, UIK.money_color(c) if absf(c) > 0.001 else Art.C_DIM, true))
+		row.add_child(UIK.label(Fmt.money(c, true) if absf(c) > 0.001 else I18n.t("Non-cash"), 7, UIK.money_color(c) if absf(c) > 0.001 else Art.C_DIM, true))
 		content.add_child(row)
 
 
@@ -699,7 +699,7 @@ func _tab_contracts() -> void:
 	cols.add_child(right)
 	right.add_child(UIK.label("NEGOTIATION", 7, Art.C_DIM, true))
 	for hh in k["history"]:
-		right.add_child(UIK.wrap("%s: %s" % [GameState.entity_name(hh["by"]) if hh["by"] != "player" else GameState.business_display_name(), hh["text"]], 7, Art.C_WHITE, 220))
+		right.add_child(UIK.wrap("%s: %s" % [GameState.entity_name(hh["by"]) if hh["by"] != "player" else GameState.business_display_name(), I18n.t(str(hh["text"]))], 7, Art.C_WHITE, 220))
 	var cost := Ecommerce.avg_cost(Ecommerce.default_stock_location(), k["product"])
 	if cost <= 0:
 		var o := Ecommerce.offer("tradelink_wholesale", k["product"])

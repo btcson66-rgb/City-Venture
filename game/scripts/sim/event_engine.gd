@@ -59,7 +59,7 @@ static func bind(d: Dictionary) -> Dictionary:
 			return {}
 		ctx["product_id"] = best
 		ctx["product"] = I18n.t(DataDB.product(best)["name"])
-		ctx["product_lower"] = str(ctx["product"]).to_lower()
+		ctx["product_lower"] = I18n.t(str(ctx["product"])) if I18n.is_zh() else str(ctx["product"]).to_lower()
 	if b.has("supplier"):
 		var counts := {}
 		for po in GameState.data["ecommerce"]["purchase_orders"].values():

@@ -222,7 +222,7 @@ static func auto_resolve_return(order_id: String) -> bool:
 	if r["ok"]:
 		GameState.inc_stat("returns_by_staff")
 		EventBus.notify.emit(I18n.t("%s (support) handled a return on %s: %s.") % [agent["name"], order_id,
-			I18n.t("sent a replacement") if choice == "replace" else I18n.t("refunded")], "info", "people")
+			I18n.t("sent a replacement") if choice == "replace" else I18n.t("gave a refund")], "info", "people")
 	return r["ok"]
 
 
