@@ -77,7 +77,12 @@ static func run(year: int, month: int) -> Dictionary:
 	if StoryEngine.St().get("chapter", "") == "ch7_supply_shock" and "ch7_close" in StoryEngine.St()["active"]:
 		if float(main.get("business_profit", main.get("net_profit", 0.0))) >= 0.0:
 			GameState.set_flag("ch7_month_profit")   # made money through the shock
+		elif GameState.stat("ch7_loss_months") >= 1.0:
+			# a second losing month: the chapter moves on (never a soft-lock), and says honestly what happened
+			GameState.set_flag("ch7_month_profit")
+			GameState.add_message("maya", "Two months in the red, but you're still open. Plenty of shops aren't. Keep the prices you set and the local supplier; the shock won't last forever.")
 		else:
+			GameState.inc_stat("ch7_loss_months")
 			GameState.add_message("maya", "Rough month. The shock hit everyone. Next month counts too.")
 	GameState.timeline(I18n.t("Closed %s: business profit %s, cash %s.") % [label_of(rep), Fmt.money0(main["business_profit"]), Fmt.money0(main["cash_close"])], "milestone")
 	GameState.inc_stat("month_closes")

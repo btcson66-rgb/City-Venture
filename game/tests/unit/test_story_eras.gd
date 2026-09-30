@@ -115,3 +115,22 @@ func test_clearing_crisis_holds_imports_until_paid() -> void:
 		Clock.advance(12 * 60)
 	runner.eq(int(GameState.stat("import_received")), 1, "and delivered")
 	runner.check(Ledger.check_balanced(), "ledger balanced")
+
+
+func test_chapter_7_never_soft_locks_on_losses() -> void:
+	_setup()
+	StoryEngine.start_chapter("ch7_supply_shock")
+	StoryEngine.St()["active"] = ["ch7_close"]   # straight to the month-end objective
+	for o in ["ch7_news", "ch7_ken", "ch7_stock", "ch7_price"]:
+		StoryEngine.St()["done"].append(o)
+	var cid := GameState.company_id()
+	for i in 2:
+		Ledger.expense(cid, "other", 3000.0, "a bad month")
+		Clock.advance(1)   # the close covers entries before now
+		var d := Clock.date()
+		MonthClose.run(int(d["year"]), int(d["month"]))
+		if i == 0:
+			runner.check(not GameState.flag("ch7_month_profit"), "one losing month: try again next month")
+	runner.check(GameState.flag("ch7_month_profit"), "two losing months: the chapter moves on anyway")
+	_check()
+	runner.check("ch7_supply_shock" in StoryEngine.St()["chapters_done"], "chapter 7 complete, no soft-lock")
