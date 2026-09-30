@@ -92,6 +92,7 @@ static func close_company() -> Dictionary:
 	for l in GameState.data["ecommerce"]["listings"].values():
 		l["active"] = false
 	rep["stock"] = Ecommerce.liquidate_all(LIQUIDATION_RATE)
+	Logistics.on_company_closed(ent)   # the van goes to auction
 	var ar := maxf(0.0, Ledger.balance(ent, "accounts_receivable")) + maxf(0.0, Ledger.balance(ent, "marketplace_balance"))
 	if ar > 0.01:
 		var got := snappedf(ar * AR_RECOVERY, 0.01)

@@ -90,6 +90,12 @@ func _businesses() -> void:
 				det.add_child(UIK.label(I18n.t("✓ You run %s.") % Cafe.display_name(), 9, Art.C_GREEN, true))
 			else:
 				det.add_child(UIK.label("Old Town: metro (Loop Line), or walk west from Shopping Street.", 8, Art.C_GOLD, true))
+		"logistics":
+			det.add_child(UIK.wrap("Buy a used van from Sam Okoro at Dockside Motors in the Harbor, and it works two ways: deliver your own ecommerce parcels for fuel instead of a courier fee, and take local delivery runs posted every morning (Company OS → Logistics), planning each route yourself. Rent a bay at Pier 7 for cheap stock space, and hire drivers.", 8, Art.C_WHITE, 300))
+			if Logistics.has_van():
+				det.add_child(UIK.label("✓ You run a van. Runs are in Company OS → Logistics.", 9, Art.C_GREEN, true))
+			else:
+				det.add_child(UIK.label("Harbor: metro Harbor Line (M3) from Riverside. Sam is at Dockside Motors, Mon–Sat.", 8, Art.C_GOLD, true))
 		_:
 			det.add_child(UIK.wrap(I18n.t("Not in this build. %s is planned for %s — it will play differently, not just a new icon.") % [I18n.t(d["name"]), "P1–P3" if d["tier"] == "p0" else "a later expansion"], 8, Art.C_GOLD, 300))
 

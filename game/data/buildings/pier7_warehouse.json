@@ -1,0 +1,315 @@
+{
+ "id": "pier7_warehouse",
+ "name": "Pier 7 Warehouse",
+ "district": "harbor",
+ "type": "warehouse",
+ "hours": {
+  "open": "00:00",
+  "close": "24:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "pier7_warehouse",
+  "fallback": "brick_shops",
+  "x": 193,
+  "sign": "PIER 7 WAREHOUSE"
+ },
+ "interior": {
+  "size": [
+   36,
+   18
+  ],
+  "floor": "concrete",
+  "wall": "concrete_wall",
+  "ambient": "warehouse",
+  "property": "pier7_warehouse",
+  "stock_display": {
+   "location": "pier7_warehouse",
+   "x": 424,
+   "y": 236,
+   "cols": 10,
+   "per_box": 100,
+   "max": 40
+  },
+  "props": [
+   {
+    "sprite": "cork_board",
+    "x": 20,
+    "y": 8,
+    "wall": true
+   },
+   {
+    "sprite": "window_wide_day",
+    "x": 110,
+    "y": 0,
+    "wall": true,
+    "night": "window_wide_night"
+   },
+   {
+    "sprite": "window_wide_day",
+    "x": 250,
+    "y": 0,
+    "wall": true,
+    "night": "window_wide_night"
+   },
+   {
+    "sprite": "loading_dock_door",
+    "x": 388,
+    "y": 0,
+    "wall": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 100,
+    "y": 0,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 260,
+    "y": 0,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 420,
+    "y": 0,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "desk_laptop",
+    "x": 20,
+    "y": 66
+   },
+   {
+    "sprite": "office_chair",
+    "x": 34,
+    "y": 108,
+    "solid": false
+   },
+   {
+    "sprite": "filing_cabinet",
+    "x": 76,
+    "y": 58
+   },
+   {
+    "sprite": "water_cooler",
+    "x": 8,
+    "y": 172
+   },
+   {
+    "sprite": "pallet_rack",
+    "fallback": "parcel_shelf",
+    "x": 130,
+    "y": 58
+   },
+   {
+    "sprite": "pallet_rack",
+    "fallback": "parcel_shelf",
+    "x": 186,
+    "y": 58
+   },
+   {
+    "sprite": "pallet_rack",
+    "fallback": "parcel_shelf",
+    "x": 242,
+    "y": 58
+   },
+   {
+    "sprite": "pallet_rack",
+    "fallback": "parcel_shelf",
+    "x": 298,
+    "y": 58
+   },
+   {
+    "sprite": "pallet_rack",
+    "fallback": "parcel_shelf",
+    "x": 130,
+    "y": 132
+   },
+   {
+    "sprite": "pallet_rack",
+    "fallback": "parcel_shelf",
+    "x": 186,
+    "y": 132
+   },
+   {
+    "sprite": "pallet_rack",
+    "fallback": "parcel_shelf",
+    "x": 242,
+    "y": 132
+   },
+   {
+    "sprite": "pallet_rack",
+    "fallback": "parcel_shelf",
+    "x": 298,
+    "y": 132
+   },
+   {
+    "sprite": "pallet_rack",
+    "fallback": "parcel_shelf",
+    "x": 130,
+    "y": 206
+   },
+   {
+    "sprite": "pallet_rack",
+    "fallback": "parcel_shelf",
+    "x": 186,
+    "y": 206
+   },
+   {
+    "sprite": "pallet_rack",
+    "fallback": "parcel_shelf",
+    "x": 242,
+    "y": 206
+   },
+   {
+    "sprite": "pallet_rack",
+    "fallback": "parcel_shelf",
+    "x": 298,
+    "y": 206
+   },
+   {
+    "sprite": "packing_bench_large",
+    "fallback": "packing_table",
+    "x": 440,
+    "y": 132
+   },
+   {
+    "sprite": "packing_bench_large",
+    "fallback": "packing_table",
+    "x": 494,
+    "y": 132
+   },
+   {
+    "sprite": "forklift_parked",
+    "x": 380,
+    "y": 66
+   },
+   {
+    "sprite": "box",
+    "x": 420,
+    "y": 82,
+    "solid": false
+   },
+   {
+    "sprite": "box",
+    "x": 436,
+    "y": 86,
+    "solid": false
+   },
+   {
+    "sprite": "box",
+    "x": 428,
+    "y": 74,
+    "solid": false
+   },
+   {
+    "sprite": "box",
+    "x": 520,
+    "y": 70,
+    "solid": false
+   },
+   {
+    "sprite": "box",
+    "x": 536,
+    "y": 74,
+    "solid": false
+   },
+   {
+    "sprite": "plant_big",
+    "x": 540,
+    "y": 226
+   }
+  ],
+  "interactables": [
+   {
+    "id": "lease",
+    "at": [
+     50,
+     54
+    ],
+    "label": "Lettings desk: lease Bay 3",
+    "action": "lease_property",
+    "params": {
+     "property": "pier7_warehouse",
+     "unless_lease": "pier7_warehouse"
+    }
+   },
+   {
+    "id": "desk",
+    "at": [
+     46,
+     112
+    ],
+    "label": "Sit at the yard office desk — Company OS",
+    "action": "open_company_os",
+    "params": {
+     "terminal": "pier7",
+     "requires": "lease:pier7_warehouse"
+    }
+   },
+   {
+    "id": "packing",
+    "at": [
+     490,
+     180
+    ],
+    "label": "Packing bench",
+    "action": "pack_orders",
+    "params": {
+     "location": "pier7_warehouse",
+     "requires": "lease:pier7_warehouse"
+    }
+   },
+   {
+    "id": "dock",
+    "at": [
+     400,
+     104
+    ],
+    "label": "Loading dock",
+    "action": "look",
+    "params": {
+     "icon": "parcel",
+     "text": "Bay 3's loading dock: pallets come in off the trucks here. Stock you order can be delivered to this warehouse, and the packing bench by the dock packs it for the courier or your own van."
+    }
+   },
+   {
+    "id": "racking",
+    "at": [
+     226,
+     118
+    ],
+    "label": "Pallet racking",
+    "action": "look",
+    "params": {
+     "icon": "inventory",
+     "text": "Racking for 5,000 units, and it is the cheapest space per unit in the city. Empty racking still costs rent.",
+     "alt": [
+      {
+       "if": "!company_registered",
+       "text": "Racking for 5,000 units. Pier 7 leases bays to registered companies only."
+      }
+     ]
+    }
+   }
+  ],
+  "npc_spots": {},
+  "staff_spots": {
+   "driver": [
+    [
+     360,
+     140
+    ],
+    [
+     386,
+     140
+    ]
+   ]
+  }
+ }
+}

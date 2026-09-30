@@ -11,7 +11,7 @@ func _init(loc: String) -> void:
 	title_text = I18n.t("Packing table — %s") % Ecommerce.location_name(loc)
 	icon_name = "parcel"
 	help_key = "packing"
-	panel_size = Vector2(420, 250)
+	panel_size = Vector2(420, 250 + (36 if Logistics.has_van() else 0))
 
 
 func build() -> void:
@@ -50,6 +50,17 @@ func build() -> void:
 		h.add_child(b1)
 		h.add_child(b2)
 		body.add_child(h)
+		if Logistics.has_van():
+			var q := Logistics.ship_quote(location)
+			var vr := UIK.hbox(4)
+			var bv := UIK.button(I18n.t("Own van · same day (%s fuel, about %s of your time)") % [Fmt.money(float(q["fuel"])), Fmt.duration_min(int(q["minutes"]))], _own_van)
+			bv.name = "OwnVan"
+			vr.add_child(bv)
+			vr.add_child(UIK.tip("own_van_shipping"))
+			body.add_child(vr)
+			body.add_child(UIK.label("Fuel instead of a courier fee, delivered today: cheaper per parcel, but the driving is your time.", 7, Art.C_DIM))
+			if int(q["all"]) > int(q["count"]):
+				body.add_child(UIK.label(I18n.t("The van takes %d parcels a trip: the other %d wait for the next one.") % [int(q["count"]), int(q["all"]) - int(q["count"])], 7, Art.C_DIM))
 		var b3 := UIK.button("Carry them to PostPoint yourself (cheaper, costs your time)", _carry)
 		b3.name = "Carry"
 		body.add_child(b3)
@@ -84,6 +95,20 @@ func _courier(method: String) -> void:
 	if r["ok"]:
 		UIRoot.toast(I18n.t("Courier booked: %d parcel%s, %s. Pickup %s.") % [r["count"], I18n.pl(r["count"]), Fmt.money(r["cost"]), Clock.fmt_time(r["pickup_at"])], "good", "parcel")
 	rebuild()
+
+
+## Deliver the packed parcels yourself in your van: fuel per parcel instead of a courier fee, same day, and the drive
+## takes your time.
+func _own_van() -> void:
+	var r := Logistics.ship_own_van(location)
+	if not r["ok"]:
+		UIRoot.toast(I18n.t(str(r["error"])), "warn", "warning")
+		rebuild()
+		return
+	Clock.advance(int(r["minutes"]))
+	UIRoot.toast(I18n.t("Van run done: %d parcel%s delivered, %s of fuel, %s on the road.") % [r["count"], I18n.pl(r["count"]), Fmt.money(r["cost"]), Fmt.duration_min(int(r["minutes"]))], "good", "parcel")
+	if is_inside_tree():
+		rebuild()
 
 
 func _carry() -> void:

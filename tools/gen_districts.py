@@ -28,12 +28,16 @@ ROWS = {
     # "name|fallback": the facade Codex is drawing, and what stands in until it lands (re-run this script then)
     "old_town": ["rowhouse_brick|apartment_mid", "@okafor_lettings", "arcade_arches|retail_arcade", "@corner_cafe_unit",
                  "clock_tower|civic_annex", "@old_town_studio", "rowhouse_brick|riverside_walkup"],
+    # fillers: no fallback that carries a painted sign board (a filler's sign text comes from the facade art)
+    "harbor": ["warehouse_shed|shop_row_awning", "@pier7_warehouse", "cold_store|retail_arcade", "@dockside_motors",
+               "container_stack|riverside_walkup", "@harbor_point_fitness", "@customs_house"],
 }
 LABELS = {
     "riverside": {"east": "STARTUP HUB →"}, "startup_hub": {"west": "← RIVERSIDE"},
     "civic_center": {"east": "FINANCIAL →", "west": "← SHOPPING ST"}, "financial": {"west": "← CIVIC CENTER"},
     "shopping_street": {"east": "CIVIC CENTER →", "west": "← OLD TOWN"},
     "old_town": {"east": "SHOPPING ST →"},
+    "harbor": {},
 }
 # weekend market (Shopping Street): stalls are out Sat/Sun 09:00-18:00, packed away otherwise
 MARKET_HOURS = {"days": "sat,sun", "from": "09:00", "to": "18:00"}
@@ -120,7 +124,10 @@ def layout(did):
     k = 0
     while px < width - 40:
         if not near_door(px, 34):
-            if k % 2 == 0:
+            if did == "harbor":   # a working quay: a lamp every other bay instead of trees
+                if k % 2 == 1:
+                    props.append(P("harbor_lamp|lamp", px - 8, 384, [6, 66, 5, 4], glow=True))
+            elif k % 2 == 0:
                 props.append(P("tree_round" if (k // 2) % 3 else "tree_round_b", px - 32, 382, [28, 84, 8, 6]))
             elif did == "old_town":
                 props.append(P("old_lamp|lamp", px - 8, 384, [6, 66, 5, 4], glow=True))
@@ -130,7 +137,7 @@ def layout(did):
         k += 1
     for bx in range(28, width - 20, 36):
         if not near_door(bx, 18):
-            props.append(P("bollard", bx, 386, [2, 11, 4, 3]))
+            props.append(P("mooring_bollard|bollard" if did == "harbor" else "bollard", bx, 386, [2, 11, 4, 3]))
     # --- per building dressing
     for (dx, typ, bid, bx, m) in doors:
         if typ == "own_cafe":   # the player's café: two bistro tables and a chalkboard
@@ -139,6 +146,21 @@ def layout(did):
             props.append(P("cafe_board", dx - 30, 346, [2, 16, 12, 4]))
         elif typ == "lettings":
             props.append(P("planter_small", dx + 18, 342, [1, 14, 22, 6]))
+        elif typ == "warehouse":   # pallets by the door (a parcel crate stands in for the pallet stack)
+            props.append(P("pallet_stack|product_parcel", dx + 30, 350, [1, 12, 14, 4]))
+            props.append(P("pallet_stack|product_parcel", dx + 46, 352, [1, 12, 14, 4]))
+            props.append(P("pallet_stack|product_parcel", dx + 38, 338, solid=False))
+        elif typ == "van_dealer":
+            props.append(P("cone", dx - 44, 350, [1, 12, 10, 4]))
+            props.append(P("cone", dx + 46, 350, [1, 12, 10, 4]))
+            props.append(P("parking_meter", dx + 62, 350, [2, 18, 6, 4]))
+        elif typ == "gym":
+            props.append(P("bike_rack", dx - 66, 350, [1, 20, 52, 5]))
+            props.append(P("planter_small", dx + 20, 342, [1, 14, 22, 6]))
+        elif typ == "customs":
+            props.append(P("planter", dx - 70, 346, [1, 18, 34, 8]))
+            props.append(P("planter", dx + 36, 346, [1, 18, 34, 8]))
+            props.append(P("flagpole", dx - 96, 344, [1, 60, 6, 5]))
         elif typ == "cafe":
             props.append(P("umbrella_table" if bid == "bloom_coffee" else "umbrella_table_blue", dx + 24, 366, [10, 30, 16, 6]))
             props.append(P("umbrella_table" if bid == "bloom_coffee" else "umbrella_table_blue", dx + 64, 366, [10, 30, 16, 6]))
@@ -165,7 +187,8 @@ def layout(did):
                 props.append(P("flagpole", dx - 96, 344, [1, 60, 6, 5]))
                 props.append(P("flagpole", dx + 80, 344, [1, 60, 6, 5]))
         elif typ == "filler" and rnd.random() < 0.5:
-            props.append(P(rnd.choice(["planter_small", "trash_bin", "bike"]), dx + rnd.randint(20, 40), 346, [1, 12, 16, 5]))
+            names = ["crate|product_parcel", "trash_bin", "cone"] if did == "harbor" else ["planter_small", "trash_bin", "bike"]
+            props.append(P(rnd.choice(names), dx + rnd.randint(20, 40), 346, [1, 12, 16, 5]))
     # wayfinding near exits
     for ex in d.get("exits", []):
         side = "west" if ex["rect"][0] < 20 else "east"
@@ -201,12 +224,17 @@ def layout(did):
         props += market_square()
     if did == "old_town" and not any(p.get("_base", 0) >= 470 for p in props):
         props += old_town_square()
+    if did == "harbor":
+        props += harbor_quay()   # rebuilt on every run (no _base): the quay has no hand-placed dressing to keep
     # river railing / hedges along the park
     if did == "riverside":
         for rx in range(0, width, 64):
             props.append(P("railing", rx, 656, [0, 10, 64, 4]))
         for hx in (120, 440, 1240, 1560):
             props.append(P("hedge", hx, 560, [0, 12, 48, 6]))
+    elif did == "harbor":   # a safety rail along the quay edge, no hedges
+        for rx in range(0, width, 64):
+            props.append(P("railing", rx, 656, [0, 10, 64, 4]))
     else:
         for hx in range(8, width - 40, 180):
             props.append(P("hedge", hx, d["bounds"]["bottom"] - 2, [0, 12, 48, 6]))
@@ -260,6 +288,29 @@ def old_town_square():
     for tx in (60, 1160):
         out.append(dict(P("tree_round_b", tx, 626, [28, 84, 8, 6]), _base=626))
     out.append(dict(P("trash_bin", 760, 660, [1, 14, 16, 6]), _base=660))
+    return out
+
+
+def harbor_quay():
+    """Harbor's south side: the quay apron with work lamps, mooring bollards along the edge, crate stacks, cones and a
+    bench or two. Only props with an honest stand-in are placed (a parcel crate for crates, the street bollard and lamp).
+    Waiting on art, added here when it lands: container_red/_blue/_green, pallet_stack, forklift, rope_coil, life_ring,
+    crane_gantry (backdrop). Re-run this script then, so positions use the real sprite sizes."""
+    out = []
+    for lx in (180, 520, 860, 1250):
+        out.append(P("harbor_lamp|lamp", lx, 612, [6, 66, 5, 4], glow=True))
+    for bx in range(60, 1380, 132):
+        out.append(P("mooring_bollard|bollard", bx, 642, [2, 11, 4, 3]))
+    # crate stacks: two on the ground, one on top
+    for cx in (300, 704, 1020):
+        out.append(P("crate|product_parcel", cx, 626, [1, 12, 14, 4]))
+        out.append(P("crate|product_parcel", cx + 18, 628, [1, 12, 14, 4]))
+        out.append(P("crate|product_parcel", cx + 9, 614, solid=False))
+    for cx in (450, 640, 950):
+        out.append(P("cone", cx, 596, [1, 12, 10, 4]))
+    for bx in (560, 1090):
+        out.append(P("bench", bx, 636, [1, 12, 34, 7]))
+    out.append(P("trash_bin", 780, 636, [1, 14, 16, 6]))
     return out
 
 

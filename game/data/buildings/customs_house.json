@@ -1,0 +1,68 @@
+{
+ "id": "customs_house",
+ "name": "Aurelia Customs House",
+ "district": "harbor",
+ "type": "customs",
+ "hours": {
+  "open": "09:00",
+  "close": "17:00",
+  "days": "mon,tue,wed,thu,fri"
+ },
+ "closed_reason": "The Customs House is not open to visitors yet: import permits and customs clearance arrive in a later build.",
+ "exterior": {
+  "sprite": "customs_house",
+  "fallback": "civic_annex",
+  "x": 1030,
+  "sign": "CUSTOMS HOUSE"
+ },
+ "interior": {
+  "size": [
+   14,
+   9
+  ],
+  "floor": "marble",
+  "wall": "plaster_warm",
+  "ambient": "office",
+  "props": [
+   {
+    "sprite": "window_day",
+    "x": 40,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "seal",
+    "x": 96,
+    "y": 8,
+    "wall": true
+   },
+   {
+    "sprite": "civic_counter",
+    "x": 40,
+    "y": 56
+   },
+   {
+    "sprite": "queue_barrier",
+    "x": 60,
+    "y": 116
+   }
+  ],
+  "interactables": [
+   {
+    "id": "notice",
+    "at": [
+     112,
+     100
+    ],
+    "label": "Read the notice",
+    "action": "look",
+    "params": {
+     "icon": "lock",
+     "text": "CLOSED TO VISITORS. Import permits and customs clearance are not part of this build yet."
+    }
+   }
+  ],
+  "npc_spots": {}
+ }
+}

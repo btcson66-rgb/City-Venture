@@ -1,0 +1,20 @@
+{
+ "id": "pier7_warehouse",
+ "name": "Pier 7 Warehouse, Bay 3",
+ "district": "harbor",
+ "kind": "warehouse",
+ "monthly_rent": 1400,
+ "deposit_months": 1,
+ "building": "pier7_warehouse",
+ "requires": [
+  "company_registered"
+ ],
+ "requires_text": "Pier 7 leases bays to registered companies only.",
+ "agent": "Pier 7 lettings office",
+ "agent_line": "Pier 7 lettings: \"Bay 3 is yours. Racking's up, the packing bench is by the office, and the forklift keys stay on the hook.\"",
+ "blurb": "A bay on Pier 7 with a loading dock, pallet racking and a packing bench. Once it is yours, your stock can be delivered here and orders packed on the spot. The rent is due whether the racking is full or not.",
+ "capacity": {
+  "inventory_units": 5000,
+  "staff": 3
+ }
+}

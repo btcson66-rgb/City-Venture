@@ -51,6 +51,8 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 	if req.begins_with("lease:") and not Living.has_lease(req.substr(6)):
 		if req == "lease:corner_cafe":
 			UIRoot.toast("This till comes with the lease. Mr. Okafor at Okafor Lettings handles it.", "warn", "lock")
+		elif req == "lease:pier7_warehouse":
+			UIRoot.toast("This is Bay 3's kit. Lease the warehouse at the lettings desk by the door first.", "warn", "lock")
 		else:
 			UIRoot.toast("This is Suite 2B's desk. Talk to Tom about leasing it.", "warn", "lock")
 		return
@@ -104,6 +106,8 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 			UIRoot.open_modal(LoanModal.new(false))
 		"lease_office":
 			UIRoot.open_modal(LeaseModal.new("suite_2b"))
+		"lease_property":
+			UIRoot.open_modal(LeaseModal.new(str(params.get("property", ""))))
 		"cowork_desk":
 			UIRoot.open_modal(CoworkDeskModal.new())
 		"whiteboard":
@@ -208,6 +212,8 @@ static func _talk(npc_id: String) -> void:
 					follow = func(): UIRoot.open_modal(LeaseModal.new("suite_2b"))
 				"lease_cafe":
 					follow = func(): UIRoot.open_modal(LeaseModal.new("corner_cafe"))
+				"buy_van":
+					follow = func(): UIRoot.open_modal(VanDealModal.new())
 				"loan_office":
 					GameState.set_flag("wants_loan_offer", false)
 					follow = func():

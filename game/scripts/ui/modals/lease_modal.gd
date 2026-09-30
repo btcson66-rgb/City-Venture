@@ -10,7 +10,7 @@ func _init(property_id: String) -> void:
 	title_text = I18n.t("Lease — ") + I18n.t(str(p.get("name", pid)))
 	icon_name = "company"
 	help_key = "lease"
-	panel_size = Vector2(380, 210)
+	panel_size = Vector2(380, 268 if str(p.get("kind", "")) == "warehouse" else 210)
 
 
 func build() -> void:
@@ -24,13 +24,18 @@ func build() -> void:
 	dep.add_child(UIK.tip("deposit"))
 	body.add_child(dep)
 	if int(p.get("capacity", {}).get("inventory_units", 0)) > 0:
-		body.add_child(UIK.kv("Storage", I18n.t("%d units") % int(p.get("capacity", {}).get("inventory_units", 0))))
+		var sto := UIK.kv("Storage", I18n.t("%d units") % int(p.get("capacity", {}).get("inventory_units", 0)))
+		if p.get("kind", "") == "warehouse":
+			sto.add_child(UIK.tip("stock_location"))   # a second place to keep stock
+		body.add_child(sto)
 	if p.get("kind", "") == "office":
 		body.add_child(UIK.kv("Desks", "%d" % int(p.get("capacity", {}).get("staff", 0))))
 	if p.has("blurb"):
 		body.add_child(UIK.wrap(I18n.t(str(p["blurb"])), 8, Art.C_MUTED, 360))
 	else:
 		body.add_child(UIK.wrap(I18n.t("A real office: your company name on the door and the sign, a proper desk for Company OS, and a stockroom so boxes stop living in your apartment. It's also %s every month whether you sell anything or not.") % Fmt.money0(float(p["monthly_rent"])), 8, Art.C_MUTED, 360))
+	if p.get("kind", "") == "warehouse":
+		body.add_child(UIK.wrap(I18n.t("In plain words: you pay %s every month for the space, full or empty. Lease it once you have stock to put in it.") % Fmt.money0(float(p["monthly_rent"])), 7, Art.C_SKY, 360))
 	var lb := UIK.button("Sign the lease", _sign, "primary")
 	if GameState.company_id() == "":
 		lb.disabled = true

@@ -4,7 +4,8 @@ extends WorldScene
 
 const BASE_Y := 320.0   # building fronts meet the north sidewalk here
 const POI_ICONS := {"home": "home", "cafe": "coffee", "restaurant": "coffee", "bank": "bank", "civic": "civic", "parcel": "parcel",
-	"retail": "shop", "retail_space": "shop", "own_cafe": "coffee", "lettings": "home", "flat_to_let": "home"}
+	"retail": "shop", "retail_space": "shop", "own_cafe": "coffee", "lettings": "home", "flat_to_let": "home",
+	"warehouse": "inventory", "van_dealer": "company", "gym": "people", "customs": "civic"}
 
 var def: Dictionary = {}
 var building_nodes := {}
@@ -300,7 +301,7 @@ func _add_water_sparkles() -> void:
 	var mat := CanvasItemMaterial.new()
 	mat.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
 	for g in def.get("ground", []):
-		if not str(g["type"]) in ["water", "water_alt"]:
+		if not str(g["type"]) in ["water", "water_alt", "water_harbor"]:
 			continue
 		var r: Array = g["rect"]
 		var area := Rect2(float(r[0]) * T, float(r[1]) * T, float(r[2]) * T, float(r[3]) * T)
@@ -357,9 +358,9 @@ func minimap_shapes() -> Array:
 		match str(g["type"]):
 			"grass", "grass_flowers", "garden":
 				col = Color8(88, 130, 72)
-			"water", "water_alt", "water_edge":
+			"water", "water_alt", "water_edge", "water_harbor":
 				col = Color8(56, 110, 170)
-			"sidewalk", "plaza", "plaza_alt", "boards":
+			"sidewalk", "plaza", "plaza_alt", "boards", "quay_concrete", "quay_edge":
 				col = Color8(170, 164, 150)
 			"road", "road_dash_h", "curb_top", "curb_bottom", "crosswalk_h":
 				col = Color8(70, 74, 86)

@@ -1,0 +1,1456 @@
+{
+ "id": "harbor",
+ "name": "Harbor",
+ "size_tiles": [
+  88,
+  46
+ ],
+ "music": "day_city",
+ "ground": [
+  {
+   "type": "quay_concrete",
+   "fallback": "plaza_alt",
+   "rect": [
+    0,
+    0,
+    88,
+    20
+   ]
+  },
+  {
+   "type": "sidewalk_alt",
+   "rect": [
+    0,
+    20,
+    88,
+    4
+   ]
+  },
+  {
+   "type": "curb_top",
+   "rect": [
+    0,
+    24,
+    88,
+    1
+   ]
+  },
+  {
+   "type": "road",
+   "rect": [
+    0,
+    25,
+    88,
+    5
+   ]
+  },
+  {
+   "type": "road_dash_h",
+   "rect": [
+    0,
+    27,
+    88,
+    1
+   ],
+   "step": 2
+  },
+  {
+   "type": "curb_bottom",
+   "rect": [
+    0,
+    30,
+    88,
+    1
+   ]
+  },
+  {
+   "type": "sidewalk_alt",
+   "rect": [
+    0,
+    31,
+    88,
+    3
+   ]
+  },
+  {
+   "type": "quay_concrete",
+   "fallback": "plaza",
+   "rect": [
+    0,
+    34,
+    88,
+    7
+   ]
+  },
+  {
+   "type": "quay_edge",
+   "fallback": "boards",
+   "rect": [
+    0,
+    41,
+    88,
+    1
+   ]
+  },
+  {
+   "type": "water_harbor",
+   "fallback": "water",
+   "rect": [
+    0,
+    42,
+    88,
+    4
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    30,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    64,
+    25,
+    3,
+    5
+   ]
+  }
+ ],
+ "buildings": [
+  "pier7_warehouse",
+  "dockside_motors",
+  "harbor_point_fitness",
+  "customs_house"
+ ],
+ "fillers": [
+  {
+   "sprite": "warehouse_shed",
+   "x": 20,
+   "fallback": "shop_row_awning"
+  },
+  {
+   "sprite": "cold_store",
+   "x": 370,
+   "fallback": "retail_arcade"
+  },
+  {
+   "sprite": "container_stack",
+   "x": 736,
+   "fallback": "riverside_walkup"
+  }
+ ],
+ "props": [
+  {
+   "sprite": "harbor_lamp",
+   "x": 132,
+   "y": 312,
+   "fallback": "lamp",
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_gen": true
+  },
+  {
+   "sprite": "harbor_lamp",
+   "x": 292,
+   "y": 312,
+   "fallback": "lamp",
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_gen": true
+  },
+  {
+   "sprite": "harbor_lamp",
+   "x": 1252,
+   "y": 312,
+   "fallback": "lamp",
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 28,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 64,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 136,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 172,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 208,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 244,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 316,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 352,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 388,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 424,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 496,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 532,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 568,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 604,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 676,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 712,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 748,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 820,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 856,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 892,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 964,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 1000,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 1036,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 1072,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 1144,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 1180,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 1216,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 1252,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 1288,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 1324,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 1360,
+   "y": 370,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "trash_bin",
+   "x": 130,
+   "y": 324,
+   "solid": [
+    1,
+    12,
+    16,
+    5
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "pallet_stack",
+   "x": 295,
+   "y": 334,
+   "fallback": "product_parcel",
+   "solid": [
+    1,
+    12,
+    14,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "pallet_stack",
+   "x": 311,
+   "y": 336,
+   "fallback": "product_parcel",
+   "solid": [
+    1,
+    12,
+    14,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "pallet_stack",
+   "x": 303,
+   "y": 322,
+   "fallback": "product_parcel",
+   "solid": false,
+   "_gen": true
+  },
+  {
+   "sprite": "trash_bin",
+   "x": 488,
+   "y": 324,
+   "solid": [
+    1,
+    12,
+    16,
+    5
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "cone",
+   "x": 599,
+   "y": 336,
+   "solid": [
+    1,
+    12,
+    10,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "cone",
+   "x": 689,
+   "y": 336,
+   "solid": [
+    1,
+    12,
+    10,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "parking_meter",
+   "x": 705,
+   "y": 326,
+   "solid": [
+    2,
+    18,
+    6,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bike_rack",
+   "x": 878,
+   "y": 328,
+   "solid": [
+    1,
+    20,
+    52,
+    5
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "planter_small",
+   "x": 964,
+   "y": 320,
+   "solid": [
+    1,
+    14,
+    22,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "planter",
+   "x": 1040,
+   "y": 316,
+   "solid": [
+    1,
+    18,
+    34,
+    8
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "planter",
+   "x": 1146,
+   "y": 316,
+   "solid": [
+    1,
+    18,
+    34,
+    8
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "flagpole",
+   "x": 1014,
+   "y": 278,
+   "solid": [
+    1,
+    60,
+    6,
+    5
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "digital_sign",
+   "x": 744,
+   "y": 304,
+   "solid": [
+    4,
+    38,
+    14,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "harbor_lamp",
+   "x": 180,
+   "y": 540,
+   "fallback": "lamp",
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_gen": true
+  },
+  {
+   "sprite": "harbor_lamp",
+   "x": 520,
+   "y": 540,
+   "fallback": "lamp",
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_gen": true
+  },
+  {
+   "sprite": "harbor_lamp",
+   "x": 860,
+   "y": 540,
+   "fallback": "lamp",
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_gen": true
+  },
+  {
+   "sprite": "harbor_lamp",
+   "x": 1250,
+   "y": 540,
+   "fallback": "lamp",
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 60,
+   "y": 626,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 192,
+   "y": 626,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 324,
+   "y": 626,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 456,
+   "y": 626,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 588,
+   "y": 626,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 720,
+   "y": 626,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 852,
+   "y": 626,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 984,
+   "y": 626,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 1116,
+   "y": 626,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 1248,
+   "y": 626,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "crate",
+   "x": 300,
+   "y": 610,
+   "fallback": "product_parcel",
+   "solid": [
+    1,
+    12,
+    14,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "crate",
+   "x": 318,
+   "y": 612,
+   "fallback": "product_parcel",
+   "solid": [
+    1,
+    12,
+    14,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "crate",
+   "x": 309,
+   "y": 598,
+   "fallback": "product_parcel",
+   "solid": false,
+   "_gen": true
+  },
+  {
+   "sprite": "crate",
+   "x": 704,
+   "y": 610,
+   "fallback": "product_parcel",
+   "solid": [
+    1,
+    12,
+    14,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "crate",
+   "x": 722,
+   "y": 612,
+   "fallback": "product_parcel",
+   "solid": [
+    1,
+    12,
+    14,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "crate",
+   "x": 713,
+   "y": 598,
+   "fallback": "product_parcel",
+   "solid": false,
+   "_gen": true
+  },
+  {
+   "sprite": "crate",
+   "x": 1020,
+   "y": 610,
+   "fallback": "product_parcel",
+   "solid": [
+    1,
+    12,
+    14,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "crate",
+   "x": 1038,
+   "y": 612,
+   "fallback": "product_parcel",
+   "solid": [
+    1,
+    12,
+    14,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "crate",
+   "x": 1029,
+   "y": 598,
+   "fallback": "product_parcel",
+   "solid": false,
+   "_gen": true
+  },
+  {
+   "sprite": "cone",
+   "x": 450,
+   "y": 582,
+   "solid": [
+    1,
+    12,
+    10,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "cone",
+   "x": 640,
+   "y": 582,
+   "solid": [
+    1,
+    12,
+    10,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "cone",
+   "x": 950,
+   "y": 582,
+   "solid": [
+    1,
+    12,
+    10,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bench",
+   "x": 560,
+   "y": 614,
+   "solid": [
+    1,
+    12,
+    34,
+    7
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bench",
+   "x": 1090,
+   "y": 614,
+   "solid": [
+    1,
+    12,
+    34,
+    7
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "trash_bin",
+   "x": 780,
+   "y": 614,
+   "solid": [
+    1,
+    14,
+    16,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 0,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 64,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 128,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 192,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 256,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 320,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 384,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 448,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 512,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 576,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 640,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 704,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 768,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 832,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 896,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 960,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 1024,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 1088,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 1152,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 1216,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 1280,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 1344,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  }
+ ],
+ "metro": {
+  "station": "harbor",
+  "x": 1180,
+  "y": 560
+ },
+ "exits": [],
+ "spawns": {
+  "metro": [
+   1220,
+   642
+  ]
+ },
+ "bounds": {
+  "top": 322,
+  "bottom": 650
+ },
+ "traffic": [
+  {
+   "y": 424,
+   "dir": -1,
+   "density": 0.5
+  },
+  {
+   "y": 478,
+   "dir": 1,
+   "density": 0.5
+  }
+ ],
+ "ped_paths": [
+  {
+   "y": 350,
+   "x0": 20,
+   "x1": 1388
+  },
+  {
+   "y": 362,
+   "x0": 20,
+   "x1": 1388
+  },
+  {
+   "y": 506,
+   "x0": 20,
+   "x1": 1388
+  },
+  {
+   "y": 590,
+   "x0": 20,
+   "x1": 1160
+  },
+  {
+   "y": 628,
+   "x0": 20,
+   "x1": 1388
+  }
+ ],
+ "ambient_density": {
+  "morning": 8,
+  "afternoon": 9,
+  "evening": 5,
+  "night": 2
+ },
+ "ped_outfits": [
+  "logistics_site",
+  "logistics_site",
+  "logistics_site",
+  "casual_jacket",
+  "casual_jacket",
+  "casual_tee",
+  "courier",
+  "office_professional"
+ ],
+ "minimap_color": "#4a7a92"
+}

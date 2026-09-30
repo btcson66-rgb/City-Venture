@@ -262,6 +262,10 @@ static func stock_locations() -> Array:
 	var out: Array = ["riverside_studio"]
 	if GameState.data["living"]["leases"].has("suite_2b"):
 		out.append("suite_2b")
+	# any leased warehouse holds stock too (Pier 7, Harbor)
+	for pid in GameState.data["living"]["leases"]:
+		if str(DataDB.properties.get(pid, {}).get("kind", "")) == "warehouse":
+			out.append(pid)
 	return out
 
 
@@ -755,6 +759,8 @@ static func _ship(o: Dictionary) -> void:
 		eta += 2 * Clock.DAY   # wrong label: it goes to the wrong address first
 	if Tutorial.first_venture_active() and GameState.stat("orders_delivered") < 1:
 		eta = Clock.now() + (40 if not bool(o.get("label_ok", true)) else 20)   # the guided first parcel: across town
+	if o["ship"].has("van_eta"):
+		eta = int(o["ship"]["van_eta"])   # your own van: same day, and you know the address (Logistics.ship_own_van)
 	o["ship"]["eta"] = eta
 	Sim.schedule(eta, "eco.deliver", {"order": o["id"]})
 	GameState.inc_stat("orders_shipped")

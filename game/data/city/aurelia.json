@@ -127,13 +127,13 @@
   {
    "id": "harbor",
    "name": "Harbor",
-   "status": "planned",
+   "status": "active",
    "map_pos": [
     292,
     318
    ],
-   "icon": "bank",
-   "blurb": "Containers, customs, freight.",
+   "icon": "parcel",
+   "blurb": "Containers, customs and freight. Rent Pier 7 for stock, buy a used van from Sam, and start delivering.",
    "board": {
     "label": [
      76,
@@ -361,7 +361,13 @@
    "old_town>civic_center": 8,
    "old_town>startup_hub": 13,
    "old_town>financial": 11,
-   "old_town>riverside": 16
+   "old_town>riverside": 16,
+   "harbor>riverside": 8,
+   "harbor>startup_hub": 15,
+   "harbor>financial": 17,
+   "harbor>civic_center": 21,
+   "harbor>shopping_street": 22,
+   "harbor>old_town": 24
   }
  },
  "board_extra": {

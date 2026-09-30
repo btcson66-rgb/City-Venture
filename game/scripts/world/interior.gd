@@ -260,8 +260,8 @@ func refresh_named_npcs() -> void:
 				continue
 			var at: Array = list[int(used[kind])]
 			used[kind] = int(used[kind]) + 1
-			want[p["id"]] = {"p": p, "pos": Vector2(float(at[0]), float(at[1])), "face": {"packer": "left", "barista": "down"}.get(kind, "up"),
-				"pose": {"packer": "interact", "barista": "idle"}.get(kind, "sit")}
+			want[p["id"]] = {"p": p, "pos": Vector2(float(at[0]), float(at[1])), "face": {"packer": "left", "barista": "down", "driver": "down"}.get(kind, "up"),
+				"pose": {"packer": "interact", "barista": "idle", "driver": "idle"}.get(kind, "sit")}
 			if kind == "desk":
 				var seat := seat_near(want[p["id"]]["pos"], 24.0)
 				if seat.is_empty() or _seat_claimed(seat["pos"], want):
@@ -301,7 +301,7 @@ func refresh_stock() -> void:
 		c.queue_free()
 	var sd: Dictionary = def["stock_display"]
 	var units := Ecommerce.total_units_at(str(sd["location"]))
-	var boxes := mini(20, int(ceil(units / 10.0)))
+	var boxes := mini(int(sd.get("max", 20)), int(ceil(units / float(sd.get("per_box", 10)))))   # a warehouse shows more, bigger stacks
 	var cols := int(sd.get("cols", 5))
 	var tex := Art.tex("interiors/box")
 	for i in boxes:

@@ -1,0 +1,118 @@
+{
+ "id": "harbor_point_fitness",
+ "name": "Harbor Point Fitness",
+ "district": "harbor",
+ "type": "gym",
+ "hours": {
+  "open": "06:00",
+  "close": "22:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "harbor_point_fitness",
+  "fallback": "popup_unit",
+  "x": 888,
+  "sign": "HARBOR POINT FITNESS"
+ },
+ "interior": {
+  "size": [
+   18,
+   11
+  ],
+  "floor": "wood_dark",
+  "wall": "white_modern",
+  "ambient": "shop",
+  "props": [
+   {
+    "sprite": "window_wide_day",
+    "x": 20,
+    "y": 0,
+    "wall": true,
+    "night": "window_wide_night"
+   },
+   {
+    "sprite": "tv",
+    "x": 150,
+    "y": 10
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 130,
+    "y": 0,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "mirror_full",
+    "x": 226,
+    "y": -6
+   },
+   {
+    "sprite": "checkout_counter",
+    "x": 100,
+    "y": 56
+   },
+   {
+    "sprite": "lockers",
+    "x": 8,
+    "y": 52
+   },
+   {
+    "sprite": "bench_civic",
+    "x": 52,
+    "y": 132
+   },
+   {
+    "sprite": "rug",
+    "x": 130,
+    "y": 124,
+    "floor": true
+   },
+   {
+    "sprite": "rug",
+    "x": 200,
+    "y": 124,
+    "floor": true
+   },
+   {
+    "sprite": "water_cooler",
+    "x": 250,
+    "y": 76
+   },
+   {
+    "sprite": "plant_big",
+    "x": 262,
+    "y": 132
+   }
+  ],
+  "interactables": [
+   {
+    "id": "front_desk",
+    "at": [
+     144,
+     104
+    ],
+    "label": "Front desk",
+    "action": "look",
+    "params": {
+     "icon": "people",
+     "text": "Harbor Point Fitness. Rosa Lim runs it: early classes, a boxing corner and a very firm view on prices. She is out on the floor today, and memberships are not sold in this build. If she needs something she will message you."
+    }
+   },
+   {
+    "id": "board",
+    "at": [
+     40,
+     100
+    ],
+    "label": "Class timetable",
+    "action": "look",
+    "params": {
+     "icon": "calendar",
+     "text": "06:30 boxing · 07:30 spin · 12:15 lunchtime circuits · 18:00 strength. Bring your own water bottle."
+    }
+   }
+  ],
+  "npc_spots": {}
+ }
+}

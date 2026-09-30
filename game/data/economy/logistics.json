@@ -1,0 +1,277 @@
+{
+ "property": "pier7_warehouse",
+ "van": {
+  "name": "Used panel van",
+  "price": 9800,
+  "insurance_month": 165,
+  "resale": 0.55,
+  "capacity_parcels": 40
+ },
+ "fuel": {
+  "l_per_km": 0.14,
+  "price_l": 2.1,
+  "era_sensitivity": 0.5,
+  "upkeep_per_km": 0.07
+ },
+ "own_van_shipping": {
+  "km_per_parcel": 4.5,
+  "minutes_base": 25,
+  "minutes_per_parcel": 12
+ },
+ "runs": {
+  "post_hour": 7,
+  "per_day": [
+   2,
+   4
+  ],
+  "max_open": 8,
+  "max_active": 3,
+  "stops": [
+   4,
+   6
+  ],
+  "base_pay": 32,
+  "pay_per_stop": 20,
+  "score_pay": [
+   0.9,
+   0.2
+  ],
+  "late_penalty": 0.4,
+  "cancel_after_hours": 6,
+  "speed_kmh": 24,
+  "load_minutes": 30,
+  "stop_minutes": 12,
+  "kinds": [
+   {
+    "id": "rush",
+    "name": "Rush",
+    "weight": 2,
+    "by_hour": 12,
+    "day": 0,
+    "pay_mult": 1.25
+   },
+   {
+    "id": "same_day",
+    "name": "Same day",
+    "weight": 5,
+    "by_hour": 17,
+    "day": 0,
+    "pay_mult": 1.0
+   },
+   {
+    "id": "next_day",
+    "name": "Next day",
+    "weight": 3,
+    "by_hour": 10,
+    "day": 1,
+    "pay_mult": 0.95
+   }
+  ]
+ },
+ "driver": {
+  "start_hour": 9,
+  "score_base": 0.66,
+  "score_per_skill": 0.04
+ },
+ "clients": [
+  {
+   "name": "Crumb & Co. Bakery"
+  },
+  {
+   "name": "Harbor Candle Co."
+  },
+  {
+   "name": "Riverside Bike Works"
+  },
+  {
+   "name": "Studio Nine Yoga"
+  },
+  {
+   "name": "Lantern Books"
+  },
+  {
+   "name": "Kuro Ramen"
+  },
+  {
+   "name": "Fresh+ Market"
+  },
+  {
+   "name": "Pixel Pup Grooming"
+  },
+  {
+   "name": "Nori Tea House"
+  },
+  {
+   "name": "Atlas Movers"
+  },
+  {
+   "name": "Bright Smile Dental"
+  },
+  {
+   "name": "Greenleaf Florist"
+  }
+ ],
+ "map": {
+  "size": [
+   580,
+   236
+  ],
+  "km_per_px": 0.045,
+  "depot": {
+   "name": "Pier 7 yard",
+   "x": 58,
+   "y": 192
+  },
+  "river": [
+   [
+    500,
+    0
+   ],
+   [
+    468,
+    58
+   ],
+   [
+    404,
+    104
+   ],
+   [
+    338,
+    146
+   ],
+   [
+    262,
+    180
+   ],
+   [
+    188,
+    206
+   ],
+   [
+    128,
+    236
+   ]
+  ],
+  "bridges": [
+   [
+    426,
+    88
+   ],
+   [
+    300,
+    163
+   ],
+   [
+    196,
+    203
+   ]
+  ]
+ },
+ "places": [
+  {
+   "id": "lantern_books",
+   "name": "Lantern Books",
+   "district": "old_town",
+   "x": 100,
+   "y": 108
+  },
+  {
+   "id": "okafor_lettings",
+   "name": "Okafor Lettings",
+   "district": "old_town",
+   "x": 150,
+   "y": 148
+  },
+  {
+   "id": "threadline",
+   "name": "Threadline",
+   "district": "shopping_street",
+   "x": 214,
+   "y": 62
+  },
+  {
+   "id": "lantern_bistro",
+   "name": "Lantern Bistro",
+   "district": "shopping_street",
+   "x": 262,
+   "y": 104
+  },
+  {
+   "id": "crestline",
+   "name": "Crestline",
+   "district": "shopping_street",
+   "x": 186,
+   "y": 122
+  },
+  {
+   "id": "city_hall",
+   "name": "Aurelia City Hall",
+   "district": "civic_center",
+   "x": 336,
+   "y": 44
+  },
+  {
+   "id": "tax_office",
+   "name": "Tax Office",
+   "district": "civic_center",
+   "x": 388,
+   "y": 68
+  },
+  {
+   "id": "nexus_bank",
+   "name": "Nexus Bank",
+   "district": "financial",
+   "x": 320,
+   "y": 96
+  },
+  {
+   "id": "arc_capital",
+   "name": "Arc Capital",
+   "district": "financial",
+   "x": 352,
+   "y": 122
+  },
+  {
+   "id": "bloom_coffee",
+   "name": "Bloom Coffee",
+   "district": "riverside",
+   "x": 312,
+   "y": 196
+  },
+  {
+   "id": "postpoint",
+   "name": "PostPoint",
+   "district": "riverside",
+   "x": 368,
+   "y": 176
+  },
+  {
+   "id": "fresh_market",
+   "name": "Fresh+ Market",
+   "district": "riverside",
+   "x": 276,
+   "y": 216
+  },
+  {
+   "id": "nexus_cowork",
+   "name": "Nexus Co-work",
+   "district": "startup_hub",
+   "x": 498,
+   "y": 92
+  },
+  {
+   "id": "horizon_labs",
+   "name": "Horizon Labs",
+   "district": "startup_hub",
+   "x": 540,
+   "y": 140
+  },
+  {
+   "id": "bean_byte",
+   "name": "Bean & Byte",
+   "district": "startup_hub",
+   "x": 466,
+   "y": 166
+  }
+ ]
+}
