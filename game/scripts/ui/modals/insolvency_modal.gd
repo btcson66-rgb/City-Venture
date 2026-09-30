@@ -7,6 +7,7 @@ var report := {}
 
 
 func _init() -> void:
+	pauses_time = true
 	title_text = "The company can't pay its debts"
 	icon_name = "warning"
 	panel_size = Vector2(460, 290)

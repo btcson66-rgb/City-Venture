@@ -99,6 +99,11 @@ static func perk_value(perk_id: String) -> float:
 	return float(job_def(current_job()).get("perk", {}).get("value", 0.0)) if has_perk(perk_id) else 0.0
 
 
+## Worked a shift today (so you're tired enough to sleep early).
+static func worked_today() -> bool:
+	return GameState.has_game() and int(C().get("last_shift_day", -1)) == Clock.day_index()
+
+
 ## A shift is the job's full length, or runs until closing time when you come in late (at least MIN_SHIFT_H).
 const MIN_SHIFT_H := 2
 

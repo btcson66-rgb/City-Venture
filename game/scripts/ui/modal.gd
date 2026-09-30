@@ -1,6 +1,7 @@
 class_name Modal
 extends Control
-## Base for contextual management UI opened from in-world interactions. Pauses world time.
+## Base for contextual management UI opened from in-world interactions. World time keeps running unless
+## `pauses_time` is set.
 
 signal closed
 
@@ -10,6 +11,10 @@ var panel_size := Vector2(420, 250)
 var closable := true
 var dim_alpha := 0.55
 var help_key := ""           # data/help/help.json: shown the first time, and behind the ? button (Help)
+## Life goes on while you use a screen (Company OS, the bank, a shop): the clock keeps running. Screens that are
+## about stopping to read or decide (pause menu, help cards, decisions, reports, minigames that apply their own
+## time) set this to stop it.
+var pauses_time := false
 var panel: PanelContainer
 var body: VBoxContainer
 var header: HBoxContainer

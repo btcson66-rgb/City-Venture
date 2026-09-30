@@ -3,6 +3,7 @@ extends Modal
 
 
 func _init() -> void:
+	pauses_time = true
 	title_text = "Paused"
 	icon_name = "settings"
 	panel_size = Vector2(330, 318)

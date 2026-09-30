@@ -6,6 +6,10 @@ var lines: Array = []
 var ok_text := "Close"
 
 
+func _init() -> void:
+	pauses_time = true   # reading: help cards, news, brochures
+
+
 static func make(t: String, ic: String, ls: Array, size := Vector2(380, 220)) -> InfoModal:
 	var m := InfoModal.new()
 	m.title_text = t

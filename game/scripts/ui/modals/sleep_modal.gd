@@ -3,23 +3,32 @@ extends Modal
 
 
 func _init() -> void:
+	pauses_time = true
 	title_text = "Bed"
 	icon_name = "sleep"
 	help_key = "sleep"
 	panel_size = Vector2(330, 150)
 
 
+## You can sleep in the evening, or any time after a shift (you're tired), or late in the afternoon of the guided
+## first venture (so a new player is never stuck waiting for 7 PM).
+static func can_sleep() -> bool:
+	var h := Clock.hour()
+	return h >= 19 or h < 5 or Careers.worked_today() or (Tutorial.first_venture_active() and h >= 16)
+
+
 func build() -> void:
 	var h := Clock.hour()
-	var evening := h >= 19 or h < 5
-	if evening:
+	if can_sleep():
 		body.add_child(UIK.wrap("Call it a day? You'll wake up at 7:00 AM. The game autosaves.", 9, Art.C_WHITE, 310))
+		if h >= 5 and h < 19:
+			body.add_child(UIK.wrap(I18n.t("It's only %s: sleeping now skips the rest of today.") % Clock.fmt_time(), 7, Art.C_GOLD, 310))
 		var b := UIK.button("Sleep until 7:00 AM", _sleep, "primary")
 		b.name = "Sleep"
 		body.add_child(b)
 	else:
 		# no naps: the day is for living it (work a shift, run the business); the bed is for the night
-		body.add_child(UIK.wrap(I18n.t("It's %s. You're not tired yet: the bed is for the night, from 7:00 PM. Waiting for something? Work a shift or tidy up the business meanwhile.") % Clock.fmt_time(), 9, Art.C_WHITE, 310))
+		body.add_child(UIK.wrap(I18n.t("It's %s. You're not tired yet: you can sleep from 7:00 PM, or after working a shift. Waiting for something? Work a shift or tidy up the business meanwhile.") % Clock.fmt_time(), 9, Art.C_WHITE, 310))
 	footer.add_child(UIK.button("Not now", close))
 
 

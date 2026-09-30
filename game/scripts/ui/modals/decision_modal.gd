@@ -8,6 +8,7 @@ var outcome := ""
 
 
 func _init(i: Dictionary) -> void:
+	pauses_time = true
 	inst = i
 	def = DataDB.events.get(i["id"], {})
 	var pres: Dictionary = def.get("presentation", {})

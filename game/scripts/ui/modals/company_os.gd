@@ -44,13 +44,23 @@ func _init(term: String) -> void:
 	help_key = "os_overview"
 
 
+var _clock_label: Label
+
+
 func _ready() -> void:
 	super._ready()
+	# time keeps running while you work at the computer: keep the header clock live
+	Clock.time_changed.connect(_tick_clock)
 	GameState.set_flag("company_os_opened")
 	if GameState.company_id() != "":
 		GameState.set_flag("company_os_opened_as_company")
 	if terminal == "office":
 		GameState.set_flag("used_office_desk")
+
+
+func _tick_clock() -> void:
+	if is_instance_valid(_clock_label):
+		_clock_label.text = Clock.fmt_datetime()
 
 
 func build() -> void:
@@ -61,7 +71,8 @@ func build() -> void:
 	top.add_child(UIK.title(GameState.business_display_name(), 11, Art.C_GOLD))
 	top.add_child(UIK.label(where, 7, Art.C_DIM))
 	top.add_child(UIK.expand())
-	top.add_child(UIK.label(Clock.fmt_datetime(), 7, Art.C_MUTED, true))
+	_clock_label = UIK.label(Clock.fmt_datetime(), 7, Art.C_MUTED, true)
+	top.add_child(_clock_label)
 	var row := UIK.hbox(6)
 	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	body.add_child(row)

@@ -159,3 +159,29 @@ func test_the_guided_first_venture_has_no_waits() -> void:
 	var r2 := Ecommerce.buy("tradelink_wholesale", "phone_stand", 80)
 	runner.check(int(r2["eta"]) - Clock.now() >= 12 * 60, "later stock takes its time")
 	runner.eq(int(GameState.stat("stock_received")), 1, "not delivered yet")
+
+
+func test_a_continued_first_venture_never_waits_on_stock() -> void:
+	# an older save: stock bought under the old rules (two days away), tutorial from a previous version
+	Ecommerce.buy("tradelink_wholesale", "phone_stand", 80)
+	GameState.data["tutorial"] = {"step": 11, "seen": {}, "off": false, "v": 2}
+	var tut := Tutorial.new()
+	runner.eq(str(tut.current()["id"]), "buy", "a returning player resumes at buying stock, not back at reception")
+	tut.st()["step"] = Tutorial._index("shoot")
+	runner.eq(int(GameState.stat("stock_received")), 0, "the old order is still on the road")
+	tut._rush_stock(3.0)
+	runner.eq(int(GameState.stat("stock_received")), 1, "it turns up early instead of making them wait")
+	runner.check(GameState.data["messages"].any(func(m): return m["from"] == "ken"), "with a note from the supplier")
+	tut.free()
+
+
+func test_you_can_sleep_after_a_shift() -> void:
+	GameState.data["tutorial"] = {"step": 99, "seen": {}, "off": true, "v": Tutorial.VERSION}
+	while Clock.hour() != 14:
+		Clock.advance(30)
+	runner.check(not SleepModal.can_sleep(), "not at 2 PM on a day off")
+	Careers.hire("barista")
+	while Clock.hour() != 9:
+		Clock.advance(60)
+	Careers.work_shift("barista", 1.0)
+	runner.check(SleepModal.can_sleep(), "but yes after a shift (%s)" % Clock.fmt_time())

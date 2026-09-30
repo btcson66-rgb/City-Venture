@@ -92,10 +92,22 @@ func close_all() -> void:
 	Clock.pop_pause("modal")
 
 
+## Time stops only while a screen that asks for it (Modal.pauses_time) is open; everything else lets the day run on.
+func _update_modal_pause() -> void:
+	var stop := false
+	for c in modal_layer.get_children():
+		if not c.is_queued_for_deletion() and bool(c.get("pauses_time")):
+			stop = true
+	if stop:
+		Clock.push_pause("modal")
+	else:
+		Clock.pop_pause("modal")
+
+
 # ------------------------------------------------------------------ modals
 func open_modal(m: Control) -> void:
 	modal_layer.add_child(m)
-	Clock.push_pause("modal")
+	_update_modal_pause()
 	hud.set_prompt("")
 	if m.has_signal("closed"):
 		m.closed.connect(_on_modal_closed, CONNECT_DEFERRED)
@@ -103,12 +115,7 @@ func open_modal(m: Control) -> void:
 
 func _on_modal_closed() -> void:
 	await get_tree().process_frame
-	var live := 0
-	for c in modal_layer.get_children():
-		if not c.is_queued_for_deletion():
-			live += 1
-	if live == 0:
-		Clock.pop_pause("modal")
+	_update_modal_pause()
 	hud.refresh()
 
 

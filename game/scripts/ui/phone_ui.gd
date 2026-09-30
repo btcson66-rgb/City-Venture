@@ -46,7 +46,6 @@ func open() -> void:
 	is_open = true
 	visible = true
 	app = "home"
-	Clock.push_pause("phone")
 	_player_pose("phone")
 	GameState.set_flag("phone_opened")
 	_render()
@@ -58,7 +57,6 @@ func open() -> void:
 func close() -> void:
 	is_open = false
 	visible = false
-	Clock.pop_pause("phone")
 	_player_pose("")
 
 

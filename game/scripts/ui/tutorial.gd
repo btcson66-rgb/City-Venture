@@ -74,8 +74,8 @@ const STEPS := [
 		"done": "stat:orders_shipped>=1", "target": {"building": "postpoint_riverside", "action": "dropoff_parcels"}, "ui": ["DropEconomy"],
 		"keys": ["E"], "hint": "Hand it in"},
 	{"id": "paid", "title": "Getting paid",
-		"text": "It's on its way. This first delivery takes a few minutes; later ones take 1–3 days. When it arrives, the sale lands in your ShopLane balance, and ShopLane pays out to your bank every week (Company OS → Finance).",
-		"done": "stat:orders_delivered>=1", "target": {},
+		"text": "It's on its way. This first delivery takes a few minutes; later ones take 1–3 days. When it arrives, the sale lands in your ShopLane balance, and ShopLane pays out to your bank every week (Company OS → Finance). Meanwhile, walk over to Bloom Coffee: you'll pick up a job there next.",
+		"done": "stat:orders_delivered>=1", "target": {"building": "bloom_coffee", "action": "work_shift"},
 		"keys": []},
 	{"id": "job", "title": "Earn on the side",
 		"text": "Your first sale is done! Money comes in faster with a part-time job too. Bloom Coffee is hiring: go to its staff door, press E and take the barista job. (More jobs are on the Business Board.)",
@@ -86,7 +86,7 @@ const STEPS := [
 		"done": "stat:shifts_worked>=1", "target": {"job": true}, "ui": ["StartGame", "WorkShift"],
 		"keys": ["E"], "hints": ["Start working", "Start the shift"]},
 	{"id": "sleep", "title": "End the day",
-		"text": "After 7 PM, go home and sleep in your bed. Overnight your listing keeps selling and deliveries keep moving. Tomorrow, the city is yours.",
+		"text": "After a shift you're tired: go home and sleep in your bed (any time after work, or from 7 PM). Overnight your listing keeps selling and deliveries keep moving. Tomorrow, the city is yours.",
 		"done": "stat:nights_slept>=1", "target": {"building": HOME, "action": "sleep"}, "ui": ["Sleep"],
 		"keys": [], "hint": "Sleep until morning"},
 ]
@@ -171,7 +171,12 @@ func st() -> Dictionary:
 	elif int(t.get("v", 1)) < VERSION:
 		# an older script: restart on this one (it skips whatever is already done), unless this player already got a
 		# first order delivered: they've been through the loop, so don't walk them through it again
-		t["step"] = STEPS.size() if GameState.stat("orders_delivered") >= 1 else 0
+		# Resume after "buy" when stock was already bought: earlier steps like the day pass only hold for one day and
+		# would otherwise send a returning player back to reception.
+		if GameState.stat("orders_delivered") >= 1:
+			t["step"] = STEPS.size()
+		else:
+			t["step"] = _index("buy") if GameState.stat("purchase_orders") >= 1 else 0
 		t["v"] = VERSION
 	return t
 
@@ -264,6 +269,7 @@ func _process(delta: float) -> void:
 			_nudge_maya()
 		elif s["id"] == "order":
 			_first_order()
+		_rush_stock(delta)
 	else:
 		card.visible = false
 	var op := UIRoot.hud.obj_panel
@@ -329,6 +335,37 @@ func _nudge_maya() -> void:
 	GameState.add_message("maya", "Hey, did you get my messages? Call me when you can.")
 
 
+var _rush_t := 0.0
+
+
+## The guided first venture never waits on a truck: stock still in transit once the player has moved past buying it
+## (bought before this rule, or a continued save) shows up after a moment, with a note from the supplier.
+func _rush_stock(delta: float) -> void:
+	if not first_venture_active() or int(st()["step"]) <= _index("buy") or Ecommerce.total_units() > 0:
+		_rush_t = 0.0
+		return
+	var late: Array = Ecommerce.E()["purchase_orders"].values().filter(func(po): return po["status"] == "in_transit")
+	if late.is_empty():
+		return
+	_rush_t += delta
+	if _rush_t < 2.5:
+		return
+	_rush_t = 0.0
+	for po in late:
+		var contact := str(DataDB.supplier(po["supplier"]).get("contact_npc", ""))
+		if contact != "":
+			GameState.add_message(contact, "Good news: a van was in your area, so your order came early.")
+		po["eta"] = Clock.now()
+		Ecommerce._h_po_arrive({"po": po["id"]})
+
+
+static func _index(id: String) -> int:
+	for i in STEPS.size():
+		if STEPS[i]["id"] == id:
+			return i
+	return -1
+
+
 ## The guided first order comes in a few minutes after the first listing goes live (normally orders follow demand).
 func _first_order() -> void:
 	if bool(st()["seen"].get("first_order", false)) or GameState.stat("orders_placed") >= 1:
@@ -347,16 +384,21 @@ func _graduate() -> void:
 
 var _shown := -1
 var _shown_loc := ""
+var _shown_txt := ""
 
 
 func _show_step(i: int) -> void:
-	if _completing or (_shown == i and _shown_loc == I18n.locale()):
+	if _completing:
+		return
+	var txt := I18n.t(step_text(STEPS[i]))
+	if _shown == i and _shown_loc == I18n.locale() and _shown_txt == txt:
 		return
 	_shown = i
 	_shown_loc = I18n.locale()
+	_shown_txt = txt
 	var s: Dictionary = STEPS[i]
 	head.text = (I18n.t("FIRST VENTURE %d/%d") % [mini(i + 1, STEPS.size()), STEPS.size()]) + "  ·  " + I18n.t(str(s["title"]))
-	body.text = I18n.t(str(s["text"]))
+	body.text = txt
 	for c in keys_row.get_children():
 		c.queue_free()
 	for k in s.get("keys", []):
@@ -368,6 +410,15 @@ func _show_step(i: int) -> void:
 		keys_row.add_child(kc)
 	keys_row.visible = not s.get("keys", []).is_empty()
 	_fit_card.call_deferred()
+
+
+## A step's instructions, fitted to the moment: a shift that can't happen today says so and sends you to bed.
+static func step_text(s: Dictionary) -> String:
+	if s["id"] == "shift" and Careers.current_job() != "":
+		var why := Careers.shift_block(Careers.current_job())
+		if why in ["too late for a shift today", "closed now"]:
+			return "Too late for a shift today: the workplace closes soon. Go home and sleep (you can, after 4 PM on your first day), and work a shift tomorrow morning."
+	return str(s["text"])
 
 
 func _fit_card() -> void:

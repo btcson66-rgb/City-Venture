@@ -8,6 +8,7 @@ var confirm := -1          # the slot waiting for "Replace" to be confirmed
 
 
 func _init(m := "load") -> void:
+	pauses_time = true
 	mode = m
 	title_text = "Load a game" if m == "load" else "Start a new game"
 	icon_name = "save"

@@ -25,6 +25,7 @@ var _done_sent := false
 
 
 func _init() -> void:
+	pauses_time = true
 	panel_size = Vector2(600, 322)
 	icon_name = "clock"
 

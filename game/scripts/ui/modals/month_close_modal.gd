@@ -6,6 +6,7 @@ var rep: Dictionary
 
 
 func _init(r: Dictionary) -> void:
+	pauses_time = true
 	rep = r
 	title_text = I18n.t("Month Close — %s") % MonthClose.label_of(r)
 	icon_name = "finance"
