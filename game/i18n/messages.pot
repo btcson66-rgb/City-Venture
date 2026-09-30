@@ -357,11 +357,11 @@ msgstr ""
 msgid "%s till: %d customers"
 msgstr ""
 
-#: scripts/sim/acquisition.gd:55
+#: scripts/sim/acquisition.gd:60
 msgid "%s × last year's profit of %s"
 msgstr ""
 
-#: scripts/sim/acquisition.gd:57
+#: scripts/sim/acquisition.gd:62
 msgid "%s × last year's revenue of %s"
 msgstr ""
 
@@ -3649,7 +3649,7 @@ msgstr ""
 msgid "Hairstyle"
 msgstr ""
 
-#: scripts/sim/acquisition.gd:134
+#: scripts/sim/acquisition.gd:141
 msgid "Hale Group earn-out"
 msgstr ""
 
@@ -3657,7 +3657,7 @@ msgstr ""
 msgid "Hale Group makes an offer"
 msgstr ""
 
-#: scripts/sim/acquisition.gd:136
+#: scripts/sim/acquisition.gd:143
 msgid "Hale Group paid the earn-out: %s."
 msgstr ""
 
@@ -4161,7 +4161,7 @@ msgstr ""
 msgid "Investors buy shares in a registered company."
 msgstr ""
 
-#: scripts/sim/acquisition.gd:62
+#: scripts/sim/acquisition.gd:69
 msgid "Investors own %s of it, so your share is %s."
 msgstr ""
 
@@ -5521,7 +5521,7 @@ msgstr ""
 msgid "No saved games yet."
 msgstr ""
 
-#: scripts/sim/acquisition.gd:95 scripts/sim/event_engine.gd:165 scripts/sim/rails.gd:332
+#: scripts/sim/acquisition.gd:102 scripts/sim/event_engine.gd:165 scripts/sim/rails.gd:332
 msgid "No such choice."
 msgstr ""
 
@@ -8045,11 +8045,11 @@ msgstr ""
 msgid "Sold %d%% of %s for %s."
 msgstr ""
 
-#: scripts/sim/acquisition.gd:109
+#: scripts/sim/acquisition.gd:116
 msgid "Sold %s to Hale Group"
 msgstr ""
 
-#: scripts/sim/acquisition.gd:112
+#: scripts/sim/acquisition.gd:119
 msgid "Sold %s to Hale Group: %s paid to you."
 msgstr ""
 
@@ -8693,7 +8693,7 @@ msgstr ""
 msgid "The digital-dollar bridge was exploited. Transfers are frozen until about %s."
 msgstr ""
 
-#: scripts/sim/acquisition.gd:140
+#: scripts/sim/acquisition.gd:147
 msgid "The earn-out did not pay: revenue fell short of the agreed floor."
 msgstr ""
 
@@ -8837,7 +8837,7 @@ msgstr ""
 msgid "Theo"
 msgstr ""
 
-#: scripts/sim/acquisition.gd:78
+#: scripts/sim/acquisition.gd:85
 msgid "There is no offer on the table."
 msgstr ""
 
@@ -9061,7 +9061,7 @@ msgstr ""
 msgid "Tue"
 msgstr ""
 
-#: scripts/sim/acquisition.gd:92
+#: scripts/sim/acquisition.gd:99
 msgid "Turned down Hale Group's offer for %s."
 msgstr ""
 
@@ -9221,7 +9221,7 @@ msgstr ""
 msgid "Victor Hale has read your numbers: meet him at Crestline (weekdays 11–16), or wait for his call"
 msgstr ""
 
-#: scripts/sim/acquisition.gd:89
+#: scripts/sim/acquisition.gd:96
 msgid "Victor Hale. Fine. %s more, part of it now and the rest if revenue holds for a year. %s is in your account. Don't make me regret it."
 msgstr ""
 
@@ -9229,19 +9229,19 @@ msgstr ""
 msgid "Victor Hale. I'd like to talk about {company}. I'm at the Crestline flagship on weekdays, eleven to four. If that's inconvenient, I'll call."
 msgstr ""
 
-#: scripts/sim/acquisition.gd:83
+#: scripts/sim/acquisition.gd:90
 msgid "Victor Hale. Papers signed. %s is in your account. You stay on as managing director: you know where the levers are."
 msgstr ""
 
-#: scripts/sim/acquisition.gd:139
+#: scripts/sim/acquisition.gd:146
 msgid "Victor Hale. Revenue is at %s of the number we signed on. Under our agreement the earn-out doesn't pay. I would rather have paid it."
 msgstr ""
 
-#: scripts/sim/acquisition.gd:135
+#: scripts/sim/acquisition.gd:142
 msgid "Victor Hale. Twelve months, targets met. The second payment is in your account: %s."
 msgstr ""
 
-#: scripts/sim/acquisition.gd:93
+#: scripts/sim/acquisition.gd:100
 msgid "Victor Hale. Understood. Independent suits you. If the number changes, so will the conversation."
 msgstr ""
 
@@ -9757,7 +9757,7 @@ msgstr ""
 msgid "You owe (suppliers)"
 msgstr ""
 
-#: scripts/sim/acquisition.gd:60
+#: scripts/sim/acquisition.gd:67
 msgid "You own all of it, so the whole amount is yours: %s."
 msgstr ""
 
@@ -10471,6 +10471,10 @@ msgstr ""
 
 #: scripts/world/actions.gd:22
 msgid "not yours (yet)"
+msgstr ""
+
+#: scripts/sim/acquisition.gd:64
+msgid "nothing for earnings (last year's profit: %s)"
 msgstr ""
 
 #: scripts/world/actions.gd:37

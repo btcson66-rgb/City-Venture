@@ -525,6 +525,17 @@ func test_acquisition_falls_back_to_revenue_for_a_thin_profit_business() -> void
 	runner.check(float(q["price"]) >= float(Acquisition.cfg()["min_price"]), "never below the minimum offer")
 
 
+func test_acquisition_of_a_loss_making_company_is_priced_on_its_assets() -> void:
+	var cid := _setup()
+	Clock.advance(30 * Clock.DAY)
+	Ledger.post(cid, "Ads", [{"acct": "exp:advertising", "dr": 3000.0}, {"acct": "cash", "cr": 3000.0}])
+	var q := Acquisition.quote()
+	runner.eq(str(q["basis"]), "assets", "no earnings to price")
+	runner.eq(float(q["price"]), Ledger.cash(cid), "the offer is what the company owns")
+	var ctx := Acquisition.context()
+	runner.check(str(ctx["basis"]).contains("nothing for earnings"), "and the decision says so plainly")
+
+
 func test_acquisition_accept_pays_the_founder_and_hands_over_the_company() -> void:
 	var cid := _books()
 	var inst := EventEngine.trigger("acquisition_offer")   # fired with no context: the offer binds itself

@@ -1010,7 +1010,11 @@ func _chapters_10_to_12() -> void:
 	await metro_to("riverside")
 	await enter_building("riverside_apartment")
 	await _buy_import("phone_stand", "escrow", "settlement_escrow")
+	Clock.advance(130)   # (harness) the contract locks within two hours: the order shows as held in escrow
+	await bot.click_named("Tab_finance")
+	await bot.click_named("Tab_operations")
 	await _scroll_to_end()
+	await bot.wait(4.5)   # let the toast fade
 	await bot.shot("operations_escrow_order")
 	await close_modal()
 	bot.expect(int(GameState.stat("escrow_orders")) >= 1, "import ordered through escrow")
@@ -1039,6 +1043,7 @@ func _chapters_10_to_12() -> void:
 	await bot.click_named("Tab_operations")
 	await bot.wait(0.4)
 	await _scroll_to_end()
+	await bot.wait(4.5)
 	await bot.shot("operations_frozen_order")
 	await close_modal()
 	await _read_news("bridge_frozen")

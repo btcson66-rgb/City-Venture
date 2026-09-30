@@ -36,7 +36,12 @@ static func quote() -> Dictionary:
 	var raw := snappedf(maxf(by_profit, by_revenue) + cash + stock + owed - debts, 1.0)
 	var price := maxf(float(c.get("min_price", 5000.0)), raw)
 	var founder := float(GameState.data.get("cap_table", {"founder": 1.0}).get("founder", 1.0))
-	return {"price": price, "basis": "profit" if by_profit >= by_revenue else "revenue", "profit_year": profit_year, "revenue_year": revenue_year,
+	var basis := "assets"   # no earnings to price: the company lost money and has no revenue worth a multiple
+	if by_profit > 0.0 and by_profit >= by_revenue:
+		basis = "profit"
+	elif by_revenue > 0.0:
+		basis = "revenue"
+	return {"price": price, "basis": basis, "profit_year": profit_year, "revenue_year": revenue_year,
 		"enterprise": maxf(by_profit, by_revenue), "cash": cash, "stock": stock, "owed": owed, "debts": debts,
 		"founder_share": founder, "take": snappedf(price * founder, 0.01)}
 
@@ -53,8 +58,10 @@ static func context() -> Dictionary:
 	var basis := ""
 	if str(q["basis"]) == "profit":
 		basis = I18n.t("%s × last year's profit of %s") % ["%.1f" % float(c.get("profit_multiple", 3.5)), Fmt.money0(float(q["profit_year"]))]
-	else:
+	elif str(q["basis"]) == "revenue":
 		basis = I18n.t("%s × last year's revenue of %s") % ["%.2f" % float(c.get("revenue_multiple", 0.35)), Fmt.money0(float(q["revenue_year"]))]
+	else:
+		basis = I18n.t("nothing for earnings (last year's profit: %s)") % Fmt.money0(float(q["profit_year"]))
 	var share := ""
 	if founder >= 0.999:
 		share = I18n.t("You own all of it, so the whole amount is yours: %s.") % Fmt.money0(float(q["take"]))

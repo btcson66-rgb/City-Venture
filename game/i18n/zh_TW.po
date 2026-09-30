@@ -358,11 +358,11 @@ msgstr "%s 訂閱收入——%d 位用戶"
 msgid "%s till: %d customers"
 msgstr "%s 收銀：%d 位客人"
 
-#: scripts/sim/acquisition.gd:55
+#: scripts/sim/acquisition.gd:60
 msgid "%s × last year's profit of %s"
 msgstr "%s 倍去年獲利 %s"
 
-#: scripts/sim/acquisition.gd:57
+#: scripts/sim/acquisition.gd:62
 msgid "%s × last year's revenue of %s"
 msgstr "%s 倍去年營收 %s"
 
@@ -3650,7 +3650,7 @@ msgstr "髮色"
 msgid "Hairstyle"
 msgstr "髮型"
 
-#: scripts/sim/acquisition.gd:134
+#: scripts/sim/acquisition.gd:141
 msgid "Hale Group earn-out"
 msgstr "Hale Group 績效尾款"
 
@@ -3658,7 +3658,7 @@ msgstr "Hale Group 績效尾款"
 msgid "Hale Group makes an offer"
 msgstr "Hale Group 開出收購條件"
 
-#: scripts/sim/acquisition.gd:136
+#: scripts/sim/acquisition.gd:143
 msgid "Hale Group paid the earn-out: %s."
 msgstr "Hale Group 付了績效尾款：%s。"
 
@@ -4162,7 +4162,7 @@ msgstr "庫存：你有什麼、放在哪裡"
 msgid "Investors buy shares in a registered company."
 msgstr "投資人只能入股已登記的公司。"
 
-#: scripts/sim/acquisition.gd:62
+#: scripts/sim/acquisition.gd:69
 msgid "Investors own %s of it, so your share is %s."
 msgstr "投資人持有 %s，所以你的份是 %s。"
 
@@ -5522,7 +5522,7 @@ msgstr "不賣。公司、獲利和麻煩都還是你的。Victor 說大門會�
 msgid "No saved games yet."
 msgstr "還沒有存檔。"
 
-#: scripts/sim/acquisition.gd:95 scripts/sim/event_engine.gd:165 scripts/sim/rails.gd:332
+#: scripts/sim/acquisition.gd:102 scripts/sim/event_engine.gd:165 scripts/sim/rails.gd:332
 msgid "No such choice."
 msgstr "沒有這個選項。"
 
@@ -8046,11 +8046,11 @@ msgstr "賣給清倉商：%d × %s（成本的 %d%%）"
 msgid "Sold %d%% of %s for %s."
 msgstr "賣出 %d%% 的 %s 股份，換得 %s。"
 
-#: scripts/sim/acquisition.gd:109
+#: scripts/sim/acquisition.gd:116
 msgid "Sold %s to Hale Group"
 msgstr "把 %s 賣給 Hale Group"
 
-#: scripts/sim/acquisition.gd:112
+#: scripts/sim/acquisition.gd:119
 msgid "Sold %s to Hale Group: %s paid to you."
 msgstr "把 %s 賣給 Hale Group：付給你 %s。"
 
@@ -8694,7 +8694,7 @@ msgstr "差別是：獲利歸我，錯誤一起扛。別浪費先發優勢。"
 msgid "The digital-dollar bridge was exploited. Transfers are frozen until about %s."
 msgstr "數位美元跨鏈橋遭駭。轉帳凍結，預計 %s 前後恢復。"
 
-#: scripts/sim/acquisition.gd:140
+#: scripts/sim/acquisition.gd:147
 msgid "The earn-out did not pay: revenue fell short of the agreed floor."
 msgstr "績效尾款沒有付：營收低於約定的下限。"
 
@@ -8838,7 +8838,7 @@ msgstr "然後說好、說不，或報一個更好的數字。三種我都尊重
 msgid "Theo"
 msgstr "Theo"
 
-#: scripts/sim/acquisition.gd:78
+#: scripts/sim/acquisition.gd:85
 msgid "There is no offer on the table."
 msgstr "目前沒有任何收購提案。"
 
@@ -9062,7 +9062,7 @@ msgstr "在預覽上試穿，用個人現金購買，可以馬上穿，或之後
 msgid "Tue"
 msgstr "二"
 
-#: scripts/sim/acquisition.gd:92
+#: scripts/sim/acquisition.gd:99
 msgid "Turned down Hale Group's offer for %s."
 msgstr "婉拒了 Hale Group 對 %s 的收購提案。"
 
@@ -9222,7 +9222,7 @@ msgstr "Victor Hale"
 msgid "Victor Hale has read your numbers: meet him at Crestline (weekdays 11–16), or wait for his call"
 msgstr "Victor Hale 看過你的數字了：到 Crestline 找他（平日 11–16 點），或等他來電"
 
-#: scripts/sim/acquisition.gd:89
+#: scripts/sim/acquisition.gd:96
 msgid "Victor Hale. Fine. %s more, part of it now and the rest if revenue holds for a year. %s is in your account. Don't make me regret it."
 msgstr "我是 Victor Hale。好。多 %s，一部分現在付，其餘的看營收能不能撐一年。%s 已經進你的帳戶了。別讓我後悔。"
 
@@ -9230,19 +9230,19 @@ msgstr "我是 Victor Hale。好。多 %s，一部分現在付，其餘的看營
 msgid "Victor Hale. I'd like to talk about {company}. I'm at the Crestline flagship on weekdays, eleven to four. If that's inconvenient, I'll call."
 msgstr "我是 Victor Hale。我想跟你談談 {company}。平日十一點到四點我在 Crestline 旗艦店。不方便的話，我打給你。"
 
-#: scripts/sim/acquisition.gd:83
+#: scripts/sim/acquisition.gd:90
 msgid "Victor Hale. Papers signed. %s is in your account. You stay on as managing director: you know where the levers are."
 msgstr "我是 Victor Hale。文件簽好了。%s 已經進你的帳戶。你繼續當總經理：你最清楚哪裡是關鍵。"
 
-#: scripts/sim/acquisition.gd:139
+#: scripts/sim/acquisition.gd:146
 msgid "Victor Hale. Revenue is at %s of the number we signed on. Under our agreement the earn-out doesn't pay. I would rather have paid it."
 msgstr "我是 Victor Hale。營收只有簽約時的 %s。依照協議，績效尾款不會發。我寧願付這筆錢。"
 
-#: scripts/sim/acquisition.gd:135
+#: scripts/sim/acquisition.gd:142
 msgid "Victor Hale. Twelve months, targets met. The second payment is in your account: %s."
 msgstr "我是 Victor Hale。十二個月，目標達成。第二筆款項已進你的帳戶：%s。"
 
-#: scripts/sim/acquisition.gd:93
+#: scripts/sim/acquisition.gd:100
 msgid "Victor Hale. Understood. Independent suits you. If the number changes, so will the conversation."
 msgstr "我是 Victor Hale。了解。保持獨立很適合你。數字變了，談法也會跟著變。"
 
@@ -9758,7 +9758,7 @@ msgstr "你個人只有 %s。"
 msgid "You owe (suppliers)"
 msgstr "你欠別人（供應商）"
 
-#: scripts/sim/acquisition.gd:60
+#: scripts/sim/acquisition.gd:67
 msgid "You own all of it, so the whole amount is yours: %s."
 msgstr "公司全部歸你，所以整筆都是你的：%s。"
 
@@ -10473,6 +10473,10 @@ msgstr "（還）不是你的辦公室"
 #: scripts/world/actions.gd:22
 msgid "not yours (yet)"
 msgstr "（還）不是你的"
+
+#: scripts/sim/acquisition.gd:64
+msgid "nothing for earnings (last year's profit: %s)"
+msgstr "獲利算不出價值（去年獲利：%s）"
 
 #: scripts/world/actions.gd:37
 msgid "nothing to drop off"
