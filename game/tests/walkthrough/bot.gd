@@ -578,7 +578,7 @@ func _shots() -> void:
 	SceneRouter._set_scene(ArrivalScene.new())
 	await wait(6.2)
 	await shot("arrival")
-	for d in ["riverside", "startup_hub", "civic_center", "financial", "shopping_street"]:
+	for d in ["riverside", "startup_hub", "civic_center", "financial", "shopping_street", "harbor"]:
 		for b in DataDB.districts[d]["buildings"]:
 			SceneRouter._enter("district", d, "door_" + b, "down")
 			await wait(1.0)

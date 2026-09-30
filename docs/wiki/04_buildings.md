@@ -72,7 +72,19 @@
 | `shop_row_awning` | 雨遮店排 | ✗ | 164×164 | （無） | 三間小店，雨遮顏色各不同 |
 | `cinema_front` | 電影院 | ✗ | 200×220 | AURELIA CINEMA | 裝飾藝術風格門面、燈泡邊框的片名看板（看板內容用色塊） |
 
-### Harbor（P1）
+### Harbor（已實作 · 2026-09-30，美術待交）
+
+四棟可進入建築和三棟填充建築都已接進遊戲（`data/buildings/`、`data/districts/harbor.json`），立面圖沒交之前資料用 `fallback` 暫代：交件並更新 `buildings_meta.json` 後跑 `python3 tools/gen_districts.py harbor` 重排即可。招牌文字由程式畫（`exterior.sign`），暫代立面的舊招牌字會被蓋掉。
+
+| 立面 id | 建築 id | 目前暫代 | 說明 |
+|---------|---------|----------|------|
+| `pier7_warehouse` | `pier7_warehouse` | `brick_shops` | 24 小時可進；在裡面的櫃台租倉位 |
+| `dockside_motors` | `dockside_motors` | `byte_bean` | 週一到週六 08–18；Sam Okoro 在櫃台後面 |
+| `harbor_point_fitness` | `harbor_point_fitness` | `popup_unit` | 每天 06–22；可看櫃台和課表 |
+| `customs_house` | `customs_house` | `civic_annex` | **進不去**（`closed_reason`：進口許可與清關還沒納入這個版本）；仍有一個小室內場景，讓截圖巡禮和工具載得起來 |
+| `warehouse_shed` / `cold_store` / `container_stack` | （填充） | `shop_row_awning` / `retail_arcade` / `riverside_walkup` | 不可進入 |
+
+下表是給美術的設定稿（尺寸是建議值）：
 
 | 立面 id | 名稱 | 可進入 | 建議尺寸 | 招牌文字 | 視覺設定 |
 |---------|------|--------|----------|----------|----------|

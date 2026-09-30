@@ -200,6 +200,7 @@ A5 已重製四種現有表情並補上眼鏡；12 位具名 NPC 的頭像和四
 | `support` | Customer Support 客服 | `office_professional` | 加 `headset` 耳麥 | 坐在辦公桌講電話 |
 | `marketer` | Marketer 行銷 | `startup_casual` | 加 `bag_tote` 托特包 | 坐在辦公桌 |
 | `developer` | Developer 工程師 | `office_professional` | 改穿帽 T（`student` 服裝的成人版）或加 `headset` | 坐在雙螢幕桌 |
+| `driver` | Van Driver 貨車司機 | `logistics_site`（橘色反光背心暫代） | 加安全帽、手上拿著手寫的路線單 | **已實作**：工作日 9–17 點站在 Pier 7 倉庫裝卸平台旁（要先租下倉庫才看得到人；他的工作是開你的貨車跑一趟外送，見 `13_core_loop_and_work.md`） |
 
 ## 路人（`scripts/world/ambient_person.gd`）
 
@@ -207,7 +208,9 @@ A5 已重製四種現有表情並補上眼鏡；12 位具名 NPC 的頭像和四
 
 各區可以設定路人服裝（區域資料的 `ped_outfits`）：**購物街已實作**，多穿 `luxury_citywear`。
 
-**規劃**：金融區多西裝；大學區多 `student`；港區多 `logistics_site`；購物街加提購物袋的路人；住宅區有推嬰兒車、遛狗的人（需要新的配件或道具）。
+**港區已實作**：路人多穿 `logistics_site`（橘色反光背心，美術暫代）、`courier`、`casual_jacket`。
+
+**規劃**：金融區多西裝；大學區多 `student`；購物街加提購物袋的路人；住宅區有推嬰兒車、遛狗的人（需要新的配件或道具）。
 
 ---
 
@@ -223,7 +226,7 @@ A5 已重製四種現有表情並補上眼鏡；12 位具名 NPC 的頭像和四
 | `rosa` | Rosa Lim | Harbor Point Fitness 老闆 | P1 | 陰柔 · 圓臉 · 黑色馬尾 · s3 · 圓眼深瞳 · 平眉 · 露齒笑 | `athleisure` | 精力旺盛、殺價很兇、很講信用。運動外套、毛巾掛脖子 |
 | `okafor` | Mr. Okafor | 房東 | P1 | 陽剛 · 圓臉 · 灰白平頭 · s6 · 圓眼深瞳 · 濃眉 · 微笑 | 開襟毛衣（`civic_staff` 暫代） | 老城的老派房東：公正、嘮叨、記得每個房客的生日。老花眼鏡 |
 | `ines` | Ines Duarte | 海關官員 | P2 | 陰柔 · 方臉 · 棕色包頭 · s4 · 細長眼 · 濃眉 · 平嘴 | `uniform_officer` | 公事公辦，但會提醒你漏了哪張文件 |
-| `sam` | Sam Okoro | Dockside Motors 二手貨車行老闆（港區） | P1（港區開放時） | 陽剛 · 方臉 · 黑色短捲髮 · s5 · 圓眼深瞳 · 濃眉 · 露齒笑 | 工作服（`courier` 暫代，深藍） | 爽朗、講實話，會直接告訴你哪台車的變速箱快不行了。手上有機油、耳朵夾一支筆 |
+| `sam` | Sam Okoro | Dockside Motors 二手貨車行老闆（港區） | **已實作**（港區，週一到週六 08–18 點在展示間櫃台後面；找他說話可以買第一台貨車，見 `09_vehicles.md`）。外型用現有選項組、黑色捲髮暫用 `messy`，`npc_sam` 專屬圖等 B2 | 陽剛 · 方臉 · 黑色短捲髮 · s5 · 圓眼深瞳 · 濃眉 · 露齒笑 | 工作服（`courier` 暫代，深藍） | 爽朗、講實話，會直接告訴你哪台車的變速箱快不行了。手上有機油、耳朵夾一支筆 |
 | `hana` | Prof. Hana Sato | 大學研究室主持人 | P1 | 陰柔 · 橢圓臉 · 銀色鮑伯 · s2 · 圓眼深瞳 · 柔眉 · 微笑 · 圓框眼鏡 | `lab_coat` | 研發合作、介紹實習生。實驗袍口袋插著三支筆 |
 | `kai` | Kai Moreno | Aurelia Daily 記者 | P1 | 中性 · 心形臉 · 棕色亂髮 · s3 · 大眼榛瞳 · 平眉 · 露齒笑 | `casual_jacket` | 「Viral Mention」事件和新聞頭條的人。相機背帶、記者證 |
 

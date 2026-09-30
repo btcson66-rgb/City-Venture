@@ -199,7 +199,7 @@ static func leg(a: Vector2, b: Vector2) -> Array:
 	var best: Array = []
 	var best_len := INF
 	for br in bridges():
-		var l := a.distance_to(br) + br.distance_to(b)
+		var l: float = a.distance_to(br) + br.distance_to(b)
 		if l < best_len:
 			best_len = l
 			best = [a, br, b]

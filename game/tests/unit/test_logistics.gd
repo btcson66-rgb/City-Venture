@@ -7,7 +7,7 @@ extends RefCounted
 var runner
 
 
-func _company(cash := 40000.0) -> String:
+func _company(cash := 27000.0) -> String:
 	Company.register("Haul Test Co", "ecommerce", "22 Founders Lane")
 	Company.open_business_account(cash)
 	GameState.set_flag("business_account_opened")
@@ -277,6 +277,7 @@ func test_the_route_minigame_plays_and_autoplays() -> void:
 	var g3 := RouteGame.new({"id": "R9", "client": "Kuro Ramen", "stops": STOPS, "by": 0})
 	g3.phase = "play"
 	g3.stage = Control.new()
+	g3.footer = HBoxContainer.new()
 	g3.build_round()
 	g3._pick(2)
 	g3._pick(0)
@@ -290,6 +291,7 @@ func test_the_route_minigame_plays_and_autoplays() -> void:
 		g3._pick(i)
 	runner.check(not g3.drive_btn.disabled, "drive once every stop is planned")
 	g3.stage.free()
+	g3.footer.free()
 	g3.free()
 	g2.free()
 	g.free()
@@ -406,7 +408,7 @@ func test_you_can_only_carry_so_many_runs() -> void:
 
 func test_drivers_need_the_van_and_work_a_run_every_workday() -> void:
 	Company.register("Haul Test Co", "ecommerce", "22 Founders Lane")
-	Company.open_business_account(60000.0)
+	Company.open_business_account(27000.0)
 	GameState.set_flag("business_account_opened")
 	var cid := GameState.company_id()
 	Staff.register_employer()
