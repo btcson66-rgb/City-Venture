@@ -810,7 +810,7 @@ func _chapters_7_to_9() -> void:
 	await bot.shot("operations_green")
 	await close_modal()
 	bot.expect(GameState.flag("packaging_green"), "recycled packaging")
-	await pass_time_at_home(func(): return Ecommerce.total_units_at_any("solar_lamp") > 0, 8)
+	await pass_time_at_home(func(): return Ecommerce.total_units_at_any("solar_lamp") > 0, 8, true)   # a few days in Year 4
 	await _home_laptop("sales")
 	await bot.click_named("ListSelf_solar_lamp", 3.0)
 	await bot.until(func(): return not (UIRoot.top_modal() is MiniGame), 8.0)   # the photo shoot
@@ -1014,6 +1014,9 @@ func _harbor_logistics() -> void:
 		await bot.click_named("Tab_logistics", 3.0)   # a click elsewhere puts the card away
 		await bot.wait(0.3)
 	var open := Logistics.open_jobs()
+	if not bot.expect(not open.is_empty(), "delivery runs on the board"):
+		await close_modal()
+		return
 	var jid := str(open[open.size() - 1]["id"])   # the latest deadline: no rush
 	await bot.click_named("Accept_" + jid, 3.0)
 	await bot.wait(0.4)
