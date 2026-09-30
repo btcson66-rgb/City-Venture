@@ -574,6 +574,8 @@ Lina 坐在 Nexus Bank 右下角新加的辦公桌（`exec_desk` 在 x 330, y 19
 
 S3 的街景三項需要程式接線（依年代顯示），交圖後由 Claude 線接上。
 
+**S3 美術交件（2026-09-30）**：`events/supply_shock_plan.png`、`events/payment_pending.png`、`props/port_cranes_far.png`、`props/solar_roof_small.png`、`props/solar_roof_large.png`、`props/ev_charger.png` 及對應 `world_detail/` 4× 版已完成，含 `.png.import`。事件圖由既有決策／結算 UI 動態讀取；三種街景物件仍待 Claude 線分別在第 3 年（吊車）和第 4 年（兩款太陽能屋頂、充電樁）接入適當街區。美術稿與縮圖在 `docs/art_sources/s3_20260930/`，證據在 `evidence/2026-09-30_s3_events_streets/`。
+
 ### 第 10–12 章（先看，還不用畫）
 
 第 10 章 Digital Rails、第 11 章 The Other Side of Trust、第 12 章 Regulation & Scale 還在設計。確定之後會需要：
