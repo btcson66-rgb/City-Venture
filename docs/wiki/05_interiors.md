@@ -248,3 +248,7 @@
 | `aurum_dining` | Aurum | P3 | `dining_table`（高級版 **`dining_table_fine`**）、**`wine_wall`**、`hanging_light` | 服務生 |
 | `factory_unit` | 廠房 | P3 | **`assembly_line`**、**`qc_station`**、`pallet_rack`、`forklift` | 工人（新服裝 `site`） |
 | `solaris_energy` | Solaris Energy | P3 | `monitor_desk`、**`solar_panel_sample`**、**`battery_rack`** | — |
+
+## B2 港區室內 · 美術已交 2026-09-30
+
+Pier 倉庫：`pallet_rack`、`loading_dock_door`、`forklift_parked`、`packing_bench_large`；貨車行：`sales_desk`、`key_board`。另交 `interiors/floor_harbor_concrete.png`（192×192 / 768×768）平整藍灰水泥材質，建議室內 floor 資料使用 `harbor_concrete`。房間排版、互動和碰撞待 Claude 線接入。
