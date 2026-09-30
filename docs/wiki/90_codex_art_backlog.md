@@ -576,7 +576,7 @@ S3 的街景三項需要程式接線（依年代顯示），交圖後由 Claude 
 
 ### 第 10–12 章（先看，還不用畫）
 
-第 10 章 Digital Rails、第 11 章 The Other Side of Trust、第 12 章 Regulation & Scale 還在設計。確定之後會需要：
+第 10 章 Digital Rails、第 11 章 The Other Side of Trust、第 12 章 Regulation & Scale 已經實作（程式和資料都在，見 [STORY_IMPLEMENTATION §9](../STORY_IMPLEMENTATION.md)），美術照第六輪的清單畫，程式會自動接上。需要：
 
 - 章節卡 `chapter_10` 到 `chapter_12`，內容見 [11 背景](11_backdrops_maps.md)；
 - Lina 辦公室的室內場景；

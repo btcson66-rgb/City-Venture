@@ -17,6 +17,12 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "ch10":
+		# quick rerun of the last chapters: --from=ch10 (the full walkthrough never does this)
+		await _fast_forward_to_ch10()
+		await _chapters_10_to_12()
+		await _summary()
+		return
 	await _chapter1()
 	await _chapter2()
 	await _chapter3()
@@ -29,6 +35,18 @@ func run() -> void:
 		await _chapters_4_to_6()
 		await _chapters_7_to_9()
 		await _old_town_cafe()
+		await _chapters_10_to_12()
+	await _summary()
+
+
+func _arg(name: String) -> String:
+	for a in OS.get_cmdline_user_args():
+		if a.begins_with("--%s=" % name):
+			return a.substr(name.length() + 3)
+	return ""
+
+
+func _summary() -> void:
 	await _save_load()
 	bot.step("Summary")
 	var be := GameState.business_entity()
@@ -115,6 +133,14 @@ func _pick_choice(inst: Dictionary) -> String:
 			return "decline"   # the walkthrough bridges the gap with a bank loan instead
 		"supply_shock_plan":
 			return "local"     # the local co-op: the chapter's new supplier gets used
+		"escrow_offer":
+			return "try"       # Chapter 10: open the escrow account
+		"rail_frozen":
+			return "reroute"   # Chapter 11: pay again by wire while the bridge is frozen
+		"acquisition_offer":
+			return "counter"   # Chapter 12: ask for more, with an earn-out
+		"shipment_lost":
+			return "reship"
 	return DataDB.events[inst["id"]]["choices"][0]["id"]
 
 
@@ -910,6 +936,198 @@ func _old_town_cafe() -> void:
 	await exit_building()
 	await metro_to("riverside")
 	await enter_building("riverside_apartment")
+
+
+## Chapters 10–12: the digital rails (Year 6), the bridge exploit (Year 7), the regulation wave and Victor Hale's offer
+## (Year 8). Each opens with the news board, then uses the chapter's new system for real.
+func _until_weekday_hours(h0: int, h1: int) -> void:
+	while not _is_weekday() or Clock.hour() < h0 or Clock.hour() >= h1:
+		await pass_time_at_home(func(): return _is_weekday() and Clock.hour() >= h0 and Clock.hour() < h1, 1)
+
+
+## Click the first "!" badge on the top screen: the card stays pinned for the screenshot, then closes.
+func _pin_badge_shot(shot_name: String) -> void:
+	var m = UIRoot.top_modal()
+	if m == null:
+		return
+	var tips: Array = m.find_children("*", "InfoTip", true, false)
+	if tips.is_empty():
+		bot.fail("no '!' badge on this screen (%s)" % shot_name)
+		return
+	var tip: InfoTip = tips[0]
+	await bot.click(tip)
+	await bot.wait(0.5)
+	bot.expect(is_instance_valid(tip._pinned) and tip._pinned.visible, "the '!' badge for %s pins its card" % tip.tip_id)
+	await bot.shot(shot_name)
+	if is_instance_valid(tip._pinned):
+		tip._pinned.hide()
+	await bot.wait(0.2)
+
+
+## Scroll the top screen's content to the bottom (the purchase orders sit below the suppliers).
+func _scroll_to_end() -> void:
+	var m = UIRoot.top_modal()
+	if m == null:
+		return
+	for sc in m.find_children("*", "ScrollContainer", true, false):
+		var s := sc as ScrollContainer
+		s.scroll_vertical = 100000
+	await bot.wait(0.4)
+
+
+func _buy_import(product: String, method: String, shot_name := "") -> void:
+	await _home_laptop("operations")
+	await bot.click_named("Buy_lumina_direct_" + product, 3.0)
+	await bot.wait(0.6)
+	if shot_name != "":
+		await bot.shot(shot_name)
+	await bot.click_named("Settle_" + method, 3.0)
+	await bot.wait(0.5)
+
+
+func _chapters_10_to_12() -> void:
+	await popups()
+	bot.expect(StoryEngine.St()["chapter"] == "ch10_digital_rails", "Chapter 10 started after Chapter 9")
+	bot.expect(World.year() == 6, "Year 6: the Digital Finance Boom")
+	# ---------------------------------------------------------------- chapter 10
+	bot.step("Chapter 10 — the news, and Lina's escrow offer")
+	await _read_news("digital_rails")
+	await _until_weekday_hours(10, 15)
+	await exit_building()
+	await metro_to("financial")
+	await enter_building("nexus_bank")
+	await bot.use(func(n): return n.action == "talk" and str(n.params.get("npc", "")) == "lina", "Lina Zhao")
+	await bot.wait(0.6)
+	await bot.shot("lina_rails")
+	await talk_through_dialogue_first_choice()
+	await bot.until(func(): return UIRoot.top_modal() is DecisionModal, 12.0)
+	await bot.wait(0.8)
+	await _pin_badge_shot("badge_escrow_pinned")
+	await popups()   # answers the escrow offer: open the account
+	bot.expect(GameState.flag("escrow_open"), "opened an escrow account")
+	bot.step("Chapter 10 — an import paid through escrow")
+	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")
+	await _buy_import("phone_stand", "escrow", "settlement_escrow")
+	await _scroll_to_end()
+	await bot.shot("operations_escrow_order")
+	await close_modal()
+	bot.expect(int(GameState.stat("escrow_orders")) >= 1, "import ordered through escrow")
+	await _home_laptop("finance")
+	await bot.shot("finance_held_in_escrow")
+	await close_modal()
+	await pass_time_at_home(func(): return "ch10_digital_rails" in StoryEngine.St()["chapters_done"], 30, true)   # a 12-day import
+	await popups()
+	bot.expect(int(GameState.stat("escrow_released")) >= 1, "escrow released to the supplier on arrival")
+	bot.expect("ch10_digital_rails" in StoryEngine.St()["chapters_done"], "Chapter 10 complete")
+	# ---------------------------------------------------------------- chapter 11
+	bot.step("Chapter 11 — the bridge exploit")
+	bot.expect(World.year() == 7, "Year 7: the Bridge Exploit")
+	await _read_news("bridge_before")
+	await _buy_import("phone_stand", "escrow", "settlement_before_exploit")
+	await close_modal()
+	await bot.until(func(): return not EventEngine.pending().is_empty(), 40.0)   # the bridge is hit within the hour
+	await bot.until(func(): return UIRoot.top_modal() is DecisionModal, 20.0)
+	await bot.wait(0.6)
+	bot.expect(Rails.frozen(), "the bridge is frozen with our payment crossing it")
+	await _pin_badge_shot("badge_frozen_pinned")
+	await popups()   # answers rail_frozen: pay again by wire
+	bot.expect(Rails.X().get("decision", "") == "reroute", "paid again by wire")
+	await _home_laptop("finance")
+	await bot.shot("finance_frozen_funds")
+	await bot.click_named("Tab_operations")
+	await bot.wait(0.4)
+	await _scroll_to_end()
+	await bot.shot("operations_frozen_order")
+	await close_modal()
+	await _read_news("bridge_frozen")
+	await pass_time_at_home(func(): return "ch11_other_side_of_trust" in StoryEngine.St()["chapters_done"], 40, true)
+	await popups()
+	bot.expect(Rails.state() == "recovered", "the bridge reopened")
+	bot.expect(absf(Ledger.balance(GameState.business_entity(), "frozen_funds")) < 0.01, "frozen funds settled")
+	bot.expect("ch11_other_side_of_trust" in StoryEngine.St()["chapters_done"], "Chapter 11 complete: through the freeze and restocked")
+	# ---------------------------------------------------------------- chapter 12
+	bot.step("Chapter 12 — the regulation wave: the import licence")
+	bot.expect(World.year() == 8, "Year 8: the Regulation Wave")
+	await _read_news("regulation")
+	await _until_weekday_hours(9, 15)
+	await exit_building()
+	await metro_to("civic_center")
+	await enter_building("city_hall")
+	await bot.use_action("permits_info")
+	await bot.wait(0.6)
+	await bot.shot("permits_import_licence")
+	await _pin_badge_shot("badge_licence_pinned")
+	await bot.click_named("ApplyImportLicence", 3.0)
+	await bot.wait(0.5)
+	await bot.shot("permits_licence_processing")
+	await close_modal()
+	bot.expect(Compliance.licence_pending() or Compliance.licence_valid(), "import licence applied for")
+	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")
+	await pass_time_at_home(func(): return Compliance.licence_valid(), 6, true)
+	await popups()
+	bot.expect(GameState.flag("import_licence"), "import licence granted")
+	bot.step("Chapter 12 — a large import goes through KYC")
+	await _buy_import("wireless_earbuds", "letter_of_credit", "settlement_kyc")
+	await close_modal()
+	bot.expect(int(GameState.stat("kyc_checks")) >= 1, "the large payment carries a KYC check")
+	await pass_time_at_home(func(): return int(GameState.stat("kyc_cleared")) >= 1, 6, true)
+	await popups()
+	bot.expect(int(GameState.stat("kyc_cleared")) >= 1, "KYC cleared")
+	await _home_laptop("finance")
+	await bot.shot("finance_compliance_cost")
+	await close_modal()
+	bot.step("Chapter 12 — Victor Hale's offer")
+	await _until_weekday_hours(11, 15)
+	await exit_building()
+	await metro_to("shopping_street")
+	await enter_building("crestline_flagship")
+	await bot.use(func(n): return n.action == "talk" and str(n.params.get("npc", "")) == "victor", "Victor Hale")
+	await bot.wait(0.6)
+	await bot.shot("victor_offer")
+	await talk_through_dialogue_first_choice()
+	await bot.until(func(): return UIRoot.top_modal() is DecisionModal, 12.0)
+	await bot.wait(0.8)
+	await _pin_badge_shot("badge_valuation_pinned")
+	await popups()   # counter: a better price with an earn-out
+	bot.expect(GameState.flag("offer_countered") and GameState.flag("company_sold"), "countered Hale Group's offer")
+	await bot.wait(1.2)
+	await bot.shot("ending_card")
+	await bot.wait(3.0)
+	bot.expect("ch12_regulation_scale" in StoryEngine.St()["chapters_done"], "Chapter 12 complete")
+	bot.expect(GameState.flag("story_complete"), "the main story is complete")
+	bot.expect("goal_growth" in StoryEngine.St()["active"], "free play: the growth goal")
+	bot.expect(Ledger.check_balanced(), "ledger balanced after chapters 10–12")
+	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")
+
+
+## Test harness for `--from=ch10`: set the first nine chapters' outcome directly (a company, a business account, Suite
+## 2B, the exchange account) so Chapters 10–12 can be rerun in minutes.
+func _fast_forward_to_ch10() -> void:
+	bot.step("(harness) skip to Chapter 10")
+	GameState.data["tutorial"] = {"step": 99, "seen": {}, "off": true, "v": 99}
+	Company.register("Riverlight Goods", "ecommerce", "22 Founders Lane")
+	Company.open_business_account(20000.0)
+	Living.lease("suite_2b")
+	var st := StoryEngine.St()
+	st["active"] = []
+	for ch in StoryEngine.chapters():
+		if str(ch["id"]) == "ch10_digital_rails":
+			break
+		st["chapters_done"].append(ch["id"])
+		for o in ch.get("objectives", []):
+			st["done"].append(o["id"])
+	st["chapter"] = "ch9_clearing_crisis"
+	World.set_year(5)
+	for f in ["phone_opened", "business_chosen", "met_lina", "exchange_account", "employer_registered"]:
+		GameState.set_flag(f)
+	StoryEngine.start_chapter("ch10_digital_rails")
+	await bot.wait(1.0)
 
 
 func talk_through_dialogue_first_choice() -> void:

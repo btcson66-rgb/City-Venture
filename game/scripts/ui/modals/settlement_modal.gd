@@ -34,7 +34,7 @@ func _init() -> void:
 	title_text = "Pay a supplier abroad"
 	icon_name = "bank"
 	help_key = "settlement"
-	panel_size = Vector2(440, 330)
+	panel_size = Vector2(440, 340)
 
 
 func _amount() -> float:
@@ -64,9 +64,8 @@ func build() -> void:
 			body.add_child(UIK.wrap(I18n.t("Your payment is stuck on the frozen bridge until about %s. Pay again by another rail to get the goods moving; the frozen money comes back when the bridge reopens.") % Clock.fmt_short(Rails.frozen_until()), 7, Art.C_RED, 410))
 		else:
 			body.add_child(UIK.wrap(I18n.t("Paid by %s. It lands around %s; the supplier ships after that. A faster rail costs its own fee.") % [I18n.t(str(Ecommerce.settlement_def(str(st["method"]))["name"])), Clock.fmt_short(int(st["clears"]))], 7, Art.C_GOLD, 410))
-	else:
-		body.add_child(UIK.wrap("Cross-border payments are jammed. The supplier ships only once your money lands on their side.", 7, Art.C_MUTED, 410) if World.year() < 6 \
-			else UIK.wrap("The supplier ships only once your money lands on their side. Compare the rails: fee, speed and track record.", 7, Art.C_MUTED, 410))
+	elif World.year() < 6:
+		body.add_child(UIK.wrap("Cross-border payments are jammed. The supplier ships only once your money lands on their side.", 7, Art.C_MUTED, 410))
 	var kyc := Compliance.kyc(amount) if po_id == "" else {}
 	if not kyc.is_empty():
 		body.add_child(UIK.label_tip(I18n.t("KYC check: %s and %d more hours before this payment lands (payments over %s).") % [Fmt.money(float(kyc["fee"])), int(kyc["hours"]), Fmt.money0(Compliance.kyc_threshold())], "kyc", 7, Art.C_GOLD))
@@ -98,7 +97,7 @@ func build() -> void:
 		b.disabled = why != ""
 		row.add_child(b)
 		list.add_child(UIK.card(row))
-	body.add_child(UIK.scroll(list, Vector2(420, 218)))
+	body.add_child(UIK.scroll(list, Vector2(420, 244)))
 	footer.add_child(UIK.button("Cancel", close))
 
 

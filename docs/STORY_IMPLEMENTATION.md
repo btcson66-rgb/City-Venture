@@ -7,9 +7,9 @@ Writing rules (kickoff §31–§33):
 - Business lessons come from situations (the profit is on paper but the bank balance is small), not from definitions.
 - Crypto never appears before the Year 5 Clearing Crisis. When it does, it arrives as a problem ("the payment still hasn't landed") before any option.
 
-Condition DSL (shared by story and events): `flag:<f>`, `!flag:<f>`, `visited:<building|district>`, `stat:<name><op><n>`, `day<op><n>`, `cash<op><n>`, `company_registered`, `time_between:<hh:mm>-<hh:mm>`, `weekday:<mon..sun>`.
+Condition DSL (shared by story and events): `flag:<f>`, `!flag:<f>`, `visited:<building|district>`, `stat:<name><op><n>`, `day<op><n>`, `cash<op><n>`, `company_registered`, `time_between:<hh:mm>-<hh:mm>`, `weekday:<mon..sun>`, and later `listed:`, `stock_units`, `world_year`, `loan_capacity>=n` (what Nexus Bank would lend today), `ctx:<key>` (a true value in the event's own context).
 
-Action vocabulary (story `on_start` / `on_complete`): `dialogue:<id>`, `message:<npc>:<text>`, `set_flag`, `start:<objective>`, `complete_chapter`, `timeline:<text>`, `toast`, `unlock:<feature>`, `event:<id>`.
+Action vocabulary (story `on_start` / `on_complete`): `dialogue:<id>`, `message:<npc>:<text>`, `set_flag`, `start:<objective>`, `complete_chapter`, `timeline:<text>`, `toast`, `unlock:<feature>`, `event:<id>`, and later `world_year`, `flag_reset`, `card` (a title band across the screen: the ending cards), `rail_exploit` (Chapter 11). Any action can carry `if: <condition>` and `delay_min`.
 
 ---
 
@@ -22,9 +22,9 @@ Action vocabulary (story `on_start` / `on_complete`): `dialogue:<id>`, `message:
 | 3 Supply Shock | Ch7 | `shipping_index` ×1.6–2.2, supplier lead time ×1.4, logistics demand ↑ | Planned P1/P2 |
 | 4 Green Shift | Ch8 | new energy policy, EV/solar opportunities on Business Board | Planned P3 |
 | 5 Clearing Crisis | Ch9 | cross-border settlement delays; overseas suppliers demand prepay/alt rails; unlocks settlement comparison | Planned P2 |
-| 6 Digital Finance Boom | Ch10 | new rails, digital assets; scam events | Planned P2 |
-| 7 Bridge Exploit | Ch11 | exploit event hits players using that rail; "We solved one trust problem and created another." | Planned P2 |
-| 8 Regulation Wave | Ch12 | compliance cost & licences as operating conditions | Planned P2/P3 |
+| 6 Digital Finance Boom | Ch10 | new rails: escrow on delivery; wires recover to 3–5 days | **Implemented** (§9) |
+| 7 Bridge Exploit | Ch11 | exploit event hits players using that rail; "We solved one trust problem and created another." | **Implemented** (§9) |
+| 8 Regulation Wave | Ch12 | compliance cost & licences as operating conditions; the first acquisition offer | **Implemented** (§9) |
 | 9 Global Consolidation | — | M&A offers, IPO option | Planned P3 |
 | 10 Legacy | — | sandbox + Legacy generation | Planned P3 |
 
@@ -242,12 +242,99 @@ crypto never appears earlier). A pending payment can be switched to a faster rai
 | 4 | Get the payment through | `stat:import_cleared>=1` | wait, or Speed up |
 | 5 | Receive the import | `stat:import_received>=1` | then the $40k-a-month sandbox goal |
 
-## 9. Chapters beyond (Planned)
+## 9. Chapters 10–12 (Implemented)
 
-| Chapter | Key content | Systems it needs |
-|---------|-------------|------------------|
-| Ch10 Digital Rails (Year 6) | Lina's startup: escrow that pays on delivery (smart-contract escrow, simulated), fast settlement for regular importers. Optional, never forced | escrow PO state, rail reliability stat |
-| Ch11 The Other Side of Trust (Year 7) | A bridge exploit freezes one rail for players who used it: money in limbo for days. "We solved one trust problem and created another." | frozen-balance state, recovery rules, news event |
-| Ch12 Regulation & Scale (Year 8) | Compliance as operating cost (KYC on large payments, import licence), governance, first acquisition offer | licence permits, compliance cost, M&A offer |
+The last three chapters of the main story. Same shape as §8: each moves the world into its era (`World.set_year`, data in
+`data/world/years.json`), opens with the news board at Bloom Coffee, and asks the player to use the new system for real.
+They chain **ch9 → ch10 → ch11 → ch12 → an ending card → free play** (`goal_growth`, now "Grow {company}: $40,000 revenue
+in a month"). A save that stopped after Chapter 9 carries on into Chapter 10. The tone rule holds: the rails are neither a
+miracle nor a scam, and traditional finance is not the villain. Every new idea has a "!" badge (`data/help/glossary.json`).
 
-Art for Chapters 7–9 (and a heads-up for 10–12) is in `docs/wiki/90_codex_art_backlog.md`.
+### CHAPTER 10 — DIGITAL RAILS ("Money that moves when the goods do.") · Year 6
+Era effects: wires recover to 3–5 days (`wire_clear_mult` 0.6), imports +3%, shipping index 1.1.
+New settlement method **escrow on delivery** (`data/economy/settlement_methods.json`, `escrow: true`, `digital_rail: true`,
+`from_year: 6`, needs `flag:escrow_open`): the payment is locked in a simulated smart contract (0.6%, $15 minimum, locks in
+1–2 hours, no wire delay). The supplier ships once it sees the money locked; the contract pays the supplier on arrival.
+If the supplier fails, the contract refunds (the fee is not returned).
+
+| # | Objective | Completes when | Systems |
+|---|-----------|----------------|---------|
+| 1 | Read the news | `flag:news_read` | Lina and Ken text |
+| 2 | Talk to Lina Zhao (Nexus Bank, weekdays 10–16), or take her call | `flag:ch10_decided` | `lina_rails` → event `escrow_offer` (phone fallback after 2 days): **open an escrow account** or **stay with wires and letters of credit** (never forced; Lina reopens the offer later if you declined) |
+| 3 | Import from Lumina Direct, paying with escrow or the traditional way | `stat:import_orders_y6>=1` | Settlement screen lists fee, speed and each rail's **reliability** |
+| 4 | Get the import delivered | `stat:import_received_y6>=1` | escrow released on arrival |
+
+Money: escrow is booked as `escrow_held` (cash out, not yet stock, not yet the supplier's), then released to inventory on
+arrival. The **rail reliability** stat is the share of payments landing on time, per rail: published starting values in
+`data/economy/rails.json`, closed by 10% of the gap on every clean landing, knocked down by the exploit (Chapter 11). A
+regular on the digital rails (two settled payments) pays 65% of the fee. After Chapter 10 the random event `shipment_lost`
+can happen to an import on the way: escrow orders may take the refund, other orders can only ask for a re-ship.
+
+### CHAPTER 11 — THE OTHER SIDE OF TRUST ("We solved one trust problem and created another.") · Year 7
+Era effects: as Year 6 with wires still 3–5 days. The news changes with the story: before the exploit it reports record
+bridge volumes, during the freeze it reports the exploit, afterwards the recovery (`headlines`, `headlines_incident`,
+`headlines_after`).
+
+| # | Objective | Completes when | Systems |
+|---|-----------|----------------|---------|
+| 1 | Read the news | `flag:news_read` | Lina: volumes tripled; Marcus: keep a wire route warm |
+| 2 | Restock from Lumina Direct, paying the way you like | `stat:import_orders_y7>=1` | Completing it starts the exploit **20 minutes later** (a fallback fires it after 7 days) |
+| 3 | Get through the freeze | `flag:rail_recovered` | the bridge stays frozen 6 days |
+| 4 | Restock: get the import delivered | `stat:import_received_y7>=1` | |
+
+The exploit freezes only what is still **crossing the bridge**: digital-rail payments (escrow or digital dollars) that
+haven't landed yet (`awaiting_payment`). Their money moves to `frozen_funds` and the order is on hold; the digital rails
+are closed to new payments until the bridge reopens. Then:
+- **Money in flight** → event `rail_frozen` (Lina): **wait it out** (free; goods ship after the reopening; the payment lands
+  at 90% and you cover the 10% gap so the supplier ships) · **pay again by wire** (fee 1% + $25, 3–5 days; needs the cash
+  twice for a while; the frozen payment comes back at 90%) · **bridge loan from Nexus Bank** (`Bank.take_loan`, 3 months,
+  the normal APR, then reroute; repay early with no penalty). Rerouting is also available later from Company OS →
+  Operations → Reroute (wire or letter of credit).
+- **Recovery, honestly**: after 6 days 90% of frozen balances are restored (`recovery_ratio`). The other 10% was drained
+  before the freeze; operators' reserve and an insurance pool covered everyone else's share. The gap is booked as a loss
+  (`exp:other`), whichever option you chose. Lina says so in a message.
+- **Lighter path**: nobody who paid by wire or letter of credit has money crossing the bridge. They get a message (the
+  supplier is on wires only for now), no decision, and carry on; the digital rails are just closed for a week.
+The rails' reliability drops to 78% of its value and recovers with each clean settlement.
+
+### CHAPTER 12 — REGULATION & SCALE ("Growing up means paperwork.") · Year 8
+Era effects: `compliance: true`, base rate 5.5%, home rent ×1.18. Compliance becomes an operating cost:
+- **KYC on large payments** (`data/economy/compliance.json`): a cross-border payment of $2,500 or more costs a fee (0.3%,
+  at least $40, expense category `compliance`) and the check takes a day *before* the payment goes out over its rail.
+  Speeding a payment up doesn't skip the check.
+- **Import licence** at the City Hall permits kiosk (replaces the "Import permits & customs — Planned" row): $450 a year
+  (expense `registration`), two days to process, valid 365 days, renewable in its last 60 days; reminders and expiry by
+  message. Without a valid licence, imports are blocked in Year 8.
+- **Monthly compliance cost**: $60 plus $8 per employee, charged on the 1st at 09:00 to a registered company (expense
+  category `compliance`, its own line on the month-end report).
+
+| # | Objective | Completes when | Systems |
+|---|-----------|----------------|---------|
+| 1 | Read the news | `flag:news_read` | Ana and Ken text about the Payments Integrity Act |
+| 2 | Get an import licence at the permits kiosk | `flag:import_licence` | `Compliance.apply_licence` |
+| 3 | Import in bulk: a payment over $2,500 goes through KYC | `stat:kyc_cleared>=1` | Settlement screen shows the KYC fee and delay |
+| 4 | Meet Victor Hale at Crestline (weekdays 11–16), or wait for his call | `flag:offer_decided` | `victor_offer` → event `acquisition_offer` (phone fallback after 3 days) |
+
+**Victor Hale** (Hale Group) is not a villain: tall, thin, no wasted words, he reads the books and says how he got to the
+number. The **price comes from the company's own numbers** (`Acquisition.quote`, `data/economy/acquisition.json`): 3.5 ×
+the last year's operating profit (extrapolated from the last 90 days; when profit is thin, 0.35 × yearly revenue instead),
+plus cash, stock at 80% of cost and money owed to you, minus everything you owe, never below $5,000; investors (Elena's
+share) take theirs. The event lays the arithmetic out. Choices:
+- **Accept**: the founder's share is paid into personal cash; the company carries on under Hale Group with you as managing
+  director. It belongs to Hale Group now (`company_sold`): no owner withdrawals or founder capital.
+- **Counter**: 20% more, but only 60% now; the rest is an **earn-out** paid a year later only if revenue stays at 90% of
+  the number at signing (`acq.earnout`; Victor's message says whether it paid).
+- **Decline**: nothing changes; Victor says the door stays open.
+
+Whichever is chosen, Chapter 12 ends with an **ending card** (`ENDING — A NEW OWNER` / `ON YOUR TERMS` / `STILL YOURS`,
+`UIRoot.show_chapter_card`), `story_complete` is set, and free play continues with `goal_growth`.
+
+## 10. Beyond (Planned)
+
+| Year | Content | Systems it needs |
+|------|---------|------------------|
+| 9 Global Consolidation | more M&A offers (as buyer or target), an IPO option, the second acquisition wave | valuation reuse, listing rules |
+| 10 Legacy | sandbox + Legacy generation | save-carry-over, family/succession |
+
+Art for Chapters 7–12 is in `docs/wiki/90_codex_art_backlog.md`: the chapter cards `backdrops/chapter_10`–`chapter_12`
+and the event pictures `events/rail_frozen` and `events/acquisition_offer` show up automatically once the files exist.

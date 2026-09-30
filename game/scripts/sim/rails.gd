@@ -104,7 +104,7 @@ static func set_reliability(method_id: String, v: float) -> void:
 
 
 static func reliability_text(method_id: String) -> String:
-	return I18n.t("%d%% landed on time") % int(round(reliability(method_id) * 100.0))
+	return I18n.t("%s landed on time") % Fmt.pct(reliability(method_id), 1)
 
 
 ## A payment landed on this rail without trouble.
