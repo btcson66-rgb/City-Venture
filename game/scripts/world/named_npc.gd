@@ -10,6 +10,7 @@ var name_tag: PanelContainer
 
 
 func setup(id: String, scene: Node) -> void:
+	add_to_group("expressive_npc")
 	npc_id = id
 	def = DataDB.npc(id)
 	rig = CharacterRig.new()

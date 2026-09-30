@@ -4,13 +4,16 @@
 
 | 檔案 | 尺寸 | 用在 | 美術 | 內容 |
 |------|------|------|------|------|
-| `menu` | 752×360 | 主選單，會慢慢左右平移（所以比畫面寬 112 px） | **CODEX v2** | 乾淨的街景，旗幟用符號代替文字 |
-| `arrival` | 640×360 | 開場「抵達 Aurelia」：列車進城 | **CODEX v2** | 河岸天際線、橋、倒影。列車（`vehicles/metro_train`）由程式在上面開過 |
-| `skyline_day` | 1300×320 | 每個街區建築後面的遠景，視差捲動 | CONV（Board G） | 白天天際線 |
-| `skyline_night` | 1300×320 | 同上，晚上交叉淡入 | CONV（Board D） | 夜景，窗戶亮燈 |
-| `wardrobe` | 200×250 | 捏臉畫面的角色背景 | CONV（Board H） | 更衣室 |
+| `menu` | 752×360 | 主選單，會慢慢左右平移（所以比畫面寬 112 px） | **CODEX 原創 2026-09-29** | 河岸新創街區、預設主角與 Maya |
+| `arrival` | 640×360 | 開場「抵達 Aurelia」：列車進城 | **CODEX 原創 2026-09-29** | 河岸天際線、橋、倒影；動態列車與近景橋由程式疊加 |
+| `skyline_day` | 1300×320 | 每個街區建築後面的遠景，視差捲動 | **CODEX 原創 2026-09-29** | 藍色現代建築與河岸 |
+| `skyline_dusk` | 1300×320 | 黃昏交叉淡入 | **CODEX 原創 2026-09-29** | 同構圖桃色天空與琥珀窗光，既有接點已使用 |
+| `skyline_night` | 1300×320 | 同上，晚上交叉淡入 | **CODEX 原創 2026-09-29** | 同構圖靛藍夜景、選擇性亮窗 |
+| `wardrobe` | 200×250 | 捏臉畫面的角色背景 | **CODEX 原創 2026-09-29** | 空置暖木更衣室，人物由遊戲疊加 |
 
-Codex 的原始素材在 `docs/art_sources/menu_v2_source.png`、`arrival_v2_source.png`，重建指令是 `python3 tools/art/finalize_backdrops.py`。
+目前原畫與 prompt 在 `docs/art_sources/renewal_20260929/`，重建指令為 `python tools/art/renewal_pack.py`。舊 `finalize_backdrops.py` 是 v2 的歷史重建工具，會恢復舊 menu / arrival，勿用來重建本批。
+
+**2026-09-29 狀態更新**：下列規劃清單中的 `chapter_1`、`chapter_2`、`chapter_3`、`chapter_4`、`chapter_5`、`chapter_6`、`insolvency` 和 `skyline_dusk` 已交付並接入；chapter_7–12 和其餘未列項目仍為規劃。六章順序為列車、首單包裹、市政登記、員工桌、檯燈訂單、深夜現金曲線。
 
 ### 規劃中的背景
 
@@ -47,6 +50,8 @@ Codex 的原始素材在 `docs/art_sources/menu_v2_source.png`、`arrival_v2_sou
 ---
 
 ## 地點卡（`game/assets/cards/`，192×108）
+
+**2026-09-29 更新**：下表全部 12 張已換成原創圖（CODEX 原創更新），原畫與來源對照見 `docs/art_sources/renewal_20260929/sources.json` 及 `evidence/2026-09-29_art_renewal/asset_manifest.json`。以下 A6 註記保留歷史背景。地點卡代表場景氛圍，並非可行走房間／街道已重建。
 
 第一次走進一個街區或建築時，左下角浮出一張卡：圖片、「NEW LOCATION」、名稱、營業時間。建築沒有卡時，改用它所在街區的卡。
 

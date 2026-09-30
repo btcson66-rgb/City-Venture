@@ -121,6 +121,9 @@ func _show() -> void:
 
 
 func _set_speaker(who: String, expr: String) -> void:
+	# In-world faces follow the same expression as the conversation portrait.
+	for npc in get_tree().get_nodes_in_group("expressive_npc"):
+		npc.rig.set_expression(expr if npc.npc_id == who else "neutral")
 	if who == "player":
 		var p: Dictionary = GameState.data["player"]
 		name_label.text = p["name"]
@@ -159,6 +162,8 @@ func advance() -> void:
 
 
 func _end() -> void:
+	for npc in get_tree().get_nodes_in_group("expressive_npc"):
+		npc.rig.set_expression("neutral")
 	active = false
 	visible = false
 	Clock.pop_pause("dialogue")

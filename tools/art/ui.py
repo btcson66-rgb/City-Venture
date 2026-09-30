@@ -48,23 +48,24 @@ def grad_panel(w, h, top, bottom, border, hi, alpha=246, accent=None):
     return im
 
 
-def gen_panels(out):
+def gen_panels(out, only=None):
     P = {}
-    P["panel"] = grad_panel(24, 24, (25, 43, 69), (11, 23, 41), (68, 105, 159), (114, 161, 220), 250, (128, 189, 245))
-    P["panel_glass"] = grad_panel(24, 24, (23, 40, 65), (11, 21, 39), (63, 99, 150), (104, 149, 207), 235)
+    P["panel"] = grad_panel(24, 24, (27, 44, 62), (13, 25, 39), (61, 88, 114), (104, 140, 166), 252, (165, 199, 218))
+    P["panel_glass"] = grad_panel(24, 24, (26, 43, 60), (13, 25, 39), (57, 83, 108), (99, 135, 162), 242)
     P["inset"] = nine(16, 16, PAL["navy_900"], PAL["navy_700"], None, None)
     P["header"] = nine(16, 16, PAL["navy_700"], PAL["navy_600"], lighten(PAL["navy_700"], 0.12), None)
-    P["button"] = grad_panel(16, 16, (48, 74, 119), (29, 49, 83), (77, 121, 188), (129, 171, 222), 255)
-    P["button_hover"] = grad_panel(16, 16, (72, 120, 196), (46, 88, 158), (132, 180, 240), (170, 206, 250), 255)
+    P["button"] = grad_panel(16, 16, (39, 62, 83), (26, 44, 63), (74, 106, 132), (121, 154, 177), 255)
+    P["button_hover"] = grad_panel(16, 16, (57, 96, 137), (37, 70, 106), (121, 168, 202), (168, 206, 231), 255)
     P["button_pressed"] = nine(16, 16, PAL["navy_700"], PAL["blue_400"], shade(PAL["navy_700"], 0.8), None)
     P["button_disabled"] = nine(16, 16, (40, 46, 60), (64, 70, 86), None, None)
-    P["button_primary"] = grad_panel(16, 16, (70, 160, 104), (40, 112, 70), (120, 210, 140), (160, 232, 176), 255)
-    P["button_primary_hover"] = grad_panel(16, 16, (90, 186, 124), (54, 136, 88), (170, 240, 184), (200, 250, 210), 255)
+    # Primary navigation uses city blue; green remains reserved for cash/success.
+    P["button_primary"] = grad_panel(16, 16, (61, 128, 195), (34, 85, 145), (135, 187, 225), (185, 220, 244), 255)
+    P["button_primary_hover"] = grad_panel(16, 16, (77, 151, 215), (47, 107, 171), (166, 214, 245), (213, 237, 252), 255)
     P["button_danger"] = nine(16, 16, (150, 64, 56), (224, 104, 83), (180, 84, 72), (100, 40, 36))
     P["tab"] = nine(16, 16, PAL["navy_800"], PAL["navy_600"], None, None)
     P["tab_active"] = grad_panel(16, 16, (64, 116, 196), (40, 82, 150), (132, 180, 240), (170, 206, 250), 255)
     P["tooltip"] = nine(16, 16, (240, 242, 246), PAL["navy_500"], None, None)
-    P["card"] = grad_panel(16, 16, (33, 53, 83), (20, 36, 61), (62, 94, 139), (98, 142, 194), 255)
+    P["card"] = grad_panel(16, 16, (32, 50, 67), (19, 34, 49), (61, 86, 110), (100, 136, 160), 255)
     P["card_gold"] = nine(16, 16, PAL["navy_700"], PAL["gold_500"], None, None)
     P["bar_bg"] = nine(8, 8, PAL["navy_900"], PAL["navy_600"], None, None)
     P["bar_fill"] = nine(8, 8, PAL["blue_400"], PAL["blue_300"], lighten(PAL["blue_400"], 0.3), None)
@@ -72,7 +73,10 @@ def gen_panels(out):
     P["field"] = nine(16, 16, (10, 20, 34), PAL["blue_500"], None, None)
     P["prompt_key"] = nine(12, 12, (240, 242, 246), (140, 150, 170), None, (190, 196, 210), cut=True)
     for k, im in P.items():
-        save(im, f"{out}/ui/{k}.png")
+        if only is None or k in only:
+            save(im, f"{out}/ui/{k}.png")
+    if only is not None:
+        return
     # phone frame
     w, h = 150, 250
     ph = new(w, h)

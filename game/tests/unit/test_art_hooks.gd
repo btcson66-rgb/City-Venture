@@ -26,20 +26,20 @@ func test_missing_optional_art_keeps_the_layered_look() -> void:
 	runner.check(not Art.has_tex("characters/npc_nobody"), "no sheet for an unknown NPC")
 	runner.check(Art.opt_tex("logos/nobody") == null, "opt_tex returns null without a warning")
 	var app: Dictionary = DataDB.npc("maya")["appearance"]
-	var L := Art.character_layers(app, "casual_jacket", {}, "maya")
-	runner.check(L.size() >= 10, "Maya is still built from layers (%d)" % L.size())
+	var L := Art.character_layers(app, "casual_jacket", {}, "art_test_missing")
+	runner.check(L.size() >= 10, "An NPC without optional art keeps its layers (%d)" % L.size())
 	runner.check(not _names(L).has("top_detail"), "no detail layer until the art exists")
 
 
 func test_npc_sheet_replaces_the_rig() -> void:
-	_art("characters/npc_maya")
-	_art("portraits/npc_maya", 256, 64)
+	_art("characters/npc_art_test")
+	_art("portraits/npc_art_test", 256, 64)
 	var app: Dictionary = DataDB.npc("maya")["appearance"]
-	var L := Art.character_layers(app, "casual_jacket", {"top": Color.RED}, "maya")
+	var L := Art.character_layers(app, "casual_jacket", {"top": Color.RED}, "art_test")
 	runner.eq(L.size(), 1, "one hand-made sheet")
-	runner.eq(str(L[0]["tex"]), "characters/npc_maya", "Maya's own sheet")
+	runner.eq(str(L[0]["tex"]), "characters/npc_art_test", "NPC's own sheet")
 	runner.eq(L[0]["tint"], Color.WHITE, "never tinted")
-	var P := Art.portrait_layers(app, "casual_jacket", {}, "maya")
+	var P := Art.portrait_layers(app, "casual_jacket", {}, "art_test")
 	runner.eq(P.size(), 1, "one hand-made portrait strip")
 	runner.eq(int(P[0]["frames"]), 4, "with the 4 expressions")
 	runner.check(Art.character_layers(app, "casual_jacket").size() > 1, "the player never picks up an NPC sheet")
