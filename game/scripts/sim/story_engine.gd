@@ -92,6 +92,10 @@ static func complete_objective(id: String) -> void:
 	EventBus.objective_changed.emit()
 
 
+## The objective being checked right now (read by the bots' watchdog when the game stops responding).
+static var last_phase := ""
+
+
 static func check() -> void:
 	# saves that finished the June sandbox before chapters 4–6 existed carry on into Chapter 4
 	if St().get("chapter", "") == "ch3_open_for_business" and "goal_month" in St()["done"] and not chapter_def("ch4_growing_pains").is_empty():
@@ -111,6 +115,7 @@ static func check() -> void:
 		guard += 1
 		changed = false
 		for id in St()["active"].duplicate():
+			last_phase = str(id)
 			var d := objective_def(id)
 			var conds: Array = d.get("complete_when", [])
 			if conds.is_empty():

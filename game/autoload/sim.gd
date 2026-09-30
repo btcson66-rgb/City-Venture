@@ -72,7 +72,12 @@ func _on_minute(t: int) -> void:
 		_dispatch(it["kind"], it["p"])
 
 
+## What the simulation is doing right now (read by the bots' watchdog when the game stops responding).
+var phase := ""
+
+
 func _dispatch(kind: String, p: Dictionary) -> void:
+	phase = kind
 	var mod := kind.get_slice(".", 0)
 	match mod:
 		"rail":
@@ -106,17 +111,29 @@ func _dispatch(kind: String, p: Dictionary) -> void:
 
 
 func _on_hour(t: int, h: int) -> void:
+	phase = "hour:compliance"
 	Compliance.on_hour(t, h)
+	phase = "hour:ecommerce"
 	Ecommerce.on_hour(t, h)
+	phase = "hour:contracts"
 	Contracts.on_hour(t, h)
+	phase = "hour:living"
 	Living.on_hour(t, h)
+	phase = "hour:events"
 	EventEngine.on_hour(t, h)
+	phase = "hour:careers"
 	Careers.on_hour(t, h)
+	phase = "hour:staff"
 	Staff.on_hour(t, h)
+	phase = "hour:saas"
 	Saas.on_hour(t, h)
+	phase = "hour:cafe"
 	Cafe.on_hour(t, h)
+	phase = "hour:logistics"
 	Logistics.on_hour(t, h)
+	phase = "hour:story"
 	_request_story_check()
+	phase = ""
 
 
 func _on_month_end(year: int, month: int) -> void:

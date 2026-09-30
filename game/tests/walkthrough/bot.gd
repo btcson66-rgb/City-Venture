@@ -23,7 +23,37 @@ var _audit_t := 0.0
 var _word_re := RegEx.create_from_string("[A-Za-z][A-Za-z'’]+")
 
 
+var _watchdog: Thread
+var _watch_run := true
+var _last_step := ""
+
+
+## A watchdog on its own thread: when the main loop stops advancing for 20 s it prints what the simulation and the
+## bot were doing, so a hang in a long run names its cause instead of timing out silently.
+func _watch() -> void:
+	var last := -1
+	var still := 0
+	while _watch_run:
+		OS.delay_msec(5000)
+		var f := Engine.get_process_frames()
+		if f == last:
+			still += 5
+			if still >= 20 and still % 20 == 0:
+				print("[watchdog] main loop stalled %d s · sim phase '%s' · story check '%s' · last bot line '%s'" % [still, Sim.phase, StoryEngine.last_phase, _last_step])
+		else:
+			still = 0
+		last = f
+
+
+func _exit_tree() -> void:
+	_watch_run = false
+	if _watchdog != null and _watchdog.is_started():
+		_watchdog.wait_to_finish()
+
+
 func _ready() -> void:
+	_watchdog = Thread.new()
+	_watchdog.start(_watch)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	for a in OS.get_cmdline_user_args():
 		if a.begins_with("--out="):
@@ -160,6 +190,7 @@ func log_line(s: String) -> void:
 	if GameState.has_game():
 		stamp = "[%s] " % Clock.fmt_datetime()
 	var line := "%6.1fs %s%s" % [(Time.get_ticks_msec() - t0) / 1000.0, stamp, s]
+	_last_step = s
 	print(line)
 	log_lines.append(line)
 

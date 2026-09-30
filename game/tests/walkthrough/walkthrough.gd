@@ -874,7 +874,7 @@ func _chapters_7_to_9() -> void:
 		await bot.wait(0.4)
 	await close_modal()
 	await close_modal()
-	await pass_time_at_home(func(): return "ch9_clearing_crisis" in StoryEngine.St()["chapters_done"], 30)
+	await pass_time_at_home(func(): return "ch9_clearing_crisis" in StoryEngine.St()["chapters_done"], 30, true)   # the import takes weeks
 	bot.expect("ch9_clearing_crisis" in StoryEngine.St()["chapters_done"], "Chapter 9 complete: the import got through")
 	bot.expect(Ledger.check_balanced(), "ledger balanced after chapters 7–9")
 
