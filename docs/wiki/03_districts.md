@@ -150,14 +150,31 @@
 暫代的機制是資料裡的 `fallback` 欄位（見 [GAME_DATA_SCHEMA](../GAME_DATA_SCHEMA.md) 的 1.8、1.9）。室內家具的暫代見 [05](05_interiors.md#old-town已實作--2026-09-30)。
 
 **玩法**：Old Town 是「咖啡店」這個產業的所在地。到 Okafor Lettings 向 Mr. Okafor 租轉角店面，再裝潢、辦食品處理執照、進貨、開店，流程見 [13](13_core_loop_and_work.md#咖啡店產業old-town)。**還沒有**：搬進 Studio 1A（規劃中）、藝廊、印刷行、轉角工坊（規劃中，見下）。
+### Harbor 港區 · `harbor`
+
+| 項目 | 內容 |
+|------|------|
+| 狀態 | **已實作**（2026-09-30）· 物流業（`logistics`）的起點。立面、地磚和街道物件的正式美術還沒交，全部用暫代圖（見下）；設定稿和美術清單在下面「規劃中的區域」的 Harbor 條目和 `90_codex_art_backlog.md` B2 |
+| 尺寸 | 88×46 格 |
+| 主色 | `#4A8CE8` 藍 |
+| 小地圖色 | `#4A7A92` |
+| 地面 | 上廣場（被天際線蓋掉）→ 人行道 → 馬路（2 條斑馬線）→ 人行道 → **碼頭水泥地 `quay_concrete`**（暫代 `plaza`）→ **岸緣 `quay_edge`**（暫代 `boards`）→ **港區海水 `water_harbor`**（暫代 `water`）。三種新地磚交件後，資料不用改，加進 `atlas.png` 和 `atlas.json` 就會換上 |
+| 可進入建築 | `pier7_warehouse` Pier 7 倉庫（**在倉庫裡租**：櫃台開租約視窗；租下後是第二個庫存地點，有打包檯，見 `13_core_loop_and_work.md`）· `dockside_motors` Dockside Motors（Sam Okoro 賣第一台貨車，見 `09_vehicles.md`）· `harbor_point_fitness` Harbor Point Fitness（Rosa 的健身房：進得去、能看看櫃台和課表；她本人和會員還沒做）· `customs_house` Aurelia 海關大樓（**進不去**，門口的字說明「進口許可與清關還沒納入這個版本」；資料欄位 `closed_reason`） |
+| 填充建築 | `warehouse_shed`（暫代 `shop_row_awning`）· `cold_store`（暫代 `retail_arcade`）· `container_stack`（暫代 `riverside_walkup`） |
+| 立面暫代 | `pier7_warehouse` → `brick_shops` · `dockside_motors` → `byte_bean` · `harbor_point_fitness` → `popup_unit` · `customs_house` → `civic_annex`；招牌字由程式畫 |
+| 街道物件 | 已放（有合理的暫代）：`harbor_lamp`（暫代 `lamp`）、`mooring_bollard`（暫代 `bollard`）、`crate` 和 `pallet_stack`（暫代 `product_parcel` 紙箱）、路錐、長椅、垃圾桶、岸邊欄杆 `railing`、門口的停車收費柱。**還沒放**（沒有不突兀的暫代，交件後加進 `gen_districts.py` 的 `harbor_quay()` 再跑一次）：`container_red` / `_blue` / `_green`、`forklift`、`rope_coil`、`life_ring`、`crane_gantry`（背景） |
+| 路人 | 多穿 `logistics_site`、`courier`、`casual_jacket` |
+| 出口 | 無（只能搭捷運，M3 港區線 ⇄ 河濱區，8 分鐘；到其他區 15–24 分鐘，寫在 `city/aurelia.json` 的 `travel_min`） |
+| 捷運 | M3 |
+| 街區資料 | `data/districts/harbor.json`（用 `tools/gen_districts.py harbor` 排版） |
 
 ---
 
 ## 規劃中的區域
 
-以下是**設定稿**，程式和美術都還沒做。每區都照上面的版型：一排建築、兩線道、一條特色帶。每區需要的美術清單在最後的「每區交付清單」。
+以下是**設定稿**，程式和美術都還沒做（Harbor 已經開放，見上；它的設定稿保留在下面當美術清單）。每區都照上面的版型：一排建築、兩線道、一條特色帶。每區需要的美術清單在最後的「每區交付清單」。
 
-### Harbor 港區 · `harbor` · P1
+### Harbor 港區 · `harbor` · P1（設定稿，已開放）
 
 | 項目 | 設定 |
 |------|------|

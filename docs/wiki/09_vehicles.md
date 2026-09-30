@@ -54,9 +54,11 @@
 
 ### 物流車輛（P1–P3）
 
+**玩家的第一台貨車已實作（2026-09-30）**：港區 Dockside Motors 的 Sam Okoro 賣一台二手廂型貨車 **$9,800**（從公司帳戶付，記 `exp:vehicle`），保險每月 **$165**（`exp:insurance`），油耗每 100 公里 14 公升、每公里油資約 $0.29（`exp:fuel`），一趟載 40 件包裹。玩法見 `13_core_loop_and_work.md`。目前貨車**還不會出現在街上或停車場**，只出現在購買畫面（`VanDealModal` 用街上的 `van_side_body` + `van_side_detail` 暫代；`van_player_side_*` 交件後畫面自動換圖）。詳細美術規格在 `90_codex_art_backlog.md` B2。
+
 | 車種 id | 用途 | 尺寸建議 | 備註 |
 |---------|------|---------|------|
-| `van_owned` | 物流業起點：「一台二手貨車」 | side 72×36 | 側面有程式畫的公司名 |
+| `van_owned` | 物流業起點：「一台二手貨車」（已實作為 `van_player_side_body` / `_detail`，美術待交） | side 72×36 | 側面有程式畫的公司名 |
 | `box_truck` | 物流擴張 | side 96×44 | |
 | `container_truck` | 港區車流 | side 128×48 | 車斗上的貨櫃用 `container_*` 顏色 |
 | `forklift` | 港區、倉庫 | side 40×36 | 也當靜態物件 |

@@ -1,0 +1,115 @@
+{
+ "id": "dockside_motors",
+ "name": "Dockside Motors",
+ "district": "harbor",
+ "type": "van_dealer",
+ "hours": {
+  "open": "08:00",
+  "close": "18:00",
+  "days": "mon,tue,wed,thu,fri,sat"
+ },
+ "exterior": {
+  "sprite": "dockside_motors",
+  "fallback": "byte_bean",
+  "x": 579,
+  "sign": "DOCKSIDE MOTORS"
+ },
+ "interior": {
+  "size": [
+   16,
+   11
+  ],
+  "floor": "concrete",
+  "wall": "brick",
+  "ambient": "office",
+  "props": [
+   {
+    "sprite": "window_day",
+    "x": 20,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "key_board",
+    "fallback": "cork_board",
+    "x": 96,
+    "y": 6,
+    "wall": true
+   },
+   {
+    "sprite": "framed_art_b",
+    "x": 176,
+    "y": 12,
+    "wall": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 130,
+    "y": 0,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "sales_desk",
+    "fallback": "checkout_counter",
+    "x": 84,
+    "y": 54
+   },
+   {
+    "sprite": "filing_cabinet",
+    "x": 12,
+    "y": 52
+   },
+   {
+    "sprite": "water_cooler",
+    "x": 224,
+    "y": 52
+   },
+   {
+    "sprite": "chair",
+    "x": 60,
+    "y": 116,
+    "solid": false
+   },
+   {
+    "sprite": "chair",
+    "x": 96,
+    "y": 116,
+    "solid": false
+   },
+   {
+    "sprite": "plant",
+    "x": 232,
+    "y": 132
+   },
+   {
+    "sprite": "rug_small",
+    "x": 72,
+    "y": 132,
+    "floor": true
+   }
+  ],
+  "interactables": [
+   {
+    "id": "pricelist",
+    "at": [
+     190,
+     84
+    ],
+    "label": "Read the used-van price sheet",
+    "action": "look",
+    "params": {
+     "icon": "info",
+     "text": "USED VANS, AS SEEN: white panel van, 140,000 km, $9,800. Insurance about $165 a month, fuel about 14 L per 100 km. Two on the lot. Ask Sam."
+    }
+   }
+  ],
+  "npc_spots": {
+   "desk": [
+    128,
+    66
+   ]
+  }
+ }
+}

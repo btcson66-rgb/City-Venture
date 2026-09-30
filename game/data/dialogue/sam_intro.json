@@ -1,0 +1,66 @@
+{
+ "id": "sam_intro",
+ "with": "sam",
+ "nodes": {
+  "start": [
+   {
+    "who": "sam",
+    "expr": "happy",
+    "text": "Sam Okoro, Dockside Motors. Mind the oil, it gets on everything, including the paperwork."
+   },
+   {
+    "who": "sam",
+    "text": "You've got the look of someone whose parcels keep going the long way round. A van fixes that."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "What have you got?",
+      "next": "van"
+     },
+     {
+      "text": "Is it reliable?",
+      "next": "honest"
+     }
+    ]
+   }
+  ],
+  "van": [
+   {
+    "who": "sam",
+    "text": "One white panel van, 140,000 kilometres, ninety-eight hundred dollars. Room for forty parcels or a very patient dog."
+   },
+   {
+    "goto": "honest"
+   }
+  ],
+  "honest": [
+   {
+    "who": "sam",
+    "expr": "thinking",
+    "text": "Straight answer? The gearbox sighs on the hills and the left mirror is held on by hope. The engine is honest, and so am I."
+   },
+   {
+    "who": "sam",
+    "text": "Insure it, keep it moving, and it earns. Leave it on the kerb and it is just a very expensive shed."
+   },
+   {
+    "goto": "end"
+   }
+  ],
+  "end": [
+   {
+    "who": "sam",
+    "expr": "happy",
+    "text": "Have a look at the paperwork. Take your time. I'm not going anywhere, I live here."
+   }
+  ]
+ },
+ "on_end": [
+  {
+   "do": "set_flag",
+   "flag": "met_sam"
+  }
+ ]
+}

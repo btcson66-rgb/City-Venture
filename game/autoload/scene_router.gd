@@ -156,6 +156,8 @@ func world_scene() -> WorldScene:
 func building_open(bid: String) -> Dictionary:
 	var b := DataDB.building(bid)
 	var h: Dictionary = b.get("hours", {})
+	if b.has("closed_reason"):
+		return {"open": false, "reason": I18n.t(str(b["closed_reason"]))}   # not enterable in this build (Customs House): say why
 	if h.has("always_if_lease") and Living.has_lease(h["always_if_lease"]):
 		return {"open": true}
 	if b.get("type", "") == "home":

@@ -5,7 +5,8 @@ extends Modal
 
 const TABS := [["overview", "Overview", "company"], ["finance", "Finance", "finance"], ["sales", "Sales", "orders"],
 	["operations", "Operations", "parcel"], ["inventory", "Inventory", "inventory"], ["people", "People", "people"],
-	["contracts", "Contracts", "contracts"], ["freelance", "Freelance", "tasks"], ["saas", "SaaS", "laptop"], ["cafe", "Café", "coffee"]]
+	["contracts", "Contracts", "contracts"], ["freelance", "Freelance", "tasks"], ["saas", "SaaS", "laptop"], ["cafe", "Café", "coffee"],
+	["logistics", "Logistics", "map"]]
 const PLANNED := [["Property", "home"], ["International", "world"], ["Reports", "tasks"]]
 
 var terminal := "laptop"
@@ -68,7 +69,7 @@ func _tick_clock() -> void:
 
 func build() -> void:
 	var where: String = {"home_laptop": "Laptop · Riverside Tower 7C", "cowork": "Hot desk · Nexus Co-work", "office": "Desk · Suite 2B",
-		"cafe": "Laptop · café table", "cafe_till": "Till · your café"}.get(terminal, terminal)
+		"cafe": "Laptop · café table", "cafe_till": "Till · your café", "pier7": "Desk · Pier 7 yard office"}.get(terminal, terminal)
 	var top := UIK.hbox(6)
 	body.add_child(top)
 	top.add_child(UIK.title(GameState.business_display_name(), 11, Art.C_GOLD))
@@ -82,13 +83,20 @@ func build() -> void:
 	var nav := UIK.vbox(2)
 	nav.custom_minimum_size = Vector2(96, 0)
 	row.add_child(nav)
-	for t in TABS:
-		if t[0] == "cafe" and not Cafe.leased():
-			continue   # appears once you lease the café unit in Old Town
+	var shown: Array = TABS.filter(func(t): return not (t[0] == "cafe" and not Cafe.leased()) and not (t[0] == "logistics" and not Logistics.has_van()))
+	# the café tab appears once you lease the corner unit, the logistics tab once you own a van; with all eleven the
+	# buttons get a little tighter so the column still fits the window
+	var compact := shown.size() > 10
+	for t in shown:
 		var b := UIK.button(t[1], _set_tab.bind(t[0]), "tab_active" if tab == t[0] else "tab")
 		b.icon = Art.icon(t[2])
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		b.name = "Tab_" + t[0]
+		if compact:
+			var st := UIK.tex_box("ui/tab_active" if tab == t[0] else "ui/tab", 4, 2)
+			b.add_theme_stylebox_override("normal", st)
+			b.add_theme_stylebox_override("hover", st)
+			b.add_theme_constant_override("icon_max_width", 12)
 		if t[0] == "contracts" and _open_offers() > 0:
 			b.text = I18n.t(b.text) + " ●"
 		nav.add_child(b)
@@ -1220,3 +1228,115 @@ func _cafe_step(text: String, done: bool, note: String) -> HBoxContainer:
 	if note != "":
 		v.add_child(UIK.label(note, 7, Art.C_GOLD))
 	return r
+
+
+# ============================================================== LOGISTICS
+func _tab_logistics() -> void:
+	var s := Logistics.S()
+	var head := UIK.hbox(6)
+	content.add_child(head)
+	head.add_child(UIK.title("Logistics", 11, Art.C_GOLD))
+	head.add_child(UIK.label(I18n.t("Van kept at Pier 7 · insurance %s a month · %.0f km driven") % [Fmt.money0(float(Logistics.van_cfg().get("insurance_month", 165))),
+		float(s["van"].get("km", 0.0))], 7, Art.C_DIM))
+	var g := GridContainer.new()
+	g.columns = 4
+	g.add_theme_constant_override("h_separation", 4)
+	content.add_child(g)
+	var open := Logistics.open_jobs()
+	var mine := Logistics.active_jobs()
+	_kpi(g, I18n.t("RUNS ON THE BOARD"), str(open.size()), Art.C_WHITE, I18n.t("%d accepted") % mine.size())
+	_kpi(g, I18n.t("RUNS PAID, 7 DAYS"), Fmt.money0(Logistics.history_sum(7, "pay")), Art.C_GREEN, I18n.t("%d runs") % Logistics.history_count(7))
+	_kpi(g, I18n.t("FUEL, 7 DAYS"), Fmt.money0(Logistics.history_sum(7, "fuel")), Art.C_RED, I18n.t("%.1f L per 100 km") % (Logistics.fuel_l_per_km() * 100.0))
+	_kpi(g, I18n.t("DRIVERS"), str(Staff.count("driver")), Art.C_WHITE, I18n.t("%d parcels a trip") % int(Logistics.van_cfg().get("capacity_parcels", 40)))
+	_section_tip("Posted runs", "delivery_run")
+	if open.is_empty():
+		content.add_child(UIK.wrap("No runs on the board. Clients post new ones every morning at 7:00.", 7, Art.C_DIM, 470))
+	for j in open:
+		var jid := str(j["id"])
+		var row := UIK.hbox(6)
+		content.add_child(row)
+		var col := UIK.vbox(0)
+		col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		row.add_child(col)
+		var top := UIK.hbox(4)
+		col.add_child(top)
+		var cl := UIK.label(I18n.t(str(j["client"])), 8, Art.C_WHITE, true)
+		top.add_child(cl)
+		top.add_child(UIK.chip(Logistics.kind_name(str(j["kind"])).to_upper(), Art.C_GOLD if str(j["kind"]) == "rush" else Art.C_SKY))
+		var too_late := Clock.now() + int(j["est_min"]) > int(j["by"])   # leaving right now, the best route still arrives after the deadline
+		col.add_child(UIK.label(I18n.t("%d stops · deliver by %s · about %s on the road") % [(j["stops"] as Array).size(), Clock.fmt_short(int(j["by"])),
+			Fmt.duration_min(int(j["est_min"]))] + ("  ·  " + I18n.t("too late to make it if you leave now") if too_late else ""), 7, Art.C_RED if too_late else Art.C_MUTED))
+		row.add_child(UIK.label(Fmt.money0(float(j["pay"])), 9, Art.C_GREEN, true))
+		var ab := UIK.button("Accept", func():
+			var r := Logistics.accept(jid)
+			if not r["ok"]:
+				UIRoot.toast(I18n.t(str(r["error"])), "warn", "lock")
+			rebuild(), "primary")
+		ab.name = "Accept_" + jid
+		row.add_child(ab)
+	if not open.is_empty():
+		content.add_child(UIK.wrap(I18n.t("In plain words: you get the fee if you finish by the deadline; a late run pays %d%% less, and one left undone for hours is cancelled.") % int(round(float(Logistics.runs_cfg().get("late_penalty", 0.4)) * 100.0)), 7, Art.C_SKY, 470))
+	_section_tip("Your runs", "route_planning")
+	if mine.is_empty():
+		content.add_child(UIK.wrap("Accept a run above, then drive it: you plan the route on a map. Every kilometre saved is fuel and time kept.", 7, Art.C_DIM, 470))
+	for j in mine:
+		var jid2 := str(j["id"])
+		var row2 := UIK.hbox(6)
+		content.add_child(row2)
+		var col2 := UIK.vbox(0)
+		col2.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		row2.add_child(col2)
+		col2.add_child(UIK.label("%s · %s" % [jid2, I18n.t(str(j["client"]))], 8, Art.C_WHITE, true))
+		var late: bool = Clock.now() > int(j["by"])
+		col2.add_child(UIK.label((I18n.t("Past its deadline (%s): the pay is cut") if late else I18n.t("Deliver by %s")) % Clock.fmt_short(int(j["by"])), 7, Art.C_RED if late else Art.C_MUTED))
+		row2.add_child(UIK.label(Fmt.money0(float(j["pay"])), 9, Art.C_GREEN, true))
+		var db := UIK.button("Drive it", _drive_run.bind(jid2), "primary")
+		db.name = "Drive_" + jid2
+		row2.add_child(db)
+	_section_tip("Drivers", "driver_staff")
+	var dwhy := Staff.hire_block("driver")
+	if Staff.count("driver") > 0:
+		content.add_child(UIK.wrap(I18n.t("%d driver(s) take one posted run each workday from 9:00 and bank the fee. They plan the route less well than you do.") % Staff.count("driver"), 7, Art.C_MUTED, 470))
+	else:
+		content.add_child(UIK.wrap("No driver yet. Hire a Van Driver in the People tab to have the van work while you do something else.", 7, Art.C_DIM, 470))
+	if dwhy != "" and Staff.count("driver") == 0:
+		content.add_child(UIK.label(I18n.t("Can't hire yet: %s.") % I18n.t(dwhy), 7, Art.C_GOLD))
+	var hist := Logistics.history(5)
+	if not hist.is_empty():
+		_section("Recent runs")
+		var grid := GridContainer.new()
+		grid.columns = 5
+		grid.add_theme_constant_override("h_separation", 12)
+		content.add_child(grid)
+		for h in ["Run", "Result", "Paid", "Route", "Score"]:
+			grid.add_child(UIK.label(I18n.t(h), 7, Art.C_DIM, true))
+		for r in hist:
+			var ok := str(r["status"]) == "done"
+			var failed := str(r["status"]) == "failed"
+			grid.add_child(UIK.label("%s · %s" % [r["id"], I18n.t(str(r["client"]))], 7, Art.C_MUTED))
+			grid.add_child(UIK.label(I18n.t("Cancelled") if failed else (I18n.t("On time") if ok else I18n.t("Late")), 7, Art.C_RED if failed else (Art.C_GREEN if ok else Art.C_GOLD), true))
+			grid.add_child(UIK.label(Fmt.money0(float(r["pay"])), 7, Art.C_GREEN if not failed else Art.C_DIM))
+			grid.add_child(UIK.label("%.1f km" % float(r["km"]) if not failed else "—", 7, Art.C_WHITE))
+			grid.add_child(UIK.label("%d%%" % int(round(float(r["score"]) * 100.0)) if not failed else "—", 7, Art.C_WHITE))
+	_section_tip("Your own parcels", "own_van_shipping")
+	content.add_child(UIK.wrap("At any packing table the shipping options include \"Own van\": fuel instead of a courier fee, delivered the same day. The Pier 7 warehouse can hold your stock too.", 7, Art.C_MUTED, 470))
+
+
+## Drive an accepted run: plan the route in the minigame, then the clock runs and the client pays.
+func _drive_run(id: String) -> void:
+	var j := Logistics.job(id)
+	if j.is_empty():
+		return
+	var g := RouteGame.new(j)
+	g.title_text = I18n.t("Plan the route: run %s") % id
+	MiniGames.play(g, func(res: Dictionary):
+		if res.get("aborted", false):
+			return
+		var r := Logistics.drive(id, res.get("order", []))
+		if not r["ok"]:
+			UIRoot.toast(I18n.t(str(r["error"])), "warn", "lock")
+		else:
+			UIRoot.toast(I18n.t("Run %s done: paid %s, fuel %s, %s on the road.") % [id, Fmt.money(float(r["pay"])), Fmt.money(float(r["fuel"])), Fmt.duration_min(int(r["minutes"]))],
+				"warn" if r["late"] else "good", "parcel")
+		if is_inside_tree():
+			rebuild())

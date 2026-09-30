@@ -72,6 +72,29 @@
     17
    ],
    "desc": "Runs the counter at your café, Mon–Sat 7:00–17:00: about 14 cups an hour."
+  },
+  "driver": {
+   "name": "Van Driver",
+   "salary_week": [
+    400,
+    520
+   ],
+   "needs_office": false,
+   "needs_flag": "van_owned",
+   "needs_text": "needs a van (buy one from Sam at Dockside Motors)",
+   "workplace": "pier7_warehouse",
+   "work_days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "work_hours": [
+    9,
+    17
+   ],
+   "desc": "Takes your van out on one posted delivery run every workday from 9:00 and banks the pay. Drivers rarely plan the route as well as you can: expect a longer way round, and rush runs they can't reach in time."
   }
  },
  "traits": [

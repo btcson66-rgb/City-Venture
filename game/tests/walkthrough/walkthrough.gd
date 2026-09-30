@@ -29,6 +29,7 @@ func run() -> void:
 		await _chapters_4_to_6()
 		await _chapters_7_to_9()
 		await _old_town_cafe()
+		await _harbor_logistics()
 	await _save_load()
 	bot.step("Summary")
 	var be := GameState.business_entity()
@@ -914,6 +915,122 @@ func _old_town_cafe() -> void:
 	await bot.shot("cafe_tab")
 	await close_modal()
 	bot.expect(Ledger.check_balanced(), "ledger balanced after opening the café")
+	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")
+
+
+## Harbor: the metro to Pier 7, a used van from Sam at Dockside Motors, a lease on the warehouse bay, then the next
+## morning's delivery run driven for real in the route minigame, and the pay banked.
+func _harbor_logistics() -> void:
+	bot.step("Harbor — metro to the docks, a used van from Sam, and Pier 7")
+	var be := GameState.business_entity()
+	if Ledger.cash(be) < 16000.0:   # the van and the bay come to about $13,000 up front
+		var top := 16000.0 - Ledger.cash(be)
+		bot.log_line("  (harness) owner tops up the company account by %s" % Fmt.money0(top))
+		Ledger.post(be, "Owner capital (test harness)", [{"acct": "cash", "dr": top}, {"acct": "equity", "cr": top}], {"type": "capital"})
+	while not _is_weekday() or Clock.hour() < 9 or Clock.hour() >= 14:
+		await pass_time_at_home(func(): return _is_weekday() and Clock.hour() >= 9 and Clock.hour() < 14, 1)
+	await exit_building()
+	await metro_to("harbor")
+	await bot.shot("harbor")
+	await bot.walk_to(Vector2(640, 352), 6.0, 60.0)
+	await bot.wait(0.6)
+	await bot.shot("harbor_street")
+	await enter_building("dockside_motors")
+	await bot.use(func(n): return n.action == "talk" and str(n.params.get("npc", "")) == "sam", "Sam Okoro")
+	await dialogue()
+	await bot.until(func(): return UIRoot.top_modal() is VanDealModal, 4.0)
+	await bot.wait(0.5)
+	await bot.shot("van_dealer")
+	await bot.click_named("BuyVan", 3.0)
+	await bot.wait(0.5)
+	await bot.shot("van_bought")
+	await close_modal()
+	bot.expect(Logistics.has_van(), "bought the van from Sam")
+	bot.expect(Ledger.balance(be, "exp:vehicle") >= 9800.0, "the van is a vehicle expense")
+	await exit_building()
+	await enter_building("pier7_warehouse")
+	await bot.wait(0.5)
+	await bot.use_action("lease_property", "the lettings desk")
+	await bot.wait(0.5)
+	await bot.shot("pier7_lease")
+	await bot.click_named("SignLease_pier7_warehouse", 3.0)
+	await bot.wait(0.4)
+	await close_modal()
+	bot.expect(Living.has_lease("pier7_warehouse"), "leased the Pier 7 bay")
+	bot.expect("pier7_warehouse" in Ecommerce.stock_locations(), "Pier 7 is a stock location")
+	await bot.wait(0.4)
+	await bot.shot("pier7_warehouse")
+	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")
+	bot.step("Harbor — the morning's delivery runs")
+	await pass_time_at_home(func(): return not Logistics.open_jobs().is_empty() and Clock.hour() >= 8 and Clock.hour() < 15, 14)
+	bot.expect(not Logistics.open_jobs().is_empty(), "runs were posted in the morning")
+	await exit_building()
+	await metro_to("harbor")
+	await enter_building("pier7_warehouse")
+	await open_os_at(func(n): return n.action == "open_company_os", "the yard office desk")
+	await bot.click_named("Tab_logistics", 3.0)
+	await bot.wait(0.6)
+	await bot.shot("logistics_tab")
+	# a "!" badge, pinned by a click
+	var tip: Control = null
+	for n in bot.get_tree().root.find_children("*", "InfoTip", true, false):
+		if (n as Control).is_visible_in_tree():
+			tip = n
+			break
+	if tip != null:
+		await bot.click_control(tip)
+		await bot.wait(0.5)
+		await bot.shot("logistics_badge_pinned")
+		await bot.click_named("Tab_logistics", 3.0)   # a click elsewhere puts the card away
+		await bot.wait(0.3)
+	var open := Logistics.open_jobs()
+	var jid := str(open[open.size() - 1]["id"])   # the latest deadline: no rush
+	await bot.click_named("Accept_" + jid, 3.0)
+	await bot.wait(0.4)
+	bot.expect(str(Logistics.job(jid).get("status", "")) == "active", "accepted run %s" % jid)
+	await bot.shot("logistics_accepted")
+	var rev0 := -Ledger.balance(be, "revenue")
+	var fuel0 := Ledger.balance(be, "exp:fuel")
+	var auto_q := MiniGames.auto
+	MiniGames.auto = -1.0   # play this one by hand
+	await bot.click_named("Drive_" + jid, 3.0)
+	await bot.until(func(): return UIRoot.top_modal() is RouteGame, 4.0)
+	await bot.wait(0.5)
+	await bot.shot("route_game_intro")
+	await bot.click_named("StartGame", 3.0)
+	await bot.wait(0.4)
+	var g := UIRoot.top_modal() as RouteGame
+	if g == null:
+		bot.fail("the route game is not open")
+	else:
+		var best := Logistics.best_order(g.stops)
+		for k in (best["order"] as Array).size():
+			await bot.click_named("Stop_%d" % (int(best["order"][k]) + 1), 3.0)
+			if k == 1:
+				await bot.shot("route_game_planning")
+		await bot.wait(0.3)
+		await bot.shot("route_game_planned")
+		await bot.click_named("DriveRoute", 3.0)
+		await bot.wait(0.5)
+		await bot.shot("route_game_results")
+		await bot.click_named("FinishGame", 3.0)
+	MiniGames.auto = auto_q
+	await bot.wait(0.8)
+	await popups()
+	bot.expect(Logistics.job(jid).is_empty() and Logistics.history(1)[0]["id"] == jid, "the run is done and in the history")
+	var paid := -Ledger.balance(be, "revenue") - rev0
+	bot.expect(paid > 60.0, "the pay was banked as revenue (%s for run %s)" % [Fmt.money(paid), jid])
+	bot.expect(Ledger.balance(be, "exp:fuel") > fuel0, "fuel was charged")
+	bot.expect(float(Logistics.history(1)[0]["score"]) > 0.99, "the best route scored 100%")
+	if UIRoot.top_modal() is CompanyOS:
+		await bot.wait(0.4)
+		await bot.shot("logistics_tab_paid")
+		await close_modal()
+	bot.expect(Ledger.check_balanced(), "ledger balanced after the first delivery run")
 	await exit_building()
 	await metro_to("riverside")
 	await enter_building("riverside_apartment")

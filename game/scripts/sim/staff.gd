@@ -79,6 +79,8 @@ static func hire_block(role := "") -> String:
 		return "needs an office (lease Suite 2B)"
 	if role != "" and str(role_def(role).get("needs_lease", "")) != "" and not Living.has_lease(str(role_def(role)["needs_lease"])):
 		return str(role_def(role).get("needs_text", "needs a workplace"))
+	if role != "" and str(role_def(role).get("needs_flag", "")) != "" and not GameState.flag(str(role_def(role)["needs_flag"])):
+		return str(role_def(role).get("needs_text", "needs a workplace"))   # e.g. drivers need the van
 	return ""
 
 
@@ -117,7 +119,8 @@ static func _make_person(role: String) -> Dictionary:
 	S()["seq"] = int(S()["seq"]) + 1
 	return {"id": id, "name": "%s %s" % [GameState.pick(c.get("first_names", ["Alex"])), GameState.pick(c.get("last_names", ["Lee"]))],
 		"role": role, "skill": skill, "salary_week": salary, "trait": str(GameState.pick(traits)["id"]) if not traits.is_empty() else "",
-		"appearance": ap, "outfit": "office_professional" if role in ["support", "developer"] else "startup_casual", "morale": int(c.get("morale_start", 70))}
+		"appearance": ap, "outfit": "office_professional" if role in ["support", "developer"] else ("logistics_site" if role == "driver" else "startup_casual"),
+		"morale": int(c.get("morale_start", 70))}
 
 
 static func hire(applicant_id: String) -> Dictionary:
