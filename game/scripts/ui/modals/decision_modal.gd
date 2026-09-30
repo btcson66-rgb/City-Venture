@@ -19,7 +19,19 @@ func _init(i: Dictionary) -> void:
 	closable = false
 
 
+## The panel may not grow past the screen: everything above the buttons scrolls when a decision runs long.
+const MAX_CONTENT_H := 262.0
+
+
 func build() -> void:
+	var sc := ScrollContainer.new()
+	sc.name = "DecisionScroll"
+	sc.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	body.add_child(sc)
+	var col := UIK.vbox(4)
+	col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	sc.add_child(col)
+	_fit.call_deferred(sc, col)
 	var pres: Dictionary = def.get("presentation", {})
 	var who: String = pres.get("speaker", "")
 	# event illustration (events/<id>.png, 160x90) once the art exists
@@ -28,12 +40,12 @@ func build() -> void:
 		var pic := TextureRect.new()
 		pic.name = "EventArt"
 		pic.texture = art
-		pic.custom_minimum_size = Vector2(160, 90)
+		pic.custom_minimum_size = Vector2(160, 90) if def.get("choices", []).size() < 3 else Vector2(124, 70)
 		pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		body.add_child(pic)
+		col.add_child(pic)
 	var h := UIK.hbox(8)
-	body.add_child(h)
+	col.add_child(h)
 	if who != "" and DataDB.npc(who).has("appearance"):
 		var pv := PortraitView.new()
 		pv.custom_minimum_size = Vector2(56, 56)
@@ -55,9 +67,9 @@ func build() -> void:
 	if outcome == "":
 		for tid in pres.get("tips", []):
 			v.add_child(UIK.label_tip(I18n.t(str(InfoTip.entry(str(tid)).get("title", tid))), str(tid), 7, Art.C_SKY))
-	body.add_child(UIK.sep())
+	col.add_child(UIK.sep())
 	if outcome != "":
-		body.add_child(UIK.wrap(outcome, 9, Art.C_SKY, 380))
+		col.add_child(UIK.wrap(outcome, 9, Art.C_SKY, 380))
 		footer.add_child(UIK.button("OK", close, "primary", 70))
 		return
 	for c in def.get("choices", []):
@@ -81,13 +93,19 @@ func build() -> void:
 			pad.add_theme_constant_override("margin_left", 10)
 			pad.add_child(dl)
 			row.add_child(pad)
-		body.add_child(row)
+		col.add_child(row)
 
 
-func _process(_d: float) -> void:
-	# a long decision grows downwards; keep the panel on screen
-	if panel != null and panel.size.y > panel_size.y:
-		panel.position.y = maxf(4.0, (360.0 - panel.size.y) / 2.0)
+## Size the scroll to its content (at most MAX_CONTENT_H) and shrink the panel back after a rebuild, so the buttons
+## at the bottom are always on screen.
+func _fit(sc: ScrollContainer, col: Control) -> void:
+	await get_tree().process_frame
+	if not is_instance_valid(sc) or not is_instance_valid(col):
+		return
+	sc.custom_minimum_size = Vector2(384, minf(col.get_combined_minimum_size().y, MAX_CONTENT_H))
+	panel.size = Vector2(panel_size.x, 0)
+	panel.reset_size()
+	panel.position = Vector2((640.0 - panel.size.x) / 2.0, maxf(4.0, (360.0 - panel.size.y) / 2.0))
 
 
 func _pick(cid: String) -> void:
