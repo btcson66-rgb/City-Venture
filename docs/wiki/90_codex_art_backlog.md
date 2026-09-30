@@ -518,6 +518,7 @@ orphan    world_map 左下角 (50,236)–(145,254) 有一塊補丁，上面沒�
 | `minigames/photo_props.png` | 小盆栽、筆記本 | 拍商品照 | 陪襯道具，透明底 |
 | `minigames/packing_bench.png` | 250×130 | 打包 | 俯視的打包桌面 |
 | `minigames/boxes.png` | 3 格 | 打包 | 小、中、大紙箱（打開的樣子） |
+| `minigames/route_map.png` | 580×236 | 物流排路線 | 已接好：放進去就取代程式畫的簡易地圖（`RouteGame`）。俯視的簡化城市地圖，河、主要道路、各區色塊，**不要有字**；資料裡地點、河和橋的座標要對著圖調（見 B2） |
 
 程式端會在檔案存在時改用圖片；這一項目前是**規劃中**，沒有 Codex 的圖也能玩。
 
@@ -615,6 +616,8 @@ Claude 線接下來要開放兩個街區和兩個新產業：
 
 ### B2 港區（物流產業）
 
+**程式已接好（2026-09-30）**：港區、Pier 7 倉庫、Dockside Motors、健身房、海關大樓（進不去）、Sam 和物流業都能玩，下表的檔案名稱資料裡都已經寫好，圖用現有素材暫代（暫代對照見 [03](03_districts.md)、[04](04_buildings.md)、[05](05_interiors.md)）。**交件後**：立面和地磚更新 `buildings_meta.json` / `atlas.json` 就會自動換上；新街道物件（貨櫃、堆高機、繩圈、救生圈、吊車）要在 `tools/gen_districts.py` 的 `harbor_quay()` 加進去再跑一次 `python3 tools/gen_districts.py harbor`；`loading_dock_door`、`forklift_parked` 已寫在 Pier 7 室內資料裡（沒有合理暫代，沒圖時不畫）；排路線小遊戲的底圖 `minigames/route_map.png` 放進去就會取代程式畫的簡易地圖，**但資料裡地點、河和橋的座標（`data/economy/logistics.json` 的 `places`、`map`）要對著圖調整**，河要沿著圖上的河、橋要在圖上的橋。
+
 | 類型 | 檔案 | 說明 |
 |------|------|------|
 | 可進入立面 + `_lights` | `buildings/pier7_warehouse` | Pier 7 倉庫：大鐵捲門、裝卸平台、門口停棧板。可以租來放庫存 |
@@ -653,7 +656,7 @@ Claude 線接下來要開放兩個街區和兩個新產業：
 | 3 | 更多表情 | 表情長條從 4 格改成 10 格，對話資料加表情標記 | 表情 P1 | 規劃中 |
 | 4 | 角色姿勢 | `CharacterRig.set_pose()`：sit、idle、phone、interact、carry；NPC、員工、客人、玩家手機都已套用 | B8 / R3 | ✅ 已接好 |
 | 5 | 新服裝和配件 | `options.json` → `outfits_shop`、`Wardrobe`、Threadline 購買和試衣間；美術到前用 `stand_in` 暫代；配件有 `acc_<id>` 就畫 | B1 | ✅ 服裝已接好；配件的選項和販售規劃中 |
-| 6 | 新區域 | 區域和建築資料、`gen_districts.py` 排版、捷運站開放 | B1–B6 | ✅ 購物街；其他區規劃中 |
+| 6 | 新區域 | 區域和建築資料、`gen_districts.py` 排版、捷運站開放 | B1–B6 | ✅ 購物街、老城區、港區（暫代圖）；其他區規劃中 |
 | 7 | 黃昏天際線 | 街區天空改成日、黃昏、夜三段交叉，也支援各區專屬天際線 | B7 | ✅ 已接好 |
 | 8 | 章節標題卡 | `backdrops/chapter_<n>` 當標題卡背景 | B7 | ✅ 已接好 |
 | 9 | 公司結束畫面 | 按「重新開始」後顯示 `backdrops/insolvency` 加「重新出發」標題 | B7 | ✅ 已接好 |
