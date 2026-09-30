@@ -69,6 +69,7 @@ func _ready() -> void:
 		out_dir = ProjectSettings.globalize_path("user://bot")
 	DirAccess.make_dir_recursive_absolute(out_dir + "/screenshots")
 	t0 = Time.get_ticks_msec()
+	UIRoot.toasted.connect(func(text: String, kind: String): if kind == "bad": log_line("  toast: " + text))
 	if I18n.locale().begins_with("zh"):
 		_audit_setup()
 	call_deferred("_run")

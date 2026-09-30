@@ -559,6 +559,10 @@ func _tab_operations() -> void:
 
 
 func _buy(sid: String, pid: String, key: String, terms: bool) -> void:
+	var full := Ecommerce.space_block(deliver_to, int(buy_qty[key]))
+	if full != "":
+		UIRoot.toast(full, "bad", "warning")   # before asking how to pay for something that won't fit
+		return
 	if Ecommerce.needs_settlement(sid) and not terms:
 		# Clearing Crisis: choose how the money crosses the border first
 		var sm := SettlementModal.for_purchase(sid, pid, int(buy_qty[key]), deliver_to)

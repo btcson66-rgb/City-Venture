@@ -480,3 +480,19 @@ func test_help_cards_and_badges_exist() -> void:
 		runner.check(Help.has(k), "help card " + k)
 	for k in ["stock_location", "own_van_shipping", "fuel_cost", "vehicle_insurance", "delivery_run", "route_planning", "driver_staff", "van_capacity"]:
 		runner.check(DataDB.glossary.has(k), "badge card " + k)
+
+
+func test_a_full_stockroom_names_the_warehouse_with_room() -> void:
+	_company()
+	runner.check(Living.lease("pier7_warehouse")["ok"], "leased")
+	var home := "riverside_studio"
+	var cap := Ecommerce.location_capacity(home)
+	runner.eq(Ecommerce.space_block(home, 200), "", "room at home to begin with")
+	runner.check(Ecommerce.buy("tradelink_wholesale", "phone_stand", cap - 100, home).get("ok", false), "home nearly filled")
+	var why := Ecommerce.space_block(home, 200)
+	runner.check(why != "", "stock on the way counts: 200 more won't fit")
+	runner.check(why.contains(Ecommerce.location_name("pier7_warehouse")), "the message names the warehouse with room: " + why)
+	var r := Ecommerce.buy("tradelink_wholesale", "phone_stand", 200, home)
+	runner.check(not r.get("ok", true) and str(r.get("error", "")) == why, "the order says the same")
+	runner.check(Ecommerce.buy("tradelink_wholesale", "phone_stand", 200, "pier7_warehouse").get("ok", false), "and goes to Pier 7")
+	runner.check(Ledger.check_balanced(), "ledger balanced")

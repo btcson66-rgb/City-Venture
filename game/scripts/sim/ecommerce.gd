@@ -72,9 +72,9 @@ static func buy(supplier_id: String, product_id: String, qty: int, location := "
 		return {"ok": false, "error": I18n.t("Minimum order is %d units.") % int(o["moq"])}
 	if location == "":
 		location = default_stock_location()
-	var cap := location_capacity(location)
-	if total_units_at(location) + incoming_units(location) + qty > cap:
-		return {"ok": false, "error": I18n.t("Not enough space there (%d units max).") % cap}
+	var full := space_block(location, qty)
+	if full != "":
+		return {"ok": false, "error": full}
 	var entity := GameState.business_entity()
 	var uc := snappedf(unit_cost(supplier_id, product_id) * cost_mult, 0.01)
 	var total := snappedf(uc * qty, 0.01)
@@ -313,6 +313,25 @@ static func location_name(loc: String) -> String:
 
 static func location_capacity(loc: String) -> int:
 	return int(DataDB.properties.get(loc, {}).get("capacity", {}).get("inventory_units", 0))
+
+
+## Why `qty` more units won't fit at `location` ("" when they fit), naming the stock location with the most room.
+static func space_block(location: String, qty: int) -> String:
+	var used := total_units_at(location) + incoming_units(location)
+	var cap := location_capacity(location)
+	if used + qty <= cap:
+		return ""
+	var msg := I18n.t("%s is full: %d of %d units, counting stock on the way.") % [location_name(location), used, cap]
+	var best := ""
+	var best_room := qty - 1
+	for l in stock_locations():
+		var room := location_capacity(l) - total_units_at(l) - incoming_units(l)
+		if l != location and room > best_room:
+			best = l
+			best_room = room
+	if best != "":
+		return msg + " " + I18n.t("%s has room: choose it under \"Deliver to\" in Operations.") % location_name(best)
+	return msg + " " + I18n.t("Sell some stock first, or lease more space.")
 
 
 static func stock_locations() -> Array:

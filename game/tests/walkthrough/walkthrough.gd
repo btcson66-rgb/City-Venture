@@ -1124,6 +1124,14 @@ func _scroll_to_end() -> void:
 
 func _buy_import(product: String, method: String, shot_name := "") -> void:
 	await _home_laptop("operations")
+	var qty := int(Ecommerce.offer("lumina_direct", product)["moq"])
+	if Ecommerce.space_block(Ecommerce.default_stock_location(), qty) != "":
+		# the stockroom is full: send it where there's room, as a player would
+		for l in Ecommerce.stock_locations():
+			if Ecommerce.space_block(l, qty) == "":
+				await bot.click_named("DeliverTo_" + l, 3.0)
+				await bot.wait(0.4)
+				break
 	await bot.click_named("Buy_lumina_direct_" + product, 3.0)
 	await bot.wait(0.6)
 	if shot_name != "":

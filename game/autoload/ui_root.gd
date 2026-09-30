@@ -257,9 +257,14 @@ func _on_message(from_id: String, text: String) -> void:
 
 
 # ------------------------------------------------------------------ toasts & cards
+## Every toast shown (the bots log the red ones, so a refused action names its reason).
+signal toasted(text: String, kind: String)
+
+
 func toast(text: String, kind := "info", icon := "info") -> void:
 	if not is_inside_tree():
 		return
+	toasted.emit(text, kind)
 	var col := Art.C_WHITE
 	match kind:
 		"good":
