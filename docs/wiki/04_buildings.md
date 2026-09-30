@@ -85,18 +85,26 @@
 | `container_stack` | 貨櫃堆 | ✗ | 180×120 | （無） | 三層貨櫃，紅藍綠黃 |
 | `crane_gantry` | 岸邊吊車 | ✗ | 160×360 | （無） | 高大的紅白吊車剪影，放在最後面 |
 
-### Old Town（P1）
+### Old Town（已實作 · 2026-09-30 · 美術暫代）
+
+三棟可進入建築和三種填充立面都已經在遊戲裡，**但七張正式立面（含 `_lights`）都還沒交**。遊戲現在畫的是資料裡 `exterior.fallback` 指定的現有立面（見 [03](03_districts.md#old-town-老城區--old_town) 的暫代對照表）。正式圖放進 `game/assets/buildings/` 並在 `buildings_meta.json` 登記尺寸、門和招牌區之後，跑一次 `python3 tools/gen_districts.py old_town` 重排街區，遊戲就會自動換上，不用改資料。
+
+| 立面 id | 建築 id | 名稱 | 可進入 | 建議尺寸 | 招牌文字 | 營業 | 暫代 | 視覺設定 |
+|---------|---------|------|--------|----------|----------|------|------|----------|
+| `okafor_lettings` | `okafor_lettings` | Okafor Lettings | ✓ | 130×150 | OKAFOR LETTINGS | 週一到六 09:00–18:00 | `brick_shops` | 老式租屋行：櫥窗貼滿房屋照片（色塊，無字），綠色木門。租轉角咖啡店面的地方 |
+| `corner_cafe_unit` | `corner_cafe_unit` | Corner Café Unit（玩家的咖啡店） | ✓ | 約 164×164 | 租之前「CORNER UNIT · TO LET」；**租下後改顯示玩家取的店名**（程式畫，預設「<公司名> Café」，可在 Company OS 咖啡店分頁改名） | 租之前 08:00–18:00；租下後 24 小時可進（`always_if_lease`） | `shop_row_awning` | 一樓小店面，大窗、遮陽棚、門口兩張小圓桌。招牌板留空。這棟是 Old Town 最重要的畫面 |
+| `old_town_studio` | `old_town_studio` | Studio 1A, Lantern Row | ✓（只能參觀） | 146×189 | LANTERN ROW FLATS | 每天 09:00–19:00 | `riverside_walkup` | 三層老公寓，外露鐵梯，窗戶小，一樓門口有信箱。最便宜、最溫馨的住處。**搬進去是規劃中** |
+| `rowhouse_brick` | （填充） | 紅磚連棟屋 ×2 | ✗ | 164×180 | （無） | — | `apartment_mid`（西端）、`riverside_walkup`（東端） | 紅磚，白框窗，爬藤 |
+| `arcade_arches` | （填充） | 拱廊 | ✗ | 200×160 | （無） | — | `retail_arcade` | 拱形騎樓下一排小店 |
+| `clock_tower` | （填充） | 鐘樓 | ✗ | 90×320 | （無） | — | `civic_annex` | 老城地標，全區最高。鐘面沒有數字 |
+
+尚未開放（**規劃中 P1–P3**，遊戲裡沒有）：
 
 | 立面 id | 名稱 | 可進入 | 建議尺寸 | 招牌文字 | 視覺設定 |
 |---------|------|--------|----------|----------|----------|
-| `old_town_studio` | Old Town Studios | ✓ | 146×189 | （無） | 三層老公寓，外露鐵梯，窗戶小，便宜但溫馨 |
-| `okafor_lettings` | Okafor Lettings | ✓ | 130×150 | OKAFOR LETTINGS | 老式租屋行：櫥窗貼滿房屋照片（色塊），綠色木門 |
 | `gallery_nine` | Gallery Nine | ✓ | 164×180 | GALLERY NINE | 白牆大窗的藝廊，裡面掛著幾幅色塊畫 |
 | `ember_print` | Ember Print | ✓ | 130×140 | EMBER PRINT | 印刷行：門口堆著紙捲，櫥窗有海報樣張（無字） |
 | `corner_workshop` | Corner Workshop | ✓ | 146×150 | （玩家店名） | 轉角工坊：捲門、工作台、工具牆 |
-| `rowhouse_brick` | 紅磚連棟屋 | ✗ | 164×180 | （無） | |
-| `arcade_arches` | 拱廊 | ✗ | 200×160 | （無） | |
-| `clock_tower` | 鐘樓 | ✗ | 90×320 | （無） | 老城地標，鐘面沒有數字 |
 
 ### Residential（P1）
 

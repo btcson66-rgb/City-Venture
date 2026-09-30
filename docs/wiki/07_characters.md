@@ -151,7 +151,7 @@ A5 已重製四種現有表情並補上眼鏡；12 位具名 NPC 的頭像和四
 
 ---
 
-## 具名 NPC（已實作 12 位）
+## 具名 NPC（已實作 14 位）
 
 外觀全部用上面的選項組出來。資料在 `game/data/npcs/<id>.json`。「定稿需求」是做專屬頭像和走路圖時的特徵重點。
 
@@ -169,6 +169,7 @@ A5 已重製四種現有表情並補上眼鏡；12 位具名 NPC 的頭像和四
 | `dara` | Dara | PostPoint 店員 | 中性 · 心形臉 · 玫瑰色亂髮 · s4 · 大眼 · 柔眉 · 小嘴 | `courier` | PostPoint 櫃台，每天 8–21 | 手腳很快。耳後夾一支筆，手上掃描槍 |
 | `daniel` | Daniel Wong | Crestline 採購 | 陽剛 · 橢圓臉 · 黑色旁分 · s3 · 杏眼 · 平眉 · 平嘴 · 方框眼鏡 | `business_suit` | Co-work 休息區，週四 17–20；接洽大訂單後，週六日 11–16 也在 Crestline 旗艦店 | 第 5 章大訂單的人。精明、有禮、拿著皮革資料夾。大訂單也可能拖垮現金流 |
 | `nina` | Nina | Threadline 造型師 | 中性 · 橢圓臉 · 金色包頭 · s2 · 大眼藍瞳 · 挑眉 · 微笑 | `luxury_citywear`（炭灰大衣 `#3A3A42`；服裝美術到位前以 `casual_jacket` 暫代） | Threadline 櫃台，每天 10–21 | 衣櫃系統的導覽員。脖子掛皮尺，手上別針墊。第一次逛衣架時打招呼（`nina_first`） |
+| `okafor` | Mr. Okafor | Okafor Lettings 房東（Old Town） | 陽剛 · 圓臉 · 灰白平頭（`buzz`、`silver`）· s6 · 圓眼深瞳 · 濃眉 · 微笑 · 圓框眼鏡 | `office_professional`（棕色上衣 `#6b4a3a`、深灰褲 `#3a3a42`；定稿目標是開襟毛衣） | Okafor Lettings 桌後（坐姿），週一到六 9–18。第一次見面走 `okafor_intro`，租下咖啡店面後改 `okafor_tenant`，其他時候 `okafor_chat`。**只有分層走路圖和頭像，沒有專屬圖**（`characters/npc_okafor`、`portraits/npc_okafor` 在 Codex B3 工單裡） | 老城的老派房東：公正、嘮叨、記得每個房客的生日。老花眼鏡、滿頭銀白。租轉角咖啡店面（每月 $1,900、押金兩個月，只租給已登記的公司）的窗口 |
 | `elena` | Elena Park | Northlight Capital 創投 | 陰柔 · 心形臉 · 黑色旁分 · s2 · 細長眼 · 平眉 · 小嘴 | `office_professional`（冷白外套 `#DFE6F0`、深色褲 `#2F3340`） | Co-work 休息區，週三 15–18 | 冷靜、快、條件不一定划算，玩家可以拒絕。白色西裝外套、極簡耳環 |
 
 > 已解決（2026-09-28）：Maya 和 Elena 原本外型幾乎一樣，現在 Elena 改成心形臉、黑色旁分、細長眼、平眉，穿冷白外套；Maya 維持鮑伯頭，換成暖芥末色外套。
@@ -181,7 +182,7 @@ A5 已重製四種現有表情並補上眼鏡；12 位具名 NPC 的頭像和四
 |----|------|-----------|------|
 | `bank` | Nexus Bank | `bank` 圖示 | 改用 Nexus 標誌（32×32）`需接線` |
 | `shoplane` | ShopLane | `orders` 圖示 | 改用 ShopLane 標誌 `需接線` |
-| `landlord` | Mr. Okafor（房東） | `home` 圖示 | P1 在 Old Town 現身，給他完整外型（見下方） |
+| `landlord` | Mr. Okafor（房東） | `home` 圖示 | 逾期房租等訊息還是用這個手機聯絡人（`phone_only`）。本人已在 Old Town 現身，是另一個 NPC `okafor`（見上方具名 NPC 表） |
 | `customer` | 客人 | `people` 圖示 | 維持。每張訂單的客人由程式隨機組外型 |
 | `client` | 顧問案客戶 | `info` 圖示 | 改用公司標誌 |
 | `jobs_board` | Aurelia Jobs | `info` 圖示 | 改用 Aurelia Jobs 標誌 |
@@ -200,6 +201,7 @@ A5 已重製四種現有表情並補上眼鏡；12 位具名 NPC 的頭像和四
 | `support` | Customer Support 客服 | `office_professional` | 加 `headset` 耳麥 | 坐在辦公桌講電話 |
 | `marketer` | Marketer 行銷 | `startup_casual` | 加 `bag_tote` 托特包 | 坐在辦公桌 |
 | `developer` | Developer 工程師 | `office_professional` | 改穿帽 T（`student` 服裝的成人版）或加 `headset` | 坐在雙螢幕桌 |
+| `barista` | Barista 咖啡師（**已實作 · 2026-09-30**） | `barista`（襯衫加圍裙） | 已有正式服裝 | 站在轉角咖啡店的吧台後（週一到六 07–17），一小時約做 14 杯。這個職位的工作地點是咖啡店，不是 Suite 2B，而且要先租下轉角咖啡店面才能僱用 |
 
 ## 路人（`scripts/world/ambient_person.gd`）
 
@@ -221,7 +223,6 @@ A5 已重製四種現有表情並補上眼鏡；12 位具名 NPC 的頭像和四
 | `omar` | Omar Haddad | 國際貿易商 | P2 | 陽剛 · 方臉 · 黑色旁分（夾灰）· s4 · 杏眼深瞳 · 濃眉 · 微笑 | `business_suit`（淺色亞麻） | 開啟海外供應鏈。短鬍子、亞麻西裝、舊皮箱，辦公室裡有茶具和世界地圖 |
 | `victor` | Victor Hale | 大型企業家 | P2–P3 | 陽剛 · 方臉 · 銀色短髮 · s1 · 細長眼灰瞳 · 平眉 · 平嘴 | `executive` | 可能是客戶、對手、收購者或夥伴，**不能固定成反派**。高、瘦、訂製西裝、沒有多餘表情 |
 | `rosa` | Rosa Lim | Harbor Point Fitness 老闆 | P1 | 陰柔 · 圓臉 · 黑色馬尾 · s3 · 圓眼深瞳 · 平眉 · 露齒笑 | `athleisure` | 精力旺盛、殺價很兇、很講信用。運動外套、毛巾掛脖子 |
-| `okafor` | Mr. Okafor | 房東 | P1 | 陽剛 · 圓臉 · 灰白平頭 · s6 · 圓眼深瞳 · 濃眉 · 微笑 | 開襟毛衣（`civic_staff` 暫代） | 老城的老派房東：公正、嘮叨、記得每個房客的生日。老花眼鏡 |
 | `ines` | Ines Duarte | 海關官員 | P2 | 陰柔 · 方臉 · 棕色包頭 · s4 · 細長眼 · 濃眉 · 平嘴 | `uniform_officer` | 公事公辦，但會提醒你漏了哪張文件 |
 | `sam` | Sam Okoro | Dockside Motors 二手貨車行老闆（港區） | P1（港區開放時） | 陽剛 · 方臉 · 黑色短捲髮 · s5 · 圓眼深瞳 · 濃眉 · 露齒笑 | 工作服（`courier` 暫代，深藍） | 爽朗、講實話，會直接告訴你哪台車的變速箱快不行了。手上有機油、耳朵夾一支筆 |
 | `hana` | Prof. Hana Sato | 大學研究室主持人 | P1 | 陰柔 · 橢圓臉 · 銀色鮑伯 · s2 · 圓眼深瞳 · 柔眉 · 微笑 · 圓框眼鏡 | `lab_coat` | 研發合作、介紹實習生。實驗袍口袋插著三支筆 |

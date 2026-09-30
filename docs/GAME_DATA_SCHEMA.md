@@ -98,6 +98,9 @@ The player's company is created at runtime as entity `co_<slug>` with the same s
 `if` (optional) is a condition string (`scripts/sim/cond.gd`). The NPC only keeps that slot while it holds, e.g. Daniel
 minds the Crestline floor on weekends only once `flag:big_contract_offered` is set.
 `outfit_tints` multiply the tintable fabric layers.
+A `dialogue` entry may carry `action`, a follow-up that opens once the conversation ends (`scripts/world/actions.gd`
+`_talk`): `coffee`, `register_company`, `bank_counter`, `lease_office`, `lease_cafe` (Mr. Okafor: opens the corner café
+lease), `loan_office`, `dropoff_parcels`, `clothing_shop`. Entries are tried in order and the first whose `when` holds wins.
 Contacts without an `appearance` (`"phone_only": true`) may set `"logo": "<id>"`. Their avatar then uses
 `assets/logos/<id>.png` when that file exists, and a UI icon otherwise.
 
@@ -119,11 +122,30 @@ Contacts without an `appearance` (`"phone_only": true`) may set `"logo": "<id>"`
   }
 }
 ```
-`action` values form a closed vocabulary implemented by `scripts/world/actions.gd`: `open_company_os`, `sleep`, `change_outfit`, `clothing_shop`, `buy_item`, `look`, `read_news`, `business_board`, `pack_orders`, `dropoff_parcels`, `register_company`, `bank_counter`, `atm`, `lease_office`, `rent_desk`, `talk`, `metro`, `exit`.
+`action` values form a closed vocabulary implemented by `scripts/world/actions.gd`: `open_company_os`, `sleep`, `change_outfit`, `clothing_shop`, `buy_item`, `look`, `read_news`, `business_board`, `pack_orders`, `dropoff_parcels`, `register_company`, `bank_counter`, `atm`, `lease_office`, `rent_desk`, `talk`, `metro`, `exit`, `cafe_counter` (work your own café's counter: the barista minigame, then `Cafe.owner_shift`).
 
 - `buy_item` with `item: "coffee"` is the café flow. Any other `item` is a meal or purchase: `{item, name, price, minutes, category, flag?}`, paid from personal cash into `exp:<category>` (`dining` for Lantern Bistro).
 - `clothing_shop` opens the store's rails (`ClothingShopModal`) for the building it sits in. `{npc, first?}`: needs the clerk present, and plays the `first` conversation until `met_<npc>` is set.
 - `look` shows a line of text: `{text, icon?, alt: [{if, text}]}`. The first `alt` whose condition holds wins.
+- Interactable `params` that lock or hide a spot: `requires` (`desk_access` or `lease:<property_id>`; the spot stays but
+  reads as locked until you hold that pass or lease, e.g. the café till needs `lease:corner_cafe`) and `unless_lease`
+  (`<property_id>`; the spot is not placed at all once that lease is yours: the TO LET notice in the café window).
+
+Building keys added with Old Town:
+
+- `exterior.fallback`: a facade id (a key of `assets/buildings/buildings_meta.json`) drawn while `exterior.sprite` has no
+  art yet. The stand-in's own metadata (size, door, sign board) is used, so a fallback with no `sign` region shows no sign
+  text. Once `buildings/<sprite>.png` exists the real facade takes over; re-run `python3 tools/gen_districts.py <district>`
+  so the block is laid out from the real widths. `DataDB.validate()` accepts a building whose `sprite` is unknown as long as
+  its `fallback` is known.
+- `hours.always_if_lease`: a property id. Once that lease is yours the building is open around the clock (Suite 2B and the
+  café unit); `hours` applies until then.
+- `interior.property`: the lease this interior belongs to. Staff of a role whose `workplace` is that property show up here
+  (`interior.refresh_named_npcs`).
+- `interior.staff_spots`: `{role: [[x, y], ...]}` places working staff by role (`barista`: behind the counter). A role with
+  no entry sits at the `desk` spots.
+- New `type` values: `own_cafe` (the player's café: ambient customers follow `Cafe.expected_demand` while open),
+  `lettings`, `flat_to_let` (the last two only pick a minimap icon).
 
 `type` sets the minimap icon and how many ambient customers sit down: `cafe` 3, `restaurant` 4, `retail` 2 (on its sofas and benches), `coworking` 5, `bank` 2, `civic` 3, `parcel` 1.
 
@@ -156,6 +178,10 @@ Prop keys (districts and interiors): `sprite`, `x`, `y` (top-left of the design 
 }
 ```
 `ped_outfits` (optional) is the pool passers-by dress from (Shopping Street leans to Luxury Citywear).
+`fallback` (optional) on a `ground` entry or a `fillers` entry names what to draw while the real tile or facade is still
+being drawn: a ground entry `{"type": "cobble_a", "fallback": "plaza", "rect": [...]}` paints `plaza` until `cobble_a` is in
+`tiles/atlas.json`; a filler `{"sprite": "clock_tower", "x": 766, "fallback": "civic_annex"}` draws `civic_annex` until
+`buildings/clock_tower.png` exists. Props use the same key (see 1.8). Old Town is built entirely this way.
 Building fronts, fillers and street dressing are laid out by `tools/gen_districts.py <district>` from real sprite widths.
 
 ### 1.10 City and Metro — `data/city/aurelia.json`
@@ -208,8 +234,19 @@ Dialogue:
 `{id, name, class: used_compact|sedan|suv|sports|luxury, price, running_cost_day, travel_time_factor, capacity, sprite}`
 
 ### 1.16 Properties — `data/properties/<id>.json`
-`{id, name, district, kind: home|office|coworking_desk|warehouse, monthly_rent, deposit_months, requires[], capacity{inventory_units, staff}}`
-The slice uses `riverside_studio` (home), `nexus_cowork_desk`, and `startup_hub_suite_2b` (small office).
+`{id, name, district, kind: home|office|coworking_desk|shop|warehouse, monthly_rent, deposit_months, requires[], capacity{inventory_units, staff}}`
+plus optional:
+- `building`: the building id the lease belongs to.
+- `requires_text`: what the lease modal and `Living.lease` say when a `requires` condition fails (default: "The landlord needs a registered company on the lease.").
+- `agent`: who handles it (Tom for Suite 2B, Mr. Okafor for the café).
+- `agent_line`: the line shown once the lease is yours (default: Tom's "It's all yours").
+- `blurb`: the paragraph in the lease modal (default: the office pitch).
+`kind` picks the expense line the monthly rent is booked to (`Living.rent_category`): `office` → `rent_office`, `shop` →
+`rent_shop`, `warehouse` → `rent_warehouse`, otherwise `coworking`. The month-end report folds all premises rent into one
+"Rent" line. Signing sets `flag:leased_<property_id>`. The lease modal shows Storage only when `inventory_units` > 0 and
+Desks only for offices.
+The slice uses `riverside_studio` (home), `nexus_cowork_desk`, `startup_hub_suite_2b` (small office, a lease id `suite_2b`)
+and `corner_cafe` (`kind: shop`, Old Town). `warehouse` has a ledger line but no property yet (Harbor, Planned).
 
 ### 1.17 World economy — `data/world/years.json`
 `{years:[{year:1,name:"The Opportunity",interest_rate:0.025,shipping_index:1.0,events:[...]},{year:5,name:"Clearing Crisis",...}]}`
@@ -243,6 +280,43 @@ colour on passers-by.
 guided first venture runs) and keeps a ? button in its header. Company OS uses `os_<tab>`.
 `typing.json`: `{saas: {<idea_id>: [[line, ...], ...], _generic: [...]}, freelance: [[line, ...], ...]}`. Code and
 spreadsheet formulas stay in English, as they would really be typed.
+
+### 1.20 Staff roles — `data/economy/staff.json`
+`{payroll_weekday, payroll_hour, work_hours[start,end], employer_registration_fee, job_ad_fee, applicant_delay_hours, applicants, severance_weeks, max_staff, morale_start, roles{<id>: {...}}}`.
+A role is `{name, salary_week[min,max], needs_office, desc}` plus optional:
+- `workplace`: the property id where this role works (default `suite_2b`, so office roles sit at Suite 2B). `barista` → `corner_cafe`.
+  Staff only appear in an interior whose `property` matches.
+- `work_days`: weekday numbers as `Clock.weekday` returns them, 0 = Sunday, 1 = Monday … 6 = Saturday (default `[1,2,3,4,5]`; barista `[1,2,3,4,5,6]`). `cafe.json` `open_days` uses the same numbers.
+- `work_hours`: `[start_hour, end_hour)` overriding the file-wide `work_hours` (barista: `[7, 17]`).
+- `needs_lease`: a property id. `Staff.hire_block` refuses to hire the role until that lease is yours.
+- `needs_text`: what the People tab says while it is refused ("needs a café (lease the corner unit in Old Town)").
+JSON numbers are floats, so code compares weekdays as ints (`Staff.is_working`, `Cafe.open_day`).
+
+### 1.21 Café — `data/economy/cafe.json`
+Everything the café module (`scripts/sim/cafe.gd`) reads; nothing is hard-coded in the module.
+```json
+{"property": "corner_cafe", "fitout_cost": 5800, "permit_fee": 280, "permit_hours": 48,
+ "open_hour": 7, "close_hour": 17, "open_days": [1,2,3,4,5,6],
+ "footfall_day": 240, "saturday_mult": 1.3, "hour_share": {"7": 0.12, "8": 0.17, "...": 0},
+ "base_conversion": 0.3, "elasticity": 1.6,
+ "items": {"coffee": {"name": "Coffee", "ref_price": 4.2, "unit_cost": 0.85, "min": 2.5, "max": 8.0},
+           "pastry": {"name": "Pastry", "ref_price": 3.8, "unit_cost": 1.3, "min": 2.0, "max": 7.0, "attach": 0.35}},
+ "supply_packs": [{"id": "small", "cups": 150, "cost": 135}, {"id": "large", "cups": 400, "cost": 320}],
+ "supplies_max": 1200, "pastry_order_max": 80,
+ "barista_cups_hour": 14, "owner_cups_hour": 16, "owner_shift_hours": 2,
+ "card_fee": 0.019, "rating_start": 3.4, "rating_speed": 0.12, "ads": [0, 15, 40]}
+```
+- `property`: the lease (1.16) the café runs on. `fitout_cost` is paid once (booked to `exp:fitout`, ready a day later);
+  `permit_fee` books to `exp:registration`, and the licence (`flag:food_permit`) is granted `permit_hours` later.
+- Demand for hour `h`: `footfall_day × hour_share[h] × (saturday_mult on Saturdays) × base_conversion × price_factor × rating_factor × ads_factor`,
+  where `price_factor = clamp((ref_price / price)^elasticity, 0.15, 1.9)`, `rating_factor = 0.55 + 0.13 × rating`, `ads_factor = 1 + 0.35 × (1 − e^(−ads/25))`.
+  The hour is Poisson-sampled, then capped by counter capacity (`barista_cups_hour × Staff.output` per barista on shift, plus
+  `owner_cups_hour` × the share of the hour you stood at the counter) and by cups in stock. `pastry.attach` is the share of
+  customers who add a pastry (also scaled by its price factor).
+- `supply_packs` ordered from supplier id `old_town_roasters` cost `cost × World.cost_mult` and arrive at 06:00 the next day
+  (`supplies_max` counts stock plus what is on the way). `pastry_order_max` caps the daily bakery order; unsold pastries are binned at `close_hour`.
+- `card_fee` is taken from each day's till at closing (`exp:platform_fees`). `ads` are the per-day flyer budgets on offer.
+- `rating_start`/`rating_speed`: the star rating starts at `rating_start` and moves this fraction of the way to each day's target.
 
 ---
 
@@ -282,4 +356,15 @@ data.reports           {month_closes:[{period, entities:{id:{revenue, refunds, c
                                         cash_open, cash_close, ar, ap, inventory}}}]}
 data.world             {year, macro{interest_rate, shipping_index}, modifiers[]}
 data.rng               {seed, state}
+data.cafe              {fit_ready, permit_ready (minute stamps, -1 = not started), supplies (cups), incoming (cups on the way),
+                        pastries (in stock today), pastry_order, prices{coffee, pastry}, ads (per day), rating (1..5),
+                        owner_from, owner_until (the window you stood at the counter), name ("" = "<Company> Café"),
+                        first_sale, shut_warned, today{d, served, pastries, rev, demand, queue_lost, stock_lost, open_hours,
+                        shut_hours, waste, owner_score?, owner_shifts?}, days[] (the last 60 closed days, same keys + rating)}
+                        (created on first use by Cafe.S(); saves from before Old Town simply lack it)
+data.living.leases     {<property_id>: {rent, day (of month), since, entity}}   (rent is charged monthly to `entity`)
 ```
+
+Flags and stats the café sets: `met_okafor`, `leased_corner_cafe`, `food_permit`, `cafe_first_sale`; stats `cafe_customers`,
+`cafe_days_open`, `cafe_owner_shifts`, `cafe_rating`. Ledger expense categories added with it: `rent_shop`, `rent_warehouse`,
+`fitout` (`fuel`, `vehicle` and `insurance` are reserved for the logistics business; nothing posts to them yet).

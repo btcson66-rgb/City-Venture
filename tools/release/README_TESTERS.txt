@@ -4,6 +4,25 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
 謝謝你幫忙測試！這是一款在現代城市裡創業、經營公司的像素風模擬 RPG。
 目前可以完整玩到第一章到第六章（開始電商、賺到第一塊錢、登記公司、月結、聘員工、大合約、現金危機）。
 
+0.1.7-test7 新增：
+  ・新街區「老城區」（Old Town）開放，可以在這裡開你自己的咖啡店：
+    - 怎麼去：任何街區的捷運入口都能搭到「老城區」（車資 $2.80，M5 環線的最後一站），
+      也可以從購物街一路往西走到底。
+    - 先登記公司（房東只租給公司）。到 Okafor Lettings 找 Okafor 先生（週一到六 9–18 點），
+      租下轉角咖啡店面：月租 $1,900、押金兩個月。
+    - 到店裡的收銀台打開 Company OS 的「咖啡店」分頁：裝修（$5,800，一天完工）、
+      向 Old Town Roasters 訂咖啡料（隔天早上 6 點送到）、設定每天的糕點訂單和咖啡、糕點的價格。
+    - 到市政廳「許可與法規」申請食品處理執照（$280，兩天後核發）。
+    - 裝修和執照都好了，週一到週六 7–17 點就能營業。吧台要有人：到 People 分頁僱咖啡師，
+      或自己在店裡對吧台按 E「站吧台」（咖啡師小遊戲，站 2 小時，服務好會拉高評分）。
+    - 房租不管有沒有客人都照付。看看 ★ 評分、走掉的客人、缺貨和丟掉的糕點，再調整價格和進貨量。
+    - Studio 1A（老城套房）目前只能參觀，還不能搬進去。
+  ・新聞（Aurelia Daily）的標題和年代名稱現在有中文翻譯。
+  ・我們的自動測試機器人現在用中文從第 1 章一路玩到第 9 章，再接著玩老城咖啡店，
+    第 7 到第 9 章不再卡在等 Ken 來電。
+  ・已知：老城區的建築外觀、地磚、街道物件和店裡家具都還是暫代美術（借用現有的圖），
+    正式圖畫好後會換上。
+
 0.1.7 新增（依你的第三次試玩回饋）：
   ・新手教學不會再卡住等貨：買了貨之後如果還在路上，幾秒後就會提早送到（供應商會傳訊息說貨車剛好在附近）。
     舊存檔接著玩也適用，而且會從「進貨」之後接下去，不會叫你重買日票。
@@ -168,6 +187,18 @@ CITY VENTURE — Test build {VERSION} ({DATE})  ·  English
 Thanks for testing! This build plays Chapters 1–6: start an online shop, earn your first dollar, register a
 company, close a month, hire staff, land Crestline's big contract and survive the cash crunch. Also playable:
 part-time jobs, freelance consulting and a SaaS product.
+
+NEW IN 0.1.7-test7: Old Town is open, and you can run your own café there. Getting there: the metro from any district
+(Loop Line M5, $2.80), or walk west from Shopping Street. Register a company first, then ask Mr. Okafor at Okafor Lettings
+(Mon-Sat 9-18) for the corner unit ($1,900/month, two months' deposit). At the till inside, Company OS → Café: fit it out
+($5,800, one day), order coffee supplies from Old Town Roasters (delivered 6 AM next day), set the daily pastry order and
+your prices. Apply for the food handling licence at City Hall → Permits ($280, two days). Then it opens Mon-Sat 7-17:
+someone has to be behind the counter, so hire a Barista in the People tab or press E at the counter yourself (the barista
+minigame, 2 hours; good service lifts the rating). The rent is due whether anyone buys a coffee or not; watch the star
+rating, walk-outs, stock-outs and binned pastries. Studio 1A (the flat) is viewing only for now. Also: news headlines and
+era names are translated in Chinese, and our walkthrough bot now plays Chapters 1-9 in Chinese and then the café without
+stalling on Ken's call in Chapter 7. Known: Old Town's facades, cobbles, street props and café furniture are stand-in
+art (borrowed from existing pieces) until the real art lands.
 
 NEW IN 0.1.7: the first venture never waits on a truck (late stock turns up early, also in continued saves) · you can
 sleep after a shift, and from 4 PM on your first day · time keeps running while the computer or phone is open (the pause

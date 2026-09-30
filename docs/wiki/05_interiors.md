@@ -159,7 +159,7 @@
 | `quay_residence` | The Quay 12F | 3 | 32×17 | wood_dark / white_modern | **`sofa_l`**、**`kitchen_island`**、**`tv_wall`**、**`art_large`**、**`home_office_corner`**、`window_wide_day` | 同上 + 居家辦公角 |
 | `skyline_penthouse` | Skyline Penthouse | 4 | 36×18 | marble / white_modern | **`bar_counter`**、**`piano`**、**`home_gym`**、**`collection_case`**、**`pool_edge`**（牆上的窗外泳池）、`window_wide_night` | 同上 + 收藏櫃 |
 | `hillside_villa` | Hillside Villa | 5 | 40×18 | wood_warm / white_modern | 上面全部 + **`fireplace`**、**`garage_door`**（車庫）、**`library_wall`** | 同上 + 車庫 |
-| `old_town_studio` | Old Town Studio | 0 | 18×12 | wood_dark / brick | `bed`（舊）、`desk`、`chair`、**`hot_plate`**、`box` | 公司倒閉後的「降級住宅」：小、舊，但有窗外的老城夕陽 |
+| `old_town_studio` | Old Town Studio | 0 | 18×12 | wood_dark / brick | `bed`（舊）、`desk`、`chair`、**`hot_plate`**、`box` | 公司倒閉後的「降級住宅」：小、舊，但有窗外的老城夕陽。**現況**：可參觀的 14×11 版本已實作（見下方「Old Town」）；搬進去是規劃中 |
 | `wardrobe_room` | 更衣室 | 3+ | 14×10 | carpet_navy / white_modern | **`clothing_rack`**、**`mirror_full`**、**`shoe_shelf`**、`wardrobe` | 換衣服（大房子的衣櫃互動升級版） |
 
 ### 辦公階梯（P1–P3）
@@ -192,11 +192,22 @@
 | `haddad_trading` | Haddad Trading | 22×14 | wood_dark / brick | `exec_desk`、**`world_map_wall`**（無字）、**`sample_crates`**、`lounge_sofa`、**`tea_set`** | 海外供應商、國際合約（P2） | Omar Haddad |
 | `harbor_point_fitness` | Harbor Point Fitness | 26×14 | **`rubber_floor`**（新）/ white_modern | **`treadmill`** ×3、**`weight_rack`**、**`yoga_mat`** ×3、**`reception_desk`**、`water_cooler`、`lockers` | 運動（生活）、和 Rosa 談 B2B 訂單 | Rosa Lim |
 
-### Old Town（P1）
+### Old Town（已實作 · 2026-09-30）
+
+三間都能進去。**這一區的專屬家具（粗體）都還沒交，遊戲現在用資料裡 `fallback` 指定的現有家具暫代**；正式圖一到（放進 `game/assets/interiors/`）就自動換上，不用改資料。
+
+| id | 名稱 | 大小（格） | 地板 / 牆 | 家具（**粗體 = 尚未畫，括號是暫代**） | 互動 | NPC |
+|----|------|-----------|-----------|------|------|-----|
+| `okafor_lettings` | Okafor Lettings | 16×12 | wood_dark / wood_panel | **`listing_board`**（`cork_board`；貼滿房屋照片，無字）、**`old_desk`**（`desk`）、`office_chair`、`chair`、`filing_cabinet`、`waiting_sofa`、`plant`、`framed_art`、`window_day`、`rug_small` | 與 Mr. Okafor 談話 → 租轉角咖啡店面（`lease_cafe`）· 看物件牆（`look`，寫著轉角店面 $1,900/月、Studio 1A $780/月） | Mr. Okafor（週一到六 09–18，坐在桌後） |
+| `corner_cafe_unit` | 轉角咖啡店 | 21×13 | wood_cafe / brick | **`cafe_counter_small`**（`cafe_counter`）、**`pastry_case_small`**（`display_case`）、**`menu_board_blank`**（`menu_board`；程式疊菜單字）、**`cafe_table_round`** ×4（`cafe_table`）、**`cafe_stool`** ×8（`cafe_chair`）、`hanging_light` ×3、`window_day` ×2、`framed_art_b`、`plant_big`、`rug_small` | **站吧台（2 小時）**（`cafe_counter`，咖啡師小遊戲）· **查看收銀台 → Company OS 咖啡店分頁**（`cafe_till`，租下後才能用）· 窗上的招租告示（`look`，租下後消失，`unless_lease`） | 咖啡師員工站在吧台後（2 個位置）；客人依營業時段變化（營業中 1–5 位） |
+| `old_town_studio` | Studio 1A | 14×11 | wood_warm / plaster_warm | **`bed_single`**（`bed`）、**`kitchenette`**（`kitchen`）、**`radiator`**（`plant`）、`window_day`、`rug_small` | 參觀（`look`，寫著 $780/月、暖氣會叮噹響、早上六點有麵包香）。**搬進去是規劃中** | — |
+
+- `corner_cafe_unit` 的 `interior.property` 是 `corner_cafe`：只有你租下這個單位，店員才會出現在吧台後面，`staff_spots.barista` 決定他們站哪裡。
+- 咖啡店的營運規則（時間、客流、補貨、評分）在 [13](13_core_loop_and_work.md#咖啡店產業old-town)。
+- 尚未開放的老城室內（規劃中）：
 
 | id | 名稱 | 大小（格） | 地板 / 牆 | 家具 | 互動 | NPC |
 |----|------|-----------|-----------|------|------|-----|
-| `okafor_lettings` | Okafor Lettings | 16×11 | wood_dark / wood_panel | `exec_desk`、`filing_cabinet`、**`listing_board`**（房屋照片用色塊）、`chair` | 租屋、換住處、退租 | Mr. Okafor |
 | `gallery_nine` | Gallery Nine | 24×13 | concrete / white_modern | **`art_large`** ×5、**`sculpture_plinth`** ×2、**`gallery_bench`** | 買收藏品（裝潢用） | 藝廊員（路人） |
 | `ember_print` | Ember Print | 18×12 | concrete / brick | **`printing_press`**、**`paper_rolls`**、**`poster_rack`**、`desk` | 印行銷品（P3 媒體業） | — |
 | `corner_workshop` | Corner Workshop | 20×12 | concrete / brick | **`workbench`** ×2、**`tool_wall`**、**`3d_printer`**、`box` | 小量製造（P3） | — |

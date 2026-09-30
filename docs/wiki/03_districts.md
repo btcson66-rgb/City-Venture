@@ -106,10 +106,50 @@
 | 填充建築 | `retail_arcade` 騎樓商場 · `cinema_front` 電影院 · `shop_row_awning` 雨遮店排 |
 | 街道物件 | 市集攤 `market_stall_rose` / `_sage` / `_cream` 各 2（**週六、週日 09–18 點才擺出來**，其他時間收起、可以穿過）、串燈 `string_lights` ×4（晚上發光，掛在 6 支路燈 `lamp` 之間）、花攤 `kiosk_flower`、長花台 `planter_long` ×2、腳踏車架 `bike_rack` ×2、長椅 ×3、北側人行道的樹、旗燈、護柱、盆栽、餐廳洋傘桌 |
 | 路人 | 多穿 Luxury Citywear（大衣顏色會變） |
-| 出口 | 東 → Civic Center（步行 8 分鐘；Civic Center 西側新增出口） |
+| 出口 | 東 → Civic Center（步行 8 分鐘；Civic Center 西側新增出口）· 西 → Old Town（步行 6 分鐘；西端有「← OLD TOWN」指示牌） |
 | 捷運 | M5 |
 | 音樂 | 資料欄位 `day_city`（規劃：輕快 city pop，晚上轉 lounge） |
 | 規劃 | `street_performer_spot` 街頭藝人；地點卡照片 `locations/i_shopping_street`；Pop-up 承租（P3） |
+
+### Old Town 老城區 · `old_town`
+
+| 項目 | 內容 |
+|------|------|
+| 狀態 | **已實作**（2026-09-30；遊戲中文顯示為「舊城區」）· 美術**全部是暫代**：Codex B3 的立面、地磚、街道物件和室內家具都還沒交。資料裡每一項都寫了正式的圖名，加一個 `fallback`（先借現有的圖）。正式圖一放進 `game/assets/`，遊戲就自動換上，不用改程式（見「暫代對照表」） |
+| 尺寸 | 88×44 格（1408×704 px） |
+| 氣質 | 低租金、老店、紅磚、石板路、拱廊、鐘樓。傍晚最美。人潮和車流都比購物街稀（車流密度 0.45） |
+| 主色 | `#D8A24A` 琥珀 |
+| 小地圖色 | `#a0674a` |
+| 音樂 | 資料欄位 `day_city`（沿用購物街的曲目；規劃：爵士吉他、手風琴） |
+| 地面 | 上方石板廣場 `cobble_a`（y 0–20）→ 人行道 `sidewalk_alt` → 馬路 `road_b`（2 條斑馬線，在 x=30、x=66 格）→ 人行道 → 下方石板廣場 `cobble_b`（y 34–44）。**`cobble_a`/`cobble_b` 還不在地磚 atlas 裡，先用 `plaza` 暫代**（`ground` 項目的 `fallback`） |
+| 可進入建築 | `okafor_lettings` Okafor Lettings 租屋行（x=215）· `corner_cafe_unit` 轉角咖啡店（x=594；玩家的咖啡店）· `old_town_studio` Studio 1A 老城套房（x=954；只能參觀，搬家是規劃中） |
+| 填充建築 | `rowhouse_brick` 紅磚連棟屋 ×2（x=20、x=1108）· `arcade_arches` 拱廊（x=387）· `clock_tower` 鐘樓（x=766，地標） |
+| 街道物件 | 70 件：鑄鐵路燈 `old_lamp` ×8、護柱 `bollard` ×32、樹籬 ×8、圓樹 `tree_round` / `tree_round_b` 各 ×4、小圓桌 `cafe_chairs_bistro` ×2、長椅 ×2、爬藤架 `ivy_trellis` ×2、小盆栽、咖啡立牌 `cafe_board`、指示牌、數位看板、噴水池、壁畫牆 `mural_wall`、舊書攤 `bookstall`、垃圾桶 |
+| 路人 | 密度依時段 7 / 11 / 9 / 3（早 / 午 / 晚 / 夜）；服裝混合休閒外套、T 恤、居家服、西裝和城市精品 |
+| 出口 | 東 → Shopping Street（步行 6 分鐘，落點在購物街西端） |
+| 捷運 | M5 Loop Line（Old Town 是 M5 的最後一站）。捷運入口在街區東側（x≈1180），離東邊出口不遠 |
+| 怎麼去 | ① 任何街區的捷運入口 → 選 Old Town（車資 $2.80；到購物街 5 分、市政中心 8 分、金融區 11 分、新創園區 13 分、河岸 16 分）② 從購物街一路往西走到底 |
+
+**暫代對照表**（沒有正式圖時，遊戲畫什麼）
+
+| 正式圖（尚未交） | 暫代 | 位置 |
+|------------------|------|------|
+| `buildings/okafor_lettings` | `brick_shops` | 立面 |
+| `buildings/corner_cafe_unit` | `shop_row_awning` | 立面 |
+| `buildings/old_town_studio` | `riverside_walkup` | 立面 |
+| `buildings/rowhouse_brick` | `apartment_mid`（x=20）· `riverside_walkup`（x=1108） | 填充建築 |
+| `buildings/arcade_arches` | `retail_arcade` | 填充建築 |
+| `buildings/clock_tower` | `civic_annex` | 填充建築 |
+| 地磚 `cobble_a`、`cobble_b` | `plaza` | 地面 |
+| `props/old_lamp` | `lamp` | 街道物件 |
+| `props/cafe_chairs_bistro` | `umbrella_table` | 街道物件 |
+| `props/mural_wall` | `billboard` | 街道物件 |
+| `props/bookstall` | `kiosk_flower` | 街道物件 |
+| `props/ivy_trellis` | `flower_bed` | 街道物件 |
+
+暫代的機制是資料裡的 `fallback` 欄位（見 [GAME_DATA_SCHEMA](../GAME_DATA_SCHEMA.md) 的 1.8、1.9）。室內家具的暫代見 [05](05_interiors.md#old-town已實作--2026-09-30)。
+
+**玩法**：Old Town 是「咖啡店」這個產業的所在地。到 Okafor Lettings 向 Mr. Okafor 租轉角店面，再裝潢、辦食品處理執照、進貨、開店，流程見 [13](13_core_loop_and_work.md#咖啡店產業old-town)。**還沒有**：搬進 Studio 1A（規劃中）、藝廊、印刷行、轉角工坊（規劃中，見下）。
 
 ---
 
@@ -133,20 +173,18 @@
 | 捷運 | M3 |
 | 音樂 | 低音、慢節奏；環境音有海鷗、船笛、金屬碰撞 |
 
-### Old Town 老城區 · `old_town` · P1
+### Old Town 老城區的後續建築 · P1–P3
+
+Old Town 本身已開放（見上）。以下是設定稿裡**還沒做**的部分：
 
 | 項目 | 設定 |
 |------|------|
-| 一句話 | 低租金、老店、藝術 |
-| 主色 | `#D8A24A` 琥珀 |
-| 氣質 | 紅磚、石板路、拱廊、爬藤、老招牌、壁畫。傍晚最美 |
-| 特色帶 | 石板路小廣場、鐘樓、壁畫牆 |
-| 可進入建築 | `old_town_studio` 老城套房（最便宜的住處；公司倒閉後的「降級住宅」）· `okafor_lettings` Okafor 租屋行（房東 Mr. Okafor）· `gallery_nine` Gallery Nine 藝廊（買收藏品裝潢）· `ember_print` Ember 印刷行（P3 媒體業、行銷印刷品）· `corner_workshop` 轉角工坊（P3 小量製造） |
-| 填充建築 | `rowhouse_brick` 紅磚連棟屋 · `arcade_arches` 拱廊 · `clock_tower` 鐘樓（地標） |
-| 新街道物件 | `cobble` 地磚（新 tile）、`mural_wall` 壁畫牆（無字）、`ivy_trellis` 爬藤架、`old_lamp` 鑄鐵路燈、`bookstall` 舊書攤、`cafe_chairs_bistro` 小圓桌 |
-| NPC | Mr. Okafor（現在只在手機出現） |
-| 捷運 | 無（從 Civic Center 走過去） |
-| 音樂 | 爵士吉他、手風琴 |
+| 尚未開放的建築 | `gallery_nine` Gallery Nine 藝廊（買收藏品裝潢）· `ember_print` Ember 印刷行（P3 媒體業、行銷印刷品）· `corner_workshop` 轉角工坊（P3 小量製造） |
+| 尚未開放的玩法 | Studio 1A（`old_town_studio`）目前只能參觀。搬進去、降級住宅（公司倒閉後的去處）是**規劃中** |
+| 尚未畫的街道物件 | `mural_wall`、`ivy_trellis`、`old_lamp`、`bookstall`、`cafe_chairs_bistro`、地磚 `cobble_a` / `cobble_b`（見上方暫代對照表） |
+| 尚未畫的背景 | 老城天際線 `skyline_old_town_day` / `_night`、地點卡（見 [90 工單 B3](90_codex_art_backlog.md#b3-老城區咖啡店產業)） |
+| 捷運 | 已開放（M5 Loop Line 的最後一站） |
+| 音樂 | 規劃：爵士吉他、手風琴（現在沿用 `day_city`） |
 
 ### Residential 住宅區 · `residential` · P1
 
