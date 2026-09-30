@@ -50,8 +50,15 @@ static func eval(expr: String, ctx := {}) -> bool:
 			return false
 		if c["status"] in ["delivered", "paid"]:
 			return true
+		if c["status"] != "active":
+			return false
 		var have := Ecommerce.available_anywhere(c["product"]) + Ecommerce.incoming_units_of(c["product"])
 		return c["status"] == "active" and have >= int(c["qty"])
+	if expr.begins_with("contract_closed:"):
+		var c := Contracts.by_tag(expr.substr(16))
+		return not c.is_empty() and GameState.data["entities"].get(c.get("seller", ""), {}).has("closed")
+	if expr == "has_listed":
+		return not Ecommerce.E()["listings"].is_empty() or GameState.stat("orders_placed") >= 1
 	match expr:
 		"forecast_ok":
 			return Forecast.ok(GameState.business_entity())

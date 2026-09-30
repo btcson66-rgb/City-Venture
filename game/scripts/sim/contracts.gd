@@ -43,11 +43,18 @@ static func _tag(c: Dictionary, what: String) -> void:
 		GameState.set_flag(tag + "_decided")
 
 
-## A tagged offer that ended without a tag (a buyer walking away after counter-offers, in builds before 0.1.8)
-## gets its "declined" flags now, so the story never waits on a decision that was already made.
+## Rebuild tagged story receipts from existing statuses in old saves, including ended offers and paid deliveries.
 static func reconcile_tags() -> void:
 	for c in C().values():
 		var tag := str(c.get("tag", ""))
+		if tag != "":
+			GameState.set_flag(tag + "_offered")
+			if str(c.get("status", "")) in ["active", "delivered", "paid"]:
+				_tag(c, "accepted")
+			if str(c.get("status", "")) in ["delivered", "paid"]:
+				_tag(c, "delivered")
+			if str(c.get("status", "")) == "paid":
+				_tag(c, "paid")
 		if tag != "" and str(c.get("status", "")) in ["rejected", "withdrawn", "expired"] and not GameState.flag(tag + "_decided"):
 			_tag(c, "declined")
 

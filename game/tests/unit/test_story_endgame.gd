@@ -87,7 +87,7 @@ func test_new_story_text_has_no_real_crypto_names() -> void:
 
 func test_data_validates_and_texts_match_the_numbers() -> void:
 	runner.eq(DataDB.validate(), [], "data validates")
-	var licence := StoryEngine.chapter_def("ch12_regulation_scale")["objectives"][0]["on_start"][2]["text"] as String
+	var licence := StoryEngine.chapter_def("ch12_regulation_scale")["objectives"][0]["on_start"][1]["text"] as String
 	runner.check(licence.contains(Fmt.money0(Compliance.licence_fee())), "Ana's message quotes the licence fee")
 	var kyc_text := str(StoryEngine.objective_def("ch12_kyc")["text"])
 	runner.check(kyc_text.contains(Fmt.money0(Compliance.kyc_threshold())), "the KYC objective quotes the threshold")

@@ -165,7 +165,7 @@ objective has a guide-arrow `target`.
 | 2 | Post a job ad (Company OS → People) | `stat:jobs_posted>=1` | `Staff.post_job` ($40). 3 applicants arrive about 18 h later |
 | 3 | Hire the first employee | `stat:hires>=1` | Applicants carry skill, salary ask and a trait. The hire starts the next day at 9:00 |
 | 4 | First payroll (Friday 17:00) | `stat:payrolls_run>=1` | A missed payroll becomes `wages_payable` and hurts morale. Three missed payrolls in a row mean insolvency |
-| 5 | Revenue isn't cash: open the cash forecast | `flag:cash_forecast_viewed` (reset when the step starts) | `Forecast.weekly` in Company OS → Finance |
+| 5 | Revenue isn't cash: open the cash forecast | `flag:cash_forecast_viewed` (retained if already viewed) | `Forecast.weekly` in Company OS → Finance |
 
 ### CHAPTER 5 — THE BIG CONTRACT ("Daniel buys by the pallet.")
 Daniel Wong texts, then waits at Nexus Co-work on Thursdays 17:00–20:00 (`daniel_big_deal`). If the player doesn't
@@ -202,7 +202,7 @@ sandbox goal is $40,000 revenue in a month.
 
 Each chapter moves the world into its era (`World.set_year`, data in `data/world/years.json`). The calendar keeps
 running day by day; the era is a story frame. Every chapter opens with the news board at Bloom Coffee (`read_news`,
-flag `news_read`, reset when the objective starts), then asks the player to use the chapter's new system for real.
+an era-specific receipt `news_read_y3`–`news_read_y8`, retained when already read), then asks the player to use the chapter's new system for real.
 
 ### CHAPTER 7 — SUPPLY SHOCK ("The boxes are stuck at sea.") · Year 3
 Era effects: courier rates ×1.8; local supplier prices +12% and lead times ×1.5; imports +25% and ×2; home rent +10%
@@ -213,7 +213,7 @@ Era effects: courier rates ×1.8; local supplier prices +12% and lead times ×1.
 | 1 | Read the news | `flag:news_read` | Ken texts about the port |
 | 2 | Talk to Ken (Nexus Co-work, Tue/Thu 10–15) or take his call | `flag:ch7_supply_plan` | `ken_supply_shock` → event `supply_shock_plan` (phone fallback after 2 days): **supply agreement** ($600, `supplier_price_mod` "cancel_era" for 60 days) · **local co-op** (unlocks `aurelia_makers`: `shock_exempt`, 1-day lead, pricier) · **stock up** (MOQ at today's price) |
 | 3 | 100 units in hand or on the way | `stock_units>=100` | new Cond atom |
-| 4 | Raise a price | `flag:repriced` (set by `Ecommerce.set_price` on an increase) | |
+| 4 | Raise a price | `flag:repriced` (retained; set by `Ecommerce.set_price` on an increase) | |
 | 5 | Close a month with a profit | `flag:ch7_month_profit` (month close during Chapter 7) | a loss month gets a message from Maya and the objective stays |
 
 ### CHAPTER 8 — THE GREEN SHIFT ("Aurelia goes electric.") · Year 4
@@ -358,3 +358,19 @@ airport scene, a Lumina warehouse) go into `docs/wiki/90_codex_art_backlog.md` w
 
 Art for Chapters 7–12 is in `docs/wiki/90_codex_art_backlog.md`: the chapter cards `backdrops/chapter_10`–`chapter_12`
 and the event pictures `events/rail_frozen` and `events/acquisition_offer` show up automatically once the files exist.
+
+## 11. 防卡關原則（Implemented，#24）
+
+- 每個 objective 啟動時立即檢查條件；檢查迴圈有重入防護，會連續處理已完成的步驟。接續章節從第一個未完成目標開始，整章已完成時只執行一次章節結束動作。
+- 完成收據不因新步驟開始而清掉：財務預測、調價、訂單、採購、退貨及配送歷史均可提前完成。`has_listed` 接受曾經上架，之後下架不要求重做拍照上架。
+- 新聞依年代保留 `news_read_y3`–`news_read_y8`，上一年的新聞不能代替新一年的新聞。舊存檔的 `news_read` 只遷移為該存檔年代的收據；換年代清掉舊的通用旗標，保留各年收據。
+- Tagged contract 的 offered／accepted／decided／delivered／paid 收據可從舊合約狀態重建；拒絕、撤回、過期都算已決定。簽約公司已關閉時 `skip_when` 結束備貨、交貨及收款的等待，`skip_text` 明說原交易無法完成；不偽造交貨或收款。
+- 第 6 章連續兩個負現金月結可繼續（`story_recovery.loss_months`），設定 `ch6_cash_reviewed`，不設定 `ch6_month_in_black`，也不發送恢復現金的稱讚。第 7 章既有兩個虧損月結路徑保留，新增 `ch7_survived_losses` 避免不實稱讚。
+- 教學進入步驟前排空所有提前完成項目；已開始生意不因日票到期回到 reception，曾任職不因離職重做應徵。尚未做班就離職要重新應徵，教學文字及箭頭指向 Bloom Coffee 員工入口；商品下架後等待第一單會明說重新上架。第一單的舊 seen 紀錄不阻止新排程，但同時只允許一個排程。
+- 箭頭跳過需要已失效日票或租約的電腦；可使用家中筆電。第 6 章資金橋接指向 Company OS，保留免費減支路徑，不把貸款當成唯一選擇。
+
+長決策的內容放在捲動區中，結果確認留在視窗底部，避免繁中內容把確認按鈕推到畫面外；確認按鈕名稱為 `DecisionOK`。單元測試檢查最小尺寸，繁中截圖測試檢查實際位置並透過輸入關閉。
+
+拒絕、撤回、過期和公司關閉的合約使用失效說明，不顯示未實際備貨／交貨／收款的成功提示；連續跳過相同交易的幾個步驟只通知一次。室內門口出生點須保留玩家碰撞間距；Pier 7 採用基底更新的家具布局，避免貨架覆蓋入口與出口路線。回歸測試檢查所有室內出生點，`--from=harbor` 可用獨立 fixture 快速檢查港區買車、租倉、送貨與存檔讀回，不能代替從新遊戲開始的完整驗收。
+
+逐項 (a) 提前完成、(b) 失效與替代路徑、(c) 箭頭稽核：`evidence/2026-09-30_24/AUDIT.md`（55 個主線目標＋18 個教學步驟）。回歸測試：`test_no_softlocks.gd`；截圖：`--bot=softlocks --lang=zh_TW`。沒有刪除／更名既有存檔欄位，SAVE_FORMAT 仍為 1。

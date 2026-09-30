@@ -20,6 +20,16 @@ func _init(i: Dictionary) -> void:
 
 
 func build() -> void:
+	# Long translated choices must scroll instead of pushing the outcome button off-screen.
+	var scroll := ScrollContainer.new()
+	scroll.name = "DecisionScroll"
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.custom_minimum_size.y = 180
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	body.add_child(scroll)
+	var content := UIK.vbox(4)
+	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.add_child(content)
 	var pres: Dictionary = def.get("presentation", {})
 	var who: String = pres.get("speaker", "")
 	# event illustration (events/<id>.png, 160x90) once the art exists
@@ -31,9 +41,9 @@ func build() -> void:
 		pic.custom_minimum_size = Vector2(160, 90)
 		pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		body.add_child(pic)
+		content.add_child(pic)
 	var h := UIK.hbox(8)
-	body.add_child(h)
+	content.add_child(h)
 	if who != "" and DataDB.npc(who).has("appearance"):
 		var pv := PortraitView.new()
 		pv.custom_minimum_size = Vector2(56, 56)
@@ -55,10 +65,12 @@ func build() -> void:
 	if outcome == "":
 		for tid in pres.get("tips", []):
 			v.add_child(UIK.label_tip(I18n.t(str(InfoTip.entry(str(tid)).get("title", tid))), str(tid), 7, Art.C_SKY))
-	body.add_child(UIK.sep())
+	content.add_child(UIK.sep())
 	if outcome != "":
-		body.add_child(UIK.wrap(outcome, 9, Art.C_SKY, 380))
-		footer.add_child(UIK.button("OK", close, "primary", 70))
+		content.add_child(UIK.wrap(outcome, 9, Art.C_SKY, 380))
+		var ok := UIK.button("OK", close, "primary", 70)
+		ok.name = "DecisionOK"
+		footer.add_child(ok)
 		return
 	for c in def.get("choices", []):
 		var avail := EventEngine.choice_available(c, inst["ctx"])
@@ -81,7 +93,7 @@ func build() -> void:
 			pad.add_theme_constant_override("margin_left", 10)
 			pad.add_child(dl)
 			row.add_child(pad)
-		body.add_child(row)
+		content.add_child(row)
 
 
 func _process(_d: float) -> void:

@@ -32,6 +32,7 @@ const STEPS := [
 	{"id": "coffee", "title": "Your first coffee",
 		"text": "Follow the gold arrow to Bloom Coffee and walk in through the door. At the counter, press E to order.",
 		"done": "flag:bought_coffee_bloom_coffee",
+		"target": {"building": "bloom_coffee", "action": "buy_item"},
 		"keys": ["E"]},
 	{"id": "east", "title": "To Startup Hub",
 		"text": "Walk east along the street (→). Past the end of Riverside is Startup Hub, where founders work.",
@@ -39,23 +40,23 @@ const STEPS := [
 		"keys": []},
 	{"id": "cowork", "title": "A place to work",
 		"text": "Go into Nexus Co-work. At reception, press E and buy a Day Pass ($15): it lets you use a desk and its computer today.",
-		"done": "desk_access", "target": {"building": "nexus_cowork", "action": "cowork_desk"}, "ui": ["DayPass"],
+		"done": "desk_access || flag:business_chosen || stat:purchase_orders>=1", "target": {"building": "nexus_cowork", "action": "cowork_desk"}, "ui": ["DayPass"],
 		"keys": ["E"], "hint": "Buy a Day Pass"},
 	{"id": "board", "title": "Choose a business",
 		"text": "Walk to the Business Board and press E. Choose E-commerce: you buy products wholesale and sell them online.",
 		"done": "flag:business_chosen", "target": {"building": "nexus_cowork", "action": "business_board"}, "ui": ["StartEcommerce", "Biz_ecommerce", "Page_business"],
 		"keys": ["E"], "hints": ["Start this business", "Pick E-commerce", "Open Businesses"]},
 	{"id": "os", "title": "Your business computer",
-		"text": "Sit at a hot desk and press E to open Company OS. Everything about your business happens here.",
-		"done": "seen:os", "target": {"building": "nexus_cowork", "action": "open_company_os"},
+		"text": "Open Company OS at your laptop at home, or at a hot desk while your co-work pass is valid. Everything about your business happens here.",
+		"done": "seen:os", "target": {"os": true},
 		"keys": ["E"]},
 	{"id": "buy", "title": "Buy your first stock",
 		"text": "In Company OS open Operations and press Buy next to a product. Start small: phone stands are cheap and sell steadily. Your first order is delivered right away; after that, stock takes a couple of days.",
-		"done": "stat:purchase_orders>=1", "target": {"building": "nexus_cowork", "action": "open_company_os"}, "ui": ["Buy_tradelink_wholesale_phone_stand", "Buy_*", "Tab_operations"],
+		"done": "stat:purchase_orders>=1", "target": {"os": true}, "ui": ["Buy_tradelink_wholesale_phone_stand", "Buy_*", "Tab_operations"],
 		"keys": [], "hints": ["Buy phone stands", "Buy this product", "Open Operations"]},
 	{"id": "shoot", "title": "Photograph and list",
 		"text": "Your stock is here. In Company OS go to Sales and press 'Shoot photos myself & list': set up the shot and take the photo yourself. Better photos sell more.",
-		"done": "stat:listings_active>=1", "target": {"os": true}, "ui": ["StartGame", "ListSelf_*", "Tab_sales"],
+		"done": "has_listed", "target": {"os": true}, "ui": ["StartGame", "ListSelf_*", "Tab_sales"],
 		"keys": [], "hints": ["Start the shoot", "Shoot the photos yourself", "Open Sales"]},
 	{"id": "order", "title": "Your first order",
 		"text": "Your listing is live on ShopLane. Your first order comes in within a few minutes, and your phone will buzz. Head home meanwhile: your packing table is there.",
@@ -79,7 +80,7 @@ const STEPS := [
 		"keys": []},
 	{"id": "job", "title": "Earn on the side",
 		"text": "Your first sale is done! Money comes in faster with a part-time job too. Bloom Coffee is hiring: go to its staff door, press E and take the barista job. (More jobs are on the Business Board.)",
-		"done": "has_job", "target": {"building": "bloom_coffee", "action": "work_shift"}, "ui": ["ApplyJob", "Job_barista"],
+		"done": "has_job || flag:has_job || stat:shifts_worked>=1", "target": {"building": "bloom_coffee", "action": "work_shift"}, "ui": ["ApplyJob", "Job_barista"],
 		"keys": ["E"], "hints": ["Take the job", "Barista: see the job"]},
 	{"id": "shift", "title": "Work a shift",
 		"text": "Press E at the staff door and start a shift. You do the work yourself: the better it goes, the more you earn. Came in late? The shift runs until closing time. Less than 2 hours left? Sleep, and work tomorrow.",
@@ -258,6 +259,8 @@ func _process(delta: float) -> void:
 		return
 	_track(ws, delta)
 	var blocked := UIRoot.is_blocking()
+	if not _completing and skip_completed():
+		_graduate()
 	if is_active():
 		var s := current()
 		card.visible = not blocked
@@ -306,6 +309,16 @@ func step_done(s: Dictionary) -> bool:
 	return d != "" and Cond.eval(d)
 
 
+## Drain completed steps before drawing a card/arrow, including when entering a continued save.
+## Returns true only on the transition to graduation (callers may show the final help card).
+func skip_completed() -> bool:
+	var was_active := is_active()
+	while is_active() and step_done(current()):
+		st()["step"] = int(st()["step"]) + 1
+		_step_t = 0.0
+	return was_active and not is_active()
+
+
 func _complete_step(instant := false) -> void:
 	_completing = true
 	if not instant:
@@ -315,6 +328,7 @@ func _complete_step(instant := false) -> void:
 	var s := st()
 	if not s.is_empty():
 		s["step"] = int(s["step"]) + 1
+		skip_completed()
 		if int(s["step"]) >= STEPS.size():
 			_graduate()
 	head.add_theme_color_override("font_color", Art.C_GOLD)
@@ -368,7 +382,9 @@ static func _index(id: String) -> int:
 
 ## The guided first order comes in a few minutes after the first listing goes live (normally orders follow demand).
 func _first_order() -> void:
-	if bool(st()["seen"].get("first_order", false)) or GameState.stat("orders_placed") >= 1:
+	if GameState.stat("orders_placed") >= 1:
+		return
+	if GameState.data["schedule"].any(func(e): return e["kind"] == "eco.order_place"):
 		return
 	for l in Ecommerce.E()["listings"].values():
 		if l.get("active", false):
@@ -414,6 +430,10 @@ func _show_step(i: int) -> void:
 
 ## A step's instructions, fitted to the moment: a shift that can't happen today says so and sends you to bed.
 static func step_text(s: Dictionary) -> String:
+	if s["id"] == "shift" and Careers.current_job() == "":
+		return "You left your job before working a shift. Take a job again at Bloom Coffee's staff door, then work a shift."
+	if s["id"] == "order" and GameState.stat("listings_active") < 1:
+		return "Your listing is no longer active. Open Company OS → Sales and list a product again; buy stock in Operations if you ran out."
 	if s["id"] == "shift" and Careers.current_job() != "":
 		var why := Careers.shift_block(Careers.current_job())
 		if why in ["too late for a shift today", "closed now"]:
@@ -542,7 +562,7 @@ func _resolve(ws: WorldScene) -> Dictionary:
 		if tgt.get("job", false):
 			var jid := Careers.current_job()
 			if jid == "":
-				return {}
+				return _route_to_building(ws, "bloom_coffee", "work_shift")
 			tgt = {"building": str(Careers.job_def(jid)["building"]), "action": "work_shift"}
 			if Careers.shift_block(jid) in ["too late for a shift today", "closed now", "already worked today"]:
 				tgt = {"building": HOME, "action": "sleep"}   # nothing to do there today: go home and sleep
@@ -555,6 +575,8 @@ func _resolve(ws: WorldScene) -> Dictionary:
 	else:
 		var o := StoryEngine.main_objective()
 		tgt = o.get("target", {})
+	if s.get("id", "") == "order" and GameState.stat("listings_active") < 1:
+		tgt = {"building": _workplace(), "action": "open_company_os"}
 	if tgt.is_empty() or tgt.get("phone", false):
 		return {}
 	if tgt.has("building"):
@@ -589,6 +611,8 @@ func _interactable(ws: WorldScene, action: String) -> Dictionary:
 	var pp: Vector2 = ws.player.global_position if ws.player != null else Vector2.ZERO
 	for n in get_tree().get_nodes_in_group("interactable"):
 		if n.action == action and n.enabled and ws.is_ancestor_of(n):
+			if action == "open_company_os" and Actions.lock_reason(action, n.params) != "":
+				continue   # an expired pass/ended lease is not a usable terminal
 			var d: float = (n as Node2D).global_position.distance_to(pp)
 			if d < bd:
 				bd = d

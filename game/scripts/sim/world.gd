@@ -81,6 +81,7 @@ static func set_year(y: int) -> void:
 	if y <= year():
 		return
 	GameState.data["world"]["year"] = y
+	GameState.set_flag("news_read", false)   # the legacy receipt must never migrate into a later unread era
 	var d := DataDB.year_def(y)
 	GameState.timeline(I18n.t("A new era in Aurelia: Year %d — %s.") % [y, I18n.t(str(d.get("name", "")))], "world")
 	EventBus.notify.emit(I18n.t("Year %d — %s. Check the news board.") % [y, I18n.t(str(d.get("name", "")))], "info", "info")

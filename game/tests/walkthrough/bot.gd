@@ -131,6 +131,8 @@ func _run() -> void:
 			await _solids()
 		"harbor":
 			await _harbor_screens()
+		"softlocks":
+			await NoSoftlocksTour.new(self).run()
 	_finish()
 
 
@@ -374,6 +376,7 @@ func walk_to(target: Vector2, tol := 4.0, timeout_s := 40.0, run := true) -> boo
 			if popup_handler.is_valid():
 				await popup_handler.call()
 			await frames(2)
+			t += get_process_delta_time() * 2.0   # a blocking modal must not suspend the timeout forever
 			continue
 		if SceneRouter.world_scene() != s or not is_instance_valid(s.player):
 			release_moves()

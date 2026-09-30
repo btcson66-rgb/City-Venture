@@ -234,6 +234,12 @@ or a conversation) binds itself. Conditions may read the event's context: `ctx:<
    "on_complete":[{"do":"start","objective":"ch1_go_outside"}]}
 ]}]}
 ```
+Story recovery and saved receipts (#24):
+
+Objectives accept optional `skip_when: [Cond expressions]` and `skip_text` (translated player text). When normal completion fails but all skip conditions hold, the engine sends the explanation and completes the step without claiming a successful task. `contract_closed:<tag>` means the contract's original seller entity has a `closed` field; it does not transfer money or rewrite the contract. `has_listed` means any listing exists, including a paused listing, or an order was already placed.
+
+`data/economy/story_recovery.json`: `{loss_months: 2}` controls the Chapter 6 negative-cash month-end fallback. Runtime additions use existing lazy dictionaries: `stats.ch6_cash_loss_months`, `flags.ch6_cash_reviewed`, `flags.ch7_survived_losses`, `flags.news_read_y3`–`news_read_y8`. The legacy `news_read`, `ch6_month_in_black`, `ch7_month_profit` keys remain readable. `_migrate` derives only the saved era's news receipt from the old generic key; era changes clear the generic receipt. Contract receipts reconcile from saved statuses on load and story checks. Tutorial version 3 and step indices are unchanged.
+
 Dialogue:
 ```json
 {"id":"maya_intro","lines":[

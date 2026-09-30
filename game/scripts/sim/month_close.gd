@@ -72,14 +72,21 @@ static func run(year: int, month: int) -> Dictionary:
 	GameState.data["reports"]["month_closes"].append(rep)
 	var main: Dictionary = rep["entities"][ents[-1]]
 	GameState.data["stats"]["best_month_revenue"] = maxf(GameState.stat("best_month_revenue"), float(main["revenue"]))
-	if StoryEngine.St().get("chapter", "") == "ch6_cash_is_oxygen" and float(main["cash_close"]) >= 0.0:
-		GameState.set_flag("ch6_month_in_black")
+	if StoryEngine.St().get("chapter", "") == "ch6_cash_is_oxygen":
+		if float(main["cash_close"]) >= 0.0:
+			GameState.set_flag("ch6_month_in_black")
+		else:
+			GameState.inc_stat("ch6_cash_loss_months")
+			if GameState.stat("ch6_cash_loss_months") >= float(DataDB.economy.get("story_recovery", {}).get("loss_months", 2)):
+				GameState.set_flag("ch6_cash_reviewed")
+				GameState.add_message("maya", "Two month-ends with negative cash. That isn't a recovery yet, but you've seen the gap. Cut costs or work shifts while you rebuild; the story carries on.")
 	if StoryEngine.St().get("chapter", "") == "ch7_supply_shock" and "ch7_close" in StoryEngine.St()["active"]:
 		if float(main.get("business_profit", main.get("net_profit", 0.0))) >= 0.0:
 			GameState.set_flag("ch7_month_profit")   # made money through the shock
 		elif GameState.stat("ch7_loss_months") >= 1.0:
 			# a second losing month: the chapter moves on (never a soft-lock), and says honestly what happened
 			GameState.set_flag("ch7_month_profit")
+			GameState.set_flag("ch7_survived_losses")
 			GameState.add_message("maya", "Two months in the red, but you're still open. Plenty of shops aren't. Keep the prices you set and the local supplier; the shock won't last forever.")
 		else:
 			GameState.inc_stat("ch7_loss_months")

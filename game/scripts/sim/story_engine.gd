@@ -2,6 +2,8 @@ class_name StoryEngine
 extends RefCounted
 ## Chapters → objectives, all from data/story/chapters.json (see STORY_IMPLEMENTATION.md).
 
+static var _checking := false
+
 
 static func St() -> Dictionary:
 	return GameState.data["story"]
@@ -42,8 +44,12 @@ static func start_chapter(id: String) -> void:
 	# ch3_open_for_business → backdrops/chapter_3 (the illustration shows once the art exists)
 	UIRoot.show_chapter_card(c.get("title", id), c.get("subtitle", ""), "backdrops/chapter_" + id.get_slice("_", 0).trim_prefix("ch"))
 	var obs: Array = c.get("objectives", [])
-	if not obs.is_empty():
-		start_objective(obs[0]["id"])
+	for o in obs:
+		if not o["id"] in St()["done"]:
+			start_objective(o["id"])
+			break
+	_finish_chapter(id)
+	check()
 	EventBus.objective_changed.emit()
 
 
@@ -57,15 +63,21 @@ static func start_objective(id: String) -> void:
 	St()["active"].append(id)
 	run_actions(d.get("on_start", []))
 	EventBus.objective_changed.emit()
+	check()   # already done before this step: do not wait for another interaction/hour
 
 
-static func complete_objective(id: String) -> void:
+static func complete_objective(id: String, unavailable := false) -> void:
 	if not id in St()["active"]:
 		return
 	St()["active"].erase(id)
 	St()["done"].append(id)
 	var d := objective_def(id)
-	if d.get("main", false):
+	if unavailable:
+		# Several consecutive unavailable steps can share one explanation; say it once.
+		var explanation := I18n.t(str(d["skip_text"]))
+		if not GameState.data["messages"].any(func(m): return str(m.get("text", "")) == explanation):
+			GameState.add_message("maya", d["skip_text"])
+	elif d.get("main", false):
 		EventBus.notify.emit("✓ " + fill(d.get("text", id)), "good", "check")
 	run_actions(d.get("on_complete", []))
 	var ch: String = d.get("_chapter", "")
@@ -78,21 +90,31 @@ static func complete_objective(id: String) -> void:
 				idx = i
 		if idx >= 0 and idx + 1 < obs.size() and not d.get("no_auto_next", false):
 			start_objective(obs[idx + 1]["id"])
-		var all_done := true
-		for o in obs:
-			if not o["id"] in St()["done"]:
-				all_done = false
-		if all_done and not ch in St()["chapters_done"]:
-			St()["chapters_done"].append(ch)
-			GameState.timeline(I18n.t("Completed %s.") % c.get("title", ch), "chapter")
-			EventBus.chapter_completed.emit(ch)
-			run_actions(c.get("on_complete", []))
-			if c.get("next", "") != "":
-				start_chapter(c["next"])
+		_finish_chapter(ch)
 	EventBus.objective_changed.emit()
 
 
+## A continued chapter may already have every objective done. Finish it once without replaying actions.
+static func _finish_chapter(id: String) -> void:
+	if id in St()["chapters_done"]:
+		return
+	var c := chapter_def(id)
+	for o in c.get("objectives", []):
+		if not o["id"] in St()["done"]:
+			return
+	St()["chapters_done"].append(id)
+	GameState.timeline(I18n.t("Completed %s.") % c.get("title", id), "chapter")
+	EventBus.chapter_completed.emit(id)
+	run_actions(c.get("on_complete", []))
+	if c.get("next", "") != "":
+		start_chapter(c["next"])
+
+
 static func check() -> void:
+	if _checking or not GameState.has_game():
+		return
+	_checking = true   # on_complete can start another chapter; the outer loop drains it
+	Contracts.reconcile_tags()
 	# saves that finished the June sandbox before chapters 4–6 existed carry on into Chapter 4
 	if St().get("chapter", "") == "ch3_open_for_business" and "goal_month" in St()["done"] and not chapter_def("ch4_growing_pains").is_empty():
 		start_chapter("ch4_growing_pains")
@@ -107,7 +129,10 @@ static func check() -> void:
 		start_chapter("ch10_digital_rails")
 	var changed := true
 	var guard := 0
-	while changed and guard < 20:
+	var limit: int = DataDB.story.get("side", []).size() + 1
+	for c in chapters():
+		limit += c.get("objectives", []).size()
+	while changed and guard < limit:
 		guard += 1
 		changed = false
 		for id in St()["active"].duplicate():
@@ -118,6 +143,10 @@ static func check() -> void:
 			if Cond.all(conds):
 				complete_objective(id)
 				changed = true
+			elif not d.get("skip_when", []).is_empty() and Cond.all(d["skip_when"]):
+				complete_objective(id, true)
+				changed = true
+	_checking = false
 
 
 static func fill(text: String) -> String:
