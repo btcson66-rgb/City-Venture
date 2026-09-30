@@ -20,7 +20,9 @@ func build() -> void:
 		footer.add_child(UIK.button("Close", close))
 		return
 	body.add_child(UIK.kv("Monthly rent", Fmt.money(float(p["monthly_rent"])), Art.C_GOLD, 9, true))
-	body.add_child(UIK.kv("Deposit", Fmt.money(float(p["monthly_rent"]) * float(p.get("deposit_months", 0)))))
+	var dep := UIK.kv("Deposit", Fmt.money(float(p["monthly_rent"]) * float(p.get("deposit_months", 0))))
+	dep.add_child(UIK.tip("deposit"))
+	body.add_child(dep)
 	if int(p.get("capacity", {}).get("inventory_units", 0)) > 0:
 		body.add_child(UIK.kv("Storage", I18n.t("%d units") % int(p.get("capacity", {}).get("inventory_units", 0))))
 	if p.get("kind", "") == "office":

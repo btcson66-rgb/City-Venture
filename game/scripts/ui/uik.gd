@@ -242,6 +242,19 @@ static func button(text: String, cb: Callable = Callable(), style := "", min_w :
 	return b
 
 
+## A "!" badge explaining a business idea on hover (and on click): see InfoTip and data/help/glossary.json.
+static func tip(id: String) -> InfoTip:
+	return InfoTip.make(id)
+
+
+## A label with its "!" badge right after it.
+static func label_tip(text: String, id: String, size := 8, color := Art.C_WHITE, bold := false) -> HBoxContainer:
+	var h := hbox(3)
+	h.add_child(label(text, size, color, bold))
+	h.add_child(tip(id))
+	return h
+
+
 static func icon(name: String, size := 16) -> TextureRect:
 	var r := TextureRect.new()
 	r.texture = Art.icon(name)

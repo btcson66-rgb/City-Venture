@@ -26,6 +26,7 @@ var character := {}
 var buildings_meta := {}
 var sprite_meta := {}     # board-converted sprites that overhang their design footprint
 var tiles := {}
+var glossary := {}        # data/help/glossary.json: {id: {title, what, why}} behind the "!" badges (InfoTip)
 var loaded := false
 
 
@@ -47,6 +48,8 @@ func load_all() -> void:
 	for path in _json_files("res://data/economy"):
 		economy[path.get_file().get_basename()] = _read(path)
 	city = _read("res://data/city/aurelia.json")
+	var gl = _read("res://data/help/glossary.json")
+	glossary = gl if typeof(gl) == TYPE_DICTIONARY else {}
 	story = _read("res://data/story/chapters.json")
 	world = _read("res://data/world/years.json")
 	character = _read("res://data/character/options.json")

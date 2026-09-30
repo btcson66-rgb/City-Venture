@@ -119,6 +119,11 @@ func _section(t: String) -> void:
 	content.add_child(UIK.label(I18n.t(t).to_upper(), 7, Art.C_DIM, true))
 
 
+## A section header with a "!" badge explaining the idea behind it.
+func _section_tip(t: String, tip_id: String) -> void:
+	content.add_child(UIK.label_tip(I18n.t(t).to_upper(), tip_id, 7, Art.C_DIM, true))
+
+
 func _kpi(grid: GridContainer, label: String, value: String, col := Art.C_WHITE, sub := "") -> void:
 	var p := UIK.panel("ui/card", 4)
 	p.custom_minimum_size = Vector2(118, 36)
@@ -1082,6 +1087,7 @@ func _tab_cafe() -> void:
 			_cafe_step("Fit out: espresso machine, counter, tables", false, I18n.t("Fitters at work until %s") % Clock.fmt_short(int(s["fit_ready"])))
 		else:
 			var fb := _cafe_step("Fit out: espresso machine, counter, tables", false, "")
+			fb.add_child(UIK.tip("fitout"))
 			var b := UIK.button(I18n.t("Fit out (%s)") % Fmt.money0(float(Cafe.cfg().get("fitout_cost", 5800))), func():
 				var r := Cafe.fit_out()
 				if not r["ok"]:
@@ -1111,12 +1117,14 @@ func _tab_cafe() -> void:
 		var nb := Cafe.baristas_at(Clock.now()).size()
 		var state := I18n.t("Open now") if Cafe.is_open_now() else I18n.t("Closed now")
 		content.add_child(UIK.label(state + "  ·  " + I18n.t("behind the counter: %d barista(s)") % nb, 7, Art.C_SKY, true))
-		content.add_child(UIK.label(I18n.t("At these prices: about %d customers on a weekday. Each barista makes ~%d cups an hour.") % [int(round(Cafe.expected_day_demand())),
-			int(Cafe.cfg().get("barista_cups_hour", 14))], 7, Art.C_MUTED))
+		var est := UIK.label_tip(I18n.t("At these prices: about %d customers on a weekday. Each barista makes ~%d cups an hour.") % [int(round(Cafe.expected_day_demand())),
+			int(Cafe.cfg().get("barista_cups_hour", 14))], "foot_traffic", 7, Art.C_MUTED)
+		content.add_child(est)
+		content.add_child(UIK.label_tip(I18n.t("Rating ★ %.1f: queues, running out and high prices pull it down.") % float(s["rating"]), "cafe_rating", 7, Art.C_MUTED))
 	# counter staff
 	if Staff.count("barista") == 0:
 		content.add_child(UIK.wrap("Nobody's on staff behind the counter: the café only opens while you work it yourself (the counter, inside the café). Hire a Barista in the People tab to open every day.", 7, Art.C_GOLD, 480))
-	_section("Menu")
+	_section_tip("Menu", "gross_margin")
 	for id in ["coffee", "pastry"]:
 		var it := Cafe.item(id)
 		var r := UIK.hbox(4)
@@ -1132,7 +1140,7 @@ func _tab_cafe() -> void:
 		up.name = "CafePriceUp_" + id
 		r.add_child(up)
 		r.add_child(UIK.label(I18n.t("street price %s · costs you %s") % [Fmt.money(float(it.get("ref_price", 4.0))), Fmt.money(float(it.get("unit_cost", 1.0)))], 7, Art.C_DIM))
-	_section("Supplies and the bakery")
+	_section_tip("Supplies and the bakery", "food_waste")
 	var sr := UIK.hbox(4)
 	content.add_child(sr)
 	sr.add_child(UIK.label(I18n.t("Coffee, milk and cups: %d cups in stock") % int(s["supplies"]), 8, Art.C_WHITE))
