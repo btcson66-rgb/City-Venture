@@ -38,7 +38,7 @@ func build() -> void:
 		var pic := TextureRect.new()
 		pic.name = "EventArt"
 		pic.texture = art
-		pic.custom_minimum_size = Vector2(160, 90)
+		pic.custom_minimum_size = Vector2(160, 90) if def.get("choices", []).size() < 3 else Vector2(124, 70)
 		pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		content.add_child(pic)
