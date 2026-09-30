@@ -57,6 +57,16 @@ static func cross_border_delay() -> bool:
 	return bool(era().get("cross_border_delay", false))
 
 
+## Years 6–8: the correspondent banks caught up, so an international wire clears faster than in the Clearing Crisis.
+static func wire_clear_mult() -> float:
+	return _num("wire_clear_mult", 1.0)
+
+
+## Year 8 (Regulation Wave): KYC checks on large payments, an import licence and a monthly compliance cost.
+static func compliance() -> bool:
+	return bool(era().get("compliance", false))
+
+
 ## A supplier is on the market in this era (Verdant Supply opens in Year 4; Aurelia Makers once unlocked).
 static func supplier_available(supplier_id: String) -> bool:
 	var s := DataDB.supplier(supplier_id)

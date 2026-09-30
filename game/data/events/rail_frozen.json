@@ -1,0 +1,67 @@
+{
+ "id": "rail_frozen",
+ "category": "finance",
+ "status": "active",
+ "presentation": {
+  "channel": "phone",
+  "speaker": "lina",
+  "title": "The bridge is frozen",
+  "icon": "warning",
+  "lines": [
+   "Lina Zhao. The bridge under our rail was exploited. Transfers crossing it are frozen.",
+   "{count} of your payments, {frozen} in all, are stuck in it until about {until}.",
+   "The operators say {ratio} of frozen balances will come back. The attacker took the rest."
+  ],
+  "tips": [
+   "frozen_funds",
+   "rail_reliability"
+  ]
+ },
+ "choices": [
+  {
+   "id": "wait",
+   "label": "Wait it out",
+   "detail": "Free. {supplier} ships once the bridge reopens ({until}). The payment lands at {ratio} and you cover the {lost} gap.",
+   "tip": "frozen_funds",
+   "effects": [
+    {
+     "op": "rail_choice",
+     "choice": "wait"
+    }
+   ],
+   "outcome": "Lina: \"Sensible. Nothing to do but wait, and keep your other rails warm.\""
+  },
+  {
+   "id": "reroute",
+   "label": "Pay again by wire ({reroute_cost})",
+   "detail": "Reroute: pay {supplier} by wire now, fee {reroute_fee}, lands in about {wire_days} days. Your frozen {frozen} comes back at {ratio} when the bridge reopens.",
+   "tip": "settlement_wire",
+   "requires": [
+    "cash>={reroute_cost_v}"
+   ],
+   "effects": [
+    {
+     "op": "rail_choice",
+     "choice": "reroute"
+    }
+   ],
+   "outcome": "The wire is on its way. Your stock ships when it lands; the frozen money comes back when the bridge reopens."
+  },
+  {
+   "id": "loan",
+   "label": "Bridge loan from Nexus Bank ({loan}), then pay by wire",
+   "detail": "Marcus lends {loan} for 3 months at {apr}. You pay {supplier} by wire now, and repay early with no penalty when the frozen money returns.",
+   "tip": "bridge_loan",
+   "requires": [
+    "loan_capacity>={loan_v}"
+   ],
+   "effects": [
+    {
+     "op": "rail_choice",
+     "choice": "loan"
+    }
+   ],
+   "outcome": "Marcus: \"Three months. When the frozen money is back, pay it off. No penalty.\""
+  }
+ ]
+}

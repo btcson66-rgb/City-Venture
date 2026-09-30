@@ -56,14 +56,18 @@ static func can_use_net_terms(supplier_id: String) -> bool:
 
 
 ## Place a purchase order. Returns {ok, error?, po_id?, total?}.
-## settlement: how an import is paid in the Clearing Crisis (Year 5): international_wire (default),
-## letter_of_credit or stablecoin_settlement. Ignored for local suppliers and before Year 5.
+## settlement: how an import is paid from the Clearing Crisis (Year 5) on: international_wire (default),
+## letter_of_credit, stablecoin_settlement or (Year 6+) escrow. Ignored for local suppliers and before Year 5.
+## Year 8: importing needs a licence, and a large payment goes through a KYC check (fee, one more day).
 static func buy(supplier_id: String, product_id: String, qty: int, location := "", use_terms := false, lead_override := -1, cost_mult := 1.0, settlement := "") -> Dictionary:
 	var o := offer(supplier_id, product_id)
 	if o.is_empty():
 		return {"ok": false, "error": "That supplier doesn't sell this."}
 	if not World.supplier_available(supplier_id):
 		return {"ok": false, "error": "That supplier isn't open to you yet."}
+	var no_licence := Compliance.import_block(supplier_id)
+	if no_licence != "":
+		return {"ok": false, "error": no_licence}
 	if qty < int(o["moq"]):
 		return {"ok": false, "error": I18n.t("Minimum order is %d units.") % int(o["moq"])}
 	if location == "":
@@ -77,14 +81,17 @@ static func buy(supplier_id: String, product_id: String, qty: int, location := "
 	var terms := use_terms and can_use_net_terms(supplier_id)
 	var settle := ""
 	var settle_fee := 0.0
+	var kyc := {}
 	if needs_settlement(supplier_id) and not terms:
 		settle = settlement if settlement != "" else "international_wire"
 		var why := settlement_block(settle)
 		if why != "":
 			return {"ok": false, "error": why}
 		settle_fee = settlement_fee(settle, total)
-	if not terms and Ledger.cash(entity) < total + settle_fee:
-		return {"ok": false, "error": I18n.t("Not enough cash. You need %s.") % Fmt.money(total + settle_fee)}
+		kyc = Compliance.kyc(total)
+	var kyc_fee := float(kyc.get("fee", 0.0))
+	if not terms and Ledger.cash(entity) < total + settle_fee + kyc_fee:
+		return {"ok": false, "error": I18n.t("Not enough cash. You need %s.") % Fmt.money(total + settle_fee + kyc_fee)}
 	var e := E()
 	e["counters"]["po"] = int(e["counters"]["po"]) + 1
 	var po_id := "PO-%d" % int(e["counters"]["po"])
@@ -94,10 +101,16 @@ static func buy(supplier_id: String, product_id: String, qty: int, location := "
 		eta = Clock.now() + 180
 	var po := {"id": po_id, "supplier": supplier_id, "product": product_id, "qty": qty, "unit_cost": uc, "total": total,
 		"placed": Clock.now(), "eta": eta, "location": location, "status": "in_transit", "entity": entity,
-		"terms": "net" if terms else "prepay", "defect_rate": float(o.get("defect_rate", 0.0))}
+		"terms": "net" if terms else "prepay", "defect_rate": float(o.get("defect_rate", 0.0)), "year": World.year()}
 	e["purchase_orders"][po_id] = po
 	var sup_name: String = I18n.t(DataDB.supplier(supplier_id).get("name", supplier_id))
-	if terms:
+	var escrow := settle != "" and Rails.is_escrow(settle)
+	if escrow:
+		# the money is locked in the contract, not with the supplier: it's paid out when the goods arrive
+		po["escrow"] = "held"
+		Ledger.post(entity, I18n.t("%s: %d × %s (into escrow)") % [sup_name, qty, I18n.t(DataDB.product(product_id)["name"])],
+			[{"acct": "escrow_held", "dr": total}, {"acct": "cash", "cr": total}], {"type": "po", "id": po_id})
+	elif terms:
 		var days := int(DataDB.supplier(supplier_id)["net_terms_for_companies"]["days"])
 		po["due"] = Clock.now() + days * Clock.DAY
 		Ledger.post(entity, I18n.t("%s: %d × %s on Net %d") % [sup_name, qty, I18n.t(DataDB.product(product_id)["name"]), days],
@@ -111,12 +124,23 @@ static func buy(supplier_id: String, product_id: String, qty: int, location := "
 		var clears := Clock.now() + settlement_hours(settle) * 60
 		po["status"] = "awaiting_payment"
 		po["settlement"] = {"method": settle, "fee": settle_fee, "clears": clears}
+		if not kyc.is_empty():
+			# Year 8: a large payment waits for the KYC check as well as the rail
+			clears += int(kyc["hours"]) * 60
+			po["settlement"]["clears"] = clears
+			po["settlement"]["kyc_until"] = clears
+			po["settlement"]["kyc"] = true
+			Ledger.expense(entity, "compliance", kyc_fee, I18n.t("KYC check — %s") % po_id, {"type": "po", "id": po_id})
+			GameState.inc_stat("kyc_checks")
 		eta = clears + (eta - Clock.now())
 		po["eta"] = eta
 		if settle_fee > 0.0:
 			Ledger.expense(entity, "bank_fees", settle_fee, I18n.t("%s — %s") % [I18n.t(str(settlement_def(settle)["name"])), po_id], {"type": "po", "id": po_id})
 		Sim.schedule(clears, "eco.po_cleared", {"po": po_id})
 		GameState.inc_stat("import_orders")
+		GameState.inc_stat("import_orders_y%d" % World.year())
+		if escrow:
+			GameState.inc_stat("escrow_orders")
 	Sim.schedule(eta, "eco.po_arrive", {"po": po_id})
 	GameState.inc_stat("purchase_orders")
 	if int(GameState.stat("purchase_orders")) == 1:
@@ -137,9 +161,12 @@ static func _h_po_arrive(p: Dictionary) -> void:
 	po["arrived"] = Clock.now()
 	if World.is_import(po["supplier"]):
 		GameState.inc_stat("import_received")
+		GameState.inc_stat("import_received_y%d" % int(po.get("year", 0)))
 	_add_stock(po["location"], po["product"], int(po["qty"]), float(po["unit_cost"]), float(po["defect_rate"]))
+	# an escrow contract pays the supplier out of escrow now; every other order was already paid or is on terms
 	Ledger.post(po["entity"], I18n.t("Stock received: %s") % po["id"],
-		[{"acct": "inventory", "dr": po["total"]}, {"acct": "inventory_in_transit", "cr": po["total"]}], {"type": "po", "id": po["id"]})
+		[{"acct": "inventory", "dr": po["total"]}, {"acct": Rails.arrival_account(po), "cr": po["total"]}], {"type": "po", "id": po["id"]})
+	Rails.on_arrived(po)
 	GameState.inc_stat("stock_received")
 	var pname: String = I18n.t(DataDB.product(po["product"])["name"])
 	EventBus.notify.emit(I18n.t("Delivered: %d × %s → %s") % [int(po["qty"]), pname, location_name(po["location"])], "good", "parcel")
@@ -161,7 +188,7 @@ static func settlement_def(id: String) -> Dictionary:
 	return {}
 
 
-## The cross-border rails on offer in this era (the stablecoin rail only from Year 5).
+## The cross-border rails on offer in this era (digital dollars from Year 5, escrow from Year 6).
 static func settlement_options() -> Array:
 	var out: Array = []
 	for m in DataDB.economy.get("settlement_methods", {}).get("methods", []):
@@ -179,6 +206,9 @@ static func settlement_open(id: String) -> bool:
 static func settlement_block(id: String) -> String:
 	if not settlement_open(id):
 		return "That payment method isn't available."
+	var frozen := Rails.freeze_block(id)
+	if frozen != "":
+		return frozen
 	var m := settlement_def(id)
 	var req := str(m.get("requires", ""))
 	if req != "" and not Cond.eval(req):
@@ -189,12 +219,19 @@ static func settlement_block(id: String) -> String:
 static func settlement_fee(id: String, amount: float) -> float:
 	var m := settlement_def(id)
 	var fee := float(m.get("fixed_fee", 0.0)) + amount * float(m.get("fee_rate", 0.0))
-	return snappedf(maxf(fee, float(m.get("fee_min", 0.0))), 0.01)
+	return snappedf(maxf(fee, float(m.get("fee_min", 0.0))) * Rails.fee_mult(id), 0.01)
+
+
+## Hours a payment on this rail takes to land, [fastest, slowest]. Wires speed up once the correspondent banks catch up.
+static func settlement_range(id: String) -> Array:
+	var h: Array = settlement_def(id).get("clear_hours", [24, 24])
+	var mult := World.wire_clear_mult() if id == "international_wire" else 1.0
+	return [int(round(float(h[0]) * mult)), int(round(float(h[1]) * mult))]
 
 
 static func settlement_hours(id: String) -> int:
-	var h: Array = settlement_def(id).get("clear_hours", [24, 24])
-	return GameState.randi_range(int(h[0]), int(h[1]))
+	var r := settlement_range(id)
+	return GameState.randi_range(int(r[0]), int(r[1]))
 
 
 ## Swap a payment that's stuck on the wire for a faster rail: pay that rail's fee, the supplier ships sooner.
@@ -202,11 +239,13 @@ static func switch_settlement(po_id: String, method: String) -> Dictionary:
 	var po: Dictionary = E()["purchase_orders"].get(po_id, {})
 	if po.is_empty() or po["status"] != "awaiting_payment":
 		return {"ok": false, "error": "That payment already went through."}
+	if Rails.is_frozen_po(po):
+		return Rails.reroute(po_id, method)   # stuck on the bridge: pay again by another rail
 	var why := settlement_block(method)
 	if why != "":
 		return {"ok": false, "error": why}
 	var st: Dictionary = po["settlement"]
-	var clears := Clock.now() + settlement_hours(method) * 60
+	var clears := maxi(Clock.now() + settlement_hours(method) * 60, int(st.get("kyc_until", 0)))   # a KYC check still has to finish
 	if clears >= int(st["clears"]):
 		return {"ok": false, "error": "That wouldn't be any faster."}
 	var fee := settlement_fee(method, float(po["total"]))
@@ -214,6 +253,15 @@ static func switch_settlement(po_id: String, method: String) -> Dictionary:
 		return {"ok": false, "error": I18n.t("Not enough cash. You need %s.") % Fmt.money(fee)}
 	if fee > 0.0:
 		Ledger.expense(po["entity"], "bank_fees", fee, I18n.t("%s — %s") % [I18n.t(str(settlement_def(method)["name"])), po_id], {"type": "po", "id": po_id})
+	# the money moves between "held in escrow" and "paid to the supplier" with the rail
+	var was_escrow := str(po.get("escrow", "")) == "held"
+	var to_escrow := Rails.is_escrow(method)
+	if to_escrow != was_escrow:
+		var amt := float(po["total"])
+		Ledger.post(str(po["entity"]), (I18n.t("%s: money moved into escrow") if to_escrow else I18n.t("%s: money moved out of escrow")) % po_id,
+			[{"acct": "escrow_held" if to_escrow else "inventory_in_transit", "dr": amt}, {"acct": "inventory_in_transit" if to_escrow else "escrow_held", "cr": amt}],
+			{"type": "po", "id": po_id})
+		po["escrow"] = "held" if to_escrow else "switched"
 	var transit := int(po["eta"]) - int(st["clears"])
 	st["method"] = method
 	st["fee"] = float(st["fee"]) + fee
@@ -226,11 +274,19 @@ static func switch_settlement(po_id: String, method: String) -> Dictionary:
 
 static func _h_po_cleared(p: Dictionary) -> void:
 	var po: Dictionary = E()["purchase_orders"].get(p["po"], {})
-	if po.is_empty() or po["status"] != "awaiting_payment" or Clock.now() < int(po["settlement"]["clears"]):
-		return   # already cleared, or this is the old (slower) rail's reminder
+	if po.is_empty() or po["status"] != "awaiting_payment" or Clock.now() < int(po["settlement"]["clears"]) or Rails.is_frozen_po(po):
+		return   # already cleared, or this is the old (slower) rail's reminder, or the money is stuck on the bridge
 	po["status"] = "in_transit"
 	GameState.inc_stat("import_cleared")
-	EventBus.notify.emit(I18n.t("Payment landed: %s ships %s (arrives %s).") % [I18n.t(DataDB.supplier(po["supplier"])["name"]), po["id"], Clock.fmt_short(int(po["eta"]))], "good", "bank")
+	var st: Dictionary = po["settlement"]
+	Rails.note_settled(str(st["method"]))
+	if bool(st.get("kyc", false)):
+		GameState.inc_stat("kyc_cleared")
+	var sup_name := I18n.t(DataDB.supplier(po["supplier"])["name"])
+	if str(po.get("escrow", "")) == "held":
+		EventBus.notify.emit(I18n.t("Escrow funded: %s ships %s (arrives %s). The money is released when it lands.") % [sup_name, po["id"], Clock.fmt_short(int(po["eta"]))], "good", "bank")
+	else:
+		EventBus.notify.emit(I18n.t("Payment landed: %s ships %s (arrives %s).") % [sup_name, po["id"], Clock.fmt_short(int(po["eta"]))], "good", "bank")
 
 
 static func _h_ap_due(p: Dictionary) -> void:
@@ -1010,7 +1066,7 @@ static func transfer_business_to(company: String) -> void:
 	var lines_player: Array = []
 	var lines_co: Array = []
 	var total := 0.0
-	for acct in ["inventory", "inventory_in_transit", "goods_out", "marketplace_balance"]:
+	for acct in ["inventory", "inventory_in_transit", "goods_out", "marketplace_balance", "escrow_held", "frozen_funds"]:
 		var b := Ledger.balance("player", acct)
 		if absf(b) < 0.01:
 			continue

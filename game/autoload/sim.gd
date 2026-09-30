@@ -75,6 +75,12 @@ func _on_minute(t: int) -> void:
 func _dispatch(kind: String, p: Dictionary) -> void:
 	var mod := kind.get_slice(".", 0)
 	match mod:
+		"rail":
+			Rails.handle(kind, p)
+		"cmp":
+			Compliance.handle(kind, p)
+		"acq":
+			Acquisition.handle(kind, p)
 		"eco":
 			Ecommerce.handle(kind, p)
 		"con":
@@ -98,6 +104,7 @@ func _dispatch(kind: String, p: Dictionary) -> void:
 
 
 func _on_hour(t: int, h: int) -> void:
+	Compliance.on_hour(t, h)
 	Ecommerce.on_hour(t, h)
 	Contracts.on_hour(t, h)
 	Living.on_hour(t, h)

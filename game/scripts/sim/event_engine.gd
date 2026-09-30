@@ -45,6 +45,19 @@ static func _queued(id: String) -> bool:
 static func bind(d: Dictionary) -> Dictionary:
 	var ctx := {}
 	var b: Dictionary = d.get("bind", {})
+	if b.has("acquisition"):
+		return Acquisition.context()   # Hale Group's price, from the company's own books
+	if b.has("import_po"):
+		# an import shipment that is on the way (the latest one placed)
+		var pick := {}
+		for po in GameState.data["ecommerce"]["purchase_orders"].values():
+			if str(po["status"]) == "in_transit" and World.is_import(str(po["supplier"])) and (pick.is_empty() or int(po["placed"]) > int(pick["placed"])):
+				pick = po
+		if pick.is_empty():
+			return {}
+		return {"po_id": str(pick["id"]), "supplier": I18n.t(str(DataDB.supplier(str(pick["supplier"]))["name"])), "qty": int(pick["qty"]),
+			"product": I18n.t(str(DataDB.product(str(pick["product"]))["name"])), "total": Fmt.money0(float(pick["total"])),
+			"escrow": str(pick.get("escrow", "")) == "held", "days": int(Rails.cfg().get("shipment_lost", {}).get("reship_days", 10))}
 	if b.has("product"):
 		var best := ""
 		var best_n := -1
@@ -93,6 +106,8 @@ static func trigger(id: String, ctx := {}) -> Dictionary:
 	var cd := int(d.get("trigger", {}).get("cooldown_days", 0))
 	if cd > 0:
 		S()["cooldowns"][id] = Clock.now() + cd * Clock.DAY
+	if ctx.is_empty() and not d.get("bind", {}).is_empty():
+		ctx = bind(d)   # a story action or a conversation fires the event with no context of its own
 	var inst := {"iid": "%s-%d" % [id, int(S()["fired"][id])], "id": id, "ctx": ctx, "t": Clock.now()}
 	S()["queue"].append(inst)
 	var pres: Dictionary = d.get("presentation", {})

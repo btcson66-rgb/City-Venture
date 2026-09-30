@@ -62,12 +62,16 @@ static func news() -> InfoModal:
 	GameState.set_flag("news_read")   # chapters that open with the news reset this and wait for it
 	var y := DataDB.year_def(int(GameState.data["world"]["year"]))
 	var ls: Array = [I18n.t("# AURELIA DAILY · Year %d — %s") % [int(y.get("year", 1)), I18n.t(str(y.get("name", "")))]]
-	for h in y.get("headlines", []):
+	for h in Rails.headlines(y):   # Year 7's headlines follow the bridge exploit
 		ls.append("• " + I18n.t(str(h)))
 	ls.append("---")
 	ls.append("# MARKET NOTES")
 	ls.append(I18n.t("• Base rate: %s. Credit is cheap — for now.") % Fmt.pct(float(y.get("interest_rate", 0.025)), 1))
 	ls.append(I18n.t("• Shipping index: %.2f (1.00 = normal).") % float(y.get("shipping_index", 1.0)))
+	if Rails.frozen():
+		ls.append(I18n.t("• Digital-dollar bridge: FROZEN until about %s.") % Clock.fmt_short(Rails.frozen_until()))
+	elif int(y.get("year", 1)) >= 6:
+		ls.append("• Digital-dollar bridge: open.")
 	ls.append("• ShopLane fee 10%%. Payouts every Monday.")
 	return make("News board", "info", ls)
 

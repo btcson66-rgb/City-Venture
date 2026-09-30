@@ -1,0 +1,62 @@
+{
+ "id": "acquisition_offer",
+ "category": "finance",
+ "status": "active",
+ "bind": {
+  "acquisition": true
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "victor",
+  "title": "Hale Group makes an offer",
+  "icon": "contracts",
+  "lines": [
+   "Victor Hale. I read your numbers, not your pitch.",
+   "Hale Group will pay {price} for {company}: {basis}, plus {assets} in cash, stock and money owed, less {debts} you owe.",
+   "{share_line}"
+  ],
+  "tips": [
+   "valuation"
+  ]
+ },
+ "choices": [
+  {
+   "id": "accept",
+   "label": "Accept: sell {company} for {price}",
+   "detail": "You get {take} now and stay on as managing director. Hale Group owns the company from here: its cash stays in it, and you can't take money out.",
+   "tip": "valuation",
+   "effects": [
+    {
+     "op": "acquisition",
+     "choice": "accept"
+    }
+   ],
+   "outcome": "Victor: \"Good. My lawyers will call yours. You keep the desk.\""
+  },
+  {
+   "id": "counter",
+   "label": "Counter: ask for {counter_price}",
+   "detail": "{uplift} more, but only {counter_now} now. The other {counter_later} is an earn-out: paid in a year, and only if revenue stays above {floor} of today's. You stay on as managing director.",
+   "tip": "earn_out",
+   "effects": [
+    {
+     "op": "acquisition",
+     "choice": "counter"
+    }
+   ],
+   "outcome": "Victor: \"You'll get it, with conditions. Read them twice.\""
+  },
+  {
+   "id": "decline",
+   "label": "Decline: stay independent",
+   "detail": "No sale. You keep the company, its profits and its problems. Victor says the door stays open.",
+   "effects": [
+    {
+     "op": "acquisition",
+     "choice": "decline"
+    }
+   ],
+   "outcome": "Victor: \"Understood. If your numbers get bigger, so will mine.\""
+  }
+ ]
+}

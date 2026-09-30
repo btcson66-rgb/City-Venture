@@ -712,7 +712,7 @@
    "id": "ch9_clearing_crisis",
    "title": "CHAPTER 9 — CLEARING CRISIS",
    "subtitle": "The payment still hasn't landed.",
-   "next": "",
+   "next": "ch10_digital_rails",
    "objectives": [
     {
      "id": "ch9_news",
@@ -798,6 +798,338 @@
      "do": "timeline",
      "text": "Got an import through the Clearing Crisis.",
      "kind": "milestone"
+    }
+   ]
+  },
+  {
+   "id": "ch10_digital_rails",
+   "title": "CHAPTER 10 — DIGITAL RAILS",
+   "subtitle": "Money that moves when the goods do.",
+   "next": "ch11_other_side_of_trust",
+   "objectives": [
+    {
+     "id": "ch10_news",
+     "main": true,
+     "goal": "Digital Rails",
+     "text": "Digital finance is booming: read the news board at Bloom Coffee",
+     "complete_when": [
+      "flag:news_read"
+     ],
+     "target": {
+      "building": "bloom_coffee",
+      "action": "read_news"
+     },
+     "on_start": [
+      {
+       "do": "flag_reset",
+       "flag": "news_read"
+      },
+      {
+       "do": "world_year",
+       "year": 6
+      },
+      {
+       "do": "message",
+       "from": "lina",
+       "text": "Lina Zhao. We launched something for importers: escrow on delivery. It's optional. Come by Nexus Bank, weekdays 10 to 4, and I'll show you."
+      },
+      {
+       "do": "message",
+       "from": "ken",
+       "text": "Heard Lina's got a new way to pay Lumina. Worth a look. She doesn't oversell."
+      }
+     ]
+    },
+    {
+     "id": "ch10_lina",
+     "main": true,
+     "goal": "Digital Rails",
+     "text": "Lina Zhao has an offer for importers: talk to her at Nexus Bank (weekdays 10–16), or wait for her call",
+     "complete_when": [
+      "flag:ch10_decided"
+     ],
+     "target": {
+      "building": "nexus_bank"
+     },
+     "on_start": [
+      {
+       "do": "event",
+       "id": "escrow_offer",
+       "delay_min": 2880
+      }
+     ]
+    },
+    {
+     "id": "ch10_import",
+     "main": true,
+     "goal": "Digital Rails",
+     "text": "Import from Lumina Direct: pay with escrow, or the traditional way (Company OS → Operations)",
+     "complete_when": [
+      "stat:import_orders_y6>=1"
+     ],
+     "target": {
+      "action": "open_company_os"
+     }
+    },
+    {
+     "id": "ch10_arrive",
+     "main": true,
+     "goal": "Digital Rails",
+     "text": "Get the import delivered",
+     "complete_when": [
+      "stat:import_received_y6>=1"
+     ]
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "message",
+     "from": "lina",
+     "if": "stat:escrow_released>=1",
+     "text": "Goods arrived, escrow released, and nobody had to trust anybody's promise. That's the whole product. It also runs on software, so keep that in mind."
+    },
+    {
+     "do": "message",
+     "from": "lina",
+     "if": "stat:escrow_released<1",
+     "text": "Wire, letter of credit, whatever fits. The escrow offer stands whenever you want it."
+    },
+    {
+     "do": "message",
+     "from": "maya",
+     "text": "Look at you, comparing payment rails. Whatever happened to 'I just want to sell phone stands'?"
+    },
+    {
+     "do": "timeline",
+     "text": "Tried the new payment rails.",
+     "kind": "milestone"
+    }
+   ]
+  },
+  {
+   "id": "ch11_other_side_of_trust",
+   "title": "CHAPTER 11 — THE OTHER SIDE OF TRUST",
+   "subtitle": "We solved one trust problem and created another.",
+   "next": "ch12_regulation_scale",
+   "objectives": [
+    {
+     "id": "ch11_news",
+     "main": true,
+     "goal": "The Other Side of Trust",
+     "text": "Digital dollars are everywhere now: read the news board at Bloom Coffee",
+     "complete_when": [
+      "flag:news_read"
+     ],
+     "target": {
+      "building": "bloom_coffee",
+      "action": "read_news"
+     },
+     "on_start": [
+      {
+       "do": "flag_reset",
+       "flag": "news_read"
+      },
+      {
+       "do": "world_year",
+       "year": 7
+      },
+      {
+       "do": "message",
+       "from": "lina",
+       "text": "Lina Zhao. Volumes tripled since spring. Every importer I know is on the rails now. Enjoy the quiet."
+      },
+      {
+       "do": "message",
+       "from": "marcus",
+       "text": "Marcus Reed. Fast isn't the same as safe. Keep a wire route warm."
+      }
+     ]
+    },
+    {
+     "id": "ch11_order",
+     "main": true,
+     "goal": "The Other Side of Trust",
+     "text": "Restock from Lumina Direct before the rush: pay the way that suits you (Company OS → Operations)",
+     "complete_when": [
+      "stat:import_orders_y7>=1"
+     ],
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": [
+      {
+       "do": "rail_exploit",
+       "delay_min": 10080
+      }
+     ],
+     "on_complete": [
+      {
+       "do": "rail_exploit",
+       "delay_min": 20
+      }
+     ]
+    },
+    {
+     "id": "ch11_freeze",
+     "main": true,
+     "goal": "The Other Side of Trust",
+     "text": "Get through the freeze: the digital-dollar rail is closed for about a week (watch your phone)",
+     "complete_when": [
+      "flag:rail_recovered"
+     ]
+    },
+    {
+     "id": "ch11_restock",
+     "main": true,
+     "goal": "The Other Side of Trust",
+     "text": "Restock {company}: get the Lumina import delivered",
+     "complete_when": [
+      "stat:import_received_y7>=1"
+     ],
+     "target": {
+      "action": "open_company_os"
+     }
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "message",
+     "from": "lina",
+     "text": "We solved one trust problem and created another. Now you've seen it from the inside. The rail is still useful. It just isn't magic."
+    },
+    {
+     "do": "message",
+     "from": "maya",
+     "text": "Money that's stuck feels different from money that's gone. Glad you made it through."
+    },
+    {
+     "do": "timeline",
+     "text": "Came through the bridge exploit.",
+     "kind": "milestone"
+    }
+   ]
+  },
+  {
+   "id": "ch12_regulation_scale",
+   "title": "CHAPTER 12 — REGULATION & SCALE",
+   "subtitle": "Growing up means paperwork.",
+   "next": "",
+   "objectives": [
+    {
+     "id": "ch12_news",
+     "main": true,
+     "goal": "Regulation & Scale",
+     "text": "New rules for big payments and imports: read the news board at Bloom Coffee",
+     "complete_when": [
+      "flag:news_read"
+     ],
+     "target": {
+      "building": "bloom_coffee",
+      "action": "read_news"
+     },
+     "on_start": [
+      {
+       "do": "flag_reset",
+       "flag": "news_read"
+      },
+      {
+       "do": "world_year",
+       "year": 8
+      },
+      {
+       "do": "message",
+       "from": "ana",
+       "text": "Ana at City Hall. The Payments Integrity Act is in force. Commercial importers need an import licence: $450 a year, at the permits kiosk. There's a monthly compliance cost now too."
+      },
+      {
+       "do": "message",
+       "from": "ken",
+       "text": "Local suppliers are untouched. It's the imports that need the paperwork. Lumina especially."
+      }
+     ]
+    },
+    {
+     "id": "ch12_licence",
+     "main": true,
+     "goal": "Regulation & Scale",
+     "text": "Get an import licence at the City Hall permits kiosk",
+     "complete_when": [
+      "flag:import_licence"
+     ],
+     "target": {
+      "building": "city_hall",
+      "action": "permits_info"
+     }
+    },
+    {
+     "id": "ch12_kyc",
+     "main": true,
+     "goal": "Regulation & Scale",
+     "text": "Import in bulk: a payment over $2,500 goes through a KYC check (Company OS → Operations)",
+     "complete_when": [
+      "stat:kyc_cleared>=1"
+     ],
+     "target": {
+      "action": "open_company_os"
+     }
+    },
+    {
+     "id": "ch12_offer",
+     "main": true,
+     "goal": "Regulation & Scale",
+     "text": "Victor Hale has read your numbers: meet him at Crestline (weekdays 11–16), or wait for his call",
+     "complete_when": [
+      "flag:offer_decided"
+     ],
+     "target": {
+      "building": "crestline_flagship"
+     },
+     "on_start": [
+      {
+       "do": "message",
+       "from": "victor",
+       "text": "Victor Hale. I'd like to talk about {company}. I'm at the Crestline flagship on weekdays, eleven to four. If that's inconvenient, I'll call."
+      },
+      {
+       "do": "event",
+       "id": "acquisition_offer",
+       "delay_min": 4320
+      }
+     ]
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "card",
+     "if": "flag:offer_accepted",
+     "title": "ENDING — A NEW OWNER",
+     "subtitle": "You built {company} and sold it well. The desk is still yours."
+    },
+    {
+     "do": "card",
+     "if": "flag:offer_countered",
+     "title": "ENDING — ON YOUR TERMS",
+     "subtitle": "A better price, a longer handshake. A year to earn the rest."
+    },
+    {
+     "do": "card",
+     "if": "flag:offer_declined",
+     "title": "ENDING — STILL YOURS",
+     "subtitle": "{company} answers to nobody but you."
+    },
+    {
+     "do": "message",
+     "from": "maya",
+     "text": "You turned a laptop and $30,000 into something a stranger wants to buy. Whatever you told Victor, I'm proud of you."
+    },
+    {
+     "do": "timeline",
+     "text": "The story so far ends here. Aurelia keeps going.",
+     "kind": "milestone"
+    },
+    {
+     "do": "set_flag",
+     "flag": "story_complete"
     },
     {
      "do": "start",
@@ -846,7 +1178,7 @@
    "id": "goal_growth",
    "main": true,
    "goal": "Sandbox",
-   "text": "Grow {company}: $40,000 revenue in a month (Chapters 10–12 are coming)",
+   "text": "Grow {company}: $40,000 revenue in a month",
    "complete_when": [
     "stat:best_month_revenue>=40000"
    ]

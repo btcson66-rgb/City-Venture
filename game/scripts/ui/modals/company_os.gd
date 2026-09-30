@@ -212,7 +212,10 @@ func _tab_finance() -> void:
 	pl.add_child(UIK.kv("Cost of goods sold", Fmt.money(-cur["cogs"]), Art.C_RED))
 	pl.add_child(UIK.kv("Gross profit", Fmt.money(cur["gross_profit"]), UIK.money_color(cur["gross_profit"]), 8, true))
 	for k in cur["opex"]:
-		pl.add_child(UIK.kv("  " + Ledger.category_name(str(k)), Fmt.money(-float(cur["opex"][k])), Art.C_RED, 7))
+		var orow := UIK.kv("  " + Ledger.category_name(str(k)), Fmt.money(-float(cur["opex"][k])), Art.C_RED, 7)
+		if str(k) == "compliance":
+			orow.add_child(UIK.tip("compliance_cost"))
+		pl.add_child(orow)
 	pl.add_child(UIK.kv("Business profit", Fmt.money(cur["business_profit"]), UIK.money_color(cur["business_profit"]), 9, true))
 	if be == "player":
 		if float(cur.get("wages", 0.0)) > 0.0:
@@ -229,6 +232,14 @@ func _tab_finance() -> void:
 	cp.add_child(UIK.kv("Supplier bills payable", Fmt.money(-Ledger.balance(be, "accounts_payable")), Art.C_GOLD))
 	cp.add_child(UIK.kv("Stock (at cost)", Fmt.money(Ledger.balance(be, "inventory")), Art.C_SKY))
 	cp.add_child(UIK.kv("Stock on the way", Fmt.money(Ledger.balance(be, "inventory_in_transit")), Art.C_SKY))
+	if absf(Ledger.balance(be, "escrow_held")) > 0.005:
+		var erow := UIK.kv("Held in escrow", Fmt.money(Ledger.balance(be, "escrow_held")), Art.C_SKY)
+		erow.add_child(UIK.tip("escrow"))
+		cp.add_child(erow)
+	if absf(Ledger.balance(be, "frozen_funds")) > 0.005:
+		var frow := UIK.kv("Frozen on the bridge", Fmt.money(Ledger.balance(be, "frozen_funds")), Art.C_RED)
+		frow.add_child(UIK.tip("frozen_funds"))
+		cp.add_child(frow)
 	cp.add_child(UIK.kv("Parcels out for delivery", Fmt.money(Ledger.balance(be, "goods_out")), Art.C_SKY))
 	cp.add_child(UIK.kv("Deposits", Fmt.money(Ledger.balance(be, "deposits")), Art.C_SKY))
 	if Bank.debt(be) > 0.0:
@@ -519,13 +530,22 @@ func _tab_operations() -> void:
 		t.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row2.add_child(t)
 		row2.add_child(UIK.label(Fmt.money(po["total"]) + (" · Net" if po["terms"] == "net" else ""), 7, Art.C_WHITE))
-		if po["status"] == "awaiting_payment":
+		if po["status"] == "awaiting_payment" and Rails.is_frozen_po(po):
+			row2.add_child(UIK.chip(I18n.t("FROZEN · BACK ") + Clock.fmt_short(Rails.frozen_until()).to_upper(), Art.C_RED))
+			row2.add_child(UIK.tip("frozen_funds"))
+			var rb := UIK.button("Reroute", func(): UIRoot.open_modal(SettlementModal.for_pending(str(po["id"]))))
+			rb.name = "Reroute_" + str(po["id"])
+			row2.add_child(rb)
+		elif po["status"] == "awaiting_payment":
 			row2.add_child(UIK.chip(I18n.t("PAYMENT PENDING · LANDS ") + Clock.fmt_short(int(po["settlement"]["clears"])).to_upper(), Art.C_RED))
 			var sb := UIK.button("Speed up", func(): UIRoot.open_modal(SettlementModal.for_pending(str(po["id"]))))
 			sb.name = "SpeedUp_" + str(po["id"])
 			row2.add_child(sb)
+		elif po["status"] == "in_transit" and str(po.get("escrow", "")) == "held":
+			row2.add_child(UIK.chip(I18n.t("IN ESCROW · ARRIVES ") + Clock.fmt_short(int(po["eta"])).to_upper(), Art.C_SKY))
+			row2.add_child(UIK.tip("escrow"))
 		else:
-			row2.add_child(UIK.chip(I18n.t("ARRIVES ") + Clock.fmt_short(int(po["eta"])).to_upper() if po["status"] == "in_transit" else "DELIVERED", Art.C_GOLD if po["status"] == "in_transit" else Art.C_GREEN))
+			row2.add_child(UIK.chip(I18n.t("ARRIVES ") + Clock.fmt_short(int(po["eta"])).to_upper() if po["status"] == "in_transit" else ("CANCELLED" if po["status"] == "cancelled" else "DELIVERED"), Art.C_GOLD if po["status"] == "in_transit" else (Art.C_MUTED if po["status"] == "cancelled" else Art.C_GREEN)))
 		content.add_child(row2)
 
 

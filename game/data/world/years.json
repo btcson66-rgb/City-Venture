@@ -88,17 +88,81 @@
   {
    "year": 6,
    "name": "Digital Finance Boom",
-   "status": "planned"
+   "status": "active",
+   "interest_rate": 0.045,
+   "shipping_index": 1.1,
+   "lead_mult": 1.0,
+   "import_lead_mult": 1.0,
+   "cost_mult": 1.03,
+   "import_cost_mult": 1.03,
+   "rent_mult": 1.15,
+   "packaging_levy": 0.4,
+   "eco_demand_mult": 1.15,
+   "cross_border_delay": true,
+   "wire_clear_mult": 0.6,
+   "headlines": [
+    "Digital-dollar payments double as fintechs race to win importers.",
+    "Nexus Bank pilots escrow on delivery with a payments start-up.",
+    "Wires recover: cross-border payments now clear in 3 to 5 days.",
+    "Import prices ease as the ports catch up."
+   ]
   },
   {
    "year": 7,
    "name": "Bridge Exploit",
-   "status": "planned"
+   "status": "active",
+   "interest_rate": 0.05,
+   "shipping_index": 1.05,
+   "lead_mult": 1.0,
+   "import_lead_mult": 1.0,
+   "cost_mult": 1.02,
+   "import_cost_mult": 1.02,
+   "rent_mult": 1.15,
+   "packaging_levy": 0.4,
+   "eco_demand_mult": 1.1,
+   "cross_border_delay": true,
+   "wire_clear_mult": 0.6,
+   "headlines": [
+    "Digital dollars now settle one in four cross-border invoices.",
+    "Bridge volumes hit a record: $2 billion moved in a month.",
+    "Analysts: 'Faster rails, thinner buffers.'",
+    "Import lead times settle at two weeks."
+   ],
+   "headlines_incident": [
+    "BRIDGE EXPLOIT: attackers drain the reserve behind the digital-dollar rail.",
+    "Operators freeze all bridge transfers for about a week while they trace the funds.",
+    "Banks: wires and letters of credit are unaffected.",
+    "Operators: 'Most balances will be restored. There is a shortfall.'"
+   ],
+   "headlines_after": [
+    "Bridge reopens with new limits; operators restore 90 cents on the dollar.",
+    "Importers go back to wires and letters of credit for big orders.",
+    "Payments start-ups promise audits and an insurance pool.",
+    "Regulators call hearings: 'Who holds your money in between?'"
+   ]
   },
   {
    "year": 8,
    "name": "Regulation Wave",
-   "status": "planned"
+   "status": "active",
+   "interest_rate": 0.055,
+   "shipping_index": 1.0,
+   "lead_mult": 1.0,
+   "import_lead_mult": 1.0,
+   "cost_mult": 1.02,
+   "import_cost_mult": 1.02,
+   "rent_mult": 1.18,
+   "packaging_levy": 0.4,
+   "eco_demand_mult": 1.1,
+   "cross_border_delay": true,
+   "wire_clear_mult": 0.6,
+   "compliance": true,
+   "headlines": [
+    "Payments Integrity Act takes effect: know-your-customer checks on transfers over $2,500.",
+    "Commercial importers now need a licence: City Hall opens a new permits counter.",
+    "Compliance officers are this year's hottest hire.",
+    "Big firms are buying small ones to absorb the paperwork."
+   ]
   },
   {
    "year": 9,

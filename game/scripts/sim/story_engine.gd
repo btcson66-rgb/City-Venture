@@ -100,6 +100,11 @@ static func check() -> void:
 	if St().get("chapter", "") == "ch6_cash_is_oxygen" and "ch6_cash_is_oxygen" in St()["chapters_done"] and not chapter_def("ch7_supply_shock").is_empty():
 		St()["active"].erase("goal_growth")
 		start_chapter("ch7_supply_shock")
+	# saves that finished Chapter 9 before Chapters 10–12 existed were parked on the growth goal: carry on into Chapter 10
+	if St().get("chapter", "") == "ch9_clearing_crisis" and "ch9_clearing_crisis" in St()["chapters_done"] and not chapter_def("ch10_digital_rails").is_empty() \
+			and not "ch10_digital_rails" in St()["chapters_done"]:
+		St()["active"].erase("goal_growth")
+		start_chapter("ch10_digital_rails")
 	var changed := true
 	var guard := 0
 	while changed and guard < 20:
@@ -177,6 +182,15 @@ static func run_actions(actions: Array) -> void:
 					EventEngine.trigger(a["id"], a.get("ctx", {}))
 			"chapter":
 				start_chapter(a["id"])
+			"card":
+				# a title band across the screen (the story's ending cards)
+				UIRoot.show_chapter_card(fill(a.get("title", "")), fill(a.get("subtitle", "")), str(a.get("art", "")))
+			"rail_exploit":
+				# Chapter 11: the bridge is hit `delay_min` from now (or at once); no-op if it already was
+				if int(a.get("delay_min", 0)) > 0:
+					Sim.schedule(Clock.now() + int(a["delay_min"]), "rail.exploit", {})
+				else:
+					Rails.exploit()
 			"lift_cap":
 				Ecommerce.lift_cap()
 			"force_return":

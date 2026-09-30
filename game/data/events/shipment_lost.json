@@ -1,0 +1,59 @@
+{
+ "id": "shipment_lost",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "chapter_done:ch10_digital_rails"
+  ],
+  "chance": 0.006,
+  "cooldown_days": 30
+ },
+ "bind": {
+  "import_po": true
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "",
+  "title": "Shipment lost at sea",
+  "icon": "warning",
+  "lines": [
+   "{supplier} has bad news: the container with your {qty} × {product} ({total}) was lost at sea.",
+   "They can ship it again, {days} days later than planned."
+  ],
+  "tips": [
+   "escrow"
+  ]
+ },
+ "choices": [
+  {
+   "id": "reship",
+   "label": "Ask for a re-ship",
+   "detail": "{supplier} sends new stock at no extra cost. It arrives {days} days later than planned.",
+   "effects": [
+    {
+     "op": "shipment_lost",
+     "choice": "reship"
+    }
+   ],
+   "outcome": "The supplier will ship again. Expect it {days} days late."
+  },
+  {
+   "id": "refund",
+   "label": "Take the refund",
+   "detail": "Escrow orders only: the contract sends your {total} back and the order is cancelled. Paid another way? Then a re-ship is all there is.",
+   "tip": "escrow",
+   "requires": [
+    "ctx:escrow"
+   ],
+   "effects": [
+    {
+     "op": "shipment_lost",
+     "choice": "refund"
+    }
+   ],
+   "outcome": "The escrow contract returned your money. The fee is not refunded."
+  }
+ ]
+}

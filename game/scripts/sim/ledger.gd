@@ -5,17 +5,18 @@ extends RefCounted
 ##
 ## Accounts:
 ##   assets       cash, marketplace_balance, accounts_receivable, inventory, inventory_in_transit,
-##                goods_out, deposits, investments
+##                goods_out, deposits, investments, escrow_held (paid into an escrow contract, released on delivery),
+##                frozen_funds (paid through a rail whose bridge is frozen: in limbo until it reopens)
 ##   liabilities  accounts_payable
 ##   equity       equity
 ##   income       revenue, refunds (contra), other_income
 ##   costs        cogs, exp:<category>
 
-const EXPENSE_CATEGORIES := ["advertising", "shipping", "platform_fees", "packaging", "photography", "registration",
+const EXPENSE_CATEGORIES := ["advertising", "shipping", "platform_fees", "packaging", "photography", "registration", "compliance",
 	"rent_office", "coworking", "inventory_writeoff", "bank_fees", "late_fees", "rent_home", "living", "coffee", "transport",
 	"clothing", "dining", "penalties", "payroll", "recruiting", "interest", "servers", "rent_shop", "rent_warehouse", "fitout",
 	"fuel", "vehicle", "insurance", "other"]
-const OPEX_BUSINESS := ["advertising", "shipping", "platform_fees", "packaging", "photography", "registration",
+const OPEX_BUSINESS := ["advertising", "shipping", "platform_fees", "packaging", "photography", "registration", "compliance",
 	"rent_office", "coworking", "inventory_writeoff", "bank_fees", "late_fees", "penalties", "payroll", "recruiting", "interest",
 	"servers", "rent_shop", "rent_warehouse", "fitout", "fuel", "vehicle", "insurance", "other"]
 ## Rent on business premises, whatever the kind (office, shop, warehouse): one line on the month-end report.
@@ -23,7 +24,7 @@ const PREMISES_RENT := ["rent_office", "rent_shop", "rent_warehouse"]
 const PERSONAL := ["rent_home", "living", "coffee", "transport", "clothing", "dining"]
 ## How each expense category reads on a report (translated through the catalogue).
 const CATEGORY_NAMES := {"advertising": "Advertising", "shipping": "Shipping", "platform_fees": "Platform fees",
-	"packaging": "Packaging", "photography": "Photography", "registration": "Registration fees", "rent_office": "Office rent",
+	"packaging": "Packaging", "photography": "Photography", "registration": "Registration fees", "compliance": "Compliance", "rent_office": "Office rent",
 	"coworking": "Co-working", "inventory_writeoff": "Inventory write-off", "bank_fees": "Bank fees", "late_fees": "Late fees",
 	"rent_home": "Home rent", "living": "Living costs", "coffee": "Coffee", "transport": "Transport", "clothing": "Clothing",
 	"dining": "Dining", "penalties": "Penalties", "payroll": "Payroll", "recruiting": "Recruiting", "interest": "Interest",

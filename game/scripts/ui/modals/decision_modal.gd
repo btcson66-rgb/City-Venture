@@ -51,6 +51,10 @@ func build() -> void:
 		v.add_child(UIK.label(DataDB.npc(who).get("name", who.capitalize()), 8, Art.C_GOLD, true))
 	for line in pres.get("lines", []):
 		v.add_child(UIK.wrap(EventEngine.fill(str(line), inst["ctx"]), 8, Art.C_WHITE, 310))
+	# new ideas in this decision get a "!" badge with a plain-language card (data/help/glossary.json)
+	if outcome == "":
+		for tid in pres.get("tips", []):
+			v.add_child(UIK.label_tip(I18n.t(str(InfoTip.entry(str(tid)).get("title", tid))), str(tid), 7, Art.C_SKY))
 	body.add_child(UIK.sep())
 	if outcome != "":
 		body.add_child(UIK.wrap(outcome, 9, Art.C_SKY, 380))
@@ -63,7 +67,14 @@ func build() -> void:
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		b.disabled = not avail
 		b.name = "Choice_" + str(c["id"])
-		row.add_child(b)
+		if c.has("tip"):
+			var head := UIK.hbox(3)
+			b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			head.add_child(b)
+			head.add_child(UIK.tip(str(c["tip"])))
+			row.add_child(head)
+		else:
+			row.add_child(b)
 		if c.has("detail"):
 			var dl := UIK.wrap(EventEngine.fill(c["detail"], inst["ctx"]) + ("" if avail else I18n.t("  (not possible now)")), 7, Art.C_MUTED, 370)
 			var pad := MarginContainer.new()

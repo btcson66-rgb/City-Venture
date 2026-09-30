@@ -41,7 +41,8 @@
     120,
     216
    ],
-   "desc": "Your bank sends it through correspondent banks. Cheap, but in the Clearing Crisis it takes 5 to 9 days to land."
+   "desc": "Your bank sends it through correspondent banks. Cheap, but the money crosses several banks and takes days to land.",
+   "tip": "settlement_wire"
   },
   {
    "id": "letter_of_credit",
@@ -62,7 +63,8 @@
     "technical": "low",
     "counterparty": "bank",
     "regulatory": "low"
-   }
+   },
+   "tip": "letter_of_credit"
   },
   {
    "id": "stablecoin_settlement",
@@ -89,7 +91,35 @@
    ],
    "requires": "flag:exchange_account",
    "requires_text": "needs a verified exchange account (ask Lina Zhao at Nexus Bank)",
-   "desc": "A licensed exchange turns your dollars into digital dollars and sends them in minutes. You carry the platform's risk."
+   "desc": "A licensed exchange turns your dollars into digital dollars and sends them in minutes. You carry the platform's risk.",
+   "digital_rail": true,
+   "tip": "digital_dollars"
+  },
+  {
+   "id": "escrow",
+   "name": "Escrow on delivery (smart contract, simulated)",
+   "status": "active",
+   "from_year": 6,
+   "cross_border": true,
+   "digital_rail": true,
+   "escrow": true,
+   "fee_rate": 0.006,
+   "fixed_fee": 0.0,
+   "fee_min": 15.0,
+   "clear_hours": [
+    1,
+    2
+   ],
+   "requires": "flag:escrow_open",
+   "requires_text": "needs an escrow account (ask Lina Zhao at Nexus Bank)",
+   "tip": "escrow",
+   "risks": {
+    "technical": "medium",
+    "counterparty": "contract / bridge",
+    "regulatory": "evolving",
+    "operational": "wallet & key management"
+   },
+   "desc": "Your money is locked in a contract that pays the supplier only when the goods arrive. Refunded if they never do. Small fee, no wire delay."
   }
  ]
 }

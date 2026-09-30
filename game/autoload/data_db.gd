@@ -200,7 +200,8 @@ func validate() -> Array:
 	# kickoff §17: an event must change money, inventory or options
 	var impactful := ["cash", "purchase", "refund_order", "replace_order", "partial_refund", "refuse_return",
 		"inventory_delta", "supplier_price_mod", "create_contract_offer", "listing_mod", "ad_price_mod", "demand_mod",
-		"liquidate_inventory", "reduce_spending", "price_all_mod", "rush_order", "equity_investment"]
+		"liquidate_inventory", "reduce_spending", "price_all_mod", "rush_order", "equity_investment", "open_escrow", "rail_choice",
+		"shipment_lost", "acquisition"]
 	for eid in events:
 		var ok := false
 		for c in events[eid].get("choices", []):
