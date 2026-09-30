@@ -1,6 +1,6 @@
 # #24 防卡關交件證據
 
-分支：`codex/24-no-softlocks`；起始基底：`89e6ac0`，交件基底更新為 `d1fc3dc`（claude/exciting-bardeen-y71ixv）。Godot 4.5.1、Windows、OpenGL 相容渲染、1280×720、繁中。
+分支：`codex/24-no-softlocks`；起始基底：`89e6ac0`，交件基底更新為 `93deb2c`（claude/exciting-bardeen-y71ixv）。Godot 4.5.1、Windows、OpenGL 相容渲染、1280×720、繁中。
 
 ## 修正
 
@@ -15,14 +15,16 @@
 
 本批於 2026-09-30 開始，驗證延續至 2026-10-01；沿用開始日期的證據目錄。
 
+完整主線是在 `d1fc3dc` 基底上跑到 0 failures；交件時基底新增 `93deb2c` 的同一長決策修正，已同步。衝突保留本分支已完整驗證的固定 180px 捲動區，並採納基底三個以上選項時的較小圖片尺寸；同步後再跑全部單元測試與繁中補救截圖測試。故事、融資與付款程式沒有更動。
+
 逐項三問稽核表在 [AUDIT.md](AUDIT.md)，亦完整貼入 Draft PR。
 
 ## 驗證
 
-- `unit.log`：`226/226 tests passed in 14.3s`；沒有 SCRIPT ERROR / ERROR / FAIL。
+- `unit.log`：`226/226 tests passed in 16.3s`；沒有 SCRIPT ERROR / ERROR / FAIL。
 - `python tools/i18n_extract.py`：missing 0；Windows 來源路徑正規化後正確排除測試文字，已再產生三份 gettext catalog。
 - `python tools/wiki_check.py`：`wiki_check: OK (1613 assets, 191 data ids)`。
-- `recovery/walkthrough_result.json`：6 個補救情境、7 張截圖，`BOT FINISHED — 0 failure(s) · 18.4s real`；`recovery/english_audit.json`：0 英文缺漏。
+- `recovery/walkthrough_result.json`：6 個補救情境、7 張截圖，`BOT FINISHED — 0 failure(s) · 18.3s real`；`recovery/english_audit.json`：0 英文缺漏。
 - `endgame-check/`：獨立 QA 存檔、`--from=ch10` 快速檢查，`BOT FINISHED — 0 failure(s) · 404.7s real`。前九章使用既有測試 fixture，這份結果只驗證第 10–12 章，不代替完整 walkthrough。英文稽核 18 項為 PO／KYC 識別碼、公司與語言名稱；本次新增句子 0 項。
 - `full-walkthrough/`：`BOT FINISHED — 0 failure(s) · 2520.7s real`；從 New Game 完整執行，218 張原始截圖（repo 保留投資、決策結果、結局與讀檔畫面），1649 筆步驟紀錄，結尾確認 55/55 主線目標、帳務平衡及存檔讀回。
 - `full-walkthrough/english_audit.json`：54 項，已逐項核對，只有 Ben Tan／Hana Wu 人名、English 語言名、ShopLane／Lantern Books 品牌，以及 PO／AUR／KYC 識別文字。本次新增文字沒有漏翻，原始稽核未過濾或刪除。
