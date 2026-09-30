@@ -119,7 +119,12 @@ Contacts without an `appearance` (`"phone_only": true`) may set `"logo": "<id>"`
   }
 }
 ```
-`action` values form a closed vocabulary implemented by `scripts/world/actions.gd`: `open_company_os`, `sleep`, `change_outfit`, `clothing_shop`, `buy_item`, `look`, `read_news`, `business_board`, `pack_orders`, `dropoff_parcels`, `register_company`, `bank_counter`, `atm`, `lease_office`, `rent_desk`, `talk`, `metro`, `exit`.
+`action` values form a closed vocabulary implemented by `scripts/world/actions.gd`: `open_company_os`, `sleep`, `change_outfit`, `clothing_shop`, `buy_item`, `look`, `read_news`, `business_board`, `pack_orders`, `dropoff_parcels`, `register_company`, `bank_counter`, `atm`, `lease_office`, `lease_property`, `rent_desk`, `talk`, `metro`, `exit`.
+
+- `lease_property` opens `LeaseModal` for `params.property` (Pier 7's lettings desk). `params.unless_lease: <property>` hides an interactable once that lease is held; `params.requires: "lease:<property>"` locks one until it is (the packing bench and yard desk at Pier 7).
+- `pack_orders` takes `params.location` (a stock location: a property id). `open_company_os` takes `params.terminal` (`pier7` is the yard office desk).
+- A `talk` NPC dialogue entry may carry `action`: `lease_cafe`, `lease_office`, `buy_van` (opens `VanDealModal`), `dropoff_parcels`, ... run after the conversation.
+- Building keys beyond the above: `closed_reason` (text): the door never opens and the toast says why (`SceneRouter.building_open`); the Customs House has one, and still needs an `interior` so tools can load it. Interior `stock_display {location, x, y, cols, per_box?, max?}` draws stacks of boxes for the units at that location (one box per `per_box` units, default 10, at most `max`, default 20). Interior `staff_spots {role: [[x,y], ...]}` places employees of that role while the lease named by `interior.property` is held.
 
 - `buy_item` with `item: "coffee"` is the café flow. Any other `item` is a meal or purchase: `{item, name, price, minutes, category, flag?}`, paid from personal cash into `exp:<category>` (`dining` for Lantern Bistro).
 - `clothing_shop` opens the store's rails (`ClothingShopModal`) for the building it sits in. `{npc, first?}`: needs the clerk present, and plays the `first` conversation until `met_<npc>` is set.
@@ -155,7 +160,8 @@ Prop keys (districts and interiors): `sprite`, `x`, `y` (top-left of the design 
   "ped_outfits":["luxury_citywear","casual_jacket","casual_tee"]
 }
 ```
-`ped_outfits` (optional) is the pool passers-by dress from (Shopping Street leans to Luxury Citywear).
+`ped_outfits` (optional) is the pool passers-by dress from (Shopping Street leans to Luxury Citywear, Harbor to Logistics / Site).
+A `ground` entry may carry `fallback`: the tile to paint while `type` is not in `assets/tiles/atlas.json` yet (Harbor's `quay_concrete`, `quay_edge` and `water_harbor`). `exits` may be empty: Harbor is reached only by metro (M3).
 Building fronts, fillers and street dressing are laid out by `tools/gen_districts.py <district>` from real sprite widths.
 
 ### 1.10 City and Metro — `data/city/aurelia.json`
@@ -208,8 +214,11 @@ Dialogue:
 `{id, name, class: used_compact|sedan|suv|sports|luxury, price, running_cost_day, travel_time_factor, capacity, sprite}`
 
 ### 1.16 Properties — `data/properties/<id>.json`
-`{id, name, district, kind: home|office|coworking_desk|warehouse, monthly_rent, deposit_months, requires[], capacity{inventory_units, staff}}`
-The slice uses `riverside_studio` (home), `nexus_cowork_desk`, and `startup_hub_suite_2b` (small office).
+`{id, name, district, kind: home|office|shop|warehouse|coworking_desk, monthly_rent, deposit_months, building, requires[], requires_text, agent_line, blurb, capacity{inventory_units, staff}}`
+The slice uses `riverside_studio` (home), `nexus_cowork_desk`, and `startup_hub_suite_2b` (small office). `corner_cafe` is a `shop`
+(rent → `exp:rent_shop`); `pier7_warehouse` is a `warehouse` ($1,400/month, deposit 1 month, 5,000 units; rent →
+`exp:rent_warehouse`). A leased `warehouse` is a stock location (`Ecommerce.stock_locations()`), so purchase orders can be
+delivered to it and its packing bench packs its orders.
 
 ### 1.17 World economy — `data/world/years.json`
 `{years:[{year:1,name:"The Opportunity",interest_rate:0.025,shipping_index:1.0,events:[...]},{year:5,name:"Clearing Crisis",...}]}`
@@ -244,6 +253,31 @@ guided first venture runs) and keeps a ? button in its header. Company OS uses `
 `typing.json`: `{saas: {<idea_id>: [[line, ...], ...], _generic: [...]}, freelance: [[line, ...], ...]}`. Code and
 spreadsheet formulas stay in English, as they would really be typed.
 
+### 1.20 Logistics — `data/economy/logistics.json`
+Read by `Logistics` (`scripts/sim/logistics.gd`). Every number of the delivery business lives here.
+```json
+{"property":"pier7_warehouse",
+ "van":{"name","price":9800,"insurance_month":165,"resale":0.55,"capacity_parcels":40},
+ "fuel":{"l_per_km":0.14,"price_l":2.1,"era_sensitivity":0.5,"upkeep_per_km":0.07},
+ "own_van_shipping":{"km_per_parcel":4.5,"minutes_base":25,"minutes_per_parcel":12},
+ "runs":{"post_hour":7,"per_day":[2,4],"max_open":8,"max_active":3,"stops":[4,6],"base_pay":32,"pay_per_stop":20,
+         "score_pay":[0.9,0.2],"late_penalty":0.4,"cancel_after_hours":6,"speed_kmh":24,"load_minutes":30,"stop_minutes":12,
+         "kinds":[{"id":"rush","name","weight","by_hour","day":0,"pay_mult"}]},
+ "driver":{"start_hour":9,"score_base":0.66,"score_per_skill":0.04},
+ "clients":[{"name"}],
+ "map":{"size":[580,236],"km_per_px":0.045,"depot":{"name","x","y"},"river":[[x,y]...],"bridges":[[x,y]...]},
+ "places":[{"id","name","district","x","y"}]}
+```
+`fuel_cost_per_km = l_per_km × price_l × (1 + era_sensitivity × (shipping_index − 1))`. `map` is the schematic city the route
+minigame draws (and `minigames/route_map.png`, 580×236, replaces the drawn map when it exists: line `river`, `bridges` and `places`
+up with the picture). The river runs top-right to bottom-left (x is a function of y); a leg between the two banks goes via
+the bridge that makes it shortest. Route length in map pixels × `km_per_px` = kilometres. Run pay = (`base_pay` + `pay_per_stop` × stops) ×
+kind `pay_mult` × a 0.92–1.12 client factor, paid × (`score_pay[0]` + `score_pay[1]` × route score), less `late_penalty` when late.
+
+Staff role `driver` (`data/economy/staff.json`) uses the generic role keys `workplace` (property the role stands in),
+`work_days`, `work_hours`, `needs_lease` (property that must be leased) and `needs_flag` (a flag that must be set: `van_owned`), with
+`needs_text` as the reason shown.
+
 ---
 
 ## 2. Runtime state (save file)
@@ -274,6 +308,12 @@ data.ecommerce         {listings{id:{product, price, photo, photo_q (your own sh
                         supplier_mods[{supplier, product, mult, until}], counters{order_seq, po_seq}}
 data.contracts.<id>    {buyer, seller, product, qty, unit_price, total, delivery_due, payment_terms_days,
                         penalty_rate, quality_req, currency, settlement, status, history[]}
+data.logistics         {van{owned, bought, entity, ins_day, km}, jobs{id:{id, client, stops[place ids], kind, posted, by, pay, km_best,
+                        est_min, status: open|active|driving|..., accepted?, driver?, driver_stats?}}, history[{id, client, stops,
+                        pay, fuel, km, score, minutes, late, status: done|late|failed, t, who}] (last 40), seq, driver_day{staff id: day}}
+                        (created on first use; flags `van_owned`, `first_delivery_run`, `leased_pier7_warehouse`; stats `van_runs`,
+                        `van_runs_late`, `van_runs_failed`, `van_km`, `van_fuel_l`, `van_parcels`, `runs_accepted`, `vans_bought`;
+                        an order shipped by your own van has `ship{method:"own_van", cost, mode:"van", van_eta, eta}`)
 data.events            {queue[], active?, history[{id, t, choice}], cooldowns{id: until}}
 data.story             {chapter, active[], done[], flags{}}
 data.npcs.<id>         {met, relationship, convo_done[]}

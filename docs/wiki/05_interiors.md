@@ -183,7 +183,18 @@
 | `lantern_bistro` | Lantern Bistro | 22×14 | checker / brick | **`dining_table`** ×4、**`bar_counter`**、**`kitchen_pass`**、`hanging_light` ×4、`menu_board`、`plant` | 已實作：點招牌套餐 $22（50 分鐘，計入「餐飲」）· 規劃：和 NPC 約飯 | 用餐客人（路人）；服務生規劃中 |
 | `popup_unit` | Pop-up Unit 5 | 16×11 | concrete / white_modern | 空房 → 租下後：**`retail_shelf`**、**`checkout_counter`**、`box` | 已實作：看租約公告 · 規劃：開實體店（P3） | — |
 
-### Harbor（P1–P2）
+### Harbor（已實作 · 2026-09-30，新家具暫代）
+
+四間都有室內場景（資料在 `data/buildings/`）。粗體的新家具還沒交，資料用 `fallback` 暫代，沒有合理暫代的家具（`loading_dock_door`、`forklift_parked`）不畫，交件後自動出現。
+
+| id | 名稱 | 大小（格） | 地板 / 牆 | 家具（暫代） | 互動 | NPC |
+|----|------|-----------|-----------|--------------|------|-----|
+| `pier7_warehouse` | Pier 7 Warehouse | 36×18 | concrete / concrete_wall | `pallet_rack`（暫代 `parcel_shelf`）×12、`packing_bench_large`（暫代 `packing_table`）×2、`desk_laptop`、`filing_cabinet`、`cork_board`、`box`；`loading_dock_door`、`forklift_parked` 等交件 | 櫃台租倉位（`lease_property`，租下後消失）· 場務室辦公桌（Company OS，需租約）· 打包檯（`pack_orders`，`location: pier7_warehouse`，需租約）· 看裝卸平台、看貨架。庫存箱堆隨庫存變多（每 100 件一箱，最多 40 箱，`stock_display`） | 貨車司機（工作日 9–17 點，需租約） |
+| `dockside_motors` | Dockside Motors | 16×11 | concrete / brick | `sales_desk`（暫代 `checkout_counter`）、`key_board`（暫代 `cork_board`）、`filing_cabinet`、`chair` ×2、`water_cooler` | 看二手貨車價目表 · 和 Sam 說話買貨車（`talk` → `buy_van` 打開 `VanDealModal`） | Sam Okoro（週一到週六 08–18） |
+| `harbor_point_fitness` | Harbor Point Fitness | 18×11 | wood_dark / white_modern | `checkout_counter`、`lockers`、`tv`、`mirror_full`、`bench_civic`、`rug` ×2、`water_cooler`；`treadmill`、`weight_rack`、`yoga_mat`、`reception_desk`、`rubber_floor` 等交件 | 看櫃台（Rosa 不在場，誠實說明還沒賣會員）· 看課表 | 無（Rosa 只用手機聯絡） |
+| `customs_house` | 海關大樓 | 14×9 | marble / plaster_warm | `civic_counter`、`queue_barrier`、`seal` | 門是關的（`closed_reason`），進不來；室內只是讓工具載得起來 | — |
+
+設定稿（下表，含 P2 的內容）：
 
 | id | 名稱 | 大小（格） | 地板 / 牆 | 家具 | 互動 | NPC |
 |----|------|-----------|-----------|------|------|-----|
