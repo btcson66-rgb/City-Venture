@@ -2,9 +2,27 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
 ============================================================
 
 謝謝你幫忙測試！這是一款在現代城市裡創業、經營公司的像素風模擬 RPG。
-目前可以完整玩到第一章到第六章（開始電商、賺到第一塊錢、登記公司、月結、聘員工、大合約、現金危機）。
+主線第 1 到第 12 章全部可以玩完（開始電商、登記公司、聘員工、大合約、現金危機、供應衝擊、綠色轉型、跨境結算、數位支付、跨鏈橋事件、監管與收購提案），之後進入自由模式。
 
-0.1.7-test7 新增：
+0.1.8-test8 新增（依你的第四次試玩回饋）：
+  ・電商進貨畫面按「+」「−」調數量時，畫面不會再跳回最上面（所有會重畫的清單都會停在原本的位置）。
+  ・劇情不會再卡在「確認 Crestline 的合約」：如果你議價後對方放棄了，這一步會算完成、繼續往下走。
+    你現在的存檔讀進來也會自動修好。
+  ・第 7 章「在供應衝擊下結一個有獲利的月」：連續兩個月虧損也會往下走（Maya 會跟你說明），不會永遠卡住。
+  ・存檔：新版本會自動補上舊存檔沒有的資料，所以舊存檔可以直接接著玩。
+  ・新街區「港區」（Harbor，搭捷運 M3 從河濱過去）和物流生意：
+    - Dockside Motors 找 Sam 買二手貨車；Pier 7 倉庫可以租來當第二個庫存點（有打包桌）。
+    - 有貨車就能自己送貨（只付油錢），也能接在地商家的送貨單，玩「排路線」小遊戲：路線越短越賺。
+    - 可以僱司機，平日自動跑一趟。
+  ・第 10–12 章：
+    - 第 10 章 Digital Rails：貨到才放款的託管付款。
+    - 第 11 章 The Other Side of Trust：數位美元的跨鏈橋出事、資金被凍結，要選等、改走電匯或借過渡貸款。
+    - 第 12 章 Regulation & Scale：大額付款審核、進口執照、合規成本，還有 Victor Hale 依你公司真實數字開出的收購提案（接受、還價或拒絕）。主線到這裡結束，之後自由模式。
+  ・「！」說明小方塊：新概念旁邊會有一個金色的「！」，滑鼠移上去（或點一下）就會說明「這是什麼、對你的生意有什麼用」。
+    看過之後會變成灰藍色。咖啡店、港區、第 10–12 章都有，其他畫面陸續補上。
+  ・美術：Codex 交了老城區和港區的正式建築、地磚、街道物件和家具，還有 Lina、Okafor、Sam 等人的專屬圖、第 7–12 章的章節卡和事件插圖。
+
+0.1.7-test7 新增（這一版一起包含）：
   ・新街區「老城區」（Old Town）開放，可以在這裡開你自己的咖啡店：
     - 怎麼去：任何街區的捷運入口都能搭到「老城區」（車資 $2.80，M5 環線的最後一站），
       也可以從購物街一路往西走到底。
@@ -20,8 +38,6 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
   ・新聞（Aurelia Daily）的標題和年代名稱現在有中文翻譯。
   ・我們的自動測試機器人現在用中文從第 1 章一路玩到第 9 章，再接著玩老城咖啡店，
     第 7 到第 9 章不再卡在等 Ken 來電。
-  ・已知：老城區的建築外觀、地磚、街道物件和店裡家具都還是暫代美術（借用現有的圖），
-    正式圖畫好後會換上。
 
 0.1.7 新增（依你的第三次試玩回饋）：
   ・新手教學不會再卡住等貨：買了貨之後如果還在路上，幾秒後就會提早送到（供應商會傳訊息說貨車剛好在附近）。
@@ -184,11 +200,22 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
 ============================================================
 CITY VENTURE — Test build {VERSION} ({DATE})  ·  English
 ============================================================
-Thanks for testing! This build plays Chapters 1–6: start an online shop, earn your first dollar, register a
-company, close a month, hire staff, land Crestline's big contract and survive the cash crunch. Also playable:
-part-time jobs, freelance consulting and a SaaS product.
+Thanks for testing! This build plays the whole main story, Chapters 1–12, then free play. Also playable: part-time
+jobs, freelance consulting, a SaaS product, your own café in Old Town and a logistics business at the Harbor.
 
-NEW IN 0.1.7-test7: Old Town is open, and you can run your own café there. Getting there: the metro from any district
+NEW IN 0.1.8-test8 (from your fourth playtest): pressing +/- on a stock order no longer jumps the list back to the top
+(every rebuilt list keeps its place) · the story no longer waits on Crestline's offer after the buyer walks away from a
+counter-offer (your current save is repaired when it loads) · Chapter 7 moves on after two losing months, with an
+honest message, instead of waiting forever · saves from earlier builds keep working: missing data is filled in on load
+· the Harbor (metro M3 from Riverside) and a logistics business: buy a used van from Sam at Dockside Motors, lease a
+bay at Pier 7 as a second stockroom, deliver your own parcels for the cost of fuel, or take local delivery runs and
+plan the route in a minigame (shorter is more profit); hire a driver · Chapters 10 Digital Rails (escrow that pays on
+delivery), 11 The Other Side of Trust (a bridge exploit freezes the digital-dollar rail) and 12 Regulation & Scale (KYC
+on large payments, the import licence, compliance costs, and Victor Hale's offer priced from your own numbers) · gold
+"!" badges explain new ideas on hover or click · Codex's art for Old Town and the Harbor, NPC sheets for Lina, Mr. Okafor
+and Sam, and chapter cards and event pictures for Chapters 7–12.
+
+ALSO IN THIS BUILD (0.1.7-test7): Old Town is open, and you can run your own café there. Getting there: the metro from any district
 (Loop Line M5, $2.80), or walk west from Shopping Street. Register a company first, then ask Mr. Okafor at Okafor Lettings
 (Mon-Sat 9-18) for the corner unit ($1,900/month, two months' deposit). At the till inside, Company OS → Café: fit it out
 ($5,800, one day), order coffee supplies from Old Town Roasters (delivered 6 AM next day), set the daily pastry order and
@@ -197,8 +224,7 @@ someone has to be behind the counter, so hire a Barista in the People tab or pre
 minigame, 2 hours; good service lifts the rating). The rent is due whether anyone buys a coffee or not; watch the star
 rating, walk-outs, stock-outs and binned pastries. Studio 1A (the flat) is viewing only for now. Also: news headlines and
 era names are translated in Chinese, and our walkthrough bot now plays Chapters 1-9 in Chinese and then the café without
-stalling on Ken's call in Chapter 7. Known: Old Town's facades, cobbles, street props and café furniture are stand-in
-art (borrowed from existing pieces) until the real art lands.
+stalling on Ken's call in Chapter 7.
 
 NEW IN 0.1.7: the first venture never waits on a truck (late stock turns up early, also in continued saves) · you can
 sleep after a shift, and from 4 PM on your first day · time keeps running while the computer or phone is open (the pause
