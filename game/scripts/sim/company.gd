@@ -99,7 +99,7 @@ static func open_business_account(capital: float) -> Dictionary:
 
 ## Move money between personal and company accounts later on.
 static func transfer(from_ent: String, to_ent: String, amount: float) -> Dictionary:
-	if Acquisition.sold() and (from_ent != "player" or to_ent != "player"):
+	if Acquisition.sold():
 		return {"ok": false, "error": "The company belongs to Hale Group now: no money moves between it and you."}
 	if amount <= 0.0 or Ledger.cash(from_ent) < amount:
 		return {"ok": false, "error": "Not enough cash."}

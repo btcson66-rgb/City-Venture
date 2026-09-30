@@ -24,7 +24,7 @@ static func quote() -> Dictionary:
 	var ent := GameState.business_entity()
 	var days := int(c.get("window_days", 90))
 	var year_factor := 365.0 / float(days)
-	var m := MonthClose.compute(ent, Clock.now() - days * Clock.DAY, Clock.now())
+	var m := MonthClose.compute(ent, Clock.now() - days * Clock.DAY, Clock.now() + 1)
 	var profit_year := (float(m["gross_profit"]) - float(m["opex_total"])) * year_factor   # what the business earns, not one-off grants
 	var revenue_year := float(m["net_revenue"]) * year_factor
 	var by_profit := maxf(0.0, profit_year) * float(c.get("profit_multiple", 3.5))
@@ -118,7 +118,7 @@ static func _sell(now_total: float, later_total: float, ctx: Dictionary) -> void
 
 static func _revenue_year() -> float:
 	var days := int(cfg().get("window_days", 90))
-	var m := MonthClose.compute(GameState.business_entity(), Clock.now() - days * Clock.DAY, Clock.now())
+	var m := MonthClose.compute(GameState.business_entity(), Clock.now() - days * Clock.DAY, Clock.now() + 1)
 	return float(m["net_revenue"]) * 365.0 / float(days)
 
 

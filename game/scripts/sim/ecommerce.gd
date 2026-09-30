@@ -125,10 +125,11 @@ static func buy(supplier_id: String, product_id: String, qty: int, location := "
 		po["status"] = "awaiting_payment"
 		po["settlement"] = {"method": settle, "fee": settle_fee, "clears": clears}
 		if not kyc.is_empty():
-			# Year 8: a large payment waits for the KYC check as well as the rail
+			# Year 8: a large payment goes through the KYC check first, then over the rail
+			var kyc_until := Clock.now() + int(kyc["hours"]) * 60
 			clears += int(kyc["hours"]) * 60
 			po["settlement"]["clears"] = clears
-			po["settlement"]["kyc_until"] = clears
+			po["settlement"]["kyc_until"] = kyc_until
 			po["settlement"]["kyc"] = true
 			Ledger.expense(entity, "compliance", kyc_fee, I18n.t("KYC check — %s") % po_id, {"type": "po", "id": po_id})
 			GameState.inc_stat("kyc_checks")
@@ -245,7 +246,7 @@ static func switch_settlement(po_id: String, method: String) -> Dictionary:
 	if why != "":
 		return {"ok": false, "error": why}
 	var st: Dictionary = po["settlement"]
-	var clears := maxi(Clock.now() + settlement_hours(method) * 60, int(st.get("kyc_until", 0)))   # a KYC check still has to finish
+	var clears := maxi(Clock.now(), int(st.get("kyc_until", 0))) + settlement_hours(method) * 60   # a KYC check still has to finish first
 	if clears >= int(st["clears"]):
 		return {"ok": false, "error": "That wouldn't be any faster."}
 	var fee := settlement_fee(method, float(po["total"]))
