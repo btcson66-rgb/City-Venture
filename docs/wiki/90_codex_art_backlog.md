@@ -585,6 +585,63 @@ S3 的街景三項需要程式接線（依年代顯示），交圖後由 Claude 
 
 規格會寫在這一節。**不要用任何真實加密貨幣的標誌或名稱**。
 
+## 第六輪：老城區、港區、咖啡店與物流、第 10–12 章卡（2026-09-30，Claude 線）
+
+Claude 線接下來要開放兩個街區和兩個新產業：
+
+- **老城區**（`old_town`）：租金便宜，玩家可以在這裡開自己的咖啡店，也就是新產業「咖啡／餐飲」；
+- **港區**（`harbor`）：第 7 章的港口、第 9 章的進口都在這裡。玩家可以租 Pier 7 倉庫當第二個庫存點，也可以買一台二手貨車，做新產業「物流」。
+
+程式會照 [03 街區](03_districts.md) 的設定稿排版。所有圖都**照現有尺寸和 `world_detail/` 高解析規則**交；沒有圖的地方，程式會先用現有素材暫代。
+
+優先順序：**S1–S3（上一節）→ B3 老城 → B2 港區 → C10**。
+
+### B3 老城區（咖啡店產業）
+
+| 類型 | 檔案 | 說明 |
+|------|------|------|
+| 可進入立面 + `_lights` | `buildings/corner_cafe_unit` | **玩家的咖啡店**。一樓小店面，大窗、遮陽棚、門口兩張小圓桌。招牌板留空，由程式疊玩家取的店名（和 Suite 2B 一樣） |
+| | `buildings/old_town_studio` | 老城套房：三層紅磚樓，一樓門口有信箱。最便宜的住處 |
+| | `buildings/okafor_lettings` | Okafor 租屋行：窄門面，櫥窗貼滿物件照片（無字） |
+| 填充立面 + `_lights` | `buildings/rowhouse_brick`、`buildings/arcade_arches`、`buildings/clock_tower` | 紅磚連棟屋、拱廊、鐘樓（地標，最高） |
+| 地磚 | `tiles/atlas.png` 加 `cobble_a`、`cobble_b` | 16×16 石板路，兩種變化 |
+| 街道物件 | `props/mural_wall`、`props/ivy_trellis`、`props/old_lamp`（加 `_lights`）、`props/bookstall`、`props/cafe_chairs_bistro` | 壁畫牆不要有字 |
+| 室內 | `corner_cafe`：`interiors/cafe_counter_small`、`interiors/espresso_machine_pro`、`interiors/pastry_case_small`、`interiors/menu_board_blank`（程式疊菜單字）、`interiors/cafe_table_round`、`interiors/cafe_stool` | 約 30×16 格的小店，吧台在後牆，4 張小桌 |
+| | `old_town_studio`：`interiors/bed_single`、`interiors/kitchenette`、`interiors/radiator` | 比河濱大樓更小更舊 |
+| | `okafor_lettings`：`interiors/listing_board`（貼滿照片的軟木板，無字）、`interiors/old_desk` | 一張桌子、一面牆的物件照片 |
+| NPC | `characters/npc_okafor`、`portraits/npc_okafor`（加 `world_detail`） | Mr. Okafor：六十多歲的房東，灰白短髮、背心、老花眼鏡、很和善 |
+| 地點卡 | `cards/old_town`、`cards/corner_cafe_unit`、`cards/old_town_studio`、`cards/okafor_lettings` | 192×108 |
+| 天際線（選配） | `backdrops/skyline_old_town_day`、`_night` | 鐘樓和紅磚屋頂 |
+
+### B2 港區（物流產業）
+
+| 類型 | 檔案 | 說明 |
+|------|------|------|
+| 可進入立面 + `_lights` | `buildings/pier7_warehouse` | Pier 7 倉庫：大鐵捲門、裝卸平台、門口停棧板。可以租來放庫存 |
+| | `buildings/dockside_motors` | Dockside Motors 二手貨車行：小辦公室加一片停車場，停兩台舊貨車。**玩家在這裡買第一台貨車** |
+| | `buildings/harbor_point_fitness` | Rosa 的健身房（現在只在手機出現） |
+| | `buildings/customs_house` | 海關大樓（第 9、12 章會用到，先不能進入） |
+| 填充立面 + `_lights` | `buildings/warehouse_shed`、`buildings/cold_store`、`buildings/container_stack` | 倉庫棚、冷凍倉、貨櫃堆 |
+| 背景 | `props/crane_gantry`（高，剪影）、`backdrops/skyline_harbor_day`、`_night` | 岸邊吊車和海面上的貨輪 |
+| 地磚 | `tiles/atlas.png` 加 `quay_edge`、`quay_concrete`、`water_harbor` | 岸壁、碼頭水泥地、港區海水（比河面深） |
+| 街道物件 | `props/container_red`、`_blue`、`_green`、`props/pallet_stack`、`props/crate`、`props/mooring_bollard`、`props/rope_coil`、`props/life_ring`、`props/forklift`、`props/harbor_lamp`（加 `_lights`） | |
+| 室內 | `pier7_warehouse`：`interiors/pallet_rack`（高貨架，放紙箱）、`interiors/loading_dock_door`、`interiors/forklift_parked`、`interiors/packing_bench_large` | 約 36×18 格，貨架成排 |
+| | `dockside_motors`：`interiors/sales_desk`、`interiors/key_board`（掛鑰匙的板子） | 小辦公室 |
+| 車輛 | `vehicles/van_player_side_body`、`_detail`（加 `_front`、`_back`） | **玩家的貨車**：和現有 `van_side` 同尺寸，白色車身、側面留一塊空白讓程式疊公司名 |
+| 小遊戲 | `minigames/route_map.png` | 580×236，俯視的簡化城市地圖（河、主要道路、各區色塊），給「排送貨路線」小遊戲當底圖。不要有字 |
+| NPC | `characters/npc_rosa`、`npc_ines`、`npc_sam`（加頭像和 `world_detail`） | Rosa Lim（健身房老闆，運動外套）、Ines Duarte（海關，制服）、Sam Okoro（貨車行老闆，工作服、手上有機油） |
+| 地點卡 | `cards/harbor`、`cards/pier7_warehouse`、`cards/dockside_motors` | 192×108 |
+
+### C10 第 10–12 章卡
+
+| 檔案 | 尺寸 | 內容 |
+|------|------|------|
+| `backdrops/chapter_10.png` | 640×360 | 數位軌道：抽象的光軌穿過夜晚的城市（**不用任何加密貨幣標誌**） |
+| `backdrops/chapter_11.png` | 640×360 | 信任的另一面：一座斷掉的橋（比喻），前景一台手機跳出新聞快報 |
+| `backdrops/chapter_12.png` | 640×360 | 監管與規模：金融區頂樓會議室，長桌、文件，窗外是世界地圖投影 |
+| `events/rail_frozen.png` | 160×90 | 付款畫面上一個被鎖住的圖示（第 11 章） |
+| `events/acquisition_offer.png` | 160×90 | 會議桌上的收購意向書和兩支筆（第 12 章） |
+
 ## 程式接線清單
 
 以下是**光交圖不夠**、需要改程式才會出現在遊戲裡的項目。Claude 線負責。✅ 表示已接好：檔案放進去就會出現。
