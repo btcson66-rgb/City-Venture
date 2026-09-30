@@ -542,13 +542,13 @@ orphan    world_map 左下角 (50,236)–(145,254) 有一塊補丁，上面沒�
 
 | 檔案 | 尺寸 | 內容 | 目前 |
 |------|------|------|------|
-| `backdrops/chapter_7.png` | 640×360 | 供應衝擊：港外排隊的貨櫃船，前景是空了一半的貨架（無字） | 沒有圖，只顯示章名 |
-| `backdrops/chapter_8.png` | 640×360 | 綠色轉型：屋頂的太陽能板和城市天際線，樓下一台電動貨車在充電 | 同上 |
-| `backdrops/chapter_9.png` | 640×360 | 結算危機：銀行大廳排隊的人，牆上螢幕是「處理中」的沙漏圖示（無字） | 同上 |
-| `characters/npc_lina.png`（加 `_sit`） | 128×144（4×3 格） | Lina Zhao，外型照 [07 角色](07_characters.md) 的設定：心形臉、黑色長髮、黑色高領、城市精品外套 | 分層組合暫代 |
-| `portraits/npc_lina.png` | 256×64（4 表情） | 同上。表情：平常、微笑、思考、驚訝 | 分層組合暫代 |
-| `world_detail/characters/npc_lina.png`、`_sit` | 512×576 | 上面兩張的高解析版 | — |
-| `world_detail/portraits/npc_lina.png` | 高解析 4 格 | 同上 | — |
+| `backdrops/chapter_7.png` | 640×360 | 供應衝擊：港外排隊的貨櫃船，前景是空了一半的貨架（無字） | ✅ S1 美術完成；原尺寸與 4× 已交 |
+| `backdrops/chapter_8.png` | 640×360 | 綠色轉型：屋頂的太陽能板和城市天際線，樓下一台電動貨車在充電 | ✅ S1 美術完成；原尺寸與 4× 已交 |
+| `backdrops/chapter_9.png` | 640×360 | 結算危機：銀行大廳排隊的人，牆上螢幕是「處理中」的沙漏圖示（無字） | ✅ S1 美術完成；原尺寸與 4× 已交 |
+| `characters/npc_lina.png`（加 `_sit`） | 128×144（4×3 格） | Lina Zhao，外型照 [07 角色](07_characters.md) 的設定：心形臉、黑色長髮、黑色高領、城市精品外套 | ✅ S1 美術完成；三向站姿與坐姿 |
+| `portraits/npc_lina.png` | 256×64（4 表情） | 同上。表情：平常、微笑、思考、驚訝 | ✅ S1 美術完成；四表情 |
+| `world_detail/characters/npc_lina.png`、`world_detail/characters/npc_lina_sit.png` | 512×576 | 上面兩張的高解析版 | ✅ S1 美術完成 |
+| `world_detail/portraits/npc_lina.png` | 高解析 4 格 | 同上 | ✅ S1 美術完成 |
 
 Lina 坐在 Nexus Bank 右下角新加的辦公桌（`exec_desk` 在 x 330, y 190，椅子 x 354, y 170），平日 10–16 點，第 5 年起才出現。
 
