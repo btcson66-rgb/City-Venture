@@ -84,6 +84,12 @@ func _businesses() -> void:
 				det.add_child(UIK.label(I18n.t("✓ You're building %s.") % str(Saas.idea().get("name", "")), 9, Art.C_GREEN, true))
 			else:
 				det.add_child(UIK.label("Start from any laptop: Company OS → SaaS.", 8, Art.C_GOLD, true))
+		"cafe":
+			det.add_child(UIK.wrap("Rent the corner unit in Old Town from Mr. Okafor (Okafor Lettings), fit it out, get the food licence at City Hall, and open. Set the menu, keep coffee in stock, order pastries, and put someone behind the counter: a barista, or you.", 8, Art.C_WHITE, 300))
+			if Cafe.leased():
+				det.add_child(UIK.label(I18n.t("✓ You run %s.") % Cafe.display_name(), 9, Art.C_GREEN, true))
+			else:
+				det.add_child(UIK.label("Old Town: metro (Loop Line), or walk west from Shopping Street.", 8, Art.C_GOLD, true))
 		_:
 			det.add_child(UIK.wrap(I18n.t("Not in this build. %s is planned for %s — it will play differently, not just a new icon.") % [I18n.t(d["name"]), "P1–P3" if d["tier"] == "p0" else "a later expansion"], 8, Art.C_GOLD, 300))
 

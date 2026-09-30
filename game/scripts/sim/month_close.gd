@@ -40,8 +40,8 @@ static func compute(entity: String, t0: int, t1: int) -> Dictionary:
 		"revenue": revenue, "refunds": refunds, "net_revenue": net_rev, "cogs": cogs, "gross_profit": net_rev - cogs,
 		"opex": opex, "opex_total": opex_total,
 		"advertising": float(opex.get("advertising", 0.0)), "shipping": float(opex.get("shipping", 0.0)),
-		"rent": float(opex.get("rent_office", 0.0)) + float(personal.get("rent_home", 0.0)),
-		"rent_office": float(opex.get("rent_office", 0.0)), "rent_home": float(personal.get("rent_home", 0.0)),
+		"rent": _premises(opex) + float(personal.get("rent_home", 0.0)),
+		"rent_office": _premises(opex), "rent_home": float(personal.get("rent_home", 0.0)),
 		"personal": personal, "personal_total": personal_total, "other_income": other_income,
 		"business_profit": business_profit, "profit": business_profit + wages - personal_total, "wages": wages,
 		"cash_open": cash_open, "cash_close": cash_close, "cash_change": cash_close - cash_open, "owner_moves": owner_moves,
@@ -49,6 +49,13 @@ static func compute(entity: String, t0: int, t1: int) -> Dictionary:
 		"ap": -Ledger.balance_at(entity, "accounts_payable", t1),
 		"inventory": Ledger.balance_at(entity, "inventory", t1) + Ledger.balance_at(entity, "inventory_in_transit", t1) + Ledger.balance_at(entity, "goods_out", t1),
 	}
+
+
+static func _premises(opex: Dictionary) -> float:
+	var r := 0.0
+	for k in Ledger.PREMISES_RENT:
+		r += float(opex.get(k, 0.0))
+	return r
 
 
 static func run(year: int, month: int) -> Dictionary:

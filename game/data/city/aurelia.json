@@ -223,13 +223,13 @@
   {
    "id": "old_town",
    "name": "Old Town",
-   "status": "planned",
+   "status": "active",
    "map_pos": [
     228,
     118
    ],
    "icon": "home",
-   "blurb": "Low rents, old shops, art.",
+   "blurb": "Low rents, old shops, cobbles and a clock tower. Open a café on the corner.",
    "board": {
     "label": [
      214,
@@ -341,7 +341,8 @@
      "startup_hub",
      "civic_center",
      "luxury_heights",
-     "shopping_street"
+     "shopping_street",
+     "old_town"
     ]
    }
   ],
@@ -355,7 +356,12 @@
    "shopping_street>civic_center": 7,
    "shopping_street>startup_hub": 11,
    "shopping_street>financial": 9,
-   "shopping_street>riverside": 15
+   "shopping_street>riverside": 15,
+   "old_town>shopping_street": 5,
+   "old_town>civic_center": 8,
+   "old_town>startup_hub": 13,
+   "old_town>financial": 11,
+   "old_town>riverside": 16
   }
  },
  "board_extra": {

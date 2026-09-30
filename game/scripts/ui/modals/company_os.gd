@@ -5,7 +5,7 @@ extends Modal
 
 const TABS := [["overview", "Overview", "company"], ["finance", "Finance", "finance"], ["sales", "Sales", "orders"],
 	["operations", "Operations", "parcel"], ["inventory", "Inventory", "inventory"], ["people", "People", "people"],
-	["contracts", "Contracts", "contracts"], ["freelance", "Freelance", "tasks"], ["saas", "SaaS", "laptop"]]
+	["contracts", "Contracts", "contracts"], ["freelance", "Freelance", "tasks"], ["saas", "SaaS", "laptop"], ["cafe", "Café", "coffee"]]
 const PLANNED := [["Property", "home"], ["International", "world"], ["Reports", "tasks"]]
 
 var terminal := "laptop"
@@ -42,6 +42,9 @@ func _init(term: String) -> void:
 	title_text = "COMPANY OS"
 	icon_name = "laptop"
 	help_key = "os_overview"
+	if term == "cafe_till":
+		tab = "cafe"
+		help_key = "os_cafe"
 
 
 var _clock_label: Label
@@ -65,7 +68,7 @@ func _tick_clock() -> void:
 
 func build() -> void:
 	var where: String = {"home_laptop": "Laptop · Riverside Tower 7C", "cowork": "Hot desk · Nexus Co-work", "office": "Desk · Suite 2B",
-		"cafe": "Laptop · café table"}.get(terminal, terminal)
+		"cafe": "Laptop · café table", "cafe_till": "Till · your café"}.get(terminal, terminal)
 	var top := UIK.hbox(6)
 	body.add_child(top)
 	top.add_child(UIK.title(GameState.business_display_name(), 11, Art.C_GOLD))
@@ -80,6 +83,8 @@ func build() -> void:
 	nav.custom_minimum_size = Vector2(96, 0)
 	row.add_child(nav)
 	for t in TABS:
+		if t[0] == "cafe" and not Cafe.leased():
+			continue   # appears once you lease the café unit in Old Town
 		var b := UIK.button(t[1], _set_tab.bind(t[0]), "tab_active" if tab == t[0] else "tab")
 		b.icon = Art.icon(t[2])
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
@@ -1058,3 +1063,152 @@ func _tab_saas() -> void:
 	content.add_child(cb2)
 	content.add_child(UIK.wrap("Cheaper brings more signups; features and support keep people subscribed. Servers cost more as you grow.", 7, Art.C_SKY, 480))
 
+
+
+# ============================================================== CAFÉ
+func _tab_cafe() -> void:
+	var s := Cafe.S()
+	var head := UIK.hbox(6)
+	content.add_child(head)
+	head.add_child(UIK.title(Cafe.display_name(), 11, Art.C_GOLD))
+	head.add_child(UIK.label(I18n.t("Lantern Row, Old Town · open Mon–Sat 7:00–17:00"), 7, Art.C_DIM))
+	var why := Cafe.open_block()
+	if why != "":
+		_section("Before the first customer")
+		_cafe_step("Lease the corner unit", Cafe.leased(), "")
+		if Cafe.fitted():
+			_cafe_step("Fit out: espresso machine, counter, tables", true, "")
+		elif Cafe.fitting():
+			_cafe_step("Fit out: espresso machine, counter, tables", false, I18n.t("Fitters at work until %s") % Clock.fmt_short(int(s["fit_ready"])))
+		else:
+			var fb := _cafe_step("Fit out: espresso machine, counter, tables", false, "")
+			var b := UIK.button(I18n.t("Fit out (%s)") % Fmt.money0(float(Cafe.cfg().get("fitout_cost", 5800))), func():
+				var r := Cafe.fit_out()
+				if not r["ok"]:
+					UIRoot.toast(I18n.t(str(r["error"])), "warn", "coffee")
+				else:
+					UIRoot.toast(I18n.t("The fitters start tonight. Ready %s.") % Clock.fmt_short(int(r["ready"])), "good", "coffee")
+				rebuild(), "primary")
+			b.name = "CafeFitOut"
+			fb.add_child(b)
+		var ptxt := ""
+		if Cafe.permit_pending():
+			ptxt = I18n.t("City Hall is processing it (ready %s)") % Clock.fmt_short(int(s["permit_ready"]))
+		elif not Cafe.permitted():
+			ptxt = I18n.t("Apply at City Hall → Permits (%s)") % Fmt.money0(float(Cafe.cfg().get("permit_fee", 280)))
+		_cafe_step("Food handling licence", Cafe.permitted(), ptxt)
+	else:
+		var g := GridContainer.new()
+		g.columns = 4
+		g.add_theme_constant_override("h_separation", 4)
+		content.add_child(g)
+		var td: Dictionary = s["today"] if int(s["today"].get("d", -1)) == Clock.day_index() else {}
+		_kpi(g, I18n.t("CUSTOMERS TODAY"), str(int(td.get("served", 0))), Art.C_WHITE, I18n.t("%d last 7 days") % int(Cafe.last_days(7, "served")))
+		_kpi(g, I18n.t("TILL TODAY"), Fmt.money0(float(td.get("rev", 0.0))), Art.C_GREEN, I18n.t("%s last 7 days") % Fmt.money0(Cafe.last_days(7, "rev")))
+		_kpi(g, I18n.t("RATING"), "★ %.1f" % float(s["rating"]), Art.C_GOLD, I18n.t("out of 5"))
+		_kpi(g, I18n.t("SUPPLIES"), I18n.t("%d cups") % int(s["supplies"]), Art.C_WHITE if int(s["supplies"]) > 60 else Art.C_RED,
+			I18n.t("+%d arriving") % int(s["incoming"]) if int(s["incoming"]) > 0 else "")
+		var nb := Cafe.baristas_at(Clock.now()).size()
+		var state := I18n.t("Open now") if Cafe.is_open_now() else I18n.t("Closed now")
+		content.add_child(UIK.label(state + "  ·  " + I18n.t("behind the counter: %d barista(s)") % nb, 7, Art.C_SKY, true))
+		content.add_child(UIK.label(I18n.t("At these prices: about %d customers on a weekday. Each barista makes ~%d cups an hour.") % [int(round(Cafe.expected_day_demand())),
+			int(Cafe.cfg().get("barista_cups_hour", 14))], 7, Art.C_MUTED))
+	# counter staff
+	if Staff.count("barista") == 0:
+		content.add_child(UIK.wrap("Nobody's on staff behind the counter: the café only opens while you work it yourself (the counter, inside the café). Hire a Barista in the People tab to open every day.", 7, Art.C_GOLD, 480))
+	_section("Menu")
+	for id in ["coffee", "pastry"]:
+		var it := Cafe.item(id)
+		var r := UIK.hbox(4)
+		content.add_child(r)
+		var nm := UIK.label(I18n.t(str(it.get("name", id))), 8, Art.C_WHITE, true)
+		nm.custom_minimum_size = Vector2(70, 0)
+		r.add_child(nm)
+		var dn := UIK.button("−", func(): Cafe.set_price(id, Cafe.price(id) - 0.25); rebuild())
+		dn.name = "CafePriceDown_" + id
+		r.add_child(dn)
+		r.add_child(UIK.label(Fmt.money(Cafe.price(id)), 9, Art.C_WHITE, true))
+		var up := UIK.button("+", func(): Cafe.set_price(id, Cafe.price(id) + 0.25); rebuild())
+		up.name = "CafePriceUp_" + id
+		r.add_child(up)
+		r.add_child(UIK.label(I18n.t("street price %s · costs you %s") % [Fmt.money(float(it.get("ref_price", 4.0))), Fmt.money(float(it.get("unit_cost", 1.0)))], 7, Art.C_DIM))
+	_section("Supplies and the bakery")
+	var sr := UIK.hbox(4)
+	content.add_child(sr)
+	sr.add_child(UIK.label(I18n.t("Coffee, milk and cups: %d cups in stock") % int(s["supplies"]), 8, Art.C_WHITE))
+	sr.add_child(UIK.expand())
+	for pk in Cafe.cfg().get("supply_packs", []):
+		var pid := str(pk["id"])
+		var pb := UIK.button(I18n.t("%d cups · %s") % [int(pk["cups"]), Fmt.money0(Cafe.pack_cost(pid))], func():
+			var r := Cafe.order_supplies(pid)
+			if not r["ok"]:
+				UIRoot.toast(I18n.t(str(r["error"])), "warn", "coffee")
+			else:
+				UIRoot.toast(I18n.t("Ordered. Old Town Roasters delivers %s.") % Clock.fmt_short(int(r["eta"])), "good", "coffee")
+			rebuild())
+		pb.name = "CafeSupplies_" + pid
+		sr.add_child(pb)
+	var br := UIK.hbox(4)
+	content.add_child(br)
+	br.add_child(UIK.label(I18n.t("Pastries from the bakery each morning:"), 8, Art.C_WHITE))
+	var pm := UIK.button("−5", func(): Cafe.set_pastry_order(int(s["pastry_order"]) - 5); rebuild())
+	pm.name = "CafePastryDown"
+	br.add_child(pm)
+	br.add_child(UIK.label(str(int(s["pastry_order"])), 9, Art.C_WHITE, true))
+	var pp := UIK.button("+5", func(): Cafe.set_pastry_order(int(s["pastry_order"]) + 5); rebuild())
+	pp.name = "CafePastryUp"
+	br.add_child(pp)
+	br.add_child(UIK.label(I18n.t("unsold ones are binned at closing"), 7, Art.C_DIM))
+	var ar := UIK.hbox(4)
+	content.add_child(ar)
+	ar.add_child(UIK.label(I18n.t("Flyers and a street board, per day:"), 8, Art.C_WHITE))
+	for a in Cafe.cfg().get("ads", [0, 15, 40]):
+		var av := float(a)
+		var ab := UIK.button(Fmt.money0(av), func(): Cafe.set_ads(av); rebuild(), "tab_active" if is_equal_approx(float(s["ads"]), av) else "tab")
+		ab.name = "CafeAds_%d" % int(av)
+		ar.add_child(ab)
+	var days: Array = s["days"]
+	if not days.is_empty():
+		_section("Last days")
+		var grid := GridContainer.new()
+		grid.columns = 6
+		grid.add_theme_constant_override("h_separation", 12)
+		content.add_child(grid)
+		for h in ["Day", "Customers", "Till", "Walked out", "Ran out", "Binned"]:
+			grid.add_child(UIK.label(I18n.t(h), 7, Art.C_DIM, true))
+		for i in range(days.size() - 1, maxi(-1, days.size() - 8), -1):
+			var d: Dictionary = days[i]
+			grid.add_child(UIK.label(Clock.fmt_date(int(d["d"]) * Clock.DAY), 7, Art.C_MUTED))
+			grid.add_child(UIK.label(str(int(d["served"])), 7, Art.C_WHITE))
+			grid.add_child(UIK.label(Fmt.money0(float(d["rev"])), 7, Art.C_GREEN))
+			grid.add_child(UIK.label(str(int(d["queue_lost"])), 7, Art.C_RED if int(d["queue_lost"]) > 0 else Art.C_DIM))
+			grid.add_child(UIK.label(str(int(d["stock_lost"])), 7, Art.C_RED if int(d["stock_lost"]) > 0 else Art.C_DIM))
+			grid.add_child(UIK.label(str(int(d["waste"])), 7, Art.C_GOLD if int(d["waste"]) > 0 else Art.C_DIM))
+	_section("Name over the door")
+	var nr := UIK.hbox(4)
+	content.add_child(nr)
+	var ed := LineEdit.new()
+	ed.text = Cafe.display_name()
+	ed.max_length = 28
+	ed.custom_minimum_size = Vector2(200, 0)
+	ed.name = "CafeName"
+	nr.add_child(ed)
+	var rn := UIK.button("Rename", func():
+		Cafe.set_name(ed.text)
+		rebuild())
+	rn.name = "CafeRename"
+	nr.add_child(rn)
+
+
+## One line of the café's opening checklist; returns the row so a button can go on the end.
+func _cafe_step(text: String, done: bool, note: String) -> HBoxContainer:
+	var r := UIK.hbox(6)
+	content.add_child(r)
+	r.add_child(UIK.label("✓" if done else "○", 9, Art.C_GREEN if done else Art.C_DIM, true))
+	var v := UIK.vbox(0)
+	v.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	r.add_child(v)
+	v.add_child(UIK.label(I18n.t(text), 8, Art.C_WHITE if not done else Art.C_MUTED, true))
+	if note != "":
+		v.add_child(UIK.label(note, 7, Art.C_GOLD))
+	return r

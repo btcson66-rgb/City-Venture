@@ -1,0 +1,66 @@
+{
+ "id": "okafor_intro",
+ "with": "okafor",
+ "nodes": {
+  "start": [
+   {
+    "who": "okafor",
+    "expr": "happy",
+    "text": "Come in, come in. Okafor Lettings: forty years in Old Town, and I still remember every tenant's birthday."
+   },
+   {
+    "who": "okafor",
+    "text": "You're here about the corner unit, I can tell. Everybody looks at it the same way."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "What was it before?",
+      "next": "before"
+     },
+     {
+      "text": "What does it cost?",
+      "next": "cost"
+     }
+    ]
+   }
+  ],
+  "before": [
+   {
+    "who": "okafor",
+    "expr": "thinking",
+    "text": "A bakery, then a phone repair shop, then a café that opened too late in the morning. Old Town walks to work early."
+   },
+   {
+    "goto": "cost"
+   }
+  ],
+  "cost": [
+   {
+    "who": "okafor",
+    "text": "Nineteen hundred a month, two months' deposit. It comes empty: you fit it out, and City Hall wants a food licence before you sell a single croissant."
+   },
+   {
+    "who": "okafor",
+    "text": "And the rent is due whether anyone buys a coffee or not. I say that to everyone. Some people listen."
+   },
+   {
+    "goto": "end"
+   }
+  ],
+  "end": [
+   {
+    "who": "okafor",
+    "expr": "happy",
+    "text": "Here are the papers. Read them. Then read them again."
+   }
+  ]
+ },
+ "on_end": [
+  {
+   "do": "set_flag",
+   "flag": "met_okafor"
+  }
+ ]
+}

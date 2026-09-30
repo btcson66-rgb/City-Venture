@@ -1,0 +1,53 @@
+{
+ "id": "okafor",
+ "name": "Mr. Okafor",
+ "role": "Old Town landlord",
+ "appearance": {
+  "presentation": "masculine",
+  "face": "round",
+  "hair": "buzz",
+  "hair_color": "silver",
+  "skin": "s6",
+  "eye_shape": "round",
+  "eye_color": "dark",
+  "brows": "thick",
+  "mouth": "smile",
+  "accessory": "glasses_round"
+ },
+ "outfit": "office_professional",
+ "outfit_tints": {
+  "top": "#6b4a3a",
+  "bottom": "#3a3a42"
+ },
+ "schedule": [
+  {
+   "days": "mon,tue,wed,thu,fri,sat",
+   "from": "09:00",
+   "to": "18:00",
+   "location": "interior:okafor_lettings",
+   "spot": "agent",
+   "pose": "sit"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [
+    "!flag:met_okafor"
+   ],
+   "conversation": "okafor_intro",
+   "action": "lease_cafe"
+  },
+  {
+   "when": [
+    "flag:leased_corner_cafe"
+   ],
+   "conversation": "okafor_tenant"
+  },
+  {
+   "when": [],
+   "conversation": "okafor_chat",
+   "action": "lease_cafe"
+  }
+ ],
+ "phone_contact": false
+}

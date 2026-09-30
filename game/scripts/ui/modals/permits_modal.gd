@@ -8,7 +8,7 @@ func _init() -> void:
 	title_text = "City Hall — Permits"
 	icon_name = "civic"
 	help_key = "permits"
-	panel_size = Vector2(420, 290)
+	panel_size = Vector2(420, 316)
 
 
 func build() -> void:
@@ -37,7 +37,7 @@ func build() -> void:
 	if World.year() >= 4:
 		_green_grant()
 	_row("Import permits & customs", I18n.t("Planned (P2)"), Art.C_DIM)
-	_row("Food handling licence", I18n.t("Planned (P3)"), Art.C_DIM)
+	_food_licence()
 	_row("Data protection registration", I18n.t("Planned (P1)"), Art.C_DIM)
 	body.add_child(UIK.sep())
 	body.add_child(UIK.wrap("Regulations here are operating conditions, not quizzes: each one has a cost, a process, and a reason.", 7, Art.C_SKY, 400))
@@ -63,6 +63,40 @@ func _green_grant() -> void:
 	b.name = "ApplyGreenGrant"
 	b.disabled = why != ""
 	r.add_child(b)
+
+
+## The café's food handling licence: needs the premises; City Hall takes two days.
+func _food_licence() -> void:
+	var r := UIK.hbox(6)
+	body.add_child(r)
+	var v := UIK.vbox(0)
+	v.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	r.add_child(v)
+	v.add_child(UIK.label(I18n.t("Food handling licence (%s)") % Fmt.money0(float(Cafe.cfg().get("permit_fee", 280))), 8, Art.C_WHITE, true))
+	v.add_child(UIK.wrap("For serving food and drink from your own premises. An inspector checks the unit; it takes two days.", 7, Art.C_MUTED, 300))
+	if Cafe.permitted():
+		r.add_child(UIK.chip(I18n.t("GRANTED"), Art.C_GREEN))
+		return
+	if Cafe.permit_pending():
+		r.add_child(UIK.chip(I18n.t("PROCESSING"), Art.C_GOLD))
+		return
+	var why := Cafe.permit_block()
+	if why != "":
+		v.add_child(UIK.label(I18n.t(why), 7, Art.C_GOLD, true))
+	var b := UIK.button("Apply", _apply_food, "primary" if why == "" else "")
+	b.name = "ApplyFoodLicence"
+	b.disabled = why != ""
+	r.add_child(b)
+
+
+func _apply_food() -> void:
+	var res := Cafe.apply_permit()
+	if not res["ok"]:
+		UIRoot.toast(I18n.t(str(res["error"])), "warn", "lock")
+		return
+	Clock.advance(20)
+	UIRoot.toast(I18n.t("Application filed. The licence should be through %s.") % Clock.fmt_short(int(res["ready"])), "good", "civic")
+	rebuild()
 
 
 func _apply_grant() -> void:

@@ -48,6 +48,30 @@
    ],
    "needs_office": false,
    "desc": "Builds software. Each developer adds dev hours to your SaaS product every workday."
+  },
+  "barista": {
+   "name": "Barista",
+   "salary_week": [
+    500,
+    640
+   ],
+   "needs_office": false,
+   "needs_lease": "corner_cafe",
+   "needs_text": "needs a café (lease the corner unit in Old Town)",
+   "workplace": "corner_cafe",
+   "work_days": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "work_hours": [
+    7,
+    17
+   ],
+   "desc": "Runs the counter at your café, Mon–Sat 7:00–17:00: about 14 cups an hour."
   }
  },
  "traits": [

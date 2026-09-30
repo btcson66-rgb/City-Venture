@@ -4,7 +4,7 @@ extends WorldScene
 
 const BASE_Y := 320.0   # building fronts meet the north sidewalk here
 const POI_ICONS := {"home": "home", "cafe": "coffee", "restaurant": "coffee", "bank": "bank", "civic": "civic", "parcel": "parcel",
-	"retail": "shop", "retail_space": "shop"}
+	"retail": "shop", "retail_space": "shop", "own_cafe": "coffee", "lettings": "home", "flat_to_let": "home"}
 
 var def: Dictionary = {}
 var building_nodes := {}
@@ -30,7 +30,10 @@ func build(district_id: String) -> void:
 	_init_layers()
 	init_nav()
 	for g in def.get("ground", []):
-		paint(g["type"], g["rect"], int(g.get("step", 1)))
+		var tile := str(g["type"])
+		if g.has("fallback") and not has_tile(tile):
+			tile = str(g["fallback"])   # a ground tile still being drawn (Old Town cobbles, Harbor quay)
+		paint(tile, g["rect"], int(g.get("step", 1)))
 	_build_sky()
 	_add_water_sparkles()
 	# north edge: building fronts / back of the block are not walkable
@@ -52,9 +55,9 @@ func build(district_id: String) -> void:
 	# buildings
 	for bid in def.get("buildings", []):
 		var bd: Dictionary = DataDB.buildings[bid]
-		_add_building(bd["exterior"]["sprite"], float(bd["exterior"]["x"]), bid, bd)
+		_add_building(facade(bd["exterior"]), float(bd["exterior"]["x"]), bid, bd)
 	for f in def.get("fillers", []):
-		_add_building(f["sprite"], float(f["x"]), "", {})
+		_add_building(facade(f), float(f["x"]), "", {})
 	for p in def.get("props", []):
 		add_prop(p)
 	# metro entrance
@@ -80,6 +83,14 @@ func build(district_id: String) -> void:
 	_spawn_pedestrians(true)
 	update_lighting()
 	refresh_named_npcs()
+
+
+## The facade to draw: the named sprite, or its `fallback` while the new facade is still being drawn.
+static func facade(d: Dictionary) -> String:
+	var sp := str(d.get("sprite", ""))
+	if d.has("fallback") and not Art.has_tex("buildings/" + sp):
+		return str(d["fallback"])
+	return sp
 
 
 ## Keep a sign's text on its painted board: step the font down until the text fits the board's width, and if it
@@ -137,6 +148,8 @@ func _add_building(sprite: String, x: float, bid: String, bd: Dictionary) -> voi
 	var text: String = str(bd.get("exterior", {}).get("sign", meta.get("sign_text", "")))
 	if bid == "small_office" and GameState.company_id() != "" and Living.has_lease("suite_2b"):
 		text = GameState.entity_name(GameState.company_id()).to_upper() + " · 2B"
+	if bid == "corner_cafe_unit" and Cafe.leased():
+		text = Cafe.display_name().to_upper()   # your café's name over the door
 	if typeof(sg) == TYPE_ARRAY and text != "":
 		text = I18n.t(text)   # generic signs translate (RIVERSIDE TOWER → 河濱大樓); brand names stay as painted
 		var lb := UIK.world_label(text, 8 if float(sg[3]) >= 10 and float(sg[2]) >= 70 else (7 if float(sg[3]) >= 9 else 5), Color8(250, 244, 226))

@@ -1,27 +1,28 @@
 {
- "id": "shopping_street",
- "name": "Shopping Street",
+ "id": "old_town",
+ "name": "Old Town",
  "size_tiles": [
-  90,
+  88,
   44
  ],
  "music": "day_city",
  "ground": [
   {
-   "type": "plaza_alt",
+   "type": "cobble_a",
+   "fallback": "plaza",
    "rect": [
     0,
     0,
-    90,
+    88,
     20
    ]
   },
   {
-   "type": "sidewalk",
+   "type": "sidewalk_alt",
    "rect": [
     0,
     20,
-    90,
+    88,
     4
    ]
   },
@@ -30,16 +31,16 @@
    "rect": [
     0,
     24,
-    90,
+    88,
     1
    ]
   },
   {
-   "type": "road",
+   "type": "road_b",
    "rect": [
     0,
     25,
-    90,
+    88,
     5
    ]
   },
@@ -48,7 +49,7 @@
    "rect": [
     0,
     27,
-    90,
+    88,
     1
    ],
    "step": 2
@@ -58,32 +59,33 @@
    "rect": [
     0,
     30,
-    90,
+    88,
     1
    ]
   },
   {
-   "type": "sidewalk",
+   "type": "sidewalk_alt",
    "rect": [
     0,
     31,
-    90,
+    88,
     3
    ]
   },
   {
-   "type": "plaza_alt",
+   "type": "cobble_b",
+   "fallback": "plaza",
    "rect": [
     0,
     34,
-    90,
+    88,
     10
    ]
   },
   {
    "type": "crosswalk_h",
    "rect": [
-    22,
+    30,
     25,
     3,
     5
@@ -92,7 +94,7 @@
   {
    "type": "crosswalk_h",
    "rect": [
-    62,
+    66,
     25,
     3,
     5
@@ -100,23 +102,30 @@
   }
  ],
  "buildings": [
-  "threadline_apparel",
-  "lantern_bistro",
-  "crestline_flagship",
-  "popup_unit"
+  "okafor_lettings",
+  "corner_cafe_unit",
+  "old_town_studio"
  ],
  "fillers": [
   {
-   "sprite": "retail_arcade",
-   "x": 20
+   "sprite": "rowhouse_brick",
+   "x": 20,
+   "fallback": "apartment_mid"
   },
   {
-   "sprite": "cinema_front",
-   "x": 587
+   "sprite": "arcade_arches",
+   "x": 387,
+   "fallback": "retail_arcade"
   },
   {
-   "sprite": "shop_row_awning",
-   "x": 1071
+   "sprite": "clock_tower",
+   "x": 766,
+   "fallback": "civic_annex"
+  },
+  {
+   "sprite": "rowhouse_brick",
+   "x": 1108,
+   "fallback": "riverside_walkup"
   }
  ],
  "props": [
@@ -130,6 +139,20 @@
     8,
     6
    ],
+   "_gen": true
+  },
+  {
+   "sprite": "old_lamp",
+   "x": 132,
+   "y": 312,
+   "fallback": "lamp",
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
    "_gen": true
   },
   {
@@ -169,9 +192,10 @@
    "_gen": true
   },
   {
-   "sprite": "lamp_banner",
+   "sprite": "old_lamp",
    "x": 612,
    "y": 312,
+   "fallback": "lamp",
    "solid": [
     6,
     66,
@@ -182,9 +206,22 @@
    "_gen": true
   },
   {
-   "sprite": "lamp_banner",
+   "sprite": "tree_round",
+   "x": 668,
+   "y": 290,
+   "solid": [
+    28,
+    84,
+    8,
+    6
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "old_lamp",
    "x": 772,
    "y": 312,
+   "fallback": "lamp",
    "solid": [
     6,
     66,
@@ -195,33 +232,24 @@
    "_gen": true
   },
   {
-   "sprite": "tree_round",
-   "x": 828,
-   "y": 290,
+   "sprite": "old_lamp",
+   "x": 932,
+   "y": 312,
+   "fallback": "lamp",
    "solid": [
-    28,
-    84,
-    8,
-    6
+    6,
+    66,
+    5,
+    4
    ],
+   "glow": true,
    "_gen": true
   },
   {
-   "sprite": "tree_round_b",
-   "x": 988,
-   "y": 290,
-   "solid": [
-    28,
-    84,
-    8,
-    6
-   ],
-   "_gen": true
-  },
-  {
-   "sprite": "lamp_banner",
+   "sprite": "old_lamp",
    "x": 1092,
    "y": 312,
+   "fallback": "lamp",
    "solid": [
     6,
     66,
@@ -232,21 +260,10 @@
    "_gen": true
   },
   {
-   "sprite": "tree_round",
-   "x": 1148,
-   "y": 290,
-   "solid": [
-    28,
-    84,
-    8,
-    6
-   ],
-   "_gen": true
-  },
-  {
-   "sprite": "lamp_banner",
+   "sprite": "old_lamp",
    "x": 1252,
    "y": 312,
+   "fallback": "lamp",
    "solid": [
     6,
     66,
@@ -342,7 +359,7 @@
   },
   {
    "sprite": "bollard",
-   "x": 280,
+   "x": 316,
    "y": 370,
    "solid": [
     2,
@@ -390,7 +407,7 @@
   },
   {
    "sprite": "bollard",
-   "x": 460,
+   "x": 496,
    "y": 370,
    "solid": [
     2,
@@ -498,7 +515,7 @@
   },
   {
    "sprite": "bollard",
-   "x": 856,
+   "x": 892,
    "y": 370,
    "solid": [
     2,
@@ -510,7 +527,7 @@
   },
   {
    "sprite": "bollard",
-   "x": 892,
+   "x": 928,
    "y": 370,
    "solid": [
     2,
@@ -582,7 +599,7 @@
   },
   {
    "sprite": "bollard",
-   "x": 1180,
+   "x": 1144,
    "y": 370,
    "solid": [
     2,
@@ -618,6 +635,18 @@
   },
   {
    "sprite": "bollard",
+   "x": 1288,
+   "y": 370,
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "bollard",
    "x": 1324,
    "y": 370,
    "solid": [
@@ -641,32 +670,8 @@
    "_gen": true
   },
   {
-   "sprite": "bollard",
-   "x": 1396,
-   "y": 370,
-   "solid": [
-    2,
-    11,
-    4,
-    3
-   ],
-   "_gen": true
-  },
-  {
    "sprite": "planter_small",
-   "x": 139,
-   "y": 324,
-   "solid": [
-    1,
-    12,
-    16,
-    5
-   ],
-   "_gen": true
-  },
-  {
-   "sprite": "planter_small",
-   "x": 266,
+   "x": 305,
    "y": 320,
    "solid": [
     1,
@@ -677,21 +682,10 @@
    "_gen": true
   },
   {
-   "sprite": "planter_small",
-   "x": 324,
-   "y": 320,
-   "solid": [
-    1,
-    14,
-    22,
-    6
-   ],
-   "_gen": true
-  },
-  {
-   "sprite": "umbrella_table",
-   "x": 511,
+   "sprite": "cafe_chairs_bistro",
+   "x": 692,
    "y": 328,
+   "fallback": "umbrella_table",
    "solid": [
     10,
     30,
@@ -701,9 +695,10 @@
    "_gen": true
   },
   {
-   "sprite": "umbrella_table",
-   "x": 551,
+   "sprite": "cafe_chairs_bistro",
+   "x": 732,
    "y": 328,
+   "fallback": "umbrella_table",
    "solid": [
     10,
     30,
@@ -714,7 +709,7 @@
   },
   {
    "sprite": "cafe_board",
-   "x": 457,
+   "x": 636,
    "y": 324,
    "solid": [
     2,
@@ -725,56 +720,8 @@
    "_gen": true
   },
   {
-   "sprite": "trash_bin",
-   "x": 714,
-   "y": 324,
-   "solid": [
-    1,
-    12,
-    16,
-    5
-   ],
-   "_gen": true
-  },
-  {
-   "sprite": "planter_small",
-   "x": 875,
-   "y": 320,
-   "solid": [
-    1,
-    14,
-    22,
-    6
-   ],
-   "_gen": true
-  },
-  {
-   "sprite": "planter_small",
-   "x": 933,
-   "y": 320,
-   "solid": [
-    1,
-    14,
-    22,
-    6
-   ],
-   "_gen": true
-  },
-  {
-   "sprite": "bike_rack",
-   "x": 1318,
-   "y": 328,
-   "solid": [
-    1,
-    20,
-    52,
-    5
-   ],
-   "_gen": true
-  },
-  {
    "sprite": "direction_sign",
-   "x": 1370,
+   "x": 1338,
    "y": 308,
    "solid": [
     18,
@@ -782,25 +729,12 @@
     6,
     4
    ],
-   "label": "CIVIC CENTER →",
-   "_gen": true
-  },
-  {
-   "sprite": "direction_sign",
-   "x": 40,
-   "y": 308,
-   "solid": [
-    18,
-    44,
-    6,
-    4
-   ],
-   "label": "← OLD TOWN",
+   "label": "SHOPPING ST →",
    "_gen": true
   },
   {
    "sprite": "digital_sign",
-   "x": 760,
+   "x": 744,
    "y": 304,
    "solid": [
     4,
@@ -811,320 +745,120 @@
    "_gen": true
   },
   {
-   "sprite": "lamp",
-   "x": 380,
-   "y": 532,
-   "solid": [
-    6,
-    66,
-    5,
-    4
-   ],
-   "glow": true,
-   "_base": 604
-  },
-  {
-   "sprite": "lamp",
-   "x": 508,
-   "y": 532,
-   "solid": [
-    6,
-    66,
-    5,
-    4
-   ],
-   "glow": true,
-   "_base": 604
-  },
-  {
-   "sprite": "lamp",
-   "x": 636,
-   "y": 532,
-   "solid": [
-    6,
-    66,
-    5,
-    4
-   ],
-   "glow": true,
-   "_base": 604
-  },
-  {
-   "sprite": "string_lights",
-   "x": 390,
-   "y": 540,
-   "overhead": true,
-   "_base": 572
-  },
-  {
-   "sprite": "string_lights",
-   "x": 518,
-   "y": 540,
-   "overhead": true,
-   "_base": 572
-  },
-  {
-   "sprite": "market_stall_rose",
-   "x": 394,
-   "y": 611,
-   "solid": [
-    2,
-    27,
-    56,
-    10
-   ],
-   "show": {
-    "days": "sat,sun",
-    "from": "09:00",
-    "to": "18:00"
-   },
-   "_base": 648
-  },
-  {
-   "sprite": "market_stall_sage",
-   "x": 510,
-   "y": 611,
-   "solid": [
-    2,
-    27,
-    56,
-    10
-   ],
-   "show": {
-    "days": "sat,sun",
-    "from": "09:00",
-    "to": "18:00"
-   },
-   "_base": 648
-  },
-  {
-   "sprite": "market_stall_cream",
-   "x": 626,
-   "y": 611,
-   "solid": [
-    2,
-    27,
-    56,
-    10
-   ],
-   "show": {
-    "days": "sat,sun",
-    "from": "09:00",
-    "to": "18:00"
-   },
-   "_base": 648
-  },
-  {
-   "sprite": "lamp",
-   "x": 900,
-   "y": 532,
-   "solid": [
-    6,
-    66,
-    5,
-    4
-   ],
-   "glow": true,
-   "_base": 604
-  },
-  {
-   "sprite": "lamp",
-   "x": 1028,
-   "y": 532,
-   "solid": [
-    6,
-    66,
-    5,
-    4
-   ],
-   "glow": true,
-   "_base": 604
-  },
-  {
-   "sprite": "lamp",
-   "x": 1156,
-   "y": 532,
-   "solid": [
-    6,
-    66,
-    5,
-    4
-   ],
-   "glow": true,
-   "_base": 604
-  },
-  {
-   "sprite": "string_lights",
-   "x": 910,
-   "y": 540,
-   "overhead": true,
-   "_base": 572
-  },
-  {
-   "sprite": "string_lights",
-   "x": 1038,
-   "y": 540,
-   "overhead": true,
-   "_base": 572
-  },
-  {
-   "sprite": "market_stall_sage",
-   "x": 914,
-   "y": 611,
-   "solid": [
-    2,
-    27,
-    56,
-    10
-   ],
-   "show": {
-    "days": "sat,sun",
-    "from": "09:00",
-    "to": "18:00"
-   },
-   "_base": 648
-  },
-  {
-   "sprite": "market_stall_cream",
-   "x": 1030,
-   "y": 611,
-   "solid": [
-    2,
-    27,
-    56,
-    10
-   ],
-   "show": {
-    "days": "sat,sun",
-    "from": "09:00",
-    "to": "18:00"
-   },
-   "_base": 648
-  },
-  {
-   "sprite": "market_stall_rose",
-   "x": 1146,
-   "y": 611,
-   "solid": [
-    2,
-    27,
-    56,
-    10
-   ],
-   "show": {
-    "days": "sat,sun",
-    "from": "09:00",
-    "to": "18:00"
-   },
-   "_base": 648
-  },
-  {
-   "sprite": "kiosk_flower",
-   "x": 700,
-   "y": 611,
+   "sprite": "fountain",
+   "x": 600,
+   "y": 566,
+   "_base": 610,
    "solid": [
     4,
-    18,
-    32,
-    11
-   ],
+    22,
+    60,
+    16
+   ]
+  },
+  {
+   "sprite": "old_lamp",
+   "x": 520,
+   "y": 532,
+   "fallback": "lamp",
+   "glow": true,
+   "_base": 604
+  },
+  {
+   "sprite": "old_lamp",
+   "x": 700,
+   "y": 532,
+   "fallback": "lamp",
+   "glow": true,
+   "_base": 604
+  },
+  {
+   "sprite": "bench",
+   "x": 540,
+   "y": 646,
+   "_base": 668,
+   "solid": [
+    1,
+    12,
+    34,
+    7
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 650,
+   "y": 646,
+   "_base": 668,
+   "solid": [
+    1,
+    12,
+    34,
+    7
+   ]
+  },
+  {
+   "sprite": "mural_wall",
+   "x": 180,
+   "y": 540,
+   "fallback": "billboard",
+   "_base": 600
+  },
+  {
+   "sprite": "bookstall",
+   "x": 900,
+   "y": 611,
+   "fallback": "kiosk_flower",
    "_base": 640
   },
   {
-   "sprite": "bench",
-   "x": 740,
-   "y": 662,
-   "solid": [
-    1,
-    12,
-    34,
-    7
-   ],
-   "_base": 684
+   "sprite": "ivy_trellis",
+   "x": 330,
+   "y": 622,
+   "fallback": "flower_bed",
+   "_base": 640
   },
   {
-   "sprite": "bench",
-   "x": 792,
-   "y": 662,
-   "solid": [
-    1,
-    12,
-    34,
-    7
-   ],
-   "_base": 684
+   "sprite": "ivy_trellis",
+   "x": 1040,
+   "y": 622,
+   "fallback": "flower_bed",
+   "_base": 640
   },
   {
-   "sprite": "bench",
-   "x": 1230,
-   "y": 662,
-   "solid": [
-    1,
-    12,
-    34,
-    7
-   ],
-   "_base": 684
-  },
-  {
-   "sprite": "planter_long",
-   "x": 560,
-   "y": 669,
-   "solid": [
-    2,
-    4,
-    72,
-    11
-   ],
-   "_base": 684
-  },
-  {
-   "sprite": "planter_long",
-   "x": 1120,
-   "y": 669,
-   "solid": [
-    2,
-    4,
-    72,
-    11
-   ],
-   "_base": 684
-  },
-  {
-   "sprite": "bike_rack",
-   "x": 1290,
-   "y": 590,
-   "solid": [
-    1,
-    12,
-    52,
-    10
-   ],
-   "_base": 612
-  },
-  {
-   "sprite": "tree_round",
-   "x": 40,
+   "sprite": "tree_round_b",
+   "x": 60,
    "y": 534,
+   "_base": 626,
    "solid": [
     28,
     84,
     8,
     6
-   ],
-   "_base": 626
+   ]
   },
   {
-   "sprite": "tree_round",
-   "x": 1360,
+   "sprite": "tree_round_b",
+   "x": 1160,
    "y": 534,
+   "_base": 626,
    "solid": [
     28,
     84,
     8,
     6
-   ],
-   "_base": 626
+   ]
+  },
+  {
+   "sprite": "trash_bin",
+   "x": 760,
+   "y": 638,
+   "_base": 660,
+   "solid": [
+    1,
+    14,
+    16,
+    6
+   ]
   },
   {
    "sprite": "hedge",
@@ -1224,48 +958,32 @@
   }
  ],
  "metro": {
-  "station": "shopping_street",
-  "x": 180,
+  "station": "old_town",
+  "x": 1180,
   "y": 560
  },
  "exits": [
   {
    "id": "east",
    "rect": [
-    1424,
+    1392,
     320,
     16,
     244
    ],
-   "to": "civic_center",
-   "spawn": "from_shopping_street",
-   "walk_min": 8
-  },
-  {
-   "id": "west",
-   "rect": [
-    0,
-    320,
-    16,
-    244
-   ],
-   "to": "old_town",
-   "spawn": "from_shopping_street",
+   "to": "shopping_street",
+   "spawn": "from_old_town",
    "walk_min": 6
   }
  ],
  "spawns": {
-  "from_civic_center": [
-   1400,
+  "from_shopping_street": [
+   1368,
    430
   ],
   "metro": [
-   220,
+   1220,
    642
-  ],
-  "from_old_town": [
-   40,
-   430
   ]
  },
  "bounds": {
@@ -1276,59 +994,56 @@
   {
    "y": 424,
    "dir": -1,
-   "density": 0.7
+   "density": 0.45
   },
   {
    "y": 478,
    "dir": 1,
-   "density": 0.7
+   "density": 0.45
   }
  ],
  "ped_paths": [
   {
    "y": 350,
    "x0": 20,
-   "x1": 1420
+   "x1": 1388
   },
   {
    "y": 362,
    "x0": 20,
-   "x1": 1420
+   "x1": 1388
   },
   {
    "y": 506,
    "x0": 20,
-   "x1": 1420
+   "x1": 1388
   },
   {
    "y": 590,
-   "x0": 300,
-   "x1": 1420
+   "x0": 20,
+   "x1": 1160
   },
   {
-   "y": 664,
+   "y": 676,
    "x0": 20,
-   "x1": 1420
+   "x1": 1388
   }
  ],
  "ambient_density": {
-  "morning": 8,
-  "afternoon": 16,
-  "evening": 14,
-  "night": 5
+  "morning": 7,
+  "afternoon": 11,
+  "evening": 9,
+  "night": 3
  },
  "ped_outfits": [
-  "luxury_citywear",
-  "luxury_citywear",
-  "luxury_citywear",
   "casual_jacket",
   "casual_jacket",
   "casual_tee",
   "casual_tee",
+  "home",
   "startup_casual",
   "office_professional",
-  "business_suit",
-  "home"
+  "luxury_citywear"
  ],
- "minimap_color": "#8a5a78"
+ "minimap_color": "#a0674a"
 }

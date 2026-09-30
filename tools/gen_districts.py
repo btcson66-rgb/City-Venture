@@ -25,15 +25,23 @@ ROWS = {
     "financial": ["finance_tower", "@nexus_bank", "glass_tower", "finance_tower", "office_slab"],
     "shopping_street": ["retail_arcade", "@threadline_apparel", "@lantern_bistro", "cinema_front", "@crestline_flagship",
                         "shop_row_awning", "@popup_unit"],
+    # "name|fallback": the facade Codex is drawing, and what stands in until it lands (re-run this script then)
+    "old_town": ["rowhouse_brick|apartment_mid", "@okafor_lettings", "arcade_arches|retail_arcade", "@corner_cafe_unit",
+                 "clock_tower|civic_annex", "@old_town_studio", "rowhouse_brick|riverside_walkup"],
 }
 LABELS = {
     "riverside": {"east": "STARTUP HUB →"}, "startup_hub": {"west": "← RIVERSIDE"},
     "civic_center": {"east": "FINANCIAL →", "west": "← SHOPPING ST"}, "financial": {"west": "← CIVIC CENTER"},
-    "shopping_street": {"east": "CIVIC CENTER →"},
+    "shopping_street": {"east": "CIVIC CENTER →", "west": "← OLD TOWN"},
+    "old_town": {"east": "SHOPPING ST →"},
 }
 # weekend market (Shopping Street): stalls are out Sat/Sun 09:00-18:00, packed away otherwise
 MARKET_HOURS = {"days": "sat,sun", "from": "09:00", "to": "18:00"}
 STALLS = ["market_stall_rose", "market_stall_sage", "market_stall_cream"]
+
+
+def has_prop(name):
+    return os.path.exists(os.path.join(PROPS, name + ".png"))
 
 
 def prop_size(name):
@@ -49,8 +57,14 @@ SPRITE_META = json.load(open(os.path.join(os.path.dirname(PROPS), "sprite_meta.j
 
 
 def P(name, x, base_y, solid=None, **kw):
-    w, h = prop_size(name)
+    """A prop standing on base_y. "name|fallback": use the fallback sprite's size until the new sprite exists."""
+    fb = ""
+    if "|" in name:
+        name, fb = name.split("|")
+    w, h = prop_size(name if has_prop(name) or not fb else fb)
     d = {"sprite": name, "x": int(x), "y": int(base_y - h)}
+    if fb:
+        d["fallback"] = fb
     if solid is not None:
         d["solid"] = solid
     d.update(kw)
@@ -75,13 +89,20 @@ def layout(did):
             bid = item[1:]
             b = bdefs[bid]
             sprite = b["exterior"]["sprite"]
+            if sprite not in META:
+                sprite = b["exterior"]["fallback"]
             b["exterior"]["x"] = x
             json.dump(b, open(os.path.join(DATA, "buildings", bid + ".json"), "w"), indent=1, ensure_ascii=False)
             m = META[sprite]
             doors.append((x + m["door"][0] + m["door"][2] / 2, b["type"], bid, x, m))
         else:
-            sprite = item
-            fillers.append({"sprite": sprite, "x": x})
+            sprite, _, fb = item.partition("|")
+            f = {"sprite": sprite, "x": x}
+            if fb:
+                f["fallback"] = fb
+                if sprite not in META:
+                    sprite = fb
+            fillers.append(f)
             m = META[sprite]
             doors.append((x + m["door"][0] + m["door"][2] / 2, "filler", sprite, x, m))
         fronts.append((x, x + META[sprite]["size"][0]))
@@ -101,6 +122,8 @@ def layout(did):
         if not near_door(px, 34):
             if k % 2 == 0:
                 props.append(P("tree_round" if (k // 2) % 3 else "tree_round_b", px - 32, 382, [28, 84, 8, 6]))
+            elif did == "old_town":
+                props.append(P("old_lamp|lamp", px - 8, 384, [6, 66, 5, 4], glow=True))
             else:
                 props.append(P("lamp_banner", px - 8, 384, [6, 66, 5, 4], glow=True))
         px += 80
@@ -110,7 +133,13 @@ def layout(did):
             props.append(P("bollard", bx, 386, [2, 11, 4, 3]))
     # --- per building dressing
     for (dx, typ, bid, bx, m) in doors:
-        if typ == "cafe":
+        if typ == "own_cafe":   # the player's café: two bistro tables and a chalkboard
+            props.append(P("cafe_chairs_bistro|umbrella_table", dx + 26, 366, [10, 30, 16, 6]))
+            props.append(P("cafe_chairs_bistro|umbrella_table", dx + 66, 366, [10, 30, 16, 6]))
+            props.append(P("cafe_board", dx - 30, 346, [2, 16, 12, 4]))
+        elif typ == "lettings":
+            props.append(P("planter_small", dx + 18, 342, [1, 14, 22, 6]))
+        elif typ == "cafe":
             props.append(P("umbrella_table" if bid == "bloom_coffee" else "umbrella_table_blue", dx + 24, 366, [10, 30, 16, 6]))
             props.append(P("umbrella_table" if bid == "bloom_coffee" else "umbrella_table_blue", dx + 64, 366, [10, 30, 16, 6]))
             props.append(P("cafe_board", dx - 30, 346, [2, 16, 12, 4]))
@@ -155,7 +184,7 @@ def layout(did):
         if name in ("lamp",):
             name = "lamp"
         try:
-            w, h = prop_size(name)
+            w, h = prop_size(name if has_prop(name) else p.get("fallback", name))
         except FileNotFoundError:
             continue
         # old data stored top-left with old heights; re-anchor on the old base line
@@ -170,6 +199,8 @@ def layout(did):
         props.append(np)
     if did == "shopping_street":
         props += market_square()
+    if did == "old_town" and not any(p.get("_base", 0) >= 470 for p in props):
+        props += old_town_square()
     # river railing / hedges along the park
     if did == "riverside":
         for rx in range(0, width, 64):
@@ -179,6 +210,11 @@ def layout(did):
     else:
         for hx in range(8, width - 40, 180):
             props.append(P("hedge", hx, d["bounds"]["bottom"] - 2, [0, 12, 48, 6]))
+    # the south squares are kept from the last run *and* regenerated: keep the regenerated one (it has its collision)
+    last = {}
+    for i, p in enumerate(props):
+        last[(p["sprite"], p["x"], p["y"])] = i
+    props = [p for i, p in enumerate(props) if last[(p["sprite"], p["x"], p["y"])] == i]
     for p in props:
         if "_base" not in p:
             p["_gen"] = True
@@ -207,6 +243,23 @@ def market_square():
     out.append(dict(P("bike_rack", 1290, 612, [1, 12, 52, 10]), _base=612))
     for tx in (40, 1360):
         out.append(dict(P("tree_round", tx, 626, [28, 84, 8, 6]), _base=626))
+    return out
+
+
+def old_town_square():
+    """Old Town's south side: a small square round the fountain, a mural wall, a bookstall, benches under old lamps."""
+    out = [dict(P("fountain", 600, 610, [4, 22, 60, 16]), _base=610)]
+    for lx in (520, 700):
+        out.append(dict(P("old_lamp|lamp", lx, 604, [6, 66, 5, 4], glow=True), _base=604))
+    for bx in (540, 650):
+        out.append(dict(P("bench", bx, 668, [1, 12, 34, 7]), _base=668))
+    out.append(dict(P("mural_wall|billboard", 180, 600, [30, 54, 8, 4]), _base=600))
+    out.append(dict(P("bookstall|kiosk_flower", 900, 640, [4, 18, 32, 11]), _base=640))
+    out.append(dict(P("ivy_trellis|flower_bed", 330, 640, [0, 8, 36, 8]), _base=640))
+    out.append(dict(P("ivy_trellis|flower_bed", 1040, 640, [0, 8, 36, 8]), _base=640))
+    for tx in (60, 1160):
+        out.append(dict(P("tree_round_b", tx, 626, [28, 84, 8, 6]), _base=626))
+    out.append(dict(P("trash_bin", 760, 660, [1, 14, 16, 6]), _base=660))
     return out
 
 

@@ -1,0 +1,232 @@
+{
+ "id": "corner_cafe_unit",
+ "name": "Corner Café Unit",
+ "district": "old_town",
+ "type": "own_cafe",
+ "hours": {
+  "open": "08:00",
+  "close": "18:00",
+  "days": "all",
+  "always_if_lease": "corner_cafe"
+ },
+ "exterior": {
+  "sprite": "corner_cafe_unit",
+  "fallback": "shop_row_awning",
+  "x": 594,
+  "sign": "CORNER UNIT · TO LET"
+ },
+ "interior": {
+  "size": [
+   21,
+   13
+  ],
+  "floor": "wood_cafe",
+  "wall": "brick",
+  "ambient": "cafe",
+  "property": "corner_cafe",
+  "props": [
+   {
+    "sprite": "menu_board_blank",
+    "fallback": "menu_board",
+    "x": 20,
+    "y": 8,
+    "wall": true
+   },
+   {
+    "sprite": "window_day",
+    "x": 232,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "window_day",
+    "x": 276,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "framed_art_b",
+    "x": 118,
+    "y": 12,
+    "wall": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 70,
+    "y": 0,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 120,
+    "y": 0,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 248,
+    "y": 40,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "cafe_counter_small",
+    "fallback": "cafe_counter",
+    "x": 30,
+    "y": 50
+   },
+   {
+    "sprite": "pastry_case_small",
+    "fallback": "display_case",
+    "x": 140,
+    "y": 60
+   },
+   {
+    "sprite": "plant_big",
+    "x": 4,
+    "y": 50
+   },
+   {
+    "sprite": "cafe_table_round",
+    "fallback": "cafe_table",
+    "x": 216,
+    "y": 104
+   },
+   {
+    "sprite": "cafe_stool",
+    "fallback": "cafe_chair",
+    "x": 198,
+    "y": 100,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_stool",
+    "fallback": "cafe_chair",
+    "x": 242,
+    "y": 100,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_table_round",
+    "fallback": "cafe_table",
+    "x": 278,
+    "y": 138
+   },
+   {
+    "sprite": "cafe_stool",
+    "fallback": "cafe_chair",
+    "x": 260,
+    "y": 134,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_stool",
+    "fallback": "cafe_chair",
+    "x": 304,
+    "y": 134,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_table_round",
+    "fallback": "cafe_table",
+    "x": 40,
+    "y": 150
+   },
+   {
+    "sprite": "cafe_stool",
+    "fallback": "cafe_chair",
+    "x": 22,
+    "y": 146,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_stool",
+    "fallback": "cafe_chair",
+    "x": 66,
+    "y": 146,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_table_round",
+    "fallback": "cafe_table",
+    "x": 216,
+    "y": 164
+   },
+   {
+    "sprite": "cafe_stool",
+    "fallback": "cafe_chair",
+    "x": 198,
+    "y": 160,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_stool",
+    "fallback": "cafe_chair",
+    "x": 242,
+    "y": 160,
+    "solid": false
+   },
+   {
+    "sprite": "rug_small",
+    "x": 130,
+    "y": 176,
+    "floor": true
+   }
+  ],
+  "interactables": [
+   {
+    "id": "counter",
+    "at": [
+     78,
+     100
+    ],
+    "label": "Work the counter (2 h)",
+    "action": "cafe_counter"
+   },
+   {
+    "id": "till",
+    "at": [
+     150,
+     100
+    ],
+    "label": "Check the till — Company OS",
+    "action": "open_company_os",
+    "params": {
+     "terminal": "cafe_till",
+     "requires": "lease:corner_cafe"
+    }
+   },
+   {
+    "id": "notice",
+    "at": [
+     290,
+     70
+    ],
+    "label": "Read the notice in the window",
+    "action": "look",
+    "params": {
+     "icon": "shop",
+     "text": "TO LET: corner unit, fitted for a café. Ask Mr. Okafor at Okafor Lettings, three doors down.",
+     "unless_lease": "corner_cafe"
+    }
+   }
+  ],
+  "npc_spots": {},
+  "staff_spots": {
+   "barista": [
+    [
+     70,
+     64
+    ],
+    [
+     104,
+     64
+    ]
+   ]
+  }
+ }
+}

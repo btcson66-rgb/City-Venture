@@ -19,8 +19,10 @@ static func lock_reason(action: String, params: Dictionary) -> String:
 	if req == "desk_access" and not Living.has_desk_access():
 		return "needs a desk pass"
 	if req.begins_with("lease:") and not Living.has_lease(req.substr(6)):
-		return "not your office (yet)"
+		return "not your office (yet)" if req == "lease:suite_2b" else "not yours (yet)"
 	match action:
+		"cafe_counter":
+			return Cafe.counter_block()
 		"register_company":
 			if not npc_present("ana"):
 				return "counter unattended"
@@ -47,9 +49,14 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 		UIRoot.toast("You need a day pass or a desk plan. Ask at reception.", "warn", "lock")
 		return
 	if req.begins_with("lease:") and not Living.has_lease(req.substr(6)):
-		UIRoot.toast("This is Suite 2B's desk. Talk to Tom about leasing it.", "warn", "lock")
+		if req == "lease:corner_cafe":
+			UIRoot.toast("This till comes with the lease. Mr. Okafor at Okafor Lettings handles it.", "warn", "lock")
+		else:
+			UIRoot.toast("This is Suite 2B's desk. Talk to Tom about leasing it.", "warn", "lock")
 		return
 	match action:
+		"cafe_counter":
+			_cafe_counter()
 		"open_company_os":
 			UIRoot.open_modal(CompanyOS.new(params.get("terminal", "laptop")))
 		"sleep":
@@ -199,6 +206,8 @@ static func _talk(npc_id: String) -> void:
 					follow = func(): UIRoot.open_modal(BankModal.new())
 				"lease_office":
 					follow = func(): UIRoot.open_modal(LeaseModal.new("suite_2b"))
+				"lease_cafe":
+					follow = func(): UIRoot.open_modal(LeaseModal.new("corner_cafe"))
 				"loan_office":
 					GameState.set_flag("wants_loan_offer", false)
 					follow = func():
@@ -232,6 +241,25 @@ static func _buy_after_talk(p: Dictionary) -> void:
 	if p.has("flag"):
 		GameState.set_flag(p["flag"])
 	UIRoot.toast(I18n.t("Coffee — %s.") % Fmt.money(price), "info", "coffee")
+
+
+## Your own café: work the counter for a couple of hours (the barista minigame), then the café's till takes over.
+static func _cafe_counter() -> void:
+	var why := Cafe.counter_block()
+	if why != "":
+		UIRoot.toast(I18n.t("Can't work the counter: %s.") % I18n.t(why), "warn", "lock")
+		return
+	var g := BaristaGame.new()
+	g.own_counter = true
+	g.title_text = I18n.t("Your counter — %s") % Cafe.display_name()
+	MiniGames.play(g, func(res: Dictionary):
+		if res.get("aborted", false):
+			return
+		var r := Cafe.owner_shift(float(res.get("score", 0.5)))
+		if r["ok"]:
+			UIRoot.toast(I18n.t("Two hours behind your own counter: %d customers served.") % int(r["served"]), "good", "coffee")
+		else:
+			UIRoot.toast(I18n.t(str(r["error"])), "warn", "lock"))
 
 
 static func _talk_staff(sid: String) -> void:

@@ -67,6 +67,13 @@ func _init_layers() -> void:
 	add_child(canvas_mod)
 
 
+## True when the ground atlas has this tile (new tiles are added to the atlas as they are drawn).
+func has_tile(tile: String) -> bool:
+	if _tile_index.is_empty():
+		tileset()
+	return _tile_index.has(tile)
+
+
 func paint(tile: String, rect: Array, step := 1) -> void:
 	if not _tile_index.has(tile):
 		tileset()

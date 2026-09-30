@@ -57,9 +57,14 @@ static func pay_home_rent() -> void:
 	GameState.inc_stat("rent_paid")
 
 
+## Which expense line a lease's rent goes to.
+static func rent_category(kind: String) -> String:
+	return {"office": "rent_office", "shop": "rent_shop", "warehouse": "rent_warehouse"}.get(kind, "coworking")
+
+
 static func _charge_lease(pid: String, ls: Dictionary) -> void:
 	var prop: Dictionary = DataDB.properties.get(pid, {})
-	var cat := "rent_office" if prop.get("kind", "") == "office" else "coworking"
+	var cat := rent_category(str(prop.get("kind", "")))
 	Ledger.expense(ls["entity"], cat, float(ls["rent"]), I18n.t("%s — monthly") % I18n.t(prop.get("name", pid)), {"type": "lease", "id": pid})
 
 
@@ -70,7 +75,7 @@ static func lease(pid: String) -> Dictionary:
 		return {"ok": false, "error": "Unknown property."}
 	for r in prop.get("requires", []):
 		if not Cond.eval(r):
-			return {"ok": false, "error": "The landlord needs a registered company on the lease."}
+			return {"ok": false, "error": str(prop.get("requires_text", "The landlord needs a registered company on the lease."))}
 	if D()["leases"].has(pid):
 		return {"ok": false, "error": "You already rent this."}
 	var ent := GameState.business_entity()
@@ -78,7 +83,7 @@ static func lease(pid: String) -> Dictionary:
 	var deposit := rent * float(prop.get("deposit_months", 0))
 	if Ledger.cash(ent) < rent + deposit:
 		return {"ok": false, "error": I18n.t("You need %s (first month%s).") % [Fmt.money(rent + deposit), " + deposit" if deposit > 0 else ""]}
-	var cat := "rent_office" if prop["kind"] == "office" else "coworking"
+	var cat := rent_category(str(prop["kind"]))
 	var lines := [{"acct": "exp:" + cat, "dr": rent}, {"acct": "cash", "cr": rent + deposit}]
 	if deposit > 0:
 		lines.append({"acct": "deposits", "dr": deposit})

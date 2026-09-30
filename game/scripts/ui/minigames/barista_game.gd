@@ -15,6 +15,7 @@ var tips := 0.0
 var served_right := 0
 var rng := RandomNumberGenerator.new()
 var cup: CupView
+var own_counter := false      # your own café: no tips for you, but good service lifts the café's rating
 
 
 func _init() -> void:
@@ -28,7 +29,8 @@ func _init() -> void:
 
 func intro_lines() -> Array:
 	return ["Each customer reads out an order. Build it: cup size, drink, milk and shots.",
-		"Press Serve before their patience runs out. Correct drinks served quickly earn tips.",
+		"Press Serve before their patience runs out. Right drinks, served fast, lift your café's rating." if own_counter
+			else "Press Serve before their patience runs out. Correct drinks served quickly earn tips.",
 		"House rules: an Americano never takes milk, and a flat white is always a double shot."]
 
 
@@ -134,6 +136,8 @@ func extra_result() -> Dictionary:
 
 
 func result_lines() -> Array:
+	if own_counter:
+		return [I18n.t("Drinks served exactly right: %d / %d") % [served_right, rounds], I18n.t("Service: %d%%") % int(round(score() * 100))]
 	return [I18n.t("Drinks served exactly right: %d / %d") % [served_right, rounds], I18n.t("Tips: %s") % Fmt.money(tips)]
 
 

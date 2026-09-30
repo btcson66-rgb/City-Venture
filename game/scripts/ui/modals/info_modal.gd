@@ -61,9 +61,9 @@ static func news() -> InfoModal:
 	Clock.advance(5)
 	GameState.set_flag("news_read")   # chapters that open with the news reset this and wait for it
 	var y := DataDB.year_def(int(GameState.data["world"]["year"]))
-	var ls: Array = [I18n.t("# AURELIA DAILY · Year %d — %s") % [int(y.get("year", 1)), y.get("name", "")]]
+	var ls: Array = [I18n.t("# AURELIA DAILY · Year %d — %s") % [int(y.get("year", 1)), I18n.t(str(y.get("name", "")))]]
 	for h in y.get("headlines", []):
-		ls.append("• " + str(h))
+		ls.append("• " + I18n.t(str(h)))
 	ls.append("---")
 	ls.append("# MARKET NOTES")
 	ls.append(I18n.t("• Base rate: %s. Credit is cheap — for now.") % Fmt.pct(float(y.get("interest_rate", 0.025)), 1))

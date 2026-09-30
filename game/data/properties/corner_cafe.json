@@ -1,0 +1,20 @@
+{
+ "id": "corner_cafe",
+ "name": "Corner Café Unit, Lantern Row",
+ "district": "old_town",
+ "kind": "shop",
+ "monthly_rent": 1900,
+ "deposit_months": 2,
+ "building": "corner_cafe_unit",
+ "requires": [
+  "company_registered"
+ ],
+ "requires_text": "Mr. Okafor leases to registered companies only.",
+ "agent": "Mr. Okafor",
+ "agent_line": "Mr. Okafor: \"Keys, meter readings, and my number. The espresso smell is included.\"",
+ "blurb": "A small shop front on a corner that half of Old Town walks past. It comes empty: fit it out, get the food licence at City Hall, and open. The rent is due whether anyone buys a coffee or not.",
+ "capacity": {
+  "inventory_units": 0,
+  "staff": 3
+ }
+}

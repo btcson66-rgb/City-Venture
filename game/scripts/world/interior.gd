@@ -66,6 +66,8 @@ func build(building_id: String) -> void:
 			_light_spill(float(p["x"]), 52.0)
 		add_prop(p)
 	for it in def.get("interactables", []):
+		if str(it.get("params", {}).get("unless_lease", "")) != "" and Living.has_lease(str(it["params"]["unless_lease"])):
+			continue   # e.g. the TO LET notice, once the unit is yours
 		var a: Array = it["at"]
 		var params: Dictionary = it.get("params", {}).duplicate()
 		params["id"] = it["id"]
@@ -245,19 +247,21 @@ func refresh_named_npcs() -> void:
 	if spots.is_empty():
 		return
 	var want := {}
-	if Living.has_lease(str(def.get("property", ""))):
-		var used := {"packer": 0, "desk": 0}
+	var here := str(def.get("property", ""))
+	if Living.has_lease(here):
+		var used := {}
 		for p in Staff.people():
-			if not Staff.is_working(p):
+			if not Staff.is_working(p) or Staff.workplace(str(p["role"])) != here:
 				continue
-			var kind := "packer" if p["role"] == "packer" and spots.has("packer") else "desk"
+			var kind := str(p["role"]) if spots.has(str(p["role"])) else "desk"
+			used[kind] = int(used.get(kind, 0))
 			var list: Array = spots.get(kind, [])
 			if int(used[kind]) >= list.size():
 				continue
 			var at: Array = list[int(used[kind])]
 			used[kind] = int(used[kind]) + 1
-			want[p["id"]] = {"p": p, "pos": Vector2(float(at[0]), float(at[1])), "face": "left" if kind == "packer" else "up",
-				"pose": "interact" if kind == "packer" else "sit"}
+			want[p["id"]] = {"p": p, "pos": Vector2(float(at[0]), float(at[1])), "face": {"packer": "left", "barista": "down"}.get(kind, "up"),
+				"pose": {"packer": "interact", "barista": "idle"}.get(kind, "sit")}
 			if kind == "desk":
 				var seat := seat_near(want[p["id"]]["pos"], 24.0)
 				if seat.is_empty() or _seat_claimed(seat["pos"], want):
@@ -329,6 +333,10 @@ func _spawn_ambient() -> void:
 			n = 3
 		"parcel":
 			n = 1
+		"own_cafe":   # your café: as busy as the hour really is
+			n = 0
+			if Cafe.is_open_now():
+				n = clampi(int(round(Cafe.expected_demand(Clock.hour()) / 4.0)), 1, 5)
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash(scene_id) + Clock.day_index() * 31 + Clock.hour()
 	if Clock.hour() < 8 or Clock.hour() >= 21:

@@ -77,6 +77,8 @@ static func hire_block(role := "") -> String:
 		return "the team is full"
 	if role != "" and bool(role_def(role).get("needs_office", false)) and not Living.has_lease("suite_2b"):
 		return "needs an office (lease Suite 2B)"
+	if role != "" and str(role_def(role).get("needs_lease", "")) != "" and not Living.has_lease(str(role_def(role)["needs_lease"])):
+		return str(role_def(role).get("needs_text", "needs a workplace"))
 	return ""
 
 
@@ -171,10 +173,25 @@ static func is_working(p: Dictionary, t := -1) -> bool:
 		t = Clock.now()
 	if t < int(p.get("start", 0)):
 		return false
+	var rd := role_def(str(p.get("role", "")))
 	var wd := Clock.weekday(t)
 	var h := int((t % Clock.DAY) / 60)
-	var wh: Array = cfg().get("work_hours", [9, 17])
-	return wd >= 1 and wd <= 5 and h >= int(wh[0]) and h < int(wh[1])
+	var wh: Array = rd.get("work_hours", cfg().get("work_hours", [9, 17]))
+	if h < int(wh[0]) or h >= int(wh[1]):
+		return false
+	for d in rd.get("work_days", [1, 2, 3, 4, 5]):
+		if int(d) == wd:   # JSON numbers are floats: compare as ints
+			return true
+	return false
+
+
+## Where someone in this role works: an office desk at Suite 2B unless the role says otherwise (baristas: the café).
+static func workplace(role: String) -> String:
+	return str(role_def(role).get("workplace", "suite_2b"))
+
+
+static func output(p: Dictionary) -> float:
+	return _output(p)
 
 
 static func _output(p: Dictionary) -> float:

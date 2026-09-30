@@ -164,6 +164,8 @@ func validate() -> Array:
 			errs.append("building %s in unknown district %s" % [bid, b.get("district")])
 		var spr: String = b.get("exterior", {}).get("sprite", "")
 		if spr != "" and not buildings_meta.has(spr):
+			spr = str(b["exterior"].get("fallback", spr))   # a facade still being drawn stands in with its fallback
+		if spr != "" and not buildings_meta.has(spr):
 			errs.append("building %s uses unknown facade %s" % [bid, spr])
 	for did in districts:
 		for bid in districts[did].get("buildings", []):

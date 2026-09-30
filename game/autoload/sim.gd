@@ -91,6 +91,8 @@ func _dispatch(kind: String, p: Dictionary) -> void:
 			Staff.handle(kind, p)
 		"bank":
 			Bank.handle(kind, p)
+		"cafe":
+			Cafe.handle(kind, p)
 		_:
 			push_warning("Sim: unknown scheduled kind " + kind)
 
@@ -103,6 +105,7 @@ func _on_hour(t: int, h: int) -> void:
 	Careers.on_hour(t, h)
 	Staff.on_hour(t, h)
 	Saas.on_hour(t, h)
+	Cafe.on_hour(t, h)
 	_request_story_check()
 
 
