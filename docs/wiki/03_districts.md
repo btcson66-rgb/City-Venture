@@ -115,13 +115,13 @@
 
 | 項目 | 內容 |
 |------|------|
-| 狀態 | **已實作**（2026-09-30；遊戲中文顯示為「舊城區」）· 美術**全部是暫代**：Codex B3 的立面、地磚、街道物件和室內家具都還沒交。資料裡每一項都寫了正式的圖名，加一個 `fallback`（先借現有的圖）。正式圖一放進 `game/assets/`，遊戲就自動換上，不用改程式（見「暫代對照表」） |
+| 狀態 | **已實作**（2026-09-30；遊戲中文顯示為「舊城區」）· 美術**B3 已交**（2026-09-30）：立面、地磚、街道物件、室內家具和 Okafor 專屬圖已有原尺寸／4× 版。資料裡每一項都寫了正式的圖名，加一個 `fallback`（先借現有的圖）。正式圖一放進 `game/assets/`，遊戲就自動換上，不用改程式（見「暫代對照表」） |
 | 尺寸 | 88×44 格（1408×704 px） |
 | 氣質 | 低租金、老店、紅磚、石板路、拱廊、鐘樓。傍晚最美。人潮和車流都比購物街稀（車流密度 0.45） |
 | 主色 | `#D8A24A` 琥珀 |
 | 小地圖色 | `#a0674a` |
 | 音樂 | 資料欄位 `day_city`（沿用購物街的曲目；規劃：爵士吉他、手風琴） |
-| 地面 | 上方石板廣場 `cobble_a`（y 0–20）→ 人行道 `sidewalk_alt` → 馬路 `road_b`（2 條斑馬線，在 x=30、x=66 格）→ 人行道 → 下方石板廣場 `cobble_b`（y 34–44）。**`cobble_a`/`cobble_b` 還不在地磚 atlas 裡，先用 `plaza` 暫代**（`ground` 項目的 `fallback`） |
+| 地面 | 上方石板廣場 `cobble_a`（y 0–20）→ 人行道 `sidewalk_alt` → 馬路 `road_b`（2 條斑馬線，在 x=30、x=66 格）→ 人行道 → 下方石板廣場 `cobble_b`（y 34–44）。**B3 已加入 `cobble_a`/`cobble_b`（原 atlas 空格 `(6,4)`、`(7,4)`）**（`ground` 項目的 `fallback`） |
 | 可進入建築 | `okafor_lettings` Okafor Lettings 租屋行（x=215）· `corner_cafe_unit` 轉角咖啡店（x=594；玩家的咖啡店）· `old_town_studio` Studio 1A 老城套房（x=954；只能參觀，搬家是規劃中） |
 | 填充建築 | `rowhouse_brick` 紅磚連棟屋 ×2（x=20、x=1108）· `arcade_arches` 拱廊（x=387）· `clock_tower` 鐘樓（x=766，地標） |
 | 街道物件 | 70 件：鑄鐵路燈 `old_lamp` ×8、護柱 `bollard` ×32、樹籬 ×8、圓樹 `tree_round` / `tree_round_b` 各 ×4、小圓桌 `cafe_chairs_bistro` ×2、長椅 ×2、爬藤架 `ivy_trellis` ×2、小盆栽、咖啡立牌 `cafe_board`、指示牌、數位看板、噴水池、壁畫牆 `mural_wall`、舊書攤 `bookstall`、垃圾桶 |
@@ -132,7 +132,7 @@
 
 **暫代對照表**（沒有正式圖時，遊戲畫什麼）
 
-| 正式圖（尚未交） | 暫代 | 位置 |
+| 正式圖（B3 已交） | 到圖前的暫代 | 位置 |
 |------------------|------|------|
 | `buildings/okafor_lettings` | `brick_shops` | 立面 |
 | `buildings/corner_cafe_unit` | `shop_row_awning` | 立面 |
@@ -181,8 +181,8 @@ Old Town 本身已開放（見上）。以下是設定稿裡**還沒做**的部�
 |------|------|
 | 尚未開放的建築 | `gallery_nine` Gallery Nine 藝廊（買收藏品裝潢）· `ember_print` Ember 印刷行（P3 媒體業、行銷印刷品）· `corner_workshop` 轉角工坊（P3 小量製造） |
 | 尚未開放的玩法 | Studio 1A（`old_town_studio`）目前只能參觀。搬進去、降級住宅（公司倒閉後的去處）是**規劃中** |
-| 尚未畫的街道物件 | `mural_wall`、`ivy_trellis`、`old_lamp`、`bookstall`、`cafe_chairs_bistro`、地磚 `cobble_a` / `cobble_b`（見上方暫代對照表） |
-| 尚未畫的背景 | 老城天際線 `skyline_old_town_day` / `_night`、地點卡（見 [90 工單 B3](90_codex_art_backlog.md#b3-老城區咖啡店產業)） |
+| 美術已交（B3） | `mural_wall`、`ivy_trellis`、`old_lamp`（含發光層）、`bookstall`、`cafe_chairs_bistro`、地磚 `cobble_a` / `cobble_b`；地點卡四張。原尺寸／4× 版本均已交 |
+| 選配背景待畫 | 老城天際線 `skyline_old_town_day` / `_night`；地點卡已交（見 [90 工單 B3](90_codex_art_backlog.md#b3-老城區咖啡店產業)） |
 | 捷運 | 已開放（M5 Loop Line 的最後一站） |
 | 音樂 | 規劃：爵士吉他、手風琴（現在沿用 `day_city`） |
 

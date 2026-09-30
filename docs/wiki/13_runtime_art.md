@@ -110,3 +110,7 @@
 - world_detail/portraits/npc_sofia.png — (1024, 256)
 - world_detail/portraits/npc_tom.png — (1024, 256)
 - world_detail/portraits/player_default.png — (1024, 256)
+
+## B3 老城（2026-09-30）
+
+原尺寸／4× 素材、發光層與 metadata 已交：詳見 `docs/art_sources/b3_20260930/manifest.json`。室內與 Okafor 由現有高解析渲染路徑自動讀入。建築外觀及地磚現有程式仍讀原尺寸；4× 資產已備妥，渲染接線待 Claude 線處理。咖啡機 `espresso_machine_pro` 沒有現有資料位置，尚待接線。改前／改後實機證據位於 `evidence/2026-09-30_b3_old_town/`。
