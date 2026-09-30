@@ -43,6 +43,15 @@ static func _tag(c: Dictionary, what: String) -> void:
 		GameState.set_flag(tag + "_decided")
 
 
+## A tagged offer that ended without a tag (a buyer walking away after counter-offers, in builds before 0.1.8)
+## gets its "declined" flags now, so the story never waits on a decision that was already made.
+static func reconcile_tags() -> void:
+	for c in C().values():
+		var tag := str(c.get("tag", ""))
+		if tag != "" and str(c.get("status", "")) in ["rejected", "withdrawn", "expired"] and not GameState.flag(tag + "_decided"):
+			_tag(c, "declined")
+
+
 static func contact_npc(c: Dictionary) -> String:
 	return str(DataDB.companies.get(c["buyer"], {}).get("contact_npc", "harbor_point"))
 
@@ -115,6 +124,7 @@ static func counter(cid: String, unit_price: float, terms_days: int, upfront_rat
 	if int(c["patience"]) < 0:
 		c["status"] = "withdrawn"
 		c["history"].append({"t": Clock.now(), "by": c["buyer"], "text": "We'll source elsewhere. Thanks anyway."})
+		_tag(c, "declined")   # the offer is settled: a story step waiting on the decision moves on
 		EventBus.contract_changed.emit(cid)
 		return {"ok": true, "result": "withdrawn"}
 	# meet in the middle

@@ -108,7 +108,8 @@ def layout(did):
                     sprite = fb
             fillers.append(f)
             m = META[sprite]
-            doors.append((x + m["door"][0] + m["door"][2] / 2, "filler", sprite, x, m))
+            door = m.get("door") or [m["size"][0] // 2 - 10, 0, 20, 0]   # fillers may have no door at all
+            doors.append((x + door[0] + door[2] / 2, "filler", sprite, x, m))
         fronts.append((x, x + META[sprite]["size"][0]))
         x += META[sprite]["size"][0] + rnd.randint(6, 14)
     assert x < width - 40, "%s frontage too long (%d > %d)" % (did, x, width)

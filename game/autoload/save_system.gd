@@ -189,6 +189,7 @@ func load_data(slot: int) -> bool:
 		return false
 	GameState.data = _migrate(d["data"])
 	GameState.data["meta"]["slot"] = slot     # carry on saving where this game was loaded from
+	Contracts.reconcile_tags()               # older builds could leave a story step waiting on a settled offer
 	GameState.unpack_rng()
 	Clock.clear_pauses()
 	loaded.emit(slot)
@@ -214,6 +215,8 @@ func autosave() -> void:
 
 
 func _migrate(d: Dictionary) -> Dictionary:
+	# a save from an older build: add whatever sections and fields this build has that it doesn't
+	_fill_missing(d, GameState.template())
 	# JSON has no ints: normalise the hot counters back to int so arithmetic stays exact.
 	d["clock"]["minutes"] = int(d["clock"]["minutes"])
 	d["ledger"]["seq"] = int(d["ledger"]["seq"])
@@ -222,3 +225,12 @@ func _migrate(d: Dictionary) -> Dictionary:
 	for it in d["schedule"]:
 		it["t"] = int(it["t"])
 	return d
+
+
+## Add keys from `tpl` that `d` lacks, recursively into dictionaries. Existing values are never touched.
+static func _fill_missing(d: Dictionary, tpl: Dictionary) -> void:
+	for k in tpl:
+		if not d.has(k):
+			d[k] = tpl[k]
+		elif typeof(d[k]) == TYPE_DICTIONARY and typeof(tpl[k]) == TYPE_DICTIONARY:
+			_fill_missing(d[k], tpl[k])

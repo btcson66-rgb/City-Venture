@@ -2,7 +2,7 @@
  "id": "harbor",
  "name": "Harbor",
  "size_tiles": [
-  88,
+  108,
   46
  ],
  "music": "day_city",
@@ -13,7 +13,7 @@
    "rect": [
     0,
     0,
-    88,
+    108,
     20
    ]
   },
@@ -22,7 +22,7 @@
    "rect": [
     0,
     20,
-    88,
+    108,
     4
    ]
   },
@@ -31,7 +31,7 @@
    "rect": [
     0,
     24,
-    88,
+    108,
     1
    ]
   },
@@ -40,7 +40,7 @@
    "rect": [
     0,
     25,
-    88,
+    108,
     5
    ]
   },
@@ -49,7 +49,7 @@
    "rect": [
     0,
     27,
-    88,
+    108,
     1
    ],
    "step": 2
@@ -59,7 +59,7 @@
    "rect": [
     0,
     30,
-    88,
+    108,
     1
    ]
   },
@@ -68,7 +68,7 @@
    "rect": [
     0,
     31,
-    88,
+    108,
     3
    ]
   },
@@ -78,7 +78,7 @@
    "rect": [
     0,
     34,
-    88,
+    108,
     7
    ]
   },
@@ -88,7 +88,7 @@
    "rect": [
     0,
     41,
-    88,
+    108,
     1
    ]
   },
@@ -98,7 +98,7 @@
    "rect": [
     0,
     42,
-    88,
+    108,
     4
    ]
   },
@@ -135,34 +135,20 @@
   },
   {
    "sprite": "cold_store",
-   "x": 370,
+   "x": 542,
    "fallback": "retail_arcade"
   },
   {
    "sprite": "container_stack",
-   "x": 736,
+   "x": 1002,
    "fallback": "riverside_walkup"
   }
  ],
  "props": [
   {
    "sprite": "harbor_lamp",
-   "x": 132,
-   "y": 312,
-   "fallback": "lamp",
-   "solid": [
-    6,
-    66,
-    5,
-    4
-   ],
-   "glow": true,
-   "_gen": true
-  },
-  {
-   "sprite": "harbor_lamp",
    "x": 292,
-   "y": 312,
+   "y": 296,
    "fallback": "lamp",
    "solid": [
     6,
@@ -175,8 +161,64 @@
   },
   {
    "sprite": "harbor_lamp",
-   "x": 1252,
-   "y": 312,
+   "x": 452,
+   "y": 296,
+   "fallback": "lamp",
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_gen": true
+  },
+  {
+   "sprite": "harbor_lamp",
+   "x": 612,
+   "y": 296,
+   "fallback": "lamp",
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_gen": true
+  },
+  {
+   "sprite": "harbor_lamp",
+   "x": 932,
+   "y": 296,
+   "fallback": "lamp",
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_gen": true
+  },
+  {
+   "sprite": "harbor_lamp",
+   "x": 1412,
+   "y": 296,
+   "fallback": "lamp",
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true,
+   "_gen": true
+  },
+  {
+   "sprite": "harbor_lamp",
+   "x": 1572,
+   "y": 296,
    "fallback": "lamp",
    "solid": [
     6,
@@ -190,7 +232,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 28,
-   "y": 370,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -203,7 +245,20 @@
   {
    "sprite": "mooring_bollard",
    "x": 64,
-   "y": 370,
+   "y": 368,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 100,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -216,20 +271,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 136,
-   "y": 370,
-   "fallback": "bollard",
-   "solid": [
-    2,
-    11,
-    4,
-    3
-   ],
-   "_gen": true
-  },
-  {
-   "sprite": "mooring_bollard",
-   "x": 172,
-   "y": 370,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -242,7 +284,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 208,
-   "y": 370,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -255,7 +297,20 @@
   {
    "sprite": "mooring_bollard",
    "x": 244,
-   "y": 370,
+   "y": 368,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 280,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -268,7 +323,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 316,
-   "y": 370,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -281,20 +336,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 352,
-   "y": 370,
-   "fallback": "bollard",
-   "solid": [
-    2,
-    11,
-    4,
-    3
-   ],
-   "_gen": true
-  },
-  {
-   "sprite": "mooring_bollard",
-   "x": 388,
-   "y": 370,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -307,7 +349,20 @@
   {
    "sprite": "mooring_bollard",
    "x": 424,
-   "y": 370,
+   "y": 368,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 460,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -320,7 +375,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 496,
-   "y": 370,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -333,7 +388,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 532,
-   "y": 370,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -346,7 +401,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 568,
-   "y": 370,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -359,7 +414,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 604,
-   "y": 370,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -371,8 +426,8 @@
   },
   {
    "sprite": "mooring_bollard",
-   "x": 676,
-   "y": 370,
+   "x": 640,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -385,7 +440,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 712,
-   "y": 370,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -398,7 +453,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 748,
-   "y": 370,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -410,8 +465,8 @@
   },
   {
    "sprite": "mooring_bollard",
-   "x": 820,
-   "y": 370,
+   "x": 784,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -424,7 +479,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 856,
-   "y": 370,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -437,7 +492,20 @@
   {
    "sprite": "mooring_bollard",
    "x": 892,
-   "y": 370,
+   "y": 368,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 928,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -450,7 +518,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 964,
-   "y": 370,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -463,7 +531,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 1000,
-   "y": 370,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -476,7 +544,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 1036,
-   "y": 370,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -489,7 +557,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 1072,
-   "y": 370,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -502,7 +570,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 1144,
-   "y": 370,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -515,7 +583,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 1180,
-   "y": 370,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -528,20 +596,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 1216,
-   "y": 370,
-   "fallback": "bollard",
-   "solid": [
-    2,
-    11,
-    4,
-    3
-   ],
-   "_gen": true
-  },
-  {
-   "sprite": "mooring_bollard",
-   "x": 1252,
-   "y": 370,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -554,7 +609,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 1288,
-   "y": 370,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -567,7 +622,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 1324,
-   "y": 370,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -580,7 +635,111 @@
   {
    "sprite": "mooring_bollard",
    "x": 1360,
-   "y": 370,
+   "y": 368,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 1396,
+   "y": 368,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 1432,
+   "y": 368,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 1468,
+   "y": 368,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 1540,
+   "y": 368,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 1576,
+   "y": 368,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 1612,
+   "y": 368,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 1648,
+   "y": 368,
+   "fallback": "bollard",
+   "solid": [
+    2,
+    11,
+    4,
+    3
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "mooring_bollard",
+   "x": 1684,
+   "y": 368,
    "fallback": "bollard",
    "solid": [
     2,
@@ -592,7 +751,7 @@
   },
   {
    "sprite": "trash_bin",
-   "x": 130,
+   "x": 197,
    "y": 324,
    "solid": [
     1,
@@ -604,8 +763,8 @@
   },
   {
    "sprite": "pallet_stack",
-   "x": 295,
-   "y": 334,
+   "x": 410,
+   "y": 326,
    "fallback": "product_parcel",
    "solid": [
     1,
@@ -617,8 +776,8 @@
   },
   {
    "sprite": "pallet_stack",
-   "x": 311,
-   "y": 336,
+   "x": 426,
+   "y": 328,
    "fallback": "product_parcel",
    "solid": [
     1,
@@ -630,15 +789,15 @@
   },
   {
    "sprite": "pallet_stack",
-   "x": 303,
-   "y": 322,
+   "x": 418,
+   "y": 314,
    "fallback": "product_parcel",
    "solid": false,
    "_gen": true
   },
   {
    "sprite": "trash_bin",
-   "x": 488,
+   "x": 716,
    "y": 324,
    "solid": [
     1,
@@ -650,7 +809,7 @@
   },
   {
    "sprite": "cone",
-   "x": 599,
+   "x": 765,
    "y": 336,
    "solid": [
     1,
@@ -662,7 +821,7 @@
   },
   {
    "sprite": "cone",
-   "x": 689,
+   "x": 855,
    "y": 336,
    "solid": [
     1,
@@ -674,7 +833,7 @@
   },
   {
    "sprite": "parking_meter",
-   "x": 705,
+   "x": 871,
    "y": 326,
    "solid": [
     2,
@@ -686,7 +845,7 @@
   },
   {
    "sprite": "bike_rack",
-   "x": 878,
+   "x": 1203,
    "y": 328,
    "solid": [
     1,
@@ -698,7 +857,7 @@
   },
   {
    "sprite": "planter_small",
-   "x": 964,
+   "x": 1289,
    "y": 320,
    "solid": [
     1,
@@ -710,7 +869,7 @@
   },
   {
    "sprite": "planter",
-   "x": 1040,
+   "x": 1430,
    "y": 316,
    "solid": [
     1,
@@ -722,7 +881,7 @@
   },
   {
    "sprite": "planter",
-   "x": 1146,
+   "x": 1536,
    "y": 316,
    "solid": [
     1,
@@ -734,7 +893,7 @@
   },
   {
    "sprite": "flagpole",
-   "x": 1014,
+   "x": 1404,
    "y": 278,
    "solid": [
     1,
@@ -746,7 +905,7 @@
   },
   {
    "sprite": "digital_sign",
-   "x": 744,
+   "x": 904,
    "y": 304,
    "solid": [
     4,
@@ -759,7 +918,7 @@
   {
    "sprite": "harbor_lamp",
    "x": 180,
-   "y": 540,
+   "y": 524,
    "fallback": "lamp",
    "solid": [
     6,
@@ -773,7 +932,7 @@
   {
    "sprite": "harbor_lamp",
    "x": 520,
-   "y": 540,
+   "y": 524,
    "fallback": "lamp",
    "solid": [
     6,
@@ -787,7 +946,7 @@
   {
    "sprite": "harbor_lamp",
    "x": 860,
-   "y": 540,
+   "y": 524,
    "fallback": "lamp",
    "solid": [
     6,
@@ -801,7 +960,7 @@
   {
    "sprite": "harbor_lamp",
    "x": 1250,
-   "y": 540,
+   "y": 524,
    "fallback": "lamp",
    "solid": [
     6,
@@ -815,7 +974,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 60,
-   "y": 626,
+   "y": 624,
    "fallback": "bollard",
    "solid": [
     2,
@@ -828,7 +987,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 192,
-   "y": 626,
+   "y": 624,
    "fallback": "bollard",
    "solid": [
     2,
@@ -841,7 +1000,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 324,
-   "y": 626,
+   "y": 624,
    "fallback": "bollard",
    "solid": [
     2,
@@ -854,7 +1013,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 456,
-   "y": 626,
+   "y": 624,
    "fallback": "bollard",
    "solid": [
     2,
@@ -867,7 +1026,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 588,
-   "y": 626,
+   "y": 624,
    "fallback": "bollard",
    "solid": [
     2,
@@ -880,7 +1039,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 720,
-   "y": 626,
+   "y": 624,
    "fallback": "bollard",
    "solid": [
     2,
@@ -893,7 +1052,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 852,
-   "y": 626,
+   "y": 624,
    "fallback": "bollard",
    "solid": [
     2,
@@ -906,7 +1065,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 984,
-   "y": 626,
+   "y": 624,
    "fallback": "bollard",
    "solid": [
     2,
@@ -919,7 +1078,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 1116,
-   "y": 626,
+   "y": 624,
    "fallback": "bollard",
    "solid": [
     2,
@@ -932,7 +1091,7 @@
   {
    "sprite": "mooring_bollard",
    "x": 1248,
-   "y": 626,
+   "y": 624,
    "fallback": "bollard",
    "solid": [
     2,
@@ -945,7 +1104,7 @@
   {
    "sprite": "crate",
    "x": 300,
-   "y": 610,
+   "y": 602,
    "fallback": "product_parcel",
    "solid": [
     1,
@@ -958,7 +1117,7 @@
   {
    "sprite": "crate",
    "x": 318,
-   "y": 612,
+   "y": 604,
    "fallback": "product_parcel",
    "solid": [
     1,
@@ -971,7 +1130,7 @@
   {
    "sprite": "crate",
    "x": 309,
-   "y": 598,
+   "y": 590,
    "fallback": "product_parcel",
    "solid": false,
    "_gen": true
@@ -979,7 +1138,7 @@
   {
    "sprite": "crate",
    "x": 704,
-   "y": 610,
+   "y": 602,
    "fallback": "product_parcel",
    "solid": [
     1,
@@ -992,7 +1151,7 @@
   {
    "sprite": "crate",
    "x": 722,
-   "y": 612,
+   "y": 604,
    "fallback": "product_parcel",
    "solid": [
     1,
@@ -1005,7 +1164,7 @@
   {
    "sprite": "crate",
    "x": 713,
-   "y": 598,
+   "y": 590,
    "fallback": "product_parcel",
    "solid": false,
    "_gen": true
@@ -1013,7 +1172,7 @@
   {
    "sprite": "crate",
    "x": 1020,
-   "y": 610,
+   "y": 602,
    "fallback": "product_parcel",
    "solid": [
     1,
@@ -1026,7 +1185,7 @@
   {
    "sprite": "crate",
    "x": 1038,
-   "y": 612,
+   "y": 604,
    "fallback": "product_parcel",
    "solid": [
     1,
@@ -1039,7 +1198,7 @@
   {
    "sprite": "crate",
    "x": 1029,
-   "y": 598,
+   "y": 590,
    "fallback": "product_parcel",
    "solid": false,
    "_gen": true
@@ -1379,6 +1538,66 @@
     4
    ],
    "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 1408,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 1472,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 1536,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 1600,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
+  },
+  {
+   "sprite": "railing",
+   "x": 1664,
+   "y": 642,
+   "solid": [
+    0,
+    10,
+    64,
+    4
+   ],
+   "_gen": true
   }
  ],
  "metro": {
@@ -1413,17 +1632,17 @@
   {
    "y": 350,
    "x0": 20,
-   "x1": 1388
+   "x1": 1708
   },
   {
    "y": 362,
    "x0": 20,
-   "x1": 1388
+   "x1": 1708
   },
   {
    "y": 506,
    "x0": 20,
-   "x1": 1388
+   "x1": 1708
   },
   {
    "y": 590,
@@ -1433,7 +1652,7 @@
   {
    "y": 628,
    "x0": 20,
-   "x1": 1388
+   "x1": 1708
   }
  ],
  "ambient_density": {

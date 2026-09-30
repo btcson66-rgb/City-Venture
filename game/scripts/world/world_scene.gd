@@ -240,7 +240,8 @@ func add_prop(p: Dictionary, parent: Node = null) -> Node2D:
 		if sm.has("glow"):
 			g.position = Vector2(float(sm["glow"][0]), float(sm["glow"][1]) - (float(h) if not (wall or floor_decal) else 0.0))
 		else:
-			g.position = Vector2(w / 2.0 + (5.0 if sprite_path.begins_with("lamp") else 0.0), (8.0 if sprite_path.begins_with("lamp") else float(h) - 4.0) - (float(h) if not (wall or floor_decal) else 0.0))
+			var lamp := sprite_path.contains("lamp")   # street lamps (lamp, old_lamp, harbor_lamp) glow at the head
+			g.position = Vector2(w / 2.0 + (5.0 if sprite_path.begins_with("lamp") else 0.0), (8.0 if lamp else float(h) - 4.0) - (float(h) if not (wall or floor_decal) else 0.0))
 		var mat := CanvasItemMaterial.new()
 		mat.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
 		g.material = mat

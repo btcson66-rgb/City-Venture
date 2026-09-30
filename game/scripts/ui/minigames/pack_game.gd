@@ -226,7 +226,12 @@ class BoxView:
 		var inner := r.grow(-5)
 		draw_rect(inner, Color8(150, 110, 66))
 		var ph := inner.size.y * minf(game.pad, 1.0)
-		draw_rect(Rect2(inner.position.x, inner.end.y - ph, inner.size.x, ph), Color(0.85, 0.92, 1.0, 0.85))
+		var pad_rect := Rect2(inner.position.x, inner.end.y - ph, inner.size.x, ph)
+		var paper := Art.opt_tex("minigames/recycled_padding") if Ecommerce.packaging() == "recycled" else null
+		if paper != null and ph > 0.5:
+			draw_texture_rect(paper, pad_rect, true)   # crumpled kraft paper, tiled
+		else:
+			draw_rect(pad_rect, Color(0.85, 0.92, 1.0, 0.85))
 		var tex := Art.opt_tex(DataDB.product_icon(str(game._order()["product"])))
 		if tex != null:
 			draw_texture_rect(tex, Rect2(r.get_center() - Vector2(16, 20), Vector2(32, 32)), false)

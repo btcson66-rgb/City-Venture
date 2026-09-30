@@ -72,10 +72,39 @@ func build() -> void:
 	pass
 
 
+## Rebuild the contents in place. Scroll lists keep their position, so pressing "+" on a row halfway down a list
+## doesn't throw you back to the top; set `reset_scroll` first when the content changes entirely (a new tab).
 func rebuild() -> void:
+	var keep: Array = [] if reset_scroll else _scroll_values(body)
+	reset_scroll = false
 	UIK.clear(body)
 	UIK.clear(footer)
 	build()
+	if not keep.is_empty():
+		_restore_scroll.call_deferred(keep)
+
+
+var reset_scroll := false
+
+
+static func _scrolls(n: Node, out: Array) -> Array:
+	for c in n.get_children():
+		if c is ScrollContainer:
+			out.append(c)
+		_scrolls(c, out)
+	return out
+
+
+func _scroll_values(n: Node) -> Array:
+	return _scrolls(n, []).map(func(sc): return sc.scroll_vertical)
+
+
+func _restore_scroll(keep: Array) -> void:
+	await get_tree().process_frame   # the new rows need a layout pass before the scroll range is right
+	var now := _scrolls(body, [])
+	for i in mini(keep.size(), now.size()):
+		if is_instance_valid(now[i]):
+			now[i].scroll_vertical = int(keep[i])
 
 
 func close() -> void:

@@ -114,6 +114,7 @@ func build() -> void:
 
 func _set_tab(t: String) -> void:
 	tab = t
+	reset_scroll = true   # a new tab starts at the top
 	help_key = "os_" + t   # the ? button explains the tab you're on
 	rebuild()
 	Help.show_once.call_deferred(help_key)
