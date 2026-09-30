@@ -68,7 +68,7 @@ static func news() -> InfoModal:
 	ls.append("# MARKET NOTES")
 	ls.append(I18n.t("• Base rate: %s. Credit is cheap — for now.") % Fmt.pct(float(y.get("interest_rate", 0.025)), 1))
 	ls.append(I18n.t("• Shipping index: %.2f (1.00 = normal).") % float(y.get("shipping_index", 1.0)))
-	ls.append("• ShopLane fee 10%%. Payouts every Monday.")
+	ls.append("• ShopLane fee 10%. Payouts every Monday.")
 	return make("News board", "info", ls)
 
 

@@ -21,7 +21,7 @@ func setup(id: String, scene: Node) -> void:
 	rig.setup(def.get("appearance", {}), def.get("outfit", "casual_tee"), tints, id)
 	rig.set_dir("down")
 	interact = Interactable.new()
-	interact.label = I18n.t("Talk to %s") % def.get("name", id)
+	interact.label = I18n.t("Talk to %s") % shown_name(str(def.get("name", id)))
 	interact.action = "talk"
 	interact.params = {"npc": id}
 	interact.radius = 30.0
@@ -29,11 +29,17 @@ func setup(id: String, scene: Node) -> void:
 	interact.position = Vector2(0, 14)
 	add_child(interact)
 	# Name chip: shown only while the player is close, so it never sits on top of wall signs.
-	name_tag = UIK.name_tag(str(def.get("name", id)))
+	name_tag = UIK.name_tag(shown_name(str(def.get("name", id))))
 	name_tag.modulate.a = 0.0
 	add_child(name_tag)
 	_place_tag.call_deferred()
 	var _u := scene
+
+
+## Names with an honorific ("Mr. Okafor") read like the dialogue box does; plain names ("Jun") never go through the
+## catalogue, where they could collide with a word (the month 6月).
+static func shown_name(n: String) -> String:
+	return I18n.t(n) if n.contains(". ") else n
 
 
 func _place_tag() -> void:

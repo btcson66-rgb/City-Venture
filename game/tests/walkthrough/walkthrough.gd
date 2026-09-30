@@ -754,8 +754,13 @@ func _chapters_7_to_9() -> void:
 	bot.step("Chapter 7 — order from the co-op, raise a price")
 	await _home_laptop("operations")
 	await bot.shot("operations_supply_shock")
-	await bot.click_named("Buy_aurelia_makers_desk_lamp", 3.0)
-	await bot.wait(0.4)
+	# the co-op sells in lots of its MOQ (30): buy until the chapter's 100 units are in hand or on the way
+	for i in 5:
+		if Cond.eval("stock_units>=100"):
+			break
+		await bot.click_named("Buy_aurelia_makers_desk_lamp", 3.0)
+		await bot.wait(0.4)
+	StoryEngine.check()   # ch7_stock is done: the price objective starts now and resets its flag
 	await bot.click_named("Tab_sales")
 	await bot.wait(0.4)
 	await bot.click_named("PriceUp_desk_lamp", 3.0)
@@ -866,6 +871,7 @@ func _old_town_cafe() -> void:
 	await close_modal()
 	bot.expect(Cafe.leased(), "leased the corner café unit")
 	await exit_building()
+	await bot.shot("old_town_storefronts")
 	await enter_building("corner_cafe_unit")
 	await open_os_at(func(n): return n.action == "open_company_os", "the café till")
 	await bot.click_named("CafeFitOut", 3.0)
@@ -891,7 +897,8 @@ func _old_town_cafe() -> void:
 	await exit_building()
 	await metro_to("riverside")
 	await enter_building("riverside_apartment")
-	await pass_time_at_home(func(): return Cafe.ready_to_open() and Cafe.open_day() and Clock.hour() >= 7 and Clock.hour() < 12, 12)
+	# the licence takes two days from the application (48 h): sleep through them, then wait for an opening morning
+	await pass_time_at_home(func(): return Cafe.ready_to_open() and Cafe.open_day() and Clock.hour() >= 7 and Clock.hour() < 15, 30)
 	bot.expect(Cafe.ready_to_open(), "fitted out and licensed")
 	bot.step("Old Town — opening day behind your own counter")
 	await exit_building()

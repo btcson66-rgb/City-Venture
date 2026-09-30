@@ -201,7 +201,7 @@ A5 已重製四種現有表情並補上眼鏡；12 位具名 NPC 的頭像和四
 | `support` | Customer Support 客服 | `office_professional` | 加 `headset` 耳麥 | 坐在辦公桌講電話 |
 | `marketer` | Marketer 行銷 | `startup_casual` | 加 `bag_tote` 托特包 | 坐在辦公桌 |
 | `developer` | Developer 工程師 | `office_professional` | 改穿帽 T（`student` 服裝的成人版）或加 `headset` | 坐在雙螢幕桌 |
-| `barista` | Barista 咖啡師（**已實作 · 2026-09-30**） | `barista`（襯衫加圍裙） | 已有正式服裝 | 站在轉角咖啡店的吧台後（週一到六 07–17），一小時約做 14 杯。這個職位的工作地點是咖啡店，不是 Suite 2B，而且要先租下轉角咖啡店面才能僱用 |
+| `barista` | Barista 咖啡師（**已實作 · 2026-09-30**） | `startup_casual`（和 `packer`、`marketer` 一樣，由 `Staff._make_person` 指定；只有 `support` 和 `developer` 穿 `office_professional`） | 規劃：改穿 `barista` 服裝（襯衫加圍裙，Jun 和 Lee 現在穿的那套）。現在的店員看起來和其他員工一樣 | 站在轉角咖啡店的吧台後（週一到六 07–17），一小時約做 14 杯。這個職位的工作地點是咖啡店，不是 Suite 2B，而且要先租下轉角咖啡店面才能僱用 |
 
 ## 路人（`scripts/world/ambient_person.gd`）
 

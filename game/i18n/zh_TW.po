@@ -270,7 +270,7 @@ msgstr "%s 已經登記過了（%s）。"
 msgid "%s is busy."
 msgstr "%s 在忙。"
 
-#: autoload/scene_router.gd:172
+#: autoload/scene_router.gd:174
 msgid "%s is closed. Open %s–%s, %s."
 msgstr "%s 目前沒開。營業時間 %s–%s，%s。"
 
@@ -4538,7 +4538,7 @@ msgstr "蓬亂"
 msgid "Metro"
 msgstr "捷運"
 
-#: autoload/scene_router.gd:203
+#: autoload/scene_router.gd:205
 msgid "Metro fare to %s"
 msgstr "捷運車資：往%s"
 
@@ -4650,9 +4650,13 @@ msgstr "每月還款"
 msgid "Monthly rent"
 msgstr "月租"
 
-#: autoload/scene_router.gd:171 scripts/ui/modals/job_modal.gd:31
+#: autoload/scene_router.gd:173 scripts/ui/modals/job_modal.gd:31
 msgid "Mon–Fri"
 msgstr "週一至週五"
+
+#: autoload/scene_router.gd:173
+msgid "Mon–Sat"
+msgstr "週一至週六"
 
 #: scripts/ui/modals/company_os.gd:634
 msgid "Morale %d"
@@ -4958,11 +4962,11 @@ msgstr "沒有風險，也沒有營收。"
 msgid "No saved games yet."
 msgstr "還沒有存檔。"
 
-#: scripts/sim/event_engine.gd:150
+#: scripts/sim/event_engine.gd:152
 msgid "No such choice."
 msgstr "沒有這個選項。"
 
-#: scripts/sim/event_engine.gd:143
+#: scripts/sim/event_engine.gd:145
 msgid "No such decision."
 msgstr "沒有這個決定。"
 
@@ -7814,7 +7818,7 @@ msgstr "謝謝"
 msgid "That applicant has moved on."
 msgstr "這位應徵者已經找到別的工作了。"
 
-#: scripts/sim/event_engine.gd:158
+#: scripts/sim/event_engine.gd:160
 msgid "That didn't work."
 msgstr "沒有成功。"
 
@@ -8462,7 +8466,7 @@ msgstr "用 WASD 或方向鍵走路，按住 Shift 可以跑步。"
 msgid "Walked out"
 msgstr "走掉"
 
-#: autoload/scene_router.gd:198
+#: autoload/scene_router.gd:200
 msgid "Walking to %s… (%d min)"
 msgstr "走路前往%s……（%d 分鐘）"
 
@@ -8726,7 +8730,7 @@ msgstr "你在這裡。"
 msgid "You can run a business and keep a job at the same time."
 msgstr "做生意和打工可以同時進行。"
 
-#: scripts/sim/event_engine.gd:152
+#: scripts/sim/event_engine.gd:154
 msgid "You can't do that right now."
 msgstr "現在不能這麼做。"
 
@@ -9746,7 +9750,7 @@ msgstr "標籤貼錯！"
 msgid "you + %d staff"
 msgstr "你＋%d 位員工"
 
-#: scripts/sim/event_engine.gd:121
+#: scripts/sim/event_engine.gd:123
 msgid "{company}"
 msgstr "{company}"
 
@@ -9778,11 +9782,11 @@ msgstr "{customer}：{reason}"
 msgid "{entity_name}: {cash}."
 msgstr "{entity_name}：{cash}。"
 
-#: scripts/sim/event_engine.gd:129 scripts/sim/event_engine.gd:130
+#: scripts/sim/event_engine.gd:131 scripts/sim/event_engine.gd:132
 msgid "{moq_cost_v}"
 msgstr "{moq_cost_v}"
 
-#: scripts/sim/event_engine.gd:122
+#: scripts/sim/event_engine.gd:124
 msgid "{player}"
 msgstr "{player}"
 
@@ -9835,8 +9839,8 @@ msgid "• Shipping index: %.2f (1.00 = normal)."
 msgstr "• 運價指數：%.2f（1.00 = 正常）。"
 
 #: scripts/ui/modals/info_modal.gd:71
-msgid "• ShopLane fee 10%%. Payouts every Monday."
-msgstr "• ShopLane 抽成 10%%。每週一撥款。"
+msgid "• ShopLane fee 10%. Payouts every Monday."
+msgstr "• ShopLane 抽成 10%。每週一撥款。"
 
 #: scripts/ui/modals/info_modal.gd:50
 msgid "• Take consulting work you do yourself: Company OS → Freelance."

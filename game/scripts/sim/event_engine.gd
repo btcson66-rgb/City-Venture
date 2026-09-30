@@ -89,6 +89,8 @@ static func trigger(id: String, ctx := {}) -> Dictionary:
 	if d.is_empty():
 		push_warning("EventEngine: unknown event " + id)
 		return {}
+	if ctx.is_empty() and not d.get("bind", {}).is_empty():
+		ctx = bind(d)   # a chapter fires its events with no context: bind the product and supplier now
 	S()["fired"][id] = int(S()["fired"].get(id, 0)) + 1
 	var cd := int(d.get("trigger", {}).get("cooldown_days", 0))
 	if cd > 0:
