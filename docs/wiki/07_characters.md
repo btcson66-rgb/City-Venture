@@ -238,3 +238,7 @@ A5 已重製四種現有表情並補上眼鏡；12 位具名 NPC 的頭像和四
 | `portraits/npc_<id>.png` | 256×64 | 4 個表情的完整頭像。有這張就取代分層頭像 |
 
 優先順序：Maya → Marcus → Daniel → Elena → Priya → Jun → 其他。
+
+## B2 具名角色 · 美術已交 2026-09-30
+
+Rosa Lim、Ines Duarte、Sam Okoro 均交 `characters/npc_<id>` 128×144（三方向 × 四表情）、`portraits/npc_<id>` 256×64 與 4×。外型依上表；表情順序平常、微笑、思考、驚訝。站姿各格保持腳底對齊，港區出生點、排程與服裝選項由 Claude 線接入。

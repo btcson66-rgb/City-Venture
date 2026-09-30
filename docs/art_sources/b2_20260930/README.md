@@ -1,0 +1,3 @@
+# B2 source art
+
+One generated image per asset/variant. Full original prompts and intended native dimensions are in buildings_sources.json, objects_sources.json, remaining_sources.json, lights_sources.json and floor_source.json. All sources retained. Corrections: Rosa alpha-only background cleanup; route map flattened to overhead layout. Sprite packing crops real alpha bounds; character cells align feet at (16,46). Vehicle body/detail channel separation is complementary and only white sheet-metal is grayscale tintable; lower wheels/glass stay in detail. Emission masks preserve original RGB only under generated mask alpha and brightness/color conditions, excluding signboards. No procedural placeholders were run.

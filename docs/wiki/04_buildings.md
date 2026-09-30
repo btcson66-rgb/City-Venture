@@ -154,3 +154,7 @@
 - 側牆（`depth`）比正面暗 15–25%，保持光源在左上。
 - `_lights` 疊圖只畫發光的東西：窗戶（大約 60% 亮、40% 暗，不要全亮）、招牌燈條、門燈、屋頂燈。
 - 同一區的建築高度要有高低變化，天際線才不會像一排牙齒。
+
+## B2 港區立面 · 美術已交 2026-09-30
+
+`pier7_warehouse` 280×190、`dockside_motors` 240×150、`harbor_point_fitness` 182×173、`customs_house` 240×220、`warehouse_shed` 220×150、`cold_store` 200×170、`container_stack` 180×120。每張附 `_lights` 及 4×；入口和空白招牌位置已寫入 buildings_meta.json，runtime 字串由資料提供。海關是否開放仍由 Claude 線決定。
