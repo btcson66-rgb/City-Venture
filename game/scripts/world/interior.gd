@@ -31,8 +31,10 @@ func build(building_id: String) -> void:
 	add_child(bg)
 	move_child(bg, 0)
 	paint("wall_" + str(def.get("wall", "plaster_warm")), [0, 0, wt, WALL_ROWS])
+	paint("wall_" + str(def.get("wall", "plaster_warm")), [0, -2, wt, 2])
 	paint("floor_" + str(def.get("floor", "wood_warm")), [0, WALL_ROWS, wt, ht - WALL_ROWS])
 	_continuous_floor()
+	_add_room_zones(building_id)
 	_decorate_walls(wt, ht)
 	# collisions: walls + edges, with a door gap at the bottom centre
 	var door_w := 32.0
@@ -51,6 +53,8 @@ func build(building_id: String) -> void:
 	add_child(ex)
 	spawns["door"] = Vector2(cx, size_px.y - 22)
 	for p in def.get("props", []):
+		if building_id == "riverside_apartment" and p["sprite"] == "rug":
+			continue  # the larger living-area textile replaces this decorative rug
 		if p["sprite"] == "company_sign":
 			_add_company_sign(p)
 			continue
@@ -81,17 +85,54 @@ func _continuous_floor() -> void:
 		return
 	var fs := Sprite2D.new()
 	fs.texture = load(path)
+	var detail := Art.opt_tex("world_detail/interiors/floor_%s" % str(def.get("floor", "wood_warm")))
+	if detail != null:
+		fs.texture = detail
+		fs.scale = Vector2(0.25, 0.25)
+		fs.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 	fs.centered = false
 	fs.region_enabled = true
-	fs.region_rect = Rect2(0, 0, size_px.x, size_px.y - WALL_ROWS * T)
+	fs.region_rect = Rect2(Vector2.ZERO, Vector2(size_px.x, size_px.y - WALL_ROWS * T) / fs.scale)
 	fs.position = Vector2(0, WALL_ROWS * T)
 	back_layer.add_child(fs)
 	back_layer.move_child(fs, 0)
 
 
+func _add_room_zones(building_id: String) -> void:
+	# Low-contrast textiles tie furniture groups together without changing paths.
+	var zones := {
+		"riverside_apartment": [Rect2(104, 112, 138, 97)],
+		"small_office": [Rect2(122, 61, 110, 73)],
+		"nexus_cowork": [],
+	}
+	var texture := Art.opt_tex("world_detail/interiors/rug_navy")
+	if texture == null:
+		return
+	for area in zones.get(building_id, []):
+		var textile := Sprite2D.new()
+		textile.texture = texture
+		textile.centered = false
+		textile.position = area.position
+		textile.scale = area.size / texture.get_size()
+		back_layer.add_child(textile)
+
+
 func _decorate_walls(wt: int, ht: int) -> void:
 	var W := wt * T
 	var wall_kind: String = def.get("wall", "plaster_warm")
+	var plaster := Art.opt_tex("world_detail/interiors/wall_plaster")
+	if plaster != null and wall_kind in ["plaster_warm", "white_modern", "marble_wall", "navy_panel"]:
+		var surface := Sprite2D.new()
+		surface.texture = plaster
+		surface.centered = false
+		surface.region_enabled = true
+		surface.region_rect = Rect2(0, 0, W * 4, 80 * 4)
+		surface.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
+		surface.scale = Vector2(0.25, 0.25)
+		surface.position = Vector2(0, -32)
+		if wall_kind == "navy_panel":
+			surface.modulate = Color("33465e")
+		back_layer.add_child(surface)
 	# wainscot: lower wall panel with a trim line (not on brick / glass walls)
 	if wall_kind in ["plaster_warm", "white_modern", "marble_wall", "navy_panel"]:
 		var wc := Color8(150, 110, 76) if wall_kind == "plaster_warm" else (Color8(206, 200, 190) if wall_kind == "white_modern" else Color8(190, 180, 164))
@@ -116,7 +157,7 @@ func _decorate_walls(wt: int, ht: int) -> void:
 	# crown moulding
 	var crown := ColorRect.new()
 	crown.color = Color(1, 1, 1, 0.18)
-	crown.position = Vector2(0, 2)
+	crown.position = Vector2(0, -30)
 	crown.size = Vector2(W, 1)
 	back_layer.add_child(crown)
 	# floor ambient occlusion along the wall base
@@ -142,14 +183,14 @@ func _decorate_walls(wt: int, ht: int) -> void:
 	back_layer.add_child(base)
 	var trim := ColorRect.new()
 	trim.color = Color(1, 1, 1, 0.12)
-	trim.position = Vector2(0, 0)
+	trim.position = Vector2(0, -32)
 	trim.size = Vector2(wt * T, 1)
 	back_layer.add_child(trim)
 	for side in [0, 1]:
 		var fr := ColorRect.new()
 		fr.color = Color8(22, 30, 46)
-		fr.position = Vector2(-4 if side == 0 else wt * T, 0)
-		fr.size = Vector2(4, ht * T + 4)
+		fr.position = Vector2(-4 if side == 0 else wt * T, -32)
+		fr.size = Vector2(4, ht * T + 36)
 		add_child(fr)
 	var bottom := ColorRect.new()
 	bottom.color = Color8(22, 30, 46)

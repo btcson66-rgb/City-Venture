@@ -13,7 +13,10 @@ func setup(rng: RandomNumberGenerator, seat_dir := "") -> void:
 	add_child(rig)
 	var outfits := ["casual_tee", "casual_jacket", "business_suit", "office_professional", "startup_casual"]
 	var outfit: String = outfits[rng.randi_range(0, outfits.size() - 1)]
-	rig.setup(Art.random_appearance(rng), outfit, Art.random_outfit_tints(rng, outfit))
+	var app := Art.random_appearance(rng)
+	var tints := Art.random_outfit_tints(rng, outfit)
+	var guest := "guest_" + str(rng.randi_range(0, 5))
+	rig.setup(app, outfit, tints, guest)
 	rig.set_dir(seat_dir if seat_dir != "" else ["down", "left", "right", "up"][rng.randi_range(0, 3)])
 	rig.set_pose("sit")   # they are placed on chairs, benches and sofas
 	_t = rng.randf_range(3.0, 9.0)

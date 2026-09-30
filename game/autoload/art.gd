@@ -78,6 +78,10 @@ func opt_color(group: String, id: String, fallback := Color.WHITE) -> Color:
 ##  - outfit_<o>_<pres>_top_detail / _bottom_detail: untinted details (shirt, tie, badge, bag) drawn over the
 ##    tinted fabric, so one suit can be charcoal on Marcus and navy on Daniel
 func character_layers(app: Dictionary, outfit: String, outfit_tints := {}, npc_id := "") -> Array:
+	if npc_id != "" and has_tex("world_detail/characters/npc_" + npc_id):
+		return [{"tex": "world_detail/characters/npc_" + npc_id, "tint": Color.WHITE, "name": "npc_detail"}]
+	if npc_id == "" and outfit == "startup_casual" and outfit_tints.is_empty() and _default_detail_appearance(app) and has_tex("world_detail/characters/player_default"):
+		return [{"tex": "world_detail/characters/player_default", "tint": Color.WHITE, "name": "founder_detail"}]
 	if npc_id != "" and has_tex("characters/npc_" + npc_id):
 		return [{"tex": "characters/npc_" + npc_id, "tint": Color.WHITE, "name": "npc"}]
 	var pres: String = app.get("presentation", "masculine")
@@ -115,6 +119,10 @@ func character_layers(app: Dictionary, outfit: String, outfit_tints := {}, npc_i
 ## strip that replaces the layers), portraits/outfit_<o>_detail (untinted collar details) and
 ## portraits/acc_<accessory> (glasses on the portrait, 64x64).
 func portrait_layers(app: Dictionary, outfit: String, outfit_tints := {}, npc_id := "") -> Array:
+	if npc_id == "" and outfit == "startup_casual" and outfit_tints.is_empty() and _default_detail_appearance(app) and has_tex("world_detail/portraits/player_default"):
+		return [{"tex": "world_detail/portraits/player_default", "tint": Color.WHITE, "frames": 4}]
+	if npc_id != "" and has_tex("world_detail/portraits/npc_" + npc_id):
+		return [{"tex": "world_detail/portraits/npc_" + npc_id, "tint": Color.WHITE, "frames": 4}]
 	if npc_id != "" and has_tex("portraits/npc_" + npc_id):
 		return [{"tex": "portraits/npc_" + npc_id, "tint": Color.WHITE, "frames": 4}]
 	var hc: Color = app.get("_hair_color_c", opt_color("hair_colors", app.get("hair_color", "brown"), Color8(120, 82, 54)))
@@ -140,6 +148,18 @@ func portrait_layers(app: Dictionary, outfit: String, outfit_tints := {}, npc_id
 	if acc != "none" and has_tex("portraits/acc_" + acc):
 		L.append({"tex": "portraits/acc_" + acc, "tint": Color.WHITE, "frames": 1})
 	return L
+
+
+func _default_detail_appearance(app: Dictionary) -> bool:
+	# Never silently replace a player's customised skin, face, hair or accessories.
+	var defaults := GameState.default_appearance()
+	for key in defaults:
+		if app.get(key, defaults[key]) != defaults[key]:
+			return false
+	for key in ["_hair_color_c", "_skin_c", "_eye_c"]:
+		if app.has(key):
+			return false
+	return true
 
 
 ## Deterministic random appearance for ambient NPCs.

@@ -1,5 +1,7 @@
 # 10 介面與圖示
 
+2026-09-29：`panel`、`panel_glass`、`button`、`button_hover`、`button_primary`、`button_primary_hover`、`card` 已更新為低飽和深藍框架與城市藍主操作。保留原有尺寸及 9-slice 邊距，綠色仍用於現金流／成功圖示。重建由 `python tools/art/renewal_pack.py` 選擇性輸出這 7 張，不會覆蓋其他 UI。
+
 ## 介面風格
 
 - **深海軍藍的面板、白字、藍色強調**（Board A「Game UI sample」）。

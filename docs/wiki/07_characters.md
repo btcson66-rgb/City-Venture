@@ -1,5 +1,11 @@
 # 07 角色
 
+### 2026-09-29 原創對話頭像更新
+
+12 位具名 NPC 已接入原創四表情頭像：`npc_ana`、`npc_daniel`、`npc_dara`、`npc_elena`、`npc_jun`、`npc_ken`、`npc_lee`、`npc_marcus`、`npc_maya`、`npc_priya`、`npc_sofia`、`npc_tom`，均位於 `game/assets/portraits/`。每張 256×64，順序維持 neutral / happy / thinking / surprised。狀態：**CODEX 原創更新，已接入既有 NPC 頭像覆寫接點**。
+
+玩家與路人的分層頭像仍沿用既有系統；本次未替換分層走路或姿勢圖。原畫與 prompt：`docs/art_sources/renewal_20260929/`；引擎 48 表情檢視：`evidence/2026-09-29_art_renewal/review/portraits_1.png`、`portraits_2.png`。
+
 ## 角色系統怎麼組成
 
 所有角色，包括主角、NPC、員工和路人，都是**同一套分層骨架**組出來的：把十幾張透明圖層疊在一起，再個別染色。所以一張「短髮」圖就能變成 8 種髮色，一套「西裝」可以給 3 種體型穿。

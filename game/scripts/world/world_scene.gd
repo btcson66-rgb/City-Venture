@@ -142,6 +142,12 @@ func add_prop(p: Dictionary, parent: Node = null) -> Node2D:
 	var holder := Node2D.new()
 	var s := Sprite2D.new()
 	s.texture = tex
+	# Keep placement, sorting and collision in design pixels; only the artwork
+	# gains resolution. canvas_items stretching preserves this detail on screen.
+	var detailed := Art.opt_tex("world_detail/" + key)
+	if detailed != null:
+		s.texture = detailed
+		s.scale = Vector2(tex.get_size()) / Vector2(detailed.get_size())
 	s.centered = false
 	# board-converted art may overhang its design footprint (top/left); placement uses the footprint
 	var sm: Dictionary = DataDB.sprite_meta.get(key, {})
@@ -168,8 +174,24 @@ func add_prop(p: Dictionary, parent: Node = null) -> Node2D:
 			holder.add_child(sh)
 		holder.add_child(s)
 		(parent if parent != null else entities).add_child(holder)
+	# Sprite offsets are texture pixels, unlike the logical holder position.
+	s.offset /= s.scale
 	if p.has("night"):
-		night_sprites.append({"node": s, "day": tex, "night": Art.tex(folder + str(p["night"]))})
+		var night_tex := Art.tex(folder + str(p["night"]))
+		if detailed != null:
+			var detailed_night := Art.opt_tex("world_detail/" + folder + str(p["night"]))
+			if detailed_night != null:
+				night_tex = detailed_night
+			else:
+				# A partial day/night pair must retain its original geometry.
+				s.texture = tex
+				s.offset *= s.scale
+				s.scale = Vector2.ONE
+		night_sprites.append({"node": s, "day": s.texture, "night": night_tex})
+	if detailed != null and s.texture == detailed and wall and sprite_path.begins_with("window_"):
+		# Taller glazing extends into the raised back wall; partial pairs fall back.
+		s.scale.y *= 1.38
+		s.position.y -= 16
 	if p.get("glow", false):
 		var g := Sprite2D.new()
 		g.texture = Art.tex("effects/glow_small" if kind == "interior" else "effects/glow_warm")

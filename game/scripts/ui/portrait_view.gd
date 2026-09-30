@@ -68,7 +68,8 @@ func set_expr(e: String) -> void:
 		if int(L["frames"]) > 1:
 			var at := AtlasTexture.new()
 			at.atlas = t
-			at.region = Rect2(f * 64, 0, 64, 64)
+			var cell := Vector2(t.get_width() / int(L["frames"]), t.get_height())
+			at.region = Rect2(Vector2(f * cell.x, 0), cell)
 			_rects[i].texture = at
 		else:
 			_rects[i].texture = t

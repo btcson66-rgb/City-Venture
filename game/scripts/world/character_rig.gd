@@ -25,6 +25,7 @@ var _group: CanvasGroup
 static var _outline_mat: ShaderMaterial
 var appearance: Dictionary = {}
 var outfit := "startup_casual"
+var expression := "neutral"
 
 
 func _ready() -> void:
@@ -67,7 +68,7 @@ func setup(app: Dictionary, outfit_id: String, tints := {}, npc_id := "") -> voi
 		s.hframes = 4
 		s.vframes = 3
 		s.centered = false
-		s.offset = -FEET
+		_fit_sheet(s)
 		s.modulate = L["tint"]
 		s.name = L["name"]
 		_group.add_child(s)
@@ -100,10 +101,18 @@ func set_pose(p: String) -> bool:
 	for s in _layers:
 		var base := str(s.get_meta("tex"))
 		s.texture = Art.tex(base + "_" + pose if pose != "" else base)
+		_fit_sheet(s)
 	_frame = 0
 	_t = 0.0
 	_apply()
 	return ok
+
+
+func _fit_sheet(s: Sprite2D) -> void:
+	# High-detail atlases keep the same logical feet anchor and walk footprint.
+	var cell := s.texture.get_size() / Vector2(4, 3)
+	s.scale = Vector2(FRAME_W, FRAME_H) / cell
+	s.offset = -FEET / s.scale
 
 
 func _outline_material() -> ShaderMaterial:
@@ -154,8 +163,17 @@ func _apply() -> void:
 	var row: int = ROWS["side"] if dir in ["left", "right"] else ROWS.get(dir, 0)
 	var idx := row * 4 + _frame
 	for s in _layers:
-		s.frame = idx
+		if s.name == "npc_detail" and pose == "":
+			var face_frame: int = {"neutral": 0, "happy": 1, "thinking": 2, "surprised": 3}.get(expression, 0)
+			s.frame = row * 4 + face_frame
+		else:
+			s.frame = idx
 		s.flip_h = dir == "left"
+
+
+func set_expression(value: String) -> void:
+	expression = value
+	_apply()
 
 
 static func dir_from_vector(v: Vector2, fallback := "down") -> String:
