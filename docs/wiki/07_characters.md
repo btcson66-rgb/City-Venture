@@ -231,6 +231,8 @@ A5 已重製四種現有表情並補上眼鏡；12 位具名 NPC 的頭像和四
 | `hana` | Prof. Hana Sato | 大學研究室主持人 | P1 | 陰柔 · 橢圓臉 · 銀色鮑伯 · s2 · 圓眼深瞳 · 柔眉 · 微笑 · 圓框眼鏡 | `lab_coat` | 研發合作、介紹實習生。實驗袍口袋插著三支筆 |
 | `kai` | Kai Moreno | Aurelia Daily 記者 | P1 | 中性 · 心形臉 · 棕色亂髮 · s3 · 大眼榛瞳 · 平眉 · 露齒笑 | `casual_jacket` | 「Viral Mention」事件和新聞頭條的人。相機背帶、記者證 |
 
+**Lina 美術（S1）**：`characters/npc_lina.png`、`characters/npc_lina_sit.png`、`portraits/npc_lina.png` 與各自的 `world_detail/` 4× 版已完成並自動套用。
+
 ### 專屬 NPC 美術（程式已接好）
 
 分層骨架的好處是便宜，壞處是每個人看起來都像同一個模子。重要 NPC 要做**專屬圖**：
