@@ -329,12 +329,32 @@ share) take theirs. The event lays the arithmetic out. Choices:
 Whichever is chosen, Chapter 12 ends with an **ending card** (`ENDING — A NEW OWNER` / `ON YOUR TERMS` / `STILL YOURS`,
 `UIRoot.show_chapter_card`), `story_complete` is set, and free play continues with `goal_growth`.
 
-## 10. Beyond (Planned)
+## 10. Season 2 — Going Global (Planned, Chapters 13–18)
+
+The main story (Chapters 1–12) ends in Year 8 with free play. Season 2 takes the company abroad: the World Map's seven
+overseas regions (`data/regions/*.json`, all `planned` today) open one by one. Each chapter teaches one real thing about
+selling across borders, and each one is playable with any business the player runs (ecommerce first; café and logistics
+get their own beats). Tickets: GitHub issues labelled `season-2`.
+
+| # | Chapter (Year) | What the player learns and does | NPCs | Systems it needs |
+|---|---|---|---|---|
+| 13 | **FIRST ORDER ABROAD** (Year 9, "Global Consolidation") | A Northridge shopper finds the store. Open an overseas storefront on ShopLane Global, set a price in their currency, ship the first international parcel (7–10 days) and get paid in NRD, converted at the bank's rate. Lesson: a sale abroad earns less than it looks after conversion and shipping. | Maya, Marcus | World Map unlock; per-region marketplace (demand, price in local currency); FX module (daily rates, bank spread); international shipping tiers |
+| 14 | **CUSTOMS** (Year 9) | Ines Duarte, the customs officer, explains duties and paperwork. Choose **DDP** (you pay the duty up front, the buyer gets a clean price) or **DDU** (the buyer pays at the door, more refusals and returns). Classify a product (tariff code) correctly or pay a penalty. | Ines Duarte | duties by region and product category; DDP/DDU per listing; refusals/returns abroad; customs penalty event |
+| 15 | **THE CURRENCY SWING** (Year 9) | The Auroria currency drops 12% in a week: overseas prices are suddenly too low. Options: reprice, lock a rate with a **forward contract** at Nexus Bank, or invoice B2B buyers in Aurelian dollars. Lesson: revenue in one currency and costs in another is a risk you manage, not a bet. | Marcus Reed | FX shock event; forward contracts (rate, notional, date, settlement P/L); invoice currency on contracts |
+| 16 | **A PARTNER OVERSEAS** (Year 9) | Omar Haddad, a trader, offers two ways into Lumina: a **distributor** (they buy in bulk at a discount, they own the customer) or a **3PL warehouse** there (you keep margin and risk, stock sits abroad). Fly there (time passes, flight cost) to sign. | Omar Haddad | region travel (a trip scene); overseas stock location (3PL fees per unit per month); distributor contract type |
+| 17 | **CONSOLIDATION** (Year 9–10) | Big players buy up small brands. A rival undercuts prices in the region you opened. Choose: niche (premium, smaller volume) or scale (lower prices, bigger stock). If Victor's offer was declined in Chapter 12, Hale Group is the rival; if accepted, you run the division that must hit targets. | Victor Hale, Kai Moreno (press) | rival pricing pressure on a market; brand/premium positioning; valuation reuse |
+| 18 | **LEGACY** (Year 10, "Legacy") | Decide what the company becomes: keep it independent, sell, hand shares to the team (employee ownership), or step back and mentor founders at Nexus Co-work. An epilogue shows the city and the people you met, shaped by your choices. | Maya, everyone | ending choices and epilogue scenes; timeline recap; new game+ seed (Planned) |
+
+Order of work: the systems of 13 (World Map unlock, regional marketplace, FX) come first; Chapters 13–14 ship
+together, 15–16 next, 17–18 last. Art needs (chapter cards 13–18, Ines and Omar sheets, a customs office interior, an
+airport scene, a Lumina warehouse) go into `docs/wiki/90_codex_art_backlog.md` when each ticket starts.
+
+### After Season 2 (Planned)
 
 | Year | Content | Systems it needs |
 |------|---------|------------------|
-| 9 Global Consolidation | more M&A offers (as buyer or target), an IPO option, the second acquisition wave | valuation reuse, listing rules |
-| 10 Legacy | sandbox + Legacy generation | save-carry-over, family/succession |
+| 10+ Legacy | sandbox and a Legacy generation (start again as someone you mentored) | save carry-over, family/succession |
+| any | IPO path as an alternative to selling | listing rules, disclosure, share price |
 
 Art for Chapters 7–12 is in `docs/wiki/90_codex_art_backlog.md`: the chapter cards `backdrops/chapter_10`–`chapter_12`
 and the event pictures `events/rail_frozen` and `events/acquisition_offer` show up automatically once the files exist.

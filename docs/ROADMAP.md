@@ -1,5 +1,38 @@
 # CITY VENTURE — Roadmap
 
+## Now (from 0.1.8): tickets on GitHub
+
+Claude plans and reviews, Codex implements: each item below is a GitHub issue written as a complete spec, labelled
+`codex`, done on its own branch and Draft PR against `claude/exciting-bardeen-y71ixv`, and merged after review.
+The working agreement is `docs/CODEX_GUIDE.md`. Status of the game today: Chapters 1–12 Implemented; businesses
+ecommerce, freelance, SaaS, café (Old Town) and logistics (Harbor) Implemented; districts Riverside, Startup Hub,
+Civic Center, Financial, Shopping Street, Old Town, Harbor Implemented.
+
+| Priority | Issue | What |
+|---|---|---|
+| P0 | [#21](https://github.com/btcson66-rgb/City-Venture/issues/21) | Purchase cancellations and returns (fix a wrong stock order) |
+| P0 | [#22](https://github.com/btcson66-rgb/City-Venture/issues/22) | Save export/import; old-version save fixtures as regression tests |
+| P0 | [#23](https://github.com/btcson66-rgb/City-Venture/issues/23) | itch.io web publishing (butler) and an in-game "what's new" card |
+| P0 | [#24](https://github.com/btcson66-rgb/City-Venture/issues/24) | No soft-locks: every chapter step and tutorial step handles "already done" and "no longer possible" |
+| P1 | [#25](https://github.com/btcson66-rgb/City-Venture/issues/25) | "!" explanation badges on every existing screen |
+| P1 | [#26](https://github.com/btcson66-rgb/City-Venture/issues/26) | 4× detail art for buildings, ground tiles and vehicles |
+| P1 | [#27](https://github.com/btcson66-rgb/City-Venture/issues/27) | Era street dressing: port cranes (Year 3), solar roofs and EV chargers (Year 4) |
+| P1 | [#28](https://github.com/btcson66-rgb/City-Venture/issues/28) | Player van colour and lettering, route map alignment, seated expressions |
+| P1 | [#29](https://github.com/btcson66-rgb/City-Venture/issues/29) | Economy balance so every chapter goal is reachable with sensible play |
+| P2 | [#30](https://github.com/btcson66-rgb/City-Venture/issues/30) | Season 2 systems: World Map, regional storefronts, currencies and FX |
+| P2 | [#31](https://github.com/btcson66-rgb/City-Venture/issues/31) | Season 2 Chapters 13–14: first order abroad, customs (DDP/DDU) |
+| P2 | [#32](https://github.com/btcson66-rgb/City-Venture/issues/32) | Moving house (Old Town Studio 1A and other homes) |
+| P2 | [#33](https://github.com/btcson66-rgb/City-Venture/issues/33) | Café depth: seasonal menu, shifts, health inspection, a second café |
+| P2 | [#34](https://github.com/btcson66-rgb/City-Venture/issues/34) | Logistics depth: route contracts, a second van, breakdowns and maintenance |
+| P3 | [#35](https://github.com/btcson66-rgb/City-Venture/issues/35) | Free play after the story: growth goals and achievements |
+
+Next in line (tickets written when the above land): Season 2 Chapters 15–18 (`docs/STORY_IMPLEMENTATION.md` §10),
+new districts (Residential, University, Luxury Heights, Airport, Industrial) each with one business.
+
+---
+
+## Original milestone plan
+
 > Priority order for every milestone (kickoff §30): **Game Feel → Core Loop → World Navigation → Business Depth → Story Integration → Visual Cohesion → Stability → Additional Content.**
 > Every milestone ships a **playable build**, automated tests, a scripted gameplay walkthrough and an evidence folder. A human playtest is required before a milestone is called done.
 > Status per item: Implemented · Mocked · Placeholder · Planned · Blocked.
