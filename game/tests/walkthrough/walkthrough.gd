@@ -796,7 +796,7 @@ func _chapters_7_to_9() -> void:
 	await bot.wait(0.6)
 	StoryEngine.check()
 	bot.expect("ch7_price" in StoryEngine.St()["done"], "stocked and repriced")
-	await pass_time_at_home(func(): return "ch7_supply_shock" in StoryEngine.St()["chapters_done"], 40, true)
+	await pass_time_at_home(func(): return "ch7_supply_shock" in StoryEngine.St()["chapters_done"], 75, true)   # a profitable month, or two month-ends
 	bot.expect("ch7_supply_shock" in StoryEngine.St()["chapters_done"], "Chapter 7 complete")
 	# ---------------------------------------------------------------- chapter 8
 	bot.step("Chapter 8 — the Green Shift")
