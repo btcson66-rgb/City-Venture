@@ -1,0 +1,9 @@
+# C10 chapter and event art — 2026-09-30
+
+Independent branch from `d68e454`, after fetching and pulling `claude/exciting-bardeen-y71ixv`. Three640×360 chapter cards and two160×90 event illustrations, each with exact4× partner and import descriptor. No existing dimensions changed; no art metadata migration is required. Exact prompts and generated originals are in docs/art_sources/c10_20260930.
+
+`before/` and `after/` contain original Godot viewport captures using the existing UIRoot.show_chapter_card and DecisionModal implementations. Chapter titles/subtitles and event text are program overlays; source images have no writing, numerals, brands or real cryptocurrency symbols. Temporary in-memory event presentation data was used only for illustration review because chapters10–12 are not implemented at this base. This verifies UI art loading and composition, **not chapter gameplay or event mechanics**. The identical-bank before captures use b524d2e assets, verified identical to d68e454. Contact sheet is separate from runtime captures.
+
+Validation: final Godot4.5.1 headless import exit0/no errors; `101/101 tests passed in 7.4s`; existing-game44-shot tour0 failures (final line in logs/shots.log); wiki_check OK. Character/pose and map-label gates are not applicable because this batch changes neither characters nor maps. Five native/detail/import pairs are verified in validation.json. Both temporary UI review runs end with `C10 UI ART REVIEW: 0 failure(s); chapter gameplay not evaluated` and no script errors.
+
+Claude handoff: chapter10–12 story data must reference chapter_10/11/12, and event ids must match rail_frozen/acquisition_offer. The existing base-size UI art path already works. Optional4× UI selection should preserve native layout sizes. No scripts/data/tests were edited; no placeholder generator was run.

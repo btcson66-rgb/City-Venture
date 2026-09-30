@@ -130,3 +130,7 @@
 | `low_cash_warning` | 空了一半的錢包，旁邊是一疊帳單 |
 
 檔名：`events/<event_id>.png`。
+
+## C10 第 10–12 章 · 美術已交 2026-09-30
+
+`backdrops/chapter_10.png`、`chapter_11.png`、`chapter_12.png`：640×360 / 2560×1440。分別以光軌、斷橋與新聞手機、頂樓會議室與世界投影表達數位結算、信任、監管與規模。`events/rail_frozen.png`、`events/acquisition_offer.png`：160×90 / 640×360，鎖住的付款光軌及空白收購文件與兩支筆。無文字、數字、真實品牌或加密貨幣符號。
