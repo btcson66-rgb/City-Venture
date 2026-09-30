@@ -556,11 +556,11 @@ Lina 坐在 Nexus Bank 右下角新加的辦公桌（`exec_desk` 在 x 330, y 19
 
 | 檔案 | 尺寸 | 內容 | 目前 |
 |------|------|------|------|
-| `props/product_solar_lamp.png` | 同 `props/product_desk_lamp` | 太陽能檯燈：燈座上有一小片太陽能板，暖白燈罩 | 暫用 LED 檯燈 |
-| `products/solar_lamp_photo.png`、`solar_lamp_photo_raw.png` | 同其他商品照 | 棚拍版和自己拍的版本 | 沒有 |
-| `logos/aurelia_makers.png` | 同其他 logo | 奧瑞莉亞職人合作社：暖橘配深灰，扳手和針線交叉成一顆星 | 沒有 |
-| `logos/verdant_supply.png` | 同其他 logo | Verdant Supply：草綠，一片葉子長出太陽光線 | 沒有 |
-| `minigames/recycled_padding.png` | 64×32 | 打包小遊戲用的回收紙緩衝（牛皮紙色，皺摺紋理） | 程式用色塊畫 |
+| `props/product_solar_lamp.png` | 同 `props/product_desk_lamp` | 太陽能檯燈：燈座上有一小片太陽能板，暖白燈罩 | ✅ S2 美術完成；16×16 與 4× |
+| `products/solar_lamp_photo.png`、`solar_lamp_photo_raw.png` | 同其他商品照 | 棚拍版和自己拍的版本 | ✅ S2 美術完成；64×64 與 4× |
+| `logos/aurelia_makers.png` | 同其他 logo | 奧瑞莉亞職人合作社：暖橘配深灰，扳手和針線交叉成一顆星 | ✅ S2 美術完成；32×32 與 4× |
+| `logos/verdant_supply.png` | 同其他 logo | Verdant Supply：草綠，一片葉子長出太陽光線 | ✅ S2 美術完成；32×32 與 4× |
+| `minigames/recycled_padding.png` | 64×32 | 打包小遊戲用的回收紙緩衝（牛皮紙色，皺摺紋理） | ✅ S2 美術完成；64×32 與 4×；BoxView 待 Claude 線接圖 |
 
 ### S3：事件插圖和街景
 
