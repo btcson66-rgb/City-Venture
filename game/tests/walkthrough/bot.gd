@@ -129,6 +129,8 @@ func _run() -> void:
 			await _tutorial_tour()
 		"solids":
 			await _solids()
+		"harbor":
+			await _harbor_screens()
 	_finish()
 
 
@@ -881,6 +883,136 @@ func _tutorial_tour() -> void:
 		expect(UIRoot.top_modal() is InfoModal, "the first venture ends with the what's-next card")
 		expect(not UIRoot.tutorial.is_active(), "the guided first venture is complete")
 	log_line("  tutorial at step %s" % _tut_step())
+
+
+# ------------------------------------------------------------------ Harbor screens (a quick look without the 40-minute walkthrough)
+## The Harbor's screens on a prepared game: Sam and the dealer, the lease, Pier 7's stock and packing bench with the own-van
+## option, Company OS → Logistics (with a pinned "!" badge), the route minigame played by hand, the driver in People.
+##   godot --path game -- --bot=harbor --out=<dir>
+func _harbor_screens() -> void:
+	GameState.new_game({"name": "Harbor Tour", "seed": 6})
+	GameState.data["tutorial"] = {"step": 99, "seen": {}, "off": true, "v": 3}
+	UIRoot._suppress_decisions = true
+	Company.register("Tour Haulage Co", "ecommerce", "22 Founders Lane")
+	Company.open_business_account(28000.0)
+	GameState.set_flag("business_account_opened")
+	UIRoot.set_hud_visible(true)
+	while not (Clock.weekday() == 1 and Clock.hour() == 10):
+		Clock.advance(60)
+	SceneRouter._enter("interior", "dockside_motors", "door", "up")
+	await wait(1.6)
+	await shot("harbor_dealer_sam")
+	Actions.run("talk", {"npc": "sam"})
+	await talk_through_dialogue()
+	await until(func(): return UIRoot.top_modal() is VanDealModal, 4.0)
+	await wait(0.5)
+	await shot("harbor_van_deal")
+	await click_named("BuyVan", 2.0)
+	await wait(0.4)
+	await shot("harbor_van_bought")
+	UIRoot.close_all()
+	UIRoot.open_modal(LeaseModal.new("pier7_warehouse"))
+	await wait(0.5)
+	await shot("harbor_lease_pier7")
+	await click_named("SignLease_pier7_warehouse", 2.0)
+	await wait(0.4)
+	await shot("harbor_lease_signed")
+	UIRoot.close_all()
+	# stock at Pier 7 and a packed batch, so the packing bench shows the own-van option
+	Ecommerce.buy("tradelink_wholesale", "phone_stand", 400, "pier7_warehouse")
+	for i in 24 * 8:
+		if Ecommerce.stock("pier7_warehouse", "phone_stand") >= 400:
+			break
+		Clock.advance(60)
+	var l := Ecommerce.create_listing("phone_stand", 14.0, "self")
+	for i in 8:
+		Ecommerce._h_order_place({"listing": l["listing_id"]})
+	SceneRouter._enter("interior", "pier7_warehouse", "door", "up")
+	await wait(1.4)
+	await shot("harbor_pier7_stocked")
+	Ecommerce.pack_orders("pier7_warehouse")
+	UIRoot.open_modal(PackShipModal.new("pier7_warehouse"))
+	await wait(0.5)
+	await shot("harbor_pack_own_van")
+	UIRoot.close_all()
+	# Company OS: the Logistics tab, a pinned badge, an accepted run and the route game
+	Living.lease("corner_cafe")   # a café on top, so Company OS shows every tab at once
+	Staff.register_employer()
+	Logistics.post_jobs()
+	UIRoot.open_modal(CompanyOS.new("pier7"))
+	await wait(0.5)
+	await shot("harbor_os_tabs")
+	await click_named("Tab_logistics", 2.0)
+	await wait(0.5)
+	await shot("harbor_logistics_tab")
+	for n in get_tree().root.find_children("*", "InfoTip", true, false):
+		if (n as Control).is_visible_in_tree():
+			await click_control(n)
+			break
+	await wait(0.5)
+	await shot("harbor_logistics_badge")
+	await click_named("Tab_logistics", 2.0)
+	await wait(0.3)
+	var open := Logistics.open_jobs()
+	var jid := str(open[open.size() - 1]["id"])
+	await click_named("Accept_" + jid, 2.0)
+	await wait(0.4)
+	await shot("harbor_logistics_accepted")
+	MiniGames.auto = -1.0
+	await click_named("Drive_" + jid, 2.0)
+	await wait(0.5)
+	await shot("harbor_route_intro")
+	await click_named("StartGame", 2.0)
+	await wait(0.4)
+	var g := UIRoot.top_modal() as RouteGame
+	var best := Logistics.best_order(g.stops)
+	var worst_first := (best["order"] as Array).duplicate()
+	for k in worst_first.size():
+		await click_named("Stop_%d" % (int(worst_first[k]) + 1), 2.0)
+		if k == 1:
+			await shot("harbor_route_planning")
+	await wait(0.3)
+	await shot("harbor_route_planned")
+	await click_named("DriveRoute", 2.0)
+	await wait(0.4)
+	await shot("harbor_route_results")
+	await click_named("FinishGame", 2.0)
+	await wait(0.6)
+	await shot("harbor_logistics_paid")
+	expect(Logistics.history(1)[0]["id"] == jid and float(Logistics.history(1)[0]["pay"]) > 60.0, "the run was driven and paid")
+	await click_named("Tab_people", 2.0)
+	await wait(0.4)
+	await shot("harbor_people_driver")
+	UIRoot.close_all()
+	UIRoot.open_modal(MetroModal.new("harbor"))
+	await wait(0.4)
+	await shot("harbor_metro")
+	UIRoot.close_all()
+	UIRoot.open_modal(BusinessBoard.new())
+	await wait(0.4)
+	await click_named("Biz_logistics", 2.0)
+	await wait(0.3)
+	await shot("harbor_business_board")
+	UIRoot.close_all()
+	expect(Ledger.check_balanced(), "ledger balanced")
+
+
+## A real mouse click on any control (the "!" badges are not Buttons).
+func click_control(c: Control) -> void:
+	var screen: Vector2 = get_viewport().get_final_transform() * c.get_global_rect().get_center()
+	var mv := InputEventMouseMotion.new()
+	mv.position = screen
+	mv.global_position = screen
+	Input.parse_input_event(mv)
+	await frames(2)
+	for pressed in [true, false]:
+		var ev := InputEventMouseButton.new()
+		ev.button_index = MOUSE_BUTTON_LEFT
+		ev.pressed = pressed
+		ev.position = screen
+		ev.global_position = screen
+		Input.parse_input_event(ev)
+		await frames(2)
 
 
 # ------------------------------------------------------------------ collision check

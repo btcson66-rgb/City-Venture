@@ -83,15 +83,20 @@ func build() -> void:
 	var nav := UIK.vbox(2)
 	nav.custom_minimum_size = Vector2(96, 0)
 	row.add_child(nav)
-	for t in TABS:
-		if t[0] == "cafe" and not Cafe.leased():
-			continue   # appears once you lease the café unit in Old Town
-		if t[0] == "logistics" and not Logistics.has_van():
-			continue   # appears once you own a van (Dockside Motors, Harbor)
+	var shown: Array = TABS.filter(func(t): return not (t[0] == "cafe" and not Cafe.leased()) and not (t[0] == "logistics" and not Logistics.has_van()))
+	# the café tab appears once you lease the corner unit, the logistics tab once you own a van; with all eleven the
+	# buttons get a little tighter so the column still fits the window
+	var compact := shown.size() > 10
+	for t in shown:
 		var b := UIK.button(t[1], _set_tab.bind(t[0]), "tab_active" if tab == t[0] else "tab")
 		b.icon = Art.icon(t[2])
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		b.name = "Tab_" + t[0]
+		if compact:
+			var st := UIK.tex_box("ui/tab_active" if tab == t[0] else "ui/tab", 4, 2)
+			b.add_theme_stylebox_override("normal", st)
+			b.add_theme_stylebox_override("hover", st)
+			b.add_theme_constant_override("icon_max_width", 12)
 		if t[0] == "contracts" and _open_offers() > 0:
 			b.text = I18n.t(b.text) + " ●"
 		nav.add_child(b)
@@ -1258,8 +1263,9 @@ func _tab_logistics() -> void:
 		var cl := UIK.label(I18n.t(str(j["client"])), 8, Art.C_WHITE, true)
 		top.add_child(cl)
 		top.add_child(UIK.chip(Logistics.kind_name(str(j["kind"])).to_upper(), Art.C_GOLD if str(j["kind"]) == "rush" else Art.C_SKY))
+		var too_late := Clock.now() + int(j["est_min"]) > int(j["by"])   # leaving right now, the best route still arrives after the deadline
 		col.add_child(UIK.label(I18n.t("%d stops · deliver by %s · about %s on the road") % [(j["stops"] as Array).size(), Clock.fmt_short(int(j["by"])),
-			Fmt.duration_min(int(j["est_min"]))], 7, Art.C_MUTED))
+			Fmt.duration_min(int(j["est_min"]))] + ("  ·  " + I18n.t("too late to make it if you leave now") if too_late else ""), 7, Art.C_RED if too_late else Art.C_MUTED))
 		row.add_child(UIK.label(Fmt.money0(float(j["pay"])), 9, Art.C_GREEN, true))
 		var ab := UIK.button("Accept", func():
 			var r := Logistics.accept(jid)

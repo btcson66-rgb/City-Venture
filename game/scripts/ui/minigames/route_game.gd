@@ -65,13 +65,18 @@ func build_round() -> void:
 	for i in stops.size():
 		var p := Logistics.place_pos(str(stops[i]))
 		var b := Button.new()
-		b.text = str(i + 1)
 		b.name = "Stop_%d" % (i + 1)
+		b.flat = true
 		b.focus_mode = Control.FOCUS_NONE
-		b.size = Vector2(18, 18)
-		b.position = p - Vector2(9, 9)
+		for st in ["normal", "hover", "pressed", "focus", "disabled"]:
+			b.add_theme_stylebox_override(st, StyleBoxEmpty.new())   # the marker is drawn by the map (number and colour follow the plan)
+		b.custom_minimum_size = Vector2(20, 20)
+		b.size = Vector2(20, 20)
+		b.position = p - Vector2(10, 10)
 		b.tooltip_text = Logistics.place_name(str(stops[i]))
 		b.pressed.connect(_pick.bind(i))
+		b.mouse_entered.connect(view.queue_redraw)
+		b.mouse_exited.connect(view.queue_redraw)
 		view.add_child(b)
 		stop_btns.append(b)
 	undo_btn = UIK.button("Undo", _undo)
@@ -112,16 +117,6 @@ func _clear() -> void:
 
 
 func _refresh() -> void:
-	for i in stop_btns.size():
-		var b: Button = stop_btns[i]
-		var done := order.has(i)
-		var sb := UIK.flat(ROUTE_COLOR if done else Color8(24, 38, 66), Color8(250, 246, 226) if done else Art.C_SKY, 1, 9)
-		for st in ["normal", "hover", "pressed", "focus"]:
-			b.add_theme_stylebox_override(st, sb)
-		b.add_theme_color_override("font_color", Art.C_NAVY_900 if done else Art.C_WHITE)
-		b.add_theme_color_override("font_hover_color", Art.C_NAVY_900 if done else Art.C_WHITE)
-		b.add_theme_font_size_override("font_size", 8)
-		b.add_theme_font_override("font", UIK.num_font())
 	if drive_btn != null:
 		drive_btn.disabled = order.size() < stops.size()
 	if undo_btn != null:
@@ -257,24 +252,33 @@ class RouteView:
 		if river.size() >= 2:
 			draw_polyline(river, water, 15.0)
 			draw_polyline(river, Color8(86, 142, 204), 7.0)
-		# roads: every place joined to its two nearest neighbours (through a bridge when the river is in the way)
+		# roads: a spanning network over the depot and every place (so the whole city is connected), plus each place's two
+		# nearest neighbours; a road across the river goes over a bridge
 		var nodes: Array = [Logistics.depot()]
 		for p in Logistics.places():
 			nodes.append(Vector2(float(p["x"]), float(p["y"])))
-		var drawn := {}
+		var edges: Array = []
 		for i in nodes.size():
-			var near: Array = []
-			for j in nodes.size():
-				if i != j:
-					near.append([Logistics.leg_px(nodes[i], nodes[j]), j])
-			near.sort_custom(func(a, b): return a[0] < b[0])
+			for j in range(i + 1, nodes.size()):
+				edges.append([Logistics.leg_px(nodes[i], nodes[j]), i, j])
+		edges.sort_custom(func(a, b): return a[0] < b[0])
+		var group: Array = range(nodes.size())
+		var roads := {}
+		for e in edges:
+			var ga: int = group[int(e[1])]
+			var gb: int = group[int(e[2])]
+			if ga != gb:
+				roads["%d-%d" % [int(e[1]), int(e[2])]] = true
+				for k in group.size():
+					if group[k] == gb:
+						group[k] = ga
+		for i in nodes.size():
+			var near: Array = edges.filter(func(e): return int(e[1]) == i or int(e[2]) == i)
 			for k in mini(2, near.size()):
-				var j2 := int(near[k][1])
-				var key := "%d-%d" % [mini(i, j2), maxi(i, j2)]
-				if drawn.has(key):
-					continue
-				drawn[key] = true
-				draw_polyline(PackedVector2Array(Logistics.leg(nodes[i], nodes[j2])), Color8(104, 112, 130), 3.0)
+				roads["%d-%d" % [int(near[k][1]), int(near[k][2])]] = true
+		for key in roads:
+			var ij: PackedStringArray = (key as String).split("-")
+			draw_polyline(PackedVector2Array(Logistics.leg(nodes[int(ij[0])], nodes[int(ij[1])])), Color8(104, 112, 130), 3.0)
 		for br in Logistics.bridges():
 			draw_rect(Rect2(br - Vector2(9, 4), Vector2(18, 8)), Color8(196, 200, 210))
 			draw_rect(Rect2(br - Vector2(9, 4), Vector2(18, 8)), Color8(60, 66, 84), false, 1.0)
@@ -314,6 +318,15 @@ class RouteView:
 		_text(font, d + Vector2(13, 3), I18n.t(str(Logistics.map_cfg().get("depot", {}).get("name", "Depot"))), Art.C_GOLD)
 		for i in game.stops.size():
 			var p := Logistics.place_pos(str(game.stops[i]))
+			var done := game.order.has(i)
+			var hot: bool = game.stop_btns.size() > i and (game.stop_btns[i] as Button).is_hovered()
+			draw_circle(p, 10.0, Color8(20, 26, 44))
+			draw_circle(p, 9.0, Color8(250, 246, 226) if hot else (Color8(250, 246, 226) if done else Art.C_SKY))
+			draw_circle(p, 7.5, RouteGame.ROUTE_COLOR if done else Color8(24, 38, 66))
+			var num := str(i + 1)
+			var nf := UIK.num_font()
+			var nw := nf.get_string_size(num, HORIZONTAL_ALIGNMENT_LEFT, -1, 9).x
+			draw_string(nf, p + Vector2(-nw / 2.0, 3.5), num, HORIZONTAL_ALIGNMENT_LEFT, -1, 9, Color8(13, 27, 43) if done else Art.C_WHITE)
 			var label := Logistics.place_name(str(game.stops[i]))
 			var right := p.x < size.x - 120.0
 			var w := font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, 7).x

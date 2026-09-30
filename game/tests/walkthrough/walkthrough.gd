@@ -975,7 +975,7 @@ func _harbor_logistics() -> void:
 			tip = n
 			break
 	if tip != null:
-		await click_control(tip)
+		await bot.click_control(tip)
 		await bot.wait(0.5)
 		await bot.shot("logistics_badge_pinned")
 		await bot.click_named("Tab_logistics", 3.0)   # a click elsewhere puts the card away
@@ -1027,24 +1027,6 @@ func _harbor_logistics() -> void:
 	await exit_building()
 	await metro_to("riverside")
 	await enter_building("riverside_apartment")
-
-
-## A real mouse click on any control (a "!" badge is not a Button).
-func click_control(c: Control) -> void:
-	var screen: Vector2 = bot.get_viewport().get_final_transform() * c.get_global_rect().get_center()
-	var mv := InputEventMouseMotion.new()
-	mv.position = screen
-	mv.global_position = screen
-	Input.parse_input_event(mv)
-	await bot.frames(2)
-	for pressed in [true, false]:
-		var ev := InputEventMouseButton.new()
-		ev.button_index = MOUSE_BUTTON_LEFT
-		ev.pressed = pressed
-		ev.position = screen
-		ev.global_position = screen
-		Input.parse_input_event(ev)
-		await bot.frames(2)
 
 
 func talk_through_dialogue_first_choice() -> void:
