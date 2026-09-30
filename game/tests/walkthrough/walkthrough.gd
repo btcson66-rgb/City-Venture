@@ -818,8 +818,8 @@ func _chapters_7_to_9() -> void:
 	await close_modal()
 	bot.expect(Cond.eval("listed:solar_lamp"), "solar desk lamps listed")
 	bot.step("Chapter 8 — the Green Business Grant at City Hall")
-	while not _is_weekday() or Clock.hour() >= 15:
-		await pass_time_at_home(func(): return _is_weekday() and Clock.hour() < 15, 1)
+	while not _is_weekday() or Clock.hour() < 8 or Clock.hour() >= 15:   # City Hall is open 9–17 on weekdays
+		await pass_time_at_home(func(): return _is_weekday() and Clock.hour() >= 8 and Clock.hour() < 15, 1)
 	await exit_building()
 	await metro_to("civic_center")
 	await enter_building("city_hall")
