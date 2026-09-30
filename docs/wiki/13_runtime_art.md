@@ -227,3 +227,17 @@
 - `world_detail/vehicles/van_player_front_detail.png`
 - `world_detail/vehicles/van_player_side_body.png`
 - `world_detail/vehicles/van_player_side_detail.png`
+## C10 素材 · 2026-09-30
+
+美術：已交，尺寸依工單，附匯入檔。UI 章節卡與 DecisionModal 的實際載圖已驗收；章節與事件劇情仍待 Claude 線資料接入。現有 UI 使用原尺寸，4× 圖可供未來清晰顯示。
+
+- `backdrops/chapter_10.png`
+- `world_detail/backdrops/chapter_10.png`
+- `backdrops/chapter_11.png`
+- `world_detail/backdrops/chapter_11.png`
+- `backdrops/chapter_12.png`
+- `world_detail/backdrops/chapter_12.png`
+- `events/rail_frozen.png`
+- `world_detail/events/rail_frozen.png`
+- `events/acquisition_offer.png`
+- `world_detail/events/acquisition_offer.png`
