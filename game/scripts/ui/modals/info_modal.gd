@@ -59,6 +59,7 @@ static func first_venture() -> InfoModal:
 
 static func news() -> InfoModal:
 	Clock.advance(5)
+	GameState.set_flag("news_read")   # chapters that open with the news reset this and wait for it
 	var y := DataDB.year_def(int(GameState.data["world"]["year"]))
 	var ls: Array = [I18n.t("# AURELIA DAILY · Year %d — %s") % [int(y.get("year", 1)), y.get("name", "")]]
 	for h in y.get("headlines", []):

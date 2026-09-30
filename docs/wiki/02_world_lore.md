@@ -78,13 +78,15 @@
 
 遊戲以年為大週期，每年有一個世界主題，影響利率、運費和新聞標題。
 
+年代不是照日曆換，而是跟著劇情走：第 7 章開啟第 3 年，第 8 章第 4 年，第 9 章第 5 年。日曆照樣一天一天過。每個年代的數字都寫在 `data/world/years.json`，程式由 `World` 讀取（`scripts/sim/world.gd`）。
+
 | 年 | 主題 | 狀態 | 畫面上的變化（規劃） |
 |----|------|------|----------------------|
 | 1 | The Opportunity 機會之年 | 已實作 | 低利率、創業熱潮。新聞板和手機頭條 |
-| 2 | Growth Fever 成長狂熱 | 規劃中 | 街上多了新店和工地圍籬 |
-| 3 | Supply Shock 供應衝擊 | 規劃中 | 港口塞船、貨架變空、運費看板變紅 |
-| 4 | The Green Shift 綠色轉型 | 規劃中 | 屋頂出現太陽能板、電動車和充電樁 |
-| 5 | Clearing Crisis 結算危機 | 規劃中 | 銀行排隊、「付款處理中」告示 |
+| 2 | Growth Fever 成長狂熱 | 已實作（數值） | 房租 +10%。跟第 3 年一起生效，沒有獨立章節 |
+| 3 | Supply Shock 供應衝擊 | 已實作 | 運費 ×1.8；本地進貨價 +12%、交期 ×1.5；進口 +25%、交期 ×2。畫面：港口塞船、貨架變空（美術規劃中） |
+| 4 | The Green Shift 綠色轉型 | 已實作 | 塑膠包材每件課 $0.40；綠色商品需求 ×1.35；Verdant Supply 開張。畫面：太陽能板、充電樁（美術規劃中） |
+| 5 | Clearing Crisis 結算危機 | 已實作 | 進口要先付款、等入帳才出貨：電匯 5–9 天、信用狀 2 天、數位美元幾分鐘。畫面：銀行排隊、「付款處理中」告示（美術規劃中） |
 | 6 | Digital Finance Boom 數位金融熱 | 規劃中 | 新金融公司看板（中性設計，不用幣圈 logo） |
 | 7 | Bridge Exploit 跨鏈橋事件 | 規劃中 | 新聞快報、辦公室氣氛緊張 |
 | 8 | Regulation Wave 監管浪潮 | 規劃中 | 市政廳多了新櫃台、合規文件 |
@@ -103,9 +105,9 @@
 | 4 | `ch4_growing_pains` | Growing Pains 成長的痛 | 已實作 | 登記雇主、徵才、第一次發薪、看現金預測 | 市政廳、Suite 2B |
 | 5 | `ch5_big_contract` | The Big Contract 大合約 | 已實作 | Daniel Wong 的 800 盞檯燈訂單，60 天票期 | Nexus Co-work、Suite 2B |
 | 6 | `ch6_cash_is_oxygen` | Cash Is Oxygen 現金是氧氣 | 已實作 | 用貸款、投資或砍成本撐過缺口，收回貨款 | Nexus Bank、Company OS |
-| 7 | — | Supply Shock 供應衝擊 | 規劃中 | 全球物流漲價，不同產業受影響程度不同 | 港區、供應商 |
-| 8 | — | Green Shift 綠色轉型 | 規劃中 | 新能源商機，可以不參與 | 工業區、太陽能公司 |
-| 9 | — | Clearing Crisis 結算危機 | 規劃中 | 跨境付款卡住，第一次比較結算方式。Lina Zhao 登場 | 銀行、海外供應商 |
+| 7 | `ch7_supply_shock` | Supply Shock 供應衝擊 | 已實作 | 運費和進貨價上漲、交期拉長。跟 Ken 談對策：簽供貨協議、找在地合作社或先囤貨。維持庫存、調價、撐過一個月 | Bloom Coffee 新聞板、Nexus Co-work、Company OS |
+| 8 | `ch8_green_shift` | Green Shift 綠色轉型 | 已實作 | 《潔淨包裝法》：改用回收包材、上架太陽能檯燈、申請 $3,000 綠色企業補助 | 新聞板、Company OS、市政廳許可服務站 |
+| 9 | `ch9_clearing_crisis` | Clearing Crisis 結算危機 | 已實作 | 跟 Lumina 進口，付款卡在電匯。到 Nexus Bank 找 Lina Zhao，比較電匯、信用狀、數位美元 | 新聞板、Nexus Bank、Company OS |
 | 10 | — | Digital Rails 數位軌道 | 規劃中 | 認識穩定幣、區塊鏈、智能合約，不強迫使用 | Lina 的辦公室 |
 | 11 | — | The Other Side of Trust 信任的另一面 | 規劃中 | 跨鏈橋被駭。技術不會消除風險，只會改變風險 | 新聞、辦公室 |
 | 12 | — | Regulation & Scale 監管與規模 | 規劃中 | 跨國企業的合規、治理、併購 | 金融區總部、機場 |
@@ -124,6 +126,8 @@
 | `harbor_point_fitness` | Harbor Point Fitness | 健身 | Rosa Lim | B2B 客戶，會議價 | 青綠、浪花 |
 | `northlight_capital` | Northlight Capital | 創投 | Elena Park | 第 6 章投資人選項 | 白配淡藍、北極星 |
 | `studio_lumen` | Studio Lumen | 攝影 | — | 商品攝影 | 黑白、光圈 |
+| `aurelia_makers` | Aurelia Makers Co-op 奧瑞莉亞職人合作社 | 在地製造 | — | 第 7 章的在地備援供應商：單價高、隔天到貨、不受運輸衝擊 | 暖橘配深灰、扳手加針線 |
+| `verdant_supply` | Verdant Supply | 綠色商品批發 | — | 第 4 年在工業區開張，賣太陽能檯燈 | 草綠、葉子加陽光 |
 | `nexus` | Nexus（Bank / Co-work） | 銀行、共享辦公 | Sofia、Marcus、Priya | 同一集團的兩個品牌 | 海軍藍配金色「N」 |
 | `postpoint` | PostPoint | 物流門市 | Dara | 寄件、收件 | 紅配白、包裹 |
 | `bloom_coffee` | Bloom Coffee | 咖啡 | Jun、Maya | 河岸咖啡店 | 深綠配米白、花苞 |
@@ -185,4 +189,5 @@
 | `ad_cost_spike` | 市場 | 廣告費暴漲 |
 | `viral_mention` | 市場 | 被網紅推薦 |
 | `elena_offer` | 財務 | Elena 的投資條件 |
+| `supply_shock_plan` | 供應 | 第 7 章 Ken 的三個對策：簽 60 天供貨協議、改找在地合作社、趁早囤貨 |
 | `low_cash_warning` | 財務 | 現金快見底 |

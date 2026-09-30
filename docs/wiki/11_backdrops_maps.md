@@ -126,6 +126,7 @@
 | `ad_cost_spike` | 廣告後台的長條圖一路往上 |
 | `viral_mention` | 手機螢幕上的愛心和分享數往上跳（**不是**金幣噴發） |
 | `elena_offer` | 條件書和一支鋼筆 |
+| `supply_shock_plan` | 港口外排隊的貨櫃船，前景一張被紅筆圈起來的運費單（無字） |
 | `low_cash_warning` | 空了一半的錢包，旁邊是一疊帳單 |
 
 檔名：`events/<event_id>.png`。

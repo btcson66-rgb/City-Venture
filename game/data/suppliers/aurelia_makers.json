@@ -1,0 +1,10 @@
+{"id": "aurelia_makers", "name": "Aurelia Makers Co-op", "region": "aurelia", "contact_npc": "",
+ "blurb": "Local makers' co-op. Pricier, but made in the city: no port, no shipping shock.",
+ "shock_exempt": true, "requires_flag": "supplier_aurelia_makers",
+ "offers": [
+  {"product": "phone_stand", "unit_cost": 4.1, "moq": 40, "lead_days": 1, "defect_rate": 0.01},
+  {"product": "desk_lamp", "unit_cost": 13.9, "moq": 30, "lead_days": 1, "defect_rate": 0.01},
+  {"product": "water_bottle", "unit_cost": 8.2, "moq": 40, "lead_days": 1, "defect_rate": 0.01}
+ ],
+ "payment_terms": "prepay",
+ "net_terms_for_companies": {"days": 15, "requires": ["company_registered"]}}

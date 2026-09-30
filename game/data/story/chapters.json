@@ -440,7 +440,7 @@
    "id": "ch6_cash_is_oxygen",
    "title": "CHAPTER 6 — CASH IS OXYGEN",
    "subtitle": "Profit on paper. Payroll on Friday.",
-   "next": "",
+   "next": "ch7_supply_shock",
    "objectives": [
     {
      "id": "ch6_forecast",
@@ -504,13 +504,304 @@
      "text": "You survived the cash crunch. Most people don't even know they're in one."
     },
     {
-     "do": "start",
-     "objective": "goal_growth"
-    },
-    {
      "do": "timeline",
      "text": "Came through the cash crunch.",
      "kind": "milestone"
+    }
+   ]
+  },
+  {
+   "id": "ch7_supply_shock",
+   "title": "CHAPTER 7 — SUPPLY SHOCK",
+   "subtitle": "The boxes are stuck at sea.",
+   "next": "ch8_green_shift",
+   "objectives": [
+    {
+     "id": "ch7_news",
+     "main": true,
+     "goal": "Supply Shock",
+     "text": "Something's wrong with shipping: read the news board at Bloom Coffee",
+     "complete_when": [
+      "flag:news_read"
+     ],
+     "target": {
+      "building": "bloom_coffee",
+      "action": "read_news"
+     },
+     "on_start": [
+      {
+       "do": "flag_reset",
+       "flag": "news_read"
+      },
+      {
+       "do": "world_year",
+       "year": 3
+      },
+      {
+       "do": "message",
+       "from": "ken",
+       "text": "Heads up. Container rates just doubled and the port's backed up. Lead times are going to get ugly."
+      }
+     ]
+    },
+    {
+     "id": "ch7_ken",
+     "main": true,
+     "goal": "Supply Shock",
+     "text": "Talk to Ken about supply (Nexus Co-work, Tue and Thu 10–15), or wait for his call",
+     "complete_when": [
+      "flag:ch7_supply_plan"
+     ],
+     "target": {
+      "building": "nexus_cowork"
+     },
+     "on_start": [
+      {
+       "do": "event",
+       "id": "supply_shock_plan",
+       "delay_min": 2880
+      }
+     ]
+    },
+    {
+     "id": "ch7_stock",
+     "main": true,
+     "goal": "Supply Shock",
+     "text": "Keep {company} stocked through the shock: 100 units in hand or on the way",
+     "complete_when": [
+      "stock_units>=100"
+     ],
+     "target": {
+      "action": "open_company_os"
+     }
+    },
+    {
+     "id": "ch7_price",
+     "main": true,
+     "goal": "Supply Shock",
+     "text": "Costs went up: raise a price to protect your margin (Company OS → Sales)",
+     "complete_when": [
+      "flag:repriced"
+     ],
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": [
+      {
+       "do": "flag_reset",
+       "flag": "repriced"
+      }
+     ]
+    },
+    {
+     "id": "ch7_close",
+     "main": true,
+     "goal": "Supply Shock",
+     "text": "Close a month with a profit despite the shock",
+     "complete_when": [
+      "flag:ch7_month_profit"
+     ]
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "message",
+     "from": "maya",
+     "text": "You kept the shelves full while half the city ran out. That's a real business."
+    },
+    {
+     "do": "timeline",
+     "text": "Came through the Supply Shock.",
+     "kind": "milestone"
+    }
+   ]
+  },
+  {
+   "id": "ch8_green_shift",
+   "title": "CHAPTER 8 — THE GREEN SHIFT",
+   "subtitle": "Aurelia goes electric.",
+   "next": "ch9_clearing_crisis",
+   "objectives": [
+    {
+     "id": "ch8_news",
+     "main": true,
+     "goal": "The Green Shift",
+     "text": "The city passed the Clean Packaging Act: read the news board",
+     "complete_when": [
+      "flag:news_read"
+     ],
+     "target": {
+      "building": "bloom_coffee",
+      "action": "read_news"
+     },
+     "on_start": [
+      {
+       "do": "flag_reset",
+       "flag": "news_read"
+      },
+      {
+       "do": "world_year",
+       "year": 4
+      },
+      {
+       "do": "message",
+       "from": "ana",
+       "text": "Heads up for sellers: plastic-padded parcels now pay a $0.40 levy. The Green Business Grant opened too. Ask at the permits kiosk."
+      }
+     ]
+    },
+    {
+     "id": "ch8_pack",
+     "main": true,
+     "goal": "The Green Shift",
+     "text": "Switch to recycled packaging (Company OS → Operations)",
+     "complete_when": [
+      "flag:packaging_green"
+     ],
+     "target": {
+      "action": "open_company_os"
+     }
+    },
+    {
+     "id": "ch8_product",
+     "main": true,
+     "goal": "The Green Shift",
+     "text": "Add a green product: buy Verdant Supply's solar desk lamps and list them",
+     "complete_when": [
+      "listed:solar_lamp"
+     ],
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": [
+      {
+       "do": "message",
+       "from": "priya",
+       "text": "Verdant Supply just opened in the Industrial Zone. Their solar desk lamps are all over ShopLane."
+      }
+     ]
+    },
+    {
+     "id": "ch8_grant",
+     "main": true,
+     "goal": "The Green Shift",
+     "text": "Apply for the Green Business Grant at the City Hall permits kiosk",
+     "complete_when": [
+      "flag:green_grant"
+     ],
+     "target": {
+      "building": "city_hall",
+      "action": "permits_info"
+     }
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "message",
+     "from": "maya",
+     "text": "Green AND profitable? Who even are you."
+    },
+    {
+     "do": "timeline",
+     "text": "Went green with the city.",
+     "kind": "milestone"
+    }
+   ]
+  },
+  {
+   "id": "ch9_clearing_crisis",
+   "title": "CHAPTER 9 — CLEARING CRISIS",
+   "subtitle": "The payment still hasn't landed.",
+   "next": "",
+   "objectives": [
+    {
+     "id": "ch9_news",
+     "main": true,
+     "goal": "Clearing Crisis",
+     "text": "Cross-border payments are jammed: read the news board",
+     "complete_when": [
+      "flag:news_read"
+     ],
+     "target": {
+      "building": "bloom_coffee",
+      "action": "read_news"
+     },
+     "on_start": [
+      {
+       "do": "flag_reset",
+       "flag": "news_read"
+      },
+      {
+       "do": "world_year",
+       "year": 5
+      },
+      {
+       "do": "message",
+       "from": "marcus",
+       "text": "Marcus Reed. Wires abroad are taking a week or more to clear. If you import, talk to Lina Zhao on our trade desk, weekdays 10 to 4."
+      }
+     ]
+    },
+    {
+     "id": "ch9_import",
+     "main": true,
+     "goal": "Clearing Crisis",
+     "text": "Order from Lumina Direct: factory prices, but you pay before it ships",
+     "complete_when": [
+      "stat:import_orders>=1"
+     ],
+     "target": {
+      "action": "open_company_os"
+     }
+    },
+    {
+     "id": "ch9_lina",
+     "main": true,
+     "goal": "Clearing Crisis",
+     "text": "The payment is stuck: talk to Lina Zhao at Nexus Bank (weekdays 10–16)",
+     "complete_when": [
+      "flag:met_lina"
+     ],
+     "target": {
+      "building": "nexus_bank"
+     }
+    },
+    {
+     "id": "ch9_settle",
+     "main": true,
+     "goal": "Clearing Crisis",
+     "text": "Get the payment through: wait for the wire, or speed it up (Company OS → Operations)",
+     "complete_when": [
+      "stat:import_cleared>=1"
+     ],
+     "target": {
+      "action": "open_company_os"
+     }
+    },
+    {
+     "id": "ch9_arrive",
+     "main": true,
+     "goal": "Clearing Crisis",
+     "text": "Receive the import from Lumina Direct",
+     "complete_when": [
+      "stat:import_received>=1"
+     ]
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "message",
+     "from": "lina",
+     "text": "Payment landed, boxes arrived. Remember who held your money in between. That's this year's lesson."
+    },
+    {
+     "do": "timeline",
+     "text": "Got an import through the Clearing Crisis.",
+     "kind": "milestone"
+    },
+    {
+     "do": "start",
+     "objective": "goal_growth"
     }
    ]
   }
@@ -555,7 +846,7 @@
    "id": "goal_growth",
    "main": true,
    "goal": "Sandbox",
-   "text": "Grow {company}: $40,000 revenue in a month (more chapters are coming)",
+   "text": "Grow {company}: $40,000 revenue in a month (Chapters 10–12 are coming)",
    "complete_when": [
     "stat:best_month_revenue>=40000"
    ]

@@ -1,0 +1,31 @@
+{
+ "id": "ken_supply_shock",
+ "with": "ken",
+ "nodes": {
+  "start": [
+   {
+    "who": "ken",
+    "expr": "thinking",
+    "text": "You saw the port? Forty ships waiting. Our containers are on three of them."
+   },
+   {
+    "who": "ken",
+    "text": "Everything from abroad costs more and takes longer now. Even my local stuff is up twelve percent."
+   },
+   {
+    "who": "player",
+    "text": "So what do I do?"
+   },
+   {
+    "who": "ken",
+    "text": "Three ways to play it. I'll send you the options. Pick one before it gets worse."
+   }
+  ]
+ },
+ "on_end": [
+  {
+   "do": "event",
+   "id": "supply_shock_plan"
+  }
+ ]
+}

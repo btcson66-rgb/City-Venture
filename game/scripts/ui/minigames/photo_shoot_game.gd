@@ -9,7 +9,7 @@ const LIGHTS := [["window", "Window light"], ["ring", "Ring light"], ["ceiling",
 const STYLING := [["none", "Nothing"], ["plant", "Small plant"], ["notebook", "Notebook"]]
 ## What suits each product (backdrops, styling prop). Anything else still works, just less well.
 const SUITS := {"wireless_earbuds": [["white", "dark"], "notebook"], "water_bottle": [["pastel", "white"], "plant"],
-	"desk_lamp": [["wood", "dark"], "notebook"], "phone_stand": [["wood", "white"], "plant"]}
+	"desk_lamp": [["wood", "dark"], "notebook"], "phone_stand": [["wood", "white"], "plant"], "solar_lamp": [["wood", "white"], "plant"]}
 const FRAME := Vector2(300, 196)
 
 var product := ""
@@ -71,7 +71,7 @@ func build_round() -> void:
 	frame_box.gui_input.connect(_frame_input)
 	h.add_child(frame_box)
 	product_rect = TextureRect.new()
-	product_rect.texture = Art.tex(str(DataDB.product(product).get("icon", "props/product_parcel")))
+	product_rect.texture = Art.tex(DataDB.product_icon(product))
 	product_rect.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	product_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	product_rect.stretch_mode = TextureRect.STRETCH_SCALE

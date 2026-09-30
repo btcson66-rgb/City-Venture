@@ -8,7 +8,7 @@ func _init() -> void:
 	title_text = "City Hall — Permits"
 	icon_name = "civic"
 	help_key = "permits"
-	panel_size = Vector2(420, 250)
+	panel_size = Vector2(420, 290)
 
 
 func build() -> void:
@@ -34,12 +34,45 @@ func build() -> void:
 		r.add_child(b)
 		if not reg:
 			v.add_child(UIK.label("Register the company first.", 7, Art.C_GOLD, true))
+	if World.year() >= 4:
+		_green_grant()
 	_row("Import permits & customs", I18n.t("Planned (P2)"), Art.C_DIM)
 	_row("Food handling licence", I18n.t("Planned (P3)"), Art.C_DIM)
 	_row("Data protection registration", I18n.t("Planned (P1)"), Art.C_DIM)
 	body.add_child(UIK.sep())
 	body.add_child(UIK.wrap("Regulations here are operating conditions, not quizzes: each one has a cost, a process, and a reason.", 7, Art.C_SKY, 400))
 	footer.add_child(UIK.button("Close", close, "", 70))
+
+
+## Year 4: the Green Business Grant, with what's still missing spelled out.
+func _green_grant() -> void:
+	var r := UIK.hbox(6)
+	body.add_child(r)
+	var v := UIK.vbox(0)
+	v.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	r.add_child(v)
+	v.add_child(UIK.label(I18n.t("Green Business Grant (%s)") % Fmt.money0(Company.GREEN_GRANT), 8, Art.C_WHITE, true))
+	v.add_child(UIK.wrap("For registered companies with recycled packaging and a green product on sale.", 7, Art.C_MUTED, 300))
+	if GameState.flag("green_grant"):
+		r.add_child(UIK.chip(I18n.t("GRANTED"), Art.C_GREEN))
+		return
+	var why := Company.green_grant_block()
+	if why != "":
+		v.add_child(UIK.label(I18n.t(why), 7, Art.C_GOLD, true))
+	var b := UIK.button("Apply", _apply_grant, "primary")
+	b.name = "ApplyGreenGrant"
+	b.disabled = why != ""
+	r.add_child(b)
+
+
+func _apply_grant() -> void:
+	var res := Company.claim_green_grant()
+	if not res["ok"]:
+		UIRoot.toast(I18n.t(str(res["error"])), "warn", "lock")
+		return
+	Clock.advance(30)
+	UIRoot.toast(I18n.t("Grant approved: %s is on its way to the company account.") % Fmt.money0(float(res["amount"])), "good", "civic")
+	rebuild()
 
 
 func _row(k: String, v: String, col: Color) -> void:

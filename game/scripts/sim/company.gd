@@ -115,3 +115,41 @@ static func company_value() -> float:
 	return Ledger.cash(e) + Ledger.balance(e, "inventory") + Ledger.balance(e, "inventory_in_transit") + Ledger.balance(e, "goods_out") \
 		+ Ledger.balance(e, "marketplace_balance") + Ledger.balance(e, "accounts_receivable") + Ledger.balance(e, "deposits") \
 		+ Ledger.balance(e, "accounts_payable") + Ledger.balance(e, "deferred_revenue")
+
+
+# ================================================================ Green Business Grant (Year 4)
+const GREEN_GRANT := 3000.0
+
+
+## A green product live on ShopLane (the solar desk lamp, or anything with `eco` in its data).
+static func has_green_listing() -> bool:
+	for l in Ecommerce.E()["listings"].values():
+		if l.get("active", false) and bool(DataDB.product(l["product"]).get("eco", false)):
+			return true
+	return false
+
+
+## Why the grant can't be claimed yet ("" = it can): the checklist the permits kiosk shows.
+static func green_grant_block() -> String:
+	if World.year() < 4:
+		return "The grant opens with the Green Shift."
+	if GameState.flag("green_grant"):
+		return "Already granted."
+	if GameState.company_id() == "":
+		return "Only registered companies can apply."
+	if Ecommerce.packaging() != "recycled":
+		return "Switch to recycled packaging first (Company OS → Operations)."
+	if not has_green_listing():
+		return "List a green product on ShopLane first."
+	return ""
+
+
+static func claim_green_grant() -> Dictionary:
+	var why := green_grant_block()
+	if why != "":
+		return {"ok": false, "error": why}
+	Ledger.post(GameState.company_id(), I18n.t("Green Business Grant — City of Aurelia"),
+		[{"acct": "cash", "dr": GREEN_GRANT}, {"acct": "other_income", "cr": GREEN_GRANT}], {"type": "grant"})
+	GameState.set_flag("green_grant")
+	GameState.timeline(I18n.t("Won the city's Green Business Grant: %s.") % Fmt.money0(GREEN_GRANT), "milestone")
+	return {"ok": true, "amount": GREEN_GRANT}

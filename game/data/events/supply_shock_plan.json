@@ -1,0 +1,87 @@
+{
+ "id": "supply_shock_plan",
+ "category": "supply",
+ "status": "active",
+ "bind": {
+  "product": "best_seller",
+  "supplier": "most_used"
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "ken",
+  "title": "Supply shock: your plan",
+  "icon": "warning",
+  "lines": [
+   "Ken again. Here are your options, straight.",
+   "Prices are up and lead times are longer until the ports clear. Nobody knows how long.",
+   "{product} now costs {unit_cost}/unit here, MOQ {moq}."
+  ]
+ },
+ "choices": [
+  {
+   "id": "lock",
+   "label": "Sign a 60-day supply agreement with {supplier} ($600 fee)",
+   "detail": "{supplier} drops the shock surcharge for 60 days. Costs $600 up front.",
+   "requires": [
+    "cash>=600"
+   ],
+   "effects": [
+    {
+     "op": "cash",
+     "amount": -600,
+     "category": "other",
+     "memo": "Supply agreement fee — TradeLink"
+    },
+    {
+     "op": "supplier_price_mod",
+     "mult": "cancel_era",
+     "days": 60
+    },
+    {
+     "op": "set_flag",
+     "flag": "ch7_price_lock"
+    },
+    {
+     "op": "set_flag",
+     "flag": "ch7_supply_plan"
+    }
+   ],
+   "outcome": "Ken: \"Done. Sixty days of sane prices. Use them.\""
+  },
+  {
+   "id": "local",
+   "label": "Add a local backup: Aurelia Makers Co-op",
+   "detail": "Made in the city, so no port and no surcharge: pricier per unit, but one-day delivery. Shows up in Company OS → Operations.",
+   "effects": [
+    {
+     "op": "set_flag",
+     "flag": "supplier_aurelia_makers"
+    },
+    {
+     "op": "set_flag",
+     "flag": "ch7_supply_plan"
+    }
+   ],
+   "outcome": "Ken: \"No hard feelings. Tell them I sent you.\""
+  },
+  {
+   "id": "stock_up",
+   "label": "Stock up now: {moq} more {product}",
+   "detail": "Spend {moq_cost} before prices climb further. Your cash goes into boxes.",
+   "requires": [
+    "cash>={moq_cost_v}"
+   ],
+   "effects": [
+    {
+     "op": "purchase",
+     "qty": "moq"
+    },
+    {
+     "op": "set_flag",
+     "flag": "ch7_supply_plan"
+    }
+   ],
+   "outcome": "Ken: \"On the next truck. Let's hope it's a short queue.\""
+  }
+ ]
+}

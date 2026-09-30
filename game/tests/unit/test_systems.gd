@@ -193,10 +193,12 @@ func test_character_options_are_cosmetic_only() -> void:
 
 
 func test_crypto_not_available_in_year_one() -> void:
+	# the story rule: crypto never appears before the Year 5 Clearing Crisis
 	for m in DataDB.economy["settlement_methods"]["methods"]:
 		if str(m["id"]).begins_with("stablecoin"):
-			runner.eq(m["status"], "planned", "stablecoin rail is not active in the slice")
-	runner.check(not GameState.flag("clearing_crisis_started"), "no clearing crisis in year 1")
+			runner.check(int(m.get("from_year", 99)) >= 5, "the stablecoin rail belongs to Year 5 or later")
+			runner.check(not Ecommerce.settlement_open(str(m["id"])), "and is not on offer in year 1")
+	runner.check(not World.cross_border_delay(), "no clearing crisis in year 1")
 
 
 func test_a_new_game_never_overwrites_another_save() -> void:

@@ -27,6 +27,7 @@ func run() -> void:
 	else:
 		await _month()
 		await _chapters_4_to_6()
+		await _chapters_7_to_9()
 	await _save_load()
 	bot.step("Summary")
 	var be := GameState.business_entity()
@@ -111,6 +112,8 @@ func _pick_choice(inst: Dictionary) -> String:
 			return "review"
 		"elena_offer":
 			return "decline"   # the walkthrough bridges the gap with a bank loan instead
+		"supply_shock_plan":
+			return "local"     # the local co-op: the chapter's new supplier gets used
 	return DataDB.events[inst["id"]]["choices"][0]["id"]
 
 
@@ -720,6 +723,132 @@ func _chapters_4_to_6() -> void:
 	await popups()
 	bot.expect("ch6_cash_is_oxygen" in StoryEngine.St()["chapters_done"], "Chapter 6 complete")
 	bot.expect(Ledger.check_balanced(), "ledger balanced after chapters 4–6")
+
+
+## Chapters 7–9: each opens with the news board at Bloom Coffee, then uses the chapter's new system for real.
+func _read_news(tag: String) -> void:
+	if SceneRouter.world_scene().kind == "interior":
+		await exit_building()
+	if SceneRouter.world_scene().scene_id != "riverside":
+		await metro_to("riverside")
+	await enter_building("bloom_coffee")
+	await bot.use_action("read_news")
+	await bot.wait(0.6)
+	await bot.shot("news_" + tag)
+	await close_modal()
+	bot.expect(GameState.flag("news_read"), "read the news (%s)" % tag)
+	await exit_building()
+	await enter_building("riverside_apartment")
+
+
+func _chapters_7_to_9() -> void:
+	await popups()
+	bot.expect(StoryEngine.St()["chapter"] == "ch7_supply_shock", "Chapter 7 started after Chapter 6")
+	bot.expect(World.year() == 3, "Year 3: the Supply Shock")
+	# ---------------------------------------------------------------- chapter 7
+	bot.step("Chapter 7 — the news, and Ken's options")
+	await _read_news("supply_shock")
+	await pass_time_at_home(func(): return GameState.flag("ch7_supply_plan"), 10)
+	bot.expect(World.supplier_available("aurelia_makers"), "the local co-op is a supplier now")
+	bot.step("Chapter 7 — order from the co-op, raise a price")
+	await _home_laptop("operations")
+	await bot.shot("operations_supply_shock")
+	await bot.click_named("Buy_aurelia_makers_desk_lamp", 3.0)
+	await bot.wait(0.4)
+	await bot.click_named("Tab_sales")
+	await bot.wait(0.4)
+	await bot.click_named("PriceUp_desk_lamp", 3.0)
+	await bot.wait(0.4)
+	await close_modal()
+	await bot.wait(0.6)
+	StoryEngine.check()
+	bot.expect("ch7_price" in StoryEngine.St()["done"], "stocked and repriced")
+	await pass_time_at_home(func(): return "ch7_supply_shock" in StoryEngine.St()["chapters_done"], 40, true)
+	bot.expect("ch7_supply_shock" in StoryEngine.St()["chapters_done"], "Chapter 7 complete")
+	# ---------------------------------------------------------------- chapter 8
+	bot.step("Chapter 8 — the Green Shift")
+	bot.expect(World.year() == 4, "Year 4: the Green Shift")
+	await _read_news("green_shift")
+	await _home_laptop("operations")
+	await bot.click_named("Packaging_recycled", 3.0)
+	await bot.wait(0.3)
+	await bot.click_named("Buy_verdant_supply_solar_lamp", 3.0)
+	await bot.wait(0.3)
+	await bot.shot("operations_green")
+	await close_modal()
+	bot.expect(GameState.flag("packaging_green"), "recycled packaging")
+	await pass_time_at_home(func(): return Ecommerce.total_units_at_any("solar_lamp") > 0, 8)
+	await _home_laptop("sales")
+	await bot.click_named("ListSelf_solar_lamp", 3.0)
+	await bot.until(func(): return not (UIRoot.top_modal() is MiniGame), 8.0)   # the photo shoot
+	await bot.wait(0.6)
+	await close_modal()
+	bot.expect(Cond.eval("listed:solar_lamp"), "solar desk lamps listed")
+	bot.step("Chapter 8 — the Green Business Grant at City Hall")
+	while not _is_weekday() or Clock.hour() >= 15:
+		await pass_time_at_home(func(): return _is_weekday() and Clock.hour() < 15, 1)
+	await exit_building()
+	await metro_to("civic_center")
+	await enter_building("city_hall")
+	await bot.use_action("permits_info")
+	await bot.wait(0.6)
+	await bot.shot("green_grant")
+	await bot.click_named("ApplyGreenGrant", 3.0)
+	await bot.wait(0.4)
+	await close_modal()
+	bot.expect(GameState.flag("green_grant"), "green grant approved")
+	await bot.wait(1.0)
+	await popups()
+	bot.expect("ch8_green_shift" in StoryEngine.St()["chapters_done"], "Chapter 8 complete")
+	# ---------------------------------------------------------------- chapter 9
+	bot.step("Chapter 9 — the Clearing Crisis: an import stuck on the wire")
+	bot.expect(World.year() == 5, "Year 5: the Clearing Crisis")
+	await exit_building()
+	await metro_to("riverside")
+	await _read_news("clearing_crisis")
+	await _home_laptop("operations")
+	await bot.click_named("Buy_lumina_direct_phone_stand", 3.0)
+	await bot.wait(0.6)
+	await bot.shot("settlement_choice")
+	await bot.click_named("Settle_international_wire", 3.0)
+	await bot.wait(0.4)
+	await close_modal()
+	bot.expect(GameState.stat("import_orders") >= 1, "import ordered, paid by wire")
+	bot.step("Chapter 9 — Lina Zhao at Nexus Bank")
+	while not _is_weekday() or Clock.hour() < 10 or Clock.hour() >= 15:
+		await pass_time_at_home(func(): return _is_weekday() and Clock.hour() >= 10 and Clock.hour() < 15, 1)
+	await exit_building()
+	await metro_to("financial")
+	await enter_building("nexus_bank")
+	await bot.use(func(n): return n.action == "talk" and str(n.params.get("npc", "")) == "lina", "Lina Zhao")
+	await bot.wait(0.6)
+	await bot.shot("lina_intro")
+	await talk_through_dialogue_first_choice()
+	bot.expect(GameState.flag("met_lina"), "met Lina Zhao")
+	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")
+	await _home_laptop("operations")
+	var pend := ""
+	for po in Ecommerce.E()["purchase_orders"].values():
+		if po["status"] == "awaiting_payment":
+			pend = str(po["id"])
+	if pend != "":
+		await bot.click_named("SpeedUp_" + pend, 3.0)
+		await bot.wait(0.5)
+		await bot.shot("settlement_speed_up")
+		await bot.click_named("Settle_letter_of_credit", 3.0)
+		await bot.wait(0.4)
+	await close_modal()
+	await close_modal()
+	await pass_time_at_home(func(): return "ch9_clearing_crisis" in StoryEngine.St()["chapters_done"], 30)
+	bot.expect("ch9_clearing_crisis" in StoryEngine.St()["chapters_done"], "Chapter 9 complete: the import got through")
+	bot.expect(Ledger.check_balanced(), "ledger balanced after chapters 7–9")
+
+
+func talk_through_dialogue_first_choice() -> void:
+	await bot.until(func(): return UIRoot.dialogue.active, 3.0)
+	await bot.talk_through_dialogue()
 
 
 func _video_epilogue() -> void:

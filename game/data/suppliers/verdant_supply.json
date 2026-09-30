@@ -1,0 +1,8 @@
+{"id": "verdant_supply", "name": "Verdant Supply", "region": "aurelia", "contact_npc": "",
+ "blurb": "Green products wholesaler in the Industrial Zone. Opened with the Green Shift.",
+ "from_year": 4,
+ "offers": [
+  {"product": "solar_lamp", "unit_cost": 16.0, "moq": 30, "lead_days": 2, "defect_rate": 0.02}
+ ],
+ "payment_terms": "prepay",
+ "net_terms_for_companies": {"days": 30, "requires": ["company_registered"]}}

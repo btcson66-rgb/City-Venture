@@ -257,7 +257,7 @@ static func restock_plan(c: Dictionary) -> Dictionary:
 	var best := {}
 	for sid in DataDB.suppliers:
 		var o := Ecommerce.offer(sid, c["product"])
-		if o.is_empty():
+		if o.is_empty() or not World.supplier_available(sid):
 			continue
 		var uc := Ecommerce.unit_cost(sid, c["product"])
 		if best.is_empty() or uc < float(best["uc"]):

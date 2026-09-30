@@ -96,6 +96,10 @@ static func check() -> void:
 	# saves that finished the June sandbox before chapters 4–6 existed carry on into Chapter 4
 	if St().get("chapter", "") == "ch3_open_for_business" and "goal_month" in St()["done"] and not chapter_def("ch4_growing_pains").is_empty():
 		start_chapter("ch4_growing_pains")
+	# saves that finished Chapter 6 before Chapter 7 existed were parked on the growth goal: carry on into Chapter 7
+	if St().get("chapter", "") == "ch6_cash_is_oxygen" and "ch6_cash_is_oxygen" in St()["chapters_done"] and not chapter_def("ch7_supply_shock").is_empty():
+		St()["active"].erase("goal_growth")
+		start_chapter("ch7_supply_shock")
 	var changed := true
 	var guard := 0
 	while changed and guard < 20:
@@ -147,7 +151,12 @@ static func run_actions(actions: Array) -> void:
 				else:
 					GameState.add_message(a["from"], fill(a["text"]))
 			"set_flag":
-				GameState.set_flag(a["flag"], a.get("value", true))
+				if int(a.get("delay_min", 0)) > 0:
+					Sim.schedule(Clock.now() + int(a["delay_min"]), "story.flag", {"flag": a["flag"], "value": a.get("value", true)})
+				else:
+					GameState.set_flag(a["flag"], a.get("value", true))
+			"world_year":
+				World.set_year(int(a["year"]))
 			"flag_reset":
 				GameState.set_flag(a["flag"], false)
 			"start":
@@ -188,5 +197,8 @@ static func handle(kind: String, p: Dictionary) -> void:
 	match kind:
 		"story.message":
 			GameState.add_message(p["from"], fill(p["text"]))
+		"story.flag":
+			GameState.set_flag(p["flag"], p.get("value", true))
+			check()
 		"story.check":
 			check()

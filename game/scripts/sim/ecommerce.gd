@@ -45,7 +45,7 @@ static func unit_cost(supplier_id: String, product_id: String) -> float:
 	var o := offer(supplier_id, product_id)
 	if o.is_empty():
 		return 0.0
-	return snappedf(float(o["unit_cost"]) * cost_multiplier(supplier_id, product_id), 0.01)
+	return snappedf(float(o["unit_cost"]) * cost_multiplier(supplier_id, product_id) * World.cost_mult(supplier_id), 0.01)
 
 
 static func can_use_net_terms(supplier_id: String) -> bool:
@@ -56,10 +56,14 @@ static func can_use_net_terms(supplier_id: String) -> bool:
 
 
 ## Place a purchase order. Returns {ok, error?, po_id?, total?}.
-static func buy(supplier_id: String, product_id: String, qty: int, location := "", use_terms := false, lead_override := -1, cost_mult := 1.0) -> Dictionary:
+## settlement: how an import is paid in the Clearing Crisis (Year 5): international_wire (default),
+## letter_of_credit or stablecoin_settlement. Ignored for local suppliers and before Year 5.
+static func buy(supplier_id: String, product_id: String, qty: int, location := "", use_terms := false, lead_override := -1, cost_mult := 1.0, settlement := "") -> Dictionary:
 	var o := offer(supplier_id, product_id)
 	if o.is_empty():
 		return {"ok": false, "error": "That supplier doesn't sell this."}
+	if not World.supplier_available(supplier_id):
+		return {"ok": false, "error": "That supplier isn't open to you yet."}
 	if qty < int(o["moq"]):
 		return {"ok": false, "error": I18n.t("Minimum order is %d units.") % int(o["moq"])}
 	if location == "":
@@ -71,12 +75,20 @@ static func buy(supplier_id: String, product_id: String, qty: int, location := "
 	var uc := snappedf(unit_cost(supplier_id, product_id) * cost_mult, 0.01)
 	var total := snappedf(uc * qty, 0.01)
 	var terms := use_terms and can_use_net_terms(supplier_id)
-	if not terms and Ledger.cash(entity) < total:
-		return {"ok": false, "error": I18n.t("Not enough cash. You need %s.") % Fmt.money(total)}
+	var settle := ""
+	var settle_fee := 0.0
+	if needs_settlement(supplier_id) and not terms:
+		settle = settlement if settlement != "" else "international_wire"
+		var why := settlement_block(settle)
+		if why != "":
+			return {"ok": false, "error": why}
+		settle_fee = settlement_fee(settle, total)
+	if not terms and Ledger.cash(entity) < total + settle_fee:
+		return {"ok": false, "error": I18n.t("Not enough cash. You need %s.") % Fmt.money(total + settle_fee)}
 	var e := E()
 	e["counters"]["po"] = int(e["counters"]["po"]) + 1
 	var po_id := "PO-%d" % int(e["counters"]["po"])
-	var lead := int(o["lead_days"]) if lead_override < 0 else lead_override
+	var lead := int(ceil(float(o["lead_days"]) * World.lead_mult(supplier_id))) if lead_override < 0 else lead_override
 	var eta := Clock.at_day_time(lead, 10 * 60 + GameState.randi_range(0, 360))
 	if lead == 0:
 		eta = Clock.now() + 180
@@ -94,6 +106,17 @@ static func buy(supplier_id: String, product_id: String, qty: int, location := "
 	else:
 		Ledger.post(entity, I18n.t("%s: %d × %s (prepaid)") % [sup_name, qty, I18n.t(DataDB.product(product_id)["name"])],
 			[{"acct": "inventory_in_transit", "dr": total}, {"acct": "cash", "cr": total}], {"type": "po", "id": po_id})
+	if settle != "":
+		# the money has left, but the supplier won't ship until it lands on their side
+		var clears := Clock.now() + settlement_hours(settle) * 60
+		po["status"] = "awaiting_payment"
+		po["settlement"] = {"method": settle, "fee": settle_fee, "clears": clears}
+		eta = clears + (eta - Clock.now())
+		po["eta"] = eta
+		if settle_fee > 0.0:
+			Ledger.expense(entity, "bank_fees", settle_fee, I18n.t("%s — %s") % [I18n.t(str(settlement_def(settle)["name"])), po_id], {"type": "po", "id": po_id})
+		Sim.schedule(clears, "eco.po_cleared", {"po": po_id})
+		GameState.inc_stat("import_orders")
 	Sim.schedule(eta, "eco.po_arrive", {"po": po_id})
 	GameState.inc_stat("purchase_orders")
 	if int(GameState.stat("purchase_orders")) == 1:
@@ -112,6 +135,8 @@ static func _h_po_arrive(p: Dictionary) -> void:
 		return
 	po["status"] = "delivered"
 	po["arrived"] = Clock.now()
+	if World.is_import(po["supplier"]):
+		GameState.inc_stat("import_received")
 	_add_stock(po["location"], po["product"], int(po["qty"]), float(po["unit_cost"]), float(po["defect_rate"]))
 	Ledger.post(po["entity"], I18n.t("Stock received: %s") % po["id"],
 		[{"acct": "inventory", "dr": po["total"]}, {"acct": "inventory_in_transit", "cr": po["total"]}], {"type": "po", "id": po["id"]})
@@ -122,6 +147,90 @@ static func _h_po_arrive(p: Dictionary) -> void:
 	if contact != "":
 		GameState.add_message(contact, I18n.t("Dropped %d %s at %s. Don't let them sit around.") % [int(po["qty"]), pname if I18n.is_zh() else pname.to_lower(), location_name(po["location"])])
 	EventBus.po_arrived.emit(po["id"])
+
+
+# ================================================================ cross-border settlement (Year 5)
+static func needs_settlement(supplier_id: String) -> bool:
+	return World.cross_border_delay() and World.is_import(supplier_id)
+
+
+static func settlement_def(id: String) -> Dictionary:
+	for m in DataDB.economy.get("settlement_methods", {}).get("methods", []):
+		if m["id"] == id:
+			return m
+	return {}
+
+
+## The cross-border rails on offer in this era (the stablecoin rail only from Year 5).
+static func settlement_options() -> Array:
+	var out: Array = []
+	for m in DataDB.economy.get("settlement_methods", {}).get("methods", []):
+		if bool(m.get("cross_border", false)) and settlement_open(str(m["id"])):
+			out.append(m)
+	return out
+
+
+static func settlement_open(id: String) -> bool:
+	var m := settlement_def(id)
+	return not m.is_empty() and m.get("status", "") == "active" and World.year() >= int(m.get("from_year", 1))
+
+
+## Why a rail can't be used right now ("" = it can).
+static func settlement_block(id: String) -> String:
+	if not settlement_open(id):
+		return "That payment method isn't available."
+	var m := settlement_def(id)
+	var req := str(m.get("requires", ""))
+	if req != "" and not Cond.eval(req):
+		return I18n.t("This %s.") % I18n.t(str(m.get("requires_text", "has a requirement you don't meet yet")))
+	return ""
+
+
+static func settlement_fee(id: String, amount: float) -> float:
+	var m := settlement_def(id)
+	var fee := float(m.get("fixed_fee", 0.0)) + amount * float(m.get("fee_rate", 0.0))
+	return snappedf(maxf(fee, float(m.get("fee_min", 0.0))), 0.01)
+
+
+static func settlement_hours(id: String) -> int:
+	var h: Array = settlement_def(id).get("clear_hours", [24, 24])
+	return GameState.randi_range(int(h[0]), int(h[1]))
+
+
+## Swap a payment that's stuck on the wire for a faster rail: pay that rail's fee, the supplier ships sooner.
+static func switch_settlement(po_id: String, method: String) -> Dictionary:
+	var po: Dictionary = E()["purchase_orders"].get(po_id, {})
+	if po.is_empty() or po["status"] != "awaiting_payment":
+		return {"ok": false, "error": "That payment already went through."}
+	var why := settlement_block(method)
+	if why != "":
+		return {"ok": false, "error": why}
+	var st: Dictionary = po["settlement"]
+	var clears := Clock.now() + settlement_hours(method) * 60
+	if clears >= int(st["clears"]):
+		return {"ok": false, "error": "That wouldn't be any faster."}
+	var fee := settlement_fee(method, float(po["total"]))
+	if Ledger.cash(po["entity"]) < fee:
+		return {"ok": false, "error": I18n.t("Not enough cash. You need %s.") % Fmt.money(fee)}
+	if fee > 0.0:
+		Ledger.expense(po["entity"], "bank_fees", fee, I18n.t("%s — %s") % [I18n.t(str(settlement_def(method)["name"])), po_id], {"type": "po", "id": po_id})
+	var transit := int(po["eta"]) - int(st["clears"])
+	st["method"] = method
+	st["fee"] = float(st["fee"]) + fee
+	st["clears"] = clears
+	po["eta"] = clears + transit
+	Sim.schedule(clears, "eco.po_cleared", {"po": po_id})
+	Sim.schedule(int(po["eta"]), "eco.po_arrive", {"po": po_id})
+	return {"ok": true, "clears": clears, "fee": fee}
+
+
+static func _h_po_cleared(p: Dictionary) -> void:
+	var po: Dictionary = E()["purchase_orders"].get(p["po"], {})
+	if po.is_empty() or po["status"] != "awaiting_payment" or Clock.now() < int(po["settlement"]["clears"]):
+		return   # already cleared, or this is the old (slower) rail's reminder
+	po["status"] = "in_transit"
+	GameState.inc_stat("import_cleared")
+	EventBus.notify.emit(I18n.t("Payment landed: %s ships %s (arrives %s).") % [I18n.t(DataDB.supplier(po["supplier"])["name"]), po["id"], Clock.fmt_short(int(po["eta"]))], "good", "bank")
 
 
 static func _h_ap_due(p: Dictionary) -> void:
@@ -234,7 +343,7 @@ static func total_units_at(loc: String) -> int:
 static func incoming_units(loc := "") -> int:
 	var n := 0
 	for po in E()["purchase_orders"].values():
-		if po["status"] == "in_transit" and (loc == "" or po["location"] == loc):
+		if po["status"] in ["in_transit", "awaiting_payment"] and (loc == "" or po["location"] == loc):
 			n += int(po["qty"])
 	return n
 
@@ -242,7 +351,7 @@ static func incoming_units(loc := "") -> int:
 static func incoming_units_of(product_id: String) -> int:
 	var n := 0
 	for po in E()["purchase_orders"].values():
-		if po["status"] == "in_transit" and po["product"] == product_id:
+		if po["status"] in ["in_transit", "awaiting_payment"] and po["product"] == product_id:
 			n += int(po["qty"])
 	return n
 
@@ -308,7 +417,10 @@ static func set_price(lid: String, price: float) -> void:
 	if l.is_empty():
 		return
 	var p := DataDB.product(l["product"])
+	var before := float(l["price"])
 	l["price"] = snappedf(clampf(price, float(p["price_min"]), float(p["price_max"])), 0.01)
+	if float(l["price"]) > before + 0.001:
+		GameState.set_flag("repriced")   # Chapter 7 asks you to pass rising costs on
 	EventBus.listing_changed.emit(lid)
 
 
@@ -359,6 +471,10 @@ static func ad_factor(l: Dictionary) -> float:
 
 static func demand_mult(product_id: String) -> float:
 	var m := 1.0 + Staff.demand_boost()
+	if bool(DataDB.product(product_id).get("eco", false)):
+		m *= World.eco_demand_mult()   # Year 4 on: green products are in demand
+	if packaging() == "recycled" and World.packaging_levy() > 0.0:
+		m *= 1.05   # "plastic-free packaging" on the listing
 	var t := Clock.now()
 	for d in E()["demand_mods"]:
 		if int(d["until"]) > t and (d.get("product", "*") == "*" or d["product"] == product_id):
@@ -527,7 +643,7 @@ static func pack_orders(loc: String, max_n := -1, quality := {}) -> int:
 			var qv: Dictionary = quality.get(str(o["id"]), {"q": avg, "label_ok": true})
 			o["pack_q"] = float(qv["q"])
 			o["label_ok"] = bool(qv["label_ok"])
-		var pack := float(DataDB.product(o["product"]).get("packaging_cost", 0.5))
+		var pack := float(DataDB.product(o["product"]).get("packaging_cost", 0.5)) + packaging_extra()
 		Ledger.post(o["entity"], I18n.t("Packed order %s") % o["id"], [
 			{"acct": "goods_out", "dr": cost}, {"acct": "inventory", "cr": cost},
 			{"acct": "exp:packaging", "dr": pack}, {"acct": "cash", "cr": pack}], {"type": "order", "id": o["id"]})
@@ -538,10 +654,28 @@ static func pack_orders(loc: String, max_n := -1, quality := {}) -> int:
 	return n
 
 
+## "standard" (bubble wrap) or "recycled" (paper padding: a little dearer, and no levy from Year 4).
+static func packaging() -> String:
+	return str(E().get("packaging", "standard"))
+
+
+static func set_packaging(kind: String) -> void:
+	E()["packaging"] = kind
+	if kind == "recycled":
+		GameState.set_flag("packaging_green")
+
+
+## Per-parcel packaging on top of the product's own box: recycled padding costs more, bubble wrap pays the levy.
+static func packaging_extra() -> float:
+	if packaging() == "recycled":
+		return float(mk().get("recycled_packaging_extra", 0.25))
+	return World.packaging_levy()
+
+
 static func ship_cost(o: Dictionary, method: String) -> float:
 	var m := DataDB.ship_method(method)
 	var cls: String = DataDB.product(o["product"]).get("ship_class", "small")
-	return float(m.get("cost", {}).get(cls, 5.0))
+	return snappedf(float(m.get("cost", {}).get(cls, 5.0)) * World.shipping_index(), 0.01)   # the era's courier rates
 
 
 ## Book a courier pickup for all packed orders at `loc`.
@@ -900,7 +1034,7 @@ static func transfer_business_to(company: String) -> void:
 		if o["status"] in OPEN_STATUSES or o["status"] == "return_requested" or o["status"] == "delivered":
 			o["entity"] = company
 	for po in E()["purchase_orders"].values():
-		if po["status"] == "in_transit":
+		if po["status"] in ["in_transit", "awaiting_payment"]:
 			po["entity"] = company
 
 
@@ -911,6 +1045,8 @@ static func handle(kind: String, p: Dictionary) -> void:
 			_h_po_arrive(p)
 		"eco.ap_due":
 			_h_ap_due(p)
+		"eco.po_cleared":
+			_h_po_cleared(p)
 		"eco.order_place":
 			_h_order_place(p)
 		"eco.pickup":

@@ -3,7 +3,7 @@ extends RefCounted
 ## Tiny condition DSL shared by story objectives and events.
 ##   flag:x  !flag:x  visited:x  stat:name>=n  day>=n  cash<n  company_registered  !company_registered
 ##   has_ads  best_rating>=4.2  weekday:mon  hour>=h  has_stock  has_stock:product_id  chapter_done:id  objective_done:id
-##   has_job  desk_access  carrying_parcels
+##   has_job  desk_access  carrying_parcels  listed:product_id  world_year>=n  stock_units>=n (in hand + on the way)
 
 
 static func all(conds: Array, ctx := {}) -> bool:
@@ -33,6 +33,9 @@ static func eval(expr: String, ctx := {}) -> bool:
 	if expr.begins_with("has_stock:"):
 		# unreserved units of one product somewhere the player can ship from
 		return Ecommerce.best_location(expr.substr(10)) != ""
+	if expr.begins_with("listed:"):
+		var l := Ecommerce.listing_for(expr.substr(7))
+		return not l.is_empty() and bool(l.get("active", false))
 	if expr.begins_with("chapter_done:"):
 		return expr.substr(13) in GameState.data["story"]["chapters_done"]
 	if expr.begins_with("objective_done:"):
@@ -95,6 +98,10 @@ static func _value(name: String, ctx: Dictionary) -> float:
 	if name.begins_with("stat:"):
 		return GameState.stat(name.substr(5))
 	match name:
+		"world_year":
+			return World.year()
+		"stock_units":
+			return Ecommerce.total_units() + Ecommerce.incoming_units()
 		"day":
 			return Clock.day_index()
 		"hour":

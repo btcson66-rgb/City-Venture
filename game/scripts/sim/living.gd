@@ -43,7 +43,7 @@ static func _entities() -> Array:
 
 
 static func pay_home_rent() -> void:
-	var rent := float(cfg().get("home_rent", 1250))
+	var rent := snappedf(float(cfg().get("home_rent", 1250)) * World.rent_mult(), 1.0)   # rents rise with the era
 	var before := Ledger.cash("player")
 	var mname: String = Clock.month_name(int(Clock.date()["month"]))
 	Ledger.expense("player", "rent_home", rent, I18n.t("Rent — Riverside Tower 7C (%s)") % mname, {"type": "rent"})

@@ -31,6 +31,13 @@
  ],
  "dialogue": [
   {
+   "when": [
+    "objective_done:ch7_news",
+    "!flag:ch7_supply_plan"
+   ],
+   "conversation": "ken_supply_shock"
+  },
+  {
    "when": [],
    "conversation": "ken_intro"
   }

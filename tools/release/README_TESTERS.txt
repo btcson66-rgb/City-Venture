@@ -4,6 +4,23 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
 謝謝你幫忙測試！這是一款在現代城市裡創業、經營公司的像素風模擬 RPG。
 目前可以完整玩到第一章到第六章（開始電商、賺到第一塊錢、登記公司、月結、聘員工、大合約、現金危機）。
 
+0.1.7 新增（依你的第三次試玩回饋）：
+  ・新手教學不會再卡住等貨：買了貨之後如果還在路上，幾秒後就會提早送到（供應商會傳訊息說貨車剛好在附近）。
+    舊存檔接著玩也適用，而且會從「進貨」之後接下去，不會叫你重買日票。
+  ・上完班就能睡覺：工作完會累，可以直接回家睡；第一次創業期間下午 4 點以後也能睡。
+    太晚來不及上班時，教學會直接告訴你先回家睡、明天再上班，箭頭也會指向床。
+  ・等包裹送達時，教學會先帶你走去 Bloom Coffee，下一步就在那裡找工作，不會空等。
+  ・打開電腦或看手機時，時間會繼續走（跟現實一樣）。暫停選單、小遊戲、說明卡和劇情抉擇才會暫停。
+  ・中文換行：打包版之前缺少中文斷行資料，句子會在奇怪的地方斷開，現在修好了。
+  ・新美術：接上 Codex 的新版美術（室內地板牆面、角色、NPC 表情等）。
+  ・新章節：第 7 章「供應衝擊」、第 8 章「綠色轉型」、第 9 章「清算危機」。
+    - 第 7 章：運費、進貨價、交期都變了，要跟 Ken 談對策（簽供貨協議、找在地合作社或先囤貨）、
+      維持庫存、調價、撐過一個月。
+    - 第 8 章：塑膠包材要課稅，改用回收包材、上架太陽能檯燈，到市政廳申請 $3,000 綠色企業補助。
+    - 第 9 章：跟國外進口時錢卡在電匯，到 Nexus Bank 找新角色 Lina Zhao，
+      比較電匯、信用狀、數位美元三種付款方式。
+    第 10–12 章還在設計，美術需求已經寫給 Codex。
+
 0.1.6 新增（依你的第二次試玩回饋）：
   ・存檔不會再不見：每場遊戲有自己的存檔欄位，按「新遊戲」會開新欄位，不會蓋掉舊的。
     標題畫面多了「讀取存檔」，可以選任何一場繼續玩。欄位都滿時會先問你要取代哪一個，
@@ -151,6 +168,13 @@ CITY VENTURE — Test build {VERSION} ({DATE})  ·  English
 Thanks for testing! This build plays Chapters 1–6: start an online shop, earn your first dollar, register a
 company, close a month, hire staff, land Crestline's big contract and survive the cash crunch. Also playable:
 part-time jobs, freelance consulting and a SaaS product.
+
+NEW IN 0.1.7: the first venture never waits on a truck (late stock turns up early, also in continued saves) · you can
+sleep after a shift, and from 4 PM on your first day · time keeps running while the computer or phone is open (the pause
+menu, minigames, help cards and decisions still pause) · Chinese line breaks fixed in exported builds (the ICU
+line-break data was missing) · Codex's renewed art · Chapters 7 Supply Shock, 8 The Green Shift and 9 Clearing Crisis:
+shipping and supplier prices by era, recycled packaging and the Green Business Grant, paying importers by wire, letter
+of credit or digital dollars with Lina Zhao at Nexus Bank.
 
 NEW IN 0.1.6: every game has its own save slot, so New Game never overwrites the game you were playing; the title
 screen lists all saves (Load game) and asks before replacing one (the old file is kept in a backup folder) · the

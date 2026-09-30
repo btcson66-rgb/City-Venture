@@ -16,22 +16,74 @@
   {
    "year": 2,
    "name": "Growth Fever",
-   "status": "planned"
+   "status": "active",
+   "interest_rate": 0.035,
+   "shipping_index": 1.0,
+   "rent_mult": 1.1,
+   "headlines": [
+    "Aurelia rents up 10% as the startup boom fills every desk.",
+    "Hiring gets harder: wages up 8% in a year.",
+    "Everyone is raising a round. Not everyone should be."
+   ]
   },
   {
    "year": 3,
    "name": "Supply Shock",
-   "status": "planned"
+   "status": "active",
+   "interest_rate": 0.045,
+   "shipping_index": 1.8,
+   "lead_mult": 1.5,
+   "import_lead_mult": 2.0,
+   "cost_mult": 1.12,
+   "import_cost_mult": 1.25,
+   "rent_mult": 1.1,
+   "headlines": [
+    "Port of Aurelia backed up for a third week: 40 ships waiting.",
+    "Container rates double. Couriers add fuel surcharges.",
+    "Retailers warn of empty shelves before the holidays.",
+    "PostPoint hiring: parcel volumes at a record."
+   ]
   },
   {
    "year": 4,
    "name": "The Green Shift",
-   "status": "planned"
+   "status": "active",
+   "interest_rate": 0.04,
+   "shipping_index": 1.3,
+   "lead_mult": 1.2,
+   "import_lead_mult": 1.4,
+   "cost_mult": 1.05,
+   "import_cost_mult": 1.1,
+   "rent_mult": 1.12,
+   "packaging_levy": 0.4,
+   "eco_demand_mult": 1.35,
+   "headlines": [
+    "Clean Packaging Act passes: $0.40 levy on plastic-padded parcels.",
+    "City opens a $2M Green Business Grant for local sellers.",
+    "Solar desk lamps are this year's must-have gift.",
+    "Verdant Supply opens a warehouse in the Industrial Zone."
+   ]
   },
   {
    "year": 5,
    "name": "Clearing Crisis",
-   "status": "planned"
+   "status": "active",
+   "interest_rate": 0.05,
+   "shipping_index": 1.2,
+   "lead_mult": 1.1,
+   "import_lead_mult": 1.2,
+   "cost_mult": 1.05,
+   "import_cost_mult": 1.05,
+   "rent_mult": 1.15,
+   "packaging_levy": 0.4,
+   "eco_demand_mult": 1.2,
+   "cross_border_delay": true,
+   "headlines": [
+    "Cross-border payments stuck: correspondent banks slow down checks.",
+    "Importers report wires taking 5 to 9 days to clear.",
+    "Banks push letters of credit; fintechs push 'digital dollars'.",
+    "Regulators: 'Know who you are paying, and how.'"
+   ]
   },
   {
    "year": 6,

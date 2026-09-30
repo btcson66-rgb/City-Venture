@@ -41,9 +41,12 @@ static func apply(e: Dictionary, ctx: Dictionary) -> Dictionary:
 			var mult := float(e.get("cost_mult", 1.0))
 			return Ecommerce.buy(sup, pid, qty, "", false, lead, mult)
 		"supplier_price_mod":
+			var sup_id: String = ctx.get("supplier_id", e.get("supplier", "*"))
+			# "cancel_era": undo the era's surcharge for this supplier (a supply agreement at pre-shock prices)
+			var pm := 1.0 / World.cost_mult(sup_id) if str(e.get("mult", 1.0)) == "cancel_era" else float(e.get("mult", 1.0))
 			GameState.data["ecommerce"]["supplier_mods"].append({
-				"supplier": ctx.get("supplier_id", e.get("supplier", "*")), "product": ctx.get("product_id", "*"),
-				"mult": float(e.get("mult", 1.0)), "from": Clock.now() + int(e.get("from_days", 0)) * Clock.DAY,
+				"supplier": sup_id, "product": ctx.get("product_id", "*") if str(e.get("mult", 1.0)) != "cancel_era" else "*",
+				"mult": pm, "from": Clock.now() + int(e.get("from_days", 0)) * Clock.DAY,
 				"until": Clock.now() + int(e.get("days", 30)) * Clock.DAY})
 		"demand_mod":
 			GameState.data["ecommerce"]["demand_mods"].append({"product": ctx.get("product_id", "*") if e.get("scope", "product") == "product" else "*",

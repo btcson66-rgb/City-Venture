@@ -213,7 +213,17 @@ The slice uses `riverside_studio` (home), `nexus_cowork_desk`, and `startup_hub_
 
 ### 1.17 World economy — `data/world/years.json`
 `{years:[{year:1,name:"The Opportunity",interest_rate:0.025,shipping_index:1.0,events:[...]},{year:5,name:"Clearing Crisis",...}]}`
-Only Year 1 is active in the slice. The rest is Planned.
+Years 1–5 are active (Year 2 only as numbers, rolled into Chapter 7). Years 6–10 are Planned.
+
+### 1.17b Eras, suppliers and settlement (Chapters 7–9)
+`years.json` → per year: `interest_rate`, `shipping_index` (courier rates ×), `cost_mult` / `import_cost_mult` (supplier
+prices ×), `lead_mult` / `import_lead_mult` (lead days ×), `rent_mult` (home rent ×), `packaging_levy` ($ per
+plastic-padded parcel), `eco_demand_mult` (demand × for products with `eco: true`), `cross_border_delay` (imports wait
+for their payment to land). Read only through `World` (`scripts/sim/world.gd`); story action `world_year` moves the era.
+Suppliers: `region` ≠ "aurelia" = import; `shock_exempt` (era multipliers don't apply); `from_year`; `requires_flag`
+(listed and buyable only once set). Products: `eco`, `icon_fallback` (stand-in picture until `icon` art exists).
+`data/economy/settlement_methods.json` → methods with `cross_border: true` are the rails for imports in Year 5:
+`fee_rate`, `fixed_fee`, `fee_min`, `clear_hours [min, max]`, `requires` (a Cond), `requires_text`, `from_year`, `desc`.
 
 ### 1.18 Character creator options — `data/character/options.json`
 `{presentations[], face_shapes[], hairstyles[], hair_colors[], skin_tones[], eye_shapes[], eye_colors[], eyebrows[], mouths[], outfits[], outfits_shop[]}`. Each option is `{id, name, layer?, color?}`. **No option has any gameplay field. The validator rejects keys like `bonus`, `stat` and `modifier`.**
@@ -248,6 +258,7 @@ data.meta              {format, version, created_unix, playtime_s, slot}   (slot
 data.tutorial          {v: 3, step, seen{}, off}   (the guided first venture; older versions restart at step 0 and skip
                         what's done. While it runs, the first stock, order, pickup and delivery come within minutes)
 data.help_seen         {key: true}
+data.world             {year, modifiers}   (the era: 1 at the start, 3/4/5 from Chapters 7/8/9)
 data.entities.<id>     {id, name, kind: person|company|npc_company, founded?, type?, address?, bank_account: bool,
                         properties[], seller_account{type: personal|business, month_gmv}}
 data.ledger            {seq, journal:[{n, t, entity, memo, source{type,id}, lines:[{acct, dr, cr}]}]}
@@ -255,7 +266,9 @@ data.ecommerce         {listings{id:{product, price, photo, photo_q (your own sh
                         orders{id:{product, qty, unit_price, customer, placed, status, location, ship{method,cost,shipped,eta},
                                    delivered, payout_batch, return{reason, status}, review,
                                    pack_q, label_ok, damaged}},   (pack_q/label_ok from the packing minigame)
-                        purchase_orders{id:{supplier, product, qty, unit_cost, total, placed, eta, location, status, terms}},
+                        purchase_orders{id:{supplier, product, qty, unit_cost, total, placed, eta, location, status, terms,
+                                   settlement{method, fee, clears}}},   (status awaiting_payment → in_transit → delivered for imports in Year 5)
+                        packaging: standard|recycled,
                         inventory{location:{product:{qty, avg_cost, defective}}},
                         parcels{location: [order_ids packed awaiting dropoff]},
                         supplier_mods[{supplier, product, mult, until}], counters{order_seq, po_seq}}

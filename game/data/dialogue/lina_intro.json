@@ -1,0 +1,90 @@
+{
+ "id": "lina_intro",
+ "with": "lina",
+ "nodes": {
+  "start": [
+   {
+    "who": "lina",
+    "text": "Lina Zhao. I run a cross-border payments startup; Nexus lets me hold office hours here. Let me guess: you paid a supplier abroad and the money hasn't landed."
+   },
+   {
+    "who": "lina",
+    "expr": "thinking",
+    "text": "Wires go through a chain of correspondent banks. Right now every bank in that chain is double-checking everything."
+   },
+   {
+    "who": "lina",
+    "text": "You have three ways to pay abroad now."
+   },
+   {
+    "who": "lina",
+    "text": "A wire: cheap, slow. A letter of credit: we guarantee you to their bank, about two days, one and a half percent."
+   },
+   {
+    "who": "lina",
+    "text": "Or digital dollars through a licensed exchange. Minutes, tiny fee. But you're trusting the platform, not a bank."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Set me up with a digital dollar account.",
+      "set": "exchange_requested",
+      "next": "digital"
+     },
+     {
+      "text": "Letters of credit sound safer.",
+      "next": "lc"
+     },
+     {
+      "text": "I'll think about it.",
+      "next": "later"
+     }
+    ]
+   }
+  ],
+  "digital": [
+   {
+    "who": "lina",
+    "expr": "happy",
+    "text": "Sensible to have both. The exchange has to verify you first. It takes a few hours."
+   },
+   {
+    "who": "lina",
+    "text": "Know who you're paying, and know who's holding your money in between. That's the whole job now."
+   }
+  ],
+  "lc": [
+   {
+    "who": "lina",
+    "expr": "happy",
+    "text": "Boring and safe. My favourite. You'll find it when you pay Lumina: Company OS, Operations."
+   }
+  ],
+  "later": [
+   {
+    "who": "lina",
+    "text": "Take your time. The ships certainly are."
+   }
+  ]
+ },
+ "on_end": [
+  {
+   "do": "set_flag",
+   "flag": "met_lina"
+  },
+  {
+   "do": "set_flag",
+   "flag": "exchange_account",
+   "delay_min": 240,
+   "if": "flag:exchange_requested"
+  },
+  {
+   "do": "message",
+   "from": "lina",
+   "text": "Your exchange account is verified. Digital dollars are an option when you pay abroad now.",
+   "delay_min": 240,
+   "if": "flag:exchange_requested"
+  }
+ ]
+}

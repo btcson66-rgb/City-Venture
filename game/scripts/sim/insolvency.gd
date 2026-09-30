@@ -132,7 +132,7 @@ static func close_company() -> Dictionary:
 			Sim.cancel("bank.payment", "id", l["id"])
 			Sim.cancel("bank.called", "id", l["id"])
 	for po in GameState.data["ecommerce"]["purchase_orders"].values():
-		if po.get("entity", "") == ent and po["status"] == "in_transit":
+		if po.get("entity", "") == ent and po["status"] in ["in_transit", "awaiting_payment"]:
 			po["status"] = "cancelled"
 	# 4. whatever cash is left goes back to the founder; the founder's investment is written off
 	var left := maxf(0.0, Ledger.cash(ent))

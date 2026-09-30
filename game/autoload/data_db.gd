@@ -87,6 +87,15 @@ func product(id: String) -> Dictionary:
 	return products.get(id, {})
 
 
+## A product's picture: its own art once it exists, else the stand-in named by `icon_fallback`.
+func product_icon(id: String) -> String:
+	var p := product(id)
+	var ic := str(p.get("icon", "props/product_parcel"))
+	if not Art.has_tex(ic) and p.has("icon_fallback"):
+		return str(p["icon_fallback"])
+	return ic
+
+
 func supplier(id: String) -> Dictionary:
 	return suppliers.get(id, {})
 

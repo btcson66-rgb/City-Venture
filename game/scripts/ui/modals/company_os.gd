@@ -312,7 +312,7 @@ func _tab_sales() -> void:
 			ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 			ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		else:
-			ic.texture = Art.tex(str(p.get("icon", "props/product_parcel")))
+			ic.texture = Art.tex(DataDB.product_icon(str(p.get("id", ""))))
 		h1.add_child(ic)
 		h1.add_child(UIK.label(p["name"], 9, Art.C_WHITE, true))
 		h1.add_child(UIK.chip("LIVE" if l["active"] else ("PAUSED · CAP" if l.get("paused_reason", "") == "seller_cap" else "PAUSED"), Art.C_GREEN if l["active"] else Art.C_GOLD))
@@ -321,9 +321,13 @@ func _tab_sales() -> void:
 		v.add_child(h1)
 		var h2 := UIK.hbox(4)
 		h2.add_child(UIK.label("Price", 7, Art.C_MUTED))
-		h2.add_child(UIK.button("−", func(): Ecommerce.set_price(l["id"], float(l["price"]) - 1.0); rebuild()))
+		var pdn := UIK.button("−", func(): Ecommerce.set_price(l["id"], float(l["price"]) - 1.0); rebuild())
+		pdn.name = "PriceDown_" + l["product"]
+		h2.add_child(pdn)
 		h2.add_child(UIK.label(Fmt.money(l["price"]), 9, Art.C_WHITE, true))
-		h2.add_child(UIK.button("+", func(): Ecommerce.set_price(l["id"], float(l["price"]) + 1.0); rebuild()))
+		var pup := UIK.button("+", func(): Ecommerce.set_price(l["id"], float(l["price"]) + 1.0); rebuild())
+		pup.name = "PriceUp_" + l["product"]
+		h2.add_child(pup)
 		h2.add_child(UIK.label("  Ads/day", 7, Art.C_MUTED))
 		h2.add_child(UIK.button("−", func(): Ecommerce.set_ad_budget(l["id"], float(l["ad_budget"]) - 5.0); rebuild()))
 		h2.add_child(UIK.label(Fmt.money0(l["ad_budget"]), 9, Art.C_WHITE, true))
@@ -433,6 +437,19 @@ func _tab_operations() -> void:
 		v.add_child(UIK.title(str(Ecommerce.orders_with([st[0]]).size()), 11))
 		g.add_child(p)
 	content.add_child(UIK.label("Packing happens at a packing table where the stock is. Ship by courier (fee, no walk) or carry to PostPoint.", 7, Art.C_DIM))
+	# packaging: bubble wrap, or recycled paper (Year 4's Clean Packaging Act puts a levy on plastic)
+	var ph := UIK.hbox(4)
+	ph.add_child(UIK.label("Packaging:", 7, Art.C_MUTED, true))
+	for pk in [["standard", "Bubble wrap"], ["recycled", "Recycled paper"]]:
+		var pb := UIK.button(pk[1], func(): Ecommerce.set_packaging(pk[0]); rebuild(), "tab_active" if Ecommerce.packaging() == pk[0] else "tab")
+		pb.name = "Packaging_" + pk[0]
+		ph.add_child(pb)
+	var levy := World.packaging_levy()
+	var note := I18n.t("Recycled costs %s more per parcel.") % Fmt.money(float(DataDB.marketplace().get("recycled_packaging_extra", 0.25)))
+	if levy > 0.0:
+		note += "  " + I18n.t("Plastic pays a %s levy per parcel; buyers like plastic-free.") % Fmt.money(levy)
+	ph.add_child(UIK.label(note, 7, Art.C_DIM))
+	content.add_child(ph)
 	_section("Suppliers")
 	if deliver_to == "" or not deliver_to in Ecommerce.stock_locations():
 		deliver_to = Ecommerce.default_stock_location()
@@ -447,6 +464,8 @@ func _tab_operations() -> void:
 	dh.add_child(UIK.label(I18n.t("%d/%d units incl. incoming") % [Ecommerce.total_units_at(loc) + Ecommerce.incoming_units(loc), capu], 7, Art.C_DIM))
 	content.add_child(dh)
 	for sid in DataDB.suppliers:
+		if not World.supplier_available(sid):
+			continue
 		var s := DataDB.supplier(sid)
 		var card := UIK.panel("ui/card", 4)
 		var v2 := UIK.vbox(1)
@@ -461,13 +480,14 @@ func _tab_operations() -> void:
 			if not buy_qty.has(key):
 				buy_qty[key] = int(o["moq"])
 			var uc := Ecommerce.unit_cost(sid, pid)
-			var mult := Ecommerce.cost_multiplier(sid, pid)
+			var mult := Ecommerce.cost_multiplier(sid, pid) * World.cost_mult(sid)   # price mods and the era
 			var row := UIK.hbox(4)
 			var nl := UIK.label(I18n.t(DataDB.product(pid)["name"]), 8, Art.C_WHITE)
 			nl.custom_minimum_size = Vector2(118, 0)
 			row.add_child(nl)
 			row.add_child(UIK.label("%s/u%s" % [Fmt.money(uc), " (+%d%%)" % int(round((mult - 1.0) * 100)) if mult > 1.001 else ""], 8, Art.C_RED if mult > 1.001 else Art.C_WHITE, true))
-			row.add_child(UIK.label(I18n.t("MOQ %d · %dd · %s duds") % [int(o["moq"]), int(o["lead_days"]), Fmt.pct(float(o["defect_rate"]), 0) if float(o["defect_rate"]) >= 0.01 else "<1%"], 7, Art.C_MUTED))
+			var lead := int(ceil(float(o["lead_days"]) * World.lead_mult(sid)))
+			row.add_child(UIK.label(I18n.t("MOQ %d · %dd · %s duds") % [int(o["moq"]), lead, Fmt.pct(float(o["defect_rate"]), 0) if float(o["defect_rate"]) >= 0.01 else "<1%"], 7, Art.C_RED if lead > int(o["lead_days"]) else Art.C_MUTED))
 			row.add_child(UIK.expand())
 			row.add_child(UIK.button("−", func(): buy_qty[key] = maxi(int(o["moq"]), int(buy_qty[key]) - int(o["moq"])); rebuild()))
 			row.add_child(UIK.label(str(buy_qty[key]), 8, Art.C_WHITE, true))
@@ -489,11 +509,23 @@ func _tab_operations() -> void:
 		t.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row2.add_child(t)
 		row2.add_child(UIK.label(Fmt.money(po["total"]) + (" · Net" if po["terms"] == "net" else ""), 7, Art.C_WHITE))
-		row2.add_child(UIK.chip(I18n.t("ARRIVES ") + Clock.fmt_short(int(po["eta"])).to_upper() if po["status"] == "in_transit" else "DELIVERED", Art.C_GOLD if po["status"] == "in_transit" else Art.C_GREEN))
+		if po["status"] == "awaiting_payment":
+			row2.add_child(UIK.chip(I18n.t("PAYMENT PENDING · LANDS ") + Clock.fmt_short(int(po["settlement"]["clears"])).to_upper(), Art.C_RED))
+			var sb := UIK.button("Speed up", func(): UIRoot.open_modal(SettlementModal.for_pending(str(po["id"]))))
+			sb.name = "SpeedUp_" + str(po["id"])
+			row2.add_child(sb)
+		else:
+			row2.add_child(UIK.chip(I18n.t("ARRIVES ") + Clock.fmt_short(int(po["eta"])).to_upper() if po["status"] == "in_transit" else "DELIVERED", Art.C_GOLD if po["status"] == "in_transit" else Art.C_GREEN))
 		content.add_child(row2)
 
 
 func _buy(sid: String, pid: String, key: String, terms: bool) -> void:
+	if Ecommerce.needs_settlement(sid) and not terms:
+		# Clearing Crisis: choose how the money crosses the border first
+		var sm := SettlementModal.for_purchase(sid, pid, int(buy_qty[key]), deliver_to)
+		sm.closed.connect(rebuild)
+		UIRoot.open_modal(sm)
+		return
 	var r := Ecommerce.buy(sid, pid, int(buy_qty[key]), deliver_to, terms)
 	if not r["ok"]:
 		UIRoot.toast(r["error"], "bad", "warning")
@@ -526,7 +558,7 @@ func _tab_inventory() -> void:
 			var q := Ecommerce.stock(loc, pid)
 			var inc := 0
 			for po in GameState.data["ecommerce"]["purchase_orders"].values():
-				if po["status"] == "in_transit" and po["location"] == loc and po["product"] == pid:
+				if po["status"] in ["in_transit", "awaiting_payment"] and po["location"] == loc and po["product"] == pid:
 					inc += int(po["qty"])
 			if q == 0 and inc == 0:
 				continue

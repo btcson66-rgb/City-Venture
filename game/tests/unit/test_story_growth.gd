@@ -85,6 +85,7 @@ func test_chapters_4_to_6() -> void:
 			break
 	_check()
 	runner.check("ch6_cash_is_oxygen" in StoryEngine.St()["chapters_done"], "chapter 6 complete")
-	runner.check(_active("goal_growth"), "growth sandbox goal")
+	runner.check(_active("ch7_news"), "chapter 7 opens with the news")
+	runner.eq(World.year(), 3, "the Supply Shock era begins")
 	runner.check(Ledger.check_balanced(), "ledger balanced")
 	var _u := cid

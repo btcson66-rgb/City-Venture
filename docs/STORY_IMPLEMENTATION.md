@@ -198,13 +198,56 @@ The options are real systems. **Marcus Reed** (Nexus Bank, weekdays 13–16) len
 and cuts living costs. **Early payment** discounts the Crestline invoice by 3% for cash now. After Chapter 6 the
 sandbox goal is $40,000 revenue in a month.
 
-## 8. Chapters beyond (Planned)
+## 8. Chapters 7–9 (Implemented, build 0.1.7)
 
-| Chapter | Key content | Phase |
-|---------|-------------|-------|
-| Ch7 Supply Shock | Year 3 world event, industry-specific impacts | P1–P2 |
-| Ch8 Green Shift | opt-in energy opportunities | P3 |
-| Ch9 Clearing Crisis | "Payment still pending." First settlement comparison (Lina Zhao) | P2 |
-| Ch10 Digital Rails | stablecoin, smart contract escrow, optional | P2 |
-| Ch11 The Other Side of Trust | bridge exploit | P2 |
-| Ch12 Regulation & Scale | compliance, governance, M&A | P2–P3 |
+Each chapter moves the world into its era (`World.set_year`, data in `data/world/years.json`). The calendar keeps
+running day by day; the era is a story frame. Every chapter opens with the news board at Bloom Coffee (`read_news`,
+flag `news_read`, reset when the objective starts), then asks the player to use the chapter's new system for real.
+
+### CHAPTER 7 — SUPPLY SHOCK ("The boxes are stuck at sea.") · Year 3
+Era effects: courier rates ×1.8; local supplier prices +12% and lead times ×1.5; imports +25% and ×2; home rent +10%
+(Year 2's Growth Fever rolls in here).
+
+| # | Objective | Completes when | Systems |
+|---|-----------|----------------|---------|
+| 1 | Read the news | `flag:news_read` | Ken texts about the port |
+| 2 | Talk to Ken (Nexus Co-work, Tue/Thu 10–15) or take his call | `flag:ch7_supply_plan` | `ken_supply_shock` → event `supply_shock_plan` (phone fallback after 2 days): **supply agreement** ($600, `supplier_price_mod` "cancel_era" for 60 days) · **local co-op** (unlocks `aurelia_makers`: `shock_exempt`, 1-day lead, pricier) · **stock up** (MOQ at today's price) |
+| 3 | 100 units in hand or on the way | `stock_units>=100` | new Cond atom |
+| 4 | Raise a price | `flag:repriced` (set by `Ecommerce.set_price` on an increase) | |
+| 5 | Close a month with a profit | `flag:ch7_month_profit` (month close during Chapter 7) | a loss month gets a message from Maya and the objective stays |
+
+### CHAPTER 8 — THE GREEN SHIFT ("Aurelia goes electric.") · Year 4
+Era effects: shipping ×1.3; Clean Packaging Act levy $0.40 per plastic-padded parcel; eco products' demand ×1.35;
+Verdant Supply opens (`from_year: 4`).
+
+| # | Objective | Completes when | Systems |
+|---|-----------|----------------|---------|
+| 1 | Read the news | `flag:news_read` | Ana texts about the levy and the grant |
+| 2 | Switch to recycled packaging | `flag:packaging_green` | Company OS → Operations → Packaging (recycled: +$0.25/parcel, no levy, +5% demand) |
+| 3 | List a green product | `listed:solar_lamp` | new product `solar_lamp` (eco), supplier `verdant_supply` |
+| 4 | Apply for the Green Business Grant | `flag:green_grant` | Permits kiosk: `Company.claim_green_grant()` → $3,000 other income; checklist shows what's missing |
+
+### CHAPTER 9 — CLEARING CRISIS ("The payment still hasn't landed.") · Year 5
+Era effect: `cross_border_delay`. Buying from an importer (supplier region ≠ aurelia) opens the Settlement screen: the PO
+is `awaiting_payment` until the money lands, then ships (`eco.po_cleared`). Rails (`data/economy/settlement_methods.json`):
+**international wire** (1% + $25, 5–9 days) · **letter of credit** (1.5%, min $60, 2 days, needs the business account)
+· **digital dollars** (stablecoin, simulated: 0.2% + $1, minutes, needs a verified exchange account; `from_year: 5`, so
+crypto never appears earlier). A pending payment can be switched to a faster rail (Operations → Speed up).
+
+| # | Objective | Completes when | Systems |
+|---|-----------|----------------|---------|
+| 1 | Read the news | `flag:news_read` | Marcus texts: talk to Lina Zhao |
+| 2 | Order from Lumina Direct | `stat:import_orders>=1` | Settlement screen |
+| 3 | Talk to Lina Zhao at Nexus Bank (weekdays 10–16, Year 5+) | `flag:met_lina` | `lina_intro`: explains the three rails; opening an exchange account verifies 4 h later (`set_flag` with `delay_min`) |
+| 4 | Get the payment through | `stat:import_cleared>=1` | wait, or Speed up |
+| 5 | Receive the import | `stat:import_received>=1` | then the $40k-a-month sandbox goal |
+
+## 9. Chapters beyond (Planned)
+
+| Chapter | Key content | Systems it needs |
+|---------|-------------|------------------|
+| Ch10 Digital Rails (Year 6) | Lina's startup: escrow that pays on delivery (smart-contract escrow, simulated), fast settlement for regular importers. Optional, never forced | escrow PO state, rail reliability stat |
+| Ch11 The Other Side of Trust (Year 7) | A bridge exploit freezes one rail for players who used it: money in limbo for days. "We solved one trust problem and created another." | frozen-balance state, recovery rules, news event |
+| Ch12 Regulation & Scale (Year 8) | Compliance as operating cost (KYC on large payments, import licence), governance, first acquisition offer | licence permits, compliance cost, M&A offer |
+
+Art for Chapters 7–9 (and a heads-up for 10–12) is in `docs/wiki/90_codex_art_backlog.md`.

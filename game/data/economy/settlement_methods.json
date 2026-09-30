@@ -1,13 +1,95 @@
 {
-  "methods": [
-    {"id": "bank_transfer", "name": "Bank transfer", "speed_days": 1, "fee_rate": 0.0, "fixed_fee": 0.0, "status": "active",
-     "risks": {"technical": "low", "counterparty": "low", "regulatory": "low"}},
-    {"id": "marketplace_payout", "name": "ShopLane payout", "speed_days": 7, "fee_rate": 0.0, "fixed_fee": 0.0, "status": "active",
-     "risks": {"technical": "low", "counterparty": "platform", "regulatory": "low"}},
-    {"id": "international_wire", "name": "International wire", "speed_days": 3, "fee_rate": 0.01, "fixed_fee": 25.0, "status": "planned",
-     "available_from": {"phase": "P2"}},
-    {"id": "stablecoin_settlement", "name": "Stablecoin settlement (simulated)", "speed_days": 0, "fee_rate": 0.002, "fixed_fee": 1.0,
-     "status": "planned", "available_from": {"phase": "P2", "flag": "clearing_crisis_started"},
-     "risks": {"technical": "medium", "counterparty": "issuer / depeg", "regulatory": "evolving", "operational": "wallet & key management"}}
-  ]
+ "methods": [
+  {
+   "id": "bank_transfer",
+   "name": "Bank transfer",
+   "speed_days": 1,
+   "fee_rate": 0.0,
+   "fixed_fee": 0.0,
+   "status": "active",
+   "risks": {
+    "technical": "low",
+    "counterparty": "low",
+    "regulatory": "low"
+   }
+  },
+  {
+   "id": "marketplace_payout",
+   "name": "ShopLane payout",
+   "speed_days": 7,
+   "fee_rate": 0.0,
+   "fixed_fee": 0.0,
+   "status": "active",
+   "risks": {
+    "technical": "low",
+    "counterparty": "platform",
+    "regulatory": "low"
+   }
+  },
+  {
+   "id": "international_wire",
+   "name": "International wire",
+   "speed_days": 3,
+   "fee_rate": 0.01,
+   "fixed_fee": 25.0,
+   "status": "active",
+   "available_from": {
+    "phase": "P2"
+   },
+   "cross_border": true,
+   "clear_hours": [
+    120,
+    216
+   ],
+   "desc": "Your bank sends it through correspondent banks. Cheap, but in the Clearing Crisis it takes 5 to 9 days to land."
+  },
+  {
+   "id": "letter_of_credit",
+   "name": "Letter of credit (Nexus Bank)",
+   "status": "active",
+   "cross_border": true,
+   "fee_rate": 0.015,
+   "fixed_fee": 0.0,
+   "fee_min": 60.0,
+   "clear_hours": [
+    48,
+    48
+   ],
+   "requires": "flag:business_account_opened",
+   "requires_text": "needs a Nexus Bank business account",
+   "desc": "Nexus Bank guarantees the payment to the supplier's bank. They ship on the bank's word in about 2 days.",
+   "risks": {
+    "technical": "low",
+    "counterparty": "bank",
+    "regulatory": "low"
+   }
+  },
+  {
+   "id": "stablecoin_settlement",
+   "name": "Digital dollars (stablecoin, simulated)",
+   "speed_days": 0,
+   "fee_rate": 0.002,
+   "fixed_fee": 1.0,
+   "status": "active",
+   "available_from": {
+    "phase": "P2",
+    "flag": "clearing_crisis_started"
+   },
+   "risks": {
+    "technical": "medium",
+    "counterparty": "issuer / depeg",
+    "regulatory": "evolving",
+    "operational": "wallet & key management"
+   },
+   "from_year": 5,
+   "cross_border": true,
+   "clear_hours": [
+    1,
+    1
+   ],
+   "requires": "flag:exchange_account",
+   "requires_text": "needs a verified exchange account (ask Lina Zhao at Nexus Bank)",
+   "desc": "A licensed exchange turns your dollars into digital dollars and sends them in minutes. You carry the platform's risk."
+  }
+ ]
 }

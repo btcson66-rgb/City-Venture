@@ -1,0 +1,46 @@
+{
+ "id": "lina",
+ "name": "Lina Zhao",
+ "role": "cross-border payments founder",
+ "appearance": {
+  "presentation": "feminine",
+  "face": "heart",
+  "hair": "long",
+  "hair_color": "black",
+  "skin": "s2",
+  "eye_shape": "almond",
+  "eye_color": "dark",
+  "brows": "straight",
+  "mouth": "small",
+  "accessory": "none"
+ },
+ "outfit": "luxury_citywear",
+ "outfit_tints": {
+  "top": "#1d1f26",
+  "bottom": "#2a2d36"
+ },
+ "schedule": [
+  {
+   "days": "mon,tue,wed,thu,fri",
+   "from": "10:00",
+   "to": "16:00",
+   "location": "interior:nexus_bank",
+   "spot": "trade",
+   "pose": "sit",
+   "if": "world_year>=5"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [
+    "!flag:met_lina"
+   ],
+   "conversation": "lina_intro"
+  },
+  {
+   "when": [],
+   "conversation": "lina_chat"
+  }
+ ],
+ "phone_contact": true
+}

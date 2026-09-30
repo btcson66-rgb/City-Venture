@@ -532,6 +532,59 @@ orphan    world_map 左下角 (50,236)–(145,254) 有一塊補丁，上面沒�
 
 優先度低，不擋任何功能。
 
+## 第 7–9 章美術（2026-09-30，Claude 線，第五輪）
+
+第 7–9 章的玩法已經做完，現在都用現有素材暫代。下面的圖交進來就會自動換上，程式不用改。高解析版照 [13 執行期美術](13_runtime_art.md) 的 `world_detail/` 規則放，原本尺寸的版本也要一份（沒有高解析版時用它）。
+
+優先順序：**S1 > S2 > S3**。每一批可以獨立交。
+
+### S1：章節卡和 Lina（玩家一定會看到）
+
+| 檔案 | 尺寸 | 內容 | 目前 |
+|------|------|------|------|
+| `backdrops/chapter_7.png` | 640×360 | 供應衝擊：港外排隊的貨櫃船，前景是空了一半的貨架（無字） | 沒有圖，只顯示章名 |
+| `backdrops/chapter_8.png` | 640×360 | 綠色轉型：屋頂的太陽能板和城市天際線，樓下一台電動貨車在充電 | 同上 |
+| `backdrops/chapter_9.png` | 640×360 | 結算危機：銀行大廳排隊的人，牆上螢幕是「處理中」的沙漏圖示（無字） | 同上 |
+| `characters/npc_lina.png`（加 `_sit`） | 128×144（4×3 格） | Lina Zhao，外型照 [07 角色](07_characters.md) 的設定：心形臉、黑色長髮、黑色高領、城市精品外套 | 分層組合暫代 |
+| `portraits/npc_lina.png` | 256×64（4 表情） | 同上。表情：平常、微笑、思考、驚訝 | 分層組合暫代 |
+| `world_detail/characters/npc_lina.png`、`_sit` | 512×576 | 上面兩張的高解析版 | — |
+| `world_detail/portraits/npc_lina.png` | 高解析 4 格 | 同上 | — |
+
+Lina 坐在 Nexus Bank 右下角新加的辦公桌（`exec_desk` 在 x 330, y 190，椅子 x 354, y 170），平日 10–16 點，第 5 年起才出現。
+
+### S2：新商品、新供應商
+
+| 檔案 | 尺寸 | 內容 | 目前 |
+|------|------|------|------|
+| `props/product_solar_lamp.png` | 同 `props/product_desk_lamp` | 太陽能檯燈：燈座上有一小片太陽能板，暖白燈罩 | 暫用 LED 檯燈 |
+| `products/solar_lamp_photo.png`、`solar_lamp_photo_raw.png` | 同其他商品照 | 棚拍版和自己拍的版本 | 沒有 |
+| `logos/aurelia_makers.png` | 同其他 logo | 奧瑞莉亞職人合作社：暖橘配深灰，扳手和針線交叉成一顆星 | 沒有 |
+| `logos/verdant_supply.png` | 同其他 logo | Verdant Supply：草綠，一片葉子長出太陽光線 | 沒有 |
+| `minigames/recycled_padding.png` | 64×32 | 打包小遊戲用的回收紙緩衝（牛皮紙色，皺摺紋理） | 程式用色塊畫 |
+
+### S3：事件插圖和街景
+
+| 檔案 | 尺寸 | 內容 |
+|------|------|------|
+| `events/supply_shock_plan.png` | 160×90 | 港外排隊的貨櫃船，前景一張被紅筆圈起來的運費單（無字） |
+| `events/payment_pending.png` | 160×90 | 手機上的轉帳畫面，一個一直轉的處理中圖示（放進去就會出現在「付款給國外供應商」畫面上方） |
+| `props/port_cranes_far.png` | 自訂 | 河濱區遠景的港口吊車剪影，第 3 年起出現（需接線） |
+| `props/solar_roof_*.png` | 自訂 | 屋頂太陽能板，第 4 年起出現在部分建築頂上（需接線） |
+| `props/ev_charger.png` | 同 `props/parking_meter` 比例 | 路邊電動車充電樁，第 4 年起出現（需接線） |
+
+S3 的街景三項需要程式接線（依年代顯示），交圖後由 Claude 線接上。
+
+### 第 10–12 章（先看，還不用畫）
+
+第 10 章 Digital Rails、第 11 章 The Other Side of Trust、第 12 章 Regulation & Scale 還在設計。確定之後會需要：
+
+- 章節卡 `chapter_10` 到 `chapter_12`，內容見 [11 背景](11_backdrops_maps.md)；
+- Lina 辦公室的室內場景；
+- 新聞快報畫面；
+- 金融區總部的頂樓會議室。
+
+規格會寫在這一節。**不要用任何真實加密貨幣的標誌或名稱**。
+
 ## 程式接線清單
 
 以下是**光交圖不夠**、需要改程式才會出現在遊戲裡的項目。Claude 線負責。✅ 表示已接好：檔案放進去就會出現。

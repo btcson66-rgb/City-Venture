@@ -23,6 +23,7 @@
 | `desk_lamp` | LED Desk Lamp LED 檯燈 | home | $29 | $12–60 | medium | `props/product_desk_lamp` | GEN |
 | `water_bottle` | Insulated Water Bottle 保溫瓶 | lifestyle | $19 | $8–40 | small | `props/product_water_bottle` | GEN |
 | `phone_stand` | Aluminium Phone Stand 鋁合金手機支架 | electronics | $12 | $5–25 | small | `props/product_phone_stand` | GEN |
+| `solar_lamp` | Solar Desk Lamp 太陽能檯燈（第 8 章，綠色商品） | home | $42 | $20–80 | medium | `props/product_solar_lamp`（還沒有圖時暫用 LED 檯燈） | `新增` |
 | （預設） | Parcel 包裹 | — | — | — | — | `props/product_parcel` | GEN |
 
 **LED 檯燈是故事道具**：第 5 章 Crestline 一次訂 800 盞。規劃在 Crestline 旗艦店裡放 `lamp_display` 陳列架，讓玩家看到自己的燈上架。
@@ -98,6 +99,8 @@
 | `shoplane` | ShopLane | 珊瑚紅，購物袋底部是一條道路 |
 | `crestline_retail` | Crestline Retail Group | 海軍藍加金，三道山脊線 |
 | `harbor_point_fitness` | Harbor Point Fitness | 青綠，浪花加一個點 |
+| `aurelia_makers` | Aurelia Makers Co-op 奧瑞莉亞職人合作社 | 暖橘加深灰，扳手和針線交叉成一顆星（第 7 章，`新增`） |
+| `verdant_supply` | Verdant Supply | 草綠，一片葉子長出太陽光線（第 8 章，`新增`） |
 | `northlight_capital` | Northlight Capital | 淡藍，北極星 |
 | `studio_lumen` | Studio Lumen | 黑白，相機光圈 |
 | `nexus` | Nexus（Bank、Co-work） | 海軍藍底加金色「N」（沿用現有招牌） |
