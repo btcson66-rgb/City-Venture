@@ -17,6 +17,13 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "harbor":
+		# Isolated logistics fixture; no earlier sales income, so this is not an economy/endgame test.
+		await _fast_forward_to_ch10()
+		await _harbor_logistics()
+		await _save_load()
+		bot.expect(Ledger.check_balanced(), "ledger balanced after the harbor fixture")
+		return
 	if _arg("from") == "ch10":
 		# quick rerun of the last chapters: --from=ch10 (the full walkthrough never does this)
 		await _fast_forward_to_ch10()
@@ -55,6 +62,10 @@ func _summary() -> void:
 		be, Fmt.money(Ledger.cash(be)), Fmt.money(Ledger.cash("player")), int(GameState.stat("orders_delivered")),
 		str(GameState.data["story"]["chapters_done"])])
 	bot.expect(Ledger.check_balanced(), "ledger balanced at the end")
+	if not bot.video_mode:
+		for c in StoryEngine.chapters():
+			for o in c.get("objectives", []):
+				bot.expect(o["id"] in StoryEngine.St()["done"], "story objective completed: " + o["id"])
 
 
 # ------------------------------------------------------------------ helpers
@@ -131,7 +142,7 @@ func _pick_choice(inst: Dictionary) -> String:
 		"crestline_big_offer":
 			return "review"
 		"elena_offer":
-			return "decline"   # the walkthrough bridges the gap with a bank loan instead
+			return "accept"   # real equity funding also covers the café/van and later operating months
 		"supply_shock_plan":
 			return "local"     # the local co-op: the chapter's new supplier gets used
 		"escrow_offer":
@@ -245,7 +256,16 @@ func pass_time_at_home(pred: Callable, max_naps := 12, sleep_only := false) -> b
 			await bot.use_action("sleep")
 			await bot.wait(0.5)
 			await bot.click_named("Sleep")
-			await bot.until(func(): return UIRoot.top_modal() == null or UIRoot.top_modal() is DecisionModal or UIRoot.top_modal() is MonthCloseModal, 8.0)
+			var woke: bool = await bot.until(func(): return not (UIRoot.top_modal() is SleepModal), 8.0)
+			for retry in 2:
+				if woke:
+					break
+				bot.log_line("  sleep click did not close the modal; retry %d" % (retry + 1))
+				await bot.click_named("Sleep")
+				woke = await bot.until(func(): return not (UIRoot.top_modal() is SleepModal), 8.0)
+			if not woke:
+				bot.fail("sleep did not finish after three input attempts")
+				await close_modal()
 		else:
 			bot.log_line("  (harness) wait 2 h")
 			Clock.advance(120)
@@ -787,7 +807,7 @@ func _chapters_7_to_9() -> void:
 			break
 		await bot.click_named("Buy_aurelia_makers_desk_lamp", 3.0)
 		await bot.wait(0.4)
-	StoryEngine.check()   # ch7_stock is done: the price objective starts now and resets its flag
+	StoryEngine.check()   # ch7_stock is done; an earlier price adjustment remains valid.
 	await bot.click_named("Tab_sales")
 	await bot.wait(0.4)
 	await bot.click_named("PriceUp_desk_lamp", 3.0)
@@ -810,7 +830,9 @@ func _chapters_7_to_9() -> void:
 	await bot.shot("operations_green")
 	await close_modal()
 	bot.expect(GameState.flag("packaging_green"), "recycled packaging")
-	await pass_time_at_home(func(): return Ecommerce.total_units_at_any("solar_lamp") > 0, 8, true)   # a few days in Year 4
+	# Sleep through days, as on the latest base; assert arrival before clicking the listing button.
+	var solar_arrived := await pass_time_at_home(func(): return Ecommerce.total_units_at_any("solar_lamp") > 0, 8, true)
+	bot.expect(solar_arrived, "solar desk lamps arrived before listing")
 	await _home_laptop("sales")
 	await bot.click_named("ListSelf_solar_lamp", 3.0)
 	await bot.until(func(): return not (UIRoot.top_modal() is MiniGame), 8.0)   # the photo shoot
@@ -818,8 +840,8 @@ func _chapters_7_to_9() -> void:
 	await close_modal()
 	bot.expect(Cond.eval("listed:solar_lamp"), "solar desk lamps listed")
 	bot.step("Chapter 8 — the Green Business Grant at City Hall")
-	while not _is_weekday() or Clock.hour() < 8 or Clock.hour() >= 15:   # City Hall is open 9–17 on weekdays
-		await pass_time_at_home(func(): return _is_weekday() and Clock.hour() >= 8 and Clock.hour() < 15, 1)
+	while not _is_weekday() or Clock.hour() < 9 or Clock.hour() >= 15:
+		await pass_time_at_home(func(): return _is_weekday() and Clock.hour() >= 9 and Clock.hour() < 15, 1)
 	await exit_building()
 	await metro_to("civic_center")
 	await enter_building("city_hall")
@@ -951,10 +973,8 @@ func _old_town_cafe() -> void:
 func _harbor_logistics() -> void:
 	bot.step("Harbor — metro to the docks, a used van from Sam, and Pier 7")
 	var be := GameState.business_entity()
-	if Ledger.cash(be) < 16000.0:   # the van and the bay come to about $13,000 up front
-		var top := 16000.0 - Ledger.cash(be)
-		bot.log_line("  (harness) owner tops up the company account by %s" % Fmt.money0(top))
-		Ledger.post(be, "Owner capital (test harness)", [{"acct": "cash", "dr": top}, {"acct": "equity", "cr": top}], {"type": "capital"})
+	# Do not fabricate capital. The full route accepts the existing investor offer through real input.
+	bot.expect(Ledger.cash(be) >= 16000.0, "actual financing covers the van, bay and working capital")
 	while not _is_weekday() or Clock.hour() < 9 or Clock.hour() >= 14:
 		await pass_time_at_home(func(): return _is_weekday() and Clock.hour() >= 9 and Clock.hour() < 14, 1)
 	await exit_building()
@@ -1158,6 +1178,7 @@ func _chapters_10_to_12() -> void:
 	await _read_news("bridge_before")
 	await _buy_import("phone_stand", "escrow", "settlement_before_exploit")
 	await close_modal()
+	bot.expect(int(GameState.stat("import_orders_y7")) >= 1, "restock ordered through escrow (cash %s)" % Fmt.money0(Ledger.cash(GameState.business_entity())))
 	await bot.until(func(): return not EventEngine.pending().is_empty(), 40.0)   # the bridge is hit within the hour
 	await bot.until(func(): return UIRoot.top_modal() is DecisionModal, 20.0)
 	await bot.wait(0.6)

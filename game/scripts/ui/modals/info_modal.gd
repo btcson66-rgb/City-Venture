@@ -59,7 +59,8 @@ static func first_venture() -> InfoModal:
 
 static func news() -> InfoModal:
 	Clock.advance(5)
-	GameState.set_flag("news_read")   # chapters that open with the news reset this and wait for it
+	GameState.set_flag("news_read")   # keep the old key for existing saves
+	GameState.set_flag("news_read_y%d" % World.year())
 	var y := DataDB.year_def(int(GameState.data["world"]["year"]))
 	var ls: Array = [I18n.t("# AURELIA DAILY · Year %d — %s") % [int(y.get("year", 1)), I18n.t(str(y.get("name", "")))]]
 	for h in Rails.headlines(y):   # Year 7's headlines follow the bridge exploit

@@ -70,7 +70,9 @@ func build() -> void:
 	col.add_child(UIK.sep())
 	if outcome != "":
 		col.add_child(UIK.wrap(outcome, 9, Art.C_SKY, 380))
-		footer.add_child(UIK.button("OK", close, "primary", 70))
+		var ok := UIK.button("OK", close, "primary", 70)
+		ok.name = "DecisionOK"
+		footer.add_child(ok)
 		return
 	for c in def.get("choices", []):
 		var avail := EventEngine.choice_available(c, inst["ctx"])

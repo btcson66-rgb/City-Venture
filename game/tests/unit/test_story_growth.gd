@@ -21,7 +21,7 @@ func test_chapters_4_to_6() -> void:
 	Company.register("Growth Test Co", "ecommerce", "22 Founders Lane")
 	Company.open_business_account(25000.0)
 	var cid := GameState.company_id()
-	GameState.set_flag("cash_forecast_viewed")   # seen earlier: chapter 4 must ask again
+	GameState.set_flag("cash_forecast_viewed")   # seen earlier: chapter 4 must retain the receipt
 	StoryEngine.start_chapter("ch4_growing_pains")
 	runner.check(_active("ch4_employer"), "chapter 4 starts with employer registration")
 	Staff.register_employer()
@@ -37,8 +37,8 @@ func test_chapters_4_to_6() -> void:
 	while GameState.stat("payrolls_run") < 1.0:
 		Clock.advance(60)
 	_check()
-	runner.check(_active("ch4_forecast"), "payroll → forecast")
-	runner.check(not GameState.flag("cash_forecast_viewed"), "forecast flag reset for the chapter")
+	runner.check(_done("ch4_forecast"), "payroll → previously viewed forecast completes")
+	runner.check(GameState.flag("cash_forecast_viewed"), "forecast receipt is retained")
 	GameState.set_flag("cash_forecast_viewed")
 	_check()
 	runner.check("ch4_growing_pains" in StoryEngine.St()["chapters_done"], "chapter 4 complete")

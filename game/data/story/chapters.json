@@ -117,7 +117,7 @@
      "goal": "Earn Your First Dollar",
      "text": "Photograph your product and list it on ShopLane (Company OS → Sales)",
      "complete_when": [
-      "stat:listings_active>=1"
+      "has_listed"
      ],
      "target": {
       "action": "open_company_os"
@@ -180,7 +180,7 @@
      "goal": "First Customer",
      "text": "Deal with an unhappy customer (check your phone)",
      "complete_when": [
-      "flag:first_issue_resolved"
+      "flag:first_issue_resolved || stat:returns_resolved>=1"
      ],
      "target": {
       "phone": true
@@ -337,13 +337,7 @@
      ],
      "target": {
       "action": "open_company_os"
-     },
-     "on_start": [
-      {
-       "do": "flag_reset",
-       "flag": "cash_forecast_viewed"
-      }
-     ]
+     }
     }
    ],
    "on_complete": [
@@ -402,11 +396,15 @@
      "goal": "The Big Contract",
      "text": "Get 800 desk lamps in stock or on the way (cash, supplier terms, a Nexus Bank loan or an investor)",
      "complete_when": [
-      "contract_ready:big_contract || flag:big_contract_declined"
+      "contract_ready:big_contract"
      ],
      "target": {
       "action": "open_company_os"
-     }
+     },
+     "skip_when": [
+      "flag:big_contract_declined || contract_closed:big_contract"
+     ],
+     "skip_text": "The Crestline deal will not go ahead. Carry on with your next venture."
     },
     {
      "id": "ch5_deliver",
@@ -414,11 +412,15 @@
      "goal": "The Big Contract",
      "text": "Deliver Crestline's lamps before the deadline (Company OS → Contracts)",
      "complete_when": [
-      "flag:big_contract_delivered || flag:big_contract_declined"
+      "flag:big_contract_delivered"
      ],
      "target": {
       "action": "open_company_os"
-     }
+     },
+     "skip_when": [
+      "flag:big_contract_declined || contract_closed:big_contract"
+     ],
+     "skip_text": "The Crestline deal will not go ahead. Carry on with your next venture."
     }
    ],
    "on_complete": [
@@ -431,7 +433,7 @@
     {
      "do": "message",
      "from": "maya",
-     "text": "You passed on the big one? Honestly, respect. Growth that kills you isn't growth.",
+     "text": "The big deal didn't go ahead. Growth that kills you isn't growth.",
      "if": "flag:big_contract_declined"
     }
    ]
@@ -475,7 +477,7 @@
       "flag:loan_taken || flag:investor_elena || flag:costs_cut || flag:early_payment_agreed || forecast_ok"
      ],
      "target": {
-      "building": "nexus_bank"
+      "action": "open_company_os"
      }
     },
     {
@@ -484,16 +486,20 @@
      "goal": "Cash Is Oxygen",
      "text": "Collect the money Crestline owes you",
      "complete_when": [
-      "flag:big_contract_paid || flag:big_contract_declined"
-     ]
+      "flag:big_contract_paid"
+     ],
+     "skip_when": [
+      "flag:big_contract_declined || contract_closed:big_contract"
+     ],
+     "skip_text": "The Crestline deal will not go ahead. Carry on with your next venture."
     },
     {
      "id": "ch6_close",
      "main": true,
      "goal": "Cash Is Oxygen",
-     "text": "Close a month with cash in the bank",
+     "text": "Close a month with cash in the bank, or review two month-ends with negative cash",
      "complete_when": [
-      "flag:ch6_month_in_black"
+      "flag:ch6_month_in_black || flag:ch6_cash_reviewed"
      ]
     }
    ],
@@ -501,7 +507,8 @@
     {
      "do": "message",
      "from": "maya",
-     "text": "You survived the cash crunch. Most people don't even know they're in one."
+     "text": "You survived the cash crunch. Most people don't even know they're in one.",
+     "if": "!flag:ch6_cash_reviewed"
     },
     {
      "do": "timeline",
@@ -522,17 +529,13 @@
      "goal": "Supply Shock",
      "text": "Something's wrong with shipping: read the news board at Bloom Coffee",
      "complete_when": [
-      "flag:news_read"
+      "flag:news_read_y3"
      ],
      "target": {
       "building": "bloom_coffee",
       "action": "read_news"
      },
      "on_start": [
-      {
-       "do": "flag_reset",
-       "flag": "news_read"
-      },
       {
        "do": "world_year",
        "year": 3
@@ -585,19 +588,13 @@
      ],
      "target": {
       "action": "open_company_os"
-     },
-     "on_start": [
-      {
-       "do": "flag_reset",
-       "flag": "repriced"
-      }
-     ]
+     }
     },
     {
      "id": "ch7_close",
      "main": true,
      "goal": "Supply Shock",
-     "text": "Close a month with a profit despite the shock",
+     "text": "Close a month through the shock: make a profit, or review two losing months",
      "complete_when": [
       "flag:ch7_month_profit"
      ]
@@ -607,7 +604,8 @@
     {
      "do": "message",
      "from": "maya",
-     "text": "You kept the shelves full while half the city ran out. That's a real business."
+     "text": "You kept the shelves full while half the city ran out. That's a real business.",
+     "if": "!flag:ch7_survived_losses"
     },
     {
      "do": "timeline",
@@ -628,17 +626,13 @@
      "goal": "The Green Shift",
      "text": "The city passed the Clean Packaging Act: read the news board",
      "complete_when": [
-      "flag:news_read"
+      "flag:news_read_y4"
      ],
      "target": {
       "building": "bloom_coffee",
       "action": "read_news"
      },
      "on_start": [
-      {
-       "do": "flag_reset",
-       "flag": "news_read"
-      },
       {
        "do": "world_year",
        "year": 4
@@ -720,17 +714,13 @@
      "goal": "Clearing Crisis",
      "text": "Cross-border payments are jammed: read the news board",
      "complete_when": [
-      "flag:news_read"
+      "flag:news_read_y5"
      ],
      "target": {
       "building": "bloom_coffee",
       "action": "read_news"
      },
      "on_start": [
-      {
-       "do": "flag_reset",
-       "flag": "news_read"
-      },
       {
        "do": "world_year",
        "year": 5
@@ -813,17 +803,13 @@
      "goal": "Digital Rails",
      "text": "Digital finance is booming: read the news board at Bloom Coffee",
      "complete_when": [
-      "flag:news_read"
+      "flag:news_read_y6"
      ],
      "target": {
       "building": "bloom_coffee",
       "action": "read_news"
      },
      "on_start": [
-      {
-       "do": "flag_reset",
-       "flag": "news_read"
-      },
       {
        "do": "world_year",
        "year": 6
@@ -918,17 +904,13 @@
      "goal": "The Other Side of Trust",
      "text": "Digital dollars are everywhere now: read the news board at Bloom Coffee",
      "complete_when": [
-      "flag:news_read"
+      "flag:news_read_y7"
      ],
      "target": {
       "building": "bloom_coffee",
       "action": "read_news"
      },
      "on_start": [
-      {
-       "do": "flag_reset",
-       "flag": "news_read"
-      },
       {
        "do": "world_year",
        "year": 7
@@ -1021,17 +1003,13 @@
      "goal": "Regulation & Scale",
      "text": "New rules for big payments and imports: read the news board at Bloom Coffee",
      "complete_when": [
-      "flag:news_read"
+      "flag:news_read_y8"
      ],
      "target": {
       "building": "bloom_coffee",
       "action": "read_news"
      },
      "on_start": [
-      {
-       "do": "flag_reset",
-       "flag": "news_read"
-      },
       {
        "do": "world_year",
        "year": 8

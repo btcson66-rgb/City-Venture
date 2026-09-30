@@ -217,6 +217,9 @@ func autosave() -> void:
 func _migrate(d: Dictionary) -> Dictionary:
 	# a save from an older build: add whatever sections and fields this build has that it doesn't
 	_fill_missing(d, GameState.template())
+	# Before era-specific receipts, the generic news flag referred to the save's current era.
+	if d["flags"].get("news_read", false):
+		d["flags"]["news_read_y%d" % int(d["world"].get("year", 1))] = true
 	# JSON has no ints: normalise the hot counters back to int so arithmetic stays exact.
 	d["clock"]["minutes"] = int(d["clock"]["minutes"])
 	d["ledger"]["seq"] = int(d["ledger"]["seq"])

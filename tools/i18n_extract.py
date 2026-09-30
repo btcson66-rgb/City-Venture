@@ -24,6 +24,7 @@ SKIP_LINE = re.compile(r'push_warning|push_error|print\(|log_line|assert\(|get_n
                        r'\.name\s*==|\.name\s*=|InputMap|load\(|preload\(|Art\.tex|Art\.icon|"--|b\.name|tooltip_text = o|'
                        r'\.set_(?:stylebox|color|constant|font|font_size|icon)\(|for sb_name in|ScrollBar"\]|^\s*"done": ')
 DATA_KEYS = {"name", "text", "label", "detail", "outcome", "lines", "risks", "strengths", "industries", "goal", "blurb",
+             "skip_text",
              "pitch", "title", "archetype", "entry_requirement", "role", "outfits_planned", "accessories_planned",
              "headlines", "headlines_incident", "headlines_after", "return_reasons_defective", "return_reasons_normal", "subtitle", "category", "quality_req",
              "sub", "1", "2", "3", "4", "5", "reason", "hint", "desc", "description", "item", "sign", "sign_text", "employer", "requires_text", "needs_text", "agent_line", "what", "why"}
@@ -71,9 +72,9 @@ def unescape(s: str) -> str:
 def extract() -> dict:
     ids: dict[str, set] = {}
     files = [f for f in glob.glob(os.path.join(GAME, "**", "*.gd"), recursive=True)
-             if "/tests/" not in f and not f.endswith(("i18n.gd", "data_db.gd", "bug_report.gd"))]
+             if "/tests/" not in f.replace("\\", "/") and not f.endswith(("i18n.gd", "data_db.gd", "bug_report.gd"))]
     for f in sorted(files):
-        rel = os.path.relpath(f, GAME)
+        rel = os.path.relpath(f, GAME).replace("\\", "/")
         for n, line in enumerate(open(f, encoding="utf-8"), 1):
             if line.strip().startswith("#") or SKIP_LINE.search(line):
                 continue
@@ -87,7 +88,7 @@ def extract() -> dict:
     for f in data_files:
         if not os.path.exists(f):
             continue
-        rel = os.path.relpath(f, os.path.join(GAME, "data"))
+        rel = os.path.relpath(f, os.path.join(GAME, "data")).replace("\\", "/")
         if rel.startswith(SKIP_DATA_FILES):
             continue
         skip_keys = SKIP_KEYS_IN.get(rel, set())
