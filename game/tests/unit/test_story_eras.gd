@@ -57,6 +57,19 @@ func test_supply_shock_changes_costs_and_chapter_7_plays_through() -> void:
 	runner.check(Ledger.check_balanced(), "ledger balanced")
 
 
+func test_chapter_events_bind_their_product_and_supplier() -> void:
+	_setup()
+	StoryEngine.start_chapter("ch7_supply_shock")
+	# a chapter fires its events with no context (`{"do": "event"}`): the event still binds the product and supplier
+	var inst := EventEngine.trigger("supply_shock_plan")
+	runner.eq(str(inst["ctx"].get("product_id", "")), "phone_stand", "the best seller is bound")
+	runner.eq(str(inst["ctx"].get("supplier_id", "")), "tradelink_wholesale", "the most-used supplier is bound")
+	runner.check(int(inst["ctx"].get("moq", 0)) > 0 and str(inst["ctx"].get("unit_cost", "")) != "", "MOQ and unit cost are filled in")
+	runner.check(not EventEngine.fill("{product} costs {unit_cost}, MOQ {moq}", inst["ctx"]).contains("{"), "no placeholder is left on screen")
+	runner.check(EventEngine.choose(inst["iid"], "stock_up")["ok"], "stocking up buys the bound product")
+	runner.check(Ledger.check_balanced(), "ledger balanced")
+
+
 func test_green_shift_levy_and_grant() -> void:
 	_setup()
 	World.set_year(4)
