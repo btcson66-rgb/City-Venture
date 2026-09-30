@@ -1,0 +1,39 @@
+{
+ "id": "lina_rails_again",
+ "with": "lina",
+ "nodes": {
+  "start": [
+   {
+    "who": "lina",
+    "text": "Still on wires and letters of credit? Nothing wrong with that. The escrow offer hasn't expired."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Open the escrow account after all.",
+      "set": "escrow_open",
+      "next": "yes"
+     },
+     {
+      "text": "Not yet.",
+      "next": "no"
+     }
+    ]
+   }
+  ],
+  "yes": [
+   {
+    "who": "lina",
+    "expr": "happy",
+    "text": "Done. It shows up when you pay abroad, next to the wire. Use it on one order first."
+   }
+  ],
+  "no": [
+   {
+    "who": "lina",
+    "text": "Fair. Boring and safe has its place."
+   }
+  ]
+ }
+}

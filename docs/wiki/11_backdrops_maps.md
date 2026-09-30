@@ -127,6 +127,10 @@
 | `viral_mention` | 手機螢幕上的愛心和分享數往上跳（**不是**金幣噴發） |
 | `elena_offer` | 條件書和一支鋼筆 |
 | `supply_shock_plan` | 港口外排隊的貨櫃船，前景一張被紅筆圈起來的運費單（無字） |
+| `escrow_offer` | （不需要）第 10 章 Lina 的託管提案，只有文字 |
+| `rail_frozen` | 付款畫面上一個被鎖住的圖示，背景是一座斷掉的橋（第 11 章，程式已接好） |
+| `acquisition_offer` | 會議桌上的收購意向書和兩支筆（第 12 章，程式已接好） |
+| `shipment_lost` | （不需要）第 10 章之後的隨機事件，只有文字 |
 | `low_cash_warning` | 空了一半的錢包，旁邊是一疊帳單 |
 
 檔名：`events/<event_id>.png`。

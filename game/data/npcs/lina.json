@@ -33,6 +33,34 @@
  "dialogue": [
   {
    "when": [
+    "objective_done:ch10_news",
+    "!flag:ch10_decided"
+   ],
+   "conversation": "lina_rails"
+  },
+  {
+   "when": [
+    "flag:rail_exploit",
+    "!flag:rail_recovered"
+   ],
+   "conversation": "lina_bridge"
+  },
+  {
+   "when": [
+    "flag:escrow_declined",
+    "!flag:escrow_open",
+    "!flag:rail_exploit"
+   ],
+   "conversation": "lina_rails_again"
+  },
+  {
+   "when": [
+    "flag:rail_recovered"
+   ],
+   "conversation": "lina_reopened"
+  },
+  {
+   "when": [
     "!flag:met_lina"
    ],
    "conversation": "lina_intro"

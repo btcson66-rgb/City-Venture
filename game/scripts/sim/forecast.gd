@@ -63,6 +63,16 @@ static func weekly(ent: String, weeks := 9) -> Dictionary:
 				var c: Dictionary = GameState.data["contracts"].get(str(it["p"].get("id", "")), {})
 				if not c.is_empty() and c.get("seller", "") == ent and c["status"] == "delivered":
 					flows.append([t5, float(c["receivable"]), I18n.t("%s pays") % GameState.entity_name(c["buyer"])])
+			"rail.unfreeze":
+				# frozen bridge money comes back at the recovery ratio; whoever waited tops up the gap
+				var ratio := float(Rails.X().get("ratio", 0.9))
+				for fi in Rails.X().get("items", []):
+					if str(fi["entity"]) != ent:
+						continue
+					if bool(fi["rerouted"]):
+						flows.append([t5, float(fi["amount"]) * ratio, "Frozen funds return"])
+					else:
+						flows.append([t5, -float(fi["amount"]) * (1.0 - ratio), "Bridge shortfall"])
 			"car.gig_paid":
 				var g: Dictionary = Careers.F()["gigs"].get(str(it["p"].get("id", "")), {})
 				if not g.is_empty() and g.get("entity", "") == ent and g["status"] == "invoiced":

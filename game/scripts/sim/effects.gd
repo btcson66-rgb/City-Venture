@@ -88,6 +88,16 @@ static func apply(e: Dictionary, ctx: Dictionary) -> Dictionary:
 			GameState.data["cap_table"] = cap
 			GameState.set_flag("investor_" + who)
 			GameState.timeline(I18n.t("Sold %d%% of %s for %s.") % [int(round(stake * 100)), GameState.business_display_name(), Fmt.money0(amt)], "milestone")
+		"open_escrow":
+			Rails.open_escrow()
+		"rail_choice":
+			# the bridge freeze decision (Chapter 11): wait, reroute by wire, or borrow and reroute
+			return Rails.decide(str(e.get("choice", "")))
+		"shipment_lost":
+			return Rails.lost_shipment(str(ctx.get("po_id", "")), str(e.get("choice", "")))
+		"acquisition":
+			# Hale Group's offer (Chapter 12): accept, counter or decline
+			return Acquisition.decide(str(e.get("choice", "")), ctx)
 		"set_flag":
 			GameState.set_flag(e["flag"], e.get("value", true))
 		"message":

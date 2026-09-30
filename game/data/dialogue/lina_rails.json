@@ -1,0 +1,65 @@
+{
+ "id": "lina_rails",
+ "with": "lina",
+ "nodes": {
+  "start": [
+   {
+    "who": "lina",
+    "text": "Back again. Good. I have something for importers. It's optional, and I'd rather you skip it than regret it."
+   },
+   {
+    "who": "lina",
+    "text": "Escrow on delivery. You pay into a smart contract: a rule that lives on the network and holds your money. It pays the supplier when your goods arrive. Not before."
+   },
+   {
+    "who": "player",
+    "text": "Why would a supplier agree to that?"
+   },
+   {
+    "who": "lina",
+    "expr": "happy",
+    "text": "Because they can see the money is locked. They ship the same day instead of waiting a week for a wire to land."
+   },
+   {
+    "who": "lina",
+    "text": "It costs 0.6 percent, fifteen dollars minimum. If the goods never come, the contract sends your money back. Nobody has to trust anybody's promise."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "What's the catch?",
+      "next": "catch"
+     },
+     {
+      "text": "Send me the terms.",
+      "next": "terms"
+     }
+    ]
+   }
+  ],
+  "catch": [
+   {
+    "who": "lina",
+    "expr": "thinking",
+    "text": "It runs on software, and software has bugs. My contract has been audited twice. I'd still say: don't put more in it than you can live without for a week."
+   },
+   {
+    "who": "lina",
+    "text": "I'll send you the terms. Say yes or no. Both are fine answers."
+   }
+  ],
+  "terms": [
+   {
+    "who": "lina",
+    "text": "Sending them now. Read the fee twice. I'd rather you trust the number than me."
+   }
+  ]
+ },
+ "on_end": [
+  {
+   "do": "event",
+   "id": "escrow_offer"
+  }
+ ]
+}

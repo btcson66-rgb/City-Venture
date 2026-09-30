@@ -219,7 +219,13 @@ All 7 overseas markets are defined with `status: planned`.
   ]
 }
 ```
-Validator rule: every event must have at least one choice whose effects touch money, inventory or options (`cash`, `purchase`, `refund_order`, `inventory_delta`, `supplier_price_mod`, `create_contract_offer`, `listing_mod`, `ad_price_mod`).
+Validator rule: every event must have at least one choice whose effects touch money, inventory or options (`cash`, `purchase`, `refund_order`, `inventory_delta`, `supplier_price_mod`, `create_contract_offer`, `listing_mod`, `ad_price_mod`, and from Chapters 10–12 `open_escrow`, `rail_choice`, `shipment_lost`, `acquisition`).
+
+Later additions (Chapters 10–12): `presentation.tips: [glossary ids]` and a choice's `tip: <glossary id>` put a "!" badge (InfoTip)
+on the decision; a choice's `detail` is the one-line plain-language note under it. `bind` selectors: `acquisition` (Hale
+Group's price, `Acquisition.context()`), `import_po` (an import on the way). An event fired with no context (a story action
+or a conversation) binds itself. Conditions may read the event's context: `ctx:<key>`. Effect ops: `open_escrow`,
+`rail_choice {choice: wait|reroute|loan}`, `shipment_lost {choice: reship|refund}`, `acquisition {choice: accept|counter|decline}`.
 
 ### 1.14 Story — `data/story/chapters.json`, `data/dialogue/<id>.json`
 ```json
@@ -261,7 +267,7 @@ delivered to it and its packing bench packs its orders.
 
 ### 1.17 World economy — `data/world/years.json`
 `{years:[{year:1,name:"The Opportunity",interest_rate:0.025,shipping_index:1.0,events:[...]},{year:5,name:"Clearing Crisis",...}]}`
-Years 1–5 are active (Year 2 only as numbers, rolled into Chapter 7). Years 6–10 are Planned.
+Years 1–8 are active (Year 2 only as numbers, rolled into Chapter 7). Years 9–10 are Planned.
 
 ### 1.17b Eras, suppliers and settlement (Chapters 7–9)
 `years.json` → per year: `interest_rate`, `shipping_index` (courier rates ×), `cost_mult` / `import_cost_mult` (supplier
@@ -271,7 +277,30 @@ for their payment to land). Read only through `World` (`scripts/sim/world.gd`); 
 Suppliers: `region` ≠ "aurelia" = import; `shock_exempt` (era multipliers don't apply); `from_year`; `requires_flag`
 (listed and buyable only once set). Products: `eco`, `icon_fallback` (stand-in picture until `icon` art exists).
 `data/economy/settlement_methods.json` → methods with `cross_border: true` are the rails for imports in Year 5:
-`fee_rate`, `fixed_fee`, `fee_min`, `clear_hours [min, max]`, `requires` (a Cond), `requires_text`, `from_year`, `desc`.
+`fee_rate`, `fixed_fee`, `fee_min`, `clear_hours [min, max]`, `requires` (a Cond), `requires_text`, `from_year`, `desc`, `tip` (glossary id).
+
+### 1.17c Digital rails, compliance and acquisition (Chapters 10–12)
+`years.json` adds `wire_clear_mult` (wire clear hours ×; 0.6 from Year 6), `compliance: true` (Year 8: KYC, licence and monthly
+cost apply), and for Year 7 `headlines_incident` / `headlines_after` (the news during and after the exploit; `headlines` is
+the news before it). `World.wire_clear_mult()`, `World.compliance()`.
+`settlement_methods.json` adds the method `escrow` (`escrow: true`) and `digital_rail: true` on both digital methods (the
+ones the bridge exploit freezes).
+`data/economy/rails.json`: `reliability{method: published on-time share}`, `reliability_gain` (share of the gap to 100%
+closed per clean landing), `regular_after` / `regular_fee_mult` (fee discount for regulars), `exploit{delay_min,
+fallback_days, freeze_days, recovery_ratio, reliability_hit}`, `shipment_lost{reship_days}`. Read through `Rails`.
+`data/economy/compliance.json`: `kyc{threshold, fee_rate, fee_min, hours}`, `import_licence{fee, days, processing_hours,
+renew_window_days}`, `monthly{base, per_employee}`. Read through `Compliance`.
+`data/economy/acquisition.json`: `window_days`, `profit_multiple`, `revenue_multiple`, `stock_haircut`, `min_price`,
+`counter_uplift`, `counter_upfront`, `earnout_days`, `earnout_floor`. Read through `Acquisition`.
+NPC `victor` (Hale Group): schedule at `crestline_flagship` weekdays 11:00–16:00 once `objective_done:ch12_kyc`; dialogues by
+outcome (`victor_offer`, `victor_sold`, `victor_earnout`, `victor_declined`, `victor_chat`).
+Ledger: new asset accounts `escrow_held` and `frozen_funds`; new expense category `compliance` (Compliance) in
+`Ledger.EXPENSE_CATEGORIES` / `OPEX_BUSINESS` / `CATEGORY_NAMES`.
+Scheduler kinds: `rail.exploit`, `rail.unfreeze`, `cmp.licence`, `cmp.remind`, `cmp.expire`, `acq.earnout`.
+Stats: `import_orders_y<year>`, `import_received_y<year>`, `escrow_orders`, `escrow_released`, `escrow_refunds`, `kyc_checks`,
+`kyc_cleared`, `compliance_charges`. Flags: `escrow_open`, `escrow_declined`, `ch10_decided`, `rail_exploit`, `rail_decided`,
+`rail_recovered`, `import_licence`, `offer_decided`, `offer_accepted`, `offer_countered`, `offer_declined`, `company_sold`,
+`earnout_paid`, `earnout_missed`, `story_complete`.
 
 ### 1.18 Character creator options — `data/character/options.json`
 `{presentations[], face_shapes[], hairstyles[], hair_colors[], skin_tones[], eye_shapes[], eye_colors[], eyebrows[], mouths[], outfits[], outfits_shop[]}`. Each option is `{id, name, layer?, color?}`. **No option has any gameplay field. The validator rejects keys like `bonus`, `stat` and `modifier`.**
@@ -367,7 +396,11 @@ data.meta              {format, version, created_unix, playtime_s, slot}   (slot
 data.tutorial          {v: 3, step, seen{}, off}   (the guided first venture; older versions restart at step 0 and skip
                         what's done. While it runs, the first stock, order, pickup and delivery come within minutes)
 data.help_seen         {key: true}
-data.world             {year, modifiers}   (the era: 1 at the start, 3/4/5 from Chapters 7/8/9)
+data.world             {year, modifiers}   (the era: 1 at the start, 3/4/5/6/7/8 from Chapters 7–12)
+data.rails             {reliability{method: 0..1}, settled{method: n}, exploit{state: none|frozen|recovered, at, until, ratio,
+                        items[{po, amount, entity, src: escrow_held|inventory_in_transit, rerouted}], amount, decision}}   (created on first use)
+data.compliance        {licence_until, licence_ready}   (created on first use; `licence_ready` is -1 when nothing is pending)
+data.cap_table         {founder: 1.0, <investor>: share}   (`{hale_group: 1.0}` after the company is sold)
 data.entities.<id>     {id, name, kind: person|company|npc_company, founded?, type?, address?, bank_account: bool,
                         properties[], seller_account{type: personal|business, month_gmv}}
 data.ledger            {seq, journal:[{n, t, entity, memo, source{type,id}, lines:[{acct, dr, cr}]}]}
@@ -375,8 +408,10 @@ data.ecommerce         {listings{id:{product, price, photo, photo_q (your own sh
                         orders{id:{product, qty, unit_price, customer, placed, status, location, ship{method,cost,shipped,eta},
                                    delivered, payout_batch, return{reason, status}, review,
                                    pack_q, label_ok, damaged}},   (pack_q/label_ok from the packing minigame)
-                        purchase_orders{id:{supplier, product, qty, unit_cost, total, placed, eta, location, status, terms,
-                                   settlement{method, fee, clears}}},   (status awaiting_payment → in_transit → delivered for imports in Year 5)
+                        purchase_orders{id:{supplier, product, qty, unit_cost, total, placed, eta, location, status, terms, year,
+                                   settlement{method, fee, clears, kyc?, kyc_until?}, escrow?, frozen?}},
+                                   (status awaiting_payment → in_transit → delivered for imports in Year 5+; `escrow`: held → released |
+                                   refunded | rerouted | switched; `frozen`: stuck on the bridge; `year`: the era it was placed in)
                         packaging: standard|recycled,
                         inventory{location:{product:{qty, avg_cost, defective}}},
                         parcels{location: [order_ids packed awaiting dropoff]},

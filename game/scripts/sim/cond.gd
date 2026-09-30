@@ -4,6 +4,7 @@ extends RefCounted
 ##   flag:x  !flag:x  visited:x  stat:name>=n  day>=n  cash<n  company_registered  !company_registered
 ##   has_ads  best_rating>=4.2  weekday:mon  hour>=h  has_stock  has_stock:product_id  chapter_done:id  objective_done:id
 ##   has_job  desk_access  carrying_parcels  listed:product_id  world_year>=n  stock_units>=n (in hand + on the way)
+##   loan_capacity>=n (what Nexus Bank would lend today)  ctx:key (a true value in the event's context)
 
 
 static func all(conds: Array, ctx := {}) -> bool:
@@ -30,6 +31,8 @@ static func eval(expr: String, ctx := {}) -> bool:
 		return GameState.visited(expr.substr(8))
 	if expr.begins_with("weekday:"):
 		return Clock.WEEKDAYS[Clock.weekday()].to_lower() == expr.substr(8).to_lower().left(3)
+	if expr.begins_with("ctx:"):
+		return bool(ctx.get(expr.substr(4), false))
 	if expr.begins_with("has_stock:"):
 		# unreserved units of one product somewhere the player can ship from
 		return Ecommerce.best_location(expr.substr(10)) != ""
@@ -102,6 +105,9 @@ static func _value(name: String, ctx: Dictionary) -> float:
 			return World.year()
 		"stock_units":
 			return Ecommerce.total_units() + Ecommerce.incoming_units()
+		"loan_capacity":
+			var lo := Bank.offer()
+			return float(lo["max"]) if lo["ok"] else 0.0
 		"day":
 			return Clock.day_index()
 		"hour":

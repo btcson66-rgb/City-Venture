@@ -256,8 +256,8 @@ func button_text(txt: String) -> Button:
 	return find_button(func(b): return b.text.contains(txt))
 
 
-## Real mouse click at the button's on-screen centre.
-func click(b: Button) -> bool:
+## Real mouse click at the control's on-screen centre (a button, or a "!" badge).
+func click(b: Control) -> bool:
 	if b == null:
 		return false
 	var sc: Node = b.get_parent()

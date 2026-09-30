@@ -128,5 +128,45 @@
   "title": "Van capacity",
   "what": "How many parcels fit in one trip. The rest wait for the next trip.",
   "why": "A fuller van spreads the fixed time of a trip over more parcels, so each parcel costs less to deliver."
+ },
+ "rail_reliability": {
+  "title": "Rail reliability",
+  "what": "The share of payments on a payment route that landed on time. It moves when something goes wrong on the route, and recovers slowly as payments land.",
+  "why": "A fast route that fails one time in ten can cost more than a slow one that never does. Look at the record, not just the speed."
+ },
+ "frozen_funds": {
+  "title": "Frozen funds",
+  "what": "Money you have paid that is stuck on the way: the operator paused transfers, so it has not reached the supplier and has not come back to you.",
+  "why": "It is still yours on paper, but you cannot spend it. Keep enough cash outside any single payment route to run the business while it is stuck."
+ },
+ "bridge_loan": {
+  "title": "Bridge loan",
+  "what": "A short loan that covers a gap until money you are owed comes in.",
+  "why": "The interest costs far less than missing payroll or rent. Repay it as soon as the money arrives."
+ },
+ "kyc": {
+  "title": "KYC check (know your customer)",
+  "what": "Before a large payment moves, the bank confirms who is paying and who is being paid.",
+  "why": "It costs a fee and about a day. Order early, so the delay does not leave your shelves empty."
+ },
+ "import_licence": {
+  "title": "Import licence",
+  "what": "A yearly permit from City Hall to bring goods in from abroad for business.",
+  "why": "Without a valid one, imports are blocked. Renew it before it lapses, or your next order cannot go out."
+ },
+ "compliance_cost": {
+  "title": "Compliance cost",
+  "what": "The steady cost of following the rules: filings, checks and the person who keeps them in order.",
+  "why": "It is an operating cost, like rent. Build it into your prices, especially as you grow."
+ },
+ "valuation": {
+  "title": "Valuation (what a buyer pays)",
+  "what": "A buyer usually pays a multiple of yearly profit, plus the company's cash and stock, minus what it owes.",
+  "why": "It shows what your business is worth today, and why both profit and cash matter."
+ },
+ "earn_out": {
+  "title": "Earn-out",
+  "what": "Part of the price is paid later, and only if the company keeps hitting agreed targets.",
+  "why": "You can ask for a higher headline price, but you carry the risk after the sale."
  }
 }

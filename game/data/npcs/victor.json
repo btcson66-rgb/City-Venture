@@ -1,0 +1,65 @@
+{
+ "id": "victor",
+ "name": "Victor Hale",
+ "role": "entrepreneur — Hale Group",
+ "appearance": {
+  "presentation": "masculine",
+  "face": "square",
+  "hair": "short_neat",
+  "hair_color": "silver",
+  "skin": "s1",
+  "eye_shape": "narrow",
+  "eye_color": "gray",
+  "brows": "straight",
+  "mouth": "neutral",
+  "accessory": "none"
+ },
+ "outfit": "business_suit",
+ "outfit_tints": {
+  "top": "#1c1f26",
+  "bottom": "#1c1f26"
+ },
+ "schedule": [
+  {
+   "days": "mon,tue,wed,thu,fri",
+   "from": "11:00",
+   "to": "16:00",
+   "location": "interior:crestline_flagship",
+   "spot": "floor",
+   "pose": "idle",
+   "if": "objective_done:ch12_kyc"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [
+    "objective_done:ch12_kyc",
+    "!flag:offer_decided"
+   ],
+   "conversation": "victor_offer"
+  },
+  {
+   "when": [
+    "flag:offer_accepted"
+   ],
+   "conversation": "victor_sold"
+  },
+  {
+   "when": [
+    "flag:offer_countered"
+   ],
+   "conversation": "victor_earnout"
+  },
+  {
+   "when": [
+    "flag:offer_declined"
+   ],
+   "conversation": "victor_declined"
+  },
+  {
+   "when": [],
+   "conversation": "victor_chat"
+  }
+ ],
+ "phone_contact": true
+}

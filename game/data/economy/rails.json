@@ -1,0 +1,21 @@
+{
+ "reliability": {
+  "international_wire": 0.97,
+  "letter_of_credit": 0.995,
+  "stablecoin_settlement": 0.985,
+  "escrow": 0.99
+ },
+ "reliability_gain": 0.1,
+ "regular_after": 2,
+ "regular_fee_mult": 0.65,
+ "exploit": {
+  "delay_min": 20,
+  "fallback_days": 7,
+  "freeze_days": 6,
+  "recovery_ratio": 0.9,
+  "reliability_hit": 0.78
+ },
+ "shipment_lost": {
+  "reship_days": 10
+ }
+}

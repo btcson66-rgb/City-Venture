@@ -1,0 +1,35 @@
+{
+ "id": "victor_offer",
+ "with": "victor",
+ "nodes": {
+  "start": [
+   {
+    "who": "victor",
+    "text": "{player}. Victor Hale. I don't do small talk, so I did my homework instead."
+   },
+   {
+    "who": "victor",
+    "text": "I read your books. Three months of them. They're better than most companies I've bought."
+   },
+   {
+    "who": "player",
+    "text": "You want to buy {company}?"
+   },
+   {
+    "who": "victor",
+    "expr": "thinking",
+    "text": "I'm prepared to. You'll get a number, and how I got to it. Read it twice."
+   },
+   {
+    "who": "victor",
+    "text": "Then say yes, say no, or say a better number. I respect all three."
+   }
+  ]
+ },
+ "on_end": [
+  {
+   "do": "event",
+   "id": "acquisition_offer"
+  }
+ ]
+}
