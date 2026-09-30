@@ -142,3 +142,12 @@ func test_rent_goes_on_the_shop_line() -> void:
 	Living.lease("corner_cafe")
 	runner.check(Ledger.balance(cid, "exp:rent_shop") > 0.0, "shop rent, not office rent")
 	runner.eq(Ledger.balance(cid, "exp:rent_office"), 0.0, "no office rent")
+
+
+func test_your_cafe_has_seats_for_its_customers() -> void:
+	var room := Interior.new()
+	room.def = DataDB.building("corner_cafe_unit")["interior"]
+	var seats := room.seats()
+	runner.check(seats.size() >= 8, "the café's stools are seats (%d)" % seats.size())
+	runner.check(seats.filter(func(s): return not s["staff"]).size() >= 8, "customers may take all of them")
+	room.free()

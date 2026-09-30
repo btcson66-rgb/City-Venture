@@ -368,7 +368,7 @@ func seats() -> Array:
 	var out: Array = []
 	for p in def.get("props", []):
 		var s := str(p["sprite"])
-		if p.get("wall", false) or not (s.contains("chair") or s.contains("bench") or s.contains("sofa") or s == "stool"):
+		if p.get("wall", false) or not (s.contains("chair") or s.contains("bench") or s.contains("sofa") or s.contains("stool")):
 			continue
 		var r := _prop_rect(p)
 		var face := "down"
