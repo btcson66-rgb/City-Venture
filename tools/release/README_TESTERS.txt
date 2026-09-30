@@ -10,6 +10,12 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
     你現在的存檔讀進來也會自動修好。
   ・第 7 章「在供應衝擊下結一個有獲利的月」：連續兩個月虧損也會往下走（Maya 會跟你說明），不會永遠卡住。
   ・存檔：新版本會自動補上舊存檔沒有的資料，所以舊存檔可以直接接著玩。
+  ・防卡關（Codex 做、我審過）：全部 55 個主線目標和 18 步新手教學都檢查過——
+    - 你提前做完的事（例如先看過現金預測、先調過價、先看過新聞）會直接算完成，不會再叫你重做。
+    - 交易沒成（拒絕、撤回、過期，或對方公司結束），劇情會明說「這筆沒成」然後繼續，不會假裝你交了貨或收了錢。
+    - 第 6 章兩個月底現金都是負的也會往下走（會老實說還沒恢復）。
+    - 共用辦公桌的日票過期時，教學箭頭改指你家裡的電腦；下架或辭職時，教學會告訴你怎麼補救。
+    - 很長的決策視窗內容可以捲動，底下的確認按鈕永遠在畫面內。
   ・新街區「港區」（Harbor，搭捷運 M3 從河濱過去）和物流生意：
     - Dockside Motors 找 Sam 買二手貨車；Pier 7 倉庫可以租來當第二個庫存點（有打包桌）。
     - 有貨車就能自己送貨（只付油錢），也能接在地商家的送貨單，玩「排路線」小遊戲：路線越短越賺。
@@ -207,6 +213,9 @@ NEW IN 0.1.8-test8 (from your fourth playtest): pressing +/- on a stock order no
 (every rebuilt list keeps its place) · the story no longer waits on Crestline's offer after the buyer walks away from a
 counter-offer (your current save is repaired when it loads) · Chapter 7 moves on after two losing months, with an
 honest message, instead of waiting forever · saves from earlier builds keep working: missing data is filled in on load
+· no soft-locks: all 55 story objectives and the 18 tutorial steps count work you did early, carry on honestly when a
+deal falls through (rejected, withdrawn, expired, or the other company closed), and point you somewhere usable when a
+day pass or listing has lapsed; Chapter 6 moves on after two negative month-ends, saying plainly you haven't recovered
 · the Harbor (metro M3 from Riverside) and a logistics business: buy a used van from Sam at Dockside Motors, lease a
 bay at Pier 7 as a second stockroom, deliver your own parcels for the cost of fuel, or take local delivery runs and
 plan the route in a minigame (shorter is more profit); hire a driver · Chapters 10 Digital Rails (escrow that pays on
