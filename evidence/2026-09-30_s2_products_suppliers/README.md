@@ -1,0 +1,7 @@
+# S2 evidence — product and supplier art
+
+Base: `b524d2e62d2f03a81c67e4bf9746e67af74ba479` from the updated `claude/exciting-bardeen-y71ixv` branch. `before_s2.png` records the prior solar-lamp fallback (`product_desk_lamp.png`) and the five absent assets; `after_s2.png` displays all six new runtime PNGs at their native size scaled with nearest-neighbor for inspection; `s2_comparison.png` places both sheets side by side. These are asset contact sheets, not claims that all six images appear in the normal screenshot route.
+
+Godot 4.5.1 `--headless --path game --import`: exit 0, no errors. Unit suite last line: `101/101 tests passed in 7.2s`. Screenshot bot: `BOT FINISHED — 0 failure(s) · 42.9s real` with 44 screenshots. `python tools/wiki_check.py`: `wiki_check: OK (1389 assets, 176 data ids)`. No characters or maps were changed, so pose and map-label checks do not apply. New file dimensions were checked against `docs/wiki/08_items.md` and `docs/wiki/90_codex_art_backlog.md`; existing metadata footprints did not change.
+
+The product icon, both listing photos and supplier logos are discovered by current dynamic asset lookups. `game/scripts/ui/minigames/pack_game.gd` `BoxView._draw` still renders its padding as a color rectangle. Claude line should replace that visual with `minigames/recycled_padding.png` while preserving the existing padding quantity/quality logic. This art-only PR does not change that script. Full source PNGs and 4× variants are included.

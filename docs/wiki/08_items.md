@@ -45,6 +45,8 @@
 | 商品照（上架卡，自己拍的） | `products/<id>_photo_raw.png` | 64×64 | P1 · `新增` · 程式已接好。同一件商品，但光線差、背景亂，讓玩家看得出「專業攝影」的差別 |
 | 手上拿著 | 搬箱姿勢用 `interiors/box` 即可 | — | — |
 
+**S2 美術交件（2026-09-30）**：`solar_lamp` 的 16×16 圖示、64×64 棚拍與隨手拍商品照已完成；Aurelia Makers 和 Verdant Supply 的 32×32 無字標誌及 `minigames/recycled_padding.png` 已完成。每張都有 `world_detail/` 4× 版及 `.png.import`；打包小遊戲的 `BoxView` 目前仍畫色塊，需 Claude 線接入紙材圖。其餘商品照與 logo 仍照上表等待後續批次。
+
 ### 規劃中的商品（候選，P1）
 
 擴充電商商品的候選清單。每一種都需要 16×16 圖示和 64×64 商品照。
