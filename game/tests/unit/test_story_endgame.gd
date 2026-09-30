@@ -318,6 +318,65 @@ func test_bridge_loan_reuses_the_bank_to_fund_the_reroute() -> void:
 	runner.check(total > 0.0 and Ledger.check_balanced(), "ledger balanced")
 
 
+func test_digital_dollars_in_flight_freeze_too() -> void:
+	_setup()
+	World.set_year(7)
+	GameState.set_flag("exchange_account")
+	var r := Ecommerce.buy("lumina_direct", "phone_stand", 400, "", false, -1, 1.0, "stablecoin_settlement")
+	var po := _po(r["po_id"])
+	var total := float(po["total"])
+	runner.eq(_bal("inventory_in_transit"), total, "digital dollars are prepaid, not escrowed")
+	Clock.advance(20)   # the payment is still crossing the bridge
+	Rails.exploit()
+	runner.eq(Rails.frozen_amount(), total, "the stablecoin payment in flight is frozen")
+	runner.eq(_bal("inventory_in_transit"), 0.0, "it left the stock-in-transit line")
+	runner.eq(_bal("frozen_funds"), total, "and sits in frozen_funds")
+	var cash0 := _cash()
+	EventEngine.choose(_pending("rail_frozen")["iid"], "wait")
+	Clock.advance(6 * Clock.DAY + 60)
+	runner.eq(str(po["status"]), "in_transit", "the supplier ships after the reopening")
+	runner.eq(_bal("inventory_in_transit"), total, "booked as stock on the way again")
+	runner.eq(_cash(), cash0 - total * 0.1, "for a 10% gap the buyer covers")
+	runner.check(_advance_until(func(): return str(po["status"]) == "delivered"), "and it arrives")
+	runner.check(Ledger.check_balanced(), "ledger balanced")
+
+
+func test_a_frozen_payment_can_be_rerouted_later_by_letter_of_credit() -> void:
+	_setup()
+	var id := _exposed_escrow_order()
+	var po := _po(id)
+	var total := float(po["total"])
+	Rails.exploit()
+	EventEngine.choose(_pending("rail_frozen")["iid"], "wait")
+	runner.check(not Ecommerce.switch_settlement(id, "stablecoin_settlement")["ok"], "the frozen rail can't rescue its own payment")
+	var cash0 := _cash()
+	var sw := Ecommerce.switch_settlement(id, "letter_of_credit")   # the Speed-up / Reroute button in Company OS
+	runner.check(sw["ok"], "rerouted by letter of credit (%s)" % str(sw.get("error", "")))
+	runner.eq(_cash(), cash0 - total - Ecommerce.settlement_fee("letter_of_credit", total), "paid again, with the bank's fee")
+	Clock.advance(3 * Clock.DAY)
+	runner.eq(str(po["status"]), "in_transit", "the letter of credit lands in two days")
+	Clock.advance(4 * Clock.DAY)
+	runner.eq(_bal("frozen_funds"), 0.0, "the bridge reopened")
+	runner.check(_advance_until(func(): return str(po["status"]) == "delivered"), "the goods arrive")
+	runner.eq(_bal("inventory"), total, "stock is booked once")
+	runner.check(Ledger.check_balanced(), "ledger balanced")
+
+
+func test_a_freeze_survives_saving_and_loading() -> void:
+	_setup()
+	var id := _exposed_escrow_order()
+	var total := float(_po(id)["total"])
+	Rails.exploit()
+	runner.check(SaveSystem.save(1), "saved mid-freeze")
+	runner.check(SaveSystem.load_data(1), "loaded")
+	runner.check(Rails.frozen() and Rails.frozen_amount() == total, "still frozen, same amount")
+	runner.check(Rails.is_frozen_po(_po(id)), "the order is still on hold")
+	EventEngine.choose(_pending("rail_frozen")["iid"], "wait")
+	Clock.advance(6 * Clock.DAY + 60)
+	runner.check(Rails.state() == "recovered" and str(_po(id)["status"]) == "in_transit", "recovers after the reload")
+	runner.check(Ledger.check_balanced(), "ledger balanced")
+
+
 func test_lighter_path_when_the_rail_was_never_used() -> void:
 	_setup()
 	World.set_year(7)
