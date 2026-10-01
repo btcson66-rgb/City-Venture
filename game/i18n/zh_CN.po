@@ -178,9 +178,13 @@ msgstr "近 7 天 %d"
 msgid "%d min"
 msgstr "%d 分钟"
 
-#: scripts/ui/modals/loan_modal.gd:53
+#: scripts/ui/modals/loan_modal.gd:73
 msgid "%d months"
 msgstr "%d 个月"
+
+#: scripts/sim/bank.gd:105
+msgid "%d more days, or accept an active contract in Company OS → Contracts."
+msgstr "还差 %d 天，或到 Company OS → 合约接受有效合约。"
 
 #: scripts/ui/modals/job_modal.gd:52
 msgid "%d more shift(s) to %s"
@@ -334,7 +338,7 @@ msgstr "%s 目前没开。营业时间 %s–%s，%s。"
 msgid "%s is full: %d of %d units, counting stock on the way."
 msgstr "%s 已经放满了：%d / %d 件（含运送中的货）。"
 
-#: scripts/ui/modals/loan_modal.gd:107
+#: scripts/ui/modals/loan_modal.gd:198
 msgid "%s is in the company account. First payment in 30 days."
 msgstr "%s 已导入公司帐户。30 天后开始还第一期。"
 
@@ -350,7 +354,7 @@ msgstr "%s 准时到帐"
 msgid "%s last 7 days"
 msgstr "近 7 天 %s"
 
-#: scripts/ui/modals/loan_modal.gd:80
+#: scripts/ui/modals/loan_modal.gd:118
 msgid "%s on %s"
 msgstr "%s，%s 扣款"
 
@@ -566,7 +570,7 @@ msgstr "创办人巷 22 号 2B 室"
 msgid "3  Tape all three seams (buttons under the box)"
 msgstr "3  三条接缝都粘贴胶带（箱子下方的按钮）"
 
-#: scripts/sim/bank.gd:88
+#: scripts/sim/bank.gd:80
 msgid "3 × last 30 days' gross profit"
 msgstr "近 30 天毛利 × 3"
 
@@ -578,15 +582,15 @@ msgstr "部分退款 30%"
 msgid "4  Label"
 msgstr "4  标签"
 
-#: scripts/sim/bank.gd:94
+#: scripts/sim/bank.gd:82
 msgid "50% of stock at cost"
 msgstr "库存成本的 50%"
 
-#: scripts/sim/bank.gd:92
+#: scripts/sim/bank.gd:81
 msgid "60% of signed contracts"
 msgstr "已签合约的 60%"
 
-#: scripts/sim/bank.gd:90
+#: scripts/sim/bank.gd:81
 msgid "70% of money owed to you"
 msgstr "应收帐款的 70%"
 
@@ -854,13 +858,17 @@ msgstr "接受：以 {price} 卖掉 {company}"
 msgid "Accepted."
 msgstr "已接受。"
 
-#: scripts/frontend/character_creator.gd:147
+#: scripts/frontend/character_creator.gd:148
 msgid "Accessory"
 msgstr "配件"
 
 #: scripts/ui/minigames/typing_game.gd:50
 msgid "Accuracy and speed decide how much of the work gets done in this session."
 msgstr "正确率和速度决定这一段时间完成多少工作。"
+
+#: scripts/sim/bank.gd:105
+msgid "Active contracts cover this condition: %s still to collect."
+msgstr "有效合约已符合此条件：尚有 %s 待收款。"
 
 #: data/events/ad_cost_spike.json
 msgid "Ad prices spike"
@@ -934,7 +942,7 @@ msgstr "机场线"
 msgid "Alex"
 msgstr "Alex"
 
-#: scripts/frontend/character_creator.gd:203 scripts/frontend/character_creator.gd:81
+#: scripts/frontend/character_creator.gd:204 scripts/frontend/character_creator.gd:81
 msgid "Alex Chen"
 msgstr "Alex Chen"
 
@@ -993,6 +1001,10 @@ msgstr "有企图心：做得更拚，两个月内会期待加薪。"
 #: scripts/ui/minigames/barista_game.gd:7
 msgid "Americano"
 msgstr "美式咖啡"
+
+#: data/help/glossary.json
+msgid "An appointment gets you to Marcus; it does not waive the company, account, credit, payment history, age or collateral requirements."
+msgstr "预约能安排与 Marcus 洽谈，仍须符合公司、帐户、信用、缴款纪录、成立天数或担保资产等资格。"
 
 #: data/help/glossary.json
 msgid "An employee who takes your van out on one posted run each workday and banks the fee. They plan the route less well than you do."
@@ -1282,7 +1294,7 @@ msgstr "包包"
 msgid "Bakery delivery: %d pastries"
 msgstr "面包店送货：%d 个糕点"
 
-#: scripts/ui/modals/loan_modal.gd:79
+#: scripts/ui/modals/loan_modal.gd:117
 msgid "Balance"
 msgstr "余额"
 
@@ -1322,7 +1334,7 @@ msgstr "咖啡师"
 msgid "Barista: see the job"
 msgstr "咖啡师：看工作内容"
 
-#: scripts/ui/modals/loan_modal.gd:26
+#: scripts/ui/modals/loan_modal.gd:28
 msgid "Base rate %s"
 msgstr "基准利率 %s"
 
@@ -1370,7 +1382,7 @@ msgstr "我们最多只能：每件 %s，票期 %d 天%s。"
 msgid "Better quality home goods. Higher MOQ."
 msgstr "品质较好的居家用品。最低订购量较高。"
 
-#: scripts/sim/bank.gd:106
+#: scripts/sim/bank.gd:169
 msgid "Between $1,000 and %s."
 msgstr "金额需在 $1,000 到 %s 之间。"
 
@@ -1426,7 +1438,7 @@ msgstr "蓝色"
 msgid "Bob"
 msgstr "鲍伯头"
 
-#: scripts/frontend/character_creator.gd:122
+#: scripts/frontend/character_creator.gd:123
 msgid "Body"
 msgstr "身形"
 
@@ -1434,11 +1446,15 @@ msgstr "身形"
 msgid "Bold. Love it."
 msgstr "有胆。我喜欢。"
 
+#: scripts/ui/modals/loan_modal.gd:89 scripts/ui/modals/loan_modal.gd:93
+msgid "Book an appointment"
+msgstr "预约贷款洽谈"
+
 #: data/dialogue/lina_intro.json
 msgid "Boring and safe. My favourite. You'll find it when you pay Lumina: Company OS, Operations."
 msgstr "无聊又安全，我的最爱。付款给 Lumina 时就会看到：Company OS 的「营运」。"
 
-#: scripts/ui/modals/loan_modal.gd:60
+#: scripts/ui/modals/loan_modal.gd:80
 msgid "Borrow %s"
 msgstr "借 %s"
 
@@ -1446,7 +1462,7 @@ msgstr "借 %s"
 msgid "Borrow for stock or a cash gap. You repay monthly with interest; missed payments hurt your credit score."
 msgstr "可以借钱进货或补资金缺口。每月连本带利还款；逾期会拉低信用分数。"
 
-#: scripts/sim/bank.gd:121
+#: scripts/sim/bank.gd:184
 msgid "Borrowed %s from Nexus Bank (%d months, %s APR)."
 msgstr "向 Nexus 银行借了 %s（%d 个月，年利率 %s）。"
 
@@ -1602,6 +1618,10 @@ msgstr "企业帐户已开立。%s 从此有自己的帐本了。"
 msgid "Business assets contributed to %s (in kind)"
 msgstr "以实物出资给 %s"
 
+#: scripts/sim/bank.gd:97
+msgid "Business bank account"
+msgstr "商业银行帐户"
+
 #: scripts/ui/modals/bank_modal.gd:12
 msgid "Business banking"
 msgstr "企业金融"
@@ -1617,6 +1637,10 @@ msgstr "公司毛利超过了一个月的房租。"
 #: scripts/ui/modals/bank_modal.gd:48
 msgid "Business lending · credit %d"
 msgstr "企业贷款 · 信用分数 %d"
+
+#: data/buildings/nexus_bank.json
+msgid "Business lending — Marcus Reed, weekdays 13:00–16:00"
+msgstr "商业贷款——Marcus Reed，平日 13:00–16:00"
 
 #: scripts/ui/modals/company_os.gd:229 scripts/ui/modals/month_close_modal.gd:36
 msgid "Business profit"
@@ -1910,7 +1934,7 @@ msgstr "现在不能上班：%s。"
 msgid "Can't work the counter: %s."
 msgstr "现在不能站吧台：%s。"
 
-#: scripts/ui/modals/metro_modal.gd:62 scripts/ui/modals/registration_modal.gd:53 scripts/ui/modals/save_list_modal.gd:37 scripts/ui/modals/settlement_modal.gd:101
+#: scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:62 scripts/ui/modals/registration_modal.gd:53 scripts/ui/modals/save_list_modal.gd:37
 msgid "Cancel"
 msgstr "取消"
 
@@ -2073,6 +2097,10 @@ msgstr "越便宜注册越多；功能和客服能留住用户。规模越大，
 #: data/events/customer_return_first.json
 msgid "Cheaper now. Expect a lukewarm review."
 msgstr "眼前比较省。评价大概不冷不热。"
+
+#: data/help/glossary.json data/help/help.json
+msgid "Check all six lending conditions before signing. A missed condition shows its gap and where to fix it."
+msgstr "签约前核对六项贷款条件。不符合的条件会列出差额与办理地点。"
 
 #: scripts/ui/minigames/clerk_forms_game.gd:29
 msgid "Check each company registration form against the four rules on your desk."
@@ -2310,7 +2338,7 @@ msgstr "咖啡豆、牛奶和杯子：还够 %d 杯"
 msgid "Collect the money Crestline owes you"
 msgstr "收回 Crestline 欠你的钱"
 
-#: scripts/sim/bank.gd:84
+#: scripts/sim/bank.gd:106
 msgid "Come back when %s has %d days of statements, or a signed contract."
 msgstr "等 %s 有 %d 天的帐务纪录，或拿到一张签好的合约再来。"
 
@@ -2349,6 +2377,10 @@ msgstr "公司"
 #: data/help/help.json
 msgid "Company OS: your business computer"
 msgstr "Company OS：你的工作电脑"
+
+#: scripts/sim/bank.gd:103
+msgid "Company days or an active contract"
+msgstr "公司成立天数，或有效合约"
 
 #: scripts/ui/minigames/clerk_forms_game.gd:68 scripts/ui/modals/registration_modal.gd:29
 msgid "Company name"
@@ -2405,6 +2437,10 @@ msgstr "合规：申报、审查与合规专员 — %s"
 #: scripts/ui/modals/purchase_return_modal.gd:55
 msgid "Confirm cancellation"
 msgstr "确认取消"
+
+#: scripts/ui/modals/loan_signing_modal.gd:16
+msgid "Confirm loan signing"
+msgstr "确认签订贷款"
 
 #: scripts/ui/modals/purchase_return_modal.gd:55
 msgid "Confirm return"
@@ -2546,9 +2582,13 @@ msgstr "快递 · 快捷 1 天（%s）"
 msgid "Credit score"
 msgstr "信用分数"
 
-#: scripts/ui/modals/loan_modal.gd:23
+#: scripts/ui/modals/loan_modal.gd:24
 msgid "Credit score %d · %s"
 msgstr "信用分数 %d · %s"
+
+#: scripts/sim/bank.gd:99
+msgid "Credit score and lending ban"
+msgstr "信用分数与禁贷期"
 
 #: scripts/ui/modals/insolvency_modal.gd:71
 msgid "Credit score now %d. Bank loans pause for 90 days. You can register a new company at City Hall whenever you're ready."
@@ -2597,6 +2637,14 @@ msgstr "杯子"
 #: scripts/ui/modals/company_os.gd:827
 msgid "Currency"
 msgstr "币别"
+
+#: scripts/ui/modals/loan_modal.gd:50
+msgid "Current %d days · required %d days · %d more days"
+msgstr "目前 %d 天 · 门槛 %d 天 · 还差 %d 天"
+
+#: scripts/ui/modals/loan_modal.gd:48 scripts/ui/modals/loan_modal.gd:52
+msgid "Current %s · required %s · gap %s"
+msgstr "目前 %s · 门槛 %s · 差额 %s"
 
 #: data/events/supplier_price_increase.json
 msgid "Current: {unit_cost}/unit, MOQ {moq}."
@@ -3122,6 +3170,10 @@ msgstr "%s 提前付款（%s），折扣 %s"
 msgid "Earn Your First Dollar"
 msgstr "赚到第一块钱"
 
+#: scripts/sim/bank.gd:108
+msgid "Earn about %s more gross profit through sales in Company OS, or add eligible collateral. Capacity is rounded down to $1,000 and capped at $250,000."
+msgstr "在 Company OS 经营销售，再赚约 %s 毛利，或增加合格担保资产。额度向下取整至千元，上限为 $250,000。"
+
 #: scripts/ui/tutorial.gd:81
 msgid "Earn on the side"
 msgstr "兼差赚钱"
@@ -3362,15 +3414,15 @@ msgstr "快捷件 · 1 天——%s"
 msgid "Expression ▶"
 msgstr "表情 ▶"
 
-#: scripts/frontend/character_creator.gd:135
+#: scripts/frontend/character_creator.gd:136
 msgid "Eye colour"
 msgstr "瞳色"
 
-#: scripts/frontend/character_creator.gd:134
+#: scripts/frontend/character_creator.gd:135
 msgid "Eye shape"
 msgstr "眼型"
 
-#: scripts/frontend/character_creator.gd:136
+#: scripts/frontend/character_creator.gd:137
 msgid "Eyebrows"
 msgstr "眉毛"
 
@@ -3406,11 +3458,11 @@ msgstr "汇率"
 msgid "FYI personal seller accounts cap out at $2,500/month on ShopLane. Registered businesses don't."
 msgstr "跟你说，ShopLane 个人卖家每月上限 $2,500。登记过的公司没有这个限制。"
 
-#: scripts/frontend/character_creator.gd:122
+#: scripts/frontend/character_creator.gd:123
 msgid "Face"
 msgstr "脸部"
 
-#: scripts/frontend/character_creator.gd:133
+#: scripts/frontend/character_creator.gd:134
 msgid "Face shape"
 msgstr "脸型"
 
@@ -3990,15 +4042,15 @@ msgstr "怎么玩"
 msgid "Haddad"
 msgstr "Haddad"
 
-#: scripts/frontend/character_creator.gd:122
+#: scripts/frontend/character_creator.gd:123
 msgid "Hair"
 msgstr "发型"
 
-#: scripts/frontend/character_creator.gd:140
+#: scripts/frontend/character_creator.gd:141
 msgid "Hair colour"
 msgstr "发色"
 
-#: scripts/frontend/character_creator.gd:139
+#: scripts/frontend/character_creator.gd:140
 msgid "Hairstyle"
 msgstr "发型"
 
@@ -4302,10 +4354,6 @@ msgstr "货车开得还顺吗？过桥的时候听听变速箱的声音，还有
 msgid "I invest in companies, not ideas. Register one and we'll talk."
 msgstr "我投资公司，不投资点子。先登记一间公司再来谈。"
 
-#: scripts/ui/modals/loan_modal.gd:36
-msgid "I lend on cash flow and collateral: gross profit, money owed to you, signed contracts and stock."
-msgstr "我看现金流和担保品放款：毛利、应收帐款、已签合约和库存。"
-
 #: data/dialogue/marcus_lending.json
 msgid "I lend on cash flow and collateral: gross profit, money owed to you, signed contracts, stock."
 msgstr "我看现金流和担保品放款：毛利、应收帐款、已签合约、库存。"
@@ -4470,7 +4518,7 @@ msgstr "库存（所有地点）：%d / 需要 %d"
 msgid "In the Clearing Crisis (Year 5), money sent abroad takes days to land, and an importer ships only once it has."
 msgstr "清算危机（第 5 年）期间，汇到国外的钱要好几天才到，进口商收到钱才会出货。"
 
-#: scripts/ui/modals/company_os.gd:462 scripts/ui/phone_ui.gd:259
+#: scripts/ui/modals/company_os.gd:462 scripts/ui/phone_ui.gd:261
 msgid "In transit"
 msgstr "运送中"
 
@@ -4522,7 +4570,7 @@ msgstr "保好险、让它一直跑，它就会赚钱；停在路边，它只是
 msgid "Interest"
 msgstr "利息"
 
-#: scripts/ui/modals/loan_modal.gd:42
+#: scripts/ui/modals/loan_modal.gd:62
 msgid "Interest (APR)"
 msgstr "利率（年）"
 
@@ -4926,7 +4974,7 @@ msgstr "迟到"
 msgid "Late fees"
 msgstr "滞纳金"
 
-#: scripts/sim/bank.gd:175
+#: scripts/sim/bank.gd:238
 msgid "Late payment fee — loan %s"
 msgstr "迟缴手续费——贷款 %s"
 
@@ -5030,6 +5078,10 @@ msgstr "传承"
 msgid "Lena"
 msgstr "Lena"
 
+#: scripts/sim/bank.gd:107
+msgid "Lending capacity"
+msgstr "可借额度"
+
 #: scripts/ui/minigames/barista_game.gd:10
 msgid "Leo"
 msgstr "Leo"
@@ -5074,7 +5126,7 @@ msgstr "执照已续期到 %s。"
 msgid "Licensing Officer"
 msgstr "执照承办员"
 
-#: scripts/ui/phone_ui.gd:270
+#: scripts/ui/phone_ui.gd:272
 msgid "Life Timeline"
 msgstr "人生纪录"
 
@@ -5182,21 +5234,33 @@ msgstr "读取存盘（%d）"
 msgid "Loading dock"
 msgstr "装卸平台"
 
-#: scripts/sim/bank.gd:148
+#: scripts/sim/bank.gd:211
 msgid "Loan %s repaid in full."
 msgstr "贷款 %s 已全部还清。"
 
-#: scripts/sim/bank.gd:149
+#: scripts/sim/bank.gd:212
 msgid "Loan %s repaid in full. Your credit score went up."
 msgstr "贷款 %s 已全部还清，你的信用分数上升了。"
 
-#: scripts/sim/bank.gd:133
+#: scripts/sim/bank.gd:196
 msgid "Loan %s — extra repayment"
 msgstr "贷款 %s——额外还款"
 
-#: scripts/sim/bank.gd:161
+#: scripts/sim/bank.gd:224
 msgid "Loan %s — monthly payment"
 msgstr "贷款 %s——每月还款"
+
+#: scripts/ui/modals/loan_modal.gd:159
+msgid "Loan appointment"
+msgstr "贷款洽谈预约"
+
+#: scripts/sim/bank.gd:151
+msgid "Loan appointment: %s. Go to Marcus Reed's manager desk at Nexus Bank, Financial District. If you miss the slot, book again at the lending sign."
+msgstr "贷款预约：%s。到金融区 Nexus Bank 的经理桌找 Marcus Reed。错过时段时，可到贷款告示牌重新预约。"
+
+#: data/help/glossary.json
+msgid "Loan eligibility"
+msgstr "贷款资格"
 
 #: scripts/sim/forecast.gd:49
 msgid "Loan payment"
@@ -5342,10 +5406,6 @@ msgstr "城市精品"
 msgid "Luxury Heights"
 msgstr "豪景高地"
 
-#: scripts/ui/modals/loan_modal.gd:34
-msgid "MARCUS REED"
-msgstr "MARCUS REED"
-
 #: scripts/ui/modals/company_os.gd:159
 msgid "MONTHLY PROFIT"
 msgstr "本月利润"
@@ -5422,7 +5482,7 @@ msgstr "Marcus Reed"
 msgid "Marcus Reed here. Big invoices on long terms are how profitable companies run out of cash. My door's open, weekdays 1 to 4."
 msgstr "我是 Marcus Reed。帐期很长的大笔发票，正是赚钱的公司会没现金的原因。平日下午 1 到 4 点，我的门是开着的。"
 
-#: scripts/ui/modals/loan_modal.gd:64
+#: scripts/ui/modals/loan_modal.gd:84
 msgid "Marcus Reed signs loans in person (weekdays 13:00–16:00, Nexus Bank)."
 msgstr "Marcus Reed 亲自签贷款（平日 13:00–16:00，Nexus 银行）。"
 
@@ -5466,7 +5526,7 @@ msgstr "行销专员"
 msgid "Masculine"
 msgstr "阳刚"
 
-#: scripts/frontend/character_creator.gd:131
+#: scripts/frontend/character_creator.gd:132
 msgid "Masculine, feminine or neutral changes the body shape only. There are no ability differences."
 msgstr "阳刚、阴柔或中性只会改变体型，没有任何能力差异。"
 
@@ -5517,6 +5577,10 @@ msgstr "中杯"
 #: data/story/chapters.json
 msgid "Meet Daniel Wong at Nexus Co-work (Thursdays 17:00–20:00)"
 msgstr "到 Nexus 共享办公室见 Daniel Wong（每周四 17:00–20:00）"
+
+#: scripts/ui/modals/loan_modal.gd:93
+msgid "Meet Marcus Reed now"
+msgstr "现在找 Marcus Reed 洽谈"
 
 #: scripts/ui/hud.gd:108 scripts/ui/modals/company_os.gd:1218
 msgid "Menu"
@@ -5642,7 +5706,7 @@ msgstr "月结——%s"
 msgid "Month close"
 msgstr "月结"
 
-#: scripts/ui/phone_ui.gd:260
+#: scripts/ui/phone_ui.gd:262
 msgid "Month sales"
 msgstr "本月销售"
 
@@ -5650,7 +5714,7 @@ msgstr "本月销售"
 msgid "Monthly hot desk ($350)"
 msgstr "自由座月租（$350）"
 
-#: scripts/ui/modals/loan_modal.gd:57
+#: scripts/ui/modals/loan_modal.gd:77
 msgid "Monthly payment"
 msgstr "每月还款"
 
@@ -5674,7 +5738,7 @@ msgstr "士气 %d"
 msgid "Morale drops when pay is late or work piles up."
 msgstr "薪水晚发或工作堆积时，士气会下降。"
 
-#: scripts/frontend/character_creator.gd:148
+#: scripts/frontend/character_creator.gd:149
 msgid "More outfits (Executive, Luxury Citywear, Travel, Formal Evening, Logistics) are sold at Threadline on Shopping Street. Accessories (hats, bags, jewellery, watches) — planned."
 msgstr "更多服装（主管、城市精品、旅行、晚宴、现场工作）在购物街的 Threadline 贩售。配件（帽子、包包、首饰、手表）——规划中。"
 
@@ -5698,7 +5762,7 @@ msgstr "早安！我是 %s，今天有预约。"
 msgid "Moss"
 msgstr "Moss"
 
-#: scripts/frontend/character_creator.gd:137
+#: scripts/frontend/character_creator.gd:138
 msgid "Mouth"
 msgstr "嘴型"
 
@@ -5846,11 +5910,11 @@ msgstr "下一位！你好，要办什么？"
 msgid "Nexus Bank"
 msgstr "Nexus 银行"
 
-#: scripts/sim/bank.gd:209
+#: scripts/sim/bank.gd:275
 msgid "Nexus Bank called loan %s and it could not be repaid."
 msgstr "Nexus 银行要求贷款 %s 立即清偿，但还不出来。"
 
-#: scripts/sim/bank.gd:186
+#: scripts/sim/bank.gd:249
 msgid "Nexus Bank called loan %s. %s due in 7 days."
 msgstr "Nexus 银行要求贷款 %s 立即清偿：7 天内须还 %s。"
 
@@ -5858,7 +5922,7 @@ msgstr "Nexus 银行要求贷款 %s 立即清偿：7 天内须还 %s。"
 msgid "Nexus Bank guarantees the payment to the supplier's bank. They ship on the bank's word in about 2 days."
 msgstr "Nexus 银行向供应商的银行担保这笔付款。对方凭银行的保证，大约 2 天就出货。"
 
-#: scripts/sim/bank.gd:115
+#: scripts/sim/bank.gd:178
 msgid "Nexus Bank loan %s: %s over %d months at %s"
 msgstr "Nexus 银行贷款 %s：%s，%d 个月，年利率 %s"
 
@@ -5954,6 +6018,10 @@ msgstr "还没有员工。每笔订单都是你自己打包，所以时间很重
 msgid "No gigs in progress. Pick one below."
 msgstr "目前没有进行中的案子，从下面挑一个。"
 
+#: scripts/sim/bank.gd:100
+msgid "No lending ban"
+msgstr "目前没有禁贷期"
+
 #: scripts/ui/modals/company_os.gd:330
 msgid "No listings yet."
 msgstr "还没有上架商品。"
@@ -6022,7 +6090,7 @@ msgstr "找不到这位员工。"
 msgid "No such gig in progress."
 msgstr "没有这个进行中的案子。"
 
-#: scripts/sim/bank.gd:129
+#: scripts/sim/bank.gd:192
 msgid "No such loan."
 msgstr "找不到这笔贷款。"
 
@@ -6054,7 +6122,7 @@ msgstr "非现金"
 msgid "None"
 msgstr "无"
 
-#: scripts/ui/modals/loan_modal.gd:71
+#: scripts/ui/modals/loan_modal.gd:109
 msgid "None."
 msgstr "没有。"
 
@@ -6086,7 +6154,7 @@ msgstr "现金不足"
 msgid "Not enough cash for return shipping: %s."
 msgstr "现金不足以支付退货运费：%s。"
 
-#: scripts/sim/bank.gd:132 scripts/sim/company.gd:105
+#: scripts/sim/bank.gd:195 scripts/sim/company.gd:105
 msgid "Not enough cash."
 msgstr "现金不够。"
 
@@ -6126,7 +6194,7 @@ msgstr "颜色跟想像的不一样。"
 msgid "Not today."
 msgstr "今天先不用。"
 
-#: scripts/sim/bank.gd:69
+#: scripts/sim/bank.gd:102
 msgid "Not while a loan is in arrears."
 msgstr "有逾期贷款时不行。"
 
@@ -6186,7 +6254,7 @@ msgstr "这里没有可以打包的：货在这个地点吗？"
 msgid "Nothing to resolve."
 msgstr "没有需要处理的事。"
 
-#: scripts/ui/phone_ui.gd:253
+#: scripts/ui/phone_ui.gd:255
 msgid "Notifications only.\nManage at a desk: Company OS."
 msgstr "这里只显示通知。\n要管理请到办公桌：Company OS。"
 
@@ -6430,6 +6498,10 @@ msgstr "打开「营运」"
 msgid "Open Sales"
 msgstr "打开「销售」"
 
+#: scripts/sim/bank.gd:98
+msgid "Open a business account at the Nexus Bank counter, Financial District."
+msgstr "到金融区 Nexus Bank 柜台开商业帐户。"
+
 #: data/help/help.json
 msgid "Open a business account for a registered company, and move money between you and the company."
 msgstr "帮已登记的公司开帐户，并在你和公司之间转帐。"
@@ -6438,13 +6510,17 @@ msgstr "帮已登记的公司开帐户，并在你和公司之间转帐。"
 msgid "Open a business account for {company} at Nexus Bank (Financial District)"
 msgstr "到 Nexus 银行帮 {company} 开企业帐户（金融区）"
 
-#: scripts/sim/bank.gd:64
+#: scripts/sim/bank.gd:98
 msgid "Open a business account with us first."
 msgstr "请先在我们这里开公司帐户。"
 
 #: scripts/ui/modals/bank_modal.gd:39
 msgid "Open account with %s"
 msgstr "存入 %s 开户"
+
+#: scripts/ui/modals/loan_modal.gd:86
+msgid "Open an account at the Nexus Bank counter"
+msgstr "到 Nexus Bank 柜台开户"
 
 #: scripts/ui/modals/bank_modal.gd:34
 msgid "Open an account for %s and move founder capital in. Your stock and ShopLane balance move with it."
@@ -6574,7 +6650,7 @@ msgstr "其他"
 msgid "Other operating expense"
 msgstr "其他营业费用"
 
-#: scripts/frontend/character_creator.gd:122 scripts/frontend/character_creator.gd:143
+#: scripts/frontend/character_creator.gd:123 scripts/frontend/character_creator.gd:144
 msgid "Outfit"
 msgstr "服装"
 
@@ -6589,6 +6665,10 @@ msgstr "透支每晚要付 $35。游戏还没结束——但总得牺牲点什�
 #: scripts/sim/living.gd:33
 msgid "Overdraft fee"
 msgstr "透支手续费"
+
+#: scripts/sim/bank.gd:101
+msgid "Overdue or called loans"
+msgstr "逾期或被催收的贷款"
 
 #: scripts/ui/modals/company_os.gd:6
 msgid "Overview"
@@ -6750,7 +6830,7 @@ msgstr "已打包订单 %s"
 msgid "Packed well"
 msgstr "打包得很好"
 
-#: scripts/ui/phone_ui.gd:258
+#: scripts/ui/phone_ui.gd:260
 msgid "Packed, not shipped"
 msgstr "已打包未出货"
 
@@ -6918,7 +6998,11 @@ msgstr "付款给国外供应商"
 msgid "Pay again by wire ({reroute_cost})"
 msgstr "改用电汇重新付款（{reroute_cost}）"
 
-#: scripts/ui/modals/loan_modal.gd:87
+#: scripts/sim/bank.gd:100
+msgid "Pay bills on time. Lending ban ends: %s."
+msgstr "按时缴清帐单。禁贷期结束：%s。"
+
+#: scripts/ui/modals/loan_modal.gd:125
 msgid "Pay off"
 msgstr "一次还清"
 
@@ -6942,7 +7026,7 @@ msgstr "付款给国外供应商"
 msgid "Paying your staff their wages, every Friday at 17:00 from the company account."
 msgstr "每周五 17:00 从公司帐户付员工薪水。"
 
-#: scripts/ui/modals/loan_modal.gd:80
+#: scripts/ui/modals/loan_modal.gd:118
 msgid "Payment"
 msgstr "还款"
 
@@ -7042,7 +7126,7 @@ msgstr "个人／独资"
 msgid "Personal Banker"
 msgstr "理财专员"
 
-#: scripts/ui/phone_ui.gd:262
+#: scripts/ui/phone_ui.gd:264
 msgid "Personal cap"
 msgstr "个人上限"
 
@@ -7262,7 +7346,7 @@ msgstr "精密制造"
 msgid "Premium consumers"
 msgstr "高端消费者"
 
-#: scripts/frontend/character_creator.gd:129
+#: scripts/frontend/character_creator.gd:130
 msgid "Presentation"
 msgstr "外型风格"
 
@@ -7690,6 +7774,10 @@ msgstr "请先登记公司。"
 msgid "Register as an employer here before you hire staff."
 msgstr "聘请员工之前，先在这里登记为雇主。"
 
+#: scripts/sim/bank.gd:96
+msgid "Register at City Hall, Civic Center."
+msgstr "到市政中心的市政厅登记公司。"
+
 #: scripts/ui/modals/permits_modal.gd:36
 msgid "Register the company first."
 msgstr "请先登记公司。"
@@ -7713,6 +7801,10 @@ msgstr "登记地址"
 #: scripts/ui/modals/permits_modal.gd:167
 msgid "Registered as an employer (%s). You can post jobs in Company OS → People."
 msgstr "雇主登记完成（%s）。可以到 Company OS →「人员」刊登职缺了。"
+
+#: scripts/sim/bank.gd:95
+msgid "Registered company"
+msgstr "已登记公司"
 
 #: data/regions/almeria.json data/regions/auroria.json data/regions/karu.json data/regions/lumina.json
 msgid "Registered company + international banking (P2)"
@@ -7846,9 +7938,13 @@ msgstr "到处都在涨房租。卖点大家真的需要的东西吧。"
 msgid "Renting an office"
 msgstr "租办公室"
 
-#: scripts/ui/modals/loan_modal.gd:84
+#: scripts/ui/modals/loan_modal.gd:122
 msgid "Repay %s"
 msgstr "还 %s"
+
+#: scripts/sim/bank.gd:102
+msgid "Repay overdue loans in this screen; if the company is in insolvency, use the recovery options."
+msgstr "在本画面偿还逾期贷款；公司若已进入清算进程，使用复原选项。"
 
 #: scripts/ui/modals/save_list_modal.gd:34 scripts/ui/modals/save_list_modal.gd:65
 msgid "Replace"
@@ -8314,11 +8410,11 @@ msgstr "存盘"
 msgid "Save cash. Sales will dip."
 msgstr "省下现金。销量会下滑。"
 
-#: scripts/ui/phone_ui.gd:279
+#: scripts/ui/phone_ui.gd:281
 msgid "Save game"
 msgstr "保存游戏"
 
-#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:280
+#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:282
 msgid "Save now"
 msgstr "立即存盘"
 
@@ -8330,7 +8426,7 @@ msgstr "已保存"
 msgid "Saved %s"
 msgstr "存于 %s"
 
-#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:282
+#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:284
 msgid "Saved (slot %d)."
 msgstr "已存盘（字段 %d）。"
 
@@ -8546,7 +8642,7 @@ msgstr "ShopLane＋发票"
 msgid "ShopLane Ads: a big brand campaign is bidding up placements."
 msgstr "ShopLane 广告：有大品牌在抢版位，价格被推高了。"
 
-#: scripts/ui/phone_ui.gd:252
+#: scripts/ui/phone_ui.gd:254
 msgid "ShopLane Seller"
 msgstr "ShopLane 卖家"
 
@@ -8650,6 +8746,10 @@ msgstr "跟 {supplier} 签 60 天供货协议（费用 $600）"
 msgid "Sign the lease"
 msgstr "签租约"
 
+#: scripts/ui/modals/loan_signing_modal.gd:9
+msgid "Sign the loan"
+msgstr "签订贷款"
+
 #: scripts/ui/minigames/clerk_forms_game.gd:69
 msgid "Signature"
 msgstr "签名"
@@ -8661,6 +8761,10 @@ msgstr "申请人有签名"
 #: scripts/sim/contracts.gd:137
 msgid "Signed contract %s with %s: %s."
 msgstr "签订合约 %s，对象 %s：%s。"
+
+#: data/help/help.json scripts/ui/modals/loan_signing_modal.gd:15
+msgid "Signing takes the afternoon; funds arrive today. First payment in 30 days."
+msgstr "签约会用掉今天下午，款项今天入帐。第一期还款在 30 天后。"
 
 #: scripts/ui/minigames/parcel_sort_game.gd:9
 msgid "Silva"
@@ -8698,7 +8802,7 @@ msgstr "能力 %d/5 · 每周 %s · %s"
 msgid "Skill %d/5 · asks %s/week · %s"
 msgstr "能力 %d/5 · 希望周薪 %s · %s"
 
-#: scripts/frontend/character_creator.gd:130
+#: scripts/frontend/character_creator.gd:131
 msgid "Skin tone"
 msgstr "肤色"
 
@@ -9290,7 +9394,7 @@ msgstr "Tanaka"
 msgid "Tape seam %d"
 msgstr "贴第 %d 条接缝"
 
-#: scripts/ui/phone_ui.gd:127 scripts/ui/phone_ui.gd:232
+#: scripts/ui/phone_ui.gd:127 scripts/ui/phone_ui.gd:234
 msgid "Tasks"
 msgstr "任务"
 
@@ -9794,7 +9898,7 @@ msgstr "这个方式%s。"
 msgid "This contract belongs to another company."
 msgstr "这份合约属于其他公司。"
 
-#: scripts/ui/phone_ui.gd:287
+#: scripts/ui/phone_ui.gd:289
 msgid "This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen."
 msgstr "这场游戏每隔几秒自动存到字段 %d。新游戏会用自己的字段；其他存盘可以在标题画面读取。"
 
@@ -9902,7 +10006,7 @@ msgstr "小费：%s"
 msgid "To Startup Hub"
 msgstr "前往新创园区"
 
-#: scripts/ui/modals/company_os.gd:462 scripts/ui/phone_ui.gd:257
+#: scripts/ui/modals/company_os.gd:462 scripts/ui/phone_ui.gd:259
 msgid "To pack"
 msgstr "待打包"
 
@@ -9942,7 +10046,7 @@ msgstr "等了好一阵子才到。"
 msgid "Total"
 msgstr "总额"
 
-#: scripts/ui/modals/loan_modal.gd:58
+#: scripts/ui/modals/loan_modal.gd:78
 msgid "Total interest"
 msgstr "总利息"
 
@@ -10022,7 +10126,7 @@ msgstr "专心工作两小时：完成 %.1f 小时的工作量。%s"
 msgid "Two hours behind your own counter: %d customers served."
 msgstr "在自己的吧台站了两小时：服务了 %d 位客人。"
 
-#: scripts/sim/bank.gd:185
+#: scripts/sim/bank.gd:248
 msgid "Two missed payments. The bank has called loan %s: %s is due in full within 7 days."
 msgstr "连续两期没缴。银行要求贷款 %s 立即清偿：7 天内须全额还 %s。"
 
@@ -10098,7 +10202,7 @@ msgstr "未知的对象。"
 msgid "Unknown supply pack."
 msgstr "没有这种材料包。"
 
-#: scripts/ui/modals/loan_modal.gd:41
+#: scripts/ui/modals/loan_modal.gd:61
 msgid "Up to"
 msgstr "最高"
 
@@ -10117,6 +10221,10 @@ msgstr "用笔电——Company OS"
 #: scripts/sim/company.gd:33
 msgid "Use letters or numbers."
 msgstr "请使用文本或数字。"
+
+#: scripts/ui/modals/loan_modal.gd:100
+msgid "Use the Metro to Financial District, then enter Nexus Bank and go to the manager desk."
+msgstr "搭捷运到金融区，进入 Nexus Bank，前往经理桌。"
 
 #: data/help/help.json
 msgid "Use the tabs on the left. Every laptop and work desk opens the same system: home, co-work hot desk, café table, office."
@@ -10258,6 +10366,14 @@ msgstr "Victor：「了解。你的数字变大，我的也会跟着变大。」
 msgid "Victor: \"You'll get it, with conditions. Read them twice.\""
 msgstr "Victor：「你会拿到，但有条件。条件要看两遍。」"
 
+#: scripts/ui/modals/loan_modal.gd:86
+msgid "View City Hall on city map"
+msgstr "在城市地图查看市政厅"
+
+#: scripts/ui/modals/loan_modal.gd:97
+msgid "View Nexus Bank on city map"
+msgstr "在城市地图查看 Nexus Bank"
+
 #: data/story/chapters.json
 msgid "Visit Nexus Co-work in Startup Hub (walk east)"
 msgstr "去新创园区的 Nexus 共享办公室（往东走）"
@@ -10274,7 +10390,7 @@ msgstr "访客一个一个来到柜台。今天的预约名单在你的夹板上
 msgid "Visitors handled correctly: %d / %d"
 msgstr "正确处理的访客：%d / %d"
 
-#: scripts/ui/modals/loan_modal.gd:38
+#: scripts/ui/modals/loan_modal.gd:54 scripts/ui/modals/loan_modal.gd:58
 msgid "WHAT YOUR BOOKS SUPPORT"
 msgstr "你的帐目撑得起的额度"
 
@@ -10382,7 +10498,7 @@ msgstr "浪费钱。"
 msgid "Watches"
 msgstr "手表"
 
-#: scripts/sim/bank.gd:62
+#: scripts/sim/bank.gd:96
 msgid "We lend to registered companies."
 msgstr "我们只借钱给已登记的公司。"
 
@@ -10610,7 +10726,7 @@ msgstr "你的本地市场"
 msgid "YOUR JOB"
 msgstr "你的工作"
 
-#: scripts/ui/modals/loan_modal.gd:68
+#: scripts/ui/modals/loan_modal.gd:106
 msgid "YOUR LOANS"
 msgstr "你的贷款"
 
@@ -10910,7 +11026,7 @@ msgstr "你的银行通过通汇银行导出。便宜，但钱要经过好几家
 msgid "Your bed"
 msgstr "你的床"
 
-#: scripts/sim/bank.gd:87
+#: scripts/sim/bank.gd:109
 msgid "Your books don't support a loan yet. Show me more gross profit."
 msgstr "你的帐目还撑不起一笔贷款。先做出更多毛利。"
 
@@ -10934,7 +11050,7 @@ msgstr "你的现金"
 msgid "Your counter — %s"
 msgstr "你的吧台——%s"
 
-#: scripts/sim/bank.gd:66
+#: scripts/sim/bank.gd:100
 msgid "Your credit history needs time to recover."
 msgstr "你的信用纪录需要时间恢复。"
 
@@ -11018,7 +11134,7 @@ msgstr "你自己的包裹"
 msgid "Your payment is stuck on the frozen bridge until about %s. Pay again by another rail to get the goods moving; the frozen money comes back when the bridge reopens."
 msgstr "你的款项卡在冻结的跨链桥上，预计 %s 前后恢复。改用别的管道再付一次，货才会动；冻结的钱等跨链桥重开后退回。"
 
-#: scripts/sim/bank.gd:188
+#: scripts/sim/bank.gd:251
 msgid "Your payment on loan %s bounced. We'll try again in 3 days. It's cheaper to call me before this happens."
 msgstr "你的贷款 %s 扣款失败，3 天后会再扣一次。下次先打给我会比较便宜。"
 
@@ -11410,11 +11526,11 @@ msgstr "租下旧城区的转角店面（Okafor 租屋行）"
 msgid "leasing agent"
 msgstr "租赁专员"
 
-#: scripts/sim/bank.gd:182
+#: scripts/sim/bank.gd:245
 msgid "loan called"
 msgstr "贷款被催收"
 
-#: scripts/sim/bank.gd:146
+#: scripts/sim/bank.gd:209
 msgid "loan repaid"
 msgstr "贷款还清"
 
@@ -11454,11 +11570,11 @@ msgstr "原料"
 msgid "media group"
 msgstr "媒体集团"
 
-#: scripts/sim/bank.gd:96
+#: scripts/sim/bank.gd:82
 msgid "minus existing debt"
 msgstr "扣除既有债务"
 
-#: scripts/sim/bank.gd:178
+#: scripts/sim/bank.gd:241
 msgid "missed payment"
 msgstr "未缴款"
 
@@ -11502,7 +11618,7 @@ msgstr "需要办公室（租下 2B 办公室）"
 msgid "net %d"
 msgstr "%d 天付款"
 
-#: scripts/sim/bank.gd:118
+#: scripts/sim/bank.gd:181
 msgid "new credit"
 msgstr "添加信贷"
 
@@ -11566,7 +11682,7 @@ msgstr "交件时"
 msgid "on the house (staff)"
 msgstr "员工免费"
 
-#: scripts/sim/bank.gd:167
+#: scripts/sim/bank.gd:230
 msgid "on-time payment"
 msgstr "准时还款"
 
@@ -11590,7 +11706,7 @@ msgstr "自有品牌"
 msgid "paid on delivery"
 msgstr "交件即付款"
 
-#: scripts/ui/phone_ui.gd:265
+#: scripts/ui/phone_ui.gd:267
 msgid "paused: cap"
 msgstr "暂停：已达上限"
 

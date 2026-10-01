@@ -177,8 +177,12 @@ msgstr ""
 msgid "%d min"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:53
+#: scripts/ui/modals/loan_modal.gd:73
 msgid "%d months"
+msgstr ""
+
+#: scripts/sim/bank.gd:105
+msgid "%d more days, or accept an active contract in Company OS → Contracts."
 msgstr ""
 
 #: scripts/ui/modals/job_modal.gd:52
@@ -333,7 +337,7 @@ msgstr ""
 msgid "%s is full: %d of %d units, counting stock on the way."
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:107
+#: scripts/ui/modals/loan_modal.gd:198
 msgid "%s is in the company account. First payment in 30 days."
 msgstr ""
 
@@ -349,7 +353,7 @@ msgstr ""
 msgid "%s last 7 days"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:80
+#: scripts/ui/modals/loan_modal.gd:118
 msgid "%s on %s"
 msgstr ""
 
@@ -565,7 +569,7 @@ msgstr ""
 msgid "3  Tape all three seams (buttons under the box)"
 msgstr ""
 
-#: scripts/sim/bank.gd:88
+#: scripts/sim/bank.gd:80
 msgid "3 × last 30 days' gross profit"
 msgstr ""
 
@@ -577,15 +581,15 @@ msgstr ""
 msgid "4  Label"
 msgstr ""
 
-#: scripts/sim/bank.gd:94
+#: scripts/sim/bank.gd:82
 msgid "50% of stock at cost"
 msgstr ""
 
-#: scripts/sim/bank.gd:92
+#: scripts/sim/bank.gd:81
 msgid "60% of signed contracts"
 msgstr ""
 
-#: scripts/sim/bank.gd:90
+#: scripts/sim/bank.gd:81
 msgid "70% of money owed to you"
 msgstr ""
 
@@ -853,12 +857,16 @@ msgstr ""
 msgid "Accepted."
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:147
+#: scripts/frontend/character_creator.gd:148
 msgid "Accessory"
 msgstr ""
 
 #: scripts/ui/minigames/typing_game.gd:50
 msgid "Accuracy and speed decide how much of the work gets done in this session."
+msgstr ""
+
+#: scripts/sim/bank.gd:105
+msgid "Active contracts cover this condition: %s still to collect."
 msgstr ""
 
 #: data/events/ad_cost_spike.json
@@ -933,7 +941,7 @@ msgstr ""
 msgid "Alex"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:203 scripts/frontend/character_creator.gd:81
+#: scripts/frontend/character_creator.gd:204 scripts/frontend/character_creator.gd:81
 msgid "Alex Chen"
 msgstr ""
 
@@ -991,6 +999,10 @@ msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:7
 msgid "Americano"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "An appointment gets you to Marcus; it does not waive the company, account, credit, payment history, age or collateral requirements."
 msgstr ""
 
 #: data/help/glossary.json
@@ -1281,7 +1293,7 @@ msgstr ""
 msgid "Bakery delivery: %d pastries"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:79
+#: scripts/ui/modals/loan_modal.gd:117
 msgid "Balance"
 msgstr ""
 
@@ -1321,7 +1333,7 @@ msgstr ""
 msgid "Barista: see the job"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:26
+#: scripts/ui/modals/loan_modal.gd:28
 msgid "Base rate %s"
 msgstr ""
 
@@ -1369,7 +1381,7 @@ msgstr ""
 msgid "Better quality home goods. Higher MOQ."
 msgstr ""
 
-#: scripts/sim/bank.gd:106
+#: scripts/sim/bank.gd:169
 msgid "Between $1,000 and %s."
 msgstr ""
 
@@ -1425,7 +1437,7 @@ msgstr ""
 msgid "Bob"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:122
+#: scripts/frontend/character_creator.gd:123
 msgid "Body"
 msgstr ""
 
@@ -1433,11 +1445,15 @@ msgstr ""
 msgid "Bold. Love it."
 msgstr ""
 
+#: scripts/ui/modals/loan_modal.gd:89 scripts/ui/modals/loan_modal.gd:93
+msgid "Book an appointment"
+msgstr ""
+
 #: data/dialogue/lina_intro.json
 msgid "Boring and safe. My favourite. You'll find it when you pay Lumina: Company OS, Operations."
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:60
+#: scripts/ui/modals/loan_modal.gd:80
 msgid "Borrow %s"
 msgstr ""
 
@@ -1445,7 +1461,7 @@ msgstr ""
 msgid "Borrow for stock or a cash gap. You repay monthly with interest; missed payments hurt your credit score."
 msgstr ""
 
-#: scripts/sim/bank.gd:121
+#: scripts/sim/bank.gd:184
 msgid "Borrowed %s from Nexus Bank (%d months, %s APR)."
 msgstr ""
 
@@ -1601,6 +1617,10 @@ msgstr ""
 msgid "Business assets contributed to %s (in kind)"
 msgstr ""
 
+#: scripts/sim/bank.gd:97
+msgid "Business bank account"
+msgstr ""
+
 #: scripts/ui/modals/bank_modal.gd:12
 msgid "Business banking"
 msgstr ""
@@ -1615,6 +1635,10 @@ msgstr ""
 
 #: scripts/ui/modals/bank_modal.gd:48
 msgid "Business lending · credit %d"
+msgstr ""
+
+#: data/buildings/nexus_bank.json
+msgid "Business lending — Marcus Reed, weekdays 13:00–16:00"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:229 scripts/ui/modals/month_close_modal.gd:36
@@ -1909,7 +1933,7 @@ msgstr ""
 msgid "Can't work the counter: %s."
 msgstr ""
 
-#: scripts/ui/modals/metro_modal.gd:62 scripts/ui/modals/registration_modal.gd:53 scripts/ui/modals/save_list_modal.gd:37 scripts/ui/modals/settlement_modal.gd:101
+#: scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:62 scripts/ui/modals/registration_modal.gd:53 scripts/ui/modals/save_list_modal.gd:37
 msgid "Cancel"
 msgstr ""
 
@@ -2071,6 +2095,10 @@ msgstr ""
 
 #: data/events/customer_return_first.json
 msgid "Cheaper now. Expect a lukewarm review."
+msgstr ""
+
+#: data/help/glossary.json data/help/help.json
+msgid "Check all six lending conditions before signing. A missed condition shows its gap and where to fix it."
 msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:29
@@ -2309,7 +2337,7 @@ msgstr ""
 msgid "Collect the money Crestline owes you"
 msgstr ""
 
-#: scripts/sim/bank.gd:84
+#: scripts/sim/bank.gd:106
 msgid "Come back when %s has %d days of statements, or a signed contract."
 msgstr ""
 
@@ -2347,6 +2375,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "Company OS: your business computer"
+msgstr ""
+
+#: scripts/sim/bank.gd:103
+msgid "Company days or an active contract"
 msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:68 scripts/ui/modals/registration_modal.gd:29
@@ -2403,6 +2435,10 @@ msgstr ""
 
 #: scripts/ui/modals/purchase_return_modal.gd:55
 msgid "Confirm cancellation"
+msgstr ""
+
+#: scripts/ui/modals/loan_signing_modal.gd:16
+msgid "Confirm loan signing"
 msgstr ""
 
 #: scripts/ui/modals/purchase_return_modal.gd:55
@@ -2545,8 +2581,12 @@ msgstr ""
 msgid "Credit score"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:23
+#: scripts/ui/modals/loan_modal.gd:24
 msgid "Credit score %d · %s"
+msgstr ""
+
+#: scripts/sim/bank.gd:99
+msgid "Credit score and lending ban"
 msgstr ""
 
 #: scripts/ui/modals/insolvency_modal.gd:71
@@ -2595,6 +2635,14 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:827
 msgid "Currency"
+msgstr ""
+
+#: scripts/ui/modals/loan_modal.gd:50
+msgid "Current %d days · required %d days · %d more days"
+msgstr ""
+
+#: scripts/ui/modals/loan_modal.gd:48 scripts/ui/modals/loan_modal.gd:52
+msgid "Current %s · required %s · gap %s"
 msgstr ""
 
 #: data/events/supplier_price_increase.json
@@ -3121,6 +3169,10 @@ msgstr ""
 msgid "Earn Your First Dollar"
 msgstr ""
 
+#: scripts/sim/bank.gd:108
+msgid "Earn about %s more gross profit through sales in Company OS, or add eligible collateral. Capacity is rounded down to $1,000 and capped at $250,000."
+msgstr ""
+
 #: scripts/ui/tutorial.gd:81
 msgid "Earn on the side"
 msgstr ""
@@ -3361,15 +3413,15 @@ msgstr ""
 msgid "Expression ▶"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:135
+#: scripts/frontend/character_creator.gd:136
 msgid "Eye colour"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:134
+#: scripts/frontend/character_creator.gd:135
 msgid "Eye shape"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:136
+#: scripts/frontend/character_creator.gd:137
 msgid "Eyebrows"
 msgstr ""
 
@@ -3405,11 +3457,11 @@ msgstr ""
 msgid "FYI personal seller accounts cap out at $2,500/month on ShopLane. Registered businesses don't."
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:122
+#: scripts/frontend/character_creator.gd:123
 msgid "Face"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:133
+#: scripts/frontend/character_creator.gd:134
 msgid "Face shape"
 msgstr ""
 
@@ -3989,15 +4041,15 @@ msgstr ""
 msgid "Haddad"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:122
+#: scripts/frontend/character_creator.gd:123
 msgid "Hair"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:140
+#: scripts/frontend/character_creator.gd:141
 msgid "Hair colour"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:139
+#: scripts/frontend/character_creator.gd:140
 msgid "Hairstyle"
 msgstr ""
 
@@ -4301,10 +4353,6 @@ msgstr ""
 msgid "I invest in companies, not ideas. Register one and we'll talk."
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:36
-msgid "I lend on cash flow and collateral: gross profit, money owed to you, signed contracts and stock."
-msgstr ""
-
 #: data/dialogue/marcus_lending.json
 msgid "I lend on cash flow and collateral: gross profit, money owed to you, signed contracts, stock."
 msgstr ""
@@ -4469,7 +4517,7 @@ msgstr ""
 msgid "In the Clearing Crisis (Year 5), money sent abroad takes days to land, and an importer ships only once it has."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:462 scripts/ui/phone_ui.gd:259
+#: scripts/ui/modals/company_os.gd:462 scripts/ui/phone_ui.gd:261
 msgid "In transit"
 msgstr ""
 
@@ -4521,7 +4569,7 @@ msgstr ""
 msgid "Interest"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:42
+#: scripts/ui/modals/loan_modal.gd:62
 msgid "Interest (APR)"
 msgstr ""
 
@@ -4925,7 +4973,7 @@ msgstr ""
 msgid "Late fees"
 msgstr ""
 
-#: scripts/sim/bank.gd:175
+#: scripts/sim/bank.gd:238
 msgid "Late payment fee — loan %s"
 msgstr ""
 
@@ -5029,6 +5077,10 @@ msgstr ""
 msgid "Lena"
 msgstr ""
 
+#: scripts/sim/bank.gd:107
+msgid "Lending capacity"
+msgstr ""
+
 #: scripts/ui/minigames/barista_game.gd:10
 msgid "Leo"
 msgstr ""
@@ -5073,7 +5125,7 @@ msgstr ""
 msgid "Licensing Officer"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:270
+#: scripts/ui/phone_ui.gd:272
 msgid "Life Timeline"
 msgstr ""
 
@@ -5181,20 +5233,32 @@ msgstr ""
 msgid "Loading dock"
 msgstr ""
 
-#: scripts/sim/bank.gd:148
+#: scripts/sim/bank.gd:211
 msgid "Loan %s repaid in full."
 msgstr ""
 
-#: scripts/sim/bank.gd:149
+#: scripts/sim/bank.gd:212
 msgid "Loan %s repaid in full. Your credit score went up."
 msgstr ""
 
-#: scripts/sim/bank.gd:133
+#: scripts/sim/bank.gd:196
 msgid "Loan %s — extra repayment"
 msgstr ""
 
-#: scripts/sim/bank.gd:161
+#: scripts/sim/bank.gd:224
 msgid "Loan %s — monthly payment"
+msgstr ""
+
+#: scripts/ui/modals/loan_modal.gd:159
+msgid "Loan appointment"
+msgstr ""
+
+#: scripts/sim/bank.gd:151
+msgid "Loan appointment: %s. Go to Marcus Reed's manager desk at Nexus Bank, Financial District. If you miss the slot, book again at the lending sign."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Loan eligibility"
 msgstr ""
 
 #: scripts/sim/forecast.gd:49
@@ -5341,10 +5405,6 @@ msgstr ""
 msgid "Luxury Heights"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:34
-msgid "MARCUS REED"
-msgstr ""
-
 #: scripts/ui/modals/company_os.gd:159
 msgid "MONTHLY PROFIT"
 msgstr ""
@@ -5421,7 +5481,7 @@ msgstr ""
 msgid "Marcus Reed here. Big invoices on long terms are how profitable companies run out of cash. My door's open, weekdays 1 to 4."
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:64
+#: scripts/ui/modals/loan_modal.gd:84
 msgid "Marcus Reed signs loans in person (weekdays 13:00–16:00, Nexus Bank)."
 msgstr ""
 
@@ -5465,7 +5525,7 @@ msgstr ""
 msgid "Masculine"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:131
+#: scripts/frontend/character_creator.gd:132
 msgid "Masculine, feminine or neutral changes the body shape only. There are no ability differences."
 msgstr ""
 
@@ -5515,6 +5575,10 @@ msgstr ""
 
 #: data/story/chapters.json
 msgid "Meet Daniel Wong at Nexus Co-work (Thursdays 17:00–20:00)"
+msgstr ""
+
+#: scripts/ui/modals/loan_modal.gd:93
+msgid "Meet Marcus Reed now"
 msgstr ""
 
 #: scripts/ui/hud.gd:108 scripts/ui/modals/company_os.gd:1218
@@ -5641,7 +5705,7 @@ msgstr ""
 msgid "Month close"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:260
+#: scripts/ui/phone_ui.gd:262
 msgid "Month sales"
 msgstr ""
 
@@ -5649,7 +5713,7 @@ msgstr ""
 msgid "Monthly hot desk ($350)"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:57
+#: scripts/ui/modals/loan_modal.gd:77
 msgid "Monthly payment"
 msgstr ""
 
@@ -5673,7 +5737,7 @@ msgstr ""
 msgid "Morale drops when pay is late or work piles up."
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:148
+#: scripts/frontend/character_creator.gd:149
 msgid "More outfits (Executive, Luxury Citywear, Travel, Formal Evening, Logistics) are sold at Threadline on Shopping Street. Accessories (hats, bags, jewellery, watches) — planned."
 msgstr ""
 
@@ -5697,7 +5761,7 @@ msgstr ""
 msgid "Moss"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:137
+#: scripts/frontend/character_creator.gd:138
 msgid "Mouth"
 msgstr ""
 
@@ -5845,11 +5909,11 @@ msgstr ""
 msgid "Nexus Bank"
 msgstr ""
 
-#: scripts/sim/bank.gd:209
+#: scripts/sim/bank.gd:275
 msgid "Nexus Bank called loan %s and it could not be repaid."
 msgstr ""
 
-#: scripts/sim/bank.gd:186
+#: scripts/sim/bank.gd:249
 msgid "Nexus Bank called loan %s. %s due in 7 days."
 msgstr ""
 
@@ -5857,7 +5921,7 @@ msgstr ""
 msgid "Nexus Bank guarantees the payment to the supplier's bank. They ship on the bank's word in about 2 days."
 msgstr ""
 
-#: scripts/sim/bank.gd:115
+#: scripts/sim/bank.gd:178
 msgid "Nexus Bank loan %s: %s over %d months at %s"
 msgstr ""
 
@@ -5953,6 +6017,10 @@ msgstr ""
 msgid "No gigs in progress. Pick one below."
 msgstr ""
 
+#: scripts/sim/bank.gd:100
+msgid "No lending ban"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:330
 msgid "No listings yet."
 msgstr ""
@@ -6021,7 +6089,7 @@ msgstr ""
 msgid "No such gig in progress."
 msgstr ""
 
-#: scripts/sim/bank.gd:129
+#: scripts/sim/bank.gd:192
 msgid "No such loan."
 msgstr ""
 
@@ -6053,7 +6121,7 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:71
+#: scripts/ui/modals/loan_modal.gd:109
 msgid "None."
 msgstr ""
 
@@ -6085,7 +6153,7 @@ msgstr ""
 msgid "Not enough cash for return shipping: %s."
 msgstr ""
 
-#: scripts/sim/bank.gd:132 scripts/sim/company.gd:105
+#: scripts/sim/bank.gd:195 scripts/sim/company.gd:105
 msgid "Not enough cash."
 msgstr ""
 
@@ -6125,7 +6193,7 @@ msgstr ""
 msgid "Not today."
 msgstr ""
 
-#: scripts/sim/bank.gd:69
+#: scripts/sim/bank.gd:102
 msgid "Not while a loan is in arrears."
 msgstr ""
 
@@ -6185,7 +6253,7 @@ msgstr ""
 msgid "Nothing to resolve."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:253
+#: scripts/ui/phone_ui.gd:255
 msgid "Notifications only.\nManage at a desk: Company OS."
 msgstr ""
 
@@ -6429,6 +6497,10 @@ msgstr ""
 msgid "Open Sales"
 msgstr ""
 
+#: scripts/sim/bank.gd:98
+msgid "Open a business account at the Nexus Bank counter, Financial District."
+msgstr ""
+
 #: data/help/help.json
 msgid "Open a business account for a registered company, and move money between you and the company."
 msgstr ""
@@ -6437,12 +6509,16 @@ msgstr ""
 msgid "Open a business account for {company} at Nexus Bank (Financial District)"
 msgstr ""
 
-#: scripts/sim/bank.gd:64
+#: scripts/sim/bank.gd:98
 msgid "Open a business account with us first."
 msgstr ""
 
 #: scripts/ui/modals/bank_modal.gd:39
 msgid "Open account with %s"
+msgstr ""
+
+#: scripts/ui/modals/loan_modal.gd:86
+msgid "Open an account at the Nexus Bank counter"
 msgstr ""
 
 #: scripts/ui/modals/bank_modal.gd:34
@@ -6573,7 +6649,7 @@ msgstr ""
 msgid "Other operating expense"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:122 scripts/frontend/character_creator.gd:143
+#: scripts/frontend/character_creator.gd:123 scripts/frontend/character_creator.gd:144
 msgid "Outfit"
 msgstr ""
 
@@ -6587,6 +6663,10 @@ msgstr ""
 
 #: scripts/sim/living.gd:33
 msgid "Overdraft fee"
+msgstr ""
+
+#: scripts/sim/bank.gd:101
+msgid "Overdue or called loans"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:6
@@ -6749,7 +6829,7 @@ msgstr ""
 msgid "Packed well"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:258
+#: scripts/ui/phone_ui.gd:260
 msgid "Packed, not shipped"
 msgstr ""
 
@@ -6917,7 +6997,11 @@ msgstr ""
 msgid "Pay again by wire ({reroute_cost})"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:87
+#: scripts/sim/bank.gd:100
+msgid "Pay bills on time. Lending ban ends: %s."
+msgstr ""
+
+#: scripts/ui/modals/loan_modal.gd:125
 msgid "Pay off"
 msgstr ""
 
@@ -6941,7 +7025,7 @@ msgstr ""
 msgid "Paying your staff their wages, every Friday at 17:00 from the company account."
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:80
+#: scripts/ui/modals/loan_modal.gd:118
 msgid "Payment"
 msgstr ""
 
@@ -7041,7 +7125,7 @@ msgstr ""
 msgid "Personal Banker"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:262
+#: scripts/ui/phone_ui.gd:264
 msgid "Personal cap"
 msgstr ""
 
@@ -7261,7 +7345,7 @@ msgstr ""
 msgid "Premium consumers"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:129
+#: scripts/frontend/character_creator.gd:130
 msgid "Presentation"
 msgstr ""
 
@@ -7689,6 +7773,10 @@ msgstr ""
 msgid "Register as an employer here before you hire staff."
 msgstr ""
 
+#: scripts/sim/bank.gd:96
+msgid "Register at City Hall, Civic Center."
+msgstr ""
+
 #: scripts/ui/modals/permits_modal.gd:36
 msgid "Register the company first."
 msgstr ""
@@ -7711,6 +7799,10 @@ msgstr ""
 
 #: scripts/ui/modals/permits_modal.gd:167
 msgid "Registered as an employer (%s). You can post jobs in Company OS → People."
+msgstr ""
+
+#: scripts/sim/bank.gd:95
+msgid "Registered company"
 msgstr ""
 
 #: data/regions/almeria.json data/regions/auroria.json data/regions/karu.json data/regions/lumina.json
@@ -7845,8 +7937,12 @@ msgstr ""
 msgid "Renting an office"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:84
+#: scripts/ui/modals/loan_modal.gd:122
 msgid "Repay %s"
+msgstr ""
+
+#: scripts/sim/bank.gd:102
+msgid "Repay overdue loans in this screen; if the company is in insolvency, use the recovery options."
 msgstr ""
 
 #: scripts/ui/modals/save_list_modal.gd:34 scripts/ui/modals/save_list_modal.gd:65
@@ -8313,11 +8409,11 @@ msgstr ""
 msgid "Save cash. Sales will dip."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:279
+#: scripts/ui/phone_ui.gd:281
 msgid "Save game"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:280
+#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:282
 msgid "Save now"
 msgstr ""
 
@@ -8329,7 +8425,7 @@ msgstr ""
 msgid "Saved %s"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:282
+#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:284
 msgid "Saved (slot %d)."
 msgstr ""
 
@@ -8545,7 +8641,7 @@ msgstr ""
 msgid "ShopLane Ads: a big brand campaign is bidding up placements."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:252
+#: scripts/ui/phone_ui.gd:254
 msgid "ShopLane Seller"
 msgstr ""
 
@@ -8649,6 +8745,10 @@ msgstr ""
 msgid "Sign the lease"
 msgstr ""
 
+#: scripts/ui/modals/loan_signing_modal.gd:9
+msgid "Sign the loan"
+msgstr ""
+
 #: scripts/ui/minigames/clerk_forms_game.gd:69
 msgid "Signature"
 msgstr ""
@@ -8659,6 +8759,10 @@ msgstr ""
 
 #: scripts/sim/contracts.gd:137
 msgid "Signed contract %s with %s: %s."
+msgstr ""
+
+#: data/help/help.json scripts/ui/modals/loan_signing_modal.gd:15
+msgid "Signing takes the afternoon; funds arrive today. First payment in 30 days."
 msgstr ""
 
 #: scripts/ui/minigames/parcel_sort_game.gd:9
@@ -8697,7 +8801,7 @@ msgstr ""
 msgid "Skill %d/5 · asks %s/week · %s"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:130
+#: scripts/frontend/character_creator.gd:131
 msgid "Skin tone"
 msgstr ""
 
@@ -9289,7 +9393,7 @@ msgstr ""
 msgid "Tape seam %d"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:127 scripts/ui/phone_ui.gd:232
+#: scripts/ui/phone_ui.gd:127 scripts/ui/phone_ui.gd:234
 msgid "Tasks"
 msgstr ""
 
@@ -9793,7 +9897,7 @@ msgstr ""
 msgid "This contract belongs to another company."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:287
+#: scripts/ui/phone_ui.gd:289
 msgid "This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen."
 msgstr ""
 
@@ -9901,7 +10005,7 @@ msgstr ""
 msgid "To Startup Hub"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:462 scripts/ui/phone_ui.gd:257
+#: scripts/ui/modals/company_os.gd:462 scripts/ui/phone_ui.gd:259
 msgid "To pack"
 msgstr ""
 
@@ -9941,7 +10045,7 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:58
+#: scripts/ui/modals/loan_modal.gd:78
 msgid "Total interest"
 msgstr ""
 
@@ -10021,7 +10125,7 @@ msgstr ""
 msgid "Two hours behind your own counter: %d customers served."
 msgstr ""
 
-#: scripts/sim/bank.gd:185
+#: scripts/sim/bank.gd:248
 msgid "Two missed payments. The bank has called loan %s: %s is due in full within 7 days."
 msgstr ""
 
@@ -10097,7 +10201,7 @@ msgstr ""
 msgid "Unknown supply pack."
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:41
+#: scripts/ui/modals/loan_modal.gd:61
 msgid "Up to"
 msgstr ""
 
@@ -10115,6 +10219,10 @@ msgstr ""
 
 #: scripts/sim/company.gd:33
 msgid "Use letters or numbers."
+msgstr ""
+
+#: scripts/ui/modals/loan_modal.gd:100
+msgid "Use the Metro to Financial District, then enter Nexus Bank and go to the manager desk."
 msgstr ""
 
 #: data/help/help.json
@@ -10257,6 +10365,14 @@ msgstr ""
 msgid "Victor: \"You'll get it, with conditions. Read them twice.\""
 msgstr ""
 
+#: scripts/ui/modals/loan_modal.gd:86
+msgid "View City Hall on city map"
+msgstr ""
+
+#: scripts/ui/modals/loan_modal.gd:97
+msgid "View Nexus Bank on city map"
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Visit Nexus Co-work in Startup Hub (walk east)"
 msgstr ""
@@ -10273,7 +10389,7 @@ msgstr ""
 msgid "Visitors handled correctly: %d / %d"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:38
+#: scripts/ui/modals/loan_modal.gd:54 scripts/ui/modals/loan_modal.gd:58
 msgid "WHAT YOUR BOOKS SUPPORT"
 msgstr ""
 
@@ -10381,7 +10497,7 @@ msgstr ""
 msgid "Watches"
 msgstr ""
 
-#: scripts/sim/bank.gd:62
+#: scripts/sim/bank.gd:96
 msgid "We lend to registered companies."
 msgstr ""
 
@@ -10609,7 +10725,7 @@ msgstr ""
 msgid "YOUR JOB"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:68
+#: scripts/ui/modals/loan_modal.gd:106
 msgid "YOUR LOANS"
 msgstr ""
 
@@ -10909,7 +11025,7 @@ msgstr ""
 msgid "Your bed"
 msgstr ""
 
-#: scripts/sim/bank.gd:87
+#: scripts/sim/bank.gd:109
 msgid "Your books don't support a loan yet. Show me more gross profit."
 msgstr ""
 
@@ -10933,7 +11049,7 @@ msgstr ""
 msgid "Your counter — %s"
 msgstr ""
 
-#: scripts/sim/bank.gd:66
+#: scripts/sim/bank.gd:100
 msgid "Your credit history needs time to recover."
 msgstr ""
 
@@ -11017,7 +11133,7 @@ msgstr ""
 msgid "Your payment is stuck on the frozen bridge until about %s. Pay again by another rail to get the goods moving; the frozen money comes back when the bridge reopens."
 msgstr ""
 
-#: scripts/sim/bank.gd:188
+#: scripts/sim/bank.gd:251
 msgid "Your payment on loan %s bounced. We'll try again in 3 days. It's cheaper to call me before this happens."
 msgstr ""
 
@@ -11409,11 +11525,11 @@ msgstr ""
 msgid "leasing agent"
 msgstr ""
 
-#: scripts/sim/bank.gd:182
+#: scripts/sim/bank.gd:245
 msgid "loan called"
 msgstr ""
 
-#: scripts/sim/bank.gd:146
+#: scripts/sim/bank.gd:209
 msgid "loan repaid"
 msgstr ""
 
@@ -11453,11 +11569,11 @@ msgstr ""
 msgid "media group"
 msgstr ""
 
-#: scripts/sim/bank.gd:96
+#: scripts/sim/bank.gd:82
 msgid "minus existing debt"
 msgstr ""
 
-#: scripts/sim/bank.gd:178
+#: scripts/sim/bank.gd:241
 msgid "missed payment"
 msgstr ""
 
@@ -11501,7 +11617,7 @@ msgstr ""
 msgid "net %d"
 msgstr ""
 
-#: scripts/sim/bank.gd:118
+#: scripts/sim/bank.gd:181
 msgid "new credit"
 msgstr ""
 
@@ -11565,7 +11681,7 @@ msgstr ""
 msgid "on the house (staff)"
 msgstr ""
 
-#: scripts/sim/bank.gd:167
+#: scripts/sim/bank.gd:230
 msgid "on-time payment"
 msgstr ""
 
@@ -11589,7 +11705,7 @@ msgstr ""
 msgid "paid on delivery"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:265
+#: scripts/ui/phone_ui.gd:267
 msgid "paused: cap"
 msgstr ""
 

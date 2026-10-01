@@ -17,6 +17,9 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "loan_access":
+		await _loan_access_fixture()
+		return
 	if _arg("from") == "interaction_focus":
 		await _interaction_focus_fixture()
 		return
@@ -86,6 +89,96 @@ func _interaction_focus_fixture() -> void:
 	await bot.click_named("Sleep")
 	await bot.until(func(): return not (UIRoot.top_modal() is SleepModal), 8.0)
 	bot.expect(Clock.hour() == 7, "real sleep input works after popup closes")
+
+
+## Lending input regression. Only travel, age and stock are fixtures; counter, booking and signing use real input.
+func _loan_access_fixture() -> void:
+	await bot.wait(4.0)   # let the arrival overlay finish before collecting lending screenshots
+	bot.step("Loan brochure outside the bank: all conditions and navigation")
+	UIRoot._suppress_decisions = true
+	UIRoot.tutorial.st()["off"] = true
+	Actions.run("loans_info", {})
+	await bot.wait(0.7)
+	var m := UIRoot.top_modal() as LoanModal
+	bot.expect(m != null and m.find_child("TakeLoan", true, false) == null, "unregistered player sees checklist, no borrow")
+	await bot.shot("loan_ineligible_top")
+	await bot.click_named("PrerequisiteCompany")
+	bot.expect(UIRoot.top_modal() is CityMapModal and (UIRoot.top_modal() as CityMapModal).sel == "civic_center", "first missing company action opens City Hall's district")
+	await close_modal()
+	var scroll: ScrollContainer = m.find_children("*", "ScrollContainer", true, false)[0]
+	scroll.scroll_vertical = 10000
+	await bot.wait(0.5)
+	await bot.shot("loan_ineligible_formula")
+	await bot.click_named("RouteNexusBank")
+	bot.expect(UIRoot.top_modal() is CityMapModal, "brochure opens the Financial District map")
+	await close_modal()
+	await close_modal()
+	bot.step("Permanent manager sign: off-duty booking and phone task")
+	GameState.data["clock"]["minutes"] = Clock.at_day_time(1, 10 * 60)
+	SceneRouter._enter("interior", "nexus_bank", "door", "up")
+	await bot.wait(0.7)
+	var sign: Interactable = bot.find_interactable(func(n): return n.params.get("id", "") == "lending_sign")
+	await bot.walk_to(sign.global_position + Vector2(0, 15), 4.0, 40.0)
+	await bot.shot("loan_permanent_manager_sign")
+	await bot.use(func(n): return n.params.get("id", "") == "lending_sign", "lending sign")
+	await bot.click_named("BookLoanAppointment")
+	await bot.wait(0.5)
+	bot.expect(Bank.marcus_on_duty(int(Bank.B()["appointment"])), "appointment is in the next actual working slot")
+	await bot.shot("loan_marcus_off_duty")
+	await close_modal()
+	await close_modal()
+	UIRoot.phone.open()
+	UIRoot.phone._open_app("tasks")
+	await bot.wait(0.6)
+	await bot.shot("loan_phone_reminder")
+	UIRoot.phone.close()
+	bot.step("Marcus's ineligible conversation opens the same read-only checklist")
+	Clock.advance_to(Clock.at_day_time(0, 13 * 60))
+	await bot.until(func(): return Actions.npc_present("marcus"), 3.0)
+	await bot.use(func(n): return n.action == "talk" and n.params.get("npc", "") == "marcus", "Marcus Reed")
+	await dialogue()
+	bot.expect(UIRoot.top_modal() is LoanModal, "refusal dialogue leads to actionable checklist")
+	bot.expect(UIRoot.top_modal().find_child("TakeLoan", true, false) == null, "NPC refusal cannot bypass eligibility")
+	await close_modal()
+	bot.step("New company opens account at counter, then applies from the same counter")
+	bot.expect(Company.register("Riverlight Goods", "retail_online", "22 Founders Lane")["ok"], "fresh company registration")
+	Actions.run("loans_info", {})
+	await bot.wait(0.4)
+	await bot.click_named("PrerequisiteAccount")
+	bot.expect(UIRoot.top_modal() is BankModal, "missing account action opens the actual bank counter")
+	await bot.click_named("OpenAccount")
+	bot.expect(GameState.flag("business_account_opened"), "account opened through teller input")
+	await close_modal()
+	var cid := GameState.company_id()
+	# Eligibility fixture: existing rules require statements or a contract, plus real book collateral.
+	GameState.data["entities"][cid]["founded"] = Clock.now() - 14 * Clock.DAY
+	Ledger.post(cid, "Lending tour stock fixture", [{"acct": "inventory", "dr": 6000}, {"acct": "cash", "cr": 6000}])
+	Clock.advance_to(Clock.at_day_time(0, 13 * 60))
+	await bot.use_action("bank_counter", "teller")
+	await bot.click_named("Lending")
+	await bot.click_named("MeetMarcus")
+	bot.expect(UIRoot.top_modal().find_child("TakeLoan", true, false) != null, "counter reaches signing without speaking to an NPC")
+	var cash_before := Ledger.cash(cid)
+	var time_before := Clock.now()
+	await bot.click_named("TakeLoan")
+	await bot.wait(0.5)
+	var signing: LoanSigningModal = UIRoot.top_modal()
+	bot.expect(signing.panel.get_global_rect().end.y <= 360.0 and signing.panel_size.y == 0, "translated confirmation fits naturally without fixed height")
+	await bot.shot("loan_signing_confirmation")
+	await bot.click_named("CancelLoan")
+	bot.expect(Ledger.cash(cid) == cash_before and Clock.now() == time_before, "cancel changes neither money nor time")
+	await bot.click_named("TakeLoan")
+	await bot.click_named("ConfirmLoan")
+	await bot.wait(0.8)
+	bot.expect(Ledger.cash(cid) > cash_before, "loan funds arrive today")
+	bot.expect(Clock.now() - time_before <= Clock.DAY and Clock.hour() == 17, "signing ends at 17:00 the same day")
+	var loan: Dictionary = Bank.loans(cid)[0]
+	bot.expect(int(loan["next"]) - int(loan["opened"]) == 30 * Clock.DAY and int(loan["paid_n"]) == 0, "first repayment remains thirty days away")
+	bot.expect(not Bank.B().has("appointment") and Sim.pending("bank.appointment").is_empty(), "meeting clears appointment and scheduled reminder")
+	bot.expect(Ledger.check_balanced(), "loan input flow keeps books balanced")
+	await bot.shot("loan_success_today")
+	await close_modal()
+	await close_modal()
 
 
 func _summary() -> void:
@@ -871,7 +964,10 @@ func _chapters_4_to_6() -> void:
 	await bot.shot("loan_offer")
 	await bot.click_named("Amt_50", 2.0)
 	await bot.click_named("Term_12", 2.0)
+	var signing_started := Clock.now()
 	await bot.click_named("TakeLoan", 2.0)
+	await bot.click_named("ConfirmLoan", 2.0)
+	bot.expect(Clock.now() - signing_started < Clock.DAY, "loan signing finishes the same afternoon")
 	await bot.wait(0.5)
 	await bot.shot("loan_taken")
 	await close_modal()
