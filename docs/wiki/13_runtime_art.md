@@ -241,3 +241,77 @@
 - `world_detail/events/rail_frozen.png`
 - `events/acquisition_offer.png`
 - `world_detail/events/acquisition_offer.png`
+
+## UI 解析度與表面品質 · 2026-10-01
+
+美術狀態：43 個語意圖示、23 面板和外框、固定格位 icons_atlas 均交 native 和4× PNG/import，共67組。SVG直接輸出雙尺寸，logical size及atlas位置不變；panel_glass有輕微透明，手機和頭像內容開口不變。來源及檢查在 `docs/art_sources/ui_quality_20261001/`，真正 UIK狀態畫面及巡禮對比在 `evidence/20261001_ui_quality/`。
+
+原尺寸UI會立即替換；4×接線須保持logical顯示矩形和9-slice邊距，交Claude處理，本批不改UI程式、字型、流程或按鈕用途。兩張既有app icon未動。
+
+圖示檔名索引：
+- `cash`
+- `clock`
+- `calendar`
+- `sun`
+- `moon`
+- `objective`
+- `star`
+- `home`
+- `company`
+- `map`
+- `people`
+- `tasks`
+- `phone`
+- `inventory`
+- `parcel`
+- `orders`
+- `finance`
+- `contracts`
+- `bank`
+- `warning`
+- `check`
+- `lock`
+- `metro`
+- `mail`
+- `settings`
+- `save`
+- `laptop`
+- `coffee`
+- `arrow_right`
+- `close`
+- `plus`
+- `minus`
+- `walk`
+- `shop`
+- `civic`
+- `startup`
+- `river`
+- `financial`
+- `dollar`
+- `info`
+- `world`
+- `sleep`
+- `shirt`
+- `bar_bg`
+- `bar_fill`
+- `bar_fill_green`
+- `button`
+- `button_danger`
+- `button_disabled`
+- `button_hover`
+- `button_pressed`
+- `button_primary`
+- `button_primary_hover`
+- `card`
+- `card_gold`
+- `field`
+- `header`
+- `inset`
+- `panel`
+- `panel_glass`
+- `phone_frame`
+- `portrait_frame`
+- `prompt_key`
+- `tab`
+- `tab_active`
+- `tooltip`
