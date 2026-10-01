@@ -102,6 +102,9 @@ func _loan_access_fixture() -> void:
 	var m := UIRoot.top_modal() as LoanModal
 	bot.expect(m != null and m.find_child("TakeLoan", true, false) == null, "unregistered player sees checklist, no borrow")
 	await bot.shot("loan_ineligible_top")
+	await bot.click_named("PrerequisiteCompany")
+	bot.expect(UIRoot.top_modal() is CityMapModal and (UIRoot.top_modal() as CityMapModal).sel == "civic_center", "first missing company action opens City Hall's district")
+	await close_modal()
 	var scroll: ScrollContainer = m.find_children("*", "ScrollContainer", true, false)[0]
 	scroll.scroll_vertical = 10000
 	await bot.wait(0.5)
@@ -139,7 +142,10 @@ func _loan_access_fixture() -> void:
 	await close_modal()
 	bot.step("New company opens account at counter, then applies from the same counter")
 	bot.expect(Company.register("Riverlight Goods", "retail_online", "22 Founders Lane")["ok"], "fresh company registration")
-	await bot.use_action("bank_counter", "teller")
+	Actions.run("loans_info", {})
+	await bot.wait(0.4)
+	await bot.click_named("PrerequisiteAccount")
+	bot.expect(UIRoot.top_modal() is BankModal, "missing account action opens the actual bank counter")
 	await bot.click_named("OpenAccount")
 	bot.expect(GameState.flag("business_account_opened"), "account opened through teller input")
 	await close_modal()

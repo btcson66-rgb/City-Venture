@@ -177,7 +177,7 @@ msgstr ""
 msgid "%d min"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:60
+#: scripts/ui/modals/loan_modal.gd:73
 msgid "%d months"
 msgstr ""
 
@@ -337,7 +337,7 @@ msgstr ""
 msgid "%s is full: %d of %d units, counting stock on the way."
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:158
+#: scripts/ui/modals/loan_modal.gd:198
 msgid "%s is in the company account. First payment in 30 days."
 msgstr ""
 
@@ -353,7 +353,7 @@ msgstr ""
 msgid "%s last 7 days"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:98
+#: scripts/ui/modals/loan_modal.gd:118
 msgid "%s on %s"
 msgstr ""
 
@@ -1293,7 +1293,7 @@ msgstr ""
 msgid "Bakery delivery: %d pastries"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:97
+#: scripts/ui/modals/loan_modal.gd:117
 msgid "Balance"
 msgstr ""
 
@@ -1445,7 +1445,7 @@ msgstr ""
 msgid "Bold. Love it."
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:73
+#: scripts/ui/modals/loan_modal.gd:89 scripts/ui/modals/loan_modal.gd:93
 msgid "Book an appointment"
 msgstr ""
 
@@ -1453,7 +1453,7 @@ msgstr ""
 msgid "Boring and safe. My favourite. You'll find it when you pay Lumina: Company OS, Operations."
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:67
+#: scripts/ui/modals/loan_modal.gd:80
 msgid "Borrow %s"
 msgstr ""
 
@@ -2637,7 +2637,11 @@ msgstr ""
 msgid "Currency"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:39
+#: scripts/ui/modals/loan_modal.gd:50
+msgid "Current %d days · required %d days · %d more days"
+msgstr ""
+
+#: scripts/ui/modals/loan_modal.gd:48 scripts/ui/modals/loan_modal.gd:52
 msgid "Current %s · required %s · gap %s"
 msgstr ""
 
@@ -4565,7 +4569,7 @@ msgstr ""
 msgid "Interest"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:49
+#: scripts/ui/modals/loan_modal.gd:62
 msgid "Interest (APR)"
 msgstr ""
 
@@ -5245,7 +5249,7 @@ msgstr ""
 msgid "Loan %s — monthly payment"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:135
+#: scripts/ui/modals/loan_modal.gd:159
 msgid "Loan appointment"
 msgstr ""
 
@@ -5477,7 +5481,7 @@ msgstr ""
 msgid "Marcus Reed here. Big invoices on long terms are how profitable companies run out of cash. My door's open, weekdays 1 to 4."
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:71
+#: scripts/ui/modals/loan_modal.gd:84
 msgid "Marcus Reed signs loans in person (weekdays 13:00–16:00, Nexus Bank)."
 msgstr ""
 
@@ -5573,7 +5577,7 @@ msgstr ""
 msgid "Meet Daniel Wong at Nexus Co-work (Thursdays 17:00–20:00)"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:73
+#: scripts/ui/modals/loan_modal.gd:93
 msgid "Meet Marcus Reed now"
 msgstr ""
 
@@ -5709,7 +5713,7 @@ msgstr ""
 msgid "Monthly hot desk ($350)"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:64
+#: scripts/ui/modals/loan_modal.gd:77
 msgid "Monthly payment"
 msgstr ""
 
@@ -6117,7 +6121,7 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:89
+#: scripts/ui/modals/loan_modal.gd:109
 msgid "None."
 msgstr ""
 
@@ -6511,6 +6515,10 @@ msgstr ""
 
 #: scripts/ui/modals/bank_modal.gd:39
 msgid "Open account with %s"
+msgstr ""
+
+#: scripts/ui/modals/loan_modal.gd:86
+msgid "Open an account at the Nexus Bank counter"
 msgstr ""
 
 #: scripts/ui/modals/bank_modal.gd:34
@@ -6993,7 +7001,7 @@ msgstr ""
 msgid "Pay bills on time. Lending ban ends: %s."
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:105
+#: scripts/ui/modals/loan_modal.gd:125
 msgid "Pay off"
 msgstr ""
 
@@ -7017,7 +7025,7 @@ msgstr ""
 msgid "Paying your staff their wages, every Friday at 17:00 from the company account."
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:98
+#: scripts/ui/modals/loan_modal.gd:118
 msgid "Payment"
 msgstr ""
 
@@ -7929,7 +7937,7 @@ msgstr ""
 msgid "Renting an office"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:102
+#: scripts/ui/modals/loan_modal.gd:122
 msgid "Repay %s"
 msgstr ""
 
@@ -10037,7 +10045,7 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:65
+#: scripts/ui/modals/loan_modal.gd:78
 msgid "Total interest"
 msgstr ""
 
@@ -10193,7 +10201,7 @@ msgstr ""
 msgid "Unknown supply pack."
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:48
+#: scripts/ui/modals/loan_modal.gd:61
 msgid "Up to"
 msgstr ""
 
@@ -10213,7 +10221,7 @@ msgstr ""
 msgid "Use letters or numbers."
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:80
+#: scripts/ui/modals/loan_modal.gd:100
 msgid "Use the Metro to Financial District, then enter Nexus Bank and go to the manager desk."
 msgstr ""
 
@@ -10357,7 +10365,11 @@ msgstr ""
 msgid "Victor: \"You'll get it, with conditions. Read them twice.\""
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:77
+#: scripts/ui/modals/loan_modal.gd:86
+msgid "View City Hall on city map"
+msgstr ""
+
+#: scripts/ui/modals/loan_modal.gd:97
 msgid "View Nexus Bank on city map"
 msgstr ""
 
@@ -10377,7 +10389,7 @@ msgstr ""
 msgid "Visitors handled correctly: %d / %d"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:41 scripts/ui/modals/loan_modal.gd:45
+#: scripts/ui/modals/loan_modal.gd:54 scripts/ui/modals/loan_modal.gd:58
 msgid "WHAT YOUR BOOKS SUPPORT"
 msgstr ""
 
@@ -10713,7 +10725,7 @@ msgstr ""
 msgid "YOUR JOB"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:86
+#: scripts/ui/modals/loan_modal.gd:106
 msgid "YOUR LOANS"
 msgstr ""
 

@@ -23,7 +23,7 @@
 
 | 檔案 | 證據 |
 |---|---|
-| 08_loan_ineligible_top.jpg | 不合格清單：條件、目前值、門檻、差額與辦理地點 |
+| 08_loan_ineligible_top.jpg | #73 審查修正：是／否條件只顯示勾叉與下一步；數字條件保留，額度以金額格式呈現，天數顯示還差幾天；未登記時市政廳為主要動作、預約為次要動作 |
 | 09_loan_ineligible_formula.jpg | 額度條件與完整五項公式、毛利差額建議 |
 | 10_loan_permanent_manager_sign.jpg | 經理桌旁可見資訊架、永久互動與值班時段 |
 | 11_loan_marcus_off_duty.jpg | 非值班時可預約，顯示日期與辦理地點 |
@@ -31,3 +31,14 @@
 | 13_loan_signing_confirmation.jpg | 動態高度確認框，事前說明時間成本及首期日期 |
 | 14_loan_success_today.jpg | 當日 17:00 入帳、貸款餘額與 30 天後首期 |
 | zh_CN_signing_confirmation.jpg | 簡中確認文字與可見按鈕 |
+
+## #73 審查修正驗證
+
+公司／帳戶／逾期條件移除 0／1 門檻列，capacity 的目前值、門檻與差額均使用 `Fmt.money0`，age 明示「還差 N 天」。第一個未達成的公司／帳戶條件成為主要按鈕；公司動作選取市政廳所在的城市地圖區域，銀行內開戶動作開啟既有櫃台，銀行外則提供銀行地圖指引。預約保留為次要按鈕。
+
+- Godot 4.5.1 單元測試：`267/267 tests passed in 15.9s`（review-unit.log、review-unit.xml）。新增布林列／金額與天數格式、公司優先於帳戶及預約次要樣式回歸。
+- 繁中貸款操作 tour：`0 failure(s) · 41.5s real`（review-loan-tour-zh_TW.log）。新增實際點擊市政廳指引與開戶主要按鈕，保留預約、會面與簽約流程檢查。08 截圖從本次 tour 重新產生，JPG 品質 85。
+- 簡中貸款操作 tour：`0 failure(s) · 41.4s real`（review-loan-tour-zh_CN.log）。兩個 tour 的語言稽核均只列出既有語言選項 `English`，新增文字漏譯 0；結果與稽核 JSON 保留為 review-loan-tour_* 報告。
+- `python tools/i18n_extract.py --check`：`3053 msgids · zh_TW translated 3053 · missing 0 · unused 119`（review-i18n-check.log）。
+
+本次為貸款介面審查回歸；前述完整 walkthrough 與打包結果屬原交件驗證，本次未重跑。

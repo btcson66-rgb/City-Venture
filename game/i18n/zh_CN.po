@@ -178,7 +178,7 @@ msgstr "近 7 天 %d"
 msgid "%d min"
 msgstr "%d 分钟"
 
-#: scripts/ui/modals/loan_modal.gd:60
+#: scripts/ui/modals/loan_modal.gd:73
 msgid "%d months"
 msgstr "%d 个月"
 
@@ -338,7 +338,7 @@ msgstr "%s 目前没开。营业时间 %s–%s，%s。"
 msgid "%s is full: %d of %d units, counting stock on the way."
 msgstr "%s 已经放满了：%d / %d 件（含运送中的货）。"
 
-#: scripts/ui/modals/loan_modal.gd:158
+#: scripts/ui/modals/loan_modal.gd:198
 msgid "%s is in the company account. First payment in 30 days."
 msgstr "%s 已导入公司帐户。30 天后开始还第一期。"
 
@@ -354,7 +354,7 @@ msgstr "%s 准时到帐"
 msgid "%s last 7 days"
 msgstr "近 7 天 %s"
 
-#: scripts/ui/modals/loan_modal.gd:98
+#: scripts/ui/modals/loan_modal.gd:118
 msgid "%s on %s"
 msgstr "%s，%s 扣款"
 
@@ -1294,7 +1294,7 @@ msgstr "包包"
 msgid "Bakery delivery: %d pastries"
 msgstr "面包店送货：%d 个糕点"
 
-#: scripts/ui/modals/loan_modal.gd:97
+#: scripts/ui/modals/loan_modal.gd:117
 msgid "Balance"
 msgstr "余额"
 
@@ -1446,7 +1446,7 @@ msgstr "身形"
 msgid "Bold. Love it."
 msgstr "有胆。我喜欢。"
 
-#: scripts/ui/modals/loan_modal.gd:73
+#: scripts/ui/modals/loan_modal.gd:89 scripts/ui/modals/loan_modal.gd:93
 msgid "Book an appointment"
 msgstr "预约贷款洽谈"
 
@@ -1454,7 +1454,7 @@ msgstr "预约贷款洽谈"
 msgid "Boring and safe. My favourite. You'll find it when you pay Lumina: Company OS, Operations."
 msgstr "无聊又安全，我的最爱。付款给 Lumina 时就会看到：Company OS 的「营运」。"
 
-#: scripts/ui/modals/loan_modal.gd:67
+#: scripts/ui/modals/loan_modal.gd:80
 msgid "Borrow %s"
 msgstr "借 %s"
 
@@ -2638,7 +2638,11 @@ msgstr "杯子"
 msgid "Currency"
 msgstr "币别"
 
-#: scripts/ui/modals/loan_modal.gd:39
+#: scripts/ui/modals/loan_modal.gd:50
+msgid "Current %d days · required %d days · %d more days"
+msgstr "目前 %d 天 · 门槛 %d 天 · 还差 %d 天"
+
+#: scripts/ui/modals/loan_modal.gd:48 scripts/ui/modals/loan_modal.gd:52
 msgid "Current %s · required %s · gap %s"
 msgstr "目前 %s · 门槛 %s · 差额 %s"
 
@@ -4566,7 +4570,7 @@ msgstr "保好险、让它一直跑，它就会赚钱；停在路边，它只是
 msgid "Interest"
 msgstr "利息"
 
-#: scripts/ui/modals/loan_modal.gd:49
+#: scripts/ui/modals/loan_modal.gd:62
 msgid "Interest (APR)"
 msgstr "利率（年）"
 
@@ -5246,7 +5250,7 @@ msgstr "贷款 %s——额外还款"
 msgid "Loan %s — monthly payment"
 msgstr "贷款 %s——每月还款"
 
-#: scripts/ui/modals/loan_modal.gd:135
+#: scripts/ui/modals/loan_modal.gd:159
 msgid "Loan appointment"
 msgstr "贷款洽谈预约"
 
@@ -5478,7 +5482,7 @@ msgstr "Marcus Reed"
 msgid "Marcus Reed here. Big invoices on long terms are how profitable companies run out of cash. My door's open, weekdays 1 to 4."
 msgstr "我是 Marcus Reed。帐期很长的大笔发票，正是赚钱的公司会没现金的原因。平日下午 1 到 4 点，我的门是开着的。"
 
-#: scripts/ui/modals/loan_modal.gd:71
+#: scripts/ui/modals/loan_modal.gd:84
 msgid "Marcus Reed signs loans in person (weekdays 13:00–16:00, Nexus Bank)."
 msgstr "Marcus Reed 亲自签贷款（平日 13:00–16:00，Nexus 银行）。"
 
@@ -5574,7 +5578,7 @@ msgstr "中杯"
 msgid "Meet Daniel Wong at Nexus Co-work (Thursdays 17:00–20:00)"
 msgstr "到 Nexus 共享办公室见 Daniel Wong（每周四 17:00–20:00）"
 
-#: scripts/ui/modals/loan_modal.gd:73
+#: scripts/ui/modals/loan_modal.gd:93
 msgid "Meet Marcus Reed now"
 msgstr "现在找 Marcus Reed 洽谈"
 
@@ -5710,7 +5714,7 @@ msgstr "本月销售"
 msgid "Monthly hot desk ($350)"
 msgstr "自由座月租（$350）"
 
-#: scripts/ui/modals/loan_modal.gd:64
+#: scripts/ui/modals/loan_modal.gd:77
 msgid "Monthly payment"
 msgstr "每月还款"
 
@@ -6118,7 +6122,7 @@ msgstr "非现金"
 msgid "None"
 msgstr "无"
 
-#: scripts/ui/modals/loan_modal.gd:89
+#: scripts/ui/modals/loan_modal.gd:109
 msgid "None."
 msgstr "没有。"
 
@@ -6513,6 +6517,10 @@ msgstr "请先在我们这里开公司帐户。"
 #: scripts/ui/modals/bank_modal.gd:39
 msgid "Open account with %s"
 msgstr "存入 %s 开户"
+
+#: scripts/ui/modals/loan_modal.gd:86
+msgid "Open an account at the Nexus Bank counter"
+msgstr "到 Nexus Bank 柜台开户"
 
 #: scripts/ui/modals/bank_modal.gd:34
 msgid "Open an account for %s and move founder capital in. Your stock and ShopLane balance move with it."
@@ -6994,7 +7002,7 @@ msgstr "改用电汇重新付款（{reroute_cost}）"
 msgid "Pay bills on time. Lending ban ends: %s."
 msgstr "按时缴清帐单。禁贷期结束：%s。"
 
-#: scripts/ui/modals/loan_modal.gd:105
+#: scripts/ui/modals/loan_modal.gd:125
 msgid "Pay off"
 msgstr "一次还清"
 
@@ -7018,7 +7026,7 @@ msgstr "付款给国外供应商"
 msgid "Paying your staff their wages, every Friday at 17:00 from the company account."
 msgstr "每周五 17:00 从公司帐户付员工薪水。"
 
-#: scripts/ui/modals/loan_modal.gd:98
+#: scripts/ui/modals/loan_modal.gd:118
 msgid "Payment"
 msgstr "还款"
 
@@ -7930,7 +7938,7 @@ msgstr "到处都在涨房租。卖点大家真的需要的东西吧。"
 msgid "Renting an office"
 msgstr "租办公室"
 
-#: scripts/ui/modals/loan_modal.gd:102
+#: scripts/ui/modals/loan_modal.gd:122
 msgid "Repay %s"
 msgstr "还 %s"
 
@@ -10038,7 +10046,7 @@ msgstr "等了好一阵子才到。"
 msgid "Total"
 msgstr "总额"
 
-#: scripts/ui/modals/loan_modal.gd:65
+#: scripts/ui/modals/loan_modal.gd:78
 msgid "Total interest"
 msgstr "总利息"
 
@@ -10194,7 +10202,7 @@ msgstr "未知的对象。"
 msgid "Unknown supply pack."
 msgstr "没有这种材料包。"
 
-#: scripts/ui/modals/loan_modal.gd:48
+#: scripts/ui/modals/loan_modal.gd:61
 msgid "Up to"
 msgstr "最高"
 
@@ -10214,7 +10222,7 @@ msgstr "用笔电——Company OS"
 msgid "Use letters or numbers."
 msgstr "请使用文本或数字。"
 
-#: scripts/ui/modals/loan_modal.gd:80
+#: scripts/ui/modals/loan_modal.gd:100
 msgid "Use the Metro to Financial District, then enter Nexus Bank and go to the manager desk."
 msgstr "搭捷运到金融区，进入 Nexus Bank，前往经理桌。"
 
@@ -10358,7 +10366,11 @@ msgstr "Victor：「了解。你的数字变大，我的也会跟着变大。」
 msgid "Victor: \"You'll get it, with conditions. Read them twice.\""
 msgstr "Victor：「你会拿到，但有条件。条件要看两遍。」"
 
-#: scripts/ui/modals/loan_modal.gd:77
+#: scripts/ui/modals/loan_modal.gd:86
+msgid "View City Hall on city map"
+msgstr "在城市地图查看市政厅"
+
+#: scripts/ui/modals/loan_modal.gd:97
 msgid "View Nexus Bank on city map"
 msgstr "在城市地图查看 Nexus Bank"
 
@@ -10378,7 +10390,7 @@ msgstr "访客一个一个来到柜台。今天的预约名单在你的夹板上
 msgid "Visitors handled correctly: %d / %d"
 msgstr "正确处理的访客：%d / %d"
 
-#: scripts/ui/modals/loan_modal.gd:41 scripts/ui/modals/loan_modal.gd:45
+#: scripts/ui/modals/loan_modal.gd:54 scripts/ui/modals/loan_modal.gd:58
 msgid "WHAT YOUR BOOKS SUPPORT"
 msgstr "你的帐目撑得起的额度"
 
@@ -10714,7 +10726,7 @@ msgstr "你的本地市场"
 msgid "YOUR JOB"
 msgstr "你的工作"
 
-#: scripts/ui/modals/loan_modal.gd:86
+#: scripts/ui/modals/loan_modal.gd:106
 msgid "YOUR LOANS"
 msgstr "你的贷款"
 

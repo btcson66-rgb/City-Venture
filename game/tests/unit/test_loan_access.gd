@@ -167,6 +167,40 @@ func test_ineligible_screen_has_all_conditions_and_no_borrow() -> void:
 	m.free()
 	runner.check(Ledger.check_balanced(), "reading checklist preserves books")
 
+
+func test_checklist_boolean_rows_and_numeric_units() -> void:
+	var m := _screen()
+	for id in ["company", "account", "arrears"]:
+		var row := m.find_child("Eligibility_" + id, true, false)
+		runner.eq(row.get_child_count(), 2, "boolean row contains only status and next step: " + id)
+	var capacity := m.find_child("Eligibility_capacity", true, false)
+	runner.eq(capacity.get_child(1).text, "Current $0 · required $2,000 · gap $2,000", "capacity always uses money units")
+	var age := m.find_child("Eligibility_age", true, false)
+	runner.eq(age.get_child(1).text, "Current 0 days · required 14 days · 14 more days", "age states remaining days")
+	var credit := m.find_child("Eligibility_credit", true, false)
+	runner.eq(credit.get_child(1).text, "Current 680 · required 560 · gap 0", "credit remains numeric")
+	m.free()
+	runner.check(Ledger.check_balanced(), "display does not change money")
+
+
+func test_first_missing_prerequisite_is_primary_and_booking_secondary() -> void:
+	var m := _screen(true)
+	var first: Button = m.footer.get_child(0)
+	runner.eq(first.name, "PrerequisiteCompany", "company comes before account")
+	runner.check(first.has_theme_stylebox_override("normal"), "first prerequisite is primary")
+	var booking: Button = m.find_child("BookLoanAppointment", true, false)
+	runner.check(not booking.has_theme_stylebox_override("normal"), "booking is secondary")
+	m.free()
+	Company.register("Lending Test", "ecommerce", "22 Founders Lane")
+	m = _screen()
+	first = m.footer.get_child(0)
+	runner.eq(first.name, "PrerequisiteAccount", "account becomes first action after registration")
+	runner.check(first.has_theme_stylebox_override("normal"), "account action is primary")
+	booking = m.find_child("BookLoanAppointment", true, false)
+	runner.check(not booking.has_theme_stylebox_override("normal"), "booking stays secondary")
+	m.free()
+	runner.check(Ledger.check_balanced(), "prioritising actions has no money effect")
+
 func test_signing_takes_only_afternoon_and_first_payment_stays_thirty_days() -> void:
 	_eligible()
 	GameState.data["clock"]["minutes"] = Clock.at_day_time(1, 13 * 60)

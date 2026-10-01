@@ -32,12 +32,25 @@ func build() -> void:
 	left.custom_minimum_size = Vector2(230, 0)
 	cols.add_child(left)
 	var o := Bank.offer()
+	var requirements := Bank.eligibility()
+	var prerequisite := ""
+	for requirement in requirements:
+		if prerequisite == "" and requirement["id"] in ["company", "account"] and not requirement["ok"]:
+			prerequisite = requirement["id"]
 	if not o["ok"]:
-		for requirement in Bank.eligibility():
+		for requirement in requirements:
+			var row := UIK.vbox(3)
+			row.name = "Eligibility_" + str(requirement["id"])
+			left.add_child(row)
 			var mark := "✓" if requirement["ok"] else "✗"
-			left.add_child(UIK.wrap(mark + " " + I18n.t(requirement["label"]), 8, Art.C_GREEN if requirement["ok"] else Art.C_RED, 240))
-			left.add_child(UIK.wrap(I18n.t("Current %s · required %s · gap %s") % [str(requirement["value"]), str(requirement["need"]), str(requirement["gap"])], 7, Art.C_WHITE, 240))
-			left.add_child(UIK.wrap(requirement["hint_action"], 7, Art.C_SKY, 240))
+			row.add_child(UIK.wrap(mark + " " + I18n.t(requirement["label"]), 8, Art.C_GREEN if requirement["ok"] else Art.C_RED, 240))
+			if requirement["id"] == "capacity":
+				row.add_child(UIK.wrap(I18n.t("Current %s · required %s · gap %s") % [Fmt.money0(float(requirement["value"])), Fmt.money0(float(requirement["need"])), Fmt.money0(float(requirement["gap"]))], 7, Art.C_WHITE, 240))
+			elif requirement["id"] == "age":
+				row.add_child(UIK.wrap(I18n.t("Current %d days · required %d days · %d more days") % [int(requirement["value"]), int(requirement["need"]), int(requirement["gap"])], 7, Art.C_WHITE, 240))
+			elif not requirement["id"] in ["company", "account", "arrears"]:
+				row.add_child(UIK.wrap(I18n.t("Current %s · required %s · gap %s") % [str(requirement["value"]), str(requirement["need"]), str(requirement["gap"])], 7, Art.C_WHITE, 240))
+			row.add_child(UIK.wrap(requirement["hint_action"], 7, Art.C_SKY, 240))
 		left.add_child(UIK.label("WHAT YOUR BOOKS SUPPORT", 7, Art.C_DIM, true))
 		for part in Bank.lending_basis()["parts"]:
 			left.add_child(UIK.kv(str(part[0]), Fmt.money0(float(part[1])), Art.C_WHITE, 7))
@@ -69,15 +82,22 @@ func build() -> void:
 			left.add_child(tk)
 		else:
 			left.add_child(UIK.wrap("Marcus Reed signs loans in person (weekdays 13:00–16:00, Nexus Bank).", 7, Art.C_SKY, 226))
-	if not officer or not Bank.at_bank() or not Bank.marcus_on_duty():
+	if prerequisite != "":
+		var action := UIK.button("View City Hall on city map" if prerequisite == "company" else "Open an account at the Nexus Bank counter", _city_hall if prerequisite == "company" else _open_account, "primary")
+		action.name = "PrerequisiteCompany" if prerequisite == "company" else "PrerequisiteAccount"
+		footer.add_child(action)
+		var booking := UIK.button("Book an appointment", _book_appointment)
+		booking.name = "BookLoanAppointment"
+		footer.add_child(booking)
+	elif not officer or not Bank.at_bank() or not Bank.marcus_on_duty():
 		var entry := UIK.button("Meet Marcus Reed now" if Bank.at_bank() and Bank.marcus_on_duty() else "Book an appointment", _entry, "primary")
 		entry.name = "MeetMarcus" if Bank.at_bank() and Bank.marcus_on_duty() else "BookLoanAppointment"
 		footer.add_child(entry)
-		if not Bank.at_bank():
-			var route := UIK.button("View Nexus Bank on city map", _route)
-			route.name = "RouteNexusBank"
-			footer.add_child(route)
-			left.add_child(UIK.wrap("Use the Metro to Financial District, then enter Nexus Bank and go to the manager desk.", 7, Art.C_SKY, 240))
+	if not Bank.at_bank():
+		var route := UIK.button("View Nexus Bank on city map", _route)
+		route.name = "RouteNexusBank"
+		footer.add_child(route)
+		left.add_child(UIK.wrap("Use the Metro to Financial District, then enter Nexus Bank and go to the manager desk.", 7, Art.C_SKY, 240))
 	if Bank.appointment_hint() != "":
 		left.add_child(UIK.wrap(Bank.appointment_hint(), 7, Art.C_SKY, 240))
 	var right := UIK.vbox(3)
@@ -131,14 +151,34 @@ func _entry() -> void:
 		Sim.cancel("bank.appointment", "id", "lending")
 		rebuild()
 	else:
-		Bank.book_appointment()
-		UIRoot.open_modal(InfoModal.make("Loan appointment", "bank", [Bank.appointment_hint()]))
-		rebuild()
+		_book_appointment()
+
+
+func _book_appointment() -> void:
+	Bank.book_appointment()
+	UIRoot.open_modal(InfoModal.make("Loan appointment", "bank", [Bank.appointment_hint()]))
+	rebuild()
+
+
+func _city_hall() -> void:
+	_city_map("civic_center")
+
+
+func _open_account() -> void:
+	if Bank.at_bank():
+		close()
+		UIRoot.open_modal(BankModal.new())
+	else:
+		_route()
 
 
 func _route() -> void:
+	_city_map("financial")
+
+
+func _city_map(district: String) -> void:
 	var map := CityMapModal.new(false)
-	map.sel = "financial"
+	map.sel = district
 	UIRoot.open_modal(map)
 
 
