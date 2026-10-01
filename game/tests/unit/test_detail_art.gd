@@ -61,9 +61,8 @@ func test_direct_detail_and_missing_optional_paths() -> void:
 
 func test_world_collision_keeps_native_alpha_mask() -> void:
 	var scene := WorldScene.new()
-	for key in ["props/tree_round", "interiors/plant_large", "props/bollard"]:
-		if not Art.has_tex(key):
-			continue
+	for key in ["props/tree_round", "interiors/plant_big", "props/bollard"]:
+		runner.check(Art.tex(key).has_meta("detail_path"), key + " exercises detail collision")
 		var native: Texture2D = load("res://assets/" + key + ".png")
 		var width := native.get_width()
 		WorldScene._foot_cache.clear()
