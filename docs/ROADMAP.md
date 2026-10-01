@@ -13,21 +13,31 @@ Civic Center, Financial, Shopping Street, Old Town, Harbor Implemented.
 | P0 | [#21](https://github.com/btcson66-rgb/City-Venture/issues/21) | Purchase cancellations and returns (fix a wrong stock order) |
 | P0 | [#22](https://github.com/btcson66-rgb/City-Venture/issues/22) | Save export/import; old-version save fixtures as regression tests |
 | P0 | [#23](https://github.com/btcson66-rgb/City-Venture/issues/23) | itch.io web publishing (butler) and an in-game "what's new" card |
-| P0 | [#24](https://github.com/btcson66-rgb/City-Venture/issues/24) | No soft-locks: every chapter step and tutorial step handles "already done" and "no longer possible" |
+| P0 | [#24](https://github.com/btcson66-rgb/City-Venture/issues/24) | No soft-locks: every chapter step and tutorial step handles "already done" and "no longer possible" (Implemented, merged in #37) |
+| P0 | [#36](https://github.com/btcson66-rgb/City-Venture/issues/36) | Closing a company ends its B2B contracts; a sold receivable is never collected twice |
+| P0 | [#39](https://github.com/btcson66-rgb/City-Venture/issues/39) | See where you can do things: interaction markers, a "what you can do here" card, a City Guide phone app |
 | P1 | [#25](https://github.com/btcson66-rgb/City-Venture/issues/25) | "!" explanation badges on every existing screen |
 | P1 | [#26](https://github.com/btcson66-rgb/City-Venture/issues/26) | 4× detail art for buildings, ground tiles and vehicles |
 | P1 | [#27](https://github.com/btcson66-rgb/City-Venture/issues/27) | Era street dressing: port cranes (Year 3), solar roofs and EV chargers (Year 4) |
 | P1 | [#28](https://github.com/btcson66-rgb/City-Venture/issues/28) | Player van colour and lettering, route map alignment, seated expressions |
 | P1 | [#29](https://github.com/btcson66-rgb/City-Venture/issues/29) | Economy balance so every chapter goal is reachable with sensible play |
+| P1 | [#40](https://github.com/btcson66-rgb/City-Venture/issues/40) | Look-only shops get something to do: Crestline market research, Harbor Point gym membership and networking |
 | P2 | [#30](https://github.com/btcson66-rgb/City-Venture/issues/30) | Season 2 systems: World Map, regional storefronts, currencies and FX |
 | P2 | [#31](https://github.com/btcson66-rgb/City-Venture/issues/31) | Season 2 Chapters 13–14: first order abroad, customs (DDP/DDU) |
 | P2 | [#32](https://github.com/btcson66-rgb/City-Venture/issues/32) | Moving house (Old Town Studio 1A and other homes) |
 | P2 | [#33](https://github.com/btcson66-rgb/City-Venture/issues/33) | Café depth: seasonal menu, shifts, health inspection, a second café |
 | P2 | [#34](https://github.com/btcson66-rgb/City-Venture/issues/34) | Logistics depth: route contracts, a second van, breakdowns and maintenance |
+| P2 | [#41](https://github.com/btcson66-rgb/City-Venture/issues/41) | Pop-up Unit 5: a weekend pop-up shop on Shopping Street (physical retail channel) |
+| P2 | [#42](https://github.com/btcson66-rgb/City-Venture/issues/42) | Season 2 Chapters 15–16: the currency swing (forward contracts), a partner overseas (distributor vs 3PL) |
+| P2 | [#43](https://github.com/btcson66-rgb/City-Venture/issues/43) | Season 2 Chapters 17–18: consolidation (niche or scale), legacy (endings and epilogue) |
 | P3 | [#35](https://github.com/btcson66-rgb/City-Venture/issues/35) | Free play after the story: growth goals and achievements |
 
-Next in line (tickets written when the above land): Season 2 Chapters 15–18 (`docs/STORY_IMPLEMENTATION.md` §10),
-new districts (Residential, University, Luxury Heights, Airport, Industrial) each with one business.
+**Work order for Codex** (one ticket at a time; start the next from the latest `claude/exciting-bardeen-y71ixv` once
+the previous PR is merged): #21 → #36 → #39 → #22 → #23 → #25 → #29 → #40 → #28 → #26 → #27 → #30 → #31 → #42 → #43 →
+#41 → #32 → #33 → #34 → #35. A ticket whose dependency is not merged yet waits; take the next one instead.
+
+Next in line (tickets written when the above land): new districts (Residential, University, Luxury Heights, Airport,
+Industrial), each with one business.
 
 ---
 
