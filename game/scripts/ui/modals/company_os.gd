@@ -532,7 +532,7 @@ func _tab_operations() -> void:
 	_section("Purchase orders")
 	var pos: Array = GameState.data["ecommerce"]["purchase_orders"].values()
 	pos.sort_custom(func(a, b): return int(a["placed"]) > int(b["placed"]))
-	for po in pos.slice(0, 8):
+	for po in pos:
 		var row2 := UIK.hbox(4)
 		row2.add_child(UIK.label(po["id"], 7, Art.C_DIM))
 		var t := UIK.label("%d × %s · %s" % [int(po["qty"]), I18n.t(DataDB.product(po["product"])["name"]), I18n.t(DataDB.supplier(po["supplier"])["name"])], 7, Art.C_WHITE)
@@ -556,6 +556,28 @@ func _tab_operations() -> void:
 		else:
 			row2.add_child(UIK.chip(I18n.t("ARRIVES ") + Clock.fmt_short(int(po["eta"])).to_upper() if po["status"] == "in_transit" else ("CANCELLED" if po["status"] == "cancelled" else "DELIVERED"), Art.C_GOLD if po["status"] == "in_transit" else (Art.C_MUTED if po["status"] == "cancelled" else Art.C_GREEN)))
 		content.add_child(row2)
+		var cancelling: bool = po["status"] in ["in_transit", "awaiting_payment"]
+		if cancelling or po["status"] == "delivered":
+			var why := Ecommerce.cancel_block(str(po["id"])) if cancelling else Ecommerce.return_block(str(po["id"]))
+			var actions := UIK.hbox(4)
+			var action := UIK.button("Cancel purchase" if cancelling else "Return stock", _purchase_return.bind(str(po["id"]), cancelling))
+			action.name = ("CancelPO_" if cancelling else "ReturnPO_") + str(po["id"])
+			action.disabled = why != ""
+			actions.add_child(action)
+			actions.add_child(UIK.tip("purchase_cancel" if cancelling else "purchase_return"))
+			if why != "":
+				actions.add_child(UIK.wrap(why, 7, Art.C_MUTED, 365))
+			content.add_child(actions)
+		for r in po.get("returns", []):
+			var sold: bool = r["status"] == "sold_to_collector" or (r["status"] == "in_transit" and GameState.data["entities"].get(r["entity"], {}).has("closed"))
+			var refund_status := I18n.t("Refund sold in liquidation") if sold else (I18n.t("Refund received") if r["status"] == "refunded" else I18n.t("Refund due %s") % Clock.fmt_short(int(r["due"])))
+			content.add_child(UIK.label(I18n.t("Returned %d units · %s · %s") % [int(r["qty"]), Fmt.money(float(r["refund"])), refund_status], 7, Art.C_GREEN if r["status"] == "refunded" else Art.C_GOLD))
+
+
+func _purchase_return(id: String, cancelling: bool) -> void:
+	var modal := PurchaseReturnModal.new(id, cancelling)
+	modal.closed.connect(rebuild)
+	UIRoot.open_modal(modal)
 
 
 func _buy(sid: String, pid: String, key: String, terms: bool) -> void:

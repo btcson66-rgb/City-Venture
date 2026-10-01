@@ -17,6 +17,12 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "interaction_focus":
+		await _interaction_focus_fixture()
+		return
+	if _arg("from") == "purchase_returns":
+		await _purchase_return_fixture()
+		return
 	if _arg("from") == "harbor":
 		# Isolated logistics fixture; no earlier sales income, so this is not an economy/endgame test.
 		await _fast_forward_to_ch10()
@@ -32,6 +38,7 @@ func run() -> void:
 		return
 	await _chapter1()
 	await _chapter2()
+	await _purchase_cancel()
 	await _chapter3()
 	if not bot.video_mode:
 		await _careers()
@@ -52,6 +59,30 @@ func _arg(name: String) -> String:
 		if a.begins_with("--%s=" % name):
 			return a.substr(name.length() + 3)
 	return ""
+
+
+## Force a popup on the exact frame that a real interactable receives focus; reaching it stays successful.
+func _interaction_focus_fixture() -> void:
+	bot.step("Interaction focus interrupted by popup")
+	UIRoot.tutorial.st()["off"] = true
+	var it: Interactable = bot.find_interactable(func(n): return n.action == "open_company_os")
+	var matched := [false]
+	var reached := func():
+		if bot.player() != null and bot.player().focus == it:
+			matched[0] = true
+			UIRoot.open_modal(Help.card("os_operations"))
+			return true
+		return false
+	var ok: bool = await bot.walk_to(it.global_position + Vector2(0, 8), 3.0, 40.0, true, reached)
+	bot.expect(ok and matched[0], "real interaction reach survives a same-frame popup")
+	bot.expect(UIRoot.top_modal() is InfoModal, "popup really opened at interaction reach")
+	await bot.click_text("Got it")
+	await bot.wait(0.4)
+	Clock.advance_to(Clock.at_day_time(0, 19 * 60))
+	await bot.use_action("sleep")
+	await bot.click_named("Sleep")
+	await bot.until(func(): return not (UIRoot.top_modal() is SleepModal), 8.0)
+	bot.expect(Clock.hour() == 7, "real sleep input works after popup closes")
 
 
 func _summary() -> void:
@@ -449,6 +480,64 @@ func _chapter2() -> void:
 	bot.expect(issue, "resolved the first customer issue")
 	await bot.wait(2.0)
 	bot.expect("ch2_first_customer" in GameState.data["story"]["chapters_done"], "Chapter 2 complete")
+
+
+## Place an extra batch and cancel through the real Operations confirmation controls.
+## Isolated delivered-stock fixture for return-screen evidence; the full run still starts from a new game.
+func _purchase_return_fixture() -> void:
+	bot.step("Supplier return UI fixture")
+	UIRoot.tutorial.st()["off"] = true
+	GameState.set_flag("business_chosen")
+	var result := Ecommerce.buy("tradelink_wholesale", "wireless_earbuds", 50)
+	bot.expect(result["ok"], "fixture purchase created")
+	var id := str(result["po_id"])
+	Ecommerce.handle("eco.po_arrive", {"po": id})
+	await _home_laptop("operations")
+	await _scroll_to_end()
+	await bot.click_named("ReturnPO_" + id)
+	await bot.wait(0.5)
+	for i in 4:
+		await bot.click_named("ReturnQtyPlus")
+	var cash := Ledger.cash("player")
+	var quote := Ecommerce.return_quote(id, 5)
+	await bot.shot("purchase_return_confirmation")
+	await bot.click_named("ConfirmReturn")
+	await bot.wait(0.5)
+	bot.expect(Ecommerce.stock("riverside_studio", "wireless_earbuds") == 45, "five units returned through confirmation")
+	bot.expect(absf(Ledger.cash("player") - cash + float(quote["shipping"])) < 0.02, "only shipping cash leaves immediately")
+	await _scroll_to_end()
+	await bot.shot("purchase_return_pending")
+	await close_modal()
+	# Jump only this isolated fixture to the supplier receipt; normal walkthrough does not jump for returns.
+	GameState.data["clock"]["minutes"] = int(quote["due"])
+	Ecommerce.handle("eco.return_refund", {"po": id, "return": 0})
+	await _home_laptop("operations")
+	await _scroll_to_end()
+	await bot.shot("purchase_return_received")
+	bot.expect(Ledger.check_balanced(), "return fixture ledger balanced")
+	await close_modal()
+
+
+func _purchase_cancel() -> void:
+	bot.step("Purchase cancellation")
+	await _home_laptop("operations")
+	await bot.click_named("Buy_tradelink_wholesale_wireless_earbuds")
+	await bot.wait(0.4)
+	var id := "PO-%d" % int(Ecommerce.E()["counters"]["po"])
+	var cash := Ledger.cash(GameState.business_entity())
+	var quote := Ecommerce.cancel_quote(id)
+	await _scroll_to_end()
+	await bot.click_named("CancelPO_" + id)
+	await bot.wait(0.5)
+	await bot.shot("purchase_cancel_confirmation")
+	await bot.click_named("ConfirmReturn")
+	await bot.wait(0.5)
+	bot.expect(Ecommerce.E()["purchase_orders"][id]["status"] == "cancelled", "extra PO cancelled through UI")
+	bot.expect(absf(Ledger.cash(GameState.business_entity()) - cash - float(quote["refund"])) < 0.02, "cancellation cash equals quoted refund")
+	bot.expect(Ledger.check_balanced(), "ledger balanced after purchase cancellation")
+	await _scroll_to_end()
+	await bot.shot("purchase_cancelled_operations")
+	await close_modal()
 
 
 func _chapter3() -> void:
