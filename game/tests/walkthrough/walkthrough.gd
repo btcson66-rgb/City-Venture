@@ -498,9 +498,19 @@ func _pack_and_ship_home() -> void:
 	await bot.use_action("pack_orders")
 	await bot.wait(0.6)
 	await once_shot("packing_table")
-	await bot.click_named("Pack", 3.0)
-	await bot.until(func(): return not (UIRoot.top_modal() is MiniGame), 5.0)   # packed by hand (PackGame)
-	await bot.wait(0.8)
+	# Like sleep, confirm that real input completed before looking for the next action. A mouse event can
+	# arrive while a rebuilt panel is settling; retry input, never change stock or mark an order packed here.
+	for attempt in 3:
+		await bot.click_named("Pack", 3.0)
+		await bot.until(func(): return not (UIRoot.top_modal() is MiniGame), 5.0)   # packed by hand (PackGame)
+		await bot.wait(0.8)
+		if not Ecommerce.orders_with(["packed"], "riverside_studio").is_empty():
+			break
+		bot.log_line("  pack click did not produce packed orders; retry %d" % (attempt + 1))
+	if Ecommerce.orders_with(["packed"], "riverside_studio").is_empty():
+		bot.fail("packing did not finish after three real input attempts")
+		await close_modal()
+		return
 	await bot.click_named("CourierExpress", 3.0)
 	await bot.wait(0.6)
 	await close_modal()
