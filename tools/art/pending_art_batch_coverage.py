@@ -5,7 +5,7 @@ import subprocess,json
 from PIL import Image
 ROOT=Path(__file__).resolve().parents[2]
 BASE="9145015af512ba98bc7560162c0de61a5ec01d70"
-BATCHES=[("City-Venture-character-quality",46),("City-Venture-traffic-quality",49),("City-Venture-environment-quality",50),("City-Venture-utilities-quality",51),("City-Venture-interior-quality",54),("City-Venture-frontage-quality",55),("City-Venture-wardrobe-quality",56),("City-Venture-ground-quality",57),("City-Venture-ui-quality",58),("City-Venture-map-quality",59),("City-Venture-backdrop-quality",60)]
+BATCHES=[("City-Venture-character-quality",46),("City-Venture-traffic-quality",49),("City-Venture-environment-quality",50),("City-Venture-utilities-quality",51),("City-Venture-interior-quality",54),("City-Venture-frontage-quality",55),("City-Venture-wardrobe-quality",56),("City-Venture-ground-quality",57),("City-Venture-ui-quality",58),("City-Venture-map-quality",59),("City-Venture-backdrop-quality",60),("City-Venture-product-quality",61)]
 assets={p.relative_to(ROOT/"game/assets").as_posix():(p,"Claude base") for p in (ROOT/"game/assets").rglob("*.png")}
 batches=[]
 for folder,pr in BATCHES:
@@ -25,11 +25,11 @@ for key,(p,owner) in sorted(assets.items()):
     detail=assets.get("world_detail/"+key)
     dsize=Image.open(detail[0]).size if detail else None
     rows.append({"asset":key,"category":key.split("/")[0],"native":size,"source":owner,"detail":dsize,"detail_source":detail[1] if detail else None,"exact_4x":dsize==tuple(v*4 for v in size),"combined_runtime":"NOT_VERIFIED"})
-out=ROOT/"docs/art_sources/backdrop_quality_20261001"
+out=ROOT/"docs/art_sources/product_quality_20261001"
 (out/"pending_batch_coverage.json").write_text(json.dumps({"base":BASE,"batches":batches,"assets":rows},indent=2)+"\n",encoding="utf-8")
 groups=Counter(r["category"] for r in rows)
 ok=Counter(r["category"] for r in rows if r["exact_4x"])
-md=["# 待合併美術批覆蓋盤點","",f"基底：{BASE}。讀取11個Draft批的美術差異，未合併、未更動任何遊戲。這是PNG檔案覆蓋，不能作為整合後實機品質PASS。","", "| 類別 | 原尺寸PNG | 正確4× | 仍缺或尺寸不符 |","|---|---:|---:|---:|"]
+md=["# 待合併美術批覆蓋盤點","",f"基底：{BASE}。讀取12個Draft批的美術差異，未合併、未更動任何遊戲。這是PNG檔案覆蓋，不能作為整合後實機品質PASS。","", "| 類別 | 原尺寸PNG | 正確4× | 仍缺或尺寸不符 |","|---|---:|---:|---:|"]
 for category,num in sorted(groups.items()):md.append(f"| {category} | {num} | {ok[category]} | {num-ok[category]} |")
 md.extend(["","## 尚待處理的圖檔",""])
 for row in rows:
