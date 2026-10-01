@@ -52,6 +52,12 @@ Conventions:
 ```
 `product` (ref → products).
 
+Optional supplier `returns` overrides: `cancel_window_hours`, `cancel_fee_rate`, `return_window_days`,
+`restocking_fee_rate`. Defaults come from `data/economy/returns.json`: 24 hours, 5%, 14 days, 15%,
+`return_ship_per_unit` 0.60 (times `World.shipping_index()`), `return_days` 3. Imports default to a 0-day
+delivered-goods return window; an explicit supplier override takes precedence. Aurelia Makers waives both fees.
+Windows are exclusive: elapsed time must be less than the configured window.
+
 ### 1.4 Marketplaces / Shipping — `data/economy/*.json`
 ```json
 // marketplace.json
@@ -418,6 +424,14 @@ data.ecommerce         {listings{id:{product, price, photo, photo_q (your own sh
                                    settlement{method, fee, clears, kyc?, kyc_until?}, escrow?, frozen?}},
                                    (status awaiting_payment → in_transit → delivered for imports in Year 5+; `escrow`: held → released |
                                    refunded | rerouted | switched; `frozen`: stuck on the bridge; `year`: the era it was placed in)
+                                   (cancellation adds status cancelled, cancelled minute, cancel_fee; unpaid terms add
+                                   payable_remaining, paid at original due date. Existing total is never overwritten.)
+                                   (supplier returns lazily add returned_qty and returns:[{qty, refund, fee, shipping, t,
+                                   due, entity, status: in_transit|refunded|sold_to_collector}]; eco.return_refund payload {po, return:index}.
+                                   Refund becomes accounts_receivable at dispatch and cash after return_days. Stock leaves
+                                   at average cost; positive cost/refund gap is exp:restocking, negative gap other_income.
+                                   If the refund owner closes meanwhile, liquidation already sells the AR: no second refund.
+                                   Missing arrived in old saves falls back to eta; missing return fields mean no returns.)
                         packaging: standard|recycled,
                         inventory{location:{product:{qty, avg_cost, defective}}},
                         parcels{location: [order_ids packed awaiting dropoff]},

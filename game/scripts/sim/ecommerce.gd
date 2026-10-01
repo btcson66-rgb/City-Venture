@@ -295,9 +295,183 @@ static func _h_ap_due(p: Dictionary) -> void:
 	if po.is_empty() or po.get("paid", false):
 		return
 	po["paid"] = true
+	if po["status"] == "cancelled" and GameState.data["entities"].get(po["entity"], {}).has("closed"):
+		return   # liquidation already settled or wrote off the remaining cancellation fee
+	var due := float(po.get("payable_remaining", po["total"]))
+	if due <= 0.0:
+		return
 	Ledger.post(po["entity"], I18n.t("Supplier invoice paid: %s") % po["id"],
-		[{"acct": "accounts_payable", "dr": po["total"]}, {"acct": "cash", "cr": po["total"]}], {"type": "ap", "id": po["id"]})
-	EventBus.notify.emit(I18n.t("Paid supplier invoice %s: %s") % [po["id"], Fmt.money(po["total"])], "info", "bank")
+		[{"acct": "accounts_payable", "dr": due}, {"acct": "cash", "cr": due}], {"type": "ap", "id": po["id"]})
+	EventBus.notify.emit(I18n.t("Paid supplier invoice %s: %s") % [po["id"], Fmt.money(due)], "info", "bank")
+
+
+# ================================================================ purchase cancellations / supplier returns
+## Supplier overrides sit over the tunable defaults; imports have no delivered-goods return window.
+static func return_policy(supplier_id: String) -> Dictionary:
+	var policy: Dictionary = DataDB.economy.get("returns", {}).duplicate()
+	if World.is_import(supplier_id):
+		policy["return_window_days"] = 0
+	policy.merge(DataDB.supplier(supplier_id).get("returns", {}), true)
+	return policy
+
+
+static func purchase_block(po: Dictionary) -> String:
+	if po.is_empty():
+		return I18n.t("That purchase order no longer exists.")
+	if GameState.data["entities"].get(po["entity"], {}).has("closed"):
+		return I18n.t("This purchase belongs to a closed company.")
+	if str(po["entity"]) != GameState.business_entity():
+		return I18n.t("This purchase belongs to another business.")
+	return ""
+
+
+static func cancel_block(po_id: String) -> String:
+	var po: Dictionary = E()["purchase_orders"].get(po_id, {})
+	var why := purchase_block(po)
+	if why != "":
+		return why
+	if not str(po["status"]) in ["in_transit", "awaiting_payment"]:
+		return I18n.t("Only a purchase still on the way can be cancelled.")
+	if Rails.is_frozen_po(po):
+		return I18n.t("Payment is frozen. Wait for the bridge to reopen before cancelling.")
+	var policy := return_policy(str(po["supplier"]))
+	if Clock.now() - int(po["placed"]) >= int(float(policy["cancel_window_hours"]) * 60):
+		if int(policy["return_window_days"]) <= 0:
+			return I18n.t("Cancellation window ended.") + " " + I18n.t("This supplier does not accept returns after delivery.")
+		return I18n.t("Cancellation window ended. Return eligible stock within %d days of arrival.") % int(policy["return_window_days"])
+	return ""
+
+
+static func cancel_quote(po_id: String) -> Dictionary:
+	var po: Dictionary = E()["purchase_orders"].get(po_id, {})
+	if po.is_empty():
+		return {}
+	var pending := str(po["status"]) == "awaiting_payment"
+	var fee := 0.0 if pending else snappedf(float(po["total"]) * float(return_policy(str(po["supplier"]))["cancel_fee_rate"]), 0.01)
+	return {"refund": snappedf(float(po["total"]) - fee, 0.01), "fee": fee,
+		"unpaid": po["terms"] == "net" and not bool(po.get("paid", false)), "pending": pending}
+
+
+static func _purchase_message(po: Dictionary, text: String) -> void:
+	var contact := str(DataDB.supplier(str(po["supplier"])).get("contact_npc", ""))
+	if contact != "":
+		GameState.add_message(contact, text)
+	GameState.timeline(text, "business")
+
+
+## Reduce an unpaid invoice; paid orders return cash. Settlement fees already charged stay on the books.
+static func cancel_purchase(po_id: String) -> Dictionary:
+	var why := cancel_block(po_id)
+	if why != "":
+		return {"ok": false, "error": why}
+	var po: Dictionary = E()["purchase_orders"][po_id]
+	var quote := cancel_quote(po_id)
+	var refund := float(quote["refund"])
+	var fee := float(quote["fee"])
+	Ledger.post(str(po["entity"]), I18n.t("Purchase cancelled: %s") % po_id,
+		[{"acct": "accounts_payable" if quote["unpaid"] else "cash", "dr": refund},
+		{"acct": "exp:restocking", "dr": fee}, {"acct": Rails.arrival_account(po), "cr": po["total"]}], {"type": "po", "id": po_id})
+	po["status"] = "cancelled"
+	po["cancelled"] = Clock.now()
+	po["cancel_fee"] = fee
+	if quote["unpaid"]:
+		po["payable_remaining"] = fee
+		if fee == 0.0:
+			Sim.cancel("eco.ap_due", "po", po_id)
+			po["paid"] = true
+	if str(po.get("escrow", "")) == "held":
+		po["escrow"] = "refunded"
+	Sim.cancel("eco.po_arrive", "po", po_id)
+	Sim.cancel("eco.po_cleared", "po", po_id)
+	GameState.inc_stat("purchase_orders_cancelled")
+	_purchase_message(po, I18n.t("%s cancelled: %s refunded or removed from your unpaid invoice; fee %s. Settlement fees are not refundable.") % [po_id, Fmt.money(refund), Fmt.money(fee)])
+	return {"ok": true, "refund": refund, "fee": fee}
+
+
+## Count cumulative returns as well as stock reserved for customer orders and active contracts.
+static func return_max(po_id: String) -> int:
+	var po: Dictionary = E()["purchase_orders"].get(po_id, {})
+	if po.is_empty():
+		return 0
+	return maxi(0, mini(int(po["qty"]) - int(po.get("returned_qty", 0)), available(str(po["location"]), str(po["product"]))))
+
+
+static func return_block(po_id: String) -> String:
+	var po: Dictionary = E()["purchase_orders"].get(po_id, {})
+	var why := purchase_block(po)
+	if why != "":
+		return why
+	if str(po["status"]) != "delivered":
+		return I18n.t("Only delivered purchases can be returned.")
+	var days := int(return_policy(str(po["supplier"]))["return_window_days"])
+	if days <= 0:
+		return I18n.t("This supplier does not accept returns after delivery.")
+	if Clock.now() - int(po.get("arrived", po["eta"])) >= days * Clock.DAY:
+		return I18n.t("The %d-day return window has ended.") % days
+	if return_max(po_id) <= 0:
+		return I18n.t("No returnable stock here: units were sold, reserved, moved, or already returned.")
+	return ""
+
+
+static func return_quote(po_id: String, qty: int) -> Dictionary:
+	var po: Dictionary = E()["purchase_orders"].get(po_id, {})
+	if po.is_empty():
+		return {}
+	var policy := return_policy(str(po["supplier"]))
+	var value := snappedf(qty * float(po["unit_cost"]), 0.01)
+	var fee := snappedf(value * float(policy["restocking_fee_rate"]), 0.01)
+	return {"refund": snappedf(value - fee, 0.01), "fee": fee,
+		"shipping": snappedf(qty * float(policy["return_ship_per_unit"]) * World.shipping_index(), 0.01),
+		"due": Clock.now() + int(policy["return_days"]) * Clock.DAY}
+
+
+## Remove stock at its current average cost; the supplier's original PO price determines the receivable.
+static func return_purchase(po_id: String, qty: int) -> Dictionary:
+	var why := return_block(po_id)
+	if why != "":
+		return {"ok": false, "error": why}
+	if qty <= 0 or qty > return_max(po_id):
+		return {"ok": false, "error": I18n.t("Choose between 1 and %d returnable units.") % return_max(po_id)}
+	var po: Dictionary = E()["purchase_orders"][po_id]
+	var quote := return_quote(po_id, qty)
+	var entity := str(po["entity"])
+	if Ledger.cash(entity) < float(quote["shipping"]):
+		return {"ok": false, "error": I18n.t("Not enough cash for return shipping: %s.") % Fmt.money(float(quote["shipping"]))}
+	var value := snappedf(qty * avg_cost(str(po["location"]), str(po["product"])), 0.01)
+	var refund := float(quote["refund"])
+	var gap := snappedf(value - refund, 0.01)
+	var lines: Array = [{"acct": "accounts_receivable", "dr": refund}, {"acct": "inventory", "cr": value}]
+	lines.append({"acct": "exp:restocking", "dr": gap} if gap >= 0 else {"acct": "other_income", "cr": -gap})
+	Ledger.post(entity, I18n.t("Stock returned to supplier: %s (%d units)") % [po_id, qty], lines, {"type": "po_return", "id": po_id})
+	Ledger.expense(entity, "shipping", float(quote["shipping"]), I18n.t("Return shipping: %s") % po_id, {"type": "po_return", "id": po_id})
+	inv(str(po["location"]))[po["product"]]["qty"] = stock(str(po["location"]), str(po["product"])) - qty
+	po["returned_qty"] = int(po.get("returned_qty", 0)) + qty
+	if not po.has("returns"):
+		po["returns"] = []
+	var record := {"qty": qty, "refund": refund, "fee": quote["fee"], "shipping": quote["shipping"],
+		"t": Clock.now(), "due": quote["due"], "status": "in_transit", "entity": entity}
+	po["returns"].append(record)
+	Sim.schedule(int(record["due"]), "eco.return_refund", {"po": po_id, "return": po["returns"].size() - 1})
+	_purchase_message(po, I18n.t("%s: returning %d units. Refund %s on %s; restocking fee %s, shipping %s.") % [po_id, qty, Fmt.money(refund), Clock.fmt_short(int(record["due"])), Fmt.money(float(quote["fee"])), Fmt.money(float(quote["shipping"]))])
+	return {"ok": true, "refund": refund, "due": record["due"]}
+
+
+static func _h_return_refund(p: Dictionary) -> void:
+	var po: Dictionary = E()["purchase_orders"].get(p.get("po", ""), {})
+	var records: Array = po.get("returns", [])
+	var index := int(p.get("return", -1))
+	if index < 0 or index >= records.size():
+		return
+	var r: Dictionary = records[index]
+	if r["status"] == "in_transit" and GameState.data["entities"].get(r["entity"], {}).has("closed"):
+		r["status"] = "sold_to_collector"   # liquidation already sold this receivable; never collect it a second time
+		return
+	if r["status"] != "in_transit" or Clock.now() < int(r["due"]):
+		return
+	r["status"] = "refunded"
+	Ledger.post(str(r["entity"]), I18n.t("Supplier return refund: %s") % po["id"],
+		[{"acct": "cash", "dr": r["refund"]}, {"acct": "accounts_receivable", "cr": r["refund"]}], {"type": "po_return", "id": po["id"]})
+	_purchase_message(po, I18n.t("%s: received the returned stock. Refund %s has reached your account.") % [po["id"], Fmt.money(float(r["refund"]))])
 
 
 # ================================================================ inventory
@@ -1116,7 +1290,7 @@ static func transfer_business_to(company: String) -> void:
 		if o["status"] in OPEN_STATUSES or o["status"] == "return_requested" or o["status"] == "delivered":
 			o["entity"] = company
 	for po in E()["purchase_orders"].values():
-		if po["status"] in ["in_transit", "awaiting_payment"]:
+		if po["status"] in ["in_transit", "awaiting_payment", "delivered"]:
 			po["entity"] = company
 
 
@@ -1129,6 +1303,8 @@ static func handle(kind: String, p: Dictionary) -> void:
 			_h_ap_due(p)
 		"eco.po_cleared":
 			_h_po_cleared(p)
+		"eco.return_refund":
+			_h_return_refund(p)
 		"eco.order_place":
 			_h_order_place(p)
 		"eco.pickup":
