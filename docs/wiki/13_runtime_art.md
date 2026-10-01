@@ -241,3 +241,72 @@
 - `world_detail/events/rail_frozen.png`
 - `events/acquisition_offer.png`
 - `world_detail/events/acquisition_offer.png`
+
+## 街道環境品質批 · 2026-10-01
+
+美術：七種常見立面與十三種路邊物件重新精修，原尺寸、4×、PNG import與發光層已交。圖上的招牌與旗幟留空白，門位、招牌與路燈 glow metadata 已按新圖對齊。沒有修改 scripts / data / tests，沒有移動地磚。
+
+實機原尺寸建築已替換；路邊物件由現有 WorldScene 自動讀 4×。District 與主選單建築仍讀原尺寸，4× 接線由 Claude 處理；全遊戲美術優化仍未完成。來源／裁切／提示詞：docs/art_sources/street_environment_20261001。前後截圖：evidence/20261001_street_environment。
+
+交付檔案：
+
+- `buildings/riverside_tower.png` — (202, 291)
+- `world_detail/buildings/riverside_tower.png` — (808, 1164)
+- `buildings/riverside_tower_lights.png` — (202, 291)
+- `world_detail/buildings/riverside_tower_lights.png` — (808, 1164)
+- `buildings/nexus_bank.png` — (234, 227)
+- `world_detail/buildings/nexus_bank.png` — (936, 908)
+- `buildings/nexus_bank_lights.png` — (234, 227)
+- `world_detail/buildings/nexus_bank_lights.png` — (936, 908)
+- `buildings/horizon_labs.png` — (202, 245)
+- `world_detail/buildings/horizon_labs.png` — (808, 980)
+- `buildings/horizon_labs_lights.png` — (202, 245)
+- `world_detail/buildings/horizon_labs_lights.png` — (808, 980)
+- `buildings/bloom_block.png` — (182, 173)
+- `world_detail/buildings/bloom_block.png` — (728, 692)
+- `buildings/bloom_block_lights.png` — (182, 173)
+- `world_detail/buildings/bloom_block_lights.png` — (728, 692)
+- `props/tree_round.png` — (68, 92)
+- `world_detail/props/tree_round.png` — (272, 368)
+- `props/lamp_banner.png` — (20, 72)
+- `world_detail/props/lamp_banner.png` — (80, 288)
+- `props/lamp_banner_lights.png` — (20, 72)
+- `world_detail/props/lamp_banner_lights.png` — (80, 288)
+- `props/tree_round_b.png` — (64, 92)
+- `world_detail/props/tree_round_b.png` — (256, 368)
+- `props/tree_tall.png` — (40, 90)
+- `world_detail/props/tree_tall.png` — (160, 360)
+- `props/lamp.png` — (20, 72)
+- `world_detail/props/lamp.png` — (80, 288)
+- `props/lamp_lights.png` — (20, 72)
+- `world_detail/props/lamp_lights.png` — (80, 288)
+- `props/bench.png` — (36, 25)
+- `world_detail/props/bench.png` — (144, 100)
+- `props/umbrella_table.png` — (36, 38)
+- `world_detail/props/umbrella_table.png` — (144, 152)
+- `props/planter.png` — (36, 32)
+- `world_detail/props/planter.png` — (144, 128)
+- `props/flower_bed.png` — (36, 22)
+- `world_detail/props/flower_bed.png` — (144, 88)
+- `props/bike.png` — (36, 22)
+- `world_detail/props/bike.png` — (144, 88)
+- `props/hedge.png` — (48, 20)
+- `world_detail/props/hedge.png` — (192, 80)
+- `props/planter_long.png` — (80, 28)
+- `world_detail/props/planter_long.png` — (320, 112)
+- `props/planter_small.png` — (24, 28)
+- `world_detail/props/planter_small.png` — (96, 112)
+- `buildings/apartment_mid.png` — (182, 251)
+- `world_detail/buildings/apartment_mid.png` — (728, 1004)
+- `buildings/apartment_mid_lights.png` — (182, 251)
+- `world_detail/buildings/apartment_mid_lights.png` — (728, 1004)
+- `buildings/office_slab.png` — (200, 290)
+- `world_detail/buildings/office_slab.png` — (800, 1160)
+- `buildings/office_slab_lights.png` — (200, 290)
+- `world_detail/buildings/office_slab_lights.png` — (800, 1160)
+- `buildings/glass_tower.png` — (188, 356)
+- `world_detail/buildings/glass_tower.png` — (752, 1424)
+- `buildings/glass_tower_lights.png` — (188, 356)
+- `world_detail/buildings/glass_tower_lights.png` — (752, 1424)
+
+sprite keys：`riverside_tower`, `nexus_bank`, `horizon_labs`, `bloom_block`, `tree_round`, `lamp_banner`, `tree_round_b`, `tree_tall`, `lamp`, `bench`, `umbrella_table`, `planter`, `flower_bed`, `bike`, `hedge`, `planter_long`, `planter_small`, `apartment_mid`, `office_slab`, `glass_tower`。
