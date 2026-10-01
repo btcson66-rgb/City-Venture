@@ -34,6 +34,7 @@ func _check_directory(relative: String) -> int:
 		runner.check(Art.tex(key) == texture, key + " is cached")
 		# Release the test's image before loading the next large background.
 		Art._cache.erase(key)
+		Art._large_cache.erase(key)
 		count += 1
 	return count
 
@@ -71,3 +72,63 @@ func test_world_collision_keeps_native_alpha_mask() -> void:
 		var actual := scene._footprint(key, Art.tex(key), 0, width, 8)
 		runner.eq(actual, expected, key + " collision mask unchanged")
 	scene.free()
+
+
+func _background_keys() -> Array:
+	var keys: Array = []
+	for file in DirAccess.open("res://assets/world_detail/backdrops").get_files():
+		if file.ends_with(".png"):
+			keys.append("backdrops/" + file.get_basename())
+	keys.sort()
+	return keys
+
+
+func test_twenty_backgrounds_keep_only_eight_and_release_evicted() -> void:
+	var art = load("res://autoload/art.gd").new()
+	var keys := _background_keys()
+	runner.check(keys.size() >= 20, "twenty distinct real backgrounds available")
+	var first: Texture2D = art.tex(keys[0])
+	var weak: WeakRef = weakref(first)
+	first = null
+	for i in range(1, 20):
+		art.tex(keys[i])
+		runner.check(art._large_cache.size() <= 8, "bounded after background %d" % i)
+	runner.eq(art._large_cache.keys(), keys.slice(12, 20), "only eight latest backgrounds remain")
+	runner.check(art._cache.is_empty(), "large art never enters permanent cache")
+	runner.eq(weak.get_ref(), null, "evicted texture has no retained cache reference")
+	art.free()
+
+
+func test_large_cache_hit_refreshes_recency_and_small_art_stays_pinned() -> void:
+	var art = load("res://autoload/art.gd").new()
+	var keys := _background_keys()
+	var icon: Texture2D = art.tex("ui/panel")
+	var active: Texture2D = art.tex(keys[0])
+	for i in range(1, 8):
+		art.tex(keys[i])
+	runner.check(art.has_tex(keys[1]), "availability probe")
+	runner.check(art.tex(keys[0]) == active, "cache hit reuses active texture")
+	art.tex(keys[8])
+	runner.check(art._large_cache.has(keys[0]), "recently read background survives")
+	runner.check(not art._large_cache.has(keys[1]), "availability probe does not pin oldest")
+	for i in range(9, 20):
+		art.tex(keys[i])
+	runner.check(not art._large_cache.has(keys[0]), "active scene does not pin cache entry")
+	runner.check(active.get_width() > 0, "eviction leaves active scene texture usable")
+	runner.check(art.tex("ui/panel") == icon, "small art permanently cached")
+	art.free()
+
+
+func test_all_five_large_groups_share_one_limit_including_explicit_detail() -> void:
+	var art = load("res://autoload/art.gd").new()
+	for group in ["backdrops", "cards", "events", "city_map", "world_map"]:
+		for prefix in ["", "world_detail/"]:
+			var files := DirAccess.open("res://assets/world_detail/" + group).get_files()
+			for file in files:
+				if file.ends_with(".png"):
+					var key: String = prefix + group + "/" + file.get_basename()
+					runner.check(art.tex(key) != null, "large image loads " + key)
+					runner.check(art._large_cache.size() <= 8, "shared limit " + key)
+					runner.check(not art._cache.has(key), "no permanent large entry " + key)
+					break
+	art.free()

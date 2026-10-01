@@ -17,7 +17,13 @@ const C_RED := Color8(234, 112, 92)
 const C_GOLD := Color8(226, 180, 82)
 const C_PURPLE := Color8(170, 130, 214)
 
+const LARGE_CACHE_LIMIT := 8
+const LARGE_TEXTURE_GROUPS := ["backdrops", "cards", "events", "city_map", "world_map"]
+
 var _cache := {}
+# Dictionary insertion order is least to most recently used. Erasing releases our reference;
+# live scenes may keep their own texture until they leave the tree.
+var _large_cache := {}
 var _absent := {}
 var font_title: FontFile
 var font_body: FontFile
@@ -28,9 +34,18 @@ func _ready() -> void:
 	font_body = load("res://assets/fonts/Inter.ttf")
 
 
+func _is_large_texture(path: String) -> bool:
+	return path.trim_prefix("world_detail/").get_slice("/", 0) in LARGE_TEXTURE_GROUPS
+
+
 func tex(path: String) -> Texture2D:
-	if _cache.has(path):
-		return _cache[path]
+	var cache: Dictionary = _large_cache if _is_large_texture(path) else _cache
+	if cache.has(path):
+		var cached: Texture2D = cache[path]
+		if _is_large_texture(path):
+			cache.erase(path)
+			cache[path] = cached
+		return cached
 	var full := "res://assets/" + path + ".png"
 	var t: Texture2D = null
 	var detail := "res://assets/world_detail/" + path + ".png"
@@ -48,7 +63,9 @@ func tex(path: String) -> Texture2D:
 		t = load(full)
 	else:
 		push_warning("Art: missing texture " + full)
-	_cache[path] = t
+	cache[path] = t
+	if _is_large_texture(path) and cache.size() > LARGE_CACHE_LIMIT:
+		cache.erase(cache.keys()[0])
 	return t
 
 
@@ -56,8 +73,9 @@ func tex(path: String) -> Texture2D:
 ## (logos, chapter cards, poses, NPC sheets...) shows up as soon as the file is committed; until then callers
 ## keep their current look.
 func has_tex(path: String) -> bool:
-	if _cache.has(path):
-		return _cache[path] != null
+	var cache: Dictionary = _large_cache if _is_large_texture(path) else _cache
+	if cache.has(path):
+		return cache[path] != null
 	if _absent.has(path):
 		return false
 	var ok := ResourceLoader.exists("res://assets/" + path + ".png") or (

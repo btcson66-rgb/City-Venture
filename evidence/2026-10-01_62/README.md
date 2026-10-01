@@ -57,3 +57,10 @@ godot --headless --path game -- --bot=walkthrough --lang=zh_TW --out=<output>
 Windows 實際使用已安裝的 Python 3.12.10、Godot 4.5.1 和 Git Bash；opencc-python-reimplemented 已安裝。
 打包成品保留在此工作區的 ignored `build/`、`dist/`；repo 只保留雜湊、大小、JPG 與文字證據。
 本張送 Draft PR，等待審閱／合併；#63 尚未開工。
+
+## PR #74 記憶體審查修正
+
+五類大圖共用最多 8 張的 LRU；其他小圖維持永久快取。新增三項回歸測試後為 274/274 全綠。
+七個已實作街區巡禮的 RENDER_TEXTURE_MEM_USED：705,795,943 → 700,487,839 bytes。
+巡禮後連讀 20 張背景：974,655,313 → 859,182,632 bytes；大圖快取 26 → 8 張。
+完整量測方法、逐站數值與限制見 [memory_review/README.md](memory_review/README.md)。

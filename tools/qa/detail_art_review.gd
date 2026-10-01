@@ -63,9 +63,10 @@ func run() -> void:
 			var before := Vector2.ZERO
 			for mode in ["native", "detail"]:
 				art._cache.clear()
+				art._large_cache.clear()
 				kit._theme = null
 				if mode == "native":
-					art._cache[key] = native
+					(art._large_cache if art._is_large_texture(key) else art._cache)[key] = native
 					for panel in ["panel", "button", "button_hover", "button_pressed", "button_disabled"]:
 						art._cache["ui/" + panel] = load("res://assets/ui/" + panel + ".png")
 					for icon in ["bank", "map", "mail"]:

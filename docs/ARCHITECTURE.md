@@ -211,6 +211,9 @@ Each objective has `complete_when` conditions (tiny condition DSL shared with ev
 - Detail art resolution (`#62`): `Art.tex(path)` prefers `assets/world_detail/<path>.png`. Its cached ImageTexture retains
   the full imported image and overrides only the logical size to the native image's dimensions (or one quarter for
   detail-only files). Atlas regions, nine-slice margins, backdrop pan and UI hit targets remain in native pixels.
+  `backdrops/`, `cards/`, `events/`, `city_map/` and `world_map/` share an eight-entry LRU cache, including
+  explicit `world_detail/` paths. Texture reads refresh recency; existence probes do not. Eviction releases only
+  the cache reference so active scenes remain valid. All other texture categories stay permanently cached.
   Explicit `world_detail/` keys retain physical dimensions for existing world/character fitting code. World collision
   continues reading the native alpha mask. Backgrounds and maps use lossy WebP import at quality 0.85; other art stays
   lossless. Release presets exclude only `tests/*`; packaging enforces decimal MB ceilings through

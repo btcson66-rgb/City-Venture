@@ -35,5 +35,6 @@ func probe(group: String, files: PackedStringArray, art: Node) -> int:
 				failures += 1
 				push_error("Packed detail missing " + key)
 			art._cache.erase(key)
+			art._large_cache.erase(key)
 			count += 1
 	return count
