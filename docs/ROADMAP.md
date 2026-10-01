@@ -20,6 +20,15 @@ Civic Center, Financial, Shopping Street, Old Town, Harbor Implemented.
 | P0 | [#52](https://github.com/btcson66-rgb/City-Venture/issues/52) | Loans you can actually take: every lending entry leads to Borrow or a clear next step, a "why not / what to do" checklist, no 30-day clock jump |
 | P0 | [#39](https://github.com/btcson66-rgb/City-Venture/issues/39) | See where you can do things: interaction markers, a "what you can do here" card, a City Guide phone app |
 | P1 | [#62](https://github.com/btcson66-rgb/City-Venture/issues/62) | Wire the delivered 4× backdrops, cards, maps and UI art at their logical size; web build size budget |
+| P1 | [#63](https://github.com/btcson66-rgb/City-Venture/issues/63) | Industry framework: industry registry, segment P&L, generic B2B Jobs and Assets (base for #64–#71) |
+| P1 | [#64](https://github.com/btcson66-rgb/City-Venture/issues/64) | Manufacturing + Industrial district: OEM orders, Line Planner, yield and QC, own-brand supply to ecommerce |
+| P1 | [#65](https://github.com/btcson66-rgb/City-Venture/issues/65) | Real estate + Residential district: brokerage (Matchmaker), mortgages and rentals, renovation, developing Lot 7 |
+| P1 | [#66](https://github.com/btcson66-rgb/City-Venture/issues/66) | Media / advertising + University district: briefs, Campaign Mixer, Creative Pitch, own media |
+| P1 | [#67](https://github.com/btcson66-rgb/City-Venture/issues/67) | Hotel + Luxury Heights: Rate Board (pricing, channels, overbooking), housekeeping, reviews, expansion |
+| P2 | [#68](https://github.com/btcson66-rgb/City-Venture/issues/68) | Automotive + Airport district: car auctions and reconditioning, rental fleet, dealership |
+| P2 | [#69](https://github.com/btcson66-rgb/City-Venture/issues/69) | Energy: solar installs (Roof Survey), storage, subsidies, EV charging network |
+| P2 | [#70](https://github.com/btcson66-rgb/City-Venture/issues/70) | International trade: RFQ, Incoterms Deal Sheet, insurance, customs, FX, letters of credit |
+| P2 | [#71](https://github.com/btcson66-rgb/City-Venture/issues/71) | Industry synergies: internal supply and transfer pricing, multi-industry jobs, industry milestones |
 | P1 | [#25](https://github.com/btcson66-rgb/City-Venture/issues/25) | "!" explanation badges on every existing screen |
 | P1 | [#26](https://github.com/btcson66-rgb/City-Venture/issues/26) | 4× detail art for buildings, ground tiles and vehicles |
 | P1 | [#27](https://github.com/btcson66-rgb/City-Venture/issues/27) | Era street dressing: port cranes (Year 3), solar roofs and EV chargers (Year 4) |
@@ -38,11 +47,11 @@ Civic Center, Financial, Shopping Street, Old Town, Harbor Implemented.
 
 **Work order for Codex** (one ticket at a time; start the next from the latest `claude/exciting-bardeen-y71ixv` once
 the previous PR is merged). First the **Friends Beta 0.2.0** (`docs/FRIENDS_BETA.md`): ~~#21~~ → ~~#36~~ → #52 → #39 → #44 → #29 →
-#22 → #23 → #25 → #45. After the beta: #62 → #40 → #28 → #26 → #27 → #30 → #31 → #42 → #43 → #41 → #32 → #33 → #34 → #35.
+#22 → #23 → #25 → #45. After the beta: #62 → #63 → #64 → #65 → #66 → #67 → #40 → #68 → #69 → #71 → #28 → #26 → #27 → #30 → #31 → #70 → #42 → #43 → #41 → #32 → #33 → #34 → #35.
 A ticket whose dependency is not merged yet waits; take the next one instead.
 
-Next in line (tickets written when the above land): new districts (Residential, University, Luxury Heights, Airport,
-Industrial), each with one business.
+New districts now come with their industry: Industrial (#64, #69), Residential (#65), University (#66),
+Luxury Heights (#67), Airport (#68, #70).
 
 ---
 
