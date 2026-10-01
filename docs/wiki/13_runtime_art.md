@@ -4,7 +4,7 @@
 
 目前覆蓋：八個室內的主要家具與材質、預設主角走路、12 位具名 NPC 的三方向四表情、5 位排程坐姿、6 位室內顧客及 13 組對話頭像。
 
-範圍限制：自訂主角造型、換裝、街道行人、僱員及建築外觀仍有原素材。坐姿目前為靜態姿勢，未提供四種坐姿表情；不代表全遊戲美術已完成。
+2026-09-30 範圍限制（歷史）：當時自訂主角、換裝、路人及僱員仍有原素材。**2026-10-01 已補完整自訂分層與姿勢**，見文末本批清單；建築與未推出內容仍依各批紀錄，不代表全遊戲美術已完成。
 
 來源與完整提示詞：../art_sources/runtime_20260930/sources.json；打包：tools/art/runtime_pack.py。
 
@@ -241,3 +241,1784 @@
 - `world_detail/events/rail_frozen.png`
 - `events/acquisition_offer.png`
 - `world_detail/events/acquisition_offer.png`
+
+## 2026-10-01 自訂角色品質修正
+
+美術狀態：完整分層素材已交（原尺寸、4×、匯入檔）；建立器、頭像與全身預览共用素材。六種膚色、三種外型、四種臉型、八種髮型與現有服裝不再切換到另一套低解析輪廓。保留具名 NPC 專屬覆寫。
+
+`Art.tex` 保留既有 logical key，優先讀高解析分層圖；移除只有預設造型才會使用的單張主角覆寫。四表情 `*_expressions` 層獨立於走路影格，頭像與建立器全身同步。腳底 (16,46)、32×48 邏輯格、碰撞與存檔外觀欄位不變。
+
+材質原畫由 imagegen 生成，SVG 原稿負責分層與姿勢；所有提示詞、原畫、打包邊界和可重建來源見 `docs/art_sources/custom_character_20261001/`。完整實機證據見 `evidence/20261001_character_customization/README.md`。這批不宣稱已完成所有建築與未推出內容的美術。
+
+共有 1040 個圖層/姿勢檔名；下列每項各交原尺寸及 world_detail 4×：
+
+- `body_masculine_round`
+- `body_masculine_round_sit`
+- `body_masculine_round_idle`
+- `body_masculine_round_phone`
+- `body_masculine_round_interact`
+- `body_masculine_round_carry`
+- `body_masculine_oval`
+- `body_masculine_oval_sit`
+- `body_masculine_oval_idle`
+- `body_masculine_oval_phone`
+- `body_masculine_oval_interact`
+- `body_masculine_oval_carry`
+- `body_masculine_square`
+- `body_masculine_square_sit`
+- `body_masculine_square_idle`
+- `body_masculine_square_phone`
+- `body_masculine_square_interact`
+- `body_masculine_square_carry`
+- `body_masculine_heart`
+- `body_masculine_heart_sit`
+- `body_masculine_heart_idle`
+- `body_masculine_heart_phone`
+- `body_masculine_heart_interact`
+- `body_masculine_heart_carry`
+- `body_feminine_round`
+- `body_feminine_round_sit`
+- `body_feminine_round_idle`
+- `body_feminine_round_phone`
+- `body_feminine_round_interact`
+- `body_feminine_round_carry`
+- `body_feminine_oval`
+- `body_feminine_oval_sit`
+- `body_feminine_oval_idle`
+- `body_feminine_oval_phone`
+- `body_feminine_oval_interact`
+- `body_feminine_oval_carry`
+- `body_feminine_square`
+- `body_feminine_square_sit`
+- `body_feminine_square_idle`
+- `body_feminine_square_phone`
+- `body_feminine_square_interact`
+- `body_feminine_square_carry`
+- `body_feminine_heart`
+- `body_feminine_heart_sit`
+- `body_feminine_heart_idle`
+- `body_feminine_heart_phone`
+- `body_feminine_heart_interact`
+- `body_feminine_heart_carry`
+- `body_neutral_round`
+- `body_neutral_round_sit`
+- `body_neutral_round_idle`
+- `body_neutral_round_phone`
+- `body_neutral_round_interact`
+- `body_neutral_round_carry`
+- `body_neutral_oval`
+- `body_neutral_oval_sit`
+- `body_neutral_oval_idle`
+- `body_neutral_oval_phone`
+- `body_neutral_oval_interact`
+- `body_neutral_oval_carry`
+- `body_neutral_square`
+- `body_neutral_square_sit`
+- `body_neutral_square_idle`
+- `body_neutral_square_phone`
+- `body_neutral_square_interact`
+- `body_neutral_square_carry`
+- `body_neutral_heart`
+- `body_neutral_heart_sit`
+- `body_neutral_heart_idle`
+- `body_neutral_heart_phone`
+- `body_neutral_heart_interact`
+- `body_neutral_heart_carry`
+- `hair_messy_back`
+- `hair_messy_back_sit`
+- `hair_messy_back_idle`
+- `hair_messy_back_phone`
+- `hair_messy_back_interact`
+- `hair_messy_back_carry`
+- `hair_messy_front`
+- `hair_messy_front_sit`
+- `hair_messy_front_idle`
+- `hair_messy_front_phone`
+- `hair_messy_front_interact`
+- `hair_messy_front_carry`
+- `hair_short_neat_back`
+- `hair_short_neat_back_sit`
+- `hair_short_neat_back_idle`
+- `hair_short_neat_back_phone`
+- `hair_short_neat_back_interact`
+- `hair_short_neat_back_carry`
+- `hair_short_neat_front`
+- `hair_short_neat_front_sit`
+- `hair_short_neat_front_idle`
+- `hair_short_neat_front_phone`
+- `hair_short_neat_front_interact`
+- `hair_short_neat_front_carry`
+- `hair_buzz_back`
+- `hair_buzz_back_sit`
+- `hair_buzz_back_idle`
+- `hair_buzz_back_phone`
+- `hair_buzz_back_interact`
+- `hair_buzz_back_carry`
+- `hair_buzz_front`
+- `hair_buzz_front_sit`
+- `hair_buzz_front_idle`
+- `hair_buzz_front_phone`
+- `hair_buzz_front_interact`
+- `hair_buzz_front_carry`
+- `hair_side_part_back`
+- `hair_side_part_back_sit`
+- `hair_side_part_back_idle`
+- `hair_side_part_back_phone`
+- `hair_side_part_back_interact`
+- `hair_side_part_back_carry`
+- `hair_side_part_front`
+- `hair_side_part_front_sit`
+- `hair_side_part_front_idle`
+- `hair_side_part_front_phone`
+- `hair_side_part_front_interact`
+- `hair_side_part_front_carry`
+- `hair_bob_back`
+- `hair_bob_back_sit`
+- `hair_bob_back_idle`
+- `hair_bob_back_phone`
+- `hair_bob_back_interact`
+- `hair_bob_back_carry`
+- `hair_bob_front`
+- `hair_bob_front_sit`
+- `hair_bob_front_idle`
+- `hair_bob_front_phone`
+- `hair_bob_front_interact`
+- `hair_bob_front_carry`
+- `hair_long_back`
+- `hair_long_back_sit`
+- `hair_long_back_idle`
+- `hair_long_back_phone`
+- `hair_long_back_interact`
+- `hair_long_back_carry`
+- `hair_long_front`
+- `hair_long_front_sit`
+- `hair_long_front_idle`
+- `hair_long_front_phone`
+- `hair_long_front_interact`
+- `hair_long_front_carry`
+- `hair_ponytail_back`
+- `hair_ponytail_back_sit`
+- `hair_ponytail_back_idle`
+- `hair_ponytail_back_phone`
+- `hair_ponytail_back_interact`
+- `hair_ponytail_back_carry`
+- `hair_ponytail_front`
+- `hair_ponytail_front_sit`
+- `hair_ponytail_front_idle`
+- `hair_ponytail_front_phone`
+- `hair_ponytail_front_interact`
+- `hair_ponytail_front_carry`
+- `hair_bun_back`
+- `hair_bun_back_sit`
+- `hair_bun_back_idle`
+- `hair_bun_back_phone`
+- `hair_bun_back_interact`
+- `hair_bun_back_carry`
+- `hair_bun_front`
+- `hair_bun_front_sit`
+- `hair_bun_front_idle`
+- `hair_bun_front_phone`
+- `hair_bun_front_interact`
+- `hair_bun_front_carry`
+- `eyes_round`
+- `eyes_round_sit`
+- `eyes_round_idle`
+- `eyes_round_phone`
+- `eyes_round_interact`
+- `eyes_round_carry`
+- `eyes_round_expressions`
+- `eyes_round_expressions_sit`
+- `eyes_round_expressions_idle`
+- `eyes_round_expressions_phone`
+- `eyes_round_expressions_interact`
+- `eyes_round_expressions_carry`
+- `iris_round`
+- `iris_round_sit`
+- `iris_round_idle`
+- `iris_round_phone`
+- `iris_round_interact`
+- `iris_round_carry`
+- `iris_round_expressions`
+- `iris_round_expressions_sit`
+- `iris_round_expressions_idle`
+- `iris_round_expressions_phone`
+- `iris_round_expressions_interact`
+- `iris_round_expressions_carry`
+- `eyes_detail_round`
+- `eyes_detail_round_sit`
+- `eyes_detail_round_idle`
+- `eyes_detail_round_phone`
+- `eyes_detail_round_interact`
+- `eyes_detail_round_carry`
+- `eyes_detail_round_expressions`
+- `eyes_detail_round_expressions_sit`
+- `eyes_detail_round_expressions_idle`
+- `eyes_detail_round_expressions_phone`
+- `eyes_detail_round_expressions_interact`
+- `eyes_detail_round_expressions_carry`
+- `eyes_almond`
+- `eyes_almond_sit`
+- `eyes_almond_idle`
+- `eyes_almond_phone`
+- `eyes_almond_interact`
+- `eyes_almond_carry`
+- `eyes_almond_expressions`
+- `eyes_almond_expressions_sit`
+- `eyes_almond_expressions_idle`
+- `eyes_almond_expressions_phone`
+- `eyes_almond_expressions_interact`
+- `eyes_almond_expressions_carry`
+- `iris_almond`
+- `iris_almond_sit`
+- `iris_almond_idle`
+- `iris_almond_phone`
+- `iris_almond_interact`
+- `iris_almond_carry`
+- `iris_almond_expressions`
+- `iris_almond_expressions_sit`
+- `iris_almond_expressions_idle`
+- `iris_almond_expressions_phone`
+- `iris_almond_expressions_interact`
+- `iris_almond_expressions_carry`
+- `eyes_detail_almond`
+- `eyes_detail_almond_sit`
+- `eyes_detail_almond_idle`
+- `eyes_detail_almond_phone`
+- `eyes_detail_almond_interact`
+- `eyes_detail_almond_carry`
+- `eyes_detail_almond_expressions`
+- `eyes_detail_almond_expressions_sit`
+- `eyes_detail_almond_expressions_idle`
+- `eyes_detail_almond_expressions_phone`
+- `eyes_detail_almond_expressions_interact`
+- `eyes_detail_almond_expressions_carry`
+- `eyes_narrow`
+- `eyes_narrow_sit`
+- `eyes_narrow_idle`
+- `eyes_narrow_phone`
+- `eyes_narrow_interact`
+- `eyes_narrow_carry`
+- `eyes_narrow_expressions`
+- `eyes_narrow_expressions_sit`
+- `eyes_narrow_expressions_idle`
+- `eyes_narrow_expressions_phone`
+- `eyes_narrow_expressions_interact`
+- `eyes_narrow_expressions_carry`
+- `iris_narrow`
+- `iris_narrow_sit`
+- `iris_narrow_idle`
+- `iris_narrow_phone`
+- `iris_narrow_interact`
+- `iris_narrow_carry`
+- `iris_narrow_expressions`
+- `iris_narrow_expressions_sit`
+- `iris_narrow_expressions_idle`
+- `iris_narrow_expressions_phone`
+- `iris_narrow_expressions_interact`
+- `iris_narrow_expressions_carry`
+- `eyes_detail_narrow`
+- `eyes_detail_narrow_sit`
+- `eyes_detail_narrow_idle`
+- `eyes_detail_narrow_phone`
+- `eyes_detail_narrow_interact`
+- `eyes_detail_narrow_carry`
+- `eyes_detail_narrow_expressions`
+- `eyes_detail_narrow_expressions_sit`
+- `eyes_detail_narrow_expressions_idle`
+- `eyes_detail_narrow_expressions_phone`
+- `eyes_detail_narrow_expressions_interact`
+- `eyes_detail_narrow_expressions_carry`
+- `eyes_wide`
+- `eyes_wide_sit`
+- `eyes_wide_idle`
+- `eyes_wide_phone`
+- `eyes_wide_interact`
+- `eyes_wide_carry`
+- `eyes_wide_expressions`
+- `eyes_wide_expressions_sit`
+- `eyes_wide_expressions_idle`
+- `eyes_wide_expressions_phone`
+- `eyes_wide_expressions_interact`
+- `eyes_wide_expressions_carry`
+- `iris_wide`
+- `iris_wide_sit`
+- `iris_wide_idle`
+- `iris_wide_phone`
+- `iris_wide_interact`
+- `iris_wide_carry`
+- `iris_wide_expressions`
+- `iris_wide_expressions_sit`
+- `iris_wide_expressions_idle`
+- `iris_wide_expressions_phone`
+- `iris_wide_expressions_interact`
+- `iris_wide_expressions_carry`
+- `eyes_detail_wide`
+- `eyes_detail_wide_sit`
+- `eyes_detail_wide_idle`
+- `eyes_detail_wide_phone`
+- `eyes_detail_wide_interact`
+- `eyes_detail_wide_carry`
+- `eyes_detail_wide_expressions`
+- `eyes_detail_wide_expressions_sit`
+- `eyes_detail_wide_expressions_idle`
+- `eyes_detail_wide_expressions_phone`
+- `eyes_detail_wide_expressions_interact`
+- `eyes_detail_wide_expressions_carry`
+- `brows_straight`
+- `brows_straight_sit`
+- `brows_straight_idle`
+- `brows_straight_phone`
+- `brows_straight_interact`
+- `brows_straight_carry`
+- `brows_straight_expressions`
+- `brows_straight_expressions_sit`
+- `brows_straight_expressions_idle`
+- `brows_straight_expressions_phone`
+- `brows_straight_expressions_interact`
+- `brows_straight_expressions_carry`
+- `brows_arched`
+- `brows_arched_sit`
+- `brows_arched_idle`
+- `brows_arched_phone`
+- `brows_arched_interact`
+- `brows_arched_carry`
+- `brows_arched_expressions`
+- `brows_arched_expressions_sit`
+- `brows_arched_expressions_idle`
+- `brows_arched_expressions_phone`
+- `brows_arched_expressions_interact`
+- `brows_arched_expressions_carry`
+- `brows_thick`
+- `brows_thick_sit`
+- `brows_thick_idle`
+- `brows_thick_phone`
+- `brows_thick_interact`
+- `brows_thick_carry`
+- `brows_thick_expressions`
+- `brows_thick_expressions_sit`
+- `brows_thick_expressions_idle`
+- `brows_thick_expressions_phone`
+- `brows_thick_expressions_interact`
+- `brows_thick_expressions_carry`
+- `brows_soft`
+- `brows_soft_sit`
+- `brows_soft_idle`
+- `brows_soft_phone`
+- `brows_soft_interact`
+- `brows_soft_carry`
+- `brows_soft_expressions`
+- `brows_soft_expressions_sit`
+- `brows_soft_expressions_idle`
+- `brows_soft_expressions_phone`
+- `brows_soft_expressions_interact`
+- `brows_soft_expressions_carry`
+- `mouth_smile`
+- `mouth_smile_sit`
+- `mouth_smile_idle`
+- `mouth_smile_phone`
+- `mouth_smile_interact`
+- `mouth_smile_carry`
+- `mouth_smile_expressions`
+- `mouth_smile_expressions_sit`
+- `mouth_smile_expressions_idle`
+- `mouth_smile_expressions_phone`
+- `mouth_smile_expressions_interact`
+- `mouth_smile_expressions_carry`
+- `mouth_neutral`
+- `mouth_neutral_sit`
+- `mouth_neutral_idle`
+- `mouth_neutral_phone`
+- `mouth_neutral_interact`
+- `mouth_neutral_carry`
+- `mouth_neutral_expressions`
+- `mouth_neutral_expressions_sit`
+- `mouth_neutral_expressions_idle`
+- `mouth_neutral_expressions_phone`
+- `mouth_neutral_expressions_interact`
+- `mouth_neutral_expressions_carry`
+- `mouth_grin`
+- `mouth_grin_sit`
+- `mouth_grin_idle`
+- `mouth_grin_phone`
+- `mouth_grin_interact`
+- `mouth_grin_carry`
+- `mouth_grin_expressions`
+- `mouth_grin_expressions_sit`
+- `mouth_grin_expressions_idle`
+- `mouth_grin_expressions_phone`
+- `mouth_grin_expressions_interact`
+- `mouth_grin_expressions_carry`
+- `mouth_small`
+- `mouth_small_sit`
+- `mouth_small_idle`
+- `mouth_small_phone`
+- `mouth_small_interact`
+- `mouth_small_carry`
+- `mouth_small_expressions`
+- `mouth_small_expressions_sit`
+- `mouth_small_expressions_idle`
+- `mouth_small_expressions_phone`
+- `mouth_small_expressions_interact`
+- `mouth_small_expressions_carry`
+- `outfit_startup_casual_masculine_top`
+- `outfit_startup_casual_masculine_top_sit`
+- `outfit_startup_casual_masculine_top_idle`
+- `outfit_startup_casual_masculine_top_phone`
+- `outfit_startup_casual_masculine_top_interact`
+- `outfit_startup_casual_masculine_top_carry`
+- `outfit_startup_casual_masculine_bottom`
+- `outfit_startup_casual_masculine_bottom_sit`
+- `outfit_startup_casual_masculine_bottom_idle`
+- `outfit_startup_casual_masculine_bottom_phone`
+- `outfit_startup_casual_masculine_bottom_interact`
+- `outfit_startup_casual_masculine_bottom_carry`
+- `outfit_startup_casual_masculine_shoes`
+- `outfit_startup_casual_masculine_shoes_sit`
+- `outfit_startup_casual_masculine_shoes_idle`
+- `outfit_startup_casual_masculine_shoes_phone`
+- `outfit_startup_casual_masculine_shoes_interact`
+- `outfit_startup_casual_masculine_shoes_carry`
+- `outfit_startup_casual_feminine_top`
+- `outfit_startup_casual_feminine_top_sit`
+- `outfit_startup_casual_feminine_top_idle`
+- `outfit_startup_casual_feminine_top_phone`
+- `outfit_startup_casual_feminine_top_interact`
+- `outfit_startup_casual_feminine_top_carry`
+- `outfit_startup_casual_feminine_bottom`
+- `outfit_startup_casual_feminine_bottom_sit`
+- `outfit_startup_casual_feminine_bottom_idle`
+- `outfit_startup_casual_feminine_bottom_phone`
+- `outfit_startup_casual_feminine_bottom_interact`
+- `outfit_startup_casual_feminine_bottom_carry`
+- `outfit_startup_casual_feminine_shoes`
+- `outfit_startup_casual_feminine_shoes_sit`
+- `outfit_startup_casual_feminine_shoes_idle`
+- `outfit_startup_casual_feminine_shoes_phone`
+- `outfit_startup_casual_feminine_shoes_interact`
+- `outfit_startup_casual_feminine_shoes_carry`
+- `outfit_startup_casual_neutral_top`
+- `outfit_startup_casual_neutral_top_sit`
+- `outfit_startup_casual_neutral_top_idle`
+- `outfit_startup_casual_neutral_top_phone`
+- `outfit_startup_casual_neutral_top_interact`
+- `outfit_startup_casual_neutral_top_carry`
+- `outfit_startup_casual_neutral_bottom`
+- `outfit_startup_casual_neutral_bottom_sit`
+- `outfit_startup_casual_neutral_bottom_idle`
+- `outfit_startup_casual_neutral_bottom_phone`
+- `outfit_startup_casual_neutral_bottom_interact`
+- `outfit_startup_casual_neutral_bottom_carry`
+- `outfit_startup_casual_neutral_shoes`
+- `outfit_startup_casual_neutral_shoes_sit`
+- `outfit_startup_casual_neutral_shoes_idle`
+- `outfit_startup_casual_neutral_shoes_phone`
+- `outfit_startup_casual_neutral_shoes_interact`
+- `outfit_startup_casual_neutral_shoes_carry`
+- `outfit_office_professional_masculine_top`
+- `outfit_office_professional_masculine_top_sit`
+- `outfit_office_professional_masculine_top_idle`
+- `outfit_office_professional_masculine_top_phone`
+- `outfit_office_professional_masculine_top_interact`
+- `outfit_office_professional_masculine_top_carry`
+- `outfit_office_professional_masculine_bottom`
+- `outfit_office_professional_masculine_bottom_sit`
+- `outfit_office_professional_masculine_bottom_idle`
+- `outfit_office_professional_masculine_bottom_phone`
+- `outfit_office_professional_masculine_bottom_interact`
+- `outfit_office_professional_masculine_bottom_carry`
+- `outfit_office_professional_masculine_shoes`
+- `outfit_office_professional_masculine_shoes_sit`
+- `outfit_office_professional_masculine_shoes_idle`
+- `outfit_office_professional_masculine_shoes_phone`
+- `outfit_office_professional_masculine_shoes_interact`
+- `outfit_office_professional_masculine_shoes_carry`
+- `outfit_office_professional_feminine_top`
+- `outfit_office_professional_feminine_top_sit`
+- `outfit_office_professional_feminine_top_idle`
+- `outfit_office_professional_feminine_top_phone`
+- `outfit_office_professional_feminine_top_interact`
+- `outfit_office_professional_feminine_top_carry`
+- `outfit_office_professional_feminine_bottom`
+- `outfit_office_professional_feminine_bottom_sit`
+- `outfit_office_professional_feminine_bottom_idle`
+- `outfit_office_professional_feminine_bottom_phone`
+- `outfit_office_professional_feminine_bottom_interact`
+- `outfit_office_professional_feminine_bottom_carry`
+- `outfit_office_professional_feminine_shoes`
+- `outfit_office_professional_feminine_shoes_sit`
+- `outfit_office_professional_feminine_shoes_idle`
+- `outfit_office_professional_feminine_shoes_phone`
+- `outfit_office_professional_feminine_shoes_interact`
+- `outfit_office_professional_feminine_shoes_carry`
+- `outfit_office_professional_neutral_top`
+- `outfit_office_professional_neutral_top_sit`
+- `outfit_office_professional_neutral_top_idle`
+- `outfit_office_professional_neutral_top_phone`
+- `outfit_office_professional_neutral_top_interact`
+- `outfit_office_professional_neutral_top_carry`
+- `outfit_office_professional_neutral_bottom`
+- `outfit_office_professional_neutral_bottom_sit`
+- `outfit_office_professional_neutral_bottom_idle`
+- `outfit_office_professional_neutral_bottom_phone`
+- `outfit_office_professional_neutral_bottom_interact`
+- `outfit_office_professional_neutral_bottom_carry`
+- `outfit_office_professional_neutral_shoes`
+- `outfit_office_professional_neutral_shoes_sit`
+- `outfit_office_professional_neutral_shoes_idle`
+- `outfit_office_professional_neutral_shoes_phone`
+- `outfit_office_professional_neutral_shoes_interact`
+- `outfit_office_professional_neutral_shoes_carry`
+- `outfit_home_masculine_top`
+- `outfit_home_masculine_top_sit`
+- `outfit_home_masculine_top_idle`
+- `outfit_home_masculine_top_phone`
+- `outfit_home_masculine_top_interact`
+- `outfit_home_masculine_top_carry`
+- `outfit_home_masculine_bottom`
+- `outfit_home_masculine_bottom_sit`
+- `outfit_home_masculine_bottom_idle`
+- `outfit_home_masculine_bottom_phone`
+- `outfit_home_masculine_bottom_interact`
+- `outfit_home_masculine_bottom_carry`
+- `outfit_home_masculine_shoes`
+- `outfit_home_masculine_shoes_sit`
+- `outfit_home_masculine_shoes_idle`
+- `outfit_home_masculine_shoes_phone`
+- `outfit_home_masculine_shoes_interact`
+- `outfit_home_masculine_shoes_carry`
+- `outfit_home_feminine_top`
+- `outfit_home_feminine_top_sit`
+- `outfit_home_feminine_top_idle`
+- `outfit_home_feminine_top_phone`
+- `outfit_home_feminine_top_interact`
+- `outfit_home_feminine_top_carry`
+- `outfit_home_feminine_bottom`
+- `outfit_home_feminine_bottom_sit`
+- `outfit_home_feminine_bottom_idle`
+- `outfit_home_feminine_bottom_phone`
+- `outfit_home_feminine_bottom_interact`
+- `outfit_home_feminine_bottom_carry`
+- `outfit_home_feminine_shoes`
+- `outfit_home_feminine_shoes_sit`
+- `outfit_home_feminine_shoes_idle`
+- `outfit_home_feminine_shoes_phone`
+- `outfit_home_feminine_shoes_interact`
+- `outfit_home_feminine_shoes_carry`
+- `outfit_home_neutral_top`
+- `outfit_home_neutral_top_sit`
+- `outfit_home_neutral_top_idle`
+- `outfit_home_neutral_top_phone`
+- `outfit_home_neutral_top_interact`
+- `outfit_home_neutral_top_carry`
+- `outfit_home_neutral_bottom`
+- `outfit_home_neutral_bottom_sit`
+- `outfit_home_neutral_bottom_idle`
+- `outfit_home_neutral_bottom_phone`
+- `outfit_home_neutral_bottom_interact`
+- `outfit_home_neutral_bottom_carry`
+- `outfit_home_neutral_shoes`
+- `outfit_home_neutral_shoes_sit`
+- `outfit_home_neutral_shoes_idle`
+- `outfit_home_neutral_shoes_phone`
+- `outfit_home_neutral_shoes_interact`
+- `outfit_home_neutral_shoes_carry`
+- `outfit_barista_masculine_top`
+- `outfit_barista_masculine_top_sit`
+- `outfit_barista_masculine_top_idle`
+- `outfit_barista_masculine_top_phone`
+- `outfit_barista_masculine_top_interact`
+- `outfit_barista_masculine_top_carry`
+- `outfit_barista_masculine_bottom`
+- `outfit_barista_masculine_bottom_sit`
+- `outfit_barista_masculine_bottom_idle`
+- `outfit_barista_masculine_bottom_phone`
+- `outfit_barista_masculine_bottom_interact`
+- `outfit_barista_masculine_bottom_carry`
+- `outfit_barista_masculine_shoes`
+- `outfit_barista_masculine_shoes_sit`
+- `outfit_barista_masculine_shoes_idle`
+- `outfit_barista_masculine_shoes_phone`
+- `outfit_barista_masculine_shoes_interact`
+- `outfit_barista_masculine_shoes_carry`
+- `outfit_barista_masculine_top_detail`
+- `outfit_barista_masculine_top_detail_sit`
+- `outfit_barista_masculine_top_detail_idle`
+- `outfit_barista_masculine_top_detail_phone`
+- `outfit_barista_masculine_top_detail_interact`
+- `outfit_barista_masculine_top_detail_carry`
+- `outfit_barista_feminine_top`
+- `outfit_barista_feminine_top_sit`
+- `outfit_barista_feminine_top_idle`
+- `outfit_barista_feminine_top_phone`
+- `outfit_barista_feminine_top_interact`
+- `outfit_barista_feminine_top_carry`
+- `outfit_barista_feminine_bottom`
+- `outfit_barista_feminine_bottom_sit`
+- `outfit_barista_feminine_bottom_idle`
+- `outfit_barista_feminine_bottom_phone`
+- `outfit_barista_feminine_bottom_interact`
+- `outfit_barista_feminine_bottom_carry`
+- `outfit_barista_feminine_shoes`
+- `outfit_barista_feminine_shoes_sit`
+- `outfit_barista_feminine_shoes_idle`
+- `outfit_barista_feminine_shoes_phone`
+- `outfit_barista_feminine_shoes_interact`
+- `outfit_barista_feminine_shoes_carry`
+- `outfit_barista_feminine_top_detail`
+- `outfit_barista_feminine_top_detail_sit`
+- `outfit_barista_feminine_top_detail_idle`
+- `outfit_barista_feminine_top_detail_phone`
+- `outfit_barista_feminine_top_detail_interact`
+- `outfit_barista_feminine_top_detail_carry`
+- `outfit_barista_neutral_top`
+- `outfit_barista_neutral_top_sit`
+- `outfit_barista_neutral_top_idle`
+- `outfit_barista_neutral_top_phone`
+- `outfit_barista_neutral_top_interact`
+- `outfit_barista_neutral_top_carry`
+- `outfit_barista_neutral_bottom`
+- `outfit_barista_neutral_bottom_sit`
+- `outfit_barista_neutral_bottom_idle`
+- `outfit_barista_neutral_bottom_phone`
+- `outfit_barista_neutral_bottom_interact`
+- `outfit_barista_neutral_bottom_carry`
+- `outfit_barista_neutral_shoes`
+- `outfit_barista_neutral_shoes_sit`
+- `outfit_barista_neutral_shoes_idle`
+- `outfit_barista_neutral_shoes_phone`
+- `outfit_barista_neutral_shoes_interact`
+- `outfit_barista_neutral_shoes_carry`
+- `outfit_barista_neutral_top_detail`
+- `outfit_barista_neutral_top_detail_sit`
+- `outfit_barista_neutral_top_detail_idle`
+- `outfit_barista_neutral_top_detail_phone`
+- `outfit_barista_neutral_top_detail_interact`
+- `outfit_barista_neutral_top_detail_carry`
+- `outfit_business_suit_masculine_top`
+- `outfit_business_suit_masculine_top_sit`
+- `outfit_business_suit_masculine_top_idle`
+- `outfit_business_suit_masculine_top_phone`
+- `outfit_business_suit_masculine_top_interact`
+- `outfit_business_suit_masculine_top_carry`
+- `outfit_business_suit_masculine_bottom`
+- `outfit_business_suit_masculine_bottom_sit`
+- `outfit_business_suit_masculine_bottom_idle`
+- `outfit_business_suit_masculine_bottom_phone`
+- `outfit_business_suit_masculine_bottom_interact`
+- `outfit_business_suit_masculine_bottom_carry`
+- `outfit_business_suit_masculine_shoes`
+- `outfit_business_suit_masculine_shoes_sit`
+- `outfit_business_suit_masculine_shoes_idle`
+- `outfit_business_suit_masculine_shoes_phone`
+- `outfit_business_suit_masculine_shoes_interact`
+- `outfit_business_suit_masculine_shoes_carry`
+- `outfit_business_suit_masculine_top_detail`
+- `outfit_business_suit_masculine_top_detail_sit`
+- `outfit_business_suit_masculine_top_detail_idle`
+- `outfit_business_suit_masculine_top_detail_phone`
+- `outfit_business_suit_masculine_top_detail_interact`
+- `outfit_business_suit_masculine_top_detail_carry`
+- `outfit_business_suit_feminine_top`
+- `outfit_business_suit_feminine_top_sit`
+- `outfit_business_suit_feminine_top_idle`
+- `outfit_business_suit_feminine_top_phone`
+- `outfit_business_suit_feminine_top_interact`
+- `outfit_business_suit_feminine_top_carry`
+- `outfit_business_suit_feminine_bottom`
+- `outfit_business_suit_feminine_bottom_sit`
+- `outfit_business_suit_feminine_bottom_idle`
+- `outfit_business_suit_feminine_bottom_phone`
+- `outfit_business_suit_feminine_bottom_interact`
+- `outfit_business_suit_feminine_bottom_carry`
+- `outfit_business_suit_feminine_shoes`
+- `outfit_business_suit_feminine_shoes_sit`
+- `outfit_business_suit_feminine_shoes_idle`
+- `outfit_business_suit_feminine_shoes_phone`
+- `outfit_business_suit_feminine_shoes_interact`
+- `outfit_business_suit_feminine_shoes_carry`
+- `outfit_business_suit_feminine_top_detail`
+- `outfit_business_suit_feminine_top_detail_sit`
+- `outfit_business_suit_feminine_top_detail_idle`
+- `outfit_business_suit_feminine_top_detail_phone`
+- `outfit_business_suit_feminine_top_detail_interact`
+- `outfit_business_suit_feminine_top_detail_carry`
+- `outfit_business_suit_neutral_top`
+- `outfit_business_suit_neutral_top_sit`
+- `outfit_business_suit_neutral_top_idle`
+- `outfit_business_suit_neutral_top_phone`
+- `outfit_business_suit_neutral_top_interact`
+- `outfit_business_suit_neutral_top_carry`
+- `outfit_business_suit_neutral_bottom`
+- `outfit_business_suit_neutral_bottom_sit`
+- `outfit_business_suit_neutral_bottom_idle`
+- `outfit_business_suit_neutral_bottom_phone`
+- `outfit_business_suit_neutral_bottom_interact`
+- `outfit_business_suit_neutral_bottom_carry`
+- `outfit_business_suit_neutral_shoes`
+- `outfit_business_suit_neutral_shoes_sit`
+- `outfit_business_suit_neutral_shoes_idle`
+- `outfit_business_suit_neutral_shoes_phone`
+- `outfit_business_suit_neutral_shoes_interact`
+- `outfit_business_suit_neutral_shoes_carry`
+- `outfit_business_suit_neutral_top_detail`
+- `outfit_business_suit_neutral_top_detail_sit`
+- `outfit_business_suit_neutral_top_detail_idle`
+- `outfit_business_suit_neutral_top_detail_phone`
+- `outfit_business_suit_neutral_top_detail_interact`
+- `outfit_business_suit_neutral_top_detail_carry`
+- `outfit_civic_staff_masculine_top`
+- `outfit_civic_staff_masculine_top_sit`
+- `outfit_civic_staff_masculine_top_idle`
+- `outfit_civic_staff_masculine_top_phone`
+- `outfit_civic_staff_masculine_top_interact`
+- `outfit_civic_staff_masculine_top_carry`
+- `outfit_civic_staff_masculine_bottom`
+- `outfit_civic_staff_masculine_bottom_sit`
+- `outfit_civic_staff_masculine_bottom_idle`
+- `outfit_civic_staff_masculine_bottom_phone`
+- `outfit_civic_staff_masculine_bottom_interact`
+- `outfit_civic_staff_masculine_bottom_carry`
+- `outfit_civic_staff_masculine_shoes`
+- `outfit_civic_staff_masculine_shoes_sit`
+- `outfit_civic_staff_masculine_shoes_idle`
+- `outfit_civic_staff_masculine_shoes_phone`
+- `outfit_civic_staff_masculine_shoes_interact`
+- `outfit_civic_staff_masculine_shoes_carry`
+- `outfit_civic_staff_masculine_top_detail`
+- `outfit_civic_staff_masculine_top_detail_sit`
+- `outfit_civic_staff_masculine_top_detail_idle`
+- `outfit_civic_staff_masculine_top_detail_phone`
+- `outfit_civic_staff_masculine_top_detail_interact`
+- `outfit_civic_staff_masculine_top_detail_carry`
+- `outfit_civic_staff_feminine_top`
+- `outfit_civic_staff_feminine_top_sit`
+- `outfit_civic_staff_feminine_top_idle`
+- `outfit_civic_staff_feminine_top_phone`
+- `outfit_civic_staff_feminine_top_interact`
+- `outfit_civic_staff_feminine_top_carry`
+- `outfit_civic_staff_feminine_bottom`
+- `outfit_civic_staff_feminine_bottom_sit`
+- `outfit_civic_staff_feminine_bottom_idle`
+- `outfit_civic_staff_feminine_bottom_phone`
+- `outfit_civic_staff_feminine_bottom_interact`
+- `outfit_civic_staff_feminine_bottom_carry`
+- `outfit_civic_staff_feminine_shoes`
+- `outfit_civic_staff_feminine_shoes_sit`
+- `outfit_civic_staff_feminine_shoes_idle`
+- `outfit_civic_staff_feminine_shoes_phone`
+- `outfit_civic_staff_feminine_shoes_interact`
+- `outfit_civic_staff_feminine_shoes_carry`
+- `outfit_civic_staff_feminine_top_detail`
+- `outfit_civic_staff_feminine_top_detail_sit`
+- `outfit_civic_staff_feminine_top_detail_idle`
+- `outfit_civic_staff_feminine_top_detail_phone`
+- `outfit_civic_staff_feminine_top_detail_interact`
+- `outfit_civic_staff_feminine_top_detail_carry`
+- `outfit_civic_staff_neutral_top`
+- `outfit_civic_staff_neutral_top_sit`
+- `outfit_civic_staff_neutral_top_idle`
+- `outfit_civic_staff_neutral_top_phone`
+- `outfit_civic_staff_neutral_top_interact`
+- `outfit_civic_staff_neutral_top_carry`
+- `outfit_civic_staff_neutral_bottom`
+- `outfit_civic_staff_neutral_bottom_sit`
+- `outfit_civic_staff_neutral_bottom_idle`
+- `outfit_civic_staff_neutral_bottom_phone`
+- `outfit_civic_staff_neutral_bottom_interact`
+- `outfit_civic_staff_neutral_bottom_carry`
+- `outfit_civic_staff_neutral_shoes`
+- `outfit_civic_staff_neutral_shoes_sit`
+- `outfit_civic_staff_neutral_shoes_idle`
+- `outfit_civic_staff_neutral_shoes_phone`
+- `outfit_civic_staff_neutral_shoes_interact`
+- `outfit_civic_staff_neutral_shoes_carry`
+- `outfit_civic_staff_neutral_top_detail`
+- `outfit_civic_staff_neutral_top_detail_sit`
+- `outfit_civic_staff_neutral_top_detail_idle`
+- `outfit_civic_staff_neutral_top_detail_phone`
+- `outfit_civic_staff_neutral_top_detail_interact`
+- `outfit_civic_staff_neutral_top_detail_carry`
+- `outfit_courier_masculine_top`
+- `outfit_courier_masculine_top_sit`
+- `outfit_courier_masculine_top_idle`
+- `outfit_courier_masculine_top_phone`
+- `outfit_courier_masculine_top_interact`
+- `outfit_courier_masculine_top_carry`
+- `outfit_courier_masculine_bottom`
+- `outfit_courier_masculine_bottom_sit`
+- `outfit_courier_masculine_bottom_idle`
+- `outfit_courier_masculine_bottom_phone`
+- `outfit_courier_masculine_bottom_interact`
+- `outfit_courier_masculine_bottom_carry`
+- `outfit_courier_masculine_shoes`
+- `outfit_courier_masculine_shoes_sit`
+- `outfit_courier_masculine_shoes_idle`
+- `outfit_courier_masculine_shoes_phone`
+- `outfit_courier_masculine_shoes_interact`
+- `outfit_courier_masculine_shoes_carry`
+- `outfit_courier_masculine_top_detail`
+- `outfit_courier_masculine_top_detail_sit`
+- `outfit_courier_masculine_top_detail_idle`
+- `outfit_courier_masculine_top_detail_phone`
+- `outfit_courier_masculine_top_detail_interact`
+- `outfit_courier_masculine_top_detail_carry`
+- `outfit_courier_feminine_top`
+- `outfit_courier_feminine_top_sit`
+- `outfit_courier_feminine_top_idle`
+- `outfit_courier_feminine_top_phone`
+- `outfit_courier_feminine_top_interact`
+- `outfit_courier_feminine_top_carry`
+- `outfit_courier_feminine_bottom`
+- `outfit_courier_feminine_bottom_sit`
+- `outfit_courier_feminine_bottom_idle`
+- `outfit_courier_feminine_bottom_phone`
+- `outfit_courier_feminine_bottom_interact`
+- `outfit_courier_feminine_bottom_carry`
+- `outfit_courier_feminine_shoes`
+- `outfit_courier_feminine_shoes_sit`
+- `outfit_courier_feminine_shoes_idle`
+- `outfit_courier_feminine_shoes_phone`
+- `outfit_courier_feminine_shoes_interact`
+- `outfit_courier_feminine_shoes_carry`
+- `outfit_courier_feminine_top_detail`
+- `outfit_courier_feminine_top_detail_sit`
+- `outfit_courier_feminine_top_detail_idle`
+- `outfit_courier_feminine_top_detail_phone`
+- `outfit_courier_feminine_top_detail_interact`
+- `outfit_courier_feminine_top_detail_carry`
+- `outfit_courier_neutral_top`
+- `outfit_courier_neutral_top_sit`
+- `outfit_courier_neutral_top_idle`
+- `outfit_courier_neutral_top_phone`
+- `outfit_courier_neutral_top_interact`
+- `outfit_courier_neutral_top_carry`
+- `outfit_courier_neutral_bottom`
+- `outfit_courier_neutral_bottom_sit`
+- `outfit_courier_neutral_bottom_idle`
+- `outfit_courier_neutral_bottom_phone`
+- `outfit_courier_neutral_bottom_interact`
+- `outfit_courier_neutral_bottom_carry`
+- `outfit_courier_neutral_shoes`
+- `outfit_courier_neutral_shoes_sit`
+- `outfit_courier_neutral_shoes_idle`
+- `outfit_courier_neutral_shoes_phone`
+- `outfit_courier_neutral_shoes_interact`
+- `outfit_courier_neutral_shoes_carry`
+- `outfit_courier_neutral_top_detail`
+- `outfit_courier_neutral_top_detail_sit`
+- `outfit_courier_neutral_top_detail_idle`
+- `outfit_courier_neutral_top_detail_phone`
+- `outfit_courier_neutral_top_detail_interact`
+- `outfit_courier_neutral_top_detail_carry`
+- `outfit_casual_tee_masculine_top`
+- `outfit_casual_tee_masculine_top_sit`
+- `outfit_casual_tee_masculine_top_idle`
+- `outfit_casual_tee_masculine_top_phone`
+- `outfit_casual_tee_masculine_top_interact`
+- `outfit_casual_tee_masculine_top_carry`
+- `outfit_casual_tee_masculine_bottom`
+- `outfit_casual_tee_masculine_bottom_sit`
+- `outfit_casual_tee_masculine_bottom_idle`
+- `outfit_casual_tee_masculine_bottom_phone`
+- `outfit_casual_tee_masculine_bottom_interact`
+- `outfit_casual_tee_masculine_bottom_carry`
+- `outfit_casual_tee_masculine_shoes`
+- `outfit_casual_tee_masculine_shoes_sit`
+- `outfit_casual_tee_masculine_shoes_idle`
+- `outfit_casual_tee_masculine_shoes_phone`
+- `outfit_casual_tee_masculine_shoes_interact`
+- `outfit_casual_tee_masculine_shoes_carry`
+- `outfit_casual_tee_feminine_top`
+- `outfit_casual_tee_feminine_top_sit`
+- `outfit_casual_tee_feminine_top_idle`
+- `outfit_casual_tee_feminine_top_phone`
+- `outfit_casual_tee_feminine_top_interact`
+- `outfit_casual_tee_feminine_top_carry`
+- `outfit_casual_tee_feminine_bottom`
+- `outfit_casual_tee_feminine_bottom_sit`
+- `outfit_casual_tee_feminine_bottom_idle`
+- `outfit_casual_tee_feminine_bottom_phone`
+- `outfit_casual_tee_feminine_bottom_interact`
+- `outfit_casual_tee_feminine_bottom_carry`
+- `outfit_casual_tee_feminine_shoes`
+- `outfit_casual_tee_feminine_shoes_sit`
+- `outfit_casual_tee_feminine_shoes_idle`
+- `outfit_casual_tee_feminine_shoes_phone`
+- `outfit_casual_tee_feminine_shoes_interact`
+- `outfit_casual_tee_feminine_shoes_carry`
+- `outfit_casual_tee_neutral_top`
+- `outfit_casual_tee_neutral_top_sit`
+- `outfit_casual_tee_neutral_top_idle`
+- `outfit_casual_tee_neutral_top_phone`
+- `outfit_casual_tee_neutral_top_interact`
+- `outfit_casual_tee_neutral_top_carry`
+- `outfit_casual_tee_neutral_bottom`
+- `outfit_casual_tee_neutral_bottom_sit`
+- `outfit_casual_tee_neutral_bottom_idle`
+- `outfit_casual_tee_neutral_bottom_phone`
+- `outfit_casual_tee_neutral_bottom_interact`
+- `outfit_casual_tee_neutral_bottom_carry`
+- `outfit_casual_tee_neutral_shoes`
+- `outfit_casual_tee_neutral_shoes_sit`
+- `outfit_casual_tee_neutral_shoes_idle`
+- `outfit_casual_tee_neutral_shoes_phone`
+- `outfit_casual_tee_neutral_shoes_interact`
+- `outfit_casual_tee_neutral_shoes_carry`
+- `outfit_casual_jacket_masculine_top`
+- `outfit_casual_jacket_masculine_top_sit`
+- `outfit_casual_jacket_masculine_top_idle`
+- `outfit_casual_jacket_masculine_top_phone`
+- `outfit_casual_jacket_masculine_top_interact`
+- `outfit_casual_jacket_masculine_top_carry`
+- `outfit_casual_jacket_masculine_bottom`
+- `outfit_casual_jacket_masculine_bottom_sit`
+- `outfit_casual_jacket_masculine_bottom_idle`
+- `outfit_casual_jacket_masculine_bottom_phone`
+- `outfit_casual_jacket_masculine_bottom_interact`
+- `outfit_casual_jacket_masculine_bottom_carry`
+- `outfit_casual_jacket_masculine_shoes`
+- `outfit_casual_jacket_masculine_shoes_sit`
+- `outfit_casual_jacket_masculine_shoes_idle`
+- `outfit_casual_jacket_masculine_shoes_phone`
+- `outfit_casual_jacket_masculine_shoes_interact`
+- `outfit_casual_jacket_masculine_shoes_carry`
+- `outfit_casual_jacket_feminine_top`
+- `outfit_casual_jacket_feminine_top_sit`
+- `outfit_casual_jacket_feminine_top_idle`
+- `outfit_casual_jacket_feminine_top_phone`
+- `outfit_casual_jacket_feminine_top_interact`
+- `outfit_casual_jacket_feminine_top_carry`
+- `outfit_casual_jacket_feminine_bottom`
+- `outfit_casual_jacket_feminine_bottom_sit`
+- `outfit_casual_jacket_feminine_bottom_idle`
+- `outfit_casual_jacket_feminine_bottom_phone`
+- `outfit_casual_jacket_feminine_bottom_interact`
+- `outfit_casual_jacket_feminine_bottom_carry`
+- `outfit_casual_jacket_feminine_shoes`
+- `outfit_casual_jacket_feminine_shoes_sit`
+- `outfit_casual_jacket_feminine_shoes_idle`
+- `outfit_casual_jacket_feminine_shoes_phone`
+- `outfit_casual_jacket_feminine_shoes_interact`
+- `outfit_casual_jacket_feminine_shoes_carry`
+- `outfit_casual_jacket_neutral_top`
+- `outfit_casual_jacket_neutral_top_sit`
+- `outfit_casual_jacket_neutral_top_idle`
+- `outfit_casual_jacket_neutral_top_phone`
+- `outfit_casual_jacket_neutral_top_interact`
+- `outfit_casual_jacket_neutral_top_carry`
+- `outfit_casual_jacket_neutral_bottom`
+- `outfit_casual_jacket_neutral_bottom_sit`
+- `outfit_casual_jacket_neutral_bottom_idle`
+- `outfit_casual_jacket_neutral_bottom_phone`
+- `outfit_casual_jacket_neutral_bottom_interact`
+- `outfit_casual_jacket_neutral_bottom_carry`
+- `outfit_casual_jacket_neutral_shoes`
+- `outfit_casual_jacket_neutral_shoes_sit`
+- `outfit_casual_jacket_neutral_shoes_idle`
+- `outfit_casual_jacket_neutral_shoes_phone`
+- `outfit_casual_jacket_neutral_shoes_interact`
+- `outfit_casual_jacket_neutral_shoes_carry`
+- `acc_glasses_round`
+- `acc_glasses_round_sit`
+- `acc_glasses_round_idle`
+- `acc_glasses_round_phone`
+- `acc_glasses_round_interact`
+- `acc_glasses_round_carry`
+- `acc_glasses_square`
+- `acc_glasses_square_sit`
+- `acc_glasses_square_idle`
+- `acc_glasses_square_phone`
+- `acc_glasses_square_interact`
+- `acc_glasses_square_carry`
+- `acc_backpack`
+- `acc_backpack_sit`
+- `acc_backpack_idle`
+- `acc_backpack_phone`
+- `acc_backpack_interact`
+- `acc_backpack_carry`
+- `head_round`
+- `head_oval`
+- `head_square`
+- `head_heart`
+- `hair_messy_back`
+- `hair_messy_front`
+- `hair_short_neat_back`
+- `hair_short_neat_front`
+- `hair_buzz_back`
+- `hair_buzz_front`
+- `hair_side_part_back`
+- `hair_side_part_front`
+- `hair_bob_back`
+- `hair_bob_front`
+- `hair_long_back`
+- `hair_long_front`
+- `hair_ponytail_back`
+- `hair_ponytail_front`
+- `hair_bun_back`
+- `hair_bun_front`
+- `eyes_round`
+- `iris_round`
+- `eyes_detail_round`
+- `eyes_almond`
+- `iris_almond`
+- `eyes_detail_almond`
+- `eyes_narrow`
+- `iris_narrow`
+- `eyes_detail_narrow`
+- `eyes_wide`
+- `iris_wide`
+- `eyes_detail_wide`
+- `brows_straight`
+- `brows_arched`
+- `brows_thick`
+- `brows_soft`
+- `mouth_smile`
+- `mouth_neutral`
+- `mouth_grin`
+- `mouth_small`
+- `outfit_startup_casual`
+- `outfit_office_professional`
+- `outfit_home`
+- `outfit_barista`
+- `outfit_barista_detail`
+- `outfit_business_suit`
+- `outfit_business_suit_detail`
+- `outfit_civic_staff`
+- `outfit_civic_staff_detail`
+- `outfit_courier`
+- `outfit_courier_detail`
+- `outfit_casual_tee`
+- `outfit_casual_jacket`
+- `acc_glasses_round`
+- `acc_glasses_square`
+- `acc_backpack`
+
+分層名稱的完整部件索引（供 wiki_check 按 prefix 解析）：
+
+``, `almond`, `almond_expressions`, `arched`, `arched_expressions`, `backpack`, `barista`, `bob`, `bun`, `business_suit`, `buzz`, `casual_jacket`, `casual_tee`, `civic_staff`, `courier`, `detail_almond`, `detail_almond_expressions`, `detail_narrow`, `detail_narrow_expressions`, `detail_round`, `detail_round_expressions`, `detail_wide`, `detail_wide_expressions`, `expressions`, `glasses_round`, `glasses_square`, `grin`, `grin_expressions`, `heart`, `home`, `long`, `messy`, `narrow`, `narrow_expressions`, `office_professional`, `oval`, `ponytail`, `round`, `round_expressions`, `short_neat`, `side_part`, `small`, `small_expressions`, `smile`, `smile_expressions`, `soft`, `soft_expressions`, `square`, `startup_casual`, `straight`, `straight_expressions`, `thick`, `thick_expressions`, `wide`, `wide_expressions`
+## 全遊戲美術優化：街道車流批 · 2026-10-01
+
+美術：五種街道車輛、轎車／掀背車前後視圖、入城列車已交原尺寸、4× 和匯入檔。既有原尺寸已直接替換，所有舊檔尺寸保持不變。車身灰階可染色，車窗／輪胎／輪圈保留固定細節；光罩只包含發光像素。
+
+接線限制：現有 Car、Skyline、ArrivalScene 仍讀原尺寸。4× 與車灯層未接入車流，本批不改 scripts / data / tests。Claude 接線時須保持原尺寸車長、offset、輪胎基線、碰撞與交通速度；不可直接把 4× 寬度當作邏輯車長。
+
+全遊戲覆蓋盤點：`../art_sources/city_traffic_20261001/whole_game_inventory.md`。檔案覆蓋不代表品質已驗收；角色品質另見 PR #46。完整遊戲美術優化仍進行中。
+
+來源、裁切與 SHA-256：`../art_sources/city_traffic_20261001/manifest.json`、`sources.json`、`crops.json`。實機證據：`evidence/20261001_city_traffic/`。
+
+本批檔案：
+
+- `vehicles/sedan_side_body.png` — (64, 28)
+- `world_detail/vehicles/sedan_side_body.png` — (256, 112)
+- `vehicles/sedan_side_detail.png` — (64, 28)
+- `world_detail/vehicles/sedan_side_detail.png` — (256, 112)
+- `vehicles/sedan_side_lights.png` — (64, 28)
+- `world_detail/vehicles/sedan_side_lights.png` — (256, 112)
+- `vehicles/sedan_front_body.png` — (32, 40)
+- `world_detail/vehicles/sedan_front_body.png` — (128, 160)
+- `vehicles/sedan_front_detail.png` — (32, 40)
+- `world_detail/vehicles/sedan_front_detail.png` — (128, 160)
+- `vehicles/sedan_front_lights.png` — (32, 40)
+- `world_detail/vehicles/sedan_front_lights.png` — (128, 160)
+- `vehicles/sedan_back_body.png` — (32, 40)
+- `world_detail/vehicles/sedan_back_body.png` — (128, 160)
+- `vehicles/sedan_back_detail.png` — (32, 40)
+- `world_detail/vehicles/sedan_back_detail.png` — (128, 160)
+- `vehicles/sedan_back_lights.png` — (32, 40)
+- `world_detail/vehicles/sedan_back_lights.png` — (128, 160)
+- `vehicles/compact_side_body.png` — (52, 26)
+- `world_detail/vehicles/compact_side_body.png` — (208, 104)
+- `vehicles/compact_side_detail.png` — (52, 26)
+- `world_detail/vehicles/compact_side_detail.png` — (208, 104)
+- `vehicles/compact_side_lights.png` — (52, 26)
+- `world_detail/vehicles/compact_side_lights.png` — (208, 104)
+- `vehicles/compact_front_body.png` — (30, 36)
+- `world_detail/vehicles/compact_front_body.png` — (120, 144)
+- `vehicles/compact_front_detail.png` — (30, 36)
+- `world_detail/vehicles/compact_front_detail.png` — (120, 144)
+- `vehicles/compact_front_lights.png` — (30, 36)
+- `world_detail/vehicles/compact_front_lights.png` — (120, 144)
+- `vehicles/compact_back_body.png` — (30, 36)
+- `world_detail/vehicles/compact_back_body.png` — (120, 144)
+- `vehicles/compact_back_detail.png` — (30, 36)
+- `world_detail/vehicles/compact_back_detail.png` — (120, 144)
+- `vehicles/compact_back_lights.png` — (30, 36)
+- `world_detail/vehicles/compact_back_lights.png` — (120, 144)
+- `vehicles/bus_side_body.png` — (112, 44)
+- `world_detail/vehicles/bus_side_body.png` — (448, 176)
+- `vehicles/bus_side_detail.png` — (112, 44)
+- `world_detail/vehicles/bus_side_detail.png` — (448, 176)
+- `vehicles/bus_side_lights.png` — (112, 44)
+- `world_detail/vehicles/bus_side_lights.png` — (448, 176)
+- `vehicles/van_side_body.png` — (72, 36)
+- `world_detail/vehicles/van_side_body.png` — (288, 144)
+- `vehicles/van_side_detail.png` — (72, 36)
+- `world_detail/vehicles/van_side_detail.png` — (288, 144)
+- `vehicles/van_side_lights.png` — (72, 36)
+- `world_detail/vehicles/van_side_lights.png` — (288, 144)
+- `vehicles/taxi_side_body.png` — (64, 28)
+- `world_detail/vehicles/taxi_side_body.png` — (256, 112)
+- `vehicles/taxi_side_detail.png` — (64, 28)
+- `world_detail/vehicles/taxi_side_detail.png` — (256, 112)
+- `vehicles/taxi_side_lights.png` — (64, 28)
+- `world_detail/vehicles/taxi_side_lights.png` — (256, 112)
+- `vehicles/metro_train.png` — (124, 40)
+- `world_detail/vehicles/metro_train.png` — (496, 160)
+
+燈層對應的 sprite key：`bus_side`, `compact_back`, `compact_front`, `compact_side`, `sedan_back`, `sedan_front`, `sedan_side`, `taxi_side`, `van_side`。
+## 街道環境品質批 · 2026-10-01
+
+美術：七種常見立面與十三種路邊物件重新精修，原尺寸、4×、PNG import與發光層已交。圖上的招牌與旗幟留空白，門位、招牌與路燈 glow metadata 已按新圖對齊。沒有修改 scripts / data / tests，沒有移動地磚。
+
+實機原尺寸建築已替換；路邊物件由現有 WorldScene 自動讀 4×。District 與主選單建築仍讀原尺寸，4× 接線由 Claude 處理；全遊戲美術優化仍未完成。來源／裁切／提示詞：docs/art_sources/street_environment_20261001。前後截圖：evidence/20261001_street_environment。
+
+交付檔案：
+
+- `buildings/riverside_tower.png` — (202, 291)
+- `world_detail/buildings/riverside_tower.png` — (808, 1164)
+- `buildings/riverside_tower_lights.png` — (202, 291)
+- `world_detail/buildings/riverside_tower_lights.png` — (808, 1164)
+- `buildings/nexus_bank.png` — (234, 227)
+- `world_detail/buildings/nexus_bank.png` — (936, 908)
+- `buildings/nexus_bank_lights.png` — (234, 227)
+- `world_detail/buildings/nexus_bank_lights.png` — (936, 908)
+- `buildings/horizon_labs.png` — (202, 245)
+- `world_detail/buildings/horizon_labs.png` — (808, 980)
+- `buildings/horizon_labs_lights.png` — (202, 245)
+- `world_detail/buildings/horizon_labs_lights.png` — (808, 980)
+- `buildings/bloom_block.png` — (182, 173)
+- `world_detail/buildings/bloom_block.png` — (728, 692)
+- `buildings/bloom_block_lights.png` — (182, 173)
+- `world_detail/buildings/bloom_block_lights.png` — (728, 692)
+- `props/tree_round.png` — (68, 92)
+- `world_detail/props/tree_round.png` — (272, 368)
+- `props/lamp_banner.png` — (20, 72)
+- `world_detail/props/lamp_banner.png` — (80, 288)
+- `props/lamp_banner_lights.png` — (20, 72)
+- `world_detail/props/lamp_banner_lights.png` — (80, 288)
+- `props/tree_round_b.png` — (64, 92)
+- `world_detail/props/tree_round_b.png` — (256, 368)
+- `props/tree_tall.png` — (40, 90)
+- `world_detail/props/tree_tall.png` — (160, 360)
+- `props/lamp.png` — (20, 72)
+- `world_detail/props/lamp.png` — (80, 288)
+- `props/lamp_lights.png` — (20, 72)
+- `world_detail/props/lamp_lights.png` — (80, 288)
+- `props/bench.png` — (36, 25)
+- `world_detail/props/bench.png` — (144, 100)
+- `props/umbrella_table.png` — (36, 38)
+- `world_detail/props/umbrella_table.png` — (144, 152)
+- `props/planter.png` — (36, 32)
+- `world_detail/props/planter.png` — (144, 128)
+- `props/flower_bed.png` — (36, 22)
+- `world_detail/props/flower_bed.png` — (144, 88)
+- `props/bike.png` — (36, 22)
+- `world_detail/props/bike.png` — (144, 88)
+- `props/hedge.png` — (48, 20)
+- `world_detail/props/hedge.png` — (192, 80)
+- `props/planter_long.png` — (80, 28)
+- `world_detail/props/planter_long.png` — (320, 112)
+- `props/planter_small.png` — (24, 28)
+- `world_detail/props/planter_small.png` — (96, 112)
+- `buildings/apartment_mid.png` — (182, 251)
+- `world_detail/buildings/apartment_mid.png` — (728, 1004)
+- `buildings/apartment_mid_lights.png` — (182, 251)
+- `world_detail/buildings/apartment_mid_lights.png` — (728, 1004)
+- `buildings/office_slab.png` — (200, 290)
+- `world_detail/buildings/office_slab.png` — (800, 1160)
+- `buildings/office_slab_lights.png` — (200, 290)
+- `world_detail/buildings/office_slab_lights.png` — (800, 1160)
+- `buildings/glass_tower.png` — (188, 356)
+- `world_detail/buildings/glass_tower.png` — (752, 1424)
+- `buildings/glass_tower_lights.png` — (188, 356)
+- `world_detail/buildings/glass_tower_lights.png` — (752, 1424)
+
+sprite keys：`riverside_tower`, `nexus_bank`, `horizon_labs`, `bloom_block`, `tree_round`, `lamp_banner`, `tree_round_b`, `tree_tall`, `lamp`, `bench`, `umbrella_table`, `planter`, `flower_bed`, `bike`, `hedge`, `planter_long`, `planter_small`, `apartment_mid`, `office_slab`, `glass_tower`。
+## 街道公共設施品質批 · 2026-10-01
+
+美術：22 種街道公共設施、市集攤位、串燈已交原尺寸／4×及匯入檔，共48 PNG。現有WorldScene自動載入高解析props；原尺寸和舊metadata保持，未改 scripts / data / tests，未移動地磚。告示牌、導引牌、菜單板、旗幟留白；文字／地鐵識別符號仍需Claude以程式疊字，本批未冒稱已接線。
+
+圖片、原提示詞、裁切和雜湊：docs/art_sources/street_utilities_20261001；前後實機：evidence/20261001_street_utilities。整個遊戲美術優化仍進行中，未驗收內容不算完成。
+
+- `props/bollard.png` — (8, 16)
+- `world_detail/props/bollard.png` — (32, 64)
+- `props/hydrant.png` — (10, 16)
+- `world_detail/props/hydrant.png` — (40, 64)
+- `props/cone.png` — (12, 14)
+- `world_detail/props/cone.png` — (48, 56)
+- `props/trash_bin.png` — (18, 22)
+- `world_detail/props/trash_bin.png` — (72, 88)
+- `props/parking_meter.png` — (8, 24)
+- `world_detail/props/parking_meter.png` — (32, 96)
+- `props/digital_sign.png` — (22, 55)
+- `world_detail/props/digital_sign.png` — (88, 220)
+- `props/digital_sign_lights.png` — (22, 55)
+- `world_detail/props/digital_sign_lights.png` — (88, 220)
+- `props/direction_sign.png` — (44, 50)
+- `world_detail/props/direction_sign.png` — (176, 200)
+- `props/metro_sign.png` — (18, 59)
+- `world_detail/props/metro_sign.png` — (72, 236)
+- `props/cafe_board.png` — (16, 22)
+- `world_detail/props/cafe_board.png` — (64, 88)
+- `props/bus_stop.png` — (56, 46)
+- `world_detail/props/bus_stop.png` — (224, 184)
+- `props/bike_rack.png` — (54, 32)
+- `world_detail/props/bike_rack.png` — (216, 128)
+- `props/fountain.png` — (68, 44)
+- `world_detail/props/fountain.png` — (272, 176)
+- `props/flagpole.png` — (22, 66)
+- `world_detail/props/flagpole.png` — (88, 264)
+- `props/kiosk_flower.png` — (48, 46)
+- `world_detail/props/kiosk_flower.png` — (192, 184)
+- `props/billboard.png` — (68, 60)
+- `world_detail/props/billboard.png` — (272, 240)
+- `props/business_board.png` — (44, 56)
+- `world_detail/props/business_board.png` — (176, 224)
+- `props/railing.png` — (64, 14)
+- `world_detail/props/railing.png` — (256, 56)
+- `props/umbrella_table_blue.png` — (36, 38)
+- `world_detail/props/umbrella_table_blue.png` — (144, 152)
+- `props/market_stall_cream.png` — (64, 50)
+- `world_detail/props/market_stall_cream.png` — (256, 200)
+- `props/market_stall_rose.png` — (64, 50)
+- `world_detail/props/market_stall_rose.png` — (256, 200)
+- `props/market_stall_sage.png` — (64, 50)
+- `world_detail/props/market_stall_sage.png` — (256, 200)
+- `props/string_lights.png` — (128, 32)
+- `world_detail/props/string_lights.png` — (512, 128)
+- `props/string_lights_lights.png` — (128, 32)
+- `world_detail/props/string_lights_lights.png` — (512, 128)
+
+sprite keys：`bollard`, `hydrant`, `cone`, `trash_bin`, `parking_meter`, `digital_sign`, `direction_sign`, `metro_sign`, `cafe_board`, `bus_stop`, `bike_rack`, `fountain`, `flagpole`, `kiosk_flower`, `billboard`, `business_board`, `railing`, `umbrella_table_blue`, `market_stall_cream`, `market_stall_rose`, `market_stall_sage`, `string_lights`。
+## Interior completion quality · 2026-10-01
+
+美術：25 種室內物件及 8 種地板已交原尺寸、4× PNG 與 import。家具、窗景經既有 world_detail 入口自動載入；七種地板重複拼接原材質，修正配對尺寸而保留既有紋理比例。假人使用中性材質。
+
+程式接線：六個招牌保留空白文字區，需 Claude 疊在地點招牌上；箱堆的獨立 Art.tex 入口仍使用原尺寸。新 server_rack_lights 提供機櫃指示燈。不是完整遊戲或所有室內的最終驗收。
+
+- interiors/checkout_counter: game/assets/interiors/checkout_counter.png + game/assets/world_detail/interiors/checkout_counter.png
+- interiors/clothing_rack: game/assets/interiors/clothing_rack.png + game/assets/world_detail/interiors/clothing_rack.png
+- interiors/fitting_room: game/assets/interiors/fitting_room.png + game/assets/world_detail/interiors/fitting_room.png
+- interiors/lockers: game/assets/interiors/lockers.png + game/assets/world_detail/interiors/lockers.png
+- interiors/mannequin: game/assets/interiors/mannequin.png + game/assets/world_detail/interiors/mannequin.png
+- interiors/mirror_full: game/assets/interiors/mirror_full.png + game/assets/world_detail/interiors/mirror_full.png
+- interiors/queue_barrier: game/assets/interiors/queue_barrier.png + game/assets/world_detail/interiors/queue_barrier.png
+- interiors/shoe_shelf: game/assets/interiors/shoe_shelf.png + game/assets/world_detail/interiors/shoe_shelf.png
+- interiors/server_rack: game/assets/interiors/server_rack.png + game/assets/world_detail/interiors/server_rack.png
+- interiors/server_rack_lights: game/assets/interiors/server_rack_lights.png + game/assets/world_detail/interiors/server_rack_lights.png
+- interiors/armchair: game/assets/interiors/armchair.png + game/assets/world_detail/interiors/armchair.png
+- interiors/box: game/assets/interiors/box.png + game/assets/world_detail/interiors/box.png
+- interiors/cork_board: game/assets/interiors/cork_board.png + game/assets/world_detail/interiors/cork_board.png
+- interiors/door_mat: game/assets/interiors/door_mat.png + game/assets/world_detail/interiors/door_mat.png
+- interiors/framed_art: game/assets/interiors/framed_art.png + game/assets/world_detail/interiors/framed_art.png
+- interiors/framed_art_b: game/assets/interiors/framed_art_b.png + game/assets/world_detail/interiors/framed_art_b.png
+- interiors/stool: game/assets/interiors/stool.png + game/assets/world_detail/interiors/stool.png
+- interiors/window_wide_day: game/assets/interiors/window_wide_day.png + game/assets/world_detail/interiors/window_wide_day.png
+- interiors/window_wide_night: game/assets/interiors/window_wide_night.png + game/assets/world_detail/interiors/window_wide_night.png
+- interiors/logo_bloom: game/assets/interiors/logo_bloom.png + game/assets/world_detail/interiors/logo_bloom.png
+- interiors/logo_bytebean: game/assets/interiors/logo_bytebean.png + game/assets/world_detail/interiors/logo_bytebean.png
+- interiors/logo_city_hall: game/assets/interiors/logo_city_hall.png + game/assets/world_detail/interiors/logo_city_hall.png
+- interiors/logo_cowork: game/assets/interiors/logo_cowork.png + game/assets/world_detail/interiors/logo_cowork.png
+- interiors/logo_nexus_bank: game/assets/interiors/logo_nexus_bank.png + game/assets/world_detail/interiors/logo_nexus_bank.png
+- interiors/logo_postpoint: game/assets/interiors/logo_postpoint.png + game/assets/world_detail/interiors/logo_postpoint.png
+- interiors/seal: game/assets/interiors/seal.png + game/assets/world_detail/interiors/seal.png
+- interiors/floor_carpet_navy: game/assets/interiors/floor_carpet_navy.png + game/assets/world_detail/interiors/floor_carpet_navy.png
+- interiors/floor_concrete: game/assets/interiors/floor_concrete.png + game/assets/world_detail/interiors/floor_concrete.png
+- interiors/floor_marble: game/assets/interiors/floor_marble.png + game/assets/world_detail/interiors/floor_marble.png
+- interiors/floor_tile_white: game/assets/interiors/floor_tile_white.png + game/assets/world_detail/interiors/floor_tile_white.png
+- interiors/floor_wood_cafe: game/assets/interiors/floor_wood_cafe.png + game/assets/world_detail/interiors/floor_wood_cafe.png
+- interiors/floor_wood_dark: game/assets/interiors/floor_wood_dark.png + game/assets/world_detail/interiors/floor_wood_dark.png
+- interiors/floor_wood_warm: game/assets/interiors/floor_wood_warm.png + game/assets/world_detail/interiors/floor_wood_warm.png
+- interiors/floor_checker: game/assets/interiors/floor_checker.png + game/assets/world_detail/interiors/floor_checker.png
+## City frontage completion · 2026-10-01
+
+美術：19 種其餘城市建築已交原尺寸與 4× PNG，另附各建築獨立光罩和 import；門口、空白招牌框 metadata 對齊新圖，舊尺寸和街區邏輯位置不變。原尺寸已自動載入。4× 的街區/主選單建築入口仍由 Claude 接線；不是完整遊戲品質驗收。
+
+- buildings/riverside_walkup: game/assets/buildings/riverside_walkup.png + game/assets/buildings/riverside_walkup_lights.png + game/assets/world_detail/buildings/riverside_walkup.png + game/assets/world_detail/buildings/riverside_walkup_lights.png
+- buildings/riverside_shops: game/assets/buildings/riverside_shops.png + game/assets/buildings/riverside_shops_lights.png + game/assets/world_detail/buildings/riverside_shops.png + game/assets/world_detail/buildings/riverside_shops_lights.png
+- buildings/postpoint: game/assets/buildings/postpoint.png + game/assets/buildings/postpoint_lights.png + game/assets/world_detail/buildings/postpoint.png + game/assets/world_detail/buildings/postpoint_lights.png
+- buildings/nexus_cowork: game/assets/buildings/nexus_cowork.png + game/assets/buildings/nexus_cowork_lights.png + game/assets/world_detail/buildings/nexus_cowork.png + game/assets/world_detail/buildings/nexus_cowork_lights.png
+- buildings/suite_building: game/assets/buildings/suite_building.png + game/assets/buildings/suite_building_lights.png + game/assets/world_detail/buildings/suite_building.png + game/assets/world_detail/buildings/suite_building_lights.png
+- buildings/byte_bean: game/assets/buildings/byte_bean.png + game/assets/buildings/byte_bean_lights.png + game/assets/world_detail/buildings/byte_bean.png + game/assets/world_detail/buildings/byte_bean_lights.png
+- buildings/city_hall: game/assets/buildings/city_hall.png + game/assets/buildings/city_hall_lights.png + game/assets/world_detail/buildings/city_hall.png + game/assets/world_detail/buildings/city_hall_lights.png
+- buildings/brick_shops: game/assets/buildings/brick_shops.png + game/assets/buildings/brick_shops_lights.png + game/assets/world_detail/buildings/brick_shops.png + game/assets/world_detail/buildings/brick_shops_lights.png
+- buildings/civic_annex: game/assets/buildings/civic_annex.png + game/assets/buildings/civic_annex_lights.png + game/assets/world_detail/buildings/civic_annex.png + game/assets/world_detail/buildings/civic_annex_lights.png
+- buildings/finance_tower: game/assets/buildings/finance_tower.png + game/assets/buildings/finance_tower_lights.png + game/assets/world_detail/buildings/finance_tower.png + game/assets/world_detail/buildings/finance_tower_lights.png
+- buildings/threadline_apparel: game/assets/buildings/threadline_apparel.png + game/assets/buildings/threadline_apparel_lights.png + game/assets/world_detail/buildings/threadline_apparel.png + game/assets/world_detail/buildings/threadline_apparel_lights.png
+- buildings/crestline_flagship: game/assets/buildings/crestline_flagship.png + game/assets/buildings/crestline_flagship_lights.png + game/assets/world_detail/buildings/crestline_flagship.png + game/assets/world_detail/buildings/crestline_flagship_lights.png
+- buildings/lantern_bistro: game/assets/buildings/lantern_bistro.png + game/assets/buildings/lantern_bistro_lights.png + game/assets/world_detail/buildings/lantern_bistro.png + game/assets/world_detail/buildings/lantern_bistro_lights.png
+- buildings/popup_unit: game/assets/buildings/popup_unit.png + game/assets/buildings/popup_unit_lights.png + game/assets/world_detail/buildings/popup_unit.png + game/assets/world_detail/buildings/popup_unit_lights.png
+- buildings/retail_arcade: game/assets/buildings/retail_arcade.png + game/assets/buildings/retail_arcade_lights.png + game/assets/world_detail/buildings/retail_arcade.png + game/assets/world_detail/buildings/retail_arcade_lights.png
+- buildings/shop_row_awning: game/assets/buildings/shop_row_awning.png + game/assets/buildings/shop_row_awning_lights.png + game/assets/world_detail/buildings/shop_row_awning.png + game/assets/world_detail/buildings/shop_row_awning_lights.png
+- buildings/cinema_front: game/assets/buildings/cinema_front.png + game/assets/buildings/cinema_front_lights.png + game/assets/world_detail/buildings/cinema_front.png + game/assets/world_detail/buildings/cinema_front_lights.png
+- buildings/corner_cafe_unit: game/assets/buildings/corner_cafe_unit.png + game/assets/buildings/corner_cafe_unit_lights.png + game/assets/world_detail/buildings/corner_cafe_unit.png + game/assets/world_detail/buildings/corner_cafe_unit_lights.png
+- buildings/metro_entrance: game/assets/buildings/metro_entrance.png + game/assets/buildings/metro_entrance_lights.png + game/assets/world_detail/buildings/metro_entrance.png + game/assets/world_detail/buildings/metro_entrance_lights.png
+## 2026-10-01 五套商店服裝完成批
+
+美術狀態：370 native + 370 world_detail PNG，配套 .png.import；128×144 角色圖層與 64×64 衣領的 logical size 不變。共有三 presentation × 五 outfits × 四部件 × 六动作 = 360 張全身圖層，以及 10 張衣領/detail。灰階布料、固定色細節及鞋分層。來源、提示詞、可重建 SVG 與 SHA-256 清單在 `docs/art_sources/shop_wardrobe_20261001/`。
+
+`outfit_palette.json` 是美術 metadata；正式服裝的預設 tint 與 4× 選圖仍需 Claude 接線或合入角色品質 PR #46。實機截圖標示此限制，不將候選合成預覽當成目前遊戲驗收。
+
+### 五套服裝完整檔名索引
+
+- `outfit_executive_masculine_top`
+- `outfit_executive_masculine_top_sit`
+- `outfit_executive_masculine_top_idle`
+- `outfit_executive_masculine_top_phone`
+- `outfit_executive_masculine_top_interact`
+- `outfit_executive_masculine_top_carry`
+- `outfit_executive_masculine_bottom`
+- `outfit_executive_masculine_bottom_sit`
+- `outfit_executive_masculine_bottom_idle`
+- `outfit_executive_masculine_bottom_phone`
+- `outfit_executive_masculine_bottom_interact`
+- `outfit_executive_masculine_bottom_carry`
+- `outfit_executive_masculine_shoes`
+- `outfit_executive_masculine_shoes_sit`
+- `outfit_executive_masculine_shoes_idle`
+- `outfit_executive_masculine_shoes_phone`
+- `outfit_executive_masculine_shoes_interact`
+- `outfit_executive_masculine_shoes_carry`
+- `outfit_executive_masculine_top_detail`
+- `outfit_executive_masculine_top_detail_sit`
+- `outfit_executive_masculine_top_detail_idle`
+- `outfit_executive_masculine_top_detail_phone`
+- `outfit_executive_masculine_top_detail_interact`
+- `outfit_executive_masculine_top_detail_carry`
+- `outfit_executive_feminine_top`
+- `outfit_executive_feminine_top_sit`
+- `outfit_executive_feminine_top_idle`
+- `outfit_executive_feminine_top_phone`
+- `outfit_executive_feminine_top_interact`
+- `outfit_executive_feminine_top_carry`
+- `outfit_executive_feminine_bottom`
+- `outfit_executive_feminine_bottom_sit`
+- `outfit_executive_feminine_bottom_idle`
+- `outfit_executive_feminine_bottom_phone`
+- `outfit_executive_feminine_bottom_interact`
+- `outfit_executive_feminine_bottom_carry`
+- `outfit_executive_feminine_shoes`
+- `outfit_executive_feminine_shoes_sit`
+- `outfit_executive_feminine_shoes_idle`
+- `outfit_executive_feminine_shoes_phone`
+- `outfit_executive_feminine_shoes_interact`
+- `outfit_executive_feminine_shoes_carry`
+- `outfit_executive_feminine_top_detail`
+- `outfit_executive_feminine_top_detail_sit`
+- `outfit_executive_feminine_top_detail_idle`
+- `outfit_executive_feminine_top_detail_phone`
+- `outfit_executive_feminine_top_detail_interact`
+- `outfit_executive_feminine_top_detail_carry`
+- `outfit_executive_neutral_top`
+- `outfit_executive_neutral_top_sit`
+- `outfit_executive_neutral_top_idle`
+- `outfit_executive_neutral_top_phone`
+- `outfit_executive_neutral_top_interact`
+- `outfit_executive_neutral_top_carry`
+- `outfit_executive_neutral_bottom`
+- `outfit_executive_neutral_bottom_sit`
+- `outfit_executive_neutral_bottom_idle`
+- `outfit_executive_neutral_bottom_phone`
+- `outfit_executive_neutral_bottom_interact`
+- `outfit_executive_neutral_bottom_carry`
+- `outfit_executive_neutral_shoes`
+- `outfit_executive_neutral_shoes_sit`
+- `outfit_executive_neutral_shoes_idle`
+- `outfit_executive_neutral_shoes_phone`
+- `outfit_executive_neutral_shoes_interact`
+- `outfit_executive_neutral_shoes_carry`
+- `outfit_executive_neutral_top_detail`
+- `outfit_executive_neutral_top_detail_sit`
+- `outfit_executive_neutral_top_detail_idle`
+- `outfit_executive_neutral_top_detail_phone`
+- `outfit_executive_neutral_top_detail_interact`
+- `outfit_executive_neutral_top_detail_carry`
+- `outfit_executive`
+- `outfit_executive_detail`
+- `outfit_luxury_citywear_masculine_top`
+- `outfit_luxury_citywear_masculine_top_sit`
+- `outfit_luxury_citywear_masculine_top_idle`
+- `outfit_luxury_citywear_masculine_top_phone`
+- `outfit_luxury_citywear_masculine_top_interact`
+- `outfit_luxury_citywear_masculine_top_carry`
+- `outfit_luxury_citywear_masculine_bottom`
+- `outfit_luxury_citywear_masculine_bottom_sit`
+- `outfit_luxury_citywear_masculine_bottom_idle`
+- `outfit_luxury_citywear_masculine_bottom_phone`
+- `outfit_luxury_citywear_masculine_bottom_interact`
+- `outfit_luxury_citywear_masculine_bottom_carry`
+- `outfit_luxury_citywear_masculine_shoes`
+- `outfit_luxury_citywear_masculine_shoes_sit`
+- `outfit_luxury_citywear_masculine_shoes_idle`
+- `outfit_luxury_citywear_masculine_shoes_phone`
+- `outfit_luxury_citywear_masculine_shoes_interact`
+- `outfit_luxury_citywear_masculine_shoes_carry`
+- `outfit_luxury_citywear_masculine_top_detail`
+- `outfit_luxury_citywear_masculine_top_detail_sit`
+- `outfit_luxury_citywear_masculine_top_detail_idle`
+- `outfit_luxury_citywear_masculine_top_detail_phone`
+- `outfit_luxury_citywear_masculine_top_detail_interact`
+- `outfit_luxury_citywear_masculine_top_detail_carry`
+- `outfit_luxury_citywear_feminine_top`
+- `outfit_luxury_citywear_feminine_top_sit`
+- `outfit_luxury_citywear_feminine_top_idle`
+- `outfit_luxury_citywear_feminine_top_phone`
+- `outfit_luxury_citywear_feminine_top_interact`
+- `outfit_luxury_citywear_feminine_top_carry`
+- `outfit_luxury_citywear_feminine_bottom`
+- `outfit_luxury_citywear_feminine_bottom_sit`
+- `outfit_luxury_citywear_feminine_bottom_idle`
+- `outfit_luxury_citywear_feminine_bottom_phone`
+- `outfit_luxury_citywear_feminine_bottom_interact`
+- `outfit_luxury_citywear_feminine_bottom_carry`
+- `outfit_luxury_citywear_feminine_shoes`
+- `outfit_luxury_citywear_feminine_shoes_sit`
+- `outfit_luxury_citywear_feminine_shoes_idle`
+- `outfit_luxury_citywear_feminine_shoes_phone`
+- `outfit_luxury_citywear_feminine_shoes_interact`
+- `outfit_luxury_citywear_feminine_shoes_carry`
+- `outfit_luxury_citywear_feminine_top_detail`
+- `outfit_luxury_citywear_feminine_top_detail_sit`
+- `outfit_luxury_citywear_feminine_top_detail_idle`
+- `outfit_luxury_citywear_feminine_top_detail_phone`
+- `outfit_luxury_citywear_feminine_top_detail_interact`
+- `outfit_luxury_citywear_feminine_top_detail_carry`
+- `outfit_luxury_citywear_neutral_top`
+- `outfit_luxury_citywear_neutral_top_sit`
+- `outfit_luxury_citywear_neutral_top_idle`
+- `outfit_luxury_citywear_neutral_top_phone`
+- `outfit_luxury_citywear_neutral_top_interact`
+- `outfit_luxury_citywear_neutral_top_carry`
+- `outfit_luxury_citywear_neutral_bottom`
+- `outfit_luxury_citywear_neutral_bottom_sit`
+- `outfit_luxury_citywear_neutral_bottom_idle`
+- `outfit_luxury_citywear_neutral_bottom_phone`
+- `outfit_luxury_citywear_neutral_bottom_interact`
+- `outfit_luxury_citywear_neutral_bottom_carry`
+- `outfit_luxury_citywear_neutral_shoes`
+- `outfit_luxury_citywear_neutral_shoes_sit`
+- `outfit_luxury_citywear_neutral_shoes_idle`
+- `outfit_luxury_citywear_neutral_shoes_phone`
+- `outfit_luxury_citywear_neutral_shoes_interact`
+- `outfit_luxury_citywear_neutral_shoes_carry`
+- `outfit_luxury_citywear_neutral_top_detail`
+- `outfit_luxury_citywear_neutral_top_detail_sit`
+- `outfit_luxury_citywear_neutral_top_detail_idle`
+- `outfit_luxury_citywear_neutral_top_detail_phone`
+- `outfit_luxury_citywear_neutral_top_detail_interact`
+- `outfit_luxury_citywear_neutral_top_detail_carry`
+- `outfit_luxury_citywear`
+- `outfit_luxury_citywear_detail`
+- `outfit_travel_masculine_top`
+- `outfit_travel_masculine_top_sit`
+- `outfit_travel_masculine_top_idle`
+- `outfit_travel_masculine_top_phone`
+- `outfit_travel_masculine_top_interact`
+- `outfit_travel_masculine_top_carry`
+- `outfit_travel_masculine_bottom`
+- `outfit_travel_masculine_bottom_sit`
+- `outfit_travel_masculine_bottom_idle`
+- `outfit_travel_masculine_bottom_phone`
+- `outfit_travel_masculine_bottom_interact`
+- `outfit_travel_masculine_bottom_carry`
+- `outfit_travel_masculine_shoes`
+- `outfit_travel_masculine_shoes_sit`
+- `outfit_travel_masculine_shoes_idle`
+- `outfit_travel_masculine_shoes_phone`
+- `outfit_travel_masculine_shoes_interact`
+- `outfit_travel_masculine_shoes_carry`
+- `outfit_travel_masculine_top_detail`
+- `outfit_travel_masculine_top_detail_sit`
+- `outfit_travel_masculine_top_detail_idle`
+- `outfit_travel_masculine_top_detail_phone`
+- `outfit_travel_masculine_top_detail_interact`
+- `outfit_travel_masculine_top_detail_carry`
+- `outfit_travel_feminine_top`
+- `outfit_travel_feminine_top_sit`
+- `outfit_travel_feminine_top_idle`
+- `outfit_travel_feminine_top_phone`
+- `outfit_travel_feminine_top_interact`
+- `outfit_travel_feminine_top_carry`
+- `outfit_travel_feminine_bottom`
+- `outfit_travel_feminine_bottom_sit`
+- `outfit_travel_feminine_bottom_idle`
+- `outfit_travel_feminine_bottom_phone`
+- `outfit_travel_feminine_bottom_interact`
+- `outfit_travel_feminine_bottom_carry`
+- `outfit_travel_feminine_shoes`
+- `outfit_travel_feminine_shoes_sit`
+- `outfit_travel_feminine_shoes_idle`
+- `outfit_travel_feminine_shoes_phone`
+- `outfit_travel_feminine_shoes_interact`
+- `outfit_travel_feminine_shoes_carry`
+- `outfit_travel_feminine_top_detail`
+- `outfit_travel_feminine_top_detail_sit`
+- `outfit_travel_feminine_top_detail_idle`
+- `outfit_travel_feminine_top_detail_phone`
+- `outfit_travel_feminine_top_detail_interact`
+- `outfit_travel_feminine_top_detail_carry`
+- `outfit_travel_neutral_top`
+- `outfit_travel_neutral_top_sit`
+- `outfit_travel_neutral_top_idle`
+- `outfit_travel_neutral_top_phone`
+- `outfit_travel_neutral_top_interact`
+- `outfit_travel_neutral_top_carry`
+- `outfit_travel_neutral_bottom`
+- `outfit_travel_neutral_bottom_sit`
+- `outfit_travel_neutral_bottom_idle`
+- `outfit_travel_neutral_bottom_phone`
+- `outfit_travel_neutral_bottom_interact`
+- `outfit_travel_neutral_bottom_carry`
+- `outfit_travel_neutral_shoes`
+- `outfit_travel_neutral_shoes_sit`
+- `outfit_travel_neutral_shoes_idle`
+- `outfit_travel_neutral_shoes_phone`
+- `outfit_travel_neutral_shoes_interact`
+- `outfit_travel_neutral_shoes_carry`
+- `outfit_travel_neutral_top_detail`
+- `outfit_travel_neutral_top_detail_sit`
+- `outfit_travel_neutral_top_detail_idle`
+- `outfit_travel_neutral_top_detail_phone`
+- `outfit_travel_neutral_top_detail_interact`
+- `outfit_travel_neutral_top_detail_carry`
+- `outfit_travel`
+- `outfit_travel_detail`
+- `outfit_formal_evening_masculine_top`
+- `outfit_formal_evening_masculine_top_sit`
+- `outfit_formal_evening_masculine_top_idle`
+- `outfit_formal_evening_masculine_top_phone`
+- `outfit_formal_evening_masculine_top_interact`
+- `outfit_formal_evening_masculine_top_carry`
+- `outfit_formal_evening_masculine_bottom`
+- `outfit_formal_evening_masculine_bottom_sit`
+- `outfit_formal_evening_masculine_bottom_idle`
+- `outfit_formal_evening_masculine_bottom_phone`
+- `outfit_formal_evening_masculine_bottom_interact`
+- `outfit_formal_evening_masculine_bottom_carry`
+- `outfit_formal_evening_masculine_shoes`
+- `outfit_formal_evening_masculine_shoes_sit`
+- `outfit_formal_evening_masculine_shoes_idle`
+- `outfit_formal_evening_masculine_shoes_phone`
+- `outfit_formal_evening_masculine_shoes_interact`
+- `outfit_formal_evening_masculine_shoes_carry`
+- `outfit_formal_evening_masculine_top_detail`
+- `outfit_formal_evening_masculine_top_detail_sit`
+- `outfit_formal_evening_masculine_top_detail_idle`
+- `outfit_formal_evening_masculine_top_detail_phone`
+- `outfit_formal_evening_masculine_top_detail_interact`
+- `outfit_formal_evening_masculine_top_detail_carry`
+- `outfit_formal_evening_feminine_top`
+- `outfit_formal_evening_feminine_top_sit`
+- `outfit_formal_evening_feminine_top_idle`
+- `outfit_formal_evening_feminine_top_phone`
+- `outfit_formal_evening_feminine_top_interact`
+- `outfit_formal_evening_feminine_top_carry`
+- `outfit_formal_evening_feminine_bottom`
+- `outfit_formal_evening_feminine_bottom_sit`
+- `outfit_formal_evening_feminine_bottom_idle`
+- `outfit_formal_evening_feminine_bottom_phone`
+- `outfit_formal_evening_feminine_bottom_interact`
+- `outfit_formal_evening_feminine_bottom_carry`
+- `outfit_formal_evening_feminine_shoes`
+- `outfit_formal_evening_feminine_shoes_sit`
+- `outfit_formal_evening_feminine_shoes_idle`
+- `outfit_formal_evening_feminine_shoes_phone`
+- `outfit_formal_evening_feminine_shoes_interact`
+- `outfit_formal_evening_feminine_shoes_carry`
+- `outfit_formal_evening_feminine_top_detail`
+- `outfit_formal_evening_feminine_top_detail_sit`
+- `outfit_formal_evening_feminine_top_detail_idle`
+- `outfit_formal_evening_feminine_top_detail_phone`
+- `outfit_formal_evening_feminine_top_detail_interact`
+- `outfit_formal_evening_feminine_top_detail_carry`
+- `outfit_formal_evening_neutral_top`
+- `outfit_formal_evening_neutral_top_sit`
+- `outfit_formal_evening_neutral_top_idle`
+- `outfit_formal_evening_neutral_top_phone`
+- `outfit_formal_evening_neutral_top_interact`
+- `outfit_formal_evening_neutral_top_carry`
+- `outfit_formal_evening_neutral_bottom`
+- `outfit_formal_evening_neutral_bottom_sit`
+- `outfit_formal_evening_neutral_bottom_idle`
+- `outfit_formal_evening_neutral_bottom_phone`
+- `outfit_formal_evening_neutral_bottom_interact`
+- `outfit_formal_evening_neutral_bottom_carry`
+- `outfit_formal_evening_neutral_shoes`
+- `outfit_formal_evening_neutral_shoes_sit`
+- `outfit_formal_evening_neutral_shoes_idle`
+- `outfit_formal_evening_neutral_shoes_phone`
+- `outfit_formal_evening_neutral_shoes_interact`
+- `outfit_formal_evening_neutral_shoes_carry`
+- `outfit_formal_evening_neutral_top_detail`
+- `outfit_formal_evening_neutral_top_detail_sit`
+- `outfit_formal_evening_neutral_top_detail_idle`
+- `outfit_formal_evening_neutral_top_detail_phone`
+- `outfit_formal_evening_neutral_top_detail_interact`
+- `outfit_formal_evening_neutral_top_detail_carry`
+- `outfit_formal_evening`
+- `outfit_formal_evening_detail`
+- `outfit_logistics_site_masculine_top`
+- `outfit_logistics_site_masculine_top_sit`
+- `outfit_logistics_site_masculine_top_idle`
+- `outfit_logistics_site_masculine_top_phone`
+- `outfit_logistics_site_masculine_top_interact`
+- `outfit_logistics_site_masculine_top_carry`
+- `outfit_logistics_site_masculine_bottom`
+- `outfit_logistics_site_masculine_bottom_sit`
+- `outfit_logistics_site_masculine_bottom_idle`
+- `outfit_logistics_site_masculine_bottom_phone`
+- `outfit_logistics_site_masculine_bottom_interact`
+- `outfit_logistics_site_masculine_bottom_carry`
+- `outfit_logistics_site_masculine_shoes`
+- `outfit_logistics_site_masculine_shoes_sit`
+- `outfit_logistics_site_masculine_shoes_idle`
+- `outfit_logistics_site_masculine_shoes_phone`
+- `outfit_logistics_site_masculine_shoes_interact`
+- `outfit_logistics_site_masculine_shoes_carry`
+- `outfit_logistics_site_masculine_top_detail`
+- `outfit_logistics_site_masculine_top_detail_sit`
+- `outfit_logistics_site_masculine_top_detail_idle`
+- `outfit_logistics_site_masculine_top_detail_phone`
+- `outfit_logistics_site_masculine_top_detail_interact`
+- `outfit_logistics_site_masculine_top_detail_carry`
+- `outfit_logistics_site_feminine_top`
+- `outfit_logistics_site_feminine_top_sit`
+- `outfit_logistics_site_feminine_top_idle`
+- `outfit_logistics_site_feminine_top_phone`
+- `outfit_logistics_site_feminine_top_interact`
+- `outfit_logistics_site_feminine_top_carry`
+- `outfit_logistics_site_feminine_bottom`
+- `outfit_logistics_site_feminine_bottom_sit`
+- `outfit_logistics_site_feminine_bottom_idle`
+- `outfit_logistics_site_feminine_bottom_phone`
+- `outfit_logistics_site_feminine_bottom_interact`
+- `outfit_logistics_site_feminine_bottom_carry`
+- `outfit_logistics_site_feminine_shoes`
+- `outfit_logistics_site_feminine_shoes_sit`
+- `outfit_logistics_site_feminine_shoes_idle`
+- `outfit_logistics_site_feminine_shoes_phone`
+- `outfit_logistics_site_feminine_shoes_interact`
+- `outfit_logistics_site_feminine_shoes_carry`
+- `outfit_logistics_site_feminine_top_detail`
+- `outfit_logistics_site_feminine_top_detail_sit`
+- `outfit_logistics_site_feminine_top_detail_idle`
+- `outfit_logistics_site_feminine_top_detail_phone`
+- `outfit_logistics_site_feminine_top_detail_interact`
+- `outfit_logistics_site_feminine_top_detail_carry`
+- `outfit_logistics_site_neutral_top`
+- `outfit_logistics_site_neutral_top_sit`
+- `outfit_logistics_site_neutral_top_idle`
+- `outfit_logistics_site_neutral_top_phone`
+- `outfit_logistics_site_neutral_top_interact`
+- `outfit_logistics_site_neutral_top_carry`
+- `outfit_logistics_site_neutral_bottom`
+- `outfit_logistics_site_neutral_bottom_sit`
+- `outfit_logistics_site_neutral_bottom_idle`
+- `outfit_logistics_site_neutral_bottom_phone`
+- `outfit_logistics_site_neutral_bottom_interact`
+- `outfit_logistics_site_neutral_bottom_carry`
+- `outfit_logistics_site_neutral_shoes`
+- `outfit_logistics_site_neutral_shoes_sit`
+- `outfit_logistics_site_neutral_shoes_idle`
+- `outfit_logistics_site_neutral_shoes_phone`
+- `outfit_logistics_site_neutral_shoes_interact`
+- `outfit_logistics_site_neutral_shoes_carry`
+- `outfit_logistics_site_neutral_top_detail`
+- `outfit_logistics_site_neutral_top_detail_sit`
+- `outfit_logistics_site_neutral_top_detail_idle`
+- `outfit_logistics_site_neutral_top_detail_phone`
+- `outfit_logistics_site_neutral_top_detail_interact`
+- `outfit_logistics_site_neutral_top_detail_carry`
+- `outfit_logistics_site`
+- `outfit_logistics_site_detail`
+## 戶外地面美術品質更新 · 2026-10-01
+
+美術狀態：28 個戶外地磚格重新製作，涵蓋七個已實作街區的道路、鋪面、草地、水面、木步道及老城／港區特色材質。`tiles/atlas.png` 128×96 和 `world_detail/tiles/atlas.png` 512×384，均附 import；atlas 的 43 個座標不動，15 格室內及 5 個空位像素保持原樣。原畫、提示詞、SVG 與逐格保全／接縫檢查在 `docs/art_sources/ground_materials_20261001/`。
+
+原尺寸替換已由既有 TileMap 載入；4× atlas 仍需 Claude 保持 16×16 邏輯尺寸接入高解析投影。七街區日夜實拍和改前／改後在 `evidence/20261001_ground_materials/`。此狀態只涵蓋本批地面，其他獨立 Draft 的角色、車流與建築尚須整合驗收。
+## UI 解析度與表面品質 · 2026-10-01
+
+美術狀態：43 個語意圖示、23 面板和外框、固定格位 icons_atlas 均交 native 和4× PNG/import，共67組。SVG直接輸出雙尺寸，logical size及atlas位置不變；panel_glass有輕微透明，手機和頭像內容開口不變。來源及檢查在 `docs/art_sources/ui_quality_20261001/`，真正 UIK狀態畫面及巡禮對比在 `evidence/20261001_ui_quality/`。
+
+原尺寸UI會立即替換；4×接線須保持logical顯示矩形和9-slice邊距，交Claude處理，本批不改UI程式、字型、流程或按鈕用途。兩張既有app icon未動。
+
+圖示檔名索引：
+- `cash`
+- `clock`
+- `calendar`
+- `sun`
+- `moon`
+- `objective`
+- `star`
+- `home`
+- `company`
+- `map`
+- `people`
+- `tasks`
+- `phone`
+- `inventory`
+- `parcel`
+- `orders`
+- `finance`
+- `contracts`
+- `bank`
+- `warning`
+- `check`
+- `lock`
+- `metro`
+- `mail`
+- `settings`
+- `save`
+- `laptop`
+- `coffee`
+- `arrow_right`
+- `close`
+- `plus`
+- `minus`
+- `walk`
+- `shop`
+- `civic`
+- `startup`
+- `river`
+- `financial`
+- `dollar`
+- `info`
+- `world`
+- `sleep`
+- `shirt`
+- `bar_bg`
+- `bar_fill`
+- `bar_fill_green`
+- `button`
+- `button_danger`
+- `button_disabled`
+- `button_hover`
+- `button_pressed`
+- `button_primary`
+- `button_primary_hover`
+- `card`
+- `card_gold`
+- `field`
+- `header`
+- `inset`
+- `panel`
+- `panel_glass`
+- `phone_frame`
+- `portrait_frame`
+- `prompt_key`
+- `tab`
+- `tab_active`
+- `tooltip`
+
+## 背景與地點卡美術品質批 · 2026-10-01
+
+美術：13 張背景與 12 張地點卡由既有原畫重新輸出完整色彩，取消 192 色壓縮，補齊原尺寸及 4× 與匯入檔。繁中原生選單、衣櫥、抵達、六章標題卡、重新出發與八張地點介紹卡已做前後實拍；未改劇情。部分 4× 背景超過來源解析度，插值比例記於 source manifest；不宣稱新增原畫細節。高解析載入與邏輯尺寸保持待 Claude 線接入。證據：`evidence/20261001_backdrop_quality/README.md`。
+
+## 地圖美術品質批 · 2026-10-01
+
+美術：25 個城市／世界／捷運素材的原尺寸及 4× 已交，含匯入檔。城市主圖、12 個街區選取、8 個世界區域選取與捷運原生 UI 已驗收（英文與繁中），53 張實拍巡禮 0 失敗。其餘一張車站預覽和備用世界背景只交素材，沒有 runtime call site。點位、地圖資料和狀態未改。高解析載入仍待 Claude 接線，須保留邏輯尺寸與點擊座標。證據：`evidence/20261001_map_quality/README.md`。
+
+## 商品與特效美術品質批 · 2026-10-01
+
+美術：六個16×16商品sprite已重新製作，附64×64透明高解析版本；六個程序光影／水面特效以SVG輸出原尺寸及4×，動畫格位不變；兩個app圖示識別不變，補4×輸出（4096圖為插值）。251/251測試、53張巡禮0失敗。七街區日夜實拍與商品add_prop渲染比例檢查已交；QA商品擺放不代表遊戲原本的擺設。高解析光罩及陰影載入仍待Claude保持logical尺寸接入。證據：`evidence/20261001_product_quality/README.md`。
+

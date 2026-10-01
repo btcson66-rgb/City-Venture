@@ -163,7 +163,18 @@ func _apply() -> void:
 	var row: int = ROWS["side"] if dir in ["left", "right"] else ROWS.get(dir, 0)
 	var idx := row * 4 + _frame
 	for s in _layers:
-		if s.name == "npc_detail" and pose == "":
+		var base := str(s.get_meta("tex"))
+		if s.name in ["eyes", "eyes_detail", "iris", "brows", "mouth"] and Art.has_tex(base + "_expressions"):
+			var expression_key := base + "_expressions" + ("_" + pose if pose != "" else "")
+			var face_texture := Art.tex(expression_key)
+			if s.texture != face_texture:
+				s.texture = face_texture
+				_fit_sheet(s)
+			var face_frame: int = {"neutral": 0, "happy": 1, "thinking": 2, "surprised": 3}.get(expression, 0)
+			s.frame = row * 4 + face_frame
+			# Facial expression frames are independent of the body's walk/breathing frames.
+			s.position.y = ([0.0, -0.45, 0.0, -0.45][_frame] if pose in ["", "carry"] else 0.0 if pose == "sit" else [0.0, -0.18, 0.0, -0.18][_frame])
+		elif s.name == "npc_detail" and pose == "":
 			var face_frame: int = {"neutral": 0, "happy": 1, "thinking": 2, "surprised": 3}.get(expression, 0)
 			s.frame = row * 4 + face_frame
 		else:

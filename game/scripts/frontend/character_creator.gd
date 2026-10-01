@@ -116,6 +116,7 @@ func _refresh() -> void:
 	for vr in views_rigs:
 		vr[0].setup(app, outfit)
 		vr[0].set_dir(vr[1])
+		vr[0].set_expression(EXPRS[expr_idx])
 	portrait.setup_character(app, outfit)
 	portrait.set_expr(EXPRS[expr_idx])
 	UIK.clear(tab_box)
