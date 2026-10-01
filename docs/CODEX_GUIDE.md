@@ -82,6 +82,8 @@ python3 tools/i18n_extract.py                                        # missing 0
   `out/walkthrough_result.json` must list 0 failures, and `out/english_audit.json` must not list your new text.
 - Screenshot tours: `--bot=shots`, `--bot=screens`, `--bot=minigames`, `--bot=tutorial`, `--bot=harbor`.
   Attach the screenshots that show your change to the PR (under `evidence/<date>_<ticket>/` with a short README).
+  Keep evidence small: JPG (quality ~85) for screenshots, at most 20 MB per ticket. Don't commit large 4× masters or
+  intermediate renders under `docs/art_sources/`; keep prompts, SVGs and one reference image per asset. Every MB stays in git history.
 
 ## Delivery checklist (paste into the PR)
 

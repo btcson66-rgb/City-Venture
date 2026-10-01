@@ -19,6 +19,7 @@ Civic Center, Financial, Shopping Street, Old Town, Harbor Implemented.
 | P0 | [#45](https://github.com/btcson66-rgb/City-Venture/issues/45) | Friends Beta 0.2.0 release: full checklist, version, patch notes, itch.io |
 | P0 | [#52](https://github.com/btcson66-rgb/City-Venture/issues/52) | Loans you can actually take: every lending entry leads to Borrow or a clear next step, a "why not / what to do" checklist, no 30-day clock jump |
 | P0 | [#39](https://github.com/btcson66-rgb/City-Venture/issues/39) | See where you can do things: interaction markers, a "what you can do here" card, a City Guide phone app |
+| P1 | [#62](https://github.com/btcson66-rgb/City-Venture/issues/62) | Wire the delivered 4× backdrops, cards, maps and UI art at their logical size; web build size budget |
 | P1 | [#25](https://github.com/btcson66-rgb/City-Venture/issues/25) | "!" explanation badges on every existing screen |
 | P1 | [#26](https://github.com/btcson66-rgb/City-Venture/issues/26) | 4× detail art for buildings, ground tiles and vehicles |
 | P1 | [#27](https://github.com/btcson66-rgb/City-Venture/issues/27) | Era street dressing: port cranes (Year 3), solar roofs and EV chargers (Year 4) |
@@ -37,7 +38,7 @@ Civic Center, Financial, Shopping Street, Old Town, Harbor Implemented.
 
 **Work order for Codex** (one ticket at a time; start the next from the latest `claude/exciting-bardeen-y71ixv` once
 the previous PR is merged). First the **Friends Beta 0.2.0** (`docs/FRIENDS_BETA.md`): ~~#21~~ → ~~#36~~ → #52 → #39 → #44 → #29 →
-#22 → #23 → #25 → #45. After the beta: #40 → #28 → #26 → #27 → #30 → #31 → #42 → #43 → #41 → #32 → #33 → #34 → #35.
+#22 → #23 → #25 → #45. After the beta: #62 → #40 → #28 → #26 → #27 → #30 → #31 → #42 → #43 → #41 → #32 → #33 → #34 → #35.
 A ticket whose dependency is not merged yet waits; take the next one instead.
 
 Next in line (tickets written when the above land): new districts (Residential, University, Luxury Heights, Airport,
