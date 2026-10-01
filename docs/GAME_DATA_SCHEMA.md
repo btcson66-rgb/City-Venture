@@ -456,6 +456,12 @@ data.logistics         {van{owned, bought, entity, ins_day, km}, jobs{id:{id, cl
                         an order shipped by your own van has `ship{method:"own_van", cost, mode:"van", van_eta, eta}`)
 data.events            {queue[], active?, history[{id, t, choice}], cooldowns{id: until}}
 data.story             {chapter, active[], done[], flags{}}
+data.bank             {credit, loans{}, seq, no_loans_until?, appointment?}
+                        `appointment` is an optional absolute minute, created only on booking. Existing saves need
+                        no migration: missing means no booking. `bank.appointment {id:"lending"}` in `schedule` sends
+                        the reminder; meeting Marcus removes both. Missed slots stay in phone Tasks with rebooking advice.
+                        Loan records keep their existing fields and repayment schedule unchanged.
+
 data.npcs.<id>         {met, relationship, convo_done[]}
 data.timeline          [{t, text, kind}]
 data.reports           {month_closes:[{period, entities:{id:{revenue, refunds, cogs, gross, opex{...}, rent, profit,
