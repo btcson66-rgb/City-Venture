@@ -30,6 +30,7 @@ const STATUS_TEXT := {
 	"rejected": "REJECTED", "expired": "EXPIRED", "withdrawn": "WITHDRAWN", "overdue": "OVERDUE", "declined": "DECLINED",
 	"late": "LATE", "called": "CALLED", "defaulted": "DEFAULTED", "closed": "CLOSED", "written_off": "WRITTEN OFF",
 	"invoiced": "INVOICED", "cancelled": "CANCELLED",
+	"terminated": "TERMINATED", "sold_to_collector": "SOLD TO COLLECTOR",
 }
 
 
@@ -765,7 +766,9 @@ func _tab_contracts() -> void:
 		sel_contract = list[0]["id"]
 	var h := UIK.hbox(4)
 	for c in list:
-		h.add_child(UIK.button("%s · %s" % [c["id"], status_text(str(c["status"]))], func(): sel_contract = c["id"]; counter_price = 0.0; rebuild(), "tab_active" if sel_contract == c["id"] else "tab"))
+		var cb := UIK.button("%s · %s" % [c["id"], status_text(str(c["status"]))], func(): sel_contract = c["id"]; counter_price = 0.0; rebuild(), "tab_active" if sel_contract == c["id"] else "tab")
+		cb.name = "Contract_" + str(c["id"])
+		h.add_child(cb)
 	content.add_child(h)
 	var k: Dictionary = GameState.data["contracts"][sel_contract]
 	var cols := UIK.hbox(10)
@@ -791,6 +794,13 @@ func _tab_contracts() -> void:
 		var o := Ecommerce.offer("tradelink_wholesale", k["product"])
 		cost = float(o.get("unit_cost", 0))
 	right.add_child(UIK.label(I18n.t("Your unit cost ≈ %s → gross margin %s") % [Fmt.money(cost), Fmt.money((float(k["unit_price"]) - cost) * int(k["qty"]))], 7, Art.C_SKY))
+	if Contracts.seller_closed(k):
+		right.add_child(UIK.label_tip("This is a contract of a closed company.", "contract_closure", 8, Art.C_RED))
+		var blocked := UIK.button("Delivery unavailable", func(): pass)
+		blocked.name = "DeliverContract"
+		blocked.disabled = true
+		right.add_child(blocked)
+		return
 	if k["status"] == "offered":
 		if not Contracts.can_trade():
 			right.add_child(UIK.label("Needs a registered company to sign.", 8, Art.C_RED))
@@ -847,8 +857,13 @@ func _tab_contracts() -> void:
 				UIRoot.toast(I18n.t("Delivered. Invoice %s due in %d days.") % [Fmt.money(r["receivable"]), int(k["payment_terms_days"])], "good", "contracts")
 			rebuild(), "primary")
 		db.name = "DeliverContract"
-		db.disabled = have < int(k["qty"])
+		db.disabled = not Contracts.can_deliver(str(k["id"]))
 		right.add_child(db)
+		var why := Contracts.delivery_block(str(k["id"]))
+		if why != "":
+			right.add_child(UIK.wrap(why, 7, Art.C_RED, 220))
+		if str(k["seller"]) != GameState.company_id():
+			return
 		var plan := Contracts.restock_plan(k)
 		if not plan.is_empty():
 			if plan.has("error"):

@@ -17,6 +17,12 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "interaction_focus":
+		await _interaction_focus_fixture()
+		return
+	if _arg("from") == "contract_closure":
+		await _contract_closure_fixture()
+		return
 	if _arg("from") == "harbor":
 		# Isolated logistics fixture; no earlier sales income, so this is not an economy/endgame test.
 		await _fast_forward_to_ch10()
@@ -52,6 +58,30 @@ func _arg(name: String) -> String:
 		if a.begins_with("--%s=" % name):
 			return a.substr(name.length() + 3)
 	return ""
+
+
+## Force a popup on the exact frame that a real interactable receives focus; reaching it stays successful.
+func _interaction_focus_fixture() -> void:
+	bot.step("Interaction focus interrupted by popup")
+	UIRoot.tutorial.st()["off"] = true
+	var it: Interactable = bot.find_interactable(func(n): return n.action == "open_company_os")
+	var matched := [false]
+	var reached := func():
+		if bot.player() != null and bot.player().focus == it:
+			matched[0] = true
+			UIRoot.open_modal(Help.card("os_operations"))
+			return true
+		return false
+	var ok: bool = await bot.walk_to(it.global_position + Vector2(0, 8), 3.0, 40.0, true, reached)
+	bot.expect(ok and matched[0], "real interaction reach survives a same-frame popup")
+	bot.expect(UIRoot.top_modal() is InfoModal, "popup really opened at interaction reach")
+	await bot.click_text("Got it")
+	await bot.wait(0.4)
+	Clock.advance_to(Clock.at_day_time(0, 19 * 60))
+	await bot.use_action("sleep")
+	await bot.click_named("Sleep")
+	await bot.until(func(): return not (UIRoot.top_modal() is SleepModal), 8.0)
+	bot.expect(Clock.hour() == 7, "real sleep input works after popup closes")
 
 
 func _summary() -> void:
@@ -338,6 +368,54 @@ func _new_game() -> void:
 	bot.expect(GameState.data["player"]["name"] == "Alex Chen", "name saved")
 	await bot.wait(1.5)
 	await bot.shot("apartment_arrival")
+
+
+## Isolated legacy-save/closure evidence: real buttons close the fixture company and show its terminal contracts.
+func _contract_closure_fixture() -> void:
+	bot.step("Company closure contract fixture")
+	UIRoot.tutorial.st()["off"] = true
+	GameState.set_flag("business_chosen")
+	Company.register("Riverlight Goods", "ecommerce", "22 Founders Lane")
+	Company.open_business_account(10000)
+	var ent := GameState.company_id()
+	var po := Ecommerce.buy("tradelink_wholesale", "water_bottle", 60)
+	Ecommerce.handle("eco.po_arrive", {"po": po["po_id"]})
+	var offered := Contracts.create_offer({"buyer": "harbor_point_fitness", "product": "water_bottle", "qty": 10, "unit_price": 21.0, "tag": "big_contract"})
+	var active := Contracts.create_offer({"buyer": "harbor_point_fitness", "product": "water_bottle", "qty": 10, "unit_price": 21.0})
+	Contracts.accept(active)
+	var delivered := Contracts.create_offer({"buyer": "harbor_point_fitness", "product": "water_bottle", "qty": 10, "unit_price": 21.0})
+	Contracts.accept(delivered)
+	Contracts.deliver(delivered)
+	await _home_laptop("contracts")
+	await bot.click_named("Contract_" + delivered)
+	await bot.shot("live_invoice_before_closure")
+	await close_modal()
+	Insolvency.begin(ent, I18n.t("The company can't pay its debts"))
+	await bot.until(func(): return UIRoot.top_modal() is InsolvencyModal, 5.0)
+	await bot.click_named("CloseCompany")
+	await bot.wait(0.5)
+	await bot.shot("contract_closure_statement")
+	await bot.click_named("StartOver")
+	await bot.wait(2.0)
+	Company.register("Riverlight Co", "ecommerce", "22 Founders Lane")
+	Company.open_business_account(500)
+	var new_po := Ecommerce.buy("tradelink_wholesale", "water_bottle", 60)
+	Ecommerce.handle("eco.po_arrive", {"po": new_po["po_id"]})
+	await _home_laptop("contracts")
+	for cid in [offered, active, delivered]:
+		await bot.click_named("Contract_" + cid)
+		await bot.wait(0.4)
+		var m = UIRoot.top_modal()
+		var b := m.find_child("DeliverContract", true, false) as Button
+		bot.expect(b != null and b.disabled, "closed seller's named delivery button disabled: " + cid)
+		await bot.shot("closed_contract_" + str(Contracts.C()[cid]["status"]))
+	bot.expect(Contracts.C()[offered]["status"] == "withdrawn" and GameState.flag("big_contract_decided"), "offered closure settles story decision")
+	bot.expect(Contracts.C()[active]["status"] == "terminated" and not Contracts.can_deliver(active), "new company cannot deliver old contract")
+	var cash := Ledger.cash(ent)
+	Contracts.handle("con.pay", {"id": delivered})
+	bot.expect(absf(Ledger.cash(ent) - cash) < 0.01 and Ledger.balance(ent, "accounts_receivable") >= 0, "closed company's AR cannot be paid twice")
+	bot.expect(Ledger.check_balanced(), "closure fixture ledger balanced")
+	await close_modal()
 
 
 func _chapter1() -> void:

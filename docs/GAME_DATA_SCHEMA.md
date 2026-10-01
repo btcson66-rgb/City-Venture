@@ -424,6 +424,12 @@ data.ecommerce         {listings{id:{product, price, photo, photo_q (your own sh
                         supplier_mods[{supplier, product, mult, until}], counters{order_seq, po_seq}}
 data.contracts.<id>    {buyer, seller, product, qty, unit_price, total, delivery_due, payment_terms_days,
                         penalty_rate, quality_req, currency, settlement, status, history[]}
+                       Closure terminal states: offered → withdrawn; active → terminated; delivered → sold_to_collector.
+                       History explains closure/AR sale. Closing cancels all seller's con.* reminders before the existing
+                       80% receivables liquidation; ending the contracts never posts an extra journal or penalty.
+                       Load reconciles these same states when entities[seller].closed exists, without repeating liquidation.
+                       con.pay/early_payment reject closed sellers; delivery requires the current, open company as seller.
+                       No original saved fields are removed or renamed; terminal status strings and history are additive.
 data.logistics         {van{owned, bought, entity, ins_day, km}, jobs{id:{id, client, stops[place ids], kind, posted, by, pay, km_best,
                         est_min, status: open|active|driving|..., accepted?, driver?, driver_stats?}}, history[{id, client, stops,
                         pay, fuel, km, score, minutes, late, status: done|late|failed, t, who}] (last 40), seq, driver_day{staff id: day}}

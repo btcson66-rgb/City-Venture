@@ -189,6 +189,7 @@ func load_data(slot: int) -> bool:
 		return false
 	GameState.data = _migrate(d["data"])
 	GameState.data["meta"]["slot"] = slot     # carry on saving where this game was loaded from
+	Contracts.reconcile_closed()             # old liquidations sold AR but left live contracts and collection schedules
 	Contracts.reconcile_tags()               # older builds could leave a story step waiting on a settled offer
 	GameState.unpack_rng()
 	Clock.clear_pauses()

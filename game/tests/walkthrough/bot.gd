@@ -389,7 +389,7 @@ func player() -> Player:
 
 
 ## Walk along a nav path using real movement actions.
-func walk_to(target: Vector2, tol := 4.0, timeout_s := 40.0, run := true) -> bool:
+func walk_to(target: Vector2, tol := 4.0, timeout_s := 40.0, run := true, reached: Callable = Callable()) -> bool:
 	var s := scene()
 	if s == null or s.player == null:
 		fail("walk_to: no world scene")
@@ -402,6 +402,7 @@ func walk_to(target: Vector2, tol := 4.0, timeout_s := 40.0, run := true) -> boo
 	var t := 0.0
 	var stuck := 0.0
 	var last := s.player.position
+	var reached_goal := false
 	while i < path.size() and t < timeout_s:
 		if UIRoot.is_blocking():
 			release_moves()
@@ -413,6 +414,9 @@ func walk_to(target: Vector2, tol := 4.0, timeout_s := 40.0, run := true) -> boo
 		if SceneRouter.world_scene() != s or not is_instance_valid(s.player):
 			release_moves()
 			return true  # scene changed (door / exit) — caller checks
+		if reached.is_valid() and reached.call():
+			reached_goal = true
+			break   # interactable focus is the game's own reach test; no need to walk into an NPC's collision
 		var p: Vector2 = s.player.position
 		var wp: Vector2 = path[i]
 		var d := wp - p
@@ -453,7 +457,7 @@ func walk_to(target: Vector2, tol := 4.0, timeout_s := 40.0, run := true) -> boo
 	await frames(2)
 	if SceneRouter.world_scene() != s:
 		return true
-	var ok := s.player.position.distance_to(target) <= tol + 6
+	var ok: bool = reached_goal or s.player.position.distance_to(target) <= tol + 6
 	if not ok:
 		fail("could not reach %s (at %s)" % [str(target), str(s.player.position)])
 	return ok
@@ -478,7 +482,10 @@ func use(pred: Callable, what: String) -> bool:
 		fail("interactable not found: " + what)
 		return false
 	var target := it.global_position + Vector2(0, 8)
-	await walk_to(target, 3.0)
+	var focused := func(): return is_instance_valid(it) and player() != null and player().focus == it
+	await walk_to(target, 3.0, 40.0, true, focused)
+	if UIRoot.is_blocking() and popup_handler.is_valid():
+		await popup_handler.call()
 	await frames(3)
 	var p := player()
 	if p != null:
@@ -492,8 +499,11 @@ func use(pred: Callable, what: String) -> bool:
 	var ok := await until(func(): return player() != null and player().focus == it, 1.5)
 	if not ok:
 		# try standing a little closer
-		await walk_to(it.global_position + Vector2(0, 2), 2.0, 5.0, false)
+		await walk_to(it.global_position + Vector2(0, 2), 2.0, 5.0, false, focused)
 		await frames(4)
+	if player() == null or player().focus != it:
+		fail("interaction focus did not match: " + what)
+		return false
 	log_line("  use \"%s\"" % it.label)
 	await key_action("interact")
 	return true
