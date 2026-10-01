@@ -165,10 +165,12 @@ func _add_building(sprite: String, x: float, bid: String, bd: Dictionary) -> voi
 	if bid != "":
 		var door: Array = meta.get("door", [w / 2 - 10, h - 34, 20, 30])
 		var dx := x + float(door[0]) + float(door[2]) / 2.0
+		spawns["door_" + bid] = Vector2(dx, BASE_Y + 22)
+		if not BuildingInfo.building_enterable(bid):
+			return
 		var trig := DoorTrigger.new()
 		trig.setup(bid, Rect2(dx - float(door[2]) / 2.0 + 2, BASE_Y - 1, float(door[2]) - 4, 9))
 		add_child(trig)
-		spawns["door_" + bid] = Vector2(dx, BASE_Y + 22)
 		var icon: String = POI_ICONS.get(str(bd.get("type", "")), "company")
 		poi.append({"pos": Vector2(dx, BASE_Y), "icon": icon, "label": I18n.t(bd.get("name", bid)), "building": bid})
 

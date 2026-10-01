@@ -42,12 +42,12 @@ func test_guide_covers_current_and_future_active_data() -> void:
 		listed.append_array(g["buildings"])
 	for bid in DataDB.buildings:
 		var b: Dictionary = DataDB.buildings[bid]
-		if BuildingInfo.district_open(str(b["district"])):
+		if BuildingInfo.building_available(bid):
 			runner.check(bid in listed, "guide covers " + bid)
 	DataDB.districts["future_test"] = {"id": "future_test", "name": "Future test", "status": "planned"}
 	DataDB.buildings["future_shop_test"] = {"id": "future_shop_test", "name": "Future shop", "district": "future_test", "category": "Restaurant", "interior": {"interactables": [{"action": "buy_item", "label": "Order", "params": {"item": "meal"}}]}}
-	var group: Dictionary = BuildingInfo.guide_groups().filter(func(g): return g["id"] == "future_test")[0]
-	runner.check(not group["open"] and group["buildings"].is_empty(), "future district is unavailable")
+	runner.check(BuildingInfo.guide_groups().filter(func(g): return g["id"] == "future_test").is_empty(), "future district is hidden")
+	var group: Dictionary
 	DataDB.districts["future_test"]["status"] = "active"
 	group = BuildingInfo.guide_groups().filter(func(g): return g["id"] == "future_test")[0]
 	runner.eq(group["buildings"], ["future_shop_test"], "status activation automatically adds future building")

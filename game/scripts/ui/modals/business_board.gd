@@ -38,13 +38,13 @@ func _businesses() -> void:
 	list.custom_minimum_size = Vector2(170, 0)
 	cols.add_child(list)
 	list.add_child(UIK.label("START NOW", 7, Art.C_DIM, true))
-	var bs: Array = DataDB.businesses.values()
+	var bs: Array = DataDB.businesses.values().filter(func(b): return b.get("status", "planned") == "active")
 	bs.sort_custom(func(a, b): return _order(a) < _order(b))
-	var shown_future := false
+	if not bs.any(func(b): return b["id"] == selected):
+		selected = str(bs[0]["id"]) if not bs.is_empty() else ""
+	if selected == "":
+		return
 	for b in bs:
-		if b["status"] != "active" and not shown_future:
-			shown_future = true
-			list.add_child(UIK.label("LATER", 7, Art.C_DIM, true))
 		var btn := UIK.button(("● " if b["status"] == "active" else "○ ") + I18n.t(b["name"]), func(): selected = b["id"]; rebuild(), "tab_active" if selected == b["id"] else "tab")
 		btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		btn.name = "Biz_" + b["id"]
@@ -62,8 +62,8 @@ func _businesses() -> void:
 	det.add_child(UIK.sep())
 	match selected:
 		"ecommerce":
-			det.add_child(UIK.wrap("Posted by Ken (TradeLink Wholesale): \"Earbuds $18, lamps $11.50, bottles $6.80, phone stands $3.40. MOQs apply. Order via laptop.\"", 8, Art.C_WHITE, 300))
-			det.add_child(UIK.wrap("ShopLane marketplace: 10% fee, weekly payouts, personal sellers capped at $2,500/month.", 8, Art.C_MUTED, 300))
+			det.add_child(UIK.wrap(_supplier_notice(), 8, Art.C_WHITE, 300))
+			det.add_child(UIK.wrap(I18n.t("ShopLane marketplace: %d%% fee, weekly payouts, personal sellers capped at %s/month.") % [int(round(float(Ecommerce.mk()["fee_rate"]) * 100.0)), Fmt.money0(float(Ecommerce.mk()["personal_seller_cap"]))], 8, Art.C_MUTED, 300))
 			if GameState.flag("business_chosen"):
 				det.add_child(UIK.label("✓ You're running this.", 9, Art.C_GREEN, true))
 			else:
@@ -97,11 +97,18 @@ func _businesses() -> void:
 			else:
 				det.add_child(UIK.label("Harbor: metro Harbor Line (M3) from Riverside. Sam is at Dockside Motors, Mon–Sat.", 8, Art.C_GOLD, true))
 		_:
-			det.add_child(UIK.wrap(I18n.t("Not in this build. %s is planned for %s — it will play differently, not just a new icon.") % [I18n.t(d["name"]), "P1–P3" if d["tier"] == "p0" else "a later expansion"], 8, Art.C_GOLD, 300))
+			det.add_child(UIK.wrap(d.get("pitch", ""), 8, Art.C_WHITE, 300))
 
 
 func _order(b: Dictionary) -> int:
 	return (0 if b["status"] == "active" else 10) + (0 if b["id"] == "ecommerce" else 1)
+
+
+func _supplier_notice() -> String:
+	var offers: Array[String] = []
+	for offer in DataDB.suppliers["tradelink_wholesale"].get("offers", []):
+		offers.append(I18n.t(str(DataDB.product(offer["product"])["name"])) + " " + Fmt.money0(float(offer["unit_cost"])))
+	return I18n.t("Posted by Ken (TradeLink Wholesale): %s. MOQs apply. Order via laptop.") % " · ".join(offers)
 
 
 func _jobs() -> void:

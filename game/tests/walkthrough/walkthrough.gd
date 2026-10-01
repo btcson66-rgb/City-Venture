@@ -70,14 +70,17 @@ func _arg(name: String) -> String:
 	return ""
 
 
-## Only time/location are fixtures. New UI, routing, settings and purchases use real input.
+## Time/location and the contract offer flag are fixtures; UI, schedules and purchases use real input.
 func _discoverability_fixture() -> void:
 	await bot.wait(4.0)
 	UIRoot._suppress_decisions = true
 	UIRoot.tutorial.st()["off"] = true
+	var fixture_day := Clock.now() - Clock.minute_of_day()
 	bot.step("Interaction markers and welcome cards in four Shopping Street shops")
 	GameState.data["clock"]["minutes"] = Clock.at_day_time(1, 14 * 60)
 	for bid in ["threadline_apparel", "crestline_flagship", "lantern_bistro", "byte_and_bean"]:
+		GameState.set_flag("big_contract_offered")
+		GameState.data["clock"]["minutes"] = fixture_day + (6 if bid == "crestline_flagship" else 1) * Clock.DAY + 14 * 60
 		SceneRouter._enter("interior", bid, "door", "up")
 		await bot.wait(0.6)
 		bot.expect(UIRoot.hud.welcome.visible, "first entry shows introduction: " + bid)
@@ -147,9 +150,10 @@ func _discoverability_fixture() -> void:
 	await bot.use_action("buy_item", "restaurant counter")
 	bot.expect(Ledger.cash("player") == before - 22 and Ledger.balance("player", "exp:dining") == 22, "meal costs $22 in dining")
 	await bot.shot("discoverability_meal")
-	SceneRouter._enter("interior", "harbor_point_fitness", "door", "up")
+	GameState.data["clock"]["minutes"] = fixture_day + Clock.DAY + 14 * 60
+	SceneRouter._enter("interior", "crestline_flagship", "door", "up")
 	await bot.wait(0.5)
-	bot.expect(UIRoot.hud.welcome.text.text == I18n.t("This is a sightseeing-only location right now."), "look-only room is explicit")
+	bot.expect(SceneRouter.world_scene().kind == "district", "empty NPC-only room has no public entrance")
 	await bot.shot("discoverability_sightseeing")
 	bot.expect(Ledger.check_balanced(), "discoverability tour keeps books balanced")
 

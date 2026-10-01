@@ -257,4 +257,8 @@
 
 ## B2 港區室內 · 美術已交 2026-09-30
 
+朋友測試版保留景觀建築的完整室內資料；`status:planned` 或 `enterable:false` 只關閉玩家入口。
+`--bot=beta_tour` 逐一檢查目前可進入建築的可用非 look 互動／在場 NPC，另驗證晚期主線的
+NPC 排程房與租下的咖啡店面。看得到的房間不能只剩鎖住的操作。
+
 Pier 倉庫：`pallet_rack`、`loading_dock_door`、`forklift_parked`、`packing_bench_large`；貨車行：`sales_desk`、`key_board`。另交 `interiors/floor_harbor_concrete.png`（192×192 / 768×768）平整藍灰水泥材質，建議室內 floor 資料使用 `harbor_concrete`。房間排版、互動和碰撞待 Claude 線接入。

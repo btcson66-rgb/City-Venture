@@ -167,6 +167,12 @@
 
 ## 立面的品質要求
 
+朋友測試版入口以 building 的 `status`／`enterable` 與街區的 status 決定，不刪除室內。
+`popup_unit`、`old_town_studio`、`harbor_point_fitness`、`customs_house` 為 planned 景觀。
+可用互動或實際排程 NPC 出現時才顯示公眾入口；Crestline 依 Daniel／Victor 的劇情條件與
+排程自動顯示。未租咖啡店面先由 Okafor 簽約，租下後才顯示入口。旧存檔站在關閉室內時
+讀檔會移到原立面門口；資料啟用後無需修改 UI 清單。城市指南、捷運、地圖只列 active 街區。
+
 - 門必須一眼看得出是門（深色開口加門框加門燈），不要被植物擋住。
 - 招牌區留**素面**底板，程式會畫字。底板顏色要讓白字或金字看得清楚。
 - 側牆（`depth`）比正面暗 15–25%，保持光源在左上。

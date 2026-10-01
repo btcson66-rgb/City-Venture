@@ -145,6 +145,8 @@ func _audit_one(t: String, ctl: Control) -> void:
 func _run() -> void:
 	await wait(1.0)
 	match mode:
+		"beta_tour":
+			await BetaTour.new(self).run()
 		"shots":
 			await _shots()
 		"walkthrough":

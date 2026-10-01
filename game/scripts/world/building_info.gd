@@ -24,6 +24,53 @@ static func district_open(id: String) -> bool:
 	return str(d.get("status", DataDB.district_def_in_city(id).get("status", "planned"))) == "active"
 
 
+static func building_enterable(id: String) -> bool:
+	var b := DataDB.building(id)
+	return not b.is_empty() and b.get("enterable", true) and str(b.get("status", "active")) == "active" and district_open(str(b.get("district", "")))
+
+
+static func world_travel_available() -> bool:
+	return DataDB.regions.values().filter(func(r): return r.get("status", "planned") == "active").size() > 1
+
+
+## A look-only room becomes a public destination only while a real scheduled NPC is there.
+static func building_available(id: String) -> bool:
+	if not building_enterable(id):
+		return false
+	for it in DataDB.building(id).get("interior", {}).get("interactables", []):
+		if not it.get("enabled", true) or str(it["action"]) == "look":
+			continue
+		# Access checks only. Sim action blockers call building_open(), so evaluating them here would recurse.
+		var requires := str(it.get("params", {}).get("requires", ""))
+		if requires.begins_with("lease:") and not Living.has_lease(requires.substr(6)):
+			continue
+		if requires == "desk_access" and not Living.has_desk_access():
+			continue
+		if str(it["action"]) == "cafe_counter" and not Cafe.leased():
+			continue
+		return true
+	var weekday: String = Clock.WEEKDAYS[Clock.weekday()].to_lower()
+	var minute := Clock.minute_of_day()
+	for npc in DataDB.npcs.values():
+		for s in npc.get("schedule", []):
+			var days := str(s.get("days", "all"))
+			if str(s.get("location", "")) == "interior:" + id and (days == "all" or weekday in days.split(",")) and Cond.all([str(s.get("if", ""))]) and minute >= Clock.parse_hm(str(s["from"])) and minute < Clock.parse_hm(str(s["to"])):
+				return true
+	return false
+
+
+## Old saves inside scenery return to the same facade's street spawn, preserving all financial state.
+static func safe_location(loc: Dictionary) -> Dictionary:
+	var result := loc.duplicate()
+	if str(loc.get("kind", "")) == "interior" and not building_available(str(loc.get("id", ""))):
+		var bid := str(loc.get("id", ""))
+		var district := str(DataDB.building(bid).get("district", "riverside"))
+		result = {"kind": "district", "id": district, "spawn": "door_" + bid, "x": -1, "y": -1, "facing": "down"}
+	if result.get("kind", "") == "district" and not district_open(str(result.get("id", ""))):
+		result = {"kind": "district", "id": "riverside", "spawn": "", "x": -1, "y": -1, "facing": "down"}
+	return result
+
+
 static func category(id: String) -> String:
 	var b := DataDB.building(id)
 	return I18n.t(str(b.get("category", "Building")))
@@ -91,10 +138,11 @@ static func guide_groups() -> Array:
 		if district_open(id):
 			for bid in DataDB.buildings:
 				var b: Dictionary = DataDB.buildings[bid]
-				if str(b.get("district", "")) == id and b.get("enterable", true) and str(b.get("status", "active")) == "active":
+				if str(b.get("district", "")) == id and building_available(bid):
 					buildings.append(bid)
 			buildings.sort()
-		groups.append({"id": id, "name": str(d.get("name", id)), "open": district_open(id), "buildings": buildings})
+		if district_open(id):
+			groups.append({"id": id, "name": str(d.get("name", id)), "open": true, "buildings": buildings})
 	return groups
 
 
@@ -110,7 +158,7 @@ static func guide_tags(id: String) -> String:
 			"lease_property", "sleep": tag = I18n.t("Housing")
 		if tag != "" and not tag in tags:
 			tags.append(tag)
-	return " · ".join(tags) if not tags.is_empty() else category(id) if not activities(id).is_empty() else I18n.t("Sightseeing")
+	return " · ".join(tags) if not tags.is_empty() else category(id) if not activities(id).is_empty() else I18n.t("Services") if building_available(id) else I18n.t("Sightseeing")
 
 
 static func station(id: String) -> String:

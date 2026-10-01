@@ -7,7 +7,6 @@ const TABS := [["overview", "Overview", "company"], ["finance", "Finance", "fina
 	["operations", "Operations", "parcel"], ["inventory", "Inventory", "inventory"], ["people", "People", "people"],
 	["contracts", "Contracts", "contracts"], ["freelance", "Freelance", "tasks"], ["saas", "SaaS", "laptop"], ["cafe", "Café", "coffee"],
 	["logistics", "Logistics", "map"]]
-const PLANNED := [["Property", "home"], ["International", "world"], ["Reports", "tasks"]]
 
 var terminal := "laptop"
 var tab := "overview"
@@ -102,10 +101,6 @@ func build() -> void:
 			b.text = I18n.t(b.text) + " ●"
 		nav.add_child(b)
 	nav.add_child(UIK.sep())
-	var planned: Array = []
-	for p in PLANNED:
-		planned.append(I18n.t(p[0]))
-	nav.add_child(UIK.wrap(I18n.t("Planned: %s") % " · ".join(planned), 6, Art.C_DIM, 94))
 	content = UIK.vbox(3)
 	var sc := UIK.scroll(content, Vector2(500, 272))
 	sc.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -162,9 +157,9 @@ func _tab_overview() -> void:
 	_kpi(g, "RECEIVABLE", Fmt.money0(ar), Art.C_GOLD, "ShopLane + invoices")
 	_kpi(g, "PAYABLE", Fmt.money0(-Ledger.balance(be, "accounts_payable")), Art.C_GOLD, "to suppliers")
 	var staff := Staff.count()
-	_kpi(g, "PEOPLE", str(1 + staff), Art.C_WHITE, (I18n.t("you + %d staff") % staff) if staff > 0 else I18n.t("just you"))
+	_kpi(g, "PEOPLE", I18n.t("%d people") % (1 + staff), Art.C_WHITE, (I18n.t("you + %d staff") % staff) if staff > 0 else I18n.t("just you"))
 	_kpi(g, "COMPANY VALUE", Fmt.money0(Company.company_value()), Art.C_SKY, "book value")
-	_kpi(g, "ORDERS DELIVERED", str(int(GameState.stat("orders_delivered"))), Art.C_WHITE, "all time")
+	_kpi(g, "ORDERS DELIVERED", I18n.t("%d orders") % int(GameState.stat("orders_delivered")), Art.C_WHITE, "all time")
 	_section("Needs attention")
 	var alerts: Array = []
 	var to_pack := Ecommerce.orders_with(["placed"]).size()

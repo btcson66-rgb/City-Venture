@@ -6,6 +6,7 @@ var time_label: Label
 var date_label: Label
 var part_icon: TextureRect
 var cash_label: Label
+var personal_label: Label
 var co_row: HBoxContainer
 var co_label: Label
 var co_name: Label
@@ -79,7 +80,8 @@ func _ready() -> void:
 	mh.add_child(UIK.icon("cash", 14))
 	var ml := UIK.vbox(0)
 	mh.add_child(ml)
-	ml.add_child(UIK.label("PERSONAL", 6, Art.C_DIM, true))
+	personal_label = UIK.label("PERSONAL", 6, Art.C_DIM, true)
+	ml.add_child(personal_label)
 	cash_label = UIK.title("", 11, Art.C_GREEN, true)
 	ml.add_child(cash_label)
 	today_label = UIK.label("", 6, Art.C_GREEN, true)
@@ -201,6 +203,7 @@ func _fit_quick(b: Button, h: HBoxContainer) -> void:
 
 
 func relabel() -> void:
+	personal_label.text = I18n.t("PERSONAL")
 	for b in quick.get_child(0).get_children():
 		var label: Label = b.get_child(0).get_node("Text")
 		label.text = I18n.t(str(label.get_meta("source_text")))
@@ -234,17 +237,17 @@ func _process(_d: float) -> void:
 		for ent in (["player", GameState.business_entity()] if GameState.business_entity() != "player" else ["player"]):
 			_delta += Ledger.operating_cash_since(ent, day0)
 	var delta := _delta
-	today_label.text = ("▲ " if delta >= 0 else "▼ ") + Fmt.money(absf(delta)) + I18n.t(" today")
+	today_label.text = ("▲ " if delta >= 0 else "▼ ") + Fmt.money0(absf(delta)) + I18n.t(" today")
 	today_label.add_theme_color_override("font_color", Art.C_GREEN if delta >= 0 else Art.C_RED)
 	var pc := Ledger.cash("player")
-	cash_label.text = Fmt.money(pc)
+	cash_label.text = Fmt.money0(pc)
 	cash_label.add_theme_color_override("font_color", Art.C_GREEN if pc >= 1500 else (Art.C_GOLD if pc >= 0 else Art.C_RED))
 	var be := GameState.business_entity()
 	co_row.visible = be != "player"
 	if be != "player":
 		co_name.text = GameState.entity_name(be).to_upper()
 		var cc := Ledger.cash(be)
-		co_label.text = Fmt.money(cc)
+		co_label.text = Fmt.money0(cc)
 		co_label.add_theme_color_override("font_color", Art.C_GREEN if cc >= 1500 else (Art.C_GOLD if cc >= 0 else Art.C_RED))
 	var unread := GameState.unread_messages()
 	var pending := not EventEngine.pending().is_empty()
@@ -291,7 +294,7 @@ func _on_saved(slot: int) -> void:
 func _on_cash(entity: String, delta: float) -> void:
 	if not visible or absf(delta) < 0.01:
 		return
-	var l := UIK.title(Fmt.money(delta, true), 9, Art.C_GREEN if delta > 0 else Art.C_RED)
+	var l := UIK.title(Fmt.money0(delta, true), 9, Art.C_GREEN if delta > 0 else Art.C_RED)
 	l.position = Vector2(640 - 70, 40 if entity == "player" else 62)
 	add_child(l)
 	var tw := create_tween()

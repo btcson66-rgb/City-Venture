@@ -90,6 +90,10 @@ func begin_world() -> void:
 
 # ------------------------------------------------------------------ world
 func _enter(kind: String, id: String, spawn: String, facing: String, pos := Vector2(-1, -1)) -> void:
+	var safe := BuildingInfo.safe_location({"kind": kind, "id": id, "x": pos.x, "y": pos.y, "facing": facing})
+	if str(safe["kind"]) != kind or str(safe["id"]) != id:
+		_enter(str(safe["kind"]), str(safe["id"]), str(safe.get("spawn", "")), str(safe["facing"]))
+		return
 	var scene: WorldScene
 	if kind == "district":
 		var d := District.new()
@@ -155,6 +159,8 @@ func world_scene() -> WorldScene:
 
 func building_open(bid: String) -> Dictionary:
 	var b := DataDB.building(bid)
+	if not BuildingInfo.building_available(bid):
+		return {"open": false, "reason": I18n.t("There is no public entrance here.")}
 	var h: Dictionary = b.get("hours", {})
 	if b.has("closed_reason"):
 		return {"open": false, "reason": I18n.t(str(b["closed_reason"]))}   # not enterable in this build (Customs House): say why
@@ -222,9 +228,9 @@ func capture_location() -> void:
 
 
 func restore_location() -> void:
-	var loc: Dictionary = GameState.data["player"]["location"]
+	var loc := BuildingInfo.safe_location(GameState.data["player"]["location"])
 	UIRoot.close_all()
-	_fade(func(): _enter(str(loc.get("kind", "interior")), str(loc.get("id", "riverside_apartment")), "door", str(loc.get("facing", "down")),
+	_fade(func(): _enter(str(loc.get("kind", "interior")), str(loc.get("id", "riverside_apartment")), str(loc.get("spawn", "door")), str(loc.get("facing", "down")),
 		Vector2(float(loc.get("x", -1)), float(loc.get("y", -1)))))
 
 

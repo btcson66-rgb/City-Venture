@@ -14,6 +14,7 @@ rm -rf "$B" "$DIST"
 mkdir -p "$B/windows" "$B/linux" "$B/macos" "$B/web" "$DIST"
 
 python3 "$ROOT/tools/i18n_extract.py" --check
+python3 "$ROOT/tools/beta_audit.py"
 cd "$GAME"
 godot --headless --path . --import >/dev/null 2>&1
 godot --headless --path . res://tests/test_runner.tscn | tail -1

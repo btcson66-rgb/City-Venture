@@ -5,7 +5,7 @@ Conventions:
 - `id` is a `snake_case` string, unique within its folder.
 - Money is a float in the entity's currency (Aurelia Dollar, `AUD$`, displayed as `$`).
 - Time durations are in **game minutes** (`*_min`) or **days** (`*_days`).
-- `status` on definitions: `active` (in this build) or `planned` (defined, not playable. The UI must say so).
+- `status` on definitions: `active` (playable) or `planned` (retained data, hidden from player lists).
 - Text shown to players lives in `text`/`lines` fields so it can be localised later.
 
 `DataDB.validate()` checks everything marked **(ref)**.
@@ -166,7 +166,15 @@ Doors and City Guide read it directly; adding a building requires its data and t
 interactables in the live room. A room with no such activity explicitly says it is sightseeing-only. Guide tags
 come from action kinds; station instructions come from the district's `metro` data. District status comes from
 `data/districts/<id>.json` when supplied, otherwise the city district definition. Inactive districts have no guide
-destinations; active buildings are discovered by their `district`, with optional `status`/`enterable` gates respected.
+destinations or labels; active buildings are discovered by their `district`. Optional building `status` defaults to
+`active`; `enterable` defaults to `true`. `planned` or explicit `enterable:false` retains the facade and interior data
+but removes public entry and guide navigation. Changing only `status` to `active` enables completed future content.
+An otherwise active room needs an unlocked non-look interactable or an NPC whose real schedule/condition matches
+now. NPC-only rooms and unleased café premises have no public prompt until something can be done there. Existing
+triggers for active buildings recheck this each frame, so NPC arrival restores entry without scene reload.
+Loading an old save inside a hidden room returns to `district:building.district`, spawn `door_<building_id>`;
+all saved finance, inventory, contracts and leases remain unchanged. Facades keep this street spawn even as scenery.
+Inactive districts are plain map blocks with no labels/stations and are absent from guide lists.
 
 Save data adds `building_visits: {building_id: count}` lazily on entry; the first two entries show a dismissible
 four-second room introduction. Missing counts in older saves start at zero and existing `visited` flags are preserved.
