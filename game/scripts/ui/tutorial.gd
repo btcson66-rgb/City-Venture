@@ -529,7 +529,7 @@ func _draw_coach() -> void:
 	# a hint bubble with an arrow, below the button (or above it near the bottom of the screen):
 	# the step on a small line, then what this button does
 	var font := UIK.bold_font()
-	var small := Art.font_body
+	var small := UIK.body_font()
 	var w1 := small.get_string_size(_coach_step, HORIZONTAL_ALIGNMENT_LEFT, -1, 6).x if _coach_step != "" else 0.0
 	var w := maxf(font.get_string_size(_coach_hint, HORIZONTAL_ALIGNMENT_LEFT, -1, 8).x, w1)
 	var h := 22.0 if _coach_step != "" else 13.0
