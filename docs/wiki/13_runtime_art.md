@@ -241,3 +241,27 @@
 - `world_detail/events/rail_frozen.png`
 - `events/acquisition_offer.png`
 - `world_detail/events/acquisition_offer.png`
+
+## City frontage completion · 2026-10-01
+
+美術：19 種其餘城市建築已交原尺寸與 4× PNG，另附各建築獨立光罩和 import；門口、空白招牌框 metadata 對齊新圖，舊尺寸和街區邏輯位置不變。原尺寸已自動載入。4× 的街區/主選單建築入口仍由 Claude 接線；不是完整遊戲品質驗收。
+
+- buildings/riverside_walkup: game/assets/buildings/riverside_walkup.png + game/assets/buildings/riverside_walkup_lights.png + game/assets/world_detail/buildings/riverside_walkup.png + game/assets/world_detail/buildings/riverside_walkup_lights.png
+- buildings/riverside_shops: game/assets/buildings/riverside_shops.png + game/assets/buildings/riverside_shops_lights.png + game/assets/world_detail/buildings/riverside_shops.png + game/assets/world_detail/buildings/riverside_shops_lights.png
+- buildings/postpoint: game/assets/buildings/postpoint.png + game/assets/buildings/postpoint_lights.png + game/assets/world_detail/buildings/postpoint.png + game/assets/world_detail/buildings/postpoint_lights.png
+- buildings/nexus_cowork: game/assets/buildings/nexus_cowork.png + game/assets/buildings/nexus_cowork_lights.png + game/assets/world_detail/buildings/nexus_cowork.png + game/assets/world_detail/buildings/nexus_cowork_lights.png
+- buildings/suite_building: game/assets/buildings/suite_building.png + game/assets/buildings/suite_building_lights.png + game/assets/world_detail/buildings/suite_building.png + game/assets/world_detail/buildings/suite_building_lights.png
+- buildings/byte_bean: game/assets/buildings/byte_bean.png + game/assets/buildings/byte_bean_lights.png + game/assets/world_detail/buildings/byte_bean.png + game/assets/world_detail/buildings/byte_bean_lights.png
+- buildings/city_hall: game/assets/buildings/city_hall.png + game/assets/buildings/city_hall_lights.png + game/assets/world_detail/buildings/city_hall.png + game/assets/world_detail/buildings/city_hall_lights.png
+- buildings/brick_shops: game/assets/buildings/brick_shops.png + game/assets/buildings/brick_shops_lights.png + game/assets/world_detail/buildings/brick_shops.png + game/assets/world_detail/buildings/brick_shops_lights.png
+- buildings/civic_annex: game/assets/buildings/civic_annex.png + game/assets/buildings/civic_annex_lights.png + game/assets/world_detail/buildings/civic_annex.png + game/assets/world_detail/buildings/civic_annex_lights.png
+- buildings/finance_tower: game/assets/buildings/finance_tower.png + game/assets/buildings/finance_tower_lights.png + game/assets/world_detail/buildings/finance_tower.png + game/assets/world_detail/buildings/finance_tower_lights.png
+- buildings/threadline_apparel: game/assets/buildings/threadline_apparel.png + game/assets/buildings/threadline_apparel_lights.png + game/assets/world_detail/buildings/threadline_apparel.png + game/assets/world_detail/buildings/threadline_apparel_lights.png
+- buildings/crestline_flagship: game/assets/buildings/crestline_flagship.png + game/assets/buildings/crestline_flagship_lights.png + game/assets/world_detail/buildings/crestline_flagship.png + game/assets/world_detail/buildings/crestline_flagship_lights.png
+- buildings/lantern_bistro: game/assets/buildings/lantern_bistro.png + game/assets/buildings/lantern_bistro_lights.png + game/assets/world_detail/buildings/lantern_bistro.png + game/assets/world_detail/buildings/lantern_bistro_lights.png
+- buildings/popup_unit: game/assets/buildings/popup_unit.png + game/assets/buildings/popup_unit_lights.png + game/assets/world_detail/buildings/popup_unit.png + game/assets/world_detail/buildings/popup_unit_lights.png
+- buildings/retail_arcade: game/assets/buildings/retail_arcade.png + game/assets/buildings/retail_arcade_lights.png + game/assets/world_detail/buildings/retail_arcade.png + game/assets/world_detail/buildings/retail_arcade_lights.png
+- buildings/shop_row_awning: game/assets/buildings/shop_row_awning.png + game/assets/buildings/shop_row_awning_lights.png + game/assets/world_detail/buildings/shop_row_awning.png + game/assets/world_detail/buildings/shop_row_awning_lights.png
+- buildings/cinema_front: game/assets/buildings/cinema_front.png + game/assets/buildings/cinema_front_lights.png + game/assets/world_detail/buildings/cinema_front.png + game/assets/world_detail/buildings/cinema_front_lights.png
+- buildings/corner_cafe_unit: game/assets/buildings/corner_cafe_unit.png + game/assets/buildings/corner_cafe_unit_lights.png + game/assets/world_detail/buildings/corner_cafe_unit.png + game/assets/world_detail/buildings/corner_cafe_unit_lights.png
+- buildings/metro_entrance: game/assets/buildings/metro_entrance.png + game/assets/buildings/metro_entrance_lights.png + game/assets/world_detail/buildings/metro_entrance.png + game/assets/world_detail/buildings/metro_entrance_lights.png
