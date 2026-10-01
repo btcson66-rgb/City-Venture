@@ -241,3 +241,9 @@
 - `world_detail/events/rail_frozen.png`
 - `events/acquisition_offer.png`
 - `world_detail/events/acquisition_offer.png`
+
+
+## 地圖美術品質批 · 2026-10-01
+
+美術：25 個城市／世界／捷運素材的原尺寸及 4× 已交，含匯入檔。城市主圖、12 個街區選取、8 個世界區域選取與捷運原生 UI 已驗收（英文與繁中），53 張實拍巡禮 0 失敗。其餘一張車站預覽和備用世界背景只交素材，沒有 runtime call site。點位、地圖資料和狀態未改。高解析載入仍待 Claude 接線，須保留邏輯尺寸與點擊座標。證據：`evidence/20261001_map_quality/README.md`。
+
