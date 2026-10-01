@@ -46,6 +46,16 @@
 
 ## 截圖
 
+## 連續作業模式補驗（2026-10-02）
+
+- 英文實際渲染探索 walkthrough：`0 failure(s) · 54.7s real`；英文 JPG 與結果 JSON 已附。
+- `bash tools/package_release.sh` 成功；內建單元 `273/273 tests passed in 19.6s`。
+  Windows、Linux、macOS、Web ZIP 均產出，package.log 與 SHA256SUMS 保留。
+- 自審逐條對照 #39，重讀世界互動、指南、存檔計數與餐點 diff；確認舊檔計數懶建立、
+  灰色鎖定僅影響呈現、導航沒有繞過營業時間。之前自審修復 HUD 初始語系未刷新與 bot 打包漏點。
+- 英文／繁中新畫面已看圖檢查；沒有文字溢出或新漏譯。依使用者最新指示，後續不再跑簡中。
+- 打包重新 import 的美術 .import 行尾變化已復原，不混入美術變更。
+
 所有截圖皆由實機 tour 產生，JPG 品質 85；本工單證據限制 20 MB。
 
 | 截圖 | 驗證 |
