@@ -241,3 +241,44 @@
 - `world_detail/events/rail_frozen.png`
 - `events/acquisition_offer.png`
 - `world_detail/events/acquisition_offer.png`
+
+## Interior completion quality · 2026-10-01
+
+美術：25 種室內物件及 8 種地板已交原尺寸、4× PNG 與 import。家具、窗景經既有 world_detail 入口自動載入；七種地板重複拼接原材質，修正配對尺寸而保留既有紋理比例。假人使用中性材質。
+
+程式接線：六個招牌保留空白文字區，需 Claude 疊在地點招牌上；箱堆的獨立 Art.tex 入口仍使用原尺寸。新 server_rack_lights 提供機櫃指示燈。不是完整遊戲或所有室內的最終驗收。
+
+- interiors/checkout_counter: game/assets/interiors/checkout_counter.png + game/assets/world_detail/interiors/checkout_counter.png
+- interiors/clothing_rack: game/assets/interiors/clothing_rack.png + game/assets/world_detail/interiors/clothing_rack.png
+- interiors/fitting_room: game/assets/interiors/fitting_room.png + game/assets/world_detail/interiors/fitting_room.png
+- interiors/lockers: game/assets/interiors/lockers.png + game/assets/world_detail/interiors/lockers.png
+- interiors/mannequin: game/assets/interiors/mannequin.png + game/assets/world_detail/interiors/mannequin.png
+- interiors/mirror_full: game/assets/interiors/mirror_full.png + game/assets/world_detail/interiors/mirror_full.png
+- interiors/queue_barrier: game/assets/interiors/queue_barrier.png + game/assets/world_detail/interiors/queue_barrier.png
+- interiors/shoe_shelf: game/assets/interiors/shoe_shelf.png + game/assets/world_detail/interiors/shoe_shelf.png
+- interiors/server_rack: game/assets/interiors/server_rack.png + game/assets/world_detail/interiors/server_rack.png
+- interiors/server_rack_lights: game/assets/interiors/server_rack_lights.png + game/assets/world_detail/interiors/server_rack_lights.png
+- interiors/armchair: game/assets/interiors/armchair.png + game/assets/world_detail/interiors/armchair.png
+- interiors/box: game/assets/interiors/box.png + game/assets/world_detail/interiors/box.png
+- interiors/cork_board: game/assets/interiors/cork_board.png + game/assets/world_detail/interiors/cork_board.png
+- interiors/door_mat: game/assets/interiors/door_mat.png + game/assets/world_detail/interiors/door_mat.png
+- interiors/framed_art: game/assets/interiors/framed_art.png + game/assets/world_detail/interiors/framed_art.png
+- interiors/framed_art_b: game/assets/interiors/framed_art_b.png + game/assets/world_detail/interiors/framed_art_b.png
+- interiors/stool: game/assets/interiors/stool.png + game/assets/world_detail/interiors/stool.png
+- interiors/window_wide_day: game/assets/interiors/window_wide_day.png + game/assets/world_detail/interiors/window_wide_day.png
+- interiors/window_wide_night: game/assets/interiors/window_wide_night.png + game/assets/world_detail/interiors/window_wide_night.png
+- interiors/logo_bloom: game/assets/interiors/logo_bloom.png + game/assets/world_detail/interiors/logo_bloom.png
+- interiors/logo_bytebean: game/assets/interiors/logo_bytebean.png + game/assets/world_detail/interiors/logo_bytebean.png
+- interiors/logo_city_hall: game/assets/interiors/logo_city_hall.png + game/assets/world_detail/interiors/logo_city_hall.png
+- interiors/logo_cowork: game/assets/interiors/logo_cowork.png + game/assets/world_detail/interiors/logo_cowork.png
+- interiors/logo_nexus_bank: game/assets/interiors/logo_nexus_bank.png + game/assets/world_detail/interiors/logo_nexus_bank.png
+- interiors/logo_postpoint: game/assets/interiors/logo_postpoint.png + game/assets/world_detail/interiors/logo_postpoint.png
+- interiors/seal: game/assets/interiors/seal.png + game/assets/world_detail/interiors/seal.png
+- interiors/floor_carpet_navy: game/assets/interiors/floor_carpet_navy.png + game/assets/world_detail/interiors/floor_carpet_navy.png
+- interiors/floor_concrete: game/assets/interiors/floor_concrete.png + game/assets/world_detail/interiors/floor_concrete.png
+- interiors/floor_marble: game/assets/interiors/floor_marble.png + game/assets/world_detail/interiors/floor_marble.png
+- interiors/floor_tile_white: game/assets/interiors/floor_tile_white.png + game/assets/world_detail/interiors/floor_tile_white.png
+- interiors/floor_wood_cafe: game/assets/interiors/floor_wood_cafe.png + game/assets/world_detail/interiors/floor_wood_cafe.png
+- interiors/floor_wood_dark: game/assets/interiors/floor_wood_dark.png + game/assets/world_detail/interiors/floor_wood_dark.png
+- interiors/floor_wood_warm: game/assets/interiors/floor_wood_warm.png + game/assets/world_detail/interiors/floor_wood_warm.png
+- interiors/floor_checker: game/assets/interiors/floor_checker.png + game/assets/world_detail/interiors/floor_checker.png
