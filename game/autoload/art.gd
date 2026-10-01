@@ -32,6 +32,12 @@ func tex(path: String) -> Texture2D:
 	if _cache.has(path):
 		return _cache[path]
 	var full := "res://assets/" + path + ".png"
+	# Customisation keeps stable logical keys (also used by pose probes and saved appearances).
+	# Native and detail layers share geometry; prefer their direct 4x rendering when present.
+	if (path.begins_with("characters/") or path.begins_with("portraits/")) and not path.get_file().begins_with("npc_"):
+		var detail := "res://assets/world_detail/" + path + ".png"
+		if ResourceLoader.exists(detail):
+			full = detail
 	var t: Texture2D = null
 	if ResourceLoader.exists(full):
 		t = load(full)
@@ -80,8 +86,6 @@ func opt_color(group: String, id: String, fallback := Color.WHITE) -> Color:
 func character_layers(app: Dictionary, outfit: String, outfit_tints := {}, npc_id := "") -> Array:
 	if npc_id != "" and has_tex("world_detail/characters/npc_" + npc_id):
 		return [{"tex": "world_detail/characters/npc_" + npc_id, "tint": Color.WHITE, "name": "npc_detail"}]
-	if npc_id == "" and outfit == "startup_casual" and outfit_tints.is_empty() and _default_detail_appearance(app) and has_tex("world_detail/characters/player_default"):
-		return [{"tex": "world_detail/characters/player_default", "tint": Color.WHITE, "name": "founder_detail"}]
 	if npc_id != "" and has_tex("characters/npc_" + npc_id):
 		return [{"tex": "characters/npc_" + npc_id, "tint": Color.WHITE, "name": "npc"}]
 	var pres: String = app.get("presentation", "masculine")
@@ -107,6 +111,8 @@ func character_layers(app: Dictionary, outfit: String, outfit_tints := {}, npc_i
 		L.append({"tex": base + "_top_detail", "tint": Color.WHITE, "name": "top_detail"})
 	L.append({"tex": "characters/eyes_%s" % eyes, "tint": Color.WHITE, "name": "eyes"})
 	L.append({"tex": "characters/iris_%s" % eyes, "tint": ec, "name": "iris"})
+	if has_tex("characters/eyes_detail_%s" % eyes):
+		L.append({"tex": "characters/eyes_detail_%s" % eyes, "tint": Color.WHITE, "name": "eyes_detail"})
 	L.append({"tex": "characters/brows_%s" % app.get("brows", "straight"), "tint": hc, "name": "brows"})
 	L.append({"tex": "characters/mouth_%s" % app.get("mouth", "smile"), "tint": Color.WHITE, "name": "mouth"})
 	L.append({"tex": "characters/hair_%s_front" % hair, "tint": hc, "name": "hair_front"})
@@ -121,8 +127,6 @@ func character_layers(app: Dictionary, outfit: String, outfit_tints := {}, npc_i
 ## strip that replaces the layers), portraits/outfit_<o>_detail (untinted collar details) and
 ## portraits/acc_<accessory> (glasses on the portrait, 64x64).
 func portrait_layers(app: Dictionary, outfit: String, outfit_tints := {}, npc_id := "") -> Array:
-	if npc_id == "" and outfit == "startup_casual" and outfit_tints.is_empty() and _default_detail_appearance(app) and has_tex("world_detail/portraits/player_default"):
-		return [{"tex": "world_detail/portraits/player_default", "tint": Color.WHITE, "frames": 4}]
 	if npc_id != "" and has_tex("world_detail/portraits/npc_" + npc_id):
 		return [{"tex": "world_detail/portraits/npc_" + npc_id, "tint": Color.WHITE, "frames": 4}]
 	if npc_id != "" and has_tex("portraits/npc_" + npc_id):
@@ -145,6 +149,10 @@ func portrait_layers(app: Dictionary, outfit: String, outfit_tints := {}, npc_id
 	L.append_array([
 		{"tex": "portraits/eyes_%s" % eyes, "tint": Color.WHITE, "frames": 4},
 		{"tex": "portraits/iris_%s" % eyes, "tint": ec, "frames": 4},
+	])
+	if has_tex("portraits/eyes_detail_%s" % eyes):
+		L.append({"tex": "portraits/eyes_detail_%s" % eyes, "tint": Color.WHITE, "frames": 4})
+	L.append_array([
 		{"tex": "portraits/brows_%s" % app.get("brows", "straight"), "tint": hc, "frames": 4},
 		{"tex": "portraits/mouth_%s" % app.get("mouth", "smile"), "tint": Color.WHITE, "frames": 4},
 		{"tex": "portraits/hair_%s_front" % hair, "tint": hc, "frames": 1},
@@ -169,18 +177,6 @@ func _resolve_outfit(outfit: String, probe: String, tints: Dictionary) -> Array:
 		t[k] = Color(st["tints"][k])
 	t.merge(tints, true)
 	return [str(st["outfit"]), t]
-
-
-func _default_detail_appearance(app: Dictionary) -> bool:
-	# Never silently replace a player's customised skin, face, hair or accessories.
-	var defaults := GameState.default_appearance()
-	for key in defaults:
-		if app.get(key, defaults[key]) != defaults[key]:
-			return false
-	for key in ["_hair_color_c", "_skin_c", "_eye_c"]:
-		if app.has(key):
-			return false
-	return true
 
 
 ## Deterministic random appearance for ambient NPCs.

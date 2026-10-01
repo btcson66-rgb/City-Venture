@@ -1,5 +1,13 @@
 # 07 角色
 
+### 2026-10-01 捏臉與分層角色品質修正
+
+美術狀態：**完整自訂分層更新，原尺寸與 4× 已交**。六種膚色與全部現有選項使用相同分層骨架；不再只有預設造型使用高解析全圖。補齊三種體型、四種臉型、八種髮型、九套現有服裝、眼鏡／背包及五種姿勢。五套商店服裝沿用既有 stand_in 選擇，引用的服裝層已更新。
+
+四表情同步出現在捏臉頭像及全身三視圖；遊戲中的分層人物使用獨立 `*_expressions` 五官圖，不把表情當走路動畫。虹膜染色與白色眼神高光分層，深膚色保留同樣面部輪廓與衣服。全部尺寸、脚底錨點及外觀存檔欄位維持原規格。
+
+素材清單：[13 實機美術](13_runtime_art.md)。原畫及可重建原稿：`docs/art_sources/custom_character_20261001/`；改前／改後、全部選項、表情、姿勢及自訂存檔進入室內的實機證據：`evidence/20261001_character_customization/`。後續舊批狀態描述為歷史记录，以上更新為本批現況。
+
 ### 2026-09-29 原創對話頭像更新
 
 12 位具名 NPC 已接入原創四表情頭像：`npc_ana`、`npc_daniel`、`npc_dara`、`npc_elena`、`npc_jun`、`npc_ken`、`npc_lee`、`npc_marcus`、`npc_maya`、`npc_priya`、`npc_sofia`、`npc_tom`，均位於 `game/assets/portraits/`。每張 256×64，順序維持 neutral / happy / thinking / surprised。狀態：**CODEX 原創更新，已接入既有 NPC 頭像覆寫接點**。
