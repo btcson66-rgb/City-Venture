@@ -9,7 +9,7 @@ msgstr ""
 msgid "\n%dxxx"
 msgstr ""
 
-#: scripts/ui/hud.gd:235
+#: scripts/ui/hud.gd:251
 msgid "   ◆ decision"
 msgstr ""
 
@@ -29,11 +29,11 @@ msgstr ""
 msgid "  of which on hold (<2 days)"
 msgstr ""
 
-#: scripts/ui/hud.gd:210
+#: scripts/ui/hud.gd:226
 msgid "  ·  DAY %d"
 msgstr ""
 
-#: autoload/ui_root.gd:371
+#: autoload/ui_root.gd:373
 msgid "  ·  Open %s–%s"
 msgstr ""
 
@@ -69,7 +69,7 @@ msgstr ""
 msgid " ltd"
 msgstr ""
 
-#: scripts/ui/hud.gd:221
+#: scripts/ui/hud.gd:237
 msgid " today"
 msgstr ""
 
@@ -275,10 +275,6 @@ msgstr ""
 
 #: scripts/sim/saas.gd:179
 msgid "%s ads"
-msgstr ""
-
-#: scripts/world/actions.gd:181
-msgid "%s at %s — %s."
 msgstr ""
 
 #: scripts/sim/insolvency.gd:28
@@ -925,7 +921,7 @@ msgstr ""
 msgid "After a shift you're tired: go home and sleep in your bed (any time after work, or from 7 PM). Overnight your listing keeps selling and deliveries keep moving. Tomorrow, the city is yours."
 msgstr ""
 
-#: scripts/ui/hud.gd:213
+#: scripts/ui/hud.gd:229
 msgid "Afternoon · Sunny"
 msgstr ""
 
@@ -1055,6 +1051,10 @@ msgstr ""
 
 #: data/dialogue/nina_first.json
 msgid "Anything you buy goes in your wardrobe at home. The fitting room's at the back."
+msgstr ""
+
+#: data/buildings/old_town_studio.json
+msgid "Apartment"
 msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:68
@@ -1297,7 +1297,7 @@ msgstr ""
 msgid "Balance"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:127
+#: data/buildings/nexus_bank.json scripts/ui/phone_ui.gd:127
 msgid "Bank"
 msgstr ""
 
@@ -1537,6 +1537,10 @@ msgstr ""
 msgid "Brown"
 msgstr ""
 
+#: data/help/help.json
+msgid "Browse buildings by district to see what you can do, opening hours and the nearest Metro station."
+msgstr ""
+
 #: data/buildings/threadline_apparel.json
 msgid "Browse the Threadline collection"
 msgstr ""
@@ -1583,6 +1587,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1092
 msgid "Build this"
+msgstr ""
+
+#: scripts/world/building_info.gd:29
+msgid "Building"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1101
@@ -1857,8 +1865,16 @@ msgstr ""
 msgid "CUSTOMS HOUSE"
 msgstr ""
 
+#: data/buildings/bloom_coffee.json data/buildings/byte_and_bean.json
+msgid "Cafe"
+msgstr ""
+
 #: data/businesses/cafe.json
 msgid "Cafe / Food"
+msgstr ""
+
+#: data/buildings/corner_cafe_unit.json
+msgid "Cafe premises"
 msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:11 scripts/ui/modals/company_os.gd:8
@@ -1989,7 +2005,7 @@ msgstr ""
 msgid "Carry them to PostPoint yourself (cheaper, costs your time)"
 msgstr ""
 
-#: scripts/ui/hud.gd:240
+#: scripts/ui/hud.gd:256
 msgid "Carrying %d parcel%s"
 msgstr ""
 
@@ -2161,6 +2177,14 @@ msgstr ""
 msgid "City"
 msgstr ""
 
+#: scripts/ui/modals/city_guide_modal.gd:7 scripts/ui/phone_ui.gd:129
+msgid "City Guide"
+msgstr ""
+
+#: data/help/help.json
+msgid "City Guide: find your next stop"
+msgstr ""
+
 #: data/jobs/city_clerk.json
 msgid "City Hall"
 msgstr ""
@@ -2191,6 +2215,10 @@ msgstr ""
 
 #: data/city/aurelia.json data/districts/civic_center.json scripts/ui/minigames/pack_game.gd:9 scripts/ui/minigames/parcel_sort_game.gd:7
 msgid "Civic Center"
+msgstr ""
+
+#: data/buildings/city_hall.json
+msgid "Civic services"
 msgstr ""
 
 #: data/buildings/harbor_point_fitness.json
@@ -2241,7 +2269,7 @@ msgstr ""
 msgid "Climate"
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:31 scripts/ui/modals/city_map_modal.gd:113 scripts/ui/modals/clothing_shop_modal.gd:27 scripts/ui/modals/clothing_shop_modal.gd:57
+#: scripts/ui/modals/business_board.gd:31 scripts/ui/modals/city_guide_modal.gd:40 scripts/ui/modals/city_map_modal.gd:113 scripts/ui/modals/clothing_shop_modal.gd:27
 msgid "Close"
 msgstr ""
 
@@ -2257,10 +2285,6 @@ msgstr ""
 msgid "Close the company: sell off, pay what we can, start again"
 msgstr ""
 
-#: scripts/world/door_trigger.gd:39
-msgid "Closed"
-msgstr ""
-
 #: scripts/sim/insolvency.gd:166
 msgid "Closed %s. Stock sold for %s; %s of debt written off. Starting again."
 msgstr ""
@@ -2273,6 +2297,10 @@ msgstr ""
 msgid "Closed now"
 msgstr ""
 
+#: scripts/world/building_info.gd:45
+msgid "Closed · opens %s"
+msgstr ""
+
 #: scripts/ui/modals/insolvency_modal.gd:62
 msgid "Closing statement"
 msgstr ""
@@ -2281,7 +2309,11 @@ msgstr ""
 msgid "Clothing"
 msgstr ""
 
-#: scripts/sim/ledger.gd:28
+#: data/buildings/crestline_flagship.json data/buildings/threadline_apparel.json
+msgid "Clothing store"
+msgstr ""
+
+#: data/buildings/nexus_cowork.json scripts/sim/ledger.gd:28
 msgid "Co-working"
 msgstr ""
 
@@ -2669,6 +2701,10 @@ msgstr ""
 msgid "Customers come from the street: Old Town's foot traffic × how many stop (price and rating) × how many cups the counter can make."
 msgstr ""
 
+#: data/buildings/customs_house.json
+msgid "Customs"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:307
 msgid "Cut costs: pause ads, cheaper living"
 msgstr ""
@@ -2703,6 +2739,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1333
 msgid "DRIVERS"
+msgstr ""
+
+#: scripts/world/building_info.gd:35
+msgid "Daily"
 msgstr ""
 
 #: data/npcs/daniel.json
@@ -3185,6 +3225,10 @@ msgstr ""
 msgid "Earn-out"
 msgstr ""
 
+#: scripts/world/building_info.gd:106
+msgid "Eat"
+msgstr ""
+
 #: data/businesses/ecommerce.json
 msgid "Ecommerce"
 msgstr ""
@@ -3265,15 +3309,11 @@ msgstr ""
 msgid "Energy price swings"
 msgstr ""
 
-#: scripts/world/door_trigger.gd:39
-msgid "Enter %s"
-msgstr ""
-
 #: scripts/sim/effects.gd:83
 msgid "Equity investment"
 msgstr ""
 
-#: scripts/ui/hud.gd:108
+#: scripts/ui/hud.gd:110
 msgid "Esc"
 msgstr ""
 
@@ -3329,7 +3369,7 @@ msgstr ""
 msgid "Estimated sales"
 msgstr ""
 
-#: scripts/ui/hud.gd:213
+#: scripts/ui/hud.gd:229
 msgid "Evening"
 msgstr ""
 
@@ -3393,7 +3433,7 @@ msgstr ""
 msgid "Executive"
 msgstr ""
 
-#: scripts/ui/tutorial.gd:607
+#: scripts/ui/tutorial.gd:619
 msgid "Exit"
 msgstr ""
 
@@ -3429,7 +3469,7 @@ msgstr ""
 msgid "FINANCIAL →"
 msgstr ""
 
-#: scripts/ui/tutorial.gd:418 scripts/ui/tutorial.gd:465
+#: scripts/ui/tutorial.gd:420 scripts/ui/tutorial.gd:467
 msgid "FIRST VENTURE %d/%d"
 msgstr ""
 
@@ -3601,6 +3641,10 @@ msgstr ""
 msgid "Fit-out & equipment"
 msgstr ""
 
+#: data/buildings/harbor_point_fitness.json
+msgid "Fitness studio"
+msgstr ""
+
 #: scripts/sim/cafe.gd:104
 msgid "Fitted out %s."
 msgstr ""
@@ -3639,6 +3683,10 @@ msgstr ""
 
 #: scripts/ui/minigames/photo_shoot_game.gd:107
 msgid "Focus"
+msgstr ""
+
+#: scripts/ui/modals/city_guide_modal.gd:48
+msgid "Follow the gold arrow to %s."
 msgstr ""
 
 #: scripts/ui/tutorial.gd:33
@@ -3901,7 +3949,7 @@ msgstr ""
 msgid "Good morning. %s."
 msgstr ""
 
-#: scripts/ui/tutorial.gd:373
+#: scripts/ui/tutorial.gd:375
 msgid "Good news: a van was in your area, so your order came early."
 msgstr ""
 
@@ -4197,7 +4245,7 @@ msgstr ""
 msgid "Hey! Welcome to Nexus. First time?"
 msgstr ""
 
-#: scripts/ui/tutorial.gd:351
+#: scripts/ui/tutorial.gd:353
 msgid "Hey, did you get my messages? Call me when you can."
 msgstr ""
 
@@ -4269,7 +4317,7 @@ msgstr ""
 msgid "Hiring gets harder: wages up 8% in a year."
 msgstr ""
 
-#: data/character/options.json
+#: data/buildings/riverside_apartment.json data/character/options.json
 msgid "Home"
 msgstr ""
 
@@ -4317,12 +4365,20 @@ msgstr ""
 msgid "Hotel / Tourism"
 msgstr ""
 
+#: scripts/world/building_info.gd:36
+msgid "Hours: %s–%s · %s"
+msgstr ""
+
 #: scripts/ui/minigames/barista_game.gd:34
 msgid "House rules: an Americano never takes milk, and a flat white is always a double shot."
 msgstr ""
 
 #: data/buildings/lantern_bistro.json
 msgid "House special"
+msgstr ""
+
+#: scripts/world/building_info.gd:110
+msgid "Housing"
 msgstr ""
 
 #: data/help/glossary.json
@@ -4517,7 +4573,7 @@ msgstr ""
 msgid "In the Clearing Crisis (Year 5), money sent abroad takes days to land, and an importer ships only once it has."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:462 scripts/ui/phone_ui.gd:261
+#: scripts/ui/modals/company_os.gd:462 scripts/ui/phone_ui.gd:264
 msgid "In transit"
 msgstr ""
 
@@ -4563,6 +4619,10 @@ msgstr ""
 
 #: data/dialogue/sam_intro.json
 msgid "Insure it, keep it moving, and it earns. Leave it on the kerb and it is just a very expensive shed."
+msgstr ""
+
+#: data/help/help.json
+msgid "Interaction markers show usable spots. Grey markers with a lock explain what you need first. Press I in a room to reopen its introduction."
 msgstr ""
 
 #: scripts/sim/ledger.gd:30
@@ -5113,6 +5173,10 @@ msgstr ""
 msgid "Letters of credit sound safer."
 msgstr ""
 
+#: data/buildings/okafor_lettings.json
+msgid "Lettings"
+msgstr ""
+
 #: data/buildings/pier7_warehouse.json
 msgid "Lettings desk: lease Bay 3"
 msgstr ""
@@ -5125,7 +5189,7 @@ msgstr ""
 msgid "Licensing Officer"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:272
+#: scripts/ui/phone_ui.gd:275
 msgid "Life Timeline"
 msgstr ""
 
@@ -5457,7 +5521,7 @@ msgstr ""
 msgid "Manufacturing & Logistics"
 msgstr ""
 
-#: scripts/ui/hud.gd:107
+#: scripts/ui/hud.gd:109
 msgid "Map"
 msgstr ""
 
@@ -5581,11 +5645,11 @@ msgstr ""
 msgid "Meet Marcus Reed now"
 msgstr ""
 
-#: scripts/ui/hud.gd:108 scripts/ui/modals/company_os.gd:1218
+#: scripts/ui/hud.gd:110 scripts/ui/modals/company_os.gd:1218
 msgid "Menu"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:127 scripts/ui/phone_ui.gd:176
+#: scripts/ui/phone_ui.gd:127 scripts/ui/phone_ui.gd:179
 msgid "Messages"
 msgstr ""
 
@@ -5593,7 +5657,7 @@ msgstr ""
 msgid "Messy"
 msgstr ""
 
-#: scripts/ui/tutorial.gd:660 scripts/world/district.gd:70
+#: scripts/ui/tutorial.gd:672 scripts/world/district.gd:70
 msgid "Metro"
 msgstr ""
 
@@ -5607,6 +5671,10 @@ msgstr ""
 
 #: scripts/world/district.gd:69
 msgid "Metro — %s Station"
+msgstr ""
+
+#: scripts/world/building_info.gd:123
+msgid "Metro: %s Station"
 msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:10
@@ -5705,7 +5773,7 @@ msgstr ""
 msgid "Month close"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:262
+#: scripts/ui/phone_ui.gd:265
 msgid "Month sales"
 msgstr ""
 
@@ -5721,11 +5789,11 @@ msgstr ""
 msgid "Monthly rent"
 msgstr ""
 
-#: autoload/scene_router.gd:175 scripts/ui/modals/job_modal.gd:31
+#: autoload/scene_router.gd:175 scripts/ui/modals/job_modal.gd:31 scripts/world/building_info.gd:35
 msgid "Mon–Fri"
 msgstr ""
 
-#: autoload/scene_router.gd:175
+#: autoload/scene_router.gd:175 scripts/world/building_info.gd:35
 msgid "Mon–Sat"
 msgstr ""
 
@@ -5749,7 +5817,7 @@ msgstr ""
 msgid "Moreau"
 msgstr ""
 
-#: scripts/ui/hud.gd:213
+#: scripts/ui/hud.gd:229
 msgid "Morning · Sunny"
 msgstr ""
 
@@ -5809,7 +5877,7 @@ msgstr ""
 msgid "NEGOTIATION"
 msgstr ""
 
-#: autoload/ui_root.gd:388
+#: autoload/ui_root.gd:390
 msgid "NEW LOCATION"
 msgstr ""
 
@@ -5965,7 +6033,7 @@ msgstr ""
 msgid "Nexus Co-work, over in Startup Hub. They've got a board — suppliers, gigs, whatever."
 msgstr ""
 
-#: scripts/ui/hud.gd:213
+#: scripts/ui/hud.gd:229
 msgid "Night"
 msgstr ""
 
@@ -6181,6 +6249,10 @@ msgstr ""
 msgid "Not now"
 msgstr ""
 
+#: scripts/ui/modals/city_guide_modal.gd:20 scripts/world/building_info.gd:44
+msgid "Not open yet"
+msgstr ""
+
 #: scripts/sim/wardrobe.gd:53
 msgid "Not sold here"
 msgstr ""
@@ -6253,7 +6325,7 @@ msgstr ""
 msgid "Nothing to resolve."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:255
+#: scripts/ui/phone_ui.gd:258
 msgid "Notifications only.\nManage at a desk: Company OS."
 msgstr ""
 
@@ -6329,7 +6401,7 @@ msgstr ""
 msgid "Of course you are."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:46 scripts/ui/modals/pause_menu.gd:61
+#: scripts/ui/modals/pause_menu.gd:46 scripts/ui/modals/pause_menu.gd:61 scripts/ui/modals/pause_menu.gd:69
 msgid "Off"
 msgstr ""
 
@@ -6343,6 +6415,10 @@ msgstr ""
 
 #: scripts/sim/contracts.gd:29
 msgid "Offer: %d × %s @ %s, Net %d"
+msgstr ""
+
+#: data/buildings/small_office.json
+msgid "Office"
 msgstr ""
 
 #: data/character/options.json
@@ -6397,7 +6473,7 @@ msgstr ""
 msgid "Omar"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:60
+#: scripts/ui/modals/pause_menu.gd:60 scripts/ui/modals/pause_menu.gd:69
 msgid "On"
 msgstr ""
 
@@ -6537,7 +6613,7 @@ msgstr ""
 msgid "Open last month close (%s)"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1209
+#: scripts/ui/modals/company_os.gd:1209 scripts/world/building_info.gd:41
 msgid "Open now"
 msgstr ""
 
@@ -6741,7 +6817,7 @@ msgstr ""
 msgid "PERMITS & REGISTRATIONS (AURELIA)"
 msgstr ""
 
-#: scripts/ui/hud.gd:80
+#: scripts/ui/hud.gd:82
 msgid "PERSONAL"
 msgstr ""
 
@@ -6829,7 +6905,7 @@ msgstr ""
 msgid "Packed well"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:260
+#: scripts/ui/phone_ui.gd:263
 msgid "Packed, not shipped"
 msgstr ""
 
@@ -6907,6 +6983,10 @@ msgstr ""
 
 #: data/jobs/parcel_sorter.json
 msgid "Parcel Sorter"
+msgstr ""
+
+#: data/buildings/postpoint_riverside.json
+msgid "Parcel counter"
 msgstr ""
 
 #: scripts/ui/minigames/parcel_sort_game.gd:26
@@ -7113,7 +7193,7 @@ msgstr ""
 msgid "Permits & regulations"
 msgstr ""
 
-#: scripts/ui/modals/bank_modal.gd:56 scripts/ui/phone_ui.gd:216
+#: scripts/ui/modals/bank_modal.gd:56 scripts/ui/phone_ui.gd:219
 msgid "Personal"
 msgstr ""
 
@@ -7125,7 +7205,7 @@ msgstr ""
 msgid "Personal Banker"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:264
+#: scripts/ui/phone_ui.gd:267
 msgid "Personal cap"
 msgstr ""
 
@@ -7141,7 +7221,7 @@ msgstr ""
 msgid "Personal seller limit reached. Your listings are paused until next month — or until you register a business."
 msgstr ""
 
-#: scripts/ui/hud.gd:105
+#: scripts/ui/hud.gd:107
 msgid "Phone"
 msgstr ""
 
@@ -7489,7 +7569,7 @@ msgstr ""
 msgid "Quit job"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:69
+#: scripts/ui/modals/pause_menu.gd:78
 msgid "Quit to title"
 msgstr ""
 
@@ -7897,7 +7977,7 @@ msgstr ""
 msgid "Rent"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:222
+#: scripts/ui/phone_ui.gd:225
 msgid "Rent $1,250 due the 14th"
 msgstr ""
 
@@ -7969,7 +8049,7 @@ msgstr ""
 msgid "Replay tutorial"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:66
+#: scripts/ui/modals/pause_menu.gd:75
 msgid "Report a problem (F12)"
 msgstr ""
 
@@ -8013,6 +8093,10 @@ msgstr ""
 msgid "Respond"
 msgstr ""
 
+#: data/buildings/lantern_bistro.json
+msgid "Restaurant"
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Restock from Lumina Direct before the rush: pay the way that suits you (Company OS → Operations)"
 msgstr ""
@@ -8043,6 +8127,10 @@ msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:11
 msgid "Retail"
+msgstr ""
+
+#: data/buildings/popup_unit.json
+msgid "Retail premises"
 msgstr ""
 
 #: data/city/aurelia.json
@@ -8325,7 +8413,7 @@ msgstr ""
 msgid "SUBSCRIBERS"
 msgstr ""
 
-#: scripts/world/interior.gd:294
+#: scripts/world/interior.gd:295
 msgid "SUITE 2B\nAVAILABLE"
 msgstr ""
 
@@ -8409,15 +8497,15 @@ msgstr ""
 msgid "Save cash. Sales will dip."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:281
+#: scripts/ui/phone_ui.gd:284
 msgid "Save game"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:282
+#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:285
 msgid "Save now"
 msgstr ""
 
-#: scripts/ui/hud.gd:148
+#: scripts/ui/hud.gd:150
 msgid "Saved"
 msgstr ""
 
@@ -8425,7 +8513,7 @@ msgstr ""
 msgid "Saved %s"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:284
+#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:287
 msgid "Saved (slot %d)."
 msgstr ""
 
@@ -8529,6 +8617,10 @@ msgstr ""
 msgid "Service: %d%%"
 msgstr ""
 
+#: scripts/world/building_info.gd:109
+msgid "Services"
+msgstr ""
+
 #: data/dialogue/lina_intro.json
 msgid "Set me up with a digital dollar account."
 msgstr ""
@@ -8625,6 +8717,10 @@ msgstr ""
 msgid "Shoot the photos yourself"
 msgstr ""
 
+#: scripts/world/building_info.gd:107
+msgid "Shop"
+msgstr ""
+
 #: scripts/sim/ledger.gd:31
 msgid "Shop rent"
 msgstr ""
@@ -8641,7 +8737,7 @@ msgstr ""
 msgid "ShopLane Ads: a big brand campaign is bidding up placements."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:254
+#: scripts/ui/phone_ui.gd:257
 msgid "ShopLane Seller"
 msgstr ""
 
@@ -8677,7 +8773,7 @@ msgstr ""
 msgid "ShopLane payout received: %s"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:221
+#: scripts/ui/phone_ui.gd:224
 msgid "ShopLane pending"
 msgstr ""
 
@@ -8729,12 +8825,20 @@ msgstr ""
 msgid "Shots"
 msgstr ""
 
+#: scripts/ui/modals/pause_menu.gd:67
+msgid "Show interaction markers"
+msgstr ""
+
 #: data/dialogue/marcus_lending.json
 msgid "Show me what you can do."
 msgstr ""
 
 #: data/character/options.json
 msgid "Side part"
+msgstr ""
+
+#: scripts/world/building_info.gd:113
+msgid "Sightseeing"
 msgstr ""
 
 #: data/events/supply_shock_plan.json
@@ -8805,7 +8909,7 @@ msgstr ""
 msgid "Skin tone"
 msgstr ""
 
-#: scripts/ui/tutorial.gd:141
+#: scripts/ui/tutorial.gd:142
 msgid "Skip"
 msgstr ""
 
@@ -9329,7 +9433,7 @@ msgstr ""
 msgid "TODAY'S BOOKINGS"
 msgstr ""
 
-#: scripts/ui/hud.gd:105 scripts/ui/tutorial.gd:27
+#: scripts/ui/hud.gd:107 scripts/ui/tutorial.gd:27
 msgid "Tab"
 msgstr ""
 
@@ -9347,6 +9451,14 @@ msgstr ""
 
 #: data/dialogue/ana_register.json
 msgid "Take a number whenever you're ready."
+msgstr ""
+
+#: scripts/ui/modals/city_guide_modal.gd:32
+msgid "Take me there"
+msgstr ""
+
+#: data/help/help.json
+msgid "Take me there sets the existing gold guide arrow to the building door. Closed buildings still show their hours; you can enter once they open."
 msgstr ""
 
 #: scripts/ui/modals/job_modal.gd:74 scripts/ui/tutorial.gd:84
@@ -9393,7 +9505,7 @@ msgstr ""
 msgid "Tape seam %d"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:127 scripts/ui/phone_ui.gd:234
+#: scripts/ui/phone_ui.gd:127 scripts/ui/phone_ui.gd:237
 msgid "Tasks"
 msgstr ""
 
@@ -9555,6 +9667,10 @@ msgstr ""
 
 #: scripts/sim/company.gd:85
 msgid "The account is already open."
+msgstr ""
+
+#: scripts/ui/modals/city_guide_modal.gd:39
+msgid "The arrow guides you to the door; wait until opening hours to enter."
 msgstr ""
 
 #: scripts/sim/insolvency.gd:66
@@ -9897,7 +10013,7 @@ msgstr ""
 msgid "This contract belongs to another company."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:289
+#: scripts/ui/phone_ui.gd:292
 msgid "This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen."
 msgstr ""
 
@@ -9919,6 +10035,10 @@ msgstr ""
 
 #: scripts/sim/contracts.gd:117 scripts/sim/contracts.gd:158 scripts/sim/contracts.gd:205 scripts/sim/contracts.gd:312
 msgid "This is a contract of a closed company."
+msgstr ""
+
+#: scripts/world/building_info.gd:77
+msgid "This is a sightseeing-only location right now."
 msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:31
@@ -10005,7 +10125,7 @@ msgstr ""
 msgid "To Startup Hub"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:462 scripts/ui/phone_ui.gd:259
+#: scripts/ui/modals/company_os.gd:462 scripts/ui/phone_ui.gd:262
 msgid "To pack"
 msgstr ""
 
@@ -10029,7 +10149,7 @@ msgstr ""
 msgid "Tom: \"It's all yours. Sign's up out front.\""
 msgstr ""
 
-#: scripts/ui/tutorial.gd:442
+#: scripts/ui/tutorial.gd:444
 msgid "Too late for a shift today: the workplace closes soon. Go home and sleep (you can, after 4 PM on your first day), and work a shift tomorrow morning."
 msgstr ""
 
@@ -10113,7 +10233,7 @@ msgstr ""
 msgid "Turning an empty unit into a working shop: equipment, counter and furniture."
 msgstr ""
 
-#: scripts/ui/tutorial.gd:217
+#: scripts/ui/tutorial.gd:218
 msgid "Tutorial skipped. You can replay it from the pause menu (Esc)."
 msgstr ""
 
@@ -10301,6 +10421,10 @@ msgstr ""
 msgid "Varga"
 msgstr ""
 
+#: data/buildings/dockside_motors.json
+msgid "Vehicle dealer"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Vehicle insurance"
 msgstr ""
@@ -10445,6 +10569,10 @@ msgstr ""
 msgid "Walk east along the street (→). Past the end of Riverside is Startup Hub, where founders work."
 msgstr ""
 
+#: scripts/world/building_info.gd:121
+msgid "Walk from a neighbouring district."
+msgstr ""
+
 #: scripts/ui/tutorial.gd:29
 msgid "Walk onto the glowing EXIT mat at the bottom of the room to go outside."
 msgstr ""
@@ -10471,6 +10599,10 @@ msgstr ""
 
 #: data/help/help.json scripts/ui/modals/wardrobe_modal.gd:10
 msgid "Wardrobe"
+msgstr ""
+
+#: data/buildings/pier7_warehouse.json
+msgid "Warehouse"
 msgstr ""
 
 #: scripts/sim/ledger.gd:31
@@ -10551,6 +10683,10 @@ msgstr ""
 
 #: data/story/chapters.json
 msgid "Went green with the city."
+msgstr ""
+
+#: scripts/ui/hud.gd:158
+msgid "What can I do here?"
 msgstr ""
 
 #: data/dialogue/okafor_intro.json
@@ -10667,6 +10803,10 @@ msgstr ""
 
 #: scripts/ui/minigames/photo_shoot_game.gd:7
 msgid "Wood desk"
+msgstr ""
+
+#: scripts/world/building_info.gd:108
+msgid "Work"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:996
@@ -10805,6 +10945,10 @@ msgstr ""
 msgid "You can't do that right now."
 msgstr ""
 
+#: scripts/world/building_info.gd:77
+msgid "You can: %s"
+msgstr ""
+
 #: scripts/ui/modals/job_modal.gd:49
 msgid "You do the work yourself: the better the shift goes, the more you earn (60% of the wage is guaranteed)."
 msgstr ""
@@ -10857,7 +11001,7 @@ msgstr ""
 msgid "You left the job at %s."
 msgstr ""
 
-#: scripts/ui/tutorial.gd:436
+#: scripts/ui/tutorial.gd:438
 msgid "You left your job before working a shift. Take a job again at Bloom Coffee's staff door, then work a shift."
 msgstr ""
 
@@ -11109,7 +11253,7 @@ msgstr ""
 msgid "Your listing is live on ShopLane. Your first order comes in within a few minutes, and your phone will buzz. Head home meanwhile: your packing table is there."
 msgstr ""
 
-#: scripts/ui/tutorial.gd:438
+#: scripts/ui/tutorial.gd:440
 msgid "Your listing is no longer active. Open Company OS → Sales and list a product again; buy stock in Operations if you ran out."
 msgstr ""
 
@@ -11217,7 +11361,7 @@ msgstr ""
 msgid "all time"
 msgstr ""
 
-#: scripts/sim/careers.gd:124 scripts/ui/tutorial.gd:569
+#: scripts/sim/careers.gd:124 scripts/ui/tutorial.gd:576
 msgid "already worked today"
 msgstr ""
 
@@ -11285,7 +11429,7 @@ msgstr ""
 msgid "client fees"
 msgstr ""
 
-#: scripts/sim/careers.gd:127 scripts/ui/tutorial.gd:441 scripts/ui/tutorial.gd:569
+#: scripts/sim/careers.gd:127 scripts/ui/tutorial.gd:443 scripts/ui/tutorial.gd:576
 msgid "closed now"
 msgstr ""
 
@@ -11705,7 +11849,7 @@ msgstr ""
 msgid "paid on delivery"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:267
+#: scripts/ui/phone_ui.gd:270
 msgid "paused: cap"
 msgstr ""
 
@@ -11889,7 +12033,7 @@ msgstr ""
 msgid "to suppliers"
 msgstr ""
 
-#: scripts/sim/careers.gd:129 scripts/ui/tutorial.gd:441 scripts/ui/tutorial.gd:569
+#: scripts/sim/careers.gd:129 scripts/ui/tutorial.gd:443 scripts/ui/tutorial.gd:576
 msgid "too late for a shift today"
 msgstr ""
 
@@ -12121,7 +12265,7 @@ msgstr ""
 msgid "◉  Shutter"
 msgstr ""
 
-#: scripts/ui/hud.gd:235
+#: scripts/ui/hud.gd:251
 msgid "● %d new"
 msgstr ""
 

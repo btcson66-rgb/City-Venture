@@ -27,6 +27,8 @@ var part_label: Label
 var _last_cash := {}
 var _delta_t := -1
 var _delta := 0.0
+var welcome: BuildingWelcome
+var here_button: Button
 
 
 func _ready() -> void:
@@ -151,6 +153,13 @@ func _ready() -> void:
 	EventBus.cash_changed.connect(_on_cash)
 	EventBus.objective_changed.connect(refresh)
 	EventBus.message_received.connect(func(_a, _b): refresh())
+	welcome = BuildingWelcome.new()
+	add_child(welcome)
+	here_button = _quick_button("info", "What can I do here?", "I", func():
+		if not UIRoot.is_blocking():
+			welcome.show_card())
+	here_button.name = "BuildingActivities"
+	quick.add_child(here_button)
 
 
 func _quick_button(icon_name: String, text: String, key: String, cb: Callable) -> Button:
@@ -165,7 +174,8 @@ func _quick_button(icon_name: String, text: String, key: String, cb: Callable) -
 	h.position = Vector2(3, 2)
 	b.add_child(h)
 	h.add_child(UIK.icon(icon_name, 8))
-	var l := UIK.label(text, 6, Art.C_WHITE, true)
+	var l := UIK.label(I18n.t(text), 6, Art.C_WHITE, true)
+	l.set_meta("source_text", text)
 	l.name = "Text"
 	h.add_child(l)
 	var kc := PanelContainer.new()
@@ -192,7 +202,13 @@ func _fit_quick(b: Button, h: HBoxContainer) -> void:
 
 func relabel() -> void:
 	for b in quick.get_child(0).get_children():
+		var label: Label = b.get_child(0).get_node("Text")
+		label.text = I18n.t(str(label.get_meta("source_text")))
 		_fit_quick.call_deferred(b, b.get_child(0))
+	if here_button != null:
+		var label: Label = here_button.get_child(0).get_node("Text")
+		label.text = I18n.t(str(label.get_meta("source_text")))
+		_fit_quick.call_deferred(here_button, here_button.get_child(0))
 
 
 func set_prompt(text: String) -> void:
@@ -238,11 +254,20 @@ func _process(_d: float) -> void:
 	quick.position = Vector2(640 - 6 - quick.size.x, money_panel.position.y + money_panel.size.y + 3)
 	var cc2 := Ecommerce.carried_count()
 	parcels_label.text = (I18n.t("Carrying %d parcel%s") % [cc2, I18n.pl(cc2)]) if cc2 > 0 else ""
+	var ws := SceneRouter.world_scene()
+	here_button.visible = ws != null and ws.kind == "interior"
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if visible and event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_I and not UIRoot.is_blocking():
+		welcome.show_card()
+		get_viewport().set_input_as_handled()
 
 
 func refresh() -> void:
 	if not GameState.has_game():
 		return
+	relabel()
 	var o := StoryEngine.main_objective()
 	obj_panel.visible = not o.is_empty()
 	goal_label.text = I18n.t(str(o.get("goal", ""))).to_upper()

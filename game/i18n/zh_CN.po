@@ -10,7 +10,7 @@ msgstr ""
 msgid "\n%dxxx"
 msgstr "\n%dxxx"
 
-#: scripts/ui/hud.gd:235
+#: scripts/ui/hud.gd:251
 msgid "   ◆ decision"
 msgstr "   ◆ 待决定"
 
@@ -30,11 +30,11 @@ msgstr "  每日广告"
 msgid "  of which on hold (<2 days)"
 msgstr "  其中保留中（未满 2 天）"
 
-#: scripts/ui/hud.gd:210
+#: scripts/ui/hud.gd:226
 msgid "  ·  DAY %d"
 msgstr "  ·  第 %d 天"
 
-#: autoload/ui_root.gd:371
+#: autoload/ui_root.gd:373
 msgid "  ·  Open %s–%s"
 msgstr "  ·  营业 %s–%s"
 
@@ -70,7 +70,7 @@ msgstr "（逾期，罚款 %s）"
 msgid " ltd"
 msgstr " ltd"
 
-#: scripts/ui/hud.gd:221
+#: scripts/ui/hud.gd:237
 msgid " today"
 msgstr " 今日"
 
@@ -277,10 +277,6 @@ msgstr "%s 上线了"
 #: scripts/sim/saas.gd:179
 msgid "%s ads"
 msgstr "%s 广告"
-
-#: scripts/world/actions.gd:181
-msgid "%s at %s — %s."
-msgstr "%s（%s）——%s。"
 
 #: scripts/sim/insolvency.gd:28
 msgid "%s became insolvent: %s"
@@ -926,7 +922,7 @@ msgstr "广告"
 msgid "After a shift you're tired: go home and sleep in your bed (any time after work, or from 7 PM). Overnight your listing keeps selling and deliveries keep moving. Tomorrow, the city is yours."
 msgstr "上完班累了：回家睡觉吧（下班后随时可以睡，或晚上 7 点以后）。夜里商品会继续卖、货也会继续送。明天起，这座城市任你闯。"
 
-#: scripts/ui/hud.gd:213
+#: scripts/ui/hud.gd:229
 msgid "Afternoon · Sunny"
 msgstr "下午 · 晴"
 
@@ -1057,6 +1053,10 @@ msgstr "%s–%s 随时可上班，%s · 每天一班"
 #: data/dialogue/nina_first.json
 msgid "Anything you buy goes in your wardrobe at home. The fitting room's at the back."
 msgstr "买的衣服都会放进你家的衣柜。试衣间在最里面。"
+
+#: data/buildings/old_town_studio.json
+msgid "Apartment"
+msgstr "公寓"
 
 #: scripts/ui/minigames/clerk_forms_game.gd:68
 msgid "Applicant"
@@ -1298,7 +1298,7 @@ msgstr "面包店送货：%d 个糕点"
 msgid "Balance"
 msgstr "余额"
 
-#: scripts/ui/phone_ui.gd:127
+#: data/buildings/nexus_bank.json scripts/ui/phone_ui.gd:127
 msgid "Bank"
 msgstr "银行"
 
@@ -1538,6 +1538,10 @@ msgstr "坏掉了，卖家不处理。"
 msgid "Brown"
 msgstr "棕色"
 
+#: data/help/help.json
+msgid "Browse buildings by district to see what you can do, opening hours and the nearest Metro station."
+msgstr "依街区浏览建筑，查看可以做什么、营业时间及捷运站。"
+
 #: data/buildings/threadline_apparel.json
 msgid "Browse the Threadline collection"
 msgstr "逛逛 Threadline 本季系列"
@@ -1585,6 +1589,10 @@ msgstr "做一次，每个月都能卖。先投入开发工时，之后才有订
 #: scripts/ui/modals/company_os.gd:1092
 msgid "Build this"
 msgstr "做这个"
+
+#: scripts/world/building_info.gd:29
+msgid "Building"
+msgstr "建筑"
 
 #: scripts/ui/modals/company_os.gd:1101
 msgid "Building %s"
@@ -1858,9 +1866,17 @@ msgstr "今日客人"
 msgid "CUSTOMS HOUSE"
 msgstr "海关大楼"
 
+#: data/buildings/bloom_coffee.json data/buildings/byte_and_bean.json
+msgid "Cafe"
+msgstr "咖啡店"
+
 #: data/businesses/cafe.json
 msgid "Cafe / Food"
 msgstr "咖啡／餐饮"
+
+#: data/buildings/corner_cafe_unit.json
+msgid "Cafe premises"
+msgstr "咖啡店面"
 
 #: scripts/ui/minigames/clerk_forms_game.gd:11 scripts/ui/modals/company_os.gd:8
 msgid "Café"
@@ -1990,7 +2006,7 @@ msgstr "自己拿去 PostPoint"
 msgid "Carry them to PostPoint yourself (cheaper, costs your time)"
 msgstr "自己拿去 PostPoint（比较便宜，但花你的时间）"
 
-#: scripts/ui/hud.gd:240
+#: scripts/ui/hud.gd:256
 msgid "Carrying %d parcel%s"
 msgstr "携带 %d 件包裹%s"
 
@@ -2162,6 +2178,14 @@ msgstr "Chris Walsh"
 msgid "City"
 msgstr "城市"
 
+#: scripts/ui/modals/city_guide_modal.gd:7 scripts/ui/phone_ui.gd:129
+msgid "City Guide"
+msgstr "城市指南"
+
+#: data/help/help.json
+msgid "City Guide: find your next stop"
+msgstr "城市指南：找到下一站"
+
 #: data/jobs/city_clerk.json
 msgid "City Hall"
 msgstr "市政厅"
@@ -2193,6 +2217,10 @@ msgstr "市府推出 200 万元绿色企业补助，给在地卖家申请。"
 #: data/city/aurelia.json data/districts/civic_center.json scripts/ui/minigames/pack_game.gd:9 scripts/ui/minigames/parcel_sort_game.gd:7
 msgid "Civic Center"
 msgstr "市政中心"
+
+#: data/buildings/city_hall.json
+msgid "Civic services"
+msgstr "市政服务"
 
 #: data/buildings/harbor_point_fitness.json
 msgid "Class timetable"
@@ -2242,7 +2270,7 @@ msgstr "客户每天早上会张贴小案子。接下一个，在任何笔电上
 msgid "Climate"
 msgstr "气候"
 
-#: scripts/ui/modals/business_board.gd:31 scripts/ui/modals/city_map_modal.gd:113 scripts/ui/modals/clothing_shop_modal.gd:27 scripts/ui/modals/clothing_shop_modal.gd:57
+#: scripts/ui/modals/business_board.gd:31 scripts/ui/modals/city_guide_modal.gd:40 scripts/ui/modals/city_map_modal.gd:113 scripts/ui/modals/clothing_shop_modal.gd:27
 msgid "Close"
 msgstr "关闭"
 
@@ -2258,10 +2286,6 @@ msgstr "完成一次现金为正的月结，或查看两次现金为负的月结
 msgid "Close the company: sell off, pay what we can, start again"
 msgstr "结束公司：变卖资产、尽量还债、重新开始"
 
-#: scripts/world/door_trigger.gd:39
-msgid "Closed"
-msgstr "休息中"
-
 #: scripts/sim/insolvency.gd:166
 msgid "Closed %s. Stock sold for %s; %s of debt written off. Starting again."
 msgstr "%s 结束营业。库存卖了 %s；%s 的债务被注销。重新出发。"
@@ -2274,6 +2298,10 @@ msgstr "%s 结算：营业利润 %s，现金 %s。"
 msgid "Closed now"
 msgstr "目前打烊"
 
+#: scripts/world/building_info.gd:45
+msgid "Closed · opens %s"
+msgstr "已打烊 · %s 开门"
+
 #: scripts/ui/modals/insolvency_modal.gd:62
 msgid "Closing statement"
 msgstr "结算明细"
@@ -2282,7 +2310,11 @@ msgstr "结算明细"
 msgid "Clothing"
 msgstr "服饰"
 
-#: scripts/sim/ledger.gd:28
+#: data/buildings/crestline_flagship.json data/buildings/threadline_apparel.json
+msgid "Clothing store"
+msgstr "服饰店"
+
+#: data/buildings/nexus_cowork.json scripts/sim/ledger.gd:28
 msgid "Co-working"
 msgstr "共享办公室"
 
@@ -2670,6 +2702,10 @@ msgstr "客人"
 msgid "Customers come from the street: Old Town's foot traffic × how many stop (price and rating) × how many cups the counter can make."
 msgstr "客人来自街上：旧城区的人流 × 愿意走进来的比例（价格和评分）× 吧台一小时做得出几杯。"
 
+#: data/buildings/customs_house.json
+msgid "Customs"
+msgstr "海关"
+
 #: scripts/ui/modals/company_os.gd:307
 msgid "Cut costs: pause ads, cheaper living"
 msgstr "缩减开支：暂停广告、降低生活费"
@@ -2705,6 +2741,10 @@ msgstr "DOCKSIDE MOTORS"
 #: scripts/ui/modals/company_os.gd:1333
 msgid "DRIVERS"
 msgstr "司机"
+
+#: scripts/world/building_info.gd:35
+msgid "Daily"
+msgstr "每日"
 
 #: data/npcs/daniel.json
 msgid "Daniel Wong"
@@ -3186,6 +3226,10 @@ msgstr "赚到你的第一块钱。"
 msgid "Earn-out"
 msgstr "绩效尾款（Earn-out）"
 
+#: scripts/world/building_info.gd:106
+msgid "Eat"
+msgstr "吃"
+
 #: data/businesses/ecommerce.json
 msgid "Ecommerce"
 msgstr "电商"
@@ -3266,15 +3310,11 @@ msgstr "能源"
 msgid "Energy price swings"
 msgstr "能源价格波动"
 
-#: scripts/world/door_trigger.gd:39
-msgid "Enter %s"
-msgstr "进入 %s"
-
 #: scripts/sim/effects.gd:83
 msgid "Equity investment"
 msgstr "股权投资"
 
-#: scripts/ui/hud.gd:108
+#: scripts/ui/hud.gd:110
 msgid "Esc"
 msgstr "Esc"
 
@@ -3330,7 +3370,7 @@ msgstr "浓缩"
 msgid "Estimated sales"
 msgstr "预估销售"
 
-#: scripts/ui/hud.gd:213
+#: scripts/ui/hud.gd:229
 msgid "Evening"
 msgstr "傍晚"
 
@@ -3394,7 +3434,7 @@ msgstr "做得非常好。"
 msgid "Executive"
 msgstr "主管"
 
-#: scripts/ui/tutorial.gd:607
+#: scripts/ui/tutorial.gd:619
 msgid "Exit"
 msgstr "出口"
 
@@ -3430,7 +3470,7 @@ msgstr "眉毛"
 msgid "FINANCIAL →"
 msgstr "金融区 →"
 
-#: scripts/ui/tutorial.gd:418 scripts/ui/tutorial.gd:465
+#: scripts/ui/tutorial.gd:420 scripts/ui/tutorial.gd:467
 msgid "FIRST VENTURE %d/%d"
 msgstr "第一次创业 %d/%d"
 
@@ -3602,6 +3642,10 @@ msgstr "装修"
 msgid "Fit-out & equipment"
 msgstr "装修与设备"
 
+#: data/buildings/harbor_point_fitness.json
+msgid "Fitness studio"
+msgstr "健身工作室"
+
 #: scripts/sim/cafe.gd:104
 msgid "Fitted out %s."
 msgstr "%s 装修完成。"
@@ -3641,6 +3685,10 @@ msgstr "传单和街边立牌，每天："
 #: scripts/ui/minigames/photo_shoot_game.gd:107
 msgid "Focus"
 msgstr "对焦"
+
+#: scripts/ui/modals/city_guide_modal.gd:48
+msgid "Follow the gold arrow to %s."
+msgstr "跟着金色箭头前往 %s。"
 
 #: scripts/ui/tutorial.gd:33
 msgid "Follow the gold arrow to Bloom Coffee and walk in through the door. At the counter, press E to order."
@@ -3902,7 +3950,7 @@ msgstr "以这个价格来说不错。"
 msgid "Good morning. %s."
 msgstr "早安。%s。"
 
-#: scripts/ui/tutorial.gd:373
+#: scripts/ui/tutorial.gd:375
 msgid "Good news: a van was in your area, so your order came early."
 msgstr "好消息：刚好有货车在你附近，你的货提早到了。"
 
@@ -4198,7 +4246,7 @@ msgstr "嘿——那 %d 个%s今天到期了。还会来吗？"
 msgid "Hey! Welcome to Nexus. First time?"
 msgstr "嗨！欢迎来到 Nexus。第一次来？"
 
-#: scripts/ui/tutorial.gd:351
+#: scripts/ui/tutorial.gd:353
 msgid "Hey, did you get my messages? Call me when you can."
 msgstr "欸，有收到我的消息吗？有空打给我。"
 
@@ -4270,7 +4318,7 @@ msgstr "征才"
 msgid "Hiring gets harder: wages up 8% in a year."
 msgstr "越来越难征人：薪资一年涨 8%。"
 
-#: data/character/options.json
+#: data/buildings/riverside_apartment.json data/character/options.json
 msgid "Home"
 msgstr "居家"
 
@@ -4318,6 +4366,10 @@ msgstr "自由座——月租"
 msgid "Hotel / Tourism"
 msgstr "饭店／观光"
 
+#: scripts/world/building_info.gd:36
+msgid "Hours: %s–%s · %s"
+msgstr "营业时间：%s–%s · %s"
+
 #: scripts/ui/minigames/barista_game.gd:34
 msgid "House rules: an Americano never takes milk, and a flat white is always a double shot."
 msgstr "店规：美式咖啡不加奶；馥列白一律双份浓缩。"
@@ -4325,6 +4377,10 @@ msgstr "店规：美式咖啡不加奶；馥列白一律双份浓缩。"
 #: data/buildings/lantern_bistro.json
 msgid "House special"
 msgstr "招牌套餐"
+
+#: scripts/world/building_info.gd:110
+msgid "Housing"
+msgstr "租屋与住宿"
 
 #: data/help/glossary.json
 msgid "How expensive moving goods is compared with a normal year (1.00)."
@@ -4518,7 +4574,7 @@ msgstr "库存（所有地点）：%d / 需要 %d"
 msgid "In the Clearing Crisis (Year 5), money sent abroad takes days to land, and an importer ships only once it has."
 msgstr "清算危机（第 5 年）期间，汇到国外的钱要好几天才到，进口商收到钱才会出货。"
 
-#: scripts/ui/modals/company_os.gd:462 scripts/ui/phone_ui.gd:261
+#: scripts/ui/modals/company_os.gd:462 scripts/ui/phone_ui.gd:264
 msgid "In transit"
 msgstr "运送中"
 
@@ -4565,6 +4621,10 @@ msgstr "保险（每月）"
 #: data/dialogue/sam_intro.json
 msgid "Insure it, keep it moving, and it earns. Leave it on the kerb and it is just a very expensive shed."
 msgstr "保好险、让它一直跑，它就会赚钱；停在路边，它只是一间很贵的棚子。"
+
+#: data/help/help.json
+msgid "Interaction markers show usable spots. Grey markers with a lock explain what you need first. Press I in a room to reopen its introduction."
+msgstr "交互标记会标示可以使用的地点；灰色锁头表示还有前置条件。在室内按 I 可重新查看介绍。"
 
 #: scripts/sim/ledger.gd:30
 msgid "Interest"
@@ -5114,6 +5174,10 @@ msgstr "信用状：Nexus 银行担保这笔付款。1.5%（至少 $60），约 
 msgid "Letters of credit sound safer."
 msgstr "信用状听起来比较安全。"
 
+#: data/buildings/okafor_lettings.json
+msgid "Lettings"
+msgstr "租赁服务"
+
 #: data/buildings/pier7_warehouse.json
 msgid "Lettings desk: lease Bay 3"
 msgstr "租赁柜台：租 3 号仓位"
@@ -5126,7 +5190,7 @@ msgstr "执照已续期到 %s。"
 msgid "Licensing Officer"
 msgstr "执照承办员"
 
-#: scripts/ui/phone_ui.gd:272
+#: scripts/ui/phone_ui.gd:275
 msgid "Life Timeline"
 msgstr "人生纪录"
 
@@ -5458,7 +5522,7 @@ msgstr "制造"
 msgid "Manufacturing & Logistics"
 msgstr "制造与物流"
 
-#: scripts/ui/hud.gd:107
+#: scripts/ui/hud.gd:109
 msgid "Map"
 msgstr "地图"
 
@@ -5582,11 +5646,11 @@ msgstr "到 Nexus 共享办公室见 Daniel Wong（每周四 17:00–20:00）"
 msgid "Meet Marcus Reed now"
 msgstr "现在找 Marcus Reed 洽谈"
 
-#: scripts/ui/hud.gd:108 scripts/ui/modals/company_os.gd:1218
+#: scripts/ui/hud.gd:110 scripts/ui/modals/company_os.gd:1218
 msgid "Menu"
 msgstr "菜单"
 
-#: scripts/ui/phone_ui.gd:127 scripts/ui/phone_ui.gd:176
+#: scripts/ui/phone_ui.gd:127 scripts/ui/phone_ui.gd:179
 msgid "Messages"
 msgstr "消息"
 
@@ -5594,7 +5658,7 @@ msgstr "消息"
 msgid "Messy"
 msgstr "蓬乱"
 
-#: scripts/ui/tutorial.gd:660 scripts/world/district.gd:70
+#: scripts/ui/tutorial.gd:672 scripts/world/district.gd:70
 msgid "Metro"
 msgstr "捷运"
 
@@ -5609,6 +5673,10 @@ msgstr "捷运 · 5 条路线"
 #: scripts/world/district.gd:69
 msgid "Metro — %s Station"
 msgstr "捷运——%s站"
+
+#: scripts/world/building_info.gd:123
+msgid "Metro: %s Station"
+msgstr "捷运：%s 站"
 
 #: scripts/ui/minigames/barista_game.gd:10
 msgid "Mia"
@@ -5706,7 +5774,7 @@ msgstr "月结——%s"
 msgid "Month close"
 msgstr "月结"
 
-#: scripts/ui/phone_ui.gd:262
+#: scripts/ui/phone_ui.gd:265
 msgid "Month sales"
 msgstr "本月销售"
 
@@ -5722,11 +5790,11 @@ msgstr "每月还款"
 msgid "Monthly rent"
 msgstr "月租"
 
-#: autoload/scene_router.gd:175 scripts/ui/modals/job_modal.gd:31
+#: autoload/scene_router.gd:175 scripts/ui/modals/job_modal.gd:31 scripts/world/building_info.gd:35
 msgid "Mon–Fri"
 msgstr "周一至周五"
 
-#: autoload/scene_router.gd:175
+#: autoload/scene_router.gd:175 scripts/world/building_info.gd:35
 msgid "Mon–Sat"
 msgstr "周一至周六"
 
@@ -5750,7 +5818,7 @@ msgstr "更多服装在购物街的 Threadline。"
 msgid "Moreau"
 msgstr "Moreau"
 
-#: scripts/ui/hud.gd:213
+#: scripts/ui/hud.gd:229
 msgid "Morning · Sunny"
 msgstr "早上 · 晴"
 
@@ -5810,7 +5878,7 @@ msgstr "名字"
 msgid "NEGOTIATION"
 msgstr "议价"
 
-#: autoload/ui_root.gd:388
+#: autoload/ui_root.gd:390
 msgid "NEW LOCATION"
 msgstr "新地点"
 
@@ -5966,7 +6034,7 @@ msgstr "新创园区 Nexus 共享办公室"
 msgid "Nexus Co-work, over in Startup Hub. They've got a board — suppliers, gigs, whatever."
 msgstr "新创园区那边有间 Nexus 共享办公室。他们有个布告栏——供应商、案子，什么都有。"
 
-#: scripts/ui/hud.gd:213
+#: scripts/ui/hud.gd:229
 msgid "Night"
 msgstr "夜晚"
 
@@ -6182,6 +6250,10 @@ msgstr "还不用。商业进口商要到监管浪潮（第 8 年）才需要。
 msgid "Not now"
 msgstr "先不要"
 
+#: scripts/ui/modals/city_guide_modal.gd:20 scripts/world/building_info.gd:44
+msgid "Not open yet"
+msgstr "尚未开放"
+
 #: scripts/sim/wardrobe.gd:53
 msgid "Not sold here"
 msgstr "这里没卖"
@@ -6254,7 +6326,7 @@ msgstr "这里没有可以打包的：货在这个地点吗？"
 msgid "Nothing to resolve."
 msgstr "没有需要处理的事。"
 
-#: scripts/ui/phone_ui.gd:255
+#: scripts/ui/phone_ui.gd:258
 msgid "Notifications only.\nManage at a desk: Company OS."
 msgstr "这里只显示通知。\n要管理请到办公桌：Company OS。"
 
@@ -6330,7 +6402,7 @@ msgstr "10月"
 msgid "Of course you are."
 msgstr "我就知道。"
 
-#: scripts/ui/modals/pause_menu.gd:46 scripts/ui/modals/pause_menu.gd:61
+#: scripts/ui/modals/pause_menu.gd:46 scripts/ui/modals/pause_menu.gd:61 scripts/ui/modals/pause_menu.gd:69
 msgid "Off"
 msgstr "关"
 
@@ -6345,6 +6417,10 @@ msgstr "报价已过期。"
 #: scripts/sim/contracts.gd:29
 msgid "Offer: %d × %s @ %s, Net %d"
 msgstr "报价：%d × %s @ %s，票期 %d 天"
+
+#: data/buildings/small_office.json
+msgid "Office"
+msgstr "办公室"
 
 #: data/character/options.json
 msgid "Office Professional"
@@ -6398,7 +6474,7 @@ msgstr "旧城区：搭捷运（环状线），或从购物街往西走。"
 msgid "Omar"
 msgstr "Omar"
 
-#: scripts/ui/modals/pause_menu.gd:60
+#: scripts/ui/modals/pause_menu.gd:60 scripts/ui/modals/pause_menu.gd:69
 msgid "On"
 msgstr "开"
 
@@ -6538,7 +6614,7 @@ msgstr "正式开业"
 msgid "Open last month close (%s)"
 msgstr "查看上月结算（%s）"
 
-#: scripts/ui/modals/company_os.gd:1209
+#: scripts/ui/modals/company_os.gd:1209 scripts/world/building_info.gd:41
 msgid "Open now"
 msgstr "营业中"
 
@@ -6742,7 +6818,7 @@ msgstr "人数"
 msgid "PERMITS & REGISTRATIONS (AURELIA)"
 msgstr "许可与登记（奥瑞莉亚）"
 
-#: scripts/ui/hud.gd:80
+#: scripts/ui/hud.gd:82
 msgid "PERSONAL"
 msgstr "个人"
 
@@ -6830,7 +6906,7 @@ msgstr "已打包订单 %s"
 msgid "Packed well"
 msgstr "打包得很好"
 
-#: scripts/ui/phone_ui.gd:260
+#: scripts/ui/phone_ui.gd:263
 msgid "Packed, not shipped"
 msgstr "已打包未出货"
 
@@ -6909,6 +6985,10 @@ msgstr "包裹 %d / %d"
 #: data/jobs/parcel_sorter.json
 msgid "Parcel Sorter"
 msgstr "包裹分拣员"
+
+#: data/buildings/postpoint_riverside.json
+msgid "Parcel counter"
+msgstr "寄件柜台"
 
 #: scripts/ui/minigames/parcel_sort_game.gd:26
 msgid "Parcels come down the belt one at a time. Send each to its district's bin: click the bin or press 1–5."
@@ -7114,7 +7194,7 @@ msgstr "许可"
 msgid "Permits & regulations"
 msgstr "许可与法规"
 
-#: scripts/ui/modals/bank_modal.gd:56 scripts/ui/phone_ui.gd:216
+#: scripts/ui/modals/bank_modal.gd:56 scripts/ui/phone_ui.gd:219
 msgid "Personal"
 msgstr "个人"
 
@@ -7126,7 +7206,7 @@ msgstr "个人／独资"
 msgid "Personal Banker"
 msgstr "理财专员"
 
-#: scripts/ui/phone_ui.gd:264
+#: scripts/ui/phone_ui.gd:267
 msgid "Personal cap"
 msgstr "个人上限"
 
@@ -7142,7 +7222,7 @@ msgstr "个人卖家上限：本月已用 %s／%s。"
 msgid "Personal seller limit reached. Your listings are paused until next month — or until you register a business."
 msgstr "已达个人卖家上限。你的商品会暂停到下个月——或直到你登记公司。"
 
-#: scripts/ui/hud.gd:105
+#: scripts/ui/hud.gd:107
 msgid "Phone"
 msgstr "手机"
 
@@ -7490,7 +7570,7 @@ msgstr "离开"
 msgid "Quit job"
 msgstr "辞职"
 
-#: scripts/ui/modals/pause_menu.gd:69
+#: scripts/ui/modals/pause_menu.gd:78
 msgid "Quit to title"
 msgstr "回到标题画面"
 
@@ -7898,7 +7978,7 @@ msgstr "进口执照续期到 %s。"
 msgid "Rent"
 msgstr "租金"
 
-#: scripts/ui/phone_ui.gd:222
+#: scripts/ui/phone_ui.gd:225
 msgid "Rent $1,250 due the 14th"
 msgstr "房租 $1,250，14 号到期"
 
@@ -7970,7 +8050,7 @@ msgstr "新品已寄出。"
 msgid "Replay tutorial"
 msgstr "重新播放教学"
 
-#: scripts/ui/modals/pause_menu.gd:66
+#: scripts/ui/modals/pause_menu.gd:75
 msgid "Report a problem (F12)"
 msgstr "回报问题（F12）"
 
@@ -8014,6 +8094,10 @@ msgstr "资源与农业"
 msgid "Respond"
 msgstr "回复"
 
+#: data/buildings/lantern_bistro.json
+msgid "Restaurant"
+msgstr "餐厅"
+
 #: data/story/chapters.json
 msgid "Restock from Lumina Direct before the rush: pay the way that suits you (Company OS → Operations)"
 msgstr "旺季前向 Lumina Direct 补货：用适合你的方式付款（Company OS → 营运）"
@@ -8045,6 +8129,10 @@ msgstr "恢复"
 #: scripts/ui/minigames/clerk_forms_game.gd:11
 msgid "Retail"
 msgstr "零售"
+
+#: data/buildings/popup_unit.json
+msgid "Retail premises"
+msgstr "零售店面"
 
 #: data/city/aurelia.json
 msgid "Retail, dining, nightlife."
@@ -8326,7 +8414,7 @@ msgstr "对帐单"
 msgid "SUBSCRIBERS"
 msgstr "订阅用户"
 
-#: scripts/world/interior.gd:294
+#: scripts/world/interior.gd:295
 msgid "SUITE 2B\nAVAILABLE"
 msgstr "2B 室\n招租中"
 
@@ -8410,15 +8498,15 @@ msgstr "存盘"
 msgid "Save cash. Sales will dip."
 msgstr "省下现金。销量会下滑。"
 
-#: scripts/ui/phone_ui.gd:281
+#: scripts/ui/phone_ui.gd:284
 msgid "Save game"
 msgstr "保存游戏"
 
-#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:282
+#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:285
 msgid "Save now"
 msgstr "立即存盘"
 
-#: scripts/ui/hud.gd:148
+#: scripts/ui/hud.gd:150
 msgid "Saved"
 msgstr "已保存"
 
@@ -8426,7 +8514,7 @@ msgstr "已保存"
 msgid "Saved %s"
 msgstr "存于 %s"
 
-#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:284
+#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:287
 msgid "Saved (slot %d)."
 msgstr "已存盘（字段 %d）。"
 
@@ -8530,6 +8618,10 @@ msgstr "服务器"
 msgid "Service: %d%%"
 msgstr "服务品质：%d%%"
 
+#: scripts/world/building_info.gd:109
+msgid "Services"
+msgstr "办事"
+
 #: data/dialogue/lina_intro.json
 msgid "Set me up with a digital dollar account."
 msgstr "帮我开一个数字美元帐户。"
@@ -8626,6 +8718,10 @@ msgstr "自己拍照并上架（1 小时 20 分）"
 msgid "Shoot the photos yourself"
 msgstr "自己拍照上架"
 
+#: scripts/world/building_info.gd:107
+msgid "Shop"
+msgstr "买"
+
 #: scripts/sim/ledger.gd:31
 msgid "Shop rent"
 msgstr "店面租金"
@@ -8642,7 +8738,7 @@ msgstr "ShopLane＋发票"
 msgid "ShopLane Ads: a big brand campaign is bidding up placements."
 msgstr "ShopLane 广告：有大品牌在抢版位，价格被推高了。"
 
-#: scripts/ui/phone_ui.gd:254
+#: scripts/ui/phone_ui.gd:257
 msgid "ShopLane Seller"
 msgstr "ShopLane 卖家"
 
@@ -8678,7 +8774,7 @@ msgstr "ShopLane 拨款"
 msgid "ShopLane payout received: %s"
 msgstr "收到 ShopLane 拨款：%s"
 
-#: scripts/ui/phone_ui.gd:221
+#: scripts/ui/phone_ui.gd:224
 msgid "ShopLane pending"
 msgstr "ShopLane 待拨款"
 
@@ -8730,6 +8826,10 @@ msgstr "第 %d 张：%d%%（%s）"
 msgid "Shots"
 msgstr "Shots"
 
+#: scripts/ui/modals/pause_menu.gd:67
+msgid "Show interaction markers"
+msgstr "显示交互标记"
+
 #: data/dialogue/marcus_lending.json
 msgid "Show me what you can do."
 msgstr "让我看看你能借多少。"
@@ -8737,6 +8837,10 @@ msgstr "让我看看你能借多少。"
 #: data/character/options.json
 msgid "Side part"
 msgstr "旁分"
+
+#: scripts/world/building_info.gd:113
+msgid "Sightseeing"
+msgstr "只能参观"
 
 #: data/events/supply_shock_plan.json
 msgid "Sign a 60-day supply agreement with {supplier} ($600 fee)"
@@ -8806,7 +8910,7 @@ msgstr "能力 %d/5 · 希望周薪 %s · %s"
 msgid "Skin tone"
 msgstr "肤色"
 
-#: scripts/ui/tutorial.gd:141
+#: scripts/ui/tutorial.gd:142
 msgid "Skip"
 msgstr "略过"
 
@@ -9330,7 +9434,7 @@ msgstr "招租：转角店面，适合开咖啡店。请洽隔三间的 Okafor �
 msgid "TODAY'S BOOKINGS"
 msgstr "今日预约"
 
-#: scripts/ui/hud.gd:105 scripts/ui/tutorial.gd:27
+#: scripts/ui/hud.gd:107 scripts/ui/tutorial.gd:27
 msgid "Tab"
 msgstr "Tab"
 
@@ -9349,6 +9453,14 @@ msgstr "抽号码牌"
 #: data/dialogue/ana_register.json
 msgid "Take a number whenever you're ready."
 msgstr "准备好了就抽号码牌。"
+
+#: scripts/ui/modals/city_guide_modal.gd:32
+msgid "Take me there"
+msgstr "带我去"
+
+#: data/help/help.json
+msgid "Take me there sets the existing gold guide arrow to the building door. Closed buildings still show their hours; you can enter once they open."
+msgstr "「带我去」会让金色引导箭头指向建筑门口。已打烊的建筑仍会显示营业时间，开门后即可进入。"
 
 #: scripts/ui/modals/job_modal.gd:74 scripts/ui/tutorial.gd:84
 msgid "Take the job"
@@ -9394,7 +9506,7 @@ msgstr "Tanaka"
 msgid "Tape seam %d"
 msgstr "贴第 %d 条接缝"
 
-#: scripts/ui/phone_ui.gd:127 scripts/ui/phone_ui.gd:234
+#: scripts/ui/phone_ui.gd:127 scripts/ui/phone_ui.gd:237
 msgid "Tasks"
 msgstr "任务"
 
@@ -9557,6 +9669,10 @@ msgstr "「总览」显示今天的数字：现金、在 ShopLane 等拨款的�
 #: scripts/sim/company.gd:85
 msgid "The account is already open."
 msgstr "帐户已经开好了。"
+
+#: scripts/ui/modals/city_guide_modal.gd:39
+msgid "The arrow guides you to the door; wait until opening hours to enter."
+msgstr "箭头会指向门口；请等营业时间再进入。"
 
 #: scripts/sim/insolvency.gd:66
 msgid "The bank won't restructure with this credit history."
@@ -9898,7 +10014,7 @@ msgstr "这个方式%s。"
 msgid "This contract belongs to another company."
 msgstr "这份合约属于其他公司。"
 
-#: scripts/ui/phone_ui.gd:289
+#: scripts/ui/phone_ui.gd:292
 msgid "This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen."
 msgstr "这场游戏每隔几秒自动存到字段 %d。新游戏会用自己的字段；其他存盘可以在标题画面读取。"
 
@@ -9921,6 +10037,10 @@ msgstr "这是 2B 室的办公桌。想租的话找 Tom 谈。"
 #: scripts/sim/contracts.gd:117 scripts/sim/contracts.gd:158 scripts/sim/contracts.gd:205 scripts/sim/contracts.gd:312
 msgid "This is a contract of a closed company."
 msgstr "这是已结束公司的合约。"
+
+#: scripts/world/building_info.gd:77
+msgid "This is a sightseeing-only location right now."
+msgstr "这里目前只能参观。"
 
 #: scripts/ui/minigames/clerk_forms_game.gd:31
 msgid "This is the same form you'll file for your own company, so the rules are worth remembering."
@@ -10006,7 +10126,7 @@ msgstr "小费：%s"
 msgid "To Startup Hub"
 msgstr "前往新创园区"
 
-#: scripts/ui/modals/company_os.gd:462 scripts/ui/phone_ui.gd:259
+#: scripts/ui/modals/company_os.gd:462 scripts/ui/phone_ui.gd:262
 msgid "To pack"
 msgstr "待打包"
 
@@ -10030,7 +10150,7 @@ msgstr "Tom"
 msgid "Tom: \"It's all yours. Sign's up out front.\""
 msgstr "Tom：「现在是你的了。招牌已经挂在门口。」"
 
-#: scripts/ui/tutorial.gd:442
+#: scripts/ui/tutorial.gd:444
 msgid "Too late for a shift today: the workplace closes soon. Go home and sleep (you can, after 4 PM on your first day), and work a shift tomorrow morning."
 msgstr "今天太晚了，来不及上班：店快打烊了。先回家睡觉（第一天下午 4 点以后就能睡），明天早上再来上班。"
 
@@ -10114,7 +10234,7 @@ msgstr "婉拒了 Hale Group 对 %s 的收购提案。"
 msgid "Turning an empty unit into a working shop: equipment, counter and furniture."
 msgstr "把空店面变成能营业的店：设备、吧台和桌椅。"
 
-#: scripts/ui/tutorial.gd:217
+#: scripts/ui/tutorial.gd:218
 msgid "Tutorial skipped. You can replay it from the pause menu (Esc)."
 msgstr "已略过教学。可以在暂停菜单（Esc）重新播放。"
 
@@ -10302,6 +10422,10 @@ msgstr "货车维护：%s 号外送单"
 msgid "Varga"
 msgstr "Varga"
 
+#: data/buildings/dockside_motors.json
+msgid "Vehicle dealer"
+msgstr "车辆经销商"
+
 #: data/help/glossary.json
 msgid "Vehicle insurance"
 msgstr "车辆保险"
@@ -10446,6 +10570,10 @@ msgstr "相邻的区域可以走路，也可以从任一捷运站搭车。"
 msgid "Walk east along the street (→). Past the end of Riverside is Startup Hub, where founders work."
 msgstr "沿着街道往东走（→）。河滨区的尽头再过去就是新创园区，创业者都在那里工作。"
 
+#: scripts/world/building_info.gd:121
+msgid "Walk from a neighbouring district."
+msgstr "从相邻街区步行前往。"
+
 #: scripts/ui/tutorial.gd:29
 msgid "Walk onto the glowing EXIT mat at the bottom of the room to go outside."
 msgstr "走到房间下方发光的「出口」地垫上，就会出门。"
@@ -10473,6 +10601,10 @@ msgstr "Walsh"
 #: data/help/help.json scripts/ui/modals/wardrobe_modal.gd:10
 msgid "Wardrobe"
 msgstr "衣柜"
+
+#: data/buildings/pier7_warehouse.json
+msgid "Warehouse"
+msgstr "仓库"
 
 #: scripts/sim/ledger.gd:31
 msgid "Warehouse rent"
@@ -10553,6 +10685,10 @@ msgstr "欢迎来到 Threadline。我是 Nina。皮尺等一下再用。"
 #: data/story/chapters.json
 msgid "Went green with the city."
 msgstr "跟着城市一起转型绿色。"
+
+#: scripts/ui/hud.gd:158
+msgid "What can I do here?"
+msgstr "这里能做什么？"
 
 #: data/dialogue/okafor_intro.json
 msgid "What does it cost?"
@@ -10669,6 +10805,10 @@ msgstr "拿到市府的绿色企业补助：%s。"
 #: scripts/ui/minigames/photo_shoot_game.gd:7
 msgid "Wood desk"
 msgstr "木头桌面"
+
+#: scripts/world/building_info.gd:108
+msgid "Work"
+msgstr "工作"
 
 #: scripts/ui/modals/company_os.gd:996
 msgid "Work 2 h"
@@ -10806,6 +10946,10 @@ msgstr "做生意和打工可以同时进行。"
 msgid "You can't do that right now."
 msgstr "现在不能这么做。"
 
+#: scripts/world/building_info.gd:77
+msgid "You can: %s"
+msgstr "你可以：%s"
+
 #: scripts/ui/modals/job_modal.gd:49
 msgid "You do the work yourself: the better the shift goes, the more you earn (60% of the wage is guaranteed)."
 msgstr "工作要自己做：班做得越好，赚得越多（保底 60% 薪水）。"
@@ -10858,7 +11002,7 @@ msgstr "你在班还没结束前就离开了。没有薪水，也没有花掉时
 msgid "You left the job at %s."
 msgstr "你离开了%s的工作。"
 
-#: scripts/ui/tutorial.gd:436
+#: scripts/ui/tutorial.gd:438
 msgid "You left your job before working a shift. Take a job again at Bloom Coffee's staff door, then work a shift."
 msgstr "你还没做过班就离职了。到 Bloom Coffee 员工入口重新应征，再做一个班。"
 
@@ -11110,7 +11254,7 @@ msgstr "你的工作 · 详情"
 msgid "Your listing is live on ShopLane. Your first order comes in within a few minutes, and your phone will buzz. Head home meanwhile: your packing table is there."
 msgstr "商品已经在 ShopLane 上架了。第一笔订单几分钟内就会进来，手机会通知你。先回家吧，打包桌在家里。"
 
-#: scripts/ui/tutorial.gd:438
+#: scripts/ui/tutorial.gd:440
 msgid "Your listing is no longer active. Open Company OS → Sales and list a product again; buy stock in Operations if you ran out."
 msgstr "商品已下架。打开 Company OS → 销售，重新上架；库存用完了，就到营运进货。"
 
@@ -11218,7 +11362,7 @@ msgstr "代理商"
 msgid "all time"
 msgstr "累计"
 
-#: scripts/sim/careers.gd:124 scripts/ui/tutorial.gd:569
+#: scripts/sim/careers.gd:124 scripts/ui/tutorial.gd:576
 msgid "already worked today"
 msgstr "今天已经上过班了"
 
@@ -11286,7 +11430,7 @@ msgstr "充电"
 msgid "client fees"
 msgstr "客户费用"
 
-#: scripts/sim/careers.gd:127 scripts/ui/tutorial.gd:441 scripts/ui/tutorial.gd:569
+#: scripts/sim/careers.gd:127 scripts/ui/tutorial.gd:443 scripts/ui/tutorial.gd:576
 msgid "closed now"
 msgstr "现在没营业"
 
@@ -11706,7 +11850,7 @@ msgstr "自有品牌"
 msgid "paid on delivery"
 msgstr "交件即付款"
 
-#: scripts/ui/phone_ui.gd:267
+#: scripts/ui/phone_ui.gd:270
 msgid "paused: cap"
 msgstr "暂停：已达上限"
 
@@ -11890,7 +12034,7 @@ msgstr "时间"
 msgid "to suppliers"
 msgstr "给供应商"
 
-#: scripts/sim/careers.gd:129 scripts/ui/tutorial.gd:441 scripts/ui/tutorial.gd:569
+#: scripts/sim/careers.gd:129 scripts/ui/tutorial.gd:443 scripts/ui/tutorial.gd:576
 msgid "too late for a shift today"
 msgstr "今天太晚了，不够上一个班"
 
@@ -12122,7 +12266,7 @@ msgstr "◆ 你在这里"
 msgid "◉  Shutter"
 msgstr "◉  快门"
 
-#: scripts/ui/hud.gd:235
+#: scripts/ui/hud.gd:251
 msgid "● %d new"
 msgstr "● %d 则新消息"
 

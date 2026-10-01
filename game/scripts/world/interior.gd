@@ -72,7 +72,8 @@ func build(building_id: String) -> void:
 		var params: Dictionary = it.get("params", {}).duplicate()
 		params["id"] = it["id"]
 		params["building"] = building_id
-		add_interactable(Vector2(float(a[0]), float(a[1])), str(it["label"]), str(it["action"]), params, float(it.get("r", 22)))
+		var point := add_interactable(Vector2(float(a[0]), float(a[1])), str(it["label"]), str(it["action"]), params, float(it.get("r", 22)))
+		point.enabled = bool(it.get("enabled", true))
 	if def.has("stock_display"):
 		stock_holder = Node2D.new()
 		entities.add_child(stock_holder)

@@ -17,6 +17,9 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "discoverability":
+		await _discoverability_fixture()
+		return
 	if _arg("from") == "loan_access":
 		await _loan_access_fixture()
 		return
@@ -65,6 +68,90 @@ func _arg(name: String) -> String:
 		if a.begins_with("--%s=" % name):
 			return a.substr(name.length() + 3)
 	return ""
+
+
+## Only time/location are fixtures. New UI, routing, settings and purchases use real input.
+func _discoverability_fixture() -> void:
+	await bot.wait(4.0)
+	UIRoot._suppress_decisions = true
+	UIRoot.tutorial.st()["off"] = true
+	bot.step("Interaction markers and welcome cards in four Shopping Street shops")
+	GameState.data["clock"]["minutes"] = Clock.at_day_time(1, 14 * 60)
+	for bid in ["threadline_apparel", "crestline_flagship", "lantern_bistro", "byte_and_bean"]:
+		SceneRouter._enter("interior", bid, "door", "up")
+		await bot.wait(0.6)
+		bot.expect(UIRoot.hud.welcome.visible, "first entry shows introduction: " + bid)
+		bot.expect(UIRoot.hud.welcome.text.text == BuildingInfo.welcome(bid, SceneRouter.world_scene()), "introduction reads live activities: " + bid)
+		await bot.shot("discoverability_" + bid)
+		await bot.click_named("DismissBuildingWelcome")
+		bot.expect(not UIRoot.hud.welcome.visible, "card dismisses by click")
+		var point: Interactable = bot.find_interactable(func(n): return n.npc == null and n.action != "look")
+		if point == null:
+			point = bot.find_interactable(func(n): return n.action == "look")
+		await bot.walk_to(point.global_position + Vector2(0, 30), 4.0, 40.0)
+		await bot.shot("discoverability_markers_" + bid)
+		await bot.click_named("BuildingActivities")
+		bot.expect(UIRoot.hud.welcome.remaining > 0, "HUD reopens introduction")
+		await bot.wait(4.3)
+		bot.expect(not UIRoot.hud.welcome.visible, "card fades after four seconds")
+		SceneRouter._enter("interior", bid, "door", "up")
+		await bot.wait(0.3)
+		bot.expect(UIRoot.hud.welcome.visible, "second entry shows introduction")
+		SceneRouter._enter("interior", bid, "door", "up")
+		await bot.wait(0.3)
+		bot.expect(not UIRoot.hud.welcome.visible, "third entry has no automatic introduction")
+	bot.step("Marker setting is independent of saves")
+	UIRoot.open_pause()
+	await bot.wait(0.3)
+	await bot.click_named("InteractionMarkersOff")
+	bot.expect(not Interactable.markers_enabled(), "markers off")
+	await bot.click_named("InteractionMarkersOn")
+	bot.expect(Interactable.markers_enabled(), "markers on")
+	await bot.shot("discoverability_settings")
+	await close_modal()
+	bot.step("A locked office marker keeps its real interaction position")
+	SceneRouter._enter("interior", "small_office", "door", "up")
+	await bot.wait(0.5)
+	UIRoot.hud.welcome.hide_card()
+	var locked: Interactable = bot.find_interactable(func(n): return n.action == "open_company_os")
+	await bot.walk_to(locked.global_position + Vector2(0, 30), 4.0, 40.0)
+	bot.expect(Actions.lock_reason(locked.action, locked.params) != "", "office terminal is visibly locked before lease")
+	await bot.shot("discoverability_locked_marker")
+	bot.step("City Guide uses phone entry and existing gold arrow")
+	SceneRouter._enter("district", "shopping_street", "door_lantern_bistro", "down")
+	await bot.wait(0.5)
+	UIRoot.phone.open()
+	await bot.wait(0.3)
+	await bot.click_named("App_guide")
+	bot.expect(UIRoot.top_modal() is CityGuideModal, "phone opens City Guide")
+	await bot.shot("discoverability_city_guide")
+	# The scroll view can reach any building without relying on sort order or a hidden button.
+	var guide := UIRoot.top_modal()
+	var scroll: ScrollContainer = guide.find_children("*", "ScrollContainer", true, false)[0]
+	var route: Button = guide.find_child("GuideTo_lantern_bistro", true, false)
+	scroll.ensure_control_visible(route)
+	await bot.wait(0.3)
+	await bot.shot("discoverability_city_guide_shopping")
+	await bot.click_named("GuideTo_lantern_bistro")
+	await bot.wait(0.5)
+	bot.expect(UIRoot.tutorial._destination == "lantern_bistro" and not UIRoot.tutorial._target.is_empty(), "phone destination uses Tutorial resolver")
+	await bot.shot("discoverability_gold_arrow")
+	GameState.data["clock"]["minutes"] = Clock.at_day_time(1, 10 * 60)
+	bot.expect(BuildingInfo.door_text("lantern_bistro").contains("11:00"), "closed door gives opening time")
+	await bot.shot("discoverability_closed_door")
+	GameState.data["clock"]["minutes"] = Clock.at_day_time(1, 14 * 60)
+	SceneRouter._enter("interior", "lantern_bistro", "door", "up")
+	await bot.wait(0.4)
+	bot.expect(UIRoot.tutorial._destination == "", "arrival returns arrow to normal objectives")
+	var before := Ledger.cash("player")
+	await bot.use_action("buy_item", "restaurant counter")
+	bot.expect(Ledger.cash("player") == before - 22 and Ledger.balance("player", "exp:dining") == 22, "meal costs $22 in dining")
+	await bot.shot("discoverability_meal")
+	SceneRouter._enter("interior", "harbor_point_fitness", "door", "up")
+	await bot.wait(0.5)
+	bot.expect(UIRoot.hud.welcome.text.text == I18n.t("This is a sightseeing-only location right now."), "look-only room is explicit")
+	await bot.shot("discoverability_sightseeing")
+	bot.expect(Ledger.check_balanced(), "discoverability tour keeps books balanced")
 
 
 ## Force a popup on the exact frame that a real interactable receives focus; reaching it stays successful.

@@ -351,6 +351,8 @@ func report_problem() -> void:
 
 ## First-visit establishing card (art converted from the concept boards), bottom-left, non-blocking.
 func show_location_card(kind: String, id: String) -> void:
+	if kind == "interior":
+		return   # The live, dismissible BuildingWelcome supplies the room's name, hours and activities.
 	var tex: Texture2D = null
 	if ResourceLoader.exists("res://assets/cards/%s.png" % id):
 		tex = Art.tex("cards/" + id)

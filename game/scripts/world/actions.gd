@@ -141,12 +141,12 @@ static func _buy_item(params: Dictionary) -> void:
 				break
 	var buy := func():
 		var price := 0.0 if _staff_coffee(params) else float(params.get("price", 4.5))
-		Ledger.expense("player", "coffee", price, "%s — %s" % [str(params.get("item", "coffee")).capitalize(), DataDB.building(params.get("building", "")).get("name", "")], {"type": "purchase"})
+		Ledger.expense("player", str(params.get("category", "coffee")), price, "%s — %s" % [str(params.get("item", "coffee")).capitalize(), DataDB.building(params.get("building", "")).get("name", "")], {"type": "purchase"})
 		Clock.advance(int(params.get("minutes", 10)))
 		if params.has("flag"):
 			GameState.set_flag(params["flag"])
 		GameState.inc_stat("coffees")
-		UIRoot.toast(I18n.t("Coffee — %s. Tastes like possibility.") % (Fmt.money(price) if price > 0 else I18n.t("on the house (staff)")), "info", "coffee")
+		UIRoot.toast(I18n.t("Coffee — %s. Tastes like possibility.") % (Fmt.money0(price) if price > 0 else I18n.t("on the house (staff)")), "info", "coffee")
 	if first_conv != "":
 		UIRoot.play_dialogue(first_conv, buy)
 	else:
@@ -178,7 +178,7 @@ static func _buy_meal(params: Dictionary) -> void:
 	if params.has("flag"):
 		GameState.set_flag(params["flag"])
 	GameState.inc_stat("meals")
-	UIRoot.toast(I18n.t("%s at %s — %s.") % [what, where, Fmt.money(price)], "info", "coffee")
+	UIRoot.toast(I18n.t("%s — %s") % [what, Fmt.money0(price)], "info", "shop")
 
 
 ## Read a sign or look at something. Params: text, and optional alt: [{if, text}] (first match wins).

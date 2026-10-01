@@ -63,6 +63,15 @@ func build() -> void:
 		UIRoot.tutorial.restart()
 		close()))
 	body.add_child(help)
+	var markers := UIK.hbox(4)
+	markers.add_child(UIK.label("Show interaction markers", 8, Art.C_MUTED))
+	var markers_on := Interactable.markers_enabled()
+	for setting in [[true, "On"], [false, "Off"]]:
+		var value: bool = setting[0]
+		var toggle := UIK.button(setting[1], func(): Interactable.set_markers(value); rebuild(), "tab_active" if value == markers_on else "tab")
+		toggle.name = "InteractionMarkersOn" if value else "InteractionMarkersOff"
+		markers.add_child(toggle)
+	body.add_child(markers)
 	body.add_child(UIK.button("Report a problem (F12)", func():
 		close()
 		UIRoot.report_problem()))

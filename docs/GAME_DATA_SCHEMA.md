@@ -113,7 +113,7 @@ Contacts without an `appearance` (`"phone_only": true`) may set `"logo": "<id>"`
 ### 1.8 Buildings — `data/buildings/<id>.json`
 ```json
 {
-  "id": "bloom_coffee", "name": "Bloom Coffee", "district": "riverside", "type": "cafe",
+  "id": "bloom_coffee", "name": "Bloom Coffee", "district": "riverside", "type": "cafe", "category": "Cafe",
   "hours": {"open":"07:00","close":"20:00","days":"all"},
   "exterior": {"sprite":"buildings/mixed_use_bloom","x":512,"y":160,"door":{"x":64,"y":142},"sign":"Bloom Coffee"},
   "interior": {
@@ -159,6 +159,21 @@ Building keys added with Old Town:
   `lettings`, `flat_to_let` (the last two only pick a minimap icon).
 
 `type` sets the minimap icon and how many ambient customers sit down: `cafe` 3, `restaurant` 4, `retail` 2 (on its sofas and benches), `coworking` 5, `bank` 2, `civic` 3, `parcel` 1.
+
+`category` is a translated, player-facing building type (Restaurant, Clothing store, Bank, Office, Warehouse, etc.).
+Doors and City Guide read it directly; adding a building requires its data and translation, not a UI list edit.
+`BuildingInfo` derives activities from enabled interior interactables except `look`, and from actual present NPC
+interactables in the live room. A room with no such activity explicitly says it is sightseeing-only. Guide tags
+come from action kinds; station instructions come from the district's `metro` data. District status comes from
+`data/districts/<id>.json` when supplied, otherwise the city district definition. Inactive districts have no guide
+destinations; active buildings are discovered by their `district`, with optional `status`/`enterable` gates respected.
+
+Save data adds `building_visits: {building_id: count}` lazily on entry; the first two entries show a dismissible
+four-second room introduction. Missing counts in older saves start at zero and existing `visited` flags are preserved.
+`user://settings.cfg` stores `[general] interaction_markers` (boolean, default true), independent of saves.
+`interior.interactables[].enabled` defaults to true. Marker offsets only affect drawing, never action coordinates.
+All data actions must map to an existing icon in `BuildingInfo.ACTION_ICONS`; the unit test fails on unknown actions.
+Phone destinations temporarily override the existing Tutorial resolver/arrow until the target interior is reached.
 
 Prop keys (districts and interiors): `sprite`, `x`, `y` (top-left of the design footprint), `solid` (`false` or `[x,y,w,h]`), `wall`, `floor`, `glow`, `night`, `label`, `interact`, plus:
 
