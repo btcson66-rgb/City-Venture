@@ -241,3 +241,9 @@
 - `world_detail/events/rail_frozen.png`
 - `events/acquisition_offer.png`
 - `world_detail/events/acquisition_offer.png`
+
+
+## 商品與特效美術品質批 · 2026-10-01
+
+美術：六個16×16商品sprite已重新製作，附64×64透明高解析版本；六個程序光影／水面特效以SVG輸出原尺寸及4×，動畫格位不變；兩個app圖示識別不變，補4×輸出（4096圖為插值）。251/251測試、53張巡禮0失敗。七街區日夜實拍與商品add_prop渲染比例檢查已交；QA商品擺放不代表遊戲原本的擺設。高解析光罩及陰影載入仍待Claude保持logical尺寸接入。證據：`evidence/20261001_product_quality/README.md`。
+
