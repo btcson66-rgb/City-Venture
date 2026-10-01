@@ -87,6 +87,7 @@ static func close_company() -> Dictionary:
 	if ent == "" or ent == "player":
 		return {"ok": false, "error": "No company to close."}
 	var rep := {"stock": 0.0, "receivables": 0.0, "deposit": 0.0, "paid": {}, "written_off": 0.0}
+	Contracts.close_for_entity(ent)   # terminal states only; the existing AR sale below is the sole journal entry
 	# 1. assets to cash
 	Ecommerce.pause_all_ads()
 	for l in GameState.data["ecommerce"]["listings"].values():

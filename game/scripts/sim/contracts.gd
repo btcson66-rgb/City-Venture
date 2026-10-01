@@ -3,6 +3,7 @@ extends RefCounted
 ## B2B contracts between two entities (Handoff §23). Nothing here assumes the counterparty is an NPC:
 ## buyer/seller are entity ids, which keeps the Enterprise Network boundary (P4) open.
 ## Lifecycle: offered → (accept | reject | counter ⇄ offered) → active → delivered (AR) → paid | withdrawn/expired.
+## Company closure: offered → withdrawn, active → terminated, delivered → sold_to_collector.
 
 
 static func C() -> Dictionary:
@@ -59,6 +60,47 @@ static func reconcile_tags() -> void:
 			_tag(c, "declined")
 
 
+static func seller_closed(c: Dictionary) -> bool:
+	return GameState.data["entities"].get(c.get("seller", ""), {}).has("closed")
+
+
+## End contracts before liquidation sells AR. Also repairs old saves, without posting money again.
+static func close_for_entity(entity: String) -> void:
+	for c in C().values():
+		if str(c.get("seller", "")) != entity:
+			continue
+		var text := ""
+		match str(c.get("status", "")):
+			"offered":
+				c["status"] = "withdrawn"
+				_tag(c, "declined")
+				text = I18n.t("The company closed. This unanswered offer was withdrawn.")
+			"active":
+				c["status"] = "terminated"
+				var tag := str(c.get("tag", ""))
+				if tag != "" and not GameState.flag(tag + "_decided"):
+					_tag(c, "declined")
+				text = I18n.t("The company closed. This undelivered contract was terminated with no additional penalty.")
+			"delivered":
+				c["status"] = "sold_to_collector"
+				text = I18n.t("This invoice was sold to a collector as part of the company liquidation. The buyer will not pay the closed company again.")
+		if text != "":
+			if not c.has("history"):
+				c["history"] = []
+			c["history"].append({"t": Clock.now(), "by": entity, "text": text})
+			EventBus.contract_changed.emit(str(c["id"]))
+		# Even an already-terminal contract in an old save may still have a stale reminder.
+		for event in GameState.data["schedule"].duplicate():
+			if str(event["kind"]).begins_with("con.") and str(event["p"].get("id", "")) == str(c["id"]):
+				Sim.cancel(str(event["kind"]), "id", c["id"])
+
+
+static func reconcile_closed() -> void:
+	for entity in GameState.data["entities"]:
+		if GameState.data["entities"][entity].has("closed"):
+			close_for_entity(str(entity))
+
+
 static func contact_npc(c: Dictionary) -> String:
 	return str(DataDB.companies.get(c["buyer"], {}).get("contact_npc", "harbor_point"))
 
@@ -71,6 +113,8 @@ static func accept(cid: String) -> Dictionary:
 	var c: Dictionary = C().get(cid, {})
 	if c.is_empty() or c["status"] != "offered":
 		return {"ok": false, "error": "This offer is no longer open."}
+	if seller_closed(c):
+		return {"ok": false, "error": I18n.t("This is a contract of a closed company.")}
 	if not can_trade():
 		return {"ok": false, "error": "They need an invoice from a registered company."}
 	c["seller"] = GameState.business_entity()
@@ -110,6 +154,8 @@ static func counter(cid: String, unit_price: float, terms_days: int, upfront_rat
 	var c: Dictionary = C().get(cid, {})
 	if c.is_empty() or c["status"] != "offered":
 		return {"ok": false, "error": "This offer is no longer open."}
+	if seller_closed(c):
+		return {"ok": false, "error": I18n.t("This is a contract of a closed company.")}
 	if not can_trade():
 		return {"ok": false, "error": "Register your company first."}
 	var neg: Dictionary = DataDB.companies.get(c["buyer"], {}).get("negotiation", {})
@@ -149,10 +195,21 @@ static func counter(cid: String, unit_price: float, terms_days: int, upfront_rat
 
 
 static func can_deliver(cid: String) -> bool:
+	return delivery_block(cid) == ""
+
+
+## One reason shared by the button and the action, so a stale UI cannot use another company's stock.
+static func delivery_block(cid: String) -> String:
 	var c: Dictionary = C().get(cid, {})
+	if not c.is_empty() and seller_closed(c):
+		return I18n.t("This is a contract of a closed company.")
+	if not c.is_empty() and str(c["seller"]) != GameState.company_id():
+		return I18n.t("This contract belongs to another company.")
 	if c.is_empty() or c["status"] != "active":
-		return false
-	return stock_for(c) >= int(c["qty"])
+		return I18n.t("Nothing to deliver.")
+	if stock_for(c) < int(c["qty"]):
+		return I18n.t("You need %d in stock (have %d).") % [int(c["qty"]), stock_for(c)]
+	return ""
 
 
 ## Units of the contract's product across every stock location (a big order can ship from two).
@@ -165,12 +222,11 @@ static func stock_for(c: Dictionary) -> int:
 
 ## Deliver the whole contract quantity from its stock location. Caller advances packing time.
 static func deliver(cid: String) -> Dictionary:
+	var why := delivery_block(cid)
+	if why != "":
+		return {"ok": false, "error": why}
 	var c: Dictionary = C().get(cid, {})
-	if c.is_empty() or c["status"] != "active":
-		return {"ok": false, "error": "Nothing to deliver."}
 	var qty := int(c["qty"])
-	if stock_for(c) < qty:
-		return {"ok": false, "error": I18n.t("You need %d in stock (have %d).") % [qty, stock_for(c)]}
 	# pick from the signing location first, then anywhere else
 	var locs: Array = [c["location"]]
 	for l2 in Ecommerce.stock_locations():
@@ -224,6 +280,8 @@ static func handle(kind: String, p: Dictionary) -> void:
 	var c: Dictionary = C().get(p.get("id", ""), {})
 	if c.is_empty():
 		return
+	if seller_closed(c):
+		return   # a missed cleanup must never collect a receivable already sold in liquidation
 	match kind:
 		"con.expire":
 			if c["status"] == "offered":
@@ -250,6 +308,8 @@ static func handle(kind: String, p: Dictionary) -> void:
 ## Invoice discounting: the buyer pays a delivered invoice now, minus a discount (default 3%).
 static func early_payment(cid: String, rate := 0.03) -> Dictionary:
 	var c: Dictionary = C().get(cid, {})
+	if not c.is_empty() and seller_closed(c):
+		return {"ok": false, "error": I18n.t("This is a contract of a closed company.")}
 	if c.is_empty() or c["status"] != "delivered":
 		return {"ok": false, "error": "Only a delivered, unpaid invoice can be paid early."}
 	var amt := float(c["receivable"])

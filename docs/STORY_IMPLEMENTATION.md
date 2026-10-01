@@ -365,6 +365,7 @@ and the event pictures `events/rail_frozen` and `events/acquisition_offer` show 
 - 完成收據不因新步驟開始而清掉：財務預測、調價、訂單、採購、退貨及配送歷史均可提前完成。`has_listed` 接受曾經上架，之後下架不要求重做拍照上架。
 - 新聞依年代保留 `news_read_y3`–`news_read_y8`，上一年的新聞不能代替新一年的新聞。舊存檔的 `news_read` 只遷移為該存檔年代的收據；換年代清掉舊的通用旗標，保留各年收據。
 - Tagged contract 的 offered／accepted／decided／delivered／paid 收據可從舊合約狀態重建；拒絕、撤回、過期都算已決定。簽約公司已關閉時 `skip_when` 結束備貨、交貨及收款的等待，`skip_text` 明說原交易無法完成；不偽造交貨或收款。
+- 公司清算前，offered → withdrawn 並設 declined/decided；active → terminated，保留已有決定、不設 delivered；delivered → sold_to_collector，不設 paid。原有 80% AR 讓售分錄是唯一回收款；載入舊存檔僅修正合約狀態與 con.* 排程。第 5–6 章仍靠 contract_closed 跳過，收款防呆也阻止已關閉公司的提前或到期收款。
 - 第 6 章連續兩個負現金月結可繼續（`story_recovery.loss_months`），設定 `ch6_cash_reviewed`，不設定 `ch6_month_in_black`，也不發送恢復現金的稱讚。第 7 章既有兩個虧損月結路徑保留，新增 `ch7_survived_losses` 避免不實稱讚。
 - 教學進入步驟前排空所有提前完成項目；已開始生意不因日票到期回到 reception，曾任職不因離職重做應徵。尚未做班就離職要重新應徵，教學文字及箭頭指向 Bloom Coffee 員工入口；商品下架後等待第一單會明說重新上架。第一單的舊 seen 紀錄不阻止新排程，但同時只允許一個排程。
 - 箭頭跳過需要已失效日票或租約的電腦；可使用家中筆電。第 6 章資金橋接指向 Company OS，保留免費減支路徑，不把貸款當成唯一選擇。
