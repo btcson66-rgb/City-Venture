@@ -95,11 +95,11 @@ R1 已交：`business_suit_top_detail`、`courier_top_detail`（三體型各一�
 | `courier` | 快遞 | Dara、Ken | Polo 衫、工作褲、腰包 | 已實作 · CODEX |
 | `casual_jacket` | 休閒外套 | Maya、路人 | 短夾克（可染色） | 已實作 · CODEX |
 | `casual_tee` | 休閒 T 恤 | 路人、客人 | T 恤（可染色）、休閒褲 | 已實作 · CODEX |
-| `executive` | Executive 主管 | 主角（Threadline $640） | 剪裁俐落的三件式、口袋巾、手錶 | 已實作 · **美術暫代**（`business_suit` 午夜藍 `#23263A`）· 等 B1 |
-| `logistics_site` | Logistics / Site 現場 | 主角（Threadline $120）、倉管、工人 | 反光背心、工作靴、安全帽（配件） | 已實作 · **美術暫代**（`courier` 橘 `#E8742A`）· 等 B1 |
-| `luxury_citywear` | Luxury Citywear 城市精品 | 主角（Threadline $520）、Nina、購物街路人 | 長版大衣、高領毛衣、皮靴（Board A「Casual City」高級版） | 已實作 · **美術暫代**（`casual_jacket` 駝色 `#9C6A44`；路人大衣 5 色）· 等 B1 |
-| `travel` | Travel 旅行 | 主角（Threadline $240；出國） | 輕羽絨、斜背包、休閒鞋 | 已實作 · **美術暫代**（`casual_jacket` 橄欖綠 `#5F6E44`）· 等 B1 |
-| `formal_evening` | Formal Evening 晚宴 | 主角（Threadline $780） | 燕尾服或晚禮服 | 已實作 · **美術暫代**（`business_suit` 黑 `#15161C`）· 等 B1 |
+| `executive` | Executive 主管 | 主角（Threadline $640） | 剪裁俐落的三件式、口袋巾、手錶 | 正式分層美術已交 2026-10-01 · 預設調色待 Claude 接線 |
+| `logistics_site` | Logistics / Site 現場 | 主角（Threadline $120）、倉管、工人 | 反光背心、工作靴、安全帽（配件） | 正式分層美術已交 2026-10-01 · 預設調色待 Claude 接線 |
+| `luxury_citywear` | Luxury Citywear 城市精品 | 主角（Threadline $520）、Nina、購物街路人 | 長版大衣、高領毛衣、皮靴（Board A「Casual City」高級版） | 正式分層美術已交 2026-10-01 · 預設調色待 Claude 接線 |
+| `travel` | Travel 旅行 | 主角（Threadline $240；出國） | 輕羽絨、斜背包、休閒鞋 | 正式分層美術已交 2026-10-01 · 預設調色待 Claude 接線 |
+| `formal_evening` | Formal Evening 晚宴 | 主角（Threadline $780） | 燕尾服或晚禮服 | 正式分層美術已交 2026-10-01 · 預設調色待 Claude 接線 |
 | `student` | 學生 | 大學區路人 | 帽 T、後背包、帆布鞋 | 規劃中 P1 · `新增` |
 | `athleisure` | 運動休閒 | 健身房、慢跑路人、Rosa | 運動外套、緊身褲、跑鞋 | 規劃中 P1 · `新增` |
 | `chef_waiter` | 餐飲制服 | 餐廳員工 | 白色廚師服或黑背心 | 規劃中 P1 · `新增` |
@@ -247,3 +247,9 @@ A5 已重製四種現有表情並補上眼鏡；12 位具名 NPC 的頭像和四
 ## B2 具名角色 · 美術已交 2026-09-30
 
 Rosa Lim、Ines Duarte、Sam Okoro 均交 `characters/npc_<id>` 128×144（三方向 × 四表情）、`portraits/npc_<id>` 256×64 與 4×。外型依上表；表情順序平常、微笑、思考、驚訝。站姿各格保持腳底對齊，港區出生點、排程與服裝選項由 Claude 線接入。
+
+## B1 五套商店服裝 · 美術已交 2026-10-01
+
+`executive`、`luxury_citywear`、`travel`、`formal_evening`、`logistics_site` 交三體型的 top、bottom、shoes、top_detail，每件都有 walk、sit、idle、phone、interact、carry；頭像各有灰階衣領及 detail。370 個 logical key，各交原尺寸和 4× PNG/import。布料可染色，固定細節保留原色。六膚色、三身形、三方向的實機矩陣與姿勢證據見 `evidence/20261001_shop_wardrobe/`。
+
+程式狀態：正式檔名會自動取代 stand_in；預設服裝色需讀 `game/assets/outfit_palette.json`，明確 NPC / 路人 tint 優先。未接前玩家衣服是灰階，不能宣告正式配色已進入完整遊戲。4× 圖層載入依賴角色品質 PR #46；本批只交美術和 metadata，不改玩法或程式。
