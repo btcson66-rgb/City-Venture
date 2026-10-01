@@ -77,7 +77,8 @@ def run():
                 manifest.append({'path': path.relative_to(ROOT).as_posix(), 'size': list(bitmap.size), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()})
         transforms[name] = {'crop': crop, 'ratio': ratio, 'offset': offset, 'logical': logical}
     meta_path.write_text(json.dumps(building_meta, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
-    sprite_path.write_text(json.dumps(sprite_meta, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
+    if any(d['folder'] == 'props' for d in definitions.values()):
+        sprite_path.write_text(json.dumps(sprite_meta, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     (SOURCE / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
     (SOURCE / 'transforms.json').write_text(json.dumps(transforms, indent=2) + '\n', encoding='utf-8')
     print(f'city_frontage_pack: {len(definitions)} originals, {len(manifest)} PNG; footprints retained, door/sign metadata aligned')
