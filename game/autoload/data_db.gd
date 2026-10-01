@@ -52,6 +52,23 @@ func load_all() -> void:
 	glossary = gl if typeof(gl) == TYPE_DICTIONARY else {}
 	story = _read("res://data/story/chapters.json")
 	world = _read("res://data/world/years.json")
+	# Economy overlays keep all release balancing numbers in one designer-owned folder.
+	# They replace existing numeric definition fields; transaction and story rules are unchanged.
+	for group in economy.get("balance", {}).get("definitions", {}):
+		if not group in FOLDERS:
+			push_error("Unknown balance definition group: " + group)
+			continue
+		var definitions: Dictionary = get(group)
+		for id in economy["balance"]["definitions"][group]:
+			if not definitions.has(id):
+				push_error("Unknown balance definition: " + group + "/" + id)
+				continue
+			for key in economy["balance"]["definitions"][group][id]:
+				var value = economy["balance"]["definitions"][group][id][key]
+				if not definitions[id].has(key) or typeof(value) not in [TYPE_FLOAT, TYPE_INT] or typeof(definitions[id][key]) not in [TYPE_FLOAT, TYPE_INT]:
+					push_error("Balance overlays must replace an existing numeric field: " + id + "/" + key)
+					continue
+				definitions[id][key] = value
 	character = _read("res://data/character/options.json")
 	buildings_meta = _read("res://assets/buildings/buildings_meta.json")
 	tiles = _read("res://assets/tiles/atlas.json")

@@ -202,7 +202,7 @@ msgstr "另有 %d 张较早的进货单已结案，没有可取消或退货的�
 msgid "%d order%s waiting to be packed — packing table (home or office)."
 msgstr "%d 笔订单%s等待打包——到打包桌（家里或办公室）。"
 
-#: scripts/ui/modals/company_os.gd:162
+#: scripts/ui/modals/company_os.gd:162 scripts/ui/modals/company_os.gd:463
 msgid "%d orders"
 msgstr "%d 笔订单"
 
@@ -242,7 +242,7 @@ msgstr "%d 趟"
 msgid "%d stops · deliver by %s · about %s on the road"
 msgstr "%d 个停靠点 · %s 前送达 · 路上约 %s"
 
-#: scripts/ui/modals/lease_modal.gd:27
+#: scripts/ui/modals/company_os.gd:519 scripts/ui/modals/lease_modal.gd:27
 msgid "%d units"
 msgstr "%d 件"
 
@@ -377,6 +377,10 @@ msgstr "%s 已支付发票 %s：%s"
 #: scripts/sim/forecast.gd:65
 msgid "%s pays"
 msgstr "%s 付款"
+
+#: scripts/ui/modals/company_os.gd:514
+msgid "%s per unit"
+msgstr "每件 %s"
 
 #: scripts/sim/staff.gd:336
 msgid "%s quit."

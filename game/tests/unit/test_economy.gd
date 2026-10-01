@@ -140,9 +140,10 @@ func test_replacement_needs_stock_of_that_product() -> void:
 	_advance_until(func(): return GameState.stat("orders_placed") >= 2, 24 * 6)
 	Ecommerce.pack_orders("riverside_studio")
 	Ecommerce.courier_pickup("riverside_studio", "express")
+	Ecommerce.set_active(Ecommerce.listing_for("wireless_earbuds")["id"], false) # reserve stock for the replacement under higher demand
 	GameState.set_flag("force_next_return")
-	_advance_until(func(): return not EventEngine.pending().is_empty(), 24 * 8)
-	var inst := EventEngine.next_pending()
+	_advance_until(func(): return EventEngine.pending().any(func(q): return q["id"] in ["customer_return_first", "customer_return"]), 24 * 8)
+	var inst: Dictionary = EventEngine.pending().filter(func(q): return q["id"] in ["customer_return_first", "customer_return"])[0]
 	var rep := {}
 	for c in DataDB.events[inst["id"]]["choices"]:
 		if c["id"] == "replace":
@@ -156,7 +157,7 @@ func test_replacement_needs_stock_of_that_product() -> void:
 	runner.check(not EventEngine.choice_available(rep, inst["ctx"]), "replacement disabled when that product is sold out")
 	var r := EventEngine.choose(inst["iid"], "refund")
 	runner.check(r["ok"], "refund still resolves the decision")
-	runner.check(EventEngine.pending().is_empty(), "decision closed")
+	runner.check(not EventEngine.pending().any(func(q): return q["iid"] == inst["iid"]), "customer decision closed")
 
 
 func test_month_close_report() -> void:

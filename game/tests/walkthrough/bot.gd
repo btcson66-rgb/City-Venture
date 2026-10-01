@@ -534,6 +534,15 @@ func talk_through_dialogue(max_lines := 30, choose_first := true) -> void:
 ## a big-contract decision, staff in the office, the loan desk, SaaS after launch, insolvency and the
 ## closing statement, the pause menu with audio settings.
 func _screens() -> void:
+	# Keep the balanced supplier prices and units visible in the bilingual screenshot tour.
+	GameState.new_game({"name": "Balance Screens", "seed": 29})
+	UIRoot.open_modal(CompanyOS.new("home_laptop"))
+	await wait(0.4)
+	await click_named("Tab_operations", 2.0)
+	await wait(0.4)
+	expect(UIRoot.top_modal().tab == "operations", "supplier units screen uses operations tab")
+	await shot("screen_operations_units")
+	UIRoot.close_all()
 	DirAccess.make_dir_recursive_absolute(SaveSystem.DIR)
 	var f := FileAccess.open(SaveSystem._path(9), FileAccess.WRITE)
 	f.store_string(FileAccess.get_file_as_string("res://tests/walkthrough/fixtures/trailer_state.json"))

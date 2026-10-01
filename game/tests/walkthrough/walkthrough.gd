@@ -515,7 +515,7 @@ func _pack_and_ship_home() -> void:
 		bot.fail("packing did not finish after three real input attempts")
 		await close_modal()
 		return
-	await bot.click_named("CourierExpress", 3.0)
+	await bot.click_named("CourierEconomy", 3.0)
 	await bot.wait(0.6)
 	await close_modal()
 
@@ -1126,6 +1126,24 @@ func _read_news(tag: String) -> void:
 	await enter_building("riverside_apartment")
 
 
+## Actual laptop purchases maintain two weeks of stock while demonstrating sensible pricing and shipping.
+func _shock_restock() -> void:
+	var needed := []
+	for pid in ["wireless_earbuds", "water_bottle", "desk_lamp", "phone_stand"]:
+		if Ecommerce.available_anywhere(pid) + Ecommerce.incoming_units_of(pid) < int(float(DataDB.product(pid)["base_daily_demand"]) * 7):
+			needed.append(pid)
+	if needed.is_empty(): return
+	await _home_laptop("operations")
+	await bot.click_named("DeliverTo_riverside_studio", 2.0)
+	for pid in needed:
+		var qty := int(Ecommerce.offer("tradelink_wholesale", pid)["moq"])
+		for batch in 3:
+			if Ecommerce.available_anywhere(pid) + Ecommerce.incoming_units_of(pid) >= int(float(DataDB.product(pid)["base_daily_demand"]) * 14): break
+			if Ecommerce.space_block("riverside_studio", qty) != "" or Ledger.cash(GameState.business_entity()) < qty * Ecommerce.unit_cost("tradelink_wholesale", pid): break
+			await bot.click_named("Buy_tradelink_wholesale_" + pid, 3.0)
+	await close_modal()
+
+
 func _chapters_7_to_9() -> void:
 	await popups()
 	bot.expect(StoryEngine.St()["chapter"] == "ch7_supply_shock", "Chapter 7 started after Chapter 6")
@@ -1147,14 +1165,27 @@ func _chapters_7_to_9() -> void:
 	StoryEngine.check()   # ch7_stock is done; an earlier price adjustment remains valid.
 	await bot.click_named("Tab_sales")
 	await bot.wait(0.4)
-	await bot.click_named("PriceUp_desk_lamp", 3.0)
+	for pid in ["wireless_earbuds", "water_bottle", "desk_lamp", "phone_stand"]:
+		var listing := Ecommerce.listing_for(pid)
+		if listing.is_empty(): continue
+		var target := float(DataDB.product(pid)["ref_price"]) * 1.2
+		for step in int(ceil(maxf(0.0, target - float(listing["price"])))):
+			await bot.click_named("PriceUp_" + pid, 3.0)
 	await bot.wait(0.4)
 	await close_modal()
 	await bot.wait(0.6)
 	StoryEngine.check()
 	bot.expect("ch7_price" in StoryEngine.St()["done"], "stocked and repriced")
-	await pass_time_at_home(func(): return "ch7_supply_shock" in StoryEngine.St()["chapters_done"], 75, true)   # a profitable month, or two month-ends
+	for day in 65:
+		if "ch7_supply_shock" in StoryEngine.St()["chapters_done"]: break
+		await _shock_restock()
+		await pass_time_at_home(func(): return "ch7_supply_shock" in StoryEngine.St()["chapters_done"], 1, true)
 	bot.expect("ch7_supply_shock" in StoryEngine.St()["chapters_done"], "Chapter 7 complete")
+	bot.expect(not GameState.flag("ch7_survived_losses"), "Chapter 7 passed with real profit, not two losses")
+	var close: Dictionary = GameState.data["reports"]["month_closes"].back()
+	var profit := float(close["entities"][GameState.business_entity()]["business_profit"])
+	bot.log_line("  ch7_month_profit set from actual ledger profit %s; survived_losses=%s" % [Fmt.money0(profit), GameState.flag("ch7_survived_losses")])
+	bot.expect(profit > 0, "positive chapter seven monthly profit")
 	# ---------------------------------------------------------------- chapter 8
 	bot.step("Chapter 8 — the Green Shift")
 	bot.expect(World.year() == 4, "Year 4: the Green Shift")

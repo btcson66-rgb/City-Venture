@@ -1,5 +1,14 @@
 # CITY VENTURE — Game Data Schema
 
+### Economy balance overlays
+
+`economy/balance.json` has `definitions: {products: {id: {numeric_field: value}}}`. DataDB applies these values after
+loading the original definitions. Only existing numeric fields may be replaced; unknown ids or nonnumeric fields
+produce an error. Saved inventory cost, orders, contracts, cash and ledger entries are never rewritten by an overlay.
+`baseline_shipping_costs` stores the pre-tuning economy/express cost table for the headless `--baseline` experiment only.
+The production simulation reads the current shipping table. New industry definitions are unaffected unless a designer
+explicitly adds their numeric fields to a later overlay.
+
 All content lives in `game/data/` as JSON, loaded by `DataDB` at boot.
 Conventions:
 - `id` is a `snake_case` string, unique within its folder.
