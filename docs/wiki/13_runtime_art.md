@@ -241,3 +241,74 @@
 - `world_detail/events/rail_frozen.png`
 - `events/acquisition_offer.png`
 - `world_detail/events/acquisition_offer.png`
+
+## 全遊戲美術優化：街道車流批 · 2026-10-01
+
+美術：五種街道車輛、轎車／掀背車前後視圖、入城列車已交原尺寸、4× 和匯入檔。既有原尺寸已直接替換，所有舊檔尺寸保持不變。車身灰階可染色，車窗／輪胎／輪圈保留固定細節；光罩只包含發光像素。
+
+接線限制：現有 Car、Skyline、ArrivalScene 仍讀原尺寸。4× 與車灯層未接入車流，本批不改 scripts / data / tests。Claude 接線時須保持原尺寸車長、offset、輪胎基線、碰撞與交通速度；不可直接把 4× 寬度當作邏輯車長。
+
+全遊戲覆蓋盤點：`../art_sources/city_traffic_20261001/whole_game_inventory.md`。檔案覆蓋不代表品質已驗收；角色品質另見 PR #46。完整遊戲美術優化仍進行中。
+
+來源、裁切與 SHA-256：`../art_sources/city_traffic_20261001/manifest.json`、`sources.json`、`crops.json`。實機證據：`evidence/20261001_city_traffic/`。
+
+本批檔案：
+
+- `vehicles/sedan_side_body.png` — (64, 28)
+- `world_detail/vehicles/sedan_side_body.png` — (256, 112)
+- `vehicles/sedan_side_detail.png` — (64, 28)
+- `world_detail/vehicles/sedan_side_detail.png` — (256, 112)
+- `vehicles/sedan_side_lights.png` — (64, 28)
+- `world_detail/vehicles/sedan_side_lights.png` — (256, 112)
+- `vehicles/sedan_front_body.png` — (32, 40)
+- `world_detail/vehicles/sedan_front_body.png` — (128, 160)
+- `vehicles/sedan_front_detail.png` — (32, 40)
+- `world_detail/vehicles/sedan_front_detail.png` — (128, 160)
+- `vehicles/sedan_front_lights.png` — (32, 40)
+- `world_detail/vehicles/sedan_front_lights.png` — (128, 160)
+- `vehicles/sedan_back_body.png` — (32, 40)
+- `world_detail/vehicles/sedan_back_body.png` — (128, 160)
+- `vehicles/sedan_back_detail.png` — (32, 40)
+- `world_detail/vehicles/sedan_back_detail.png` — (128, 160)
+- `vehicles/sedan_back_lights.png` — (32, 40)
+- `world_detail/vehicles/sedan_back_lights.png` — (128, 160)
+- `vehicles/compact_side_body.png` — (52, 26)
+- `world_detail/vehicles/compact_side_body.png` — (208, 104)
+- `vehicles/compact_side_detail.png` — (52, 26)
+- `world_detail/vehicles/compact_side_detail.png` — (208, 104)
+- `vehicles/compact_side_lights.png` — (52, 26)
+- `world_detail/vehicles/compact_side_lights.png` — (208, 104)
+- `vehicles/compact_front_body.png` — (30, 36)
+- `world_detail/vehicles/compact_front_body.png` — (120, 144)
+- `vehicles/compact_front_detail.png` — (30, 36)
+- `world_detail/vehicles/compact_front_detail.png` — (120, 144)
+- `vehicles/compact_front_lights.png` — (30, 36)
+- `world_detail/vehicles/compact_front_lights.png` — (120, 144)
+- `vehicles/compact_back_body.png` — (30, 36)
+- `world_detail/vehicles/compact_back_body.png` — (120, 144)
+- `vehicles/compact_back_detail.png` — (30, 36)
+- `world_detail/vehicles/compact_back_detail.png` — (120, 144)
+- `vehicles/compact_back_lights.png` — (30, 36)
+- `world_detail/vehicles/compact_back_lights.png` — (120, 144)
+- `vehicles/bus_side_body.png` — (112, 44)
+- `world_detail/vehicles/bus_side_body.png` — (448, 176)
+- `vehicles/bus_side_detail.png` — (112, 44)
+- `world_detail/vehicles/bus_side_detail.png` — (448, 176)
+- `vehicles/bus_side_lights.png` — (112, 44)
+- `world_detail/vehicles/bus_side_lights.png` — (448, 176)
+- `vehicles/van_side_body.png` — (72, 36)
+- `world_detail/vehicles/van_side_body.png` — (288, 144)
+- `vehicles/van_side_detail.png` — (72, 36)
+- `world_detail/vehicles/van_side_detail.png` — (288, 144)
+- `vehicles/van_side_lights.png` — (72, 36)
+- `world_detail/vehicles/van_side_lights.png` — (288, 144)
+- `vehicles/taxi_side_body.png` — (64, 28)
+- `world_detail/vehicles/taxi_side_body.png` — (256, 112)
+- `vehicles/taxi_side_detail.png` — (64, 28)
+- `world_detail/vehicles/taxi_side_detail.png` — (256, 112)
+- `vehicles/taxi_side_lights.png` — (64, 28)
+- `world_detail/vehicles/taxi_side_lights.png` — (256, 112)
+- `vehicles/metro_train.png` — (124, 40)
+- `world_detail/vehicles/metro_train.png` — (496, 160)
+
+燈層對應的 sprite key：`bus_side`, `compact_back`, `compact_front`, `compact_side`, `sedan_back`, `sedan_front`, `sedan_side`, `taxi_side`, `van_side`。
