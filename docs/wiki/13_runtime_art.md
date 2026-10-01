@@ -2009,3 +2009,8 @@ sprite keys：`bollard`, `hydrant`, `cone`, `trash_bin`, `parking_meter`, `digit
 - `tab`
 - `tab_active`
 - `tooltip`
+
+## 背景與地點卡美術品質批 · 2026-10-01
+
+美術：13 張背景與 12 張地點卡由既有原畫重新輸出完整色彩，取消 192 色壓縮，補齊原尺寸及 4× 與匯入檔。繁中原生選單、衣櫥、抵達、六章標題卡、重新出發與八張地點介紹卡已做前後實拍；未改劇情。部分 4× 背景超過來源解析度，插值比例記於 source manifest；不宣稱新增原畫細節。高解析載入與邏輯尺寸保持待 Claude 線接入。證據：`evidence/20261001_backdrop_quality/README.md`。
+

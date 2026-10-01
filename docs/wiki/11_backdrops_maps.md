@@ -138,3 +138,7 @@
 ## C10 第 10–12 章 · 美術已交 2026-09-30
 
 `backdrops/chapter_10.png`、`chapter_11.png`、`chapter_12.png`：640×360 / 2560×1440。分別以光軌、斷橋與新聞手機、頂樓會議室與世界投影表達數位結算、信任、監管與規模。`events/rail_frozen.png`、`events/acquisition_offer.png`：160×90 / 640×360，鎖住的付款光軌及空白收購文件與兩支筆。無文字、數字、真實品牌或加密貨幣符號。
+
+## 背景與地點卡品質 · 2026-10-01
+
+美術：13 背景與 12 地點卡已從既有原畫重輸出完整色彩，解除192色壓縮，附原尺寸／4×及import。原生繁中展示前後各18張、53張巡禮0失敗。4×背景超出原畫的插值比例見manifest；高解析載入須由Claude維持logical尺寸接入。證據：`evidence/20261001_backdrop_quality/README.md`。
