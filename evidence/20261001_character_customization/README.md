@@ -2,6 +2,8 @@
 
 起點：`claude/exciting-bardeen-y71ixv` 的 `e6accdb`，新 worktree / `codex/art-character-customization-quality`；已 pull。未接舊 Codex 分支。
 
+交件整合：工作期間主線更新到 `a57c87a`；本批已無衝突 rebase 到該提交，包含主線既有的 test8.1 教學字型修正和新增測試。下列最終驗收使用整合後版本；本批相對該基底沒有 gameplay/data/tests 改動。
+
 ## 問題與修正
 
 改前：只有完全相同的預設造型讀高解析 `player_default`；換一格膚色便回到舊的分層像素角色。`before/creator_s2.png` 與 `before/creator_s6.png` 為修正前真正的建立器截圖。
@@ -27,7 +29,7 @@ Windows 使用 Godot 4.5.1 console；`python` 等同工單的 `python3`。bot �
 | 檢查 | 結果 | 記錄 |
 |---|---|---|
 | godot --headless --path game --import | 最終 exit 0、無錯誤 | logs/import.log |
-| Godot 全套測試 | **227/227 tests passed in 15.1s** | logs/tests.log |
+| Godot 全套測試 | **228/228 tests passed in 16.5s** | logs/tests.log |
 | 自訂角色回歸檢查 | **8094 combinations; 1040 texture/pose checks; 0 failures** | logs/coverage.log |
 | --bot=shots | **BOT FINISHED — 0 failure(s)**；53 screenshots、63 steps | logs/tour.log / tour/walkthrough_result.json |
 | wiki_check | **OK (2800 assets, 191 data ids)** | logs/wiki.log |

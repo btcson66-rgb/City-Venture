@@ -4,9 +4,11 @@ Started from `claude/exciting-bardeen-y71ixv` at `e6accdb` in a fresh worktree a
 
 Necessary cosmetic wiring is included in `Art.tex`, `CharacterRig` and the creator expression preview. No gameplay decisions, game/data or game/tests change. Expression frames are independent of walking frames; feet, collisions, save keys and logical sizes remain unchanged. This current creator repair therefore has three display-code changes; the first item of the old pure-art checklist is intentionally not checked.
 
+The target branch advanced during production. Rebased without conflicts onto `a57c87a` before the final integration checks; the tutorial/font and release documentation changes belong to upstream, not this PR.
+
 Validation:
 - Godot 4.5.1 headless import: exit 0, no errors.
-- `227/227 tests passed in 15.1s`.
+- `228/228 tests passed in 16.5s`.
 - Custom appearance regression: `8094 combinations; 1040 texture/pose checks; 0 failures`.
 - `BOT FINISHED — 0 failure(s)`; 53 screenshots, 63 steps.
 - `wiki_check: OK (2802 assets, 191 data ids)`.
@@ -30,3 +32,15 @@ Integration handoff: none for this creator repair. The five shop stand-in choice
 - [x] evidence/<日期>_<批次>/ 有改前/改後對比和 README
 - [x] wiki 對應條目的「美術」狀態已更新
 - [x] 需要程式接線的項目已列在 PR 說明
+
+Engineering guide checklist (direct user-requested art repair; no Codex issue was assigned):
+- [ ] Branch from the latest claude/exciting-bardeen-y71ixv; Draft PR; "Closes #<n>" — latest base and Draft done; issue number not applicable to the direct request.
+- [x] Only the ticket's scope; no assets changed unless it is an art ticket — this request is character art.
+- [x] Unit tests added/updated; godot test_runner: all pass (paste the last line) — standalone meaningful art regressions under tools/qa; game/tests unchanged.
+- [ ] Walkthrough (zh_TW): 0 failures (paste the last line); english_audit clean for new text — 53-shot tour passed, full 40–60-minute story walkthrough not run for this cosmetic repair; PR remains Draft.
+- [x] python3 tools/i18n_extract.py: missing 0; python3 tools/wiki_check.py: OK
+- [x] Old saves still load (test or manual check described) — existing save unit tests pass; custom appearance JSON round trip verified.
+- [x] New ideas have "!" badges (glossary) and new screens have a help card — no new gameplay idea or player screen.
+- [x] Docs updated (GAME_DATA_SCHEMA, wiki page, STORY_IMPLEMENTATION if story) — character/runtime-art wiki; data/schema/story unchanged.
+- [x] Screenshots of the change in evidence/<date>_<ticket>/
+- [x] Anything not done or uncertain is listed in the PR body
