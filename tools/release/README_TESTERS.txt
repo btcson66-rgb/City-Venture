@@ -4,6 +4,14 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
 謝謝你幫忙測試！這是一款在現代城市裡創業、經營公司的像素風模擬 RPG。
 主線第 1 到第 12 章全部可以玩完（開始電商、登記公司、聘員工、大合約、現金危機、供應衝擊、綠色轉型、跨境結算、數位支付、跨鏈橋事件、監管與收購提案），之後進入自由模式。
 
+0.1.9-test9 新增：
+  ・叫錯貨可以補救：Company OS →「營運」的進貨單，尚未到貨的 24 小時內可以「取消進貨」（通常收 5% 手續費，
+    錢還沒過境的話全額退本金）；本地供應商的貨到貨後 14 天內可以「退貨」（扣 15% 退貨手續費加運費，
+    供應商收到貨後約 3 天退款）。進口商品只能取消、不能退貨；Aurelia Makers 合作社免手續費。
+  ・公司結束營業時，沒回覆的報價會撤回、沒交貨的合約會終止，沒收款的發票隨清算賣給催收公司，
+    不會再重複收一次錢；新公司也不能拿新庫存去交舊公司的合約。
+  ・營運頁的進貨單只列最近 8 張和還能取消／退貨的單，清單不會越玩越長。
+
 0.1.8-test8.1（網頁版修正）：新手教學黃色提示框的第一行（「第一次創業 2/18 · …」）在網頁版變成方框亂碼，已修好。
   原因：那一行用了沒有中文備援的字型；電腦版會向系統借字所以看不出來，瀏覽器沒有系統字型可借。
 
@@ -211,6 +219,12 @@ CITY VENTURE — Test build {VERSION} ({DATE})  ·  English
 ============================================================
 Thanks for testing! This build plays the whole main story, Chapters 1–12, then free play. Also playable: part-time
 jobs, freelance consulting, a SaaS product, your own café in Old Town and a logistics business at the Harbor.
+
+NEW IN 0.1.9-test9: fix a wrong stock order. Operations lets you cancel a purchase still on the way within 24 hours
+(usually a 5% fee; a payment that has not crossed the border yet comes back in full) and return local stock within 14
+days of arrival (15% restocking fee plus freight; the refund lands about 3 days after the supplier gets it). Imports can
+be cancelled, not returned; the Aurelia Makers co-op charges no fees. Closing a company now withdraws its open offers,
+ends its undelivered contracts and sells its unpaid invoices to the collector once: nothing is collected twice.
 
 0.1.8-test8.1 (web fix): the first line of the tutorial's yellow hint bubble ("FIRST VENTURE 2/18 · ...") showed hex
 boxes in the browser build. It used a font with no Chinese fallback; desktop builds borrow a system font, browsers cannot.
