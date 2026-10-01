@@ -217,9 +217,9 @@ static func _talk(npc_id: String) -> void:
 				"loan_office":
 					GameState.set_flag("wants_loan_offer", false)
 					follow = func():
-						if GameState.flag("wants_loan_offer"):
+						if GameState.flag("wants_loan_offer") or not Bank.offer()["ok"]:
 							GameState.set_flag("wants_loan_offer", false)
-							UIRoot.open_modal(LoanModal.new(true))
+							UIRoot.open_modal(LoanModal.new(Bank.offer()["ok"]))
 				"dropoff_parcels":
 					follow = func(): run("dropoff_parcels", {})
 				"clothing_shop":

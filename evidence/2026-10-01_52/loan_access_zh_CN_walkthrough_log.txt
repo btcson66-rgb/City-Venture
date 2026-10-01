@@ -1,0 +1,66 @@
+   0.0s STEP Main menu → New Game
+   1.0s   shot 01_main_menu.png
+   1.0s   click [NewGame] New Game
+   2.2s STEP Character Creator
+   2.3s   shot 02_creator_default.png
+   2.3s   click [Tab_hair] Hair
+   2.4s   click [Next_hair] ▶
+   2.8s   click [Tab_face] Face
+   2.9s   click [Next_face] ▶
+   3.0s   click [Next_eye_shape] ▶
+   3.1s   click [Tab_body] Body
+   3.2s   click [Next_presentation] ▶
+   3.8s   shot 03_creator_customised.png
+   3.8s   click [Tab_outfit] Outfit
+   3.8s   click "Startup Casual"
+   4.4s   ok  appearance changed from default (short_neat)
+   4.5s   shot 04_creator_final.png
+   4.5s   click [Start] Start in Aurelia  →
+   4.6s [6月1日（週日） 下午 2:00] STEP Arrival sequence
+   7.1s [6月1日（週日） 下午 2:00]   shot 05_arrival_train.png
+  10.7s [6月1日（週日） 下午 2:00]   shot 06_arrival_phone.png
+  15.8s [6月1日（週日） 下午 2:01]   ok  spawned in the Riverside apartment
+  15.8s [6月1日（週日） 下午 2:01]   ok  starting cash $30,000
+  15.8s [6月1日（週日） 下午 2:01]   ok  name saved
+  17.4s [6月1日（週日） 下午 2:03]   shot 07_apartment_arrival.png
+  21.3s [6月1日（週日） 下午 2:09] STEP Loan brochure outside the bank: all conditions and navigation
+  22.0s [6月1日（週日） 下午 2:09]   ok  unregistered player sees checklist, no borrow
+  22.0s [6月1日（週日） 下午 2:09]   shot 08_loan_ineligible_top.png
+  22.6s [6月1日（週日） 下午 2:09]   shot 09_loan_ineligible_formula.png
+  22.6s [6月1日（週日） 下午 2:09]   click [RouteNexusBank] View Nexus Bank on city map
+  22.6s [6月1日（週日） 下午 2:09]   ok  brochure opens the Financial District map
+  23.4s [6月1日（週日） 下午 2:09] STEP Permanent manager sign: off-duty booking and phone task
+  26.4s [6月2日（週一） 上午 10:04]   shot 10_loan_permanent_manager_sign.png
+  26.5s [6月2日（週一） 上午 10:05]   use "Business lending — Marcus Reed, weekdays 13:00–16:00"
+  26.6s [6月2日（週一） 上午 10:05]   click [BookLoanAppointment] Book an appointment
+  27.2s [6月2日（週一） 上午 10:05]   ok  appointment is in the next actual working slot
+  27.3s [6月2日（週一） 上午 10:05]   shot 11_loan_marcus_off_duty.png
+  28.8s [6月2日（週一） 上午 10:06]   shot 12_loan_phone_reminder.png
+  28.8s [6月2日（週一） 上午 10:06] STEP Marcus's ineligible conversation opens the same read-only checklist
+  30.2s [6月2日（週一） 下午 1:02]   use "和 Marcus Reed 说话"
+  32.2s [6月2日（週一） 下午 1:02]   choose "› 我可以贷款吗？"
+  34.6s [6月2日（週一） 下午 1:02]   ok  refusal dialogue leads to actionable checklist
+  34.6s [6月2日（週一） 下午 1:02]   ok  NPC refusal cannot bypass eligibility
+  35.0s [6月2日（週一） 下午 1:02] STEP New company opens account at counter, then applies from the same counter
+  35.0s [6月2日（週一） 下午 1:02]   ok  fresh company registration
+  36.9s [6月2日（週一） 下午 1:05]   use "Teller — business banking"
+  37.0s [6月2日（週一） 下午 1:05]   click [OpenAccount] 存入 $10,000 开户
+  37.1s [6月2日（週一） 下午 1:35]   ok  account opened through teller input
+  37.7s [6月2日（週一） 下午 1:36]   use "Teller — business banking"
+  37.8s [6月2日（週一） 下午 1:36]   click [Lending] 企业贷款 · 信用分数 680
+  37.9s [6月2日（週一） 下午 1:36]   click [MeetMarcus] Meet Marcus Reed now
+  38.0s [6月2日（週一） 下午 1:36]   ok  counter reaches signing without speaking to an NPC
+  38.0s [6月2日（週一） 下午 1:36]   click [TakeLoan] 借 $1,000
+  38.6s [6月2日（週一） 下午 1:36]   ok  translated confirmation fits naturally without fixed height
+  38.7s [6月2日（週一） 下午 1:36]   shot 13_loan_signing_confirmation.png
+  38.7s [6月2日（週一） 下午 1:36]   click [CancelLoan] Cancel
+  38.7s [6月2日（週一） 下午 1:36]   ok  cancel changes neither money nor time
+  38.7s [6月2日（週一） 下午 1:36]   click [TakeLoan] 借 $1,000
+  38.9s [6月2日（週一） 下午 1:36]   click [ConfirmLoan] Confirm loan signing
+  39.8s [6月2日（週一） 下午 5:00]   ok  loan funds arrive today
+  39.8s [6月2日（週一） 下午 5:00]   ok  signing ends at 17:00 the same day
+  39.8s [6月2日（週一） 下午 5:00]   ok  first repayment remains thirty days away
+  39.8s [6月2日（週一） 下午 5:00]   ok  meeting clears appointment and scheduled reminder
+  39.8s [6月2日（週一） 下午 5:00]   ok  loan input flow keeps books balanced
+  39.8s [6月2日（週一） 下午 5:00]   shot 14_loan_success_today.png
+  40.6s [6月2日（週一） 下午 5:01] BOT FINISHED — 0 failure(s) · 40.6s real

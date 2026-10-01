@@ -119,7 +119,7 @@
 | 營業 | 週一到五 09:00–16:00 |
 | 氣質 | 大理石、金色點綴、安靜。排隊欄杆和候位沙發，右後方是經理的辦公桌 |
 | 家具 | `bank_counter` · `atm` · `queue_barrier` · `waiting_sofa` · `exec_desk` · `office_chair` · `filing_cabinet` · `brochure` · `logo_nexus_bank` · `framed_art_b` · `plant_big` · `rug_navy` · `sconce` · `window_day` |
-| 互動 | 櫃台 → 企業帳戶 · ATM → 餘額 · 讀「小企業貸款」DM · 員工門（銀行櫃員打工） |
+| 互動 | 櫃台 → 企業帳戶、商業貸款 · ATM → 餘額 · 讀「小企業貸款」DM · 經理桌旁常設貸款牌 `lending_sign`（`loans_info`）→ 值班時直接會面／非值班預約 · 員工門（銀行櫃員打工） |
 | NPC | Sofia（櫃台）· Marcus Reed（經理桌，週一到五 13–16） |
 
 ### 7. Aurelia City Hall · `city_hall`

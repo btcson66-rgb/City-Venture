@@ -109,6 +109,11 @@
     "solid": false
    },
    {
+    "sprite": "brochure",
+    "x": 438,
+    "y": 130
+   },
+   {
     "sprite": "filing_cabinet",
     "x": 444,
     "y": 56
@@ -180,6 +185,15 @@
     "params": {
      "job": "bank_teller"
     }
+   },
+   {
+    "id": "lending_sign",
+    "at": [
+     450,
+     165
+    ],
+    "label": "Business lending — Marcus Reed, weekdays 13:00–16:00",
+    "action": "loans_info"
    }
   ],
   "npc_spots": {

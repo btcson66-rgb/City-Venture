@@ -55,46 +55,109 @@ static func monthly_payment(principal: float, months: int, rate := -1.0) -> floa
 	return snappedf(principal * r / (1.0 - pow(1.0 + r, -months)), 0.01)
 
 
-## What Marcus would lend today, and why. {ok, max, apr, reasons[], parts{}}
-static func offer() -> Dictionary:
+## The existing lending formula, also used to explain every prerequisite before an offer is available.
+static func lending_basis() -> Dictionary:
 	var cid := GameState.company_id()
-	if cid == "":
-		return {"ok": false, "error": "We lend to registered companies."}
-	if not GameState.flag("business_account_opened"):
-		return {"ok": false, "error": "Open a business account with us first."}
-	if credit() < 560 or Clock.now() < int(B().get("no_loans_until", 0)):
-		return {"ok": false, "error": "Your credit history needs time to recover."}
-	for l in loans(cid):
-		if l["status"] != "active":
-			return {"ok": false, "error": "Not while a loan is in arrears."}
-	var age_days := int((Clock.now() - int(GameState.data["entities"][cid].get("founded", 0))) / Clock.DAY)
-	var t0 := Clock.now() - 30 * Clock.DAY
-	var m := MonthClose.compute(cid, t0, Clock.now())
-	var gp := maxf(0.0, float(m["gross_profit"]))
-	var cash_flow := maxf(0.0, gp * 3.0)
-	var ar := maxf(0.0, Ledger.balance(cid, "accounts_receivable") + Ledger.balance(cid, "marketplace_balance"))
+	var age := 0
+	var gp := 0.0
+	var ar := 0.0
 	var contracts := 0.0
-	for c in GameState.data["contracts"].values():
-		if c["status"] == "active" and c.get("seller", "") == cid:
-			contracts += float(c["total"]) - float(c.get("upfront_paid", 0.0))
-	var stock := maxf(0.0, Ledger.balance(cid, "inventory") + Ledger.balance(cid, "inventory_in_transit"))
+	var stock := 0.0
+	var existing := 0.0
+	if cid != "":
+		age = int((Clock.now() - int(GameState.data["entities"][cid].get("founded", 0))) / Clock.DAY)
+		gp = maxf(0.0, float(MonthClose.compute(cid, Clock.now() - 30 * Clock.DAY, Clock.now())["gross_profit"]))
+		ar = maxf(0.0, Ledger.balance(cid, "accounts_receivable") + Ledger.balance(cid, "marketplace_balance"))
+		stock = maxf(0.0, Ledger.balance(cid, "inventory") + Ledger.balance(cid, "inventory_in_transit"))
+		existing = debt(cid)
+		for c in GameState.data["contracts"].values():
+			if c["status"] == "active" and c.get("seller", "") == cid:
+				contracts += float(c["total"]) - float(c.get("upfront_paid", 0.0))
 	var collateral := ar * 0.7 + contracts * 0.6 + stock * 0.5
-	var reasons: Array = []
-	if age_days < MIN_AGE_DAYS and contracts <= 0.0:
-		return {"ok": false, "error": I18n.t("Come back when %s has %d days of statements, or a signed contract.") % [GameState.business_display_name(), MIN_AGE_DAYS]}
-	var mx := floorf(minf(MAX_LOAN, cash_flow + collateral - debt(cid)) / 1000.0) * 1000.0
-	if mx < 2000.0:
-		return {"ok": false, "error": "Your books don't support a loan yet. Show me more gross profit."}
-	reasons.append([I18n.t("3 × last 30 days' gross profit"), cash_flow])
-	if ar > 0.0:
-		reasons.append([I18n.t("70% of money owed to you"), ar * 0.7])
-	if contracts > 0.0:
-		reasons.append([I18n.t("60% of signed contracts"), contracts * 0.6])
-	if stock > 0.0:
-		reasons.append([I18n.t("50% of stock at cost"), stock * 0.5])
-	if debt(cid) > 0.0:
-		reasons.append([I18n.t("minus existing debt"), -debt(cid)])
-	return {"ok": true, "max": mx, "apr": apr(), "reasons": reasons}
+	var raw := maxf(0.0, gp * 3.0) + collateral - existing
+	return {"age": age, "contracts": contracts, "raw": raw,
+		"max": floorf(minf(MAX_LOAN, raw) / 1000.0) * 1000.0,
+		"parts": [[I18n.t("3 × last 30 days' gross profit"), gp * 3],
+		[I18n.t("70% of money owed to you"), ar * 0.7], [I18n.t("60% of signed contracts"), contracts * 0.6],
+		[I18n.t("50% of stock at cost"), stock * 0.5], [I18n.t("minus existing debt"), -existing]]}
+
+
+## Each row is the single source for both refusal order and the player's actionable checklist.
+static func eligibility() -> Array[Dictionary]:
+	var cid := GameState.company_id()
+	var basis := lending_basis()
+	var arrears := 0
+	for l in loans(cid) if cid != "" else []:
+		if l["status"] != "active":
+			arrears += 1
+	var ban := int(B().get("no_loans_until", 0))
+	return [
+		{"id": "company", "ok": cid != "", "label": "Registered company", "value": int(cid != ""), "need": 1, "gap": int(cid == ""),
+		"hint_action": I18n.t("Register at City Hall, Civic Center."), "error": "We lend to registered companies."},
+		{"id": "account", "ok": GameState.flag("business_account_opened"), "label": "Business bank account", "value": int(GameState.flag("business_account_opened")), "need": 1, "gap": int(not GameState.flag("business_account_opened")),
+		"hint_action": I18n.t("Open a business account at the Nexus Bank counter, Financial District."), "error": "Open a business account with us first."},
+		{"id": "credit", "ok": credit() >= 560 and Clock.now() >= ban, "label": "Credit score and lending ban", "value": credit(), "need": 560, "gap": maxi(0, 560 - credit()),
+		"hint_action": I18n.t("Pay bills on time. Lending ban ends: %s.") % (Clock.fmt_datetime(ban) if ban > Clock.now() else I18n.t("No lending ban")), "error": "Your credit history needs time to recover."},
+		{"id": "arrears", "ok": arrears == 0, "label": "Overdue or called loans", "value": arrears, "need": 0, "gap": arrears,
+		"hint_action": I18n.t("Repay overdue loans in this screen; if the company is in insolvency, use the recovery options."), "error": "Not while a loan is in arrears."},
+		{"id": "age", "ok": int(basis["age"]) >= MIN_AGE_DAYS or float(basis["contracts"]) > 0, "label": "Company days or an active contract", "value": basis["age"], "need": MIN_AGE_DAYS,
+		"gap": 0 if float(basis["contracts"]) > 0 else maxi(0, MIN_AGE_DAYS - int(basis["age"])),
+		"hint_action": I18n.t("Active contracts cover this condition: %s still to collect.") % Fmt.money0(float(basis["contracts"])) if float(basis["contracts"]) > 0 else I18n.t("%d more days, or accept an active contract in Company OS → Contracts.") % maxi(0, MIN_AGE_DAYS - int(basis["age"])),
+		"error": I18n.t("Come back when %s has %d days of statements, or a signed contract.") % [GameState.business_display_name(), MIN_AGE_DAYS]},
+		{"id": "capacity", "ok": float(basis["max"]) >= 2000, "label": "Lending capacity", "value": maxf(0, float(basis["max"])), "need": 2000, "gap": maxf(0, 2000 - float(basis["max"])),
+		"hint_action": I18n.t("Earn about %s more gross profit through sales in Company OS, or add eligible collateral. Capacity is rounded down to $1,000 and capped at $250,000.") % Fmt.money0(ceilf(maxf(0, 2000 - float(basis["raw"])) / 3)),
+		"error": "Your books don't support a loan yet. Show me more gross profit."}]
+
+
+static func offer() -> Dictionary:
+	for requirement in eligibility():
+		if not requirement["ok"]:
+			return {"ok": false, "error": requirement["error"]}
+	var basis := lending_basis()
+	var reasons: Array = [basis["parts"][0]]
+	for i in range(1, basis["parts"].size()):
+		var part: Array = basis["parts"][i]
+		if (i < 4 and float(part[1]) > 0) or (i == 4 and float(part[1]) < 0):
+			reasons.append(part)
+	return {"ok": true, "max": basis["max"], "apr": apr(), "reasons": reasons}
+
+
+static func at_bank() -> bool:
+	var scene := SceneRouter.world_scene()
+	return scene != null and scene.kind == "interior" and scene.scene_id == "nexus_bank"
+
+
+static func marcus_on_duty(at := -1) -> bool:
+	var t := Clock.now() if at < 0 else at
+	var slot: Dictionary = DataDB.npc("marcus")["schedule"][0]
+	return str(slot["days"]).split(",").has(Clock.WEEKDAYS[Clock.weekday(t)].to_lower().substr(0, 3)) and Clock.minute_of_day(t) >= Clock.parse_hm(slot["from"]) and Clock.minute_of_day(t) < Clock.parse_hm(slot["to"])
+
+
+static func next_appointment() -> int:
+	if marcus_on_duty():
+		return Clock.now()
+	var start := Clock.parse_hm(DataDB.npc("marcus")["schedule"][0]["from"])
+	for day in range(8):
+		var t := Clock.at_day_time(day, start)
+		if t >= Clock.now() and marcus_on_duty(t):
+			return t
+	return -1
+
+
+static func appointment_hint() -> String:
+	var t := int(B().get("appointment", -1))
+	if t < 0:
+		return ""
+	return I18n.t("Loan appointment: %s. Go to Marcus Reed's manager desk at Nexus Bank, Financial District. If you miss the slot, book again at the lending sign.") % Clock.fmt_datetime(t)
+
+
+static func book_appointment() -> int:
+	var t := next_appointment()
+	B()["appointment"] = t
+	Sim.cancel("bank.appointment", "id", "lending")
+	Sim.schedule(t, "bank.appointment", {"id": "lending"})
+	GameState.add_message("marcus", appointment_hint())
+	return t
 
 
 static func take_loan(amount: float, months: int) -> Dictionary:
@@ -190,6 +253,9 @@ static func _payment(l: Dictionary) -> void:
 
 
 static func handle(kind: String, p: Dictionary) -> void:
+	if kind == "bank.appointment":
+		EventBus.notify.emit(appointment_hint(), "info", "bank")
+		return
 	var l: Dictionary = B()["loans"].get(str(p.get("id", "")), {})
 	if l.is_empty():
 		return

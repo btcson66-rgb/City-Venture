@@ -132,7 +132,7 @@ After Ch3 the slice continues as a sandbox until Month Close (June 30 → July 1
 | Ken | TradeLink Wholesale rep | phone; Nexus Co-work Tue/Thu 10:00–15:00 | delivery texts, low-stock text, price increase event speaker |
 | Ana | City Hall clerk | City Hall weekdays 09:00–17:00 | company registration |
 | Sofia | Nexus Bank banker | Nexus Bank weekdays 09:00–16:00 | business account, capital transfer |
-| Marcus Reed | bank executive | Nexus Bank weekdays 13:00–16:00 | loans: "Bring me three months of statements." (Loans Planned P1) |
+| Marcus Reed | bank executive | Nexus Bank weekdays 13:00–16:00 | Loans Implemented: counter and manager-desk sign reach lending; next-slot appointments and a full eligibility checklist |
 | Tom | leasing agent | Small Office building weekdays 09:00–18:00 | office tour, lease |
 | Dara | PostPoint clerk | PostPoint 08:00–21:00 | parcel drop-off |
 | Daniel Wong | retail buyer | Nexus Co-work Thu 17:00–19:00 (networking night) | cameo: "Call me when you can do volume." (sets `flag:met_daniel` for Ch5, P1) |
@@ -194,7 +194,12 @@ lamps cost about $9,200 up front and the money comes back 60 days later. The con
 | 4 | Close a month with cash in the bank | `flag:ch6_month_in_black` (set by the month close during Chapter 6) |
 
 The options are real systems. **Marcus Reed** (Nexus Bank, weekdays 13–16) lends on cash flow and collateral
-(`Bank`). **Elena Park** offers $40,000 for 20% (`elena_offer`, which dilutes the cap table). **Cut costs** pauses ads
+(`Bank`). Counter and brochure lending screens now list all six eligibility conditions, their gaps and next steps.
+At the bank, the counter or permanent manager-desk sign reaches Marcus directly during his data-defined schedule;
+outside those hours it books the next slot and adds a phone Tasks reminder. Brochures outside the bank open the
+Financial District on the existing city map. Signing requires explicit confirmation and advances to 17:00 that day;
+funds arrive immediately and the first payment remains 30 days after signing. Capacity and refusal order are unchanged.
+**Elena Park** offers $40,000 for 20% (`elena_offer`, which dilutes the cap table). **Cut costs** pauses ads
 and cuts living costs. **Early payment** discounts the Crestline invoice by 3% for cash now. After Chapter 6 the
 sandbox goal is $40,000 revenue in a month.
 

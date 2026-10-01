@@ -14,7 +14,8 @@ func _init(with_officer := false) -> void:
 	title_text = "Nexus Bank — Business lending"
 	icon_name = "bank"
 	help_key = "loans"
-	panel_size = Vector2(470, 300)
+	panel_size = Vector2(570, 300)
+	pauses_time = true
 
 
 func build() -> void:
@@ -22,18 +23,24 @@ func build() -> void:
 	body.add_child(top)
 	top.add_child(UIK.label(I18n.t("Credit score %d · %s") % [Bank.credit(), I18n.t(Bank.credit_band())], 9,
 		Art.C_GREEN if Bank.credit() >= 690 else (Art.C_GOLD if Bank.credit() >= 620 else Art.C_RED), true))
+	top.add_child(UIK.tip("loan_eligibility"))
 	top.add_child(UIK.expand())
 	top.add_child(UIK.label(I18n.t("Base rate %s") % Fmt.pct(Bank.base_rate(), 1), 7, Art.C_MUTED))
 	var cols := UIK.hbox(10)
-	body.add_child(cols)
+	body.add_child(UIK.scroll(cols, Vector2(548, 215)))
 	var left := UIK.vbox(3)
 	left.custom_minimum_size = Vector2(230, 0)
 	cols.add_child(left)
 	var o := Bank.offer()
 	if not o["ok"]:
-		left.add_child(UIK.label("MARCUS REED", 7, Art.C_DIM, true))
-		left.add_child(UIK.wrap("\"" + I18n.t(str(o["error"])) + "\"", 8, Art.C_GOLD, 226))
-		left.add_child(UIK.wrap("I lend on cash flow and collateral: gross profit, money owed to you, signed contracts and stock.", 7, Art.C_MUTED, 226))
+		for requirement in Bank.eligibility():
+			var mark := "✓" if requirement["ok"] else "✗"
+			left.add_child(UIK.wrap(mark + " " + I18n.t(requirement["label"]), 8, Art.C_GREEN if requirement["ok"] else Art.C_RED, 240))
+			left.add_child(UIK.wrap(I18n.t("Current %s · required %s · gap %s") % [str(requirement["value"]), str(requirement["need"]), str(requirement["gap"])], 7, Art.C_WHITE, 240))
+			left.add_child(UIK.wrap(requirement["hint_action"], 7, Art.C_SKY, 240))
+		left.add_child(UIK.label("WHAT YOUR BOOKS SUPPORT", 7, Art.C_DIM, true))
+		for part in Bank.lending_basis()["parts"]:
+			left.add_child(UIK.kv(str(part[0]), Fmt.money0(float(part[1])), Art.C_WHITE, 7))
 	else:
 		left.add_child(UIK.label("WHAT YOUR BOOKS SUPPORT", 7, Art.C_DIM, true))
 		for r in o["reasons"]:
@@ -44,7 +51,7 @@ func build() -> void:
 		var ah := UIK.hbox(3)
 		left.add_child(ah)
 		for f in [0.25, 0.5, 0.75, 1.0]:
-			var b := UIK.button(Fmt.money0(floorf(float(o["max"]) * f / 1000.0) * 1000.0), func(): pick = f; rebuild(), "tab_active" if is_equal_approx(pick, f) else "tab")
+			var b := UIK.button(Fmt.money0(maxf(1000.0, floorf(float(o["max"]) * f / 1000.0) * 1000.0)), func(): pick = f; rebuild(), "tab_active" if is_equal_approx(pick, f) else "tab")
 			b.name = "Amt_%d" % int(f * 100)
 			ah.add_child(b)
 		var th := UIK.hbox(3)
@@ -56,12 +63,23 @@ func build() -> void:
 		var pmt := Bank.monthly_payment(amt, months)
 		left.add_child(UIK.kv("Monthly payment", Fmt.money(pmt), Art.C_WHITE, 8, true))
 		left.add_child(UIK.kv("Total interest", Fmt.money(pmt * months - amt), Art.C_MUTED, 7))
-		if officer:
+		if officer and Bank.at_bank() and Bank.marcus_on_duty():
 			var tk := UIK.button(I18n.t("Borrow %s") % Fmt.money0(amt), _take, "primary")
 			tk.name = "TakeLoan"
 			left.add_child(tk)
 		else:
 			left.add_child(UIK.wrap("Marcus Reed signs loans in person (weekdays 13:00–16:00, Nexus Bank).", 7, Art.C_SKY, 226))
+	if not officer or not Bank.at_bank() or not Bank.marcus_on_duty():
+		var entry := UIK.button("Meet Marcus Reed now" if Bank.at_bank() and Bank.marcus_on_duty() else "Book an appointment", _entry, "primary")
+		entry.name = "MeetMarcus" if Bank.at_bank() and Bank.marcus_on_duty() else "BookLoanAppointment"
+		footer.add_child(entry)
+		if not Bank.at_bank():
+			var route := UIK.button("View Nexus Bank on city map", _route)
+			route.name = "RouteNexusBank"
+			footer.add_child(route)
+			left.add_child(UIK.wrap("Use the Metro to Financial District, then enter Nexus Bank and go to the manager desk.", 7, Art.C_SKY, 240))
+	if Bank.appointment_hint() != "":
+		left.add_child(UIK.wrap(Bank.appointment_hint(), 7, Art.C_SKY, 240))
 	var right := UIK.vbox(3)
 	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	cols.add_child(right)
@@ -99,11 +117,44 @@ func _take() -> void:
 	if not o["ok"]:
 		UIRoot.toast(I18n.t(str(o["error"])), "warn", "bank")
 		return
+	UIRoot.open_modal(LoanSigningModal.new(_sign))
+
+
+func _entry() -> void:
+	if Bank.at_bank() and Bank.marcus_on_duty():
+		officer = true
+		GameState.set_flag("met_marcus")
+		if not GameState.data["npcs"].has("marcus"):
+			GameState.data["npcs"]["marcus"] = {}
+		GameState.data["npcs"]["marcus"]["met"] = true
+		Bank.B().erase("appointment")
+		Sim.cancel("bank.appointment", "id", "lending")
+		rebuild()
+	else:
+		Bank.book_appointment()
+		UIRoot.open_modal(InfoModal.make("Loan appointment", "bank", [Bank.appointment_hint()]))
+		rebuild()
+
+
+func _route() -> void:
+	var map := CityMapModal.new(false)
+	map.sel = "financial"
+	UIRoot.open_modal(map)
+
+
+func _sign() -> void:
+	if not officer or not Bank.at_bank() or not Bank.marcus_on_duty():
+		_entry()
+		return
+	var o := Bank.offer()
+	if not o["ok"]:
+		rebuild()
+		return
 	var r := Bank.take_loan(_amount(o), months)
 	if not r["ok"]:
 		UIRoot.toast(I18n.t(str(r["error"])), "warn", "bank")
 		return
-	Clock.advance(30)
+	Clock.advance(maxi(0, 17 * 60 - Clock.minute_of_day()))
 	UIRoot.toast(I18n.t("%s is in the company account. First payment in 30 days.") % Fmt.money0(float(r["loan"]["principal"])), "good", "bank")
 	rebuild()
 

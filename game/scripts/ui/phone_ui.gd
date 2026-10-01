@@ -229,6 +229,8 @@ func _bank() -> void:
 
 
 func _tasks() -> void:
+	if Bank.appointment_hint() != "":
+		content.add_child(UIK.wrap(Bank.appointment_hint(), 7, Art.C_SKY, 122))
 	_header("Tasks")
 	var ch := StoryEngine.chapter_def(GameState.data["story"].get("chapter", ""))
 	if not ch.is_empty():
