@@ -4,6 +4,9 @@ CITY VENTURE — 測試版 {VERSION}（{DATE}）
 謝謝你幫忙測試！這是一款在現代城市裡創業、經營公司的像素風模擬 RPG。
 主線第 1 到第 12 章全部可以玩完（開始電商、登記公司、聘員工、大合約、現金危機、供應衝擊、綠色轉型、跨境結算、數位支付、跨鏈橋事件、監管與收購提案），之後進入自由模式。
 
+0.1.8-test8.1（網頁版修正）：新手教學黃色提示框的第一行（「第一次創業 2/18 · …」）在網頁版變成方框亂碼，已修好。
+  原因：那一行用了沒有中文備援的字型；電腦版會向系統借字所以看不出來，瀏覽器沒有系統字型可借。
+
 0.1.8-test8 新增（依你的第四次試玩回饋）：
   ・電商進貨畫面按「+」「−」調數量時，畫面不會再跳回最上面（所有會重畫的清單都會停在原本的位置）。
   ・劇情不會再卡在「確認 Crestline 的合約」：如果你議價後對方放棄了，這一步會算完成、繼續往下走。
@@ -208,6 +211,9 @@ CITY VENTURE — Test build {VERSION} ({DATE})  ·  English
 ============================================================
 Thanks for testing! This build plays the whole main story, Chapters 1–12, then free play. Also playable: part-time
 jobs, freelance consulting, a SaaS product, your own café in Old Town and a logistics business at the Harbor.
+
+0.1.8-test8.1 (web fix): the first line of the tutorial's yellow hint bubble ("FIRST VENTURE 2/18 · ...") showed hex
+boxes in the browser build. It used a font with no Chinese fallback; desktop builds borrow a system font, browsers cannot.
 
 NEW IN 0.1.8-test8 (from your fourth playtest): pressing +/- on a stock order no longer jumps the list back to the top
 (every rebuilt list keeps its place) · the story no longer waits on Crestline's offer after the buyer walks away from a
