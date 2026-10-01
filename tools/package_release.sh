@@ -74,5 +74,6 @@ web = os.path.join(b, "web")
 pack("CityVenture-%s-Web.zip" % ver, [(f, os.path.join(web, f)) for f in sorted(os.listdir(web))] +
      [("HOW_TO_SHARE_WEB.txt", text("HOW_TO_SHARE_WEB.txt", True)), ("README_TESTERS.txt", text("README_TESTERS.txt", True))])
 PY
+python3 "$ROOT/tools/qa/build_size_check.py" --root "$ROOT"
 ( cd "$DIST" && sha256sum *.zip > SHA256SUMS.txt )
 echo "packages -> $DIST"

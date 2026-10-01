@@ -1,6 +1,10 @@
 # CITY VENTURE — Game Data Schema
 
 All content lives in `game/data/` as JSON, loaded by `DataDB` at boot.
+
+Art keys keep their existing logical pixel contract (`#62`): a matching `assets/world_detail/<key>.png`
+overrides the rendered image through `Art`, while native dimensions, sprite metadata, atlas coordinates,
+map positions and collision alpha masks remain authoritative. No saved fields or format versions change.
 Conventions:
 - `id` is a `snake_case` string, unique within its folder.
 - Money is a float in the entity's currency (Aurelia Dollar, `AUD$`, displayed as `$`).

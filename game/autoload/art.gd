@@ -32,14 +32,19 @@ func tex(path: String) -> Texture2D:
 	if _cache.has(path):
 		return _cache[path]
 	var full := "res://assets/" + path + ".png"
-	# Customisation keeps stable logical keys (also used by pose probes and saved appearances).
-	# Native and detail layers share geometry; prefer their direct 4x rendering when present.
-	if (path.begins_with("characters/") or path.begins_with("portraits/")) and not path.get_file().begins_with("npc_"):
-		var detail := "res://assets/world_detail/" + path + ".png"
-		if ResourceLoader.exists(detail):
-			full = detail
 	var t: Texture2D = null
-	if ResourceLoader.exists(full):
+	var detail := "res://assets/world_detail/" + path + ".png"
+	if not path.begins_with("world_detail/") and ResourceLoader.exists(detail):
+		var source: Texture2D = load(detail)
+		var native: Texture2D = load(full) if ResourceLoader.exists(full) else null
+		var logical := Vector2i(native.get_size()) if native != null else Vector2i(source.get_size() / 4.0)
+		# Keep every caller's geometry (including atlas regions and nine-slice source margins) in
+		# native pixels. Size override changes UV coordinates, not the high-resolution image data.
+		var image_texture := ImageTexture.create_from_image(source.get_image())
+		image_texture.set_size_override(logical)
+		image_texture.set_meta("detail_path", detail)
+		t = image_texture
+	elif ResourceLoader.exists(full):
 		t = load(full)
 	else:
 		push_warning("Art: missing texture " + full)
@@ -55,7 +60,8 @@ func has_tex(path: String) -> bool:
 		return _cache[path] != null
 	if _absent.has(path):
 		return false
-	var ok := ResourceLoader.exists("res://assets/" + path + ".png")
+	var ok := ResourceLoader.exists("res://assets/" + path + ".png") or (
+		not path.begins_with("world_detail/") and ResourceLoader.exists("res://assets/world_detail/" + path + ".png"))
 	if not ok:
 		_absent[path] = true   # characters spawn all day; don't hit the filesystem for the same missing pose again
 	return ok

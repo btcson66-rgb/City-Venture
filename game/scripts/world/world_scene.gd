@@ -286,6 +286,10 @@ func _footprint(key: String, tex: Texture2D, left: int, w: int, band: int) -> Ve
 		return _foot_cache[ck]
 	var out := Vector2(0, w)
 	var img := tex.get_image() if tex != null else null
+	# Collision is defined by the native alpha mask. A detail texture keeps logical dimensions
+	# but get_image() intentionally returns all of its physical pixels.
+	if tex != null and tex.has_meta("detail_path") and ResourceLoader.exists("res://assets/" + key + ".png"):
+		img = (load("res://assets/" + key + ".png") as Texture2D).get_image()
 	if img != null:
 		if img.is_compressed():
 			img.decompress()
