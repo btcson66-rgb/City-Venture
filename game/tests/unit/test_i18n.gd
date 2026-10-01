@@ -57,3 +57,30 @@ func test_chinese_company_name_registers() -> void:
 	runner.eq(Company.validate_name("河光商行"), "", "Chinese company name is valid")
 	runner.check(Company.slug("河光商行").begins_with("u"), "ASCII-safe id for a Chinese name")
 	runner.check(Company.slug("Riverlight Goods") == "riverlight_goods", "English ids unchanged")
+
+
+## The web build has no system fonts to fall back on: Chinese text drawn with a bare font file shows as hex boxes.
+## Only the font setup may touch Art.font_body / Art.font_title; everything else uses the UIK wrappers.
+func test_no_text_drawn_with_a_bare_font_file() -> void:
+	var allowed := ["res://autoload/art.gd", "res://scripts/ui/uik.gd", "res://scripts/ui/i18n.gd"]
+	var bad: Array = []
+	for path in _scripts("res://scripts") + _scripts("res://autoload"):
+		if path in allowed:
+			continue
+		var src := FileAccess.get_file_as_string(path)
+		for bare in ["Art.font_body", "Art.font_title"]:
+			if src.contains(bare):
+				bad.append(path + " uses " + bare)
+	runner.eq(bad, [], "text uses the UIK font wrappers (they carry the CJK fallback)")
+	for v in [UIK.body_font(), UIK.bold_font(), UIK.title_font(), UIK.num_font()]:
+		runner.check(not (v as FontVariation).fallbacks.is_empty(), "every UI font has a CJK fallback")
+
+
+func _scripts(dir: String) -> Array:
+	var out: Array = []
+	for f in DirAccess.get_files_at(dir):
+		if f.ends_with(".gd"):
+			out.append(dir + "/" + f)
+	for d in DirAccess.get_directories_at(dir):
+		out.append_array(_scripts(dir + "/" + d))
+	return out
