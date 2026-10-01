@@ -237,6 +237,14 @@ msgstr ""
 msgid "%d units"
 msgstr ""
 
+#: scripts/ui/manufacturing_ui.gd:103
+msgid "%d units arrive in %d days"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:99
+msgid "%d units · %s/unit"
+msgstr ""
+
 #: scripts/sim/cafe.gd:360
 msgid "%d walked out of the queue."
 msgstr ""
@@ -373,6 +381,10 @@ msgstr ""
 msgid "%s pays"
 msgstr ""
 
+#: scripts/ui/manufacturing_ui.gd:112
+msgid "%s per unit"
+msgstr ""
+
 #: scripts/sim/staff.gd:336
 msgid "%s quit."
 msgstr ""
@@ -419,6 +431,22 @@ msgstr ""
 
 #: scripts/sim/cafe.gd:352
 msgid "%s till: %d customers"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:107
+msgid "%s · %d units · %s–%s/unit · due in %d days · defects ≤%.1f%%"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:167
+msgid "%s · %d units · defects %.1f%% · sampled %.0f%% · escaped %.1f units"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:117
+msgid "%s · %d/%d units complete"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:153
+msgid "%s · %s · %d hours · %s"
 msgstr ""
 
 #: scripts/sim/acquisition.gd:60
@@ -511,6 +539,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1218
 msgid "+%d arriving"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:100
+msgid "+100 units"
 msgstr ""
 
 #: data/events/supplier_price_increase.json
@@ -689,6 +721,10 @@ msgstr ""
 msgid "A low minimum lets you test a product cheaply; big orders tie up more cash in stock."
 msgstr ""
 
+#: data/help/glossary.json
+msgid "A low quote may lose money; a high quote loses the client."
+msgstr ""
+
 #: data/jobs/cowork_host.json
 msgid "A member asks where to find cheap suppliers. You point them to Ken."
 msgstr ""
@@ -799,6 +835,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:577
 msgid "ARRIVES "
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:24
+msgid "ASSET-"
 msgstr ""
 
 #: scripts/ui/modals/bank_modal.gd:12
@@ -977,6 +1017,10 @@ msgstr ""
 msgid "All save slots are in use. Choose one for the new game. The old save is moved to a backup folder, not deleted."
 msgstr ""
 
+#: data/help/glossary.json
+msgid "Allocate weekly hours. Each machine needs one hour between batches."
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1454
 msgid "Allocated"
 msgstr ""
@@ -1019,6 +1063,10 @@ msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:7
 msgid "Americano"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "An RFQ specifies units, deadline, price range and maximum defects."
 msgstr ""
 
 #: data/help/glossary.json
@@ -1123,6 +1171,10 @@ msgstr ""
 
 #: data/character/options.json
 msgid "Arched"
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:49
+msgid "Arrange a business loan before automation."
 msgstr ""
 
 #: data/story/chapters.json
@@ -1239,6 +1291,10 @@ msgstr ""
 
 #: data/regions/auroria.json
 msgid "Auroria"
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:50
+msgid "Automation is already installed."
 msgstr ""
 
 #: data/businesses/automotive.json
@@ -1725,6 +1781,10 @@ msgstr ""
 msgid "Buy low. Sell less low. Got it, haha."
 msgstr ""
 
+#: scripts/ui/manufacturing_ui.gd:89
+msgid "Buy machine · $28,000"
+msgstr ""
+
 #: scripts/ui/tutorial.gd:56
 msgid "Buy phone stands"
 msgstr ""
@@ -1759,6 +1819,14 @@ msgstr ""
 
 #: scripts/ui/modals/clothing_shop_modal.gd:65
 msgid "Buy — %s"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:89
+msgid "BuyMachine"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:101
+msgid "BuyMaterials"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:834
@@ -2193,6 +2261,18 @@ msgstr ""
 msgid "Choose a business"
 msgstr ""
 
+#: scripts/sim/manufacturing.gd:122
+msgid "Choose a factory machine."
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:120 scripts/sim/manufacturing.gd:194
+msgid "Choose an active OEM order."
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:121
+msgid "Choose an hourly slot within the coming week."
+msgstr ""
+
 #: scripts/sim/ecommerce.gd:434
 msgid "Choose between 1 and %d returnable units."
 msgstr ""
@@ -2455,6 +2535,10 @@ msgstr ""
 
 #: scripts/sim/company.gd:70
 msgid "Company registration fee — %s"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:153
+msgid "Completed"
 msgstr ""
 
 #: scripts/sim/story_engine.gd:110
@@ -2909,6 +2993,10 @@ msgstr ""
 msgid "Deliver Crestline's lamps before the deadline (Company OS → Contracts)"
 msgstr ""
 
+#: scripts/ui/manufacturing_ui.gd:118
+msgid "Deliver and invoice"
+msgstr ""
+
 #: data/help/help.json
 msgid "Deliver before the deadline for the full fee; late work loses 20% and your reputation. Clients pay on their terms."
 msgstr ""
@@ -2939,6 +3027,10 @@ msgstr ""
 
 #: scripts/sim/ecommerce.gd:173
 msgid "Delivered: %d × %s → %s"
+msgstr ""
+
+#: data/events/manufacturing_shortage.json
+msgid "Deliveries slip by 5 days and material prices rise 30%."
 msgstr ""
 
 #: data/help/glossary.json
@@ -2979,6 +3071,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:265
 msgid "Deposits"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Deposits are liabilities until delivery. Idle machines still cost rent."
 msgstr ""
 
 #: scripts/ui/minigames/route_game.gd:318
@@ -3313,6 +3409,10 @@ msgstr ""
 msgid "Employer registration — %s"
 msgstr ""
 
+#: scripts/sim/manufacturing.gd:129
+msgid "Enable overtime outside weekday working hours."
+msgstr ""
+
 #: scripts/ui/tutorial.gd:89
 msgid "End the day"
 msgstr ""
@@ -3329,12 +3429,20 @@ msgstr ""
 msgid "Enter %s"
 msgstr ""
 
-#: scripts/sim/effects.gd:83
+#: scripts/sim/manufacturing.gd:100
+msgid "Enter a positive unit price."
+msgstr ""
+
+#: scripts/sim/effects.gd:88
 msgid "Equity investment"
 msgstr ""
 
 #: scripts/ui/hud.gd:108
 msgid "Esc"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Escaped defects trigger refunds, fines and lower credit."
 msgstr ""
 
 #: data/help/help.json
@@ -3397,11 +3505,11 @@ msgstr ""
 msgid "Evening cut-off: everything out by 19:00, and it is."
 msgstr ""
 
-#: scripts/sim/effects.gd:22
+#: scripts/sim/effects.gd:27
 msgid "Event cost"
 msgstr ""
 
-#: scripts/sim/effects.gd:24
+#: scripts/sim/effects.gd:29
 msgid "Event income"
 msgstr ""
 
@@ -3489,6 +3597,10 @@ msgstr ""
 msgid "Eyebrows"
 msgstr ""
 
+#: data/buildings/ferro_supply.json
+msgid "FERRO SUPPLY"
+msgstr ""
+
 #: data/districts/civic_center.json
 msgid "FINANCIAL →"
 msgstr ""
@@ -3533,12 +3645,56 @@ msgstr ""
 msgid "Factories and materials."
 msgstr ""
 
+#: scripts/ui/manufacturing_ui.gd:81
+msgid "Factory cash: %s · materials: %d units"
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:360
+msgid "Factory materials liquidated"
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:182
+msgid "Factory overtime"
+msgstr ""
+
 #: data/regions/lumina.json
 msgid "Factory prices"
 msgstr ""
 
 #: data/suppliers/lumina_direct.json
 msgid "Factory prices via an import agent. Long lead time, big MOQ, more duds."
+msgstr ""
+
+#: data/events/manufacturing_recall.json
+msgid "Factory quality recall"
+msgstr ""
+
+#: data/economy/staff.json data/npcs/tomas_varga.json
+msgid "Factory technician"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:125
+msgid "FactoryAutomation"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:126
+msgid "FactoryBrand"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:127
+msgid "FactoryBrandBatch"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:90
+msgid "FactoryEmployer"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:149
+msgid "FactoryOutsource"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:148
+msgid "FactoryOvertime"
 msgstr ""
 
 #: scripts/sim/bank.gd:32
@@ -3567,6 +3723,30 @@ msgstr ""
 
 #: data/character/options.json
 msgid "Feminine"
+msgstr ""
+
+#: data/buildings/ferro_supply.json
+msgid "Ferro Supply"
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:81
+msgid "Ferro material purchase"
+msgstr ""
+
+#: data/events/manufacturing_shortage.json
+msgid "Ferro material shortage"
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:316
+msgid "Ferro materials arrived"
+msgstr ""
+
+#: data/npcs/rita_hale.json
+msgid "Ferro sales representative"
+msgstr ""
+
+#: data/dialogue/rita_hale_intro.json
+msgid "Ferro supplies material lots. Watch minimum quantities, delivery dates and weekly prices."
 msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:69
@@ -3607,6 +3787,10 @@ msgstr ""
 
 #: scripts/sim/jobs.gd:55
 msgid "Finish the agreed scope before delivery."
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:43
+msgid "Finish the current recruitment first."
 msgstr ""
 
 #: data/story/chapters.json
@@ -4309,12 +4493,24 @@ msgstr ""
 msgid "Hire"
 msgstr ""
 
+#: scripts/ui/manufacturing_ui.gd:91
+msgid "Hire Tomas · $1,100/week"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1135
 msgid "Hire a Software Developer (People tab) to build while you do other things."
 msgstr ""
 
+#: scripts/sim/manufacturing.gd:123
+msgid "Hire a technician first."
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Hire your first employee (applicants reply within a day)"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:91
+msgid "HireTomas"
 msgstr ""
 
 #: scripts/sim/staff.gd:145
@@ -4415,6 +4611,10 @@ msgstr ""
 
 #: data/dialogue/sam_owner.json
 msgid "How's the van treating you? Listen for the gearbox on the bridges, and don't leave it idling at the kerb."
+msgstr ""
+
+#: data/dialogue/tomas_varga_intro.json
+msgid "I can run your machines for $1,100 a week. Register as an employer and hire me in Line Planner."
 msgstr ""
 
 #: data/dialogue/elena_cameo.json
@@ -4601,6 +4801,10 @@ msgstr ""
 msgid "Independent. It suits you. In your place I might have said no too."
 msgstr ""
 
+#: data/districts/industrial.json
+msgid "Industrial"
+msgstr ""
+
 #: data/city/aurelia.json
 msgid "Industrial Zone"
 msgstr ""
@@ -4615,6 +4819,30 @@ msgstr ""
 
 #: data/regions/almeria.json data/regions/karu.json data/regions/solterra.json
 msgid "Infrastructure"
+msgstr ""
+
+#: data/help/help.json
+msgid "Inspect more to catch defects, or accept refunds and credit risk. Maintenance repairs broken machines."
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:138
+msgid "Inspection must be between 0% and 100%."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Inspection slows production and catches defects that need paid rework."
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:163
+msgid "Inspection_%d"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:125
+msgid "Install CNC · business loan required"
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:253
+msgid "Install automation before your own brand."
 msgstr ""
 
 #: data/products/water_bottle.json
@@ -4661,6 +4889,10 @@ msgstr ""
 msgid "International wire: cheap (1% + $25) but 5 to 9 days."
 msgstr ""
 
+#: scripts/sim/manufacturing.gd:105
+msgid "Invalid order terms."
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:7
 msgid "Inventory"
 msgstr ""
@@ -4677,7 +4909,7 @@ msgstr ""
 msgid "Inventory: what you have and where"
 msgstr ""
 
-#: scripts/sim/effects.gd:82
+#: scripts/sim/effects.gd:87
 msgid "Investors buy shares in a registered company."
 msgstr ""
 
@@ -4801,6 +5033,10 @@ msgstr ""
 msgid "Ito"
 msgstr ""
 
+#: scripts/ui/manufacturing_ui.gd:24
+msgid "JOB-"
+msgstr ""
+
 #: autoload/clock.gd:14
 msgid "Jan"
 msgstr ""
@@ -4865,6 +5101,10 @@ msgstr ""
 msgid "Just type. (Esc leaves the session.)"
 msgstr ""
 
+#: data/buildings/kessler_precision.json
+msgid "KESSLER"
+msgstr ""
+
 #: data/../assets/buildings/buildings_meta.json
 msgid "KURO RAMEN"
 msgstr ""
@@ -4897,8 +5137,16 @@ msgstr ""
 msgid "Keep 100%. Find the cash another way."
 msgstr ""
 
+#: data/events/manufacturing_cancel.json
+msgid "Keep at most the incurred production cost from the deposit; refund the rest."
+msgstr ""
+
 #: data/help/help.json
 msgid "Keep coffee supplies in (they arrive at 6:00 the next morning) and set the daily pastry order; unsold pastries are binned at closing."
+msgstr ""
+
+#: data/events/manufacturing_cancel.json
+msgid "Keep documented production costs"
 msgstr ""
 
 #: data/events/low_cash_warning.json
@@ -4959,6 +5207,18 @@ msgstr ""
 
 #: data/events/supplier_price_increase.json
 msgid "Ken: \"Smart. Shipping tomorrow.\""
+msgstr ""
+
+#: data/buildings/kessler_precision.json scripts/sim/manufacturing.gd:95
+msgid "Kessler Precision"
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:326
+msgid "Kessler subcontract production"
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:103
+msgid "Kessler won this RFQ. Your price was too high."
 msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:9
@@ -5105,6 +5365,26 @@ msgstr ""
 msgid "Leading spaces are filled in for you, and a run of spaces takes one press. A wrong key flashes red; just type the right one."
 msgstr ""
 
+#: data/buildings/unit12_factory.json
+msgid "Lease Unit 12"
+msgstr ""
+
+#: data/economy/staff.json
+msgid "Lease Unit 12 before hiring a technician."
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:21
+msgid "Lease Unit 12 in Industrial first."
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:32
+msgid "Lease Unit 12 in Industrial. Rent a machine, register as an employer and hire Tomas. OEM clients pay deposits and settle invoices on Net 30 terms."
+msgstr ""
+
+#: data/help/help.json
+msgid "Lease Unit 12, rent a machine and hire Tomas. Fixed costs continue even when the line is idle."
+msgstr ""
+
 #: scripts/ui/modals/lease_modal.gd:57
 msgid "Lease signed. Welcome to Suite 2B."
 msgstr ""
@@ -5163,6 +5443,10 @@ msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:7
 msgid "Lena"
+msgstr ""
+
+#: data/npcs/lena_park.json scripts/sim/manufacturing.gd:95
+msgid "Lena Park"
 msgstr ""
 
 #: scripts/sim/bank.gd:112
@@ -5275,6 +5559,14 @@ msgstr ""
 
 #: scripts/ui/minigames/typing_game.gd:55
 msgid "Line %d / %d"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:17 scripts/ui/manufacturing_ui.gd:69
+msgid "Line Planner"
+msgstr ""
+
+#: data/help/help.json
+msgid "Line Planner: OEM production"
 msgstr ""
 
 #: scripts/sim/insolvency.gd:120
@@ -5517,6 +5809,18 @@ msgstr ""
 msgid "MVP: %d / %d dev hours · your team adds %.1f h per workday"
 msgstr ""
 
+#: scripts/ui/manufacturing_ui.gd:24
+msgid "Machine"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:94
+msgid "Machine %s · %d units/hour"
+msgstr ""
+
+#: data/buildings/unit12_factory.json data/help/glossary.json scripts/ui/manufacturing_ui.gd:130
+msgid "Machine schedule"
+msgstr ""
+
 #: data/events/supply_shock_plan.json
 msgid "Made in the city, so no port and no surcharge: pricier per unit, but one-day delivery. Shows up in Company OS → Operations."
 msgstr ""
@@ -5541,7 +5845,7 @@ msgstr ""
 msgid "Make your first payroll: keep cash in the company for Friday 17:00"
 msgstr ""
 
-#: data/businesses/manufacturing.json data/regions/lumina.json
+#: data/businesses/manufacturing.json data/help/glossary.json data/regions/lumina.json scripts/sim/manufacturing.gd:371
 msgid "Manufacturing"
 msgstr ""
 
@@ -5625,6 +5929,14 @@ msgstr ""
 msgid "Master"
 msgstr ""
 
+#: scripts/ui/manufacturing_ui.gd:98
+msgid "MaterialLess"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:100
+msgid "MaterialMore"
+msgstr ""
+
 #: data/regions/northridge.json
 msgid "Mature regulation"
 msgstr ""
@@ -5667,6 +5979,10 @@ msgstr ""
 
 #: data/story/chapters.json
 msgid "Meet Daniel Wong at Nexus Co-work (Thursdays 17:00–20:00)"
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:68
+msgid "Meet Ferro's minimum order quantity."
 msgstr ""
 
 #: scripts/ui/modals/loan_modal.gd:93
@@ -5827,6 +6143,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "Morale drops when pay is late or work piles up."
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:160
+msgid "More inspection slows the line. Inspected defects cost rework; escaped defects cause refunds, penalties and lower credit."
 msgstr ""
 
 #: scripts/frontend/character_creator.gd:149
@@ -5997,8 +6317,16 @@ msgstr ""
 msgid "Next day"
 msgstr ""
 
+#: scripts/ui/manufacturing_ui.gd:141
+msgid "Next machine"
+msgstr ""
+
 #: data/dialogue/ana_register.json
 msgid "Next! Hi. What can I do for you?"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:141
+msgid "NextMachine"
 msgstr ""
 
 #: data/buildings/nexus_bank.json data/economy/logistics.json data/help/help.json data/jobs/bank_teller.json
@@ -6105,12 +6433,20 @@ msgstr ""
 msgid "No defects on arrival · delivered by the due date"
 msgstr ""
 
+#: scripts/sim/manufacturing.gd:208
+msgid "No delivered batch to recall."
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1395
 msgid "No driver yet. Hire a Van Driver in the People tab to have the van work while you do something else."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:701
 msgid "No employees yet. Every order is packed by you, which is why time matters."
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:51
+msgid "No free machine bay."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:982
@@ -6253,8 +6589,20 @@ msgstr ""
 msgid "Not enough cash"
 msgstr ""
 
+#: scripts/sim/manufacturing.gd:289
+msgid "Not enough cash for conversion costs."
+msgstr ""
+
 #: scripts/sim/ecommerce.gd:439 scripts/ui/modals/purchase_return_modal.gd:52
 msgid "Not enough cash for return shipping: %s."
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:255
+msgid "Not enough cash for the mould fee."
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:75
+msgid "Not enough cash for this purchase."
 msgstr ""
 
 #: scripts/sim/bank.gd:200 scripts/sim/company.gd:105
@@ -6263,6 +6611,10 @@ msgstr ""
 
 #: scripts/sim/ecommerce.gd:254 scripts/sim/ecommerce.gd:94 scripts/sim/rails.gd:271 scripts/sim/rails.gd:301
 msgid "Not enough cash. You need %s."
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:73
+msgid "Not enough factory storage capacity."
 msgstr ""
 
 #: scripts/sim/contracts.gd:352
@@ -6371,6 +6723,38 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1130
 msgid "Now the real work starts: keep them subscribed."
+msgstr ""
+
+#: data/events/manufacturing_cancel.json scripts/sim/manufacturing.gd:236
+msgid "OEM client cancellation"
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:213
+msgid "OEM defect refund"
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:217
+msgid "OEM defects"
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:181
+msgid "OEM material consumed"
+msgstr ""
+
+#: data/help/glossary.json scripts/ui/manufacturing_ui.gd:104 scripts/ui/manufacturing_ui.gd:69
+msgid "OEM orders"
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:104
+msgid "OEM phone stands"
+msgstr ""
+
+#: data/npcs/lena_park.json
+msgid "OEM procurement"
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:216
+msgid "OEM quality penalty"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:29
@@ -6585,6 +6969,10 @@ msgstr ""
 msgid "Open Company OS at your laptop at home, or at a hot desk while your co-work pass is valid. Everything about your business happens here."
 msgstr ""
 
+#: data/buildings/ferro_supply.json data/buildings/kessler_precision.json data/buildings/shift_diner.json data/buildings/unit12_factory.json
+msgid "Open Line Planner"
+msgstr ""
+
 #: scripts/ui/tutorial.gd:27
 msgid "Open Messages"
 msgstr ""
@@ -6645,12 +7033,28 @@ msgstr ""
 msgid "Open now"
 msgstr ""
 
+#: scripts/sim/manufacturing.gd:20
+msgid "Open the business bank account first."
+msgstr ""
+
 #: data/dialogue/lina_rails_again.json
 msgid "Open the escrow account after all."
 msgstr ""
 
+#: scripts/ui/manufacturing_ui.gd:79
+msgid "Open the factory"
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:221 scripts/sim/manufacturing.gd:38 scripts/sim/manufacturing.gd:48 scripts/sim/manufacturing.gd:67
+msgid "Open the factory first."
+msgstr ""
+
 #: scripts/ui/tutorial.gd:27
 msgid "Open your phone"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:79
+msgid "OpenFactory"
 msgstr ""
 
 #: scripts/sim/company.gd:95
@@ -6659,6 +7063,10 @@ msgstr ""
 
 #: scripts/sim/rails.gd:42
 msgid "Opened an escrow account on Lina Zhao's payments platform."
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:33
+msgid "Opened the Unit 12 factory."
 msgstr ""
 
 #: autoload/game_state.gd:35
@@ -6705,6 +7113,10 @@ msgstr ""
 msgid "Or digital dollars through a licensed exchange. Minutes, tiny fee. But you're trusting the platform, not a bank."
 msgstr ""
 
+#: scripts/ui/manufacturing_ui.gd:24
+msgid "Order"
+msgstr ""
+
 #: scripts/ui/minigames/pack_game.gd:44
 msgid "Order %d / %d"
 msgstr ""
@@ -6713,7 +7125,15 @@ msgstr ""
 msgid "Order %d more from %s (%s)"
 msgstr ""
 
-#: data/buildings/byte_and_bean.json
+#: scripts/ui/manufacturing_ui.gd:140
+msgid "Order %s · machine %s"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:101
+msgid "Order Ferro materials"
+msgstr ""
+
+#: data/buildings/byte_and_bean.json data/buildings/shift_diner.json
 msgid "Order an oat latte ($5.20)"
 msgstr ""
 
@@ -6769,6 +7189,10 @@ msgstr ""
 msgid "Outfit"
 msgstr ""
 
+#: scripts/ui/manufacturing_ui.gd:149
+msgid "Outsource to Kessler · higher unit cost"
+msgstr ""
+
 #: data/character/options.json
 msgid "Oval"
 msgstr ""
@@ -6783,6 +7207,14 @@ msgstr ""
 
 #: scripts/sim/bank.gd:106
 msgid "Overdue or called loans"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Overlapping orders cannot share a machine; overtime costs 1.5 times normal wages."
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:148
+msgid "Overtime · wage ×1.5, yield −2%"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:6
@@ -6803,6 +7235,18 @@ msgstr ""
 
 #: scripts/ui/modals/pack_ship_modal.gd:56
 msgid "Own van · same day (%s fuel, about %s of your time)"
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:292
+msgid "Own-brand conversion"
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:309
+msgid "Own-brand goods are ready for ecommerce."
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:256
+msgid "Own-brand mould fee"
 msgstr ""
 
 #: scripts/sim/logistics.gd:606
@@ -7119,6 +7563,10 @@ msgstr ""
 
 #: scripts/ui/modals/loan_modal.gd:125
 msgid "Pay off"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:126
+msgid "Pay own-brand mould fee"
 msgstr ""
 
 #: data/help/help.json
@@ -7461,6 +7909,10 @@ msgstr ""
 msgid "Premium consumers"
 msgstr ""
 
+#: scripts/sim/manufacturing.gd:268 scripts/sim/manufacturing.gd:278
+msgid "Prepare a working machine and enough materials."
+msgstr ""
+
 #: scripts/frontend/character_creator.gd:130
 msgid "Presentation"
 msgstr ""
@@ -7519,6 +7971,10 @@ msgstr ""
 
 #: scripts/ui/modals/registration_modal.gd:50
 msgid "Processing time"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:127
+msgid "Produce 100 own-brand units"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:650 scripts/ui/modals/company_os.gd:834
@@ -7581,6 +8037,14 @@ msgstr ""
 msgid "Quality"
 msgstr ""
 
+#: scripts/ui/manufacturing_ui.gd:69
+msgid "Quality results"
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:183
+msgid "Quality rework"
+msgstr ""
+
 #: data/regions/lumina.json
 msgid "Quality variance"
 msgstr ""
@@ -7607,6 +8071,18 @@ msgstr ""
 
 #: scripts/ui/modals/pause_menu.gd:69
 msgid "Quit to title"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:27 scripts/ui/manufacturing_ui.gd:77
+msgid "Quote OEM orders, buy raw materials, schedule machines and inspect each batch."
+msgstr ""
+
+#: data/dialogue/lena_park_intro.json
+msgid "Quote a price, reserve capacity and meet the quality specification. Kessler is bidding too."
+msgstr ""
+
+#: data/help/help.json
+msgid "Quote orders, order materials and reserve machine hours within the next week. Changeovers need one hour."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1216
@@ -7821,6 +8297,10 @@ msgstr ""
 msgid "Refund + take it back"
 msgstr ""
 
+#: data/events/manufacturing_recall.json
+msgid "Refund 20% of a shipped batch, pay a quality penalty and lose credit."
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:593
 msgid "Refund due %s"
 msgstr ""
@@ -7839,6 +8319,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:593
 msgid "Refund sold in liquidation"
+msgstr ""
+
+#: data/events/manufacturing_recall.json
+msgid "Refund the affected batch"
 msgstr ""
 
 #: scripts/ui/modals/purchase_return_modal.gd:47
@@ -7881,8 +8365,16 @@ msgstr ""
 msgid "Register a company at City Hall first."
 msgstr ""
 
-#: scripts/sim/staff.gd:55
+#: data/properties/unit12_factory.json
+msgid "Register a company before leasing the factory."
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:18 scripts/sim/staff.gd:55
 msgid "Register a company first."
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:90
+msgid "Register as an employer"
 msgstr ""
 
 #: data/help/help.json
@@ -8029,6 +8521,10 @@ msgstr ""
 msgid "Rent bounced. I've added the $%d late fee. Please sort it out this week."
 msgstr ""
 
+#: scripts/ui/manufacturing_ui.gd:88
+msgid "Rent machine · $1,400/month"
+msgstr ""
+
 #: scripts/sim/living.gd:54
 msgid "Rent paid into overdraft. Late fee charged."
 msgstr ""
@@ -8047,6 +8543,10 @@ msgstr ""
 
 #: data/dialogue/jun_chat.json
 msgid "Rent's going up everywhere, you know. Sell stuff people actually need."
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:88
+msgid "RentMachine"
 msgstr ""
 
 #: data/help/help.json
@@ -8111,6 +8611,14 @@ msgstr ""
 
 #: data/city/aurelia.json
 msgid "Research and talent."
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:150
+msgid "Reserve production slot"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:150
+msgid "ReserveSlot"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:650
@@ -8225,6 +8733,10 @@ msgstr ""
 msgid "Revenue, gross profit, expenses and operating profit are shown by business, for this month and last month."
 msgstr ""
 
+#: scripts/ui/manufacturing_ui.gd:156
+msgid "Review OEM orders"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1441
 msgid "Review next action"
 msgstr ""
@@ -8259,6 +8771,10 @@ msgstr ""
 
 #: scripts/ui/minigames/photo_shoot_game.gd:8
 msgid "Ring light"
+msgstr ""
+
+#: data/npcs/rita_hale.json
+msgid "Rita Hale"
 msgstr ""
 
 #: data/city/aurelia.json data/districts/riverside.json scripts/ui/minigames/pack_game.gd:9 scripts/ui/minigames/parcel_sort_game.gd:7
@@ -8373,6 +8889,10 @@ msgstr ""
 msgid "Run %s was cancelled: the deadline passed."
 msgstr ""
 
+#: scripts/ui/manufacturing_ui.gd:142
+msgid "Run for %d hours"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:211
 msgid "Run it from home for now"
 msgstr ""
@@ -8387,6 +8907,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "Runs are posted every morning at 7:00: a client, 4 to 6 stops, a fee and a deadline. Accept one, then drive it: you plan the route on a map."
+msgstr ""
+
+#: data/economy/staff.json
+msgid "Runs factory machines. Skill lowers defects; payroll remains due during downtime."
 msgstr ""
 
 #: data/economy/staff.json
@@ -8411,6 +8935,10 @@ msgstr ""
 
 #: autoload/sound.gd:25 autoload/sound.gd:34 autoload/sound.gd:60 autoload/sound.gd:61
 msgid "SFX"
+msgstr ""
+
+#: data/buildings/shift_diner.json
+msgid "SHIFT DINER"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:27
@@ -8509,6 +9037,14 @@ msgstr ""
 msgid "Same spend, ~30% fewer clicks."
 msgstr ""
 
+#: data/help/glossary.json scripts/ui/manufacturing_ui.gd:159
+msgid "Sampling inspection"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:164
+msgid "Sampling: %.0f%% · credit: %d points"
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Sandbox"
 msgstr ""
@@ -8547,6 +9083,14 @@ msgstr ""
 
 #: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:284
 msgid "Saved (slot %d)."
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:122
+msgid "Schedule this order"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:153
+msgid "Scheduled"
 msgstr ""
 
 #: data/city/aurelia.json
@@ -8625,6 +9169,10 @@ msgstr ""
 msgid "Send me the terms."
 msgstr ""
 
+#: scripts/ui/manufacturing_ui.gd:114
+msgid "Send quote"
+msgstr ""
+
 #: data/events/crestline_big_offer.json
 msgid "Send the contract. I'll review it."
 msgstr ""
@@ -8655,6 +9203,10 @@ msgstr ""
 
 #: scripts/sim/ledger.gd:31
 msgid "Servers"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:95
+msgid "Service machine"
 msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:140
@@ -8699,6 +9251,10 @@ msgstr ""
 
 #: scripts/ui/tutorial.gd:23
 msgid "Shift"
+msgstr ""
+
+#: data/buildings/shift_diner.json
+msgid "Shift Diner"
 msgstr ""
 
 #: data/jobs/barista.json
@@ -8989,6 +9545,10 @@ msgstr ""
 msgid "Small cup"
 msgstr ""
 
+#: data/properties/unit12_factory.json
+msgid "Small factory with three machine bays and material storage. Rent and deposit: $11,400 on signing."
+msgstr ""
+
 #: scripts/ui/minigames/photo_shoot_game.gd:9
 msgid "Small plant"
 msgstr ""
@@ -9061,7 +9621,7 @@ msgstr ""
 msgid "Sold %d × %s to liquidator (%d%% of cost)"
 msgstr ""
 
-#: scripts/sim/effects.gd:90
+#: scripts/sim/effects.gd:95
 msgid "Sold %d%% of %s for %s."
 msgstr ""
 
@@ -9165,6 +9725,10 @@ msgstr ""
 msgid "Start a %d-hour shift (up to +%s)"
 msgstr ""
 
+#: scripts/sim/manufacturing.gd:19
+msgid "Start a new company before opening another industry."
+msgstr ""
+
 #: scripts/ui/modals/save_list_modal.gd:13
 msgid "Start a new game"
 msgstr ""
@@ -9177,12 +9741,20 @@ msgstr ""
 msgid "Start an ecommerce side business"
 msgstr ""
 
+#: scripts/ui/manufacturing_ui.gd:142
+msgid "Start at %02d:00"
+msgstr ""
+
 #: scripts/ui/industry_views.gd:22 scripts/ui/modals/company_os.gd:965
 msgid "Start freelancing"
 msgstr ""
 
 #: scripts/ui/industry_views.gd:32
 msgid "Start from any laptop: Company OS → SaaS."
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:142
+msgid "Start in %d days"
 msgstr ""
 
 #: scripts/frontend/character_creator.gd:104
@@ -9373,7 +9945,7 @@ msgstr ""
 msgid "Supplier bills payable"
 msgstr ""
 
-#: scripts/sim/effects.gd:38
+#: scripts/sim/effects.gd:43
 msgid "Supplier doesn't carry that."
 msgstr ""
 
@@ -9471,6 +10043,10 @@ msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:79
 msgid "TODAY'S BOOKINGS"
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:39 scripts/sim/manufacturing.gd:44 scripts/sim/manufacturing.gd:45
+msgid "TOMAS"
 msgstr ""
 
 #: scripts/ui/hud.gd:105 scripts/ui/tutorial.gd:27
@@ -9825,6 +10401,14 @@ msgstr ""
 msgid "The existing liquidation pays 80% of receivables once. The closed company cannot collect again or use your new company stock; old contracts remain visible as records."
 msgstr ""
 
+#: scripts/sim/manufacturing.gd:27
+msgid "The factory is already open."
+msgstr ""
+
+#: data/events/manufacturing_cancel.json data/events/manufacturing_recall.json data/events/manufacturing_shortage.json
+msgid "The factory ledger and schedule have been updated."
+msgstr ""
+
 #: scripts/ui/minigames/parcel_sort_game.gd:28
 msgid "The first parcels show the district name. Later ones only have a postcode, and halfway through the cheat sheet goes away."
 msgstr ""
@@ -9863,6 +10447,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "The longer it is, the earlier you must reorder, or you run out and lose sales."
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:254
+msgid "The mould is already paid for."
 msgstr ""
 
 #: data/dialogue/lina_bridge.json
@@ -10037,6 +10625,10 @@ msgstr ""
 msgid "This %s."
 msgstr ""
 
+#: scripts/sim/manufacturing.gd:99
+msgid "This RFQ has expired."
+msgstr ""
+
 #: scripts/sim/contracts.gd:207
 msgid "This contract belongs to another company."
 msgstr ""
@@ -10085,12 +10677,20 @@ msgstr ""
 msgid "This offer is no longer open."
 msgstr ""
 
+#: scripts/sim/manufacturing.gd:210
+msgid "This order was already fully refunded."
+msgstr ""
+
 #: scripts/sim/ecommerce.gd:322
 msgid "This purchase belongs to a closed company."
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:324
 msgid "This purchase belongs to another business."
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:126
+msgid "This slot overlaps production or changeover."
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:340 scripts/sim/ecommerce.gd:408
@@ -10181,6 +10781,14 @@ msgstr ""
 msgid "Tom: \"It's all yours. Sign's up out front.\""
 msgstr ""
 
+#: data/npcs/tomas_varga.json scripts/sim/manufacturing.gd:44
+msgid "Tomas Varga"
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:39
+msgid "Tomas already works here."
+msgstr ""
+
 #: scripts/ui/tutorial.gd:442
 msgid "Too late for a shift today: the workplace closes soon. Go home and sleep (you can, after 4 PM on your first day), and work a shift tomorrow morning."
 msgstr ""
@@ -10261,6 +10869,10 @@ msgstr ""
 msgid "Tue"
 msgstr ""
 
+#: data/help/glossary.json
+msgid "Turn raw materials into OEM orders using paid machine capacity."
+msgstr ""
+
 #: scripts/sim/acquisition.gd:99
 msgid "Turned down Hale Group's offer for %s."
 msgstr ""
@@ -10297,6 +10909,10 @@ msgstr ""
 msgid "Type the bright lines exactly as shown (the grey ones are already written). The next character to type is highlighted."
 msgstr ""
 
+#: data/buildings/unit12_factory.json
+msgid "UNIT 12"
+msgstr ""
+
 #: data/buildings/popup_unit.json
 msgid "UNIT 5 · TO LET"
 msgstr ""
@@ -10325,6 +10941,14 @@ msgstr ""
 msgid "Unexpected large order"
 msgstr ""
 
+#: data/buildings/unit12_factory.json data/properties/unit12_factory.json
+msgid "Unit 12 Light Industrial"
+msgstr ""
+
+#: data/properties/unit12_factory.json
+msgid "Unit 12 is ready. Production risks and rent are yours."
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:835
 msgid "Unit price"
 msgstr ""
@@ -10341,8 +10965,16 @@ msgstr ""
 msgid "Unknown choice."
 msgstr ""
 
+#: scripts/sim/manufacturing.gd:249
+msgid "Unknown factory crisis."
+msgstr ""
+
 #: scripts/sim/saas.gd:54
 msgid "Unknown idea."
+msgstr ""
+
+#: scripts/sim/effects.gd:21
+msgid "Unknown industry event."
 msgstr ""
 
 #: scripts/sim/careers.gd:72
@@ -10355,6 +10987,10 @@ msgstr ""
 
 #: scripts/sim/cafe.gd:150
 msgid "Unknown supply pack."
+msgstr ""
+
+#: scripts/sim/manufacturing.gd:261
+msgid "Unlock your own brand and choose a valid batch."
 msgstr ""
 
 #: scripts/ui/modals/loan_modal.gd:61
@@ -10575,6 +11211,10 @@ msgstr ""
 
 #: scripts/sim/careers.gd:155
 msgid "Wages — %s shift at %s"
+msgstr ""
+
+#: data/events/manufacturing_shortage.json
+msgid "Wait for the delayed materials"
 msgstr ""
 
 #: data/story/chapters.json
@@ -10841,7 +11481,7 @@ msgstr ""
 msgid "Work done this session: %.1f of %.1f hours' worth"
 msgstr ""
 
-#: data/buildings/bloom_coffee.json data/buildings/byte_and_bean.json
+#: data/buildings/bloom_coffee.json data/buildings/byte_and_bean.json data/buildings/shift_diner.json
 msgid "Work on your laptop — Company OS"
 msgstr ""
 
@@ -11849,10 +12489,6 @@ msgstr ""
 msgid "out of 5"
 msgstr ""
 
-#: data/businesses/manufacturing.json
-msgid "overseas plant"
-msgstr ""
-
 #: data/businesses/ecommerce.json data/businesses/international_trade.json data/businesses/manufacturing.json
 msgid "own brand"
 msgstr ""
@@ -11963,6 +12599,10 @@ msgstr ""
 
 #: scripts/ui/modals/save_list_modal.gd:59
 msgid "slot %d"
+msgstr ""
+
+#: data/businesses/manufacturing.json
+msgid "small oem"
 msgstr ""
 
 #: data/businesses/energy.json
@@ -12265,6 +12905,10 @@ msgstr ""
 msgid "→ Company $1,000"
 msgstr ""
 
+#: scripts/ui/manufacturing_ui.gd:98
+msgid "−100 units"
+msgstr ""
+
 #: scripts/ui/phone_ui.gd:147
 msgid "◆ %s needs a decision"
 msgstr ""
@@ -12341,6 +12985,10 @@ msgstr ""
 msgid "✗ %s gave up waiting"
 msgstr ""
 
+#: scripts/ui/manufacturing_ui.gd:136
+msgid "✗ Choose an order in OEM orders first."
+msgstr ""
+
 #: scripts/ui/minigames/pack_game.gd:147
 msgid "✗ It doesn't fit. Try a bigger box."
 msgstr ""
@@ -12351,6 +12999,10 @@ msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:124
 msgid "✗ Not quite: %s wanted %s"
+msgstr ""
+
+#: scripts/ui/manufacturing_ui.gd:133
+msgid "✗ Rent a machine in OEM orders first."
 msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:123

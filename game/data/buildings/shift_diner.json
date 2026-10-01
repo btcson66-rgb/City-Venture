@@ -1,0 +1,161 @@
+{
+ "id": "shift_diner",
+ "name": "Shift Diner",
+ "district": "industrial",
+ "type": "restaurant",
+ "hours": {
+  "open": "00:00",
+  "close": "24:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "shift_diner",
+  "fallback": "byte_bean",
+  "x": 1400,
+  "sign": "SHIFT DINER"
+ },
+ "interior": {
+  "size": [
+   20,
+   13
+  ],
+  "floor": "wood_cafe",
+  "wall": "wood_panel",
+  "ambient": "cafe",
+  "props": [
+   {
+    "sprite": "menu_board",
+    "x": 200,
+    "y": 8,
+    "wall": true
+   },
+   {
+    "sprite": "framed_art_b",
+    "x": 60,
+    "y": 12,
+    "wall": true
+   },
+   {
+    "sprite": "window_day",
+    "x": 250,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "cafe_counter",
+    "x": 40,
+    "y": 50
+   },
+   {
+    "sprite": "cafe_table",
+    "x": 200,
+    "y": 100
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 182,
+    "y": 96,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_table",
+    "x": 260,
+    "y": 100
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 286,
+    "y": 96,
+    "solid": false
+   },
+   {
+    "sprite": "cafe_table",
+    "x": 230,
+    "y": 160
+   },
+   {
+    "sprite": "cafe_chair",
+    "x": 212,
+    "y": 156,
+    "solid": false
+   },
+   {
+    "sprite": "plant_big",
+    "x": 8,
+    "y": 120
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 90,
+    "y": 0,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 214,
+    "y": 40,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 268,
+    "y": 40,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "plant_bank",
+    "x": 292,
+    "y": 150
+   }
+  ],
+  "interactables": [
+   {
+    "id": "shift_counter",
+    "at": [
+     88,
+     102
+    ],
+    "label": "Order an oat latte ($5.20)",
+    "action": "buy_item",
+    "params": {
+     "item": "coffee",
+     "price": 5.2,
+     "minutes": 10,
+     "flag": "bought_coffee_shift_diner"
+    }
+   },
+   {
+    "id": "table",
+    "at": [
+     222,
+     134
+    ],
+    "label": "Work on your laptop — Company OS",
+    "action": "open_company_os",
+    "params": {
+     "terminal": "cafe"
+    }
+   },
+   {
+    "id": "shift_planner",
+    "at": [
+     272,
+     170
+    ],
+    "label": "Open Line Planner",
+    "icon": "company",
+    "action": "manufacturing_open"
+   }
+  ],
+  "npc_spots": {
+   "desk": [
+    88,
+    62
+   ]
+  }
+ }
+}

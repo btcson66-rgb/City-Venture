@@ -9,7 +9,8 @@ static func all() -> Array:
 		{"id":"consulting", "sim_class":Careers, "prefixes":["car"], "slot":"careers"},
 		{"id":"saas", "sim_class":Saas, "prefixes":["saas"], "slot":"business"},
 		{"id":"cafe", "sim_class":Cafe, "prefixes":["cafe"], "slot":"business"},
-		{"id":"logistics", "sim_class":Logistics, "prefixes":["log"], "slot":"business"}] + _extra
+		{"id":"logistics", "sim_class":Logistics, "prefixes":["log"], "slot":"business"},
+		{"id":"manufacturing", "sim_class":Manufacturing, "prefixes":["mfg"], "slot":"business", "actions":{"manufacturing_open":Manufacturing.open_action}}] + _extra
 
 static func register(record: Dictionary) -> bool:
 	if str(record.get("id", "")) == "" or record.get("sim_class") == null:
@@ -86,6 +87,9 @@ static func run_action(action: String, params: Dictionary, source: Node) -> bool
 
 static func infer_segment(source: Dictionary, lines: Array) -> String:
 	var kind := str(source.get("type", ""))
+	if kind == "lease":
+		var property: Dictionary = DataDB.properties.get(str(source.get("id", "")), {})
+		if property.has("segment"): return str(property["segment"])
 	if kind in ["cafe", "permit"]: return "cafe"
 	if kind == "saas": return "saas"
 	if kind.begins_with("gig_"): return "consulting"

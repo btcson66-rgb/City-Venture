@@ -1,0 +1,40 @@
+{
+ "id": "tomas_varga",
+ "name": "Tomas Varga",
+ "role": "Factory technician",
+ "appearance": {
+  "presentation": "masculine",
+  "face": "square",
+  "hair": "messy",
+  "hair_color": "black",
+  "skin": "s5",
+  "eye_shape": "round",
+  "eye_color": "dark",
+  "brows": "thick",
+  "mouth": "grin",
+  "accessory": "none"
+ },
+ "outfit": "logistics_site",
+ "outfit_tints": {
+  "top": "#2a3f66",
+  "bottom": "#2c3038"
+ },
+ "schedule": [
+  {
+   "days": "mon,tue,wed,thu,fri,sat",
+   "from": "08:00",
+   "to": "18:00",
+   "location": "interior:shift_diner",
+   "spot": "desk",
+   "pose": "idle"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [],
+   "conversation": "tomas_varga_intro",
+   "action": "manufacturing_open"
+  }
+ ],
+ "phone_contact": false
+}

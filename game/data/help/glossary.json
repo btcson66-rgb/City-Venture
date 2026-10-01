@@ -198,5 +198,25 @@
   "title": "Business segments",
   "what": "A segment groups transactions from one industry.",
   "why": "Separate results show which business pays for shared office and staff costs."
+ },
+ "manufacturing": {
+  "title": "Manufacturing",
+  "what": "Turn raw materials into OEM orders using paid machine capacity.",
+  "why": "Deposits are liabilities until delivery. Idle machines still cost rent."
+ },
+ "manufacturing_rfq": {
+  "title": "OEM orders",
+  "what": "An RFQ specifies units, deadline, price range and maximum defects.",
+  "why": "A low quote may lose money; a high quote loses the client."
+ },
+ "manufacturing_schedule": {
+  "title": "Machine schedule",
+  "what": "Allocate weekly hours. Each machine needs one hour between batches.",
+  "why": "Overlapping orders cannot share a machine; overtime costs 1.5 times normal wages."
+ },
+ "manufacturing_quality": {
+  "title": "Sampling inspection",
+  "what": "Inspection slows production and catches defects that need paid rework.",
+  "why": "Escaped defects trigger refunds, fines and lower credit."
  }
 }

@@ -271,7 +271,7 @@
   {
    "id": "industrial",
    "name": "Industrial Zone",
-   "status": "planned",
+   "status": "active",
    "map_pos": [
     44,
     150
@@ -320,8 +320,9 @@
     "name": "Harbor Line",
     "color": "#5fb06e",
     "stations": [
+     "riverside",
      "harbor",
-     "riverside"
+     "industrial"
     ]
    },
    {
@@ -367,7 +368,14 @@
    "harbor>financial": 17,
    "harbor>civic_center": 21,
    "harbor>shopping_street": 22,
-   "harbor>old_town": 24
+   "harbor>old_town": 24,
+   "industrial>harbor": 6,
+   "industrial>riverside": 14,
+   "industrial>startup_hub": 21,
+   "industrial>financial": 23,
+   "industrial>civic_center": 27,
+   "industrial>shopping_street": 28,
+   "industrial>old_town": 30
   }
  },
  "board_extra": {

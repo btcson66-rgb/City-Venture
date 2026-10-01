@@ -17,6 +17,12 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "manufacturing":
+		await _fast_forward_to_ch10()
+		await _manufacturing()
+		await _save_load()
+		bot.expect(Ledger.check_balanced(), "ledger balanced after manufacturing fixture")
+		return
 	if _arg("from") == "loan_access":
 		await _loan_access_fixture()
 		return
@@ -58,6 +64,16 @@ func run() -> void:
 		await _harbor_logistics()
 		await _chapters_10_to_12()
 	await _summary()
+	if not bot.video_mode:
+		# Independent capitalized founder fixture after the full story. Factory risk must not change the
+		# earlier tutorial story's funding assumptions; all factory actions below still use real input.
+		await close_modal()
+		GameState.new_game({"name":"Factory Founder", "seed":64001})
+		await _fast_forward_to_ch10()
+		SceneRouter._enter("interior", "riverside_apartment", "bed_side", "")
+		await wait_world()
+		await _manufacturing()
+		await _save_load()
 
 
 func _arg(name: String) -> String:
@@ -1200,6 +1216,70 @@ func _old_town_cafe() -> void:
 	await close_modal()
 	bot.expect(Ledger.check_balanced(), "ledger balanced after opening the café")
 	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")
+
+
+## Manufacturing: a real-input factory fixture through the first traceable OEM invoice.
+func _manufacturing() -> void:
+	bot.step("Industrial — factory lease, machine, technician and first OEM invoice")
+	await popups()
+	await close_modal()
+	if SceneRouter.world_scene().kind == "interior": await exit_building()
+	await metro_to("industrial")
+	await bot.shot("industrial_day")
+	await enter_building("unit12_factory")
+	await bot.use_action("lease_property")
+	await bot.click_named("SignLease_unit12_factory")
+	await close_modal()
+	bot.expect(Living.has_lease("unit12_factory"), "factory lease signed with actual company funds")
+	await bot.shot("factory_interior")
+	await bot.use_action("manufacturing_open")
+	await bot.click_named("OpenFactory")
+	await bot.click_named("RentMachine")
+	if not Staff.employer_registered(): await bot.click_named("FactoryEmployer")
+	await bot.click_named("HireTomas")
+	bot.expect(Staff.count("technician") > 0, "hired a production technician")
+	var rfq: Dictionary = Manufacturing.S()["rfqs"].values()[0]
+	await bot.click_named("Quote_"+str(rfq["id"]))
+	var job := ""
+	for id in Manufacturing.S()["orders"]: job = id
+	bot.expect(job != "", "OEM quote became a Jobs contract with deposit")
+	if job == "": return
+	for i in 10: await bot.click_named("MaterialMore")
+	await bot.click_named("BuyMaterials")
+	await close_modal()
+	# As with other walkthrough segments, only the QA harness advances idle time; production ticks remain real.
+	Clock.advance(2*Clock.DAY)
+	await popups()
+	await bot.use_action("manufacturing_open")
+	await bot.click_named("Select_"+job)
+	await bot.click_named("FactoryOvertime")
+	for i in 8: await bot.click_named("More_hours")
+	await bot.shot("line_planner")
+	await bot.click_named("ReserveSlot")
+	await close_modal()
+	Clock.advance_to(Clock.at_day_time(1, 9*60)+16*60)
+	await popups()
+	if int(Manufacturing.S()["orders"][job]["produced"]) < int(rfq["qty"]):
+		await bot.use_action("manufacturing_open")
+		await bot.click_named("Select_"+job)
+		await bot.click_named("FactoryOvertime")
+		for i in 8: await bot.click_named("More_hours")
+		await bot.click_named("ReserveSlot")
+		await close_modal()
+		Clock.advance_to(Clock.at_day_time(1, 9*60)+16*60)
+		await popups()
+	await bot.use_action("manufacturing_open")
+	await bot.click_named("Deliver_"+job)
+	bot.expect(Jobs.get_job(job)["status"] == "invoiced", "first factory revenue has a completed traceable order")
+	await bot.click_named("FactoryTab_quality")
+	await bot.shot("factory_quality")
+	bot.expect(Ledger.check_balanced(), "OEM material, overtime, invoice and return journals balanced")
+	await close_modal()
+	await exit_building()
+	Clock.advance_to(Clock.next_time_of_day(21*60))
+	await bot.shot("industrial_night")
 	await metro_to("riverside")
 	await enter_building("riverside_apartment")
 

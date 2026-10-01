@@ -35,7 +35,9 @@ static func tileset() -> TileSet:
 	var ts := TileSet.new()
 	ts.tile_size = Vector2i(T, T)
 	var src := TileSetAtlasSource.new()
-	src.texture = Art.tex("tiles/atlas")
+	# TileSetAtlasSource addresses physical image regions; unlike Sprite2D, it ignores a
+	# texture's logical size override. Keep the native atlas so sidewalks cannot sample grass.
+	src.texture = load("res://assets/tiles/atlas.png")
 	src.texture_region_size = Vector2i(T, T)
 	var tiles: Dictionary = DataDB.tiles.get("tiles", {})
 	for n in tiles:

@@ -95,6 +95,29 @@
     17
    ],
    "desc": "Takes your van out on one posted delivery run every workday from 9:00 and banks the pay. Drivers rarely plan the route as well as you can: expect a longer way round, and rush runs they can't reach in time."
+  },
+  "technician": {
+   "name": "Factory technician",
+   "salary_week": [
+    1100,
+    1100
+   ],
+   "needs_office": false,
+   "needs_lease": "unit12_factory",
+   "needs_text": "Lease Unit 12 before hiring a technician.",
+   "workplace": "unit12_factory",
+   "work_days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "work_hours": [
+    9,
+    17
+   ],
+   "desc": "Runs factory machines. Skill lowers defects; payroll remains due during downtime."
   }
  },
  "traits": [
