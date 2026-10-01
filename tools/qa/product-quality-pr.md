@@ -33,3 +33,5 @@ Claude接線：
 - [x] wiki 對應條目的「美術」狀態已更新
 - [x] 需要程式接線的項目已列在 PR 說明
 
+
+全批圖檔盤點：`docs/art_sources/product_quality_20261001/pending_batch_coverage.md` 和 JSON 讀取12個Draft的實際美術差異，1869個原尺寸PNG均有正確尺寸4×對應（1869/1869）。這是檔案覆蓋，不是已合併或全遊戲實機品質PASS。詳列 #46角色與NPC動畫、#56正式配色/暫代測試，以及各類高解析logical尺寸接線和完整故事走查缺口。

@@ -30,3 +30,5 @@
 - 現有glow、shadow與sparkle多仍讀native。若改detail，Sprite2D保留原logical尺寸、四格frame尺寸與alpha強度，不可放大光罩、陰影或水面閃光四倍。
 - 應用圖示保持目前系統圖示指向，detail是尺寸配對輸出，不需要替换project圖示設定。
 
+
+全批圖檔盤點：`docs/art_sources/product_quality_20261001/pending_batch_coverage.md` 和 JSON 讀取12個Draft的實際美術差異，1869個原尺寸PNG均有正確尺寸4×對應（1869/1869）。這是檔案覆蓋，不是已合併或全遊戲實機品質PASS。詳列 #46角色與NPC動畫、#56正式配色/暫代測試，以及各類高解析logical尺寸接線和完整故事走查缺口。
