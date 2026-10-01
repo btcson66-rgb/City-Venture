@@ -15,10 +15,10 @@ extends RefCounted
 const EXPENSE_CATEGORIES := ["advertising", "shipping", "restocking", "platform_fees", "packaging", "photography", "registration", "compliance",
 	"rent_office", "coworking", "inventory_writeoff", "bank_fees", "late_fees", "rent_home", "living", "coffee", "transport",
 	"clothing", "dining", "penalties", "payroll", "recruiting", "interest", "servers", "rent_shop", "rent_warehouse", "fitout",
-	"fuel", "vehicle", "insurance", "other"]
+	"fuel", "vehicle", "insurance", "depreciation", "maintenance", "asset_rent", "other"]
 const OPEX_BUSINESS := ["advertising", "shipping", "restocking", "platform_fees", "packaging", "photography", "registration", "compliance",
 	"rent_office", "coworking", "inventory_writeoff", "bank_fees", "late_fees", "penalties", "payroll", "recruiting", "interest",
-	"servers", "rent_shop", "rent_warehouse", "fitout", "fuel", "vehicle", "insurance", "other"]
+	"servers", "rent_shop", "rent_warehouse", "fitout", "fuel", "vehicle", "insurance", "depreciation", "maintenance", "asset_rent", "other"]
 ## Rent on business premises, whatever the kind (office, shop, warehouse): one line on the month-end report.
 const PREMISES_RENT := ["rent_office", "rent_shop", "rent_warehouse"]
 const PERSONAL := ["rent_home", "living", "coffee", "transport", "clothing", "dining"]
@@ -29,7 +29,7 @@ const CATEGORY_NAMES := {"advertising": "Advertising", "shipping": "Shipping", "
 	"rent_home": "Home rent", "living": "Living costs", "coffee": "Coffee", "transport": "Transport", "clothing": "Clothing",
 	"dining": "Dining", "penalties": "Penalties", "payroll": "Payroll", "recruiting": "Recruiting", "interest": "Interest",
 	"servers": "Servers", "rent_shop": "Shop rent", "rent_warehouse": "Warehouse rent", "fitout": "Fit-out & equipment",
-	"fuel": "Fuel", "vehicle": "Vehicles & upkeep", "insurance": "Insurance", "other": "Other"}
+	"fuel": "Fuel", "vehicle": "Vehicles & upkeep", "insurance": "Insurance", "depreciation": "Depreciation", "maintenance": "Maintenance", "asset_rent": "Asset rent", "other": "Other"}
 
 
 static func category_name(k: String) -> String:
@@ -62,6 +62,9 @@ static func post(entity: String, memo: String, lines: Array, source := {}) -> Di
 		return {}
 	var L := _L()
 	L["seq"] = int(L["seq"]) + 1
+	source = source.duplicate(true)
+	if not source.has("segment"):
+		source["segment"] = Industries.infer_segment(source, clean)
 	var entry := {"n": L["seq"], "t": Clock.now(), "entity": entity, "memo": memo, "source": source, "lines": clean}
 	L["journal"].append(entry)
 	if not L["balances"].has(entity):

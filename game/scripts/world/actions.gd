@@ -56,6 +56,8 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 		else:
 			UIRoot.toast("This is Suite 2B's desk. Talk to Tom about leasing it.", "warn", "lock")
 		return
+	if Industries.run_action(action, params, source):
+		return
 	match action:
 		"cafe_counter":
 			_cafe_counter()

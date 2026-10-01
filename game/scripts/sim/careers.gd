@@ -268,7 +268,7 @@ static func _deliver(g: Dictionary) -> Dictionary:
 	fee = snappedf(fee, 0.01)
 	var ent := str(g.get("entity", GameState.business_entity()))
 	Ledger.post(ent, I18n.t("Invoice — %s") % gig_title(g), [{"acct": "accounts_receivable", "dr": fee}, {"acct": "revenue", "cr": fee}],
-		{"type": "gig_invoice", "id": g["id"]})
+		{"segment": "consulting", "type": "gig_invoice", "id": g["id"]})
 	g["status"] = "invoiced"
 	g["invoiced"] = fee
 	g["delivered_at"] = Clock.now()
@@ -299,7 +299,7 @@ static func handle(kind: String, p: Dictionary) -> void:
 			var amt := float(g["invoiced"])
 			var ent := str(g.get("entity", "player"))
 			Ledger.post(ent, I18n.t("Client payment — %s") % gig_title(g), [{"acct": "cash", "dr": amt}, {"acct": "accounts_receivable", "cr": amt}],
-				{"type": "gig_payment", "id": g["id"]})
+				{"segment": "consulting", "type": "gig_payment", "id": g["id"]})
 			g["status"] = "paid"
 			EventBus.notify.emit(I18n.t("%s paid %s.") % [str(g["client"]), Fmt.money(amt)], "good", "cash")
 
@@ -319,3 +319,26 @@ static func on_hour(_t: int, h: int) -> void:
 			g["status"] = "cancelled"
 			F()["rep"] = clampf(rep() - 1.0, 0.0, 5.0)
 			GameState.add_message("client", I18n.t("%s: We had to cancel the project. We won't be paying for it.") % str(g["client"]))
+
+
+static func is_running() -> bool:
+	return freelance_active()
+
+
+static func os_tab() -> Dictionary:
+	return {"id":"freelance", "label":"Freelance", "icon":"tasks", "start_label":"Explore freelance consulting", "method":"_tab_freelance", "order":1}
+
+
+static func board_detail() -> Callable:
+	return IndustryViews.consulting
+
+
+static func segment_tag() -> String:
+	return "consulting"
+
+
+static func on_company_closed(ent: String) -> void:
+	for gig in F()["gigs"].values():
+		if gig.get("entity", "player") == ent and gig.get("status", "") in ["active", "invoiced"]:
+			gig["status"] = "closed"
+			Sim.cancel("car.gig_paid", "id", gig["id"])

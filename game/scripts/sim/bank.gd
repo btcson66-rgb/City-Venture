@@ -64,22 +64,27 @@ static func lending_basis() -> Dictionary:
 	var contracts := 0.0
 	var stock := 0.0
 	var existing := 0.0
+	var equipment := 0.0
 	if cid != "":
 		age = int((Clock.now() - int(GameState.data["entities"][cid].get("founded", 0))) / Clock.DAY)
 		gp = maxf(0.0, float(MonthClose.compute(cid, Clock.now() - 30 * Clock.DAY, Clock.now())["gross_profit"]))
 		ar = maxf(0.0, Ledger.balance(cid, "accounts_receivable") + Ledger.balance(cid, "marketplace_balance"))
 		stock = maxf(0.0, Ledger.balance(cid, "inventory") + Ledger.balance(cid, "inventory_in_transit"))
+		equipment = maxf(0.0, Ledger.balance(cid, "fixed_assets"))
+		for job in Jobs.S()["items"].values():
+			if job["entity"] == cid and job["status"] in ["active", "delivered"]:
+				contracts += maxf(0.0, float(job["price"])-float(job.get("deposit_paid", 0)))
 		existing = debt(cid)
 		for c in GameState.data["contracts"].values():
 			if c["status"] == "active" and c.get("seller", "") == cid:
 				contracts += float(c["total"]) - float(c.get("upfront_paid", 0.0))
-	var collateral := ar * 0.7 + contracts * 0.6 + stock * 0.5
+	var collateral := ar * 0.7 + contracts * 0.6 + stock * 0.5 + equipment * 0.5
 	var raw := maxf(0.0, gp * 3.0) + collateral - existing
 	return {"age": age, "contracts": contracts, "raw": raw,
 		"max": floorf(minf(MAX_LOAN, raw) / 1000.0) * 1000.0,
 		"parts": [[I18n.t("3 × last 30 days' gross profit"), gp * 3],
 		[I18n.t("70% of money owed to you"), ar * 0.7], [I18n.t("60% of signed contracts"), contracts * 0.6],
-		[I18n.t("50% of stock at cost"), stock * 0.5], [I18n.t("minus existing debt"), -existing]]}
+		[I18n.t("50% of stock at cost"), stock * 0.5], [I18n.t("50% of operating assets at book value"), equipment * 0.5], [I18n.t("minus existing debt"), -existing]]}
 
 
 ## Each row is the single source for both refusal order and the player's actionable checklist.
@@ -117,7 +122,7 @@ static func offer() -> Dictionary:
 	var reasons: Array = [basis["parts"][0]]
 	for i in range(1, basis["parts"].size()):
 		var part: Array = basis["parts"][i]
-		if (i < 4 and float(part[1]) > 0) or (i == 4 and float(part[1]) < 0):
+		if not is_zero_approx(float(part[1])):
 			reasons.append(part)
 	return {"ok": true, "max": basis["max"], "apr": apr(), "reasons": reasons}
 

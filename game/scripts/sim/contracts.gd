@@ -131,7 +131,7 @@ static func accept(cid: String) -> Dictionary:
 		var up := snappedf(float(c["total"]) * float(c["upfront_rate"]), 0.01)
 		c["upfront_paid"] = up
 		Ledger.post(c["seller"], I18n.t("Deposit received from %s (%s)") % [GameState.entity_name(c["buyer"]), cid],
-			[{"acct": "cash", "dr": up}, {"acct": "deferred_revenue", "cr": up}], {"type": "contract", "id": cid})
+			Jobs.deposit_lines(up), {"type": "contract", "id": cid})
 	Sim.schedule(int(c["due"]), "con.due", {"id": cid})
 	_tag(c, "accepted")
 	GameState.timeline(I18n.t("Signed contract %s with %s: %s.") % [cid, GameState.entity_name(c["buyer"]), Fmt.money(c["total"])], "business")
@@ -250,8 +250,7 @@ static func deliver(cid: String) -> Dictionary:
 	var penalty := snappedf(total * float(c["penalty_rate"]), 0.01) if late else 0.0
 	var freight := float(DataDB.shipping()["b2b_freight"]["flat_fee"])
 	var ent: String = c["seller"]
-	var lines := [
-		{"acct": "accounts_receivable", "dr": total - up}, {"acct": "deferred_revenue", "dr": up}, {"acct": "revenue", "cr": total},
+	var lines := Jobs.invoice_lines(total, up) + [
 		{"acct": "cogs", "dr": cogs}, {"acct": "inventory", "cr": cogs},
 		{"acct": "exp:shipping", "dr": freight}, {"acct": "cash", "cr": freight}]
 	if penalty > 0:

@@ -480,3 +480,13 @@ data.living.leases     {<property_id>: {rent, day (of month), since, entity}}   
 Flags and stats the café sets: `met_okafor`, `leased_corner_cafe`, `food_permit`, `cafe_first_sale`; stats `cafe_customers`,
 `cafe_days_open`, `cafe_owner_shifts`, `cafe_rating`. Ledger expense categories added with it: `rent_shop`, `rent_warehouse`,
 `fitout` (`fuel`, `vehicle` and `insurance` are reserved for the logistics business; nothing posts to them yet).
+
+
+## Industry framework state (#63)
+
+- Every ledger journal source includes `segment`: industry id or `shared`. Old entries need not be rewritten.
+- `jobs_service`: lazy `{seq, items}`. Each job has `id`, `entity`, `segment`, `client`, `scope`, `status`, `price` (AUD$), `work`/`progress` (caller-defined work units), `due`/`delivered`/`pay_due` (absolute game minutes), `terms` (0/30/60 days), `deposit` and `penalty_rate` (fractions), `deposit_paid` and `receivable` (AUD$). States: offered → active → delivered → invoiced → paid; company closure gives closed.
+- `operating_assets`: lazy `{seq, items}`. Owned/rented assets retain price/book/deposit (AUD$), life_days/rent_days/maintenance_days (game days), bought/next_rent (absolute minutes), depreciation_day/maintenance_day (day index), failure_chance (daily probability when maintenance overdue), status working/broken/sold, and segment/entity. `legacy_expensed` marks logistics vans whose purchase was already charged to vehicle expense.
+- `economy/industries.json`: asset service_hour, maintenance_days/cost, failure_chance and resale. Individual asset specifications can override these fields. Resale is clamped to 0.4–0.6.
+- MonthClose adds `segments: {rows, totals, shared_pool}` without changing existing totals. Each row includes revenue, refunds, net_revenue, cogs, gross_profit, opex, allocated, other_income and operating_profit in AUD$. Shared expenses are allocated only to positive-revenue segments; exact cents are preserved.
+- Industry registration fields: id, sim_class, prefixes, hour slot, optional actions. Tab descriptors: id, label, icon, order, render Callable or legacy method, optional start_label. Player-visible content still needs help/glossary/i18n.

@@ -3,10 +3,10 @@ extends Modal
 ## Company OS (Handoff §52–53, kickoff §15). The former "dashboard", demoted to a tool you use at a
 ## terminal: apartment laptop, co-work hot desk, cafe table, or your office desk.
 
-const TABS := [["overview", "Overview", "company"], ["finance", "Finance", "finance"], ["sales", "Sales", "orders"],
+const TABS := [["overview", "Overview", "company"], ["finance", "Finance", "finance"],
 	["operations", "Operations", "parcel"], ["inventory", "Inventory", "inventory"], ["people", "People", "people"],
-	["contracts", "Contracts", "contracts"], ["freelance", "Freelance", "tasks"], ["saas", "SaaS", "laptop"], ["cafe", "Café", "coffee"],
-	["logistics", "Logistics", "map"]]
+	["contracts", "Contracts", "contracts"], ["segments", "Segments", "finance"]]
+
 const PLANNED := [["Property", "home"], ["International", "world"], ["Reports", "tasks"]]
 
 var terminal := "laptop"
@@ -84,7 +84,12 @@ func build() -> void:
 	var nav := UIK.vbox(2)
 	nav.custom_minimum_size = Vector2(96, 0)
 	row.add_child(nav)
-	var shown: Array = TABS.filter(func(t): return not (t[0] == "cafe" and not Cafe.leased()) and not (t[0] == "logistics" and not Logistics.has_van()))
+	var shown: Array = TABS.duplicate(true)
+	for descriptor in Industries.tabs():
+		if descriptor.has("nav_index"):
+			shown.insert(mini(int(descriptor["nav_index"]), shown.size()), [descriptor["id"], descriptor["label"], descriptor["icon"]])
+		else:
+			shown.append([descriptor["id"], descriptor["label"], descriptor["icon"]])
 	# the café tab appears once you lease the corner unit, the logistics tab once you own a van; with all eleven the
 	# buttons get a little tighter so the column still fits the window
 	var compact := shown.size() > 10
@@ -101,6 +106,11 @@ func build() -> void:
 		if t[0] == "contracts" and _open_offers() > 0:
 			b.text = I18n.t(b.text) + " ●"
 		nav.add_child(b)
+	for descriptor in Industries.launchers():
+		var start := UIK.button(descriptor["start_label"], _set_tab.bind(descriptor["id"]))
+		# Preserve stable bot entry names while these are setup actions, not running-business tabs.
+		start.name = "Tab_" + str(descriptor["id"])
+		nav.add_child(start)
 	nav.add_child(UIK.sep())
 	var planned: Array = []
 	for p in PLANNED:
@@ -110,7 +120,8 @@ func build() -> void:
 	var sc := UIK.scroll(content, Vector2(500, 272))
 	sc.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(sc)
-	call("_tab_" + tab)
+	if not Industries.render_tab(tab, self):
+		call("_tab_" + tab)
 
 
 func _set_tab(t: String) -> void:
@@ -1423,3 +1434,23 @@ func _drive_run(id: String) -> void:
 				"warn" if r["late"] else "good", "parcel")
 		if is_inside_tree():
 			rebuild())
+
+
+func _tab_segments() -> void:
+	_section_tip("Segments", "segments")
+	var next := UIK.button("Review next action", _set_tab.bind("overview"), "primary")
+	next.name = "SegmentsNext"
+	content.add_child(next)
+	content.add_child(UIK.wrap("Shared costs are allocated by net revenue. With no revenue, they stay in Shared.", 8, Art.C_MUTED, 450))
+	var entity := GameState.business_entity()
+	var previous_end := Clock.month_start()
+	var previous_start := Clock.month_start(previous_end-1) if previous_end > 0 else 0
+	for period in [["This month", previous_end, Clock.now()+1], ["Last month", previous_start, previous_end]]:
+		_section(period[0])
+		var report := Segments.compute(entity, period[1], period[2])
+		for row in report["rows"].values():
+			var label := "Shared" if row["id"] == "shared" else str(DataDB.businesses.get(row["id"], {}).get("name", row["id"]))
+			content.add_child(UIK.label(label, 9, Art.C_SKY, true))
+			for field in [["Net revenue", "net_revenue"], ["Gross profit", "gross_profit"], ["Operating expenses", "opex"], ["Allocated", "allocated"], ["Operating profit", "operating_profit"]]:
+				content.add_child(UIK.kv(field[0], Fmt.money(row[field[1]])))
+		content.add_child(UIK.kv("Total operating profit", Fmt.money(report["totals"]["operating_profit"])))
