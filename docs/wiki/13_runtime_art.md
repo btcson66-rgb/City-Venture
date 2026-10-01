@@ -1936,3 +1936,76 @@ sprite keys：`bollard`, `hydrant`, `cone`, `trash_bin`, `parking_meter`, `digit
 美術狀態：28 個戶外地磚格重新製作，涵蓋七個已實作街區的道路、鋪面、草地、水面、木步道及老城／港區特色材質。`tiles/atlas.png` 128×96 和 `world_detail/tiles/atlas.png` 512×384，均附 import；atlas 的 43 個座標不動，15 格室內及 5 個空位像素保持原樣。原畫、提示詞、SVG 與逐格保全／接縫檢查在 `docs/art_sources/ground_materials_20261001/`。
 
 原尺寸替換已由既有 TileMap 載入；4× atlas 仍需 Claude 保持 16×16 邏輯尺寸接入高解析投影。七街區日夜實拍和改前／改後在 `evidence/20261001_ground_materials/`。此狀態只涵蓋本批地面，其他獨立 Draft 的角色、車流與建築尚須整合驗收。
+## UI 解析度與表面品質 · 2026-10-01
+
+美術狀態：43 個語意圖示、23 面板和外框、固定格位 icons_atlas 均交 native 和4× PNG/import，共67組。SVG直接輸出雙尺寸，logical size及atlas位置不變；panel_glass有輕微透明，手機和頭像內容開口不變。來源及檢查在 `docs/art_sources/ui_quality_20261001/`，真正 UIK狀態畫面及巡禮對比在 `evidence/20261001_ui_quality/`。
+
+原尺寸UI會立即替換；4×接線須保持logical顯示矩形和9-slice邊距，交Claude處理，本批不改UI程式、字型、流程或按鈕用途。兩張既有app icon未動。
+
+圖示檔名索引：
+- `cash`
+- `clock`
+- `calendar`
+- `sun`
+- `moon`
+- `objective`
+- `star`
+- `home`
+- `company`
+- `map`
+- `people`
+- `tasks`
+- `phone`
+- `inventory`
+- `parcel`
+- `orders`
+- `finance`
+- `contracts`
+- `bank`
+- `warning`
+- `check`
+- `lock`
+- `metro`
+- `mail`
+- `settings`
+- `save`
+- `laptop`
+- `coffee`
+- `arrow_right`
+- `close`
+- `plus`
+- `minus`
+- `walk`
+- `shop`
+- `civic`
+- `startup`
+- `river`
+- `financial`
+- `dollar`
+- `info`
+- `world`
+- `sleep`
+- `shirt`
+- `bar_bg`
+- `bar_fill`
+- `bar_fill_green`
+- `button`
+- `button_danger`
+- `button_disabled`
+- `button_hover`
+- `button_pressed`
+- `button_primary`
+- `button_primary_hover`
+- `card`
+- `card_gold`
+- `field`
+- `header`
+- `inset`
+- `panel`
+- `panel_glass`
+- `phone_frame`
+- `portrait_frame`
+- `prompt_key`
+- `tab`
+- `tab_active`
+- `tooltip`

@@ -715,3 +715,6 @@ Claude 線接下來要開放兩個街區和兩個新產業：
 美術狀態：28 個戶外地磚格重新製作，涵蓋七個已實作街區的道路、鋪面、草地、水面、木步道及老城／港區特色材質。`tiles/atlas.png` 128×96 和 `world_detail/tiles/atlas.png` 512×384，均附 import；atlas 的 43 個座標不動，15 格室內及 5 個空位像素保持原樣。原畫、提示詞、SVG 與逐格保全／接縫檢查在 `docs/art_sources/ground_materials_20261001/`。
 
 原尺寸替換已由既有 TileMap 載入；4× atlas 仍需 Claude 保持 16×16 邏輯尺寸接入高解析投影。七街區日夜實拍和改前／改後在 `evidence/20261001_ground_materials/`。此狀態只涵蓋本批地面，其他獨立 Draft 的角色、車流與建築尚須整合驗收。
+## UI 品質續批 · 2026-10-01
+
+美術狀態：67組UI native/4× PNG/import已交（43圖示、23表面外框、icons_atlas），尺寸和位置不動。SVG來源及實機狀態對比完整；高解析StyleBox的切片／邏輯邊框待Claude接線。此批不宣告所有程式已使用4× UI。
