@@ -44,25 +44,17 @@ func test_old_saves_get_a_wardrobe() -> void:
 	runner.check(Wardrobe.owns("startup_casual") and Wardrobe.owns("home"), "starters restored")
 
 
-func test_shop_outfits_draw_as_stand_ins_until_their_art_exists() -> void:
+func test_shop_outfits_use_their_own_art() -> void:
 	var app := GameState.default_appearance()
+	var pres := str(app.get("presentation", "masculine"))
 	var L := Art.character_layers(app, "executive")
 	var tops := L.filter(func(l): return l["name"] == "top")
 	runner.eq(tops.size(), 1, "one top layer")
-	runner.check(str(tops[0]["tex"]).contains("business_suit"), "executive is drawn as the suit for now (%s)" % tops[0]["tex"])
-	runner.check(tops[0]["tint"] != Color.WHITE, "in the executive colour")
+	runner.eq(str(tops[0]["tex"]), "characters/outfit_executive_%s_top" % pres, "executive uses its own sheet")
 	for l in L:
 		runner.check(Art.has_tex(str(l["tex"])), "layer exists: " + str(l["tex"]))
-	var P := Art.portrait_layers(app, "formal_evening")
-	runner.check(P.any(func(l): return str(l["tex"]) == "portraits/outfit_business_suit"), "portrait stand-in too")
-	# the real art wins as soon as it lands
-	var pres := str(app.get("presentation", "masculine"))
-	var path := "characters/outfit_executive_%s_top" % pres
-	Art._cache[path] = ImageTexture.create_from_image(Image.create(128, 144, false, Image.FORMAT_RGBA8))
-	var L2 := Art.character_layers(app, "executive")
-	Art._cache.erase(path)
-	runner.check(L2.any(func(l): return str(l["tex"]) == path), "Codex's executive sheet is used once it exists")
-
+	for l in Art.portrait_layers(app, "formal_evening"):
+		runner.check(Art.has_tex(str(l["tex"])), "portrait layer exists: " + str(l["tex"]))
 
 func test_market_stalls_are_out_on_weekend_days_only() -> void:
 	var stalls: Array = DataDB.districts["shopping_street"]["props"].filter(func(p): return p.has("show"))
