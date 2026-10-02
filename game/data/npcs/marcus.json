@@ -32,6 +32,14 @@
  "dialogue": [
   {
    "when": [
+    "world_year>=9",
+    "!flag:met_marcus_global"
+   ],
+   "conversation": "marcus_global",
+   "action": "bank_counter"
+  },
+  {
+   "when": [
     "company_registered",
     "flag:business_account_opened"
    ],

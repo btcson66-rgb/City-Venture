@@ -8,7 +8,7 @@ extends RefCounted
 ## delivered: revenue + COGS + platform fee → marketplace balance (NOT cash)
 ## Monday 09:00 payout: marketplace balance → cash.   Returns / reviews follow delivery.
 
-const OPEN_STATUSES := ["placed", "packed", "awaiting_pickup", "carried", "shipped"]
+const OPEN_STATUSES := ["placed", "packed", "awaiting_pickup", "carried", "shipped", "customs_hold"]
 
 
 static func E() -> Dictionary:
@@ -803,6 +803,7 @@ static func _h_order_place(p: Dictionary) -> void:
 	if region != "":
 		o["entity"] = GameState.company_id()
 		GlobalMarket.annotate_order(o, region)
+		Customs.annotate(o)
 	e["orders"][oid] = o
 	l["orders"] = int(l["orders"]) + 1
 	l["missed"] = 0
@@ -957,6 +958,7 @@ static func courier_pickup(loc: String, method: String) -> Dictionary:
 		t = Clock.now() + 10   # the guided first parcel: the courier is round the corner
 	for o in packed:
 		o["status"] = "awaiting_pickup"
+		o["pickup_fee_share"] = snappedf(fee / packed.size(), 0.01)
 		o["ship"] = {"method": method, "cost": ship_cost(o, method), "mode": "courier"}
 	Sim.schedule(t, "eco.pickup", {"ids": packed.map(func(x): return x["id"])})
 	return {"ok": true, "count": packed.size(), "cost": total, "pickup_at": t}
@@ -1012,6 +1014,8 @@ static func _h_pickup(p: Dictionary) -> void:
 static func _ship(o: Dictionary) -> void:
 	if o.has("region"):
 		o["ship"]["method"] = GlobalMarket.shipping_method(o, str(o["ship"]["method"]))
+		if not Customs.prepare(o):
+			return
 	var m := DataDB.ship_method(o["ship"]["method"])
 	o["status"] = "shipped"
 	o["ship"]["shipped"] = Clock.now()
@@ -1059,7 +1063,10 @@ static func _h_deliver(p: Dictionary) -> void:
 		o["damaged"] = true
 	# after-sale: returns & reviews
 	var p_ret := 0.8 if o.get("defective", false) else float(DataDB.product(o["product"]).get("return_base_rate", 0.03))
-	if GameState.flag("force_next_return") or GameState.randf() < p_ret:
+	if o.has("customs") and GameState.randf() < Customs.refusal_chance(o):
+		o["customs_refused"] = true
+		Sim.schedule(Clock.now() + 1, "eco.return_request", {"order": o["id"]})
+	elif GameState.flag("force_next_return") or GameState.randf() < p_ret:
 		GameState.set_flag("force_next_return", false)
 		Sim.schedule(Clock.now() + GameState.randi_range(12 * 60, 3 * Clock.DAY), "eco.return_request", {"order": o["id"]})
 	elif GameState.randf() < float(DataDB.product(o["product"]).get("review_rate", 0.4)):

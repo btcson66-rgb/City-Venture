@@ -334,17 +334,16 @@ share) take theirs. The event lays the arithmetic out. Choices:
 Whichever is chosen, Chapter 12 ends with an **ending card** (`ENDING — A NEW OWNER` / `ON YOUR TERMS` / `STILL YOURS`,
 `UIRoot.show_chapter_card`), `story_complete` is set, and free play continues with `goal_growth`.
 
-## 10. Season 2 — Going Global (Planned, Chapters 13–18)
+## 10. Season 2 — Going Global (Chapters 13–14 Implemented; 15–18 Planned)
 
-The main story (Chapters 1–12) ends in Year 8 with free play. Season 2 takes the company abroad: the World Map's seven
-overseas regions (`data/regions/*.json`, all `planned` today) open one by one. Each chapter teaches one real thing about
+Season one (Chapters 1–12) ends in Year 8 and continues into Chapter 13 in Year 9. Seven regional storefront systems are active; overseas travel remains Planned. Each chapter teaches one real thing about
 selling across borders, and each one is playable with any business the player runs (ecommerce first; café and logistics
 get their own beats). Tickets: GitHub issues labelled `season-2`.
 
 | # | Chapter (Year) | What the player learns and does | NPCs | Systems it needs |
 |---|---|---|---|---|
-| 13 | **FIRST ORDER ABROAD** (Year 9, "Global Consolidation") | A Northridge shopper finds the store. Open an overseas storefront on ShopLane Global, set a price in their currency, ship the first international parcel (7–10 days) and get paid in NRD, converted at the bank's rate. Lesson: a sale abroad earns less than it looks after conversion and shipping. | Maya, Marcus | World Map unlock; per-region marketplace (demand, price in local currency); FX module (daily rates, bank spread); international shipping tiers |
-| 14 | **CUSTOMS** (Year 9) | Ines Duarte, the customs officer, explains duties and paperwork. Choose **DDP** (you pay the duty up front, the buyer gets a clean price) or **DDU** (the buyer pays at the door, more refusals and returns). Classify a product (tariff code) correctly or pay a penalty. | Ines Duarte | duties by region and product category; DDP/DDU per listing; refusals/returns abroad; customs penalty event |
+| 13 | **FIRST ORDER ABROAD · Implemented** (Year 9, "Global Consolidation") | A Northridge shopper finds the store. Open an overseas storefront on ShopLane Global, set a price in their currency, ship the first international parcel (7–14 days) and get paid in NRD, converted at the bank's rate. Lesson: a sale abroad earns less than it looks after conversion and shipping. | Maya, Marcus | World Map unlock; per-region marketplace (demand, price in local currency); FX module (daily rates, bank spread); international shipping tiers |
+| 14 | **CUSTOMS · Implemented** (Year 9) | Ines Duarte, the customs officer, explains duties and paperwork. Choose **DDP** (you pay the duty up front, the buyer gets a clean price) or **DDU** (the buyer pays at the door, more refusals and returns). Classify a product (tariff code) correctly or pay a penalty. | Ines Duarte | duties by region and product category; DDP/DDU per listing; refusals/returns abroad; customs penalty event |
 | 15 | **THE CURRENCY SWING** (Year 9) | The Auroria currency drops 12% in a week: overseas prices are suddenly too low. Options: reprice, lock a rate with a **forward contract** at Nexus Bank, or invoice B2B buyers in Aurelian dollars. Lesson: revenue in one currency and costs in another is a risk you manage, not a bet. | Marcus Reed | FX shock event; forward contracts (rate, notional, date, settlement P/L); invoice currency on contracts |
 | 16 | **A PARTNER OVERSEAS** (Year 9) | Omar Haddad, a trader, offers two ways into Lumina: a **distributor** (they buy in bulk at a discount, they own the customer) or a **3PL warehouse** there (you keep margin and risk, stock sits abroad). Fly there (time passes, flight cost) to sign. | Omar Haddad | region travel (a trip scene); overseas stock location (3PL fees per unit per month); distributor contract type |
 | 17 | **CONSOLIDATION** (Year 9–10) | Big players buy up small brands. A rival undercuts prices in the region you opened. Choose: niche (premium, smaller volume) or scale (lower prices, bigger stock). If Victor's offer was declined in Chapter 12, Hale Group is the rival; if accepted, you run the division that must hit targets. | Victor Hale, Kai Moreno (press) | rival pricing pressure on a market; brand/premium positioning; valuation reuse |
@@ -380,3 +379,7 @@ and the event pictures `events/rail_frozen` and `events/acquisition_offer` show 
 拒絕、撤回、過期和公司關閉的合約使用失效說明，不顯示未實際備貨／交貨／收款的成功提示；連續跳過相同交易的幾個步驟只通知一次。室內門口出生點須保留玩家碰撞間距；Pier 7 採用基底更新的家具布局，避免貨架覆蓋入口與出口路線。回歸測試檢查所有室內出生點，`--from=harbor` 可用獨立 fixture 快速檢查港區買車、租倉、送貨與存檔讀回，不能代替從新遊戲開始的完整驗收。
 
 逐項 (a) 提前完成、(b) 失效與替代路徑、(c) 箭頭稽核：`evidence/2026-09-30_24/AUDIT.md`（55 個主線目標＋18 個教學步驟）。回歸測試：`test_no_softlocks.gd`；截圖：`--bot=softlocks --lang=zh_TW`。沒有刪除／更名既有存檔欄位，SAVE_FORMAT 仍為 1。
+
+### Chapters 13–14 — Implemented systems and story (#31)
+
+Chapter 13: Year 9 news → international banking → Northridge local price → actual export shipment → weekly foreign payout conversion. An income breakdown allocates sale, platform fee, freight/pickup, rate movement and spread to the converted order. Chapter 14: Ines/guide → DDP or DDU → actual product tariff classification → 10 delivered units with return rate below 15%. After 14 days, target is 5 or an explicit review/pause without success credit. Wrong declarations enter a finite customs_hold with documents/payment/withdrawal choices. `customs` binds chapter receipts to their company; closure skips impossible transactions without forged sale/payout flags. Early receipts drain immediately. Existing Chapter 12 ending remains the season-one ending and now leads into Chapter 13; legacy ending saves continue. Dedicated art remains Planned. See wiki/21_customs_and_exports.md and test_customs.gd.

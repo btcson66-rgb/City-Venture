@@ -33,6 +33,7 @@ const STATUS_TEXT := {
 	"late": "LATE", "called": "CALLED", "defaulted": "DEFAULTED", "closed": "CLOSED", "written_off": "WRITTEN OFF",
 	"invoiced": "INVOICED", "cancelled": "CANCELLED",
 	"terminated": "TERMINATED", "sold_to_collector": "SOLD TO COLLECTOR",
+	"customs_hold": "CUSTOMS HOLD",
 }
 
 

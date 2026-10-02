@@ -261,3 +261,7 @@ Rosa Lim、Ines Duarte、Sam Okoro 均交 `characters/npc_<id>` 128×144（三�
 `executive`、`luxury_citywear`、`travel`、`formal_evening`、`logistics_site` 交三體型的 top、bottom、shoes、top_detail，每件都有 walk、sit、idle、phone、interact、carry；頭像各有灰階衣領及 detail。370 個 logical key，各交原尺寸和 4× PNG/import。布料可染色，固定細節保留原色。六膚色、三身形、三方向的實機矩陣與姿勢證據見 `evidence/20261001_shop_wardrobe/`。
 
 程式狀態：正式檔名會自動取代 stand_in；預設服裝色需讀 `game/assets/outfit_palette.json`，明確 NPC / 路人 tint 優先。未接前玩家衣服是灰階，不能宣告正式配色已進入完整遊戲。4× 圖層載入依賴角色品質 PR #46；本批只交美術和 metadata，不改玩法或程式。
+
+### Ines Duarte — implemented interaction (#31)
+
+`ines` now attends `customs_house` weekdays 09:00–16:00. `ines_customs` explains duty classification and DDP/DDU. `uniform_officer` is the interim outfit; dedicated sprites/portraits remain Planned. A permanent notice and Overseas-sales guide provide an office-hours alternative.

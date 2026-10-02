@@ -57,6 +57,10 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 			UIRoot.toast("This is Suite 2B's desk. Talk to Tom about leasing it.", "warn", "lock")
 		return
 	match action:
+		"customs_guide":
+			GameState.set_flag("customs_brief_read")
+			StoryEngine.check()
+			UIRoot.open_modal(Help.card("customs"))
 		"cafe_counter":
 			_cafe_counter()
 		"open_company_os":

@@ -1,0 +1,68 @@
+{
+ "id": "customs_hold",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "manual"
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "ines",
+  "title": "Customs hold",
+  "icon": "warning",
+  "lines": [
+   "Parcel {order} is held. Duty: {tax}; full correction penalty: {fine}. Correct the documents, pay now, or withdraw the goods.",
+   "An unresolved hold is withdrawn after 7 days; the freight remains paid."
+  ],
+  "tips": [
+   "customs_hold",
+   "duty",
+   "tariff_code"
+  ],
+  "recommended_choice": "documents"
+ },
+ "choices": [
+  {
+   "id": "documents",
+   "label": "Correct the documents and pay a reduced penalty",
+   "detail": "Pay the duty plus half the correction fine; add 2 days to delivery.",
+   "effects": [
+    {
+     "op": "customs_hold",
+     "choice": "documents"
+    }
+   ],
+   "outcome": "Documents corrected; duty paid and delivery delayed by 2 days.",
+   "requires": [
+    "cash>={document_cost}"
+   ]
+  },
+  {
+   "id": "pay",
+   "label": "Pay duty and the full penalty now",
+   "detail": "Pay the duty and full correction fine; release the parcel immediately.",
+   "effects": [
+    {
+     "op": "customs_hold",
+     "choice": "pay"
+    }
+   ],
+   "outcome": "Duty and penalty paid. The parcel continues on its international route.",
+   "requires": [
+    "cash>={full_cost}"
+   ]
+  },
+  {
+   "id": "withdraw",
+   "label": "Withdraw the parcel",
+   "detail": "Recover the goods; lose the freight already paid. No sale or payout is claimed.",
+   "effects": [
+    {
+     "op": "customs_hold",
+     "choice": "withdraw"
+    }
+   ],
+   "outcome": "The goods are back in stock. Freight remains an expense."
+  }
+ ]
+}

@@ -137,6 +137,7 @@ static func fill(text: String, ctx: Dictionary) -> String:
 		text = text.replace("{" + str(k) + "}", I18n.t(v) if v is String else str(v))
 	text = text.replace("{company}", GameState.business_display_name())
 	text = text.replace("{player}", str(GameState.data["player"]["name"]))
+	text = text.replace("{international_fee}", Fmt.money(float(GlobalMarket.cfg().get("bank_open_fee", 150))))
 	return text
 
 

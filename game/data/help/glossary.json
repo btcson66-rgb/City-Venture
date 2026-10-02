@@ -223,5 +223,30 @@
   "title": "Overseas storefront",
   "what": "After Chapter 13 opens the markets, register a company, open international banking and set local-currency prices in Company OS.",
   "why": "Regions share your existing stock and packing table. Sales and payouts use foreign currency until conversion."
+ },
+ "ddp": {
+  "title": "DDP — seller pays duty",
+  "what": "The seller pays destination duty before the parcel leaves. The buyer sees a complete price.",
+  "why": "Lower refusal risk, but duty reduces your margin. Set a price that covers it."
+ },
+ "ddu": {
+  "title": "DDU — buyer pays on arrival",
+  "what": "The buyer pays destination duty when the parcel arrives. You do not prepay it.",
+  "why": "Lower upfront cost, but unexpected charges cause more refusals and return freight."
+ },
+ "tariff_code": {
+  "title": "Tariff classification",
+  "what": "Choose electronics, household goods, textiles or general goods according to the actual product.",
+  "why": "Choosing a lower-rate category does not change the goods: wrong declarations lead to duty correction and a fine."
+ },
+ "duty": {
+  "title": "Import duty",
+  "what": "Destination duty is the declared sale value converted to home dollars, multiplied by the region and product-category rate.",
+  "why": "DDP pays now; DDU asks the buyer on arrival. Include duty and return risk in your margin."
+ },
+ "customs_hold": {
+  "title": "Customs hold",
+  "what": "A wrong tariff code or unpaid DDP duty stops the parcel before international transit.",
+  "why": "Correct documents with a reduced fine and extra delay, pay the full correction now, or withdraw the goods. After 7 unresolved days, the parcel is withdrawn automatically; freight is not refunded."
  }
 }

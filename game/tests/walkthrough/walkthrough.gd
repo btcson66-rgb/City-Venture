@@ -17,6 +17,9 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "ch13":
+		await _chapters_13_to_14(true)
+		return
 	if _arg("from") == "global_markets":
 		await _global_markets_fixture()
 		return
@@ -46,6 +49,7 @@ func run() -> void:
 		# quick rerun of the last chapters: --from=ch10 (the full walkthrough never does this)
 		await _fast_forward_to_ch10()
 		await _chapters_10_to_12()
+		await _chapters_13_to_14()
 		await _summary()
 		return
 	await _chapter1()
@@ -63,6 +67,7 @@ func run() -> void:
 		await _old_town_cafe()
 		await _harbor_logistics()
 		await _chapters_10_to_12()
+		await _chapters_13_to_14()
 	await _summary()
 
 
@@ -110,7 +115,7 @@ func _global_markets_fixture() -> void:
 	var ent := GameState.company_id()
 	GameState.data["world"]["year"] = 9
 	Ecommerce._add_stock("riverside_studio", "wireless_earbuds", 20, 18.0, 0.0)
-	Ledger.post(ent, I18n.t("Stock"), [{"acct": "inventory", "dr": 360}, {"acct": "cash", "cr": 360}])
+	Ledger.post(ent, I18n.t("Inventory"), [{"acct": "inventory", "dr": 360}, {"acct": "cash", "cr": 360}])
 	Ecommerce.create_listing("wireless_earbuds", 60.0, "self", 0.9)
 	var listing := Ecommerce.listing_for("wireless_earbuds")
 	bot.step("International bank account")
@@ -1585,7 +1590,7 @@ func _chapters_10_to_12() -> void:
 	await bot.wait(3.0)
 	bot.expect("ch12_regulation_scale" in StoryEngine.St()["chapters_done"], "Chapter 12 complete")
 	bot.expect(GameState.flag("story_complete"), "the main story is complete")
-	bot.expect("goal_growth" in StoryEngine.St()["active"], "free play: the growth goal")
+	bot.expect(StoryEngine.St()["chapter"] == "ch13_first_order_abroad", "season two continues after Chapter 12")
 	bot.expect(Ledger.check_balanced(), "ledger balanced after chapters 10–12")
 	await exit_building()
 	await metro_to("riverside")
@@ -1594,6 +1599,175 @@ func _chapters_10_to_12() -> void:
 
 ## Test harness for `--from=ch10`: set the first nine chapters' outcome directly (a company, a business account, Suite
 ## 2B, the exchange account) so Chapters 10–12 can be rerun in minutes.
+## Season-two input flow. --from=ch13 uses explicit company/stock/customer/time fixtures.
+## The full walkthrough keeps its earned company and waits through the existing sleep/packing loop.
+func _chapters_13_to_14(fast := false) -> void:
+	await bot.wait(4.0)
+	if fast:
+		UIRoot._suppress_decisions = true
+		UIRoot.tutorial.st()["off"] = true
+		Company.register("Riverlight Goods", "retail_online", "22 Founders Lane")
+		Company.open_business_account(15000)
+		Ecommerce._add_stock("riverside_studio", "wireless_earbuds", 30, 18.0, 0.0)
+		Ledger.post(GameState.company_id(), I18n.t("Inventory"), [{"acct": "inventory", "dr": 540}, {"acct": "cash", "cr": 540}])
+		Ecommerce.create_listing("wireless_earbuds", 60.0, "self", 0.9)
+		StoryEngine.St()["active"].clear()
+		StoryEngine.start_chapter("ch13_first_order_abroad")
+	await bot.wait(4.0)
+	bot.step("Chapter 13 — Year 9 news and Marcus's international banking explanation")
+	if fast:
+		Actions.run("read_news", {})
+		await bot.wait(0.5)
+		await bot.shot("ch13_news")
+		await close_modal()
+		GameState.data["clock"]["minutes"] = Clock.at_day_time(1, 13 * 60)
+		SceneRouter._enter("interior", "nexus_bank", "door", "up")
+		await bot.wait(0.8)
+	else:
+		await _read_news("global_markets")
+		await _until_weekday_hours(13, 15)
+		await exit_building()
+		await metro_to("financial")
+		await enter_building("nexus_bank")
+	await bot.use(func(n): return n.action == "talk" and n.params.get("npc", "") == "marcus", "Marcus Reed")
+	await talk_through_dialogue_first_choice()
+	await bot.wait(0.5)
+	if not GlobalMarket.company()["bank"]:
+		await bot.click_named("OpenInternationalAccount")
+	await bot.shot("ch13_international_account")
+	await close_modal()
+	if fast:
+		SceneRouter._enter("interior", "riverside_apartment", "door", "up")
+		await bot.wait(0.6)
+	else:
+		await exit_building()
+		await metro_to("riverside")
+		await enter_building("riverside_apartment")
+	bot.step("Chapter 13 — Northridge price and first export")
+	await _home_laptop("sales")
+	await bot.click_named("SalesPage_overseas")
+	if not GlobalMarket.company()["stores"].has("northridge"):
+		await bot.click_named("OpenGlobalStore_northridge")
+	var listing: Dictionary = {}
+	for l in Ecommerce.E()["listings"].values():
+		if l.get("active", false) and Ecommerce.best_location(str(l["product"])) != "":
+			listing = l
+			break
+	if listing.is_empty():
+		bot.fail("season two has no active in-stock listing; restocking is required")
+		return
+	await bot.click_named("SaveGlobalPrice_" + str(listing["id"]))
+	await bot.shot("ch13_storefront")
+	await close_modal()
+	var first: Dictionary = {}
+	if fast:
+		Ecommerce._h_order_place({"listing": listing["id"], "region": "northridge"})
+		first = Ecommerce.E()["orders"]["#%d" % int(Ecommerce.E()["counters"]["order"])]
+		await _pack_and_ship_home()
+		Ecommerce._h_pickup({"ids": [first["id"]]})
+		GameState.data["clock"]["minutes"] = int(first["ship"]["eta"])
+		Ecommerce._h_deliver({"order": first["id"]})
+		GameState.data["clock"]["minutes"] += 3 * Clock.DAY
+		GlobalMarket.payout(GameState.company_id())
+	else:
+		await pass_time_at_home(func(): return float(GlobalMarket.balance(GameState.company_id(), "NRD")["wallet"]) > 0, 40, true)
+	await _home_laptop("finance")
+	await bot.click_named("ConvertGlobal_NRD")
+	await bot.until(func(): return UIRoot.top_modal() is ExportIncomeModal, 4.0)
+	await bot.wait(4.0)
+	await bot.shot("ch13_real_income")
+	await close_modal()
+	await close_modal()
+	bot.expect("ch13_first_order_abroad" in StoryEngine.St()["chapters_done"], "Chapter 13 actual export and conversion complete")
+	await bot.wait(4.0)
+	bot.step("Chapter 14 — Ines in the open Customs House")
+	if fast:
+		GameState.data["clock"]["minutes"] = Clock.at_day_time((8 - Clock.weekday()) % 7, 10 * 60)
+		SceneRouter._enter("interior", "customs_house", "door", "up")
+		await bot.wait(0.8)
+	else:
+		await _until_weekday_hours(9, 14)
+		await exit_building()
+		await metro_to("harbor")
+		await enter_building("customs_house")
+	await bot.use(func(n): return n.action == "talk" and n.params.get("npc", "") == "ines", "Ines Duarte")
+	await bot.shot("ch14_ines")
+	await talk_through_dialogue_first_choice()
+	await bot.wait(0.5)
+	await close_modal()
+	bot.expect(GameState.flag("met_ines"), "real Ines dialogue completed")
+	if fast:
+		SceneRouter._enter("interior", "riverside_apartment", "door", "up")
+		await bot.wait(0.6)
+	else:
+		await exit_building()
+		await metro_to("riverside")
+		await enter_building("riverside_apartment")
+	bot.step("Chapter 14 — DDP declaration and accurate tariff classification")
+	await _home_laptop("sales")
+	await bot.click_named("SalesPage_overseas")
+	await bot.click_named("ExportPolicy_ddp_" + str(listing["id"]))
+	await bot.click_named("TariffCode_" + str(listing["id"]))
+	# Sorted options start with electronics; other full-walk products choose their actual category.
+	var keys: Array = Customs.cfg()["codes"].keys()
+	keys.sort()
+	for i in keys.size():
+		await bot.key_action("ui_up")
+	for i in keys.find(Customs.code_for(str(listing["product"]))):
+		await bot.key_action("ui_down")
+	await bot.key_action("ui_accept")
+	await bot.wait(0.5)
+	await bot.shot("ch14_declaration")
+	await close_modal()
+	bot.expect(GameState.flag("export_policy_chosen") and GameState.flag("export_code_correct"), "real policy and tariff inputs recorded")
+	bot.step("Chapter 14 — trial deliveries and return risk")
+	if fast:
+		var ids: Array = []
+		for i in 10:
+			Ecommerce._h_order_place({"listing": listing["id"], "region": "northridge"})
+			ids.append("#%d" % int(Ecommerce.E()["counters"]["order"]))
+		await _pack_and_ship_home()
+		Ecommerce._h_pickup({"ids": ids})
+		for id in ids:
+			var o: Dictionary = Ecommerce.E()["orders"][id]
+			if o["status"] == "shipped":
+				GameState.data["clock"]["minutes"] = int(o["ship"]["eta"])
+				Ecommerce._h_deliver({"order": id})
+		Clock.advance(3 * Clock.DAY)   # let real scheduled returns surface before judging the trial
+		StoryEngine.check()
+	else:
+		await pass_time_at_home(func(): return "ch14_customs" in StoryEngine.St()["chapters_done"], 45, true)
+	await _home_laptop("sales")
+	await bot.click_named("SalesPage_overseas")
+	if not "ch14_customs" in StoryEngine.St()["chapters_done"] and Customs.review_available():
+		await bot.click_named("PauseGlobalExpansion")
+	await bot.shot("ch14_trial_results")
+	await _scroll_to_end()
+	await bot.shot("ch14_trial_observed")
+	await close_modal()
+	bot.expect("ch14_customs" in StoryEngine.St()["chapters_done"], "Chapter 14 trial completes")
+	bot.expect(Ledger.check_balanced(), "chapters 13–14 Ledger balanced")
+	if fast:
+		bot.step("Customs hold — wrong-code fixture, real document-correction input")
+		Customs.set_declaration("northridge", str(listing["id"]), "ddp", "textiles")
+		Ecommerce._h_order_place({"listing": listing["id"], "region": "northridge"})
+		var held_id := "#%d" % int(Ecommerce.E()["counters"]["order"])
+		await _pack_and_ship_home()
+		Ecommerce._h_pickup({"ids": [held_id]})
+		for q in EventEngine.S()["queue"]:
+			if q["id"] == "customs_hold" and q["ctx"]["order"] == held_id:
+				UIRoot.open_modal(DecisionModal.new(q))
+				break
+		await bot.wait(0.5)
+		await bot.shot("ch14_customs_choices")
+		await bot.click_named("Choice_documents")
+		await bot.wait(0.4)
+		await bot.shot("ch14_customs_corrected")
+		await bot.click_named("DecisionOK")
+		bot.expect(Ecommerce.E()["orders"][held_id]["status"] == "shipped", "real documents choice releases hold")
+		bot.expect(Ledger.check_balanced(), "document correction Ledger balanced")
+
+
 func _fast_forward_to_ch10() -> void:
 	bot.step("(harness) skip to Chapter 10")
 	GameState.data["tutorial"] = {"step": 99, "seen": {}, "off": true, "v": 99}

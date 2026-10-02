@@ -247,3 +247,7 @@ Crestline 的撤回／拒絕／過期均可接續；簽約公司關閉則明說�
 ## ShopLane Global (#30)
 
 Nexus Bank opens international banking for a registered company with domestic banking ($150 once). Sales → Overseas saves local-currency prices on the same listings and stock. Pack at the existing table; use international economy or express couriers. Weekly foreign payouts can be kept or converted in Finance, with 1.5% spread and realized exchange gain/loss. See [overseas markets](20_global_markets.md). Story and overseas travel are separate tickets.
+
+## Customs and export chapters (#31)
+
+[Customs and exports](21_customs_and_exports.md) adds actual DDP/DDU declarations and duty to the shared packing/shipping lifecycle, plus Chapters 13–14. The harbor Customs House now opens weekdays; Ines also provides a laptop guide. Failed expansion can be paused honestly without a fictional sale.

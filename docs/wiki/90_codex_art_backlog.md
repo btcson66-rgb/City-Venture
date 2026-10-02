@@ -735,3 +735,7 @@ Claude 線接下來要開放兩個街區和兩個新產業：
 ## Season 2 — overseas systems (#30)
 
 Planned art requests (existing region images remain the interim display): seven world-map region cards, one each for Northridge, Auroria, Lumina, Zenkai, Almeria, Solterra and Karu; an international courier container; seven abstract currency icons (NRD, AUR, LUM, ZEN, ALM, SOL, KAR). Do not use real currency symbols or logos. This systems ticket changes no assets.
+
+### Season 2 — Chapters 13–14 (#31)
+
+Planned: backdrops/chapter_13 and backdrops/chapter_14; dedicated Ines sprites/portrait; Customs House counter, X-ray machine, shelves and filing cabinets; events/customs_hold. The existing room and uniform_officer are interim art. This ticket changes no assets.

@@ -995,7 +995,7 @@
    "id": "ch12_regulation_scale",
    "title": "CHAPTER 12 — REGULATION & SCALE",
    "subtitle": "Growing up means paperwork.",
-   "next": "",
+   "next": "ch13_first_order_abroad",
    "objectives": [
     {
      "id": "ch12_news",
@@ -1102,7 +1102,7 @@
     },
     {
      "do": "timeline",
-     "text": "The story so far ends here. Aurelia keeps going.",
+     "text": "Season one ends here. The next market is overseas.",
      "kind": "milestone"
     },
     {
@@ -1112,6 +1112,226 @@
     {
      "do": "start",
      "objective": "goal_growth"
+    }
+   ]
+  },
+  {
+   "id": "ch13_first_order_abroad",
+   "title": "CHAPTER 13 — FIRST ORDER ABROAD",
+   "subtitle": "A foreign sale is not home cash.",
+   "next": "ch14_customs",
+   "objectives": [
+    {
+     "id": "ch13_news",
+     "main": true,
+     "goal": "First order abroad",
+     "text": "Read the Year 9 news at Bloom Coffee",
+     "complete_when": [
+      "flag:news_read_y9"
+     ],
+     "skip_when": [
+      "flag:ch13_first_order_abroad_unavailable"
+     ],
+     "skip_text": "The company behind this chapter closed. The remaining transactions cannot be completed; continue without claiming sales or a payout.",
+     "target": {
+      "building": "bloom_coffee",
+      "action": "read_news"
+     },
+     "on_start": [
+      {
+       "do": "world_year",
+       "year": 9
+      },
+      {
+       "do": "customs_begin",
+       "chapter": "ch13_first_order_abroad"
+      },
+      {
+       "do": "set_flag",
+       "flag": "global_markets_open"
+      },
+      {
+       "do": "message",
+       "from": "maya",
+       "text": "Someone in Northridge recommended your products. Read the news, talk to Marcus about international banking, then price one item locally. Include freight and the bank spread before calling it profit."
+      }
+     ]
+    },
+    {
+     "id": "ch13_bank",
+     "main": true,
+     "goal": "First order abroad",
+     "text": "Open an international account at Nexus Bank; Marcus can explain the fee",
+     "complete_when": [
+      "flag:global_bank_ready"
+     ],
+     "skip_when": [
+      "flag:ch13_first_order_abroad_unavailable"
+     ],
+     "skip_text": "The company behind this chapter closed. The remaining transactions cannot be completed; continue without claiming sales or a payout.",
+     "target": {
+      "building": "nexus_bank",
+      "action": "bank_counter"
+     },
+     "on_start": []
+    },
+    {
+     "id": "ch13_listing",
+     "main": true,
+     "goal": "First order abroad",
+     "text": "Open Northridge and save one local-currency price in Sales → Overseas",
+     "complete_when": [
+      "flag:northridge_listing_ready"
+     ],
+     "skip_when": [
+      "flag:ch13_first_order_abroad_unavailable"
+     ],
+     "skip_text": "The company behind this chapter closed. The remaining transactions cannot be completed; continue without claiming sales or a payout.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    },
+    {
+     "id": "ch13_ship",
+     "main": true,
+     "goal": "First order abroad",
+     "text": "Pack and send your first Northridge order with an international courier",
+     "complete_when": [
+      "flag:first_export_shipped"
+     ],
+     "skip_when": [
+      "flag:ch13_first_order_abroad_unavailable"
+     ],
+     "skip_text": "The company behind this chapter closed. The remaining transactions cannot be completed; continue without claiming sales or a payout.",
+     "target": {
+      "action": "pack_orders"
+     },
+     "on_start": []
+    },
+    {
+     "id": "ch13_convert",
+     "main": true,
+     "goal": "First order abroad",
+     "text": "Convert your first weekly foreign payout in Finance",
+     "complete_when": [
+      "flag:first_export_converted"
+     ],
+     "skip_when": [
+      "flag:ch13_first_order_abroad_unavailable"
+     ],
+     "skip_text": "The company behind this chapter closed. The remaining transactions cannot be completed; continue without claiming sales or a payout.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "export_income_card",
+     "if": "flag:first_export_converted"
+    }
+   ]
+  },
+  {
+   "id": "ch14_customs",
+   "title": "CHAPTER 14 — CUSTOMS",
+   "subtitle": "The price is only part of the promise.",
+   "next": "",
+   "objectives": [
+    {
+     "id": "ch14_ines",
+     "main": true,
+     "goal": "Customs",
+     "text": "Meet Ines at the Customs House (weekdays 9–16), or read her guide in Overseas sales",
+     "complete_when": [
+      "flag:met_ines || flag:customs_brief_read"
+     ],
+     "skip_when": [
+      "flag:ch14_customs_unavailable"
+     ],
+     "skip_text": "The company behind this chapter closed. The remaining transactions cannot be completed; continue without claiming sales or a payout.",
+     "target": {
+      "building": "customs_house",
+      "npc": "ines"
+     },
+     "on_start": [
+      {
+       "do": "customs_begin",
+       "chapter": "ch14_customs"
+      },
+      {
+       "do": "message",
+       "from": "ines",
+       "text": "Ines Duarte, Aurelia Customs. I am at the harbor Customs House on weekdays, nine to four. My guide is also in Overseas sales if our hours do not overlap."
+      }
+     ]
+    },
+    {
+     "id": "ch14_policy",
+     "main": true,
+     "goal": "Customs",
+     "text": "Choose DDP or DDU for an overseas listing",
+     "complete_when": [
+      "flag:export_policy_chosen"
+     ],
+     "skip_when": [
+      "flag:ch14_customs_unavailable"
+     ],
+     "skip_text": "The company behind this chapter closed. The remaining transactions cannot be completed; continue without claiming sales or a payout.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    },
+    {
+     "id": "ch14_code",
+     "main": true,
+     "goal": "Customs",
+     "text": "Choose the tariff code that matches your actual product",
+     "complete_when": [
+      "flag:export_code_correct"
+     ],
+     "skip_when": [
+      "flag:ch14_customs_unavailable"
+     ],
+     "skip_text": "The company behind this chapter closed. The remaining transactions cannot be completed; continue without claiming sales or a payout.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    },
+    {
+     "id": "ch14_trial",
+     "main": true,
+     "goal": "Customs",
+     "text": "Deliver 10 overseas units with returns below 15%; after two weeks, 5 units or an honest review",
+     "complete_when": [
+      "flag:customs_trial_passed || flag:customs_trial_reviewed"
+     ],
+     "skip_when": [
+      "flag:ch14_customs_unavailable"
+     ],
+     "skip_text": "The company behind this chapter closed. The remaining transactions cannot be completed; continue without claiming sales or a payout.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "message",
+     "from": "ines",
+     "if": "flag:customs_trial_passed",
+     "text": "Your trial met the delivery and return targets. Keep checking duty, returns and cash as volumes grow."
+    },
+    {
+     "do": "message",
+     "from": "maya",
+     "if": "flag:customs_trial_reviewed",
+     "text": "You reviewed the trial and paused expansion. That is a business decision, not a sales target achieved. Existing parcels and foreign money still need settling."
     }
    ]
   }

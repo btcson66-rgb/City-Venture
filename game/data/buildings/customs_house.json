@@ -5,10 +5,9 @@
  "type": "customs",
  "hours": {
   "open": "09:00",
-  "close": "17:00",
+  "close": "16:00",
   "days": "mon,tue,wed,thu,fri"
  },
- "closed_reason": "The Customs House is not open to visitors yet: import permits and customs clearance arrive in a later build.",
  "exterior": {
   "sprite": "customs_house",
   "fallback": "civic_annex",
@@ -50,19 +49,22 @@
   ],
   "interactables": [
    {
-    "id": "notice",
+    "id": "customs_guide",
     "at": [
-     112,
-     100
+     144,
+     104
     ],
-    "label": "Read the notice",
-    "action": "look",
-    "params": {
-     "icon": "lock",
-     "text": "CLOSED TO VISITORS. Import permits and customs clearance are not part of this build yet."
-    }
+    "label": "Read Ines's customs guide",
+    "action": "customs_guide",
+    "params": {}
    }
   ],
-  "npc_spots": {}
- }
+  "npc_spots": {
+   "officer": [
+    96,
+    88
+   ]
+  }
+ },
+ "enterable": true
 }

@@ -1,0 +1,43 @@
+{
+ "id": "ines_customs",
+ "with": "ines",
+ "nodes": {
+  "start": [
+   {
+    "who": "ines",
+    "text": "The tariff code describes the goods, not the tax you would prefer. Electronics, household goods, textiles or general goods."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "I will pay the duty: DDP.",
+      "next": "ddp"
+     },
+     {
+      "text": "I want the buyer to pay on arrival: DDU.",
+      "next": "ddu"
+     }
+    ]
+   }
+  ],
+  "ddp": [
+   {
+    "who": "ines",
+    "text": "Include that duty in your margin. Buyers know the full price and refusals are less likely; it still does not guarantee a profit."
+   }
+  ],
+  "ddu": [
+   {
+    "who": "ines",
+    "text": "Your shipping bill is lower, but the buyer sees another charge at the border. Expect more refusals and return freight."
+   }
+  ]
+ },
+ "on_end": [
+  {
+   "do": "set_flag",
+   "flag": "met_ines"
+  }
+ ]
+}

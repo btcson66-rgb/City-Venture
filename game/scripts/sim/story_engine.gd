@@ -194,6 +194,7 @@ static func check() -> void:
 
 
 static func _check_all() -> void:
+	Customs.reconcile()
 	Contracts.reconcile_tags()
 	# A closing company cannot leave a side objective waiting for a business action forever.
 	for id in side_progress().keys():
@@ -221,6 +222,8 @@ static func _check_all() -> void:
 		St()["active"].erase("goal_growth")
 		start_chapter("ch10_digital_rails")
 	var changed := true
+	if "ch12_regulation_scale" in St()["chapters_done"] and not "ch13_first_order_abroad" in St()["chapters_done"] and St().get("chapter", "") == "ch12_regulation_scale":
+		start_chapter("ch13_first_order_abroad")
 	var guard := 0
 	var limit: int = DataDB.story.get("side", []).size() + 1
 	for c in chapters():
@@ -270,6 +273,10 @@ static func run_actions(actions: Array) -> void:
 		if a.has("if") and not Cond.eval(str(a["if"])):
 			continue
 		match a.get("do", ""):
+			"customs_begin":
+				Customs.begin(str(a["chapter"]))
+			"export_income_card":
+				UIRoot.open_modal(ExportIncomeModal.new())
 			"dialogue":
 				UIRoot.queue_dialogue(a["id"])
 			"message":

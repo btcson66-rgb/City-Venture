@@ -15,6 +15,8 @@ static func apply(e: Dictionary, ctx: Dictionary) -> Dictionary:
 	var op: String = e.get("op", "")
 	var ent := GameState.business_entity()
 	match op:
+		"customs_hold":
+			return Customs.resolve(str(ctx.get("order", "")), str(e.get("choice", "")))
 		"cash":
 			var amt := _num(e.get("amount", 0), ctx)
 			var cat: String = e.get("category", "other")

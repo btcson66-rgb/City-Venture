@@ -74,10 +74,20 @@ func build() -> void:
 		ok.name = "DecisionOK"
 		footer.add_child(ok)
 		return
+	var recommended := ""
+	if pres.has("recommended_choice"):
+		for c in def.get("choices", []):
+			if c["id"] == pres["recommended_choice"] and EventEngine.choice_available(c, inst["ctx"]):
+				recommended = str(c["id"])
+		if recommended == "":
+			for c in def.get("choices", []):
+				if EventEngine.choice_available(c, inst["ctx"]):
+					recommended = str(c["id"])
+					break
 	for c in def.get("choices", []):
 		var avail := EventEngine.choice_available(c, inst["ctx"])
 		var row := UIK.vbox(0)
-		var b := UIK.button(EventEngine.fill(c["label"], inst["ctx"]), _pick.bind(c["id"]))
+		var b := UIK.button(EventEngine.fill(c["label"], inst["ctx"]), _pick.bind(c["id"]), "primary" if recommended == str(c["id"]) else "")
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		b.disabled = not avail
 		b.name = "Choice_" + str(c["id"])
@@ -90,7 +100,10 @@ func build() -> void:
 		else:
 			row.add_child(b)
 		if c.has("detail"):
-			var dl := UIK.wrap(EventEngine.fill(c["detail"], inst["ctx"]) + ("" if avail else I18n.t("  (not possible now)")), 7, Art.C_MUTED, 370)
+			var suffix := "" if avail else I18n.t("  (not possible now)")
+			if pres.has("recommended_choice") and not avail:
+				suffix = I18n.t(" ✗ Transfer company cash or choose withdrawal.")
+			var dl := UIK.wrap(EventEngine.fill(c["detail"], inst["ctx"]) + suffix, 7, Art.C_MUTED, 370)
 			var pad := MarginContainer.new()
 			pad.add_theme_constant_override("margin_left", 10)
 			pad.add_child(dl)

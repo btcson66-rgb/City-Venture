@@ -57,6 +57,7 @@ static func open_bank() -> Dictionary:
 		Ledger.expense(GameState.company_id(), "bank_fees", fee,
 			I18n.t("International account opening fee: %s") % Fmt.money(fee), {"type": "global_bank"})
 		company()["bank"] = true
+	StoryEngine.check()
 	return {"ok": true}
 
 
@@ -78,6 +79,7 @@ static func open_store(region: String) -> Dictionary:
 		return {"ok": false, "error": why}
 	if not company()["stores"].has(region):
 		company()["stores"][region] = {"prices": {}, "revenue": 0.0}
+	StoryEngine.check()
 	return {"ok": true}
 
 
@@ -97,6 +99,7 @@ static func set_price(region: String, listing: String, price: float) -> Dictiona
 	if price < min_price or price > max_price:
 		return {"ok": false, "error": I18n.t("Price range: %s–%s %s per unit.") % [Fmt.money(min_price), Fmt.money(max_price), currency(region)]}
 	company()["stores"][region]["prices"][listing] = snappedf(price, 0.01)
+	StoryEngine.check()
 	return {"ok": true}
 
 
@@ -230,6 +233,7 @@ static func convert_currency(entity: String, ccy: String) -> Dictionary:
 	Ledger.post(entity, I18n.t("Convert %s %s to home cash: %s") % [Fmt.money(units), ccy, Fmt.money(cash)], lines,
 		{"type": "fx_conversion", "currency": ccy, "foreign": units, "rate": FX.rate(ccy), "realized": delta})
 	b["wallet"] = 0.0
+	StoryEngine.check()
 	return {"ok": true, "cash": cash, "gain_loss": delta}
 
 
@@ -285,6 +289,7 @@ static func close_for_entity(entity: String) -> void:
 	for o in Ecommerce.E()["orders"].values():
 		if not o.has("region") or o["entity"] != entity:
 			continue
+		Customs.remove_decisions(str(o["id"]))
 		if o["status"] in Ecommerce.OPEN_STATUSES:
 			var cost := float(o.get("cogs", 0))
 			if cost > 0:

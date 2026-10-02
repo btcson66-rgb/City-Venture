@@ -70,6 +70,7 @@ static func sales(os: CompanyOS, box: VBoxContainer) -> void:
 		first = false
 		save.name = "SaveGlobalPrice_" + str(l["id"])
 		row.add_child(save)
+		CustomsUI.declaration(os, box, region, str(l["id"]))
 		box.add_child(UIK.label(I18n.t("Expected demand: %.1f orders/day") % GlobalMarket.demand(region, l), 7, Art.C_MUTED))
 	if Ecommerce.E()["listings"].is_empty():
 		box.add_child(UIK.wrap("Create a product listing in Domestic sales first, then set its overseas price here.", 8, Art.C_GOLD, 460))
@@ -78,6 +79,7 @@ static func sales(os: CompanyOS, box: VBoxContainer) -> void:
 		box.add_child(go)
 	box.add_child(UIK.label_tip("International shipping", "international_shipping"))
 	box.add_child(UIK.wrap("Pack overseas orders at your packing table. Economy and express couriers use international routes; your own van only delivers domestic parcels.", 7, Art.C_MUTED, 460))
+	CustomsUI.guide(os, box)
 
 
 static func finance(os: CompanyOS, box: VBoxContainer) -> void:
