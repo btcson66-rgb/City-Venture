@@ -1,0 +1,75 @@
+{
+ "rate_mean": 0.025,
+ "rate_min": 0.005,
+ "rate_max": 0.12,
+ "rate_reversion": 0.045,
+ "rate_noise": 0.003,
+ "rate_shock": 0.08,
+ "peak": 1.08,
+ "trough": 0.92,
+ "cycle_reversion": 0.04,
+ "cycle_noise": 0.025,
+ "cycle_min": 0.65,
+ "cycle_max": 1.4,
+ "shock_chance": 0.025,
+ "shock_size": 0.06,
+ "shock_days": 12,
+ "inflation_reversion": 0.025,
+ "inflation_cycle": 0.002,
+ "inflation_noise": 0.002,
+ "inflation_min": 0.85,
+ "inflation_max": 1.25,
+ "demand_min": 0.45,
+ "demand_max": 1.6,
+ "history_days": 400,
+ "industries": {
+  "automotive": {
+   "cycle": 1.4,
+   "rate": 5.0
+  },
+  "cafe": {
+   "cycle": 0.5,
+   "rate": 0.6
+  },
+  "consulting": {
+   "cycle": 1.0,
+   "rate": 1.5
+  },
+  "ecommerce": {
+   "cycle": 1.0,
+   "rate": 1.5
+  },
+  "energy": {
+   "cycle": 1.0,
+   "rate": 1.5
+  },
+  "hotel": {
+   "cycle": 1.0,
+   "rate": 1.5
+  },
+  "international_trade": {
+   "cycle": 1.0,
+   "rate": 1.5
+  },
+  "logistics": {
+   "cycle": 1.0,
+   "rate": 1.5
+  },
+  "manufacturing": {
+   "cycle": 1.0,
+   "rate": 1.5
+  },
+  "media": {
+   "cycle": 1.0,
+   "rate": 1.5
+  },
+  "real_estate": {
+   "cycle": 1.4,
+   "rate": 5.0
+  },
+  "saas": {
+   "cycle": 1.0,
+   "rate": 1.5
+  }
+ }
+}

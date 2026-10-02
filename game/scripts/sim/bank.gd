@@ -41,7 +41,7 @@ static func debt(ent: String) -> float:
 
 
 static func base_rate() -> float:
-	return float(DataDB.year_def(int(GameState.data["world"]["year"])).get("interest_rate", 0.025))
+	return Macro.rate()
 
 
 static func apr() -> float:

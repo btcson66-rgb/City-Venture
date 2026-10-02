@@ -6,7 +6,7 @@ extends Modal
 const TABS := [["overview", "Overview", "company"], ["finance", "Finance", "finance"], ["sales", "Sales", "orders"],
 	["operations", "Operations", "parcel"], ["inventory", "Inventory", "inventory"], ["people", "People", "people"],
 	["contracts", "Contracts", "contracts"], ["freelance", "Freelance", "tasks"], ["saas", "SaaS", "laptop"], ["cafe", "Café", "coffee"],
-	["logistics", "Logistics", "map"]]
+	["logistics", "Logistics", "map"], ["market", "Market", "world"]]
 const PLANNED := [["Property", "home"], ["International", "world"], ["Reports", "tasks"]]
 
 var terminal := "laptop"
@@ -83,7 +83,9 @@ func build() -> void:
 	body.add_child(row)
 	var nav := UIK.vbox(2)
 	nav.custom_minimum_size = Vector2(96, 0)
-	row.add_child(nav)
+	var nav_scroll := UIK.scroll(nav, Vector2(96, 230))
+	nav_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	row.add_child(nav_scroll)
 	var shown: Array = TABS.filter(func(t): return not (t[0] == "cafe" and not Cafe.leased()) and not (t[0] == "logistics" and not Logistics.has_van()))
 	# the café tab appears once you lease the corner unit, the logistics tab once you own a van; with all eleven the
 	# buttons get a little tighter so the column still fits the window
@@ -1423,3 +1425,7 @@ func _drive_run(id: String) -> void:
 				"warn" if r["late"] else "good", "parcel")
 		if is_inside_tree():
 			rebuild())
+
+
+func _tab_market() -> void:
+	MarketView.render(self)

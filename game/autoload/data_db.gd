@@ -3,7 +3,7 @@ extends Node
 ## Content is data-driven (Handoff §73): scene scripts only reference ids.
 
 const FOLDERS := ["businesses", "products", "suppliers", "companies", "npcs", "buildings", "districts",
-	"regions", "regulations", "events", "dialogue", "properties", "jobs", "scenarios"]
+	"regions", "regulations", "events", "dialogue", "properties", "jobs", "scenarios", "rivals"]
 
 var businesses := {}
 var products := {}
@@ -19,6 +19,7 @@ var dialogue := {}
 var properties := {}
 var jobs := {}
 var scenarios := {}
+var rivals := {}
 var difficulty := {}
 var economy := {}      # marketplace, shipping, living, settlement_methods
 var city := {}

@@ -154,3 +154,10 @@ Ground taps follow walkable routes; nearby objects show a touch interaction butt
 ## Replay setup and cards (#89)
 
 New Game offers Easy/Standard/Hard/Custom rules, a seed and story/sandbox selection, then character creation. Scenario cards show objective, current/required quantities, deadline and a single next action. The six openings are `inherited_cafe`, `fresh_restart`, `venture_fund`, `harbor_cargo`, `family_property`, `part_time_start`. Weekly challenges use fixed standard rules; local history has no online ranking. See [replay rules](../REPLAY.md). Maple Court is a financial scenario asset; a physical property scene remains planned outside this ticket.
+
+
+### Market and City news (#90)
+
+The Company OS Market tab (`MarketView`) shows seeded cycle/base rate/inflation and normalized shares, rivals and bounded daily headlines. Its navigation scrolls to preserve minimum button targets. The phone City news app shows 1–3 items per day. Poaching offers have salary-match and departure choices and expire after three days. `macro_cycle` and `market_competition` explanation badges and `os_market`/`poach` help cards explain the costs.
+
+Rival data IDs: `automotive_1`, `automotive_2`, `cafe_1`, `cafe_2`, `consulting_1`, `consulting_2`, `ecommerce_1`, `ecommerce_2`, `energy_1`, `energy_2`, `hotel_1`, `hotel_2`, `international_trade_1`, `international_trade_2`, `logistics_1`, `logistics_2`, `manufacturing_1`, `manufacturing_2`, `media_1`, `media_2`, `real_estate_1`, `real_estate_2`, `saas_1`, `saas_2`. These cover declared industries; the old PR target does not make every industry playable.

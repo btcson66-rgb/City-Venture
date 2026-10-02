@@ -116,7 +116,8 @@ static func company_value() -> float:
 	var e := GameState.business_entity()
 	return Ledger.cash(e) + Ledger.balance(e, "inventory") + Ledger.balance(e, "inventory_in_transit") + Ledger.balance(e, "goods_out") \
 		+ Ledger.balance(e, "marketplace_balance") + Ledger.balance(e, "accounts_receivable") + Ledger.balance(e, "deposits") \
-		+ Ledger.balance(e, "accounts_payable") + Ledger.balance(e, "deferred_revenue") + Ledger.balance(e, "escrow_held") + Ledger.balance(e, "frozen_funds")
+		+ Ledger.balance(e, "accounts_payable") + Ledger.balance(e, "deferred_revenue") + Ledger.balance(e, "escrow_held") + Ledger.balance(e, "frozen_funds") \
+		+ (Ledger.balance(e, "investments") if e != "player" else 0.0)
 
 
 # ================================================================ Green Business Grant (Year 4)

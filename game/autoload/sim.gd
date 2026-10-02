@@ -111,6 +111,8 @@ func _dispatch(kind: String, p: Dictionary) -> void:
 
 
 func _on_hour(t: int, h: int) -> void:
+	phase = "hour:macro"
+	Macro.on_hour(t, h)
 	phase = "hour:compliance"
 	Compliance.on_hour(t, h)
 	phase = "hour:ecommerce"

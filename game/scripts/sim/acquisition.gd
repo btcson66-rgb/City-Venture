@@ -146,3 +146,8 @@ static func handle(kind: String, p: Dictionary) -> void:
 		GameState.add_message("victor", I18n.t("Victor Hale. Revenue is at %s of the number we signed on. Under our agreement the earn-out doesn't pay. I would rather have paid it.") % Fmt.pct(now_rev / maxf(1.0, base)))
 		GameState.timeline(I18n.t("The earn-out did not pay: revenue fell short of the agreed floor."), "milestone")
 		GameState.set_flag("earnout_missed")
+
+
+## Independent late-game purchase; separate from the story offer to sell your own company.
+static func buy_rival(id: String) -> Dictionary:
+	return Rivals.acquire(id)

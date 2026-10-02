@@ -106,6 +106,7 @@ static func _make_person(role: String) -> Dictionary:
 	# better people ask for more: salary spreads across the role's band by skill, with some noise
 	var t := (skill - 1) / 4.0
 	var salary := snappedf(lerpf(float(sal[0]), float(sal[1]), clampf(t + (GameState.randf() - 0.5) * 0.3, 0.0, 1.0)), 5.0)
+	salary = snappedf(salary * Macro.costs() * Rivals.wages(), 0.01)
 	var traits: Array = c.get("traits", [])
 	var ap := GameState.default_appearance()
 	var opts := DataDB.character

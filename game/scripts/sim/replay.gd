@@ -156,6 +156,8 @@ static func net_worth() -> float:
 	for entity in GameState.data["entities"]:
 		if entity != "player" and GameState.data["entities"][entity].get("kind", "") != "company":
 			continue
+		if entity != "player":
+			total += Ledger.balance(entity, "investments")
 		for account in ["cash", "marketplace_balance", "accounts_receivable", "inventory", "inventory_in_transit", "goods_out", "deposits", "property", "escrow_held", "frozen_funds", "loan_payable", "wages_payable", "accounts_payable", "deferred_revenue"]:
 			total += Ledger.balance(entity, account)
 	return snappedf(total, 0.01)

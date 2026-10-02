@@ -112,7 +112,7 @@ static func fuel_mult() -> float:
 
 static func fuel_cost_per_km() -> float:
 	var f: Dictionary = cfg().get("fuel", {})
-	return float(f.get("l_per_km", 0.14)) * float(f.get("price_l", 2.1)) * fuel_mult()
+	return float(f.get("l_per_km", 0.14)) * float(f.get("price_l", 2.1)) * fuel_mult() * Macro.costs()
 
 
 static func upkeep_per_km() -> float:
@@ -370,7 +370,7 @@ static func post_jobs() -> int:
 	if not has_van():
 		return 0
 	var r := runs_cfg()
-	var want := GameState.randi_range(int(r["per_day"][0]), int(r["per_day"][1]))
+	var want := roundi(GameState.randi_range(int(r["per_day"][0]), int(r["per_day"][1])) * Macro.demand("logistics") * Rivals.demand("logistics"))
 	var n := 0
 	while n < want and open_jobs().size() < int(r.get("max_open", 8)):
 		var j := _make_job()

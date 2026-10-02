@@ -25,6 +25,7 @@ static func create_offer(t: Dictionary) -> String:
 		"upfront_rate": float(t.get("upfront_rate", 0.0)), "currency": "AUD", "settlement": "bank_transfer",
 		"status": "offered", "offered": Clock.now(), "expires": Clock.now() + int(t.get("expires_days", 2)) * Clock.DAY,
 		"tag": str(t.get("tag", "")),
+		"competitors": Rivals.competitors("ecommerce") if Rivals.active() else [],
 		"patience": int(DataDB.companies.get(t["buyer"], {}).get("negotiation", {}).get("patience", 1)),
 		"history": [{"t": Clock.now(), "by": t["buyer"], "text": I18n.t("Offer: %d × %s @ %s, Net %d") % [qty, I18n.t(p.get("name", "")), Fmt.money(price), int(t.get("payment_terms_days", 30))]}],
 	}

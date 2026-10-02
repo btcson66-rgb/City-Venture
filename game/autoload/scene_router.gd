@@ -67,6 +67,7 @@ func go_arrival(setup: Dictionary) -> void:
 
 ## Called by the arrival sequence when it ends.
 func begin_world() -> void:
+	Macro.initialize()
 	await _fade(func():
 		_enter("interior", "riverside_apartment", "bed_side", ""))
 	if Replay.story_enabled():

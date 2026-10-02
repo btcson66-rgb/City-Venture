@@ -493,3 +493,8 @@ InputAccess stores touch contacts, transient walking routes and controller focus
 ### Replay rules and scenarios (#89)
 
 `difficulty.json` supplies bounded presets/custom fields, market variation and score weights; `scenarios/*.json` supplies `{id, name, description, goal, initial, win, limit_days|limit_months}`. DataDB loads both. Optional saved `run` snapshots rules/seed/preferences, full scenario definition, started/deadline minutes, original company id, starting net worth, status/result and read/recorded flags. Missing `run` preserves original behavior. `property` is a ledger asset; scenario mortgages remain `loan_payable` and ordinary Bank loan schedules. Local challenge history is separate from game saves and preserves corrupt files. See [REPLAY.md](REPLAY.md) for all keys, units and six IDs.
+
+
+## Market state (#90)
+
+`economy/macro.json`: bounded daily mean reversion/noise/shock settings, phase thresholds and per-industry cycle/rate sensitivity. `economy/rivals.json`: weekly price/quality/advertising/location and payroll/acquisition/news limits. `data/rivals/*.json`: `{id,name,industry,strategy,capital,price,quality,locations}`. Optional saved `macro` contains private RNG string, daily index/rate/inflation/trend/shock expiry and bounded path; `rivals` contains private RNG string, last week, virtual-company books/status/buyer/acquired cost and timed staff offers; `city_news` contains last day, timeline/event cursors and bounded published/queued items. Current contract/freelance offers may carry optional dynamic `competitors` snapshots. No existing keys renamed. Acquisition purchases post cash to investments; closure writes the asset off. See MARKET.md for neutral legacy quotes and dependency boundaries.

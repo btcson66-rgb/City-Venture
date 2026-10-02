@@ -1,0 +1,11 @@
+# #90 market self-review (in progress)
+
+Current checks: 295/295 unit tests passed in 19.8 seconds; i18n 3249 translated, missing 0; wiki_check OK (3830 assets / 221 data IDs). Six market tests plus existing suites are included in unit.xml. Self-review added real company-closure/investment and rival trade-receipt assertions; the final full suite above includes these changes. Integration still requires rerun on the agreed base.
+
+Chinese native short tour: 3 samples / 0 failures. The same normal café/job strategy for 120 days at seeds 90/91/92 gained $13,223.13 / $19,076.27 / $17,256.39 in net worth. All ledgers balanced and all cash balances remained positive. Different demand/rates produced different revenues. Three profitable samples are not a universal profitability or risk-free-strategy proof.
+
+JPGs show the Company OS Market page, phone City news and competing staff offer. Currency units and weekly salary decimals are visible. Poaching has two real choices and no recommended/primary decision; offers expire after three days with time running. Full walkthrough is running in an isolated QA save directory; no pass is claimed yet.
+
+Self-review fixes: clamp after numeric quantization; canonicalize JSON numeric comparison while preserving saved RNG; use one-based Clock days; scroll Company OS navigation; remove unsupported recommendation from the staff choice; guard deferred offer dialogs against stacking; include purchased market presence in net worth/company book value; write off acquired assets and clear recruitment offers at company closure; retain rival quantity/charged-price receipts rather than unexplained income.
+
+Blocking integration discrepancy: the requested Continuous mode/Session A documentation is on origin/claude/gifted-franklin-9hr8ju, not the specified PR target origin/claude/exciting-bardeen-y71ixv. The newer branch's beta_audit source was executed read-only against this checkout: 16 inherited hits (beta-audit.txt), including other-session content. This is not a passing self-review. The target lacks RFQ/brief/industry framework callers; the current dynamic competitor snapshot API and contract/freelance hooks do not constitute RFQ/brief acceptance. Awaiting the user's base-integration choice before moving to #40.

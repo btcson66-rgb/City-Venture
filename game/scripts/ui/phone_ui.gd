@@ -114,6 +114,8 @@ func _render() -> void:
 			_shoplane()
 		"timeline":
 			_timeline()
+		"news":
+			_news()
 		"save":
 			_save()
 
@@ -132,7 +134,7 @@ func _home() -> void:
 	var unread := GameState.unread_messages()
 	var apps := [["messages", "mail", I18n.t("Messages") + (" %d" % unread if unread > 0 else "")], ["bank", "bank", "Bank"], ["tasks", "tasks", "Tasks"],
 		["map", "map", "City"], ["shoplane", "orders", "ShopLane"], ["timeline", "calendar", "Timeline"],
-		["world", "world", "World"], ["save", "save", "Save"], ["close", "close", "Close"]]
+		["news", "mail", "City news"], ["world", "world", "World"], ["save", "save", "Save"], ["close", "close", "Close"]]
 	for a in apps:
 		var b := Button.new()
 		b.custom_minimum_size = Vector2(40, 40)
@@ -293,3 +295,12 @@ func _save() -> void:
 	b.add_theme_font_size_override("font_size", 7)
 	content.add_child(b)
 	content.add_child(UIK.wrap(I18n.t("This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen.") % SaveSystem.current_slot(), 6, Art.C_DIM, 124))
+
+
+func _news() -> void:
+	_header("City news")
+	content.add_child(UIK.label_tip("Market conditions", "macro_cycle", 7))
+	var items: Array = CityNews.S()["items"]
+	for index in range(items.size() - 1, -1, -1):
+		content.add_child(UIK.label(Clock.fmt_short(int(items[index]["t"])), 6, Art.C_GOLD))
+		content.add_child(UIK.wrap(str(items[index]["text"]), 7, Art.C_WHITE, 124))
