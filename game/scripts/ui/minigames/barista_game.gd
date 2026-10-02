@@ -31,7 +31,7 @@ func intro_lines() -> Array:
 	return ["Each customer reads out an order. Build it: cup size, drink, milk and shots.",
 		"Press Serve before their patience runs out. Right drinks, served fast, lift your café's rating." if own_counter
 			else "Press Serve before their patience runs out. Correct drinks served quickly earn tips.",
-		"House rules: an Americano never takes milk, and a flat white is always a double shot."]
+		"House rules: single shot by default; an Americano never takes milk, and a flat white is always a double shot."]
 
 
 func round_name() -> String:
@@ -61,8 +61,7 @@ func order_text() -> String:
 	var t := _name(DRINKS, want["drink"]) + sep + _name(SIZES, want["size"])
 	if want["milk"] != "none":
 		t += sep + _name(MILKS, want["milk"])
-	if want["shots"] == "2" and want["drink"] != "flat_white":
-		t += sep + _name(SHOTS, "2")
+	t += sep + _name(SHOTS, str(want["shots"]))
 	return t
 
 

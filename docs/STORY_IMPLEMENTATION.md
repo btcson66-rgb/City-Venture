@@ -414,3 +414,6 @@ and the event pictures `events/rail_frozen` and `events/acquisition_offer` show 
 拒絕、撤回、過期和公司關閉的合約使用失效說明，不顯示未實際備貨／交貨／收款的成功提示；連續跳過相同交易的幾個步驟只通知一次。室內門口出生點須保留玩家碰撞間距；Pier 7 採用基底更新的家具布局，避免貨架覆蓋入口與出口路線。回歸測試檢查所有室內出生點，`--from=harbor` 可用獨立 fixture 快速檢查港區買車、租倉、送貨與存檔讀回，不能代替從新遊戲開始的完整驗收。
 
 逐項 (a) 提前完成、(b) 失效與替代路徑、(c) 箭頭稽核：`evidence/2026-09-30_24/AUDIT.md`（55 個主線目標＋18 個教學步驟）。回歸測試：`test_no_softlocks.gd`；截圖：`--bot=softlocks --lang=zh_TW`。沒有刪除／更名既有存檔欄位，SAVE_FORMAT 仍為 1。
+
+### NPC destination schedules (#109)
+Meet Daniel, Ken and Lina objectives carry an NPC target so initial guidance and the arrow reflect their scheduled presence, not just the building opening hours. Hours are displayed without changing completion conditions or story progression.

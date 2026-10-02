@@ -500,7 +500,7 @@ func _do_list(pid: String, photo: String, photo_q: float) -> void:
 
 # ============================================================== OPERATIONS
 func _tab_operations() -> void:
-	_concepts(["moq", "lead_time", "supplier_terms", "packaging_levy", "shipping_index", "settlement_wire", "letter_of_credit", "digital_dollars"])
+	_concepts(["moq", "lead_time", "supplier_terms", "net_terms", "accounts_payable", "packaging_levy", "shipping_index", "settlement_wire", "letter_of_credit", "digital_dollars"])
 	_section("Fulfilment pipeline")
 	var g := GridContainer.new()
 	g.columns = 5
@@ -579,6 +579,7 @@ func _tab_operations() -> void:
 				var terms := UIK.button(I18n.t("Net %d days") % int(s["net_terms_for_companies"]["days"]), _buy.bind(sid, pid, key, true))
 				terms.disabled = Ecommerce.space_block(loc, int(buy_qty[key])) != "" or Compliance.import_block(sid) != ""
 				row.add_child(terms)
+				row.add_child(UIK.tip("net_terms"))
 			v2.add_child(row)
 		content.add_child(card)
 	_section("Purchase orders")
@@ -599,6 +600,7 @@ func _tab_operations() -> void:
 		t.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row2.add_child(t)
 		row2.add_child(UIK.label(Fmt.money0(po["total"]) + (" · Net" if po["terms"] == "net" else ""), 7, Art.C_WHITE))
+		row2.add_child(UIK.tip("net_terms"))
 		if po["status"] == "awaiting_payment" and Rails.is_frozen_po(po):
 			row2.add_child(UIK.chip(I18n.t("FROZEN · BACK ") + Clock.fmt_short(Rails.frozen_until()).to_upper(), Art.C_RED))
 			row2.add_child(UIK.tip("frozen_funds"))
@@ -880,6 +882,7 @@ func _tab_contracts() -> void:
 			["Payment terms", I18n.t("Net %d days%s") % [int(k["payment_terms_days"]), (I18n.t(" · %d%% upfront") % int(float(k["upfront_rate"]) * 100)) if float(k["upfront_rate"]) > 0 else ""]],
 			["Late penalty", Fmt.pct(float(k["penalty_rate"]))], ["Quality", Fmt.pct(float(k["quality_req"]))], ["Currency", "AUD (Aurelia dollar)"], ["Settlement", "Bank transfer"]]:
 		v.add_child(UIK.kv(row[0], row[1], Art.C_WHITE, 7))
+		if row[0] == "Payment terms": v.add_child(UIK.tip("net_terms"))
 	var right := UIK.vbox(2)
 	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	cols.add_child(right)
@@ -1062,6 +1065,7 @@ func _tab_freelance() -> void:
 		ol.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 		row.add_child(ol)
 		row.add_child(UIK.label(I18n.t("%d h · %d days · %s") % [int(o["hours"]), int(o["days"]), I18n.t("paid on delivery") if int(o["terms"]) == 0 else I18n.t("net %d") % int(o["terms"])], 7, Art.C_MUTED))
+		row.add_child(UIK.tip("net_terms"))
 		row.add_child(UIK.expand())
 		row.add_child(UIK.label(Fmt.money0(float(o["fee"])), 9, Art.C_GREEN, true))
 		var oid: String = o["id"]

@@ -71,6 +71,7 @@ func test_barista_orders_follow_the_house_rules() -> void:
 		g.round_i = 0
 		g.stage = Control.new()
 		g.build_round()
+		runner.check(g.order_text().contains(BaristaGame._name(BaristaGame.SHOTS, str(g.want["shots"]))), "every ticket states its shot count, including flat white")
 		if g.want["drink"] == "americano":
 			runner.check(g.want["milk"] == "none", "americano without milk")
 		if g.want["drink"] == "flat_white":

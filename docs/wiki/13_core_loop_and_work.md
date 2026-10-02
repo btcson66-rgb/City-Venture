@@ -252,3 +252,6 @@ Crestline 的撤回／拒絕／過期均可接續；簽約公司關閉則明說�
 通用 Jobs 工單記錄客戶、範圍、工作量、交期、價格、Net 0／30／60、訂金及違約罰則。先完成範圍，再交付及開立發票，付款日前留在應收帳款；公司關閉後不再重收。既有商品合約仍使用原協商與扣庫存流程，只共用訂金與發票分錄。
 
 通用 Assets 支援購買、租賃、直線折舊、保養、故障與公司關閉拍賣，殘值為購入價 40–60%。固定資產帳面價值與已簽工單納入銀行擔保額度。物流貨車已在購買時列費用，遷移後不再重複折舊；保留原保險、油耗、維護費與拍賣數字。舊存檔延遲建立新區段，不改既有帳本。
+
+## Player feedback guidance (#109)
+Every barista ticket explicitly lists Single shot or Double shot, including flat white. Tutorial cards, objective text, navigation and City Guide share live opening windows. Closed destinations offer an explicit wait action; weekend closures name the actual next opening date. NPC-specific objectives use the person’s scheduled availability. Payment terms badges explain Net 0, Net 30 and Net 60, supplier cash timing, deposits/upfront, MOQ, lead time and AR/AP.

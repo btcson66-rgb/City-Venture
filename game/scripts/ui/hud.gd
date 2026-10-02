@@ -155,6 +155,8 @@ func _ready() -> void:
 	SaveSystem.saved.connect(_on_saved)
 	EventBus.cash_changed.connect(_on_cash)
 	EventBus.objective_changed.connect(refresh)
+	Clock.minute_tick.connect(func(_t):
+		if visible and Clock.world_active: _refresh_objective_hours())
 	EventBus.message_received.connect(func(_a, _b): refresh())
 	welcome = BuildingWelcome.new()
 	add_child(welcome)
@@ -275,10 +277,17 @@ func refresh() -> void:
 	var o := StoryEngine.main_objective()
 	obj_panel.visible = not o.is_empty()
 	goal_label.text = I18n.t(str(o.get("goal", ""))).to_upper()
-	obj_label.text = o.get("text", "")
+	_refresh_objective_hours()
 	var ws := SceneRouter.world_scene()
 	if ws != null:
 		loc_label.text = (I18n.t(DataDB.districts[ws.scene_id]["name"]) if ws.kind == "district" else I18n.t(DataDB.building(ws.scene_id).get("name", ""))).to_upper()
+
+
+func _refresh_objective_hours() -> void:
+	var o := StoryEngine.main_objective()
+	obj_label.text = o.get("text", "")
+	var hours := DestinationHours.target_text(o)
+	if hours != "": obj_label.text += "\n" + hours
 
 
 func _on_saved(slot: int) -> void:

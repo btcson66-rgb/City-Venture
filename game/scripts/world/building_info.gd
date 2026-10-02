@@ -112,11 +112,11 @@ static func hours(id: String) -> String:
 
 static func status(id: String) -> String:
 	if SceneRouter.building_open(id)["open"]:
-		return I18n.t("Open now")
+		return str(DestinationHours.status(id)["text"])
 	var b := DataDB.building(id)
 	if b.has("closed_reason"):
 		return I18n.t("Not open yet")
-	return I18n.t("Closed · opens %s") % str(b.get("hours", {}).get("open", "00:00"))
+	return str(DestinationHours.status(id)["text"])
 
 
 static func door_text(id: String) -> String:

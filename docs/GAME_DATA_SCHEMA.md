@@ -544,3 +544,6 @@ Shared properties may have `purchase_price`, `rooms`, investment_home kind and s
 
 ### Automotive (#68)
 `economy/automotive.json` holds the licence, lot slots per stage, the auction (weekday, lots, bidder range, buyer fee, inspection), used car models and defects, reconditioning options, listing sale curve, airport passenger flow (base, season, weekday), rental classes with rates, damage, accident and insurance tables, service intervals, dealership brands (EV flag, margin, models), deposit, minimum stock and floor-plan interest, the four crisis settings and `hooks` for Hotel guests, Energy chargers and `ev_boost`. Events `automotive_*` use `op: industry`, `industry: automotive`.
+
+### Destination opening windows (#109)
+Objective targets may include `npc` alongside `building`. DestinationHours intersects building hours with that NPC schedule, including weekdays and conditional slots, and finds the next actual opening. Queries are read-only; explicit waiting advances Clock normally. No save keys or format changes.
