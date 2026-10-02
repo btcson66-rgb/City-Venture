@@ -82,11 +82,22 @@ func _ready() -> void:
 ## Bloom Coffee, ShopLane, Company OS), people's names, key names.
 func _audit_setup() -> void:
 	audit_on = true
-	var tr = JSON.parse_string(FileAccess.get_file_as_string(ProjectSettings.globalize_path("res://").path_join("../tools/i18n/zh_TW.json")))
-	if typeof(tr) == TYPE_DICTIONARY:
-		for v in tr.values():
-			for m in _word_re.search_all(str(v)):
-				_allowed[m.get_string()] = true
+	var folder := ProjectSettings.globalize_path("res://").path_join("../tools/i18n")
+	for path in DataDB._json_files(folder):
+		if not path.get_file().begins_with("zh_TW"):
+			continue
+		var tr = JSON.parse_string(FileAccess.get_file_as_string(path))
+		if tr is Dictionary:
+			for value in tr.values():
+				for word in _word_re.search_all(str(value)):
+					_allowed[word.get_string()] = true
+	# Language self-names and configured hardware-key names deliberately keep their spelling.
+	for locale in I18n.LOCALES:
+		for word in _word_re.search_all(str(locale[1])):
+			_allowed[word.get_string()] = true
+	for action in Preferences.bindings:
+		for word in _word_re.search_all(Preferences.key_caption(action)):
+			_allowed[word.get_string()] = true
 	for n in DataDB.npcs.values():
 		for w in str(n.get("name", "")).split(" "):
 			_allowed[w] = true
