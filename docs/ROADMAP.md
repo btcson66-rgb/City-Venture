@@ -59,16 +59,25 @@ Shopping Street, Old Town, Harbor, Industrial, Residential, University, Luxury H
 | P2 | [#96](https://github.com/btcson66-rgb/City-Venture/issues/96) | Tax, legal and brand: VAT and corporate tax filing, disputes, insurance, company reputation |
 | P2 | [#97](https://github.com/btcson66-rgb/City-Venture/issues/97) | Audio pass: district and industry ambience, new music, minigame sound |
 | P2 | [#99](https://github.com/btcson66-rgb/City-Venture/issues/99) | Season 3, Chapters 19–24 “The City’s Future”: expo bid, harbour rebuild, energy transition, talent war, election, expo opening |
+| P0 | [#109](https://github.com/btcson66-rgb/City-Venture/issues/109) | Player-reported fixes: barista ticket always names the shot count, tutorials give opening hours first, glossary for payment terms (票期) |
+| P0 | [#110](https://github.com/btcson66-rgb/City-Venture/issues/110) | End any lease: notice period, deposit return, early-exit fee, moving stock and staff |
+| P1 | [#111](https://github.com/btcson66-rgb/City-Venture/issues/111) | Map adjacency: walking exits match the city map, adjacency checker, edge signposts |
+| P1 | [#112](https://github.com/btcson66-rgb/City-Venture/issues/112) | Phone messages you can answer: threads, quick replies with real effects, time-limited replies, messaging NPCs first |
+| P1 | [#113](https://github.com/btcson66-rgb/City-Venture/issues/113) | Ecommerce multi-item orders and packing: box sizes by volume, packing puzzle, shipping by box and weight |
+| P1 | [#114](https://github.com/btcson66-rgb/City-Venture/issues/114) | Richer part-time jobs and freelance: barista from order to table, deeper shifts, multi-stage consulting projects |
+| P1 | [#115](https://github.com/btcson66-rgb/City-Venture/issues/115) | Traffic safety: car collisions, crossings and lights, injury, hospital, medical bills and insurance |
+| P2 | [#116](https://github.com/btcson66-rgb/City-Venture/issues/116) | Social fundraising and partnerships: dress codes, angels/VCs, pitch, term sheet, cap table, strategic deals |
 | P3 | [#35](https://github.com/btcson66-rgb/City-Venture/issues/35) | Free play after the story: growth goals and achievements |
 
 **Work order for Codex** (two sessions in parallel, "continuous mode": stacked branches, self-review before the next ticket;
 see `docs/CODEX_GUIDE.md`). Friends Beta 0.2.0 and the industries #62–#71 are done.
 - Session A (systems and experience): #98 → #87 → #88 → #89 → #90 → #40 → #28 → #26 → #27 → #96 → #97 → #95
 - Session B (story and content): #86 → #30 → #31 → #70 → #42 → #43 → #35 → #92 → #93 → #91 → #32 → #94 → #33 → #34 → #41 → #99
+- Session C (player feedback): #109 → #110 → #111 → #112 → #113 → #114 → #115 → #116
 A ticket whose dependency is not merged yet waits; take the next one instead.
 
 Dependencies worth knowing: #88 needs #87 (InputMap); #93 uses #90's rivals; #94 needs #32; #92 needs #35 and #43;
-#99 needs #86 and #43; #70 needs #30 and #31.
+#99 needs #86 and #43; #70 needs #30 and #31; #116 needs #95 (and uses #91, #92, #93 when merged); #115 leaves a hook for #94.
 
 ---
 
