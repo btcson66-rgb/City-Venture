@@ -27,7 +27,7 @@ DATA_KEYS = {"name", "text", "label", "detail", "outcome", "lines", "risks", "st
              "skip_text", "audiences", "slogan", "visual", "tone",
              "pitch", "title", "archetype", "entry_requirement", "role", "outfits_planned", "accessories_planned",
              "headlines", "headlines_incident", "headlines_after", "return_reasons_defective", "return_reasons_normal", "subtitle", "category", "quality_req",
-             "sub", "1", "2", "3", "4", "5", "reason", "hint", "desc", "description", "item", "sign", "sign_text", "employer", "requires_text", "needs_text", "agent_line", "what", "why"}
+             "sub", "1", "2", "3", "4", "5", "reason", "hint", "desc", "description", "item", "sign", "sign_text", "employer", "requires_text", "needs_text", "agent_line", "what", "why", "good", "effect", "licence", "location", "unit_label", "client_name"}
 DATA_ID_KEYS = {"revenue_models", "cost_types", "growth_paths"}   # snake_case ids shown as words
 SKIP_DATA_FILES = ("companies/",)                # company names stay as they are (NPC names map to themselves)
 SKIP_KEYS_IN = {"economy/marketplace.json": {"customer_first_names", "customer_last_initials"}}

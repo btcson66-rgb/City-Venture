@@ -50,7 +50,7 @@ static func _supply(os, c: VBoxContainer) -> void:
 		c.add_child(UIK.card(card))
 		card.add_child(UIK.label("✓ %s → %s · %s" % [InternalSupply.industry_name(p["seller"]), InternalSupply.industry_name(p["buyer"]), I18n.t(str(l["good"]))], 8, Art.C_GREEN, true))
 		card.add_child(UIK.wrap(I18n.t(str(l["effect"])), 7, Art.C_MUTED, 430))
-		var unit := I18n.t(str(l["unit"]))
+		var unit := I18n.t(str(l["unit_label"]))
 		card.add_child(UIK.kv(I18n.t("Transfer price per %s") % unit, Fmt.money(float(p["price"])), Art.C_GOLD))
 		card.add_child(UIK.kv(I18n.t("Your cost / outside market"), "%s / %s" % [Fmt.money(float(p["cost"])), Fmt.money(float(p["market"]))]))
 		var modes := UIK.hbox(3)
@@ -59,7 +59,7 @@ static func _supply(os, c: VBoxContainer) -> void:
 		for m in [["cost", I18n.t("At cost")], ["plus", plus_label], ["market", I18n.t("Market price")]]:
 			var on: bool = st["mode"] == m[0]
 			var label: String = ("● " if on else "") + m[1]
-			_btn(os, modes, label, "GroupMode_%s_%s" % [k.replace(":", "_"), m[0]], _set_mode.bind(k, m[0]), none)
+			_btn(os, modes, label, "GroupMode_" + k.replace(":", "_") + "_" + str(m[0]), _set_mode.bind(k, m[0]), none)
 		if not bool(l.get("native", false)):
 			_btn(os, modes, I18n.t("Resume") if st["paused"] else I18n.t("Pause"), "GroupPause_" + k.replace(":", "_"), func(): return InternalSupply.set_paused(k, not st["paused"]), none)
 		var life := InternalSupply.lifetime(k)
@@ -105,7 +105,7 @@ static func _jobs(os, c: VBoxContainer, primary: Array) -> void:
 		var def: Dictionary = GroupJobs.defs()[job["def"]]
 		var card := UIK.vbox(2)
 		c.add_child(UIK.card(card))
-		card.add_child(UIK.label("%s · %s" % [I18n.t(str(def["title"])), I18n.t(str(def["client"]))], 9, Art.C_GOLD, true))
+		card.add_child(UIK.label("%s · %s" % [I18n.t(str(def["title"])), I18n.t(str(def["client_name"]))], 9, Art.C_GOLD, true))
 		card.add_child(UIK.wrap(I18n.t(str(def["pitch"])), 7, Art.C_MUTED, 430))
 		card.add_child(UIK.kv("Reward if every part is done", Fmt.money0(float(def["reward"])), Art.C_GREEN))
 		card.add_child(UIK.kv("Time to finish", I18n.t("%d days") % int(def["deadline_days"])))
@@ -128,7 +128,7 @@ static func _jobs(os, c: VBoxContainer, primary: Array) -> void:
 			card.add_child(UIK.label("%s %s: %s · %s" % [tag, InternalSupply.industry_name(str(part["industry"])), I18n.t(str(part["label"])), progress], 7, Art.C_GREEN if ps["done"] else Art.C_WHITE))
 			if not ps["done"]:
 				_btn(os, card, I18n.t("Subcontract %s for %s") % [InternalSupply.industry_name(str(part["industry"])), Fmt.money0(float(part["subcontract"]))],
-					"GroupSub_%s_%s" % [job["id"], part["id"]], GroupJobs.subcontract.bind(job["id"], part["id"]), primary)
+					"GroupSub_" + str(job["id"]) + "_" + str(part["id"]), GroupJobs.subcontract.bind(job["id"], part["id"]), primary)
 		card.add_child(UIK.kv("Pays if closed now", Fmt.money0(GroupJobs.earned(job)), Art.C_GREEN))
 		card.add_child(UIK.wrap(I18n.t("Next step: %s") % GroupJobs.next_step(job), 7, Art.C_SKY, 430))
 	var recent := GroupJobs.finished()

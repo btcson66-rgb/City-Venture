@@ -65,7 +65,7 @@ static func offer(def_id: String) -> String:
 	S()["items"][id] = {"id": id, "def": def_id, "status": "offered", "offered": Clock.now(), "expires": Clock.now() + int(def["offer_days"]) * Clock.DAY,
 		"deadline": 0, "base": {}, "sub": {}, "paid": 0.0, "fees": 0.0, "entity": GameState.business_entity()}
 	S()["last_offer"][def_id] = Clock.now()
-	GameState.add_message(str(def.get("npc", "")), I18n.t("%s has a big order that needs several of your businesses: %s. Reward %s. Open Company OS, Group tab.") % [I18n.t(str(def["client"])), I18n.t(str(def["title"])), Fmt.money0(float(def["reward"]))])
+	GameState.add_message(str(def.get("npc", "")), I18n.t("%s has a big order that needs several of your businesses: %s. Reward %s. Open Company OS, Group tab.") % [I18n.t(str(def["client_name"])), I18n.t(str(def["title"])), Fmt.money0(float(def["reward"]))])
 	EventBus.notify.emit(I18n.t("New group job: %s") % I18n.t(str(def["title"])), "info", "contracts")
 	return id
 

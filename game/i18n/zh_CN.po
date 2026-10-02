@@ -178,7 +178,7 @@ msgstr "%d 杯"
 msgid "%d cups · %s"
 msgstr "%d 杯份 · %s"
 
-#: scripts/ui/automotive_ui.gd:229
+#: scripts/ui/automotive_ui.gd:229 scripts/ui/group_ui.gd:111
 msgid "%d days"
 msgstr "%d 天"
 
@@ -189,6 +189,10 @@ msgstr "交件后 %d 天"
 #: scripts/ui/modals/company_os.gd:879
 msgid "%d days after signing"
 msgstr "签约后 %d 天"
+
+#: scripts/ui/group_ui.gd:123
+msgid "%d days left"
+msgstr "剩 %d 天"
 
 #: scripts/ui/modals/company_os.gd:1441
 msgid "%d driver(s) take one posted run each workday from 9:00 and bank the fee. They plan the route less well than you do."
@@ -210,6 +214,10 @@ msgstr "已聘 %d 位房务员（每人每天约清 %d 间，老板自己可清 
 msgid "%d last 7 days"
 msgstr "近 7 天 %d"
 
+#: scripts/sim/milestones.gd:77
+msgid "%d milestones reached. See Achievements on your phone."
+msgstr "已达成 %d 个里程碑。到手机的「成就」查看。"
+
 #: scripts/sim/fmt.gd:46
 msgid "%d min"
 msgstr "%d 分钟"
@@ -229,6 +237,14 @@ msgstr "再做 %d 班升为%s"
 #: scripts/sim/logistics.gd:380
 msgid "%d new delivery runs are posted (Company OS → Logistics)."
 msgstr "有 %d 趟新的外送单上架了（Company OS → 物流）。"
+
+#: scripts/ui/phone_ui.gd:317
+msgid "%d of %d days"
+msgstr "%d／%d 天"
+
+#: scripts/ui/phone_ui.gd:302
+msgid "%d of %d reached"
+msgstr "已达成 %d／%d"
 
 #: scripts/ui/modals/company_os.gd:636
 msgid "%d older purchase orders are done: nothing left to cancel or return."
@@ -410,6 +426,10 @@ msgstr "%s 跑完 %s 号外送单：收入 %s。"
 msgid "%s found no run to take today."
 msgstr "今天 %s 没有接得到的外送单。"
 
+#: scripts/sim/group_jobs.gd:68
+msgid "%s has a big order that needs several of your businesses: %s. Reward %s. Open Company OS, Group tab."
+msgstr "%s 有一笔需要多个事业合作的大案：%s。报酬 %s。请到公司后台的「集团」分页查看。"
+
 #: scripts/sim/ecommerce.gd:507
 msgid "%s has room: choose it under \"Deliver to\" in Operations."
 msgstr "%s 还有空间：请在「营运」的「送货到」选它。"
@@ -446,6 +466,10 @@ msgstr "%s 准时到帐"
 msgid "%s last 7 days"
 msgstr "近 7 天 %s"
 
+#: scripts/sim/gates.gd:44
+msgid "%s needed, you have %s"
+msgstr "需要 %s，你目前有 %s"
+
 #: scripts/ui/modals/loan_modal.gd:119
 msgid "%s on %s"
 msgstr "%s，%s 扣款"
@@ -478,7 +502,7 @@ msgstr "%s 离职了。"
 msgid "%s registered as an employer."
 msgstr "%s 完成雇主登记。"
 
-#: scripts/sim/hotel.gd:626
+#: scripts/sim/hotel.gd:628
 msgid "%s renovation"
 msgstr "%s翻新"
 
@@ -1022,7 +1046,7 @@ msgstr "持牌交易所把你的钱换成数字美元，几分钟就送到。平
 msgid "A listing needs photos. You can spend time shooting them or pay Studio Lumen for professional photos."
 msgstr "上架需要照片，可以自己花时间拍摄，或付费请 Studio Lumen 拍专业照片。"
 
-#: scripts/sim/hotel.gd:623
+#: scripts/sim/hotel.gd:625
 msgid "A locked group block uses these rooms during the renovation."
 msgstr "已锁定的团体房在翻新期间要用这些房间。"
 
@@ -1058,6 +1082,10 @@ msgstr "有会员问哪里找便宜的供应商，你介绍他去找 Ken。"
 msgid "A missed target lowers reputation and future brief opportunities."
 msgstr "未达目标会降低声誉及未来客户需求机会。"
 
+#: data/milestones.json
+msgid "A month behind the counter"
+msgstr "吧台满一个月"
+
 #: data/help/glossary.json
 msgid "A monthly premium that covers accidents, theft and damage to your van and what is in it."
 msgstr "每月缴的保费，涵盖货车和车上货物的意外、失窃和损坏。"
@@ -1065,6 +1093,14 @@ msgstr "每月缴的保费，涵盖货车和车上货物的意外、失窃和损
 #: data/help/glossary.json
 msgid "A negative account can trigger warnings and insolvency. Review the forecast and reduce costs before more bills arrive."
 msgstr "帐户余额为负可能触发警告与破产流程；更多帐单到期前先看预测、降低支出。"
+
+#: data/quests/green_showroom_launch.json
+msgid "A new EV showroom wants cars on the floor, chargers and rooftop solar on site, and a launch campaign that fills it on opening weekend."
+msgstr "新的电动车展间需要展示车、现场充电桩与屋顶太阳能，还要一场让开幕周末客满的宣传活动。"
+
+#: data/quests/new_neighbourhood_opening.json
+msgid "A new block opens on Lot 7. The Trust wants it built, solar on the roofs and a sales campaign running before the keys are handed over."
+msgstr "第 7 号地块要开新社区。开发信托要求盖好、屋顶装上太阳能，并在交屋前跑完销售活动。"
 
 #: scripts/sim/world.gd:86
 msgid "A new era in Aurelia: Year %d — %s."
@@ -1077,6 +1113,10 @@ msgstr "新规定要求每座公共充电站都要有无障碍车位。现在改
 #: data/help/glossary.json
 msgid "A one-off cost you earn back slowly from sales. Count it before you sign."
 msgstr "一次性的支出，要靠之后的营收慢慢赚回来。签约前先把它算进去。"
+
+#: scripts/ui/group_ui.gd:115
+msgid "A part from a business you do not run, or cannot finish, can be subcontracted for a fee. Unfinished parts at the deadline pay nothing."
+msgstr "你没有经营或做不完的部分，可以付费转包。截止时没完成的部分不给报酬。"
 
 #: data/help/help.json
 msgid "A payment stuck on the wire can be switched to a faster rail later: Company OS → Operations → Purchase orders → Speed up."
@@ -1093,6 +1133,10 @@ msgstr "会卖的照片。"
 #: scripts/ui/tutorial.gd:41
 msgid "A place to work"
 msgstr "找个地方工作"
+
+#: data/milestones.json
+msgid "A proper agency"
+msgstr "像样的代理商"
 
 #: data/events/hotel_review_storm.json
 msgid "A public reply and a refund calm the thread. The bad rating ages out of the reviews."
@@ -1134,6 +1178,10 @@ msgstr "分部汇整同一产业的交易。"
 msgid "A seller drops off twenty parcels with no labels. You feel their pain."
 msgstr "一个卖家拿来二十个没贴标签的包裹。你完全懂那种痛。"
 
+#: data/synergies.json
+msgid "A share of the hotel's guests rent from your airport fleet."
+msgstr "一部分饭店住客会向你的机场车队租车。"
+
 #: data/character/options.json
 msgid "A sharp three-piece in midnight wool. Pocket square included."
 msgstr "午夜蓝羊毛三件式，剪裁俐落，附口袋巾。"
@@ -1169,6 +1217,10 @@ msgstr "员工士气分数反映工作与薪资带来的感受。"
 #: data/events/real_estate_arrears.json
 msgid "A tenant has missed rent. Receivables remain visible; collection takes time and may fail."
 msgstr "房客未付租金，欠款会列在应收帐款；催收需花时间，也可能收不回来。"
+
+#: data/milestones.json
+msgid "A thousand cups"
+msgstr "一千杯"
 
 #: scripts/ui/minigames/route_game.gd:147
 msgid "A tidy route. A stop or two out of order."
@@ -1298,9 +1350,33 @@ msgstr "接受"
 msgid "Accept a run above, then drive it: you plan the route on a map. Every kilometre saved is fuel and time kept."
 msgstr "先接上面的外送单，再开车去送：你要在地图上规划路线。每省一公里，就省下油钱和时间。"
 
+#: data/quests/city_fleet_refresh.json data/quests/private_label_launch.json
+msgid "Accept an RFQ, schedule the machines and deliver the batch."
+msgstr "接下询价单、排好机台并交出整批货。"
+
+#: data/quests/trade_fair_week.json
+msgid "Accept and fill a group block on the hotel Rate Board."
+msgstr "在饭店房价看板接下并住满一个团体包房。"
+
+#: scripts/ui/group_ui.gd:116
+msgid "Accept group job"
+msgstr "接下集团委托"
+
+#: scripts/sim/group_jobs.gd:182
+msgid "Accept it to start the clock."
+msgstr "接单后才开始计时。"
+
+#: data/quests/city_fleet_refresh.json
+msgid "Accept runs in Company OS and plan each route."
+msgstr "在公司后台接配送单，并自己规划每条路线。"
+
 #: data/events/energy_subsidy_cut.json
 msgid "Accept the cut and requote clients"
 msgstr "接受砍半并重新报价"
+
+#: scripts/sim/group_jobs.gd:116
+msgid "Accept the group job first."
+msgstr "请先接下这个集团委托。"
 
 #: data/events/hotel_event_cancelled.json
 msgid "Accept the loss"
@@ -1317,6 +1393,10 @@ msgstr "可以接受、还价或拒绝。先确认：如果对方 60 天后才�
 #: data/events/acquisition_offer.json
 msgid "Accept: sell {company} for {price}"
 msgstr "接受：以 {price} 卖掉 {company}"
+
+#: scripts/sim/group_jobs.gd:83
+msgid "Accepted group job: %s"
+msgstr "接下集团委托：%s"
 
 #: scripts/sim/jobs.gd:44
 msgid "Accepted job %s: %s"
@@ -1357,6 +1437,10 @@ msgstr "事故维修：%s"
 #: scripts/ui/minigames/typing_game.gd:50
 msgid "Accuracy and speed decide how much of the work gets done in this session."
 msgstr "正确率和速度决定这一段时间完成多少工作。"
+
+#: scripts/ui/phone_ui.gd:283
+msgid "Achievements"
+msgstr "成就"
 
 #: scripts/sim/media.gd:218
 msgid "Acquire Campus Radio before selling advertising inventory."
@@ -1430,7 +1514,7 @@ msgstr "每日广告"
 msgid "Advanced Tech & Manufacturing"
 msgstr "先进科技与制造"
 
-#: scripts/sim/ledger.gd:26 scripts/ui/modals/month_close_modal.gd:31
+#: scripts/sim/ledger.gd:27 scripts/ui/modals/month_close_modal.gd:31
 msgid "Advertising"
 msgstr "广告"
 
@@ -1453,6 +1537,10 @@ msgstr "售后保养工单"
 #: scripts/ui/hud.gd:233
 msgid "Afternoon · Sunny"
 msgstr "下午 · 晴"
+
+#: data/milestones.json
+msgid "Agency of record"
+msgstr "指定代理商"
 
 #: scripts/sim/media.gd:89
 msgid "Agency proposal"
@@ -1526,7 +1614,7 @@ msgstr "将预算分配至各管道。曝光费用决定曝光量；客群符合
 msgid "Allocate weekly hours. Each machine needs one hour between batches."
 msgstr "安排本周机台时段。每台机器换线需要一小时。"
 
-#: scripts/ui/modals/company_os.gd:1502
+#: scripts/ui/modals/company_os.gd:1506
 msgid "Allocated"
 msgstr "分摊"
 
@@ -1633,6 +1721,18 @@ msgstr "年利率"
 #: data/economy/staff.json
 msgid "Answers customers and settles returns for you (replace if in stock, otherwise refund)."
 msgstr "回复客人、帮你处理退货（有库存就换货，否则退款）。"
+
+#: data/synergies.json
+msgid "Any laptop or the co-working hot desk."
+msgstr "任一台笔电或共同工作空间的弹性座位。"
+
+#: data/synergies.json
+msgid "Any laptop."
+msgstr "任一台笔电。"
+
+#: data/synergies.json
+msgid "Any laptop; a shop or warehouse unit later."
+msgstr "任一台笔电；之后可再加店面或仓库。"
 
 #: scripts/ui/modals/job_modal.gd:30
 msgid "Any time %s–%s, %s · one shift a day"
@@ -1774,7 +1874,7 @@ msgstr "资产折旧：%s"
 msgid "Asset maintenance: %s"
 msgstr "资产保养：%s"
 
-#: scripts/sim/ledger.gd:32
+#: scripts/sim/ledger.gd:33
 msgid "Asset rent"
 msgstr "资产租金"
 
@@ -1806,6 +1906,10 @@ msgstr "Aster 小旅馆（12 房），接着扩建加餐厅（30 房），最后
 msgid "Aster Inn + Brasserie"
 msgstr "Aster 小旅馆＋餐厅"
 
+#: data/synergies.json
+msgid "Aster Inn in Luxury Heights."
+msgstr "豪华高地的 Aster 旅店。"
+
 #: data/properties/aster_inn.json
 msgid "Aster Inn lease"
 msgstr "Aster 小旅馆租约"
@@ -1833,6 +1937,10 @@ msgstr "瑕疵率 5% 时，100 件平均约有 5 件瑕疵；承诺大量交货�
 #: scripts/ui/modals/company_os.gd:1464
 msgid "At any packing table the shipping options include \"Own van\": fuel instead of a courier fee, delivered the same day. The Pier 7 warehouse can hold your stock too."
 msgstr "每张打包桌的出货选项都多了「自己的货车」：付油钱代替快递费，当天送到。7 号码头仓库也能放你的库存。"
+
+#: scripts/ui/group_ui.gd:59
+msgid "At cost"
+msgstr "依成本"
 
 #: scripts/sim/hotel.gd:95
 msgid "At least %d guest reviews (now %d)."
@@ -1930,6 +2038,10 @@ msgstr "奥瑞莉亚市政厅"
 msgid "Aurelia Customs House"
 msgstr "奥瑞莉亚海关大楼"
 
+#: data/quests/trade_fair_week.json
+msgid "Aurelia Expo Board"
+msgstr "奥瑞利亚博览会委员会"
+
 #: data/npcs/jobs_board.json
 msgid "Aurelia Jobs"
 msgstr "奥瑞莉亚人力银行"
@@ -1945,6 +2057,10 @@ msgstr "奥瑞莉亚捷运——%s"
 #: data/economy/hotel.json
 msgid "Aurelia Trade Expo"
 msgstr "奥蕾莉亚商展"
+
+#: data/quests/city_fleet_refresh.json
+msgid "Aurelia Transit Office"
+msgstr "奥瑞利亚交通局"
 
 #: data/buildings/aurelia_university.json
 msgid "Aurelia University"
@@ -1994,6 +2110,10 @@ msgstr "AutoLayout"
 msgid "AutoService"
 msgstr "AutoService"
 
+#: data/milestones.json
+msgid "Automated line"
+msgstr "自动化产线"
+
 #: scripts/sim/manufacturing.gd:50
 msgid "Automation is already installed."
 msgstr "已安装自动化设备。"
@@ -2009,6 +2129,10 @@ msgstr "Ava"
 #: scripts/ui/minigames/clerk_forms_game.gd:8
 msgid "Ava Moreau"
 msgstr "Ava Moreau"
+
+#: data/milestones.json
+msgid "Average 90% occupancy across 30 nights."
+msgstr "连续 30 晚平均住房率 90%。"
 
 #: data/economy/marketplace.json
 msgid "Average quality."
@@ -2110,7 +2234,7 @@ msgstr "中性议价"
 msgid "Bank"
 msgstr "银行"
 
-#: scripts/sim/ledger.gd:28
+#: scripts/sim/ledger.gd:29
 msgid "Bank fees"
 msgstr "银行手续费"
 
@@ -2338,6 +2462,10 @@ msgstr "预约贷款洽谈"
 msgid "Book the scheduled technician for $700"
 msgstr "预约一般技师，费用 $700"
 
+#: data/milestones.json
+msgid "Booked solid"
+msgstr "案子接不完"
+
 #: data/events/hotel_slump.json
 msgid "Bookings have dried up. You can discount or wait for the season to turn."
 msgstr "订房突然变少。你可以打折促销，或等淡季过去。"
@@ -2366,6 +2494,10 @@ msgstr "可以借钱进货或补资金缺口。每月连本带利还款；逾期
 msgid "Borrowed %s from Nexus Bank (%d months, %s APR)."
 msgstr "向 Nexus 银行借了 %s（%d 个月，年利率 %s）。"
 
+#: scripts/sim/internal_supply.gd:142
+msgid "Both businesses must run on the same company's books."
+msgstr "两个事业必须记在同一家公司的帐上。"
+
 #: scripts/sim/logistics.gd:91
 msgid "Bought a used van from Sam Okoro at Dockside Motors for %s."
 msgstr "向 Dockside Motors 的 Sam Okoro 买了一台二手货车，花了 %s。"
@@ -2390,6 +2522,10 @@ msgstr "精品旅馆"
 msgid "Boutique hotels, tourists and critics."
 msgstr "精品旅馆、观光客与评论家。"
 
+#: data/milestones.json
+msgid "Boutique practice"
+msgstr "精品事务所"
+
 #: scripts/ui/minigames/pack_game.gd:113
 msgid "Box"
 msgstr "Box"
@@ -2401,6 +2537,10 @@ msgstr "抛锚补偿券"
 #: scripts/ui/hotel_ui.gd:185
 msgid "Breakfast and supplies"
 msgstr "早餐与耗品"
+
+#: data/synergies.json
+msgid "Breakfast from the cafe kitchen"
+msgstr "咖啡店厨房供应的早餐"
 
 #: data/help/glossary.json
 msgid "Breakfast lifts the service score; the cafe makes it cheaper."
@@ -2477,6 +2617,10 @@ msgstr "仲介只有配对成交才取得佣金，持有房产还需承担房贷
 #: scripts/ui/real_estate_ui.gd:89
 msgid "Brokerage exam and licence"
 msgstr "经纪考试与执照"
+
+#: data/synergies.json
+msgid "Brokerage licence at City Hall."
+msgstr "到市政厅申请仲介执照。"
 
 #: data/character/options.json
 msgid "Brown"
@@ -2578,7 +2722,7 @@ msgstr "建筑"
 msgid "Building %s"
 msgstr "开发中：%s"
 
-#: scripts/sim/real_estate.gd:174
+#: scripts/sim/real_estate.gd:175
 msgid "Building completed: %s."
 msgstr "大楼已完工：%s。"
 
@@ -2698,6 +2842,10 @@ msgstr "买日票（$15）"
 msgid "Buy a used van from Sam Okoro at Dockside Motors in the Harbor, and it works two ways: deliver your own ecommerce parcels for fuel instead of a courier fee, and take local delivery runs posted every morning (Company OS → Logistics), planning each route yourself. Rent a bay at Pier 7 for cheap stock space, and hire drivers."
 msgstr "向港区 Dockside Motors 的 Sam Okoro 买一台二手货车，有两种赚法：自己送电商包裹，付油钱而不是快递费；或接每天早上上架的本地外送单（Company OS → 物流），路线自己排。再租下 7 号码头的仓位，用便宜的空间放库存，也可以请司机。"
 
+#: scripts/sim/internal_supply.gd:147
+msgid "Buy a van first."
+msgstr "请先买一台货车。"
+
 #: data/story/chapters.json
 msgid "Buy low. Sell less low. Got it, haha."
 msgstr "低价买进，没那么低地卖出。懂了，哈哈。"
@@ -2741,6 +2889,10 @@ msgstr "第一次进货"
 #: data/story/chapters.json
 msgid "Buy your first stock (Company OS → Operations). Laptop at home or a co-work desk."
 msgstr "进第一批货（Company OS → 营运）。用家里的笔电或共享办公桌。"
+
+#: data/milestones.json
+msgid "Buy your first van."
+msgstr "买下第一台货车。"
 
 #: scripts/ui/modals/clothing_shop_modal.gd:65
 msgid "Buy — %s"
@@ -3114,6 +3266,10 @@ msgstr "取消工单的应退订金：%s"
 msgid "Capacity, not demand, can be the real limit on a busy weekend."
 msgstr "旺季周末真正的上限可能是房务产能，而不是需求。"
 
+#: scripts/sim/gates.gd:43
+msgid "Capital"
+msgstr "资金"
+
 #: scripts/sim/ecommerce.gd:1288
 msgid "Capital contributed in kind by founder"
 msgstr "创办人实物出资"
@@ -3306,7 +3462,7 @@ msgstr "充电站遭破坏"
 msgid "Charger vandalism repair"
 msgstr "充电站破坏修复"
 
-#: data/help/glossary.json scripts/ui/energy_ui.gd:228 scripts/ui/energy_ui.gd:63
+#: data/help/glossary.json data/milestones.json scripts/ui/energy_ui.gd:228 scripts/ui/energy_ui.gd:63
 msgid "Charging network"
 msgstr "充电网络"
 
@@ -3422,6 +3578,10 @@ msgstr "中文通知、招牌、联系人职称、服饰状态与教学标题已
 msgid "Chinese tutorial headings now use the bundled fallback font in browsers, preventing missing-character boxes."
 msgstr "浏览器的中文教学标题改用内附备援字体，不再出现缺字方框。"
 
+#: data/synergies.json
+msgid "Choose Own cafe kitchen on the Rate Board: the hotel buys breakfast from the cafe at the transfer price."
+msgstr "在房价看板选「自家咖啡店厨房」：饭店以转拨价向咖啡店买早餐。"
+
 #: scripts/sim/automotive.gd:653
 msgid "Choose a brand you can sign."
 msgstr "请选择可签约的品牌。"
@@ -3482,6 +3642,10 @@ msgstr "请选择列出的电池容量和毛利率。"
 msgid "Choose a listed car."
 msgstr "请选择已上架的车。"
 
+#: scripts/sim/group_jobs.gd:122
+msgid "Choose a part that is still open."
+msgstr "请选一个尚未完成的部分。"
+
 #: scripts/sim/media.gd:179 scripts/sim/media.gd:182
 msgid "Choose a paused campaign and fund its next media purchase."
 msgstr "请选择暂停的活动，并备妥下一次媒体采购资金。"
@@ -3506,7 +3670,7 @@ msgstr "请选择标准租金 70% 到 140% 之间的费率。"
 msgid "Choose a room type and a price."
 msgstr "请选择房型并输入价格。"
 
-#: scripts/sim/hotel.gd:606 scripts/sim/hotel.gd:618
+#: scripts/sim/hotel.gd:608 scripts/sim/hotel.gd:620
 msgid "Choose a room type."
 msgstr "请选择房型。"
 
@@ -3586,7 +3750,7 @@ msgstr "请选择尚未结案的客户需求。"
 msgid "Choose an open district to see its location and travel routes."
 msgstr "选择已开放街区，查看位置与交通路线。"
 
-#: scripts/sim/hotel.gd:558
+#: scripts/sim/hotel.gd:560
 msgid "Choose an open group block."
 msgstr "请选择一笔开放中的团体房。"
 
@@ -3614,6 +3778,10 @@ msgstr "请选择尚未持有的住宅单位。"
 msgid "Choose between 1 and %d returnable units."
 msgstr "请选择 1 至 %d 件可退库存。"
 
+#: scripts/sim/internal_supply.gd:98
+msgid "Choose cost, cost plus or market price for a listed supply pair."
+msgstr "请为列出的供应组合选择成本、成本加成或市价。"
+
 #: data/help/help.json
 msgid "Choose the name carefully: it goes on your sign and your invoices."
 msgstr "名字要想清楚：它会出现在招牌和发票上。"
@@ -3622,7 +3790,7 @@ msgstr "名字要想清楚：它会出现在招牌和发票上。"
 msgid "Choose to take over or lease the Aster Inn."
 msgstr "请选择顶下或承租 Aster 小旅馆。"
 
-#: scripts/ui/modals/business_board.gd:109
+#: scripts/ui/modals/business_board.gd:127
 msgid "Chose a first business: ecommerce."
 msgstr "选了第一门生意：电商。"
 
@@ -3641,6 +3809,10 @@ msgstr "City Curb Office"
 #: scripts/ui/energy_ui.gd:230
 msgid "City EV adoption %s (+%s a year) · %d of %d stations open · grid electricity %s/kWh"
 msgstr "全市电动车普及率 %s（每年 +%s）· 营运中 %d／%d 站 · 电网电价 %s/kWh"
+
+#: data/quests/city_fleet_refresh.json
+msgid "City Fleet Refresh"
+msgstr "市府车队更新"
 
 #: scripts/ui/modals/city_guide_modal.gd:7 scripts/ui/phone_ui.gd:129
 msgid "City Guide"
@@ -3734,6 +3906,10 @@ msgstr "《洁净包装法》通过：塑料缓冲包裹每件课 $0.40。"
 msgid "Clean charts"
 msgstr "简洁图表"
 
+#: data/milestones.json
+msgid "Clean line"
+msgstr "良率达标"
+
 #: data/dialogue/henri_dubois_intro.json
 msgid "Clean rooms, a friendly desk and a fair price. A room nobody cleaned cannot be sold at all, so hire housekeepers before you chase more guests."
 msgstr "干净的房间、亲切的柜台、合理的价格。没人清的房间根本不能卖，所以先请房务员，再去抢更多客人。"
@@ -3826,6 +4002,10 @@ msgstr "气候"
 msgid "Close"
 msgstr "关闭"
 
+#: data/milestones.json
+msgid "Close a brokerage mandate."
+msgstr "成交一笔仲介委托。"
+
 #: data/story/chapters.json
 msgid "Close a month through the shock: make a profit, or review two losing months"
 msgstr "度过供应冲击：完成一次获利月结，或查看两个亏损月份"
@@ -3833,6 +4013,10 @@ msgstr "度过供应冲击：完成一次获利月结，或查看两个亏损月
 #: data/story/chapters.json
 msgid "Close a month with cash in the bank, or review two month-ends with negative cash"
 msgstr "完成一次现金为正的月结，或查看两次现金为负的月结"
+
+#: data/milestones.json
+msgid "Close ten brokerage mandates."
+msgstr "成交十笔仲介委托。"
 
 #: scripts/ui/modals/insolvency_modal.gd:52
 msgid "Close the company: sell off, pay what we can, start again"
@@ -3866,7 +4050,7 @@ msgstr "公司结束营业会撤回未回复报价与交货安排，避免发票
 msgid "Closing statement"
 msgstr "结算明细"
 
-#: scripts/sim/ledger.gd:29
+#: scripts/sim/ledger.gd:30
 msgid "Clothing"
 msgstr "服饰"
 
@@ -3874,7 +4058,7 @@ msgstr "服饰"
 msgid "Clothing store"
 msgstr "服饰店"
 
-#: data/buildings/nexus_cowork.json scripts/sim/ledger.gd:28
+#: data/buildings/nexus_cowork.json scripts/sim/ledger.gd:29
 msgid "Co-working"
 msgstr "共享办公室"
 
@@ -3906,7 +4090,7 @@ msgstr "写完了：完成 %.1f 小时的工作量。"
 msgid "Coding session — %s"
 msgstr "写程序：%s"
 
-#: data/economy/cafe.json scripts/sim/ledger.gd:29 scripts/world/actions.gd:247
+#: data/economy/cafe.json scripts/sim/ledger.gd:30 scripts/world/actions.gd:247
 msgid "Coffee"
 msgstr "咖啡"
 
@@ -3929,6 +4113,10 @@ msgstr "咖啡——Bloom Coffee"
 #: scripts/ui/modals/company_os.gd:1296
 msgid "Coffee, milk and cups: %d cups in stock"
 msgstr "咖啡豆、牛奶和杯子：还够 %d 杯"
+
+#: data/milestones.json
+msgid "Collect 500 lifetime sign-ups."
+msgstr "累计 500 个注册。"
 
 #: data/story/chapters.json
 msgid "Collect the money Crestline owes you"
@@ -4010,6 +4198,34 @@ msgstr "公司登记规费——%s"
 msgid "Compare orders per day and unit margin after a price change; selling twice as many units is not useful if each loses money."
 msgstr "调价后一起看每日订单与单件毛利；如果每件都亏钱，多卖一倍也没有帮助。"
 
+#: data/milestones.json
+msgid "Complete 50 van runs."
+msgstr "完成 50 趟货车配送。"
+
+#: data/quests/new_neighbourhood_opening.json
+msgid "Complete a development project"
+msgstr "完成一项开发案"
+
+#: data/milestones.json
+msgid "Complete a development project."
+msgstr "完成一项开发案。"
+
+#: data/milestones.json
+msgid "Complete a travel-agency room block."
+msgstr "完成一个旅行社包房。"
+
+#: data/milestones.json
+msgid "Complete five group blocks."
+msgstr "完成五个团体包房。"
+
+#: data/quests/city_fleet_refresh.json
+msgid "Complete five van runs"
+msgstr "完成五趟货车配送"
+
+#: data/milestones.json
+msgid "Complete ten van runs."
+msgstr "完成十趟货车配送。"
+
 #: scripts/sim/hotel.gd:91
 msgid "Complete the previous growth stage."
 msgstr "请先完成上一个成长阶段。"
@@ -4030,7 +4246,7 @@ msgstr "已完成"
 msgid "Completed %s."
 msgstr "完成了%s。"
 
-#: scripts/sim/real_estate.gd:168
+#: scripts/sim/real_estate.gd:169
 msgid "Completed Lot 7 building"
 msgstr "7 号地大楼完工"
 
@@ -4042,7 +4258,7 @@ msgstr "完工后产生可出售或出租的各户，大楼也会出现在城市
 msgid "Complex regulation"
 msgstr "法规复杂"
 
-#: scripts/sim/ledger.gd:27
+#: scripts/sim/ledger.gd:28
 msgid "Compliance"
 msgstr "合规"
 
@@ -4174,13 +4390,25 @@ msgstr "灯笼街转角咖啡店面"
 msgid "Corner Café Unit, Lantern Row: $1,900/month, 2 months' deposit. Ask Mr. Okafor."
 msgstr "灯笼巷转角咖啡店面：每月 $1,900，押金 2 个月。请洽 Okafor 先生。"
 
+#: data/synergies.json
+msgid "Corner unit in Old Town."
+msgstr "旧城的转角店面。"
+
 #: data/economy/automotive.json
 msgid "Corvo Compact"
 msgstr "Corvo 小型车"
 
+#: scripts/ui/group_ui.gd:58
+msgid "Cost + %d%%"
+msgstr "成本加 %d%%"
+
 #: data/help/glossary.json scripts/ui/modals/company_os.gd:267
 msgid "Cost of goods sold"
 msgstr "销货成本"
+
+#: scripts/sim/internal_supply.gd:206
+msgid "Cost of internal supply: %s"
+msgstr "内部供应成本：%s"
 
 #: data/events/ad_cost_spike.json
 msgid "Cost per click +40% for the next 7 days."
@@ -4326,9 +4554,17 @@ msgstr "Crestline"
 msgid "Crestline Flagship"
 msgstr "Crestline 旗舰店"
 
+#: data/quests/private_label_launch.json
+msgid "Crestline Retail"
+msgstr "Crestline 零售"
+
 #: data/events/crestline_big_offer.json
 msgid "Crestline wants 800 lamps"
 msgstr "Crestline 要 800 盏灯"
+
+#: data/quests/private_label_launch.json
+msgid "Crestline wants a private-label line: built by a factory, sold through a marketplace shop and backed by a launch campaign."
+msgstr "Crestline 想推自有品牌：工厂生产、网络商店贩售，再配上上市宣传。"
 
 #: data/buildings/crestline_flagship.json
 msgid "Crestline's autumn lighting range. One shelf is still empty."
@@ -4338,7 +4574,7 @@ msgstr "Crestline 的秋季灯具系列。有一层架子还空着。"
 msgid "Crestline's offer is in Company OS → Contracts: accept, counter or decline"
 msgstr "Crestline 的报价在 Company OS →「合约」：接受、还价或拒绝"
 
-#: scripts/sim/hotel.gd:482
+#: scripts/sim/hotel.gd:484
 msgid "Critic Vera Stone published her review: %.1f stars."
 msgstr "评论家 Vera Stone 发表了评价：%.1f 颗星。"
 
@@ -4570,6 +4806,10 @@ msgstr "成交。寄过来吧。"
 msgid "Dealer licence"
 msgstr "车商执照"
 
+#: data/synergies.json
+msgid "Dealer licence fee when you open the Auto Desk."
+msgstr "开设汽车柜台时缴交经销商执照费。"
+
 #: scripts/ui/automotive_ui.gd:281
 msgid "DealerNextAirport"
 msgstr "DealerNextAirport"
@@ -4650,9 +4890,49 @@ msgstr "供应链深厚"
 msgid "Defect rate"
 msgstr "瑕疵率"
 
+#: data/milestones.json
+msgid "Deliver 1,000 marketplace orders."
+msgstr "送达 1,000 笔商城订单。"
+
+#: data/milestones.json
+msgid "Deliver 100 marketplace orders."
+msgstr "送达 100 笔商城订单。"
+
+#: data/milestones.json
+msgid "Deliver 15 freelance gigs."
+msgstr "交付 15 件接案。"
+
+#: data/milestones.json
+msgid "Deliver 15 solar installs."
+msgstr "交付 15 件太阳能安装。"
+
+#: data/milestones.json
+msgid "Deliver 200 parcels by van."
+msgstr "用货车送达 200 件包裹。"
+
+#: data/milestones.json
+msgid "Deliver 30 freelance gigs."
+msgstr "交付 30 件接案。"
+
+#: data/quests/private_label_launch.json
+msgid "Deliver 50 more marketplace orders"
+msgstr "再送达 50 笔商城订单"
+
 #: data/story/chapters.json
 msgid "Deliver Crestline's lamps before the deadline (Company OS → Contracts)"
 msgstr "在期限前把灯交给 Crestline（Company OS →「合约」）"
+
+#: data/quests/green_showroom_launch.json
+msgid "Deliver a solar install"
+msgstr "交付一件太阳能安装"
+
+#: data/milestones.json
+msgid "Deliver a solar install."
+msgstr "交付一件太阳能安装。"
+
+#: data/milestones.json
+msgid "Deliver an OEM production order."
+msgstr "交付一张代工生产单。"
 
 #: scripts/ui/manufacturing_ui.gd:121
 msgid "Deliver and invoice"
@@ -4666,6 +4946,26 @@ msgstr "在期限前交件拿全额；迟交扣 20%，信誉也会下降。客�
 msgid "Deliver by %s"
 msgstr "%s 前送达"
 
+#: data/milestones.json
+msgid "Deliver five OEM production orders."
+msgstr "交付五张代工生产单。"
+
+#: data/milestones.json
+msgid "Deliver five freelance gigs."
+msgstr "交付五件接案。"
+
+#: data/milestones.json
+msgid "Deliver five solar installs."
+msgstr "交付五件太阳能安装。"
+
+#: data/quests/city_fleet_refresh.json data/quests/private_label_launch.json
+msgid "Deliver one OEM production order"
+msgstr "交付一张代工生产单"
+
+#: data/milestones.json
+msgid "Deliver one freelance gig."
+msgstr "交付一件接案。"
+
 #: scripts/sim/jobs.gd:80
 msgid "Deliver this job before invoicing."
 msgstr "先交付这张工单，才能开立发票。"
@@ -4673,6 +4973,14 @@ msgstr "先交付这张工单，才能开立发票。"
 #: scripts/ui/modals/company_os.gd:537
 msgid "Deliver to:"
 msgstr "送货到："
+
+#: data/quests/new_neighbourhood_opening.json
+msgid "Deliver two solar installs"
+msgstr "交付两件太阳能安装"
+
+#: data/milestones.json
+msgid "Deliver your first marketplace order."
+msgstr "送达你的第一笔商城订单。"
 
 #: scripts/ui/energy_ui.gd:167
 msgid "Delivered"
@@ -4778,7 +5086,7 @@ msgstr "车场"
 msgid "Depot Supervisor"
 msgstr "站点主管"
 
-#: scripts/sim/ledger.gd:32
+#: scripts/sim/ledger.gd:33
 msgid "Depreciation"
 msgstr "折旧"
 
@@ -4810,9 +5118,13 @@ msgstr "目的地充电桩"
 msgid "Detail · %s"
 msgstr "美容 · %s"
 
-#: scripts/ui/modals/business_board.gd:97
+#: scripts/ui/modals/business_board.gd:115
 msgid "Details / apply"
 msgstr "详情／应征"
+
+#: data/milestones.json
+msgid "Developer"
+msgstr "开发商"
 
 #: scripts/ui/real_estate_ui.gd:58
 msgid "Development"
@@ -4862,7 +5174,7 @@ msgstr "数字金融正夯：到 Bloom Coffee 看新闻板"
 msgid "Digital-dollar payments double as fintechs race to win importers."
 msgstr "金融科技业抢进口商，数字美元付款量翻倍。"
 
-#: scripts/sim/ledger.gd:30
+#: scripts/sim/ledger.gd:31
 msgid "Dining"
 msgstr "餐饮"
 
@@ -4930,6 +5242,10 @@ msgstr "Dockside Motors 老板"
 msgid "Dockside Motors · %s now"
 msgstr "Dockside Motors · 现收 %s"
 
+#: data/synergies.json
+msgid "Dockside Motors, Harbor (bay at Pier 7 optional)."
+msgstr "港区 Dockside Motors（7 号码头车位可选）。"
+
 #: scripts/sim/logistics.gd:80
 msgid "Dockside Motors: %s"
 msgstr "Dockside Motors：%s"
@@ -4993,6 +5309,10 @@ msgstr "饮品"
 #: scripts/ui/minigames/barista_game.gd:140 scripts/ui/minigames/barista_game.gd:141
 msgid "Drinks served exactly right: %d / %d"
 msgstr "完全做对的饮品：%d / %d"
+
+#: data/milestones.json
+msgid "Drive 500 km."
+msgstr "开 500 公里。"
 
 #: scripts/ui/modals/company_os.gd:1435
 msgid "Drive it"
@@ -5082,6 +5402,10 @@ msgstr "每位客人会说出点单。照着做：杯子大小、饮品、奶类
 msgid "Each day shows expected occupancy at your current prices. Gold days are peak demand; purple days have a city event."
 msgstr "每格显示以目前房价预估的住房率。金色是需求旺日，紫色是有城市活动的日子。"
 
+#: data/synergies.json
+msgid "Each delivered ecommerce order restocks from your own line instead of an outside wholesaler."
+msgstr "每笔送达的电商订单改由自家产线补货，不再向外部批发商进货。"
+
 #: data/economy/staff.json
 msgid "Each electrician adds crew-days to installs on weekdays. Salary is due even when weather stops work."
 msgstr "每位电工在平日为安装案增加工作天。就算天候停工，薪水照付。"
@@ -5134,6 +5458,10 @@ msgstr "在 Company OS 经营销售，再赚约 %s 毛利，或增加合格担�
 msgid "Earn on the side"
 msgstr "兼差赚钱"
 
+#: scripts/sim/gates.gd:45
+msgid "Earn or borrow the difference first."
+msgstr "先赚到或借到不足的资金。"
+
 #: scripts/sim/energy.gd:245
 msgid "Earn the battery installer certification before selling storage."
 msgstr "取得电池安装认证后才能销售储能。"
@@ -5158,7 +5486,7 @@ msgstr "吃"
 msgid "Ecommerce"
 msgstr "电商"
 
-#: scripts/ui/modals/business_board.gd:110
+#: scripts/ui/modals/business_board.gd:128
 msgid "Ecommerce it is. Order stock from a laptop or a desk."
 msgstr "就做电商。用笔电或办公桌下单进货。"
 
@@ -5193,6 +5521,14 @@ msgstr "电路故障"
 #: data/economy/staff.json data/npcs/rafael_costa.json
 msgid "Electrician"
 msgstr "电工"
+
+#: data/synergies.json
+msgid "Electricity for the factory"
+msgstr "工厂用电"
+
+#: data/synergies.json
+msgid "Electricity for the hotel"
+msgstr "饭店用电"
 
 #: data/events/energy_tariff.json
 msgid "Electricity tariff increase"
@@ -5238,7 +5574,11 @@ msgstr "符合条件的进货单可取消或退货。营运清单保留最近的
 msgid "Eligible registered companies can buy from some suppliers now and pay after the stated number of days."
 msgstr "符合条件的登记公司可向部分供应商先买货，在指定天数后付款。"
 
-#: scripts/sim/hotel.gd:667
+#: scripts/ui/group_ui.gd:93
+msgid "Eliminated internal sales"
+msgstr "冲销内部销售"
+
+#: scripts/sim/hotel.gd:669
 msgid "Emergency repair"
 msgstr "紧急维修"
 
@@ -5426,6 +5766,10 @@ msgstr "活动负责人"
 msgid "Every binned pastry is money spent for nothing. Order for the day you expect, not the day you hope for."
 msgstr "每丢掉一个糕点，就是白花一笔钱。照你预期的生意量订货，不要照你希望的。"
 
+#: scripts/ui/modals/business_board.gd:75
+msgid "Every gate is open."
+msgstr "所有门槛都已达成。"
+
 #: data/events/energy_subsidy_cut.json
 msgid "Every grant is halved while the policy recovers over 90 days."
 msgstr "政策在 90 天内逐步恢复，期间所有补助减半。"
@@ -5445,6 +5789,10 @@ msgstr "人人都在募资。不是人人都该募。"
 #: data/dialogue/ken_supply_shock.json
 msgid "Everything from abroad costs more and takes longer now. Even my local stuff is up twelve percent."
 msgstr "国外来的东西现在都更贵、更慢。连我这边的在地货都涨了百分之十二。"
+
+#: scripts/sim/group_jobs.gd:186
+msgid "Everything is done; the client pays on closing."
+msgstr "全部完成；结案时客户付款。"
 
 #: data/regions/aurelia.json
 msgid "Everything starts here"
@@ -5589,6 +5937,10 @@ msgstr "工厂现金：%s · 原料：%d 件"
 #: scripts/sim/automotive.gd:688
 msgid "Factory delivery: %s"
 msgstr "原厂交车：%s"
+
+#: data/synergies.json
+msgid "Factory goods for ShopLane"
+msgstr "供应 ShopLane 的工厂商品"
 
 #: scripts/sim/manufacturing.gd:373
 msgid "Factory materials liquidated"
@@ -5738,6 +6090,10 @@ msgstr "已缴规费"
 msgid "Filing fee paid: $300"
 msgstr "已缴规费：$300"
 
+#: data/quests/trade_fair_week.json
+msgid "Fill a group room block"
+msgstr "住满一个团体包房"
+
 #: scripts/sim/insolvency.gd:138
 msgid "Final distribution to the founder"
 msgstr "最后分配给创办人"
@@ -5770,6 +6126,34 @@ msgstr "找货源、找买家，把货物送过国界。"
 msgid "Find three backup suppliers for %s"
 msgstr "帮 %s 找三家备用供应商"
 
+#: data/milestones.json
+msgid "Finish 15 client campaigns."
+msgstr "完成 15 档客户宣传活动。"
+
+#: data/milestones.json
+msgid "Finish a client campaign."
+msgstr "完成一档客户宣传活动。"
+
+#: data/quests/new_neighbourhood_opening.json
+msgid "Finish a construction project from the Matchmaker's Growth page."
+msgstr "从配对台的成长页面完成一项营建案。"
+
+#: data/quests/green_showroom_launch.json data/quests/private_label_launch.json
+msgid "Finish a launch campaign"
+msgstr "完成一档上市宣传活动"
+
+#: data/quests/new_neighbourhood_opening.json
+msgid "Finish a sales campaign"
+msgstr "完成一档销售活动"
+
+#: data/milestones.json
+msgid "Finish five client campaigns."
+msgstr "完成五档客户宣传活动。"
+
+#: data/quests/trade_fair_week.json
+msgid "Finish one measured promotion campaign"
+msgstr "完成一档可量测的宣传活动"
+
 #: scripts/sim/jobs.gd:72
 msgid "Finish the agreed scope before delivery."
 msgstr "完成约定范围后才能交付。"
@@ -5786,13 +6170,41 @@ msgstr "第一位客人"
 msgid "First ShopLane listing: %s at %s."
 msgstr "第一个 ShopLane 商品上架：%s，售价 %s。"
 
+#: data/milestones.json
+msgid "First batch shipped"
+msgstr "首批货出厂"
+
+#: data/milestones.json
+msgid "First campaign wrapped"
+msgstr "第一档活动结案"
+
+#: data/milestones.json
+msgid "First car sold"
+msgstr "卖出第一台车"
+
+#: data/milestones.json
+msgid "First client delivered"
+msgstr "交付第一位客户"
+
+#: data/milestones.json
+msgid "First commission"
+msgstr "第一笔佣金"
+
 #: scripts/sim/logistics.gd:442
 msgid "First delivery run for %s: %s."
 msgstr "第一趟外送单，客户 %s：%s。"
 
+#: data/milestones.json
+msgid "First group block"
+msgstr "第一个团体包房"
+
 #: scripts/sim/ecommerce.gd:148
 msgid "First inventory order: %d × %s from %s."
 msgstr "第一次进货：%d × %s，来自 %s。"
+
+#: data/milestones.json
+msgid "First parcel out"
+msgstr "第一件包裹出货"
 
 #: scripts/sim/ecommerce.gd:1209
 msgid "First payout from ShopLane: %s."
@@ -5813,6 +6225,10 @@ msgstr "第一次退货：寄了新品给 {customer}。"
 #: data/story/chapters.json
 msgid "First revenue! ShopLane pays out on Mondays."
 msgstr "第一笔营收！ShopLane 每周一拨款。"
+
+#: data/milestones.json
+msgid "First roof lit"
+msgstr "第一个屋顶亮灯"
 
 #: scripts/sim/ecommerce.gd:1037
 msgid "First sale: %s bought %s for %s."
@@ -5838,7 +6254,7 @@ msgstr "装修：义式咖啡机、吧台、桌椅"
 msgid "Fit-out"
 msgstr "装修"
 
-#: scripts/sim/ledger.gd:31
+#: scripts/sim/ledger.gd:32
 msgid "Fit-out & equipment"
 msgstr "装修与设备"
 
@@ -5858,9 +6274,25 @@ msgstr "装修中，%s 完工"
 msgid "Fitting room — change outfit"
 msgstr "试衣间——换衣服"
 
+#: data/milestones.json
+msgid "Five campaigns"
+msgstr "五档活动"
+
+#: data/milestones.json
+msgid "Five hundred sign-ups"
+msgstr "五百个注册"
+
+#: data/milestones.json
+msgid "Five installs"
+msgstr "五件安装"
+
 #: data/dialogue/nina_first.json
 msgid "Five looks this season: Executive, Luxury Citywear, Travel, Formal Evening, and Logistics for the warehouse days."
 msgstr "这季有五种造型：主管、城市精品、旅行、晚宴，还有仓库日穿的现场工作服。"
+
+#: data/milestones.json
+msgid "Five orders on time"
+msgstr "五张准时交货"
 
 #: data/buildings/skyline_grand.json
 msgid "Five-star hotel"
@@ -5870,7 +6302,7 @@ msgstr "五星级饭店"
 msgid "Fix a wrong order before it arrives. Settlement fees stay paid; an unpaid invoice is reduced instead of returning cash."
 msgstr "在到货前修正买错的进货单。清算手续费不退还；未付发票会减少应付金额，不会退回现金。"
 
-#: scripts/sim/hotel.gd:676
+#: scripts/sim/hotel.gd:678
 msgid "Flash sale after cancellation"
 msgstr "活动取消后的限时特卖"
 
@@ -5954,6 +6386,10 @@ msgstr "食品处理许可"
 msgid "Food handling licence (%s)"
 msgstr "食品处理执照（%s）"
 
+#: data/synergies.json
+msgid "Food handling licence at City Hall."
+msgstr "到市政厅申请食品处理执照。"
+
 #: scripts/sim/cafe.gd:410
 msgid "Food handling licence granted."
 msgstr "食品处理执照核发了。"
@@ -6006,6 +6442,10 @@ msgstr "Aster 小旅馆前老板"
 msgid "Forms handled correctly: %d / %d"
 msgstr "正确处理的表单：%d / %d"
 
+#: data/milestones.json
+msgid "Forty cars sold"
+msgstr "卖出四十台车"
+
 #: data/economy/marketplace.json
 msgid "Found it cheaper elsewhere."
 msgstr "别家比较便宜。"
@@ -6050,7 +6490,7 @@ msgstr "经销最低量：库存或在途新车需维持 %d 辆。月底每缺�
 msgid "Franchise sales manager"
 msgstr "经销业务经理"
 
-#: scripts/sim/automotive.gd:73
+#: data/milestones.json scripts/sim/automotive.gd:73
 msgid "Franchised dealer"
 msgstr "品牌经销商"
 
@@ -6150,7 +6590,7 @@ msgstr "冻结在跨链桥"
 msgid "Frozen on the bridge: %s"
 msgstr "冻结在跨链桥：%s"
 
-#: scripts/sim/ledger.gd:32
+#: scripts/sim/ledger.gd:33
 msgid "Fuel"
 msgstr "油资"
 
@@ -6190,6 +6630,18 @@ msgstr "出货流程"
 msgid "Full cover"
 msgstr "全险"
 
+#: scripts/ui/group_ui.gd:153
+msgid "Full list: phone, Timeline, Achievements."
+msgstr "完整清单：手机 → 时间轴 → 成就。"
+
+#: data/milestones.json
+msgid "Full shelf"
+msgstr "货架满档"
+
+#: data/milestones.json
+msgid "Full-scale plant"
+msgstr "全规模工厂"
+
 #: scripts/sim/real_estate.gd:129
 msgid "Fund the first construction milestone before breaking ground."
 msgstr "动工前请备妥第一期工程款。"
@@ -6205,6 +6657,10 @@ msgstr "GATEWAY 租车"
 #: scripts/ui/modals/permits_modal.gd:132 scripts/ui/modals/permits_modal.gd:66
 msgid "GRANTED"
 msgstr "已核发"
+
+#: scripts/ui/group_ui.gd:91
+msgid "GROUP THIS MONTH (internal trade eliminated)"
+msgstr "本月集团（已冲销内部交易）"
 
 #: scripts/sim/media.gd:195
 msgid "GROUP-"
@@ -6245,6 +6701,10 @@ msgstr "先到市政厅取得经纪执照，再配对客户与屋主委托，选
 #: data/story/chapters.json
 msgid "Get the import delivered"
 msgstr "让进口货送到"
+
+#: scripts/sim/gates.gd:47
+msgid "Get the licence at City Hall."
+msgstr "到市政厅取得执照。"
 
 #: data/story/chapters.json
 msgid "Get the parcel delivered to your customer"
@@ -6394,6 +6854,10 @@ msgstr "绿色企业补助（%s）"
 msgid "Green Business Grant — City of Aurelia"
 msgstr "绿色企业补助——奥瑞莉亚市政府"
 
+#: data/quests/green_showroom_launch.json
+msgid "Green Showroom Launch"
+msgstr "绿能展间开幕"
+
 #: data/help/glossary.json
 msgid "Green business grant"
 msgstr "绿色事业补助"
@@ -6422,6 +6886,10 @@ msgstr "自有屋顶发电售电：%s"
 msgid "Grid export pays %s/kWh: about %s/year; payback %.1f years. Materials %s."
 msgstr "趸购电价 %s/kWh：每年约 %s；回本 %.1f 年。材料费 %s。"
 
+#: data/synergies.json
+msgid "Grid permits per job; subsidies at City Hall."
+msgstr "每案需并网许可；补助到市政厅申请。"
+
 #: data/character/options.json
 msgid "Grin"
 msgstr "咧嘴笑"
@@ -6430,7 +6898,7 @@ msgstr "咧嘴笑"
 msgid "Gross margin"
 msgstr "毛利率"
 
-#: scripts/ui/modals/company_os.gd:1502 scripts/ui/modals/company_os.gd:268 scripts/ui/modals/info_modal.gd:87 scripts/ui/modals/month_close_modal.gd:30
+#: scripts/ui/modals/company_os.gd:1506 scripts/ui/modals/company_os.gd:268 scripts/ui/modals/info_modal.gd:87 scripts/ui/modals/month_close_modal.gd:30
 msgid "Gross profit"
 msgstr "毛利"
 
@@ -6438,7 +6906,15 @@ msgstr "毛利"
 msgid "Gross profit covers a month of rent."
 msgstr "毛利够付一个月房租了。"
 
-#: scripts/sim/hotel.gd:591
+#: scripts/ui/group_ui.gd:10 scripts/ui/modals/company_os.gd:8
+msgid "Group"
+msgstr "集团"
+
+#: data/synergies.json
+msgid "Group advertising"
+msgstr "集团内广告"
+
+#: scripts/sim/hotel.gd:593
 msgid "Group block deposit refunded"
 msgstr "退还团体房订金"
 
@@ -6454,9 +6930,45 @@ msgstr "集团业务"
 msgid "Group campaigns"
 msgstr "集团活动"
 
-#: scripts/sim/hotel.gd:546
+#: scripts/sim/group_jobs.gd:164
+msgid "Group job %s closed (%s): paid %s."
+msgstr "集团委托「%s」结案（%s）：付款 %s。"
+
+#: scripts/sim/group_jobs.gd:157
+msgid "Group job %s: %s"
+msgstr "集团委托 %s：%s"
+
+#: scripts/sim/group_jobs.gd:165
+msgid "Group job %s: paid %s."
+msgstr "集团委托「%s」：付款 %s。"
+
+#: scripts/ui/group_ui.gd:101
+msgid "Group jobs"
+msgstr "集团委托"
+
+#: data/help/help.json
+msgid "Group jobs are big orders that need two or more industries. Unfinished parts can be subcontracted for a fee."
+msgstr "集团委托是需要两个以上产业的大案。没完成的部分可付费转包。"
+
+#: scripts/ui/group_ui.gd:94
+msgid "Group net revenue"
+msgstr "集团净营收"
+
+#: scripts/ui/group_ui.gd:95
+msgid "Group operating profit"
+msgstr "集团营业利润"
+
+#: scripts/sim/hotel.gd:548
 msgid "Group room block"
 msgstr "团体房"
+
+#: data/help/help.json
+msgid "Group totals eliminate internal trade, so moving money between your own businesses never makes the group richer or poorer; only real savings do."
+msgstr "集团合计会冲销内部交易，所以自家事业之间转移金额不会让集团变多或变少；只有真正省下的成本才算。"
+
+#: data/help/help.json
+msgid "Group: trade between your businesses"
+msgstr "集团：事业之间的交易"
 
 #: scripts/ui/hotel_ui.gd:51
 msgid "Groups and OTA"
@@ -6506,7 +7018,7 @@ msgstr "GrowthNextBoard"
 msgid "Guest rating at least %.1f (now %.1f)."
 msgstr "住客评分至少 %.1f（目前 %.1f）。"
 
-#: scripts/sim/hotel.gd:662
+#: scripts/sim/hotel.gd:664
 msgid "Guest recovery and public reply"
 msgstr "客诉补偿与公开回复"
 
@@ -6514,7 +7026,7 @@ msgstr "客诉补偿与公开回复"
 msgid "Guest reviews"
 msgstr "住客评价"
 
-#: scripts/sim/hotel.gd:405
+#: scripts/sim/hotel.gd:406
 msgid "Guest supplies, laundry and breakfast"
 msgstr "客房耗品、洗涤与早餐"
 
@@ -6654,6 +7166,14 @@ msgstr "Harbor Point 健身房"
 msgid "Harbor Point Fitness. Rosa Lim runs it: early classes, a boxing corner and a very firm view on prices. She is out on the floor today, and memberships are not sold in this build. If she needs something she will message you."
 msgstr "Harbor Point 健身房，老板是 Rosa Lim：一早就有课、有拳击区，对价格的态度非常强硬。今天她在场边带课，这个版本也还不卖会员。她有事会传消息给你。"
 
+#: data/milestones.json
+msgid "Harbor Resort"
+msgstr "港湾度假村"
+
+#: data/synergies.json
+msgid "Harbor auction; Airport district for rentals."
+msgstr "港区拍卖；租车在机场区。"
+
 #: data/help/patch_notes.json
 msgid "Harbor logistics adds a van, warehouse, delivery routes, and drivers. Chapters 10–12 cover escrow, frozen payments, compliance, and an acquisition offer."
 msgstr "港区物流加入货车、仓库、送货路线与司机；第 10–12 章涵盖托管、冻结款项、合规与收购提案。"
@@ -6673,6 +7193,10 @@ msgstr "Harlow & Finch 房仲"
 #: data/properties/realty_office.json
 msgid "Harlow & Finch brokerage office"
 msgstr "Harlow & Finch 仲介店"
+
+#: data/synergies.json
+msgid "Harlow & Finch office in Residential."
+msgstr "住宅区的 Harlow & Finch 办公室。"
 
 #: data/economy/automotive.json
 msgid "Harrow SUV"
@@ -6745,6 +7269,10 @@ msgstr "Helio 业务"
 #: data/properties/helio_warehouse.json
 msgid "Helio warehouse office"
 msgstr "Helio 仓库办公室"
+
+#: data/synergies.json
+msgid "Helio warehouse office in Industrial."
+msgstr "工业区的 Helio 仓库办公室。"
 
 #: scripts/ui/minigames/cowork_host_game.gd:66
 msgid "Hello, I'm %s. I'm here to meet %s."
@@ -6878,9 +7406,21 @@ msgstr "征才"
 msgid "Hiring gets harder: wages up 8% in a year."
 msgstr "越来越难征人：薪资一年涨 8%。"
 
+#: data/milestones.json
+msgid "Hold 1,000 paying subscribers."
+msgstr "拥有 1,000 位付费订阅者。"
+
+#: data/milestones.json
+msgid "Hold 100 paying subscribers."
+msgstr "拥有 100 位付费订阅者。"
+
 #: data/events/energy_tariff.json
 msgid "Hold charging prices"
 msgstr "维持充电价格"
+
+#: data/milestones.json
+msgid "Hold factory yield at 97% or better for 30 production days running."
+msgstr "连续 30 个生产日，工厂良率维持在 97% 以上。"
 
 #: data/events/hotel_strike.json
 msgid "Hold firm"
@@ -6898,7 +7438,7 @@ msgstr "居家"
 msgid "Home market"
 msgstr "本地市场"
 
-#: scripts/sim/forecast.gd:38 scripts/sim/ledger.gd:29
+#: scripts/sim/forecast.gd:38 scripts/sim/ledger.gd:30
 msgid "Home rent"
 msgstr "房租"
 
@@ -6946,7 +7486,7 @@ msgstr "自由座——月租"
 msgid "Hotel"
 msgstr "旅馆"
 
-#: data/businesses/hotel.json scripts/sim/hotel.gd:733 scripts/ui/hotel_ui.gd:13
+#: data/businesses/hotel.json scripts/sim/hotel.gd:735 scripts/ui/hotel_ui.gd:13
 msgid "Hotel / Tourism"
 msgstr "饭店／观光"
 
@@ -6958,7 +7498,11 @@ msgstr "饭店评论家"
 msgid "Hotel guests add %d rental requests a day."
 msgstr "饭店住客每日增加 %d 笔租车询问。"
 
-#: scripts/sim/hotel.gd:410
+#: data/synergies.json
+msgid "Hotel guests sent to car rental"
+msgstr "饭店住客转介租车"
+
+#: scripts/sim/hotel.gd:412
 msgid "Hotel insurance, property tax and software"
 msgstr "旅馆保险、房屋税与系统费"
 
@@ -6966,7 +7510,7 @@ msgstr "旅馆保险、房屋税与系统费"
 msgid "Hotel revenue management"
 msgstr "饭店营收管理"
 
-#: scripts/sim/hotel.gd:408
+#: scripts/sim/hotel.gd:410
 msgid "Hotel utilities"
 msgstr "旅馆水电瓦斯"
 
@@ -6998,7 +7542,7 @@ msgstr "房务一天可清 %.1f 间；昨晚的周转需要 %.1f 间（没清的
 msgid "Housekeeping capacity"
 msgstr "房务产能"
 
-#: scripts/sim/hotel.gd:683
+#: scripts/sim/hotel.gd:685
 msgid "Housekeeping settlement bonus"
 msgstr "房务员和解奖金"
 
@@ -7045,6 +7589,22 @@ msgstr "货车开得还顺吗？过桥的时候听听变速箱的声音，还有
 #: data/economy/energy.json
 msgid "Hub Garage Co"
 msgstr "Hub Garage Co"
+
+#: data/milestones.json
+msgid "Hundred happy buyers"
+msgstr "百位满意买家"
+
+#: data/milestones.json
+msgid "Hundred subscribers"
+msgstr "百位订阅者"
+
+#: data/milestones.json
+msgid "Hundred trading days"
+msgstr "营业百日"
+
+#: data/milestones.json
+msgid "Hundred-fifty billable hours"
+msgstr "一百五十计费小时"
 
 #: data/dialogue/tomas_varga_intro.json
 msgid "I can run your machines for $1,100 a week. Register as an employer and hire me in Line Planner."
@@ -7250,7 +7810,7 @@ msgstr "整备中"
 msgid "In transit"
 msgstr "运送中"
 
-#: scripts/ui/modals/company_os.gd:1504
+#: scripts/ui/modals/company_os.gd:1510
 msgid "Included internal media cost"
 msgstr "其中：集团内部媒体成本"
 
@@ -7285,6 +7845,10 @@ msgstr "Ines"
 #: data/regions/almeria.json data/regions/karu.json data/regions/solterra.json
 msgid "Infrastructure"
 msgstr "基础建设"
+
+#: data/milestones.json
+msgid "Inn and Brasserie"
+msgstr "旅店与餐厅"
 
 #: data/events/energy_typhoon.json
 msgid "Inspect first and repair only the worst"
@@ -7374,7 +7938,7 @@ msgstr "安装案收一次款但有保固尾巴；充电站按度数赚钱，并
 msgid "Insulated Water Bottle"
 msgstr "保温水瓶"
 
-#: scripts/sim/ledger.gd:32 scripts/ui/automotive_ui.gd:219
+#: scripts/sim/ledger.gd:33 scripts/ui/automotive_ui.gd:219
 msgid "Insurance"
 msgstr "保险"
 
@@ -7406,7 +7970,7 @@ msgstr "交互标记会标示可以使用的地点；灰色锁头表示还有前
 msgid "Interaction markers show where to act. City Guide explains each open building and its services."
 msgstr "交互标示帮你找到可以做事的地方；城市指南列出开放建筑与服务。"
 
-#: scripts/sim/ledger.gd:30
+#: scripts/sim/ledger.gd:31
 msgid "Interest"
 msgstr "利息"
 
@@ -7414,13 +7978,45 @@ msgstr "利息"
 msgid "Interest (APR)"
 msgstr "利率（年）"
 
-#: scripts/sim/media.gd:130
-msgid "Internal campaign at media cost"
-msgstr "集团内部活动按媒体成本计价"
-
 #: scripts/ui/media_ui.gd:156
 msgid "Internal campaigns charge the target segment at media cost. No agency service fee or supplier rebate; measured conversions boost real business demand."
 msgstr "内部活动以媒体成本计入目标分部，免代理服务费且不收供应商回扣；实际转换会提升业务需求。"
+
+#: data/synergies.json
+msgid "Internal campaigns run at media cost, or cost-plus, with no agency fee or rebate."
+msgstr "内部宣传活动依媒体成本或成本加成运行，没有代理费或回扣。"
+
+#: scripts/sim/internal_supply.gd:209
+msgid "Internal purchase from %s: %s"
+msgstr "向%s内部采购：%s"
+
+#: scripts/ui/modals/company_os.gd:1509
+msgid "Internal purchases from the group"
+msgstr "向集团内部采购"
+
+#: scripts/sim/internal_supply.gd:208
+msgid "Internal sale to %s: %s"
+msgstr "对%s内部销售：%s"
+
+#: scripts/ui/group_ui.gd:96
+msgid "Internal sales and purchases differ; check the ledger."
+msgstr "内部销售与采购不一致；请检查帐本。"
+
+#: scripts/ui/group_ui.gd:96
+msgid "Internal sales equal internal purchases."
+msgstr "内部销售与内部采购相等。"
+
+#: scripts/ui/modals/company_os.gd:1508
+msgid "Internal sales to the group"
+msgstr "对集团内部销售"
+
+#: scripts/ui/group_ui.gd:38
+msgid "Internal supply"
+msgstr "内部供应"
+
+#: scripts/ui/modals/company_os.gd:1511
+msgid "Internal trade eliminated in group total"
+msgstr "集团合计已冲销的内部交易"
 
 #: data/city/aurelia.json
 msgid "International Airport"
@@ -7454,7 +8050,7 @@ msgstr "库存"
 msgid "Inventory is cash you can't spend. The ledger values it at average cost; a liquidator pays about 40% of that."
 msgstr "库存就是花不掉的现金。帐上用平均成本计价；清仓商大约只付四成。"
 
-#: scripts/sim/ledger.gd:28
+#: scripts/sim/ledger.gd:29
 msgid "Inventory write-off"
 msgstr "存货报废"
 
@@ -7553,6 +8149,10 @@ msgstr "每件包裹便宜很多，但开车的时间是你的。件数少、或
 #: data/help/glossary.json
 msgid "It is still yours on paper, but you cannot spend it. Keep enough cash outside any single payment route to run the business while it is stuck."
 msgstr "帐面上还是你的，但你不能动用。单一付款管道以外，要留够现金，才撑得过钱被卡住的这段时间。"
+
+#: data/help/glossary.json
+msgid "It moves profit between segments, not into the group. The consolidated totals cancel it out, so only real savings versus buying outside count."
+msgstr "它只在分部之间移动利润，不会增加集团利润。合并报表会把它冲销，只有相对外购省下的成本才算数。"
 
 #: data/dialogue/lina_rails.json
 msgid "It runs on software, and software has bugs. My contract has been audited twice. I'd still say: don't put more in it than you can live without for a week."
@@ -7746,6 +8346,10 @@ msgstr "咖啡材料要备着（隔天早上 6:00 送到），也要设置每天
 msgid "Keep documented production costs"
 msgstr "扣留已发生的生产成本"
 
+#: data/milestones.json
+msgid "Keep five listings live at once."
+msgstr "同时维持五个上架商品。"
+
 #: data/events/low_cash_warning.json
 msgid "Keep going"
 msgstr "继续撑"
@@ -7753,6 +8357,10 @@ msgstr "继续撑"
 #: scripts/sim/company.gd:31
 msgid "Keep it under 28 characters."
 msgstr "请在 28 个字以内。"
+
+#: data/quests/private_label_launch.json
+msgid "Keep listings live and stocked."
+msgstr "让商品维持上架且有库存。"
 
 #: data/events/ad_cost_spike.json
 msgid "Keep my budget"
@@ -7765,6 +8373,10 @@ msgstr "维持曝光，花更多钱。"
 #: data/events/automotive_recall.json
 msgid "Keep renting them"
 msgstr "继续出租"
+
+#: data/quests/trade_fair_week.json
+msgid "Keep the cafe open and stocked; fair visitors walk in."
+msgstr "让咖啡店开门且备足货；展览访客会自己走进来。"
 
 #: scripts/ui/automotive_ui.gd:95
 msgid "Keep the dealer licence fee in the business account."
@@ -7830,6 +8442,10 @@ msgstr "Kessler 外包生产"
 msgid "Kettle Labs"
 msgstr "Kettle Labs"
 
+#: data/milestones.json
+msgid "Keys in hand"
+msgstr "钥匙到手"
+
 #: scripts/ui/minigames/pack_game.gd:76 scripts/ui/minigames/parcel_sort_game.gd:9
 msgid "Kim"
 msgstr "Kim"
@@ -7845,6 +8461,10 @@ msgstr "知道你付钱给谁，也知道中间是谁拿着你的钱。现在的
 #: scripts/ui/automotive_ui.gd:168
 msgid "Known defect: %s (remaining value loss %d%%)."
 msgstr "已知瑕疵：%s（剩余价值损失 %d%%）。"
+
+#: data/milestones.json
+msgid "Known on every street"
+msgstr "街街都认得"
 
 #: data/economy/logistics.json
 msgid "Kuro Ramen"
@@ -7877,6 +8497,10 @@ msgstr "已领执照"
 #: scripts/ui/modals/company_os.gd:395
 msgid "LIVE"
 msgstr "贩售中"
+
+#: data/milestones.json
+msgid "Landlord"
+msgstr "房东"
 
 #: scripts/sim/energy.gd:658
 msgid "Landlord revenue share: %s"
@@ -7926,7 +8550,7 @@ msgstr "最后一次……"
 msgid "Last days"
 msgstr "最近几天"
 
-#: scripts/ui/modals/company_os.gd:1496
+#: scripts/ui/modals/company_os.gd:1500
 msgid "Last month"
 msgstr "上月"
 
@@ -7942,7 +8566,7 @@ msgstr "离打烊至少还有 2 小时，就能上较短的班，依实际工时
 msgid "Late delivery penalty"
 msgstr "延迟交货罚款"
 
-#: scripts/sim/ledger.gd:28
+#: scripts/sim/ledger.gd:29
 msgid "Late fees"
 msgstr "滞纳金"
 
@@ -7973,6 +8597,10 @@ msgstr "以每月 %s 上线"
 #: data/help/help.json
 msgid "Launch when it's ready. Price, ads and new features decide signups and churn; servers cost more as you grow."
 msgstr "做好就上线。价格、广告和新功能决定注册数和流失率；用户越多，服务器越贵。"
+
+#: data/milestones.json
+msgid "Launch your product."
+msgstr "推出你的产品。"
 
 #: scripts/sim/saas.gd:104
 msgid "Launched %s at %s/month."
@@ -8017,6 +8645,10 @@ msgstr "承租 The Loft 工作室"
 #: data/buildings/unit12_factory.json
 msgid "Lease Unit 12"
 msgstr "承租 12 号厂房"
+
+#: scripts/sim/internal_supply.gd:145
+msgid "Lease Unit 12 and open the factory first."
+msgstr "请先租下 12 号厂房并开设工厂。"
 
 #: data/economy/staff.json
 msgid "Lease Unit 12 before hiring a technician."
@@ -8206,6 +8838,10 @@ msgstr "租赁服务"
 msgid "Lettings desk: lease Bay 3"
 msgstr "租赁柜台：租 3 号仓位"
 
+#: scripts/sim/gates.gd:46
+msgid "Licence"
+msgstr "执照"
+
 #: scripts/ui/modals/permits_modal.gd:116
 msgid "Licence renewed until %s."
 msgstr "执照已续期到 %s。"
@@ -8214,7 +8850,7 @@ msgstr "执照已续期到 %s。"
 msgid "Licensing Officer"
 msgstr "执照承办员"
 
-#: scripts/ui/phone_ui.gd:277
+#: scripts/ui/phone_ui.gd:280
 msgid "Life Timeline"
 msgstr "人生纪录"
 
@@ -8334,7 +8970,7 @@ msgstr "已上架%s，售价 %s。花了 %s。"
 msgid "Listings on ShopLane (10% fee · weekly payout)"
 msgstr "ShopLane 上架商品（抽成 10% · 每周拨款）"
 
-#: scripts/sim/forecast.gd:42 scripts/sim/ledger.gd:29
+#: scripts/sim/forecast.gd:42 scripts/sim/ledger.gd:30
 msgid "Living costs"
 msgstr "生活费"
 
@@ -8418,6 +9054,10 @@ msgstr "本地供应商通常接受到货后 14 天内退货。只能退原到�
 msgid "Local wholesaler. Reliable, not the cheapest."
 msgstr "本地批发商。可靠，但不是最便宜。"
 
+#: scripts/sim/gates.gd:48
+msgid "Location"
+msgstr "地点"
+
 #: scripts/ui/hotel_ui.gd:223
 msgid "Lock %d rooms for the group"
 msgstr "为团体锁定 %d 间房"
@@ -8426,13 +9066,17 @@ msgstr "为团体锁定 %d 间房"
 msgid "Lock in {moq} more at today's price"
 msgstr "用今天的价格再订 {moq} 件"
 
-#: scripts/sim/hotel.gd:568
+#: scripts/sim/hotel.gd:570
 msgid "Locked a group block of %d rooms for %s."
 msgstr "已锁定 %d 间团体房（客户：%s）。"
 
 #: scripts/ui/hotel_ui.gd:225
 msgid "Locked: %d %s rooms for %d nights, %d done. The group pays at the end of the stay."
 msgstr "已锁定：%d 间%s，共 %d 晚，已住 %d 晚。团体在住宿结束后付款。"
+
+#: data/milestones.json
+msgid "Log 150 hours of gig work."
+msgstr "累计 150 小时接案工时。"
 
 #: data/businesses/logistics.json data/regions/karu.json data/regions/lumina.json scripts/sim/logistics.gd:623
 msgid "Logistics"
@@ -8514,6 +9158,10 @@ msgstr "这笔销售没了，还要付退货运费。评价保得住。"
 msgid "Lot 7"
 msgstr "7 号地"
 
+#: data/quests/new_neighbourhood_opening.json
+msgid "Lot 7 Development Trust"
+msgstr "第 7 号地块开发信托"
+
 #: scripts/ui/real_estate_ui.gd:89
 msgid "Lot 7 building permit"
 msgstr "7 号地建照"
@@ -8546,7 +9194,7 @@ msgstr "房租便宜、老店林立、石板路和钟楼。在转角开一家咖
 msgid "Low weekly pay, but slower production than an experienced designer."
 msgstr "每周薪资较低，但制作速度比资深设计师慢。"
 
-#: scripts/sim/hotel.gd:657
+#: scripts/sim/hotel.gd:659
 msgid "Low-season promotion"
 msgstr "淡季促销"
 
@@ -8589,6 +9237,10 @@ msgstr "豪景高地"
 #: data/buildings/cargo_terminal.json
 msgid "MANIFEST: 14 pallets of electronics, 6 crates of machine parts and a pallet of coffee are waiting for the evening freighter."
 msgstr "舱单：14 栈板电子产品、6 箱机械零件和 1 栈板咖啡正等待晚班货机。"
+
+#: scripts/ui/group_ui.gd:147
+msgid "MILESTONES %d of %d"
+msgstr "里程碑 %d／%d"
 
 #: scripts/ui/modals/company_os.gd:203
 msgid "MONTHLY PROFIT"
@@ -8646,7 +9298,7 @@ msgstr "维修 校园电台 · %s"
 msgid "MaintainCampusRadio"
 msgstr "MaintainCampusRadio"
 
-#: scripts/sim/ledger.gd:32
+#: scripts/sim/ledger.gd:33
 msgid "Maintenance"
 msgstr "保养"
 
@@ -8793,6 +9445,10 @@ msgstr "毛利维持，但充电的车主变少。"
 #: data/events/energy_tariff.json
 msgid "Margins shrink while the tariff eases over two months."
 msgstr "电价在两个月内逐步回落，期间毛利缩水。"
+
+#: scripts/ui/group_ui.gd:59
+msgid "Market price"
+msgstr "市价"
 
 #: scripts/ui/modals/company_os.gd:418
 msgid "Market ~%s · expect ~%.1f orders/day · %d views · %d orders · in stock %d · unit margin after fee+shipping ≈ %s"
@@ -9038,6 +9694,10 @@ msgstr "Mia"
 msgid "Mid"
 msgstr "中"
 
+#: scripts/sim/milestones.gd:62 scripts/sim/milestones.gd:64
+msgid "Milestone: %s"
+msgstr "里程碑：%s"
+
 #: scripts/ui/minigames/barista_game.gd:98
 msgid "Milk"
 msgstr "奶类"
@@ -9242,6 +9902,10 @@ msgstr "Moss"
 msgid "Mouth"
 msgstr "嘴型"
 
+#: data/quests/green_showroom_launch.json
+msgid "Move two cars through the Auto Desk."
+msgstr "通过汽车柜台卖出两台车。"
+
 #: autoload/game_state.gd:43
 msgid "Moved to Aurelia City with $%s in savings."
 msgstr "带着 $%s 的存款搬到奥瑞莉亚市。"
@@ -9338,6 +10002,10 @@ msgstr "天然资源"
 msgid "Navy dye"
 msgstr "藏青挑染"
 
+#: data/milestones.json
+msgid "Nearly full house"
+msgstr "几乎客满"
+
 #: scripts/ui/modals/permits_modal.gd:34
 msgid "Needed before you hire anyone. Payroll runs every Friday at 17:00 from the company account."
 msgstr "聘人之前必须登记。每周五 17:00 从公司帐户发薪。"
@@ -9366,7 +10034,7 @@ msgstr "谈固定月费"
 msgid "Negotiate revenue share"
 msgstr "谈营收分成"
 
-#: scripts/sim/real_estate.gd:261
+#: scripts/sim/real_estate.gd:262
 msgid "Neighbor mediation"
 msgstr "邻里协调"
 
@@ -9386,7 +10054,7 @@ msgstr "票期 %d 天%s"
 msgid "Net 30 leaves cash available today but creates a bill in 30 days. Reserve money for that bill in your forecast."
 msgstr "票期 30 天今天保留了现金，但 30 天后要付款；现金预测要预留这笔帐款。"
 
-#: scripts/ui/modals/company_os.gd:1502
+#: scripts/ui/modals/company_os.gd:1506
 msgid "Net revenue"
 msgstr "净营收"
 
@@ -9397,6 +10065,10 @@ msgstr "中性"
 #: scripts/frontend/main_menu.gd:44
 msgid "New Game"
 msgstr "新游戏"
+
+#: data/quests/new_neighbourhood_opening.json
+msgid "New Neighbourhood Opening"
+msgstr "新社区开幕"
 
 #: scripts/sim/automotive.gd:766
 msgid "New car returned to the factory: %s"
@@ -9413,6 +10085,10 @@ msgstr "新面孔。来杯小白咖啡？"
 #: autoload/scene_router.gd:82
 msgid "New game"
 msgstr "新游戏"
+
+#: scripts/sim/group_jobs.gd:69
+msgid "New group job: %s"
+msgstr "新的集团委托：%s"
 
 #: scripts/sim/ecommerce.gd:805
 msgid "New order %s — %s — %s"
@@ -9437,6 +10113,14 @@ msgstr "隔天"
 #: scripts/ui/manufacturing_ui.gd:144
 msgid "Next machine"
 msgstr "下一台机器"
+
+#: scripts/ui/group_ui.gd:133 scripts/ui/group_ui.gd:42 scripts/ui/modals/business_board.gd:75
+msgid "Next step: %s"
+msgstr "下一步：%s"
+
+#: scripts/ui/group_ui.gd:141
+msgid "Next step: run two or more businesses. Clients with big orders phone you; the offer lasts about ten days."
+msgstr "下一步：同时经营两个以上事业。有大案的客户会打电话给你；邀约约维持十天。"
 
 #: data/dialogue/ana_register.json
 msgid "Next! Hi. What can I do for you?"
@@ -9618,6 +10302,10 @@ msgstr "没有需要保养的车队车辆。"
 msgid "No free machine bay."
 msgstr "没有空的机台位置。"
 
+#: scripts/sim/internal_supply.gd:136
+msgid "No game."
+msgstr "没有进行中的游戏。"
+
 #: scripts/ui/modals/company_os.gd:1027
 msgid "No gigs in progress. Pick one below."
 msgstr "目前没有进行中的案子，从下面挑一个。"
@@ -9626,9 +10314,17 @@ msgstr "目前没有进行中的案子，从下面挑一个。"
 msgid "No group block is waiting. New offers arrive every Monday morning."
 msgstr "目前没有待处理的团体房。新的提案每周一早上送来。"
 
+#: scripts/ui/group_ui.gd:140
+msgid "No group job on offer."
+msgstr "目前没有集团委托。"
+
 #: scripts/sim/bank.gd:137
 msgid "No lending ban"
 msgstr "目前没有禁贷期"
+
+#: data/synergies.json
+msgid "No licence until imports need one (Year 8)."
+msgstr "进口需要执照前（第 8 年）不用执照。"
 
 #: scripts/ui/modals/company_os.gd:376
 msgid "No listings yet."
@@ -9718,6 +10414,14 @@ msgstr "找不到这笔贷款。"
 msgid "No supplier carries this product."
 msgstr "没有供应商卖这个商品。"
 
+#: scripts/ui/group_ui.gd:41
+msgid "No supply pair is running yet."
+msgstr "还没有可运作的供应组合。"
+
+#: scripts/ui/group_ui.gd:69
+msgid "No trade yet. The first one settles at 22:00."
+msgstr "尚无交易。第一笔会在 22:00 结算。"
+
 #: scripts/ui/automotive_ui.gd:163
 msgid "No used cars on your lot. Win one at the Wednesday auction."
 msgstr "车场上没有中古车。到周三拍卖标一辆吧。"
@@ -9746,9 +10450,21 @@ msgstr "非现金"
 msgid "None"
 msgstr "无"
 
-#: scripts/ui/modals/loan_modal.gd:110
+#: data/synergies.json scripts/sim/gates.gd:46 scripts/ui/modals/loan_modal.gd:110
 msgid "None."
 msgstr "没有。"
+
+#: data/synergies.json
+msgid "None; a van and insurance."
+msgstr "不用；需要一台货车与保险。"
+
+#: data/synergies.json
+msgid "None; machines and materials."
+msgstr "不用；需要机台与材料。"
+
+#: data/synergies.json
+msgid "None; meet Henri Dubois at The Aster first."
+msgstr "不用；先到 The Aster 拜访 Henri Dubois。"
 
 #: scripts/ui/minigames/barista_game.gd:10
 msgid "Nora"
@@ -9769,6 +10485,10 @@ msgstr "北岭"
 #: scripts/ui/minigames/clerk_forms_game.gd:9
 msgid "Northwind Goods"
 msgstr "Northwind Goods"
+
+#: scripts/sim/internal_supply.gd:134
+msgid "Not a supply pair."
+msgstr "不是供应组合。"
 
 #: scripts/sim/wardrobe.gd:57
 msgid "Not enough cash"
@@ -9797,6 +10517,10 @@ msgstr "现金不足以支付模具费。"
 #: scripts/sim/compliance.gd:32
 msgid "Not enough cash for the permit fee."
 msgstr "现金不足以支付许可费用。"
+
+#: scripts/sim/group_jobs.gd:126
+msgid "Not enough cash for the subcontractor's fee."
+msgstr "现金不足以支付转包费。"
 
 #: scripts/sim/manufacturing.gd:75
 msgid "Not enough cash for this purchase."
@@ -9910,6 +10634,10 @@ msgstr "这里没有可以打包的：货在这个地点吗？"
 msgid "Nothing to resolve."
 msgstr "没有需要处理的事。"
 
+#: scripts/sim/internal_supply.gd:191 scripts/sim/internal_supply.gd:201
+msgid "Nothing to trade."
+msgstr "没有可交易的内容。"
+
 #: scripts/ui/phone_ui.gd:260
 msgid "Notifications only.\nManage at a desk: Company OS."
 msgstr "这里只显示通知。\n要管理请到办公桌：Company OS。"
@@ -9982,7 +10710,7 @@ msgstr "订单 %s"
 msgid "ORDERS DELIVERED"
 msgstr "已送达订单"
 
-#: scripts/sim/hotel.gd:510
+#: scripts/sim/hotel.gd:512
 msgid "OTA commission deducted from statement"
 msgstr "从 OTA 帐单扣除佣金"
 
@@ -9990,7 +10718,7 @@ msgstr "从 OTA 帐单扣除佣金"
 msgid "OTA listing: %s"
 msgstr "OTA 上架：%s"
 
-#: scripts/sim/hotel.gd:497
+#: scripts/sim/hotel.gd:499
 msgid "OTA room-night statement"
 msgstr "OTA 房晚对帐单"
 
@@ -10086,7 +10814,7 @@ msgstr "上班族正装"
 msgid "Office deposit returned"
 msgstr "办公室押金退回"
 
-#: scripts/sim/ledger.gd:27
+#: scripts/sim/ledger.gd:28
 msgid "Office rent"
 msgstr "办公室租金"
 
@@ -10122,6 +10850,10 @@ msgstr "Old Town Roasters 送来了 %d 杯份的材料。"
 msgid "Old Town Roasters: supplies for %d cups"
 msgstr "Old Town Roasters：%d 杯份的材料"
 
+#: data/milestones.json
+msgid "Old Town institution"
+msgstr "旧城名店"
+
 #: data/npcs/okafor.json
 msgid "Old Town landlord"
 msgstr "旧城区房东"
@@ -10153,6 +10885,10 @@ msgstr "现货"
 #: scripts/ui/automotive_ui.gd:244
 msgid "On rent"
 msgstr "出租中"
+
+#: data/milestones.json
+msgid "On the air"
+msgstr "开始广播"
 
 #: scripts/ui/minigames/cowork_host_game.gd:29
 msgid "On the list? Check them in. Not on the list, or asking to work here today? Sell a day pass ($15)."
@@ -10226,6 +10962,14 @@ msgstr "只有登记过的公司才能持有进口执照。"
 msgid "Open"
 msgstr "打开"
 
+#: scripts/sim/internal_supply.gd:176
+msgid "Open %s to buy from %s."
+msgstr "开设%s，才能向%s采购。"
+
+#: scripts/sim/internal_supply.gd:181
+msgid "Open %s to supply %s."
+msgstr "开设%s，才能供应给%s。"
+
 #: scripts/ui/hotel_ui.gd:278
 msgid "Open %s · %s"
 msgstr "开幕 %s · %s"
@@ -10270,7 +11014,7 @@ msgstr "周一到周六 7:00–17:00 营业。打烊时结帐入银行；刷卡�
 msgid "Open Operations"
 msgstr "打开「营运」"
 
-#: scripts/sim/hotel.gd:733 scripts/ui/hotel_ui.gd:15 scripts/ui/hotel_ui.gd:20
+#: scripts/sim/hotel.gd:735 scripts/ui/hotel_ui.gd:15 scripts/ui/hotel_ui.gd:20
 msgid "Open Rate Board"
 msgstr "打开房价看板"
 
@@ -10302,9 +11046,17 @@ msgstr "请开设公司银行帐户。"
 msgid "Open a charging station first."
 msgstr "请先开一座充电站。"
 
+#: scripts/sim/internal_supply.gd:182
+msgid "Open a second business at the Business Board to start trading inside the group."
+msgstr "到事业看板开第二个事业，就能开始集团内部交易。"
+
 #: scripts/ui/modals/bank_modal.gd:40
 msgid "Open account with %s"
 msgstr "存入 %s 开户"
+
+#: data/milestones.json
+msgid "Open an EV charging station."
+msgstr "开一座电动车充电站。"
 
 #: scripts/ui/modals/loan_modal.gd:87
 msgid "Open an account at the Nexus Bank counter"
@@ -10362,7 +11114,7 @@ msgstr "开设汽车柜台 · 执照费 %s"
 msgid "Open the brokerage"
 msgstr "开设仲介店"
 
-#: scripts/sim/real_estate.gd:249 scripts/sim/real_estate.gd:84
+#: scripts/sim/real_estate.gd:250 scripts/sim/real_estate.gd:84
 msgid "Open the brokerage first."
 msgstr "先开设仲介店。"
 
@@ -10381,6 +11133,18 @@ msgstr "请先开业，再上一次电池课程。"
 #: scripts/sim/energy.gd:462
 msgid "Open the business first."
 msgstr "请先开业。"
+
+#: scripts/sim/internal_supply.gd:140
+msgid "Open the buying business first."
+msgstr "请先开设采购方的事业。"
+
+#: data/milestones.json
+msgid "Open the cafe on 100 days."
+msgstr "咖啡店营业满 100 天。"
+
+#: data/milestones.json
+msgid "Open the cafe on 30 days."
+msgstr "咖啡店营业满 30 天。"
 
 #: scripts/ui/media_ui.gd:52
 msgid "Open the campaign studio"
@@ -10410,7 +11174,7 @@ msgstr "打开车队柜台"
 msgid "Open the group business before buying internal media."
 msgstr "请先开设集团业务，再购买内部广告。"
 
-#: scripts/sim/hotel.gd:153 scripts/sim/hotel.gd:649
+#: scripts/sim/hotel.gd:153 scripts/sim/hotel.gd:651
 msgid "Open the hotel first."
 msgstr "请先开业旅馆。"
 
@@ -10425,6 +11189,10 @@ msgstr "开办太阳能事业"
 #: data/dialogue/ms_okoro_intro.json
 msgid "Open the subsidy desk"
 msgstr "打开补助窗口"
+
+#: scripts/sim/internal_supply.gd:138
+msgid "Open the supplying business first."
+msgstr "请先开设供应方的事业。"
 
 #: scripts/ui/tutorial.gd:27
 msgid "Open your phone"
@@ -10502,11 +11270,11 @@ msgstr "营运资产：%s"
 msgid "Operating costs"
 msgstr "营运成本"
 
-#: data/help/glossary.json scripts/ui/modals/company_os.gd:1502
+#: data/help/glossary.json scripts/ui/modals/company_os.gd:1506
 msgid "Operating expenses"
 msgstr "营业费用"
 
-#: scripts/ui/modals/company_os.gd:1502
+#: scripts/ui/modals/company_os.gd:1506
 msgid "Operating profit"
 msgstr "营业利益"
 
@@ -10634,7 +11402,7 @@ msgstr "待打包订单：%d"
 msgid "Oskar"
 msgstr "Oskar"
 
-#: scripts/sim/ledger.gd:32
+#: scripts/sim/ledger.gd:33
 msgid "Other"
 msgstr "其他"
 
@@ -10645,6 +11413,10 @@ msgstr "其他营业费用"
 #: scripts/frontend/character_creator.gd:123 scripts/frontend/character_creator.gd:144
 msgid "Outfit"
 msgstr "服装"
+
+#: scripts/sim/internal_supply.gd:215
+msgid "Outside purchase avoided: %s"
+msgstr "省下的外购：%s"
 
 #: scripts/ui/manufacturing_ui.gd:152
 msgid "Outsource to Kessler · higher unit cost"
@@ -10725,6 +11497,10 @@ msgstr "Owen Blake"
 #: data/dialogue/owen_blake_intro.json
 msgid "Owen Blake, Blake Journeys. I move tour groups. Give me twenty-five percent off the rack rate and I will lock a block of rooms weeks ahead, then pay you thirty days after the stay."
 msgstr "我是 Owen Blake，Blake 旅游。我带旅行团。给我定价七五折，我就提前数周锁一批房，住宿结束三十天后付款。"
+
+#: data/milestones.json
+msgid "Own Campus Radio."
+msgstr "拥有校园广播。"
 
 #: scripts/sim/real_estate.gd:124
 msgid "Own a rental and obtain the Lot 7 building permit at City Hall first."
@@ -10882,7 +11658,7 @@ msgstr "打包订单"
 msgid "Pack the order at your packing table, then ship it"
 msgstr "到打包桌打包订单，然后出货"
 
-#: scripts/sim/ledger.gd:27
+#: scripts/sim/ledger.gd:28
 msgid "Packaging"
 msgstr "包材"
 
@@ -11026,6 +11802,10 @@ msgstr "Park"
 msgid "Parks, cafes and a waterfront lifestyle. Your first home."
 msgstr "公园、咖啡馆、河岸生活。你在这城市的第一个家。"
 
+#: data/synergies.json
+msgid "Part of the hotel's nightly utilities is electricity bought from your energy business."
+msgstr "饭店每晚水电费的一部分，是向你的能源事业购买的电力。"
+
 #: data/help/glossary.json
 msgid "Part of the price is paid later, and only if the company keeps hitting agreed targets."
 msgstr "一部分价金之后才付，而且要公司持续达到约定的目标才给。"
@@ -11082,7 +11862,7 @@ msgstr "Patel"
 msgid "Path:"
 msgstr "路径："
 
-#: scripts/ui/modals/company_os.gd:415
+#: scripts/ui/group_ui.gd:64 scripts/ui/modals/company_os.gd:415
 msgid "Pause"
 msgstr "暂停"
 
@@ -11222,7 +12002,7 @@ msgstr "拨款已送出：%s 导入你的公司帐户。"
 msgid "Payout sent: %s to your personal account."
 msgstr "拨款已送出：%s 导入你的个人帐户。"
 
-#: data/help/glossary.json scripts/sim/forecast.gd:22 scripts/sim/ledger.gd:30
+#: data/help/glossary.json scripts/sim/forecast.gd:22 scripts/sim/ledger.gd:31
 msgid "Payroll"
 msgstr "发薪"
 
@@ -11242,6 +12022,10 @@ msgstr "薪水已发：%s。"
 msgid "Payroll — %d people"
 msgstr "薪资——%d 人"
 
+#: scripts/ui/group_ui.gd:132
+msgid "Pays if closed now"
+msgstr "现在结案可得"
+
 #: scripts/ui/hotel_ui.gd:150
 msgid "Peak-day surcharge %d%% on days at ×%.1f demand or more"
 msgstr "旺日加价 %d%%（适用需求达 ×%.1f 以上的日子）"
@@ -11254,7 +12038,7 @@ msgstr "PeakLess"
 msgid "PeakMore"
 msgstr "PeakMore"
 
-#: scripts/sim/ledger.gd:30
+#: scripts/sim/ledger.gd:31
 msgid "Penalties"
 msgstr "违约金"
 
@@ -11326,7 +12110,7 @@ msgstr "拍照上架"
 msgid "Photograph your product and list it on ShopLane (Company OS → Sales)"
 msgstr "拍商品照，在 ShopLane 上架（Company OS → 销售）"
 
-#: scripts/sim/ledger.gd:27
+#: scripts/sim/ledger.gd:28
 msgid "Photography"
 msgstr "摄影"
 
@@ -11422,7 +12206,7 @@ msgstr "规划路线：%s 号外送单"
 msgid "Plastic pays a %s levy per 100 parcels; buyers like plastic-free."
 msgstr "塑料每 100 件包裹课征 %s 税；买家偏好无塑包装。"
 
-#: scripts/sim/ledger.gd:26
+#: scripts/sim/ledger.gd:27
 msgid "Platform fees"
 msgstr "平台手续费"
 
@@ -11638,6 +12422,10 @@ msgstr "港口通了之前，价格会涨、交期会拉长。没人知道要多
 msgid "Priti"
 msgstr "Priti"
 
+#: data/quests/private_label_launch.json
+msgid "Private-Label Launch"
+msgstr "自有品牌上市"
+
 #: data/npcs/priya.json scripts/ui/minigames/cowork_host_game.gd:9
 msgid "Priya"
 msgstr "Priya"
@@ -11722,7 +12510,7 @@ msgstr "不动产"
 msgid "Property brokerage commission"
 msgstr "房屋仲介佣金"
 
-#: scripts/sim/real_estate.gd:288
+#: scripts/sim/real_estate.gd:289
 msgid "Property closure auction"
 msgstr "公司关闭后房产拍卖"
 
@@ -11742,7 +12530,7 @@ msgstr "不动产许可已核发。"
 msgid "Property permits"
 msgstr "不动产许可"
 
-#: scripts/sim/real_estate.gd:279
+#: scripts/sim/real_estate.gd:280
 msgid "Property taxes and management"
 msgstr "房产税费与管理费"
 
@@ -11854,6 +12642,10 @@ msgstr "为代工单报价、采购原料、安排机台，并决定每批抽检
 msgid "Quote a price, reserve capacity and meet the quality specification. Kessler is bidding too."
 msgstr "提出报价、预留产能并符合品质规格。Kessler 也会参与竞标。"
 
+#: data/quests/green_showroom_launch.json
+msgid "Quote and finish one install."
+msgstr "报价并完成一件安装。"
+
 #: data/help/help.json
 msgid "Quote orders, order materials and reserve machine hours within the next week. Changeovers need one hour."
 msgstr "为订单报价、采购原料并预留未来一周的机台时段。换线需要一小时。"
@@ -11861,6 +12653,10 @@ msgstr "为订单报价、采购原料并预留未来一周的机台时段。换
 #: data/help/glossary.json
 msgid "Quote rooftop solar for real clients, then build an EV charging network."
 msgstr "为真实客户的屋顶报价太阳能，然后创建电动车充电网络。"
+
+#: data/quests/new_neighbourhood_opening.json
+msgid "Quote, install and deliver solar jobs in the Energy console."
+msgstr "在能源控制台报价、安装并交付太阳能案件。"
 
 #: scripts/ui/modals/company_os.gd:1264
 msgid "RATING"
@@ -11886,7 +12682,7 @@ msgstr "已拒绝"
 msgid "RENT DUE IN 14 DAYS"
 msgstr "房租 14 天后到期"
 
-#: scripts/sim/real_estate.gd:233
+#: scripts/sim/real_estate.gd:234
 msgid "RENT-"
 msgstr "RENT-"
 
@@ -12022,6 +12818,18 @@ msgstr "评分 ★ %.1f：排队太久、缺货和价格太高都会拉低评分
 msgid "Ravi"
 msgstr "Ravi"
 
+#: data/milestones.json
+msgid "Reach $25,000 of lifetime sales revenue."
+msgstr "累计销售营收达 $25,000。"
+
+#: data/milestones.json
+msgid "Reach hotel stage three."
+msgstr "饭店升到第三阶段。"
+
+#: data/milestones.json
+msgid "Reach hotel stage two."
+msgstr "饭店升到第二阶段。"
+
 #: scripts/sim/energy.gd:475
 msgid "Reach installer-with-storage stage before applying for a charger grant."
 msgstr "达到「安装加储能」阶段后才能申请充电站补助。"
@@ -12029,6 +12837,38 @@ msgstr "达到「安装加储能」阶段后才能申请充电站补助。"
 #: scripts/sim/energy.gd:560 scripts/sim/energy.gd:581
 msgid "Reach installer-with-storage stage before opening charging sites."
 msgstr "达到「安装加储能」阶段后才能开设充电站。"
+
+#: data/milestones.json
+msgid "Reach the agency stage."
+msgstr "升到代理商阶段。"
+
+#: data/milestones.json
+msgid "Reach the automated line stage."
+msgstr "升到自动化产线阶段。"
+
+#: data/milestones.json
+msgid "Reach the development stage."
+msgstr "升到开发商阶段。"
+
+#: data/milestones.json
+msgid "Reach the franchise stage."
+msgstr "升到特许经营阶段。"
+
+#: data/milestones.json
+msgid "Reach the rental fleet stage."
+msgstr "升到租赁车队阶段。"
+
+#: data/milestones.json
+msgid "Reach the rental portfolio stage."
+msgstr "升到出租资产阶段。"
+
+#: data/milestones.json
+msgid "Reach the storage stage."
+msgstr "升到储能阶段。"
+
+#: data/milestones.json
+msgid "Reach the third factory stage."
+msgstr "升到工厂第三阶段。"
 
 #: scripts/ui/tutorial.gd:27
 msgid "Read Maya's message"
@@ -12098,7 +12938,7 @@ msgstr "可上架（这些你手上有货）"
 msgid "Ready to order materials"
 msgstr "可订购材料"
 
-#: data/businesses/real_estate.json data/help/glossary.json scripts/sim/real_estate.gd:312 scripts/ui/real_estate_ui.gd:25
+#: data/businesses/real_estate.json data/help/glossary.json scripts/sim/real_estate.gd:313 scripts/ui/real_estate_ui.gd:25
 msgid "Real Estate"
 msgstr "房地产"
 
@@ -12206,7 +13046,7 @@ msgstr "Recruit_front_desk"
 msgid "Recruit_housekeeper"
 msgstr "Recruit_housekeeper"
 
-#: scripts/sim/ledger.gd:30
+#: scripts/sim/ledger.gd:31
 msgid "Recruiting"
 msgstr "招募"
 
@@ -12402,7 +13242,7 @@ msgstr "登记不会自动把个人现金转入公司；下一步到 Nexus Bank 
 msgid "Registration fee"
 msgstr "登记规费"
 
-#: scripts/sim/ledger.gd:27
+#: scripts/sim/ledger.gd:28
 msgid "Registration fees"
 msgstr "登记规费"
 
@@ -12413,6 +13253,10 @@ msgstr "登记字号 %s · 成立于 %s"
 #: scripts/ui/modals/company_os.gd:251
 msgid "Registration: "
 msgstr "公司登记："
+
+#: data/milestones.json
+msgid "Regulars forming"
+msgstr "常客成形"
 
 #: data/story/chapters.json
 msgid "Regulation & Scale"
@@ -12486,7 +13330,7 @@ msgstr "翻新%s · %s · 停售 %d 天"
 msgid "Renovate an empty owned unit before listing it."
 msgstr "请在上架前翻修自己持有的空屋。"
 
-#: scripts/sim/real_estate.gd:244
+#: scripts/sim/real_estate.gd:245
 msgid "Renovation budget overrun"
 msgstr "翻修预算超支"
 
@@ -12570,6 +13414,10 @@ msgstr "租车车队"
 msgid "Rental fleet operator"
 msgstr "租车车队经营者"
 
+#: data/milestones.json
+msgid "Rental fleet running"
+msgstr "租赁车队上路"
+
 #: data/help/help.json
 msgid "Rental fleet: lease the Gateway counter, buy cars, set day and week rates and schedule services. Skipped service causes breakdowns mid-rental."
 msgstr "租车车队：承租 Gateway 柜台、买车、设置日租与周租费率并安排保养。跳过保养会在租期中抛锚。"
@@ -12629,6 +13477,10 @@ msgstr "还 %s"
 #: scripts/sim/bank.gd:139
 msgid "Repay overdue loans in this screen; if the company is in insolvency, use the recovery options."
 msgstr "在本画面偿还逾期贷款；公司若已进入清算进程，使用复原选项。"
+
+#: data/milestones.json
+msgid "Repeat business"
+msgstr "回头客"
 
 #: scripts/ui/modals/save_list_modal.gd:47 scripts/ui/modals/save_list_modal.gd:67 scripts/ui/modals/save_list_modal.gd:93
 msgid "Replace"
@@ -12718,7 +13570,7 @@ msgstr "房贷期限为 20–30 年，头期款为 20–30%。信用、房屋与
 msgid "Residential renovation"
 msgstr "住宅翻修"
 
-#: scripts/sim/real_estate.gd:186
+#: scripts/sim/real_estate.gd:187
 msgid "Residential unit sold"
 msgstr "住宅单位售出"
 
@@ -12742,11 +13594,11 @@ msgstr "回复"
 msgid "Restaurant"
 msgstr "餐厅"
 
-#: scripts/sim/hotel.gd:416
+#: scripts/sim/hotel.gd:418
 msgid "Restaurant and bar sales"
 msgstr "餐厅与酒吧营收"
 
-#: scripts/sim/hotel.gd:417
+#: scripts/sim/hotel.gd:419
 msgid "Restaurant ingredients"
 msgstr "餐厅食材"
 
@@ -12774,7 +13626,7 @@ msgstr "重整手续费——贷款 %s"
 msgid "Result"
 msgstr "结果"
 
-#: scripts/ui/modals/company_os.gd:415 scripts/ui/modals/pause_menu.gd:13
+#: scripts/ui/group_ui.gd:64 scripts/ui/modals/company_os.gd:415 scripts/ui/modals/pause_menu.gd:13
 msgid "Resume"
 msgstr "恢复"
 
@@ -12806,7 +13658,7 @@ msgstr "零售商警告：节前恐怕会缺货。"
 msgid "Retrofit every station"
 msgstr "改建所有充电站"
 
-#: scripts/sim/ledger.gd:26 scripts/ui/modals/purchase_return_modal.gd:45
+#: scripts/sim/ledger.gd:27 scripts/ui/modals/purchase_return_modal.gd:45
 msgid "Return & cancellation fees"
 msgstr "退货与取消手续费"
 
@@ -12878,13 +13730,17 @@ msgstr "查看代工单"
 msgid "Review my lot"
 msgstr "查看我的车场"
 
-#: scripts/ui/modals/company_os.gd:1489
+#: scripts/ui/modals/company_os.gd:1493
 msgid "Review next action"
 msgstr "查看下一步"
 
 #: data/events/real_estate_arrears.json data/events/real_estate_delay.json data/events/real_estate_neighbors.json data/events/real_estate_rate.json
 msgid "Review properties and respond"
 msgstr "查看对象并处理"
+
+#: scripts/ui/group_ui.gd:14
+msgid "Review segment results"
+msgstr "查看分部损益"
 
 #: data/events/hotel_review_storm.json scripts/ui/hotel_ui.gd:252
 msgid "Review storm"
@@ -12906,9 +13762,17 @@ msgstr "帮 %s 查看定价"
 msgid "ReviewsNextGrowth"
 msgstr "ReviewsNextGrowth"
 
+#: scripts/ui/group_ui.gd:110
+msgid "Reward if every part is done"
+msgstr "全部完成可得报酬"
+
 #: scripts/ui/minigames/parcel_sort_game.gd:9
 msgid "Reyes"
 msgstr "Reyes"
+
+#: data/milestones.json
+msgid "Ribbon cutting"
+msgstr "剪彩激活"
 
 #: scripts/ui/minigames/cowork_host_game.gd:8
 msgid "Ricci"
@@ -12981,6 +13845,10 @@ msgstr "河畔区看板"
 #: scripts/ui/minigames/clerk_forms_game.gd:9
 msgid "Riverstone Bakery"
 msgstr "Riverstone Bakery"
+
+#: data/milestones.json
+msgid "Roadmap delivered"
+msgstr "路线图兑现"
 
 #: scripts/sim/automotive.gd:628
 msgid "Roadside tow: %s"
@@ -13074,6 +13942,10 @@ msgstr "第 %d / %d 回"
 msgid "Round glasses"
 msgstr "圆框眼镜"
 
+#: data/milestones.json
+msgid "Round the city twice"
+msgstr "绕城两圈"
+
 #: scripts/ui/modals/company_os.gd:1453
 msgid "Route"
 msgstr "路线"
@@ -13153,6 +14025,10 @@ msgstr "推出 $1,200 的限时特卖"
 #: data/events/hotel_slump.json
 msgid "Run a $1,800 discount campaign"
 msgstr "推出 $1,800 的折扣活动"
+
+#: data/quests/green_showroom_launch.json data/quests/new_neighbourhood_opening.json data/quests/private_label_launch.json
+msgid "Run a measured campaign to its last day."
+msgstr "把一档可量测的活动跑到最后一天。"
 
 #: scripts/ui/manufacturing_ui.gd:145
 msgid "Run for %d hours"
@@ -13366,7 +14242,7 @@ msgstr "请先存足原厂订单的现金。"
 msgid "Save exported. Keep this file outside your browser."
 msgstr "存盘已导出。请把文件保存在浏览器以外的地方。"
 
-#: scripts/ui/phone_ui.gd:286
+#: scripts/ui/phone_ui.gd:326
 msgid "Save game"
 msgstr "保存游戏"
 
@@ -13374,7 +14250,7 @@ msgstr "保存游戏"
 msgid "Save imported. Continue where you left off."
 msgstr "存盘已导入，可以接着玩。"
 
-#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:287
+#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:327
 msgid "Save now"
 msgstr "立即存盘"
 
@@ -13386,7 +14262,7 @@ msgstr "第 %d 个存盘槽的主档已损坏。"
 msgid "Save the Helio Supply materials cost first."
 msgstr "请先备妥 Helio Supply 的材料费。"
 
-#: scripts/sim/hotel.gd:690
+#: scripts/sim/hotel.gd:692
 msgid "Save the VIP upgrade cost first."
 msgstr "请先备好 VIP 升等的成本。"
 
@@ -13410,11 +14286,11 @@ msgstr "请先准备创意制作费用。"
 msgid "Save the dealer licence fee first."
 msgstr "请先存足车商执照费。"
 
-#: scripts/sim/hotel.gd:666
+#: scripts/sim/hotel.gd:668
 msgid "Save the emergency repair cost first."
 msgstr "请先备好紧急维修费。"
 
-#: scripts/sim/hotel.gd:609
+#: scripts/sim/hotel.gd:611
 msgid "Save the equipment service cost first."
 msgstr "请先备好设备保养费。"
 
@@ -13430,15 +14306,15 @@ msgstr "请先备好扩建费用。"
 msgid "Save the first month of rent and equipment first."
 msgstr "请先备好首月租金与设备费。"
 
-#: scripts/sim/hotel.gd:675
+#: scripts/sim/hotel.gd:677
 msgid "Save the flash-sale cost first."
 msgstr "请先备好特卖费用。"
 
-#: scripts/sim/hotel.gd:661
+#: scripts/sim/hotel.gd:663
 msgid "Save the guest recovery cost first."
 msgstr "请先备好客诉补偿费。"
 
-#: scripts/sim/hotel.gd:682
+#: scripts/sim/hotel.gd:684
 msgid "Save the housekeeping bonus first."
 msgstr "请先备好房务奖金。"
 
@@ -13454,7 +14330,7 @@ msgstr "请先备妥面板材料费。"
 msgid "Save the premium supplier fee first."
 msgstr "请先备妥优先配额费。"
 
-#: scripts/sim/hotel.gd:656
+#: scripts/sim/hotel.gd:658
 msgid "Save the promotion cost first."
 msgstr "请先备好促销费用。"
 
@@ -13478,11 +14354,11 @@ msgstr "请先备好锁定费率的费用。"
 msgid "Save the reconditioning cost first."
 msgstr "请先存足整备费。"
 
-#: scripts/sim/hotel.gd:625
+#: scripts/sim/hotel.gd:627
 msgid "Save the renovation cost first."
 msgstr "请先备好翻新费用。"
 
-#: scripts/sim/energy.gd:729 scripts/sim/hotel.gd:670
+#: scripts/sim/energy.gd:729 scripts/sim/hotel.gd:672
 msgid "Save the repair cost first."
 msgstr "请先备妥修复费用。"
 
@@ -13514,7 +14390,7 @@ msgstr "已保存"
 msgid "Saved %s"
 msgstr "存于 %s"
 
-#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:289
+#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:329
 msgid "Saved (slot %d)."
 msgstr "已存盘（字段 %d）。"
 
@@ -13526,7 +14402,7 @@ msgstr "安排这笔订单"
 msgid "Scheduled"
 msgstr "已调度"
 
-#: scripts/sim/hotel.gd:671
+#: scripts/sim/hotel.gd:673
 msgid "Scheduled repair"
 msgstr "调度维修"
 
@@ -13554,7 +14430,11 @@ msgstr "角落潦草写着：「利润是观点，现金是事实。」"
 msgid "Seal & next"
 msgstr "封箱，下一张"
 
-#: scripts/ui/modals/company_os.gd:1488 scripts/ui/modals/company_os.gd:8
+#: scripts/ui/group_ui.gd:92
+msgid "Segment sales added up"
+msgstr "各分部销售加总"
+
+#: scripts/ui/modals/company_os.gd:1492 scripts/ui/modals/company_os.gd:8
 msgid "Segments"
 msgstr "分部损益"
 
@@ -13582,6 +14462,14 @@ msgstr "出售 %d 次曝光 · %s"
 msgid "Sell 10 units with average cost $6: COGS is $60. Subtract it from net revenue to find gross profit."
 msgstr "售出 10 件、平均成本 $6，销货成本是 $60；从净营收扣除后得到毛利。"
 
+#: data/milestones.json
+msgid "Sell 40 cars."
+msgstr "卖出 40 台车。"
+
+#: data/milestones.json
+msgid "Sell a car."
+msgstr "卖出一台车。"
+
 #: scripts/ui/minigames/cowork_host_game.gd:98
 msgid "Sell a day pass ($15)"
 msgstr "卖日票（$15）"
@@ -13594,7 +14482,7 @@ msgstr "把中古车卖给 Dockside Motors"
 msgid "Sell all stock to a liquidator (40% of cost)"
 msgstr "把库存全卖给清仓商（成本的 40%）"
 
-#: scripts/sim/real_estate.gd:112 scripts/sim/real_estate.gd:179
+#: scripts/sim/real_estate.gd:112 scripts/sim/real_estate.gd:180
 msgid "Sell an empty finished unit."
 msgstr "请出售已完工的空屋。"
 
@@ -13605,6 +14493,18 @@ msgstr "出售空屋"
 #: scripts/sim/ecommerce.gd:508
 msgid "Sell some stock first, or lease more space."
 msgstr "先卖掉一些库存，或租更大的空间。"
+
+#: data/milestones.json
+msgid "Sell ten cars."
+msgstr "卖出十台车。"
+
+#: data/quests/city_fleet_refresh.json
+msgid "Sell three cars"
+msgstr "卖出三台车"
+
+#: data/quests/green_showroom_launch.json
+msgid "Sell two cars"
+msgstr "卖出两台车"
 
 #: scripts/ui/modals/company_os.gd:1009
 msgid "Sell your time: clients post small projects every morning. Accept a gig, work it here in 2-hour sessions, deliver before the deadline and invoice. Payment follows the client's terms. On-time work earns stars; stars raise your rate."
@@ -13682,11 +14582,27 @@ msgstr "分开看损益，才能知道哪个业务负担共用办公室与员工
 msgid "Serve"
 msgstr "出餐"
 
+#: data/milestones.json
+msgid "Serve 1,000 cafe customers."
+msgstr "服务 1,000 位咖啡店顾客。"
+
+#: data/milestones.json
+msgid "Serve 100 cafe customers."
+msgstr "服务 100 位咖啡店顾客。"
+
+#: data/quests/trade_fair_week.json
+msgid "Serve 150 more cafe customers"
+msgstr "再服务 150 位咖啡店顾客"
+
+#: data/milestones.json
+msgid "Serve 5,000 cafe customers."
+msgstr "服务 5,000 位咖啡店顾客。"
+
 #: data/help/glossary.json
 msgid "Server costs"
 msgstr "服务器成本"
 
-#: scripts/sim/ledger.gd:31
+#: scripts/sim/ledger.gd:32
 msgid "Servers"
 msgstr "服务器"
 
@@ -13730,6 +14646,10 @@ msgstr "ServiceDue"
 msgid "Services"
 msgstr "办事"
 
+#: data/help/help.json
+msgid "Set a transfer price for each running pair: at cost, cost plus a markup or market price. Both businesses show the trade in Segments."
+msgstr "为每个运作中的组合设置转拨价：依成本、成本加成或市价。两边事业都会在分部报表显示这笔交易。"
+
 #: data/dialogue/lina_intro.json
 msgid "Set me up with a digital dollar account."
 msgstr "帮我开一个数字美元帐户。"
@@ -13770,11 +14690,11 @@ msgstr "遮荫、方位和屋顶承重决定发电量。朝南又没有遮荫的
 msgid "Shah"
 msgstr "Shah"
 
-#: scripts/ui/modals/company_os.gd:1500
+#: scripts/ui/modals/company_os.gd:1504
 msgid "Shared"
 msgstr "共用"
 
-#: scripts/ui/modals/company_os.gd:1492
+#: scripts/ui/modals/company_os.gd:1496
 msgid "Shared costs are allocated by net revenue. With no revenue, they stay in Shared."
 msgstr "共用费用依净营收比例分摊；没有营收时，留在「共用」。"
 
@@ -13830,6 +14750,10 @@ msgstr "班表"
 msgid "Shifts worked: %d"
 msgstr "已上班 %d 班"
 
+#: data/milestones.json
+msgid "Ship three features after launch."
+msgstr "上市后再推出三个功能。"
+
 #: scripts/ui/minigames/pack_game.gd:95
 msgid "Ship to: %s"
 msgstr "寄到：%s"
@@ -13842,7 +14766,7 @@ msgstr "货柜在海上遗失"
 msgid "Shipped %d parcel%s — %s."
 msgstr "寄出 %d 件包裹%s——%s。"
 
-#: scripts/sim/ledger.gd:26 scripts/ui/modals/month_close_modal.gd:32 scripts/ui/modals/world_map_modal.gd:117
+#: scripts/sim/ledger.gd:27 scripts/ui/modals/month_close_modal.gd:32 scripts/ui/modals/world_map_modal.gd:117
 msgid "Shipping"
 msgstr "运费"
 
@@ -13862,7 +14786,11 @@ msgstr "自己拍照上架"
 msgid "Shop"
 msgstr "买"
 
-#: scripts/sim/ledger.gd:31
+#: data/synergies.json
+msgid "Shop or office unit"
+msgstr "店面或办公室单位"
+
+#: scripts/sim/ledger.gd:32
 msgid "Shop rent"
 msgstr "店面租金"
 
@@ -14226,6 +15154,10 @@ msgstr "太阳能与充电事业"
 msgid "Solar desk lamps are this year's must-have gift."
 msgstr "太阳能台灯是今年必送的礼物。"
 
+#: data/milestones.json
+msgid "Solar installer of the year"
+msgstr "年度太阳能安装商"
+
 #: data/businesses/energy.json
 msgid "Solar installs, storage and an EV charging network."
 msgstr "太阳能安装、储能与电动车充电网络。"
@@ -14466,7 +15398,7 @@ msgstr "开始建置充电站：%s。"
 msgid "Started freelancing as a consultant."
 msgstr "开始以顾问身份接案。"
 
-#: scripts/sim/hotel.gd:632
+#: scripts/sim/hotel.gd:634
 msgid "Started renovating the %s rooms."
 msgstr "开始翻新%s。"
 
@@ -14574,6 +15506,10 @@ msgstr "已排 %d / %d 个停靠点  ·  目前路线 %.1f 公里"
 msgid "Storage"
 msgstr "仓储"
 
+#: data/milestones.json
+msgid "Storage certified"
+msgstr "储能认证"
+
 #: scripts/sim/wardrobe.gd:66 scripts/ui/modals/clothing_shop_modal.gd:17
 msgid "Store"
 msgstr "商店"
@@ -14634,6 +15570,14 @@ msgstr "摄影棚拍照要 %s。"
 msgid "Styling"
 msgstr "陪衬道具"
 
+#: scripts/ui/group_ui.gd:130
+msgid "Subcontract %s for %s"
+msgstr "转包%s（费用 %s）"
+
+#: scripts/sim/group_jobs.gd:127
+msgid "Subcontractor for group job %s: %s"
+msgstr "集团委托 %s 的转包：%s"
+
 #: data/help/glossary.json
 msgid "Subscriber churn"
 msgstr "订户流失率"
@@ -14661,6 +15605,14 @@ msgstr "补助急件申请"
 #: scripts/ui/energy_ui.gd:224
 msgid "SubsidyNextLeads"
 msgstr "SubsidyNextLeads"
+
+#: scripts/ui/modals/business_board.gd:83
+msgid "Suggested after: %s"
+msgstr "建议接在这些之后：%s"
+
+#: scripts/ui/modals/business_board.gd:78
+msgid "Suggested after: nothing, start here."
+msgstr "建议顺序：没有前置，从这里开始。"
 
 #: data/economy/hotel.json
 msgid "Suite"
@@ -14801,6 +15753,10 @@ msgstr "今日收银"
 #: data/buildings/corner_cafe_unit.json
 msgid "TO LET: corner unit, fitted for a café. Ask Mr. Okafor at Okafor Lettings, three doors down."
 msgstr "招租：转角店面，适合开咖啡店。请洽隔三间的 Okafor 租屋行，找 Okafor 先生。"
+
+#: scripts/ui/modals/business_board.gd:71
+msgid "TO OPEN THIS"
+msgstr "开业条件"
 
 #: scripts/ui/minigames/cowork_host_game.gd:79
 msgid "TODAY'S BOOKINGS"
@@ -14966,7 +15922,7 @@ msgstr "实习柜员"
 msgid "Teller — business banking"
 msgstr "柜台——企业金融"
 
-#: scripts/sim/hotel.gd:412
+#: scripts/sim/hotel.gd:414
 msgid "Temporary cleaners"
 msgstr "临时清洁人员"
 
@@ -14974,19 +15930,31 @@ msgstr "临时清洁人员"
 msgid "Temporary cleaners: %s · %s per room"
 msgstr "临时清洁人员：%s · 每间 %s"
 
+#: data/milestones.json
+msgid "Ten cars sold"
+msgstr "卖出十台车"
+
+#: data/milestones.json
+msgid "Ten mandates closed"
+msgstr "成交十笔委托"
+
+#: data/milestones.json
+msgid "Ten runs"
+msgstr "十趟配送"
+
 #: scripts/ui/real_estate_ui.gd:133
 msgid "Tenant"
 msgstr "租客"
 
-#: scripts/sim/real_estate.gd:211
+#: scripts/sim/real_estate.gd:212
 msgid "Tenant arrears settled"
 msgstr "房客欠租结算"
 
-#: scripts/sim/real_estate.gd:237
+#: scripts/sim/real_estate.gd:238
 msgid "Tenant damage repair"
 msgstr "房客损坏修缮"
 
-#: scripts/sim/real_estate.gd:234
+#: scripts/sim/real_estate.gd:235
 msgid "Tenant monthly rent"
 msgstr "房客月租金"
 
@@ -15054,7 +16022,7 @@ msgstr "这张进货单已不存在。"
 msgid "That rail is frozen."
 msgstr "那个管道已冻结。"
 
-#: scripts/sim/hotel.gd:554
+#: scripts/sim/hotel.gd:556
 msgid "That room type is being renovated during the stay."
 msgstr "入住期间这个房型正在翻新。"
 
@@ -15110,6 +16078,10 @@ msgstr "创业布告栏"
 msgid "The Crestline deal will not go ahead. Carry on with your next venture."
 msgstr "Crestline 这笔交易不会继续了。接着做你的下一个事业吧。"
 
+#: data/quests/trade_fair_week.json
+msgid "The Expo Board needs visitors housed, the fair promoted and the stands fed. One supplier for all three, paid by the part."
+msgstr "博览会委员会需要安排访客住宿、宣传展会，还要供应摊位餐点。一个供应商包三项，按项目付款。"
+
 #: data/story/chapters.json data/world/years.json
 msgid "The Green Shift"
 msgstr "绿色转型"
@@ -15121,6 +16093,10 @@ msgstr "The Loft"
 #: data/properties/loft_office.json
 msgid "The Loft agency studio"
 msgstr "The Loft 代理工作室"
+
+#: data/synergies.json
+msgid "The Loft in University."
+msgstr "大学区的 The Loft。"
 
 #: scripts/sim/saas.gd:100
 msgid "The MVP needs %d more dev hours."
@@ -15146,6 +16122,10 @@ msgstr "「总览」显示今天的数字：现金、在 ShopLane 等拨款的�
 msgid "The SaaS server bill has a monthly base cost plus a cost for each subscriber."
 msgstr "SaaS 服务器帐单包含每月基本费与每位订户的额外成本。"
 
+#: data/quests/city_fleet_refresh.json
+msgid "The Transit Office is renewing its service fleet: parts built to drawing, cars sourced and delivery runs flown across the city."
+msgstr "交通局要更新服务车队：依图面生产零件、采购车辆，并在全市跑配送。"
+
 #: scripts/sim/company.gd:85
 msgid "The account is already open."
 msgstr "帐户已经开好了。"
@@ -15169,6 +16149,10 @@ msgstr "拍卖在周三 09:00–17:00。下一场在 %d 天后：现在先验车
 #: scripts/sim/automotive.gd:45
 msgid "The auto desk is already open."
 msgstr "汽车柜台已经开设。"
+
+#: data/synergies.json
+msgid "The auto desk services and prepares the logistics van at its own workshop cost."
+msgstr "汽车柜台以自家工坊成本替物流货车整备与保养。"
 
 #: data/help/glossary.json
 msgid "The average book cost of stock sold to customers during the month. Stock still on the shelf is inventory, not this expense."
@@ -15378,6 +16362,10 @@ msgstr "工厂已开业。"
 msgid "The factory ledger and schedule have been updated."
 msgstr "工厂帐本和调度已更新。"
 
+#: data/synergies.json
+msgid "The factory's power comes from your own solar and storage, so the grid bill falls."
+msgstr "工厂用电来自你自己的太阳能与储能，电网电费因此下降。"
+
 #: autoload/save_system.gd:406
 msgid "The file could not be read. Your existing save is unchanged."
 msgstr "无法读取文件。原有存盘仍完整保留。"
@@ -15518,6 +16506,10 @@ msgstr "许可画面会列出下一个缺少的步骤；只有换包材、没有
 msgid "The pitch lost. Review creative fit before the next proposal."
 msgstr "提案未得标。下次提案前请检查创意是否符合客群。"
 
+#: data/help/glossary.json
+msgid "The price one of your businesses charges another for goods or services inside the group."
+msgstr "集团内，一个事业向另一个事业收取商品或服务的价格。"
+
 #: data/events/hotel_slump.json
 msgid "The promotion softens the dip for two weeks, then it fades."
 msgstr "促销能在两周内减缓低迷，之后效果消退。"
@@ -15526,7 +16518,7 @@ msgstr "促销能在两周内减缓低迷，之后效果消退。"
 msgid "The registration fee is %s."
 msgstr "登记规费是 %s。"
 
-#: scripts/sim/hotel.gd:720 scripts/sim/hotel.gd:721
+#: scripts/sim/hotel.gd:722 scripts/sim/hotel.gd:723
 msgid "The renovated %s rooms are back on sale."
 msgstr "翻新完成的%s重新开卖。"
 
@@ -15554,7 +16546,7 @@ msgstr "外送单每天早上上架。发动前先排好路线：少开的每一
 msgid "The sale fell through: not enough cash or lot space."
 msgstr "交易失败：现金或车场空间不足。"
 
-#: scripts/sim/real_estate.gd:185
+#: scripts/sim/real_estate.gd:186
 msgid "The sale would not cover the mortgage and the company cannot pay the shortfall. Raise cash or wait for prices to recover."
 msgstr "这笔出售无法还清房贷，公司也付不起差额。请先筹措现金，或等房价回升。"
 
@@ -15746,11 +16738,11 @@ msgstr "此客户需求在制作期间已到期。"
 msgid "This contract belongs to another company."
 msgstr "这份合约属于其他公司。"
 
-#: scripts/sim/hotel.gd:608
+#: scripts/sim/hotel.gd:610
 msgid "This equipment needs no service today."
 msgstr "这些设备今天不需要保养。"
 
-#: scripts/ui/phone_ui.gd:294
+#: scripts/ui/phone_ui.gd:334
 msgid "This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen."
 msgstr "这场游戏每隔几秒自动存到字段 %d。新游戏会用自己的字段；其他存盘可以在标题画面读取。"
 
@@ -15758,9 +16750,17 @@ msgstr "这场游戏每隔几秒自动存到字段 %d。新游戏会用自己的
 msgid "This game autosaves to slot %d."
 msgstr "这场游戏自动存在字段 %d。"
 
-#: scripts/sim/hotel.gd:561
+#: scripts/sim/hotel.gd:563
 msgid "This group block has expired."
 msgstr "这笔团体房已过期。"
+
+#: scripts/sim/group_jobs.gd:76
+msgid "This group job is no longer on offer."
+msgstr "这个集团委托已不再开放。"
+
+#: scripts/sim/group_jobs.gd:140
+msgid "This group job is not running."
+msgstr "这个集团委托没有进行中。"
 
 #: scripts/sim/contracts.gd:86
 msgid "This invoice was sold to a collector as part of the company liquidation. The buyer will not pay the closed company again."
@@ -15790,11 +16790,11 @@ msgstr "这不是 City Venture 的存盘。"
 msgid "This is the same form you'll file for your own company, so the rules are worth remembering."
 msgstr "这就是你之后登记自己公司要填的表，规则值得记住。"
 
-#: scripts/sim/energy.gd:275 scripts/sim/hotel.gd:566 scripts/sim/jobs.gd:40 scripts/sim/media.gd:223
+#: scripts/sim/energy.gd:275 scripts/sim/hotel.gd:568 scripts/sim/jobs.gd:40 scripts/sim/media.gd:223
 msgid "This job is no longer available."
 msgstr "这张工单已无法承接。"
 
-#: scripts/ui/modals/company_os.gd:1496
+#: scripts/ui/modals/company_os.gd:1500
 msgid "This month"
 msgstr "本月"
 
@@ -15830,7 +16830,7 @@ msgstr "这张进货单属于其他企业。"
 msgid "This roof survey is no longer available."
 msgstr "这个屋顶案已不可用。"
 
-#: scripts/sim/hotel.gd:620
+#: scripts/sim/hotel.gd:622
 msgid "This room type is already being renovated."
 msgstr "这个房型已经在翻新。"
 
@@ -15846,6 +16846,10 @@ msgstr "此时段与生产或换线时间重叠。"
 msgid "This supplier does not accept returns after delivery."
 msgstr "这家供应商不接受到货后退货。"
 
+#: scripts/sim/internal_supply.gd:109
+msgid "This supply runs with the business and cannot be paused."
+msgstr "这项供应随事业运作，无法暂停。"
+
 #: scripts/world/actions.gd:53
 msgid "This till comes with the lease. Mr. Okafor at Okafor Lettings handles it."
 msgstr "这台收银机跟着租约走。请找 Okafor 租屋行的 Okafor 先生。"
@@ -15857,6 +16861,14 @@ msgstr "今年的补助申请已截止。"
 #: scripts/sim/energy.gd:447
 msgid "This year's subsidy quota is used up."
 msgstr "今年的补助额度已用完。"
+
+#: data/milestones.json
+msgid "Thousand subscribers"
+msgstr "千位订阅者"
+
+#: data/milestones.json
+msgid "Thousand-order shop"
+msgstr "千单商店"
 
 #: data/buildings/threadline_apparel.json data/economy/logistics.json data/help/help.json
 msgid "Threadline"
@@ -15910,7 +16922,11 @@ msgstr "路上时间：%s"
 msgid "Time only moves forward by living it: working a shift, or sleeping at night."
 msgstr "时间只会随着你的生活前进：上班工作，或晚上睡觉。"
 
-#: scripts/ui/phone_ui.gd:128
+#: scripts/ui/group_ui.gd:111
+msgid "Time to finish"
+msgstr "完成期限"
+
+#: scripts/ui/phone_ui.gd:128 scripts/ui/phone_ui.gd:283
 msgid "Timeline"
 msgstr "人生纪录"
 
@@ -15990,7 +17006,7 @@ msgstr "今天太晚了，来不及上班：店快打烊了。先回家睡觉（
 msgid "Too many orders. Not enough hours."
 msgstr "订单太多，时间不够。"
 
-#: scripts/sim/hotel.gd:553
+#: scripts/sim/hotel.gd:555
 msgid "Too many rooms of this type are already locked for those nights."
 msgstr "那几晚这个房型已锁定太多房间。"
 
@@ -16010,7 +17026,7 @@ msgstr "总额"
 msgid "Total interest"
 msgstr "总利息"
 
-#: scripts/ui/modals/company_os.gd:1505
+#: scripts/ui/modals/company_os.gd:1512
 msgid "Total operating profit"
 msgstr "营业利益合计"
 
@@ -16038,6 +17054,10 @@ msgstr "贸易"
 msgid "Trade & Energy"
 msgstr "贸易与能源"
 
+#: data/quests/trade_fair_week.json
+msgid "Trade Fair Week"
+msgstr "商展周"
+
 #: data/regions/almeria.json
 msgid "Trade hub"
 msgstr "贸易枢纽"
@@ -16046,9 +17066,21 @@ msgstr "贸易枢纽"
 msgid "TradeLink Wholesale"
 msgstr "TradeLink 批发"
 
+#: scripts/ui/group_ui.gd:67
+msgid "Traded %s %s · internal sales %s · saved versus outside %s"
+msgstr "已交易 %s %s · 内部销售 %s · 相对外购省下 %s"
+
 #: data/economy/automotive.json
 msgid "Trailhead SUV"
 msgstr "Trailhead 休旅车"
+
+#: data/help/glossary.json
+msgid "Transfer price"
+msgstr "转拨价"
+
+#: scripts/ui/group_ui.gd:54
+msgid "Transfer price per %s"
+msgstr "每%s转拨价"
 
 #: scripts/sim/company.gd:107
 msgid "Transfer to %s"
@@ -16058,7 +17090,7 @@ msgstr "转帐给 %s"
 msgid "Transfers"
 msgstr "转帐"
 
-#: scripts/sim/ledger.gd:29
+#: scripts/sim/ledger.gd:30
 msgid "Transport"
 msgstr "交通"
 
@@ -16086,6 +17118,10 @@ msgstr "和其他客人一视同仁"
 msgid "Tried the new payment rails."
 msgstr "试了新的支付管道。"
 
+#: data/milestones.json
+msgid "Trusted by agencies"
+msgstr "旅行社信赖"
+
 #: data/help/help.json
 msgid "Try outfits on the preview, buy with your personal cash, and wear them now or later from your wardrobe."
 msgstr "在预览上试穿，用个人现金购买，可以马上穿，或之后从衣柜换上。"
@@ -16110,6 +17146,10 @@ msgstr "把空店面变成能营业的店：设备、吧台和桌椅。"
 msgid "Tutorial skipped. You can replay it from the pause menu (Esc)."
 msgstr "已略过教学。可以在暂停菜单（Esc）重新播放。"
 
+#: data/milestones.json
+msgid "Twenty-five grand in sales"
+msgstr "两万五千销售额"
+
 #: scripts/ui/modals/company_os.gd:1112
 msgid "Two focused hours: %.1f hours of the work done. %s"
 msgstr "专心工作两小时：完成 %.1f 小时的工作量。%s"
@@ -16117,6 +17157,10 @@ msgstr "专心工作两小时：完成 %.1f 小时的工作量。%s"
 #: scripts/world/actions.gd:268
 msgid "Two hours behind your own counter: %d customers served."
 msgstr "在自己的吧台站了两小时：服务了 %d 位客人。"
+
+#: data/milestones.json
+msgid "Two hundred parcels"
+msgstr "两百件包裹"
 
 #: scripts/sim/bank.gd:288
 msgid "Two missed payments. The bank has called loan %s: %s is due in full within 7 days."
@@ -16178,13 +17222,17 @@ msgstr "「收回」会拿回最后一张。"
 msgid "Unexpected large order"
 msgstr "意外的大订单"
 
-#: scripts/sim/real_estate.gd:291
+#: scripts/sim/real_estate.gd:292
 msgid "Unfinished construction auction"
 msgstr "未完工工程拍卖"
 
 #: data/buildings/unit12_factory.json data/properties/unit12_factory.json
 msgid "Unit 12 Light Industrial"
 msgstr "12 号轻工业厂房"
+
+#: data/synergies.json
+msgid "Unit 12 in Industrial."
+msgstr "工业区 12 号厂房。"
 
 #: data/properties/unit12_factory.json
 msgid "Unit 12 is ready. Production risks and rent are yours."
@@ -16242,7 +17290,7 @@ msgstr "未知的工厂危机。"
 msgid "Unknown fleet policy."
 msgstr "未知的车队政策。"
 
-#: scripts/sim/hotel.gd:694
+#: scripts/sim/hotel.gd:696
 msgid "Unknown hotel crisis."
 msgstr "未知的旅馆危机。"
 
@@ -16258,7 +17306,7 @@ msgstr "未知的产业事件。"
 msgid "Unknown job."
 msgstr "找不到这份工作。"
 
-#: scripts/sim/real_estate.gd:269
+#: scripts/sim/real_estate.gd:270
 msgid "Unknown property crisis."
 msgstr "未知的不动产危机。"
 
@@ -16358,7 +17406,7 @@ msgstr "使用率 = 出租车天 ÷ 可用车天。机场旅客、季节、租�
 msgid "VENTURE TOWER"
 msgstr "创业大楼"
 
-#: scripts/sim/hotel.gd:691
+#: scripts/sim/hotel.gd:693
 msgid "VIP suite upgrade for a critic"
 msgstr "为评论家升等 VIP 套房"
 
@@ -16406,6 +17454,10 @@ msgstr "货车保险：每月"
 msgid "Van kept at Pier 7 · insurance %s a month · %.0f km driven"
 msgstr "货车停在 7 号码头 · 保险每月 %s · 已开 %.0f 公里"
 
+#: data/synergies.json
+msgid "Van purchase prep and service"
+msgstr "货车整备与保养"
+
 #: scripts/ui/modals/pack_ship_modal.gd:111
 msgid "Van run done: %d parcel%s delivered, %s of fuel, %s on the road."
 msgstr "货车跑完了：送出 %d 件包裹，油钱 %s，路上花了 %s。"
@@ -16434,7 +17486,7 @@ msgstr "车辆经销商"
 msgid "Vehicle insurance"
 msgstr "车辆保险"
 
-#: scripts/sim/ledger.gd:32
+#: scripts/sim/ledger.gd:33
 msgid "Vehicles & upkeep"
 msgstr "车辆与维护"
 
@@ -16461,6 +17513,10 @@ msgstr "Verdant Supply 刚在工业区开张。他们的太阳能台灯在 ShopL
 #: data/world/years.json
 msgid "Verdant Supply opens a warehouse in the Industrial Zone."
 msgstr "Verdant Supply 在工业区开设仓库。"
+
+#: data/milestones.json
+msgid "Version 1.0 ships"
+msgstr "1.0 版上线"
 
 #: data/npcs/victor.json
 msgid "Victor Hale"
@@ -16526,6 +17582,10 @@ msgstr "请先到豪景高地的 The Aster 拜访 Henri Dubois。"
 msgid "Visit Threadline on Shopping Street to browse the outfits available now."
 msgstr "到商店街的 Threadline 看看目前贩售的服装。"
 
+#: scripts/sim/gates.gd:49
+msgid "Visit or lease the location."
+msgstr "亲自去看或租下该地点。"
+
 #: scripts/ui/minigames/cowork_host_game.gd:34
 msgid "Visitor %d / %d"
 msgstr "访客 %d / %d"
@@ -16549,6 +17609,10 @@ msgstr "Volt Electric"
 #: data/economy/automotive.json
 msgid "Volt Hatch EV"
 msgstr "Volt Hatch 电动车"
+
+#: data/quests/green_showroom_launch.json
+msgid "Volta Motors Regional"
+msgstr "Volta Motors 区域部"
 
 #: data/npcs/priya_nair.json
 msgid "Voyago booking-platform account manager"
@@ -16626,11 +17690,11 @@ msgstr "等待补助审核"
 msgid "Walk between neighbouring districts, or take the Metro from any station."
 msgstr "相邻的区域可以走路，也可以从任一捷运站搭车。"
 
-#: scripts/sim/hotel.gd:577
+#: scripts/sim/hotel.gd:579
 msgid "Walk compensation for a group block"
 msgstr "团体房被迫换房的补偿"
 
-#: scripts/sim/hotel.gd:411
+#: scripts/sim/hotel.gd:413
 msgid "Walk compensation for overbooked guests"
 msgstr "超卖客人的赶客补偿"
 
@@ -16682,7 +17746,7 @@ msgstr "仓库"
 msgid "Warehouse office to let"
 msgstr "出租仓库办公室"
 
-#: scripts/sim/ledger.gd:31
+#: scripts/sim/ledger.gd:32
 msgid "Warehouse rent"
 msgstr "仓库租金"
 
@@ -16914,6 +17978,14 @@ msgstr "供应商为什么会同意？"
 msgid "Wide"
 msgstr "大眼"
 
+#: data/quests/trade_fair_week.json
+msgid "Win a client brief in the Campaign Mixer and run it to the end."
+msgstr "在宣传混音台赢得客户需求，并运行到结束。"
+
+#: data/quests/city_fleet_refresh.json
+msgid "Win at auction, recondition and sell, or sell new from the franchise."
+msgstr "在拍卖会得标、整备后卖出，或通过特许经营卖新车。"
+
 #: data/help/glossary.json
 msgid "Win cars at the Wednesday auction, recondition and sell them, run an airport rental fleet, then sign a dealership franchise."
 msgstr "在周三拍卖标车、整备后卖出，经营机场租车车队，再签下经销权。"
@@ -16998,7 +18070,7 @@ msgstr "这段时间完成的工作量：%.1f / %.1f 小时"
 msgid "Work on your laptop — Company OS"
 msgstr "用笔电工作——Company OS"
 
-#: scripts/ui/modals/business_board.gd:103
+#: scripts/ui/modals/business_board.gd:121
 msgid "Work shifts on site: walk to the workplace's staff door and press E."
 msgstr "要到现场上班：走到工作地点的员工信道按 E。"
 
@@ -17290,7 +18362,7 @@ msgstr "你想买下 {company}？"
 msgid "You'd need %s of your own money."
 msgstr "你需要拿出自己的 %s。"
 
-#: scripts/ui/modals/business_board.gd:116
+#: scripts/ui/modals/business_board.gd:134
 msgid "You're a freelance consultant now. Today's gigs are in Company OS → Freelance."
 msgstr "你现在是自由接案顾问了。今天的案子在 Company OS → 接案。"
 
@@ -17374,9 +18446,17 @@ msgstr "你的床"
 msgid "Your books don't support a loan yet. Show me more gross profit."
 msgstr "你的帐目还撑不起一笔贷款。先做出更多毛利。"
 
+#: data/synergies.json
+msgid "Your brokerage houses a group business in one of its managed units instead of an outside landlord."
+msgstr "你的仲介公司把集团事业安置在自己管理的单位里，不再付给外部房东。"
+
 #: scripts/ui/tutorial.gd:49
 msgid "Your business computer"
 msgstr "你的工作电脑"
+
+#: scripts/ui/group_ui.gd:11
+msgid "Your businesses can trade with each other. Set the transfer price; both sides show in Segments and the group total never counts it twice."
+msgstr "你的事业之间可以互相交易。设置转拨价；两边都会显示在分部报表，集团合计不会重复计算。"
 
 #: data/help/glossary.json
 msgid "Your cafe needs an inspection and City Hall permission before serving food and drinks."
@@ -17393,6 +18473,10 @@ msgstr "你决定。"
 #: scripts/ui/modals/clothing_shop_modal.gd:56
 msgid "Your cash"
 msgstr "你的现金"
+
+#: scripts/ui/group_ui.gd:55
+msgid "Your cost / outside market"
+msgstr "你的成本／外部市价"
 
 #: scripts/world/actions.gd:262
 msgid "Your counter — %s"
@@ -17470,7 +18554,7 @@ msgstr "你的进口执照核发了，有效期一年：最后两个月内要续
 msgid "Your import licence runs out in about two months. Renew it at the permits kiosk before it lapses."
 msgstr "你的进口执照大约两个月后到期。到期前到许可服务站续期。"
 
-#: scripts/ui/modals/business_board.gd:97
+#: scripts/ui/modals/business_board.gd:115
 msgid "Your job · details"
 msgstr "你的工作 · 详情"
 
@@ -17918,6 +19002,10 @@ msgstr "征才平台"
 msgid "just you"
 msgstr "只有你"
 
+#: data/synergies.json
+msgid "kWh"
+msgstr "度"
+
 #: data/businesses/cafe.json data/businesses/energy.json data/businesses/hotel.json data/businesses/manufacturing.json
 msgid "labor"
 msgstr "人力"
@@ -17989,6 +19077,10 @@ msgstr "电商平台"
 #: data/businesses/manufacturing.json
 msgid "materials"
 msgstr "原料"
+
+#: data/synergies.json
+msgid "media $"
+msgstr "媒体费用（元）"
 
 #: scripts/sim/bank.gd:115
 msgid "minus existing debt"
@@ -18389,6 +19481,10 @@ msgstr "水电"
 #: data/businesses/real_estate.json
 msgid "vacancy"
 msgstr "空置"
+
+#: data/synergies.json
+msgid "van service"
+msgstr "货车保养"
 
 #: data/npcs/elena.json
 msgid "venture investor — Northlight Capital"

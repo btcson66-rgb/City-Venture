@@ -177,7 +177,7 @@ msgstr ""
 msgid "%d cups · %s"
 msgstr ""
 
-#: scripts/ui/automotive_ui.gd:229
+#: scripts/ui/automotive_ui.gd:229 scripts/ui/group_ui.gd:111
 msgid "%d days"
 msgstr ""
 
@@ -187,6 +187,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:879
 msgid "%d days after signing"
+msgstr ""
+
+#: scripts/ui/group_ui.gd:123
+msgid "%d days left"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1441
@@ -209,6 +213,10 @@ msgstr ""
 msgid "%d last 7 days"
 msgstr ""
 
+#: scripts/sim/milestones.gd:77
+msgid "%d milestones reached. See Achievements on your phone."
+msgstr ""
+
 #: scripts/sim/fmt.gd:46
 msgid "%d min"
 msgstr ""
@@ -227,6 +235,14 @@ msgstr ""
 
 #: scripts/sim/logistics.gd:380
 msgid "%d new delivery runs are posted (Company OS → Logistics)."
+msgstr ""
+
+#: scripts/ui/phone_ui.gd:317
+msgid "%d of %d days"
+msgstr ""
+
+#: scripts/ui/phone_ui.gd:302
+msgid "%d of %d reached"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:636
@@ -409,6 +425,10 @@ msgstr ""
 msgid "%s found no run to take today."
 msgstr ""
 
+#: scripts/sim/group_jobs.gd:68
+msgid "%s has a big order that needs several of your businesses: %s. Reward %s. Open Company OS, Group tab."
+msgstr ""
+
 #: scripts/sim/ecommerce.gd:507
 msgid "%s has room: choose it under \"Deliver to\" in Operations."
 msgstr ""
@@ -445,6 +465,10 @@ msgstr ""
 msgid "%s last 7 days"
 msgstr ""
 
+#: scripts/sim/gates.gd:44
+msgid "%s needed, you have %s"
+msgstr ""
+
 #: scripts/ui/modals/loan_modal.gd:119
 msgid "%s on %s"
 msgstr ""
@@ -477,7 +501,7 @@ msgstr ""
 msgid "%s registered as an employer."
 msgstr ""
 
-#: scripts/sim/hotel.gd:626
+#: scripts/sim/hotel.gd:628
 msgid "%s renovation"
 msgstr ""
 
@@ -1021,7 +1045,7 @@ msgstr ""
 msgid "A listing needs photos. You can spend time shooting them or pay Studio Lumen for professional photos."
 msgstr ""
 
-#: scripts/sim/hotel.gd:623
+#: scripts/sim/hotel.gd:625
 msgid "A locked group block uses these rooms during the renovation."
 msgstr ""
 
@@ -1057,12 +1081,24 @@ msgstr ""
 msgid "A missed target lowers reputation and future brief opportunities."
 msgstr ""
 
+#: data/milestones.json
+msgid "A month behind the counter"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "A monthly premium that covers accidents, theft and damage to your van and what is in it."
 msgstr ""
 
 #: data/help/glossary.json
 msgid "A negative account can trigger warnings and insolvency. Review the forecast and reduce costs before more bills arrive."
+msgstr ""
+
+#: data/quests/green_showroom_launch.json
+msgid "A new EV showroom wants cars on the floor, chargers and rooftop solar on site, and a launch campaign that fills it on opening weekend."
+msgstr ""
+
+#: data/quests/new_neighbourhood_opening.json
+msgid "A new block opens on Lot 7. The Trust wants it built, solar on the roofs and a sales campaign running before the keys are handed over."
 msgstr ""
 
 #: scripts/sim/world.gd:86
@@ -1075,6 +1111,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "A one-off cost you earn back slowly from sales. Count it before you sign."
+msgstr ""
+
+#: scripts/ui/group_ui.gd:115
+msgid "A part from a business you do not run, or cannot finish, can be subcontracted for a fee. Unfinished parts at the deadline pay nothing."
 msgstr ""
 
 #: data/help/help.json
@@ -1091,6 +1131,10 @@ msgstr ""
 
 #: scripts/ui/tutorial.gd:41
 msgid "A place to work"
+msgstr ""
+
+#: data/milestones.json
+msgid "A proper agency"
 msgstr ""
 
 #: data/events/hotel_review_storm.json
@@ -1133,6 +1177,10 @@ msgstr ""
 msgid "A seller drops off twenty parcels with no labels. You feel their pain."
 msgstr ""
 
+#: data/synergies.json
+msgid "A share of the hotel's guests rent from your airport fleet."
+msgstr ""
+
 #: data/character/options.json
 msgid "A sharp three-piece in midnight wool. Pocket square included."
 msgstr ""
@@ -1167,6 +1215,10 @@ msgstr ""
 
 #: data/events/real_estate_arrears.json
 msgid "A tenant has missed rent. Receivables remain visible; collection takes time and may fail."
+msgstr ""
+
+#: data/milestones.json
+msgid "A thousand cups"
 msgstr ""
 
 #: scripts/ui/minigames/route_game.gd:147
@@ -1297,8 +1349,32 @@ msgstr ""
 msgid "Accept a run above, then drive it: you plan the route on a map. Every kilometre saved is fuel and time kept."
 msgstr ""
 
+#: data/quests/city_fleet_refresh.json data/quests/private_label_launch.json
+msgid "Accept an RFQ, schedule the machines and deliver the batch."
+msgstr ""
+
+#: data/quests/trade_fair_week.json
+msgid "Accept and fill a group block on the hotel Rate Board."
+msgstr ""
+
+#: scripts/ui/group_ui.gd:116
+msgid "Accept group job"
+msgstr ""
+
+#: scripts/sim/group_jobs.gd:182
+msgid "Accept it to start the clock."
+msgstr ""
+
+#: data/quests/city_fleet_refresh.json
+msgid "Accept runs in Company OS and plan each route."
+msgstr ""
+
 #: data/events/energy_subsidy_cut.json
 msgid "Accept the cut and requote clients"
+msgstr ""
+
+#: scripts/sim/group_jobs.gd:116
+msgid "Accept the group job first."
 msgstr ""
 
 #: data/events/hotel_event_cancelled.json
@@ -1315,6 +1391,10 @@ msgstr ""
 
 #: data/events/acquisition_offer.json
 msgid "Accept: sell {company} for {price}"
+msgstr ""
+
+#: scripts/sim/group_jobs.gd:83
+msgid "Accepted group job: %s"
 msgstr ""
 
 #: scripts/sim/jobs.gd:44
@@ -1355,6 +1435,10 @@ msgstr ""
 
 #: scripts/ui/minigames/typing_game.gd:50
 msgid "Accuracy and speed decide how much of the work gets done in this session."
+msgstr ""
+
+#: scripts/ui/phone_ui.gd:283
+msgid "Achievements"
 msgstr ""
 
 #: scripts/sim/media.gd:218
@@ -1429,7 +1513,7 @@ msgstr ""
 msgid "Advanced Tech & Manufacturing"
 msgstr ""
 
-#: scripts/sim/ledger.gd:26 scripts/ui/modals/month_close_modal.gd:31
+#: scripts/sim/ledger.gd:27 scripts/ui/modals/month_close_modal.gd:31
 msgid "Advertising"
 msgstr ""
 
@@ -1451,6 +1535,10 @@ msgstr ""
 
 #: scripts/ui/hud.gd:233
 msgid "Afternoon · Sunny"
+msgstr ""
+
+#: data/milestones.json
+msgid "Agency of record"
 msgstr ""
 
 #: scripts/sim/media.gd:89
@@ -1525,7 +1613,7 @@ msgstr ""
 msgid "Allocate weekly hours. Each machine needs one hour between batches."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1502
+#: scripts/ui/modals/company_os.gd:1506
 msgid "Allocated"
 msgstr ""
 
@@ -1631,6 +1719,18 @@ msgstr ""
 
 #: data/economy/staff.json
 msgid "Answers customers and settles returns for you (replace if in stock, otherwise refund)."
+msgstr ""
+
+#: data/synergies.json
+msgid "Any laptop or the co-working hot desk."
+msgstr ""
+
+#: data/synergies.json
+msgid "Any laptop."
+msgstr ""
+
+#: data/synergies.json
+msgid "Any laptop; a shop or warehouse unit later."
 msgstr ""
 
 #: scripts/ui/modals/job_modal.gd:30
@@ -1773,7 +1873,7 @@ msgstr ""
 msgid "Asset maintenance: %s"
 msgstr ""
 
-#: scripts/sim/ledger.gd:32
+#: scripts/sim/ledger.gd:33
 msgid "Asset rent"
 msgstr ""
 
@@ -1805,6 +1905,10 @@ msgstr ""
 msgid "Aster Inn + Brasserie"
 msgstr ""
 
+#: data/synergies.json
+msgid "Aster Inn in Luxury Heights."
+msgstr ""
+
 #: data/properties/aster_inn.json
 msgid "Aster Inn lease"
 msgstr ""
@@ -1831,6 +1935,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1464
 msgid "At any packing table the shipping options include \"Own van\": fuel instead of a courier fee, delivered the same day. The Pier 7 warehouse can hold your stock too."
+msgstr ""
+
+#: scripts/ui/group_ui.gd:59
+msgid "At cost"
 msgstr ""
 
 #: scripts/sim/hotel.gd:95
@@ -1929,6 +2037,10 @@ msgstr ""
 msgid "Aurelia Customs House"
 msgstr ""
 
+#: data/quests/trade_fair_week.json
+msgid "Aurelia Expo Board"
+msgstr ""
+
 #: data/npcs/jobs_board.json
 msgid "Aurelia Jobs"
 msgstr ""
@@ -1943,6 +2055,10 @@ msgstr ""
 
 #: data/economy/hotel.json
 msgid "Aurelia Trade Expo"
+msgstr ""
+
+#: data/quests/city_fleet_refresh.json
+msgid "Aurelia Transit Office"
 msgstr ""
 
 #: data/buildings/aurelia_university.json
@@ -1993,6 +2109,10 @@ msgstr ""
 msgid "AutoService"
 msgstr ""
 
+#: data/milestones.json
+msgid "Automated line"
+msgstr ""
+
 #: scripts/sim/manufacturing.gd:50
 msgid "Automation is already installed."
 msgstr ""
@@ -2007,6 +2127,10 @@ msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:8
 msgid "Ava Moreau"
+msgstr ""
+
+#: data/milestones.json
+msgid "Average 90% occupancy across 30 nights."
 msgstr ""
 
 #: data/economy/marketplace.json
@@ -2109,7 +2233,7 @@ msgstr ""
 msgid "Bank"
 msgstr ""
 
-#: scripts/sim/ledger.gd:28
+#: scripts/sim/ledger.gd:29
 msgid "Bank fees"
 msgstr ""
 
@@ -2337,6 +2461,10 @@ msgstr ""
 msgid "Book the scheduled technician for $700"
 msgstr ""
 
+#: data/milestones.json
+msgid "Booked solid"
+msgstr ""
+
 #: data/events/hotel_slump.json
 msgid "Bookings have dried up. You can discount or wait for the season to turn."
 msgstr ""
@@ -2365,6 +2493,10 @@ msgstr ""
 msgid "Borrowed %s from Nexus Bank (%d months, %s APR)."
 msgstr ""
 
+#: scripts/sim/internal_supply.gd:142
+msgid "Both businesses must run on the same company's books."
+msgstr ""
+
 #: scripts/sim/logistics.gd:91
 msgid "Bought a used van from Sam Okoro at Dockside Motors for %s."
 msgstr ""
@@ -2389,6 +2521,10 @@ msgstr ""
 msgid "Boutique hotels, tourists and critics."
 msgstr ""
 
+#: data/milestones.json
+msgid "Boutique practice"
+msgstr ""
+
 #: scripts/ui/minigames/pack_game.gd:113
 msgid "Box"
 msgstr ""
@@ -2399,6 +2535,10 @@ msgstr ""
 
 #: scripts/ui/hotel_ui.gd:185
 msgid "Breakfast and supplies"
+msgstr ""
+
+#: data/synergies.json
+msgid "Breakfast from the cafe kitchen"
 msgstr ""
 
 #: data/help/glossary.json
@@ -2475,6 +2615,10 @@ msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:89
 msgid "Brokerage exam and licence"
+msgstr ""
+
+#: data/synergies.json
+msgid "Brokerage licence at City Hall."
 msgstr ""
 
 #: data/character/options.json
@@ -2577,7 +2721,7 @@ msgstr ""
 msgid "Building %s"
 msgstr ""
 
-#: scripts/sim/real_estate.gd:174
+#: scripts/sim/real_estate.gd:175
 msgid "Building completed: %s."
 msgstr ""
 
@@ -2697,6 +2841,10 @@ msgstr ""
 msgid "Buy a used van from Sam Okoro at Dockside Motors in the Harbor, and it works two ways: deliver your own ecommerce parcels for fuel instead of a courier fee, and take local delivery runs posted every morning (Company OS → Logistics), planning each route yourself. Rent a bay at Pier 7 for cheap stock space, and hire drivers."
 msgstr ""
 
+#: scripts/sim/internal_supply.gd:147
+msgid "Buy a van first."
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Buy low. Sell less low. Got it, haha."
 msgstr ""
@@ -2739,6 +2887,10 @@ msgstr ""
 
 #: data/story/chapters.json
 msgid "Buy your first stock (Company OS → Operations). Laptop at home or a co-work desk."
+msgstr ""
+
+#: data/milestones.json
+msgid "Buy your first van."
 msgstr ""
 
 #: scripts/ui/modals/clothing_shop_modal.gd:65
@@ -3113,6 +3265,10 @@ msgstr ""
 msgid "Capacity, not demand, can be the real limit on a busy weekend."
 msgstr ""
 
+#: scripts/sim/gates.gd:43
+msgid "Capital"
+msgstr ""
+
 #: scripts/sim/ecommerce.gd:1288
 msgid "Capital contributed in kind by founder"
 msgstr ""
@@ -3305,7 +3461,7 @@ msgstr ""
 msgid "Charger vandalism repair"
 msgstr ""
 
-#: data/help/glossary.json scripts/ui/energy_ui.gd:228 scripts/ui/energy_ui.gd:63
+#: data/help/glossary.json data/milestones.json scripts/ui/energy_ui.gd:228 scripts/ui/energy_ui.gd:63
 msgid "Charging network"
 msgstr ""
 
@@ -3421,6 +3577,10 @@ msgstr ""
 msgid "Chinese tutorial headings now use the bundled fallback font in browsers, preventing missing-character boxes."
 msgstr ""
 
+#: data/synergies.json
+msgid "Choose Own cafe kitchen on the Rate Board: the hotel buys breakfast from the cafe at the transfer price."
+msgstr ""
+
 #: scripts/sim/automotive.gd:653
 msgid "Choose a brand you can sign."
 msgstr ""
@@ -3481,6 +3641,10 @@ msgstr ""
 msgid "Choose a listed car."
 msgstr ""
 
+#: scripts/sim/group_jobs.gd:122
+msgid "Choose a part that is still open."
+msgstr ""
+
 #: scripts/sim/media.gd:179 scripts/sim/media.gd:182
 msgid "Choose a paused campaign and fund its next media purchase."
 msgstr ""
@@ -3505,7 +3669,7 @@ msgstr ""
 msgid "Choose a room type and a price."
 msgstr ""
 
-#: scripts/sim/hotel.gd:606 scripts/sim/hotel.gd:618
+#: scripts/sim/hotel.gd:608 scripts/sim/hotel.gd:620
 msgid "Choose a room type."
 msgstr ""
 
@@ -3585,7 +3749,7 @@ msgstr ""
 msgid "Choose an open district to see its location and travel routes."
 msgstr ""
 
-#: scripts/sim/hotel.gd:558
+#: scripts/sim/hotel.gd:560
 msgid "Choose an open group block."
 msgstr ""
 
@@ -3613,6 +3777,10 @@ msgstr ""
 msgid "Choose between 1 and %d returnable units."
 msgstr ""
 
+#: scripts/sim/internal_supply.gd:98
+msgid "Choose cost, cost plus or market price for a listed supply pair."
+msgstr ""
+
 #: data/help/help.json
 msgid "Choose the name carefully: it goes on your sign and your invoices."
 msgstr ""
@@ -3621,7 +3789,7 @@ msgstr ""
 msgid "Choose to take over or lease the Aster Inn."
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:109
+#: scripts/ui/modals/business_board.gd:127
 msgid "Chose a first business: ecommerce."
 msgstr ""
 
@@ -3639,6 +3807,10 @@ msgstr ""
 
 #: scripts/ui/energy_ui.gd:230
 msgid "City EV adoption %s (+%s a year) · %d of %d stations open · grid electricity %s/kWh"
+msgstr ""
+
+#: data/quests/city_fleet_refresh.json
+msgid "City Fleet Refresh"
 msgstr ""
 
 #: scripts/ui/modals/city_guide_modal.gd:7 scripts/ui/phone_ui.gd:129
@@ -3733,6 +3905,10 @@ msgstr ""
 msgid "Clean charts"
 msgstr ""
 
+#: data/milestones.json
+msgid "Clean line"
+msgstr ""
+
 #: data/dialogue/henri_dubois_intro.json
 msgid "Clean rooms, a friendly desk and a fair price. A room nobody cleaned cannot be sold at all, so hire housekeepers before you chase more guests."
 msgstr ""
@@ -3825,12 +4001,20 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
+#: data/milestones.json
+msgid "Close a brokerage mandate."
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Close a month through the shock: make a profit, or review two losing months"
 msgstr ""
 
 #: data/story/chapters.json
 msgid "Close a month with cash in the bank, or review two month-ends with negative cash"
+msgstr ""
+
+#: data/milestones.json
+msgid "Close ten brokerage mandates."
 msgstr ""
 
 #: scripts/ui/modals/insolvency_modal.gd:52
@@ -3865,7 +4049,7 @@ msgstr ""
 msgid "Closing statement"
 msgstr ""
 
-#: scripts/sim/ledger.gd:29
+#: scripts/sim/ledger.gd:30
 msgid "Clothing"
 msgstr ""
 
@@ -3873,7 +4057,7 @@ msgstr ""
 msgid "Clothing store"
 msgstr ""
 
-#: data/buildings/nexus_cowork.json scripts/sim/ledger.gd:28
+#: data/buildings/nexus_cowork.json scripts/sim/ledger.gd:29
 msgid "Co-working"
 msgstr ""
 
@@ -3905,7 +4089,7 @@ msgstr ""
 msgid "Coding session — %s"
 msgstr ""
 
-#: data/economy/cafe.json scripts/sim/ledger.gd:29 scripts/world/actions.gd:247
+#: data/economy/cafe.json scripts/sim/ledger.gd:30 scripts/world/actions.gd:247
 msgid "Coffee"
 msgstr ""
 
@@ -3927,6 +4111,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1296
 msgid "Coffee, milk and cups: %d cups in stock"
+msgstr ""
+
+#: data/milestones.json
+msgid "Collect 500 lifetime sign-ups."
 msgstr ""
 
 #: data/story/chapters.json
@@ -4009,6 +4197,34 @@ msgstr ""
 msgid "Compare orders per day and unit margin after a price change; selling twice as many units is not useful if each loses money."
 msgstr ""
 
+#: data/milestones.json
+msgid "Complete 50 van runs."
+msgstr ""
+
+#: data/quests/new_neighbourhood_opening.json
+msgid "Complete a development project"
+msgstr ""
+
+#: data/milestones.json
+msgid "Complete a development project."
+msgstr ""
+
+#: data/milestones.json
+msgid "Complete a travel-agency room block."
+msgstr ""
+
+#: data/milestones.json
+msgid "Complete five group blocks."
+msgstr ""
+
+#: data/quests/city_fleet_refresh.json
+msgid "Complete five van runs"
+msgstr ""
+
+#: data/milestones.json
+msgid "Complete ten van runs."
+msgstr ""
+
 #: scripts/sim/hotel.gd:91
 msgid "Complete the previous growth stage."
 msgstr ""
@@ -4029,7 +4245,7 @@ msgstr ""
 msgid "Completed %s."
 msgstr ""
 
-#: scripts/sim/real_estate.gd:168
+#: scripts/sim/real_estate.gd:169
 msgid "Completed Lot 7 building"
 msgstr ""
 
@@ -4041,7 +4257,7 @@ msgstr ""
 msgid "Complex regulation"
 msgstr ""
 
-#: scripts/sim/ledger.gd:27
+#: scripts/sim/ledger.gd:28
 msgid "Compliance"
 msgstr ""
 
@@ -4173,12 +4389,24 @@ msgstr ""
 msgid "Corner Café Unit, Lantern Row: $1,900/month, 2 months' deposit. Ask Mr. Okafor."
 msgstr ""
 
+#: data/synergies.json
+msgid "Corner unit in Old Town."
+msgstr ""
+
 #: data/economy/automotive.json
 msgid "Corvo Compact"
 msgstr ""
 
+#: scripts/ui/group_ui.gd:58
+msgid "Cost + %d%%"
+msgstr ""
+
 #: data/help/glossary.json scripts/ui/modals/company_os.gd:267
 msgid "Cost of goods sold"
+msgstr ""
+
+#: scripts/sim/internal_supply.gd:206
+msgid "Cost of internal supply: %s"
 msgstr ""
 
 #: data/events/ad_cost_spike.json
@@ -4325,8 +4553,16 @@ msgstr ""
 msgid "Crestline Flagship"
 msgstr ""
 
+#: data/quests/private_label_launch.json
+msgid "Crestline Retail"
+msgstr ""
+
 #: data/events/crestline_big_offer.json
 msgid "Crestline wants 800 lamps"
+msgstr ""
+
+#: data/quests/private_label_launch.json
+msgid "Crestline wants a private-label line: built by a factory, sold through a marketplace shop and backed by a launch campaign."
 msgstr ""
 
 #: data/buildings/crestline_flagship.json
@@ -4337,7 +4573,7 @@ msgstr ""
 msgid "Crestline's offer is in Company OS → Contracts: accept, counter or decline"
 msgstr ""
 
-#: scripts/sim/hotel.gd:482
+#: scripts/sim/hotel.gd:484
 msgid "Critic Vera Stone published her review: %.1f stars."
 msgstr ""
 
@@ -4569,6 +4805,10 @@ msgstr ""
 msgid "Dealer licence"
 msgstr ""
 
+#: data/synergies.json
+msgid "Dealer licence fee when you open the Auto Desk."
+msgstr ""
+
 #: scripts/ui/automotive_ui.gd:281
 msgid "DealerNextAirport"
 msgstr ""
@@ -4649,8 +4889,48 @@ msgstr ""
 msgid "Defect rate"
 msgstr ""
 
+#: data/milestones.json
+msgid "Deliver 1,000 marketplace orders."
+msgstr ""
+
+#: data/milestones.json
+msgid "Deliver 100 marketplace orders."
+msgstr ""
+
+#: data/milestones.json
+msgid "Deliver 15 freelance gigs."
+msgstr ""
+
+#: data/milestones.json
+msgid "Deliver 15 solar installs."
+msgstr ""
+
+#: data/milestones.json
+msgid "Deliver 200 parcels by van."
+msgstr ""
+
+#: data/milestones.json
+msgid "Deliver 30 freelance gigs."
+msgstr ""
+
+#: data/quests/private_label_launch.json
+msgid "Deliver 50 more marketplace orders"
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Deliver Crestline's lamps before the deadline (Company OS → Contracts)"
+msgstr ""
+
+#: data/quests/green_showroom_launch.json
+msgid "Deliver a solar install"
+msgstr ""
+
+#: data/milestones.json
+msgid "Deliver a solar install."
+msgstr ""
+
+#: data/milestones.json
+msgid "Deliver an OEM production order."
 msgstr ""
 
 #: scripts/ui/manufacturing_ui.gd:121
@@ -4665,12 +4945,40 @@ msgstr ""
 msgid "Deliver by %s"
 msgstr ""
 
+#: data/milestones.json
+msgid "Deliver five OEM production orders."
+msgstr ""
+
+#: data/milestones.json
+msgid "Deliver five freelance gigs."
+msgstr ""
+
+#: data/milestones.json
+msgid "Deliver five solar installs."
+msgstr ""
+
+#: data/quests/city_fleet_refresh.json data/quests/private_label_launch.json
+msgid "Deliver one OEM production order"
+msgstr ""
+
+#: data/milestones.json
+msgid "Deliver one freelance gig."
+msgstr ""
+
 #: scripts/sim/jobs.gd:80
 msgid "Deliver this job before invoicing."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:537
 msgid "Deliver to:"
+msgstr ""
+
+#: data/quests/new_neighbourhood_opening.json
+msgid "Deliver two solar installs"
+msgstr ""
+
+#: data/milestones.json
+msgid "Deliver your first marketplace order."
 msgstr ""
 
 #: scripts/ui/energy_ui.gd:167
@@ -4777,7 +5085,7 @@ msgstr ""
 msgid "Depot Supervisor"
 msgstr ""
 
-#: scripts/sim/ledger.gd:32
+#: scripts/sim/ledger.gd:33
 msgid "Depreciation"
 msgstr ""
 
@@ -4809,8 +5117,12 @@ msgstr ""
 msgid "Detail · %s"
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:97
+#: scripts/ui/modals/business_board.gd:115
 msgid "Details / apply"
+msgstr ""
+
+#: data/milestones.json
+msgid "Developer"
 msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:58
@@ -4861,7 +5173,7 @@ msgstr ""
 msgid "Digital-dollar payments double as fintechs race to win importers."
 msgstr ""
 
-#: scripts/sim/ledger.gd:30
+#: scripts/sim/ledger.gd:31
 msgid "Dining"
 msgstr ""
 
@@ -4929,6 +5241,10 @@ msgstr ""
 msgid "Dockside Motors · %s now"
 msgstr ""
 
+#: data/synergies.json
+msgid "Dockside Motors, Harbor (bay at Pier 7 optional)."
+msgstr ""
+
 #: scripts/sim/logistics.gd:80
 msgid "Dockside Motors: %s"
 msgstr ""
@@ -4991,6 +5307,10 @@ msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:140 scripts/ui/minigames/barista_game.gd:141
 msgid "Drinks served exactly right: %d / %d"
+msgstr ""
+
+#: data/milestones.json
+msgid "Drive 500 km."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1435
@@ -5081,6 +5401,10 @@ msgstr ""
 msgid "Each day shows expected occupancy at your current prices. Gold days are peak demand; purple days have a city event."
 msgstr ""
 
+#: data/synergies.json
+msgid "Each delivered ecommerce order restocks from your own line instead of an outside wholesaler."
+msgstr ""
+
 #: data/economy/staff.json
 msgid "Each electrician adds crew-days to installs on weekdays. Salary is due even when weather stops work."
 msgstr ""
@@ -5133,6 +5457,10 @@ msgstr ""
 msgid "Earn on the side"
 msgstr ""
 
+#: scripts/sim/gates.gd:45
+msgid "Earn or borrow the difference first."
+msgstr ""
+
 #: scripts/sim/energy.gd:245
 msgid "Earn the battery installer certification before selling storage."
 msgstr ""
@@ -5157,7 +5485,7 @@ msgstr ""
 msgid "Ecommerce"
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:110
+#: scripts/ui/modals/business_board.gd:128
 msgid "Ecommerce it is. Order stock from a laptop or a desk."
 msgstr ""
 
@@ -5191,6 +5519,14 @@ msgstr ""
 
 #: data/economy/staff.json data/npcs/rafael_costa.json
 msgid "Electrician"
+msgstr ""
+
+#: data/synergies.json
+msgid "Electricity for the factory"
+msgstr ""
+
+#: data/synergies.json
+msgid "Electricity for the hotel"
 msgstr ""
 
 #: data/events/energy_tariff.json
@@ -5237,7 +5573,11 @@ msgstr ""
 msgid "Eligible registered companies can buy from some suppliers now and pay after the stated number of days."
 msgstr ""
 
-#: scripts/sim/hotel.gd:667
+#: scripts/ui/group_ui.gd:93
+msgid "Eliminated internal sales"
+msgstr ""
+
+#: scripts/sim/hotel.gd:669
 msgid "Emergency repair"
 msgstr ""
 
@@ -5425,6 +5765,10 @@ msgstr ""
 msgid "Every binned pastry is money spent for nothing. Order for the day you expect, not the day you hope for."
 msgstr ""
 
+#: scripts/ui/modals/business_board.gd:75
+msgid "Every gate is open."
+msgstr ""
+
 #: data/events/energy_subsidy_cut.json
 msgid "Every grant is halved while the policy recovers over 90 days."
 msgstr ""
@@ -5443,6 +5787,10 @@ msgstr ""
 
 #: data/dialogue/ken_supply_shock.json
 msgid "Everything from abroad costs more and takes longer now. Even my local stuff is up twelve percent."
+msgstr ""
+
+#: scripts/sim/group_jobs.gd:186
+msgid "Everything is done; the client pays on closing."
 msgstr ""
 
 #: data/regions/aurelia.json
@@ -5587,6 +5935,10 @@ msgstr ""
 
 #: scripts/sim/automotive.gd:688
 msgid "Factory delivery: %s"
+msgstr ""
+
+#: data/synergies.json
+msgid "Factory goods for ShopLane"
 msgstr ""
 
 #: scripts/sim/manufacturing.gd:373
@@ -5737,6 +6089,10 @@ msgstr ""
 msgid "Filing fee paid: $300"
 msgstr ""
 
+#: data/quests/trade_fair_week.json
+msgid "Fill a group room block"
+msgstr ""
+
 #: scripts/sim/insolvency.gd:138
 msgid "Final distribution to the founder"
 msgstr ""
@@ -5769,6 +6125,34 @@ msgstr ""
 msgid "Find three backup suppliers for %s"
 msgstr ""
 
+#: data/milestones.json
+msgid "Finish 15 client campaigns."
+msgstr ""
+
+#: data/milestones.json
+msgid "Finish a client campaign."
+msgstr ""
+
+#: data/quests/new_neighbourhood_opening.json
+msgid "Finish a construction project from the Matchmaker's Growth page."
+msgstr ""
+
+#: data/quests/green_showroom_launch.json data/quests/private_label_launch.json
+msgid "Finish a launch campaign"
+msgstr ""
+
+#: data/quests/new_neighbourhood_opening.json
+msgid "Finish a sales campaign"
+msgstr ""
+
+#: data/milestones.json
+msgid "Finish five client campaigns."
+msgstr ""
+
+#: data/quests/trade_fair_week.json
+msgid "Finish one measured promotion campaign"
+msgstr ""
+
 #: scripts/sim/jobs.gd:72
 msgid "Finish the agreed scope before delivery."
 msgstr ""
@@ -5785,12 +6169,40 @@ msgstr ""
 msgid "First ShopLane listing: %s at %s."
 msgstr ""
 
+#: data/milestones.json
+msgid "First batch shipped"
+msgstr ""
+
+#: data/milestones.json
+msgid "First campaign wrapped"
+msgstr ""
+
+#: data/milestones.json
+msgid "First car sold"
+msgstr ""
+
+#: data/milestones.json
+msgid "First client delivered"
+msgstr ""
+
+#: data/milestones.json
+msgid "First commission"
+msgstr ""
+
 #: scripts/sim/logistics.gd:442
 msgid "First delivery run for %s: %s."
 msgstr ""
 
+#: data/milestones.json
+msgid "First group block"
+msgstr ""
+
 #: scripts/sim/ecommerce.gd:148
 msgid "First inventory order: %d × %s from %s."
+msgstr ""
+
+#: data/milestones.json
+msgid "First parcel out"
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:1209
@@ -5811,6 +6223,10 @@ msgstr ""
 
 #: data/story/chapters.json
 msgid "First revenue! ShopLane pays out on Mondays."
+msgstr ""
+
+#: data/milestones.json
+msgid "First roof lit"
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:1037
@@ -5837,7 +6253,7 @@ msgstr ""
 msgid "Fit-out"
 msgstr ""
 
-#: scripts/sim/ledger.gd:31
+#: scripts/sim/ledger.gd:32
 msgid "Fit-out & equipment"
 msgstr ""
 
@@ -5857,8 +6273,24 @@ msgstr ""
 msgid "Fitting room — change outfit"
 msgstr ""
 
+#: data/milestones.json
+msgid "Five campaigns"
+msgstr ""
+
+#: data/milestones.json
+msgid "Five hundred sign-ups"
+msgstr ""
+
+#: data/milestones.json
+msgid "Five installs"
+msgstr ""
+
 #: data/dialogue/nina_first.json
 msgid "Five looks this season: Executive, Luxury Citywear, Travel, Formal Evening, and Logistics for the warehouse days."
+msgstr ""
+
+#: data/milestones.json
+msgid "Five orders on time"
 msgstr ""
 
 #: data/buildings/skyline_grand.json
@@ -5869,7 +6301,7 @@ msgstr ""
 msgid "Fix a wrong order before it arrives. Settlement fees stay paid; an unpaid invoice is reduced instead of returning cash."
 msgstr ""
 
-#: scripts/sim/hotel.gd:676
+#: scripts/sim/hotel.gd:678
 msgid "Flash sale after cancellation"
 msgstr ""
 
@@ -5953,6 +6385,10 @@ msgstr ""
 msgid "Food handling licence (%s)"
 msgstr ""
 
+#: data/synergies.json
+msgid "Food handling licence at City Hall."
+msgstr ""
+
 #: scripts/sim/cafe.gd:410
 msgid "Food handling licence granted."
 msgstr ""
@@ -6005,6 +6441,10 @@ msgstr ""
 msgid "Forms handled correctly: %d / %d"
 msgstr ""
 
+#: data/milestones.json
+msgid "Forty cars sold"
+msgstr ""
+
 #: data/economy/marketplace.json
 msgid "Found it cheaper elsewhere."
 msgstr ""
@@ -6049,7 +6489,7 @@ msgstr ""
 msgid "Franchise sales manager"
 msgstr ""
 
-#: scripts/sim/automotive.gd:73
+#: data/milestones.json scripts/sim/automotive.gd:73
 msgid "Franchised dealer"
 msgstr ""
 
@@ -6149,7 +6589,7 @@ msgstr ""
 msgid "Frozen on the bridge: %s"
 msgstr ""
 
-#: scripts/sim/ledger.gd:32
+#: scripts/sim/ledger.gd:33
 msgid "Fuel"
 msgstr ""
 
@@ -6189,6 +6629,18 @@ msgstr ""
 msgid "Full cover"
 msgstr ""
 
+#: scripts/ui/group_ui.gd:153
+msgid "Full list: phone, Timeline, Achievements."
+msgstr ""
+
+#: data/milestones.json
+msgid "Full shelf"
+msgstr ""
+
+#: data/milestones.json
+msgid "Full-scale plant"
+msgstr ""
+
 #: scripts/sim/real_estate.gd:129
 msgid "Fund the first construction milestone before breaking ground."
 msgstr ""
@@ -6203,6 +6655,10 @@ msgstr ""
 
 #: scripts/ui/modals/permits_modal.gd:132 scripts/ui/modals/permits_modal.gd:66
 msgid "GRANTED"
+msgstr ""
+
+#: scripts/ui/group_ui.gd:91
+msgid "GROUP THIS MONTH (internal trade eliminated)"
 msgstr ""
 
 #: scripts/sim/media.gd:195
@@ -6243,6 +6699,10 @@ msgstr ""
 
 #: data/story/chapters.json
 msgid "Get the import delivered"
+msgstr ""
+
+#: scripts/sim/gates.gd:47
+msgid "Get the licence at City Hall."
 msgstr ""
 
 #: data/story/chapters.json
@@ -6393,6 +6853,10 @@ msgstr ""
 msgid "Green Business Grant — City of Aurelia"
 msgstr ""
 
+#: data/quests/green_showroom_launch.json
+msgid "Green Showroom Launch"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Green business grant"
 msgstr ""
@@ -6421,6 +6885,10 @@ msgstr ""
 msgid "Grid export pays %s/kWh: about %s/year; payback %.1f years. Materials %s."
 msgstr ""
 
+#: data/synergies.json
+msgid "Grid permits per job; subsidies at City Hall."
+msgstr ""
+
 #: data/character/options.json
 msgid "Grin"
 msgstr ""
@@ -6429,7 +6897,7 @@ msgstr ""
 msgid "Gross margin"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1502 scripts/ui/modals/company_os.gd:268 scripts/ui/modals/info_modal.gd:87 scripts/ui/modals/month_close_modal.gd:30
+#: scripts/ui/modals/company_os.gd:1506 scripts/ui/modals/company_os.gd:268 scripts/ui/modals/info_modal.gd:87 scripts/ui/modals/month_close_modal.gd:30
 msgid "Gross profit"
 msgstr ""
 
@@ -6437,7 +6905,15 @@ msgstr ""
 msgid "Gross profit covers a month of rent."
 msgstr ""
 
-#: scripts/sim/hotel.gd:591
+#: scripts/ui/group_ui.gd:10 scripts/ui/modals/company_os.gd:8
+msgid "Group"
+msgstr ""
+
+#: data/synergies.json
+msgid "Group advertising"
+msgstr ""
+
+#: scripts/sim/hotel.gd:593
 msgid "Group block deposit refunded"
 msgstr ""
 
@@ -6453,8 +6929,44 @@ msgstr ""
 msgid "Group campaigns"
 msgstr ""
 
-#: scripts/sim/hotel.gd:546
+#: scripts/sim/group_jobs.gd:164
+msgid "Group job %s closed (%s): paid %s."
+msgstr ""
+
+#: scripts/sim/group_jobs.gd:157
+msgid "Group job %s: %s"
+msgstr ""
+
+#: scripts/sim/group_jobs.gd:165
+msgid "Group job %s: paid %s."
+msgstr ""
+
+#: scripts/ui/group_ui.gd:101
+msgid "Group jobs"
+msgstr ""
+
+#: data/help/help.json
+msgid "Group jobs are big orders that need two or more industries. Unfinished parts can be subcontracted for a fee."
+msgstr ""
+
+#: scripts/ui/group_ui.gd:94
+msgid "Group net revenue"
+msgstr ""
+
+#: scripts/ui/group_ui.gd:95
+msgid "Group operating profit"
+msgstr ""
+
+#: scripts/sim/hotel.gd:548
 msgid "Group room block"
+msgstr ""
+
+#: data/help/help.json
+msgid "Group totals eliminate internal trade, so moving money between your own businesses never makes the group richer or poorer; only real savings do."
+msgstr ""
+
+#: data/help/help.json
+msgid "Group: trade between your businesses"
 msgstr ""
 
 #: scripts/ui/hotel_ui.gd:51
@@ -6505,7 +7017,7 @@ msgstr ""
 msgid "Guest rating at least %.1f (now %.1f)."
 msgstr ""
 
-#: scripts/sim/hotel.gd:662
+#: scripts/sim/hotel.gd:664
 msgid "Guest recovery and public reply"
 msgstr ""
 
@@ -6513,7 +7025,7 @@ msgstr ""
 msgid "Guest reviews"
 msgstr ""
 
-#: scripts/sim/hotel.gd:405
+#: scripts/sim/hotel.gd:406
 msgid "Guest supplies, laundry and breakfast"
 msgstr ""
 
@@ -6653,6 +7165,14 @@ msgstr ""
 msgid "Harbor Point Fitness. Rosa Lim runs it: early classes, a boxing corner and a very firm view on prices. She is out on the floor today, and memberships are not sold in this build. If she needs something she will message you."
 msgstr ""
 
+#: data/milestones.json
+msgid "Harbor Resort"
+msgstr ""
+
+#: data/synergies.json
+msgid "Harbor auction; Airport district for rentals."
+msgstr ""
+
 #: data/help/patch_notes.json
 msgid "Harbor logistics adds a van, warehouse, delivery routes, and drivers. Chapters 10–12 cover escrow, frozen payments, compliance, and an acquisition offer."
 msgstr ""
@@ -6671,6 +7191,10 @@ msgstr ""
 
 #: data/properties/realty_office.json
 msgid "Harlow & Finch brokerage office"
+msgstr ""
+
+#: data/synergies.json
+msgid "Harlow & Finch office in Residential."
 msgstr ""
 
 #: data/economy/automotive.json
@@ -6743,6 +7267,10 @@ msgstr ""
 
 #: data/properties/helio_warehouse.json
 msgid "Helio warehouse office"
+msgstr ""
+
+#: data/synergies.json
+msgid "Helio warehouse office in Industrial."
 msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:66
@@ -6877,8 +7405,20 @@ msgstr ""
 msgid "Hiring gets harder: wages up 8% in a year."
 msgstr ""
 
+#: data/milestones.json
+msgid "Hold 1,000 paying subscribers."
+msgstr ""
+
+#: data/milestones.json
+msgid "Hold 100 paying subscribers."
+msgstr ""
+
 #: data/events/energy_tariff.json
 msgid "Hold charging prices"
+msgstr ""
+
+#: data/milestones.json
+msgid "Hold factory yield at 97% or better for 30 production days running."
 msgstr ""
 
 #: data/events/hotel_strike.json
@@ -6897,7 +7437,7 @@ msgstr ""
 msgid "Home market"
 msgstr ""
 
-#: scripts/sim/forecast.gd:38 scripts/sim/ledger.gd:29
+#: scripts/sim/forecast.gd:38 scripts/sim/ledger.gd:30
 msgid "Home rent"
 msgstr ""
 
@@ -6945,7 +7485,7 @@ msgstr ""
 msgid "Hotel"
 msgstr ""
 
-#: data/businesses/hotel.json scripts/sim/hotel.gd:733 scripts/ui/hotel_ui.gd:13
+#: data/businesses/hotel.json scripts/sim/hotel.gd:735 scripts/ui/hotel_ui.gd:13
 msgid "Hotel / Tourism"
 msgstr ""
 
@@ -6957,7 +7497,11 @@ msgstr ""
 msgid "Hotel guests add %d rental requests a day."
 msgstr ""
 
-#: scripts/sim/hotel.gd:410
+#: data/synergies.json
+msgid "Hotel guests sent to car rental"
+msgstr ""
+
+#: scripts/sim/hotel.gd:412
 msgid "Hotel insurance, property tax and software"
 msgstr ""
 
@@ -6965,7 +7509,7 @@ msgstr ""
 msgid "Hotel revenue management"
 msgstr ""
 
-#: scripts/sim/hotel.gd:408
+#: scripts/sim/hotel.gd:410
 msgid "Hotel utilities"
 msgstr ""
 
@@ -6997,7 +7541,7 @@ msgstr ""
 msgid "Housekeeping capacity"
 msgstr ""
 
-#: scripts/sim/hotel.gd:683
+#: scripts/sim/hotel.gd:685
 msgid "Housekeeping settlement bonus"
 msgstr ""
 
@@ -7043,6 +7587,22 @@ msgstr ""
 
 #: data/economy/energy.json
 msgid "Hub Garage Co"
+msgstr ""
+
+#: data/milestones.json
+msgid "Hundred happy buyers"
+msgstr ""
+
+#: data/milestones.json
+msgid "Hundred subscribers"
+msgstr ""
+
+#: data/milestones.json
+msgid "Hundred trading days"
+msgstr ""
+
+#: data/milestones.json
+msgid "Hundred-fifty billable hours"
 msgstr ""
 
 #: data/dialogue/tomas_varga_intro.json
@@ -7249,7 +7809,7 @@ msgstr ""
 msgid "In transit"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1504
+#: scripts/ui/modals/company_os.gd:1510
 msgid "Included internal media cost"
 msgstr ""
 
@@ -7283,6 +7843,10 @@ msgstr ""
 
 #: data/regions/almeria.json data/regions/karu.json data/regions/solterra.json
 msgid "Infrastructure"
+msgstr ""
+
+#: data/milestones.json
+msgid "Inn and Brasserie"
 msgstr ""
 
 #: data/events/energy_typhoon.json
@@ -7373,7 +7937,7 @@ msgstr ""
 msgid "Insulated Water Bottle"
 msgstr ""
 
-#: scripts/sim/ledger.gd:32 scripts/ui/automotive_ui.gd:219
+#: scripts/sim/ledger.gd:33 scripts/ui/automotive_ui.gd:219
 msgid "Insurance"
 msgstr ""
 
@@ -7405,7 +7969,7 @@ msgstr ""
 msgid "Interaction markers show where to act. City Guide explains each open building and its services."
 msgstr ""
 
-#: scripts/sim/ledger.gd:30
+#: scripts/sim/ledger.gd:31
 msgid "Interest"
 msgstr ""
 
@@ -7413,12 +7977,44 @@ msgstr ""
 msgid "Interest (APR)"
 msgstr ""
 
-#: scripts/sim/media.gd:130
-msgid "Internal campaign at media cost"
-msgstr ""
-
 #: scripts/ui/media_ui.gd:156
 msgid "Internal campaigns charge the target segment at media cost. No agency service fee or supplier rebate; measured conversions boost real business demand."
+msgstr ""
+
+#: data/synergies.json
+msgid "Internal campaigns run at media cost, or cost-plus, with no agency fee or rebate."
+msgstr ""
+
+#: scripts/sim/internal_supply.gd:209
+msgid "Internal purchase from %s: %s"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:1509
+msgid "Internal purchases from the group"
+msgstr ""
+
+#: scripts/sim/internal_supply.gd:208
+msgid "Internal sale to %s: %s"
+msgstr ""
+
+#: scripts/ui/group_ui.gd:96
+msgid "Internal sales and purchases differ; check the ledger."
+msgstr ""
+
+#: scripts/ui/group_ui.gd:96
+msgid "Internal sales equal internal purchases."
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:1508
+msgid "Internal sales to the group"
+msgstr ""
+
+#: scripts/ui/group_ui.gd:38
+msgid "Internal supply"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:1511
+msgid "Internal trade eliminated in group total"
 msgstr ""
 
 #: data/city/aurelia.json
@@ -7453,7 +8049,7 @@ msgstr ""
 msgid "Inventory is cash you can't spend. The ledger values it at average cost; a liquidator pays about 40% of that."
 msgstr ""
 
-#: scripts/sim/ledger.gd:28
+#: scripts/sim/ledger.gd:29
 msgid "Inventory write-off"
 msgstr ""
 
@@ -7551,6 +8147,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "It is still yours on paper, but you cannot spend it. Keep enough cash outside any single payment route to run the business while it is stuck."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "It moves profit between segments, not into the group. The consolidated totals cancel it out, so only real savings versus buying outside count."
 msgstr ""
 
 #: data/dialogue/lina_rails.json
@@ -7745,12 +8345,20 @@ msgstr ""
 msgid "Keep documented production costs"
 msgstr ""
 
+#: data/milestones.json
+msgid "Keep five listings live at once."
+msgstr ""
+
 #: data/events/low_cash_warning.json
 msgid "Keep going"
 msgstr ""
 
 #: scripts/sim/company.gd:31
 msgid "Keep it under 28 characters."
+msgstr ""
+
+#: data/quests/private_label_launch.json
+msgid "Keep listings live and stocked."
 msgstr ""
 
 #: data/events/ad_cost_spike.json
@@ -7763,6 +8371,10 @@ msgstr ""
 
 #: data/events/automotive_recall.json
 msgid "Keep renting them"
+msgstr ""
+
+#: data/quests/trade_fair_week.json
+msgid "Keep the cafe open and stocked; fair visitors walk in."
 msgstr ""
 
 #: scripts/ui/automotive_ui.gd:95
@@ -7829,6 +8441,10 @@ msgstr ""
 msgid "Kettle Labs"
 msgstr ""
 
+#: data/milestones.json
+msgid "Keys in hand"
+msgstr ""
+
 #: scripts/ui/minigames/pack_game.gd:76 scripts/ui/minigames/parcel_sort_game.gd:9
 msgid "Kim"
 msgstr ""
@@ -7843,6 +8459,10 @@ msgstr ""
 
 #: scripts/ui/automotive_ui.gd:168
 msgid "Known defect: %s (remaining value loss %d%%)."
+msgstr ""
+
+#: data/milestones.json
+msgid "Known on every street"
 msgstr ""
 
 #: data/economy/logistics.json
@@ -7875,6 +8495,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:395
 msgid "LIVE"
+msgstr ""
+
+#: data/milestones.json
+msgid "Landlord"
 msgstr ""
 
 #: scripts/sim/energy.gd:658
@@ -7925,7 +8549,7 @@ msgstr ""
 msgid "Last days"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1496
+#: scripts/ui/modals/company_os.gd:1500
 msgid "Last month"
 msgstr ""
 
@@ -7941,7 +8565,7 @@ msgstr ""
 msgid "Late delivery penalty"
 msgstr ""
 
-#: scripts/sim/ledger.gd:28
+#: scripts/sim/ledger.gd:29
 msgid "Late fees"
 msgstr ""
 
@@ -7971,6 +8595,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "Launch when it's ready. Price, ads and new features decide signups and churn; servers cost more as you grow."
+msgstr ""
+
+#: data/milestones.json
+msgid "Launch your product."
 msgstr ""
 
 #: scripts/sim/saas.gd:104
@@ -8015,6 +8643,10 @@ msgstr ""
 
 #: data/buildings/unit12_factory.json
 msgid "Lease Unit 12"
+msgstr ""
+
+#: scripts/sim/internal_supply.gd:145
+msgid "Lease Unit 12 and open the factory first."
 msgstr ""
 
 #: data/economy/staff.json
@@ -8205,6 +8837,10 @@ msgstr ""
 msgid "Lettings desk: lease Bay 3"
 msgstr ""
 
+#: scripts/sim/gates.gd:46
+msgid "Licence"
+msgstr ""
+
 #: scripts/ui/modals/permits_modal.gd:116
 msgid "Licence renewed until %s."
 msgstr ""
@@ -8213,7 +8849,7 @@ msgstr ""
 msgid "Licensing Officer"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:277
+#: scripts/ui/phone_ui.gd:280
 msgid "Life Timeline"
 msgstr ""
 
@@ -8333,7 +8969,7 @@ msgstr ""
 msgid "Listings on ShopLane (10% fee · weekly payout)"
 msgstr ""
 
-#: scripts/sim/forecast.gd:42 scripts/sim/ledger.gd:29
+#: scripts/sim/forecast.gd:42 scripts/sim/ledger.gd:30
 msgid "Living costs"
 msgstr ""
 
@@ -8417,6 +9053,10 @@ msgstr ""
 msgid "Local wholesaler. Reliable, not the cheapest."
 msgstr ""
 
+#: scripts/sim/gates.gd:48
+msgid "Location"
+msgstr ""
+
 #: scripts/ui/hotel_ui.gd:223
 msgid "Lock %d rooms for the group"
 msgstr ""
@@ -8425,12 +9065,16 @@ msgstr ""
 msgid "Lock in {moq} more at today's price"
 msgstr ""
 
-#: scripts/sim/hotel.gd:568
+#: scripts/sim/hotel.gd:570
 msgid "Locked a group block of %d rooms for %s."
 msgstr ""
 
 #: scripts/ui/hotel_ui.gd:225
 msgid "Locked: %d %s rooms for %d nights, %d done. The group pays at the end of the stay."
+msgstr ""
+
+#: data/milestones.json
+msgid "Log 150 hours of gig work."
 msgstr ""
 
 #: data/businesses/logistics.json data/regions/karu.json data/regions/lumina.json scripts/sim/logistics.gd:623
@@ -8513,6 +9157,10 @@ msgstr ""
 msgid "Lot 7"
 msgstr ""
 
+#: data/quests/new_neighbourhood_opening.json
+msgid "Lot 7 Development Trust"
+msgstr ""
+
 #: scripts/ui/real_estate_ui.gd:89
 msgid "Lot 7 building permit"
 msgstr ""
@@ -8545,7 +9193,7 @@ msgstr ""
 msgid "Low weekly pay, but slower production than an experienced designer."
 msgstr ""
 
-#: scripts/sim/hotel.gd:657
+#: scripts/sim/hotel.gd:659
 msgid "Low-season promotion"
 msgstr ""
 
@@ -8587,6 +9235,10 @@ msgstr ""
 
 #: data/buildings/cargo_terminal.json
 msgid "MANIFEST: 14 pallets of electronics, 6 crates of machine parts and a pallet of coffee are waiting for the evening freighter."
+msgstr ""
+
+#: scripts/ui/group_ui.gd:147
+msgid "MILESTONES %d of %d"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:203
@@ -8645,7 +9297,7 @@ msgstr ""
 msgid "MaintainCampusRadio"
 msgstr ""
 
-#: scripts/sim/ledger.gd:32
+#: scripts/sim/ledger.gd:33
 msgid "Maintenance"
 msgstr ""
 
@@ -8791,6 +9443,10 @@ msgstr ""
 
 #: data/events/energy_tariff.json
 msgid "Margins shrink while the tariff eases over two months."
+msgstr ""
+
+#: scripts/ui/group_ui.gd:59
+msgid "Market price"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:418
@@ -9037,6 +9693,10 @@ msgstr ""
 msgid "Mid"
 msgstr ""
 
+#: scripts/sim/milestones.gd:62 scripts/sim/milestones.gd:64
+msgid "Milestone: %s"
+msgstr ""
+
 #: scripts/ui/minigames/barista_game.gd:98
 msgid "Milk"
 msgstr ""
@@ -9241,6 +9901,10 @@ msgstr ""
 msgid "Mouth"
 msgstr ""
 
+#: data/quests/green_showroom_launch.json
+msgid "Move two cars through the Auto Desk."
+msgstr ""
+
 #: autoload/game_state.gd:43
 msgid "Moved to Aurelia City with $%s in savings."
 msgstr ""
@@ -9337,6 +10001,10 @@ msgstr ""
 msgid "Navy dye"
 msgstr ""
 
+#: data/milestones.json
+msgid "Nearly full house"
+msgstr ""
+
 #: scripts/ui/modals/permits_modal.gd:34
 msgid "Needed before you hire anyone. Payroll runs every Friday at 17:00 from the company account."
 msgstr ""
@@ -9365,7 +10033,7 @@ msgstr ""
 msgid "Negotiate revenue share"
 msgstr ""
 
-#: scripts/sim/real_estate.gd:261
+#: scripts/sim/real_estate.gd:262
 msgid "Neighbor mediation"
 msgstr ""
 
@@ -9385,7 +10053,7 @@ msgstr ""
 msgid "Net 30 leaves cash available today but creates a bill in 30 days. Reserve money for that bill in your forecast."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1502
+#: scripts/ui/modals/company_os.gd:1506
 msgid "Net revenue"
 msgstr ""
 
@@ -9395,6 +10063,10 @@ msgstr ""
 
 #: scripts/frontend/main_menu.gd:44
 msgid "New Game"
+msgstr ""
+
+#: data/quests/new_neighbourhood_opening.json
+msgid "New Neighbourhood Opening"
 msgstr ""
 
 #: scripts/sim/automotive.gd:766
@@ -9411,6 +10083,10 @@ msgstr ""
 
 #: autoload/scene_router.gd:82
 msgid "New game"
+msgstr ""
+
+#: scripts/sim/group_jobs.gd:69
+msgid "New group job: %s"
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:805
@@ -9435,6 +10111,14 @@ msgstr ""
 
 #: scripts/ui/manufacturing_ui.gd:144
 msgid "Next machine"
+msgstr ""
+
+#: scripts/ui/group_ui.gd:133 scripts/ui/group_ui.gd:42 scripts/ui/modals/business_board.gd:75
+msgid "Next step: %s"
+msgstr ""
+
+#: scripts/ui/group_ui.gd:141
+msgid "Next step: run two or more businesses. Clients with big orders phone you; the offer lasts about ten days."
 msgstr ""
 
 #: data/dialogue/ana_register.json
@@ -9617,6 +10301,10 @@ msgstr ""
 msgid "No free machine bay."
 msgstr ""
 
+#: scripts/sim/internal_supply.gd:136
+msgid "No game."
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1027
 msgid "No gigs in progress. Pick one below."
 msgstr ""
@@ -9625,8 +10313,16 @@ msgstr ""
 msgid "No group block is waiting. New offers arrive every Monday morning."
 msgstr ""
 
+#: scripts/ui/group_ui.gd:140
+msgid "No group job on offer."
+msgstr ""
+
 #: scripts/sim/bank.gd:137
 msgid "No lending ban"
+msgstr ""
+
+#: data/synergies.json
+msgid "No licence until imports need one (Year 8)."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:376
@@ -9717,6 +10413,14 @@ msgstr ""
 msgid "No supplier carries this product."
 msgstr ""
 
+#: scripts/ui/group_ui.gd:41
+msgid "No supply pair is running yet."
+msgstr ""
+
+#: scripts/ui/group_ui.gd:69
+msgid "No trade yet. The first one settles at 22:00."
+msgstr ""
+
 #: scripts/ui/automotive_ui.gd:163
 msgid "No used cars on your lot. Win one at the Wednesday auction."
 msgstr ""
@@ -9745,8 +10449,20 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:110
+#: data/synergies.json scripts/sim/gates.gd:46 scripts/ui/modals/loan_modal.gd:110
 msgid "None."
+msgstr ""
+
+#: data/synergies.json
+msgid "None; a van and insurance."
+msgstr ""
+
+#: data/synergies.json
+msgid "None; machines and materials."
+msgstr ""
+
+#: data/synergies.json
+msgid "None; meet Henri Dubois at The Aster first."
 msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:10
@@ -9767,6 +10483,10 @@ msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:9
 msgid "Northwind Goods"
+msgstr ""
+
+#: scripts/sim/internal_supply.gd:134
+msgid "Not a supply pair."
 msgstr ""
 
 #: scripts/sim/wardrobe.gd:57
@@ -9795,6 +10515,10 @@ msgstr ""
 
 #: scripts/sim/compliance.gd:32
 msgid "Not enough cash for the permit fee."
+msgstr ""
+
+#: scripts/sim/group_jobs.gd:126
+msgid "Not enough cash for the subcontractor's fee."
 msgstr ""
 
 #: scripts/sim/manufacturing.gd:75
@@ -9909,6 +10633,10 @@ msgstr ""
 msgid "Nothing to resolve."
 msgstr ""
 
+#: scripts/sim/internal_supply.gd:191 scripts/sim/internal_supply.gd:201
+msgid "Nothing to trade."
+msgstr ""
+
 #: scripts/ui/phone_ui.gd:260
 msgid "Notifications only.\nManage at a desk: Company OS."
 msgstr ""
@@ -9981,7 +10709,7 @@ msgstr ""
 msgid "ORDERS DELIVERED"
 msgstr ""
 
-#: scripts/sim/hotel.gd:510
+#: scripts/sim/hotel.gd:512
 msgid "OTA commission deducted from statement"
 msgstr ""
 
@@ -9989,7 +10717,7 @@ msgstr ""
 msgid "OTA listing: %s"
 msgstr ""
 
-#: scripts/sim/hotel.gd:497
+#: scripts/sim/hotel.gd:499
 msgid "OTA room-night statement"
 msgstr ""
 
@@ -10085,7 +10813,7 @@ msgstr ""
 msgid "Office deposit returned"
 msgstr ""
 
-#: scripts/sim/ledger.gd:27
+#: scripts/sim/ledger.gd:28
 msgid "Office rent"
 msgstr ""
 
@@ -10121,6 +10849,10 @@ msgstr ""
 msgid "Old Town Roasters: supplies for %d cups"
 msgstr ""
 
+#: data/milestones.json
+msgid "Old Town institution"
+msgstr ""
+
 #: data/npcs/okafor.json
 msgid "Old Town landlord"
 msgstr ""
@@ -10151,6 +10883,10 @@ msgstr ""
 
 #: scripts/ui/automotive_ui.gd:244
 msgid "On rent"
+msgstr ""
+
+#: data/milestones.json
+msgid "On the air"
 msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:29
@@ -10225,6 +10961,14 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
+#: scripts/sim/internal_supply.gd:176
+msgid "Open %s to buy from %s."
+msgstr ""
+
+#: scripts/sim/internal_supply.gd:181
+msgid "Open %s to supply %s."
+msgstr ""
+
 #: scripts/ui/hotel_ui.gd:278
 msgid "Open %s · %s"
 msgstr ""
@@ -10269,7 +11013,7 @@ msgstr ""
 msgid "Open Operations"
 msgstr ""
 
-#: scripts/sim/hotel.gd:733 scripts/ui/hotel_ui.gd:15 scripts/ui/hotel_ui.gd:20
+#: scripts/sim/hotel.gd:735 scripts/ui/hotel_ui.gd:15 scripts/ui/hotel_ui.gd:20
 msgid "Open Rate Board"
 msgstr ""
 
@@ -10301,8 +11045,16 @@ msgstr ""
 msgid "Open a charging station first."
 msgstr ""
 
+#: scripts/sim/internal_supply.gd:182
+msgid "Open a second business at the Business Board to start trading inside the group."
+msgstr ""
+
 #: scripts/ui/modals/bank_modal.gd:40
 msgid "Open account with %s"
+msgstr ""
+
+#: data/milestones.json
+msgid "Open an EV charging station."
 msgstr ""
 
 #: scripts/ui/modals/loan_modal.gd:87
@@ -10361,7 +11113,7 @@ msgstr ""
 msgid "Open the brokerage"
 msgstr ""
 
-#: scripts/sim/real_estate.gd:249 scripts/sim/real_estate.gd:84
+#: scripts/sim/real_estate.gd:250 scripts/sim/real_estate.gd:84
 msgid "Open the brokerage first."
 msgstr ""
 
@@ -10379,6 +11131,18 @@ msgstr ""
 
 #: scripts/sim/energy.gd:462
 msgid "Open the business first."
+msgstr ""
+
+#: scripts/sim/internal_supply.gd:140
+msgid "Open the buying business first."
+msgstr ""
+
+#: data/milestones.json
+msgid "Open the cafe on 100 days."
+msgstr ""
+
+#: data/milestones.json
+msgid "Open the cafe on 30 days."
 msgstr ""
 
 #: scripts/ui/media_ui.gd:52
@@ -10409,7 +11173,7 @@ msgstr ""
 msgid "Open the group business before buying internal media."
 msgstr ""
 
-#: scripts/sim/hotel.gd:153 scripts/sim/hotel.gd:649
+#: scripts/sim/hotel.gd:153 scripts/sim/hotel.gd:651
 msgid "Open the hotel first."
 msgstr ""
 
@@ -10423,6 +11187,10 @@ msgstr ""
 
 #: data/dialogue/ms_okoro_intro.json
 msgid "Open the subsidy desk"
+msgstr ""
+
+#: scripts/sim/internal_supply.gd:138
+msgid "Open the supplying business first."
 msgstr ""
 
 #: scripts/ui/tutorial.gd:27
@@ -10501,11 +11269,11 @@ msgstr ""
 msgid "Operating costs"
 msgstr ""
 
-#: data/help/glossary.json scripts/ui/modals/company_os.gd:1502
+#: data/help/glossary.json scripts/ui/modals/company_os.gd:1506
 msgid "Operating expenses"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1502
+#: scripts/ui/modals/company_os.gd:1506
 msgid "Operating profit"
 msgstr ""
 
@@ -10633,7 +11401,7 @@ msgstr ""
 msgid "Oskar"
 msgstr ""
 
-#: scripts/sim/ledger.gd:32
+#: scripts/sim/ledger.gd:33
 msgid "Other"
 msgstr ""
 
@@ -10643,6 +11411,10 @@ msgstr ""
 
 #: scripts/frontend/character_creator.gd:123 scripts/frontend/character_creator.gd:144
 msgid "Outfit"
+msgstr ""
+
+#: scripts/sim/internal_supply.gd:215
+msgid "Outside purchase avoided: %s"
 msgstr ""
 
 #: scripts/ui/manufacturing_ui.gd:152
@@ -10723,6 +11495,10 @@ msgstr ""
 
 #: data/dialogue/owen_blake_intro.json
 msgid "Owen Blake, Blake Journeys. I move tour groups. Give me twenty-five percent off the rack rate and I will lock a block of rooms weeks ahead, then pay you thirty days after the stay."
+msgstr ""
+
+#: data/milestones.json
+msgid "Own Campus Radio."
 msgstr ""
 
 #: scripts/sim/real_estate.gd:124
@@ -10881,7 +11657,7 @@ msgstr ""
 msgid "Pack the order at your packing table, then ship it"
 msgstr ""
 
-#: scripts/sim/ledger.gd:27
+#: scripts/sim/ledger.gd:28
 msgid "Packaging"
 msgstr ""
 
@@ -11025,6 +11801,10 @@ msgstr ""
 msgid "Parks, cafes and a waterfront lifestyle. Your first home."
 msgstr ""
 
+#: data/synergies.json
+msgid "Part of the hotel's nightly utilities is electricity bought from your energy business."
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Part of the price is paid later, and only if the company keeps hitting agreed targets."
 msgstr ""
@@ -11081,7 +11861,7 @@ msgstr ""
 msgid "Path:"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:415
+#: scripts/ui/group_ui.gd:64 scripts/ui/modals/company_os.gd:415
 msgid "Pause"
 msgstr ""
 
@@ -11221,7 +12001,7 @@ msgstr ""
 msgid "Payout sent: %s to your personal account."
 msgstr ""
 
-#: data/help/glossary.json scripts/sim/forecast.gd:22 scripts/sim/ledger.gd:30
+#: data/help/glossary.json scripts/sim/forecast.gd:22 scripts/sim/ledger.gd:31
 msgid "Payroll"
 msgstr ""
 
@@ -11241,6 +12021,10 @@ msgstr ""
 msgid "Payroll — %d people"
 msgstr ""
 
+#: scripts/ui/group_ui.gd:132
+msgid "Pays if closed now"
+msgstr ""
+
 #: scripts/ui/hotel_ui.gd:150
 msgid "Peak-day surcharge %d%% on days at ×%.1f demand or more"
 msgstr ""
@@ -11253,7 +12037,7 @@ msgstr ""
 msgid "PeakMore"
 msgstr ""
 
-#: scripts/sim/ledger.gd:30
+#: scripts/sim/ledger.gd:31
 msgid "Penalties"
 msgstr ""
 
@@ -11325,7 +12109,7 @@ msgstr ""
 msgid "Photograph your product and list it on ShopLane (Company OS → Sales)"
 msgstr ""
 
-#: scripts/sim/ledger.gd:27
+#: scripts/sim/ledger.gd:28
 msgid "Photography"
 msgstr ""
 
@@ -11421,7 +12205,7 @@ msgstr ""
 msgid "Plastic pays a %s levy per 100 parcels; buyers like plastic-free."
 msgstr ""
 
-#: scripts/sim/ledger.gd:26
+#: scripts/sim/ledger.gd:27
 msgid "Platform fees"
 msgstr ""
 
@@ -11637,6 +12421,10 @@ msgstr ""
 msgid "Priti"
 msgstr ""
 
+#: data/quests/private_label_launch.json
+msgid "Private-Label Launch"
+msgstr ""
+
 #: data/npcs/priya.json scripts/ui/minigames/cowork_host_game.gd:9
 msgid "Priya"
 msgstr ""
@@ -11721,7 +12509,7 @@ msgstr ""
 msgid "Property brokerage commission"
 msgstr ""
 
-#: scripts/sim/real_estate.gd:288
+#: scripts/sim/real_estate.gd:289
 msgid "Property closure auction"
 msgstr ""
 
@@ -11741,7 +12529,7 @@ msgstr ""
 msgid "Property permits"
 msgstr ""
 
-#: scripts/sim/real_estate.gd:279
+#: scripts/sim/real_estate.gd:280
 msgid "Property taxes and management"
 msgstr ""
 
@@ -11853,12 +12641,20 @@ msgstr ""
 msgid "Quote a price, reserve capacity and meet the quality specification. Kessler is bidding too."
 msgstr ""
 
+#: data/quests/green_showroom_launch.json
+msgid "Quote and finish one install."
+msgstr ""
+
 #: data/help/help.json
 msgid "Quote orders, order materials and reserve machine hours within the next week. Changeovers need one hour."
 msgstr ""
 
 #: data/help/glossary.json
 msgid "Quote rooftop solar for real clients, then build an EV charging network."
+msgstr ""
+
+#: data/quests/new_neighbourhood_opening.json
+msgid "Quote, install and deliver solar jobs in the Energy console."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1264
@@ -11885,7 +12681,7 @@ msgstr ""
 msgid "RENT DUE IN 14 DAYS"
 msgstr ""
 
-#: scripts/sim/real_estate.gd:233
+#: scripts/sim/real_estate.gd:234
 msgid "RENT-"
 msgstr ""
 
@@ -12021,12 +12817,56 @@ msgstr ""
 msgid "Ravi"
 msgstr ""
 
+#: data/milestones.json
+msgid "Reach $25,000 of lifetime sales revenue."
+msgstr ""
+
+#: data/milestones.json
+msgid "Reach hotel stage three."
+msgstr ""
+
+#: data/milestones.json
+msgid "Reach hotel stage two."
+msgstr ""
+
 #: scripts/sim/energy.gd:475
 msgid "Reach installer-with-storage stage before applying for a charger grant."
 msgstr ""
 
 #: scripts/sim/energy.gd:560 scripts/sim/energy.gd:581
 msgid "Reach installer-with-storage stage before opening charging sites."
+msgstr ""
+
+#: data/milestones.json
+msgid "Reach the agency stage."
+msgstr ""
+
+#: data/milestones.json
+msgid "Reach the automated line stage."
+msgstr ""
+
+#: data/milestones.json
+msgid "Reach the development stage."
+msgstr ""
+
+#: data/milestones.json
+msgid "Reach the franchise stage."
+msgstr ""
+
+#: data/milestones.json
+msgid "Reach the rental fleet stage."
+msgstr ""
+
+#: data/milestones.json
+msgid "Reach the rental portfolio stage."
+msgstr ""
+
+#: data/milestones.json
+msgid "Reach the storage stage."
+msgstr ""
+
+#: data/milestones.json
+msgid "Reach the third factory stage."
 msgstr ""
 
 #: scripts/ui/tutorial.gd:27
@@ -12097,7 +12937,7 @@ msgstr ""
 msgid "Ready to order materials"
 msgstr ""
 
-#: data/businesses/real_estate.json data/help/glossary.json scripts/sim/real_estate.gd:312 scripts/ui/real_estate_ui.gd:25
+#: data/businesses/real_estate.json data/help/glossary.json scripts/sim/real_estate.gd:313 scripts/ui/real_estate_ui.gd:25
 msgid "Real Estate"
 msgstr ""
 
@@ -12205,7 +13045,7 @@ msgstr ""
 msgid "Recruit_housekeeper"
 msgstr ""
 
-#: scripts/sim/ledger.gd:30
+#: scripts/sim/ledger.gd:31
 msgid "Recruiting"
 msgstr ""
 
@@ -12401,7 +13241,7 @@ msgstr ""
 msgid "Registration fee"
 msgstr ""
 
-#: scripts/sim/ledger.gd:27
+#: scripts/sim/ledger.gd:28
 msgid "Registration fees"
 msgstr ""
 
@@ -12411,6 +13251,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:251
 msgid "Registration: "
+msgstr ""
+
+#: data/milestones.json
+msgid "Regulars forming"
 msgstr ""
 
 #: data/story/chapters.json
@@ -12485,7 +13329,7 @@ msgstr ""
 msgid "Renovate an empty owned unit before listing it."
 msgstr ""
 
-#: scripts/sim/real_estate.gd:244
+#: scripts/sim/real_estate.gd:245
 msgid "Renovation budget overrun"
 msgstr ""
 
@@ -12569,6 +13413,10 @@ msgstr ""
 msgid "Rental fleet operator"
 msgstr ""
 
+#: data/milestones.json
+msgid "Rental fleet running"
+msgstr ""
+
 #: data/help/help.json
 msgid "Rental fleet: lease the Gateway counter, buy cars, set day and week rates and schedule services. Skipped service causes breakdowns mid-rental."
 msgstr ""
@@ -12627,6 +13475,10 @@ msgstr ""
 
 #: scripts/sim/bank.gd:139
 msgid "Repay overdue loans in this screen; if the company is in insolvency, use the recovery options."
+msgstr ""
+
+#: data/milestones.json
+msgid "Repeat business"
 msgstr ""
 
 #: scripts/ui/modals/save_list_modal.gd:47 scripts/ui/modals/save_list_modal.gd:67 scripts/ui/modals/save_list_modal.gd:93
@@ -12717,7 +13569,7 @@ msgstr ""
 msgid "Residential renovation"
 msgstr ""
 
-#: scripts/sim/real_estate.gd:186
+#: scripts/sim/real_estate.gd:187
 msgid "Residential unit sold"
 msgstr ""
 
@@ -12741,11 +13593,11 @@ msgstr ""
 msgid "Restaurant"
 msgstr ""
 
-#: scripts/sim/hotel.gd:416
+#: scripts/sim/hotel.gd:418
 msgid "Restaurant and bar sales"
 msgstr ""
 
-#: scripts/sim/hotel.gd:417
+#: scripts/sim/hotel.gd:419
 msgid "Restaurant ingredients"
 msgstr ""
 
@@ -12773,7 +13625,7 @@ msgstr ""
 msgid "Result"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:415 scripts/ui/modals/pause_menu.gd:13
+#: scripts/ui/group_ui.gd:64 scripts/ui/modals/company_os.gd:415 scripts/ui/modals/pause_menu.gd:13
 msgid "Resume"
 msgstr ""
 
@@ -12805,7 +13657,7 @@ msgstr ""
 msgid "Retrofit every station"
 msgstr ""
 
-#: scripts/sim/ledger.gd:26 scripts/ui/modals/purchase_return_modal.gd:45
+#: scripts/sim/ledger.gd:27 scripts/ui/modals/purchase_return_modal.gd:45
 msgid "Return & cancellation fees"
 msgstr ""
 
@@ -12877,12 +13729,16 @@ msgstr ""
 msgid "Review my lot"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1489
+#: scripts/ui/modals/company_os.gd:1493
 msgid "Review next action"
 msgstr ""
 
 #: data/events/real_estate_arrears.json data/events/real_estate_delay.json data/events/real_estate_neighbors.json data/events/real_estate_rate.json
 msgid "Review properties and respond"
+msgstr ""
+
+#: scripts/ui/group_ui.gd:14
+msgid "Review segment results"
 msgstr ""
 
 #: data/events/hotel_review_storm.json scripts/ui/hotel_ui.gd:252
@@ -12905,8 +13761,16 @@ msgstr ""
 msgid "ReviewsNextGrowth"
 msgstr ""
 
+#: scripts/ui/group_ui.gd:110
+msgid "Reward if every part is done"
+msgstr ""
+
 #: scripts/ui/minigames/parcel_sort_game.gd:9
 msgid "Reyes"
+msgstr ""
+
+#: data/milestones.json
+msgid "Ribbon cutting"
 msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:8
@@ -12979,6 +13843,10 @@ msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:9
 msgid "Riverstone Bakery"
+msgstr ""
+
+#: data/milestones.json
+msgid "Roadmap delivered"
 msgstr ""
 
 #: scripts/sim/automotive.gd:628
@@ -13073,6 +13941,10 @@ msgstr ""
 msgid "Round glasses"
 msgstr ""
 
+#: data/milestones.json
+msgid "Round the city twice"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1453
 msgid "Route"
 msgstr ""
@@ -13151,6 +14023,10 @@ msgstr ""
 
 #: data/events/hotel_slump.json
 msgid "Run a $1,800 discount campaign"
+msgstr ""
+
+#: data/quests/green_showroom_launch.json data/quests/new_neighbourhood_opening.json data/quests/private_label_launch.json
+msgid "Run a measured campaign to its last day."
 msgstr ""
 
 #: scripts/ui/manufacturing_ui.gd:145
@@ -13365,7 +14241,7 @@ msgstr ""
 msgid "Save exported. Keep this file outside your browser."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:286
+#: scripts/ui/phone_ui.gd:326
 msgid "Save game"
 msgstr ""
 
@@ -13373,7 +14249,7 @@ msgstr ""
 msgid "Save imported. Continue where you left off."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:287
+#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:327
 msgid "Save now"
 msgstr ""
 
@@ -13385,7 +14261,7 @@ msgstr ""
 msgid "Save the Helio Supply materials cost first."
 msgstr ""
 
-#: scripts/sim/hotel.gd:690
+#: scripts/sim/hotel.gd:692
 msgid "Save the VIP upgrade cost first."
 msgstr ""
 
@@ -13409,11 +14285,11 @@ msgstr ""
 msgid "Save the dealer licence fee first."
 msgstr ""
 
-#: scripts/sim/hotel.gd:666
+#: scripts/sim/hotel.gd:668
 msgid "Save the emergency repair cost first."
 msgstr ""
 
-#: scripts/sim/hotel.gd:609
+#: scripts/sim/hotel.gd:611
 msgid "Save the equipment service cost first."
 msgstr ""
 
@@ -13429,15 +14305,15 @@ msgstr ""
 msgid "Save the first month of rent and equipment first."
 msgstr ""
 
-#: scripts/sim/hotel.gd:675
+#: scripts/sim/hotel.gd:677
 msgid "Save the flash-sale cost first."
 msgstr ""
 
-#: scripts/sim/hotel.gd:661
+#: scripts/sim/hotel.gd:663
 msgid "Save the guest recovery cost first."
 msgstr ""
 
-#: scripts/sim/hotel.gd:682
+#: scripts/sim/hotel.gd:684
 msgid "Save the housekeeping bonus first."
 msgstr ""
 
@@ -13453,7 +14329,7 @@ msgstr ""
 msgid "Save the premium supplier fee first."
 msgstr ""
 
-#: scripts/sim/hotel.gd:656
+#: scripts/sim/hotel.gd:658
 msgid "Save the promotion cost first."
 msgstr ""
 
@@ -13477,11 +14353,11 @@ msgstr ""
 msgid "Save the reconditioning cost first."
 msgstr ""
 
-#: scripts/sim/hotel.gd:625
+#: scripts/sim/hotel.gd:627
 msgid "Save the renovation cost first."
 msgstr ""
 
-#: scripts/sim/energy.gd:729 scripts/sim/hotel.gd:670
+#: scripts/sim/energy.gd:729 scripts/sim/hotel.gd:672
 msgid "Save the repair cost first."
 msgstr ""
 
@@ -13513,7 +14389,7 @@ msgstr ""
 msgid "Saved %s"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:289
+#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:329
 msgid "Saved (slot %d)."
 msgstr ""
 
@@ -13525,7 +14401,7 @@ msgstr ""
 msgid "Scheduled"
 msgstr ""
 
-#: scripts/sim/hotel.gd:671
+#: scripts/sim/hotel.gd:673
 msgid "Scheduled repair"
 msgstr ""
 
@@ -13553,7 +14429,11 @@ msgstr ""
 msgid "Seal & next"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1488 scripts/ui/modals/company_os.gd:8
+#: scripts/ui/group_ui.gd:92
+msgid "Segment sales added up"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:1492 scripts/ui/modals/company_os.gd:8
 msgid "Segments"
 msgstr ""
 
@@ -13581,6 +14461,14 @@ msgstr ""
 msgid "Sell 10 units with average cost $6: COGS is $60. Subtract it from net revenue to find gross profit."
 msgstr ""
 
+#: data/milestones.json
+msgid "Sell 40 cars."
+msgstr ""
+
+#: data/milestones.json
+msgid "Sell a car."
+msgstr ""
+
 #: scripts/ui/minigames/cowork_host_game.gd:98
 msgid "Sell a day pass ($15)"
 msgstr ""
@@ -13593,7 +14481,7 @@ msgstr ""
 msgid "Sell all stock to a liquidator (40% of cost)"
 msgstr ""
 
-#: scripts/sim/real_estate.gd:112 scripts/sim/real_estate.gd:179
+#: scripts/sim/real_estate.gd:112 scripts/sim/real_estate.gd:180
 msgid "Sell an empty finished unit."
 msgstr ""
 
@@ -13603,6 +14491,18 @@ msgstr ""
 
 #: scripts/sim/ecommerce.gd:508
 msgid "Sell some stock first, or lease more space."
+msgstr ""
+
+#: data/milestones.json
+msgid "Sell ten cars."
+msgstr ""
+
+#: data/quests/city_fleet_refresh.json
+msgid "Sell three cars"
+msgstr ""
+
+#: data/quests/green_showroom_launch.json
+msgid "Sell two cars"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1009
@@ -13681,11 +14581,27 @@ msgstr ""
 msgid "Serve"
 msgstr ""
 
+#: data/milestones.json
+msgid "Serve 1,000 cafe customers."
+msgstr ""
+
+#: data/milestones.json
+msgid "Serve 100 cafe customers."
+msgstr ""
+
+#: data/quests/trade_fair_week.json
+msgid "Serve 150 more cafe customers"
+msgstr ""
+
+#: data/milestones.json
+msgid "Serve 5,000 cafe customers."
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Server costs"
 msgstr ""
 
-#: scripts/sim/ledger.gd:31
+#: scripts/sim/ledger.gd:32
 msgid "Servers"
 msgstr ""
 
@@ -13729,6 +14645,10 @@ msgstr ""
 msgid "Services"
 msgstr ""
 
+#: data/help/help.json
+msgid "Set a transfer price for each running pair: at cost, cost plus a markup or market price. Both businesses show the trade in Segments."
+msgstr ""
+
 #: data/dialogue/lina_intro.json
 msgid "Set me up with a digital dollar account."
 msgstr ""
@@ -13769,11 +14689,11 @@ msgstr ""
 msgid "Shah"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1500
+#: scripts/ui/modals/company_os.gd:1504
 msgid "Shared"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1492
+#: scripts/ui/modals/company_os.gd:1496
 msgid "Shared costs are allocated by net revenue. With no revenue, they stay in Shared."
 msgstr ""
 
@@ -13829,6 +14749,10 @@ msgstr ""
 msgid "Shifts worked: %d"
 msgstr ""
 
+#: data/milestones.json
+msgid "Ship three features after launch."
+msgstr ""
+
 #: scripts/ui/minigames/pack_game.gd:95
 msgid "Ship to: %s"
 msgstr ""
@@ -13841,7 +14765,7 @@ msgstr ""
 msgid "Shipped %d parcel%s — %s."
 msgstr ""
 
-#: scripts/sim/ledger.gd:26 scripts/ui/modals/month_close_modal.gd:32 scripts/ui/modals/world_map_modal.gd:117
+#: scripts/sim/ledger.gd:27 scripts/ui/modals/month_close_modal.gd:32 scripts/ui/modals/world_map_modal.gd:117
 msgid "Shipping"
 msgstr ""
 
@@ -13861,7 +14785,11 @@ msgstr ""
 msgid "Shop"
 msgstr ""
 
-#: scripts/sim/ledger.gd:31
+#: data/synergies.json
+msgid "Shop or office unit"
+msgstr ""
+
+#: scripts/sim/ledger.gd:32
 msgid "Shop rent"
 msgstr ""
 
@@ -14225,6 +15153,10 @@ msgstr ""
 msgid "Solar desk lamps are this year's must-have gift."
 msgstr ""
 
+#: data/milestones.json
+msgid "Solar installer of the year"
+msgstr ""
+
 #: data/businesses/energy.json
 msgid "Solar installs, storage and an EV charging network."
 msgstr ""
@@ -14465,7 +15397,7 @@ msgstr ""
 msgid "Started freelancing as a consultant."
 msgstr ""
 
-#: scripts/sim/hotel.gd:632
+#: scripts/sim/hotel.gd:634
 msgid "Started renovating the %s rooms."
 msgstr ""
 
@@ -14573,6 +15505,10 @@ msgstr ""
 msgid "Storage"
 msgstr ""
 
+#: data/milestones.json
+msgid "Storage certified"
+msgstr ""
+
 #: scripts/sim/wardrobe.gd:66 scripts/ui/modals/clothing_shop_modal.gd:17
 msgid "Store"
 msgstr ""
@@ -14633,6 +15569,14 @@ msgstr ""
 msgid "Styling"
 msgstr ""
 
+#: scripts/ui/group_ui.gd:130
+msgid "Subcontract %s for %s"
+msgstr ""
+
+#: scripts/sim/group_jobs.gd:127
+msgid "Subcontractor for group job %s: %s"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Subscriber churn"
 msgstr ""
@@ -14659,6 +15603,14 @@ msgstr ""
 
 #: scripts/ui/energy_ui.gd:224
 msgid "SubsidyNextLeads"
+msgstr ""
+
+#: scripts/ui/modals/business_board.gd:83
+msgid "Suggested after: %s"
+msgstr ""
+
+#: scripts/ui/modals/business_board.gd:78
+msgid "Suggested after: nothing, start here."
 msgstr ""
 
 #: data/economy/hotel.json
@@ -14799,6 +15751,10 @@ msgstr ""
 
 #: data/buildings/corner_cafe_unit.json
 msgid "TO LET: corner unit, fitted for a café. Ask Mr. Okafor at Okafor Lettings, three doors down."
+msgstr ""
+
+#: scripts/ui/modals/business_board.gd:71
+msgid "TO OPEN THIS"
 msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:79
@@ -14965,7 +15921,7 @@ msgstr ""
 msgid "Teller — business banking"
 msgstr ""
 
-#: scripts/sim/hotel.gd:412
+#: scripts/sim/hotel.gd:414
 msgid "Temporary cleaners"
 msgstr ""
 
@@ -14973,19 +15929,31 @@ msgstr ""
 msgid "Temporary cleaners: %s · %s per room"
 msgstr ""
 
+#: data/milestones.json
+msgid "Ten cars sold"
+msgstr ""
+
+#: data/milestones.json
+msgid "Ten mandates closed"
+msgstr ""
+
+#: data/milestones.json
+msgid "Ten runs"
+msgstr ""
+
 #: scripts/ui/real_estate_ui.gd:133
 msgid "Tenant"
 msgstr ""
 
-#: scripts/sim/real_estate.gd:211
+#: scripts/sim/real_estate.gd:212
 msgid "Tenant arrears settled"
 msgstr ""
 
-#: scripts/sim/real_estate.gd:237
+#: scripts/sim/real_estate.gd:238
 msgid "Tenant damage repair"
 msgstr ""
 
-#: scripts/sim/real_estate.gd:234
+#: scripts/sim/real_estate.gd:235
 msgid "Tenant monthly rent"
 msgstr ""
 
@@ -15053,7 +16021,7 @@ msgstr ""
 msgid "That rail is frozen."
 msgstr ""
 
-#: scripts/sim/hotel.gd:554
+#: scripts/sim/hotel.gd:556
 msgid "That room type is being renovated during the stay."
 msgstr ""
 
@@ -15109,6 +16077,10 @@ msgstr ""
 msgid "The Crestline deal will not go ahead. Carry on with your next venture."
 msgstr ""
 
+#: data/quests/trade_fair_week.json
+msgid "The Expo Board needs visitors housed, the fair promoted and the stands fed. One supplier for all three, paid by the part."
+msgstr ""
+
 #: data/story/chapters.json data/world/years.json
 msgid "The Green Shift"
 msgstr ""
@@ -15119,6 +16091,10 @@ msgstr ""
 
 #: data/properties/loft_office.json
 msgid "The Loft agency studio"
+msgstr ""
+
+#: data/synergies.json
+msgid "The Loft in University."
 msgstr ""
 
 #: scripts/sim/saas.gd:100
@@ -15145,6 +16121,10 @@ msgstr ""
 msgid "The SaaS server bill has a monthly base cost plus a cost for each subscriber."
 msgstr ""
 
+#: data/quests/city_fleet_refresh.json
+msgid "The Transit Office is renewing its service fleet: parts built to drawing, cars sourced and delivery runs flown across the city."
+msgstr ""
+
 #: scripts/sim/company.gd:85
 msgid "The account is already open."
 msgstr ""
@@ -15167,6 +16147,10 @@ msgstr ""
 
 #: scripts/sim/automotive.gd:45
 msgid "The auto desk is already open."
+msgstr ""
+
+#: data/synergies.json
+msgid "The auto desk services and prepares the logistics van at its own workshop cost."
 msgstr ""
 
 #: data/help/glossary.json
@@ -15377,6 +16361,10 @@ msgstr ""
 msgid "The factory ledger and schedule have been updated."
 msgstr ""
 
+#: data/synergies.json
+msgid "The factory's power comes from your own solar and storage, so the grid bill falls."
+msgstr ""
+
 #: autoload/save_system.gd:406
 msgid "The file could not be read. Your existing save is unchanged."
 msgstr ""
@@ -15517,6 +16505,10 @@ msgstr ""
 msgid "The pitch lost. Review creative fit before the next proposal."
 msgstr ""
 
+#: data/help/glossary.json
+msgid "The price one of your businesses charges another for goods or services inside the group."
+msgstr ""
+
 #: data/events/hotel_slump.json
 msgid "The promotion softens the dip for two weeks, then it fades."
 msgstr ""
@@ -15525,7 +16517,7 @@ msgstr ""
 msgid "The registration fee is %s."
 msgstr ""
 
-#: scripts/sim/hotel.gd:720 scripts/sim/hotel.gd:721
+#: scripts/sim/hotel.gd:722 scripts/sim/hotel.gd:723
 msgid "The renovated %s rooms are back on sale."
 msgstr ""
 
@@ -15553,7 +16545,7 @@ msgstr ""
 msgid "The sale fell through: not enough cash or lot space."
 msgstr ""
 
-#: scripts/sim/real_estate.gd:185
+#: scripts/sim/real_estate.gd:186
 msgid "The sale would not cover the mortgage and the company cannot pay the shortfall. Raise cash or wait for prices to recover."
 msgstr ""
 
@@ -15745,11 +16737,11 @@ msgstr ""
 msgid "This contract belongs to another company."
 msgstr ""
 
-#: scripts/sim/hotel.gd:608
+#: scripts/sim/hotel.gd:610
 msgid "This equipment needs no service today."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:294
+#: scripts/ui/phone_ui.gd:334
 msgid "This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen."
 msgstr ""
 
@@ -15757,8 +16749,16 @@ msgstr ""
 msgid "This game autosaves to slot %d."
 msgstr ""
 
-#: scripts/sim/hotel.gd:561
+#: scripts/sim/hotel.gd:563
 msgid "This group block has expired."
+msgstr ""
+
+#: scripts/sim/group_jobs.gd:76
+msgid "This group job is no longer on offer."
+msgstr ""
+
+#: scripts/sim/group_jobs.gd:140
+msgid "This group job is not running."
 msgstr ""
 
 #: scripts/sim/contracts.gd:86
@@ -15789,11 +16789,11 @@ msgstr ""
 msgid "This is the same form you'll file for your own company, so the rules are worth remembering."
 msgstr ""
 
-#: scripts/sim/energy.gd:275 scripts/sim/hotel.gd:566 scripts/sim/jobs.gd:40 scripts/sim/media.gd:223
+#: scripts/sim/energy.gd:275 scripts/sim/hotel.gd:568 scripts/sim/jobs.gd:40 scripts/sim/media.gd:223
 msgid "This job is no longer available."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1496
+#: scripts/ui/modals/company_os.gd:1500
 msgid "This month"
 msgstr ""
 
@@ -15829,7 +16829,7 @@ msgstr ""
 msgid "This roof survey is no longer available."
 msgstr ""
 
-#: scripts/sim/hotel.gd:620
+#: scripts/sim/hotel.gd:622
 msgid "This room type is already being renovated."
 msgstr ""
 
@@ -15845,6 +16845,10 @@ msgstr ""
 msgid "This supplier does not accept returns after delivery."
 msgstr ""
 
+#: scripts/sim/internal_supply.gd:109
+msgid "This supply runs with the business and cannot be paused."
+msgstr ""
+
 #: scripts/world/actions.gd:53
 msgid "This till comes with the lease. Mr. Okafor at Okafor Lettings handles it."
 msgstr ""
@@ -15855,6 +16859,14 @@ msgstr ""
 
 #: scripts/sim/energy.gd:447
 msgid "This year's subsidy quota is used up."
+msgstr ""
+
+#: data/milestones.json
+msgid "Thousand subscribers"
+msgstr ""
+
+#: data/milestones.json
+msgid "Thousand-order shop"
 msgstr ""
 
 #: data/buildings/threadline_apparel.json data/economy/logistics.json data/help/help.json
@@ -15909,7 +16921,11 @@ msgstr ""
 msgid "Time only moves forward by living it: working a shift, or sleeping at night."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:128
+#: scripts/ui/group_ui.gd:111
+msgid "Time to finish"
+msgstr ""
+
+#: scripts/ui/phone_ui.gd:128 scripts/ui/phone_ui.gd:283
 msgid "Timeline"
 msgstr ""
 
@@ -15989,7 +17005,7 @@ msgstr ""
 msgid "Too many orders. Not enough hours."
 msgstr ""
 
-#: scripts/sim/hotel.gd:553
+#: scripts/sim/hotel.gd:555
 msgid "Too many rooms of this type are already locked for those nights."
 msgstr ""
 
@@ -16009,7 +17025,7 @@ msgstr ""
 msgid "Total interest"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1505
+#: scripts/ui/modals/company_os.gd:1512
 msgid "Total operating profit"
 msgstr ""
 
@@ -16037,6 +17053,10 @@ msgstr ""
 msgid "Trade & Energy"
 msgstr ""
 
+#: data/quests/trade_fair_week.json
+msgid "Trade Fair Week"
+msgstr ""
+
 #: data/regions/almeria.json
 msgid "Trade hub"
 msgstr ""
@@ -16045,8 +17065,20 @@ msgstr ""
 msgid "TradeLink Wholesale"
 msgstr ""
 
+#: scripts/ui/group_ui.gd:67
+msgid "Traded %s %s · internal sales %s · saved versus outside %s"
+msgstr ""
+
 #: data/economy/automotive.json
 msgid "Trailhead SUV"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Transfer price"
+msgstr ""
+
+#: scripts/ui/group_ui.gd:54
+msgid "Transfer price per %s"
 msgstr ""
 
 #: scripts/sim/company.gd:107
@@ -16057,7 +17089,7 @@ msgstr ""
 msgid "Transfers"
 msgstr ""
 
-#: scripts/sim/ledger.gd:29
+#: scripts/sim/ledger.gd:30
 msgid "Transport"
 msgstr ""
 
@@ -16085,6 +17117,10 @@ msgstr ""
 msgid "Tried the new payment rails."
 msgstr ""
 
+#: data/milestones.json
+msgid "Trusted by agencies"
+msgstr ""
+
 #: data/help/help.json
 msgid "Try outfits on the preview, buy with your personal cash, and wear them now or later from your wardrobe."
 msgstr ""
@@ -16109,12 +17145,20 @@ msgstr ""
 msgid "Tutorial skipped. You can replay it from the pause menu (Esc)."
 msgstr ""
 
+#: data/milestones.json
+msgid "Twenty-five grand in sales"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1112
 msgid "Two focused hours: %.1f hours of the work done. %s"
 msgstr ""
 
 #: scripts/world/actions.gd:268
 msgid "Two hours behind your own counter: %d customers served."
+msgstr ""
+
+#: data/milestones.json
+msgid "Two hundred parcels"
 msgstr ""
 
 #: scripts/sim/bank.gd:288
@@ -16177,12 +17221,16 @@ msgstr ""
 msgid "Unexpected large order"
 msgstr ""
 
-#: scripts/sim/real_estate.gd:291
+#: scripts/sim/real_estate.gd:292
 msgid "Unfinished construction auction"
 msgstr ""
 
 #: data/buildings/unit12_factory.json data/properties/unit12_factory.json
 msgid "Unit 12 Light Industrial"
+msgstr ""
+
+#: data/synergies.json
+msgid "Unit 12 in Industrial."
 msgstr ""
 
 #: data/properties/unit12_factory.json
@@ -16241,7 +17289,7 @@ msgstr ""
 msgid "Unknown fleet policy."
 msgstr ""
 
-#: scripts/sim/hotel.gd:694
+#: scripts/sim/hotel.gd:696
 msgid "Unknown hotel crisis."
 msgstr ""
 
@@ -16257,7 +17305,7 @@ msgstr ""
 msgid "Unknown job."
 msgstr ""
 
-#: scripts/sim/real_estate.gd:269
+#: scripts/sim/real_estate.gd:270
 msgid "Unknown property crisis."
 msgstr ""
 
@@ -16357,7 +17405,7 @@ msgstr ""
 msgid "VENTURE TOWER"
 msgstr ""
 
-#: scripts/sim/hotel.gd:691
+#: scripts/sim/hotel.gd:693
 msgid "VIP suite upgrade for a critic"
 msgstr ""
 
@@ -16405,6 +17453,10 @@ msgstr ""
 msgid "Van kept at Pier 7 · insurance %s a month · %.0f km driven"
 msgstr ""
 
+#: data/synergies.json
+msgid "Van purchase prep and service"
+msgstr ""
+
 #: scripts/ui/modals/pack_ship_modal.gd:111
 msgid "Van run done: %d parcel%s delivered, %s of fuel, %s on the road."
 msgstr ""
@@ -16433,7 +17485,7 @@ msgstr ""
 msgid "Vehicle insurance"
 msgstr ""
 
-#: scripts/sim/ledger.gd:32
+#: scripts/sim/ledger.gd:33
 msgid "Vehicles & upkeep"
 msgstr ""
 
@@ -16459,6 +17511,10 @@ msgstr ""
 
 #: data/world/years.json
 msgid "Verdant Supply opens a warehouse in the Industrial Zone."
+msgstr ""
+
+#: data/milestones.json
+msgid "Version 1.0 ships"
 msgstr ""
 
 #: data/npcs/victor.json
@@ -16525,6 +17581,10 @@ msgstr ""
 msgid "Visit Threadline on Shopping Street to browse the outfits available now."
 msgstr ""
 
+#: scripts/sim/gates.gd:49
+msgid "Visit or lease the location."
+msgstr ""
+
 #: scripts/ui/minigames/cowork_host_game.gd:34
 msgid "Visitor %d / %d"
 msgstr ""
@@ -16547,6 +17607,10 @@ msgstr ""
 
 #: data/economy/automotive.json
 msgid "Volt Hatch EV"
+msgstr ""
+
+#: data/quests/green_showroom_launch.json
+msgid "Volta Motors Regional"
 msgstr ""
 
 #: data/npcs/priya_nair.json
@@ -16625,11 +17689,11 @@ msgstr ""
 msgid "Walk between neighbouring districts, or take the Metro from any station."
 msgstr ""
 
-#: scripts/sim/hotel.gd:577
+#: scripts/sim/hotel.gd:579
 msgid "Walk compensation for a group block"
 msgstr ""
 
-#: scripts/sim/hotel.gd:411
+#: scripts/sim/hotel.gd:413
 msgid "Walk compensation for overbooked guests"
 msgstr ""
 
@@ -16681,7 +17745,7 @@ msgstr ""
 msgid "Warehouse office to let"
 msgstr ""
 
-#: scripts/sim/ledger.gd:31
+#: scripts/sim/ledger.gd:32
 msgid "Warehouse rent"
 msgstr ""
 
@@ -16913,6 +17977,14 @@ msgstr ""
 msgid "Wide"
 msgstr ""
 
+#: data/quests/trade_fair_week.json
+msgid "Win a client brief in the Campaign Mixer and run it to the end."
+msgstr ""
+
+#: data/quests/city_fleet_refresh.json
+msgid "Win at auction, recondition and sell, or sell new from the franchise."
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Win cars at the Wednesday auction, recondition and sell them, run an airport rental fleet, then sign a dealership franchise."
 msgstr ""
@@ -16997,7 +18069,7 @@ msgstr ""
 msgid "Work on your laptop — Company OS"
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:103
+#: scripts/ui/modals/business_board.gd:121
 msgid "Work shifts on site: walk to the workplace's staff door and press E."
 msgstr ""
 
@@ -17289,7 +18361,7 @@ msgstr ""
 msgid "You'd need %s of your own money."
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:116
+#: scripts/ui/modals/business_board.gd:134
 msgid "You're a freelance consultant now. Today's gigs are in Company OS → Freelance."
 msgstr ""
 
@@ -17373,8 +18445,16 @@ msgstr ""
 msgid "Your books don't support a loan yet. Show me more gross profit."
 msgstr ""
 
+#: data/synergies.json
+msgid "Your brokerage houses a group business in one of its managed units instead of an outside landlord."
+msgstr ""
+
 #: scripts/ui/tutorial.gd:49
 msgid "Your business computer"
+msgstr ""
+
+#: scripts/ui/group_ui.gd:11
+msgid "Your businesses can trade with each other. Set the transfer price; both sides show in Segments and the group total never counts it twice."
 msgstr ""
 
 #: data/help/glossary.json
@@ -17391,6 +18471,10 @@ msgstr ""
 
 #: scripts/ui/modals/clothing_shop_modal.gd:56
 msgid "Your cash"
+msgstr ""
+
+#: scripts/ui/group_ui.gd:55
+msgid "Your cost / outside market"
 msgstr ""
 
 #: scripts/world/actions.gd:262
@@ -17469,7 +18553,7 @@ msgstr ""
 msgid "Your import licence runs out in about two months. Renew it at the permits kiosk before it lapses."
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:97
+#: scripts/ui/modals/business_board.gd:115
 msgid "Your job · details"
 msgstr ""
 
@@ -17917,6 +19001,10 @@ msgstr ""
 msgid "just you"
 msgstr ""
 
+#: data/synergies.json
+msgid "kWh"
+msgstr ""
+
 #: data/businesses/cafe.json data/businesses/energy.json data/businesses/hotel.json data/businesses/manufacturing.json
 msgid "labor"
 msgstr ""
@@ -17987,6 +19075,10 @@ msgstr ""
 
 #: data/businesses/manufacturing.json
 msgid "materials"
+msgstr ""
+
+#: data/synergies.json
+msgid "media $"
 msgstr ""
 
 #: scripts/sim/bank.gd:115
@@ -18387,6 +19479,10 @@ msgstr ""
 
 #: data/businesses/real_estate.json
 msgid "vacancy"
+msgstr ""
+
+#: data/synergies.json
+msgid "van service"
 msgstr ""
 
 #: data/npcs/elena.json
