@@ -26,7 +26,7 @@ static func on_hour(t: int, h: int) -> void:
 			continue
 		if not Cond.all(tr.get("conditions", [])):
 			continue
-		if GameState.randf() >= float(tr.get("chance", 0.0)) / 2.0:
+		if GameState.randf() >= clampf(float(tr.get("chance", 0.0)) * Replay.number("event_frequency", 1.0) / 2.0, 0.0, 1.0):
 			continue
 		var ctx := bind(d)
 		if ctx.is_empty() and not d.get("bind", {}).is_empty():

@@ -150,3 +150,7 @@ and extra-large text use scrollable panels. Color assistance retains textual lab
 ## Touch and controllers (#88)
 
 Ground taps follow walkable routes; nearby objects show a touch interaction button. Buttons are at least 44 logical pixels. D-pad focuses the next action first; enlarged lists scroll to keep controls reachable. Portrait devices request landscape. See [input support](../INPUT_ACCESS.md) and the explicit device validation limits there.
+
+## Replay setup and cards (#89)
+
+New Game offers Easy/Standard/Hard/Custom rules, a seed and story/sandbox selection, then character creation. Scenario cards show objective, current/required quantities, deadline and a single next action. The six openings are `inherited_cafe`, `fresh_restart`, `venture_fund`, `harbor_cargo`, `family_property`, `part_time_start`. Weekly challenges use fixed standard rules; local history has no online ranking. See [replay rules](../REPLAY.md). Maple Court is a financial scenario asset; a physical property scene remains planned outside this ticket.

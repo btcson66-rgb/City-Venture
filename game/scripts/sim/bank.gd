@@ -45,7 +45,7 @@ static func base_rate() -> float:
 
 
 static func apr() -> float:
-	return clampf(base_rate() + 0.06 + (720 - credit()) * 0.0004, 0.06, 0.24)
+	return clampf(base_rate() + Replay.number("interest_surcharge", 0.0) + 0.06 + (720 - credit()) * 0.0004, 0.06, 0.24)
 
 
 static func monthly_payment(principal: float, months: int, rate := -1.0) -> float:
@@ -240,12 +240,12 @@ static func _payment(l: Dictionary) -> void:
 	l["status"] = "late"
 	adjust_credit(-40, "missed payment")
 	GameState.inc_stat("loan_payments_missed")
-	if int(l["missed"]) >= 2:
+	if int(l["missed"]) >= maxi(1, ceili(2 * Replay.number("debt_tolerance", 1.0))):
 		l["status"] = "called"
 		adjust_credit(-60, "loan called")
 		l["call_due"] = Clock.now() + 7 * Clock.DAY
 		Sim.schedule(int(l["call_due"]), "bank.called", {"id": l["id"]})
-		GameState.add_message("marcus", I18n.t("Two missed payments. The bank has called loan %s: %s is due in full within 7 days.") % [l["id"], Fmt.money(float(l["balance"]))])
+		GameState.add_message("marcus", I18n.t("%d missed payments. Loan %s is called: %s is due in full within 7 days.") % [int(l["missed"]), l["id"], Fmt.money(float(l["balance"]))])
 		EventBus.notify.emit(I18n.t("Nexus Bank called loan %s. %s due in 7 days.") % [l["id"], Fmt.money(float(l["balance"]))], "bad", "warning")
 		return
 	GameState.add_message("marcus", I18n.t("Your payment on loan %s bounced. We'll try again in 3 days. It's cheaper to call me before this happens.") % l["id"])

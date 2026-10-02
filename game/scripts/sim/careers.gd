@@ -159,6 +159,7 @@ static func work_shift(id: String, score := 1.0, tips := 0.0) -> Dictionary:
 		C()["shifts"][id] = shifts(id) + 1
 	C()["last_shift_day"] = Clock.day_index()
 	GameState.inc_stat("shifts_worked")
+	Replay.record_work_score(score)
 	var lines: Array = j.get("lines", [])
 	var moment: String = I18n.t(str(lines[(shifts(id) - 1) % lines.size()])) if not lines.is_empty() else ""
 	var promoted := rank_index(id) > before

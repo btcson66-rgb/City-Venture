@@ -131,6 +131,8 @@ func _on_hour(t: int, h: int) -> void:
 	Cafe.on_hour(t, h)
 	phase = "hour:logistics"
 	Logistics.on_hour(t, h)
+	phase = "hour:scenario"
+	Replay.on_hour(t, h)
 	phase = "hour:story"
 	_request_story_check()
 	phase = ""

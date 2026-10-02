@@ -109,6 +109,6 @@ func _ready() -> void:
 func _new_game() -> void:
 	if SaveSystem.free_slot() >= 0:
 		SaveSystem.next_slot = -1
-		SceneRouter.go_creator()
+		UIRoot.open_modal(NewRunModal.new(func(setup): SceneRouter.go_creator(setup)))
 	else:
 		UIRoot.open_modal(SaveListModal.new("replace"))

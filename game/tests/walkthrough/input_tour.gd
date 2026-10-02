@@ -56,6 +56,14 @@ func _navigate(modal: Modal, label: String) -> void:
 		checks.append({"modal": label + " B returns", "ok": closed})
 		if not closed:
 			failures.append(label + ": B did not close")
+	elif modal is RunCardModal:
+		await _pad(JOY_BUTTON_B)
+		var waits := is_instance_valid(modal) and not modal.is_queued_for_deletion()
+		await _pad(JOY_BUTTON_A)
+		var acknowledged := not is_instance_valid(modal) or modal.is_queued_for_deletion()
+		checks.append({"modal": label + " A acknowledges", "ok": waits and acknowledged})
+		if not waits or not acknowledged:
+			failures.append(label + ": controller acknowledgement failed")
 	elif modal is InsolvencyModal:
 		await _pad(JOY_BUTTON_B)
 		var waits := is_instance_valid(modal) and not modal.is_queued_for_deletion()

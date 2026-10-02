@@ -49,26 +49,34 @@ func go_menu() -> void:
 	_set_scene(MainMenu.new())
 
 
-func go_creator() -> void:
+func go_creator(setup := {}) -> void:
 	Clock.world_active = false
 	UIRoot.set_hud_visible(false)
-	_fade(func(): _set_scene(CharacterCreator.new()))
+	_fade(func(): _set_scene(CharacterCreator.new(setup)))
 
 
 func go_arrival(setup: Dictionary) -> void:
 	GameState.new_game(setup)
 	Clock.world_active = false
 	UIRoot.set_hud_visible(false)
-	_fade(func(): _set_scene(ArrivalScene.new()))
+	if Replay.active() and not Replay.S().get("scenario", {}).is_empty():
+		begin_world()
+	else:
+		_fade(func(): _set_scene(ArrivalScene.new()))
 
 
 ## Called by the arrival sequence when it ends.
 func begin_world() -> void:
 	await _fade(func():
 		_enter("interior", "riverside_apartment", "bed_side", ""))
-	StoryEngine.start_chapter("ch1_arrival")
-	GameState.add_message("maya", "So you actually quit?")
-	GameState.add_message("maya", "Call me. Or text. Or whatever.")
+	if Replay.story_enabled():
+		StoryEngine.start_chapter("ch1_arrival")
+		GameState.add_message("maya", "So you actually quit?")
+		GameState.add_message("maya", "Call me. Or text. Or whatever.")
+	else:
+		UIRoot.tutorial.st()["off"] = true
+	if Replay.active() and not Replay.S().get("scenario", {}).is_empty() and not Replay.S().get("opening_seen", false):
+		UIRoot.open_modal(RunCardModal.new(true))
 	SaveSystem.autosave()
 
 
@@ -208,8 +216,9 @@ func capture_location() -> void:
 func restore_location() -> void:
 	var loc: Dictionary = GameState.data["player"]["location"]
 	UIRoot.close_all()
-	_fade(func(): _enter(str(loc.get("kind", "interior")), str(loc.get("id", "riverside_apartment")), "door", str(loc.get("facing", "down")),
-		Vector2(float(loc.get("x", -1)), float(loc.get("y", -1)))))
+	_fade(func():
+		_enter(str(loc.get("kind", "interior")), str(loc.get("id", "riverside_apartment")), "door", str(loc.get("facing", "down")), Vector2(float(loc.get("x", -1)), float(loc.get("y", -1))))
+		Replay.resume_cards())
 
 
 func reenter_current() -> void:

@@ -23,15 +23,17 @@ func default_appearance() -> Dictionary:
 ## Build a fresh world. `setup` = {name, appearance{}, outfit, seed?}
 func new_game(setup: Dictionary) -> void:
 	Ecommerce.invalidate_reservations()
-	var living := DataDB.living()
+	var start_cash := Replay.opening_cash(setup)
 	var seed_v: int = int(setup.get("seed", Time.get_ticks_usec() % 2147483647))
 	rng.seed = seed_v
 	data = template(setup, seed_v)
 	data["meta"]["slot"] = SaveSystem.claim_slot()
 	Ledger.post("player", "Opening balance — savings", [
-		{"acct": "cash", "dr": float(living.get("start_cash", 30000))},
-		{"acct": "equity", "cr": float(living.get("start_cash", 30000))}], {"type": "opening"})
-	timeline(I18n.t("Moved to Aurelia City with $%s in savings.") % Fmt.money0(float(living.get("start_cash", 30000))))
+		{"acct": "cash", "dr": start_cash},
+		{"acct": "equity", "cr": start_cash}], {"type": "opening"})
+	timeline(I18n.t("Moved to Aurelia City with $%s in savings.") % Fmt.money0(start_cash))
+	if setup.has("run"):
+		Replay.initialize(setup["run"])
 
 
 ## The shape of a brand-new game. new_game() starts from it, and loading an older save fills in anything a newer

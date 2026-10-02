@@ -2,6 +2,7 @@ class_name CharacterCreator
 extends Control
 ## Character creation (Handoff §36, Board B). Everything here is cosmetic: no stats, no bonuses.
 
+var run_setup := {}
 var app: Dictionary
 var outfit := "startup_casual"
 var name_edit: LineEdit
@@ -17,6 +18,10 @@ var options_box: VBoxContainer
 var tab_box: HBoxContainer
 const DIRS := ["down", "right", "up", "left"]
 const EXPRS := ["neutral", "happy", "thinking", "surprised"]
+
+
+func _init(options := {}) -> void:
+	run_setup = options.duplicate(true)
 
 
 func _ready() -> void:
@@ -226,4 +231,6 @@ func _start() -> void:
 	var n := name_edit.text.strip_edges()
 	if n == "":
 		n = "Alex Chen"
-	SceneRouter.go_arrival({"name": n, "appearance": app.duplicate(), "outfit": outfit})
+	var setup := run_setup.duplicate(true)
+	setup.merge({"name": n, "appearance": app.duplicate(), "outfit": outfit}, true)
+	SceneRouter.go_arrival(setup)

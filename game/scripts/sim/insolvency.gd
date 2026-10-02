@@ -189,5 +189,5 @@ static func _resolve(how: String) -> void:
 
 ## Called every Friday after payroll: three missed payrolls in a row means the company is insolvent.
 static func check_payroll(ent: String) -> void:
-	if int(Staff.S().get("missed_run", 0)) >= 3:
-		begin(ent, I18n.t("three payrolls in a row went unpaid"))
+	if int(Staff.S().get("missed_run", 0)) >= maxi(1, ceili(3 * Replay.number("debt_tolerance", 1.0))):
+		begin(ent, I18n.t("%d consecutive payrolls went unpaid") % int(Staff.S().get("missed_run", 0)))

@@ -28,6 +28,10 @@ func build() -> void:
 	var settings := UIK.button("Settings", func(): UIRoot.open_modal(SettingsModal.new()))
 	settings.name = "Settings"
 	body.add_child(settings)
+	if Replay.active() and not Replay.S().get("scenario", {}).is_empty():
+		var overview := UIK.button("Scenario progress", func(): UIRoot.open_modal(RunCardModal.new(Replay.S().get("status", "running") == "running")))
+		overview.name = "RunOverview"
+		body.add_child(overview)
 	var lang := UIK.hbox(4)
 	lang.add_child(UIK.label("Language", 8, Art.C_MUTED))
 	for l in I18n.LOCALES:

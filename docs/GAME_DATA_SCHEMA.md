@@ -489,3 +489,7 @@ preserved; old company saves need no migration. See [SETTINGS.md](SETTINGS.md) f
 ### Input accessibility (#88)
 
 InputAccess stores touch contacts, transient walking routes and controller focus only in memory; no saved game keys or migrations. See [INPUT_ACCESS.md](INPUT_ACCESS.md).
+
+### Replay rules and scenarios (#89)
+
+`difficulty.json` supplies bounded presets/custom fields, market variation and score weights; `scenarios/*.json` supplies `{id, name, description, goal, initial, win, limit_days|limit_months}`. DataDB loads both. Optional saved `run` snapshots rules/seed/preferences, full scenario definition, started/deadline minutes, original company id, starting net worth, status/result and read/recorded flags. Missing `run` preserves original behavior. `property` is a ledger asset; scenario mortgages remain `loan_payable` and ordinary Bank loan schedules. Local challenge history is separate from game saves and preserves corrupt files. See [REPLAY.md](REPLAY.md) for all keys, units and six IDs.

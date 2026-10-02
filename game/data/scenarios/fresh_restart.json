@@ -1,0 +1,16 @@
+{
+ "id": "fresh_restart",
+ "name": "Starting again",
+ "description": "Credit score 520 points and a 90-day lending ban. Recover through work rather than new debt.",
+ "goal": "Rebuild savings after the lending ban.",
+ "initial": {
+  "cash": 3500,
+  "credit": 520,
+  "ban_days": 90
+ },
+ "win": {
+  "cash": 5000,
+  "elapsed_days": 90
+ },
+ "limit_days": 120
+}

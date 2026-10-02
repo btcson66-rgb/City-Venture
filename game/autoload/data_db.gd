@@ -3,7 +3,7 @@ extends Node
 ## Content is data-driven (Handoff §73): scene scripts only reference ids.
 
 const FOLDERS := ["businesses", "products", "suppliers", "companies", "npcs", "buildings", "districts",
-	"regions", "regulations", "events", "dialogue", "properties", "jobs"]
+	"regions", "regulations", "events", "dialogue", "properties", "jobs", "scenarios"]
 
 var businesses := {}
 var products := {}
@@ -18,6 +18,8 @@ var events := {}
 var dialogue := {}
 var properties := {}
 var jobs := {}
+var scenarios := {}
+var difficulty := {}
 var economy := {}      # marketplace, shipping, living, settlement_methods
 var city := {}
 var story := {}
@@ -47,6 +49,7 @@ func load_all() -> void:
 					target[it["id"]] = it
 	for path in _json_files("res://data/economy"):
 		economy[path.get_file().get_basename()] = _read(path)
+	difficulty = _read("res://data/difficulty.json")
 	city = _read("res://data/city/aurelia.json")
 	var gl = _read("res://data/help/glossary.json")
 	glossary = gl if typeof(gl) == TYPE_DICTIONARY else {}

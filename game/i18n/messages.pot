@@ -121,12 +121,32 @@ msgstr ""
 msgid "$30,000. A laptop. A phone. A city."
 msgstr ""
 
+#: data/scenarios/part_time_start.json
+msgid "$500 and no company. Start with shifts, improve your work and save before committing to a business."
+msgstr ""
+
+#: data/scenarios/venture_fund.json
+msgid "$500,000 of venture backing. Reach the revenue target within 18 months or the board withdraws its capital."
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1332
 msgid "%.1f L per 100 km"
 msgstr ""
 
+#: scripts/ui/modals/run_card_modal.gd:52
+msgid "%.1f days"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1402
 msgid "%.1f km"
+msgstr ""
+
+#: scripts/ui/modals/run_card_modal.gd:53
+msgid "%.2f / 5 stars"
+msgstr ""
+
+#: scripts/ui/modals/new_run_modal.gd:153
+msgid "%.2f × standard"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:992
@@ -139,6 +159,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1330
 msgid "%d accepted"
+msgstr ""
+
+#: scripts/sim/insolvency.gd:193
+msgid "%d consecutive payrolls went unpaid"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1206
@@ -175,6 +199,10 @@ msgstr ""
 
 #: scripts/sim/fmt.gd:46
 msgid "%d min"
+msgstr ""
+
+#: scripts/sim/bank.gd:248
+msgid "%d missed payments. Loan %s is called: %s is due in full within 7 days."
 msgstr ""
 
 #: scripts/ui/modals/loan_modal.gd:73
@@ -225,8 +253,16 @@ msgstr ""
 msgid "%d people applied for %s. Review them in Company OS → People."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1331
+#: scripts/ui/modals/run_card_modal.gd:54
+msgid "%d points"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:1331 scripts/ui/modals/run_card_modal.gd:55
 msgid "%d runs"
+msgstr ""
+
+#: scripts/ui/modals/run_card_modal.gd:56
+msgid "%d shifts"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1350
@@ -257,7 +293,7 @@ msgstr ""
 msgid "%s  ·  %d min"
 msgstr ""
 
-#: autoload/game_state.gd:184
+#: autoload/game_state.gd:186
 msgid "%s (personal seller)"
 msgstr ""
 
@@ -329,7 +365,7 @@ msgstr ""
 msgid "%s is busy."
 msgstr ""
 
-#: autoload/scene_router.gd:160
+#: autoload/scene_router.gd:168
 msgid "%s is closed. Open %s–%s, %s."
 msgstr ""
 
@@ -357,7 +393,7 @@ msgstr ""
 msgid "%s on %s"
 msgstr ""
 
-#: scripts/sim/careers.gd:304
+#: scripts/sim/careers.gd:305
 msgid "%s paid %s."
 msgstr ""
 
@@ -453,7 +489,7 @@ msgstr ""
 msgid "%s: %d × %s on Net %d"
 msgstr ""
 
-#: scripts/sim/careers.gd:285
+#: scripts/sim/careers.gd:286
 msgid "%s: It's late, so we've knocked 20%% off. Invoice for %s noted."
 msgstr ""
 
@@ -461,11 +497,11 @@ msgstr ""
 msgid "%s: Nobody came for our delivery, so we've booked another courier. No fee to pay, and no more work from us this month."
 msgstr ""
 
-#: scripts/sim/careers.gd:284
+#: scripts/sim/careers.gd:285
 msgid "%s: Received, thanks! Invoice for %s noted."
 msgstr ""
 
-#: scripts/sim/careers.gd:321
+#: scripts/sim/careers.gd:322
 msgid "%s: We had to cancel the project. We won't be paying for it."
 msgstr ""
 
@@ -651,6 +687,10 @@ msgstr ""
 
 #: scripts/ui/modals/insolvency_modal.gd:30
 msgid "A company can fail. You don't. Pick what happens next:"
+msgstr ""
+
+#: data/help/help.json
+msgid "A completed attempt never settles twice. Continuing preserves your city and assets. Start a new game to try another scenario."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:182
@@ -861,7 +901,7 @@ msgstr ""
 msgid "Accessibility"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:172
+#: scripts/frontend/character_creator.gd:177
 msgid "Accessory"
 msgstr ""
 
@@ -941,11 +981,11 @@ msgstr ""
 msgid "Airport Line"
 msgstr ""
 
-#: autoload/game_state.gd:46 autoload/game_state.gd:55 scripts/sim/ecommerce.gd:834 scripts/sim/staff.gd:120
+#: autoload/game_state.gd:48 autoload/game_state.gd:57 scripts/sim/ecommerce.gd:834 scripts/sim/staff.gd:120
 msgid "Alex"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:228 scripts/frontend/character_creator.gd:83
+#: scripts/frontend/character_creator.gd:233 scripts/frontend/character_creator.gd:88
 msgid "Alex Chen"
 msgstr ""
 
@@ -997,7 +1037,7 @@ msgstr ""
 msgid "Amateur-looking. It will cost you some sales; you can reshoot later."
 msgstr ""
 
-#: autoload/preferences.gd:171 scripts/ui/modals/settings_modal.gd:30
+#: autoload/preferences.gd:172 scripts/ui/modals/settings_modal.gd:30
 msgid "Ambience"
 msgstr ""
 
@@ -1019,6 +1059,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "An office gives your company desks for staff, more storage and a proper address. Rent is charged every month."
+msgstr ""
+
+#: data/scenarios/inherited_cafe.json
+msgid "An operating café, one barista and an outstanding loan. Keep supplies stocked and cover payroll."
 msgstr ""
 
 #: data/npcs/ana.json
@@ -1245,7 +1289,7 @@ msgstr ""
 msgid "Awaiting courier"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:54
+#: scripts/frontend/character_creator.gd:59
 msgid "BACK"
 msgstr ""
 
@@ -1273,7 +1317,7 @@ msgstr ""
 msgid "BUILD  ·  LIVE  ·  CONNECT  ·  GROW"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:105
+#: scripts/frontend/character_creator.gd:110
 msgid "Back"
 msgstr ""
 
@@ -1377,6 +1421,10 @@ msgstr ""
 msgid "Before the first customer"
 msgstr ""
 
+#: scripts/ui/modals/run_card_modal.gd:36
+msgid "Begin scenario"
+msgstr ""
+
 #: scripts/sim/compliance.gd:72
 msgid "Being processed."
 msgstr ""
@@ -1453,11 +1501,15 @@ msgstr ""
 msgid "Blue-yellow"
 msgstr ""
 
+#: scripts/sim/replay.gd:216
+msgid "Board capital withdrawn: %s"
+msgstr ""
+
 #: data/character/options.json
 msgid "Bob"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:147
+#: scripts/frontend/character_creator.gd:152
 msgid "Body"
 msgstr ""
 
@@ -1603,6 +1655,14 @@ msgstr ""
 
 #: data/businesses/saas.json
 msgid "Build it once, sell it every month. Development hours now, subscribers later: price, churn and servers decide if it works."
+msgstr ""
+
+#: data/scenarios/family_property.json
+msgid "Build net worth while keeping the mortgage current."
+msgstr ""
+
+#: data/scenarios/part_time_start.json
+msgid "Build savings from wages without a company."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1092
@@ -1865,7 +1925,7 @@ msgstr ""
 msgid "COUNTERED"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:49
+#: scripts/frontend/character_creator.gd:54
 msgid "CREATE YOUR CHARACTER"
 msgstr ""
 
@@ -1909,7 +1969,7 @@ msgstr ""
 msgid "Call me when you can do volume."
 msgstr ""
 
-#: autoload/scene_router.gd:71
+#: autoload/scene_router.gd:75
 msgid "Call me. Or text. Or whatever."
 msgstr ""
 
@@ -2017,6 +2077,10 @@ msgstr ""
 msgid "Carrying %d parcel%s"
 msgstr ""
 
+#: scripts/ui/modals/run_card_modal.gd:44
+msgid "Cash"
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Cash Is Oxygen"
 msgstr ""
@@ -2087,6 +2151,10 @@ msgstr ""
 
 #: data/economy/saas.json
 msgid "Chairly"
+msgstr ""
+
+#: scripts/ui/modals/run_card_modal.gd:44
+msgid "Challenge score"
 msgstr ""
 
 #: data/buildings/riverside_apartment.json
@@ -2257,7 +2325,7 @@ msgstr ""
 msgid "Client payment"
 msgstr ""
 
-#: scripts/sim/careers.gd:301
+#: scripts/sim/careers.gd:302
 msgid "Client payment — %s"
 msgstr ""
 
@@ -2445,6 +2513,14 @@ msgstr ""
 msgid "Company registration fee — %s"
 msgstr ""
 
+#: data/help/help.json
+msgid "Complete every condition before the deadline. Missed loan payments or closing the scenario company can end the attempt; the founder can continue in sandbox."
+msgstr ""
+
+#: data/scenarios/harbor_cargo.json
+msgid "Complete profitable delivery runs."
+msgstr ""
+
 #: scripts/sim/story_engine.gd:110
 msgid "Completed %s."
 msgstr ""
@@ -2511,6 +2587,10 @@ msgstr ""
 
 #: scripts/frontend/main_menu.gd:50 scripts/ui/minigames/mini_game.gd:173 scripts/ui/modals/month_close_modal.gd:56
 msgid "Continue"
+msgstr ""
+
+#: scripts/ui/modals/run_card_modal.gd:36
+msgid "Continue in sandbox"
 msgstr ""
 
 #: scripts/sim/contracts.gd:259
@@ -2625,12 +2705,20 @@ msgstr ""
 msgid "Courier · Express 1d (%s)"
 msgstr ""
 
+#: scripts/ui/modals/new_run_modal.gd:145
+msgid "Create character"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:259
 msgid "Credit score"
 msgstr ""
 
 #: scripts/ui/modals/loan_modal.gd:24
 msgid "Credit score %d · %s"
+msgstr ""
+
+#: data/scenarios/fresh_restart.json
+msgid "Credit score 520 points and a 90-day lending ban. Recover through work rather than new debt."
 msgstr ""
 
 #: scripts/sim/bank.gd:99
@@ -2695,6 +2783,10 @@ msgstr ""
 
 #: data/events/supplier_price_increase.json
 msgid "Current: {unit_cost}/unit, MOQ {moq}."
+msgstr ""
+
+#: scripts/ui/modals/new_run_modal.gd:86
+msgid "Custom"
 msgstr ""
 
 #: data/npcs/customer.json
@@ -2829,7 +2921,11 @@ msgstr ""
 msgid "Day pass is $15. Or $350 a month for a hot desk."
 msgstr ""
 
-#: scripts/sim/careers.gd:317
+#: scripts/ui/modals/run_card_modal.gd:24
+msgid "Deadline"
+msgstr ""
+
+#: scripts/sim/careers.gd:318
 msgid "Deadline missed: %s. Deliver soon, the fee drops."
 msgstr ""
 
@@ -2839,6 +2935,10 @@ msgstr ""
 
 #: scripts/sim/contracts.gd:173
 msgid "Deal. Send it over."
+msgstr ""
+
+#: data/difficulty.json
+msgid "Debt tolerance"
 msgstr ""
 
 #: scripts/ui/modals/insolvency_modal.gd:68
@@ -2953,12 +3053,20 @@ msgstr ""
 msgid "Delivery run %s: %s (%d stops)"
 msgstr ""
 
+#: scripts/ui/modals/run_card_modal.gd:44
+msgid "Delivery runs"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Delivery runs: pay and deadlines"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:842
 msgid "Delivery unavailable"
+msgstr ""
+
+#: data/difficulty.json
+msgid "Demand fluctuation"
 msgstr ""
 
 #: data/events/viral_mention.json
@@ -3229,6 +3337,10 @@ msgstr ""
 msgid "Earn about %s more gross profit through sales in Company OS, or add eligible collateral. Capacity is rounded down to $1,000 and capped at $250,000."
 msgstr ""
 
+#: data/scenarios/inherited_cafe.json
+msgid "Earn café revenue while keeping cash positive."
+msgstr ""
+
 #: scripts/ui/tutorial.gd:81
 msgid "Earn on the side"
 msgstr ""
@@ -3239,6 +3351,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "Earn-out"
+msgstr ""
+
+#: data/difficulty.json
+msgid "Easy"
 msgstr ""
 
 #: data/businesses/ecommerce.json
@@ -3325,6 +3441,10 @@ msgstr ""
 msgid "Enter %s"
 msgstr ""
 
+#: scripts/ui/modals/new_run_modal.gd:165
+msgid "Enter a seed from 0 to 2147483647."
+msgstr ""
+
 #: scripts/sim/effects.gd:83
 msgid "Equity investment"
 msgstr ""
@@ -3391,6 +3511,10 @@ msgstr ""
 
 #: scripts/sim/effects.gd:22
 msgid "Event cost"
+msgstr ""
+
+#: data/difficulty.json
+msgid "Event frequency"
 msgstr ""
 
 #: scripts/sim/effects.gd:24
@@ -3461,7 +3585,7 @@ msgstr ""
 msgid "Express · 1 day — %s"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:79
+#: scripts/frontend/character_creator.gd:84
 msgid "Expression ▶"
 msgstr ""
 
@@ -3469,15 +3593,15 @@ msgstr ""
 msgid "Extra large"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:160
+#: scripts/frontend/character_creator.gd:165
 msgid "Eye colour"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:159
+#: scripts/frontend/character_creator.gd:164
 msgid "Eye shape"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:161
+#: scripts/frontend/character_creator.gd:166
 msgid "Eyebrows"
 msgstr ""
 
@@ -3493,7 +3617,7 @@ msgstr ""
 msgid "FRESH+ MARKET"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:54
+#: scripts/frontend/character_creator.gd:59
 msgid "FRONT"
 msgstr ""
 
@@ -3513,11 +3637,11 @@ msgstr ""
 msgid "FYI personal seller accounts cap out at $2,500/month on ShopLane. Registered businesses don't."
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:147
+#: scripts/frontend/character_creator.gd:152
 msgid "Face"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:158
+#: scripts/frontend/character_creator.gd:163
 msgid "Face shape"
 msgstr ""
 
@@ -3539,6 +3663,10 @@ msgstr ""
 
 #: data/dialogue/lina_rails_again.json
 msgid "Fair. Boring and safe has its place."
+msgstr ""
+
+#: data/scenarios/family_property.json
+msgid "Family property"
 msgstr ""
 
 #: data/regions/karu.json
@@ -4081,7 +4209,7 @@ msgstr ""
 msgid "Growth market"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:40
+#: scripts/ui/modals/pause_menu.gd:44
 msgid "Guide arrow"
 msgstr ""
 
@@ -4109,15 +4237,15 @@ msgstr ""
 msgid "Haddad"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:147
+#: scripts/frontend/character_creator.gd:152
 msgid "Hair"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:165
+#: scripts/frontend/character_creator.gd:170
 msgid "Hair colour"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:164
+#: scripts/frontend/character_creator.gd:169
 msgid "Hairstyle"
 msgstr ""
 
@@ -4193,8 +4321,16 @@ msgstr ""
 msgid "Harbor Point Fitness. Rosa Lim runs it: early classes, a boxing corner and a very firm view on prices. She is out on the floor today, and memberships are not sold in this build. If she needs something she will message you."
 msgstr ""
 
+#: data/scenarios/harbor_cargo.json
+msgid "Harbor small cargo"
+msgstr ""
+
 #: scripts/ui/modals/business_board.gd:98
 msgid "Harbor: metro Harbor Line (M3) from Riverside. Sam is at Dockside Motors, Mon–Sat."
+msgstr ""
+
+#: data/difficulty.json
+msgid "Hard"
 msgstr ""
 
 #: data/character/options.json
@@ -4621,6 +4757,22 @@ msgstr ""
 msgid "Infrastructure"
 msgstr ""
 
+#: data/scenarios/inherited_cafe.json
+msgid "Inherited café"
+msgstr ""
+
+#: scripts/sim/replay.gd:105
+msgid "Inherited café supplies: %d cups"
+msgstr ""
+
+#: scripts/sim/replay.gd:130
+msgid "Inherited loan: %s"
+msgstr ""
+
+#: scripts/sim/replay.gd:115
+msgid "Inherited property — %s"
+msgstr ""
+
 #: data/products/water_bottle.json
 msgid "Insulated Water Bottle"
 msgstr ""
@@ -4647,6 +4799,10 @@ msgstr ""
 
 #: scripts/ui/modals/loan_modal.gd:62
 msgid "Interest (APR)"
+msgstr ""
+
+#: data/difficulty.json
+msgid "Interest surcharge"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:10
@@ -4705,7 +4861,7 @@ msgstr ""
 msgid "Invoice reduction"
 msgstr ""
 
-#: scripts/sim/careers.gd:270
+#: scripts/sim/careers.gd:271
 msgid "Invoice — %s"
 msgstr ""
 
@@ -5001,7 +5157,7 @@ msgstr ""
 msgid "LIVE"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:32
+#: scripts/ui/modals/pause_menu.gd:36
 msgid "Language"
 msgstr ""
 
@@ -5357,12 +5513,32 @@ msgstr ""
 msgid "Loans"
 msgstr ""
 
+#: scripts/ui/modals/new_run_modal.gd:54
+msgid "Local challenge history"
+msgstr ""
+
 #: scripts/sim/logistics.gd:355 scripts/ui/minigames/route_game.gd:27
 msgid "Local client"
 msgstr ""
 
+#: scripts/ui/modals/new_run_modal.gd:64
+msgid "Local history is unreadable — restore a backup before saving records."
+msgstr ""
+
 #: data/suppliers/aurelia_makers.json
 msgid "Local makers' co-op. Pricier, but made in the city: no port, no shipping shock."
+msgstr ""
+
+#: scripts/ui/modals/run_card_modal.gd:35
+msgid "Local record could not be saved — check storage and retry"
+msgstr ""
+
+#: scripts/ui/modals/run_card_modal.gd:35
+msgid "Local record saved — view it from new game setup"
+msgstr ""
+
+#: scripts/ui/modals/new_run_modal.gd:62
+msgid "Local records only. No server or online ranking."
 msgstr ""
 
 #: data/story/chapters.json
@@ -5429,7 +5605,7 @@ msgstr ""
 msgid "Looking around first."
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:50
+#: scripts/frontend/character_creator.gd:55
 msgid "Looks only. Your business choices decide everything else."
 msgstr ""
 
@@ -5605,11 +5781,11 @@ msgstr ""
 msgid "Masculine"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:156
+#: scripts/frontend/character_creator.gd:161
 msgid "Masculine, feminine or neutral changes the body shape only. There are no ability differences."
 msgstr ""
 
-#: autoload/preferences.gd:171 autoload/preferences.gd:177 autoload/sound.gd:49
+#: autoload/preferences.gd:172 autoload/preferences.gd:178 autoload/sound.gd:49
 msgid "Master"
 msgstr ""
 
@@ -5685,7 +5861,7 @@ msgstr ""
 msgid "Metro"
 msgstr ""
 
-#: autoload/scene_router.gd:191
+#: autoload/scene_router.gd:199
 msgid "Metro fare to %s"
 msgstr ""
 
@@ -5805,11 +5981,11 @@ msgstr ""
 msgid "Monthly rent"
 msgstr ""
 
-#: autoload/scene_router.gd:159 scripts/ui/modals/job_modal.gd:31
+#: autoload/scene_router.gd:167 scripts/ui/modals/job_modal.gd:31
 msgid "Mon–Fri"
 msgstr ""
 
-#: autoload/scene_router.gd:159
+#: autoload/scene_router.gd:167
 msgid "Mon–Sat"
 msgstr ""
 
@@ -5821,7 +5997,7 @@ msgstr ""
 msgid "Morale drops when pay is late or work piles up."
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:173
+#: scripts/frontend/character_creator.gd:178
 msgid "More outfits (Executive, Luxury Citywear, Travel, Formal Evening, Logistics) are sold at Threadline on Shopping Street. Accessories (hats, bags, jewellery, watches) — planned."
 msgstr ""
 
@@ -5845,7 +6021,7 @@ msgstr ""
 msgid "Moss"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:162
+#: scripts/frontend/character_creator.gd:167
 msgid "Mouth"
 msgstr ""
 
@@ -5889,7 +6065,7 @@ msgstr ""
 msgid "Mr. Okafor: \"Keys, meter readings, and my number. The espresso smell is included.\""
 msgstr ""
 
-#: autoload/preferences.gd:171 autoload/sound.gd:26 autoload/sound.gd:33 autoload/sound.gd:34
+#: autoload/preferences.gd:172 autoload/sound.gd:26 autoload/sound.gd:33 autoload/sound.gd:34
 msgid "Music"
 msgstr ""
 
@@ -5901,7 +6077,7 @@ msgstr ""
 msgid "My favourite tenant! Open before seven and the builders from the clock tower job will keep you in business."
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:81
+#: scripts/frontend/character_creator.gd:86
 msgid "NAME"
 msgstr ""
 
@@ -5969,6 +6145,14 @@ msgstr ""
 msgid "Net %d%s"
 msgstr ""
 
+#: scripts/ui/modals/run_card_modal.gd:44
+msgid "Net worth"
+msgstr ""
+
+#: scripts/ui/modals/run_card_modal.gd:44
+msgid "Net worth gained"
+msgstr ""
+
 #: data/character/options.json
 msgid "Neutral"
 msgstr ""
@@ -5979,6 +6163,14 @@ msgstr ""
 
 #: data/dialogue/jun_first.json
 msgid "New face. Flat white?"
+msgstr ""
+
+#: data/help/help.json
+msgid "New game rules"
+msgstr ""
+
+#: scripts/ui/modals/new_run_modal.gd:19
+msgid "New game setup"
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:847
@@ -6089,6 +6281,10 @@ msgstr ""
 msgid "No company to close."
 msgstr ""
 
+#: scripts/ui/modals/new_run_modal.gd:66
+msgid "No completed challenges yet."
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:806
 msgid "No contracts yet. B2B customers want invoices from a registered company — and they usually pay later (Net 30)."
 msgstr ""
@@ -6153,6 +6349,10 @@ msgstr ""
 msgid "No product yet."
 msgstr ""
 
+#: scripts/ui/modals/run_card_modal.gd:53
+msgid "No rating yet"
+msgstr ""
+
 #: scripts/sim/ecommerce.gd:455
 msgid "No returnable stock here: units were sold, reserved, moved, or already returned."
 msgstr ""
@@ -6185,7 +6385,7 @@ msgstr ""
 msgid "No such employee."
 msgstr ""
 
-#: scripts/sim/careers.gd:252
+#: scripts/sim/careers.gd:253
 msgid "No such gig in progress."
 msgstr ""
 
@@ -6421,6 +6621,14 @@ msgstr ""
 msgid "Oat milk"
 msgstr ""
 
+#: scripts/ui/modals/run_card_modal.gd:31
+msgid "Objective met — continue in sandbox"
+msgstr ""
+
+#: scripts/ui/modals/run_card_modal.gd:31
+msgid "Objective missed — continue or try a new run"
+msgstr ""
+
 #: data/businesses/hotel.json
 msgid "Occupancy, ADR, seasons."
 msgstr ""
@@ -6433,7 +6641,7 @@ msgstr ""
 msgid "Of course you are."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:43 scripts/ui/modals/settings_modal.gd:55
+#: scripts/ui/modals/pause_menu.gd:47 scripts/ui/modals/settings_modal.gd:55
 msgid "Off"
 msgstr ""
 
@@ -6501,7 +6709,7 @@ msgstr ""
 msgid "Omar"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:42
+#: scripts/ui/modals/pause_menu.gd:46
 msgid "On"
 msgstr ""
 
@@ -6527,6 +6735,10 @@ msgstr ""
 
 #: data/events/customer_return.json
 msgid "One unit + express shipping."
+msgstr ""
+
+#: data/scenarios/harbor_cargo.json
+msgid "One used van and two accepted delivery contracts. Complete routes on time and keep fuel costs in check."
 msgstr ""
 
 #: data/businesses/logistics.json
@@ -6753,7 +6965,7 @@ msgstr ""
 msgid "Other operating expense"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:147 scripts/frontend/character_creator.gd:168
+#: scripts/frontend/character_creator.gd:152 scripts/frontend/character_creator.gd:173
 msgid "Outfit"
 msgstr ""
 
@@ -7273,6 +7485,10 @@ msgstr ""
 msgid "Pick a box to start"
 msgstr ""
 
+#: data/help/help.json
+msgid "Pick a difficulty, seed and story mode, then create your character. A scenario fixes its opening funds."
+msgstr ""
+
 #: scripts/ui/modals/business_board.gd:82
 msgid "Pick a product idea and build it in Company OS → SaaS: development hours first, subscribers after launch. Hire developers to build faster."
 msgstr ""
@@ -7347,6 +7563,10 @@ msgstr ""
 
 #: scripts/sim/ledger.gd:26
 msgid "Platform fees"
+msgstr ""
+
+#: scripts/ui/modals/new_run_modal.gd:128
+msgid "Play this week's challenge"
 msgstr ""
 
 #: autoload/input_access.gd:165 autoload/input_access.gd:89
@@ -7453,7 +7673,7 @@ msgstr ""
 msgid "Premium consumers"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:154
+#: scripts/frontend/character_creator.gd:159
 msgid "Presentation"
 msgstr ""
 
@@ -7541,12 +7761,24 @@ msgstr ""
 msgid "Profit this month: %s. Cash moved by %s. The gap (%s) is sitting in stock, in ShopLane's hands, or in unpaid invoices."
 msgstr ""
 
-#: scripts/sim/careers.gd:166
+#: scripts/sim/careers.gd:167
 msgid "Promoted to %s at %s."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:10
 msgid "Property"
+msgstr ""
+
+#: scripts/sim/replay.gd:191
+msgid "Property maintenance — %s"
+msgstr ""
+
+#: scripts/sim/replay.gd:190
+msgid "Property rent — %s"
+msgstr ""
+
+#: scripts/sim/replay.gd:193
+msgid "Property repair — %s"
 msgstr ""
 
 #: data/jobs/barista.json
@@ -7601,7 +7833,7 @@ msgstr ""
 msgid "Quit job"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:51
+#: scripts/ui/modals/pause_menu.gd:55
 msgid "Quit to title"
 msgstr ""
 
@@ -7689,7 +7921,11 @@ msgstr ""
 msgid "Ran out of coffee for %d."
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:104
+#: scripts/ui/modals/new_run_modal.gd:100
+msgid "Random seed"
+msgstr ""
+
+#: scripts/frontend/character_creator.gd:109
 msgid "Randomize"
 msgstr ""
 
@@ -7697,7 +7933,7 @@ msgstr ""
 msgid "Rates stay low as startup filings hit a record."
 msgstr ""
 
-#: data/help/glossary.json
+#: data/help/glossary.json scripts/ui/modals/run_card_modal.gd:44
 msgid "Rating"
 msgstr ""
 
@@ -7707,6 +7943,10 @@ msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:7
 msgid "Ravi"
+msgstr ""
+
+#: data/scenarios/venture_fund.json
+msgid "Reach the revenue target before the board deadline."
 msgstr ""
 
 #: scripts/ui/tutorial.gd:27
@@ -7743,6 +7983,10 @@ msgstr ""
 
 #: data/businesses/real_estate.json
 msgid "Real Estate"
+msgstr ""
+
+#: data/scenarios/fresh_restart.json
+msgid "Rebuild savings after the lending ban."
 msgstr ""
 
 #: scripts/ui/modals/insolvency_modal.gd:64
@@ -8085,7 +8329,7 @@ msgstr ""
 msgid "Replacement shipped."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:44
+#: scripts/ui/modals/pause_menu.gd:48
 msgid "Replay tutorial"
 msgstr ""
 
@@ -8093,7 +8337,7 @@ msgstr ""
 msgid "Report a problem"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:48
+#: scripts/ui/modals/pause_menu.gd:52
 msgid "Report a problem (F12)"
 msgstr ""
 
@@ -8165,6 +8409,10 @@ msgstr ""
 msgid "Result"
 msgstr ""
 
+#: data/help/help.json
+msgid "Results snapshot net worth, time played and rating. Challenge points combine these measures; local history is available from new game setup."
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:369 scripts/ui/modals/pause_menu.gd:13
 msgid "Resume"
 msgstr ""
@@ -8217,7 +8465,7 @@ msgstr ""
 msgid "Returns normally have a 14-day window, 15% restocking fee, $0.60 freight per unit adjusted by the shipping index, and a 3-day refund delay. Imports accept cancellations only unless the supplier specifies otherwise."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:220 scripts/ui/modals/month_close_modal.gd:27
+#: scripts/ui/modals/company_os.gd:220 scripts/ui/modals/month_close_modal.gd:27 scripts/ui/modals/run_card_modal.gd:44
 msgid "Revenue"
 msgstr ""
 
@@ -8381,6 +8629,10 @@ msgstr ""
 msgid "Run it from home for now"
 msgstr ""
 
+#: scripts/ui/modals/new_run_modal.gd:54
+msgid "Run settings"
+msgstr ""
+
 #: data/jobs/cowork_host.json
 msgid "Run the front desk at Nexus: check in members, set up events, meet everyone."
 msgstr ""
@@ -8413,7 +8665,7 @@ msgstr ""
 msgid "SERVERS"
 msgstr ""
 
-#: autoload/preferences.gd:171 autoload/sound.gd:27 autoload/sound.gd:36 autoload/sound.gd:65
+#: autoload/preferences.gd:172 autoload/sound.gd:27 autoload/sound.gd:36 autoload/sound.gd:65
 msgid "SFX"
 msgstr ""
 
@@ -8425,7 +8677,7 @@ msgstr ""
 msgid "SHOPPING ST →"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:54
+#: scripts/frontend/character_creator.gd:59
 msgid "SIDE"
 msgstr ""
 
@@ -8557,6 +8809,38 @@ msgstr ""
 msgid "Saved (slot %d)."
 msgstr ""
 
+#: scripts/sim/replay.gd:228
+msgid "Scenario finished: %s"
+msgstr ""
+
+#: scripts/ui/modals/new_run_modal.gd:71
+msgid "Scenario funds override starting cash. Each opening has its own objective and deadline."
+msgstr ""
+
+#: data/help/help.json
+msgid "Scenario objective"
+msgstr ""
+
+#: scripts/ui/modals/run_card_modal.gd:10
+msgid "Scenario opening"
+msgstr ""
+
+#: scripts/ui/modals/pause_menu.gd:32
+msgid "Scenario progress"
+msgstr ""
+
+#: scripts/ui/modals/run_card_modal.gd:10
+msgid "Scenario result"
+msgstr ""
+
+#: data/help/help.json
+msgid "Scenario settlement"
+msgstr ""
+
+#: scripts/ui/modals/new_run_modal.gd:54
+msgid "Scenarios"
+msgstr ""
+
 #: data/city/aurelia.json
 msgid "Schools, parks, families."
 msgstr ""
@@ -8577,8 +8861,20 @@ msgstr ""
 msgid "Seal & next"
 msgstr ""
 
+#: scripts/ui/modals/run_card_modal.gd:25
+msgid "Seed"
+msgstr ""
+
+#: scripts/ui/modals/new_run_modal.gd:92
+msgid "Seed (0–2147483647)"
+msgstr ""
+
 #: data/help/help.json scripts/ui/modals/settings_modal.gd:125 scripts/ui/modals/settings_modal.gd:38
 msgid "Select an action, then press a key. Esc cancels key capture."
+msgstr ""
+
+#: scripts/ui/modals/new_run_modal.gd:141
+msgid "Selected: %s · %s"
 msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:98
@@ -8945,7 +9241,7 @@ msgstr ""
 msgid "Skill %d/5 · asks %s/week · %s"
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:155
+#: scripts/frontend/character_creator.gd:160
 msgid "Skin tone"
 msgstr ""
 
@@ -9013,7 +9309,7 @@ msgstr ""
 msgid "So what do I do?"
 msgstr ""
 
-#: autoload/scene_router.gd:70 data/dialogue/maya_intro.json
+#: autoload/scene_router.gd:74 data/dialogue/maya_intro.json
 msgid "So you actually quit?"
 msgstr ""
 
@@ -9157,6 +9453,14 @@ msgstr ""
 msgid "Staff work weekdays at your office and are paid every Friday at 17:00, so keep cash in the company."
 msgstr ""
 
+#: data/difficulty.json
+msgid "Standard"
+msgstr ""
+
+#: scripts/ui/modals/new_run_modal.gd:74
+msgid "Standard arrival"
+msgstr ""
+
 #: scripts/ui/minigames/mini_game.gd:77
 msgid "Start"
 msgstr ""
@@ -9181,7 +9485,7 @@ msgstr ""
 msgid "Start from any laptop: Company OS → SaaS."
 msgstr ""
 
-#: scripts/frontend/character_creator.gd:106
+#: scripts/frontend/character_creator.gd:111
 msgid "Start in Aurelia  →"
 msgstr ""
 
@@ -9213,8 +9517,20 @@ msgstr ""
 msgid "Started building %s, a SaaS product."
 msgstr ""
 
-#: scripts/sim/careers.gd:183
+#: scripts/sim/careers.gd:184
 msgid "Started freelancing as a consultant."
+msgstr ""
+
+#: data/scenarios/fresh_restart.json
+msgid "Starting again"
+msgstr ""
+
+#: data/difficulty.json
+msgid "Starting cash"
+msgstr ""
+
+#: data/scenarios/part_time_start.json
+msgid "Starting with a job"
 msgstr ""
 
 #: data/character/options.json
@@ -9311,6 +9627,14 @@ msgstr ""
 
 #: scripts/sim/wardrobe.gd:66 scripts/ui/modals/clothing_shop_modal.gd:17
 msgid "Store"
+msgstr ""
+
+#: scripts/ui/modals/new_run_modal.gd:104
+msgid "Story off — enable story"
+msgstr ""
+
+#: scripts/ui/modals/new_run_modal.gd:104
+msgid "Story on — switch to sandbox"
 msgstr ""
 
 #: data/character/options.json
@@ -9601,7 +9925,7 @@ msgstr ""
 msgid "That name is already registered in Aurelia."
 msgstr ""
 
-#: scripts/sim/careers.gd:240
+#: scripts/sim/careers.gd:241
 msgid "That offer is gone."
 msgstr ""
 
@@ -9909,6 +10233,10 @@ msgstr ""
 msgid "The runs are posted every morning. Plan the route before you turn the key: every kilometre you don't drive is money you keep."
 msgstr ""
 
+#: data/help/help.json
+msgid "The same seed, rules and choices reproduce the simulation. Daily market previews do not consume the event RNG. Weekly challenges lock standard rules and save results locally."
+msgstr ""
+
 #: data/help/glossary.json
 msgid "The share of payments on a payment route that landed on time. It moves when something goes wrong on the route, and recovers slowly as payments land."
 msgstr ""
@@ -10133,6 +10461,10 @@ msgstr ""
 msgid "Time on the road: %s"
 msgstr ""
 
+#: scripts/ui/modals/run_card_modal.gd:44
+msgid "Time played"
+msgstr ""
+
 #: scripts/ui/phone_ui.gd:134
 msgid "Timeline"
 msgstr ""
@@ -10271,10 +10603,6 @@ msgstr ""
 
 #: scripts/world/actions.gd:266
 msgid "Two hours behind your own counter: %d customers served."
-msgstr ""
-
-#: scripts/sim/bank.gd:248
-msgid "Two missed payments. The bank has called loan %s: %s is due in full within 7 days."
 msgstr ""
 
 #: scripts/sim/month_close.gd:82
@@ -10461,6 +10789,10 @@ msgstr ""
 msgid "Vehicles & upkeep"
 msgstr ""
 
+#: data/scenarios/venture_fund.json
+msgid "Venture funding"
+msgstr ""
+
 #: data/suppliers/verdant_supply.json
 msgid "Verdant Supply"
 msgstr ""
@@ -10617,7 +10949,7 @@ msgstr ""
 msgid "Walked out"
 msgstr ""
 
-#: autoload/scene_router.gd:186
+#: autoload/scene_router.gd:194
 msgid "Walking to %s… (%d min)"
 msgstr ""
 
@@ -10689,8 +11021,16 @@ msgstr ""
 msgid "Wed"
 msgstr ""
 
+#: scripts/ui/modals/new_run_modal.gd:69
+msgid "Week %s · %s · %d points · %s"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:291
 msgid "Week of"
+msgstr ""
+
+#: scripts/ui/modals/new_run_modal.gd:144
+msgid "Weekly challenge uses fixed standard rules, seed and sandbox. Changing any choice starts a regular run."
 msgstr ""
 
 #: scripts/sim/careers.gd:79
@@ -10853,6 +11193,10 @@ msgstr ""
 msgid "Work on your laptop — Company OS"
 msgstr ""
 
+#: scripts/ui/modals/run_card_modal.gd:44
+msgid "Work shifts"
+msgstr ""
+
 #: scripts/ui/modals/business_board.gd:138
 msgid "Work shifts on site: walk to the workplace's staff door and press E."
 msgstr ""
@@ -10917,7 +11261,7 @@ msgstr ""
 msgid "You already have a job ad running."
 msgstr ""
 
-#: scripts/sim/careers.gd:230
+#: scripts/sim/careers.gd:231
 msgid "You already have as many gigs as you can handle."
 msgstr ""
 
@@ -10995,6 +11339,10 @@ msgstr ""
 
 #: data/dialogue/lina_intro.json
 msgid "You have three ways to pay abroad now."
+msgstr ""
+
+#: data/scenarios/family_property.json
+msgid "You inherit one Maple Court apartment and its mortgage. Rent can fall vacant; work helps cover the payments."
 msgstr ""
 
 #: data/story/chapters.json
@@ -11149,7 +11497,7 @@ msgstr ""
 msgid "You're trending"
 msgstr ""
 
-#: scripts/sim/careers.gd:167
+#: scripts/sim/careers.gd:168
 msgid "You've earned it: you're our new %s. New rate: $%d an hour."
 msgstr ""
 
@@ -11287,6 +11635,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "Your money is locked with a neutral party and released to the supplier only when the goods arrive."
+msgstr ""
+
+#: data/help/help.json
+msgid "Your opening card shows the objective, seed and deadline. Cash, debts and assets are real ledger entries."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1404
@@ -12039,10 +12391,6 @@ msgstr ""
 
 #: scripts/ui/modals/save_list_modal.gd:57
 msgid "this game"
-msgstr ""
-
-#: scripts/sim/insolvency.gd:193
-msgid "three payrolls in a row went unpaid"
 msgstr ""
 
 #: data/businesses/consulting.json
