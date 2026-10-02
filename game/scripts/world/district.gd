@@ -66,6 +66,8 @@ func build(district_id: String) -> void:
 		_add_building(facade(f), float(f["x"]), "", {})
 	for p in def.get("props", []):
 		add_prop(p)
+	for p in Energy.street_props(district_id):   # chargers the player built stand on the pavement
+		add_prop(p)
 	# metro entrance
 	var m: Dictionary = def.get("metro", {})
 	if not m.is_empty():

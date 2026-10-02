@@ -33,7 +33,7 @@ func test_opening_gates_world_and_registry() -> void:
 	Living.lease("unit12_factory")
 	runner.check(Manufacturing.start()["ok"], "lease unlocks")
 	runner.eq(DataDB.district_def_in_city("industrial")["status"], "active", "district active")
-	runner.check(DataDB.districts["industrial"]["buildings"].size() == 4, "four locations")
+	runner.check(DataDB.districts["industrial"]["buildings"].size() >= 4, "manufacturing locations (energy adds more)")
 	runner.check(Industries.tabs().any(func(tab): return tab["id"] == "manufacturing"), "registered tab")
 	runner.check(not Manufacturing.acquire_machine(false, true)["ok"], "automation requires genuine lending")
 	runner.check(not Manufacturing.order_material(1)["ok"], "MOQ enforced")

@@ -114,6 +114,11 @@ func run() -> void:
 		SceneRouter._enter("interior","riverside_apartment","bed_side","")
 		await wait_world()
 		await _hotel()
+		GameState.new_game({"name":"Energy Founder","seed":69001})
+		await _fast_forward_to_ch10()
+		SceneRouter._enter("interior","riverside_apartment","bed_side","")
+		await wait_world()
+		await _energy()
 		await _save_load()
 
 
@@ -1964,6 +1969,51 @@ func _hotel() -> void:
 	await bot.use_action("hotel_open")
 	await bot.click_named("HotelTab_reviews")
 	await bot.shot("guest_reviews")
+func _energy() -> void:
+	bot.step("Industrial - lease warehouse, Roof Survey, subsidy, install and first solar invoice")
+	await popups()
+	await close_modal()
+	if SceneRouter.world_scene().kind=="interior":await exit_building()
+	await metro_to("industrial")
+	await bot.shot("industrial_energy_day")
+	await enter_building("helio_warehouse")
+	await bot.use_action("lease_property")
+	await bot.click_named("SignLease_helio_warehouse")
+	await close_modal()
+	await bot.use_action("energy_open")
+	await bot.click_named("OpenEnergy")
+	await close_modal()
+	var chosen := ""
+	for week in 6:
+		for lead in Energy.open_leads():
+			if lead["kind"]=="own":continue
+			await bot.use_action("energy_open")
+			await bot.click_named("Survey_"+lead["id"])
+			await bot.click_named("AutoLayout")
+			await bot.shot("roof_survey")
+			await bot.click_named("SendQuote")
+			await close_modal()
+			if lead["status"]=="won":
+				for job in Energy.S()["installs"]:
+					if Energy.S()["installs"][job]["lead"]==lead["id"]:chosen=job
+				break
+		if chosen!="":break
+		Clock.advance(7*Clock.DAY)
+		await popups()
+	bot.expect(chosen!="","actual Roof Survey quote wins a client job")
+	if chosen=="":return
+	await bot.use_action("energy_open")
+	await bot.click_named("EnergyTab_installs")
+	await bot.click_named("StartInstall_"+chosen)
+	await close_modal()
+	Clock.advance(30*Clock.DAY)
+	await popups()
+	bot.expect(Energy.S()["installs"][chosen]["status"]=="delivered","crew-days finish the install")
+	bot.expect(Jobs.get_job(chosen)["status"] in ["invoiced","paid"],"first solar income is a traceable Jobs invoice")
+	bot.expect(Ledger.check_balanced(),"materials, install and invoice balance")
+	await bot.use_action("energy_open")
+	await bot.click_named("EnergyTab_installs")
+	await bot.shot("energy_installs")
 	await close_modal()
 	await exit_building()
 	await metro_to("riverside")

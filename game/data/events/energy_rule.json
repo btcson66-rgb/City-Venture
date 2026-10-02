@@ -1,0 +1,50 @@
+{
+ "id": "energy_rule",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:energy_active",
+   "flag:energy_chargers"
+  ],
+  "chance": 0.008,
+  "cooldown_days": 60,
+  "earliest_day": 10
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "ms_okoro",
+  "title": "Accessible charging bay rule",
+  "icon": "warning",
+  "lines": [
+   "A new rule requires an accessible bay at every public charging station. Retrofit now, or apply for an exemption and risk fines."
+  ]
+ },
+ "choices": [
+  {
+   "id": "retrofit",
+   "label": "Retrofit every station",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "energy",
+     "kind": "rule_retrofit"
+    }
+   ],
+   "outcome": "Certain cost, no fine."
+  },
+  {
+   "id": "exempt",
+   "label": "File for an exemption",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "energy",
+     "kind": "rule_exempt"
+    }
+   ],
+   "outcome": "Cheap if granted; a fine and a reputation hit if refused."
+  }
+ ]
+}
