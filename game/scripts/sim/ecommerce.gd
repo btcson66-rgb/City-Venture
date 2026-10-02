@@ -724,7 +724,7 @@ static func ad_factor(l: Dictionary) -> float:
 
 
 static func demand_mult(product_id: String) -> float:
-	var m := 1.0 + Staff.demand_boost()
+	var m := (1.0 + Staff.demand_boost()) * Media.demand_boost("ecommerce")
 	if bool(DataDB.product(product_id).get("eco", false)):
 		m *= World.eco_demand_mult()   # Year 4 on: green products are in demand
 	if packaging() == "recycled" and World.packaging_levy() > 0.0:

@@ -1456,4 +1456,5 @@ func _tab_segments() -> void:
 			content.add_child(UIK.label(label, 9, Art.C_SKY, true))
 			for field in [["Net revenue", "net_revenue"], ["Gross profit", "gross_profit"], ["Operating expenses", "opex"], ["Allocated", "allocated"], ["Operating profit", "operating_profit"]]:
 				content.add_child(UIK.kv(field[0], Fmt.money(row[field[1]])))
+			if float(row["internal_cost"])>0:content.add_child(UIK.kv("Included internal media cost",Fmt.money(row["internal_cost"])))
 		content.add_child(UIK.kv("Total operating profit", Fmt.money(report["totals"]["operating_profit"])))

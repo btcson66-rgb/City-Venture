@@ -1,0 +1,37 @@
+{
+ "id": "media_client",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:media_active"
+  ],
+  "chance": 0.012,
+  "cooldown_days": 21,
+  "earliest_day": 4
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "imani_cole",
+  "title": "Client switches agencies",
+  "icon": "warning",
+  "lines": [
+   "A major client left. Cancel the remaining media plan and refund the unused advance."
+  ]
+ },
+ "choices": [
+  {
+   "id": "respond",
+   "label": "Review the campaign and respond",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "media",
+     "kind": "client"
+    }
+   ],
+   "outcome": "A major client left. Cancel the remaining media plan and refund the unused advance."
+  }
+ ]
+}

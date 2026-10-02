@@ -205,7 +205,7 @@ static func rating_factor() -> float:
 
 
 static func ads_factor() -> float:
-	return 1.0 + 0.35 * (1.0 - exp(-float(S()["ads"]) / 25.0))
+	return (1.0 + 0.35 * (1.0 - exp(-float(S()["ads"]) / 25.0))) * Media.demand_boost("cafe")
 
 
 ## Expected customers who want a coffee in hour `hh` (before the counter's capacity and the supplies).

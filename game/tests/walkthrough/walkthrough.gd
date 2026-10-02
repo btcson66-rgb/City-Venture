@@ -17,6 +17,11 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from")=="media":
+		await _fast_forward_to_ch10()
+		await _media()
+		await _save_load()
+		return
 	if _arg("from")=="real_estate":
 		await _fast_forward_to_ch10()
 		await _real_estate()
@@ -85,6 +90,13 @@ func run() -> void:
 		SceneRouter._enter("interior","riverside_apartment","bed_side","")
 		await wait_world()
 		await _real_estate()
+		await _save_load()
+		await close_modal()
+		GameState.new_game({"name":"Media Founder","seed":66001})
+		await _fast_forward_to_ch10()
+		SceneRouter._enter("interior","riverside_apartment","bed_side","")
+		await wait_world()
+		await _media()
 		await _save_load()
 
 
@@ -1713,3 +1725,59 @@ func _save_load() -> void:
 	bot.expect(absf(Clock.now() - t) <= 2, "time restored after load")
 	bot.expect(GameState.data["player"]["location"]["id"] == loc["id"], "location restored (%s)" % loc["id"])
 	await bot.shot("after_load")
+
+func _media() -> void:
+	var previous_auto := MiniGames.auto
+	MiniGames.auto=-1
+	bot.step("University — lease studio, creative pitch, media mix and first client invoice")
+	await popups()
+	await close_modal()
+	if SceneRouter.world_scene().kind=="interior":await exit_building()
+	await metro_to("university")
+	await bot.shot("university_day")
+	await enter_building("the_loft")
+	await bot.use_action("lease_property")
+	await bot.click_named("SignLease_loft_office")
+	await close_modal()
+	await bot.use_action("media_open")
+	await bot.click_named("OpenAgency")
+	await close_modal()
+	var chosen := ""
+	for week in 8:
+		for brief in Media.S()["briefs"].values().duplicate():
+			if brief["status"]!="open":continue
+			await bot.use_action("media_open")
+			await bot.click_named("CreativePitch_"+brief["id"])
+			await bot.wait(.4)
+			await bot.click_named("StartGame")
+			for i in 3:
+				await bot.click_named("CreativeCard_"+["slogan","visual","tone"][i]+"_"+str(int(brief["preferences"][i])))
+			await bot.shot("creative_pitch_result")
+			await bot.click_named("FinishGame")
+			await bot.click_named("Propose_"+brief["id"])
+			await close_modal()
+			if brief["status"]=="won":chosen=brief["id"];break
+		if chosen!="":break
+		Clock.advance(7*Clock.DAY)
+		await popups()
+	bot.expect(chosen!="","actual creative cards and proposal win a client job")
+	if chosen=="":return
+	await bot.use_action("media_open")
+	await bot.click_named("MediaTab_mixer")
+	await bot.click_named("SelectCampaign_"+chosen)
+	await bot.click_named("MixMore_radio")
+	await bot.shot("campaign_mixer")
+	await close_modal()
+	Clock.advance(int(Media.cfg()["campaign_days"])*Clock.DAY)
+	await popups()
+	bot.expect(Media.S()["campaigns"][chosen]["status"]=="completed","daily campaign finishes actual client work")
+	bot.expect(Jobs.get_job(chosen)["status"]=="invoiced","first agency income is a traceable Jobs invoice")
+	bot.expect(Ledger.check_balanced(),"campaign costs and invoice balance")
+	await bot.use_action("media_open")
+	await bot.click_named("MediaTab_reports")
+	await bot.shot("campaign_report")
+	await close_modal()
+	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")
+	MiniGames.auto=previous_auto

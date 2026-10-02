@@ -438,6 +438,14 @@ msgstr "%s 订阅收入——%d 位用户"
 msgid "%s till: %d customers"
 msgstr "%s 收银：%d 位客人"
 
+#: scripts/ui/media_ui.gd:137
+msgid "%s · %.0f%% · CPM %s · audience fit %.0f%%"
+msgstr "%s · %.0f%% · 每千次曝光 %s · 客群符合度 %.0f%%"
+
+#: scripts/ui/media_ui.gd:147
+msgid "%s · %d campaign days · spend %s · impressions %d · relevant reach %d · clicks %d · conversions %d"
+msgstr "%s · 活动 %d 天 · 投放 %s · 曝光 %d 次 · 有效触及 %d 人次 · 点击 %d 次 · 转换 %d 人次"
+
 #: scripts/ui/real_estate_ui.gd:129
 msgid "%s · %d rooms · minimum %s · %s"
 msgstr "%s · %d 房 · 底价 %s · %s"
@@ -465,6 +473,10 @@ msgstr "%s · 帐面 %s · 市价 %s · 月租 %s"
 #: scripts/ui/real_estate_ui.gd:133
 msgid "%s · budget %s · %d rooms · urgency %d/5 · %s"
 msgstr "%s · 预算 %s · %d 房 · 急迫度 %d/5 级 · %s"
+
+#: scripts/ui/media_ui.gd:73
+msgid "%s · budget %s · %s · audience %s · %d days remaining"
+msgstr "%s · 预算 %s · %s · 客群 %s · 剩余 %d 天"
 
 #: scripts/ui/real_estate_ui.gd:178
 msgid "%s · budget %s · paid %s · completion in %d days"
@@ -703,6 +715,14 @@ msgid "A buyer usually pays a multiple of yearly profit, plus the company's cash
 msgstr "买家通常会付年获利的几倍，再加上公司的现金和库存，扣掉公司欠的钱。"
 
 #: data/help/glossary.json
+msgid "A campaign aims for relevant reach or conversions, then reports actual measured results."
+msgstr "活动以有效触及或转换为目标，并回报实际测量结果。"
+
+#: data/events/media_pr.json
+msgid "A campaign message upset its audience. Repair it at a cost or keep spending with weaker creative."
+msgstr "活动消息引起客群不满。可付费修复，或以较差的创意继续投放。"
+
+#: data/help/glossary.json
 msgid "A charge per parcel padded with plastic, under the Clean Packaging Act (Year 4)."
 msgstr "第 4 年《清洁包装法》上路后，用塑料缓冲材的包裹每件都要缴的费用。"
 
@@ -721,6 +741,10 @@ msgstr "公司可以失败，你不会。选择接下来怎么做："
 #: scripts/ui/modals/company_os.gd:196
 msgid "A contract offer is waiting in Contracts."
 msgstr "「合约」里有一份报价在等你。"
+
+#: data/economy/staff.json
+msgid "A designer and media buyer unlock three simultaneous client campaigns."
+msgstr "设计师和媒体采购员可让你同时运行三场客户活动。"
 
 #: data/help/glossary.json
 msgid "A fast route that fails one time in ten can cost more than a slow one that never does. Look at the record, not just the speed."
@@ -758,9 +782,17 @@ msgstr "最低订购量低，就能用小钱试卖新商品；订得多，就有
 msgid "A low quote may lose money; a high quote loses the client."
 msgstr "报价太低可能亏损；报价太高会失去客户。"
 
+#: data/events/media_client.json
+msgid "A major client left. Cancel the remaining media plan and refund the unused advance."
+msgstr "大客户离开了。取消剩余投放计划，并退还未使用的预付款。"
+
 #: data/jobs/cowork_host.json
 msgid "A member asks where to find cheap suppliers. You point them to Ken."
 msgstr "有会员问哪里找便宜的供应商，你介绍他去找 Ken。"
+
+#: data/help/glossary.json
+msgid "A missed target lowers reputation and future brief opportunities."
+msgstr "未达目标会降低声誉及未来客户需求机会。"
 
 #: data/help/glossary.json
 msgid "A monthly premium that covers accidents, theft and damage to your van and what is in it."
@@ -797,6 +829,10 @@ msgstr "真正的办公室：门上和招牌挂着你的公司名，有张像样
 #: data/jobs/barista.json
 msgid "A regular tells you she only buys what she can see on the counter. Noted."
 msgstr "一位熟客说她只买看得到、摆在柜台上的东西。记下来了。"
+
+#: data/help/glossary.json
+msgid "A rejected pitch still costs time and money."
+msgstr "未得标的提案仍会耗费时间与金钱。"
 
 #: autoload/ui_root.gd:225
 msgid "A rough shift: it doesn't count toward your next promotion."
@@ -954,9 +990,25 @@ msgstr "配件"
 msgid "Accuracy and speed decide how much of the work gets done in this session."
 msgstr "正确率和速度决定这一段时间完成多少工作。"
 
+#: scripts/sim/media.gd:198
+msgid "Acquire Campus Radio before selling advertising inventory."
+msgstr "请先收购 Campus Radio，再出售广告库存。"
+
+#: scripts/ui/media_ui.gd:176
+msgid "Acquire Campus Radio · %s"
+msgstr "收购 Campus Radio · %s"
+
+#: scripts/sim/media.gd:186
+msgid "Acquired Campus Radio and its finite advertising inventory."
+msgstr "已收购 Campus Radio 及其有限广告库存。"
+
 #: scripts/sim/bank.gd:134
 msgid "Active contracts cover this condition: %s still to collect."
 msgstr "有效合约已符合此条件：尚有 %s 待收款。"
+
+#: data/help/glossary.json
+msgid "Ad contracts earn money; an unsold audience still costs upkeep."
+msgstr "广告合约可带来收入；没有售出的受众仍须支付营运费。"
 
 #: data/events/ad_cost_spike.json
 msgid "Ad prices spike"
@@ -1018,6 +1070,10 @@ msgstr "上完班累了：回家睡觉吧（下班后随时可以睡，或晚上
 msgid "Afternoon · Sunny"
 msgstr "下午 · 晴"
 
+#: scripts/sim/media.gd:72
+msgid "Agency proposal"
+msgstr "代理商提案"
+
 #: data/regions/solterra.json
 msgid "Agriculture"
 msgstr "农业"
@@ -1053,6 +1109,10 @@ msgstr "一切平静。出去走走吧。"
 #: scripts/ui/modals/save_list_modal.gd:20
 msgid "All save slots are in use. Choose one for the new game. The old save is moved to a backup folder, not deleted."
 msgstr "存盘字段都满了。选一个给新游戏用，旧存盘会移到备份文件夹，不会删掉。"
+
+#: data/help/help.json
+msgid "Allocate the budget across channels. CPM buys impressions, audience fit and saturation limit relevant reach. Adjust the mix while running."
+msgstr "将预算分配至各管道。曝光费用决定曝光量；客群符合度与饱和限制有效触及。活动期间可以调整配置。"
 
 #: data/help/glossary.json
 msgid "Allocate weekly hours. Each machine needs one hour between batches."
@@ -1302,6 +1362,14 @@ msgstr "Atlas 搬家公司"
 msgid "Auburn"
 msgstr "红棕"
 
+#: scripts/ui/media_ui.gd:182
+msgid "Audience %d listeners · %d impressions available today"
+msgstr "听众 %d 人 · 今日可售曝光 %d 次"
+
+#: scripts/ui/minigames/creative_pitch.gd:22
+msgid "Audience: %s"
+msgstr "客群：%s"
+
 #: data/economy/freelance.json
 msgid "Audit the online store of %s"
 msgstr "帮 %s 健检网络商店"
@@ -1337,6 +1405,10 @@ msgstr "奥瑞莉亚职人合作社"
 #: scripts/ui/modals/metro_modal.gd:10
 msgid "Aurelia Metro — %s"
 msgstr "奥瑞莉亚捷运——%s"
+
+#: data/buildings/aurelia_university.json
+msgid "Aurelia University"
+msgstr "Aurelia University"
 
 #: data/story/chapters.json
 msgid "Aurelia goes electric."
@@ -1538,6 +1610,10 @@ msgstr "审核中。"
 msgid "Bello"
 msgstr "Bello"
 
+#: data/economy/media.json
+msgid "Belong together"
+msgstr "一起找到归属"
+
 #: data/events/low_cash_warning.json
 msgid "Belt tightened."
 msgstr "裤带勒紧了。"
@@ -1625,6 +1701,10 @@ msgstr "鲍伯头"
 #: scripts/frontend/character_creator.gd:123
 msgid "Body"
 msgstr "身形"
+
+#: data/economy/media.json
+msgid "Bold colour"
+msgstr "鲜明色彩"
 
 #: data/dialogue/maya_intro.json
 msgid "Bold. Love it."
@@ -1770,6 +1850,10 @@ msgstr "预算维持不变。"
 msgid "Budget, rooms, neighborhood and urgency determine client fit. Negotiation changes commission and acceptance."
 msgstr "预算、房数、区域与急迫度决定需求配对，议价策略则影响佣金与成交率。"
 
+#: scripts/ui/media_ui.gd:79
+msgid "Build Creative Pitch"
+msgstr "制作创意提案"
+
 #: data/economy/freelance.json
 msgid "Build a cash-flow spreadsheet for %s"
 msgstr "帮 %s 做现金流量表"
@@ -1789,6 +1873,10 @@ msgstr "做一次，每个月都能卖。先投入开发工时（你用笔电写
 #: data/businesses/saas.json
 msgid "Build it once, sell it every month. Development hours now, subscribers later: price, churn and servers decide if it works."
 msgstr "做一次，每个月都能卖。先投入开发工时，之后才有订阅用户：价格、流失率和服务器成本决定成败。"
+
+#: scripts/ui/minigames/creative_pitch.gd:15
+msgid "Build the client pitch from slogan, visual and tone cards."
+msgstr "选择标语、视觉与语气卡，组合客户提案。"
 
 #: scripts/ui/modals/company_os.gd:1106
 msgid "Build this"
@@ -1890,6 +1978,10 @@ msgstr "购买 %s"
 msgid "Buy %s · price %s · down %s"
 msgstr "购入 %s · 房价 %s · 头期 %s"
 
+#: data/help/glossary.json
+msgid "Buy Campus Radio as a depreciating asset and sell finite audience impressions."
+msgstr "将 Campus Radio 购入为折旧资产，出售有限的受众曝光。"
+
 #: scripts/ui/tutorial.gd:44
 msgid "Buy a Day Pass"
 msgstr "买一张日票"
@@ -1945,6 +2037,10 @@ msgstr "进第一批货（Company OS → 营运）。用家里的笔电或共享
 #: scripts/ui/modals/clothing_shop_modal.gd:65
 msgid "Buy — %s"
 msgstr "购买——%s"
+
+#: scripts/ui/media_ui.gd:176
+msgid "BuyCampusRadio"
+msgstr "BuyCampusRadio"
 
 #: scripts/ui/manufacturing_ui.gd:89
 msgid "BuyMachine"
@@ -2082,6 +2178,14 @@ msgstr "还价"
 msgid "COUNTERED"
 msgstr "已还价"
 
+#: data/help/glossary.json
+msgid "CPM and saturation"
+msgstr "每千次曝光费用与饱和"
+
+#: data/help/glossary.json
+msgid "CPM is the cost of one thousand impressions. Repeated spending on one channel produces less fresh reach."
+msgstr "CPM 是每一千次曝光的费用。同一管道重复投放，添加加的触及会减少。"
+
 #: scripts/frontend/character_creator.gd:47
 msgid "CREATE YOUR CHARACTER"
 msgstr "创建你的角色"
@@ -2097,6 +2201,10 @@ msgstr "今日客人"
 #: data/buildings/customs_house.json
 msgid "CUSTOMS HOUSE"
 msgstr "海关大楼"
+
+#: scripts/ui/media_ui.gd:159
+msgid "Cafe"
+msgstr "咖啡店"
 
 #: data/businesses/cafe.json
 msgid "Cafe / Food"
@@ -2146,9 +2254,73 @@ msgstr "撑过了跨链桥事件。"
 msgid "Came through the cash crunch."
 msgstr "撑过了现金危机。"
 
+#: data/help/glossary.json
+msgid "Campaign KPI"
+msgstr "活动目标"
+
+#: scripts/ui/media_ui.gd:10
+msgid "Campaign Mixer"
+msgstr "广告活动配置"
+
+#: data/help/help.json
+msgid "Campaign Mixer: brief to results"
+msgstr "广告活动配置：从需求到成果"
+
+#: data/help/glossary.json
+msgid "Campaign agency"
+msgstr "广告代理商"
+
+#: data/economy/staff.json
+msgid "Campaign designer"
+msgstr "活动设计师"
+
+#: scripts/ui/media_ui.gd:151
+msgid "Campaign in progress; adjust its media mix."
+msgstr "活动进行中；下一步调整媒体配置。"
+
+#: scripts/sim/media.gd:113
+msgid "Campaign media purchase after rebate"
+msgstr "扣除回扣后的活动媒体采购"
+
+#: scripts/sim/media.gd:81
+msgid "Campaign proposal won: %s."
+msgstr "活动提案得标：%s。"
+
+#: data/events/media_pr.json
+msgid "Campaign public-relations crisis"
+msgstr "活动公关危机"
+
+#: scripts/sim/media.gd:216
+msgid "Campaign public-relations repair"
+msgstr "活动公关修复"
+
+#: scripts/sim/media.gd:157
+msgid "Campaign report completed: %s."
+msgstr "活动报告已完成：%s。"
+
+#: scripts/ui/media_ui.gd:141 scripts/ui/media_ui.gd:145 scripts/ui/media_ui.gd:43
+msgid "Campaign reports"
+msgstr "活动报告"
+
 #: data/businesses/media.json
 msgid "Campaigns, creators and reputation."
 msgstr "活动、创作者，还有口碑。"
+
+#: data/buildings/campus_radio.json data/economy/media.json scripts/sim/media.gd:181
+msgid "Campus Radio"
+msgstr "Campus Radio"
+
+#: scripts/sim/media.gd:195
+msgid "Campus Radio measured advertising slot"
+msgstr "Campus Radio 可衡量的广告时段"
+
+#: scripts/sim/media.gd:228
+msgid "Campus Radio upkeep"
+msgstr "Campus Radio 营运维护"
+
+#: scripts/sim/media.gd:195
+msgid "Campus advertiser"
+msgstr "校园广告客户"
 
 #: scripts/ui/modals/business_board.gd:61
 msgid "Can grow into"
@@ -2221,6 +2393,10 @@ msgstr "注资给 %s"
 #: scripts/ui/minigames/barista_game.gd:7
 msgid "Cappuccino"
 msgstr "卡布奇诺"
+
+#: data/economy/media.json
+msgid "Care for every home"
+msgstr "照顾每一个家"
 
 #: data/economy/staff.json
 msgid "Careful: fewer mistakes, fewer returns."
@@ -2322,6 +2498,14 @@ msgstr "换衣服和配件。只影响外观，不会改变任何数值。更多
 msgid "Changed my mind."
 msgstr "我改变主意了。"
 
+#: scripts/sim/media.gd:96 scripts/sim/media.gd:98
+msgid "Channel shares must total 100 percent."
+msgstr "所有管道的预算占比合计须为 100%。"
+
+#: data/events/media_price.json
+msgid "Channels raised CPM. Adjust the mix before the next daily buying cycle."
+msgstr "管道调高每千次曝光费用。请在下次每日采购前调整配置。"
+
 #: data/dialogue/maya_cafe.json
 msgid "Chaos is just growth without a spreadsheet."
 msgstr "混乱只是没做试算表的成长。"
@@ -2394,9 +2578,25 @@ msgstr "选一门生意"
 msgid "Choose a factory machine."
 msgstr "请选择厂内机台。"
 
+#: scripts/sim/media.gd:160 scripts/sim/media.gd:163
+msgid "Choose a paused campaign and fund its next media purchase."
+msgstr "请选择暂停的活动，并备妥下一次媒体采购资金。"
+
 #: scripts/sim/real_estate.gd:124
 msgid "Choose a project scale and a name of 1–32 characters."
 msgstr "请选择建案规模，名称需为 1–32 个字符。"
+
+#: scripts/sim/media.gd:92
+msgid "Choose a running campaign."
+msgstr "请选择进行中的活动。"
+
+#: scripts/sim/media.gd:172
+msgid "Choose a running group business and a valid media budget."
+msgstr "请选择营运中的集团业务及有效媒体预算。"
+
+#: data/help/help.json
+msgid "Choose a slogan, visual and tone. The brief and university mentor explain the audience preferences."
+msgstr "选择标语、视觉与语气。需求及大学导师会说明客群偏好。"
 
 #: scripts/sim/manufacturing.gd:120 scripts/sim/manufacturing.gd:194
 msgid "Choose an active OEM order."
@@ -2413,6 +2613,14 @@ msgstr "请选择未来一周内的整点时段。"
 #: scripts/sim/jobs.gd:55
 msgid "Choose an offered construction contract."
 msgstr "请选择待接受的工程合约。"
+
+#: scripts/sim/media.gd:70
+msgid "Choose an open brief with a free campaign slot."
+msgstr "请选择有效需求，并保留一个活动名额。"
+
+#: scripts/sim/media.gd:58
+msgid "Choose an open client brief."
+msgstr "请选择尚未结案的客户需求。"
 
 #: scripts/sim/real_estate.gd:61
 msgid "Choose an open owner mandate and a matching client."
@@ -2482,6 +2690,10 @@ msgstr "课程时间表"
 msgid "Clean Packaging Act passes: $0.40 levy on plastic-padded parcels."
 msgstr "《洁净包装法》通过：塑料缓冲包裹每件课 $0.40。"
 
+#: data/economy/media.json
+msgid "Clean charts"
+msgstr "简洁图表"
+
 #: data/economy/freelance.json
 msgid "Clean up the books of %s"
 msgstr "帮 %s 整理帐务"
@@ -2502,6 +2714,14 @@ msgstr "喀嚓！%d%%（%s）"
 msgid "Client"
 msgstr "客户"
 
+#: scripts/ui/media_ui.gd:70
+msgid "Client brief"
+msgstr "客户需求"
+
+#: scripts/ui/media_ui.gd:152 scripts/ui/media_ui.gd:169 scripts/ui/media_ui.gd:43
+msgid "Client briefs"
+msgstr "客户需求"
+
 #: scripts/ui/real_estate_ui.gd:58
 msgid "Client matches"
 msgstr "客户配对"
@@ -2513,6 +2733,14 @@ msgstr "客户付款"
 #: scripts/sim/careers.gd:301
 msgid "Client payment — %s"
 msgstr "客户付款——%s"
+
+#: scripts/ui/media_ui.gd:75
+msgid "Client preferences: %s / %s / %s"
+msgstr "客户偏好：%s／%s／%s"
+
+#: data/events/media_client.json
+msgid "Client switches agencies"
+msgstr "客户更换代理商"
 
 #: scripts/ui/minigames/typing_game.gd:44 scripts/ui/modals/company_os.gd:1058
 msgid "Client work"
@@ -2690,6 +2918,10 @@ msgstr "公司登记"
 msgid "Company registration fee — %s"
 msgstr "公司登记规费——%s"
 
+#: scripts/sim/media.gd:180
+msgid "Complete two campaigns and hire a designer and media buyer before buying Campus Radio."
+msgstr "完成两场活动，聘用设计师与媒体采购员后，再收购 Campus Radio。"
+
 #: scripts/ui/manufacturing_ui.gd:153
 msgid "Completed"
 msgstr "已完成"
@@ -2774,6 +3006,10 @@ msgstr "货柜、海关和货运。租下 7 号码头放库存，向 Sam 买一�
 msgid "Continue"
 msgstr "继续"
 
+#: data/events/media_pr.json
+msgid "Continue with weaker creative"
+msgstr "以较差的创意继续投放"
+
 #: scripts/sim/contracts.gd:258
 msgid "Contract %s delivered to %s: %d × %s @ %s"
 msgstr "合约 %s 已交货给 %s：%d × %s @ %s"
@@ -2797,6 +3033,10 @@ msgstr "公司关闭后的合约"
 #: data/help/help.json
 msgid "Contracts: business deals"
 msgstr "合约：企业订单"
+
+#: scripts/ui/media_ui.gd:73
+msgid "Conversions"
+msgstr "转换人次"
 
 #: scripts/sim/cafe.gd:53
 msgid "Corner"
@@ -2885,6 +3125,42 @@ msgstr "快递 · 经济 3 天（%s）"
 #: scripts/ui/modals/pack_ship_modal.gd:48
 msgid "Courier · Express 1d (%s)"
 msgstr "快递 · 快捷 1 天（%s）"
+
+#: scripts/ui/minigames/creative_pitch.gd:11
+msgid "Creative Pitch"
+msgstr "创意提案"
+
+#: data/help/help.json
+msgid "Creative Pitch: read the client preferences"
+msgstr "创意提案：阅读客户偏好"
+
+#: scripts/sim/media.gd:60
+msgid "Creative pitch production"
+msgstr "创意提案制作"
+
+#: data/help/glossary.json
+msgid "Creative quality"
+msgstr "创意品质"
+
+#: scripts/ui/media_ui.gd:76
+msgid "Creative quality %.0f%% · service fee %s · media rebate %.0f%% · Net 30"
+msgstr "创意品质 %.0f%% · 服务费 %s · 媒体回扣 %.0f%% · 30 天帐期"
+
+#: scripts/ui/minigames/creative_pitch.gd:32
+msgid "Creative quality: %d%%. Client fit changes campaign clicks."
+msgstr "创意品质：%d%%。符合客群偏好会影响活动点击数。"
+
+#: data/economy/staff.json
+msgid "Creative skill improves campaign click-through. Salary is due even when a pitch loses."
+msgstr "创意能力可提升活动点击率。即使提案落选，也须支付薪资。"
+
+#: data/npcs/kai_morgan.json
+msgid "Creator and KOL"
+msgstr "创作者与意见领袖"
+
+#: data/dialogue/kai_morgan_intro.json
+msgid "Creator collaborations reach students. Check the audience mix and CPM before buying. Strong creative raises clicks; a missed KPI hurts the agency reputation."
+msgstr "创作者合作能触及学生。采购前先检查客群分布与每千次曝光费用。好创意可增加点击；未达目标会降低代理商声誉。"
 
 #: scripts/ui/modals/company_os.gd:273
 msgid "Credit score"
@@ -3013,6 +3289,10 @@ msgstr "DOCKSIDE MOTORS"
 #: scripts/ui/modals/company_os.gd:1347
 msgid "DRIVERS"
 msgstr "司机"
+
+#: data/help/help.json
+msgid "Daily reports track impressions, clicks and conversions. Finish the scope, then invoice service fees, media rebates and earned KPI bonuses."
+msgstr "每日报告追踪曝光、点击与转换。完成工作范围后，开立服务费、媒体回扣及达标奖金的发票。"
 
 #: data/npcs/daniel.json
 msgid "Daniel Wong"
@@ -3334,9 +3614,17 @@ msgstr "金融科技业抢进口商，数字美元付款量翻倍。"
 msgid "Dining"
 msgstr "餐饮"
 
+#: data/economy/media.json
+msgid "Direct"
+msgstr "直接"
+
 #: scripts/sim/ecommerce.gd:1178
 msgid "Dispute lost on %s: −%s"
 msgstr "申诉败诉 %s：−%s"
+
+#: data/help/glossary.json
+msgid "Distribute spending by audience, not just the cheapest CPM."
+msgstr "应依客群分配预算，不能只选最便宜的曝光。"
 
 #: data/help/help.json
 msgid "Districts marked Open can be visited now. Planned ones arrive in later updates."
@@ -3397,6 +3685,10 @@ msgstr "双份浓缩"
 #: scripts/ui/real_estate_ui.gd:154
 msgid "Down payment: %.0f%%"
 msgstr "头期款：%.0f%%"
+
+#: data/npcs/imani_cole.json
+msgid "Dr. Imani Cole"
+msgstr "Dr. Imani Cole"
 
 #: scripts/ui/minigames/photo_shoot_game.gd:104
 msgid "Drag the product in the frame"
@@ -3526,7 +3818,7 @@ msgstr "赚到你的第一块钱。"
 msgid "Earn-out"
 msgstr "绩效尾款（Earn-out）"
 
-#: data/businesses/ecommerce.json scripts/sim/ecommerce.gd:1343
+#: data/businesses/ecommerce.json scripts/sim/ecommerce.gd:1343 scripts/ui/media_ui.gd:159
 msgid "Ecommerce"
 msgstr "电商"
 
@@ -3890,6 +4182,10 @@ msgstr "普通"
 msgid "Fair. Boring and safe has its place."
 msgstr "也对。无聊又安全，自有它的价值。"
 
+#: data/economy/media.json
+msgid "Families"
+msgstr "家庭"
+
 #: data/regions/karu.json
 msgid "Fast growth"
 msgstr "成长快速"
@@ -3961,6 +4257,10 @@ msgstr "金融：利润不等于现金"
 #: data/city/aurelia.json data/districts/financial.json scripts/ui/minigames/pack_game.gd:9 scripts/ui/minigames/parcel_sort_game.gd:8
 msgid "Financial District"
 msgstr "金融区"
+
+#: data/economy/media.json
+msgid "Financial billboard"
+msgstr "金融区看板"
 
 #: data/businesses/international_trade.json
 msgid "Find supply, find buyers, move goods across borders."
@@ -4282,6 +4582,10 @@ msgstr "请备妥下一期工程款。"
 msgid "GRANTED"
 msgstr "已核发"
 
+#: scripts/sim/media.gd:175
+msgid "GROUP-"
+msgstr "GROUP-"
+
 #: data/story/chapters.json
 msgid "Get 800 desk lamps in stock or on the way (cash, supplier terms, a Nexus Bank loan or an investor)"
 msgstr "备齐 800 盏台灯（有库存或在路上都算）：用现金、供应商帐期、Nexus 银行贷款或投资人"
@@ -4441,6 +4745,14 @@ msgstr "毛利"
 #: data/story/chapters.json
 msgid "Gross profit covers a month of rent."
 msgstr "毛利够付一个月房租了。"
+
+#: scripts/sim/media.gd:176
+msgid "Group business"
+msgstr "集团业务"
+
+#: scripts/ui/media_ui.gd:43
+msgid "Group campaigns"
+msgstr "集团活动"
 
 #: data/story/chapters.json
 msgid "Grow {company}: $40,000 revenue in a month"
@@ -4794,6 +5106,10 @@ msgstr "自由座 · Nexus 共享办公室"
 msgid "Hot desk — monthly"
 msgstr "自由座——月租"
 
+#: scripts/ui/media_ui.gd:159
+msgid "Hotel"
+msgstr "旅馆"
+
 #: data/businesses/hotel.json
 msgid "Hotel / Tourism"
 msgstr "饭店／观光"
@@ -5010,6 +5326,10 @@ msgstr "清算危机（第 5 年）期间，汇到国外的钱要好几天才到
 msgid "In transit"
 msgstr "运送中"
 
+#: scripts/ui/modals/company_os.gd:1459
+msgid "Included internal media cost"
+msgstr "其中：集团内部媒体成本"
+
 #: scripts/ui/modals/company_os.gd:319
 msgid "Includes payroll, rent, loans, supplier bills, invoices due and estimated ShopLane sales (%s/day). Excludes restocking."
 msgstr "包含薪资、租金、贷款、供应商帐单、到期应收款，以及预估的 ShopLane 销售（每天 %s）。不含补货。"
@@ -5090,6 +5410,14 @@ msgstr "利息"
 msgid "Interest (APR)"
 msgstr "利率（年）"
 
+#: scripts/sim/media.gd:112
+msgid "Internal campaign at media cost"
+msgstr "集团内部活动按媒体成本计价"
+
+#: scripts/ui/media_ui.gd:156
+msgid "Internal campaigns charge the target segment at media cost. No agency service fee or supplier rebate; measured conversions boost real business demand."
+msgstr "内部活动以媒体成本计入目标分部，免代理服务费且不收供应商回扣；实际转换会提升业务需求。"
+
 #: scripts/ui/modals/company_os.gd:10
 msgid "International"
 msgstr "国际"
@@ -5109,6 +5437,10 @@ msgstr "国际电汇"
 #: data/help/help.json
 msgid "International wire: cheap (1% + $25) but 5 to 9 days."
 msgstr "国际电汇：便宜（1% + $25），但要 5 到 9 天。"
+
+#: data/dialogue/student_intern_intro.json
+msgid "Interns cost less but work slowly. Hire a designer and a media buyer to run three campaigns at once."
+msgstr "实习生薪资较低，但制作较慢。聘用设计师和媒体采购员后，可同时运行三场活动。"
 
 #: scripts/sim/manufacturing.gd:105
 msgid "Invalid order terms."
@@ -5153,6 +5485,10 @@ msgstr "减少应付金额"
 #: scripts/sim/careers.gd:270
 msgid "Invoice — %s"
 msgstr "发票——%s"
+
+#: scripts/ui/media_ui.gd:150
+msgid "Invoice: %s · %s"
+msgstr "发票：%s · %s"
 
 #: scripts/sim/jobs.gd:90
 msgid "Invoiced job %s: %s"
@@ -5326,6 +5662,10 @@ msgstr "直接开始打字（按 Esc 离开）。"
 msgid "KESSLER"
 msgstr "KESSLER 精密制造"
 
+#: scripts/ui/media_ui.gd:149
+msgid "KPI settlement · bonus %s · review the next client brief."
+msgstr "目标结算 · 奖金 %s · 下一步检阅客户需求。"
+
 #: data/../assets/buildings/buildings_meta.json
 msgid "KURO RAMEN"
 msgstr "KURO 拉面"
@@ -5349,6 +5689,14 @@ msgstr "KYC 审查：%s，这笔款项还要多等 %d 小时才会入帐（超�
 #: scripts/ui/minigames/barista_game.gd:10
 msgid "Kai"
 msgstr "Kai"
+
+#: data/npcs/kai_morgan.json
+msgid "Kai Morgan"
+msgstr "Kai Morgan"
+
+#: data/economy/media.json
+msgid "Kai Morgan KOL"
+msgstr "Kai Morgan 创作者合作"
 
 #: data/regions/karu.json
 msgid "Karu"
@@ -5593,6 +5941,18 @@ msgstr "雇用房仲人员前，请先承租 Harlow & Finch 仲介店。"
 #: scripts/sim/real_estate.gd:19 scripts/ui/real_estate_ui.gd:67
 msgid "Lease Harlow & Finch in Residential first."
 msgstr "先承租住宅区的 Harlow & Finch 仲介店。"
+
+#: data/economy/staff.json
+msgid "Lease The Loft before hiring campaign staff."
+msgstr "聘用活动人员前，请先承租 The Loft。"
+
+#: scripts/sim/media.gd:17 scripts/ui/media_ui.gd:22 scripts/ui/media_ui.gd:50
+msgid "Lease The Loft in University before opening the agency."
+msgstr "先承租大学区 The Loft，再开设代理工作室。"
+
+#: data/buildings/the_loft.json
+msgid "Lease The Loft studio"
+msgstr "承租 The Loft 工作室"
 
 #: data/buildings/unit12_factory.json
 msgid "Lease Unit 12"
@@ -6006,6 +6366,10 @@ msgstr "低"
 msgid "Low rents, old shops, cobbles and a clock tower. Open a café on the corner."
 msgstr "房租便宜、老店林立、石板路和钟楼。在转角开一家咖啡店吧。"
 
+#: data/economy/staff.json
+msgid "Low weekly pay, but slower production than an experienced designer."
+msgstr "每周薪资较低，但制作速度比资深设计师慢。"
+
 #: scripts/ui/minigames/cowork_host_game.gd:7
 msgid "Luca"
 msgstr "Luca"
@@ -6086,6 +6450,14 @@ msgstr "在城里生产，不经港口、没有附加费：单价较高，但隔
 msgid "Main costs"
 msgstr "主要成本"
 
+#: scripts/ui/media_ui.gd:181
+msgid "Maintain Campus Radio · %s"
+msgstr "维修 Campus Radio · %s"
+
+#: scripts/ui/media_ui.gd:181
+msgid "MaintainCampusRadio"
+msgstr "MaintainCampusRadio"
+
 #: scripts/sim/ledger.gd:32
 msgid "Maintenance"
 msgstr "保养"
@@ -6097,6 +6469,10 @@ msgstr "赚到 $1,250 毛利——下个月的房租"
 #: data/story/chapters.json
 msgid "Make it official. Or don't."
 msgstr "正式成立公司。或者不要。"
+
+#: data/economy/media.json
+msgid "Make work easier"
+msgstr "让工作更轻松"
 
 #: data/story/chapters.json
 msgid "Make your first payroll: keep cash in the company for Friday 17:00"
@@ -6234,6 +6610,10 @@ msgstr "配对分数"
 msgid "Match score: %.0f%%"
 msgstr "配对分数：%.0f%%"
 
+#: data/help/help.json
+msgid "Matching cards improves creative quality and click-through; cheap interns assist more slowly than designers."
+msgstr "符合偏好的卡片可提升创意品质和点击率；低薪实习生协助制作的速度比设计师慢。"
+
 #: scripts/ui/real_estate_ui.gd:16
 msgid "Matchmaker"
 msgstr "对象配对"
@@ -6274,13 +6654,33 @@ msgstr "Maya：「好好享受你的 15 分钟成名时刻，大明星。」"
 msgid "Maybe. Register a company, open an account with us, and give it a couple of weeks."
 msgstr "也许。先登记公司、在我们这里开户，再经营几周。"
 
+#: scripts/sim/media.gd:47
+msgid "Measured media campaign"
+msgstr "可衡量的媒体活动"
+
 #: data/regions/northridge.json
 msgid "Media"
 msgstr "媒体"
 
-#: data/businesses/media.json
+#: data/businesses/media.json scripts/sim/media.gd:242 scripts/ui/media_ui.gd:16
 msgid "Media / Advertising"
 msgstr "媒体／广告"
+
+#: scripts/ui/media_ui.gd:162
+msgid "Media budget %s"
+msgstr "媒体预算 %s"
+
+#: data/economy/staff.json
+msgid "Media buyer"
+msgstr "媒体采购员"
+
+#: data/events/media_price.json
+msgid "Media channel price increase"
+msgstr "媒体管道涨价"
+
+#: scripts/ui/media_ui.gd:124 scripts/ui/media_ui.gd:43
+msgid "Media mix"
+msgstr "媒体配置"
 
 #: scripts/ui/minigames/pack_game.gd:7
 msgid "Medium box"
@@ -6318,6 +6718,10 @@ msgstr "蓬乱"
 msgid "Metro"
 msgstr "捷运"
 
+#: data/economy/media.json
+msgid "Metro advertising"
+msgstr "地铁广告"
+
 #: autoload/scene_router.gd:207
 msgid "Metro fare to %s"
 msgstr "捷运车资：往%s"
@@ -6330,6 +6734,10 @@ msgstr "捷运 · 5 条路线"
 msgid "Metro — %s Station"
 msgstr "捷运——%s站"
 
+#: data/districts/university.json
+msgid "Metro — University"
+msgstr "地铁－大学区"
+
 #: scripts/ui/minigames/barista_game.gd:10
 msgid "Mia"
 msgstr "Mia"
@@ -6341,6 +6749,10 @@ msgstr "中"
 #: scripts/ui/minigames/barista_game.gd:98
 msgid "Milk"
 msgstr "奶类"
+
+#: data/economy/media.json
+msgid "Minimal luxury"
+msgstr "极简奢华"
 
 #: scripts/sim/company.gd:87
 msgid "Minimum opening deposit is $500."
@@ -6737,6 +7149,10 @@ msgstr "新创园区 Nexus 共享办公室"
 #: data/dialogue/jun_first.json
 msgid "Nexus Co-work, over in Startup Hub. They've got a board — suppliers, gigs, whatever."
 msgstr "新创园区那边有间 Nexus 共享办公室。他们有个布告栏——供应商、案子，什么都有。"
+
+#: data/npcs/student_intern.json
+msgid "Nia Park"
+msgstr "Nia Park"
 
 #: scripts/ui/hud.gd:214
 msgid "Night"
@@ -7210,6 +7626,10 @@ msgstr "办公室押金退回"
 msgid "Office rent"
 msgstr "办公室租金"
 
+#: data/economy/media.json
+msgid "Office workers"
+msgstr "上班族"
+
 #: scripts/ui/minigames/parcel_sort_game.gd:9
 msgid "Okafor"
 msgstr "Okafor"
@@ -7330,6 +7750,10 @@ msgstr "开放中"
 msgid "Open Businesses"
 msgstr "打开「事业」"
 
+#: data/buildings/aurelia_university.json data/buildings/campus_radio.json data/buildings/the_loft.json data/dialogue/imani_cole_intro.json
+msgid "Open Campaign Mixer"
+msgstr "打开广告活动配置"
+
 #: scripts/ui/tutorial.gd:50
 msgid "Open Company OS at your laptop at home, or at a hot desk while your co-work pass is valid. Everything about your business happens here."
 msgstr "在家用笔电，或在共用办公室通行证有效时使用桌上电脑，打开 Company OS。生意的各项操作都在这里。"
@@ -7402,6 +7826,10 @@ msgstr "查看上月结算（%s）"
 msgid "Open now"
 msgstr "营业中"
 
+#: scripts/sim/media.gd:210
+msgid "Open the agency first."
+msgstr "请先开设代理工作室。"
+
 #: scripts/ui/real_estate_ui.gd:69
 msgid "Open the brokerage"
 msgstr "开设仲介店"
@@ -7418,6 +7846,10 @@ msgstr "先开设仲介店、清偿逾期款并改善信用，再申请房贷。
 msgid "Open the business bank account first."
 msgstr "请先开立企业银行帐户。"
 
+#: scripts/ui/media_ui.gd:52
+msgid "Open the campaign studio"
+msgstr "开设广告活动工作室"
+
 #: data/dialogue/lina_rails_again.json
 msgid "Open the escrow account after all."
 msgstr "还是帮我开托管帐户吧。"
@@ -7430,9 +7862,17 @@ msgstr "开设工厂"
 msgid "Open the factory first."
 msgstr "请先开设工厂。"
 
+#: scripts/sim/media.gd:173 scripts/sim/media.gd:174
+msgid "Open the group business before buying internal media."
+msgstr "请先开设集团业务，再购买内部广告。"
+
 #: scripts/ui/tutorial.gd:27
 msgid "Open your phone"
 msgstr "打开手机"
+
+#: scripts/ui/media_ui.gd:52
+msgid "OpenAgency"
+msgstr "OpenAgency"
 
 #: scripts/ui/real_estate_ui.gd:69
 msgid "OpenBrokerage"
@@ -7449,6 +7889,10 @@ msgstr "已开设 Harlow & Finch 仲介店。"
 #: scripts/sim/company.gd:95
 msgid "Opened a business account at Nexus Bank with %s of founder capital."
 msgstr "在 Nexus 银行开了企业帐户，创办人出资 %s。"
+
+#: scripts/sim/media.gd:24
+msgid "Opened a campaign studio at The Loft."
+msgstr "已在 The Loft 开设广告活动工作室。"
 
 #: scripts/sim/rails.gd:42
 msgid "Opened an escrow account on Lina Zhao's payments platform."
@@ -7657,6 +8101,14 @@ msgstr "自己货车配送：%d 件包裹"
 #: scripts/sim/wardrobe.gd:55 scripts/ui/modals/clothing_shop_modal.gd:47
 msgid "Owned"
 msgstr "已拥有"
+
+#: data/help/glossary.json
+msgid "Owned audience and inventory"
+msgstr "自有受众与库存"
+
+#: scripts/ui/media_ui.gd:164 scripts/ui/media_ui.gd:43
+msgid "Owned media"
+msgstr "自有媒体"
 
 #: scripts/ui/real_estate_ui.gd:125
 msgid "Owner mandates"
@@ -8170,6 +8622,14 @@ msgstr "7 号码头租赁处：「3 号仓位是你的了。货架都架好了�
 msgid "Pier 7 yard"
 msgstr "7 号码头车场"
 
+#: scripts/ui/media_ui.gd:17
+msgid "Pitch client briefs, mix media channels and measure results before invoicing."
+msgstr "依客户需求提案、配置媒体管道，衡量成果后再开立发票。"
+
+#: data/help/glossary.json
+msgid "Pitch for client Jobs, run a budgeted campaign, then settle actual work."
+msgstr "提出客户工作提案，按预算运行活动，最后结算实际工作。"
+
 #: scripts/ui/minigames/clerk_forms_game.gd:10
 msgid "Pixel Orchard"
 msgstr "Pixel Orchard"
@@ -8217,6 +8677,10 @@ msgstr "塑料包材每件课 %s；买家偏好无塑包装。"
 #: scripts/sim/ledger.gd:26
 msgid "Platform fees"
 msgstr "平台手续费"
+
+#: data/economy/media.json
+msgid "Playful"
+msgstr "活泼"
 
 #: data/dialogue/jun_first.json
 msgid "Please."
@@ -8317,6 +8781,10 @@ msgstr "精密制造"
 #: data/regions/auroria.json
 msgid "Premium consumers"
 msgstr "高端消费者"
+
+#: data/economy/media.json
+msgid "Premium customers"
+msgstr "高端客群"
 
 #: scripts/ui/real_estate_ui.gd:168
 msgid "Premium renovation"
@@ -8466,6 +8934,10 @@ msgstr "房产税费与管理费"
 msgid "Property viewing"
 msgstr "房屋带看"
 
+#: scripts/ui/media_ui.gd:83
+msgid "Propose · %s · %d minutes"
+msgstr "提出提案 · %s · %d 分钟"
+
 #: data/jobs/barista.json
 msgid "Pull shots behind Jun's counter and learn how regulars decide what to buy."
 msgstr "在 Jun 的吧台后面煮咖啡，观察熟客怎么决定要买什么。"
@@ -8498,6 +8970,10 @@ msgstr "拿出自己的 %s"
 msgid "Quality"
 msgstr "品质"
 
+#: data/help/glossary.json
+msgid "Quality changes click-through and KPI results."
+msgstr "品质会影响点击率与目标成果。"
+
 #: scripts/ui/manufacturing_ui.gd:69
 msgid "Quality results"
 msgstr "品检结果"
@@ -8517,6 +8993,10 @@ msgstr "数量"
 #: scripts/ui/modals/purchase_return_modal.gd:32
 msgid "Quantity (up to %d)"
 msgstr "数量（最多 %d 件）"
+
+#: data/economy/media.json
+msgid "Quiet excellence"
+msgstr "低调而卓越"
 
 #: data/jobs/bank_teller.json
 msgid "Quiet morning. You read the small-business lending policy twice."
@@ -8610,6 +9090,10 @@ msgstr "能放 5,000 件的货架，是全市每件最便宜的空间。货架�
 msgid "Racking for 5,000 units. Pier 7 leases bays to registered companies only."
 msgstr "能放 5,000 件的货架。7 号码头的仓位只租给已登记的公司。"
 
+#: scripts/ui/media_ui.gd:174
+msgid "RadioRecruit"
+msgstr "RadioRecruit"
+
 #: data/help/glossary.json
 msgid "Rail reliability"
 msgstr "管道可靠度"
@@ -8658,6 +9142,18 @@ msgstr "Ravi"
 msgid "Read Maya's message"
 msgstr "读 Maya 的消息"
 
+#: data/dialogue/imani_cole_intro.json
+msgid "Read a client brief before creating the slogan, visual and tone. Our students want belonging, bold colour and a playful voice. Media saturation limits repeated spending."
+msgstr "制作标语、视觉与语气前，先读客户需求。学生喜欢归属感、鲜明色彩和活泼语气。媒体饱和会限制重复投放的效益。"
+
+#: data/help/help.json
+msgid "Read audience, goal and deadline. Create a pitch, then submit it; losing costs time and money."
+msgstr "阅读客群、目标及期限。制作并提交提案；落选仍会耗费时间与金钱。"
+
+#: scripts/ui/minigames/creative_pitch.gd:15
+msgid "Read the audience preferences in the brief. Matching cards improve click-through."
+msgstr "先阅读需求里的客群偏好。符合偏好的卡片可提升点击率。"
+
 #: data/buildings/popup_unit.json
 msgid "Read the lease notice"
 msgstr "看租约公告"
@@ -8697,6 +9193,10 @@ msgstr "房仲人员"
 #: data/npcs/diane_harlow.json
 msgid "Realty mentor"
 msgstr "房仲前辈"
+
+#: data/economy/media.json
+msgid "Reassuring"
+msgstr "安心"
 
 #: scripts/ui/modals/insolvency_modal.gd:64
 msgid "Receivables sold (80%)"
@@ -8738,6 +9238,10 @@ msgstr "柜台——座位与日票"
 msgid "Records Clerk"
 msgstr "文件办事员"
 
+#: scripts/ui/media_ui.gd:174 scripts/ui/media_ui.gd:85
+msgid "Recruit %s"
+msgstr "招募%s"
+
 #: scripts/ui/real_estate_ui.gd:109
 msgid "Recruit a realty agent"
 msgstr "招募房仲人员"
@@ -8765,6 +9269,10 @@ msgstr "回收纸"
 #: scripts/ui/minigames/cowork_host_game.gd:8
 msgid "Reed"
 msgstr "Reed"
+
+#: data/economy/media.json
+msgid "Refined"
+msgstr "精致"
 
 #: scripts/ui/modals/purchase_return_modal.gd:44
 msgid "Refund"
@@ -8842,7 +9350,7 @@ msgstr "登记并付款"
 msgid "Register (%s)"
 msgstr "登记（%s）"
 
-#: scripts/sim/real_estate.gd:17 scripts/ui/real_estate_ui.gd:67
+#: scripts/sim/media.gd:16 scripts/sim/real_estate.gd:17 scripts/ui/media_ui.gd:50 scripts/ui/real_estate_ui.gd:67
 msgid "Register a company and open its bank account first."
 msgstr "先登记公司并开设公司银行帐户。"
 
@@ -8965,6 +9473,10 @@ msgstr "退件"
 #: scripts/ui/minigames/clerk_forms_game.gd:97
 msgid "Reject (click the wrong field first)"
 msgstr "退件（先点出错的字段）"
+
+#: scripts/ui/media_ui.gd:73
+msgid "Relevant reach"
+msgstr "有效触及"
 
 #: data/economy/staff.json
 msgid "Reliable: morale drops half as fast."
@@ -9110,6 +9622,10 @@ msgstr "报表"
 msgid "Reputation %.1f · rate about %s/h · %d delivered · %d late"
 msgstr "信誉 %.1f · 时薪约 %s · 已交件 %d · 迟交 %d"
 
+#: scripts/ui/media_ui.gd:62
+msgid "Reputation: %d%% · campaign slots: %d/%d · cash: %s"
+msgstr "声誉：%d%% · 活动名额：%d/%d 场 · 现金：%s"
+
 #: scripts/ui/modals/company_os.gd:568 scripts/ui/modals/settlement_modal.gd:95
 msgid "Reroute"
 msgstr "绕道"
@@ -9145,6 +9661,10 @@ msgstr "住宅区"
 #: data/city/aurelia.json
 msgid "Residential District"
 msgstr "住宅区"
+
+#: data/economy/media.json
+msgid "Residential billboard"
+msgstr "住宅区看板"
 
 #: scripts/sim/bank.gd:70
 msgid "Residential mortgage purchase"
@@ -9197,6 +9717,10 @@ msgstr "结果"
 #: scripts/ui/modals/company_os.gd:383 scripts/ui/modals/pause_menu.gd:13
 msgid "Resume"
 msgstr "恢复"
+
+#: scripts/ui/media_ui.gd:132
+msgid "Resume after funding the media purchase"
+msgstr "备妥媒体采购资金后恢复投放"
 
 #: scripts/ui/minigames/clerk_forms_game.gd:11
 msgid "Retail"
@@ -9282,6 +9806,10 @@ msgstr "查看对象并处理"
 msgid "Review terms in Company OS → Contracts. Accept, counter or decline there."
 msgstr "到 Company OS → 合约查看条款。可以接受、还价或拒绝。"
 
+#: data/events/media_client.json data/events/media_pr.json data/events/media_price.json
+msgid "Review the campaign and respond"
+msgstr "检阅活动并回应"
+
 #: data/economy/freelance.json
 msgid "Review the prices of %s"
 msgstr "帮 %s 查看定价"
@@ -9350,6 +9878,10 @@ msgstr "河滨大楼 · 7C"
 msgid "Riverside Tower, Unit 7C"
 msgstr "河滨大楼 7C"
 
+#: data/economy/media.json
+msgid "Riverside billboard"
+msgstr "河畔区看板"
+
 #: scripts/ui/minigames/clerk_forms_game.gd:9
 msgid "Riverstone Bakery"
 msgstr "Riverstone Bakery"
@@ -9406,6 +9938,10 @@ msgstr "路线规划员"
 msgid "Route planning"
 msgstr "路线规划"
 
+#: scripts/ui/media_ui.gd:55
+msgid "RouteAgencyPrerequisite"
+msgstr "RouteAgencyPrerequisite"
+
 #: scripts/ui/real_estate_ui.gd:72
 msgid "RouteRealtyPrerequisite"
 msgstr "RouteRealtyPrerequisite"
@@ -9433,6 +9969,10 @@ msgstr "单号"
 #: scripts/ui/modals/company_os.gd:1436
 msgid "Run %s done: paid %s, fuel %s, %s on the road."
 msgstr "%s 号外送单完成：收入 %s，油资 %s，路上花了 %s。"
+
+#: scripts/ui/media_ui.gd:160
+msgid "Run %s internal campaign · %s"
+msgstr "投放%s内部活动 · %s"
 
 #: scripts/sim/logistics.gd:567
 msgid "Run %s is past its deadline. Deliver soon, the pay drops."
@@ -9634,9 +10174,21 @@ msgstr "保存游戏"
 msgid "Save now"
 msgstr "立即存盘"
 
+#: scripts/sim/media.gd:59 scripts/ui/media_ui.gd:104
+msgid "Save the creative production cost first."
+msgstr "请先准备创意制作费用。"
+
 #: scripts/sim/bank.gd:65
 msgid "Save the property down payment first."
 msgstr "先存足房屋头期款。"
+
+#: scripts/sim/media.gd:71
+msgid "Save the proposal cost first."
+msgstr "请先准备提案费用。"
+
+#: scripts/sim/media.gd:215
+msgid "Save the public-relations repair cost first."
+msgstr "请先准备公关修复费用。"
 
 #: scripts/ui/hud.gd:149
 msgid "Saved"
@@ -9693,6 +10245,10 @@ msgstr "选择客户"
 #: scripts/ui/real_estate_ui.gd:130
 msgid "Select property"
 msgstr "选择对象"
+
+#: scripts/ui/media_ui.gd:185
+msgid "Sell %d impressions · %s"
+msgstr "出售 %d 次曝光 · %s"
 
 #: scripts/ui/minigames/cowork_host_game.gd:98
 msgid "Sell a day pass ($15)"
@@ -9829,6 +10385,10 @@ msgstr "共用"
 #: scripts/ui/modals/company_os.gd:1447
 msgid "Shared costs are allocated by net revenue. With no revenue, they stay in Shared."
 msgstr "共用费用依净营收比例分摊；没有营收时，留在「共用」。"
+
+#: scripts/ui/media_ui.gd:140
+msgid "Shares total 100%. Changing the mix affects the next buying cycle, not past reports."
+msgstr "占比合计 100%。调整配置会影响下次采购，已完成的报告保持原数据。"
 
 #: scripts/ui/tutorial.gd:23
 msgid "Shift"
@@ -10102,6 +10662,10 @@ msgstr "睡到早上 7:00"
 msgid "Sleep until morning"
 msgstr "睡到早上"
 
+#: data/help/glossary.json
+msgid "Slogan, visual and tone should match the client audience preferences."
+msgstr "标语、视觉与语气应符合客户指定的客群偏好。"
+
 #: scripts/ui/modals/pause_menu.gd:30
 msgid "Slow"
 msgstr "慢"
@@ -10161,6 +10725,10 @@ msgstr "真的辞了？"
 #: data/dialogue/maya_intro.json
 msgid "So... now what?"
 msgstr "所以……现在呢？"
+
+#: data/economy/media.json
+msgid "Social feed"
+msgstr "社群动态"
 
 #: data/npcs/sofia.json scripts/ui/minigames/cowork_host_game.gd:7
 msgid "Sofia"
@@ -10277,6 +10845,10 @@ msgstr "空间"
 #: scripts/ui/modals/company_os.gd:573
 msgid "Speed up"
 msgstr "加快"
+
+#: scripts/ui/media_ui.gd:131
+msgid "Spend %s/%s · impressions %d · clicks %d · conversions %d"
+msgstr "投放 %s/%s · 曝光 %d 次 · 点击 %d 次 · 转换 %d 人次"
 
 #: data/events/supply_shock_plan.json
 msgid "Spend {moq_cost} before prices climb further. Your cash goes into boxes."
@@ -10489,6 +11061,14 @@ msgstr "要老实答吗？上坡的时候变速箱会叹气，左后照镜是靠
 #: data/regions/auroria.json
 msgid "Strict consumer protection"
 msgstr "严格的消费者保护"
+
+#: data/economy/staff.json data/npcs/student_intern.json
+msgid "Student intern"
+msgstr "学生实习生"
+
+#: data/economy/media.json
+msgid "Students"
+msgstr "学生"
 
 #: data/buildings/old_town_studio.json
 msgid "Studio 1A, Lantern Row"
@@ -10866,6 +11446,14 @@ msgstr "Crestline 这笔交易不会继续了。接着做你的下一个事业�
 msgid "The Green Shift"
 msgstr "绿色转型"
 
+#: data/buildings/the_loft.json
+msgid "The Loft"
+msgstr "The Loft"
+
+#: data/properties/loft_office.json
+msgid "The Loft agency studio"
+msgstr "The Loft 代理工作室"
+
 #: scripts/sim/saas.gd:100
 msgid "The MVP needs %d more dev hours."
 msgstr "MVP 还需要 %d 开发小时。"
@@ -10889,6 +11477,10 @@ msgstr "「总览」显示今天的数字：现金、在 ShopLane 等拨款的�
 #: scripts/sim/company.gd:85
 msgid "The account is already open."
 msgstr "帐户已经开好了。"
+
+#: scripts/sim/media.gd:18
+msgid "The agency is already open."
+msgstr "代理工作室已开业。"
 
 #: scripts/sim/insolvency.gd:66
 msgid "The bank won't restructure with this credit history."
@@ -11102,6 +11694,10 @@ msgstr "款项卡住了：到 Nexus 银行找 Lina Zhao（平日 10–16 点）"
 msgid "The payment still hasn't landed."
 msgstr "那笔钱还是没到。"
 
+#: scripts/ui/media_ui.gd:29
+msgid "The pitch lost. Review creative fit before the next proposal."
+msgstr "提案未得标。下次提案前请检查创意是否符合客群。"
+
 #: scripts/sim/company.gd:58
 msgid "The registration fee is %s."
 msgstr "登记规费是 %s。"
@@ -11182,6 +11778,10 @@ msgstr "货车从 7 号码头出发，每个编号的停靠点各停一次，再
 msgid "The van takes %d parcels a trip: the other %d wait for the next one."
 msgstr "货车一趟载 %d 件：其余 %d 件等下一趟。"
 
+#: data/events/media_pr.json
+msgid "The weaker creative will reduce campaign clicks."
+msgstr "较差的创意将减少活动点击。"
+
 #: data/events/rail_frozen.json
 msgid "The wire is on its way. Your stock ships when it lands; the frozen money comes back when the bridge reopens."
 msgstr "电汇已经导出。款项到了就出货；冻结的钱等跨链桥重开后退回。"
@@ -11250,6 +11850,14 @@ msgstr "这个方式%s。"
 msgid "This RFQ has expired."
 msgstr "这份询价单已到期。"
 
+#: scripts/sim/media.gd:202
+msgid "This advertising slot is unavailable or inventory is exhausted."
+msgstr "此广告时段无法出售，或库存已耗尽。"
+
+#: scripts/sim/media.gd:62 scripts/sim/media.gd:74
+msgid "This client brief expired during production."
+msgstr "此客户需求在制作期间已到期。"
+
 #: scripts/sim/contracts.gd:207
 msgid "This contract belongs to another company."
 msgstr "这份合约属于其他公司。"
@@ -11282,7 +11890,7 @@ msgstr "这是已结束公司的合约。"
 msgid "This is the same form you'll file for your own company, so the rules are worth remembering."
 msgstr "这就是你之后登记自己公司要填的表，规则值得记住。"
 
-#: scripts/sim/jobs.gd:38
+#: scripts/sim/jobs.gd:38 scripts/sim/media.gd:203 scripts/sim/media.gd:77
 msgid "This job is no longer available."
 msgstr "这张工单已无法承接。"
 
@@ -11434,7 +12042,7 @@ msgstr "总额"
 msgid "Total interest"
 msgstr "总利息"
 
-#: scripts/ui/modals/company_os.gd:1459
+#: scripts/ui/modals/company_os.gd:1460
 msgid "Total operating profit"
 msgstr "营业利益合计"
 
@@ -11586,9 +12194,21 @@ msgstr "单价"
 msgid "Units on hand at each location, units reserved for orders, and units on the way."
 msgstr "每个地点的现有数量、已被订单保留的数量，以及在路上的数量。"
 
+#: data/districts/university.json
+msgid "University"
+msgstr "大学区"
+
 #: data/city/aurelia.json
 msgid "University District"
 msgstr "大学城"
+
+#: data/npcs/imani_cole.json
+msgid "University client mentor"
+msgstr "大学客户导师"
+
+#: scripts/sim/media.gd:221
+msgid "Unknown agency crisis."
+msgstr "未知的代理商危机。"
 
 #: scripts/sim/ecommerce.gd:1156
 msgid "Unknown choice."
@@ -11625,6 +12245,10 @@ msgstr "没有这种材料包。"
 #: scripts/sim/manufacturing.gd:261
 msgid "Unlock your own brand and choose a valid batch."
 msgstr "先解锁自有品牌，再选择有效的批量数量。"
+
+#: scripts/sim/media.gd:145
+msgid "Unused campaign advance refunded"
+msgstr "退还未使用的活动预付款"
 
 #: scripts/ui/modals/loan_modal.gd:61
 msgid "Up to"
@@ -11921,6 +12545,10 @@ msgstr "仓库每件的空间成本比办公室低很多，空间大就能接更
 #: data/character/options.json
 msgid "Warm"
 msgstr "暖色"
+
+#: data/economy/media.json
+msgid "Warm homes"
+msgstr "温暖居家"
 
 #: data/help/glossary.json
 msgid "Waste"
@@ -13002,10 +13630,6 @@ msgstr "电商平台"
 msgid "materials"
 msgstr "原料"
 
-#: data/businesses/media.json
-msgid "media group"
-msgstr "媒体集团"
-
 #: scripts/sim/bank.gd:109
 msgid "minus existing debt"
 msgstr "扣除既有债务"
@@ -13134,6 +13758,10 @@ msgstr "满分 5"
 msgid "own brand"
 msgstr "自有品牌"
 
+#: data/businesses/media.json
+msgid "owned media"
+msgstr "自有媒体"
+
 #: scripts/ui/modals/company_os.gd:1022
 msgid "paid on delivery"
 msgstr "交件即付款"
@@ -13249,6 +13877,10 @@ msgstr "小型代工"
 #: data/businesses/energy.json
 msgid "solar farm"
 msgstr "太阳能电厂"
+
+#: data/businesses/media.json
+msgid "solo studio"
+msgstr "个人工作室"
 
 #: scripts/ui/modals/company_os.gd:723
 msgid "starts tomorrow 9:00"
@@ -13634,6 +14266,10 @@ msgstr "✗ %s 等不下去走了"
 msgid "✗ Choose an order in OEM orders first."
 msgstr "✗ 请先到代工单选择订单。"
 
+#: scripts/ui/media_ui.gd:167
+msgid "✗ Complete two campaigns and hire a designer and media buyer before buying Campus Radio."
+msgstr "✗ 完成两场活动，聘用设计师与媒体采购员后，再收购 Campus Radio。"
+
 #: scripts/ui/real_estate_ui.gd:180
 msgid "✗ Fund the next construction milestone."
 msgstr "✗ 请备妥下一期工程款。"
@@ -13657,6 +14293,10 @@ msgstr "✗ 请先持有出租对象，再到市政厅申请建照。"
 #: scripts/ui/manufacturing_ui.gd:133
 msgid "✗ Rent a machine in OEM orders first."
 msgstr "✗ 请先到代工单租用机台。"
+
+#: scripts/ui/media_ui.gd:130
+msgid "✗ Select a running campaign to adjust media shares."
+msgstr "✗ 请选择进行中的活动，再调整媒体占比。"
 
 #: scripts/ui/real_estate_ui.gd:142
 msgid "✗ Select an owner mandate and a client, then arrange a viewing."

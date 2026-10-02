@@ -738,3 +738,6 @@ Facade requests: `facades/unit12_factory.png`, `facades/ferro_supply.png`, `faca
 # Real Estate (#65)
 
 Facade requests: `buildings/maple_court.png`, `buildings/birch_row.png`, `buildings/harlow_finch.png`, `buildings/lot7.png`, `buildings/lot7_construction.png`, `buildings/venture_tower.png`, with lights variants. Existing apartment, rowhouse, lettings, warehouse and office facades use Art.has_tex fallback; construction and completion are distinct live saved states, including the player's name. New furniture request `props/realty_listings_board.png` uses a cork-board fallback. Existing furnished homes/lettings office provide explorable interiors. No asset files changed.
+
+## #66 University / media
+Requested named facades: `aurelia_university.png`, `the_loft.png`, `campus_radio.png` plus corresponding `_lights.png`. Runtime district facades check Art.has_tex and use civic_annex, nexus_cowork and office_slab metadata/doors as supported fallbacks. Decorative bookshop and cafe use brick_shops/corner_cafe_unit. No unavailable textures are loaded.

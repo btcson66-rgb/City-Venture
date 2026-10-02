@@ -96,6 +96,9 @@ func _audit_setup() -> void:
 	var mk: Dictionary = DataDB._read("res://data/economy/marketplace.json")
 	for w in mk.get("customer_first_names", []):
 		_allowed[str(w)] = true
+	# Client organization names are kept brands, as NPC and employer names are.
+	for client in DataDB.economy.get("media",{}).get("client_names",[]):
+		for w in str(client).split(" "):_allowed[w]=true
 	for w in ["Tab", "Esc", "WASD", "Shift", "F12", "OK", "Guide", "Tour", "Collision", "Check", "Test", "Founder", "Alex", "Rivera",
 			"Riverlight", "Goods", "Co", "LLC", "Ltd", "Inc", "PO"]:   # stable purchase-order identifiers, e.g. PO-101
 		_allowed[w] = true

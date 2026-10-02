@@ -13,6 +13,7 @@ static func compute(entity: String, t0: int, t1: int) -> Dictionary:
 		var segment := str(entry.get("source", {}).get("segment", Industries.infer_segment(entry.get("source", {}), entry["lines"])))
 		if not rows.has(segment): rows[segment] = _row(segment)
 		var row: Dictionary = rows[segment]
+		var internal: bool=bool(entry.get("source",{}).get("internal",false))
 		for line in entry["lines"]:
 			var account := str(line["acct"])
 			var amount := float(line.get("dr", 0)) - float(line.get("cr", 0))
@@ -22,6 +23,7 @@ static func compute(entity: String, t0: int, t1: int) -> Dictionary:
 			elif account == "other_income": row["other_income"] -= amount
 			elif account.begins_with("exp:") and account.substr(4) in Ledger.OPEX_BUSINESS:
 				row["opex"] += amount
+				if internal:row["internal_cost"] += amount
 	var weight := 0.0
 	var recipients: Array = []
 	for id in rows:
@@ -49,4 +51,4 @@ static func compute(entity: String, t0: int, t1: int) -> Dictionary:
 
 static func _row(id: String) -> Dictionary:
 	return {"id":id, "revenue":0.0, "refunds":0.0, "net_revenue":0.0, "cogs":0.0,
-		"gross_profit":0.0, "opex":0.0, "allocated":0.0, "other_income":0.0, "operating_profit":0.0}
+		"gross_profit":0.0, "opex":0.0, "allocated":0.0, "internal_cost":0.0, "other_income":0.0, "operating_profit":0.0}

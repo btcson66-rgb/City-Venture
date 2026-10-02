@@ -247,7 +247,7 @@
   {
    "id": "university",
    "name": "University District",
-   "status": "planned",
+   "status": "active",
    "map_pos": [
     590,
     150
@@ -303,7 +303,8 @@
     "stations": [
      "civic_center",
      "financial",
-     "riverside"
+     "riverside",
+     "university"
     ]
    },
    {
@@ -384,7 +385,16 @@
    "residential>civic_center": 32,
    "residential>shopping_street": 9,
    "residential>harbor": 29,
-   "residential>industrial": 35
+   "residential>industrial": 35,
+   "university>startup_hub": 7,
+   "university>riverside": 13,
+   "university>financial": 15,
+   "university>civic_center": 16,
+   "university>shopping_street": 18,
+   "university>old_town": 20,
+   "university>residential": 25,
+   "university>harbor": 25,
+   "university>industrial": 31
   }
  },
  "board_extra": {

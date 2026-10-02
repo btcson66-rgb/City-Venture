@@ -221,6 +221,8 @@ Old Town 本身已開放（見上）。以下是設定稿裡**還沒做**的部�
 
 ### University 大學區 · `university` · P1
 
+Implemented #66: M1 connects the district. Enter `aurelia_university`, `the_loft`, `campus_radio`; mentor Dr. Imani Cole, Kai Morgan and Nia Park provide client/recruitment access. Full current media workflow is in [21_media.md](21_media.md). The older institute/innovation-lab and M2 extension concepts below remain future art/world requests.
+
 | 項目 | 設定 |
 |------|------|
 | 一句話 | 研究和人才 |

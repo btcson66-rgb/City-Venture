@@ -437,6 +437,14 @@ msgstr ""
 msgid "%s till: %d customers"
 msgstr ""
 
+#: scripts/ui/media_ui.gd:137
+msgid "%s · %.0f%% · CPM %s · audience fit %.0f%%"
+msgstr ""
+
+#: scripts/ui/media_ui.gd:147
+msgid "%s · %d campaign days · spend %s · impressions %d · relevant reach %d · clicks %d · conversions %d"
+msgstr ""
+
 #: scripts/ui/real_estate_ui.gd:129
 msgid "%s · %d rooms · minimum %s · %s"
 msgstr ""
@@ -463,6 +471,10 @@ msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:133
 msgid "%s · budget %s · %d rooms · urgency %d/5 · %s"
+msgstr ""
+
+#: scripts/ui/media_ui.gd:73
+msgid "%s · budget %s · %s · audience %s · %d days remaining"
 msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:178
@@ -702,6 +714,14 @@ msgid "A buyer usually pays a multiple of yearly profit, plus the company's cash
 msgstr ""
 
 #: data/help/glossary.json
+msgid "A campaign aims for relevant reach or conversions, then reports actual measured results."
+msgstr ""
+
+#: data/events/media_pr.json
+msgid "A campaign message upset its audience. Repair it at a cost or keep spending with weaker creative."
+msgstr ""
+
+#: data/help/glossary.json
 msgid "A charge per parcel padded with plastic, under the Clean Packaging Act (Year 4)."
 msgstr ""
 
@@ -719,6 +739,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:196
 msgid "A contract offer is waiting in Contracts."
+msgstr ""
+
+#: data/economy/staff.json
+msgid "A designer and media buyer unlock three simultaneous client campaigns."
 msgstr ""
 
 #: data/help/glossary.json
@@ -757,8 +781,16 @@ msgstr ""
 msgid "A low quote may lose money; a high quote loses the client."
 msgstr ""
 
+#: data/events/media_client.json
+msgid "A major client left. Cancel the remaining media plan and refund the unused advance."
+msgstr ""
+
 #: data/jobs/cowork_host.json
 msgid "A member asks where to find cheap suppliers. You point them to Ken."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "A missed target lowers reputation and future brief opportunities."
 msgstr ""
 
 #: data/help/glossary.json
@@ -795,6 +827,10 @@ msgstr ""
 
 #: data/jobs/barista.json
 msgid "A regular tells you she only buys what she can see on the counter. Noted."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "A rejected pitch still costs time and money."
 msgstr ""
 
 #: autoload/ui_root.gd:225
@@ -953,8 +989,24 @@ msgstr ""
 msgid "Accuracy and speed decide how much of the work gets done in this session."
 msgstr ""
 
+#: scripts/sim/media.gd:198
+msgid "Acquire Campus Radio before selling advertising inventory."
+msgstr ""
+
+#: scripts/ui/media_ui.gd:176
+msgid "Acquire Campus Radio · %s"
+msgstr ""
+
+#: scripts/sim/media.gd:186
+msgid "Acquired Campus Radio and its finite advertising inventory."
+msgstr ""
+
 #: scripts/sim/bank.gd:134
 msgid "Active contracts cover this condition: %s still to collect."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Ad contracts earn money; an unsold audience still costs upkeep."
 msgstr ""
 
 #: data/events/ad_cost_spike.json
@@ -1017,6 +1069,10 @@ msgstr ""
 msgid "Afternoon · Sunny"
 msgstr ""
 
+#: scripts/sim/media.gd:72
+msgid "Agency proposal"
+msgstr ""
+
 #: data/regions/solterra.json
 msgid "Agriculture"
 msgstr ""
@@ -1051,6 +1107,10 @@ msgstr ""
 
 #: scripts/ui/modals/save_list_modal.gd:20
 msgid "All save slots are in use. Choose one for the new game. The old save is moved to a backup folder, not deleted."
+msgstr ""
+
+#: data/help/help.json
+msgid "Allocate the budget across channels. CPM buys impressions, audience fit and saturation limit relevant reach. Adjust the mix while running."
 msgstr ""
 
 #: data/help/glossary.json
@@ -1301,6 +1361,14 @@ msgstr ""
 msgid "Auburn"
 msgstr ""
 
+#: scripts/ui/media_ui.gd:182
+msgid "Audience %d listeners · %d impressions available today"
+msgstr ""
+
+#: scripts/ui/minigames/creative_pitch.gd:22
+msgid "Audience: %s"
+msgstr ""
+
 #: data/economy/freelance.json
 msgid "Audit the online store of %s"
 msgstr ""
@@ -1335,6 +1403,10 @@ msgstr ""
 
 #: scripts/ui/modals/metro_modal.gd:10
 msgid "Aurelia Metro — %s"
+msgstr ""
+
+#: data/buildings/aurelia_university.json
+msgid "Aurelia University"
 msgstr ""
 
 #: data/story/chapters.json
@@ -1537,6 +1609,10 @@ msgstr ""
 msgid "Bello"
 msgstr ""
 
+#: data/economy/media.json
+msgid "Belong together"
+msgstr ""
+
 #: data/events/low_cash_warning.json
 msgid "Belt tightened."
 msgstr ""
@@ -1623,6 +1699,10 @@ msgstr ""
 
 #: scripts/frontend/character_creator.gd:123
 msgid "Body"
+msgstr ""
+
+#: data/economy/media.json
+msgid "Bold colour"
 msgstr ""
 
 #: data/dialogue/maya_intro.json
@@ -1769,6 +1849,10 @@ msgstr ""
 msgid "Budget, rooms, neighborhood and urgency determine client fit. Negotiation changes commission and acceptance."
 msgstr ""
 
+#: scripts/ui/media_ui.gd:79
+msgid "Build Creative Pitch"
+msgstr ""
+
 #: data/economy/freelance.json
 msgid "Build a cash-flow spreadsheet for %s"
 msgstr ""
@@ -1787,6 +1871,10 @@ msgstr ""
 
 #: data/businesses/saas.json
 msgid "Build it once, sell it every month. Development hours now, subscribers later: price, churn and servers decide if it works."
+msgstr ""
+
+#: scripts/ui/minigames/creative_pitch.gd:15
+msgid "Build the client pitch from slogan, visual and tone cards."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1106
@@ -1889,6 +1977,10 @@ msgstr ""
 msgid "Buy %s · price %s · down %s"
 msgstr ""
 
+#: data/help/glossary.json
+msgid "Buy Campus Radio as a depreciating asset and sell finite audience impressions."
+msgstr ""
+
 #: scripts/ui/tutorial.gd:44
 msgid "Buy a Day Pass"
 msgstr ""
@@ -1943,6 +2035,10 @@ msgstr ""
 
 #: scripts/ui/modals/clothing_shop_modal.gd:65
 msgid "Buy — %s"
+msgstr ""
+
+#: scripts/ui/media_ui.gd:176
+msgid "BuyCampusRadio"
 msgstr ""
 
 #: scripts/ui/manufacturing_ui.gd:89
@@ -2081,6 +2177,14 @@ msgstr ""
 msgid "COUNTERED"
 msgstr ""
 
+#: data/help/glossary.json
+msgid "CPM and saturation"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "CPM is the cost of one thousand impressions. Repeated spending on one channel produces less fresh reach."
+msgstr ""
+
 #: scripts/frontend/character_creator.gd:47
 msgid "CREATE YOUR CHARACTER"
 msgstr ""
@@ -2095,6 +2199,10 @@ msgstr ""
 
 #: data/buildings/customs_house.json
 msgid "CUSTOMS HOUSE"
+msgstr ""
+
+#: scripts/ui/media_ui.gd:159
+msgid "Cafe"
 msgstr ""
 
 #: data/businesses/cafe.json
@@ -2145,8 +2253,72 @@ msgstr ""
 msgid "Came through the cash crunch."
 msgstr ""
 
+#: data/help/glossary.json
+msgid "Campaign KPI"
+msgstr ""
+
+#: scripts/ui/media_ui.gd:10
+msgid "Campaign Mixer"
+msgstr ""
+
+#: data/help/help.json
+msgid "Campaign Mixer: brief to results"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Campaign agency"
+msgstr ""
+
+#: data/economy/staff.json
+msgid "Campaign designer"
+msgstr ""
+
+#: scripts/ui/media_ui.gd:151
+msgid "Campaign in progress; adjust its media mix."
+msgstr ""
+
+#: scripts/sim/media.gd:113
+msgid "Campaign media purchase after rebate"
+msgstr ""
+
+#: scripts/sim/media.gd:81
+msgid "Campaign proposal won: %s."
+msgstr ""
+
+#: data/events/media_pr.json
+msgid "Campaign public-relations crisis"
+msgstr ""
+
+#: scripts/sim/media.gd:216
+msgid "Campaign public-relations repair"
+msgstr ""
+
+#: scripts/sim/media.gd:157
+msgid "Campaign report completed: %s."
+msgstr ""
+
+#: scripts/ui/media_ui.gd:141 scripts/ui/media_ui.gd:145 scripts/ui/media_ui.gd:43
+msgid "Campaign reports"
+msgstr ""
+
 #: data/businesses/media.json
 msgid "Campaigns, creators and reputation."
+msgstr ""
+
+#: data/buildings/campus_radio.json data/economy/media.json scripts/sim/media.gd:181
+msgid "Campus Radio"
+msgstr ""
+
+#: scripts/sim/media.gd:195
+msgid "Campus Radio measured advertising slot"
+msgstr ""
+
+#: scripts/sim/media.gd:228
+msgid "Campus Radio upkeep"
+msgstr ""
+
+#: scripts/sim/media.gd:195
+msgid "Campus advertiser"
 msgstr ""
 
 #: scripts/ui/modals/business_board.gd:61
@@ -2219,6 +2391,10 @@ msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:7
 msgid "Cappuccino"
+msgstr ""
+
+#: data/economy/media.json
+msgid "Care for every home"
 msgstr ""
 
 #: data/economy/staff.json
@@ -2321,6 +2497,14 @@ msgstr ""
 msgid "Changed my mind."
 msgstr ""
 
+#: scripts/sim/media.gd:96 scripts/sim/media.gd:98
+msgid "Channel shares must total 100 percent."
+msgstr ""
+
+#: data/events/media_price.json
+msgid "Channels raised CPM. Adjust the mix before the next daily buying cycle."
+msgstr ""
+
 #: data/dialogue/maya_cafe.json
 msgid "Chaos is just growth without a spreadsheet."
 msgstr ""
@@ -2393,8 +2577,24 @@ msgstr ""
 msgid "Choose a factory machine."
 msgstr ""
 
+#: scripts/sim/media.gd:160 scripts/sim/media.gd:163
+msgid "Choose a paused campaign and fund its next media purchase."
+msgstr ""
+
 #: scripts/sim/real_estate.gd:124
 msgid "Choose a project scale and a name of 1–32 characters."
+msgstr ""
+
+#: scripts/sim/media.gd:92
+msgid "Choose a running campaign."
+msgstr ""
+
+#: scripts/sim/media.gd:172
+msgid "Choose a running group business and a valid media budget."
+msgstr ""
+
+#: data/help/help.json
+msgid "Choose a slogan, visual and tone. The brief and university mentor explain the audience preferences."
 msgstr ""
 
 #: scripts/sim/manufacturing.gd:120 scripts/sim/manufacturing.gd:194
@@ -2411,6 +2611,14 @@ msgstr ""
 
 #: scripts/sim/jobs.gd:55
 msgid "Choose an offered construction contract."
+msgstr ""
+
+#: scripts/sim/media.gd:70
+msgid "Choose an open brief with a free campaign slot."
+msgstr ""
+
+#: scripts/sim/media.gd:58
+msgid "Choose an open client brief."
 msgstr ""
 
 #: scripts/sim/real_estate.gd:61
@@ -2481,6 +2689,10 @@ msgstr ""
 msgid "Clean Packaging Act passes: $0.40 levy on plastic-padded parcels."
 msgstr ""
 
+#: data/economy/media.json
+msgid "Clean charts"
+msgstr ""
+
 #: data/economy/freelance.json
 msgid "Clean up the books of %s"
 msgstr ""
@@ -2501,6 +2713,14 @@ msgstr ""
 msgid "Client"
 msgstr ""
 
+#: scripts/ui/media_ui.gd:70
+msgid "Client brief"
+msgstr ""
+
+#: scripts/ui/media_ui.gd:152 scripts/ui/media_ui.gd:169 scripts/ui/media_ui.gd:43
+msgid "Client briefs"
+msgstr ""
+
 #: scripts/ui/real_estate_ui.gd:58
 msgid "Client matches"
 msgstr ""
@@ -2511,6 +2731,14 @@ msgstr ""
 
 #: scripts/sim/careers.gd:301
 msgid "Client payment — %s"
+msgstr ""
+
+#: scripts/ui/media_ui.gd:75
+msgid "Client preferences: %s / %s / %s"
+msgstr ""
+
+#: data/events/media_client.json
+msgid "Client switches agencies"
 msgstr ""
 
 #: scripts/ui/minigames/typing_game.gd:44 scripts/ui/modals/company_os.gd:1058
@@ -2689,6 +2917,10 @@ msgstr ""
 msgid "Company registration fee — %s"
 msgstr ""
 
+#: scripts/sim/media.gd:180
+msgid "Complete two campaigns and hire a designer and media buyer before buying Campus Radio."
+msgstr ""
+
 #: scripts/ui/manufacturing_ui.gd:153
 msgid "Completed"
 msgstr ""
@@ -2773,6 +3005,10 @@ msgstr ""
 msgid "Continue"
 msgstr ""
 
+#: data/events/media_pr.json
+msgid "Continue with weaker creative"
+msgstr ""
+
 #: scripts/sim/contracts.gd:258
 msgid "Contract %s delivered to %s: %d × %s @ %s"
 msgstr ""
@@ -2795,6 +3031,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "Contracts: business deals"
+msgstr ""
+
+#: scripts/ui/media_ui.gd:73
+msgid "Conversions"
 msgstr ""
 
 #: scripts/sim/cafe.gd:53
@@ -2883,6 +3123,42 @@ msgstr ""
 
 #: scripts/ui/modals/pack_ship_modal.gd:48
 msgid "Courier · Express 1d (%s)"
+msgstr ""
+
+#: scripts/ui/minigames/creative_pitch.gd:11
+msgid "Creative Pitch"
+msgstr ""
+
+#: data/help/help.json
+msgid "Creative Pitch: read the client preferences"
+msgstr ""
+
+#: scripts/sim/media.gd:60
+msgid "Creative pitch production"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Creative quality"
+msgstr ""
+
+#: scripts/ui/media_ui.gd:76
+msgid "Creative quality %.0f%% · service fee %s · media rebate %.0f%% · Net 30"
+msgstr ""
+
+#: scripts/ui/minigames/creative_pitch.gd:32
+msgid "Creative quality: %d%%. Client fit changes campaign clicks."
+msgstr ""
+
+#: data/economy/staff.json
+msgid "Creative skill improves campaign click-through. Salary is due even when a pitch loses."
+msgstr ""
+
+#: data/npcs/kai_morgan.json
+msgid "Creator and KOL"
+msgstr ""
+
+#: data/dialogue/kai_morgan_intro.json
+msgid "Creator collaborations reach students. Check the audience mix and CPM before buying. Strong creative raises clicks; a missed KPI hurts the agency reputation."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:273
@@ -3011,6 +3287,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1347
 msgid "DRIVERS"
+msgstr ""
+
+#: data/help/help.json
+msgid "Daily reports track impressions, clicks and conversions. Finish the scope, then invoice service fees, media rebates and earned KPI bonuses."
 msgstr ""
 
 #: data/npcs/daniel.json
@@ -3333,8 +3613,16 @@ msgstr ""
 msgid "Dining"
 msgstr ""
 
+#: data/economy/media.json
+msgid "Direct"
+msgstr ""
+
 #: scripts/sim/ecommerce.gd:1178
 msgid "Dispute lost on %s: −%s"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Distribute spending by audience, not just the cheapest CPM."
 msgstr ""
 
 #: data/help/help.json
@@ -3395,6 +3683,10 @@ msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:154
 msgid "Down payment: %.0f%%"
+msgstr ""
+
+#: data/npcs/imani_cole.json
+msgid "Dr. Imani Cole"
 msgstr ""
 
 #: scripts/ui/minigames/photo_shoot_game.gd:104
@@ -3525,7 +3817,7 @@ msgstr ""
 msgid "Earn-out"
 msgstr ""
 
-#: data/businesses/ecommerce.json scripts/sim/ecommerce.gd:1343
+#: data/businesses/ecommerce.json scripts/sim/ecommerce.gd:1343 scripts/ui/media_ui.gd:159
 msgid "Ecommerce"
 msgstr ""
 
@@ -3889,6 +4181,10 @@ msgstr ""
 msgid "Fair. Boring and safe has its place."
 msgstr ""
 
+#: data/economy/media.json
+msgid "Families"
+msgstr ""
+
 #: data/regions/karu.json
 msgid "Fast growth"
 msgstr ""
@@ -3959,6 +4255,10 @@ msgstr ""
 
 #: data/city/aurelia.json data/districts/financial.json scripts/ui/minigames/pack_game.gd:9 scripts/ui/minigames/parcel_sort_game.gd:8
 msgid "Financial District"
+msgstr ""
+
+#: data/economy/media.json
+msgid "Financial billboard"
 msgstr ""
 
 #: data/businesses/international_trade.json
@@ -4281,6 +4581,10 @@ msgstr ""
 msgid "GRANTED"
 msgstr ""
 
+#: scripts/sim/media.gd:175
+msgid "GROUP-"
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Get 800 desk lamps in stock or on the way (cash, supplier terms, a Nexus Bank loan or an investor)"
 msgstr ""
@@ -4439,6 +4743,14 @@ msgstr ""
 
 #: data/story/chapters.json
 msgid "Gross profit covers a month of rent."
+msgstr ""
+
+#: scripts/sim/media.gd:176
+msgid "Group business"
+msgstr ""
+
+#: scripts/ui/media_ui.gd:43
+msgid "Group campaigns"
 msgstr ""
 
 #: data/story/chapters.json
@@ -4793,6 +5105,10 @@ msgstr ""
 msgid "Hot desk — monthly"
 msgstr ""
 
+#: scripts/ui/media_ui.gd:159
+msgid "Hotel"
+msgstr ""
+
 #: data/businesses/hotel.json
 msgid "Hotel / Tourism"
 msgstr ""
@@ -5009,6 +5325,10 @@ msgstr ""
 msgid "In transit"
 msgstr ""
 
+#: scripts/ui/modals/company_os.gd:1459
+msgid "Included internal media cost"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:319
 msgid "Includes payroll, rent, loans, supplier bills, invoices due and estimated ShopLane sales (%s/day). Excludes restocking."
 msgstr ""
@@ -5089,6 +5409,14 @@ msgstr ""
 msgid "Interest (APR)"
 msgstr ""
 
+#: scripts/sim/media.gd:112
+msgid "Internal campaign at media cost"
+msgstr ""
+
+#: scripts/ui/media_ui.gd:156
+msgid "Internal campaigns charge the target segment at media cost. No agency service fee or supplier rebate; measured conversions boost real business demand."
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:10
 msgid "International"
 msgstr ""
@@ -5107,6 +5435,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "International wire: cheap (1% + $25) but 5 to 9 days."
+msgstr ""
+
+#: data/dialogue/student_intern_intro.json
+msgid "Interns cost less but work slowly. Hire a designer and a media buyer to run three campaigns at once."
 msgstr ""
 
 #: scripts/sim/manufacturing.gd:105
@@ -5151,6 +5483,10 @@ msgstr ""
 
 #: scripts/sim/careers.gd:270
 msgid "Invoice — %s"
+msgstr ""
+
+#: scripts/ui/media_ui.gd:150
+msgid "Invoice: %s · %s"
 msgstr ""
 
 #: scripts/sim/jobs.gd:90
@@ -5325,6 +5661,10 @@ msgstr ""
 msgid "KESSLER"
 msgstr ""
 
+#: scripts/ui/media_ui.gd:149
+msgid "KPI settlement · bonus %s · review the next client brief."
+msgstr ""
+
 #: data/../assets/buildings/buildings_meta.json
 msgid "KURO RAMEN"
 msgstr ""
@@ -5347,6 +5687,14 @@ msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:10
 msgid "Kai"
+msgstr ""
+
+#: data/npcs/kai_morgan.json
+msgid "Kai Morgan"
+msgstr ""
+
+#: data/economy/media.json
+msgid "Kai Morgan KOL"
 msgstr ""
 
 #: data/regions/karu.json
@@ -5591,6 +5939,18 @@ msgstr ""
 
 #: scripts/sim/real_estate.gd:19 scripts/ui/real_estate_ui.gd:67
 msgid "Lease Harlow & Finch in Residential first."
+msgstr ""
+
+#: data/economy/staff.json
+msgid "Lease The Loft before hiring campaign staff."
+msgstr ""
+
+#: scripts/sim/media.gd:17 scripts/ui/media_ui.gd:22 scripts/ui/media_ui.gd:50
+msgid "Lease The Loft in University before opening the agency."
+msgstr ""
+
+#: data/buildings/the_loft.json
+msgid "Lease The Loft studio"
 msgstr ""
 
 #: data/buildings/unit12_factory.json
@@ -6005,6 +6365,10 @@ msgstr ""
 msgid "Low rents, old shops, cobbles and a clock tower. Open a café on the corner."
 msgstr ""
 
+#: data/economy/staff.json
+msgid "Low weekly pay, but slower production than an experienced designer."
+msgstr ""
+
 #: scripts/ui/minigames/cowork_host_game.gd:7
 msgid "Luca"
 msgstr ""
@@ -6085,6 +6449,14 @@ msgstr ""
 msgid "Main costs"
 msgstr ""
 
+#: scripts/ui/media_ui.gd:181
+msgid "Maintain Campus Radio · %s"
+msgstr ""
+
+#: scripts/ui/media_ui.gd:181
+msgid "MaintainCampusRadio"
+msgstr ""
+
 #: scripts/sim/ledger.gd:32
 msgid "Maintenance"
 msgstr ""
@@ -6095,6 +6467,10 @@ msgstr ""
 
 #: data/story/chapters.json
 msgid "Make it official. Or don't."
+msgstr ""
+
+#: data/economy/media.json
+msgid "Make work easier"
 msgstr ""
 
 #: data/story/chapters.json
@@ -6233,6 +6609,10 @@ msgstr ""
 msgid "Match score: %.0f%%"
 msgstr ""
 
+#: data/help/help.json
+msgid "Matching cards improves creative quality and click-through; cheap interns assist more slowly than designers."
+msgstr ""
+
 #: scripts/ui/real_estate_ui.gd:16
 msgid "Matchmaker"
 msgstr ""
@@ -6273,12 +6653,32 @@ msgstr ""
 msgid "Maybe. Register a company, open an account with us, and give it a couple of weeks."
 msgstr ""
 
+#: scripts/sim/media.gd:47
+msgid "Measured media campaign"
+msgstr ""
+
 #: data/regions/northridge.json
 msgid "Media"
 msgstr ""
 
-#: data/businesses/media.json
+#: data/businesses/media.json scripts/sim/media.gd:242 scripts/ui/media_ui.gd:16
 msgid "Media / Advertising"
+msgstr ""
+
+#: scripts/ui/media_ui.gd:162
+msgid "Media budget %s"
+msgstr ""
+
+#: data/economy/staff.json
+msgid "Media buyer"
+msgstr ""
+
+#: data/events/media_price.json
+msgid "Media channel price increase"
+msgstr ""
+
+#: scripts/ui/media_ui.gd:124 scripts/ui/media_ui.gd:43
+msgid "Media mix"
 msgstr ""
 
 #: scripts/ui/minigames/pack_game.gd:7
@@ -6317,6 +6717,10 @@ msgstr ""
 msgid "Metro"
 msgstr ""
 
+#: data/economy/media.json
+msgid "Metro advertising"
+msgstr ""
+
 #: autoload/scene_router.gd:207
 msgid "Metro fare to %s"
 msgstr ""
@@ -6329,6 +6733,10 @@ msgstr ""
 msgid "Metro — %s Station"
 msgstr ""
 
+#: data/districts/university.json
+msgid "Metro — University"
+msgstr ""
+
 #: scripts/ui/minigames/barista_game.gd:10
 msgid "Mia"
 msgstr ""
@@ -6339,6 +6747,10 @@ msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:98
 msgid "Milk"
+msgstr ""
+
+#: data/economy/media.json
+msgid "Minimal luxury"
 msgstr ""
 
 #: scripts/sim/company.gd:87
@@ -6735,6 +7147,10 @@ msgstr ""
 
 #: data/dialogue/jun_first.json
 msgid "Nexus Co-work, over in Startup Hub. They've got a board — suppliers, gigs, whatever."
+msgstr ""
+
+#: data/npcs/student_intern.json
+msgid "Nia Park"
 msgstr ""
 
 #: scripts/ui/hud.gd:214
@@ -7209,6 +7625,10 @@ msgstr ""
 msgid "Office rent"
 msgstr ""
 
+#: data/economy/media.json
+msgid "Office workers"
+msgstr ""
+
 #: scripts/ui/minigames/parcel_sort_game.gd:9
 msgid "Okafor"
 msgstr ""
@@ -7329,6 +7749,10 @@ msgstr ""
 msgid "Open Businesses"
 msgstr ""
 
+#: data/buildings/aurelia_university.json data/buildings/campus_radio.json data/buildings/the_loft.json data/dialogue/imani_cole_intro.json
+msgid "Open Campaign Mixer"
+msgstr ""
+
 #: scripts/ui/tutorial.gd:50
 msgid "Open Company OS at your laptop at home, or at a hot desk while your co-work pass is valid. Everything about your business happens here."
 msgstr ""
@@ -7401,6 +7825,10 @@ msgstr ""
 msgid "Open now"
 msgstr ""
 
+#: scripts/sim/media.gd:210
+msgid "Open the agency first."
+msgstr ""
+
 #: scripts/ui/real_estate_ui.gd:69
 msgid "Open the brokerage"
 msgstr ""
@@ -7417,6 +7845,10 @@ msgstr ""
 msgid "Open the business bank account first."
 msgstr ""
 
+#: scripts/ui/media_ui.gd:52
+msgid "Open the campaign studio"
+msgstr ""
+
 #: data/dialogue/lina_rails_again.json
 msgid "Open the escrow account after all."
 msgstr ""
@@ -7429,8 +7861,16 @@ msgstr ""
 msgid "Open the factory first."
 msgstr ""
 
+#: scripts/sim/media.gd:173 scripts/sim/media.gd:174
+msgid "Open the group business before buying internal media."
+msgstr ""
+
 #: scripts/ui/tutorial.gd:27
 msgid "Open your phone"
+msgstr ""
+
+#: scripts/ui/media_ui.gd:52
+msgid "OpenAgency"
 msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:69
@@ -7447,6 +7887,10 @@ msgstr ""
 
 #: scripts/sim/company.gd:95
 msgid "Opened a business account at Nexus Bank with %s of founder capital."
+msgstr ""
+
+#: scripts/sim/media.gd:24
+msgid "Opened a campaign studio at The Loft."
 msgstr ""
 
 #: scripts/sim/rails.gd:42
@@ -7655,6 +8099,14 @@ msgstr ""
 
 #: scripts/sim/wardrobe.gd:55 scripts/ui/modals/clothing_shop_modal.gd:47
 msgid "Owned"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Owned audience and inventory"
+msgstr ""
+
+#: scripts/ui/media_ui.gd:164 scripts/ui/media_ui.gd:43
+msgid "Owned media"
 msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:125
@@ -8169,6 +8621,14 @@ msgstr ""
 msgid "Pier 7 yard"
 msgstr ""
 
+#: scripts/ui/media_ui.gd:17
+msgid "Pitch client briefs, mix media channels and measure results before invoicing."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Pitch for client Jobs, run a budgeted campaign, then settle actual work."
+msgstr ""
+
 #: scripts/ui/minigames/clerk_forms_game.gd:10
 msgid "Pixel Orchard"
 msgstr ""
@@ -8215,6 +8675,10 @@ msgstr ""
 
 #: scripts/sim/ledger.gd:26
 msgid "Platform fees"
+msgstr ""
+
+#: data/economy/media.json
+msgid "Playful"
 msgstr ""
 
 #: data/dialogue/jun_first.json
@@ -8315,6 +8779,10 @@ msgstr ""
 
 #: data/regions/auroria.json
 msgid "Premium consumers"
+msgstr ""
+
+#: data/economy/media.json
+msgid "Premium customers"
 msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:168
@@ -8465,6 +8933,10 @@ msgstr ""
 msgid "Property viewing"
 msgstr ""
 
+#: scripts/ui/media_ui.gd:83
+msgid "Propose · %s · %d minutes"
+msgstr ""
+
 #: data/jobs/barista.json
 msgid "Pull shots behind Jun's counter and learn how regulars decide what to buy."
 msgstr ""
@@ -8497,6 +8969,10 @@ msgstr ""
 msgid "Quality"
 msgstr ""
 
+#: data/help/glossary.json
+msgid "Quality changes click-through and KPI results."
+msgstr ""
+
 #: scripts/ui/manufacturing_ui.gd:69
 msgid "Quality results"
 msgstr ""
@@ -8515,6 +8991,10 @@ msgstr ""
 
 #: scripts/ui/modals/purchase_return_modal.gd:32
 msgid "Quantity (up to %d)"
+msgstr ""
+
+#: data/economy/media.json
+msgid "Quiet excellence"
 msgstr ""
 
 #: data/jobs/bank_teller.json
@@ -8609,6 +9089,10 @@ msgstr ""
 msgid "Racking for 5,000 units. Pier 7 leases bays to registered companies only."
 msgstr ""
 
+#: scripts/ui/media_ui.gd:174
+msgid "RadioRecruit"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Rail reliability"
 msgstr ""
@@ -8657,6 +9141,18 @@ msgstr ""
 msgid "Read Maya's message"
 msgstr ""
 
+#: data/dialogue/imani_cole_intro.json
+msgid "Read a client brief before creating the slogan, visual and tone. Our students want belonging, bold colour and a playful voice. Media saturation limits repeated spending."
+msgstr ""
+
+#: data/help/help.json
+msgid "Read audience, goal and deadline. Create a pitch, then submit it; losing costs time and money."
+msgstr ""
+
+#: scripts/ui/minigames/creative_pitch.gd:15
+msgid "Read the audience preferences in the brief. Matching cards improve click-through."
+msgstr ""
+
 #: data/buildings/popup_unit.json
 msgid "Read the lease notice"
 msgstr ""
@@ -8695,6 +9191,10 @@ msgstr ""
 
 #: data/npcs/diane_harlow.json
 msgid "Realty mentor"
+msgstr ""
+
+#: data/economy/media.json
+msgid "Reassuring"
 msgstr ""
 
 #: scripts/ui/modals/insolvency_modal.gd:64
@@ -8737,6 +9237,10 @@ msgstr ""
 msgid "Records Clerk"
 msgstr ""
 
+#: scripts/ui/media_ui.gd:174 scripts/ui/media_ui.gd:85
+msgid "Recruit %s"
+msgstr ""
+
 #: scripts/ui/real_estate_ui.gd:109
 msgid "Recruit a realty agent"
 msgstr ""
@@ -8763,6 +9267,10 @@ msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:8
 msgid "Reed"
+msgstr ""
+
+#: data/economy/media.json
+msgid "Refined"
 msgstr ""
 
 #: scripts/ui/modals/purchase_return_modal.gd:44
@@ -8841,7 +9349,7 @@ msgstr ""
 msgid "Register (%s)"
 msgstr ""
 
-#: scripts/sim/real_estate.gd:17 scripts/ui/real_estate_ui.gd:67
+#: scripts/sim/media.gd:16 scripts/sim/real_estate.gd:17 scripts/ui/media_ui.gd:50 scripts/ui/real_estate_ui.gd:67
 msgid "Register a company and open its bank account first."
 msgstr ""
 
@@ -8963,6 +9471,10 @@ msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:97
 msgid "Reject (click the wrong field first)"
+msgstr ""
+
+#: scripts/ui/media_ui.gd:73
+msgid "Relevant reach"
 msgstr ""
 
 #: data/economy/staff.json
@@ -9109,6 +9621,10 @@ msgstr ""
 msgid "Reputation %.1f · rate about %s/h · %d delivered · %d late"
 msgstr ""
 
+#: scripts/ui/media_ui.gd:62
+msgid "Reputation: %d%% · campaign slots: %d/%d · cash: %s"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:568 scripts/ui/modals/settlement_modal.gd:95
 msgid "Reroute"
 msgstr ""
@@ -9143,6 +9659,10 @@ msgstr ""
 
 #: data/city/aurelia.json
 msgid "Residential District"
+msgstr ""
+
+#: data/economy/media.json
+msgid "Residential billboard"
 msgstr ""
 
 #: scripts/sim/bank.gd:70
@@ -9195,6 +9715,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:383 scripts/ui/modals/pause_menu.gd:13
 msgid "Resume"
+msgstr ""
+
+#: scripts/ui/media_ui.gd:132
+msgid "Resume after funding the media purchase"
 msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:11
@@ -9281,6 +9805,10 @@ msgstr ""
 msgid "Review terms in Company OS → Contracts. Accept, counter or decline there."
 msgstr ""
 
+#: data/events/media_client.json data/events/media_pr.json data/events/media_price.json
+msgid "Review the campaign and respond"
+msgstr ""
+
 #: data/economy/freelance.json
 msgid "Review the prices of %s"
 msgstr ""
@@ -9349,6 +9877,10 @@ msgstr ""
 msgid "Riverside Tower, Unit 7C"
 msgstr ""
 
+#: data/economy/media.json
+msgid "Riverside billboard"
+msgstr ""
+
 #: scripts/ui/minigames/clerk_forms_game.gd:9
 msgid "Riverstone Bakery"
 msgstr ""
@@ -9405,6 +9937,10 @@ msgstr ""
 msgid "Route planning"
 msgstr ""
 
+#: scripts/ui/media_ui.gd:55
+msgid "RouteAgencyPrerequisite"
+msgstr ""
+
 #: scripts/ui/real_estate_ui.gd:72
 msgid "RouteRealtyPrerequisite"
 msgstr ""
@@ -9431,6 +9967,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1436
 msgid "Run %s done: paid %s, fuel %s, %s on the road."
+msgstr ""
+
+#: scripts/ui/media_ui.gd:160
+msgid "Run %s internal campaign · %s"
 msgstr ""
 
 #: scripts/sim/logistics.gd:567
@@ -9633,8 +10173,20 @@ msgstr ""
 msgid "Save now"
 msgstr ""
 
+#: scripts/sim/media.gd:59 scripts/ui/media_ui.gd:104
+msgid "Save the creative production cost first."
+msgstr ""
+
 #: scripts/sim/bank.gd:65
 msgid "Save the property down payment first."
+msgstr ""
+
+#: scripts/sim/media.gd:71
+msgid "Save the proposal cost first."
+msgstr ""
+
+#: scripts/sim/media.gd:215
+msgid "Save the public-relations repair cost first."
 msgstr ""
 
 #: scripts/ui/hud.gd:149
@@ -9691,6 +10243,10 @@ msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:130
 msgid "Select property"
+msgstr ""
+
+#: scripts/ui/media_ui.gd:185
+msgid "Sell %d impressions · %s"
 msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:98
@@ -9827,6 +10383,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1447
 msgid "Shared costs are allocated by net revenue. With no revenue, they stay in Shared."
+msgstr ""
+
+#: scripts/ui/media_ui.gd:140
+msgid "Shares total 100%. Changing the mix affects the next buying cycle, not past reports."
 msgstr ""
 
 #: scripts/ui/tutorial.gd:23
@@ -10101,6 +10661,10 @@ msgstr ""
 msgid "Sleep until morning"
 msgstr ""
 
+#: data/help/glossary.json
+msgid "Slogan, visual and tone should match the client audience preferences."
+msgstr ""
+
 #: scripts/ui/modals/pause_menu.gd:30
 msgid "Slow"
 msgstr ""
@@ -10159,6 +10723,10 @@ msgstr ""
 
 #: data/dialogue/maya_intro.json
 msgid "So... now what?"
+msgstr ""
+
+#: data/economy/media.json
+msgid "Social feed"
 msgstr ""
 
 #: data/npcs/sofia.json scripts/ui/minigames/cowork_host_game.gd:7
@@ -10275,6 +10843,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:573
 msgid "Speed up"
+msgstr ""
+
+#: scripts/ui/media_ui.gd:131
+msgid "Spend %s/%s · impressions %d · clicks %d · conversions %d"
 msgstr ""
 
 #: data/events/supply_shock_plan.json
@@ -10487,6 +11059,14 @@ msgstr ""
 
 #: data/regions/auroria.json
 msgid "Strict consumer protection"
+msgstr ""
+
+#: data/economy/staff.json data/npcs/student_intern.json
+msgid "Student intern"
+msgstr ""
+
+#: data/economy/media.json
+msgid "Students"
 msgstr ""
 
 #: data/buildings/old_town_studio.json
@@ -10865,6 +11445,14 @@ msgstr ""
 msgid "The Green Shift"
 msgstr ""
 
+#: data/buildings/the_loft.json
+msgid "The Loft"
+msgstr ""
+
+#: data/properties/loft_office.json
+msgid "The Loft agency studio"
+msgstr ""
+
 #: scripts/sim/saas.gd:100
 msgid "The MVP needs %d more dev hours."
 msgstr ""
@@ -10887,6 +11475,10 @@ msgstr ""
 
 #: scripts/sim/company.gd:85
 msgid "The account is already open."
+msgstr ""
+
+#: scripts/sim/media.gd:18
+msgid "The agency is already open."
 msgstr ""
 
 #: scripts/sim/insolvency.gd:66
@@ -11101,6 +11693,10 @@ msgstr ""
 msgid "The payment still hasn't landed."
 msgstr ""
 
+#: scripts/ui/media_ui.gd:29
+msgid "The pitch lost. Review creative fit before the next proposal."
+msgstr ""
+
 #: scripts/sim/company.gd:58
 msgid "The registration fee is %s."
 msgstr ""
@@ -11181,6 +11777,10 @@ msgstr ""
 msgid "The van takes %d parcels a trip: the other %d wait for the next one."
 msgstr ""
 
+#: data/events/media_pr.json
+msgid "The weaker creative will reduce campaign clicks."
+msgstr ""
+
 #: data/events/rail_frozen.json
 msgid "The wire is on its way. Your stock ships when it lands; the frozen money comes back when the bridge reopens."
 msgstr ""
@@ -11249,6 +11849,14 @@ msgstr ""
 msgid "This RFQ has expired."
 msgstr ""
 
+#: scripts/sim/media.gd:202
+msgid "This advertising slot is unavailable or inventory is exhausted."
+msgstr ""
+
+#: scripts/sim/media.gd:62 scripts/sim/media.gd:74
+msgid "This client brief expired during production."
+msgstr ""
+
 #: scripts/sim/contracts.gd:207
 msgid "This contract belongs to another company."
 msgstr ""
@@ -11281,7 +11889,7 @@ msgstr ""
 msgid "This is the same form you'll file for your own company, so the rules are worth remembering."
 msgstr ""
 
-#: scripts/sim/jobs.gd:38
+#: scripts/sim/jobs.gd:38 scripts/sim/media.gd:203 scripts/sim/media.gd:77
 msgid "This job is no longer available."
 msgstr ""
 
@@ -11433,7 +12041,7 @@ msgstr ""
 msgid "Total interest"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1459
+#: scripts/ui/modals/company_os.gd:1460
 msgid "Total operating profit"
 msgstr ""
 
@@ -11585,8 +12193,20 @@ msgstr ""
 msgid "Units on hand at each location, units reserved for orders, and units on the way."
 msgstr ""
 
+#: data/districts/university.json
+msgid "University"
+msgstr ""
+
 #: data/city/aurelia.json
 msgid "University District"
+msgstr ""
+
+#: data/npcs/imani_cole.json
+msgid "University client mentor"
+msgstr ""
+
+#: scripts/sim/media.gd:221
+msgid "Unknown agency crisis."
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:1156
@@ -11623,6 +12243,10 @@ msgstr ""
 
 #: scripts/sim/manufacturing.gd:261
 msgid "Unlock your own brand and choose a valid batch."
+msgstr ""
+
+#: scripts/sim/media.gd:145
+msgid "Unused campaign advance refunded"
 msgstr ""
 
 #: scripts/ui/modals/loan_modal.gd:61
@@ -11919,6 +12543,10 @@ msgstr ""
 
 #: data/character/options.json
 msgid "Warm"
+msgstr ""
+
+#: data/economy/media.json
+msgid "Warm homes"
 msgstr ""
 
 #: data/help/glossary.json
@@ -13001,10 +13629,6 @@ msgstr ""
 msgid "materials"
 msgstr ""
 
-#: data/businesses/media.json
-msgid "media group"
-msgstr ""
-
 #: scripts/sim/bank.gd:109
 msgid "minus existing debt"
 msgstr ""
@@ -13133,6 +13757,10 @@ msgstr ""
 msgid "own brand"
 msgstr ""
 
+#: data/businesses/media.json
+msgid "owned media"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1022
 msgid "paid on delivery"
 msgstr ""
@@ -13247,6 +13875,10 @@ msgstr ""
 
 #: data/businesses/energy.json
 msgid "solar farm"
+msgstr ""
+
+#: data/businesses/media.json
+msgid "solo studio"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:723
@@ -13633,6 +14265,10 @@ msgstr ""
 msgid "✗ Choose an order in OEM orders first."
 msgstr ""
 
+#: scripts/ui/media_ui.gd:167
+msgid "✗ Complete two campaigns and hire a designer and media buyer before buying Campus Radio."
+msgstr ""
+
 #: scripts/ui/real_estate_ui.gd:180
 msgid "✗ Fund the next construction milestone."
 msgstr ""
@@ -13655,6 +14291,10 @@ msgstr ""
 
 #: scripts/ui/manufacturing_ui.gd:133
 msgid "✗ Rent a machine in OEM orders first."
+msgstr ""
+
+#: scripts/ui/media_ui.gd:130
+msgid "✗ Select a running campaign to adjust media shares."
 msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:142

@@ -1,0 +1,133 @@
+{
+ "id": "aurelia_university",
+ "name": "Aurelia University",
+ "district": "university",
+ "type": "public",
+ "hours": {
+  "open": "08:00",
+  "close": "20:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "aurelia_university",
+  "fallback": "civic_annex",
+  "x": 80,
+  "sign": "Aurelia University"
+ },
+ "interior": {
+  "size": [
+   16,
+   12
+  ],
+  "floor": "wood_dark",
+  "wall": "wood_panel",
+  "ambient": "office",
+  "props": [
+   {
+    "sprite": "listing_board",
+    "fallback": "cork_board",
+    "x": 30,
+    "y": 8,
+    "wall": true
+   },
+   {
+    "sprite": "framed_art",
+    "x": 150,
+    "y": 12,
+    "wall": true
+   },
+   {
+    "sprite": "window_day",
+    "x": 196,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "old_desk",
+    "fallback": "desk",
+    "x": 96,
+    "y": 70
+   },
+   {
+    "sprite": "office_chair",
+    "x": 112,
+    "y": 56,
+    "solid": false
+   },
+   {
+    "sprite": "chair",
+    "x": 112,
+    "y": 118,
+    "solid": false
+   },
+   {
+    "sprite": "filing_cabinet",
+    "x": 12,
+    "y": 50
+   },
+   {
+    "sprite": "plant",
+    "x": 216,
+    "y": 56
+   },
+   {
+    "sprite": "waiting_sofa",
+    "x": 160,
+    "y": 130
+   },
+   {
+    "sprite": "rug_small",
+    "x": 90,
+    "y": 150,
+    "floor": true
+   }
+  ],
+  "interactables": [
+   {
+    "id": "campaign_mixer",
+    "at": [
+     52,
+     100
+    ],
+    "label": "Open Campaign Mixer",
+    "action": "media_open",
+    "icon": "star"
+   }
+  ],
+  "npc_spots": {
+   "mentor": [
+    120,
+    74
+   ],
+   "intern": [
+    160,
+    74
+   ]
+  },
+  "staff_spots": {
+   "media_designer": [
+    [
+     120,
+     74
+    ],
+    [
+     160,
+     74
+    ]
+   ],
+   "media_buyer": [
+    [
+     220,
+     74
+    ]
+   ],
+   "media_intern": [
+    [
+     260,
+     74
+    ]
+   ]
+  }
+ }
+}
