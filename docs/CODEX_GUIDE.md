@@ -119,3 +119,27 @@ python3 tools/i18n_extract.py                                        # missing 0
 - The 120-day balance report must retain all three strategies and downside outcomes; segment totals must equal the company total.
 - Inspect JPG evidence for every new screen and district: units on numbers, no overflowing or untranslated text, ✓/✗ plus next step for boolean prerequisites, and the primary button is the next action.
 - Keep each ticket’s evidence at most 20 MB. Stacked Draft PRs follow the user-authorized dependency order.
+
+## Continuous mode (two sessions, stacked branches)
+
+When Claude asks for continuous mode, work through your session's list in `docs/ROADMAP.md` without waiting for reviews.
+- If the previous ticket's PR is not merged yet, branch the next one from it: `git checkout -b codex/<n>-<name> codex/<previous>`.
+  Open each PR as a Draft against `claude/exciting-bardeen-y71ixv`; first line "Stacked on #<previous PR>, merge in order", then `Closes #<n>`.
+- Before starting and before opening a PR, fetch and merge (never rebase) the latest `claude/exciting-bardeen-y71ixv`.
+  Conflicts: regenerate `game/i18n/*.po` with `python3 tools/i18n_extract.py`; keep both sides' keys in `tools/i18n/*.json`, `data/**/*.json`
+  and `docs/wiki/*.md`; keep both behaviours in code (registry entries are separate list items).
+- Put new translations in `tools/i18n/zh_TW_<topic>.json` to keep merges small.
+
+Self-review before the next ticket (all must hold):
+1. Unit tests green; `i18n_extract --check` missing 0; `wiki_check` OK; `tools/beta_audit.py` 0 hits.
+2. While developing run unit tests plus the ticket's short tour; run the full rendered walkthrough only every third ticket
+   (it takes over an hour without a GPU).
+3. Every spec line done, or explained in the PR. Numbers carry units: `Fmt.money` for unit prices, fees and memos, `money0` only for large
+   totals. Yes/no conditions show ✓/✗ plus the next step, never 0/1. At most one primary button per screen, and it is the player's next
+   sensible step; decisions mark one only when the data says `recommended: true`.
+4. Revenue only from traceable trades (R4): never book income for something that did not happen; savings reduce a cost that was really paid.
+5. Crisis effects decay; paused flows resume or time out; every event has at least two real choices; every chapter and side story has
+   "already done" and "no longer possible" tests (no soft-locks).
+6. Balance bot: at least one sensible strategy profits on average, none is risk-free.
+7. Re-read your diff for save/load, old saves, edge values and company closure. Evidence as JPG, at most 20 MB per ticket.
+At the end, report a table: PR link, test count, issues your self-review fixed, open doubts.
