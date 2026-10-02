@@ -151,7 +151,7 @@
   {
    "id": "residential",
    "name": "Residential District",
-   "status": "planned",
+   "status": "active",
    "map_pos": [
     150,
     92
@@ -343,7 +343,8 @@
      "civic_center",
      "luxury_heights",
      "shopping_street",
-     "old_town"
+     "old_town",
+     "residential"
     ]
    }
   ],
@@ -375,7 +376,15 @@
    "industrial>financial": 23,
    "industrial>civic_center": 27,
    "industrial>shopping_street": 28,
-   "industrial>old_town": 30
+   "industrial>old_town": 30,
+   "residential>old_town": 5,
+   "residential>riverside": 19,
+   "residential>startup_hub": 26,
+   "residential>financial": 28,
+   "residential>civic_center": 32,
+   "residential>shopping_street": 9,
+   "residential>harbor": 29,
+   "residential>industrial": 35
   }
  },
  "board_extra": {

@@ -34,7 +34,7 @@ static func invoice_lines(price: float, deposit: float) -> Array:
 
 static func accept(id: String) -> Dictionary:
 	var job := get_job(id)
-	if not _available(job) or job["status"] != "offered" or Clock.now() > int(job["due"]):
+	if not _available(job) or job["status"] != "offered" or Clock.now() > int(job["due"]) or job.get("direction","")=="purchase":
 		return {"ok":false, "error":I18n.t("This job is no longer available.")}
 	job["status"] = "active"
 	job["deposit_paid"] = snappedf(float(job["price"]) * float(job["deposit"]), 0.01)
@@ -49,6 +49,21 @@ static func progress(id: String, work: float) -> Dictionary:
 	job["progress"] = minf(float(job["work"]), float(job["progress"])+work)
 	return {"ok":true, "progress":job["progress"]}
 
+## Outbound construction jobs use paid milestones, never a seller's deposit or revenue invoice.
+static func accept_purchase(id: String) -> Dictionary:
+	var job := get_job(id)
+	if not _available(job) or job["status"]!="offered" or job.get("direction","")!="purchase":return {"ok":false,"error":I18n.t("Choose an offered construction contract.")}
+	job["status"]="active"
+	job["paid_cost"]=0.0
+	return {"ok":true}
+static func purchase_milestone(id: String, amount: float, work: float, account: String) -> Dictionary:
+	var job := get_job(id)
+	if not _available(job) or job.get("direction","")!="purchase" or job["status"]!="active" or not is_finite(amount) or amount<=0 or work<0 or not is_finite(work) or Ledger.cash(job["entity"])<amount or float(job.get("paid_cost",0))+amount>float(job["price"])+.01:return {"ok":false,"error":I18n.t("Fund the next construction milestone.")}
+	Ledger.post(job["entity"],I18n.t("Contractor milestone paid"),[{"acct":account,"dr":amount},{"acct":"cash","cr":amount}],{"type":"job_purchase","id":id,"segment":job["segment"]})
+	job["paid_cost"]=snappedf(float(job["paid_cost"])+amount,.01)
+	if work==0:return {"ok":true,"progress":job["progress"]}
+	return progress(id,work)
+
 static func deliver(id: String) -> Dictionary:
 	var job := get_job(id)
 	if not _available(job) or job["status"] != "active" or float(job["progress"]) < float(job["work"]):
@@ -59,7 +74,7 @@ static func deliver(id: String) -> Dictionary:
 
 static func invoice(id: String) -> Dictionary:
 	var job := get_job(id)
-	if not _available(job) or job["status"] != "delivered":
+	if not _available(job) or job["status"] != "delivered" or job.get("direction","")=="purchase":
 		return {"ok":false, "error":I18n.t("Deliver this job before invoicing.")}
 	var penalty := snappedf(float(job["price"]) * float(job["penalty_rate"]), 0.01) if int(job["delivered"]) > int(job["due"]) else 0.0
 	var receivable := maxf(0, float(job["price"])-float(job["deposit_paid"])-penalty)

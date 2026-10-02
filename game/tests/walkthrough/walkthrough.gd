@@ -17,6 +17,11 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from")=="real_estate":
+		await _fast_forward_to_ch10()
+		await _real_estate()
+		await _save_load()
+		return
 	if _arg("from") == "manufacturing":
 		await _fast_forward_to_ch10()
 		await _manufacturing()
@@ -73,6 +78,13 @@ func run() -> void:
 		SceneRouter._enter("interior", "riverside_apartment", "bed_side", "")
 		await wait_world()
 		await _manufacturing()
+		await _save_load()
+		await close_modal()
+		GameState.new_game({"name":"Realty Founder","seed":65001})
+		await _fast_forward_to_ch10()
+		SceneRouter._enter("interior","riverside_apartment","bed_side","")
+		await wait_world()
+		await _real_estate()
 		await _save_load()
 
 
@@ -1221,6 +1233,61 @@ func _old_town_cafe() -> void:
 
 
 ## Manufacturing: a real-input factory fixture through the first traceable OEM invoice.
+func _real_estate() -> void:
+	bot.step("Residential — licence, brokerage office, client match and first commission")
+	while Clock.weekday() not in [1,2,3,4,5]:Clock.advance(Clock.DAY)
+	Clock.advance_to(Clock.next_time_of_day(10*60))
+	await popups()
+	await close_modal()
+	if SceneRouter.world_scene().kind=="interior":await exit_building()
+	await metro_to("civic_center")
+	await enter_building("city_hall")
+	await bot.use_action("permits_info")
+	await bot.click_named("PropertyPermits")
+	await bot.click_named("ApplyRealtyPermit_brokerage")
+	await close_modal()
+	await close_modal()
+	Clock.advance(3*Clock.DAY)
+	await popups()
+	bot.expect(RealEstate.licence(),"brokerage licence followed City Hall fee and three-day process")
+	await exit_building()
+	await metro_to("residential")
+	await bot.shot("residential_day")
+	await enter_building("harlow_finch")
+	await bot.use_action("lease_property")
+	await bot.click_named("SignLease_realty_office")
+	await close_modal()
+	await bot.use_action("real_estate_open")
+	await bot.click_named("OpenBrokerage")
+	await bot.shot("matchmaker")
+	await close_modal()
+	for week in 8:
+		for mandate in RealEstate.S()["mandates"].values().duplicate():
+			if mandate["status"]!="open":continue
+			for client in RealEstate.S()["clients"].values().duplicate():
+				if client["status"]!="open" or client["kind"]!=mandate["kind"] or float(client["budget"])<float(mandate["floor"]):continue
+				await bot.use_action("real_estate_open")
+				await bot.click_named("Mandate_"+str(mandate["id"]))
+				await bot.click_named("Client_"+str(client["id"]))
+				await bot.click_named("Negotiate_soft")
+				await bot.click_named("ArrangeViewing")
+				await close_modal()
+				await popups()
+				if GameState.stat("realty_matches")>0:break
+			if GameState.stat("realty_matches")>0:break
+		if GameState.stat("realty_matches")>0:break
+		Clock.advance(7*Clock.DAY)
+		await popups()
+	bot.expect(GameState.stat("realty_matches")>0,"first brokerage income from a real client deal")
+	bot.expect(Ledger.check_balanced(),"viewing and commission ledger balanced")
+	await bot.use_action("real_estate_open")
+	await bot.click_named("RealtyTab_properties")
+	await bot.shot("property_management")
+	await close_modal()
+	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")
+
 func _manufacturing() -> void:
 	bot.step("Industrial — factory lease, machine, technician and first OEM invoice")
 	await popups()

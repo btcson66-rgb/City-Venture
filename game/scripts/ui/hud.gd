@@ -81,6 +81,7 @@ func _ready() -> void:
 	cash_label = UIK.title("", 11, Art.C_GREEN, true)
 	ml.add_child(cash_label)
 	today_label = UIK.label("", 6, Art.C_GREEN, true)
+	today_label.add_theme_font_override("font", UIK.num_font())
 	ml.add_child(today_label)
 	co_row = UIK.hbox(4)
 	mv.add_child(co_row)
@@ -267,7 +268,8 @@ func _on_cash(entity: String, delta: float) -> void:
 	if not visible or absf(delta) < 0.01:
 		return
 	var l := UIK.title(Fmt.money(delta, true), 9, Art.C_GREEN if delta > 0 else Art.C_RED)
-	l.position = Vector2(640 - 70, 40 if entity == "player" else 62)
+	# Large property payments must stay inside the viewport as well as ordinary small cash deltas.
+	l.position = Vector2(640 - 6 - l.get_combined_minimum_size().x, 40 if entity == "player" else 62)
 	add_child(l)
 	var tw := create_tween()
 	tw.tween_property(l, "position:y", l.position.y + 14, 1.2)

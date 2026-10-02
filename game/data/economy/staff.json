@@ -118,6 +118,29 @@
     17
    ],
    "desc": "Runs factory machines. Skill lowers defects; payroll remains due during downtime."
+  },
+  "realty_agent": {
+   "name": "Realty agent",
+   "salary_week": [
+    900,
+    900
+   ],
+   "needs_office": false,
+   "needs_lease": "realty_office",
+   "workplace": "harlow_finch",
+   "work_days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "work_hours": [
+    9,
+    17
+   ],
+   "desc": "Assists brokerage client matches. Payroll is due even when deals fail.",
+   "needs_text": "Lease Harlow & Finch before hiring an agent."
   }
  },
  "traits": [

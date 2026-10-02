@@ -144,6 +144,7 @@ static func close_company() -> Dictionary:
 		lines.append({"acct": "exp:other", "dr": inv - left})
 	if inv > 0.01:
 		lines.append({"acct": "investments", "cr": inv})
+		if left>inv:lines.append({"acct":"other_income","cr":snappedf(left-inv,.01)})
 		Ledger.post("player", I18n.t("%s closed: final distribution, rest of the investment written off") % GameState.entity_name(ent), lines, {"type": "liquidation"})
 	elif left > 0.01:
 		Ledger.post("player", I18n.t("%s closed: final distribution") % GameState.entity_name(ent), [{"acct": "cash", "dr": left}, {"acct": "other_income", "cr": left}], {"type": "liquidation"})

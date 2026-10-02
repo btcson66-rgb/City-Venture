@@ -1,0 +1,89 @@
+{
+ "id": "maple_court",
+ "name": "Maple Court",
+ "district": "residential",
+ "type": "flat_to_let",
+ "hours": {
+  "open": "09:00",
+  "close": "19:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "maple_court",
+  "fallback": "apartment_mid",
+  "x": 80,
+  "sign": "Maple Court"
+ },
+ "interior": {
+  "size": [
+   14,
+   11
+  ],
+  "floor": "wood_warm",
+  "wall": "plaster_warm",
+  "ambient": "",
+  "props": [
+   {
+    "sprite": "window_day",
+    "x": 40,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "radiator",
+    "fallback": "plant",
+    "x": 150,
+    "y": 50
+   },
+   {
+    "sprite": "bed_single",
+    "fallback": "bed",
+    "x": 150,
+    "y": 90
+   },
+   {
+    "sprite": "kitchenette",
+    "fallback": "kitchen",
+    "x": 10,
+    "y": 44
+   },
+   {
+    "sprite": "rug_small",
+    "x": 80,
+    "y": 120,
+    "floor": true
+   }
+  ],
+  "interactables": [
+   {
+    "id": "realty_terminal",
+    "at": [
+     52,
+     100
+    ],
+    "label": "Open Matchmaker",
+    "action": "real_estate_open",
+    "icon": "home"
+   }
+  ],
+  "npc_spots": {
+   "agent": [
+    120,
+    74
+   ]
+  },
+  "staff_spots": {
+   "realty_agent": [
+    [
+     120,
+     74
+    ],
+    [
+     160,
+     74
+    ]
+   ]
+  }
+ }
+}

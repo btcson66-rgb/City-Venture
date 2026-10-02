@@ -153,7 +153,7 @@ func _decorate_walls(wt: int, ht: int) -> void:
 			var pl := ColorRect.new()
 			pl.color = wc.darkened(0.12)
 			pl.position = Vector2(x + 3, WALL_ROWS * T - 13)
-			pl.size = Vector2(18, 9)
+			pl.size = Vector2(maxi(0,mini(18,W-x-3)), 9)
 			back_layer.add_child(pl)
 		var tr := ColorRect.new()
 		tr.color = wc.lightened(0.25)

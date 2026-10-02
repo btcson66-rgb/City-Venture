@@ -734,3 +734,7 @@ Claude 線接下來要開放兩個街區和兩個新產業：
 # Manufacturing (#64)
 
 Facade requests: `facades/unit12_factory.png`, `facades/ferro_supply.png`, `facades/kessler_precision.png`, `facades/shift_diner.png`; existing `brick_shops` / `byte_bean` are rendered through Art.has_tex fallback. Future industrial freight sprite: `vehicles/industrial_truck_side_body.png` and `vehicles/industrial_truck_side_detail.png`; existing vans provide current freight traffic. Interior machine request: `props/cnc_machine.png` (packing bench fallback), material rack request `props/ferro_material_rack.png` (parcel shelf fallback). No art files are modified by this ticket.
+
+# Real Estate (#65)
+
+Facade requests: `buildings/maple_court.png`, `buildings/birch_row.png`, `buildings/harlow_finch.png`, `buildings/lot7.png`, `buildings/lot7_construction.png`, `buildings/venture_tower.png`, with lights variants. Existing apartment, rowhouse, lettings, warehouse and office facades use Art.has_tex fallback; construction and completion are distinct live saved states, including the player's name. New furniture request `props/realty_listings_board.png` uses a cork-board fallback. Existing furnished homes/lettings office provide explorable interiors. No asset files changed.

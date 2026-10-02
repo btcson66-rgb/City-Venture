@@ -1,0 +1,82 @@
+{
+ "id": "lot7",
+ "name": "Lot 7",
+ "district": "residential",
+ "type": "office",
+ "hours": {
+  "open": "08:00",
+  "close": "20:00",
+  "days": "all",
+  "always_if_lease": "suite_2b"
+ },
+ "exterior": {
+  "sprite": "lot7",
+  "fallback": "office_slab",
+  "x": 1265,
+  "sign": "Lot 7"
+ },
+ "interior": {
+  "size": [
+   24,
+   15
+  ],
+  "floor": "wood_dark",
+  "wall": "brick",
+  "ambient": "office",
+  "property": "suite_2b",
+  "props": [
+   {
+    "sprite": "cork_board",
+    "x": 40,
+    "y": 8,
+    "wall": true
+   },
+   {
+    "sprite": "box",
+    "x": 160,
+    "y": 80
+   },
+   {
+    "sprite": "packing_table",
+    "x": 20,
+    "y": 60
+   }
+  ],
+  "stock_display": {
+   "location": "suite_2b",
+   "x": 292,
+   "y": 112,
+   "cols": 5
+  },
+  "interactables": [
+   {
+    "id": "realty_terminal",
+    "at": [
+     52,
+     100
+    ],
+    "label": "Open Matchmaker",
+    "action": "real_estate_open",
+    "icon": "home"
+   }
+  ],
+  "npc_spots": {
+   "agent": [
+    120,
+    74
+   ]
+  },
+  "staff_spots": {
+   "realty_agent": [
+    [
+     120,
+     74
+    ],
+    [
+     160,
+     74
+    ]
+   ]
+  }
+ }
+}

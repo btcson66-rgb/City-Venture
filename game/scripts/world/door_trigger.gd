@@ -35,7 +35,9 @@ func _process(delta: float) -> void:
 	var near := pl != null and pl.global_position.distance_to(global_position + _center) < 44.0
 	if near and _hint.modulate.a < 0.05:
 		var st := SceneRouter.building_open(building_id)
-		var nm := I18n.t(str(DataDB.building(building_id).get("name", building_id)))
+		var definition := DataDB.building(building_id)
+		if building_id=="lot7":definition=RealEstate.lot_definition(definition)
+		var nm := I18n.t(str(definition.get("name", building_id)))
 		_hint_label.text = ("▲ " + I18n.t("Enter %s") % nm) if st["open"] else (nm + " · " + I18n.t("Closed"))
 		_hint_label.add_theme_color_override("font_color", Color(1.0, 0.86, 0.42) if st["open"] else Color(1.0, 0.55, 0.5))
 		_hint.reset_size()

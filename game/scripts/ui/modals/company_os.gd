@@ -7,7 +7,7 @@ const TABS := [["overview", "Overview", "company"], ["finance", "Finance", "fina
 	["operations", "Operations", "parcel"], ["inventory", "Inventory", "inventory"], ["people", "People", "people"],
 	["contracts", "Contracts", "contracts"], ["segments", "Segments", "finance"]]
 
-const PLANNED := [["Property", "home"], ["International", "world"], ["Reports", "tasks"]]
+const PLANNED := [["International", "world"], ["Reports", "tasks"]]
 
 var terminal := "laptop"
 var tab := "overview"
@@ -83,7 +83,10 @@ func build() -> void:
 	body.add_child(row)
 	var nav := UIK.vbox(2)
 	nav.custom_minimum_size = Vector2(96, 0)
-	row.add_child(nav)
+	# Industry launchers can outgrow the window; keep the content and every navigation action reachable.
+	var nav_scroll := UIK.scroll(nav, Vector2(108, 272))
+	nav_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	row.add_child(nav_scroll)
 	var shown: Array = TABS.duplicate(true)
 	for descriptor in Industries.tabs():
 		if descriptor.has("nav_index"):
