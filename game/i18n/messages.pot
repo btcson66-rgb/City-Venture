@@ -9,7 +9,7 @@ msgstr ""
 msgid "\n%dxxx"
 msgstr ""
 
-#: scripts/ui/hud.gd:235
+#: scripts/ui/hud.gd:238
 msgid "   ◆ decision"
 msgstr ""
 
@@ -29,7 +29,7 @@ msgstr ""
 msgid "  of which on hold (<2 days)"
 msgstr ""
 
-#: scripts/ui/hud.gd:210
+#: scripts/ui/hud.gd:213
 msgid "  ·  DAY %d"
 msgstr ""
 
@@ -69,7 +69,7 @@ msgstr ""
 msgid " ltd"
 msgstr ""
 
-#: scripts/ui/hud.gd:221
+#: scripts/ui/hud.gd:224
 msgid " today"
 msgstr ""
 
@@ -329,7 +329,7 @@ msgstr ""
 msgid "%s is busy."
 msgstr ""
 
-#: autoload/scene_router.gd:176
+#: autoload/scene_router.gd:160
 msgid "%s is closed. Open %s–%s, %s."
 msgstr ""
 
@@ -629,7 +629,7 @@ msgstr ""
 msgid "A big sale can still leave you short of cash for two months. Check the cash forecast before you say yes."
 msgstr ""
 
-#: scripts/frontend/main_menu.gd:36
+#: scripts/frontend/main_menu.gd:38
 msgid "A business-simulation RPG in a living, modern city."
 msgstr ""
 
@@ -857,6 +857,10 @@ msgstr ""
 msgid "Accepted."
 msgstr ""
 
+#: scripts/ui/modals/settings_modal.gd:5
+msgid "Accessibility"
+msgstr ""
+
 #: scripts/frontend/character_creator.gd:148
 msgid "Accessory"
 msgstr ""
@@ -925,7 +929,7 @@ msgstr ""
 msgid "After a shift you're tired: go home and sleep in your bed (any time after work, or from 7 PM). Overnight your listing keeps selling and deliveries keep moving. Tomorrow, the city is yours."
 msgstr ""
 
-#: scripts/ui/hud.gd:213
+#: scripts/ui/hud.gd:216
 msgid "Afternoon · Sunny"
 msgstr ""
 
@@ -991,6 +995,10 @@ msgstr ""
 
 #: scripts/ui/minigames/photo_shoot_game.gd:293
 msgid "Amateur-looking. It will cost you some sales; you can reshoot later."
+msgstr ""
+
+#: autoload/preferences.gd:168 scripts/ui/modals/settings_modal.gd:30
+msgid "Ambience"
 msgstr ""
 
 #: data/economy/staff.json
@@ -1149,6 +1157,10 @@ msgstr ""
 msgid "Auburn"
 msgstr ""
 
+#: scripts/ui/modals/settings_modal.gd:5
+msgid "Audio"
+msgstr ""
+
 #: data/economy/freelance.json
 msgid "Audit the online store of %s"
 msgstr ""
@@ -1205,6 +1217,10 @@ msgstr ""
 msgid "Automotive"
 msgstr ""
 
+#: scripts/ui/modals/settings_modal.gd:61
+msgid "Autosave interval"
+msgstr ""
+
 #: scripts/ui/minigames/barista_game.gd:10
 msgid "Ava"
 msgstr ""
@@ -1253,7 +1269,7 @@ msgstr ""
 msgid "BRIDGE EXPLOIT: attackers drain the reserve behind the digital-dollar rail."
 msgstr ""
 
-#: scripts/frontend/main_menu.gd:33
+#: scripts/frontend/main_menu.gd:35
 msgid "BUILD  ·  LIVE  ·  CONNECT  ·  GROW"
 msgstr ""
 
@@ -1433,6 +1449,10 @@ msgstr ""
 msgid "Blue"
 msgstr ""
 
+#: scripts/ui/modals/settings_modal.gd:55
+msgid "Blue-yellow"
+msgstr ""
+
 #: data/character/options.json
 msgid "Bob"
 msgstr ""
@@ -1447,6 +1467,10 @@ msgstr ""
 
 #: scripts/ui/modals/loan_modal.gd:89 scripts/ui/modals/loan_modal.gd:93
 msgid "Book an appointment"
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:34
+msgid "Borderless"
 msgstr ""
 
 #: data/dialogue/lina_intro.json
@@ -1801,7 +1825,7 @@ msgstr ""
 msgid "CHURN"
 msgstr ""
 
-#: scripts/frontend/main_menu.gd:27 scripts/frontend/main_menu.gd:30
+#: scripts/frontend/main_menu.gd:29 scripts/frontend/main_menu.gd:32
 msgid "CITY VENTURE"
 msgstr ""
 
@@ -1885,7 +1909,7 @@ msgstr ""
 msgid "Call me when you can do volume."
 msgstr ""
 
-#: autoload/scene_router.gd:87
+#: autoload/scene_router.gd:71
 msgid "Call me. Or text. Or whatever."
 msgstr ""
 
@@ -1989,7 +2013,7 @@ msgstr ""
 msgid "Carry them to PostPoint yourself (cheaper, costs your time)"
 msgstr ""
 
-#: scripts/ui/hud.gd:240
+#: scripts/ui/hud.gd:243
 msgid "Carrying %d parcel%s"
 msgstr ""
 
@@ -2135,6 +2159,14 @@ msgstr ""
 
 #: scripts/ui/minigames/parcel_sort_game.gd:9
 msgid "Chen"
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:138
+msgid "Choice %d"
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:59
+msgid "Choices always wait for you. Profit and loss use text and signed amounts as well as color."
 msgstr ""
 
 #: scripts/ui/tutorial.gd:45
@@ -2337,6 +2369,10 @@ msgstr ""
 msgid "Collect the money Crestline owes you"
 msgstr ""
 
+#: scripts/ui/modals/settings_modal.gd:55
+msgid "Color assistance"
+msgstr ""
+
 #: scripts/sim/bank.gd:106
 msgid "Come back when %s has %d days of statements, or a signed contract."
 msgstr ""
@@ -2371,6 +2407,10 @@ msgstr ""
 
 #: scripts/ui/modals/bank_modal.gd:58
 msgid "Company"
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:7
+msgid "Company OS"
 msgstr ""
 
 #: data/help/help.json
@@ -2433,6 +2473,10 @@ msgstr ""
 msgid "Compliance: filings, checks and the compliance officer — %s"
 msgstr ""
 
+#: scripts/ui/modals/settings_modal.gd:8
+msgid "Confirm"
+msgstr ""
+
 #: scripts/ui/modals/purchase_return_modal.gd:55
 msgid "Confirm cancellation"
 msgstr ""
@@ -2465,7 +2509,7 @@ msgstr ""
 msgid "Containers, customs and freight. Rent Pier 7 for stock, buy a used van from Sam, and start delivering."
 msgstr ""
 
-#: scripts/frontend/main_menu.gd:48 scripts/ui/minigames/mini_game.gd:173 scripts/ui/modals/month_close_modal.gd:56
+#: scripts/frontend/main_menu.gd:50 scripts/ui/minigames/mini_game.gd:173 scripts/ui/modals/month_close_modal.gd:56
 msgid "Continue"
 msgstr ""
 
@@ -2487,6 +2531,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "Contracts: business deals"
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:5
+msgid "Controls"
 msgstr ""
 
 #: scripts/sim/cafe.gd:53
@@ -2757,16 +2805,12 @@ msgstr ""
 msgid "Day"
 msgstr ""
 
-#: scripts/frontend/main_menu.gd:57
+#: scripts/frontend/main_menu.gd:59
 msgid "Day %d"
 msgstr ""
 
 #: scripts/ui/modals/save_list_modal.gd:55
 msgid "Day %d · personal %s"
-msgstr ""
-
-#: scripts/ui/modals/pause_menu.gd:29
-msgid "Day length"
 msgstr ""
 
 #: scripts/ui/modals/cowork_desk_modal.gd:15
@@ -2853,6 +2897,14 @@ msgstr ""
 msgid "Deep supplier base"
 msgstr ""
 
+#: scripts/ui/modals/settings_modal.gd:62
+msgid "Default game speed"
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:64
+msgid "Default speed applies at launch. Hold Fast-forward for twice the current speed; release to resume."
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Deliver Crestline's lamps before the deadline (Company OS → Contracts)"
 msgstr ""
@@ -2925,7 +2977,7 @@ msgstr ""
 msgid "Deposits"
 msgstr ""
 
-#: scripts/ui/minigames/route_game.gd:318
+#: scripts/ui/minigames/route_game.gd:319
 msgid "Depot"
 msgstr ""
 
@@ -2997,6 +3049,10 @@ msgstr ""
 msgid "Dining"
 msgstr ""
 
+#: scripts/ui/modals/settings_modal.gd:5
+msgid "Display"
+msgstr ""
+
 #: scripts/sim/ecommerce.gd:1223
 msgid "Dispute lost on %s: −%s"
 msgstr ""
@@ -3041,7 +3097,7 @@ msgstr ""
 msgid "Don't forget to eat."
 msgstr ""
 
-#: scripts/ui/modals/bank_modal.gd:73 scripts/ui/modals/pack_ship_modal.gd:68 scripts/ui/modals/permits_modal.gd:17
+#: scripts/ui/modals/bank_modal.gd:73 scripts/ui/modals/pack_ship_modal.gd:68 scripts/ui/modals/permits_modal.gd:17 scripts/ui/modals/settings_modal.gd:65
 msgid "Done"
 msgstr ""
 
@@ -3113,7 +3169,7 @@ msgstr ""
 msgid "E / click to skip"
 msgstr ""
 
-#: scripts/ui/dialogue_box.gd:66
+#: scripts/ui/dialogue_box.gd:67
 msgid "E / click ›"
 msgstr ""
 
@@ -3273,10 +3329,6 @@ msgstr ""
 msgid "Equity investment"
 msgstr ""
 
-#: scripts/ui/hud.gd:108
-msgid "Esc"
-msgstr ""
-
 #: data/help/help.json
 msgid "Escrow (Year 6, ask Lina Zhao): your money is locked in a contract and paid to the supplier only when the goods arrive. 0.6% (at least $15), no wire delay, refunded if they never ship."
 msgstr ""
@@ -3329,7 +3381,7 @@ msgstr ""
 msgid "Estimated sales"
 msgstr ""
 
-#: scripts/ui/hud.gd:213
+#: scripts/ui/hud.gd:216
 msgid "Evening"
 msgstr ""
 
@@ -3413,6 +3465,10 @@ msgstr ""
 msgid "Expression ▶"
 msgstr ""
 
+#: scripts/ui/modals/settings_modal.gd:36
+msgid "Extra large"
+msgstr ""
+
 #: scripts/frontend/character_creator.gd:136
 msgid "Eye colour"
 msgstr ""
@@ -3491,6 +3547,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "Fast payment means stock moves sooner. You need an exchange account, and a new payment rail brings its own risks."
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:8
+msgid "Fast-forward"
 msgstr ""
 
 #: data/economy/staff.json
@@ -3833,8 +3893,16 @@ msgstr ""
 msgid "Fulfilment pipeline"
 msgstr ""
 
+#: scripts/ui/modals/settings_modal.gd:34
+msgid "Fullscreen"
+msgstr ""
+
 #: scripts/ui/modals/permits_modal.gd:123 scripts/ui/modals/permits_modal.gd:57
 msgid "GRANTED"
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:5
+msgid "Game"
 msgstr ""
 
 #: data/story/chapters.json
@@ -4013,7 +4081,7 @@ msgstr ""
 msgid "Growth market"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:58
+#: scripts/ui/modals/pause_menu.gd:40
 msgid "Guide arrow"
 msgstr ""
 
@@ -4217,8 +4285,8 @@ msgstr ""
 msgid "Hi-vis vest, work trousers, steel-toe boots. For warehouse days."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:46
-msgid "High"
+#: scripts/ui/modals/settings_modal.gd:55
+msgid "High contrast"
 msgstr ""
 
 #: data/regions/northridge.json
@@ -4563,6 +4631,10 @@ msgstr ""
 
 #: data/dialogue/sam_intro.json
 msgid "Insure it, keep it moving, and it earns. Leave it on the kerb and it is just a very expensive shed."
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:7
+msgid "Interact"
 msgstr ""
 
 #: scripts/sim/ledger.gd:30
@@ -4925,7 +4997,7 @@ msgstr ""
 msgid "LIVE"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:35
+#: scripts/ui/modals/pause_menu.gd:32
 msgid "Language"
 msgstr ""
 
@@ -4953,12 +5025,20 @@ msgstr ""
 msgid "Laptop · café table"
 msgstr ""
 
+#: scripts/ui/modals/settings_modal.gd:36
+msgid "Large"
+msgstr ""
+
 #: scripts/ui/minigames/pack_game.gd:7
 msgid "Large box"
 msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:6
 msgid "Large cup"
+msgstr ""
+
+#: data/help/help.json
+msgid "Large text uses scrollbars. Choices always wait for you."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1271
@@ -5225,7 +5305,7 @@ msgstr ""
 msgid "Load a game"
 msgstr ""
 
-#: scripts/frontend/main_menu.gd:61
+#: scripts/frontend/main_menu.gd:63
 msgid "Load game (%d)"
 msgstr ""
 
@@ -5365,10 +5445,6 @@ msgstr ""
 msgid "Love it."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:46
-msgid "Low"
-msgstr ""
-
 #: data/city/aurelia.json
 msgid "Low rents, old shops, cobbles and a clock tower. Open a café on the corner."
 msgstr ""
@@ -5457,7 +5533,7 @@ msgstr ""
 msgid "Manufacturing & Logistics"
 msgstr ""
 
-#: scripts/ui/hud.gd:107
+#: scripts/ui/hud.gd:107 scripts/ui/modals/settings_modal.gd:7
 msgid "Map"
 msgstr ""
 
@@ -5529,8 +5605,12 @@ msgstr ""
 msgid "Masculine, feminine or neutral changes the body shape only. There are no ability differences."
 msgstr ""
 
-#: autoload/sound.gd:47
+#: autoload/preferences.gd:168 autoload/preferences.gd:174 autoload/sound.gd:47
 msgid "Master"
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:30
+msgid "Master volume"
 msgstr ""
 
 #: data/regions/northridge.json
@@ -5565,6 +5645,10 @@ msgstr ""
 msgid "Media / Advertising"
 msgstr ""
 
+#: scripts/ui/modals/settings_modal.gd:36
+msgid "Medium"
+msgstr ""
+
 #: scripts/ui/minigames/pack_game.gd:7
 msgid "Medium box"
 msgstr ""
@@ -5597,7 +5681,7 @@ msgstr ""
 msgid "Metro"
 msgstr ""
 
-#: autoload/scene_router.gd:207
+#: autoload/scene_router.gd:191
 msgid "Metro fare to %s"
 msgstr ""
 
@@ -5611,10 +5695,6 @@ msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:10
 msgid "Mia"
-msgstr ""
-
-#: scripts/ui/modals/pause_menu.gd:46
-msgid "Mid"
 msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:98
@@ -5721,11 +5801,11 @@ msgstr ""
 msgid "Monthly rent"
 msgstr ""
 
-#: autoload/scene_router.gd:175 scripts/ui/modals/job_modal.gd:31
+#: autoload/scene_router.gd:159 scripts/ui/modals/job_modal.gd:31
 msgid "Mon–Fri"
 msgstr ""
 
-#: autoload/scene_router.gd:175
+#: autoload/scene_router.gd:159
 msgid "Mon–Sat"
 msgstr ""
 
@@ -5749,7 +5829,7 @@ msgstr ""
 msgid "Moreau"
 msgstr ""
 
-#: scripts/ui/hud.gd:213
+#: scripts/ui/hud.gd:216
 msgid "Morning · Sunny"
 msgstr ""
 
@@ -5763,6 +5843,22 @@ msgstr ""
 
 #: scripts/frontend/character_creator.gd:138
 msgid "Mouth"
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:6
+msgid "Move down"
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:6
+msgid "Move left"
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:6
+msgid "Move right"
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:6
+msgid "Move up"
 msgstr ""
 
 #: autoload/game_state.gd:34
@@ -5789,7 +5885,7 @@ msgstr ""
 msgid "Mr. Okafor: \"Keys, meter readings, and my number. The espresso smell is included.\""
 msgstr ""
 
-#: autoload/sound.gd:24 autoload/sound.gd:31 autoload/sound.gd:32 autoload/sound.gd:58
+#: autoload/preferences.gd:168 autoload/sound.gd:24 autoload/sound.gd:31 autoload/sound.gd:32
 msgid "Music"
 msgstr ""
 
@@ -5873,7 +5969,7 @@ msgstr ""
 msgid "Neutral"
 msgstr ""
 
-#: scripts/frontend/main_menu.gd:44
+#: scripts/frontend/main_menu.gd:46
 msgid "New Game"
 msgstr ""
 
@@ -5965,7 +6061,7 @@ msgstr ""
 msgid "Nexus Co-work, over in Startup Hub. They've got a board — suppliers, gigs, whatever."
 msgstr ""
 
-#: scripts/ui/hud.gd:213
+#: scripts/ui/hud.gd:216
 msgid "Night"
 msgstr ""
 
@@ -6133,10 +6229,6 @@ msgstr ""
 msgid "Nori Tea House"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:30
-msgid "Normal"
-msgstr ""
-
 #: data/regions/northridge.json
 msgid "Northridge"
 msgstr ""
@@ -6253,6 +6345,10 @@ msgstr ""
 msgid "Nothing to resolve."
 msgstr ""
 
+#: scripts/ui/modals/settings_modal.gd:58
+msgid "Notification duration"
+msgstr ""
+
 #: scripts/ui/phone_ui.gd:255
 msgid "Notifications only.\nManage at a desk: Company OS."
 msgstr ""
@@ -6329,7 +6425,7 @@ msgstr ""
 msgid "Of course you are."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:46 scripts/ui/modals/pause_menu.gd:61
+#: scripts/ui/modals/pause_menu.gd:43 scripts/ui/modals/settings_modal.gd:55
 msgid "Off"
 msgstr ""
 
@@ -6397,7 +6493,7 @@ msgstr ""
 msgid "Omar"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:60
+#: scripts/ui/modals/pause_menu.gd:42
 msgid "On"
 msgstr ""
 
@@ -6910,14 +7006,14 @@ msgid "Parcel Sorter"
 msgstr ""
 
 #: scripts/ui/minigames/parcel_sort_game.gd:26
-msgid "Parcels come down the belt one at a time. Send each to its district's bin: click the bin or press 1–5."
+msgid "Parcels come down the belt one at a time. Click the district bin or use the Choice 1–5 bindings in Settings."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:253
 msgid "Parcels out for delivery"
 msgstr ""
 
-#: scripts/ui/minigames/parcel_sort_game.gd:135
+#: scripts/ui/minigames/parcel_sort_game.gd:136
 msgid "Parcels sorted correctly: %d / %d"
 msgstr ""
 
@@ -6973,7 +7069,7 @@ msgstr ""
 msgid "Patel"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:369
+#: scripts/ui/modals/company_os.gd:369 scripts/ui/modals/settings_modal.gd:8
 msgid "Pause"
 msgstr ""
 
@@ -7141,7 +7237,7 @@ msgstr ""
 msgid "Personal seller limit reached. Your listings are paused until next month — or until you register a business."
 msgstr ""
 
-#: scripts/ui/hud.gd:105
+#: scripts/ui/hud.gd:105 scripts/ui/modals/settings_modal.gd:7
 msgid "Phone"
 msgstr ""
 
@@ -7361,6 +7457,10 @@ msgstr ""
 msgid "Press Serve before their patience runs out. Right drinks, served fast, lift your café's rating."
 msgstr ""
 
+#: scripts/ui/modals/settings_modal.gd:46
+msgid "Press a key. Esc cancels key capture."
+msgstr ""
+
 #: scripts/ui/minigames/photo_shoot_game.gd:41
 msgid "Press the shutter when the focus needle is in the green. You get three shots; the best one goes on your listing."
 msgstr ""
@@ -7481,7 +7581,7 @@ msgstr ""
 msgid "Quiet morning. You read the small-business lending policy twice."
 msgstr ""
 
-#: scripts/frontend/main_menu.gd:65
+#: scripts/frontend/main_menu.gd:70
 msgid "Quit"
 msgstr ""
 
@@ -7489,7 +7589,7 @@ msgstr ""
 msgid "Quit job"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:69
+#: scripts/ui/modals/pause_menu.gd:51
 msgid "Quit to title"
 msgstr ""
 
@@ -7687,6 +7787,14 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:474
 msgid "Recycled paper"
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:55
+msgid "Red-green"
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:56
+msgid "Reduce motion"
 msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:8
@@ -7965,11 +8073,15 @@ msgstr ""
 msgid "Replacement shipped."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:62
+#: scripts/ui/modals/pause_menu.gd:44
 msgid "Replay tutorial"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:66
+#: scripts/ui/modals/settings_modal.gd:8
+msgid "Report a problem"
+msgstr ""
+
+#: scripts/ui/modals/pause_menu.gd:48
 msgid "Report a problem (F12)"
 msgstr ""
 
@@ -8023,6 +8135,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "Restocking fee"
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:51
+msgid "Restore default keys"
 msgstr ""
 
 #: scripts/ui/modals/insolvency_modal.gd:42
@@ -8229,7 +8345,7 @@ msgstr ""
 msgid "Route planning"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1394
+#: scripts/ui/modals/company_os.gd:1394 scripts/ui/modals/settings_modal.gd:7
 msgid "Run"
 msgstr ""
 
@@ -8285,7 +8401,7 @@ msgstr ""
 msgid "SERVERS"
 msgstr ""
 
-#: autoload/sound.gd:25 autoload/sound.gd:34 autoload/sound.gd:60 autoload/sound.gd:61
+#: autoload/preferences.gd:168 autoload/sound.gd:25 autoload/sound.gd:34 autoload/sound.gd:60
 msgid "SFX"
 msgstr ""
 
@@ -8417,7 +8533,7 @@ msgstr ""
 msgid "Save now"
 msgstr ""
 
-#: scripts/ui/hud.gd:148
+#: scripts/ui/hud.gd:150
 msgid "Saved"
 msgstr ""
 
@@ -8447,6 +8563,10 @@ msgstr ""
 
 #: scripts/ui/minigames/pack_game.gd:138
 msgid "Seal & next"
+msgstr ""
+
+#: data/help/help.json scripts/ui/modals/settings_modal.gd:125 scripts/ui/modals/settings_modal.gd:38
+msgid "Select an action, then press a key. Esc cancels key capture."
 msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:98
@@ -8539,6 +8659,18 @@ msgstr ""
 
 #: scripts/ui/minigames/photo_shoot_game.gd:39
 msgid "Set up the shot: pick a backdrop, the light and an optional styling prop."
+msgstr ""
+
+#: data/help/help.json scripts/frontend/main_menu.gd:67 scripts/ui/modals/pause_menu.gd:28 scripts/ui/modals/settings_modal.gd:15
+msgid "Settings"
+msgstr ""
+
+#: data/help/help.json
+msgid "Settings apply immediately and are stored separately from your saved games."
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:72
+msgid "Settings could not be saved. Check available storage and try again."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:827
@@ -8825,15 +8957,11 @@ msgstr ""
 msgid "Sleep until morning"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:30
-msgid "Slow"
-msgstr ""
-
 #: data/jobs/barista.json
 msgid "Slow afternoon. You wipe tables and watch who comes back twice."
 msgstr ""
 
-#: data/character/options.json
+#: data/character/options.json scripts/ui/modals/settings_modal.gd:36
 msgid "Small"
 msgstr ""
 
@@ -8873,7 +9001,7 @@ msgstr ""
 msgid "So what do I do?"
 msgstr ""
 
-#: autoload/scene_router.gd:86 data/dialogue/maya_intro.json
+#: autoload/scene_router.gd:70 data/dialogue/maya_intro.json
 msgid "So you actually quit?"
 msgstr ""
 
@@ -8981,7 +9109,7 @@ msgstr ""
 msgid "Sort, scan and stack the neighbourhood's parcels. You'll see how shipping really works."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:42
+#: scripts/ui/modals/settings_modal.gd:30
 msgid "Sound effects"
 msgstr ""
 
@@ -9217,6 +9345,10 @@ msgstr ""
 msgid "Styling"
 msgstr ""
 
+#: scripts/ui/modals/settings_modal.gd:57
+msgid "Subtitle advance delay (0 = manual)"
+msgstr ""
+
 #: data/dialogue/tom_office.json
 msgid "Suite 2B. Natural light, 40 square metres, storage out back."
 msgstr ""
@@ -9329,7 +9461,7 @@ msgstr ""
 msgid "TODAY'S BOOKINGS"
 msgstr ""
 
-#: scripts/ui/hud.gd:105 scripts/ui/tutorial.gd:27
+#: scripts/ui/tutorial.gd:27
 msgid "Tab"
 msgstr ""
 
@@ -9429,12 +9561,16 @@ msgstr ""
 msgid "Teller — business banking"
 msgstr ""
 
-#: scripts/frontend/main_menu.gd:70
+#: scripts/frontend/main_menu.gd:75
 msgid "Test build: Esc → Report a problem."
 msgstr ""
 
-#: scripts/frontend/main_menu.gd:70
+#: scripts/frontend/main_menu.gd:75
 msgid "Test build: press F12 any time to report a problem."
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:36
+msgid "Text size"
 msgstr ""
 
 #: scripts/ui/modals/registration_modal.gd:27
@@ -9985,10 +10121,6 @@ msgstr ""
 msgid "Time on the road: %s"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:33
-msgid "Time only moves forward by living it: working a shift, or sleeping at night."
-msgstr ""
-
 #: scripts/ui/phone_ui.gd:128
 msgid "Timeline"
 msgstr ""
@@ -10113,6 +10245,10 @@ msgstr ""
 msgid "Turning an empty unit into a working shop: equipment, counter and furniture."
 msgstr ""
 
+#: scripts/ui/modals/settings_modal.gd:63
+msgid "Tutorial hints"
+msgstr ""
+
 #: scripts/ui/tutorial.gd:217
 msgid "Tutorial skipped. You can replay it from the pause menu (Esc)."
 msgstr ""
@@ -10141,6 +10277,10 @@ msgstr ""
 msgid "Type the bright lines exactly as shown (the grey ones are already written). The next character to type is highlighted."
 msgstr ""
 
+#: scripts/ui/modals/settings_modal.gd:35
+msgid "UI scale"
+msgstr ""
+
 #: data/buildings/popup_unit.json
 msgid "UNIT 5 · TO LET"
 msgstr ""
@@ -10157,7 +10297,7 @@ msgstr ""
 msgid "Unanswered offers are withdrawn; undelivered contracts are terminated without an extra penalty. Unpaid delivered invoices are sold to a collector in the liquidation."
 msgstr ""
 
-#: scripts/ui/minigames/route_game.gd:82 scripts/ui/minigames/teller_cash_game.gd:82
+#: scripts/ui/minigames/route_game.gd:82 scripts/ui/minigames/teller_cash_game.gd:82 scripts/ui/modals/settings_modal.gd:140
 msgid "Undo"
 msgstr ""
 
@@ -10241,7 +10381,7 @@ msgstr ""
 msgid "Using a Chinese input method? Switch the keyboard to English input first."
 msgstr ""
 
-#: scripts/frontend/main_menu.gd:66
+#: scripts/frontend/main_menu.gd:71
 msgid "VERTICAL SLICE 001 · art converted from concept boards · %s"
 msgstr ""
 
@@ -10449,6 +10589,10 @@ msgstr ""
 msgid "Walk onto the glowing EXIT mat at the bottom of the room to go outside."
 msgstr ""
 
+#: scripts/world/player.gd:134
+msgid "Walk to a laptop or work desk, then use Company OS."
+msgstr ""
+
 #: scripts/ui/tutorial.gd:46
 msgid "Walk to the Business Board and press E. Choose E-commerce: you buy products wholesale and sell them online."
 msgstr ""
@@ -10461,7 +10605,7 @@ msgstr ""
 msgid "Walked out"
 msgstr ""
 
-#: autoload/scene_router.gd:202
+#: autoload/scene_router.gd:186
 msgid "Walking to %s… (%d min)"
 msgstr ""
 
@@ -10631,6 +10775,14 @@ msgstr ""
 
 #: scripts/ui/minigames/photo_shoot_game.gd:8
 msgid "Window light"
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:34
+msgid "Window mode"
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:34
+msgid "Windowed"
 msgstr ""
 
 #: data/story/chapters.json
@@ -12121,7 +12273,7 @@ msgstr ""
 msgid "◉  Shutter"
 msgstr ""
 
-#: scripts/ui/hud.gd:235
+#: scripts/ui/hud.gd:238
 msgid "● %d new"
 msgstr ""
 
@@ -12151,6 +12303,10 @@ msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:117
 msgid "✓ Rejected for the right reason"
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:112
+msgid "✓ Turn off"
 msgstr ""
 
 #: scripts/ui/modals/business_board.gd:90
@@ -12215,4 +12371,12 @@ msgstr ""
 
 #: scripts/ui/minigames/teller_cash_game.gd:111
 msgid "✗ Till error: you handed over %s"
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:112
+msgid "✗ Turn on"
+msgstr ""
+
+#: scripts/ui/modals/settings_modal.gd:129
+msgid "✗ Used by %s. Choose another key."
 msgstr ""

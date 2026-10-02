@@ -25,12 +25,9 @@ func build() -> void:
 	lb.name = "LoadGame"
 	sv.add_child(lb)
 	body.add_child(sv)
-	var sp := UIK.hbox(4)
-	sp.add_child(UIK.label("Day length", 8, Art.C_MUTED))
-	for opt in [[1.0, "Slow"], [1.5, "Normal"]]:
-		sp.add_child(UIK.button(opt[1], func(): Clock.speed = opt[0]; rebuild(), "tab_active" if is_equal_approx(Clock.speed, opt[0]) else "tab"))
-	body.add_child(sp)
-	body.add_child(UIK.label("Time only moves forward by living it: working a shift, or sleeping at night.", 7, Art.C_DIM))
+	var settings := UIK.button("Settings", func(): UIRoot.open_modal(SettingsModal.new()))
+	settings.name = "Settings"
+	body.add_child(settings)
 	var lang := UIK.hbox(4)
 	lang.add_child(UIK.label("Language", 8, Art.C_MUTED))
 	for l in I18n.LOCALES:
@@ -39,21 +36,6 @@ func build() -> void:
 		b.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 		lang.add_child(b)
 	body.add_child(lang)
-	for row in [["Music", "music"], ["Sound effects", "sfx"]]:
-		var ah := UIK.hbox(3)
-		ah.add_child(UIK.label(row[0], 8, Art.C_MUTED))
-		var cur: float = Sound.music_volume if row[1] == "music" else Sound.sfx_volume
-		for lv in [[0.0, "Off"], [0.4, "Low"], [0.8, "Mid"], [1.0, "High"]]:
-			var key: String = row[1]
-			var b := UIK.button(lv[1], func():
-				if key == "music":
-					Sound.set_volumes(lv[0], Sound.sfx_volume)
-				else:
-					Sound.set_volumes(Sound.music_volume, lv[0])
-				rebuild(), "tab_active" if absf(cur - float(lv[0])) < 0.05 else "tab")
-			b.name = "Vol_%s_%d" % [key, int(float(lv[0]) * 100)]
-			ah.add_child(b)
-		body.add_child(ah)
 	var help := UIK.hbox(4)
 	help.add_child(UIK.label("Guide arrow", 8, Art.C_MUTED))
 	var on := Tutorial.guide_enabled()

@@ -111,7 +111,7 @@ func _input(event: InputEvent) -> void:
 	if phase != "play" or not (event is InputEventKey) or not event.pressed:
 		return
 	var k := event as InputEventKey
-	if k.keycode == KEY_ESCAPE:
+	if event.is_action_pressed("pause") or event.is_action_pressed("cancel"):
 		return   # MiniGame handles leaving
 	var s := _cur()
 	if col >= s.length():

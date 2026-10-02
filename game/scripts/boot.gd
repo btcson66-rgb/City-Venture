@@ -19,6 +19,9 @@ func _start() -> void:
 		var stress = load("res://tests/walkthrough/stress.gd").new()
 		get_tree().root.add_child(stress)
 		return
+	if bot == "settings":
+		get_tree().root.add_child(load("res://tests/walkthrough/settings_tour.gd").new())
+		return
 	SceneRouter.go_menu()
 	if bot != "":
 		var script: GDScript = load("res://tests/walkthrough/bot.gd")

@@ -30,7 +30,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_since += delta
-	if _since >= AUTOSAVE_EVERY:
+	if _since >= float(Preferences.values["autosave_seconds"]):
 		_since = 0.0
 		autosave_if_changed()
 

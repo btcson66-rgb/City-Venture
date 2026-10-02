@@ -4,7 +4,9 @@ extends Control
 
 
 func _ready() -> void:
-	set_anchors_preset(Control.PRESET_FULL_RECT)
+	set_anchors_preset(Control.PRESET_TOP_LEFT)
+	size = get_viewport_rect().size
+	get_viewport().size_changed.connect(func(): size = get_viewport_rect().size)
 	theme = UIK.theme()
 	add_child(Backdrop.make("backdrops/menu"))
 	# navy wash on the left third so the title and buttons read over the street scene
@@ -27,7 +29,7 @@ func _ready() -> void:
 	var shadow := UIK.title("CITY VENTURE", 40, Color8(20, 40, 90))
 	shadow.position = Vector2(42, 34)
 	add_child(shadow)
-	var t := UIK.title("CITY VENTURE", 40, Color8(236, 242, 255))
+	var t := UIK.title("CITY VENTURE", 24, Color8(236, 242, 255))
 	t.position = Vector2(40, 31)
 	add_child(t)
 	var tag := UIK.title("BUILD  ·  LIVE  ·  CONNECT  ·  GROW", 10, Art.C_SKY)
@@ -41,11 +43,11 @@ func _ready() -> void:
 	box.custom_minimum_size = Vector2(150, 0)
 	add_child(box)
 	# a new game always gets its own save slot: it never overwrites the game you were playing
-	var ng := UIK.button("New Game", _new_game, "primary", 150)
+	var ng := UIK.button("New Game", _new_game, "primary" if SaveSystem.latest_slot() < 0 else "", 150)
 	ng.name = "NewGame"
 	box.add_child(ng)
 	var slot := SaveSystem.latest_slot()
-	var cont := UIK.button("Continue", func(): SaveSystem.load_and_enter(slot), "", 150)
+	var cont := UIK.button("Continue", func(): SaveSystem.load_and_enter(slot), "primary" if slot >= 0 else "", 150)
 	cont.name = "Continue"
 	cont.disabled = slot < 0
 	box.add_child(cont)
@@ -62,6 +64,9 @@ func _ready() -> void:
 	lg.name = "LoadGame"
 	lg.disabled = saves == 0
 	box.add_child(lg)
+	var settings := UIK.button("Settings", func(): UIRoot.open_modal(SettingsModal.new()), "", 150)
+	settings.name = "Settings"
+	box.add_child(settings)
 	box.add_child(UIK.button("Quit", func(): get_tree().quit(), "", 150))
 	var ver := UIK.label(I18n.t("VERTICAL SLICE 001 · art converted from concept boards · %s") % ProjectSettings.get_setting("application/config/version", ""), 7, Art.C_DIM)
 	ver.position = Vector2(8, 346)
@@ -81,6 +86,24 @@ func _ready() -> void:
 		b.name = "Lang_" + code
 		b.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 		lang.add_child(b)
+	# Large text and UI scaling keep title actions reachable instead of overlapping fixed positions.
+	shadow.queue_free()
+	var scroll := ScrollContainer.new()
+	scroll.name = "MenuScroll"
+	scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	scroll.offset_left = 20
+	scroll.offset_top = 16
+	scroll.offset_right = -20
+	scroll.offset_bottom = -16
+	add_child(scroll)
+	var layout := UIK.vbox(6)
+	layout.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.add_child(layout)
+	for node in [t, tag, sub, box, lang, hint, ver]:
+		node.reparent(layout)
+		if node is Label:
+			node.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+
 
 
 func _new_game() -> void:

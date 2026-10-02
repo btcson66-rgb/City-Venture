@@ -199,11 +199,12 @@ static func _perms(n: int) -> Array:
 func _unhandled_key_input(event: InputEvent) -> void:
 	if phase != "play" or not (event is InputEventKey) or not event.pressed or event.echo:
 		return
-	var k := int((event as InputEventKey).keycode)
-	if k >= KEY_1 and k <= KEY_9 and k - KEY_1 < stops.size():
-		get_viewport().set_input_as_handled()
-		_pick(k - KEY_1)
-	elif k == KEY_BACKSPACE:
+	for index in mini(9, stops.size()):
+		if event.is_action_pressed("pick_%d" % (index + 1)):
+			get_viewport().set_input_as_handled()
+			_pick(index)
+			return
+	if event.is_action_pressed("undo"):
 		get_viewport().set_input_as_handled()
 		_undo()
 

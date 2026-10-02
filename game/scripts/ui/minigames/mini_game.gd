@@ -218,7 +218,7 @@ func _send(r: Dictionary) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause"):
+	if (event.is_action_pressed("pause") or event.is_action_pressed("cancel")):
 		get_viewport().set_input_as_handled()
 		if phase == "results":
 			_finish()

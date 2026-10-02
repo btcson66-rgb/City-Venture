@@ -251,7 +251,7 @@ func _process(delta: float) -> void:
 		UIRoot.coach_layer.add_child(_coach)
 		_coach.draw.connect(_draw_coach)
 	var ws := SceneRouter.world_scene()
-	var live := GameState.has_game() and UIRoot.hud.visible and ws != null and not SceneRouter.transitioning
+	var live := bool(Preferences.values["tutorial_hints"]) and GameState.has_game() and UIRoot.hud.visible and ws != null and not SceneRouter.transitioning
 	visible = live
 	if _coach != null:
 		_coach.visible = live

@@ -480,3 +480,8 @@ data.living.leases     {<property_id>: {rent, day (of month), since, entity}}   
 Flags and stats the café sets: `met_okafor`, `leased_corner_cafe`, `food_permit`, `cafe_first_sale`; stats `cafe_customers`,
 `cafe_days_open`, `cafe_owner_shifts`, `cafe_rating`. Ledger expense categories added with it: `rent_shop`, `rent_warehouse`,
 `fitout` (`fuel`, `vehicle` and `insurance` are reserved for the logistics business; nothing posts to them yet).
+
+
+Device settings (#87) are outside GameState and game saves: `Preferences` persists audio, display, accessibility,
+input bindings and launch defaults in `user://settings.cfg`. Unknown ConfigFile sections and legacy audio keys are
+preserved; old company saves need no migration. See [SETTINGS.md](SETTINGS.md) for units, limits and validation.

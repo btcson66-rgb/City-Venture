@@ -139,3 +139,10 @@
 ## 美術品質更新 · 2026-10-01
 
 43 圖示的SVG語意延續既有A7，並補直接輸出的4×。23表面／外框整理為統一海軍藍漸層與城市藍操作色；危險、停用、滑過、按下、選中狀態分開。sleep改成床，圖檔不寫字。原尺寸與atlas格位不變，已由既有renderer自動替換；高解析UI載入和9-slice的physical／logical邊界由Claude接線。美術來源與21實機狀態、全巡禮證據見ui_quality_20261001。
+
+
+### Device settings (#87)
+
+The title and pause menus open five settings pages (audio, display, controls, accessibility and game). UI scaling
+and extra-large text use scrollable panels. Color assistance retains textual labels and signed money; toggles show
+✓/✗ and the next available action. Settings remain outside company saves. See [settings](../SETTINGS.md).

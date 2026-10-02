@@ -10,7 +10,7 @@ msgstr ""
 msgid "\n%dxxx"
 msgstr "\n%dxxx"
 
-#: scripts/ui/hud.gd:235
+#: scripts/ui/hud.gd:238
 msgid "   ◆ decision"
 msgstr "   ◆ 待決定"
 
@@ -30,7 +30,7 @@ msgstr "  每日廣告"
 msgid "  of which on hold (<2 days)"
 msgstr "  其中保留中（未滿 2 天）"
 
-#: scripts/ui/hud.gd:210
+#: scripts/ui/hud.gd:213
 msgid "  ·  DAY %d"
 msgstr "  ·  第 %d 天"
 
@@ -70,7 +70,7 @@ msgstr "（逾期，罰款 %s）"
 msgid " ltd"
 msgstr " ltd"
 
-#: scripts/ui/hud.gd:221
+#: scripts/ui/hud.gd:224
 msgid " today"
 msgstr " 今日"
 
@@ -330,7 +330,7 @@ msgstr "%s 已經登記過了（%s）。"
 msgid "%s is busy."
 msgstr "%s 在忙。"
 
-#: autoload/scene_router.gd:176
+#: autoload/scene_router.gd:160
 msgid "%s is closed. Open %s–%s, %s."
 msgstr "%s 目前沒開。營業時間 %s–%s，%s。"
 
@@ -630,7 +630,7 @@ msgstr "價格更好，握手更久。剩下的一年後再賺。"
 msgid "A big sale can still leave you short of cash for two months. Check the cash forecast before you say yes."
 msgstr "就算接到大訂單，也可能兩個月都缺現金。答應之前先看現金預測。"
 
-#: scripts/frontend/main_menu.gd:36
+#: scripts/frontend/main_menu.gd:38
 msgid "A business-simulation RPG in a living, modern city."
 msgstr "一款在鮮活的現代城市裡經營事業的模擬 RPG。"
 
@@ -858,6 +858,10 @@ msgstr "接受：以 {price} 賣掉 {company}"
 msgid "Accepted."
 msgstr "已接受。"
 
+#: scripts/ui/modals/settings_modal.gd:5
+msgid "Accessibility"
+msgstr "無障礙"
+
 #: scripts/frontend/character_creator.gd:148
 msgid "Accessory"
 msgstr "配件"
@@ -926,7 +930,7 @@ msgstr "廣告"
 msgid "After a shift you're tired: go home and sleep in your bed (any time after work, or from 7 PM). Overnight your listing keeps selling and deliveries keep moving. Tomorrow, the city is yours."
 msgstr "上完班累了：回家睡覺吧（下班後隨時可以睡，或晚上 7 點以後）。夜裡商品會繼續賣、貨也會繼續送。明天起，這座城市任你闖。"
 
-#: scripts/ui/hud.gd:213
+#: scripts/ui/hud.gd:216
 msgid "Afternoon · Sunny"
 msgstr "下午 · 晴"
 
@@ -993,6 +997,10 @@ msgstr "鋁合金手機架"
 #: scripts/ui/minigames/photo_shoot_game.gd:293
 msgid "Amateur-looking. It will cost you some sales; you can reshoot later."
 msgstr "看起來很業餘，會少一些訂單；之後可以重拍。"
+
+#: autoload/preferences.gd:168 scripts/ui/modals/settings_modal.gd:30
+msgid "Ambience"
+msgstr "環境音"
 
 #: data/economy/staff.json
 msgid "Ambitious: works harder, expects a raise within two months."
@@ -1150,6 +1158,10 @@ msgstr "Atlas 搬家公司"
 msgid "Auburn"
 msgstr "紅棕"
 
+#: scripts/ui/modals/settings_modal.gd:5
+msgid "Audio"
+msgstr "音訊"
+
 #: data/economy/freelance.json
 msgid "Audit the online store of %s"
 msgstr "幫 %s 健檢網路商店"
@@ -1206,6 +1218,10 @@ msgstr "奧羅利亞"
 msgid "Automotive"
 msgstr "汽車"
 
+#: scripts/ui/modals/settings_modal.gd:61
+msgid "Autosave interval"
+msgstr "自動存檔間隔"
+
 #: scripts/ui/minigames/barista_game.gd:10
 msgid "Ava"
 msgstr "Ava"
@@ -1254,7 +1270,7 @@ msgstr "快訊：數位美元跨鏈橋遭駭。轉帳凍結，預計 %s 前後�
 msgid "BRIDGE EXPLOIT: attackers drain the reserve behind the digital-dollar rail."
 msgstr "跨鏈橋遭駭：駭客掏空數位美元管道背後的準備金。"
 
-#: scripts/frontend/main_menu.gd:33
+#: scripts/frontend/main_menu.gd:35
 msgid "BUILD  ·  LIVE  ·  CONNECT  ·  GROW"
 msgstr "創業  ·  生活  ·  連結  ·  成長"
 
@@ -1434,6 +1450,10 @@ msgstr "樓下就是 Bloom Coffee。河濱區最好喝的小白咖啡。"
 msgid "Blue"
 msgstr "藍色"
 
+#: scripts/ui/modals/settings_modal.gd:55
+msgid "Blue-yellow"
+msgstr "藍黃色辨識"
+
 #: data/character/options.json
 msgid "Bob"
 msgstr "鮑伯頭"
@@ -1449,6 +1469,10 @@ msgstr "有膽。我喜歡。"
 #: scripts/ui/modals/loan_modal.gd:89 scripts/ui/modals/loan_modal.gd:93
 msgid "Book an appointment"
 msgstr "預約貸款洽談"
+
+#: scripts/ui/modals/settings_modal.gd:34
+msgid "Borderless"
+msgstr "無邊框"
 
 #: data/dialogue/lina_intro.json
 msgid "Boring and safe. My favourite. You'll find it when you pay Lumina: Company OS, Operations."
@@ -1802,7 +1826,7 @@ msgstr "第九章——清算危機"
 msgid "CHURN"
 msgstr "流失率"
 
-#: scripts/frontend/main_menu.gd:27 scripts/frontend/main_menu.gd:30
+#: scripts/frontend/main_menu.gd:29 scripts/frontend/main_menu.gd:32
 msgid "CITY VENTURE"
 msgstr "CITY VENTURE"
 
@@ -1886,7 +1910,7 @@ msgstr "今天就到這裡？你會在早上 7:00 起床。遊戲會自動存檔
 msgid "Call me when you can do volume."
 msgstr "等你有量了再打給我。"
 
-#: autoload/scene_router.gd:87
+#: autoload/scene_router.gd:71
 msgid "Call me. Or text. Or whatever."
 msgstr "打給我。或傳訊息。隨便。"
 
@@ -1990,7 +2014,7 @@ msgstr "自己拿去 PostPoint"
 msgid "Carry them to PostPoint yourself (cheaper, costs your time)"
 msgstr "自己拿去 PostPoint（比較便宜，但花你的時間）"
 
-#: scripts/ui/hud.gd:240
+#: scripts/ui/hud.gd:243
 msgid "Carrying %d parcel%s"
 msgstr "攜帶 %d 件包裹%s"
 
@@ -2137,6 +2161,14 @@ msgstr "看看手機（Tab）"
 #: scripts/ui/minigames/parcel_sort_game.gd:9
 msgid "Chen"
 msgstr "Chen"
+
+#: scripts/ui/modals/settings_modal.gd:138
+msgid "Choice %d"
+msgstr "選項 %d"
+
+#: scripts/ui/modals/settings_modal.gd:59
+msgid "Choices always wait for you. Profit and loss use text and signed amounts as well as color."
+msgstr "選項一律等你選擇。盈虧除了顏色，也用文字與金額正負號表示。"
 
 #: scripts/ui/tutorial.gd:45
 msgid "Choose a business"
@@ -2338,6 +2370,10 @@ msgstr "咖啡豆、牛奶和杯子：還夠 %d 杯"
 msgid "Collect the money Crestline owes you"
 msgstr "收回 Crestline 欠你的錢"
 
+#: scripts/ui/modals/settings_modal.gd:55
+msgid "Color assistance"
+msgstr "色彩輔助"
+
 #: scripts/sim/bank.gd:106
 msgid "Come back when %s has %d days of statements, or a signed contract."
 msgstr "等 %s 有 %d 天的帳務紀錄，或拿到一張簽好的合約再來。"
@@ -2373,6 +2409,10 @@ msgstr "社群經理"
 #: scripts/ui/modals/bank_modal.gd:58
 msgid "Company"
 msgstr "公司"
+
+#: scripts/ui/modals/settings_modal.gd:7
+msgid "Company OS"
+msgstr "Company OS"
 
 #: data/help/help.json
 msgid "Company OS: your business computer"
@@ -2434,6 +2474,10 @@ msgstr "合規專員是今年最搶手的職缺。"
 msgid "Compliance: filings, checks and the compliance officer — %s"
 msgstr "合規：申報、審查與合規專員 — %s"
 
+#: scripts/ui/modals/settings_modal.gd:8
+msgid "Confirm"
+msgstr "確認"
+
 #: scripts/ui/modals/purchase_return_modal.gd:55
 msgid "Confirm cancellation"
 msgstr "確認取消"
@@ -2466,7 +2510,7 @@ msgstr "貨櫃運費翻倍，快遞加收燃油附加費。"
 msgid "Containers, customs and freight. Rent Pier 7 for stock, buy a used van from Sam, and start delivering."
 msgstr "貨櫃、海關和貨運。租下 7 號碼頭放庫存，向 Sam 買一台二手貨車，開始送貨。"
 
-#: scripts/frontend/main_menu.gd:48 scripts/ui/minigames/mini_game.gd:173 scripts/ui/modals/month_close_modal.gd:56
+#: scripts/frontend/main_menu.gd:50 scripts/ui/minigames/mini_game.gd:173 scripts/ui/modals/month_close_modal.gd:56
 msgid "Continue"
 msgstr "繼續"
 
@@ -2489,6 +2533,10 @@ msgstr "公司關閉後的合約"
 #: data/help/help.json
 msgid "Contracts: business deals"
 msgstr "合約：企業訂單"
+
+#: scripts/ui/modals/settings_modal.gd:5
+msgid "Controls"
+msgstr "操作"
 
 #: scripts/sim/cafe.gd:53
 msgid "Corner"
@@ -2758,17 +2806,13 @@ msgstr "個資保護登記"
 msgid "Day"
 msgstr "日期"
 
-#: scripts/frontend/main_menu.gd:57
+#: scripts/frontend/main_menu.gd:59
 msgid "Day %d"
 msgstr "第 %d 天"
 
 #: scripts/ui/modals/save_list_modal.gd:55
 msgid "Day %d · personal %s"
 msgstr "第 %d 天 · 個人 %s"
-
-#: scripts/ui/modals/pause_menu.gd:29
-msgid "Day length"
-msgstr "一天長度"
 
 #: scripts/ui/modals/cowork_desk_modal.gd:15
 msgid "Day pass (desk + wifi, today)"
@@ -2854,6 +2898,14 @@ msgstr "深色"
 msgid "Deep supplier base"
 msgstr "供應鏈深厚"
 
+#: scripts/ui/modals/settings_modal.gd:62
+msgid "Default game speed"
+msgstr "預設遊戲速度"
+
+#: scripts/ui/modals/settings_modal.gd:64
+msgid "Default speed applies at launch. Hold Fast-forward for twice the current speed; release to resume."
+msgstr "預設速度於啟動時套用。按住快轉鍵以兩倍速度前進，放開即恢復。"
+
 #: data/story/chapters.json
 msgid "Deliver Crestline's lamps before the deadline (Company OS → Contracts)"
 msgstr "在期限前把燈交給 Crestline（Company OS →「合約」）"
@@ -2926,7 +2978,7 @@ msgstr "收到 %s 的訂金（%s）"
 msgid "Deposits"
 msgstr "押金"
 
-#: scripts/ui/minigames/route_game.gd:318
+#: scripts/ui/minigames/route_game.gd:319
 msgid "Depot"
 msgstr "車場"
 
@@ -2998,6 +3050,10 @@ msgstr "金融科技業搶進口商，數位美元付款量翻倍。"
 msgid "Dining"
 msgstr "餐飲"
 
+#: scripts/ui/modals/settings_modal.gd:5
+msgid "Display"
+msgstr "顯示"
+
 #: scripts/sim/ecommerce.gd:1223
 msgid "Dispute lost on %s: −%s"
 msgstr "申訴敗訴 %s：−%s"
@@ -3042,7 +3098,7 @@ msgstr "國內線、國際線、貨運、私人航空。"
 msgid "Don't forget to eat."
 msgstr "記得吃飯。"
 
-#: scripts/ui/modals/bank_modal.gd:73 scripts/ui/modals/pack_ship_modal.gd:68 scripts/ui/modals/permits_modal.gd:17
+#: scripts/ui/modals/bank_modal.gd:73 scripts/ui/modals/pack_ship_modal.gd:68 scripts/ui/modals/permits_modal.gd:17 scripts/ui/modals/settings_modal.gd:65
 msgid "Done"
 msgstr "完成"
 
@@ -3114,7 +3170,7 @@ msgstr "截止 %s"
 msgid "E / click to skip"
 msgstr "E／點擊略過"
 
-#: scripts/ui/dialogue_box.gd:66
+#: scripts/ui/dialogue_box.gd:67
 msgid "E / click ›"
 msgstr "E／點擊 ›"
 
@@ -3274,10 +3330,6 @@ msgstr "進入 %s"
 msgid "Equity investment"
 msgstr "股權投資"
 
-#: scripts/ui/hud.gd:108
-msgid "Esc"
-msgstr "Esc"
-
 #: data/help/help.json
 msgid "Escrow (Year 6, ask Lina Zhao): your money is locked in a contract and paid to the supplier only when the goods arrive. 0.6% (at least $15), no wire delay, refunded if they never ship."
 msgstr "託管（第 6 年，找 Lina Zhao）：錢鎖在一份合約裡，貨到了才付給供應商。0.6%（最低 $15），不用等電匯，對方沒出貨就退款。"
@@ -3330,7 +3382,7 @@ msgstr "濃縮"
 msgid "Estimated sales"
 msgstr "預估銷售"
 
-#: scripts/ui/hud.gd:213
+#: scripts/ui/hud.gd:216
 msgid "Evening"
 msgstr "傍晚"
 
@@ -3414,6 +3466,10 @@ msgstr "快捷件 · 1 天——%s"
 msgid "Expression ▶"
 msgstr "表情 ▶"
 
+#: scripts/ui/modals/settings_modal.gd:36
+msgid "Extra large"
+msgstr "特大"
+
 #: scripts/frontend/character_creator.gd:136
 msgid "Eye colour"
 msgstr "瞳色"
@@ -3493,6 +3549,10 @@ msgstr "成長快速"
 #: data/help/glossary.json
 msgid "Fast payment means stock moves sooner. You need an exchange account, and a new payment rail brings its own risks."
 msgstr "付款快，貨就出得快。但要先開交易所帳戶，而且新的支付管道也有它自己的風險。"
+
+#: scripts/ui/modals/settings_modal.gd:8
+msgid "Fast-forward"
+msgstr "快轉"
 
 #: data/economy/staff.json
 msgid "Fast: +30% work output."
@@ -3834,9 +3894,17 @@ msgstr "出貨助理"
 msgid "Fulfilment pipeline"
 msgstr "出貨流程"
 
+#: scripts/ui/modals/settings_modal.gd:34
+msgid "Fullscreen"
+msgstr "全螢幕"
+
 #: scripts/ui/modals/permits_modal.gd:123 scripts/ui/modals/permits_modal.gd:57
 msgid "GRANTED"
 msgstr "已核發"
+
+#: scripts/ui/modals/settings_modal.gd:5
+msgid "Game"
+msgstr "遊戲"
 
 #: data/story/chapters.json
 msgid "Get 800 desk lamps in stock or on the way (cash, supplier terms, a Nexus Bank loan or an investor)"
@@ -4014,7 +4082,7 @@ msgstr "成長狂熱"
 msgid "Growth market"
 msgstr "成長市場"
 
-#: scripts/ui/modals/pause_menu.gd:58
+#: scripts/ui/modals/pause_menu.gd:40
 msgid "Guide arrow"
 msgstr "導引箭頭"
 
@@ -4218,9 +4286,9 @@ msgstr "嗨，我今天可以在這裡工作嗎？我叫 %s。"
 msgid "Hi-vis vest, work trousers, steel-toe boots. For warehouse days."
 msgstr "反光背心、工作褲、鋼頭靴。倉庫日專用。"
 
-#: scripts/ui/modals/pause_menu.gd:46
-msgid "High"
-msgstr "高"
+#: scripts/ui/modals/settings_modal.gd:55
+msgid "High contrast"
+msgstr "高對比"
 
 #: data/regions/northridge.json
 msgid "High costs"
@@ -4565,6 +4633,10 @@ msgstr "保險（每月）"
 #: data/dialogue/sam_intro.json
 msgid "Insure it, keep it moving, and it earns. Leave it on the kerb and it is just a very expensive shed."
 msgstr "保好險、讓它一直跑，它就會賺錢；停在路邊，它只是一間很貴的棚子。"
+
+#: scripts/ui/modals/settings_modal.gd:7
+msgid "Interact"
+msgstr "互動"
 
 #: scripts/sim/ledger.gd:30
 msgid "Interest"
@@ -4926,7 +4998,7 @@ msgstr "已領執照"
 msgid "LIVE"
 msgstr "販售中"
 
-#: scripts/ui/modals/pause_menu.gd:35
+#: scripts/ui/modals/pause_menu.gd:32
 msgid "Language"
 msgstr "語言"
 
@@ -4954,6 +5026,10 @@ msgstr "筆電 · 河濱大樓 7C"
 msgid "Laptop · café table"
 msgstr "筆電 · 咖啡廳"
 
+#: scripts/ui/modals/settings_modal.gd:36
+msgid "Large"
+msgstr "大"
+
 #: scripts/ui/minigames/pack_game.gd:7
 msgid "Large box"
 msgstr "大箱子"
@@ -4961,6 +5037,10 @@ msgstr "大箱子"
 #: scripts/ui/minigames/barista_game.gd:6
 msgid "Large cup"
 msgstr "大杯"
+
+#: data/help/help.json
+msgid "Large text uses scrollbars. Choices always wait for you."
+msgstr "大字介面可捲動。選項一律等你選擇。"
 
 #: scripts/ui/modals/company_os.gd:1271
 msgid "Last days"
@@ -5226,7 +5306,7 @@ msgstr "讀取"
 msgid "Load a game"
 msgstr "讀取存檔"
 
-#: scripts/frontend/main_menu.gd:61
+#: scripts/frontend/main_menu.gd:63
 msgid "Load game (%d)"
 msgstr "讀取存檔（%d）"
 
@@ -5366,10 +5446,6 @@ msgstr "這筆銷售沒了，還要付退貨運費。評價保得住。"
 msgid "Love it."
 msgstr "超喜歡。"
 
-#: scripts/ui/modals/pause_menu.gd:46
-msgid "Low"
-msgstr "低"
-
 #: data/city/aurelia.json
 msgid "Low rents, old shops, cobbles and a clock tower. Open a café on the corner."
 msgstr "房租便宜、老店林立、石板路和鐘樓。在轉角開一家咖啡店吧。"
@@ -5458,7 +5534,7 @@ msgstr "製造"
 msgid "Manufacturing & Logistics"
 msgstr "製造與物流"
 
-#: scripts/ui/hud.gd:107
+#: scripts/ui/hud.gd:107 scripts/ui/modals/settings_modal.gd:7
 msgid "Map"
 msgstr "地圖"
 
@@ -5530,9 +5606,13 @@ msgstr "陽剛"
 msgid "Masculine, feminine or neutral changes the body shape only. There are no ability differences."
 msgstr "陽剛、陰柔或中性只會改變體型，沒有任何能力差異。"
 
-#: autoload/sound.gd:47
+#: autoload/preferences.gd:168 autoload/preferences.gd:174 autoload/sound.gd:47
 msgid "Master"
 msgstr "Master"
+
+#: scripts/ui/modals/settings_modal.gd:30
+msgid "Master volume"
+msgstr "主音量"
 
 #: data/regions/northridge.json
 msgid "Mature regulation"
@@ -5566,6 +5646,10 @@ msgstr "媒體"
 msgid "Media / Advertising"
 msgstr "媒體／廣告"
 
+#: scripts/ui/modals/settings_modal.gd:36
+msgid "Medium"
+msgstr "中"
+
 #: scripts/ui/minigames/pack_game.gd:7
 msgid "Medium box"
 msgstr "中箱子"
@@ -5598,7 +5682,7 @@ msgstr "蓬亂"
 msgid "Metro"
 msgstr "捷運"
 
-#: autoload/scene_router.gd:207
+#: autoload/scene_router.gd:191
 msgid "Metro fare to %s"
 msgstr "捷運車資：往%s"
 
@@ -5613,10 +5697,6 @@ msgstr "捷運——%s站"
 #: scripts/ui/minigames/barista_game.gd:10
 msgid "Mia"
 msgstr "Mia"
-
-#: scripts/ui/modals/pause_menu.gd:46
-msgid "Mid"
-msgstr "中"
 
 #: scripts/ui/minigames/barista_game.gd:98
 msgid "Milk"
@@ -5722,11 +5802,11 @@ msgstr "每月還款"
 msgid "Monthly rent"
 msgstr "月租"
 
-#: autoload/scene_router.gd:175 scripts/ui/modals/job_modal.gd:31
+#: autoload/scene_router.gd:159 scripts/ui/modals/job_modal.gd:31
 msgid "Mon–Fri"
 msgstr "週一至週五"
 
-#: autoload/scene_router.gd:175
+#: autoload/scene_router.gd:159
 msgid "Mon–Sat"
 msgstr "週一至週六"
 
@@ -5750,7 +5830,7 @@ msgstr "更多服裝在購物街的 Threadline。"
 msgid "Moreau"
 msgstr "Moreau"
 
-#: scripts/ui/hud.gd:213
+#: scripts/ui/hud.gd:216
 msgid "Morning · Sunny"
 msgstr "早上 · 晴"
 
@@ -5765,6 +5845,22 @@ msgstr "Moss"
 #: scripts/frontend/character_creator.gd:138
 msgid "Mouth"
 msgstr "嘴型"
+
+#: scripts/ui/modals/settings_modal.gd:6
+msgid "Move down"
+msgstr "向下移動"
+
+#: scripts/ui/modals/settings_modal.gd:6
+msgid "Move left"
+msgstr "向左移動"
+
+#: scripts/ui/modals/settings_modal.gd:6
+msgid "Move right"
+msgstr "向右移動"
+
+#: scripts/ui/modals/settings_modal.gd:6
+msgid "Move up"
+msgstr "向上移動"
 
 #: autoload/game_state.gd:34
 msgid "Moved to Aurelia City with $%s in savings."
@@ -5790,7 +5886,7 @@ msgstr "Okafor 先生只租給已登記的公司。"
 msgid "Mr. Okafor: \"Keys, meter readings, and my number. The espresso smell is included.\""
 msgstr "Okafor 先生：「鑰匙、水電表讀數，還有我的電話。咖啡香是附贈的。」"
 
-#: autoload/sound.gd:24 autoload/sound.gd:31 autoload/sound.gd:32 autoload/sound.gd:58
+#: autoload/preferences.gd:168 autoload/sound.gd:24 autoload/sound.gd:31 autoload/sound.gd:32
 msgid "Music"
 msgstr "音樂"
 
@@ -5874,7 +5970,7 @@ msgstr "票期 %d 天%s"
 msgid "Neutral"
 msgstr "中性"
 
-#: scripts/frontend/main_menu.gd:44
+#: scripts/frontend/main_menu.gd:46
 msgid "New Game"
 msgstr "新遊戲"
 
@@ -5966,7 +6062,7 @@ msgstr "新創園區 Nexus 共享辦公室"
 msgid "Nexus Co-work, over in Startup Hub. They've got a board — suppliers, gigs, whatever."
 msgstr "新創園區那邊有間 Nexus 共享辦公室。他們有個佈告欄——供應商、案子，什麼都有。"
 
-#: scripts/ui/hud.gd:213
+#: scripts/ui/hud.gd:216
 msgid "Night"
 msgstr "夜晚"
 
@@ -6134,10 +6230,6 @@ msgstr "Nora"
 msgid "Nori Tea House"
 msgstr "Nori 茶館"
 
-#: scripts/ui/modals/pause_menu.gd:30
-msgid "Normal"
-msgstr "一般"
-
 #: data/regions/northridge.json
 msgid "Northridge"
 msgstr "北嶺"
@@ -6254,6 +6346,10 @@ msgstr "這裡沒有可以打包的：貨在這個地點嗎？"
 msgid "Nothing to resolve."
 msgstr "沒有需要處理的事。"
 
+#: scripts/ui/modals/settings_modal.gd:58
+msgid "Notification duration"
+msgstr "通知停留時間"
+
 #: scripts/ui/phone_ui.gd:255
 msgid "Notifications only.\nManage at a desk: Company OS."
 msgstr "這裡只顯示通知。\n要管理請到辦公桌：Company OS。"
@@ -6330,7 +6426,7 @@ msgstr "10月"
 msgid "Of course you are."
 msgstr "我就知道。"
 
-#: scripts/ui/modals/pause_menu.gd:46 scripts/ui/modals/pause_menu.gd:61
+#: scripts/ui/modals/pause_menu.gd:43 scripts/ui/modals/settings_modal.gd:55
 msgid "Off"
 msgstr "關"
 
@@ -6398,7 +6494,7 @@ msgstr "舊城區：搭捷運（環狀線），或從購物街往西走。"
 msgid "Omar"
 msgstr "Omar"
 
-#: scripts/ui/modals/pause_menu.gd:60
+#: scripts/ui/modals/pause_menu.gd:42
 msgid "On"
 msgstr "開"
 
@@ -6911,14 +7007,14 @@ msgid "Parcel Sorter"
 msgstr "包裹分揀員"
 
 #: scripts/ui/minigames/parcel_sort_game.gd:26
-msgid "Parcels come down the belt one at a time. Send each to its district's bin: click the bin or press 1–5."
-msgstr "包裹一個一個從輸送帶下來。把它放進對應區域的籃子：點籃子，或按 1–5。"
+msgid "Parcels come down the belt one at a time. Click the district bin or use the Choice 1–5 bindings in Settings."
+msgstr "包裹會逐件送來。請點選行政區的箱子，或使用設定中的「選項 1–5」按鍵。"
 
 #: scripts/ui/modals/company_os.gd:253
 msgid "Parcels out for delivery"
 msgstr "配送中的包裹"
 
-#: scripts/ui/minigames/parcel_sort_game.gd:135
+#: scripts/ui/minigames/parcel_sort_game.gd:136
 msgid "Parcels sorted correctly: %d / %d"
 msgstr "分對的包裹：%d / %d"
 
@@ -6974,7 +7070,7 @@ msgstr "糕點"
 msgid "Patel"
 msgstr "Patel"
 
-#: scripts/ui/modals/company_os.gd:369
+#: scripts/ui/modals/company_os.gd:369 scripts/ui/modals/settings_modal.gd:8
 msgid "Pause"
 msgstr "暫停"
 
@@ -7142,7 +7238,7 @@ msgstr "個人賣家上限：本月已用 %s／%s。"
 msgid "Personal seller limit reached. Your listings are paused until next month — or until you register a business."
 msgstr "已達個人賣家上限。你的商品會暫停到下個月——或直到你登記公司。"
 
-#: scripts/ui/hud.gd:105
+#: scripts/ui/hud.gd:105 scripts/ui/modals/settings_modal.gd:7
 msgid "Phone"
 msgstr "手機"
 
@@ -7362,6 +7458,10 @@ msgstr "在客人失去耐心前按「出餐」。做對又做得快，就會拿
 msgid "Press Serve before their patience runs out. Right drinks, served fast, lift your café's rating."
 msgstr "在客人失去耐心前按「出餐」。做對又做得快，就能提升店的評分。"
 
+#: scripts/ui/modals/settings_modal.gd:46
+msgid "Press a key. Esc cancels key capture."
+msgstr "請按下按鍵。Esc 可取消設定按鍵。"
+
 #: scripts/ui/minigames/photo_shoot_game.gd:41
 msgid "Press the shutter when the focus needle is in the green. You get three shots; the best one goes on your listing."
 msgstr "對焦指針在綠色區間時按快門。可以拍三張，最好的一張會放上商品頁。"
@@ -7482,7 +7582,7 @@ msgstr "數量（最多 %d 件）"
 msgid "Quiet morning. You read the small-business lending policy twice."
 msgstr "安靜的早上。你把小型企業貸款規定讀了兩遍。"
 
-#: scripts/frontend/main_menu.gd:65
+#: scripts/frontend/main_menu.gd:70
 msgid "Quit"
 msgstr "離開"
 
@@ -7490,7 +7590,7 @@ msgstr "離開"
 msgid "Quit job"
 msgstr "辭職"
 
-#: scripts/ui/modals/pause_menu.gd:69
+#: scripts/ui/modals/pause_menu.gd:51
 msgid "Quit to title"
 msgstr "回到標題畫面"
 
@@ -7689,6 +7789,14 @@ msgstr "回收紙緩衝材稍微貴一點，但不用繳這筆稅，重視環保
 #: scripts/ui/modals/company_os.gd:474
 msgid "Recycled paper"
 msgstr "回收紙"
+
+#: scripts/ui/modals/settings_modal.gd:55
+msgid "Red-green"
+msgstr "紅綠色辨識"
+
+#: scripts/ui/modals/settings_modal.gd:56
+msgid "Reduce motion"
+msgstr "減少畫面晃動"
 
 #: scripts/ui/minigames/cowork_host_game.gd:8
 msgid "Reed"
@@ -7966,11 +8074,15 @@ msgstr "已寄出替換品 %s：%s（快捷）"
 msgid "Replacement shipped."
 msgstr "新品已寄出。"
 
-#: scripts/ui/modals/pause_menu.gd:62
+#: scripts/ui/modals/pause_menu.gd:44
 msgid "Replay tutorial"
 msgstr "重新播放教學"
 
-#: scripts/ui/modals/pause_menu.gd:66
+#: scripts/ui/modals/settings_modal.gd:8
+msgid "Report a problem"
+msgstr "回報問題"
+
+#: scripts/ui/modals/pause_menu.gd:48
 msgid "Report a problem (F12)"
 msgstr "回報問題（F12）"
 
@@ -8025,6 +8137,10 @@ msgstr "替 {company} 補貨：讓 Lumina 的進口貨送到"
 #: data/help/glossary.json
 msgid "Restocking fee"
 msgstr "退貨手續費"
+
+#: scripts/ui/modals/settings_modal.gd:51
+msgid "Restore default keys"
+msgstr "還原預設按鍵"
 
 #: scripts/ui/modals/insolvency_modal.gd:42
 msgid "Restructure the loan with Nexus Bank (24 months, +3% interest, credit hit)"
@@ -8230,9 +8346,9 @@ msgstr "路線規劃員"
 msgid "Route planning"
 msgstr "路線規劃"
 
-#: scripts/ui/modals/company_os.gd:1394
+#: scripts/ui/modals/company_os.gd:1394 scripts/ui/modals/settings_modal.gd:7
 msgid "Run"
-msgstr "單號"
+msgstr "跑步"
 
 #: scripts/ui/modals/company_os.gd:1422
 msgid "Run %s done: paid %s, fuel %s, %s on the road."
@@ -8286,7 +8402,7 @@ msgstr "急單再訂 {moq} 件（1 天到貨，成本 +20%）"
 msgid "SERVERS"
 msgstr "伺服器"
 
-#: autoload/sound.gd:25 autoload/sound.gd:34 autoload/sound.gd:60 autoload/sound.gd:61
+#: autoload/preferences.gd:168 autoload/sound.gd:25 autoload/sound.gd:34 autoload/sound.gd:60
 msgid "SFX"
 msgstr "SFX"
 
@@ -8418,7 +8534,7 @@ msgstr "儲存遊戲"
 msgid "Save now"
 msgstr "立即存檔"
 
-#: scripts/ui/hud.gd:148
+#: scripts/ui/hud.gd:150
 msgid "Saved"
 msgstr "已儲存"
 
@@ -8449,6 +8565,10 @@ msgstr "角落潦草寫著：「利潤是觀點，現金是事實。」"
 #: scripts/ui/minigames/pack_game.gd:138
 msgid "Seal & next"
 msgstr "封箱，下一張"
+
+#: data/help/help.json scripts/ui/modals/settings_modal.gd:125 scripts/ui/modals/settings_modal.gd:38
+msgid "Select an action, then press a key. Esc cancels key capture."
+msgstr "選擇動作後按下按鍵。Esc 可取消設定按鍵。"
 
 #: scripts/ui/minigames/cowork_host_game.gd:98
 msgid "Sell a day pass ($15)"
@@ -8541,6 +8661,18 @@ msgstr "用 − 和 + 調整價格，每日預估訂單會跟著變：便宜賣�
 #: scripts/ui/minigames/photo_shoot_game.gd:39
 msgid "Set up the shot: pick a backdrop, the light and an optional styling prop."
 msgstr "先佈置：選背景、燈光，還可以加一個陪襯的道具。"
+
+#: data/help/help.json scripts/frontend/main_menu.gd:67 scripts/ui/modals/pause_menu.gd:28 scripts/ui/modals/settings_modal.gd:15
+msgid "Settings"
+msgstr "設定"
+
+#: data/help/help.json
+msgid "Settings apply immediately and are stored separately from your saved games."
+msgstr "設定立即套用，並與遊戲存檔分開儲存。"
+
+#: scripts/ui/modals/settings_modal.gd:72
+msgid "Settings could not be saved. Check available storage and try again."
+msgstr "設定無法儲存，請檢查儲存空間後再試。"
 
 #: scripts/ui/modals/company_os.gd:827
 msgid "Settlement"
@@ -8826,17 +8958,13 @@ msgstr "睡到早上 7:00"
 msgid "Sleep until morning"
 msgstr "睡到早上"
 
-#: scripts/ui/modals/pause_menu.gd:30
-msgid "Slow"
-msgstr "慢"
-
 #: data/jobs/barista.json
 msgid "Slow afternoon. You wipe tables and watch who comes back twice."
 msgstr "悠閒的下午。你擦著桌子，觀察誰會回來第二次。"
 
-#: data/character/options.json
+#: data/character/options.json scripts/ui/modals/settings_modal.gd:36
 msgid "Small"
-msgstr "小嘴"
+msgstr "小"
 
 #: data/businesses/manufacturing.json
 msgid "Small OEM runs. Yield, downtime, defects."
@@ -8874,7 +9002,7 @@ msgstr "所以整個想法都是錯的？"
 msgid "So what do I do?"
 msgstr "那我該怎麼辦？"
 
-#: autoload/scene_router.gd:86 data/dialogue/maya_intro.json
+#: autoload/scene_router.gd:70 data/dialogue/maya_intro.json
 msgid "So you actually quit?"
 msgstr "真的辭了？"
 
@@ -8982,7 +9110,7 @@ msgstr "抱歉——這單我接不了。"
 msgid "Sort, scan and stack the neighbourhood's parcels. You'll see how shipping really works."
 msgstr "分揀、掃描、堆疊附近的包裹。你會看到物流實際上怎麼運作。"
 
-#: scripts/ui/modals/pause_menu.gd:42
+#: scripts/ui/modals/settings_modal.gd:30
 msgid "Sound effects"
 msgstr "音效"
 
@@ -9218,6 +9346,10 @@ msgstr "攝影棚拍照要 %s。"
 msgid "Styling"
 msgstr "陪襯道具"
 
+#: scripts/ui/modals/settings_modal.gd:57
+msgid "Subtitle advance delay (0 = manual)"
+msgstr "字幕換行等待（0＝手動）"
+
 #: data/dialogue/tom_office.json
 msgid "Suite 2B. Natural light, 40 square metres, storage out back."
 msgstr "2B 室。採光好，40 平方公尺，後面有倉庫。"
@@ -9330,7 +9462,7 @@ msgstr "招租：轉角店面，適合開咖啡店。請洽隔三間的 Okafor �
 msgid "TODAY'S BOOKINGS"
 msgstr "今日預約"
 
-#: scripts/ui/hud.gd:105 scripts/ui/tutorial.gd:27
+#: scripts/ui/tutorial.gd:27
 msgid "Tab"
 msgstr "Tab"
 
@@ -9430,13 +9562,17 @@ msgstr "實習櫃員"
 msgid "Teller — business banking"
 msgstr "櫃檯——企業金融"
 
-#: scripts/frontend/main_menu.gd:70
+#: scripts/frontend/main_menu.gd:75
 msgid "Test build: Esc → Report a problem."
 msgstr "測試版：按 Esc →「回報問題」。"
 
-#: scripts/frontend/main_menu.gd:70
+#: scripts/frontend/main_menu.gd:75
 msgid "Test build: press F12 any time to report a problem."
 msgstr "測試版：遇到問題隨時按 F12 回報。"
+
+#: scripts/ui/modals/settings_modal.gd:36
+msgid "Text size"
+msgstr "文字大小"
 
 #: scripts/ui/modals/registration_modal.gd:27
 msgid "Thanks"
@@ -9986,10 +10122,6 @@ msgstr "收銀台 · 你的咖啡店"
 msgid "Time on the road: %s"
 msgstr "路上時間：%s"
 
-#: scripts/ui/modals/pause_menu.gd:33
-msgid "Time only moves forward by living it: working a shift, or sleeping at night."
-msgstr "時間只會隨著你的生活前進：上班工作，或晚上睡覺。"
-
 #: scripts/ui/phone_ui.gd:128
 msgid "Timeline"
 msgstr "人生紀錄"
@@ -10114,6 +10246,10 @@ msgstr "婉拒了 Hale Group 對 %s 的收購提案。"
 msgid "Turning an empty unit into a working shop: equipment, counter and furniture."
 msgstr "把空店面變成能營業的店：設備、吧台和桌椅。"
 
+#: scripts/ui/modals/settings_modal.gd:63
+msgid "Tutorial hints"
+msgstr "教學提示"
+
 #: scripts/ui/tutorial.gd:217
 msgid "Tutorial skipped. You can replay it from the pause menu (Esc)."
 msgstr "已略過教學。可以在暫停選單（Esc）重新播放。"
@@ -10142,6 +10278,10 @@ msgstr "連續兩個月虧損，但你還開著。很多店已經撐不下去了
 msgid "Type the bright lines exactly as shown (the grey ones are already written). The next character to type is highlighted."
 msgstr "照著畫面打出亮色的那幾行（灰色的已經寫好了）。下一個要打的字元會反白標示。"
 
+#: scripts/ui/modals/settings_modal.gd:35
+msgid "UI scale"
+msgstr "介面縮放"
+
 #: data/buildings/popup_unit.json
 msgid "UNIT 5 · TO LET"
 msgstr "5 號店面 · 招租"
@@ -10158,9 +10298,9 @@ msgstr "呃。你看到這個了嗎？？"
 msgid "Unanswered offers are withdrawn; undelivered contracts are terminated without an extra penalty. Unpaid delivered invoices are sold to a collector in the liquidation."
 msgstr "未回覆報價會撤回，未交貨合約會終止，不另收違約金。已交貨未收款的發票隨清算賣給催收公司。"
 
-#: scripts/ui/minigames/route_game.gd:82 scripts/ui/minigames/teller_cash_game.gd:82
+#: scripts/ui/minigames/route_game.gd:82 scripts/ui/minigames/teller_cash_game.gd:82 scripts/ui/modals/settings_modal.gd:140
 msgid "Undo"
-msgstr "收回"
+msgstr "復原"
 
 #: scripts/ui/minigames/teller_cash_game.gd:25
 msgid "Undo takes the last note back."
@@ -10242,7 +10382,7 @@ msgstr "二手廂型貨車"
 msgid "Using a Chinese input method? Switch the keyboard to English input first."
 msgstr "用中文輸入法的話，請先切換成英文輸入。"
 
-#: scripts/frontend/main_menu.gd:66
+#: scripts/frontend/main_menu.gd:71
 msgid "VERTICAL SLICE 001 · art converted from concept boards · %s"
 msgstr "垂直切片 001 · 美術由概念圖轉換 · %s"
 
@@ -10450,6 +10590,10 @@ msgstr "沿著街道往東走（→）。河濱區的盡頭再過去就是新創
 msgid "Walk onto the glowing EXIT mat at the bottom of the room to go outside."
 msgstr "走到房間下方發光的「出口」地墊上，就會出門。"
 
+#: scripts/world/player.gd:134
+msgid "Walk to a laptop or work desk, then use Company OS."
+msgstr "請走到筆電或工作桌旁，再開啟 Company OS。"
+
 #: scripts/ui/tutorial.gd:46
 msgid "Walk to the Business Board and press E. Choose E-commerce: you buy products wholesale and sell them online."
 msgstr "走到創業佈告欄前按 E。選「電商」：批發進貨，在網路上賣。"
@@ -10462,7 +10606,7 @@ msgstr "用 WASD 或方向鍵走路，按住 Shift 可以跑步。"
 msgid "Walked out"
 msgstr "走掉"
 
-#: autoload/scene_router.gd:202
+#: autoload/scene_router.gd:186
 msgid "Walking to %s… (%d min)"
 msgstr "走路前往%s……（%d 分鐘）"
 
@@ -10633,6 +10777,14 @@ msgstr "大眼"
 #: scripts/ui/minigames/photo_shoot_game.gd:8
 msgid "Window light"
 msgstr "窗邊自然光"
+
+#: scripts/ui/modals/settings_modal.gd:34
+msgid "Window mode"
+msgstr "視窗模式"
+
+#: scripts/ui/modals/settings_modal.gd:34
+msgid "Windowed"
+msgstr "視窗"
 
 #: data/story/chapters.json
 msgid "Wire, letter of credit, whatever fits. The escrow offer stands whenever you want it."
@@ -12122,7 +12274,7 @@ msgstr "◆ 你在這裡"
 msgid "◉  Shutter"
 msgstr "◉  快門"
 
-#: scripts/ui/hud.gd:235
+#: scripts/ui/hud.gd:238
 msgid "● %d new"
 msgstr "● %d 則新訊息"
 
@@ -12153,6 +12305,10 @@ msgstr "✓ 金額正確"
 #: scripts/ui/minigames/clerk_forms_game.gd:117
 msgid "✓ Rejected for the right reason"
 msgstr "✓ 退件，理由正確"
+
+#: scripts/ui/modals/settings_modal.gd:112
+msgid "✓ Turn off"
+msgstr "✓ 關閉"
 
 #: scripts/ui/modals/business_board.gd:90
 msgid "✓ You run %s."
@@ -12217,3 +12373,11 @@ msgstr "✗ 排隊的人越來越多了"
 #: scripts/ui/minigames/teller_cash_game.gd:111
 msgid "✗ Till error: you handed over %s"
 msgstr "✗ 帳差：你給了 %s"
+
+#: scripts/ui/modals/settings_modal.gd:112
+msgid "✗ Turn on"
+msgstr "✗ 開啟"
+
+#: scripts/ui/modals/settings_modal.gd:129
+msgid "✗ Used by %s. Choose another key."
+msgstr "✗ 已用於「%s」，請改用其他按鍵。"

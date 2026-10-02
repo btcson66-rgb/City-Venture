@@ -102,10 +102,10 @@ func _ready() -> void:
 	quick.add_child(qrow)
 	quick.alignment = BoxContainer.ALIGNMENT_END
 	qrow.alignment = BoxContainer.ALIGNMENT_END
-	phone_btn = _quick_button("phone", "Phone", "Tab", func(): UIRoot.toggle_phone())
+	phone_btn = _quick_button("phone", "Phone", "phone", func(): UIRoot.toggle_phone())
 	qrow.add_child(phone_btn)
-	qrow.add_child(_quick_button("map", "Map", "M", func(): UIRoot.open_map()))
-	qrow.add_child(_quick_button("settings", "Menu", "Esc", func(): UIRoot.open_pause()))
+	qrow.add_child(_quick_button("map", "Map", "map", func(): UIRoot.open_map()))
+	qrow.add_child(_quick_button("settings", "Menu", "pause", func(): UIRoot.open_pause()))
 	phone_hint = UIK.label("", 7, Art.C_GOLD, true)
 	phone_hint.visible = false
 	phone_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -137,7 +137,9 @@ func _ready() -> void:
 	var ph := UIK.hbox(5)
 	prompt_panel.add_child(ph)
 	var key := UIK.panel("ui/prompt_key", 2)
-	key.add_child(UIK.label(" E ", 7, Art.C_NAVY_800, true))
+	var prompt_key := UIK.label(" " + Preferences.key_caption("interact") + " ", 7, Art.C_NAVY_800, true)
+	key.add_child(prompt_key)
+	Preferences.changed.connect(func(): prompt_key.text = " " + Preferences.key_caption("interact") + " ")
 	ph.add_child(key)
 	prompt_label = UIK.label("", 8, Art.C_WHITE, true)
 	ph.add_child(prompt_label)
@@ -176,9 +178,10 @@ func _quick_button(icon_name: String, text: String, key: String, cb: Callable) -
 	ks.content_margin_bottom = 0
 	kc.add_theme_stylebox_override("panel", ks)
 	kc.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var kl := UIK.label(key, 5, Art.C_NAVY_800, true)
+	var kl := UIK.label(Preferences.key_caption(key), 5, Art.C_NAVY_800, true)
 	kl.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	kc.add_child(kl)
+	Preferences.changed.connect(func(): kl.text = Preferences.key_caption(key); _fit_quick.call_deferred(b, h))
 	h.add_child(kc)
 	b.pressed.connect(cb)
 	_fit_quick.call_deferred(b, h)

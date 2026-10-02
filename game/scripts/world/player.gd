@@ -126,7 +126,14 @@ func _facing_vec() -> Vector2:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("interact") and focus != null and can_move():
+	if event.is_action_pressed("company_os_hint") and can_move():
+		get_viewport().set_input_as_handled()
+		if focus != null and focus.action == "open_company_os":
+			interact_now()
+		else:
+			UIRoot.toast("Walk to a laptop or work desk, then use Company OS.", "info", "laptop")
+		return
+	if (event.is_action_pressed("interact") or event.is_action_pressed("confirm")) and focus != null and can_move():
 		get_viewport().set_input_as_handled()
 		interact_now()
 
