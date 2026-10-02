@@ -550,6 +550,7 @@ func talk_through_dialogue(max_lines := 30, choose_first := true) -> void:
 ## a big-contract decision, staff in the office, the loan desk, SaaS after launch, insolvency and the
 ## closing statement, the pause menu with audio settings.
 func _screens() -> void:
+	await load("res://tests/walkthrough/info_badges_tour.gd").new(self).run()
 	# Keep the balanced supplier prices and units visible in the bilingual screenshot tour.
 	GameState.new_game({"name": "Balance Screens", "seed": 29})
 	UIRoot.open_modal(CompanyOS.new("home_laptop"))
@@ -572,6 +573,14 @@ func _screens() -> void:
 	UIRoot.set_hud_visible(true)
 	await wait(0.8)
 	# the Crestline decision (long detail text must wrap)
+	await until(func(): return UIRoot.card_layer.find_child("ChapterCard", false, false) == null, 8.0)
+	var contract_screen := CompanyOS.new("office")
+	contract_screen.tab = "contracts"
+	UIRoot.open_modal(contract_screen)
+	await wait(0.4)
+	expect(contract_screen.tab == "contracts", "contract terms tab shown")
+	await shot("screen_contract_terms")
+	UIRoot.close_all()
 	var inst := EventEngine.trigger("crestline_big_offer", {})
 	UIRoot.open_modal(DecisionModal.new(inst))
 	await wait(0.6)
@@ -587,6 +596,7 @@ func _screens() -> void:
 		Clock.advance(60)
 	SceneRouter._enter("interior", "small_office", "door", "up")
 	await wait(1.6)
+	await until(func(): return UIRoot.card_layer.find_child("ChapterCard", false, false) == null, 8.0)
 	await shot("screen_staff_in_office")
 	UIRoot.open_modal(CompanyOS.new("office"))
 	await wait(0.3)

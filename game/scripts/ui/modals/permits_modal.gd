@@ -30,7 +30,7 @@ func build() -> void:
 	var v := UIK.vbox(0)
 	v.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	r.add_child(v)
-	v.add_child(UIK.label("Employer registration & payroll", 8, Art.C_WHITE, true))
+	v.add_child(UIK.label_tip("Employer registration & payroll", "employer_registration", 8, Art.C_WHITE, true))
 	v.add_child(UIK.wrap("Needed before you hire anyone. Payroll runs every Friday at 17:00 from the company account.", 7, Art.C_MUTED, 300))
 	if emp:
 		r.add_child(UIK.chip("✓", Art.C_GREEN))
@@ -57,7 +57,7 @@ func _green_grant() -> void:
 	var v := UIK.vbox(0)
 	v.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	r.add_child(v)
-	v.add_child(UIK.label(I18n.t("Green Business Grant (%s)") % Fmt.money0(Company.GREEN_GRANT), 8, Art.C_WHITE, true))
+	v.add_child(UIK.label_tip(I18n.t("Green Business Grant (%s)") % Fmt.money0(Company.GREEN_GRANT), "green_grant", 8, Art.C_WHITE, true))
 	v.add_child(UIK.wrap("For registered companies with recycled packaging and a green product on sale.", 7, Art.C_MUTED, 300))
 	if GameState.flag("green_grant"):
 		r.add_child(UIK.chip(I18n.t("GRANTED"), Art.C_GREEN))
@@ -123,7 +123,7 @@ func _food_licence() -> void:
 	var v := UIK.vbox(0)
 	v.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	r.add_child(v)
-	v.add_child(UIK.label(I18n.t("Food handling licence (%s)") % Fmt.money0(float(Cafe.cfg().get("permit_fee", 280))), 8, Art.C_WHITE, true))
+	v.add_child(UIK.label_tip(I18n.t("Food handling licence (%s)") % Fmt.money0(float(Cafe.cfg().get("permit_fee", 280))), "food_licence", 8, Art.C_WHITE, true))
 	v.add_child(UIK.wrap("For serving food and drink from your own premises. An inspector checks the unit; it takes two days.", 7, Art.C_MUTED, 300))
 	if Cafe.permitted():
 		r.add_child(UIK.chip(I18n.t("GRANTED"), Art.C_GREEN))
@@ -161,7 +161,7 @@ func _apply_grant() -> void:
 
 
 func _row(k: String, v: String, col: Color) -> void:
-	body.add_child(UIK.kv(k, v, col, 8))
+	body.add_child(UIK.kv_tip(k, v, "company_registration", col, 8))
 
 
 func _action_style(ready: bool) -> String:

@@ -74,21 +74,18 @@ func build() -> void:
 		ok.name = "DecisionOK"
 		footer.add_child(ok)
 		return
+	var primary_chosen := false
 	for c in def.get("choices", []):
 		var avail := EventEngine.choice_available(c, inst["ctx"])
 		var row := UIK.vbox(0)
-		var b := UIK.button(EventEngine.fill(c["label"], inst["ctx"]), _pick.bind(c["id"]))
+		var b := UIK.button(EventEngine.fill(c["label"], inst["ctx"]), _pick.bind(c["id"]), "primary" if avail and not primary_chosen else "")
+		if avail: primary_chosen = true
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		b.disabled = not avail
 		b.name = "Choice_" + str(c["id"])
+		row.add_child(b)
 		if c.has("tip"):
-			var head := UIK.hbox(3)
-			b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			head.add_child(b)
-			head.add_child(UIK.tip(str(c["tip"])))
-			row.add_child(head)
-		else:
-			row.add_child(b)
+			row.add_child(UIK.label_tip(str(InfoTip.entry(str(c["tip"])).get("title", "")), str(c["tip"]), 7, Art.C_SKY))
 		if c.has("detail"):
 			var dl := UIK.wrap(EventEngine.fill(c["detail"], inst["ctx"]) + ("" if avail else I18n.t("  (not possible now)")), 7, Art.C_MUTED, 370)
 			var pad := MarginContainer.new()

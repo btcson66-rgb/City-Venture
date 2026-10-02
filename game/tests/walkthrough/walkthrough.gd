@@ -948,10 +948,11 @@ func _month() -> void:
 				await bot.click_named("Tab_operations")
 				await bot.click_named("DeliverTo_riverside_studio", 1.0)
 				for k in range(int(ceil(maxf(0, need_bottles) / 60.0))):
+					if bot.button_named("Buy_tradelink_wholesale_water_bottle") == null: break
 					await bot.click_named("Buy_tradelink_wholesale_water_bottle")
-				if Ecommerce.available_anywhere("water_bottle") < 25:
+				if Ecommerce.available_anywhere("water_bottle") < 25 and bot.button_named("Buy_tradelink_wholesale_water_bottle") != null:
 					await bot.click_named("Buy_tradelink_wholesale_water_bottle")
-				if Ecommerce.available_anywhere("wireless_earbuds") < 10:
+				if Ecommerce.available_anywhere("wireless_earbuds") < 10 and bot.button_named("Buy_tradelink_wholesale_wireless_earbuds") != null:
 					await bot.click_named("Buy_tradelink_wholesale_wireless_earbuds")
 			if offer_open:
 				await bot.click_named("Tab_contracts")
