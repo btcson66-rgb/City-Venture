@@ -19,6 +19,10 @@ func _ready() -> void:
 
 
 func _run() -> void:
+	if not safe_output_directory(str(options["out"])):
+		push_error("Stress output must be isolated from player saves")
+		get_tree().quit(1)
+		return
 	SaveSystem.autosave_enabled = false
 	SaveSystem.DIR = str(options["out"]).path_join("saves")
 	DirAccess.make_dir_recursive_absolute(SaveSystem.DIR)
@@ -103,6 +107,16 @@ func _run() -> void:
 
 func _expired() -> bool:
 	return Time.get_ticks_usec() - started > int(options["wall_seconds"]) * 1000000
+
+
+## An explicit QA output must never make new_game claim or back up a player's slot.
+static func safe_output_directory(path: String) -> bool:
+	if path.strip_edges().is_empty():
+		return false
+	var dir := ProjectSettings.globalize_path(path).simplify_path().replace("\\", "/").trim_suffix("/").to_lower()
+	var home := ProjectSettings.globalize_path("user://").simplify_path().replace("\\", "/").trim_suffix("/").to_lower()
+	var saves := home + "/saves"
+	return dir != home and dir != saves and not dir.begins_with(saves + "/")
 
 
 ## Exercise the real order placement, packing, shipping and scheduled aftersales.

@@ -6,7 +6,7 @@ ten-year, seven-new-industry, multi-company Web acceptance is not established.
 ## Reproduce
 
 Use Godot 4.5.1. Import once, then use a dedicated output directory (never a
-player save folder):
+player save folder; the probe rejects the player data root/save tree):
 
 ```text
 godot --headless --path game --import

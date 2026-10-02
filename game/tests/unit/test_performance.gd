@@ -67,5 +67,11 @@ func test_location_product_boundaries_and_no_overselling() -> void:
 	runner.eq(Ecommerce.reserved("riverside_studio", "phone_stand"), 100, "zero packing preserves reservations")
 
 
-func test_ci_failure_probe() -> void:
-	runner.check(false, "Intentional CI failure demonstration for ticket 98")
+func test_stress_output_cannot_claim_player_slots() -> void:
+	var stress_script: GDScript = load("res://tests/walkthrough/stress.gd")
+	runner.check(not stress_script.safe_output_directory("user://"), "player data root rejected")
+	runner.check(not stress_script.safe_output_directory("user://saves"), "player saves rejected")
+	runner.check(not stress_script.safe_output_directory("user://saves/qa"), "nested player saves rejected")
+	runner.check(not stress_script.safe_output_directory("user://qa/.."), "traversal to player root rejected")
+	runner.check(not stress_script.safe_output_directory(""), "empty output rejected")
+	runner.check(stress_script.safe_output_directory("user://stress"), "isolated QA output allowed")
