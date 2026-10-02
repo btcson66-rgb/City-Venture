@@ -86,6 +86,7 @@ func run() -> void:
 		# earlier tutorial story's funding assumptions; all factory actions below still use real input.
 		await close_modal()
 		GameState.new_game({"name":"Factory Founder", "seed":64001})
+		_tried.clear()  # a new game restarts decision ids
 		await _fast_forward_to_ch10()
 		SceneRouter._enter("interior", "riverside_apartment", "bed_side", "")
 		await wait_world()
@@ -93,6 +94,7 @@ func run() -> void:
 		await _save_load()
 		await close_modal()
 		GameState.new_game({"name":"Realty Founder","seed":65001})
+		_tried.clear()
 		await _fast_forward_to_ch10()
 		SceneRouter._enter("interior","riverside_apartment","bed_side","")
 		await wait_world()
@@ -100,6 +102,7 @@ func run() -> void:
 		await _save_load()
 		await close_modal()
 		GameState.new_game({"name":"Media Founder","seed":66001})
+		_tried.clear()
 		await _fast_forward_to_ch10()
 		SceneRouter._enter("interior","riverside_apartment","bed_side","")
 		await wait_world()
