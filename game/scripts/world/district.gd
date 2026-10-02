@@ -5,7 +5,7 @@ extends WorldScene
 const BASE_Y := 320.0   # building fronts meet the north sidewalk here
 const POI_ICONS := {"home": "home", "cafe": "coffee", "restaurant": "coffee", "bank": "bank", "civic": "civic", "parcel": "parcel",
 	"retail": "shop", "retail_space": "shop", "own_cafe": "coffee", "lettings": "home", "flat_to_let": "home",
-	"warehouse": "inventory", "van_dealer": "company", "gym": "people", "customs": "civic"}
+	"warehouse": "inventory", "van_dealer": "company", "gym": "people", "customs": "civic", "hotel": "sleep"}
 
 var def: Dictionary = {}
 var building_nodes := {}

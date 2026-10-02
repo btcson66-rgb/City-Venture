@@ -1,0 +1,315 @@
+{
+ "id": "luxury_heights",
+ "name": "Luxury Heights",
+ "size_tiles": [
+  120,
+  46
+ ],
+ "music": "day_city",
+ "ground": [
+  {
+   "type": "plaza_alt",
+   "rect": [
+    0,
+    0,
+    108,
+    20
+   ]
+  },
+  {
+   "type": "sidewalk",
+   "rect": [
+    0,
+    20,
+    108,
+    4
+   ]
+  },
+  {
+   "type": "curb_top",
+   "rect": [
+    0,
+    24,
+    108,
+    1
+   ]
+  },
+  {
+   "type": "road",
+   "rect": [
+    0,
+    25,
+    108,
+    5
+   ]
+  },
+  {
+   "type": "road_dash_h",
+   "rect": [
+    0,
+    27,
+    108,
+    1
+   ],
+   "step": 2
+  },
+  {
+   "type": "curb_bottom",
+   "rect": [
+    0,
+    30,
+    108,
+    1
+   ]
+  },
+  {
+   "type": "sidewalk",
+   "rect": [
+    0,
+    31,
+    108,
+    3
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    0,
+    34,
+    108,
+    10
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    30,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    64,
+    25,
+    3,
+    5
+   ]
+  }
+ ],
+ "buildings": [
+  "the_aster",
+  "skyline_grand",
+  "observation_deck"
+ ],
+ "fillers": [
+  {
+   "sprite": "boutique_row",
+   "fallback": "shop_row_awning",
+   "x": 1335
+  },
+  {
+   "sprite": "gallery_row",
+   "fallback": "brick_shops",
+   "x": 1570
+  }
+ ],
+ "props": [
+  {
+   "sprite": "tree_round",
+   "x": 28,
+   "y": 290,
+   "solid": [
+    28,
+    84,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_round_b",
+   "x": 340,
+   "y": 290,
+   "solid": [
+    28,
+    84,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_round",
+   "x": 700,
+   "y": 290,
+   "solid": [
+    28,
+    84,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_round_b",
+   "x": 1040,
+   "y": 290,
+   "solid": [
+    28,
+    84,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_round",
+   "x": 1420,
+   "y": 290,
+   "solid": [
+    28,
+    84,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "tree_round_b",
+   "x": 1650,
+   "y": 290,
+   "solid": [
+    28,
+    84,
+    8,
+    6
+   ]
+  },
+  {
+   "sprite": "lamp_banner",
+   "x": 300,
+   "y": 312,
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true
+  },
+  {
+   "sprite": "lamp_banner",
+   "x": 660,
+   "y": 312,
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true
+  },
+  {
+   "sprite": "lamp_banner",
+   "x": 1000,
+   "y": 312,
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true
+  },
+  {
+   "sprite": "lamp_banner",
+   "x": 1380,
+   "y": 312,
+   "solid": [
+    6,
+    66,
+    5,
+    4
+   ],
+   "glow": true
+  },
+  {
+   "sprite": "fountain",
+   "x": 1040,
+   "y": 330
+  }
+ ],
+ "metro": {
+  "station": "luxury_heights",
+  "x": 1180,
+  "y": 560,
+  "label": "Metro — Luxury Heights"
+ },
+ "exits": [],
+ "spawns": {
+  "metro": [
+   1220,
+   642
+  ]
+ },
+ "bounds": {
+  "top": 322,
+  "bottom": 728
+ },
+ "traffic": [
+  {
+   "y": 424,
+   "dir": -1,
+   "density": 0.4
+  },
+  {
+   "y": 478,
+   "dir": 1,
+   "density": 0.4
+  }
+ ],
+ "ped_paths": [
+  {
+   "y": 350,
+   "x0": 20,
+   "x1": 1708
+  },
+  {
+   "y": 362,
+   "x0": 20,
+   "x1": 1708
+  },
+  {
+   "y": 506,
+   "x0": 20,
+   "x1": 1708
+  },
+  {
+   "y": 590,
+   "x0": 20,
+   "x1": 1160
+  },
+  {
+   "y": 628,
+   "x0": 20,
+   "x1": 1708
+  }
+ ],
+ "ambient_density": {
+  "morning": 6,
+  "afternoon": 9,
+  "evening": 8,
+  "night": 3
+ },
+ "ped_outfits": [
+  "luxury_citywear",
+  "luxury_citywear",
+  "luxury_citywear",
+  "business_suit",
+  "office_professional",
+  "casual_jacket"
+ ],
+ "minimap_color": "#b46be0",
+ "traffic_types": [
+  "sedan",
+  "compact"
+ ]
+}

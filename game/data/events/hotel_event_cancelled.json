@@ -1,0 +1,50 @@
+{
+ "id": "hotel_event_cancelled",
+ "category": "market",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:hotel_active",
+   "flag:hotel_event_upcoming"
+  ],
+  "chance": 0.03,
+  "cooldown_days": 30,
+  "earliest_day": 5
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "owen_blake",
+  "title": "City event cancelled",
+  "icon": "warning",
+  "lines": [
+   "The organisers cancelled the next big city event. Group guests are leaving."
+  ]
+ },
+ "choices": [
+  {
+   "id": "promo",
+   "label": "Run a $1,200 flash sale",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "hotel",
+     "kind": "cancel_promo"
+    }
+   ],
+   "outcome": "The flash sale refills some rooms for a week. Group deposits are refunded."
+  },
+  {
+   "id": "accept",
+   "label": "Accept the loss",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "hotel",
+     "kind": "cancel_accept"
+    }
+   ],
+   "outcome": "The event leaves the calendar and group deposits are refunded."
+  }
+ ]
+}
