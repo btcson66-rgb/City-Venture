@@ -1178,10 +1178,6 @@ msgstr "分部汇整同一产业的交易。"
 msgid "A seller drops off twenty parcels with no labels. You feel their pain."
 msgstr "一个卖家拿来二十个没贴标签的包裹。你完全懂那种痛。"
 
-#: data/synergies.json
-msgid "A share of the hotel's guests rent from your airport fleet."
-msgstr "一部分饭店住客会向你的机场车队租车。"
-
 #: data/character/options.json
 msgid "A sharp three-piece in midnight wool. Pocket square included."
 msgstr "午夜蓝羊毛三件式，剪裁俐落，附口袋巾。"
@@ -2494,7 +2490,7 @@ msgstr "可以借钱进货或补资金缺口。每月连本带利还款；逾期
 msgid "Borrowed %s from Nexus Bank (%d months, %s APR)."
 msgstr "向 Nexus 银行借了 %s（%d 个月，年利率 %s）。"
 
-#: scripts/sim/internal_supply.gd:142
+#: scripts/sim/internal_supply.gd:143
 msgid "Both businesses must run on the same company's books."
 msgstr "两个事业必须记在同一家公司的帐上。"
 
@@ -2842,7 +2838,7 @@ msgstr "买日票（$15）"
 msgid "Buy a used van from Sam Okoro at Dockside Motors in the Harbor, and it works two ways: deliver your own ecommerce parcels for fuel instead of a courier fee, and take local delivery runs posted every morning (Company OS → Logistics), planning each route yourself. Rent a bay at Pier 7 for cheap stock space, and hire drivers."
 msgstr "向港区 Dockside Motors 的 Sam Okoro 买一台二手货车，有两种赚法：自己送电商包裹，付油钱而不是快递费；或接每天早上上架的本地外送单（Company OS → 物流），路线自己排。再租下 7 号码头的仓位，用便宜的空间放库存，也可以请司机。"
 
-#: scripts/sim/internal_supply.gd:147
+#: scripts/sim/internal_supply.gd:148
 msgid "Buy a van first."
 msgstr "请先买一台货车。"
 
@@ -3778,7 +3774,7 @@ msgstr "请选择尚未持有的住宅单位。"
 msgid "Choose between 1 and %d returnable units."
 msgstr "请选择 1 至 %d 件可退库存。"
 
-#: scripts/sim/internal_supply.gd:98
+#: scripts/sim/internal_supply.gd:99
 msgid "Choose cost, cost plus or market price for a listed supply pair."
 msgstr "请为列出的供应组合选择成本、成本加成或市价。"
 
@@ -4406,7 +4402,7 @@ msgstr "成本加 %d%%"
 msgid "Cost of goods sold"
 msgstr "销货成本"
 
-#: scripts/sim/internal_supply.gd:206
+#: scripts/sim/internal_supply.gd:217
 msgid "Cost of internal supply: %s"
 msgstr "内部供应成本：%s"
 
@@ -5521,10 +5517,6 @@ msgstr "电路故障"
 #: data/economy/staff.json data/npcs/rafael_costa.json
 msgid "Electrician"
 msgstr "电工"
-
-#: data/synergies.json
-msgid "Electricity for the factory"
-msgstr "工厂用电"
 
 #: data/synergies.json
 msgid "Electricity for the hotel"
@@ -7498,10 +7490,6 @@ msgstr "饭店评论家"
 msgid "Hotel guests add %d rental requests a day."
 msgstr "饭店住客每日增加 %d 笔租车询问。"
 
-#: data/synergies.json
-msgid "Hotel guests sent to car rental"
-msgstr "饭店住客转介租车"
-
 #: scripts/sim/hotel.gd:412
 msgid "Hotel insurance, property tax and software"
 msgstr "旅馆保险、房屋税与系统费"
@@ -7986,7 +7974,7 @@ msgstr "内部活动以媒体成本计入目标分部，免代理服务费且不
 msgid "Internal campaigns run at media cost, or cost-plus, with no agency fee or rebate."
 msgstr "内部宣传活动依媒体成本或成本加成运行，没有代理费或回扣。"
 
-#: scripts/sim/internal_supply.gd:209
+#: scripts/sim/internal_supply.gd:220
 msgid "Internal purchase from %s: %s"
 msgstr "向%s内部采购：%s"
 
@@ -7994,7 +7982,7 @@ msgstr "向%s内部采购：%s"
 msgid "Internal purchases from the group"
 msgstr "向集团内部采购"
 
-#: scripts/sim/internal_supply.gd:208
+#: scripts/sim/internal_supply.gd:219
 msgid "Internal sale to %s: %s"
 msgstr "对%s内部销售：%s"
 
@@ -8646,7 +8634,7 @@ msgstr "承租 The Loft 工作室"
 msgid "Lease Unit 12"
 msgstr "承租 12 号厂房"
 
-#: scripts/sim/internal_supply.gd:145
+#: scripts/sim/internal_supply.gd:146
 msgid "Lease Unit 12 and open the factory first."
 msgstr "请先租下 12 号厂房并开设工厂。"
 
@@ -10302,7 +10290,7 @@ msgstr "没有需要保养的车队车辆。"
 msgid "No free machine bay."
 msgstr "没有空的机台位置。"
 
-#: scripts/sim/internal_supply.gd:136
+#: scripts/sim/internal_supply.gd:137
 msgid "No game."
 msgstr "没有进行中的游戏。"
 
@@ -10353,6 +10341,10 @@ msgstr "柜台没有人。"
 #: scripts/world/actions.gd:136
 msgid "No one's behind the counter."
 msgstr "柜台没有人。"
+
+#: scripts/sim/internal_supply.gd:208
+msgid "No outside purchase to replace yet."
+msgstr "目前还没有可以取代的外部采购。"
 
 #: scripts/ui/modals/dropoff_modal.gd:28
 msgid "No pickup fee when you bring them in."
@@ -10486,7 +10478,7 @@ msgstr "北岭"
 msgid "Northwind Goods"
 msgstr "Northwind Goods"
 
-#: scripts/sim/internal_supply.gd:134
+#: scripts/sim/internal_supply.gd:135
 msgid "Not a supply pair."
 msgstr "不是供应组合。"
 
@@ -10634,7 +10626,7 @@ msgstr "这里没有可以打包的：货在这个地点吗？"
 msgid "Nothing to resolve."
 msgstr "没有需要处理的事。"
 
-#: scripts/sim/internal_supply.gd:191 scripts/sim/internal_supply.gd:201
+#: scripts/sim/internal_supply.gd:192 scripts/sim/internal_supply.gd:202
 msgid "Nothing to trade."
 msgstr "没有可交易的内容。"
 
@@ -10962,11 +10954,11 @@ msgstr "只有登记过的公司才能持有进口执照。"
 msgid "Open"
 msgstr "打开"
 
-#: scripts/sim/internal_supply.gd:176
+#: scripts/sim/internal_supply.gd:177
 msgid "Open %s to buy from %s."
 msgstr "开设%s，才能向%s采购。"
 
-#: scripts/sim/internal_supply.gd:181
+#: scripts/sim/internal_supply.gd:182
 msgid "Open %s to supply %s."
 msgstr "开设%s，才能供应给%s。"
 
@@ -11046,7 +11038,7 @@ msgstr "请开设公司银行帐户。"
 msgid "Open a charging station first."
 msgstr "请先开一座充电站。"
 
-#: scripts/sim/internal_supply.gd:182
+#: scripts/sim/internal_supply.gd:183
 msgid "Open a second business at the Business Board to start trading inside the group."
 msgstr "到事业看板开第二个事业，就能开始集团内部交易。"
 
@@ -11134,7 +11126,7 @@ msgstr "请先开业，再上一次电池课程。"
 msgid "Open the business first."
 msgstr "请先开业。"
 
-#: scripts/sim/internal_supply.gd:140
+#: scripts/sim/internal_supply.gd:141
 msgid "Open the buying business first."
 msgstr "请先开设采购方的事业。"
 
@@ -11190,7 +11182,7 @@ msgstr "开办太阳能事业"
 msgid "Open the subsidy desk"
 msgstr "打开补助窗口"
 
-#: scripts/sim/internal_supply.gd:138
+#: scripts/sim/internal_supply.gd:139
 msgid "Open the supplying business first."
 msgstr "请先开设供应方的事业。"
 
@@ -11414,7 +11406,7 @@ msgstr "其他营业费用"
 msgid "Outfit"
 msgstr "服装"
 
-#: scripts/sim/internal_supply.gd:215
+#: scripts/sim/internal_supply.gd:225
 msgid "Outside purchase avoided: %s"
 msgstr "省下的外购：%s"
 
@@ -16362,10 +16354,6 @@ msgstr "工厂已开业。"
 msgid "The factory ledger and schedule have been updated."
 msgstr "工厂帐本和调度已更新。"
 
-#: data/synergies.json
-msgid "The factory's power comes from your own solar and storage, so the grid bill falls."
-msgstr "工厂用电来自你自己的太阳能与储能，电网电费因此下降。"
-
 #: autoload/save_system.gd:406
 msgid "The file could not be read. Your existing save is unchanged."
 msgstr "无法读取文件。原有存盘仍完整保留。"
@@ -16846,7 +16834,7 @@ msgstr "此时段与生产或换线时间重叠。"
 msgid "This supplier does not accept returns after delivery."
 msgstr "这家供应商不接受到货后退货。"
 
-#: scripts/sim/internal_supply.gd:109
+#: scripts/sim/internal_supply.gd:110
 msgid "This supply runs with the business and cannot be paused."
 msgstr "这项供应随事业运作，无法暂停。"
 

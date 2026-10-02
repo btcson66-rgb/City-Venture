@@ -10,8 +10,9 @@ extends RefCounted
 ## ic_revenue and ic_cost use their own accounts routed through the ic_clearing account, so they never reach revenue,
 ## cogs or opex: the company P&L and the consolidated group totals eliminate them by construction, and the clearing
 ## account always nets to zero. Group profit therefore does not depend on the transfer price, only on real savings.
-## Non-native links also book the outside purchase they avoid (market price x share avoided) as other income, so the group
-## gains market x share minus the real cost, whatever the transfer price.
+## Non-native links replace a purchase the buyer really made outside: the avoided amount (market price x share) is credited back
+## to the buyer's own expense accounts (`offset_accts`), capped at what that segment actually spent there in the last 30 days.
+## With no outside spend to replace, nothing trades: internal supply never creates income on its own (spec R4).
 ## State: GameState.data["synergy"]["pairs"][link:buyer].
 
 const MODES := ["cost", "plus", "market"]
@@ -199,6 +200,16 @@ static func trade(k: String, qty: float, opts := {}) -> Dictionary:
 	var cost := snappedf(qty * unit, 0.01)
 	if amount <= 0 and cost <= 0:
 		return {"ok": false, "error": I18n.t("Nothing to trade.")}
+	var avoided := 0.0
+	if not bool(l.get("native", false)):
+		var room := outside_spend(k, ent)
+		var per_unit := market_price(l) * float(l.get("avoid", 1.0))
+		if room <= 0.0 or per_unit <= 0.0:
+			return {"ok": false, "error": I18n.t("No outside purchase to replace yet.")}
+		qty = minf(qty, room / per_unit)
+		amount = snappedf(qty * p, 0.01)
+		cost = snappedf(qty * unit, 0.01)
+		avoided = snappedf(qty * per_unit, 0.01)
 	var good := I18n.t(str(l["good"]))
 	var source_for := func(segment: String) -> Dictionary: return {"type": "internal_supply", "id": k, "segment": segment, "internal": true}
 	if cost > 0:
@@ -210,9 +221,8 @@ static func trade(k: String, qty: float, opts := {}) -> Dictionary:
 	var saving := 0.0
 	if not bool(l.get("native", false)):
 		# The buyer no longer pays an outside seller for the share it now takes from the group.
-		var avoided := snappedf(qty * market_price(l) * float(l.get("avoid", 1.0)), 0.01)
 		if avoided > 0:
-			Ledger.post(ent, I18n.t("Outside purchase avoided: %s") % good, [{"acct": "cash", "dr": avoided}, {"acct": "other_income", "cr": avoided}],
+			Ledger.post(ent, I18n.t("Outside purchase avoided: %s") % good, [{"acct": "cash", "dr": avoided}, {"acct": _offset_acct(l), "cr": avoided}],
 				{"type": "internal_saving", "id": k, "segment": buyer})
 		saving = snappedf(avoided - cost, 0.01)
 	st["qty"] = float(st["qty"]) + qty
@@ -222,6 +232,37 @@ static func trade(k: String, qty: float, opts := {}) -> Dictionary:
 	st["trades"] = int(st["trades"]) + 1
 	GameState.inc_stat("internal_trades")
 	return {"ok": true, "amount": amount, "cost": cost, "price": p, "saving": saving}
+
+
+## What the buyer segment really paid outside on this link's accounts in the last 30 days, minus what earlier
+## internal trades on the same pair already credited back. Only that much outside purchasing can be replaced.
+static func outside_spend(k: String, ent: String) -> float:
+	var parts := parse(k)
+	var l := link(parts[0])
+	var accts: Array = l.get("offset_accts", [])
+	if accts.is_empty():
+		return 0.0
+	var t0 := Clock.now() - 30 * Clock.DAY
+	var spent := 0.0
+	var credited := 0.0
+	for e in GameState.data["ledger"]["journal"]:
+		if e["entity"] != ent or int(e["t"]) < t0:
+			continue
+		var src: Dictionary = e.get("source", {})
+		var mine: bool = str(src.get("type", "")) == "internal_saving" and str(src.get("id", "")) == k
+		var seg := str(src.get("segment", Industries.infer_segment(src, e["lines"])))
+		if not mine and (seg != parts[1] or bool(src.get("internal", false))):
+			continue
+		for line in e["lines"]:
+			if str(line["acct"]) in accts:
+				if mine: credited += float(line.get("cr", 0.0))
+				else: spent += float(line.get("dr", 0.0)) - float(line.get("cr", 0.0))
+	return maxf(0.0, snappedf(spent - credited, 0.01))
+
+
+static func _offset_acct(l: Dictionary) -> String:
+	var accts: Array = l.get("offset_accts", ["cogs"])
+	return str(accts[0])
 
 
 # ------------------------------------------------------------------ native hooks (called by the buying/selling module)

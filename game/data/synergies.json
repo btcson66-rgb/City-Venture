@@ -2,42 +2,215 @@
  "id": "synergies",
  "settle_hour": 22,
  "monthly_days": 30,
- "markup_options": [0.1, 0.2, 0.35],
+ "markup_options": [
+  0.1,
+  0.2,
+  0.35
+ ],
  "links": [
-  {"id": "factory_goods", "seller": "manufacturing", "buyers": ["ecommerce"], "good": "Factory goods for ShopLane", "unit_label": "unit",
-   "cost": 9.0, "market": 14.0, "avoid": 1.0, "cadence": "daily", "driver": {"stat": "orders_delivered", "per": 1.0}, "requires": "factory",
-   "effect": "Each delivered ecommerce order restocks from your own line instead of an outside wholesaler."},
-  {"id": "cafe_breakfast", "seller": "cafe", "buyers": ["hotel"], "good": "Breakfast from the cafe kitchen", "unit_label": "guest", "native": true,
-   "cost_ref": ["hotel", "breakfast", "own_cafe", "cost"], "market_ref": ["hotel", "breakfast", "standard", "cost"],
-   "effect": "Choose Own cafe kitchen on the Rate Board: the hotel buys breakfast from the cafe at the transfer price."},
-  {"id": "media_ads", "seller": "media", "buyers": ["cafe", "ecommerce", "hotel"], "good": "Group advertising", "unit_label": "media $", "native": true,
-   "cost": 1.0, "market": 1.18, "effect": "Internal campaigns run at media cost, or cost-plus, with no agency fee or rebate."},
-  {"id": "energy_power_hotel", "seller": "energy", "buyers": ["hotel"], "good": "Electricity for the hotel", "unit_label": "kWh", "native": true,
-   "cost": 0.09, "market": 0.18, "power_share": 0.45, "effect": "Part of the hotel's nightly utilities is electricity bought from your energy business."},
-  {"id": "energy_power_factory", "seller": "energy", "buyers": ["manufacturing"], "good": "Electricity for the factory", "unit_label": "kWh",
-   "cost": 0.09, "market": 0.17, "avoid": 1.0, "cadence": "daily", "driver": {"flat": 250}, "requires": "factory",
-   "effect": "The factory's power comes from your own solar and storage, so the grid bill falls."},
-  {"id": "re_shop_rent", "seller": "real_estate", "buyers": ["ecommerce", "cafe", "media", "hotel", "automotive", "logistics", "energy", "manufacturing", "saas", "consulting"],
-   "good": "Shop or office unit", "unit_label": "unit", "cost": 300.0, "market": 800.0, "avoid": 0.5, "cadence": "monthly", "driver": {"flat": 1},
-   "effect": "Your brokerage houses a group business in one of its managed units instead of an outside landlord."},
-  {"id": "auto_van_service", "seller": "automotive", "buyers": ["logistics"], "good": "Van purchase prep and service", "unit_label": "van service", "cost": 35.0, "market": 60.0,
-   "avoid": 1.0, "cadence": "monthly", "driver": {"flat": 1}, "requires": "van",
-   "effect": "The auto desk services and prepares the logistics van at its own workshop cost."},
-  {"id": "hotel_referrals", "seller": "hotel", "buyers": ["automotive"], "good": "Hotel guests sent to car rental", "unit_label": "referral", "cost": 1.0, "market": 4.0,
-   "avoid": 1.0, "cadence": "daily", "driver": {"fn": "hotel_guests_day", "per": 0.12},
-   "effect": "A share of the hotel's guests rent from your airport fleet."}
+  {
+   "id": "factory_goods",
+   "seller": "manufacturing",
+   "buyers": [
+    "ecommerce"
+   ],
+   "good": "Factory goods for ShopLane",
+   "unit_label": "unit",
+   "cost": 9.0,
+   "market": 14.0,
+   "avoid": 1.0,
+   "cadence": "daily",
+   "driver": {
+    "stat": "orders_delivered",
+    "per": 1.0
+   },
+   "requires": "factory",
+   "effect": "Each delivered ecommerce order restocks from your own line instead of an outside wholesaler.",
+   "offset_accts": [
+    "cogs"
+   ]
+  },
+  {
+   "id": "cafe_breakfast",
+   "seller": "cafe",
+   "buyers": [
+    "hotel"
+   ],
+   "good": "Breakfast from the cafe kitchen",
+   "unit_label": "guest",
+   "native": true,
+   "cost_ref": [
+    "hotel",
+    "breakfast",
+    "own_cafe",
+    "cost"
+   ],
+   "market_ref": [
+    "hotel",
+    "breakfast",
+    "standard",
+    "cost"
+   ],
+   "effect": "Choose Own cafe kitchen on the Rate Board: the hotel buys breakfast from the cafe at the transfer price."
+  },
+  {
+   "id": "media_ads",
+   "seller": "media",
+   "buyers": [
+    "cafe",
+    "ecommerce",
+    "hotel"
+   ],
+   "good": "Group advertising",
+   "unit_label": "media $",
+   "native": true,
+   "cost": 1.0,
+   "market": 1.18,
+   "effect": "Internal campaigns run at media cost, or cost-plus, with no agency fee or rebate."
+  },
+  {
+   "id": "energy_power_hotel",
+   "seller": "energy",
+   "buyers": [
+    "hotel"
+   ],
+   "good": "Electricity for the hotel",
+   "unit_label": "kWh",
+   "native": true,
+   "cost": 0.09,
+   "market": 0.18,
+   "power_share": 0.45,
+   "effect": "Part of the hotel's nightly utilities is electricity bought from your energy business."
+  },
+  {
+   "id": "re_shop_rent",
+   "seller": "real_estate",
+   "buyers": [
+    "ecommerce",
+    "cafe",
+    "media",
+    "hotel",
+    "automotive",
+    "logistics",
+    "energy",
+    "manufacturing",
+    "saas",
+    "consulting"
+   ],
+   "good": "Shop or office unit",
+   "unit_label": "unit",
+   "cost": 300.0,
+   "market": 800.0,
+   "avoid": 0.5,
+   "cadence": "monthly",
+   "driver": {
+    "flat": 1
+   },
+   "effect": "Your brokerage houses a group business in one of its managed units instead of an outside landlord.",
+   "offset_accts": [
+    "exp:rent_shop",
+    "exp:rent_office",
+    "exp:rent_warehouse"
+   ]
+  },
+  {
+   "id": "auto_van_service",
+   "seller": "automotive",
+   "buyers": [
+    "logistics"
+   ],
+   "good": "Van purchase prep and service",
+   "unit_label": "van service",
+   "cost": 35.0,
+   "market": 60.0,
+   "avoid": 1.0,
+   "cadence": "monthly",
+   "driver": {
+    "flat": 1
+   },
+   "requires": "van",
+   "effect": "The auto desk services and prepares the logistics van at its own workshop cost.",
+   "offset_accts": [
+    "exp:maintenance"
+   ]
+  }
  ],
  "gates": {
-  "ecommerce": {"licence": "No licence until imports need one (Year 8).", "location": "Any laptop; a shop or warehouse unit later.", "after": []},
-  "consulting": {"licence": "None.", "location": "Any laptop or the co-working hot desk.", "after": []},
-  "saas": {"licence": "None.", "location": "Any laptop.", "after": ["consulting"]},
-  "cafe": {"licence": "Food handling licence at City Hall.", "location": "Corner unit in Old Town.", "after": ["ecommerce"]},
-  "logistics": {"licence": "None; a van and insurance.", "location": "Dockside Motors, Harbor (bay at Pier 7 optional).", "after": ["ecommerce"]},
-  "manufacturing": {"licence": "None; machines and materials.", "location": "Unit 12 in Industrial.", "after": ["ecommerce"]},
-  "real_estate": {"licence": "Brokerage licence at City Hall.", "location": "Harlow & Finch office in Residential.", "after": ["cafe"]},
-  "media": {"licence": "None.", "location": "The Loft in University.", "after": ["cafe", "ecommerce"]},
-  "hotel": {"licence": "None; meet Henri Dubois at The Aster first.", "location": "Aster Inn in Luxury Heights.", "after": ["cafe", "real_estate"]},
-  "automotive": {"licence": "Dealer licence fee when you open the Auto Desk.", "location": "Harbor auction; Airport district for rentals.", "after": ["logistics"]},
-  "energy": {"licence": "Grid permits per job; subsidies at City Hall.", "location": "Helio warehouse office in Industrial.", "after": ["manufacturing", "real_estate"]}
+  "ecommerce": {
+   "licence": "No licence until imports need one (Year 8).",
+   "location": "Any laptop; a shop or warehouse unit later.",
+   "after": []
+  },
+  "consulting": {
+   "licence": "None.",
+   "location": "Any laptop or the co-working hot desk.",
+   "after": []
+  },
+  "saas": {
+   "licence": "None.",
+   "location": "Any laptop.",
+   "after": [
+    "consulting"
+   ]
+  },
+  "cafe": {
+   "licence": "Food handling licence at City Hall.",
+   "location": "Corner unit in Old Town.",
+   "after": [
+    "ecommerce"
+   ]
+  },
+  "logistics": {
+   "licence": "None; a van and insurance.",
+   "location": "Dockside Motors, Harbor (bay at Pier 7 optional).",
+   "after": [
+    "ecommerce"
+   ]
+  },
+  "manufacturing": {
+   "licence": "None; machines and materials.",
+   "location": "Unit 12 in Industrial.",
+   "after": [
+    "ecommerce"
+   ]
+  },
+  "real_estate": {
+   "licence": "Brokerage licence at City Hall.",
+   "location": "Harlow & Finch office in Residential.",
+   "after": [
+    "cafe"
+   ]
+  },
+  "media": {
+   "licence": "None.",
+   "location": "The Loft in University.",
+   "after": [
+    "cafe",
+    "ecommerce"
+   ]
+  },
+  "hotel": {
+   "licence": "None; meet Henri Dubois at The Aster first.",
+   "location": "Aster Inn in Luxury Heights.",
+   "after": [
+    "cafe",
+    "real_estate"
+   ]
+  },
+  "automotive": {
+   "licence": "Dealer licence fee when you open the Auto Desk.",
+   "location": "Harbor auction; Airport district for rentals.",
+   "after": [
+    "logistics"
+   ]
+  },
+  "energy": {
+   "licence": "Grid permits per job; subsidies at City Hall.",
+   "location": "Helio warehouse office in Industrial.",
+   "after": [
+    "manufacturing",
+    "real_estate"
+   ]
+  }
  }
 }

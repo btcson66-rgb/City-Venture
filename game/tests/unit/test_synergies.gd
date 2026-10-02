@@ -155,6 +155,8 @@ func test_saving_versus_outside_is_independent_of_the_price() -> void:
 	_open_factory()
 	var k := InternalSupply.key("factory_goods", "ecommerce")
 	runner.check(InternalSupply.feasible(k), "factory supplies ecommerce")
+	runner.check(not InternalSupply.trade(k, 100.0)["ok"], "no outside purchase to replace: nothing trades, no income appears")
+	_outside(cid, "ecommerce", "cogs", 4200.0)
 	var gains: Array = []
 	for mode in ["cost", "market"]:
 		InternalSupply.set_policy(k, mode)
@@ -164,7 +166,16 @@ func test_saving_versus_outside_is_independent_of_the_price() -> void:
 		runner.eq(result["saving"], 500.0, "100 units save market minus cost")
 	runner.eq(gains[0], gains[1], "same group gain whatever the transfer price")
 	runner.eq(gains[0], 500.0, "group gains market minus real cost per unit")
+	var capped := InternalSupply.trade(k, 1000.0)
+	runner.check(capped["ok"], "the rest of the outside spend can still be replaced")
+	runner.eq(snappedf(float(capped["cost"]) / 9.0, 0.01), 100.0, "asked for 1,000 units but only 100 were still bought outside")
+	runner.eq(InternalSupply.outside_spend(k, cid), 0.0, "never replaces more than was really bought outside")
+	runner.eq(Ledger.balance(cid, "other_income"), 0.0, "internal supply books no other income")
 	runner.check(Ledger.check_balanced(), "books balance")
+
+
+func _outside(cid: String, segment: String, acct: String, amount: float) -> void:
+	Ledger.post(cid, "Outside purchase (test)", [{"acct": acct, "dr": amount}, {"acct": "cash", "cr": amount}], {"type": "test", "segment": segment})
 
 
 func test_segments_report_both_sides() -> void:
@@ -188,6 +199,7 @@ func test_factory_goods_settle_by_orders_delivered() -> void:
 	_open_factory()
 	var k := InternalSupply.key("factory_goods", "ecommerce")
 	runner.eq(InternalSupply.settle_all(), 0, "first pass only sets the baseline")
+	_outside(GameState.company_id(), "ecommerce", "cogs", 1000.0)
 	GameState.inc_stat("orders_delivered", 12)
 	runner.eq(InternalSupply.settle_all(), 1, "a day with deliveries trades")
 	runner.eq(InternalSupply.state(k)["qty"], 12.0, "one unit per delivered order")
@@ -203,23 +215,21 @@ func test_factory_goods_settle_by_orders_delivered() -> void:
 	runner.check(float(InternalSupply.state(k)["qty"]) > 12.0, "resumed pair trades again")
 
 
-func test_monthly_van_service_and_hotel_referrals() -> void:
+func test_monthly_van_service() -> void:
 	var cid := _company()
 	runner.check(Automotive.start()["ok"], "auto desk opens")
 	runner.check(Logistics.buy_van()["ok"], "van bought")
 	var van := InternalSupply.key("auto_van_service", "logistics")
 	runner.check(InternalSupply.feasible(van), "automotive services the logistics van")
+	_outside(cid, "logistics", "exp:maintenance", 120.0)
+	Clock.advance(31 * Clock.DAY)
+	_outside(cid, "logistics", "exp:maintenance", 120.0)
 	Clock.advance(31 * Clock.DAY)
 	runner.check(int(InternalSupply.state(van)["trades"]) >= 1, "monthly service trade settled")
 	runner.check(float(InternalSupply.state(van)["saving"]) > 0, "service saves versus outside")
-	_open_hotel()
-	var ref := InternalSupply.key("hotel_referrals", "automotive")
-	runner.check(InternalSupply.feasible(ref), "hotel refers guests to rental")
-	Hotel.S()["history"].append({"day": Clock.day_index(), "occupied": 50, "rooms": 60, "room_revenue": 5000.0, "walks": 0, "dirty": 0})
-	InternalSupply.settle_all()
-	runner.eq(InternalSupply.state(ref)["qty"], 6.0, "twelve percent of 50 guests")
+	runner.eq(Ledger.balance(cid, "other_income"), 0.0, "no other income")
+	runner.check(InternalSupply.link("hotel_referrals").is_empty(), "hotel guests feed rental demand inside automotive, not as a cash link")
 	runner.check(Ledger.check_balanced(), "books balance")
-	var _e := cid
 
 
 func test_hotel_breakfast_and_power_run_through_internal_supply() -> void:
