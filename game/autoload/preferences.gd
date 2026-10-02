@@ -135,6 +135,10 @@ func apply_input() -> void:
 		for event in InputMap.action_get_events(pair[1]):
 			InputMap.action_add_event(pair[0], event)
 
+	var access := get_tree().root.get_node_or_null("InputAccess") if is_inside_tree() else null
+	if access != null:
+		access.install_controller()
+
 
 func font_factor() -> float:
 	return [0.85, 1.0, 1.25, 1.5][int(values["font_size"])]

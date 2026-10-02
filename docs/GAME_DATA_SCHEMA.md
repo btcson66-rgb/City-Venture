@@ -485,3 +485,7 @@ Flags and stats the café sets: `met_okafor`, `leased_corner_cafe`, `food_permit
 Device settings (#87) are outside GameState and game saves: `Preferences` persists audio, display, accessibility,
 input bindings and launch defaults in `user://settings.cfg`. Unknown ConfigFile sections and legacy audio keys are
 preserved; old company saves need no migration. See [SETTINGS.md](SETTINGS.md) for units, limits and validation.
+
+### Input accessibility (#88)
+
+InputAccess stores touch contacts, transient walking routes and controller focus only in memory; no saved game keys or migrations. See [INPUT_ACCESS.md](INPUT_ACCESS.md).

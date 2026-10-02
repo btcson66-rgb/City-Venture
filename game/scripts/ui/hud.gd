@@ -190,7 +190,7 @@ func _quick_button(icon_name: String, text: String, key: String, cb: Callable) -
 
 func _fit_quick(b: Button, h: HBoxContainer) -> void:
 	h.reset_size()
-	b.custom_minimum_size = h.get_combined_minimum_size() + Vector2(6, 4)
+	b.custom_minimum_size = (h.get_combined_minimum_size() + Vector2(6, 4)).max(Vector2(44, 44))
 
 
 func relabel() -> void:
@@ -203,7 +203,7 @@ func set_prompt(text: String) -> void:
 	prompt_label.text = text
 	prompt_panel.reset_size()
 	await get_tree().process_frame
-	prompt_panel.position = Vector2((640 - prompt_panel.size.x) / 2.0, 360 - 34)
+	prompt_panel.position = Vector2((get_viewport_rect().size.x - prompt_panel.size.x) / 2.0, get_viewport_rect().size.y - prompt_panel.size.y - 8)
 
 
 func _process(_d: float) -> void:
@@ -238,7 +238,10 @@ func _process(_d: float) -> void:
 	phone_hint.text = ((I18n.t("● %d new") % unread) if unread > 0 else "") + ((I18n.t("   ◆ decision")) if pending else "")
 	phone_hint.visible = phone_hint.text != ""
 	phone_btn.modulate = Color(1, 1, 1) if unread == 0 and not pending else Color(1.0, 0.92, 0.6).lerp(Color(1, 1, 1), 0.5 + 0.5 * sin(Time.get_ticks_msec() / 180.0))
-	quick.position = Vector2(640 - 6 - quick.size.x, money_panel.position.y + money_panel.size.y + 3)
+	quick.position = Vector2(get_viewport_rect().size.x - 6 - quick.size.x, money_panel.position.y + money_panel.size.y + 3)
+	money_panel.position.x = maxf(6.0, get_viewport_rect().size.x - money_panel.size.x - 6.0)
+	minimap.get_parent().visible = not InputAccess.touch_mode or get_viewport_rect().size.x >= 600
+	obj_panel.visible = not InputAccess.touch_mode and not StoryEngine.main_objective().is_empty()
 	var cc2 := Ecommerce.carried_count()
 	parcels_label.text = (I18n.t("Carrying %d parcel%s") % [cc2, I18n.pl(cc2)]) if cc2 > 0 else ""
 

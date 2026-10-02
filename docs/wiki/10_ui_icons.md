@@ -146,3 +146,7 @@
 The title and pause menus open five settings pages (audio, display, controls, accessibility and game). UI scaling
 and extra-large text use scrollable panels. Color assistance retains textual labels and signed money; toggles show
 ✓/✗ and the next available action. Settings remain outside company saves. See [settings](../SETTINGS.md).
+
+## Touch and controllers (#88)
+
+Ground taps follow walkable routes; nearby objects show a touch interaction button. Buttons are at least 44 logical pixels. D-pad focuses the next action first; enlarged lists scroll to keep controls reachable. Portrait devices request landscape. See [input support](../INPUT_ACCESS.md) and the explicit device validation limits there.

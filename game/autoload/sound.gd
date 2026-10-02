@@ -16,6 +16,8 @@ var _pool: Array[AudioStreamPlayer] = []
 var _cache := {}
 var _last := {}
 var _headless := false
+var _audio_unlocked := not OS.has_feature("web")
+var _pending_music := ""
 
 
 func _ready() -> void:
@@ -50,6 +52,9 @@ func _ensure_bus(n: String) -> void:
 func _player(bus: String) -> AudioStreamPlayer:
 	var p := AudioStreamPlayer.new()
 	p.bus = bus
+	# Web sample playback can disconnect dynamically created buses; stream uses the mixed output.
+	if OS.has_feature("web"):
+		p.playback_type = AudioServer.PLAYBACK_TYPE_STREAM
 	add_child(p)
 	return p
 
@@ -82,7 +87,7 @@ func _stream(path: String) -> AudioStream:
 
 ## One-shot effect. Rate-limited per name so bursts (ten toasts at once) don't stack up.
 func play(name: String, db := 0.0) -> void:
-	if _headless:
+	if _headless or not _audio_unlocked:
 		return
 	var now := Time.get_ticks_msec()
 	if now - int(_last.get(name, -1000)) < 70:
@@ -101,6 +106,9 @@ func play(name: String, db := 0.0) -> void:
 
 ## Crossfade to a music track ("" = silence).
 func music(track: String) -> void:
+	if not _audio_unlocked:
+		_pending_music = track
+		return
 	if track == _current or _headless:
 		return
 	_current = track
@@ -187,3 +195,11 @@ func _exit_tree() -> void:
 			p.stop()
 			p.stream = null
 	_cache.clear()
+
+
+func _input(event: InputEvent) -> void:
+	if _audio_unlocked:
+		return
+	if (event is InputEventScreenTouch and event.pressed) or (event is InputEventMouseButton and event.pressed) or (event is InputEventKey and event.pressed):
+		_audio_unlocked = true
+		music(_pending_music)

@@ -224,9 +224,11 @@ static func name_tag(text: String) -> PanelContainer:
 static func button(text: String, cb: Callable = Callable(), style := "", min_w := 0.0) -> Button:
 	var b := Button.new()
 	b.text = text
-	b.focus_mode = Control.FOCUS_NONE
+	b.set_meta("primary_action", style == "primary")
+	b.focus_mode = Control.FOCUS_ALL
+	b.custom_minimum_size = Vector2(44, 44)
 	if min_w > 0:
-		b.custom_minimum_size = Vector2(min_w, 0)
+		b.custom_minimum_size = Vector2(maxf(44, min_w), 44)
 	if style == "primary":
 		b.add_theme_stylebox_override("normal", tex_box("ui/button_primary", 4, 5))
 		b.add_theme_stylebox_override("hover", tex_box("ui/button_primary_hover", 4, 5))

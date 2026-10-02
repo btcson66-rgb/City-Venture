@@ -45,13 +45,19 @@ func _ready() -> void:
 func open() -> void:
 	is_open = true
 	visible = true
+	var holder := get_child(0) as Control
+	holder.position.x = maxf(8.0, get_viewport_rect().size.x - 162.0)
+	screen.size.y = maxf(80.0, minf(214.0, get_viewport_rect().size.y - 54.0))
+	var scroll := screen.get_child(0) as ScrollContainer
+	scroll.custom_minimum_size.y = screen.size.y
+	scroll.size.y = screen.size.y
 	app = "home"
 	_player_pose("phone")
 	GameState.set_flag("phone_opened")
 	_render()
 	var h: Control = get_child(0)
-	h.position.y = 360
-	create_tween().tween_property(h, "position:y", 56.0, 0.18)
+	h.position.y = get_viewport_rect().size.y
+	create_tween().tween_property(h, "position:y", maxf(8.0, minf(56.0, get_viewport_rect().size.y - 250.0)), 0.18)
 
 
 func close() -> void:
@@ -68,7 +74,7 @@ func _player_pose(p: String) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if is_open and event.is_action_pressed("pause"):
+	if is_open and (event.is_action_pressed("pause") or event.is_action_pressed("cancel")):
 		get_viewport().set_input_as_handled()
 		if app == "home":
 			close()
