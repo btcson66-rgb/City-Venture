@@ -69,12 +69,24 @@ msgstr ""
 msgid " today"
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:101
+msgid " · %d days left"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:880
 msgid " · %d%% upfront"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:601
 msgid " · Net"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:170
+msgid " · due in %d days"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:155
+msgid " · with subsidy %s pending a %d-day City Hall decision, client pays %s"
 msgstr ""
 
 #: data/dialogue/maya_intro.json
@@ -213,6 +225,10 @@ msgstr ""
 msgid "%d orders waiting to be packed. I'm on it."
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:147
+msgid "%d panels · %.1f kW · %s kWh/year · average shading loss %d%% · load %d of %d kg"
+msgstr ""
+
 #: scripts/ui/minigames/pack_game.gd:201
 msgid "%d parcel(s) have the wrong label and will arrive late."
 msgstr ""
@@ -275,6 +291,10 @@ msgstr ""
 
 #: scripts/ui/modals/settlement_modal.gd:56
 msgid "%d × %s from %s: %s"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:278
+msgid "%d%% revenue share"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:931
@@ -461,6 +481,10 @@ msgstr ""
 msgid "%s · %.0f%% · CPM %s · audience fit %.0f%%"
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:169
+msgid "%s · %.1f kW · %s · crew-days %.1f of %.1f"
+msgstr ""
+
 #: scripts/ui/media_ui.gd:147
 msgid "%s · %d campaign days · spend %s · impressions %d · relevant reach %d · clicks %d · conversions %d"
 msgstr ""
@@ -485,6 +509,14 @@ msgstr ""
 msgid "%s · %s · %d hours · %s"
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:259
+msgid "%s · %s · %s · %d ports · price %s/kWh · demand about %d kWh/day · margin %s/kWh · %d kWh sold, %s revenue"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:102
+msgid "%s · %s · %s · faces %s · %d×%d cells · load limit %d kg · uses %s kWh/year%s"
+msgstr ""
+
 #: scripts/ui/real_estate_ui.gd:162
 msgid "%s · book %s · market %s · rent %s/month"
 msgstr ""
@@ -499,6 +531,14 @@ msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:178
 msgid "%s · budget %s · paid %s · completion in %d days"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:72
+msgid "%s · reputation %d%% · cash %s · weather %s · crew %.1f crew-days/day"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:278
+msgid "%s · terms agreed: %s"
 msgstr ""
 
 #: scripts/sim/acquisition.gd:60
@@ -547,6 +587,10 @@ msgstr ""
 
 #: scripts/sim/careers.gd:321
 msgid "%s: We had to cancel the project. We won't be paying for it."
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:221
+msgid "%s: grant %s, %s"
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:262
@@ -873,6 +917,10 @@ msgstr ""
 msgid "A new era in Aurelia: Year %d — %s."
 msgstr ""
 
+#: data/events/energy_rule.json
+msgid "A new rule requires an accessible bay at every public charging station. Retrofit now, or apply for an exemption and risk fines."
+msgstr ""
+
 #: data/help/glossary.json
 msgid "A one-off cost you earn back slowly from sales. Count it before you sign."
 msgstr ""
@@ -933,8 +981,16 @@ msgstr ""
 msgid "A shift is 4 hours, one a day, in opening hours. You play the shift: better work pays more (60% of the wage is guaranteed) and earns tips."
 msgstr ""
 
+#: data/events/energy_shortage.json
+msgid "A shipment of panels is stuck. Pay a premium supplier for an allocation, or wait and absorb the higher materials price."
+msgstr ""
+
 #: data/help/glossary.json
 msgid "A short loan that covers a gap until money you are owed comes in."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "A shorter payback wins more quotes."
 msgstr ""
 
 #: data/help/glossary.json
@@ -955,6 +1011,10 @@ msgstr ""
 
 #: scripts/ui/minigames/route_game.gd:147
 msgid "A tidy route. A stop or two out of order."
+msgstr ""
+
+#: data/events/energy_typhoon.json
+msgid "A typhoon tore panels off roofs you installed. Honour every claim at once, or inspect and triage the cheapest repairs."
 msgstr ""
 
 #: data/dialogue/lina_intro.json
@@ -1045,6 +1105,10 @@ msgstr ""
 msgid "Accept a run above, then drive it: you plan the route on a map. Every kilometre saved is fuel and time kept."
 msgstr ""
 
+#: data/events/energy_subsidy_cut.json
+msgid "Accept the cut and requote clients"
+msgstr ""
+
 #: data/events/crestline_big_offer.json
 msgid "Accept, counter or decline in Company OS → Contracts. The catch is working capital (you pay for the lamps now and get paid in 60 days) and space (home holds 600 units, Suite 2B 1,500)."
 msgstr ""
@@ -1063,6 +1127,22 @@ msgstr ""
 
 #: scripts/sim/contracts.gd:129
 msgid "Accepted."
+msgstr ""
+
+#: scripts/sim/energy.gd:748
+msgid "Accessibility exemption filing"
+msgstr ""
+
+#: scripts/sim/energy.gd:753
+msgid "Accessibility rule fine"
+msgstr ""
+
+#: scripts/sim/energy.gd:742
+msgid "Accessible bay retrofit"
+msgstr ""
+
+#: data/events/energy_rule.json
+msgid "Accessible charging bay rule"
 msgstr ""
 
 #: scripts/frontend/character_creator.gd:148
@@ -1163,6 +1243,10 @@ msgstr ""
 
 #: scripts/sim/media.gd:72
 msgid "Agency proposal"
+msgstr ""
+
+#: scripts/sim/energy.gd:582
+msgid "Agree terms with the landlord or use your own property first."
 msgstr ""
 
 #: data/regions/solterra.json
@@ -1345,6 +1429,10 @@ msgstr ""
 msgid "Application filed. The licence should be through %s."
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:212
+msgid "Applications are open this year."
+msgstr ""
+
 #: scripts/ui/modals/permits_modal.gd:140 scripts/ui/modals/permits_modal.gd:71
 msgid "Apply"
 msgstr ""
@@ -1363,6 +1451,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "Apply at the permits kiosk in City Hall. The money lands in the company account."
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:218
+msgid "Apply for %s · fee %s"
 msgstr ""
 
 #: data/story/chapters.json
@@ -1391,6 +1483,10 @@ msgstr ""
 
 #: data/economy/logistics.json
 msgid "Arc Capital"
+msgstr ""
+
+#: data/economy/energy.json
+msgid "Arcade Garage"
 msgstr ""
 
 #: data/character/options.json
@@ -1553,6 +1649,10 @@ msgstr ""
 msgid "Auroria"
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:132
+msgid "AutoLayout"
+msgstr ""
+
 #: scripts/sim/manufacturing.gd:50
 msgid "Automation is already installed."
 msgstr ""
@@ -1707,6 +1807,14 @@ msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:168
 msgid "Basic renovation"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:136
+msgid "Battery %d kWh"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:136
+msgid "Battery_%d"
 msgstr ""
 
 #: data/buildings/pier7_warehouse.json
@@ -1925,6 +2033,10 @@ msgstr ""
 msgid "Bright Smile Dental"
 msgstr ""
 
+#: data/economy/energy.json
+msgid "Brightline Parking"
+msgstr ""
+
 #: scripts/ui/minigames/clerk_forms_game.gd:9
 msgid "Brightpath Studio"
 msgstr ""
@@ -1989,6 +2101,10 @@ msgstr ""
 msgid "Budget, rooms, neighborhood and urgency determine client fit. Negotiation changes commission and acceptance."
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:285
+msgid "Build %s · %s"
+msgstr ""
+
 #: scripts/ui/media_ui.gd:79
 msgid "Build Creative Pitch"
 msgstr ""
@@ -2013,6 +2129,10 @@ msgstr ""
 msgid "Build it once, sell it every month. Development hours now, subscribers later: price, churn and servers decide if it works."
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:150
+msgid "Build on your own roof · %s"
+msgstr ""
+
 #: scripts/ui/minigames/creative_pitch.gd:15
 msgid "Build the client pitch from slogan, visual and tone cards."
 msgstr ""
@@ -2021,7 +2141,19 @@ msgstr ""
 msgid "Build this"
 msgstr ""
 
-#: scripts/world/building_info.gd:77
+#: scripts/ui/energy_ui.gd:286
+msgid "BuildGrant_%s_%s"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:287
+msgid "BuildLoan_%s_%s"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:285
+msgid "Build_%s_%s"
+msgstr ""
+
+#: scripts/world/building_info.gd:78
 msgid "Building"
 msgstr ""
 
@@ -2291,6 +2423,10 @@ msgstr ""
 
 #: data/districts/shopping_street.json
 msgid "CIVIC CENTER →"
+msgstr ""
+
+#: scripts/sim/energy.gd:391
+msgid "CLAIM-"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:30
@@ -2649,6 +2785,14 @@ msgstr ""
 msgid "Central Station"
 msgstr ""
 
+#: data/events/energy_rule.json
+msgid "Certain cost, no fine."
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:190
+msgid "CertifyStorage"
+msgstr ""
+
 #: data/economy/saas.json
 msgid "Chairly"
 msgstr ""
@@ -2685,8 +2829,52 @@ msgstr ""
 msgid "Chapters 7–9 add supply shocks, greener packaging and products, a green-business grant, and international payment choices."
 msgstr ""
 
+#: scripts/sim/energy.gd:524
+msgid "Charger capital grant: %s"
+msgstr ""
+
+#: data/events/energy_vandal.json
+msgid "Charger vandalism"
+msgstr ""
+
+#: scripts/sim/energy.gd:730
+msgid "Charger vandalism repair"
+msgstr ""
+
+#: data/help/glossary.json scripts/ui/energy_ui.gd:228 scripts/ui/energy_ui.gd:63
+msgid "Charging network"
+msgstr ""
+
+#: scripts/sim/energy.gd:47
+msgid "Charging network operator"
+msgstr ""
+
+#: scripts/sim/energy.gd:654
+msgid "Charging sessions: %s"
+msgstr ""
+
+#: scripts/sim/energy.gd:668
+msgid "Charging site fee: %s"
+msgstr ""
+
+#: scripts/sim/energy.gd:611
+msgid "Charging station opened: %s."
+msgstr ""
+
+#: scripts/sim/energy.gd:593
+msgid "Charging station: %s"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:234
+msgid "ChargingNextInstalls"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Cheap and trusted, but slow: the supplier waits for the money, so your stock arrives later. Order earlier when you pay this way."
+msgstr ""
+
+#: data/events/energy_rule.json
+msgid "Cheap if granted; a fine and a reputation hit if refused."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1217
@@ -2757,12 +2945,40 @@ msgstr ""
 msgid "Choose a business"
 msgstr ""
 
+#: scripts/sim/energy.gd:471
+msgid "Choose a contracted install first."
+msgstr ""
+
+#: scripts/sim/energy.gd:309
+msgid "Choose a contracted install that is ready to start."
+msgstr ""
+
 #: scripts/sim/manufacturing.gd:122
 msgid "Choose a factory machine."
 msgstr ""
 
+#: scripts/sim/energy.gd:564
+msgid "Choose a fixed fee or revenue share."
+msgstr ""
+
+#: scripts/sim/energy.gd:580
+msgid "Choose a free charging site and station type."
+msgstr ""
+
+#: scripts/sim/energy.gd:559
+msgid "Choose a free charging site."
+msgstr ""
+
+#: scripts/sim/energy.gd:246
+msgid "Choose a listed battery size and margin."
+msgstr ""
+
 #: scripts/sim/media.gd:160 scripts/sim/media.gd:163
 msgid "Choose a paused campaign and fund its next media purchase."
+msgstr ""
+
+#: scripts/sim/energy.gd:615
+msgid "Choose a price within the listed range."
 msgstr ""
 
 #: scripts/sim/real_estate.gd:124
@@ -2821,6 +3037,18 @@ msgstr ""
 msgid "Choose an open owner mandate and a matching client."
 msgstr ""
 
+#: scripts/sim/energy.gd:213 scripts/sim/energy.gd:220 scripts/sim/energy.gd:231 scripts/sim/energy.gd:244
+msgid "Choose an open roof survey."
+msgstr ""
+
+#: scripts/sim/energy.gd:671
+msgid "Choose an open station."
+msgstr ""
+
+#: scripts/sim/energy.gd:397
+msgid "Choose an open warranty claim."
+msgstr ""
+
 #: scripts/sim/real_estate.gd:85
 msgid "Choose an unowned residential unit."
 msgstr ""
@@ -2845,6 +3073,14 @@ msgstr ""
 msgid "City"
 msgstr ""
 
+#: data/economy/energy.json
+msgid "City Curb Office"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:230
+msgid "City EV adoption %s (+%s a year) · %d of %d stations open · grid electricity %s/kWh"
+msgstr ""
+
 #: scripts/ui/modals/city_guide_modal.gd:7 scripts/ui/phone_ui.gd:129
 msgid "City Guide"
 msgstr ""
@@ -2857,8 +3093,16 @@ msgstr ""
 msgid "City Hall"
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:209
+msgid "City Hall energy subsidy desk (Ms. Okoro)"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1252
 msgid "City Hall is processing it (ready %s)"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "City Hall pays part of a system's price from a yearly quota. You file for the client, pay a fee and wait for a decision."
 msgstr ""
 
 #: data/help/glossary.json
@@ -2879,6 +3123,10 @@ msgstr ""
 
 #: autoload/save_system.gd:330 autoload/save_system.gd:352
 msgid "City Venture save"
+msgstr ""
+
+#: data/npcs/ms_okoro.json
+msgid "City energy office"
 msgstr ""
 
 #: data/help/patch_notes.json
@@ -2921,7 +3169,7 @@ msgstr ""
 msgid "Clean up the books of %s"
 msgstr ""
 
-#: scripts/ui/minigames/route_game.gd:85
+#: scripts/sim/energy.gd:77 scripts/ui/minigames/route_game.gd:85
 msgid "Clear"
 msgstr ""
 
@@ -2959,6 +3207,10 @@ msgstr ""
 
 #: scripts/ui/media_ui.gd:75
 msgid "Client preferences: %s / %s / %s"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:152
+msgid "Client saves %s/year (solar %s, battery %s) · payback %.1f years · client acceptance %d%%"
 msgstr ""
 
 #: data/events/media_client.json
@@ -3009,7 +3261,7 @@ msgstr ""
 msgid "Closed now"
 msgstr ""
 
-#: scripts/world/building_info.gd:93
+#: scripts/world/building_info.gd:94
 msgid "Closed · opens %s"
 msgstr ""
 
@@ -3163,6 +3415,10 @@ msgstr ""
 
 #: scripts/sim/media.gd:180
 msgid "Complete two campaigns and hire a designer and media buyer before buying Campus Radio."
+msgstr ""
+
+#: scripts/sim/energy.gd:50 scripts/ui/energy_ui.gd:189 scripts/ui/energy_ui.gd:233
+msgid "Complete two solar installs before the battery course."
 msgstr ""
 
 #: scripts/ui/manufacturing_ui.gd:153
@@ -3319,6 +3575,10 @@ msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:8
 msgid "Costa"
+msgstr ""
+
+#: data/events/energy_vandal.json
+msgid "Costs more but cuts outage risk for two months."
 msgstr ""
 
 #: data/help/glossary.json
@@ -3561,7 +3821,7 @@ msgstr ""
 msgid "DRIVERS"
 msgstr ""
 
-#: scripts/world/building_info.gd:83
+#: scripts/world/building_info.gd:84
 msgid "Daily"
 msgstr ""
 
@@ -3741,6 +4001,10 @@ msgstr ""
 msgid "Deliver to:"
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:167
+msgid "Delivered"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1110
 msgid "Delivered and invoiced: %s."
 msgstr ""
@@ -3845,6 +4109,10 @@ msgstr ""
 msgid "Desks"
 msgstr ""
 
+#: data/economy/energy.json
+msgid "Destination chargers"
+msgstr ""
+
 #: scripts/ui/modals/business_board.gd:97
 msgid "Details / apply"
 msgstr ""
@@ -3911,6 +4179,10 @@ msgstr ""
 
 #: scripts/sim/ecommerce.gd:1178
 msgid "Dispute lost on %s: −%s"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:182
+msgid "Dispute the claim"
 msgstr ""
 
 #: data/help/glossary.json
@@ -4069,6 +4341,10 @@ msgstr ""
 msgid "Each customer reads out an order. Build it: cup size, drink, milk and shots."
 msgstr ""
 
+#: data/economy/staff.json
+msgid "Each electrician adds crew-days to installs on weekdays. Salary is due even when weather stops work."
+msgstr ""
+
 #: data/help/patch_notes.json
 msgid "Each game has its own save slot. Starting another game keeps your existing games, and replacing a full slot preserves a backup."
 msgstr ""
@@ -4105,6 +4381,10 @@ msgstr ""
 msgid "Earn on the side"
 msgstr ""
 
+#: scripts/sim/energy.gd:245
+msgid "Earn the battery installer certification before selling storage."
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Earn your first dollar."
 msgstr ""
@@ -4113,7 +4393,11 @@ msgstr ""
 msgid "Earn-out"
 msgstr ""
 
-#: scripts/world/building_info.gd:168
+#: scripts/sim/energy.gd:57
+msgid "Earned the battery installer certification."
+msgstr ""
+
+#: scripts/world/building_info.gd:169
 msgid "Eat"
 msgstr ""
 
@@ -4147,6 +4431,14 @@ msgstr ""
 
 #: data/dialogue/daniel_big_deal.json
 msgid "Eight hundred of them. Twenty-eight dollars each. Net 60."
+msgstr ""
+
+#: data/economy/staff.json data/npcs/rafael_costa.json
+msgid "Electrician"
+msgstr ""
+
+#: data/events/energy_tariff.json
+msgid "Electricity tariff increase"
 msgstr ""
 
 #: data/regions/lumina.json data/regions/zenkai.json
@@ -4213,12 +4505,40 @@ msgstr ""
 msgid "End the day"
 msgstr ""
 
-#: data/businesses/energy.json data/regions/almeria.json
+#: data/businesses/energy.json data/regions/almeria.json scripts/sim/energy.gd:791 scripts/ui/energy_ui.gd:20
 msgid "Energy"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:10
+msgid "Energy Console"
+msgstr ""
+
+#: data/help/help.json
+msgid "Energy Console: roof to charging network"
 msgstr ""
 
 #: data/regions/almeria.json
 msgid "Energy price swings"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Energy subsidy"
+msgstr ""
+
+#: scripts/sim/energy.gd:502
+msgid "Energy subsidy %s for %s."
+msgstr ""
+
+#: scripts/sim/energy.gd:478
+msgid "Energy subsidy application fee"
+msgstr ""
+
+#: data/buildings/city_hall.json
+msgid "Energy subsidy desk"
+msgstr ""
+
+#: scripts/sim/energy.gd:518
+msgid "Energy subsidy paid by City Hall: %s"
 msgstr ""
 
 #: scripts/sim/manufacturing.gd:100
@@ -4315,6 +4635,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "Every binned pastry is money spent for nothing. Order for the day you expect, not the day you hope for."
+msgstr ""
+
+#: data/events/energy_subsidy_cut.json
+msgid "Every grant is halved while the policy recovers over 90 days."
 msgstr ""
 
 #: data/help/glossary.json
@@ -4529,6 +4853,10 @@ msgstr ""
 msgid "Families"
 msgstr ""
 
+#: data/economy/energy.json
+msgid "Fast charging hub"
+msgstr ""
+
 #: data/regions/karu.json
 msgid "Fast growth"
 msgstr ""
@@ -4575,6 +4903,10 @@ msgstr ""
 
 #: data/dialogue/rita_hale_intro.json
 msgid "Ferro supplies material lots. Watch minimum quantities, delivery dates and weekly prices."
+msgstr ""
+
+#: data/events/energy_rule.json
+msgid "File for an exemption"
 msgstr ""
 
 #: autoload/save_system.gd:367
@@ -5073,6 +5405,14 @@ msgstr ""
 msgid "Grant approved: %s is on its way to the company account."
 msgstr ""
 
+#: data/dialogue/ms_okoro_intro.json
+msgid "Grants have an annual quota and a closing date. Applications cost a fee, take days and some are rejected. A policy change can cut the rate."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Grants lower the client's price but can be rejected, run out or be cut by policy."
+msgstr ""
+
 #: data/character/options.json
 msgid "Gray"
 msgstr ""
@@ -5111,6 +5451,22 @@ msgstr ""
 
 #: data/economy/logistics.json
 msgid "Greenleaf Florist"
+msgstr ""
+
+#: scripts/sim/energy.gd:315
+msgid "Grid connection permit: %s"
+msgstr ""
+
+#: scripts/sim/energy.gd:655
+msgid "Grid electricity for charging: %s"
+msgstr ""
+
+#: scripts/sim/energy.gd:680
+msgid "Grid export from your rooftop array: %s"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:149
+msgid "Grid export pays %s/kWh: about %s/year; payback %.1f years. Materials %s."
 msgstr ""
 
 #: data/character/options.json
@@ -5167,6 +5523,14 @@ msgstr ""
 
 #: data/buildings/harbor_point_fitness.json
 msgid "HARBOR POINT FITNESS"
+msgstr ""
+
+#: data/buildings/helio_supply.json
+msgid "HELIO SUPPLY"
+msgstr ""
+
+#: data/buildings/helio_warehouse.json
+msgid "HELIO WAREHOUSE"
 msgstr ""
 
 #: scripts/ui/modals/job_modal.gd:25
@@ -5253,6 +5617,10 @@ msgstr ""
 msgid "Harbor & Pine Co."
 msgstr ""
 
+#: data/economy/energy.json
+msgid "Harbor Authority"
+msgstr ""
+
 #: data/economy/logistics.json
 msgid "Harbor Candle Co."
 msgstr ""
@@ -5335,6 +5703,30 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:291
 msgid "Held in escrow"
+msgstr ""
+
+#: data/buildings/helio_supply.json
+msgid "Helio Supply"
+msgstr ""
+
+#: scripts/sim/energy.gd:323
+msgid "Helio Supply materials: %s"
+msgstr ""
+
+#: data/buildings/helio_warehouse.json
+msgid "Helio Warehouse Office"
+msgstr ""
+
+#: scripts/sim/energy.gd:53
+msgid "Helio battery installer certification"
+msgstr ""
+
+#: data/npcs/sunny_adeyemi.json
+msgid "Helio sales"
+msgstr ""
+
+#: data/properties/helio_warehouse.json
+msgid "Helio warehouse office"
 msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:66
@@ -5449,6 +5841,10 @@ msgstr ""
 msgid "Hiring gets harder: wages up 8% in a year."
 msgstr ""
 
+#: data/events/energy_tariff.json
+msgid "Hold charging prices"
+msgstr ""
+
 #: data/buildings/riverside_apartment.json data/character/options.json
 msgid "Home"
 msgstr ""
@@ -5469,6 +5865,10 @@ msgstr ""
 msgid "Home rent + living"
 msgstr ""
 
+#: data/economy/energy.json
+msgid "Home roof"
+msgstr ""
+
 #: data/dialogue/maya_intro.json
 msgid "Honest. I respect it."
 msgstr ""
@@ -5479,6 +5879,10 @@ msgstr ""
 
 #: data/dialogue/maya_intro.json
 msgid "Honestly? No idea."
+msgstr ""
+
+#: data/events/energy_typhoon.json
+msgid "Honour every claim and repair now"
 msgstr ""
 
 #: data/economy/logistics.json
@@ -5501,7 +5905,7 @@ msgstr ""
 msgid "Hotel / Tourism"
 msgstr ""
 
-#: scripts/world/building_info.gd:84
+#: scripts/world/building_info.gd:85
 msgid "Hours: %s–%s · %s"
 msgstr ""
 
@@ -5513,7 +5917,7 @@ msgstr ""
 msgid "House special"
 msgstr ""
 
-#: scripts/world/building_info.gd:172
+#: scripts/world/building_info.gd:173
 msgid "Housing"
 msgstr ""
 
@@ -5543,6 +5947,10 @@ msgstr ""
 
 #: data/dialogue/sam_owner.json
 msgid "How's the van treating you? Listen for the gearbox on the bridges, and don't leave it idling at the kerb."
+msgstr ""
+
+#: data/economy/energy.json
+msgid "Hub Garage Co"
 msgstr ""
 
 #: data/dialogue/tomas_varga_intro.json
@@ -5639,6 +6047,10 @@ msgstr ""
 
 #: data/dialogue/victor_declined.json
 msgid "If your numbers get bigger, so will mine."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Ignoring a claim damages your reputation."
 msgstr ""
 
 #: data/regions/karu.json
@@ -5765,6 +6177,10 @@ msgstr ""
 msgid "Infrastructure"
 msgstr ""
 
+#: data/events/energy_typhoon.json
+msgid "Inspect first and repair only the worst"
+msgstr ""
+
 #: data/help/help.json
 msgid "Inspect more to catch defects, or accept refunds and credit risk. Maintenance repairs broken machines."
 msgstr ""
@@ -5787,6 +6203,54 @@ msgstr ""
 
 #: scripts/sim/manufacturing.gd:253
 msgid "Install automation before your own brand."
+msgstr ""
+
+#: scripts/sim/energy.gd:370
+msgid "Install deposit refunded: %s"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:213
+msgid "Install grant quota remains."
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:214
+msgid "Install grants: %d%% of the quote up to %s per system. Quota left %s of %s. Charger grants: %d%% up to %s, quota left %s. Filing fee %s, decision in about %d days; some applications are rejected."
+msgstr ""
+
+#: scripts/sim/energy.gd:361
+msgid "Installed %.1f kW for %s."
+msgstr ""
+
+#: scripts/sim/energy.gd:355
+msgid "Installed materials expensed: %s"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Installed systems are covered for a year. A claim costs a share of the price to repair."
+msgstr ""
+
+#: scripts/sim/energy.gd:47
+msgid "Installer"
+msgstr ""
+
+#: scripts/sim/energy.gd:47
+msgid "Installer with storage"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:167
+msgid "Installing"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:161
+msgid "Installs"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:234 scripts/ui/energy_ui.gd:63
+msgid "Installs & warranty"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Installs pay once with a warranty tail; chargers earn per kWh and track EV adoption."
 msgstr ""
 
 #: data/products/water_bottle.json
@@ -5875,6 +6339,10 @@ msgstr ""
 
 #: scripts/sim/acquisition.gd:69
 msgid "Investors own %s of it, so your share is %s."
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:175
+msgid "Invoice %s · %s · warranty to %s"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:979
@@ -6241,6 +6709,10 @@ msgstr ""
 msgid "LIVE"
 msgstr ""
 
+#: scripts/sim/energy.gd:658
+msgid "Landlord revenue share: %s"
+msgstr ""
+
 #: scripts/ui/modals/pause_menu.gd:44
 msgid "Language"
 msgstr ""
@@ -6399,6 +6871,22 @@ msgstr ""
 
 #: scripts/ui/modals/lease_modal.gd:61
 msgid "Lease signed: %s."
+msgstr ""
+
+#: data/economy/staff.json
+msgid "Lease the Helio warehouse before hiring an electrician."
+msgstr ""
+
+#: data/buildings/helio_warehouse.json
+msgid "Lease the Helio warehouse office"
+msgstr ""
+
+#: scripts/sim/energy.gd:33 scripts/ui/energy_ui.gd:81
+msgid "Lease the Helio warehouse office in Industrial first."
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:26
+msgid "Lease the Helio warehouse office in Industrial, then survey real roofs and quote systems. Subsidies come from City Hall."
 msgstr ""
 
 #: data/buildings/harlow_finch.json
@@ -6997,8 +7485,24 @@ msgstr ""
 msgid "Marcus: \"Three months. When the frozen money is back, pay it off. No penalty.\""
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:141
+msgid "Margin %d%%"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Margin pays for rent, wages and ads. A busy shop with a thin margin can still lose money."
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:141
+msgid "Margin_%d"
+msgstr ""
+
+#: data/events/energy_tariff.json
+msgid "Margins hold, but fewer drivers plug in."
+msgstr ""
+
+#: data/events/energy_tariff.json
+msgid "Margins shrink while the tariff eases over two months."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:418
@@ -7055,6 +7559,14 @@ msgstr ""
 
 #: scripts/ui/manufacturing_ui.gd:100
 msgid "MaterialMore"
+msgstr ""
+
+#: data/events/energy_shortage.json
+msgid "Materials cost 35% more, easing over six weeks."
+msgstr ""
+
+#: data/events/energy_shortage.json
+msgid "Materials stay about 10% higher for three weeks."
 msgstr ""
 
 #: data/regions/northridge.json
@@ -7141,6 +7653,10 @@ msgstr ""
 msgid "Menu"
 msgstr ""
 
+#: data/economy/energy.json
+msgid "Meridian Parking"
+msgstr ""
+
 #: scripts/ui/phone_ui.gd:127 scripts/ui/phone_ui.gd:181
 msgid "Messages"
 msgstr ""
@@ -7153,7 +7669,7 @@ msgstr ""
 msgid "Metal supplier"
 msgstr ""
 
-#: scripts/ui/tutorial.gd:674 scripts/world/district.gd:75
+#: scripts/ui/tutorial.gd:674 scripts/world/district.gd:77
 msgid "Metro"
 msgstr ""
 
@@ -7169,7 +7685,7 @@ msgstr ""
 msgid "Metro · 5 lines"
 msgstr ""
 
-#: scripts/world/district.gd:74
+#: scripts/world/district.gd:76
 msgid "Metro — %s Station"
 msgstr ""
 
@@ -7177,7 +7693,7 @@ msgstr ""
 msgid "Metro — University"
 msgstr ""
 
-#: scripts/world/building_info.gd:185
+#: scripts/world/building_info.gd:186
 msgid "Metro: %s Station"
 msgstr ""
 
@@ -7321,11 +7837,11 @@ msgstr ""
 msgid "Monthly rent"
 msgstr ""
 
-#: autoload/scene_router.gd:181 scripts/ui/modals/job_modal.gd:31 scripts/world/building_info.gd:83
+#: autoload/scene_router.gd:181 scripts/ui/modals/job_modal.gd:31 scripts/world/building_info.gd:84
 msgid "Mon–Fri"
 msgstr ""
 
-#: autoload/scene_router.gd:181 scripts/world/building_info.gd:83
+#: autoload/scene_router.gd:181 scripts/world/building_info.gd:84
 msgid "Mon–Sat"
 msgstr ""
 
@@ -7335,6 +7851,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "Morale drops when pay is late or work piles up."
+msgstr ""
+
+#: data/dialogue/rafael_costa_intro.json
+msgid "More electricians mean more crew-days each day, but they are paid every week even when rain stops the work. Hire me from the console once you have the warehouse."
 msgstr ""
 
 #: scripts/ui/manufacturing_ui.gd:160
@@ -7407,6 +7927,10 @@ msgstr ""
 
 #: data/properties/corner_cafe.json
 msgid "Mr. Okafor: \"Keys, meter readings, and my number. The espresso smell is included.\""
+msgstr ""
+
+#: data/npcs/ms_okoro.json
+msgid "Ms. Okoro"
 msgstr ""
 
 #: autoload/sound.gd:24 autoload/sound.gd:31 autoload/sound.gd:32 autoload/sound.gd:58
@@ -7485,6 +8009,14 @@ msgstr ""
 msgid "Needs attention"
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:275
+msgid "Negotiate fixed fee"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:276
+msgid "Negotiate revenue share"
+msgstr ""
+
 #: scripts/sim/real_estate.gd:251
 msgid "Neighbor mediation"
 msgstr ""
@@ -7557,6 +8089,10 @@ msgstr ""
 msgid "Nexus Bank"
 msgstr ""
 
+#: data/economy/energy.json
+msgid "Nexus Bank Estates"
+msgstr ""
+
 #: scripts/sim/bank.gd:307
 msgid "Nexus Bank called loan %s and it could not be repaid."
 msgstr ""
@@ -7613,6 +8149,10 @@ msgstr ""
 msgid "Nexus Co-work, over in Startup Hub. They've got a board — suppliers, gigs, whatever."
 msgstr ""
 
+#: data/economy/energy.json
+msgid "Nexus Property"
+msgstr ""
+
 #: data/npcs/student_intern.json
 msgid "Nia Park"
 msgstr ""
@@ -7635,6 +8175,10 @@ msgstr ""
 
 #: scripts/sim/jobs.gd:48
 msgid "No active job to work on."
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:136
+msgid "No battery"
 msgstr ""
 
 #: data/events/viral_mention.json
@@ -7881,7 +8425,7 @@ msgstr ""
 msgid "Not now"
 msgstr ""
 
-#: scripts/ui/modals/city_guide_modal.gd:20 scripts/world/building_info.gd:92
+#: scripts/ui/modals/city_guide_modal.gd:20 scripts/world/building_info.gd:93
 msgid "Not open yet"
 msgstr ""
 
@@ -8035,6 +8579,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:29
 msgid "OVERDUE"
+msgstr ""
+
+#: scripts/sim/energy.gd:205
+msgid "OWN-"
 msgstr ""
 
 #: data/dialogue/barista_bytebean.json
@@ -8229,6 +8777,10 @@ msgstr ""
 msgid "Open Company OS at your laptop at home, or at a hot desk while your co-work pass is valid. Everything about your business happens here."
 msgstr ""
 
+#: data/buildings/helio_supply.json data/buildings/helio_warehouse.json data/dialogue/rafael_costa_intro.json data/dialogue/sunny_adeyemi_intro.json
+msgid "Open Energy Console"
+msgstr ""
+
 #: data/buildings/ferro_supply.json data/buildings/kessler_precision.json data/buildings/shift_diner.json data/buildings/unit12_factory.json
 msgid "Open Line Planner"
 msgstr ""
@@ -8269,6 +8821,10 @@ msgstr ""
 msgid "Open a business account with us first."
 msgstr ""
 
+#: scripts/sim/energy.gd:727
+msgid "Open a charging station first."
+msgstr ""
+
 #: scripts/ui/modals/bank_modal.gd:40
 msgid "Open account with %s"
 msgstr ""
@@ -8293,7 +8849,7 @@ msgstr ""
 msgid "Open last month close (%s)"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1268 scripts/world/building_info.gd:89
+#: scripts/ui/modals/company_os.gd:1268 scripts/world/building_info.gd:90
 msgid "Open now"
 msgstr ""
 
@@ -8317,8 +8873,20 @@ msgstr ""
 msgid "Open the business bank account first."
 msgstr ""
 
+#: scripts/sim/energy.gd:49
+msgid "Open the business first, then complete the battery course once."
+msgstr ""
+
+#: scripts/sim/energy.gd:462
+msgid "Open the business first."
+msgstr ""
+
 #: scripts/ui/media_ui.gd:52
 msgid "Open the campaign studio"
+msgstr ""
+
+#: scripts/sim/energy.gd:700
+msgid "Open the energy business first."
 msgstr ""
 
 #: data/dialogue/lina_rails_again.json
@@ -8337,6 +8905,14 @@ msgstr ""
 msgid "Open the group business before buying internal media."
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:84
+msgid "Open the solar business"
+msgstr ""
+
+#: data/dialogue/ms_okoro_intro.json
+msgid "Open the subsidy desk"
+msgstr ""
+
 #: scripts/ui/tutorial.gd:27
 msgid "Open your phone"
 msgstr ""
@@ -8347,6 +8923,10 @@ msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:69
 msgid "OpenBrokerage"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:84
+msgid "OpenEnergy"
 msgstr ""
 
 #: scripts/ui/manufacturing_ui.gd:79
@@ -8363,6 +8943,10 @@ msgstr ""
 
 #: scripts/sim/media.gd:24
 msgid "Opened a campaign studio at The Loft."
+msgstr ""
+
+#: scripts/sim/energy.gd:40
+msgid "Opened a solar installation business at the Helio warehouse."
 msgstr ""
 
 #: scripts/sim/rails.gd:42
@@ -8447,6 +9031,14 @@ msgstr ""
 
 #: data/story/chapters.json
 msgid "Order from Lumina Direct: factory prices, but you pay before it ships"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:173
+msgid "Order materials and start · %s"
+msgstr ""
+
+#: data/help/help.json
+msgid "Order materials from Helio Supply, then crew-days finish the install. Rain slows work and storms stop it."
 msgstr ""
 
 #: data/buildings/lantern_bistro.json
@@ -8547,6 +9139,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "Own a rental before applying for the Lot 7 building permit. Ruiz construction uses paid monthly milestones; unfinished buildings cannot be sold."
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:106
+msgid "Own array %s: %.1f kW · %d kWh sold · %s earned"
 msgstr ""
 
 #: data/help/glossary.json
@@ -8785,6 +9381,14 @@ msgstr ""
 msgid "Pallet racking"
 msgstr ""
 
+#: data/buildings/helio_supply.json
+msgid "Panel and battery catalogue"
+msgstr ""
+
+#: scripts/sim/energy.gd:385
+msgid "Panel or inverter defect"
+msgstr ""
+
 #: scripts/ui/minigames/clerk_forms_game.gd:9
 msgid "Paper Crane Ltd"
 msgstr ""
@@ -8889,6 +9493,10 @@ msgstr ""
 msgid "Pay"
 msgstr ""
 
+#: data/events/energy_shortage.json
+msgid "Pay Helio a premium allocation fee"
+msgstr ""
+
 #: scripts/ui/modals/settlement_modal.gd:34
 msgid "Pay a supplier abroad"
 msgstr ""
@@ -8915,6 +9523,10 @@ msgstr ""
 
 #: scripts/ui/manufacturing_ui.gd:126
 msgid "Pay own-brand mould fee"
+msgstr ""
+
+#: data/events/energy_subsidy_cut.json
+msgid "Pay rush filing fees to protect pending grants"
 msgstr ""
 
 #: data/help/help.json
@@ -9001,6 +9613,10 @@ msgstr ""
 msgid "Penalties"
 msgstr ""
 
+#: data/events/energy_subsidy_cut.json
+msgid "Pending applications keep the old grant; new ones pay half for 90 days."
+msgstr ""
+
 #: data/city/aurelia.json
 msgid "Penthouses, clubs, fine dining."
 msgstr ""
@@ -9081,6 +9697,10 @@ msgstr ""
 msgid "Pick a box to start"
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:249
+msgid "Pick a district on the map. Free spots are limited; landlords want a fee or a share, your own property needs none."
+msgstr ""
+
 #: scripts/ui/industry_views.gd:35
 msgid "Pick a product idea and build it in Company OS → SaaS: development hours first, subscribers after launch. Hire developers to build faster."
 msgstr ""
@@ -9123,6 +9743,22 @@ msgstr ""
 
 #: data/economy/logistics.json
 msgid "Pixel Pup Grooming"
+msgstr ""
+
+#: scripts/sim/energy.gd:129
+msgid "Place at least one panel on the roof."
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:132
+msgid "Place best panels"
+msgstr ""
+
+#: scripts/sim/energy.gd:117
+msgid "Place panels on free roof cells only."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Place panels on roof cells. Shade, direction and the load limit change annual kWh and the client's payback."
 msgstr ""
 
 #: data/economy/freelance.json
@@ -9261,6 +9897,10 @@ msgstr ""
 msgid "Premium customers"
 msgstr ""
 
+#: scripts/sim/energy.gd:706
+msgid "Premium panel allocation fee"
+msgstr ""
+
 #: scripts/ui/real_estate_ui.gd:168
 msgid "Premium renovation"
 msgstr ""
@@ -9297,6 +9937,14 @@ msgstr ""
 msgid "Price"
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:156
+msgid "Price %s without subsidy · materials %s · margin %d%% · %.1f crew-days (about %d days)%s"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:265
+msgid "Price +%s"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Price and demand"
 msgstr ""
@@ -9307,6 +9955,14 @@ msgstr ""
 
 #: data/events/viral_mention.json
 msgid "Price raised."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Price too high and the bays empty; too low and each kWh loses money."
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:264
+msgid "Price −%s"
 msgstr ""
 
 #: data/events/supply_shock_plan.json
@@ -9477,6 +10133,10 @@ msgstr ""
 msgid "Quantity (up to %d)"
 msgstr ""
 
+#: data/economy/energy.json
+msgid "Quay Depot"
+msgstr ""
+
 #: data/economy/media.json
 msgid "Quiet excellence"
 msgstr ""
@@ -9507,6 +10167,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "Quote orders, order materials and reserve machine hours within the next week. Changeovers need one hour."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Quote rooftop solar for real clients, then build an EV charging network."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1264
@@ -9549,6 +10213,10 @@ msgstr ""
 msgid "RIVERSIDE TOWER"
 msgstr ""
 
+#: scripts/sim/energy.gd:198
+msgid "ROOF-"
+msgstr ""
+
 #: scripts/ui/minigames/clerk_forms_game.gd:90
 msgid "RULES"
 msgstr ""
@@ -9569,6 +10237,10 @@ msgstr ""
 msgid "Racking for 5,000 units. Pier 7 leases bays to registered companies only."
 msgstr ""
 
+#: data/properties/helio_warehouse.json
+msgid "Racks, a loading door and a desk. Rent and deposit: $5,200 on signing."
+msgstr ""
+
 #: data/buildings/campus_radio.json
 msgid "Radio station"
 msgstr ""
@@ -9577,12 +10249,24 @@ msgstr ""
 msgid "RadioRecruit"
 msgstr ""
 
+#: data/npcs/rafael_costa.json
+msgid "Rafael Costa"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Rail reliability"
 msgstr ""
 
+#: scripts/sim/energy.gd:77
+msgid "Rain"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:767
 msgid "Raise +8%"
+msgstr ""
+
+#: data/events/energy_tariff.json
+msgid "Raise prices by $0.05 per kWh"
 msgstr ""
 
 #: data/events/viral_mention.json
@@ -9619,6 +10303,14 @@ msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:7
 msgid "Ravi"
+msgstr ""
+
+#: scripts/sim/energy.gd:475
+msgid "Reach installer-with-storage stage before applying for a charger grant."
+msgstr ""
+
+#: scripts/sim/energy.gd:560 scripts/sim/energy.gd:581
+msgid "Reach installer-with-storage stage before opening charging sites."
 msgstr ""
 
 #: scripts/ui/tutorial.gd:27
@@ -9667,6 +10359,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:427
 msgid "Ready to list (you have these in hand)"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:167
+msgid "Ready to order materials"
 msgstr ""
 
 #: data/businesses/real_estate.json data/help/glossary.json scripts/sim/real_estate.gd:302 scripts/ui/real_estate_ui.gd:25
@@ -9741,8 +10437,16 @@ msgstr ""
 msgid "Recruit a realty agent"
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:184
+msgid "Recruit electrician · %s a week"
+msgstr ""
+
 #: scripts/ui/real_estate_ui.gd:109
 msgid "RecruitRealtyAgent"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:184
+msgid "Recruit_electrician"
 msgstr ""
 
 #: scripts/sim/ledger.gd:30
@@ -9845,7 +10549,7 @@ msgstr ""
 msgid "Register (%s)"
 msgstr ""
 
-#: scripts/sim/media.gd:16 scripts/sim/real_estate.gd:17 scripts/ui/media_ui.gd:50 scripts/ui/real_estate_ui.gd:67
+#: scripts/sim/energy.gd:32 scripts/sim/media.gd:16 scripts/sim/real_estate.gd:17 scripts/ui/energy_ui.gd:81
 msgid "Register a company and open its bank account first."
 msgstr ""
 
@@ -9859,6 +10563,10 @@ msgstr ""
 
 #: data/properties/unit12_factory.json
 msgid "Register a company before leasing the factory."
+msgstr ""
+
+#: data/properties/helio_warehouse.json
+msgid "Register a company before leasing the warehouse office."
 msgstr ""
 
 #: scripts/sim/manufacturing.gd:18 scripts/sim/staff.gd:55
@@ -10081,6 +10789,30 @@ msgstr ""
 msgid "Renting an office"
 msgstr ""
 
+#: data/events/energy_vandal.json
+msgid "Repair and add cameras"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:266
+msgid "Repair and service · %s"
+msgstr ""
+
+#: data/events/energy_vandal.json
+msgid "Repair the damage now"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:181
+msgid "Repair under warranty · %s"
+msgstr ""
+
+#: data/events/energy_typhoon.json
+msgid "Repairs cost less, but clients remember the wait."
+msgstr ""
+
+#: data/events/energy_typhoon.json
+msgid "Repairs cost real money but clients trust you."
+msgstr ""
+
 #: scripts/ui/modals/loan_modal.gd:123
 msgid "Repay %s"
 msgstr ""
@@ -10181,6 +10913,10 @@ msgstr ""
 msgid "Residential unit sold"
 msgstr ""
 
+#: data/economy/energy.json
+msgid "Residents Association"
+msgstr ""
+
 #: data/regions/solterra.json
 msgid "Resources & Agriculture"
 msgstr ""
@@ -10245,6 +10981,10 @@ msgstr ""
 msgid "Retailers warn of empty shelves before the holidays."
 msgstr ""
 
+#: data/events/energy_rule.json
+msgid "Retrofit every station"
+msgstr ""
+
 #: scripts/sim/ledger.gd:26 scripts/ui/modals/purchase_return_modal.gd:45
 msgid "Return & cancellation fees"
 msgstr ""
@@ -10291,6 +11031,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:980
 msgid "Revenue is booked. The cash isn't here yet."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Revenue is kWh sold times price, minus grid electricity. Demand follows the city EV adoption rate and falls as your price rises."
 msgstr ""
 
 #: data/story/chapters.json
@@ -10357,6 +11101,10 @@ msgstr ""
 msgid "Rita Hale"
 msgstr ""
 
+#: data/economy/energy.json
+msgid "Riverlight Estates"
+msgstr ""
+
 #: data/city/aurelia.json data/districts/riverside.json scripts/ui/minigames/pack_game.gd:9 scripts/ui/minigames/parcel_sort_game.gd:7
 msgid "Riverside"
 msgstr ""
@@ -10399,6 +11147,34 @@ msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:9
 msgid "Riverstone Bakery"
+msgstr ""
+
+#: data/help/glossary.json scripts/ui/energy_ui.gd:63
+msgid "Roof Survey"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:116
+msgid "Roof Survey: %s"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:117
+msgid "Roof faces %s (%d%% of south-facing yield) · load limit %d kg = %d panels max · each cell shows the sun it keeps after building and tree shade."
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:113 scripts/ui/energy_ui.gd:224 scripts/ui/energy_ui.gd:63 scripts/ui/energy_ui.gd:96
+msgid "Roof leads"
+msgstr ""
+
+#: scripts/sim/energy.gd:284
+msgid "Roof survey accepted: %s."
+msgstr ""
+
+#: scripts/sim/energy.gd:318
+msgid "Rooftop array: %s"
+msgstr ""
+
+#: scripts/sim/energy.gd:273
+msgid "Rooftop solar installation"
 msgstr ""
 
 #: scripts/ui/modals/van_deal_modal.gd:38
@@ -10455,6 +11231,10 @@ msgstr ""
 
 #: scripts/ui/media_ui.gd:55
 msgid "RouteAgencyPrerequisite"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:87
+msgid "RouteEnergyPrerequisite"
 msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:72
@@ -10713,8 +11493,32 @@ msgstr ""
 msgid "Save slot %d is damaged."
 msgstr ""
 
+#: scripts/sim/energy.gd:314
+msgid "Save the Helio Supply materials cost first."
+msgstr ""
+
+#: scripts/sim/energy.gd:741
+msgid "Save the accessibility retrofit cost first."
+msgstr ""
+
+#: scripts/sim/energy.gd:52
+msgid "Save the battery course fee first."
+msgstr ""
+
 #: scripts/sim/media.gd:59 scripts/ui/media_ui.gd:104
 msgid "Save the creative production cost first."
+msgstr ""
+
+#: scripts/sim/energy.gd:747
+msgid "Save the exemption filing fee first."
+msgstr ""
+
+#: scripts/sim/energy.gd:288
+msgid "Save the panel materials cost first."
+msgstr ""
+
+#: scripts/sim/energy.gd:705
+msgid "Save the premium supplier fee first."
 msgstr ""
 
 #: scripts/sim/bank.gd:65
@@ -10727,6 +11531,22 @@ msgstr ""
 
 #: scripts/sim/media.gd:215
 msgid "Save the public-relations repair cost first."
+msgstr ""
+
+#: scripts/sim/energy.gd:729
+msgid "Save the repair cost first."
+msgstr ""
+
+#: scripts/sim/energy.gd:719
+msgid "Save the rush filing fees first."
+msgstr ""
+
+#: scripts/sim/energy.gd:588
+msgid "Save the station build cost first."
+msgstr ""
+
+#: scripts/sim/energy.gd:448
+msgid "Save the subsidy application fee first."
 msgstr ""
 
 #: autoload/save_system.gd:421
@@ -10861,8 +11681,16 @@ msgstr ""
 msgid "Send quote"
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:157
+msgid "Send quote · %s"
+msgstr ""
+
 #: data/events/crestline_big_offer.json
 msgid "Send the contract. I'll review it."
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:150 scripts/ui/energy_ui.gd:157
+msgid "SendQuote"
 msgstr ""
 
 #: data/dialogue/lina_rails.json
@@ -10905,7 +11733,7 @@ msgstr ""
 msgid "Service: %d%%"
 msgstr ""
 
-#: scripts/world/building_info.gd:171 scripts/world/building_info.gd:175
+#: scripts/world/building_info.gd:172 scripts/world/building_info.gd:176
 msgid "Services"
 msgstr ""
 
@@ -10931,6 +11759,10 @@ msgstr ""
 
 #: scripts/sim/staff.gd:155
 msgid "Severance — %s"
+msgstr ""
+
+#: data/dialogue/sunny_adeyemi_intro.json
+msgid "Shade, direction and the roof load limit decide the yield. A south roof with clean cells pays back fastest; add a battery when the client uses power at the evening peak."
 msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:8
@@ -11021,12 +11853,16 @@ msgstr ""
 msgid "Shoot the photos yourself"
 msgstr ""
 
-#: scripts/world/building_info.gd:169
+#: scripts/world/building_info.gd:170
 msgid "Shop"
 msgstr ""
 
 #: scripts/sim/ledger.gd:31
 msgid "Shop rent"
+msgstr ""
+
+#: data/economy/energy.json
+msgid "Shop roof"
 msgstr ""
 
 #: data/economy/marketplace.json data/npcs/shoplane.json scripts/ui/phone_ui.gd:128
@@ -11149,7 +11985,7 @@ msgstr ""
 msgid "Side part"
 msgstr ""
 
-#: scripts/world/building_info.gd:175
+#: scripts/world/building_info.gd:176
 msgid "Sightseeing"
 msgstr ""
 
@@ -11341,12 +12177,24 @@ msgstr ""
 msgid "Solar Desk Lamp"
 msgstr ""
 
+#: data/buildings/helio_supply.json
+msgid "Solar and battery supplier"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Solar and charging business"
+msgstr ""
+
 #: data/world/years.json
 msgid "Solar desk lamps are this year's must-have gift."
 msgstr ""
 
 #: data/businesses/energy.json
-msgid "Solar installs to grid-scale. Policy-driven."
+msgid "Solar installs, storage and an EV charging network."
+msgstr ""
+
+#: data/events/energy_shortage.json
+msgid "Solar panel shortage"
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:1257
@@ -11383,6 +12231,10 @@ msgstr ""
 
 #: data/events/viral_mention.json
 msgid "Some creator with 400k followers just posted your {product_lower}."
+msgstr ""
+
+#: data/events/energy_vandal.json
+msgid "Someone damaged a charging station. Repair it quickly, or pay more to harden it with cameras and shields."
 msgstr ""
 
 #: data/help/help.json
@@ -11533,6 +12385,10 @@ msgstr ""
 msgid "Started building %s, a SaaS product."
 msgstr ""
 
+#: scripts/sim/energy.gd:602
+msgid "Started building a charging station: %s."
+msgstr ""
+
 #: scripts/sim/careers.gd:183
 msgid "Started freelancing as a consultant."
 msgstr ""
@@ -11633,6 +12489,10 @@ msgstr ""
 msgid "Store"
 msgstr ""
 
+#: scripts/sim/energy.gd:77
+msgid "Storm"
+msgstr ""
+
 #: data/character/options.json
 msgid "Straight"
 msgstr ""
@@ -11689,12 +12549,40 @@ msgstr ""
 msgid "Subscriber churn"
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:63
+msgid "Subsidy desk"
+msgstr ""
+
+#: data/events/energy_subsidy_cut.json
+msgid "Subsidy policy change"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:142
+msgid "Subsidy requested: no"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:142
+msgid "Subsidy requested: yes"
+msgstr ""
+
+#: scripts/sim/energy.gd:720
+msgid "Subsidy rush filing"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:224
+msgid "SubsidyNextLeads"
+msgstr ""
+
 #: data/dialogue/tom_office.json
 msgid "Suite 2B. Natural light, 40 square metres, storage out back."
 msgstr ""
 
 #: autoload/clock.gd:13
 msgid "Sun"
+msgstr ""
+
+#: data/npcs/sunny_adeyemi.json
+msgid "Sunny Adeyemi"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:287
@@ -11755,6 +12643,22 @@ msgstr ""
 
 #: data/dialogue/ana_register.json
 msgid "Sure. Name, business type, address. $300 fee."
+msgstr ""
+
+#: data/help/help.json
+msgid "Survey a roof, place panels around shade and the load limit, then send a quote with or without a subsidy."
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:21
+msgid "Survey roofs, quote solar and storage, then build a charging network."
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:103
+msgid "Survey this roof"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:113
+msgid "SurveyNeedsLead"
 msgstr ""
 
 #: scripts/ui/modals/settlement_modal.gd:95
@@ -11835,6 +12739,14 @@ msgstr ""
 
 #: data/help/help.json
 msgid "Take me there sets the existing gold guide arrow to the building door. Closed buildings still show their hours; you can enter once they open."
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:232
+msgid "Take the battery course first."
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:190
+msgid "Take the battery course · %s"
 msgstr ""
 
 #: scripts/ui/modals/job_modal.gd:74 scripts/ui/tutorial.gd:84
@@ -12157,6 +13069,14 @@ msgstr ""
 msgid "The brokerage is already open."
 msgstr ""
 
+#: scripts/sim/energy.gd:55
+msgid "The business closed during the course."
+msgstr ""
+
+#: scripts/sim/energy.gd:567
+msgid "The business closed during the negotiation."
+msgstr ""
+
 #: data/help/glossary.json
 msgid "The buyer pays a percentage of the contract before delivery; the remainder follows the payment terms."
 msgstr ""
@@ -12165,12 +13085,20 @@ msgstr ""
 msgid "The buyer pays the invoice 30 or 60 days after delivery, not on the day they get the goods."
 msgstr ""
 
+#: data/events/energy_subsidy_cut.json
+msgid "The city is halving solar grants. File rush paperwork for applications still in the queue, or accept the lower rate."
+msgstr ""
+
 #: data/help/help.json
 msgid "The city map"
 msgstr ""
 
 #: data/story/chapters.json
 msgid "The city passed the Clean Packaging Act: read the news board"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:34
+msgid "The client declined this quote. Improve payback or the price."
 msgstr ""
 
 #: data/help/help.json
@@ -12221,6 +13149,10 @@ msgstr ""
 msgid "The employer registration fee is %s."
 msgstr ""
 
+#: scripts/sim/energy.gd:34
+msgid "The energy business is already open."
+msgstr ""
+
 #: data/events/shipment_lost.json
 msgid "The escrow contract returned your money. The fee is not refunded."
 msgstr ""
@@ -12257,8 +13189,20 @@ msgstr ""
 msgid "The grant opens with the Green Shift."
 msgstr ""
 
+#: data/events/energy_tariff.json
+msgid "The grid raised commercial tariffs by 25%. Hold your prices and take the margin hit, or pass the cost on to drivers."
+msgstr ""
+
 #: data/help/glossary.json
 msgid "The interest costs far less than missing payroll or rent. Repay it as soon as the money arrives."
+msgstr ""
+
+#: scripts/sim/energy.gd:565
+msgid "The landlord asked you to come back tomorrow."
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:35
+msgid "The landlord declined. Try again tomorrow."
 msgstr ""
 
 #: scripts/sim/living.gd:78
@@ -12337,6 +13281,10 @@ msgstr ""
 msgid "The river can only be crossed at a bridge. Undo takes the last stop back; the route is drawn as you go."
 msgstr ""
 
+#: scripts/sim/energy.gd:119
+msgid "The roof load limit allows fewer panels."
+msgstr ""
+
 #: data/dialogue/sam_owner.json
 msgid "The runs are posted every morning. Plan the route before you turn the key: every kilometre you don't drive is money you keep."
 msgstr ""
@@ -12363,6 +13311,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "The stars customers give your café. They drift toward how each day felt: queues, running out, prices and service."
+msgstr ""
+
+#: data/events/energy_vandal.json
+msgid "The station is back in three days."
 msgstr ""
 
 #: data/help/glossary.json
@@ -12501,6 +13453,10 @@ msgstr ""
 msgid "This advertising slot is unavailable or inventory is exhausted."
 msgstr ""
 
+#: scripts/sim/energy.gd:467
+msgid "This application is already filed."
+msgstr ""
+
 #: data/help/help.json
 msgid "This card lists updates after the version that last saved your game. Scroll to read all release notes."
 msgstr ""
@@ -12537,7 +13493,7 @@ msgstr ""
 msgid "This is a contract of a closed company."
 msgstr ""
 
-#: scripts/world/building_info.gd:138
+#: scripts/world/building_info.gd:139
 msgid "This is a sightseeing-only location right now."
 msgstr ""
 
@@ -12549,7 +13505,7 @@ msgstr ""
 msgid "This is the same form you'll file for your own company, so the rules are worth remembering."
 msgstr ""
 
-#: scripts/sim/jobs.gd:38 scripts/sim/media.gd:203 scripts/sim/media.gd:77
+#: scripts/sim/energy.gd:275 scripts/sim/jobs.gd:38 scripts/sim/media.gd:203 scripts/sim/media.gd:77
 msgid "This job is no longer available."
 msgstr ""
 
@@ -12581,6 +13537,10 @@ msgstr ""
 msgid "This purchase belongs to another business."
 msgstr ""
 
+#: scripts/sim/energy.gd:268
+msgid "This roof survey is no longer available."
+msgstr ""
+
 #: scripts/save_codec.gd:13 scripts/save_codec.gd:24
 msgid "This save comes from a newer version of City Venture."
 msgstr ""
@@ -12595,6 +13555,14 @@ msgstr ""
 
 #: scripts/world/actions.gd:53
 msgid "This till comes with the lease. Mr. Okafor at Okafor Lettings handles it."
+msgstr ""
+
+#: scripts/sim/energy.gd:446
+msgid "This year's subsidy applications are closed."
+msgstr ""
+
+#: scripts/sim/energy.gd:447
+msgid "This year's subsidy quota is used up."
 msgstr ""
 
 #: data/buildings/threadline_apparel.json data/economy/logistics.json data/help/help.json
@@ -12671,6 +13639,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1055
 msgid "Today's offers"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:142
+msgid "ToggleSubsidy"
 msgstr ""
 
 #: data/help/glossary.json
@@ -12813,6 +13785,14 @@ msgstr ""
 msgid "Type the bright lines exactly as shown (the grey ones are already written). The next character to type is highlighted."
 msgstr ""
 
+#: scripts/sim/energy.gd:713
+msgid "Typhoon damage"
+msgstr ""
+
+#: data/events/energy_typhoon.json
+msgid "Typhoon damage claims"
+msgstr ""
+
 #: data/buildings/unit12_factory.json
 msgid "UNIT 12"
 msgstr ""
@@ -12873,6 +13853,10 @@ msgstr ""
 msgid "University District"
 msgstr ""
 
+#: data/economy/energy.json
+msgid "University Estates"
+msgstr ""
+
 #: data/npcs/imani_cole.json
 msgid "University client mentor"
 msgstr ""
@@ -12883,6 +13867,10 @@ msgstr ""
 
 #: scripts/sim/ecommerce.gd:1156
 msgid "Unknown choice."
+msgstr ""
+
+#: scripts/sim/energy.gd:755
+msgid "Unknown energy crisis."
 msgstr ""
 
 #: scripts/sim/manufacturing.gd:249
@@ -12921,6 +13909,10 @@ msgstr ""
 msgid "Unused campaign advance refunded"
 msgstr ""
 
+#: scripts/sim/energy.gd:375 scripts/sim/energy.gd:782
+msgid "Unused materials written off: %s"
+msgstr ""
+
 #: scripts/ui/modals/loan_modal.gd:62
 msgid "Up to"
 msgstr ""
@@ -12955,6 +13947,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "Use the tabs on the left. Every laptop and work desk opens the same system: home, co-work hot desk, café table, office."
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:271
+msgid "Use your own property"
 msgstr ""
 
 #: data/businesses/automotive.json
@@ -13161,8 +14157,16 @@ msgstr ""
 msgid "Wages — %s shift at %s"
 msgstr ""
 
+#: scripts/sim/energy.gd:310
+msgid "Wait for City Hall's subsidy decision before ordering materials."
+msgstr ""
+
 #: data/events/manufacturing_shortage.json
 msgid "Wait for the delayed materials"
+msgstr ""
+
+#: data/events/energy_shortage.json
+msgid "Wait for the shipment and pay the shortage price"
 msgstr ""
 
 #: data/story/chapters.json
@@ -13181,6 +14185,10 @@ msgstr ""
 msgid "Wait. Someone actually bought one??"
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:168
+msgid "Waiting for subsidy decision"
+msgstr ""
+
 #: scripts/ui/modals/city_map_modal.gd:117
 msgid "Walk between neighbouring districts, or take the Metro from any station."
 msgstr ""
@@ -13189,7 +14197,7 @@ msgstr ""
 msgid "Walk east along the street (→). Past the end of Riverside is Startup Hub, where founders work."
 msgstr ""
 
-#: scripts/world/building_info.gd:183
+#: scripts/world/building_info.gd:184
 msgid "Walk from a neighbouring district."
 msgstr ""
 
@@ -13225,6 +14233,10 @@ msgstr ""
 msgid "Warehouse"
 msgstr ""
 
+#: data/buildings/helio_warehouse.json
+msgid "Warehouse office to let"
+msgstr ""
+
 #: scripts/sim/ledger.gd:31
 msgid "Warehouse rent"
 msgstr ""
@@ -13233,12 +14245,36 @@ msgstr ""
 msgid "Warehouse space costs far less per unit than an office, and more room means bigger orders and fewer sell-outs. But each location's rent is due every month, full or empty."
 msgstr ""
 
+#: data/properties/helio_warehouse.json
+msgid "Warehouse with a desk, panel racks and a loading door. Rent and deposit: $5,200 on signing."
+msgstr ""
+
 #: data/character/options.json
 msgid "Warm"
 msgstr ""
 
 #: data/economy/media.json
 msgid "Warm homes"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Warranty"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:178
+msgid "Warranty claim from %s: %s, repair cost %s, decide within %d days"
+msgstr ""
+
+#: scripts/sim/energy.gd:410
+msgid "Warranty dispute lost: %s"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:183
+msgid "Warranty exposure: about %s a year in expected repairs on installed systems."
+msgstr ""
+
+#: scripts/sim/energy.gd:401
+msgid "Warranty repair: %s"
 msgstr ""
 
 #: data/help/glossary.json
@@ -13425,6 +14461,10 @@ msgstr ""
 msgid "Wires recover: cross-border payments now clear in 3 to 5 days."
 msgstr ""
 
+#: data/help/help.json
+msgid "With storage certification and two installs you can build charging stations. Set a price per kWh and watch demand."
+msgstr ""
+
 #: scripts/sim/company.gd:111
 msgid "Withdrawal from %s"
 msgstr ""
@@ -13445,7 +14485,7 @@ msgstr ""
 msgid "Wood desk"
 msgstr ""
 
-#: scripts/world/building_info.gd:170
+#: scripts/world/building_info.gd:171
 msgid "Work"
 msgstr ""
 
@@ -13479,6 +14519,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "Work the counter for two hours to open without staff, add a pair of hands when it's busy, and lift the rating with good service."
+msgstr ""
+
+#: data/economy/energy.json
+msgid "Workshop roof"
 msgstr ""
 
 #: scripts/ui/phone_ui.gd:131
@@ -13585,7 +14629,7 @@ msgstr ""
 msgid "You can't do that right now."
 msgstr ""
 
-#: scripts/world/building_info.gd:138
+#: scripts/world/building_info.gd:139
 msgid "You can: %s"
 msgstr ""
 
@@ -13789,8 +14833,16 @@ msgstr ""
 msgid "Young population"
 msgstr ""
 
+#: data/economy/energy.json
+msgid "Your Helio warehouse lot"
+msgstr ""
+
 #: data/buildings/crestline_flagship.json
 msgid "Your LED desk lamps, on Crestline's shelf. Eight hundred of them left through your door."
+msgstr ""
+
+#: data/economy/energy.json
+msgid "Your Maple Court unit"
 msgstr ""
 
 #: scripts/sim/cafe.gd:121
@@ -13953,6 +15005,14 @@ msgstr ""
 msgid "Your phone is buzzing. Press Tab (or click Phone, top right) and read Maya's message."
 msgstr ""
 
+#: data/economy/energy.json
+msgid "Your property roof"
+msgstr ""
+
+#: scripts/sim/energy.gd:347
+msgid "Your rooftop array is feeding the grid: %s."
+msgstr ""
+
 #: scripts/ui/minigames/route_game.gd:156
 msgid "Your route: %.1f km. The shortest possible: %.1f km."
 msgstr ""
@@ -14045,10 +15105,6 @@ msgstr ""
 msgid "barista"
 msgstr ""
 
-#: data/businesses/energy.json
-msgid "battery"
-msgstr ""
-
 #: scripts/ui/modals/company_os.gd:1269
 msgid "behind the counter: %d barista(s)"
 msgstr ""
@@ -14069,6 +15125,10 @@ msgstr ""
 msgid "brokerage"
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:258
+msgid "building until %s"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:203
 msgid "business only"
 msgstr ""
@@ -14082,7 +15142,11 @@ msgid "central kitchen"
 msgstr ""
 
 #: data/businesses/energy.json
-msgid "charging"
+msgid "charging network"
+msgstr ""
+
+#: data/businesses/energy.json
+msgid "charging sales"
 msgstr ""
 
 #: data/businesses/media.json
@@ -14169,6 +15233,10 @@ msgstr ""
 msgid "e.g. Riverlight Goods"
 msgstr ""
 
+#: data/businesses/energy.json
+msgid "electricity"
+msgstr ""
+
 #: data/businesses/saas.json
 msgid "enterprise"
 msgstr ""
@@ -14199,6 +15267,10 @@ msgstr ""
 
 #: scripts/sim/cafe.gd:88
 msgid "fit out the unit"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:278
+msgid "fixed fee %s/month"
 msgstr ""
 
 #: data/businesses/logistics.json
@@ -14270,6 +15342,10 @@ msgid "ingredients"
 msgstr ""
 
 #: data/businesses/energy.json
+msgid "installer"
+msgstr ""
+
+#: data/businesses/energy.json
 msgid "installs"
 msgstr ""
 
@@ -14297,12 +15373,16 @@ msgstr ""
 msgid "just you"
 msgstr ""
 
-#: data/businesses/cafe.json data/businesses/hotel.json data/businesses/manufacturing.json
+#: data/businesses/cafe.json data/businesses/energy.json data/businesses/hotel.json data/businesses/manufacturing.json
 msgid "labor"
 msgstr ""
 
 #: data/businesses/real_estate.json data/npcs/landlord.json
 msgid "landlord"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:270
+msgid "landlord wants %s/month or %d%% of revenue"
 msgstr ""
 
 #: scripts/ui/modals/settlement_modal.gd:84
@@ -14489,8 +15569,16 @@ msgstr ""
 msgid "out of 5"
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:258
+msgid "out of service"
+msgstr ""
+
 #: data/businesses/ecommerce.json data/businesses/international_trade.json data/businesses/manufacturing.json
 msgid "own brand"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:278
+msgid "own property"
 msgstr ""
 
 #: data/businesses/media.json
@@ -14515,10 +15603,6 @@ msgstr ""
 
 #: data/businesses/ecommerce.json
 msgid "platform fees"
-msgstr ""
-
-#: data/businesses/energy.json
-msgid "power sales"
 msgstr ""
 
 #: data/businesses/ecommerce.json
@@ -14609,16 +15693,16 @@ msgstr ""
 msgid "small oem"
 msgstr ""
 
-#: data/businesses/energy.json
-msgid "solar farm"
-msgstr ""
-
 #: data/businesses/media.json
 msgid "solo studio"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:762
 msgid "starts tomorrow 9:00"
+msgstr ""
+
+#: data/businesses/energy.json
+msgid "storage"
 msgstr ""
 
 #: data/businesses/cafe.json
@@ -14631,6 +15715,10 @@ msgstr ""
 
 #: data/businesses/saas.json
 msgid "subscriptions"
+msgstr ""
+
+#: scripts/sim/energy.gd:510
+msgid "subsidy rejected"
 msgstr ""
 
 #: data/npcs/ken.json
@@ -14733,6 +15821,14 @@ msgstr ""
 msgid "waste"
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:287
+msgid "with bank loan"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:286
+msgid "with grant request"
+msgstr ""
+
 #: scripts/ui/minigames/pack_game.gd:188
 msgid "wrong label!"
 msgstr ""
@@ -14747,6 +15843,10 @@ msgstr ""
 
 #: scripts/sim/logistics.gd:580
 msgid "you need a van (Dockside Motors, Harbor)"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:270
+msgid "your own property, no landlord fee"
 msgstr ""
 
 #: scripts/sim/event_engine.gd:138
@@ -14997,6 +16097,14 @@ msgstr ""
 msgid "✗ %s gave up waiting"
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:215
+msgid "✗ A policy cut is reducing grants; the rate recovers over time."
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:112
+msgid "✗ Choose a roof lead to survey first."
+msgstr ""
+
 #: scripts/ui/manufacturing_ui.gd:136
 msgid "✗ Choose an order in OEM orders first."
 msgstr ""
@@ -15013,6 +16121,14 @@ msgstr ""
 msgid "✗ It doesn't fit. Try a bigger box."
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:176
+msgid "✗ No installs yet. Survey a roof and send a quote."
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:98
+msgid "✗ No roof leads this week. New leads arrive every Monday."
+msgstr ""
+
 #: scripts/ui/minigames/cowork_host_game.gd:116
 msgid "✗ No: %s"
 msgstr ""
@@ -15023,6 +16139,10 @@ msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:192 scripts/ui/real_estate_ui.gd:93
 msgid "✗ Own a rental and apply for the building permit at City Hall first."
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:145
+msgid "✗ Place at least one panel on the roof."
 msgstr ""
 
 #: scripts/ui/modals/permits_modal.gd:24

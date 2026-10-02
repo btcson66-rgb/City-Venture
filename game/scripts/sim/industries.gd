@@ -12,7 +12,8 @@ static func all() -> Array:
 		{"id":"logistics", "sim_class":Logistics, "prefixes":["log"], "slot":"business"},
 		{"id":"manufacturing", "sim_class":Manufacturing, "prefixes":["mfg"], "slot":"business", "actions":{"manufacturing_open":Manufacturing.open_action}},
 		{"id":"real_estate", "sim_class":RealEstate, "prefixes":["re"], "slot":"business", "actions":{"real_estate_open":RealEstate.open_action}},
-		{"id":"media", "sim_class":Media, "prefixes":["media"], "slot":"business", "actions":{"media_open":Media.open_action}}] + _extra
+		{"id":"media", "sim_class":Media, "prefixes":["media"], "slot":"business", "actions":{"media_open":Media.open_action}},
+		{"id":"energy", "sim_class":Energy, "prefixes":["energy"], "slot":"business", "actions":{"energy_open":Energy.open_action, "energy_subsidy":Energy.subsidy_action}}] + _extra
 
 static func register(record: Dictionary) -> bool:
 	if str(record.get("id", "")) == "" or record.get("sim_class") == null:

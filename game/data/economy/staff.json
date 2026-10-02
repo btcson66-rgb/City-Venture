@@ -210,6 +210,29 @@
    ],
    "desc": "Low weekly pay, but slower production than an experienced designer.",
    "needs_text": "Lease The Loft before hiring campaign staff."
+  },
+  "electrician": {
+   "name": "Electrician",
+   "salary_week": [
+    1050,
+    1050
+   ],
+   "needs_office": false,
+   "needs_lease": "helio_warehouse",
+   "workplace": "helio_warehouse",
+   "work_days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "work_hours": [
+    8,
+    17
+   ],
+   "desc": "Each electrician adds crew-days to installs on weekdays. Salary is due even when weather stops work.",
+   "needs_text": "Lease the Helio warehouse before hiring an electrician."
   }
  },
  "traits": [

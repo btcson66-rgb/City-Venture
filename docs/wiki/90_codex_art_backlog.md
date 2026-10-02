@@ -741,3 +741,6 @@ Facade requests: `buildings/maple_court.png`, `buildings/birch_row.png`, `buildi
 
 ## #66 University / media
 Requested named facades: `aurelia_university.png`, `the_loft.png`, `campus_radio.png` plus corresponding `_lights.png`. Runtime district facades check Art.has_tex and use civic_annex, nexus_cowork and office_slab metadata/doors as supported fallbacks. Decorative bookshop and cafe use brick_shops/corner_cafe_unit. No unavailable textures are loaded.
+
+## #69 Energy
+Requested named facades: `buildings/helio_supply.png` and `buildings/helio_warehouse.png` with `_lights` variants. Runtime district facades check Art.has_tex and use warehouse_shed and cold_store as supported fallbacks. Player-built chargers use `props/ev_charger.png` (exists) while open and `props/cone.png` while building; requested upgrades are `props/ev_charger_fast.png` (two-bay hub) and `props/solar_roof_sign.png` for rooftop leads, with ev_charger/bollard fallbacks. Interiors reuse existing warehouse props. No asset files changed.
