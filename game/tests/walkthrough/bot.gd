@@ -477,7 +477,7 @@ func find_interactable(pred: Callable) -> Interactable:
 
 
 ## Walk up to an interactable and press E. Returns true if the prompt matched and we interacted.
-func use(pred: Callable, what: String) -> bool:
+func use(pred: Callable, what: String, retries := 2) -> bool:
 	if UIRoot.is_blocking() and popup_handler.is_valid():
 		await popup_handler.call()
 	var it := find_interactable(pred)
@@ -505,6 +505,10 @@ func use(pred: Callable, what: String) -> bool:
 		await walk_to(it.global_position + Vector2(0, 2), 2.0, 5.0, false, focused)
 		await frames(4)
 	if player() == null or player().focus != it:
+		# A newly surfaced decision can interrupt the last approach/facing frames.
+		if retries > 0 and UIRoot.is_blocking() and popup_handler.is_valid():
+			await popup_handler.call()
+			return await use(pred, what, retries - 1)
 		fail("interaction focus did not match: " + what)
 		return false
 	log_line("  use \"%s\"" % it.label)
