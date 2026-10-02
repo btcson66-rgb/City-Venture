@@ -24,6 +24,11 @@ func default_appearance() -> Dictionary:
 func new_game(setup: Dictionary) -> void:
 	var living := DataDB.living()
 	var seed_v: int = int(setup.get("seed", Time.get_ticks_usec() % 2147483647))
+	# Explicit reproducible seeds are restricted to QA bot runs.
+	if Array(OS.get_cmdline_user_args()).any(func(a): return a.begins_with("--bot=")):
+		for arg in OS.get_cmdline_user_args():
+			if arg.begins_with("--seed="):
+				seed_v = int(arg.substr(7))
 	rng.seed = seed_v
 	data = template(setup, seed_v)
 	data["meta"]["slot"] = SaveSystem.claim_slot()

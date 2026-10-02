@@ -1,9 +1,9 @@
 {
  "id": "media",
  "name": "Media / Advertising",
- "status": "planned",
- "tier": "future",
- "module": "",
+ "status": "active",
+ "tier": "p1",
+ "module": "media",
  "pitch": "Campaigns, creators and reputation.",
  "starting_capital_min": 2000,
  "revenue_models": [
@@ -14,8 +14,9 @@
   "talent"
  ],
  "growth_paths": [
+  "solo_studio",
   "agency",
-  "media_group"
+  "owned_media"
  ],
  "icon": "ui/icons/star"
 }

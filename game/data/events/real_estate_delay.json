@@ -1,0 +1,38 @@
+{
+ "id": "real_estate_delay",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:real_estate_active"
+  ],
+  "chance": 0.025,
+  "cooldown_days": 28,
+  "once": false,
+  "earliest_day": 4
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "diane_harlow",
+  "title": "Ruiz construction delay",
+  "icon": "warning",
+  "lines": [
+   "Ruiz needs more time. Milestones pause and the completion date moves."
+  ]
+ },
+ "choices": [
+  {
+   "id": "respond",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "real_estate",
+     "kind": "delay"
+    }
+   ],
+   "outcome": "Ruiz needs more time. Milestones pause and the completion date moves.",
+   "label": "Review properties and respond"
+  }
+ ]
+}

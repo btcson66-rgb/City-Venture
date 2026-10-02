@@ -15,6 +15,7 @@ var peds: Array = []
 var _ped_rng := RandomNumberGenerator.new()
 var _density_acc := 0.0
 var sky_layer: CanvasLayer
+var _lot_rendered := ""
 var sky_day: Sprite2D
 var sky_dusk: Sprite2D
 var sky_night: Sprite2D
@@ -27,6 +28,9 @@ func build(district_id: String) -> void:
 	kind = "district"
 	scene_id = district_id
 	def = DataDB.districts[district_id]
+	if district_id=="residential":
+		_lot_rendered=JSON.stringify(RealEstate.lot_definition(DataDB.buildings["lot7"])["exterior"])
+		EventBus.world_refresh.connect(_refresh_lot7)
 	size_px = Vector2i(int(def["size_tiles"][0]) * T, int(def["size_tiles"][1]) * T)
 	_init_layers()
 	init_nav()
@@ -56,6 +60,7 @@ func build(district_id: String) -> void:
 	# buildings
 	for bid in def.get("buildings", []):
 		var bd: Dictionary = DataDB.buildings[bid]
+		if bid=="lot7":bd=RealEstate.lot_definition(bd)
 		_add_building(facade(bd["exterior"]), float(bd["exterior"]["x"]), bid, bd)
 	for f in def.get("fillers", []):
 		_add_building(facade(f), float(f["x"]), "", {})
@@ -94,9 +99,15 @@ static func facade(d: Dictionary) -> String:
 	return sp
 
 
-## Keep a sign's text on its painted board: step the font down until the text fits the board's width, and if it
-## still doesn't, let it overflow evenly on both sides. A Label only grows right and down, which slid long names
-## like "RIVERSIDE TOWER" off their boards and dropped tall fonts below them.
+## Rebuild only when a construction transition changes the rendered facade.
+func _refresh_lot7() -> void:
+	if JSON.stringify(RealEstate.lot_definition(DataDB.buildings["lot7"])["exterior"])!=_lot_rendered:
+		call_deferred("_reload_lot7")
+func _reload_lot7() -> void:
+	if is_instance_valid(player) and SceneRouter.world_scene()==self:
+		SceneRouter._enter("district","residential","metro","",player.position)
+
+## Keep a translated sign within the painted board, including long player names.
 func _fit_sign(lb: Label, board: Rect2) -> void:
 	if not is_instance_valid(lb):
 		return

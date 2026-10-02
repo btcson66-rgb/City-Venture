@@ -26,6 +26,8 @@ var _word_re := RegEx.create_from_string("[A-Za-z][A-Za-z'’]+")
 var _watchdog: Thread
 var _watch_run := true
 var _last_step := ""
+var daily_results: Array = []
+var trace_daily := false
 
 
 ## A watchdog on its own thread: when the main loop stops advancing for 20 s it prints what the simulation and the
@@ -62,6 +64,9 @@ func _ready() -> void:
 			quit_at_end = false
 		if a == "--video":
 			video_mode = true
+	trace_daily = "--daily-trace" in OS.get_cmdline_user_args()
+	if trace_daily:
+		Clock.day_started.connect(_daily_snapshot)
 	# bots play the minigames at a fixed quality and skip first-open help cards (both covered by their own checks)
 	Help.auto = false
 	MiniGames.auto = 0.85
@@ -93,6 +98,9 @@ func _audit_setup() -> void:
 	var mk: Dictionary = DataDB._read("res://data/economy/marketplace.json")
 	for w in mk.get("customer_first_names", []):
 		_allowed[str(w)] = true
+	# Client organization names are kept brands, as NPC and employer names are.
+	for client in DataDB.economy.get("media",{}).get("client_names",[]):
+		for w in str(client).split(" "):_allowed[w]=true
 	for w in ["Tab", "Esc", "WASD", "Shift", "F12", "OK", "Guide", "Tour", "Collision", "Check", "Test", "Founder", "Alex", "Rivera",
 			"Riverlight", "Goods", "Co", "LLC", "Ltd", "Inc", "PO"]:   # stable purchase-order identifiers, e.g. PO-101
 		_allowed[w] = true
@@ -175,7 +183,20 @@ func _run() -> void:
 	_finish()
 
 
+func _daily_snapshot(day: int) -> void:
+	# Only economic outputs: exclude renderer timing, positions and additive reporting metadata.
+	if not GameState.has_game():
+		return
+	daily_results.append({"day":day, "balances":GameState.data["ledger"]["balances"].duplicate(true),
+		"stats":GameState.data["stats"].duplicate(true), "rng_state":str(GameState.rng.state)})
+
+
 func _finish() -> void:
+	if trace_daily:
+		_daily_snapshot(Clock.day_index())
+		var trace := FileAccess.open(out_dir + "/daily_results.json", FileAccess.WRITE)
+		trace.store_string(JSON.stringify({"seed":GameState.data.get("rng", {}).get("seed"), "days":daily_results}, "  "))
+		trace.close()
 	log_line("BOT FINISHED — %d failure(s) · %.1fs real" % [failures.size(), (Time.get_ticks_msec() - t0) / 1000.0])
 	var f := FileAccess.open(out_dir + "/walkthrough_log.txt", FileAccess.WRITE)
 	if f:

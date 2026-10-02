@@ -1,0 +1,22 @@
+{
+ "id": "rita_hale_intro",
+ "start": "start",
+ "nodes": {
+  "start": [
+   {
+    "who": "rita_hale",
+    "text": "Ferro supplies material lots. Watch minimum quantities, delivery dates and weekly prices."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Open Line Planner",
+      "next": "end"
+     }
+    ]
+   }
+  ],
+  "end": []
+ }
+}

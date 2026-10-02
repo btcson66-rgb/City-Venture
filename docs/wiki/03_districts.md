@@ -203,7 +203,9 @@ Old Town 本身已開放（見上）。以下是設定稿裡**還沒做**的部�
 | 捷運 | 已開放（M5 Loop Line 的最後一站） |
 | 音樂 | 規劃：爵士吉他、手風琴（現在沿用 `day_city`） |
 
-### Residential 住宅區 · `residential` · P1
+### Residential 住宅區 · `residential` · Implemented #65
+
+已開放 Maple Court、Birch Row、Harlow & Finch、Lot 7 與 M5 Loop／Old Town 步行連接。房產玩法見 [房地產](20_real_estate.md)。下表的 FreshMart、社區中心、Maya 搬家及公園物件保留為後續生活擴充規劃。
 
 | 項目 | 設定 |
 |------|------|
@@ -214,10 +216,12 @@ Old Town 本身已開放（見上）。以下是設定稿裡**還沒做**的部�
 | 可進入建築 | `maple_court` Maple Court 公寓（**住宅第 2 階**；Maya 的新家，支線「幫 Maya 搬家」）· `freshmart` FreshMart 超市（生活費、買日用品）· `community_center` 社區中心（活動、招募兼職員工） |
 | 填充建築 | `apartment_balcony` 陽台公寓 · `townhouse_row` 連棟透天 · `school_front` 小學正門（不可進入） |
 | 新街道物件 | `swing_set` 鞦韆、`slide` 溜滑梯、`sandbox` 沙坑、`basketball_hoop` 籃球架、`mailbox_bank` 信箱牆、`laundry_line` 晾衣繩（陽台用） |
-| 捷運 | 無（規劃公車站） |
+| 捷運 | M5 Loop 已開放；另有 Old Town 步行出口 |
 | 音樂 | 溫暖木吉他 |
 
 ### University 大學區 · `university` · P1
+
+Implemented #66: M1 connects the district. Enter `aurelia_university`, `the_loft`, `campus_radio`; mentor Dr. Imani Cole, Kai Morgan and Nia Park provide client/recruitment access. Full current media workflow is in [21_media.md](21_media.md). The older institute/innovation-lab and M2 extension concepts below remain future art/world requests.
 
 | 項目 | 設定 |
 |------|------|

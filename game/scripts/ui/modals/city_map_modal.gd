@@ -77,6 +77,16 @@ func build() -> void:
 				func(): sel = did; rebuild())
 		card.name = "District_" + did
 		mapc.add_child(card)
+	if GameState.data.get("real_estate_landmark",{}).get("completed",false):
+		var residential := DataDB.district_def_in_city("residential")
+		var pin: Array=residential["board"]["pin"]
+		var landmark := TextureButton.new()
+		landmark.name="Landmark_lot7"
+		landmark.texture_normal=Art.icon("home")
+		landmark.position=board_to_map(Vector2(float(pin[0]),float(pin[1])))+Vector2(-6,-14)
+		landmark.tooltip_text=str(GameState.data["real_estate_landmark"]["name"])
+		landmark.pressed.connect(func():sel="residential";rebuild())
+		mapc.add_child(landmark)
 	# "you are here" marker
 	var hd := DataDB.district_def_in_city(here)
 	if hd.has("board"):
@@ -97,6 +107,8 @@ func build() -> void:
 	info.add_child(pic)
 	info.add_child(UIK.title(dd.get("name", "—"), 11))
 	info.add_child(UIK.wrap(dd.get("blurb", ""), 7, Art.C_SKY, 146))
+	if sel=="residential" and GameState.data.get("real_estate_landmark",{}).get("completed",false):
+		info.add_child(UIK.wrap(str(GameState.data["real_estate_landmark"]["name"]),7,Art.C_GOLD,146))
 	info.add_child(UIK.chip("Open", Art.C_GREEN))
 	if sel == here:
 		info.add_child(UIK.label("You are here.", 7, Art.C_GOLD, true))

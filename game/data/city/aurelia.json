@@ -151,7 +151,7 @@
   {
    "id": "residential",
    "name": "Residential District",
-   "status": "planned",
+   "status": "active",
    "map_pos": [
     150,
     92
@@ -247,7 +247,7 @@
   {
    "id": "university",
    "name": "University District",
-   "status": "planned",
+   "status": "active",
    "map_pos": [
     590,
     150
@@ -271,7 +271,7 @@
   {
    "id": "industrial",
    "name": "Industrial Zone",
-   "status": "planned",
+   "status": "active",
    "map_pos": [
     44,
     150
@@ -303,7 +303,8 @@
     "stations": [
      "civic_center",
      "financial",
-     "riverside"
+     "riverside",
+     "university"
     ]
    },
    {
@@ -320,8 +321,9 @@
     "name": "Harbor Line",
     "color": "#5fb06e",
     "stations": [
+     "riverside",
      "harbor",
-     "riverside"
+     "industrial"
     ]
    },
    {
@@ -342,7 +344,8 @@
      "civic_center",
      "luxury_heights",
      "shopping_street",
-     "old_town"
+     "old_town",
+     "residential"
     ]
    }
   ],
@@ -367,7 +370,31 @@
    "harbor>financial": 17,
    "harbor>civic_center": 21,
    "harbor>shopping_street": 22,
-   "harbor>old_town": 24
+   "harbor>old_town": 24,
+   "industrial>harbor": 6,
+   "industrial>riverside": 14,
+   "industrial>startup_hub": 21,
+   "industrial>financial": 23,
+   "industrial>civic_center": 27,
+   "industrial>shopping_street": 28,
+   "industrial>old_town": 30,
+   "residential>old_town": 5,
+   "residential>riverside": 19,
+   "residential>startup_hub": 26,
+   "residential>financial": 28,
+   "residential>civic_center": 32,
+   "residential>shopping_street": 9,
+   "residential>harbor": 29,
+   "residential>industrial": 35,
+   "university>startup_hub": 7,
+   "university>riverside": 13,
+   "university>financial": 15,
+   "university>civic_center": 16,
+   "university>shopping_street": 18,
+   "university>old_town": 20,
+   "university>residential": 25,
+   "university>harbor": 25,
+   "university>industrial": 31
   }
  },
  "board_extra": {

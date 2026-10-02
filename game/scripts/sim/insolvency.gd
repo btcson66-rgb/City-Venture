@@ -87,13 +87,9 @@ static func close_company() -> Dictionary:
 	if ent == "" or ent == "player":
 		return {"ok": false, "error": "No company to close."}
 	var rep := {"stock": 0.0, "receivables": 0.0, "deposit": 0.0, "paid": {}, "written_off": 0.0}
-	Contracts.close_for_entity(ent)   # terminal states only; the existing AR sale below is the sole journal entry
+	Industries.on_company_closed(ent)   # work/assets close here; the AR sale below is collected once
 	# 1. assets to cash
-	Ecommerce.pause_all_ads()
-	for l in GameState.data["ecommerce"]["listings"].values():
-		l["active"] = false
 	rep["stock"] = Ecommerce.liquidate_all(LIQUIDATION_RATE)
-	Logistics.on_company_closed(ent)   # the van goes to auction
 	var ar := maxf(0.0, Ledger.balance(ent, "accounts_receivable")) + maxf(0.0, Ledger.balance(ent, "marketplace_balance"))
 	if ar > 0.01:
 		var got := snappedf(ar * AR_RECOVERY, 0.01)
@@ -148,6 +144,7 @@ static func close_company() -> Dictionary:
 		lines.append({"acct": "exp:other", "dr": inv - left})
 	if inv > 0.01:
 		lines.append({"acct": "investments", "cr": inv})
+		if left>inv:lines.append({"acct":"other_income","cr":snappedf(left-inv,.01)})
 		Ledger.post("player", I18n.t("%s closed: final distribution, rest of the investment written off") % GameState.entity_name(ent), lines, {"type": "liquidation"})
 	elif left > 0.01:
 		Ledger.post("player", I18n.t("%s closed: final distribution") % GameState.entity_name(ent), [{"acct": "cash", "dr": left}, {"acct": "other_income", "cr": left}], {"type": "liquidation"})

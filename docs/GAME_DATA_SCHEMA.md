@@ -10,6 +10,10 @@ The production simulation reads the current shipping table. New industry definit
 explicitly adds their numeric fields to a later overlay.
 
 All content lives in `game/data/` as JSON, loaded by `DataDB` at boot.
+
+Art keys keep their existing logical pixel contract (`#62`): a matching `assets/world_detail/<key>.png`
+overrides the rendered image through `Art`, while native dimensions, sprite metadata, atlas coordinates,
+map positions and collision alpha masks remain authoritative. No saved fields or format versions change.
 Conventions:
 - `id` is a `snake_case` string, unique within its folder.
 - Money is a float in the entity's currency (Aurelia Dollar, `AUD$`, displayed as `$`).
@@ -512,3 +516,23 @@ data.living.leases     {<property_id>: {rent, day (of month), since, entity}}   
 Flags and stats the café sets: `met_okafor`, `leased_corner_cafe`, `food_permit`, `cafe_first_sale`; stats `cafe_customers`,
 `cafe_days_open`, `cafe_owner_shifts`, `cafe_rating`. Ledger expense categories added with it: `rent_shop`, `rent_warehouse`,
 `fitout` (`fuel`, `vehicle` and `insurance` are reserved for the logistics business; nothing posts to them yet).
+
+
+## Industry framework state (#63)
+
+- Every ledger journal source includes `segment`: industry id or `shared`. Old entries need not be rewritten.
+- `jobs_service`: lazy `{seq, items}`. Each job has `id`, `entity`, `segment`, `client`, `scope`, `status`, `price` (AUD$), `work`/`progress` (caller-defined work units), `due`/`delivered`/`pay_due` (absolute game minutes), `terms` (0/30/60 days), `deposit` and `penalty_rate` (fractions), `deposit_paid` and `receivable` (AUD$). States: offered → active → delivered → invoiced → paid; company closure gives closed.
+- `operating_assets`: lazy `{seq, items}`. Owned/rented assets retain price/book/deposit (AUD$), life_days/rent_days/maintenance_days (game days), bought/next_rent (absolute minutes), depreciation_day/maintenance_day (day index), failure_chance (daily probability when maintenance overdue), status working/broken/sold, and segment/entity. `legacy_expensed` marks logistics vans whose purchase was already charged to vehicle expense.
+- `economy/industries.json`: asset service_hour, maintenance_days/cost, failure_chance and resale. Individual asset specifications can override these fields. Resale is clamped to 0.4–0.6.
+- MonthClose adds `segments: {rows, totals, shared_pool}` without changing existing totals. Each row includes revenue, refunds, net_revenue, cogs, gross_profit, opex, allocated, other_income and operating_profit in AUD$. Shared expenses are allocated only to positive-revenue segments; exact cents are preserved.
+- Industry registration fields: id, sim_class, prefixes, hour slot, optional actions. Tab descriptors: id, label, icon, order, render Callable or legacy method, optional start_label. Player-visible content still needs help/glossary/i18n.
+# Manufacturing extension (#64)
+
+`economy/manufacturing.json` configures RFQ price/quantity/due/quality terms, materials/MOQ/lead/capacity, machine purchase/rent/capacity/life/maintenance/failure, overtime, sampling/rework, crises, CNC and brand costs. `GameState.data.manufacturing` is lazy and save-compatible: entity, active, machines (Assets IDs), lots (qty/unit/quality), pos (cost/due/status), rfqs, orders (Jobs ID/produced/escaped/cost/refund), slots (start/end/machine/job/overtime/outsource/status), stage, inspection, quality history and recall deduplication. Scheduled prefixes: `mfg.arrival`, `mfg.outsource`, `mfg.brand`. Event effect `industry` routes a named crisis through the registry. District optional `traffic_types` chooses existing vehicle types without changing other districts.
+
+# Real Estate extension (#65)
+
+Shared properties may have `purchase_price`, `rooms`, investment_home kind and segment. `real_estate` lazy state contains active/entity/stage, mandates, clients, owned properties (book/base_price/uplift/rent/screen/tenant/renovation/mortgage/status), tenant invoices, project (budget/paid/units/milestones/due/delay/job/status), market (index/rate_shift/month/last_rate), seq/week. `real_estate_landmark` holds completed/name independently of company closure. Compliance.permits is `{id: {entity,status,due}}`; `cmp.property_permit` completes a paid process. Bank mortgage records keep existing loan fields plus type/property; rates reset each payment. Jobs direction=purchase uses accept_purchase/purchase_milestone, capitalizes costs and excludes incoming deposits/invoices/collateral. Scheduled `re.tenant/rent/collect/renovation/build` persist. Economy controls all permit/matching/rent/credit/renovation/development/market/crisis costs. Property equity is market minus the linked mortgage; unrealized market moves are disclosure, not income.
+
+### Media (#66)
+`economy/media.json` defines brief budgets/targets, creative card preferences, fees/time, staff skill multipliers, normalized channel mixes, CPM/audience/saturation, reputation, capacity, owned-media asset/inventory/upkeep and crises. `GameState.data.media` lazily stores entity/active, briefs, campaigns (mix, cumulative channel spend, daily report, status, KPI), reputation, completed count, radio asset/audience/inventory/day/offers and expiring per-industry demand boosts. Client jobs reference incoming Jobs; inventory asset uses Assets. Events have registry `industry:media` effects.

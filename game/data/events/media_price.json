@@ -1,0 +1,37 @@
+{
+ "id": "media_price",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:media_active"
+  ],
+  "chance": 0.018,
+  "cooldown_days": 21,
+  "earliest_day": 4
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "imani_cole",
+  "title": "Media channel price increase",
+  "icon": "warning",
+  "lines": [
+   "Channels raised CPM. Adjust the mix before the next daily buying cycle."
+  ]
+ },
+ "choices": [
+  {
+   "id": "respond",
+   "label": "Review the campaign and respond",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "media",
+     "kind": "price"
+    }
+   ],
+   "outcome": "Channels raised CPM. Adjust the mix before the next daily buying cycle."
+  }
+ ]
+}

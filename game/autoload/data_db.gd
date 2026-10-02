@@ -220,11 +220,15 @@ func validate() -> Array:
 	var impactful := ["cash", "purchase", "refund_order", "replace_order", "partial_refund", "refuse_return",
 		"inventory_delta", "supplier_price_mod", "create_contract_offer", "listing_mod", "ad_price_mod", "demand_mod",
 		"liquidate_inventory", "reduce_spending", "price_all_mod", "rush_order", "equity_investment", "open_escrow", "rail_choice",
-		"shipment_lost", "acquisition"]
+		"shipment_lost", "acquisition", "industry"]
 	for eid in events:
 		var ok := false
 		for c in events[eid].get("choices", []):
 			for e in c.get("effects", []):
+				if e.get("op", "") == "industry":
+					var registered := Industries.find(str(e.get("industry", "")))
+					if registered.is_empty() or not registered["sim_class"].has_method("crisis"):
+						errs.append("event %s has an unknown industry effect" % eid)
 				if e.get("op", "") in impactful:
 					ok = true
 		if not ok:

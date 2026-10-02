@@ -12,10 +12,12 @@ contract for the beta. Work order: #21 → #36 → #39 → #44 → #29 → #22 �
 | Area | In the beta |
 |---|---|
 | Story | Chapters 1–12, then free play with the growth goal. Season 2 (Chapters 13–18) is not visible. |
-| Businesses | E-commerce, freelance consulting, SaaS, the Old Town café, Harbor logistics. |
-| Districts | Riverside, Startup Hub, Civic Center, Financial, Shopping Street, Old Town, Harbor. |
+| Businesses | E-commerce, freelance consulting, SaaS, the Old Town café, Harbor logistics, manufacturing (#64), real estate (#65), media (#66). |
+| Districts | Riverside, Startup Hub, Civic Center, Financial, Shopping Street, Old Town, Harbor, Industrial (#64), Residential (#65), University (#66). |
 | Systems | Company, bank, loans, staff, contracts, month close, forecast, settlement rails, compliance, insolvency, wardrobe, minigames, tutorial, "!" badges, help cards, autosave, save slots, F12 problem report. |
 | New for the beta | Purchase cancel/returns (#21), safe company closure (#36), interaction markers + City Guide (#39), economy balance (#29), save export/import (#22), "what's new" card and itch.io publishing (#23), "!" badges everywhere (#25). |
+
+> Release note: the industry framework and new industries (#62 art wiring, #63 registry, #64 manufacturing, #65 real estate, #66 media) are merged into 0.2.0-beta. Their districts and businesses are `active`, so the "planned stays hidden" rules above keep covering the rest.
 
 ## 2. The "nothing unfinished" rules
 

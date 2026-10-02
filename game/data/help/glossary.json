@@ -338,5 +338,75 @@
   "title": "Cost of goods sold",
   "what": "The average book cost of stock sold to customers during the month. Stock still on the shelf is inventory, not this expense.",
   "why": "Sell 10 units with average cost $6: COGS is $60. Subtract it from net revenue to find gross profit."
+ },
+ "segments": {
+  "title": "Business segments",
+  "what": "A segment groups transactions from one industry.",
+  "why": "Separate results show which business pays for shared office and staff costs."
+ },
+ "manufacturing": {
+  "title": "Manufacturing",
+  "what": "Turn raw materials into OEM orders using paid machine capacity.",
+  "why": "Deposits are liabilities until delivery. Idle machines still cost rent."
+ },
+ "manufacturing_rfq": {
+  "title": "OEM orders",
+  "what": "An RFQ specifies units, deadline, price range and maximum defects.",
+  "why": "A low quote may lose money; a high quote loses the client."
+ },
+ "manufacturing_schedule": {
+  "title": "Machine schedule",
+  "what": "Allocate weekly hours. Each machine needs one hour between batches.",
+  "why": "Overlapping orders cannot share a machine; overtime costs 1.5 times normal wages."
+ },
+ "manufacturing_quality": {
+  "title": "Sampling inspection",
+  "what": "Inspection slows production and catches defects that need paid rework.",
+  "why": "Escaped defects trigger refunds, fines and lower credit."
+ },
+ "real_estate": {
+  "title": "Real Estate",
+  "what": "Brokerage earns a commission only on a completed client match. Ownership adds mortgage and tenant risks.",
+  "why": "Start with brokerage, then buy a rental, then develop Lot 7."
+ },
+ "realty_match": {
+  "title": "Match score",
+  "what": "Budget, rooms, neighborhood and urgency determine client fit. Negotiation changes commission and acceptance.",
+  "why": "A high asking price can fail. Viewings still cost time and money."
+ },
+ "mortgage": {
+  "title": "Property mortgage",
+  "what": "Borrow against a specific home with a down payment and a long monthly amortization.",
+  "why": "Variable interest and vacancy can make cash flow negative."
+ },
+ "development": {
+  "title": "Ruiz development",
+  "what": "Pay construction milestones on an approved, named project. Delays and overruns change the budget.",
+  "why": "Completion creates saleable or rentable units and a visible building."
+ },
+ "media": {
+  "title": "Campaign agency",
+  "what": "Pitch for client Jobs, run a budgeted campaign, then settle actual work.",
+  "why": "A rejected pitch still costs time and money."
+ },
+ "media_mix": {
+  "title": "CPM and saturation",
+  "what": "CPM is the cost of one thousand impressions. Repeated spending on one channel produces less fresh reach.",
+  "why": "Distribute spending by audience, not just the cheapest CPM."
+ },
+ "creative_pitch": {
+  "title": "Creative quality",
+  "what": "Slogan, visual and tone should match the client audience preferences.",
+  "why": "Quality changes click-through and KPI results."
+ },
+ "media_kpi": {
+  "title": "Campaign KPI",
+  "what": "A campaign aims for relevant reach or conversions, then reports actual measured results.",
+  "why": "A missed target lowers reputation and future brief opportunities."
+ },
+ "owned_media": {
+  "title": "Owned audience and inventory",
+  "what": "Buy Campus Radio as a depreciating asset and sell finite audience impressions.",
+  "why": "Ad contracts earn money; an unsold audience still costs upkeep."
  }
 }

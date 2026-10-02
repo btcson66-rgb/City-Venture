@@ -54,6 +54,24 @@ static func monthly_payment(principal: float, months: int, rate := -1.0) -> floa
 		return principal / months
 	return snappedf(principal * r / (1.0 - pow(1.0 + r, -months)), 0.01)
 
+## Separate property-secured terms; the existing short business loan rules and limits stay intact.
+static func property_mortgage(property_id: String, price: float, down: float, years: int) -> Dictionary:
+	var config := RealEstate.cfg()
+	if not RealEstate.valid() or credit()<int(config["mortgage_credit"]) or Clock.now()<int(B().get("no_loans_until",0)) or loans(GameState.company_id()).any(func(l):return l["status"]!="active"):return {"ok":false,"error":I18n.t("Open the brokerage, clear arrears and improve credit before a mortgage.")}
+	if not is_finite(price) or price<=0 or not is_finite(down) or down<float(config["down_min"]) or down>float(config["down_max"]) or years<int(config["mortgage_year_min"]) or years>int(config["mortgage_year_max"]):return {"ok":false,"error":I18n.t("Mortgage terms require 20–30% down and 20–30 years.")}
+	var deposit := snappedf(price*down,.01)
+	var principal := snappedf(price-deposit,.01)
+	var cid := GameState.company_id()
+	if Ledger.cash(cid)<deposit:return {"ok":false,"error":I18n.t("Save the property down payment first.")}
+	var id := "MORT-"+str(B()["seq"])
+	B()["seq"]=int(B()["seq"])+1
+	var rate := RealEstateMarket.rate()+float(config["mortgage_margin"])
+	B()["loans"][id]={"id":id,"entity":cid,"property":property_id,"type":"mortgage","principal":principal,"balance":principal,"months":years*12,"apr":rate,"payment":monthly_payment(principal,years*12,rate),"paid_n":0,"missed":0,"status":"active","opened":Clock.now(),"next":Clock.now()+30*Clock.DAY}
+	Ledger.post(cid,I18n.t("Residential mortgage purchase"),[{"acct":"property_assets","dr":price},{"acct":"cash","cr":deposit},{"acct":"loan_payable","cr":principal}],{"type":"mortgage","id":id,"segment":"real_estate"})
+	Sim.schedule(Clock.now()+30*Clock.DAY,"bank.payment",{"id":id})
+	adjust_credit(-10,"mortgage")
+	return {"ok":true,"id":id,"price":price,"loan":B()["loans"][id]}
+
 
 ## The existing lending formula, also used to explain every prerequisite before an offer is available.
 static func lending_basis() -> Dictionary:
@@ -64,22 +82,33 @@ static func lending_basis() -> Dictionary:
 	var contracts := 0.0
 	var stock := 0.0
 	var existing := 0.0
+	var equipment := 0.0
 	if cid != "":
 		age = int((Clock.now() - int(GameState.data["entities"][cid].get("founded", 0))) / Clock.DAY)
 		gp = maxf(0.0, float(MonthClose.compute(cid, Clock.now() - 30 * Clock.DAY, Clock.now())["gross_profit"]))
 		ar = maxf(0.0, Ledger.balance(cid, "accounts_receivable") + Ledger.balance(cid, "marketplace_balance"))
 		stock = maxf(0.0, Ledger.balance(cid, "inventory") + Ledger.balance(cid, "inventory_in_transit"))
+		equipment = maxf(0.0, Ledger.balance(cid, "fixed_assets"))
+		for job in Jobs.S()["items"].values():
+			if job["entity"] == cid and job["status"] in ["active", "delivered"] and job.get("direction","")!="purchase":
+				contracts += maxf(0.0, float(job["price"])-float(job.get("deposit_paid", 0)))
 		existing = debt(cid)
 		for c in GameState.data["contracts"].values():
 			if c["status"] == "active" and c.get("seller", "") == cid:
 				contracts += float(c["total"]) - float(c.get("upfront_paid", 0.0))
-	var collateral := ar * 0.7 + contracts * 0.6 + stock * 0.5
+		# Mortgage principal was already subtracted from property market equity.
+		for loan in loans(cid):
+			if loan.get("type","")=="mortgage":existing-=float(loan["balance"])
+	var property_equity := RealEstate.equity()*float(RealEstate.cfg().get("equity_factor",.5))
+	var collateral := ar * 0.7 + contracts * 0.6 + stock * 0.5 + equipment * 0.5 + property_equity
 	var raw := maxf(0.0, gp * 3.0) + collateral - existing
-	return {"age": age, "contracts": contracts, "raw": raw,
+	var basis := {"age": age, "contracts": contracts, "raw": raw,
 		"max": floorf(minf(MAX_LOAN, raw) / 1000.0) * 1000.0,
 		"parts": [[I18n.t("3 × last 30 days' gross profit"), gp * 3],
 		[I18n.t("70% of money owed to you"), ar * 0.7], [I18n.t("60% of signed contracts"), contracts * 0.6],
-		[I18n.t("50% of stock at cost"), stock * 0.5], [I18n.t("minus existing debt"), -existing]]}
+		[I18n.t("50% of stock at cost"), stock * 0.5], [I18n.t("50% of operating assets at book value"), equipment * 0.5], [I18n.t("minus existing debt"), -existing]]}
+	if property_equity>0:basis["parts"].append([I18n.t("50% of property market equity"),property_equity])
+	return basis
 
 
 ## Each row is the single source for both refusal order and the player's actionable checklist.
@@ -117,7 +146,7 @@ static func offer() -> Dictionary:
 	var reasons: Array = [basis["parts"][0]]
 	for i in range(1, basis["parts"].size()):
 		var part: Array = basis["parts"][i]
-		if (i < 4 and float(part[1]) > 0) or (i == 4 and float(part[1]) < 0):
+		if not is_zero_approx(float(part[1])):
 			reasons.append(part)
 	return {"ok": true, "max": basis["max"], "apr": apr(), "reasons": reasons}
 
@@ -215,6 +244,9 @@ static func _close(l: Dictionary) -> void:
 static func _payment(l: Dictionary) -> void:
 	if not l["status"] in ["active", "late"]:
 		return
+	if l.get("type","")=="mortgage":
+		l["apr"]=RealEstateMarket.rate()+float(RealEstate.cfg()["mortgage_margin"])
+		l["payment"]=monthly_payment(float(l["balance"]),maxi(1,int(l["months"])-int(l["paid_n"])),float(l["apr"]))
 	var r := float(l["apr"]) / 12.0
 	var interest := snappedf(float(l["balance"]) * r, 0.01)
 	var due := minf(float(l["payment"]), float(l["balance"]) + interest)
@@ -222,7 +254,7 @@ static func _payment(l: Dictionary) -> void:
 	var ent: String = l["entity"]
 	if Ledger.cash(ent) >= due:
 		Ledger.post(ent, I18n.t("Loan %s — monthly payment") % l["id"], [{"acct": "exp:interest", "dr": interest}, {"acct": "loan_payable", "dr": principal},
-			{"acct": "cash", "cr": due}], {"type": "loan_payment", "id": l["id"]})
+			{"acct": "cash", "cr": due}], {"type": "loan_payment", "id": l["id"],"segment":"real_estate" if l.get("type","")=="mortgage" else "shared"})
 		l["balance"] = snappedf(float(l["balance"]) - principal, 0.01)
 		l["paid_n"] = int(l["paid_n"]) + 1
 		l["missed"] = 0

@@ -9,7 +9,8 @@ const ACTION_ICONS := {
 	"loans_info": "bank", "register_company": "civic", "permits_info": "civic", "take_number": "civic",
 	"pack_orders": "parcel", "dropoff_parcels": "parcel", "change_outfit": "shirt",
 	"lease_property": "home", "whiteboard": "objective", "look": "info", "talk": "people",
-	"talk_staff": "people", "business_board": "company", "metro": "metro"
+	"talk_staff": "people", "business_board": "company", "metro": "metro",
+	"media_open": "company", "real_estate_open": "home", "manufacturing_open": "inventory"
 }
 
 
@@ -93,7 +94,10 @@ static func status(id: String) -> String:
 
 
 static func door_text(id: String) -> String:
-	return "%s — %s · %s" % [I18n.t(str(DataDB.building(id).get("name", id))), category(id), status(id)]
+	var definition := DataDB.building(id)
+	if id == "lot7":
+		definition = RealEstate.lot_definition(definition)
+	return "%s — %s · %s" % [I18n.t(str(definition.get("name", id))), category(id), status(id)]
 
 
 ## Uses the instantiated scene (including current NPCs), or building data in headless callers.

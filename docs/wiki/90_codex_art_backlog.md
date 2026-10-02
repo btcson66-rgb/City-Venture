@@ -731,3 +731,13 @@ Claude 線接下來要開放兩個街區和兩個新產業：
 
 美術：六個16×16商品sprite已重新製作，附64×64透明高解析版本；六個程序光影／水面特效以SVG輸出原尺寸及4×，動畫格位不變；兩個app圖示識別不變，補4×輸出（4096圖為插值）。251/251測試、53張巡禮0失敗。七街區日夜實拍與商品add_prop渲染比例檢查已交；QA商品擺放不代表遊戲原本的擺設。高解析光罩及陰影載入仍待Claude保持logical尺寸接入。證據：`evidence/20261001_product_quality/README.md`。
 
+# Manufacturing (#64)
+
+Facade requests: `facades/unit12_factory.png`, `facades/ferro_supply.png`, `facades/kessler_precision.png`, `facades/shift_diner.png`; existing `brick_shops` / `byte_bean` are rendered through Art.has_tex fallback. Future industrial freight sprite: `vehicles/industrial_truck_side_body.png` and `vehicles/industrial_truck_side_detail.png`; existing vans provide current freight traffic. Interior machine request: `props/cnc_machine.png` (packing bench fallback), material rack request `props/ferro_material_rack.png` (parcel shelf fallback). No art files are modified by this ticket.
+
+# Real Estate (#65)
+
+Facade requests: `buildings/maple_court.png`, `buildings/birch_row.png`, `buildings/harlow_finch.png`, `buildings/lot7.png`, `buildings/lot7_construction.png`, `buildings/venture_tower.png`, with lights variants. Existing apartment, rowhouse, lettings, warehouse and office facades use Art.has_tex fallback; construction and completion are distinct live saved states, including the player's name. New furniture request `props/realty_listings_board.png` uses a cork-board fallback. Existing furnished homes/lettings office provide explorable interiors. No asset files changed.
+
+## #66 University / media
+Requested named facades: `aurelia_university.png`, `the_loft.png`, `campus_radio.png` plus corresponding `_lights.png`. Runtime district facades check Art.has_tex and use civic_annex, nexus_cowork and office_slab metadata/doors as supported fallbacks. Decorative bookshop and cafe use brick_shops/corner_cafe_unit. No unavailable textures are loaded.

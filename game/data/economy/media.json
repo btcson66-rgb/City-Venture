@@ -1,0 +1,203 @@
+{
+ "id": "media",
+ "weekly_briefs": 3,
+ "brief_min": 1,
+ "client_names": [
+  "Aurelia University",
+  "Northstar Books",
+  "Harbor Makers",
+  "Finch Families"
+ ],
+ "audiences": [
+  "Students",
+  "Office workers",
+  "Families",
+  "Premium customers"
+ ],
+ "budget_min": 5000,
+ "budget_max": 80000,
+ "service_fee": 1800,
+ "media_rebate": 0.12,
+ "buyer_rebate": 0.15,
+ "bonus_fraction": 0.1,
+ "client_deposit": 0.8,
+ "brief_deadline_days": 21,
+ "campaign_days": 14,
+ "pitch_minutes": 180,
+ "pitch_cost": 280,
+ "creative_minutes": 120,
+ "creative_cost": 160,
+ "proposal_base": 0.6,
+ "proposal_quality": 0.3,
+ "proposal_rep": 0.2,
+ "proposal_min": 0.08,
+ "proposal_max": 0.92,
+ "ctr_base": 0.002,
+ "ctr_quality": 0.022,
+ "conversion_rate": 0.035,
+ "performance_noise": [
+  0.65,
+  1.25
+ ],
+ "kpi_reach_per_budget": 8,
+ "kpi_conversion_per_budget": 0.018,
+ "reputation_start": 0.55,
+ "reputation_win": 0.08,
+ "reputation_loss": 0.15,
+ "reputation_min": 0.1,
+ "agency_completed": 2,
+ "capacity_solo": 1,
+ "capacity_agency": 3,
+ "designer_quality_per_skill": 0.012,
+ "intern_quality_per_skill": 0.002,
+ "agency_asset_price": 45000,
+ "asset_life_days": 1460,
+ "asset_maintenance_cost": 450,
+ "asset_maintenance_days": 30,
+ "asset_failure_chance": 0.03,
+ "radio_audience_start": 12000,
+ "radio_growth_per_reach": 0.002,
+ "radio_inventory_per_listener": 2,
+ "radio_ad_impressions": 8000,
+ "radio_cpm": 14,
+ "owned_media_upkeep_day": 40,
+ "group_boost_max": 0.5,
+ "group_conversion_scale": 120,
+ "group_boost_days": 3,
+ "crisis_pr_cost": 1800,
+ "crisis_pr_quality_loss": 0.35,
+ "crisis_price_mult": 1.3,
+ "channels": {
+  "radio": {
+   "name": "Campus Radio",
+   "cpm": 12,
+   "audience": [
+    0.7,
+    0.15,
+    0.1,
+    0.05
+   ],
+   "saturation": 5000
+  },
+  "social": {
+   "name": "Social feed",
+   "cpm": 8,
+   "audience": [
+    0.4,
+    0.35,
+    0.2,
+    0.05
+   ],
+   "saturation": 4000
+  },
+  "kol": {
+   "name": "Kai Morgan KOL",
+   "cpm": 25,
+   "audience": [
+    0.8,
+    0.1,
+    0.05,
+    0.05
+   ],
+   "saturation": 3000
+  },
+  "metro": {
+   "name": "Metro advertising",
+   "cpm": 18,
+   "audience": [
+    0.2,
+    0.5,
+    0.25,
+    0.05
+   ],
+   "saturation": 6000
+  },
+  "billboard_riverside": {
+   "name": "Riverside billboard",
+   "cpm": 14,
+   "audience": [
+    0.1,
+    0.2,
+    0.6,
+    0.1
+   ],
+   "saturation": 4500
+  },
+  "billboard_financial": {
+   "name": "Financial billboard",
+   "cpm": 24,
+   "audience": [
+    0.05,
+    0.45,
+    0.1,
+    0.4
+   ],
+   "saturation": 6500
+  },
+  "billboard_residential": {
+   "name": "Residential billboard",
+   "cpm": 10,
+   "audience": [
+    0.1,
+    0.1,
+    0.75,
+    0.05
+   ],
+   "saturation": 4000
+  }
+ },
+ "creative_cards": {
+  "slogan": [
+   "Belong together",
+   "Make work easier",
+   "Care for every home",
+   "Quiet excellence"
+  ],
+  "visual": [
+   "Bold colour",
+   "Clean charts",
+   "Warm homes",
+   "Minimal luxury"
+  ],
+  "tone": [
+   "Playful",
+   "Direct",
+   "Reassuring",
+   "Refined"
+  ]
+ },
+ "preferences": [
+  [
+   0,
+   0,
+   0
+  ],
+  [
+   1,
+   1,
+   1
+  ],
+  [
+   2,
+   2,
+   2
+  ],
+  [
+   3,
+   3,
+   3
+  ]
+ ],
+ "initial_mix": {
+  "radio": 20,
+  "social": 40,
+  "kol": 10,
+  "metro": 10,
+  "billboard_riverside": 10,
+  "billboard_financial": 0,
+  "billboard_residential": 10
+ },
+ "designer_minutes_saved": 30,
+ "intern_minutes_saved": 5,
+ "creative_minutes_min": 30
+}

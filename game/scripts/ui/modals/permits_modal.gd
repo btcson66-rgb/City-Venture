@@ -48,6 +48,9 @@ func build() -> void:
 	body.add_child(UIK.sep())
 	body.add_child(UIK.wrap("Regulations here are operating conditions, not quizzes: each one has a cost, a process, and a reason.", 7, Art.C_SKY, 400))
 	footer.add_child(UIK.button("Close", close, "", 70))
+	var property_permits := UIK.button("Property permits",func():RealEstateUI.open("permits"),"",110)
+	property_permits.name="PropertyPermits"
+	footer.add_child(property_permits)
 
 
 ## Year 4: the Green Business Grant, with what's still missing spelled out.
