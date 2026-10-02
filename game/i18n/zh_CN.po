@@ -166,7 +166,7 @@ msgstr "已接 %d 单"
 msgid "%d cars are due for service; skipping it risks a breakdown during a rental."
 msgstr "有 %d 辆车该保养了；不保养可能在租期中抛锚。"
 
-#: scripts/sim/automotive.gd:648
+#: scripts/sim/automotive.gd:647
 msgid "%d completed rentals"
 msgstr "完成 %d 笔租赁"
 
@@ -1350,7 +1350,7 @@ msgstr "配件"
 msgid "Accident history"
 msgstr "事故纪录"
 
-#: scripts/sim/automotive.gd:615
+#: scripts/sim/automotive.gd:614
 msgid "Accident repair: %s"
 msgstr "事故维修：%s"
 
@@ -1446,7 +1446,7 @@ msgstr "上完班累了：回家睡觉吧（下班后随时可以睡，或晚上
 msgid "After a tiring shift you can return home to sleep. The first venture allows sleep after 4 PM and guides you home when it is too late to work."
 msgstr "上完疲累的班可以回家睡觉。第一次创业期间下午 4 点后可睡，太晚无法工作时会引导你回家。"
 
-#: scripts/sim/automotive.gd:731
+#: scripts/sim/automotive.gd:730
 msgid "After-sales service ticket"
 msgstr "售后保养工单"
 
@@ -1998,7 +1998,7 @@ msgstr "AutoService"
 msgid "Automation is already installed."
 msgstr "已安装自动化设备。"
 
-#: data/businesses/automotive.json scripts/sim/automotive.gd:907 scripts/ui/automotive_ui.gd:22 scripts/ui/automotive_ui.gd:92
+#: data/businesses/automotive.json scripts/sim/automotive.gd:911 scripts/ui/automotive_ui.gd:22 scripts/ui/automotive_ui.gd:92
 msgid "Automotive"
 msgstr "汽车"
 
@@ -2394,7 +2394,7 @@ msgstr "精品旅馆、观光客与评论家。"
 msgid "Box"
 msgstr "Box"
 
-#: scripts/sim/automotive.gd:628
+#: scripts/sim/automotive.gd:627
 msgid "Breakdown compensation voucher"
 msgstr "抛锚补偿券"
 
@@ -2710,7 +2710,7 @@ msgstr "购买机台 · $28,000"
 msgid "Buy phone stands"
 msgstr "买手机架"
 
-#: scripts/sim/automotive.gd:647
+#: scripts/sim/automotive.gd:646
 msgid "Buy rental cars at Gateway Car Rental."
 msgstr "到 Gateway 租车购买租赁车。"
 
@@ -3422,7 +3422,7 @@ msgstr "中文通知、招牌、联系人职称、服饰状态与教学标题已
 msgid "Chinese tutorial headings now use the bundled fallback font in browsers, preventing missing-character boxes."
 msgstr "浏览器的中文教学标题改用内附备援字体，不再出现缺字方框。"
 
-#: scripts/sim/automotive.gd:654
+#: scripts/sim/automotive.gd:653
 msgid "Choose a brand you can sign."
 msgstr "请选择可签约的品牌。"
 
@@ -3742,7 +3742,7 @@ msgstr "干净的房间、亲切的柜台、合理的价格。没人清的房间
 msgid "Clean up the books of %s"
 msgstr "帮 %s 整理帐务"
 
-#: scripts/sim/automotive.gd:592
+#: scripts/sim/automotive.gd:591
 msgid "Cleaning and refuelling"
 msgstr "清洁与加油"
 
@@ -4094,7 +4094,7 @@ msgstr "顾问"
 msgid "Consumer"
 msgstr "消费"
 
-#: scripts/sim/automotive.gd:877
+#: scripts/sim/automotive.gd:881
 msgid "Consumer-protection fine for an undisclosed flood car"
 msgstr "未揭露泡水车的消费者保护罚款"
 
@@ -4754,7 +4754,7 @@ msgstr "押金"
 msgid "Deposit %s, minimum stock %d new cars, minimum order %d cars. Margins are thin (about 5–7%%) but sales are steady and service tickets follow every car you sell."
 msgstr "保证金 %s，最低库存 %d 辆新车，最低订购 %d 辆。毛利很薄（约 5–7%%），但销量稳定，每卖一辆车都会带来保养工单。"
 
-#: scripts/sim/automotive.gd:650
+#: scripts/sim/automotive.gd:649
 msgid "Deposit and first order in cash"
 msgstr "保证金与首张订单的现金"
 
@@ -4949,10 +4949,6 @@ msgstr "开不了机。"
 #: scripts/sim/ecommerce.gd:1099
 msgid "Doesn't work. Out of the box."
 msgstr "一拆开就不能用。"
-
-#: data/city/aurelia.json
-msgid "Domestic, international, cargo, private aviation."
-msgstr "国内线、国际线、货运、私人航空。"
 
 #: data/dialogue/maya_cafe.json
 msgid "Don't forget to eat."
@@ -5590,7 +5586,7 @@ msgstr "工厂"
 msgid "Factory cash: %s · materials: %d units"
 msgstr "工厂现金：%s · 原料：%d 件"
 
-#: scripts/sim/automotive.gd:689
+#: scripts/sim/automotive.gd:688
 msgid "Factory delivery: %s"
 msgstr "原厂交车：%s"
 
@@ -5598,11 +5594,11 @@ msgstr "原厂交车：%s"
 msgid "Factory materials liquidated"
 msgstr "工厂原料清算"
 
-#: scripts/sim/automotive.gd:771 scripts/sim/automotive.gd:888
+#: scripts/sim/automotive.gd:770 scripts/sim/automotive.gd:892
 msgid "Factory order cancelled"
 msgstr "原厂订单已取消"
 
-#: scripts/sim/automotive.gd:679
+#: scripts/sim/automotive.gd:678
 msgid "Factory order: %s"
 msgstr "原厂订购：%s"
 
@@ -5882,7 +5878,7 @@ msgstr "活动取消后的限时特卖"
 msgid "Flat white"
 msgstr "馥列白"
 
-#: scripts/sim/automotive.gd:740
+#: scripts/sim/automotive.gd:739
 msgid "Fleet and lot insurance"
 msgstr "车队与车场保险"
 
@@ -5890,7 +5886,7 @@ msgstr "车队与车场保险"
 msgid "Fleet car sold: %s"
 msgstr "车队车辆出售：%s"
 
-#: scripts/sim/automotive.gd:647
+#: scripts/sim/automotive.gd:646
 msgid "Fleet of %d cars and the rental counter"
 msgstr "%d 辆车队与租车柜台"
 
@@ -5922,7 +5918,7 @@ msgstr "泡水损坏"
 msgid "Flood-damaged car on your lot"
 msgstr "车场上的泡水车"
 
-#: scripts/sim/automotive.gd:747
+#: scripts/sim/automotive.gd:746
 msgid "Floor-plan interest"
 msgstr "车辆融资利息"
 
@@ -6034,15 +6030,15 @@ msgstr "创办人 · 别人不做的都你做"
 msgid "Franchise deposit and minimum stock"
 msgstr "经销保证金与最低库存"
 
-#: scripts/sim/automotive.gd:764 scripts/sim/automotive.gd:890
+#: scripts/sim/automotive.gd:763 scripts/sim/automotive.gd:894
 msgid "Franchise deposit settled"
 msgstr "经销保证金已结清"
 
-#: scripts/sim/automotive.gd:658
+#: scripts/sim/automotive.gd:657
 msgid "Franchise deposit: %s"
 msgstr "经销保证金：%s"
 
-#: scripts/sim/automotive.gd:751
+#: scripts/sim/automotive.gd:750
 msgid "Franchise minimum-stock shortfall"
 msgstr "经销最低库存不足"
 
@@ -7386,7 +7382,7 @@ msgstr "保险"
 msgid "Insurance claim dispute"
 msgstr "保险理赔争议"
 
-#: scripts/sim/automotive.gd:617
+#: scripts/sim/automotive.gd:616
 msgid "Insurance claim received: %s"
 msgstr "收到保险理赔：%s"
 
@@ -7398,7 +7394,7 @@ msgstr "保险（每月）"
 msgid "Insure it, keep it moving, and it earns. Leave it on the kerb and it is just a very expensive shed."
 msgstr "保好险、让它一直跑，它就会赚钱；停在路边，它只是一间很贵的棚子。"
 
-#: scripts/sim/automotive.gd:808
+#: scripts/sim/automotive.gd:807
 msgid "Insurer dispute settled at a discount"
 msgstr "与保险公司折价和解"
 
@@ -7774,7 +7770,7 @@ msgstr "继续出租"
 msgid "Keep the dealer licence fee in the business account."
 msgstr "请在公司帐户保留车商执照费。"
 
-#: scripts/sim/automotive.gd:648
+#: scripts/sim/automotive.gd:647
 msgid "Keep the fleet on rent."
 msgstr "让车队持续出租。"
 
@@ -8098,7 +8094,7 @@ msgstr "承租租车柜台"
 msgid "Lease the showroom"
 msgstr "承租展示中心"
 
-#: scripts/sim/automotive.gd:649
+#: scripts/sim/automotive.gd:648
 msgid "Lease the showroom at Gateway Car Rental."
 msgstr "到 Gateway 租车承租展示中心。"
 
@@ -8150,7 +8146,7 @@ msgstr "离开了%s的工作。"
 msgid "Legacy"
 msgstr "传承"
 
-#: scripts/sim/automotive.gd:810
+#: scripts/sim/automotive.gd:809
 msgid "Legal fee for an insurer dispute"
 msgstr "保险争议律师费"
 
@@ -8530,7 +8526,7 @@ msgstr "7 号地工程"
 msgid "Lot 7 development land"
 msgstr "7 号开发地"
 
-#: scripts/sim/automotive.gd:847
+#: scripts/sim/automotive.gd:851
 msgid "Lot storage and preparation"
 msgstr "车场停放与整备"
 
@@ -8946,7 +8942,7 @@ msgstr "请达到 Ferro 的最低采购量。"
 msgid "Meet Marcus Reed now"
 msgstr "现在找 Marcus Reed 洽谈"
 
-#: scripts/sim/automotive.gd:656
+#: scripts/sim/automotive.gd:655
 msgid "Meet every franchise requirement first."
 msgstr "请先满足所有经销条件。"
 
@@ -9402,11 +9398,11 @@ msgstr "中性"
 msgid "New Game"
 msgstr "新游戏"
 
-#: scripts/sim/automotive.gd:767
+#: scripts/sim/automotive.gd:766
 msgid "New car returned to the factory: %s"
 msgstr "新车退回原厂：%s"
 
-#: scripts/sim/automotive.gd:719
+#: scripts/sim/automotive.gd:718
 msgid "New car sold: %s"
 msgstr "新车售出：%s"
 
@@ -10234,7 +10230,7 @@ msgstr "打开"
 msgid "Open %s · %s"
 msgstr "开幕 %s · %s"
 
-#: scripts/sim/automotive.gd:907 scripts/ui/automotive_ui.gd:24 scripts/ui/automotive_ui.gd:30
+#: scripts/sim/automotive.gd:911 scripts/ui/automotive_ui.gd:24 scripts/ui/automotive_ui.gd:30
 msgid "Open Auto Desk"
 msgstr "开设汽车柜台"
 
@@ -10354,7 +10350,7 @@ msgstr "打开拍卖柜台"
 msgid "Open the auto desk before hiring a technician."
 msgstr "请先开设汽车柜台再雇用技师。"
 
-#: scripts/sim/automotive.gd:369 scripts/sim/automotive.gd:786
+#: scripts/sim/automotive.gd:369 scripts/sim/automotive.gd:785
 msgid "Open the auto desk first."
 msgstr "请先开设汽车柜台。"
 
@@ -10574,7 +10570,7 @@ msgstr "向 Ferro 采购原料"
 msgid "Order an oat latte ($5.20)"
 msgstr "点杯燕麦拿铁（$5.20）"
 
-#: scripts/sim/automotive.gd:673
+#: scripts/sim/automotive.gd:672
 msgid "Order at least the franchise minimum quantity."
 msgstr "请至少订购经销最低数量。"
 
@@ -11265,10 +11261,6 @@ msgstr "违约金"
 #: data/events/energy_subsidy_cut.json
 msgid "Pending applications keep the old grant; new ones pay half for 90 days."
 msgstr "审核中的申请维持原补助；新申请 90 天内只给一半。"
-
-#: data/city/aurelia.json
-msgid "Penthouses, clubs, fine dining."
-msgstr "顶层豪宅、会所、高级餐厅。"
 
 #: scripts/ui/modals/company_os.gd:7
 msgid "People"
@@ -12122,7 +12114,7 @@ msgstr "房仲前辈"
 msgid "Reassuring"
 msgstr "安心"
 
-#: scripts/sim/automotive.gd:819
+#: scripts/sim/automotive.gd:823
 msgid "Recall handling: %s"
 msgstr "召回处理：%s"
 
@@ -12562,7 +12554,7 @@ msgstr "RentMachine"
 msgid "RentRealtyBuilding"
 msgstr "RentRealtyBuilding"
 
-#: scripts/sim/automotive.gd:615
+#: scripts/sim/automotive.gd:614
 msgid "Rental damage repair: %s"
 msgstr "租赁损坏维修：%s"
 
@@ -12582,11 +12574,11 @@ msgstr "租车车队经营者"
 msgid "Rental fleet: lease the Gateway counter, buy cars, set day and week rates and schedule services. Skipped service causes breakdowns mid-rental."
 msgstr "租车车队：承租 Gateway 柜台、买车、设置日租与周租费率并安排保养。跳过保养会在租期中抛锚。"
 
-#: scripts/sim/automotive.gd:627
+#: scripts/sim/automotive.gd:626
 msgid "Rental interrupted: %s"
 msgstr "租赁中断：%s"
 
-#: scripts/sim/automotive.gd:591
+#: scripts/sim/automotive.gd:590
 msgid "Rental returned: %s"
 msgstr "租赁还车：%s"
 
@@ -12602,11 +12594,11 @@ msgstr "修复并加装监视器"
 msgid "Repair and service · %s"
 msgstr "修复与保养 · %s"
 
-#: scripts/sim/automotive.gd:812
+#: scripts/sim/automotive.gd:811
 msgid "Repair paid after a lost dispute"
 msgstr "争议败诉后支付维修费"
 
-#: scripts/sim/automotive.gd:807
+#: scripts/sim/automotive.gd:806
 msgid "Repair paid after an insurer dispute"
 msgstr "保险争议后支付维修费"
 
@@ -12990,7 +12982,7 @@ msgstr "河畔区看板"
 msgid "Riverstone Bakery"
 msgstr "Riverstone Bakery"
 
-#: scripts/sim/automotive.gd:629
+#: scripts/sim/automotive.gd:628
 msgid "Roadside tow: %s"
 msgstr "路边拖吊：%s"
 
@@ -13354,7 +13346,7 @@ msgstr "存盘"
 msgid "Save backup"
 msgstr "存盘备份"
 
-#: scripts/sim/automotive.gd:650
+#: scripts/sim/automotive.gd:649
 msgid "Save cash or arrange a bank loan."
 msgstr "请存足现金或申请银行贷款。"
 
@@ -13366,7 +13358,7 @@ msgstr "省下现金。销量会下滑。"
 msgid "Save enough cash for the bid and the buyer fee first."
 msgstr "请先存足出价与买方手续费的现金。"
 
-#: scripts/sim/automotive.gd:676
+#: scripts/sim/automotive.gd:675
 msgid "Save enough cash for the factory order first."
 msgstr "请先存足原厂订单的现金。"
 
@@ -13998,7 +13990,7 @@ msgstr "让我看看你能借多少。"
 msgid "Showroom discount"
 msgstr "展示中心折扣"
 
-#: scripts/sim/automotive.gd:649
+#: scripts/sim/automotive.gd:648
 msgid "Showroom leased"
 msgstr "已承租展示中心"
 
@@ -14018,7 +14010,7 @@ msgstr "签约 %s%s · 保证金 %s"
 msgid "Sign a 60-day supply agreement with {supplier} ($600 fee)"
 msgstr "跟 {supplier} 签 60 天供货协议（费用 $600）"
 
-#: scripts/sim/automotive.gd:669 scripts/sim/automotive.gd:758
+#: scripts/sim/automotive.gd:668 scripts/sim/automotive.gd:757
 msgid "Sign a franchise first."
 msgstr "请先签下经销权。"
 
@@ -14042,7 +14034,7 @@ msgstr "申请人有签名"
 msgid "Signed contract %s with %s: %s."
 msgstr "签订合约 %s，对象 %s：%s。"
 
-#: scripts/sim/automotive.gd:662
+#: scripts/sim/automotive.gd:661
 msgid "Signed the %s franchise."
 msgstr "签下了 %s 经销权。"
 
@@ -14514,7 +14506,7 @@ msgstr "库存（成本）"
 msgid "Stock at cost"
 msgstr "库存（成本）"
 
-#: scripts/sim/automotive.gd:884
+#: scripts/sim/automotive.gd:888
 msgid "Stock car auctioned: %s"
 msgstr "库存车拍卖处分：%s"
 
@@ -15582,7 +15574,7 @@ msgstr "组长把邮递区号表收走了，现在要靠记忆！"
 msgid "The shortest way there is. Textbook."
 msgstr "这就是最短的路线，教科书等级。"
 
-#: scripts/sim/automotive.gd:674
+#: scripts/sim/automotive.gd:673
 msgid "The showroom does not have room for that many cars."
 msgstr "展示中心放不下那么多车。"
 
@@ -16226,7 +16218,7 @@ msgstr "大学客户导师"
 msgid "Unknown agency crisis."
 msgstr "未知的代理商危机。"
 
-#: scripts/sim/automotive.gd:822
+#: scripts/sim/automotive.gd:826
 msgid "Unknown automotive crisis."
 msgstr "未知的汽车危机。"
 
@@ -16718,7 +16710,7 @@ msgstr "保固"
 msgid "Warranty claim from %s: %s, repair cost %s, decide within %d days"
 msgstr "%s 的保固理赔：%s，修复成本 %s，请在 %d 天内处理"
 
-#: scripts/sim/automotive.gd:875
+#: scripts/sim/automotive.gd:879
 msgid "Warranty claim on a used car"
 msgstr "中古车保固求偿"
 
