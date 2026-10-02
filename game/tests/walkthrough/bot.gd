@@ -297,11 +297,12 @@ func click(b: Control) -> bool:
 	if b == null:
 		return false
 	var sc: Node = b.get_parent()
-	while sc != null and not sc is ScrollContainer:
+	# Nested accessible modals can have both a list scroll and a page scroll.
+	while sc != null:
+		if sc is ScrollContainer:
+			(sc as ScrollContainer).ensure_control_visible(b)
+			await frames(3)
 		sc = sc.get_parent()
-	if sc != null:
-		(sc as ScrollContainer).ensure_control_visible(b)
-		await frames(3)
 	var center := b.get_global_rect().get_center()
 	var screen := get_viewport().get_final_transform() * center
 	var mv := InputEventMouseMotion.new()
