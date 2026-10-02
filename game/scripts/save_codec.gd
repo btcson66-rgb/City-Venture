@@ -89,16 +89,25 @@ static func _record(value: Variant, expected: Dictionary) -> bool:
 
 
 static func _newer(incoming: String, current: String) -> bool:
-	var a := incoming.split("-")[0].split(".")
-	var b := current.split("-")[0].split(".")
-	for index in 3:
-		var av := int(a[index]) if index < a.size() else 0
-		var bv := int(b[index]) if index < b.size() else 0
-		if av != bv: return av > bv
+	return compare_versions(incoming, current) > 0
+
+
+static func compare_versions(a: String, b: String) -> int:
 	var pattern := RegEx.new()
 	pattern.compile("[0-9]+")
-	var incoming_build := pattern.search(incoming.get_slice("-", 1))
-	var current_build := pattern.search(current.get_slice("-", 1))
-	if incoming_build != null:
-		return int(incoming_build.get_string()) > (int(current_build.get_string()) if current_build != null else 0)
-	return false
+	var av := pattern.search_all(a.get_slice("-", 0))
+	var bv := pattern.search_all(b.get_slice("-", 0))
+	for i in maxi(3, maxi(av.size(), bv.size())):
+		var x := int(av[i].get_string()) if i < av.size() else 0
+		var y := int(bv[i].get_string()) if i < bv.size() else 0
+		if x != y: return 1 if x > y else -1
+	var asuffix := a.get_slice("-", 1)
+	var bsuffix := b.get_slice("-", 1)
+	if asuffix.is_empty() != bsuffix.is_empty(): return 1 if asuffix.is_empty() else -1
+	av = pattern.search_all(asuffix)
+	bv = pattern.search_all(bsuffix)
+	for i in maxi(av.size(), bv.size()):
+		var x := int(av[i].get_string()) if i < av.size() else 0
+		var y := int(bv[i].get_string()) if i < bv.size() else 0
+		if x != y: return 1 if x > y else -1
+	return 0

@@ -81,7 +81,9 @@ func test_invalid_imports_preserve_every_existing_byte_and_game() -> void:
 	bad_order["data"]["ecommerce"]["orders"]["#bad"] = {}
 	var bad_location = JSON.parse_string(original)
 	bad_location["data"]["player"]["location"] = {}
-	for text in ["{", "{}", JSON.stringify(future), JSON.stringify(bad_shape), JSON.stringify(bad_entity), JSON.stringify(bad_order), JSON.stringify(bad_location)]:
+	var future_build = JSON.parse_string(original)
+	future_build["data"]["meta"]["version"] = str(ProjectSettings.get_setting("application/config/version")) + ".99"
+	for text in ["{", "{}", JSON.stringify(future), JSON.stringify(future_build), JSON.stringify(bad_shape), JSON.stringify(bad_entity), JSON.stringify(bad_order), JSON.stringify(bad_location)]:
 		var result := SaveSystem.import_text(text, 1, true)
 		runner.check(not result["ok"], "invalid import rejected")
 		runner.eq(FileAccess.get_file_as_string(SaveSystem._path(1)), original, "existing bytes never deleted")

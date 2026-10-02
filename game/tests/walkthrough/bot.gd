@@ -149,6 +149,8 @@ func _run() -> void:
 	match mode:
 		"save_transfer":
 			await load("res://tests/walkthrough/save_transfer_tour.gd").new(self).run()
+		"patch_notes":
+			await load("res://tests/walkthrough/patch_notes_tour.gd").new(self).run()
 		"beta_tour":
 			await BetaTour.new(self).run()
 		"shots":
@@ -502,7 +504,17 @@ func use(pred: Callable, what: String) -> bool:
 		await frames(2)
 		Input.action_release(act)
 		await frames(4)
-	var ok := await until(func(): return player() != null and player().focus == it, 1.5)
+	var ok := false
+	for attempt in range(4):
+		# A queued decision may open during the facing frames above. Answer it
+		# through real input, then reacquire focus before pressing interact.
+		if UIRoot.is_blocking() and popup_handler.is_valid():
+			await popup_handler.call()
+			await walk_to(target, 3.0, 5.0, true, focused)
+		ok = await until(func(): return UIRoot.is_blocking() or focused.call(), 1.5)
+		if ok and not UIRoot.is_blocking() and focused.call():
+			break
+		ok = false
 	if not ok:
 		# try standing a little closer
 		await walk_to(it.global_position + Vector2(0, 2), 2.0, 5.0, false, focused)

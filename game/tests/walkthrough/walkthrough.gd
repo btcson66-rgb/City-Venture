@@ -290,11 +290,16 @@ func _summary() -> void:
 func popups() -> void:
 	# answer any decision / month close that surfaced while we were busy
 	var guard := 0
-	while guard < 6:
+	while guard < 64:
 		guard += 1
 		var m = UIRoot.top_modal()
 		if m == null:
-			return
+			# The next queued report/decision opens on a subsequent process frame.
+			# Wait for that handoff before resuming world interaction.
+			await bot.frames(3)
+			m = UIRoot.top_modal()
+			if m == null:
+				return
 		if m is DecisionModal:
 			var inst: Dictionary = m.inst
 			await bot.shot("decision_" + str(inst["id"]))
@@ -337,6 +342,7 @@ func popups() -> void:
 				m.close()
 		else:
 			return
+	bot.fail("queued popup drain exceeded 64 real decisions/reports")
 
 
 func _pick_choice(inst: Dictionary) -> String:

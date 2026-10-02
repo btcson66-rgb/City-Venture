@@ -27,6 +27,7 @@ var buildings_meta := {}
 var sprite_meta := {}     # board-converted sprites that overhang their design footprint
 var tiles := {}
 var glossary := {}        # data/help/glossary.json: {id: {title, what, why}} behind the "!" badges (InfoTip)
+var patch_notes := {}     # data/help/patch_notes.json: {version: {date, lines[]}}
 var loaded := false
 
 
@@ -50,6 +51,7 @@ func load_all() -> void:
 	city = _read("res://data/city/aurelia.json")
 	var gl = _read("res://data/help/glossary.json")
 	glossary = gl if typeof(gl) == TYPE_DICTIONARY else {}
+	patch_notes = _read("res://data/help/patch_notes.json")
 	story = _read("res://data/story/chapters.json")
 	world = _read("res://data/world/years.json")
 	# Economy overlays keep all release balancing numbers in one designer-owned folder.

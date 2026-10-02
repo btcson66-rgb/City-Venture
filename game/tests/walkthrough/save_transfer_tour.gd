@@ -115,7 +115,10 @@ func _web() -> void:
 		var slot := SaveSystem.latest_slot()
 		bot.expect(slot >= 0 and SaveSystem.load_and_enter(slot), "IndexedDB save survives browser refresh")
 		await bot.wait(0.8)
-		bot.expect(GameState.data["player"]["name"] == "Save Traveler", "persisted player recovered")
+		var expected_player := "Alex Chen" if OS.get_cmdline_user_args().has("--import-legacy") else "Save Traveler"
+		bot.expect(GameState.data["player"]["name"] == expected_player, "persisted player recovered")
+		if OS.get_cmdline_user_args().has("--check-updates"):
+			bot.expect(not PatchNotes.needs_notice(GameState.data), "read update notice persists after browser refresh")
 		_web_phase("finished")
 		return
 	var walk := Walkthrough.new(bot)
@@ -146,6 +149,11 @@ func _web() -> void:
 	bot.expect(Ledger.check_balanced(), "browser imported ledger balanced")
 	if old_import:
 		bot.expect(GameState.data["meta"]["version"] == "0.1.8-test8.1", "real historical 0.1.8 save imported in Chromium")
+		if OS.get_cmdline_user_args().has("--check-updates"):
+			bot.expect(await bot.until(func(): return bot.get_tree().root.find_child("PatchNotesModal", true, false) != null, 5.0), "browser older save shows what's new")
+			await bot.wait(0.5)
+			_web_phase("updates", "ContinueUpdatedGame")
+			bot.expect(await bot.until(func(): return not PatchNotes.needs_notice(GameState.data), 90.0), "browser player acknowledges update notice")
 	else:
 		bot.expect(GameState.data["player"]["name"] == "Save Traveler", "download imported after new game")
 	SaveSystem.save(SaveSystem.current_slot())

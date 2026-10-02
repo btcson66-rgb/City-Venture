@@ -205,6 +205,7 @@ func load_and_enter(slot: int) -> bool:
 	if not load_data(slot):
 		return false
 	SceneRouter.restore_location()
+	PatchNotes.after_load()
 	return true
 
 

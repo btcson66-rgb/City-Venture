@@ -4,6 +4,7 @@ extends Modal
 
 var lines: Array = []
 var ok_text := "Close"
+var ok_name := "CloseInfo"
 
 
 func _init() -> void:
@@ -33,7 +34,9 @@ func build() -> void:
 		else:
 			v.add_child(UIK.wrap(str(l), 8, Art.C_WHITE, 350))
 	body.add_child(UIK.scroll(v, Vector2(360, panel_size.y - 70)))
-	footer.add_child(UIK.button(ok_text, close, "primary" if ok_text != "Close" else "", 70))
+	var confirm := UIK.button(ok_text, close, "primary" if ok_text != "Close" else "", 70)
+	confirm.name = ok_name
+	footer.add_child(confirm)
 
 
 ## Shown when the guided first venture is done: what the player just did, and what else there is.
