@@ -1981,7 +1981,7 @@ func _automotive() -> void:
 	if SceneRouter.world_scene().kind=="interior":await exit_building()
 	await metro_to("airport")
 	await bot.shot("airport_day")
-	await enter_building("aurelia_auto_auction")
+	await enter_building("gateway_car_rental")   # open every day; the auction hall closes on Sundays
 	Ledger.post(GameState.company_id(),"QA auto equity",[{"acct":"cash","dr":60000},{"acct":"equity","cr":60000}])
 	await bot.use_action("automotive_open")
 	await bot.click_named("OpenAutoDesk")
