@@ -56,6 +56,8 @@ func _fade(cb: Callable, minutes := 0) -> void:
 
 # ------------------------------------------------------------------ front-end
 func go_menu() -> void:
+	if UIRoot.tutorial != null:
+		UIRoot.tutorial.clear_destination()
 	Sound.music("menu")
 	Clock.world_active = false
 	UIRoot.set_hud_visible(false)
@@ -72,7 +74,13 @@ func go_creator() -> void:
 
 
 func go_arrival(setup: Dictionary) -> void:
-	GameState.new_game(setup)
+	if UIRoot.tutorial != null:
+		UIRoot.tutorial.clear_destination()
+	if not GameState.new_game(setup):
+		# Never carry on into a game that cannot be saved: say why and go back to the title screen.
+		go_menu()
+		UIRoot.open_modal(InfoModal.make("New game", "save", [I18n.t(SaveSystem.last_error) if SaveSystem.last_error != "" else I18n.t("The new game could not be started because no save slot was available.")]))
+		return
 	Clock.world_active = false
 	UIRoot.set_hud_visible(false)
 	_fade(func(): _set_scene(ArrivalScene.new()))

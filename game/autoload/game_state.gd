@@ -21,7 +21,8 @@ func default_appearance() -> Dictionary:
 
 
 ## Build a fresh world. `setup` = {name, appearance{}, outfit, seed?}
-func new_game(setup: Dictionary) -> void:
+## Returns false (and leaves no game in memory) when no save slot could be claimed; SaveSystem.last_error says why.
+func new_game(setup: Dictionary) -> bool:
 	var living := DataDB.living()
 	var seed_v: int = int(setup.get("seed", Time.get_ticks_usec() % 2147483647))
 	# Explicit reproducible seeds are restricted to QA bot runs.
@@ -30,12 +31,17 @@ func new_game(setup: Dictionary) -> void:
 			if arg.begins_with("--seed="):
 				seed_v = int(arg.substr(7))
 	rng.seed = seed_v
+	var slot := SaveSystem.claim_slot()
+	if slot < 0:
+		data = {}
+		return false
 	data = template(setup, seed_v)
-	data["meta"]["slot"] = SaveSystem.claim_slot()
+	data["meta"]["slot"] = slot
 	Ledger.post("player", "Opening balance — savings", [
 		{"acct": "cash", "dr": float(living.get("start_cash", 30000))},
 		{"acct": "equity", "cr": float(living.get("start_cash", 30000))}], {"type": "opening"})
 	timeline(I18n.t("Moved to Aurelia City with $%s in savings.") % Fmt.money0(float(living.get("start_cash", 30000))))
+	return true
 
 
 ## The shape of a brand-new game. new_game() starts from it, and loading an older save fills in anything a newer

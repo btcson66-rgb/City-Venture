@@ -42,14 +42,14 @@ func build() -> void:
 		body.add_child(row)
 	var quote := Ecommerce.cancel_quote(po_id) if cancelling else Ecommerce.return_quote(po_id, qty)
 	body.add_child(UIK.kv("Invoice reduction" if cancelling and quote["unpaid"] else "Refund", Fmt.money0(float(quote["refund"])), Art.C_GREEN))
-	body.add_child(UIK.label_tip(I18n.t("Return & cancellation fees") + ": " + Fmt.money0(float(quote["fee"])), "restocking_fee"))
+	body.add_child(UIK.label_tip(I18n.t("Return & cancellation fees") + ": " + Fmt.money(float(quote["fee"])), "restocking_fee"))
 	if cancelling:
 		body.add_child(UIK.wrap("Refunded now. Unpaid terms reduce your invoice; any cancellation fee stays payable on its original due date. Settlement fees are not refundable.", 8, Art.C_MUTED, 410))
 	else:
-		body.add_child(UIK.kv("Return shipping", Fmt.money0(float(quote["shipping"]))))
+		body.add_child(UIK.kv("Return shipping", Fmt.money(float(quote["shipping"]))))
 		body.add_child(UIK.wrap(I18n.t("Cash arrives when the supplier receives the stock: %s. Reserved units cannot be returned.") % Clock.fmt_short(int(quote["due"])), 8, Art.C_MUTED, 410))
 		if Ledger.cash(str(po["entity"])) < float(quote["shipping"]):
-			why = I18n.t("Not enough cash for return shipping: %s.") % Fmt.money0(float(quote["shipping"]))
+			why = I18n.t("Not enough cash for return shipping: %s.") % Fmt.money(float(quote["shipping"]))
 	if why != "":
 		body.add_child(UIK.wrap(why, 8, Art.C_RED, 410))
 	var confirm := UIK.button("Confirm cancellation" if cancelling else "Confirm return", _confirm, "primary")

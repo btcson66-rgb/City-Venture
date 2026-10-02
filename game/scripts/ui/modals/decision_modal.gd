@@ -74,12 +74,11 @@ func build() -> void:
 		ok.name = "DecisionOK"
 		footer.add_child(ok)
 		return
-	var primary_chosen := false
+	# No choice is nudged: only one the event data marks "recommended": true gets the primary style.
 	for c in def.get("choices", []):
 		var avail := EventEngine.choice_available(c, inst["ctx"])
 		var row := UIK.vbox(0)
-		var b := UIK.button(EventEngine.fill(c["label"], inst["ctx"]), _pick.bind(c["id"]), "primary" if avail and not primary_chosen else "")
-		if avail: primary_chosen = true
+		var b := UIK.button(EventEngine.fill(c["label"], inst["ctx"]), _pick.bind(c["id"]), "primary" if avail and bool(c.get("recommended", false)) else "")
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		b.disabled = not avail
 		b.name = "Choice_" + str(c["id"])

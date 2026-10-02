@@ -384,7 +384,7 @@ static func cancel_purchase(po_id: String) -> Dictionary:
 	Sim.cancel("eco.po_arrive", "po", po_id)
 	Sim.cancel("eco.po_cleared", "po", po_id)
 	GameState.inc_stat("purchase_orders_cancelled")
-	_purchase_message(po, I18n.t("%s cancelled: %s refunded or removed from your unpaid invoice; fee %s. Settlement fees are not refundable.") % [po_id, Fmt.money0(refund), Fmt.money0(fee)])
+	_purchase_message(po, I18n.t("%s cancelled: %s refunded or removed from your unpaid invoice; fee %s. Settlement fees are not refundable.") % [po_id, Fmt.money(refund), Fmt.money(fee)])
 	return {"ok": true, "refund": refund, "fee": fee}
 
 
@@ -436,7 +436,7 @@ static func return_purchase(po_id: String, qty: int) -> Dictionary:
 	var quote := return_quote(po_id, qty)
 	var entity := str(po["entity"])
 	if Ledger.cash(entity) < float(quote["shipping"]):
-		return {"ok": false, "error": I18n.t("Not enough cash for return shipping: %s.") % Fmt.money0(float(quote["shipping"]))}
+		return {"ok": false, "error": I18n.t("Not enough cash for return shipping: %s.") % Fmt.money(float(quote["shipping"]))}
 	var value := snappedf(qty * avg_cost(str(po["location"]), str(po["product"])), 0.01)
 	var refund := float(quote["refund"])
 	var gap := snappedf(value - refund, 0.01)
@@ -1026,7 +1026,7 @@ static func _h_deliver(p: Dictionary) -> void:
 	var price := snappedf(float(o["unit_price"]) * int(o["qty"]), 0.01)
 	var fee := snappedf(price * float(mk().get("fee_rate", 0.1)), 0.01)
 	var pname: String = I18n.t(DataDB.product(o["product"])["name"])
-	Ledger.post(o["entity"], I18n.t("Sale delivered %s: %d × %s @ %s") % [o["id"], int(o["qty"]), pname, Fmt.money0(o["unit_price"])], [
+	Ledger.post(o["entity"], I18n.t("Sale delivered %s: %d × %s @ %s") % [o["id"], int(o["qty"]), pname, Fmt.money(o["unit_price"])], [
 		{"acct": "marketplace_balance", "dr": price}, {"acct": "revenue", "cr": price},
 		{"acct": "cogs", "dr": float(o.get("cogs", 0.0))}, {"acct": "goods_out", "cr": float(o.get("cogs", 0.0))},
 		{"acct": "exp:platform_fees", "dr": fee}, {"acct": "marketplace_balance", "cr": fee}], {"segment": "ecommerce", "type": "order", "id": o["id"]})

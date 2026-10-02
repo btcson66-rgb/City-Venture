@@ -22,6 +22,9 @@ var _since := 0.0
 var _last_sig := ""
 var _js_cbs: Array = []   # JavaScriptBridge callbacks must stay referenced
 var last_error := ""
+const BACKUP_EVERY_SEC := 600.0
+var _last_rotate: Dictionary = {}      # slot -> unix time its .bak history last rotated (this session)
+var _summary_cache: Dictionary = {}    # slot -> {"mt": modified time, "sm": decoded summary}
 var pending_import := {}
 
 
@@ -126,7 +129,7 @@ func save_list() -> Array:
 	for s in [AUTOSAVE_SLOT] + GAME_SLOTS:
 		if has_save(s):
 			var sm := summary(s)
-			out.append({"slot": s, "summary": sm, "corrupt": sm.is_empty(), "backup": recovery_index(s)})
+			out.append({"slot": s, "summary": sm, "corrupt": sm.is_empty(), "backup": recovery_index(s) if sm.is_empty() else -1})
 	out.sort_custom(func(a, b): return float(a["summary"].get("saved_unix", 0)) > float(b["summary"].get("saved_unix", 0)))
 	return out
 
@@ -145,21 +148,28 @@ func latest_slot() -> int:
 
 func summary(slot: int) -> Dictionary:
 	if not has_save(slot):
+		_summary_cache.erase(slot)
 		return {}
+	var mt := FileAccess.get_modified_time(_path(slot))
+	var hit: Dictionary = _summary_cache.get(slot, {})
+	if not hit.is_empty() and int(hit["mt"]) == mt:
+		return hit["sm"]
 	var result := validate_text(FileAccess.get_file_as_string(_path(slot)))
-	if not result["ok"]:
-		return {}
-	return result["payload"].get("summary", {})
+	var sm: Dictionary = result["payload"].get("summary", {}) if result["ok"] else {}
+	_summary_cache[slot] = {"mt": mt, "sm": sm}
+	return sm
 
 
-func save(slot := 1) -> bool:
+## Manual saves always rotate the .bak1-3 history; an autosave only does it once per session and then every 10 real minutes,
+## so the 15-second autosave can't push a good backup out of the three kept.
+func save(slot := 1, manual := true) -> bool:
 	if slot < 0:
 		return false
-	return save_to(_path(slot), slot)
+	return save_to(_path(slot), slot, manual)
 
 
 ## Write the current game to any path (slots, or a copy attached to a bug report).
-func save_to(path: String, slot := -1) -> bool:
+func save_to(path: String, slot := -1, manual := true) -> bool:
 	if not GameState.has_game():
 		return false
 	SceneRouter.capture_location()
@@ -174,9 +184,12 @@ func save_to(path: String, slot := -1) -> bool:
 		"chapter": d["story"].get("chapter", ""),
 	}
 	var payload := {"format": GameState.SAVE_FORMAT, "summary": summary_d, "data": d}
-	if not _atomic_write(path, JSON.stringify(payload), slot >= 0):
+	var rotate := slot >= 0 and (manual or _backup_due(slot))
+	if not _atomic_write(path, JSON.stringify(payload), rotate):
 		last_error = "The save could not be written. Your existing save is unchanged."
 		return false
+	if rotate:
+		_last_rotate[slot] = Time.get_unix_time_from_system()
 	if slot >= 0:
 		saved.emit(slot)
 	return true
@@ -209,11 +222,15 @@ func load_and_enter(slot: int) -> bool:
 	return true
 
 
+func _backup_due(slot: int) -> bool:
+	return not _last_rotate.has(slot) or Time.get_unix_time_from_system() - float(_last_rotate[slot]) >= BACKUP_EVERY_SEC
+
+
 func autosave() -> void:
 	if not GameState.has_game():
 		return
 	_since = 0.0
-	if save(current_slot()):
+	if save(current_slot(), false):
 		var ws := SceneRouter.world_scene()
 		var pos: Vector2 = ws.player.position if ws != null and ws.player != null else Vector2.ZERO
 		_last_sig = "%d|%s|%d|%d|%d" % [Clock.now(), ws.scene_id if ws != null else "", int(pos.x), int(pos.y), int(GameState.data["ledger"]["seq"])]
@@ -254,6 +271,7 @@ func validate_text(text: String) -> Dictionary:
 
 ## A completed temporary file replaces its destination atomically. No delete-then-write window.
 func _atomic_write(path: String, text: String, rotate := false) -> bool:
+	_summary_cache.clear()
 	var temp := path + ".tmp"
 	var file := FileAccess.open(temp, FileAccess.WRITE)
 	if file == null: return false
