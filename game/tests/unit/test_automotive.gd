@@ -318,6 +318,27 @@ func test_dealership_deposit_minimum_stock_and_after_sales() -> void:
 	runner.check(int(Automotive.franchise()["visits"]) >= 0, "after-sales visits tracked")
 	runner.check(Ledger.check_balanced(), "dealership balanced")
 
+func test_ev_brand_sets_energy_boost_and_hotel_guests_feed_rentals() -> void:
+	var entity := setup(1200000)
+	fleet_ready(entity, 10)
+	Automotive.S()["completed"] = 25
+	runner.check(Living.lease("gateway_showroom")["ok"], "showroom leased")
+	runner.eq(float(Automotive.S()["ev_boost"]), 0.0, "no boost before a franchise")
+	var brand := ""
+	for id in Automotive.dealer()["brands"]:
+		if bool(Automotive.dealer()["brands"][id]["ev"]): brand = id
+	runner.check(brand != "", "an EV brand exists in data")
+	runner.check(Automotive.sign_franchise(brand)["ok"], "EV franchise signed")
+	runner.check(float(Automotive.S()["ev_boost"]) > 0.0, "EV dealership sets ev_boost")
+	runner.eq(float(GameState.data["automotive"]["ev_boost"]), float(Automotive.S()["ev_boost"]), "Energy reads data.automotive.ev_boost")
+	var before := Energy.adoption()
+	GameState.data["automotive"]["ev_boost"] = 0.0
+	runner.check(Energy.adoption() < before, "adoption includes the dealership boost")
+	Automotive.update_ev_boost()
+	runner.check(Automotive.terminate()["ok"], "franchise ended")
+	runner.eq(float(Automotive.S()["ev_boost"]), 0.0, "boost removed with the franchise")
+	runner.eq(Automotive.hotel_guests(), 0.0, "no hotel, no hotel guests")
+
 func test_dealership_shortfall_ends_franchise_and_forfeits_deposit() -> void:
 	var entity := setup(1200000)
 	fleet_ready(entity, 10)
@@ -423,7 +444,7 @@ func test_stock_cars_and_fleet_back_bank_loans() -> void:
 	if car_id == "": return
 	var cost := float(Automotive.S()["stock"][car_id]["cost"])
 	var after := Bank.lending_basis()
-	var line := after["parts"].filter(func(p): return str(p[0]).contains("car stock"))
+	var line: Array = after["parts"].filter(func(p): return str(p[0]).contains("car stock"))
 	runner.check(line.size() == 1 and absf(float(line[0][1]) - cost * 0.6) < .01, "stock cars count at 60% of cost")
 	runner.check(float(after["raw"]) > float(before["raw"]) - cost - 1.0, "cars partly replace the cash they cost")
 	fleet_ready(entity, 1)

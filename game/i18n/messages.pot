@@ -37,6 +37,10 @@ msgstr ""
 msgid "  …and %d more"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:261
+msgid " (EV)"
+msgstr ""
+
 #: scripts/ui/minigames/teller_cash_game.gd:108
 msgid " (fewer notes would be tidier)"
 msgstr ""
@@ -157,12 +161,24 @@ msgstr ""
 msgid "%d accepted"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:209
+msgid "%d cars are due for service; skipping it risks a breakdown during a rental."
+msgstr ""
+
+#: scripts/sim/automotive.gd:648
+msgid "%d completed rentals"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1265
 msgid "%d cups"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1300
 msgid "%d cups · %s"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:229
+msgid "%d days"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1049
@@ -201,7 +217,7 @@ msgstr ""
 msgid "%d months"
 msgstr ""
 
-#: scripts/sim/bank.gd:137
+#: scripts/sim/bank.gd:142
 msgid "%d more days, or accept an active contract in Company OS → Contracts."
 msgstr ""
 
@@ -305,6 +321,10 @@ msgstr ""
 msgid "%d%% upfront"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:204
+msgid "%d/%d cars · utilisation %d%% (14 days) · rating %.1f of 5 · lost requests %d · service due %d"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:542
 msgid "%d/%d units incl. incoming"
 msgstr ""
@@ -329,6 +349,10 @@ msgstr ""
 msgid "%s (support) handled a return on %s: %s."
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:183
+msgid "%s = %d%% of market · about %d days to sell"
+msgstr ""
+
 #: scripts/sim/cafe.gd:53
 msgid "%s Café"
 msgstr ""
@@ -343,6 +367,10 @@ msgstr ""
 
 #: scripts/sim/insolvency.gd:28
 msgid "%s became insolvent: %s"
+msgstr ""
+
+#: scripts/ui/minigames/auction_game.gd:80
+msgid "%s bids %s"
 msgstr ""
 
 #: scripts/sim/staff.gd:273
@@ -529,6 +557,14 @@ msgstr ""
 msgid "%s · %d units · defects %.1f%% · sampled %.0f%% · escaped %.1f units"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:106
+msgid "%s · %d years · %s km · body %s · mechanics %s · market %s · opens %s"
+msgstr ""
+
+#: scripts/ui/minigames/auction_game.gd:34
+msgid "%s · %d years · %s km · market %s"
+msgstr ""
+
 #: scripts/ui/manufacturing_ui.gd:120
 msgid "%s · %d/%d units complete"
 msgstr ""
@@ -551,6 +587,14 @@ msgstr ""
 
 #: scripts/ui/hotel_ui.gd:232
 msgid "%s · %s · received %s · %s"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:242
+msgid "%s · %s · rentals %d · revenue %s"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:222
+msgid "%s · %s/car/mo"
 msgstr ""
 
 #: scripts/ui/minigames/creative_pitch.gd:22
@@ -577,8 +621,20 @@ msgstr ""
 msgid "%s · condition %d%% · %s"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:80
+msgid "%s · lot %d/%d cars · fleet %d · cash %s"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:166
+msgid "%s · paid %s (incl. repairs %s) · market %s · %s"
+msgstr ""
+
 #: scripts/ui/energy_ui.gd:72
 msgid "%s · reputation %d%% · cash %s · weather %s · crew %.1f crew-days/day"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:267
+msgid "%s · sold %d · service visits %d · in stock %d · on order %d · discount %d%%"
 msgstr ""
 
 #: scripts/ui/energy_ui.gd:278
@@ -603,6 +659,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1192
 msgid "%s/month each"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:291
+msgid "%s: %d passengers/day"
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:111
@@ -753,7 +813,7 @@ msgstr ""
 msgid "3  Tape all three seams (buttons under the box)"
 msgstr ""
 
-#: scripts/sim/bank.gd:109
+#: scripts/sim/bank.gd:113
 msgid "3 × last 30 days' gross profit"
 msgstr ""
 
@@ -773,23 +833,27 @@ msgstr ""
 msgid "4  Label"
 msgstr ""
 
-#: scripts/sim/bank.gd:111
+#: scripts/sim/bank.gd:115
 msgid "50% of operating assets at book value"
 msgstr ""
 
-#: scripts/sim/bank.gd:112
+#: scripts/sim/bank.gd:116
 msgid "50% of property market equity"
 msgstr ""
 
-#: scripts/sim/bank.gd:111
+#: scripts/sim/bank.gd:115
 msgid "50% of stock at cost"
 msgstr ""
 
-#: scripts/sim/bank.gd:110
+#: scripts/sim/bank.gd:118
+msgid "60% of car stock at cost"
+msgstr ""
+
+#: scripts/sim/bank.gd:114
 msgid "60% of signed contracts"
 msgstr ""
 
-#: scripts/sim/bank.gd:110
+#: scripts/sim/bank.gd:114
 msgid "70% of money owed to you"
 msgstr ""
 
@@ -807,6 +871,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "A $20 sale leaves $18 before stock, advertising and shipping. Set prices using the amount you keep."
+msgstr ""
+
+#: data/events/automotive_claim.json
+msgid "A $350 lawyer; about half the time you win and pay nothing more."
 msgstr ""
 
 #: data/help/glossary.json
@@ -865,6 +933,10 @@ msgstr ""
 msgid "A busy sales day raises receivables before checking cash. Keep enough cash for bills until the payout."
 msgstr ""
 
+#: data/events/automotive_flood.json
+msgid "A buyer may find the damage later: a refund claim and a consumer fine are likely."
+msgstr ""
+
 #: data/help/glossary.json
 msgid "A buyer usually pays a multiple of yearly profit, plus the company's cash and stock, minus what it owes."
 msgstr ""
@@ -882,6 +954,10 @@ msgid "A charge per parcel padded with plastic, under the Clean Packaging Act (Y
 msgstr ""
 
 #: data/help/glossary.json
+msgid "A cheap car sitting idle earns nothing; a high price loses requests. Service skipped means breakdowns and bad reviews."
+msgstr ""
+
+#: data/help/glossary.json
 msgid "A client posts a job with several stops, a fee and a deadline. On time pays the full fee, late pays less, and a run left undone is cancelled."
 msgstr ""
 
@@ -895,6 +971,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:226
 msgid "A contract offer is waiting in Contracts."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "A dealership needs a deposit, a showroom and a minimum number of new cars in stock or on order each month."
 msgstr ""
 
 #: data/economy/staff.json
@@ -959,6 +1039,10 @@ msgstr ""
 
 #: data/events/media_client.json
 msgid "A major client is thinking of leaving. Let them go and refund the unused advance, or offer a discount to keep the campaign."
+msgstr ""
+
+#: data/events/automotive_recall.json
+msgid "A maker has recalled a part used in some of your rental cars. Pull them from service for three days, or keep renting them and risk breakdowns."
 msgstr ""
 
 #: scripts/ui/minigames/creative_pitch.gd:15
@@ -1125,6 +1209,18 @@ msgstr ""
 msgid "ADR is revenue per sold room. RevPAR is revenue per available room, whether sold or not."
 msgstr ""
 
+#: data/buildings/cargo_terminal.json
+msgid "AIR CARGO"
+msgstr ""
+
+#: data/buildings/cargo_terminal.json
+msgid "AIR CARGO: bonded freight apron. Pallets and containers from Pier 7 and the Industrial Zone are screened here before they fly. Visitors may watch the apron from the gate."
+msgstr ""
+
+#: data/buildings/airport_terminal.json
+msgid "AIRPORT"
+msgstr ""
+
 #: autoload/clock.gd:159
 msgid "AM"
 msgstr ""
@@ -1153,6 +1249,10 @@ msgstr ""
 msgid "ATM — balances"
 msgstr ""
 
+#: data/buildings/aurelia_auto_auction.json
+msgid "AUCTION RULES: lots sell Wednesdays 09:00–17:00. Buyer fee 5% on top of the hammer price. Hidden defects are not shown — pay Jun Ito $150 for an inspection before you bid."
+msgstr ""
+
 #: scripts/sim/contracts.gd:25
 msgid "AUD"
 msgstr ""
@@ -1163,6 +1263,10 @@ msgstr ""
 
 #: scripts/ui/minigames/parcel_sort_game.gd:73
 msgid "AURELIA %s"
+msgstr ""
+
+#: data/buildings/aurelia_auto_auction.json
+msgid "AURELIA AUTO AUCTION"
 msgstr ""
 
 #: data/../assets/buildings/buildings_meta.json
@@ -1241,6 +1345,14 @@ msgstr ""
 msgid "Accessory"
 msgstr ""
 
+#: data/economy/automotive.json
+msgid "Accident history"
+msgstr ""
+
+#: scripts/sim/automotive.gd:615
+msgid "Accident repair: %s"
+msgstr ""
+
 #: scripts/ui/minigames/typing_game.gd:50
 msgid "Accuracy and speed decide how much of the work gets done in this session."
 msgstr ""
@@ -1257,7 +1369,7 @@ msgstr ""
 msgid "Acquired Campus Radio and its finite advertising inventory."
 msgstr ""
 
-#: scripts/sim/bank.gd:137
+#: scripts/sim/bank.gd:142
 msgid "Active contracts cover this condition: %s still to collect."
 msgstr ""
 
@@ -1279,6 +1391,10 @@ msgstr ""
 
 #: scripts/ui/minigames/pack_game.gd:118
 msgid "Add bubble wrap"
+msgstr ""
+
+#: scripts/sim/automotive.gd:385
+msgid "Added %s to the rental fleet."
 msgstr ""
 
 #: scripts/sim/company.gd:108
@@ -1329,6 +1445,10 @@ msgstr ""
 msgid "After a tiring shift you can return home to sleep. The first venture allows sleep after 4 PM and guides you home when it is too late to work."
 msgstr ""
 
+#: scripts/sim/automotive.gd:731
+msgid "After-sales service ticket"
+msgstr ""
+
 #: scripts/ui/hud.gd:233
 msgid "Afternoon · Sunny"
 msgstr ""
@@ -1345,8 +1465,24 @@ msgstr ""
 msgid "Agriculture"
 msgstr ""
 
+#: data/buildings/cargo_terminal.json
+msgid "Air cargo"
+msgstr ""
+
+#: data/districts/airport.json scripts/ui/automotive_ui.gd:70
+msgid "Airport"
+msgstr ""
+
 #: data/city/aurelia.json
 msgid "Airport Line"
+msgstr ""
+
+#: data/buildings/airport_terminal.json
+msgid "Airport terminal"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:294
+msgid "AirportNextFleet"
 msgstr ""
 
 #: autoload/game_state.gd:56 autoload/game_state.gd:65 scripts/sim/ecommerce.gd:793 scripts/sim/staff.gd:120
@@ -1677,6 +1813,10 @@ msgstr ""
 msgid "Aster Inn: 7 Standard, 4 Deluxe and 1 Suite. Take it over for $150,000 or lease it for $9,000 a month."
 msgstr ""
 
+#: data/economy/automotive.json
+msgid "Astra sedan"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "At 12% APR, $1,000 outstanding accrues about $10 interest for a month before principal repayment."
 msgstr ""
@@ -1717,6 +1857,38 @@ msgstr ""
 msgid "Auburn"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:70 scripts/ui/minigames/auction_game.gd:20
+msgid "Auction"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Auction and hidden defects"
+msgstr ""
+
+#: data/businesses/automotive.json
+msgid "Auction flips, an airport rental fleet and a franchised dealership."
+msgstr ""
+
+#: scripts/sim/automotive.gd:241
+msgid "Auction purchase: %s"
+msgstr ""
+
+#: data/help/help.json
+msgid "Auction: bid before the hammer falls"
+msgstr ""
+
+#: data/help/help.json
+msgid "Auction: inspect lots before Wednesday, bid live on auction day, then recondition and list the car. A higher price means more days to sell."
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:132
+msgid "AuctionNextLot"
+msgstr ""
+
+#: data/npcs/frank_doyle.json
+msgid "Auctioneer"
+msgstr ""
+
 #: scripts/ui/media_ui.gd:182
 msgid "Audience %d listeners · %d impressions available today"
 msgstr ""
@@ -1731,6 +1903,18 @@ msgstr ""
 
 #: data/regions/aurelia.json
 msgid "Aurelia"
+msgstr ""
+
+#: data/buildings/cargo_terminal.json
+msgid "Aurelia Air Cargo Terminal"
+msgstr ""
+
+#: data/buildings/airport_terminal.json
+msgid "Aurelia Airport Terminal"
+msgstr ""
+
+#: data/buildings/aurelia_auto_auction.json
+msgid "Aurelia Auto Auction"
 msgstr ""
 
 #: data/city/aurelia.json scripts/ui/modals/city_map_modal.gd:16
@@ -1781,15 +1965,39 @@ msgstr ""
 msgid "Auroria"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:11
+msgid "Auto Desk"
+msgstr ""
+
+#: data/help/help.json
+msgid "Auto Desk: auction, fleet, showroom"
+msgstr ""
+
+#: data/buildings/aurelia_auto_auction.json
+msgid "Auto auction"
+msgstr ""
+
+#: data/economy/staff.json
+msgid "Auto technician"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:232
+msgid "Auto-service on return: "
+msgstr ""
+
 #: scripts/ui/energy_ui.gd:132
 msgid "AutoLayout"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:232
+msgid "AutoService"
 msgstr ""
 
 #: scripts/sim/manufacturing.gd:50
 msgid "Automation is already installed."
 msgstr ""
 
-#: data/businesses/automotive.json
+#: data/businesses/automotive.json scripts/sim/automotive.gd:907 scripts/ui/automotive_ui.gd:22 scripts/ui/automotive_ui.gd:92
 msgid "Automotive"
 msgstr ""
 
@@ -1941,6 +2149,10 @@ msgstr ""
 msgid "Base-linked mortgage costs are rising. Review cash and property equity."
 msgstr ""
 
+#: data/economy/automotive.json
+msgid "Basic cover"
+msgstr ""
+
 #: scripts/ui/real_estate_ui.gd:168
 msgid "Basic renovation"
 msgstr ""
@@ -2001,8 +2213,32 @@ msgstr ""
 msgid "Better quality home goods. Higher MOQ."
 msgstr ""
 
-#: scripts/sim/bank.gd:201
+#: scripts/sim/bank.gd:206
 msgid "Between $1,000 and %s."
+msgstr ""
+
+#: scripts/ui/minigames/auction_game.gd:44
+msgid "Bid"
+msgstr ""
+
+#: scripts/ui/minigames/auction_game.gd:62
+msgid "Bid %s"
+msgstr ""
+
+#: scripts/ui/minigames/auction_game.gd:26
+msgid "Bid against live bidders. Press Bid to raise; stop bidding when the price passes what the car is worth to you."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Bidders have private ceilings. A paid inspection reveals hidden defects such as flood damage, engine wear or a rolled-back odometer."
+msgstr ""
+
+#: scripts/ui/minigames/auction_game.gd:61
+msgid "Bidding is open."
+msgstr ""
+
+#: scripts/sim/automotive.gd:189 scripts/ui/automotive_ui.gd:137
+msgid "Bidding runs on auction day, Wednesdays 09:00-17:00."
 msgstr ""
 
 #: data/regions/northridge.json
@@ -2109,6 +2345,10 @@ msgstr ""
 msgid "Boring and safe. My favourite. You'll find it when you pay Lumina: Company OS, Operations."
 msgstr ""
 
+#: data/economy/automotive.json
+msgid "Borough Luxe"
+msgstr ""
+
 #: scripts/ui/modals/loan_modal.gd:81
 msgid "Borrow %s"
 msgstr ""
@@ -2121,7 +2361,7 @@ msgstr ""
 msgid "Borrow for stock or a cash gap. You repay monthly with interest; missed payments hurt your credit score."
 msgstr ""
 
-#: scripts/sim/bank.gd:216
+#: scripts/sim/bank.gd:221
 msgid "Borrowed %s from Nexus Bank (%d months, %s APR)."
 msgstr ""
 
@@ -2151,6 +2391,10 @@ msgstr ""
 
 #: scripts/ui/minigames/pack_game.gd:113
 msgid "Box"
+msgstr ""
+
+#: scripts/sim/automotive.gd:628
+msgid "Breakdown compensation voucher"
 msgstr ""
 
 #: scripts/ui/hotel_ui.gd:185
@@ -2207,6 +2451,10 @@ msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:9
 msgid "Brightpath Studio"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:244
+msgid "Broken down"
 msgstr ""
 
 #: data/economy/marketplace.json
@@ -2365,7 +2613,7 @@ msgstr ""
 msgid "Business assets contributed to %s (in kind)"
 msgstr ""
 
-#: scripts/sim/bank.gd:129
+#: scripts/sim/bank.gd:134
 msgid "Business bank account"
 msgstr ""
 
@@ -2397,6 +2645,10 @@ msgstr ""
 msgid "Business segments"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:288
+msgid "Business travellers %d%%, tourists %d%%. A fuel-price scare, a bad rating or high rates cut requests; the fleet size limits how many you can serve."
+msgstr ""
+
 #: scripts/ui/minigames/clerk_forms_game.gd:68 scripts/ui/modals/registration_modal.gd:36
 msgid "Business type"
 msgstr ""
@@ -2415,6 +2667,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:574
 msgid "Buy %s"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:237
+msgid "Buy %s · %s · %s/day"
 msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:173
@@ -2451,6 +2707,10 @@ msgstr ""
 
 #: scripts/ui/tutorial.gd:56
 msgid "Buy phone stands"
+msgstr ""
+
+#: scripts/sim/automotive.gd:647
+msgid "Buy rental cars at Gateway Car Rental."
 msgstr ""
 
 #: scripts/ui/modals/info_modal.gd:46
@@ -2865,6 +3125,10 @@ msgstr ""
 msgid "Cappuccino"
 msgstr ""
 
+#: data/buildings/gateway_car_rental.json
+msgid "Car rental and showroom"
+msgstr ""
+
 #: data/economy/media.json
 msgid "Care for every home"
 msgstr ""
@@ -3109,12 +3373,20 @@ msgstr ""
 msgid "Check the Business Board. People post suppliers, gigs, all sorts."
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:246 scripts/ui/automotive_ui.gd:281
+msgid "Check the airport flow"
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Check the cash forecast: does {company} make it to the next big payment?"
 msgstr ""
 
 #: data/buildings/skyline_grand.json
 msgid "Check the competitor's rates"
+msgstr ""
+
+#: data/buildings/airport_terminal.json
+msgid "Check the departures hall"
 msgstr ""
 
 #: scripts/ui/minigames/pack_game.gd:37
@@ -3149,12 +3421,20 @@ msgstr ""
 msgid "Chinese tutorial headings now use the bundled fallback font in browsers, preventing missing-character boxes."
 msgstr ""
 
+#: scripts/sim/automotive.gd:654
+msgid "Choose a brand you can sign."
+msgstr ""
+
 #: scripts/sim/hotel.gd:148
 msgid "Choose a breakfast option."
 msgstr ""
 
 #: scripts/ui/tutorial.gd:45
 msgid "Choose a business"
+msgstr ""
+
+#: scripts/sim/automotive.gd:378
+msgid "Choose a car class."
 msgstr ""
 
 #: scripts/sim/energy.gd:471
@@ -3169,8 +3449,20 @@ msgstr ""
 msgid "Choose a factory machine."
 msgstr ""
 
+#: scripts/sim/automotive.gd:311
+msgid "Choose a finished used car on your lot."
+msgstr ""
+
 #: scripts/sim/energy.gd:564
 msgid "Choose a fixed fee or revenue share."
+msgstr ""
+
+#: scripts/sim/automotive.gd:435
+msgid "Choose a fleet car that is not on rent."
+msgstr ""
+
+#: scripts/sim/automotive.gd:409
+msgid "Choose a fleet car."
 msgstr ""
 
 #: scripts/sim/energy.gd:580
@@ -3183,6 +3475,10 @@ msgstr ""
 
 #: scripts/sim/energy.gd:246
 msgid "Choose a listed battery size and margin."
+msgstr ""
+
+#: scripts/sim/automotive.gd:322
+msgid "Choose a listed car."
 msgstr ""
 
 #: scripts/sim/media.gd:179 scripts/sim/media.gd:182
@@ -3199,6 +3495,10 @@ msgstr ""
 
 #: scripts/sim/real_estate.gd:125
 msgid "Choose a project scale and a name of 1–32 characters."
+msgstr ""
+
+#: scripts/sim/automotive.gd:451
+msgid "Choose a rate between 70% and 140% of the standard rate."
 msgstr ""
 
 #: scripts/sim/hotel.gd:130
@@ -3221,8 +3521,24 @@ msgstr ""
 msgid "Choose a save slot to replace. Its existing save will be backed up."
 msgstr ""
 
+#: scripts/sim/automotive.gd:457
+msgid "Choose a service interval."
+msgstr ""
+
+#: scripts/sim/automotive.gd:463
+msgid "Choose a showroom discount between 0% and 6%."
+msgstr ""
+
 #: data/help/help.json
 msgid "Choose a slogan, visual and tone. The brief and university mentor explain the audience preferences."
+msgstr ""
+
+#: scripts/sim/automotive.gd:280
+msgid "Choose a used car on your lot."
+msgstr ""
+
+#: scripts/sim/automotive.gd:349
+msgid "Choose a used car that is not in the workshop."
 msgstr ""
 
 #: scripts/sim/hotel.gd:136
@@ -3245,8 +3561,16 @@ msgstr ""
 msgid "Choose an hourly slot within the coming week."
 msgstr ""
 
+#: scripts/sim/automotive.gd:454
+msgid "Choose an insurance cover."
+msgstr ""
+
 #: scripts/sim/jobs.gd:57
 msgid "Choose an offered construction contract."
+msgstr ""
+
+#: scripts/sim/automotive.gd:176 scripts/sim/automotive.gd:188 scripts/sim/automotive.gd:202 scripts/sim/automotive.gd:221
+msgid "Choose an open auction lot."
 msgstr ""
 
 #: scripts/sim/media.gd:87
@@ -3415,6 +3739,10 @@ msgstr ""
 
 #: data/economy/freelance.json
 msgid "Clean up the books of %s"
+msgstr ""
+
+#: scripts/sim/automotive.gd:592
+msgid "Cleaning and refuelling"
 msgstr ""
 
 #: data/events/hotel_strike.json
@@ -3605,7 +3933,7 @@ msgstr ""
 msgid "Collect the money Crestline owes you"
 msgstr ""
 
-#: scripts/sim/bank.gd:138
+#: scripts/sim/bank.gd:143
 msgid "Come back when %s has %d days of statements, or a signed contract."
 msgstr ""
 
@@ -3637,6 +3965,10 @@ msgstr ""
 msgid "Community Manager"
 msgstr ""
 
+#: data/economy/automotive.json
+msgid "Compact"
+msgstr ""
+
 #: scripts/ui/modals/bank_modal.gd:62
 msgid "Company"
 msgstr ""
@@ -3645,7 +3977,7 @@ msgstr ""
 msgid "Company OS: your business computer"
 msgstr ""
 
-#: scripts/sim/bank.gd:135
+#: scripts/sim/bank.gd:140
 msgid "Company days or an active contract"
 msgstr ""
 
@@ -3761,6 +4093,10 @@ msgstr ""
 msgid "Consumer"
 msgstr ""
 
+#: scripts/sim/automotive.gd:877
+msgid "Consumer-protection fine for an undisclosed flood car"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:835
 msgid "Contacts"
 msgstr ""
@@ -3835,6 +4171,10 @@ msgstr ""
 
 #: data/buildings/okafor_lettings.json
 msgid "Corner Café Unit, Lantern Row: $1,900/month, 2 months' deposit. Ask Mr. Okafor."
+msgstr ""
+
+#: data/economy/automotive.json
+msgid "Corvo Compact"
 msgstr ""
 
 #: data/help/glossary.json scripts/ui/modals/company_os.gd:267
@@ -3969,7 +4309,7 @@ msgstr ""
 msgid "Credit score %d points · %s"
 msgstr ""
 
-#: scripts/sim/bank.gd:131
+#: scripts/sim/bank.gd:136
 msgid "Credit score and lending ban"
 msgstr ""
 
@@ -4037,6 +4377,10 @@ msgstr ""
 msgid "Current %s · required %s · gap %s"
 msgstr ""
 
+#: scripts/ui/minigames/auction_game.gd:55
+msgid "Current bid %s"
+msgstr ""
+
 #: data/events/supplier_price_increase.json
 msgid "Current: {unit_cost}/unit, MOQ {moq}."
 msgstr ""
@@ -4069,8 +4413,16 @@ msgstr ""
 msgid "Cut costs: pause ads, cheaper living"
 msgstr ""
 
+#: data/events/automotive_fuel.json
+msgid "Cut rates for two weeks"
+msgstr ""
+
 #: data/events/low_cash_warning.json
 msgid "Cut spending (pause ads, cheaper living)"
+msgstr ""
+
+#: data/economy/staff.json
+msgid "Cuts reconditioning and service costs by 20%, saves a workshop day and adds two dealership service bays. Salary is due even in a slow week."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:29
@@ -4083,6 +4435,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:26 scripts/ui/modals/company_os.gd:617
 msgid "DELIVERED"
+msgstr ""
+
+#: data/buildings/airport_terminal.json
+msgid "DEPARTURES: business travellers and tourists keep the hall busy. Summer and the December holidays bring the biggest crowds; the car-rental desk sits at Gateway Car Rental across the plaza."
 msgstr ""
 
 #: scripts/ui/modals/metro_modal.gd:46
@@ -4157,7 +4513,7 @@ msgstr ""
 msgid "Dark slate"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1335
+#: scripts/ui/automotive_ui.gd:216 scripts/ui/modals/company_os.gd:1335
 msgid "Day"
 msgstr ""
 
@@ -4193,6 +4549,10 @@ msgstr ""
 msgid "Day pass is $15. Or $350 a month for a hot desk."
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:214
+msgid "Day rate %d%% · week rate %d%% of standard"
+msgstr ""
+
 #: scripts/sim/careers.gd:317
 msgid "Deadline missed: %s. Deliver soon, the fee drops."
 msgstr ""
@@ -4203,6 +4563,30 @@ msgstr ""
 
 #: scripts/sim/contracts.gd:173
 msgid "Deal. Send it over."
+msgstr ""
+
+#: scripts/sim/automotive.gd:54
+msgid "Dealer licence"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:281
+msgid "DealerNextAirport"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:262
+msgid "DealerNextFleet"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:70
+msgid "Dealership"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:250
+msgid "Dealership franchise"
+msgstr ""
+
+#: data/help/help.json
+msgid "Dealership: build a ten-car fleet and 25 rentals, lease the showroom, pay the deposit and keep new cars in stock."
 msgstr ""
 
 #: scripts/ui/modals/insolvency_modal.gd:68
@@ -4365,6 +4749,14 @@ msgstr ""
 msgid "Deposit"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:258
+msgid "Deposit %s, minimum stock %d new cars, minimum order %d cars. Margins are thin (about 5–7%%) but sales are steady and service tickets follow every car you sell."
+msgstr ""
+
+#: scripts/sim/automotive.gd:650
+msgid "Deposit and first order in cash"
+msgstr ""
+
 #: scripts/sim/contracts.gd:133
 msgid "Deposit received from %s (%s)"
 msgstr ""
@@ -4411,6 +4803,10 @@ msgstr ""
 
 #: data/economy/energy.json
 msgid "Destination chargers"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:175
+msgid "Detail · %s"
 msgstr ""
 
 #: scripts/ui/modals/business_board.gd:97
@@ -4497,6 +4893,18 @@ msgstr ""
 msgid "Directories & Files:"
 msgstr ""
 
+#: data/events/automotive_flood.json
+msgid "Disclose the flood damage"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:276
+msgid "DiscountLess"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:277
+msgid "DiscountMore"
+msgstr ""
+
 #: scripts/sim/ecommerce.gd:1178
 msgid "Dispute lost on %s: −%s"
 msgstr ""
@@ -4515,6 +4923,10 @@ msgstr ""
 
 #: data/npcs/sam.json
 msgid "Dockside Motors owner"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:189
+msgid "Dockside Motors · %s now"
 msgstr ""
 
 #: scripts/sim/logistics.gd:80
@@ -4621,6 +5033,10 @@ msgstr ""
 msgid "Due %s"
 msgstr ""
 
+#: data/economy/automotive.json
+msgid "Duke coupe"
+msgstr ""
+
 #: scripts/frontend/arrival_scene.gd:71
 msgid "E / click to skip"
 msgstr ""
@@ -4693,6 +5109,10 @@ msgstr ""
 msgid "Each stage needs occupancy, rating, reviews and staff, not only cash."
 msgstr ""
 
+#: data/help/glossary.json
+msgid "Each stage uses real cars and real customers: stock cars back bank loans, rentals follow airport passengers, and the franchise adds steady sales and service income."
+msgstr ""
+
 #: data/dialogue/ken_intro.json
 msgid "Earbuds, lamps, bottles, phone stands. MOQs are MOQs, don't haggle me on those."
 msgstr ""
@@ -4709,7 +5129,7 @@ msgstr ""
 msgid "Earn Your First Dollar"
 msgstr ""
 
-#: scripts/sim/bank.gd:140
+#: scripts/sim/bank.gd:145
 msgid "Earn about %s more gross profit through sales in Company OS, or add eligible collateral. Capacity is rounded down to $1,000 and capped at $250,000."
 msgstr ""
 
@@ -4749,7 +5169,7 @@ msgstr ""
 msgid "Ecommerce? Like... selling stuff online?"
 msgstr ""
 
-#: data/economy/shipping.json
+#: data/economy/automotive.json data/economy/shipping.json
 msgid "Economy"
 msgstr ""
 
@@ -4767,6 +5187,10 @@ msgstr ""
 
 #: data/dialogue/daniel_big_deal.json
 msgid "Eight hundred of them. Twenty-eight dollars each. Net 60."
+msgstr ""
+
+#: data/economy/automotive.json
+msgid "Electrical fault"
 msgstr ""
 
 #: data/economy/staff.json data/npcs/rafael_costa.json
@@ -4845,6 +5269,14 @@ msgstr ""
 msgid "End the day"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:280
+msgid "End the franchise"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:280
+msgid "EndFranchise"
+msgstr ""
+
 #: data/businesses/energy.json data/regions/almeria.json scripts/sim/energy.gd:791 scripts/ui/energy_ui.gd:20
 msgid "Energy"
 msgstr ""
@@ -4881,12 +5313,24 @@ msgstr ""
 msgid "Energy subsidy paid by City Hall: %s"
 msgstr ""
 
+#: data/economy/automotive.json
+msgid "Engine wear"
+msgstr ""
+
 #: data/events/hotel_equipment_failure.json
 msgid "Engineers fix it today and the rooms stay on sale."
 msgstr ""
 
 #: scripts/sim/manufacturing.gd:108
 msgid "Enter a positive unit price."
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:130
+msgid "Enter bidding · next %s"
+msgstr ""
+
+#: data/buildings/aurelia_auto_auction.json
+msgid "Enter the Wednesday auction"
 msgstr ""
 
 #: data/dialogue/henri_dubois_intro.json
@@ -5017,7 +5461,7 @@ msgstr ""
 msgid "Exactly as described. Fast shipping."
 msgstr ""
 
-#: scripts/sim/bank.gd:32
+#: scripts/sim/automotive.gd:104 scripts/sim/bank.gd:32
 msgid "Excellent"
 msgstr ""
 
@@ -5145,8 +5589,20 @@ msgstr ""
 msgid "Factory cash: %s · materials: %d units"
 msgstr ""
 
+#: scripts/sim/automotive.gd:689
+msgid "Factory delivery: %s"
+msgstr ""
+
 #: scripts/sim/manufacturing.gd:373
 msgid "Factory materials liquidated"
+msgstr ""
+
+#: scripts/sim/automotive.gd:771 scripts/sim/automotive.gd:888
+msgid "Factory order cancelled"
+msgstr ""
+
+#: scripts/sim/automotive.gd:679
+msgid "Factory order: %s"
 msgstr ""
 
 #: scripts/sim/manufacturing.gd:192
@@ -5193,7 +5649,7 @@ msgstr ""
 msgid "FactoryOvertime"
 msgstr ""
 
-#: scripts/sim/bank.gd:32
+#: scripts/sim/automotive.gd:104 scripts/sim/bank.gd:32
 msgid "Fair"
 msgstr ""
 
@@ -5259,6 +5715,10 @@ msgstr ""
 
 #: data/dialogue/rita_hale_intro.json
 msgid "Ferro supplies material lots. Watch minimum quantities, delivery dates and weekly prices."
+msgstr ""
+
+#: data/events/automotive_claim.json
+msgid "Fight the dispute"
 msgstr ""
 
 #: data/events/energy_rule.json
@@ -5421,8 +5881,48 @@ msgstr ""
 msgid "Flat white"
 msgstr ""
 
+#: scripts/sim/automotive.gd:740
+msgid "Fleet and lot insurance"
+msgstr ""
+
+#: scripts/sim/automotive.gd:441
+msgid "Fleet car sold: %s"
+msgstr ""
+
+#: scripts/sim/automotive.gd:647
+msgid "Fleet of %d cars and the rental counter"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Fleet utilisation"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:246
+msgid "FleetNextAirport"
+msgstr ""
+
 #: scripts/ui/modals/world_map_modal.gd:116
 msgid "Flight"
+msgstr ""
+
+#: data/city/aurelia.json
+msgid "Flights, car rental, the Wednesday auction and the cargo apron."
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:23
+msgid "Flip auction cars, run an airport rental fleet and sign a dealership franchise."
+msgstr ""
+
+#: data/economy/automotive.json
+msgid "Flood damage"
+msgstr ""
+
+#: data/events/automotive_flood.json
+msgid "Flood-damaged car on your lot"
+msgstr ""
+
+#: scripts/sim/automotive.gd:747
+msgid "Floor-plan interest"
 msgstr ""
 
 #: scripts/sim/cafe.gd:314
@@ -5527,6 +6027,38 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:734
 msgid "Founder · does everything nobody else does"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Franchise deposit and minimum stock"
+msgstr ""
+
+#: scripts/sim/automotive.gd:764 scripts/sim/automotive.gd:890
+msgid "Franchise deposit settled"
+msgstr ""
+
+#: scripts/sim/automotive.gd:658
+msgid "Franchise deposit: %s"
+msgstr ""
+
+#: scripts/sim/automotive.gd:751
+msgid "Franchise minimum-stock shortfall"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:266
+msgid "Franchise minimum: keep %d new cars in stock or on order. Missing cars cost %s each at month end."
+msgstr ""
+
+#: data/npcs/mara_quinn.json
+msgid "Franchise sales manager"
+msgstr ""
+
+#: scripts/sim/automotive.gd:73
+msgid "Franchised dealer"
+msgstr ""
+
+#: data/npcs/frank_doyle.json
+msgid "Frank Doyle"
 msgstr ""
 
 #: data/jobs/barista.json
@@ -5637,6 +6169,10 @@ msgstr ""
 msgid "Fuel instead of a courier fee, delivered today: cheaper per parcel, but the driving is your time."
 msgstr ""
 
+#: data/events/automotive_fuel.json
+msgid "Fuel price spike"
+msgstr ""
+
 #: scripts/ui/minigames/route_game.gd:158
 msgid "Fuel used: %.1f L (%s)"
 msgstr ""
@@ -5653,6 +6189,10 @@ msgstr ""
 msgid "Fulfilment pipeline"
 msgstr ""
 
+#: data/economy/automotive.json
+msgid "Full cover"
+msgstr ""
+
 #: scripts/sim/real_estate.gd:129
 msgid "Fund the first construction milestone before breaking ground."
 msgstr ""
@@ -5661,12 +6201,32 @@ msgstr ""
 msgid "Fund the next construction milestone."
 msgstr ""
 
+#: data/buildings/gateway_car_rental.json
+msgid "GATEWAY CAR RENTAL"
+msgstr ""
+
 #: scripts/ui/modals/permits_modal.gd:132 scripts/ui/modals/permits_modal.gd:66
 msgid "GRANTED"
 msgstr ""
 
 #: scripts/sim/media.gd:195
 msgid "GROUP-"
+msgstr ""
+
+#: data/buildings/gateway_car_rental.json
+msgid "Gateway Car Rental"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:198
+msgid "Gateway Car Rental counter leased."
+msgstr ""
+
+#: data/properties/gateway_counter.json
+msgid "Gateway rental counter"
+msgstr ""
+
+#: data/properties/gateway_showroom.json
+msgid "Gateway showroom"
 msgstr ""
 
 #: data/story/chapters.json
@@ -5705,6 +6265,10 @@ msgstr ""
 msgid "Getting paid"
 msgstr ""
 
+#: data/dialogue/jun_ito_intro.json
+msgid "Give me $150 and half an hour and I will tell you what is wrong underneath. Flood, engine, odometer: nobody else tells you before you bid. I also service your rental cars, if you hire me."
+msgstr ""
+
 #: data/world/years.json
 msgid "Global Consolidation"
 msgstr ""
@@ -5717,19 +6281,35 @@ msgstr ""
 msgid "Go see your city."
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:192
+msgid "Go to the auction"
+msgstr ""
+
 #: scripts/ui/modals/permits_modal.gd:21
 msgid "Go to the company registration counter"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:262
+msgid "Go to the rental fleet"
+msgstr ""
+
+#: scripts/ui/minigames/auction_game.gd:61
+msgid "Going once…"
 msgstr ""
 
 #: scripts/ui/tutorial.gd:28
 msgid "Going outside"
 msgstr ""
 
+#: scripts/ui/minigames/auction_game.gd:61
+msgid "Going twice…"
+msgstr ""
+
 #: data/dialogue/maya_intro.json
 msgid "Gonna build something of my own."
 msgstr ""
 
-#: scripts/sim/bank.gd:32
+#: scripts/sim/automotive.gd:104 scripts/sim/bank.gd:32
 msgid "Good"
 msgstr ""
 
@@ -6037,6 +6617,10 @@ msgstr ""
 msgid "Hand over the parcels you're carrying and choose economy (3 days) or express (1 day)."
 msgstr ""
 
+#: data/events/automotive_recall.json
+msgid "Handling costs $120 per car and they are off the road for three days."
+msgstr ""
+
 #: data/city/aurelia.json data/districts/harbor.json scripts/ui/minigames/pack_game.gd:9
 msgid "Harbor"
 msgstr ""
@@ -6091,6 +6675,10 @@ msgstr ""
 
 #: data/properties/realty_office.json
 msgid "Harlow & Finch brokerage office"
+msgstr ""
+
+#: data/economy/automotive.json
+msgid "Harrow SUV"
 msgstr ""
 
 #: data/character/options.json
@@ -6213,8 +6801,16 @@ msgstr ""
 msgid "Hi-vis vest, work trousers, steel-toe boots. For warehouse days."
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:124
+msgid "Hidden defects unknown. Paid inspection: %s."
+msgstr ""
+
 #: scripts/ui/modals/pause_menu.gd:55
 msgid "High"
+msgstr ""
+
+#: scripts/ui/minigames/auction_game.gd:59
+msgid "High bidder: %s · with fee %s"
 msgstr ""
 
 #: data/regions/northridge.json
@@ -6293,6 +6889,10 @@ msgstr ""
 msgid "Hold firm"
 msgstr ""
 
+#: data/events/automotive_fuel.json
+msgid "Hold prices"
+msgstr ""
+
 #: data/buildings/riverside_apartment.json data/character/options.json
 msgid "Home"
 msgstr ""
@@ -6355,6 +6955,10 @@ msgstr ""
 
 #: data/npcs/vera_stone.json
 msgid "Hotel critic"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:293
+msgid "Hotel guests add %d rental requests a day."
 msgstr ""
 
 #: scripts/sim/hotel.gd:410
@@ -6641,6 +7245,10 @@ msgstr ""
 msgid "In the Clearing Crisis (Year 5), money sent abroad takes days to land, and an importer ships only once it has."
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:166 scripts/ui/automotive_ui.gd:244
+msgid "In the workshop"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:509 scripts/ui/phone_ui.gd:266
 msgid "In transit"
 msgstr ""
@@ -6687,6 +7295,14 @@ msgstr ""
 
 #: data/help/help.json
 msgid "Inspect more to catch defects, or accept refunds and credit risk. Maintenance repairs broken machines."
+msgstr ""
+
+#: scripts/sim/automotive.gd:284
+msgid "Inspect the car first; only a known, repairable defect can be fixed."
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:128
+msgid "Inspect with Jun · %s"
 msgstr ""
 
 #: scripts/sim/manufacturing.gd:148
@@ -6761,8 +7377,16 @@ msgstr ""
 msgid "Insulated Water Bottle"
 msgstr ""
 
-#: scripts/sim/ledger.gd:32
+#: scripts/sim/ledger.gd:32 scripts/ui/automotive_ui.gd:219
 msgid "Insurance"
+msgstr ""
+
+#: data/events/automotive_claim.json
+msgid "Insurance claim dispute"
+msgstr ""
+
+#: scripts/sim/automotive.gd:617
+msgid "Insurance claim received: %s"
 msgstr ""
 
 #: scripts/ui/modals/van_deal_modal.gd:32
@@ -6771,6 +7395,10 @@ msgstr ""
 
 #: data/dialogue/sam_intro.json
 msgid "Insure it, keep it moving, and it earns. Leave it on the kerb and it is just a very expensive shed."
+msgstr ""
+
+#: scripts/sim/automotive.gd:808
+msgid "Insurer dispute settled at a discount"
 msgstr ""
 
 #: data/help/help.json
@@ -7025,6 +7653,26 @@ msgstr ""
 msgid "Jun"
 msgstr ""
 
+#: data/npcs/jun_ito.json
+msgid "Jun Ito"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:122
+msgid "Jun Ito found %s: true value %s."
+msgstr ""
+
+#: scripts/sim/automotive.gd:177
+msgid "Jun Ito has already inspected this car."
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:120
+msgid "Jun Ito: no hidden defect found."
+msgstr ""
+
+#: data/events/automotive_flood.json
+msgid "Jun spotted water lines under the carpet of a car you bought at auction. Disclose it and cut the price, pay for a repair, or list it quietly and hope."
+msgstr ""
+
 #: scripts/ui/minigames/barista_game.gd:10
 msgid "June"
 msgstr ""
@@ -7117,6 +7765,18 @@ msgstr ""
 msgid "Keep reach, spend more."
 msgstr ""
 
+#: data/events/automotive_recall.json
+msgid "Keep renting them"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:95
+msgid "Keep the dealer licence fee in the business account."
+msgstr ""
+
+#: scripts/sim/automotive.gd:648
+msgid "Keep the fleet on rent."
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Keep {company} stocked through the shock: 100 units in hand or on the way"
 msgstr ""
@@ -7177,8 +7837,16 @@ msgstr ""
 msgid "Kim"
 msgstr ""
 
+#: data/economy/automotive.json
+msgid "Kite wagon"
+msgstr ""
+
 #: data/dialogue/lina_intro.json
 msgid "Know who you're paying, and know who's holding your money in between. That's the whole job now."
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:168
+msgid "Known defect: %s (remaining value loss %d%%)."
 msgstr ""
 
 #: data/economy/logistics.json
@@ -7253,6 +7921,10 @@ msgstr ""
 msgid "Large cup"
 msgstr ""
 
+#: scripts/ui/minigames/auction_game.gd:61
+msgid "Last call…"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1330
 msgid "Last days"
 msgstr ""
@@ -7277,7 +7949,7 @@ msgstr ""
 msgid "Late fees"
 msgstr ""
 
-#: scripts/sim/bank.gd:273
+#: scripts/sim/bank.gd:278
 msgid "Late payment fee — loan %s"
 msgstr ""
 
@@ -7385,6 +8057,10 @@ msgstr ""
 msgid "Lease the Aster Inn · %s first month"
 msgstr ""
 
+#: scripts/sim/automotive.gd:370
+msgid "Lease the Gateway Car Rental counter first."
+msgstr ""
+
 #: data/economy/staff.json
 msgid "Lease the Helio warehouse before hiring an electrician."
 msgstr ""
@@ -7411,6 +8087,18 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1231
 msgid "Lease the corner unit"
+msgstr ""
+
+#: data/buildings/gateway_car_rental.json
+msgid "Lease the rental counter"
+msgstr ""
+
+#: data/buildings/gateway_car_rental.json
+msgid "Lease the showroom"
+msgstr ""
+
+#: scripts/sim/automotive.gd:649
+msgid "Lease the showroom at Gateway Car Rental."
 msgstr ""
 
 #: scripts/sim/cafe.gd:96
@@ -7461,6 +8149,10 @@ msgstr ""
 msgid "Legacy"
 msgstr ""
 
+#: scripts/sim/automotive.gd:810
+msgid "Legal fee for an insurer dispute"
+msgstr ""
+
 #: scripts/ui/minigames/cowork_host_game.gd:7
 msgid "Lena"
 msgstr ""
@@ -7469,7 +8161,7 @@ msgstr ""
 msgid "Lena Park"
 msgstr ""
 
-#: scripts/sim/bank.gd:139
+#: scripts/sim/bank.gd:144
 msgid "Lending capacity"
 msgstr ""
 
@@ -7621,8 +8313,20 @@ msgstr ""
 msgid "List a product you have in stock. Shoot the photos yourself (a photo shoot you play) or pay Studio Lumen $120 for pro photos."
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:188
+msgid "List for sale"
+msgstr ""
+
+#: data/events/automotive_flood.json
+msgid "List it quietly"
+msgstr ""
+
 #: scripts/ui/real_estate_ui.gd:165
 msgid "List rental · estimated vacancy %d days"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:166
+msgid "Listed"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:496
@@ -7657,19 +8361,19 @@ msgstr ""
 msgid "Loading dock"
 msgstr ""
 
-#: scripts/sim/bank.gd:243
+#: scripts/sim/bank.gd:248
 msgid "Loan %s repaid in full."
 msgstr ""
 
-#: scripts/sim/bank.gd:244
+#: scripts/sim/bank.gd:249
 msgid "Loan %s repaid in full. Your credit score went up."
 msgstr ""
 
-#: scripts/sim/bank.gd:228
+#: scripts/sim/bank.gd:233
 msgid "Loan %s — extra repayment"
 msgstr ""
 
-#: scripts/sim/bank.gd:259
+#: scripts/sim/bank.gd:264
 msgid "Loan %s — monthly payment"
 msgstr ""
 
@@ -7677,7 +8381,7 @@ msgstr ""
 msgid "Loan appointment"
 msgstr ""
 
-#: scripts/sim/bank.gd:183
+#: scripts/sim/bank.gd:188
 msgid "Loan appointment: %s. Go to Marcus Reed's manager desk at Nexus Bank, Financial District. If you miss the slot, book again at the lending sign."
 msgstr ""
 
@@ -7769,6 +8473,10 @@ msgstr ""
 msgid "Look at the lighting display"
 msgstr ""
 
+#: data/buildings/cargo_terminal.json
+msgid "Look at the manifest screen"
+msgstr ""
+
 #: data/buildings/the_aster.json
 msgid "Look at the room list"
 msgstr ""
@@ -7819,6 +8527,10 @@ msgstr ""
 
 #: data/properties/lot7_land.json
 msgid "Lot 7 development land"
+msgstr ""
+
+#: scripts/sim/automotive.gd:847
+msgid "Lot storage and preparation"
 msgstr ""
 
 #: data/economy/marketplace.json
@@ -7875,6 +8587,10 @@ msgstr ""
 
 #: data/city/aurelia.json data/districts/luxury_heights.json
 msgid "Luxury Heights"
+msgstr ""
+
+#: data/buildings/cargo_terminal.json
+msgid "MANIFEST: 14 pallets of electronics, 6 crates of machine parts and a pallet of coffee are waiting for the evening freighter."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:203
@@ -7961,6 +8677,10 @@ msgstr ""
 msgid "Management lists keep their scroll position. Story goals recover from declined contracts and difficult cash-flow months."
 msgstr ""
 
+#: data/events/automotive_recall.json
+msgid "Manufacturer recall"
+msgstr ""
+
 #: data/businesses/manufacturing.json data/help/glossary.json data/regions/lumina.json scripts/sim/manufacturing.gd:384
 msgid "Manufacturing"
 msgstr ""
@@ -8011,6 +8731,10 @@ msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:8
 msgid "Mara Lindqvist"
+msgstr ""
+
+#: data/npcs/mara_quinn.json
+msgid "Mara Quinn"
 msgstr ""
 
 #: data/npcs/marcus.json
@@ -8221,6 +8945,10 @@ msgstr ""
 msgid "Meet Marcus Reed now"
 msgstr ""
 
+#: scripts/sim/automotive.gd:656
+msgid "Meet every franchise requirement first."
+msgstr ""
+
 #: scripts/sim/hotel.gd:106
 msgid "Meet every growth condition first."
 msgstr ""
@@ -8229,8 +8957,32 @@ msgstr ""
 msgid "Menu"
 msgstr ""
 
+#: data/economy/automotive.json
+msgid "Meridian City"
+msgstr ""
+
+#: data/economy/automotive.json
+msgid "Meridian City hatch"
+msgstr ""
+
+#: data/economy/automotive.json
+msgid "Meridian Family"
+msgstr ""
+
+#: data/economy/automotive.json
+msgid "Meridian Motors"
+msgstr ""
+
 #: data/economy/energy.json
 msgid "Meridian Parking"
+msgstr ""
+
+#: data/economy/automotive.json
+msgid "Meridian Trail SUV"
+msgstr ""
+
+#: data/dialogue/mara_quinn_intro.json
+msgid "Meridian and Volt sell steady volume on thin margins. You need a ten-car fleet, a showroom and a deposit, and you must always keep new cars on the floor. Service tickets after the sale are where the dealership earns."
 msgstr ""
 
 #: scripts/ui/phone_ui.gd:127 scripts/ui/phone_ui.gd:181
@@ -8263,6 +9015,10 @@ msgstr ""
 
 #: scripts/world/district.gd:76
 msgid "Metro — %s Station"
+msgstr ""
+
+#: data/districts/airport.json
+msgid "Metro — Airport"
 msgstr ""
 
 #: data/districts/luxury_heights.json
@@ -8311,6 +9067,10 @@ msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:154
 msgid "Minimum tenant credit: %d points"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Miss the stock minimum twice and the factory ends the franchise and keeps part of the deposit."
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:788
@@ -8525,6 +9285,14 @@ msgstr ""
 msgid "My favourite tenant! Open before seven and the builders from the clock tower job will keep you in business."
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:160 scripts/ui/automotive_ui.gd:70
+msgid "My lot"
+msgstr ""
+
+#: data/buildings/aurelia_auto_auction.json
+msgid "My lot and listings"
+msgstr ""
+
 #: scripts/frontend/character_creator.gd:79
 msgid "NAME"
 msgstr ""
@@ -8633,6 +9401,14 @@ msgstr ""
 msgid "New Game"
 msgstr ""
 
+#: scripts/sim/automotive.gd:767
+msgid "New car returned to the factory: %s"
+msgstr ""
+
+#: scripts/sim/automotive.gd:719
+msgid "New car sold: %s"
+msgstr ""
+
 #: data/dialogue/jun_first.json
 msgid "New face. Flat white?"
 msgstr ""
@@ -8697,11 +9473,11 @@ msgstr ""
 msgid "Nexus Bank Estates"
 msgstr ""
 
-#: scripts/sim/bank.gd:310
+#: scripts/sim/bank.gd:315
 msgid "Nexus Bank called loan %s and it could not be repaid."
 msgstr ""
 
-#: scripts/sim/bank.gd:284
+#: scripts/sim/bank.gd:289
 msgid "Nexus Bank called loan %s. %s due in 7 days."
 msgstr ""
 
@@ -8709,7 +9485,7 @@ msgstr ""
 msgid "Nexus Bank guarantees the payment to the supplier's bank. They ship on the bank's word in about 2 days."
 msgstr ""
 
-#: scripts/sim/bank.gd:210
+#: scripts/sim/bank.gd:215
 msgid "Nexus Bank loan %s: %s over %d months at %s"
 msgstr ""
 
@@ -8785,6 +9561,10 @@ msgstr ""
 msgid "No battery"
 msgstr ""
 
+#: scripts/ui/minigames/auction_game.gd:59
+msgid "No bids yet."
+msgstr ""
+
 #: data/economy/hotel.json
 msgid "No breakfast"
 msgstr ""
@@ -8803,6 +9583,10 @@ msgstr ""
 
 #: data/events/customer_return_first.json
 msgid "No cost today. 1★ review, and they might open a dispute."
+msgstr ""
+
+#: data/economy/automotive.json
+msgid "No cover"
 msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:45
@@ -8829,6 +9613,10 @@ msgstr ""
 msgid "No employees yet. Every order is packed by you, which is why time matters."
 msgstr ""
 
+#: scripts/sim/automotive.gd:420
+msgid "No fleet car needs service."
+msgstr ""
+
 #: scripts/sim/manufacturing.gd:51
 msgid "No free machine bay."
 msgstr ""
@@ -8841,7 +9629,7 @@ msgstr ""
 msgid "No group block is waiting. New offers arrive every Monday morning."
 msgstr ""
 
-#: scripts/sim/bank.gd:132
+#: scripts/sim/bank.gd:137
 msgid "No lending ban"
 msgstr ""
 
@@ -8851,6 +9639,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:233
 msgid "No listings yet. Buy stock (Operations), then list it (Sales)."
+msgstr ""
+
+#: data/events/automotive_recall.json
+msgid "No lost rentals, but each car may break down over the next three weeks."
 msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:8
@@ -8921,12 +9713,16 @@ msgstr ""
 msgid "No such gig in progress."
 msgstr ""
 
-#: scripts/sim/bank.gd:224
+#: scripts/sim/bank.gd:229
 msgid "No such loan."
 msgstr ""
 
 #: scripts/sim/contracts.gd:342
 msgid "No supplier carries this product."
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:163
+msgid "No used cars on your lot. Win one at the Wednesday auction."
 msgstr ""
 
 #: data/dialogue/lina_bridge.json
@@ -9009,7 +9805,7 @@ msgstr ""
 msgid "Not enough cash for this purchase."
 msgstr ""
 
-#: scripts/sim/bank.gd:227 scripts/sim/company.gd:105
+#: scripts/sim/bank.gd:232 scripts/sim/company.gd:105
 msgid "Not enough cash."
 msgstr ""
 
@@ -9053,7 +9849,7 @@ msgstr ""
 msgid "Not today."
 msgstr ""
 
-#: scripts/sim/bank.gd:134
+#: scripts/sim/bank.gd:139
 msgid "Not while a loan is in arrears."
 msgstr ""
 
@@ -9253,6 +10049,10 @@ msgstr ""
 msgid "Oct"
 msgstr ""
 
+#: data/economy/automotive.json
+msgid "Odometer rollback"
+msgstr ""
+
 #: data/dialogue/maya_intro.json
 msgid "Of course you are."
 msgstr ""
@@ -9353,8 +10153,16 @@ msgstr ""
 msgid "On hand"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:244
+msgid "On rent"
+msgstr ""
+
 #: scripts/ui/minigames/cowork_host_game.gd:29
 msgid "On the list? Check them in. Not on the list, or asking to work here today? Sell a day pass ($15)."
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:166
+msgid "On the lot"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:946
@@ -9425,6 +10233,10 @@ msgstr ""
 msgid "Open %s · %s"
 msgstr ""
 
+#: scripts/sim/automotive.gd:907 scripts/ui/automotive_ui.gd:24 scripts/ui/automotive_ui.gd:30
+msgid "Open Auto Desk"
+msgstr ""
+
 #: scripts/ui/tutorial.gd:48
 msgid "Open Businesses"
 msgstr ""
@@ -9469,7 +10281,7 @@ msgstr ""
 msgid "Open Sales"
 msgstr ""
 
-#: scripts/sim/bank.gd:130
+#: scripts/sim/bank.gd:135
 msgid "Open a business account at the Nexus Bank counter, Financial District."
 msgstr ""
 
@@ -9481,8 +10293,12 @@ msgstr ""
 msgid "Open a business account for {company} at Nexus Bank (Financial District)"
 msgstr ""
 
-#: scripts/sim/bank.gd:130
+#: scripts/sim/bank.gd:135
 msgid "Open a business account with us first."
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:94
+msgid "Open a business bank account."
 msgstr ""
 
 #: scripts/sim/energy.gd:727
@@ -9529,6 +10345,22 @@ msgstr ""
 msgid "Open the agency first."
 msgstr ""
 
+#: data/dialogue/frank_doyle_intro.json data/dialogue/jun_ito_intro.json
+msgid "Open the auction desk"
+msgstr ""
+
+#: data/economy/staff.json
+msgid "Open the auto desk before hiring a technician."
+msgstr ""
+
+#: scripts/sim/automotive.gd:369 scripts/sim/automotive.gd:786
+msgid "Open the auto desk first."
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:97
+msgid "Open the auto desk · licence %s"
+msgstr ""
+
 #: scripts/ui/real_estate_ui.gd:69
 msgid "Open the brokerage"
 msgstr ""
@@ -9573,12 +10405,20 @@ msgstr ""
 msgid "Open the factory first."
 msgstr ""
 
+#: data/buildings/gateway_car_rental.json
+msgid "Open the fleet desk"
+msgstr ""
+
 #: scripts/sim/media.gd:193 scripts/sim/media.gd:194
 msgid "Open the group business before buying internal media."
 msgstr ""
 
 #: scripts/sim/hotel.gd:153 scripts/sim/hotel.gd:649
 msgid "Open the hotel first."
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:294
+msgid "Open the rental fleet"
 msgstr ""
 
 #: scripts/ui/energy_ui.gd:84
@@ -9595,6 +10435,10 @@ msgstr ""
 
 #: scripts/ui/media_ui.gd:52
 msgid "OpenAgency"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:97
+msgid "OpenAutoDesk"
 msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:69
@@ -9629,6 +10473,10 @@ msgstr ""
 msgid "Opened a solar installation business at the Helio warehouse."
 msgstr ""
 
+#: scripts/sim/automotive.gd:56
+msgid "Opened an auto desk at Aurelia Auto Auction."
+msgstr ""
+
 #: scripts/sim/rails.gd:42
 msgid "Opened an escrow account on Lina Zhao's payments platform."
 msgstr ""
@@ -9639,6 +10487,10 @@ msgstr ""
 
 #: autoload/game_state.gd:40
 msgid "Opening balance — savings"
+msgstr ""
+
+#: scripts/ui/minigames/auction_game.gd:55
+msgid "Opening bid %s"
 msgstr ""
 
 #: scripts/sim/hotel.gd:92
@@ -9701,8 +10553,16 @@ msgstr ""
 msgid "Order %d more from %s (%s)"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:271
+msgid "Order %d × %s · %s"
+msgstr ""
+
 #: scripts/ui/manufacturing_ui.gd:143
 msgid "Order %s · machine %s"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:278
+msgid "Order +1"
 msgstr ""
 
 #: scripts/ui/manufacturing_ui.gd:104
@@ -9711,6 +10571,10 @@ msgstr ""
 
 #: data/buildings/byte_and_bean.json data/buildings/shift_diner.json
 msgid "Order an oat latte ($5.20)"
+msgstr ""
+
+#: scripts/sim/automotive.gd:673
+msgid "Order at least the franchise minimum quantity."
 msgstr ""
 
 #: data/buildings/bloom_coffee.json
@@ -9735,6 +10599,18 @@ msgstr ""
 
 #: data/dialogue/ken_intro.json
 msgid "Order through TradeLink on your laptop. Two days to your door."
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:279
+msgid "Order −1"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:279
+msgid "OrderLess"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:278
+msgid "OrderMore"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1000
@@ -9821,7 +10697,7 @@ msgstr ""
 msgid "Overdraft fee"
 msgstr ""
 
-#: scripts/sim/bank.gd:133
+#: scripts/sim/bank.gd:138
 msgid "Overdue or called loans"
 msgstr ""
 
@@ -10181,6 +11057,10 @@ msgstr ""
 msgid "Partial refund sent."
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:285
+msgid "Passenger flow"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1433
 msgid "Past its deadline (%s): the pay is cut"
 msgstr ""
@@ -10253,12 +11133,16 @@ msgstr ""
 msgid "Pay bills on time to protect credit; an appointment alone cannot override unpaid arrears or a low score."
 msgstr ""
 
-#: scripts/sim/bank.gd:132
+#: scripts/sim/bank.gd:137
 msgid "Pay bills on time. Lending ban ends: %s."
 msgstr ""
 
 #: data/help/glossary.json
 msgid "Pay construction milestones on an approved, named project. Delays and overruns change the budget."
+msgstr ""
+
+#: data/events/automotive_flood.json
+msgid "Pay for a proper repair"
 msgstr ""
 
 #: scripts/ui/modals/loan_modal.gd:126
@@ -10279,6 +11163,10 @@ msgstr ""
 
 #: data/events/media_price.json
 msgid "Pay the higher rates"
+msgstr ""
+
+#: data/events/automotive_claim.json
+msgid "Pay the repair yourself"
 msgstr ""
 
 #: scripts/ui/modals/settlement_modal.gd:95
@@ -10375,6 +11263,10 @@ msgstr ""
 
 #: data/events/energy_subsidy_cut.json
 msgid "Pending applications keep the old grant; new ones pay half for 90 days."
+msgstr ""
+
+#: data/city/aurelia.json
+msgid "Penthouses, clubs, fine dining."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:7
@@ -10561,7 +11453,7 @@ msgstr ""
 msgid "Ponytail"
 msgstr ""
 
-#: scripts/sim/bank.gd:32
+#: scripts/sim/automotive.gd:104 scripts/sim/bank.gd:32
 msgid "Poor"
 msgstr ""
 
@@ -10641,8 +11533,16 @@ msgstr ""
 msgid "Posted runs"
 msgstr ""
 
+#: scripts/sim/automotive.gd:180
+msgid "Pre-auction inspection"
+msgstr ""
+
 #: data/regions/zenkai.json
 msgid "Precision manufacturing"
+msgstr ""
+
+#: data/economy/automotive.json
+msgid "Premium"
 msgstr ""
 
 #: data/regions/auroria.json
@@ -10671,6 +11571,10 @@ msgstr ""
 
 #: scripts/frontend/character_creator.gd:130
 msgid "Presentation"
+msgstr ""
+
+#: data/help/help.json
+msgid "Press Bid to raise by one step. Bidders raise until they reach private limits; after a few quiet ticks the hammer falls."
 msgstr ""
 
 #: scripts/ui/tutorial.gd:86
@@ -10707,6 +11611,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "Price and your rating move conversion; flyers bring more people past the door."
+msgstr ""
+
+#: scripts/sim/automotive.gd:314
+msgid "Price between 80% and 130% of the market value."
 msgstr ""
 
 #: data/dialogue/henri_dubois_intro.json
@@ -10849,7 +11757,7 @@ msgstr ""
 msgid "Property viewing"
 msgstr ""
 
-#: scripts/sim/bank.gd:113
+#: scripts/sim/bank.gd:117
 msgid "Property worth less than its mortgage"
 msgstr ""
 
@@ -10859,6 +11767,14 @@ msgstr ""
 
 #: data/jobs/barista.json
 msgid "Pull shots behind Jun's counter and learn how regulars decide what to buy."
+msgstr ""
+
+#: data/events/automotive_recall.json
+msgid "Pull the cars for repair"
+msgstr ""
+
+#: data/events/automotive_fuel.json
+msgid "Pump prices jumped and airport travellers are renting fewer cars. Cut rates for two weeks to keep the fleet moving, or hold your prices and ride out weaker demand."
 msgstr ""
 
 #: data/help/glossary.json
@@ -11081,6 +11997,14 @@ msgstr ""
 msgid "Rate Board: price, channels, rooms"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:216
+msgid "Rate_%s_%s"
+msgstr ""
+
+#: data/events/automotive_fuel.json
+msgid "Rates drop 8% for 14 days and demand recovers faster."
+msgstr ""
+
 #: data/world/years.json
 msgid "Rates stay low as startup filings hit a record."
 msgstr ""
@@ -11125,6 +12049,18 @@ msgstr ""
 msgid "Read audience, goal and deadline. Create a pitch, then submit it; losing costs time and money."
 msgstr ""
 
+#: data/buildings/airport_terminal.json
+msgid "Read the arrivals board"
+msgstr ""
+
+#: data/buildings/aurelia_auto_auction.json
+msgid "Read the auction rules"
+msgstr ""
+
+#: data/buildings/cargo_terminal.json
+msgid "Read the cargo apron notice board"
+msgstr ""
+
 #: data/help/patch_notes.json
 msgid "Read the explanation badges beside cash, invoices, loans, staff, subscriptions, and shipping whenever you need help."
 msgstr ""
@@ -11153,6 +12089,14 @@ msgstr ""
 msgid "Read: 'Small Business Lending'"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:244
+msgid "Ready"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:171
+msgid "Ready on day %d."
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:427
 msgid "Ready to list (you have these in hand)"
 msgstr ""
@@ -11175,6 +12119,10 @@ msgstr ""
 
 #: data/economy/media.json
 msgid "Reassuring"
+msgstr ""
+
+#: scripts/sim/automotive.gd:819
+msgid "Recall handling: %s"
 msgstr ""
 
 #: data/help/glossary.json
@@ -11219,6 +12167,10 @@ msgstr ""
 
 #: data/buildings/nexus_cowork.json
 msgid "Reception — desks & day passes"
+msgstr ""
+
+#: scripts/sim/automotive.gd:289
+msgid "Reconditioning: %s"
 msgstr ""
 
 #: data/jobs/city_clerk.json
@@ -11361,7 +12313,7 @@ msgstr ""
 msgid "Register (%s)"
 msgstr ""
 
-#: scripts/sim/energy.gd:32 scripts/sim/hotel.gd:40 scripts/sim/media.gd:16 scripts/sim/real_estate.gd:17
+#: scripts/sim/automotive.gd:43 scripts/sim/energy.gd:32 scripts/sim/hotel.gd:40 scripts/sim/media.gd:16
 msgid "Register a company and open its bank account first."
 msgstr ""
 
@@ -11381,7 +12333,7 @@ msgstr ""
 msgid "Register a company before leasing the warehouse office."
 msgstr ""
 
-#: scripts/sim/manufacturing.gd:18 scripts/sim/staff.gd:55
+#: scripts/sim/manufacturing.gd:18 scripts/sim/staff.gd:55 scripts/ui/automotive_ui.gd:93
 msgid "Register a company first."
 msgstr ""
 
@@ -11393,7 +12345,7 @@ msgstr ""
 msgid "Register as an employer here before you hire staff."
 msgstr ""
 
-#: scripts/sim/bank.gd:128
+#: scripts/sim/bank.gd:133
 msgid "Register at City Hall, Civic Center."
 msgstr ""
 
@@ -11425,7 +12377,7 @@ msgstr ""
 msgid "Registered as an employer (%s). You can post jobs in Company OS → People."
 msgstr ""
 
-#: scripts/sim/bank.gd:127
+#: scripts/sim/bank.gd:132
 msgid "Registered company"
 msgstr ""
 
@@ -11609,6 +12561,34 @@ msgstr ""
 msgid "RentRealtyBuilding"
 msgstr ""
 
+#: scripts/sim/automotive.gd:615
+msgid "Rental damage repair: %s"
+msgstr ""
+
+#: data/events/automotive_fuel.json
+msgid "Rental demand falls and recovers slowly over three weeks."
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:196 scripts/ui/automotive_ui.gd:70
+msgid "Rental fleet"
+msgstr ""
+
+#: scripts/sim/automotive.gd:73
+msgid "Rental fleet operator"
+msgstr ""
+
+#: data/help/help.json
+msgid "Rental fleet: lease the Gateway counter, buy cars, set day and week rates and schedule services. Skipped service causes breakdowns mid-rental."
+msgstr ""
+
+#: scripts/sim/automotive.gd:627
+msgid "Rental interrupted: %s"
+msgstr ""
+
+#: scripts/sim/automotive.gd:591
+msgid "Rental returned: %s"
+msgstr ""
+
 #: data/help/help.json
 msgid "Renting an office"
 msgstr ""
@@ -11621,12 +12601,24 @@ msgstr ""
 msgid "Repair and service · %s"
 msgstr ""
 
+#: scripts/sim/automotive.gd:812
+msgid "Repair paid after a lost dispute"
+msgstr ""
+
+#: scripts/sim/automotive.gd:807
+msgid "Repair paid after an insurer dispute"
+msgstr ""
+
 #: data/events/energy_vandal.json
 msgid "Repair the damage now"
 msgstr ""
 
 #: scripts/ui/energy_ui.gd:181
 msgid "Repair under warranty · %s"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:178
+msgid "Repair · %s"
 msgstr ""
 
 #: data/events/energy_typhoon.json
@@ -11641,7 +12633,7 @@ msgstr ""
 msgid "Repay %s"
 msgstr ""
 
-#: scripts/sim/bank.gd:134
+#: scripts/sim/bank.gd:139
 msgid "Repay overdue loans in this screen; if the company is in insolvency, use the recovery options."
 msgstr ""
 
@@ -11889,6 +12881,10 @@ msgstr ""
 msgid "Review OEM orders"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:132
+msgid "Review my lot"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1489
 msgid "Review next action"
 msgstr ""
@@ -11991,6 +12987,10 @@ msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:9
 msgid "Riverstone Bakery"
+msgstr ""
+
+#: scripts/sim/automotive.gd:629
+msgid "Roadside tow: %s"
 msgstr ""
 
 #: data/help/glossary.json scripts/ui/energy_ui.gd:63
@@ -12097,8 +13097,16 @@ msgstr ""
 msgid "RouteAgencyPrerequisite"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:100
+msgid "RouteAutoPrerequisite"
+msgstr ""
+
 #: scripts/ui/energy_ui.gd:87
 msgid "RouteEnergyPrerequisite"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:201
+msgid "RouteGateway"
 msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:72
@@ -12249,6 +13257,10 @@ msgstr ""
 msgid "SUPPLIES"
 msgstr ""
 
+#: data/economy/automotive.json
+msgid "SUV"
+msgstr ""
+
 #: data/regions/northridge.json scripts/sim/saas.gd:201
 msgid "SaaS"
 msgstr ""
@@ -12341,8 +13353,20 @@ msgstr ""
 msgid "Save backup"
 msgstr ""
 
+#: scripts/sim/automotive.gd:650
+msgid "Save cash or arrange a bank loan."
+msgstr ""
+
 #: data/events/ad_cost_spike.json
 msgid "Save cash. Sales will dip."
+msgstr ""
+
+#: scripts/sim/automotive.gd:193
+msgid "Save enough cash for the bid and the buyer fee first."
+msgstr ""
+
+#: scripts/sim/automotive.gd:676
+msgid "Save enough cash for the factory order first."
 msgstr ""
 
 #: autoload/save_system.gd:354
@@ -12389,6 +13413,10 @@ msgstr ""
 msgid "Save the creative production cost first."
 msgstr ""
 
+#: scripts/sim/automotive.gd:48
+msgid "Save the dealer licence fee first."
+msgstr ""
+
 #: scripts/sim/hotel.gd:666
 msgid "Save the emergency repair cost first."
 msgstr ""
@@ -12421,6 +13449,10 @@ msgstr ""
 msgid "Save the housekeeping bonus first."
 msgstr ""
 
+#: scripts/sim/automotive.gd:179
+msgid "Save the inspection fee first."
+msgstr ""
+
 #: scripts/sim/energy.gd:288
 msgid "Save the panel materials cost first."
 msgstr ""
@@ -12447,6 +13479,10 @@ msgstr ""
 
 #: scripts/sim/media.gd:234
 msgid "Save the rate-lock fee first."
+msgstr ""
+
+#: scripts/sim/automotive.gd:288
+msgid "Save the reconditioning cost first."
 msgstr ""
 
 #: scripts/sim/hotel.gd:625
@@ -12557,6 +13593,10 @@ msgstr ""
 msgid "Sell a day pass ($15)"
 msgstr ""
 
+#: data/buildings/dockside_motors.json
+msgid "Sell a used car to Dockside Motors"
+msgstr ""
+
 #: data/events/low_cash_warning.json
 msgid "Sell all stock to a liquidator (40% of cost)"
 msgstr ""
@@ -12665,12 +13705,32 @@ msgstr ""
 msgid "Service %s equipment · %s"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:210
+msgid "Service due cars · %s"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:227
+msgid "Service every"
+msgstr ""
+
 #: scripts/ui/manufacturing_ui.gd:98
 msgid "Service machine"
 msgstr ""
 
+#: scripts/sim/automotive.gd:410
+msgid "Service the car after the rental returns."
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:176
+msgid "Service · %s"
+msgstr ""
+
 #: scripts/ui/minigames/barista_game.gd:140
 msgid "Service: %d%%"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:210
+msgid "ServiceDue"
 msgstr ""
 
 #: scripts/world/building_info.gd:197 scripts/world/building_info.gd:202
@@ -12691,6 +13751,10 @@ msgstr ""
 
 #: scripts/ui/minigames/photo_shoot_game.gd:39
 msgid "Set up the shot: pick a backdrop, the light and an optional styling prop."
+msgstr ""
+
+#: data/events/automotive_claim.json
+msgid "Settle for half"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:881
@@ -12929,6 +13993,14 @@ msgstr ""
 msgid "Show me what you can do."
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:275
+msgid "Showroom discount"
+msgstr ""
+
+#: scripts/sim/automotive.gd:649
+msgid "Showroom leased"
+msgstr ""
+
 #: data/character/options.json
 msgid "Side part"
 msgstr ""
@@ -12937,8 +14009,16 @@ msgstr ""
 msgid "Sightseeing"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:261
+msgid "Sign %s%s · deposit %s"
+msgstr ""
+
 #: data/events/supply_shock_plan.json
 msgid "Sign a 60-day supply agreement with {supplier} ($600 fee)"
+msgstr ""
+
+#: scripts/sim/automotive.gd:669 scripts/sim/automotive.gd:758
+msgid "Sign a franchise first."
 msgstr ""
 
 #: scripts/ui/modals/lease_modal.gd:40
@@ -12959,6 +14039,10 @@ msgstr ""
 
 #: scripts/sim/contracts.gd:137
 msgid "Signed contract %s with %s: %s."
+msgstr ""
+
+#: scripts/sim/automotive.gd:662
+msgid "Signed the %s franchise."
 msgstr ""
 
 #: data/help/help.json scripts/ui/modals/loan_signing_modal.gd:15
@@ -13157,6 +14241,14 @@ msgstr ""
 msgid "Solar panel shortage"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:244
+msgid "Sold"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:190
+msgid "Sold %d cars · profit so far %s"
+msgstr ""
+
 #: scripts/sim/ecommerce.gd:1257
 msgid "Sold %d × %s to liquidator (%d%% of cost)"
 msgstr ""
@@ -13175,6 +14267,10 @@ msgstr ""
 
 #: data/events/low_cash_warning.json
 msgid "Sold inventory to a liquidator to stay afloat."
+msgstr ""
+
+#: scripts/sim/automotive.gd:352
+msgid "Sold to Dockside Motors: %s"
 msgstr ""
 
 #: scripts/ui/minigames/mini_game.gd:182
@@ -13417,6 +14513,10 @@ msgstr ""
 msgid "Stock at cost"
 msgstr ""
 
+#: scripts/sim/automotive.gd:884
+msgid "Stock car auctioned: %s"
+msgstr ""
+
 #: scripts/ui/modals/pack_ship_modal.gd:25
 msgid "Stock here: "
 msgstr ""
@@ -13457,8 +14557,16 @@ msgstr ""
 msgid "Stock up now: {moq} more {product}"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:192
+msgid "StockNextAuction"
+msgstr ""
+
 #: data/economy/saas.json
 msgid "Stockroom"
+msgstr ""
+
+#: scripts/ui/minigames/auction_game.gd:47
+msgid "Stop bidding"
 msgstr ""
 
 #: data/economy/marketplace.json
@@ -13797,6 +14905,14 @@ msgstr ""
 msgid "Taking this job means leaving %s."
 msgstr ""
 
+#: data/dialogue/mara_quinn_intro.json
+msgid "Talk franchise"
+msgstr ""
+
+#: data/buildings/gateway_car_rental.json
+msgid "Talk franchise with Mara"
+msgstr ""
+
 #: scripts/world/named_npc.gd:24 scripts/world/staff_npc.gd:19
 msgid "Talk to %s"
 msgstr ""
@@ -13839,6 +14955,10 @@ msgstr ""
 
 #: data/regions/zenkai.json
 msgid "Tech competition"
+msgstr ""
+
+#: data/npcs/jun_ito.json
+msgid "Technician"
 msgstr ""
 
 #: data/jobs/bank_teller.json
@@ -14045,6 +15165,18 @@ msgstr ""
 msgid "The arrow guides you to the door; wait until opening hours to enter."
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:112
+msgid "The auction is live until %02d:00. Bid in the Auction game; the buyer fee is %d%%."
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:114
+msgid "The auction runs Wednesdays 09:00–17:00. Next one in %d days: inspect lots now, bid then."
+msgstr ""
+
+#: scripts/sim/automotive.gd:45
+msgid "The auto desk is already open."
+msgstr ""
+
 #: data/help/glossary.json
 msgid "The average book cost of stock sold to customers during the month. Stock still on the shelf is inventory, not this expense."
 msgstr ""
@@ -14121,6 +15253,14 @@ msgstr ""
 msgid "The business closed during the negotiation."
 msgstr ""
 
+#: scripts/ui/minigames/auction_game.gd:26
+msgid "The buyer fee is added to the hammer price. Hidden defects are not shown unless Jun inspected the car."
+msgstr ""
+
+#: data/help/help.json
+msgid "The buyer fee is added to the price. Stop bidding when the price passes what the car is worth to you."
+msgstr ""
+
 #: data/help/glossary.json
 msgid "The buyer pays a percentage of the contract before delivery; the remainder follows the payment terms."
 msgstr ""
@@ -14131,6 +15271,10 @@ msgstr ""
 
 #: data/events/media_client.json
 msgid "The campaign stops. The unused advance is refunded and your reputation takes a hit."
+msgstr ""
+
+#: data/events/automotive_flood.json
+msgid "The car is priced as a flood car; no claims will follow."
 msgstr ""
 
 #: data/dialogue/owen_blake_intro.json
@@ -14187,6 +15331,10 @@ msgstr ""
 
 #: scripts/ui/modals/insolvency_modal.gd:37
 msgid "The company is solvent again. Your savings took the hit."
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:200
+msgid "The counter costs %s per month. Lease it at Gateway Car Rental in the Airport district."
 msgstr ""
 
 #: data/help/glossary.json
@@ -14277,6 +15425,10 @@ msgstr ""
 msgid "The hotel is already open."
 msgstr ""
 
+#: data/events/automotive_claim.json
+msgid "The insurer disputes a $3,200 accident repair on one of your rental cars. Pay it yourself, fight it with a lawyer, or settle for half."
+msgstr ""
+
 #: data/help/glossary.json
 msgid "The interest costs far less than missing payroll or rent. Repay it as soon as the money arrives."
 msgstr ""
@@ -14353,6 +15505,10 @@ msgstr ""
 msgid "The packing table"
 msgstr ""
 
+#: scripts/sim/automotive.gd:371
+msgid "The parking lot is full."
+msgstr ""
+
 #: data/story/chapters.json
 msgid "The payment is stuck: talk to Lina Zhao at Nexus Bank (weekdays 10–16)"
 msgstr ""
@@ -14381,6 +15537,10 @@ msgstr ""
 msgid "The renovated %s rooms are back on sale."
 msgstr ""
 
+#: data/events/automotive_flood.json
+msgid "The repair removes most of the damage but costs money and workshop days."
+msgstr ""
+
 #: data/events/hotel_review_storm.json
 msgid "The review stays heavy until fresh reviews dilute it."
 msgstr ""
@@ -14395,6 +15555,10 @@ msgstr ""
 
 #: data/dialogue/sam_owner.json
 msgid "The runs are posted every morning. Plan the route before you turn the key: every kilometre you don't drive is money you keep."
+msgstr ""
+
+#: scripts/sim/automotive.gd:233
+msgid "The sale fell through: not enough cash or lot space."
 msgstr ""
 
 #: scripts/sim/real_estate.gd:185
@@ -14415,6 +15579,10 @@ msgstr ""
 
 #: scripts/ui/minigames/route_game.gd:145
 msgid "The shortest way there is. Textbook."
+msgstr ""
+
+#: scripts/sim/automotive.gd:674
+msgid "The showroom does not have room for that many cars."
 msgstr ""
 
 #: data/help/glossary.json
@@ -14649,6 +15817,10 @@ msgstr ""
 msgid "This order was already fully refunded."
 msgstr ""
 
+#: scripts/sim/automotive.gd:286
+msgid "This part of the car is already as good as it gets."
+msgstr ""
+
 #: scripts/sim/compliance.gd:29
 msgid "This permit is already granted or being processed."
 msgstr ""
@@ -14773,6 +15945,10 @@ msgstr ""
 msgid "Tobi Okafor"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:287
+msgid "Today %d passengers · season factor %.2f · about %.1f rental requests a day at your prices."
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1055
 msgid "Today's offers"
 msgstr ""
@@ -14877,6 +16053,10 @@ msgstr ""
 msgid "TradeLink Wholesale"
 msgstr ""
 
+#: data/economy/automotive.json
+msgid "Trailhead SUV"
+msgstr ""
+
 #: scripts/sim/company.gd:107
 msgid "Transfer to %s"
 msgstr ""
@@ -14945,7 +16125,7 @@ msgstr ""
 msgid "Two hours behind your own counter: %d customers served."
 msgstr ""
 
-#: scripts/sim/bank.gd:283
+#: scripts/sim/bank.gd:288
 msgid "Two missed payments. The bank has called loan %s: %s is due in full within 7 days."
 msgstr ""
 
@@ -14978,7 +16158,7 @@ msgid "UNIT 5 · TO LET"
 msgstr ""
 
 #: data/buildings/dockside_motors.json
-msgid "USED VANS, AS SEEN: white panel van, 140,000 km, $9,800. Insurance about $165 a month, fuel about 14 L per 100 km. Two on the lot. Ask Sam."
+msgid "USED VANS, AS SEEN: white panel van, 140,000 km, $9,800. Insurance about $165 a month, fuel about 14 L per 100 km. Two on the lot. Ask Sam. Sam also buys used cars at 80% of their true value, paid on the spot."
 msgstr ""
 
 #: data/events/viral_mention.json
@@ -15045,8 +16225,16 @@ msgstr ""
 msgid "Unknown agency crisis."
 msgstr ""
 
+#: scripts/sim/automotive.gd:822
+msgid "Unknown automotive crisis."
+msgstr ""
+
 #: scripts/sim/ecommerce.gd:1156
 msgid "Unknown choice."
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:169
+msgid "Unknown condition: a hidden defect may cost a warranty claim after the sale."
 msgstr ""
 
 #: scripts/sim/energy.gd:755
@@ -15055,6 +16243,10 @@ msgstr ""
 
 #: scripts/sim/manufacturing.gd:262
 msgid "Unknown factory crisis."
+msgstr ""
+
+#: scripts/sim/automotive.gd:465
+msgid "Unknown fleet policy."
 msgstr ""
 
 #: scripts/sim/hotel.gd:694
@@ -15109,6 +16301,10 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:186
+msgid "Update listing"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Upfront payment"
 msgstr ""
@@ -15141,16 +16337,28 @@ msgstr ""
 msgid "Use your own property"
 msgstr ""
 
-#: data/businesses/automotive.json
-msgid "Used cars, rentals, maybe an EV brand one day."
+#: scripts/sim/automotive.gd:339
+msgid "Used car sold: %s"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Used cars, rentals and dealership"
 msgstr ""
 
 #: data/economy/logistics.json scripts/sim/logistics.gd:80 scripts/ui/modals/van_deal_modal.gd:28
 msgid "Used panel van"
 msgstr ""
 
+#: scripts/sim/automotive.gd:73
+msgid "Used-car flipper"
+msgstr ""
+
 #: scripts/ui/minigames/typing_game.gd:51
 msgid "Using a Chinese input method? Switch the keyboard to English input first."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Utilisation is rented car-days divided by available car-days. Airport passengers, season, rates and ratings set the requests."
 msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:12 scripts/ui/real_estate_ui.gd:15
@@ -15337,6 +16545,18 @@ msgstr ""
 msgid "Visitors handled correctly: %d / %d"
 msgstr ""
 
+#: data/economy/automotive.json
+msgid "Volt Crossover EV"
+msgstr ""
+
+#: data/economy/automotive.json
+msgid "Volt Electric"
+msgstr ""
+
+#: data/economy/automotive.json
+msgid "Volt Hatch EV"
+msgstr ""
+
 #: data/npcs/priya_nair.json
 msgid "Voyago booking-platform account manager"
 msgstr ""
@@ -15497,6 +16717,10 @@ msgstr ""
 msgid "Warranty claim from %s: %s, repair cost %s, decide within %d days"
 msgstr ""
 
+#: scripts/sim/automotive.gd:875
+msgid "Warranty claim on a used car"
+msgstr ""
+
 #: scripts/sim/energy.gd:410
 msgid "Warranty dispute lost: %s"
 msgstr ""
@@ -15525,7 +16749,7 @@ msgstr ""
 msgid "We closed the %s campaign: the media purchase went unfunded for too long. The unused advance was refunded."
 msgstr ""
 
-#: scripts/sim/bank.gd:128
+#: scripts/sim/bank.gd:133
 msgid "We lend to registered companies."
 msgstr ""
 
@@ -15559,6 +16783,18 @@ msgstr ""
 
 #: autoload/clock.gd:13
 msgid "Wed"
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:109
+msgid "Wednesday auction"
+msgstr ""
+
+#: data/dialogue/frank_doyle_intro.json
+msgid "Wednesdays at nine I sell cars to the loudest hand in the room. Bidders drop out at private limits, so a quiet raise beats a wild one. Remember the buyer fee, and that a pretty car can hide a bad past."
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:216
+msgid "Week"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:336
@@ -15685,8 +16921,20 @@ msgstr ""
 msgid "Wide"
 msgstr ""
 
+#: data/help/glossary.json
+msgid "Win cars at the Wednesday auction, recondition and sell them, run an airport rental fleet, then sign a dealership franchise."
+msgstr ""
+
+#: scripts/ui/automotive_ui.gd:29
+msgid "Win cars at the Wednesday auction, then rent them out at the airport or sell them on."
+msgstr ""
+
 #: scripts/ui/minigames/photo_shoot_game.gd:8
 msgid "Window light"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Winning an uninspected car can mean paying visible-condition prices for a worse car, and a later warranty claim."
 msgstr ""
 
 #: data/story/chapters.json
@@ -15719,6 +16967,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "Without a valid one, imports are blocked. Renew it before it lapses, or your next order cannot go out."
+msgstr ""
+
+#: scripts/sim/automotive.gd:243
+msgid "Won %s at auction for %s."
 msgstr ""
 
 #: scripts/sim/company.gd:156
@@ -15817,6 +17069,10 @@ msgstr ""
 msgid "Year 8: importing needs an import licence ($450 a year). A registered company also pays a monthly compliance cost."
 msgstr ""
 
+#: scripts/ui/minigames/auction_game.gd:56
+msgid "You"
+msgstr ""
+
 #: scripts/sim/staff.gd:92
 msgid "You already have a job ad running."
 msgstr ""
@@ -15831,6 +17087,10 @@ msgstr ""
 
 #: scripts/sim/cafe.gd:119
 msgid "You already have the licence."
+msgstr ""
+
+#: scripts/sim/automotive.gd:190
+msgid "You already hold the high bid."
 msgstr ""
 
 #: scripts/sim/company.gd:51
@@ -15993,6 +17253,14 @@ msgstr ""
 msgid "You packed boxes until 1 AM again, didn't you. You need help. Like, a person."
 msgstr ""
 
+#: data/events/automotive_claim.json
+msgid "You pay half the repair and move on."
+msgstr ""
+
+#: data/events/automotive_claim.json
+msgid "You pay the full $3,200 and the matter closes."
+msgstr ""
+
 #: scripts/frontend/arrival_scene.gd:97
 msgid "You quit your job. You have savings, a laptop, a phone — and a lease."
 msgstr ""
@@ -16109,7 +17377,7 @@ msgstr ""
 msgid "Your bed"
 msgstr ""
 
-#: scripts/sim/bank.gd:141
+#: scripts/sim/bank.gd:146
 msgid "Your books don't support a loan yet. Show me more gross profit."
 msgstr ""
 
@@ -16137,7 +17405,7 @@ msgstr ""
 msgid "Your counter — %s"
 msgstr ""
 
-#: scripts/sim/bank.gd:132
+#: scripts/sim/bank.gd:137
 msgid "Your credit history needs time to recover."
 msgstr ""
 
@@ -16225,6 +17493,10 @@ msgstr ""
 msgid "Your listing's getting hammered."
 msgstr ""
 
+#: scripts/sim/automotive.gd:191
+msgid "Your lot is full. Sell or wholesale a car first."
+msgstr ""
+
 #: data/economy/settlement_methods.json
 msgid "Your money is locked in a contract that pays the supplier only when the goods arrive. Refunded if they never do. Small fee, no wire delay."
 msgstr ""
@@ -16241,7 +17513,7 @@ msgstr ""
 msgid "Your payment is stuck on the frozen bridge until about %s. Pay again by another rail to get the goods moving; the frozen money comes back when the bridge reopens."
 msgstr ""
 
-#: scripts/sim/bank.gd:286
+#: scripts/sim/bank.gd:291
 msgid "Your payment on loan %s bounced. We'll try again in 3 days. It's cheaper to call me before this happens."
 msgstr ""
 
@@ -16525,10 +17797,6 @@ msgstr ""
 msgid "equipment"
 msgstr ""
 
-#: data/businesses/automotive.json
-msgid "ev startup"
-msgstr ""
-
 #: scripts/ui/modals/job_modal.gd:31
 msgid "every day"
 msgstr ""
@@ -16693,11 +17961,11 @@ msgstr ""
 msgid "leasing agent"
 msgstr ""
 
-#: scripts/sim/bank.gd:280
+#: scripts/sim/bank.gd:285
 msgid "loan called"
 msgstr ""
 
-#: scripts/sim/bank.gd:241
+#: scripts/sim/bank.gd:246
 msgid "loan repaid"
 msgstr ""
 
@@ -16729,11 +17997,11 @@ msgstr ""
 msgid "materials"
 msgstr ""
 
-#: scripts/sim/bank.gd:111
+#: scripts/sim/bank.gd:115
 msgid "minus existing debt"
 msgstr ""
 
-#: scripts/sim/bank.gd:276
+#: scripts/sim/bank.gd:281
 msgid "missed payment"
 msgstr ""
 
@@ -16777,7 +18045,7 @@ msgstr ""
 msgid "net %d"
 msgstr ""
 
-#: scripts/sim/bank.gd:213
+#: scripts/sim/bank.gd:218
 msgid "new credit"
 msgstr ""
 
@@ -16853,7 +18121,7 @@ msgstr ""
 msgid "on ✓"
 msgstr ""
 
-#: scripts/sim/bank.gd:265
+#: scripts/sim/bank.gd:270
 msgid "on-time payment"
 msgstr ""
 
@@ -16946,6 +18214,10 @@ msgid "rent"
 msgstr ""
 
 #: data/businesses/automotive.json
+msgid "rental fleet"
+msgstr ""
+
+#: data/businesses/automotive.json
 msgid "rentals"
 msgstr ""
 
@@ -16977,6 +18249,10 @@ msgstr ""
 msgid "second store"
 msgstr ""
 
+#: scripts/ui/automotive_ui.gd:272
+msgid "sells at %s · stock %d"
+msgstr ""
+
 #: scripts/sim/staff.gd:245
 msgid "sent a replacement"
 msgstr ""
@@ -16985,7 +18261,7 @@ msgstr ""
 msgid "servers"
 msgstr ""
 
-#: scripts/ui/hotel_ui.gd:203
+#: scripts/ui/automotive_ui.gd:244 scripts/ui/hotel_ui.gd:203
 msgid "service due"
 msgstr ""
 
@@ -17107,6 +18383,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1319
 msgid "unsold ones are binned at closing"
+msgstr ""
+
+#: data/businesses/automotive.json
+msgid "used car flipper"
 msgstr ""
 
 #: data/businesses/cafe.json
@@ -17373,6 +18653,10 @@ msgstr ""
 msgid "✓ Rejected for the right reason"
 msgstr ""
 
+#: scripts/ui/minigames/auction_game.gd:98
+msgid "✓ Sold to you for %s plus the buyer fee. Inspect, recondition and list it from My lot."
+msgstr ""
+
 #: scripts/ui/industry_views.gd:50
 msgid "✓ You run %s."
 msgstr ""
@@ -17409,6 +18693,10 @@ msgstr ""
 msgid "✗ A policy cut is reducing grants; the rate recovers over time."
 msgstr ""
 
+#: scripts/ui/minigames/auction_game.gd:100
+msgid "✗ Another bidder won at %s. Next step: try another lot."
+msgstr ""
+
 #: scripts/ui/energy_ui.gd:112
 msgid "✗ Choose a roof lead to survey first."
 msgstr ""
@@ -17435,6 +18723,10 @@ msgstr ""
 
 #: scripts/ui/energy_ui.gd:98
 msgid "✗ No roof leads this week. New leads arrive every Monday."
+msgstr ""
+
+#: scripts/ui/minigames/auction_game.gd:101
+msgid "✗ No sale. Next step: check the other lots."
 msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:116

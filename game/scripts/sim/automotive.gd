@@ -12,7 +12,7 @@ static func _fresh() -> Dictionary:
 	var rental: Dictionary = cfg().get("rental", {})
 	var prior := float(rental.get("review_prior_n", 12))
 	return {"active":false, "entity":"", "week":-1, "index":1.0, "heat":1.0, "lots":{}, "stock":{}, "fleet":{}, "rentals":{},
-		"seq":1, "completed":0, "lost":0, "claims":0, "sold_count":0, "flip_profit":0.0, "history":[], "days":[],
+		"seq":1, "ev_boost":0.0, "completed":0, "lost":0, "claims":0, "sold_count":0, "flip_profit":0.0, "history":[], "days":[],
 		"reviews":{"sum":prior*float(rental.get("review_prior_score", 4.0)), "n":prior},
 		"policy":{"daily":1.0, "weekly":1.0, "insurance":"basic", "service_days":30, "auto_service":false, "discount":0.0},
 		"demand":{"start":1.0, "from":0, "until":0}, "rate_cut":0, "recall":{"until":0, "ids":[]},
@@ -486,17 +486,30 @@ static func demand_mult() -> float:
 static func _set_demand(multiplier: float, days: int) -> void:
 	S()["demand"] = {"start":multiplier, "from":Clock.now(), "until":Clock.now() + days * Clock.DAY}
 
-## Optional hotel hook (#67): guests who want a car. A no-op when the hotel module is not registered.
+## Hotel guests (#67): average occupied rooms over the last week, read from the hotel's own history.
 static func hotel_guests() -> float:
-	var hotel := Industries.find("hotel")
-	if hotel.is_empty() or not hotel["sim_class"].has_method("guest_flow"): return 0.0
-	return maxf(0.0, float(hotel["sim_class"].guest_flow()))
+	if not Hotel.is_running(): return 0.0
+	var rows: Array = Hotel.S()["history"].slice(maxi(0, Hotel.S()["history"].size() - 7))
+	if rows.is_empty(): return 0.0
+	var total := 0.0
+	for row in rows: total += float(row["occupied"])
+	return total / rows.size()
 
-## Optional charger hook (#69): 0..1 charging density. A no-op (1.0) when the energy module is not registered.
+## Charging network (#69): more open stations make EV models easier to sell (0..1 density).
+static func ev_charger_density() -> float:
+	if not Energy.is_running(): return 0.0
+	return clampf(float(Energy.open_stations().size()) / float(cfg()["hooks"]["ev_station_ref"]), 0.0, 1.0)
+
 static func ev_charger_mult() -> float:
-	var energy := Industries.find("energy")
-	if energy.is_empty() or not energy["sim_class"].has_method("ev_charger_density"): return 1.0
-	return 1.0 + float(cfg()["hooks"]["ev_charger_demand"]) * clampf(float(energy["sim_class"].ev_charger_density()), 0.0, 1.0)
+	return 1.0 + float(cfg()["hooks"]["ev_charger_demand"]) * ev_charger_density()
+
+## Energy synergy (#69): an active EV-brand franchise raises city EV adoption; Energy reads data.automotive.ev_boost.
+static func update_ev_boost() -> void:
+	var boost := 0.0
+	if dealership_active() and bool(brand_def().get("ev", false)):
+		var h: Dictionary = cfg()["hooks"]
+		boost = minf(float(h["ev_boost_cap"]), float(h["ev_boost_base"]) + float(h["ev_boost_per_sale"]) * float(S()["franchise"]["sold"]))
+	S()["ev_boost"] = snappedf(boost, 0.0001)
 
 static func passengers(t := -1) -> float:
 	var when := Clock.now() if t < 0 else t
@@ -645,6 +658,7 @@ static func sign_franchise(brand: String) -> Dictionary:
 	Ledger.post(entity(), I18n.t("Franchise deposit: %s") % I18n.t(d["brands"][brand]["name"]), [{"acct":"deposits", "dr":deposit}, {"acct":"cash", "cr":deposit}], source("franchise", brand))
 	S()["franchise"] = {"status":"active", "brand":brand, "deposit":deposit, "since":Clock.day_index(), "short":0, "sold":0, "orders":{}, "visits":0, "month":-1}
 	GameState.set_flag("automotive_dealer")
+	update_ev_boost()
 	GameState.timeline(I18n.t("Signed the %s franchise.") % I18n.t(d["brands"][brand]["name"]), "milestone")
 	return {"ok":true}
 
@@ -757,6 +771,7 @@ static func terminate(forced := false) -> Dictionary:
 		Ledger.post(entity(), I18n.t("Factory order cancelled"), [{"acct":"cash", "dr":order["cost"]}, {"acct":"inventory_in_transit", "cr":order["cost"]}], source("franchise"))
 		Sim.cancel("auto.delivery", "id", id)
 	S()["franchise"] = {"status":"ended", "brand":"", "deposit":0.0, "since":0, "short":0, "sold":int(S()["franchise"]["sold"]), "orders":{}, "visits":0, "month":-1}
+	update_ev_boost()
 	GameState.set_flag("automotive_dealer", false)
 	return {"ok":true, "forfeit":forfeit}
 
@@ -835,7 +850,9 @@ static func on_hour(t: int, h: int) -> void:
 			for car in S()["stock"].values().duplicate():
 				if car["status"] == "listed" and GameState.rng.randf() < sale_probability(float(car["list"]) / market_value(car)) * demand: _sell_retail(car)
 		12: _walk_ins()
-		15: _after_sales()
+		15:
+			_after_sales()
+			update_ev_boost()
 		17:
 			for lot in S()["lots"].values():
 				if lot["status"] != "open": continue
@@ -872,6 +889,7 @@ static func on_company_closed(closed: String) -> void:
 	if dealership_active():
 		Ledger.post(closed, I18n.t("Franchise deposit settled"), [{"acct":"cash", "dr":S()["franchise"]["deposit"]}, {"acct":"deposits", "cr":S()["franchise"]["deposit"]}], source("liquidation"))
 	S()["franchise"] = {"status":"ended", "brand":"", "deposit":0.0, "since":0, "short":0, "sold":0, "orders":{}, "visits":0, "month":-1}
+	update_ev_boost()
 	S()["rentals"] = {}
 	S()["lots"] = {}
 	S()["active"] = false

@@ -311,3 +311,5 @@ Implemented #67: M5 connects the district. Enter `the_aster`, `skyline_grand`, `
 
 美術：25 個城市／世界／捷運素材的原尺寸及 4× 已交，含匯入檔。城市主圖、12 個街區選取、8 個世界區域選取與捷運原生 UI 已驗收（英文與繁中），53 張實拍巡禮 0 失敗。其餘一張車站預覽和備用世界背景只交素材，沒有 runtime call site。點位、地圖資料和狀態未改。高解析載入仍待 Claude 接線，須保留邏輯尺寸與點擊座標。證據：`evidence/20261001_map_quality/README.md`。
 
+
+Implemented #68: M4 connects the Airport district. Enter `airport_terminal`, `gateway_car_rental`, `aurelia_auto_auction` and look at `cargo_terminal`; Frank Doyle, Jun Ito and Mara Quinn support the automotive business. Full workflow in [23_automotive.md](23_automotive.md).

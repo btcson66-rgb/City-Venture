@@ -119,6 +119,11 @@ func run() -> void:
 		SceneRouter._enter("interior","riverside_apartment","bed_side","")
 		await wait_world()
 		await _energy()
+		GameState.new_game({"name":"Auto Founder","seed":68001})
+		await _fast_forward_to_ch10()
+		SceneRouter._enter("interior","riverside_apartment","bed_side","")
+		await wait_world()
+		await _automotive()
 		await _save_load()
 
 
@@ -1969,6 +1974,29 @@ func _hotel() -> void:
 	await bot.use_action("hotel_open")
 	await bot.click_named("HotelTab_reviews")
 	await bot.shot("guest_reviews")
+func _automotive() -> void:
+	bot.step("Airport - open the auto desk, win a Wednesday auction car, recondition, list and sell it")
+	await popups()
+	await close_modal()
+	if SceneRouter.world_scene().kind=="interior":await exit_building()
+	await metro_to("airport")
+	await bot.shot("airport_day")
+	await enter_building("aurelia_auto_auction")
+	Ledger.post(GameState.company_id(),"QA auto equity",[{"acct":"cash","dr":60000},{"acct":"equity","cr":60000}])
+	await bot.use_action("automotive_open")
+	await bot.click_named("OpenAutoDesk")
+	bot.expect(Automotive.is_running(),"actual licence opens the auto desk")
+	var days := Automotive.days_to_auction()
+	Clock.advance_to(Clock.at_day_time(7 if days==0 and Clock.hour()>=10 else days,10*60))
+	Automotive.refresh()
+	for lot in Automotive.open_lots():
+		if Automotive.auction_auto(lot["id"],Automotive.visible_value(lot["car"])*0.85).get("won",false):break
+	await bot.shot("auction_lots")
+	for car in Automotive.S()["stock"].values():
+		Automotive.list_car(car["id"],Automotive.market_value(car))
+	Clock.advance(21*Clock.DAY)
+	await popups()
+	bot.expect(Ledger.check_balanced(),"auto books balance")
 func _energy() -> void:
 	bot.step("Industrial - lease warehouse, Roof Survey, subsidy, install and first solar invoice")
 	await popups()

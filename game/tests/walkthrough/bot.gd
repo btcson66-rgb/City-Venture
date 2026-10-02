@@ -103,6 +103,14 @@ func _audit_setup() -> void:
 		for w in str(client).split(" "):_allowed[w]=true
 	for client in DataDB.economy.get("hotel",{}).get("client_names",[]):
 		for w in str(client).split(" "):_allowed[w]=true
+	for bidder in DataDB.economy.get("automotive",{}).get("auction",{}).get("bidder_names",[]):
+		for w in str(bidder).split(" "):_allowed[w]=true
+	for brand in DataDB.economy.get("automotive",{}).get("dealership",{}).get("brands",{}).values():
+		for w in str(brand["name"]).split(" "):_allowed[w]=true
+		for model in brand["models"]:
+			for w in str(model["name"]).split(" "):_allowed[w]=true
+	for model in DataDB.economy.get("automotive",{}).get("models",[]):
+		for w in str(model["name"]).split(" "):_allowed[w]=true
 	# Roof clients and parking landlords are kept names too.
 	for kind in DataDB.economy.get("energy",{}).get("roof_kinds",{}).values():
 		for client in kind["names"]:
