@@ -1,0 +1,43 @@
+{
+ "home_currency": "AUD",
+ "bank_spread": 0.015,
+ "daily_volatility": 0.006,
+ "mean_reversion": 0.03,
+ "min_factor": 0.5,
+ "max_factor": 2.0,
+ "history_days": 365,
+ "seed_offset": 30030,
+ "era_volatility": {
+  "9": 1.3
+ },
+ "currencies": {
+  "NRD": {
+   "name": "Northridge Crown",
+   "start_rate": 1.1
+  },
+  "AUR": {
+   "name": "Aurorian Note",
+   "start_rate": 0.85
+  },
+  "LUM": {
+   "name": "Lumina Credit",
+   "start_rate": 0.15
+  },
+  "ZEN": {
+   "name": "Zenkai Unit",
+   "start_rate": 0.55
+  },
+  "ALM": {
+   "name": "Almerian Unit",
+   "start_rate": 0.4
+  },
+  "SOL": {
+   "name": "Solterra Unit",
+   "start_rate": 0.65
+  },
+  "KAR": {
+   "name": "Karu Unit",
+   "start_rate": 0.22
+  }
+ }
+}

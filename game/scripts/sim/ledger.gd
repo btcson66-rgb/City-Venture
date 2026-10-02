@@ -11,6 +11,8 @@ extends RefCounted
 ##   equity       equity
 ##   income       revenue, refunds (contra), other_income
 ##   costs        cogs, exp:<category>
+##   foreign      fx_receivable:<ccy>, fx_wallet:<ccy> (historical home-dollar assets)
+##   exchange     fx_gain_loss (credit gain / debit loss; realized on conversion or refund settlement)
 
 const EXPENSE_CATEGORIES := ["advertising", "shipping", "restocking", "platform_fees", "packaging", "photography", "registration", "compliance",
 	"rent_office", "coworking", "inventory_writeoff", "bank_fees", "late_fees", "rent_home", "living", "coffee", "transport",

@@ -488,3 +488,11 @@ data.living.leases     {<property_id>: {rent, day (of month), since, entity}}   
 Flags and stats the café sets: `met_okafor`, `leased_corner_cafe`, `food_permit`, `cafe_first_sale`; stats `cafe_customers`,
 `cafe_days_open`, `cafe_owner_shifts`, `cafe_rating`. Ledger expense categories added with it: `rent_shop`, `rent_warehouse`,
 `fitout` (`fuel`, `vehicle` and `insurance` are reserved for the logistics business; nothing posts to them yet).
+
+## Overseas systems (#30)
+
+`economy/fx.json`: home_currency; bank_spread (fraction); daily_volatility (fraction); mean_reversion (fraction); min_factor/max_factor (relative to start); history_days (days); seed_offset; era_volatility (year → multiplier); currencies (code → name, start_rate in home dollars/foreign unit). `FX.add_shock` stores temporary volatility and expiry day.
+
+`economy/regions_market.json`: bank_open_fee (home dollars), population_reference (million), regions (id → currency, population_millions, demand_multiplier, product_multipliers by product category, unlock_year). `shipping.json` international methods add base_cost (home dollars), cost_per_day (home dollars/distance-day), days_factor, min_days/max_days.
+
+Lazy save keys: fx {rates, history[code]: [{day,rate}], last_day, rng as signed integer string, shocks}; global_market.companies[entity] {bank, stores[region]: {prices[listing] in local units, revenue in local units}, balances[currency]: {receivable,wallet} in foreign units, auto_fx}. Overseas orders extend existing orders with region, currency, foreign_price, delivery_rate, foreign_due and global_paid. Book values remain in Ledger home dollars. No existing saved key is renamed.

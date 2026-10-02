@@ -578,14 +578,14 @@ static func _insurance(t: int) -> void:
 static func ship_block(loc: String) -> String:
 	if not has_van():
 		return "you need a van (Dockside Motors, Harbor)"
-	if Ecommerce.orders_with(["packed"], loc).is_empty():
+	if Ecommerce.orders_with(["packed"], loc).filter(func(o): return not o.has("region")).is_empty():
 		return "nothing packed here"
 	return ""
 
 
 ## What delivering the packed parcels at `loc` yourself would cost: {count, all, fuel, minutes}.
 static func ship_quote(loc: String) -> Dictionary:
-	var packed := Ecommerce.orders_with(["packed"], loc)
+	var packed := Ecommerce.orders_with(["packed"], loc).filter(func(o): return not o.has("region"))
 	var s: Dictionary = cfg().get("own_van_shipping", {})
 	var n := mini(packed.size(), int(van_cfg().get("capacity_parcels", 40)))
 	return {"count": n, "all": packed.size(), "fuel": snappedf(n * float(s.get("km_per_parcel", 4.5)) * fuel_cost_per_km(), 0.01),
@@ -600,7 +600,7 @@ static func ship_own_van(loc: String) -> Dictionary:
 		return {"ok": false, "error": why}
 	var q := ship_quote(loc)
 	var n := int(q["count"])
-	var packed := Ecommerce.orders_with(["packed"], loc).slice(0, n)
+	var packed := Ecommerce.orders_with(["packed"], loc).filter(func(o): return not o.has("region")).slice(0, n)
 	var ent: String = packed[0]["entity"]
 	if float(q["fuel"]) > 0.0:
 		Ledger.expense(ent, "fuel", float(q["fuel"]), I18n.t("Own-van delivery: %d parcels") % n, {"type": "ship"})

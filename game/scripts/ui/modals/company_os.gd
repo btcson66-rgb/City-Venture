@@ -7,7 +7,7 @@ const TABS := [["overview", "Overview", "company"], ["finance", "Finance", "fina
 	["operations", "Operations", "parcel"], ["inventory", "Inventory", "inventory"], ["people", "People", "people"],
 	["contracts", "Contracts", "contracts"], ["freelance", "Freelance", "tasks"], ["saas", "SaaS", "laptop"], ["cafe", "Café", "coffee"],
 	["logistics", "Logistics", "map"]]
-const PLANNED := [["Property", "home"], ["International", "world"], ["Reports", "tasks"]]
+const PLANNED := [["Property", "home"], ["Reports", "tasks"]]
 
 var terminal := "laptop"
 var tab := "overview"
@@ -19,6 +19,8 @@ var counter_up := 0.0
 var buy_qty := {}
 var new_price := {}
 var deliver_to := ""
+var sales_page := "domestic"
+var global_region := "northridge"
 
 
 ## Order / contract status chips (ids stay English in data; shown translated).
@@ -209,6 +211,7 @@ func _tab_overview() -> void:
 
 # ============================================================== FINANCE
 func _tab_finance() -> void:
+	GlobalMarketUI.finance(self, content)
 	var be := GameState.business_entity()
 	var cur := MonthClose.current(be)
 	var cols := UIK.hbox(10)
@@ -316,6 +319,15 @@ func _forecast(be: String) -> void:
 
 # ============================================================== SALES
 func _tab_sales() -> void:
+	var pages := UIK.hbox(4)
+	content.add_child(pages)
+	for entry in [["domestic", "Domestic"], ["overseas", "Overseas"]]:
+		var b := UIK.button(entry[1], func(): sales_page = entry[0]; rebuild(), "tab_active" if sales_page == entry[0] else "tab")
+		b.name = "SalesPage_" + entry[0]
+		pages.add_child(b)
+	if sales_page == "overseas":
+		GlobalMarketUI.sales(self, content)
+		return
 	if Ecommerce.is_personal():
 		var capbar := ProgressBar.new()
 		capbar.max_value = Ecommerce.seller_cap()

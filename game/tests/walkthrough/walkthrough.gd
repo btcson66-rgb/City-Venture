@@ -17,6 +17,9 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "global_markets":
+		await _global_markets_fixture()
+		return
 	if _arg("from") == "opportunities":
 		await _opportunities_fixture()
 		return
@@ -96,6 +99,72 @@ func _interaction_focus_fixture() -> void:
 
 ## Lending input regression. Only travel, age and stock are fixtures; counter, booking and signing use real input.
 ## Short #86 infrastructure tour. Real industry stories remain blocked on their modules.
+## Short system tour: company, stock, customer and elapsed shipping days are explicit fixtures.
+## Banking, storefront, pricing, packing, courier and conversion use real button input.
+func _global_markets_fixture() -> void:
+	await bot.wait(4.0)
+	UIRoot._suppress_decisions = true
+	UIRoot.tutorial.st()["off"] = true
+	Company.register("Global Goods", "retail_online", "22 Founders Lane")
+	Company.open_business_account(15000)
+	var ent := GameState.company_id()
+	GameState.data["world"]["year"] = 9
+	Ecommerce._add_stock("riverside_studio", "wireless_earbuds", 20, 18.0, 0.0)
+	Ledger.post(ent, I18n.t("Stock"), [{"acct": "inventory", "dr": 360}, {"acct": "cash", "cr": 360}])
+	Ecommerce.create_listing("wireless_earbuds", 60.0, "self", 0.9)
+	var listing := Ecommerce.listing_for("wireless_earbuds")
+	bot.step("International bank account")
+	UIRoot.open_modal(BankModal.new(false))
+	await bot.wait(0.5)
+	await bot.shot("global_bank_fee")
+	await bot.click_named("OpenInternationalAccount")
+	bot.expect(GlobalMarket.company()["bank"], "actual bank button opens international account")
+	await close_modal()
+	bot.step("Local currency storefront and price")
+	UIRoot.open_modal(CompanyOS.new("home_laptop"))
+	await bot.wait(0.5)
+	await bot.click_named("Tab_sales")
+	await bot.click_named("SalesPage_overseas")
+	await bot.click_named("OpenGlobalStore_northridge")
+	await bot.click_named("SaveGlobalPrice_" + str(listing["id"]))
+	bot.expect(GlobalMarket.order_allowed("northridge", str(listing["id"])), "saved price allows regional orders")
+	await bot.shot("global_local_price")
+	await close_modal()
+	bot.step("International economy shipping")
+	Ecommerce._h_order_place({"listing": listing["id"], "region": "northridge"})
+	var o: Dictionary = Ecommerce.E()["orders"]["#%d" % int(Ecommerce.E()["counters"]["order"])]
+	UIRoot.open_modal(PackShipModal.new("riverside_studio"))
+	await bot.wait(0.5)
+	await bot.click_named("Pack")
+	await bot.until(func(): return not (UIRoot.top_modal() is MiniGame), 5.0)
+	await bot.wait(0.5)
+	await bot.shot("global_courier_choices")
+	await bot.click_named("CourierEconomy")
+	await close_modal()
+	Ecommerce._h_pickup({"ids": [o["id"]]})
+	bot.expect(o["ship"]["method"] == "international_economy", "courier uses international route")
+	GameState.data["clock"]["minutes"] = int(o["ship"]["eta"])
+	Ecommerce._h_deliver({"order": o["id"]})
+	GameState.data["clock"]["minutes"] += 3 * Clock.DAY
+	GlobalMarket.payout(ent)
+	bot.step("Foreign wallet conversion")
+	UIRoot.open_modal(CompanyOS.new("home_laptop"))
+	await bot.wait(0.5)
+	await bot.click_named("Tab_finance")
+	await bot.shot("global_foreign_wallet")
+	await bot.click_named("ConvertGlobal_NRD")
+	bot.expect(GlobalMarket.balance(ent, "NRD")["wallet"] == 0, "real finance button converts wallet once")
+	await bot.shot("global_realized_fx")
+	await close_modal()
+	bot.step("World map regional facts")
+	UIRoot.open_modal(WorldMapModal.new())
+	await bot.wait(0.5)
+	await bot.click_named("Region_northridge")
+	bot.expect(UIRoot.top_modal() is GlobalRegionModal, "region card opens facts without travel")
+	await bot.shot("global_region_facts")
+	bot.expect(Ledger.check_balanced(), "global tour ledger balanced")
+
+
 func _opportunities_fixture() -> void:
 	await bot.wait(4.0)
 	UIRoot._suppress_decisions = true

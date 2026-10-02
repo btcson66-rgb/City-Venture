@@ -29,7 +29,7 @@ func build() -> void:
 	if waiting.size() > 5:
 		body.add_child(UIK.label(I18n.t("  …and %d more") % (waiting.size() - 5), 8, Art.C_DIM))
 	var mins := int(DataDB.shipping().get("pack_minutes_per_order", 8))
-	var pb := UIK.button(I18n.t("Pack %d order%s (%s)") % [waiting.size(), I18n.pl(waiting.size()), Fmt.duration_min(mins * waiting.size())], _pack, "primary")
+	var pb := UIK.button(I18n.t("Pack %d order%s (%s)") % [waiting.size(), I18n.pl(waiting.size()), Fmt.duration_min(mins * waiting.size())], _pack, "primary" if not waiting.is_empty() else "")
 	pb.disabled = waiting.is_empty()
 	pb.name = "Pack"
 	body.add_child(pb)
@@ -43,9 +43,10 @@ func build() -> void:
 			exp += Ecommerce.ship_cost(o, "express")
 		var fee := float(DataDB.shipping()["pickup"]["courier_fee_per_batch"])
 		var h := UIK.hbox(4)
-		var b1 := UIK.button(I18n.t("Courier · Economy 3d (%s)") % Fmt.money(econ + fee), _courier.bind("economy"))
+		var abroad := packed.any(func(o): return o.has("region"))
+		var b1 := UIK.button((I18n.t("Courier · Economy / international 7–14 days (%s)") if abroad else I18n.t("Courier · Economy 3d (%s)")) % Fmt.money(econ + fee), _courier.bind("economy"), "primary" if waiting.is_empty() else "")
 		b1.name = "CourierEconomy"
-		var b2 := UIK.button(I18n.t("Courier · Express 1d (%s)") % Fmt.money(exp + fee), _courier.bind("express"))
+		var b2 := UIK.button((I18n.t("Courier · Express / international 7–10 days (%s)") if abroad else I18n.t("Courier · Express 1d (%s)")) % Fmt.money(exp + fee), _courier.bind("express"))
 		b2.name = "CourierExpress"
 		h.add_child(b1)
 		h.add_child(b2)
@@ -55,6 +56,7 @@ func build() -> void:
 			var vr := UIK.hbox(4)
 			var bv := UIK.button(I18n.t("Own van · same day (%s fuel, about %s of your time)") % [Fmt.money(float(q["fuel"])), Fmt.duration_min(int(q["minutes"]))], _own_van)
 			bv.name = "OwnVan"
+			bv.disabled = int(q["count"]) == 0
 			vr.add_child(bv)
 			vr.add_child(UIK.tip("own_van_shipping"))
 			body.add_child(vr)

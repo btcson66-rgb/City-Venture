@@ -48,6 +48,23 @@ func build() -> void:
 			var lb := UIK.button(I18n.t("Business lending · credit %d") % Bank.credit(), func(): UIRoot.open_modal(LoanModal.new(false)))
 			lb.name = "Lending"
 			left.add_child(lb)
+			if GlobalMarket.company()["bank"]:
+				left.add_child(UIK.wrap("✓ International account ready. Open Overseas sales in Company OS next.", 7, Art.C_GREEN, 196))
+			else:
+				left.add_child(UIK.label_tip("International account", "overseas_storefront"))
+				var why := GlobalMarket.bank_block()
+				if why != "":
+					left.add_child(UIK.wrap("✗ " + I18n.t(why), 7, Art.C_GOLD, 196))
+				var international := UIK.button(I18n.t("Open international account (%s)") % Fmt.money(float(GlobalMarket.cfg().get("bank_open_fee", 150))), func():
+					var result := GlobalMarket.open_bank()
+					if not result["ok"]:
+						UIRoot.toast(I18n.t(str(result["error"])), "warn", "warning")
+						return
+					Clock.advance(30)
+					rebuild(), "primary")
+				international.name = "OpenInternationalAccount"
+				international.disabled = why != ""
+				left.add_child(international)
 	var right := UIK.vbox(2)
 	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	cols.add_child(right)

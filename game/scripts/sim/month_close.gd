@@ -24,7 +24,7 @@ static func compute(entity: String, t0: int, t1: int) -> Dictionary:
 		if absf(v2) > 0.001:
 			personal[c] = v2
 			personal_total += v2
-	var other_income := -float(mv.get("other_income", 0.0))
+	var other_income := -float(mv.get("other_income", 0.0)) - float(mv.get("fx_gain_loss", 0.0))
 	var wages := -float(mv.get("wages", 0.0))   # part-time job pay (personal income, not business profit)
 	var business_profit := net_rev - cogs - opex_total + other_income
 	var cash_open := Ledger.balance_at(entity, "cash", t0)

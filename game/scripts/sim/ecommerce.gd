@@ -750,6 +750,7 @@ static func lambda_day(l: Dictionary) -> float:
 
 
 static func on_hour(t: int, h: int) -> void:
+	GlobalMarket.on_hour(t, h)
 	if h == 0:
 		_charge_ads()
 		_expire_mods()
@@ -777,6 +778,9 @@ static func _generate_demand(t: int, h: int) -> void:
 
 
 static func _h_order_place(p: Dictionary) -> void:
+	var region := str(p.get("region", ""))
+	if region != "" and not GlobalMarket.order_allowed(region, str(p["listing"])):
+		return
 	var l: Dictionary = E()["listings"].get(p["listing"], {})
 	if l.is_empty() or not l.get("active", false):
 		return
@@ -796,6 +800,9 @@ static func _h_order_place(p: Dictionary) -> void:
 	var o := {"id": oid, "listing": l["id"], "product": l["product"], "qty": 1, "unit_price": float(l["price"]),
 		"customer": "%s %s" % [GameState.pick(names), GameState.pick(inits)], "placed": Clock.now(), "status": "placed",
 		"location": loc, "entity": GameState.business_entity(), "defective": GameState.randf() < dr}
+	if region != "":
+		o["entity"] = GameState.company_id()
+		GlobalMarket.annotate_order(o, region)
 	e["orders"][oid] = o
 	l["orders"] = int(l["orders"]) + 1
 	l["missed"] = 0
@@ -927,6 +934,8 @@ static func packaging_extra() -> float:
 
 
 static func ship_cost(o: Dictionary, method: String) -> float:
+	if o.has("region"):
+		return GlobalMarket.shipping_cost(o, method)
 	var m := DataDB.ship_method(method)
 	var cls: String = DataDB.product(o["product"]).get("ship_class", "small")
 	return snappedf(float(m.get("cost", {}).get(cls, 5.0)) * World.shipping_index(), 0.01)   # the era's courier rates
@@ -1001,6 +1010,8 @@ static func _h_pickup(p: Dictionary) -> void:
 
 
 static func _ship(o: Dictionary) -> void:
+	if o.has("region"):
+		o["ship"]["method"] = GlobalMarket.shipping_method(o, str(o["ship"]["method"]))
 	var m := DataDB.ship_method(o["ship"]["method"])
 	o["status"] = "shipped"
 	o["ship"]["shipped"] = Clock.now()
@@ -1011,6 +1022,8 @@ static func _ship(o: Dictionary) -> void:
 		eta = Clock.now() + (40 if not bool(o.get("label_ok", true)) else 20)   # the guided first parcel: across town
 	if o["ship"].has("van_eta"):
 		eta = int(o["ship"]["van_eta"])   # your own van: same day, and you know the address (Logistics.ship_own_van)
+	if o.has("region"):
+		eta = Clock.now() + GlobalMarket.shipping_days(o, str(o["ship"]["method"])) * Clock.DAY
 	o["ship"]["eta"] = eta
 	Sim.schedule(eta, "eco.deliver", {"order": o["id"]})
 	GameState.inc_stat("orders_shipped")
@@ -1021,18 +1034,21 @@ static func _h_deliver(p: Dictionary) -> void:
 	var o: Dictionary = E()["orders"].get(p["order"], {})
 	if o.is_empty() or o["status"] != "shipped":
 		return
+	if o.has("region") and not GlobalMarket.live(str(o["entity"])):
+		o["status"] = "cancelled"
+		return
 	o["status"] = "delivered"
 	o["delivered"] = Clock.now()
 	var price := snappedf(float(o["unit_price"]) * int(o["qty"]), 0.01)
 	var fee := snappedf(price * float(mk().get("fee_rate", 0.1)), 0.01)
 	var pname: String = I18n.t(DataDB.product(o["product"])["name"])
-	Ledger.post(o["entity"], I18n.t("Sale delivered %s: %d × %s @ %s") % [o["id"], int(o["qty"]), pname, Fmt.money(o["unit_price"])], [
-		{"acct": "marketplace_balance", "dr": price}, {"acct": "revenue", "cr": price},
-		{"acct": "cogs", "dr": float(o.get("cogs", 0.0))}, {"acct": "goods_out", "cr": float(o.get("cogs", 0.0))},
-		{"acct": "exp:platform_fees", "dr": fee}, {"acct": "marketplace_balance", "cr": fee}], {"type": "order", "id": o["id"]})
-	o["fee"] = fee
+	if o.has("region"):
+		GlobalMarket.deliver(o)
+	else:
+		_post_local_delivery(o, price, fee, pname)
 	GameState.inc_stat("orders_delivered")
-	GameState.inc_stat("revenue_total", price)
+	if not o.has("region"):
+		GameState.inc_stat("revenue_total", price)
 	if int(GameState.stat("orders_delivered")) == 1:
 		GameState.timeline(I18n.t("First sale: %s bought %s for %s.") % [o["customer"], pname, Fmt.money(price)], "milestone")
 	EventBus.order_delivered.emit(o["id"])
@@ -1048,6 +1064,14 @@ static func _h_deliver(p: Dictionary) -> void:
 		Sim.schedule(Clock.now() + GameState.randi_range(12 * 60, 3 * Clock.DAY), "eco.return_request", {"order": o["id"]})
 	elif GameState.randf() < float(DataDB.product(o["product"]).get("review_rate", 0.4)):
 		Sim.schedule(Clock.now() + GameState.randi_range(8 * 60, 3 * Clock.DAY), "eco.review", {"order": o["id"]})
+
+
+static func _post_local_delivery(o: Dictionary, price: float, fee: float, pname: String) -> void:
+	Ledger.post(o["entity"], I18n.t("Sale delivered %s: %d × %s @ %s") % [o["id"], int(o["qty"]), pname, Fmt.money(o["unit_price"])], [
+		{"acct": "marketplace_balance", "dr": price}, {"acct": "revenue", "cr": price},
+		{"acct": "cogs", "dr": float(o.get("cogs", 0.0))}, {"acct": "goods_out", "cr": float(o.get("cogs", 0.0))},
+		{"acct": "exp:platform_fees", "dr": fee}, {"acct": "marketplace_balance", "cr": fee}], {"type": "order", "id": o["id"]})
+	o["fee"] = fee
 
 
 static func _review_stars(o: Dictionary) -> int:
@@ -1113,6 +1137,8 @@ static func resolve_return(order_id: String, choice: String) -> Dictionary:
 	var o: Dictionary = E()["orders"].get(order_id, {})
 	if o.is_empty() or o["status"] != "return_requested":
 		return {"ok": false, "error": "Nothing to resolve."}
+	if o.has("region") and choice in ["refund", "partial"]:
+		return GlobalMarket.resolve_return(o, choice)
 	var price := float(o["unit_price"]) * int(o["qty"])
 	var fee := float(o.get("fee", 0.0))
 	var ent: String = o["entity"]
@@ -1168,6 +1194,13 @@ static func _h_dispute(p: Dictionary) -> void:
 	var o: Dictionary = E()["orders"].get(p["order"], {})
 	if o.is_empty() or o["status"] != "refused":
 		return
+	if o.has("region"):
+		if not GlobalMarket.live(str(o["entity"])):
+			return
+		GlobalMarket.refund(o, 1.0)
+		Ledger.expense(str(o["entity"]), "platform_fees", 15.0, "Overseas dispute fee", {"type": "global_dispute"})
+		o["status"] = "disputed"
+		return
 	var price := float(o["unit_price"]) * int(o["qty"])
 	var ent: String = o["entity"]
 	Ledger.post(ent, I18n.t("ShopLane dispute lost %s: forced refund + $15 fee") % o["id"], [
@@ -1184,7 +1217,7 @@ static func held_amount(entity: String) -> float:
 	var t := Clock.now()
 	var s := 0.0
 	for o in E()["orders"].values():
-		if o["entity"] == entity and o["status"] == "delivered" and t - int(o.get("delivered", 0)) < hold:
+		if not o.has("region") and o["entity"] == entity and o["status"] == "delivered" and t - int(o.get("delivered", 0)) < hold:
 			s += float(o["unit_price"]) * int(o["qty"]) - float(o.get("fee", 0.0))
 	return s
 

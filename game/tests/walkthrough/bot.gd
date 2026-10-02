@@ -88,6 +88,9 @@ func _audit_setup() -> void:
 	for n in DataDB.npcs.values():
 		for w in str(n.get("name", "")).split(" "):
 			_allowed[w] = true
+	# Currency codes are identifiers printed beside foreign amounts, not untranslated prose.
+	for ccy in DataDB.economy.get("fx", {}).get("currencies", {}):
+		_allowed[str(ccy)] = true
 	var mk: Dictionary = DataDB._read("res://data/economy/marketplace.json")
 	for w in mk.get("customer_first_names", []):
 		_allowed[str(w)] = true

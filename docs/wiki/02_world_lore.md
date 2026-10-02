@@ -195,3 +195,7 @@
 | `rail_frozen` | 財務 | 第 11 章跨鏈橋被駭：等、電匯重付、或過渡貸款後重付。插圖 `events/rail_frozen`（已接好） |
 | `acquisition_offer` | 財務 | 第 12 章 Victor Hale 的收購提案：接受、還價（績效尾款）、婉拒。價格來自公司的真實數字。插圖 `events/acquisition_offer`（已接好） |
 | `shipment_lost` | 供應 | 第 10 章之後的隨機事件：進口貨櫃在海上遺失。託管訂單可以退款；其他付款方式只能請對方重新出貨（晚 10 天） |
+
+## Overseas market systems (#30)
+
+Seven regional storefronts and foreign currencies are implemented; unlock occurs in Chapter 13 / year 9. Region cards show actual company revenue and current quotes. Travel remains planned for Chapter 16. See [overseas markets](20_global_markets.md) for currencies, banking and freight.

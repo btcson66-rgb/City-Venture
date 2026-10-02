@@ -243,3 +243,7 @@ Company OS → 營運頁列出所有進貨單。尚未到貨的單可在下單�
 55 個章節目標與 18 個教學步驟全部有提前完成檢查。開始生意後日票到期可改用家中筆電，商品曾上架後下架不要求重做拍照，等待第一單時則提示重新上架；還沒做班就離職，箭頭及文字提示重新應徵。章節不再清掉財務預測／調價的完成紀錄，新聞按年代記錄。第 6 章負現金月結兩次後會明說還沒恢復並往下走；第 7 章虧損替代路徑也不假稱獲利。`story_recovery` 為故事補救設定。
 
 Crestline 的撤回／拒絕／過期均可接續；簽約公司關閉則明說原交易無法完成，故事往下走，不把失效當成收款成功。費用及收入平衡另由 #29 評估。逐項稽核與回歸證據見 `evidence/2026-09-30_24/`。
+
+## ShopLane Global (#30)
+
+Nexus Bank opens international banking for a registered company with domestic banking ($150 once). Sales → Overseas saves local-currency prices on the same listings and stock. Pack at the existing table; use international economy or express couriers. Weekly foreign payouts can be kept or converted in Finance, with 1.5% spread and realized exchange gain/loss. See [overseas markets](20_global_markets.md). Story and overseas travel are separate tickets.
