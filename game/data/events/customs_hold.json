@@ -18,8 +18,7 @@
    "customs_hold",
    "duty",
    "tariff_code"
-  ],
-  "recommended_choice": "documents"
+  ]
  },
  "choices": [
   {
@@ -35,7 +34,8 @@
    "outcome": "Documents corrected; duty paid and delivery delayed by 2 days.",
    "requires": [
     "cash>={document_cost}"
-   ]
+   ],
+   "recommended": true
   },
   {
    "id": "pay",

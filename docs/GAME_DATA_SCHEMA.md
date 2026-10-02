@@ -500,3 +500,5 @@ Lazy save keys: fx {rates, history[code]: [{day,rate}], last_day, rng as signed 
 ## Duties and season-two chapter receipts (#31)
 
 `economy/duties.json`: categories maps product category to one of codes; codes provide names. regions maps region → tariff code → rate fraction. refusal_rates maps ddp/ddu to probability; misclassification_fine (home dollars), document_fine_factor, document_delay_days, hold_timeout_days, target_units, fallback_units, target_return_rate, review_after_days, return_observation_days (days). Lazy customs save state has companies[entity][region:listing] {policy,code}, chapters[id] {entity,started minute}. Orders snapshot customs {policy,code,expected,duty_paid,penalty,cleared,held_at}; customs_refused marks duty-related refusal. pickup_fee_share allocates the courier batch fee for the income card. Existing saved keys remain intact.
+
+Customs decision choices may set `recommended: true`; only the first available explicitly recommended choice gets primary styling. An unavailable recommendation does not promote an unmarked choice.
