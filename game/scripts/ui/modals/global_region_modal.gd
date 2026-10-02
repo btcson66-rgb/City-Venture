@@ -26,3 +26,6 @@ func build() -> void:
 	body.add_child(UIK.wrap(("✗ " + I18n.t(why)) if why != "" else I18n.t("✓ Region available. Open Company OS → Sales → Overseas next."), 8, Art.C_GOLD if why != "" else Art.C_GREEN, 390))
 	body.add_child(UIK.label_tip("International shipping", "international_shipping"))
 	footer.add_child(UIK.button("Close", close))
+	var trade := UIK.button("Compare trade route", func(): close(); UIRoot.open_modal(TradeQuoteModal.new(region)), "primary")
+	trade.name = "TradeRoute_" + region
+	footer.add_child(trade)

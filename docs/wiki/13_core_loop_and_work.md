@@ -251,3 +251,7 @@ Nexus Bank opens international banking for a registered company with domestic ba
 ## Customs and export chapters (#31)
 
 [Customs and exports](21_customs_and_exports.md) adds actual DDP/DDU declarations and duty to the shared packing/shipping lifecycle, plus Chapters 13–14. The harbor Customs House now opens weekdays; Ines also provides a laptop guide. Failed expansion can be paused honestly without a fictional sale.
+
+## Trade route preview (issue70)
+
+World Map → regional facts → Compare trade route opens an RFQ estimate, not an active industry. See [trade route estimates](22_trade_route_estimates.md) for scope and blocked execution dependencies.

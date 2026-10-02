@@ -789,6 +789,10 @@ msgstr ""
 msgid "A tidy route. A stop or two out of order."
 msgstr ""
 
+#: data/help/glossary.json
+msgid "A time-limited estimate of goods, transport, bank fees and risk. Prices are expressed in local currency; the Deal Sheet compares home-dollar costs."
+msgstr ""
+
 #: data/dialogue/lina_intro.json
 msgid "A wire: cheap, slow. A letter of credit: we guarantee you to their bank, about two days, one and a half percent."
 msgstr ""
@@ -833,7 +837,7 @@ msgstr ""
 msgid "ATM — balances"
 msgstr ""
 
-#: scripts/sim/contracts.gd:25 scripts/sim/fx.gd:24 scripts/sim/fx.gd:32
+#: scripts/sim/contracts.gd:25 scripts/sim/fx.gd:24 scripts/sim/fx.gd:32 scripts/sim/trade_quote.gd:11
 msgid "AUD"
 msgstr ""
 
@@ -973,6 +977,10 @@ msgstr ""
 msgid "Agriculture"
 msgstr ""
 
+#: scripts/ui/modals/trade_quote_modal.gd:36
+msgid "Air freight"
+msgstr ""
+
 #: data/city/aurelia.json
 msgid "Airport Line"
 msgstr ""
@@ -987,6 +995,10 @@ msgstr ""
 
 #: scripts/ui/minigames/route_game.gd:53
 msgid "All %d stops planned  ·  round trip %.1f km"
+msgstr ""
+
+#: data/help/help.json
+msgid "All cost rows are in home dollars; the buyer quote is labelled with its own currency."
 msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:30
@@ -1177,6 +1189,10 @@ msgstr ""
 msgid "At any packing table the shipping options include \"Own van\": fuel instead of a courier fee, delivered the same day. The Pier 7 warehouse can hold your stock too."
 msgstr ""
 
+#: scripts/ui/modals/trade_quote_modal.gd:41
+msgid "At supplier collection"
+msgstr ""
+
 #: scripts/ui/tutorial.gd:70
 msgid "At the packing table, choose how it leaves: book the courier (it collects from home) or carry it to PostPoint yourself (cheaper, costs your time)."
 msgstr ""
@@ -1359,6 +1375,10 @@ msgstr ""
 
 #: scripts/ui/phone_ui.gd:129
 msgid "Bank"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:101
+msgid "Bank fee / spread (home dollars)"
 msgstr ""
 
 #: scripts/sim/ledger.gd:30
@@ -1789,12 +1809,28 @@ msgstr ""
 msgid "Buy — %s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:836
+#: scripts/ui/modals/company_os.gd:836 scripts/ui/modals/trade_quote_modal.gd:34
 msgid "Buyer"
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:1217
 msgid "Buyer %s opened a dispute on order %s. We refunded them and charged a $15 dispute fee."
+msgstr ""
+
+#: scripts/sim/trade_quote.gd:63
+msgid "Buyer delivery"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:106
+msgid "Buyer landed / ceiling (home dollars)"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:98
+msgid "Buyer quote (foreign total)"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:73
+msgid "Buyer region"
 msgstr ""
 
 #: data/character/options.json
@@ -1879,6 +1915,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1149
 msgid "CHURN"
+msgstr ""
+
+#: scripts/sim/trade_quote.gd:20 scripts/ui/modals/trade_quote_modal.gd:86 scripts/ui/modals/trade_quote_modal.gd:9
+msgid "CIF"
 msgstr ""
 
 #: scripts/frontend/main_menu.gd:27 scripts/frontend/main_menu.gd:30
@@ -2061,6 +2101,30 @@ msgstr ""
 msgid "Careful: fewer mistakes, fewer returns."
 msgstr ""
 
+#: scripts/sim/trade_quote.gd:45
+msgid "Cargo insurance"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:90
+msgid "Cargo insurance: off"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:90
+msgid "Cargo insurance: on"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:109
+msgid "Cargo loss / buyer default (%)"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:107
+msgid "Cargo risk passes at"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:88
+msgid "Cargo transport"
+msgstr ""
+
 #: scripts/ui/tutorial.gd:72
 msgid "Carry it to PostPoint"
 msgstr ""
@@ -2241,6 +2305,10 @@ msgstr ""
 msgid "Choose a supported overseas region."
 msgstr ""
 
+#: scripts/sim/trade_quote.gd:19
+msgid "Choose a supported product, term, transport and payment method."
+msgstr ""
+
 #: scripts/sim/ecommerce.gd:434
 msgid "Choose between 1 and %d returnable units."
 msgstr ""
@@ -2259,6 +2327,10 @@ msgstr ""
 
 #: data/story/chapters.json
 msgid "Choose the tariff code that matches your actual product"
+msgstr ""
+
+#: scripts/sim/trade_quote.gd:17
+msgid "Choose two different trading regions."
 msgstr ""
 
 #: data/help/glossary.json
@@ -2521,6 +2593,22 @@ msgstr ""
 msgid "Company registration fee — %s"
 msgstr ""
 
+#: scripts/ui/modals/trade_quote_modal.gd:105
+msgid "Compare buyer landed cost with demand before choosing a route."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Compare routes before committing cash. This preview does not place an order; refresh after a quote expires."
+msgstr ""
+
+#: data/help/help.json
+msgid "Compare supply and buyer regions, quantities, trade terms, cargo transport and payment methods."
+msgstr ""
+
+#: scripts/ui/modals/global_region_modal.gd:29
+msgid "Compare trade route"
+msgstr ""
+
 #: scripts/sim/story_engine.gd:181
 msgid "Completed %s."
 msgstr ""
@@ -2647,6 +2735,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:226
 msgid "Cost of goods sold"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:87
+msgid "Cost ownership and risk transfer"
 msgstr ""
 
 #: data/events/ad_cost_spike.json
@@ -2841,6 +2933,10 @@ msgstr ""
 msgid "Cut spending (pause ads, cheaper living)"
 msgstr ""
 
+#: scripts/ui/modals/trade_quote_modal.gd:86
+msgid "DDP"
+msgstr ""
+
 #: data/help/help.json
 msgid "DDP pays duty before shipping and reduces refusals. DDU leaves duty to the buyer on arrival; refusals are more common."
 msgstr ""
@@ -2973,6 +3069,10 @@ msgstr ""
 msgid "Deadline missed: %s. Deliver soon, the fee drops."
 msgstr ""
 
+#: data/help/help.json
+msgid "Deal signing is unavailable. Estimates create no contract, inventory or payment."
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Deal with an unhappy customer (check your phone)"
 msgstr ""
@@ -3103,6 +3203,10 @@ msgstr ""
 
 #: data/events/viral_mention.json
 msgid "Demand ×3 for 3 days. Stock is the bottleneck."
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:108
+msgid "Departure wait / transit / payment (days)"
 msgstr ""
 
 #: data/help/glossary.json scripts/ui/modals/lease_modal.gd:23
@@ -3353,6 +3457,14 @@ msgstr ""
 msgid "EXPIRED"
 msgstr ""
 
+#: scripts/ui/modals/trade_quote_modal.gd:86
+msgid "EXW"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "EXW: buyer collects. FOB: seller loads the vessel. CIF: seller also pays main freight and required insurance, but risk still passes at loading. DDP: seller covers arrival duty and risk until buyer delivery."
+msgstr ""
+
 #: scripts/ui/minigames/teller_cash_game.gd:23
 msgid "Each customer asks for a cash withdrawal. Click notes into the tray until it adds up exactly."
 msgstr ""
@@ -3557,6 +3669,10 @@ msgstr ""
 msgid "Espresso"
 msgstr ""
 
+#: scripts/ui/modals/trade_quote_modal.gd:102
+msgid "Estimated margin (home dollars)"
+msgstr ""
+
 #: scripts/sim/forecast.gd:107
 msgid "Estimated sales"
 msgstr ""
@@ -3683,6 +3799,14 @@ msgstr ""
 
 #: scripts/ui/tutorial.gd:418 scripts/ui/tutorial.gd:465
 msgid "FIRST VENTURE %d/%d"
+msgstr ""
+
+#: scripts/sim/trade_quote.gd:20 scripts/ui/modals/trade_quote_modal.gd:86
+msgid "FOB"
+msgstr ""
+
+#: scripts/sim/trade_quote.gd:21
+msgid "FOB and CIF require sea transport. For air, choose EXW or DDP."
 msgstr ""
 
 #: data/../assets/buildings/buildings_meta.json
@@ -4557,6 +4681,10 @@ msgstr ""
 msgid "Hiring gets harder: wages up 8% in a year."
 msgstr ""
 
+#: scripts/ui/modals/trade_quote_modal.gd:110
+msgid "Hold warehouse rent (home dollars/day)"
+msgstr ""
+
 #: data/character/options.json
 msgid "Home"
 msgstr ""
@@ -4749,7 +4877,7 @@ msgstr ""
 msgid "Immature institutions"
 msgstr ""
 
-#: data/help/glossary.json
+#: data/help/glossary.json scripts/sim/trade_quote.gd:46
 msgid "Import duty"
 msgstr ""
 
@@ -4883,6 +5011,10 @@ msgstr ""
 
 #: scripts/sim/ledger.gd:34
 msgid "Insurance"
+msgstr ""
+
+#: data/help/help.json
+msgid "Insurance reduces cargo exposure and L/C lowers default exposure; both cost money and neither guarantees a profit."
 msgstr ""
 
 #: scripts/ui/modals/van_deal_modal.gd:32
@@ -5465,6 +5597,10 @@ msgstr ""
 msgid "Letter of credit"
 msgstr ""
 
+#: scripts/ui/modals/trade_quote_modal.gd:39
+msgid "Letter of credit (L/C)"
+msgstr ""
+
 #: data/economy/settlement_methods.json
 msgid "Letter of credit (Nexus Bank)"
 msgstr ""
@@ -5811,6 +5947,10 @@ msgstr ""
 
 #: scripts/ui/modals/business_board.gd:60
 msgid "Main costs"
+msgstr ""
+
+#: scripts/sim/trade_quote.gd:44
+msgid "Main freight"
 msgstr ""
 
 #: data/story/chapters.json
@@ -6473,6 +6613,10 @@ msgstr ""
 msgid "No saved games yet."
 msgstr ""
 
+#: scripts/ui/modals/trade_quote_modal.gd:111
+msgid "No stock, contract, payment, insurance claim or forward hedge is created by this estimate."
+msgstr ""
+
 #: scripts/sim/acquisition.gd:102 scripts/sim/event_engine.gd:168 scripts/sim/rails.gd:332
 msgid "No such choice."
 msgstr ""
@@ -6495,6 +6639,10 @@ msgstr ""
 
 #: scripts/sim/contracts.gd:343
 msgid "No supplier carries this product."
+msgstr ""
+
+#: scripts/sim/trade_quote.gd:30
+msgid "No valid exchange quote is available."
 msgstr ""
 
 #: data/dialogue/lina_bridge.json
@@ -6829,6 +6977,10 @@ msgstr ""
 msgid "On time pays the full fee, a shorter route pays a little more, and a late run pays 40% less. A run left undone for hours is cancelled. Fuel and upkeep come off every run."
 msgstr ""
 
+#: scripts/ui/modals/trade_quote_modal.gd:42
+msgid "On vessel loading"
+msgstr ""
+
 #: data/events/customer_return.json
 msgid "One unit + express shipping."
 msgstr ""
@@ -6993,6 +7145,10 @@ msgstr ""
 msgid "Open your phone"
 msgstr ""
 
+#: scripts/ui/modals/trade_quote_modal.gd:40
+msgid "Open-account credit"
+msgstr ""
+
 #: scripts/sim/company.gd:95
 msgid "Opened a business account at Nexus Bank with %s of founder capital."
 msgstr ""
@@ -7087,6 +7243,10 @@ msgstr ""
 
 #: scripts/ui/modals/pack_ship_modal.gd:26
 msgid "Orders waiting to be packed: %d"
+msgstr ""
+
+#: scripts/sim/trade_quote.gd:43
+msgid "Origin handling"
 msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:7
@@ -8001,8 +8161,16 @@ msgstr ""
 msgid "Quantity"
 msgstr ""
 
+#: scripts/ui/modals/trade_quote_modal.gd:77
+msgid "Quantity (units)"
+msgstr ""
+
 #: scripts/ui/modals/purchase_return_modal.gd:32
 msgid "Quantity (up to %d)"
+msgstr ""
+
+#: scripts/sim/trade_quote.gd:26
+msgid "Quantity exceeds regional capacity or demand, or markup is outside 0–100%."
 msgstr ""
 
 #: data/jobs/bank_teller.json
@@ -8055,6 +8223,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:29
 msgid "RETURN REQUESTED"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:96
+msgid "RFQ — three-day estimate"
 msgstr ""
 
 #: data/../assets/buildings/buildings_meta.json data/buildings/riverside_apartment.json
@@ -8235,6 +8407,10 @@ msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:8
 msgid "Reed"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:112
+msgid "Refresh RFQ estimate"
 msgstr ""
 
 #: scripts/ui/modals/purchase_return_modal.gd:44
@@ -8527,6 +8703,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:980
 msgid "Reputation %.1f · rate about %s/h · %d delivered · %d late"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Request for quotation"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:567 scripts/ui/modals/settlement_modal.gd:95
@@ -9013,6 +9193,10 @@ msgstr ""
 msgid "Scribbled in the corner: 'profit is an opinion, cash is a fact.'"
 msgstr ""
 
+#: scripts/ui/modals/trade_quote_modal.gd:35
+msgid "Sea freight"
+msgstr ""
+
 #: scripts/ui/minigames/pack_game.gd:138
 msgid "Seal & next"
 msgstr ""
@@ -9037,7 +9221,7 @@ msgstr ""
 msgid "Sell your time: clients post small projects every morning. Accept a gig, work it here in 2-hour sessions, deliver before the deadline and invoice. Payment follows the client's terms. On-time work earns stars; stars raise your rate."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:836
+#: scripts/ui/modals/company_os.gd:836 scripts/ui/modals/trade_quote_modal.gd:33
 msgid "Seller"
 msgstr ""
 
@@ -9777,6 +9961,14 @@ msgstr ""
 msgid "Straight answer? The gearbox sighs on the hills and the left mirror is held on by hope. The engine is honest, and so am I."
 msgstr ""
 
+#: scripts/ui/modals/trade_quote_modal.gd:104
+msgid "Stress estimate: foreign receipts fall 15% and one seller cargo loss occurs. This is a scenario, not a forecast or a guaranteed result."
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:103
+msgid "Stress margin (home dollars)"
+msgstr ""
+
 #: data/regions/auroria.json
 msgid "Strict consumer protection"
 msgstr ""
@@ -9825,6 +10017,10 @@ msgstr ""
 msgid "Supplier bills payable"
 msgstr ""
 
+#: scripts/ui/modals/trade_quote_modal.gd:41
+msgid "Supplier collection"
+msgstr ""
+
 #: scripts/sim/effects.gd:40
 msgid "Supplier doesn't carry that."
 msgstr ""
@@ -9865,6 +10061,14 @@ msgstr ""
 msgid "Supply Shock"
 msgstr ""
 
+#: scripts/ui/modals/trade_quote_modal.gd:97
+msgid "Supply cost (home dollars)"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:72
+msgid "Supply region"
+msgstr ""
+
 #: data/events/supply_shock_plan.json
 msgid "Supply shock: your plan"
 msgstr ""
@@ -9891,6 +10095,14 @@ msgstr ""
 
 #: scripts/ui/modals/settlement_modal.gd:109
 msgid "Switched: the payment lands %s."
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:38
+msgid "T/T on delivery"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:37
+msgid "T/T prepaid"
 msgstr ""
 
 #: data/../assets/buildings/buildings_meta.json
@@ -10717,12 +10929,60 @@ msgstr ""
 msgid "Trade & Energy"
 msgstr ""
 
+#: scripts/ui/modals/trade_quote_modal.gd:19
+msgid "Trade Deal Sheet — estimate"
+msgstr ""
+
 #: data/regions/almeria.json
 msgid "Trade hub"
 msgstr ""
 
+#: scripts/ui/modals/trade_quote_modal.gd:89
+msgid "Trade payment"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:74
+msgid "Trade product"
+msgstr ""
+
+#: data/help/help.json
+msgid "Trade route estimates"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:86
+msgid "Trade term"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Trade terms"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:73
+msgid "TradeDestination"
+msgstr ""
+
 #: data/suppliers/tradelink_wholesale.json
 msgid "TradeLink Wholesale"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:89
+msgid "TradePayment"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:74
+msgid "TradeProduct"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:72
+msgid "TradeSource"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:86
+msgid "TradeTerm"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:88
+msgid "TradeTransport"
 msgstr ""
 
 #: scripts/sim/company.gd:107
@@ -10983,6 +11243,10 @@ msgstr ""
 
 #: data/world/years.json
 msgid "Verdant Supply opens a warehouse in the Industrial Zone."
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:42
+msgid "Vessel loading"
 msgstr ""
 
 #: data/npcs/victor.json
@@ -11279,6 +11543,10 @@ msgstr ""
 
 #: data/buildings/small_office.json scripts/ui/modals/info_modal.gd:83
 msgid "Whiteboard"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Who pays and who carries risk are different questions. FOB and CIF apply only to sea transport."
 msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:8
@@ -12153,6 +12421,10 @@ msgstr ""
 msgid "hiring — ask about the job"
 msgstr ""
 
+#: scripts/ui/modals/trade_quote_modal.gd:100
+msgid "home dollars"
+msgstr ""
+
 #: data/businesses/hotel.json
 msgid "hotel group"
 msgstr ""
@@ -12903,6 +13175,10 @@ msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:129
 msgid "✗ %s gave up waiting"
+msgstr ""
+
+#: scripts/ui/modals/trade_quote_modal.gd:69
+msgid "✗ Deals cannot be signed in this build. Compare route estimates first."
 msgstr ""
 
 #: scripts/ui/minigames/pack_game.gd:147

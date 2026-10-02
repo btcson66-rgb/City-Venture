@@ -1,0 +1,41 @@
+   0.0s STEP Main menu → New Game
+   1.0s   shot 01_main_menu.png
+   1.0s   click [NewGame] New Game
+   2.3s STEP Character Creator
+   2.4s   shot 02_creator_default.png
+   2.4s   click [Tab_hair] Hair
+   2.4s   click [Next_hair] ▶
+   2.8s   click [Tab_face] Face
+   2.9s   click [Next_face] ▶
+   3.0s   click [Next_eye_shape] ▶
+   3.1s   click [Tab_body] Body
+   3.2s   click [Next_presentation] ▶
+   3.8s   shot 03_creator_customised.png
+   3.8s   click [Tab_outfit] Outfit
+   3.8s   click "Startup Casual"
+   4.4s   ok  appearance changed from default (short_neat)
+   4.5s   shot 04_creator_final.png
+   4.5s   click [Start] Start in Aurelia  →
+   4.6s [6月1日（週日） 下午 2:00] STEP Arrival sequence
+   7.1s [6月1日（週日） 下午 2:00]   shot 05_arrival_train.png
+  10.7s [6月1日（週日） 下午 2:00]   shot 06_arrival_phone.png
+  15.6s [6月1日（週日） 下午 2:01]   ok  spawned in the Riverside apartment
+  15.6s [6月1日（週日） 下午 2:01]   ok  starting cash $30,000
+  15.6s [6月1日（週日） 下午 2:01]   ok  name saved
+  17.2s [6月1日（週日） 下午 2:03]   shot 07_apartment_arrival.png
+  21.1s [6月1日（週日） 下午 2:09] STEP Trade RFQ preview — no active industry or invented payment
+  21.6s [6月1日（週日） 下午 2:10]   click [Region_northridge]
+  21.8s [6月1日（週日） 下午 2:10]   shot 08_trade_region_entry.png
+  21.8s [6月1日（週日） 下午 2:10]   click [TradeRoute_northridge] Compare trade route
+  22.3s [6月1日（週日） 下午 2:10]   shot 09_trade_deal_sheet.png
+  22.3s [6月1日（週日） 下午 2:10]   ok  quote has rational margin and losing stress case
+  22.3s [6月1日（週日） 下午 2:10]   click [TradeTerm] CIF（成本、保險與運費）
+  23.5s [6月1日（週日） 下午 2:10]   ok  real DDP selection
+  23.5s [6月1日（週日） 下午 2:10]   click [TradeTransport] 海運
+  24.4s [6月1日（週日） 下午 2:10]   ok  real air selection
+  24.4s [6月1日（週日） 下午 2:10]   click [TradeRefreshRFQ] Refresh RFQ estimate
+  24.5s [6月1日（週日） 下午 2:10]   shot 10_trade_air_ddp.png
+  24.9s [6月1日（週日） 下午 2:10]   shot 11_trade_risk_and_costs.png
+  24.9s [6月1日（週日） 下午 2:10]   ok  preview creates no saved business and keeps ledger balanced
+  24.9s [6月1日（週日） 下午 2:10]   click [Close] ×
+  25.0s [6月1日（週日） 下午 2:10] BOT FINISHED — 0 failure(s) · 25.0s real

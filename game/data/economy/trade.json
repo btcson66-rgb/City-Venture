@@ -1,0 +1,215 @@
+{
+ "terms": {
+  "EXW": {
+   "origin_payer": "buyer",
+   "freight_payer": "buyer",
+   "insurance_payer": "buyer",
+   "duty_payer": "buyer",
+   "risk_transfer": "Supplier collection",
+   "insurance_required": false
+  },
+  "FOB": {
+   "origin_payer": "seller",
+   "freight_payer": "buyer",
+   "insurance_payer": "buyer",
+   "duty_payer": "buyer",
+   "risk_transfer": "Vessel loading",
+   "insurance_required": false
+  },
+  "CIF": {
+   "origin_payer": "seller",
+   "freight_payer": "seller",
+   "insurance_payer": "seller",
+   "duty_payer": "buyer",
+   "risk_transfer": "Vessel loading",
+   "insurance_required": true
+  },
+  "DDP": {
+   "origin_payer": "seller",
+   "freight_payer": "seller",
+   "insurance_payer": "seller",
+   "duty_payer": "seller",
+   "risk_transfer": "Buyer delivery",
+   "insurance_required": false
+  }
+ },
+ "goods": {
+  "wireless_earbuds": {
+   "tariff_code": "electronics",
+   "regions": {
+    "almeria": {
+     "price": 18.0,
+     "capacity": 200,
+     "demand": 150
+    },
+    "aurelia": {
+     "price": 19.26,
+     "capacity": 190,
+     "demand": 160
+    },
+    "auroria": {
+     "price": 20.52,
+     "capacity": 180,
+     "demand": 170
+    },
+    "karu": {
+     "price": 21.78,
+     "capacity": 170,
+     "demand": 180
+    },
+    "lumina": {
+     "price": 23.04,
+     "capacity": 160,
+     "demand": 190
+    },
+    "northridge": {
+     "price": 24.3,
+     "capacity": 150,
+     "demand": 200
+    },
+    "solterra": {
+     "price": 25.56,
+     "capacity": 140,
+     "demand": 210
+    },
+    "zenkai": {
+     "price": 26.82,
+     "capacity": 130,
+     "demand": 220
+    }
+   }
+  },
+  "desk_lamp": {
+   "tariff_code": "household",
+   "regions": {
+    "almeria": {
+     "price": 12.0,
+     "capacity": 200,
+     "demand": 150
+    },
+    "aurelia": {
+     "price": 12.84,
+     "capacity": 190,
+     "demand": 160
+    },
+    "auroria": {
+     "price": 13.68,
+     "capacity": 180,
+     "demand": 170
+    },
+    "karu": {
+     "price": 14.52,
+     "capacity": 170,
+     "demand": 180
+    },
+    "lumina": {
+     "price": 15.36,
+     "capacity": 160,
+     "demand": 190
+    },
+    "northridge": {
+     "price": 16.2,
+     "capacity": 150,
+     "demand": 200
+    },
+    "solterra": {
+     "price": 17.04,
+     "capacity": 140,
+     "demand": 210
+    },
+    "zenkai": {
+     "price": 17.88,
+     "capacity": 130,
+     "demand": 220
+    }
+   }
+  }
+ },
+ "routes": {
+  "almeria": {
+   "freight_factor": 1.0,
+   "default_risk": 0.015
+  },
+  "aurelia": {
+   "freight_factor": 1.1,
+   "default_risk": 0.023
+  },
+  "auroria": {
+   "freight_factor": 1.2,
+   "default_risk": 0.031
+  },
+  "karu": {
+   "freight_factor": 1.3,
+   "default_risk": 0.039
+  },
+  "lumina": {
+   "freight_factor": 1.4,
+   "default_risk": 0.047
+  },
+  "northridge": {
+   "freight_factor": 1.5,
+   "default_risk": 0.055
+  },
+  "solterra": {
+   "freight_factor": 1.6,
+   "default_risk": 0.063
+  },
+  "zenkai": {
+   "freight_factor": 1.7000000000000002,
+   "default_risk": 0.07100000000000001
+  }
+ },
+ "origin_handling_per_unit": 1.2,
+ "insurance_rate": 0.018,
+ "insurance_coverage": 0.85,
+ "origin_loss_exposure": 0.05,
+ "stress_fx_factor": 0.85,
+ "quote_valid_days": 3,
+ "warehouse_rent_per_unit_day": 0.12,
+ "transport": {
+  "sea": {
+   "base_fee": 32,
+   "unit_fee": 1.2,
+   "days": 21,
+   "departure_weekday": 2,
+   "loss_risk": 0.04
+  },
+  "air": {
+   "base_fee": 95,
+   "unit_fee": 3.8,
+   "days": 3,
+   "departure_weekday": 0,
+   "loss_risk": 0.015
+  }
+ },
+ "payments": {
+  "tt_prepaid": {
+   "fee_rate": 0,
+   "fixed_fee": 4,
+   "days": 0,
+   "default_multiplier": 0
+  },
+  "tt_delivery": {
+   "fee_rate": 0,
+   "fixed_fee": 4,
+   "days": 0,
+   "default_multiplier": 0.35
+  },
+  "lc": {
+   "fee_rate": 0.02,
+   "fixed_fee": 12,
+   "days": 7,
+   "default_multiplier": 0.05
+  },
+  "open_account": {
+   "fee_rate": 0,
+   "fixed_fee": 4,
+   "days": 30,
+   "default_multiplier": 1
+  }
+ },
+ "home_import_rates": {
+  "electronics": 0.04,
+  "household": 0.06
+ }
+}

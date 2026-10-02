@@ -500,3 +500,7 @@ Lazy save keys: fx {rates, history[code]: [{day,rate}], last_day, rng as signed 
 ## Duties and season-two chapter receipts (#31)
 
 `economy/duties.json`: categories maps product category to one of codes; codes provide names. regions maps region → tariff code → rate fraction. refusal_rates maps ddp/ddu to probability; misclassification_fine (home dollars), document_fine_factor, document_delay_days, hold_timeout_days, target_units, fallback_units, target_return_rate, review_after_days, return_observation_days (days). Lazy customs save state has companies[entity][region:listing] {policy,code}, chapters[id] {entity,started minute}. Orders snapshot customs {policy,code,expected,duty_paid,penalty,cleared,held_at}; customs_refused marks duty-related refusal. pickup_fee_share allocates the courier batch fee for the income card. Existing saved keys remain intact.
+
+## Trade RFQ preview (issue70)
+
+`economy/trade.json` contains terms with origin/freight/insurance/duty payers, risk_transfer and insurance_required; goods keyed by product with tariff_code and regional local-unit price/capacity/demand; routes with freight_factor/default_risk; transport with base_fee/unit_fee/days/departure_weekday/loss_risk; payments with fee_rate/fixed_fee/days/default_multiplier. Other numeric keys tune quote expiry, handling, insurance, stress and warehouse rent. TradeQuote.sheet returns an immutable estimate with units and quoted_at/valid_until. No persistent trade state or executed job exists in this preview.

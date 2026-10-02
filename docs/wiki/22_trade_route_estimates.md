@@ -1,0 +1,11 @@
+# International trade route estimates — issue70
+
+Status: Implemented RFQ / Deal Sheet preview; Blocked industry execution until issue63 shared Industries / Jobs / Assets integration. This is not the completed international-trade industry.
+
+World Map regional cards expose Compare trade route. The preview needs neither owned goods nor a registered company; no inventory, contract, revenue or cash is created. Eight regional supply and demand tables are in economy/trade.json. Current FX quotes and Customs category tariffs are reused. The designer parameters are local-unit product prices, regional capacity/demand, route freight/default exposure, weekly sea departure, air speed/cost, banking fees, quote life, insurance coverage and daily hold warehouse rent.
+
+EXW assigns collection/onward costs to the buyer. FOB has seller-paid origin handling and buyer-paid main carriage, transferring cargo risk at vessel loading. CIF additionally pays carriage and required insurance but retains FOB's loading risk transfer. DDP assigns costs, import duty and delivery risk to the seller. FOB/CIF reject air. Deal Sheet separates seller margin from buyer landed cost and demand ceiling; all costs carry home-dollar units, while buyer quote carries its currency. A 15% foreign-receipt drop plus seller cargo exposure is a labelled stress scenario, not a forecast. Insurance and L/C reduce distinct risks at a cost; no result is guaranteed.
+
+Product ids: wireless_earbuds and desk_lamp. Terms: EXW, FOB, CIF, DDP. Transport: sea, air. Payments: tt_prepaid, tt_delivery, lc, open_account. Glossary: trade_terms, trade_rfq. Help: trade_quote. Stable controls: TradeSource, TradeDestination, TradeProduct, TradeQuantity, TradeTerm, TradeTransport, TradePayment, TradeInsurance, TradeRefreshRFQ and TradeRoute_<region>.
+
+Remaining issue70 acceptance: register the actual trade industry through issue63; RFQ acceptance and Jobs lifecycle, L/C documents and payment release, customs hold warehouse rent Ledger, shipping / insurance crises, three growth tiers, recurring jobs, bonded warehouse / agency supply chain, Meridian Trade Desk lease and NPC placement, lending/staff integration, 120-day three-strategy balance and route / customs execution evidence. Airport exterior depends on issue68; shared forward hedging follows issue42. No alternate Jobs or Assets store is introduced.

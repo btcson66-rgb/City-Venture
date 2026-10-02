@@ -790,6 +790,10 @@ msgstr "转角的小店面，旧城区一半的人每天都会经过。交屋是
 msgid "A tidy route. A stop or two out of order."
 msgstr "路线很俐落，只有一两个点的顺序可以更好。"
 
+#: data/help/glossary.json
+msgid "A time-limited estimate of goods, transport, bank fees and risk. Prices are expressed in local currency; the Deal Sheet compares home-dollar costs."
+msgstr "有期限的商品、运费、银行费用与风险试算。商品以当地货币报价，交易明细统一以本国元比较成本。"
+
 #: data/dialogue/lina_intro.json
 msgid "A wire: cheap, slow. A letter of credit: we guarantee you to their bank, about two days, one and a half percent."
 msgstr "电汇：便宜、慢。信用状：我们向对方银行担保你，大约两天，手续费百分之一点五。"
@@ -834,7 +838,7 @@ msgstr "ATM"
 msgid "ATM — balances"
 msgstr "ATM——查余额"
 
-#: scripts/sim/contracts.gd:25 scripts/sim/fx.gd:24 scripts/sim/fx.gd:32
+#: scripts/sim/contracts.gd:25 scripts/sim/fx.gd:24 scripts/sim/fx.gd:32 scripts/sim/trade_quote.gd:11
 msgid "AUD"
 msgstr "AUD"
 
@@ -974,6 +978,10 @@ msgstr "下午 · 晴"
 msgid "Agriculture"
 msgstr "农业"
 
+#: scripts/ui/modals/trade_quote_modal.gd:36
+msgid "Air freight"
+msgstr "空运"
+
 #: data/city/aurelia.json
 msgid "Airport Line"
 msgstr "机场线"
@@ -989,6 +997,10 @@ msgstr "Alex Chen"
 #: scripts/ui/minigames/route_game.gd:53
 msgid "All %d stops planned  ·  round trip %.1f km"
 msgstr "%d 个停靠点都排好了  ·  来回共 %.1f 公里"
+
+#: data/help/help.json
+msgid "All cost rows are in home dollars; the buyer quote is labelled with its own currency."
+msgstr "各项成本都以本国元列示；买方报价另标明使用的货币。"
 
 #: scripts/ui/minigames/clerk_forms_game.gd:30
 msgid "All good? Approve it. Something wrong? Click the wrong field first, then Reject."
@@ -1178,6 +1190,10 @@ msgstr "请对方提前付款（折 3%%：现在拿 %s）"
 msgid "At any packing table the shipping options include \"Own van\": fuel instead of a courier fee, delivered the same day. The Pier 7 warehouse can hold your stock too."
 msgstr "每张打包桌的出货选项都多了「自己的货车」：付油钱代替快递费，当天送到。7 号码头仓库也能放你的库存。"
 
+#: scripts/ui/modals/trade_quote_modal.gd:41
+msgid "At supplier collection"
+msgstr "在供应商处提货时"
+
 #: scripts/ui/tutorial.gd:70
 msgid "At the packing table, choose how it leaves: book the courier (it collects from home) or carry it to PostPoint yourself (cheaper, costs your time)."
 msgstr "在打包桌选择寄送方式：叫快递（到家收件），或自己拿去 PostPoint（比较便宜，但花你的时间）。"
@@ -1361,6 +1377,10 @@ msgstr "余额"
 #: scripts/ui/phone_ui.gd:129
 msgid "Bank"
 msgstr "银行"
+
+#: scripts/ui/modals/trade_quote_modal.gd:101
+msgid "Bank fee / spread (home dollars)"
+msgstr "银行手续费／换汇价差（本国元）"
 
 #: scripts/sim/ledger.gd:30
 msgid "Bank fees"
@@ -1790,13 +1810,29 @@ msgstr "进第一批货（Company OS → 营运）。用家里的笔电或共享
 msgid "Buy — %s"
 msgstr "购买——%s"
 
-#: scripts/ui/modals/company_os.gd:836
+#: scripts/ui/modals/company_os.gd:836 scripts/ui/modals/trade_quote_modal.gd:34
 msgid "Buyer"
-msgstr "买方"
+msgstr "买方负担"
 
 #: scripts/sim/ecommerce.gd:1217
 msgid "Buyer %s opened a dispute on order %s. We refunded them and charged a $15 dispute fee."
 msgstr "买家 %s 对订单 %s 提出申诉。我们已退款给对方，并收取 $15 申诉处理费。"
+
+#: scripts/sim/trade_quote.gd:63
+msgid "Buyer delivery"
+msgstr "送达买方时"
+
+#: scripts/ui/modals/trade_quote_modal.gd:106
+msgid "Buyer landed / ceiling (home dollars)"
+msgstr "买方到岸成本／价格上限（本国元）"
+
+#: scripts/ui/modals/trade_quote_modal.gd:98
+msgid "Buyer quote (foreign total)"
+msgstr "买方报价（外币总额）"
+
+#: scripts/ui/modals/trade_quote_modal.gd:73
+msgid "Buyer region"
+msgstr "买方地区"
 
 #: data/character/options.json
 msgid "Buzz"
@@ -1881,6 +1917,10 @@ msgstr "第九章——清算危机"
 #: scripts/ui/modals/company_os.gd:1149
 msgid "CHURN"
 msgstr "流失率"
+
+#: scripts/sim/trade_quote.gd:20 scripts/ui/modals/trade_quote_modal.gd:86 scripts/ui/modals/trade_quote_modal.gd:9
+msgid "CIF"
+msgstr "CIF（成本、保险与运费）"
 
 #: scripts/frontend/main_menu.gd:27 scripts/frontend/main_menu.gd:30
 msgid "CITY VENTURE"
@@ -2062,6 +2102,30 @@ msgstr "卡布奇诺"
 msgid "Careful: fewer mistakes, fewer returns."
 msgstr "细心：出错少，退货少。"
 
+#: scripts/sim/trade_quote.gd:45
+msgid "Cargo insurance"
+msgstr "货物保险"
+
+#: scripts/ui/modals/trade_quote_modal.gd:90
+msgid "Cargo insurance: off"
+msgstr "货物保险：不投保"
+
+#: scripts/ui/modals/trade_quote_modal.gd:90
+msgid "Cargo insurance: on"
+msgstr "货物保险：投保"
+
+#: scripts/ui/modals/trade_quote_modal.gd:109
+msgid "Cargo loss / buyer default (%)"
+msgstr "货损／买方倒帐几率（%）"
+
+#: scripts/ui/modals/trade_quote_modal.gd:107
+msgid "Cargo risk passes at"
+msgstr "货物风险转移时点"
+
+#: scripts/ui/modals/trade_quote_modal.gd:88
+msgid "Cargo transport"
+msgstr "货物运输"
+
 #: scripts/ui/tutorial.gd:72
 msgid "Carry it to PostPoint"
 msgstr "自己拿去 PostPoint"
@@ -2242,6 +2306,10 @@ msgstr "请选择关税支付方式与有效的税则分类。"
 msgid "Choose a supported overseas region."
 msgstr "请选择可经营的海外地区。"
 
+#: scripts/sim/trade_quote.gd:19
+msgid "Choose a supported product, term, transport and payment method."
+msgstr "请选择可用的商品、贸易条件、运输与付款方式。"
+
 #: scripts/sim/ecommerce.gd:434
 msgid "Choose between 1 and %d returnable units."
 msgstr "请选择 1 至 %d 件可退库存。"
@@ -2261,6 +2329,10 @@ msgstr "名字要想清楚：它会出现在招牌和发票上。"
 #: data/story/chapters.json
 msgid "Choose the tariff code that matches your actual product"
 msgstr "选择符合实际商品的税则分类"
+
+#: scripts/sim/trade_quote.gd:17
+msgid "Choose two different trading regions."
+msgstr "请选择两个不同的交易地区。"
 
 #: data/help/glossary.json
 msgid "Choosing a lower-rate category does not change the goods: wrong declarations lead to duty correction and a fine."
@@ -2522,6 +2594,22 @@ msgstr "公司登记"
 msgid "Company registration fee — %s"
 msgstr "公司登记规费——%s"
 
+#: scripts/ui/modals/trade_quote_modal.gd:105
+msgid "Compare buyer landed cost with demand before choosing a route."
+msgstr "先比较买方到岸成本与需求价格，再决定交易路线。"
+
+#: data/help/glossary.json
+msgid "Compare routes before committing cash. This preview does not place an order; refresh after a quote expires."
+msgstr "投入资金前先比较路线。试算不会下单；报价过期后请重新询价。"
+
+#: data/help/help.json
+msgid "Compare supply and buyer regions, quantities, trade terms, cargo transport and payment methods."
+msgstr "比较供应地区、买方地区、数量、贸易条件、运输与付款方式。"
+
+#: scripts/ui/modals/global_region_modal.gd:29
+msgid "Compare trade route"
+msgstr "比较贸易路线"
+
 #: scripts/sim/story_engine.gd:181
 msgid "Completed %s."
 msgstr "完成了%s。"
@@ -2649,6 +2737,10 @@ msgstr "补齐文档并付减额罚款"
 #: scripts/ui/modals/company_os.gd:226
 msgid "Cost of goods sold"
 msgstr "销货成本"
+
+#: scripts/ui/modals/trade_quote_modal.gd:87
+msgid "Cost ownership and risk transfer"
+msgstr "成本负担与风险转移"
 
 #: data/events/ad_cost_spike.json
 msgid "Cost per click +40% for the next 7 days."
@@ -2842,6 +2934,10 @@ msgstr "缩减开支：暂停广告、降低生活费"
 msgid "Cut spending (pause ads, cheaper living)"
 msgstr "缩减开支（暂停广告、生活从简）"
 
+#: scripts/ui/modals/trade_quote_modal.gd:86
+msgid "DDP"
+msgstr "DDP（完税交货）"
+
 #: data/help/help.json
 msgid "DDP pays duty before shipping and reduces refusals. DDU leaves duty to the buyer on arrival; refusals are more common."
 msgstr "DDP 在出货前付关税，拒收较少；DDU 让买家到货时付，拒收较常发生。"
@@ -2974,6 +3070,10 @@ msgstr "日票 $15。或是自由座每月 $350。"
 msgid "Deadline missed: %s. Deliver soon, the fee drops."
 msgstr "错过截止时间：%s。快点交件，费用会被打折。"
 
+#: data/help/help.json
+msgid "Deal signing is unavailable. Estimates create no contract, inventory or payment."
+msgstr "尚未开放交易签约。试算不会创建合约、库存或付款。"
+
 #: data/story/chapters.json
 msgid "Deal with an unhappy customer (check your phone)"
 msgstr "处理一位不满意的客人（看手机）"
@@ -3105,6 +3205,10 @@ msgstr "无法交货"
 #: data/events/viral_mention.json
 msgid "Demand ×3 for 3 days. Stock is the bottleneck."
 msgstr "3 天内需求 ×3。库存才是瓶颈。"
+
+#: scripts/ui/modals/trade_quote_modal.gd:108
+msgid "Departure wait / transit / payment (days)"
+msgstr "等候出发／运送／收款（天）"
 
 #: data/help/glossary.json scripts/ui/modals/lease_modal.gd:23
 msgid "Deposit"
@@ -3354,6 +3458,14 @@ msgstr "出口"
 msgid "EXPIRED"
 msgstr "已过期"
 
+#: scripts/ui/modals/trade_quote_modal.gd:86
+msgid "EXW"
+msgstr "EXW（工厂交货）"
+
+#: data/help/glossary.json
+msgid "EXW: buyer collects. FOB: seller loads the vessel. CIF: seller also pays main freight and required insurance, but risk still passes at loading. DDP: seller covers arrival duty and risk until buyer delivery."
+msgstr "EXW 由买方提货；FOB 由卖方负责装船；CIF 由卖方再付主运费及必要保险，但风险仍在装船时转移；DDP 由卖方付进口税，并承担送达买方前的风险。"
+
 #: scripts/ui/minigames/teller_cash_game.gd:23
 msgid "Each customer asks for a cash withdrawal. Click notes into the tray until it adds up exactly."
 msgstr "每位客人要提领现金。点击纸钞放进托盘，凑到刚好的金额。"
@@ -3558,6 +3670,10 @@ msgstr "托管：你把钱付进一份替你保管的合约。供应商看到钱
 msgid "Espresso"
 msgstr "浓缩"
 
+#: scripts/ui/modals/trade_quote_modal.gd:102
+msgid "Estimated margin (home dollars)"
+msgstr "预估交易余额（本国元）"
+
 #: scripts/sim/forecast.gd:107
 msgid "Estimated sales"
 msgstr "预估销售"
@@ -3685,6 +3801,14 @@ msgstr "金融区 →"
 #: scripts/ui/tutorial.gd:418 scripts/ui/tutorial.gd:465
 msgid "FIRST VENTURE %d/%d"
 msgstr "第一次创业 %d/%d"
+
+#: scripts/sim/trade_quote.gd:20 scripts/ui/modals/trade_quote_modal.gd:86
+msgid "FOB"
+msgstr "FOB（装运港船上交货）"
+
+#: scripts/sim/trade_quote.gd:21
+msgid "FOB and CIF require sea transport. For air, choose EXW or DDP."
+msgstr "FOB、CIF 适用海运；空运请选 EXW 或 DDP。"
 
 #: data/../assets/buildings/buildings_meta.json
 msgid "FRESH+ MARKET"
@@ -4558,6 +4682,10 @@ msgstr "征才"
 msgid "Hiring gets harder: wages up 8% in a year."
 msgstr "越来越难征人：薪资一年涨 8%。"
 
+#: scripts/ui/modals/trade_quote_modal.gd:110
+msgid "Hold warehouse rent (home dollars/day)"
+msgstr "扣关仓租（本国元／天）"
+
 #: data/character/options.json
 msgid "Home"
 msgstr "居家"
@@ -4750,7 +4878,7 @@ msgstr "你的数字变大，我的也会跟着变大。"
 msgid "Immature institutions"
 msgstr "制度尚未成熟"
 
-#: data/help/glossary.json
+#: data/help/glossary.json scripts/sim/trade_quote.gd:46
 msgid "Import duty"
 msgstr "进口关税"
 
@@ -4885,6 +5013,10 @@ msgstr "保温水瓶"
 #: scripts/sim/ledger.gd:34
 msgid "Insurance"
 msgstr "保险"
+
+#: data/help/help.json
+msgid "Insurance reduces cargo exposure and L/C lowers default exposure; both cost money and neither guarantees a profit."
+msgstr "保险降低货损负担，信用状降低倒帐风险；两者都要费用，也都无法保证获利。"
 
 #: scripts/ui/modals/van_deal_modal.gd:32
 msgid "Insurance, every month"
@@ -5466,6 +5598,10 @@ msgstr "出发吧"
 msgid "Letter of credit"
 msgstr "信用状"
 
+#: scripts/ui/modals/trade_quote_modal.gd:39
+msgid "Letter of credit (L/C)"
+msgstr "信用状 L/C"
+
 #: data/economy/settlement_methods.json
 msgid "Letter of credit (Nexus Bank)"
 msgstr "信用状（Nexus 银行）"
@@ -5813,6 +5949,10 @@ msgstr "在城里生产，不经港口、没有附加费：单价较高，但隔
 #: scripts/ui/modals/business_board.gd:60
 msgid "Main costs"
 msgstr "主要成本"
+
+#: scripts/sim/trade_quote.gd:44
+msgid "Main freight"
+msgstr "主运费"
 
 #: data/story/chapters.json
 msgid "Make $1,250 gross profit — next month's rent"
@@ -6474,6 +6614,10 @@ msgstr "不卖。公司、获利和麻烦都还是你的。Victor 说大门会�
 msgid "No saved games yet."
 msgstr "还没有存盘。"
 
+#: scripts/ui/modals/trade_quote_modal.gd:111
+msgid "No stock, contract, payment, insurance claim or forward hedge is created by this estimate."
+msgstr "本次试算不会创建库存、合约、付款、保险理赔或远期锁汇。"
+
 #: scripts/sim/acquisition.gd:102 scripts/sim/event_engine.gd:168 scripts/sim/rails.gd:332
 msgid "No such choice."
 msgstr "没有这个选项。"
@@ -6497,6 +6641,10 @@ msgstr "找不到这笔贷款。"
 #: scripts/sim/contracts.gd:343
 msgid "No supplier carries this product."
 msgstr "没有供应商卖这个商品。"
+
+#: scripts/sim/trade_quote.gd:30
+msgid "No valid exchange quote is available."
+msgstr "目前没有可用的汇率报价。"
 
 #: data/dialogue/lina_bridge.json
 msgid "No. Wires fail too, just more slowly and with more paperwork. We replaced one kind of trust with another: fewer middlemen, more software."
@@ -6830,6 +6978,10 @@ msgstr "准时"
 msgid "On time pays the full fee, a shorter route pays a little more, and a late run pays 40% less. A run left undone for hours is cancelled. Fuel and upkeep come off every run."
 msgstr "准时送到拿全额运费，路线越短报酬多一点，迟到的单少拿 40%。放了好几个小时没送的单会被取消。每趟都要扣油资和维护费。"
 
+#: scripts/ui/modals/trade_quote_modal.gd:42
+msgid "On vessel loading"
+msgstr "装船时"
+
 #: data/events/customer_return.json
 msgid "One unit + express shipping."
 msgstr "多花一件商品＋快捷运费。"
@@ -6994,6 +7146,10 @@ msgstr "先开设这个地区的商店，并保存当地售价。"
 msgid "Open your phone"
 msgstr "打开手机"
 
+#: scripts/ui/modals/trade_quote_modal.gd:40
+msgid "Open-account credit"
+msgstr "记帐赊销"
+
 #: scripts/sim/company.gd:95
 msgid "Opened a business account at Nexus Bank with %s of founder capital."
 msgstr "在 Nexus 银行开了企业帐户，创办人出资 %s。"
@@ -7089,6 +7245,10 @@ msgstr "亲手打包的订单：%d"
 #: scripts/ui/modals/pack_ship_modal.gd:26
 msgid "Orders waiting to be packed: %d"
 msgstr "待打包订单：%d"
+
+#: scripts/sim/trade_quote.gd:43
+msgid "Origin handling"
+msgstr "起运地处理费"
 
 #: scripts/ui/minigames/cowork_host_game.gd:7
 msgid "Oskar"
@@ -8002,9 +8162,17 @@ msgstr "品质不稳"
 msgid "Quantity"
 msgstr "数量"
 
+#: scripts/ui/modals/trade_quote_modal.gd:77
+msgid "Quantity (units)"
+msgstr "数量（件）"
+
 #: scripts/ui/modals/purchase_return_modal.gd:32
 msgid "Quantity (up to %d)"
 msgstr "数量（最多 %d 件）"
+
+#: scripts/sim/trade_quote.gd:26
+msgid "Quantity exceeds regional capacity or demand, or markup is outside 0–100%."
+msgstr "数量超过地区产能或需求，或加价率不在 0–100% 范围内。"
 
 #: data/jobs/bank_teller.json
 msgid "Quiet morning. You read the small-business lending policy twice."
@@ -8057,6 +8225,10 @@ msgstr "已换货"
 #: scripts/ui/modals/company_os.gd:29
 msgid "RETURN REQUESTED"
 msgstr "申请退货"
+
+#: scripts/ui/modals/trade_quote_modal.gd:96
+msgid "RFQ — three-day estimate"
+msgstr "询价 RFQ：有效三天"
 
 #: data/../assets/buildings/buildings_meta.json data/buildings/riverside_apartment.json
 msgid "RIVERSIDE TOWER"
@@ -8237,6 +8409,10 @@ msgstr "回收纸"
 #: scripts/ui/minigames/cowork_host_game.gd:8
 msgid "Reed"
 msgstr "Reed"
+
+#: scripts/ui/modals/trade_quote_modal.gd:112
+msgid "Refresh RFQ estimate"
+msgstr "更新询价试算"
 
 #: scripts/ui/modals/purchase_return_modal.gd:44
 msgid "Refund"
@@ -8529,6 +8705,10 @@ msgstr "报表"
 #: scripts/ui/modals/company_os.gd:980
 msgid "Reputation %.1f · rate about %s/h · %d delivered · %d late"
 msgstr "信誉 %.1f · 时薪约 %s · 已交件 %d · 迟交 %d"
+
+#: data/help/glossary.json
+msgid "Request for quotation"
+msgstr "询价 RFQ"
 
 #: scripts/ui/modals/company_os.gd:567 scripts/ui/modals/settlement_modal.gd:95
 msgid "Reroute"
@@ -9014,6 +9194,10 @@ msgstr "得分 %d%%"
 msgid "Scribbled in the corner: 'profit is an opinion, cash is a fact.'"
 msgstr "角落潦草写着：「利润是观点，现金是事实。」"
 
+#: scripts/ui/modals/trade_quote_modal.gd:35
+msgid "Sea freight"
+msgstr "海运"
+
 #: scripts/ui/minigames/pack_game.gd:138
 msgid "Seal & next"
 msgstr "封箱，下一张"
@@ -9038,9 +9222,9 @@ msgstr "先卖掉一些库存，或租更大的空间。"
 msgid "Sell your time: clients post small projects every morning. Accept a gig, work it here in 2-hour sessions, deliver before the deadline and invoice. Payment follows the client's terms. On-time work earns stars; stars raise your rate."
 msgstr "出卖你的时间：客户每天早上会张贴小案子。接案后在这里以每次 2 小时的方式工作，截止前交件并开立发票，依客户的付款条件收款。准时交件能累积星等，星等越高时薪越高。"
 
-#: scripts/ui/modals/company_os.gd:836
+#: scripts/ui/modals/company_os.gd:836 scripts/ui/modals/trade_quote_modal.gd:33
 msgid "Seller"
-msgstr "卖方"
+msgstr "卖方负担"
 
 #: data/regions/zenkai.json
 msgid "Semiconductors"
@@ -9778,6 +9962,14 @@ msgstr "平眉"
 msgid "Straight answer? The gearbox sighs on the hills and the left mirror is held on by hope. The engine is honest, and so am I."
 msgstr "要老实答吗？上坡的时候变速箱会叹气，左后照镜是靠希望黏着的。引擎很老实，我也是。"
 
+#: scripts/ui/modals/trade_quote_modal.gd:104
+msgid "Stress estimate: foreign receipts fall 15% and one seller cargo loss occurs. This is a scenario, not a forecast or a guaranteed result."
+msgstr "压力情境：外币收款价值跌 15%，并发生一次由卖方承担的货损。这是情境试算，不是预测，也不是保证结果。"
+
+#: scripts/ui/modals/trade_quote_modal.gd:103
+msgid "Stress margin (home dollars)"
+msgstr "压力情境余额（本国元）"
+
 #: data/regions/auroria.json
 msgid "Strict consumer protection"
 msgstr "严格的消费者保护"
@@ -9826,6 +10018,10 @@ msgstr "日"
 msgid "Supplier bills payable"
 msgstr "应付供应商帐款"
 
+#: scripts/ui/modals/trade_quote_modal.gd:41
+msgid "Supplier collection"
+msgstr "在供应商处提货时"
+
 #: scripts/sim/effects.gd:40
 msgid "Supplier doesn't carry that."
 msgstr "供应商没有这个商品。"
@@ -9866,6 +10062,14 @@ msgstr "材料和面包店"
 msgid "Supply Shock"
 msgstr "供应冲击"
 
+#: scripts/ui/modals/trade_quote_modal.gd:97
+msgid "Supply cost (home dollars)"
+msgstr "进货成本（本国元）"
+
+#: scripts/ui/modals/trade_quote_modal.gd:72
+msgid "Supply region"
+msgstr "供应地区"
+
 #: data/events/supply_shock_plan.json
 msgid "Supply shock: your plan"
 msgstr "供应冲击：你的对策"
@@ -9893,6 +10097,14 @@ msgstr "先改用回收包材（Company OS → 营运）。"
 #: scripts/ui/modals/settlement_modal.gd:109
 msgid "Switched: the payment lands %s."
 msgstr "已改用：款项 %s 入帐。"
+
+#: scripts/ui/modals/trade_quote_modal.gd:38
+msgid "T/T on delivery"
+msgstr "T/T 货到付款"
+
+#: scripts/ui/modals/trade_quote_modal.gd:37
+msgid "T/T prepaid"
+msgstr "T/T 预付"
 
 #: data/../assets/buildings/buildings_meta.json
 msgid "TAX OFFICE"
@@ -10718,13 +10930,61 @@ msgstr "贸易"
 msgid "Trade & Energy"
 msgstr "贸易与能源"
 
+#: scripts/ui/modals/trade_quote_modal.gd:19
+msgid "Trade Deal Sheet — estimate"
+msgstr "贸易交易明细：试算"
+
 #: data/regions/almeria.json
 msgid "Trade hub"
 msgstr "贸易枢纽"
 
+#: scripts/ui/modals/trade_quote_modal.gd:89
+msgid "Trade payment"
+msgstr "贸易付款"
+
+#: scripts/ui/modals/trade_quote_modal.gd:74
+msgid "Trade product"
+msgstr "贸易商品"
+
+#: data/help/help.json
+msgid "Trade route estimates"
+msgstr "贸易路线试算"
+
+#: scripts/ui/modals/trade_quote_modal.gd:86
+msgid "Trade term"
+msgstr "贸易条件"
+
+#: data/help/glossary.json
+msgid "Trade terms"
+msgstr "贸易条件"
+
+#: scripts/ui/modals/trade_quote_modal.gd:73
+msgid "TradeDestination"
+msgstr "TradeDestination"
+
 #: data/suppliers/tradelink_wholesale.json
 msgid "TradeLink Wholesale"
 msgstr "TradeLink 批发"
+
+#: scripts/ui/modals/trade_quote_modal.gd:89
+msgid "TradePayment"
+msgstr "TradePayment"
+
+#: scripts/ui/modals/trade_quote_modal.gd:74
+msgid "TradeProduct"
+msgstr "TradeProduct"
+
+#: scripts/ui/modals/trade_quote_modal.gd:72
+msgid "TradeSource"
+msgstr "TradeSource"
+
+#: scripts/ui/modals/trade_quote_modal.gd:86
+msgid "TradeTerm"
+msgstr "TradeTerm"
+
+#: scripts/ui/modals/trade_quote_modal.gd:88
+msgid "TradeTransport"
+msgstr "TradeTransport"
 
 #: scripts/sim/company.gd:107
 msgid "Transfer to %s"
@@ -10985,6 +11245,10 @@ msgstr "Verdant Supply 刚在工业区开张。他们的太阳能台灯在 ShopL
 #: data/world/years.json
 msgid "Verdant Supply opens a warehouse in the Industrial Zone."
 msgstr "Verdant Supply 在工业区开设仓库。"
+
+#: scripts/ui/modals/trade_quote_modal.gd:42
+msgid "Vessel loading"
+msgstr "装船时"
 
 #: data/npcs/victor.json
 msgid "Victor Hale"
@@ -11281,6 +11545,10 @@ msgstr "白色，14 万公里，会叹气的变速箱，老实的引擎。买下
 #: data/buildings/small_office.json scripts/ui/modals/info_modal.gd:83
 msgid "Whiteboard"
 msgstr "白板"
+
+#: data/help/glossary.json
+msgid "Who pays and who carries risk are different questions. FOB and CIF apply only to sea transport."
+msgstr "付费的一方不一定承担风险。FOB、CIF 仅适用海运。"
 
 #: scripts/ui/minigames/barista_game.gd:8
 msgid "Whole milk"
@@ -12154,6 +12422,10 @@ msgstr "有你还没达成的条件"
 msgid "hiring — ask about the job"
 msgstr "征人中——询问这份工作"
 
+#: scripts/ui/modals/trade_quote_modal.gd:100
+msgid "home dollars"
+msgstr "本国元"
+
 #: data/businesses/hotel.json
 msgid "hotel group"
 msgstr "饭店集团"
@@ -12905,6 +13177,10 @@ msgstr "✗ %s 从输送带掉下去了"
 #: scripts/ui/minigames/barista_game.gd:129
 msgid "✗ %s gave up waiting"
 msgstr "✗ %s 等不下去走了"
+
+#: scripts/ui/modals/trade_quote_modal.gd:69
+msgid "✗ Deals cannot be signed in this build. Compare route estimates first."
+msgstr "✗ 此版本尚未开放签约；请先比较交易路线试算。"
 
 #: scripts/ui/minigames/pack_game.gd:147
 msgid "✗ It doesn't fit. Try a bigger box."

@@ -17,6 +17,9 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "trade_quote":
+		await _trade_quote_fixture()
+		return
 	if _arg("from") == "ch13":
 		await _chapters_13_to_14(true)
 		return
@@ -69,6 +72,53 @@ func run() -> void:
 		await _chapters_10_to_12()
 		await _chapters_13_to_14()
 	await _summary()
+
+
+## Region entry is a fixture; route selection and quote comparisons use native controls.
+func _trade_quote_fixture() -> void:
+	await bot.wait(4.0)
+	UIRoot._suppress_decisions = true
+	UIRoot.tutorial.st()["off"] = true
+	bot.step("Trade RFQ preview — no active industry or invented payment")
+	UIRoot.open_modal(WorldMapModal.new())
+	await bot.wait(0.5)
+	await bot.click_named("Region_northridge")
+	await bot.shot("trade_region_entry")
+	await bot.click_named("TradeRoute_northridge")
+	await bot.wait(0.4)
+	if UIRoot.top_modal() is InfoModal:
+		await bot.click_text("Got it")
+	await bot.shot("trade_deal_sheet")
+	var modal: TradeQuoteModal = UIRoot.top_modal()
+	bot.expect(modal.quote["ok"] and modal.quote["margin"] > 0 and modal.quote["stress_margin"] < 0, "quote has rational margin and losing stress case")
+	await bot.click_named("TradeTerm")
+	for i in 4:
+		await bot.key_action("ui_up")
+	for i in 3:
+		await bot.key_action("ui_down")
+	await bot.key_action("ui_accept")
+	await bot.wait(0.3)
+	bot.expect(modal.term == "DDP", "real DDP selection")
+	await bot.click_named("TradeTransport")
+	for i in 2:
+		await bot.key_action("ui_up")
+	await bot.key_action("ui_down")
+	await bot.key_action("ui_accept")
+	await bot.wait(0.3)
+	bot.expect(modal.mode == "air", "real air selection")
+	await bot.click_named("TradeRefreshRFQ")
+	await bot.shot("trade_air_ddp")
+	var sc: ScrollContainer
+	# Discover the actual modal scroll, not an assumed position in the world.
+	for child in modal.body.get_children():
+		if child is ScrollContainer:
+			sc = child
+	if sc != null:
+		sc.scroll_vertical = int(sc.get_v_scroll_bar().max_value)
+	await bot.wait(0.4)
+	await bot.shot("trade_risk_and_costs")
+	bot.expect(not GameState.data.has("trade") and Ledger.check_balanced(), "preview creates no saved business and keeps ledger balanced")
+	await bot.click_named("Close")
 
 
 func _arg(name: String) -> String:
