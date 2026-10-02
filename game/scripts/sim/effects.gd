@@ -15,6 +15,8 @@ static func apply(e: Dictionary, ctx: Dictionary) -> Dictionary:
 	var op: String = e.get("op", "")
 	var ent := GameState.business_entity()
 	match op:
+		"lease_damage":
+			return LeaseEnd.record_damage(str(e.get("property", ctx.get("property", ""))), _num(e.get("amount", 0), ctx))
 		"industry":
 			var module := Industries.find(str(e.get("industry", "")))
 			if module.is_empty() or not module["sim_class"].has_method("crisis"):

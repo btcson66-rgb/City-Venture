@@ -19,7 +19,7 @@ static func segment_tag() -> String:return "hotel"
 static func source(id := "") -> Dictionary:return {"type":"hotel","id":id,"segment":"hotel"}
 static func error(text: String) -> Dictionary:return {"ok":false,"error":I18n.t(text)}
 static func is_running() -> bool:return GameState.has_game() and bool(S()["active"])
-static func valid() -> bool:return is_running() and Assets._valid_entity(entity())
+static func valid() -> bool:return is_running() and Assets._valid_entity(entity()) and (S()["mode"] == "own" or Living.has_lease(str(cfg()["lease_property"])))
 static func stage() -> int:return int(S()["stage"])
 static func rooms_of(type: String) -> int:return int(S()["rooms"].get(type,{}).get("n",0))
 static func total_rooms() -> int:

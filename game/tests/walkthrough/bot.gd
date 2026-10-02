@@ -169,6 +169,8 @@ func _audit_one(t: String, ctl: Control) -> void:
 func _run() -> void:
 	await wait(1.0)
 	match mode:
+		"lease_end":
+			await load("res://tests/walkthrough/lease_end_tour.gd").new(self).run()
 		"player_feedback":
 			await load("res://tests/walkthrough/player_feedback_tour.gd").new(self).run()
 		"save_transfer":

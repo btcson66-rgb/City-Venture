@@ -572,6 +572,7 @@ static func best_location(product_id: String) -> String:
 	var best := ""
 	var best_n := 0
 	for loc in stock_locations():
+		if Living.D()["leases"].get(loc, {}).has("ending"): continue
 		var a := available(loc, product_id)
 		if a > best_n:
 			best_n = a

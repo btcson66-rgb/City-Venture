@@ -50,7 +50,7 @@ msgstr "（张数可以再少一点）"
 msgid " (late: -20%)"
 msgstr "（迟交：-20%）"
 
-#: scripts/sim/living.gd:85
+#: scripts/sim/living.gd:89
 msgid " + deposit"
 msgstr "＋押金"
 
@@ -166,7 +166,7 @@ msgstr "已接 %d 单"
 msgid "%d cars are due for service; skipping it risks a breakdown during a rental."
 msgstr "有 %d 辆车该保养了；不保养可能在租期中抛锚。"
 
-#: scripts/sim/automotive.gd:647
+#: scripts/sim/automotive.gd:649
 msgid "%d completed rentals"
 msgstr "完成 %d 笔租赁"
 
@@ -238,11 +238,11 @@ msgstr "再做 %d 班升为%s"
 msgid "%d new delivery runs are posted (Company OS → Logistics)."
 msgstr "有 %d 趟新的外送单上架了（Company OS → 物流）。"
 
-#: scripts/ui/phone_ui.gd:317
+#: scripts/ui/phone_ui.gd:320
 msgid "%d of %d days"
 msgstr "%d／%d 天"
 
-#: scripts/ui/phone_ui.gd:302
+#: scripts/ui/phone_ui.gd:305
 msgid "%d of %d reached"
 msgstr "已达成 %d／%d"
 
@@ -258,7 +258,7 @@ msgstr "%d 笔订单%s等待打包——到打包桌（家里或办公室）。"
 msgid "%d orders"
 msgstr "%d 笔订单"
 
-#: scripts/world/actions.gd:285
+#: scripts/world/actions.gd:287
 msgid "%d orders waiting to be packed. I'm on it."
 msgstr "还有 %d 笔订单等着打包，我正在处理。"
 
@@ -438,7 +438,7 @@ msgstr "%s 还有空间：请在「营运」的「送货到」选它。"
 msgid "%s is already registered (%s)."
 msgstr "%s 已经登记过了（%s）。"
 
-#: scripts/world/actions.gd:236
+#: scripts/world/actions.gd:238
 msgid "%s is busy."
 msgstr "%s 在忙。"
 
@@ -674,7 +674,7 @@ msgstr "%s 倍去年获利 %s"
 msgid "%s × last year's revenue of %s"
 msgstr "%s 倍去年营收 %s"
 
-#: scripts/sim/living.gd:68
+#: scripts/sim/living.gd:72
 msgid "%s — monthly"
 msgstr "%s——月租"
 
@@ -1130,6 +1130,10 @@ msgstr "会卖的照片。"
 msgid "A place to work"
 msgstr "找个地方工作"
 
+#: scripts/ui/modals/lease_end_modal.gd:47
+msgid "A premises-dependent business pauses when its lease ends. Finish its jobs first, or settle cancellations. Existing delivered invoices remain collectible."
+msgstr "依赖处所的产业会在退租后暂停。先完成工单，或结清取消费用。已交付的应收款仍可收取。"
+
 #: data/milestones.json
 msgid "A proper agency"
 msgstr "像样的代理商"
@@ -1142,7 +1146,7 @@ msgstr "公开回复加上退款平息了风波，这则负评会随时间移出
 msgid "A quiet upgrade costs one suite night and lifts her service score."
 msgstr "悄悄升等要送出一晚套房，但会提高她给的服务分。"
 
-#: scripts/ui/modals/lease_modal.gd:36
+#: scripts/ui/modals/lease_modal.gd:39
 msgid "A real office: your company name on the door and the sign, a proper desk for Company OS, and a stockroom so boxes stop living in your apartment. It's also %s every month whether you sell anything or not."
 msgstr "真正的办公室：门上和招牌挂着你的公司名，有张像样的办公桌用 Company OS，还有仓库，纸箱不用再堆在你家。不过不管有没有卖出东西，每个月都要 %s。"
 
@@ -1422,7 +1426,7 @@ msgstr "配件"
 msgid "Accident history"
 msgstr "事故纪录"
 
-#: scripts/sim/automotive.gd:614
+#: scripts/sim/automotive.gd:616
 msgid "Accident repair: %s"
 msgstr "事故维修：%s"
 
@@ -1434,7 +1438,7 @@ msgstr "应付帐款"
 msgid "Accuracy and speed decide how much of the work gets done in this session."
 msgstr "正确率和速度决定这一段时间完成多少工作。"
 
-#: scripts/ui/phone_ui.gd:283
+#: scripts/ui/phone_ui.gd:286
 msgid "Achievements"
 msgstr "成就"
 
@@ -1526,7 +1530,7 @@ msgstr "上完班累了：回家睡觉吧（下班后随时可以睡，或晚上
 msgid "After a tiring shift you can return home to sleep. The first venture allows sleep after 4 PM and guides you home when it is too late to work."
 msgstr "上完疲累的班可以回家睡觉。第一次创业期间下午 4 点后可睡，太晚无法工作时会引导你回家。"
 
-#: scripts/sim/automotive.gd:730
+#: scripts/sim/automotive.gd:734
 msgid "After-sales service ticket"
 msgstr "售后保养工单"
 
@@ -1570,7 +1574,7 @@ msgstr "机场航厦"
 msgid "AirportNextFleet"
 msgstr "AirportNextFleet"
 
-#: autoload/game_state.gd:56 autoload/game_state.gd:65 scripts/sim/ecommerce.gd:793 scripts/sim/staff.gd:120
+#: autoload/game_state.gd:56 autoload/game_state.gd:65 scripts/sim/ecommerce.gd:794 scripts/sim/staff.gd:120
 msgid "Alex"
 msgstr "Alex"
 
@@ -1590,7 +1594,7 @@ msgstr "所有文件 (*)"
 msgid "All good? Approve it. Something wrong? Click the wrong field first, then Reject."
 msgstr "都没问题就「核准」。有错的话，先点出错的字段，再按「退件」。"
 
-#: scripts/world/actions.gd:285
+#: scripts/world/actions.gd:287
 msgid "All packed. The courier comes at 16:00."
 msgstr "都打包好了，快递 16:00 来收。"
 
@@ -2114,7 +2118,7 @@ msgstr "自动化产线"
 msgid "Automation is already installed."
 msgstr "已安装自动化设备。"
 
-#: data/businesses/automotive.json scripts/sim/automotive.gd:911 scripts/ui/automotive_ui.gd:22 scripts/ui/automotive_ui.gd:92
+#: data/businesses/automotive.json scripts/sim/automotive.gd:915 scripts/ui/automotive_ui.gd:22 scripts/ui/automotive_ui.gd:92
 msgid "Automotive"
 msgstr "汽车"
 
@@ -2526,7 +2530,7 @@ msgstr "精品事务所"
 msgid "Box"
 msgstr "Box"
 
-#: scripts/sim/automotive.gd:627
+#: scripts/sim/automotive.gd:629
 msgid "Breakdown compensation voucher"
 msgstr "抛锚补偿券"
 
@@ -2750,7 +2754,7 @@ msgstr "公司登记——奥瑞莉亚市"
 msgid "Business account opened. %s now runs on its own books."
 msgstr "企业帐户已开立。%s 从此有自己的帐本了。"
 
-#: scripts/sim/ecommerce.gd:1287
+#: scripts/sim/ecommerce.gd:1288
 msgid "Business assets contributed to %s (in kind)"
 msgstr "以实物出资给 %s"
 
@@ -2802,7 +2806,7 @@ msgstr "事业"
 msgid "Businesses: choose from the businesses available now, or find a part-time job."
 msgstr "生意：选择目前可经营的生意，或找一份兼职工作。"
 
-#: scripts/world/actions.gd:278
+#: scripts/world/actions.gd:280
 msgid "Busy day. All good."
 msgstr "今天很忙，一切顺利。"
 
@@ -2830,7 +2834,7 @@ msgstr "将 校园电台 购入为折旧资产，出售有限的受众曝光。"
 msgid "Buy a Day Pass"
 msgstr "买一张日票"
 
-#: scripts/ui/modals/cowork_desk_modal.gd:23
+#: scripts/ui/modals/cowork_desk_modal.gd:26
 msgid "Buy a day pass ($15)"
 msgstr "买日票（$15）"
 
@@ -2854,7 +2858,7 @@ msgstr "购买机台 · $28,000"
 msgid "Buy phone stands"
 msgstr "买手机架"
 
-#: scripts/sim/automotive.gd:646
+#: scripts/sim/automotive.gd:648
 msgid "Buy rental cars at Gateway Car Rental."
 msgstr "到 Gateway 租车购买租赁车。"
 
@@ -2910,7 +2914,7 @@ msgstr "BuyMaterials"
 msgid "Buyer"
 msgstr "买方"
 
-#: scripts/sim/ecommerce.gd:1177
+#: scripts/sim/ecommerce.gd:1178
 msgid "Buyer %s opened a dispute on order %s. We refunded them and charged a $15 dispute fee."
 msgstr "买家 %s 对订单 %s 提出申诉。我们已退款给对方，并收取 $15 申诉处理费。"
 
@@ -3218,7 +3222,7 @@ msgstr "还不能聘人：%s。"
 msgid "Can't start a shift now: %s."
 msgstr "现在不能上班：%s。"
 
-#: scripts/world/actions.gd:258
+#: scripts/world/actions.gd:260
 msgid "Can't work the counter: %s."
 msgstr "现在不能站吧台：%s。"
 
@@ -3229,6 +3233,10 @@ msgstr "取消"
 #: data/help/glossary.json
 msgid "Cancel a purchase still on the way within the supplier cancellation window (normally 24 hours). The normal fee is 5%; payments that have not cleared return the full principal."
 msgstr "在供应商取消期限内（通常为 24 小时）可取消运送中的进货单。一般收取 5% 手续费；尚未清算的款项退回全部本金。"
+
+#: scripts/ui/modals/lease_end_modal.gd:51
+msgid "Cancel jobs with penalty"
+msgstr "取消工单并付违约金"
 
 #: data/help/help.json
 msgid "Cancel or return a purchase"
@@ -3270,7 +3278,7 @@ msgstr "旺季周末真正的上限可能是房务产能，而不是需求。"
 msgid "Capital"
 msgstr "资金"
 
-#: scripts/sim/ecommerce.gd:1288
+#: scripts/sim/ecommerce.gd:1289
 msgid "Capital contributed in kind by founder"
 msgstr "创办人实物出资"
 
@@ -3330,6 +3338,10 @@ msgstr "周末现金"
 msgid "Cash below zero is money you owe rather than cash available to spend."
 msgstr "现金低于零表示你欠钱，不是可花用的余额。"
 
+#: scripts/sim/lease_end.gd:130
+msgid "Cash changed during notice. Fund the remaining exit costs first."
+msgstr "通知期间现金变动，请先补足剩余退租费用。"
+
 #: data/help/glossary.json
 msgid "Cash forecast"
 msgstr "现金预测"
@@ -3357,6 +3369,10 @@ msgstr "现金不等于利润"
 #: data/events/low_cash_warning.json
 msgid "Cash is running low"
 msgstr "现金快不够了"
+
+#: scripts/ui/modals/lease_end_modal.gd:76
+msgid "Cash needed before refund"
+msgstr "退押金前所需现金"
 
 #: data/events/low_cash_warning.json
 msgid "Cash now, big loss on inventory."
@@ -3582,7 +3598,7 @@ msgstr "浏览器的中文教学标题改用内附备援字体，不再出现缺
 msgid "Choose Own cafe kitchen on the Rate Board: the hotel buys breakfast from the cafe at the transfer price."
 msgstr "在房价看板选「自家咖啡店厨房」：饭店以转拨价向咖啡店买早餐。"
 
-#: scripts/sim/automotive.gd:653
+#: scripts/sim/automotive.gd:655
 msgid "Choose a brand you can sign."
 msgstr "请选择可签约的品牌。"
 
@@ -3605,6 +3621,10 @@ msgstr "请先选择已签约的安装案。"
 #: scripts/sim/energy.gd:309
 msgid "Choose a contracted install that is ready to start."
 msgstr "请选择已签约、可开工的安装案。"
+
+#: scripts/sim/lease_end.gd:53
+msgid "Choose a destination that is not already ending its lease."
+msgstr "请选择没有正在退租的搬迁目的地。"
 
 #: scripts/sim/manufacturing.gd:132
 msgid "Choose a factory machine."
@@ -3641,6 +3661,10 @@ msgstr "请选择列出的电池容量和毛利率。"
 #: scripts/sim/automotive.gd:322
 msgid "Choose a listed car."
 msgstr "请选择已上架的车。"
+
+#: scripts/sim/lease_end.gd:48
+msgid "Choose a new home before ending your current home lease."
+msgstr "退掉目前住处前，请先选好新住处。"
 
 #: scripts/sim/group_jobs.gd:122
 msgid "Choose a part that is still open."
@@ -3774,6 +3798,14 @@ msgstr "请选择待处理的保固理赔。"
 msgid "Choose an unowned residential unit."
 msgstr "请选择尚未持有的住宅单位。"
 
+#: scripts/sim/lease_end.gd:59
+msgid "Choose another active stock location for outstanding orders and deliveries."
+msgstr "请选择其他可用库存地点，接手未完成订单与到货。"
+
+#: scripts/sim/lease_end.gd:63
+msgid "Choose another leased workplace for employees."
+msgstr "请为员工选择另一个已租工作地点。"
+
 #: scripts/sim/ecommerce.gd:434
 msgid "Choose between 1 and %d returnable units."
 msgstr "请选择 1 至 %d 件可退库存。"
@@ -3782,6 +3814,10 @@ msgstr "请选择 1 至 %d 件可退库存。"
 msgid "Choose cost, cost plus or market price for a listed supply pair."
 msgstr "请为列出的供应组合选择成本、成本加成或市价。"
 
+#: scripts/sim/lease_end.gd:41
+msgid "Choose notice or immediate termination."
+msgstr "请选择到期退租或立即退租。"
+
 #: data/help/help.json
 msgid "Choose the name carefully: it goes on your sign and your invoices."
 msgstr "名字要想清楚：它会出现在招牌和发票上。"
@@ -3789,6 +3825,10 @@ msgstr "名字要想清楚：它会出现在招牌和发票上。"
 #: scripts/sim/hotel.gd:47
 msgid "Choose to take over or lease the Aster Inn."
 msgstr "请选择顶下或承租 Aster 小旅馆。"
+
+#: scripts/sim/lease_end.gd:57
+msgid "Choose where to move stock, or sell it to the liquidator."
+msgstr "请选择搬迁库存或折价出清。"
 
 #: scripts/ui/modals/business_board.gd:130
 msgid "Chose a first business: ecommerce."
@@ -3918,7 +3958,7 @@ msgstr "干净的房间、亲切的柜台、合理的价格。没人清的房间
 msgid "Clean up the books of %s"
 msgstr "帮 %s 整理帐务"
 
-#: scripts/sim/automotive.gd:591
+#: scripts/sim/automotive.gd:593
 msgid "Cleaning and refuelling"
 msgstr "清洁与加油"
 
@@ -4098,7 +4138,7 @@ msgstr "写完了：完成 %.1f 小时的工作量。"
 msgid "Coding session — %s"
 msgstr "写程序：%s"
 
-#: data/economy/cafe.json scripts/sim/ledger.gd:30 scripts/world/actions.gd:247
+#: data/economy/cafe.json scripts/sim/ledger.gd:30 scripts/world/actions.gd:249
 msgid "Coffee"
 msgstr "咖啡"
 
@@ -4106,11 +4146,11 @@ msgstr "咖啡"
 msgid "Coffee machine, printer, Wi-Fi: you fix all three before lunch."
 msgstr "咖啡机、打印机、Wi-Fi：午餐前你三个都修好了。"
 
-#: scripts/world/actions.gd:251
+#: scripts/world/actions.gd:253
 msgid "Coffee — %s."
 msgstr "咖啡——%s。"
 
-#: scripts/world/actions.gd:151
+#: scripts/world/actions.gd:153
 msgid "Coffee — %s. Tastes like possibility."
 msgstr "咖啡——%s。喝起来是可能性的味道。"
 
@@ -4302,6 +4342,10 @@ msgstr "确认签订贷款"
 msgid "Confirm return"
 msgstr "确认退货"
 
+#: scripts/ui/modals/lease_end_modal.gd:81
+msgid "Confirm termination"
+msgstr "确认退租"
+
 #: scripts/ui/real_estate_ui.gd:180
 msgid "Construction in progress"
 msgstr "工程进行中"
@@ -4318,7 +4362,7 @@ msgstr "顾问"
 msgid "Consumer"
 msgstr "消费"
 
-#: scripts/sim/automotive.gd:881
+#: scripts/sim/automotive.gd:885
 msgid "Consumer-protection fine for an undisclosed flood car"
 msgstr "未揭露泡水车的消费者保护罚款"
 
@@ -4446,7 +4490,7 @@ msgstr "成本变高了：调高售价保住毛利（Company OS → 销售）"
 msgid "Could I get a loan?"
 msgstr "我可以贷款吗？"
 
-#: scripts/world/actions.gd:278
+#: scripts/world/actions.gd:280
 msgid "Could use a bit more support around here."
 msgstr "这里有点需要更多支持。"
 
@@ -4478,7 +4522,7 @@ msgstr "叫快递来收（或自己拿去）"
 msgid "Courier or self delivery"
 msgstr "快递或自行送货"
 
-#: scripts/sim/ecommerce.gd:1000
+#: scripts/sim/ecommerce.gd:1001
 msgid "Courier picked up %d parcel%s."
 msgstr "快递收走了 %d 件包裹%s。"
 
@@ -4486,7 +4530,7 @@ msgstr "快递收走了 %d 件包裹%s。"
 msgid "Courier picks up in ~2 hours and adds a %s pickup fee."
 msgstr "快递约 2 小时后来收，另收 %s 收件费。"
 
-#: scripts/sim/ecommerce.gd:945
+#: scripts/sim/ecommerce.gd:946
 msgid "Courier pickup: %d parcels (%s)"
 msgstr "快递收件：%d 件包裹（%s）"
 
@@ -4714,6 +4758,10 @@ msgstr "每日营运"
 msgid "Daily reports track impressions, clicks and conversions. Finish the scope, then invoice service fees, media rebates and earned KPI bonuses."
 msgstr "每日报告追踪曝光、点击与转换。完成工作范围后，开立服务费、媒体回扣及达标奖金的发票。"
 
+#: scripts/ui/modals/lease_end_modal.gd:73
+msgid "Damage deduction"
+msgstr "损坏扣款"
+
 #: data/npcs/daniel.json
 msgid "Daniel Wong"
 msgstr "Daniel Wong"
@@ -4786,7 +4834,7 @@ msgstr "日票（座位＋网络，限今天）"
 msgid "Day pass (paid online)"
 msgstr "日票（在线已付）"
 
-#: scripts/ui/modals/cowork_desk_modal.gd:41
+#: scripts/ui/modals/cowork_desk_modal.gd:44
 msgid "Day pass active. Grab any hot desk."
 msgstr "日票已生效。随便找个自由座坐。"
 
@@ -5062,7 +5110,7 @@ msgstr "需求会低迷四周，之后自行恢复。"
 msgid "Demand ×3 for 3 days. Stock is the bottleneck."
 msgstr "3 天内需求 ×3。库存才是瓶颈。"
 
-#: data/help/glossary.json scripts/ui/modals/lease_modal.gd:23
+#: data/help/glossary.json scripts/ui/modals/lease_modal.gd:26
 msgid "Deposit"
 msgstr "押金"
 
@@ -5070,13 +5118,21 @@ msgstr "押金"
 msgid "Deposit %s, minimum stock %d new cars, minimum order %d cars. Margins are thin (about 5–7%%) but sales are steady and service tickets follow every car you sell."
 msgstr "保证金 %s，最低库存 %d 辆新车，最低订购 %d 辆。毛利很薄（约 5–7%%），但销量稳定，每卖一辆车都会带来保养工单。"
 
-#: scripts/sim/automotive.gd:649
+#: scripts/sim/automotive.gd:651
 msgid "Deposit and first order in cash"
 msgstr "保证金与首张订单的现金"
+
+#: scripts/ui/modals/lease_end_modal.gd:73
+msgid "Deposit held"
+msgstr "保管中押金"
 
 #: scripts/sim/contracts.gd:133
 msgid "Deposit received from %s (%s)"
 msgstr "收到 %s 的订金（%s）"
+
+#: scripts/ui/modals/lease_end_modal.gd:73
+msgid "Deposit returned on exit"
+msgstr "退租时退回押金"
 
 #: scripts/ui/modals/company_os.gd:299
 msgid "Deposits"
@@ -5114,13 +5170,17 @@ msgstr "办公桌 · 7 号码头场务室"
 msgid "Desk · Suite 2B"
 msgstr "办公桌 · 2B 室"
 
-#: scripts/ui/modals/lease_modal.gd:32
+#: scripts/ui/modals/lease_modal.gd:35
 msgid "Desks"
 msgstr "办公桌"
 
 #: data/economy/energy.json
 msgid "Destination chargers"
 msgstr "目的地充电桩"
+
+#: scripts/ui/modals/lease_end_modal.gd:52
+msgid "Destination for stock, orders and staff"
+msgstr "库存、订单和员工搬迁目的地"
 
 #: scripts/ui/automotive_ui.gd:175
 msgid "Detail · %s"
@@ -5226,7 +5286,11 @@ msgstr "DiscountLess"
 msgid "DiscountMore"
 msgstr "DiscountMore"
 
-#: scripts/sim/ecommerce.gd:1178
+#: scripts/ui/modals/lease_end_modal.gd:50
+msgid "Dismiss staff"
+msgstr "资遣员工"
+
+#: scripts/sim/ecommerce.gd:1179
 msgid "Dispute lost on %s: −%s"
 msgstr "申诉败诉 %s：−%s"
 
@@ -5274,7 +5338,7 @@ msgstr "堪用。"
 msgid "Doesn't turn on."
 msgstr "开不了机。"
 
-#: scripts/sim/ecommerce.gd:1099
+#: scripts/sim/ecommerce.gd:1100
 msgid "Doesn't work. Out of the box."
 msgstr "一拆开就不能用。"
 
@@ -5450,6 +5514,14 @@ msgstr "每个阶段都用真实的车与客人：库存车可抵押贷款，租
 msgid "Earbuds, lamps, bottles, phone stands. MOQs are MOQs, don't haggle me on those."
 msgstr "耳机、台灯、水瓶、手机架。最低订购量就是最低订购量，这个别跟我杀。"
 
+#: scripts/ui/modals/lease_end_modal.gd:73
+msgid "Early exit fee"
+msgstr "提前解约金"
+
+#: scripts/sim/lease_end.gd:104
+msgid "Early lease exit: %s"
+msgstr "提前解约：%s"
+
 #: data/help/glossary.json
 msgid "Early payment discount"
 msgstr "提前付款折扣"
@@ -5494,7 +5566,7 @@ msgstr "取得电池安装认证。"
 msgid "Eat"
 msgstr "吃"
 
-#: data/businesses/ecommerce.json scripts/sim/ecommerce.gd:1343 scripts/ui/media_ui.gd:160
+#: data/businesses/ecommerce.json scripts/sim/ecommerce.gd:1344 scripts/ui/media_ui.gd:160
 msgid "Ecommerce"
 msgstr "电商"
 
@@ -5622,6 +5694,10 @@ msgstr "终止经销权"
 msgid "EndFranchise"
 msgstr "EndFranchise"
 
+#: data/help/help.json
+msgid "Ending a lease"
+msgstr "终止租约"
+
 #: data/businesses/energy.json data/regions/almeria.json scripts/sim/energy.gd:791 scripts/ui/energy_ui.gd:20
 msgid "Energy"
 msgstr "能源"
@@ -5682,7 +5758,7 @@ msgstr "参加周三拍卖"
 msgid "Equipment ages. Tired rooms drag down every review until you renovate, and a renovated room is off sale while the painters work."
 msgstr "设备会老化。老旧房间会拉低每则评价，直到你翻新；翻新期间该房型不能卖。"
 
-#: scripts/sim/effects.gd:88
+#: scripts/sim/effects.gd:90
 msgid "Equity investment"
 msgstr "股权投资"
 
@@ -5758,11 +5834,11 @@ msgstr "傍晚"
 msgid "Evening cut-off: everything out by 19:00, and it is."
 msgstr "晚上截件：19:00 前全部出货，而且做到了。"
 
-#: scripts/sim/effects.gd:27
+#: scripts/sim/effects.gd:29
 msgid "Event cost"
 msgstr "事件支出"
 
-#: scripts/sim/effects.gd:29
+#: scripts/sim/effects.gd:31
 msgid "Event income"
 msgstr "事件收入"
 
@@ -5829,6 +5905,10 @@ msgstr "主管"
 #: scripts/ui/tutorial.gd:645
 msgid "Exit"
 msgstr "出口"
+
+#: scripts/ui/modals/lease_end_modal.gd:75
+msgid "Exit date"
+msgstr "退租日期"
 
 #: data/help/glossary.json
 msgid "Expected demand per day comes from weekday, season and city events such as festivals or trade fairs."
@@ -5942,7 +6022,7 @@ msgstr "工厂"
 msgid "Factory cash: %s · materials: %d units"
 msgstr "工厂现金：%s · 原料：%d 件"
 
-#: scripts/sim/automotive.gd:688
+#: scripts/sim/automotive.gd:690
 msgid "Factory delivery: %s"
 msgstr "原厂交车：%s"
 
@@ -5950,15 +6030,15 @@ msgstr "原厂交车：%s"
 msgid "Factory goods for ShopLane"
 msgstr "供应 ShopLane 的工厂商品"
 
-#: scripts/sim/manufacturing.gd:373
+#: scripts/sim/lease_end.gd:217 scripts/sim/manufacturing.gd:373
 msgid "Factory materials liquidated"
 msgstr "工厂原料清算"
 
-#: scripts/sim/automotive.gd:770 scripts/sim/automotive.gd:892
+#: scripts/sim/automotive.gd:774 scripts/sim/automotive.gd:896
 msgid "Factory order cancelled"
 msgstr "原厂订单已取消"
 
-#: scripts/sim/automotive.gd:678
+#: scripts/sim/automotive.gd:680
 msgid "Factory order: %s"
 msgstr "原厂订购：%s"
 
@@ -6162,6 +6242,14 @@ msgstr "完成一档销售活动"
 msgid "Finish five client campaigns."
 msgstr "完成五档客户宣传活动。"
 
+#: scripts/sim/lease_end.gd:68
+msgid "Finish industry jobs first, or cancel them with their contractual penalties."
+msgstr "先完成产业工单，或取消并支付合约违约金。"
+
+#: scripts/ui/modals/lease_end_modal.gd:51
+msgid "Finish jobs first"
+msgstr "先完成工单"
+
 #: data/quests/trade_fair_week.json
 msgid "Finish one measured promotion campaign"
 msgstr "完成一档可量测的宣传活动"
@@ -6178,7 +6266,7 @@ msgstr "请先完成目前的招募。"
 msgid "First Customer"
 msgstr "第一位客人"
 
-#: scripts/sim/ecommerce.gd:649
+#: scripts/sim/ecommerce.gd:650
 msgid "First ShopLane listing: %s at %s."
 msgstr "第一个 ShopLane 商品上架：%s，售价 %s。"
 
@@ -6218,7 +6306,7 @@ msgstr "第一次进货：%d × %s，来自 %s。"
 msgid "First parcel out"
 msgstr "第一件包裹出货"
 
-#: scripts/sim/ecommerce.gd:1209
+#: scripts/sim/ecommerce.gd:1210
 msgid "First payout from ShopLane: %s."
 msgstr "第一笔 ShopLane 拨款：%s。"
 
@@ -6242,7 +6330,7 @@ msgstr "第一笔营收！ShopLane 每周一拨款。"
 msgid "First roof lit"
 msgstr "第一个屋顶亮灯"
 
-#: scripts/sim/ecommerce.gd:1037
+#: scripts/sim/ecommerce.gd:1038
 msgid "First sale: %s bought %s for %s."
 msgstr "第一笔销售：%s 买了%s，%s。"
 
@@ -6322,7 +6410,7 @@ msgstr "活动取消后的限时特卖"
 msgid "Flat white"
 msgstr "馥列白"
 
-#: scripts/sim/automotive.gd:739
+#: scripts/sim/automotive.gd:743
 msgid "Fleet and lot insurance"
 msgstr "车队与车场保险"
 
@@ -6330,7 +6418,7 @@ msgstr "车队与车场保险"
 msgid "Fleet car sold: %s"
 msgstr "车队车辆出售：%s"
 
-#: scripts/sim/automotive.gd:646
+#: scripts/sim/automotive.gd:648
 msgid "Fleet of %d cars and the rental counter"
 msgstr "%d 辆车队与租车柜台"
 
@@ -6362,7 +6450,7 @@ msgstr "泡水损坏"
 msgid "Flood-damaged car on your lot"
 msgstr "车场上的泡水车"
 
-#: scripts/sim/automotive.gd:746
+#: scripts/sim/automotive.gd:750
 msgid "Floor-plan interest"
 msgstr "车辆融资利息"
 
@@ -6406,7 +6494,7 @@ msgstr "到市政厅申请食品处理执照。"
 msgid "Food handling licence granted."
 msgstr "食品处理执照核发了。"
 
-#: scripts/sim/living.gd:21
+#: scripts/sim/living.gd:22
 msgid "Food, transit & bills"
 msgstr "伙食、交通与帐单"
 
@@ -6482,15 +6570,15 @@ msgstr "创办人 · 别人不做的都你做"
 msgid "Franchise deposit and minimum stock"
 msgstr "经销保证金与最低库存"
 
-#: scripts/sim/automotive.gd:763 scripts/sim/automotive.gd:894
+#: scripts/sim/automotive.gd:767 scripts/sim/automotive.gd:898
 msgid "Franchise deposit settled"
 msgstr "经销保证金已结清"
 
-#: scripts/sim/automotive.gd:657
+#: scripts/sim/automotive.gd:659
 msgid "Franchise deposit: %s"
 msgstr "经销保证金：%s"
 
-#: scripts/sim/automotive.gd:750
+#: scripts/sim/automotive.gd:754
 msgid "Franchise minimum-stock shortfall"
 msgstr "经销最低库存不足"
 
@@ -6737,6 +6825,10 @@ msgstr "收到钱"
 #: data/dialogue/jun_ito_intro.json
 msgid "Give me $150 and half an hour and I will tell you what is wrong underneath. Flood, engine, odometer: nobody else tells you before you bid. I also service your rental cars, if you hire me."
 msgstr "给我 $150 和半小时，我就告诉你车子底下哪里有问题。泡水、引擎、里程数：出价前没别人会告诉你。你雇用我的话，我也能保养你的租赁车。"
+
+#: scripts/ui/modals/lease_end_modal.gd:48
+msgid "Give notice"
+msgstr "提出退租通知"
 
 #: data/world/years.json
 msgid "Global Consolidation"
@@ -7470,7 +7562,7 @@ msgstr "住宅屋顶"
 msgid "Honest. I respect it."
 msgstr "很诚实。我欣赏。"
 
-#: scripts/world/actions.gd:278
+#: scripts/world/actions.gd:280
 msgid "Honestly? I'm looking at other jobs."
 msgstr "老实说？我在看其他工作了。"
 
@@ -7698,6 +7790,10 @@ msgstr "运送中"
 msgid "INVOICED"
 msgstr "已开发票"
 
+#: data/help/help.json
+msgid "If costs or obligations change during notice, review the pending exit. Your current home needs a replacement first."
+msgstr "通知期内费用或义务变动，请重新查看待完成退租。目前住处要先找到替代住所。"
+
 #: data/help/glossary.json
 msgid "If everyone arrives, you pay walk compensation and the review suffers."
 msgstr "如果大家都来，你得付出赶客补偿，评价也会下降。"
@@ -7794,7 +7890,7 @@ msgstr "简单说：这台货车今天先算公司的一笔支出。要让它一
 msgid "In plain words: you get the fee if you finish by the deadline; a late run pays %d%% less, and one left undone for hours is cancelled."
 msgstr "简单说：截止前送完才拿全额运费；迟到的单少拿 %d%%，放了好几个小时没送的单会被取消。"
 
-#: scripts/ui/modals/lease_modal.gd:38
+#: scripts/ui/modals/lease_modal.gd:41
 msgid "In plain words: you pay %s every month for the space, full or empty. Lease it once you have stock to put in it."
 msgstr "简单说：这个空间每个月付 %s，放满放空都一样。等你有库存要放，再租比较划算。"
 
@@ -7814,7 +7910,7 @@ msgstr "清算危机（第 5 年）期间，汇到国外的钱要好几天才到
 msgid "In the workshop"
 msgstr "整备中"
 
-#: scripts/ui/modals/company_os.gd:509 scripts/ui/phone_ui.gd:266
+#: scripts/ui/modals/company_os.gd:509 scripts/ui/phone_ui.gd:269
 msgid "In transit"
 msgstr "运送中"
 
@@ -7954,7 +8050,7 @@ msgstr "保险"
 msgid "Insurance claim dispute"
 msgstr "保险理赔争议"
 
-#: scripts/sim/automotive.gd:616
+#: scripts/sim/automotive.gd:618
 msgid "Insurance claim received: %s"
 msgstr "收到保险理赔：%s"
 
@@ -7966,7 +8062,7 @@ msgstr "保险（每月）"
 msgid "Insure it, keep it moving, and it earns. Leave it on the kerb and it is just a very expensive shed."
 msgstr "保好险、让它一直跑，它就会赚钱；停在路边，它只是一间很贵的棚子。"
 
-#: scripts/sim/automotive.gd:807
+#: scripts/sim/automotive.gd:811
 msgid "Insurer dispute settled at a discount"
 msgstr "与保险公司折价和解"
 
@@ -8046,9 +8142,17 @@ msgstr "国际电汇：便宜（1% + $25），但要 5 到 9 天。"
 msgid "Interns cost less but work slowly. Hire a designer and a media buyer to run three campaigns at once."
 msgstr "实习生薪资较低，但制作较慢。聘用设计师和媒体采购员后，可同时运行三场活动。"
 
+#: scripts/sim/lease_end.gd:44
+msgid "Invalid lease terms. Review the property data before ending this lease."
+msgstr "租约条款有误，退租前请先检查处所数据。"
+
 #: scripts/sim/manufacturing.gd:115
 msgid "Invalid order terms."
 msgstr "订单条件无效。"
+
+#: scripts/sim/lease_end.gd:197
+msgid "Invalid property damage claim."
+msgstr "处所损坏扣款无效。"
 
 #: scripts/ui/modals/company_os.gd:7
 msgid "Inventory"
@@ -8066,7 +8170,7 @@ msgstr "存货报废"
 msgid "Inventory: what you have and where"
 msgstr "库存：你有什么、放在哪里"
 
-#: scripts/sim/effects.gd:87
+#: scripts/sim/effects.gd:89
 msgid "Investors buy shares in a registered company."
 msgstr "投资人只能入股已登记的公司。"
 
@@ -8230,6 +8334,10 @@ msgstr "%s 的征才广告已上线，应征者通常一天内会回复。"
 msgid "Job ad — %s"
 msgstr "征才广告——%s"
 
+#: scripts/ui/modals/lease_end_modal.gd:73
+msgid "Job deposit refunds"
+msgstr "退还工单订金"
+
 #: scripts/sim/jobs.gd:43
 msgid "Job deposit: %s"
 msgstr "工单订金：%s"
@@ -8241,6 +8349,10 @@ msgstr "工单发票：%s"
 #: scripts/sim/jobs.gd:100
 msgid "Job payment: %s"
 msgstr "工单收款：%s"
+
+#: scripts/ui/modals/lease_end_modal.gd:73
+msgid "Job penalties"
+msgstr "工单违约金"
 
 #: scripts/ui/minigames/clerk_forms_game.gd:8
 msgid "Jon Silva"
@@ -8390,7 +8502,7 @@ msgstr "让咖啡店开门且备足货；展览访客会自己走进来。"
 msgid "Keep the dealer licence fee in the business account."
 msgstr "请在公司帐户保留车商执照费。"
 
-#: scripts/sim/automotive.gd:647
+#: scripts/sim/automotive.gd:649
 msgid "Keep the fleet on rent."
 msgstr "让车队持续出租。"
 
@@ -8586,7 +8698,7 @@ msgstr "迟缴手续费——贷款 %s"
 msgid "Late penalty"
 msgstr "逾期罚款"
 
-#: scripts/sim/living.gd:52
+#: scripts/sim/living.gd:56
 msgid "Late rent fee"
 msgstr "房租滞纳金"
 
@@ -8674,19 +8786,55 @@ msgstr "到工业区承租 12 号厂房、租用机台、登记为雇主并雇�
 msgid "Lease Unit 12, rent a machine and hire Tomas. Fixed costs continue even when the line is idle."
 msgstr "承租 12 号厂房、租用机台并雇用 Tomas。停线时也会持续产生固定成本。"
 
+#: scripts/sim/lease_end.gd:172
+msgid "Lease deposit settlement: %s"
+msgstr "租约押金结算：%s"
+
+#: scripts/sim/lease_end.gd:178
+msgid "Lease ended: %s"
+msgstr "已退租：%s"
+
+#: scripts/sim/lease_end.gd:144
+msgid "Lease exit job penalty: %s"
+msgstr "退租工单违约金：%s"
+
+#: scripts/sim/lease_end.gd:143
+msgid "Lease exit job refund: %s"
+msgstr "退租工单退款：%s"
+
+#: scripts/sim/lease_end.gd:191
+msgid "Lease exit needs attention: %s"
+msgstr "退租需要处理：%s"
+
+#: scripts/sim/lease_end.gd:163
+msgid "Lease exit stock liquidation: %s"
+msgstr "退租库存出清：%s"
+
+#: scripts/sim/lease_end.gd:165
+msgid "Lease exit stock move: %d units"
+msgstr "退租搬运库存：%d 件"
+
 #: scripts/ui/hotel_ui.gd:76
 msgid "Lease instead · %s per month plus equipment"
 msgstr "改成承租 · 每月 %s 加设备租金"
 
-#: scripts/ui/modals/lease_modal.gd:59
+#: scripts/sim/lease_end.gd:103
+msgid "Lease notice rent: %s"
+msgstr "退租通知期租金：%s"
+
+#: scripts/sim/lease_end.gd:106
+msgid "Lease notice: %s · ends %s"
+msgstr "退租通知：%s・%s 到期"
+
+#: scripts/ui/modals/lease_modal.gd:62
 msgid "Lease signed. Welcome to Suite 2B."
 msgstr "租约已签。欢迎来到 2B 室。"
 
-#: scripts/sim/living.gd:90
+#: scripts/sim/living.gd:94
 msgid "Lease signed: %s"
 msgstr "租约已签：%s"
 
-#: scripts/ui/modals/lease_modal.gd:61
+#: scripts/ui/modals/lease_modal.gd:64
 msgid "Lease signed: %s."
 msgstr "租约已签：%s。"
 
@@ -8734,7 +8882,7 @@ msgstr "承租租车柜台"
 msgid "Lease the showroom"
 msgstr "承租展示中心"
 
-#: scripts/sim/automotive.gd:648
+#: scripts/sim/automotive.gd:650
 msgid "Lease the showroom at Gateway Car Rental."
 msgstr "到 Gateway 租车承租展示中心。"
 
@@ -8758,17 +8906,25 @@ msgstr "租约——"
 msgid "LeaseAster"
 msgstr "LeaseAster"
 
-#: scripts/sim/living.gd:92
+#: scripts/sim/living.gd:96
 msgid "Leased %s for %s/month."
 msgstr "租下了%s，月租 %s。"
 
-#: scripts/ui/modals/lease_modal.gd:44
+#: scripts/ui/modals/lease_end_modal.gd:13 scripts/ui/phone_ui.gd:129
+msgid "Leases"
+msgstr "租约"
+
+#: scripts/ui/modals/lease_modal.gd:47
 msgid "Leases must be in a registered company's name."
 msgstr "租约必须用登记公司的名义签。"
 
 #: scripts/ui/minigames/mini_game.gd:108
 msgid "Leave early"
 msgstr "提早离开"
+
+#: scripts/ui/modals/lease_end_modal.gd:48
+msgid "Leave immediately"
+msgstr "立即退租"
 
 #: data/npcs/lee.json scripts/sim/staff.gd:120 scripts/ui/minigames/pack_game.gd:76
 msgid "Lee"
@@ -8786,7 +8942,7 @@ msgstr "离开了%s的工作。"
 msgid "Legacy"
 msgstr "传承"
 
-#: scripts/sim/automotive.gd:809
+#: scripts/sim/automotive.gd:813
 msgid "Legal fee for an insurer dispute"
 msgstr "保险争议律师费"
 
@@ -8858,7 +9014,7 @@ msgstr "执照已续期到 %s。"
 msgid "Licensing Officer"
 msgstr "执照承办员"
 
-#: scripts/ui/phone_ui.gd:280
+#: scripts/ui/phone_ui.gd:283
 msgid "Life Timeline"
 msgstr "人生纪录"
 
@@ -8941,6 +9097,14 @@ msgstr "床单、洗涤与备品每间入住一晚成本 %s；水电每房每天
 #: data/help/glossary.json
 msgid "Linen, laundry, amenities and breakfast are variable costs for each occupied room-night. Your own cafe kitchen supplies breakfast at wholesale cost."
 msgstr "床单、洗涤、备品与早餐是每间入住房晚的变动成本。自家咖啡店的厨房能以批发成本供应早餐。"
+
+#: scripts/sim/lease_end.gd:56
+msgid "Liquidate factory materials and prepaid deliveries before ending the factory lease."
+msgstr "工厂退租前，请先选择清算原料与预付运送中的采购。"
+
+#: scripts/ui/modals/lease_end_modal.gd:49
+msgid "Liquidate stock"
+msgstr "折价出清库存"
 
 #: scripts/sim/insolvency.gd:120
 msgid "Liquidation payment — %s"
@@ -9186,7 +9350,7 @@ msgstr "7 号地工程"
 msgid "Lot 7 development land"
 msgstr "7 号开发地"
 
-#: scripts/sim/automotive.gd:851
+#: scripts/sim/automotive.gd:855
 msgid "Lot storage and preparation"
 msgstr "车场停放与整备"
 
@@ -9329,6 +9493,10 @@ msgstr "让工作更轻松"
 #: data/story/chapters.json
 msgid "Make your first payroll: keep cash in the company for Friday 17:00"
 msgstr "发第一次薪水：周五 17:00 前公司帐上要有钱"
+
+#: scripts/ui/modals/cowork_desk_modal.gd:20 scripts/ui/modals/lease_modal.gd:19 scripts/world/interior.gd:85
+msgid "Manage lease"
+msgstr "管理租约"
 
 #: scripts/ui/real_estate_ui.gd:188 scripts/ui/real_estate_ui.gd:94
 msgid "Manage properties"
@@ -9514,6 +9682,10 @@ msgstr "对象配对"
 msgid "Matchmaker and property management"
 msgstr "对象配对与房产管理"
 
+#: scripts/ui/modals/lease_end_modal.gd:73
+msgid "Material liquidation proceeds"
+msgstr "原料清算所得"
+
 #: scripts/ui/manufacturing_ui.gd:102
 msgid "MaterialLess"
 msgstr "MaterialLess"
@@ -9610,7 +9782,7 @@ msgstr "请达到 Ferro 的最低采购量。"
 msgid "Meet Marcus Reed now"
 msgstr "现在找 Marcus Reed 洽谈"
 
-#: scripts/sim/automotive.gd:655
+#: scripts/sim/automotive.gd:657
 msgid "Meet every franchise requirement first."
 msgstr "请先满足所有经销条件。"
 
@@ -9650,7 +9822,7 @@ msgstr "Meridian Trail 休旅车"
 msgid "Meridian and Volt sell steady volume on thin margins. You need a ten-car fleet, a showroom and a deposit, and you must always keep new cars on the floor. Service tickets after the sale are where the dealership earns."
 msgstr "Meridian 与 Volt 靠薄利稳定走量。你需要十辆车队、展示中心和保证金，而且展场必须随时有新车。卖车后的保养工单才是经销商真正赚钱的地方。"
 
-#: scripts/ui/phone_ui.gd:127 scripts/ui/phone_ui.gd:181
+#: scripts/ui/phone_ui.gd:127 scripts/ui/phone_ui.gd:184
 msgid "Messages"
 msgstr "消息"
 
@@ -9742,7 +9914,7 @@ msgstr "房客最低信用：%d 分"
 msgid "Miss the stock minimum twice and the factory ends the franchise and keeps part of the deposit."
 msgstr "连续两次没达到最低库存，原厂会终止经销权并没收部分保证金。"
 
-#: scripts/sim/ecommerce.gd:788
+#: scripts/sim/ecommerce.gd:789
 msgid "Missed a sale: %s is out of stock."
 msgstr "错过一笔订单：%s 缺货。"
 
@@ -9822,11 +9994,11 @@ msgstr "月结——%s"
 msgid "Month close"
 msgstr "月结"
 
-#: scripts/ui/phone_ui.gd:267
+#: scripts/ui/phone_ui.gd:270
 msgid "Month sales"
 msgstr "本月销售"
 
-#: scripts/ui/modals/cowork_desk_modal.gd:26
+#: scripts/ui/modals/cowork_desk_modal.gd:29
 msgid "Monthly hot desk ($350)"
 msgstr "自由座月租（$350）"
 
@@ -9842,9 +10014,13 @@ msgstr "每月还款"
 msgid "Monthly recurring revenue"
 msgstr "每月经常性收入"
 
-#: scripts/ui/modals/lease_modal.gd:22
+#: scripts/ui/modals/lease_modal.gd:25
 msgid "Monthly rent"
 msgstr "月租"
+
+#: scripts/ui/modals/lease_end_modal.gd:28
+msgid "Monthly rent: %s"
+msgstr "月租：%s"
 
 #: autoload/scene_router.gd:189 scripts/ui/modals/job_modal.gd:31 scripts/world/building_info.gd:109
 msgid "Mon–Fri"
@@ -9914,6 +10090,18 @@ msgstr "Moss"
 msgid "Mouth"
 msgstr "嘴型"
 
+#: scripts/sim/lease_end.gd:66
+msgid "Move reserved stock with its orders, or finish those orders before liquidating. No customer stock may be sold away."
+msgstr "请将保留库存和订单一起搬迁，或完成订单后再出清。不能卖掉客户已订的库存。"
+
+#: scripts/ui/modals/lease_end_modal.gd:49
+msgid "Move stock"
+msgstr "搬迁库存"
+
+#: data/help/help.json
+msgid "Move stock with its outstanding orders; transfer or dismiss staff. Finish industry jobs or pay cancellation penalties."
+msgstr "库存与未完成订单一起搬迁；员工要调职或资遣。完成产业工单，或支付取消违约金。"
+
 #: data/quests/green_showroom_launch.json
 msgid "Move two cars through the Auto Desk."
 msgstr "通过汽车柜台卖出两台车。"
@@ -9925,6 +10113,10 @@ msgstr "带着 $%s 的存款搬到奥瑞莉亚市。"
 #: scripts/ui/tutorial.gd:20
 msgid "Moving around"
 msgstr "移动"
+
+#: scripts/ui/modals/lease_end_modal.gd:73
+msgid "Moving cost"
+msgstr "搬运费"
 
 #: data/npcs/okafor.json
 msgid "Mr. Okafor"
@@ -10086,11 +10278,11 @@ msgstr "新游戏"
 msgid "New Neighbourhood Opening"
 msgstr "新社区开幕"
 
-#: scripts/sim/automotive.gd:766
+#: scripts/sim/automotive.gd:770
 msgid "New car returned to the factory: %s"
 msgstr "新车退回原厂：%s"
 
-#: scripts/sim/automotive.gd:718
+#: scripts/sim/automotive.gd:721
 msgid "New car sold: %s"
 msgstr "新车售出：%s"
 
@@ -10106,11 +10298,11 @@ msgstr "新游戏"
 msgid "New group job: %s"
 msgstr "新的集团委托：%s"
 
-#: scripts/sim/ecommerce.gd:805
+#: scripts/sim/ecommerce.gd:806
 msgid "New order %s — %s — %s"
 msgstr "新订单 %s——%s——%s"
 
-#: scripts/sim/ecommerce.gd:1082
+#: scripts/sim/ecommerce.gd:1083
 msgid "New review %s: %s \"%s\""
 msgstr "新评价 %s：%s「%s」"
 
@@ -10206,7 +10398,7 @@ msgstr "Nexus 银行——企业贷款"
 msgid "Nexus Co-work"
 msgstr "Nexus 共享办公室"
 
-#: scripts/sim/living.gd:104
+#: scripts/sim/living.gd:108
 msgid "Nexus Co-work day pass"
 msgstr "Nexus 共享办公室日票"
 
@@ -10246,7 +10438,7 @@ msgstr "Nina"
 msgid "Nineteen hundred a month, two months' deposit. It comes empty: you fit it out, and City Hall wants a food licence before you sell a single croissant."
 msgstr "每月一千九，押金两个月。交屋是空的：你自己装修，而且卖出第一个可颂之前，市政厅要先看到你的食品执照。"
 
-#: scripts/sim/ecommerce.gd:1135
+#: scripts/sim/ecommerce.gd:1136
 msgid "No %s in stock to send."
 msgstr "没有%s的库存可以寄。"
 
@@ -10362,11 +10554,11 @@ msgstr "不加奶"
 msgid "No new offers. More arrive every morning at 8:00."
 msgstr "没有新案子。每天早上 8:00 会有新的。"
 
-#: scripts/world/actions.gd:163
+#: scripts/world/actions.gd:165
 msgid "No one's at the till."
 msgstr "柜台没有人。"
 
-#: scripts/world/actions.gd:136
+#: scripts/world/actions.gd:138
 msgid "No one's behind the counter."
 msgstr "柜台没有人。"
 
@@ -10574,7 +10766,7 @@ msgstr "不太好。感觉很廉价。"
 msgid "Not needed yet. Commercial importers need one from the Regulation Wave (Year 8)."
 msgstr "还不用。商业进口商要到监管浪潮（第 8 年）才需要。"
 
-#: data/events/elena_offer.json scripts/ui/minigames/mini_game.gd:79 scripts/ui/modals/lease_modal.gd:46 scripts/ui/modals/sleep_modal.gd:32
+#: data/events/elena_offer.json scripts/ui/minigames/mini_game.gd:79 scripts/ui/modals/lease_modal.gd:49 scripts/ui/modals/sleep_modal.gd:32
 msgid "Not now"
 msgstr "先不要"
 
@@ -10626,7 +10818,7 @@ msgstr "一切照旧：跟清算危机时一样付款到国外。之后还是可
 msgid "Nothing on the rails today."
 msgstr "今天衣架上没有东西。"
 
-#: scripts/sim/ecommerce.gd:939
+#: scripts/sim/ecommerce.gd:940
 msgid "Nothing packed here."
 msgstr "这里没有已打包的货。"
 
@@ -10654,7 +10846,7 @@ msgstr "没有可以上线的产品。"
 msgid "Nothing to pack here: is the stock at this location?"
 msgstr "这里没有可以打包的：货在这个地点吗？"
 
-#: scripts/sim/ecommerce.gd:1115
+#: scripts/sim/ecommerce.gd:1116
 msgid "Nothing to resolve."
 msgstr "没有需要处理的事。"
 
@@ -10662,7 +10854,19 @@ msgstr "没有需要处理的事。"
 msgid "Nothing to trade."
 msgstr "没有可交易的内容。"
 
-#: scripts/ui/phone_ui.gd:260
+#: scripts/ui/modals/lease_end_modal.gd:29 scripts/ui/modals/lease_end_modal.gd:70
+msgid "Notice ends %s"
+msgstr "退租通知 %s 到期"
+
+#: scripts/sim/lease_end.gd:46
+msgid "Notice has already been given. Review the pending notice."
+msgstr "已提出退租通知，请查看进行中的通知。"
+
+#: scripts/ui/modals/lease_end_modal.gd:73
+msgid "Notice rent"
+msgstr "通知期租金"
+
+#: scripts/ui/phone_ui.gd:263
 msgid "Notifications only.\nManage at a desk: Company OS."
 msgstr "这里只显示通知。\n要管理请到办公桌：Company OS。"
 
@@ -10998,7 +11202,7 @@ msgstr "开设%s，才能供应给%s。"
 msgid "Open %s · %s"
 msgstr "开幕 %s · %s"
 
-#: scripts/sim/automotive.gd:911 scripts/ui/automotive_ui.gd:24 scripts/ui/automotive_ui.gd:30
+#: scripts/sim/automotive.gd:915 scripts/ui/automotive_ui.gd:24 scripts/ui/automotive_ui.gd:30
 msgid "Open Auto Desk"
 msgstr "开设汽车柜台"
 
@@ -11130,7 +11334,7 @@ msgstr "打开拍卖柜台"
 msgid "Open the auto desk before hiring a technician."
 msgstr "请先开设汽车柜台再雇用技师。"
 
-#: scripts/sim/automotive.gd:369 scripts/sim/automotive.gd:785
+#: scripts/sim/automotive.gd:369 scripts/sim/automotive.gd:789
 msgid "Open the auto desk first."
 msgstr "请先开设汽车柜台。"
 
@@ -11370,7 +11574,7 @@ msgstr "向 Ferro 采购原料"
 msgid "Order an oat latte ($5.20)"
 msgstr "点杯燕麦拿铁（$5.20）"
 
-#: scripts/sim/automotive.gd:672
+#: scripts/sim/automotive.gd:674
 msgid "Order at least the franchise minimum quantity."
 msgstr "请至少订购经销最低数量。"
 
@@ -11494,7 +11698,7 @@ msgstr "透支"
 msgid "Overdraft costs $35 a night. Nothing's over — but something has to give."
 msgstr "透支每晚要付 $35。游戏还没结束——但总得牺牲点什么。"
 
-#: scripts/sim/living.gd:33
+#: scripts/sim/living.gd:37
 msgid "Overdraft fee"
 msgstr "透支手续费"
 
@@ -11714,7 +11918,7 @@ msgstr "打包了 %d 笔订单%s。"
 msgid "Packed and ready: %d"
 msgstr "已打包待出货：%d"
 
-#: scripts/sim/ecommerce.gd:901
+#: scripts/sim/ecommerce.gd:902
 msgid "Packed order %s"
 msgstr "已打包订单 %s"
 
@@ -11722,7 +11926,7 @@ msgstr "已打包订单 %s"
 msgid "Packed well"
 msgstr "打包得很好"
 
-#: scripts/ui/phone_ui.gd:265
+#: scripts/ui/phone_ui.gd:268
 msgid "Packed, not shipped"
 msgstr "已打包未出货"
 
@@ -11858,7 +12062,7 @@ msgstr "兼职、商品摄影、打包、写程序与接案都有亲手操作的
 msgid "Part-time jobs: take one to earn a wage. You work the shifts yourself at the workplace (staff door, press E)."
 msgstr "「兼职工作」：选一份赚薪水。班要自己到工作地点上（员工信道按 E）。"
 
-#: scripts/sim/ecommerce.gd:1146
+#: scripts/sim/ecommerce.gd:1147
 msgid "Partial refund 30%% %s: %s"
 msgstr "部分退款 30%% %s：%s"
 
@@ -11954,6 +12158,10 @@ msgstr "取得许可并命名建案后，按工程里程碑付款；延误和超
 msgid "Pay for a proper repair"
 msgstr "花钱彻底修复"
 
+#: data/help/help.json
+msgid "Pay notice rent and any early exit fee before leaving. Deposits return only on exit, less damage."
+msgstr "离开前先付通知期租金与提前解约金。押金到退租时才退，并扣除损坏。"
+
 #: scripts/ui/modals/loan_modal.gd:126
 msgid "Pay off"
 msgstr "一次还清"
@@ -12026,11 +12234,11 @@ msgstr "《支付诚信法》生效：超过 $2,500 的转帐要做 KYC 审查�
 msgid "Payments start-ups promise audits and an insurance pool."
 msgstr "支付新创承诺接受稽核，并成立保险基金。"
 
-#: scripts/sim/ecommerce.gd:1207
+#: scripts/sim/ecommerce.gd:1208
 msgid "Payout sent: %s to your business account."
 msgstr "拨款已送出：%s 导入你的公司帐户。"
 
-#: scripts/sim/ecommerce.gd:1207
+#: scripts/sim/ecommerce.gd:1208
 msgid "Payout sent: %s to your personal account."
 msgstr "拨款已送出：%s 导入你的个人帐户。"
 
@@ -12098,7 +12306,7 @@ msgstr "许可"
 msgid "Permits & regulations"
 msgstr "许可与法规"
 
-#: scripts/ui/modals/bank_modal.gd:60 scripts/ui/phone_ui.gd:221
+#: scripts/ui/modals/bank_modal.gd:60 scripts/ui/phone_ui.gd:224
 msgid "Personal"
 msgstr "个人"
 
@@ -12110,7 +12318,7 @@ msgstr "个人／独资"
 msgid "Personal Banker"
 msgstr "理财专员"
 
-#: scripts/ui/phone_ui.gd:269
+#: scripts/ui/phone_ui.gd:272
 msgid "Personal cap"
 msgstr "个人上限"
 
@@ -12122,7 +12330,7 @@ msgstr "个人活存"
 msgid "Personal seller cap: %s of %s used this month."
 msgstr "个人卖家上限：本月已用 %s／%s。"
 
-#: scripts/sim/ecommerce.gd:843
+#: scripts/sim/ecommerce.gd:844
 msgid "Personal seller limit reached. Your listings are paused until next month — or until you register a business."
 msgstr "已达个人卖家上限。你的商品会暂停到下个月——或直到你登记公司。"
 
@@ -12318,7 +12526,7 @@ msgstr "PostPoint 河滨分店"
 msgid "PostPoint clerk"
 msgstr "PostPoint 店员"
 
-#: scripts/sim/ecommerce.gd:988
+#: scripts/sim/ecommerce.gd:989
 msgid "PostPoint drop-off: %d parcels (%s)"
 msgstr "PostPoint 寄件：%d 件包裹（%s）"
 
@@ -12349,6 +12557,10 @@ msgstr "拍卖前验车"
 #: data/regions/zenkai.json
 msgid "Precision manufacturing"
 msgstr "精密制造"
+
+#: scripts/sim/lease_end.gd:140
+msgid "Premises lease ended"
+msgstr "处所租约已结束"
 
 #: data/economy/automotive.json
 msgid "Premium"
@@ -12986,7 +13198,7 @@ msgstr "房仲前辈"
 msgid "Reassuring"
 msgstr "安心"
 
-#: scripts/sim/automotive.gd:823
+#: scripts/sim/automotive.gd:827
 msgid "Recall handling: %s"
 msgstr "召回处理：%s"
 
@@ -13106,7 +13318,7 @@ msgstr "精致"
 msgid "Refund"
 msgstr "退款"
 
-#: scripts/sim/ecommerce.gd:1130
+#: scripts/sim/ecommerce.gd:1131
 msgid "Refund %s: %s (return label paid)"
 msgstr "退款 %s：%s（已付退货运费）"
 
@@ -13374,7 +13586,7 @@ msgstr "翻修还需 %d 天完工"
 msgid "Rent"
 msgstr "租金"
 
-#: scripts/ui/phone_ui.gd:227
+#: scripts/ui/phone_ui.gd:230
 msgid "Rent $1,250 due the 14th"
 msgstr "房租 $1,250，14 号到期"
 
@@ -13390,7 +13602,7 @@ msgstr "房租（营业场所）"
 msgid "Rent asking ratio: %.0f%%"
 msgstr "租金开价比：%.0f%%"
 
-#: scripts/sim/living.gd:53
+#: scripts/sim/living.gd:57
 msgid "Rent bounced. I've added the $%d late fee. Please sort it out this week."
 msgstr "房租扣款失败。我加收了 $%d 的滞纳金。这周内请处理一下。"
 
@@ -13398,11 +13610,11 @@ msgstr "房租扣款失败。我加收了 $%d 的滞纳金。这周内请处理�
 msgid "Rent machine · $1,400/month"
 msgstr "租用机台 · 每月 $1,400"
 
-#: scripts/sim/living.gd:54
+#: scripts/sim/living.gd:58
 msgid "Rent paid into overdraft. Late fee charged."
 msgstr "房租用透支付了。已收取滞纳金。"
 
-#: scripts/sim/living.gd:56
+#: scripts/sim/living.gd:60
 msgid "Rent paid: %s"
 msgstr "已付房租：%s"
 
@@ -13414,7 +13626,7 @@ msgstr "整栋上架出租，各户分别收租"
 msgid "Rent the corner unit in Old Town from Mr. Okafor (Okafor Lettings), fit it out, get the food licence at City Hall, and open. Set the menu, keep coffee in stock, order pastries, and put someone behind the counter: a barista, or you."
 msgstr "向 Okafor 先生（Okafor 租屋行）租下旧城区的转角店面，装修、到市政厅办食品执照，然后开张。订好菜单价格、备好咖啡材料、订糕点，再找人顾吧台：咖啡师，或你自己。"
 
-#: scripts/sim/living.gd:49
+#: scripts/sim/living.gd:53
 msgid "Rent — Riverside Tower 7C (%s)"
 msgstr "房租——河滨大楼 7C（%s）"
 
@@ -13430,7 +13642,7 @@ msgstr "RentMachine"
 msgid "RentRealtyBuilding"
 msgstr "RentRealtyBuilding"
 
-#: scripts/sim/automotive.gd:614
+#: scripts/sim/automotive.gd:616
 msgid "Rental damage repair: %s"
 msgstr "租赁损坏维修：%s"
 
@@ -13454,11 +13666,11 @@ msgstr "租赁车队上路"
 msgid "Rental fleet: lease the Gateway counter, buy cars, set day and week rates and schedule services. Skipped service causes breakdowns mid-rental."
 msgstr "租车车队：承租 Gateway 柜台、买车、设置日租与周租费率并安排保养。跳过保养会在租期中抛锚。"
 
-#: scripts/sim/automotive.gd:626
+#: scripts/sim/automotive.gd:628
 msgid "Rental interrupted: %s"
 msgstr "租赁中断：%s"
 
-#: scripts/sim/automotive.gd:590
+#: scripts/sim/automotive.gd:592
 msgid "Rental returned: %s"
 msgstr "租赁还车：%s"
 
@@ -13474,11 +13686,11 @@ msgstr "修复并加装监视器"
 msgid "Repair and service · %s"
 msgstr "修复与保养 · %s"
 
-#: scripts/sim/automotive.gd:811
+#: scripts/sim/automotive.gd:815
 msgid "Repair paid after a lost dispute"
 msgstr "争议败诉后支付维修费"
 
-#: scripts/sim/automotive.gd:806
+#: scripts/sim/automotive.gd:810
 msgid "Repair paid after an insurer dispute"
 msgstr "保险争议后支付维修费"
 
@@ -13526,7 +13738,7 @@ msgstr "要取代 %s（第 %d 天）吗？"
 msgid "Replacement on its way. {customer}: \"Oh — nice. Didn't expect that.\""
 msgstr "新品已在路上。{customer}：「喔——不错耶，没想到。」"
 
-#: scripts/sim/ecommerce.gd:1139
+#: scripts/sim/ecommerce.gd:1140
 msgid "Replacement sent %s: %s (express)"
 msgstr "已寄出替换品 %s：%s（快捷）"
 
@@ -13609,6 +13821,10 @@ msgstr "住宅单位售出"
 #: data/economy/energy.json
 msgid "Residents Association"
 msgstr "Residents Association"
+
+#: scripts/ui/modals/lease_end_modal.gd:81
+msgid "Resolve pending exit"
+msgstr "处理待完成退租"
 
 #: data/economy/hotel.json
 msgid "Resort spa and pool"
@@ -13758,6 +13974,10 @@ msgstr "按产业列出本月与上月的营收、毛利、费用及营业利益
 msgid "Review OEM orders"
 msgstr "查看代工单"
 
+#: scripts/ui/modals/lease_end_modal.gd:30
+msgid "Review lease"
+msgstr "查看租约"
+
 #: scripts/ui/automotive_ui.gd:132
 msgid "Review my lot"
 msgstr "查看我的车场"
@@ -13882,7 +14102,7 @@ msgstr "Riverstone Bakery"
 msgid "Roadmap delivered"
 msgstr "路线图兑现"
 
-#: scripts/sim/automotive.gd:628
+#: scripts/sim/automotive.gd:630
 msgid "Roadside tow: %s"
 msgstr "路边拖吊：%s"
 
@@ -14150,7 +14370,7 @@ msgstr "对帐单"
 msgid "SUBSCRIBERS"
 msgstr "订阅用户"
 
-#: scripts/world/interior.gd:295
+#: scripts/world/interior.gd:299
 msgid "SUITE 2B\nAVAILABLE"
 msgstr "2B 室\n招租中"
 
@@ -14182,7 +14402,7 @@ msgstr "SaaS：做软件产品"
 msgid "Sale"
 msgstr "售屋"
 
-#: scripts/sim/ecommerce.gd:1029
+#: scripts/sim/ecommerce.gd:1030
 msgid "Sale delivered %s: %d × %s @ %s"
 msgstr "销售已送达 %s：%d × %s @ %s"
 
@@ -14254,7 +14474,7 @@ msgstr "存盘"
 msgid "Save backup"
 msgstr "存盘备份"
 
-#: scripts/sim/automotive.gd:649
+#: scripts/sim/automotive.gd:651
 msgid "Save cash or arrange a bank loan."
 msgstr "请存足现金或申请银行贷款。"
 
@@ -14266,15 +14486,19 @@ msgstr "省下现金。销量会下滑。"
 msgid "Save enough cash for the bid and the buyer fee first."
 msgstr "请先存足出价与买方手续费的现金。"
 
-#: scripts/sim/automotive.gd:675
+#: scripts/sim/automotive.gd:677
 msgid "Save enough cash for the factory order first."
 msgstr "请先存足原厂订单的现金。"
+
+#: scripts/sim/lease_end.gd:101
+msgid "Save enough cash for the notice, fees, moving and contract settlement first."
+msgstr "请先备妥通知期租金、费用、搬运与合约结算现金。"
 
 #: autoload/save_system.gd:354
 msgid "Save exported. Keep this file outside your browser."
 msgstr "存盘已导出。请把文件保存在浏览器以外的地方。"
 
-#: scripts/ui/phone_ui.gd:326
+#: scripts/ui/phone_ui.gd:329
 msgid "Save game"
 msgstr "保存游戏"
 
@@ -14282,7 +14506,7 @@ msgstr "保存游戏"
 msgid "Save imported. Continue where you left off."
 msgstr "存盘已导入，可以接着玩。"
 
-#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:327
+#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:330
 msgid "Save now"
 msgstr "立即存盘"
 
@@ -14422,7 +14646,7 @@ msgstr "已保存"
 msgid "Saved %s"
 msgstr "存于 %s"
 
-#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:329
+#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:332
 msgid "Saved (slot %d)."
 msgstr "已存盘（字段 %d）。"
 
@@ -14842,11 +15066,11 @@ msgstr "ShopLane＋发票"
 msgid "ShopLane Ads: a big brand campaign is bidding up placements."
 msgstr "ShopLane 广告：有大品牌在抢版位，价格被推高了。"
 
-#: scripts/ui/phone_ui.gd:259
+#: scripts/ui/phone_ui.gd:262
 msgid "ShopLane Seller"
 msgstr "ShopLane 卖家"
 
-#: scripts/sim/ecommerce.gd:1219
+#: scripts/sim/ecommerce.gd:1220
 msgid "ShopLane ads: %s"
 msgstr "ShopLane 广告：%s"
 
@@ -14854,7 +15078,7 @@ msgstr "ShopLane 广告：%s"
 msgid "ShopLane balance (paid Mondays)"
 msgstr "ShopLane 余额（每周一拨款）"
 
-#: scripts/sim/ecommerce.gd:1173
+#: scripts/sim/ecommerce.gd:1174
 msgid "ShopLane dispute lost %s: forced refund + $15 fee"
 msgstr "ShopLane 申诉败诉 %s：强制退款＋$15 手续费"
 
@@ -14870,11 +15094,11 @@ msgstr "ShopLane 每笔销售先扣 10% 手续费，再拨款给你。"
 msgid "ShopLane marketplace: %d%% fee, weekly payouts, personal sellers capped at %s/month."
 msgstr "ShopLane 平台：抽成 %d%%，每周拨款，个人卖家每月上限 %s。"
 
-#: scripts/sim/ecommerce.gd:1211
+#: scripts/sim/ecommerce.gd:1212
 msgid "ShopLane negative balance charged to card"
 msgstr "ShopLane 负余额已从信用卡扣款"
 
-#: scripts/sim/ecommerce.gd:844
+#: scripts/sim/ecommerce.gd:845
 msgid "ShopLane paused your listings: personal seller limit reached."
 msgstr "ShopLane 暂停了你的商品：已达个人卖家上限。"
 
@@ -14882,11 +15106,11 @@ msgstr "ShopLane 暂停了你的商品：已达个人卖家上限。"
 msgid "ShopLane payout"
 msgstr "ShopLane 拨款"
 
-#: scripts/sim/ecommerce.gd:1206
+#: scripts/sim/ecommerce.gd:1207
 msgid "ShopLane payout received: %s"
 msgstr "收到 ShopLane 拨款：%s"
 
-#: scripts/ui/phone_ui.gd:226
+#: scripts/ui/phone_ui.gd:229
 msgid "ShopLane pending"
 msgstr "ShopLane 待拨款"
 
@@ -14902,11 +15126,11 @@ msgstr "已达 ShopLane 个人卖家上限——到市政厅登记公司。"
 msgid "ShopLane seller cap lifted · B2B contracts unlocked · office leases unlocked · supplier net terms unlocked"
 msgstr "解除 ShopLane 卖家上限 · 解锁 B2B 合约 · 解锁办公室租约 · 解锁供应商票期"
 
-#: scripts/sim/ecommerce.gd:1204
+#: scripts/sim/ecommerce.gd:1205
 msgid "ShopLane weekly payout"
 msgstr "ShopLane 每周拨款"
 
-#: scripts/sim/ecommerce.gd:694
+#: scripts/sim/ecommerce.gd:695
 msgid "ShopLane: personal seller limit reached this month."
 msgstr "ShopLane：本月已达个人卖家上限。"
 
@@ -14950,7 +15174,7 @@ msgstr "让我看看你能借多少。"
 msgid "Showroom discount"
 msgstr "展示中心折扣"
 
-#: scripts/sim/automotive.gd:648
+#: scripts/sim/automotive.gd:650
 msgid "Showroom leased"
 msgstr "已承租展示中心"
 
@@ -14970,11 +15194,11 @@ msgstr "签约 %s%s · 保证金 %s"
 msgid "Sign a 60-day supply agreement with {supplier} ($600 fee)"
 msgstr "跟 {supplier} 签 60 天供货协议（费用 $600）"
 
-#: scripts/sim/automotive.gd:668 scripts/sim/automotive.gd:757
+#: scripts/sim/automotive.gd:670 scripts/sim/automotive.gd:761
 msgid "Sign a franchise first."
 msgstr "请先签下经销权。"
 
-#: scripts/ui/modals/lease_modal.gd:40
+#: scripts/ui/modals/lease_modal.gd:43
 msgid "Sign the lease"
 msgstr "签租约"
 
@@ -14994,7 +15218,7 @@ msgstr "申请人有签名"
 msgid "Signed contract %s with %s: %s."
 msgstr "签订合约 %s，对象 %s：%s。"
 
-#: scripts/sim/automotive.gd:661
+#: scripts/sim/automotive.gd:663
 msgid "Signed the %s franchise."
 msgstr "签下了 %s 经销权。"
 
@@ -15206,11 +15430,11 @@ msgstr "已售出"
 msgid "Sold %d cars · profit so far %s"
 msgstr "已售 %d 辆 · 目前获利 %s"
 
-#: scripts/sim/ecommerce.gd:1257
+#: scripts/sim/ecommerce.gd:1258
 msgid "Sold %d × %s to liquidator (%d%% of cost)"
 msgstr "卖给清仓商：%d × %s（成本的 %d%%）"
 
-#: scripts/sim/effects.gd:95
+#: scripts/sim/effects.gd:97
 msgid "Sold %d%% of %s for %s."
 msgstr "卖出 %d%% 的 %s 股份，换得 %s。"
 
@@ -15321,6 +15545,10 @@ msgstr "员工信道——上班"
 #: data/help/glossary.json
 msgid "Staff morale"
 msgstr "员工士气"
+
+#: scripts/ui/modals/lease_end_modal.gd:73
+msgid "Staff severance"
+msgstr "员工资遣费"
 
 #: data/help/help.json
 msgid "Staff work weekdays at your office and are paid every Friday at 17:00, so keep cash in the company."
@@ -15470,7 +15698,7 @@ msgstr "库存（成本）"
 msgid "Stock at cost"
 msgstr "库存（成本）"
 
-#: scripts/sim/automotive.gd:888
+#: scripts/sim/automotive.gd:892
 msgid "Stock car auctioned: %s"
 msgstr "库存车拍卖处分：%s"
 
@@ -15534,7 +15762,7 @@ msgstr "用一天就坏了。"
 msgid "Stops planned %d / %d  ·  route so far %.1f km"
 msgstr "已排 %d / %d 个停靠点  ·  目前路线 %.1f 公里"
 
-#: scripts/ui/modals/lease_modal.gd:27
+#: scripts/ui/modals/lease_modal.gd:30
 msgid "Storage"
 msgstr "仓储"
 
@@ -15586,7 +15814,7 @@ msgstr "Studio Lumen"
 msgid "Studio Lumen photos ($120) & list"
 msgstr "找 Studio Lumen 拍照（$120）并上架"
 
-#: scripts/sim/ecommerce.gd:637
+#: scripts/sim/ecommerce.gd:638
 msgid "Studio Lumen product photos: %s"
 msgstr "Studio Lumen 商品摄影：%s"
 
@@ -15594,7 +15822,7 @@ msgstr "Studio Lumen 商品摄影：%s"
 msgid "Studio Nine Yoga"
 msgstr "Studio Nine 瑜伽"
 
-#: scripts/sim/ecommerce.gd:636
+#: scripts/sim/ecommerce.gd:637
 msgid "Studio photos cost %s."
 msgstr "摄影棚拍照要 %s。"
 
@@ -15670,7 +15898,7 @@ msgstr "应付供应商帐款"
 msgid "Supplier credit"
 msgstr "供应商票期"
 
-#: scripts/sim/effects.gd:43
+#: scripts/sim/effects.gd:45
 msgid "Supplier doesn't carry that."
 msgstr "供应商没有这个商品。"
 
@@ -15918,7 +16146,7 @@ msgstr "Tanaka"
 msgid "Tape seam %d"
 msgstr "贴第 %d 条接缝"
 
-#: scripts/ui/phone_ui.gd:127 scripts/ui/phone_ui.gd:239
+#: scripts/ui/phone_ui.gd:127 scripts/ui/phone_ui.gd:242
 msgid "Tasks"
 msgstr "任务"
 
@@ -16350,6 +16578,14 @@ msgstr "柜台每月租金 %s。请到机场区的 Gateway 租车承租。"
 msgid "The days between paying a supplier and the stock reaching your shelf."
 msgstr "从付款给供应商到货品上架之间的天数。"
 
+#: scripts/sim/lease_end.gd:60
+msgid "The destination has insufficient room for stock and incoming deliveries."
+msgstr "目的地空间不足，无法容纳库存与预计到货。"
+
+#: scripts/sim/lease_end.gd:64
+msgid "The destination has insufficient staff capacity."
+msgstr "目的地没有足够的员工空间。"
+
 #: data/dialogue/victor_sold.json
 msgid "The difference: the profit is mine, and the mistakes are ours. Don't waste the head start."
 msgstr "差别是：获利归我，错误一起扛。别浪费先发优势。"
@@ -16450,7 +16686,7 @@ msgstr "地主请你明天再来谈。"
 msgid "The landlord declined. Try again tomorrow."
 msgstr "地主拒绝了。明天再试。"
 
-#: scripts/sim/living.gd:78
+#: scripts/sim/living.gd:82
 msgid "The landlord needs a registered company on the lease."
 msgstr "房东要求用登记过的公司签租约。"
 
@@ -16489,6 +16725,10 @@ msgstr "已支付模具费。"
 #: autoload/scene_router.gd:82
 msgid "The new game could not be started because no save slot was available."
 msgstr "没有可用的存盘字段，无法开始新游戏。"
+
+#: scripts/sim/lease_end.gd:116
+msgid "The notice period has not ended yet. Keep using the premises until the exit date."
+msgstr "通知期尚未结束，退租日期前仍可使用处所。"
 
 #: data/dialogue/lina_bridge.json
 msgid "The operators are tracing the funds. I never asked anyone to trust me blindly. I asked them to trust code. Code has authors, and authors make mistakes."
@@ -16594,7 +16834,7 @@ msgstr "组长把邮递区号表收走了，现在要靠记忆！"
 msgid "The shortest way there is. Textbook."
 msgstr "这就是最短的路线，教科书等级。"
 
-#: scripts/sim/automotive.gd:673
+#: scripts/sim/automotive.gd:675
 msgid "The showroom does not have room for that many cars."
 msgstr "展示中心放不下那么多车。"
 
@@ -16762,6 +17002,10 @@ msgstr "这张卡片列出原存盘版本之后的更新，可向下卷动阅读
 msgid "This client brief expired during production."
 msgstr "此客户需求在制作期间已到期。"
 
+#: scripts/sim/lease_end.gd:114 scripts/sim/lease_end.gd:45
+msgid "This company is already closed."
+msgstr "这家公司已结束营业。"
+
 #: scripts/sim/contracts.gd:207
 msgid "This contract belongs to another company."
 msgstr "这份合约属于其他公司。"
@@ -16770,7 +17014,7 @@ msgstr "这份合约属于其他公司。"
 msgid "This equipment needs no service today."
 msgstr "这些设备今天不需要保养。"
 
-#: scripts/ui/phone_ui.gd:334
+#: scripts/ui/phone_ui.gd:337
 msgid "This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen."
 msgstr "这场游戏每隔几秒自动存到字段 %d。新游戏会用自己的字段；其他存盘可以在标题画面读取。"
 
@@ -16822,6 +17066,10 @@ msgstr "这就是你之后登记自己公司要填的表，规则值得记住。
 msgid "This job is no longer available."
 msgstr "这张工单已无法承接。"
 
+#: scripts/ui/modals/lease_end_modal.gd:44
+msgid "This lease has ended."
+msgstr "这份租约已结束。"
+
 #: scripts/ui/modals/company_os.gd:1504
 msgid "This month"
 msgstr "本月"
@@ -16845,6 +17093,14 @@ msgstr "这部分已经是最佳状态。"
 #: scripts/sim/compliance.gd:29
 msgid "This permit is already granted or being processed."
 msgstr "这项许可已核发或正在审核。"
+
+#: scripts/sim/lease_end.gd:40
+msgid "This property has no active lease."
+msgstr "这处所没有有效租约。"
+
+#: scripts/sim/lease_end.gd:113
+msgid "This property has no pending notice."
+msgstr "这处所没有待完成的退租通知。"
 
 #: scripts/sim/ecommerce.gd:322
 msgid "This purchase belongs to a closed company."
@@ -16918,7 +17174,7 @@ msgstr "有三种做法。我把选项传给你。趁情况还没更糟，挑一
 msgid "Thu"
 msgstr "四"
 
-#: scripts/world/actions.gd:119
+#: scripts/world/actions.gd:121
 msgid "Ticket A-%d. Now serving A-%d."
 msgstr "号码 A-%d。目前叫号 A-%d。"
 
@@ -16954,7 +17210,7 @@ msgstr "时间只会随着你的生活前进：上班工作，或晚上睡觉。
 msgid "Time to finish"
 msgstr "完成期限"
 
-#: scripts/ui/phone_ui.gd:128 scripts/ui/phone_ui.gd:283
+#: scripts/ui/phone_ui.gd:128 scripts/ui/phone_ui.gd:286
 msgid "Timeline"
 msgstr "人生纪录"
 
@@ -16974,7 +17230,7 @@ msgstr "老旧房间会拉低每则评价的清洁与价值感分数。"
 msgid "To Startup Hub"
 msgstr "前往新创园区"
 
-#: scripts/ui/modals/company_os.gd:509 scripts/ui/phone_ui.gd:264
+#: scripts/ui/modals/company_os.gd:509 scripts/ui/phone_ui.gd:267
 msgid "To pack"
 msgstr "待打包"
 
@@ -17014,7 +17270,7 @@ msgstr "跟着美元价值走的代币，在交易所帐户之间几分钟就能
 msgid "Tom"
 msgstr "Tom"
 
-#: scripts/ui/modals/lease_modal.gd:19
+#: scripts/ui/modals/lease_modal.gd:22
 msgid "Tom: \"It's all yours. Sign's up out front.\""
 msgstr "Tom：「现在是你的了。招牌已经挂在门口。」"
 
@@ -17102,6 +17358,10 @@ msgstr "已交易 %s %s · 内部销售 %s · 相对外购省下 %s"
 msgid "Trailhead SUV"
 msgstr "Trailhead 休旅车"
 
+#: scripts/sim/lease_end.gd:61
+msgid "Transfer or dismiss employees before their workplace ends."
+msgstr "工作地点结束前，请先调职或资遣员工。"
+
 #: data/help/glossary.json
 msgid "Transfer price"
 msgstr "转拨价"
@@ -17109,6 +17369,10 @@ msgstr "转拨价"
 #: scripts/ui/group_ui.gd:54
 msgid "Transfer price per %s"
 msgstr "每%s转拨价"
+
+#: scripts/ui/modals/lease_end_modal.gd:50
+msgid "Transfer staff"
+msgstr "调职员工"
 
 #: scripts/sim/company.gd:107
 msgid "Transfer to %s"
@@ -17182,7 +17446,7 @@ msgstr "两万五千销售额"
 msgid "Two focused hours: %.1f hours of the work done. %s"
 msgstr "专心工作两小时：完成 %.1f 小时的工作量。%s"
 
-#: scripts/world/actions.gd:268
+#: scripts/world/actions.gd:270
 msgid "Two hours behind your own counter: %d customers served."
 msgstr "在自己的吧台站了两小时：服务了 %d 位客人。"
 
@@ -17294,11 +17558,11 @@ msgstr "大学客户导师"
 msgid "Unknown agency crisis."
 msgstr "未知的代理商危机。"
 
-#: scripts/sim/automotive.gd:826
+#: scripts/sim/automotive.gd:830
 msgid "Unknown automotive crisis."
 msgstr "未知的汽车危机。"
 
-#: scripts/sim/ecommerce.gd:1156
+#: scripts/sim/ecommerce.gd:1157
 msgid "Unknown choice."
 msgstr "未知的选项。"
 
@@ -17326,7 +17590,7 @@ msgstr "未知的旅馆危机。"
 msgid "Unknown idea."
 msgstr "未知的点子。"
 
-#: scripts/sim/effects.gd:21
+#: scripts/sim/effects.gd:23
 msgid "Unknown industry event."
 msgstr "未知的产业事件。"
 
@@ -17338,7 +17602,7 @@ msgstr "找不到这份工作。"
 msgid "Unknown property crisis."
 msgstr "未知的不动产危机。"
 
-#: scripts/sim/living.gd:75
+#: scripts/sim/living.gd:79
 msgid "Unknown property."
 msgstr "未知的对象。"
 
@@ -17802,7 +18066,7 @@ msgstr "保固"
 msgid "Warranty claim from %s: %s, repair cost %s, decide within %d days"
 msgstr "%s 的保固理赔：%s，修复成本 %s，请在 %d 天内处理"
 
-#: scripts/sim/automotive.gd:879
+#: scripts/sim/automotive.gd:883
 msgid "Warranty claim on a used car"
 msgstr "中古车保固求偿"
 
@@ -17962,7 +18226,7 @@ msgstr "最浓的那种。"
 msgid "When a company closes, its undelivered contracts end and its unpaid invoices go to a collector. Old contracts stay visible, but the closed company cannot deliver or collect again."
 msgstr "公司关闭时，未交货合约终止，未收款发票让售催收公司。旧合约保留供查阅，但已结束公司不能再交货或收款。"
 
-#: scripts/world/actions.gd:280
+#: scripts/world/actions.gd:282
 msgid "When are we getting paid? Rent's due."
 msgstr "什么时候发薪水？房租要缴了。"
 
@@ -18190,7 +18454,7 @@ msgstr "你已经是最高出价者。"
 msgid "You already own a registered company."
 msgstr "你已经有一间登记的公司了。"
 
-#: scripts/sim/living.gd:80
+#: scripts/sim/living.gd:84
 msgid "You already rent this."
 msgstr "你已经租了这里。"
 
@@ -18294,7 +18558,7 @@ msgstr "你看起来在盘算什么。"
 msgid "You need %d in stock (have %d)."
 msgstr "需要 %d 件库存（目前 %d 件）。"
 
-#: scripts/sim/living.gd:85
+#: scripts/sim/living.gd:89
 msgid "You need %s (first month%s)."
 msgstr "需要 %s（首月租金%s）。"
 
@@ -18310,7 +18574,7 @@ msgstr "你需要日票或座位方案。到柜台问问。"
 msgid "You need a van."
 msgstr "你需要一台货车。"
 
-#: scripts/sim/ecommerce.gd:629
+#: scripts/sim/ecommerce.gd:630
 msgid "You need the product in hand to photograph it."
 msgstr "商品要在手上才能拍照。"
 
@@ -18414,7 +18678,7 @@ msgstr "你正拿着包裹。走到河滨区的 PostPoint，在柜台交寄。"
 msgid "You're here about the corner unit, I can tell. Everybody looks at it the same way."
 msgstr "你是为了转角那间店面来的吧，我看得出来。每个人看它的眼神都一样。"
 
-#: scripts/sim/ecommerce.gd:973
+#: scripts/sim/ecommerce.gd:974
 msgid "You're not carrying any parcels."
 msgstr "你身上没有包裹。"
 
@@ -18430,7 +18694,7 @@ msgstr "这是你应得的：你是我们新的%s。新时薪：每小时 $%d。
 msgid "You've got the look of someone whose parcels keep going the long way round. A van fixes that."
 msgstr "你看起来就像包裹老是绕远路的人。有一台货车就解决了。"
 
-#: scripts/sim/ecommerce.gd:835
+#: scripts/sim/ecommerce.gd:836
 msgid "You've sold %s of your %s personal seller limit this month. Register a business to lift it."
 msgstr "你这个月已经卖了 %s，个人卖家上限是 %s。登记公司就能解除限制。"
 
@@ -18506,7 +18770,7 @@ msgstr "你的现金"
 msgid "Your cost / outside market"
 msgstr "你的成本／外部市价"
 
-#: scripts/world/actions.gd:262
+#: scripts/world/actions.gd:264
 msgid "Your counter — %s"
 msgstr "你的吧台——%s"
 
@@ -18518,11 +18782,15 @@ msgstr "你的信用纪录需要时间恢复。"
 msgid "Your credit score and record of repayments affect whether the bank lends and how much it offers."
 msgstr "信用分数与还款纪录会影响银行是否放款及额度。"
 
+#: scripts/ui/modals/lease_end_modal.gd:33
+msgid "Your current home cannot be ended until you have a replacement home."
+msgstr "找到新住处前，不能退掉目前的住处。"
+
 #: data/help/glossary.json
 msgid "Your daily ad budget buys product exposure; clicks can cost money without creating an order."
 msgstr "每日广告预算用来增加商品曝光；点击会花钱，不一定带来订单。"
 
-#: scripts/ui/modals/cowork_desk_modal.gd:21
+#: scripts/ui/modals/cowork_desk_modal.gd:24
 msgid "Your day pass is active today."
 msgstr "你今天的日票有效。"
 
@@ -18622,7 +18890,7 @@ msgstr "你的款项卡在冻结的跨链桥上，预计 %s 前后恢复。改�
 msgid "Your payment on loan %s bounced. We'll try again in 3 days. It's cheaper to call me before this happens."
 msgstr "你的贷款 %s 扣款失败，3 天后会再扣一次。下次先打给我会比较便宜。"
 
-#: scripts/sim/living.gd:126
+#: scripts/sim/living.gd:130
 msgid "Your personal account"
 msgstr "你的个人帐户"
 
@@ -19226,7 +19494,7 @@ msgstr "关 ✗"
 msgid "on delivery"
 msgstr "交件时"
 
-#: scripts/world/actions.gd:151
+#: scripts/world/actions.gd:153
 msgid "on the house (staff)"
 msgstr "员工免费"
 
@@ -19270,7 +19538,7 @@ msgstr "自有媒体"
 msgid "paid on delivery"
 msgstr "交件即付款"
 
-#: scripts/ui/phone_ui.gd:272
+#: scripts/ui/phone_ui.gd:275
 msgid "paused: cap"
 msgstr "暂停：已达上限"
 

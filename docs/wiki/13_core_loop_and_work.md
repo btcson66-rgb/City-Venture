@@ -255,3 +255,7 @@ Crestline 的撤回／拒絕／過期均可接續；簽約公司關閉則明說�
 
 ## Player feedback guidance (#109)
 Every barista ticket explicitly lists Single shot or Double shot, including flat white. Tutorial cards, objective text, navigation and City Guide share live opening windows. Closed destinations offer an explicit wait action; weekend closures name the actual next opening date. NPC-specific objectives use the person’s scheduled availability. Payment terms badges explain Net 0, Net 30 and Net 60, supplier cash timing, deposits/upfront, MOQ, lead time and AR/AP.
+
+
+## Lease exits (#110)
+Implemented: Phone → Leases, property agents/cowork desks and leased interior exits reach one termination screen. Review notice rent, early fee, damage, deposit return, moving, staff severance and unfinished-job settlement before confirming. Notice keeps access until its deadline; changed obligations retain the lease with an actionable pending exit. Move finished stock and its deliveries/orders together or liquidate unreserved stock. Factory materials have an explicit liquidation choice. Delivered invoices remain collectible. Fixed-premises production, media, energy, hotel bookings, brokerage mandates and new vehicle rentals/dealership sales stop without premises. Owned hotels and residential tenant invoices continue. Blocked: current home cannot end before #32 provides a replacement. Automotive fleet/installed equipment relocation and franchise termination remain separate existing asset/contract flows; this change pauses premises operations and does not erase owned assets.

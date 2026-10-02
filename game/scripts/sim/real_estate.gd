@@ -32,7 +32,7 @@ static func _id(prefix: String) -> String:
 static func listings() -> Array:
 	return DataDB.properties.values().filter(func(p):return p.get("kind","")=="investment_home" and p.get("district","")=="residential")
 static func refresh() -> void:
-	if not valid(): return
+	if not valid() or not Living.has_lease("realty_office"): return
 	var week := Clock.day_index()/7
 	if week==int(S()["week"]):return
 	S()["week"]=week
@@ -59,7 +59,7 @@ static func score(mandate: Dictionary, client: Dictionary) -> float:
 static func viewing(mandate_id: String, client_id: String, negotiation: String) -> Dictionary:
 	var mandate: Dictionary=S()["mandates"].get(mandate_id,{})
 	var client: Dictionary=S()["clients"].get(client_id,{})
-	if not valid() or mandate.is_empty() or client.is_empty() or mandate["status"]!="open" or client["status"]!="open" or not cfg()["commission_rates"].has(negotiation):return error("Choose an open owner mandate and a matching client.")
+	if not valid() or not Living.has_lease("realty_office") or mandate.is_empty() or client.is_empty() or mandate["status"]!="open" or client["status"]!="open" or not cfg()["commission_rates"].has(negotiation):return error("Choose an open owner mandate and a matching client.")
 	if Ledger.cash(entity())<float(cfg()["show_cost"]):return error("Not enough cash for a viewing.")
 	Ledger.expense(entity(),"other",float(cfg()["show_cost"]),I18n.t("Property viewing"),source(mandate_id))
 	var chance := float(cfg()["match_chance"])*score(mandate,client)*RealEstateMarket.index()+float(cfg()["negotiation_chance"][negotiation])+int(client["urgency"])*float(cfg()["urgency_chance"])+Staff.count("realty_agent")*float(cfg()["agent_chance"])
@@ -68,7 +68,7 @@ static func viewing(mandate_id: String, client_id: String, negotiation: String) 
 	var success: bool = mandate["kind"]==client["kind"] and float(client["budget"])>=float(mandate["floor"]) and GameState.rng.randf()<clampf(chance,.02,.9)
 	client["status"]="matched" if success else "declined"
 	Clock.advance(int(cfg()["show_minutes"]))
-	if not valid():return error("The brokerage closed during this viewing.")
+	if not valid() or not Living.has_lease("realty_office"):return error("The brokerage closed during this viewing.")
 	if not success:return {"ok":true,"closed":false}
 	mandate["status"]="closed"
 	var commission := snappedf(float(mandate["floor"])*(float(cfg()["commission_rates"][negotiation]) if mandate["kind"]=="sale" else 1.0),.01)

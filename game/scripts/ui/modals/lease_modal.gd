@@ -16,6 +16,9 @@ func _init(property_id: String) -> void:
 func build() -> void:
 	var p: Dictionary = DataDB.properties.get(pid, {})
 	if Living.has_lease(pid):
+		var manage := UIK.button("Manage lease", func(): close(); UIRoot.open_modal(LeaseEndModal.new(pid)), "primary")
+		manage.name = "ManageLease_" + pid
+		footer.add_child(manage)
 		body.add_child(UIK.wrap(I18n.t(str(p.get("agent_line", "Tom: \"It's all yours. Sign's up out front.\""))), 9, Art.C_WHITE, 360))
 		footer.add_child(UIK.button("Close", close))
 		return

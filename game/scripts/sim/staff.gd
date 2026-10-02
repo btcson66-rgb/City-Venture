@@ -260,7 +260,7 @@ static func on_hour(t: int, h: int) -> void:
 
 
 static func _pack_hour(p: Dictionary, h: int) -> void:
-	var loc := "suite_2b"
+	var loc := str(p.get("workplace", "suite_2b"))
 	if not Living.has_lease(loc):
 		return
 	var cap := int(round(4.0 * _output(p)))

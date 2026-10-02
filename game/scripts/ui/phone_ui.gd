@@ -126,7 +126,7 @@ func _home() -> void:
 	var unread := GameState.unread_messages()
 	var apps := [["messages", "mail", I18n.t("Messages") + (" %d" % unread if unread > 0 else "")], ["bank", "bank", "Bank"], ["tasks", "tasks", "Tasks"],
 		["map", "map", "City"], ["shoplane", "orders", "ShopLane"], ["timeline", "calendar", "Timeline"],
-		["guide", "info", "City Guide"], ["save", "save", "Save"], ["close", "close", "Close"]]
+		["leases", "home", "Leases"], ["guide", "info", "City Guide"], ["save", "save", "Save"], ["close", "close", "Close"]]
 	if BuildingInfo.world_travel_available():
 		apps.insert(apps.size() - 1, ["world", "world", "World"])
 	for a in apps:
@@ -153,6 +153,9 @@ func _home() -> void:
 
 func _open_app(a: String) -> void:
 	match a:
+		"leases":
+			close()
+			UIRoot.open_modal(LeaseEndModal.new())
 		"guide":
 			close()
 			UIRoot.open_modal(CityGuideModal.new())
