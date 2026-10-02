@@ -148,7 +148,7 @@ static func _buy_item(params: Dictionary) -> void:
 		if params.has("flag"):
 			GameState.set_flag(params["flag"])
 		GameState.inc_stat("coffees")
-		UIRoot.toast(I18n.t("Coffee — %s. Tastes like possibility.") % (Fmt.money0(price) if price > 0 else I18n.t("on the house (staff)")), "info", "coffee")
+		UIRoot.toast(I18n.t("Coffee — %s. Tastes like possibility.") % (Fmt.money(price) if price > 0 else I18n.t("on the house (staff)")), "info", "coffee")
 	if first_conv != "":
 		UIRoot.play_dialogue(first_conv, buy)
 	else:
@@ -180,7 +180,7 @@ static func _buy_meal(params: Dictionary) -> void:
 	if params.has("flag"):
 		GameState.set_flag(params["flag"])
 	GameState.inc_stat("meals")
-	UIRoot.toast(I18n.t("%s — %s") % [what, Fmt.money0(price)], "info", "shop")
+	UIRoot.toast(I18n.t("%s — %s") % [what, Fmt.money(price)], "info", "shop")
 
 
 ## Read a sign or look at something. Params: text, and optional alt: [{if, text}] (first match wins).
@@ -248,7 +248,7 @@ static func _buy_after_talk(p: Dictionary) -> void:
 	Clock.advance(int(p.get("minutes", 10)))
 	if p.has("flag"):
 		GameState.set_flag(p["flag"])
-	UIRoot.toast(I18n.t("Coffee — %s.") % Fmt.money0(price), "info", "coffee")
+	UIRoot.toast(I18n.t("Coffee — %s.") % Fmt.money(price), "info", "coffee")
 
 
 ## Your own café: work the counter for a couple of hours (the barista minigame), then the café's till takes over.

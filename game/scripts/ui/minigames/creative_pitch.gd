@@ -7,22 +7,33 @@ func _init(client_brief: Dictionary) -> void:
 	super._init()
 	brief=client_brief
 	rounds=3
-	round_time=0
+	round_time=float(Media.cfg().get("creative_round_seconds",15))
 	title_text="Creative Pitch"
 	help_key="creative_pitch"
 	icon_name="star"
 func intro_lines() -> Array:
-	return ["Build the client pitch from slogan, visual and tone cards.","Read the audience preferences in the brief. Matching cards improve click-through."]
+	return ["Build the client pitch from slogan, visual and tone cards.","Match the client's preferences shown above the cards. Each round is timed and the cards change places.","A matching card earns the point; a wrong pick or the clock running out earns nothing."]
 func build_round() -> void:
 	var category: String=["slogan","visual","tone"][round_i]
 	var cards := UIK.vbox(6)
 	cards.position=Vector2(10,8)
 	cards.size=Vector2(550,220)
 	stage.add_child(cards)
-	cards.add_child(UIK.wrap(I18n.t("Audience: %s")%I18n.t(Media.cfg()["audiences"][int(brief["audience"])]),10,Art.C_GOLD,520))
+	cards.add_child(UIK.wrap(I18n.t("%s · audience: %s")%[I18n.t(str(brief.get("client",""))),I18n.t(Media.cfg()["audiences"][int(brief["audience"])])],10,Art.C_GOLD,520))
+	var preferences: Array=brief["preferences"]
+	var wanted: Array=[]
+	for k in 3:wanted.append(I18n.t(Media.cfg()["creative_cards"][["slogan","visual","tone"][k]][int(preferences[k])]))
+	cards.add_child(UIK.wrap(I18n.t("Client preferences: %s / %s / %s")%wanted,8,Art.C_SKY,520))
 	var options: Array=Media.cfg()["creative_cards"][category]
-	for i in options.size():
-		var card := UIK.button(options[i],choose.bind(i),"primary" if i==0 else "button")
+	var order: Array=range(options.size())
+	# The order is shuffled per brief and round so the right card is not always in the same place.
+	var shuffle := RandomNumberGenerator.new()
+	shuffle.seed=hash(str(brief.get("id",""))+category)
+	for n in range(order.size()-1,0,-1):
+		var j := shuffle.randi_range(0,n)
+		var t=order[n];order[n]=order[j];order[j]=t
+	for i in order:
+		var card := UIK.button(options[i],choose.bind(i),"button")
 		card.name="CreativeCard_"+category+"_"+str(i)
 		cards.add_child(card)
 func choose(index: int) -> void:

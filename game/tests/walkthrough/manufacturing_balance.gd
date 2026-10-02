@@ -14,7 +14,12 @@ func run() -> void:
 		var rows := results.filter(func(r): return r["strategy"] == strategy)
 		var profits := rows.map(func(r): return r["operating_profit"])
 		grouped[strategy] = {"min_profit":profits.min(), "max_profit":profits.max(), "losing_seeds":rows.filter(func(r): return float(r["operating_profit"]) < 0).size()}
-		if grouped[strategy]["losing_seeds"] == 0: failures.append(strategy+" has no observed downside")
+		var mean: float = 0.0
+		for p in profits: mean += float(p) / profits.size()
+		grouped[strategy]["mean_profit"] = mean
+		# Sensible play must pay on average; only the aggressive strategy has to show real downside.
+		if strategy != "aggressive" and mean <= 0.0: failures.append(strategy+" does not profit on average")
+		if strategy == "aggressive" and grouped[strategy]["losing_seeds"] == 0: failures.append(strategy+" has no observed downside")
 	DirAccess.make_dir_recursive_absolute(out)
 	var f := FileAccess.open(out+"/manufacturing_balance_120.json", FileAccess.WRITE)
 	f.store_string(JSON.stringify({"days":120, "opening_capital":40000, "seeds":[64001,64002,64003], "strategies":grouped, "runs":results, "failures":failures}, "\t"))
@@ -55,13 +60,16 @@ func simulate(strategy: String, seed_value: int) -> void:
 			if loan["ok"]: Bank.take_loan(minf(float(loan["max"]), 12000), 24)
 		var machine := str(Manufacturing.S()["machines"][0])
 		var asset: Dictionary = Assets.S()["items"][machine]
-		if strategy != "aggressive" and (asset["status"] == "broken" or asset.get("maintenance_due", false)): Assets.maintain(machine)
+		# The aggressive player skips preventive maintenance and only repairs once the machine has actually broken.
+		if asset["status"] == "broken" or (strategy != "aggressive" and asset.get("maintenance_due", false)): Assets.maintain(machine)
 		if Clock.weekday() == 1:
 			var accepted := 0
 			for rfq in Manufacturing.S()["rfqs"].values():
 				if rfq["status"] != "open" or int(rfq["due"]) <= Clock.now(): continue
 				if accepted >= (2 if strategy == "conservative" else 3): break
-				var price := float(rfq["max_price"])-(0.20 if strategy == "aggressive" else 0.0)
+				# Quote position inside the client's band: the floor always wins, the ceiling wins least often.
+				var band := 0.0 if strategy == "conservative" else 0.4 if strategy == "normal" else 1.0
+				var price := lerpf(float(rfq["min_price"]), float(rfq["max_price"]), band)
 				if Manufacturing.quote(rfq["id"], price)["ok"]: accepted += 1
 		var pending := 0
 		for po in Manufacturing.S()["pos"].values():

@@ -3,6 +3,7 @@ extends RefCounted
 ## Shared, live building information for doors, welcome cards and the phone guide.
 
 const ACTION_ICONS := {
+	"energy_open": "company", "energy_subsidy": "civic",
 	"buy_item": "shop", "clothing_shop": "shop", "cafe_counter": "coffee",
 	"work_shift": "tasks", "open_company_os": "laptop", "cowork_desk": "laptop",
 	"sleep": "sleep", "read_news": "info", "bank_counter": "bank", "atm": "bank",
@@ -10,7 +11,7 @@ const ACTION_ICONS := {
 	"pack_orders": "parcel", "dropoff_parcels": "parcel", "change_outfit": "shirt",
 	"lease_property": "home", "whiteboard": "objective", "look": "info", "talk": "people",
 	"talk_staff": "people", "business_board": "company", "metro": "metro",
-	"media_open": "company", "real_estate_open": "home", "manufacturing_open": "inventory", "automotive_open": "metro"
+	"media_open": "company", "hotel_open": "sleep", "real_estate_open": "home", "manufacturing_open": "inventory", "automotive_open": "metro"
 }
 
 
@@ -34,8 +35,33 @@ static func world_travel_available() -> bool:
 	return DataDB.regions.values().filter(func(r): return r.get("status", "planned") == "active").size() > 1
 
 
-## A look-only room becomes a public destination only while a real scheduled NPC is there.
+static var _avail_cache: Dictionary = {}
+static var _avail_stamp := ""
+
+
+## The door trigger asks every frame and the guide asks per building, so the answer is kept until the game minute or
+## anything it reads (leases, desk pass, flags, the game itself) changes.
 static func building_available(id: String) -> bool:
+	if not GameState.has_game():
+		return _compute_available(id)
+	var stamp := "%d|%d|%d|%d|%d|%d" % [Clock.now(), int(GameState.data["meta"].get("created_unix", 0)), GameState.data["flags"].size(),
+		Living.D()["leases"].size(), int(Living.D().get("day_pass", -1)), int(GameState.data["ledger"]["seq"])]
+	if stamp != _avail_stamp:
+		_avail_stamp = stamp
+		_avail_cache.clear()
+	if not _avail_cache.has(id):
+		_avail_cache[id] = _compute_available(id)
+	return _avail_cache[id]
+
+
+## Forget remembered answers (data edited at run time, e.g. by tests).
+static func invalidate_availability() -> void:
+	_avail_stamp = ""
+	_avail_cache.clear()
+
+
+## A look-only room becomes a public destination only while a real scheduled NPC is there.
+static func _compute_available(id: String) -> bool:
 	if not building_enterable(id):
 		return false
 	for it in DataDB.building(id).get("interior", {}).get("interactables", []):
@@ -129,7 +155,7 @@ static func action_label(label: String, action: String, params: Dictionary) -> S
 	if action == "buy_item" and params.has("price"):
 		var money := RegEx.create_from_string("\\$[0-9,]+(?:\\.[0-9]+)?")
 		var found := money.search(text)
-		if found != null: text = text.substr(0, found.get_start()) + Fmt.money0(float(params["price"])) + text.substr(found.get_end())
+		if found != null: text = text.substr(0, found.get_start()) + (Fmt.money(float(params["price"])) if absf(float(params["price"]) - roundf(float(params["price"]))) > 0.001 else Fmt.money0(float(params["price"]))) + text.substr(found.get_end())
 	return text
 
 
@@ -169,7 +195,8 @@ static func guide_tags(id: String) -> String:
 			"clothing_shop": tag = I18n.t("Shop")
 			"work_shift", "open_company_os", "cowork_desk", "business_board", "pack_orders": tag = I18n.t("Work")
 			"bank_counter", "atm", "loans_info", "register_company", "permits_info", "take_number", "dropoff_parcels": tag = I18n.t("Services")
-			"lease_property", "sleep": tag = I18n.t("Housing")
+			"lease_property": tag = I18n.t("Property")
+			"sleep": tag = I18n.t("Housing")
 		if tag != "" and not tag in tags:
 			tags.append(tag)
 	return " · ".join(tags) if not tags.is_empty() else category(id) if not activities(id).is_empty() else I18n.t("Services") if building_available(id) else I18n.t("Sightseeing")

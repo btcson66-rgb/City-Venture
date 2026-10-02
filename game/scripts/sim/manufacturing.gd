@@ -94,13 +94,23 @@ static func refresh_rfqs() -> void:
 		var qty := GameState.rng.randi_range(int(cfg()["rfq_qty_min"]), int(cfg()["rfq_qty_max"]))
 		S()["rfqs"][id] = {"id":id, "client":"Lena Park" if i == 0 else "Kessler Precision", "product":"phone_stand", "qty":qty, "min_price":float(cfg()["quote_min"]), "max_price":float(cfg()["quote_max"]), "due":Clock.now()+int(cfg()["rfq_due_days"])*Clock.DAY, "max_defect":float(cfg()["max_defect"]), "status":"open"}
 
+## Win probability for a quote: 100% at the client's floor price, falling linearly to `win_at_max` at their ceiling, 0 above it.
+static func win_chance(rfq: Dictionary, price: float) -> float:
+	var lo := float(rfq["min_price"])
+	var hi := float(rfq["max_price"])
+	if price > hi: return 0.0
+	if price <= lo or hi <= lo: return 1.0
+	return lerpf(1.0, float(cfg()["win_at_max"]), (price-lo)/(hi-lo))
+
 static func quote(id: String, price: float) -> Dictionary:
 	var rfq: Dictionary = S()["rfqs"].get(id, {})
 	if not valid() or rfq.is_empty() or rfq["status"] != "open" or Clock.now() >= int(rfq["due"]): return _error("This RFQ has expired.")
 	if not is_finite(price) or price <= 0: return _error("Enter a positive unit price.")
-	if price > float(rfq["max_price"]):
+	var chance := win_chance(rfq, price)
+	# Quoting at or below the client's floor always wins; the dearer the quote, the likelier a rival (Kessler) takes it.
+	if chance <= 0.0 or (chance < 1.0 and GameState.rng.randf() >= chance):
 		rfq["status"] = "rejected"
-		return _error("Kessler won this RFQ. Your price was too high.")
+		return {"ok":false, "error":I18n.t("%s chose a rival quote. Your price was too high.") % I18n.t(str(rfq["client"]))}
 	var job := Jobs.offer({"entity":entity(), "client":rfq["client"], "scope":"OEM phone stands", "price":snappedf(price*int(rfq["qty"]), 0.01), "work":int(rfq["qty"]), "due":rfq["due"], "terms":int(cfg()["payment_terms"]), "deposit":float(cfg()["deposit_rate"]), "penalty_rate":float(cfg()["late_penalty"]), "segment":"manufacturing"})
 	if job == "": return _error("Invalid order terms.")
 	var accepted := Jobs.accept(job)
@@ -233,7 +243,10 @@ static func crisis(kind: String, retain := true) -> Dictionary:
 				var job := Jobs.get_job(order["job"])
 				var deposit := float(job["deposit_paid"])
 				var kept := minf(deposit, float(order["cost"])) if retain else 0.0
-				Ledger.post(entity(), I18n.t("OEM client cancellation"), [{"acct":"deferred_revenue", "dr":deposit}, {"acct":"other_income", "cr":kept}, {"acct":"cash", "cr":deposit-kept}], source(order["job"]))
+				var lines := [{"acct":"deferred_revenue", "dr":deposit}]
+				if kept > 0: lines.append({"acct":"other_income", "cr":kept})
+				if deposit-kept > 0: lines.append({"acct":"cash", "cr":deposit-kept})
+				if deposit > 0: Ledger.post(entity(), I18n.t("OEM client cancellation"), lines, source(order["job"]))
 				job["deposit_paid"] = 0.0
 				job["status"] = "closed"
 				order["status"] = "cancelled"

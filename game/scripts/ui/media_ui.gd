@@ -134,7 +134,7 @@ func mixer(content: Control) -> void:
 		var channel: Dictionary=Media.cfg()["channels"][cid]
 		var row := UIK.hbox(4)
 		content.add_child(row)
-		row.add_child(UIK.label(I18n.t("%s · %.0f%% · CPM %s · audience fit %.0f%%")%[I18n.t(channel["name"]),float(campaign["mix"][cid]),Fmt.money(float(channel["cpm"])*float(Media.S()["price_mult"])),float(channel["audience"][int(campaign["audience"])])*100],8))
+		row.add_child(UIK.label(I18n.t("%s · %.0f%% · CPM %s · audience fit %.0f%%")%[I18n.t(channel["name"]),float(campaign["mix"][cid]),Fmt.money(float(channel["cpm"])*Media.price_mult()),float(channel["audience"][int(campaign["audience"])])*100],8))
 		button(row,"−","MixLess_"+cid,shift.bind(selected,cid,-10))
 		button(row,"+","MixMore_"+cid,shift.bind(selected,cid,10))
 	content.add_child(UIK.wrap("Shares total 100%. Changing the mix affects the next buying cycle, not past reports.",8,Art.C_MUTED,550))

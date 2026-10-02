@@ -33,7 +33,7 @@ func test_opening_gates_world_and_registry() -> void:
 	Living.lease("unit12_factory")
 	runner.check(Manufacturing.start()["ok"], "lease unlocks")
 	runner.eq(DataDB.district_def_in_city("industrial")["status"], "active", "district active")
-	runner.check(DataDB.districts["industrial"]["buildings"].size() == 4, "four locations")
+	runner.check(DataDB.districts["industrial"]["buildings"].size() >= 4, "manufacturing locations (energy adds more)")
 	runner.check(Industries.tabs().any(func(tab): return tab["id"] == "manufacturing"), "registered tab")
 	runner.check(not Manufacturing.acquire_machine(false, true)["ok"], "automation requires genuine lending")
 	runner.check(not Manufacturing.order_material(1)["ok"], "MOQ enforced")
@@ -43,7 +43,7 @@ func test_opening_gates_world_and_registry() -> void:
 func test_slot_conflicts_changeover_and_yield_formula() -> void:
 	setup_factory()
 	var rfq: Dictionary = Manufacturing.S()["rfqs"].values()[0]
-	var job := str(Manufacturing.quote(rfq["id"], 2.35)["id"])
+	var job := str(Manufacturing.quote(rfq["id"], float(rfq["min_price"]))["id"])
 	var machine := str(Manufacturing.S()["machines"][0])
 	var t := next_monday()
 	runner.check(Manufacturing.plan(job, machine, t, 4)["ok"], "first slot")
@@ -66,7 +66,7 @@ func test_complete_material_production_invoice_payment_cycle() -> void:
 	Clock.advance(2*Clock.DAY)
 	runner.eq(Manufacturing.material_units(), 2000, "materials physically received")
 	var rfq: Dictionary = Manufacturing.S()["rfqs"].values()[0]
-	var job := str(Manufacturing.quote(rfq["id"], 2.35)["id"])
+	var job := str(Manufacturing.quote(rfq["id"], float(rfq["min_price"]))["id"])
 	var machine := str(Manufacturing.S()["machines"][0])
 	var t := Clock.at_day_time(1, 9*60)
 	runner.check(Manufacturing.plan(job, machine, t, 16, true)["ok"], "scheduled production")
@@ -114,7 +114,7 @@ func test_crises_cancellation_deposit_and_close_cleanup() -> void:
 	runner.check(int(Manufacturing.S()["pos"][po["id"]]["due"]) > original, "shortage delays booked PO")
 	runner.check(Manufacturing.material_price() > 1.65, "shortage changes actual cost")
 	var rfq: Dictionary = Manufacturing.S()["rfqs"].values()[0]
-	var job := str(Manufacturing.quote(rfq["id"], 2.35)["id"])
+	var job := str(Manufacturing.quote(rfq["id"], float(rfq["min_price"]))["id"])
 	var cash := Ledger.cash(entity)
 	var deposit := float(Jobs.get_job(job)["deposit_paid"])
 	Manufacturing.crisis("cancel")
@@ -134,7 +134,7 @@ func test_old_save_lazy_state_and_roundtrip_with_slots() -> void:
 	runner.check(not Manufacturing.is_running(), "old save lazily initialized")
 	setup_factory()
 	Manufacturing.set_inspection(0.75)
-	var job := str(Manufacturing.quote(Manufacturing.S()["rfqs"].values()[0]["id"], 2.35)["id"])
+	var job := str(Manufacturing.quote(Manufacturing.S()["rfqs"].values()[0]["id"], Manufacturing.cfg()["quote_min"])["id"])
 	Manufacturing.plan(job, Manufacturing.S()["machines"][0], next_monday(), 8)
 	runner.check(SaveSystem.save(97), "saved actual state")
 	GameState.data.erase("manufacturing")
@@ -149,7 +149,7 @@ func test_growth_loan_automation_brand_and_equipment_closure() -> void:
 	Manufacturing.acquire_machine(false)
 	Manufacturing.order_material(2000)
 	Clock.advance(2*Clock.DAY)
-	var job := str(Manufacturing.quote(Manufacturing.S()["rfqs"].values()[0]["id"], 2.35)["id"])
+	var job := str(Manufacturing.quote(Manufacturing.S()["rfqs"].values()[0]["id"], Manufacturing.cfg()["quote_min"])["id"])
 	runner.check(Bank.take_loan(2000, 24)["ok"], "eligible signed job and machine finance real loan")
 	runner.check(Manufacturing.acquire_machine(false, true)["ok"], "CNC requires and uses Assets with active loan")
 	runner.eq(Manufacturing.S()["stage"], 2, "automation growth")
@@ -171,7 +171,7 @@ func test_growth_loan_automation_brand_and_equipment_closure() -> void:
 func test_actual_recall_event_and_positive_work_cost_cancellation() -> void:
 	var entity := setup_factory()
 	var rfq: Dictionary = Manufacturing.S()["rfqs"].values()[0]
-	var job := str(Manufacturing.quote(rfq["id"], 2.35)["id"])
+	var job := str(Manufacturing.quote(rfq["id"], float(rfq["min_price"]))["id"])
 	Manufacturing.plan(job, "", Clock.at_day_time(1, 9*60), 1, false, true)
 	Clock.advance_to(Clock.at_day_time(1, 10*60))
 	Manufacturing.deliver(job)
@@ -206,7 +206,7 @@ func test_brand_retry_keeps_machine_reserved_and_company_close_cancels_it() -> v
 	Assets.S()["items"][slot["machine"]]["status"] = "broken"
 	Clock.advance_to(int(slot["end"]))
 	runner.check(int(slot["end"]) > Clock.now(), "repair delay keeps bay reserved")
-	var job := str(Manufacturing.quote(Manufacturing.S()["rfqs"].values()[0]["id"], 2.35)["id"])
+	var job := str(Manufacturing.quote(Manufacturing.S()["rfqs"].values()[0]["id"], Manufacturing.cfg()["quote_min"])["id"])
 	runner.check(not Manufacturing.plan(job, slot["machine"], Clock.now(), 1, true)["ok"], "delayed brand batch cannot overlap OEM work")
 	runner.check(Insolvency.close_company()["ok"], "actual company closure")
 	runner.check(not Manufacturing.is_running(), "manufacturing closed")
@@ -217,3 +217,34 @@ func test_brand_retry_keeps_machine_reserved_and_company_close_cancels_it() -> v
 	runner.check(Ledger.check_balanced(), "full closure ledger balanced")
 
 
+
+func test_rfq_win_chance_falls_with_price_and_names_the_client() -> void:
+	setup_factory()
+	var rfq := {"min_price": 2.0, "max_price": 3.0}
+	runner.eq(Manufacturing.win_chance(rfq, 1.5), 1.0, "below the floor always wins")
+	runner.eq(Manufacturing.win_chance(rfq, 2.0), 1.0, "the floor always wins")
+	runner.check(Manufacturing.win_chance(rfq, 2.5) < 1.0 and Manufacturing.win_chance(rfq, 2.5) > Manufacturing.win_chance(rfq, 2.9), "dearer quotes win less often")
+	runner.eq(Manufacturing.win_chance(rfq, 3.0), float(Manufacturing.cfg()["win_at_max"]), "the ceiling wins at the configured rate")
+	runner.eq(Manufacturing.win_chance(rfq, 3.01), 0.0, "above the ceiling never wins")
+	var wins := 0
+	var trials := 60
+	for i in trials:
+		var id := "RFQ-T%d" % i
+		Manufacturing.S()["rfqs"][id] = {"id": id, "client": "Lena Park", "product": "phone_stand", "qty": 100, "min_price": 2.0, "max_price": 3.0, "due": Clock.now() + 5 * Clock.DAY, "max_defect": 0.02, "status": "open"}
+		if Manufacturing.quote(id, 3.0)["ok"]: wins += 1
+	runner.check(wins > trials * 0.2 and wins < trials * 0.8, "quoting the ceiling is a gamble (%d/%d won)" % [wins, trials])
+	var lost: Array = Manufacturing.S()["rfqs"].values().filter(func(r): return r["status"] == "rejected")
+	runner.check(lost.size() > 0, "lost RFQs are marked rejected")
+	Manufacturing.S()["rfqs"]["RFQ-NAMED"] = {"id": "RFQ-NAMED", "client": "Lena Park", "product": "phone_stand", "qty": 100, "min_price": 2.0, "max_price": 3.0, "due": Clock.now() + 5 * Clock.DAY, "max_defect": 0.02, "status": "open"}
+	var refused := Manufacturing.quote("RFQ-NAMED", 99.0)
+	runner.check(not refused["ok"] and "Lena Park" in str(refused["error"]), "the rejection names the actual client")
+
+func test_cancel_crisis_without_a_deposit_posts_no_empty_entry() -> void:
+	var entity := setup_factory()
+	var rfq: Dictionary = Manufacturing.S()["rfqs"].values()[0]
+	var job := str(Manufacturing.quote(rfq["id"], float(rfq["min_price"]))["id"])
+	Jobs.get_job(job)["deposit_paid"] = 0.0
+	var entries := Ledger.entries(entity, 5000).size()
+	runner.check(Manufacturing.crisis("cancel")["ok"], "cancellation runs")
+	runner.eq(Ledger.entries(entity, 5000).size(), entries, "a zero deposit leaves the journal alone")
+	runner.eq(Jobs.get_job(job)["status"], "closed", "job still closed")

@@ -124,6 +124,7 @@ func _on_hour(t: int, h: int) -> void:
 	phase = "hour:saas"
 	Industries.on_hour(t, h, "business")
 	Assets.on_hour(t, h)
+	Jobs.on_hour(t, h)
 	phase = "hour:story"
 	_request_story_check()
 	phase = ""

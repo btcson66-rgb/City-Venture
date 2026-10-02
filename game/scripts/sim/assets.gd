@@ -78,7 +78,7 @@ static func on_hour(t: int, h: int) -> void:
 			var dep := minf(float(item["book"]), snappedf(float(item["price"])/int(item["life_days"])*elapsed, 0.01))
 			if day-Clock.day_index_at(int(item["bought"])) >= int(item["life_days"]): dep = float(item["book"])
 			item["book"] = snappedf(float(item["book"])-dep, 0.01)
-			Ledger.post(item["entity"], I18n.t("Asset depreciation: %s") % item["id"], [{"acct":"exp:depreciation", "dr":dep}, {"acct":"fixed_assets", "cr":dep}], {"type":"asset", "segment":item["segment"]})
+			if dep > 0: Ledger.post(item["entity"], I18n.t("Asset depreciation: %s") % item["id"], [{"acct":"exp:depreciation", "dr":dep}, {"acct":"fixed_assets", "cr":dep}], {"type":"asset", "segment":item["segment"]})
 		if item["rented"] and t >= int(item["next_rent"]):
 			Ledger.expense(item["entity"], "asset_rent", item["price"], I18n.t("Asset rent: %s") % item["id"], {"type":"asset", "segment":item["segment"]}, "cash" if Ledger.cash(item["entity"]) >= float(item["price"]) else "accounts_payable")
 			item["next_rent"] = t+int(item.get("rent_days", 30))*Clock.DAY

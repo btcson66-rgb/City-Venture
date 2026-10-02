@@ -1,0 +1,21 @@
+{
+ "id": "helio_warehouse",
+ "name": "Helio warehouse office",
+ "district": "industrial",
+ "kind": "warehouse",
+ "monthly_rent": 2600,
+ "deposit_months": 1,
+ "building": "helio_warehouse",
+ "requires": [
+  "company_registered"
+ ],
+ "requires_text": "Register a company before leasing the warehouse office.",
+ "agent": "Helio lettings",
+ "agent_line": "Racks, a loading door and a desk. Rent and deposit: $5,200 on signing.",
+ "blurb": "Warehouse with a desk, panel racks and a loading door. Rent and deposit: $5,200 on signing.",
+ "capacity": {
+  "inventory_units": 3000,
+  "staff": 4
+ },
+ "segment": "energy"
+}

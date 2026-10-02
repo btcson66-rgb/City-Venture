@@ -238,6 +238,8 @@ Implemented #66: M1 connects the district. Enter `aurelia_university`, `the_loft
 
 ### Luxury Heights 豪宅區 · `luxury_heights` · P3
 
+Implemented #67: M5 connects the district. Enter `the_aster`, `skyline_grand`, `observation_deck`; Henri Dubois, Priya Nair, Owen Blake and Vera Stone support the hotel business. Full workflow in [22_hotel.md](22_hotel.md). The penthouse, villa, club, motors and Aurum dining concepts below remain future requests.
+
 | 項目 | 設定 |
 |------|------|
 | 一句話 | 頂樓豪宅、俱樂部、高級餐廳 |

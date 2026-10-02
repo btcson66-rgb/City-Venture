@@ -20,6 +20,8 @@ static func offer(spec: Dictionary) -> String:
 		"due":spec.get("due", Clock.now()+Clock.DAY), "work":spec.get("work", 1.0),
 		"segment":spec.get("segment", "shared"), "deposit":clampf(float(spec.get("deposit", 0)), 0, 1),
 		"penalty_rate":clampf(float(spec.get("penalty_rate", 0)), 0, 1), "deposit_paid":0.0}, true)
+	# An offer nobody takes lapses at its due time (or an explicit `expires_at`) instead of sitting in the list forever.
+	job["expires_at"] = int(spec.get("expires_at", job["due"]))
 	S()["items"][id] = job
 	return id
 
@@ -98,6 +100,18 @@ static func handle(kind: String, payload: Dictionary) -> void:
 	Ledger.post(job["entity"], I18n.t("Job payment: %s") % job["id"], [{"acct":"cash", "dr":amount}, {"acct":"accounts_receivable", "cr":amount}], {"type":"job", "id":job["id"], "segment":job["segment"]})
 	job["status"] = "paid"
 	Sim.cancel("job.pay", "id", job["id"])
+
+## Daily sweep: offers past their expiry become "expired" (they can no longer be accepted, and drop out of lending math).
+static func expire_offers() -> int:
+	var n := 0
+	for job in S()["items"].values():
+		if job["status"] == "offered" and Clock.now() > int(job.get("expires_at", job.get("due", Clock.now()))):
+			job["status"] = "expired"
+			n += 1
+	return n
+
+static func on_hour(_t: int, h: int) -> void:
+	if h == 0: expire_offers()
 
 static func on_company_closed(entity: String) -> void:
 	for job in S()["items"].values():

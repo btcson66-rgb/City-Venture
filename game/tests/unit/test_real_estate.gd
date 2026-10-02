@@ -184,3 +184,48 @@ func test_old_save_lazy_state_and_segment_totals() -> void:
 	var company := MonthClose.compute(entity,0,Clock.now()+1)
 	runner.check(absf(float(report["totals"]["operating_profit"])-float(company["business_profit"]))<.011,"segments equal company profit")
 	runner.check(Ledger.check_balanced(),"old-save full cycle balanced")
+func test_sale_below_mortgage_needs_the_shortfall_covered() -> void:
+	var entity := setup(90000)
+	RealEstate.buy("maple_1",.2,25)
+	var property: Dictionary=RealEstate.S()["properties"]["maple_1"]
+	var loan: Dictionary=Bank.B()["loans"][property["mortgage"]]
+	RealEstateMarket.S()["index"]=.5
+	var value := RealEstateMarket.value(property)
+	runner.check(float(loan["balance"])>value,"underwater: mortgage exceeds the market value")
+	Ledger.expense(entity,"other",Ledger.cash(entity)-1000.0,"QA drain")
+	var refused := RealEstate.sell("maple_1")
+	runner.check(not refused["ok"] and str(refused["error"])!="","sale blocked with a clear message")
+	runner.eq(property["status"],"empty","blocked sale changes nothing")
+	runner.eq(loan["status"],"active","mortgage untouched")
+	Ledger.post(entity,"QA equity",[{"acct":"cash","dr":float(loan["balance"])},{"acct":"equity","cr":float(loan["balance"])}])
+	var sold := RealEstate.sell("maple_1")
+	runner.check(sold["ok"],"sale allowed once the company can pay the shortfall")
+	runner.eq(loan["status"],"closed","mortgage fully repaid, not silently left open")
+	runner.check(float(sold["shortfall"])>0,"shortfall reported")
+	runner.check(Ledger.check_balanced(),"underwater sale balanced")
+func test_negative_property_equity_reduces_lending_capacity() -> void:
+	setup(90000)
+	RealEstate.buy("maple_1",.2,25)
+	RealEstateMarket.S()["index"]=1.0
+	var healthy := RealEstate.equity(false)
+	var capacity := float(Bank.lending_basis()["raw"])
+	RealEstateMarket.S()["index"]=.4
+	runner.check(RealEstate.equity(false)<0,"signed equity goes negative")
+	runner.eq(RealEstate.equity(),0.0,"displayed equity still floors at zero")
+	runner.check(float(Bank.lending_basis()["raw"])<capacity-maxf(0,healthy)*.5,"an underwater home subtracts from capacity")
+func test_rate_shock_fades_and_empty_listings_are_safe() -> void:
+	setup()
+	Clock.advance(40*Clock.DAY)
+	RealEstate.crisis("rate")
+	var shock := float(RealEstateMarket.S()["rate_shift"])
+	runner.eq(shock,float(RealEstate.cfg()["rate_shock"]),"fresh shock applies in full")
+	for month in 24:
+		RealEstateMarket.S()["month"]=Clock.day_index()/30-1   # the next update is a new month
+		RealEstateMarket.update()
+	runner.check(float(RealEstateMarket.S()["rate_shift"])<shock*.1,"the shift decays instead of lasting forever")
+	var saved: Dictionary=DataDB.properties
+	DataDB.properties={}
+	RealEstate.S()["week"]=-1
+	RealEstate.refresh()
+	DataDB.properties=saved
+	runner.check(true,"no listings: refresh does not index an empty array")

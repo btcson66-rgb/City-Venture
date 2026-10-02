@@ -409,6 +409,91 @@
   "what": "Buy Campus Radio as a depreciating asset and sell finite audience impressions.",
   "why": "Ad contracts earn money; an unsold audience still costs upkeep."
  },
+ "hotel": {
+  "title": "Hotel revenue management",
+  "what": "Rooms are perishable: an empty room tonight earns nothing tomorrow. You choose prices, channels and overbooking; a night audit sells the rooms.",
+  "why": "Occupancy times average daily rate (ADR) is room revenue."
+ },
+ "hotel_calendar": {
+  "title": "Demand calendar",
+  "what": "Expected demand per day comes from weekday, season and city events such as festivals or trade fairs.",
+  "why": "Raise prices on gold days and be careful before locking group rooms on them."
+ },
+ "hotel_adr": {
+  "title": "ADR and RevPAR",
+  "what": "ADR is revenue per sold room. RevPAR is revenue per available room, whether sold or not.",
+  "why": "A high price with empty rooms can earn less than a lower price that sells out."
+ },
+ "hotel_channels": {
+  "title": "Channels and commission",
+  "what": "Direct guests pay you with no commission. The OTA takes 15% (standard) or 18% (featured) of each night and pays a weekly statement Net 30. Agency blocks give 25% off.",
+  "why": "Use the OTA to fill empty nights, not nights you could sell directly."
+ },
+ "hotel_overbook": {
+  "title": "Overbooking",
+  "what": "Some booked guests never arrive. Selling up to 10% more bookings than rooms fills those gaps.",
+  "why": "If everyone arrives, you pay walk compensation and the review suffers."
+ },
+ "hotel_housekeeping": {
+  "title": "Housekeeping capacity",
+  "what": "Each checkout needs a full clean, each stayover a light one. Rooms nobody cleaned cannot be sold tonight.",
+  "why": "Capacity, not demand, can be the real limit on a busy weekend."
+ },
+ "hotel_supplies": {
+  "title": "Supplies and breakfast",
+  "what": "Linen, laundry, amenities and breakfast are variable costs for each occupied room-night. Your own cafe kitchen supplies breakfast at wholesale cost.",
+  "why": "Breakfast lifts the service score; the cafe makes it cheaper."
+ },
+ "hotel_equipment": {
+  "title": "Room equipment",
+  "what": "Room fit-outs are assets that wear out, need service and can break. Renovation restores condition but takes the rooms off sale.",
+  "why": "Tired rooms lower cleanliness and value scores in every review."
+ },
+ "hotel_blocks": {
+  "title": "Group blocks",
+  "what": "A travel agency locks rooms weeks ahead at 25% off and pays 30 days after the stay, with a 20% deposit.",
+  "why": "Reliable volume, but the rooms are gone if demand later spikes."
+ },
+ "hotel_ota": {
+  "title": "OTA statements",
+  "what": "Voyago invoices your OTA nights each week. The commission is deducted from the receivable and the rest is paid Net 30.",
+  "why": "Cash arrives a month after the guests, so keep a buffer."
+ },
+ "hotel_reviews": {
+  "title": "Guest reviews",
+  "what": "Score 1 to 5 from cleanliness, service and value for money. Only the last 60 days count. Critic Vera Stone's review weighs five times.",
+  "why": "Rating changes your direct bookings and your OTA ranking."
+ },
+ "hotel_growth": {
+  "title": "Growth stages",
+  "what": "Aster Inn (12 rooms), then the Brasserie expansion (30 rooms), then a Harbor resort (50 rooms).",
+  "why": "Each stage needs occupancy, rating, reviews and staff, not only cash."
+ },
+ "energy": {
+  "title": "Solar and charging business",
+  "what": "Quote rooftop solar for real clients, then build an EV charging network.",
+  "why": "Installs pay once with a warranty tail; chargers earn per kWh and track EV adoption."
+ },
+ "energy_roof": {
+  "title": "Roof Survey",
+  "what": "Place panels on roof cells. Shade, direction and the load limit change annual kWh and the client's payback.",
+  "why": "A shorter payback wins more quotes."
+ },
+ "energy_subsidy": {
+  "title": "Energy subsidy",
+  "what": "City Hall pays part of a system's price from a yearly quota. You file for the client, pay a fee and wait for a decision.",
+  "why": "Grants lower the client's price but can be rejected, run out or be cut by policy."
+ },
+ "energy_charging": {
+  "title": "Charging network",
+  "what": "Revenue is kWh sold times price, minus grid electricity. Demand follows the city EV adoption rate and falls as your price rises.",
+  "why": "Price too high and the bays empty; too low and each kWh loses money."
+ },
+ "energy_warranty": {
+  "title": "Warranty",
+  "what": "Installed systems are covered for a year. A claim costs a share of the price to repair.",
+  "why": "Ignoring a claim damages your reputation."
+ },
  "automotive": {
   "title": "Used cars, rentals and dealership",
   "what": "Win cars at the Wednesday auction, recondition and sell them, run an airport rental fleet, then sign a dealership franchise.",

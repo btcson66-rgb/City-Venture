@@ -103,7 +103,9 @@ static func lending_basis() -> Dictionary:
 		# Mortgage principal was already subtracted from property market equity.
 		for loan in loans(cid):
 			if loan.get("type","")=="mortgage":existing-=float(loan["balance"])
-	var property_equity := RealEstate.equity()*float(RealEstate.cfg().get("equity_factor",.5))
+	# Negative equity (a home worth less than its mortgage) counts in full against capacity; positive equity is haircut.
+	var raw_equity := RealEstate.equity(false)
+	var property_equity := raw_equity*float(RealEstate.cfg().get("equity_factor",.5)) if raw_equity>0 else raw_equity
 	var collateral := ar * 0.7 + contracts * 0.6 + stock * 0.5 + equipment * 0.5 + property_equity + vehicle_stock * 0.6
 	var raw := maxf(0.0, gp * 3.0) + collateral - existing
 	var basis := {"age": age, "contracts": contracts, "raw": raw,
@@ -112,6 +114,7 @@ static func lending_basis() -> Dictionary:
 		[I18n.t("70% of money owed to you"), ar * 0.7], [I18n.t("60% of signed contracts"), contracts * 0.6],
 		[I18n.t("50% of stock at cost"), stock * 0.5], [I18n.t("50% of operating assets at book value"), equipment * 0.5], [I18n.t("minus existing debt"), -existing]]}
 	if property_equity>0:basis["parts"].append([I18n.t("50% of property market equity"),property_equity])
+	elif property_equity<0:basis["parts"].append([I18n.t("Property worth less than its mortgage"),property_equity])
 	if vehicle_stock>0:basis["parts"].append([I18n.t("60% of car stock at cost"),vehicle_stock*0.6])
 	return basis
 

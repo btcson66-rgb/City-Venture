@@ -401,7 +401,7 @@ func _tab_sales() -> void:
 		var pdn := UIK.button("−", func(): Ecommerce.set_price(l["id"], float(l["price"]) - 1.0); rebuild())
 		pdn.name = "PriceDown_" + l["product"]
 		h2.add_child(pdn)
-		h2.add_child(UIK.label(Fmt.money0(l["price"]), 9, Art.C_WHITE, true))
+		h2.add_child(UIK.label(Fmt.money(l["price"]), 9, Art.C_WHITE, true))
 		var pup := UIK.button("+", func(): Ecommerce.set_price(l["id"], float(l["price"]) + 1.0); rebuild())
 		pup.name = "PriceUp_" + l["product"]
 		h2.add_child(pup)
@@ -416,7 +416,7 @@ func _tab_sales() -> void:
 		v.add_child(h2)
 		var margin := float(l["price"]) * 0.9 - Ecommerce.avg_cost(Ecommerce.best_location(l["product"]) if Ecommerce.best_location(l["product"]) != "" else "riverside_studio", l["product"]) - Ecommerce.ship_cost({"product": l["product"]}, "economy")
 		v.add_child(UIK.label(I18n.t("Market ~%s · expect ~%.1f orders/day · %d views · %d orders · in stock %d · unit margin after fee+shipping ≈ %s") % [
-			Fmt.money0(float(p["ref_price"])), Ecommerce.lambda_day(l), int(l["views"]), int(l["orders"]), Ecommerce.available_anywhere(l["product"]), Fmt.money0(margin)], 7, Art.C_MUTED))
+			Fmt.money(float(p["ref_price"])), Ecommerce.lambda_day(l), int(l["views"]), int(l["orders"]), Ecommerce.available_anywhere(l["product"]), Fmt.money(margin)], 7, Art.C_MUTED))
 		content.add_child(card)
 	# new listings
 	var unlisted: Array = []
@@ -434,10 +434,10 @@ func _tab_sales() -> void:
 			card2.add_child(v2)
 			var h := UIK.hbox(4)
 			h.add_child(UIK.label(p2["name"], 9, Art.C_WHITE, true))
-			h.add_child(UIK.label(I18n.t("market ~%s") % Fmt.money0(float(p2["ref_price"])), 7, Art.C_MUTED))
+			h.add_child(UIK.label(I18n.t("market ~%s") % Fmt.money(float(p2["ref_price"])), 7, Art.C_MUTED))
 			h.add_child(UIK.expand())
 			h.add_child(UIK.button("−", func(): new_price[pid] = maxf(float(p2["price_min"]), float(new_price[pid]) - 1.0); rebuild()))
-			h.add_child(UIK.label(Fmt.money0(new_price[pid]), 9, Art.C_WHITE, true))
+			h.add_child(UIK.label(Fmt.money(new_price[pid]), 9, Art.C_WHITE, true))
 			h.add_child(UIK.button("+", func(): new_price[pid] = minf(float(p2["price_max"]), float(new_price[pid]) + 1.0); rebuild()))
 			v2.add_child(h)
 			var h3 := UIK.hbox(4)
@@ -458,7 +458,7 @@ func _tab_sales() -> void:
 		var t := UIK.label("%s · %s" % [I18n.t(DataDB.product(o["product"])["name"]), o["customer"]], 7, Art.C_WHITE)
 		t.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(t)
-		row.add_child(UIK.label(Fmt.money0(o["unit_price"]), 7, Art.C_WHITE))
+		row.add_child(UIK.label(Fmt.money(o["unit_price"]), 7, Art.C_WHITE))
 		row.add_child(UIK.chip(status_text(str(o["status"])), _status_col(o["status"])))
 		if o.has("review"):
 			row.add_child(UIK.label("★".repeat(int(o["review"]["stars"])), 7, Art.C_GOLD))
@@ -563,7 +563,7 @@ func _tab_operations() -> void:
 			var nl := UIK.label(I18n.t(DataDB.product(pid)["name"]), 8, Art.C_WHITE)
 			nl.custom_minimum_size = Vector2(118, 0)
 			row.add_child(nl)
-			row.add_child(UIK.label(I18n.t("%s per unit") % Fmt.money0(uc) + (" (+%d%%)" % int(round((mult - 1.0) * 100)) if mult > 1.001 else ""), 8, Art.C_RED if mult > 1.001 else Art.C_WHITE, true))
+			row.add_child(UIK.label(I18n.t("%s per unit") % Fmt.money(uc) + (" (+%d%%)" % int(round((mult - 1.0) * 100)) if mult > 1.001 else ""), 8, Art.C_RED if mult > 1.001 else Art.C_WHITE, true))
 			var lead := int(ceil(float(o["lead_days"]) * World.lead_mult(sid)))
 			v2.add_child(UIK.label(I18n.t("MOQ %d units · %d days · %s duds") % [int(o["moq"]), lead, Fmt.pct(float(o["defect_rate"]), 0) if float(o["defect_rate"]) >= 0.01 else "<1%"], 7, Art.C_RED if lead > int(o["lead_days"]) else Art.C_MUTED))
 			row.add_child(UIK.expand())
@@ -571,7 +571,7 @@ func _tab_operations() -> void:
 			row.add_child(UIK.label(I18n.t("%d units") % int(buy_qty[key]), 8, Art.C_WHITE, true))
 			row.add_child(UIK.button("+", func(): buy_qty[key] = int(buy_qty[key]) + int(o["moq"]); rebuild()))
 			var ready := _buy_possible(sid, pid, int(buy_qty[key]), loc)
-			var bb := UIK.button(I18n.t("Buy %s") % Fmt.money0(uc * int(buy_qty[key])), _buy.bind(sid, pid, key, false), _next_style(ready))
+			var bb := UIK.button(I18n.t("Buy %s") % Fmt.money(uc * int(buy_qty[key])), _buy.bind(sid, pid, key, false), _next_style(ready))
 			bb.disabled = not ready
 			bb.name = "Buy_%s_%s" % [sid, pid]
 			row.add_child(bb)
@@ -875,7 +875,7 @@ func _tab_contracts() -> void:
 	cols.add_child(v)
 	var seller_name := GameState.entity_name(k["seller"]) if k["seller"] != "player" else GameState.business_display_name()
 	for row in [["Buyer", GameState.entity_name(k["buyer"])], ["Seller", seller_name], ["Product", I18n.t(DataDB.product(k["product"])["name"])],
-			["Quantity", I18n.t("%d units") % int(k["qty"])], ["Unit price", Fmt.money0(k["unit_price"])], ["Total", Fmt.money0(k["total"])],
+			["Quantity", I18n.t("%d units") % int(k["qty"])], ["Unit price", Fmt.money(k["unit_price"])], ["Total", Fmt.money(k["total"])],
 			["Delivery", (I18n.t("due ") + Clock.fmt_short(int(k["due"]))) if k.has("due") else I18n.t("%d days after signing") % int(k["delivery_days"])],
 			["Payment terms", I18n.t("Net %d days%s") % [int(k["payment_terms_days"]), (I18n.t(" · %d%% upfront") % int(float(k["upfront_rate"]) * 100)) if float(k["upfront_rate"]) > 0 else ""]],
 			["Late penalty", Fmt.pct(float(k["penalty_rate"]))], ["Quality", Fmt.pct(float(k["quality_req"]))], ["Currency", "AUD (Aurelia dollar)"], ["Settlement", "Bank transfer"]]:
@@ -890,7 +890,7 @@ func _tab_contracts() -> void:
 	if cost <= 0:
 		var o := Ecommerce.offer("tradelink_wholesale", k["product"])
 		cost = float(o.get("unit_cost", 0))
-	right.add_child(UIK.label(I18n.t("Your unit cost ≈ %s → gross margin %s") % [Fmt.money0(cost), Fmt.money0((float(k["unit_price"]) - cost) * int(k["qty"]))], 7, Art.C_SKY))
+	right.add_child(UIK.label(I18n.t("Your unit cost ≈ %s → gross margin %s") % [Fmt.money(cost), Fmt.money((float(k["unit_price"]) - cost) * int(k["qty"]))], 7, Art.C_SKY))
 	if Contracts.seller_closed(k):
 		right.add_child(UIK.label_tip("This is a contract of a closed company.", "contract_closure", 8, Art.C_RED))
 		var blocked := UIK.button("Delivery unavailable", func(): pass)
@@ -919,7 +919,7 @@ func _tab_contracts() -> void:
 		right.add_child(UIK.label("COUNTER-OFFER", 7, Art.C_DIM, true))
 		var c1 := UIK.hbox(3)
 		c1.add_child(UIK.button("−", func(): counter_price = maxf(1.0, counter_price - 0.5); rebuild()))
-		c1.add_child(UIK.label(I18n.t("%s per unit") % Fmt.money0(counter_price), 8, Art.C_WHITE, true))
+		c1.add_child(UIK.label(I18n.t("%s per unit") % Fmt.money(counter_price), 8, Art.C_WHITE, true))
 		c1.add_child(UIK.button("+", func(): counter_price += 0.5; rebuild()))
 		right.add_child(c1)
 		var c2 := UIK.hbox(3)
@@ -1168,7 +1168,7 @@ func _tab_saas() -> void:
 		var cb := UIK.button(I18n.t("Code for %d hours") % int(Saas.cfg().get("founder_session_hours", 2)), _code_session, _next_style(float(s["dev_done"]) < Saas.dev_needed()))
 		cb.name = "SaasCode"
 		row.add_child(cb)
-		var lb := UIK.button(I18n.t("Launch at %s/month") % Fmt.money0(float(s["price"])), func():
+		var lb := UIK.button(I18n.t("Launch at %s/month") % Fmt.money(float(s["price"])), func():
 			var r := Saas.launch()
 			if not r["ok"]:
 				UIRoot.toast(I18n.t(str(r["error"])), "warn", "laptop")
@@ -1201,7 +1201,7 @@ func _tab_saas() -> void:
 	var pm := UIK.button("−$5", func(): Saas.set_price(float(s["price"]) - 5.0); rebuild())
 	pm.name = "SaasPriceDown"
 	pr.add_child(pm)
-	pr.add_child(UIK.label(Fmt.money0(float(s["price"])), 9, Art.C_WHITE, true))
+	pr.add_child(UIK.label(Fmt.money(float(s["price"])), 9, Art.C_WHITE, true))
 	var pp := UIK.button("+$5", func(): Saas.set_price(float(s["price"]) + 5.0); rebuild())
 	pp.name = "SaasPriceUp"
 	pr.add_child(pp)
@@ -1285,11 +1285,11 @@ func _tab_cafe() -> void:
 		var dn := UIK.button("−", func(): Cafe.set_price(id, Cafe.price(id) - 0.25); rebuild())
 		dn.name = "CafePriceDown_" + id
 		r.add_child(dn)
-		r.add_child(UIK.label(Fmt.money0(Cafe.price(id)), 9, Art.C_WHITE, true))
+		r.add_child(UIK.label(Fmt.money(Cafe.price(id)), 9, Art.C_WHITE, true))
 		var up := UIK.button("+", func(): Cafe.set_price(id, Cafe.price(id) + 0.25); rebuild())
 		up.name = "CafePriceUp_" + id
 		r.add_child(up)
-		r.add_child(UIK.label(I18n.t("street price %s · costs you %s") % [Fmt.money0(float(it.get("ref_price", 4.0))), Fmt.money0(float(it.get("unit_cost", 1.0)))], 7, Art.C_DIM))
+		r.add_child(UIK.label(I18n.t("street price %s · costs you %s") % [Fmt.money(float(it.get("ref_price", 4.0))), Fmt.money(float(it.get("unit_cost", 1.0)))], 7, Art.C_DIM))
 	_section_tip("Supplies and the bakery", "food_waste")
 	var sr := UIK.hbox(4)
 	content.add_child(sr)
@@ -1297,7 +1297,7 @@ func _tab_cafe() -> void:
 	sr.add_child(UIK.expand())
 	for pk in Cafe.cfg().get("supply_packs", []):
 		var pid := str(pk["id"])
-		var pb := UIK.button(I18n.t("%d cups · %s") % [int(pk["cups"]), Fmt.money0(Cafe.pack_cost(pid))], func():
+		var pb := UIK.button(I18n.t("%d cups · %s") % [int(pk["cups"]), Fmt.money(Cafe.pack_cost(pid))], func():
 			var r := Cafe.order_supplies(pid)
 			if not r["ok"]:
 				UIRoot.toast(I18n.t(str(r["error"])), "warn", "coffee")

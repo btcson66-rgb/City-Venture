@@ -86,6 +86,7 @@ func run() -> void:
 		# earlier tutorial story's funding assumptions; all factory actions below still use real input.
 		await close_modal()
 		GameState.new_game({"name":"Factory Founder", "seed":64001})
+		_tried.clear()  # a new game restarts decision ids
 		await _fast_forward_to_ch10()
 		SceneRouter._enter("interior", "riverside_apartment", "bed_side", "")
 		await wait_world()
@@ -93,6 +94,7 @@ func run() -> void:
 		await _save_load()
 		await close_modal()
 		GameState.new_game({"name":"Realty Founder","seed":65001})
+		_tried.clear()
 		await _fast_forward_to_ch10()
 		SceneRouter._enter("interior","riverside_apartment","bed_side","")
 		await wait_world()
@@ -100,10 +102,23 @@ func run() -> void:
 		await _save_load()
 		await close_modal()
 		GameState.new_game({"name":"Media Founder","seed":66001})
+		_tried.clear()
 		await _fast_forward_to_ch10()
 		SceneRouter._enter("interior","riverside_apartment","bed_side","")
 		await wait_world()
 		await _media()
+		await _save_load()
+		await close_modal()
+		GameState.new_game({"name":"Hotel Founder","seed":67001})
+		await _fast_forward_to_ch10()
+		SceneRouter._enter("interior","riverside_apartment","bed_side","")
+		await wait_world()
+		await _hotel()
+		GameState.new_game({"name":"Energy Founder","seed":69001})
+		await _fast_forward_to_ch10()
+		SceneRouter._enter("interior","riverside_apartment","bed_side","")
+		await wait_world()
+		await _energy()
 		await _save_load()
 
 
@@ -1924,3 +1939,82 @@ func _media() -> void:
 	await metro_to("riverside")
 	await enter_building("riverside_apartment")
 	MiniGames.auto=previous_auto
+
+
+func _hotel() -> void:
+	bot.step("Luxury Heights — take over the Aster Inn, set the Rate Board, staff up and sell the first nights")
+	await popups()
+	await close_modal()
+	if SceneRouter.world_scene().kind=="interior":await exit_building()
+	await metro_to("luxury_heights")
+	await bot.shot("luxury_heights_day")
+	await enter_building("the_aster")
+	Ledger.post(GameState.company_id(),"QA hotel equity",[{"acct":"cash","dr":160000},{"acct":"equity","cr":160000}])
+	await bot.use_action("hotel_open")
+	await bot.click_named("TakeoverAster")
+	bot.expect(Hotel.is_running() and Hotel.total_rooms()==12,"actual takeover opens the 12-room Aster Inn")
+	await bot.shot("rate_board")
+	await bot.click_named("Price_standard_10")
+	await bot.click_named("BoardNextOps")
+	await bot.shot("hotel_operations")
+	await close_modal()
+	for role in ["housekeeper","housekeeper","front_desk"]:
+		if Staff.post_job(role).get("ok",false):
+			Clock.advance(18*60)
+			if not Staff.S()["applicants"].is_empty():Staff.hire(Staff.S()["applicants"][0]["id"])
+	Clock.advance(10*Clock.DAY)
+	await popups()
+	bot.expect(float(Hotel.stats(10)["occupancy"])>0 and -Ledger.balance(GameState.company_id(),"revenue")>0,"night audits sell rooms and book room revenue")
+	bot.expect(Ledger.check_balanced(),"hotel books balance")
+	await bot.use_action("hotel_open")
+	await bot.click_named("HotelTab_reviews")
+	await bot.shot("guest_reviews")
+func _energy() -> void:
+	bot.step("Industrial - lease warehouse, Roof Survey, subsidy, install and first solar invoice")
+	await popups()
+	await close_modal()
+	if SceneRouter.world_scene().kind=="interior":await exit_building()
+	await metro_to("industrial")
+	await bot.shot("industrial_energy_day")
+	await enter_building("helio_warehouse")
+	await bot.use_action("lease_property")
+	await bot.click_named("SignLease_helio_warehouse")
+	await close_modal()
+	await bot.use_action("energy_open")
+	await bot.click_named("OpenEnergy")
+	await close_modal()
+	var chosen := ""
+	for week in 6:
+		for lead in Energy.open_leads():
+			if lead["kind"]=="own":continue
+			await bot.use_action("energy_open")
+			await bot.click_named("Survey_"+lead["id"])
+			await bot.click_named("AutoLayout")
+			await bot.shot("roof_survey")
+			await bot.click_named("SendQuote")
+			await close_modal()
+			if lead["status"]=="won":
+				for job in Energy.S()["installs"]:
+					if Energy.S()["installs"][job]["lead"]==lead["id"]:chosen=job
+				break
+		if chosen!="":break
+		Clock.advance(7*Clock.DAY)
+		await popups()
+	bot.expect(chosen!="","actual Roof Survey quote wins a client job")
+	if chosen=="":return
+	await bot.use_action("energy_open")
+	await bot.click_named("EnergyTab_installs")
+	await bot.click_named("StartInstall_"+chosen)
+	await close_modal()
+	Clock.advance(30*Clock.DAY)
+	await popups()
+	bot.expect(Energy.S()["installs"][chosen]["status"]=="delivered","crew-days finish the install")
+	bot.expect(Jobs.get_job(chosen)["status"] in ["invoiced","paid"],"first solar income is a traceable Jobs invoice")
+	bot.expect(Ledger.check_balanced(),"materials, install and invoice balance")
+	await bot.use_action("energy_open")
+	await bot.click_named("EnergyTab_installs")
+	await bot.shot("energy_installs")
+	await close_modal()
+	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")

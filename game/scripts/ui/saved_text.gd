@@ -45,7 +45,8 @@ static func display(text: String) -> String:
 	var offset := 0
 	for found in money.search_all(localized):
 		result += localized.substr(offset, found.get_start() - offset)
-		result += Fmt.money0(float(found.get_string().substr(1).replace(",", "")))
+		var amount := float(found.get_string().substr(1).replace(",", ""))
+		result += Fmt.money(amount) if absf(amount - roundf(amount)) > 0.001 else Fmt.money0(amount)
 		offset = found.get_end()
 	return result + localized.substr(offset)
 

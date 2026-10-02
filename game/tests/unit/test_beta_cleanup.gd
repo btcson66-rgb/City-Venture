@@ -34,8 +34,10 @@ func test_status_activation_is_data_driven_and_explicit_switch_wins() -> void:
 	DataDB.buildings["beta_future_shop"] = {"id": "beta_future_shop", "name": "Shop", "district": "beta_future", "status": "planned", "interior": {"interactables": [{"action": "buy_item", "label": "Buy"}]}}
 	DataDB.districts["beta_future"]["status"] = "active"
 	DataDB.buildings["beta_future_shop"]["status"] = "active"
+	BuildingInfo.invalidate_availability()
 	runner.check(BuildingInfo.building_available("beta_future_shop"), "status activation makes working shop available automatically")
 	DataDB.buildings["beta_future_shop"]["enterable"] = false
+	BuildingInfo.invalidate_availability()
 	runner.check(not BuildingInfo.building_available("beta_future_shop"), "explicit nonenterable scenery stays hidden")
 	DataDB.buildings.erase("beta_future_shop")
 	DataDB.districts.erase("beta_future")

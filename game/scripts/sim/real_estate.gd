@@ -41,6 +41,7 @@ static func refresh() -> void:
 	for record in S()["clients"].values():
 		if record["status"]=="open":record["status"]="expired"
 	var homes := listings()
+	if homes.is_empty():return
 	for i in int(cfg()["weekly_mandates"]):
 		var home: Dictionary=homes[GameState.rng.randi_range(0,homes.size()-1)]
 		var sale := i==0
@@ -177,19 +178,28 @@ static func sell(id: String) -> Dictionary:
 	var property: Dictionary=S()["properties"].get(id,{})
 	if not valid() or property.is_empty() or property["status"] not in ["empty","listed"] or not property["renovation"].is_empty():return error("Sell an empty finished unit.")
 	var value := RealEstateMarket.value(property)
+	var loan: Dictionary=Bank.B()["loans"].get(property["mortgage"],{})
+	var owed := float(loan["balance"]) if not loan.is_empty() and loan["status"] in ["active","late","called"] else 0.0
+	# Selling below the mortgage leaves a shortfall that must come out of company cash: refuse the sale if it can't.
+	if owed>value+.005 and Ledger.cash(entity())+value<owed:
+		return error("The sale would not cover the mortgage and the company cannot pay the shortfall. Raise cash or wait for prices to recover.")
 	Ledger.post(entity(),I18n.t("Residential unit sold"),[{"acct":"cash","dr":value},{"acct":"revenue","cr":value},{"acct":"cogs","dr":property["book"]},{"acct":"property_assets","cr":property["book"]}],source(id))
 	property["status"]="sold"
 	Sim.cancel("re.tenant","id",id)
-	var loan: Dictionary=Bank.B()["loans"].get(property["mortgage"],{})
-	if not loan.is_empty() and loan["status"] in ["active","late","called"]:Bank.repay(loan["id"],float(loan["balance"]))
-	return {"ok":true,"value":value}
-static func equity() -> float:
+	if owed>0:
+		var repaid := Bank.repay(loan["id"],owed)
+		if not repaid.get("ok",false):push_warning("RealEstate: mortgage repayment failed after sale: "+str(repaid.get("error","")))
+	return {"ok":true,"value":value,"shortfall":maxf(0,owed-value)}
+## Market value minus mortgage, summed over every owned unit. `floor_at_zero` keeps each unit's equity non-negative
+## (what the player sees as net worth); lending leaves it off, so a unit worth less than its mortgage reduces capacity.
+static func equity(floor_at_zero := true) -> float:
 	if not valid():return 0
 	var total := 0.0
 	for property in S()["properties"].values():
 		if property["status"]=="sold":continue
 		var loan: Dictionary=Bank.B()["loans"].get(property["mortgage"],{})
-		total+=maxf(0,RealEstateMarket.value(property)-float(loan.get("balance",0)))
+		var unit := RealEstateMarket.value(property)-float(loan.get("balance",0))
+		total+=maxf(0,unit) if floor_at_zero else unit
 	return total
 static func handle(kind: String, payload: Dictionary) -> void:
 	if not valid():return

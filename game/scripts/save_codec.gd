@@ -2,6 +2,14 @@ class_name SaveCodec
 extends RefCounted
 ## Untrusted imports are checked before migration, storage, or changing the live game.
 
+static func _truthy(v) -> bool:
+	if v is bool: return v
+	if v == null: return false
+	if v is int or v is float: return float(v) != 0.0
+	if v is String: return not str(v).to_lower() in ["", "false", "0", "no", "off", "null"]
+	return true
+
+
 static func decode(text: String) -> Dictionary:
 	var invalid := {"ok": false, "error": "This is not a City Venture save."}
 	if text.length() > 20 * 1024 * 1024: return invalid
@@ -39,8 +47,9 @@ static func decode(text: String) -> Dictionary:
 		if not _record(message, {"t": 0, "from": "", "text": "", "read": false}): return invalid
 	for stat in data.get("stats", {}).values():
 		if not _numeric(stat): return invalid
-	for flag in data["flags"].values():
-		if not flag is bool: return invalid
+	if not data["flags"] is Dictionary: return invalid
+	for key in data["flags"].keys():       # an older or hand-edited save may hold 1/0/"yes": read it as the truth value, don't reject the save
+		data["flags"][key] = _truthy(data["flags"][key])
 	for entry in data["schedule"]:
 		if not _record(entry, {"t": 0, "kind": "", "p": {}}): return invalid
 	var totals := {}

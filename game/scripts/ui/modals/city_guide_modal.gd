@@ -29,7 +29,7 @@ func build() -> void:
 			v.add_child(row)
 			row.add_child(UIK.label(I18n.t(str(DataDB.building(bid)["name"])) + " — " + BuildingInfo.category(bid), 8, Art.C_WHITE, true))
 			row.add_child(UIK.expand())
-			var route := UIK.button("Take me there", _guide.bind(bid), "primary")
+			var route := UIK.button("Take me there", _guide.bind(bid))
 			route.name = "GuideTo_" + bid
 			row.add_child(route)
 			v.add_child(UIK.wrap(BuildingInfo.guide_tags(bid) + " · " + BuildingInfo.status(bid), 7, Art.C_SKY, 520))

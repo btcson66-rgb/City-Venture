@@ -101,6 +101,12 @@ func _audit_setup() -> void:
 	# Client organization names are kept brands, as NPC and employer names are.
 	for client in DataDB.economy.get("media",{}).get("client_names",[]):
 		for w in str(client).split(" "):_allowed[w]=true
+	for client in DataDB.economy.get("hotel",{}).get("client_names",[]):
+		for w in str(client).split(" "):_allowed[w]=true
+	# Roof clients and parking landlords are kept names too.
+	for kind in DataDB.economy.get("energy",{}).get("roof_kinds",{}).values():
+		for client in kind["names"]:
+			for w in str(client).split(" "):_allowed[w]=true
 	for w in ["Tab", "Esc", "WASD", "Shift", "F12", "OK", "Guide", "Tour", "Collision", "Check", "Test", "Founder", "Alex", "Rivera",
 			"Riverlight", "Goods", "Co", "LLC", "Ltd", "Inc", "PO"]:   # stable purchase-order identifiers, e.g. PO-101
 		_allowed[w] = true

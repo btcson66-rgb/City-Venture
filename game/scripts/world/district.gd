@@ -5,7 +5,7 @@ extends WorldScene
 const BASE_Y := 320.0   # building fronts meet the north sidewalk here
 const POI_ICONS := {"home": "home", "cafe": "coffee", "restaurant": "coffee", "bank": "bank", "civic": "civic", "parcel": "parcel",
 	"retail": "shop", "retail_space": "shop", "own_cafe": "coffee", "lettings": "home", "flat_to_let": "home",
-	"warehouse": "inventory", "van_dealer": "company", "gym": "people", "customs": "civic"}
+	"warehouse": "inventory", "van_dealer": "company", "gym": "people", "customs": "civic", "hotel": "sleep"}
 
 var def: Dictionary = {}
 var building_nodes := {}
@@ -65,6 +65,8 @@ func build(district_id: String) -> void:
 	for f in def.get("fillers", []):
 		_add_building(facade(f), float(f["x"]), "", {})
 	for p in def.get("props", []):
+		add_prop(p)
+	for p in Energy.street_props(district_id):   # chargers the player built stand on the pavement
 		add_prop(p)
 	# metro entrance
 	var m: Dictionary = def.get("metro", {})
