@@ -1,0 +1,26 @@
+{
+ "id": "owen_blake_intro",
+ "with": "owen_blake",
+ "nodes": {
+  "start": [
+   {
+    "who": "owen_blake",
+    "text": "Owen Blake, Blake Journeys. I move tour groups. Give me twenty-five percent off the rack rate and I will lock a block of rooms weeks ahead, then pay you thirty days after the stay."
+   },
+   {
+    "who": "owen_blake",
+    "text": "The catch is that those rooms are gone, even if a festival suddenly doubles demand. Read the calendar before you say yes."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Open the Rate Board",
+      "next": "end"
+     }
+    ]
+   }
+  ],
+  "end": []
+ }
+}

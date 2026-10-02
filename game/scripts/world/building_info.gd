@@ -10,7 +10,7 @@ const ACTION_ICONS := {
 	"pack_orders": "parcel", "dropoff_parcels": "parcel", "change_outfit": "shirt",
 	"lease_property": "home", "whiteboard": "objective", "look": "info", "talk": "people",
 	"talk_staff": "people", "business_board": "company", "metro": "metro",
-	"media_open": "company", "real_estate_open": "home", "manufacturing_open": "inventory"
+	"media_open": "company", "hotel_open": "sleep", "real_estate_open": "home", "manufacturing_open": "inventory"
 }
 
 

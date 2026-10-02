@@ -174,6 +174,10 @@ msgstr "%d 小时 %d 分"
 msgid "%d h · %d days · %s"
 msgstr "%d 小时 · %d 天内 · %s"
 
+#: scripts/ui/hotel_ui.gd:176
+msgid "%d housekeepers hired (each cleans about %d rooms a day; the owner covers %d)."
+msgstr "已聘 %d 位房务员（每人每天约清 %d 间，老板自己可清 %d 间）。"
+
 #: scripts/ui/modals/company_os.gd:1262
 msgid "%d last 7 days"
 msgstr "近 7 天 %d"
@@ -289,6 +293,10 @@ msgstr "%d/%d 件（含在途）"
 #: scripts/ui/modals/metro_modal.gd:52
 msgid "%s  ·  %d min"
 msgstr "%s  ·  %d 分钟"
+
+#: scripts/ui/hotel_ui.gd:241
+msgid "%s %.1f of 5"
+msgstr "%s %.1f／5"
 
 #: scripts/ui/modals/company_os.gd:397
 msgid "%s (%d reviews)"
@@ -418,6 +426,10 @@ msgstr "%s 离职了。"
 msgid "%s registered as an employer."
 msgstr "%s 完成雇主登记。"
 
+#: scripts/sim/hotel.gd:626
+msgid "%s renovation"
+msgstr "%s翻新"
+
 #: scripts/sim/staff.gd:335
 msgid "%s resigned from %s."
 msgstr "%s 从%s离职了。"
@@ -425,6 +437,10 @@ msgstr "%s 从%s离职了。"
 #: scripts/sim/staff.gd:337
 msgid "%s resigned."
 msgstr "%s 辞职了。"
+
+#: scripts/sim/hotel.gd:77
+msgid "%s rooms"
+msgstr "%s客房"
 
 #: scripts/sim/cafe.gd:341
 msgid "%s served its first customer!"
@@ -462,9 +478,17 @@ msgstr "%s 收银：%d 位客人"
 msgid "%s · %.0f%% · CPM %s · audience fit %.0f%%"
 msgstr "%s · %.0f%% · 每千次曝光 %s · 客群符合度 %.0f%%"
 
+#: scripts/ui/hotel_ui.gd:221
+msgid "%s · %d %s rooms × %d nights from %s %d · group rate %s per room-night (%s off the %s rack) · total %s · 20%% deposit · Net 30"
+msgstr "%s · %d 间%s × %d 晚，%s %d 日入住 · 团体价每房每晚 %s（折扣 %s，定价 %s）· 总额 %s · 20%% 订金 · 住后 30 天付款"
+
 #: scripts/ui/media_ui.gd:147
 msgid "%s · %d campaign days · spend %s · impressions %d · relevant reach %d · clicks %d · conversions %d"
 msgstr "%s · 活动 %d 天 · 投放 %s · 曝光 %d 次 · 有效触及 %d 人次 · 点击 %d 次 · 转换 %d 人次"
+
+#: scripts/ui/hotel_ui.gd:126
+msgid "%s · %d rooms · %s per night (market %s)"
+msgstr "%s · %d 间 · 每晚 %s（市场价 %s）"
 
 #: scripts/ui/real_estate_ui.gd:129
 msgid "%s · %d rooms · minimum %s · %s"
@@ -482,9 +506,17 @@ msgstr "%s · %d 件 · 不良率 %.1f%% · 抽检 %.0f%% · 漏检 %.1f 件"
 msgid "%s · %d/%d units complete"
 msgstr "%s · 已完成 %d/%d 件"
 
+#: scripts/ui/hotel_ui.gd:189
+msgid "%s · %s per guest · service +%.2f"
+msgstr "%s · 每位 %s · 服务分 +%.2f"
+
 #: scripts/ui/manufacturing_ui.gd:153
 msgid "%s · %s · %d hours · %s"
 msgstr "%s · %s · %d 小时 · %s"
+
+#: scripts/ui/hotel_ui.gd:232
+msgid "%s · %s · received %s · %s"
+msgstr "%s · %s · 实收 %s · %s"
 
 #: scripts/ui/real_estate_ui.gd:162
 msgid "%s · book %s · market %s · rent %s/month"
@@ -501,6 +533,10 @@ msgstr "%s · 预算 %s · %s · 客群 %s · 剩余 %d 天"
 #: scripts/ui/real_estate_ui.gd:178
 msgid "%s · budget %s · paid %s · completion in %d days"
 msgstr "%s · 预算 %s · 已付 %s · 预计 %d 天完工"
+
+#: scripts/ui/hotel_ui.gd:204
+msgid "%s · condition %d%% · %s"
+msgstr "%s · 设备状况 %d%% · %s"
 
 #: scripts/sim/acquisition.gd:60
 msgid "%s × last year's profit of %s"
@@ -674,6 +710,14 @@ msgstr "近 30 天毛利 × 3"
 msgid "30% partial refund"
 msgstr "部分退款 30%"
 
+#: scripts/ui/hotel_ui.gd:106
+msgid "30-day demand calendar"
+msgstr "30 天需求日历"
+
+#: scripts/sim/hotel.gd:93
+msgid "30-day occupancy at least %d%% (now %d%%)."
+msgstr "近 30 天住房率至少 %d%%（目前 %d%%）。"
+
 #: scripts/ui/minigames/pack_game.gd:131
 msgid "4  Label"
 msgstr "4  标签"
@@ -822,9 +866,17 @@ msgstr "重新出发"
 msgid "A fuller van spreads the fixed time of a trip over more parcels, so each parcel costs less to deliver."
 msgstr "货车装得越满，每趟固定的时间就分摊到更多包裹上，每件的送货成本就越低。"
 
+#: data/events/hotel_review_storm.json
+msgid "A guest's angry post is spreading across the booking platform."
+msgstr "一位房客的怒文正在订房平台上扩散。"
+
 #: data/help/glossary.json
 msgid "A high asking price can fail. Viewings still cost time and money."
 msgstr "开价过高可能无法成交，带看仍会花费时间与金钱。"
+
+#: data/help/glossary.json
+msgid "A high price with empty rooms can earn less than a lower price that sells out."
+msgstr "房价高但房间空着，可能赚得比较低价卖满还少。"
 
 #: data/help/glossary.json
 msgid "A higher rating brings more customers every day, for free."
@@ -837,6 +889,10 @@ msgstr "持牌交易所把你的钱换成数字美元，几分钟就送到。平
 #: data/help/glossary.json
 msgid "A listing needs photos. You can spend time shooting them or pay Studio Lumen for professional photos."
 msgstr "上架需要照片，可以自己花时间拍摄，或付费请 Studio Lumen 拍专业照片。"
+
+#: scripts/sim/hotel.gd:623
+msgid "A locked group block uses these rooms during the renovation."
+msgstr "已锁定的团体房在翻新期间要用这些房间。"
 
 #: data/help/glossary.json
 msgid "A longer term lowers the monthly burden but can increase total interest. Compare both before borrowing."
@@ -893,6 +949,14 @@ msgstr "会卖的照片。"
 #: scripts/ui/tutorial.gd:41
 msgid "A place to work"
 msgstr "找个地方工作"
+
+#: data/events/hotel_review_storm.json
+msgid "A public reply and a refund calm the thread. The bad rating ages out of the reviews."
+msgstr "公开回复加上退款平息了风波，这则负评会随时间移出评价计算。"
+
+#: data/events/hotel_vera_visit.json
+msgid "A quiet upgrade costs one suite night and lifts her service score."
+msgstr "悄悄升等要送出一晚套房，但会提高她给的服务分。"
 
 #: scripts/ui/modals/lease_modal.gd:36
 msgid "A real office: your company name on the door and the sign, a proper desk for Company OS, and a stockroom so boxes stop living in your apartment. It's also %s every month whether you sell anything or not."
@@ -958,6 +1022,10 @@ msgstr "房客未付租金，欠款会列在应收帐款；催收需花时间，
 msgid "A tidy route. A stop or two out of order."
 msgstr "路线很俐落，只有一两个点的顺序可以更好。"
 
+#: data/help/glossary.json
+msgid "A travel agency locks rooms weeks ahead at 25% off and pays 30 days after the stay, with a 20% deposit."
+msgstr "旅行社会提前数周以七五折锁房，先付 20% 订金，住宿结束后 30 天付尾款。"
+
 #: data/dialogue/lina_intro.json
 msgid "A wire: cheap, slow. A letter of credit: we guarantee you to their bank, about two days, one and a half percent."
 msgstr "电汇：便宜、慢。信用状：我们向对方银行担保你，大约两天，手续费百分之一点五。"
@@ -977,6 +1045,14 @@ msgstr "帐户"
 #: scripts/ui/modals/company_os.gd:28
 msgid "ACTIVE"
 msgstr "运行中"
+
+#: data/help/glossary.json
+msgid "ADR and RevPAR"
+msgstr "平均房价与每房营收"
+
+#: data/help/glossary.json
+msgid "ADR is revenue per sold room. RevPAR is revenue per available room, whether sold or not."
+msgstr "平均房价（ADR）是每间卖出房间的营收。每房营收（RevPAR）则是每间可售房间的营收，不论有没有卖出。"
 
 #: autoload/clock.gd:159
 msgid "AM"
@@ -1045,6 +1121,10 @@ msgstr "接受"
 #: scripts/ui/modals/company_os.gd:1423
 msgid "Accept a run above, then drive it: you plan the route on a map. Every kilometre saved is fuel and time kept."
 msgstr "先接上面的外送单，再开车去送：你要在地图上规划路线。每省一公里，就省下油钱和时间。"
+
+#: data/events/hotel_event_cancelled.json
+msgid "Accept the loss"
+msgstr "接受损失"
 
 #: data/events/crestline_big_offer.json
 msgid "Accept, counter or decline in Company OS → Contracts. The catch is working capital (you pay for the lamps now and get paid in 60 days) and space (home holds 600 units, Suite 2B 1,500)."
@@ -1334,6 +1414,10 @@ msgstr "买的衣服都会放进你家的衣柜。试衣间在最里面。"
 msgid "Apartment"
 msgstr "公寓"
 
+#: data/events/hotel_review_storm.json
+msgid "Apologise and compensate for $900"
+msgstr "道歉并赔偿 $900"
+
 #: scripts/ui/minigames/clerk_forms_game.gd:68
 msgid "Applicant"
 msgstr "申请人"
@@ -1422,6 +1506,10 @@ msgstr "收到就裂了。"
 msgid "Arrived late and scratched."
 msgstr "晚到还有刮痕。"
 
+#: data/buildings/observation_deck.json
+msgid "Ask about group tours"
+msgstr "询问团体旅游"
+
 #: data/events/shipment_lost.json
 msgid "Ask for a re-ship"
 msgstr "请对方重新出货"
@@ -1454,6 +1542,34 @@ msgstr "资产租金：%s"
 msgid "Assists brokerage client matches. Payroll is due even when deals fail."
 msgstr "协助仲介客户配对。即使未成交仍须支付薪资。"
 
+#: data/economy/hotel.json
+msgid "Aster Brasserie kitchen"
+msgstr "Aster 餐厅厨房"
+
+#: data/economy/hotel.json
+msgid "Aster Harbor Resort"
+msgstr "Aster 港湾度假村"
+
+#: scripts/ui/hotel_ui.gd:66
+msgid "Aster Inn"
+msgstr "Aster 小旅馆"
+
+#: data/help/glossary.json
+msgid "Aster Inn (12 rooms), then the Brasserie expansion (30 rooms), then a Harbor resort (50 rooms)."
+msgstr "Aster 小旅馆（12 房），接着扩建加餐厅（30 房），最后开港湾度假村（50 房）。"
+
+#: data/economy/hotel.json
+msgid "Aster Inn + Brasserie"
+msgstr "Aster 小旅馆＋餐厅"
+
+#: data/properties/aster_inn.json
+msgid "Aster Inn lease"
+msgstr "Aster 小旅馆租约"
+
+#: data/buildings/the_aster.json
+msgid "Aster Inn: 7 Standard, 4 Deluxe and 1 Suite. Take it over for $150,000 or lease it for $9,000 a month."
+msgstr "Aster 小旅馆：标准房 7 间、豪华房 4 间、套房 1 间。顶下要 $150,000，或月租 $9,000。"
+
 #: data/help/glossary.json
 msgid "At 12% APR, $1,000 outstanding accrues about $10 interest for a month before principal repayment."
 msgstr "年利率 12%、余额 $1,000，在还本金前一个月约产生 $10 利息。"
@@ -1469,6 +1585,10 @@ msgstr "瑕疵率 5% 时，100 件平均约有 5 件瑕疵；承诺大量交货�
 #: scripts/ui/modals/company_os.gd:1464
 msgid "At any packing table the shipping options include \"Own van\": fuel instead of a courier fee, delivered the same day. The Pier 7 warehouse can hold your stock too."
 msgstr "每张打包桌的出货选项都多了「自己的货车」：付油钱代替快递费，当天送到。7 号码头仓库也能放你的库存。"
+
+#: scripts/sim/hotel.gd:95
+msgid "At least %d guest reviews (now %d)."
+msgstr "至少 %d 则住客评价（目前 %d）。"
 
 #: scripts/ui/tutorial.gd:70
 msgid "At the packing table, choose how it leaves: book the courier (it collects from home) or carry it to PostPoint yourself (cheaper, costs your time)."
@@ -1533,6 +1653,10 @@ msgstr "奥瑞莉亚职人合作社"
 #: scripts/ui/modals/metro_modal.gd:10
 msgid "Aurelia Metro — %s"
 msgstr "奥瑞莉亚捷运——%s"
+
+#: data/economy/hotel.json
+msgid "Aurelia Trade Expo"
+msgstr "奥蕾莉亚商展"
 
 #: data/buildings/aurelia_university.json
 msgid "Aurelia University"
@@ -1637,6 +1761,10 @@ msgstr "又来啦。老样子？"
 #: scripts/ui/minigames/route_game.gd:160
 msgid "Back at the depot around %s. Deadline: %s."
 msgstr "约 %s 回到车场。截止时间：%s。"
+
+#: scripts/ui/hotel_ui.gd:280
+msgid "Back to the Rate Board"
+msgstr "回到房价看板"
 
 #: scripts/ui/minigames/photo_shoot_game.gd:89 scripts/ui/minigames/photo_shoot_game.gd:90
 msgid "Backdrop"
@@ -1810,6 +1938,10 @@ msgstr "正式黑领结。适合晚宴、发表会，还有签下大案子的那
 msgid "Blake"
 msgstr "Blake"
 
+#: data/npcs/owen_blake.json
+msgid "Blake Journeys travel agent"
+msgstr "Blake 旅游旅行社业务"
+
 #: data/character/options.json
 msgid "Blonde"
 msgstr "金色"
@@ -1825,6 +1957,10 @@ msgstr "楼下就是 Bloom Coffee。河滨区最好喝的小白咖啡。"
 #: data/character/options.json
 msgid "Blue"
 msgstr "蓝色"
+
+#: scripts/ui/hotel_ui.gd:152
+msgid "BoardNextOps"
+msgstr "BoardNextOps"
 
 #: data/character/options.json
 msgid "Bob"
@@ -1845,6 +1981,14 @@ msgstr "有胆。我喜欢。"
 #: scripts/ui/modals/loan_modal.gd:90 scripts/ui/modals/loan_modal.gd:94
 msgid "Book an appointment"
 msgstr "预约贷款洽谈"
+
+#: data/events/hotel_equipment_failure.json
+msgid "Book the scheduled technician for $700"
+msgstr "预约一般技师，费用 $700"
+
+#: data/events/hotel_slump.json
+msgid "Bookings have dried up. You can discount or wait for the season to turn."
+msgstr "订房突然变少。你可以打折促销，或等淡季过去。"
 
 #: data/dialogue/lina_intro.json
 msgid "Boring and safe. My favourite. You'll find it when you pay Lumina: Company OS, Operations."
@@ -1882,9 +2026,25 @@ msgstr "不小心买了两个。"
 msgid "Bought: %s. It's in your wardrobe."
 msgstr "已购买：%s。已放进你的衣柜。"
 
+#: data/buildings/the_aster.json
+msgid "Boutique hotel"
+msgstr "精品旅馆"
+
+#: data/city/aurelia.json
+msgid "Boutique hotels, tourists and critics."
+msgstr "精品旅馆、观光客与评论家。"
+
 #: scripts/ui/minigames/pack_game.gd:113
 msgid "Box"
 msgstr "Box"
+
+#: scripts/ui/hotel_ui.gd:185
+msgid "Breakfast and supplies"
+msgstr "早餐与耗品"
+
+#: data/help/glossary.json
+msgid "Breakfast lifts the service score; the cafe makes it cheaper."
+msgstr "早餐会提高服务分，自家咖啡店能让成本更低。"
 
 #: data/world/years.json
 msgid "Bridge Exploit"
@@ -2542,6 +2702,10 @@ msgstr "已取消"
 msgid "Cancelled job deposit: %s"
 msgstr "取消工单的应退订金：%s"
 
+#: data/help/glossary.json
+msgid "Capacity, not demand, can be the real limit on a busy weekend."
+msgstr "旺季周末真正的上限可能是房务产能，而不是需求。"
+
 #: scripts/sim/ecommerce.gd:1288
 msgid "Capital contributed in kind by founder"
 msgstr "创办人实物出资"
@@ -2574,9 +2738,17 @@ msgstr "自己拿去 PostPoint（比较便宜，但花你的时间）"
 msgid "Carrying %d parcel%s"
 msgstr "携带 %d 件包裹%s"
 
+#: scripts/ui/hotel_ui.gd:277
+msgid "Cash %s of %s."
+msgstr "现金 %s／需要 %s。"
+
 #: data/story/chapters.json
 msgid "Cash Is Oxygen"
 msgstr "现金就是氧气"
+
+#: data/help/glossary.json
+msgid "Cash arrives a month after the guests, so keep a buffer."
+msgstr "现金会在住客入住一个月后才入帐，请留好缓冲。"
 
 #: scripts/ui/modals/purchase_return_modal.gd:50
 msgid "Cash arrives when the supplier receives the stock: %s. Reserved units cannot be returned."
@@ -2670,6 +2842,14 @@ msgstr "我改变主意了。"
 msgid "Channel shares must total 100 percent."
 msgstr "所有管道的预算占比合计须为 100%。"
 
+#: scripts/ui/hotel_ui.gd:130
+msgid "Channels"
+msgstr "通路"
+
+#: data/help/glossary.json
+msgid "Channels and commission"
+msgstr "通路与佣金"
+
 #: data/events/media_price.json
 msgid "Channels raised CPM. Adjust the mix before the next daily buying cycle."
 msgstr "管道调高每千次曝光费用。请在下次每日采购前调整配置。"
@@ -2726,6 +2906,10 @@ msgstr "去看看创业布告栏。大家会贴供应商、案子，什么都有
 msgid "Check the cash forecast: does {company} make it to the next big payment?"
 msgstr "看看现金预测：{company} 撑得到下一笔大款项入帐吗？"
 
+#: data/buildings/skyline_grand.json
+msgid "Check the competitor's rates"
+msgstr "查看对手房价"
+
 #: scripts/ui/minigames/pack_game.gd:37
 msgid "Check the label against the order: the wrong one sends the parcel to the wrong address and it arrives late."
 msgstr "标签要跟订单对照。贴错的话包裹会先送到错的地址，晚到。"
@@ -2737,6 +2921,10 @@ msgstr "看看收银——Company OS"
 #: data/story/chapters.json
 msgid "Check your phone (Tab)"
 msgstr "看看手机（Tab）"
+
+#: data/economy/staff.json
+msgid "Check-in coverage lifts the service score in guest reviews."
+msgstr "柜台服务涵盖率越高，住客评价的服务分越高。"
 
 #: scripts/ui/minigames/parcel_sort_game.gd:9
 msgid "Chen"
@@ -2754,6 +2942,10 @@ msgstr "中文通知、招牌、联系人职称、服饰状态与教学标题已
 msgid "Chinese tutorial headings now use the bundled fallback font in browsers, preventing missing-character boxes."
 msgstr "浏览器的中文教学标题改用内附备援字体，不再出现缺字方框。"
 
+#: scripts/sim/hotel.gd:148
+msgid "Choose a breakfast option."
+msgstr "请选择早餐方案。"
+
 #: scripts/ui/tutorial.gd:45
 msgid "Choose a business"
 msgstr "选一门生意"
@@ -2766,9 +2958,21 @@ msgstr "请选择厂内机台。"
 msgid "Choose a paused campaign and fund its next media purchase."
 msgstr "请选择暂停的活动，并备妥下一次媒体采购资金。"
 
+#: scripts/sim/hotel.gd:144
+msgid "Choose a peak-day surcharge between 0% and 40%."
+msgstr "旺日加价请设在 0% 到 40% 之间。"
+
 #: scripts/sim/real_estate.gd:124
 msgid "Choose a project scale and a name of 1–32 characters."
 msgstr "请选择建案规模，名称需为 1–32 个字符。"
+
+#: scripts/sim/hotel.gd:130
+msgid "Choose a room type and a price."
+msgstr "请选择房型并输入价格。"
+
+#: scripts/sim/hotel.gd:606 scripts/sim/hotel.gd:618
+msgid "Choose a room type."
+msgstr "请选择房型。"
 
 #: scripts/sim/media.gd:92
 msgid "Choose a running campaign."
@@ -2785,6 +2989,10 @@ msgstr "选择要覆盖的存盘槽。原有存盘会先备份。"
 #: data/help/help.json
 msgid "Choose a slogan, visual and tone. The brief and university mentor explain the audience preferences."
 msgstr "选择标语、视觉与语气。需求及大学导师会说明客群偏好。"
+
+#: scripts/sim/hotel.gd:136
+msgid "Choose a valid channel mix."
+msgstr "请选择有效的通路配置。"
 
 #: data/help/patch_notes.json
 msgid "Choose among e-commerce, consulting, SaaS, a cafe, logistics, manufacturing, real estate and media."
@@ -2818,6 +3026,10 @@ msgstr "请选择尚未结案的客户需求。"
 msgid "Choose an open district to see its location and travel routes."
 msgstr "选择已开放街区，查看位置与交通路线。"
 
+#: scripts/sim/hotel.gd:558
+msgid "Choose an open group block."
+msgstr "请选择一笔开放中的团体房。"
+
 #: scripts/sim/real_estate.gd:61
 msgid "Choose an open owner mandate and a matching client."
 msgstr "请选择有效屋主委托及合适客户。"
@@ -2833,6 +3045,10 @@ msgstr "请选择 1 至 %d 件可退库存。"
 #: data/help/help.json
 msgid "Choose the name carefully: it goes on your sign and your invoices."
 msgstr "名字要想清楚：它会出现在招牌和发票上。"
+
+#: scripts/sim/hotel.gd:47
+msgid "Choose to take over or lease the Aster Inn."
+msgstr "请选择顶下或承租 Aster 小旅馆。"
 
 #: scripts/ui/modals/business_board.gd:109
 msgid "Chose a first business: ecommerce."
@@ -2878,9 +3094,17 @@ msgstr "市政厅、许可、公司登记、公共服务。"
 msgid "City Hall: your food handling licence is approved."
 msgstr "市政厅：你的食品处理执照核准了。"
 
+#: data/economy/hotel.json
+msgid "City Marathon Weekend"
+msgstr "城市马拉松周末"
+
 #: autoload/save_system.gd:330 autoload/save_system.gd:352
 msgid "City Venture save"
 msgstr "City Venture 存盘"
+
+#: data/events/hotel_event_cancelled.json
+msgid "City event cancelled"
+msgstr "城市活动取消"
 
 #: data/help/patch_notes.json
 msgid "City lists show businesses and places that are ready to use. Your next action follows the prerequisites you have met."
@@ -2918,9 +3142,25 @@ msgstr "《洁净包装法》通过：塑料缓冲包裹每件课 $0.40。"
 msgid "Clean charts"
 msgstr "简洁图表"
 
+#: data/dialogue/henri_dubois_intro.json
+msgid "Clean rooms, a friendly desk and a fair price. A room nobody cleaned cannot be sold at all, so hire housekeepers before you chase more guests."
+msgstr "干净的房间、亲切的柜台、合理的价格。没人清的房间根本不能卖，所以先请房务员，再去抢更多客人。"
+
 #: data/economy/freelance.json
 msgid "Clean up the books of %s"
 msgstr "帮 %s 整理帐务"
+
+#: data/events/hotel_strike.json
+msgid "Cleaning capacity drops to sixty percent for six days."
+msgstr "六天内清洁产能降到六成。"
+
+#: data/events/hotel_strike.json
+msgid "Cleaning nearly stops for ten days and morale falls."
+msgstr "清洁几乎停摆十天，员工士气也下降。"
+
+#: scripts/ui/hotel_ui.gd:240
+msgid "Cleanliness"
+msgstr "清洁"
 
 #: scripts/ui/minigames/route_game.gd:85
 msgid "Clear"
@@ -3162,6 +3402,10 @@ msgstr "公司登记规费——%s"
 msgid "Compare orders per day and unit margin after a price change; selling twice as many units is not useful if each loses money."
 msgstr "调价后一起看每日订单与单件毛利；如果每件都亏钱，多卖一倍也没有帮助。"
 
+#: scripts/sim/hotel.gd:91
+msgid "Complete the previous growth stage."
+msgstr "请先完成上一个成长阶段。"
+
 #: scripts/sim/media.gd:180
 msgid "Complete two campaigns and hire a designer and media buyer before buying Campus Radio."
 msgstr "完成两场活动，聘用设计师与媒体采购员后，再收购 Campus Radio。"
@@ -3205,6 +3449,10 @@ msgstr "合规专员是今年最抢手的职缺。"
 #: scripts/sim/compliance.gd:145
 msgid "Compliance: filings, checks and the compliance officer — %s"
 msgstr "合规：申报、审查与合规专员 — %s"
+
+#: scripts/ui/hotel_ui.gd:242
+msgid "Condition of rooms %d%% · housekeeping gap %.1f rooms · walks so far %d (cost %s)"
+msgstr "客房状况 %d%% · 房务缺口 %.1f 间 · 累计被赶走 %d 位（赔偿 %s）"
 
 #: scripts/ui/modals/purchase_return_modal.gd:55
 msgid "Confirm cancellation"
@@ -3466,6 +3714,14 @@ msgstr "Crestline 的秋季灯具系列。有一层架子还空着。"
 msgid "Crestline's offer is in Company OS → Contracts: accept, counter or decline"
 msgstr "Crestline 的报价在 Company OS →「合约」：接受、还价或拒绝"
 
+#: scripts/sim/hotel.gd:482
+msgid "Critic Vera Stone published her review: %.1f stars."
+msgstr "评论家 Vera Stone 发表了评价：%.1f 颗星。"
+
+#: data/events/hotel_vera_visit.json
+msgid "Critic on the guest list"
+msgstr "房客名单上有评论家"
+
 #: scripts/ui/modals/settlement_modal.gd:68
 msgid "Cross-border payments are jammed. The supplier ships only once your money lands on their side."
 msgstr "跨境付款大塞车。钱要到了对方那边，供应商才会出货。"
@@ -3566,6 +3822,10 @@ msgstr "司机"
 msgid "Daily"
 msgstr "每日"
 
+#: scripts/ui/hotel_ui.gd:51
+msgid "Daily operations"
+msgstr "每日营运"
+
 #: data/help/help.json
 msgid "Daily reports track impressions, clicks and conversions. Finish the scope, then invoice service fees, media rebates and earned KPI bonuses."
 msgstr "每日报告追踪曝光、点击与转换。完成工作范围后，开立服务费、媒体回扣及达标奖金的发票。"
@@ -3621,6 +3881,10 @@ msgstr "日期"
 #: scripts/frontend/main_menu.gd:57
 msgid "Day %d"
 msgstr "第 %d 天"
+
+#: scripts/ui/hotel_ui.gd:254
+msgid "Day %d · %s · %.1f of 5 · weight %d"
+msgstr "第 %d 天 · %s · %.1f／5 · 权重 %d"
 
 #: scripts/ui/modals/save_list_modal.gd:83
 msgid "Day %d · personal %s"
@@ -3790,9 +4054,21 @@ msgstr "外送单：报酬与截止时间"
 msgid "Delivery unavailable"
 msgstr "无法交货"
 
+#: data/economy/hotel.json
+msgid "Deluxe"
+msgstr "豪华房"
+
+#: data/help/glossary.json
+msgid "Demand calendar"
+msgstr "需求日历"
+
 #: data/help/glossary.json
 msgid "Demand changes when your price moves relative to the market price. A higher price earns more per sale but can reduce orders."
 msgstr "售价相对市场价格改变时，需求也会变；涨价每笔赚更多，但订单可能减少。"
+
+#: data/events/hotel_slump.json
+msgid "Demand is lower for four weeks, then returns on its own."
+msgstr "需求会低迷四周，之后自行恢复。"
 
 #: data/events/viral_mention.json
 msgid "Demand ×3 for 3 days. Stock is the bottleneck."
@@ -3905,6 +4181,26 @@ msgstr "餐饮"
 #: data/economy/media.json
 msgid "Direct"
 msgstr "直接"
+
+#: data/dialogue/henri_dubois_intro.json
+msgid "Direct guests pay no commission but are few. The booking platform brings volume and takes fifteen to eighteen percent. Overbook a little, because some guests never arrive, but a walked guest costs you a room and a review."
+msgstr "直订客没有佣金，但人数少。订房平台带来大量客人，要抽 15% 到 18%。可以稍微超卖，因为有些客人不会出现；但被赶走的客人会让你赔一间房，还换来一则负评。"
+
+#: data/help/help.json
+msgid "Direct guests pay no commission, the OTA brings volume for 15% to 18%, and agency blocks lock rooms at 25% off weeks ahead."
+msgstr "直订客没有佣金，OTA 带来量但抽 15% 到 18%，旅行社团体房则提前数周以七五折锁房。"
+
+#: data/help/glossary.json
+msgid "Direct guests pay you with no commission. The OTA takes 15% (standard) or 18% (featured) of each night and pays a weekly statement Net 30. Agency blocks give 25% off."
+msgstr "直订客直接付款，没有佣金。OTA 每晚抽 15%（标准）或 18%（精选），每周出帐单、30 天后付款。旅行社团体房折扣 25%。"
+
+#: scripts/sim/hotel.gd:401
+msgid "Direct room revenue"
+msgstr "直订房费收入"
+
+#: scripts/ui/hotel_ui.gd:133
+msgid "Direct: no commission, lower volume. OTA %s: %d%% commission on every night, more guests. Agency group blocks: 25%% off, rooms locked in advance (see Groups and OTA)."
+msgstr "直订：没有佣金，量较少。OTA「%s」：每晚抽 %d%% 佣金，客人较多。旅行社团体房：折扣 25%%，房间提前锁定（见「团体房与 OTA」）。"
 
 #: autoload/save_system.gd:367
 msgid "Directories & Files:"
@@ -4062,6 +4358,10 @@ msgstr "出口"
 msgid "EXPIRED"
 msgstr "已过期"
 
+#: data/help/glossary.json
+msgid "Each checkout needs a full clean, each stayover a light one. Rooms nobody cleaned cannot be sold tonight."
+msgstr "每间退房要全面清洁，续住则只做简单整理。没人清的房间今晚不能卖。"
+
 #: scripts/ui/minigames/teller_cash_game.gd:23
 msgid "Each customer asks for a cash withdrawal. Click notes into the tray until it adds up exactly."
 msgstr "每位客人要提领现金。点击纸钞放进托盘，凑到刚好的金额。"
@@ -4070,9 +4370,17 @@ msgstr "每位客人要提领现金。点击纸钞放进托盘，凑到刚好的
 msgid "Each customer reads out an order. Build it: cup size, drink, milk and shots."
 msgstr "每位客人会说出点单。照着做：杯子大小、饮品、奶类、浓缩份数。"
 
+#: scripts/ui/hotel_ui.gd:107
+msgid "Each day shows expected occupancy at your current prices. Gold days are peak demand; purple days have a city event."
+msgstr "每格显示以目前房价预估的住房率。金色是需求旺日，紫色是有城市活动的日子。"
+
 #: data/help/patch_notes.json
 msgid "Each game has its own save slot. Starting another game keeps your existing games, and replacing a full slot preserves a backup."
 msgstr "每局游戏都有自己的存盘槽。开新局会保留原有游戏；槽满时取代存盘会先保留备份。"
+
+#: data/economy/staff.json
+msgid "Each housekeeper cleans about five rooms a day; rooms left dirty cannot be sold. Payroll is due even in low season."
+msgstr "每位房务员一天约清 5 间；没清的房间不能卖。淡季也要照发薪水。"
 
 #: data/help/help.json
 msgid "Each rail shows how often its payments landed on time. A frozen or failed payment lowers it."
@@ -4081,6 +4389,10 @@ msgstr "每个管道都会显示过去有多少款项准时到帐。款项被冻
 #: data/help/patch_notes.json
 msgid "Each screen explains itself on first use; its help button lets you read the explanation again."
 msgstr "第一次使用画面时会显示说明；之后可按说明按钮重看。"
+
+#: data/help/glossary.json
+msgid "Each stage needs occupancy, rating, reviews and staff, not only cash."
+msgstr "每个阶段除了现金，还要有住房率、评分、评价数与员工。"
 
 #: data/dialogue/ken_intro.json
 msgid "Earbuds, lamps, bottles, phone stands. MOQs are MOQs, don't haggle me on those."
@@ -4190,6 +4502,10 @@ msgstr "符合条件的进货单可取消或退货。营运清单保留最近的
 msgid "Eligible registered companies can buy from some suppliers now and pay after the stated number of days."
 msgstr "符合条件的登记公司可向部分供应商先买货，在指定天数后付款。"
 
+#: scripts/sim/hotel.gd:667
+msgid "Emergency repair"
+msgstr "紧急维修"
+
 #: data/regions/karu.json
 msgid "Emerging Market"
 msgstr "新兴市场"
@@ -4222,9 +4538,17 @@ msgstr "能源"
 msgid "Energy price swings"
 msgstr "能源价格波动"
 
+#: data/events/hotel_equipment_failure.json
+msgid "Engineers fix it today and the rooms stay on sale."
+msgstr "工程师今天就修好，房间照常贩售。"
+
 #: scripts/sim/manufacturing.gd:100
 msgid "Enter a positive unit price."
 msgstr "请输入大于零的单价。"
+
+#: data/dialogue/henri_dubois_intro.json
+msgid "Equipment ages. Tired rooms drag down every review until you renovate, and a renovated room is off sale while the painters work."
+msgstr "设备会老化。老旧房间会拉低每则评价，直到你翻新；翻新期间该房型不能卖。"
 
 #: scripts/sim/effects.gd:88
 msgid "Equity investment"
@@ -4361,6 +4685,10 @@ msgstr "主管"
 #: scripts/ui/tutorial.gd:621
 msgid "Exit"
 msgstr "出口"
+
+#: data/help/glossary.json
+msgid "Expected demand per day comes from weekday, season and city events such as festivals or trade fairs."
+msgstr "每天的预估需求来自星期几、季节，以及音乐节、商展等城市活动。"
 
 #: scripts/ui/modals/company_os.gd:1196
 msgid "Expected signups: %.1f/day · features shipped: %d · next feature %d / %d h"
@@ -4546,6 +4874,10 @@ msgstr "手脚快：工作产出 +30%。"
 msgid "Favorites:"
 msgstr "我的最爱："
 
+#: data/economy/hotel.json
+msgid "Featured listing"
+msgstr "精选曝光"
+
 #: autoload/clock.gd:14
 msgid "Feb"
 msgstr "2月"
@@ -4718,9 +5050,17 @@ msgstr "试衣间——换衣服"
 msgid "Five looks this season: Executive, Luxury Citywear, Travel, Formal Evening, and Logistics for the warehouse days."
 msgstr "这季有五种造型：主管、城市精品、旅行、晚宴，还有仓库日穿的现场工作服。"
 
+#: data/buildings/skyline_grand.json
+msgid "Five-star hotel"
+msgstr "五星级饭店"
+
 #: data/help/glossary.json
 msgid "Fix a wrong order before it arrives. Settlement fees stay paid; an unpaid invoice is reduced instead of returning cash."
 msgstr "在到货前修正买错的进货单。清算手续费不退还；未付发票会减少应付金额，不会退回现金。"
+
+#: scripts/sim/hotel.gd:676
+msgid "Flash sale after cancellation"
+msgstr "活动取消后的限时特卖"
 
 #: scripts/ui/minigames/barista_game.gd:7
 msgid "Flat white"
@@ -4805,6 +5145,10 @@ msgstr "表单 %d / %d"
 #: data/character/options.json
 msgid "Formal Evening"
 msgstr "晚宴"
+
+#: data/npcs/henri_dubois.json
+msgid "Former Aster Inn owner"
+msgstr "Aster 小旅馆前老板"
 
 #: scripts/ui/minigames/clerk_forms_game.gd:135
 msgid "Forms handled correctly: %d / %d"
@@ -4897,6 +5241,14 @@ msgstr "从现在起，城市照自己的步调走：进货要两三天，包裹
 #: data/buildings/harbor_point_fitness.json
 msgid "Front desk"
 msgstr "柜台"
+
+#: data/economy/staff.json
+msgid "Front desk agent"
+msgstr "柜台人员"
+
+#: scripts/ui/hotel_ui.gd:177
+msgid "Front desk coverage %d%% with %d staff."
+msgstr "柜台服务涵盖率 %d%%（%d 位柜台）。"
 
 #: data/help/glossary.json
 msgid "Frozen funds"
@@ -5130,6 +5482,14 @@ msgstr "毛利"
 msgid "Gross profit covers a month of rent."
 msgstr "毛利够付一个月房租了。"
 
+#: scripts/sim/hotel.gd:591
+msgid "Group block deposit refunded"
+msgstr "退还团体房订金"
+
+#: data/help/glossary.json
+msgid "Group blocks"
+msgstr "团体房"
+
 #: scripts/sim/media.gd:176
 msgid "Group business"
 msgstr "集团业务"
@@ -5137,6 +5497,18 @@ msgstr "集团业务"
 #: scripts/ui/media_ui.gd:43
 msgid "Group campaigns"
 msgstr "集团活动"
+
+#: scripts/sim/hotel.gd:546
+msgid "Group room block"
+msgstr "团体房"
+
+#: scripts/ui/hotel_ui.gd:51
+msgid "Groups and OTA"
+msgstr "团体房与 OTA"
+
+#: scripts/ui/hotel_ui.gd:233
+msgid "GroupsNextReviews"
+msgstr "GroupsNextReviews"
 
 #: data/story/chapters.json
 msgid "Grow {company}: $40,000 revenue in a month"
@@ -5154,6 +5526,10 @@ msgstr "长大，就是多了文档。"
 msgid "Growing."
 msgstr "在长大。"
 
+#: scripts/ui/hotel_ui.gd:51
+msgid "Growth"
+msgstr "成长"
+
 #: data/world/years.json
 msgid "Growth Fever"
 msgstr "成长狂热"
@@ -5161,6 +5537,34 @@ msgstr "成长狂热"
 #: data/regions/solterra.json
 msgid "Growth market"
 msgstr "成长市场"
+
+#: data/help/glossary.json scripts/ui/hotel_ui.gd:264
+msgid "Growth stages"
+msgstr "成长阶段"
+
+#: scripts/ui/hotel_ui.gd:280
+msgid "GrowthNextBoard"
+msgstr "GrowthNextBoard"
+
+#: scripts/sim/hotel.gd:94
+msgid "Guest rating at least %.1f (now %.1f)."
+msgstr "住客评分至少 %.1f（目前 %.1f）。"
+
+#: scripts/sim/hotel.gd:662
+msgid "Guest recovery and public reply"
+msgstr "客诉补偿与公开回复"
+
+#: data/help/glossary.json scripts/ui/hotel_ui.gd:237 scripts/ui/hotel_ui.gd:51
+msgid "Guest reviews"
+msgstr "住客评价"
+
+#: scripts/sim/hotel.gd:405
+msgid "Guest supplies, laundry and breakfast"
+msgstr "客房耗品、洗涤与早餐"
+
+#: scripts/ui/hotel_ui.gd:250
+msgid "Guests"
+msgstr "一般住客"
 
 #: scripts/ui/modals/pause_menu.gd:67
 msgid "Guide arrow"
@@ -5266,6 +5670,10 @@ msgstr "Harbor Home Goods"
 msgid "Harbor Line"
 msgstr "港区线"
 
+#: data/economy/hotel.json
+msgid "Harbor Music Festival"
+msgstr "港口音乐节"
+
 #: data/buildings/harbor_point_fitness.json
 msgid "Harbor Point Fitness"
 msgstr "Harbor Point 健身房"
@@ -5341,6 +5749,10 @@ msgstr "托管中"
 #: scripts/ui/minigames/cowork_host_game.gd:66
 msgid "Hello, I'm %s. I'm here to meet %s."
 msgstr "你好，我是 %s，来找 %s 开会。"
+
+#: data/npcs/henri_dubois.json
+msgid "Henri Dubois"
+msgstr "Henri Dubois"
 
 #: data/dialogue/okafor_intro.json
 msgid "Here are the papers. Read them. Then read them again."
@@ -5422,6 +5834,14 @@ msgstr "聘一位软件工程师（「人员」分页），你做别的事时他
 msgid "Hire a technician first."
 msgstr "请先雇用技师。"
 
+#: scripts/sim/hotel.gd:96
+msgid "Hire at least %d hotel staff (now %d)."
+msgstr "至少聘 %d 位旅馆员工（目前 %d）。"
+
+#: data/events/hotel_strike.json
+msgid "Hire replacement cleaners"
+msgstr "雇用临时清洁人员"
+
 #: data/story/chapters.json
 msgid "Hire your first employee (applicants reply within a day)"
 msgstr "聘用你的第一位员工（应征者一天内会回复）"
@@ -5449,6 +5869,10 @@ msgstr "征才"
 #: data/world/years.json
 msgid "Hiring gets harder: wages up 8% in a year."
 msgstr "越来越难征人：薪资一年涨 8%。"
+
+#: data/events/hotel_strike.json
+msgid "Hold firm"
+msgstr "强硬不让步"
 
 #: data/buildings/riverside_apartment.json data/character/options.json
 msgid "Home"
@@ -5498,9 +5922,25 @@ msgstr "自由座——月租"
 msgid "Hotel"
 msgstr "旅馆"
 
-#: data/businesses/hotel.json
+#: data/businesses/hotel.json scripts/sim/hotel.gd:733 scripts/ui/hotel_ui.gd:13
 msgid "Hotel / Tourism"
 msgstr "饭店／观光"
+
+#: data/npcs/vera_stone.json
+msgid "Hotel critic"
+msgstr "饭店评论家"
+
+#: scripts/sim/hotel.gd:410
+msgid "Hotel insurance, property tax and software"
+msgstr "旅馆保险、房屋税与系统费"
+
+#: data/help/glossary.json
+msgid "Hotel revenue management"
+msgstr "饭店营收管理"
+
+#: scripts/sim/hotel.gd:408
+msgid "Hotel utilities"
+msgstr "旅馆水电瓦斯"
 
 #: scripts/world/building_info.gd:84
 msgid "Hours: %s–%s · %s"
@@ -5514,9 +5954,37 @@ msgstr "店规：美式咖啡不加奶；馥列白一律双份浓缩。"
 msgid "House special"
 msgstr "招牌套餐"
 
+#: data/economy/staff.json
+msgid "Housekeeper"
+msgstr "房务员"
+
+#: data/help/help.json
+msgid "Housekeepers decide how many rooms can be sold. Reviews of cleanliness, service and value drive your OTA ranking and demand."
+msgstr "房务员决定能卖出几间房。清洁、服务与价值感的评价会影响 OTA 排名与需求。"
+
+#: scripts/ui/hotel_ui.gd:173
+msgid "Housekeeping can clean %.1f rooms a day; last night's turnover needs %.1f (rooms left dirty cannot be sold)."
+msgstr "房务一天可清 %.1f 间；昨晚的周转需要 %.1f 间（没清的房间不能卖）。"
+
+#: data/help/glossary.json scripts/ui/hotel_ui.gd:170
+msgid "Housekeeping capacity"
+msgstr "房务产能"
+
+#: scripts/sim/hotel.gd:683
+msgid "Housekeeping settlement bonus"
+msgstr "房务员和解奖金"
+
+#: data/events/hotel_strike.json
+msgid "Housekeeping strike"
+msgstr "房务员罢工"
+
 #: scripts/world/building_info.gd:172
 msgid "Housing"
 msgstr "租屋与住宿"
+
+#: data/dialogue/henri_dubois_intro.json
+msgid "How do I make money from rooms?"
+msgstr "房间要怎么赚钱？"
 
 #: data/dialogue/marcus_loan.json
 msgid "How do property mortgages work?"
@@ -5574,6 +6042,10 @@ msgstr "我看了你的帐，三个月的量。比我买过的多数公司都漂
 msgid "I read your numbers, not your pitch."
 msgstr "我看的是你的数字，不是你的演示文稿。"
 
+#: data/dialogue/vera_stone_intro.json
+msgid "I review hotels for a living. One of my reviews outweighs five ordinary guests, and I do not announce when I am staying."
+msgstr "我靠评论饭店维生。我的一则评价抵得上五位普通住客，而且我入住前从不通知。"
+
 #: data/dialogue/ana_register.json
 msgid "I want to register a company."
 msgstr "我要登记公司。"
@@ -5627,6 +6099,10 @@ msgid "INVOICED"
 msgstr "已开发票"
 
 #: data/help/glossary.json
+msgid "If everyone arrives, you pay walk compensation and the review suffers."
+msgstr "如果大家都来，你得付出赶客补偿，评价也会下降。"
+
+#: data/help/glossary.json
 msgid "If payroll lands before a customer pays, profitable sales can still leave cash below zero. Order stock only after allowing for that gap."
 msgstr "若发薪日早于客户付款日，销售有利润仍可能缺现金。进货前先预留这段空窗的资金。"
 
@@ -5641,6 +6117,10 @@ msgstr "如果你想成长得比现金允许的还快，打给我。"
 #: data/dialogue/victor_declined.json
 msgid "If your numbers get bigger, so will mine."
 msgstr "你的数字变大，我的也会跟着变大。"
+
+#: data/events/hotel_review_storm.json
+msgid "Ignore it"
+msgstr "置之不理"
 
 #: data/regions/karu.json
 msgid "Immature institutions"
@@ -5941,6 +6421,10 @@ msgstr "你的时间可以拿去做别的事，但不管有没有单，每周的
 #: data/help/glossary.json
 msgid "It is an operating cost, like rent. Build it into your prices, especially as you grow."
 msgstr "它跟房租一样是营运成本。要算进定价里，公司越大越要注意。"
+
+#: data/events/hotel_equipment_failure.json
+msgid "It is cheaper, but the affected rooms are off sale for six days."
+msgstr "比较便宜，但受影响的房间会停售六天。"
 
 #: data/help/glossary.json
 msgid "It is due every month whether the van moves or not, so a van that sits idle still costs you money."
@@ -6390,6 +6874,10 @@ msgstr "到工业区承租 12 号厂房、租用机台、登记为雇主并雇�
 msgid "Lease Unit 12, rent a machine and hire Tomas. Fixed costs continue even when the line is idle."
 msgstr "承租 12 号厂房、租用机台并雇用 Tomas。停线时也会持续产生固定成本。"
 
+#: scripts/ui/hotel_ui.gd:76
+msgid "Lease instead · %s per month plus equipment"
+msgstr "改成承租 · 每月 %s 加设备租金"
+
 #: scripts/ui/modals/lease_modal.gd:59
 msgid "Lease signed. Welcome to Suite 2B."
 msgstr "租约已签。欢迎来到 2B 室。"
@@ -6401,6 +6889,10 @@ msgstr "租约已签：%s"
 #: scripts/ui/modals/lease_modal.gd:61
 msgid "Lease signed: %s."
 msgstr "租约已签：%s。"
+
+#: scripts/ui/hotel_ui.gd:78
+msgid "Lease the Aster Inn · %s first month"
+msgstr "承租 Aster 小旅馆 · 首月 %s"
 
 #: data/buildings/harlow_finch.json
 msgid "Lease the brokerage office"
@@ -6418,9 +6910,21 @@ msgstr "租下转角店面"
 msgid "Lease the unit first."
 msgstr "请先租下店面。"
 
+#: scripts/sim/hotel.gd:149
+msgid "Lease your corner cafe before using its kitchen for breakfast."
+msgstr "请先承租街角咖啡店，才能用它的厨房做早餐。"
+
+#: scripts/ui/hotel_ui.gd:190
+msgid "Lease your corner cafe to serve breakfast from its kitchen at wholesale cost."
+msgstr "承租街角咖啡店后，就能用它的厨房以批发成本供应早餐。"
+
 #: scripts/ui/modals/lease_modal.gd:10
 msgid "Lease — "
 msgstr "租约——"
+
+#: scripts/ui/hotel_ui.gd:76 scripts/ui/hotel_ui.gd:78
+msgid "LeaseAster"
+msgstr "LeaseAster"
 
 #: scripts/sim/living.gd:92
 msgid "Leased %s for %s/month."
@@ -6514,6 +7018,10 @@ msgstr "执照承办员"
 msgid "Life Timeline"
 msgstr "人生纪录"
 
+#: data/events/hotel_equipment_failure.json
+msgid "Lift and hot water failure"
+msgstr "电梯与热水故障"
+
 #: data/character/options.json scripts/ui/minigames/photo_shoot_game.gd:91 scripts/ui/minigames/photo_shoot_game.gd:92
 msgid "Light"
 msgstr "浅色"
@@ -6581,6 +7089,14 @@ msgstr "产线调度"
 #: data/help/help.json
 msgid "Line Planner: OEM production"
 msgstr "产线调度：代工生产"
+
+#: scripts/ui/hotel_ui.gd:191
+msgid "Linen, laundry and amenities cost %s per occupied room-night; utilities %s per room per day."
+msgstr "床单、洗涤与备品每间入住一晚成本 %s；水电每房每天 %s。"
+
+#: data/help/glossary.json
+msgid "Linen, laundry, amenities and breakfast are variable costs for each occupied room-night. Your own cafe kitchen supplies breakfast at wholesale cost."
+msgstr "床单、洗涤、备品与早餐是每间入住房晚的变动成本。自家咖啡店的厨房能以批发成本供应早餐。"
 
 #: scripts/sim/insolvency.gd:120
 msgid "Liquidation payment — %s"
@@ -6690,9 +7206,21 @@ msgstr "本地供应商通常接受到货后 14 天内退货。只能退原到�
 msgid "Local wholesaler. Reliable, not the cheapest."
 msgstr "本地批发商。可靠，但不是最便宜。"
 
+#: scripts/ui/hotel_ui.gd:223
+msgid "Lock %d rooms for the group"
+msgstr "为团体锁定 %d 间房"
+
 #: data/events/supplier_price_increase.json
 msgid "Lock in {moq} more at today's price"
 msgstr "用今天的价格再订 {moq} 件"
+
+#: scripts/sim/hotel.gd:568
+msgid "Locked a group block of %d rooms for %s."
+msgstr "已锁定 %d 间团体房（客户：%s）。"
+
+#: scripts/ui/hotel_ui.gd:225
+msgid "Locked: %d %s rooms for %d nights, %d done. The group pays at the end of the stay."
+msgstr "已锁定：%d 间%s，共 %d 晚，已住 %d 晚。团体在住宿结束后付款。"
 
 #: data/businesses/logistics.json data/regions/karu.json data/regions/lumina.json scripts/sim/logistics.gd:623
 msgid "Logistics"
@@ -6722,9 +7250,17 @@ msgstr "慢慢看。镜子很诚实，我大概也算诚实。"
 msgid "Look around the studio"
 msgstr "看看这间套房"
 
+#: data/buildings/observation_deck.json
+msgid "Look at the city view"
+msgstr "看看城市夜景"
+
 #: data/buildings/crestline_flagship.json
 msgid "Look at the lighting display"
 msgstr "看看灯具展示台"
+
+#: data/buildings/the_aster.json
+msgid "Look at the room list"
+msgstr "看看房型清单"
 
 #: data/story/chapters.json
 msgid "Look at you, comparing payment rails. Whatever happened to 'I just want to sell phone stands'?"
@@ -6790,6 +7326,14 @@ msgstr "房租便宜、老店林立、石板路和钟楼。在转角开一家咖
 msgid "Low weekly pay, but slower production than an experienced designer."
 msgstr "每周薪资较低，但制作速度比资深设计师慢。"
 
+#: scripts/sim/hotel.gd:657
+msgid "Low-season promotion"
+msgstr "淡季促销"
+
+#: data/events/hotel_slump.json
+msgid "Low-season slump"
+msgstr "淡季低迷"
+
 #: scripts/ui/minigames/cowork_host_game.gd:7
 msgid "Luca"
 msgstr "Luca"
@@ -6818,7 +7362,7 @@ msgstr "精品"
 msgid "Luxury Citywear"
 msgstr "城市精品"
 
-#: data/city/aurelia.json
+#: data/city/aurelia.json data/districts/luxury_heights.json
 msgid "Luxury Heights"
 msgstr "豪景高地"
 
@@ -7138,6 +7682,10 @@ msgstr "请达到 Ferro 的最低采购量。"
 msgid "Meet Marcus Reed now"
 msgstr "现在找 Marcus Reed 洽谈"
 
+#: scripts/sim/hotel.gd:106
+msgid "Meet every growth condition first."
+msgstr "请先满足所有成长条件。"
+
 #: scripts/ui/hud.gd:113 scripts/ui/modals/company_os.gd:1277
 msgid "Menu"
 msgstr "菜单"
@@ -7173,6 +7721,10 @@ msgstr "捷运 · 5 条路线"
 #: scripts/world/district.gd:74
 msgid "Metro — %s Station"
 msgstr "捷运——%s站"
+
+#: data/districts/luxury_heights.json
+msgid "Metro — Luxury Heights"
+msgstr "捷运 — 豪景高地"
 
 #: data/districts/university.json
 msgid "Metro — University"
@@ -7550,6 +8102,22 @@ msgstr "下一台机器"
 msgid "Next! Hi. What can I do for you?"
 msgstr "下一位！你好，要办什么？"
 
+#: scripts/ui/hotel_ui.gd:152
+msgid "Next: daily operations"
+msgstr "下一步：每日营运"
+
+#: scripts/ui/hotel_ui.gd:211
+msgid "Next: groups and OTA"
+msgstr "下一步：团体房与 OTA"
+
+#: scripts/ui/hotel_ui.gd:260
+msgid "Next: growth"
+msgstr "下一步：成长"
+
+#: scripts/ui/hotel_ui.gd:233
+msgid "Next: guest reviews"
+msgstr "下一步：住客评价"
+
 #: scripts/ui/manufacturing_ui.gd:141
 msgid "NextMachine"
 msgstr "NextMachine"
@@ -7638,6 +8206,10 @@ msgstr "没有%s的库存可以寄。"
 msgid "No active job to work on."
 msgstr "没有可进行的工单。"
 
+#: data/economy/hotel.json
+msgid "No breakfast"
+msgstr "不供早餐"
+
 #: data/events/viral_mention.json
 msgid "No changes."
 msgstr "不做任何改变。"
@@ -7685,6 +8257,10 @@ msgstr "没有空的机台位置。"
 #: scripts/ui/modals/company_os.gd:1027
 msgid "No gigs in progress. Pick one below."
 msgstr "目前没有进行中的案子，从下面挑一个。"
+
+#: scripts/ui/hotel_ui.gd:217
+msgid "No group block is waiting. New offers arrive every Monday morning."
+msgstr "目前没有待处理的团体房。新的提案每周一早上送来。"
 
 #: scripts/sim/bank.gd:129
 msgid "No lending ban"
@@ -7914,6 +8490,10 @@ msgstr "还不行：%s。"
 msgid "Notebook"
 msgstr "笔记本"
 
+#: data/dialogue/vera_stone_intro.json
+msgid "Noted. Every guest gets the same care."
+msgstr "记下了。每位客人都受到一样的照顾。"
+
 #: scripts/ui/minigames/photo_shoot_game.gd:9
 msgid "Nothing"
 msgstr "不摆"
@@ -8030,6 +8610,34 @@ msgstr "订单 %s"
 msgid "ORDERS DELIVERED"
 msgstr "已送达订单"
 
+#: scripts/sim/hotel.gd:510
+msgid "OTA commission deducted from statement"
+msgstr "从 OTA 帐单扣除佣金"
+
+#: scripts/ui/hotel_ui.gd:136
+msgid "OTA listing: %s"
+msgstr "OTA 上架：%s"
+
+#: scripts/sim/hotel.gd:497
+msgid "OTA room-night statement"
+msgstr "OTA 房晚对帐单"
+
+#: scripts/ui/hotel_ui.gd:139
+msgid "OTA share of rooms %d%%"
+msgstr "OTA 可售房数占比 %d%%"
+
+#: data/help/glossary.json scripts/ui/hotel_ui.gd:227
+msgid "OTA statements"
+msgstr "OTA 对帐单"
+
+#: scripts/ui/hotel_ui.gd:138
+msgid "OTAAllotLess"
+msgstr "OTAAllotLess"
+
+#: scripts/ui/hotel_ui.gd:140
+msgid "OTAAllotMore"
+msgstr "OTAAllotMore"
+
 #: scripts/ui/modals/wardrobe_modal.gd:45
 msgid "OUTFIT"
 msgstr "服装"
@@ -8045,6 +8653,14 @@ msgstr "燕麦拿铁？这里大家都喝燕麦奶。"
 #: scripts/ui/minigames/barista_game.gd:8
 msgid "Oat milk"
 msgstr "燕麦奶"
+
+#: data/buildings/observation_deck.json
+msgid "Observation Deck"
+msgstr "观景台"
+
+#: data/help/glossary.json
+msgid "Occupancy times average daily rate (ADR) is room revenue."
+msgstr "住房率乘以平均房价（ADR）就是房费收入。"
 
 #: data/businesses/hotel.json
 msgid "Occupancy, ADR, seasons."
@@ -8214,9 +8830,13 @@ msgstr "只有已登记的公司能申请。"
 msgid "Only registered companies can hold an import licence."
 msgstr "只有登记过的公司才能持有进口执照。"
 
-#: autoload/save_system.gd:367 scripts/ui/modals/city_map_modal.gd:112 scripts/ui/modals/city_map_modal.gd:158 scripts/ui/modals/city_map_modal.gd:74
+#: autoload/save_system.gd:367 scripts/ui/hotel_ui.gd:272 scripts/ui/modals/city_map_modal.gd:112 scripts/ui/modals/city_map_modal.gd:158
 msgid "Open"
 msgstr "打开"
+
+#: scripts/ui/hotel_ui.gd:278
+msgid "Open %s · %s"
+msgstr "开幕 %s · %s"
 
 #: scripts/ui/tutorial.gd:48
 msgid "Open Businesses"
@@ -8249,6 +8869,10 @@ msgstr "周一到周六 7:00–17:00 营业。打烊时结帐入银行；刷卡�
 #: scripts/ui/tutorial.gd:56
 msgid "Open Operations"
 msgstr "打开「营运」"
+
+#: scripts/sim/hotel.gd:733 scripts/ui/hotel_ui.gd:15 scripts/ui/hotel_ui.gd:20
+msgid "Open Rate Board"
+msgstr "打开房价看板"
 
 #: scripts/ui/tutorial.gd:60
 msgid "Open Sales"
@@ -8298,6 +8922,14 @@ msgstr "查看上月结算（%s）"
 msgid "Open now"
 msgstr "营业中"
 
+#: data/buildings/the_aster.json data/dialogue/henri_dubois_intro.json data/dialogue/owen_blake_intro.json data/dialogue/priya_nair_intro.json
+msgid "Open the Rate Board"
+msgstr "打开房价看板"
+
+#: data/buildings/skyline_grand.json
+msgid "Open the Rate Board (Voyago desk)"
+msgstr "打开房价看板（Voyago 柜台）"
+
 #: scripts/sim/media.gd:210
 msgid "Open the agency first."
 msgstr "请先开设代理工作室。"
@@ -8338,6 +8970,10 @@ msgstr "请先开设工厂。"
 msgid "Open the group business before buying internal media."
 msgstr "请先开设集团业务，再购买内部广告。"
 
+#: scripts/sim/hotel.gd:153 scripts/sim/hotel.gd:649
+msgid "Open the hotel first."
+msgstr "请先开业旅馆。"
+
 #: scripts/ui/tutorial.gd:27
 msgid "Open your phone"
 msgstr "打开手机"
@@ -8353,6 +8989,10 @@ msgstr "OpenBrokerage"
 #: scripts/ui/manufacturing_ui.gd:79
 msgid "OpenFactory"
 msgstr "OpenFactory"
+
+#: scripts/sim/hotel.gd:122
+msgid "Opened %s."
+msgstr "「%s」开幕了。"
 
 #: scripts/sim/real_estate.gd:26
 msgid "Opened Harlow & Finch brokerage."
@@ -8377,6 +9017,10 @@ msgstr "12 号工厂已开业。"
 #: autoload/game_state.gd:35
 msgid "Opening balance — savings"
 msgstr "期初余额——个人存款"
+
+#: scripts/sim/hotel.gd:92
+msgid "Operate for %d days at this stage (%d so far)."
+msgstr "在此阶段营运满 %d 天（目前 %d 天）。"
 
 #: scripts/sim/assets.gd:33
 msgid "Operating asset: %s"
@@ -8413,6 +9057,10 @@ msgstr "营运方冻结所有跨链桥转帐约一周，追查资金去向。"
 #: data/world/years.json
 msgid "Operators: 'Most balances will be restored. There is a shortfall.'"
 msgstr "营运方：「大部分余额会回复，但有缺口。」"
+
+#: scripts/ui/hotel_ui.gd:211
+msgid "OpsNextGroups"
+msgstr "OpsNextGroups"
 
 #: data/dialogue/lina_intro.json
 msgid "Or digital dollars through a licensed exchange. Minutes, tiny fee. But you're trusting the platform, not a bank."
@@ -8502,6 +9150,34 @@ msgstr "外包给 Kessler · 单位成本较高"
 msgid "Oval"
 msgstr "鹅蛋"
 
+#: scripts/ui/hotel_ui.gd:239
+msgid "Overall %.1f of 5 from %d reviews in the last %d days. Cleanliness 35%%, service 35%%, value 30%%. Vera Stone's review counts five times."
+msgstr "总分 %.1f／5（%d 则评价，近 %d 天）。清洁占 35%%、服务占 35%%、价值感占 30%%。Vera Stone 的评价算五倍。"
+
+#: scripts/ui/hotel_ui.gd:144
+msgid "OverbookLess"
+msgstr "OverbookLess"
+
+#: scripts/ui/hotel_ui.gd:146
+msgid "OverbookMore"
+msgstr "OverbookMore"
+
+#: data/help/glossary.json
+msgid "Overbooking"
+msgstr "超卖"
+
+#: scripts/ui/hotel_ui.gd:145
+msgid "Overbooking %d%% · walk cost about %s per guest at the Standard price"
+msgstr "超卖 %d%% · 以标准房价计，每位被赶走的客人约赔 %s"
+
+#: scripts/ui/hotel_ui.gd:141
+msgid "Overbooking and peak pricing"
+msgstr "超卖与旺日加价"
+
+#: scripts/sim/hotel.gd:140
+msgid "Overbooking must stay between 0% and 10%."
+msgstr "超卖比例必须在 0% 到 10% 之间。"
+
 #: data/help/glossary.json
 msgid "Overdraft"
 msgstr "透支"
@@ -8538,6 +9214,14 @@ msgstr "欠款（银行、薪资、供应商）"
 msgid "Owed to you (ShopLane + invoices)"
 msgstr "别人欠你（ShopLane＋发票）"
 
+#: data/npcs/owen_blake.json
+msgid "Owen Blake"
+msgstr "Owen Blake"
+
+#: data/dialogue/owen_blake_intro.json
+msgid "Owen Blake, Blake Journeys. I move tour groups. Give me twenty-five percent off the rack rate and I will lock a block of rooms weeks ahead, then pay you thirty days after the stay."
+msgstr "我是 Owen Blake，Blake 旅游。我带旅行团。给我定价七五折，我就提前数周锁一批房，住宿结束三十天后付款。"
+
 #: scripts/sim/real_estate.gd:123
 msgid "Own a rental and obtain the Lot 7 building permit at City Hall first."
 msgstr "先持有出租对象，并到市政厅取得 7 号地建照。"
@@ -8549,6 +9233,10 @@ msgstr "先持有出租对象，再申请建照。"
 #: data/help/help.json
 msgid "Own a rental before applying for the Lot 7 building permit. Ruiz construction uses paid monthly milestones; unfinished buildings cannot be sold."
 msgstr "持有出租对象后才能申请 7 号地建照。Ruiz 工程按月支付里程碑款，未完工大楼不能出售。"
+
+#: data/economy/hotel.json
+msgid "Own cafe kitchen"
+msgstr "自家咖啡店厨房"
 
 #: data/help/glossary.json
 msgid "Own van or courier?"
@@ -8890,6 +9578,14 @@ msgstr "暂停"
 msgid "Pay"
 msgstr "薪资"
 
+#: data/events/hotel_equipment_failure.json
+msgid "Pay $2,400 for an emergency repair"
+msgstr "花 $2,400 紧急维修"
+
+#: data/events/hotel_strike.json
+msgid "Pay a $350 settlement bonus each"
+msgstr "每人发 $350 和解奖金"
+
 #: scripts/ui/modals/settlement_modal.gd:34
 msgid "Pay a supplier abroad"
 msgstr "付款给国外供应商"
@@ -8998,13 +9694,21 @@ msgstr "薪水已发：%s。"
 msgid "Payroll — %d people"
 msgstr "薪资——%d 人"
 
+#: scripts/ui/hotel_ui.gd:150
+msgid "Peak-day surcharge %d%% on days at ×%.1f demand or more"
+msgstr "旺日加价 %d%%（适用需求达 ×%.1f 以上的日子）"
+
+#: scripts/ui/hotel_ui.gd:149
+msgid "PeakLess"
+msgstr "PeakLess"
+
+#: scripts/ui/hotel_ui.gd:151
+msgid "PeakMore"
+msgstr "PeakMore"
+
 #: scripts/sim/ledger.gd:30
 msgid "Penalties"
 msgstr "违约金"
-
-#: data/city/aurelia.json
-msgid "Penthouses, clubs, fine dining."
-msgstr "顶层豪宅、会所、高级餐厅。"
 
 #: scripts/ui/modals/company_os.gd:7
 msgid "People"
@@ -9306,9 +10010,17 @@ msgstr "价格与需求"
 msgid "Price and your rating move conversion; flyers bring more people past the door."
 msgstr "价格和评分会影响进店率；传单能让更多人经过你的店。"
 
+#: data/dialogue/henri_dubois_intro.json
+msgid "Price is the whole game. Look at the thirty-day calendar: weekends and festivals sell themselves, Tuesdays do not. Raise prices when the calendar is gold, and never leave rooms empty for pride."
+msgstr "定价就是这门生意的全部。看三十天日历：周末和活动自己会卖，周二不会。日历变金色就涨价，也别为了面子让房间空着。"
+
 #: data/events/viral_mention.json
 msgid "Price raised."
 msgstr "已涨价。"
+
+#: scripts/ui/hotel_ui.gd:128
+msgid "Price_%s_%s"
+msgstr "Price_%s_%s"
 
 #: data/events/supply_shock_plan.json
 msgid "Prices are up and lead times are longer until the ports clear. Nobody knows how long."
@@ -9321,6 +10033,14 @@ msgstr "Priti"
 #: data/npcs/priya.json scripts/ui/minigames/cowork_host_game.gd:9
 msgid "Priya"
 msgstr "Priya"
+
+#: data/npcs/priya_nair.json
+msgid "Priya Nair"
+msgstr "Priya Nair"
+
+#: data/dialogue/priya_nair_intro.json
+msgid "Priya Nair, Voyago. We list your rooms in front of ten thousand travellers. The standard listing costs fifteen percent per night; the featured listing costs eighteen and ranks higher."
+msgstr "我是 Priya Nair，Voyago 订房平台。我们把你的房间放到一万名旅客眼前。标准上架每晚抽 15%，精选上架抽 18%，排名更前面。"
 
 #: data/jobs/cowork_host.json
 msgid "Priya hands you the event calendar. It's full."
@@ -9586,6 +10306,10 @@ msgstr "管道可靠度"
 msgid "Raise +8%"
 msgstr "加薪 8%"
 
+#: data/help/glossary.json
+msgid "Raise prices on gold days and be careful before locking group rooms on them."
+msgstr "金色日子要涨价，锁团体房前要三思。"
+
 #: data/events/viral_mention.json
 msgid "Raise the price 15%"
 msgstr "涨价 15%"
@@ -9606,6 +10330,14 @@ msgstr "咖啡材料用完，%d 位客人没买到。"
 msgid "Randomize"
 msgstr "随机"
 
+#: scripts/ui/hotel_ui.gd:51 scripts/ui/hotel_ui.gd:7
+msgid "Rate Board"
+msgstr "房价看板"
+
+#: data/help/help.json
+msgid "Rate Board: price, channels, rooms"
+msgstr "房价看板：价格、通路、房间"
+
 #: data/world/years.json
 msgid "Rates stay low as startup filings hit a record."
 msgstr "利率维持低档，新创登记数创新高。"
@@ -9613,6 +10345,14 @@ msgstr "利率维持低档，新创登记数创新高。"
 #: data/help/glossary.json
 msgid "Rating"
 msgstr "评分"
+
+#: scripts/ui/hotel_ui.gd:58
+msgid "Rating %.1f of 5 · occupancy %d%% (30 days) · ADR %s · RevPAR %s · cash %s"
+msgstr "评分 %.1f／5 · 近 30 天住房率 %d%% · 平均房价 %s · 每房营收 %s · 现金 %s"
+
+#: data/help/glossary.json
+msgid "Rating changes your direct bookings and your OTA ranking."
+msgstr "评分会影响直订量与 OTA 排名。"
 
 #: scripts/ui/modals/company_os.gd:1273
 msgid "Rating ★ %.1f: queues, running out and high prices pull it down."
@@ -9742,9 +10482,25 @@ msgstr "招募%s"
 msgid "Recruit a realty agent"
 msgstr "招募房仲人员"
 
+#: scripts/ui/hotel_ui.gd:182
+msgid "Recruit front desk · %s per week"
+msgstr "招募柜台 · 每周 %s"
+
+#: scripts/ui/hotel_ui.gd:181
+msgid "Recruit housekeeper · %s per week"
+msgstr "招募房务员 · 每周 %s"
+
 #: scripts/ui/real_estate_ui.gd:109
 msgid "RecruitRealtyAgent"
 msgstr "RecruitRealtyAgent"
+
+#: scripts/ui/hotel_ui.gd:182
+msgid "Recruit_front_desk"
+msgstr "Recruit_front_desk"
+
+#: scripts/ui/hotel_ui.gd:181
+msgid "Recruit_housekeeper"
+msgstr "Recruit_housekeeper"
 
 #: scripts/sim/ledger.gd:30
 msgid "Recruiting"
@@ -9846,7 +10602,7 @@ msgstr "登记并付款"
 msgid "Register (%s)"
 msgstr "登记（%s）"
 
-#: scripts/sim/media.gd:16 scripts/sim/real_estate.gd:17 scripts/ui/media_ui.gd:50 scripts/ui/real_estate_ui.gd:67
+#: scripts/sim/hotel.gd:40 scripts/sim/media.gd:16 scripts/sim/real_estate.gd:17 scripts/ui/hotel_ui.gd:69
 msgid "Register a company and open its bank account first."
 msgstr "先登记公司并开设公司银行帐户。"
 
@@ -9982,6 +10738,10 @@ msgstr "退件（先点出错的字段）"
 msgid "Relevant reach"
 msgstr "有效触及"
 
+#: data/help/glossary.json
+msgid "Reliable volume, but the rooms are gone if demand later spikes."
+msgstr "量稳定，但如果之后需求暴增，这些房间已经卖掉了。"
+
 #: data/economy/staff.json
 msgid "Reliable: morale drops half as fast."
 msgstr "可靠：士气下降速度减半。"
@@ -10005,6 +10765,14 @@ msgstr "续期（%s）"
 #: scripts/sim/compliance.gd:110
 msgid "Renewed the import licence until %s."
 msgstr "进口执照续期到 %s。"
+
+#: scripts/ui/hotel_ui.gd:259
+msgid "Renovate %s · %s"
+msgstr "翻新%s · %s"
+
+#: scripts/ui/hotel_ui.gd:210
+msgid "Renovate %s · %s · %d days offline"
+msgstr "翻新%s · %s · 停售 %d 天"
 
 #: scripts/sim/real_estate.gd:114
 msgid "Renovate an empty owned unit before listing it."
@@ -10182,6 +10950,10 @@ msgstr "住宅翻修"
 msgid "Residential unit sold"
 msgstr "住宅单位售出"
 
+#: data/economy/hotel.json
+msgid "Resort spa and pool"
+msgstr "度假村 SPA 与泳池"
+
 #: data/regions/solterra.json
 msgid "Resources & Agriculture"
 msgstr "资源与农业"
@@ -10193,6 +10965,14 @@ msgstr "回复"
 #: data/buildings/lantern_bistro.json data/buildings/shift_diner.json
 msgid "Restaurant"
 msgstr "餐厅"
+
+#: scripts/sim/hotel.gd:416
+msgid "Restaurant and bar sales"
+msgstr "餐厅与酒吧营收"
+
+#: scripts/sim/hotel.gd:417
+msgid "Restaurant ingredients"
+msgstr "餐厅食材"
 
 #: data/story/chapters.json
 msgid "Restock from Lumina Direct before the rush: pay the way that suits you (Company OS → Operations)"
@@ -10318,6 +11098,10 @@ msgstr "查看下一步"
 msgid "Review properties and respond"
 msgstr "查看对象并处理"
 
+#: data/events/hotel_review_storm.json scripts/ui/hotel_ui.gd:252
+msgid "Review storm"
+msgstr "负评风暴"
+
 #: data/events/unexpected_large_order.json
 msgid "Review terms in Company OS → Contracts. Accept, counter or decline there."
 msgstr "到 Company OS → 合约查看条款。可以接受、还价或拒绝。"
@@ -10329,6 +11113,10 @@ msgstr "检阅活动并回应"
 #: data/economy/freelance.json
 msgid "Review the prices of %s"
 msgstr "帮 %s 查看定价"
+
+#: scripts/ui/hotel_ui.gd:260
+msgid "ReviewsNextGrowth"
+msgstr "ReviewsNextGrowth"
 
 #: scripts/ui/minigames/parcel_sort_game.gd:9
 msgid "Reyes"
@@ -10402,9 +11190,29 @@ msgstr "河畔区看板"
 msgid "Riverstone Bakery"
 msgstr "Riverstone Bakery"
 
+#: data/help/glossary.json
+msgid "Room equipment"
+msgstr "客房设备"
+
+#: scripts/ui/hotel_ui.gd:193
+msgid "Room equipment and renovation"
+msgstr "客房设备与翻新"
+
+#: data/help/glossary.json
+msgid "Room fit-outs are assets that wear out, need service and can break. Renovation restores condition but takes the rooms off sale."
+msgstr "客房装潢是会老化、需要保养、也会故障的资产。翻新能恢复状况，但该房型会停售。"
+
 #: scripts/ui/modals/van_deal_modal.gd:38
 msgid "Room for"
 msgstr "载货量"
+
+#: scripts/ui/hotel_ui.gd:120
+msgid "Room prices"
+msgstr "房型价格"
+
+#: data/help/glossary.json
+msgid "Rooms are perishable: an empty room tonight earns nothing tomorrow. You choose prices, channels and overbooking; a night audit sells the rooms."
+msgstr "房间是易逝品：今晚空着的房间明天不能补卖。你决定价格、通路与超卖，夜间结算会把房间卖出去。"
 
 #: data/npcs/harbor_point.json
 msgid "Rosa · Harbor Point Fitness"
@@ -10501,6 +11309,14 @@ msgstr "%s 号外送单收入 %s。"
 #: scripts/sim/logistics.gd:564
 msgid "Run %s was cancelled: the deadline passed."
 msgstr "%s 号外送单被取消了：超过截止时间。"
+
+#: data/events/hotel_event_cancelled.json
+msgid "Run a $1,200 flash sale"
+msgstr "推出 $1,200 的限时特卖"
+
+#: data/events/hotel_slump.json
+msgid "Run a $1,800 discount campaign"
+msgstr "推出 $1,800 的折扣活动"
 
 #: scripts/ui/manufacturing_ui.gd:142
 msgid "Run for %d hours"
@@ -10714,9 +11530,45 @@ msgstr "立即存盘"
 msgid "Save slot %d is damaged."
 msgstr "第 %d 个存盘槽的主档已损坏。"
 
+#: scripts/sim/hotel.gd:690
+msgid "Save the VIP upgrade cost first."
+msgstr "请先备好 VIP 升等的成本。"
+
 #: scripts/sim/media.gd:59 scripts/ui/media_ui.gd:104
 msgid "Save the creative production cost first."
 msgstr "请先准备创意制作费用。"
+
+#: scripts/sim/hotel.gd:666
+msgid "Save the emergency repair cost first."
+msgstr "请先备好紧急维修费。"
+
+#: scripts/sim/hotel.gd:609
+msgid "Save the equipment service cost first."
+msgstr "请先备好设备保养费。"
+
+#: scripts/sim/hotel.gd:107
+msgid "Save the expansion price first."
+msgstr "请先备好扩建费用。"
+
+#: scripts/sim/hotel.gd:50
+msgid "Save the first month of rent and equipment first."
+msgstr "请先备好首月租金与设备费。"
+
+#: scripts/sim/hotel.gd:675
+msgid "Save the flash-sale cost first."
+msgstr "请先备好特卖费用。"
+
+#: scripts/sim/hotel.gd:661
+msgid "Save the guest recovery cost first."
+msgstr "请先备好客诉补偿费。"
+
+#: scripts/sim/hotel.gd:682
+msgid "Save the housekeeping bonus first."
+msgstr "请先备好房务奖金。"
+
+#: scripts/sim/hotel.gd:656
+msgid "Save the promotion cost first."
+msgstr "请先备好促销费用。"
 
 #: scripts/sim/bank.gd:65
 msgid "Save the property down payment first."
@@ -10729,6 +11581,18 @@ msgstr "请先准备提案费用。"
 #: scripts/sim/media.gd:215
 msgid "Save the public-relations repair cost first."
 msgstr "请先准备公关修复费用。"
+
+#: scripts/sim/hotel.gd:625
+msgid "Save the renovation cost first."
+msgstr "请先备好翻新费用。"
+
+#: scripts/sim/hotel.gd:670
+msgid "Save the repair cost first."
+msgstr "请先备好维修费。"
+
+#: scripts/sim/hotel.gd:49
+msgid "Save the takeover price first."
+msgstr "请先备好顶让费用。"
 
 #: autoload/save_system.gd:421
 msgid "Save transfer"
@@ -10754,6 +11618,10 @@ msgstr "安排这笔订单"
 msgid "Scheduled"
 msgstr "已调度"
 
+#: scripts/sim/hotel.gd:671
+msgid "Scheduled repair"
+msgstr "调度维修"
+
 #: data/city/aurelia.json
 msgid "Schools, parks, families."
 msgstr "学校、公园、家庭。"
@@ -10765,6 +11633,10 @@ msgstr "得分"
 #: scripts/ui/minigames/mini_game.gd:119 scripts/ui/minigames/mini_game.gd:168
 msgid "Score %d%%"
 msgstr "得分 %d%%"
+
+#: data/help/glossary.json
+msgid "Score 1 to 5 from cleanliness, service and value for money. Only the last 60 days count. Critic Vera Stone's review weighs five times."
+msgstr "依清洁、服务与价值感打 1 到 5 分，只计算最近 60 天。评论家 Vera Stone 的评价算五倍。"
 
 #: scripts/ui/modals/info_modal.gd:90
 msgid "Scribbled in the corner: 'profit is an opinion, cash is a fact.'"
@@ -10898,6 +11770,14 @@ msgstr "服务器成本"
 msgid "Servers"
 msgstr "服务器"
 
+#: scripts/ui/hotel_ui.gd:240
+msgid "Service"
+msgstr "服务"
+
+#: scripts/ui/hotel_ui.gd:209
+msgid "Service %s equipment · %s"
+msgstr "保养%s设备 · %s"
+
 #: scripts/ui/manufacturing_ui.gd:95
 msgid "Service machine"
 msgstr "保养机台"
@@ -10913,6 +11793,10 @@ msgstr "办事"
 #: data/dialogue/lina_intro.json
 msgid "Set me up with a digital dollar account."
 msgstr "帮我开一个数字美元帐户。"
+
+#: scripts/ui/hotel_ui.gd:14
+msgid "Set room prices, channels and overbooking against a 30-day demand calendar."
+msgstr "对照 30 天需求日历，设置房价、通路与超卖。"
 
 #: data/help/help.json
 msgid "Set the price with − and +. Expected orders per day update as you change it: cheaper sells more but earns less per sale."
@@ -10949,6 +11833,10 @@ msgstr "共用费用依净营收比例分摊；没有营收时，留在「共用
 #: scripts/ui/media_ui.gd:140
 msgid "Shares total 100%. Changing the mix affects the next buying cycle, not past reports."
 msgstr "占比合计 100%。调整配置会影响下次采购，已完成的报告保持原数据。"
+
+#: data/events/hotel_vera_visit.json
+msgid "She is judged on your normal operation."
+msgstr "她看到的就是你平常的营运水准。"
 
 #: scripts/ui/tutorial.gd:23
 msgid "Shift"
@@ -11226,6 +12114,18 @@ msgstr "肤色"
 msgid "Skip"
 msgstr "略过"
 
+#: data/buildings/skyline_grand.json
+msgid "Skyline Grand"
+msgstr "Skyline Grand"
+
+#: data/buildings/skyline_grand.json
+msgid "Skyline Grand rack rates: Suites from $320, rooms from $210. They are fully booked in peak weeks, so mid-priced guests overflow to hotels like yours."
+msgstr "Skyline Grand 的定价：套房 $320 起，一般房 $210 起。旺周经常客满，中价位的客人会溢出到像你这样的旅馆。"
+
+#: data/buildings/observation_deck.json
+msgid "Skyline Observation Deck"
+msgstr "Skyline 观景台"
+
 #: data/buildings/riverside_apartment.json
 msgid "Sleep"
 msgstr "睡觉"
@@ -11382,6 +12282,10 @@ msgstr "东西扎实。运送有点久。"
 msgid "Solterra"
 msgstr "索特拉"
 
+#: data/help/glossary.json
+msgid "Some booked guests never arrive. Selling up to 10% more bookings than rooms fills those gaps."
+msgstr "有些订房的客人不会出现。多卖最多 10% 的订房可以补上这些空缺。"
+
 #: data/events/viral_mention.json
 msgid "Some creator with 400k followers just posted your {product_lower}."
 msgstr "有个 40 万粉丝的网红刚发文推了你的{product_lower}。"
@@ -11457,6 +12361,26 @@ msgstr "员工士气"
 #: data/help/help.json
 msgid "Staff work weekdays at your office and are paid every Friday at 17:00, so keep cash in the company."
 msgstr "员工平日在你的办公室上班，每周五 17:00 发薪，公司帐上要留现金。"
+
+#: scripts/ui/hotel_ui.gd:270
+msgid "Stage %d · %s · +%d rooms · %s"
+msgstr "第 %d 阶 · %s · 增加 %d 间 · %s"
+
+#: scripts/ui/hotel_ui.gd:265
+msgid "Stage 1 · Aster Inn · %d rooms (open)"
+msgstr "第 1 阶 · Aster 小旅馆 · %d 间（已开幕）"
+
+#: data/economy/hotel.json
+msgid "Standard"
+msgstr "标准房"
+
+#: data/economy/hotel.json
+msgid "Standard buffet"
+msgstr "标准自助早餐"
+
+#: data/economy/hotel.json
+msgid "Standard listing"
+msgstr "标准上架"
 
 #: scripts/ui/minigames/mini_game.gd:77
 msgid "Start"
@@ -11537,6 +12461,10 @@ msgstr "开始开发 SaaS 产品 %s。"
 #: scripts/sim/careers.gd:183
 msgid "Started freelancing as a consultant."
 msgstr "开始以顾问身份接案。"
+
+#: scripts/sim/hotel.gd:632
+msgid "Started renovating the %s rooms."
+msgstr "开始翻新%s。"
 
 #: data/character/options.json
 msgid "Startup Casual"
@@ -11690,6 +12618,10 @@ msgstr "陪衬道具"
 msgid "Subscriber churn"
 msgstr "订户流失率"
 
+#: data/economy/hotel.json
+msgid "Suite"
+msgstr "套房"
+
 #: data/dialogue/tom_office.json
 msgid "Suite 2B. Natural light, 40 square metres, storage out back."
 msgstr "2B 室。采光好，40 平方公尺，后面有仓库。"
@@ -11737,6 +12669,10 @@ msgstr "供应商"
 #: data/help/help.json
 msgid "Suppliers sell in minimum order quantities (MOQ). You pay up front and the stock arrives in a few days (ARRIVES shows when)."
 msgstr "供应商有最低订购量（MOQ）。要先付款，货几天后才到（「到货」会显示时间）。"
+
+#: data/help/glossary.json
+msgid "Supplies and breakfast"
+msgstr "耗品与早餐"
 
 #: scripts/ui/modals/company_os.gd:1293
 msgid "Supplies and the bakery"
@@ -11838,6 +12774,30 @@ msgstr "带我去"
 msgid "Take me there sets the existing gold guide arrow to the building door. Closed buildings still show their hours; you can enter once they open."
 msgstr "「带我去」会让金色引导箭头指向建筑门口。已打烊的建筑仍会显示营业时间，开门后即可进入。"
 
+#: scripts/ui/hotel_ui.gd:72
+msgid "Take over for %s, or lease with %s cash for the first month (you have %s)."
+msgstr "顶下需要 %s，或备好首月 %s 承租（你目前有 %s）。"
+
+#: data/economy/staff.json
+msgid "Take over or lease the Aster Inn before hiring hotel staff."
+msgstr "请先顶下或承租 Aster 小旅馆，才能聘请旅馆员工。"
+
+#: scripts/ui/hotel_ui.gd:19
+msgid "Take over or lease the Aster Inn in Luxury Heights, then set prices on the Rate Board."
+msgstr "到豪景高地顶下或承租 Aster 小旅馆，再到房价看板设置价格。"
+
+#: data/help/help.json
+msgid "Take over or lease the Aster Inn, then set prices per room type against the 30-day demand calendar."
+msgstr "顶下或承租 Aster 小旅馆，再对照 30 天需求日历，设置各房型价格。"
+
+#: scripts/ui/hotel_ui.gd:67
+msgid "Take over the 12-room Aster Inn: set prices, choose channels and keep the rooms clean."
+msgstr "顶下 12 房的 Aster 小旅馆：定价、选通路，并维持房间干净。"
+
+#: scripts/ui/hotel_ui.gd:75
+msgid "Take over the Aster Inn · %s"
+msgstr "顶下 Aster 小旅馆 · %s"
+
 #: scripts/ui/modals/job_modal.gd:74 scripts/ui/tutorial.gd:84
 msgid "Take the job"
 msgstr "接受这份工作"
@@ -11849,6 +12809,10 @@ msgstr "接受退款"
 #: data/dialogue/lina_intro.json
 msgid "Take your time. The ships certainly are."
 msgstr "慢慢想。船也慢慢来。"
+
+#: scripts/ui/hotel_ui.gd:75
+msgid "TakeoverAster"
+msgstr "TakeoverAster"
 
 #: data/dialogue/ana_register.json
 msgid "Takes about 45 minutes to process."
@@ -11918,6 +12882,14 @@ msgstr "实习柜员"
 msgid "Teller — business banking"
 msgstr "柜台——企业金融"
 
+#: scripts/sim/hotel.gd:412
+msgid "Temporary cleaners"
+msgstr "临时清洁人员"
+
+#: scripts/ui/hotel_ui.gd:183
+msgid "Temporary cleaners: %s · %s per room"
+msgstr "临时清洁人员：%s · 每间 %s"
+
 #: scripts/ui/real_estate_ui.gd:133
 msgid "Tenant"
 msgstr "租客"
@@ -11986,6 +12958,10 @@ msgstr "那笔款项没有卡在跨链桥上。"
 msgid "That payment method isn't available."
 msgstr "目前不能用这种付款方式。"
 
+#: scripts/sim/hotel.gd:132
+msgid "That price is outside the allowed range."
+msgstr "这个价格超出允许范围。"
+
 #: scripts/sim/ecommerce.gd:320 scripts/ui/modals/purchase_return_modal.gd:23
 msgid "That purchase order no longer exists."
 msgstr "这张进货单已不存在。"
@@ -11993,6 +12969,10 @@ msgstr "这张进货单已不存在。"
 #: scripts/sim/rails.gd:263
 msgid "That rail is frozen."
 msgstr "那个管道已冻结。"
+
+#: scripts/sim/hotel.gd:554
+msgid "That room type is being renovated during the stay."
+msgstr "入住期间这个房型正在翻新。"
 
 #: scripts/sim/logistics.gd:406
 msgid "That route doesn't visit every stop once."
@@ -12029,6 +13009,10 @@ msgstr "已超过 %d 天的退货期限。"
 #: data/jobs/barista.json
 msgid "The 8 AM rush: forty flat whites and one oat-milk emergency."
 msgstr "早上 8 点的尖峰：四十杯澳白，外加一次燕麦奶危机。"
+
+#: data/buildings/the_aster.json
+msgid "The Aster"
+msgstr "The Aster"
 
 #: data/story/chapters.json
 msgid "The Big Contract"
@@ -12166,6 +13150,10 @@ msgstr "买方在交货前先付合约金额的一部分，余款依票期支付
 msgid "The buyer pays the invoice 30 or 60 days after delivery, not on the day they get the goods."
 msgstr "买方在交货后 30 或 60 天才付款，不是收到货当天。"
 
+#: data/dialogue/owen_blake_intro.json
+msgid "The catch is that those rooms are gone, even if a festival suddenly doubles demand. Read the calendar before you say yes."
+msgstr "代价是那些房间卖掉了，就算突然有活动让需求翻倍也一样。答应之前先看日历。"
+
 #: data/help/help.json
 msgid "The city map"
 msgstr "城市地图"
@@ -12226,6 +13214,10 @@ msgstr "雇主登记费是 %s。"
 msgid "The escrow contract returned your money. The fee is not refunded."
 msgstr "托管合约把钱退给你了。手续费不退。"
 
+#: data/events/hotel_event_cancelled.json
+msgid "The event leaves the calendar and group deposits are refunded."
+msgstr "活动从日历上移除，团体订金全数退还。"
+
 #: data/help/glossary.json
 msgid "The existing liquidation pays 80% of receivables once. The closed company cannot collect again or use your new company stock; old contracts remain visible as records."
 msgstr "清算一次回收应收帐款的 80%。已关闭公司不能再收一次钱，也不能使用新公司的库存；旧合约仍保留供查阅。"
@@ -12254,9 +13246,25 @@ msgstr "装修要 %s。"
 msgid "The fitters start tonight. Ready %s."
 msgstr "装修师傅今晚开工，%s 完工。"
 
+#: data/events/hotel_event_cancelled.json
+msgid "The flash sale refills some rooms for a week. Group deposits are refunded."
+msgstr "限时特卖让部分房间在一周内重新卖出，团体订金全数退还。"
+
 #: scripts/sim/company.gd:137
 msgid "The grant opens with the Green Shift."
 msgstr "补助要等绿色转型才开放。"
+
+#: scripts/ui/hotel_ui.gd:279
+msgid "The group Campaign Mixer can run an internal hotel campaign at media cost; measured conversions lift real demand for a few days."
+msgstr "集团的广告活动配置可以用媒体成本替旅馆投放内部广告；有成效的转换会让真实需求提高几天。"
+
+#: scripts/sim/hotel.gd:103
+msgid "The hotel is already at its largest size."
+msgstr "旅馆已经是最大规模。"
+
+#: scripts/sim/hotel.gd:41
+msgid "The hotel is already open."
+msgstr "旅馆已经开业。"
 
 #: data/help/glossary.json
 msgid "The interest costs far less than missing payroll or rent. Repay it as soon as the money arrives."
@@ -12273,6 +13281,10 @@ msgstr "帐本依同一存放地点的商品进价，计算每件平均成本。
 #: scripts/sim/cafe.gd:127 scripts/sim/compliance.gd:95
 msgid "The licence fee is %s."
 msgstr "执照费是 %s。"
+
+#: data/events/hotel_equipment_failure.json
+msgid "The lift and the hot water have broken in the same week."
+msgstr "电梯与热水在同一周坏了。"
 
 #: data/events/low_cash_warning.json
 msgid "The liquidator's van is on its way."
@@ -12306,6 +13318,10 @@ msgstr "营运方说冻结的余额会回来 {ratio}，其余的被黑客拿走�
 msgid "The order you visit the stops in. The shortest round trip is rarely the order on the client's list."
 msgstr "你走访各停靠点的顺序。最短的来回路线，通常不是客户清单上的顺序。"
 
+#: data/events/hotel_event_cancelled.json
+msgid "The organisers cancelled the next big city event. Group guests are leaving."
+msgstr "主办单位取消了下一场城市大型活动，团体客人要退订。"
+
 #: scripts/ui/minigames/pack_game.gd:203
 msgid "The other %d orders are packed at the same standard."
 msgstr "其余 %d 张订单照同样水准打包。"
@@ -12330,9 +13346,21 @@ msgstr "许可画面会列出下一个缺少的步骤；只有换包材、没有
 msgid "The pitch lost. Review creative fit before the next proposal."
 msgstr "提案未得标。下次提案前请检查创意是否符合客群。"
 
+#: data/events/hotel_slump.json
+msgid "The promotion softens the dip for two weeks, then it fades."
+msgstr "促销能在两周内减缓低迷，之后效果消退。"
+
 #: scripts/sim/company.gd:58
 msgid "The registration fee is %s."
 msgstr "登记规费是 %s。"
+
+#: scripts/sim/hotel.gd:720 scripts/sim/hotel.gd:721
+msgid "The renovated %s rooms are back on sale."
+msgstr "翻新完成的%s重新开卖。"
+
+#: data/events/hotel_review_storm.json
+msgid "The review stays heavy until fresh reviews dilute it."
+msgstr "这则评价会一直很有分量，直到新评价把它稀释。"
 
 #: data/help/help.json scripts/ui/minigames/route_game.gd:39
 msgid "The river can only be crossed at a bridge. Undo takes the last stop back; the route is drawn as you go."
@@ -12393,6 +13421,10 @@ msgstr "有银行做担保，供应商会更快出货。要付手续费，但买
 #: data/events/shipment_lost.json
 msgid "The supplier will ship again. Expect it {days} days late."
 msgstr "供应商会重新出货，预计晚 {days} 天到。"
+
+#: data/events/hotel_strike.json
+msgid "The team stays and no rooms are lost."
+msgstr "团队留下来，没有任何房间受影响。"
 
 #: data/help/help.json
 msgid "The teller is open weekdays 9 to 16. Loans are at the manager's desk."
@@ -12514,6 +13546,10 @@ msgstr "此客户需求在制作期间已到期。"
 msgid "This contract belongs to another company."
 msgstr "这份合约属于其他公司。"
 
+#: scripts/sim/hotel.gd:608
+msgid "This equipment needs no service today."
+msgstr "这些设备今天不需要保养。"
+
 #: scripts/ui/phone_ui.gd:294
 msgid "This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen."
 msgstr "这场游戏每隔几秒自动存到字段 %d。新游戏会用自己的字段；其他存盘可以在标题画面读取。"
@@ -12521,6 +13557,10 @@ msgstr "这场游戏每隔几秒自动存到字段 %d。新游戏会用自己的
 #: scripts/ui/modals/pause_menu.gd:20
 msgid "This game autosaves to slot %d."
 msgstr "这场游戏自动存在字段 %d。"
+
+#: scripts/sim/hotel.gd:561
+msgid "This group block has expired."
+msgstr "这笔团体房已过期。"
 
 #: scripts/sim/contracts.gd:86
 msgid "This invoice was sold to a collector as part of the company liquidation. The buyer will not pay the closed company again."
@@ -12550,7 +13590,7 @@ msgstr "这不是 City Venture 的存盘。"
 msgid "This is the same form you'll file for your own company, so the rules are worth remembering."
 msgstr "这就是你之后登记自己公司要填的表，规则值得记住。"
 
-#: scripts/sim/jobs.gd:38 scripts/sim/media.gd:203 scripts/sim/media.gd:77
+#: scripts/sim/hotel.gd:566 scripts/sim/jobs.gd:38 scripts/sim/media.gd:203 scripts/sim/media.gd:77
 msgid "This job is no longer available."
 msgstr "这张工单已无法承接。"
 
@@ -12581,6 +13621,10 @@ msgstr "这张进货单属于已关闭的公司。"
 #: scripts/sim/ecommerce.gd:324
 msgid "This purchase belongs to another business."
 msgstr "这张进货单属于其他企业。"
+
+#: scripts/sim/hotel.gd:620
+msgid "This room type is already being renovated."
+msgstr "这个房型已经在翻新。"
 
 #: scripts/save_codec.gd:13 scripts/save_codec.gd:24
 msgid "This save comes from a newer version of City Venture."
@@ -12622,6 +13666,10 @@ msgstr "四"
 msgid "Ticket A-%d. Now serving A-%d."
 msgstr "号码 A-%d。目前叫号 A-%d。"
 
+#: scripts/ui/hotel_ui.gd:137
+msgid "Tier: %s · %d%%"
+msgstr "方案：%s · %d%%"
+
 #: scripts/ui/modals/company_os.gd:1335
 msgid "Till"
 msgstr "收银"
@@ -12658,6 +13706,10 @@ msgstr "提醒你：在 ShopLane 限制你之前先把公司登记好。每个�
 msgid "Tips: %s"
 msgstr "小费：%s"
 
+#: data/help/glossary.json
+msgid "Tired rooms lower cleanliness and value scores in every review."
+msgstr "老旧房间会拉低每则评价的清洁与价值感分数。"
+
 #: scripts/ui/tutorial.gd:37
 msgid "To Startup Hub"
 msgstr "前往新创园区"
@@ -12673,6 +13725,18 @@ msgstr "Tobi Okafor"
 #: scripts/ui/modals/company_os.gd:1055
 msgid "Today's offers"
 msgstr "今日案子"
+
+#: scripts/ui/hotel_ui.gd:136
+msgid "ToggleOTA"
+msgstr "ToggleOTA"
+
+#: scripts/ui/hotel_ui.gd:137
+msgid "ToggleOTATier"
+msgstr "ToggleOTATier"
+
+#: scripts/ui/hotel_ui.gd:183
+msgid "ToggleTemp"
+msgstr "ToggleTemp"
 
 #: data/help/glossary.json
 msgid "Tokens that track the dollar and move between exchange accounts in minutes, any day of the week."
@@ -12702,9 +13766,17 @@ msgstr "今天太晚了，来不及上班：店快打烊了。先回家睡觉（
 msgid "Too many orders. Not enough hours."
 msgstr "订单太多，时间不够。"
 
+#: scripts/sim/hotel.gd:553
+msgid "Too many rooms of this type are already locked for those nights."
+msgstr "那几晚这个房型已锁定太多房间。"
+
 #: data/economy/marketplace.json
 msgid "Took a while to arrive."
 msgstr "等了好一阵子才到。"
+
+#: scripts/sim/hotel.gd:73
+msgid "Took over the Aster Inn."
+msgstr "顶下了 Aster 小旅馆。"
 
 #: scripts/ui/modals/company_os.gd:878
 msgid "Total"
@@ -12725,6 +13797,14 @@ msgstr "库存总值（帐面）"
 #: data/regions/northridge.json
 msgid "Tough competition"
 msgstr "竞争激烈"
+
+#: data/buildings/observation_deck.json
+msgid "Tour groups gather here before and after the evening view. Festival weekends fill every hotel in the city."
+msgstr "旅行团在傍晚赏景前后会聚集在这里。活动周末，全市的旅馆都会客满。"
+
+#: data/buildings/observation_deck.json
+msgid "Tourist attraction"
+msgstr "观光景点"
 
 #: data/regions/almeria.json
 msgid "Trade"
@@ -12758,9 +13838,21 @@ msgstr "交通"
 msgid "Travel"
 msgstr "旅行"
 
+#: scripts/ui/hotel_ui.gd:215
+msgid "Travel-agency group blocks"
+msgstr "旅行社团体房"
+
 #: scripts/ui/minigames/teller_cash_game.gd:71
 msgid "Tray: "
 msgstr "托盘："
+
+#: data/events/hotel_vera_visit.json
+msgid "Treat her as a VIP and comp the suite"
+msgstr "当作 VIP 招待，免费升等套房"
+
+#: data/events/hotel_vera_visit.json
+msgid "Treat her like any other guest"
+msgstr "和其他客人一视同仁"
 
 #: data/story/chapters.json
 msgid "Tried the new payment rails."
@@ -12834,6 +13926,10 @@ msgstr "呃。你看到这个了吗？？"
 msgid "Unanswered offers are withdrawn; undelivered contracts are terminated without an extra penalty. Unpaid delivered invoices are sold to a collector in the liquidation."
 msgstr "未回复报价会撤回，未交货合约会终止，不另收违约金。已交货未收款的发票随清算卖给催收公司。"
 
+#: scripts/ui/hotel_ui.gd:229
+msgid "Unbilled OTA nights this week: gross %s, commission %s. Statements are invoiced every %d days, paid Net %d."
+msgstr "本周尚未出帐的 OTA 房晚：总额 %s，佣金 %s。每 %d 天出一次帐单，%d 天后付款。"
+
 #: scripts/ui/minigames/route_game.gd:82 scripts/ui/minigames/teller_cash_game.gd:82
 msgid "Undo"
 msgstr "收回"
@@ -12889,6 +13985,10 @@ msgstr "未知的选项。"
 #: scripts/sim/manufacturing.gd:249
 msgid "Unknown factory crisis."
 msgstr "未知的工厂危机。"
+
+#: scripts/sim/hotel.gd:694
+msgid "Unknown hotel crisis."
+msgstr "未知的旅馆危机。"
 
 #: scripts/sim/saas.gd:54
 msgid "Unknown idea."
@@ -12954,6 +14054,10 @@ msgstr "用上一份备份"
 msgid "Use the Metro to Financial District, then enter Nexus Bank and go to the manager desk."
 msgstr "搭捷运到金融区，进入 Nexus Bank，前往经理桌。"
 
+#: data/help/glossary.json
+msgid "Use the OTA to fill empty nights, not nights you could sell directly."
+msgstr "用 OTA 补空房，不要拿来卖你本来就能直接卖出的夜晚。"
+
 #: data/help/help.json
 msgid "Use the tabs on the left. Every laptop and work desk opens the same system: home, co-work hot desk, café table, office."
 msgstr "用左边的分页切换。每台笔电和工作座位打开的都是同一套系统：家里、共享座位、咖啡店、办公室。"
@@ -12974,6 +14078,10 @@ msgstr "用中文输入法的话，请先切换成英文输入。"
 msgid "VENTURE TOWER"
 msgstr "创业大楼"
 
+#: scripts/sim/hotel.gd:691
+msgid "VIP suite upgrade for a critic"
+msgstr "为评论家升等 VIP 套房"
+
 #: scripts/ui/minigames/pack_game.gd:76
 msgid "Val"
 msgstr "Val"
@@ -12989,6 +14097,10 @@ msgstr "估值（买家愿意付多少）"
 #: scripts/ui/modals/company_os.gd:691
 msgid "Value"
 msgstr "价值"
+
+#: scripts/ui/hotel_ui.gd:240
+msgid "Value for money"
+msgstr "价值感"
 
 #: data/economy/staff.json
 msgid "Van Driver"
@@ -13045,6 +14157,18 @@ msgstr "车辆保险"
 #: scripts/sim/ledger.gd:32
 msgid "Vehicles & upkeep"
 msgstr "车辆与维护"
+
+#: data/npcs/vera_stone.json
+msgid "Vera Stone"
+msgstr "Vera Stone"
+
+#: data/events/hotel_vera_visit.json
+msgid "Vera Stone has booked a night under a false name. Her review counts five times."
+msgstr "Vera Stone 用假名订了一晚。她的评价算五倍。"
+
+#: scripts/ui/hotel_ui.gd:251
+msgid "Vera Stone ×5"
+msgstr "Vera Stone ×5"
 
 #: data/suppliers/verdant_supply.json
 msgid "Verdant Supply"
@@ -13114,6 +14238,10 @@ msgstr "在城市地图查看 Nexus Bank"
 msgid "Visit Nexus Co-work in Startup Hub (walk east)"
 msgstr "去新创园区的 Nexus 共享办公室（往东走）"
 
+#: scripts/sim/hotel.gd:42 scripts/ui/hotel_ui.gd:70
+msgid "Visit The Aster in Luxury Heights and meet Henri Dubois first."
+msgstr "请先到豪景高地的 The Aster 拜访 Henri Dubois。"
+
 #: scripts/frontend/character_creator.gd:149
 msgid "Visit Threadline on Shopping Street to browse the outfits available now."
 msgstr "到商店街的 Threadline 看看目前贩售的服装。"
@@ -13129,6 +14257,14 @@ msgstr "访客一个一个来到柜台。今天的预约名单在你的夹板上
 #: scripts/ui/minigames/cowork_host_game.gd:131
 msgid "Visitors handled correctly: %d / %d"
 msgstr "正确处理的访客：%d / %d"
+
+#: data/npcs/priya_nair.json
+msgid "Voyago booking-platform account manager"
+msgstr "Voyago 订房平台业务"
+
+#: data/help/glossary.json
+msgid "Voyago invoices your OTA nights each week. The commission is deducted from the receivable and the rest is paid Net 30."
+msgstr "Voyago 每周替你的 OTA 房晚出帐单。佣金从应收款中扣除，其余 30 天后付款。"
 
 #: scripts/ui/modals/loan_modal.gd:55 scripts/ui/modals/loan_modal.gd:59
 msgid "WHAT YOUR BOOKS SUPPORT"
@@ -13174,7 +14310,7 @@ msgstr "等第一笔订单"
 msgid "Wait for your stock to arrive: work a part-time shift meanwhile, and sleep at night"
 msgstr "等货到：这段时间去上兼职的班，晚上睡觉"
 
-#: data/events/rail_frozen.json
+#: data/events/hotel_slump.json data/events/rail_frozen.json
 msgid "Wait it out"
 msgstr "等它过去"
 
@@ -13185,6 +14321,14 @@ msgstr "等等。真的有人买了？？"
 #: scripts/ui/modals/city_map_modal.gd:117
 msgid "Walk between neighbouring districts, or take the Metro from any station."
 msgstr "相邻的区域可以走路，也可以从任一捷运站搭车。"
+
+#: scripts/sim/hotel.gd:577
+msgid "Walk compensation for a group block"
+msgstr "团体房被迫换房的补偿"
+
+#: scripts/sim/hotel.gd:411
+msgid "Walk compensation for overbooked guests"
+msgstr "超卖客人的赶客补偿"
 
 #: scripts/ui/tutorial.gd:38
 msgid "Walk east along the street (→). Past the end of Riverside is Startup Hub, where founders work."
@@ -13205,6 +14349,10 @@ msgstr "走到创业布告栏前按 E。选「电商」：批发进货，在网�
 #: scripts/ui/tutorial.gd:21
 msgid "Walk with WASD or the arrow keys. Hold Shift to run."
 msgstr "用 WASD 或方向键走路，按住 Shift 可以跑步。"
+
+#: scripts/ui/hotel_ui.gd:253
+msgid "Walked guests"
+msgstr "被赶走的客人"
 
 #: scripts/ui/modals/company_os.gd:1335
 msgid "Walked out"
@@ -13306,6 +14454,10 @@ msgstr "欢迎加入！每班 4 小时，营业时间内随时可以来。准备
 msgid "Welcome to Nexus Bank. How can I help?"
 msgstr "欢迎光临 Nexus 银行。有什么需要帮忙的？"
 
+#: data/dialogue/henri_dubois_intro.json
+msgid "Welcome to The Aster. Twelve rooms, one lift that sulks, and a night manager who has not slept since 2019. I am selling it before it sells me."
+msgstr "欢迎来到 The Aster。十二间房、一部爱闹脾气的电梯，还有一位从 2019 年就没睡过觉的夜班经理。我要在它把我卖掉之前，先把它卖掉。"
+
 #: data/dialogue/nina_first.json
 msgid "Welcome to Threadline. I'm Nina. Tape measure's for later."
 msgstr "欢迎来到 Threadline。我是 Nina。皮尺等一下再用。"
@@ -13329,6 +14481,10 @@ msgstr "发生了什么：%s"
 #: data/dialogue/sam_intro.json
 msgid "What have you got?"
 msgstr "你这里有什么？"
+
+#: data/dialogue/henri_dubois_intro.json
+msgid "What keeps guests coming back?"
+msgstr "怎样才能让客人回头？"
 
 #: data/dialogue/okafor_intro.json
 msgid "What was it before?"
@@ -13882,9 +15038,17 @@ msgstr "第一笔生意完成了！再兼一份差，钱会进来得更快。Blo
 msgid "Your first venture guides you through buying stock, listing, packing, shipping, and getting paid. Gold arrows and button highlights show your next step."
 msgstr "第一次创业带你跑完进货、上架、打包、寄送与收款。金色箭头和按钮提示会指出下一步。"
 
+#: data/dialogue/priya_nair_intro.json
+msgid "Your guest rating sets your ranking. Keep it high and the platform sends you more bookings without you lifting a finger."
+msgstr "你的住客评分决定排名。评分高，平台就会自动送更多订单给你。"
+
 #: scripts/ui/modals/world_map_modal.gd:76
 msgid "Your home market"
 msgstr "你的本地市场"
+
+#: data/events/hotel_strike.json
+msgid "Your housekeepers are threatening to walk out over the rota."
+msgstr "房务员因为排班问题威胁要罢工。"
 
 #: scripts/sim/compliance.gd:172
 msgid "Your import licence has expired. No imports until it's renewed at the permits kiosk."
@@ -14026,6 +15190,10 @@ msgstr "今天已经上过班了"
 msgid "api"
 msgstr "API"
 
+#: data/businesses/hotel.json
+msgid "aster inn"
+msgstr "Aster 小旅馆"
+
 #: data/businesses/manufacturing.json
 msgid "automation"
 msgstr "自动化"
@@ -14066,6 +15234,14 @@ msgstr "精品事务所"
 msgid "box too big"
 msgstr "箱子太大"
 
+#: data/businesses/hotel.json
+msgid "brasserie"
+msgstr "餐厅"
+
+#: scripts/ui/hotel_ui.gd:202
+msgid "broken: rooms not for sale"
+msgstr "故障：该房型停售"
+
 #: data/businesses/real_estate.json
 msgid "brokerage"
 msgstr "仲介"
@@ -14093,6 +15269,10 @@ msgstr "客户费用"
 #: scripts/sim/careers.gd:127 scripts/ui/tutorial.gd:445 scripts/ui/tutorial.gd:578
 msgid "closed now"
 msgstr "现在没营业"
+
+#: scripts/ui/hotel_ui.gd:136
+msgid "closed ✗"
+msgstr "已关闭 ✗"
 
 #: data/businesses/international_trade.json
 msgid "commission"
@@ -14246,6 +15426,18 @@ msgstr "到市政厅办食品处理执照"
 msgid "go to the workplace to work a shift"
 msgstr "要到工作地点才能上班"
 
+#: data/businesses/hotel.json
+msgid "group blocks"
+msgstr "团体房"
+
+#: scripts/ui/hotel_ui.gd:103
+msgid "group rooms"
+msgstr "团体房"
+
+#: data/businesses/hotel.json
+msgid "harbor resort"
+msgstr "港湾度假村"
+
 #: scripts/ui/minigames/photo_shoot_game.gd:261
 msgid "harsh light"
 msgstr "光线太硬"
@@ -14257,10 +15449,6 @@ msgstr "有你还没达成的条件"
 #: scripts/world/actions.gd:41
 msgid "hiring — ask about the job"
 msgstr "征人中——询问这份工作"
-
-#: data/businesses/hotel.json
-msgid "hotel group"
-msgstr "饭店集团"
 
 #: scripts/ui/modals/company_os.gd:204
 msgid "in the bank"
@@ -14434,6 +15622,10 @@ msgstr "尚无评价"
 msgid "not enough padding"
 msgstr "缓冲不够"
 
+#: scripts/ui/hotel_ui.gd:125
+msgid "not for sale"
+msgstr "停售"
+
 #: scripts/sim/careers.gd:122
 msgid "not hired here"
 msgstr "你没有在这里工作"
@@ -14470,6 +15662,10 @@ msgstr "没有要寄的"
 msgid "oem orders"
 msgstr "代工订单"
 
+#: scripts/ui/hotel_ui.gd:183
+msgid "off ✗"
+msgstr "关 ✗"
+
 #: scripts/ui/modals/company_os.gd:1049
 msgid "on delivery"
 msgstr "交件时"
@@ -14478,6 +15674,10 @@ msgstr "交件时"
 msgid "on the house (staff)"
 msgstr "员工免费"
 
+#: scripts/ui/hotel_ui.gd:183
+msgid "on ✓"
+msgstr "开 ✓"
+
 #: scripts/sim/bank.gd:262
 msgid "on-time payment"
 msgstr "准时还款"
@@ -14485,6 +15685,10 @@ msgstr "准时还款"
 #: scripts/sim/logistics.gd:65 scripts/sim/staff.gd:73
 msgid "open a business bank account first"
 msgstr "先开公司银行帐户"
+
+#: scripts/ui/hotel_ui.gd:136
+msgid "open ✓"
+msgstr "已上架 ✓"
 
 #: scripts/ui/modals/company_os.gd:1264
 msgid "out of 5"
@@ -14554,6 +15758,10 @@ msgstr "常客优惠价"
 msgid "relationship banker"
 msgstr "客户经理"
 
+#: scripts/ui/hotel_ui.gd:201
+msgid "renovating until %s"
+msgstr "翻新至 %s"
+
 #: data/businesses/cafe.json data/businesses/real_estate.json
 msgid "rent"
 msgstr "租金"
@@ -14563,8 +15771,8 @@ msgid "rentals"
 msgstr "租赁"
 
 #: data/businesses/hotel.json
-msgid "resort"
-msgstr "度假村"
+msgid "restaurant"
+msgstr "餐厅"
 
 #: data/businesses/ecommerce.json
 msgid "retail"
@@ -14597,6 +15805,10 @@ msgstr "寄出换货"
 #: data/businesses/saas.json
 msgid "servers"
 msgstr "服务器"
+
+#: scripts/ui/hotel_ui.gd:203
+msgid "service due"
+msgstr "需要保养"
 
 #: data/businesses/ecommerce.json data/businesses/international_trade.json
 msgid "shipping"

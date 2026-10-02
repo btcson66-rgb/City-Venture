@@ -73,7 +73,7 @@ static func hire_block(role := "") -> String:
 		return "open a business bank account first"
 	if not employer_registered():
 		return "register as an employer at City Hall"
-	if count() >= int(cfg().get("max_staff", 6)):
+	if count() >= (int(Hotel.cfg().get("business", {}).get("max_staff", 12)) if Hotel.is_running() else int(cfg().get("max_staff", 6))):
 		return "the team is full"
 	if role != "" and bool(role_def(role).get("needs_office", false)) and not Living.has_lease("suite_2b"):
 		return "needs an office (lease Suite 2B)"

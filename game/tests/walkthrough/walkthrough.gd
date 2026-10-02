@@ -105,6 +105,13 @@ func run() -> void:
 		await wait_world()
 		await _media()
 		await _save_load()
+		await close_modal()
+		GameState.new_game({"name":"Hotel Founder","seed":67001})
+		await _fast_forward_to_ch10()
+		SceneRouter._enter("interior","riverside_apartment","bed_side","")
+		await wait_world()
+		await _hotel()
+		await _save_load()
 
 
 func _arg(name: String) -> String:
@@ -1924,3 +1931,37 @@ func _media() -> void:
 	await metro_to("riverside")
 	await enter_building("riverside_apartment")
 	MiniGames.auto=previous_auto
+
+
+func _hotel() -> void:
+	bot.step("Luxury Heights — take over the Aster Inn, set the Rate Board, staff up and sell the first nights")
+	await popups()
+	await close_modal()
+	if SceneRouter.world_scene().kind=="interior":await exit_building()
+	await metro_to("luxury_heights")
+	await bot.shot("luxury_heights_day")
+	await enter_building("the_aster")
+	Ledger.post(GameState.company_id(),"QA hotel equity",[{"acct":"cash","dr":160000},{"acct":"equity","cr":160000}])
+	await bot.use_action("hotel_open")
+	await bot.click_named("TakeoverAster")
+	bot.expect(Hotel.is_running() and Hotel.total_rooms()==12,"actual takeover opens the 12-room Aster Inn")
+	await bot.shot("rate_board")
+	await bot.click_named("Price_standard_10")
+	await bot.click_named("BoardNextOps")
+	await bot.shot("hotel_operations")
+	await close_modal()
+	for role in ["housekeeper","housekeeper","front_desk"]:
+		if Staff.post_job(role).get("ok",false):
+			Clock.advance(18*60)
+			if not Staff.S()["applicants"].is_empty():Staff.hire(Staff.S()["applicants"][0]["id"])
+	Clock.advance(10*Clock.DAY)
+	await popups()
+	bot.expect(float(Hotel.stats(10)["occupancy"])>0 and -Ledger.balance(GameState.company_id(),"revenue")>0,"night audits sell rooms and book room revenue")
+	bot.expect(Ledger.check_balanced(),"hotel books balance")
+	await bot.use_action("hotel_open")
+	await bot.click_named("HotelTab_reviews")
+	await bot.shot("guest_reviews")
+	await close_modal()
+	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")

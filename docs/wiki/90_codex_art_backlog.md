@@ -741,3 +741,6 @@ Facade requests: `buildings/maple_court.png`, `buildings/birch_row.png`, `buildi
 
 ## #66 University / media
 Requested named facades: `aurelia_university.png`, `the_loft.png`, `campus_radio.png` plus corresponding `_lights.png`. Runtime district facades check Art.has_tex and use civic_annex, nexus_cowork and office_slab metadata/doors as supported fallbacks. Decorative bookshop and cafe use brick_shops/corner_cafe_unit. No unavailable textures are loaded.
+
+## #67 Hotel / Luxury Heights
+Requested named facades: `the_aster.png`, `skyline_grand.png`, `observation_deck.png`, `boutique_row.png`, `gallery_row.png` plus corresponding `_lights.png`. Runtime district facades check Art.has_tex and use riverside_tower, glass_tower, civic_annex, shop_row_awning and brick_shops as supported fallbacks. Requested portraits for Henri Dubois, Priya Nair, Owen Blake and Vera Stone fall back to the generated appearance. Requested furniture: `interiors/reception_desk.png`, `interiors/luggage_cart.png`, `interiors/hotel_bed_made.png`, `interiors/chandelier.png` (current lobbies use sales_desk, lounge_sofa, key_board and plant props). Requested icon `ui/icons/hotel.png` (the sleep icon is used). No unavailable textures are loaded and no asset files changed.

@@ -1,0 +1,159 @@
+{
+ "id": "the_aster",
+ "name": "The Aster",
+ "category": "Boutique hotel",
+ "district": "luxury_heights",
+ "type": "hotel",
+ "hours": {
+  "open": "06:00",
+  "close": "23:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "the_aster",
+  "fallback": "riverside_tower",
+  "x": 80,
+  "sign": "The Aster"
+ },
+ "interior": {
+  "size": [
+   24,
+   14
+  ],
+  "floor": "marble",
+  "wall": "marble_wall",
+  "ambient": "bank",
+  "props": [
+   {
+    "sprite": "window_day",
+    "x": 40,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "framed_art",
+    "x": 120,
+    "y": 12,
+    "wall": true
+   },
+   {
+    "sprite": "key_board",
+    "fallback": "cork_board",
+    "x": 210,
+    "y": 10,
+    "wall": true
+   },
+   {
+    "sprite": "window_day",
+    "x": 300,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "sales_desk",
+    "x": 176,
+    "y": 62
+   },
+   {
+    "sprite": "office_chair",
+    "x": 196,
+    "y": 52,
+    "solid": false
+   },
+   {
+    "sprite": "lounge_sofa",
+    "x": 40,
+    "y": 120
+   },
+   {
+    "sprite": "coffee_table",
+    "x": 60,
+    "y": 156
+   },
+   {
+    "sprite": "plant_big",
+    "x": 8,
+    "y": 50
+   },
+   {
+    "sprite": "plant_big",
+    "x": 346,
+    "y": 150
+   },
+   {
+    "sprite": "armchair",
+    "x": 280,
+    "y": 130
+   },
+   {
+    "sprite": "rug_navy",
+    "x": 44,
+    "y": 170,
+    "floor": true
+   }
+  ],
+  "interactables": [
+   {
+    "id": "rate_board",
+    "at": [
+     200,
+     108
+    ],
+    "label": "Open the Rate Board",
+    "action": "hotel_open",
+    "icon": "sleep"
+   },
+   {
+    "id": "aster_rooms",
+    "at": [
+     320,
+     100
+    ],
+    "label": "Look at the room list",
+    "action": "look",
+    "params": {
+     "icon": "sleep",
+     "text": "Aster Inn: 7 Standard, 4 Deluxe and 1 Suite. Take it over for $150,000 or lease it for $9,000 a month."
+    }
+   }
+  ],
+  "npc_spots": {
+   "owner": [
+    150,
+    84
+   ],
+   "guest": [
+    70,
+    150
+   ]
+  },
+  "staff_spots": {
+   "front_desk": [
+    [
+     196,
+     84
+    ],
+    [
+     236,
+     84
+    ]
+   ],
+   "housekeeper": [
+    [
+     300,
+     84
+    ],
+    [
+     330,
+     84
+    ],
+    [
+     300,
+     120
+    ]
+   ]
+  }
+ }
+}
