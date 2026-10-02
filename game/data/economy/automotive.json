@@ -55,7 +55,9 @@
   "tow_cost": 180, "voucher": 120, "fleet_max": 30,
   "overdue_failure": 0.06, "service_days": [21, 30, 45], "service_labor": 60,
   "review_prior_score": 4.0, "review_prior_n": 12, "review_base": 4.6, "review_noise": 0.5,
-  "breakdown_review": 1.5, "damage_review": 3.4, "rating_slope": 0.55, "rating_min": 0.45, "rating_max": 1.25,
+  "breakdown_review": 1.5,
+  "breakdown_weight": 3,
+  "damage_review": 3.4, "rating_slope": 0.55, "rating_min": 0.45, "rating_max": 1.25,
   "insurance": {
    "none": {"premium": 0, "deductible": 0, "cover": 0.0, "name": "No cover"},
    "basic": {"premium": 36, "deductible": 1500, "cover": 0.8, "name": "Basic cover"},

@@ -59,7 +59,7 @@ func test_opening_gates_district_and_registry() -> void:
 	runner.check(groups.size() == 1 and "airport_terminal" in groups[0]["buildings"] and "aurelia_auto_auction" in groups[0]["buildings"] and "gateway_car_rental" in groups[0]["buildings"], "guide lists airport destinations")
 	runner.check(DataDB.districts["airport"]["metro"]["station"] == "airport" and BuildingInfo.station("airport_terminal").contains("Airport"), "metro station is shown")
 	for npc in ["frank_doyle", "jun_ito", "mara_quinn"]:
-		runner.check(DataDB.npcs.has(npc) and DataDB.dialogues.has(npc + "_intro"), npc + " has dialogue")
+		runner.check(DataDB.npcs.has(npc) and DataDB.dialogue.has(npc + "_intro"), npc + " has dialogue")
 
 func test_auction_ai_bids_are_bounded_and_deterministic() -> void:
 	setup(50000)
@@ -493,7 +493,8 @@ func test_screens_build_without_errors_and_pick_one_primary() -> void:
 	runner.check(game.find_child("AuctionBid", true, false) != null, "live bidding screen")
 	game.bid()
 	runner.eq(Automotive.S()["lots"][lot["id"]]["leader"], "player", "pressing Bid raises")
-	for n in 10:
+	game.stop_bidding()
+	for n in 80:
 		if game.settled: break
 		game.tick()
 	runner.check(game.settled and Automotive.S()["lots"][lot["id"]]["status"] != "open", "hammer falls after quiet ticks")

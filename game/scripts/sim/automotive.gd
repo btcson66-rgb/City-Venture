@@ -276,7 +276,7 @@ static func recon_days(option: String, car: Dictionary) -> int:
 
 static func recon(car_id: String, option: String) -> Dictionary:
 	var car: Dictionary = S()["stock"].get(car_id, {})
-	if not valid() or car.is_empty() or bool(car["new"]) or car["status"] not in ["lot", "listed"] or option not in ["detail", "service", "repair"]:
+	if not valid() or car.is_empty() or bool(car["new"]) or car["status"] not in ["lot", "listed", "shop"] or option not in ["detail", "service", "repair"]:
 		return error("Choose a used car on your lot.")
 	if option == "repair":
 		var spec: Dictionary = cfg()["defects"].get(str(car["defect"]), {})
@@ -454,7 +454,7 @@ static func set_policy(key: String, value: Variant) -> Dictionary:
 			if not rental()["insurance"].has(str(value)): return error("Choose an insurance cover.")
 			p[key] = str(value)
 		"service_days":
-			if int(value) not in rental()["service_days"]: return error("Choose a service interval.")
+			if not rental()["service_days"].any(func(d): return int(d) == int(value)): return error("Choose a service interval.")
 			p[key] = int(value)
 			for id in fleet_cars(): fleet_item(id)["maintenance_days"] = int(value)
 		"auto_service": p[key] = bool(value)
@@ -472,9 +472,9 @@ static func rating() -> float: return float(S()["reviews"]["sum"]) / maxf(1.0, f
 static func rating_factor() -> float:
 	var r: Dictionary = rental()
 	return clampf(1.0 + float(r["rating_slope"]) * (rating() - 4.0), float(r["rating_min"]), float(r["rating_max"]))
-static func _review(score: float) -> void:
-	S()["reviews"]["sum"] = float(S()["reviews"]["sum"]) + clampf(score, 1.0, 5.0)
-	S()["reviews"]["n"] = float(S()["reviews"]["n"]) + 1.0
+static func _review(score: float, weight := 1.0) -> void:
+	S()["reviews"]["sum"] = float(S()["reviews"]["sum"]) + clampf(score, 1.0, 5.0) * weight
+	S()["reviews"]["n"] = float(S()["reviews"]["n"]) + weight
 
 # ------------------------------------------------------------------ the airport and demand
 static func demand_mult() -> float:
@@ -561,8 +561,7 @@ static func _rental_day() -> void:
 		if int(contract["end"]) <= day: _return(contract, day)
 	for id in fleet_cars():
 		var item := fleet_item(id)
-		if item["status"] == "broken" and str(S()["fleet"][id]["rental"]) == "" and Ledger.cash(entity()) >= service_cost(id): service(id)
-		elif bool(policy()["auto_service"]) and bool(item.get("maintenance_due", false)) and car_state(id) == "ready": service(id)
+		if bool(policy()["auto_service"]) and (bool(item.get("maintenance_due", false)) or item["status"] == "broken") and str(S()["fleet"][id]["rental"]) == "" and Ledger.cash(entity()) >= service_cost(id): service(id)
 	var requests := 0
 	var started := 0
 	for cls in r["class_weight"]:
@@ -627,7 +626,7 @@ static func _breakdown(contract: Dictionary, day: int) -> void:
 		Ledger.post(entity(), I18n.t("Rental interrupted: %s") % car["plate"], [{"acct":"cash", "dr":revenue}, {"acct":"revenue", "cr":revenue}, {"acct":"refunds", "dr":revenue}, {"acct":"cash", "cr":revenue}], source("rental_breakdown", str(contract["id"])))
 	Ledger.expense(entity(), "penalties", float(r["voucher"]), I18n.t("Breakdown compensation voucher"), source("rental_breakdown", str(contract["id"])), _pay_from(float(r["voucher"])))
 	Ledger.expense(entity(), "vehicle", float(r["tow_cost"]), I18n.t("Roadside tow: %s") % car["plate"], source("rental_breakdown", str(contract["id"])), _pay_from(float(r["tow_cost"])))
-	_review(float(r["breakdown_review"]))
+	_review(float(r["breakdown_review"]), float(r["breakdown_weight"]))
 	car["breakdowns"] = int(car["breakdowns"]) + 1
 	car["rental"] = ""
 	car["out"] = day + 2
@@ -816,6 +815,11 @@ static func crisis(kind: String, _retain := true) -> Dictionary:
 			ids = ids.slice(0, mini(int(c["recall_max"]), ceili(ids.size() * float(c["recall_share"]))))
 			for id in ids:
 				if kind == "recall_pull":
+					var open_id := str(S()["fleet"][id]["rental"])
+					if open_id != "":
+						S()["rentals"].erase(open_id)
+						S()["fleet"][id]["rental"] = ""
+						S()["lost"] = int(S()["lost"]) + 1
 					Ledger.expense(entity(), "vehicle", float(c["recall_labor"]), I18n.t("Recall handling: %s") % S()["fleet"][id]["plate"], source("recall", id), _pay_from(float(c["recall_labor"])))
 					S()["fleet"][id]["out"] = maxi(int(S()["fleet"][id]["out"]), Clock.day_index() + int(c["recall_days"]))
 			if kind == "recall_run": S()["recall"] = {"until":Clock.now() + int(c["recall_risk_days"]) * Clock.DAY, "ids":ids}
