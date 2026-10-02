@@ -133,4 +133,3 @@ func test_news_daily_count_dedup_bounds_and_legacy_quotes() -> void:
 	runner.eq(Macro.demand("cafe"), 1.0, "old save neutral until play initializes")
 	runner.eq(Rivals.demand("ecommerce"), 1.0, "old save neutral market")
 	runner.check(not Macro.active() and not Rivals.active(), "passive quotes do not mutate old save")
-
