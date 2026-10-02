@@ -1,6 +1,10 @@
 # CITY VENTURE — Game Data Schema
 
 All content lives in `game/data/` as JSON, loaded by `DataDB` at boot.
+
+Performance QA (`docs/PERFORMANCE.md`) adds no persisted gameplay keys. Ecommerce
+order reservations use a derived, disposable index rebuilt from existing orders;
+legacy saves require no new field or migration.
 Conventions:
 - `id` is a `snake_case` string, unique within its folder.
 - Money is a float in the entity's currency (Aurelia Dollar, `AUD$`, displayed as `$`).

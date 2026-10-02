@@ -15,6 +15,10 @@ func _start() -> void:
 	for a in OS.get_cmdline_user_args():
 		if a.begins_with("--bot="):
 			bot = a.substr(6)
+	if bot == "stress":
+		var stress = load("res://tests/walkthrough/stress.gd").new()
+		get_tree().root.add_child(stress)
+		return
 	SceneRouter.go_menu()
 	if bot != "":
 		var script: GDScript = load("res://tests/walkthrough/bot.gd")

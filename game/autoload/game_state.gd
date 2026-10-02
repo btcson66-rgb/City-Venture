@@ -22,6 +22,7 @@ func default_appearance() -> Dictionary:
 
 ## Build a fresh world. `setup` = {name, appearance{}, outfit, seed?}
 func new_game(setup: Dictionary) -> void:
+	Ecommerce.invalidate_reservations()
 	var living := DataDB.living()
 	var seed_v: int = int(setup.get("seed", Time.get_ticks_usec() % 2147483647))
 	rng.seed = seed_v

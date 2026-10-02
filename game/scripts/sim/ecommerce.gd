@@ -10,6 +10,49 @@ extends RefCounted
 
 const OPEN_STATUSES := ["placed", "packed", "awaiting_pickup", "carried", "shipped"]
 
+## Derived order reservations, never saved. Production only creates placed orders
+## in _h_order_place and releases them in pack_orders. A different loaded/new-game
+## dictionary or external fixture insertion rebuilds the index before it is read.
+static var _reservation_source: Dictionary = {}
+static var _reservation_size := -1
+static var _reservation_units: Dictionary = {}
+
+
+static func invalidate_reservations() -> void:
+	_reservation_source = {}
+	_reservation_size = -1
+	_reservation_units = {}
+
+
+static func _reservation_key(loc: String, product: String) -> String:
+	return loc + ":" + product
+
+
+static func _refresh_reservations() -> void:
+	if not EventBus.state_loaded.is_connected(invalidate_reservations):
+		EventBus.state_loaded.connect(invalidate_reservations)
+	var orders: Dictionary = E()["orders"]
+	if is_same(orders, _reservation_source) and orders.size() == _reservation_size:
+		return
+	_reservation_source = orders
+	_reservation_size = orders.size()
+	_reservation_units = {}
+	for id in orders:
+		var o: Dictionary = orders[id]
+		if o["status"] == "placed":
+			var key := _reservation_key(o["location"], o["product"])
+			_reservation_units[key] = int(_reservation_units.get(key, 0)) + int(o["qty"])
+
+
+static func _reserve_new_order(o: Dictionary) -> void:
+	var orders: Dictionary = E()["orders"]
+	if not is_same(orders, _reservation_source) or orders.size() != _reservation_size + 1:
+		invalidate_reservations()
+		return
+	var key := _reservation_key(o["location"], o["product"])
+	_reservation_units[key] = int(_reservation_units.get(key, 0)) + int(o["qty"])
+	_reservation_size = orders.size()
+
 
 static func E() -> Dictionary:
 	return GameState.data["ecommerce"]
@@ -547,10 +590,8 @@ static func avg_cost(loc: String, product_id: String) -> float:
 
 
 static func reserved(loc: String, product_id: String) -> int:
-	var n := 0
-	for o in E()["orders"].values():
-		if o["status"] == "placed" and o["location"] == loc and o["product"] == product_id:
-			n += int(o["qty"])
+	_refresh_reservations()
+	var n := int(_reservation_units.get(_reservation_key(loc, product_id), 0))
 	for c in GameState.data["contracts"].values():
 		if c.get("status", "") == "active" and c.get("location", "") == loc and c.get("product", "") == product_id:
 			n += int(c["qty"])
@@ -797,6 +838,7 @@ static func _h_order_place(p: Dictionary) -> void:
 		"customer": "%s %s" % [GameState.pick(names), GameState.pick(inits)], "placed": Clock.now(), "status": "placed",
 		"location": loc, "entity": GameState.business_entity(), "defective": GameState.randf() < dr}
 	e["orders"][oid] = o
+	_reserve_new_order(o)
 	l["orders"] = int(l["orders"]) + 1
 	l["missed"] = 0
 	var mkey := Clock.month_key()
@@ -875,6 +917,7 @@ static func photo_factor(l: Dictionary) -> float:
 ## quality: order id → {q, label_ok} from the packing minigame; orders beyond the
 ## ones packed by hand get the session's average. Staff packers pass nothing (they pack well).
 static func pack_orders(loc: String, max_n := -1, quality := {}) -> int:
+	_refresh_reservations()
 	var avg := 0.85
 	if not quality.is_empty():
 		avg = 0.0
@@ -892,6 +935,8 @@ static func pack_orders(loc: String, max_n := -1, quality := {}) -> int:
 		l[o["product"]]["qty"] = int(l[o["product"]]["qty"]) - int(o["qty"])
 		o["cogs"] = cost
 		o["status"] = "packed"
+		var reservation_key := _reservation_key(loc, o["product"])
+		_reservation_units[reservation_key] = int(_reservation_units.get(reservation_key, 0)) - int(o["qty"])
 		o["packed"] = Clock.now()
 		if not quality.is_empty():
 			var qv: Dictionary = quality.get(str(o["id"]), {"q": avg, "label_ok": true})
