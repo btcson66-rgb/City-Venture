@@ -65,3 +65,7 @@ func test_location_product_boundaries_and_no_overselling() -> void:
 	runner.eq(Ecommerce.reserved("riverside_studio", "wireless_earbuds"), 0, "other product distinct")
 	runner.eq(Ecommerce.pack_orders("riverside_studio", 0), 0, "zero packing limit")
 	runner.eq(Ecommerce.reserved("riverside_studio", "phone_stand"), 100, "zero packing preserves reservations")
+
+
+func test_ci_failure_probe() -> void:
+	runner.check(false, "Intentional CI failure demonstration for ticket 98")
