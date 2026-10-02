@@ -1,0 +1,22 @@
+{
+ "id": "jun_ito_intro",
+ "with": "jun_ito",
+ "nodes": {
+  "start": [
+   {
+    "who": "jun_ito",
+    "text": "Give me $150 and half an hour and I will tell you what is wrong underneath. Flood, engine, odometer: nobody else tells you before you bid. I also service your rental cars, if you hire me."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Open the auction desk",
+      "next": "end"
+     }
+    ]
+   }
+  ],
+  "end": []
+ }
+}

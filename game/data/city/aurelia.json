@@ -199,13 +199,13 @@
   {
    "id": "airport",
    "name": "International Airport",
-   "status": "planned",
+   "status": "active",
    "map_pos": [
     548,
     70
    ],
    "icon": "world",
-   "blurb": "Domestic, international, cargo, private aviation.",
+   "blurb": "Flights, car rental, the Wednesday auction and the cargo apron.",
    "board": {
     "label": [
      765,
@@ -394,7 +394,17 @@
    "university>old_town": 20,
    "university>residential": 25,
    "university>harbor": 25,
-   "university>industrial": 31
+   "university>industrial": 31,
+   "airport>financial": 14,
+   "airport>civic_center": 19,
+   "airport>riverside": 24,
+   "airport>startup_hub": 22,
+   "airport>shopping_street": 23,
+   "airport>old_town": 25,
+   "airport>university": 29,
+   "airport>harbor": 31,
+   "airport>residential": 33,
+   "airport>industrial": 37
   }
  },
  "board_extra": {

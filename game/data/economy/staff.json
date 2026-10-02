@@ -210,6 +210,29 @@
    ],
    "desc": "Low weekly pay, but slower production than an experienced designer.",
    "needs_text": "Lease The Loft before hiring campaign staff."
+  },
+  "auto_mechanic": {
+   "name": "Auto technician",
+   "salary_week": [
+    1000,
+    1000
+   ],
+   "needs_office": false,
+   "needs_flag": "automotive_active",
+   "workplace": "aurelia_auto_auction",
+   "work_days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "work_hours": [
+    9,
+    17
+   ],
+   "desc": "Cuts reconditioning and service costs by 20%, saves a workshop day and adds two dealership service bays. Salary is due even in a slow week.",
+   "needs_text": "Open the auto desk before hiring a technician."
   }
  },
  "traits": [

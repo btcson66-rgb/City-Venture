@@ -83,11 +83,15 @@ static func lending_basis() -> Dictionary:
 	var stock := 0.0
 	var existing := 0.0
 	var equipment := 0.0
+	var vehicle_stock := 0.0
 	if cid != "":
 		age = int((Clock.now() - int(GameState.data["entities"][cid].get("founded", 0))) / Clock.DAY)
 		gp = maxf(0.0, float(MonthClose.compute(cid, Clock.now() - 30 * Clock.DAY, Clock.now())["gross_profit"]))
 		ar = maxf(0.0, Ledger.balance(cid, "accounts_receivable") + Ledger.balance(cid, "marketplace_balance"))
 		stock = maxf(0.0, Ledger.balance(cid, "inventory") + Ledger.balance(cid, "inventory_in_transit"))
+		# Cars hold value better than general stock: move them out of the 50% bucket (rental fleet is already in operating assets).
+		vehicle_stock = minf(stock, Automotive.stock_cost())
+		stock -= vehicle_stock
 		equipment = maxf(0.0, Ledger.balance(cid, "fixed_assets"))
 		for job in Jobs.S()["items"].values():
 			if job["entity"] == cid and job["status"] in ["active", "delivered"] and job.get("direction","")!="purchase":
@@ -100,7 +104,7 @@ static func lending_basis() -> Dictionary:
 		for loan in loans(cid):
 			if loan.get("type","")=="mortgage":existing-=float(loan["balance"])
 	var property_equity := RealEstate.equity()*float(RealEstate.cfg().get("equity_factor",.5))
-	var collateral := ar * 0.7 + contracts * 0.6 + stock * 0.5 + equipment * 0.5 + property_equity
+	var collateral := ar * 0.7 + contracts * 0.6 + stock * 0.5 + equipment * 0.5 + property_equity + vehicle_stock * 0.6
 	var raw := maxf(0.0, gp * 3.0) + collateral - existing
 	var basis := {"age": age, "contracts": contracts, "raw": raw,
 		"max": floorf(minf(MAX_LOAN, raw) / 1000.0) * 1000.0,
@@ -108,6 +112,7 @@ static func lending_basis() -> Dictionary:
 		[I18n.t("70% of money owed to you"), ar * 0.7], [I18n.t("60% of signed contracts"), contracts * 0.6],
 		[I18n.t("50% of stock at cost"), stock * 0.5], [I18n.t("50% of operating assets at book value"), equipment * 0.5], [I18n.t("minus existing debt"), -existing]]}
 	if property_equity>0:basis["parts"].append([I18n.t("50% of property market equity"),property_equity])
+	if vehicle_stock>0:basis["parts"].append([I18n.t("60% of car stock at cost"),vehicle_stock*0.6])
 	return basis
 
 

@@ -1,0 +1,62 @@
+{
+ "id": "automotive_flood",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:automotive_active",
+   "flag:automotive_flood"
+  ],
+  "chance": 0.08,
+  "cooldown_days": 14,
+  "earliest_day": 4
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "jun_ito",
+  "title": "Flood-damaged car on your lot",
+  "icon": "warning",
+  "lines": [
+   "Jun spotted water lines under the carpet of a car you bought at auction. Disclose it and cut the price, pay for a repair, or list it quietly and hope."
+  ]
+ },
+ "choices": [
+  {
+   "id": "flood_disclose",
+   "label": "Disclose the flood damage",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "automotive",
+     "kind": "flood_disclose"
+    }
+   ],
+   "outcome": "The car is priced as a flood car; no claims will follow."
+  },
+  {
+   "id": "flood_repair",
+   "label": "Pay for a proper repair",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "automotive",
+     "kind": "flood_repair"
+    }
+   ],
+   "outcome": "The repair removes most of the damage but costs money and workshop days."
+  },
+  {
+   "id": "flood_hide",
+   "label": "List it quietly",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "automotive",
+     "kind": "flood_hide"
+    }
+   ],
+   "outcome": "A buyer may find the damage later: a refund claim and a consumer fine are likely."
+  }
+ ]
+}
