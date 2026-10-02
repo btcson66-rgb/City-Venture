@@ -273,13 +273,53 @@ func _shoplane() -> void:
 		content.add_child(UIK.wrap("%s · %s · %s · %s" % [I18n.t(DataDB.product(l["product"])["name"]), Fmt.money0(l["price"]), Fmt.stars(Ecommerce.rating(l)), st], 6, Art.C_WHITE, 124))
 
 
+var timeline_page := "life"
+
+
 func _timeline() -> void:
 	_header("Life Timeline")
+	var tabs := UIK.hbox(2)
+	content.add_child(tabs)
+	for t in [["life", "Timeline"], ["achievements", "Achievements"]]:
+		var tb := UIK.button(t[1], func(): timeline_page = t[0]; _render(), "tab_active" if timeline_page == t[0] else "tab")
+		tb.name = "TimelinePage_" + t[0]
+		tb.add_theme_font_size_override("font_size", 6)
+		tabs.add_child(tb)
+	if timeline_page == "achievements":
+		_achievements()
+		return
 	var tl: Array = GameState.data["timeline"]
 	for i in range(tl.size() - 1, -1, -1):
 		var e: Dictionary = tl[i]
-		content.add_child(UIK.label(Clock.fmt_short(int(e["t"])), 6, Art.C_GOLD))
-		content.add_child(UIK.wrap(str(e["text"]), 7, Art.C_WHITE, 124))
+		var milestone: bool = str(e.get("kind", "")) == "milestone"
+		content.add_child(UIK.label(("★ " if milestone else "") + Clock.fmt_short(int(e["t"])), 6, Art.C_GOLD))
+		content.add_child(UIK.wrap(str(e["text"]), 7, Art.C_GOLD if milestone else Art.C_WHITE, 124))
+
+
+## Five milestones per industry (data/milestones.json): unlocked ones with their date, locked ones with progress.
+func _achievements() -> void:
+	var total := Milestones.count()
+	content.add_child(UIK.label(I18n.t("%d of %d reached") % [total[0], total[1]], 7, Art.C_SKY, true))
+	for entry in Industries.all():
+		var n := Milestones.count(entry["id"])
+		content.add_child(UIK.label("%s  %d/%d" % [InternalSupply.industry_name(entry["id"]), n[0], n[1]], 7, Art.C_GOLD, true))
+		for m in Milestones.list(entry["id"]):
+			if Milestones.unlocked(m["id"]):
+				content.add_child(UIK.wrap("✓ %s · %s" % [I18n.t(str(m["name"])), Clock.fmt_short(int(Milestones.S()["done"][m["id"]]))], 6, Art.C_GREEN, 124))
+			else:
+				var pr := Milestones.progress(m)
+				content.add_child(UIK.wrap("✗ %s · %s" % [I18n.t(str(m["name"])), _progress_text(m, pr)], 6, Art.C_MUTED, 124))
+				content.add_child(UIK.wrap(I18n.t(str(m["desc"])), 6, Art.C_DIM, 124))
+
+
+static func _progress_text(m: Dictionary, pr: Dictionary) -> String:
+	if pr["streak"]:
+		return I18n.t("%d of %d days") % [int(pr["have"]), int(pr["target"])]
+	if m.get("money", false):
+		return "%s / %s" % [Fmt.money0(float(pr["have"])), Fmt.money0(float(pr["target"]))]
+	if m.get("pct", false):
+		return "%s / %s" % [Fmt.pct(float(pr["have"])), Fmt.pct(float(pr["target"]))]
+	return "%d / %d" % [int(pr["have"]), int(pr["target"])]
 
 
 func _save() -> void:

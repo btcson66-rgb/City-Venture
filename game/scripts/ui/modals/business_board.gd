@@ -59,10 +59,28 @@ func _businesses() -> void:
 	det.add_child(UIK.kv("Money comes from", I18n.join(d["revenue_models"], true)))
 	det.add_child(UIK.kv("Main costs", I18n.join(d["cost_types"], true)))
 	det.add_child(UIK.kv("Can grow into", I18n.join(d["growth_paths"], true)))
+	_gates(det)
 	det.add_child(UIK.sep())
 	if not Industries.board_detail(selected, det, self):
 		det.add_child(UIK.wrap(d.get("pitch", ""), 8, Art.C_WHITE, 300))
 
+
+
+## Gates (#71): capital, licence and location with a tick or a cross, the next step, and which industry to open first.
+func _gates(det: Control) -> void:
+	det.add_child(UIK.label("TO OPEN THIS", 7, Art.C_DIM, true))
+	for row in Gates.rows(selected):
+		det.add_child(UIK.wrap("%s %s: %s" % ["✓" if row["ok"] else "✗", I18n.t(str(row["label"])), row["text"]], 8, Art.C_GREEN if row["ok"] else Art.C_GOLD, 300))
+	var step := Gates.next_step(selected)
+	det.add_child(UIK.wrap(I18n.t("Next step: %s") % step if step != "" else "✓ " + I18n.t("Every gate is open."), 8, Art.C_SKY, 300))
+	var after := Gates.suggested_after(selected)
+	if after.is_empty():
+		det.add_child(UIK.label("Suggested after: nothing, start here.", 8, Art.C_MUTED))
+	else:
+		var parts: Array = []
+		for a in after:
+			parts.append(("✓ " if a["ok"] else "✗ ") + str(a["name"]))
+		det.add_child(UIK.wrap(I18n.t("Suggested after: %s") % ", ".join(parts), 8, Art.C_MUTED, 300))
 
 
 func _order(b: Dictionary) -> int:

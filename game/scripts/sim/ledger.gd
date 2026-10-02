@@ -11,6 +11,7 @@ extends RefCounted
 ##   equity       equity
 ##   income       revenue, refunds (contra), other_income
 ##   costs        cogs, exp:<category>
+##   group trade  ic_revenue (credit), ic_cost (debit), ic_clearing: internal supply between industries (#71); never in revenue/cogs/opex
 
 const EXPENSE_CATEGORIES := ["advertising", "shipping", "restocking", "platform_fees", "packaging", "photography", "registration", "compliance",
 	"rent_office", "coworking", "inventory_writeoff", "bank_fees", "late_fees", "rent_home", "living", "coffee", "transport",

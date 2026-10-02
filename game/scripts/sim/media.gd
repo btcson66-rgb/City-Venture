@@ -127,7 +127,7 @@ static func _day(campaign: Dictionary) -> void:
 		campaign["paused_at"]=Clock.now()
 		return
 	if internal:
-		Ledger.post(entity(),I18n.t("Internal campaign at media cost"),[{"acct":"exp:advertising","dr":cost},{"acct":"cash","cr":cost}],{"type":"group_campaign","id":campaign["id"],"segment":campaign["target"],"internal":true})
+		InternalSupply.trade(InternalSupply.key("media_ads",campaign["target"]),cost,{"entity":entity()})
 	else:Ledger.post(entity(),I18n.t("Campaign media purchase after rebate"),[{"acct":"cogs","dr":cost},{"acct":"cash","cr":cost}],source(campaign["id"]))
 	var raw := 0.0
 	var reach := 0.0

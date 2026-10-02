@@ -1,0 +1,22 @@
+{
+ "id": "new_neighbourhood_opening",
+ "title": "New Neighbourhood Opening",
+ "client": "Lot 7 Development Trust",
+ "npc": "diane_harlow",
+ "pitch": "A new block opens on Lot 7. The Trust wants it built, solar on the roofs and a sales campaign running before the keys are handed over.",
+ "reward": 52000,
+ "deadline_days": 45,
+ "offer_days": 12,
+ "earliest_day": 60,
+ "cooldown_days": 90,
+ "chance": 0.04,
+ "min_running": 2,
+ "parts": [
+  {"id": "develop", "industry": "real_estate", "label": "Complete a development project", "share": 0.45, "metric": "stat:re_projects_completed", "target": 1, "subcontract": 14000,
+   "hint": "Finish a construction project from the Matchmaker's Growth page."},
+  {"id": "solar", "industry": "energy", "label": "Deliver two solar installs", "share": 0.3, "metric": "stat:energy_installs", "target": 2, "subcontract": 7500,
+   "hint": "Quote, install and deliver solar jobs in the Energy console."},
+  {"id": "sales", "industry": "media", "label": "Finish a sales campaign", "share": 0.25, "metric": "data:media.completed", "target": 1, "subcontract": 4200,
+   "hint": "Run a measured campaign to its last day."}
+ ]
+}

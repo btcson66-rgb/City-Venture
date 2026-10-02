@@ -401,10 +401,12 @@ static func audit() -> Dictionary:
 	if direct_revenue>0:Ledger.post(entity(),I18n.t("Direct room revenue"),[{"acct":"cash","dr":direct_revenue},{"acct":"revenue","cr":direct_revenue}],source(source_id))
 	var supplies := guests_total*float(c["supplies_room"])
 	var breakfast_mode: String=state["breakfast"] if state["breakfast"]!="own_cafe" or Cafe.leased() else "standard"
-	supplies+=guests_total*float(c["breakfast"][breakfast_mode]["cost"])
+	# Own-cafe breakfast is an internal supply (#71): the cafe books the real cost and an internal sale, the hotel the purchase.
+	if not (breakfast_mode=="own_cafe" and InternalSupply.hotel_breakfast(guests_total)):supplies+=guests_total*float(c["breakfast"][breakfast_mode]["cost"])
 	if supplies>0:Ledger.post(entity(),I18n.t("Guest supplies, laundry and breakfast"),[{"acct":"cogs","dr":supplies},{"acct":_pay_from(supplies),"cr":supplies}],source(source_id))
 	var utilities := total_rooms()*float(c["utilities_room_day"])
 	if stage()>=3:utilities+=float(c["stages"]["3"]["site_cost_day"])
+	utilities=InternalSupply.hotel_power(utilities)   # electricity from your own energy business (#71), if running on the same books
 	if utilities>0:Ledger.expense(entity(),"other",utilities,I18n.t("Hotel utilities"),source(source_id),_pay_from(utilities))
 	var overhead := total_rooms()*float(c["overhead_room_day"]) *(1.0 if state["mode"]=="own" else float(c["overhead_lease_share"]))   # a landlord carries property tax
 	if overhead>0:Ledger.expense(entity(),"insurance",overhead,I18n.t("Hotel insurance, property tax and software"),source(source_id),_pay_from(overhead))

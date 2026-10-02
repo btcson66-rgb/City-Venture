@@ -1,0 +1,22 @@
+{
+ "id": "green_showroom_launch",
+ "title": "Green Showroom Launch",
+ "client": "Volta Motors Regional",
+ "npc": "imani_cole",
+ "pitch": "A new EV showroom wants cars on the floor, chargers and rooftop solar on site, and a launch campaign that fills it on opening weekend.",
+ "reward": 40000,
+ "deadline_days": 28,
+ "offer_days": 10,
+ "earliest_day": 90,
+ "cooldown_days": 80,
+ "chance": 0.04,
+ "min_running": 2,
+ "parts": [
+  {"id": "cars", "industry": "automotive", "label": "Sell two cars", "share": 0.35, "metric": "stat:cars_sold", "target": 2, "subcontract": 6500,
+   "hint": "Move two cars through the Auto Desk."},
+  {"id": "power", "industry": "energy", "label": "Deliver a solar install", "share": 0.35, "metric": "stat:energy_installs", "target": 1, "subcontract": 6000,
+   "hint": "Quote and finish one install."},
+  {"id": "launch", "industry": "media", "label": "Finish a launch campaign", "share": 0.3, "metric": "data:media.completed", "target": 1, "subcontract": 4500,
+   "hint": "Run a measured campaign to its last day."}
+ ]
+}

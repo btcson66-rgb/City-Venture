@@ -163,6 +163,7 @@ static func _milestone() -> void:
 		Jobs.deliver(project["job"])
 		job["status"]="paid"
 		project["status"]="completed"
+		GameState.inc_stat("re_projects_completed")
 		GameState.data["real_estate_landmark"]={"name":project["name"],"completed":true}
 		var total := float(project["paid"])
 		Ledger.post(entity(),I18n.t("Completed Lot 7 building"),[{"acct":"property_assets","dr":total},{"acct":"construction_in_progress","cr":total}],source(project["job"]))

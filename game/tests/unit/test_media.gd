@@ -69,7 +69,7 @@ func test_group_campaigns_change_actual_cafe_and_ecommerce_demand() -> void:
 	runner.check(result["ok"],"internal cost-price campaign")
 	Clock.advance(Clock.DAY)
 	runner.check(Cafe.ads_factor()>before,"actual cafe ads demand responds")
-	runner.check(Ledger.balance(entity,"exp:advertising")>0,"internal actual cash cost")
+	runner.check(Ledger.balance(entity,"ic_cost")>0 and Ledger.balance(entity,"cogs")>0,"internal media cost is a segment transfer backed by actual cash cost")
 	runner.eq(-Ledger.balance(entity,"revenue"),0.0,"no invented internal agency revenue")
 	runner.check(float(Segments.compute(entity,0,Clock.now()+1)["rows"]["cafe"]["internal_cost"])>0,"internal cost explicitly labeled in segment report")
 	Clock.advance(int(Media.cfg()["campaign_days"])*Clock.DAY)

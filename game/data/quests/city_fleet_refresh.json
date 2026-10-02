@@ -1,0 +1,22 @@
+{
+ "id": "city_fleet_refresh",
+ "title": "City Fleet Refresh",
+ "client": "Aurelia Transit Office",
+ "npc": "owen_blake",
+ "pitch": "The Transit Office is renewing its service fleet: parts built to drawing, cars sourced and delivery runs flown across the city.",
+ "reward": 44000,
+ "deadline_days": 30,
+ "offer_days": 10,
+ "earliest_day": 75,
+ "cooldown_days": 75,
+ "chance": 0.04,
+ "min_running": 2,
+ "parts": [
+  {"id": "parts", "industry": "manufacturing", "label": "Deliver one OEM production order", "share": 0.35, "metric": "count:manufacturing.orders|status=delivered", "target": 1, "subcontract": 8500,
+   "hint": "Accept an RFQ, schedule the machines and deliver the batch."},
+  {"id": "cars", "industry": "automotive", "label": "Sell three cars", "share": 0.35, "metric": "stat:cars_sold", "target": 3, "subcontract": 8000,
+   "hint": "Win at auction, recondition and sell, or sell new from the franchise."},
+  {"id": "runs", "industry": "logistics", "label": "Complete five van runs", "share": 0.3, "metric": "stat:van_runs", "target": 5, "subcontract": 3200,
+   "hint": "Accept runs in Company OS and plan each route."}
+ ]
+}

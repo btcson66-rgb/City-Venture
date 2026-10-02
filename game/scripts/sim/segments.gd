@@ -1,6 +1,8 @@
 class_name Segments
 extends RefCounted
 ## Revenue/cost attribution plus exact-cent allocation; reporting never creates journal entries.
+## Internal group trade (#71) sits in internal_revenue / internal_charge per segment. Segment profit includes both sides;
+## the totals row sums them to zero, so group profit and revenue never count a transfer twice.
 
 static func compute(entity: String, t0: int, t1: int) -> Dictionary:
 	var rows := {}
@@ -21,6 +23,11 @@ static func compute(entity: String, t0: int, t1: int) -> Dictionary:
 			elif account == "refunds": row["refunds"] += amount
 			elif account == "cogs": row["cogs"] += amount
 			elif account == "other_income": row["other_income"] -= amount
+			elif account == "ic_revenue":
+				row["internal_revenue"] -= amount
+			elif account == "ic_cost":
+				row["internal_charge"] += amount
+				row["internal_cost"] += amount
 			elif account.begins_with("exp:") and account.substr(4) in Ledger.OPEX_BUSINESS:
 				row["opex"] += amount
 				if internal:row["internal_cost"] += amount
@@ -44,11 +51,13 @@ static func compute(entity: String, t0: int, t1: int) -> Dictionary:
 	var totals := _row("total")
 	for row in rows.values():
 		row["gross_profit"] = snappedf(float(row["net_revenue"]) - float(row["cogs"]), 0.01)
-		row["operating_profit"] = snappedf(float(row["gross_profit"]) - float(row["opex"]) + float(row["other_income"]), 0.01)
-		for key in ["revenue", "refunds", "net_revenue", "cogs", "gross_profit", "opex", "other_income", "operating_profit"]:
+		row["internal_revenue"] = snappedf(float(row["internal_revenue"]), 0.01)
+		row["internal_charge"] = snappedf(float(row["internal_charge"]), 0.01)
+		row["operating_profit"] = snappedf(float(row["gross_profit"]) - float(row["opex"]) + float(row["other_income"]) + float(row["internal_revenue"]) - float(row["internal_charge"]), 0.01)
+		for key in ["revenue", "refunds", "net_revenue", "cogs", "gross_profit", "opex", "other_income", "operating_profit", "internal_revenue", "internal_charge"]:
 			totals[key] = snappedf(float(totals[key]) + float(row[key]), 0.01)
 	return {"rows":rows, "totals":totals, "shared_pool":pool}
 
 static func _row(id: String) -> Dictionary:
 	return {"id":id, "revenue":0.0, "refunds":0.0, "net_revenue":0.0, "cogs":0.0,
-		"gross_profit":0.0, "opex":0.0, "allocated":0.0, "internal_cost":0.0, "other_income":0.0, "operating_profit":0.0}
+		"gross_profit":0.0, "opex":0.0, "allocated":0.0, "internal_cost":0.0, "internal_revenue":0.0, "internal_charge":0.0, "other_income":0.0, "operating_profit":0.0}

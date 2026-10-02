@@ -1,0 +1,22 @@
+{
+ "id": "trade_fair_week",
+ "title": "Trade Fair Week",
+ "client": "Aurelia Expo Board",
+ "npc": "henri_dubois",
+ "pitch": "The Expo Board needs visitors housed, the fair promoted and the stands fed. One supplier for all three, paid by the part.",
+ "reward": 36000,
+ "deadline_days": 21,
+ "offer_days": 10,
+ "earliest_day": 30,
+ "cooldown_days": 60,
+ "chance": 0.05,
+ "min_running": 2,
+ "parts": [
+  {"id": "rooms", "industry": "hotel", "label": "Fill a group room block", "share": 0.4, "metric": "data:hotel.completed_blocks", "target": 1, "subcontract": 6500,
+   "hint": "Accept and fill a group block on the hotel Rate Board."},
+  {"id": "promo", "industry": "media", "label": "Finish one measured promotion campaign", "share": 0.3, "metric": "data:media.completed", "target": 1, "subcontract": 4800,
+   "hint": "Win a client brief in the Campaign Mixer and run it to the end."},
+  {"id": "catering", "industry": "cafe", "label": "Serve 150 more cafe customers", "share": 0.3, "metric": "stat:cafe_customers", "target": 150, "subcontract": 3600,
+   "hint": "Keep the cafe open and stocked; fair visitors walk in."}
+ ]
+}

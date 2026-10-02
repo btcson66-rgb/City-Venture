@@ -5,7 +5,7 @@ extends Modal
 
 const TABS := [["overview", "Overview", "company"], ["finance", "Finance", "finance"],
 	["operations", "Operations", "parcel"], ["inventory", "Inventory", "inventory"], ["people", "People", "people"],
-	["contracts", "Contracts", "contracts"], ["segments", "Segments", "finance"]]
+	["contracts", "Contracts", "contracts"], ["segments", "Segments", "finance"], ["group", "Group", "company"]]
 
 var terminal := "laptop"
 var tab := "overview"
@@ -1484,6 +1484,10 @@ func _drive_run(id: String) -> void:
 			rebuild())
 
 
+func _tab_group() -> void:
+	GroupUI.render(self)
+
+
 func _tab_segments() -> void:
 	_section_tip("Segments", "segments")
 	var next := UIK.button("Review next action", _set_tab.bind("overview"), "primary")
@@ -1501,5 +1505,8 @@ func _tab_segments() -> void:
 			content.add_child(UIK.label(label, 9, Art.C_SKY, true))
 			for field in [["Net revenue", "net_revenue"], ["Gross profit", "gross_profit"], ["Operating expenses", "opex"], ["Allocated", "allocated"], ["Operating profit", "operating_profit"]]:
 				content.add_child(UIK.kv(field[0], Fmt.money(row[field[1]])))
-			if float(row["internal_cost"])>0:content.add_child(UIK.kv("Included internal media cost",Fmt.money(row["internal_cost"])))
+			if float(row["internal_revenue"])>0:content.add_child(UIK.kv("Internal sales to the group",Fmt.money(row["internal_revenue"])))
+			if float(row["internal_charge"])>0:content.add_child(UIK.kv("Internal purchases from the group",Fmt.money(row["internal_charge"])))
+			if float(row["internal_cost"])-float(row["internal_charge"])>0.004:content.add_child(UIK.kv("Included internal media cost",Fmt.money(float(row["internal_cost"])-float(row["internal_charge"]))))
+		if float(report["totals"]["internal_revenue"])>0:content.add_child(UIK.kv("Internal trade eliminated in group total",Fmt.money(report["totals"]["internal_revenue"])))
 		content.add_child(UIK.kv("Total operating profit", Fmt.money(report["totals"]["operating_profit"])))
