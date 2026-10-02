@@ -17,13 +17,14 @@
   "title": "Client switches agencies",
   "icon": "warning",
   "lines": [
-   "A major client left. Cancel the remaining media plan and refund the unused advance."
+   "A major client is thinking of leaving. Let them go and refund the unused advance, or offer a discount to keep the campaign."
   ]
  },
  "choices": [
   {
    "id": "respond",
-   "label": "Review the campaign and respond",
+   "label": "Let them go and refund the advance",
+   "detail": "The campaign stops. The unused advance is refunded and your reputation takes a hit.",
    "effects": [
     {
      "op": "industry",
@@ -31,7 +32,20 @@
      "kind": "client"
     }
    ],
-   "outcome": "A major client left. Cancel the remaining media plan and refund the unused advance."
+   "outcome": "The client left. The remaining media plan was cancelled and the unused advance refunded."
+  },
+  {
+   "id": "keep",
+   "label": "Offer a retention discount",
+   "detail": "Pay $1,500 to keep the campaign running.",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "media",
+     "kind": "client_keep"
+    }
+   ],
+   "outcome": "The client stayed after the discount. The campaign carries on."
   }
  ]
 }

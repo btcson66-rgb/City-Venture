@@ -160,9 +160,97 @@ func test_creative_cards_have_distinct_clickable_positions() -> void:
 	await UIRoot.get_tree().process_frame
 	var cards: Array=[]
 	for i in 4:cards.append(game.find_child("CreativeCard_slogan_"+str(i),true,false))
+	var rects: Array=[]
 	for i in 4:
 		runner.check(cards[i]!=null,"actual named card")
-		if i>0:runner.check(cards[i].get_global_rect().position.y>=cards[i-1].get_global_rect().end.y,"cards do not overlap")
+		rects.append(cards[i].get_global_rect())
+	rects.sort_custom(func(a,b):return a.position.y<b.position.y)
+	for i in range(1,4):runner.check(rects[i].position.y>=rects[i-1].end.y,"cards do not overlap")
 	for i in 3:game.choose(int(brief["preferences"][i]))
 	runner.eq(game.score(),1.0,"three actual card rounds")
+	game.close()
+func test_preferences_are_random_per_brief_not_per_audience() -> void:
+	setup()
+	var seen := {}
+	for week in 8:
+		Clock.advance(7*Clock.DAY)
+		for brief in Media.S()["briefs"].values():seen[str(brief["preferences"])]=true
+	runner.check(seen.size()>4,"preference mixes vary between briefs (%d distinct)"%seen.size())
+	runner.check(Media.S()["briefs"].values().all(func(b):return b["preferences"].size()==3),"three preferences each")
+func test_price_shock_expires_and_rate_lock_halves_it() -> void:
+	var entity := setup(20000)
+	Media.crisis("price")
+	runner.eq(Media.price_mult(),float(Media.cfg()["crisis_price_mult"]),"shock applies")
+	Clock.advance((int(Media.cfg()["crisis_price_days"])+1)*Clock.DAY)
+	runner.eq(Media.price_mult(),1.0,"CPMs return to normal after the shock window")
+	var cash := Ledger.cash(entity)
+	runner.check(Media.crisis("price_lock")["ok"],"rate lock accepted")
+	runner.eq(Ledger.cash(entity),cash-float(Media.cfg()["crisis_price_lock_cost"]),"the lock costs its fee")
+	var half := 1.0+(float(Media.cfg()["crisis_price_mult"])-1.0)*float(Media.cfg()["crisis_price_lock_share"])
+	runner.eq(Media.price_mult(),half,"locked increase is smaller")
+	Media.S()["price_mult"]=1.3
+	Media.S().erase("price_until")
+	runner.eq(Media.price_mult(),1.3,"an older save's shock starts its countdown on first read")
+	Clock.advance((int(Media.cfg()["crisis_price_days"])+1)*Clock.DAY)
+	runner.eq(Media.price_mult(),1.0,"and then expires too")
+	runner.check(Ledger.check_balanced(),"balanced")
+func test_media_events_offer_a_real_second_choice() -> void:
+	for id in ["media_price","media_client"]:
+		runner.check(DataDB.events[id]["choices"].size()>=2,id+" has two choices")
+	var entity := setup(20000)
+	won()
+	var cash := Ledger.cash(entity)
+	var event := EventEngine.trigger("media_client")
+	runner.check(EventEngine.choose(event["iid"],"keep")["ok"],"retention discount")
+	runner.eq(Ledger.cash(entity),cash-float(Media.cfg()["crisis_keep_cost"]),"discount paid")
+	runner.eq(Media.running().size(),1,"the client campaign keeps running")
+func test_client_crisis_picks_a_client_campaign_and_cancel_is_not_completed() -> void:
+	setup(30000)
+	var id := won()
+	var group_id := "GROUP-X"
+	var rebuilt := {group_id:Media._campaign(group_id,{"client":"Group business","budget":5000.0,"goal":"conversions","audience":1,"kpi":1.0,"quality":.8},"cafe")}
+	rebuilt[id]=Media.S()["campaigns"][id]
+	Media.S()["campaigns"]=rebuilt
+	var before := GameState.stat("media_completed")
+	runner.check(Media.crisis("client")["ok"],"client leaves")
+	runner.eq(rebuilt[id]["status"],"cancelled","the paying client's campaign is the one cancelled")
+	runner.eq(rebuilt[group_id]["status"],"running","the internal group campaign is untouched")
+	runner.eq(GameState.stat("media_completed"),before,"a cancelled campaign is not counted as completed")
+func test_paused_campaign_resumes_when_funded_or_times_out() -> void:
+	var entity := setup()
+	var id := won()
+	var campaign: Dictionary=Media.S()["campaigns"][id]
+	Ledger.expense(entity,"other",Ledger.cash(entity),"QA drain working cash")
+	Clock.advance(Clock.DAY)
+	runner.eq(campaign["status"],"paused","unfunded buying pauses the campaign")
+	Ledger.post(entity,"QA funding",[{"acct":"cash","dr":20000.0},{"acct":"equity","cr":20000.0}])
+	Clock.advance(Clock.DAY)
+	runner.eq(campaign["status"],"running","a funded paused campaign restarts without a click")
+	Ledger.expense(entity,"other",Ledger.cash(entity),"QA drain again")
+	Clock.advance(Clock.DAY)
+	runner.eq(campaign["status"],"paused","paused again")
+	var reputation := float(Media.S()["reputation"])
+	Clock.advance((int(Media.cfg()["paused_timeout_days"])+2)*Clock.DAY)
+	runner.eq(campaign["status"],"cancelled","left unfunded too long it is closed")
+	runner.check(float(Media.S()["reputation"])<reputation,"closing it costs reputation")
+	runner.check(Ledger.check_balanced(),"timeout settlement balanced")
+func test_creative_pitch_is_timed_shows_preferences_and_has_no_default_primary() -> void:
+	setup()
+	var brief: Dictionary=Media.S()["briefs"].values()[0]
+	var game := CreativePitch.new(brief)
+	runner.check(game.round_time>0.0,"each round has a timer")
+	UIRoot.open_modal(game)
+	await UIRoot.get_tree().process_frame
+	game.start()
+	await UIRoot.get_tree().process_frame
+	await UIRoot.get_tree().process_frame
+	var cards := game.find_children("CreativeCard_slogan_*","Button",true,false)
+	runner.eq(cards.size(),4,"four cards")
+	runner.check(cards.all(func(c):return not c.has_theme_stylebox_override("normal")),"no card is pre-highlighted")
+	var shown := false
+	for label in game.find_children("*","Label",true,false):
+		if "Client preferences" in label.text or "客戶偏好" in label.text:shown=true
+	runner.check(shown,"the client's preferences are visible inside the minigame")
+	game.round_timeout()
+	runner.eq(game.points,0.0,"running out the clock scores nothing")
 	game.close()

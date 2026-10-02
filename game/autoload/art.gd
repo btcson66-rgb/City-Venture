@@ -63,6 +63,8 @@ func tex(path: String) -> Texture2D:
 		t = load(full)
 	else:
 		push_warning("Art: missing texture " + full)
+	if t == null and _is_large_texture(path):
+		return null   # a missing large texture must not take a slot and push a real one out of the LRU
 	cache[path] = t
 	if _is_large_texture(path) and cache.size() > LARGE_CACHE_LIMIT:
 		cache.erase(cache.keys()[0])

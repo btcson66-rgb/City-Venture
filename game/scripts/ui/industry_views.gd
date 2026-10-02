@@ -17,7 +17,7 @@ static func ecommerce(det: Control, board: Node) -> void:
 static func _supplier_notice() -> String:
 	var offers: Array[String] = []
 	for offer in DataDB.suppliers["tradelink_wholesale"].get("offers", []):
-		offers.append(I18n.t(str(DataDB.product(offer["product"])["name"])) + " " + Fmt.money0(float(offer["unit_cost"])))
+		offers.append(I18n.t(str(DataDB.product(offer["product"])["name"])) + " " + Fmt.money(float(offer["unit_cost"])))
 	return I18n.t("Posted by Ken (TradeLink Wholesale): %s. MOQs apply. Order via laptop.") % " · ".join(offers)
 
 

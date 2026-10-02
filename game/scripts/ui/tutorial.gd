@@ -115,6 +115,7 @@ var _destination := ""
 
 
 func _ready() -> void:
+	EventBus.state_loaded.connect(clear_destination)
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var cfg := ConfigFile.new()
@@ -608,6 +609,11 @@ func _resolve(ws: WorldScene) -> Dictionary:
 ## A phone destination temporarily takes precedence over story/tutorial targets, using the same resolver and draw.
 func guide_to_building(id: String) -> void:
 	_destination = id
+
+
+## A phone destination belongs to one game: it is dropped on a new game, a load and a return to the title screen.
+func clear_destination() -> void:
+	_destination = ""
 
 
 func _workplace() -> String:

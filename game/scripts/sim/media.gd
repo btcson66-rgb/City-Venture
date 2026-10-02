@@ -29,6 +29,20 @@ static func stage() -> int:
 	return 1
 static func capacity() -> int:return int(cfg()["capacity_agency"] if stage()>=2 else cfg()["capacity_solo"])
 static func running() -> Array:return S()["campaigns"].values().filter(func(c):return c["status"]=="running")
+## A channel price shock fades: it lasts `crisis_price_days`, then CPMs return to normal. A save from before the
+## expiry existed starts the countdown the first time it is read.
+static func price_mult() -> float:
+	var m := float(S()["price_mult"])
+	if m==1.0:return 1.0
+	if not S().has("price_until"):S()["price_until"]=Clock.now()+int(cfg()["crisis_price_days"])*Clock.DAY
+	if Clock.now()>=int(S()["price_until"]):
+		S()["price_mult"]=1.0
+		S().erase("price_until")
+		return 1.0
+	return m
+static func _set_price_shock(mult: float) -> void:
+	S()["price_mult"]=mult
+	S()["price_until"]=Clock.now()+int(cfg()["crisis_price_days"])*Clock.DAY
 static func occupied() -> Array:return S()["campaigns"].values().filter(func(c):return c["status"] in ["running","paused"])
 static func refresh() -> void:
 	if not valid():return
@@ -45,8 +59,11 @@ static func refresh() -> void:
 		var client: String=cfg()["client_names"][GameState.rng.randi_range(0,cfg()["client_names"].size()-1)]
 		var price := budget+float(cfg()["service_fee"])
 		var id := Jobs.offer({"entity":entity(),"client":client,"scope":"Measured media campaign","price":price,"work":cfg()["campaign_days"],"due":Clock.now()+int(cfg()["brief_deadline_days"])*Clock.DAY,"terms":30,"deposit":budget*float(cfg()["client_deposit"])/price,"segment":"media"})
-		S()["briefs"][id]={"id":id,"client":client,"budget":budget,"goal":goal,"audience":audience,"deadline":Jobs.get_job(id)["due"],"kpi":budget*float(cfg()["kpi_reach_per_budget"] if goal=="awareness" else cfg()["kpi_conversion_per_budget"]),"status":"open","quality":0.0,"preferences":cfg()["preferences"][audience].duplicate()}
+		S()["briefs"][id]={"id":id,"client":client,"budget":budget,"goal":goal,"audience":audience,"deadline":Jobs.get_job(id)["due"],"kpi":budget*float(cfg()["kpi_reach_per_budget"] if goal=="awareness" else cfg()["kpi_conversion_per_budget"]),"status":"open","quality":0.0,"preferences":_roll_preferences()}
 	if not S()["radio"].is_empty():_radio_offer()
+## Every brief wants its own slogan / visual / tone mix; it is not fixed by the audience.
+static func _roll_preferences() -> Array:
+	return [GameState.rng.randi_range(0,3),GameState.rng.randi_range(0,3),GameState.rng.randi_range(0,3)]
 static func creative_score(brief: Dictionary,cards: Array) -> float:
 	if cards.size()!=3:return 0
 	var score := 0.0
@@ -107,6 +124,7 @@ static func _day(campaign: Dictionary) -> void:
 	var cost := snappedf(gross*(1-rebate),.01)
 	if Ledger.cash(entity())<cost:
 		campaign["status"]="paused"
+		campaign["paused_at"]=Clock.now()
 		return
 	if internal:
 		Ledger.post(entity(),I18n.t("Internal campaign at media cost"),[{"acct":"exp:advertising","dr":cost},{"acct":"cash","cr":cost}],{"type":"group_campaign","id":campaign["id"],"segment":campaign["target"],"internal":true})
@@ -117,7 +135,7 @@ static func _day(campaign: Dictionary) -> void:
 		var channel: Dictionary=cfg()["channels"][cid]
 		var share := gross*float(campaign["mix"][cid])/100
 		var prior := float(campaign["channel_spend"].get(cid,0))
-		var views := impressions(channel,share,prior,float(S()["price_mult"]))
+		var views := impressions(channel,share,prior,price_mult())
 		campaign["channel_spend"][cid]=prior+share
 		raw+=views
 		reach+=views*float(channel["audience"][int(campaign["audience"])])
@@ -148,8 +166,9 @@ static func _settle(campaign: Dictionary,cancelled := false) -> void:
 		if job["price"]>0:Jobs.deliver(job["id"]);Jobs.invoice(job["id"])
 		else:job["status"]="closed"
 		S()["reputation"]=clampf(float(S()["reputation"])+(float(cfg()["reputation_win"]) if met else -float(cfg()["reputation_loss"])),float(cfg()["reputation_min"]),1)
-		if not cancelled:S()["completed"]=int(S()["completed"])+1
-		GameState.inc_stat("media_completed")
+		if not cancelled:
+			S()["completed"]=int(S()["completed"])+1
+			GameState.inc_stat("media_completed")
 		if not S()["radio"].is_empty():S()["radio"]["audience"]=float(S()["radio"]["audience"])+float(campaign["reach"])*float(cfg()["radio_growth_per_reach"])
 	campaign["kpi_met"]=met
 	campaign["status"]="cancelled" if cancelled else "completed"
@@ -162,6 +181,7 @@ static func resume(id: String) -> Dictionary:
 	var rebate := 0.0 if campaign["target"]!="" else float(cfg()["buyer_rebate"] if Staff.count("media_buyer")>0 else cfg()["media_rebate"])
 	if Ledger.cash(entity())<snappedf(gross*(1-rebate),.01):return error("Choose a paused campaign and fund its next media purchase.")
 	campaign["status"]="running"
+	campaign.erase("paused_at")
 	Sim.schedule(Clock.now()+Clock.DAY,"media.day",{"id":id})
 	return {"ok":true}
 static func demand_boost(target: String) -> float:
@@ -209,23 +229,43 @@ static func sell_slot(id: String) -> Dictionary:
 static func crisis(kind: String,_retain := true) -> Dictionary:
 	if not valid():return error("Open the agency first.")
 	match kind:
-		"price":S()["price_mult"]=float(cfg()["crisis_price_mult"])
+		"price":_set_price_shock(float(cfg()["crisis_price_mult"]))
+		"price_lock":
+			if Ledger.cash(entity())<float(cfg()["crisis_price_lock_cost"]):return error("Save the rate-lock fee first.")
+			Ledger.expense(entity(),"other",float(cfg()["crisis_price_lock_cost"]),I18n.t("Channel rate lock"),source())
+			_set_price_shock(1.0+(float(cfg()["crisis_price_mult"])-1.0)*float(cfg()["crisis_price_lock_share"]))
 		"pr","pr_ignore":
 			if kind=="pr":
 				if Ledger.cash(entity())<float(cfg()["crisis_pr_cost"]):return error("Save the public-relations repair cost first.")
 				Ledger.expense(entity(),"other",float(cfg()["crisis_pr_cost"]),I18n.t("Campaign public-relations repair"),source())
 			else:
 				for campaign in running():campaign["quality"]=maxf(0,float(campaign["quality"])-float(cfg()["crisis_pr_quality_loss"]))
-		"client":
-			if not running().is_empty():_settle(running()[0],true)
+		"client","client_keep":
+			# Only a paying client can walk away; internal group campaigns are never the one that leaves.
+			var clients := running().filter(func(c):return c["target"]=="")
+			if not clients.is_empty():
+				if kind=="client":_settle(clients[0],true)
+				else:
+					if Ledger.cash(entity())<float(cfg()["crisis_keep_cost"]):return error("Save the client retention discount first.")
+					Ledger.expense(entity(),"other",float(cfg()["crisis_keep_cost"]),I18n.t("Client retention discount"),source(clients[0]["id"]))
 		_:return error("Unknown agency crisis.")
 	return {"ok":true}
 static func on_hour(_t: int,h: int) -> void:
 	if not valid() or h!=9:return
 	refresh()
+	_service_paused()
 	if not S()["radio"].is_empty():
 		_inventory()
 		Ledger.expense(entity(),"maintenance",float(cfg()["owned_media_upkeep_day"]),I18n.t("Campus Radio upkeep"),source(),"cash" if Ledger.cash(entity())>=float(cfg()["owned_media_upkeep_day"]) else "accounts_payable")
+## A paused campaign restarts by itself once the next media purchase is funded; one left unfunded for
+## `paused_timeout_days` is closed like a cancelled brief (unused advance refunded, reputation penalty).
+static func _service_paused() -> void:
+	for campaign in S()["campaigns"].values():
+		if campaign["status"]!="paused":continue
+		if resume(campaign["id"]).get("ok",false):continue
+		if Clock.now()-int(campaign.get("paused_at",Clock.now()))>=int(cfg()["paused_timeout_days"])*Clock.DAY:
+			_settle(campaign,true)
+			GameState.add_message("imani_cole",I18n.t("We closed the %s campaign: the media purchase went unfunded for too long. The unused advance was refunded.")%campaign["client"])
 static func handle(kind: String,payload: Dictionary) -> void:
 	if not valid():return
 	if kind=="media.day":

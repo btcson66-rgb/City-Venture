@@ -163,8 +163,8 @@ func _apply_grant() -> void:
 	rebuild()
 
 
-func _row(k: String, v: String, col: Color) -> void:
-	body.add_child(UIK.kv_tip(k, v, "company_registration", col, 8))
+func _row(k: String, v: String, col: Color, tip := "company_registration") -> void:
+	body.add_child(UIK.kv_tip(k, v, tip, col, 8))
 
 
 func _action_style(ready: bool) -> String:

@@ -40,6 +40,9 @@ static func set_markers(on: bool) -> void:
 	cfg.save("user://settings.cfg")
 
 
+var _was_drawn := false
+
+
 ## Offset only the visual chip, never the interaction position or radius.
 func _stagger() -> void:
 	var neighbours: Array[Interactable] = []
@@ -51,6 +54,12 @@ func _stagger() -> void:
 
 
 func _process(delta: float) -> void:
+	if not enabled or not markers_enabled():
+		if _was_drawn:             # clear the chip once, then stop redrawing every frame
+			_was_drawn = false
+			queue_redraw()
+		return
+	_was_drawn = true
 	_phase += delta * 2.0
 	queue_redraw()
 

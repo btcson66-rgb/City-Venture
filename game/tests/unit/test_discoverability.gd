@@ -49,9 +49,11 @@ func test_guide_covers_current_and_future_active_data() -> void:
 	runner.check(BuildingInfo.guide_groups().filter(func(g): return g["id"] == "future_test").is_empty(), "future district is hidden")
 	var group: Dictionary
 	DataDB.districts["future_test"]["status"] = "active"
+	BuildingInfo.invalidate_availability()
 	group = BuildingInfo.guide_groups().filter(func(g): return g["id"] == "future_test")[0]
 	runner.eq(group["buildings"], ["future_shop_test"], "status activation automatically adds future building")
 	DataDB.buildings["future_shop_test"]["enterable"] = false
+	BuildingInfo.invalidate_availability()
 	group = BuildingInfo.guide_groups().filter(func(g): return g["id"] == "future_test")[0]
 	runner.check(group["buildings"].is_empty(), "nonenterable scenery is excluded")
 	DataDB.buildings.erase("future_shop_test")
@@ -84,5 +86,5 @@ func test_meal_purchase_uses_dining_and_item_name() -> void:
 	runner.eq(Ledger.cash("player"), cash - 22, "real purchase charged")
 	runner.eq(Ledger.balance("player", "exp:dining"), 22.0, "dining category from data")
 	runner.eq(Ledger.balance("player", "exp:coffee"), 0.0, "meal is not coffee")
-	runner.check("House special — $22" in notices, "toast names meal and unit")
+	runner.check("House special — $22.00" in notices, "toast names meal and unit")
 	runner.check(Ledger.check_balanced(), "purchase balanced")

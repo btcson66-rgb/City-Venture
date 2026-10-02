@@ -41,6 +41,8 @@ func build() -> void:
 			ob.name = "OpenAccount"
 			ob.disabled = Ledger.cash("player") < capital
 			left.add_child(ob)
+			if ob.disabled:
+				left.add_child(UIK.wrap(I18n.t("You only have %s in personal checking. Pick a smaller amount.") % Fmt.money0(Ledger.cash("player")), 7, Art.C_GOLD, 196))
 		else:
 			left.add_child(UIK.label("Transfers", 8, Art.C_MUTED, true))
 			var th := UIK.hbox(3)
