@@ -52,7 +52,10 @@ func _businesses() -> void:
 	var d: Dictionary = DataDB.businesses[selected]
 	var det := UIK.vbox(4)
 	det.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	cols.add_child(det)
+	# The details (gates, suppliers, actions) can outgrow the panel; scroll them so the start button stays on screen.
+	var det_scroll := UIK.scroll(det, Vector2(310, 236))
+	det_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	cols.add_child(det_scroll)
 	det.add_child(UIK.title(d["name"], 13, Art.C_WHITE))
 	det.add_child(UIK.wrap(d["pitch"], 9, Art.C_SKY, 300))
 	det.add_child(UIK.kv("Minimum starting capital", Fmt.money0(float(d["starting_capital_min"]))))
