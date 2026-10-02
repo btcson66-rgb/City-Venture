@@ -67,6 +67,8 @@ func _ready() -> void:
 	MiniGames.auto = 0.85
 	if out_dir == "":
 		out_dir = ProjectSettings.globalize_path("user://bot")
+	# Keep walkthrough save/load fixtures outside the player profile.
+	SaveSystem.DIR = out_dir.path_join("saves")
 	DirAccess.make_dir_recursive_absolute(out_dir + "/screenshots")
 	t0 = Time.get_ticks_msec()
 	UIRoot.toasted.connect(func(text: String, kind: String): if kind == "bad": log_line("  toast: " + text))

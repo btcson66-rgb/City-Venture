@@ -431,6 +431,7 @@ func _new_game() -> void:
 	await bot.wait(1.5)
 	await bot.shot("main_menu")
 	await bot.click_named("NewGame")
+	await bot.click_named("CreateRunCharacter")
 	await bot.until(func(): return SceneRouter.current is CharacterCreator, 5.0)
 	await bot.wait(1.0)
 	bot.step("Character Creator")
