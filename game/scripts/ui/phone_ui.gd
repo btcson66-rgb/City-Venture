@@ -104,6 +104,8 @@ func _render() -> void:
 			_bank()
 		"tasks":
 			_tasks()
+		"opportunities":
+			_opportunities()
 		"shoplane":
 			_shoplane()
 		"timeline":
@@ -126,7 +128,7 @@ func _home() -> void:
 	var unread := GameState.unread_messages()
 	var apps := [["messages", "mail", I18n.t("Messages") + (" %d" % unread if unread > 0 else "")], ["bank", "bank", "Bank"], ["tasks", "tasks", "Tasks"],
 		["map", "map", "City"], ["shoplane", "orders", "ShopLane"], ["timeline", "calendar", "Timeline"],
-		["world", "world", "World"], ["save", "save", "Save"], ["close", "close", "Close"]]
+		["world", "world", "World"], ["opportunities", "tasks", "Opportunities"], ["save", "save", "Save"], ["close", "close", "Close"]]
 	for a in apps:
 		var b := Button.new()
 		b.custom_minimum_size = Vector2(40, 40)
@@ -161,6 +163,27 @@ func _open_app(a: String) -> void:
 			close()
 		_:
 			_go(a)
+
+
+func _opportunities() -> void:
+	_header("Opportunities")
+	content.add_child(UIK.label_tip("Side stories", "side_stories"))
+	var help := UIK.button("?", func(): Help.open("phone_opportunities"))
+	help.name = "OpportunitiesHelp"
+	content.add_child(help)
+	var available := StoryEngine.available_side_stories()
+	if available.is_empty():
+		content.add_child(UIK.wrap("No new opportunities right now. Check again after your company grows.", 7, Art.C_MUTED, 128))
+	for i in available.size():
+		var d: Dictionary = available[i]
+		content.add_child(UIK.wrap(str(d.get("title", "")), 8, Art.C_WHITE, 128))
+		content.add_child(UIK.wrap(str(d.get("text", "")), 7, Art.C_MUTED, 128))
+		var id := str(d["id"])
+		var b := UIK.button("Accept opportunity", func():
+			StoryEngine.start_side_story(id)
+			_render(), "primary" if i == 0 else "")
+		b.name = "AcceptOpportunity_" + id
+		content.add_child(b)
 
 
 func _senders() -> Array:

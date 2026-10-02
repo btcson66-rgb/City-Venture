@@ -13,6 +13,70 @@ static func chapters() -> Array:
 	return DataDB.story.get("chapters", [])
 
 
+## Side stories share objective conditions/actions, but never replace the main chapter.
+static func side_stories() -> Dictionary:
+	return DataDB.story.get("side_stories", {})
+
+
+## Lazy state keeps saves written before side stories compatible.
+static func side_progress() -> Dictionary:
+	if not St().has("side_stories"):
+		St()["side_stories"] = {}
+	return St()["side_stories"]
+
+
+static func side_available(id: String) -> bool:
+	var d: Dictionary = side_stories().get(id, {})
+	if d.is_empty() or d.get("objectives", []).is_empty() or side_progress().has(id):
+		return false
+	var business := str(d.get("business", ""))
+	if business != "" and DataDB.businesses.get(business, {}).get("status", "") != "active":
+		return false
+	var company := GameState.company_id()
+	var entity: Dictionary = GameState.data["entities"].get(company, {})
+	if company == "" or entity.is_empty() or entity.has("closed"):
+		return false
+	return Cond.all(d.get("trigger", []))
+
+
+static func available_side_stories() -> Array:
+	var out: Array = []
+	for id in side_stories():
+		if side_available(str(id)):
+			out.append(side_stories()[id])
+	out.sort_custom(func(a, b): return str(a["id"]) < str(b["id"]))
+	return out
+
+
+static func start_side_story(id: String) -> bool:
+	if not side_available(id):
+		return false
+	side_progress()[id] = {"company": GameState.company_id(), "status": "active", "skipped": false}
+	_advance_side_story(id)
+	check()
+	return true
+
+
+## Completion receipts precede actions, so repeated checks/reloads cannot award twice.
+## An unavailable step continues the sequence but forfeits the completion reward.
+static func _advance_side_story(id: String) -> void:
+	var p: Dictionary = side_progress().get(id, {})
+	if p.get("status", "") != "active":
+		return
+	var d: Dictionary = side_stories().get(id, {})
+	if d.is_empty():
+		return
+	for o in d.get("objectives", []):
+		if not o["id"] in St()["done"]:
+			start_objective(str(o["id"]))
+			return
+	p["status"] = "unavailable" if p.get("skipped", false) else "completed"
+	if p["status"] == "completed":
+		run_actions(d.get("on_complete", []))
+	else:
+		run_actions(d.get("on_unavailable", []))
+
+
 static func chapter_def(id: String) -> Dictionary:
 	for c in chapters():
 		if c["id"] == id:
@@ -72,6 +136,7 @@ static func complete_objective(id: String, unavailable := false) -> void:
 	St()["active"].erase(id)
 	St()["done"].append(id)
 	var d := objective_def(id)
+	var side := str(d.get("_side_story", ""))
 	if unavailable:
 		# Several consecutive unavailable steps can share one explanation; say it once.
 		var explanation := I18n.t(str(d["skip_text"]))
@@ -79,7 +144,13 @@ static func complete_objective(id: String, unavailable := false) -> void:
 			GameState.add_message("maya", d["skip_text"])
 	elif d.get("main", false):
 		EventBus.notify.emit("✓ " + fill(d.get("text", id)), "good", "check")
-	run_actions(d.get("on_complete", []))
+	if side != "" and unavailable:
+		side_progress()[side]["skipped"] = true
+		run_actions(d.get("on_skip", []))
+	else:
+		run_actions(d.get("on_complete", []))
+	if side != "":
+		_advance_side_story(side)
 	var ch: String = d.get("_chapter", "")
 	if ch != "":
 		var c := chapter_def(ch)
@@ -124,6 +195,19 @@ static func check() -> void:
 
 static func _check_all() -> void:
 	Contracts.reconcile_tags()
+	# A closing company cannot leave a side objective waiting for a business action forever.
+	for id in side_progress().keys():
+		var p: Dictionary = side_progress()[id]
+		if p.get("status", "") != "active":
+			continue
+		var company: Dictionary = GameState.data["entities"].get(p.get("company", ""), {})
+		if company.is_empty() or company.has("closed"):
+			p["status"] = "unavailable"
+			for o in side_stories().get(id, {}).get("objectives", []):
+				St()["active"].erase(o["id"])
+			run_actions(side_stories().get(id, {}).get("on_unavailable", []))
+		else:
+			_advance_side_story(str(id))
 	# saves that finished the June sandbox before chapters 4–6 existed carry on into Chapter 4
 	if St().get("chapter", "") == "ch3_open_for_business" and "goal_month" in St()["done"] and not chapter_def("ch4_growing_pains").is_empty():
 		start_chapter("ch4_growing_pains")

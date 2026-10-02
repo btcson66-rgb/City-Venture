@@ -242,6 +242,18 @@ or a conversation) binds itself. Conditions may read the event's context: `ctx:<
 ```
 Story recovery and saved receipts (#24):
 
+Side-story infrastructure (#86, content integration Blocked on #64–#69): definitions load from
+`data/story/side_stories/<id>.json` into `DataDB.story.side_stories`. Each definition has `id`, translated
+`title`/`text`, `business` (must be active), `trigger: [Cond expressions]`, and `objectives` in the same
+format as chapter objectives. Objective ids must be globally unique. Accepting requires a live registered
+company. The phone's Opportunities app accepts eligible stories without replacing the main chapter.
+`story.side_stories[id] = {company, status: active|completed|unavailable, skipped}` initializes lazily on
+old saves. Steps advance sequentially; `on_skip` replaces a side step's success actions when it is impossible.
+The story's `on_complete` runs once only when no step was skipped; otherwise `on_unavailable` runs once.
+Closing/removing the bound company cancels its active steps and runs `on_unavailable`, never the reward.
+There is no production side-story content in this change: each industry's real conditions, choices,
+reward and tutorial require its implementation to be merged first.
+
 Objectives accept optional `skip_when: [Cond expressions]` and `skip_text` (translated player text). When normal completion fails but all skip conditions hold, the engine sends the explanation and completes the step without claiming a successful task. `contract_closed:<tag>` means the contract's original seller entity has a `closed` field; it does not transfer money or rewrite the contract. `has_listed` means any listing exists, including a paused listing, or an order was already placed.
 
 `data/economy/story_recovery.json`: `{loss_months: 2}` controls the Chapter 6 negative-cash month-end fallback. Runtime additions use existing lazy dictionaries: `stats.ch6_cash_loss_months`, `flags.ch6_cash_reviewed`, `flags.ch7_survived_losses`, `flags.news_read_y3`–`news_read_y8`. The legacy `news_read`, `ch6_month_in_black`, `ch7_month_profit` keys remain readable. `_migrate` derives only the saved era's news receipt from the old generic key; era changes clear the generic receipt. Contract receipts reconcile from saved statuses on load and story checks. Tutorial version 3 and step indices are unchanged.

@@ -17,6 +17,9 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "opportunities":
+		await _opportunities_fixture()
+		return
 	if _arg("from") == "loan_access":
 		await _loan_access_fixture()
 		return
@@ -92,6 +95,23 @@ func _interaction_focus_fixture() -> void:
 
 
 ## Lending input regression. Only travel, age and stock are fixtures; counter, booking and signing use real input.
+## Short #86 infrastructure tour. Real industry stories remain blocked on their modules.
+func _opportunities_fixture() -> void:
+	await bot.wait(4.0)
+	UIRoot._suppress_decisions = true
+	UIRoot.tutorial.st()["off"] = true
+	bot.step("Phone opportunities: no unavailable industry can offer a story")
+	UIRoot.phone.open()
+	await bot.wait(0.5)
+	await bot.click_named("App_opportunities")
+	bot.expect(UIRoot.phone.app == "opportunities", "phone opens Opportunities through its app button")
+	bot.expect(StoryEngine.available_side_stories().is_empty(), "unmerged industries offer no fictional content")
+	bot.expect(UIRoot.phone.find_children("AcceptOpportunity_*", "Button", true, false).is_empty(), "empty state has no acceptance action")
+	await bot.shot("opportunities_empty")
+	UIRoot.phone.close()
+	bot.expect(Ledger.check_balanced(), "opportunity view keeps ledger balanced")
+
+
 func _loan_access_fixture() -> void:
 	await bot.wait(4.0)   # let the arrival overlay finish before collecting lending screenshots
 	bot.step("Loan brochure outside the bank: all conditions and navigation")

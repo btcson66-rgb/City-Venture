@@ -51,6 +51,15 @@ func load_all() -> void:
 	var gl = _read("res://data/help/glossary.json")
 	glossary = gl if typeof(gl) == TYPE_DICTIONARY else {}
 	story = _read("res://data/story/chapters.json")
+	story["side_stories"] = {}
+	for path in _json_files("res://data/story/side_stories"):
+		var side: Dictionary = _read(path)
+		if side.has("id"):
+			story["side_stories"][side["id"]] = side
+			for step in side.get("objectives", []):
+				var objective: Dictionary = step.duplicate(true)
+				objective["_side_story"] = side["id"]
+				story["side"].append(objective)
 	world = _read("res://data/world/years.json")
 	character = _read("res://data/character/options.json")
 	buildings_meta = _read("res://assets/buildings/buildings_meta.json")
