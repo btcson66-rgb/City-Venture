@@ -39,6 +39,18 @@ static func _init_patterns() -> void:
 	_patterns.sort_custom(func(a, b): return a["literal"] > b["literal"])
 
 static func display(text: String) -> String:
+	var localized := _localized(text)
+	var money := RegEx.create_from_string("\\$[0-9,]+(?:\\.[0-9]+)?")
+	var result := ""
+	var offset := 0
+	for found in money.search_all(localized):
+		result += localized.substr(offset, found.get_start() - offset)
+		result += Fmt.money0(float(found.get_string().substr(1).replace(",", "")))
+		offset = found.get_end()
+	return result + localized.substr(offset)
+
+
+static func _localized(text: String) -> String:
 	if not I18n.is_zh(): return text
 	if text == "Coffee — Bloom Coffee": return I18n.t("Coffee — Bloom Coffee")
 	var translated := I18n.t(text)

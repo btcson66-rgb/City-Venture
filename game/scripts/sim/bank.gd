@@ -245,8 +245,8 @@ static func _payment(l: Dictionary) -> void:
 		adjust_credit(-60, "loan called")
 		l["call_due"] = Clock.now() + 7 * Clock.DAY
 		Sim.schedule(int(l["call_due"]), "bank.called", {"id": l["id"]})
-		GameState.add_message("marcus", I18n.t("Two missed payments. The bank has called loan %s: %s is due in full within 7 days.") % [l["id"], Fmt.money(float(l["balance"]))])
-		EventBus.notify.emit(I18n.t("Nexus Bank called loan %s. %s due in 7 days.") % [l["id"], Fmt.money(float(l["balance"]))], "bad", "warning")
+		GameState.add_message("marcus", I18n.t("Two missed payments. The bank has called loan %s: %s is due in full within 7 days.") % [l["id"], Fmt.money0(float(l["balance"]))])
+		EventBus.notify.emit(I18n.t("Nexus Bank called loan %s. %s due in 7 days.") % [l["id"], Fmt.money0(float(l["balance"]))], "bad", "warning")
 		return
 	GameState.add_message("marcus", I18n.t("Your payment on loan %s bounced. We'll try again in 3 days. It's cheaper to call me before this happens.") % l["id"])
 	Sim.schedule(Clock.now() + 3 * Clock.DAY, "bank.payment", {"id": l["id"]})

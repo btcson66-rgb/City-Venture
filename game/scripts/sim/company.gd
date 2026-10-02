@@ -55,7 +55,7 @@ static func register(name: String, business_type: String, address: String) -> Di
 	var reg := registration()
 	var fee := registration_fee()
 	if Ledger.cash("player") < fee:
-		return {"ok": false, "error": I18n.t("The registration fee is %s.") % Fmt.money(fee)}
+		return {"ok": false, "error": I18n.t("The registration fee is %s.") % Fmt.money0(fee)}
 	var cid := "co_" + slug(name)
 	var k := 2
 	while GameState.data["entities"].has(cid):   # a closed company keeps its books; a restart gets a fresh id
@@ -86,7 +86,7 @@ static func open_business_account(capital: float) -> Dictionary:
 	if capital < 500.0:
 		return {"ok": false, "error": "Minimum opening deposit is $500."}
 	if Ledger.cash("player") < capital:
-		return {"ok": false, "error": I18n.t("You only have %s personally.") % Fmt.money(Ledger.cash("player"))}
+		return {"ok": false, "error": I18n.t("You only have %s personally.") % Fmt.money0(Ledger.cash("player"))}
 	Ledger.post("player", I18n.t("Capital injected into %s") % GameState.entity_name(cid), [{"acct": "investments", "dr": capital}, {"acct": "cash", "cr": capital}], {"type": "capital"})
 	Ledger.post(cid, "Founder capital (opening deposit)", [{"acct": "cash", "dr": capital}, {"acct": "equity", "cr": capital}], {"type": "capital"})
 	GameState.data["entities"][cid]["bank_account"] = true

@@ -246,7 +246,7 @@ static func _buy_after_talk(p: Dictionary) -> void:
 	Clock.advance(int(p.get("minutes", 10)))
 	if p.has("flag"):
 		GameState.set_flag(p["flag"])
-	UIRoot.toast(I18n.t("Coffee — %s.") % Fmt.money(price), "info", "coffee")
+	UIRoot.toast(I18n.t("Coffee — %s.") % Fmt.money0(price), "info", "coffee")
 
 
 ## Your own café: work the counter for a couple of hours (the barista minigame), then the café's till takes over.

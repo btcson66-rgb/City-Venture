@@ -1,6 +1,16 @@
 extends RefCounted
 var runner
 
+func test_beta_release_notes_are_complete_in_both_languages() -> void:
+	var note: Dictionary = DataDB.patch_notes.get("0.2.0-beta", {})
+	var lines: Array = note.get("lines", [])
+	runner.check(lines.size() >= 6 and lines.size() <= 10, "release has 6–10 player-facing updates")
+	I18n.init()
+	var previous := I18n.locale()
+	I18n.set_locale("zh_TW", false)
+	for line in lines: runner.check(I18n.t(str(line)) != str(line), "release line translated")
+	I18n.set_locale(previous, false)
+
 func test_version_filter_excludes_seen_and_future_releases() -> void:
 	var notes := {"0.1.9-test9": {}, "0.1.6-test6": {}, "0.1.8-test8.1": {}, "0.1.5-test5": {}, "0.2.0-beta": {}, "0.1.7-test7": {}}
 	runner.eq(PatchNotes.since("0.1.6-test6", "0.1.9-test9", notes), ["0.1.7-test7", "0.1.8-test8.1", "0.1.9-test9"], "only newer installed releases in chronological order")

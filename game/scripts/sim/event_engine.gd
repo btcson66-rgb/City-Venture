@@ -91,9 +91,9 @@ static func bind(d: Dictionary) -> Dictionary:
 		var o := Ecommerce.offer(sup, ctx.get("product_id", ""))
 		if not o.is_empty():
 			ctx["moq"] = int(o["moq"])
-			ctx["unit_cost"] = Fmt.money(Ecommerce.unit_cost(sup, ctx["product_id"]))
+			ctx["unit_cost"] = Fmt.money0(Ecommerce.unit_cost(sup, ctx["product_id"]))
 			ctx["moq_cost_v"] = Ecommerce.unit_cost(sup, ctx["product_id"]) * int(o["moq"])
-			ctx["moq_cost"] = Fmt.money(ctx["moq_cost_v"])
+			ctx["moq_cost"] = Fmt.money0(ctx["moq_cost_v"])
 	return ctx
 
 

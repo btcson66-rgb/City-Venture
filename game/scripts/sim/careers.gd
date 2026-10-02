@@ -281,8 +281,8 @@ static func _deliver(g: Dictionary) -> Dictionary:
 	else:
 		f["rep"] = clampf(rep() + 0.25, 0.0, 5.0)
 	GameState.inc_stat("gigs_delivered")
-	GameState.add_message("client", I18n.t("%s: Received, thanks! Invoice for %s noted.") % [str(g["client"]), Fmt.money(fee)] if not late
-		else I18n.t("%s: It's late, so we've knocked 20%% off. Invoice for %s noted.") % [str(g["client"]), Fmt.money(fee)])
+	GameState.add_message("client", I18n.t("%s: Received, thanks! Invoice for %s noted.") % [str(g["client"]), Fmt.money0(fee)] if not late
+		else I18n.t("%s: It's late, so we've knocked 20%% off. Invoice for %s noted.") % [str(g["client"]), Fmt.money0(fee)])
 	return {"ok": true, "delivered": true, "fee": fee, "late": late}
 
 
@@ -301,7 +301,7 @@ static func handle(kind: String, p: Dictionary) -> void:
 			Ledger.post(ent, I18n.t("Client payment — %s") % gig_title(g), [{"acct": "cash", "dr": amt}, {"acct": "accounts_receivable", "cr": amt}],
 				{"type": "gig_payment", "id": g["id"]})
 			g["status"] = "paid"
-			EventBus.notify.emit(I18n.t("%s paid %s.") % [str(g["client"]), Fmt.money(amt)], "good", "cash")
+			EventBus.notify.emit(I18n.t("%s paid %s.") % [str(g["client"]), Fmt.money0(amt)], "good", "cash")
 
 
 static func on_hour(_t: int, h: int) -> void:

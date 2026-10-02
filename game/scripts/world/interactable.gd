@@ -76,7 +76,7 @@ func _draw() -> void:
 	if locked:
 		draw_texture_rect(Art.icon("lock"), Rect2(pos + Vector2(size - 4, size - 4), Vector2(7, 7)), false, Color(1, 1, 1, alpha))
 	if distance <= 64.0:
-		var text := I18n.t(label)
+		var text := BuildingInfo.action_label(label, action, params)
 		if text.length() > 38:
 			text = text.left(37) + "…"
 		var font := UIK.body_font()
@@ -87,7 +87,7 @@ func _draw() -> void:
 
 
 func prompt_text() -> String:
-	var t := I18n.t(label)
+	var t := BuildingInfo.action_label(label, action, params)
 	var lock := Actions.lock_reason(action, params)
 	if lock != "":
 		t += "  ·  " + I18n.t(lock)

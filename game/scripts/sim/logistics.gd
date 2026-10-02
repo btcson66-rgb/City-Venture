@@ -439,10 +439,10 @@ static func _settle(j: Dictionary, st: Dictionary, driver: String) -> Dictionary
 	GameState.inc_stat("van_fuel_l", float(st["fuel_l"]))
 	if int(GameState.stat("van_runs")) == 1:
 		GameState.set_flag("first_delivery_run")
-		GameState.timeline(I18n.t("First delivery run for %s: %s.") % [client, Fmt.money(pay)], "milestone")
-	var msg := I18n.t("Run %s paid %s.") % [j["id"], Fmt.money(pay)]
+		GameState.timeline(I18n.t("First delivery run for %s: %s.") % [client, Fmt.money0(pay)], "milestone")
+	var msg := I18n.t("Run %s paid %s.") % [j["id"], Fmt.money0(pay)]
 	if driver != "":
-		msg = I18n.t("%s drove run %s: paid %s.") % [driver, j["id"], Fmt.money(pay)]
+		msg = I18n.t("%s drove run %s: paid %s.") % [driver, j["id"], Fmt.money0(pay)]
 	if late:
 		msg += " " + I18n.t("It was late, so the pay was cut.")
 	EventBus.notify.emit(msg, "warn" if late else "good", "parcel")

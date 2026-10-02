@@ -43,7 +43,7 @@ static func rescue_with_savings() -> Dictionary:
 	var ent := str(state().get("entity", ""))
 	var need := shortfall(ent)
 	if Ledger.cash("player") < need:
-		return {"ok": false, "error": I18n.t("You'd need %s of your own money.") % Fmt.money(need)}
+		return {"ok": false, "error": I18n.t("You'd need %s of your own money.") % Fmt.money0(need)}
 	if need > 0.0:
 		Ledger.post("player", I18n.t("Rescue capital into %s") % GameState.entity_name(ent), [{"acct": "investments", "dr": need}, {"acct": "cash", "cr": need}], {"type": "capital"})
 		Ledger.post(ent, "Founder rescue capital", [{"acct": "cash", "dr": need}, {"acct": "equity", "cr": need}], {"type": "capital"})

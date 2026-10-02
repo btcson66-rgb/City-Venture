@@ -355,7 +355,7 @@ static func _close_day() -> void:
 		_update_rating(td)
 		GameState.inc_stat("cafe_customers", int(td["served"]))
 		GameState.inc_stat("cafe_days_open")
-		var msg := I18n.t("%s closed: %d customers, %s in the till.") % [display_name(), int(td["served"]), Fmt.money(gross)]
+		var msg := I18n.t("%s closed: %d customers, %s in the till.") % [display_name(), int(td["served"]), Fmt.money0(gross)]
 		if int(td["queue_lost"]) > 0:
 			msg += " " + I18n.t("%d walked out of the queue.") % int(td["queue_lost"])
 		if int(td["stock_lost"]) > 0:

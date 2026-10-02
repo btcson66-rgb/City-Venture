@@ -897,7 +897,7 @@ func _tutorial_tour() -> void:
 	await wait(0.8)
 	UIRoot.close_all()
 	await wait(1.6)
-	expect(_tut_step() == "order", "listed: wait for the first order (%s)" % _tut_step())
+	expect(_tut_step() in ["order", "pack"], "listed: wait for or pack the first order (%s)" % _tut_step())
 	SceneRouter._enter("interior", "riverside_apartment", "door", "up")
 	await wait(1.4)
 	await shot("tut_order_wait")

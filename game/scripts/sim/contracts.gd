@@ -26,7 +26,7 @@ static func create_offer(t: Dictionary) -> String:
 		"status": "offered", "offered": Clock.now(), "expires": Clock.now() + int(t.get("expires_days", 2)) * Clock.DAY,
 		"tag": str(t.get("tag", "")),
 		"patience": int(DataDB.companies.get(t["buyer"], {}).get("negotiation", {}).get("patience", 1)),
-		"history": [{"t": Clock.now(), "by": t["buyer"], "text": I18n.t("Offer: %d × %s @ %s, Net %d") % [qty, I18n.t(p.get("name", "")), Fmt.money(price), int(t.get("payment_terms_days", 30))]}],
+		"history": [{"t": Clock.now(), "by": t["buyer"], "text": I18n.t("Offer: %d × %s @ %s, Net %d") % [qty, I18n.t(p.get("name", "")), Fmt.money0(price), int(t.get("payment_terms_days", 30))]}],
 	}
 	C()[cid] = c
 	Sim.schedule(int(c["expires"]), "con.expire", {"id": cid})
@@ -134,7 +134,7 @@ static func accept(cid: String) -> Dictionary:
 			[{"acct": "cash", "dr": up}, {"acct": "deferred_revenue", "cr": up}], {"type": "contract", "id": cid})
 	Sim.schedule(int(c["due"]), "con.due", {"id": cid})
 	_tag(c, "accepted")
-	GameState.timeline(I18n.t("Signed contract %s with %s: %s.") % [cid, GameState.entity_name(c["buyer"]), Fmt.money(c["total"])], "business")
+	GameState.timeline(I18n.t("Signed contract %s with %s: %s.") % [cid, GameState.entity_name(c["buyer"]), Fmt.money0(c["total"])], "business")
 	EventBus.contract_changed.emit(cid)
 	return {"ok": true}
 
@@ -160,7 +160,7 @@ static func counter(cid: String, unit_price: float, terms_days: int, upfront_rat
 		return {"ok": false, "error": "Register your company first."}
 	var neg: Dictionary = DataDB.companies.get(c["buyer"], {}).get("negotiation", {})
 	c["history"].append({"t": Clock.now(), "by": GameState.business_entity(),
-		"text": I18n.t("Counter: %s/unit, Net %d%s") % [Fmt.money(unit_price), terms_days, (I18n.t(", %d%% upfront") % int(upfront_rate * 100)) if upfront_rate > 0 else ""]})
+		"text": I18n.t("Counter: %s/unit, Net %d%s") % [Fmt.money0(unit_price), terms_days, (I18n.t(", %d%% upfront") % int(upfront_rate * 100)) if upfront_rate > 0 else ""]})
 	var max_price := float(c["orig_price"]) * (2.0 - float(neg.get("min_price_factor", 0.9)))  # tolerance above their offer
 	var min_terms := int(neg.get("min_terms_days", 15))
 	var max_up := float(neg.get("accepts_upfront", 0.3))
@@ -189,7 +189,7 @@ static func counter(cid: String, unit_price: float, terms_days: int, upfront_rat
 	c["upfront_rate"] = mid_up
 	c["total"] = snappedf(int(c["qty"]) * mid_price, 0.01)
 	c["history"].append({"t": Clock.now(), "by": c["buyer"],
-		"text": I18n.t("Best we can do: %s/unit, Net %d%s.") % [Fmt.money(mid_price), mid_terms, (I18n.t(", %d%% upfront") % int(mid_up * 100)) if mid_up > 0 else ""]})
+		"text": I18n.t("Best we can do: %s/unit, Net %d%s.") % [Fmt.money0(mid_price), mid_terms, (I18n.t(", %d%% upfront") % int(mid_up * 100)) if mid_up > 0 else ""]})
 	EventBus.contract_changed.emit(cid)
 	return {"ok": true, "result": "countered"}
 
@@ -257,12 +257,12 @@ static func deliver(cid: String) -> Dictionary:
 	if penalty > 0:
 		lines += [{"acct": "exp:penalties", "dr": penalty}, {"acct": "accounts_receivable", "cr": penalty}]
 	Ledger.post(ent, I18n.t("Contract %s delivered to %s: %d × %s @ %s") % [cid, GameState.entity_name(c["buyer"]), qty,
-		I18n.t(DataDB.product(c["product"])["name"]), Fmt.money(c["unit_price"])], lines, {"type": "contract", "id": cid})
+		I18n.t(DataDB.product(c["product"])["name"]), Fmt.money0(c["unit_price"])], lines, {"type": "contract", "id": cid})
 	c["status"] = "delivered"
 	c["delivered"] = Clock.now()
 	c["receivable"] = snappedf(total - up - penalty, 0.01)
 	c["pay_due"] = Clock.now() + int(c["payment_terms_days"]) * Clock.DAY
-	c["history"].append({"t": Clock.now(), "by": ent, "text": I18n.t("Delivered%s. Invoice %s due in %d days.") % [I18n.t(" late (penalty %s)") % Fmt.money(penalty) if late else "", Fmt.money(c["receivable"]), int(c["payment_terms_days"])]})
+	c["history"].append({"t": Clock.now(), "by": ent, "text": I18n.t("Delivered%s. Invoice %s due in %d days.") % [I18n.t(" late (penalty %s)") % Fmt.money0(penalty) if late else "", Fmt.money0(c["receivable"]), int(c["payment_terms_days"])]})
 	Sim.cancel("con.due", "id", cid)
 	Sim.schedule(int(c["pay_due"]), "con.pay", {"id": cid})
 	GameState.inc_stat("contracts_delivered")
@@ -299,9 +299,9 @@ static func handle(kind: String, p: Dictionary) -> void:
 				Ledger.post(c["seller"], I18n.t("Invoice paid by %s (%s)") % [GameState.entity_name(c["buyer"]), c["id"]],
 					[{"acct": "cash", "dr": amt}, {"acct": "accounts_receivable", "cr": amt}], {"type": "contract", "id": c["id"]})
 				c["status"] = "paid"
-				c["history"].append({"t": Clock.now(), "by": c["buyer"], "text": I18n.t("Paid %s.") % Fmt.money(amt)})
+				c["history"].append({"t": Clock.now(), "by": c["buyer"], "text": I18n.t("Paid %s.") % Fmt.money0(amt)})
 				_tag(c, "paid")
-				EventBus.notify.emit(I18n.t("%s paid invoice %s: %s") % [GameState.entity_name(c["buyer"]), c["id"], Fmt.money(amt)], "good", "cash")
+				EventBus.notify.emit(I18n.t("%s paid invoice %s: %s") % [GameState.entity_name(c["buyer"]), c["id"], Fmt.money0(amt)], "good", "cash")
 				EventBus.contract_changed.emit(c["id"])
 
 
@@ -317,7 +317,7 @@ static func early_payment(cid: String, rate := 0.03) -> Dictionary:
 	Ledger.post(c["seller"], I18n.t("Early payment from %s (%s), %s discount") % [GameState.entity_name(c["buyer"]), cid, Fmt.pct(rate)],
 		[{"acct": "cash", "dr": amt - disc}, {"acct": "exp:bank_fees", "dr": disc}, {"acct": "accounts_receivable", "cr": amt}], {"type": "contract", "id": cid})
 	c["status"] = "paid"
-	c["history"].append({"t": Clock.now(), "by": c["buyer"], "text": I18n.t("Paid early: %s (discount %s).") % [Fmt.money(amt - disc), Fmt.money(disc)]})
+	c["history"].append({"t": Clock.now(), "by": c["buyer"], "text": I18n.t("Paid early: %s (discount %s).") % [Fmt.money0(amt - disc), Fmt.money0(disc)]})
 	Sim.cancel("con.pay", "id", cid)
 	GameState.set_flag("early_payment_agreed")
 	_tag(c, "paid")

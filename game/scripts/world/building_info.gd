@@ -116,7 +116,17 @@ static func activities(id: String, scene: WorldScene = null) -> Array[String]:
 
 static func _activity(label: String, action: String, params: Dictionary) -> String:
 	var reason := Actions.lock_reason(action, params)
-	return I18n.t(label) + (" (" + I18n.t(reason) + ")" if reason != "" else "")
+	return action_label(label, action, params) + (" (" + I18n.t(reason) + ")" if reason != "" else "")
+
+
+## A data-authored shop label quotes the current price using the same units as the rest of the UI.
+static func action_label(label: String, action: String, params: Dictionary) -> String:
+	var text := I18n.t(label)
+	if action == "buy_item" and params.has("price"):
+		var money := RegEx.create_from_string("\\$[0-9,]+(?:\\.[0-9]+)?")
+		var found := money.search(text)
+		if found != null: text = text.substr(0, found.get_start()) + Fmt.money0(float(params["price"])) + text.substr(found.get_end())
+	return text
 
 
 static func welcome(id: String, scene: WorldScene = null) -> String:

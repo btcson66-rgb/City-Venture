@@ -220,7 +220,7 @@ func _finish_shift(job_id: String, res: Dictionary) -> void:
 		toast(I18n.t(str(r["error"])), "warn", "lock")
 		return
 	toast(str(r["moment"]), "info", "clock")
-	toast(I18n.t("Shift done: +%s (wages and tips).") % Fmt.money(r["pay"]), "good", "cash")
+	toast(I18n.t("Shift done: +%s (wages and tips).") % Fmt.money0(r["pay"]), "good", "cash")
 	if not r.get("counted", true):
 		toast("A rough shift: it doesn't count toward your next promotion.", "warn", "people")
 	if r["promoted"]:
