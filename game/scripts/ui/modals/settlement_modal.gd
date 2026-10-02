@@ -53,7 +53,7 @@ func build() -> void:
 		tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
 		body.add_child(tr)
-	var head := I18n.t("%d × %s from %s: %s") % [qty, I18n.t(DataDB.product(product).get("name", product)), I18n.t(DataDB.supplier(supplier).get("name", supplier)), Fmt.money(amount)]
+	var head := I18n.t("%d × %s from %s: %s") % [qty, I18n.t(DataDB.product(product).get("name", product)), I18n.t(DataDB.supplier(supplier).get("name", supplier)), Fmt.money0(amount)]
 	body.add_child(UIK.label(head, 8, Art.C_WHITE, true))
 	var frozen_po := false
 	if po_id != "":
@@ -68,7 +68,7 @@ func build() -> void:
 		body.add_child(UIK.wrap("Cross-border payments are jammed. The supplier ships only once your money lands on their side.", 7, Art.C_MUTED, 410))
 	var kyc := Compliance.kyc(amount) if po_id == "" else {}
 	if not kyc.is_empty():
-		body.add_child(UIK.label_tip(I18n.t("KYC check: %s and %d more hours before this payment lands (payments over %s).") % [Fmt.money(float(kyc["fee"])), int(kyc["hours"]), Fmt.money0(Compliance.kyc_threshold())], "kyc", 7, Art.C_GOLD))
+		body.add_child(UIK.label_tip(I18n.t("KYC check: %s and %d more hours before this payment lands (payments over %s).") % [Fmt.money0(float(kyc["fee"])), int(kyc["hours"]), Fmt.money0(Compliance.kyc_threshold())], "kyc", 7, Art.C_GOLD))
 	var list := UIK.vbox(3)
 	for m in Ecommerce.settlement_options():
 		var id := str(m["id"])
@@ -82,7 +82,7 @@ func build() -> void:
 		row.add_child(v)
 		var h: Array = Ecommerce.settlement_range(id)
 		var speed := I18n.t("lands in about %d hour(s)") % int(h[0]) if int(h[1]) < 24 else (I18n.t("lands in %d–%d days") % [int(h[0]) / 24, int(h[1]) / 24] if h[0] != h[1] else I18n.t("lands in %d days") % (int(h[0]) / 24))
-		var title := I18n.t(str(m["name"])) + "  ·  " + I18n.t("fee %s") % Fmt.money(Ecommerce.settlement_fee(id, amount)) + "  ·  " + speed
+		var title := I18n.t(str(m["name"])) + "  ·  " + I18n.t("fee %s") % Fmt.money0(Ecommerce.settlement_fee(id, amount)) + "  ·  " + speed
 		var title_row: Control = UIK.label_tip(title, str(m["tip"]), 8, Art.C_WHITE, true) if m.has("tip") else UIK.label(title, 8, Art.C_WHITE, true)
 		v.add_child(title_row)
 		v.add_child(UIK.wrap(I18n.t(str(m.get("desc", ""))), 7, Art.C_MUTED, 300))
@@ -110,7 +110,7 @@ func _pay(method: String) -> void:
 	else:
 		r = Ecommerce.buy(supplier, product, qty, location, false, -1, 1.0, method)
 		if r["ok"]:
-			UIRoot.toast(I18n.t("Paid %s. The supplier ships once it lands.") % Fmt.money(r["total"]), "good", "bank")
+			UIRoot.toast(I18n.t("Paid %s. The supplier ships once it lands.") % Fmt.money0(r["total"]), "good", "bank")
 	if not r["ok"]:
 		UIRoot.toast(I18n.t(str(r["error"])), "bad", "warning")
 		return

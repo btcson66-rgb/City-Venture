@@ -49,6 +49,10 @@ func run() -> void:
 	await _chapter2()
 	await _purchase_cancel()
 	await _chapter3()
+	if _arg("capture") != "":
+		SaveSystem.save_to(_arg("capture"))
+		bot.expect(FileAccess.file_exists(_arg("capture")), "genuine chapter-three save captured")
+		return
 	if not bot.video_mode:
 		await _careers()
 	if bot.video_mode:

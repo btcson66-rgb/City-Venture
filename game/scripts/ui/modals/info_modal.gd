@@ -84,7 +84,7 @@ static func whiteboard() -> InfoModal:
 	var be := GameState.business_entity()
 	var cur := MonthClose.current(be)
 	return make("Whiteboard", "tasks", ["# IDEAS · PEOPLE · PRODUCT · GROWTH",
-		["This month revenue", Fmt.money(cur["net_revenue"])], ["Gross profit", Fmt.money(cur["gross_profit"])],
-		["Operating costs", Fmt.money(cur["opex_total"])], ["Cash in bank", Fmt.money(Ledger.cash(be))],
-		["Waiting at ShopLane", Fmt.money(Ledger.balance(be, "marketplace_balance"))], "---",
+		["This month revenue", Fmt.money0(cur["net_revenue"])], ["Gross profit", Fmt.money0(cur["gross_profit"])],
+		["Operating costs", Fmt.money0(cur["opex_total"])], ["Cash in bank", Fmt.money0(Ledger.cash(be))],
+		["Waiting at ShopLane", Fmt.money0(Ledger.balance(be, "marketplace_balance"))], "---",
 		"Scribbled in the corner: 'profit is an opinion, cash is a fact.'"])

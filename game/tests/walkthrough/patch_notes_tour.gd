@@ -17,7 +17,10 @@ func run() -> void:
 	await bot.shot("patch_notes_old_save")
 	var card = bot.get_tree().root.find_child("PatchNotesModal", true, false)
 	bot.expect(card.lines.any(func(line): return str(line).contains("0.1.6-test6")), "newer releases included")
-	bot.expect(not card.lines.any(func(line): return str(line).contains("0.1.5-test5") or str(line).contains("0.2.0-beta")), "seen and future releases excluded")
+	bot.expect(not card.lines.any(func(line): return str(line).contains("0.1.5-test5")), "seen release excluded")
+	for version in DataDB.patch_notes:
+		if PatchNotes.compare(str(version), str(ProjectSettings.get_setting("application/config/version"))) > 0:
+			bot.expect(not card.lines.any(func(line): return str(line).contains(str(version))), "future release excluded")
 	var scrolls: Array = card.find_children("*", "ScrollContainer", true, false)
 	if not scrolls.is_empty():
 		scrolls[0].scroll_vertical = 10000

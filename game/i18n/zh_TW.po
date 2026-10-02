@@ -958,10 +958,6 @@ msgstr "正確率和速度決定這一段時間完成多少工作。"
 msgid "Active contracts cover this condition: %s still to collect."
 msgstr "有效合約已符合此條件：尚有 %s 待收款。"
 
-#: data/help/patch_notes.json
-msgid "Active retail demand and delivery costs have been balanced. Save export, import, and three recovery backups help protect your progress."
-msgstr "已開放的零售需求與寄送費用已調整；匯出、匯入存檔與三份復原備份能保護遊戲進度。"
-
 #: data/events/ad_cost_spike.json
 msgid "Ad prices spike"
 msgstr "廣告價格飆漲"
@@ -2110,6 +2106,10 @@ msgstr "在供應商取消期限內（通常為 24 小時）可取消運送中�
 msgid "Cancel or return a purchase"
 msgstr "取消進貨或退貨"
 
+#: data/help/patch_notes.json
+msgid "Cancel or return eligible purchases. Closing a company settles its contracts and prevents old invoices from paying twice."
+msgstr "符合條件的進貨可以取消或退貨；結束公司會處理合約，避免舊發票重複收款。"
+
 #: scripts/ui/modals/company_os.gd:610 scripts/ui/modals/purchase_return_modal.gd:13 scripts/ui/modals/purchase_return_modal.gd:26
 msgid "Cancel purchase"
 msgstr "取消進貨"
@@ -2334,6 +2334,10 @@ msgstr "選一門生意"
 msgid "Choose a save slot to replace. Its existing save will be backed up."
 msgstr "選擇要覆蓋的存檔槽。原有存檔會先備份。"
 
+#: data/help/patch_notes.json
+msgid "Choose among e-commerce, freelance consulting, SaaS, a cafe, and Harbor logistics."
+msgstr "選擇電商、自由接案、SaaS、咖啡店與港區物流這 5 種生意。"
+
 #: data/help/help.json
 msgid "Choose an open district to see its location and travel routes."
 msgstr "選擇已開放街區，查看位置與交通路線。"
@@ -2361,10 +2365,6 @@ msgstr "城市"
 #: scripts/ui/modals/city_guide_modal.gd:7 scripts/ui/phone_ui.gd:129
 msgid "City Guide"
 msgstr "城市指南"
-
-#: data/help/patch_notes.json
-msgid "City Guide and interaction markers read the current building data. Only open businesses are listed."
-msgstr "城市導覽與互動標示會讀取目前的建築資料，只列出已開放的事業。"
 
 #: data/help/help.json
 msgid "City Guide: find your next stop"
@@ -2397,6 +2397,10 @@ msgstr "市政廳：你的食品處理執照核准了。"
 #: autoload/save_system.gd:330 autoload/save_system.gd:352
 msgid "City Venture save"
 msgstr "City Venture 存檔"
+
+#: data/help/patch_notes.json
+msgid "City lists show businesses and places that are ready to use. Your next action follows the prerequisites you have met."
+msgstr "城市清單只顯示可以使用的生意與場所；主要按鈕會帶你做現在能做的下一步。"
 
 #: scripts/ui/modals/world_map_modal.gd:120
 msgid "City map"
@@ -3714,6 +3718,10 @@ msgstr "出口"
 msgid "Expected signups: %.1f/day · features shipped: %d · next feature %d / %d h"
 msgstr "預估註冊：每天 %.1f 位 · 已推出功能：%d · 下一個功能 %d / %d 小時"
 
+#: data/help/patch_notes.json
+msgid "Explore 7 city districts and build your company through all 12 story chapters."
+msgstr "探索 7 個街區，從第一次創業一路玩完 12 章故事。"
+
 #: autoload/save_system.gd:366 scripts/ui/modals/pause_menu.gd:29 scripts/ui/modals/save_list_modal.gd:25
 msgid "Export save"
 msgstr "匯出存檔"
@@ -3721,6 +3729,10 @@ msgstr "匯出存檔"
 #: data/help/glossary.json
 msgid "Export save downloads your current game as a .cvsave file. Import save continues that game in an empty slot, or a slot you explicitly choose to replace."
 msgstr "匯出存檔會把目前這局下載成 .cvsave 檔案。匯入時會使用空的存檔槽；沒有空位時，由你選擇要覆蓋哪一槽。"
+
+#: data/help/patch_notes.json
+msgid "Export your game as a backup file and import it on another device. Three recovery backups protect each save slot."
+msgstr "把遊戲匯出成備份檔，也能匯入另一台裝置；每個存檔欄位保留 3 份復原備份。"
 
 #: data/help/help.json
 msgid "Export your save before clearing browser data or switching computers."
@@ -4117,6 +4129,10 @@ msgstr "五"
 #: data/economy/staff.json
 msgid "Friendly: lifts everyone's morale a little each week."
 msgstr "友善：每週讓大家的士氣都好一點。"
+
+#: scripts/frontend/main_menu.gd:66
+msgid "Friends beta · %s"
+msgstr "朋友測試版 · %s"
 
 #: data/help/help.json
 msgid "From Year 4 the city pays a one-off $3,000 grant to registered companies that went green."
@@ -4950,6 +4966,10 @@ msgstr "保好險、讓它一直跑，它就會賺錢；停在路邊，它只是
 msgid "Interaction markers show usable spots. Grey markers with a lock explain what you need first. Press I in a room to reopen its introduction."
 msgstr "互動標記會標示可以使用的地點；灰色鎖頭表示還有前置條件。在室內按 I 可重新查看介紹。"
 
+#: data/help/patch_notes.json
+msgid "Interaction markers show where to act. City Guide explains each open building and its services."
+msgstr "互動標示幫你找到可以做事的地方；城市指南列出開放建築與服務。"
+
 #: scripts/sim/ledger.gd:30
 msgid "Interest"
 msgstr "利息"
@@ -5406,7 +5426,7 @@ msgstr "交期長"
 msgid "Leading spaces are filled in for you, and a run of spaces takes one press. A wrong key flashes red; just type the right one."
 msgstr "行首的空格會自動補上，連續的空格只要按一次。打錯會閃紅色，再打正確的字就好。"
 
-#: scripts/ui/modals/lease_modal.gd:57
+#: scripts/ui/modals/lease_modal.gd:59
 msgid "Lease signed. Welcome to Suite 2B."
 msgstr "租約已簽。歡迎來到 2B 室。"
 
@@ -5414,7 +5434,7 @@ msgstr "租約已簽。歡迎來到 2B 室。"
 msgid "Lease signed: %s"
 msgstr "租約已簽：%s"
 
-#: scripts/ui/modals/lease_modal.gd:59
+#: scripts/ui/modals/lease_modal.gd:61
 msgid "Lease signed: %s."
 msgstr "租約已簽：%s。"
 
@@ -5438,7 +5458,7 @@ msgstr "租約——"
 msgid "Leased %s for %s/month."
 msgstr "租下了%s，月租 %s。"
 
-#: scripts/ui/modals/lease_modal.gd:42
+#: scripts/ui/modals/lease_modal.gd:44
 msgid "Leases must be in a registered company's name."
 msgstr "租約必須用登記公司的名義簽。"
 
@@ -6606,7 +6626,7 @@ msgstr "不太好。感覺很廉價。"
 msgid "Not needed yet. Commercial importers need one from the Regulation Wave (Year 8)."
 msgstr "還不用。商業進口商要到監管浪潮（第 8 年）才需要。"
 
-#: data/events/elena_offer.json scripts/ui/minigames/mini_game.gd:79 scripts/ui/modals/lease_modal.gd:44 scripts/ui/modals/sleep_modal.gd:32
+#: data/events/elena_offer.json scripts/ui/minigames/mini_game.gd:79 scripts/ui/modals/lease_modal.gd:46 scripts/ui/modals/sleep_modal.gd:32
 msgid "Not now"
 msgstr "先不要"
 
@@ -6821,6 +6841,10 @@ msgstr "舊城區房東"
 #: scripts/ui/modals/business_board.gd:92
 msgid "Old Town: metro (Loop Line), or walk west from Shopping Street."
 msgstr "舊城區：搭捷運（環狀線），或從購物街往西走。"
+
+#: data/help/patch_notes.json
+msgid "Older games keep their progress and receive an update card. Use F12 or Pause > Report a problem to send a diagnostic file."
+msgstr "舊存檔保留進度，讀取時會顯示更新內容；按 F12 或暫停 → 回報問題取得診斷檔。"
 
 #: data/help/patch_notes.json
 msgid "Older saves receive missing fields automatically so you can keep playing."
@@ -8042,6 +8066,10 @@ msgstr "Ravi"
 msgid "Read Maya's message"
 msgstr "讀 Maya 的訊息"
 
+#: data/help/patch_notes.json
+msgid "Read the explanation badges beside cash, invoices, loans, staff, subscriptions, and shipping whenever you need help."
+msgstr "現金、發票、貸款、員工、訂閱與出貨旁都有說明小方塊，需要時隨時閱讀。"
+
 #: data/buildings/popup_unit.json
 msgid "Read the lease notice"
 msgstr "看租約公告"
@@ -8501,6 +8529,10 @@ msgstr "恢復"
 #: scripts/ui/minigames/clerk_forms_game.gd:11
 msgid "Retail"
 msgstr "零售"
+
+#: data/help/patch_notes.json
+msgid "Retail demand and shipping costs are balanced so careful founders can grow through the first 12 chapters."
+msgstr "調整零售需求與運費，讓謹慎經營的創業者能逐步完成前 12 章。"
 
 #: data/buildings/popup_unit.json
 msgid "Retail premises"
@@ -9270,7 +9302,7 @@ msgstr "只能參觀"
 msgid "Sign a 60-day supply agreement with {supplier} ($600 fee)"
 msgstr "跟 {supplier} 簽 60 天供貨協議（費用 $600）"
 
-#: scripts/ui/modals/lease_modal.gd:39
+#: scripts/ui/modals/lease_modal.gd:40
 msgid "Sign the lease"
 msgstr "簽租約"
 
@@ -10870,10 +10902,6 @@ msgstr "二手廂型貨車"
 msgid "Using a Chinese input method? Switch the keyboard to English input first."
 msgstr "用中文輸入法的話，請先切換成英文輸入。"
 
-#: scripts/frontend/main_menu.gd:66
-msgid "VERTICAL SLICE 001 · art converted from concept boards · %s"
-msgstr "垂直切片 001 · 美術由概念圖轉換 · %s"
-
 #: scripts/ui/minigames/pack_game.gd:76
 msgid "Val"
 msgstr "Val"
@@ -11891,8 +11919,8 @@ msgid "a bit blurry"
 msgstr "有點糊"
 
 #: scripts/ui/modals/van_deal_modal.gd:35
-msgid "about %s per km"
-msgstr "每公里約 %s"
+msgid "about %s per 100 km"
+msgstr "每 100 公里約 %s"
 
 #: data/businesses/ecommerce.json
 msgid "ads"

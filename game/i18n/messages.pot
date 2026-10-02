@@ -957,10 +957,6 @@ msgstr ""
 msgid "Active contracts cover this condition: %s still to collect."
 msgstr ""
 
-#: data/help/patch_notes.json
-msgid "Active retail demand and delivery costs have been balanced. Save export, import, and three recovery backups help protect your progress."
-msgstr ""
-
 #: data/events/ad_cost_spike.json
 msgid "Ad prices spike"
 msgstr ""
@@ -2109,6 +2105,10 @@ msgstr ""
 msgid "Cancel or return a purchase"
 msgstr ""
 
+#: data/help/patch_notes.json
+msgid "Cancel or return eligible purchases. Closing a company settles its contracts and prevents old invoices from paying twice."
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:610 scripts/ui/modals/purchase_return_modal.gd:13 scripts/ui/modals/purchase_return_modal.gd:26
 msgid "Cancel purchase"
 msgstr ""
@@ -2333,6 +2333,10 @@ msgstr ""
 msgid "Choose a save slot to replace. Its existing save will be backed up."
 msgstr ""
 
+#: data/help/patch_notes.json
+msgid "Choose among e-commerce, freelance consulting, SaaS, a cafe, and Harbor logistics."
+msgstr ""
+
 #: data/help/help.json
 msgid "Choose an open district to see its location and travel routes."
 msgstr ""
@@ -2359,10 +2363,6 @@ msgstr ""
 
 #: scripts/ui/modals/city_guide_modal.gd:7 scripts/ui/phone_ui.gd:129
 msgid "City Guide"
-msgstr ""
-
-#: data/help/patch_notes.json
-msgid "City Guide and interaction markers read the current building data. Only open businesses are listed."
 msgstr ""
 
 #: data/help/help.json
@@ -2395,6 +2395,10 @@ msgstr ""
 
 #: autoload/save_system.gd:330 autoload/save_system.gd:352
 msgid "City Venture save"
+msgstr ""
+
+#: data/help/patch_notes.json
+msgid "City lists show businesses and places that are ready to use. Your next action follows the prerequisites you have met."
 msgstr ""
 
 #: scripts/ui/modals/world_map_modal.gd:120
@@ -3713,12 +3717,20 @@ msgstr ""
 msgid "Expected signups: %.1f/day · features shipped: %d · next feature %d / %d h"
 msgstr ""
 
+#: data/help/patch_notes.json
+msgid "Explore 7 city districts and build your company through all 12 story chapters."
+msgstr ""
+
 #: autoload/save_system.gd:366 scripts/ui/modals/pause_menu.gd:29 scripts/ui/modals/save_list_modal.gd:25
 msgid "Export save"
 msgstr ""
 
 #: data/help/glossary.json
 msgid "Export save downloads your current game as a .cvsave file. Import save continues that game in an empty slot, or a slot you explicitly choose to replace."
+msgstr ""
+
+#: data/help/patch_notes.json
+msgid "Export your game as a backup file and import it on another device. Three recovery backups protect each save slot."
 msgstr ""
 
 #: data/help/help.json
@@ -4115,6 +4127,10 @@ msgstr ""
 
 #: data/economy/staff.json
 msgid "Friendly: lifts everyone's morale a little each week."
+msgstr ""
+
+#: scripts/frontend/main_menu.gd:66
+msgid "Friends beta · %s"
 msgstr ""
 
 #: data/help/help.json
@@ -4949,6 +4965,10 @@ msgstr ""
 msgid "Interaction markers show usable spots. Grey markers with a lock explain what you need first. Press I in a room to reopen its introduction."
 msgstr ""
 
+#: data/help/patch_notes.json
+msgid "Interaction markers show where to act. City Guide explains each open building and its services."
+msgstr ""
+
 #: scripts/sim/ledger.gd:30
 msgid "Interest"
 msgstr ""
@@ -5405,7 +5425,7 @@ msgstr ""
 msgid "Leading spaces are filled in for you, and a run of spaces takes one press. A wrong key flashes red; just type the right one."
 msgstr ""
 
-#: scripts/ui/modals/lease_modal.gd:57
+#: scripts/ui/modals/lease_modal.gd:59
 msgid "Lease signed. Welcome to Suite 2B."
 msgstr ""
 
@@ -5413,7 +5433,7 @@ msgstr ""
 msgid "Lease signed: %s"
 msgstr ""
 
-#: scripts/ui/modals/lease_modal.gd:59
+#: scripts/ui/modals/lease_modal.gd:61
 msgid "Lease signed: %s."
 msgstr ""
 
@@ -5437,7 +5457,7 @@ msgstr ""
 msgid "Leased %s for %s/month."
 msgstr ""
 
-#: scripts/ui/modals/lease_modal.gd:42
+#: scripts/ui/modals/lease_modal.gd:44
 msgid "Leases must be in a registered company's name."
 msgstr ""
 
@@ -6605,7 +6625,7 @@ msgstr ""
 msgid "Not needed yet. Commercial importers need one from the Regulation Wave (Year 8)."
 msgstr ""
 
-#: data/events/elena_offer.json scripts/ui/minigames/mini_game.gd:79 scripts/ui/modals/lease_modal.gd:44 scripts/ui/modals/sleep_modal.gd:32
+#: data/events/elena_offer.json scripts/ui/minigames/mini_game.gd:79 scripts/ui/modals/lease_modal.gd:46 scripts/ui/modals/sleep_modal.gd:32
 msgid "Not now"
 msgstr ""
 
@@ -6819,6 +6839,10 @@ msgstr ""
 
 #: scripts/ui/modals/business_board.gd:92
 msgid "Old Town: metro (Loop Line), or walk west from Shopping Street."
+msgstr ""
+
+#: data/help/patch_notes.json
+msgid "Older games keep their progress and receive an update card. Use F12 or Pause > Report a problem to send a diagnostic file."
 msgstr ""
 
 #: data/help/patch_notes.json
@@ -8041,6 +8065,10 @@ msgstr ""
 msgid "Read Maya's message"
 msgstr ""
 
+#: data/help/patch_notes.json
+msgid "Read the explanation badges beside cash, invoices, loans, staff, subscriptions, and shipping whenever you need help."
+msgstr ""
+
 #: data/buildings/popup_unit.json
 msgid "Read the lease notice"
 msgstr ""
@@ -8499,6 +8527,10 @@ msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:11
 msgid "Retail"
+msgstr ""
+
+#: data/help/patch_notes.json
+msgid "Retail demand and shipping costs are balanced so careful founders can grow through the first 12 chapters."
 msgstr ""
 
 #: data/buildings/popup_unit.json
@@ -9269,7 +9301,7 @@ msgstr ""
 msgid "Sign a 60-day supply agreement with {supplier} ($600 fee)"
 msgstr ""
 
-#: scripts/ui/modals/lease_modal.gd:39
+#: scripts/ui/modals/lease_modal.gd:40
 msgid "Sign the lease"
 msgstr ""
 
@@ -10869,10 +10901,6 @@ msgstr ""
 msgid "Using a Chinese input method? Switch the keyboard to English input first."
 msgstr ""
 
-#: scripts/frontend/main_menu.gd:66
-msgid "VERTICAL SLICE 001 · art converted from concept boards · %s"
-msgstr ""
-
 #: scripts/ui/minigames/pack_game.gd:76
 msgid "Val"
 msgstr ""
@@ -11890,7 +11918,7 @@ msgid "a bit blurry"
 msgstr ""
 
 #: scripts/ui/modals/van_deal_modal.gd:35
-msgid "about %s per km"
+msgid "about %s per 100 km"
 msgstr ""
 
 #: data/businesses/ecommerce.json
