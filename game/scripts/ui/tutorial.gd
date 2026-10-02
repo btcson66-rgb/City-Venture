@@ -416,6 +416,8 @@ func _show_step(i: int) -> void:
 	_shown = i
 	_shown_loc = I18n.locale()
 	_shown_txt = txt
+	var skip := find_child("SkipTutorial", true, false) as Button
+	if skip != null: skip.text = I18n.t("Skip")
 	var s: Dictionary = STEPS[i]
 	head.text = (I18n.t("FIRST VENTURE %d/%d") % [mini(i + 1, STEPS.size()), STEPS.size()]) + "  ·  " + I18n.t(str(s["title"]))
 	body.text = txt

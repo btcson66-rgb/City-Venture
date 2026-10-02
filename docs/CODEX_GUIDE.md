@@ -37,6 +37,7 @@ Read these before touching an area:
 - Old saves must keep loading. New state is created lazily (`static func S()` pattern) or added to
   `GameState.template()`; `SaveSystem._migrate` fills missing keys. Never rename or delete a saved key without a
   migration and a test that loads a save made before your change.
+- Every release must add a save actually played in that version to `game/tests/fixtures/saves/`, with its source commit and capture log.
 - Player-facing honesty: if a feature is a stand-in or planned, the text says so. Status words in docs:
   Implemented / Mocked / Placeholder / Planned / Blocked.
 - New business ideas the player meets get a "!" explanation badge: `UIK.tip("<id>")` or `UIK.label_tip(text, "<id>")`,

@@ -149,7 +149,7 @@ func _ready() -> void:
 	save_chip = UIK.hbox(2)
 	save_chip.modulate.a = 0.0
 	save_chip.add_child(UIK.icon("save", 8))
-	save_chip.add_child(UIK.label("Saved", 6, Art.C_MUTED, true))
+	save_chip.add_child(UIK.label(I18n.t("Saved"), 6, Art.C_MUTED, true))
 	add_child(save_chip)
 	SaveSystem.saved.connect(_on_saved)
 	EventBus.cash_changed.connect(_on_cash)
@@ -283,6 +283,7 @@ func refresh() -> void:
 func _on_saved(slot: int) -> void:
 	if slot != SaveSystem.current_slot() or not visible:
 		return
+	(save_chip.get_child(1) as Label).text = I18n.t("Saved")
 	save_chip.reset_size()
 	save_chip.position = Vector2(640 - 8 - save_chip.size.x, 360 - 97)
 	var tw := create_tween()

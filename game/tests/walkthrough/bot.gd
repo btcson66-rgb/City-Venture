@@ -80,7 +80,9 @@ func _ready() -> void:
 ## Bloom Coffee, ShopLane, Company OS), people's names, key names.
 func _audit_setup() -> void:
 	audit_on = true
-	var tr = JSON.parse_string(FileAccess.get_file_as_string(ProjectSettings.globalize_path("res://").path_join("../tools/i18n/zh_TW.json")))
+	var catalogue_path := ProjectSettings.globalize_path("res://").path_join("../tools/i18n/zh_TW.json")
+	# QA Web exports contain game resources, not the repository's tools directory.
+	var tr = JSON.parse_string(FileAccess.get_file_as_string(catalogue_path)) if FileAccess.file_exists(catalogue_path) else {}
 	if typeof(tr) == TYPE_DICTIONARY:
 		for v in tr.values():
 			for m in _word_re.search_all(str(v)):
@@ -145,6 +147,8 @@ func _audit_one(t: String, ctl: Control) -> void:
 func _run() -> void:
 	await wait(1.0)
 	match mode:
+		"save_transfer":
+			await load("res://tests/walkthrough/save_transfer_tour.gd").new(self).run()
 		"beta_tour":
 			await BetaTour.new(self).run()
 		"shots":

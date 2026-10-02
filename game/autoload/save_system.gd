@@ -14,12 +14,15 @@ const AUTOSAVE_EVERY := 15.0
 
 signal saved(slot: int)
 signal loaded(slot: int)
+signal exported(filename: String)
 
 var autosave_enabled := true
 var next_slot := -1        # the slot the title screen picked for the next new game (when every slot is taken)
 var _since := 0.0
 var _last_sig := ""
 var _js_cbs: Array = []   # JavaScriptBridge callbacks must stay referenced
+var last_error := ""
+var pending_import := {}
 
 
 func _ready() -> void:
@@ -104,15 +107,17 @@ func claim_slot() -> int:
 				oldest = t
 				s = g
 	if has_save(s):
-		backup(s)
+		if not backup(s):
+			last_error = "A backup could not be created. Your existing save is unchanged."
+			return -1
 	return s
 
 
-## Move a slot's file into saves/replaced/ (kept, just out of the list).
-func backup(slot: int) -> void:
+## Copy a slot into saves/replaced/ before any replacement, preserving the primary on failure.
+func backup(slot: int) -> bool:
 	var dir := DIR + "/replaced"
-	DirAccess.make_dir_recursive_absolute(dir)
-	DirAccess.rename_absolute(_path(slot), "%s/slot_%d_%d.json" % [dir, slot, int(Time.get_unix_time_from_system())])
+	if FileAccess.file_exists(dir) or DirAccess.make_dir_recursive_absolute(dir) != OK: return false
+	return DirAccess.copy_absolute(_path(slot), "%s/slot_%d_%d_%d.json" % [dir, slot, int(Time.get_unix_time_from_system()), Time.get_ticks_usec()]) == OK
 
 
 ## Every saved game, newest first: [{slot, summary}].
@@ -121,8 +126,7 @@ func save_list() -> Array:
 	for s in [AUTOSAVE_SLOT] + GAME_SLOTS:
 		if has_save(s):
 			var sm := summary(s)
-			if not sm.is_empty():
-				out.append({"slot": s, "summary": sm})
+			out.append({"slot": s, "summary": sm, "corrupt": sm.is_empty(), "backup": recovery_index(s)})
 	out.sort_custom(func(a, b): return float(a["summary"].get("saved_unix", 0)) > float(b["summary"].get("saved_unix", 0)))
 	return out
 
@@ -142,13 +146,15 @@ func latest_slot() -> int:
 func summary(slot: int) -> Dictionary:
 	if not has_save(slot):
 		return {}
-	var d = JSON.parse_string(FileAccess.get_file_as_string(_path(slot)))
-	if typeof(d) != TYPE_DICTIONARY:
+	var result := validate_text(FileAccess.get_file_as_string(_path(slot)))
+	if not result["ok"]:
 		return {}
-	return d.get("summary", {})
+	return result["payload"].get("summary", {})
 
 
 func save(slot := 1) -> bool:
+	if slot < 0:
+		return false
 	return save_to(_path(slot), slot)
 
 
@@ -168,12 +174,9 @@ func save_to(path: String, slot := -1) -> bool:
 		"chapter": d["story"].get("chapter", ""),
 	}
 	var payload := {"format": GameState.SAVE_FORMAT, "summary": summary_d, "data": d}
-	var f := FileAccess.open(path, FileAccess.WRITE)
-	if f == null:
-		push_error("SaveSystem: cannot write " + path)
+	if not _atomic_write(path, JSON.stringify(payload), slot >= 0):
+		last_error = "The save could not be written. Your existing save is unchanged."
 		return false
-	f.store_string(JSON.stringify(payload))
-	f.close()
 	if slot >= 0:
 		saved.emit(slot)
 	return true
@@ -183,11 +186,11 @@ func save_to(path: String, slot := -1) -> bool:
 func load_data(slot: int) -> bool:
 	if not has_save(slot):
 		return false
-	var d = JSON.parse_string(FileAccess.get_file_as_string(_path(slot)))
-	if typeof(d) != TYPE_DICTIONARY or int(d.get("format", 0)) != GameState.SAVE_FORMAT:
-		push_error("SaveSystem: incompatible save")
+	var result := validate_text(FileAccess.get_file_as_string(_path(slot)))
+	if not result["ok"]:
+		last_error = result["error"]
 		return false
-	GameState.data = _migrate(d["data"])
+	GameState.data = result["payload"]["data"]
 	GameState.data["meta"]["slot"] = slot     # carry on saving where this game was loaded from
 	Contracts.reconcile_closed()             # old liquidations sold AR but left live contracts and collection schedules
 	Contracts.reconcile_tags()               # older builds could leave a story step waiting on a settled offer
@@ -238,3 +241,180 @@ static func _fill_missing(d: Dictionary, tpl: Dictionary) -> void:
 			d[k] = tpl[k]
 		elif typeof(d[k]) == TYPE_DICTIONARY and typeof(tpl[k]) == TYPE_DICTIONARY:
 			_fill_missing(d[k], tpl[k])
+
+
+## Validate without changing the running game; migrations run only on the decoded copy.
+func validate_text(text: String) -> Dictionary:
+	var result := SaveCodec.decode(text)
+	if result["ok"]:
+		result["payload"]["data"] = _migrate(result["payload"]["data"])
+	return result
+
+
+## A completed temporary file replaces its destination atomically. No delete-then-write window.
+func _atomic_write(path: String, text: String, rotate := false) -> bool:
+	var temp := path + ".tmp"
+	var file := FileAccess.open(temp, FileAccess.WRITE)
+	if file == null: return false
+	file.store_string(text)
+	file.flush()
+	var error := file.get_error()
+	file.close()
+	if error != OK: return false
+	if rotate and FileAccess.file_exists(path):
+		for index in [3, 2]:
+			var previous := path.trim_suffix(".json") + ".bak%d" % (index - 1)
+			if FileAccess.file_exists(previous) and not _atomic_write(path.trim_suffix(".json") + ".bak%d" % index, FileAccess.get_file_as_string(previous)):
+				return false
+		if not _atomic_write(path.trim_suffix(".json") + ".bak1", FileAccess.get_file_as_string(path)):
+			return false
+	return DirAccess.rename_absolute(temp, path) == OK
+
+
+func recovery_index(slot: int) -> int:
+	for index in [1, 2, 3]:
+		var path := _path(slot).trim_suffix(".json") + ".bak%d" % index
+		if FileAccess.file_exists(path) and validate_text(FileAccess.get_file_as_string(path))["ok"]:
+			return index
+	return -1
+
+
+func restore_backup(slot: int) -> bool:
+	var index := recovery_index(slot)
+	if index < 0: return false
+	if has_save(slot) and not backup(slot): return false
+	var path := _path(slot).trim_suffix(".json") + ".bak%d" % index
+	return _atomic_write(_path(slot), FileAccess.get_file_as_string(path))
+
+
+func import_text(text: String, slot := -1, replace := false) -> Dictionary:
+	var result := validate_text(text)
+	if not result["ok"]: return result
+	if slot < 0: slot = free_slot()
+	if slot < 0: return {"ok": false, "full": true, "payload": result["payload"], "error": "Choose a save slot to replace. Its existing save will be backed up."}
+	if not slot in GAME_SLOTS: return {"ok": false, "error": "This is not a City Venture save."}
+	if has_save(slot) and (not replace or not backup(slot)):
+		return {"ok": false, "error": "A backup could not be created. Your existing save is unchanged."}
+	result["payload"]["data"]["meta"]["slot"] = slot
+	DirAccess.make_dir_recursive_absolute(DIR)
+	if not _atomic_write(_path(slot), JSON.stringify(result["payload"]), true):
+		return {"ok": false, "error": "The save could not be written. Your existing save is unchanged."}
+	return {"ok": true, "slot": slot}
+
+
+func export_filename() -> String:
+	var who := str(GameState.data["player"]["name"])
+	var safe := ""
+	for character in who:
+		safe += "_" if character.unicode_at(0) in [60, 62, 58, 34, 47, 92, 124, 63, 42] or character.unicode_at(0) < 32 else character
+	safe = safe.strip_edges().left(60).trim_suffix(".")
+	if safe.is_empty(): safe = "Player"
+	var date := Clock.date()
+	return "CityVenture_%s_%04d-%02d-%02d.cvsave" % [safe, date["year"], date["month"], date["day"]]
+
+
+func show_export() -> void:
+	if not GameState.has_game(): return
+	if OS.has_feature("web"):
+		var path := "user://export.cvsave"
+		if save_to(path):
+			JavaScriptBridge.download_buffer(FileAccess.get_file_as_bytes(path), export_filename(), "application/json")
+			exported.emit(export_filename())
+		else: _transfer_error(last_error)
+		return
+	var dialog := FileDialog.new()
+	dialog.name = "ExportSaveDialog"
+	dialog.access = FileDialog.ACCESS_FILESYSTEM
+	dialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE
+	dialog.filters = PackedStringArray(["*.cvsave ; " + I18n.t("City Venture save")])
+	dialog.current_file = export_filename()
+	get_tree().root.add_child(dialog)
+	dialog.file_selected.connect(func(path):
+		if not save_to(path): _transfer_error(last_error)
+		else:
+			UIRoot.toast("Save exported. Keep this file outside your browser.", "good", "save")
+			exported.emit(path.get_file())
+		dialog.queue_free())
+	dialog.canceled.connect(func(): dialog.queue_free())
+	dialog.popup_centered(Vector2i(800, 520))
+	_localize_picker(dialog)
+
+
+func show_import() -> void:
+	if OS.has_feature("web"):
+		_web_import()
+		return
+	var dialog := FileDialog.new()
+	dialog.name = "ImportSaveDialog"
+	dialog.access = FileDialog.ACCESS_FILESYSTEM
+	dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+	dialog.filters = PackedStringArray(["*.cvsave,*.json ; " + I18n.t("City Venture save")])
+	get_tree().root.add_child(dialog)
+	dialog.file_selected.connect(func(path): _receive_import(FileAccess.get_file_as_string(path)); dialog.queue_free())
+	dialog.canceled.connect(func(): dialog.queue_free())
+	dialog.popup_centered(Vector2i(800, 520))
+	_localize_picker(dialog)
+
+
+func _localize_picker(dialog: FileDialog) -> void:
+	# Engine file pickers have their own strings and do not use the game's gettext catalogue.
+	var picker_theme := UIK.theme().duplicate() as Theme
+	picker_theme.set_font("title_font", "Window", UIK.body_font())
+	picker_theme.set_font_size("title_font_size", "Window", 10)
+	dialog.theme = picker_theme
+	dialog.title = I18n.t("Export save" if dialog.file_mode == FileDialog.FILE_MODE_SAVE_FILE else "Import save")
+	var words := {"Directories & Files:": I18n.t("Directories & Files:"), "Favorites:": I18n.t("Favorites:"), "Recent:": I18n.t("Recent:"), "File:": I18n.t("File:"), "Path:": I18n.t("Path:"), "Save": I18n.t("Save"), "Open": I18n.t("Open"), "Cancel": I18n.t("Cancel"), "All Files (*)": I18n.t("All Files (*)")}
+	for control in dialog.find_children("*", "Control", true, false):
+		if control is Label or control is Button:
+			if words.has(control.text):
+				control.text = words[control.text]
+				control.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+
+
+func _web_import() -> void:
+	var document = JavaScriptBridge.get_interface("document")
+	var input = document.createElement("input")
+	input.type = "file"
+	input.accept = ".cvsave,.json"
+	input.style.display = "none"
+	document.body.appendChild(input)
+	var reader = JavaScriptBridge.create_object("FileReader")
+	var callbacks: Array = []
+	var finish := JavaScriptBridge.create_callback(func(_args):
+		_receive_import(str(reader.result))
+		input.remove()
+		_release_callbacks.call_deferred(callbacks))
+	var failure := JavaScriptBridge.create_callback(func(_args): _transfer_error("The file could not be read. Your existing save is unchanged."); input.remove(); _release_callbacks.call_deferred(callbacks))
+	var selected := JavaScriptBridge.create_callback(func(_args):
+		if int(input.files.length) > 0: reader.readAsText(input.files.item(0))
+		else: input.remove(); _release_callbacks.call_deferred(callbacks))
+	var cancel := JavaScriptBridge.create_callback(func(_args): input.remove(); _release_callbacks.call_deferred(callbacks))
+	callbacks.append_array([finish, failure, selected, cancel])
+	_js_cbs.append_array(callbacks)
+	reader.onload = finish
+	reader.onerror = failure
+	input.onchange = selected
+	input.oncancel = cancel
+	input.click()
+
+
+func _release_callbacks(callbacks: Array) -> void:
+	for callback in callbacks: _js_cbs.erase(callback)
+	callbacks.clear()
+
+
+func _receive_import(text: String) -> void:
+	var result := import_text(text)
+	if result.get("full", false):
+		pending_import = result["payload"]
+		UIRoot.close_all()
+		UIRoot.open_modal(SaveListModal.new("import"))
+	elif result["ok"]:
+		UIRoot.close_all()
+		load_and_enter(result["slot"])
+		UIRoot.toast("Save imported. Continue where you left off.", "good", "save")
+	else: _transfer_error(result["error"])
+
+
+func _transfer_error(message: String) -> void:
+	UIRoot.open_modal(InfoModal.make("Save transfer", "save", [I18n.t(message)]))

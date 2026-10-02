@@ -514,6 +514,14 @@ msgstr "（订单 {order}——{product}）"
 msgid "(Order {order} — {product}, {price})"
 msgstr "（订单 {order}——{product}，{price}）"
 
+#: autoload/save_system.gd:329
+msgid "*.cvsave ; "
+msgstr "*.cvsave ; "
+
+#: autoload/save_system.gd:351
+msgid "*.cvsave,*.json ; "
+msgstr "*.cvsave,*.json ; "
+
 #: scripts/ui/modals/company_os.gd:1129
 msgid "+%d / −%d last 7 days"
 msgstr "近 7 天 +%d / −%d"
@@ -613,6 +621,10 @@ msgstr "日票（$15）今天可以使用共享座位和电脑。常来的话，
 #: data/help/help.json
 msgid "A Van Driver (People tab) takes one run each workday from 9:00. Your own ecommerce parcels can go out in the van too: choose \"Own van\" at the packing table."
 msgstr "货车司机（人员分页）每个工作日 9:00 起接一趟外送。你自己的电商包裹也能用货车送：在打包桌选「自己的货车」。"
+
+#: autoload/save_system.gd:111 autoload/save_system.gd:297 scripts/ui/modals/save_list_modal.gd:63
+msgid "A backup could not be created. Your existing save is unchanged."
+msgstr "无法创建备份。原有存盘仍完整保留。"
 
 #: data/jobs/bank_teller.json
 msgid "A bakery owner asks for a loan. Sofia asks for three months of books. You see why."
@@ -957,6 +969,10 @@ msgstr "Alex Chen"
 #: scripts/ui/minigames/route_game.gd:53
 msgid "All %d stops planned  ·  round trip %.1f km"
 msgstr "%d 个停靠点都排好了  ·  来回共 %.1f 公里"
+
+#: autoload/save_system.gd:366
+msgid "All Files (*)"
+msgstr "所有文件 (*)"
 
 #: scripts/ui/minigames/clerk_forms_game.gd:30
 msgid "All good? Approve it. Something wrong? Click the wrong field first, then Reject."
@@ -1562,6 +1578,10 @@ msgstr "逛逛 Threadline 本季系列"
 msgid "Browse the listings"
 msgstr "看看对象"
 
+#: data/help/glossary.json
+msgid "Browser saves stay on this device. Clearing browser data or changing computers can lose them. Export a copy before an update; keep it somewhere safe. The last three local backups help recover a damaged save."
+msgstr "浏览器存盘只留在这台设备。清除浏览器数据或换电脑时可能会遗失。更新前先导出一份，妥善保存。本机也保留最近三份备份，主档损坏时可用来复原。"
+
 #: scripts/ui/modals/company_os.gd:469
 msgid "Bubble wrap"
 msgstr "气泡纸"
@@ -1962,7 +1982,7 @@ msgstr "现在不能上班：%s。"
 msgid "Can't work the counter: %s."
 msgstr "现在不能站吧台：%s。"
 
-#: scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57 scripts/ui/modals/registration_modal.gd:53 scripts/ui/modals/save_list_modal.gd:37
+#: autoload/save_system.gd:366 scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57 scripts/ui/modals/registration_modal.gd:53
 msgid "Cancel"
 msgstr "取消"
 
@@ -2170,6 +2190,10 @@ msgstr "Chen"
 msgid "Choose a business"
 msgstr "选一门生意"
 
+#: autoload/save_system.gd:294 scripts/ui/modals/save_list_modal.gd:22
+msgid "Choose a save slot to replace. Its existing save will be backed up."
+msgstr "选择要覆盖的存盘槽。原有存盘会先备份。"
+
 #: data/help/help.json
 msgid "Choose an open district to see its location and travel routes."
 msgstr "选择已开放街区，查看位置与交通路线。"
@@ -2222,6 +2246,10 @@ msgstr "市政厅、许可、公司登记、公共服务。"
 msgid "City Hall: your food handling licence is approved."
 msgstr "市政厅：你的食品处理执照核准了。"
 
+#: autoload/save_system.gd:329 autoload/save_system.gd:351
+msgid "City Venture save"
+msgstr "City Venture 存盘"
+
 #: scripts/ui/modals/world_map_modal.gd:120
 msgid "City map"
 msgstr "城市地图"
@@ -2229,6 +2257,10 @@ msgstr "城市地图"
 #: data/world/years.json
 msgid "City opens a $2M Green Business Grant for local sellers."
 msgstr "市府推出 200 万元绿色企业补助，给在地卖家申请。"
+
+#: autoload/save_system.gd:313
+msgid "CityVenture_%s_%04d-%02d-%02d.cvsave"
+msgstr "CityVenture_%s_%04d-%02d-%02d.cvsave"
 
 #: data/city/aurelia.json data/districts/civic_center.json scripts/ui/minigames/pack_game.gd:9 scripts/ui/minigames/parcel_sort_game.gd:7
 msgid "Civic Center"
@@ -2814,11 +2846,11 @@ msgstr "日期"
 msgid "Day %d"
 msgstr "第 %d 天"
 
-#: scripts/ui/modals/save_list_modal.gd:55
+#: scripts/ui/modals/save_list_modal.gd:83
 msgid "Day %d · personal %s"
 msgstr "第 %d 天 · 个人 %s"
 
-#: scripts/ui/modals/pause_menu.gd:29
+#: scripts/ui/modals/pause_menu.gd:38
 msgid "Day length"
 msgstr "一天长度"
 
@@ -3049,6 +3081,10 @@ msgstr "金融科技业抢进口商，数字美元付款量翻倍。"
 #: scripts/sim/ledger.gd:30
 msgid "Dining"
 msgstr "餐饮"
+
+#: autoload/save_system.gd:366
+msgid "Directories & Files:"
+msgstr "文件夹与文件："
 
 #: scripts/sim/ecommerce.gd:1178
 msgid "Dispute lost on %s: −%s"
@@ -3442,13 +3478,21 @@ msgstr "做得非常好。"
 msgid "Executive"
 msgstr "主管"
 
-#: scripts/ui/tutorial.gd:619
+#: scripts/ui/tutorial.gd:621
 msgid "Exit"
 msgstr "出口"
 
 #: scripts/ui/modals/company_os.gd:1134
 msgid "Expected signups: %.1f/day · features shipped: %d · next feature %d / %d h"
 msgstr "预估注册：每天 %.1f 位 · 已推出功能：%d · 下一个功能 %d / %d 小时"
+
+#: autoload/save_system.gd:365 scripts/ui/modals/pause_menu.gd:29 scripts/ui/modals/save_list_modal.gd:25
+msgid "Export save"
+msgstr "导出存盘"
+
+#: data/help/glossary.json
+msgid "Export save downloads your current game as a .cvsave file. Import save continues that game in an empty slot, or a slot you explicitly choose to replace."
+msgstr "导出存盘会把目前这局下载成 .cvsave 文件。导入时会使用空的存盘槽；没有空位时，由你选择要覆盖哪一槽。"
 
 #: data/economy/shipping.json
 msgid "Express"
@@ -3478,7 +3522,7 @@ msgstr "眉毛"
 msgid "FINANCIAL →"
 msgstr "金融区 →"
 
-#: scripts/ui/tutorial.gd:420 scripts/ui/tutorial.gd:467
+#: scripts/ui/tutorial.gd:422 scripts/ui/tutorial.gd:469
 msgid "FIRST VENTURE %d/%d"
 msgstr "第一次创业 %d/%d"
 
@@ -3546,6 +3590,10 @@ msgstr "付款快，货就出得快。但要先开交易所帐户，而且新的
 msgid "Fast: +30% work output."
 msgstr "手脚快：工作产出 +30%。"
 
+#: autoload/save_system.gd:366
+msgid "Favorites:"
+msgstr "我的最爱："
+
 #: autoload/clock.gd:14
 msgid "Feb"
 msgstr "2月"
@@ -3553,6 +3601,14 @@ msgstr "2月"
 #: data/character/options.json
 msgid "Feminine"
 msgstr "阴柔"
+
+#: autoload/save_system.gd:366
+msgid "File:"
+msgstr "文件："
+
+#: autoload/save_system.gd:381
+msgid "FileReader"
+msgstr "FileReader"
 
 #: scripts/ui/minigames/clerk_forms_game.gd:69
 msgid "Filing fee paid"
@@ -4074,7 +4130,7 @@ msgstr "成长狂热"
 msgid "Growth market"
 msgstr "成长市场"
 
-#: scripts/ui/modals/pause_menu.gd:58
+#: scripts/ui/modals/pause_menu.gd:67
 msgid "Guide arrow"
 msgstr "导引箭头"
 
@@ -4278,7 +4334,7 @@ msgstr "嗨，我今天可以在这里工作吗？我叫 %s。"
 msgid "Hi-vis vest, work trousers, steel-toe boots. For warehouse days."
 msgstr "反光背心、工作裤、钢头靴。仓库日专用。"
 
-#: scripts/ui/modals/pause_menu.gd:46
+#: scripts/ui/modals/pause_menu.gd:55
 msgid "High"
 msgstr "高"
 
@@ -4545,6 +4601,10 @@ msgstr "进口执照要等监管浪潮才会实施。"
 #: data/world/years.json
 msgid "Import prices ease as the ports catch up."
 msgstr "港口赶上进度，进口价格回稳。"
+
+#: autoload/save_system.gd:365 scripts/ui/modals/pause_menu.gd:32 scripts/ui/modals/save_list_modal.gd:13 scripts/ui/modals/save_list_modal.gd:29
+msgid "Import save"
+msgstr "导入存盘"
 
 #: data/world/years.json
 msgid "Importers go back to wires and letters of credit for big orders."
@@ -4990,7 +5050,7 @@ msgstr "已领执照"
 msgid "LIVE"
 msgstr "贩售中"
 
-#: scripts/ui/modals/pause_menu.gd:35
+#: scripts/ui/modals/pause_menu.gd:44
 msgid "Language"
 msgstr "语言"
 
@@ -5286,7 +5346,7 @@ msgstr "生活费"
 msgid "Living costs drop to $18/day. Sales slow down."
 msgstr "生活费降到每天 $18。销售会变慢。"
 
-#: scripts/ui/modals/save_list_modal.gd:62
+#: scripts/ui/modals/save_list_modal.gd:90
 msgid "Load"
 msgstr "读取"
 
@@ -5434,7 +5494,7 @@ msgstr "这笔销售没了，还要付退货运费。评价保得住。"
 msgid "Love it."
 msgstr "超喜欢。"
 
-#: scripts/ui/modals/pause_menu.gd:46
+#: scripts/ui/modals/pause_menu.gd:55
 msgid "Low"
 msgstr "低"
 
@@ -5662,7 +5722,7 @@ msgstr "消息"
 msgid "Messy"
 msgstr "蓬乱"
 
-#: scripts/ui/tutorial.gd:672 scripts/world/district.gd:70
+#: scripts/ui/tutorial.gd:674 scripts/world/district.gd:70
 msgid "Metro"
 msgstr "捷运"
 
@@ -5686,7 +5746,7 @@ msgstr "捷运：%s 站"
 msgid "Mia"
 msgstr "Mia"
 
-#: scripts/ui/modals/pause_menu.gd:46
+#: scripts/ui/modals/pause_menu.gd:55
 msgid "Mid"
 msgstr "中"
 
@@ -6138,7 +6198,7 @@ msgstr "目前没有外送单。客户每天早上 7:00 会刊登新的。"
 msgid "No sale. You keep the company, its profits and its problems. Victor says the door stays open."
 msgstr "不卖。公司、获利和麻烦都还是你的。Victor 说大门会一直开着。"
 
-#: scripts/ui/modals/save_list_modal.gd:25
+#: scripts/ui/modals/save_list_modal.gd:38
 msgid "No saved games yet."
 msgstr "还没有存盘。"
 
@@ -6202,7 +6262,7 @@ msgstr "Nora"
 msgid "Nori Tea House"
 msgstr "Nori 茶馆"
 
-#: scripts/ui/modals/pause_menu.gd:30
+#: scripts/ui/modals/pause_menu.gd:39
 msgid "Normal"
 msgstr "一般"
 
@@ -6390,7 +6450,7 @@ msgstr "10月"
 msgid "Of course you are."
 msgstr "我就知道。"
 
-#: scripts/ui/modals/pause_menu.gd:46 scripts/ui/modals/pause_menu.gd:61 scripts/ui/modals/pause_menu.gd:69
+#: scripts/ui/modals/pause_menu.gd:55 scripts/ui/modals/pause_menu.gd:70 scripts/ui/modals/pause_menu.gd:78
 msgid "Off"
 msgstr "关"
 
@@ -6462,7 +6522,7 @@ msgstr "旧城区：搭捷运（环状线），或从购物街往西走。"
 msgid "Omar"
 msgstr "Omar"
 
-#: scripts/ui/modals/pause_menu.gd:60 scripts/ui/modals/pause_menu.gd:69
+#: scripts/ui/modals/pause_menu.gd:69 scripts/ui/modals/pause_menu.gd:78
 msgid "On"
 msgstr "开"
 
@@ -6534,9 +6594,9 @@ msgstr "只有已登记的公司能申请。"
 msgid "Only registered companies can hold an import licence."
 msgstr "只有登记过的公司才能持有进口执照。"
 
-#: scripts/ui/modals/city_map_modal.gd:100 scripts/ui/modals/city_map_modal.gd:146 scripts/ui/modals/city_map_modal.gd:74 scripts/ui/modals/world_map_modal.gd:103
+#: autoload/save_system.gd:366 scripts/ui/modals/city_map_modal.gd:100 scripts/ui/modals/city_map_modal.gd:146 scripts/ui/modals/city_map_modal.gd:74
 msgid "Open"
-msgstr "开放中"
+msgstr "打开"
 
 #: scripts/ui/tutorial.gd:48
 msgid "Open Businesses"
@@ -7038,6 +7098,10 @@ msgstr "糕点"
 msgid "Patel"
 msgstr "Patel"
 
+#: autoload/save_system.gd:366
+msgid "Path:"
+msgstr "路径："
+
 #: scripts/ui/modals/company_os.gd:364
 msgid "Pause"
 msgstr "暂停"
@@ -7294,6 +7358,10 @@ msgstr "塑料包材每件课 %s；买家偏好无塑包装。"
 msgid "Platform fees"
 msgstr "平台手续费"
 
+#: autoload/save_system.gd:311
+msgid "Player"
+msgstr "玩家"
+
 #: data/dialogue/jun_first.json
 msgid "Please."
 msgstr "麻烦了。"
@@ -7534,7 +7602,7 @@ msgstr "离开"
 msgid "Quit job"
 msgstr "辞职"
 
-#: scripts/ui/modals/pause_menu.gd:78
+#: scripts/ui/modals/pause_menu.gd:87
 msgid "Quit to title"
 msgstr "回到标题画面"
 
@@ -7701,6 +7769,10 @@ msgstr "最近的外送单"
 #: scripts/ui/modals/company_os.gd:259
 msgid "Recent transactions"
 msgstr "最近交易"
+
+#: autoload/save_system.gd:366
+msgid "Recent:"
+msgstr "最近使用："
 
 #: scripts/ui/modals/cowork_desk_modal.gd:14
 msgid "Reception is unstaffed. Self-service kiosk:"
@@ -7982,11 +8054,11 @@ msgstr "还 %s"
 msgid "Repay overdue loans in this screen; if the company is in insolvency, use the recovery options."
 msgstr "在本画面偿还逾期贷款；公司若已进入清算进程，使用复原选项。"
 
-#: scripts/ui/modals/save_list_modal.gd:34 scripts/ui/modals/save_list_modal.gd:65
+#: scripts/ui/modals/save_list_modal.gd:47 scripts/ui/modals/save_list_modal.gd:67 scripts/ui/modals/save_list_modal.gd:93
 msgid "Replace"
 msgstr "取代"
 
-#: scripts/ui/modals/save_list_modal.gd:30
+#: scripts/ui/modals/save_list_modal.gd:43
 msgid "Replace %s (day %d)?"
 msgstr "要取代 %s（第 %d 天）吗？"
 
@@ -8002,11 +8074,11 @@ msgstr "已寄出替换品 %s：%s（快捷）"
 msgid "Replacement shipped."
 msgstr "新品已寄出。"
 
-#: scripts/ui/modals/pause_menu.gd:62
+#: scripts/ui/modals/pause_menu.gd:71
 msgid "Replay tutorial"
 msgstr "重新播放教学"
 
-#: scripts/ui/modals/pause_menu.gd:75
+#: scripts/ui/modals/pause_menu.gd:84
 msgid "Report a problem (F12)"
 msgstr "回报问题（F12）"
 
@@ -8442,27 +8514,47 @@ msgstr "六"
 msgid "Sato"
 msgstr "Sato"
 
-#: scripts/ui/phone_ui.gd:129
+#: autoload/save_system.gd:366 scripts/ui/phone_ui.gd:129
 msgid "Save"
 msgstr "存盘"
+
+#: data/help/glossary.json
+msgid "Save backup"
+msgstr "存盘备份"
 
 #: data/events/ad_cost_spike.json
 msgid "Save cash. Sales will dip."
 msgstr "省下现金。销量会下滑。"
 
+#: autoload/save_system.gd:335
+msgid "Save exported. Keep this file outside your browser."
+msgstr "存盘已导出。请把文件保存在浏览器以外的地方。"
+
 #: scripts/ui/phone_ui.gd:286
 msgid "Save game"
 msgstr "保存游戏"
+
+#: autoload/save_system.gd:415
+msgid "Save imported. Continue where you left off."
+msgstr "存盘已导入，可以接着玩。"
 
 #: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:287
 msgid "Save now"
 msgstr "立即存盘"
 
-#: scripts/ui/hud.gd:152
+#: scripts/ui/modals/save_list_modal.gd:58
+msgid "Save slot %d is damaged."
+msgstr "第 %d 个存盘槽的主档已损坏。"
+
+#: autoload/save_system.gd:420
+msgid "Save transfer"
+msgstr "存盘导入／导出"
+
+#: scripts/ui/hud.gd:152 scripts/ui/hud.gd:286
 msgid "Saved"
 msgstr "已保存"
 
-#: scripts/ui/modals/save_list_modal.gd:59
+#: scripts/ui/modals/save_list_modal.gd:87
 msgid "Saved %s"
 msgstr "存于 %s"
 
@@ -8778,7 +8870,7 @@ msgstr "第 %d 张：%d%%（%s）"
 msgid "Shots"
 msgstr "Shots"
 
-#: scripts/ui/modals/pause_menu.gd:67
+#: scripts/ui/modals/pause_menu.gd:76
 msgid "Show interaction markers"
 msgstr "显示交互标记"
 
@@ -8862,7 +8954,7 @@ msgstr "能力 %d/5 · 希望周薪 %s · %s"
 msgid "Skin tone"
 msgstr "肤色"
 
-#: scripts/ui/tutorial.gd:142
+#: scripts/ui/tutorial.gd:142 scripts/ui/tutorial.gd:420
 msgid "Skip"
 msgstr "略过"
 
@@ -8882,7 +8974,7 @@ msgstr "睡到早上 7:00"
 msgid "Sleep until morning"
 msgstr "睡到早上"
 
-#: scripts/ui/modals/pause_menu.gd:30
+#: scripts/ui/modals/pause_menu.gd:39
 msgid "Slow"
 msgstr "慢"
 
@@ -9038,7 +9130,7 @@ msgstr "抱歉——这单我接不了。"
 msgid "Sort, scan and stack the neighbourhood's parcels. You'll see how shipping really works."
 msgstr "分拣、扫描、堆栈附近的包裹。你会看到物流实际上怎么运作。"
 
-#: scripts/ui/modals/pause_menu.gd:42
+#: scripts/ui/modals/pause_menu.gd:51
 msgid "Sound effects"
 msgstr "音效"
 
@@ -9750,6 +9842,10 @@ msgstr "托管合约把钱退给你了。手续费不退。"
 msgid "The existing liquidation pays 80% of receivables once. The closed company cannot collect again or use your new company stock; old contracts remain visible as records."
 msgstr "清算一次回收应收帐款的 80%。已关闭公司不能再收一次钱，也不能使用新公司的库存；旧合约仍保留供查阅。"
 
+#: autoload/save_system.gd:387
+msgid "The file could not be read. Your existing save is unchanged."
+msgstr "无法读取文件。原有存盘仍完整保留。"
+
 #: scripts/ui/minigames/parcel_sort_game.gd:28
 msgid "The first parcels show the district name. Later ones only have a postcode, and halfway through the cheat sheet goes away."
 msgstr "前几个包裹会写区名，后面只有邮递区号；做到一半，小抄还会被收走。"
@@ -9829,6 +9925,10 @@ msgstr "过河只能走桥。「收回」会取消最后一个停靠点；路线
 #: data/dialogue/sam_owner.json
 msgid "The runs are posted every morning. Plan the route before you turn the key: every kilometre you don't drive is money you keep."
 msgstr "外送单每天早上上架。发动前先排好路线：少开的每一公里，都是你留下的钱。"
+
+#: autoload/save_system.gd:178 autoload/save_system.gd:301
+msgid "The save could not be written. Your existing save is unchanged."
+msgstr "无法写入存盘。原有存盘仍完整保留。"
 
 #: data/help/glossary.json
 msgid "The share of payments on a payment route that landed on time. It moves when something goes wrong on the route, and recovers slowly as payments land."
@@ -9998,6 +10098,10 @@ msgstr "这是已结束公司的合约。"
 msgid "This is a sightseeing-only location right now."
 msgstr "这里目前只能参观。"
 
+#: autoload/save_system.gd:295 scripts/save_codec.gd:6
+msgid "This is not a City Venture save."
+msgstr "这不是 City Venture 的存盘。"
+
 #: scripts/ui/minigames/clerk_forms_game.gd:31
 msgid "This is the same form you'll file for your own company, so the rules are worth remembering."
 msgstr "这就是你之后登记自己公司要填的表，规则值得记住。"
@@ -10017,6 +10121,10 @@ msgstr "这张进货单属于已关闭的公司。"
 #: scripts/sim/ecommerce.gd:324
 msgid "This purchase belongs to another business."
 msgstr "这张进货单属于其他企业。"
+
+#: scripts/save_codec.gd:13 scripts/save_codec.gd:24
+msgid "This save comes from a newer version of City Venture."
+msgstr "这个存盘来自更新的 City Venture 版本。"
 
 #: scripts/sim/ecommerce.gd:340 scripts/sim/ecommerce.gd:408
 msgid "This supplier does not accept returns after delivery."
@@ -10062,7 +10170,7 @@ msgstr "收银台 · 你的咖啡店"
 msgid "Time on the road: %s"
 msgstr "路上时间：%s"
 
-#: scripts/ui/modals/pause_menu.gd:33
+#: scripts/ui/modals/pause_menu.gd:42
 msgid "Time only moves forward by living it: working a shift, or sleeping at night."
 msgstr "时间只会随着你的生活前进：上班工作，或晚上睡觉。"
 
@@ -10106,7 +10214,7 @@ msgstr "Tom"
 msgid "Tom: \"It's all yours. Sign's up out front.\""
 msgstr "Tom：「现在是你的了。招牌已经挂在门口。」"
 
-#: scripts/ui/tutorial.gd:444
+#: scripts/ui/tutorial.gd:446
 msgid "Too late for a shift today: the workplace closes soon. Go home and sleep (you can, after 4 PM on your first day), and work a shift tomorrow morning."
 msgstr "今天太晚了，来不及上班：店快打烊了。先回家睡觉（第一天下午 4 点以后就能睡），明天早上再来上班。"
 
@@ -10297,6 +10405,10 @@ msgstr "用笔电——Company OS"
 #: scripts/sim/company.gd:33
 msgid "Use letters or numbers."
 msgstr "请使用文本或数字。"
+
+#: scripts/ui/modals/save_list_modal.gd:61
+msgid "Use previous backup"
+msgstr "用上一份备份"
 
 #: scripts/ui/modals/loan_modal.gd:100
 msgid "Use the Metro to Financial District, then enter Nexus Bank and go to the manager desk."
@@ -10962,7 +11074,7 @@ msgstr "你在班还没结束前就离开了。没有薪水，也没有花掉时
 msgid "You left the job at %s."
 msgstr "你离开了%s的工作。"
 
-#: scripts/ui/tutorial.gd:438
+#: scripts/ui/tutorial.gd:440
 msgid "You left your job before working a shift. Take a job again at Bloom Coffee's staff door, then work a shift."
 msgstr "你还没做过班就离职了。到 Bloom Coffee 员工入口重新应征，再做一个班。"
 
@@ -11214,7 +11326,7 @@ msgstr "你的工作 · 详情"
 msgid "Your listing is live on ShopLane. Your first order comes in within a few minutes, and your phone will buzz. Head home meanwhile: your packing table is there."
 msgstr "商品已经在 ShopLane 上架了。第一笔订单几分钟内就会进来，手机会通知你。先回家吧，打包桌在家里。"
 
-#: scripts/ui/tutorial.gd:440
+#: scripts/ui/tutorial.gd:442
 msgid "Your listing is no longer active. Open Company OS → Sales and list a product again; buy stock in Operations if you ran out."
 msgstr "商品已下架。打开 Company OS → 销售，重新上架；库存用完了，就到营运进货。"
 
@@ -11318,7 +11430,7 @@ msgstr "代理商"
 msgid "all time"
 msgstr "累计"
 
-#: scripts/sim/careers.gd:124 scripts/ui/tutorial.gd:576
+#: scripts/sim/careers.gd:124 scripts/ui/tutorial.gd:578
 msgid "already worked today"
 msgstr "今天已经上过班了"
 
@@ -11386,7 +11498,7 @@ msgstr "充电"
 msgid "client fees"
 msgstr "客户费用"
 
-#: scripts/sim/careers.gd:127 scripts/ui/tutorial.gd:443 scripts/ui/tutorial.gd:576
+#: scripts/sim/careers.gd:127 scripts/ui/tutorial.gd:445 scripts/ui/tutorial.gd:578
 msgid "closed now"
 msgstr "现在没营业"
 
@@ -11906,7 +12018,7 @@ msgstr "服务器"
 msgid "shipping"
 msgstr "运费"
 
-#: scripts/ui/modals/save_list_modal.gd:59
+#: scripts/ui/modals/save_list_modal.gd:87
 msgid "slot %d"
 msgstr "字段 %d"
 
@@ -11974,7 +12086,7 @@ msgstr "名单上有他，应该帮他报到"
 msgid "they weren't on the list: sell a day pass"
 msgstr "名单上没有他，应该卖日票"
 
-#: scripts/ui/modals/save_list_modal.gd:57
+#: scripts/ui/modals/save_list_modal.gd:85
 msgid "this game"
 msgstr "目前这场"
 
@@ -11990,7 +12102,7 @@ msgstr "时间"
 msgid "to suppliers"
 msgstr "给供应商"
 
-#: scripts/sim/careers.gd:129 scripts/ui/tutorial.gd:443 scripts/ui/tutorial.gd:576
+#: scripts/sim/careers.gd:129 scripts/ui/tutorial.gd:445 scripts/ui/tutorial.gd:578
 msgid "too late for a shift today"
 msgstr "今天太晚了，不够上一个班"
 

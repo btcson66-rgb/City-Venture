@@ -513,6 +513,14 @@ msgstr ""
 msgid "(Order {order} — {product}, {price})"
 msgstr ""
 
+#: autoload/save_system.gd:329
+msgid "*.cvsave ; "
+msgstr ""
+
+#: autoload/save_system.gd:351
+msgid "*.cvsave,*.json ; "
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1129
 msgid "+%d / −%d last 7 days"
 msgstr ""
@@ -611,6 +619,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "A Van Driver (People tab) takes one run each workday from 9:00. Your own ecommerce parcels can go out in the van too: choose \"Own van\" at the packing table."
+msgstr ""
+
+#: autoload/save_system.gd:111 autoload/save_system.gd:297 scripts/ui/modals/save_list_modal.gd:63
+msgid "A backup could not be created. Your existing save is unchanged."
 msgstr ""
 
 #: data/jobs/bank_teller.json
@@ -955,6 +967,10 @@ msgstr ""
 
 #: scripts/ui/minigames/route_game.gd:53
 msgid "All %d stops planned  ·  round trip %.1f km"
+msgstr ""
+
+#: autoload/save_system.gd:366
+msgid "All Files (*)"
 msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:30
@@ -1561,6 +1577,10 @@ msgstr ""
 msgid "Browse the listings"
 msgstr ""
 
+#: data/help/glossary.json
+msgid "Browser saves stay on this device. Clearing browser data or changing computers can lose them. Export a copy before an update; keep it somewhere safe. The last three local backups help recover a damaged save."
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:469
 msgid "Bubble wrap"
 msgstr ""
@@ -1961,7 +1981,7 @@ msgstr ""
 msgid "Can't work the counter: %s."
 msgstr ""
 
-#: scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57 scripts/ui/modals/registration_modal.gd:53 scripts/ui/modals/save_list_modal.gd:37
+#: autoload/save_system.gd:366 scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57 scripts/ui/modals/registration_modal.gd:53
 msgid "Cancel"
 msgstr ""
 
@@ -2169,6 +2189,10 @@ msgstr ""
 msgid "Choose a business"
 msgstr ""
 
+#: autoload/save_system.gd:294 scripts/ui/modals/save_list_modal.gd:22
+msgid "Choose a save slot to replace. Its existing save will be backed up."
+msgstr ""
+
 #: data/help/help.json
 msgid "Choose an open district to see its location and travel routes."
 msgstr ""
@@ -2221,12 +2245,20 @@ msgstr ""
 msgid "City Hall: your food handling licence is approved."
 msgstr ""
 
+#: autoload/save_system.gd:329 autoload/save_system.gd:351
+msgid "City Venture save"
+msgstr ""
+
 #: scripts/ui/modals/world_map_modal.gd:120
 msgid "City map"
 msgstr ""
 
 #: data/world/years.json
 msgid "City opens a $2M Green Business Grant for local sellers."
+msgstr ""
+
+#: autoload/save_system.gd:313
+msgid "CityVenture_%s_%04d-%02d-%02d.cvsave"
 msgstr ""
 
 #: data/city/aurelia.json data/districts/civic_center.json scripts/ui/minigames/pack_game.gd:9 scripts/ui/minigames/parcel_sort_game.gd:7
@@ -2813,11 +2845,11 @@ msgstr ""
 msgid "Day %d"
 msgstr ""
 
-#: scripts/ui/modals/save_list_modal.gd:55
+#: scripts/ui/modals/save_list_modal.gd:83
 msgid "Day %d · personal %s"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:29
+#: scripts/ui/modals/pause_menu.gd:38
 msgid "Day length"
 msgstr ""
 
@@ -3047,6 +3079,10 @@ msgstr ""
 
 #: scripts/sim/ledger.gd:30
 msgid "Dining"
+msgstr ""
+
+#: autoload/save_system.gd:366
+msgid "Directories & Files:"
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:1178
@@ -3441,12 +3477,20 @@ msgstr ""
 msgid "Executive"
 msgstr ""
 
-#: scripts/ui/tutorial.gd:619
+#: scripts/ui/tutorial.gd:621
 msgid "Exit"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1134
 msgid "Expected signups: %.1f/day · features shipped: %d · next feature %d / %d h"
+msgstr ""
+
+#: autoload/save_system.gd:365 scripts/ui/modals/pause_menu.gd:29 scripts/ui/modals/save_list_modal.gd:25
+msgid "Export save"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Export save downloads your current game as a .cvsave file. Import save continues that game in an empty slot, or a slot you explicitly choose to replace."
 msgstr ""
 
 #: data/economy/shipping.json
@@ -3477,7 +3521,7 @@ msgstr ""
 msgid "FINANCIAL →"
 msgstr ""
 
-#: scripts/ui/tutorial.gd:420 scripts/ui/tutorial.gd:467
+#: scripts/ui/tutorial.gd:422 scripts/ui/tutorial.gd:469
 msgid "FIRST VENTURE %d/%d"
 msgstr ""
 
@@ -3545,12 +3589,24 @@ msgstr ""
 msgid "Fast: +30% work output."
 msgstr ""
 
+#: autoload/save_system.gd:366
+msgid "Favorites:"
+msgstr ""
+
 #: autoload/clock.gd:14
 msgid "Feb"
 msgstr ""
 
 #: data/character/options.json
 msgid "Feminine"
+msgstr ""
+
+#: autoload/save_system.gd:366
+msgid "File:"
+msgstr ""
+
+#: autoload/save_system.gd:381
+msgid "FileReader"
 msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:69
@@ -4073,7 +4129,7 @@ msgstr ""
 msgid "Growth market"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:58
+#: scripts/ui/modals/pause_menu.gd:67
 msgid "Guide arrow"
 msgstr ""
 
@@ -4277,7 +4333,7 @@ msgstr ""
 msgid "Hi-vis vest, work trousers, steel-toe boots. For warehouse days."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:46
+#: scripts/ui/modals/pause_menu.gd:55
 msgid "High"
 msgstr ""
 
@@ -4543,6 +4599,10 @@ msgstr ""
 
 #: data/world/years.json
 msgid "Import prices ease as the ports catch up."
+msgstr ""
+
+#: autoload/save_system.gd:365 scripts/ui/modals/pause_menu.gd:32 scripts/ui/modals/save_list_modal.gd:13 scripts/ui/modals/save_list_modal.gd:29
+msgid "Import save"
 msgstr ""
 
 #: data/world/years.json
@@ -4989,7 +5049,7 @@ msgstr ""
 msgid "LIVE"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:35
+#: scripts/ui/modals/pause_menu.gd:44
 msgid "Language"
 msgstr ""
 
@@ -5285,7 +5345,7 @@ msgstr ""
 msgid "Living costs drop to $18/day. Sales slow down."
 msgstr ""
 
-#: scripts/ui/modals/save_list_modal.gd:62
+#: scripts/ui/modals/save_list_modal.gd:90
 msgid "Load"
 msgstr ""
 
@@ -5433,7 +5493,7 @@ msgstr ""
 msgid "Love it."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:46
+#: scripts/ui/modals/pause_menu.gd:55
 msgid "Low"
 msgstr ""
 
@@ -5661,7 +5721,7 @@ msgstr ""
 msgid "Messy"
 msgstr ""
 
-#: scripts/ui/tutorial.gd:672 scripts/world/district.gd:70
+#: scripts/ui/tutorial.gd:674 scripts/world/district.gd:70
 msgid "Metro"
 msgstr ""
 
@@ -5685,7 +5745,7 @@ msgstr ""
 msgid "Mia"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:46
+#: scripts/ui/modals/pause_menu.gd:55
 msgid "Mid"
 msgstr ""
 
@@ -6137,7 +6197,7 @@ msgstr ""
 msgid "No sale. You keep the company, its profits and its problems. Victor says the door stays open."
 msgstr ""
 
-#: scripts/ui/modals/save_list_modal.gd:25
+#: scripts/ui/modals/save_list_modal.gd:38
 msgid "No saved games yet."
 msgstr ""
 
@@ -6201,7 +6261,7 @@ msgstr ""
 msgid "Nori Tea House"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:30
+#: scripts/ui/modals/pause_menu.gd:39
 msgid "Normal"
 msgstr ""
 
@@ -6389,7 +6449,7 @@ msgstr ""
 msgid "Of course you are."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:46 scripts/ui/modals/pause_menu.gd:61 scripts/ui/modals/pause_menu.gd:69
+#: scripts/ui/modals/pause_menu.gd:55 scripts/ui/modals/pause_menu.gd:70 scripts/ui/modals/pause_menu.gd:78
 msgid "Off"
 msgstr ""
 
@@ -6461,7 +6521,7 @@ msgstr ""
 msgid "Omar"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:60 scripts/ui/modals/pause_menu.gd:69
+#: scripts/ui/modals/pause_menu.gd:69 scripts/ui/modals/pause_menu.gd:78
 msgid "On"
 msgstr ""
 
@@ -6533,7 +6593,7 @@ msgstr ""
 msgid "Only registered companies can hold an import licence."
 msgstr ""
 
-#: scripts/ui/modals/city_map_modal.gd:100 scripts/ui/modals/city_map_modal.gd:146 scripts/ui/modals/city_map_modal.gd:74 scripts/ui/modals/world_map_modal.gd:103
+#: autoload/save_system.gd:366 scripts/ui/modals/city_map_modal.gd:100 scripts/ui/modals/city_map_modal.gd:146 scripts/ui/modals/city_map_modal.gd:74
 msgid "Open"
 msgstr ""
 
@@ -7037,6 +7097,10 @@ msgstr ""
 msgid "Patel"
 msgstr ""
 
+#: autoload/save_system.gd:366
+msgid "Path:"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:364
 msgid "Pause"
 msgstr ""
@@ -7293,6 +7357,10 @@ msgstr ""
 msgid "Platform fees"
 msgstr ""
 
+#: autoload/save_system.gd:311
+msgid "Player"
+msgstr ""
+
 #: data/dialogue/jun_first.json
 msgid "Please."
 msgstr ""
@@ -7533,7 +7601,7 @@ msgstr ""
 msgid "Quit job"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:78
+#: scripts/ui/modals/pause_menu.gd:87
 msgid "Quit to title"
 msgstr ""
 
@@ -7699,6 +7767,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:259
 msgid "Recent transactions"
+msgstr ""
+
+#: autoload/save_system.gd:366
+msgid "Recent:"
 msgstr ""
 
 #: scripts/ui/modals/cowork_desk_modal.gd:14
@@ -7981,11 +8053,11 @@ msgstr ""
 msgid "Repay overdue loans in this screen; if the company is in insolvency, use the recovery options."
 msgstr ""
 
-#: scripts/ui/modals/save_list_modal.gd:34 scripts/ui/modals/save_list_modal.gd:65
+#: scripts/ui/modals/save_list_modal.gd:47 scripts/ui/modals/save_list_modal.gd:67 scripts/ui/modals/save_list_modal.gd:93
 msgid "Replace"
 msgstr ""
 
-#: scripts/ui/modals/save_list_modal.gd:30
+#: scripts/ui/modals/save_list_modal.gd:43
 msgid "Replace %s (day %d)?"
 msgstr ""
 
@@ -8001,11 +8073,11 @@ msgstr ""
 msgid "Replacement shipped."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:62
+#: scripts/ui/modals/pause_menu.gd:71
 msgid "Replay tutorial"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:75
+#: scripts/ui/modals/pause_menu.gd:84
 msgid "Report a problem (F12)"
 msgstr ""
 
@@ -8441,27 +8513,47 @@ msgstr ""
 msgid "Sato"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:129
+#: autoload/save_system.gd:366 scripts/ui/phone_ui.gd:129
 msgid "Save"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Save backup"
 msgstr ""
 
 #: data/events/ad_cost_spike.json
 msgid "Save cash. Sales will dip."
 msgstr ""
 
+#: autoload/save_system.gd:335
+msgid "Save exported. Keep this file outside your browser."
+msgstr ""
+
 #: scripts/ui/phone_ui.gd:286
 msgid "Save game"
+msgstr ""
+
+#: autoload/save_system.gd:415
+msgid "Save imported. Continue where you left off."
 msgstr ""
 
 #: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:287
 msgid "Save now"
 msgstr ""
 
-#: scripts/ui/hud.gd:152
+#: scripts/ui/modals/save_list_modal.gd:58
+msgid "Save slot %d is damaged."
+msgstr ""
+
+#: autoload/save_system.gd:420
+msgid "Save transfer"
+msgstr ""
+
+#: scripts/ui/hud.gd:152 scripts/ui/hud.gd:286
 msgid "Saved"
 msgstr ""
 
-#: scripts/ui/modals/save_list_modal.gd:59
+#: scripts/ui/modals/save_list_modal.gd:87
 msgid "Saved %s"
 msgstr ""
 
@@ -8777,7 +8869,7 @@ msgstr ""
 msgid "Shots"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:67
+#: scripts/ui/modals/pause_menu.gd:76
 msgid "Show interaction markers"
 msgstr ""
 
@@ -8861,7 +8953,7 @@ msgstr ""
 msgid "Skin tone"
 msgstr ""
 
-#: scripts/ui/tutorial.gd:142
+#: scripts/ui/tutorial.gd:142 scripts/ui/tutorial.gd:420
 msgid "Skip"
 msgstr ""
 
@@ -8881,7 +8973,7 @@ msgstr ""
 msgid "Sleep until morning"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:30
+#: scripts/ui/modals/pause_menu.gd:39
 msgid "Slow"
 msgstr ""
 
@@ -9037,7 +9129,7 @@ msgstr ""
 msgid "Sort, scan and stack the neighbourhood's parcels. You'll see how shipping really works."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:42
+#: scripts/ui/modals/pause_menu.gd:51
 msgid "Sound effects"
 msgstr ""
 
@@ -9749,6 +9841,10 @@ msgstr ""
 msgid "The existing liquidation pays 80% of receivables once. The closed company cannot collect again or use your new company stock; old contracts remain visible as records."
 msgstr ""
 
+#: autoload/save_system.gd:387
+msgid "The file could not be read. Your existing save is unchanged."
+msgstr ""
+
 #: scripts/ui/minigames/parcel_sort_game.gd:28
 msgid "The first parcels show the district name. Later ones only have a postcode, and halfway through the cheat sheet goes away."
 msgstr ""
@@ -9827,6 +9923,10 @@ msgstr ""
 
 #: data/dialogue/sam_owner.json
 msgid "The runs are posted every morning. Plan the route before you turn the key: every kilometre you don't drive is money you keep."
+msgstr ""
+
+#: autoload/save_system.gd:178 autoload/save_system.gd:301
+msgid "The save could not be written. Your existing save is unchanged."
 msgstr ""
 
 #: data/help/glossary.json
@@ -9997,6 +10097,10 @@ msgstr ""
 msgid "This is a sightseeing-only location right now."
 msgstr ""
 
+#: autoload/save_system.gd:295 scripts/save_codec.gd:6
+msgid "This is not a City Venture save."
+msgstr ""
+
 #: scripts/ui/minigames/clerk_forms_game.gd:31
 msgid "This is the same form you'll file for your own company, so the rules are worth remembering."
 msgstr ""
@@ -10015,6 +10119,10 @@ msgstr ""
 
 #: scripts/sim/ecommerce.gd:324
 msgid "This purchase belongs to another business."
+msgstr ""
+
+#: scripts/save_codec.gd:13 scripts/save_codec.gd:24
+msgid "This save comes from a newer version of City Venture."
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:340 scripts/sim/ecommerce.gd:408
@@ -10061,7 +10169,7 @@ msgstr ""
 msgid "Time on the road: %s"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:33
+#: scripts/ui/modals/pause_menu.gd:42
 msgid "Time only moves forward by living it: working a shift, or sleeping at night."
 msgstr ""
 
@@ -10105,7 +10213,7 @@ msgstr ""
 msgid "Tom: \"It's all yours. Sign's up out front.\""
 msgstr ""
 
-#: scripts/ui/tutorial.gd:444
+#: scripts/ui/tutorial.gd:446
 msgid "Too late for a shift today: the workplace closes soon. Go home and sleep (you can, after 4 PM on your first day), and work a shift tomorrow morning."
 msgstr ""
 
@@ -10295,6 +10403,10 @@ msgstr ""
 
 #: scripts/sim/company.gd:33
 msgid "Use letters or numbers."
+msgstr ""
+
+#: scripts/ui/modals/save_list_modal.gd:61
+msgid "Use previous backup"
 msgstr ""
 
 #: scripts/ui/modals/loan_modal.gd:100
@@ -10961,7 +11073,7 @@ msgstr ""
 msgid "You left the job at %s."
 msgstr ""
 
-#: scripts/ui/tutorial.gd:438
+#: scripts/ui/tutorial.gd:440
 msgid "You left your job before working a shift. Take a job again at Bloom Coffee's staff door, then work a shift."
 msgstr ""
 
@@ -11213,7 +11325,7 @@ msgstr ""
 msgid "Your listing is live on ShopLane. Your first order comes in within a few minutes, and your phone will buzz. Head home meanwhile: your packing table is there."
 msgstr ""
 
-#: scripts/ui/tutorial.gd:440
+#: scripts/ui/tutorial.gd:442
 msgid "Your listing is no longer active. Open Company OS → Sales and list a product again; buy stock in Operations if you ran out."
 msgstr ""
 
@@ -11317,7 +11429,7 @@ msgstr ""
 msgid "all time"
 msgstr ""
 
-#: scripts/sim/careers.gd:124 scripts/ui/tutorial.gd:576
+#: scripts/sim/careers.gd:124 scripts/ui/tutorial.gd:578
 msgid "already worked today"
 msgstr ""
 
@@ -11385,7 +11497,7 @@ msgstr ""
 msgid "client fees"
 msgstr ""
 
-#: scripts/sim/careers.gd:127 scripts/ui/tutorial.gd:443 scripts/ui/tutorial.gd:576
+#: scripts/sim/careers.gd:127 scripts/ui/tutorial.gd:445 scripts/ui/tutorial.gd:578
 msgid "closed now"
 msgstr ""
 
@@ -11905,7 +12017,7 @@ msgstr ""
 msgid "shipping"
 msgstr ""
 
-#: scripts/ui/modals/save_list_modal.gd:59
+#: scripts/ui/modals/save_list_modal.gd:87
 msgid "slot %d"
 msgstr ""
 
@@ -11973,7 +12085,7 @@ msgstr ""
 msgid "they weren't on the list: sell a day pass"
 msgstr ""
 
-#: scripts/ui/modals/save_list_modal.gd:57
+#: scripts/ui/modals/save_list_modal.gd:85
 msgid "this game"
 msgstr ""
 
@@ -11989,7 +12101,7 @@ msgstr ""
 msgid "to suppliers"
 msgstr ""
 
-#: scripts/sim/careers.gd:129 scripts/ui/tutorial.gd:443 scripts/ui/tutorial.gd:576
+#: scripts/sim/careers.gd:129 scripts/ui/tutorial.gd:445 scripts/ui/tutorial.gd:578
 msgid "too late for a shift today"
 msgstr ""
 

@@ -430,6 +430,8 @@ Staff role `driver` (`data/economy/staff.json`) uses the generic role keys `work
 
 ## 2. Runtime state (save file)
 
+Save transfer (#22) retains `SAVE_FORMAT = 1`: `.cvsave` has the same `{format, summary, data}` envelope as slots. Imports validate core records and reconciled ledger balances before adding missing historical fields. They never rewrite historical money or RNG state. Slots use atomic temporary-file replacement, three `slot_n.bak1..3` backups, and a separately copied `saves/replaced/` archive before explicit replacement. Invalid primaries remain visible for recovery; imports preserve the source `meta.version` for the subsequent update notice. No new mandatory saved keys are introduced.
+
 ```
 data.player            {name, appearance{presentation,face,hair,hair_color,skin,eye_shape,eye_color,brows,mouth},
                         outfit, wardrobe[outfit ids owned], home:"riverside_studio", location{kind,id,x,y,facing}, flags{}}

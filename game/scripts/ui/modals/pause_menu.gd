@@ -6,7 +6,7 @@ func _init() -> void:
 	pauses_time = true
 	title_text = "Paused"
 	icon_name = "settings"
-	panel_size = Vector2(330, 318)
+	panel_size = Vector2(420, 344)
 
 
 func build() -> void:
@@ -25,6 +25,15 @@ func build() -> void:
 	lb.name = "LoadGame"
 	sv.add_child(lb)
 	body.add_child(sv)
+	var transfers := UIK.hbox(4)
+	var export_button := UIK.button("Export save", SaveSystem.show_export)
+	export_button.name = "ExportSave"
+	transfers.add_child(export_button)
+	var import_button := UIK.button("Import save", SaveSystem.show_import)
+	import_button.name = "ImportSave"
+	transfers.add_child(import_button)
+	transfers.add_child(UIK.tip("save_export"))
+	body.add_child(transfers)
 	var sp := UIK.hbox(4)
 	sp.add_child(UIK.label("Day length", 8, Art.C_MUTED))
 	for opt in [[1.0, "Slow"], [1.5, "Normal"]]:
