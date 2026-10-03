@@ -1146,6 +1146,16 @@ static func _h_return_request(p: Dictionary) -> void:
 		"product_id": o["product"], "price": Fmt.money(Packing.total(o)), "reason": reason})
 
 
+## Shared UI/action preflight: all unreserved units in the returned basket must be replaceable.
+static func replacement_available(order_id: String) -> bool:
+	var order: Dictionary = E()["orders"].get(order_id, {})
+	if order.is_empty() or order.get("status", "") != "return_requested": return false
+	for item in Packing.items(order):
+		var location := best_location(item["product"])
+		if location == "" or available(location, item["product"]) < int(item["qty"]): return false
+	return true
+
+
 ## Resolve a return request. choice: refund | replace | partial | refuse
 static func resolve_return(order_id: String, choice: String) -> Dictionary:
 	var o: Dictionary = E()["orders"].get(order_id, {})

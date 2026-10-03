@@ -2849,7 +2849,7 @@ msgstr ""
 msgid "Business account opened. %s now runs on its own books."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1332
+#: scripts/sim/ecommerce.gd:1342
 msgid "Business assets contributed to %s (in kind)"
 msgstr ""
 
@@ -3009,7 +3009,7 @@ msgstr ""
 msgid "Buyer"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1222
+#: scripts/sim/ecommerce.gd:1232
 msgid "Buyer %s opened a dispute on order %s. We refunded them and charged a $15 dispute fee."
 msgstr ""
 
@@ -3373,7 +3373,7 @@ msgstr ""
 msgid "Capital"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1333
+#: scripts/sim/ecommerce.gd:1343
 msgid "Capital contributed in kind by founder"
 msgstr ""
 
@@ -4721,16 +4721,16 @@ msgstr ""
 msgid "Costa"
 msgstr ""
 
+#: data/events/customer_return_first.json
+msgid "Costs every item in this parcel + express shipping. Likely a 5★ review."
+msgstr ""
+
 #: data/events/energy_vandal.json
 msgid "Costs more but cuts outage risk for two months."
 msgstr ""
 
 #: data/help/glossary.json
 msgid "Costs of running the business beyond the stock sold: advertising, shipping, rent, staff and servers."
-msgstr ""
-
-#: data/events/customer_return_first.json
-msgid "Costs one more unit + express shipping. Likely a 5★ review."
 msgstr ""
 
 #: data/story/chapters.json
@@ -5601,7 +5601,7 @@ msgstr ""
 msgid "Dispatch"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1223
+#: scripts/sim/ecommerce.gd:1233
 msgid "Dispute lost on %s: −%s"
 msgstr ""
 
@@ -5877,7 +5877,7 @@ msgstr ""
 msgid "Eat"
 msgstr ""
 
-#: data/businesses/ecommerce.json scripts/sim/ecommerce.gd:1388 scripts/ui/media_ui.gd:160
+#: data/businesses/ecommerce.json scripts/sim/ecommerce.gd:1398 scripts/ui/media_ui.gd:160
 msgid "Ecommerce"
 msgstr ""
 
@@ -6167,6 +6167,10 @@ msgstr ""
 
 #: data/events/energy_subsidy_cut.json
 msgid "Every grant is halved while the policy recovers over 90 days."
+msgstr ""
+
+#: data/events/customer_return.json
+msgid "Every item in this parcel + express shipping."
 msgstr ""
 
 #: data/help/glossary.json
@@ -6633,7 +6637,7 @@ msgstr ""
 msgid "First parcel out"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1254
+#: scripts/sim/ecommerce.gd:1264
 msgid "First payout from ShopLane: %s."
 msgstr ""
 
@@ -10877,7 +10881,7 @@ msgstr ""
 msgid "Nineteen hundred a month, two months' deposit. It comes empty: you fit it out, and City Hall wants a food licence before you sell a single croissant."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1175
+#: scripts/sim/ecommerce.gd:1185
 msgid "No %s in stock to send."
 msgstr ""
 
@@ -11297,7 +11301,7 @@ msgstr ""
 msgid "Nothing to pack here: is the stock at this location?"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1153
+#: scripts/sim/ecommerce.gd:1163
 msgid "Nothing to resolve."
 msgstr ""
 
@@ -11599,10 +11603,6 @@ msgstr ""
 
 #: scripts/sim/bank.gd:291
 msgid "One extension granted: the retry is now in six days. Your debt and existing late fee remain due."
-msgstr ""
-
-#: data/events/customer_return.json
-msgid "One unit + express shipping."
 msgstr ""
 
 #: data/businesses/logistics.json
@@ -12557,7 +12557,7 @@ msgstr ""
 msgid "Part-time jobs: take one to earn a wage. You work the shifts yourself at the workplace (staff door, press E)."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1191
+#: scripts/sim/ecommerce.gd:1201
 msgid "Partial refund 30%% %s: %s"
 msgstr ""
 
@@ -12737,11 +12737,11 @@ msgstr ""
 msgid "Payments start-ups promise audits and an insurance pool."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1252
+#: scripts/sim/ecommerce.gd:1262
 msgid "Payout sent: %s to your business account."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1252
+#: scripts/sim/ecommerce.gd:1262
 msgid "Payout sent: %s to your personal account."
 msgstr ""
 
@@ -13881,7 +13881,7 @@ msgstr ""
 msgid "Refund"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1169
+#: scripts/sim/ecommerce.gd:1179
 msgid "Refund %s: %s (return label paid)"
 msgstr ""
 
@@ -14305,7 +14305,7 @@ msgstr ""
 msgid "Replacement on its way. {customer}: \"Oh — nice. Didn't expect that.\""
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1184
+#: scripts/sim/ecommerce.gd:1194
 msgid "Replacement sent %s: %s (express)"
 msgstr ""
 
@@ -15737,7 +15737,7 @@ msgstr ""
 msgid "ShopLane Seller"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1264
+#: scripts/sim/ecommerce.gd:1274
 msgid "ShopLane ads: %s"
 msgstr ""
 
@@ -15745,7 +15745,7 @@ msgstr ""
 msgid "ShopLane balance (paid Mondays)"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1218
+#: scripts/sim/ecommerce.gd:1228
 msgid "ShopLane dispute lost %s: forced refund + $15 fee"
 msgstr ""
 
@@ -15761,7 +15761,7 @@ msgstr ""
 msgid "ShopLane marketplace: %d%% fee, weekly payouts, personal sellers capped at %s/month."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1256
+#: scripts/sim/ecommerce.gd:1266
 msgid "ShopLane negative balance charged to card"
 msgstr ""
 
@@ -15773,7 +15773,7 @@ msgstr ""
 msgid "ShopLane payout"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1251
+#: scripts/sim/ecommerce.gd:1261
 msgid "ShopLane payout received: %s"
 msgstr ""
 
@@ -15793,7 +15793,7 @@ msgstr ""
 msgid "ShopLane seller cap lifted · B2B contracts unlocked · office leases unlocked · supplier net terms unlocked"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1249
+#: scripts/sim/ecommerce.gd:1259
 msgid "ShopLane weekly payout"
 msgstr ""
 
@@ -16101,7 +16101,7 @@ msgstr ""
 msgid "Sold %d cars · profit so far %s"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1302
+#: scripts/sim/ecommerce.gd:1312
 msgid "Sold %d × %s to liquidator (%d%% of cost)"
 msgstr ""
 
@@ -18301,7 +18301,7 @@ msgstr ""
 msgid "Unknown automotive crisis."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1201
+#: scripts/sim/ecommerce.gd:1211
 msgid "Unknown choice."
 msgstr ""
 

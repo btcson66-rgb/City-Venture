@@ -40,9 +40,9 @@
   {
    "id": "replace",
    "label": "Send a replacement (express)",
-   "detail": "Costs one more unit + express shipping. Likely a 5★ review.",
+   "detail": "Costs every item in this parcel + express shipping. Likely a 5★ review.",
    "requires": [
-    "has_stock:{product_id}"
+    "can_replace:{order}"
    ],
    "effects": [
     {

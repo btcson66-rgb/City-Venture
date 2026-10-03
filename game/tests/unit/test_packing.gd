@@ -130,3 +130,21 @@ func test_invalid_quantities_duplicate_stock_and_negative_padding() -> void:
 	var before := Ledger.cash("player")
 	runner.eq(Ecommerce.pack_orders(LOC, -1, {o["id"]: policy}), 0, "negative material input rejected")
 	runner.eq(Ledger.cash("player"), before, "no negative material credit")
+
+func test_return_choice_requires_whole_basket_quantities() -> void:
+	var order := basket()
+	seed_order(order)
+	order["status"] = "return_requested"
+	Ecommerce.inv(LOC)["desk_lamp"]["qty"] = 0
+	var choice: Dictionary = DataDB.events["customer_return"]["choices"][1]
+	var context := {"order":order["id"],"product_id":"phone_stand"}
+	runner.check(Cond.eval("has_stock:phone_stand"), "legacy primary-only predicate still true")
+	runner.check(not EventEngine.choice_available(choice,context), "missing second SKU disables replacement")
+	Ecommerce.inv(LOC)["desk_lamp"]["qty"] = 1
+	Ecommerce.inv(LOC)["phone_stand"]["qty"] = 1
+	runner.check(not EventEngine.choice_available(choice,context), "whole quantity required, not one unit")
+	Ecommerce.inv(LOC)["phone_stand"]["qty"] = 2
+	runner.check(EventEngine.choice_available(choice,context), "complete basket enables replacement")
+	runner.check(Ecommerce.resolve_return(order["id"],"replace")["ok"], "enabled replacement actually resolves")
+	runner.check(not EventEngine.choice_available(choice,context), "already resolved choice disabled")
+	runner.check(Ledger.check_balanced(), "replacement UI path balances")

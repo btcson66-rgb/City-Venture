@@ -46,3 +46,20 @@ func run() -> void:
 	UIRoot.open_modal(PackShipModal.new("riverside_studio"))
 	await bot.wait(0.3)
 	await bot.shot("packing_postage_quote")
+
+	await bot.click_named("CourierEconomy")
+	Clock.advance(121)   # actual scheduled courier pickup
+	Ecommerce.handle("eco.deliver", {"order":"M1"})
+	# Fixture restock buys only the primary SKU; the second SKU is deliberately unavailable.
+	Ecommerce._add_stock("riverside_studio", "phone_stand", 2, 5.0, 0.0)
+	Ledger.post("player", "Replacement tour primary restock", [{"acct":"inventory","dr":10.0},{"acct":"cash","cr":10.0}], {"segment":"ecommerce"})
+	Ecommerce.handle("eco.return_request", {"order":"M1"})
+	var event: Dictionary = EventEngine.S()["queue"].back()
+	UIRoot.open_modal(DecisionModal.new(event))
+	await bot.wait(0.3)
+	await bot.shot("replacement_missing_second_sku")
+	var replace := UIRoot.top_modal().find_child("Choice_replace", true, false) as Button
+	bot.expect(replace != null and replace.disabled, "whole-basket stock guard disables unavailable replacement")
+	await bot.click_named("Choice_refund")
+	bot.expect(Ecommerce.E()["orders"]["M1"]["status"] == "refunded", "refund alternative resolves through actual choice")
+	bot.expect(Ledger.check_balanced(), "return alternative ledger balanced")
