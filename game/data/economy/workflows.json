@@ -1,0 +1,172 @@
+{
+ "revision_limit": 1,
+ "revision_max": 3,
+ "revision_hours": 2,
+ "revision_fee": 60,
+ "quote_min": 0.8,
+ "quote_max": 1.5,
+ "quote_per_star": 0.15,
+ "daily_hours_max": 6,
+ "scope_chance": 0.4,
+ "scope_extra": 0.25,
+ "scope_surcharge": 0.25,
+ "accept_quality": 0.6,
+ "settlement_rate": 0.65,
+ "promotion_quality": 0.75,
+ "barista_tip_fast": 2.0,
+ "barista_tip_slow": 0.5,
+ "barista_patience": 60.0,
+ "barista_queue": 3,
+ "cases": {
+  "market": [
+   {
+    "text": "Customer sample: 12 of 20 buyers cite delivery delays. Classify the main issue.",
+    "options": [
+     "Delivery reliability",
+     "Price confusion",
+     "Logo preference"
+    ],
+    "answer": 0
+   },
+   {
+    "text": "Research sample: commuters want portable products. Which segment should the report prioritize?",
+    "options": [
+     "Commuters",
+     "Hotel owners",
+     "Factory operators"
+    ],
+    "answer": 0
+   },
+   {
+    "text": "Only 20 customers were interviewed. How should you report the result?",
+    "options": [
+     "Directional evidence; collect a larger sample",
+     "Guaranteed demand from the entire city",
+     "No need to disclose sample size"
+    ],
+    "answer": 0
+   }
+  ],
+  "finance": [
+   {
+    "text": "Client model: sales $120, goods $50, shipping $10. Calculate gross contribution before other expenses.",
+    "options": [
+     "$60.00",
+     "$120.00",
+     "$70.00"
+    ],
+    "answer": 0
+   },
+   {
+    "text": "Cash $80; customer receivables $40 due next month. What cash is available now?",
+    "options": [
+     "$80.00",
+     "$120.00",
+     "$40.00"
+    ],
+    "answer": 0
+   },
+   {
+    "text": "Unit price $25; cost $10; fee $2. Calculate contribution per unit.",
+    "options": [
+     "$13.00",
+     "$15.00",
+     "$25.00"
+    ],
+    "answer": 0
+   }
+  ],
+  "operations": [
+   {
+    "text": "Order fulfillment: arrange the required steps in sequence.",
+    "options": [
+     "Dispatch",
+     "Verify order",
+     "Pack goods"
+    ],
+    "answer": [
+     "Verify order",
+     "Pack goods",
+     "Dispatch"
+    ]
+   },
+   {
+    "text": "Customer return: arrange the steps without refunding an unchecked claim.",
+    "options": [
+     "Refund approved amount",
+     "Check receipt",
+     "Inspect returned goods"
+    ],
+    "answer": [
+     "Check receipt",
+     "Inspect returned goods",
+     "Refund approved amount"
+    ]
+   },
+   {
+    "text": "Purchase process: arrange controls before payment.",
+    "options": [
+     "Pay invoice",
+     "Approve purchase",
+     "Verify delivery"
+    ],
+    "answer": [
+     "Approve purchase",
+     "Verify delivery",
+     "Pay invoice"
+    ]
+   }
+  ],
+  "brand": [
+   {
+    "text": "Client audience is commuters. Choose a benefit-led message about portability.",
+    "options": [
+     "Portable convenience for your commute",
+     "Largest industrial output",
+     "Exclusive hotel management"
+    ],
+    "answer": 0
+   },
+   {
+    "text": "Client requires a warm, plain voice. Choose the matching tone.",
+    "options": [
+     "Clear and friendly",
+     "Aggressive technical jargon",
+     "Vague luxury claims"
+    ],
+    "answer": 0
+   },
+   {
+    "text": "Client wants evidence before a claim. Choose the supported proposal.",
+    "options": [
+     "Show the sample and its limits",
+     "Promise guaranteed sales",
+     "Invent customer testimonials"
+    ],
+    "answer": 0
+   }
+  ]
+ },
+ "interview_answers": {
+  "market": {
+   "goal": "Client: identify demand and report the sample limitations.",
+   "audience": "Client: our buyers commute and value portability.",
+   "budget": "Client: keep the quote within the stated project fee; negotiate changes before extra work."
+  },
+  "finance": {
+   "goal": "Client: model cash separately from revenue and include all unit costs.",
+   "audience": "Client: the finance manager needs an auditable calculation.",
+   "budget": "Client: keep the quote within the stated project fee; negotiate changes before extra work."
+  },
+  "operations": {
+   "goal": "Client: document an order, return and purchase control sequence.",
+   "audience": "Client: our warehouse and support team will use the process.",
+   "budget": "Client: keep the quote within the stated project fee; negotiate changes before extra work."
+  },
+  "brand": {
+   "goal": "Client: use a warm, clear message supported by customer evidence.",
+   "audience": "Client: target commuters and portable convenience.",
+   "budget": "Client: keep the quote within the stated project fee; negotiate changes before extra work."
+  }
+ }
+}

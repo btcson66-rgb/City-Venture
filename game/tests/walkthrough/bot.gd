@@ -171,6 +171,8 @@ func _audit_one(t: String, ctl: Control) -> void:
 func _run() -> void:
 	await wait(1.0)
 	match mode:
+		"workflows":
+			await load("res://tests/walkthrough/workflows_tour.gd").new(self).run()
 		"packing":
 			await load("res://tests/walkthrough/packing_tour.gd").new(self).run()
 		"phone_messages":
@@ -805,7 +807,10 @@ func _minigames() -> void:
 	for f in [["Size", b.want["size"]], ["Drink", b.want["drink"]], ["Milk", b.want["milk"]], ["Shots", b.want["shots"]]]:
 		await click_named("%s_%s" % [f[0], f[1]], 1.0)
 	await shot("mg_barista_built")
+	await click_named("ConfirmOrder", 1.0)
 	await click_named("Serve", 1.0)
+	await click_named("Deliver_%d" % int(b.want["destination"]), 1.0)
+	await click_named("CleanTable", 1.0)
 	await wait(0.3)
 	expect(b.points >= 0.99, "a correctly built drink scores full points (%.2f)" % b.points)
 	await _mg_finish(b, "barista")
@@ -815,6 +820,7 @@ func _minigames() -> void:
 	await _mg_finish(ps, "parcels")
 	var ch: CoworkHostGame = await _mg_open(CoworkHostGame.new(), "cowork")
 	await click_named("Desk_" + str(ch.visitors[0]["answer"]), 1.0)
+	await click_named("Room_A_10", 1.0)
 	expect(ch.points > 0.7, "handling a visitor right scores")
 	await _mg_finish(ch, "cowork")
 	var cf: ClerkFormsGame = await _mg_open(ClerkFormsGame.new(), "clerk")
@@ -824,6 +830,7 @@ func _minigames() -> void:
 		await click_named("Field_" + str(cf.form["bad"]), 1.0)
 		await shot("mg_clerk_marked")
 		await click_named("Reject", 1.0)
+	await click_named("Complaint_verify", 1.0)
 	expect(cf.points >= 0.99, "the right call on a form scores full points")
 	await _mg_finish(cf, "clerk")
 	var tc: TellerCashGame = await _mg_open(TellerCashGame.new(), "teller")
@@ -834,6 +841,7 @@ func _minigames() -> void:
 			left -= d
 	await shot("mg_teller_counted")
 	await click_named("HandOver", 1.0)
+	await click_named("Refund_" + ("yes" if tc.receipt_valid else "no"), 1.0)
 	expect(tc.points >= 0.99, "an exact, tidy withdrawal scores full points")
 	await _mg_finish(tc, "teller")
 	var ph: PhotoShootGame = await _mg_open(PhotoShootGame.new("desk_lamp"), "photo")

@@ -5,7 +5,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: scripts/ui/minigames/parcel_sort_game.gd:84
+#: scripts/ui/minigames/parcel_sort_game.gd:96
 msgid "\n%dxxx"
 msgstr ""
 
@@ -41,11 +41,7 @@ msgstr ""
 msgid " (EV)"
 msgstr ""
 
-#: scripts/ui/minigames/teller_cash_game.gd:108
-msgid " (fewer notes would be tidier)"
-msgstr ""
-
-#: scripts/ui/modals/company_os.gd:1114
+#: scripts/ui/modals/company_os.gd:1117
 msgid " (late: -20%)"
 msgstr ""
 
@@ -145,11 +141,11 @@ msgstr ""
 msgid "%%|%[-+0-9.]*[sdif]"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1395
+#: scripts/ui/modals/company_os.gd:1398
 msgid "%.1f L per 100 km"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1465
+#: scripts/ui/modals/company_os.gd:1468
 msgid "%.1f km"
 msgstr ""
 
@@ -161,7 +157,7 @@ msgstr ""
 msgid "%d / %d units"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1393
+#: scripts/ui/modals/company_os.gd:1396
 msgid "%d accepted"
 msgstr ""
 
@@ -173,11 +169,11 @@ msgstr ""
 msgid "%d completed rentals"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1269
+#: scripts/ui/modals/company_os.gd:1272
 msgid "%d cups"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1304
+#: scripts/ui/modals/company_os.gd:1307
 msgid "%d cups · %s"
 msgstr ""
 
@@ -197,7 +193,7 @@ msgstr ""
 msgid "%d days left"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1445
+#: scripts/ui/modals/company_os.gd:1448
 msgid "%d driver(s) take one posted run each workday from 9:00 and bank the fee. They plan the route less well than you do."
 msgstr ""
 
@@ -213,7 +209,7 @@ msgstr ""
 msgid "%d housekeepers hired (each cleans about %d rooms a day; the owner covers %d)."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1266
+#: scripts/ui/modals/company_os.gd:1269
 msgid "%d last 7 days"
 msgstr ""
 
@@ -277,7 +273,7 @@ msgstr ""
 msgid "%d parcels"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1396
+#: scripts/ui/modals/company_os.gd:1399
 msgid "%d parcels a trip"
 msgstr ""
 
@@ -285,7 +281,7 @@ msgstr ""
 msgid "%d pastries binned."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1195 scripts/ui/modals/company_os.gd:209
+#: scripts/ui/modals/company_os.gd:1198 scripts/ui/modals/company_os.gd:209
 msgid "%d people"
 msgstr ""
 
@@ -301,11 +297,15 @@ msgstr ""
 msgid "%d points · %s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1394
+#: scripts/ui/modals/freelance_modal.gd:45
+msgid "%d revision(s)"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:1397
 msgid "%d runs"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1413
+#: scripts/ui/modals/company_os.gd:1416
 msgid "%d stops · deliver by %s · about %s on the road"
 msgstr ""
 
@@ -377,7 +377,7 @@ msgstr ""
 msgid "%s Café"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1180
+#: scripts/ui/modals/company_os.gd:1183
 msgid "%s IS LIVE"
 msgstr ""
 
@@ -465,7 +465,7 @@ msgstr ""
 msgid "%s landed on time"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1267
+#: scripts/ui/modals/company_os.gd:1270
 msgid "%s last 7 days"
 msgstr ""
 
@@ -477,7 +477,7 @@ msgstr ""
 msgid "%s on %s"
 msgstr ""
 
-#: scripts/sim/careers.gd:304
+#: scripts/sim/careers.gd:322
 msgid "%s paid %s."
 msgstr ""
 
@@ -559,6 +559,10 @@ msgstr ""
 
 #: scripts/ui/energy_ui.gd:169
 msgid "%s · %.1f kW · %s · crew-days %.1f of %.1f"
+msgstr ""
+
+#: scripts/ui/modals/freelance_modal.gd:17
+msgid "%s · %.1f/%.1f h · fee %s · due %s"
 msgstr ""
 
 #: scripts/ui/hotel_ui.gd:221
@@ -681,11 +685,11 @@ msgstr ""
 msgid "%s — monthly"
 msgstr ""
 
-#: scripts/ui/minigames/cowork_host_game.gd:62
+#: scripts/ui/minigames/cowork_host_game.gd:66
 msgid "%s, I have a desk plan. Pretty sure."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1196
+#: scripts/ui/modals/company_os.gd:1199
 msgid "%s/month each"
 msgstr ""
 
@@ -705,7 +709,7 @@ msgstr ""
 msgid "%s: %d × %s on Net %d"
 msgstr ""
 
-#: scripts/sim/careers.gd:285
+#: scripts/sim/careers.gd:303
 msgid "%s: It's late, so we've knocked 20%% off. Invoice for %s noted."
 msgstr ""
 
@@ -713,11 +717,11 @@ msgstr ""
 msgid "%s: Nobody came for our delivery, so we've booked another courier. No fee to pay, and no more work from us this month."
 msgstr ""
 
-#: scripts/sim/careers.gd:284
+#: scripts/sim/careers.gd:302
 msgid "%s: Received, thanks! Invoice for %s noted."
 msgstr ""
 
-#: scripts/sim/careers.gd:321
+#: scripts/sim/careers.gd:339
 msgid "%s: We had to cancel the project. We won't be paying for it."
 msgstr ""
 
@@ -769,11 +773,11 @@ msgstr ""
 msgid "*.cvsave,*.json ; "
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1195
+#: scripts/ui/modals/company_os.gd:1198
 msgid "+%d / −%d last 7 days"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1270
+#: scripts/ui/modals/company_os.gd:1273
 msgid "+%d arriving"
 msgstr ""
 
@@ -963,6 +967,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "A buyer usually pays a multiple of yearly profit, plus the company's cash and stock, minus what it owes."
+msgstr ""
+
+#: scripts/ui/minigames/clerk_forms_game.gd:67
+msgid "A caller complains about a delayed application. Verify the reference, explain the status, and escalate unresolved cases."
 msgstr ""
 
 #: data/help/glossary.json
@@ -1317,7 +1325,7 @@ msgstr ""
 msgid "AUD (Aurelia dollar)"
 msgstr ""
 
-#: scripts/ui/minigames/parcel_sort_game.gd:73
+#: scripts/ui/minigames/parcel_sort_game.gd:85
 msgid "AURELIA %s"
 msgstr ""
 
@@ -1337,7 +1345,7 @@ msgstr ""
 msgid "AURELIA CITY HALL"
 msgstr ""
 
-#: scripts/ui/minigames/clerk_forms_game.gd:67
+#: scripts/ui/minigames/clerk_forms_game.gd:80
 msgid "AURELIA · COMPANY REGISTRATION"
 msgstr ""
 
@@ -1345,11 +1353,15 @@ msgstr ""
 msgid "AWAITING PICKUP"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1072 scripts/ui/modals/company_os.gd:1416 scripts/ui/modals/company_os.gd:913
+#: scripts/ui/modals/freelance_modal.gd:57
+msgid "Absorb the added work"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:1072 scripts/ui/modals/company_os.gd:1419 scripts/ui/modals/company_os.gd:913
 msgid "Accept"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1427
+#: scripts/ui/modals/company_os.gd:1430
 msgid "Accept a run above, then drive it: you plan the route on a map. Every kilometre saved is fuel and time kept."
 msgstr ""
 
@@ -1399,6 +1411,26 @@ msgstr ""
 
 #: data/events/acquisition_offer.json
 msgid "Accept: sell {company} for {price}"
+msgstr ""
+
+#: scripts/ui/modals/freelance_modal.gd:66
+msgid "AcceptDelivery"
+msgstr ""
+
+#: scripts/sim/freelance_workflow.gd:10
+msgid "Acceptance"
+msgstr ""
+
+#: scripts/sim/freelance_workflow.gd:10
+msgid "Acceptance failed"
+msgstr ""
+
+#: scripts/sim/freelance_workflow.gd:106
+msgid "Acceptance failed. Revise the work or settle at a discount."
+msgstr ""
+
+#: scripts/sim/freelance_workflow.gd:10
+msgid "Accepted"
 msgstr ""
 
 #: scripts/sim/group_jobs.gd:87
@@ -1493,6 +1525,10 @@ msgstr ""
 msgid "Added %s to the rental fleet."
 msgstr ""
 
+#: scripts/sim/freelance_workflow.gd:10
+msgid "Added scope"
+msgstr ""
+
 #: scripts/sim/company.gd:108
 msgid "Additional founder capital"
 msgstr ""
@@ -1517,7 +1553,7 @@ msgstr ""
 msgid "Ads paused."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1213 scripts/ui/modals/company_os.gd:408
+#: scripts/ui/modals/company_os.gd:1216 scripts/ui/modals/company_os.gd:408
 msgid "Ads/day"
 msgstr ""
 
@@ -1561,8 +1597,24 @@ msgstr ""
 msgid "Agenda"
 msgstr ""
 
+#: data/economy/workflows.json
+msgid "Aggressive technical jargon"
+msgstr ""
+
+#: scripts/ui/modals/freelance_modal.gd:63
+msgid "Agree paid revision (%s)"
+msgstr ""
+
+#: scripts/ui/modals/freelance_modal.gd:49
+msgid "Agree quote and scope"
+msgstr ""
+
 #: scripts/sim/energy.gd:582
 msgid "Agree terms with the landlord or use your own property first."
+msgstr ""
+
+#: scripts/ui/modals/freelance_modal.gd:49
+msgid "AgreeProposal"
 msgstr ""
 
 #: data/regions/solterra.json
@@ -1605,7 +1657,7 @@ msgstr ""
 msgid "All Files (*)"
 msgstr ""
 
-#: scripts/ui/minigames/clerk_forms_game.gd:30
+#: scripts/ui/minigames/clerk_forms_game.gd:33
 msgid "All good? Approve it. Something wrong? Click the wrong field first, then Reject."
 msgstr ""
 
@@ -1625,11 +1677,15 @@ msgstr ""
 msgid "Allocate the budget across channels. CPM buys impressions, audience fit and saturation limit relevant reach. Adjust the mix while running."
 msgstr ""
 
+#: scripts/ui/modals/freelance_modal.gd:51
+msgid "Allocate up to two hours to this session. Each day's work is capped; rest before continuing tomorrow."
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Allocate weekly hours. Each machine needs one hour between batches."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1510
+#: scripts/ui/modals/company_os.gd:1513
 msgid "Allocated"
 msgstr ""
 
@@ -1750,7 +1806,7 @@ msgid "Any laptop; a shop or warehouse unit later."
 msgstr ""
 
 #: scripts/ui/modals/job_modal.gd:30
-msgid "Any time %s–%s, %s · one shift a day"
+msgid "Any time %s–%s, %s · %d shift(s) a day"
 msgstr ""
 
 #: data/dialogue/nina_first.json
@@ -1765,7 +1821,7 @@ msgstr ""
 msgid "Apologise and compensate for $900"
 msgstr ""
 
-#: scripts/ui/minigames/clerk_forms_game.gd:68
+#: scripts/ui/minigames/clerk_forms_game.gd:81
 msgid "Applicant"
 msgstr ""
 
@@ -1793,7 +1849,7 @@ msgstr ""
 msgid "Apply after leasing the premises. Processing takes 2 days, so plan fit-out and opening around that wait."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1258
+#: scripts/ui/modals/company_os.gd:1261
 msgid "Apply at City Hall → Permits (%s)"
 msgstr ""
 
@@ -1821,8 +1877,12 @@ msgstr ""
 msgid "Apply: %s · %d days"
 msgstr ""
 
-#: scripts/ui/minigames/clerk_forms_game.gd:94
+#: scripts/ui/minigames/clerk_forms_game.gd:107
 msgid "Approve"
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Approve purchase"
 msgstr ""
 
 #: autoload/clock.gd:14
@@ -1953,7 +2013,7 @@ msgstr ""
 msgid "At 5%, a 100-unit order averages about 5 duds. Allow spare stock before promising a large delivery."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1468
+#: scripts/ui/modals/company_os.gd:1471
 msgid "At any packing table the shipping options include \"Own van\": fuel instead of a courier fee, delivered the same day. The Pier 7 warehouse can hold your stock too."
 msgstr ""
 
@@ -1973,7 +2033,7 @@ msgstr ""
 msgid "At the start of each month you get last month's report: revenue, costs, profit, and what happened to your cash."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1274
+#: scripts/ui/modals/company_os.gd:1277
 msgid "At these prices: about %d customers on a weekday. Each barista makes ~%d cups an hour."
 msgstr ""
 
@@ -2101,6 +2161,10 @@ msgstr ""
 msgid "Auroria"
 msgstr ""
 
+#: scripts/ui/minigames/teller_cash_game.gd:67
+msgid "Authorize refund"
+msgstr ""
+
 #: scripts/ui/automotive_ui.gd:11
 msgid "Auto Desk"
 msgstr ""
@@ -2147,6 +2211,10 @@ msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:8
 msgid "Ava Moreau"
+msgstr ""
+
+#: scripts/ui/minigames/cowork_host_game.gd:85
+msgid "Available"
 msgstr ""
 
 #: data/milestones.json
@@ -2329,7 +2397,7 @@ msgstr ""
 msgid "Before a large payment moves, the bank confirms who is paying and who is being paid."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1234
+#: scripts/ui/modals/company_os.gd:1237
 msgid "Before the first customer"
 msgstr ""
 
@@ -2401,7 +2469,7 @@ msgstr ""
 msgid "Bills are paid in cash. Plenty of profitable companies still run out of it."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1339
+#: scripts/ui/modals/company_os.gd:1342
 msgid "Binned"
 msgstr ""
 
@@ -2669,6 +2737,10 @@ msgstr ""
 msgid "Bubble wrap"
 msgstr ""
 
+#: scripts/ui/modals/freelance_modal.gd:30
+msgid "Budget"
+msgstr ""
+
 #: data/events/ad_cost_spike.json
 msgid "Budget raised."
 msgstr ""
@@ -2697,7 +2769,7 @@ msgstr ""
 msgid "Build a cash-flow spreadsheet for %s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1139
+#: scripts/ui/modals/company_os.gd:1142
 msgid "Build a software product"
 msgstr ""
 
@@ -2705,7 +2777,7 @@ msgstr ""
 msgid "Build an investor pitch deck for %s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1140
+#: scripts/ui/modals/company_os.gd:1143
 msgid "Build it once, sell it every month. Development hours now (you at a laptop, plus developers you hire), subscribers later. Price, churn and servers decide whether it works."
 msgstr ""
 
@@ -2721,7 +2793,7 @@ msgstr ""
 msgid "Build the client pitch from slogan, visual and tone cards."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1153
+#: scripts/ui/modals/company_os.gd:1156
 msgid "Build this"
 msgstr ""
 
@@ -2741,7 +2813,7 @@ msgstr ""
 msgid "Building"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1162
+#: scripts/ui/modals/company_os.gd:1165
 msgid "Building %s"
 msgstr ""
 
@@ -2817,7 +2889,7 @@ msgstr ""
 msgid "Business travellers %d%%, tourists %d%%. A fuel-price scare, a bad rating or high rates cut requests; the fleet size limits how many you can serve."
 msgstr ""
 
-#: scripts/ui/minigames/clerk_forms_game.gd:68 scripts/ui/modals/registration_modal.gd:36
+#: scripts/ui/minigames/clerk_forms_game.gd:81 scripts/ui/modals/registration_modal.gd:36
 msgid "Business type"
 msgstr ""
 
@@ -3021,7 +3093,7 @@ msgstr ""
 msgid "CHAPTER 9 — CLEARING CRISIS"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1197
+#: scripts/ui/modals/company_os.gd:1200
 msgid "CHURN"
 msgstr ""
 
@@ -3089,7 +3161,7 @@ msgstr ""
 msgid "CRESTLINE"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1266
+#: scripts/ui/modals/company_os.gd:1269
 msgid "CUSTOMERS TODAY"
 msgstr ""
 
@@ -3137,7 +3209,7 @@ msgstr ""
 msgid "Call me. Or text. Or whatever."
 msgstr ""
 
-#: scripts/ui/minigames/cowork_host_game.gd:98
+#: scripts/ui/minigames/cowork_host_game.gd:118
 msgid "Call their host"
 msgstr ""
 
@@ -3237,11 +3309,11 @@ msgstr ""
 msgid "Can't do that."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1449 scripts/ui/modals/company_os.gd:784
+#: scripts/ui/modals/company_os.gd:1452 scripts/ui/modals/company_os.gd:784
 msgid "Can't hire yet: %s."
 msgstr ""
 
-#: scripts/ui/modals/job_modal.gd:65
+#: scripts/ui/modals/job_modal.gd:67
 msgid "Can't start a shift now: %s."
 msgstr ""
 
@@ -3285,7 +3357,7 @@ msgstr ""
 msgid "Cancellation window ended. Return eligible stock within %d days of arrival."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1463
+#: scripts/ui/modals/company_os.gd:1466
 msgid "Cancelled"
 msgstr ""
 
@@ -3335,6 +3407,10 @@ msgstr ""
 
 #: scripts/ui/hud.gd:262
 msgid "Carrying %d parcel%s"
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Cash $80; customer receivables $40 due next month. What cash is available now?"
 msgstr ""
 
 #: scripts/ui/hotel_ui.gd:278
@@ -3489,6 +3565,10 @@ msgstr ""
 msgid "Chapters 7–9 add supply shocks, greener packaging and products, a green-business grant, and international payment choices."
 msgstr ""
 
+#: scripts/ui/modals/freelance_modal.gd:56
+msgid "Charge for added scope"
+msgstr ""
+
 #: scripts/sim/energy.gd:524
 msgid "Charger capital grant: %s"
 msgstr ""
@@ -3537,7 +3617,7 @@ msgstr ""
 msgid "Cheap if granted; a fine and a reputation hit if refused."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1221
+#: scripts/ui/modals/company_os.gd:1224
 msgid "Cheaper brings more signups; features and support keep people subscribed. Servers cost more as you grow."
 msgstr ""
 
@@ -3553,12 +3633,16 @@ msgstr ""
 msgid "Check asset cost, useful life and available cash."
 msgstr ""
 
-#: scripts/ui/minigames/clerk_forms_game.gd:29
+#: scripts/ui/minigames/clerk_forms_game.gd:32
 msgid "Check each company registration form against the four rules on your desk."
 msgstr ""
 
-#: scripts/ui/minigames/cowork_host_game.gd:98
+#: scripts/ui/minigames/cowork_host_game.gd:118
 msgid "Check in"
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Check receipt"
 msgstr ""
 
 #: data/story/chapters.json
@@ -3905,7 +3989,7 @@ msgstr ""
 msgid "City Hall energy subsidy desk (Ms. Okoro)"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1256
+#: scripts/ui/modals/company_os.gd:1259
 msgid "City Hall is processing it (ready %s)"
 msgstr ""
 
@@ -3977,6 +4061,10 @@ msgstr ""
 msgid "Class timetable"
 msgstr ""
 
+#: scripts/ui/minigames/barista_game.gd:182
+msgid "Clean"
+msgstr ""
+
 #: data/world/years.json
 msgid "Clean Packaging Act passes: $0.40 levy on plastic-padded parcels."
 msgstr ""
@@ -3991,6 +4079,14 @@ msgstr ""
 
 #: data/dialogue/henri_dubois_intro.json
 msgid "Clean rooms, a friendly desk and a fair price. A room nobody cleaned cannot be sold at all, so hire housekeepers before you chase more guests."
+msgstr ""
+
+#: scripts/ui/minigames/barista_game.gd:184
+msgid "Clean table %d"
+msgstr ""
+
+#: scripts/ui/minigames/barista_game.gd:214
+msgid "Clean table / counter"
 msgstr ""
 
 #: data/economy/freelance.json
@@ -4017,6 +4113,10 @@ msgstr ""
 msgid "Clear"
 msgstr ""
 
+#: data/economy/workflows.json
+msgid "Clear and friendly"
+msgstr ""
+
 #: scripts/ui/minigames/pack_game.gd:163
 msgid "Clear box"
 msgstr ""
@@ -4033,6 +4133,10 @@ msgstr ""
 msgid "Client"
 msgstr ""
 
+#: data/economy/workflows.json
+msgid "Client audience is commuters. Choose a benefit-led message about portability."
+msgstr ""
+
 #: scripts/ui/media_ui.gd:70
 msgid "Client brief"
 msgstr ""
@@ -4045,11 +4149,15 @@ msgstr ""
 msgid "Client matches"
 msgstr ""
 
+#: data/economy/workflows.json
+msgid "Client model: sales $120, goods $50, shipping $10. Calculate gross contribution before other expenses."
+msgstr ""
+
 #: scripts/sim/forecast.gd:79
 msgid "Client payment"
 msgstr ""
 
-#: scripts/sim/careers.gd:301
+#: scripts/sim/careers.gd:319
 msgid "Client payment — %s"
 msgstr ""
 
@@ -4057,8 +4165,24 @@ msgstr ""
 msgid "Client preferences: %s / %s / %s"
 msgstr ""
 
+#: data/help/help.json scripts/ui/modals/freelance_modal.gd:8
+msgid "Client project"
+msgstr ""
+
+#: scripts/ui/modals/freelance_modal.gd:55
+msgid "Client requests extra scope. The added work is real; agree a surcharge or absorb it within the original fee."
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Client requires a warm, plain voice. Choose the matching tone."
+msgstr ""
+
 #: scripts/sim/media.gd:250
 msgid "Client retention discount"
+msgstr ""
+
+#: scripts/sim/freelance_workflow.gd:10
+msgid "Client revision"
 msgstr ""
 
 #: scripts/ui/energy_ui.gd:152
@@ -4069,8 +4193,60 @@ msgstr ""
 msgid "Client switches agencies"
 msgstr ""
 
-#: scripts/ui/minigames/typing_game.gd:44 scripts/ui/modals/company_os.gd:1104
+#: data/economy/workflows.json
+msgid "Client wants evidence before a claim. Choose the supported proposal."
+msgstr ""
+
+#: scripts/ui/minigames/typing_game.gd:44 scripts/ui/modals/company_os.gd:1107
 msgid "Client work"
+msgstr ""
+
+#: data/help/help.json scripts/ui/minigames/consulting_game.gd:11
+msgid "Client work session"
+msgstr ""
+
+#: scripts/ui/minigames/consulting_game.gd:74
+msgid "Client-work quality: %d%%"
+msgstr ""
+
+#: data/help/help.json scripts/ui/modals/freelance_modal.gd:24
+msgid "Client: ask about the goal, audience and budget. Skipping questions leaves gaps at acceptance."
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Client: document an order, return and purchase control sequence."
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Client: identify demand and report the sample limitations."
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Client: keep the quote within the stated project fee; negotiate changes before extra work."
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Client: model cash separately from revenue and include all unit costs."
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Client: our buyers commute and value portability."
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Client: our warehouse and support team will use the process."
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Client: target commuters and portable convenience."
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Client: the finance manager needs an auditable calculation."
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Client: use a warm, clear message supported by customer evidence."
 msgstr ""
 
 #: scripts/ui/industry_views.gd:25
@@ -4117,7 +4293,7 @@ msgstr ""
 msgid "Closed %s: business profit %s, cash %s."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1272
+#: scripts/ui/modals/company_os.gd:1275
 msgid "Closed now"
 msgstr ""
 
@@ -4161,11 +4337,11 @@ msgstr ""
 msgid "Co-working, incubators and a very caffeinated founder scene."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1218
+#: scripts/ui/modals/company_os.gd:1221
 msgid "Code a feature for %d hours"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1172
+#: scripts/ui/modals/company_os.gd:1175
 msgid "Code for %d hours"
 msgstr ""
 
@@ -4201,7 +4377,7 @@ msgstr ""
 msgid "Coffee — Bloom Coffee"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1300
+#: scripts/ui/modals/company_os.gd:1303
 msgid "Coffee, milk and cups: %d cups in stock"
 msgstr ""
 
@@ -4245,6 +4421,10 @@ msgstr ""
 msgid "Community Manager"
 msgstr ""
 
+#: data/economy/workflows.json
+msgid "Commuters"
+msgstr ""
+
 #: data/economy/automotive.json
 msgid "Compact"
 msgstr ""
@@ -4261,7 +4441,7 @@ msgstr ""
 msgid "Company days or an active contract"
 msgstr ""
 
-#: scripts/ui/minigames/clerk_forms_game.gd:68 scripts/ui/modals/registration_modal.gd:29
+#: scripts/ui/minigames/clerk_forms_game.gd:81 scripts/ui/modals/registration_modal.gd:29
 msgid "Company name"
 msgstr ""
 
@@ -4311,6 +4491,14 @@ msgstr ""
 
 #: data/quests/city_fleet_refresh.json
 msgid "Complete five van runs"
+msgstr ""
+
+#: data/help/help.json
+msgid "Complete service at work"
+msgstr ""
+
+#: data/help/help.json scripts/ui/minigames/barista_game.gd:41
+msgid "Complete service determines tips and the manager's review. Keep cup, milk and espresso shot counts correct."
 msgstr ""
 
 #: data/milestones.json
@@ -4385,8 +4573,16 @@ msgstr ""
 msgid "Confirm cancellation"
 msgstr ""
 
+#: scripts/ui/minigames/consulting_game.gd:48
+msgid "Confirm client fit"
+msgstr ""
+
 #: scripts/ui/modals/loan_signing_modal.gd:16
 msgid "Confirm loan signing"
+msgstr ""
+
+#: scripts/ui/minigames/barista_game.gd:190
+msgid "Confirm order"
 msgstr ""
 
 #: scripts/ui/modals/purchase_return_modal.gd:55
@@ -4557,7 +4753,7 @@ msgstr ""
 msgid "Count cash, open accounts and watch how the bank judges small businesses."
 msgstr ""
 
-#: scripts/ui/minigames/teller_cash_game.gd:77
+#: scripts/ui/minigames/teller_cash_game.gd:94
 msgid "Counted: %s of %s"
 msgstr ""
 
@@ -4709,7 +4905,7 @@ msgstr ""
 msgid "Crumb & Co. Bakery"
 msgstr ""
 
-#: scripts/ui/minigames/barista_game.gd:94
+#: scripts/ui/minigames/barista_game.gd:198
 msgid "Cup"
 msgstr ""
 
@@ -4737,7 +4933,7 @@ msgstr ""
 msgid "Customer"
 msgstr ""
 
-#: scripts/ui/minigames/barista_game.gd:38 scripts/ui/minigames/teller_cash_game.gd:29
+#: scripts/ui/minigames/barista_game.gd:45 scripts/ui/minigames/teller_cash_game.gd:33
 msgid "Customer %d / %d"
 msgstr ""
 
@@ -4745,7 +4941,15 @@ msgstr ""
 msgid "Customer Support"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1339
+#: data/economy/workflows.json
+msgid "Customer return: arrange the steps without refunding an unchecked claim."
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Customer sample: 12 of 20 buyers cite delivery delays. Classify the main issue."
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:1342
 msgid "Customers"
 msgstr ""
 
@@ -4801,7 +5005,7 @@ msgstr ""
 msgid "DOCKSIDE MOTORS"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1396
+#: scripts/ui/modals/company_os.gd:1399
 msgid "DRIVERS"
 msgstr ""
 
@@ -4865,7 +5069,7 @@ msgstr ""
 msgid "Dark slate"
 msgstr ""
 
-#: scripts/ui/automotive_ui.gd:216 scripts/ui/modals/company_os.gd:1339
+#: scripts/ui/automotive_ui.gd:216 scripts/ui/modals/company_os.gd:1342
 msgid "Day"
 msgstr ""
 
@@ -4889,7 +5093,7 @@ msgstr ""
 msgid "Day pass (desk + wifi, today)"
 msgstr ""
 
-#: scripts/ui/minigames/cowork_host_game.gd:47
+#: scripts/ui/minigames/cowork_host_game.gd:51
 msgid "Day pass (paid online)"
 msgstr ""
 
@@ -4909,7 +5113,7 @@ msgstr ""
 msgid "Deadline default: %s"
 msgstr ""
 
-#: scripts/sim/careers.gd:317
+#: scripts/sim/careers.gd:335
 msgid "Deadline missed: %s. Deliver soon, the fee drops."
 msgstr ""
 
@@ -5069,7 +5273,7 @@ msgstr ""
 msgid "Deliver before the deadline for the full fee; late work loses 20% and your reputation. Clients pay on their terms."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1437
+#: scripts/ui/modals/company_os.gd:1440
 msgid "Deliver by %s"
 msgstr ""
 
@@ -5097,6 +5301,10 @@ msgstr ""
 msgid "Deliver this job before invoicing."
 msgstr ""
 
+#: scripts/ui/modals/freelance_modal.gd:59
+msgid "Deliver to client"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:537
 msgid "Deliver to:"
 msgstr ""
@@ -5109,11 +5317,15 @@ msgstr ""
 msgid "Deliver your first marketplace order."
 msgstr ""
 
+#: scripts/ui/modals/freelance_modal.gd:59
+msgid "DeliverGig"
+msgstr ""
+
 #: scripts/ui/energy_ui.gd:167
 msgid "Delivered"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1114
+#: scripts/ui/modals/company_os.gd:1117
 msgid "Delivered and invoiced: %s."
 msgstr ""
 
@@ -5141,7 +5353,7 @@ msgstr ""
 msgid "Delivering parcels yourself in your own van: you pay fuel per parcel instead of the courier's price, and they arrive the same day."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:881
+#: scripts/sim/freelance_workflow.gd:10 scripts/ui/modals/company_os.gd:881
 msgid "Delivery"
 msgstr ""
 
@@ -5151,6 +5363,10 @@ msgstr ""
 
 #: data/events/crestline_big_offer.json
 msgid "Delivery in 21 days, Net 60. Strict SLA: late is 10% off."
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Delivery reliability"
 msgstr ""
 
 #: scripts/sim/logistics.gd:423
@@ -5233,7 +5449,7 @@ msgstr ""
 msgid "Design"
 msgstr ""
 
-#: scripts/ui/minigames/cowork_host_game.gd:47
+#: scripts/ui/minigames/cowork_host_game.gd:51
 msgid "Desk plan"
 msgstr ""
 
@@ -5349,8 +5565,20 @@ msgstr ""
 msgid "Direct: no commission, lower volume. OTA %s: %d%% commission on every night, more guests. Agency group blocks: 25%% off, rooms locked in advance (see Groups and OTA)."
 msgstr ""
 
+#: data/economy/workflows.json
+msgid "Directional evidence; collect a larger sample"
+msgstr ""
+
 #: autoload/save_system.gd:385
 msgid "Directories & Files:"
+msgstr ""
+
+#: data/help/help.json scripts/ui/minigames/barista_game.gd:40
+msgid "Dirty tables cannot seat another guest. Waiting guests lose patience; choose who to serve first."
+msgstr ""
+
+#: scripts/ui/minigames/barista_game.gd:182
+msgid "Dirty — clean before seating"
 msgstr ""
 
 #: data/events/automotive_flood.json
@@ -5367,6 +5595,10 @@ msgstr ""
 
 #: scripts/ui/modals/lease_end_modal.gd:50
 msgid "Dismiss staff"
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Dispatch"
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:1223
@@ -5461,11 +5693,11 @@ msgstr ""
 msgid "Drag the product into the frame and zoom so it fills about a third of the picture. Keep it inside the edges."
 msgstr ""
 
-#: scripts/ui/minigames/barista_game.gd:95 scripts/ui/minigames/barista_game.gd:96
+#: scripts/ui/minigames/barista_game.gd:199 scripts/ui/minigames/barista_game.gd:200
 msgid "Drink"
 msgstr ""
 
-#: scripts/ui/minigames/barista_game.gd:139 scripts/ui/minigames/barista_game.gd:140
+#: scripts/ui/minigames/barista_game.gd:251 scripts/ui/minigames/barista_game.gd:252
 msgid "Drinks served exactly right: %d / %d"
 msgstr ""
 
@@ -5473,7 +5705,7 @@ msgstr ""
 msgid "Drive 500 km."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1439
+#: scripts/ui/modals/company_os.gd:1442
 msgid "Drive it"
 msgstr ""
 
@@ -5481,7 +5713,7 @@ msgstr ""
 msgid "Drive the route"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1442
+#: scripts/ui/modals/company_os.gd:1445
 msgid "Drivers"
 msgstr ""
 
@@ -5549,12 +5781,8 @@ msgstr ""
 msgid "Each checkout needs a full clean, each stayover a light one. Rooms nobody cleaned cannot be sold tonight."
 msgstr ""
 
-#: scripts/ui/minigames/teller_cash_game.gd:23
+#: scripts/ui/minigames/teller_cash_game.gd:27
 msgid "Each customer asks for a cash withdrawal. Click notes into the tray until it adds up exactly."
-msgstr ""
-
-#: scripts/ui/minigames/barista_game.gd:31
-msgid "Each customer reads out an order. Build it: cup size, drink, milk and shots."
 msgstr ""
 
 #: scripts/ui/hotel_ui.gd:107
@@ -5701,7 +5929,7 @@ msgstr ""
 msgid "Electronics"
 msgstr ""
 
-#: scripts/ui/minigames/cowork_host_game.gd:9
+#: scripts/ui/minigames/cowork_host_game.gd:13 scripts/ui/minigames/cowork_host_game.gd:9
 msgid "Elena"
 msgstr ""
 
@@ -5897,7 +6125,7 @@ msgstr ""
 msgid "Escrow: you pay into a contract that holds the money. The supplier ships when they see it locked, and is paid only when your goods arrive."
 msgstr ""
 
-#: scripts/ui/minigames/barista_game.gd:98
+#: scripts/ui/minigames/barista_game.gd:202
 msgid "Espresso"
 msgstr ""
 
@@ -5981,6 +6209,14 @@ msgstr ""
 msgid "Excellent work."
 msgstr ""
 
+#: data/economy/workflows.json
+msgid "Exclusive hotel management"
+msgstr ""
+
+#: scripts/sim/freelance_workflow.gd:10
+msgid "Execution"
+msgstr ""
+
 #: data/character/options.json
 msgid "Executive"
 msgstr ""
@@ -5997,15 +6233,19 @@ msgstr ""
 msgid "Expected demand per day comes from weekday, season and city events such as festivals or trade fairs."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1200
+#: scripts/ui/modals/company_os.gd:1203
 msgid "Expected signups: %.1f/day · features shipped: %d · next feature %d / %d h"
+msgstr ""
+
+#: scripts/ui/minigames/teller_cash_game.gd:67
+msgid "Explain policy and decline refund"
 msgstr ""
 
 #: data/help/patch_notes.json
 msgid "Explore 10 city districts and build your company through all 12 story chapters."
 msgstr ""
 
-#: scripts/sim/careers.gd:329
+#: scripts/sim/careers.gd:347
 msgid "Explore freelance consulting"
 msgstr ""
 
@@ -6073,7 +6313,7 @@ msgstr ""
 msgid "FROZEN · BACK "
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1395
+#: scripts/ui/modals/company_os.gd:1398
 msgid "FUEL, 7 DAYS"
 msgstr ""
 
@@ -6115,6 +6355,10 @@ msgstr ""
 
 #: scripts/sim/lease_end.gd:217 scripts/sim/manufacturing.gd:373
 msgid "Factory materials liquidated"
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Factory operators"
 msgstr ""
 
 #: scripts/sim/automotive.gd:774 scripts/sim/automotive.gd:896
@@ -6257,7 +6501,7 @@ msgstr ""
 msgid "FileReader"
 msgstr ""
 
-#: scripts/ui/minigames/clerk_forms_game.gd:69
+#: scripts/ui/minigames/clerk_forms_game.gd:82
 msgid "Filing fee paid"
 msgstr ""
 
@@ -6425,11 +6669,11 @@ msgstr ""
 msgid "First-venture deliveries and the first sale arrive quickly. Normal supply and shipping times return after the tutorial."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1244
+#: scripts/ui/modals/company_os.gd:1247
 msgid "Fit out (%s)"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1237 scripts/ui/modals/company_os.gd:1239 scripts/ui/modals/company_os.gd:1241
+#: scripts/ui/modals/company_os.gd:1240 scripts/ui/modals/company_os.gd:1242 scripts/ui/modals/company_os.gd:1244
 msgid "Fit out: espresso machine, counter, tables"
 msgstr ""
 
@@ -6449,7 +6693,7 @@ msgstr ""
 msgid "Fitted out %s."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1239
+#: scripts/ui/modals/company_os.gd:1242
 msgid "Fitters at work until %s"
 msgstr ""
 
@@ -6541,7 +6785,7 @@ msgstr ""
 msgid "Flyers and a board for %s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1326
+#: scripts/ui/modals/company_os.gd:1329
 msgid "Flyers and a street board, per day:"
 msgstr ""
 
@@ -6561,7 +6805,7 @@ msgstr ""
 msgid "Food"
 msgstr ""
 
-#: data/help/glossary.json scripts/sim/cafe.gd:128 scripts/ui/modals/company_os.gd:1259
+#: data/help/glossary.json scripts/sim/cafe.gd:128 scripts/ui/modals/company_os.gd:1262
 msgid "Food handling licence"
 msgstr ""
 
@@ -6609,7 +6853,7 @@ msgstr ""
 msgid "For serving food and drink from your own premises. An inspector checks the unit; it takes two days."
 msgstr ""
 
-#: scripts/ui/minigames/clerk_forms_game.gd:35
+#: scripts/ui/minigames/clerk_forms_game.gd:38
 msgid "Form %d / %d"
 msgstr ""
 
@@ -6621,7 +6865,7 @@ msgstr ""
 msgid "Former Aster Inn owner"
 msgstr ""
 
-#: scripts/ui/minigames/clerk_forms_game.gd:135
+#: scripts/ui/minigames/clerk_forms_game.gd:141
 msgid "Forms handled correctly: %d / %d"
 msgstr ""
 
@@ -6693,7 +6937,7 @@ msgstr ""
 msgid "Free. {supplier} ships once the bridge reopens ({until}). The payment lands at {ratio} and you cover the {lost} gap."
 msgstr ""
 
-#: scripts/sim/careers.gd:329
+#: scripts/sim/careers.gd:347
 msgid "Freelance"
 msgstr ""
 
@@ -7101,7 +7345,7 @@ msgstr ""
 msgid "Gross margin"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1510 scripts/ui/modals/company_os.gd:268 scripts/ui/modals/info_modal.gd:87 scripts/ui/modals/month_close_modal.gd:30
+#: scripts/ui/modals/company_os.gd:1513 scripts/ui/modals/company_os.gd:268 scripts/ui/modals/info_modal.gd:87 scripts/ui/modals/month_close_modal.gd:30
 msgid "Gross profit"
 msgstr ""
 
@@ -7217,6 +7461,14 @@ msgstr ""
 msgid "GrowthNextBoard"
 msgstr ""
 
+#: data/economy/workflows.json
+msgid "Guaranteed demand from the entire city"
+msgstr ""
+
+#: scripts/ui/minigames/barista_game.gd:158 scripts/ui/minigames/barista_game.gd:92
+msgid "Guest %d · %d s"
+msgstr ""
+
 #: scripts/sim/hotel.gd:94
 msgid "Guest rating at least %.1f (now %.1f)."
 msgstr ""
@@ -7317,11 +7569,11 @@ msgstr ""
 msgid "Hand it in"
 msgstr ""
 
-#: scripts/ui/minigames/teller_cash_game.gd:86
+#: scripts/ui/minigames/teller_cash_game.gd:103
 msgid "Hand it over"
 msgstr ""
 
-#: scripts/ui/minigames/teller_cash_game.gd:24
+#: scripts/ui/minigames/teller_cash_game.gd:28
 msgid "Hand it over when the total matches. Exact with the fewest notes is best; a wrong amount is a till error."
 msgstr ""
 
@@ -7477,7 +7729,7 @@ msgstr ""
 msgid "Helio warehouse office in Industrial."
 msgstr ""
 
-#: scripts/ui/minigames/cowork_host_game.gd:66
+#: scripts/ui/minigames/cowork_host_game.gd:70
 msgid "Hello, I'm %s. I'm here to meet %s."
 msgstr ""
 
@@ -7489,7 +7741,7 @@ msgstr ""
 msgid "Here are the papers. Read them. Then read them again."
 msgstr ""
 
-#: scripts/ui/minigames/cowork_host_game.gd:30
+#: scripts/ui/minigames/cowork_host_game.gd:34
 msgid "Here to meet someone? Call their host down. Careful: some people say they booked when they didn't."
 msgstr ""
 
@@ -7521,7 +7773,7 @@ msgstr ""
 msgid "Hi! Rosa from Harbor Point Fitness."
 msgstr ""
 
-#: scripts/ui/minigames/cowork_host_game.gd:57
+#: scripts/ui/minigames/cowork_host_game.gd:61
 msgid "Hi, can I work here today? I'm %s."
 msgstr ""
 
@@ -7565,7 +7817,7 @@ msgstr ""
 msgid "Hire Tomas · $1,100/week"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1185
+#: scripts/ui/modals/company_os.gd:1188
 msgid "Hire a Software Developer (People tab) to build while you do other things."
 msgstr ""
 
@@ -7593,11 +7845,11 @@ msgstr ""
 msgid "Hired %s as %s."
 msgstr ""
 
-#: scripts/sim/careers.gd:78
+#: scripts/sim/careers.gd:82
 msgid "Hired as %s at %s."
 msgstr ""
 
-#: scripts/ui/modals/job_modal.gd:83
+#: scripts/ui/modals/job_modal.gd:85
 msgid "Hired! You're now a %s at %s."
 msgstr ""
 
@@ -7705,6 +7957,10 @@ msgstr ""
 msgid "Hotel insurance, property tax and software"
 msgstr ""
 
+#: data/economy/workflows.json
+msgid "Hotel owners"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Hotel revenue management"
 msgstr ""
@@ -7715,10 +7971,6 @@ msgstr ""
 
 #: scripts/world/building_info.gd:110
 msgid "Hours: %s–%s · %s"
-msgstr ""
-
-#: scripts/ui/minigames/barista_game.gd:34
-msgid "House rules: single shot by default; an Americano never takes milk, and a flat white is always a double shot."
 msgstr ""
 
 #: data/buildings/lantern_bistro.json
@@ -7873,7 +8125,7 @@ msgstr ""
 msgid "I've got a meeting that matters."
 msgstr ""
 
-#: scripts/ui/minigames/clerk_forms_game.gd:68
+#: scripts/ui/minigames/clerk_forms_game.gd:81
 msgid "ID number"
 msgstr ""
 
@@ -7989,7 +8241,7 @@ msgstr ""
 msgid "In plain words: the van is a company expense today. It only pays back if you keep it busy, with your own parcels and delivery runs."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1424
+#: scripts/ui/modals/company_os.gd:1427
 msgid "In plain words: you get the fee if you finish by the deadline; a late run pays %d%% less, and one left undone for hours is cancelled."
 msgstr ""
 
@@ -8017,8 +8269,12 @@ msgstr ""
 msgid "In transit"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1514
+#: scripts/ui/modals/company_os.gd:1517
 msgid "Included internal media cost"
+msgstr ""
+
+#: scripts/sim/freelance_workflow.gd:89
+msgid "Included revisions are used. Agree a paid revision or settle at a discount."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:350
@@ -8063,6 +8319,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "Inspect more to catch defects, or accept refunds and credit risk. Maintenance repairs broken machines."
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Inspect returned goods"
 msgstr ""
 
 #: scripts/sim/automotive.gd:284
@@ -8197,7 +8457,7 @@ msgstr ""
 msgid "Internal purchase from %s: %s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1513
+#: scripts/ui/modals/company_os.gd:1516
 msgid "Internal purchases from the group"
 msgstr ""
 
@@ -8213,7 +8473,7 @@ msgstr ""
 msgid "Internal sales equal internal purchases."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1512
+#: scripts/ui/modals/company_os.gd:1515
 msgid "Internal sales to the group"
 msgstr ""
 
@@ -8221,7 +8481,7 @@ msgstr ""
 msgid "Internal supply"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1515
+#: scripts/ui/modals/company_os.gd:1518
 msgid "Internal trade eliminated in group total"
 msgstr ""
 
@@ -8245,6 +8505,14 @@ msgstr ""
 msgid "Interns cost less but work slowly. Hire a designer and a media buyer to run three campaigns at once."
 msgstr ""
 
+#: scripts/sim/freelance_workflow.gd:10
+msgid "Interview"
+msgstr ""
+
+#: data/help/glossary.json scripts/ui/modals/freelance_modal.gd:16
+msgid "Interview, scope and acceptance"
+msgstr ""
+
 #: scripts/sim/lease_end.gd:44
 msgid "Invalid lease terms. Review the property data before ending this lease."
 msgstr ""
@@ -8255,6 +8523,14 @@ msgstr ""
 
 #: scripts/sim/lease_end.gd:197
 msgid "Invalid property damage claim."
+msgstr ""
+
+#: scripts/sim/careers.gd:152
+msgid "Invalid shift result."
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Invent customer testimonials"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:7
@@ -8301,7 +8577,7 @@ msgstr ""
 msgid "Invoice reduction"
 msgstr ""
 
-#: scripts/sim/careers.gd:270
+#: scripts/sim/careers.gd:288
 msgid "Invoice — %s"
 msgstr ""
 
@@ -8621,7 +8897,7 @@ msgstr ""
 msgid "Keep {company} stocked through the shock: 100 units in hand or on the way"
 msgstr ""
 
-#: data/npcs/ken.json scripts/ui/minigames/cowork_host_game.gd:9
+#: data/npcs/ken.json scripts/ui/minigames/cowork_host_game.gd:13 scripts/ui/minigames/cowork_host_game.gd:9
 msgid "Ken"
 msgstr ""
 
@@ -8749,7 +9025,7 @@ msgstr ""
 msgid "Lantern Books"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1231
+#: scripts/ui/modals/company_os.gd:1234
 msgid "Lantern Row, Old Town · open Mon–Sat 7:00–17:00"
 msgstr ""
 
@@ -8777,19 +9053,23 @@ msgstr ""
 msgid "Larger boxes cost more in materials and dimensional postage. Fragile goods need padding."
 msgstr ""
 
+#: data/economy/workflows.json
+msgid "Largest industrial output"
+msgstr ""
+
 #: scripts/ui/minigames/auction_game.gd:61
 msgid "Last call…"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1334
+#: scripts/ui/modals/company_os.gd:1337
 msgid "Last days"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1504
+#: scripts/ui/modals/company_os.gd:1507
 msgid "Last month"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1463
+#: scripts/ui/modals/company_os.gd:1466
 msgid "Late"
 msgstr ""
 
@@ -8825,7 +9105,7 @@ msgstr ""
 msgid "Latte"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1175
+#: scripts/ui/modals/company_os.gd:1178
 msgid "Launch at %s/month"
 msgstr ""
 
@@ -8985,7 +9265,7 @@ msgstr ""
 msgid "Lease the café unit first."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1235
+#: scripts/ui/modals/company_os.gd:1238
 msgid "Lease the corner unit"
 msgstr ""
 
@@ -9049,12 +9329,16 @@ msgstr ""
 msgid "Left earbud's dead. Out of the box."
 msgstr ""
 
-#: scripts/sim/careers.gd:88
+#: scripts/sim/careers.gd:92
 msgid "Left the job at %s."
 msgstr ""
 
 #: data/world/years.json
 msgid "Legacy"
+msgstr ""
+
+#: scripts/sim/freelance_workflow.gd:10
+msgid "Legacy project"
 msgstr ""
 
 #: scripts/sim/automotive.gd:813
@@ -9377,6 +9661,10 @@ msgstr ""
 msgid "Logistics: a van, runs and thin margins"
 msgstr ""
 
+#: data/economy/workflows.json
+msgid "Logo preference"
+msgstr ""
+
 #: data/character/options.json
 msgid "Long"
 msgstr ""
@@ -9549,15 +9837,15 @@ msgstr ""
 msgid "MORT-"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1196
+#: scripts/ui/modals/company_os.gd:1199
 msgid "MRR"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1151
+#: scripts/ui/modals/company_os.gd:1154
 msgid "MVP %d dev hours · typical price %s/month · market ~%d customers · churn ~%d%%/month"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1169
+#: scripts/ui/modals/company_os.gd:1172
 msgid "MVP: %d / %d dev hours · your team adds %.1f h per workday"
 msgstr ""
 
@@ -9617,8 +9905,16 @@ msgstr ""
 msgid "Manage properties"
 msgstr ""
 
+#: data/help/help.json scripts/ui/minigames/barista_game.gd:39
+msgid "Manage the queue: confirm or recommend, make each drink, deliver to the ticket's counter or table, then clean."
+msgstr ""
+
 #: data/help/patch_notes.json
 msgid "Management lists keep their scroll position. Story goals recover from declined contracts and difficult cash-flow months."
+msgstr ""
+
+#: scripts/ui/modals/job_modal.gd:54
+msgid "Manager review %d%% · next rank needs %d%%; serve and clean well to improve."
 msgstr ""
 
 #: data/events/automotive_recall.json
@@ -9925,7 +10221,7 @@ msgstr ""
 msgid "Meeting: %s at %s. Check Agenda; if you miss it, book again."
 msgstr ""
 
-#: scripts/ui/hud.gd:113 scripts/ui/modals/company_os.gd:1281
+#: scripts/ui/hud.gd:113 scripts/ui/modals/company_os.gd:1284
 msgid "Menu"
 msgstr ""
 
@@ -10017,7 +10313,7 @@ msgstr ""
 msgid "Milestone: %s"
 msgstr ""
 
-#: scripts/ui/minigames/barista_game.gd:97
+#: scripts/ui/minigames/barista_game.gd:201
 msgid "Milk"
 msgstr ""
 
@@ -10197,7 +10493,7 @@ msgstr ""
 msgid "Morning · Sunny"
 msgstr ""
 
-#: scripts/ui/minigames/cowork_host_game.gd:54
+#: scripts/ui/minigames/cowork_host_game.gd:58
 msgid "Morning! %s, I booked for today."
 msgstr ""
 
@@ -10329,7 +10625,7 @@ msgstr ""
 msgid "Nair"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1349
+#: scripts/ui/modals/company_os.gd:1352
 msgid "Name over the door"
 msgstr ""
 
@@ -10405,7 +10701,7 @@ msgstr ""
 msgid "Net 30 leaves cash available today but creates a bill in 30 days. Reserve money for that bill in your forecast."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1510
+#: scripts/ui/modals/company_os.gd:1513
 msgid "Net revenue"
 msgstr ""
 
@@ -10637,7 +10933,7 @@ msgstr ""
 msgid "No delivered batch to recall."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1447
+#: scripts/ui/modals/company_os.gd:1450
 msgid "No driver yet. Hire a Van Driver in the People tab to have the van work while you do something else."
 msgstr ""
 
@@ -10689,12 +10985,20 @@ msgstr ""
 msgid "No lost rentals, but each car may break down over the next three weeks."
 msgstr ""
 
+#: scripts/ui/modals/job_modal.gd:54
+msgid "No manager review yet — complete a shift."
+msgstr ""
+
 #: scripts/sim/phone_messages.gd:145
 msgid "No meeting time is currently available. Ask again later."
 msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:8
 msgid "No milk"
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "No need to disclose sample size"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1060
@@ -10733,7 +11037,7 @@ msgstr ""
 msgid "No risk. No revenue."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1399
+#: scripts/ui/modals/company_os.gd:1402
 msgid "No runs on the board. Clients post new ones every morning at 7:00."
 msgstr ""
 
@@ -10765,7 +11069,7 @@ msgstr ""
 msgid "No such employee."
 msgstr ""
 
-#: scripts/sim/careers.gd:252
+#: scripts/sim/careers.gd:267
 msgid "No such gig in progress."
 msgstr ""
 
@@ -10801,7 +11105,7 @@ msgstr ""
 msgid "Nobody at the counter. Registration: Mon–Fri 9:00–17:00."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1280
+#: scripts/ui/modals/company_os.gd:1283
 msgid "Nobody's on staff behind the counter: the café only opens while you work it yourself (the counter, inside the café). Hire a Barista in the People tab to open every day."
 msgstr ""
 
@@ -11025,7 +11329,7 @@ msgstr ""
 msgid "Novak"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1180
+#: scripts/ui/modals/company_os.gd:1183
 msgid "Now the real work starts: keep them subscribed."
 msgstr ""
 
@@ -11143,6 +11447,10 @@ msgstr ""
 
 #: data/businesses/hotel.json
 msgid "Occupancy, ADR, seasons."
+msgstr ""
+
+#: scripts/ui/minigames/barista_game.gd:182 scripts/ui/minigames/cowork_host_game.gd:85
+msgid "Occupied"
 msgstr ""
 
 #: autoload/clock.gd:14
@@ -11269,7 +11577,7 @@ msgstr ""
 msgid "On the air"
 msgstr ""
 
-#: scripts/ui/minigames/cowork_host_game.gd:29
+#: scripts/ui/minigames/cowork_host_game.gd:33
 msgid "On the list? Check them in. Not on the list, or asking to work here today? Sell a day pass ($15)."
 msgstr ""
 
@@ -11281,7 +11589,7 @@ msgstr ""
 msgid "On the way from suppliers: %d units"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1463
+#: scripts/ui/modals/company_os.gd:1466
 msgid "On time"
 msgstr ""
 
@@ -11315,6 +11623,10 @@ msgstr ""
 
 #: data/world/years.json
 msgid "Online retail spending up 14% year-on-year."
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Only 20 customers were interviewed. How should you report the result?"
 msgstr ""
 
 #: scripts/sim/contracts.gd:318
@@ -11465,6 +11777,10 @@ msgstr ""
 msgid "Open an escrow account"
 msgstr ""
 
+#: scripts/ui/modals/company_os.gd:1055
+msgid "Open client project"
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Open for Business"
 msgstr ""
@@ -11473,7 +11789,7 @@ msgstr ""
 msgid "Open last month close (%s)"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1272
+#: scripts/ui/modals/company_os.gd:1275
 msgid "Open now"
 msgstr ""
 
@@ -11669,11 +11985,11 @@ msgstr ""
 msgid "Operating costs"
 msgstr ""
 
-#: data/help/glossary.json scripts/ui/modals/company_os.gd:1510
+#: data/help/glossary.json scripts/ui/modals/company_os.gd:1513
 msgid "Operating expenses"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1510
+#: scripts/ui/modals/company_os.gd:1513
 msgid "Operating profit"
 msgstr ""
 
@@ -11717,6 +12033,10 @@ msgstr ""
 msgid "Order %d more from %s (%s)"
 msgstr ""
 
+#: scripts/ui/minigames/barista_game.gd:180
+msgid "Order %d · %s"
+msgstr ""
+
 #: scripts/ui/automotive_ui.gd:271
 msgid "Order %d × %s · %s"
 msgstr ""
@@ -11747,6 +12067,10 @@ msgstr ""
 
 #: data/story/chapters.json
 msgid "Order from Lumina Direct: factory prices, but you pay before it ships"
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Order fulfillment: arrange the required steps in sequence."
 msgstr ""
 
 #: scripts/ui/energy_ui.gd:175
@@ -11785,7 +12109,7 @@ msgstr ""
 msgid "Ordered %d × %s — %s. Arrives %s."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1309
+#: scripts/ui/modals/company_os.gd:1312
 msgid "Ordered. Old Town Roasters delivers %s."
 msgstr ""
 
@@ -12045,6 +12369,10 @@ msgstr ""
 msgid "Pack each order by hand, in four steps: a box that fits, padding, tape on all three seams, and the right label."
 msgstr ""
 
+#: data/economy/workflows.json
+msgid "Pack goods"
+msgstr ""
+
 #: data/help/help.json
 msgid "Pack orders by hand: box, padding, tape, label. Poor padding means broken items and returns; a wrong label means late delivery."
 msgstr ""
@@ -12117,8 +12445,12 @@ msgstr ""
 msgid "Padding should reach the green zone. Too little and things arrive broken; that means returns and bad reviews."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1457
+#: scripts/ui/modals/company_os.gd:1460
 msgid "Paid"
+msgstr ""
+
+#: scripts/ui/minigames/teller_cash_game.gd:74
+msgid "Paid %s for a %s purchase. Count the change."
 msgstr ""
 
 #: scripts/sim/contracts.gd:306
@@ -12169,7 +12501,7 @@ msgstr ""
 msgid "Paper Crane Ltd"
 msgstr ""
 
-#: scripts/ui/minigames/parcel_sort_game.gd:32
+#: scripts/ui/minigames/parcel_sort_game.gd:34
 msgid "Parcel %d / %d"
 msgstr ""
 
@@ -12181,7 +12513,7 @@ msgstr ""
 msgid "Parcel counter"
 msgstr ""
 
-#: scripts/ui/minigames/parcel_sort_game.gd:26
+#: scripts/ui/minigames/parcel_sort_game.gd:28
 msgid "Parcels come down the belt one at a time. Send each to its district's bin: click the bin or press 1–5."
 msgstr ""
 
@@ -12189,7 +12521,7 @@ msgstr ""
 msgid "Parcels out for delivery"
 msgstr ""
 
-#: scripts/ui/minigames/parcel_sort_game.gd:135
+#: scripts/ui/minigames/parcel_sort_game.gd:148
 msgid "Parcels sorted correctly: %d / %d"
 msgstr ""
 
@@ -12237,7 +12569,7 @@ msgstr ""
 msgid "Passenger flow"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1437
+#: scripts/ui/modals/company_os.gd:1440
 msgid "Past its deadline (%s): the pay is cut"
 msgstr ""
 
@@ -12245,7 +12577,7 @@ msgstr ""
 msgid "Pastel card"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1315
+#: scripts/ui/modals/company_os.gd:1318
 msgid "Pastries from the bakery each morning:"
 msgstr ""
 
@@ -12319,6 +12651,10 @@ msgstr ""
 
 #: data/events/automotive_flood.json
 msgid "Pay for a proper repair"
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Pay invoice"
 msgstr ""
 
 #: data/help/help.json
@@ -12537,6 +12873,10 @@ msgstr ""
 msgid "Pick a box to start"
 msgstr ""
 
+#: scripts/ui/minigames/consulting_game.gd:31
+msgid "Pick a card, then confirm how it fits the client brief."
+msgstr ""
+
 #: scripts/ui/energy_ui.gd:251
 msgid "Pick a district on the map. Free spots are limited; landlords want a fee or a share, your own property needs none."
 msgstr ""
@@ -12547,6 +12887,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "Pick an idea, then build the first version: code sessions yourself (typing) or hire developers."
+msgstr ""
+
+#: scripts/ui/minigames/barista_game.gd:180 scripts/ui/minigames/barista_game.gd:209
+msgid "Pickup counter"
 msgstr ""
 
 #: data/buildings/pier7_warehouse.json
@@ -12617,7 +12961,7 @@ msgstr ""
 msgid "Plan the route"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1477
+#: scripts/ui/modals/company_os.gd:1480
 msgid "Plan the route: run %s"
 msgstr ""
 
@@ -12677,6 +13021,10 @@ msgstr ""
 msgid "Port of Aurelia backed up for a third week: 40 ships waiting."
 msgstr ""
 
+#: data/economy/workflows.json
+msgid "Portable convenience for your commute"
+msgstr ""
+
 #: data/regions/lumina.json
 msgid "Ports"
 msgstr ""
@@ -12717,7 +13065,7 @@ msgstr ""
 msgid "PostPoint — drop-off"
 msgstr ""
 
-#: scripts/ui/minigames/parcel_sort_game.gd:27
+#: scripts/ui/minigames/parcel_sort_game.gd:29
 msgid "Postcodes tell you the district: 1xxx Riverside, 2xxx Startup Hub, 3xxx Civic Center, 4xxx Financial District, 5xxx Shopping Street."
 msgstr ""
 
@@ -12725,7 +13073,7 @@ msgstr ""
 msgid "Posted by Ken (TradeLink Wholesale): %s. MOQs apply. Order via laptop."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1397
+#: scripts/ui/modals/company_os.gd:1400
 msgid "Posted runs"
 msgstr ""
 
@@ -12765,6 +13113,10 @@ msgstr ""
 msgid "Prepare a working machine and enough materials."
 msgstr ""
 
+#: scripts/ui/modals/freelance_modal.gd:34
+msgid "Prepare proposal"
+msgstr ""
+
 #: scripts/ui/real_estate_ui.gd:94
 msgid "PrepareRealtyOwnership"
 msgstr ""
@@ -12781,19 +13133,11 @@ msgstr ""
 msgid "Press E at the staff door and start a shift. You do the work yourself: the better it goes, the more you earn. Came in late? The shift runs until closing time. Less than 2 hours left? Sleep, and work tomorrow."
 msgstr ""
 
-#: scripts/ui/minigames/barista_game.gd:33
-msgid "Press Serve before their patience runs out. Correct drinks served quickly earn tips."
-msgstr ""
-
-#: scripts/ui/minigames/barista_game.gd:32
-msgid "Press Serve before their patience runs out. Right drinks, served fast, lift your café's rating."
-msgstr ""
-
 #: scripts/ui/minigames/photo_shoot_game.gd:41
 msgid "Press the shutter when the focus needle is in the green. You get three shots; the best one goes on your listing."
 msgstr ""
 
-#: scripts/ui/modals/clothing_shop_modal.gd:55 scripts/ui/modals/company_os.gd:1204 scripts/ui/modals/company_os.gd:400 scripts/ui/modals/van_deal_modal.gd:31
+#: scripts/ui/modals/clothing_shop_modal.gd:55 scripts/ui/modals/company_os.gd:1207 scripts/ui/modals/company_os.gd:400 scripts/ui/modals/van_deal_modal.gd:31
 msgid "Price"
 msgstr ""
 
@@ -12815,6 +13159,10 @@ msgstr ""
 
 #: scripts/sim/automotive.gd:314
 msgid "Price between 80% and 130% of the market value."
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Price confusion"
 msgstr ""
 
 #: data/dialogue/henri_dubois_intro.json
@@ -12869,6 +13217,10 @@ msgstr ""
 msgid "Problem report saved (screenshot + save + log). Send this folder to whoever invited you to test: %s"
 msgstr ""
 
+#: scripts/ui/minigames/consulting_game.gd:29
+msgid "Process order: %s"
+msgstr ""
+
 #: data/jobs/city_clerk.json
 msgid "Process permits and registrations at City Hall. Weekdays only, steady pay."
 msgstr ""
@@ -12917,7 +13269,19 @@ msgstr ""
 msgid "Project closed"
 msgstr ""
 
-#: scripts/sim/careers.gd:166
+#: scripts/ui/modals/freelance_modal.gd:30
+msgid "Project goal"
+msgstr ""
+
+#: scripts/ui/minigames/clerk_forms_game.gd:69
+msgid "Promise approval without checking"
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Promise guaranteed sales"
+msgstr ""
+
+#: scripts/sim/careers.gd:180
 msgid "Promoted to %s at %s."
 msgstr ""
 
@@ -12965,6 +13329,10 @@ msgstr ""
 msgid "Property worth less than its mortgage"
 msgstr ""
 
+#: scripts/sim/freelance_workflow.gd:10 scripts/ui/modals/freelance_modal.gd:34
+msgid "Proposal"
+msgstr ""
+
 #: scripts/ui/media_ui.gd:84
 msgid "Propose · %s · %d minutes"
 msgstr ""
@@ -12995,6 +13363,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:585
 msgid "Purchase orders"
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Purchase process: arrange controls before payment."
 msgstr ""
 
 #: scripts/sim/real_estate.gd:91
@@ -13049,7 +13421,7 @@ msgstr ""
 msgid "Quit"
 msgstr ""
 
-#: scripts/ui/modals/job_modal.gd:66
+#: scripts/ui/modals/job_modal.gd:68
 msgid "Quit job"
 msgstr ""
 
@@ -13077,11 +13449,15 @@ msgstr ""
 msgid "Quote rooftop solar for real clients, then build an EV charging network."
 msgstr ""
 
+#: data/help/help.json scripts/ui/modals/freelance_modal.gd:36
+msgid "Quote the project and choose the included revision allowance. A higher reputation permits a higher quote."
+msgstr ""
+
 #: data/quests/new_neighbourhood_opening.json
 msgid "Quote, install and deliver solar jobs in the Energy console."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1268
+#: scripts/ui/modals/company_os.gd:1271
 msgid "RATING"
 msgstr ""
 
@@ -13125,15 +13501,15 @@ msgstr ""
 msgid "ROOF-"
 msgstr ""
 
-#: scripts/ui/minigames/clerk_forms_game.gd:90
+#: scripts/ui/minigames/clerk_forms_game.gd:103
 msgid "RULES"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1393
+#: scripts/ui/modals/company_os.gd:1396
 msgid "RUNS ON THE BOARD"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1394
+#: scripts/ui/modals/company_os.gd:1397
 msgid "RUNS PAID, 7 DAYS"
 msgstr ""
 
@@ -13189,7 +13565,7 @@ msgstr ""
 msgid "Raise {product} ads 40%"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1339
+#: scripts/ui/modals/company_os.gd:1342
 msgid "Ran out"
 msgstr ""
 
@@ -13233,7 +13609,7 @@ msgstr ""
 msgid "Rating changes your direct bookings and your OTA ranking."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1277
+#: scripts/ui/modals/company_os.gd:1280
 msgid "Rating ★ %.1f: queues, running out and high prices pull it down."
 msgstr ""
 
@@ -13405,7 +13781,7 @@ msgstr ""
 msgid "Recent orders"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1452
+#: scripts/ui/modals/company_os.gd:1455
 msgid "Recent runs"
 msgstr ""
 
@@ -13425,8 +13801,16 @@ msgstr ""
 msgid "Reception — desks & day passes"
 msgstr ""
 
+#: scripts/ui/minigames/barista_game.gd:194
+msgid "Recommend the selected drink"
+msgstr ""
+
 #: scripts/sim/automotive.gd:289
 msgid "Reconditioning: %s"
+msgstr ""
+
+#: scripts/ui/minigames/parcel_sort_game.gd:54
+msgid "Record damage and quarantine"
 msgstr ""
 
 #: data/jobs/city_clerk.json
@@ -13507,6 +13891,10 @@ msgstr ""
 
 #: data/events/manufacturing_recall.json
 msgid "Refund 20% of a shipped batch, pay a quality penalty and lose credit."
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Refund approved amount"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:635
@@ -13701,11 +14089,11 @@ msgstr ""
 msgid "Regulators: 'Know who you are paying, and how.'"
 msgstr ""
 
-#: scripts/ui/minigames/clerk_forms_game.gd:97
+#: scripts/ui/minigames/clerk_forms_game.gd:110
 msgid "Reject"
 msgstr ""
 
-#: scripts/ui/minigames/clerk_forms_game.gd:97
+#: scripts/ui/minigames/clerk_forms_game.gd:110
 msgid "Reject (click the wrong field first)"
 msgstr ""
 
@@ -13729,7 +14117,7 @@ msgstr ""
 msgid "Ren Tanaka"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1358
+#: scripts/ui/modals/company_os.gd:1361
 msgid "Rename"
 msgstr ""
 
@@ -13949,6 +14337,10 @@ msgstr ""
 msgid "Reputation: %d%% · campaign slots: %d/%d · cash: %s"
 msgstr ""
 
+#: scripts/ui/modals/freelance_modal.gd:66
+msgid "Request acceptance and invoice"
+msgstr ""
+
 #: scripts/sim/bank.gd:291
 msgid "Request three more days to pay"
 msgstr ""
@@ -13969,8 +14361,20 @@ msgstr ""
 msgid "Research and talent."
 msgstr ""
 
+#: data/economy/workflows.json
+msgid "Research sample: commuters want portable products. Which segment should the report prioritize?"
+msgstr ""
+
+#: data/economy/freelance.json
+msgid "Research the market for %s"
+msgstr ""
+
 #: scripts/ui/manufacturing_ui.gd:154
 msgid "Reserve production slot"
+msgstr ""
+
+#: scripts/ui/minigames/cowork_host_game.gd:86
+msgid "Reserve this slot"
 msgstr ""
 
 #: scripts/ui/manufacturing_ui.gd:154
@@ -14061,7 +14465,7 @@ msgstr ""
 msgid "Restructuring fee — loan %s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1457
+#: scripts/ui/modals/company_os.gd:1460
 msgid "Result"
 msgstr ""
 
@@ -14107,6 +14511,10 @@ msgstr ""
 
 #: data/events/customer_return.json
 msgid "Return request"
+msgstr ""
+
+#: scripts/ui/minigames/teller_cash_game.gd:64
+msgid "Return request: check the receipt and deadline before refunding."
 msgstr ""
 
 #: scripts/ui/modals/purchase_return_modal.gd:49
@@ -14177,7 +14585,7 @@ msgstr ""
 msgid "Review my lot"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1497
+#: scripts/ui/modals/company_os.gd:1500
 msgid "Review next action"
 msgstr ""
 
@@ -14207,6 +14615,18 @@ msgstr ""
 
 #: scripts/ui/hotel_ui.gd:261
 msgid "ReviewsNextGrowth"
+msgstr ""
+
+#: scripts/ui/modals/freelance_modal.gd:63
+msgid "ReviseGig"
+msgstr ""
+
+#: scripts/ui/modals/freelance_modal.gd:62
+msgid "Revision rounds: %d/%d included. Choose revision work or discounted settlement."
+msgstr ""
+
+#: scripts/sim/freelance_workflow.gd:10
+msgid "Revision work"
 msgstr ""
 
 #: scripts/ui/group_ui.gd:110
@@ -14329,6 +14749,10 @@ msgstr ""
 msgid "Rooftop solar installation"
 msgstr ""
 
+#: scripts/ui/minigames/cowork_host_game.gd:85
+msgid "Room %s · %02d:00–%02d:00 · %s"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Room equipment"
 msgstr ""
@@ -14397,7 +14821,7 @@ msgstr ""
 msgid "Round the city twice"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1457
+#: scripts/ui/modals/company_os.gd:1460
 msgid "Route"
 msgstr ""
 
@@ -14445,11 +14869,11 @@ msgstr ""
 msgid "Ruiz needs more time. Milestones pause and the completion date moves."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1457
+#: scripts/ui/modals/company_os.gd:1460
 msgid "Run"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1485
+#: scripts/ui/modals/company_os.gd:1488
 msgid "Run %s done: paid %s, fuel %s, %s on the road."
 msgstr ""
 
@@ -14525,7 +14949,7 @@ msgstr ""
 msgid "SE"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1199
+#: scripts/ui/modals/company_os.gd:1202
 msgid "SERVERS"
 msgstr ""
 
@@ -14569,7 +14993,7 @@ msgstr ""
 msgid "STATEMENT"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1195
+#: scripts/ui/modals/company_os.gd:1198
 msgid "SUBSCRIBERS"
 msgstr ""
 
@@ -14577,7 +15001,7 @@ msgstr ""
 msgid "SUITE 2B\nAVAILABLE"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1269
+#: scripts/ui/modals/company_os.gd:1272
 msgid "SUPPLIES"
 msgstr ""
 
@@ -14877,7 +15301,15 @@ msgstr ""
 msgid "Schools, parks, families."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1457
+#: scripts/ui/modals/freelance_modal.gd:57
+msgid "Scope_absorb"
+msgstr ""
+
+#: scripts/ui/modals/freelance_modal.gd:56
+msgid "Scope_charge"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:1460
 msgid "Score"
 msgstr ""
 
@@ -14901,7 +15333,7 @@ msgstr ""
 msgid "Segment sales added up"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1496 scripts/ui/modals/company_os.gd:8
+#: scripts/ui/modals/company_os.gd:1499 scripts/ui/modals/company_os.gd:8
 msgid "Segments"
 msgstr ""
 
@@ -14941,7 +15373,7 @@ msgstr ""
 msgid "Sell a car."
 msgstr ""
 
-#: scripts/ui/minigames/cowork_host_game.gd:98
+#: scripts/ui/minigames/cowork_host_game.gd:118
 msgid "Sell a day pass ($15)"
 msgstr ""
 
@@ -15025,6 +15457,10 @@ msgstr ""
 msgid "Send the contract. I'll review it."
 msgstr ""
 
+#: scripts/ui/minigames/parcel_sort_game.gd:54
+msgid "Send the damaged parcel onward"
+msgstr ""
+
 #: scripts/ui/energy_ui.gd:150 scripts/ui/energy_ui.gd:157
 msgid "SendQuote"
 msgstr ""
@@ -15049,7 +15485,7 @@ msgstr ""
 msgid "Separate results show which business pays for shared office and staff costs."
 msgstr ""
 
-#: scripts/ui/minigames/barista_game.gd:99
+#: scripts/ui/minigames/barista_game.gd:203
 msgid "Serve"
 msgstr ""
 
@@ -15105,7 +15541,7 @@ msgstr ""
 msgid "Service · %s"
 msgstr ""
 
-#: scripts/ui/minigames/barista_game.gd:139
+#: scripts/ui/minigames/barista_game.gd:251
 msgid "Service: %d%%"
 msgstr ""
 
@@ -15115,6 +15551,14 @@ msgstr ""
 
 #: scripts/world/building_info.gd:197 scripts/world/building_info.gd:202
 msgid "Services"
+msgstr ""
+
+#: scripts/ui/modals/freelance_modal.gd:52
+msgid "Session_1"
+msgstr ""
+
+#: scripts/ui/modals/freelance_modal.gd:53
+msgid "Session_2"
 msgstr ""
 
 #: data/help/help.json
@@ -15137,8 +15581,16 @@ msgstr ""
 msgid "Set up the shot: pick a backdrop, the light and an optional styling prop."
 msgstr ""
 
+#: scripts/ui/modals/freelance_modal.gd:64
+msgid "Settle at a discount"
+msgstr ""
+
 #: data/events/automotive_claim.json
 msgid "Settle for half"
+msgstr ""
+
+#: scripts/ui/modals/freelance_modal.gd:64
+msgid "SettleGig"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:883
@@ -15161,11 +15613,11 @@ msgstr ""
 msgid "Shah"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1508
+#: scripts/ui/modals/company_os.gd:1511
 msgid "Shared"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1500
+#: scripts/ui/modals/company_os.gd:1503
 msgid "Shared costs are allocated by net revenue. With no revenue, they stay in Shared."
 msgstr ""
 
@@ -15193,23 +15645,23 @@ msgstr ""
 msgid "Shift done: +%s (wages and tips)."
 msgstr ""
 
-#: scripts/ui/minigames/barista_game.gd:23
+#: scripts/ui/minigames/barista_game.gd:29
 msgid "Shift — Bloom Coffee counter"
 msgstr ""
 
-#: scripts/ui/minigames/clerk_forms_game.gd:21
+#: scripts/ui/minigames/clerk_forms_game.gd:24
 msgid "Shift — City Hall registration counter"
 msgstr ""
 
-#: scripts/ui/minigames/teller_cash_game.gd:15
+#: scripts/ui/minigames/teller_cash_game.gd:19
 msgid "Shift — Nexus Bank teller window"
 msgstr ""
 
-#: scripts/ui/minigames/cowork_host_game.gd:19
+#: scripts/ui/minigames/cowork_host_game.gd:23
 msgid "Shift — Nexus Co-work front desk"
 msgstr ""
 
-#: scripts/ui/minigames/parcel_sort_game.gd:18
+#: scripts/ui/minigames/parcel_sort_game.gd:20
 msgid "Shift — PostPoint sorting belt"
 msgstr ""
 
@@ -15373,7 +15825,7 @@ msgstr ""
 msgid "Shot %d: %d%% (%s)"
 msgstr ""
 
-#: scripts/ui/minigames/barista_game.gd:98
+#: scripts/ui/minigames/barista_game.gd:202
 msgid "Shots"
 msgstr ""
 
@@ -15383,6 +15835,10 @@ msgstr ""
 
 #: data/dialogue/marcus_lending.json
 msgid "Show me what you can do."
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Show the sample and its limits"
 msgstr ""
 
 #: scripts/ui/automotive_ui.gd:275
@@ -15421,7 +15877,7 @@ msgstr ""
 msgid "Sign the loan"
 msgstr ""
 
-#: scripts/ui/minigames/clerk_forms_game.gd:69
+#: scripts/ui/minigames/clerk_forms_game.gd:82
 msgid "Signature"
 msgstr ""
 
@@ -15465,7 +15921,7 @@ msgstr ""
 msgid "Sit down at your desk and open Company OS as {company}"
 msgstr ""
 
-#: scripts/ui/minigames/barista_game.gd:94
+#: scripts/ui/minigames/barista_game.gd:198
 msgid "Size"
 msgstr ""
 
@@ -15793,7 +16249,7 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
-#: scripts/ui/modals/job_modal.gd:60
+#: scripts/ui/modals/job_modal.gd:62
 msgid "Start a %d-hour shift (up to +%s)"
 msgstr ""
 
@@ -15869,7 +16325,7 @@ msgstr ""
 msgid "Started building a charging station: %s."
 msgstr ""
 
-#: scripts/sim/careers.gd:183
+#: scripts/sim/careers.gd:197
 msgid "Started freelancing as a consultant."
 msgstr ""
 
@@ -16153,7 +16609,7 @@ msgstr ""
 msgid "Supplies and breakfast"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1297
+#: scripts/ui/modals/company_os.gd:1300
 msgid "Supplies and the bakery"
 msgstr ""
 
@@ -16225,7 +16681,7 @@ msgstr ""
 msgid "THREADLINE"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1267
+#: scripts/ui/modals/company_os.gd:1270
 msgid "TILL TODAY"
 msgstr ""
 
@@ -16237,7 +16693,7 @@ msgstr ""
 msgid "TO OPEN THIS"
 msgstr ""
 
-#: scripts/ui/minigames/cowork_host_game.gd:79
+#: scripts/ui/minigames/cowork_host_game.gd:99
 msgid "TODAY'S BOOKINGS"
 msgstr ""
 
@@ -16247,6 +16703,14 @@ msgstr ""
 
 #: scripts/ui/hud.gd:110 scripts/ui/tutorial.gd:27
 msgid "Tab"
+msgstr ""
+
+#: scripts/ui/minigames/barista_game.gd:180 scripts/ui/minigames/barista_game.gd:209
+msgid "Table %d"
+msgstr ""
+
+#: scripts/ui/minigames/barista_game.gd:182
+msgid "Table %d: %s"
 msgstr ""
 
 #: data/events/elena_offer.json
@@ -16305,7 +16769,7 @@ msgstr ""
 msgid "Take the battery course · %s"
 msgstr ""
 
-#: scripts/ui/modals/job_modal.gd:74 scripts/ui/tutorial.gd:84
+#: scripts/ui/modals/job_modal.gd:76 scripts/ui/tutorial.gd:84
 msgid "Take the job"
 msgstr ""
 
@@ -16329,7 +16793,7 @@ msgstr ""
 msgid "Takes your van out on one posted delivery run every workday from 9:00 and banks the pay. Drivers rarely plan the route as well as you can: expect a longer way round, and rush runs they can't reach in time."
 msgstr ""
 
-#: scripts/ui/modals/job_modal.gd:73
+#: scripts/ui/modals/job_modal.gd:75
 msgid "Taking this job means leaving %s."
 msgstr ""
 
@@ -16359,6 +16823,10 @@ msgstr ""
 
 #: scripts/ui/minigames/pack_game.gd:117
 msgid "Tape seam %d"
+msgstr ""
+
+#: scripts/ui/modals/freelance_modal.gd:30
+msgid "Target audience"
 msgstr ""
 
 #: scripts/ui/phone_ui.gd:149 scripts/ui/phone_ui.gd:347
@@ -16473,7 +16941,7 @@ msgstr ""
 msgid "That name is already registered in Aurelia."
 msgstr ""
 
-#: scripts/sim/careers.gd:240
+#: scripts/sim/careers.gd:255
 msgid "That offer is gone."
 msgstr ""
 
@@ -16761,6 +17229,10 @@ msgstr ""
 msgid "The client left. The remaining media plan was cancelled and the unused advance refunded."
 msgstr ""
 
+#: scripts/sim/freelance_workflow.gd:32
+msgid "The client rejected this quote. Lower it or build your reputation."
+msgstr ""
+
 #: data/events/media_client.json
 msgid "The client stayed after the discount. The campaign carries on."
 msgstr ""
@@ -16853,7 +17325,7 @@ msgstr ""
 msgid "The file could not be read. Your existing save is unchanged."
 msgstr ""
 
-#: scripts/ui/minigames/parcel_sort_game.gd:28
+#: scripts/ui/minigames/parcel_sort_game.gd:30
 msgid "The first parcels show the district name. Later ones only have a postcode, and halfway through the cheat sheet goes away."
 msgstr ""
 
@@ -16861,7 +17333,7 @@ msgstr ""
 msgid "The fit-out costs %s."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1249
+#: scripts/ui/modals/company_os.gd:1252
 msgid "The fitters start tonight. Ready %s."
 msgstr ""
 
@@ -17053,7 +17525,7 @@ msgstr ""
 msgid "The share of payments on a payment route that landed on time. It moves when something goes wrong on the route, and recovers slowly as payments land."
 msgstr ""
 
-#: scripts/ui/minigames/parcel_sort_game.gd:90
+#: scripts/ui/minigames/parcel_sort_game.gd:102
 msgid "The shift lead took the postcode sheet. From memory now!"
 msgstr ""
 
@@ -17135,6 +17607,10 @@ msgstr ""
 
 #: scripts/ui/modals/pack_ship_modal.gd:65
 msgid "The van takes %d parcels a trip: the other %d wait for the next one."
+msgstr ""
+
+#: scripts/ui/minigames/cowork_host_game.gd:82
+msgid "The visitor also needs a one-hour meeting room. Resolve the booking conflict."
 msgstr ""
 
 #: data/events/media_pr.json
@@ -17293,11 +17769,11 @@ msgstr ""
 msgid "This is not a City Venture save."
 msgstr ""
 
-#: scripts/ui/minigames/clerk_forms_game.gd:31
+#: scripts/ui/minigames/clerk_forms_game.gd:34
 msgid "This is the same form you'll file for your own company, so the rules are worth remembering."
 msgstr ""
 
-#: scripts/sim/energy.gd:275 scripts/sim/hotel.gd:568 scripts/sim/jobs.gd:40 scripts/sim/media.gd:223
+#: scripts/sim/energy.gd:275 scripts/sim/freelance_workflow.gd:62 scripts/sim/hotel.gd:568 scripts/sim/jobs.gd:40
 msgid "This job is no longer available."
 msgstr ""
 
@@ -17313,7 +17789,7 @@ msgstr ""
 msgid "This message has already been answered or is unavailable."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1504
+#: scripts/ui/modals/company_os.gd:1507
 msgid "This month"
 msgstr ""
 
@@ -17373,6 +17849,10 @@ msgstr ""
 msgid "This slot overlaps production or changeover."
 msgstr ""
 
+#: scripts/sim/freelance_workflow.gd:111
+msgid "This stage is unavailable. Finish the previous step first."
+msgstr ""
+
 #: scripts/sim/ecommerce.gd:343 scripts/sim/ecommerce.gd:411
 msgid "This supplier does not accept returns after delivery."
 msgstr ""
@@ -17429,7 +17909,7 @@ msgstr ""
 msgid "Tier: %s · %d%%"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1339
+#: scripts/ui/modals/company_os.gd:1342
 msgid "Till"
 msgstr ""
 
@@ -17469,7 +17949,7 @@ msgstr ""
 msgid "Tip: register a company before ShopLane caps you. Everyone learns that one the hard way."
 msgstr ""
 
-#: scripts/ui/minigames/barista_game.gd:140
+#: scripts/ui/minigames/barista_game.gd:252
 msgid "Tips: %s"
 msgstr ""
 
@@ -17491,6 +17971,10 @@ msgstr ""
 
 #: scripts/ui/automotive_ui.gd:287
 msgid "Today %d passengers · season factor %.2f · about %.1f rental requests a day at your prices."
+msgstr ""
+
+#: scripts/sim/freelance_workflow.gd:52
+msgid "Today's consulting hours are used. Rest and continue tomorrow."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1058
@@ -17561,7 +18045,7 @@ msgstr ""
 msgid "Total interest"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1516
+#: scripts/ui/modals/company_os.gd:1519
 msgid "Total operating profit"
 msgstr ""
 
@@ -17645,7 +18129,7 @@ msgstr ""
 msgid "Travel-agency group blocks"
 msgstr ""
 
-#: scripts/ui/minigames/teller_cash_game.gd:71
+#: scripts/ui/minigames/teller_cash_game.gd:88
 msgid "Tray: "
 msgstr ""
 
@@ -17693,7 +18177,7 @@ msgstr ""
 msgid "Twenty-five grand in sales"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1116
+#: scripts/ui/modals/company_os.gd:1119
 msgid "Two focused hours: %.1f hours of the work done. %s"
 msgstr ""
 
@@ -17753,11 +18237,11 @@ msgstr ""
 msgid "Unbilled OTA nights this week: gross %s, commission %s. Statements are invoiced every %d days, paid Net %d."
 msgstr ""
 
-#: scripts/ui/minigames/route_game.gd:82 scripts/ui/minigames/teller_cash_game.gd:82
+#: scripts/ui/minigames/route_game.gd:82 scripts/ui/minigames/teller_cash_game.gd:99
 msgid "Undo"
 msgstr ""
 
-#: scripts/ui/minigames/teller_cash_game.gd:25
+#: scripts/ui/minigames/teller_cash_game.gd:29
 msgid "Undo takes the last note back."
 msgstr ""
 
@@ -17783,6 +18267,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:880
 msgid "Unit price"
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Unit price $25; cost $10; fee $2. Calculate contribution per unit."
 msgstr ""
 
 #: data/help/help.json
@@ -17845,7 +18333,7 @@ msgstr ""
 msgid "Unknown industry event."
 msgstr ""
 
-#: scripts/sim/careers.gd:72
+#: scripts/sim/careers.gd:76
 msgid "Unknown job."
 msgstr ""
 
@@ -17893,6 +18381,10 @@ msgstr ""
 msgid "Upfront payment"
 msgstr ""
 
+#: scripts/ui/modals/freelance_modal.gd:63
+msgid "Use included revision"
+msgstr ""
+
 #: data/buildings/riverside_apartment.json
 msgid "Use laptop — Company OS"
 msgstr ""
@@ -17911,6 +18403,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "Use the OTA to fill empty nights, not nights you could sell directly."
+msgstr ""
+
+#: data/help/glossary.json data/help/help.json scripts/ui/minigames/consulting_game.gd:16
+msgid "Use the client's brief. Research, financial models, operating processes and brand strategy each need different work."
 msgstr ""
 
 #: data/help/help.json
@@ -17953,6 +18449,10 @@ msgstr ""
 msgid "VIP suite upgrade for a critic"
 msgstr ""
 
+#: data/economy/workflows.json
+msgid "Vague luxury claims"
+msgstr ""
+
 #: scripts/ui/minigames/pack_game.gd:86
 msgid "Val"
 msgstr ""
@@ -17993,7 +18493,7 @@ msgstr ""
 msgid "Van insurance: monthly"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1385
+#: scripts/ui/modals/company_os.gd:1388
 msgid "Van kept at Pier 7 · insurance %s a month · %.0f km driven"
 msgstr ""
 
@@ -18055,6 +18555,18 @@ msgstr ""
 
 #: data/world/years.json
 msgid "Verdant Supply opens a warehouse in the Industrial Zone."
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Verify delivery"
+msgstr ""
+
+#: data/economy/workflows.json
+msgid "Verify order"
+msgstr ""
+
+#: scripts/ui/minigames/clerk_forms_game.gd:69
+msgid "Verify reference and escalate"
 msgstr ""
 
 #: data/milestones.json
@@ -18129,15 +18641,15 @@ msgstr ""
 msgid "Visit or lease the location."
 msgstr ""
 
-#: scripts/ui/minigames/cowork_host_game.gd:34
+#: scripts/ui/minigames/cowork_host_game.gd:38
 msgid "Visitor %d / %d"
 msgstr ""
 
-#: scripts/ui/minigames/cowork_host_game.gd:28
+#: scripts/ui/minigames/cowork_host_game.gd:32
 msgid "Visitors come to the desk one by one. Today's bookings are on your clipboard."
 msgstr ""
 
-#: scripts/ui/minigames/cowork_host_game.gd:131
+#: scripts/ui/minigames/cowork_host_game.gd:155
 msgid "Visitors handled correctly: %d / %d"
 msgstr ""
 
@@ -18193,7 +18705,7 @@ msgstr ""
 msgid "Wages owed to your team: %s"
 msgstr ""
 
-#: scripts/sim/careers.gd:155
+#: scripts/sim/careers.gd:161
 msgid "Wages — %s shift at %s"
 msgstr ""
 
@@ -18273,7 +18785,7 @@ msgstr ""
 msgid "Walked guests"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1339
+#: scripts/ui/modals/company_os.gd:1342
 msgid "Walked out"
 msgstr ""
 
@@ -18421,7 +18933,7 @@ msgstr ""
 msgid "Weekly payouts"
 msgstr ""
 
-#: scripts/sim/careers.gd:79
+#: scripts/sim/careers.gd:83
 msgid "Welcome aboard! Shifts are 4 hours, any time we're open. Come by the staff door when you're ready."
 msgstr ""
 
@@ -18589,7 +19101,7 @@ msgstr ""
 msgid "Withdrawal from %s"
 msgstr ""
 
-#: scripts/ui/minigames/teller_cash_game.gd:126
+#: scripts/ui/minigames/teller_cash_game.gd:145
 msgid "Withdrawals counted exactly: %d / %d"
 msgstr ""
 
@@ -18613,7 +19125,11 @@ msgstr ""
 msgid "Work"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1055
+#: scripts/ui/modals/freelance_modal.gd:52
+msgid "Work 1 h"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:1055 scripts/ui/modals/freelance_modal.gd:53
 msgid "Work 2 h"
 msgstr ""
 
@@ -18717,7 +19233,7 @@ msgstr ""
 msgid "You already have a meeting with this contact. Review Agenda first."
 msgstr ""
 
-#: scripts/sim/careers.gd:230
+#: scripts/sim/careers.gd:244
 msgid "You already have as many gigs as you can handle."
 msgstr ""
 
@@ -18741,7 +19257,7 @@ msgstr ""
 msgid "You already rent this."
 msgstr ""
 
-#: scripts/sim/careers.gd:75
+#: scripts/sim/careers.gd:79
 msgid "You already work here."
 msgstr ""
 
@@ -18825,7 +19341,7 @@ msgstr ""
 msgid "You left before the shift was done. No pay, and no time lost."
 msgstr ""
 
-#: scripts/ui/modals/job_modal.gd:68
+#: scripts/ui/modals/job_modal.gd:70
 msgid "You left the job at %s."
 msgstr ""
 
@@ -18969,7 +19485,7 @@ msgstr ""
 msgid "You're trending"
 msgstr ""
 
-#: scripts/sim/careers.gd:167
+#: scripts/sim/careers.gd:181
 msgid "You've earned it: you're our new %s. New rate: $%d an hour."
 msgstr ""
 
@@ -19161,7 +19677,7 @@ msgstr ""
 msgid "Your money is locked with a neutral party and released to the supplier only when the goods arrive."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1467
+#: scripts/ui/modals/company_os.gd:1470
 msgid "Your own parcels"
 msgstr ""
 
@@ -19201,7 +19717,7 @@ msgstr ""
 msgid "Your route: %.1f km. The shortest possible: %.1f km."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1425
+#: scripts/ui/modals/company_os.gd:1428
 msgid "Your runs"
 msgstr ""
 
@@ -19227,6 +19743,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:896
 msgid "Your unit cost ≈ %s → gross margin %s"
+msgstr ""
+
+#: data/help/glossary.json data/help/help.json scripts/ui/minigames/consulting_game.gd:16
+msgid "Your work quality affects acceptance. A session uses real consulting hours; no payment is earned before acceptance."
 msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:7
@@ -19265,7 +19785,7 @@ msgstr ""
 msgid "all time"
 msgstr ""
 
-#: scripts/sim/careers.gd:124 scripts/ui/tutorial.gd:597
+#: scripts/sim/careers.gd:129 scripts/ui/tutorial.gd:597
 msgid "already worked today"
 msgstr ""
 
@@ -19297,7 +19817,7 @@ msgstr ""
 msgid "barista"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1273
+#: scripts/ui/modals/company_os.gd:1276
 msgid "behind the counter: %d barista(s)"
 msgstr ""
 
@@ -19353,7 +19873,7 @@ msgstr ""
 msgid "client fees"
 msgstr ""
 
-#: scripts/sim/careers.gd:127 scripts/ui/tutorial.gd:464 scripts/ui/tutorial.gd:597
+#: scripts/sim/careers.gd:132 scripts/ui/tutorial.gd:464 scripts/ui/tutorial.gd:597
 msgid "closed now"
 msgstr ""
 
@@ -19513,7 +20033,7 @@ msgstr ""
 msgid "get the food handling licence at City Hall"
 msgstr ""
 
-#: scripts/ui/modals/job_modal.gd:58
+#: scripts/ui/modals/job_modal.gd:60
 msgid "go to the workplace to work a shift"
 msgstr ""
 
@@ -19733,7 +20253,7 @@ msgstr ""
 msgid "not for sale"
 msgstr ""
 
-#: scripts/sim/careers.gd:122
+#: scripts/sim/careers.gd:126
 msgid "not hired here"
 msgstr ""
 
@@ -19797,7 +20317,7 @@ msgstr ""
 msgid "open ✓"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1268
+#: scripts/ui/modals/company_os.gd:1271
 msgid "out of 5"
 msgstr ""
 
@@ -19825,7 +20345,7 @@ msgstr ""
 msgid "paused: cap"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1197 scripts/ui/modals/company_os.gd:1199
+#: scripts/ui/modals/company_os.gd:1200 scripts/ui/modals/company_os.gd:1202
 msgid "per month"
 msgstr ""
 
@@ -19957,7 +20477,7 @@ msgstr ""
 msgid "store sales"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1296
+#: scripts/ui/modals/company_os.gd:1299
 msgid "street price %s · costs you %s"
 msgstr ""
 
@@ -20001,18 +20521,6 @@ msgstr ""
 msgid "the team is full"
 msgstr ""
 
-#: scripts/ui/minigames/cowork_host_game.gd:115
-msgid "they came for a meeting: call the host"
-msgstr ""
-
-#: scripts/ui/minigames/cowork_host_game.gd:114
-msgid "they were on the list: check them in"
-msgstr ""
-
-#: scripts/ui/minigames/cowork_host_game.gd:114
-msgid "they weren't on the list: sell a day pass"
-msgstr ""
-
 #: scripts/ui/modals/save_list_modal.gd:85
 msgid "this game"
 msgstr ""
@@ -20029,11 +20537,11 @@ msgstr ""
 msgid "to suppliers"
 msgstr ""
 
-#: scripts/sim/careers.gd:129 scripts/ui/tutorial.gd:464 scripts/ui/tutorial.gd:597
+#: scripts/sim/careers.gd:134 scripts/ui/tutorial.gd:464 scripts/ui/tutorial.gd:597
 msgid "too late for a shift today"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1414
+#: scripts/ui/modals/company_os.gd:1417
 msgid "too late to make it if you leave now"
 msgstr ""
 
@@ -20045,7 +20553,7 @@ msgstr ""
 msgid "too tight"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1323
+#: scripts/ui/modals/company_os.gd:1326
 msgid "unsold ones are binned at closing"
 msgstr ""
 
@@ -20189,11 +20697,7 @@ msgstr ""
 msgid "{uplift} more, but only {counter_now} now. The other {counter_later} is an earn-out: paid in a year, and only if revenue stays above {floor} of today's. You stay on as managing director."
 msgstr ""
 
-#: scripts/ui/minigames/clerk_forms_game.gd:120
-msgid "½ Right to reject, but that field was fine"
-msgstr ""
-
-#: scripts/ui/minigames/teller_cash_game.gd:58
+#: scripts/ui/minigames/teller_cash_game.gd:74
 msgid "“I'd like to withdraw %s, please.”"
 msgstr ""
 
@@ -20293,32 +20797,32 @@ msgstr ""
 msgid "● Open in this build"
 msgstr ""
 
-#: scripts/ui/minigames/barista_game.gd:121
+#: scripts/ui/minigames/barista_game.gd:126
+msgid "✓ %s enjoyed the service."
+msgstr ""
+
+#: scripts/ui/minigames/barista_game.gd:126
 msgid "✓ %s is happy (+%s tip)"
-msgstr ""
-
-#: scripts/ui/minigames/cowork_host_game.gd:111
-msgid "✓ %s is sorted"
-msgstr ""
-
-#: scripts/ui/minigames/clerk_forms_game.gd:113
-msgid "✓ Approved: all in order"
 msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:180
 msgid "✓ Building complete. Sell or rent units in Properties."
 msgstr ""
 
-#: scripts/ui/minigames/teller_cash_game.gd:108
-msgid "✓ Exact"
+#: scripts/ui/minigames/barista_game.gd:102
+msgid "✓ Delivered. Clean the table for the next guest."
+msgstr ""
+
+#: scripts/ui/modals/freelance_modal.gd:19
+msgid "✓ Project ended. Review payment status in Company OS, or choose another offer."
+msgstr ""
+
+#: scripts/ui/minigames/teller_cash_game.gd:65
+msgid "✓ Receipt valid and within 14 days"
 msgstr ""
 
 #: scripts/ui/modals/permits_modal.gd:24
 msgid "✓ Registered"
-msgstr ""
-
-#: scripts/ui/minigames/clerk_forms_game.gd:117
-msgid "✓ Rejected for the right reason"
 msgstr ""
 
 #: scripts/ui/minigames/auction_game.gd:98
@@ -20345,20 +20849,24 @@ msgstr ""
 msgid "✓ You're running this."
 msgstr ""
 
-#: scripts/ui/minigames/parcel_sort_game.gd:111
+#: scripts/ui/minigames/parcel_sort_game.gd:124
 msgid "✗ %s belongs in %s"
 msgstr ""
 
-#: scripts/ui/minigames/parcel_sort_game.gd:116
+#: scripts/ui/minigames/parcel_sort_game.gd:129
 msgid "✗ %s fell off the belt"
 msgstr ""
 
-#: scripts/ui/minigames/barista_game.gd:128
+#: scripts/ui/minigames/barista_game.gd:238
 msgid "✗ %s gave up waiting"
 msgstr ""
 
 #: scripts/ui/energy_ui.gd:217
 msgid "✗ A policy cut is reducing grants; the rate recovers over time."
+msgstr ""
+
+#: scripts/ui/minigames/cowork_host_game.gd:135
+msgid "✗ Already booked. Offer a free room or another hour."
 msgstr ""
 
 #: scripts/ui/minigames/auction_game.gd:100
@@ -20375,6 +20883,10 @@ msgstr ""
 
 #: scripts/ui/media_ui.gd:168
 msgid "✗ Complete two campaigns and hire a designer and media buyer before buying Campus Radio."
+msgstr ""
+
+#: scripts/ui/minigames/barista_game.gd:77
+msgid "✗ Confirm the guest's preferred drink before recommending."
 msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:180
@@ -20401,20 +20913,20 @@ msgstr ""
 msgid "✗ No sale. Next step: check the other lots."
 msgstr ""
 
-#: scripts/ui/minigames/cowork_host_game.gd:116
-msgid "✗ No: %s"
-msgstr ""
-
-#: scripts/ui/minigames/barista_game.gd:123
-msgid "✗ Not quite: %s wanted %s"
-msgstr ""
-
 #: scripts/ui/real_estate_ui.gd:192 scripts/ui/real_estate_ui.gd:93
 msgid "✗ Own a rental and apply for the building permit at City Hall first."
 msgstr ""
 
+#: scripts/ui/minigames/parcel_sort_game.gd:52
+msgid "✗ Parcel damaged: contents exposed. Record damage before moving it to the inspection shelf."
+msgstr ""
+
 #: scripts/ui/energy_ui.gd:145
 msgid "✗ Place at least one panel on the roof."
+msgstr ""
+
+#: scripts/ui/minigames/teller_cash_game.gd:65
+msgid "✗ Receipt missing — explain the return policy"
 msgstr ""
 
 #: scripts/ui/modals/permits_modal.gd:24
@@ -20437,22 +20949,18 @@ msgstr ""
 msgid "✗ Select an owner mandate and a client, then arrange a viewing."
 msgstr ""
 
-#: scripts/ui/minigames/clerk_forms_game.gd:123
-msgid "✗ That form had a problem"
-msgstr ""
-
-#: scripts/ui/minigames/clerk_forms_game.gd:126
-msgid "✗ That form was fine"
-msgstr ""
-
-#: scripts/ui/minigames/teller_cash_game.gd:116
+#: scripts/ui/minigames/teller_cash_game.gd:135
 msgid "✗ The customer asked for the manager"
 msgstr ""
 
-#: scripts/ui/minigames/cowork_host_game.gd:121
+#: scripts/ui/minigames/cowork_host_game.gd:145
 msgid "✗ The queue is getting long"
 msgstr ""
 
-#: scripts/ui/minigames/teller_cash_game.gd:111
-msgid "✗ Till error: you handed over %s"
+#: scripts/ui/minigames/barista_game.gd:74
+msgid "✗ This table is occupied or dirty. Serve another guest or clean it."
+msgstr ""
+
+#: scripts/ui/minigames/barista_game.gd:102
+msgid "✗ Wrong table. Recover the order and clean up."
 msgstr ""

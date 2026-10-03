@@ -1023,7 +1023,7 @@ func _tab_freelance() -> void:
 	var full := roundi(Careers.rep())
 	var stars := "★".repeat(full) + "☆".repeat(5 - full)
 	head.add_child(UIK.label(stars, 10, Art.C_GOLD, true))
-	head.add_child(UIK.label(I18n.t("Reputation %.1f · rate about %s/h · %d delivered · %d late") % [Careers.rep(), Fmt.money0(Careers.hourly_rate()), int(f["done"]), int(f["late"])], 7, Art.C_MUTED, true))
+	head.add_child(UIK.label(I18n.t("Reputation %.1f · rate about %s/h · %d delivered · %d late") % [Careers.rep(), Fmt.money(Careers.hourly_rate()), int(f["done"]), int(f["late"])], 7, Art.C_MUTED, true))
 	_section("In progress")
 	var act := Careers.active_gigs()
 	if act.is_empty():
@@ -1049,10 +1049,10 @@ func _tab_freelance() -> void:
 		var r2 := UIK.hbox(6)
 		v.add_child(r2)
 		r2.add_child(UIK.label(I18n.t("%d / %d h · due %s · %s · pays %s") % [int(g["done"]), int(g["hours"]), Clock.fmt_datetime(int(g["due"])),
-			Fmt.money0(float(g["fee"])), I18n.t("on delivery") if int(g["terms"]) == 0 else I18n.t("%d days after delivery") % int(g["terms"])], 7, Art.C_MUTED))
+			Fmt.money(float(g["fee"])), I18n.t("on delivery") if int(g["terms"]) == 0 else I18n.t("%d days after delivery") % int(g["terms"])], 7, Art.C_MUTED))
 		r2.add_child(UIK.expand())
 		var gid: String = g["id"]
-		var wb := UIK.button(I18n.t("Work 2 h"), func(): _work_gig(gid), _next_style(true))
+		var wb := UIK.button(I18n.t("Open client project") if g.has("workflow") else I18n.t("Work 2 h"), func(): _work_gig(gid), _next_style(true))
 		wb.name = "Work_" + gid
 		r2.add_child(wb)
 	_section("Today's offers")
@@ -1067,7 +1067,7 @@ func _tab_freelance() -> void:
 		row.add_child(UIK.label(I18n.t("%d h · %d days · %s") % [int(o["hours"]), int(o["days"]), I18n.t("paid on delivery") if int(o["terms"]) == 0 else I18n.t("net %d") % int(o["terms"])], 7, Art.C_MUTED))
 		row.add_child(UIK.tip("net_terms"))
 		row.add_child(UIK.expand())
-		row.add_child(UIK.label(Fmt.money0(float(o["fee"])), 9, Art.C_GREEN, true))
+		row.add_child(UIK.label(Fmt.money(float(o["fee"])), 9, Art.C_GREEN, true))
 		var oid: String = o["id"]
 		var ab := UIK.button("Accept", func():
 			var r := Careers.accept(oid)
@@ -1099,6 +1099,9 @@ func _code_session() -> void:
 
 
 func _work_gig(gid: String) -> void:
+	if Careers.F()["gigs"].get(gid, {}).has("workflow"):
+		UIRoot.open_modal(FreelanceModal.new(gid))
+		return
 	var g: Dictionary = Careers.F()["gigs"].get(gid, {})
 	var h := float(Careers.session_hours())
 	MiniGames.play(TypingGame.new("freelance", "", h, Careers.gig_title(g) if not g.is_empty() else "Client work"), func(res: Dictionary):

@@ -42,10 +42,14 @@ static func rank_index(id: String) -> int:
 	var ranks: Array = job_def(id).get("ranks", [])
 	var r := 0
 	for i in ranks.size():
-		if shifts(id) >= int(ranks[i]["shifts"]):
+		if shifts(id) >= int(ranks[i]["shifts"]) and manager_rating(id) >= float(ranks[i].get("manager_rating", 0.0)):
 			r = i
 	return r
 
+
+static func manager_rating(id: String) -> float:
+	var ratings: Dictionary = C().get("manager_ratings", {}).get(id, {})
+	return float(ratings.get("sum", 0.0)) / maxi(1, int(ratings.get("count", 0))) if not ratings.is_empty() else (1.0 if shifts(id) > 0 else 0.0)
 
 static func rank(id: String) -> Dictionary:
 	var ranks: Array = job_def(id).get("ranks", [])
@@ -101,7 +105,7 @@ static func perk_value(perk_id: String) -> float:
 
 ## Worked a shift today (so you're tired enough to sleep early).
 static func worked_today() -> bool:
-	return GameState.has_game() and int(C().get("last_shift_day", -1)) == Clock.day_index()
+	return GameState.has_game() and (int(C().get("last_shift_day", -1)) == Clock.day_index() or int(C().get("last_freelance_day", -1)) == Clock.day_index())
 
 
 ## A shift is the job's full length, or runs until closing time when you come in late (at least MIN_SHIFT_H).
@@ -121,7 +125,8 @@ static func shift_block(id: String) -> String:
 	if current_job() != id:
 		return "not hired here"
 	if int(C()["last_shift_day"]) == Clock.day_index():
-		return "already worked today"
+		var used := int(C().get("shift_counts", {}).get(str(Clock.day_index()), 1))
+		if used >= int(rank(id).get("shifts_per_day", 1)): return "already worked today"
 	var j := job_def(id)
 	if not SceneRouter.building_open(str(j["building"]))["open"]:
 		return "closed now"
@@ -144,6 +149,7 @@ static func pay_for(id: String, score: float, hours := -1) -> float:
 ## Work one shift (played as a minigame, see MiniGames): time passes, pay follows the score, tips on top, and a
 ## shift that went well enough counts toward promotion.
 static func work_shift(id: String, score := 1.0, tips := 0.0) -> Dictionary:
+	if not is_finite(score) or not is_finite(tips) or tips < 0: return {"ok": false, "error": "Invalid shift result."}
 	var why := shift_block(id)
 	if why != "":
 		return {"ok": false, "error": why}
@@ -157,6 +163,14 @@ static func work_shift(id: String, score := 1.0, tips := 0.0) -> Dictionary:
 	var counted := score >= COUNTS_FROM
 	if counted:
 		C()["shifts"][id] = shifts(id) + 1
+	if not C().has("manager_ratings"): C()["manager_ratings"] = {}
+	var ratings: Dictionary = C()["manager_ratings"].get(id, {"sum": 0.0, "count": 0})
+	ratings["sum"] = float(ratings["sum"]) + clampf(score, 0, 1)
+	ratings["count"] = int(ratings["count"]) + 1
+	C()["manager_ratings"][id] = ratings
+	if not C().has("shift_counts"): C()["shift_counts"] = {}
+	var today := str(Clock.day_index())
+	C()["shift_counts"][today] = int(C()["shift_counts"].get(today, 0)) + 1
 	C()["last_shift_day"] = Clock.day_index()
 	GameState.inc_stat("shifts_worked")
 	var lines: Array = j.get("lines", [])
@@ -215,7 +229,7 @@ static func refresh_offers(force := false) -> void:
 		var terms: Array = cfg().get("terms_days", [0, 7, 14])
 		var days := int(ceil(hours / 4.0)) + GameState.randi_range(1, 3)
 		offers.append({"id": "G%d" % int(f["seq"]), "template": t["id"], "title": t["title"], "client": GameState.pick(clients),
-			"hours": hours, "fee": fee, "terms": int(GameState.pick(terms)), "days": days})
+			"workflow_version": 2, "work_type": t.get("work_type", "market"), "scope_draw": GameState.randf(), "hours": hours, "fee": fee, "terms": int(GameState.pick(terms)), "days": days})
 		f["seq"] = int(f["seq"]) + 1
 	f["offers"] = offers
 
@@ -233,6 +247,7 @@ static func accept(offer_id: String) -> Dictionary:
 			var due := Clock.at_day_time(int(o["days"]), 18 * 60)
 			var g: Dictionary = o.duplicate()
 			g.merge({"done": 0, "status": "active", "due": due, "accepted": Clock.now(), "entity": GameState.business_entity()})
+			if int(g.get("workflow_version", 0)) >= 2: FreelanceWorkflow.begin(g)
 			f["gigs"][offer_id] = g
 			f["offers"].erase(o)
 			GameState.inc_stat("gigs_accepted")
@@ -250,6 +265,7 @@ static func work_on(gig_id: String, progress := -1.0) -> Dictionary:
 	var g: Dictionary = F()["gigs"].get(gig_id, {})
 	if g.is_empty() or not g["status"] in ["active", "late"]:
 		return {"ok": false, "error": "No such gig in progress."}
+	if g.has("workflow"): return FreelanceWorkflow.work(gig_id, float(session_hours()) if progress < 0 else minf(float(session_hours()), progress), 0.85)
 	var left := float(g["hours"]) - float(g["done"])
 	var clock_h := mini(session_hours(), int(ceil(left)))
 	var h := minf(left, float(clock_h) if progress < 0.0 else progress)
@@ -262,6 +278,8 @@ static func work_on(gig_id: String, progress := -1.0) -> Dictionary:
 
 
 static func _deliver(g: Dictionary) -> Dictionary:
+	if g.get("status", "") not in ["active", "late"] or GameState.data["entities"].get(g.get("entity", "player"), {}).has("closed"): return FreelanceWorkflow.blocked()
+	if g.has("workflow") and FreelanceWorkflow.stage(g) != "accepted": return FreelanceWorkflow.blocked()
 	var f := F()
 	var late := Clock.now() > int(g["due"])
 	var fee := float(g["fee"]) * (1.0 - (float(cfg().get("late_penalty", 0.2)) if late else 0.0))
@@ -279,10 +297,10 @@ static func _deliver(g: Dictionary) -> Dictionary:
 		f["late"] = int(f["late"]) + 1
 		f["rep"] = clampf(rep() - 0.5, 0.0, 5.0)
 	else:
-		f["rep"] = clampf(rep() + 0.25, 0.0, 5.0)
+		f["rep"] = clampf(rep() + ((int(g["workflow"]["rating"]) - 3) * 0.125 if g.has("workflow") else 0.25), 0.0, 5.0)
 	GameState.inc_stat("gigs_delivered")
-	GameState.add_message("client", I18n.t("%s: Received, thanks! Invoice for %s noted.") % [str(g["client"]), Fmt.money0(fee)] if not late
-		else I18n.t("%s: It's late, so we've knocked 20%% off. Invoice for %s noted.") % [str(g["client"]), Fmt.money0(fee)])
+	GameState.add_message("client", I18n.t("%s: Received, thanks! Invoice for %s noted.") % [str(g["client"]), Fmt.money(fee)] if not late
+		else I18n.t("%s: It's late, so we've knocked 20%% off. Invoice for %s noted.") % [str(g["client"]), Fmt.money(fee)])
 	return {"ok": true, "delivered": true, "fee": fee, "late": late}
 
 
@@ -301,7 +319,7 @@ static func handle(kind: String, p: Dictionary) -> void:
 			Ledger.post(ent, I18n.t("Client payment — %s") % gig_title(g), [{"acct": "cash", "dr": amt}, {"acct": "accounts_receivable", "cr": amt}],
 				{"segment": "consulting", "type": "gig_payment", "id": g["id"]})
 			g["status"] = "paid"
-			EventBus.notify.emit(I18n.t("%s paid %s.") % [str(g["client"]), Fmt.money0(amt)], "good", "cash")
+			EventBus.notify.emit(I18n.t("%s paid %s.") % [str(g["client"]), Fmt.money(amt)], "good", "cash")
 
 
 static func on_hour(_t: int, h: int) -> void:
@@ -339,6 +357,6 @@ static func segment_tag() -> String:
 
 static func on_company_closed(ent: String) -> void:
 	for gig in F()["gigs"].values():
-		if gig.get("entity", "player") == ent and gig.get("status", "") in ["active", "invoiced"]:
+		if gig.get("entity", "player") == ent and gig.get("status", "") in ["active", "late", "invoiced"]:
 			gig["status"] = "closed"
 			Sim.cancel("car.gig_paid", "id", gig["id"])

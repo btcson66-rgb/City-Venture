@@ -262,3 +262,9 @@ Implemented: Phone → Leases, property agents/cowork desks and leased interior 
 
 ## Multi-item parcel packing (#113)
 Implemented: baskets reserve every SKU/quantity at one location. The packing table places and rotates each unit on a non-overlapping grid. Box height, footprint, actual weight and dimensional weight determine fit and postage. Fragile goods need padding; shipping damage causes actual return/review flows. Whole-basket refunds restore all undamaged stock and reverse all line COGS. Replacement requires every line before consuming any stock. Staff skill selects fitting/oversized cartons and padding. New `desk_monitor` from `harbor_home_goods` needs a large carton; it uses the existing monitor art with a parcel fallback. B2B contract freight remains the separate existing bulk delivery flow.
+
+
+## 多站點打工與接案（#114）
+Implemented：咖啡師同時處理三位客人，確認／推薦、製作、送至取餐台或指定桌號、清理完成才計分。髒桌可從另一張訂單清理；等待時間決定小費，實際店長評價與完成班數共同決定升職、薪資及每日兩班資格。收銀增加找零及退貨審核，共享空間接待增加會議室衝突，包裹分揀增加破損記錄／隔離，文書增加客訴處理；各環節會影響原有班次收入。
+Implemented：新接案依序訪談、報價及約定修改次數、每日跨案分配最多六小時、選擇加價或吸收追加範圍、交付及修改、驗收／折價結案。市場調查分類資料、財務模型計算、營運流程排序、品牌策略選卡各有不同操作；品質與訪談資訊影響驗收，評價影響後續案源與報價上限。只有驗收或協議折價後才開發票，依原有付款條件收款；沒有執行階段的虛構收入。舊存檔中的既有案件繼續使用原交付流程。
+Blocked：#95 尚未合併，暫沿用實際班次／接案工時與既有提早休息條件；待共用體力系統合併後串接，不建立另一套疲勞系統。範圍變更與修改為三回合資料題，不宣稱能編寫任意真實試算表或品牌文件。

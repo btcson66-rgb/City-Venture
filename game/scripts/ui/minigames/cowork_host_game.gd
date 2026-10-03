@@ -8,6 +8,10 @@ const FIRST := ["Lena", "Eli", "Jonas", "Mara", "Theo", "Priti", "Oskar", "Yuki"
 const LAST := ["Park", "Moss", "Reed", "Varga", "Blake", "Shah", "Lund", "Ito", "Costa", "Bello", "Duarte", "Nair", "Sato", "Ricci"]
 const HOSTS := ["Priya", "Tom", "Ken", "Elena"]
 
+var service_stage := "visitor"
+var visitor_quality := 0.0
+var rooms := {"A_9": "Elena", "B_10": "Ken"}
+
 var bookings: Array = []      # [{name, plan}]
 var visitors: Array = []      # [{name, says, answer}]
 var right := 0
@@ -67,6 +71,22 @@ func _plan_day() -> void:
 
 
 func build_round() -> void:
+	service_stage = "visitor"
+	_layout()
+
+func _layout() -> void:
+	if service_stage == "room":
+		UIK.clear(stage)
+		var room_panel := UIK.vbox(8)
+		stage.add_child(room_panel)
+		room_panel.add_child(UIK.wrap("The visitor also needs a one-hour meeting room. Resolve the booking conflict.", 10, Art.C_WHITE, 540))
+		var hour := 9 + round_i / 2
+		for slot in ["A_%d" % hour, "A_%d" % (hour + 1), "B_%d" % hour, "B_%d" % (hour + 1)]:
+			room_panel.add_child(UIK.label(I18n.t("Room %s · %02d:00–%02d:00 · %s") % [slot.split("_")[0], int(slot.split("_")[1]), int(slot.split("_")[1]) + 1, I18n.t("Occupied" if rooms.has(slot) else "Available")], 9))
+			var choose := UIK.button("Reserve this slot", _room.bind(slot))
+			choose.name = "Room_" + slot
+			room_panel.add_child(choose)
+		return
 	UIK.clear(stage)
 	var h := UIK.hbox(12)
 	stage.add_child(h)
@@ -105,15 +125,19 @@ func _answer(a: String) -> void:
 	if phase != "play":
 		return
 	var v: Dictionary = visitors[round_i]
-	if a == v["answer"]:
-		right += 1
-		award(0.75 + 0.25 * time_left())
-		flash(I18n.t("✓ %s is sorted") % str(v["name"]), true)
-	else:
-		award(0.0)
-		var why := {"checkin": "they were on the list: check them in", "daypass": "they weren't on the list: sell a day pass",
-			"host": "they came for a meeting: call the host"}
-		flash(I18n.t("✗ No: %s") % I18n.t(why[str(v["answer"])]), false)
+	visitor_quality = 1.0 if a == v["answer"] else 0.0
+	service_stage = "room"
+	_layout()
+
+func _room(slot: String) -> void:
+	if service_stage != "room": return
+	if rooms.has(slot):
+		flash("✗ Already booked. Offer a free room or another hour.", false)
+		return
+	rooms[slot] = visitors[round_i]["name"]
+	var quality := visitor_quality * 0.6 + 0.4
+	if quality >= 0.99: right += 1
+	award(quality)
 	next_round()
 
 

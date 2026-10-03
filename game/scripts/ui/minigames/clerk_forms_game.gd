@@ -10,6 +10,9 @@ const COMPANIES := ["Brightpath Studio", "Harbor & Pine Co.", "Kettle Labs", "No
 	"Pixel Orchard", "Lumen Tea House"]
 const TYPES := ["E-commerce", "Café", "Consulting", "Software", "Retail"]
 
+var service_stage := "form"
+var form_quality := 0.0
+
 var form := {}
 var marked := ""
 var right := 0
@@ -36,6 +39,7 @@ func round_name() -> String:
 
 
 func build_round() -> void:
+	service_stage = "form"
 	var id := "%s%06d" % [char(65 + rng.randi_range(0, 25)), rng.randi_range(100000, 999999)]
 	form = {"applicant": PEOPLE[rng.randi_range(0, PEOPLE.size() - 1)], "company": COMPANIES[rng.randi_range(0, COMPANIES.size() - 1)],
 		"type": TYPES[rng.randi_range(0, TYPES.size() - 1)], "id": id, "fee": "$300", "signed": true, "bad": ""}
@@ -57,6 +61,15 @@ func build_round() -> void:
 
 func _layout() -> void:
 	UIK.clear(stage)
+	if service_stage == "call":
+		var call := UIK.vbox(8)
+		stage.add_child(call)
+		call.add_child(UIK.wrap("A caller complains about a delayed application. Verify the reference, explain the status, and escalate unresolved cases.", 10, Art.C_WHITE, 540))
+		for correct in [true, false]:
+			var reply := UIK.button("Verify reference and escalate" if correct else "Promise approval without checking", _call.bind(correct))
+			reply.name = "Complaint_" + ("verify" if correct else "promise")
+			call.add_child(reply)
+		return
 	var h := UIK.hbox(12)
 	stage.add_child(h)
 	var paper := card(Color(0.98, 0.97, 0.93), Color8(150, 140, 120))
@@ -91,7 +104,7 @@ func _layout() -> void:
 	for r in RULES:
 		nv.add_child(UIK.wrap("• " + I18n.t(r), 7, Color8(60, 50, 10), 190))
 	right_col.add_child(note)
-	var ap := UIK.button("Approve", _decide.bind(true), "primary", 200)
+	var ap := UIK.button("Approve", _decide.bind(true), "", 200)
 	ap.name = "Approve"
 	right_col.add_child(ap)
 	var rj := UIK.button("Reject (click the wrong field first)" if marked == "" else "Reject", _decide.bind(false), "danger", 200)
@@ -106,24 +119,17 @@ func _mark(key: String) -> void:
 
 
 func _decide(approve: bool) -> void:
+	if service_stage != "form": return
 	var bad := str(form["bad"])
-	if approve and bad == "":
-		right += 1
-		award(1.0)
-		flash("✓ Approved: all in order", true)
-	elif not approve and bad != "" and marked == bad:
-		right += 1
-		award(1.0)
-		flash("✓ Rejected for the right reason", true)
-	elif not approve and bad != "":
-		award(0.5)
-		flash("½ Right to reject, but that field was fine", false)
-	elif approve:
-		award(0.0)
-		flash("✗ That form had a problem", false)
-	else:
-		award(0.0)
-		flash("✗ That form was fine", false)
+	form_quality = 1.0 if (approve and bad == "") or (not approve and bad != "" and marked == bad) else (0.5 if not approve and bad != "" else 0.0)
+	service_stage = "call"
+	_layout()
+
+func _call(correct: bool) -> void:
+	if service_stage != "call": return
+	var quality := form_quality * 0.6 + (0.4 if correct else 0.0)
+	if quality >= 0.99: right += 1
+	award(quality)
 	next_round()
 
 
