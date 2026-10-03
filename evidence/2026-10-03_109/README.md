@@ -1,6 +1,6 @@
 # #109 — player feedback fixes
 
-Status: Implemented; self-review PASS on the tested integration snapshot. Stacked on integration PR #108 (commit d20c9a09); merge #108 first.
+Status: Implemented; self-review PASS. Integration PR #108 is merged. The latest mandated base f097b906 was merged into this same branch, regenerating the conflicting gettext catalogs with both translation sidecars retained.
 
 - Every generated barista order states Single shot or Double shot; flat white explicitly states Double shot. Rules state the default.
 - Shared DestinationHours reads building hours and optional NPC schedules. Tutorial initial prompts, objective text, door/City Guide states and navigation show opening/closing times. Waiting uses normal Clock simulation; closing, overnight windows and weekend closures are handled.
@@ -10,7 +10,7 @@ Status: Implemented; self-review PASS on the tested integration snapshot. Stacke
 
 ## Verification
 
-Final validation: 458/458 tests passed in 129.0s, including NPC target/AP refinements. See unit.log.
+Current-base validation: 458/458 tests passed in 136.9s; short rendered tour 0 failures in 7.6s. See unit-current-base.log and tour-current-base.log. The original implementation evidence remains available in unit.log.
 Translation: missing 0. Wiki: OK (3830 assets, 269 data ids). Beta audit: 0 hits. git diff --check: clean.
 Rendered Traditional Chinese ticket tour: 0 failures; see tour/walkthrough_result.json and tour.log. English audit contains only existing brand names Gateway / Helio Supply / Helio Warehouse Office; no new text.
 Full walkthrough: not run for ticket 1, per Continuous mode (every third ticket).
