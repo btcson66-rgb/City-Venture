@@ -74,6 +74,10 @@ msgstr " ltd"
 msgid " today"
 msgstr " 今日"
 
+#: scripts/ui/energy_ui.gd:172
+msgid " · %d days late"
+msgstr " · 逾期 %d 天"
+
 #: scripts/ui/energy_ui.gd:101
 msgid " · %d days left"
 msgstr " · 剩 %d 天"
@@ -86,7 +90,7 @@ msgstr " · 预付 %d%%"
 msgid " · Net"
 msgstr " · 票期"
 
-#: scripts/ui/energy_ui.gd:170
+#: scripts/ui/energy_ui.gd:172
 msgid " · due in %d days"
 msgstr " · %d 天后到期"
 
@@ -330,7 +334,7 @@ msgstr "%d 位客人排不到就走了。"
 msgid "%d × %s from %s: %s"
 msgstr "%d 件 %s，来自 %s：%s"
 
-#: scripts/ui/energy_ui.gd:278
+#: scripts/ui/energy_ui.gd:280
 msgid "%d%% revenue share"
 msgstr "营收分成 %d%%"
 
@@ -602,7 +606,7 @@ msgstr "%s · 每位 %s · 服务分 +%.2f"
 msgid "%s · %s · %d hours · %s"
 msgstr "%s · %s · %d 小时 · %s"
 
-#: scripts/ui/energy_ui.gd:259
+#: scripts/ui/energy_ui.gd:261
 msgid "%s · %s · %s · %d ports · price %s/kWh · demand about %d kWh/day · margin %s/kWh · %d kWh sold, %s revenue"
 msgstr "%s · %s · %s · %d 个车位 · 售价 %s/kWh · 预估需求每日约 %d kWh · 每度毛利 %s · 已售 %d kWh，营收 %s"
 
@@ -662,7 +666,7 @@ msgstr "%s · 信誉 %d%% · 现金 %s · 天气 %s · 施工能量 每日 %.1f 
 msgid "%s · sold %d · service visits %d · in stock %d · on order %d · discount %d%%"
 msgstr "%s · 已售 %d · 保养进厂 %d · 库存 %d · 在途 %d · 折扣 %d%%"
 
-#: scripts/ui/energy_ui.gd:278
+#: scripts/ui/energy_ui.gd:280
 msgid "%s · terms agreed: %s"
 msgstr "%s · 已谈妥条件：%s"
 
@@ -718,7 +722,7 @@ msgstr "%s：收到了，谢谢！已收到 %s 的发票。"
 msgid "%s: We had to cancel the project. We won't be paying for it."
 msgstr "%s：我们只好取消这个案子，不会付款。"
 
-#: scripts/ui/energy_ui.gd:221
+#: scripts/ui/energy_ui.gd:223
 msgid "%s: grant %s, %s"
 msgstr "%s：补助 %s，%s"
 
@@ -1770,7 +1774,7 @@ msgstr "%s 的应征者："
 msgid "Application filed. The licence should be through %s."
 msgstr "申请已送出。执照预计 %s 核发。"
 
-#: scripts/ui/energy_ui.gd:212
+#: scripts/ui/energy_ui.gd:214
 msgid "Applications are open this year."
 msgstr "今年补助仍在受理。"
 
@@ -1794,7 +1798,7 @@ msgstr "到市政厅 → 许可办理（%s）"
 msgid "Apply at the permits kiosk in City Hall. The money lands in the company account."
 msgstr "到市政厅的许可服务站申请。钱会汇进公司帐户。"
 
-#: scripts/ui/energy_ui.gd:218
+#: scripts/ui/energy_ui.gd:220
 msgid "Apply for %s · fee %s"
 msgstr "为 %s 申请补助 · 手续费 %s"
 
@@ -2678,7 +2682,7 @@ msgstr "预算维持不变。"
 msgid "Budget, rooms, neighborhood and urgency determine client fit. Negotiation changes commission and acceptance."
 msgstr "预算、房数、区域与急迫度决定需求配对，议价策略则影响佣金与成交率。"
 
-#: scripts/ui/energy_ui.gd:285
+#: scripts/ui/energy_ui.gd:287
 msgid "Build %s · %s"
 msgstr "建置 %s · %s"
 
@@ -2718,15 +2722,15 @@ msgstr "选择标语、视觉与语气卡，组合客户提案。"
 msgid "Build this"
 msgstr "做这个"
 
-#: scripts/ui/energy_ui.gd:286
+#: scripts/ui/energy_ui.gd:288
 msgid "BuildGrant_%s_%s"
 msgstr "BuildGrant_%s_%s"
 
-#: scripts/ui/energy_ui.gd:287
+#: scripts/ui/energy_ui.gd:289
 msgid "BuildLoan_%s_%s"
 msgstr "BuildLoan_%s_%s"
 
-#: scripts/ui/energy_ui.gd:285
+#: scripts/ui/energy_ui.gd:287
 msgid "Build_%s_%s"
 msgstr "Build_%s_%s"
 
@@ -3426,7 +3430,7 @@ msgstr "中央车站"
 msgid "Certain cost, no fine."
 msgstr "成本确定，没有罚款。"
 
-#: scripts/ui/energy_ui.gd:190
+#: scripts/ui/energy_ui.gd:192
 msgid "CertifyStorage"
 msgstr "CertifyStorage"
 
@@ -3494,7 +3498,7 @@ msgstr "充电站遭破坏"
 msgid "Charger vandalism repair"
 msgstr "充电站破坏修复"
 
-#: data/help/glossary.json data/milestones.json scripts/ui/energy_ui.gd:228 scripts/ui/energy_ui.gd:63
+#: data/help/glossary.json data/milestones.json scripts/ui/energy_ui.gd:230 scripts/ui/energy_ui.gd:63
 msgid "Charging network"
 msgstr "充电网络"
 
@@ -3518,7 +3522,7 @@ msgstr "充电站激活：%s。"
 msgid "Charging station: %s"
 msgstr "充电站：%s"
 
-#: scripts/ui/energy_ui.gd:234
+#: scripts/ui/energy_ui.gd:236
 msgid "ChargingNextInstalls"
 msgstr "ChargingNextInstalls"
 
@@ -3874,7 +3878,7 @@ msgstr "城市"
 msgid "City Curb Office"
 msgstr "City Curb Office"
 
-#: scripts/ui/energy_ui.gd:230
+#: scripts/ui/energy_ui.gd:232
 msgid "City EV adoption %s (+%s a year) · %d of %d stations open · grid electricity %s/kWh"
 msgstr "全市电动车普及率 %s（每年 +%s）· 营运中 %d／%d 站 · 电网电价 %s/kWh"
 
@@ -3894,7 +3898,7 @@ msgstr "城市指南：找到下一站"
 msgid "City Hall"
 msgstr "市政厅"
 
-#: scripts/ui/energy_ui.gd:209
+#: scripts/ui/energy_ui.gd:211
 msgid "City Hall energy subsidy desk (Ms. Okoro)"
 msgstr "市府能源补助窗口（Ms. Okoro）"
 
@@ -4322,7 +4326,7 @@ msgstr "请先完成此消息范本的条件。"
 msgid "Complete two campaigns and hire a designer and media buyer before buying Campus Radio."
 msgstr "完成两场活动，聘用设计师与媒体采购员后，再收购 校园电台。"
 
-#: scripts/sim/energy.gd:50 scripts/ui/energy_ui.gd:189 scripts/ui/energy_ui.gd:233
+#: scripts/sim/energy.gd:50 scripts/ui/energy_ui.gd:191 scripts/ui/energy_ui.gd:235
 msgid "Complete two solar installs before the battery course."
 msgstr "请先完成两件太阳能安装，再上电池课程。"
 
@@ -5350,7 +5354,7 @@ msgstr "资遣员工"
 msgid "Dispute lost on %s: −%s"
 msgstr "申诉败诉 %s：−%s"
 
-#: scripts/ui/energy_ui.gd:182
+#: scripts/ui/energy_ui.gd:184
 msgid "Dispute the claim"
 msgstr "拒绝理赔"
 
@@ -7432,7 +7436,7 @@ msgstr "Helio Supply 材料：%s"
 
 #: data/buildings/helio_warehouse.json
 msgid "Helio Warehouse Office"
-msgstr "Helio Warehouse Office"
+msgstr "Helio 仓库办公室"
 
 #: scripts/sim/energy.gd:53
 msgid "Helio battery installer certification"
@@ -8070,11 +8074,11 @@ msgstr "先安装自动化设备，再创建自有品牌。"
 msgid "Install deposit refunded: %s"
 msgstr "退还安装订金：%s"
 
-#: scripts/ui/energy_ui.gd:213
+#: scripts/ui/energy_ui.gd:215
 msgid "Install grant quota remains."
 msgstr "安装补助额度仍有剩余。"
 
-#: scripts/ui/energy_ui.gd:214
+#: scripts/ui/energy_ui.gd:216
 msgid "Install grants: %d%% of the quote up to %s per system. Quota left %s of %s. Charger grants: %d%% up to %s, quota left %s. Filing fee %s, decision in about %d days; some applications are rejected."
 msgstr "安装补助：报价的 %d%%，每套最高 %s。剩余额度 %s／%s。充电站补助：%d%%，最高 %s，剩余额度 %s。申请费 %s，约 %d 天出结果，部分申请会被退件。"
 
@@ -8106,7 +8110,7 @@ msgstr "施工中"
 msgid "Installs"
 msgstr "安装案"
 
-#: scripts/ui/energy_ui.gd:234 scripts/ui/energy_ui.gd:63
+#: scripts/ui/energy_ui.gd:236 scripts/ui/energy_ui.gd:63
 msgid "Installs & warranty"
 msgstr "安装与保固"
 
@@ -8254,7 +8258,7 @@ msgstr "投资人只能入股已登记的公司。"
 msgid "Investors own %s of it, so your share is %s."
 msgstr "投资人持有 %s，所以你的份是 %s。"
 
-#: scripts/ui/energy_ui.gd:175
+#: scripts/ui/energy_ui.gd:177
 msgid "Invoice %s · %s · warranty to %s"
 msgstr "发票 %s · %s · 保固至 %s"
 
@@ -10262,6 +10266,10 @@ msgstr "我的车场与上架"
 msgid "NAME"
 msgstr "名字"
 
+#: scripts/ui/energy_ui.gd:294
+msgid "NE"
+msgstr "东北"
+
 #: scripts/ui/modals/company_os.gd:889
 msgid "NEGOTIATION"
 msgstr "议价"
@@ -10277,6 +10285,10 @@ msgstr "NEXUS 银行"
 #: data/../assets/buildings/buildings_meta.json data/buildings/nexus_cowork.json
 msgid "NEXUS CO-WORK"
 msgstr "NEXUS 共享办公室"
+
+#: scripts/ui/energy_ui.gd:294
+msgid "NW"
+msgstr "西北"
 
 #: scripts/ui/minigames/clerk_forms_game.gd:8
 msgid "Nadia Haddad"
@@ -10330,11 +10342,11 @@ msgstr "需要注意"
 msgid "Negotiate a rate lock"
 msgstr "协商锁定费率"
 
-#: scripts/ui/energy_ui.gd:275
+#: scripts/ui/energy_ui.gd:277
 msgid "Negotiate fixed fee"
 msgstr "谈固定月费"
 
-#: scripts/ui/energy_ui.gd:276
+#: scripts/ui/energy_ui.gd:278
 msgid "Negotiate revenue share"
 msgstr "谈营收分成"
 
@@ -11702,7 +11714,7 @@ msgstr "点杯咖啡（$4.50）"
 msgid "Order from Lumina Direct: factory prices, but you pay before it ships"
 msgstr "跟 Lumina Direct 下单：工厂价，但要先付款才出货"
 
-#: scripts/ui/energy_ui.gd:173
+#: scripts/ui/energy_ui.gd:175
 msgid "Order materials and start · %s"
 msgstr "订购材料并开工 · %s"
 
@@ -12482,7 +12494,7 @@ msgstr "选电商"
 msgid "Pick a box to start"
 msgstr "先选一个箱子"
 
-#: scripts/ui/energy_ui.gd:249
+#: scripts/ui/energy_ui.gd:251
 msgid "Pick a district on the map. Free spots are limited; landlords want a fee or a share, your own property needs none."
 msgstr "在地图上选街区。空位有限；地主要收月费或分成，用自己的不动产则不用。"
 
@@ -12742,7 +12754,7 @@ msgstr "售价"
 msgid "Price %s without subsidy · materials %s · margin %d%% · %.1f crew-days (about %d days)%s"
 msgstr "未补助价格 %s · 材料 %s · 毛利率 %d%% · %.1f 个工作天（约 %d 天）%s"
 
-#: scripts/ui/energy_ui.gd:265
+#: scripts/ui/energy_ui.gd:267
 msgid "Price +%s"
 msgstr "售价 +%s"
 
@@ -12770,7 +12782,7 @@ msgstr "已涨价。"
 msgid "Price too high and the bays empty; too low and each kWh loses money."
 msgstr "价格太高车位会空，太低则每度电都在亏。"
 
-#: scripts/ui/energy_ui.gd:264
+#: scripts/ui/energy_ui.gd:266
 msgid "Price −%s"
 msgstr "售价 −%s"
 
@@ -13382,7 +13394,7 @@ msgstr "招募%s"
 msgid "Recruit a realty agent"
 msgstr "招募房仲人员"
 
-#: scripts/ui/energy_ui.gd:184
+#: scripts/ui/energy_ui.gd:186
 msgid "Recruit electrician · %s a week"
 msgstr "招募电工 · 周薪 %s"
 
@@ -13398,7 +13410,7 @@ msgstr "招募房务员 · 每周 %s"
 msgid "RecruitRealtyAgent"
 msgstr "RecruitRealtyAgent"
 
-#: scripts/ui/energy_ui.gd:184
+#: scripts/ui/energy_ui.gd:186
 msgid "Recruit_electrician"
 msgstr "Recruit_electrician"
 
@@ -13802,7 +13814,7 @@ msgstr "租办公室"
 msgid "Repair and add cameras"
 msgstr "修复并加装监视器"
 
-#: scripts/ui/energy_ui.gd:266
+#: scripts/ui/energy_ui.gd:268
 msgid "Repair and service · %s"
 msgstr "修复与保养 · %s"
 
@@ -13818,7 +13830,7 @@ msgstr "保险争议后支付维修费"
 msgid "Repair the damage now"
 msgstr "立刻修复损坏"
 
-#: scripts/ui/energy_ui.gd:181
+#: scripts/ui/energy_ui.gd:183
 msgid "Repair under warranty · %s"
 msgstr "依保固修复 · %s"
 
@@ -14250,7 +14262,7 @@ msgstr "屋顶勘查：%s"
 msgid "Roof faces %s (%d%% of south-facing yield) · load limit %d kg = %d panels max · each cell shows the sun it keeps after building and tree shade."
 msgstr "屋顶朝向 %s（约南向发电量的 %d%%）· 承重上限 %d kg = 最多 %d 片面板 · 每格显示扣除建筑与树木遮荫后保留的日照。"
 
-#: scripts/ui/energy_ui.gd:113 scripts/ui/energy_ui.gd:224 scripts/ui/energy_ui.gd:63 scripts/ui/energy_ui.gd:96
+#: scripts/ui/energy_ui.gd:113 scripts/ui/energy_ui.gd:226 scripts/ui/energy_ui.gd:63 scripts/ui/energy_ui.gd:96
 msgid "Roof leads"
 msgstr "屋顶客户"
 
@@ -14454,6 +14466,10 @@ msgstr "急件"
 msgid "Rush-order {moq} more (1-day, +20% cost)"
 msgstr "急单再订 {moq} 件（1 天到货，成本 +20%）"
 
+#: scripts/ui/energy_ui.gd:294
+msgid "SE"
+msgstr "东南"
+
 #: scripts/ui/modals/company_os.gd:1199
 msgid "SERVERS"
 msgstr "服务器"
@@ -14513,6 +14529,10 @@ msgstr "材料"
 #: data/economy/automotive.json
 msgid "SUV"
 msgstr "休旅车"
+
+#: scripts/ui/energy_ui.gd:294
+msgid "SW"
+msgstr "西南"
 
 #: data/regions/northridge.json scripts/sim/saas.gd:201
 msgid "SaaS"
@@ -15994,7 +16014,7 @@ msgstr "申请补助：是"
 msgid "Subsidy rush filing"
 msgstr "补助急件申请"
 
-#: scripts/ui/energy_ui.gd:224
+#: scripts/ui/energy_ui.gd:226
 msgid "SubsidyNextLeads"
 msgstr "SubsidyNextLeads"
 
@@ -16214,11 +16234,11 @@ msgstr "顶下 12 房的 Aster 小旅馆：定价、选通路，并维持房间�
 msgid "Take over the Aster Inn · %s"
 msgstr "顶下 Aster 小旅馆 · %s"
 
-#: scripts/ui/energy_ui.gd:232
+#: scripts/ui/energy_ui.gd:234
 msgid "Take the battery course first."
 msgstr "请先上电池课程。"
 
-#: scripts/ui/energy_ui.gd:190
+#: scripts/ui/energy_ui.gd:192
 msgid "Take the battery course · %s"
 msgstr "上电池课程 · %s"
 
@@ -17826,7 +17846,7 @@ msgstr "用 OTA 补空房，不要拿来卖你本来就能直接卖出的夜晚�
 msgid "Use the tabs on the left. Every laptop and work desk opens the same system: home, co-work hot desk, café table, office."
 msgstr "用左边的分页切换。每台笔电和工作座位打开的都是同一套系统：家里、共享座位、咖啡店、办公室。"
 
-#: scripts/ui/energy_ui.gd:271
+#: scripts/ui/energy_ui.gd:273
 msgid "Use your own property"
 msgstr "使用自己的不动产"
 
@@ -18234,7 +18254,7 @@ msgstr "温暖居家"
 msgid "Warranty"
 msgstr "保固"
 
-#: scripts/ui/energy_ui.gd:178
+#: scripts/ui/energy_ui.gd:180
 msgid "Warranty claim from %s: %s, repair cost %s, decide within %d days"
 msgstr "%s 的保固理赔：%s，修复成本 %s，请在 %d 天内处理"
 
@@ -18246,7 +18266,7 @@ msgstr "中古车保固求偿"
 msgid "Warranty dispute lost: %s"
 msgstr "保固争议败诉：%s"
 
-#: scripts/ui/energy_ui.gd:183
+#: scripts/ui/energy_ui.gd:185
 msgid "Warranty exposure: about %s a year in expected repairs on installed systems."
 msgstr "保固风险：已安装系统预期每年修复费用约 %s。"
 
@@ -19230,7 +19250,7 @@ msgstr "故障：该房型停售"
 msgid "brokerage"
 msgstr "仲介"
 
-#: scripts/ui/energy_ui.gd:258
+#: scripts/ui/energy_ui.gd:260
 msgid "building until %s"
 msgstr "施工至 %s"
 
@@ -19374,7 +19394,7 @@ msgstr "费用"
 msgid "fit out the unit"
 msgstr "先把店面装修好"
 
-#: scripts/ui/energy_ui.gd:278
+#: scripts/ui/energy_ui.gd:280
 msgid "fixed fee %s/month"
 msgstr "固定月费 %s"
 
@@ -19498,7 +19518,7 @@ msgstr "人力"
 msgid "landlord"
 msgstr "房东"
 
-#: scripts/ui/energy_ui.gd:270
+#: scripts/ui/energy_ui.gd:272
 msgid "landlord wants %s/month or %d%% of revenue"
 msgstr "地主要求每月 %s 或营收的 %d%%"
 
@@ -19706,7 +19726,7 @@ msgstr "已上架 ✓"
 msgid "out of 5"
 msgstr "满分 5"
 
-#: scripts/ui/energy_ui.gd:258
+#: scripts/ui/energy_ui.gd:260
 msgid "out of service"
 msgstr "停止服务"
 
@@ -19714,7 +19734,7 @@ msgstr "停止服务"
 msgid "own brand"
 msgstr "自有品牌"
 
-#: scripts/ui/energy_ui.gd:278
+#: scripts/ui/energy_ui.gd:280
 msgid "own property"
 msgstr "自有不动产"
 
@@ -19982,11 +20002,11 @@ msgstr "仓库"
 msgid "waste"
 msgstr "损耗"
 
-#: scripts/ui/energy_ui.gd:287
+#: scripts/ui/energy_ui.gd:289
 msgid "with bank loan"
 msgstr "银行贷款"
 
-#: scripts/ui/energy_ui.gd:286
+#: scripts/ui/energy_ui.gd:288
 msgid "with grant request"
 msgstr "并申请补助"
 
@@ -20006,7 +20026,7 @@ msgstr "你已经有这台货车了"
 msgid "you need a van (Dockside Motors, Harbor)"
 msgstr "你需要一台货车（港区的 Dockside Motors）"
 
-#: scripts/ui/energy_ui.gd:270
+#: scripts/ui/energy_ui.gd:272
 msgid "your own property, no landlord fee"
 msgstr "你自己的不动产，不用付地主费用"
 
@@ -20262,7 +20282,7 @@ msgstr "✗ %s 从输送带掉下去了"
 msgid "✗ %s gave up waiting"
 msgstr "✗ %s 等不下去走了"
 
-#: scripts/ui/energy_ui.gd:215
+#: scripts/ui/energy_ui.gd:217
 msgid "✗ A policy cut is reducing grants; the rate recovers over time."
 msgstr "✗ 政策调降正在压低补助，比例会逐步恢复。"
 
@@ -20290,7 +20310,7 @@ msgstr "✗ 请备妥下一期工程款。"
 msgid "✗ It doesn't fit. Try a bigger box."
 msgstr "✗ 装不下，换大一点的箱子。"
 
-#: scripts/ui/energy_ui.gd:176
+#: scripts/ui/energy_ui.gd:178
 msgid "✗ No installs yet. Survey a roof and send a quote."
 msgstr "✗ 还没有安装案。先勘查屋顶并送出报价。"
 
