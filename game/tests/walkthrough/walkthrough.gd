@@ -16,6 +16,26 @@ func _init(b) -> void:
 
 
 func run() -> void:
+	if _arg("resume") == "ch7_close":
+		# Resume an interrupted full replay from its own autosave, never an economic fixture.
+		if not SaveSystem.load_and_enter(1):
+			bot.fail("cannot load interrupted walkthrough save")
+			return
+		await wait_world()
+		var complete: Array = StoryEngine.St()["chapters_done"]
+		if StoryEngine.St()["chapter"] != "ch7_supply_shock" or not ["ch1_arrival", "ch2_first_customer", "ch3_open_for_business", "ch4_growing_pains", "ch5_big_contract", "ch6_cash_is_oxygen"].all(func(id): return id in complete) or not "ch7_price" in StoryEngine.St()["done"]:
+			bot.fail("resume save lacks the earlier full-walkthrough chapter receipts")
+			return
+		for event in EventEngine.S()["history"]: _tried[event["iid"]] = true
+		bot.step("Resume interrupted full walkthrough from its original chapter-seven autosave")
+		await _chapters_7_to_9()
+		await _old_town_cafe()
+		await _harbor_logistics()
+		await _chapters_10_to_12()
+		await _summary()
+		await _industry_fixtures()
+		await load("res://tests/walkthrough/map_adjacency_tour.gd").new(bot).run()
+		return
 	await _new_game()
 	if _arg("from") == "discoverability":
 		await _discoverability_fixture()
@@ -1250,33 +1270,42 @@ func _chapters_7_to_9() -> void:
 	bot.expect(StoryEngine.St()["chapter"] == "ch7_supply_shock", "Chapter 7 started after Chapter 6")
 	bot.expect(World.year() == 3, "Year 3: the Supply Shock")
 	# ---------------------------------------------------------------- chapter 7
-	bot.step("Chapter 7 — the news, and Ken's options")
-	await _read_news("supply_shock")
-	await pass_time_at_home(func(): return GameState.flag("ch7_supply_plan"), 6, true)   # Ken calls within two days
-	bot.expect(World.supplier_available("aurelia_makers"), "the local co-op is a supplier now")
-	bot.step("Chapter 7 — order from the co-op, raise a price")
-	await _home_laptop("operations")
-	await bot.shot("operations_supply_shock")
-	# the co-op sells in lots of its MOQ (30): buy until the chapter's 100 units are in hand or on the way
-	for i in 5:
-		if Cond.eval("stock_units>=100"):
-			break
-		await bot.click_named("Buy_aurelia_makers_desk_lamp", 3.0)
-		await bot.wait(0.4)
-	StoryEngine.check()   # ch7_stock is done; an earlier price adjustment remains valid.
+	if _arg("resume") != "ch7_close":
+		bot.step("Chapter 7 — the news, and Ken's options")
+		await _read_news("supply_shock")
+		await pass_time_at_home(func(): return GameState.flag("ch7_supply_plan"), 6, true)   # Ken calls within two days
+		bot.expect(World.supplier_available("aurelia_makers"), "the local co-op is a supplier now")
+		bot.step("Chapter 7 — order from the co-op, raise a price")
+		await _home_laptop("operations")
+		await bot.shot("operations_supply_shock")
+		# the co-op sells in lots of its MOQ (30): buy until the chapter's 100 units are in hand or on the way
+		for i in 5:
+			if Cond.eval("stock_units>=100"):
+				break
+			await bot.click_named("Buy_aurelia_makers_desk_lamp", 3.0)
+			await bot.wait(0.4)
+		StoryEngine.check()   # ch7_stock is done; an earlier price adjustment remains valid.
+		await close_modal()
+	# Reprice from current landed unit costs, postage and marketplace fees, through the actual UI.
+	# The owner handles customer decisions here; an idle support role would cost more than its benefit.
+	await _home_laptop("people")
+	for employee in Staff.people().duplicate():
+		if employee["role"] == "support":
+			await bot.click_named("LetGo_" + str(employee["id"]), 3.0)
 	await bot.click_named("Tab_sales")
 	await bot.wait(0.4)
 	for pid in ["wireless_earbuds", "water_bottle", "desk_lamp", "phone_stand"]:
 		var listing := Ecommerce.listing_for(pid)
 		if listing.is_empty(): continue
-		var target := float(DataDB.product(pid)["ref_price"]) * 1.2
+		var product := DataDB.product(pid)
+		var elasticity := float(product["elasticity"])
+		var landed := Ecommerce.unit_cost("tradelink_wholesale", pid) + Ecommerce.ship_cost({"product": pid}, "economy") + float(product["packaging_cost"])
+		var target := minf(float(product["price_max"]), ceil(landed * elasticity / (elasticity - 1.0) / (1.0 - float(Ecommerce.mk()["fee_rate"]))))
 		for step in int(ceil(maxf(0.0, target - float(listing["price"])))):
 			await bot.click_named("PriceUp_" + pid, 3.0)
-	await bot.wait(0.4)
 	await close_modal()
-	await bot.wait(0.6)
 	StoryEngine.check()
-	bot.expect("ch7_price" in StoryEngine.St()["done"], "stocked and repriced")
+	bot.expect("ch7_price" in StoryEngine.St()["done"], "stocked and repriced from actual shipping and supplier costs")
 	for day in 65:
 		if "ch7_supply_shock" in StoryEngine.St()["chapters_done"]: break
 		await _shock_restock()
