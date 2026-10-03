@@ -26,7 +26,7 @@ func build() -> void:
 	body.add_child(UIK.wrap(I18n.t(str(j.get("blurb", ""))), 8, Art.C_SKY, 400))
 	var h: Dictionary = DataDB.building(str(j["building"])).get("hours", {})
 	var days := str(h.get("days", "all"))
-	body.add_child(UIK.kv("Pay", I18n.t("$%d / hour · %s per 4-hour shift") % [int(Careers.wage(job_id)), Fmt.money(Careers.shift_pay(job_id))], Art.C_GREEN))
+	body.add_child(UIK.kv("Pay", I18n.t("$%d / hour · %s per 4-hour shift") % [int(Careers.wage(job_id)), Fmt.money0(Careers.shift_pay(job_id))], Art.C_GREEN))
 	body.add_child(UIK.kv("Shifts", I18n.t("Any time %s–%s, %s · one shift a day") % [h.get("open", ""), h.get("close", ""),
 		I18n.t("every day") if days == "all" else I18n.t("Mon–Fri")]))
 	body.add_child(UIK.kv("Perk", I18n.t(str(j.get("perk", {}).get("desc", ""))), Art.C_GOLD))
@@ -57,7 +57,7 @@ func build() -> void:
 		if not here:
 			why = "go to the workplace to work a shift"
 		var hrs := Careers.shift_hours_now(job_id) if Careers.shift_block(job_id) == "" else int(j.get("shift_hours", 4))
-		var b := UIK.button(I18n.t("Start a %d-hour shift (up to +%s)") % [hrs, Fmt.money(Careers.pay_for(job_id, 1.0, hrs))], _work, "primary")
+		var b := UIK.button(I18n.t("Start a %d-hour shift (up to +%s)") % [hrs, Fmt.money0(Careers.pay_for(job_id, 1.0, hrs))], _work, "primary" if why == "" else "")
 		b.name = "WorkShift"
 		b.disabled = why != ""
 		footer.add_child(b)

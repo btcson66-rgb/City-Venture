@@ -1,0 +1,49 @@
+{
+ "id": "hotel_vera_visit",
+ "category": "market",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:hotel_active"
+  ],
+  "chance": 0.02,
+  "cooldown_days": 30,
+  "earliest_day": 15
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "priya_nair",
+  "title": "Critic on the guest list",
+  "icon": "warning",
+  "lines": [
+   "Vera Stone has booked a night under a false name. Her review counts five times."
+  ]
+ },
+ "choices": [
+  {
+   "id": "vip",
+   "label": "Treat her as a VIP and comp the suite",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "hotel",
+     "kind": "vera_vip"
+    }
+   ],
+   "outcome": "A quiet upgrade costs one suite night and lifts her service score."
+  },
+  {
+   "id": "normal",
+   "label": "Treat her like any other guest",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "hotel",
+     "kind": "vera_normal"
+    }
+   ],
+   "outcome": "She is judged on your normal operation."
+  }
+ ]
+}

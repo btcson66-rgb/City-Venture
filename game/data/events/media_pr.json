@@ -1,0 +1,49 @@
+{
+ "id": "media_pr",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:media_active"
+  ],
+  "chance": 0.015,
+  "cooldown_days": 21,
+  "earliest_day": 4
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "imani_cole",
+  "title": "Campaign public-relations crisis",
+  "icon": "warning",
+  "lines": [
+   "A campaign message upset its audience. Repair it at a cost or keep spending with weaker creative."
+  ]
+ },
+ "choices": [
+  {
+   "id": "respond",
+   "label": "Review the campaign and respond",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "media",
+     "kind": "pr"
+    }
+   ],
+   "outcome": "A campaign message upset its audience. Repair it at a cost or keep spending with weaker creative."
+  },
+  {
+   "id": "continue",
+   "label": "Continue with weaker creative",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "media",
+     "kind": "pr_ignore"
+    }
+   ],
+   "outcome": "The weaker creative will reduce campaign clicks."
+  }
+ ]
+}

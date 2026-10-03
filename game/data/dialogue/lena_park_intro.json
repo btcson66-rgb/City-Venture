@@ -1,0 +1,22 @@
+{
+ "id": "lena_park_intro",
+ "start": "start",
+ "nodes": {
+  "start": [
+   {
+    "who": "lena_park",
+    "text": "Quote a price, reserve capacity and meet the quality specification. Kessler is bidding too."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Open Line Planner",
+      "next": "end"
+     }
+    ]
+   }
+  ],
+  "end": []
+ }
+}

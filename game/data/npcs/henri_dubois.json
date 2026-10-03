@@ -1,0 +1,40 @@
+{
+ "id": "henri_dubois",
+ "name": "Henri Dubois",
+ "role": "Former Aster Inn owner",
+ "appearance": {
+  "presentation": "masculine",
+  "face": "oval",
+  "hair": "short_neat",
+  "hair_color": "silver",
+  "skin": "s2",
+  "eye_shape": "almond",
+  "eye_color": "brown",
+  "brows": "straight",
+  "mouth": "smile",
+  "accessory": "glasses_round"
+ },
+ "outfit": "office_professional",
+ "outfit_tints": {
+  "top": "#4a3a58",
+  "bottom": "#2c3038"
+ },
+ "schedule": [
+  {
+   "days": "mon,tue,wed,thu,fri,sat,sun",
+   "from": "08:00",
+   "to": "20:00",
+   "location": "interior:the_aster",
+   "spot": "owner",
+   "pose": "idle"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [],
+   "conversation": "henri_dubois_intro",
+   "action": "hotel_open"
+  }
+ ],
+ "phone_contact": false
+}

@@ -1,0 +1,221 @@
+{
+ "id": "residential",
+ "name": "Residential",
+ "size_tiles": [
+  108,
+  46
+ ],
+ "music": "day_city",
+ "ground": [
+  {
+   "type": "grass",
+   "rect": [
+    0,
+    0,
+    108,
+    20
+   ]
+  },
+  {
+   "type": "sidewalk_alt",
+   "rect": [
+    0,
+    20,
+    108,
+    4
+   ]
+  },
+  {
+   "type": "curb_top",
+   "rect": [
+    0,
+    24,
+    108,
+    1
+   ]
+  },
+  {
+   "type": "road",
+   "rect": [
+    0,
+    25,
+    108,
+    5
+   ]
+  },
+  {
+   "type": "road_dash_h",
+   "rect": [
+    0,
+    27,
+    108,
+    1
+   ],
+   "step": 2
+  },
+  {
+   "type": "curb_bottom",
+   "rect": [
+    0,
+    30,
+    108,
+    1
+   ]
+  },
+  {
+   "type": "sidewalk_alt",
+   "rect": [
+    0,
+    31,
+    108,
+    3
+   ]
+  },
+  {
+   "type": "grass",
+   "rect": [
+    0,
+    34,
+    108,
+    7
+   ]
+  },
+  {
+   "type": "grass",
+   "rect": [
+    0,
+    41,
+    108,
+    1
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    0,
+    42,
+    108,
+    4
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    30,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    64,
+    25,
+    3,
+    5
+   ]
+  }
+ ],
+ "buildings": [
+  "maple_court",
+  "birch_row",
+  "harlow_finch",
+  "lot7"
+ ],
+ "fillers": [],
+ "props": [],
+ "metro": {
+  "station": "residential",
+  "x": 1180,
+  "y": 560
+ },
+ "exits": [
+  {
+   "id": "west",
+   "rect": [
+    0,
+    320,
+    16,
+    244
+   ],
+   "to": "old_town",
+   "spawn": "from_residential",
+   "walk_min": 5
+  }
+ ],
+ "spawns": {
+  "metro": [
+   1220,
+   642
+  ],
+  "from_old_town": [
+   28,
+   430
+  ]
+ },
+ "bounds": {
+  "top": 322,
+  "bottom": 650
+ },
+ "traffic": [
+  {
+   "y": 424,
+   "dir": -1,
+   "density": 0.5
+  },
+  {
+   "y": 478,
+   "dir": 1,
+   "density": 0.5
+  }
+ ],
+ "ped_paths": [
+  {
+   "y": 350,
+   "x0": 20,
+   "x1": 1708
+  },
+  {
+   "y": 362,
+   "x0": 20,
+   "x1": 1708
+  },
+  {
+   "y": 506,
+   "x0": 20,
+   "x1": 1708
+  },
+  {
+   "y": 590,
+   "x0": 20,
+   "x1": 1160
+  },
+  {
+   "y": 628,
+   "x0": 20,
+   "x1": 1708
+  }
+ ],
+ "ambient_density": {
+  "morning": 8,
+  "afternoon": 9,
+  "evening": 5,
+  "night": 2
+ },
+ "ped_outfits": [
+  "logistics_site",
+  "logistics_site",
+  "logistics_site",
+  "casual_jacket",
+  "casual_jacket",
+  "casual_tee",
+  "courier",
+  "office_professional"
+ ],
+ "minimap_color": "#819c6c",
+ "traffic_types": [
+  "compact",
+  "sedan"
+ ]
+}

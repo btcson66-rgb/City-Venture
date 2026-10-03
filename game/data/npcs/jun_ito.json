@@ -1,0 +1,40 @@
+{
+ "id": "jun_ito",
+ "name": "Jun Ito",
+ "role": "Technician",
+ "appearance": {
+  "presentation": "masculine",
+  "face": "oval",
+  "hair": "short_neat",
+  "hair_color": "black",
+  "skin": "s2",
+  "eye_shape": "round",
+  "eye_color": "dark",
+  "brows": "thick",
+  "mouth": "smile",
+  "accessory": "none"
+ },
+ "outfit": "logistics_site",
+ "outfit_tints": {
+  "top": "#355a7c",
+  "bottom": "#2c3038"
+ },
+ "schedule": [
+  {
+   "days": "mon,tue,wed,thu,fri,sat",
+   "from": "08:00",
+   "to": "17:00",
+   "location": "interior:aurelia_auto_auction",
+   "spot": "bay",
+   "pose": "idle"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [],
+   "conversation": "jun_ito_intro",
+   "action": "automotive_open"
+  }
+ ],
+ "phone_contact": false
+}

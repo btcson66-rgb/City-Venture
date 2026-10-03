@@ -1,0 +1,49 @@
+{
+ "id": "energy_subsidy_cut",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:energy_active"
+  ],
+  "chance": 0.01,
+  "cooldown_days": 60,
+  "earliest_day": 4
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "ms_okoro",
+  "title": "Subsidy policy change",
+  "icon": "warning",
+  "lines": [
+   "The city is halving solar grants. File rush paperwork for applications still in the queue, or accept the lower rate."
+  ]
+ },
+ "choices": [
+  {
+   "id": "rush",
+   "label": "Pay rush filing fees to protect pending grants",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "energy",
+     "kind": "cut_rush"
+    }
+   ],
+   "outcome": "Pending applications keep the old grant; new ones pay half for 90 days."
+  },
+  {
+   "id": "accept",
+   "label": "Accept the cut and requote clients",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "energy",
+     "kind": "cut_accept"
+    }
+   ],
+   "outcome": "Every grant is halved while the policy recovers over 90 days."
+  }
+ ]
+}

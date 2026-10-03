@@ -1,10 +1,10 @@
 {
  "id": "automotive",
  "name": "Automotive",
- "status": "planned",
- "tier": "future",
- "module": "",
- "pitch": "Used cars, rentals, maybe an EV brand one day.",
+ "status": "active",
+ "tier": "p2",
+ "module": "automotive",
+ "pitch": "Auction flips, an airport rental fleet and a franchised dealership.",
  "starting_capital_min": 30000,
  "revenue_models": [
   "sales",
@@ -15,8 +15,9 @@
   "maintenance"
  ],
  "growth_paths": [
-  "dealership",
-  "ev_startup"
+  "used_car_flipper",
+  "rental_fleet",
+  "dealership"
  ],
  "icon": "ui/icons/metro"
 }

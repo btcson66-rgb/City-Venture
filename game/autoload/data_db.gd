@@ -3,7 +3,7 @@ extends Node
 ## Content is data-driven (Handoff §73): scene scripts only reference ids.
 
 const FOLDERS := ["businesses", "products", "suppliers", "companies", "npcs", "buildings", "districts",
-	"regions", "regulations", "events", "dialogue", "properties", "jobs"]
+	"regions", "regulations", "events", "dialogue", "properties", "jobs", "quests"]
 
 var businesses := {}
 var products := {}
@@ -18,6 +18,9 @@ var events := {}
 var dialogue := {}
 var properties := {}
 var jobs := {}
+var quests := {}         # data/quests/*.json: multi-industry mega-jobs (#71)
+var synergies := {}      # data/synergies.json: internal supply links + Business Board gates
+var milestones := {}     # data/milestones.json: id -> milestone (5 per industry)
 var economy := {}      # marketplace, shipping, living, settlement_methods
 var city := {}
 var story := {}
@@ -27,6 +30,7 @@ var buildings_meta := {}
 var sprite_meta := {}     # board-converted sprites that overhang their design footprint
 var tiles := {}
 var glossary := {}        # data/help/glossary.json: {id: {title, what, why}} behind the "!" badges (InfoTip)
+var patch_notes := {}     # data/help/patch_notes.json: {version: {date, lines[]}}
 var loaded := false
 
 
@@ -48,10 +52,32 @@ func load_all() -> void:
 	for path in _json_files("res://data/economy"):
 		economy[path.get_file().get_basename()] = _read(path)
 	city = _read("res://data/city/aurelia.json")
+	synergies = _read("res://data/synergies.json")
+	milestones.clear()
+	for m in _read("res://data/milestones.json").get("milestones", []):
+		milestones[m["id"]] = m
 	var gl = _read("res://data/help/glossary.json")
 	glossary = gl if typeof(gl) == TYPE_DICTIONARY else {}
+	patch_notes = _read("res://data/help/patch_notes.json")
 	story = _read("res://data/story/chapters.json")
 	world = _read("res://data/world/years.json")
+	# Economy overlays keep all release balancing numbers in one designer-owned folder.
+	# They replace existing numeric definition fields; transaction and story rules are unchanged.
+	for group in economy.get("balance", {}).get("definitions", {}):
+		if not group in FOLDERS:
+			push_error("Unknown balance definition group: " + group)
+			continue
+		var definitions: Dictionary = get(group)
+		for id in economy["balance"]["definitions"][group]:
+			if not definitions.has(id):
+				push_error("Unknown balance definition: " + group + "/" + id)
+				continue
+			for key in economy["balance"]["definitions"][group][id]:
+				var value = economy["balance"]["definitions"][group][id][key]
+				if not definitions[id].has(key) or typeof(value) not in [TYPE_FLOAT, TYPE_INT] or typeof(definitions[id][key]) not in [TYPE_FLOAT, TYPE_INT]:
+					push_error("Balance overlays must replace an existing numeric field: " + id + "/" + key)
+					continue
+				definitions[id][key] = value
 	character = _read("res://data/character/options.json")
 	buildings_meta = _read("res://assets/buildings/buildings_meta.json")
 	tiles = _read("res://assets/tiles/atlas.json")
@@ -201,11 +227,15 @@ func validate() -> Array:
 	var impactful := ["cash", "purchase", "refund_order", "replace_order", "partial_refund", "refuse_return",
 		"inventory_delta", "supplier_price_mod", "create_contract_offer", "listing_mod", "ad_price_mod", "demand_mod",
 		"liquidate_inventory", "reduce_spending", "price_all_mod", "rush_order", "equity_investment", "open_escrow", "rail_choice",
-		"shipment_lost", "acquisition"]
+		"shipment_lost", "acquisition", "industry"]
 	for eid in events:
 		var ok := false
 		for c in events[eid].get("choices", []):
 			for e in c.get("effects", []):
+				if e.get("op", "") == "industry":
+					var registered := Industries.find(str(e.get("industry", "")))
+					if registered.is_empty() or not registered["sim_class"].has_method("crisis"):
+						errs.append("event %s has an unknown industry effect" % eid)
 				if e.get("op", "") in impactful:
 					ok = true
 		if not ok:

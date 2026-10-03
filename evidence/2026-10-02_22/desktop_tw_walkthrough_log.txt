@@ -1,0 +1,51 @@
+   0.1s STEP Main menu → New Game
+   0.3s   shot 01_main_menu.png
+   0.3s   click [NewGame] New Game
+   0.4s STEP Character Creator
+   0.5s   shot 02_creator_default.png
+   0.5s   click [Tab_hair] Hair
+   0.5s   click [Next_hair] ▶
+   0.5s   click [Tab_face] Face
+   0.6s   click [Next_face] ▶
+   0.6s   click [Next_eye_shape] ▶
+   0.6s   click [Tab_body] Body
+   0.6s   click [Next_presentation] ▶
+   0.7s   shot 03_creator_customised.png
+   0.7s   click [Tab_outfit] Outfit
+   0.7s   click "Startup Casual"
+   0.8s   ok  appearance changed from default (short_neat)
+   0.8s   shot 04_creator_final.png
+   0.8s   click [Start] Start in Aurelia  →
+   0.8s [6月1日（週日） 下午 2:00] STEP Arrival sequence
+   1.0s [6月1日（週日） 下午 2:00]   shot 05_arrival_train.png
+   1.2s [6月1日（週日） 下午 2:00]   shot 06_arrival_phone.png
+   1.5s [6月1日（週日） 下午 2:01]   ok  spawned in the Riverside apartment
+   1.5s [6月1日（週日） 下午 2:01]   ok  starting cash $30,000
+   1.5s [6月1日（週日） 下午 2:01]   ok  name saved
+   1.8s [6月1日（週日） 下午 2:03]   shot 07_apartment_arrival.png
+   2.2s [6月1日（週日） 下午 2:07]   shot 08_save_pause_transfer.png
+   2.2s [6月1日（週日） 下午 2:07]   click [ExportSave] Export save
+   2.3s [6月1日（週日） 下午 2:07]   ok  real desktop export picker opened
+   2.4s [6月1日（週日） 下午 2:07]   shot 09_save_export_picker.png
+   2.4s [6月1日（週日） 下午 2:07]   ok  exported .cvsave exists
+   2.6s [6月1日（週日） 下午 2:00]   shot 10_save_list_transfer.png
+   2.6s [6月1日（週日） 下午 2:00]   click [ImportSave] Import save
+   2.7s [6月1日（週日） 下午 2:00]   ok  real desktop import picker opened
+   2.8s [6月1日（週日） 下午 2:00]   shot 11_save_import_picker.png
+   2.9s [6月1日（週日） 下午 2:08]   ok  original game continued after import
+   2.9s [6月1日（週日） 下午 2:08]   ok  imported cash preserved
+   2.9s [6月1日（週日） 下午 2:08]   ok  imported books balanced
+   3.0s [6月1日（週日） 下午 2:08]   shot 12_save_import_continued.png
+   3.1s [6月1日（週日） 下午 2:08]   shot 13_save_recover_backup.png
+   3.1s [6月1日（週日） 下午 2:08]   click [RestoreBackup_3] Use previous backup
+   3.3s [6月1日（週日） 下午 2:09]   ok  previous backup continued
+   3.4s [6月1日（週日） 下午 2:09]   shot 14_save_invalid_file_message.png
+   3.5s [6月1日（週日） 下午 2:09]   shot 15_save_export_help.png
+   3.6s [6月1日（週日） 下午 2:09]   ok  full slots require explicit UI selection
+   3.6s [6月1日（週日） 下午 2:09]   shot 16_save_import_full_slots.png
+   3.6s [6月1日（週日） 下午 2:09]   click [Replace_1] Replace
+   3.8s [6月1日（週日） 下午 2:09]   shot 17_save_import_confirm_replace.png
+   3.8s [6月1日（週日） 下午 2:09]   click [ConfirmReplace] Replace
+   3.9s [6月1日（週日） 下午 2:08]   ok  confirmed import replaces chosen slot only
+   3.9s [6月1日（週日） 下午 2:08]   ok  closing import selector clears pending import
+   3.9s [6月1日（週日） 下午 2:08] BOT FINISHED — 0 failure(s) · 3.9s real

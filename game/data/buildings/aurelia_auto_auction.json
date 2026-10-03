@@ -1,0 +1,151 @@
+{
+ "id": "aurelia_auto_auction",
+ "name": "Aurelia Auto Auction",
+ "category": "Auto auction",
+ "district": "airport",
+ "type": "office",
+ "hours": {
+  "open": "08:00",
+  "close": "18:00",
+  "days": "mon,tue,wed,thu,fri,sat"
+ },
+ "exterior": {
+  "sprite": "aurelia_auto_auction",
+  "fallback": "warehouse_shed",
+  "x": 760,
+  "sign": "AURELIA AUTO AUCTION"
+ },
+ "interior": {
+  "size": [
+   16,
+   12
+  ],
+  "floor": "concrete",
+  "wall": "brick",
+  "ambient": "office",
+  "props": [
+   {
+    "sprite": "listing_board",
+    "fallback": "cork_board",
+    "x": 30,
+    "y": 8,
+    "wall": true
+   },
+   {
+    "sprite": "framed_art",
+    "x": 150,
+    "y": 12,
+    "wall": true
+   },
+   {
+    "sprite": "window_day",
+    "x": 196,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "old_desk",
+    "fallback": "desk",
+    "x": 96,
+    "y": 70
+   },
+   {
+    "sprite": "office_chair",
+    "x": 112,
+    "y": 56,
+    "solid": false
+   },
+   {
+    "sprite": "chair",
+    "x": 112,
+    "y": 118,
+    "solid": false
+   },
+   {
+    "sprite": "filing_cabinet",
+    "x": 12,
+    "y": 50
+   },
+   {
+    "sprite": "plant",
+    "x": 216,
+    "y": 56
+   },
+   {
+    "sprite": "waiting_sofa",
+    "x": 160,
+    "y": 130
+   },
+   {
+    "sprite": "rug_small",
+    "x": 90,
+    "y": 150,
+    "floor": true
+   }
+  ],
+  "interactables": [
+   {
+    "id": "auction_floor",
+    "at": [
+     52,
+     100
+    ],
+    "label": "Enter the Wednesday auction",
+    "action": "automotive_open",
+    "params": {
+     "page": "auction"
+    },
+    "icon": "metro"
+   },
+   {
+    "id": "lot_board",
+    "at": [
+     150,
+     100
+    ],
+    "label": "My lot and listings",
+    "action": "automotive_open",
+    "params": {
+     "page": "stock"
+    },
+    "icon": "metro"
+   },
+   {
+    "id": "lot_notice",
+    "at": [
+     210,
+     100
+    ],
+    "label": "Read the auction rules",
+    "action": "look",
+    "params": {
+     "icon": "info",
+     "text": "AUCTION RULES: lots sell Wednesdays 09:00–17:00. Buyer fee 5% on top of the hammer price. Hidden defects are not shown — pay Jun Ito $150 for an inspection before you bid."
+    }
+   }
+  ],
+  "npc_spots": {
+   "podium": [
+    120,
+    74
+   ],
+   "bay": [
+    190,
+    74
+   ]
+  },
+  "staff_spots": {
+   "auto_mechanic": [
+    [
+     60,
+     74
+    ],
+    [
+     260,
+     74
+    ]
+   ]
+  }
+ }
+}

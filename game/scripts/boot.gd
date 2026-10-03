@@ -19,10 +19,10 @@ func _start() -> void:
 		var stress = load("res://tests/walkthrough/stress.gd").new()
 		get_tree().root.add_child(stress)
 		return
-	SceneRouter.go_menu()
 	if bot != "":
 		var script: GDScript = load("res://tests/walkthrough/bot.gd")
 		var b = script.new()
 		b.name = "Bot"
 		b.mode = bot
 		get_tree().root.add_child(b)
+	SceneRouter.go_menu()

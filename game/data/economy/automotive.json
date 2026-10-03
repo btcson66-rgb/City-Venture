@@ -1,0 +1,94 @@
+{
+ "id": "automotive",
+ "license_fee": 400,
+ "lot_slots": [4, 10, 20],
+ "stage_fleet": 10,
+ "stage_rentals": 25,
+ "stock_insurance_month": 24,
+ "storage_day": 14,
+ "resale_stock": 0.5,
+ "auction": {
+  "weekday": 3, "open_hour": 9, "close_hour": 17, "lots": 6, "open_ratio": 0.45, "inc_min": 100, "inc_ratio": 0.02,
+  "buyer_fee": 0.05, "ai_count": 3, "ai_min": 0.62, "ai_max": 0.97, "ai_cap": 0.99, "eager_min": 0.45, "eager_max": 0.8,
+  "heat": [0.94, 1.08], "silent_polls": 3, "poll_seconds": 1.0, "minutes": 45,
+  "inspection_cost": 150, "inspection_minutes": 30, "defect_chance": 0.4,
+  "bidder_names": ["Dealer Kruger", "Lot Hawk Autos", "Mrs. Odell", "Bayside Wholesale", "Marek & Sons"]
+ },
+ "models": [
+  {"id": "city_hatch", "name": "Meridian City hatch", "class": "economy", "base": 8200},
+  {"id": "corvo_compact", "name": "Corvo Compact", "class": "economy", "base": 9800},
+  {"id": "astra_sedan", "name": "Astra sedan", "class": "compact", "base": 13200},
+  {"id": "kite_wagon", "name": "Kite wagon", "class": "compact", "base": 15500},
+  {"id": "harrow_suv", "name": "Harrow SUV", "class": "suv", "base": 23500},
+  {"id": "trail_suv", "name": "Trailhead SUV", "class": "suv", "base": 28000},
+  {"id": "duke_coupe", "name": "Duke coupe", "class": "premium", "base": 30500},
+  {"id": "borough_lux", "name": "Borough Luxe", "class": "premium", "base": 33000}
+ ],
+ "value": {"ext": 0.25, "mech": 0.2, "floor": 0.55, "km_start": 40000, "km_span": 400000, "km_min": 0.7, "km_max": 1.0},
+ "defects": {
+  "flood": {"name": "Flood damage", "hit": 0.3, "repair": 0.18, "fix": 0.6, "days": 3, "weight": 2},
+  "engine": {"name": "Engine wear", "hit": 0.22, "repair": 0.15, "fix": 1.0, "days": 3, "weight": 3},
+  "accident": {"name": "Accident history", "hit": 0.18, "repair": 0.1, "fix": 0.7, "days": 3, "weight": 3},
+  "odometer": {"name": "Odometer rollback", "hit": 0.15, "repair": 0.0, "fix": 0.0, "days": 0, "weight": 2},
+  "electrical": {"name": "Electrical fault", "hit": 0.08, "repair": 0.05, "fix": 1.0, "days": 2, "weight": 2}
+ },
+ "recon": {
+  "detail": {"cost": 180, "cost_base": 0.02, "gain": 0.25, "days": 1},
+  "service": {"cost": 300, "cost_base": 0.03, "gain": 0.3, "days": 2},
+  "mechanic_days_saved": 1, "mechanic_cost_cut": 0.2
+ },
+ "market": {"index_min": 0.92, "index_max": 1.08, "index_step": 0.02},
+ "sale": {"base": 0.12, "k": 6.5, "max": 0.6, "min": 0.01, "ratio_min": 0.8, "ratio_max": 1.3, "claim_chance": 0.6, "claim_days": 7, "wholesale": 0.8},
+ "airport": {
+  "pax_base": 6200,
+  "season": [0.85, 0.8, 0.9, 1.0, 1.05, 1.15, 1.3, 1.3, 1.05, 1.0, 1.0, 1.2],
+  "weekday": [1.1, 0.95, 0.95, 1.0, 1.0, 1.1, 1.1],
+  "business_share": 0.45
+ },
+ "rental": {
+  "request_rate": 0.0013, "capture": 0.5,
+  "class_weight": {"economy": 0.38, "compact": 0.3, "suv": 0.22, "premium": 0.1},
+  "duration": [[1, 0.2], [2, 0.22], [3, 0.2], [4, 0.12], [5, 0.08], [7, 0.12], [10, 0.06]],
+  "elasticity": 1.5, "price_mult_min": 0.7, "price_mult_max": 1.4,
+  "clean_cost": 14, "damage_chance": 0.05, "damage_cost": [150, 900], "damage_days": 1,
+  "accident_chance": 0.008, "accident_ratio": [0.12, 0.3], "accident_days": 7,
+  "tow_cost": 180, "voucher": 120, "fleet_max": 30,
+  "overdue_failure": 0.06, "service_days": [21, 30, 45], "service_labor": 60,
+  "review_prior_score": 4.0, "review_prior_n": 12, "review_base": 4.6, "review_noise": 0.5,
+  "breakdown_review": 1.5,
+  "breakdown_weight": 3,
+  "damage_review": 3.4, "rating_slope": 0.55, "rating_min": 0.45, "rating_max": 1.25,
+  "insurance": {
+   "none": {"premium": 0, "deductible": 0, "cover": 0.0, "name": "No cover"},
+   "basic": {"premium": 36, "deductible": 1500, "cover": 0.8, "name": "Basic cover"},
+   "full": {"premium": 74, "deductible": 300, "cover": 1.0, "name": "Full cover"}
+  },
+  "classes": {
+   "economy": {"name": "Economy", "price": 11000, "rate": 35, "weekly": 210, "life_days": 1460, "resale": 0.5, "service": 90},
+   "compact": {"name": "Compact", "price": 16000, "rate": 48, "weekly": 290, "life_days": 1460, "resale": 0.5, "service": 110},
+   "suv": {"name": "SUV", "price": 26000, "rate": 68, "weekly": 410, "life_days": 1460, "resale": 0.5, "service": 140},
+   "premium": {"name": "Premium", "price": 38000, "rate": 90, "weekly": 540, "life_days": 1460, "resale": 0.5, "service": 180}
+  }
+ },
+ "dealership": {
+  "deposit": 30000, "min_stock": 3, "min_order": 2, "shortfall_fee": 1500, "terminate_after": 2, "deposit_forfeit": 0.5,
+  "delivery_days": 3, "walkins": 0.55, "buy_base": 0.42, "buy_discount_gain": 4.0, "discount_max": 0.06,
+  "floorplan_month": 0.008, "service_rate": 0.012, "service_ticket": [160, 300], "service_cost": 0.45, "bay_base": 2, "bay_mechanic": 2,
+  "brands": {
+   "meridian": {"name": "Meridian Motors", "ev": false, "margin": 0.055, "demand": 1.0, "models": [
+     {"id": "mer_city", "name": "Meridian City", "msrp": 18000, "weight": 0.5},
+     {"id": "mer_family", "name": "Meridian Family", "msrp": 26000, "weight": 0.35},
+     {"id": "mer_trail", "name": "Meridian Trail SUV", "msrp": 31000, "weight": 0.15}]},
+   "volt": {"name": "Volt Electric", "ev": true, "margin": 0.065, "demand": 0.8, "models": [
+     {"id": "volt_hatch", "name": "Volt Hatch EV", "msrp": 29000, "weight": 0.6},
+     {"id": "volt_cross", "name": "Volt Crossover EV", "msrp": 38000, "weight": 0.4}]}
+  }
+ },
+ "crisis": {
+  "flood_repair_days": 3, "flood_claim_chance": 0.85, "flood_fine": 2000,
+  "fuel_demand": 0.78, "fuel_days": 21, "fuel_cut_demand": 0.93, "fuel_cut_rate": 0.92, "fuel_cut_days": 14,
+  "claim_amount": 3200, "claim_legal": 350, "claim_win": 0.55, "claim_settle": 0.5,
+  "recall_share": 0.3, "recall_max": 6, "recall_days": 3, "recall_labor": 120, "recall_fault": 0.04, "recall_risk_days": 20
+ },
+ "hooks": {"hotel_guest_rentals": 0.35, "ev_charger_demand": 0.15, "ev_station_ref": 4, "ev_boost_base": 0.01, "ev_boost_per_sale": 0.002, "ev_boost_cap": 0.05}
+}
