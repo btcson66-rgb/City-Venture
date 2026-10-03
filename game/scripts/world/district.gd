@@ -176,7 +176,8 @@ func _add_building(sprite: String, x: float, bid: String, bd: Dictionary) -> voi
 			sign_labels[bid] = lb
 	# door → interior
 	if bid != "":
-		var door: Array = meta.get("door", [w / 2 - 10, h - 34, 20, 30])
+		var door_meta = meta.get("door")   # scenery sprites used as fallbacks have "door": null
+		var door: Array = door_meta if door_meta is Array else [w / 2 - 10, h - 34, 20, 30]
 		var dx := x + float(door[0]) + float(door[2]) / 2.0
 		spawns["door_" + bid] = Vector2(dx, BASE_Y + 22)
 		if not BuildingInfo.building_enterable(bid):

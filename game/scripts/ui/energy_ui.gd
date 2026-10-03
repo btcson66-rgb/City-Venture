@@ -99,7 +99,7 @@ func leads(content: Control) -> void:
 	for lead in list:
 		var spec: Dictionary = Energy.cfg()["roof_kinds"][lead["kind"]]
 		var days := "" if lead["kind"] == "own" else I18n.t(" · %d days left") % maxi(0, ceili((int(lead["expires"]) - Clock.now()) / float(Clock.DAY)))
-		note(content, I18n.t("%s · %s · %s · faces %s · %d×%d cells · load limit %d kg · uses %s kWh/year%s") % [I18n.t(lead["client"]), I18n.t(spec["label"]), I18n.t(DataDB.districts[lead["district"]]["name"]), lead["roof"]["orientation"], int(lead["roof"]["w"]), int(lead["roof"]["h"]), int(lead["roof"]["load_kg"]), "-" if lead["kind"] == "own" else Fmt.money0(lead["kwh_year"]).substr(1), days])
+		note(content, I18n.t("%s · %s · %s · faces %s · %d×%d cells · load limit %d kg · uses %s kWh/year%s") % [I18n.t(lead["client"]), I18n.t(spec["label"]), I18n.t(DataDB.districts[lead["district"]]["name"]), _facing(lead["roof"]["orientation"]), int(lead["roof"]["w"]), int(lead["roof"]["h"]), int(lead["roof"]["load_kg"]), "-" if lead["kind"] == "own" else Fmt.money0(lead["kwh_year"]).substr(1), days])
 		button(content, I18n.t("Survey this roof"), "Survey_" + lead["id"], pick.bind(lead["id"]), true)
 	if not Energy.S()["arrays"].is_empty():
 		for arr in Energy.S()["arrays"].values():
@@ -114,7 +114,7 @@ func survey(content: Control) -> void:
 		return
 	var roof: Dictionary = lead["roof"]
 	content.add_child(UIK.label_tip(I18n.t("Roof Survey: %s") % I18n.t(lead["client"]), "energy_roof", 9))
-	note(content, I18n.t("Roof faces %s (%d%% of south-facing yield) · load limit %d kg = %d panels max · each cell shows the sun it keeps after building and tree shade.") % [roof["orientation"], roundi(float(Energy.cfg()["orientation_factor"][roof["orientation"]]) * 100), int(roof["load_kg"]), Energy.max_panels(roof)], Art.C_SKY)
+	note(content, I18n.t("Roof faces %s (%d%% of south-facing yield) · load limit %d kg = %d panels max · each cell shows the sun it keeps after building and tree shade.") % [_facing(roof["orientation"]), roundi(float(Energy.cfg()["orientation_factor"][roof["orientation"]]) * 100), int(roof["load_kg"]), Energy.max_panels(roof)], Art.C_SKY)
 	var grid := GridContainer.new()
 	grid.columns = int(roof["w"])
 	content.add_child(grid)
@@ -167,7 +167,9 @@ func installs(content: Control) -> void:
 		var status_text := I18n.t("Ready to order materials") if inst["status"] == "contracted" else I18n.t("Installing") if inst["status"] == "installing" else I18n.t("Delivered")
 		if inst["subsidy"] == "pending": status_text = I18n.t("Waiting for subsidy decision")
 		var line := I18n.t("%s · %.1f kW · %s · crew-days %.1f of %.1f") % [I18n.t(inst["client"]), float(inst["kw"]), status_text, float(inst["done"]), float(inst["work"])]
-		if not job.is_empty(): line += I18n.t(" · due in %d days") % ceili((int(job["due"]) - Clock.now()) / float(Clock.DAY))
+		if not job.is_empty() and inst["status"] != "delivered":
+			var left := ceili((int(job["due"]) - Clock.now()) / float(Clock.DAY))
+			line += I18n.t(" · due in %d days") % left if left >= 0 else I18n.t(" · %d days late") % -left
 		note(content, line)
 		if inst["status"] == "contracted":
 			button(content, I18n.t("Order materials and start · %s") % Fmt.money0(inst["materials"]), "StartInstall_" + inst["id"], Energy.start_install.bind(inst["id"]), inst["subsidy"] != "pending")
@@ -285,3 +287,9 @@ func spot_row(content: Control, spot: Dictionary) -> void:
 		button(build_row, I18n.t("Build %s · %s") % [I18n.t(t["name"]), Fmt.money0(cost)], "Build_%s_%s" % [id, type], Energy.build_station.bind(id, type, false, false), type == "l2")
 		if can_grant: button(build_row, I18n.t("with grant request"), "BuildGrant_%s_%s" % [id, type], Energy.build_station.bind(id, type, true, false))
 		button(build_row, I18n.t("with bank loan"), "BuildLoan_%s_%s" % [id, type], Energy.build_station.bind(id, type, false, true))
+
+
+## Compass points read in the player's language ("SW" → "southwest").
+static func _facing(code: String) -> String:
+	var names := {"N": "north", "NE": "northeast", "E": "east", "SE": "southeast", "S": "south", "SW": "southwest", "W": "west", "NW": "northwest"}
+	return I18n.t(names.get(code, code))
