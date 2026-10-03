@@ -459,7 +459,9 @@ func popups() -> void:
 				m.close()
 		elif m is PoachModal:
 			await bot.shot("competing_job_offer")
-			await bot.click_named("RetainEmployee", 3.0)
+			var retain := retention_affordable(m.employee)
+			bot.log_line("  retention budget %s" % ("retain" if retain else "release"))
+			await bot.click_named("RetainEmployee" if retain else "ReleaseEmployee", 3.0)
 			await bot.wait(0.4)
 		elif m is MonthCloseModal:
 			await bot.wait(1.5)
@@ -475,6 +477,22 @@ func popups() -> void:
 		else:
 			return
 	bot.fail("queued popup drain exceeded 64 real decisions/reports")
+
+
+## QA founder policy: retain only when current trading supports payroll, rather than compounding every bid.
+static func retention_affordable(employee: String) -> bool:
+	var offer: Dictionary = Rivals.S().get("offers", {}).get(employee, {})
+	var person: Dictionary = Staff.S()["people"].get(employee, {})
+	var company := GameState.company_id()
+	if offer.is_empty() or person.is_empty() or company == "" or offer.get("company", "") != company:
+		return false
+	if offer.get("status", "") != "pending" or Clock.now() >= int(offer.get("expires", 0)):
+		return false
+	if GameState.data["entities"][company].has("closed"): return false
+	var wage := float(offer.get("salary", 0))
+	var range: Array = Staff.role_def(str(person["role"])).get("salary_week", [0, 0])
+	return wage > 0 and wage <= float(range[1]) * 1.25 and Ledger.cash(company) >= wage * 4 \
+		and float(MonthClose.current(company)["business_profit"]) > 0
 
 
 func _pick_choice(inst: Dictionary) -> String:
