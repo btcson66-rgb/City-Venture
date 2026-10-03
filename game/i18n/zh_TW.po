@@ -74,6 +74,10 @@ msgstr " ltd"
 msgid " today"
 msgstr " 今日"
 
+#: scripts/ui/energy_ui.gd:172
+msgid " · %d days late"
+msgstr " · 逾期 %d 天"
+
 #: scripts/ui/energy_ui.gd:101
 msgid " · %d days left"
 msgstr " · 剩 %d 天"
@@ -86,7 +90,7 @@ msgstr " · 預付 %d%%"
 msgid " · Net"
 msgstr " · 票期"
 
-#: scripts/ui/energy_ui.gd:170
+#: scripts/ui/energy_ui.gd:172
 msgid " · due in %d days"
 msgstr " · %d 天後到期"
 
@@ -330,7 +334,7 @@ msgstr "%d 位客人排不到就走了。"
 msgid "%d × %s from %s: %s"
 msgstr "%d 件 %s，來自 %s：%s"
 
-#: scripts/ui/energy_ui.gd:278
+#: scripts/ui/energy_ui.gd:280
 msgid "%d%% revenue share"
 msgstr "營收分成 %d%%"
 
@@ -602,7 +606,7 @@ msgstr "%s · 每位 %s · 服務分 +%.2f"
 msgid "%s · %s · %d hours · %s"
 msgstr "%s · %s · %d 小時 · %s"
 
-#: scripts/ui/energy_ui.gd:259
+#: scripts/ui/energy_ui.gd:261
 msgid "%s · %s · %s · %d ports · price %s/kWh · demand about %d kWh/day · margin %s/kWh · %d kWh sold, %s revenue"
 msgstr "%s · %s · %s · %d 個車位 · 售價 %s/kWh · 預估需求每日約 %d kWh · 每度毛利 %s · 已售 %d kWh，營收 %s"
 
@@ -662,7 +666,7 @@ msgstr "%s · 信譽 %d%% · 現金 %s · 天氣 %s · 施工能量 每日 %.1f 
 msgid "%s · sold %d · service visits %d · in stock %d · on order %d · discount %d%%"
 msgstr "%s · 已售 %d · 保養進廠 %d · 庫存 %d · 在途 %d · 折扣 %d%%"
 
-#: scripts/ui/energy_ui.gd:278
+#: scripts/ui/energy_ui.gd:280
 msgid "%s · terms agreed: %s"
 msgstr "%s · 已談妥條件：%s"
 
@@ -718,7 +722,7 @@ msgstr "%s：收到了，謝謝！已收到 %s 的發票。"
 msgid "%s: We had to cancel the project. We won't be paying for it."
 msgstr "%s：我們只好取消這個案子，不會付款。"
 
-#: scripts/ui/energy_ui.gd:221
+#: scripts/ui/energy_ui.gd:223
 msgid "%s: grant %s, %s"
 msgstr "%s：補助 %s，%s"
 
@@ -1762,7 +1766,7 @@ msgstr "%s 的應徵者："
 msgid "Application filed. The licence should be through %s."
 msgstr "申請已送出。執照預計 %s 核發。"
 
-#: scripts/ui/energy_ui.gd:212
+#: scripts/ui/energy_ui.gd:214
 msgid "Applications are open this year."
 msgstr "今年補助仍在受理。"
 
@@ -1786,7 +1790,7 @@ msgstr "到市政廳 → 許可辦理（%s）"
 msgid "Apply at the permits kiosk in City Hall. The money lands in the company account."
 msgstr "到市政廳的許可服務站申請。錢會匯進公司帳戶。"
 
-#: scripts/ui/energy_ui.gd:218
+#: scripts/ui/energy_ui.gd:220
 msgid "Apply for %s · fee %s"
 msgstr "為 %s 申請補助 · 手續費 %s"
 
@@ -2662,7 +2666,7 @@ msgstr "預算維持不變。"
 msgid "Budget, rooms, neighborhood and urgency determine client fit. Negotiation changes commission and acceptance."
 msgstr "預算、房數、區域與急迫度決定需求配對，議價策略則影響佣金與成交率。"
 
-#: scripts/ui/energy_ui.gd:285
+#: scripts/ui/energy_ui.gd:287
 msgid "Build %s · %s"
 msgstr "建置 %s · %s"
 
@@ -2702,15 +2706,15 @@ msgstr "選擇標語、視覺與語氣卡，組合客戶提案。"
 msgid "Build this"
 msgstr "做這個"
 
-#: scripts/ui/energy_ui.gd:286
+#: scripts/ui/energy_ui.gd:288
 msgid "BuildGrant_%s_%s"
 msgstr "BuildGrant_%s_%s"
 
-#: scripts/ui/energy_ui.gd:287
+#: scripts/ui/energy_ui.gd:289
 msgid "BuildLoan_%s_%s"
 msgstr "BuildLoan_%s_%s"
 
-#: scripts/ui/energy_ui.gd:285
+#: scripts/ui/energy_ui.gd:287
 msgid "Build_%s_%s"
 msgstr "Build_%s_%s"
 
@@ -3410,7 +3414,7 @@ msgstr "中央車站"
 msgid "Certain cost, no fine."
 msgstr "成本確定，沒有罰款。"
 
-#: scripts/ui/energy_ui.gd:190
+#: scripts/ui/energy_ui.gd:192
 msgid "CertifyStorage"
 msgstr "CertifyStorage"
 
@@ -3478,7 +3482,7 @@ msgstr "充電站遭破壞"
 msgid "Charger vandalism repair"
 msgstr "充電站破壞修復"
 
-#: data/help/glossary.json data/milestones.json scripts/ui/energy_ui.gd:228 scripts/ui/energy_ui.gd:63
+#: data/help/glossary.json data/milestones.json scripts/ui/energy_ui.gd:230 scripts/ui/energy_ui.gd:63
 msgid "Charging network"
 msgstr "充電網路"
 
@@ -3502,7 +3506,7 @@ msgstr "充電站啟用：%s。"
 msgid "Charging station: %s"
 msgstr "充電站：%s"
 
-#: scripts/ui/energy_ui.gd:234
+#: scripts/ui/energy_ui.gd:236
 msgid "ChargingNextInstalls"
 msgstr "ChargingNextInstalls"
 
@@ -3846,7 +3850,7 @@ msgstr "城市"
 msgid "City Curb Office"
 msgstr "City Curb Office"
 
-#: scripts/ui/energy_ui.gd:230
+#: scripts/ui/energy_ui.gd:232
 msgid "City EV adoption %s (+%s a year) · %d of %d stations open · grid electricity %s/kWh"
 msgstr "全市電動車普及率 %s（每年 +%s）· 營運中 %d／%d 站 · 電網電價 %s/kWh"
 
@@ -3866,7 +3870,7 @@ msgstr "城市指南：找到下一站"
 msgid "City Hall"
 msgstr "市政廳"
 
-#: scripts/ui/energy_ui.gd:209
+#: scripts/ui/energy_ui.gd:211
 msgid "City Hall energy subsidy desk (Ms. Okoro)"
 msgstr "市府能源補助窗口（Ms. Okoro）"
 
@@ -4286,7 +4290,7 @@ msgstr "請先完成上一個成長階段。"
 msgid "Complete two campaigns and hire a designer and media buyer before buying Campus Radio."
 msgstr "完成兩場活動，聘用設計師與媒體採購員後，再收購 校園電台。"
 
-#: scripts/sim/energy.gd:50 scripts/ui/energy_ui.gd:189 scripts/ui/energy_ui.gd:233
+#: scripts/sim/energy.gd:50 scripts/ui/energy_ui.gd:191 scripts/ui/energy_ui.gd:235
 msgid "Complete two solar installs before the battery course."
 msgstr "請先完成兩件太陽能安裝，再上電池課程。"
 
@@ -5298,7 +5302,7 @@ msgstr "資遣員工"
 msgid "Dispute lost on %s: −%s"
 msgstr "申訴敗訴 %s：−%s"
 
-#: scripts/ui/energy_ui.gd:182
+#: scripts/ui/energy_ui.gd:184
 msgid "Dispute the claim"
 msgstr "拒絕理賠"
 
@@ -7368,7 +7372,7 @@ msgstr "Helio Supply 材料：%s"
 
 #: data/buildings/helio_warehouse.json
 msgid "Helio Warehouse Office"
-msgstr "Helio Warehouse Office"
+msgstr "Helio 倉庫辦公室"
 
 #: scripts/sim/energy.gd:53
 msgid "Helio battery installer certification"
@@ -8002,11 +8006,11 @@ msgstr "先安裝自動化設備，再建立自有品牌。"
 msgid "Install deposit refunded: %s"
 msgstr "退還安裝訂金：%s"
 
-#: scripts/ui/energy_ui.gd:213
+#: scripts/ui/energy_ui.gd:215
 msgid "Install grant quota remains."
 msgstr "安裝補助額度仍有剩餘。"
 
-#: scripts/ui/energy_ui.gd:214
+#: scripts/ui/energy_ui.gd:216
 msgid "Install grants: %d%% of the quote up to %s per system. Quota left %s of %s. Charger grants: %d%% up to %s, quota left %s. Filing fee %s, decision in about %d days; some applications are rejected."
 msgstr "安裝補助：報價的 %d%%，每套最高 %s。剩餘額度 %s／%s。充電站補助：%d%%，最高 %s，剩餘額度 %s。申請費 %s，約 %d 天出結果，部分申請會被退件。"
 
@@ -8038,7 +8042,7 @@ msgstr "施工中"
 msgid "Installs"
 msgstr "安裝案"
 
-#: scripts/ui/energy_ui.gd:234 scripts/ui/energy_ui.gd:63
+#: scripts/ui/energy_ui.gd:236 scripts/ui/energy_ui.gd:63
 msgid "Installs & warranty"
 msgstr "安裝與保固"
 
@@ -8186,7 +8190,7 @@ msgstr "投資人只能入股已登記的公司。"
 msgid "Investors own %s of it, so your share is %s."
 msgstr "投資人持有 %s，所以你的份是 %s。"
 
-#: scripts/ui/energy_ui.gd:175
+#: scripts/ui/energy_ui.gd:177
 msgid "Invoice %s · %s · warranty to %s"
 msgstr "發票 %s · %s · 保固至 %s"
 
@@ -10170,6 +10174,10 @@ msgstr "我的車場與上架"
 msgid "NAME"
 msgstr "名字"
 
+#: scripts/ui/energy_ui.gd:294
+msgid "NE"
+msgstr "東北"
+
 #: scripts/ui/modals/company_os.gd:889
 msgid "NEGOTIATION"
 msgstr "議價"
@@ -10185,6 +10193,10 @@ msgstr "NEXUS 銀行"
 #: data/../assets/buildings/buildings_meta.json data/buildings/nexus_cowork.json
 msgid "NEXUS CO-WORK"
 msgstr "NEXUS 共享辦公室"
+
+#: scripts/ui/energy_ui.gd:294
+msgid "NW"
+msgstr "西北"
 
 #: scripts/ui/minigames/clerk_forms_game.gd:8
 msgid "Nadia Haddad"
@@ -10238,11 +10250,11 @@ msgstr "需要注意"
 msgid "Negotiate a rate lock"
 msgstr "協商鎖定費率"
 
-#: scripts/ui/energy_ui.gd:275
+#: scripts/ui/energy_ui.gd:277
 msgid "Negotiate fixed fee"
 msgstr "談固定月費"
 
-#: scripts/ui/energy_ui.gd:276
+#: scripts/ui/energy_ui.gd:278
 msgid "Negotiate revenue share"
 msgstr "談營收分成"
 
@@ -11594,7 +11606,7 @@ msgstr "點杯咖啡（$4.50）"
 msgid "Order from Lumina Direct: factory prices, but you pay before it ships"
 msgstr "跟 Lumina Direct 下單：工廠價，但要先付款才出貨"
 
-#: scripts/ui/energy_ui.gd:173
+#: scripts/ui/energy_ui.gd:175
 msgid "Order materials and start · %s"
 msgstr "訂購材料並開工 · %s"
 
@@ -12370,7 +12382,7 @@ msgstr "選電商"
 msgid "Pick a box to start"
 msgstr "先選一個箱子"
 
-#: scripts/ui/energy_ui.gd:249
+#: scripts/ui/energy_ui.gd:251
 msgid "Pick a district on the map. Free spots are limited; landlords want a fee or a share, your own property needs none."
 msgstr "在地圖上選街區。空位有限；地主要收月費或分成，用自己的不動產則不用。"
 
@@ -12630,7 +12642,7 @@ msgstr "售價"
 msgid "Price %s without subsidy · materials %s · margin %d%% · %.1f crew-days (about %d days)%s"
 msgstr "未補助價格 %s · 材料 %s · 毛利率 %d%% · %.1f 個工作天（約 %d 天）%s"
 
-#: scripts/ui/energy_ui.gd:265
+#: scripts/ui/energy_ui.gd:267
 msgid "Price +%s"
 msgstr "售價 +%s"
 
@@ -12658,7 +12670,7 @@ msgstr "已漲價。"
 msgid "Price too high and the bays empty; too low and each kWh loses money."
 msgstr "價格太高車位會空，太低則每度電都在虧。"
 
-#: scripts/ui/energy_ui.gd:264
+#: scripts/ui/energy_ui.gd:266
 msgid "Price −%s"
 msgstr "售價 −%s"
 
@@ -13270,7 +13282,7 @@ msgstr "招募%s"
 msgid "Recruit a realty agent"
 msgstr "招募房仲人員"
 
-#: scripts/ui/energy_ui.gd:184
+#: scripts/ui/energy_ui.gd:186
 msgid "Recruit electrician · %s a week"
 msgstr "招募電工 · 週薪 %s"
 
@@ -13286,7 +13298,7 @@ msgstr "招募房務員 · 每週 %s"
 msgid "RecruitRealtyAgent"
 msgstr "RecruitRealtyAgent"
 
-#: scripts/ui/energy_ui.gd:184
+#: scripts/ui/energy_ui.gd:186
 msgid "Recruit_electrician"
 msgstr "Recruit_electrician"
 
@@ -13690,7 +13702,7 @@ msgstr "租辦公室"
 msgid "Repair and add cameras"
 msgstr "修復並加裝監視器"
 
-#: scripts/ui/energy_ui.gd:266
+#: scripts/ui/energy_ui.gd:268
 msgid "Repair and service · %s"
 msgstr "修復與保養 · %s"
 
@@ -13706,7 +13718,7 @@ msgstr "保險爭議後支付維修費"
 msgid "Repair the damage now"
 msgstr "立刻修復損壞"
 
-#: scripts/ui/energy_ui.gd:181
+#: scripts/ui/energy_ui.gd:183
 msgid "Repair under warranty · %s"
 msgstr "依保固修復 · %s"
 
@@ -14126,7 +14138,7 @@ msgstr "屋頂勘查：%s"
 msgid "Roof faces %s (%d%% of south-facing yield) · load limit %d kg = %d panels max · each cell shows the sun it keeps after building and tree shade."
 msgstr "屋頂朝向 %s（約南向發電量的 %d%%）· 承重上限 %d kg = 最多 %d 片面板 · 每格顯示扣除建築與樹木遮蔭後保留的日照。"
 
-#: scripts/ui/energy_ui.gd:113 scripts/ui/energy_ui.gd:224 scripts/ui/energy_ui.gd:63 scripts/ui/energy_ui.gd:96
+#: scripts/ui/energy_ui.gd:113 scripts/ui/energy_ui.gd:226 scripts/ui/energy_ui.gd:63 scripts/ui/energy_ui.gd:96
 msgid "Roof leads"
 msgstr "屋頂客戶"
 
@@ -14330,6 +14342,10 @@ msgstr "急件"
 msgid "Rush-order {moq} more (1-day, +20% cost)"
 msgstr "急單再訂 {moq} 件（1 天到貨，成本 +20%）"
 
+#: scripts/ui/energy_ui.gd:294
+msgid "SE"
+msgstr "東南"
+
 #: scripts/ui/modals/company_os.gd:1199
 msgid "SERVERS"
 msgstr "伺服器"
@@ -14389,6 +14405,10 @@ msgstr "材料"
 #: data/economy/automotive.json
 msgid "SUV"
 msgstr "休旅車"
+
+#: scripts/ui/energy_ui.gd:294
+msgid "SW"
+msgstr "西南"
 
 #: data/regions/northridge.json scripts/sim/saas.gd:201
 msgid "SaaS"
@@ -15870,7 +15890,7 @@ msgstr "申請補助：是"
 msgid "Subsidy rush filing"
 msgstr "補助急件申請"
 
-#: scripts/ui/energy_ui.gd:224
+#: scripts/ui/energy_ui.gd:226
 msgid "SubsidyNextLeads"
 msgstr "SubsidyNextLeads"
 
@@ -16090,11 +16110,11 @@ msgstr "頂下 12 房的 Aster 小旅館：定價、選通路，並維持房間�
 msgid "Take over the Aster Inn · %s"
 msgstr "頂下 Aster 小旅館 · %s"
 
-#: scripts/ui/energy_ui.gd:232
+#: scripts/ui/energy_ui.gd:234
 msgid "Take the battery course first."
 msgstr "請先上電池課程。"
 
-#: scripts/ui/energy_ui.gd:190
+#: scripts/ui/energy_ui.gd:192
 msgid "Take the battery course · %s"
 msgstr "上電池課程 · %s"
 
@@ -17674,7 +17694,7 @@ msgstr "用 OTA 補空房，不要拿來賣你本來就能直接賣出的夜晚�
 msgid "Use the tabs on the left. Every laptop and work desk opens the same system: home, co-work hot desk, café table, office."
 msgstr "用左邊的分頁切換。每台筆電和工作座位打開的都是同一套系統：家裡、共享座位、咖啡店、辦公室。"
 
-#: scripts/ui/energy_ui.gd:271
+#: scripts/ui/energy_ui.gd:273
 msgid "Use your own property"
 msgstr "使用自己的不動產"
 
@@ -18074,7 +18094,7 @@ msgstr "溫暖居家"
 msgid "Warranty"
 msgstr "保固"
 
-#: scripts/ui/energy_ui.gd:178
+#: scripts/ui/energy_ui.gd:180
 msgid "Warranty claim from %s: %s, repair cost %s, decide within %d days"
 msgstr "%s 的保固理賠：%s，修復成本 %s，請在 %d 天內處理"
 
@@ -18086,7 +18106,7 @@ msgstr "中古車保固求償"
 msgid "Warranty dispute lost: %s"
 msgstr "保固爭議敗訴：%s"
 
-#: scripts/ui/energy_ui.gd:183
+#: scripts/ui/energy_ui.gd:185
 msgid "Warranty exposure: about %s a year in expected repairs on installed systems."
 msgstr "保固風險：已安裝系統預期每年修復費用約 %s。"
 
@@ -19054,7 +19074,7 @@ msgstr "故障：該房型停售"
 msgid "brokerage"
 msgstr "仲介"
 
-#: scripts/ui/energy_ui.gd:258
+#: scripts/ui/energy_ui.gd:260
 msgid "building until %s"
 msgstr "施工至 %s"
 
@@ -19198,7 +19218,7 @@ msgstr "費用"
 msgid "fit out the unit"
 msgstr "先把店面裝修好"
 
-#: scripts/ui/energy_ui.gd:278
+#: scripts/ui/energy_ui.gd:280
 msgid "fixed fee %s/month"
 msgstr "固定月費 %s"
 
@@ -19322,7 +19342,7 @@ msgstr "人力"
 msgid "landlord"
 msgstr "房東"
 
-#: scripts/ui/energy_ui.gd:270
+#: scripts/ui/energy_ui.gd:272
 msgid "landlord wants %s/month or %d%% of revenue"
 msgstr "地主要求每月 %s 或營收的 %d%%"
 
@@ -19530,7 +19550,7 @@ msgstr "已上架 ✓"
 msgid "out of 5"
 msgstr "滿分 5"
 
-#: scripts/ui/energy_ui.gd:258
+#: scripts/ui/energy_ui.gd:260
 msgid "out of service"
 msgstr "停止服務"
 
@@ -19538,7 +19558,7 @@ msgstr "停止服務"
 msgid "own brand"
 msgstr "自有品牌"
 
-#: scripts/ui/energy_ui.gd:278
+#: scripts/ui/energy_ui.gd:280
 msgid "own property"
 msgstr "自有不動產"
 
@@ -19806,11 +19826,11 @@ msgstr "倉庫"
 msgid "waste"
 msgstr "損耗"
 
-#: scripts/ui/energy_ui.gd:287
+#: scripts/ui/energy_ui.gd:289
 msgid "with bank loan"
 msgstr "銀行貸款"
 
-#: scripts/ui/energy_ui.gd:286
+#: scripts/ui/energy_ui.gd:288
 msgid "with grant request"
 msgstr "並申請補助"
 
@@ -19830,7 +19850,7 @@ msgstr "你已經有這台貨車了"
 msgid "you need a van (Dockside Motors, Harbor)"
 msgstr "你需要一台貨車（港區的 Dockside Motors）"
 
-#: scripts/ui/energy_ui.gd:270
+#: scripts/ui/energy_ui.gd:272
 msgid "your own property, no landlord fee"
 msgstr "你自己的不動產，不用付地主費用"
 
@@ -20086,7 +20106,7 @@ msgstr "✗ %s 從輸送帶掉下去了"
 msgid "✗ %s gave up waiting"
 msgstr "✗ %s 等不下去走了"
 
-#: scripts/ui/energy_ui.gd:215
+#: scripts/ui/energy_ui.gd:217
 msgid "✗ A policy cut is reducing grants; the rate recovers over time."
 msgstr "✗ 政策調降正在壓低補助，比例會逐步恢復。"
 
@@ -20114,7 +20134,7 @@ msgstr "✗ 請備妥下一期工程款。"
 msgid "✗ It doesn't fit. Try a bigger box."
 msgstr "✗ 裝不下，換大一點的箱子。"
 
-#: scripts/ui/energy_ui.gd:176
+#: scripts/ui/energy_ui.gd:178
 msgid "✗ No installs yet. Survey a roof and send a quote."
 msgstr "✗ 還沒有安裝案。先勘查屋頂並送出報價。"
 
