@@ -16,6 +16,9 @@ func _init(b) -> void:
 
 
 func run() -> void:
+	if _arg("resume") == "ch6_close":
+		await _resume_ch6_close()
+		return
 	await _new_game()
 	if _arg("from") == "era_props":
 		await _era_props_fixture()
@@ -103,15 +106,39 @@ func run() -> void:
 	else:
 		await _month()
 		await _chapters_4_to_6()
-		await _shop_research()
-		await _chapters_7_to_9()
-		await _old_town_cafe()
-		await _harbor_logistics()
-		await _fitness_visit()
-		await _chapters_10_to_12()
+		await _remaining_story()
+		return
 	await _summary()
-	if not bot.video_mode:
-		await _industry_fixtures()
+
+
+## Continue only an actual earlier walkthrough save. No outcome flags, funding or RNG are invented.
+func _resume_ch6_close() -> void:
+	bot.step("Resume genuine chapter-six month-close checkpoint")
+	if not SaveSystem.load_data(1):
+		bot.expect(false, "resume checkpoint loads through normal save validation")
+		return
+	var st := StoryEngine.St()
+	var valid := str(st.get("chapter", "")) == "ch6_cash_is_oxygen" and GameState.flag("big_contract_paid")
+	for chapter in ["ch1_arrival", "ch2_first_customer", "ch3_open_for_business", "ch4_growing_pains", "ch5_big_contract"]:
+		valid = valid and chapter in st.get("chapters_done", [])
+	bot.expect(valid, "checkpoint contains genuine chapters 1–5 and paid contract")
+	if not valid: return
+	SceneRouter.restore_location()
+	await wait_world()
+	await popups()
+	await _chapter6_close()
+	await _remaining_story()
+
+
+func _remaining_story() -> void:
+	await _shop_research()
+	await _chapters_7_to_9()
+	await _old_town_cafe()
+	await _harbor_logistics()
+	await _fitness_visit()
+	await _chapters_10_to_12()
+	await _summary()
+	await _industry_fixtures()
 
 
 
@@ -1216,6 +1243,10 @@ func _chapters_4_to_6() -> void:
 	await bot.shot("early_payment")
 	await close_modal()
 	bot.expect(GameState.flag("big_contract_paid"), "Crestline paid early (3% discount)")
+	await _chapter6_close()
+
+
+func _chapter6_close() -> void:
 	await pass_time_at_home(func(): return GameState.flag("ch6_month_in_black") or GameState.data["reports"]["month_closes"].size() >= 2, 20, true)
 	await bot.wait(1.0)
 	await popups()
