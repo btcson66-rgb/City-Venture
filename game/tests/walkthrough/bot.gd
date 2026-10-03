@@ -588,6 +588,14 @@ func talk_through_dialogue(max_lines := 30, choose_first := true) -> void:
 ## a big-contract decision, staff in the office, the loan desk, SaaS after launch, insolvency and the
 ## closing statement, the pause menu with audio settings.
 func _screens() -> void:
+	GameState.new_game({"name":"Studio Screens","seed":32})
+	GameState.data["tutorial"]={"off":true}
+	UIRoot._suppress_decisions=true
+	GameState.data["world"]["year"]=3
+	Housing.request("old_town_studio","penalty")
+	SceneRouter._enter("interior",Living.home_building(),Living.home_bed(),"down")
+	await wait(.8)
+	await shot("screen_studio_1a")
 	await load("res://tests/walkthrough/info_badges_tour.gd").new(self).run()
 	# Keep the balanced supplier prices and units visible in the bilingual screenshot tour.
 	GameState.new_game({"name": "Balance Screens", "seed": 29})

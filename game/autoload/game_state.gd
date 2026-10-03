@@ -40,6 +40,7 @@ func new_game(setup: Dictionary) -> bool:
 	Ledger.post("player", "Opening balance — savings", [
 		{"acct": "cash", "dr": float(living.get("start_cash", 30000))},
 		{"acct": "equity", "cr": float(living.get("start_cash", 30000))}], {"type": "opening"})
+	Housing.opening()
 	timeline(I18n.t("Moved to Aurelia City with $%s in savings.") % Fmt.money0(float(living.get("start_cash", 30000))))
 	return true
 

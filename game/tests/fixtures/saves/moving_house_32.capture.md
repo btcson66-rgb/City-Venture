@@ -1,0 +1,1 @@
+Source: codex/32-moving-house, based on bfcbe9bb, implementation captured before commit. Actual Okafor MoveToday / laptop / packing / HomeNotice / CancelHomeMove inputs. Capture: evidence/2026-10-03_32/short_result.json. Tutorial/time setup controlled, no injected revenue.

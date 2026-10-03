@@ -111,7 +111,7 @@
 |---------|---------|------|--------|----------|----------|------|------|----------|
 | `okafor_lettings` | `okafor_lettings` | Okafor Lettings | ✓ | 164×164 | OKAFOR LETTINGS | 週一到六 09:00–18:00 | `brick_shops` | 老式租屋行：櫥窗貼滿房屋照片（色塊，無字），綠色木門。租轉角咖啡店面的地方 |
 | `corner_cafe_unit` | `corner_cafe_unit` | Corner Café Unit（玩家的咖啡店） | ✓ | 約 164×164 | 租之前「CORNER UNIT · TO LET」；**租下後改顯示玩家取的店名**（程式畫，預設「<公司名> Café」，可在 Company OS 咖啡店分頁改名） | 租之前 08:00–18:00；租下後 24 小時可進（`always_if_lease`） | `shop_row_awning` | 一樓小店面，大窗、遮陽棚、門口兩張小圓桌。招牌板留空。這棟是 Old Town 最重要的畫面 |
-| `old_town_studio` | `old_town_studio` | Studio 1A, Lantern Row | ✓（只能參觀） | 146×189 | LANTERN ROW FLATS | 每天 09:00–19:00 | `riverside_walkup` | 三層老公寓，外露鐵梯，窗戶小，一樓門口有信箱。最便宜、最溫馨的住處。**搬進去是規劃中** |
+| `old_town_studio` | `old_town_studio` | Studio 1A, Lantern Row | ✓（可承租搬入，#32） | 146×189 | LANTERN ROW FLATS | 房客全天可用 | `riverside_walkup` | 三層老公寓，外露鐵梯，窗戶小，一樓門口有信箱。最便宜、最溫馨的住處。**可在 Okafor 租屋行承租搬入** |
 | `rowhouse_brick` | （填充） | 紅磚連棟屋 ×2 | ✗ | 164×180 | （無） | — | `apartment_mid`（西端）、`riverside_walkup`（東端） | 紅磚，白框窗，爬藤 |
 | `arcade_arches` | （填充） | 拱廊 | ✗ | 200×160 | （無） | — | `retail_arcade` | 拱形騎樓下一排小店 |
 | `clock_tower` | （填充） | 鐘樓 | ✗ | 90×320 | （無） | — | `civic_annex` | 老城地標，全區最高。鐘面沒有數字 |
@@ -168,7 +168,7 @@
 ## 立面的品質要求
 
 朋友測試版入口以 building 的 `status`／`enterable` 與街區的 status 決定，不刪除室內。
-`popup_unit`、`old_town_studio`、`harbor_point_fitness`、`customs_house` 為 planned 景觀。
+`popup_unit`、`harbor_point_fitness` 仍為 planned 景觀；`old_town_studio` 已開放租住，`customs_house` 已有通關說明互動。
 可用互動或實際排程 NPC 出現時才顯示公眾入口；Crestline 依 Daniel／Victor 的劇情條件與
 排程自動顯示。未租咖啡店面先由 Okafor 簽約，租下後才顯示入口。旧存檔站在關閉室內時
 讀檔會移到原立面門口；資料啟用後無需修改 UI 清單。城市指南、捷運、地圖只列 active 街區。

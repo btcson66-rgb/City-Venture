@@ -12,11 +12,19 @@ static func cfg() -> Dictionary:
 	return DataDB.living()
 
 
+static func home() -> String:
+	var id:=str(GameState.data["player"].get("home","riverside_studio"))
+	return id if DataDB.properties.get(id,{}).get("kind","")=="home" else "riverside_studio"
+static func home_building() -> String:return str(DataDB.properties[home()]["building"])
+static func home_bed() -> String:return str(DataDB.properties[home()].get("bed","bed_side"))
+static func home_rent() -> float:return snappedf(float(DataDB.properties[home()]["monthly_rent"])*World.rent_mult(),.01)
+
 static func daily_living() -> float:
 	return float(cfg().get("reduced_daily_living", 18)) if D().get("reduced", false) else float(cfg().get("daily_living", 32))
 
 
 static func on_hour(t: int, h: int) -> void:
+	Housing.on_hour()
 	if h == 0:
 		Ledger.expense("player", "living", daily_living(), "Food, transit & bills", {"type": "living"})
 	if h == 9:
@@ -41,10 +49,10 @@ static func _entities() -> Array:
 
 
 static func pay_home_rent() -> void:
-	var rent := snappedf(float(cfg().get("home_rent", 1250)) * World.rent_mult(), 1.0)   # rents rise with the era
+	var rent := home_rent()   # rents rise with the era
 	var before := Ledger.cash("player")
 	var mname: String = Clock.month_name(int(Clock.date()["month"]))
-	Ledger.expense("player", "rent_home", rent, I18n.t("Rent — Riverside Tower 7C (%s)") % mname, {"type": "rent"})
+	Ledger.expense("player", "rent_home", rent, I18n.t("Home rent — %s (%s)") % [I18n.t(DataDB.properties[home()]["name"]),mname], {"type": "rent"})
 	D()["rent_history"].append({"t": Clock.now(), "amount": rent, "late": before < rent})
 	if before < rent:
 		Ledger.expense("player", "late_fees", float(cfg().get("late_rent_fee", 75)), "Late rent fee", {"type": "fee"})
@@ -114,7 +122,7 @@ static func check_solvency() -> void:
 		var c := Ledger.cash(ent)
 		var upcoming := 0.0
 		if ent == "player":
-			upcoming = float(cfg().get("home_rent", 1250)) if int(Clock.date()["day"]) >= int(cfg().get("rent_due_day_of_month", 14)) - 5 and int(Clock.date()["day"]) < int(cfg().get("rent_due_day_of_month", 14)) else 0.0
+			upcoming = home_rent() if int(Clock.date()["day"]) >= int(cfg().get("rent_due_day_of_month", 14)) - 5 and int(Clock.date()["day"]) < int(cfg().get("rent_due_day_of_month", 14)) else 0.0
 		if c < th or c < upcoming:
 			var key: String = "low_cash_" + ent
 			if int(GameState.data["events"]["cooldowns"].get(key, 0)) > Clock.now():

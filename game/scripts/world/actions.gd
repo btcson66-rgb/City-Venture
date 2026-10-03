@@ -16,6 +16,7 @@ static func npc_present(npc_id: String) -> bool:
 ## Short reason shown next to the prompt when an action isn't available right now.
 static func lock_reason(action: String, params: Dictionary) -> String:
 	var req: String = params.get("requires", "")
+	if req.begins_with("home:") and Living.home()!=req.substr(5):return "This belongs to the current tenant. Rent this home at Okafor Lettings first."
 	if req == "desk_access" and not Living.has_desk_access():
 		return "needs a desk pass"
 	if req.begins_with("lease:") and not Living.has_lease(req.substr(6)):
@@ -46,6 +47,9 @@ static func lock_reason(action: String, params: Dictionary) -> String:
 
 static func run(action: String, params: Dictionary, source: Node = null) -> void:
 	var req: String = params.get("requires", "")
+	if req.begins_with("home:") and Living.home()!=req.substr(5):
+		UIRoot.toast("This belongs to the current tenant. Rent this home at Okafor Lettings first.","warn","home")
+		return
 	if req == "desk_access" and not Living.has_desk_access():
 		UIRoot.toast("You need a day pass or a desk plan. Ask at reception.", "warn", "lock")
 		return
@@ -93,7 +97,7 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 		"business_board":
 			UIRoot.open_modal(BusinessBoard.new())
 		"pack_orders":
-			UIRoot.open_modal(PackShipModal.new(str(params.get("location", "riverside_studio"))))
+			UIRoot.open_modal(PackShipModal.new(str(params.get("location", Living.home()))))
 		"dropoff_parcels":
 			if Ecommerce.carried_count() == 0:
 				UIRoot.toast("Nothing to drop off. Pack orders at your packing table and choose 'Carry to PostPoint'.", "info", "parcel")
@@ -115,6 +119,8 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 			UIRoot.open_modal(LoanModal.new(false))
 		"lease_office":
 			UIRoot.open_modal(LeaseModal.new("suite_2b"))
+		"home_letting":
+			UIRoot.open_modal(HomeMoveModal.new())
 		"lease_property":
 			UIRoot.open_modal(LeaseModal.new(str(params.get("property", ""))))
 		"cowork_desk":

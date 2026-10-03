@@ -165,7 +165,7 @@
 | `quay_residence` | The Quay 12F | 3 | 32×17 | wood_dark / white_modern | **`sofa_l`**、**`kitchen_island`**、**`tv_wall`**、**`art_large`**、**`home_office_corner`**、`window_wide_day` | 同上 + 居家辦公角 |
 | `skyline_penthouse` | Skyline Penthouse | 4 | 36×18 | marble / white_modern | **`bar_counter`**、**`piano`**、**`home_gym`**、**`collection_case`**、**`pool_edge`**（牆上的窗外泳池）、`window_wide_night` | 同上 + 收藏櫃 |
 | `hillside_villa` | Hillside Villa | 5 | 40×18 | wood_warm / white_modern | 上面全部 + **`fireplace`**、**`garage_door`**（車庫）、**`library_wall`** | 同上 + 車庫 |
-| `old_town_studio` | Old Town Studio | 0 | 18×12 | wood_dark / brick | `bed`（舊）、`desk`、`chair`、**`hot_plate`**、`box` | 公司倒閉後的「降級住宅」：小、舊，但有窗外的老城夕陽。**現況**：可參觀的 14×11 版本已實作（見下方「Old Town」）；搬進去是規劃中 |
+| `old_town_studio` | Old Town Studio | 0 | 18×12 | wood_dark / brick | `bed`（舊）、`desk`、`chair`、**`hot_plate`**、`box` | 公司倒閉後的「降級住宅」：小、舊，但有窗外的老城夕陽。**現況**：可參觀的 14×11 版本已實作（見下方「Old Town」）；可承租搬入，具備床、筆電與打包桌（#32） |
 | `wardrobe_room` | 更衣室 | 3+ | 14×10 | carpet_navy / white_modern | **`clothing_rack`**、**`mirror_full`**、**`shoe_shelf`**、`wardrobe` | 換衣服（大房子的衣櫃互動升級版） |
 
 ### 辦公階梯（P1–P3）
@@ -217,7 +217,7 @@
 |----|------|-----------|-----------|------|------|-----|
 | `okafor_lettings` | Okafor Lettings | 16×12 | wood_dark / wood_panel | **`listing_board`**（`cork_board`；貼滿房屋照片，無字）、**`old_desk`**（`desk`）、`office_chair`、`chair`、`filing_cabinet`、`waiting_sofa`、`plant`、`framed_art`、`window_day`、`rug_small` | 與 Mr. Okafor 談話 → 租轉角咖啡店面（`lease_cafe`）· 看物件牆（`look`，寫著轉角店面 $1,900/月、Studio 1A $780/月） | Mr. Okafor（週一到六 09–18，坐在桌後） |
 | `corner_cafe_unit` | 轉角咖啡店 | 21×13 | wood_cafe / brick | **`cafe_counter_small`**（`cafe_counter`）、**`pastry_case_small`**（`display_case`）、**`menu_board_blank`**（`menu_board`；程式疊菜單字）、**`cafe_table_round`** ×4（`cafe_table`）、**`cafe_stool`** ×8（`cafe_chair`）、`hanging_light` ×3、`window_day` ×2、`framed_art_b`、`plant_big`、`rug_small` | **站吧台（2 小時）**（`cafe_counter`，咖啡師小遊戲）· **查看收銀台 → Company OS 咖啡店分頁**（`cafe_till`，租下後才能用）· 窗上的招租告示（`look`，租下後消失，`unless_lease`） | 咖啡師員工站在吧台後（2 個位置）；客人依營業時段變化（營業中 1–5 位） |
-| `old_town_studio` | Studio 1A | 14×11 | wood_warm / plaster_warm | **`bed_single`**（`bed`）、**`kitchenette`**（`kitchen`）、**`radiator`**（`plant`）、`window_day`、`rug_small` | 參觀（`look`，寫著 $780/月、暖氣會叮噹響、早上六點有麵包香）。**搬進去是規劃中** | — |
+| `old_town_studio` | Studio 1A | 14×11 | wood_warm / plaster_warm | **`bed_single`**（`bed`）、**`kitchenette`**（`kitchen`）、**`radiator`**（`plant`）、`window_day`、`rug_small` | 參觀（`look`，寫著 $780/月、暖氣會叮噹響、早上六點有麵包香）。**可承租搬入，具備床、筆電與打包桌（#32）** | — |
 
 - `corner_cafe_unit` 的 `interior.property` 是 `corner_cafe`：只有你租下這個單位，店員才會出現在吧台後面，`staff_spots.barista` 決定他們站哪裡。
 - 咖啡店的營運規則（時間、客流、補貨、評分）在 [13](13_core_loop_and_work.md#咖啡店產業old-town)。
@@ -262,3 +262,6 @@
 NPC 排程房與租下的咖啡店面。看得到的房間不能只剩鎖住的操作。
 
 Pier 倉庫：`pallet_rack`、`loading_dock_door`、`forklift_parked`、`packing_bench_large`；貨車行：`sales_desk`、`key_board`。另交 `interiors/floor_harbor_concrete.png`（192×192 / 768×768）平整藍灰水泥材質，建議室內 floor 資料使用 `harbor_concrete`。房間排版、互動和碰撞待 Claude 線接入。
+
+
+#32：Studio 1A 的 14×11 室內保留 `bed_single`、`kitchenette`、`radiator`，加上 `desk_laptop`、`packing_table` 與 200 件容量的實際庫存顯示。床位由 home property 的 `bed_position` 定義。現任房客可睡覺、操作 Company OS 與打包；退租後設備會鎖定，不提供另一間免費住處。租屋行新增租屋／搬家入口，兩種退租方式都會實際入帳。

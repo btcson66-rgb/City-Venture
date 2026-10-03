@@ -577,13 +577,13 @@ func _resolve(ws: WorldScene) -> Dictionary:
 				return _route_to_building(ws, "bloom_coffee", "work_shift")
 			tgt = {"building": str(Careers.job_def(jid)["building"]), "action": "work_shift"}
 			if Careers.shift_block(jid) in ["too late for a shift today", "closed now", "already worked today"]:
-				tgt = {"building": HOME, "action": "sleep"}   # nothing to do there today: go home and sleep
+				tgt = {"building": Living.home_building(), "action": "sleep"}   # nothing to do there today: go home and sleep
 		if tgt.get("os", false):
 			# the nearest Company OS: one in this room, the co-work desk while a pass is valid, or the laptop at home
 			var here := _interactable(ws, "open_company_os")
 			if not here.is_empty():
 				return here
-			tgt = {"building": "nexus_cowork" if Living.has_desk_access() else HOME, "action": "open_company_os"}
+			tgt = {"building": "nexus_cowork" if Living.has_desk_access() else Living.home_building(), "action": "open_company_os"}
 	else:
 		var o := StoryEngine.main_objective()
 		tgt = o.get("target", {})
@@ -619,7 +619,7 @@ func clear_destination() -> void:
 func _workplace() -> String:
 	if GameState.company_id() != "" and Living.has_lease("suite_2b"):
 		return "small_office"
-	return HOME
+	return Living.home_building()
 
 
 func _exit_of(ws: WorldScene) -> Dictionary:

@@ -115,10 +115,11 @@ func _enter(kind: String, id: String, spawn: String, facing: String, pos := Vect
 		scene = it
 	var p: Vector2 = pos
 	if p.x < 0:
-		if spawn == "bed_side":
-			p = Vector2(60, 124)
-		else:
-			p = scene.spawns.get(spawn, scene.spawns.get("door", Vector2(scene.size_px) / 2.0))
+		p = scene.spawns.get(spawn, scene.spawns.get("door", Vector2(scene.size_px) / 2.0))
+		for prop in DataDB.properties.values():
+			if prop.get("kind","")=="home" and prop.get("building","")==id and spawn==str(prop.get("bed","bed_side")):
+				var at: Array=prop.get("bed_position",[60,124])
+				p=Vector2(at[0],at[1])
 	var f := facing
 	if f == "":
 		f = "down" if kind == "district" else "up"
@@ -224,7 +225,7 @@ func metro_travel(to_district: String, minutes: int, fare: float) -> void:
 
 
 func teleport_home_and_sleep() -> void:
-	_fade(func(): _enter("interior", "riverside_apartment", "bed_side", "down"))
+	_fade(func(): _enter("interior", Living.home_building(), Living.home_bed(), "down"))
 
 
 ## Save support ----------------------------------------------------------------
@@ -238,7 +239,7 @@ func capture_location() -> void:
 func restore_location() -> void:
 	var loc := BuildingInfo.safe_location(GameState.data["player"]["location"])
 	UIRoot.close_all()
-	_fade(func(): _enter(str(loc.get("kind", "interior")), str(loc.get("id", "riverside_apartment")), str(loc.get("spawn", "door")), str(loc.get("facing", "down")),
+	_fade(func(): _enter(str(loc.get("kind", "interior")), str(loc.get("id", Living.home_building())), str(loc.get("spawn", "door")), str(loc.get("facing", "down")),
 		Vector2(float(loc.get("x", -1)), float(loc.get("y", -1)))))
 
 

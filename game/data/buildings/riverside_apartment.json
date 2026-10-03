@@ -138,7 +138,8 @@
     "label": "Use laptop — Company OS",
     "action": "open_company_os",
     "params": {
-     "terminal": "home_laptop"
+     "terminal": "home_laptop",
+     "requires": "home:riverside_studio"
     }
    },
    {
@@ -148,7 +149,10 @@
      104
     ],
     "label": "Sleep",
-    "action": "sleep"
+    "action": "sleep",
+    "params": {
+     "requires": "home:riverside_studio"
+    }
    },
    {
     "id": "wardrobe",
@@ -157,7 +161,10 @@
      70
     ],
     "label": "Change outfit",
-    "action": "change_outfit"
+    "action": "change_outfit",
+    "params": {
+     "requires": "home:riverside_studio"
+    }
    },
    {
     "id": "packing",
@@ -168,7 +175,8 @@
     "label": "Packing table",
     "action": "pack_orders",
     "params": {
-     "location": "riverside_studio"
+     "location": "riverside_studio",
+     "requires": "home:riverside_studio"
     }
    }
   ],

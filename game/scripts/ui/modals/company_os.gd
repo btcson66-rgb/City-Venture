@@ -74,6 +74,7 @@ func build() -> void:
 	_primary_chosen = false
 	var where: String = {"home_laptop": "Laptop · Riverside Tower 7C", "cowork": "Hot desk · Nexus Co-work", "office": "Desk · Suite 2B",
 		"cafe": "Laptop · café table", "cafe_till": "Till · your café", "pier7": "Desk · Pier 7 yard office"}.get(terminal, terminal)
+	if terminal=="home_laptop":where=I18n.t(DataDB.properties[Living.home()]["name"])
 	var top := UIK.hbox(6)
 	body.add_child(top)
 	var companies := CompanyPortfolio.ids()
@@ -458,7 +459,7 @@ func _tab_sales() -> void:
 		h2.add_child(UIK.expand())
 		h2.add_child(UIK.button("Pause" if l["active"] else "Resume", func(): Ecommerce.set_active(l["id"], not l["active"]); rebuild()))
 		v.add_child(h2)
-		var margin := float(l["price"]) * 0.9 - Ecommerce.avg_cost(Ecommerce.best_location(l["product"]) if Ecommerce.best_location(l["product"]) != "" else "riverside_studio", l["product"]) - Ecommerce.ship_cost({"product": l["product"]}, "economy")
+		var margin := float(l["price"]) * 0.9 - Ecommerce.avg_cost(Ecommerce.best_location(l["product"]) if Ecommerce.best_location(l["product"]) != "" else Living.home(), l["product"]) - Ecommerce.ship_cost({"product": l["product"]}, "economy")
 		v.add_child(UIK.label(I18n.t("Market ~%s · expect ~%.1f orders/day · %d views · %d orders · in stock %d · unit margin after fee+shipping ≈ %s") % [
 			Fmt.money(float(p["ref_price"])), Ecommerce.lambda_day(l), int(l["views"]), int(l["orders"]), Ecommerce.available_anywhere(l["product"]), Fmt.money(margin)], 7, Art.C_MUTED))
 		content.add_child(card)

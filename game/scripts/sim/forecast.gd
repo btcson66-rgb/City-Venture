@@ -35,7 +35,7 @@ static func weekly(ent: String, weeks := 9) -> Dictionary:
 		var lv := DataDB.living()
 		var t3 := _next_day_of_month(int(lv.get("rent_due_day_of_month", 14)))
 		while t3 < horizon:
-			flows.append([t3, -float(lv.get("home_rent", 1250)), "Home rent"])
+			flows.append([t3, -Living.home_rent(), "Home rent"])
 			t3 = _next_day_of_month(int(lv.get("rent_due_day_of_month", 14)), t3 + Clock.DAY)
 		var daily := Living.daily_living()
 		for d in weeks * 7:

@@ -17,6 +17,9 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "moving_house":
+		await _moving_house_fixture()
+		return
 	if _arg("from") == "holding_groups":
 		await _holding_groups_fixture()
 		return
@@ -2901,3 +2904,46 @@ func _holding_key(code: int) -> void:
 		event.keycode=code;event.pressed=pressed
 		Input.parse_input_event(event)
 		await bot.wait(.12)
+
+func _moving_house_fixture() -> void:
+	await bot.wait(4)
+	UIRoot._suppress_decisions=true
+	UIRoot.tutorial.st()["off"]=true
+	StoryEngine.St()["active"].clear()
+	GameState.data["world"]["year"]=3
+	GameState.data["clock"]["minutes"]=Clock.DAY+9*60
+	Ecommerce.buy("tradelink_wholesale","phone_stand",80)
+	await bot.wait(4)
+	UIRoot.close_all()
+	SceneRouter._enter("interior","okafor_lettings","door","up")
+	await bot.wait(.7)
+	bot.step("Home lease: two real exit options")
+	await bot.use_action("home_letting")
+	await bot.wait(.5)
+	if UIRoot.top_modal() is InfoModal:await bot.click_text("Got it")
+	await bot.shot("moving_home_choices")
+	await _export_row_input("HomeNow_old_town_studio")
+	bot.expect(Living.home()=="old_town_studio","real lease and immediate termination")
+	await bot.shot("moving_home_receipt")
+	UIRoot.close_all()
+	SceneRouter._enter("interior",Living.home_building(),Living.home_bed(),"down")
+	await bot.wait(.8)
+	Clock.world_active=false
+	await bot.shot("moving_studio_1a")
+	bot.expect(SceneRouter.world_scene().player.global_position.distance_to(Vector2(188,126))<2,"wake at configured new bed spot")
+	await bot.use_action("open_company_os")
+	await bot.wait(.4)
+	await bot.shot("moving_home_company_os")
+	UIRoot.close_all()
+	await bot.use_action("pack_orders")
+	await bot.wait(.4)
+	await bot.shot("moving_home_packing_table")
+	UIRoot.close_all()
+	Housing.request("riverside_studio","notice")
+	UIRoot.open_modal(HomeMoveModal.new())
+	await bot.wait(.4)
+	await bot.shot("moving_notice_and_cancel")
+	await _export_row_input("CancelHomeMove")
+	bot.expect(Housing.S()["pending"].is_empty(),"notice cancellation returns deposit")
+	bot.expect(Ledger.check_balanced(),"moving ledger balances")
+	bot.expect(SaveSystem.save_to(bot.out_dir.path_join("moving_house.json")),"home and stock save")

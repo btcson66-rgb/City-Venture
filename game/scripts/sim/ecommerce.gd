@@ -478,7 +478,7 @@ static func _h_return_refund(p: Dictionary) -> void:
 static func default_stock_location() -> String:
 	if Living.has_lease("suite_2b"):
 		return "suite_2b"
-	return "riverside_studio"
+	return Living.home()
 
 
 static func location_name(loc: String) -> String:
@@ -491,6 +491,7 @@ static func location_capacity(loc: String) -> int:
 
 ## Why `qty` more units won't fit at `location` ("" when they fit), naming the stock location with the most room.
 static func space_block(location: String, qty: int) -> String:
+	if DataDB.properties.get(location,{}).get("kind","")=="home" and location!=Living.home():return "That home is no longer your stock location. Choose your current home or leased storage."
 	var used := total_units_at(location) + incoming_units(location)
 	var cap := location_capacity(location)
 	if used + qty <= cap:
@@ -509,7 +510,7 @@ static func space_block(location: String, qty: int) -> String:
 
 
 static func stock_locations() -> Array:
-	var out: Array = ["riverside_studio"]
+	var out: Array = [Living.home()]
 	if Living.has_lease("suite_2b"):
 		out.append("suite_2b")
 	# any leased warehouse holds stock too (Pier 7, Harbor)

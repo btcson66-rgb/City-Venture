@@ -72,7 +72,8 @@ static func stock_margin(ent: String,loc: String,product: String,qty: int,before
 	var amount := snappedf(float(S()["margin"].get(k,0))*float(qty)/maxi(1,before),.01)
 	if not is_zero_approx(amount):margin_change(k,-amount)
 	return amount
-static func goods(seller: String,buyer: String,product: String,qty: int,price: float,loc := "riverside_studio") -> Dictionary:
+static func goods(seller: String,buyer: String,product: String,qty: int,price: float,loc := "") -> Dictionary:
+	if loc=="":loc=Living.home()
 	if seller==buyer or not GlobalMarket.live(seller) or not GlobalMarket.live(buyer) or owner(seller)!=owner(buyer) or owner(seller)=="player" or not is_finite(price) or price<=0 or qty<=0 or Ledger.cash(buyer)<price*qty: return {"ok":false,"error":"Choose sibling subsidiaries, actual stock and an affordable transfer price."}
 	var result: Dictionary = CompanyPortfolio.run_in(seller,func():
 		if Ecommerce.stock(loc,product)<qty:return {"ok":false,"error":"The selling subsidiary does not have these units."}

@@ -9,7 +9,7 @@ const ACTION_ICONS := {
 	"sleep": "sleep", "read_news": "info", "bank_counter": "bank", "atm": "bank",
 	"customs_guide": "info", "loans_info": "bank", "register_company": "civic", "permits_info": "civic", "take_number": "civic",
 	"pack_orders": "parcel", "dropoff_parcels": "parcel", "change_outfit": "shirt",
-	"lease_property": "home", "whiteboard": "objective", "look": "info", "talk": "people",
+	"home_letting": "home", "lease_property": "home", "whiteboard": "objective", "look": "info", "talk": "people",
 	"talk_staff": "people", "business_board": "company", "metro": "metro",
 	"media_open": "company", "hotel_open": "sleep", "real_estate_open": "home", "manufacturing_open": "inventory", "automotive_open": "metro"
 }
@@ -69,6 +69,7 @@ static func _compute_available(id: String) -> bool:
 			continue
 		# Access checks only. Sim action blockers call building_open(), so evaluating them here would recurse.
 		var requires := str(it.get("params", {}).get("requires", ""))
+		if requires.begins_with("home:") and Living.home()!=requires.substr(5):continue
 		if requires.begins_with("lease:") and not Living.has_lease(requires.substr(6)):
 			continue
 		if requires == "desk_access" and not Living.has_desk_access():

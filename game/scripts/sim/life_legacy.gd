@@ -11,7 +11,7 @@ static func S() -> Dictionary:
 	return GameState.data["life_legacy"]
 
 static func net_worth() -> float:
-	return Ledger.cash("player") + Ledger.balance("player", "investments") - Insolvency.liabilities("player")
+	return Ledger.cash("player") + Ledger.balance("player", "investments") + Ledger.balance("player","home_deposit") - Insolvency.liabilities("player")
 
 static func metrics() -> Dictionary:
 	var contacts := 0
