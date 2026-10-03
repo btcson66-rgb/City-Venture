@@ -1,6 +1,6 @@
 # #112 Phone replies review
 
-486/486 unit tests passed in 137.2s on the latest mandated base. Final rendered tour, including Maya intro: 0 failures in 13.3s, 0 English audit hits, seven JPGs about 1.5 MB. The UI tour confirms the newest outgoing reply is visible and history remains scrollable. i18n --check: 5102 msgids, missing 0; wiki OK; beta audit 0. Thirteen focused phone tests include the single-primary rule, effect rollback and timeout receipts.
+487/487 unit tests passed in 141.2s on the latest mandated base. Final rendered tour, including Maya intro: 0 failures in 13.3s, 0 English audit hits, seven JPGs about 1.5 MB. The UI tour confirms the newest outgoing reply is visible and history remains scrollable. i18n --check: 5102 msgids, missing 0; wiki OK; beta audit 0. Fourteen focused phone tests include the single-primary rule, effect rollback and timeout receipts.
 
 An intermediate full suite caught a group-offer expiry being recorded as declined (481/482); the lifecycle now preserves expired while recording the data default. The succeeding full suite passes.
 
@@ -14,4 +14,6 @@ Self-review fixes: preserved the first-chapter Maya phone conversation and added
 
 Dependency: #95 is not merged; social interactions use saved phone_met_NPC flags and counts, without inventing an affinity or fatigue API. #111 full rendered gate is still pending, so the next ticket must wait for that result. All PRs remain Draft, no merge/deployment.
 
-Additional self-review: documented saved message/agenda/expiry fields in GAME_DATA_SCHEMA, added phone help and reply-deadline glossary badges, and displayed each timed message’s data default beside its countdown. Full suite 486/486, focused 13/13, rendered tour 0 failures and 0 audit hits after these fixes.
+Additional self-review: documented saved message/agenda/expiry fields in GAME_DATA_SCHEMA, added phone help and reply-deadline glossary badges, and displayed each timed message’s data default beside its countdown. Full suite 487/487, focused 14/14, rendered tour 0 failures and 0 audit hits after these fixes.
+
+Genuine old-save regression: load the archived pre-phone twelve-chapter play save, assign unique historical message IDs, acknowledge one notification, roundtrip the entire state, retain all twelve chapter receipts and preserve actual cash and balanced books. This is a real played save, not a manufactured migration fixture. Final units 487/487 in 141.2s; phone 14/14 in 3.4s.

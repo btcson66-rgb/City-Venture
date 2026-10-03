@@ -170,3 +170,24 @@ func test_maya_intro_phone_gate_and_completed_call_are_not_replayed() -> void:
 	UIRoot.phone._open_thread("maya")
 	runner.check(not UIRoot.dialogue.active and UIRoot.phone.app == "thread", "already completed conversation opens normal history")
 	UIRoot.phone.close()
+
+func test_genuine_pre_phone_twelve_chapter_save_keeps_books_and_history() -> void:
+	var path := ProjectSettings.globalize_path("res://").path_join("../evidence/2026-10-03_111/full-replay-story-complete.json.gz")
+	var bytes := FileAccess.get_file_as_bytes(path).decompress_dynamic(16 * 1024 * 1024, FileAccess.COMPRESSION_GZIP)
+	var payload: Dictionary = JSON.parse_string(bytes.get_string_from_utf8())
+	GameState.data = SaveSystem._migrate(payload["data"])
+	runner.check(GameState.flag("story_complete") and StoryEngine.St()["chapters_done"].size() == 12, "actual old save retains all chapter receipts")
+	var cash := Ledger.cash(GameState.business_entity())
+	var count: int = GameState.data["messages"].size()
+	var seen := {}
+	for message in GameState.data["messages"]:
+		PhoneMessages.prepare(message)
+		runner.check(not seen.has(message["id"]), "genuine old history gets unique IDs")
+		seen[message["id"]] = true
+	runner.eq(PhoneMessages.S()["agenda"].size(), 0, "no fabricated historical meeting")
+	var message: Dictionary = GameState.data["messages"][0]
+	runner.check(PhoneMessages.reply(message["id"], "ack")["ok"], "historical notification can be acknowledged")
+	GameState.data = SaveSystem._migrate(JSON.parse_string(JSON.stringify(GameState.data)))
+	runner.eq(GameState.data["messages"].size(), count + 1, "actual historical messages plus one outgoing reply survive load")
+	runner.eq(Ledger.cash(GameState.business_entity()), cash, "loading and acknowledging do not change genuine books")
+	runner.check(Ledger.check_balanced(), "actual twelve-chapter books remain balanced")
