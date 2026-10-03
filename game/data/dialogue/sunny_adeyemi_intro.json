@@ -1,0 +1,22 @@
+{
+ "id": "sunny_adeyemi_intro",
+ "with": "sunny_adeyemi",
+ "nodes": {
+  "start": [
+   {
+    "who": "sunny_adeyemi",
+    "text": "Shade, direction and the roof load limit decide the yield. A south roof with clean cells pays back fastest; add a battery when the client uses power at the evening peak."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Open Energy Console",
+      "next": "end"
+     }
+    ]
+   }
+  ],
+  "end": []
+ }
+}

@@ -1,0 +1,21 @@
+{
+ "id": "unit12_factory",
+ "name": "Unit 12 Light Industrial",
+ "district": "industrial",
+ "kind": "warehouse",
+ "monthly_rent": 3800,
+ "deposit_months": 2,
+ "building": "unit12_factory",
+ "requires": [
+  "company_registered"
+ ],
+ "requires_text": "Register a company before leasing the factory.",
+ "agent": "Unit 12 lettings",
+ "agent_line": "Unit 12 is ready. Production risks and rent are yours.",
+ "blurb": "Small factory with three machine bays and material storage. Rent and deposit: $11,400 on signing.",
+ "capacity": {
+  "inventory_units": 12000,
+  "staff": 3
+ },
+ "segment": "manufacturing"
+}

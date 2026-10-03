@@ -1,0 +1,38 @@
+{
+ "id": "real_estate_rate",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:real_estate_active"
+  ],
+  "chance": 0.025,
+  "cooldown_days": 28,
+  "once": false,
+  "earliest_day": 4
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "diane_harlow",
+  "title": "Mortgage rate rise",
+  "icon": "warning",
+  "lines": [
+   "Base-linked mortgage costs are rising. Review cash and property equity."
+  ]
+ },
+ "choices": [
+  {
+   "id": "respond",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "real_estate",
+     "kind": "rate"
+    }
+   ],
+   "outcome": "Base-linked mortgage costs are rising. Review cash and property equity.",
+   "label": "Review properties and respond"
+  }
+ ]
+}

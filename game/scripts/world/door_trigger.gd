@@ -32,11 +32,10 @@ func setup(bid: String, r: Rect2) -> void:
 func _process(delta: float) -> void:
 	_cool = maxf(0.0, _cool - delta)
 	var pl := get_tree().get_first_node_in_group("player") as Node2D
-	var near := pl != null and pl.global_position.distance_to(global_position + _center) < 44.0
-	if near and _hint.modulate.a < 0.05:
+	var near := pl != null and pl.global_position.distance_to(global_position + _center) < 44.0 and BuildingInfo.building_available(building_id)
+	if near:
 		var st := SceneRouter.building_open(building_id)
-		var nm := I18n.t(str(DataDB.building(building_id).get("name", building_id)))
-		_hint_label.text = ("▲ " + I18n.t("Enter %s") % nm) if st["open"] else (nm + " · " + I18n.t("Closed"))
+		_hint_label.text = "▲ " + BuildingInfo.door_text(building_id)
 		_hint_label.add_theme_color_override("font_color", Color(1.0, 0.86, 0.42) if st["open"] else Color(1.0, 0.55, 0.5))
 		_hint.reset_size()
 		_hint.position = _center + Vector2(-_hint.size.x / 2.0, -46)
@@ -44,6 +43,8 @@ func _process(delta: float) -> void:
 
 
 func _on_enter(body: Node) -> void:
+	if not BuildingInfo.building_available(building_id):
+		return
 	if not body is Player or _cool > 0.0 or SceneRouter.transitioning:
 		return
 	var p := body as Player

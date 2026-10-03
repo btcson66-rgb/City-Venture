@@ -154,13 +154,28 @@
     "params": {
      "job": "city_clerk"
     }
+   },
+   {
+    "id": "energy_desk",
+    "at": [
+     462,
+     124
+    ],
+    "label": "Energy subsidy desk",
+    "action": "energy_subsidy",
+    "icon": "civic"
    }
   ],
   "npc_spots": {
    "clerk": [
     256,
     66
+   ],
+   "okoro": [
+    462,
+    94
    ]
   }
- }
+ },
+ "category": "Civic services"
 }

@@ -1,0 +1,22 @@
+{
+ "id": "diane_harlow_intro",
+ "with": "diane_harlow",
+ "nodes": {
+  "start": [
+   {
+    "who": "diane_harlow",
+    "text": "Get the brokerage licence at City Hall. Match a client to an owner mandate, choose your negotiation and arrange a viewing."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Open Matchmaker",
+      "next": "end"
+     }
+    ]
+   }
+  ],
+  "end": []
+ }
+}

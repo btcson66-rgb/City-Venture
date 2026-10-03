@@ -119,7 +119,7 @@ func _serve() -> void:
 		served_right += 1
 		var tip := 2.0 if time_left() > 0.5 else 0.5
 		tips += tip
-		flash(I18n.t("✓ %s is happy (+%s tip)") % [str(want["who"]), Fmt.money(tip)], true)
+		flash(I18n.t("✓ %s is happy (+%s tip)") % [str(want["who"]), Fmt.money0(tip)], true)
 	else:
 		flash(I18n.t("✗ Not quite: %s wanted %s") % [str(want["who"]), order_text()], false)
 	next_round()
@@ -138,7 +138,7 @@ func extra_result() -> Dictionary:
 func result_lines() -> Array:
 	if own_counter:
 		return [I18n.t("Drinks served exactly right: %d / %d") % [served_right, rounds], I18n.t("Service: %d%%") % int(round(score() * 100))]
-	return [I18n.t("Drinks served exactly right: %d / %d") % [served_right, rounds], I18n.t("Tips: %s") % Fmt.money(tips)]
+	return [I18n.t("Drinks served exactly right: %d / %d") % [served_right, rounds], I18n.t("Tips: %s") % Fmt.money0(tips)]
 
 
 ## A cup filled in layers as the drink is built.

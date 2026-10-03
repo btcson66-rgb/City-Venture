@@ -1,0 +1,22 @@
+{
+ "id": "ms_okoro_intro",
+ "with": "ms_okoro",
+ "nodes": {
+  "start": [
+   {
+    "who": "ms_okoro",
+    "text": "Grants have an annual quota and a closing date. Applications cost a fee, take days and some are rejected. A policy change can cut the rate."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Open the subsidy desk",
+      "next": "end"
+     }
+    ]
+   }
+  ],
+  "end": []
+ }
+}

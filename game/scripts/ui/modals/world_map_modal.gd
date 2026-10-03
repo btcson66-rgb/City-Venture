@@ -23,6 +23,8 @@ static func b2m(p: Vector2) -> Vector2:
 
 func build() -> void:
 	footer.visible = false
+	if DataDB.regions.get(sel, {}).get("status", "planned") != "active":
+		sel = "aurelia"
 	var mapc := Control.new()
 	mapc.custom_minimum_size = MAP_SIZE
 	mapc.clip_contents = true
@@ -34,7 +36,7 @@ func build() -> void:
 	mapc.add_child(img)
 	for rid in DataDB.regions:
 		var r: Dictionary = DataDB.regions[rid]
-		if not r.has("board"):
+		if r.get("status", "planned") != "active" or not r.has("board"):
 			continue
 		var lb: Array = r["board"]["label"]
 		var a := b2m(Vector2(float(lb[0]), float(lb[1])))
@@ -98,7 +100,7 @@ func build() -> void:
 	if sel == "aurelia":
 		c1.add_child(UIK.chip("YOUR HOME MARKET", Art.C_GREEN))
 	else:
-		c1.add_child(UIK.chip("OVERSEAS · PLANNED P2", Art.C_GOLD))
+		c1.add_child(UIK.chip("Open", Art.C_GOLD))
 	var c2 := UIK.vbox(0)
 	c2.custom_minimum_size = Vector2(210, 0)
 	row.add_child(c2)

@@ -68,7 +68,7 @@ func _ready() -> void:
 	settings.name = "Settings"
 	box.add_child(settings)
 	box.add_child(UIK.button("Quit", func(): get_tree().quit(), "", 150))
-	var ver := UIK.label(I18n.t("VERTICAL SLICE 001 · art converted from concept boards · %s") % ProjectSettings.get_setting("application/config/version", ""), 7, Art.C_DIM)
+	var ver := UIK.label(I18n.t("Friends beta · %s") % ProjectSettings.get_setting("application/config/version", ""), 7, Art.C_DIM)
 	ver.position = Vector2(8, 346)
 	add_child(ver)
 	# in a browser F12 opens the developer tools, so web testers report from the pause menu

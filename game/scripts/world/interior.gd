@@ -72,7 +72,8 @@ func build(building_id: String) -> void:
 		var params: Dictionary = it.get("params", {}).duplicate()
 		params["id"] = it["id"]
 		params["building"] = building_id
-		add_interactable(Vector2(float(a[0]), float(a[1])), str(it["label"]), str(it["action"]), params, float(it.get("r", 22)))
+		var point := add_interactable(Vector2(float(a[0]), float(a[1])), str(it["label"]), str(it["action"]), params, float(it.get("r", 22)))
+		point.enabled = bool(it.get("enabled", true))
 	if def.has("stock_display"):
 		stock_holder = Node2D.new()
 		entities.add_child(stock_holder)
@@ -153,7 +154,7 @@ func _decorate_walls(wt: int, ht: int) -> void:
 			var pl := ColorRect.new()
 			pl.color = wc.darkened(0.12)
 			pl.position = Vector2(x + 3, WALL_ROWS * T - 13)
-			pl.size = Vector2(18, 9)
+			pl.size = Vector2(maxi(0,mini(18,W-x-3)), 9)
 			back_layer.add_child(pl)
 		var tr := ColorRect.new()
 		tr.color = wc.lightened(0.25)

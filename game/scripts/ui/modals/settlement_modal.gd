@@ -53,7 +53,7 @@ func build() -> void:
 		tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
 		body.add_child(tr)
-	var head := I18n.t("%d × %s from %s: %s") % [qty, I18n.t(DataDB.product(product).get("name", product)), I18n.t(DataDB.supplier(supplier).get("name", supplier)), Fmt.money(amount)]
+	var head := I18n.t("%d × %s from %s: %s") % [qty, I18n.t(DataDB.product(product).get("name", product)), I18n.t(DataDB.supplier(supplier).get("name", supplier)), Fmt.money0(amount)]
 	body.add_child(UIK.label(head, 8, Art.C_WHITE, true))
 	var frozen_po := false
 	if po_id != "":
@@ -110,7 +110,7 @@ func _pay(method: String) -> void:
 	else:
 		r = Ecommerce.buy(supplier, product, qty, location, false, -1, 1.0, method)
 		if r["ok"]:
-			UIRoot.toast(I18n.t("Paid %s. The supplier ships once it lands.") % Fmt.money(r["total"]), "good", "bank")
+			UIRoot.toast(I18n.t("Paid %s. The supplier ships once it lands.") % Fmt.money0(r["total"]), "good", "bank")
 	if not r["ok"]:
 		UIRoot.toast(I18n.t(str(r["error"])), "bad", "warning")
 		return

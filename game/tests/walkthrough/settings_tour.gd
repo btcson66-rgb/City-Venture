@@ -121,7 +121,12 @@ func _run() -> void:
 		await _settle()
 		for game_file in games.get_files():
 			if game_file.ends_with(".gd") and game_file not in ["mini_game.gd", "mini_games.gd"]:
-				var game: Modal = load("res://scripts/ui/minigames/" + game_file).new()
+				var script: GDScript = load("res://scripts/ui/minigames/" + game_file)
+				var game: Modal
+				match game_file:
+					"auction_game.gd": game = script.new("settings_intro_only")
+					"creative_pitch.gd": game = script.new({"id": "settings_intro_only", "client": "QA", "audience": 0, "preferences": [0, 1, 2]})
+					_: game = script.new()
 				await _check_modal(game, game_file + " (intro)")
 	var menu_scroll := SceneRouter.current.get_node("MenuScroll") as ScrollContainer
 	var menu_ok := menu_scroll.size.x > 100.0 and menu_scroll.size.y > 100.0
