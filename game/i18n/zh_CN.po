@@ -2778,7 +2778,7 @@ msgstr "公司登记——奥瑞莉亚市"
 msgid "Business account opened. %s now runs on its own books."
 msgstr "企业帐户已开立。%s 从此有自己的帐本了。"
 
-#: scripts/sim/ecommerce.gd:1332
+#: scripts/sim/ecommerce.gd:1342
 msgid "Business assets contributed to %s (in kind)"
 msgstr "以实物出资给 %s"
 
@@ -2938,7 +2938,7 @@ msgstr "BuyMaterials"
 msgid "Buyer"
 msgstr "买方"
 
-#: scripts/sim/ecommerce.gd:1222
+#: scripts/sim/ecommerce.gd:1232
 msgid "Buyer %s opened a dispute on order %s. We refunded them and charged a $15 dispute fee."
 msgstr "买家 %s 对订单 %s 提出申诉。我们已退款给对方，并收取 $15 申诉处理费。"
 
@@ -3302,7 +3302,7 @@ msgstr "旺季周末真正的上限可能是房务产能，而不是需求。"
 msgid "Capital"
 msgstr "资金"
 
-#: scripts/sim/ecommerce.gd:1333
+#: scripts/sim/ecommerce.gd:1343
 msgid "Capital contributed in kind by founder"
 msgstr "创办人实物出资"
 
@@ -4526,6 +4526,10 @@ msgstr "接下来 7 天，每次点击费用 +40%。"
 msgid "Costa"
 msgstr "Costa"
 
+#: data/events/customer_return_first.json
+msgid "Costs every item in this parcel + express shipping. Likely a 5★ review."
+msgstr "补寄包裹内所有商品，另付快递运费。可能获得 5★ 评价。"
+
 #: data/events/energy_vandal.json
 msgid "Costs more but cuts outage risk for two months."
 msgstr "花费较高，但两个月内降低停机风险。"
@@ -4533,10 +4537,6 @@ msgstr "花费较高，但两个月内降低停机风险。"
 #: data/help/glossary.json
 msgid "Costs of running the business beyond the stock sold: advertising, shipping, rent, staff and servers."
 msgstr "除了售出商品成本以外的经营支出，例如广告、运费、租金、员工与服务器。"
-
-#: data/events/customer_return_first.json
-msgid "Costs one more unit + express shipping. Likely a 5★ review."
-msgstr "多花一件商品＋快捷运费。很可能拿到五星。"
 
 #: data/story/chapters.json
 msgid "Costs went up: raise a price to protect your margin (Company OS → Sales)"
@@ -5370,7 +5370,7 @@ msgstr "DiscountMore"
 msgid "Dismiss staff"
 msgstr "资遣员工"
 
-#: scripts/sim/ecommerce.gd:1223
+#: scripts/sim/ecommerce.gd:1233
 msgid "Dispute lost on %s: −%s"
 msgstr "申诉败诉 %s：−%s"
 
@@ -5650,7 +5650,7 @@ msgstr "取得电池安装认证。"
 msgid "Eat"
 msgstr "吃"
 
-#: data/businesses/ecommerce.json scripts/sim/ecommerce.gd:1388 scripts/ui/media_ui.gd:160
+#: data/businesses/ecommerce.json scripts/sim/ecommerce.gd:1398 scripts/ui/media_ui.gd:160
 msgid "Ecommerce"
 msgstr "电商"
 
@@ -5941,6 +5941,10 @@ msgstr "所有门槛都已达成。"
 #: data/events/energy_subsidy_cut.json
 msgid "Every grant is halved while the policy recovers over 90 days."
 msgstr "政策在 90 天内逐步恢复，期间所有补助减半。"
+
+#: data/events/customer_return.json
+msgid "Every item in this parcel + express shipping."
+msgstr "补寄包裹内所有商品，另付快递运费。"
 
 #: data/help/glossary.json
 msgid "Every kilometre you don't need to drive comes straight off your costs. A shorter route saves fuel and hours."
@@ -6390,7 +6394,7 @@ msgstr "第一次进货：%d × %s，来自 %s。"
 msgid "First parcel out"
 msgstr "第一件包裹出货"
 
-#: scripts/sim/ecommerce.gd:1254
+#: scripts/sim/ecommerce.gd:1264
 msgid "First payout from ShopLane: %s."
 msgstr "第一笔 ShopLane 拨款：%s。"
 
@@ -10582,7 +10586,7 @@ msgstr "Nina"
 msgid "Nineteen hundred a month, two months' deposit. It comes empty: you fit it out, and City Hall wants a food licence before you sell a single croissant."
 msgstr "每月一千九，押金两个月。交屋是空的：你自己装修，而且卖出第一个可颂之前，市政厅要先看到你的食品执照。"
 
-#: scripts/sim/ecommerce.gd:1175
+#: scripts/sim/ecommerce.gd:1185
 msgid "No %s in stock to send."
 msgstr "没有%s的库存可以寄。"
 
@@ -10994,7 +10998,7 @@ msgstr "没有可以上线的产品。"
 msgid "Nothing to pack here: is the stock at this location?"
 msgstr "这里没有可以打包的：货在这个地点吗？"
 
-#: scripts/sim/ecommerce.gd:1153
+#: scripts/sim/ecommerce.gd:1163
 msgid "Nothing to resolve."
 msgstr "没有需要处理的事。"
 
@@ -11293,10 +11297,6 @@ msgstr "准时送到拿全额运费，路线越短报酬多一点，迟到的单
 #: scripts/sim/bank.gd:291
 msgid "One extension granted: the retry is now in six days. Your debt and existing late fee remain due."
 msgstr "已核准一次展延：六天后再扣款。债务与既有滞纳金仍须支付。"
-
-#: data/events/customer_return.json
-msgid "One unit + express shipping."
-msgstr "多花一件商品＋快捷运费。"
 
 #: data/businesses/logistics.json
 msgid "One used van. Every hour and every litre counts."
@@ -12226,7 +12226,7 @@ msgstr "兼职、商品摄影、打包、写程序与接案都有亲手操作的
 msgid "Part-time jobs: take one to earn a wage. You work the shifts yourself at the workplace (staff door, press E)."
 msgstr "「兼职工作」：选一份赚薪水。班要自己到工作地点上（员工信道按 E）。"
 
-#: scripts/sim/ecommerce.gd:1191
+#: scripts/sim/ecommerce.gd:1201
 msgid "Partial refund 30%% %s: %s"
 msgstr "部分退款 30%% %s：%s"
 
@@ -12402,11 +12402,11 @@ msgstr "《支付诚信法》生效：超过 $2,500 的转帐要做 KYC 审查�
 msgid "Payments start-ups promise audits and an insurance pool."
 msgstr "支付新创承诺接受稽核，并成立保险基金。"
 
-#: scripts/sim/ecommerce.gd:1252
+#: scripts/sim/ecommerce.gd:1262
 msgid "Payout sent: %s to your business account."
 msgstr "拨款已送出：%s 导入你的公司帐户。"
 
-#: scripts/sim/ecommerce.gd:1252
+#: scripts/sim/ecommerce.gd:1262
 msgid "Payout sent: %s to your personal account."
 msgstr "拨款已送出：%s 导入你的个人帐户。"
 
@@ -13498,7 +13498,7 @@ msgstr "精致"
 msgid "Refund"
 msgstr "退款"
 
-#: scripts/sim/ecommerce.gd:1169
+#: scripts/sim/ecommerce.gd:1179
 msgid "Refund %s: %s (return label paid)"
 msgstr "退款 %s：%s（已付退货运费）"
 
@@ -13918,7 +13918,7 @@ msgstr "要取代 %s（第 %d 天）吗？"
 msgid "Replacement on its way. {customer}: \"Oh — nice. Didn't expect that.\""
 msgstr "新品已在路上。{customer}：「喔——不错耶，没想到。」"
 
-#: scripts/sim/ecommerce.gd:1184
+#: scripts/sim/ecommerce.gd:1194
 msgid "Replacement sent %s: %s (express)"
 msgstr "已寄出替换品 %s：%s（快捷）"
 
@@ -15286,7 +15286,7 @@ msgstr "ShopLane 广告：有大品牌在抢版位，价格被推高了。"
 msgid "ShopLane Seller"
 msgstr "ShopLane 卖家"
 
-#: scripts/sim/ecommerce.gd:1264
+#: scripts/sim/ecommerce.gd:1274
 msgid "ShopLane ads: %s"
 msgstr "ShopLane 广告：%s"
 
@@ -15294,7 +15294,7 @@ msgstr "ShopLane 广告：%s"
 msgid "ShopLane balance (paid Mondays)"
 msgstr "ShopLane 余额（每周一拨款）"
 
-#: scripts/sim/ecommerce.gd:1218
+#: scripts/sim/ecommerce.gd:1228
 msgid "ShopLane dispute lost %s: forced refund + $15 fee"
 msgstr "ShopLane 申诉败诉 %s：强制退款＋$15 手续费"
 
@@ -15310,7 +15310,7 @@ msgstr "ShopLane 每笔销售先扣 10% 手续费，再拨款给你。"
 msgid "ShopLane marketplace: %d%% fee, weekly payouts, personal sellers capped at %s/month."
 msgstr "ShopLane 平台：抽成 %d%%，每周拨款，个人卖家每月上限 %s。"
 
-#: scripts/sim/ecommerce.gd:1256
+#: scripts/sim/ecommerce.gd:1266
 msgid "ShopLane negative balance charged to card"
 msgstr "ShopLane 负余额已从信用卡扣款"
 
@@ -15322,7 +15322,7 @@ msgstr "ShopLane 暂停了你的商品：已达个人卖家上限。"
 msgid "ShopLane payout"
 msgstr "ShopLane 拨款"
 
-#: scripts/sim/ecommerce.gd:1251
+#: scripts/sim/ecommerce.gd:1261
 msgid "ShopLane payout received: %s"
 msgstr "收到 ShopLane 拨款：%s"
 
@@ -15342,7 +15342,7 @@ msgstr "已达 ShopLane 个人卖家上限——到市政厅登记公司。"
 msgid "ShopLane seller cap lifted · B2B contracts unlocked · office leases unlocked · supplier net terms unlocked"
 msgstr "解除 ShopLane 卖家上限 · 解锁 B2B 合约 · 解锁办公室租约 · 解锁供应商票期"
 
-#: scripts/sim/ecommerce.gd:1249
+#: scripts/sim/ecommerce.gd:1259
 msgid "ShopLane weekly payout"
 msgstr "ShopLane 每周拨款"
 
@@ -15646,7 +15646,7 @@ msgstr "已售出"
 msgid "Sold %d cars · profit so far %s"
 msgstr "已售 %d 辆 · 目前获利 %s"
 
-#: scripts/sim/ecommerce.gd:1302
+#: scripts/sim/ecommerce.gd:1312
 msgid "Sold %d × %s to liquidator (%d%% of cost)"
 msgstr "卖给清仓商：%d × %s（成本的 %d%%）"
 
@@ -17814,7 +17814,7 @@ msgstr "未知的代理商危机。"
 msgid "Unknown automotive crisis."
 msgstr "未知的汽车危机。"
 
-#: scripts/sim/ecommerce.gd:1201
+#: scripts/sim/ecommerce.gd:1211
 msgid "Unknown choice."
 msgstr "未知的选项。"
 

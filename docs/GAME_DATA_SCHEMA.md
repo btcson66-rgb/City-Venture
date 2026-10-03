@@ -576,3 +576,5 @@ Properties tune `notice_days` (30 by default), `min_term_months`, `early_exit_fe
 
 ### Multi-item ecommerce parcels (#113)
 `economy/ecommerce.json` defines combo/quantity probabilities, box grid/height/material cost/dimensions, padding damage and staff policies, dimensional divisor and excess kg rate. Products carry `size:[width,depth,height]`, `weight` (kg), `fragile`. Orders retain legacy `product/qty/unit_price` (primary line) and new `items:[{product,qty,unit_price,cogs?}]`, `total`, `pack:{box,padding,placements:[{item,x,y,rotated}],q,label_ok}`. Old single-line orders are interpreted lazily without deleting keys. Saved pack selection controls postage and damage. Returns apply to the whole basket; one defective line makes the whole returned basket non-resellable.
+
+Return-event replacement requirements use `can_replace:{order}`. The predicate checks every basket SKU and full quantity of unreserved stock; the replacement action retains its atomic preflight. Labels state whole-parcel replacement rather than one unit.

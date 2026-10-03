@@ -33,6 +33,8 @@ static func eval(expr: String, ctx := {}) -> bool:
 		return Clock.WEEKDAYS[Clock.weekday()].to_lower() == expr.substr(8).to_lower().left(3)
 	if expr.begins_with("ctx:"):
 		return bool(ctx.get(expr.substr(4), false))
+	if expr.begins_with("can_replace:"):
+		return Ecommerce.replacement_available(expr.substr(12))
 	if expr.begins_with("has_stock:"):
 		# unreserved units of one product somewhere the player can ship from
 		return Ecommerce.best_location(expr.substr(10)) != ""
