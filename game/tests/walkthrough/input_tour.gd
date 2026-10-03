@@ -137,7 +137,7 @@ func _run() -> void:
 	var games := DirAccess.open("res://scripts/ui/minigames")
 	for file in games.get_files():
 		if file.ends_with(".gd") and file not in ["mini_game.gd", "mini_games.gd"]:
-			await _navigate(load("res://scripts/ui/minigames/" + file).new(), file)
+			await _navigate(_make_game(file), file)
 	SceneRouter._set_scene(CharacterCreator.new())
 	InputAccess.controller_mode = true
 	await _settle()

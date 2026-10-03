@@ -21,10 +21,13 @@ func _draw() -> void:
 		var col := Color(ln["color"])
 		var st: Array = ln["stations"]
 		for i in st.size() - 1:
-			draw_line(_pos(st[i]), _pos(st[i + 1]), col, 2.0)
+			if BuildingInfo.district_open(str(st[i])) and BuildingInfo.district_open(str(st[i + 1])):
+				draw_line(_pos(st[i]), _pos(st[i + 1]), col, 2.0)
 	for d in DataDB.city["districts"]:
+		if not BuildingInfo.district_open(str(d["id"])):
+			continue
 		var p := _pos(d["id"])
-		var active: bool = d["status"] == "active"
+		var active := true
 		draw_circle(p, 3.5 if active else 2.5, Color.WHITE if active else Color(0.6, 0.65, 0.75))
 		draw_circle(p, 2.0 if active else 1.5, Art.C_NAVY_700)
 		if d["id"] == here:

@@ -41,7 +41,7 @@ func build() -> void:
 		row.add_child(more)
 		body.add_child(row)
 	var quote := Ecommerce.cancel_quote(po_id) if cancelling else Ecommerce.return_quote(po_id, qty)
-	body.add_child(UIK.kv("Invoice reduction" if cancelling and quote["unpaid"] else "Refund", Fmt.money(float(quote["refund"])), Art.C_GREEN))
+	body.add_child(UIK.kv("Invoice reduction" if cancelling and quote["unpaid"] else "Refund", Fmt.money0(float(quote["refund"])), Art.C_GREEN))
 	body.add_child(UIK.label_tip(I18n.t("Return & cancellation fees") + ": " + Fmt.money(float(quote["fee"])), "restocking_fee"))
 	if cancelling:
 		body.add_child(UIK.wrap("Refunded now. Unpaid terms reduce your invoice; any cancellation fee stays payable on its original due date. Settlement fees are not refundable.", 8, Art.C_MUTED, 410))

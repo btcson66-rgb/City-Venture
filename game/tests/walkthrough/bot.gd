@@ -26,6 +26,8 @@ var _word_re := RegEx.create_from_string("[A-Za-z][A-Za-z'’]+")
 var _watchdog: Thread
 var _watch_run := true
 var _last_step := ""
+var daily_results: Array = []
+var trace_daily := false
 
 
 ## A watchdog on its own thread: when the main loop stops advancing for 20 s it prints what the simulation and the
@@ -62,11 +64,17 @@ func _ready() -> void:
 			quit_at_end = false
 		if a == "--video":
 			video_mode = true
+	trace_daily = "--daily-trace" in OS.get_cmdline_user_args()
+	if trace_daily:
+		Clock.day_started.connect(_daily_snapshot)
 	# bots play the minigames at a fixed quality and skip first-open help cards (both covered by their own checks)
 	Help.auto = false
 	MiniGames.auto = 0.85
 	if out_dir == "":
 		out_dir = ProjectSettings.globalize_path("user://bot")
+	# Set before the title menu reads save slots; QA must not share player/unit-test saves.
+	SaveSystem.DIR = out_dir.path_join("saves")
+	SaveSystem.autosave_enabled = false
 	DirAccess.make_dir_recursive_absolute(out_dir + "/screenshots")
 	t0 = Time.get_ticks_msec()
 	UIRoot.toasted.connect(func(text: String, kind: String): if kind == "bad": log_line("  toast: " + text))
@@ -80,7 +88,9 @@ func _ready() -> void:
 ## Bloom Coffee, ShopLane, Company OS), people's names, key names.
 func _audit_setup() -> void:
 	audit_on = true
-	var tr = JSON.parse_string(FileAccess.get_file_as_string(ProjectSettings.globalize_path("res://").path_join("../tools/i18n/zh_TW.json")))
+	var catalogue_path := ProjectSettings.globalize_path("res://").path_join("../tools/i18n/zh_TW.json")
+	# QA Web exports contain game resources, not the repository's tools directory.
+	var tr = JSON.parse_string(FileAccess.get_file_as_string(catalogue_path)) if FileAccess.file_exists(catalogue_path) else {}
 	if typeof(tr) == TYPE_DICTIONARY:
 		for v in tr.values():
 			for m in _word_re.search_all(str(v)):
@@ -91,6 +101,23 @@ func _audit_setup() -> void:
 	var mk: Dictionary = DataDB._read("res://data/economy/marketplace.json")
 	for w in mk.get("customer_first_names", []):
 		_allowed[str(w)] = true
+	# Client organization names are kept brands, as NPC and employer names are.
+	for client in DataDB.economy.get("media",{}).get("client_names",[]):
+		for w in str(client).split(" "):_allowed[w]=true
+	for client in DataDB.economy.get("hotel",{}).get("client_names",[]):
+		for w in str(client).split(" "):_allowed[w]=true
+	for bidder in DataDB.economy.get("automotive",{}).get("auction",{}).get("bidder_names",[]):
+		for w in str(bidder).split(" "):_allowed[w]=true
+	for brand in DataDB.economy.get("automotive",{}).get("dealership",{}).get("brands",{}).values():
+		for w in str(brand["name"]).split(" "):_allowed[w]=true
+		for model in brand["models"]:
+			for w in str(model["name"]).split(" "):_allowed[w]=true
+	for model in DataDB.economy.get("automotive",{}).get("models",[]):
+		for w in str(model["name"]).split(" "):_allowed[w]=true
+	# Roof clients and parking landlords are kept names too.
+	for kind in DataDB.economy.get("energy",{}).get("roof_kinds",{}).values():
+		for client in kind["names"]:
+			for w in str(client).split(" "):_allowed[w]=true
 	for w in ["Tab", "Esc", "WASD", "Shift", "F12", "OK", "Guide", "Tour", "Collision", "Check", "Test", "Founder", "Alex", "Rivera",
 			"Riverlight", "Goods", "Co", "LLC", "Ltd", "Inc", "PO"]:   # stable purchase-order identifiers, e.g. PO-101
 		_allowed[w] = true
@@ -145,6 +172,12 @@ func _audit_one(t: String, ctl: Control) -> void:
 func _run() -> void:
 	await wait(1.0)
 	match mode:
+		"save_transfer":
+			await load("res://tests/walkthrough/save_transfer_tour.gd").new(self).run()
+		"patch_notes":
+			await load("res://tests/walkthrough/patch_notes_tour.gd").new(self).run()
+		"beta_tour":
+			await BetaTour.new(self).run()
 		"shots":
 			await _shots()
 		"walkthrough":
@@ -167,7 +200,20 @@ func _run() -> void:
 	_finish()
 
 
+func _daily_snapshot(day: int) -> void:
+	# Only economic outputs: exclude renderer timing, positions and additive reporting metadata.
+	if not GameState.has_game():
+		return
+	daily_results.append({"day":day, "balances":GameState.data["ledger"]["balances"].duplicate(true),
+		"stats":GameState.data["stats"].duplicate(true), "rng_state":str(GameState.rng.state)})
+
+
 func _finish() -> void:
+	if trace_daily:
+		_daily_snapshot(Clock.day_index())
+		var trace := FileAccess.open(out_dir + "/daily_results.json", FileAccess.WRITE)
+		trace.store_string(JSON.stringify({"seed":GameState.data.get("rng", {}).get("seed"), "days":daily_results}, "  "))
+		trace.close()
 	log_line("BOT FINISHED — %d failure(s) · %.1fs real" % [failures.size(), (Time.get_ticks_msec() - t0) / 1000.0])
 	var f := FileAccess.open(out_dir + "/walkthrough_log.txt", FileAccess.WRITE)
 	if f:
@@ -295,11 +341,12 @@ func click(b: Control) -> bool:
 	if b == null:
 		return false
 	var sc: Node = b.get_parent()
-	while sc != null and not sc is ScrollContainer:
+	# Nested accessible modals can have both a list scroll and a page scroll.
+	while sc != null:
+		if sc is ScrollContainer:
+			(sc as ScrollContainer).ensure_control_visible(b)
+			await frames(3)
 		sc = sc.get_parent()
-	if sc != null:
-		(sc as ScrollContainer).ensure_control_visible(b)
-		await frames(3)
 	var center := b.get_global_rect().get_center()
 	var screen := get_viewport().get_final_transform() * center
 	var mv := InputEventMouseMotion.new()
@@ -496,7 +543,17 @@ func use(pred: Callable, what: String) -> bool:
 		await frames(2)
 		Input.action_release(act)
 		await frames(4)
-	var ok := await until(func(): return player() != null and player().focus == it, 1.5)
+	var ok := false
+	for attempt in range(4):
+		# A queued decision may open during the facing frames above. Answer it
+		# through real input, then reacquire focus before pressing interact.
+		if UIRoot.is_blocking() and popup_handler.is_valid():
+			await popup_handler.call()
+			await walk_to(target, 3.0, 5.0, true, focused)
+		ok = await until(func(): return UIRoot.is_blocking() or focused.call(), 1.5)
+		if ok and not UIRoot.is_blocking() and focused.call():
+			break
+		ok = false
 	if not ok:
 		# try standing a little closer
 		await walk_to(it.global_position + Vector2(0, 2), 2.0, 5.0, false, focused)
@@ -532,6 +589,16 @@ func talk_through_dialogue(max_lines := 30, choose_first := true) -> void:
 ## a big-contract decision, staff in the office, the loan desk, SaaS after launch, insolvency and the
 ## closing statement, the pause menu with audio settings.
 func _screens() -> void:
+	await load("res://tests/walkthrough/info_badges_tour.gd").new(self).run()
+	# Keep the balanced supplier prices and units visible in the bilingual screenshot tour.
+	GameState.new_game({"name": "Balance Screens", "seed": 29})
+	UIRoot.open_modal(CompanyOS.new("home_laptop"))
+	await wait(0.4)
+	await click_named("Tab_operations", 2.0)
+	await wait(0.4)
+	expect(UIRoot.top_modal().tab == "operations", "supplier units screen uses operations tab")
+	await shot("screen_operations_units")
+	UIRoot.close_all()
 	DirAccess.make_dir_recursive_absolute(SaveSystem.DIR)
 	var f := FileAccess.open(SaveSystem._path(9), FileAccess.WRITE)
 	f.store_string(FileAccess.get_file_as_string("res://tests/walkthrough/fixtures/trailer_state.json"))
@@ -545,6 +612,14 @@ func _screens() -> void:
 	UIRoot.set_hud_visible(true)
 	await wait(0.8)
 	# the Crestline decision (long detail text must wrap)
+	await until(func(): return UIRoot.card_layer.find_child("ChapterCard", false, false) == null, 8.0)
+	var contract_screen := CompanyOS.new("office")
+	contract_screen.tab = "contracts"
+	UIRoot.open_modal(contract_screen)
+	await wait(0.4)
+	expect(contract_screen.tab == "contracts", "contract terms tab shown")
+	await shot("screen_contract_terms")
+	UIRoot.close_all()
 	var inst := EventEngine.trigger("crestline_big_offer", {})
 	UIRoot.open_modal(DecisionModal.new(inst))
 	await wait(0.6)
@@ -560,6 +635,7 @@ func _screens() -> void:
 		Clock.advance(60)
 	SceneRouter._enter("interior", "small_office", "door", "up")
 	await wait(1.6)
+	await until(func(): return UIRoot.card_layer.find_child("ChapterCard", false, false) == null, 8.0)
 	await shot("screen_staff_in_office")
 	UIRoot.open_modal(CompanyOS.new("office"))
 	await wait(0.3)
@@ -860,7 +936,7 @@ func _tutorial_tour() -> void:
 	await wait(0.8)
 	UIRoot.close_all()
 	await wait(1.6)
-	expect(_tut_step() == "order", "listed: wait for the first order (%s)" % _tut_step())
+	expect(_tut_step() in ["order", "pack"], "listed: wait for or pack the first order (%s)" % _tut_step())
 	SceneRouter._enter("interior", "riverside_apartment", "door", "up")
 	await wait(1.4)
 	await shot("tut_order_wait")

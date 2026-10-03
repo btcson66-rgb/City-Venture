@@ -1,0 +1,22 @@
+{
+ "id": "frank_doyle_intro",
+ "with": "frank_doyle",
+ "nodes": {
+  "start": [
+   {
+    "who": "frank_doyle",
+    "text": "Wednesdays at nine I sell cars to the loudest hand in the room. Bidders drop out at private limits, so a quiet raise beats a wild one. Remember the buyer fee, and that a pretty car can hide a bad past."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Open the auction desk",
+      "next": "end"
+     }
+    ]
+   }
+  ],
+  "end": []
+ }
+}

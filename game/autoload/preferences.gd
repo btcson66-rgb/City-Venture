@@ -10,7 +10,7 @@ const DEFAULTS := {"master": 1.0, "music": 0.8, "sfx": 0.9, "ambience": 0.8,
 const BINDINGS := {"move_left": [KEY_A, KEY_LEFT], "move_right": [KEY_D, KEY_RIGHT],
 	"move_up": [KEY_W, KEY_UP], "move_down": [KEY_S, KEY_DOWN], "run": [KEY_SHIFT],
 	"interact": [KEY_E, KEY_SPACE], "phone": [KEY_TAB, KEY_P], "map": [KEY_M],
-	"company_os_hint": [KEY_C], "pause": [KEY_ESCAPE], "fast_forward": [KEY_F],
+	"company_os_hint": [KEY_C], "building_activities": [KEY_I], "pause": [KEY_ESCAPE], "fast_forward": [KEY_F],
 	"confirm": [KEY_ENTER], "cancel": [KEY_BACKSPACE], "bug_report": [KEY_F12], "undo": [KEY_U],
 	"pick_1": [KEY_1], "pick_2": [KEY_2], "pick_3": [KEY_3], "pick_4": [KEY_4], "pick_5": [KEY_5],
 	"pick_6": [KEY_6], "pick_7": [KEY_7], "pick_8": [KEY_8], "pick_9": [KEY_9]}

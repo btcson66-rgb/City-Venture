@@ -77,14 +77,15 @@ static func buy_van() -> Dictionary:
 	var ent := GameState.business_entity()
 	var price := float(van_cfg().get("price", 9800))
 	var ins := float(van_cfg().get("insurance_month", 165))
-	Ledger.expense(ent, "vehicle", price, I18n.t("Dockside Motors: %s") % I18n.t(str(van_cfg().get("name", "Used panel van"))), {"type": "vehicle"})
-	Ledger.expense(ent, "insurance", ins, I18n.t("Van insurance: first month"), {"type": "insurance"})
+	Ledger.expense(ent, "vehicle", price, I18n.t("Dockside Motors: %s") % I18n.t(str(van_cfg().get("name", "Used panel van"))), {"segment": "logistics", "type": "vehicle"})
+	Ledger.expense(ent, "insurance", ins, I18n.t("Van insurance: first month"), {"segment": "logistics", "type": "insurance"})
 	var v: Dictionary = S()["van"]
 	v["owned"] = true
 	v["bought"] = Clock.now()
 	v["entity"] = ent
 	v["ins_day"] = mini(28, int(Clock.date()["day"]))
 	v["km"] = 0.0
+	Assets.register_expensed_van()
 	GameState.set_flag("van_owned")
 	GameState.inc_stat("vans_bought")
 	GameState.timeline(I18n.t("Bought a used van from Sam Okoro at Dockside Motors for %s.") % Fmt.money0(price), "business")
@@ -96,8 +97,7 @@ static func buy_van() -> Dictionary:
 static func on_company_closed(ent: String) -> float:
 	if not has_van() or str(S()["van"].get("entity", "")) != ent:
 		return 0.0
-	var got := snappedf(float(van_cfg().get("price", 9800)) * float(van_cfg().get("resale", 0.55)), 0.01)
-	Ledger.post(ent, I18n.t("Van sold at auction"), [{"acct": "cash", "dr": got}, {"acct": "other_income", "cr": got}], {"type": "liquidation"})
+	var got := Assets.auction_expensed_van(ent)
 	S()["van"]["owned"] = false
 	S()["jobs"] = {}
 	GameState.set_flag("van_owned", false)
@@ -421,11 +421,11 @@ static func _settle(j: Dictionary, st: Dictionary, driver: String) -> Dictionary
 	var ent := entity()
 	var client := I18n.t(str(j["client"]))
 	Ledger.post(ent, I18n.t("Delivery run %s: %s (%d stops)") % [j["id"], client, (j["stops"] as Array).size()],
-		[{"acct": "cash", "dr": pay}, {"acct": "revenue", "cr": pay}], {"type": "delivery", "id": j["id"]})
+		[{"acct": "cash", "dr": pay}, {"acct": "revenue", "cr": pay}], {"segment": "logistics", "type": "delivery", "id": j["id"]})
 	if float(st["fuel_cost"]) > 0.0:
-		Ledger.expense(ent, "fuel", float(st["fuel_cost"]), I18n.t("Fuel: run %s, %.1f km") % [j["id"], float(st["km"])], {"type": "delivery", "id": j["id"]})
+		Ledger.expense(ent, "fuel", float(st["fuel_cost"]), I18n.t("Fuel: run %s, %.1f km") % [j["id"], float(st["km"])], {"segment": "logistics", "type": "delivery", "id": j["id"]})
 	if float(st["upkeep"]) > 0.0:
-		Ledger.expense(ent, "vehicle", float(st["upkeep"]), I18n.t("Van upkeep: run %s") % j["id"], {"type": "delivery", "id": j["id"]})
+		Ledger.expense(ent, "vehicle", float(st["upkeep"]), I18n.t("Van upkeep: run %s") % j["id"], {"segment": "logistics", "type": "delivery", "id": j["id"]})
 	S()["van"]["km"] = float(S()["van"].get("km", 0.0)) + float(st["km"])
 	j["status"] = "late" if late else "done"
 	j["done"] = Clock.now()
@@ -439,10 +439,10 @@ static func _settle(j: Dictionary, st: Dictionary, driver: String) -> Dictionary
 	GameState.inc_stat("van_fuel_l", float(st["fuel_l"]))
 	if int(GameState.stat("van_runs")) == 1:
 		GameState.set_flag("first_delivery_run")
-		GameState.timeline(I18n.t("First delivery run for %s: %s.") % [client, Fmt.money(pay)], "milestone")
-	var msg := I18n.t("Run %s paid %s.") % [j["id"], Fmt.money(pay)]
+		GameState.timeline(I18n.t("First delivery run for %s: %s.") % [client, Fmt.money0(pay)], "milestone")
+	var msg := I18n.t("Run %s paid %s.") % [j["id"], Fmt.money0(pay)]
 	if driver != "":
-		msg = I18n.t("%s drove run %s: paid %s.") % [driver, j["id"], Fmt.money(pay)]
+		msg = I18n.t("%s drove run %s: paid %s.") % [driver, j["id"], Fmt.money0(pay)]
 	if late:
 		msg += " " + I18n.t("It was late, so the pay was cut.")
 	EventBus.notify.emit(msg, "warn" if late else "good", "parcel")
@@ -570,7 +570,7 @@ static func _housekeeping(t: int) -> void:
 static func _insurance(t: int) -> void:
 	var v: Dictionary = S()["van"]
 	if int(Clock.date_at(t)["day"]) == int(v.get("ins_day", 1)) and t - int(v.get("bought", 0)) > 20 * Clock.DAY:
-		Ledger.expense(entity(), "insurance", float(van_cfg().get("insurance_month", 165)), I18n.t("Van insurance: monthly"), {"type": "insurance"})
+		Ledger.expense(entity(), "insurance", float(van_cfg().get("insurance_month", 165)), I18n.t("Van insurance: monthly"), {"segment": "logistics", "type": "insurance"})
 
 
 # ------------------------------------------------------------------ shipping your own parcels
@@ -603,7 +603,7 @@ static func ship_own_van(loc: String) -> Dictionary:
 	var packed := Ecommerce.orders_with(["packed"], loc).slice(0, n)
 	var ent: String = packed[0]["entity"]
 	if float(q["fuel"]) > 0.0:
-		Ledger.expense(ent, "fuel", float(q["fuel"]), I18n.t("Own-van delivery: %d parcels") % n, {"type": "ship"})
+		Ledger.expense(ent, "fuel", float(q["fuel"]), I18n.t("Own-van delivery: %d parcels") % n, {"segment": "logistics", "type": "ship"})
 	var eta := Clock.now() + int(q["minutes"])
 	var each := snappedf(float(q["fuel"]) / maxf(1.0, float(n)), 0.01)
 	for o in packed:
@@ -613,3 +613,19 @@ static func ship_own_van(loc: String) -> Dictionary:
 	var km := n * float((cfg().get("own_van_shipping", {}) as Dictionary).get("km_per_parcel", 4.5))
 	S()["van"]["km"] = float(S()["van"].get("km", 0.0)) + km
 	return {"ok": true, "count": n, "cost": float(q["fuel"]), "minutes": int(q["minutes"]), "eta": eta}
+
+
+static func is_running() -> bool:
+	return has_van()
+
+
+static func os_tab() -> Dictionary:
+	return {"id":"logistics", "label":"Logistics", "icon":"map", "method":"_tab_logistics", "order":4}
+
+
+static func board_detail() -> Callable:
+	return IndustryViews.logistics
+
+
+static func segment_tag() -> String:
+	return "logistics"

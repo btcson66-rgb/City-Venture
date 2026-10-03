@@ -53,6 +53,14 @@ func _make(file: String) -> Modal:
 	return script.new()
 
 
+func _make_game(file: String) -> Modal:
+	var script: GDScript = load("res://scripts/ui/minigames/" + file)
+	match file:
+		"auction_game.gd": return script.new("settings_intro_only")
+		"creative_pitch.gd": return script.new({"id": "settings_intro_only", "client": "QA", "audience": 0, "preferences": [0, 1, 2]})
+	return script.new()
+
+
 func _run() -> void:
 	for argument in OS.get_cmdline_user_args():
 		if argument.begins_with("--out="):
@@ -121,7 +129,7 @@ func _run() -> void:
 		await _settle()
 		for game_file in games.get_files():
 			if game_file.ends_with(".gd") and game_file not in ["mini_game.gd", "mini_games.gd"]:
-				var game: Modal = load("res://scripts/ui/minigames/" + game_file).new()
+				var game := _make_game(game_file)
 				await _check_modal(game, game_file + " (intro)")
 	var menu_scroll := SceneRouter.current.get_node("MenuScroll") as ScrollContainer
 	var menu_ok := menu_scroll.size.x > 100.0 and menu_scroll.size.y > 100.0

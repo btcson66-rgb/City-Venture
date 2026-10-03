@@ -1,0 +1,38 @@
+{
+ "id": "real_estate_arrears",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:real_estate_active"
+  ],
+  "chance": 0.025,
+  "cooldown_days": 28,
+  "once": false,
+  "earliest_day": 4
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "diane_harlow",
+  "title": "Tenant rent arrears",
+  "icon": "warning",
+  "lines": [
+   "A tenant has missed rent. Receivables remain visible; collection takes time and may fail."
+  ]
+ },
+ "choices": [
+  {
+   "id": "respond",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "real_estate",
+     "kind": "arrears"
+    }
+   ],
+   "outcome": "A tenant has missed rent. Receivables remain visible; collection takes time and may fail.",
+   "label": "Review properties and respond"
+  }
+ ]
+}

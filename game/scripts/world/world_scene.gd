@@ -35,7 +35,9 @@ static func tileset() -> TileSet:
 	var ts := TileSet.new()
 	ts.tile_size = Vector2i(T, T)
 	var src := TileSetAtlasSource.new()
-	src.texture = Art.tex("tiles/atlas")
+	# TileSetAtlasSource addresses physical image regions; unlike Sprite2D, it ignores a
+	# texture's logical size override. Keep the native atlas so sidewalks cannot sample grass.
+	src.texture = load("res://assets/tiles/atlas.png")
 	src.texture_region_size = Vector2i(T, T)
 	var tiles: Dictionary = DataDB.tiles.get("tiles", {})
 	for n in tiles:
@@ -286,6 +288,10 @@ func _footprint(key: String, tex: Texture2D, left: int, w: int, band: int) -> Ve
 		return _foot_cache[ck]
 	var out := Vector2(0, w)
 	var img := tex.get_image() if tex != null else null
+	# Collision is defined by the native alpha mask. A detail texture keeps logical dimensions
+	# but get_image() intentionally returns all of its physical pixels.
+	if tex != null and tex.has_meta("detail_path") and ResourceLoader.exists("res://assets/" + key + ".png"):
+		img = (load("res://assets/" + key + ".png") as Texture2D).get_image()
 	if img != null:
 		if img.is_compressed():
 			img.decompress()

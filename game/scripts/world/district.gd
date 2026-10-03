@@ -5,7 +5,7 @@ extends WorldScene
 const BASE_Y := 320.0   # building fronts meet the north sidewalk here
 const POI_ICONS := {"home": "home", "cafe": "coffee", "restaurant": "coffee", "bank": "bank", "civic": "civic", "parcel": "parcel",
 	"retail": "shop", "retail_space": "shop", "own_cafe": "coffee", "lettings": "home", "flat_to_let": "home",
-	"warehouse": "inventory", "van_dealer": "company", "gym": "people", "customs": "civic"}
+	"warehouse": "inventory", "van_dealer": "company", "gym": "people", "customs": "civic", "hotel": "sleep"}
 
 var def: Dictionary = {}
 var building_nodes := {}
@@ -15,6 +15,7 @@ var peds: Array = []
 var _ped_rng := RandomNumberGenerator.new()
 var _density_acc := 0.0
 var sky_layer: CanvasLayer
+var _lot_rendered := ""
 var sky_day: Sprite2D
 var sky_dusk: Sprite2D
 var sky_night: Sprite2D
@@ -27,6 +28,9 @@ func build(district_id: String) -> void:
 	kind = "district"
 	scene_id = district_id
 	def = DataDB.districts[district_id]
+	if district_id=="residential":
+		_lot_rendered=JSON.stringify(RealEstate.lot_definition(DataDB.buildings["lot7"])["exterior"])
+		EventBus.world_refresh.connect(_refresh_lot7)
 	size_px = Vector2i(int(def["size_tiles"][0]) * T, int(def["size_tiles"][1]) * T)
 	_init_layers()
 	init_nav()
@@ -56,10 +60,13 @@ func build(district_id: String) -> void:
 	# buildings
 	for bid in def.get("buildings", []):
 		var bd: Dictionary = DataDB.buildings[bid]
+		if bid=="lot7":bd=RealEstate.lot_definition(bd)
 		_add_building(facade(bd["exterior"]), float(bd["exterior"]["x"]), bid, bd)
 	for f in def.get("fillers", []):
 		_add_building(facade(f), float(f["x"]), "", {})
 	for p in def.get("props", []):
+		add_prop(p)
+	for p in Energy.street_props(district_id):   # chargers the player built stand on the pavement
 		add_prop(p)
 	# metro entrance
 	var m: Dictionary = def.get("metro", {})
@@ -94,9 +101,15 @@ static func facade(d: Dictionary) -> String:
 	return sp
 
 
-## Keep a sign's text on its painted board: step the font down until the text fits the board's width, and if it
-## still doesn't, let it overflow evenly on both sides. A Label only grows right and down, which slid long names
-## like "RIVERSIDE TOWER" off their boards and dropped tall fonts below them.
+## Rebuild only when a construction transition changes the rendered facade.
+func _refresh_lot7() -> void:
+	if JSON.stringify(RealEstate.lot_definition(DataDB.buildings["lot7"])["exterior"])!=_lot_rendered:
+		call_deferred("_reload_lot7")
+func _reload_lot7() -> void:
+	if is_instance_valid(player) and SceneRouter.world_scene()==self:
+		SceneRouter._enter("district","residential","metro","",player.position)
+
+## Keep a translated sign within the painted board, including long player names.
 func _fit_sign(lb: Label, board: Rect2) -> void:
 	if not is_instance_valid(lb):
 		return
@@ -163,12 +176,15 @@ func _add_building(sprite: String, x: float, bid: String, bd: Dictionary) -> voi
 			sign_labels[bid] = lb
 	# door → interior
 	if bid != "":
-		var door: Array = meta.get("door", [w / 2 - 10, h - 34, 20, 30])
+		var door_meta = meta.get("door")   # scenery sprites used as fallbacks have "door": null
+		var door: Array = door_meta if door_meta is Array else [w / 2 - 10, h - 34, 20, 30]
 		var dx := x + float(door[0]) + float(door[2]) / 2.0
+		spawns["door_" + bid] = Vector2(dx, BASE_Y + 22)
+		if not BuildingInfo.building_enterable(bid):
+			return
 		var trig := DoorTrigger.new()
 		trig.setup(bid, Rect2(dx - float(door[2]) / 2.0 + 2, BASE_Y - 1, float(door[2]) - 4, 9))
 		add_child(trig)
-		spawns["door_" + bid] = Vector2(dx, BASE_Y + 22)
 		var icon: String = POI_ICONS.get(str(bd.get("type", "")), "company")
 		poi.append({"pos": Vector2(dx, BASE_Y), "icon": icon, "label": I18n.t(bd.get("name", bid)), "building": bid})
 

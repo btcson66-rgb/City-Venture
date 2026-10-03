@@ -1,0 +1,131 @@
+{
+ "id": "skyline_grand",
+ "name": "Skyline Grand",
+ "category": "Five-star hotel",
+ "district": "luxury_heights",
+ "type": "hotel",
+ "hours": {
+  "open": "07:00",
+  "close": "23:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "skyline_grand",
+  "fallback": "glass_tower",
+  "x": 470,
+  "sign": "Skyline Grand"
+ },
+ "interior": {
+  "size": [
+   24,
+   14
+  ],
+  "floor": "marble",
+  "wall": "marble_wall",
+  "ambient": "bank",
+  "props": [
+   {
+    "sprite": "window_day",
+    "x": 30,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "framed_art_b",
+    "x": 100,
+    "y": 12,
+    "wall": true
+   },
+   {
+    "sprite": "logo_nexus_bank",
+    "fallback": "framed_art",
+    "x": 190,
+    "y": 8,
+    "wall": true
+   },
+   {
+    "sprite": "window_day",
+    "x": 300,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "exec_desk",
+    "x": 150,
+    "y": 60
+   },
+   {
+    "sprite": "lounge_sofa",
+    "x": 40,
+    "y": 130
+   },
+   {
+    "sprite": "lounge_sofa",
+    "x": 250,
+    "y": 130
+   },
+   {
+    "sprite": "coffee_table",
+    "x": 130,
+    "y": 160
+   },
+   {
+    "sprite": "plant_big",
+    "x": 8,
+    "y": 50
+   },
+   {
+    "sprite": "plant_big",
+    "x": 346,
+    "y": 60
+   },
+   {
+    "sprite": "rug_navy",
+    "x": 120,
+    "y": 176,
+    "floor": true
+   }
+  ],
+  "interactables": [
+   {
+    "id": "ota_desk",
+    "at": [
+     150,
+     100
+    ],
+    "label": "Open the Rate Board (Voyago desk)",
+    "action": "hotel_open",
+    "icon": "sleep"
+   },
+   {
+    "id": "rival_rates",
+    "at": [
+     210,
+     100
+    ],
+    "label": "Check the competitor's rates",
+    "action": "look",
+    "params": {
+     "icon": "star",
+     "text": "Skyline Grand rack rates: Suites from $320, rooms from $210. They are fully booked in peak weeks, so mid-priced guests overflow to hotels like yours."
+    }
+   }
+  ],
+  "npc_spots": {
+   "ota": [
+    120,
+    84
+   ],
+   "lounge": [
+    60,
+    156
+   ],
+   "lounge2": [
+    270,
+    156
+   ]
+  }
+ }
+}

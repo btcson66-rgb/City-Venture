@@ -25,10 +25,10 @@ func _start() -> void:
 	if bot == "settings":
 		get_tree().root.add_child(load("res://tests/walkthrough/settings_tour.gd").new())
 		return
-	SceneRouter.go_menu()
 	if bot != "":
 		var script: GDScript = load("res://tests/walkthrough/bot.gd")
 		var b = script.new()
 		b.name = "Bot"
 		b.mode = bot
 		get_tree().root.add_child(b)
+	SceneRouter.go_menu()

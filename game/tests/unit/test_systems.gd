@@ -216,7 +216,9 @@ func test_a_new_game_never_overwrites_another_save() -> void:
 	SaveSystem.next_slot = first
 	GameState.new_game({"name": "Third Founder", "seed": 3})
 	runner.eq(SaveSystem.current_slot(), first, "the chosen slot is reused")
-	runner.check(not SaveSystem.has_save(first), "the old file moved out of the slot")
+	runner.eq(str(SaveSystem.summary(first).get("name", "")), name1, "old primary remains until new save is fully written")
 	runner.check(DirAccess.get_files_at(SaveSystem.DIR + "/replaced").size() >= 1, "and into saves/replaced/")
+	runner.check(SaveSystem.save(first), "replacement written atomically")
+	runner.eq(str(SaveSystem.summary(first).get("name", "")), "Third Founder", "chosen slot now contains completed new save")
 	for s in [first, second]:
 		DirAccess.remove_absolute(SaveSystem._path(s))

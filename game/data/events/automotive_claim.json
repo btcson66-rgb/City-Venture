@@ -1,0 +1,62 @@
+{
+ "id": "automotive_claim",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:automotive_active",
+   "flag:automotive_fleet"
+  ],
+  "chance": 0.012,
+  "cooldown_days": 30,
+  "earliest_day": 4
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "frank_doyle",
+  "title": "Insurance claim dispute",
+  "icon": "warning",
+  "lines": [
+   "The insurer disputes a $3,200 accident repair on one of your rental cars. Pay it yourself, fight it with a lawyer, or settle for half."
+  ]
+ },
+ "choices": [
+  {
+   "id": "claim_pay",
+   "label": "Pay the repair yourself",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "automotive",
+     "kind": "claim_pay"
+    }
+   ],
+   "outcome": "You pay the full $3,200 and the matter closes."
+  },
+  {
+   "id": "claim_fight",
+   "label": "Fight the dispute",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "automotive",
+     "kind": "claim_fight"
+    }
+   ],
+   "outcome": "A $350 lawyer; about half the time you win and pay nothing more."
+  },
+  {
+   "id": "claim_settle",
+   "label": "Settle for half",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "automotive",
+     "kind": "claim_settle"
+    }
+   ],
+   "outcome": "You pay half the repair and move on."
+  }
+ ]
+}

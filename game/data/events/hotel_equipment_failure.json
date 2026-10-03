@@ -1,0 +1,49 @@
+{
+ "id": "hotel_equipment_failure",
+ "category": "market",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:hotel_active"
+  ],
+  "chance": 0.02,
+  "cooldown_days": 30,
+  "earliest_day": 5
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "henri_dubois",
+  "title": "Lift and hot water failure",
+  "icon": "warning",
+  "lines": [
+   "The lift and the hot water have broken in the same week."
+  ]
+ },
+ "choices": [
+  {
+   "id": "fast",
+   "label": "Pay $2,400 for an emergency repair",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "hotel",
+     "kind": "breakdown_fast"
+    }
+   ],
+   "outcome": "Engineers fix it today and the rooms stay on sale."
+  },
+  {
+   "id": "slow",
+   "label": "Book the scheduled technician for $700",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "hotel",
+     "kind": "breakdown_slow"
+    }
+   ],
+   "outcome": "It is cheaper, but the affected rooms are off sale for six days."
+  }
+ ]
+}

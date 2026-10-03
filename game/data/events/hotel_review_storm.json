@@ -1,0 +1,49 @@
+{
+ "id": "hotel_review_storm",
+ "category": "market",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:hotel_active"
+  ],
+  "chance": 0.015,
+  "cooldown_days": 30,
+  "earliest_day": 5
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "priya_nair",
+  "title": "Review storm",
+  "icon": "warning",
+  "lines": [
+   "A guest's angry post is spreading across the booking platform."
+  ]
+ },
+ "choices": [
+  {
+   "id": "respond",
+   "label": "Apologise and compensate for $900",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "hotel",
+     "kind": "storm_respond"
+    }
+   ],
+   "outcome": "A public reply and a refund calm the thread. The bad rating ages out of the reviews."
+  },
+  {
+   "id": "ignore",
+   "label": "Ignore it",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "hotel",
+     "kind": "storm_ignore"
+    }
+   ],
+   "outcome": "The review stays heavy until fresh reviews dilute it."
+  }
+ ]
+}

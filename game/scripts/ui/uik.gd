@@ -319,6 +319,17 @@ static func kv(k: String, v: String, vcolor := Art.C_WHITE, size := 8, bold := f
 	return h
 
 
+## A finance row with the explanation beside its label, before the value.
+static func kv_tip(k: String, v: String, id: String, vcolor := Art.C_WHITE, size := 8, bold := false) -> HBoxContainer:
+	var h := hbox(4)
+	h.add_child(label_tip(k, id, size, Art.C_WHITE if bold else Art.C_MUTED, bold))
+	h.add_child(expand())
+	var value := label(v, size, vcolor, bold)
+	value.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	h.add_child(value)
+	return h
+
+
 static func scroll(child: Control, min_size := Vector2(100, 100)) -> ScrollContainer:
 	var s := ScrollContainer.new()
 	s.custom_minimum_size = min_size

@@ -1,0 +1,40 @@
+{
+ "id": "manufacturing_shortage",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:manufacturing_active"
+  ],
+  "chance": 0.025,
+  "cooldown_days": 28,
+  "once": false,
+  "earliest_day": 4
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "lena_park",
+  "title": "Ferro material shortage",
+  "icon": "warning",
+  "lines": [
+   "Deliveries slip by 5 days and material prices rise 30%."
+  ]
+ },
+ "choices": [
+  {
+   "id": "wait",
+   "label": "Wait for the delayed materials",
+   "detail": "Deliveries slip by 5 days and material prices rise 30%.",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "manufacturing",
+     "kind": "shortage",
+     "retain": true
+    }
+   ],
+   "outcome": "The factory ledger and schedule have been updated."
+  }
+ ]
+}

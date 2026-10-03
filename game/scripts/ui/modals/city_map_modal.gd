@@ -35,6 +35,8 @@ func build() -> void:
 		here = ws.scene_id if ws.kind == "district" else DataDB.building(ws.scene_id).get("district", "")
 	if sel == "":
 		sel = here if here != "" else "riverside"
+	if not BuildingInfo.district_open(sel):
+		sel = "riverside"
 	footer.visible = false
 	var h := UIK.hbox(8)
 	body.add_child(h)
@@ -63,7 +65,6 @@ func build() -> void:
 		lg.add_child(lv)
 		lv.add_child(UIK.label("LEGEND", 6, Art.C_DIM, true))
 		lv.add_child(UIK.label("● Open in this build", 6, Art.C_GREEN))
-		lv.add_child(UIK.label("● Planned (P1+)", 6, Art.C_GOLD))
 		lv.add_child(UIK.label("◆ You are here", 6, Art.C_WHITE))
 		mapc.add_child(lg)
 	if ex.has("metro"):
@@ -73,13 +74,24 @@ func build() -> void:
 		if not d.has("board"):
 			continue
 		var bd: Dictionary = d["board"]
-		var active: bool = d["status"] == "active"
-		var sub := "You are here" if d["id"] == here else ("Open" if active else "Planned")
+		if not BuildingInfo.district_open(str(d["id"])):
+			continue
+		var sub := "You are here" if d["id"] == here else "Open"
 		var did: String = d["id"]
 		var card := _label_card(board_rect(bd["label"]), d["name"], sub, d.get("icon", "info"), Color(bd.get("accent", "#4a8ce8")), did == sel,
 				func(): sel = did; rebuild())
 		card.name = "District_" + did
 		mapc.add_child(card)
+	if GameState.data.get("real_estate_landmark",{}).get("completed",false):
+		var residential := DataDB.district_def_in_city("residential")
+		var pin: Array=residential["board"]["pin"]
+		var landmark := TextureButton.new()
+		landmark.name="Landmark_lot7"
+		landmark.texture_normal=Art.icon("home")
+		landmark.position=board_to_map(Vector2(float(pin[0]),float(pin[1])))+Vector2(-6,-14)
+		landmark.tooltip_text=str(GameState.data["real_estate_landmark"]["name"])
+		landmark.pressed.connect(func():sel="residential";rebuild())
+		mapc.add_child(landmark)
 	# "you are here" marker
 	var hd := DataDB.district_def_in_city(here)
 	if hd.has("board"):
@@ -100,21 +112,23 @@ func build() -> void:
 	info.add_child(pic)
 	info.add_child(UIK.title(dd.get("name", "—"), 11))
 	info.add_child(UIK.wrap(dd.get("blurb", ""), 7, Art.C_SKY, 146))
-	if dd.get("status", "") == "active":
-		info.add_child(UIK.chip("OPEN IN THIS BUILD", Art.C_GREEN))
-	else:
-		info.add_child(UIK.chip("PLANNED · P1", Art.C_GOLD))
+	if sel=="residential" and GameState.data.get("real_estate_landmark",{}).get("completed",false):
+		info.add_child(UIK.wrap(str(GameState.data["real_estate_landmark"]["name"]),7,Art.C_GOLD,146))
+	info.add_child(UIK.chip("Open", Art.C_GREEN))
 	if sel == here:
 		info.add_child(UIK.label("You are here.", 7, Art.C_GOLD, true))
 	info.add_child(UIK.sep())
-	info.add_child(UIK.label("Pop. 3.2M · 62 km² · 5 Metro lines", 6, Art.C_DIM))
+	info.add_child(UIK.wrap("Population: 3.2 million people · 62 km² · 5 Metro lines", 6, Art.C_DIM, 146))
 	info.add_child(UIK.wrap("Walk between neighbouring districts, or take the Metro from any station.", 6, Art.C_MUTED, 146))
 	var sp := Control.new()
 	sp.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	info.add_child(sp)
 	var row := UIK.hbox(4)
 	info.add_child(row)
-	row.add_child(UIK.button("World map", func(): close(); UIRoot.open_modal(WorldMapModal.new()), "", 70))
+	if BuildingInfo.world_travel_available():
+		var world := UIK.button("World map", func(): close(); UIRoot.open_modal(WorldMapModal.new()), "", 70)
+		world.name = "WorldMap"
+		row.add_child(world)
 	row.add_child(UIK.button("Close", close, "", 60))
 
 

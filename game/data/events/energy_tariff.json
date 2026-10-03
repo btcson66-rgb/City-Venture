@@ -1,0 +1,50 @@
+{
+ "id": "energy_tariff",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:energy_active",
+   "flag:energy_chargers"
+  ],
+  "chance": 0.012,
+  "cooldown_days": 45,
+  "earliest_day": 4
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "sunny_adeyemi",
+  "title": "Electricity tariff increase",
+  "icon": "warning",
+  "lines": [
+   "The grid raised commercial tariffs by 25%. Hold your prices and take the margin hit, or pass the cost on to drivers."
+  ]
+ },
+ "choices": [
+  {
+   "id": "hold",
+   "label": "Hold charging prices",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "energy",
+     "kind": "tariff_hold"
+    }
+   ],
+   "outcome": "Margins shrink while the tariff eases over two months."
+  },
+  {
+   "id": "pass",
+   "label": "Raise prices by $0.05 per kWh",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "energy",
+     "kind": "tariff_pass"
+    }
+   ],
+   "outcome": "Margins hold, but fewer drivers plug in."
+  }
+ ]
+}

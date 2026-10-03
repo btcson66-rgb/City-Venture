@@ -17,6 +17,25 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "discoverability":
+		await _discoverability_fixture()
+		return
+	if _arg("from")=="media":
+		await _fast_forward_to_ch10()
+		await _media()
+		await _save_load()
+		return
+	if _arg("from")=="real_estate":
+		await _fast_forward_to_ch10()
+		await _real_estate()
+		await _save_load()
+		return
+	if _arg("from") == "manufacturing":
+		await _fast_forward_to_ch10()
+		await _manufacturing()
+		await _save_load()
+		bot.expect(Ledger.check_balanced(), "ledger balanced after manufacturing fixture")
+		return
 	if _arg("from") == "loan_access":
 		await _loan_access_fixture()
 		return
@@ -36,6 +55,10 @@ func run() -> void:
 		await _save_load()
 		bot.expect(Ledger.check_balanced(), "ledger balanced after the harbor fixture")
 		return
+	if _arg("from") == "industries":
+		await _industry_fixtures()
+		bot.expect(Ledger.check_balanced(), "ledger balanced after the industry fixtures")
+		return
 	if _arg("from") == "ch10":
 		# quick rerun of the last chapters: --from=ch10 (the full walkthrough never does this)
 		await _fast_forward_to_ch10()
@@ -46,6 +69,10 @@ func run() -> void:
 	await _chapter2()
 	await _purchase_cancel()
 	await _chapter3()
+	if _arg("capture") != "":
+		SaveSystem.save_to(_arg("capture"))
+		bot.expect(FileAccess.file_exists(_arg("capture")), "genuine chapter-three save captured")
+		return
 	if not bot.video_mode:
 		await _careers()
 	if bot.video_mode:
@@ -58,13 +85,153 @@ func run() -> void:
 		await _harbor_logistics()
 		await _chapters_10_to_12()
 	await _summary()
+	if not bot.video_mode:
+		await _industry_fixtures()
 
+
+
+## Independent founder fixtures, one new game per industry (#64–#69). Run alone with --from=industries.
+func _industry_fixtures() -> void:
+	# Independent capitalized founder fixture after the full story. Factory risk must not change the
+	# earlier tutorial story's funding assumptions; all factory actions below still use real input.
+	await close_modal()
+	GameState.new_game({"name":"Factory Founder", "seed":64001})
+	_tried.clear()  # a new game restarts decision ids
+	await _fast_forward_to_ch10()
+	SceneRouter._enter("interior", "riverside_apartment", "bed_side", "")
+	await wait_world()
+	await _manufacturing()
+	await _save_load()
+	await close_modal()
+	GameState.new_game({"name":"Realty Founder","seed":65001})
+	_tried.clear()
+	await _fast_forward_to_ch10()
+	SceneRouter._enter("interior","riverside_apartment","bed_side","")
+	await wait_world()
+	await _real_estate()
+	await _save_load()
+	await close_modal()
+	GameState.new_game({"name":"Media Founder","seed":66001})
+	_tried.clear()
+	await _fast_forward_to_ch10()
+	SceneRouter._enter("interior","riverside_apartment","bed_side","")
+	await wait_world()
+	await _media()
+	await _save_load()
+	await close_modal()
+	GameState.new_game({"name":"Hotel Founder","seed":67001})
+	_tried.clear()
+	await _fast_forward_to_ch10()
+	SceneRouter._enter("interior","riverside_apartment","bed_side","")
+	await wait_world()
+	await _hotel()
+	GameState.new_game({"name":"Energy Founder","seed":69001})
+	_tried.clear()
+	await _fast_forward_to_ch10()
+	SceneRouter._enter("interior","riverside_apartment","bed_side","")
+	await wait_world()
+	await _energy()
+	GameState.new_game({"name":"Auto Founder","seed":68001})
+	_tried.clear()
+	await _fast_forward_to_ch10()
+	SceneRouter._enter("interior","riverside_apartment","bed_side","")
+	await wait_world()
+	await _automotive()
+	await _save_load()
 
 func _arg(name: String) -> String:
 	for a in OS.get_cmdline_user_args():
 		if a.begins_with("--%s=" % name):
 			return a.substr(name.length() + 3)
 	return ""
+
+
+## Time/location and the contract offer flag are fixtures; UI, schedules and purchases use real input.
+func _discoverability_fixture() -> void:
+	await bot.wait(4.0)
+	UIRoot._suppress_decisions = true
+	UIRoot.tutorial.st()["off"] = true
+	var fixture_day := Clock.now() - Clock.minute_of_day()
+	bot.step("Interaction markers and welcome cards in four Shopping Street shops")
+	GameState.data["clock"]["minutes"] = Clock.at_day_time(1, 14 * 60)
+	for bid in ["threadline_apparel", "crestline_flagship", "lantern_bistro", "byte_and_bean"]:
+		GameState.set_flag("big_contract_offered")
+		GameState.data["clock"]["minutes"] = fixture_day + (6 if bid == "crestline_flagship" else 1) * Clock.DAY + 14 * 60
+		SceneRouter._enter("interior", bid, "door", "up")
+		await bot.wait(0.6)
+		bot.expect(UIRoot.hud.welcome.visible, "first entry shows introduction: " + bid)
+		bot.expect(UIRoot.hud.welcome.text.text == BuildingInfo.welcome(bid, SceneRouter.world_scene()), "introduction reads live activities: " + bid)
+		await bot.shot("discoverability_" + bid)
+		await bot.click_named("DismissBuildingWelcome")
+		bot.expect(not UIRoot.hud.welcome.visible, "card dismisses by click")
+		var point: Interactable = bot.find_interactable(func(n): return n.npc == null and n.action != "look")
+		if point == null:
+			point = bot.find_interactable(func(n): return n.action == "look")
+		await bot.walk_to(point.global_position + Vector2(0, 30), 4.0, 40.0)
+		await bot.shot("discoverability_markers_" + bid)
+		await bot.click_named("BuildingActivities")
+		bot.expect(UIRoot.hud.welcome.remaining > 0, "HUD reopens introduction")
+		await bot.wait(4.3)
+		bot.expect(not UIRoot.hud.welcome.visible, "card fades after four seconds")
+		SceneRouter._enter("interior", bid, "door", "up")
+		await bot.wait(0.3)
+		bot.expect(UIRoot.hud.welcome.visible, "second entry shows introduction")
+		SceneRouter._enter("interior", bid, "door", "up")
+		await bot.wait(0.3)
+		bot.expect(not UIRoot.hud.welcome.visible, "third entry has no automatic introduction")
+	bot.step("Marker setting is independent of saves")
+	UIRoot.open_pause()
+	await bot.wait(0.3)
+	await bot.click_named("InteractionMarkersOff")
+	bot.expect(not Interactable.markers_enabled(), "markers off")
+	await bot.click_named("InteractionMarkersOn")
+	bot.expect(Interactable.markers_enabled(), "markers on")
+	await bot.shot("discoverability_settings")
+	await close_modal()
+	bot.step("A locked office marker keeps its real interaction position")
+	SceneRouter._enter("interior", "small_office", "door", "up")
+	await bot.wait(0.5)
+	UIRoot.hud.welcome.hide_card()
+	var locked: Interactable = bot.find_interactable(func(n): return n.action == "open_company_os")
+	await bot.walk_to(locked.global_position + Vector2(0, 30), 4.0, 40.0)
+	bot.expect(Actions.lock_reason(locked.action, locked.params) != "", "office terminal is visibly locked before lease")
+	await bot.shot("discoverability_locked_marker")
+	bot.step("City Guide uses phone entry and existing gold arrow")
+	SceneRouter._enter("district", "shopping_street", "door_lantern_bistro", "down")
+	await bot.wait(0.5)
+	UIRoot.phone.open()
+	await bot.wait(0.3)
+	await bot.click_named("App_guide")
+	bot.expect(UIRoot.top_modal() is CityGuideModal, "phone opens City Guide")
+	await bot.shot("discoverability_city_guide")
+	# The scroll view can reach any building without relying on sort order or a hidden button.
+	var guide := UIRoot.top_modal()
+	var scroll: ScrollContainer = guide.find_children("*", "ScrollContainer", true, false)[0]
+	var route: Button = guide.find_child("GuideTo_lantern_bistro", true, false)
+	scroll.ensure_control_visible(route)
+	await bot.wait(0.3)
+	await bot.shot("discoverability_city_guide_shopping")
+	await bot.click_named("GuideTo_lantern_bistro")
+	await bot.wait(0.5)
+	bot.expect(UIRoot.tutorial._destination == "lantern_bistro" and not UIRoot.tutorial._target.is_empty(), "phone destination uses Tutorial resolver")
+	await bot.shot("discoverability_gold_arrow")
+	GameState.data["clock"]["minutes"] = Clock.at_day_time(1, 10 * 60)
+	bot.expect(BuildingInfo.door_text("lantern_bistro").contains("11:00"), "closed door gives opening time")
+	await bot.shot("discoverability_closed_door")
+	GameState.data["clock"]["minutes"] = Clock.at_day_time(1, 14 * 60)
+	SceneRouter._enter("interior", "lantern_bistro", "door", "up")
+	await bot.wait(0.4)
+	bot.expect(UIRoot.tutorial._destination == "", "arrival returns arrow to normal objectives")
+	var before := Ledger.cash("player")
+	await bot.use_action("buy_item", "restaurant counter")
+	bot.expect(Ledger.cash("player") == before - 22 and Ledger.balance("player", "exp:dining") == 22, "meal costs $22 in dining")
+	await bot.shot("discoverability_meal")
+	GameState.data["clock"]["minutes"] = fixture_day + Clock.DAY + 14 * 60
+	SceneRouter._enter("interior", "crestline_flagship", "door", "up")
+	await bot.wait(0.5)
+	bot.expect(SceneRouter.world_scene().kind == "district", "empty NPC-only room has no public entrance")
+	await bot.shot("discoverability_sightseeing")
+	bot.expect(Ledger.check_balanced(), "discoverability tour keeps books balanced")
 
 
 ## Force a popup on the exact frame that a real interactable receives focus; reaching it stays successful.
@@ -199,11 +366,16 @@ func _summary() -> void:
 func popups() -> void:
 	# answer any decision / month close that surfaced while we were busy
 	var guard := 0
-	while guard < 6:
+	while guard < 64:
 		guard += 1
 		var m = UIRoot.top_modal()
 		if m == null:
-			return
+			# The next queued report/decision opens on a subsequent process frame.
+			# Wait for that handoff before resuming world interaction.
+			await bot.frames(3)
+			m = UIRoot.top_modal()
+			if m == null:
+				return
 		if m is DecisionModal:
 			var inst: Dictionary = m.inst
 			await bot.shot("decision_" + str(inst["id"]))
@@ -246,6 +418,7 @@ func popups() -> void:
 				m.close()
 		else:
 			return
+	bot.fail("queued popup drain exceeded 64 real decisions/reports")
 
 
 func _pick_choice(inst: Dictionary) -> String:
@@ -411,10 +584,20 @@ func _pack_and_ship_home() -> void:
 	await bot.use_action("pack_orders")
 	await bot.wait(0.6)
 	await once_shot("packing_table")
-	await bot.click_named("Pack", 3.0)
-	await bot.until(func(): return not (UIRoot.top_modal() is MiniGame), 5.0)   # packed by hand (PackGame)
-	await bot.wait(0.8)
-	await bot.click_named("CourierExpress", 3.0)
+	# Like sleep, confirm that real input completed before looking for the next action. A mouse event can
+	# arrive while a rebuilt panel is settling; retry input, never change stock or mark an order packed here.
+	for attempt in 3:
+		await bot.click_named("Pack", 3.0)
+		await bot.until(func(): return not (UIRoot.top_modal() is MiniGame), 5.0)   # packed by hand (PackGame)
+		await bot.wait(0.8)
+		if not Ecommerce.orders_with(["packed"], "riverside_studio").is_empty():
+			break
+		bot.log_line("  pack click did not produce packed orders; retry %d" % (attempt + 1))
+	if Ecommerce.orders_with(["packed"], "riverside_studio").is_empty():
+		bot.fail("packing did not finish after three real input attempts")
+		await close_modal()
+		return
+	await bot.click_named("CourierEconomy", 3.0)
 	await bot.wait(0.6)
 	await close_modal()
 
@@ -841,10 +1024,11 @@ func _month() -> void:
 				await bot.click_named("Tab_operations")
 				await bot.click_named("DeliverTo_riverside_studio", 1.0)
 				for k in range(int(ceil(maxf(0, need_bottles) / 60.0))):
+					if bot.button_named("Buy_tradelink_wholesale_water_bottle") == null: break
 					await bot.click_named("Buy_tradelink_wholesale_water_bottle")
-				if Ecommerce.available_anywhere("water_bottle") < 25:
+				if Ecommerce.available_anywhere("water_bottle") < 25 and bot.button_named("Buy_tradelink_wholesale_water_bottle") != null:
 					await bot.click_named("Buy_tradelink_wholesale_water_bottle")
-				if Ecommerce.available_anywhere("wireless_earbuds") < 10:
+				if Ecommerce.available_anywhere("wireless_earbuds") < 10 and bot.button_named("Buy_tradelink_wholesale_wireless_earbuds") != null:
 					await bot.click_named("Buy_tradelink_wholesale_wireless_earbuds")
 			if offer_open:
 				await bot.click_named("Tab_contracts")
@@ -1025,6 +1209,24 @@ func _read_news(tag: String) -> void:
 	await enter_building("riverside_apartment")
 
 
+## Actual laptop purchases maintain two weeks of stock while demonstrating sensible pricing and shipping.
+func _shock_restock() -> void:
+	var needed := []
+	for pid in ["wireless_earbuds", "water_bottle", "desk_lamp", "phone_stand"]:
+		if Ecommerce.available_anywhere(pid) + Ecommerce.incoming_units_of(pid) < int(float(DataDB.product(pid)["base_daily_demand"]) * 7):
+			needed.append(pid)
+	if needed.is_empty(): return
+	await _home_laptop("operations")
+	await bot.click_named("DeliverTo_riverside_studio", 2.0)
+	for pid in needed:
+		var qty := int(Ecommerce.offer("tradelink_wholesale", pid)["moq"])
+		for batch in 3:
+			if Ecommerce.available_anywhere(pid) + Ecommerce.incoming_units_of(pid) >= int(float(DataDB.product(pid)["base_daily_demand"]) * 14): break
+			if Ecommerce.space_block("riverside_studio", qty) != "" or Ledger.cash(GameState.business_entity()) < qty * Ecommerce.unit_cost("tradelink_wholesale", pid): break
+			await bot.click_named("Buy_tradelink_wholesale_" + pid, 3.0)
+	await close_modal()
+
+
 func _chapters_7_to_9() -> void:
 	await popups()
 	bot.expect(StoryEngine.St()["chapter"] == "ch7_supply_shock", "Chapter 7 started after Chapter 6")
@@ -1046,14 +1248,27 @@ func _chapters_7_to_9() -> void:
 	StoryEngine.check()   # ch7_stock is done; an earlier price adjustment remains valid.
 	await bot.click_named("Tab_sales")
 	await bot.wait(0.4)
-	await bot.click_named("PriceUp_desk_lamp", 3.0)
+	for pid in ["wireless_earbuds", "water_bottle", "desk_lamp", "phone_stand"]:
+		var listing := Ecommerce.listing_for(pid)
+		if listing.is_empty(): continue
+		var target := float(DataDB.product(pid)["ref_price"]) * 1.2
+		for step in int(ceil(maxf(0.0, target - float(listing["price"])))):
+			await bot.click_named("PriceUp_" + pid, 3.0)
 	await bot.wait(0.4)
 	await close_modal()
 	await bot.wait(0.6)
 	StoryEngine.check()
 	bot.expect("ch7_price" in StoryEngine.St()["done"], "stocked and repriced")
-	await pass_time_at_home(func(): return "ch7_supply_shock" in StoryEngine.St()["chapters_done"], 75, true)   # a profitable month, or two month-ends
+	for day in 65:
+		if "ch7_supply_shock" in StoryEngine.St()["chapters_done"]: break
+		await _shock_restock()
+		await pass_time_at_home(func(): return "ch7_supply_shock" in StoryEngine.St()["chapters_done"], 1, true)
 	bot.expect("ch7_supply_shock" in StoryEngine.St()["chapters_done"], "Chapter 7 complete")
+	bot.expect(not GameState.flag("ch7_survived_losses"), "Chapter 7 passed with real profit, not two losses")
+	var close: Dictionary = GameState.data["reports"]["month_closes"].back()
+	var profit := float(close["entities"][GameState.business_entity()]["business_profit"])
+	bot.log_line("  ch7_month_profit set from actual ledger profit %s; survived_losses=%s" % [Fmt.money0(profit), GameState.flag("ch7_survived_losses")])
+	bot.expect(profit > 0, "positive chapter seven monthly profit")
 	# ---------------------------------------------------------------- chapter 8
 	bot.step("Chapter 8 — the Green Shift")
 	bot.expect(World.year() == 4, "Year 4: the Green Shift")
@@ -1200,6 +1415,125 @@ func _old_town_cafe() -> void:
 	await close_modal()
 	bot.expect(Ledger.check_balanced(), "ledger balanced after opening the café")
 	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")
+
+
+## Manufacturing: a real-input factory fixture through the first traceable OEM invoice.
+func _real_estate() -> void:
+	bot.step("Residential — licence, brokerage office, client match and first commission")
+	while Clock.weekday() not in [1,2,3,4,5]:Clock.advance(Clock.DAY)
+	Clock.advance_to(Clock.next_time_of_day(10*60))
+	await popups()
+	await close_modal()
+	if SceneRouter.world_scene().kind=="interior":await exit_building()
+	await metro_to("civic_center")
+	await enter_building("city_hall")
+	await bot.use_action("permits_info")
+	await bot.click_named("PropertyPermits")
+	await bot.click_named("ApplyRealtyPermit_brokerage")
+	await close_modal()
+	await close_modal()
+	Clock.advance(3*Clock.DAY)
+	await popups()
+	bot.expect(RealEstate.licence(),"brokerage licence followed City Hall fee and three-day process")
+	await exit_building()
+	await metro_to("residential")
+	await bot.shot("residential_day")
+	await enter_building("harlow_finch")
+	await bot.use_action("lease_property")
+	await bot.click_named("SignLease_realty_office")
+	await close_modal()
+	await bot.use_action("real_estate_open")
+	await bot.click_named("OpenBrokerage")
+	await bot.shot("matchmaker")
+	await close_modal()
+	for week in 8:
+		for mandate in RealEstate.S()["mandates"].values().duplicate():
+			if mandate["status"]!="open":continue
+			for client in RealEstate.S()["clients"].values().duplicate():
+				if client["status"]!="open" or client["kind"]!=mandate["kind"] or float(client["budget"])<float(mandate["floor"]):continue
+				await bot.use_action("real_estate_open")
+				await bot.click_named("Mandate_"+str(mandate["id"]))
+				await bot.click_named("Client_"+str(client["id"]))
+				await bot.click_named("Negotiate_soft")
+				await bot.click_named("ArrangeViewing")
+				await close_modal()
+				await popups()
+				if GameState.stat("realty_matches")>0:break
+			if GameState.stat("realty_matches")>0:break
+		if GameState.stat("realty_matches")>0:break
+		Clock.advance(7*Clock.DAY)
+		await popups()
+	bot.expect(GameState.stat("realty_matches")>0,"first brokerage income from a real client deal")
+	bot.expect(Ledger.check_balanced(),"viewing and commission ledger balanced")
+	await bot.use_action("real_estate_open")
+	await bot.click_named("RealtyTab_properties")
+	await bot.shot("property_management")
+	await close_modal()
+	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")
+
+func _manufacturing() -> void:
+	bot.step("Industrial — factory lease, machine, technician and first OEM invoice")
+	await popups()
+	await close_modal()
+	if SceneRouter.world_scene().kind == "interior": await exit_building()
+	await metro_to("industrial")
+	await bot.shot("industrial_day")
+	await enter_building("unit12_factory")
+	await bot.use_action("lease_property")
+	await bot.click_named("SignLease_unit12_factory")
+	await close_modal()
+	bot.expect(Living.has_lease("unit12_factory"), "factory lease signed with actual company funds")
+	await bot.shot("factory_interior")
+	await bot.use_action("manufacturing_open")
+	await bot.click_named("OpenFactory")
+	await bot.click_named("RentMachine")
+	if not Staff.employer_registered(): await bot.click_named("FactoryEmployer")
+	await bot.click_named("HireTomas")
+	bot.expect(Staff.count("technician") > 0, "hired a production technician")
+	var rfq: Dictionary = Manufacturing.S()["rfqs"].values()[0]
+	await bot.click_named("Quote_"+str(rfq["id"]))
+	var job := ""
+	for id in Manufacturing.S()["orders"]: job = id
+	bot.expect(job != "", "OEM quote became a Jobs contract with deposit")
+	if job == "": return
+	for i in 10: await bot.click_named("MaterialMore")
+	await bot.click_named("BuyMaterials")
+	await close_modal()
+	# As with other walkthrough segments, only the QA harness advances idle time; production ticks remain real.
+	Clock.advance(2*Clock.DAY)
+	await popups()
+	await bot.use_action("manufacturing_open")
+	await bot.click_named("Select_"+job)
+	await bot.click_named("FactoryOvertime")
+	for i in 8: await bot.click_named("More_hours")
+	await bot.shot("line_planner")
+	await bot.click_named("ReserveSlot")
+	await close_modal()
+	Clock.advance_to(Clock.at_day_time(1, 9*60)+16*60)
+	await popups()
+	if int(Manufacturing.S()["orders"][job]["produced"]) < int(rfq["qty"]):
+		await bot.use_action("manufacturing_open")
+		await bot.click_named("Select_"+job)
+		await bot.click_named("FactoryOvertime")
+		for i in 8: await bot.click_named("More_hours")
+		await bot.click_named("ReserveSlot")
+		await close_modal()
+		Clock.advance_to(Clock.at_day_time(1, 9*60)+16*60)
+		await popups()
+	await bot.use_action("manufacturing_open")
+	await bot.click_named("Deliver_"+job)
+	bot.expect(Jobs.get_job(job)["status"] == "invoiced", "first factory revenue has a completed traceable order")
+	await bot.click_named("FactoryTab_quality")
+	await bot.shot("factory_quality")
+	bot.expect(Ledger.check_balanced(), "OEM material, overtime, invoice and return journals balanced")
+	await close_modal()
+	await exit_building()
+	Clock.advance_to(Clock.next_time_of_day(21*60))
+	await bot.shot("industrial_night")
 	await metro_to("riverside")
 	await enter_building("riverside_apartment")
 
@@ -1566,3 +1900,161 @@ func _save_load() -> void:
 	bot.expect(absf(Clock.now() - t) <= 2, "time restored after load")
 	bot.expect(GameState.data["player"]["location"]["id"] == loc["id"], "location restored (%s)" % loc["id"])
 	await bot.shot("after_load")
+
+func _media() -> void:
+	var previous_auto := MiniGames.auto
+	MiniGames.auto=-1
+	bot.step("University — lease studio, creative pitch, media mix and first client invoice")
+	await popups()
+	await close_modal()
+	if SceneRouter.world_scene().kind=="interior":await exit_building()
+	await metro_to("university")
+	await bot.shot("university_day")
+	await enter_building("the_loft")
+	await bot.use_action("lease_property")
+	await bot.click_named("SignLease_loft_office")
+	await close_modal()
+	await bot.use_action("media_open")
+	await bot.click_named("OpenAgency")
+	await close_modal()
+	var chosen := ""
+	for week in 8:
+		for brief in Media.S()["briefs"].values().duplicate():
+			if brief["status"]!="open":continue
+			await bot.use_action("media_open")
+			await bot.click_named("CreativePitch_"+brief["id"])
+			await bot.wait(.4)
+			await bot.click_named("StartGame")
+			for i in 3:
+				await bot.click_named("CreativeCard_"+["slogan","visual","tone"][i]+"_"+str(int(brief["preferences"][i])))
+			await bot.shot("creative_pitch_result")
+			await bot.click_named("FinishGame")
+			await bot.click_named("Propose_"+brief["id"])
+			await close_modal()
+			if brief["status"]=="won":chosen=brief["id"];break
+		if chosen!="":break
+		Clock.advance(7*Clock.DAY)
+		await popups()
+	bot.expect(chosen!="","actual creative cards and proposal win a client job")
+	if chosen=="":return
+	await bot.use_action("media_open")
+	await bot.click_named("MediaTab_mixer")
+	await bot.click_named("SelectCampaign_"+chosen)
+	await bot.click_named("MixMore_radio")
+	await bot.shot("campaign_mixer")
+	await close_modal()
+	Clock.advance(int(Media.cfg()["campaign_days"])*Clock.DAY)
+	await popups()
+	bot.expect(Media.S()["campaigns"][chosen]["status"]=="completed","daily campaign finishes actual client work")
+	bot.expect(Jobs.get_job(chosen)["status"]=="invoiced","first agency income is a traceable Jobs invoice")
+	bot.expect(Ledger.check_balanced(),"campaign costs and invoice balance")
+	await bot.use_action("media_open")
+	await bot.click_named("MediaTab_reports")
+	await bot.shot("campaign_report")
+	await close_modal()
+	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")
+	MiniGames.auto=previous_auto
+
+
+func _hotel() -> void:
+	bot.step("Luxury Heights — take over the Aster Inn, set the Rate Board, staff up and sell the first nights")
+	await popups()
+	await close_modal()
+	if SceneRouter.world_scene().kind=="interior":await exit_building()
+	await metro_to("luxury_heights")
+	await bot.shot("luxury_heights_day")
+	await enter_building("the_aster")
+	Ledger.post(GameState.company_id(),"QA hotel equity",[{"acct":"cash","dr":160000},{"acct":"equity","cr":160000}])
+	await bot.use_action("hotel_open")
+	await bot.click_named("TakeoverAster")
+	bot.expect(Hotel.is_running() and Hotel.total_rooms()==12,"actual takeover opens the 12-room Aster Inn")
+	await bot.shot("rate_board")
+	await bot.click_named("Price_standard_10")
+	await bot.click_named("BoardNextOps")
+	await bot.shot("hotel_operations")
+	await close_modal()
+	for role in ["housekeeper","housekeeper","front_desk"]:
+		if Staff.post_job(role).get("ok",false):
+			Clock.advance(18*60)
+			if not Staff.S()["applicants"].is_empty():Staff.hire(Staff.S()["applicants"][0]["id"])
+	Clock.advance(10*Clock.DAY)
+	await popups()
+	bot.expect(float(Hotel.stats(10)["occupancy"])>0 and -Ledger.balance(GameState.company_id(),"revenue")>0,"night audits sell rooms and book room revenue")
+	bot.expect(Ledger.check_balanced(),"hotel books balance")
+	await bot.use_action("hotel_open")
+	await bot.click_named("HotelTab_reviews")
+	await bot.shot("guest_reviews")
+func _automotive() -> void:
+	bot.step("Airport - open the auto desk, win a Wednesday auction car, recondition, list and sell it")
+	await popups()
+	await close_modal()
+	if SceneRouter.world_scene().kind=="interior":await exit_building()
+	await metro_to("airport")
+	await bot.shot("airport_day")
+	await enter_building("gateway_car_rental")   # open every day; the auction hall closes on Sundays
+	Ledger.post(GameState.company_id(),"QA auto equity",[{"acct":"cash","dr":60000},{"acct":"equity","cr":60000}])
+	await bot.use_action("automotive_open")
+	await bot.click_named("OpenAutoDesk")
+	bot.expect(Automotive.is_running(),"actual licence opens the auto desk")
+	var days := Automotive.days_to_auction()
+	Clock.advance_to(Clock.at_day_time(7 if days==0 and Clock.hour()>=10 else days,10*60))
+	Automotive.refresh()
+	for lot in Automotive.open_lots():
+		if Automotive.auction_auto(lot["id"],Automotive.visible_value(lot["car"])*0.85).get("won",false):break
+	await bot.shot("auction_lots")
+	for car in Automotive.S()["stock"].values():
+		Automotive.list_car(car["id"],Automotive.market_value(car))
+	Clock.advance(21*Clock.DAY)
+	await popups()
+	bot.expect(Ledger.check_balanced(),"auto books balance")
+func _energy() -> void:
+	bot.step("Industrial - lease warehouse, Roof Survey, subsidy, install and first solar invoice")
+	await popups()
+	await close_modal()
+	if SceneRouter.world_scene().kind=="interior":await exit_building()
+	await metro_to("industrial")
+	await bot.shot("industrial_energy_day")
+	await enter_building("helio_warehouse")
+	await bot.use_action("lease_property")
+	await bot.click_named("SignLease_helio_warehouse")
+	await close_modal()
+	await bot.use_action("energy_open")
+	await bot.click_named("OpenEnergy")
+	await close_modal()
+	var chosen := ""
+	for week in 6:
+		for lead in Energy.open_leads():
+			if lead["kind"]=="own":continue
+			await bot.use_action("energy_open")
+			await bot.click_named("Survey_"+lead["id"])
+			await bot.click_named("AutoLayout")
+			await bot.shot("roof_survey")
+			await bot.click_named("SendQuote")
+			await close_modal()
+			if lead["status"]=="won":
+				for job in Energy.S()["installs"]:
+					if Energy.S()["installs"][job]["lead"]==lead["id"]:chosen=job
+				break
+		if chosen!="":break
+		Clock.advance(7*Clock.DAY)
+		await popups()
+	bot.expect(chosen!="","actual Roof Survey quote wins a client job")
+	if chosen=="":return
+	await bot.use_action("energy_open")
+	await bot.click_named("EnergyTab_installs")
+	await bot.click_named("StartInstall_"+chosen)
+	await close_modal()
+	Clock.advance(30*Clock.DAY)
+	await popups()
+	bot.expect(Energy.S()["installs"][chosen]["status"]=="delivered","crew-days finish the install")
+	bot.expect(Jobs.get_job(chosen)["status"] in ["invoiced","paid"],"first solar income is a traceable Jobs invoice")
+	bot.expect(Ledger.check_balanced(),"materials, install and invoice balance")
+	await bot.use_action("energy_open")
+	await bot.click_named("EnergyTab_installs")
+	await bot.shot("energy_installs")
+	await close_modal()
+	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")
