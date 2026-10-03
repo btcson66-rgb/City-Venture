@@ -28,6 +28,9 @@ func build() -> void:
 	var achievements := UIK.button("Achievements", func(): UIRoot.open_modal(GrowthModal.new("achievements")))
 	achievements.name = "PauseAchievements"
 	body.add_child(achievements)
+	var retirement := UIK.button("Retirement and life review", func(): UIRoot.open_modal(LifeReviewModal.new()))
+	retirement.name = "OpenLifeReview"
+	body.add_child(retirement)
 	var transfers := UIK.hbox(4)
 	var export_button := UIK.button("Export save", SaveSystem.show_export)
 	export_button.name = "ExportSave"

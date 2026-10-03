@@ -209,8 +209,11 @@ func unread_messages() -> int:
 	return n
 
 
-func timeline(text: String, kind := "life") -> void:
-	data["timeline"].append({"t": Clock.now(), "text": text, "kind": kind})
+func timeline(text: String, kind := "life", metadata := {}) -> void:
+	var row := {"t": Clock.now(), "text": text, "kind": kind}
+	for key in ["art", "category", "entity", "npc"]:
+		if metadata.has(key): row[key] = metadata[key]
+	data["timeline"].append(row)
 
 
 func mark_visited(key: String) -> void:

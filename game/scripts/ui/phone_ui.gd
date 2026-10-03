@@ -302,6 +302,8 @@ func _shoplane() -> void:
 
 
 var timeline_page := "life"
+var timeline_filter := "all"
+var timeline_year := -1
 
 
 func _timeline() -> void:
@@ -316,10 +318,43 @@ func _timeline() -> void:
 	if timeline_page == "achievements":
 		_achievements()
 		return
-	var tl: Array = GameState.data["timeline"]
-	for i in range(tl.size() - 1, -1, -1):
+	var filters := UIK.vbox(1)
+	content.add_child(filters)
+	var picker := OptionButton.new()
+	picker.name = "TimelineCategory"
+	var categories := ["all", "company", "life", "people", "crisis", "milestones"]
+	var labels := ["All events", "Company", "Life", "Contacts", "Crises", "Milestones"]
+	for label in labels: picker.add_item(I18n.t(label))
+	picker.select(categories.find(timeline_filter))
+	picker.item_selected.connect(func(index): timeline_filter = categories[index]; _render())
+	filters.add_child(picker)
+	var years := [-1]
+	for entry in GameState.data["timeline"]:
+		var year := int(Clock.date_at(int(entry["t"]))["year"])
+		if not year in years: years.append(year)
+	var year_picker := OptionButton.new()
+	year_picker.name = "TimelineYear"
+	for year in years: year_picker.add_item(I18n.t("All years") if year == -1 else I18n.t("Year %d") % year)
+	year_picker.select(maxi(0, years.find(timeline_year)))
+	year_picker.item_selected.connect(func(index): timeline_year = years[index]; _render())
+	filters.add_child(year_picker)
+	var tl: Array = LifeLegacy.events(timeline_filter, timeline_year)
+	var shown_year := -1
+	for i in tl.size():
+		var year := int(Clock.date_at(int(tl[i]["t"]))["year"])
+		if year != shown_year:
+			content.add_child(UIK.label(I18n.t("Year %d") % year, 8, Art.C_GOLD, true))
+			shown_year = year
 		var e: Dictionary = tl[i]
 		var milestone: bool = str(e.get("kind", "")) == "milestone"
+		var art := str(e.get("art", ""))
+		if art != "" and Art.has_tex(art):
+			var thumb := TextureRect.new()
+			thumb.texture = Art.opt_tex(art)
+			thumb.custom_minimum_size = Vector2(112, 48)
+			thumb.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			thumb.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			content.add_child(thumb)
 		content.add_child(UIK.label(("★ " if milestone else "") + Clock.fmt_short(int(e["t"])), 6, Art.C_GOLD))
 		content.add_child(UIK.wrap(str(e["text"]), 7, Art.C_GOLD if milestone else Art.C_WHITE, 124))
 

@@ -768,3 +768,5 @@ Requested named facades: `airport_terminal.png`, `gateway_car_rental.png`, `aure
 Requested: backdrops/chapter_17, backdrops/chapter_18; dedicated Kai Moreno sprites/portrait; events/rival_undercut; five epilogue backdrops (city, people, company, timeline, next chapter). Existing executive outfit and UI cards are interim. No art assets changed.
 
 #35 — Planned: 25 achievement icons, 16×16, `achievements/<id>.png`; IDs follow data/story/achievements.json. Existing star icons and text remain functional fallback.
+
+#92 — Planned: seven legacy portraits/cards `legacy/<archetype>.png` for builder, merchant, innovator, operator, local_legend, comeback, quiet_owner. Current life review and optional event/chapter thumbnails use existing assets.

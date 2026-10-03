@@ -17,6 +17,9 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "life_legacy":
+		await _life_legacy_fixture()
+		return
 	if _arg("from") == "growth":
 		await _growth_fixture()
 		return
@@ -2644,6 +2647,8 @@ func _chapters_17_to_18(fast := false) -> void:
 			await bot.shot("ch18_" + choice + "_card_" + str(card + 1))
 			await _export_row_input("legacy_next_card")
 		bot.expect(GameState.flag("legacy_cards_viewed") and "ch18_legacy" in StoryEngine.St()["chapters_done"], "all epilogue cards viewed: " + choice)
+		if UIRoot.top_modal() is LifeReviewModal:
+			await bot.click_named("KeepThisLife")
 		await bot.click_named("legacy_free_play")
 	await close_modal()
 	if fast:
@@ -2690,3 +2695,67 @@ func _growth_review() -> void:
 	await bot.shot("growth_pause_achievements")
 	UIRoot.close_all()
 	bot.expect(Ledger.check_balanced(), "growth UI never changes financial books")
+
+func _life_legacy_fixture() -> void:
+	await bot.wait(4.0)
+	UIRoot._suppress_decisions = true
+	UIRoot.tutorial.st()["off"] = true
+	Clock.world_active = false
+	var baseline := GameState.data.duplicate(true)
+	var generated: Array = []
+	for strategy in ["merchant", "innovator", "comeback"]:
+		bot.step("Life strategy — " + strategy)
+		UIRoot.close_all()
+		GameState.data = baseline.duplicate(true)
+		StoryEngine.St()["active"].clear()
+		var fixture = load("res://tests/unit/test_global.gd").new()
+		fixture._setup()
+		if strategy == "merchant":
+			for i in 20:
+				var order: Dictionary = fixture._order()
+				fixture._deliver(order)
+		elif strategy == "innovator":
+			bot.expect(Saas.start("freelancer_invoicing")["ok"], "start actual software product")
+			bot.expect(Saas.add_dev(Saas.dev_needed(), true)["ok"], "real founder MVP work")
+			bot.expect(Saas.launch()["ok"], "launch actual MVP")
+			bot.expect(Saas.add_dev(8 * float(Saas.cfg()["feature_hours"]), true)["ok"], "ship actual software features")
+		else:
+			bot.expect(Insolvency.close_company()["ok"], "actual first company closure")
+			fixture._setup()
+			var order: Dictionary = fixture._order()
+			fixture._deliver(order)
+		GameState.set_flag("legacy_cards_viewed")
+		bot.expect(LifeLegacy.review()["ok"], "record actual strategy life")
+		bot.expect(LifeLegacy.S()["review"]["primary"]["id"] == strategy, "different strategy yields " + strategy)
+		var path: String = bot.out_dir.path_join("life_" + strategy + ".json")
+		bot.expect(SaveSystem.save_to(path), "save life review: " + strategy)
+		generated.append({"strategy":strategy, "primary":LifeLegacy.S()["review"]["primary"], "metrics":LifeLegacy.S()["review"]["metrics"]})
+		UIRoot.close_all()
+		await bot.wait(5.0)
+		UIRoot.open_modal(LifeReviewModal.new())
+		await bot.wait(0.5)
+		await bot.shot("life_" + strategy + "_review")
+		var modal := UIRoot.top_modal()
+		var scroll: ScrollContainer = modal.find_children("*", "ScrollContainer", true, false)[0]
+		scroll.scroll_vertical = 10000
+		await bot.wait(0.5)
+		await bot.shot("life_" + strategy + "_stats_and_next")
+		await _export_row_input("KeepThisLife")
+		bot.expect(Ledger.check_balanced(), "strategy life books balanced")
+	var file := FileAccess.open(bot.out_dir.path_join("life_strategies.json"), FileAccess.WRITE)
+	file.store_string(JSON.stringify(generated, " "))
+	UIRoot.phone.open()
+	await bot.wait(0.5)
+	await bot.click_named("App_timeline")
+	await bot.wait(0.5)
+	await bot.shot("life_phone_timeline")
+	bot.expect(UIRoot.phone.find_child("TimelineCategory", true, false) != null and UIRoot.phone.find_child("TimelineYear", true, false) != null, "native timeline category and year controls")
+	UIRoot.phone.close()
+	UIRoot.open_modal(LifeReviewModal.new())
+	await _export_row_input("ChooseNextLife_generation")
+	await bot.shot("life_new_generation_confirm")
+	await _export_row_input("ConfirmNextLife")
+	await bot.wait(5.0)
+	bot.expect(GameState.data["meta"].get("difficulty", 0) == 1 and GameState.company_id() == "", "next generation starts clean at higher difficulty")
+	await bot.shot("life_new_generation_world")
+	bot.expect(Ledger.check_balanced(), "new generation ledger balanced")

@@ -257,11 +257,11 @@ msgstr ""
 msgid "%d new delivery runs are posted (Company OS → Logistics)."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:348
+#: scripts/ui/phone_ui.gd:383
 msgid "%d of %d days"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:333
+#: scripts/ui/phone_ui.gd:368
 msgid "%d of %d reached"
 msgstr ""
 
@@ -297,7 +297,7 @@ msgstr ""
 msgid "%d parcels a trip"
 msgstr ""
 
-#: scripts/sim/cafe.gd:364
+#: scripts/sim/cafe.gd:365
 msgid "%d pastries binned."
 msgstr ""
 
@@ -341,7 +341,7 @@ msgstr ""
 msgid "%d units · %s/unit"
 msgstr ""
 
-#: scripts/sim/cafe.gd:360
+#: scripts/sim/cafe.gd:361
 msgid "%d walked out of the queue."
 msgstr ""
 
@@ -397,7 +397,7 @@ msgstr ""
 msgid "%s IS LIVE"
 msgstr ""
 
-#: scripts/sim/saas.gd:179
+#: scripts/sim/saas.gd:180
 msgid "%s ads"
 msgstr ""
 
@@ -429,7 +429,7 @@ msgstr ""
 msgid "%s chose a rival quote. Your price was too high."
 msgstr ""
 
-#: scripts/sim/cafe.gd:358
+#: scripts/sim/cafe.gd:359
 msgid "%s closed: %d customers, %s in the till."
 msgstr ""
 
@@ -505,7 +505,7 @@ msgstr ""
 msgid "%s on %s"
 msgstr ""
 
-#: scripts/sim/careers.gd:304
+#: scripts/sim/careers.gd:305
 msgid "%s paid %s."
 msgstr ""
 
@@ -549,35 +549,35 @@ msgstr ""
 msgid "%s rooms"
 msgstr ""
 
-#: scripts/sim/cafe.gd:341
+#: scripts/sim/cafe.gd:342
 msgid "%s served its first customer!"
 msgstr ""
 
-#: scripts/sim/cafe.gd:340
+#: scripts/sim/cafe.gd:341
 msgid "%s served its first customer."
 msgstr ""
 
-#: scripts/sim/saas.gd:177
+#: scripts/sim/saas.gd:178
 msgid "%s servers"
 msgstr ""
 
-#: scripts/sim/saas.gd:91
+#: scripts/sim/saas.gd:92
 msgid "%s shipped a new feature: %s."
 msgstr ""
 
-#: scripts/sim/saas.gd:90
+#: scripts/sim/saas.gd:91
 msgid "%s shipped: %s."
 msgstr ""
 
-#: scripts/sim/cafe.gd:368
+#: scripts/sim/cafe.gd:369
 msgid "%s stayed shut today: nobody was behind the counter. Hire a barista (People tab) or work the counter yourself."
 msgstr ""
 
-#: scripts/sim/saas.gd:174
+#: scripts/sim/saas.gd:175
 msgid "%s subscriptions — %d users"
 msgstr ""
 
-#: scripts/sim/cafe.gd:352
+#: scripts/sim/cafe.gd:353
 msgid "%s till: %d customers"
 msgstr ""
 
@@ -709,6 +709,14 @@ msgstr ""
 msgid "%s — monthly"
 msgstr ""
 
+#: scripts/sim/life_legacy.gd:96
+msgid "%s's next generation"
+msgstr ""
+
+#: scripts/sim/life_legacy.gd:74
+msgid "%s's story leans toward %s, with a trace of %s. %s The next life begins with fewer resources; this record preserves what actually happened."
+msgstr ""
+
 #: scripts/ui/minigames/cowork_host_game.gd:62
 msgid "%s, I have a desk plan. Pretty sure."
 msgstr ""
@@ -733,7 +741,7 @@ msgstr ""
 msgid "%s: %d × %s on Net %d"
 msgstr ""
 
-#: scripts/sim/careers.gd:285
+#: scripts/sim/careers.gd:286
 msgid "%s: It's late, so we've knocked 20%% off. Invoice for %s noted."
 msgstr ""
 
@@ -741,11 +749,11 @@ msgstr ""
 msgid "%s: Nobody came for our delivery, so we've booked another courier. No fee to pay, and no more work from us this month."
 msgstr ""
 
-#: scripts/sim/careers.gd:284
+#: scripts/sim/careers.gd:285
 msgid "%s: Received, thanks! Invoice for %s noted."
 msgstr ""
 
-#: scripts/sim/careers.gd:321
+#: scripts/sim/careers.gd:322
 msgid "%s: We had to cancel the project. We won't be paying for it."
 msgstr ""
 
@@ -1037,6 +1045,10 @@ msgstr ""
 msgid "A client posts a job with several stops, a fee and a deadline. On time pays the full fee, late pays less, and a run left undone is cancelled."
 msgstr ""
 
+#: data/legacy.json
+msgid "A closed company did not close the rest of your life."
+msgstr ""
+
 #: data/story/achievements.json
 msgid "A colleague"
 msgstr ""
@@ -1205,6 +1217,10 @@ msgstr ""
 msgid "A new founder at Nexus Co-work has enough cash for one batch. Discuss product pricing or inventory cash flow; either conversation takes one hour and pays no fee."
 msgstr ""
 
+#: scripts/sim/life_legacy.gd:113
+msgid "A new life at difficulty %d, carrying %s home dollars. Previous save: slot %d."
+msgstr ""
+
 #: data/events/energy_rule.json
 msgid "A new rule requires an accessible bay at every public charging station. Retrofit now, or apply for an exemption and risk fines."
 msgstr ""
@@ -1299,6 +1315,10 @@ msgstr ""
 
 #: data/jobs/parcel_sorter.json
 msgid "A seller drops off twenty parcels with no labels. You feel their pain."
+msgstr ""
+
+#: scripts/ui/modals/life_review_modal.gd:52
+msgid "A separate next life"
 msgstr ""
 
 #: data/character/options.json
@@ -1597,7 +1617,7 @@ msgstr ""
 msgid "Accuracy and speed decide how much of the work gets done in this session."
 msgstr ""
 
-#: scripts/ui/modals/growth_modal.gd:17 scripts/ui/modals/pause_menu.gd:28 scripts/ui/phone_ui.gd:311
+#: scripts/ui/modals/growth_modal.gd:17 scripts/ui/modals/pause_menu.gd:28 scripts/ui/phone_ui.gd:313
 msgid "Achievements"
 msgstr ""
 
@@ -1785,6 +1805,10 @@ msgstr ""
 msgid "All cost rows are in home dollars; the buyer quote is labelled with its own currency."
 msgstr ""
 
+#: scripts/ui/phone_ui.gd:326
+msgid "All events"
+msgstr ""
+
 #: scripts/ui/minigames/clerk_forms_game.gd:30
 msgid "All good? Approve it. Something wrong? Click the wrong field first, then Reject."
 msgstr ""
@@ -1799,6 +1823,10 @@ msgstr ""
 
 #: scripts/ui/modals/save_list_modal.gd:20
 msgid "All save slots are in use. Choose one for the new game. The old save is moved to a backup folder, not deleted."
+msgstr ""
+
+#: scripts/ui/phone_ui.gd:337
+msgid "All years"
 msgstr ""
 
 #: data/help/help.json
@@ -2477,7 +2505,7 @@ msgstr ""
 msgid "Bags"
 msgstr ""
 
-#: scripts/sim/cafe.gd:311
+#: scripts/sim/cafe.gd:312
 msgid "Bakery delivery: %d pastries"
 msgstr ""
 
@@ -2739,6 +2767,10 @@ msgstr ""
 
 #: scripts/ui/modals/loan_modal.gd:90 scripts/ui/modals/loan_modal.gd:94
 msgid "Book an appointment"
+msgstr ""
+
+#: scripts/ui/modals/life_review_modal.gd:46
+msgid "Book net worth (home dollars)"
 msgstr ""
 
 #: data/events/hotel_equipment_failure.json
@@ -3009,6 +3041,10 @@ msgstr ""
 msgid "Build_%s_%s"
 msgstr ""
 
+#: data/legacy.json
+msgid "Builder"
+msgstr ""
+
 #: scripts/world/building_info.gd:103
 msgid "Building"
 msgstr ""
@@ -3095,6 +3131,10 @@ msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:68 scripts/ui/modals/registration_modal.gd:36
 msgid "Business type"
+msgstr ""
+
+#: scripts/ui/modals/life_review_modal.gd:46
+msgid "Business types with revenue"
 msgstr ""
 
 #: data/story/achievements.json data/story/goals.json scripts/ui/modals/business_board.gd:21
@@ -3421,7 +3461,7 @@ msgstr ""
 msgid "Cafe premises"
 msgstr ""
 
-#: scripts/sim/cafe.gd:419 scripts/ui/minigames/clerk_forms_game.gd:11
+#: scripts/sim/cafe.gd:420 scripts/ui/minigames/clerk_forms_game.gd:11
 msgid "Café"
 msgstr ""
 
@@ -4041,6 +4081,10 @@ msgstr ""
 msgid "Choose a market strategy first."
 msgstr ""
 
+#: data/help/help.json
+msgid "Choose a next-life route, then confirm. The old game is saved first; only an empty slot may be used."
+msgstr ""
+
 #: scripts/sim/group_jobs.gd:122
 msgid "Choose a part that is still open."
 msgstr ""
@@ -4107,6 +4151,10 @@ msgstr ""
 
 #: scripts/sim/trade_quote.gd:19
 msgid "Choose a supported product, term, transport and payment method."
+msgstr ""
+
+#: data/help/help.json
+msgid "Choose a timeline category and year on the phone. Optional thumbnails use existing art when a record names it."
 msgstr ""
 
 #: scripts/sim/automotive.gd:280
@@ -4245,6 +4293,10 @@ msgstr ""
 msgid "Choose the name carefully: it goes on your sign and your invoices."
 msgstr ""
 
+#: scripts/sim/life_legacy.gd:85
+msgid "Choose the next generation or the next chapter of this character."
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Choose the tariff code that matches your actual product"
 msgstr ""
@@ -4325,7 +4377,7 @@ msgstr ""
 msgid "City Hall, permits, registration, public services."
 msgstr ""
 
-#: scripts/sim/cafe.gd:411
+#: scripts/sim/cafe.gd:412
 msgid "City Hall: your food handling licence is approved."
 msgstr ""
 
@@ -4445,7 +4497,7 @@ msgstr ""
 msgid "Client payment"
 msgstr ""
 
-#: scripts/sim/careers.gd:301
+#: scripts/sim/careers.gd:302
 msgid "Client payment — %s"
 msgstr ""
 
@@ -4621,6 +4673,10 @@ msgstr ""
 msgid "Come in, come in. Okafor Lettings: forty years in Old Town, and I still remember every tenant's birthday."
 msgstr ""
 
+#: data/legacy.json
+msgid "Comeback"
+msgstr ""
+
 #: data/dialogue/jun_first.json
 msgid "Coming up."
 msgstr ""
@@ -4649,7 +4705,7 @@ msgstr ""
 msgid "Compact"
 msgstr ""
 
-#: scripts/ui/modals/bank_modal.gd:82
+#: scripts/ui/modals/bank_modal.gd:82 scripts/ui/phone_ui.gd:326
 msgid "Company"
 msgstr ""
 
@@ -4789,12 +4845,16 @@ msgstr ""
 msgid "Completed"
 msgstr ""
 
-#: scripts/sim/story_engine.gd:181
+#: scripts/sim/story_engine.gd:184
 msgid "Completed %s."
 msgstr ""
 
 #: scripts/sim/real_estate.gd:169
 msgid "Completed Lot 7 building"
+msgstr ""
+
+#: scripts/ui/modals/life_review_modal.gd:46
+msgid "Completed city projects"
 msgstr ""
 
 #: data/help/glossary.json
@@ -4877,7 +4937,7 @@ msgstr ""
 msgid "Contact Omar with a live registered company first."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:863
+#: scripts/ui/modals/company_os.gd:863 scripts/ui/phone_ui.gd:326
 msgid "Contacts"
 msgstr ""
 
@@ -5209,6 +5269,10 @@ msgstr ""
 msgid "Crestline's offer is in Company OS → Contracts: accept, counter or decline"
 msgstr ""
 
+#: scripts/ui/phone_ui.gd:326
+msgid "Crises"
+msgstr ""
+
 #: scripts/sim/hotel.gd:484
 msgid "Critic Vera Stone published her review: %.1f stars."
 msgstr ""
@@ -5251,6 +5315,10 @@ msgstr ""
 
 #: scripts/ui/minigames/auction_game.gd:55
 msgid "Current bid %s"
+msgstr ""
+
+#: scripts/ui/modals/life_review_modal.gd:46
+msgid "Current employees"
 msgstr ""
 
 #: scripts/ui/modals/legacy_modal.gd:101
@@ -5449,7 +5517,7 @@ msgstr ""
 msgid "Day %d · personal %s"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:41
+#: scripts/ui/modals/pause_menu.gd:44
 msgid "Day length"
 msgstr ""
 
@@ -5477,7 +5545,7 @@ msgstr ""
 msgid "Days"
 msgstr ""
 
-#: scripts/sim/careers.gd:317
+#: scripts/sim/careers.gd:318
 msgid "Deadline missed: %s. Deliver soon, the fee drops."
 msgstr ""
 
@@ -5555,6 +5623,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:246
 msgid "Decision pending: %s"
+msgstr ""
+
+#: scripts/sim/event_engine.gd:179
+msgid "Decision: %s — %s"
 msgstr ""
 
 #: data/help/help.json
@@ -5699,6 +5771,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1145
 msgid "Delivered and invoiced: %s."
+msgstr ""
+
+#: scripts/ui/modals/life_review_modal.gd:46
+msgid "Delivered orders"
 msgstr ""
 
 #: scripts/sim/contracts.gd:296
@@ -6441,6 +6517,10 @@ msgstr ""
 msgid "Energy Console: roof to charging network"
 msgstr ""
 
+#: scripts/ui/modals/life_review_modal.gd:46
+msgid "Energy installations"
+msgstr ""
+
 #: data/regions/almeria.json
 msgid "Energy price swings"
 msgstr ""
@@ -6489,7 +6569,7 @@ msgstr ""
 msgid "Enter the Wednesday auction"
 msgstr ""
 
-#: scripts/ui/modals/legacy_modal.gd:119
+#: scripts/ui/modals/legacy_modal.gd:120
 msgid "Epilogue card %d of %d"
 msgstr ""
 
@@ -6693,7 +6773,7 @@ msgstr ""
 msgid "Explore 10 city districts and build your company through all 12 story chapters."
 msgstr ""
 
-#: scripts/sim/careers.gd:329
+#: scripts/sim/careers.gd:330
 msgid "Explore freelance consulting"
 msgstr ""
 
@@ -6701,7 +6781,7 @@ msgstr ""
 msgid "Export duty %s: %s"
 msgstr ""
 
-#: autoload/save_system.gd:385 scripts/ui/modals/pause_menu.gd:32 scripts/ui/modals/save_list_modal.gd:25
+#: autoload/save_system.gd:385 scripts/ui/modals/pause_menu.gd:35 scripts/ui/modals/save_list_modal.gd:25
 msgid "Export save"
 msgstr ""
 
@@ -7049,7 +7129,7 @@ msgstr ""
 msgid "Finish a sales campaign"
 msgstr ""
 
-#: scripts/ui/modals/legacy_modal.gd:120
+#: scripts/ui/modals/legacy_modal.gd:121
 msgid "Finish epilogue"
 msgstr ""
 
@@ -7071,6 +7151,10 @@ msgstr ""
 
 #: scripts/sim/manufacturing.gd:43
 msgid "Finish the current recruitment first."
+msgstr ""
+
+#: scripts/sim/life_legacy.gd:80
+msgid "Finish the epilogue or choose retirement before starting another life."
 msgstr ""
 
 #: scripts/ui/modals/growth_modal.gd:33
@@ -7205,6 +7289,10 @@ msgstr ""
 msgid "Five installs"
 msgstr ""
 
+#: scripts/ui/modals/life_review_modal.gd:41
+msgid "Five key moments"
+msgstr ""
+
 #: data/dialogue/nina_first.json
 msgid "Five looks this season: Executive, Luxury Citywear, Travel, Formal Evening, and Logistics for the warehouse days."
 msgstr ""
@@ -7273,7 +7361,7 @@ msgstr ""
 msgid "Floor-plan interest"
 msgstr ""
 
-#: scripts/sim/cafe.gd:314
+#: scripts/sim/cafe.gd:315
 msgid "Flyers and a board for %s"
 msgstr ""
 
@@ -7309,7 +7397,7 @@ msgstr ""
 msgid "Food handling licence at City Hall."
 msgstr ""
 
-#: scripts/sim/cafe.gd:410
+#: scripts/sim/cafe.gd:411
 msgid "Food handling licence granted."
 msgstr ""
 
@@ -7469,7 +7557,7 @@ msgstr ""
 msgid "Free. {supplier} ships once the bridge reopens ({until}). The payment lands at {ratio} and you cover the {lost} gap."
 msgstr ""
 
-#: scripts/sim/careers.gd:329
+#: scripts/sim/careers.gd:330
 msgid "Freelance"
 msgstr ""
 
@@ -8021,7 +8109,7 @@ msgstr ""
 msgid "Guests"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:70
+#: scripts/ui/modals/pause_menu.gd:73
 msgid "Guide arrow"
 msgstr ""
 
@@ -8329,7 +8417,7 @@ msgstr ""
 msgid "Hidden defects unknown. Paid inspection: %s."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:58
+#: scripts/ui/modals/pause_menu.gd:61
 msgid "High"
 msgstr ""
 
@@ -8817,7 +8905,7 @@ msgstr ""
 msgid "Import prices ease as the ports catch up."
 msgstr ""
 
-#: autoload/save_system.gd:385 scripts/ui/modals/pause_menu.gd:35 scripts/ui/modals/save_list_modal.gd:13 scripts/ui/modals/save_list_modal.gd:29
+#: autoload/save_system.gd:385 scripts/ui/modals/pause_menu.gd:38 scripts/ui/modals/save_list_modal.gd:13 scripts/ui/modals/save_list_modal.gd:29
 msgid "Import save"
 msgstr ""
 
@@ -8925,8 +9013,16 @@ msgstr ""
 msgid "Infrastructure"
 msgstr ""
 
+#: scripts/sim/life_legacy.gd:109
+msgid "Inherited capital: %s"
+msgstr ""
+
 #: data/milestones.json
 msgid "Inn and Brasserie"
+msgstr ""
+
+#: data/legacy.json
+msgid "Innovator"
 msgstr ""
 
 #: data/events/energy_typhoon.json
@@ -9201,7 +9297,7 @@ msgstr ""
 msgid "Invoice reduction"
 msgstr ""
 
-#: scripts/sim/careers.gd:270
+#: scripts/sim/careers.gd:271
 msgid "Invoice — %s"
 msgstr ""
 
@@ -9513,6 +9609,10 @@ msgstr ""
 msgid "Keep listings live and stocked."
 msgstr ""
 
+#: scripts/ui/modals/life_review_modal.gd:33 scripts/ui/modals/life_review_modal.gd:66
+msgid "Keep living this life"
+msgstr ""
+
 #: data/events/ad_cost_spike.json
 msgid "Keep my budget"
 msgstr ""
@@ -9629,6 +9729,10 @@ msgstr ""
 msgid "Know who you're paying, and know who's holding your money in between. That's the whole job now."
 msgstr ""
 
+#: scripts/ui/modals/life_review_modal.gd:46
+msgid "Known contacts"
+msgstr ""
+
 #: scripts/ui/automotive_ui.gd:168
 msgid "Known defect: %s (remaining value loss %d%%)."
 msgstr ""
@@ -9681,7 +9785,7 @@ msgstr ""
 msgid "Landlord revenue share: %s"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:47
+#: scripts/ui/modals/pause_menu.gd:50
 msgid "Language"
 msgstr ""
 
@@ -9785,7 +9889,7 @@ msgstr ""
 msgid "Launch your product."
 msgstr ""
 
-#: scripts/sim/saas.gd:104
+#: scripts/sim/saas.gd:105
 msgid "Launched %s at %s/month."
 msgstr ""
 
@@ -9961,6 +10065,10 @@ msgstr ""
 msgid "Legacy"
 msgstr ""
 
+#: data/help/glossary.json scripts/ui/modals/life_review_modal.gd:38
+msgid "Legacy archetypes"
+msgstr ""
+
 #: scripts/sim/legacy_business.gd:236
 msgid "Legacy choice: %s."
 msgstr ""
@@ -10041,8 +10149,16 @@ msgstr ""
 msgid "Licensing Officer"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:308
+#: scripts/ui/phone_ui.gd:326
+msgid "Life"
+msgstr ""
+
+#: scripts/ui/phone_ui.gd:310
 msgid "Life Timeline"
+msgstr ""
+
+#: data/help/help.json scripts/ui/modals/life_review_modal.gd:6
+msgid "Life review"
 msgstr ""
 
 #: data/events/hotel_equipment_failure.json
@@ -10161,6 +10277,10 @@ msgstr ""
 msgid "Listings on ShopLane (10% fee · weekly payout)"
 msgstr ""
 
+#: scripts/sim/life_legacy.gd:66
+msgid "Live thirty days or finish the main story before retiring."
+msgstr ""
+
 #: data/story/achievements.json
 msgid "Live thirty days without any personal or company cash account becoming negative."
 msgstr ""
@@ -10231,6 +10351,10 @@ msgstr ""
 
 #: data/story/goals.json
 msgid "Loans paid in full"
+msgstr ""
+
+#: data/legacy.json
+msgid "Local Legend"
 msgstr ""
 
 #: scripts/sim/logistics.gd:355 scripts/ui/minigames/route_game.gd:27
@@ -10389,7 +10513,7 @@ msgstr ""
 msgid "Love it."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:58
+#: scripts/ui/modals/pause_menu.gd:61
 msgid "Low"
 msgstr ""
 
@@ -10577,7 +10701,7 @@ msgstr ""
 msgid "Main freight"
 msgstr ""
 
-#: scripts/ui/modals/growth_modal.gd:64 scripts/ui/phone_ui.gd:329
+#: scripts/ui/modals/growth_modal.gd:64 scripts/ui/phone_ui.gd:364
 msgid "Main-story achievements"
 msgstr ""
 
@@ -10965,6 +11089,10 @@ msgstr ""
 msgid "Menu"
 msgstr ""
 
+#: data/legacy.json
+msgid "Merchant"
+msgstr ""
+
 #: data/economy/automotive.json
 msgid "Meridian City"
 msgstr ""
@@ -11045,12 +11173,16 @@ msgstr ""
 msgid "Mia"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:58
+#: scripts/ui/modals/pause_menu.gd:61
 msgid "Mid"
 msgstr ""
 
 #: scripts/sim/milestones.gd:62 scripts/sim/milestones.gd:64
 msgid "Milestone: %s"
+msgstr ""
+
+#: scripts/ui/phone_ui.gd:326
+msgid "Milestones"
 msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:98
@@ -11269,7 +11401,7 @@ msgstr ""
 msgid "Move two cars through the Auto Desk."
 msgstr ""
 
-#: autoload/game_state.gd:43
+#: autoload/game_state.gd:43 scripts/sim/life_legacy.gd:112
 msgid "Moved to Aurelia City with $%s in savings."
 msgstr ""
 
@@ -11453,6 +11585,10 @@ msgstr ""
 msgid "New Game"
 msgstr ""
 
+#: data/help/glossary.json
+msgid "New Game+"
+msgstr ""
+
 #: data/quests/new_neighbourhood_opening.json
 msgid "New Neighbourhood Opening"
 msgstr ""
@@ -11493,12 +11629,20 @@ msgstr ""
 msgid "News board"
 msgstr ""
 
-#: scripts/ui/modals/legacy_modal.gd:120
+#: scripts/ui/modals/legacy_modal.gd:121
 msgid "Next card"
 msgstr ""
 
 #: data/economy/logistics.json
 msgid "Next day"
+msgstr ""
+
+#: scripts/ui/modals/life_review_modal.gd:56
+msgid "Next generation"
+msgstr ""
+
+#: scripts/ui/modals/life_review_modal.gd:56
+msgid "Next life with this character"
 msgstr ""
 
 #: scripts/ui/manufacturing_ui.gd:144
@@ -11515,6 +11659,10 @@ msgstr ""
 
 #: data/dialogue/ana_register.json
 msgid "Next! Hi. What can I do for you?"
+msgstr ""
+
+#: scripts/sim/life_legacy.gd:107
+msgid "Next-life starting capital adjustment"
 msgstr ""
 
 #: scripts/ui/hotel_ui.gd:152
@@ -11713,6 +11861,10 @@ msgstr ""
 msgid "No employees yet. Every order is packed by you, which is why time matters."
 msgstr ""
 
+#: scripts/sim/life_legacy.gd:81
+msgid "No empty save slot. Keep this life and manage saves from the title screen."
+msgstr ""
+
 #: scripts/sim/automotive.gd:420
 msgid "No fleet car needs service."
 msgstr ""
@@ -11841,7 +11993,7 @@ msgstr ""
 msgid "No such employee."
 msgstr ""
 
-#: scripts/sim/careers.gd:252
+#: scripts/sim/careers.gd:253
 msgid "No such gig in progress."
 msgstr ""
 
@@ -11921,7 +12073,7 @@ msgstr ""
 msgid "Nori Tea House"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:42
+#: scripts/ui/modals/pause_menu.gd:45
 msgid "Normal"
 msgstr ""
 
@@ -12077,7 +12229,7 @@ msgstr ""
 msgid "Nothing to drop off. Pack orders at your packing table and choose 'Carry to PostPoint'."
 msgstr ""
 
-#: scripts/sim/saas.gd:98
+#: scripts/sim/saas.gd:99
 msgid "Nothing to launch."
 msgstr ""
 
@@ -12245,7 +12397,7 @@ msgstr ""
 msgid "Of course you are."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:58 scripts/ui/modals/pause_menu.gd:73 scripts/ui/modals/pause_menu.gd:81
+#: scripts/ui/modals/pause_menu.gd:61 scripts/ui/modals/pause_menu.gd:76 scripts/ui/modals/pause_menu.gd:84
 msgid "Off"
 msgstr ""
 
@@ -12309,7 +12461,7 @@ msgstr ""
 msgid "Old Town"
 msgstr ""
 
-#: scripts/sim/cafe.gd:406
+#: scripts/sim/cafe.gd:407
 msgid "Old Town Roasters delivered supplies for %d cups."
 msgstr ""
 
@@ -12357,7 +12509,7 @@ msgstr ""
 msgid "Omar — your Lumina partner"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:72 scripts/ui/modals/pause_menu.gd:81
+#: scripts/ui/modals/pause_menu.gd:75 scripts/ui/modals/pause_menu.gd:84
 msgid "On"
 msgstr ""
 
@@ -12603,6 +12755,10 @@ msgstr ""
 
 #: scripts/sim/fx_forward.gd:38
 msgid "Open an international company account first."
+msgstr ""
+
+#: scripts/ui/modals/life_review_modal.gd:46
+msgid "Open charging stations"
 msgstr ""
 
 #: data/story/chapters.json
@@ -12877,6 +13033,10 @@ msgstr ""
 msgid "Operations: buying stock"
 msgstr ""
 
+#: data/legacy.json
+msgid "Operator"
+msgstr ""
+
 #: data/world/years.json
 msgid "Operators freeze all bridge transfers for about a week while they trace the funds."
 msgstr ""
@@ -13083,6 +13243,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:385
 msgid "Overseas"
+msgstr ""
+
+#: scripts/ui/modals/life_review_modal.gd:46
+msgid "Overseas deliveries"
 msgstr ""
 
 #: scripts/sim/global_market.gd:188
@@ -14141,6 +14305,10 @@ msgstr ""
 msgid "Pricing and margin"
 msgstr ""
 
+#: scripts/ui/modals/life_review_modal.gd:39
+msgid "Primary: %s · Secondary: %s"
+msgstr ""
+
 #: scripts/ui/minigames/cowork_host_game.gd:7
 msgid "Priti"
 msgstr ""
@@ -14217,7 +14385,7 @@ msgstr ""
 msgid "Project closed"
 msgstr ""
 
-#: scripts/sim/careers.gd:166
+#: scripts/sim/careers.gd:167
 msgid "Promoted to %s at %s."
 msgstr ""
 
@@ -14349,6 +14517,10 @@ msgstr ""
 msgid "Quay Depot"
 msgstr ""
 
+#: data/legacy.json
+msgid "Quiet Owner"
+msgstr ""
+
 #: data/economy/media.json
 msgid "Quiet excellence"
 msgstr ""
@@ -14365,7 +14537,7 @@ msgstr ""
 msgid "Quit job"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:90
+#: scripts/ui/modals/pause_menu.gd:93
 msgid "Quit to title"
 msgstr ""
 
@@ -14517,7 +14689,7 @@ msgstr ""
 msgid "Ran out"
 msgstr ""
 
-#: scripts/sim/cafe.gd:362
+#: scripts/sim/cafe.gd:363
 msgid "Ran out of coffee for %d."
 msgstr ""
 
@@ -14829,12 +15001,24 @@ msgstr ""
 msgid "Reconsider goals set aside"
 msgstr ""
 
+#: scripts/ui/modals/life_review_modal.gd:28
+msgid "Record retirement and review this life"
+msgstr ""
+
 #: scripts/sim/legacy_business.gd:264
 msgid "Recorded deliveries reached %d overseas regions. Company cash now: %s home dollars."
 msgstr ""
 
+#: scripts/ui/modals/life_review_modal.gd:45
+msgid "Recorded life statistics"
+msgstr ""
+
 #: scripts/ui/modals/legacy_modal.gd:82
 msgid "Recorded market revenue (home dollars)"
+msgstr ""
+
+#: scripts/ui/modals/life_review_modal.gd:46
+msgid "Recorded work hours"
 msgstr ""
 
 #: data/jobs/city_clerk.json
@@ -15357,11 +15541,11 @@ msgstr ""
 msgid "Replacement shipped."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:74
+#: scripts/ui/modals/pause_menu.gd:77
 msgid "Replay tutorial"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:87
+#: scripts/ui/modals/pause_menu.gd:90
 msgid "Report a problem (F12)"
 msgstr ""
 
@@ -15529,6 +15713,14 @@ msgstr ""
 msgid "Retailers warn of empty shelves before the holidays."
 msgstr ""
 
+#: scripts/ui/modals/pause_menu.gd:31
+msgid "Retirement and life review"
+msgstr ""
+
+#: scripts/ui/modals/life_review_modal.gd:26
+msgid "Retirement records your life without closing or selling the company. You can keep playing or begin another life in a separate save slot."
+msgstr ""
+
 #: data/events/energy_rule.json
 msgid "Retrofit every station"
 msgstr ""
@@ -15561,7 +15753,7 @@ msgstr ""
 msgid "Return stock to supplier"
 msgstr ""
 
-#: scripts/ui/modals/legacy_modal.gd:112
+#: scripts/ui/modals/legacy_modal.gd:113
 msgid "Return to free play"
 msgstr ""
 
@@ -15673,6 +15865,10 @@ msgstr ""
 msgid "Review the prices of %s"
 msgstr ""
 
+#: scripts/ui/modals/legacy_modal.gd:112
+msgid "Review this life"
+msgstr ""
+
 #: scripts/ui/modals/legacy_modal.gd:49 scripts/ui/modals/legacy_modal.gd:72
 msgid "Review unavailable market"
 msgstr ""
@@ -15689,7 +15885,7 @@ msgstr ""
 msgid "ReviewsNextGrowth"
 msgstr ""
 
-#: scripts/ui/modals/legacy_modal.gd:113
+#: scripts/ui/modals/legacy_modal.gd:114
 msgid "Revisit the ending cards"
 msgstr ""
 
@@ -16073,7 +16269,7 @@ msgstr ""
 msgid "SW"
 msgstr ""
 
-#: data/regions/northridge.json scripts/sim/saas.gd:201
+#: data/regions/northridge.json scripts/sim/saas.gd:202
 msgid "SaaS"
 msgstr ""
 
@@ -16193,7 +16389,7 @@ msgstr ""
 msgid "Save exported. Keep this file outside your browser."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:357
+#: scripts/ui/phone_ui.gd:392
 msgid "Save game"
 msgstr ""
 
@@ -16205,7 +16401,7 @@ msgstr ""
 msgid "Save local price"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:358
+#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:393
 msgid "Save now"
 msgstr ""
 
@@ -16333,6 +16529,10 @@ msgstr ""
 msgid "Save the takeover price first."
 msgstr ""
 
+#: scripts/ui/modals/life_review_modal.gd:62
+msgid "Save this life and start the selected next life"
+msgstr ""
+
 #: autoload/save_system.gd:440
 msgid "Save transfer"
 msgstr ""
@@ -16345,7 +16545,7 @@ msgstr ""
 msgid "Saved %s"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:360
+#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:395
 msgid "Saved (slot %d)."
 msgstr ""
 
@@ -16415,6 +16615,10 @@ msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:130
 msgid "Select property"
+msgstr ""
+
+#: scripts/ui/modals/life_review_modal.gd:42
+msgid "Selected by the category weights in the legacy data, then by recency. Older records without a category keep their original text."
 msgstr ""
 
 #: data/help/glossary.json
@@ -16669,6 +16873,10 @@ msgstr ""
 msgid "Settlement"
 msgstr ""
 
+#: data/help/glossary.json
+msgid "Seven weighted formulas summarize real records: business types, people, trade, innovation, city projects, recovery, assets and recorded work."
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:801
 msgid "Severance paid: %s."
 msgstr ""
@@ -16921,7 +17129,7 @@ msgstr ""
 msgid "Shots"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:79
+#: scripts/ui/modals/pause_menu.gd:82
 msgid "Show interaction markers"
 msgstr ""
 
@@ -17077,7 +17285,7 @@ msgstr ""
 msgid "Slogan, visual and tone should match the client audience preferences."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:42
+#: scripts/ui/modals/pause_menu.gd:45
 msgid "Slow"
 msgstr ""
 
@@ -17167,6 +17375,10 @@ msgstr ""
 
 #: data/economy/staff.json
 msgid "Software Developer"
+msgstr ""
+
+#: scripts/ui/modals/life_review_modal.gd:46
+msgid "Software features"
 msgstr ""
 
 #: data/products/solar_lamp.json
@@ -17293,7 +17505,7 @@ msgstr ""
 msgid "Sort, scan and stack the neighbourhood's parcels. You'll see how shipping really works."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:54
+#: scripts/ui/modals/pause_menu.gd:57
 msgid "Sound effects"
 msgstr ""
 
@@ -17381,7 +17593,7 @@ msgstr ""
 msgid "Start a new game"
 msgstr ""
 
-#: scripts/sim/saas.gd:201
+#: scripts/sim/saas.gd:202
 msgid "Start a software product"
 msgstr ""
 
@@ -17417,6 +17629,10 @@ msgstr ""
 msgid "Start packing"
 msgstr ""
 
+#: data/help/glossary.json
+msgid "Start the next generation or another life in an empty slot. Keep the prior save and inherit only a limited amount of capital."
+msgstr ""
+
 #: scripts/ui/tutorial.gd:88
 msgid "Start the shift"
 msgstr ""
@@ -17445,7 +17661,7 @@ msgstr ""
 msgid "Started building a charging station: %s."
 msgstr ""
 
-#: scripts/sim/careers.gd:183
+#: scripts/sim/careers.gd:184
 msgid "Started freelancing as a consultant."
 msgstr ""
 
@@ -17453,8 +17669,16 @@ msgstr ""
 msgid "Started renovating the %s rooms."
 msgstr ""
 
+#: scripts/ui/modals/life_review_modal.gd:53
+msgid "Starting cash falls to 80% per difficulty level and customer demand to 90% per level (floor 30%). Inherited capital is limited to 5% of current book net worth and at most 2,500 home dollars; it is equity, never sales revenue."
+msgstr ""
+
 #: scripts/ui/overseas_partner_ui.gd:49
 msgid "Starting receipt estimate (foreign units)"
+msgstr ""
+
+#: scripts/sim/story_engine.gd:111
+msgid "Starting savings: %s home dollars. A laptop, a phone, another life."
 msgstr ""
 
 #: data/character/options.json
@@ -18101,7 +18325,7 @@ msgstr ""
 msgid "That name is already registered in Aurelia."
 msgstr ""
 
-#: scripts/sim/careers.gd:240
+#: scripts/sim/careers.gd:241
 msgid "That offer is gone."
 msgstr ""
 
@@ -18209,7 +18433,7 @@ msgstr ""
 msgid "The Loft in University."
 msgstr ""
 
-#: scripts/sim/saas.gd:100
+#: scripts/sim/saas.gd:101
 msgid "The MVP needs %d more dev hours."
 msgstr ""
 
@@ -18461,12 +18685,20 @@ msgstr ""
 msgid "The counter costs %s per month. Lease it at Gateway Car Rental in the Airport district."
 msgstr ""
 
+#: scripts/sim/life_legacy.gd:90
+msgid "The current life could not be saved. Keep playing and try again."
+msgstr ""
+
 #: data/help/glossary.json
 msgid "The days between paying a supplier and the stock reaching your shelf."
 msgstr ""
 
 #: data/dialogue/victor_sold.json
 msgid "The difference: the profit is mine, and the mistakes are ours. Don't waste the head start."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "The difficulty level lowers starting cash and retail demand. Old businesses and sales never become new-life income."
 msgstr ""
 
 #: scripts/sim/rails.gd:202
@@ -18605,6 +18837,10 @@ msgstr ""
 msgid "The licence fee is %s."
 msgstr ""
 
+#: data/help/help.json
+msgid "The life review preserves the seven scores, five key moments and recorded statistics. It never creates profits."
+msgstr ""
+
 #: data/events/hotel_equipment_failure.json
 msgid "The lift and the hot water have broken in the same week."
 msgstr ""
@@ -18635,6 +18871,10 @@ msgstr ""
 
 #: scripts/sim/legacy_business.gd:266
 msgid "The next chapter is yours"
+msgstr ""
+
+#: scripts/sim/life_legacy.gd:102
+msgid "The next life could not be created. Your current life is preserved."
 msgstr ""
 
 #: scripts/sim/legacy_business.gd:75 scripts/sim/legacy_business.gd:88
@@ -18981,7 +19221,7 @@ msgstr ""
 msgid "This equipment needs no service today."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:365
+#: scripts/ui/phone_ui.gd:400
 msgid "This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen."
 msgstr ""
 
@@ -19201,7 +19441,7 @@ msgstr ""
 msgid "Time on the road: %s"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:45
+#: scripts/ui/modals/pause_menu.gd:48
 msgid "Time only moves forward by living it: working a shift, or sleeping at night."
 msgstr ""
 
@@ -19209,7 +19449,7 @@ msgstr ""
 msgid "Time to finish"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:133 scripts/ui/phone_ui.gd:311
+#: scripts/ui/phone_ui.gd:133 scripts/ui/phone_ui.gd:313
 msgid "Timeline"
 msgstr ""
 
@@ -19689,7 +19929,7 @@ msgstr ""
 msgid "Upcoming: {upcoming}."
 msgstr ""
 
-#: scripts/sim/saas.gd:87
+#: scripts/sim/saas.gd:88
 msgid "Update"
 msgstr ""
 
@@ -20041,7 +20281,7 @@ msgstr ""
 msgid "Wages owed to your team: %s"
 msgstr ""
 
-#: scripts/sim/careers.gd:155
+#: scripts/sim/careers.gd:156
 msgid "Wages — %s shift at %s"
 msgstr ""
 
@@ -20493,6 +20733,10 @@ msgstr ""
 msgid "Work done this session: %.1f of %.1f hours' worth"
 msgstr ""
 
+#: scripts/ui/modals/life_review_modal.gd:50
+msgid "Work hours include recorded paid shifts, cafe work and freelance hours. Older saves may lack hours recorded before this version."
+msgstr ""
+
 #: data/buildings/bloom_coffee.json data/buildings/byte_and_bean.json data/buildings/shift_diner.json
 msgid "Work on your laptop — Company OS"
 msgstr ""
@@ -20549,6 +20793,10 @@ msgstr ""
 msgid "Yeah. Just looking."
 msgstr ""
 
+#: scripts/ui/phone_ui.gd:337 scripts/ui/phone_ui.gd:346
+msgid "Year %d"
+msgstr ""
+
 #: scripts/sim/world.gd:87
 msgid "Year %d — %s. Check the news board."
 msgstr ""
@@ -20569,7 +20817,7 @@ msgstr ""
 msgid "You already have a job ad running."
 msgstr ""
 
-#: scripts/sim/careers.gd:230
+#: scripts/sim/careers.gd:231
 msgid "You already have as many gigs as you can handle."
 msgstr ""
 
@@ -20609,6 +20857,10 @@ msgstr ""
 msgid "You asked for more and I said yes. Now you have a year to earn the rest."
 msgstr ""
 
+#: data/legacy.json
+msgid "You built structures that other people could work inside."
+msgstr ""
+
 #: data/story/chapters.json
 msgid "You built {company} and sold it well. The desk is still yours."
 msgstr ""
@@ -20627,6 +20879,10 @@ msgstr ""
 
 #: scripts/world/building_info.gd:164
 msgid "You can: %s"
+msgstr ""
+
+#: data/legacy.json
+msgid "You connected goods, customers and places through real trades."
 msgstr ""
 
 #: scripts/sim/legacy_business.gd:264
@@ -20665,6 +20921,10 @@ msgstr ""
 msgid "You keep the customer relationship and retail margin. Pay sea freight and duty before dispatch, monthly rent per unsold unit, and shipping for each sale. Slow stock still ties up cash."
 msgstr ""
 
+#: data/legacy.json
+msgid "You kept showing up when the work needed doing."
+msgstr ""
+
 #: data/story/chapters.json
 msgid "You kept the shelves full while half the city ran out. That's a real business."
 msgstr ""
@@ -20695,6 +20955,14 @@ msgstr ""
 
 #: data/dialogue/jun_first.json
 msgid "You look like you're plotting something."
+msgstr ""
+
+#: data/legacy.json
+msgid "You made a place in the city and left people who remember you."
+msgstr ""
+
+#: data/legacy.json
+msgid "You made space for life while your assets carried part of the load."
 msgstr ""
 
 #: scripts/ui/modals/legacy_modal.gd:42
@@ -20857,7 +21125,7 @@ msgstr ""
 msgid "You're trending"
 msgstr ""
 
-#: scripts/sim/careers.gd:167
+#: scripts/sim/careers.gd:168
 msgid "You've earned it: you're our new %s. New rate: $%d an hour."
 msgstr ""
 
@@ -20965,6 +21233,10 @@ msgstr ""
 msgid "Your credit score and record of repayments affect whether the bank lends and how much it offers."
 msgstr ""
 
+#: scripts/ui/modals/life_review_modal.gd:61
+msgid "Your current game is saved first. Only an empty slot is used; companies, earned income and achievements start fresh. Continue only when ready."
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Your daily ad budget buys product exposure; clicks can cost money without creating an order."
 msgstr ""
@@ -20983,6 +21255,10 @@ msgstr ""
 
 #: data/dialogue/lina_intro.json
 msgid "Your exchange account is verified. Digital dollars are an option when you pay abroad now."
+msgstr ""
+
+#: data/legacy.json
+msgid "Your experiments turned technical ideas into useful services."
 msgstr ""
 
 #: scripts/ui/modals/info_modal.gd:44
@@ -21055,6 +21331,10 @@ msgstr ""
 
 #: scripts/sim/automotive.gd:191
 msgid "Your lot is full. Sell or wholesale a car first."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Your main and secondary tendencies describe this saved life, not a score that awards cash."
 msgstr ""
 
 #: data/economy/settlement_methods.json
@@ -22375,6 +22655,10 @@ msgstr ""
 
 #: scripts/ui/minigames/pack_game.gd:147
 msgid "✗ It doesn't fit. Try a bigger box."
+msgstr ""
+
+#: scripts/ui/modals/life_review_modal.gd:32
+msgid "✗ Live thirty days or finish the main story before retiring. Continue living this life."
 msgstr ""
 
 #: scripts/ui/modals/legacy_modal.gd:104

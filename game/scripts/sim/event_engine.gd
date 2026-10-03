@@ -176,6 +176,7 @@ static func choose(iid: String, choice_id: String) -> Dictionary:
 			return {"ok": false, "error": r.get("error", "That didn't work.")}
 	S()["queue"].erase(inst)
 	S()["history"].append({"iid": iid, "id": inst["id"], "t": Clock.now(), "choice": choice_id})
+	GameState.timeline(I18n.t("Decision: %s — %s") % [fill(str(d.get("presentation", {}).get("title", inst["id"])), inst["ctx"]), fill(str(choice.get("label", choice_id)), inst["ctx"])], "crisis", {"art":"events/" + str(inst["id"])})
 	EventBus.world_refresh.emit()
 	return {"ok": true, "results": results, "outcome": fill(str(choice.get("outcome", "")), inst["ctx"])}
 

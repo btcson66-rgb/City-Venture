@@ -152,6 +152,7 @@ static func work_shift(id: String, score := 1.0, tips := 0.0) -> Dictionary:
 	var hours := shift_hours_now(id)
 	var pay := pay_for(id, score, hours) + snappedf(tips, 0.01)
 	Clock.advance(hours * 60)
+	GameState.inc_stat("paid_work_minutes", hours * 60)
 	Ledger.post("player", I18n.t("Wages — %s shift at %s") % [I18n.t(str(rank(id)["title"])), I18n.t(str(j["employer"]))],
 		[{"acct": "cash", "dr": pay}, {"acct": "wages", "cr": pay}], {"type": "wages", "job": id})
 	var counted := score >= COUNTS_FROM

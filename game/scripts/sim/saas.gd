@@ -75,6 +75,7 @@ static func add_dev(hours: float, by_founder := false, clock_hours := -1.0) -> D
 	if by_founder:
 		Clock.advance(int(round((clock_hours if clock_hours >= 0.0 else hours) * 60)))
 		GameState.inc_stat("saas_founder_hours", hours)
+		GameState.inc_stat("saas_work_minutes", int(round((clock_hours if clock_hours >= 0.0 else hours) * 60)))
 	if not launched():
 		s["dev_done"] = minf(dev_needed(), float(s["dev_done"]) + hours)
 		return {"ok": true, "mvp_ready": float(s["dev_done"]) >= dev_needed()}

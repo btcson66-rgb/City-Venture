@@ -258,11 +258,11 @@ msgstr "再做 %d 班升为%s"
 msgid "%d new delivery runs are posted (Company OS → Logistics)."
 msgstr "有 %d 趟新的外送单上架了（Company OS → 物流）。"
 
-#: scripts/ui/phone_ui.gd:348
+#: scripts/ui/phone_ui.gd:383
 msgid "%d of %d days"
 msgstr "%d／%d 天"
 
-#: scripts/ui/phone_ui.gd:333
+#: scripts/ui/phone_ui.gd:368
 msgid "%d of %d reached"
 msgstr "已达成 %d／%d"
 
@@ -298,7 +298,7 @@ msgstr "%d 件包裹"
 msgid "%d parcels a trip"
 msgstr "每趟 %d 件包裹"
 
-#: scripts/sim/cafe.gd:364
+#: scripts/sim/cafe.gd:365
 msgid "%d pastries binned."
 msgstr "丢掉了 %d 个糕点。"
 
@@ -342,7 +342,7 @@ msgstr "%d 户 · %d 天 · 预算 %s"
 msgid "%d units · %s/unit"
 msgstr "%d 件 · 每件 %s"
 
-#: scripts/sim/cafe.gd:360
+#: scripts/sim/cafe.gd:361
 msgid "%d walked out of the queue."
 msgstr "%d 位客人排不到就走了。"
 
@@ -398,7 +398,7 @@ msgstr "%s 咖啡"
 msgid "%s IS LIVE"
 msgstr "%s 上线了"
 
-#: scripts/sim/saas.gd:179
+#: scripts/sim/saas.gd:180
 msgid "%s ads"
 msgstr "%s 广告"
 
@@ -430,7 +430,7 @@ msgstr "%s 采取%s策略，市场是%s。实际营收 %s 本国元，交付 %d 
 msgid "%s chose a rival quote. Your price was too high."
 msgstr "%s 选了对手的报价。你的价格太高了。"
 
-#: scripts/sim/cafe.gd:358
+#: scripts/sim/cafe.gd:359
 msgid "%s closed: %d customers, %s in the till."
 msgstr "%s 打烊了：%d 位客人，收银 %s。"
 
@@ -506,7 +506,7 @@ msgstr "需要 %s，你目前有 %s"
 msgid "%s on %s"
 msgstr "%s，%s 扣款"
 
-#: scripts/sim/careers.gd:304
+#: scripts/sim/careers.gd:305
 msgid "%s paid %s."
 msgstr "%s 付款 %s。"
 
@@ -550,35 +550,35 @@ msgstr "%s 辞职了。"
 msgid "%s rooms"
 msgstr "%s客房"
 
-#: scripts/sim/cafe.gd:341
+#: scripts/sim/cafe.gd:342
 msgid "%s served its first customer!"
 msgstr "%s 迎来第一位客人！"
 
-#: scripts/sim/cafe.gd:340
+#: scripts/sim/cafe.gd:341
 msgid "%s served its first customer."
 msgstr "%s 迎来第一位客人。"
 
-#: scripts/sim/saas.gd:177
+#: scripts/sim/saas.gd:178
 msgid "%s servers"
 msgstr "%s 服务器"
 
-#: scripts/sim/saas.gd:91
+#: scripts/sim/saas.gd:92
 msgid "%s shipped a new feature: %s."
 msgstr "%s 推出新功能：%s。"
 
-#: scripts/sim/saas.gd:90
+#: scripts/sim/saas.gd:91
 msgid "%s shipped: %s."
 msgstr "%s 推出：%s。"
 
-#: scripts/sim/cafe.gd:368
+#: scripts/sim/cafe.gd:369
 msgid "%s stayed shut today: nobody was behind the counter. Hire a barista (People tab) or work the counter yourself."
 msgstr "%s 今天没开门：吧台没人顾。去雇一位咖啡师（人员分页），或自己站吧台。"
 
-#: scripts/sim/saas.gd:174
+#: scripts/sim/saas.gd:175
 msgid "%s subscriptions — %d users"
 msgstr "%s 订阅收入——%d 位用户"
 
-#: scripts/sim/cafe.gd:352
+#: scripts/sim/cafe.gd:353
 msgid "%s till: %d customers"
 msgstr "%s 收银：%d 位客人"
 
@@ -710,6 +710,14 @@ msgstr "%s 倍去年营收 %s"
 msgid "%s — monthly"
 msgstr "%s——月租"
 
+#: scripts/sim/life_legacy.gd:96
+msgid "%s's next generation"
+msgstr "%s 的下一代"
+
+#: scripts/sim/life_legacy.gd:74
+msgid "%s's story leans toward %s, with a trace of %s. %s The next life begins with fewer resources; this record preserves what actually happened."
+msgstr "%s 的人生最接近「%s」，也带着「%s」的色彩。%s 下一段人生会以较少资源起步；这份回顾保留的是实际发生的事。"
+
 #: scripts/ui/minigames/cowork_host_game.gd:62
 msgid "%s, I have a desk plan. Pretty sure."
 msgstr "我是 %s，我有月租座位。应该有吧。"
@@ -734,7 +742,7 @@ msgstr "%s：%d × %s（预付）"
 msgid "%s: %d × %s on Net %d"
 msgstr "%s：%d × %s，票期 %d 天"
 
-#: scripts/sim/careers.gd:285
+#: scripts/sim/careers.gd:286
 msgid "%s: It's late, so we've knocked 20%% off. Invoice for %s noted."
 msgstr "%s：迟交了，所以费用打八折。已收到 %s 的发票。"
 
@@ -742,11 +750,11 @@ msgstr "%s：迟交了，所以费用打八折。已收到 %s 的发票。"
 msgid "%s: Nobody came for our delivery, so we've booked another courier. No fee to pay, and no more work from us this month."
 msgstr "%s：一直没人来送货，我们已经改找别的快递。不用付你钱，这个月也不会再找你了。"
 
-#: scripts/sim/careers.gd:284
+#: scripts/sim/careers.gd:285
 msgid "%s: Received, thanks! Invoice for %s noted."
 msgstr "%s：收到了，谢谢！已收到 %s 的发票。"
 
-#: scripts/sim/careers.gd:321
+#: scripts/sim/careers.gd:322
 msgid "%s: We had to cancel the project. We won't be paying for it."
 msgstr "%s：我们只好取消这个案子，不会付款。"
 
@@ -1038,6 +1046,10 @@ msgstr "便宜的车闲着也赚不到钱；价格太高会流失询问。不保
 msgid "A client posts a job with several stops, a fee and a deadline. On time pays the full fee, late pays less, and a run left undone is cancelled."
 msgstr "客户会刊登一张外送单：几个停靠点、一笔运费和一个截止时间。准时送到拿全额，迟到拿得比较少，放着没送的单会被取消。"
 
+#: data/legacy.json
+msgid "A closed company did not close the rest of your life."
+msgstr "一家公司结束，并不代表你的人生也结束。"
+
 #: data/story/achievements.json
 msgid "A colleague"
 msgstr "第一位伙伴"
@@ -1206,6 +1218,10 @@ msgstr "奥瑞莉亚进入新时代：第 %d 年——%s。"
 msgid "A new founder at Nexus Co-work has enough cash for one batch. Discuss product pricing or inventory cash flow; either conversation takes one hour and pays no fee."
 msgstr "Nexus Co-work 有一位新创办人，手上的现金只够买一批货。你可以陪他讨论定价或库存现金流；交谈都需一小时，不收取费用。"
 
+#: scripts/sim/life_legacy.gd:113
+msgid "A new life at difficulty %d, carrying %s home dollars. Previous save: slot %d."
+msgstr "展开难度 %d 的新人生，带入 %s 本国元资本。上一局保存在第 %d 槽。"
+
 #: data/events/energy_rule.json
 msgid "A new rule requires an accessible bay at every public charging station. Retrofit now, or apply for an exemption and risk fines."
 msgstr "新规定要求每座公共充电站都要有无障碍车位。现在改建，或申请豁免但可能被罚款。"
@@ -1301,6 +1317,10 @@ msgstr "分部汇整同一产业的交易。"
 #: data/jobs/parcel_sorter.json
 msgid "A seller drops off twenty parcels with no labels. You feel their pain."
 msgstr "一个卖家拿来二十个没贴标签的包裹。你完全懂那种痛。"
+
+#: scripts/ui/modals/life_review_modal.gd:52
+msgid "A separate next life"
+msgstr "另一段独立的人生"
 
 #: data/character/options.json
 msgid "A sharp three-piece in midnight wool. Pocket square included."
@@ -1598,7 +1618,7 @@ msgstr "事故维修：%s"
 msgid "Accuracy and speed decide how much of the work gets done in this session."
 msgstr "正确率和速度决定这一段时间完成多少工作。"
 
-#: scripts/ui/modals/growth_modal.gd:17 scripts/ui/modals/pause_menu.gd:28 scripts/ui/phone_ui.gd:311
+#: scripts/ui/modals/growth_modal.gd:17 scripts/ui/modals/pause_menu.gd:28 scripts/ui/phone_ui.gd:313
 msgid "Achievements"
 msgstr "成就"
 
@@ -1786,6 +1806,10 @@ msgstr "所有文件 (*)"
 msgid "All cost rows are in home dollars; the buyer quote is labelled with its own currency."
 msgstr "各项成本都以本国元列示；买方报价另标明使用的货币。"
 
+#: scripts/ui/phone_ui.gd:326
+msgid "All events"
+msgstr "全部事件"
+
 #: scripts/ui/minigames/clerk_forms_game.gd:30
 msgid "All good? Approve it. Something wrong? Click the wrong field first, then Reject."
 msgstr "都没问题就「核准」。有错的话，先点出错的字段，再按「退件」。"
@@ -1801,6 +1825,10 @@ msgstr "一切平静。出去走走吧。"
 #: scripts/ui/modals/save_list_modal.gd:20
 msgid "All save slots are in use. Choose one for the new game. The old save is moved to a backup folder, not deleted."
 msgstr "存盘字段都满了。选一个给新游戏用，旧存盘会移到备份文件夹，不会删掉。"
+
+#: scripts/ui/phone_ui.gd:337
+msgid "All years"
+msgstr "全部年份"
 
 #: data/help/help.json
 msgid "Allocate the budget across channels. CPM buys impressions, audience fit and saturation limit relevant reach. Adjust the mix while running."
@@ -2478,7 +2506,7 @@ msgstr "后背包"
 msgid "Bags"
 msgstr "包包"
 
-#: scripts/sim/cafe.gd:311
+#: scripts/sim/cafe.gd:312
 msgid "Bakery delivery: %d pastries"
 msgstr "面包店送货：%d 个糕点"
 
@@ -2741,6 +2769,10 @@ msgstr "有胆。我喜欢。"
 #: scripts/ui/modals/loan_modal.gd:90 scripts/ui/modals/loan_modal.gd:94
 msgid "Book an appointment"
 msgstr "预约贷款洽谈"
+
+#: scripts/ui/modals/life_review_modal.gd:46
+msgid "Book net worth (home dollars)"
+msgstr "帐面净值（本国元）"
 
 #: data/events/hotel_equipment_failure.json
 msgid "Book the scheduled technician for $700"
@@ -3010,6 +3042,10 @@ msgstr "BuildLoan_%s_%s"
 msgid "Build_%s_%s"
 msgstr "Build_%s_%s"
 
+#: data/legacy.json
+msgid "Builder"
+msgstr "建造者"
+
 #: scripts/world/building_info.gd:103
 msgid "Building"
 msgstr "建筑"
@@ -3097,6 +3133,10 @@ msgstr "商务旅客 %d%%，观光客 %d%%。油价恐慌、评价差或租金�
 #: scripts/ui/minigames/clerk_forms_game.gd:68 scripts/ui/modals/registration_modal.gd:36
 msgid "Business type"
 msgstr "营业项目"
+
+#: scripts/ui/modals/life_review_modal.gd:46
+msgid "Business types with revenue"
+msgstr "有实际营收的生意（种）"
 
 #: data/story/achievements.json data/story/goals.json scripts/ui/modals/business_board.gd:21
 msgid "Businesses"
@@ -3422,7 +3462,7 @@ msgstr "咖啡／餐饮"
 msgid "Cafe premises"
 msgstr "咖啡店面"
 
-#: scripts/sim/cafe.gd:419 scripts/ui/minigames/clerk_forms_game.gd:11
+#: scripts/sim/cafe.gd:420 scripts/ui/minigames/clerk_forms_game.gd:11
 msgid "Café"
 msgstr "咖啡店"
 
@@ -4042,6 +4082,10 @@ msgstr "请选择已上架的车。"
 msgid "Choose a market strategy first."
 msgstr "先选择市场策略。"
 
+#: data/help/help.json
+msgid "Choose a next-life route, then confirm. The old game is saved first; only an empty slot may be used."
+msgstr "先选新人生路线，再确认。会先保存旧局，只使用空白存盘槽。"
+
 #: scripts/sim/group_jobs.gd:122
 msgid "Choose a part that is still open."
 msgstr "请选一个尚未完成的部分。"
@@ -4109,6 +4153,10 @@ msgstr "请选择可经营的海外地区。"
 #: scripts/sim/trade_quote.gd:19
 msgid "Choose a supported product, term, transport and payment method."
 msgstr "请选择可用的商品、贸易条件、运输与付款方式。"
+
+#: data/help/help.json
+msgid "Choose a timeline category and year on the phone. Optional thumbnails use existing art when a record names it."
+msgstr "在手机选择时间轴类别与年份。纪录有指定素材时，缩略图会沿用现有美术。"
 
 #: scripts/sim/automotive.gd:280
 msgid "Choose a used car on your lot."
@@ -4246,6 +4294,10 @@ msgstr "先选择退居导师的结局。"
 msgid "Choose the name carefully: it goes on your sign and your invoices."
 msgstr "名字要想清楚：它会出现在招牌和发票上。"
 
+#: scripts/sim/life_legacy.gd:85
+msgid "Choose the next generation or the next chapter of this character."
+msgstr "选择下一代，或让同一角色展开新人生。"
+
 #: data/story/chapters.json
 msgid "Choose the tariff code that matches your actual product"
 msgstr "选择符合实际商品的税则分类"
@@ -4326,7 +4378,7 @@ msgstr "市政厅——许可"
 msgid "City Hall, permits, registration, public services."
 msgstr "市政厅、许可、公司登记、公共服务。"
 
-#: scripts/sim/cafe.gd:411
+#: scripts/sim/cafe.gd:412
 msgid "City Hall: your food handling licence is approved."
 msgstr "市政厅：你的食品处理执照核准了。"
 
@@ -4446,7 +4498,7 @@ msgstr "客户配对"
 msgid "Client payment"
 msgstr "客户付款"
 
-#: scripts/sim/careers.gd:301
+#: scripts/sim/careers.gd:302
 msgid "Client payment — %s"
 msgstr "客户付款——%s"
 
@@ -4622,6 +4674,10 @@ msgstr "等 %s 有 %d 天的帐务纪录，或拿到一张签好的合约再来�
 msgid "Come in, come in. Okafor Lettings: forty years in Old Town, and I still remember every tenant's birthday."
 msgstr "请进请进。Okafor 租屋行：在旧城区四十年了，每位房客的生日我都还记得。"
 
+#: data/legacy.json
+msgid "Comeback"
+msgstr "东山再起者"
+
 #: data/dialogue/jun_first.json
 msgid "Coming up."
 msgstr "马上来。"
@@ -4650,7 +4706,7 @@ msgstr "社群经理"
 msgid "Compact"
 msgstr "小型车"
 
-#: scripts/ui/modals/bank_modal.gd:82
+#: scripts/ui/modals/bank_modal.gd:82 scripts/ui/phone_ui.gd:326
 msgid "Company"
 msgstr "公司"
 
@@ -4790,13 +4846,17 @@ msgstr "请先完成两件太阳能安装，再上电池课程。"
 msgid "Completed"
 msgstr "已完成"
 
-#: scripts/sim/story_engine.gd:181
+#: scripts/sim/story_engine.gd:184
 msgid "Completed %s."
 msgstr "完成了%s。"
 
 #: scripts/sim/real_estate.gd:169
 msgid "Completed Lot 7 building"
 msgstr "7 号地大楼完工"
+
+#: scripts/ui/modals/life_review_modal.gd:46
+msgid "Completed city projects"
+msgstr "已完成城市开发案（件）"
 
 #: data/help/glossary.json
 msgid "Completion creates saleable or rentable units and a visible building."
@@ -4878,7 +4938,7 @@ msgstr "通过视频或出差，联系 Lumina 的 Omar"
 msgid "Contact Omar with a live registered company first."
 msgstr "请先成立仍在营运的公司，再联系 Omar。"
 
-#: scripts/ui/modals/company_os.gd:863
+#: scripts/ui/modals/company_os.gd:863 scripts/ui/phone_ui.gd:326
 msgid "Contacts"
 msgstr "联系人"
 
@@ -5210,6 +5270,10 @@ msgstr "Crestline 的秋季灯具系列。有一层架子还空着。"
 msgid "Crestline's offer is in Company OS → Contracts: accept, counter or decline"
 msgstr "Crestline 的报价在 Company OS →「合约」：接受、还价或拒绝"
 
+#: scripts/ui/phone_ui.gd:326
+msgid "Crises"
+msgstr "危机"
+
 #: scripts/sim/hotel.gd:484
 msgid "Critic Vera Stone published her review: %.1f stars."
 msgstr "评论家 Vera Stone 发表了评价：%.1f 颗星。"
@@ -5253,6 +5317,10 @@ msgstr "目前 %s · 门槛 %s · 差额 %s"
 #: scripts/ui/minigames/auction_game.gd:55
 msgid "Current bid %s"
 msgstr "目前出价 %s"
+
+#: scripts/ui/modals/life_review_modal.gd:46
+msgid "Current employees"
+msgstr "目前员工（人）"
 
 #: scripts/ui/modals/legacy_modal.gd:101
 msgid "Current valuation (home dollars)"
@@ -5450,7 +5518,7 @@ msgstr "第 %d 天 · %s · %.1f／5 · 权重 %d"
 msgid "Day %d · personal %s"
 msgstr "第 %d 天 · 个人 %s"
 
-#: scripts/ui/modals/pause_menu.gd:41
+#: scripts/ui/modals/pause_menu.gd:44
 msgid "Day length"
 msgstr "一天长度"
 
@@ -5478,7 +5546,7 @@ msgstr "日租 %d%% · 周租 %d%%（相对标准）"
 msgid "Days"
 msgstr "天"
 
-#: scripts/sim/careers.gd:317
+#: scripts/sim/careers.gd:318
 msgid "Deadline missed: %s. Deliver soon, the fee drops."
 msgstr "错过截止时间：%s。快点交件，费用会被打折。"
 
@@ -5557,6 +5625,10 @@ msgstr "决定"
 #: scripts/ui/modals/company_os.gd:246
 msgid "Decision pending: %s"
 msgstr "待决定：%s"
+
+#: scripts/sim/event_engine.gd:179
+msgid "Decision: %s — %s"
+msgstr "决策：%s—%s"
 
 #: data/help/help.json
 msgid "Decisions"
@@ -5701,6 +5773,10 @@ msgstr "已交付"
 #: scripts/ui/modals/company_os.gd:1145
 msgid "Delivered and invoiced: %s."
 msgstr "已交件并开立发票：%s。"
+
+#: scripts/ui/modals/life_review_modal.gd:46
+msgid "Delivered orders"
+msgstr "已交付订单（笔）"
 
 #: scripts/sim/contracts.gd:296
 msgid "Delivered%s. Invoice %s due in %d days."
@@ -6442,6 +6518,10 @@ msgstr "能源控制台"
 msgid "Energy Console: roof to charging network"
 msgstr "能源控制台：从屋顶到充电网络"
 
+#: scripts/ui/modals/life_review_modal.gd:46
+msgid "Energy installations"
+msgstr "已完成能源安装（件）"
+
 #: data/regions/almeria.json
 msgid "Energy price swings"
 msgstr "能源价格波动"
@@ -6490,7 +6570,7 @@ msgstr "进入竞标 · 下一口 %s"
 msgid "Enter the Wednesday auction"
 msgstr "参加周三拍卖"
 
-#: scripts/ui/modals/legacy_modal.gd:119
+#: scripts/ui/modals/legacy_modal.gd:120
 msgid "Epilogue card %d of %d"
 msgstr "尾声第 %d 张，共 %d 张"
 
@@ -6694,7 +6774,7 @@ msgstr "预估注册：每天 %.1f 位 · 已推出功能：%d · 下一个功�
 msgid "Explore 10 city districts and build your company through all 12 story chapters."
 msgstr "探索 10 个街区，从第一次创业一路玩完 12 章故事。"
 
-#: scripts/sim/careers.gd:329
+#: scripts/sim/careers.gd:330
 msgid "Explore freelance consulting"
 msgstr "接案起步"
 
@@ -6702,7 +6782,7 @@ msgstr "接案起步"
 msgid "Export duty %s: %s"
 msgstr "出口订单 %s 关税：%s"
 
-#: autoload/save_system.gd:385 scripts/ui/modals/pause_menu.gd:32 scripts/ui/modals/save_list_modal.gd:25
+#: autoload/save_system.gd:385 scripts/ui/modals/pause_menu.gd:35 scripts/ui/modals/save_list_modal.gd:25
 msgid "Export save"
 msgstr "导出存盘"
 
@@ -7050,7 +7130,7 @@ msgstr "完成一档上市宣传活动"
 msgid "Finish a sales campaign"
 msgstr "完成一档销售活动"
 
-#: scripts/ui/modals/legacy_modal.gd:120
+#: scripts/ui/modals/legacy_modal.gd:121
 msgid "Finish epilogue"
 msgstr "看完尾声"
 
@@ -7073,6 +7153,10 @@ msgstr "完成约定范围后才能交付。"
 #: scripts/sim/manufacturing.gd:43
 msgid "Finish the current recruitment first."
 msgstr "请先完成目前的招募。"
+
+#: scripts/sim/life_legacy.gd:80
+msgid "Finish the epilogue or choose retirement before starting another life."
+msgstr "先读完尾声或选择退休，再展开新人生。"
 
 #: scripts/ui/modals/growth_modal.gd:33
 msgid "Finish the main story to start optional growth goals. Achievements already track your progress."
@@ -7206,6 +7290,10 @@ msgstr "五百个注册"
 msgid "Five installs"
 msgstr "五件安装"
 
+#: scripts/ui/modals/life_review_modal.gd:41
+msgid "Five key moments"
+msgstr "五个关键时刻"
+
 #: data/dialogue/nina_first.json
 msgid "Five looks this season: Executive, Luxury Citywear, Travel, Formal Evening, and Logistics for the warehouse days."
 msgstr "这季有五种造型：主管、城市精品、旅行、晚宴，还有仓库日穿的现场工作服。"
@@ -7274,7 +7362,7 @@ msgstr "车场上的泡水车"
 msgid "Floor-plan interest"
 msgstr "车辆融资利息"
 
-#: scripts/sim/cafe.gd:314
+#: scripts/sim/cafe.gd:315
 msgid "Flyers and a board for %s"
 msgstr "%s 的传单和立牌"
 
@@ -7310,7 +7398,7 @@ msgstr "食品处理执照（%s）"
 msgid "Food handling licence at City Hall."
 msgstr "到市政厅申请食品处理执照。"
 
-#: scripts/sim/cafe.gd:410
+#: scripts/sim/cafe.gd:411
 msgid "Food handling licence granted."
 msgstr "食品处理执照核发了。"
 
@@ -7470,7 +7558,7 @@ msgstr "在 Nexus 共享办公室工作期间，可免费使用共享座位。"
 msgid "Free. {supplier} ships once the bridge reopens ({until}). The payment lands at {ratio} and you cover the {lost} gap."
 msgstr "免费。跨链桥重开后（{until}）{supplier} 才出货。款项以 {ratio} 入帐，差额 {lost} 由你补。"
 
-#: scripts/sim/careers.gd:329
+#: scripts/sim/careers.gd:330
 msgid "Freelance"
 msgstr "接案"
 
@@ -8022,7 +8110,7 @@ msgstr "客房耗品、洗涤与早餐"
 msgid "Guests"
 msgstr "一般住客"
 
-#: scripts/ui/modals/pause_menu.gd:70
+#: scripts/ui/modals/pause_menu.gd:73
 msgid "Guide arrow"
 msgstr "导引箭头"
 
@@ -8330,7 +8418,7 @@ msgstr "反光背心、工作裤、钢头靴。仓库日专用。"
 msgid "Hidden defects unknown. Paid inspection: %s."
 msgstr "隐藏瑕疵未知。付费验车：%s。"
 
-#: scripts/ui/modals/pause_menu.gd:58
+#: scripts/ui/modals/pause_menu.gd:61
 msgid "High"
 msgstr "高"
 
@@ -8818,7 +8906,7 @@ msgstr "进口执照要等监管浪潮才会实施。"
 msgid "Import prices ease as the ports catch up."
 msgstr "港口赶上进度，进口价格回稳。"
 
-#: autoload/save_system.gd:385 scripts/ui/modals/pause_menu.gd:35 scripts/ui/modals/save_list_modal.gd:13 scripts/ui/modals/save_list_modal.gd:29
+#: autoload/save_system.gd:385 scripts/ui/modals/pause_menu.gd:38 scripts/ui/modals/save_list_modal.gd:13 scripts/ui/modals/save_list_modal.gd:29
 msgid "Import save"
 msgstr "导入存盘"
 
@@ -8926,9 +9014,17 @@ msgstr "Ines 的海关指南"
 msgid "Infrastructure"
 msgstr "基础建设"
 
+#: scripts/sim/life_legacy.gd:109
+msgid "Inherited capital: %s"
+msgstr "继承资本：%s"
+
 #: data/milestones.json
 msgid "Inn and Brasserie"
 msgstr "旅店与餐厅"
+
+#: data/legacy.json
+msgid "Innovator"
+msgstr "创新者"
 
 #: data/events/energy_typhoon.json
 msgid "Inspect first and repair only the worst"
@@ -9202,7 +9298,7 @@ msgstr "%s 已付款（%s）"
 msgid "Invoice reduction"
 msgstr "减少应付金额"
 
-#: scripts/sim/careers.gd:270
+#: scripts/sim/careers.gd:271
 msgid "Invoice — %s"
 msgstr "发票——%s"
 
@@ -9514,6 +9610,10 @@ msgstr "请在 28 个字以内。"
 msgid "Keep listings live and stocked."
 msgstr "让商品维持上架且有库存。"
 
+#: scripts/ui/modals/life_review_modal.gd:33 scripts/ui/modals/life_review_modal.gd:66
+msgid "Keep living this life"
+msgstr "继续这段人生"
+
 #: data/events/ad_cost_spike.json
 msgid "Keep my budget"
 msgstr "预算不变"
@@ -9630,6 +9730,10 @@ msgstr "Kite 旅行车"
 msgid "Know who you're paying, and know who's holding your money in between. That's the whole job now."
 msgstr "知道你付钱给谁，也知道中间是谁拿着你的钱。现在的工作就是这个。"
 
+#: scripts/ui/modals/life_review_modal.gd:46
+msgid "Known contacts"
+msgstr "已认识的人脉（人）"
+
 #: scripts/ui/automotive_ui.gd:168
 msgid "Known defect: %s (remaining value loss %d%%)."
 msgstr "已知瑕疵：%s（剩余价值损失 %d%%）。"
@@ -9682,7 +9786,7 @@ msgstr "房东"
 msgid "Landlord revenue share: %s"
 msgstr "地主营收分成：%s"
 
-#: scripts/ui/modals/pause_menu.gd:47
+#: scripts/ui/modals/pause_menu.gd:50
 msgid "Language"
 msgstr "语言"
 
@@ -9786,7 +9890,7 @@ msgstr "做好就上线。价格、广告和新功能决定注册数和流失率
 msgid "Launch your product."
 msgstr "推出你的产品。"
 
-#: scripts/sim/saas.gd:104
+#: scripts/sim/saas.gd:105
 msgid "Launched %s at %s/month."
 msgstr "%s 上线，每月 %s。"
 
@@ -9962,6 +10066,10 @@ msgstr "离开了%s的工作。"
 msgid "Legacy"
 msgstr "传承"
 
+#: data/help/glossary.json scripts/ui/modals/life_review_modal.gd:38
+msgid "Legacy archetypes"
+msgstr "传承类型"
+
 #: scripts/sim/legacy_business.gd:236
 msgid "Legacy choice: %s."
 msgstr "传承选择：%s。"
@@ -10042,9 +10150,17 @@ msgstr "执照已续期到 %s。"
 msgid "Licensing Officer"
 msgstr "执照承办员"
 
-#: scripts/ui/phone_ui.gd:308
+#: scripts/ui/phone_ui.gd:326
+msgid "Life"
+msgstr "人生"
+
+#: scripts/ui/phone_ui.gd:310
 msgid "Life Timeline"
 msgstr "人生纪录"
+
+#: data/help/help.json scripts/ui/modals/life_review_modal.gd:6
+msgid "Life review"
+msgstr "人生回顾"
 
 #: data/events/hotel_equipment_failure.json
 msgid "Lift and hot water failure"
@@ -10162,6 +10278,10 @@ msgstr "已上架%s，售价 %s。花了 %s。"
 msgid "Listings on ShopLane (10% fee · weekly payout)"
 msgstr "ShopLane 上架商品（抽成 10% · 每周拨款）"
 
+#: scripts/sim/life_legacy.gd:66
+msgid "Live thirty days or finish the main story before retiring."
+msgstr "先生活三十天或完成主线，再选择退休。"
+
 #: data/story/achievements.json
 msgid "Live thirty days without any personal or company cash account becoming negative."
 msgstr "度过三十天，期间个人与公司的现金帐户都未透支。"
@@ -10233,6 +10353,10 @@ msgstr "贷款"
 #: data/story/goals.json
 msgid "Loans paid in full"
 msgstr "贷款全部还清"
+
+#: data/legacy.json
+msgid "Local Legend"
+msgstr "在地传奇"
 
 #: scripts/sim/logistics.gd:355 scripts/ui/minigames/route_game.gd:27
 msgid "Local client"
@@ -10390,7 +10514,7 @@ msgstr "车场停放与整备"
 msgid "Love it."
 msgstr "超喜欢。"
 
-#: scripts/ui/modals/pause_menu.gd:58
+#: scripts/ui/modals/pause_menu.gd:61
 msgid "Low"
 msgstr "低"
 
@@ -10578,7 +10702,7 @@ msgstr "主要成本"
 msgid "Main freight"
 msgstr "主运费"
 
-#: scripts/ui/modals/growth_modal.gd:64 scripts/ui/phone_ui.gd:329
+#: scripts/ui/modals/growth_modal.gd:64 scripts/ui/phone_ui.gd:364
 msgid "Main-story achievements"
 msgstr "主线成就"
 
@@ -10966,6 +11090,10 @@ msgstr "在 Nexus Co-work 辅导创办人：%s，花费一小时。"
 msgid "Menu"
 msgstr "菜单"
 
+#: data/legacy.json
+msgid "Merchant"
+msgstr "商旅"
+
 #: data/economy/automotive.json
 msgid "Meridian City"
 msgstr "Meridian City"
@@ -11046,13 +11174,17 @@ msgstr "捷运：%s 站"
 msgid "Mia"
 msgstr "Mia"
 
-#: scripts/ui/modals/pause_menu.gd:58
+#: scripts/ui/modals/pause_menu.gd:61
 msgid "Mid"
 msgstr "中"
 
 #: scripts/sim/milestones.gd:62 scripts/sim/milestones.gd:64
 msgid "Milestone: %s"
 msgstr "里程碑：%s"
+
+#: scripts/ui/phone_ui.gd:326
+msgid "Milestones"
+msgstr "里程碑"
 
 #: scripts/ui/minigames/barista_game.gd:98
 msgid "Milk"
@@ -11270,7 +11402,7 @@ msgstr "嘴型"
 msgid "Move two cars through the Auto Desk."
 msgstr "通过汽车柜台卖出两台车。"
 
-#: autoload/game_state.gd:43
+#: autoload/game_state.gd:43 scripts/sim/life_legacy.gd:112
 msgid "Moved to Aurelia City with $%s in savings."
 msgstr "带着 $%s 的存款搬到奥瑞莉亚市。"
 
@@ -11454,6 +11586,10 @@ msgstr "中性"
 msgid "New Game"
 msgstr "新游戏"
 
+#: data/help/glossary.json
+msgid "New Game+"
+msgstr "新人生＋"
+
 #: data/quests/new_neighbourhood_opening.json
 msgid "New Neighbourhood Opening"
 msgstr "新社区开幕"
@@ -11494,13 +11630,21 @@ msgstr "大额付款与进口有新规定：到 Bloom Coffee 看新闻板"
 msgid "News board"
 msgstr "公告栏"
 
-#: scripts/ui/modals/legacy_modal.gd:120
+#: scripts/ui/modals/legacy_modal.gd:121
 msgid "Next card"
 msgstr "下一张"
 
 #: data/economy/logistics.json
 msgid "Next day"
 msgstr "隔天"
+
+#: scripts/ui/modals/life_review_modal.gd:56
+msgid "Next generation"
+msgstr "下一代"
+
+#: scripts/ui/modals/life_review_modal.gd:56
+msgid "Next life with this character"
+msgstr "同一角色的新人生"
 
 #: scripts/ui/manufacturing_ui.gd:144
 msgid "Next machine"
@@ -11517,6 +11661,10 @@ msgstr "下一步：同时经营两个以上事业。有大案的客户会打电
 #: data/dialogue/ana_register.json
 msgid "Next! Hi. What can I do for you?"
 msgstr "下一位！你好，要办什么？"
+
+#: scripts/sim/life_legacy.gd:107
+msgid "Next-life starting capital adjustment"
+msgstr "新人生起始资本调整"
 
 #: scripts/ui/hotel_ui.gd:152
 msgid "Next: daily operations"
@@ -11714,6 +11862,10 @@ msgstr "还没有司机。到人员分页请一位货车司机，你去忙别的
 msgid "No employees yet. Every order is packed by you, which is why time matters."
 msgstr "还没有员工。每笔订单都是你自己打包，所以时间很重要。"
 
+#: scripts/sim/life_legacy.gd:81
+msgid "No empty save slot. Keep this life and manage saves from the title screen."
+msgstr "没有空白存盘槽。先继续这一局，再到标题画面管理存盘。"
+
 #: scripts/sim/automotive.gd:420
 msgid "No fleet car needs service."
 msgstr "没有需要保养的车队车辆。"
@@ -11842,7 +11994,7 @@ msgstr "没有这个决定。"
 msgid "No such employee."
 msgstr "找不到这位员工。"
 
-#: scripts/sim/careers.gd:252
+#: scripts/sim/careers.gd:253
 msgid "No such gig in progress."
 msgstr "没有这个进行中的案子。"
 
@@ -11922,7 +12074,7 @@ msgstr "Nora"
 msgid "Nori Tea House"
 msgstr "Nori 茶馆"
 
-#: scripts/ui/modals/pause_menu.gd:42
+#: scripts/ui/modals/pause_menu.gd:45
 msgid "Normal"
 msgstr "一般"
 
@@ -12078,7 +12230,7 @@ msgstr "你看过我的数字之前，没什么好谈的。"
 msgid "Nothing to drop off. Pack orders at your packing table and choose 'Carry to PostPoint'."
 msgstr "没有要寄的东西。先到打包桌打包，再选「自己拿去 PostPoint」。"
 
-#: scripts/sim/saas.gd:98
+#: scripts/sim/saas.gd:99
 msgid "Nothing to launch."
 msgstr "没有可以上线的产品。"
 
@@ -12246,7 +12398,7 @@ msgstr "调表"
 msgid "Of course you are."
 msgstr "我就知道。"
 
-#: scripts/ui/modals/pause_menu.gd:58 scripts/ui/modals/pause_menu.gd:73 scripts/ui/modals/pause_menu.gd:81
+#: scripts/ui/modals/pause_menu.gd:61 scripts/ui/modals/pause_menu.gd:76 scripts/ui/modals/pause_menu.gd:84
 msgid "Off"
 msgstr "关"
 
@@ -12310,7 +12462,7 @@ msgstr "好。哇。"
 msgid "Old Town"
 msgstr "旧城区"
 
-#: scripts/sim/cafe.gd:406
+#: scripts/sim/cafe.gd:407
 msgid "Old Town Roasters delivered supplies for %d cups."
 msgstr "Old Town Roasters 送来了 %d 杯份的材料。"
 
@@ -12358,7 +12510,7 @@ msgstr "Omar 按批发价整批买断，客户关系归他。"
 msgid "Omar — your Lumina partner"
 msgstr "Omar — 你的 Lumina 伙伴"
 
-#: scripts/ui/modals/pause_menu.gd:72 scripts/ui/modals/pause_menu.gd:81
+#: scripts/ui/modals/pause_menu.gd:75 scripts/ui/modals/pause_menu.gd:84
 msgid "On"
 msgstr "开"
 
@@ -12605,6 +12757,10 @@ msgstr "到 Nexus Bank 开立国际帐户；Marcus 会说明费用"
 #: scripts/sim/fx_forward.gd:38
 msgid "Open an international company account first."
 msgstr "请先开立公司国际帐户。"
+
+#: scripts/ui/modals/life_review_modal.gd:46
+msgid "Open charging stations"
+msgstr "营运中的充电站（座）"
 
 #: data/story/chapters.json
 msgid "Open for Business"
@@ -12878,6 +13034,10 @@ msgstr "营运页列出所有进货单，停用的操作旁会显示原因。"
 msgid "Operations: buying stock"
 msgstr "营运：进货"
 
+#: data/legacy.json
+msgid "Operator"
+msgstr "实干者"
+
 #: data/world/years.json
 msgid "Operators freeze all bridge transfers for about a week while they trace the funds."
 msgstr "营运方冻结所有跨链桥转帐约一周，追查资金去向。"
@@ -13085,6 +13245,10 @@ msgstr "同一机台不能同时生产多张订单；加班工资为平常的 1.
 #: scripts/ui/modals/company_os.gd:385
 msgid "Overseas"
 msgstr "海外"
+
+#: scripts/ui/modals/life_review_modal.gd:46
+msgid "Overseas deliveries"
+msgstr "海外交付（笔）"
 
 #: scripts/sim/global_market.gd:188
 msgid "Overseas delivery %s: %s %s"
@@ -14142,6 +14306,10 @@ msgstr "港口通了之前，价格会涨、交期会拉长。没人知道要多
 msgid "Pricing and margin"
 msgstr "定价与毛利"
 
+#: scripts/ui/modals/life_review_modal.gd:39
+msgid "Primary: %s · Secondary: %s"
+msgstr "主要类型：%s・次要类型：%s"
+
 #: scripts/ui/minigames/cowork_host_game.gd:7
 msgid "Priti"
 msgstr "Priti"
@@ -14218,7 +14386,7 @@ msgstr "本月利润：%s。现金变动：%s。中间的差额（%s）躺在库
 msgid "Project closed"
 msgstr "建案已结束"
 
-#: scripts/sim/careers.gd:166
+#: scripts/sim/careers.gd:167
 msgid "Promoted to %s at %s."
 msgstr "升职为%s（%s）。"
 
@@ -14350,6 +14518,10 @@ msgstr "数量超过地区产能或需求，或加价率不在 0–100% 范围�
 msgid "Quay Depot"
 msgstr "Quay Depot"
 
+#: data/legacy.json
+msgid "Quiet Owner"
+msgstr "从容的经营者"
+
 #: data/economy/media.json
 msgid "Quiet excellence"
 msgstr "低调而卓越"
@@ -14366,7 +14538,7 @@ msgstr "离开"
 msgid "Quit job"
 msgstr "辞职"
 
-#: scripts/ui/modals/pause_menu.gd:90
+#: scripts/ui/modals/pause_menu.gd:93
 msgid "Quit to title"
 msgstr "回到标题画面"
 
@@ -14518,7 +14690,7 @@ msgstr "{product}广告预算提高 40%"
 msgid "Ran out"
 msgstr "缺货"
 
-#: scripts/sim/cafe.gd:362
+#: scripts/sim/cafe.gd:363
 msgid "Ran out of coffee for %d."
 msgstr "咖啡材料用完，%d 位客人没买到。"
 
@@ -14830,13 +15002,25 @@ msgstr "整备：%s"
 msgid "Reconsider goals set aside"
 msgstr "重新考虑搁置的目标"
 
+#: scripts/ui/modals/life_review_modal.gd:28
+msgid "Record retirement and review this life"
+msgstr "记录退休，回顾这段人生"
+
 #: scripts/sim/legacy_business.gd:264
 msgid "Recorded deliveries reached %d overseas regions. Company cash now: %s home dollars."
 msgstr "实际交付的商品到达 %d 个海外地区。目前公司现金：%s 本国元。"
 
+#: scripts/ui/modals/life_review_modal.gd:45
+msgid "Recorded life statistics"
+msgstr "这段人生的实际纪录"
+
 #: scripts/ui/modals/legacy_modal.gd:82
 msgid "Recorded market revenue (home dollars)"
 msgstr "实际市场营收（本国元）"
+
+#: scripts/ui/modals/life_review_modal.gd:46
+msgid "Recorded work hours"
+msgstr "已记录工时（小时）"
 
 #: data/jobs/city_clerk.json
 msgid "Records Clerk"
@@ -15358,11 +15542,11 @@ msgstr "已寄出替换品 %s：%s（快捷）"
 msgid "Replacement shipped."
 msgstr "新品已寄出。"
 
-#: scripts/ui/modals/pause_menu.gd:74
+#: scripts/ui/modals/pause_menu.gd:77
 msgid "Replay tutorial"
 msgstr "重新播放教学"
 
-#: scripts/ui/modals/pause_menu.gd:87
+#: scripts/ui/modals/pause_menu.gd:90
 msgid "Report a problem (F12)"
 msgstr "回报问题（F12）"
 
@@ -15530,6 +15714,14 @@ msgstr "零售、餐饮、夜生活。"
 msgid "Retailers warn of empty shelves before the holidays."
 msgstr "零售商警告：节前恐怕会缺货。"
 
+#: scripts/ui/modals/pause_menu.gd:31
+msgid "Retirement and life review"
+msgstr "退休与人生回顾"
+
+#: scripts/ui/modals/life_review_modal.gd:26
+msgid "Retirement records your life without closing or selling the company. You can keep playing or begin another life in a separate save slot."
+msgstr "退休会记录这段人生，不会替你关闭或出售公司。可以继续这一局，或在另一个存盘槽展开新人生。"
+
 #: data/events/energy_rule.json
 msgid "Retrofit every station"
 msgstr "改建所有充电站"
@@ -15562,7 +15754,7 @@ msgstr "退货"
 msgid "Return stock to supplier"
 msgstr "退货给供应商"
 
-#: scripts/ui/modals/legacy_modal.gd:112
+#: scripts/ui/modals/legacy_modal.gd:113
 msgid "Return to free play"
 msgstr "回到自由经营"
 
@@ -15674,6 +15866,10 @@ msgstr "检阅活动并回应"
 msgid "Review the prices of %s"
 msgstr "帮 %s 查看定价"
 
+#: scripts/ui/modals/legacy_modal.gd:112
+msgid "Review this life"
+msgstr "回顾这段人生"
+
 #: scripts/ui/modals/legacy_modal.gd:49 scripts/ui/modals/legacy_modal.gd:72
 msgid "Review unavailable market"
 msgstr "检讨无法运行的策略"
@@ -15690,7 +15886,7 @@ msgstr "则评价"
 msgid "ReviewsNextGrowth"
 msgstr "ReviewsNextGrowth"
 
-#: scripts/ui/modals/legacy_modal.gd:113
+#: scripts/ui/modals/legacy_modal.gd:114
 msgid "Revisit the ending cards"
 msgstr "重看尾声"
 
@@ -16074,7 +16270,7 @@ msgstr "休旅车"
 msgid "SW"
 msgstr "西南"
 
-#: data/regions/northridge.json scripts/sim/saas.gd:201
+#: data/regions/northridge.json scripts/sim/saas.gd:202
 msgid "SaaS"
 msgstr "SaaS"
 
@@ -16194,7 +16390,7 @@ msgstr "请先存足原厂订单的现金。"
 msgid "Save exported. Keep this file outside your browser."
 msgstr "存盘已导出。请把文件保存在浏览器以外的地方。"
 
-#: scripts/ui/phone_ui.gd:357
+#: scripts/ui/phone_ui.gd:392
 msgid "Save game"
 msgstr "保存游戏"
 
@@ -16206,7 +16402,7 @@ msgstr "存盘已导入，可以接着玩。"
 msgid "Save local price"
 msgstr "保存当地售价"
 
-#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:358
+#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:393
 msgid "Save now"
 msgstr "立即存盘"
 
@@ -16334,6 +16530,10 @@ msgstr "请先备妥补助申请费。"
 msgid "Save the takeover price first."
 msgstr "请先备好顶让费用。"
 
+#: scripts/ui/modals/life_review_modal.gd:62
+msgid "Save this life and start the selected next life"
+msgstr "保存这一局，展开选好的新人生"
+
 #: autoload/save_system.gd:440
 msgid "Save transfer"
 msgstr "存盘导入／导出"
@@ -16346,7 +16546,7 @@ msgstr "已保存"
 msgid "Saved %s"
 msgstr "存于 %s"
 
-#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:360
+#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:395
 msgid "Saved (slot %d)."
 msgstr "已存盘（字段 %d）。"
 
@@ -16417,6 +16617,10 @@ msgstr "选择客户"
 #: scripts/ui/real_estate_ui.gd:130
 msgid "Select property"
 msgstr "选择对象"
+
+#: scripts/ui/modals/life_review_modal.gd:42
+msgid "Selected by the category weights in the legacy data, then by recency. Older records without a category keep their original text."
+msgstr "先依传承数据的事件类别权重排序，再取较新的纪录。旧纪录没有类别时仍保留原文。"
 
 #: data/help/glossary.json
 msgid "Self photos take 1 hour 20 minutes; studio photos cost $120. Better presentation can help orders, but keep cash for stock."
@@ -16670,6 +16874,10 @@ msgstr "半价和解"
 msgid "Settlement"
 msgstr "结算方式"
 
+#: data/help/glossary.json
+msgid "Seven weighted formulas summarize real records: business types, people, trade, innovation, city projects, recovery, assets and recorded work."
+msgstr "七组加权公式整理实际纪录：产业、员工、交易、创新、城市开发、东山再起、资产与工时。"
+
 #: scripts/ui/modals/company_os.gd:801
 msgid "Severance paid: %s."
 msgstr "已付资遣费：%s。"
@@ -16922,7 +17130,7 @@ msgstr "第 %d 张：%d%%（%s）"
 msgid "Shots"
 msgstr "Shots"
 
-#: scripts/ui/modals/pause_menu.gd:79
+#: scripts/ui/modals/pause_menu.gd:82
 msgid "Show interaction markers"
 msgstr "显示交互标记"
 
@@ -17078,7 +17286,7 @@ msgstr "睡到早上"
 msgid "Slogan, visual and tone should match the client audience preferences."
 msgstr "标语、视觉与语气应符合客户指定的客群偏好。"
 
-#: scripts/ui/modals/pause_menu.gd:42
+#: scripts/ui/modals/pause_menu.gd:45
 msgid "Slow"
 msgstr "慢"
 
@@ -17169,6 +17377,10 @@ msgstr "软件"
 #: data/economy/staff.json
 msgid "Software Developer"
 msgstr "软件工程师"
+
+#: scripts/ui/modals/life_review_modal.gd:46
+msgid "Software features"
+msgstr "已推出软件功能（项）"
 
 #: data/products/solar_lamp.json
 msgid "Solar Desk Lamp"
@@ -17294,7 +17506,7 @@ msgstr "抱歉——这单我接不了。"
 msgid "Sort, scan and stack the neighbourhood's parcels. You'll see how shipping really works."
 msgstr "分拣、扫描、堆栈附近的包裹。你会看到物流实际上怎么运作。"
 
-#: scripts/ui/modals/pause_menu.gd:54
+#: scripts/ui/modals/pause_menu.gd:57
 msgid "Sound effects"
 msgstr "音效"
 
@@ -17382,7 +17594,7 @@ msgstr "请先创立新公司，再开设其他产业。"
 msgid "Start a new game"
 msgstr "开始新游戏"
 
-#: scripts/sim/saas.gd:201
+#: scripts/sim/saas.gd:202
 msgid "Start a software product"
 msgstr "软件产品起步"
 
@@ -17418,6 +17630,10 @@ msgstr "重新开始"
 msgid "Start packing"
 msgstr "开始打包"
 
+#: data/help/glossary.json
+msgid "Start the next generation or another life in an empty slot. Keep the prior save and inherit only a limited amount of capital."
+msgstr "在空白存盘槽开始下一代或新人生，保留旧存盘，只带入有限资本。"
+
 #: scripts/ui/tutorial.gd:88
 msgid "Start the shift"
 msgstr "开始上班"
@@ -17446,7 +17662,7 @@ msgstr "开始开发 SaaS 产品 %s。"
 msgid "Started building a charging station: %s."
 msgstr "开始建置充电站：%s。"
 
-#: scripts/sim/careers.gd:183
+#: scripts/sim/careers.gd:184
 msgid "Started freelancing as a consultant."
 msgstr "开始以顾问身份接案。"
 
@@ -17454,9 +17670,17 @@ msgstr "开始以顾问身份接案。"
 msgid "Started renovating the %s rooms."
 msgstr "开始翻新%s。"
 
+#: scripts/ui/modals/life_review_modal.gd:53
+msgid "Starting cash falls to 80% per difficulty level and customer demand to 90% per level (floor 30%). Inherited capital is limited to 5% of current book net worth and at most 2,500 home dollars; it is equity, never sales revenue."
+msgstr "难度每升一级，起始资金乘以 80%，零售需求乘以 90%（最低 30%）。继承资本最多为目前帐面净值的 5%，且不超过 2,500 本国元；只列为资本，不算销售营收。"
+
 #: scripts/ui/overseas_partner_ui.gd:49
 msgid "Starting receipt estimate (foreign units)"
 msgstr "期初预估收入（外币）"
+
+#: scripts/sim/story_engine.gd:111
+msgid "Starting savings: %s home dollars. A laptop, a phone, another life."
+msgstr "起始积蓄：%s 本国元。一台笔电、一支手机，另一段人生。"
 
 #: data/character/options.json
 msgid "Startup Casual"
@@ -18102,7 +18326,7 @@ msgstr "没有成功。"
 msgid "That name is already registered in Aurelia."
 msgstr "这个名称在奥瑞莉亚已经被登记了。"
 
-#: scripts/sim/careers.gd:240
+#: scripts/sim/careers.gd:241
 msgid "That offer is gone."
 msgstr "这个案子已经没了。"
 
@@ -18210,7 +18434,7 @@ msgstr "The Loft 代理工作室"
 msgid "The Loft in University."
 msgstr "大学区的 The Loft。"
 
-#: scripts/sim/saas.gd:100
+#: scripts/sim/saas.gd:101
 msgid "The MVP needs %d more dev hours."
 msgstr "MVP 还需要 %d 开发小时。"
 
@@ -18462,6 +18686,10 @@ msgstr "公司恢复偿债能力了，代价是你的积蓄。"
 msgid "The counter costs %s per month. Lease it at Gateway Car Rental in the Airport district."
 msgstr "柜台每月租金 %s。请到机场区的 Gateway 租车承租。"
 
+#: scripts/sim/life_legacy.gd:90
+msgid "The current life could not be saved. Keep playing and try again."
+msgstr "目前这一局无法保存。先继续游戏，稍后再试。"
+
 #: data/help/glossary.json
 msgid "The days between paying a supplier and the stock reaching your shelf."
 msgstr "从付款给供应商到货品上架之间的天数。"
@@ -18469,6 +18697,10 @@ msgstr "从付款给供应商到货品上架之间的天数。"
 #: data/dialogue/victor_sold.json
 msgid "The difference: the profit is mine, and the mistakes are ours. Don't waste the head start."
 msgstr "差别是：获利归我，错误一起扛。别浪费先发优势。"
+
+#: data/help/glossary.json
+msgid "The difficulty level lowers starting cash and retail demand. Old businesses and sales never become new-life income."
+msgstr "难度提高会减少起始资金与零售需求。旧公司的生意和销售不会变成新局收入。"
 
 #: scripts/sim/rails.gd:202
 msgid "The digital-dollar bridge was exploited. Transfers are frozen until about %s."
@@ -18606,6 +18838,10 @@ msgstr "帐本依同一存放地点的商品进价，计算每件平均成本。
 msgid "The licence fee is %s."
 msgstr "执照费是 %s。"
 
+#: data/help/help.json
+msgid "The life review preserves the seven scores, five key moments and recorded statistics. It never creates profits."
+msgstr "人生回顾保存七种类型分数、五个关键时刻与统计纪录，不会凭空产生获利。"
+
 #: data/events/hotel_equipment_failure.json
 msgid "The lift and the hot water have broken in the same week."
 msgstr "电梯与热水在同一周坏了。"
@@ -18637,6 +18873,10 @@ msgstr "没有可用的存盘字段，无法开始新游戏。"
 #: scripts/sim/legacy_business.gd:266
 msgid "The next chapter is yours"
 msgstr "下一段故事，由你决定"
+
+#: scripts/sim/life_legacy.gd:102
+msgid "The next life could not be created. Your current life is preserved."
+msgstr "无法创建新人生，原本这一局已保留。"
 
 #: scripts/sim/legacy_business.gd:75 scripts/sim/legacy_business.gd:88
 msgid "The operating response is already committed. Continue with the market review."
@@ -18982,7 +19222,7 @@ msgstr "这笔海关扣留已结束。"
 msgid "This equipment needs no service today."
 msgstr "这些设备今天不需要保养。"
 
-#: scripts/ui/phone_ui.gd:365
+#: scripts/ui/phone_ui.gd:400
 msgid "This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen."
 msgstr "这场游戏每隔几秒自动存到字段 %d。新游戏会用自己的字段；其他存盘可以在标题画面读取。"
 
@@ -19202,7 +19442,7 @@ msgstr "用电脑或手机时，时间继续走；阅读说明、暂停、小游
 msgid "Time on the road: %s"
 msgstr "路上时间：%s"
 
-#: scripts/ui/modals/pause_menu.gd:45
+#: scripts/ui/modals/pause_menu.gd:48
 msgid "Time only moves forward by living it: working a shift, or sleeping at night."
 msgstr "时间只会随着你的生活前进：上班工作，或晚上睡觉。"
 
@@ -19210,7 +19450,7 @@ msgstr "时间只会随着你的生活前进：上班工作，或晚上睡觉。
 msgid "Time to finish"
 msgstr "完成期限"
 
-#: scripts/ui/phone_ui.gd:133 scripts/ui/phone_ui.gd:311
+#: scripts/ui/phone_ui.gd:133 scripts/ui/phone_ui.gd:313
 msgid "Timeline"
 msgstr "人生纪录"
 
@@ -19690,7 +19930,7 @@ msgstr "最高"
 msgid "Upcoming: {upcoming}."
 msgstr "即将支出：{upcoming}。"
 
-#: scripts/sim/saas.gd:87
+#: scripts/sim/saas.gd:88
 msgid "Update"
 msgstr "更新"
 
@@ -20042,7 +20282,7 @@ msgstr "积欠员工薪资"
 msgid "Wages owed to your team: %s"
 msgstr "积欠团队薪资：%s"
 
-#: scripts/sim/careers.gd:155
+#: scripts/sim/careers.gd:156
 msgid "Wages — %s shift at %s"
 msgstr "薪资——%s 在 %s 的班"
 
@@ -20494,6 +20734,10 @@ msgstr "到自由座工作——Company OS"
 msgid "Work done this session: %.1f of %.1f hours' worth"
 msgstr "这段时间完成的工作量：%.1f / %.1f 小时"
 
+#: scripts/ui/modals/life_review_modal.gd:50
+msgid "Work hours include recorded paid shifts, cafe work and freelance hours. Older saves may lack hours recorded before this version."
+msgstr "工时计入已记录的有薪班次、咖啡店工作、接案与软件开发工时。旧存盘可能缺少这版之前未记录的工时。"
+
 #: data/buildings/bloom_coffee.json data/buildings/byte_and_bean.json data/buildings/shift_diner.json
 msgid "Work on your laptop — Company OS"
 msgstr "用笔电工作——Company OS"
@@ -20550,6 +20794,10 @@ msgstr "嗯。"
 msgid "Yeah. Just looking."
 msgstr "对。先看看。"
 
+#: scripts/ui/phone_ui.gd:337 scripts/ui/phone_ui.gd:346
+msgid "Year %d"
+msgstr "%d 年"
+
 #: scripts/sim/world.gd:87
 msgid "Year %d — %s. Check the news board."
 msgstr "第 %d 年——%s。去看看新闻看板。"
@@ -20570,7 +20818,7 @@ msgstr "你"
 msgid "You already have a job ad running."
 msgstr "你已经有一则征才广告在刊登中。"
 
-#: scripts/sim/careers.gd:230
+#: scripts/sim/careers.gd:231
 msgid "You already have as many gigs as you can handle."
 msgstr "你手上的案子已经满了。"
 
@@ -20610,6 +20858,10 @@ msgstr "你在这里。"
 msgid "You asked for more and I said yes. Now you have a year to earn the rest."
 msgstr "你要求更多，我答应了。现在你有一年的时间去赚剩下的。"
 
+#: data/legacy.json
+msgid "You built structures that other people could work inside."
+msgstr "你创建的事业，也成为别人发挥才能的地方。"
+
 #: data/story/chapters.json
 msgid "You built {company} and sold it well. The desk is still yours."
 msgstr "你一手打造 {company}，也卖了个好价钱。办公桌还是你的。"
@@ -20629,6 +20881,10 @@ msgstr "现在不能这么做。"
 #: scripts/world/building_info.gd:164
 msgid "You can: %s"
 msgstr "你可以：%s"
+
+#: data/legacy.json
+msgid "You connected goods, customers and places through real trades."
+msgstr "一笔笔实际交易，让你串起商品、顾客与不同地方。"
 
 #: scripts/sim/legacy_business.gd:264
 msgid "You continue operating under the existing ownership. Previous investors and sales stay on the books."
@@ -20666,6 +20922,10 @@ msgstr "现在付款到国外有三种方式。"
 msgid "You keep the customer relationship and retail margin. Pay sea freight and duty before dispatch, monthly rent per unsold unit, and shipping for each sale. Slow stock still ties up cash."
 msgstr "客户关系与零售毛利归你。出货前付海运费与关税，未售出库存按件付月租，每笔销售另付出货费；滞销仍会占用现金。"
 
+#: data/legacy.json
+msgid "You kept showing up when the work needed doing."
+msgstr "事情需要有人做时，你总愿意把它做好。"
+
 #: data/story/chapters.json
 msgid "You kept the shelves full while half the city ran out. That's a real business."
 msgstr "半个城市都断货，你还能把架上补满。这才是真正的生意。"
@@ -20697,6 +20957,14 @@ msgstr "你还没做过班就离职了。到 Bloom Coffee 员工入口重新应�
 #: data/dialogue/jun_first.json
 msgid "You look like you're plotting something."
 msgstr "你看起来在盘算什么。"
+
+#: data/legacy.json
+msgid "You made a place in the city and left people who remember you."
+msgstr "你在城市留下足迹，也留下记得你的人。"
+
+#: data/legacy.json
+msgid "You made space for life while your assets carried part of the load."
+msgstr "资产承担了一部分工作，让你也能留时间给生活。"
 
 #: scripts/ui/modals/legacy_modal.gd:42
 msgid "You manage a Hale Group division. The revenue goal is a management benchmark; the chapter only requires continued operations, not growth."
@@ -20858,7 +21126,7 @@ msgstr "你身上没有包裹。"
 msgid "You're trending"
 msgstr "你爆红了"
 
-#: scripts/sim/careers.gd:167
+#: scripts/sim/careers.gd:168
 msgid "You've earned it: you're our new %s. New rate: $%d an hour."
 msgstr "这是你应得的：你是我们新的%s。新时薪：每小时 $%d。"
 
@@ -20966,6 +21234,10 @@ msgstr "你的信用纪录需要时间恢复。"
 msgid "Your credit score and record of repayments affect whether the bank lends and how much it offers."
 msgstr "信用分数与还款纪录会影响银行是否放款及额度。"
 
+#: scripts/ui/modals/life_review_modal.gd:61
+msgid "Your current game is saved first. Only an empty slot is used; companies, earned income and achievements start fresh. Continue only when ready."
+msgstr "会先保存目前这一局，再使用空白存盘槽。公司、营收与成就都重新开始；准备好再继续。"
+
 #: data/help/glossary.json
 msgid "Your daily ad budget buys product exposure; clicks can cost money without creating an order."
 msgstr "每日广告预算用来增加商品曝光；点击会花钱，不一定带来订单。"
@@ -20985,6 +21257,10 @@ msgstr "结局已记录。回到自由经营后，会沿用实际帐目。"
 #: data/dialogue/lina_intro.json
 msgid "Your exchange account is verified. Digital dollars are an option when you pay abroad now."
 msgstr "你的交易所帐户已验证。现在付款到国外可以选数字美元了。"
+
+#: data/legacy.json
+msgid "Your experiments turned technical ideas into useful services."
+msgstr "你把技术想法一步步试成了有用的服务。"
 
 #: scripts/ui/modals/info_modal.gd:44
 msgid "Your first business loop"
@@ -21057,6 +21333,10 @@ msgstr "你的商品页被灌爆了。"
 #: scripts/sim/automotive.gd:191
 msgid "Your lot is full. Sell or wholesale a car first."
 msgstr "车场已满。请先卖掉或批发出一辆车。"
+
+#: data/help/glossary.json
+msgid "Your main and secondary tendencies describe this saved life, not a score that awards cash."
+msgstr "主要与次要类型描述这段人生，不会依分数发钱。"
 
 #: data/economy/settlement_methods.json
 msgid "Your money is locked in a contract that pays the supplier only when the goods arrive. Refunded if they never do. Small fee, no wire delay."
@@ -22377,6 +22657,10 @@ msgstr "✗ 请备妥下一期工程款。"
 #: scripts/ui/minigames/pack_game.gd:147
 msgid "✗ It doesn't fit. Try a bigger box."
 msgstr "✗ 装不下，换大一点的箱子。"
+
+#: scripts/ui/modals/life_review_modal.gd:32
+msgid "✗ Live thirty days or finish the main story before retiring. Continue living this life."
+msgstr "✗ 先生活三十天或完成主线，再选择退休。目前可以继续这段人生。"
 
 #: scripts/ui/modals/legacy_modal.gd:104
 msgid "✗ No capitalized company to sell. Open a business account or choose another ending; no sale payment is made."

@@ -20,6 +20,7 @@ var properties := {}
 var jobs := {}
 var quests := {}         # data/quests/*.json: multi-industry mega-jobs (#71)
 var synergies := {}      # data/synergies.json: internal supply links + Business Board gates
+var legacy := {}
 var milestones := {}     # data/milestones.json: id -> milestone (5 per industry)
 var economy := {}      # marketplace, shipping, living, settlement_methods
 var city := {}
@@ -53,6 +54,7 @@ func load_all() -> void:
 		economy[path.get_file().get_basename()] = _read(path)
 	city = _read("res://data/city/aurelia.json")
 	synergies = _read("res://data/synergies.json")
+	legacy = _read("res://data/legacy.json")
 	milestones.clear()
 	for m in _read("res://data/milestones.json").get("milestones", []):
 		milestones[m["id"]] = m

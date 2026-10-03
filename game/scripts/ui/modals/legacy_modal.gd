@@ -109,6 +109,7 @@ func epilogue(box: VBoxContainer) -> void:
 	var viewed := int(s["viewed"])
 	if viewed >= s["cards"].size():
 		box.add_child(UIK.wrap("Your ending is recorded. Free play continues from the actual books.", 9, Art.C_WHITE, 452))
+		add_action(box, "Review this life", "legacy_life_review", func(): LifeLegacy.review(); UIRoot.open_modal(LifeReviewModal.new()))
 		add_action(box, "Return to free play", "legacy_free_play", close, true)
 		add_action(box, "Revisit the ending cards", "legacy_replay_cards", func(): s["viewed"] = 0; rebuild())
 		return
@@ -117,4 +118,9 @@ func epilogue(box: VBoxContainer) -> void:
 	for line in card["lines"]:
 		box.add_child(UIK.wrap(str(line), 8, Art.C_WHITE, 452))
 	box.add_child(UIK.wrap(I18n.t("Epilogue card %d of %d") % [viewed + 1, s["cards"].size()], 7, Art.C_MUTED, 452))
-	add_action(box, "Next card" if viewed + 1 < s["cards"].size() else "Finish epilogue", "legacy_next_card", func(): LegacyBusiness.view_next(); rebuild(), true)
+	add_action(box, "Next card" if viewed + 1 < s["cards"].size() else "Finish epilogue", "legacy_next_card", func():
+		LegacyBusiness.view_next()
+		rebuild()
+		if GameState.flag("legacy_cards_viewed"):
+			LifeLegacy.review()
+			UIRoot.open_modal(LifeReviewModal.new()), true)

@@ -142,7 +142,7 @@ static func hire(applicant_id: String) -> Dictionary:
 	S()["applicants"] = []
 	S()["posting"] = {}
 	GameState.inc_stat("hires")
-	GameState.timeline(I18n.t("Hired %s as %s.") % [p["name"], I18n.t(str(role_def(p["role"])["name"]))], "business")
+	GameState.timeline(I18n.t("Hired %s as %s.") % [p["name"], I18n.t(str(role_def(p["role"])["name"]))], "business", {"category":"people"})
 	EventBus.world_refresh.emit()
 	return {"ok": true, "person": p}
 
@@ -156,7 +156,7 @@ static func let_go(pid: String) -> Dictionary:
 	S()["people"].erase(pid)
 	for o in people():
 		o["morale"] = clampi(int(o["morale"]) - 5, 0, 100)
-	GameState.timeline(I18n.t("Let %s go.") % p["name"], "business")
+	GameState.timeline(I18n.t("Let %s go.") % p["name"], "business", {"category":"people"})
 	EventBus.world_refresh.emit()
 	return {"ok": true, "severance": sev}
 
@@ -334,7 +334,7 @@ static func _quit(p: Dictionary) -> void:
 	GameState.inc_stat("resignations")
 	GameState.add_message("jobs_board", I18n.t("%s resigned from %s.") % [p["name"], GameState.business_display_name()])
 	EventBus.notify.emit(I18n.t("%s quit.") % p["name"], "bad", "people")
-	GameState.timeline(I18n.t("%s resigned.") % p["name"], "business")
+	GameState.timeline(I18n.t("%s resigned.") % p["name"], "business", {"category":"people"})
 	EventBus.world_refresh.emit()
 
 

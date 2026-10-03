@@ -1,0 +1,203 @@
+{
+ "archetypes": [
+  {
+   "id": "builder",
+   "name": "Builder",
+   "text": "You built structures that other people could work inside.",
+   "formula": [
+    {
+     "metric": "industries",
+     "divisor": 3,
+     "weight": 45,
+     "cap": 1
+    },
+    {
+     "metric": "employees",
+     "divisor": 10,
+     "weight": 35,
+     "cap": 1
+    },
+    {
+     "metric": "net_worth",
+     "divisor": 100000,
+     "weight": 20,
+     "cap": 1
+    }
+   ],
+   "inherit_cash_home": 1200
+  },
+  {
+   "id": "merchant",
+   "name": "Merchant",
+   "text": "You connected goods, customers and places through real trades.",
+   "formula": [
+    {
+     "metric": "delivered",
+     "divisor": 20,
+     "weight": 65,
+     "cap": 1
+    },
+    {
+     "metric": "overseas",
+     "divisor": 20,
+     "weight": 25,
+     "cap": 1
+    },
+    {
+     "metric": "net_worth",
+     "divisor": 100000,
+     "weight": 10,
+     "cap": 1
+    }
+   ],
+   "inherit_cash_home": 1800
+  },
+  {
+   "id": "innovator",
+   "name": "Innovator",
+   "text": "Your experiments turned technical ideas into useful services.",
+   "formula": [
+    {
+     "metric": "features",
+     "divisor": 8,
+     "weight": 80,
+     "cap": 1
+    },
+    {
+     "metric": "energy_installs",
+     "divisor": 10,
+     "weight": 15,
+     "cap": 1
+    },
+    {
+     "metric": "chargers",
+     "divisor": 3,
+     "weight": 5,
+     "cap": 1
+    }
+   ],
+   "inherit_cash_home": 1000
+  },
+  {
+   "id": "operator",
+   "name": "Operator",
+   "text": "You kept showing up when the work needed doing.",
+   "formula": [
+    {
+     "metric": "work_hours",
+     "divisor": 150,
+     "weight": 70,
+     "cap": 1
+    },
+    {
+     "metric": "employees",
+     "divisor": 10,
+     "weight": 20,
+     "cap": 1
+    },
+    {
+     "metric": "industries",
+     "divisor": 3,
+     "weight": 10,
+     "cap": 1
+    }
+   ],
+   "inherit_cash_home": 1400
+  },
+  {
+   "id": "local_legend",
+   "name": "Local Legend",
+   "text": "You made a place in the city and left people who remember you.",
+   "formula": [
+    {
+     "metric": "city_projects",
+     "divisor": 3,
+     "weight": 40,
+     "cap": 1
+    },
+    {
+     "metric": "chargers",
+     "divisor": 3,
+     "weight": 30,
+     "cap": 1
+    },
+    {
+     "metric": "contacts",
+     "divisor": 10,
+     "weight": 30,
+     "cap": 1
+    }
+   ],
+   "inherit_cash_home": 800
+  },
+  {
+   "id": "comeback",
+   "name": "Comeback",
+   "text": "A closed company did not close the rest of your life.",
+   "formula": [
+    {
+     "metric": "recovery",
+     "divisor": 1,
+     "weight": 80,
+     "cap": 1
+    },
+    {
+     "metric": "work_hours",
+     "divisor": 100,
+     "weight": 20,
+     "cap": 1
+    }
+   ],
+   "inherit_cash_home": 1600
+  },
+  {
+   "id": "quiet_owner",
+   "name": "Quiet Owner",
+   "text": "You made space for life while your assets carried part of the load.",
+   "formula": [
+    {
+     "metric": "net_worth",
+     "divisor": 100000,
+     "weight": 75,
+     "cap": 1
+    },
+    {
+     "metric": "quiet_work",
+     "divisor": 1,
+     "weight": 25,
+     "cap": 1
+    }
+   ],
+   "inherit_cash_home": 2200
+  }
+ ],
+ "event_weights": {
+  "life": 1,
+  "business": 3,
+  "company": 3,
+  "people": 4,
+  "crisis": 6,
+  "milestone": 5,
+  "chapter": 4,
+  "world": 4
+ },
+ "categories": {
+  "life": "life",
+  "business": "company",
+  "company": "company",
+  "people": "people",
+  "crisis": "crisis",
+  "milestone": "milestones",
+  "chapter": "milestones",
+  "world": "crisis"
+ },
+ "difficulty": {
+  "opening_cash_factor": 0.8,
+  "demand_factor": 0.9,
+  "min_demand_factor": 0.3
+ },
+ "max_inheritance_home": 2500,
+ "max_inheritance_share": 0.05,
+ "retire_days": 30,
+ "quiet_work_hours": 40
+}

@@ -427,3 +427,5 @@ See wiki/23_overseas_partners.md for the single expiring currency shock, collate
 See wiki/24_consolidation_and_legacy.md for market receipts, three acquisition branches, real price/ad/stock actions, expiring rival effects, Kai’s actual records and disclosed share estimate, four outcomes, employee equity, fee-based management and resumable five-card epilogue. Unavailable retail routes and company closure skip market success honestly; Maya and free play remain available without a company. New game plus remains Planned.
 
 #35 free play — Implemented: optional three-goal rotation, twenty-five data-defined achievements backfilled from existing save records, and Company OS timeline review. Goals may be set aside; company closure does not require fictitious completion. No monetary reward is manufactured.
+
+#92 life review / New Game+ — Implemented: seven data-defined archetypes, chronological/category filtering, immutable ending or retirement review, and separate-slot new lives with limited opening equity inheritance and increased actual difficulty.

@@ -275,6 +275,7 @@ static func owner_shift(score: float) -> Dictionary:
 	GameState.inc_stat("cafe_owner_shifts")
 	var before := int(td.get("served", 0))
 	Clock.advance(mins)
+	GameState.inc_stat("cafe_work_minutes", mins)
 	return {"ok": true, "served": int(_today().get("served", 0)) - before}
 
 
