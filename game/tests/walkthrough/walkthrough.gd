@@ -2379,5 +2379,9 @@ func _era_props_fixture() -> void:
 				SceneRouter.world_scene().player.camera.zoom = Vector2.ONE
 				await bot.walk_to(Vector2(1140, 624), 20.0, 36.0)
 				await bot.shot("era_%d_riverside_far_port" % year)
+			else:
+				SceneRouter.world_scene().player.camera.zoom = Vector2.ONE
+				await bot.walk_to(Vector2(150, 404), 25.0, 24.0)
+				await bot.shot("era_%d_%s_chargers" % [year, district])
 	bot.expect(World.year() == 4, "era progression saved")
 	bot.expect(Ledger.check_balanced(), "era decoration tour balanced")

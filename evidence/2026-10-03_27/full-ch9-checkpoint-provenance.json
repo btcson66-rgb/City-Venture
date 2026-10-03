@@ -75,5 +75,21 @@
   "chapter7_fallback": false,
   "resumed_with": "--resume=ch9_import",
   "modifications_to_save": false,
-  "remaining_validation": "pending"
+  "remaining_validation": "completed: full-ch9-final-result.json, zero failures",
+  "import_orders_stat": 1.0,
+  "lumina_purchase_orders": [
+    {
+      "id": "PO-160",
+      "supplier": "lumina_direct",
+      "status": "in_transit",
+      "entity": "co_riverlight_goods",
+      "settlement": {
+        "clears": 186714,
+        "fee": 93.76,
+        "method": "letter_of_credit"
+      },
+      "total": 876.0,
+      "placed": 183725
+    }
+  ]
 }

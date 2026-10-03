@@ -1,0 +1,47 @@
+{
+  "mode": "rendered genuine-save continuation; not one uninterrupted run",
+  "segments": [
+    {
+      "trace": "full-prefix.log",
+      "coverage": "fresh start through Chapters 1–5",
+      "logged_steps": 889,
+      "screenshots": 172,
+      "elapsed_seconds": 1570.1,
+      "failures": []
+    },
+    {
+      "trace": "full-budget-valid-prefix.log",
+      "coverage": "genuine first checkpoint through profitable Chapters 6–8 and Chapter 9 import",
+      "logged_steps": 904,
+      "screenshots": 142,
+      "elapsed_seconds": 2059.0,
+      "failures": []
+    },
+    {
+      "trace": "full-ch9-final.log",
+      "coverage": "genuine second checkpoint through Chapters 9–12 and industry fixtures",
+      "logged_steps": 1004,
+      "screenshots": 175,
+      "elapsed_seconds": 1408.7,
+      "failures": []
+    }
+  ],
+  "logged_steps_including_resume_overlap": 2797,
+  "screenshots_including_resume_overlap": 489,
+  "passing_segment_seconds": 5037.8,
+  "failures": [],
+  "historical_failures_retained": [
+    "full-retention-failed.log",
+    "full-budget-packing-failed.log"
+  ],
+  "final_result": {
+    "failures": [],
+    "screenshots": 175,
+    "steps": 1003
+  },
+  "limitations": [
+    "original process stopped without final result; cause unknown",
+    "raw final English audit has 22 inherited findings",
+    "automotive auction bids won no car in this rendered fixture; retail sale not demonstrated"
+  ]
+}

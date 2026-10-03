@@ -1,4 +1,4 @@
-# Session A progress — 2026-10-03
+# Session A progress — 2026-10-04
 
 Continuous work remains in progress. All PRs are Drafts targeting claude/exciting-bardeen-y71ixv. The #108 baseline (f097b906) was merged into the first branch #98 and propagated through the stack without rebasing. Session B/C functionality is outside this session; shared industry hooks are integrated.
 
@@ -12,7 +12,7 @@ Continuous work remains in progress. All PRs are Drafts targeting claude/excitin
 | #40 | [#123](https://github.com/btcson66-rgb/City-Venture/pull/123) | 491/491; 7/7 related | seven-day cache; monthly rejoin/short-month/insufficient cash; class receipts; real finite networking; existing Rosa ID and destination/icon wiring; original-account guard for queued opportunities after closure; overnight NPC schedule wait | shops tour 104 steps / 0 failures; full cadence 2533 steps / 366 screenshots / 0 failures in 4923.3 seconds; inherited raw English findings |
 | #28 | [#132](https://github.com/btcson66-rgb/City-Venture/pull/132) | 495/495; four new tests | shared body-only tint/name sizing; saved palette; map coordinates/bridges; optional sitting expressions/fallback; fee precision; accepted-run primary priority | van/route tour 88 steps / 0 failures; no distinct sitting emotion art supplied; inherited performance/device limits |
 | #26 | [#133](https://github.com/btcson66-rgb/City-Venture/pull/133) | 498/498; three new tests | physical detail/logical geometry; static atlas cache and cells; device cfg toggle/live reload; Web watchdog; dual-mode atlas regression | shots 43 steps / 0 failures; Web 60s each 22.49→21.89 FPS (-2.66%); software renderer/concurrent tests; inherited gaps |
-| #27 | [#135](https://github.com/btcson66-rgb/City-Venture/pull/135) | 504/504; three scenery + three QA tests | conditional scenery/roof offsets; fixed floating panels; non-solid layers; live refresh; generator preservation; tall-roof QA framing | era tour 46 steps / 0 failures; full prefix interrupted at chapter 6; first continuation failed two profit checks; budget-policy rerun passed Ch6–8 profitably; packing-close QA input repaired; genuine Ch9 continuation pending; #96 waits |
+| #27 | [#135](https://github.com/btcson66-rgb/City-Venture/pull/135) | 504/504; three scenery + three QA tests | conditional scenery/roof offsets; fixed floating panels; non-solid layers; live refresh; generator preservation; roof/curb framing; profitable retention policy; verified real modal dismissal | era tour 52 steps / 0 failures; rendered genuine-save continuation coverage 2797 steps / 489 shots / 0 failures in 5037.8s, with resume overlap; earlier failed traces retained; 22 inherited English findings; automotive rendered fixture did not win a retail car; inherited gaps |
 | #96 | — | Not run | Not started | after preceding ticket |
 | #97 | — | Not run | Not started | after preceding ticket |
 | #95 | — | Not run | Not started | after preceding ticket |
