@@ -770,3 +770,5 @@ Requested: backdrops/chapter_17, backdrops/chapter_18; dedicated Kai Moreno spri
 #35 — Planned: 25 achievement icons, 16×16, `achievements/<id>.png`; IDs follow data/story/achievements.json. Existing star icons and text remain functional fallback.
 
 #92 — Planned: seven legacy portraits/cards `legacy/<archetype>.png` for builder, merchant, innovator, operator, local_legend, comeback, quiet_owner. Current life review and optional event/chapter thumbnails use existing assets.
+
+- #93：投資人路演、IPO 掛牌日、整併提案插圖 Planned；目前用既有 modal 與文字呈現完整操作。

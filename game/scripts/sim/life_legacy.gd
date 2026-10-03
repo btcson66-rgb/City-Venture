@@ -34,6 +34,7 @@ static func scores(values: Dictionary) -> Array:
 			var value := float(values.get(term["metric"], 0))
 			if not is_finite(value): value = 0
 			score += clampf(value / maxf(0.01, float(term["divisor"])), 0, float(term.get("cap", 1))) * float(term["weight"])
+		score = minf(100,score+float(CapitalMarket.cfg()["route_bonus"].get(CapitalMarket.S()["route"],{}).get(d["id"],0)))
 		out.append({"id":d["id"], "score":score, "name":d["name"]})
 	out.sort_custom(func(a, b): return a["score"] > b["score"] if not is_equal_approx(a["score"], b["score"]) else str(a["id"]) < str(b["id"]))
 	return out
@@ -72,6 +73,7 @@ static func review(retire := false) -> Dictionary:
 	S()["review"] = {"t":Clock.now(), "primary":ranked[0], "secondary":secondary, "scores":ranked, "metrics":values,
 		"moments":key_moments(GameState.data["timeline"]), "player":GameState.data["player"].duplicate(true),
 		"epilogue":I18n.t("%s's story leans toward %s, with a trace of %s. %s The next life begins with fewer resources; this record preserves what actually happened.") % [GameState.data["player"]["name"], I18n.t(primary["name"]), I18n.t(secondary["name"]), I18n.t(primary["text"])]}
+	S()["review"]["epilogue"] += " " + CapitalMarket.route_text()
 	S()["retired"] = retire
 	S()["shown"] = true
 	return {"ok":true, "review":S()["review"]}

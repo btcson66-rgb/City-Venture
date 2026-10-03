@@ -1,0 +1,105 @@
+{
+ "window_days": 365,
+ "revenue_multiple": 0.6,
+ "growth_cap": 0.3,
+ "due_days": 7,
+ "offer_days": 30,
+ "integration_days": 14,
+ "integration_fee_share": 0.08,
+ "integration_loss_share": 0.2,
+ "audit_days": 14,
+ "annual_revenue_min": 12000,
+ "profitable_years": 2,
+ "quarter_days": 90,
+ "quarter_expectation_share": 0.25,
+ "miss_price_factor": 0.85,
+ "beat_price_factor": 1.04,
+ "morale_hit": 8,
+ "pressure_days": 60,
+ "public_share": 0.2,
+ "shares": 10000,
+ "roadshow_factors": [
+  0.9,
+  1,
+  1.1,
+  1.2
+ ],
+ "board_cash_share": 0.5,
+ "underwriters": [
+  {
+   "id": "nexus",
+   "name": "Nexus Securities",
+   "fee": 500,
+   "commission": 0.03
+  },
+  {
+   "id": "harbor",
+   "name": "Harbor Capital",
+   "fee": 300,
+   "commission": 0.06
+  }
+ ],
+ "npc_companies": [
+  {
+   "id": "hale",
+   "name": "Hale Group",
+   "revenue": 48000,
+   "growth": 0.1,
+   "staff": 8
+  },
+  {
+   "id": "vesper",
+   "name": "Vesper Brands",
+   "revenue": 12000,
+   "growth": 0.04,
+   "staff": 3
+  },
+  {
+   "id": "meridian",
+   "name": "Meridian Supply",
+   "revenue": 24000,
+   "growth": -0.05,
+   "staff": 4
+  }
+ ],
+ "route_bonus": {
+  "public": {
+   "builder": 8,
+   "operator": 5
+  },
+  "acquired": {
+   "quiet_owner": 8,
+   "merchant": 5
+  },
+  "private": {
+   "innovator": 8,
+   "local_legend": 5
+  }
+ },
+ "questions": [
+  {
+   "text": "Investors ask why revenue differs from cash.",
+   "good": "Explain unsettled receivables and the actual cash balance.",
+   "risk": "Promise every sale turns into cash immediately.",
+   "recommended": true
+  },
+  {
+   "text": "Investors ask how you would handle a weak quarter.",
+   "good": "Publish the shortfall and fund measured improvements.",
+   "risk": "Promise a fixed return regardless of operating results.",
+   "recommended": true
+  },
+  {
+   "text": "Investors ask what public shareholders receive.",
+   "good": "Explain ownership dilution, reporting and board votes.",
+   "risk": "Promise ownership without influence or financial risk.",
+   "recommended": true
+  }
+ ],
+ "reputation_hit": 8,
+ "reputation_start": 100,
+ "reputation_min": 30,
+ "recovery_days": 365,
+ "ipo_max_share": 0.5,
+ "offer_premium_step": 0.04
+}

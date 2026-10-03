@@ -112,6 +112,7 @@ func _dispatch(kind: String, p: Dictionary) -> void:
 func _on_hour(t: int, h: int) -> void:
 	OverseasPartners.on_hour()
 	LegacyBusiness.on_hour()
+	CapitalMarket.on_hour()
 	Growth.check()
 	phase = "hour:compliance"
 	Compliance.on_hour(t, h)

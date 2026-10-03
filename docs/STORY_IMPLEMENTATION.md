@@ -429,3 +429,5 @@ See wiki/24_consolidation_and_legacy.md for market receipts, three acquisition b
 #35 free play — Implemented: optional three-goal rotation, twenty-five data-defined achievements backfilled from existing save records, and Company OS timeline review. Goals may be set aside; company closure does not require fictitious completion. No monetary reward is manufactured.
 
 #92 life review / New Game+ — Implemented: seven data-defined archetypes, chronological/category filtering, immutable ending or retirement review, and separate-slot new lives with limited opening equity inheritance and increased actual difficulty.
+
+#93 Implemented：第九／十年事件、NPC 整併與反向收購整合、完整 IPO 審計／路演／掛牌／季報、董事會表決，以及三條股權路線對傳承的影響。參閱 wiki/27_capital_markets.md；NPC 情境與治理涵蓋範圍明列，未接入尚未合併的 #90。

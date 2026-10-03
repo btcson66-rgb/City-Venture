@@ -210,6 +210,10 @@ func _tab_overview() -> void:
 		var legacy := UIK.button("Consolidation and legacy", func(): UIRoot.open_modal(LegacyModal.new()))
 		legacy.name = "OpenLegacyStory"
 		content.add_child(legacy)
+	if World.year() >= 9:
+		var capital := UIK.button("Ownership and public markets", func(): UIRoot.open_modal(CapitalMarketModal.new()))
+		capital.name = "OpenCapitalMarket"
+		content.add_child(capital)
 	var be := GameState.business_entity()
 	var cur := MonthClose.current(be)
 	var g := GridContainer.new()

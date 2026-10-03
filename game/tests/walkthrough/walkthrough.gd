@@ -17,6 +17,9 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "capital_market":
+		await _capital_market_fixture()
+		return
 	if _arg("from") == "life_legacy":
 		await _life_legacy_fixture()
 		return
@@ -2759,3 +2762,72 @@ func _life_legacy_fixture() -> void:
 	bot.expect(GameState.data["meta"].get("difficulty", 0) == 1 and GameState.company_id() == "", "next generation starts clean at higher difficulty")
 	await bot.shot("life_new_generation_world")
 	bot.expect(Ledger.check_balanced(), "new generation ledger balanced")
+
+func _capital_market_fixture() -> void:
+	await bot.wait(4)
+	UIRoot._suppress_decisions=true
+	UIRoot.tutorial.st()["off"]=true
+	Clock.world_active=false
+	var fixture = load("res://tests/unit/test_capital_market.gd").new()
+	fixture.eligible()
+	StoryEngine.St()["active"].clear()
+	await bot.wait(5)
+	var base := GameState.data.duplicate(true)
+	for route in ["public","acquired","private"]:
+		bot.step("Capital ownership route — "+route)
+		UIRoot.close_all()
+		GameState.data=base.duplicate(true)
+		GameState.unpack_rng()
+		# Offers originally expired during the two years of actual trading: request a fresh current-price round.
+		CapitalMarket.S()["offers"].clear()
+		CapitalMarket.begin()
+		UIRoot.open_modal(CapitalMarketModal.new())
+		await bot.wait(.5)
+		await bot.shot("capital_"+route+"_proposals")
+		if route=="public":
+			await _export_row_input("Underwriter_nexus")
+			await _export_row_input("StartListingAudit")
+			await bot.shot("capital_paid_audit")
+			GameState.data["clock"]["minutes"]=CapitalMarket.S()["ipo"]["ready"]
+			UIRoot.top_modal().rebuild()
+			await _export_row_input("ReadListingAudit")
+			for question in 3:
+				var button: Button = bot.button_named("RoadshowTransparent")
+				var parent: Node = button.get_parent()
+				while parent != null and not parent is ScrollContainer: parent=parent.get_parent()
+				if parent != null: (parent as ScrollContainer).ensure_control_visible(button)
+				await bot.wait(.5)
+				await bot.shot("capital_roadshow_"+str(question+1))
+				await _export_row_input("RoadshowTransparent")
+			await bot.shot("capital_issue_price")
+			await _export_row_input("ConfirmListing")
+			await bot.shot("capital_listing_day")
+			bot.expect(CapitalMarket.S()["route"]=="public","actual listing capital and governance")
+			GameState.data["clock"]["minutes"]=CapitalMarket.S()["ipo"]["next_quarter"]
+			CapitalMarket.on_hour()
+			UIRoot.top_modal().rebuild()
+			await bot.shot("capital_actual_quarter")
+		elif route=="acquired":
+			await _export_row_input("SelectOffer_vesper")
+			GameState.data["clock"]["minutes"]=CapitalMarket.S()["offers"][1]["ready"]
+			UIRoot.top_modal().rebuild()
+			await bot.shot("capital_sale_after_diligence")
+			await _export_row_input("ConfirmCapitalSale")
+			bot.expect(CapitalMarket.S()["buyer"]=="Vesper Brands","selected owner and real founder payout")
+		else:
+			await _export_row_input("ChoosePrivateRoute")
+			bot.expect(CapitalMarket.S()["route"]=="private","private route retains ownership")
+			await _export_row_input("AcquireNPC_vesper")
+			GameState.data["clock"]["minutes"]+=15*Clock.DAY
+			CapitalMarket.on_hour()
+			UIRoot.top_modal().rebuild()
+			await bot.shot("capital_private_integration")
+			bot.expect(CapitalMarket.S()["integrations"].size()==1,"actual purchase and integration")
+		UIRoot.close_all()
+		GameState.set_flag("legacy_cards_viewed")
+		LifeLegacy.review()
+		UIRoot.open_modal(LifeReviewModal.new())
+		await bot.wait(.5)
+		await bot.shot("capital_"+route+"_life_review")
+		bot.expect(SaveSystem.save_to(bot.out_dir.path_join("capital_"+route+".json")),"save ownership route")
+		bot.expect(Ledger.check_balanced(),"ownership route double-entry balance")

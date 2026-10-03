@@ -746,7 +746,7 @@ static func lambda_day(l: Dictionary, region := "home") -> float:
 	var fresh := 1.0
 	if Clock.now() - int(l.get("created", 0)) < int(mk().get("new_listing_days", 3)) * Clock.DAY:
 		fresh = float(mk().get("new_listing_boost", 1.6))   # marketplaces promote new listings
-	return float(p["base_daily_demand"]) * pf * rating_factor(l) * photo_f * ad_factor(l) * demand_mult(l["product"]) * fresh * LegacyBusiness.demand_factor(l, region) * LifeLegacy.demand_factor()
+	return float(p["base_daily_demand"]) * pf * rating_factor(l) * photo_f * ad_factor(l) * demand_mult(l["product"]) * fresh * LegacyBusiness.demand_factor(l, region) * LifeLegacy.demand_factor() * CapitalMarket.demand_factor()
 
 
 static func on_hour(t: int, h: int) -> void:

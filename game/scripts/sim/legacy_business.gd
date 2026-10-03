@@ -201,6 +201,8 @@ static func ending_block(choice: String) -> String:
 		return "Speak with Maya first, at Bloom Coffee or by phone."
 	if not choice in ["independent", "sale", "employees", "mentor"]:
 		return "Choose an available ending."
+	if choice == "employees" and CapitalMarket.S()["route"]=="public" and not CapitalMarket.board_grant_approve():
+		return "The board rejected dilution for the team grant. Choose another legacy route."
 	if choice == "employees" and (not GlobalMarket.live(GameState.company_id()) or Staff.count() < 1):
 		return "Hire at least one employee in a live company before sharing ownership."
 	return ""
@@ -259,7 +261,7 @@ static func cards(choice: String, ent: String) -> Array:
 		history += "• " + str(item["text"]) + "\n"
 	var name := GameState.entity_name(ent) if ent != "" else I18n.t("Your founder journey")
 	return [
-		{"title": ending_title(choice), "lines": [I18n.t("Aurelia is still moving. Your ending opens free play; it does not manufacture a final profit.")]},
+		{"title": ending_title(choice), "lines": [I18n.t("Aurelia is still moving. Your ending opens free play; it does not manufacture a final profit."), CapitalMarket.route_text()]},
 		{"title": "People along the way", "lines": [I18n.t("You met %d contacts and hired %d employees across your journey.") % [npcs, employees]]},
 		{"title": "Your company", "lines": [name, I18n.t("Recorded deliveries reached %d overseas regions. Company cash now: %s home dollars.") % [regions.size(), Fmt.money(Ledger.cash(ent) if ent != "" else 0)], I18n.t({"independent": "You continue operating under the existing ownership. Previous investors and sales stay on the books.", "sale": "The ownership record is retained. A completed prior sale pays nothing again; without a live company there is no new sale.", "employees": "The board-approved team grant transfers existing shares. It creates no revenue or personal payout.", "mentor": "You mentor at Nexus Co-work. A live company uses a contract manager with monthly fees; after closure, there is no company to hand over."}[choice])]},
 		{"title": "Your timeline", "lines": [history if history != "" else I18n.t("A new start is still a story.")]},
