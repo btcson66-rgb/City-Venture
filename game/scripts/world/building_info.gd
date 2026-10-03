@@ -3,6 +3,7 @@ extends RefCounted
 ## Shared, live building information for doors, welcome cards and the phone guide.
 
 const ACTION_ICONS := {
+	"market_research": "info", "fitness": "people",
 	"energy_open": "company", "energy_subsidy": "civic",
 	"buy_item": "shop", "clothing_shop": "shop", "cafe_counter": "coffee",
 	"work_shift": "tasks", "open_company_os": "laptop", "cowork_desk": "laptop",

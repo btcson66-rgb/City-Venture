@@ -749,3 +749,6 @@ Requested named facades: `buildings/helio_supply.png` and `buildings/helio_wareh
 
 ## #68 Automotive / Airport
 Requested named facades: `airport_terminal.png`, `gateway_car_rental.png`, `aurelia_auto_auction.png`, `cargo_terminal.png` plus corresponding `_lights.png`, a car sprite sheet for the lot and an auction paddle icon. Runtime district facades check Art.has_tex and use existing glass_tower, civic_annex, warehouse and shop_row_awning art as named fallbacks.
+
+## #40 Rosa Lim
+Rosa Lim (`harbor_point`) currently uses an existing startup_casual outfit and idle pose. A fitness-owner outfit/portrait is requested; no new art is required for the current playable membership/class flow.

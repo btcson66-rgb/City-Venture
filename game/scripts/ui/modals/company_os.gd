@@ -396,6 +396,10 @@ func _tab_sales() -> void:
 		h1.add_child(UIK.expand())
 		h1.add_child(UIK.label(I18n.t("%s (%d reviews)") % [Fmt.stars(Ecommerce.rating(l)), int(l["rating_n"])], 8, Art.C_GOLD))
 		v.add_child(h1)
+		var research: Dictionary = ShopLife.S()["research"].get(str(l["product"]), {})
+		if not research.is_empty():
+			v.add_child(UIK.label(I18n.t("Market research: Crestline %s")%Fmt.money(float(research["price"])),7,Art.C_SKY))
+			if Clock.now()>=int(research["until"]):v.add_child(UIK.label("✗ Research expired — visit Crestline again.",7,Art.C_MUTED))
 		var h2 := UIK.hbox(4)
 		h2.add_child(UIK.label_tip("Price", "price_elasticity", 7, Art.C_MUTED))
 		var pdn := UIK.button("−", func(): Ecommerce.set_price(l["id"], float(l["price"]) - 1.0); rebuild())

@@ -75,10 +75,10 @@ func test_harbor_is_open_and_linked() -> void:
 	runner.check(DataDB.validate().is_empty(), "data validates: " + str(DataDB.validate()))
 
 
-func test_inactive_gym_and_customs_keep_their_interior_data() -> void:
-	runner.check(not SceneRouter.building_open("harbor_point_fitness")["open"], "Harbor Point Fitness is scenery until enabled")
+func test_playable_gym_and_inactive_customs_keep_their_interior_data() -> void:
+	runner.check(BuildingInfo.building_enterable("harbor_point_fitness"), "Harbor Point Fitness is enabled by shop activities")
 	var g := DataDB.building("harbor_point_fitness")
-	runner.check(g["interior"]["interactables"].any(func(i): return i["action"] == "look"), "with something to look at inside")
+	runner.check(g["interior"]["interactables"].any(func(i): return i["action"] == "fitness"), "with real class activities inside")
 	var st := SceneRouter.building_open("customs_house")
 	runner.check(not st["open"], "the Customs House is closed")
 	runner.check(str(st["reason"]).contains("no public entrance"), "world reason has no build notes")

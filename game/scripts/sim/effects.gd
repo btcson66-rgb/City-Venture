@@ -15,6 +15,8 @@ static func apply(e: Dictionary, ctx: Dictionary) -> Dictionary:
 	var op: String = e.get("op", "")
 	var ent := GameState.business_entity()
 	match op:
+		"shop_network":
+			return ShopLife.network_choice(str(e.get("kind", "")), ctx)
 		"industry":
 			var module := Industries.find(str(e.get("industry", "")))
 			if module.is_empty() or not module["sim_class"].has_method("crisis"):

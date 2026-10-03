@@ -17,6 +17,19 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "shops":
+		await _fast_forward_to_ch10()
+		# Capitalized founder fixture purchases actual stock before visiting shops.
+		var offer := Ecommerce.offer("tradelink_wholesale", "water_bottle")
+		var po := Ecommerce.buy("tradelink_wholesale", "water_bottle", int(offer["moq"]))
+		bot.expect(po.get("ok",false), "shop fixture purchased real stock")
+		Clock.advance(7*Clock.DAY)
+		await popups()
+		Ecommerce.create_listing("water_bottle", float(DataDB.product("water_bottle")["ref_price"]), "self")
+		await _shop_research()
+		await _fitness_visit()
+		await _save_load()
+		return
 	if _arg("from") == "discoverability":
 		await _discoverability_fixture()
 		return
@@ -80,9 +93,11 @@ func run() -> void:
 	else:
 		await _month()
 		await _chapters_4_to_6()
+		await _shop_research()
 		await _chapters_7_to_9()
 		await _old_town_cafe()
 		await _harbor_logistics()
+		await _fitness_visit()
 		await _chapters_10_to_12()
 	await _summary()
 	if not bot.video_mode:
@@ -2076,3 +2091,86 @@ func _energy() -> void:
 	await exit_building()
 	await metro_to("riverside")
 	await enter_building("riverside_apartment")
+
+
+func _shop_research() -> void:
+	bot.step("Shopping Street — compare Crestline shelf prices")
+	await popups()
+	await close_modal()
+	if SceneRouter.world_scene().kind=="interior":await exit_building()
+	await metro_to("shopping_street")
+	await _shop_wait_hours(false)
+	await enter_building("crestline_flagship")
+	await bot.use_action("market_research")
+	var products := ShopLife.products()
+	bot.expect(not products.is_empty(), "owned/listed product available for research")
+	if products.is_empty():await close_modal();return
+	var id: String=products[0]
+	await bot.click_named("Research_"+id)
+	bot.expect(ShopLife.S()["research"].has(id), "real thirty-minute research saved")
+	await bot.shot("crestline_competitor_research")
+	await bot.click_named("ResearchDone")
+	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")
+	await _home_laptop("sales")
+	await bot.shot("sales_research_badge")
+	await close_modal()
+
+
+func _fitness_visit() -> void:
+	bot.step("Harbor — buy a single class and meet business connections")
+	await popups()
+	await close_modal()
+	if SceneRouter.world_scene().kind=="interior":await exit_building()
+	await metro_to("harbor")
+	await _shop_wait_hours(true)
+	await enter_building("harbor_point_fitness")
+	await bot.use(func(n):return n.action=="fitness" and bool(n.params.get("desk",false)), "Rosa's reception")
+	var before := Ledger.cash("player")
+	await bot.click_named("FitnessSingle")
+	bot.expect(absf(Ledger.cash("player")-before+float(ShopLife.cfg()["single_fee"]))<0.01,"single class charged to personal cash")
+	await bot.shot("fitness_timetable")
+	await bot.click_named("FitnessWait")
+	await bot.shot("fitness_class_ready")
+	var minute := Clock.minute_of_day()
+	var chosen := ""
+	for item in ShopLife.cfg()["class_times"]:
+		if minute>=int(item["minute"]) and minute<int(item["minute"])+10:chosen=item["id"]
+	bot.expect(chosen!="", "timetable reaches actual class start")
+	if chosen!="":await bot.click_named("FitnessClass_"+chosen)
+	await bot.wait(1.0)
+	bot.expect(not bool(ShopLife.S()["single"]), "class consumed saved single pass")
+	# Observe seeded chance by actually taking subsequent classes, with real pass fees.
+	for attempt in 12:
+		var opportunity := EventEngine.pending().filter(func(e):return str(e["id"]).begins_with("fitness_"))
+		if not opportunity.is_empty():
+			await bot.shot("fitness_networking_opportunity")
+			break
+		await popups()
+		await bot.use_action("fitness")
+		if not ShopLife.has_pass():
+			await close_modal()
+			await _shop_wait_hours(true)
+			await bot.use(func(n):return n.action=="fitness" and bool(n.params.get("desk",false)), "Rosa's reception")
+			await bot.click_named("FitnessSingle")
+		await bot.click_named("FitnessWait")
+		for item in ShopLife.cfg()["class_times"]:
+			if Clock.minute_of_day()>=int(item["minute"]) and Clock.minute_of_day()<int(item["minute"])+10:
+				await bot.click_named("FitnessClass_"+str(item["id"]))
+				break
+		await bot.wait(1.0)
+	await popups()
+	bot.expect(Ledger.check_balanced(), "fitness and networking books balance")
+	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")
+
+
+func _shop_wait_hours(weekday: bool) -> void:
+	# Bounded fixture idle time; never tries to sleep in a shop/district.
+	for hour in 7*24:
+		if (not weekday or _is_weekday()) and Clock.hour()>=11 and Clock.hour()<17:return
+		Clock.advance(60)
+		await popups()
+	bot.fail("Shop opening hours unavailable after seven days")

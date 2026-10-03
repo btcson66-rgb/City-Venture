@@ -974,7 +974,7 @@ static func packaging_extra() -> float:
 static func ship_cost(o: Dictionary, method: String) -> float:
 	var m := DataDB.ship_method(method)
 	var cls: String = DataDB.product(o["product"]).get("ship_class", "small")
-	return snappedf(float(m.get("cost", {}).get(cls, 5.0)) * World.shipping_index(), 0.01)   # the era's courier rates
+	return snappedf(float(m.get("cost", {}).get(cls, 5.0)) * World.shipping_index() * ShopLife.shipping_factor(), 0.01)   # the era's courier rates
 
 
 ## Book a courier pickup for all packed orders at `loc`.

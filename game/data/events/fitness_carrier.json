@@ -1,0 +1,38 @@
+{
+ "id": "fitness_carrier",
+ "category": "networking",
+ "status": "active",
+ "trigger": {
+  "when": "fitness",
+  "cooldown_days": 30
+ },
+ "presentation": {
+  "channel": "modal",
+  "title": "A courier introduction",
+  "icon": "people",
+  "lines": [
+   "A gym member introduces a courier with a seven-day trial price."
+  ]
+ },
+ "choices": [
+  {
+   "id": "accept",
+   "label": "Try the courier introduction",
+   "detail": "Pay {trial_discount} less on actual parcel labels for {trial_days} days. No cash award.",
+   "effects": [
+    {
+     "op": "shop_network",
+     "kind": "carrier"
+    }
+   ],
+   "outcome": "The opportunity is ready. Follow its terms and next steps."
+  },
+  {
+   "id": "decline",
+   "label": "Decline and keep your current plan",
+   "detail": "No fee, order or commitment. Another opportunity may arrive after 30 days.",
+   "effects": [],
+   "outcome": "You keep your current plan."
+  }
+ ]
+}

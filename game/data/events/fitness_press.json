@@ -1,0 +1,38 @@
+{
+ "id": "fitness_press",
+ "category": "networking",
+ "status": "active",
+ "trigger": {
+  "when": "fitness",
+  "cooldown_days": 30
+ },
+ "presentation": {
+  "channel": "modal",
+  "title": "A local sponsored report",
+  "icon": "people",
+  "lines": [
+   "Kai Moreno offers a clearly labelled sponsored report about your product."
+  ]
+ },
+ "choices": [
+  {
+   "id": "accept",
+   "label": "Commission the report · {press_fee}",
+   "detail": "Pay {press_fee} for {press_days} days of exposure. You still need real sales to earn revenue.",
+   "effects": [
+    {
+     "op": "shop_network",
+     "kind": "press"
+    }
+   ],
+   "outcome": "The opportunity is ready. Follow its terms and next steps."
+  },
+  {
+   "id": "decline",
+   "label": "Decline and keep your current plan",
+   "detail": "No fee, order or commitment. Another opportunity may arrive after 30 days.",
+   "effects": [],
+   "outcome": "You keep your current plan."
+  }
+ ]
+}

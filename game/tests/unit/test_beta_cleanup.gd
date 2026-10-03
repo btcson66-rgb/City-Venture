@@ -22,7 +22,7 @@ func test_scenery_keeps_data_but_has_no_public_destination() -> void:
 	var listed := []
 	for g in BuildingInfo.guide_groups():
 		listed.append_array(g["buildings"])
-	for bid in ["popup_unit", "old_town_studio", "harbor_point_fitness", "customs_house"]:
+	for bid in ["popup_unit", "old_town_studio", "customs_house"]:
 		runner.check(not BuildingInfo.building_enterable(bid), bid + " is scenery")
 		runner.check(not bid in listed, bid + " is absent from guide")
 		runner.check(DataDB.building(bid).has("interior"), bid + " retains interior data")
@@ -61,6 +61,10 @@ func test_old_hidden_room_save_returns_to_same_street_door() -> void:
 
 
 func test_npc_only_room_tracks_real_schedule_and_story_conditions() -> void:
+	# Preserve the look-only-room contract independently of the now playable research action.
+	var activities: Array = DataDB.buildings["crestline_flagship"]["interior"]["interactables"]
+	DataDB.buildings["crestline_flagship"]["interior"]["interactables"] = activities.filter(func(it): return it["action"] == "look")
+	BuildingInfo.invalidate_availability()
 	GameState.data["clock"]["minutes"] = Clock.at_day_time(6, 14 * 60)
 	runner.check(not BuildingInfo.building_available("crestline_flagship"), "empty pre-contract room has no public entrance")
 	GameState.set_flag("big_contract_offered")
@@ -68,3 +72,5 @@ func test_npc_only_room_tracks_real_schedule_and_story_conditions() -> void:
 	runner.eq(BuildingInfo.guide_tags("crestline_flagship"), "Services", "scheduled negotiation is not advertised as sightseeing")
 	GameState.data["clock"]["minutes"] = Clock.at_day_time(0, 19 * 60)
 	runner.check(not BuildingInfo.building_available("crestline_flagship"), "entrance hides after Daniel leaves")
+	DataDB.buildings["crestline_flagship"]["interior"]["interactables"] = activities
+	BuildingInfo.invalidate_availability()

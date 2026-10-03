@@ -21,6 +21,8 @@ static func lock_reason(action: String, params: Dictionary) -> String:
 	if req.begins_with("lease:") and not Living.has_lease(req.substr(6)):
 		return "not your office (yet)" if req == "lease:suite_2b" else "not yours (yet)"
 	match action:
+		"fitness":
+			if params.get("desk", false) and not npc_present("harbor_point"): return "Rosa is at reception weekdays, 06:00–20:00."
 		"cafe_counter":
 			return Cafe.counter_block()
 		"register_company":
@@ -59,6 +61,12 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 	if Industries.run_action(action, params, source):
 		return
 	match action:
+		"market_research":
+			UIRoot.open_modal(ResearchModal.new())
+		"fitness":
+			if params.get("desk", false) and not npc_present("harbor_point"):
+				UIRoot.toast("Rosa is at reception weekdays, 06:00–20:00.", "warn", "people")
+			else: UIRoot.open_modal(FitnessModal.new(bool(params.get("desk", false))))
 		"cafe_counter":
 			_cafe_counter()
 		"open_company_os":

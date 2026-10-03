@@ -262,3 +262,6 @@
 NPC 排程房與租下的咖啡店面。看得到的房間不能只剩鎖住的操作。
 
 Pier 倉庫：`pallet_rack`、`loading_dock_door`、`forklift_parked`、`packing_bench_large`；貨車行：`sales_desk`、`key_board`。另交 `interiors/floor_harbor_concrete.png`（192×192 / 768×768）平整藍灰水泥材質，建議室內 floor 資料使用 `harbor_concrete`。房間排版、互動和碰撞待 Claude 線接入。
+
+## Research and fitness (#40)
+Crestline research beside the lighting display keeps both previous look variants. Harbor Point reception and timetable open fitness management; classes show an existing interact pose. Monthly fees are personal expenses, paid access survives cancellation, and unused single-class passes are saved. Networking offers carry two real choices, thirty-day recurrence limits, real Contracts, seven-day parcel label discounts and paid local advertising. No character stat bonus is added.
