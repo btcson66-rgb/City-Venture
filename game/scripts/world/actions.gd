@@ -122,6 +122,10 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 			UIRoot.open_modal(LeaseModal.new("suite_2b"))
 		"personal_assets":
 			UIRoot.open_modal(PersonalAssetsModal.new())
+		"popup_store":
+			UIRoot.open_modal(PopupStoreModal.new())
+		"popup_till":
+			PopupStore.open_till()
 		"logistics_depth":
 			UIRoot.open_modal(LogisticsDepthModal.new())
 		"cafe_depth":

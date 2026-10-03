@@ -760,6 +760,12 @@ func _tab_inventory() -> void:
 
 # ============================================================== PEOPLE
 func _tab_people() -> void:
+	if not PopupStore.active().is_empty():
+		content.add_child(UIK.wrap(I18n.t("Pop-up weekend checkout: %s per hour in addition to normal wages.")%Fmt.money(float(PopupStore.cfg()["employee_hourly"])),8,Art.C_MUTED,470))
+		for person in Staff.people():
+			for day in [6,0]:
+				var b:=UIK.button(I18n.t("Assign %s: %s checkout")%[person["name"],I18n.t("Saturday" if day==6 else "Sunday")],func():PopupStore.assign(person["id"],day);rebuild())
+				b.name="PopupStaff_"+person["id"]+"_"+str(day);content.add_child(b)
 	_concepts(["payroll", "morale", "employer_registration"])
 	var p: Dictionary = GameState.data["player"]
 	var card := UIK.panel("ui/card", 5)

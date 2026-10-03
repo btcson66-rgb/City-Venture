@@ -71,6 +71,7 @@ static func rent_category(kind: String) -> String:
 
 static func _charge_lease(pid: String, ls: Dictionary) -> void:
 	var prop: Dictionary = DataDB.properties.get(pid, {})
+	if prop.get("kind","")=="popup":return
 	var cat := rent_category(str(prop.get("kind", "")))
 	Ledger.expense(ls["entity"], cat, float(ls["rent"]), I18n.t("%s — monthly") % I18n.t(prop.get("name", pid)), {"type": "lease", "id": pid})
 
@@ -84,6 +85,7 @@ static func lease(pid: String) -> Dictionary:
 	for r in prop.get("requires", []):
 		if not Cond.eval(r):
 			return {"ok": false, "error": str(prop.get("requires_text", "The landlord needs a registered company on the lease."))}
+	if pid=="popup_retail":return PopupStore.sign(PopupStore.next_weekend())
 	if D()["leases"].has(pid):
 		return {"ok": false, "error": "You already rent this."}
 	var ent := GameState.business_entity()

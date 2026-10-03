@@ -60,6 +60,8 @@ static func eval(expr: String, ctx := {}) -> bool:
 	if expr == "has_listed":
 		return not Ecommerce.E()["listings"].is_empty() or GameState.stat("orders_placed") >= 1
 	match expr:
+		"popup_open":
+			return PopupStore.is_open(Clock.now()) and Ecommerce.total_units_at("popup_retail")>0
 		"forecast_ok":
 			return Forecast.ok(GameState.business_entity())
 		"company_registered":

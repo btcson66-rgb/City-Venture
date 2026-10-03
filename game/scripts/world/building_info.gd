@@ -9,7 +9,7 @@ const ACTION_ICONS := {
 	"sleep": "sleep", "read_news": "info", "bank_counter": "bank", "atm": "bank",
 	"customs_guide": "info", "loans_info": "bank", "register_company": "civic", "permits_info": "civic", "take_number": "civic",
 	"pack_orders": "parcel", "dropoff_parcels": "parcel", "change_outfit": "shirt",
-	"personal_assets": "home", "cafe_depth": "coffee", "logistics_depth": "map", "home_letting": "home", "lease_property": "home", "whiteboard": "objective", "look": "info", "talk": "people",
+	"personal_assets": "home", "cafe_depth": "coffee", "logistics_depth": "map", "popup_store": "shop", "popup_till": "cash", "home_letting": "home", "lease_property": "home", "whiteboard": "objective", "look": "info", "talk": "people",
 	"talk_staff": "people", "business_board": "company", "metro": "metro",
 	"media_open": "company", "hotel_open": "sleep", "real_estate_open": "home", "manufacturing_open": "inventory", "automotive_open": "metro"
 }
@@ -64,7 +64,7 @@ static func invalidate_availability() -> void:
 static func _compute_available(id: String) -> bool:
 	if not building_enterable(id):
 		return false
-	for it in DataDB.building(id).get("interior", {}).get("interactables", []):
+	for it in interactables(id):
 		if not it.get("enabled", true) or str(it["action"]) == "look":
 			continue
 		# Access checks only. Sim action blockers call building_open(), so evaluating them here would recurse.
@@ -135,7 +135,7 @@ static func activities(id: String, scene: WorldScene = null) -> Array[String]:
 			if scene.is_ancestor_of(node) and node.enabled and node.action != "look":
 				out.append(_activity(str(node.label), str(node.action), node.params))
 	else:
-		for it in DataDB.building(id).get("interior", {}).get("interactables", []):
+		for it in interactables(id):
 			var params: Dictionary = it.get("params", {}).duplicate()
 			if params.has("unless_lease") and Living.has_lease(str(params["unless_lease"])):
 				continue
@@ -189,7 +189,7 @@ static func guide_groups() -> Array:
 
 static func guide_tags(id: String) -> String:
 	var tags: Array[String] = []
-	for it in DataDB.building(id).get("interior", {}).get("interactables", []):
+	for it in interactables(id):
 		var tag := ""
 		match str(it["action"]):
 			"buy_item", "cafe_counter": tag = I18n.t("Eat")
@@ -220,3 +220,11 @@ static func record_entry(id: String) -> int:
 	var visits: Dictionary = GameState.data["building_visits"]
 	visits[id] = int(visits.get(id, 0)) + 1
 	return int(visits[id])
+
+
+static func interactables(id: String) -> Array:
+	var out: Array=DataDB.building(id).get("interior",{}).get("interactables",[])
+	if id=="popup_unit":
+		if Living.D()["leases"].has("popup_retail"):return out.filter(func(it):return not it["action"] in ["cafe_counter","cafe_depth","lease_property"])
+		if Living.D()["leases"].has("popup_cafe"):return out.filter(func(it):return not it["action"] in ["popup_store","popup_till"])
+	return out

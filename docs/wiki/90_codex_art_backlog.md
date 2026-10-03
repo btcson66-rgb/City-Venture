@@ -777,3 +777,10 @@ Requested: backdrops/chapter_17, backdrops/chapter_18; dedicated Kai Moreno spri
 - Planned：第二款新型節能貨車（沿用既有貨車素材作 fallback）。
 - Planned：拖吊車事件插圖（維持文字與警示圖示作 fallback）。
 本工單不修改 game/assets。
+
+## #41 週末快閃店（待製作）
+
+- 快閃店室內佈置：同一 popup_unit 可做咖啡分店或週末零售，兩種租約互斥。
+- 可搬移攤位與貨架：目前使用既有 shelf／box fallback。
+- 專用收銀台：目前使用 cash_register／desk_laptop fallback。
+- 週末立牌：標示週六、週日 10:00–18:00。營業中逛街客使用既有角色外觀，未新增貼圖。

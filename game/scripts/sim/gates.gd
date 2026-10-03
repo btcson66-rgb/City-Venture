@@ -16,6 +16,7 @@ static func capital(id: String) -> Dictionary:
 
 static func licence_ok(id: String) -> bool:
 	match id:
+		"popup": return GameState.company_id()!="" and GameState.business_entity()==GameState.company_id()
 		"cafe": return Cafe.permitted()
 		"real_estate": return Compliance.permit_valid("brokerage")
 		"automotive": return Automotive.is_running()
@@ -24,6 +25,7 @@ static func licence_ok(id: String) -> bool:
 
 static func location_ok(id: String) -> bool:
 	match id:
+		"popup": return not PopupStore.active().is_empty()
 		"cafe": return Cafe.leased()
 		"logistics": return Logistics.has_van()
 		"manufacturing": return Living.has_lease("unit12_factory")

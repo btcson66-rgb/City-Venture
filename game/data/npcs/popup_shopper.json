@@ -1,0 +1,35 @@
+{
+ "id": "popup_shopper",
+ "name": "Mr. Lin",
+ "role": "Pop-up customer",
+ "appearance": {
+  "presentation": "masculine",
+  "face": "square",
+  "hair": "messy",
+  "hair_color": "black",
+  "skin": "s5",
+  "eye_shape": "round",
+  "eye_color": "dark",
+  "brows": "thick",
+  "mouth": "grin",
+  "accessory": "none"
+ },
+ "outfit": "startup_casual",
+ "outfit_tints": {
+  "top": "#2a3f66",
+  "bottom": "#2c3038"
+ },
+ "schedule": [
+  {
+   "days": "sat,sun",
+   "from": "10:00",
+   "to": "18:00",
+   "location": "interior:popup_unit",
+   "spot": "browse",
+   "pose": "idle",
+   "if": "popup_open"
+  }
+ ],
+ "dialogue": [],
+ "phone_contact": false
+}

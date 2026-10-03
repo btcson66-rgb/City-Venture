@@ -63,6 +63,7 @@ static func roster() -> Dictionary:
 	Cafe.S()
 	return GameState.data["cafe"]["roster"]
 static func scheduled(p: Dictionary,t: int,property: String) -> bool:
+	if PopupStore.assigned_at(str(p["id"]),t):return false
 	var id: String=p["id"]
 	if not roster().has(id):
 		# A newly encountered/legacy barista receives a visible early weekday roster, never an invisible all-day worker.

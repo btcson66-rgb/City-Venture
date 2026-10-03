@@ -31,6 +31,9 @@ static func fee() -> float:
 	if int(S()["moves"])==0:return 0
 	return snappedf(float(Living.cfg()["moving_fee"])+float(Living.cfg()["moving_unit_fee"])*units_at(Living.home(),false),.01)
 static func capacity_block(pid: String) -> String:
+	for view in views():
+		var blocked: bool=CompanyPortfolio.run_in(view["id"],func():return PopupStore.return_reserved(Living.home())>0)
+		if blocked:return "Finish the pop-up weekend before moving home. Its unsold stock must return to this home."
 	var prop: Dictionary=DataDB.properties.get(pid,{})
 	if prop.get("kind","")!="home" or not DataDB.buildings.has(prop.get("building","")):return "Choose a home that is available for moving."
 	if prop.get("owner_purchase",false) and not PersonalAssets.owned(pid):return "Buy this home before arranging a move."

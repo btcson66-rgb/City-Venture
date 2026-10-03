@@ -65,6 +65,18 @@
     "sprite": "table",
     "x": 132,
     "y": 58
+   },
+   {
+    "sprite": "shelf",
+    "fallback": "box",
+    "x": 176,
+    "y": 52
+   },
+   {
+    "sprite": "cash_register",
+    "fallback": "desk_laptop",
+    "x": 70,
+    "y": 58
    }
   ],
   "interactables": [
@@ -105,9 +117,42 @@
      "property": "popup_cafe",
      "requires": "lease:popup_cafe"
     }
+   },
+   {
+    "id": "popup_notice",
+    "at": [
+     112,
+     92
+    ],
+    "label": "Reserve a weekend pop-up",
+    "action": "popup_store",
+    "params": {}
+   },
+   {
+    "id": "popup_till",
+    "at": [
+     66,
+     106
+    ],
+    "label": "Work the pop-up checkout",
+    "action": "popup_till",
+    "params": {}
    }
   ],
-  "npc_spots": {}
+  "npc_spots": {
+   "browse": [
+    174,
+    95
+   ]
+  },
+  "stock_display": {
+   "location": "popup_retail",
+   "x": 170,
+   "y": 74,
+   "cols": 3,
+   "per_box": 10,
+   "max": 15
+  }
  },
  "category": "Retail premises",
  "status": "active"

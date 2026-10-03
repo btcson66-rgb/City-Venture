@@ -17,6 +17,9 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from")=="popup":
+		await _popup_fixture()
+		return
 	if _arg("from") == "logistics_depth":
 		await _logistics_depth_fixture()
 		return
@@ -126,6 +129,7 @@ func run() -> void:
 		await _month()
 		await _chapters_4_to_6()
 		await _chapters_7_to_9()
+		await _popup_weekend()
 		await _old_town_cafe()
 		await _harbor_logistics()
 		await _chapters_10_to_12()
@@ -3098,3 +3102,59 @@ func _logistics_depth_fixture() -> void:
 	bot.expect(LogisticsDepth.available("van2"),"half-day service returns vehicle")
 	bot.expect(Ledger.check_balanced(),"fleet money balanced")
 	bot.expect(SaveSystem.save_to(bot.out_dir.path_join("logistics_depth.json")),"played fleet save")
+func _popup_fixture() -> void:
+	await bot.wait(4)
+	UIRoot._suppress_decisions=true;UIRoot.tutorial.st()["off"]=true;StoryEngine.St()["active"].clear()
+	Company.register("Weekend Goods","retail_online","Riverside");Company.open_business_account(5000)
+	# Controlled inventory is purchased at cost on the real ledger, never treated as income.
+	Ledger.post(GameState.company_id(),"Controlled pop-up inventory purchase",[{"acct":"inventory","dr":500},{"acct":"cash","cr":500}],{"type":"qa_fixture"})
+	Ecommerce._add_stock(Living.home(),"water_bottle",100,5,0)
+	await _popup_weekend(true)
+func _popup_weekend(fixture:=false) -> void:
+	bot.step("Weekend pop-up: real stock, checkout, automatic return and report")
+	UIRoot.close_all();SceneRouter._enter("interior","popup_unit","door","up")
+	await bot.wait(.8);await bot.use_action("popup_store");await bot.wait(.3)
+	await bot.shot("popup_weekend_reservation")
+	await _export_row_input("SignPopup")
+	bot.expect(not PopupStore.active().is_empty(),"real notice reserved weekend")
+	if PopupStore.active().is_empty():return
+	var start:=int(PopupStore.active()["start"]);var end:=int(PopupStore.active()["end"])
+	var product: String="water_bottle" if fixture else ""
+	if not fixture:
+		for location in Ecommerce.stock_locations():
+			for id in Ecommerce.inv(location):
+				if Ecommerce.available(location,id)>=50:product=id;break
+			if product!="":break
+	bot.expect(product!="","fifty available units for pop-up")
+	if product=="":return
+	var first: String="";var stocked_source: String=""
+	for source in Ecommerce.stock_locations():
+		if Ecommerce.available(source,product)>0 and first=="":first=source
+		if Ecommerce.available(source,product)>=50 and stocked_source=="":stocked_source=source
+	await _export_row_input("PopupStock_"+product+("_"+stocked_source if first!=stocked_source else ""))
+	bot.expect(Ecommerce.stock("popup_retail",product)==50,"fifty units physically transferred")
+	await bot.shot("popup_stock_and_unit_price")
+	UIRoot.close_all()
+	if fixture:GameState.data["clock"]["minutes"]=start
+	else:Clock.advance_to(start)
+	SceneRouter._enter("interior","popup_unit","door","up")
+	await bot.wait(1.5);await bot.shot("popup_open_shop_and_customer")
+	await bot.use_action("popup_store");await bot.wait(.3)
+	await _export_row_input("PopupTill")
+	await bot.until(func():return not UIRoot.top_modal() is MiniGame,12)
+	bot.expect(float(PopupStore.active().get("revenue",0))>0,"one-hour checkout actual sales")
+	if fixture:
+		GameState.data["clock"]["minutes"]=end
+		PopupStore.handle("popup.close",{"start":start})
+	else:Clock.advance_to(end)
+	await bot.wait(.5)
+	if not UIRoot.top_modal() is PopupStoreModal:UIRoot.open_modal(PopupStoreModal.new())
+	await bot.wait(.3)
+	var m:=UIRoot.top_modal()
+	for child in m.body.get_children():
+		if child is ScrollContainer:child.scroll_vertical=child.get_v_scroll_bar().max_value
+	await bot.wait(.4);await bot.shot("popup_weekend_report")
+	bot.expect(PopupStore.active().is_empty() and PopupStore.S()["history"].size()>0,"weekend settles automatically")
+	bot.expect(Ledger.check_balanced(),"pop-up all journals balanced")
+	bot.expect(SaveSystem.save_to(bot.out_dir.path_join("popup_weekend.json")),"played pop-up save")
+	UIRoot.close_all()

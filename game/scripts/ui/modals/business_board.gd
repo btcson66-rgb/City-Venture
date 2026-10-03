@@ -36,7 +36,7 @@ func _businesses() -> void:
 	body.add_child(cols)
 	var list := UIK.vbox(2)
 	list.custom_minimum_size = Vector2(170, 0)
-	cols.add_child(list)
+	cols.add_child(UIK.scroll(list,Vector2(180,236)))
 	list.add_child(UIK.label("START NOW", 7, Art.C_DIM, true))
 	var bs: Array = DataDB.businesses.values().filter(func(b): return b.get("status", "planned") == "active")
 	bs.sort_custom(func(a, b): return _order(a) < _order(b))

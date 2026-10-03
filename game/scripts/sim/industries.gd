@@ -9,6 +9,7 @@ static func all() -> Array:
 		{"id":"consulting", "sim_class":Careers, "prefixes":["car"], "slot":"careers"},
 		{"id":"saas", "sim_class":Saas, "prefixes":["saas"], "slot":"business"},
 		{"id":"cafe", "sim_class":Cafe, "prefixes":["cafe"], "slot":"business"},
+		{"id":"popup", "auxiliary":true, "sim_class":PopupStore, "prefixes":["popup"], "slot":"business"},
 		{"id":"logistics", "sim_class":Logistics, "prefixes":["log"], "slot":"business"},
 		{"id":"manufacturing", "sim_class":Manufacturing, "prefixes":["mfg"], "slot":"business", "actions":{"manufacturing_open":Manufacturing.open_action}},
 		{"id":"real_estate", "sim_class":RealEstate, "prefixes":["re"], "slot":"business", "actions":{"real_estate_open":RealEstate.open_action}},

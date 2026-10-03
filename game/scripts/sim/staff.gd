@@ -172,6 +172,7 @@ static func give_raise(pid: String) -> Dictionary:
 
 
 static func is_working(p: Dictionary, t := -1) -> bool:
+	if PopupStore.assigned_at(str(p["id"]),Clock.now() if t<0 else t):return false
 	if t < 0:
 		t = Clock.now()
 	if t < int(p.get("start", 0)):

@@ -185,3 +185,13 @@
 
 ### #94 Personal housing
 Implemented: `maple_owner_home` (Maple Court owner apartment), `heights_penthouse` (Luxury Heights), `garden_villa` (Residential outskirts). Data-driven home interiors reuse existing furniture/facades as explicit visual fallback; no new art assets. Residential street extends to the villa driveway, retaining existing exits. Buy at Okafor, move with the existing home system, wake/use laptop/pack at the new home. Personal showroom is at Dockside Motors.
+
+## #41：週末快閃店
+
+五號快閃店可租一個週末（週六、週日 10:00–18:00），至少提前一天在店內公告處預約。公司須完成登記與銀行開戶，租金 $380 包含兩天。店面與第二間咖啡店共用同一空間，不能同時出租。
+
+在 Company OS 的「週末快閃店」選商品、來源倉位與件數，搬運一小時，容量 150 件。有空閒公司貨車不另收費，否則每趟 $25；已保留給訂單的貨不能搬。搬出的貨在原倉位保留退回容量，週末結束前不能搬家。店內可見既有貨架與收銀台素材，以及營業時的逛街客；專用快閃店美術仍列入 backlog。
+
+自己到店站櫃台一小時，或在 People 指派員工週六／週日值班。員工每小時另付 $18，同一時間停止原店／物流工作。沒人值班不營業。週日 18:00 剩貨自動搬回來源，租約結束。
+
+資料識別：`popup_retail` 店面、`popup` 銷售通路、`popup_shopper` 週末逛街客。

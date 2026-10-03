@@ -65,7 +65,7 @@ func build(building_id: String) -> void:
 		if p.has("night"):
 			_light_spill(float(p["x"]), 52.0)
 		add_prop(p)
-	for it in def.get("interactables", []):
+	for it in BuildingInfo.interactables(building_id):
 		if str(it.get("params", {}).get("unless_lease", "")) != "" and Living.has_lease(str(it["params"]["unless_lease"])):
 			continue   # e.g. the TO LET notice, once the unit is yours
 		var a: Array = it["at"]

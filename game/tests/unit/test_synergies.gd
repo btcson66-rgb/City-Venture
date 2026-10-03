@@ -44,6 +44,7 @@ func _keys() -> Array:
 func test_data_is_complete_and_wellformed() -> void:
 	runner.eq(DataDB.milestones.size(), 55, "five milestones for each of eleven industries")
 	for entry in Industries.all():
+		if entry.get("auxiliary",false):continue # A sales channel shares its parent industry milestones.
 		runner.eq(Milestones.list(entry["id"]).size(), 5, "five milestones: " + str(entry["id"]))
 	for m in DataDB.milestones.values():
 		runner.check(str(m["metric"]).get_slice(":", 0) in ["stat", "data", "count", "fn"] and str(m["name"]) != "" and str(m["desc"]) != "", "milestone shape " + str(m["id"]))
