@@ -17,6 +17,9 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "ch15":
+		await _chapters_15_to_16(true)
+		return
 	if _arg("from") == "trade_quote":
 		await _trade_quote_fixture()
 		return
@@ -53,6 +56,7 @@ func run() -> void:
 		await _fast_forward_to_ch10()
 		await _chapters_10_to_12()
 		await _chapters_13_to_14()
+		await _chapters_15_to_16()
 		await _summary()
 		return
 	await _chapter1()
@@ -71,6 +75,7 @@ func run() -> void:
 		await _harbor_logistics()
 		await _chapters_10_to_12()
 		await _chapters_13_to_14()
+		await _chapters_15_to_16()
 	await _summary()
 
 
@@ -1908,3 +1913,154 @@ func _save_load() -> void:
 	bot.expect(absf(Clock.now() - t) <= 2, "time restored after load")
 	bot.expect(GameState.data["player"]["location"]["id"] == loc["id"], "location restored (%s)" % loc["id"])
 	await bot.shot("after_load")
+
+
+## Chapter 15–16 short tour: company/stock/time fixtures, native hedge, travel and contract inputs.
+func _chapters_15_to_16(fast := false) -> void:
+	await bot.wait(4.0)
+	if fast:
+		UIRoot._suppress_decisions = true
+		UIRoot.tutorial.st()["off"] = true
+		Company.register("Riverlight Global", "retail_online", "22 Founders Lane")
+		Company.open_business_account(15000)
+		GlobalMarket.open_bank()
+		GameState.data["world"]["year"] = 9
+		Ecommerce._add_stock("riverside_studio", "wireless_earbuds", 40, 18.0, 0)
+		Ledger.post(GameState.company_id(), "Tour inventory fixture", [{"acct": "inventory", "dr": 720}, {"acct": "cash", "cr": 720}])
+		Ecommerce.create_listing("wireless_earbuds", 60, "self", 0.9)
+		GlobalMarket.open_store("auroria")
+		GlobalMarket.set_price("auroria", str(Ecommerce.listing_for("wireless_earbuds")["id"]), 60)
+		StoryEngine.St()["active"].clear()
+		StoryEngine.start_chapter("ch15_currency_swing")
+	bot.step("Chapter 15 — currency briefing and real bank hedge")
+	if fast:
+		Actions.run("read_news", {})
+		await bot.wait(0.4)
+		await bot.shot("ch15_fx_news")
+		await close_modal()
+		GameState.data["clock"]["minutes"] = Clock.at_day_time(1, 13 * 60)
+		SceneRouter._enter("interior", "nexus_bank", "door", "up")
+		await bot.wait(0.6)
+	else:
+		await _read_news("fx_risk")
+		await _until_weekday_hours(13, 15)
+		await exit_building()
+		await metro_to("financial")
+		await enter_building("nexus_bank")
+	await bot.use(func(n): return n.action == "talk" and n.params.get("npc", "") == "marcus", "Marcus exchange risk")
+	await talk_through_dialogue_first_choice()
+	await bot.wait(0.5)
+	await bot.click_named("BankFXRisk")
+	await bot.shot("ch15_forward_quote")
+	if FXForward.quote("AUR", 100, 30)["ok"]:
+		await bot.click_named("SignForward")
+	else:
+		await bot.click_named("ChooseHomeInvoices")
+	bot.expect(GameState.flag("fx_response_forward") or GameState.flag("fx_response_home"), "native risk response recorded")
+	await close_modal()
+	await close_modal()
+	if fast:
+		# Elapsed time is a fixture; the actual settlement handler and month report remain real.
+		GameState.data["clock"]["minutes"] += 31 * Clock.DAY
+		FXForward.on_hour()
+		var date := Clock.date()
+		var report := MonthClose.run(int(date["year"]), int(date["month"]))
+		UIRoot.open_modal(MonthCloseModal.new(report))
+		await bot.wait(0.5)
+		await bot.shot("ch15_exchange_month_close")
+		await bot.click_text("Continue")
+	else:
+		await exit_building()
+		await metro_to("riverside")
+		await enter_building("riverside_apartment")
+		await pass_time_at_home(func(): return GameState.flag("fx_month_viewed"), 35, true)
+	StoryEngine.check()
+	await bot.wait(0.6)
+	await bot.shot("ch15_comparison")
+	await popups()
+	bot.expect("ch15_currency_swing" in StoryEngine.St()["chapters_done"], "chapter15 completes from actual response and viewed month close")
+	bot.step("Chapter 16 — Omar video, flight and distributor contract")
+	if fast:
+		SceneRouter._enter("interior", "riverside_apartment", "door", "up")
+		await bot.wait(0.6)
+	await _home_laptop("sales")
+	await bot.click_named("SalesPage_overseas")
+	await bot.click_named("CompareLuminaPartners")
+	await bot.click_named("CallOmar")
+	await talk_through_dialogue_first_choice()
+	await bot.wait(0.5)
+	await bot.shot("ch16_channel_choices")
+	await bot.click_named("LuminaFlight_" + GameState.company_id())
+	await bot.wait(0.5)
+	await popups()
+	await bot.shot("ch16_trip_return")
+	await bot.click_named("LuminaFlight_player")
+	await bot.wait(0.5)
+	await popups()
+	await bot.click_named("RequestOmarContract")
+	await bot.wait(0.5)
+	await bot.shot("ch16_distributor_offer")
+	await bot.click_named("AcceptContract")
+	await bot.click_named("DeliverContract")
+	var contract := Contracts.by_tag("lumina_distributor")
+	bot.expect(not contract.is_empty() and contract["status"] == "shipped", "native signing and dispatch put goods in transit")
+	await bot.shot("ch16_goods_in_transit")
+	await close_modal()
+	await close_modal()
+	await close_modal()
+	if fast:
+		GameState.data["clock"]["minutes"] = int(contract["eta"])
+		Contracts.handle("con.partner_arrive", {"id": contract["id"]})
+		GameState.data["clock"]["minutes"] = int(contract["pay_due"])
+		Contracts.handle("con.pay", {"id": contract["id"]})
+	else:
+		await pass_time_at_home(func(): return contract["status"] == "paid", 30, true)
+	StoryEngine.check()
+	await bot.wait(0.6)
+	await bot.shot("ch16_90_day_comparison")
+	await popups()
+	bot.expect("ch16_partner_overseas" in StoryEngine.St()["chapters_done"], "chapter16 recognizes collected partner income")
+	bot.step("Overseas warehouse — real lease and sea batch input")
+	await _home_laptop("sales")
+	await bot.click_named("SalesPage_overseas")
+	await bot.click_named("CompareLuminaPartners")
+	await bot.click_named("PartnerChannel_warehouse")
+	await bot.click_named("OpenLuminaWarehouse")
+	await bot.click_named("SendLuminaStock")
+	await bot.shot("ch16_warehouse_batch")
+	await close_modal()
+	await close_modal()
+	bot.expect(GameState.flag("lumina_stock_dispatched"), "warehouse batch really dispatched")
+	if fast:
+		var batch: Dictionary = OverseasPartners.company()["transfers"][-1]
+		GameState.data["clock"]["minutes"] = int(batch["eta"])
+		OverseasPartners.handle("partners.arrive", {"entity": GameState.company_id(), "index": batch["index"]})
+		await _home_laptop("sales")
+		await bot.click_named("SalesPage_overseas")
+		await bot.click_named("GlobalRegion")
+		var regions: Array = GlobalMarket.cfg()["regions"].keys()
+		regions.sort()
+		for i in regions.size():
+			await bot.key_action("ui_up")
+		for i in regions.find("lumina"):
+			await bot.key_action("ui_down")
+		await bot.key_action("ui_accept")
+		await bot.wait(0.5)
+		var listing := Ecommerce.listing_for("wireless_earbuds")
+		await _export_row_input("SaveGlobalPrice_" + str(listing["id"]))
+		await bot.shot("ch16_warehouse_local_price")
+		await close_modal()
+		Ecommerce._h_order_place({"listing": listing["id"], "region": "lumina"})
+		var order: Dictionary = Ecommerce.E()["orders"]["#%d" % int(Ecommerce.E()["counters"]["order"])]
+		bot.expect(order.get("partner_channel", "") == "3pl" and order["status"] == "shipped", "actual warehouse fulfilment and fee")
+		GameState.data["clock"]["minutes"] = int(order["ship"]["eta"])
+		Ecommerce._h_deliver({"order": order["id"]})
+		GameState.data["clock"]["minutes"] += 3 * Clock.DAY
+		GlobalMarket.payout(GameState.company_id())
+		await _home_laptop("finance")
+		await bot.click_named("ConvertGlobal_" + GlobalMarket.currency("lumina"))
+		await bot.wait(0.5)
+		await bot.shot("ch16_warehouse_income")
+		await close_modal()
+		await close_modal()
+	bot.expect(Ledger.check_balanced(), "chapters15–16 books balanced")

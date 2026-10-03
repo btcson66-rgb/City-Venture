@@ -28,6 +28,10 @@ func build() -> void:
 		v.add_child(UIK.kv("Refunds", Fmt.money(-e["refunds"]), Art.C_RED))
 		v.add_child(UIK.kv("COGS", Fmt.money(-e["cogs"]), Art.C_RED))
 		v.add_child(UIK.kv("Gross profit", Fmt.money(e["gross_profit"]), UIK.money_color(e["gross_profit"]), 8, true))
+		v.add_child(UIK.kv("Realized exchange gain / loss", Fmt.money(float(e.get("fx_gain_loss", 0)), true)))
+		var ch: Dictionary = OverseasPartners.S()["chapters"].get("ch15_currency_swing", {})
+		if not ch.is_empty() and e["entity"] == ch["entity"] and int(rep["t1"]) > int(ch["started"]):
+			GameState.set_flag("fx_month_viewed")
 		v.add_child(UIK.kv("Advertising", Fmt.money(-e["advertising"]), Art.C_RED))
 		v.add_child(UIK.kv("Shipping", Fmt.money(-e["shipping"]), Art.C_RED))
 		var other_opex := float(e["opex_total"]) - float(e["advertising"]) - float(e["shipping"]) - float(e["rent_office"])

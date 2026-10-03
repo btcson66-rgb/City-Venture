@@ -32,6 +32,14 @@
  "dialogue": [
   {
    "when": [
+    "flag:fx_shock_started",
+    "!flag:met_marcus_fx"
+   ],
+   "conversation": "marcus_fx",
+   "action": "bank_counter"
+  },
+  {
+   "when": [
     "world_year>=9",
     "!flag:met_marcus_global"
    ],

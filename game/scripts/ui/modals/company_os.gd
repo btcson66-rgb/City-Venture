@@ -904,13 +904,18 @@ func _tab_contracts() -> void:
 		if coming > 0 and have < int(k["qty"]):
 			right.add_child(UIK.label(I18n.t("On the way from suppliers: %d") % coming, 7, Art.C_SKY, true))
 		right.add_child(UIK.label(I18n.t("Due %s") % Clock.fmt_datetime(int(k["due"])), 7, Art.C_GOLD if Clock.now() < int(k["due"]) else Art.C_RED))
-		var db := UIK.button(I18n.t("Pack & deliver %d units (B2B freight $40)") % int(k["qty"]), func():
+		var partner: bool = k.get("type", "") == "lumina_distributor"
+		var deliver_label := I18n.t("Dispatch %d units to Lumina; freight and duty charged now") % int(k["qty"]) if partner else I18n.t("Pack & deliver %d units (B2B freight $40)") % int(k["qty"])
+		var db := UIK.button(deliver_label, func():
 			var r := Contracts.deliver(k["id"])
 			if not r["ok"]:
 				UIRoot.toast(r["error"], "bad", "warning")
 			else:
 				Clock.advance(90)
-				UIRoot.toast(I18n.t("Delivered. Invoice %s due in %d days.") % [Fmt.money(r["receivable"]), int(k["payment_terms_days"])], "good", "contracts")
+				if partner:
+					UIRoot.toast(I18n.t("Dispatched. Revenue is booked on arrival; payment follows delivery."), "good", "contracts")
+				else:
+					UIRoot.toast(I18n.t("Delivered. Invoice %s due in %d days.") % [Fmt.money(r["receivable"]), int(k["payment_terms_days"])], "good", "contracts")
 			rebuild(), "primary")
 		db.name = "DeliverContract"
 		db.disabled = not Contracts.can_deliver(str(k["id"]))
@@ -933,10 +938,12 @@ func _tab_contracts() -> void:
 					var ft := UIK.button("…or on supplier credit terms", func(): _fill(k, true))
 					ft.name = "FillContractTerms"
 					right.add_child(ft)
+	elif k["status"] == "shipped" and k.get("type", "") == "lumina_distributor":
+		right.add_child(UIK.wrap(I18n.t("✓ Goods in transit. Arrival: %s. Revenue is not booked yet.") % Clock.fmt_datetime(int(k["eta"])), 7, Art.C_SKY, 220))
 	elif k["status"] == "delivered":
 		right.add_child(UIK.label(I18n.t("Invoice %s · due %s") % [Fmt.money(k["receivable"]), Clock.fmt_short(int(k["pay_due"]))], 8, Art.C_GOLD, true))
 		right.add_child(UIK.wrap("Revenue is booked. The cash isn't here yet.", 7, Art.C_SKY, 220))
-		if int(k["payment_terms_days"]) >= 30:
+		if int(k["payment_terms_days"]) >= 30 and k.get("type", "") != "lumina_distributor":
 			var ep := UIK.button(I18n.t("Ask for early payment (−3%%: %s now)") % Fmt.money0(float(k["receivable"]) * 0.97), func():
 				var r := Contracts.early_payment(k["id"])
 				if r["ok"]:

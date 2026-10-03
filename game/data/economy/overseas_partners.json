@@ -1,0 +1,34 @@
+{
+ "shock": {
+  "currency": "AUR",
+  "drop": 0.12,
+  "days": 7,
+  "volatility": 1.8
+ },
+ "forward": {
+  "fixed_fee": 5,
+  "fee_rates": {
+   "30": 0.008,
+   "60": 0.015
+  },
+  "maximum_notional": 10000
+ },
+ "flight_fare": 420,
+ "flight_days": 1,
+ "distributor_units": 10,
+ "wholesale_factor": 0.55,
+ "distributor_delivery_days": 21,
+ "distributor_payment_days": 7,
+ "home_invoice_price_factor": 0.94,
+ "home_invoice_acceptance": 0.78,
+ "warehouse_open_fee": 100,
+ "warehouse_capacity": 200,
+ "warehouse_rent_unit_month": 0.65,
+ "warehouse_shipping_unit": 3,
+ "warehouse_delivery_days": 2,
+ "transfer_freight_base": 35,
+ "transfer_freight_unit": 1.2,
+ "transfer_days": 14,
+ "clearance_after_days": 45,
+ "comparison_units_90": 90
+}

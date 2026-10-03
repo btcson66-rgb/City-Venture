@@ -45,12 +45,16 @@ msgstr ""
 msgid " (fewer notes would be tidier)"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1067
+#: scripts/ui/modals/company_os.gd:1074
 msgid " (late: -20%)"
 msgstr ""
 
 #: scripts/sim/living.gd:85
 msgid " + deposit"
+msgstr ""
+
+#: scripts/ui/modals/overseas_partner_modal.gd:91
+msgid " /month · "
 msgstr ""
 
 #: scripts/sim/company.gd:65
@@ -65,7 +69,7 @@ msgstr ""
 msgid " inc"
 msgstr ""
 
-#: scripts/sim/contracts.gd:265
+#: scripts/sim/contracts.gd:297
 msgid " late (penalty %s)"
 msgstr ""
 
@@ -93,7 +97,7 @@ msgstr ""
 msgid "\"Kind of.\" You're in Aurelia with a suitcase."
 msgstr ""
 
-#: scripts/ui/modals/info_modal.gd:65
+#: scripts/ui/modals/info_modal.gd:67
 msgid "# AURELIA DAILY · Year %d — %s"
 msgstr ""
 
@@ -101,11 +105,11 @@ msgstr ""
 msgid "# FROM HERE IT'S YOUR CALL"
 msgstr ""
 
-#: scripts/ui/modals/info_modal.gd:83
+#: scripts/ui/modals/info_modal.gd:87
 msgid "# IDEAS · PEOPLE · PRODUCT · GROWTH"
 msgstr ""
 
-#: scripts/ui/modals/info_modal.gd:69
+#: scripts/ui/modals/info_modal.gd:73
 msgid "# MARKET NOTES"
 msgstr ""
 
@@ -129,15 +133,15 @@ msgstr ""
 msgid "$30,000. A laptop. A phone. A city."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1345
+#: scripts/ui/modals/company_os.gd:1352
 msgid "%.1f L per 100 km"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1415
+#: scripts/ui/modals/company_os.gd:1422
 msgid "%.1f km"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1005
+#: scripts/ui/modals/company_os.gd:1012
 msgid "%d / %d h · due %s · %s · pays %s"
 msgstr ""
 
@@ -145,19 +149,23 @@ msgstr ""
 msgid "%d / %d units"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1343
+#: scripts/ui/modals/company_os.gd:1350
 msgid "%d accepted"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1219
+#: scripts/ui/modals/company_os.gd:1226
 msgid "%d cups"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1254
+#: scripts/ui/modals/company_os.gd:1261
 msgid "%d cups · %s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1006
+#: scripts/ui/modals/fx_risk_modal.gd:50
+msgid "%d days"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:1013
 msgid "%d days after delivery"
 msgstr ""
 
@@ -165,7 +173,7 @@ msgstr ""
 msgid "%d days after signing"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1395
+#: scripts/ui/modals/company_os.gd:1402
 msgid "%d driver(s) take one posted run each workday from 9:00 and bank the fee. They plan the route less well than you do."
 msgstr ""
 
@@ -173,11 +181,11 @@ msgstr ""
 msgid "%d h %d min"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1021
+#: scripts/ui/modals/company_os.gd:1028
 msgid "%d h · %d days · %s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1216
+#: scripts/ui/modals/company_os.gd:1223
 msgid "%d last 7 days"
 msgstr ""
 
@@ -221,7 +229,7 @@ msgstr ""
 msgid "%d parcels"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1346
+#: scripts/ui/modals/company_os.gd:1353
 msgid "%d parcels a trip"
 msgstr ""
 
@@ -233,11 +241,11 @@ msgstr ""
 msgid "%d people applied for %s. Review them in Company OS → People."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1344
+#: scripts/ui/modals/company_os.gd:1351
 msgid "%d runs"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1363
+#: scripts/ui/modals/company_os.gd:1370
 msgid "%d stops · deliver by %s · about %s on the road"
 msgstr ""
 
@@ -277,7 +285,7 @@ msgstr ""
 msgid "%s Café"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1132
+#: scripts/ui/modals/company_os.gd:1139
 msgid "%s IS LIVE"
 msgstr ""
 
@@ -321,6 +329,10 @@ msgstr ""
 msgid "%s drove run %s: paid %s."
 msgstr ""
 
+#: scripts/sim/overseas_partners.gd:84
+msgid "%s flight completed: %s paid; %d day elapsed. Business simulation continued during the journey."
+msgstr ""
+
 #: scripts/sim/logistics.gd:516
 msgid "%s found no run to take today."
 msgstr ""
@@ -357,7 +369,7 @@ msgstr ""
 msgid "%s landed on time"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1217
+#: scripts/ui/modals/company_os.gd:1224
 msgid "%s last 7 days"
 msgstr ""
 
@@ -369,11 +381,11 @@ msgstr ""
 msgid "%s paid %s."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:943
+#: scripts/ui/modals/company_os.gd:950
 msgid "%s paid early: %s in the bank."
 msgstr ""
 
-#: scripts/sim/contracts.gd:304
+#: scripts/sim/contracts.gd:351
 msgid "%s paid invoice %s: %s"
 msgstr ""
 
@@ -445,7 +457,7 @@ msgstr ""
 msgid "%s, I have a desk plan. Pretty sure."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1148
+#: scripts/ui/modals/company_os.gd:1155
 msgid "%s/month each"
 msgstr ""
 
@@ -513,11 +525,11 @@ msgstr ""
 msgid "(Order {order} — {product}, {price})"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1147
+#: scripts/ui/modals/company_os.gd:1154
 msgid "+%d / −%d last 7 days"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1220
+#: scripts/ui/modals/company_os.gd:1227
 msgid "+%d arriving"
 msgstr ""
 
@@ -529,7 +541,7 @@ msgstr ""
 msgid "+15% unit cost for 30 days. Margins shrink."
 msgstr ""
 
-#: scripts/sim/contracts.gd:163 scripts/sim/contracts.gd:192
+#: scripts/sim/contracts.gd:172 scripts/sim/contracts.gd:203
 msgid ", %d%% upfront"
 msgstr ""
 
@@ -549,7 +561,7 @@ msgstr ""
 msgid "1  Box"
 msgstr ""
 
-#: scripts/ui/global_market_ui.gd:20 scripts/ui/modals/global_region_modal.gd:20
+#: scripts/ui/global_market_ui.gd:21 scripts/ui/modals/global_region_modal.gd:20
 msgid "1 %s = %s home dollars"
 msgstr ""
 
@@ -670,6 +682,10 @@ msgid "A contract offer is waiting in Contracts."
 msgstr ""
 
 #: data/help/glossary.json
+msgid "A distributor owns the customers; a warehouse fulfils orders for your customers."
+msgstr ""
+
+#: data/help/glossary.json
 msgid "A fast route that fails one time in ten can cost more than a slow one that never does. Look at the record, not just the speed."
 msgstr ""
 
@@ -682,7 +698,15 @@ msgid "A food-truck owner needs four permits. You find the one form that covers 
 msgstr ""
 
 #: data/story/chapters.json
+msgid "A foreign price is not a home-currency promise."
+msgstr ""
+
+#: data/story/chapters.json
 msgid "A foreign sale is not home cash."
+msgstr ""
+
+#: data/dialogue/marcus_fx.json
+msgid "A forward locks the sale of expected foreign receipts, not free money. You pay a fee and collateral; a stronger foreign currency means the hedge loses while your receipts gain. Repricing or future home-currency invoices are also choices."
 msgstr ""
 
 #: scripts/ui/modals/insolvency_modal.gd:74
@@ -694,6 +718,10 @@ msgid "A fuller van spreads the fixed time of a trip over more parcels, so each 
 msgstr ""
 
 #: data/help/glossary.json
+msgid "A hedge can lose when the foreign currency strengthens; it does not guarantee business profit."
+msgstr ""
+
+#: data/help/glossary.json
 msgid "A higher rating brings more customers every day, for free."
 msgstr ""
 
@@ -701,7 +729,7 @@ msgstr ""
 msgid "A licensed exchange turns your dollars into digital dollars and sends them in minutes. You carry the platform's risk."
 msgstr ""
 
-#: scripts/sim/global_market.gd:223
+#: scripts/sim/global_market.gd:226
 msgid "A live company and international account are required."
 msgstr ""
 
@@ -793,6 +821,10 @@ msgstr ""
 msgid "A time-limited estimate of goods, transport, bank fees and risk. Prices are expressed in local currency; the Deal Sheet compares home-dollar costs."
 msgstr ""
 
+#: scripts/ui/modals/overseas_partner_modal.gd:34
+msgid "A video call costs nothing and lets you choose a partner without a flight."
+msgstr ""
+
 #: data/dialogue/lina_intro.json
 msgid "A wire: cheap, slow. A letter of credit: we guarantee you to their bank, about two days, one and a half percent."
 msgstr ""
@@ -837,12 +869,16 @@ msgstr ""
 msgid "ATM — balances"
 msgstr ""
 
-#: scripts/sim/contracts.gd:25 scripts/sim/fx.gd:24 scripts/sim/fx.gd:32 scripts/sim/trade_quote.gd:11
+#: scripts/sim/contracts.gd:25 scripts/sim/contracts.gd:334 scripts/sim/contracts.gd:35 scripts/sim/fx.gd:24
 msgid "AUD"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:840
 msgid "AUD (Aurelia dollar)"
+msgstr ""
+
+#: scripts/ui/modals/fx_risk_modal.gd:5
+msgid "AUR"
 msgstr ""
 
 #: scripts/ui/minigames/parcel_sort_game.gd:73
@@ -869,11 +905,11 @@ msgstr ""
 msgid "AWAITING PICKUP"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1025 scripts/ui/modals/company_os.gd:1366 scripts/ui/modals/company_os.gd:869
+#: scripts/ui/modals/company_os.gd:1032 scripts/ui/modals/company_os.gd:1373 scripts/ui/modals/company_os.gd:869
 msgid "Accept"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1377
+#: scripts/ui/modals/company_os.gd:1384
 msgid "Accept a run above, then drive it: you plan the route on a map. Every kilometre saved is fuel and time kept."
 msgstr ""
 
@@ -893,7 +929,7 @@ msgstr ""
 msgid "Accept: sell {company} for {price}"
 msgstr ""
 
-#: scripts/sim/contracts.gd:129
+#: scripts/sim/contracts.gd:136
 msgid "Accepted."
 msgstr ""
 
@@ -907,6 +943,14 @@ msgstr ""
 
 #: scripts/sim/bank.gd:105
 msgid "Active contracts cover this condition: %s still to collect."
+msgstr ""
+
+#: scripts/ui/overseas_partner_ui.gd:23
+msgid "Actual hedge gain / loss (home dollars)"
+msgstr ""
+
+#: scripts/ui/overseas_partner_ui.gd:58
+msgid "Actual settled hedge / fees (home dollars)"
 msgstr ""
 
 #: data/events/ad_cost_spike.json
@@ -949,7 +993,7 @@ msgstr ""
 msgid "Ads paused."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1165
+#: scripts/ui/modals/company_os.gd:1172
 msgid "Ads/day"
 msgstr ""
 
@@ -957,8 +1001,12 @@ msgstr ""
 msgid "Advanced Tech & Manufacturing"
 msgstr ""
 
-#: scripts/sim/ledger.gd:28 scripts/ui/modals/month_close_modal.gd:31
+#: scripts/sim/ledger.gd:28 scripts/ui/modals/month_close_modal.gd:35
 msgid "Advertising"
+msgstr ""
+
+#: data/help/help.json
+msgid "After 45 days, offer remaining warehouse stock to Omar or review an unsuccessful expansion honestly."
 msgstr ""
 
 #: data/help/glossary.json
@@ -1137,7 +1185,7 @@ msgstr ""
 msgid "Apply (%s)"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1208
+#: scripts/ui/modals/company_os.gd:1215
 msgid "Apply at City Hall → Permits (%s)"
 msgstr ""
 
@@ -1181,11 +1229,19 @@ msgstr ""
 msgid "Ask for a re-ship"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:940
+#: scripts/ui/modals/company_os.gd:947
 msgid "Ask for early payment (−3%%: %s now)"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1418
+#: data/help/glossary.json
+msgid "Ask the overseas buyer to pay home currency on future distributor contracts."
+msgstr ""
+
+#: scripts/ui/overseas_partner_ui.gd:78
+msgid "Assumed sales over 90 days (units)"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:1425
 msgid "At any packing table the shipping options include \"Own van\": fuel instead of a courier fee, delivered the same day. The Pier 7 warehouse can hold your stock too."
 msgstr ""
 
@@ -1201,7 +1257,7 @@ msgstr ""
 msgid "At the start of each month you get last month's report: revenue, costs, profit, and what happened to your cash."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1224
+#: scripts/ui/modals/company_os.gd:1231
 msgid "At these prices: about %d customers on a weekday. Each barista makes ~%d cups an hour."
 msgstr ""
 
@@ -1265,11 +1321,15 @@ msgstr ""
 msgid "Auroria"
 msgstr ""
 
+#: scripts/sim/overseas_partners.gd:43
+msgid "Auroria's currency fell 12% over the past week. Keeping the same local price now brings home less cash. Reprice, hedge expected receipts, or invoice future overseas contracts in home currency."
+msgstr ""
+
 #: data/economy/fx.json
 msgid "Aurorian Note"
 msgstr ""
 
-#: scripts/ui/global_market_ui.gd:94
+#: scripts/ui/global_market_ui.gd:97
 msgid "Automatically convert weekly foreign payouts"
 msgstr ""
 
@@ -1283,6 +1343,10 @@ msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:8
 msgid "Ava Moreau"
+msgstr ""
+
+#: scripts/ui/modals/fx_risk_modal.gd:53
+msgid "Available to hedge (foreign units)"
 msgstr ""
 
 #: data/economy/marketplace.json
@@ -1301,7 +1365,7 @@ msgstr ""
 msgid "Awaiting courier"
 msgstr ""
 
-#: scripts/ui/global_market_ui.gd:101
+#: scripts/ui/global_market_ui.gd:104
 msgid "Awaiting payout (%s)"
 msgstr ""
 
@@ -1397,7 +1461,7 @@ msgstr ""
 msgid "Bank spread (home dollars)"
 msgstr ""
 
-#: scripts/ui/global_market_ui.gd:89
+#: scripts/ui/global_market_ui.gd:92
 msgid "Bank spread: %.1f%%"
 msgstr ""
 
@@ -1449,7 +1513,7 @@ msgstr ""
 msgid "Before a large payment moves, the bank confirms who is paying and who is being paid."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1186
+#: scripts/ui/modals/company_os.gd:1193
 msgid "Before the first customer"
 msgstr ""
 
@@ -1465,7 +1529,7 @@ msgstr ""
 msgid "Belt tightened."
 msgstr ""
 
-#: scripts/sim/contracts.gd:192
+#: scripts/sim/contracts.gd:203
 msgid "Best we can do: %s/unit, Net %d%s."
 msgstr ""
 
@@ -1493,7 +1557,7 @@ msgstr ""
 msgid "Bills are paid in cash. Plenty of profitable companies still run out of it."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1289
+#: scripts/ui/modals/company_os.gd:1296
 msgid "Binned"
 msgstr ""
 
@@ -1657,7 +1721,7 @@ msgstr ""
 msgid "Build a cash-flow spreadsheet for %s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1091
+#: scripts/ui/modals/company_os.gd:1098
 msgid "Build a software product"
 msgstr ""
 
@@ -1665,7 +1729,7 @@ msgstr ""
 msgid "Build an investor pitch deck for %s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1092
+#: scripts/ui/modals/company_os.gd:1099
 msgid "Build it once, sell it every month. Development hours now (you at a laptop, plus developers you hire), subscribers later. Price, churn and servers decide whether it works."
 msgstr ""
 
@@ -1673,11 +1737,11 @@ msgstr ""
 msgid "Build it once, sell it every month. Development hours now, subscribers later: price, churn and servers decide if it works."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1105
+#: scripts/ui/modals/company_os.gd:1112
 msgid "Build this"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1114
+#: scripts/ui/modals/company_os.gd:1121
 msgid "Building %s"
 msgstr ""
 
@@ -1701,11 +1765,11 @@ msgstr ""
 msgid "Business Registration — City of Aurelia"
 msgstr ""
 
-#: scripts/ui/modals/bank_modal.gd:99
+#: scripts/ui/modals/bank_modal.gd:102
 msgid "Business account opened. %s now runs on its own books."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1327
+#: scripts/sim/ecommerce.gd:1330
 msgid "Business assets contributed to %s (in kind)"
 msgstr ""
 
@@ -1733,7 +1797,7 @@ msgstr ""
 msgid "Business lending — Marcus Reed, weekdays 13:00–16:00"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:233 scripts/ui/modals/month_close_modal.gd:36
+#: scripts/ui/modals/company_os.gd:233 scripts/ui/modals/month_close_modal.gd:40
 msgid "Business profit"
 msgstr ""
 
@@ -1813,7 +1877,7 @@ msgstr ""
 msgid "Buyer"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1217
+#: scripts/sim/ecommerce.gd:1220
 msgid "Buyer %s opened a dispute on order %s. We refunded them and charged a $15 dispute fee."
 msgstr ""
 
@@ -1882,6 +1946,14 @@ msgid "CHAPTER 14 — CUSTOMS"
 msgstr ""
 
 #: data/story/chapters.json
+msgid "CHAPTER 15 — THE CURRENCY SWING"
+msgstr ""
+
+#: data/story/chapters.json
+msgid "CHAPTER 16 — A PARTNER OVERSEAS"
+msgstr ""
+
+#: data/story/chapters.json
 msgid "CHAPTER 2 — FIRST CUSTOMER"
 msgstr ""
 
@@ -1913,7 +1985,7 @@ msgstr ""
 msgid "CHAPTER 9 — CLEARING CRISIS"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1149
+#: scripts/ui/modals/company_os.gd:1156
 msgid "CHURN"
 msgstr ""
 
@@ -1965,7 +2037,7 @@ msgstr ""
 msgid "CRESTLINE"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1216
+#: scripts/ui/modals/company_os.gd:1223
 msgid "CUSTOMERS TODAY"
 msgstr ""
 
@@ -1995,6 +2067,14 @@ msgstr ""
 
 #: data/help/help.json
 msgid "Café: run a shop, not a warehouse"
+msgstr ""
+
+#: scripts/ui/modals/fx_risk_modal.gd:21
+msgid "Call Marcus about exchange risk"
+msgstr ""
+
+#: data/help/help.json
+msgid "Call Omar free, or pay for a one-day flight each way."
 msgstr ""
 
 #: scripts/ui/modals/sleep_modal.gd:23
@@ -2041,7 +2121,7 @@ msgstr ""
 msgid "Can't do that."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1399 scripts/ui/modals/company_os.gd:742
+#: scripts/ui/modals/company_os.gd:1406 scripts/ui/modals/company_os.gd:742
 msgid "Can't hire yet: %s."
 msgstr ""
 
@@ -2081,11 +2161,11 @@ msgstr ""
 msgid "Cancellation window ended. Return eligible stock within %d days of arrival."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1413
+#: scripts/ui/modals/company_os.gd:1420
 msgid "Cancelled"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1328
+#: scripts/sim/ecommerce.gd:1331
 msgid "Capital contributed in kind by founder"
 msgstr ""
 
@@ -2153,7 +2233,7 @@ msgstr ""
 msgid "Cash forecast · next 9 weeks"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:242 scripts/ui/modals/info_modal.gd:85
+#: scripts/ui/modals/company_os.gd:242 scripts/ui/modals/info_modal.gd:89
 msgid "Cash in bank"
 msgstr ""
 
@@ -2185,11 +2265,11 @@ msgstr ""
 msgid "Cash stays positive for the next 9 weeks (lowest %s)."
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:46
+#: scripts/ui/modals/month_close_modal.gd:50
 msgid "Cash — end of month"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:43
+#: scripts/ui/modals/month_close_modal.gd:47
 msgid "Cash — start of month"
 msgstr ""
 
@@ -2241,7 +2321,7 @@ msgstr ""
 msgid "Cheap and trusted, but slow: the supplier waits for the money, so your stock arrives later. Order earlier when you pay this way."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1173
+#: scripts/ui/modals/company_os.gd:1180
 msgid "Cheaper brings more signups; features and support keep people subscribed. Servers cost more as you grow."
 msgstr ""
 
@@ -2301,6 +2381,10 @@ msgstr ""
 msgid "Choose a delivery-duty policy and a supported tariff code."
 msgstr ""
 
+#: scripts/sim/fx_forward.gd:40
+msgid "Choose a foreign currency, positive notional and a 30- or 60-day maturity."
+msgstr ""
+
 #: scripts/sim/global_market.gd:66
 msgid "Choose a supported overseas region."
 msgstr ""
@@ -2317,6 +2401,10 @@ msgstr ""
 msgid "Choose electronics, household goods, textiles or general goods according to the actual product."
 msgstr ""
 
+#: scripts/ui/modals/fx_risk_modal.gd:70
+msgid "Choose home-currency invoices"
+msgstr ""
+
 #: data/help/help.json
 msgid "Choose the actual product category. Correcting a held parcel means duty plus a penalty; documents halve the fine but add 2 days. Withdrawal restores goods, not freight."
 msgstr ""
@@ -2331,6 +2419,10 @@ msgstr ""
 
 #: scripts/sim/trade_quote.gd:17
 msgid "Choose two different trading regions."
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:68
+msgid "Choose your personal account or the current company account."
 msgstr ""
 
 #: data/help/glossary.json
@@ -2353,7 +2445,7 @@ msgstr ""
 msgid "City Hall"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1206
+#: scripts/ui/modals/company_os.gd:1213
 msgid "City Hall is processing it (ready %s)"
 msgstr ""
 
@@ -2417,7 +2509,7 @@ msgstr ""
 msgid "Client payment — %s"
 msgstr ""
 
-#: scripts/ui/minigames/typing_game.gd:44 scripts/ui/modals/company_os.gd:1057
+#: scripts/ui/minigames/typing_game.gd:44 scripts/ui/modals/company_os.gd:1064
 msgid "Client work"
 msgstr ""
 
@@ -2453,11 +2545,11 @@ msgstr ""
 msgid "Closed %s. Stock sold for %s; %s of debt written off. Starting again."
 msgstr ""
 
-#: scripts/sim/month_close.gd:94
+#: scripts/sim/month_close.gd:95
 msgid "Closed %s: business profit %s, cash %s."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1222
+#: scripts/ui/modals/company_os.gd:1229
 msgid "Closed now"
 msgstr ""
 
@@ -2481,11 +2573,11 @@ msgstr ""
 msgid "Co-working, incubators and a very caffeinated founder scene."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1170
+#: scripts/ui/modals/company_os.gd:1177
 msgid "Code a feature for %d hours"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1124
+#: scripts/ui/modals/company_os.gd:1131
 msgid "Code for %d hours"
 msgstr ""
 
@@ -2493,11 +2585,11 @@ msgstr ""
 msgid "Coding session"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1049
+#: scripts/ui/modals/company_os.gd:1056
 msgid "Coding session done: %.1f hours of work."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1044
+#: scripts/ui/modals/company_os.gd:1051
 msgid "Coding session — %s"
 msgstr ""
 
@@ -2517,7 +2609,7 @@ msgstr ""
 msgid "Coffee — %s. Tastes like possibility."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1250
+#: scripts/ui/modals/company_os.gd:1257
 msgid "Coffee, milk and cups: %d cups in stock"
 msgstr ""
 
@@ -2557,12 +2649,24 @@ msgstr ""
 msgid "Community Manager"
 msgstr ""
 
-#: scripts/ui/modals/bank_modal.gd:75
+#: scripts/ui/modals/bank_modal.gd:78
 msgid "Company"
 msgstr ""
 
 #: data/help/help.json
 msgid "Company OS: your business computer"
+msgstr ""
+
+#: scripts/ui/modals/overseas_partner_modal.gd:42
+msgid "Company account"
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:162
+msgid "Company cash must cover sea freight and arrival duty before dispatch."
+msgstr ""
+
+#: scripts/sim/fx_forward.gd:48
+msgid "Company cash must cover the fee and refundable hedge collateral. Transfer cash or reduce the amount."
 msgstr ""
 
 #: scripts/sim/bank.gd:103
@@ -2593,8 +2697,16 @@ msgstr ""
 msgid "Company registration fee — %s"
 msgstr ""
 
+#: scripts/ui/overseas_partner_ui.gd:10
+msgid "Compare Lumina partners"
+msgstr ""
+
 #: scripts/ui/modals/trade_quote_modal.gd:105
 msgid "Compare buyer landed cost with demand before choosing a route."
+msgstr ""
+
+#: data/help/help.json
+msgid "Compare local repricing, a paid forward hedge, or future home-currency invoices."
 msgstr ""
 
 #: data/help/glossary.json
@@ -2603,6 +2715,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "Compare supply and buyer regions, quantities, trade terms, cargo transport and payment methods."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Compare the cash you will collect with costs already paid in home currency."
 msgstr ""
 
 #: scripts/ui/modals/global_region_modal.gd:29
@@ -2657,6 +2773,14 @@ msgstr ""
 msgid "Consumer"
 msgstr ""
 
+#: data/story/chapters.json
+msgid "Contact Omar in Lumina, by video or on a business trip"
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:130 scripts/sim/overseas_partners.gd:99
+msgid "Contact Omar with a live registered company first."
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:795
 msgid "Contacts"
 msgstr ""
@@ -2669,15 +2793,15 @@ msgstr ""
 msgid "Containers, customs and freight. Rent Pier 7 for stock, buy a used van from Sam, and start delivering."
 msgstr ""
 
-#: scripts/frontend/main_menu.gd:48 scripts/ui/minigames/mini_game.gd:173 scripts/ui/modals/month_close_modal.gd:56
+#: scripts/frontend/main_menu.gd:48 scripts/ui/minigames/mini_game.gd:173 scripts/ui/modals/month_close_modal.gd:60
 msgid "Continue"
 msgstr ""
 
-#: scripts/sim/contracts.gd:259
+#: scripts/sim/contracts.gd:291
 msgid "Contract %s delivered to %s: %d × %s @ %s"
 msgstr ""
 
-#: scripts/sim/contracts.gd:295
+#: scripts/sim/contracts.gd:330
 msgid "Contract %s is overdue. Late penalty %s applies."
 msgstr ""
 
@@ -2697,11 +2821,11 @@ msgstr ""
 msgid "Conversion records the difference as an exchange gain or loss. A refund needing new foreign currency can also realize a difference."
 msgstr ""
 
-#: scripts/sim/global_market.gd:233
+#: scripts/sim/global_market.gd:236
 msgid "Convert %s %s to home cash: %s"
 msgstr ""
 
-#: scripts/ui/global_market_ui.gd:104
+#: scripts/ui/global_market_ui.gd:107
 msgid "Convert to home cash (%s)"
 msgstr ""
 
@@ -2773,7 +2897,7 @@ msgstr ""
 msgid "Counted: %s of %s"
 msgstr ""
 
-#: scripts/sim/contracts.gd:163
+#: scripts/sim/contracts.gd:172
 msgid "Counter: %s/unit, Net %d%s"
 msgstr ""
 
@@ -2789,7 +2913,7 @@ msgstr ""
 msgid "Courier collects it (or carry it)"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1011
+#: scripts/sim/ecommerce.gd:1012
 msgid "Courier picked up %d parcel%s."
 msgstr ""
 
@@ -2797,7 +2921,7 @@ msgstr ""
 msgid "Courier picks up in ~2 hours and adds a %s pickup fee."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:955
+#: scripts/sim/ecommerce.gd:956
 msgid "Courier pickup: %d parcels (%s)"
 msgstr ""
 
@@ -2817,8 +2941,12 @@ msgstr ""
 msgid "Courier · Express 1d (%s)"
 msgstr ""
 
-#: scripts/ui/global_market_ui.gd:76
+#: scripts/ui/global_market_ui.gd:78
 msgid "Create a product listing in Domestic sales first, then set its overseas price here."
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:102
+msgid "Create an active product listing first; Omar needs a product and a price."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:263
@@ -2905,7 +3033,15 @@ msgstr ""
 msgid "Customer Support"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1289
+#: data/help/glossary.json
+msgid "Customer ownership changes both margin and who bears unsold-stock risk."
+msgstr ""
+
+#: scripts/ui/overseas_partner_ui.gd:65
+msgid "Customer ownership — 90-day estimate"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:1296
 msgid "Customers"
 msgstr ""
 
@@ -2981,7 +3117,7 @@ msgstr ""
 msgid "DOCKSIDE MOTORS"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1346
+#: scripts/ui/modals/company_os.gd:1353
 msgid "DRIVERS"
 msgstr ""
 
@@ -3033,7 +3169,7 @@ msgstr ""
 msgid "Data protection registration"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1289
+#: scripts/ui/modals/company_os.gd:1296
 msgid "Day"
 msgstr ""
 
@@ -3077,7 +3213,7 @@ msgstr ""
 msgid "Deal with an unhappy customer (check your phone)"
 msgstr ""
 
-#: scripts/sim/contracts.gd:173
+#: scripts/sim/contracts.gd:183
 msgid "Deal. Send it over."
 msgstr ""
 
@@ -3125,7 +3261,7 @@ msgstr ""
 msgid "Decline: stay independent"
 msgstr ""
 
-#: scripts/sim/contracts.gd:147
+#: scripts/sim/contracts.gd:154
 msgid "Declined."
 msgstr ""
 
@@ -3149,7 +3285,7 @@ msgstr ""
 msgid "Deliver before the deadline for the full fee; late work loses 20% and your reputation. Clients pay on their terms."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1387
+#: scripts/ui/modals/company_os.gd:1394
 msgid "Deliver by %s"
 msgstr ""
 
@@ -3157,15 +3293,15 @@ msgstr ""
 msgid "Deliver to:"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1067
+#: scripts/ui/modals/company_os.gd:1074
 msgid "Delivered and invoiced: %s."
 msgstr ""
 
-#: scripts/sim/contracts.gd:265
+#: scripts/sim/contracts.gd:297
 msgid "Delivered%s. Invoice %s due in %d days."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:913
+#: scripts/ui/modals/company_os.gd:918
 msgid "Delivered. Invoice %s due in %d days."
 msgstr ""
 
@@ -3213,7 +3349,7 @@ msgstr ""
 msgid "Deposit"
 msgstr ""
 
-#: scripts/sim/contracts.gd:133
+#: scripts/sim/contracts.gd:140
 msgid "Deposit received from %s (%s)"
 msgstr ""
 
@@ -3297,8 +3433,44 @@ msgstr ""
 msgid "Dining"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1218
+#: scripts/ui/modals/company_os.gd:908
+msgid "Dispatch %d units to Lumina; freight and duty charged now"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:916
+msgid "Dispatched. Revenue is booked on arrival; payment follows delivery."
+msgstr ""
+
+#: scripts/sim/ecommerce.gd:1221
 msgid "Dispute lost on %s: −%s"
+msgstr ""
+
+#: data/help/glossary.json scripts/ui/modals/overseas_partner_modal.gd:51 scripts/ui/modals/overseas_partner_modal.gd:58
+msgid "Distributor"
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:216
+msgid "Distributor %s dispatched: %d units"
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:232
+msgid "Distributor %s received; invoice %s"
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:218
+msgid "Distributor duty %s: %s"
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:217
+msgid "Distributor freight %s: %s"
+msgstr ""
+
+#: scripts/ui/overseas_partner_ui.gd:78
+msgid "Distributor margin estimate (home dollars)"
+msgstr ""
+
+#: data/help/help.json
+msgid "Distributor: wholesale price and Omar owns the customers. Warehouse: retail customers, sea freight, duty and monthly rent."
 msgstr ""
 
 #: data/help/help.json
@@ -3333,11 +3505,11 @@ msgstr ""
 msgid "Doesn't turn on."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1130
+#: scripts/sim/ecommerce.gd:1133
 msgid "Doesn't work. Out of the box."
 msgstr ""
 
-#: scripts/ui/global_market_ui.gd:77 scripts/ui/modals/company_os.gd:325
+#: scripts/ui/global_market_ui.gd:79 scripts/ui/modals/company_os.gd:325
 msgid "Domestic"
 msgstr ""
 
@@ -3349,7 +3521,7 @@ msgstr ""
 msgid "Don't forget to eat."
 msgstr ""
 
-#: scripts/ui/modals/bank_modal.gd:90 scripts/ui/modals/pack_ship_modal.gd:70 scripts/ui/modals/permits_modal.gd:17
+#: scripts/ui/modals/bank_modal.gd:93 scripts/ui/modals/pack_ship_modal.gd:70 scripts/ui/modals/permits_modal.gd:17
 msgid "Done"
 msgstr ""
 
@@ -3381,7 +3553,7 @@ msgstr ""
 msgid "Drinks served exactly right: %d / %d"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1389
+#: scripts/ui/modals/company_os.gd:1396
 msgid "Drive it"
 msgstr ""
 
@@ -3389,7 +3561,7 @@ msgstr ""
 msgid "Drive the route"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1392
+#: scripts/ui/modals/company_os.gd:1399
 msgid "Drivers"
 msgstr ""
 
@@ -3485,7 +3657,7 @@ msgstr ""
 msgid "Early payment discount"
 msgstr ""
 
-#: scripts/sim/contracts.gd:317
+#: scripts/sim/contracts.gd:366
 msgid "Early payment from %s (%s), %s discount"
 msgstr ""
 
@@ -3749,6 +3921,18 @@ msgstr ""
 msgid "Exchange rate difference (home dollars)"
 msgstr ""
 
+#: scripts/ui/overseas_partner_ui.gd:42
+msgid "Exchange response — compare the assumptions"
+msgstr ""
+
+#: data/help/glossary.json data/story/chapters.json scripts/ui/overseas_partner_ui.gd:36
+msgid "Exchange risk"
+msgstr ""
+
+#: scripts/ui/modals/info_modal.gd:69
+msgid "Exchange-risk briefing: Auroria fell %.0f%% at the start of this chapter. Unchanged local prices bring home less cash; compare repricing, forward hedging and home-currency invoices."
+msgstr ""
+
 #: data/character/options.json
 msgid "Executive"
 msgstr ""
@@ -3757,11 +3941,11 @@ msgstr ""
 msgid "Exit"
 msgstr ""
 
-#: scripts/ui/global_market_ui.gd:74
+#: scripts/ui/global_market_ui.gd:76
 msgid "Expected demand: %.1f orders/day"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1152
+#: scripts/ui/modals/company_os.gd:1159
 msgid "Expected signups: %.1f/day · features shipped: %d · next feature %d / %d h"
 msgstr ""
 
@@ -3821,7 +4005,7 @@ msgstr ""
 msgid "FROZEN · BACK "
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1345
+#: scripts/ui/modals/company_os.gd:1352
 msgid "FUEL, 7 DAYS"
 msgstr ""
 
@@ -3881,6 +4065,14 @@ msgstr ""
 msgid "Feb"
 msgstr ""
 
+#: scripts/ui/overseas_partner_ui.gd:21
+msgid "Fee / collateral (home dollars)"
+msgstr ""
+
+#: scripts/ui/modals/fx_risk_modal.gd:57
+msgid "Fee / refundable collateral (home dollars)"
+msgstr ""
+
 #: data/character/options.json
 msgid "Feminine"
 msgstr ""
@@ -3917,11 +4109,11 @@ msgstr ""
 msgid "Financial District"
 msgstr ""
 
-#: scripts/ui/global_market_ui.gd:27
+#: scripts/ui/global_market_ui.gd:28
 msgid "Find City Hall"
 msgstr ""
 
-#: scripts/ui/global_market_ui.gd:34
+#: scripts/ui/global_market_ui.gd:35
 msgid "Find Nexus Bank"
 msgstr ""
 
@@ -3953,7 +4145,7 @@ msgstr ""
 msgid "First order abroad"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1249
+#: scripts/sim/ecommerce.gd:1252
 msgid "First payout from ShopLane: %s."
 msgstr ""
 
@@ -3973,7 +4165,7 @@ msgstr ""
 msgid "First revenue! ShopLane pays out on Mondays."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1057
+#: scripts/sim/ecommerce.gd:1060
 msgid "First sale: %s bought %s for %s."
 msgstr ""
 
@@ -3981,11 +4173,11 @@ msgstr ""
 msgid "First unhappy customer"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1195
+#: scripts/ui/modals/company_os.gd:1202
 msgid "Fit out (%s)"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1189 scripts/ui/modals/company_os.gd:1191 scripts/ui/modals/company_os.gd:1193
+#: scripts/ui/modals/company_os.gd:1196 scripts/ui/modals/company_os.gd:1198 scripts/ui/modals/company_os.gd:1200
 msgid "Fit out: espresso machine, counter, tables"
 msgstr ""
 
@@ -4001,7 +4193,7 @@ msgstr ""
 msgid "Fitted out %s."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1191
+#: scripts/ui/modals/company_os.gd:1198
 msgid "Fitters at work until %s"
 msgstr ""
 
@@ -4021,11 +4213,15 @@ msgstr ""
 msgid "Flat white"
 msgstr ""
 
+#: scripts/ui/modals/overseas_partner_modal.gd:38
+msgid "Flight each way (home dollars)"
+msgstr ""
+
 #: scripts/sim/cafe.gd:314
 msgid "Flyers and a board for %s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1276
+#: scripts/ui/modals/company_os.gd:1283
 msgid "Flyers and a street board, per day:"
 msgstr ""
 
@@ -4041,7 +4237,7 @@ msgstr ""
 msgid "Food"
 msgstr ""
 
-#: scripts/sim/cafe.gd:128 scripts/ui/modals/company_os.gd:1209
+#: scripts/sim/cafe.gd:128 scripts/ui/modals/company_os.gd:1216
 msgid "Food handling licence"
 msgstr ""
 
@@ -4090,10 +4286,14 @@ msgid "Foreign payouts keep their currency. Check the current rate before conver
 msgstr ""
 
 #: data/help/glossary.json
+msgid "Foreign receipts change home value when exchange quotes move."
+msgstr ""
+
+#: data/help/glossary.json
 msgid "Foreign receipts retain their historical home-dollar book value until you convert them."
 msgstr ""
 
-#: scripts/sim/global_market.gd:285
+#: scripts/sim/global_market.gd:289
 msgid "Foreign receipts transferred for company closure"
 msgstr ""
 
@@ -4107,6 +4307,22 @@ msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:135
 msgid "Forms handled correctly: %d / %d"
+msgstr ""
+
+#: scripts/sim/fx_forward.gd:62
+msgid "Forward %s fee: %s"
+msgstr ""
+
+#: scripts/sim/fx_forward.gd:63
+msgid "Forward %s refundable collateral: %s"
+msgstr ""
+
+#: scripts/sim/fx_forward.gd:82
+msgid "Forward %s settled at %s: exchange result %s"
+msgstr ""
+
+#: data/help/glossary.json scripts/ui/modals/fx_risk_modal.gd:26 scripts/ui/overseas_partner_ui.gd:16
+msgid "Forward contract"
 msgstr ""
 
 #: data/economy/marketplace.json
@@ -4149,7 +4365,7 @@ msgstr ""
 msgid "Freelance Consulting"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:965
+#: scripts/ui/modals/company_os.gd:972
 msgid "Freelance consulting"
 msgstr ""
 
@@ -4235,6 +4451,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:470
 msgid "Fulfilment pipeline"
+msgstr ""
+
+#: scripts/ui/modals/fx_risk_modal.gd:69
+msgid "Future overseas distributor offers can use home currency. Buyers take the exchange risk: acceptance is lower and their offer is cheaper. Existing invoices keep their agreed currency."
 msgstr ""
 
 #: scripts/ui/modals/permits_modal.gd:123 scripts/ui/modals/permits_modal.gd:57
@@ -4389,7 +4609,7 @@ msgstr ""
 msgid "Gross margin"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:227 scripts/ui/modals/info_modal.gd:84 scripts/ui/modals/month_close_modal.gd:30
+#: scripts/ui/modals/company_os.gd:227 scripts/ui/modals/info_modal.gd:88 scripts/ui/modals/month_close_modal.gd:30
 msgid "Gross profit"
 msgstr ""
 
@@ -4601,7 +4821,7 @@ msgstr ""
 msgid "Here's what your books support. Borrow what you need, not what you're offered."
 msgstr ""
 
-#: scripts/sim/contracts.gd:294
+#: scripts/sim/contracts.gd:329
 msgid "Hey — the %d %s were due today. Still coming?"
 msgstr ""
 
@@ -4653,7 +4873,7 @@ msgstr ""
 msgid "Hire"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1137
+#: scripts/ui/modals/company_os.gd:1144
 msgid "Hire a Software Developer (People tab) to build while you do other things."
 msgstr ""
 
@@ -4703,6 +4923,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:237
 msgid "Home rent + living"
+msgstr ""
+
+#: data/help/glossary.json scripts/ui/modals/fx_risk_modal.gd:68
+msgid "Home-currency invoices"
 msgstr ""
 
 #: data/dialogue/maya_intro.json
@@ -4769,6 +4993,10 @@ msgstr ""
 msgid "How's the van treating you? Listen for the gearbox on the bridges, and don't leave it idling at the kerb."
 msgstr ""
 
+#: data/dialogue/omar_trade.json
+msgid "I buy at wholesale and keep the customers. A warehouse leaves the customers and margin with you, but you fund sea freight, duty, storage and slow stock. A video call works if you cannot afford a flight."
+msgstr ""
+
 #: data/dialogue/elena_cameo.json
 msgid "I invest in companies, not ideas. Register one and we'll talk."
 msgstr ""
@@ -4799,6 +5027,10 @@ msgstr ""
 
 #: data/dialogue/ana_register.json
 msgid "I want to register a company."
+msgstr ""
+
+#: data/dialogue/marcus_fx.json data/dialogue/omar_trade.json
+msgid "I will compare before committing cash."
 msgstr ""
 
 #: data/dialogue/marcus_global.json
@@ -4937,7 +5169,7 @@ msgstr ""
 msgid "In plain words: the van is a company expense today. It only pays back if you keep it busy, with your own parcels and delivery runs."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1374
+#: scripts/ui/modals/company_os.gd:1381
 msgid "In plain words: you get the fee if you finish by the deadline; a late run pays %d%% less, and one left undone for hours is cancelled."
 msgstr ""
 
@@ -4945,7 +5177,7 @@ msgstr ""
 msgid "In plain words: you pay %s every month for the space, full or empty. Lease it once you have stock to put in it."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:981
+#: scripts/ui/modals/company_os.gd:988
 msgid "In progress"
 msgstr ""
 
@@ -5041,7 +5273,7 @@ msgstr ""
 msgid "International Trade"
 msgstr ""
 
-#: scripts/ui/modals/bank_modal.gd:54
+#: scripts/ui/modals/bank_modal.gd:57
 msgid "International account"
 msgstr ""
 
@@ -5065,11 +5297,11 @@ msgstr ""
 msgid "International freight (home dollars)"
 msgstr ""
 
-#: scripts/sim/global_market.gd:309
+#: scripts/sim/global_market.gd:313
 msgid "International return postage"
 msgstr ""
 
-#: data/help/glossary.json scripts/ui/global_market_ui.gd:80 scripts/ui/modals/global_region_modal.gd:27
+#: data/help/glossary.json scripts/ui/global_market_ui.gd:82 scripts/ui/modals/global_region_modal.gd:27
 msgid "International shipping"
 msgstr ""
 
@@ -5105,11 +5337,11 @@ msgstr ""
 msgid "Investors own %s of it, so your share is %s."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:937
+#: scripts/ui/modals/company_os.gd:944
 msgid "Invoice %s · due %s"
 msgstr ""
 
-#: scripts/sim/contracts.gd:299
+#: scripts/sim/contracts.gd:346
 msgid "Invoice paid by %s (%s)"
 msgstr ""
 
@@ -5121,7 +5353,7 @@ msgstr ""
 msgid "Invoice — %s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1038
+#: scripts/ui/modals/company_os.gd:1045
 msgid "Invoiced, not yet paid"
 msgstr ""
 
@@ -5309,8 +5541,20 @@ msgstr ""
 msgid "Keep coffee supplies in (they arrive at 6:00 the next morning) and set the daily pastry order; unsold pastries are binned at closing."
 msgstr ""
 
+#: scripts/sim/overseas_partners.gd:202
+msgid "Keep company cash for distributor freight and duty before dispatch."
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:74
+msgid "Keep enough cash for the ticket, or call Omar by video."
+msgstr ""
+
 #: scripts/sim/global_market.gd:47
 msgid "Keep enough company cash for the international account fee."
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:150
+msgid "Keep enough unreserved domestic stock before sending a batch overseas."
 msgstr ""
 
 #: data/events/low_cash_warning.json
@@ -5433,7 +5677,7 @@ msgstr ""
 msgid "Lantern Books"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1183
+#: scripts/ui/modals/company_os.gd:1190
 msgid "Lantern Row, Old Town · open Mon–Sat 7:00–17:00"
 msgstr ""
 
@@ -5457,11 +5701,11 @@ msgstr ""
 msgid "Large cup"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1284
+#: scripts/ui/modals/company_os.gd:1291
 msgid "Last days"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1413
+#: scripts/ui/modals/company_os.gd:1420
 msgid "Late"
 msgstr ""
 
@@ -5485,7 +5729,7 @@ msgstr ""
 msgid "Latte"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1127
+#: scripts/ui/modals/company_os.gd:1134
 msgid "Launch at %s/month"
 msgstr ""
 
@@ -5529,7 +5773,7 @@ msgstr ""
 msgid "Lease the café unit first."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1187
+#: scripts/ui/modals/company_os.gd:1194
 msgid "Lease the corner unit"
 msgstr ""
 
@@ -5793,11 +6037,19 @@ msgstr ""
 msgid "Local wholesaler. Reliable, not the cheapest."
 msgstr ""
 
+#: data/help/glossary.json
+msgid "Lock a sale rate for expected foreign receipts, with a fee and refundable collateral."
+msgstr ""
+
 #: data/events/supplier_price_increase.json
 msgid "Lock in {moq} more at today's price"
 msgstr ""
 
-#: data/businesses/logistics.json data/regions/karu.json data/regions/lumina.json scripts/ui/modals/company_os.gd:1334
+#: scripts/ui/modals/fx_risk_modal.gd:56
+msgid "Locked quote (home dollars/foreign unit)"
+msgstr ""
+
+#: data/businesses/logistics.json data/regions/karu.json data/regions/lumina.json scripts/ui/modals/company_os.gd:1341
 msgid "Logistics"
 msgstr ""
 
@@ -5893,12 +6145,68 @@ msgstr ""
 msgid "Lumina"
 msgstr ""
 
+#: scripts/sim/overseas_partners.gd:75
+msgid "Lumina %s flight ticket: %s"
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:253
+msgid "Lumina 3PL shipment %s: %s"
+msgstr ""
+
 #: data/economy/fx.json
 msgid "Lumina Credit"
 msgstr ""
 
 #: data/suppliers/lumina_direct.json
 msgid "Lumina Direct (import agent)"
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:184
+msgid "Lumina batch arrived: %d units"
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:166
+msgid "Lumina batch duty: %s"
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:317
+msgid "Lumina distributor goods written off at closure"
+msgstr ""
+
+#: scripts/sim/contracts.gd:169
+msgid "Lumina distributor invoices are paid after arrival; choose 0% upfront."
+msgstr ""
+
+#: scripts/sim/contracts.gd:341
+msgid "Lumina invoice %s paid: %s"
+msgstr ""
+
+#: scripts/sim/contracts.gd:359
+msgid "Lumina invoices follow their agreed settlement date; early payment is unavailable."
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:82
+msgid "Lumina journey"
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:285
+msgid "Lumina monthly stock rent: %s"
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:165
+msgid "Lumina sea freight: %s"
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:164
+msgid "Lumina stock batch: %d units"
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:313
+msgid "Lumina transit stock written off at closure"
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:138
+msgid "Lumina warehouse opening: %s"
 msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:8
@@ -5929,15 +6237,15 @@ msgstr ""
 msgid "MOQ %d · %dd · %s duds"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1148
+#: scripts/ui/modals/company_os.gd:1155
 msgid "MRR"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1103
+#: scripts/ui/modals/company_os.gd:1110
 msgid "MVP %d dev hours · typical price %s/month · market ~%d customers · churn ~%d%%/month"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1121
+#: scripts/ui/modals/company_os.gd:1128
 msgid "MVP: %d / %d dev hours · your team adds %.1f h per workday"
 msgstr ""
 
@@ -5963,6 +6271,14 @@ msgstr ""
 
 #: data/story/chapters.json
 msgid "Make your first payroll: keep cash in the company for Friday 17:00"
+msgstr ""
+
+#: data/help/help.json scripts/ui/modals/bank_modal.gd:52 scripts/ui/overseas_partner_ui.gd:26 scripts/ui/overseas_partner_ui.gd:7
+msgid "Manage exchange risk"
+msgstr ""
+
+#: scripts/ui/modals/fx_risk_modal.gd:11
+msgid "Manage foreign receipts"
 msgstr ""
 
 #: data/businesses/manufacturing.json data/regions/lumina.json
@@ -6101,7 +6417,7 @@ msgstr ""
 msgid "Meet Marcus Reed now"
 msgstr ""
 
-#: scripts/ui/hud.gd:108 scripts/ui/modals/company_os.gd:1231
+#: scripts/ui/hud.gd:108 scripts/ui/modals/company_os.gd:1238
 msgid "Menu"
 msgstr ""
 
@@ -6349,7 +6665,7 @@ msgstr ""
 msgid "Nair"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1299
+#: scripts/ui/modals/company_os.gd:1306
 msgid "Name over the door"
 msgstr ""
 
@@ -6389,6 +6705,10 @@ msgstr ""
 msgid "Net %d%s"
 msgstr ""
 
+#: scripts/ui/overseas_partner_ui.gd:37
+msgid "Net per unit now: %s; before the currency fall: %s (home dollars, platform fee and bank spread included; stock, freight and duty excluded)."
+msgstr ""
+
 #: scripts/ui/modals/export_income_modal.gd:33
 msgid "Net receipt before stock and packing (home dollars)"
 msgstr ""
@@ -6409,7 +6729,7 @@ msgstr ""
 msgid "New order %s — %s — %s"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1113
+#: scripts/sim/ecommerce.gd:1116
 msgid "New review %s: %s \"%s\""
 msgstr ""
 
@@ -6417,7 +6737,7 @@ msgstr ""
 msgid "New rules for big payments and imports: read the news board at Bloom Coffee"
 msgstr ""
 
-#: scripts/ui/modals/info_modal.gd:77
+#: scripts/ui/modals/info_modal.gd:81
 msgid "News board"
 msgstr ""
 
@@ -6505,8 +6825,12 @@ msgstr ""
 msgid "Nineteen hundred a month, two months' deposit. It comes empty: you fit it out, and City Hall wants a food licence before you sell a single croissant."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1168
+#: scripts/sim/ecommerce.gd:1171
 msgid "No %s in stock to send."
+msgstr ""
+
+#: scripts/ui/overseas_partner_ui.gd:70
+msgid "No active product price is available. The expansion ended through the review or company-closure alternative, without invented sales."
 msgstr ""
 
 #: data/events/viral_mention.json
@@ -6537,7 +6861,7 @@ msgstr ""
 msgid "No defects on arrival · delivered by the due date"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1397
+#: scripts/ui/modals/company_os.gd:1404
 msgid "No driver yet. Hire a Van Driver in the People tab to have the van work while you do something else."
 msgstr ""
 
@@ -6545,11 +6869,11 @@ msgstr ""
 msgid "No employees yet. Every order is packed by you, which is why time matters."
 msgstr ""
 
-#: scripts/sim/global_market.gd:227
+#: scripts/sim/global_market.gd:230
 msgid "No foreign payout is ready to convert."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:984
+#: scripts/ui/modals/company_os.gd:991
 msgid "No gigs in progress. Pick one below."
 msgstr ""
 
@@ -6569,7 +6893,7 @@ msgstr ""
 msgid "No milk"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1014
+#: scripts/ui/modals/company_os.gd:1021
 msgid "No new offers. More arrive every morning at 8:00."
 msgstr ""
 
@@ -6601,7 +6925,7 @@ msgstr ""
 msgid "No risk. No revenue."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1349
+#: scripts/ui/modals/company_os.gd:1356
 msgid "No runs on the board. Clients post new ones every morning at 7:00."
 msgstr ""
 
@@ -6637,8 +6961,12 @@ msgstr ""
 msgid "No such loan."
 msgstr ""
 
-#: scripts/sim/contracts.gd:343
+#: scripts/sim/contracts.gd:392
 msgid "No supplier carries this product."
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:115
+msgid "No unreserved overseas stock remains to sell."
 msgstr ""
 
 #: scripts/sim/trade_quote.gd:30
@@ -6657,7 +6985,7 @@ msgstr ""
 msgid "Nobody at the counter. Registration: Mon–Fri 9:00–17:00."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1230
+#: scripts/ui/modals/company_os.gd:1237
 msgid "Nobody's on staff behind the counter: the café only opens while you work it yourself (the counter, inside the café). Hire a Barista in the People tab to open every day."
 msgstr ""
 
@@ -6717,7 +7045,7 @@ msgstr ""
 msgid "Not enough company cash; withdraw the parcel or transfer cash first."
 msgstr ""
 
-#: scripts/sim/contracts.gd:353
+#: scripts/sim/contracts.gd:402
 msgid "Not enough storage for %d more units (most free space: %d). Lease Suite 2B for 1,500 units."
 msgstr ""
 
@@ -6777,7 +7105,7 @@ msgstr ""
 msgid "Nothing on the rails today."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:949
+#: scripts/sim/ecommerce.gd:950
 msgid "Nothing packed here."
 msgstr ""
 
@@ -6785,7 +7113,7 @@ msgstr ""
 msgid "Nothing packed — is the stock at this location?"
 msgstr ""
 
-#: scripts/sim/contracts.gd:209
+#: scripts/sim/contracts.gd:225
 msgid "Nothing to deliver."
 msgstr ""
 
@@ -6805,12 +7133,16 @@ msgstr ""
 msgid "Nothing to pack here: is the stock at this location?"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1146
+#: scripts/sim/ecommerce.gd:1149
 msgid "Nothing to resolve."
 msgstr ""
 
 #: scripts/ui/phone_ui.gd:278
 msgid "Notifications only.\nManage at a desk: Company OS."
+msgstr ""
+
+#: scripts/sim/fx_forward.gd:42
+msgid "Notional exceeds receipts and estimated sales available to hedge. Reduce the amount."
 msgstr ""
 
 #: autoload/clock.gd:14
@@ -6821,7 +7153,7 @@ msgstr ""
 msgid "Novak"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1132
+#: scripts/ui/modals/company_os.gd:1139
 msgid "Now the real work starts: keep them subscribed."
 msgstr ""
 
@@ -6893,8 +7225,12 @@ msgstr ""
 msgid "Offer 30% back, they keep it"
 msgstr ""
 
-#: scripts/sim/contracts.gd:289
+#: scripts/sim/contracts.gd:324
 msgid "Offer expired."
+msgstr ""
+
+#: scripts/ui/modals/overseas_partner_modal.gd:97
+msgid "Offer remaining stock to Omar"
 msgstr ""
 
 #: scripts/sim/contracts.gd:29
@@ -6953,6 +7289,22 @@ msgstr ""
 msgid "Omar"
 msgstr ""
 
+#: data/npcs/omar.json
+msgid "Omar Haddad"
+msgstr ""
+
+#: scripts/ui/modals/overseas_partner_modal.gd:59
+msgid "Omar buys a batch at 55% of your retail price and owns the customers. You fund freight and stock; payment follows delivery. A home-currency quote pays less and may be declined."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Omar buys a batch at wholesale and owns the customer relationship."
+msgstr ""
+
+#: scripts/ui/modals/overseas_partner_modal.gd:10
+msgid "Omar — your Lumina partner"
+msgstr ""
+
 #: scripts/ui/modals/pause_menu.gd:60
 msgid "On"
 msgstr ""
@@ -6969,7 +7321,7 @@ msgstr ""
 msgid "On the way from suppliers: %d"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1413
+#: scripts/ui/modals/company_os.gd:1420
 msgid "On time"
 msgstr ""
 
@@ -6979,6 +7331,10 @@ msgstr ""
 
 #: scripts/ui/modals/trade_quote_modal.gd:42
 msgid "On vessel loading"
+msgstr ""
+
+#: scripts/ui/modals/overseas_partner_modal.gd:47
+msgid "One day passes each way. Your businesses keep running. If ticket cash is short, use the video call."
 msgstr ""
 
 #: data/events/customer_return.json
@@ -7005,7 +7361,7 @@ msgstr ""
 msgid "Online retail spending up 14% year-on-year."
 msgstr ""
 
-#: scripts/sim/contracts.gd:314
+#: scripts/sim/contracts.gd:363
 msgid "Only a delivered, unpaid invoice can be paid early."
 msgstr ""
 
@@ -7039,6 +7395,14 @@ msgstr ""
 
 #: scripts/ui/tutorial.gd:50
 msgid "Open Company OS at your laptop at home, or at a hot desk while your co-work pass is valid. Everything about your business happens here."
+msgstr ""
+
+#: scripts/ui/modals/overseas_partner_modal.gd:95
+msgid "Open Lumina Overseas sales and save a local price. Warehouse orders then pack and ship automatically after the batch arrives."
+msgstr ""
+
+#: scripts/ui/modals/overseas_partner_modal.gd:77
+msgid "Open Lumina warehouse (%s)"
 msgstr ""
 
 #: scripts/ui/tutorial.gd:27
@@ -7105,11 +7469,19 @@ msgstr ""
 msgid "Open an international account at Nexus Bank; Marcus can explain the fee"
 msgstr ""
 
+#: scripts/sim/fx_forward.gd:38
+msgid "Open an international company account first."
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Open for Business"
 msgstr ""
 
-#: scripts/ui/modals/bank_modal.gd:58
+#: scripts/ui/overseas_partner_ui.gd:59
+msgid "Open hedges are not counted as settled income. Repricing affects demand; home-currency invoices lower buyer acceptance and price. Check the actual month-close exchange line."
+msgstr ""
+
+#: scripts/ui/modals/bank_modal.gd:61
 msgid "Open international account (%s)"
 msgstr ""
 
@@ -7117,11 +7489,11 @@ msgstr ""
 msgid "Open last month close (%s)"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1222
+#: scripts/ui/modals/company_os.gd:1229
 msgid "Open now"
 msgstr ""
 
-#: scripts/ui/global_market_ui.gd:44
+#: scripts/ui/global_market_ui.gd:45
 msgid "Open storefront"
 msgstr ""
 
@@ -7131,6 +7503,14 @@ msgstr ""
 
 #: data/dialogue/lina_rails_again.json
 msgid "Open the escrow account after all."
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:132
+msgid "Open the international bank account before leasing overseas stock space."
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:147
+msgid "Open the overseas warehouse and choose a positive quantity first."
 msgstr ""
 
 #: scripts/sim/global_market.gd:92
@@ -7161,7 +7541,7 @@ msgstr ""
 msgid "Opening balance — savings"
 msgstr ""
 
-#: scripts/ui/modals/info_modal.gd:85
+#: scripts/ui/modals/info_modal.gd:89
 msgid "Operating costs"
 msgstr ""
 
@@ -7201,7 +7581,7 @@ msgstr ""
 msgid "Order %d / %d"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:928
+#: scripts/ui/modals/company_os.gd:933
 msgid "Order %d more from %s (%s)"
 msgstr ""
 
@@ -7225,7 +7605,7 @@ msgstr ""
 msgid "Order through TradeLink on your laptop. Two days to your door."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:958
+#: scripts/ui/modals/company_os.gd:965
 msgid "Ordered %d × %s to %s. Arrives %s."
 msgstr ""
 
@@ -7233,7 +7613,7 @@ msgstr ""
 msgid "Ordered %d × %s — %s. Arrives %s."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1259
+#: scripts/ui/modals/company_os.gd:1266
 msgid "Ordered. Old Town Roasters delivers %s."
 msgstr ""
 
@@ -7257,8 +7637,12 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:34
+#: scripts/ui/modals/month_close_modal.gd:38
 msgid "Other operating expense"
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:75 scripts/sim/overseas_partners.gd:84
+msgid "Outbound"
 msgstr ""
 
 #: scripts/frontend/character_creator.gd:123 scripts/frontend/character_creator.gd:144
@@ -7285,11 +7669,11 @@ msgstr ""
 msgid "Overseas"
 msgstr ""
 
-#: scripts/sim/global_market.gd:185
+#: scripts/sim/global_market.gd:188
 msgid "Overseas delivery %s: %s %s"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1208
+#: scripts/sim/ecommerce.gd:1211
 msgid "Overseas dispute fee"
 msgstr ""
 
@@ -7301,15 +7685,19 @@ msgstr ""
 msgid "Overseas markets open in Chapter 13."
 msgstr ""
 
-#: scripts/sim/global_market.gd:296
+#: scripts/sim/global_market.gd:300
 msgid "Overseas parcel written off at closure"
 msgstr ""
 
-#: scripts/ui/global_market_ui.gd:88
+#: data/help/help.json data/story/chapters.json
+msgid "Overseas partner"
+msgstr ""
+
+#: scripts/ui/global_market_ui.gd:90
 msgid "Overseas payouts"
 msgstr ""
 
-#: scripts/sim/global_market.gd:272
+#: scripts/sim/global_market.gd:275
 msgid "Overseas refund %s: %s %s"
 msgstr ""
 
@@ -7317,8 +7705,20 @@ msgstr ""
 msgid "Overseas region"
 msgstr ""
 
+#: scripts/ui/modals/overseas_partner_modal.gd:90
+msgid "Overseas stock (units)"
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:156
+msgid "Overseas stock and incoming batches exceed the warehouse capacity."
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Overseas storefront"
+msgstr ""
+
+#: data/help/glossary.json scripts/ui/modals/overseas_partner_modal.gd:51 scripts/ui/modals/overseas_partner_modal.gd:73
+msgid "Overseas warehouse"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:6
@@ -7329,7 +7729,7 @@ msgstr ""
 msgid "Owed (bank, wages, suppliers)"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:47
+#: scripts/ui/modals/month_close_modal.gd:51
 msgid "Owed to you (ShopLane + invoices)"
 msgstr ""
 
@@ -7349,7 +7749,7 @@ msgstr ""
 msgid "Owned"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:45
+#: scripts/ui/modals/month_close_modal.gd:49
 msgid "Owner money in / out"
 msgstr ""
 
@@ -7429,7 +7829,7 @@ msgstr ""
 msgid "Pack %d order%s (%s)"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:907
+#: scripts/ui/modals/company_os.gd:908
 msgid "Pack & deliver %d units (B2B freight $40)"
 msgstr ""
 
@@ -7449,7 +7849,7 @@ msgstr ""
 msgid "Pack orders by hand: box, padding, tape, label. Poor padding means broken items and returns; a wrong label means late delivery."
 msgstr ""
 
-#: scripts/ui/global_market_ui.gd:81
+#: scripts/ui/global_market_ui.gd:83
 msgid "Pack overseas orders at your packing table. Economy and express couriers use international routes; your own van only delivers domestic parcels."
 msgstr ""
 
@@ -7485,7 +7885,7 @@ msgstr ""
 msgid "Packed and ready: %d"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:909
+#: scripts/sim/ecommerce.gd:910
 msgid "Packed order %s"
 msgstr ""
 
@@ -7521,11 +7921,11 @@ msgstr ""
 msgid "Padding should reach the green zone. Too little and things arrive broken; that means returns and bad reviews."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1407
+#: scripts/ui/modals/company_os.gd:1414
 msgid "Paid"
 msgstr ""
 
-#: scripts/sim/contracts.gd:302
+#: scripts/sim/contracts.gd:349
 msgid "Paid %s."
 msgstr ""
 
@@ -7537,7 +7937,7 @@ msgstr ""
 msgid "Paid by %s. It lands around %s; the supplier ships after that. A faster rail costs its own fee."
 msgstr ""
 
-#: scripts/sim/contracts.gd:320
+#: scripts/sim/contracts.gd:369
 msgid "Paid early: %s (discount %s)."
 msgstr ""
 
@@ -7613,7 +8013,7 @@ msgstr ""
 msgid "Part-time jobs: take one to earn a wage. You work the shifts yourself at the workplace (staff door, press E)."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1179
+#: scripts/sim/ecommerce.gd:1182
 msgid "Partial refund 30%% %s: %s"
 msgstr ""
 
@@ -7621,7 +8021,7 @@ msgstr ""
 msgid "Partial refund sent."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1387
+#: scripts/ui/modals/company_os.gd:1394
 msgid "Past its deadline (%s): the pay is cut"
 msgstr ""
 
@@ -7629,7 +8029,7 @@ msgstr ""
 msgid "Pastel card"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1265
+#: scripts/ui/modals/company_os.gd:1272
 msgid "Pastries from the bakery each morning:"
 msgstr ""
 
@@ -7737,11 +8137,11 @@ msgstr ""
 msgid "Payments start-ups promise audits and an insurance pool."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1247
+#: scripts/sim/ecommerce.gd:1250
 msgid "Payout sent: %s to your business account."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1247
+#: scripts/sim/ecommerce.gd:1250
 msgid "Payout sent: %s to your personal account."
 msgstr ""
 
@@ -7793,7 +8193,7 @@ msgstr ""
 msgid "Permits & regulations"
 msgstr ""
 
-#: scripts/ui/modals/bank_modal.gd:73 scripts/ui/phone_ui.gd:239
+#: scripts/ui/modals/bank_modal.gd:76 scripts/ui/phone_ui.gd:239
 msgid "Personal"
 msgstr ""
 
@@ -7803,6 +8203,10 @@ msgstr ""
 
 #: data/jobs/bank_teller.json
 msgid "Personal Banker"
+msgstr ""
+
+#: scripts/ui/modals/overseas_partner_modal.gd:42
+msgid "Personal account"
 msgstr ""
 
 #: scripts/ui/phone_ui.gd:287
@@ -7817,7 +8221,7 @@ msgstr ""
 msgid "Personal seller cap: %s of %s used this month."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:851
+#: scripts/sim/ecommerce.gd:852
 msgid "Personal seller limit reached. Your listings are paused until next month — or until you register a business."
 msgstr ""
 
@@ -7897,7 +8301,7 @@ msgstr ""
 msgid "Plan the route"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1427
+#: scripts/ui/modals/company_os.gd:1434
 msgid "Plan the route: run %s"
 msgstr ""
 
@@ -7997,7 +8401,7 @@ msgstr ""
 msgid "PostPoint clerk"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:999
+#: scripts/sim/ecommerce.gd:1000
 msgid "PostPoint drop-off: %d parcels (%s)"
 msgstr ""
 
@@ -8017,7 +8421,7 @@ msgstr ""
 msgid "Posted by Ken (TradeLink Wholesale): \"Earbuds $18, lamps $11.50, bottles $6.80, phone stands $3.40. MOQs apply. Order via laptop.\""
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1347
+#: scripts/ui/modals/company_os.gd:1354
 msgid "Posted runs"
 msgstr ""
 
@@ -8049,7 +8453,7 @@ msgstr ""
 msgid "Press the shutter when the focus needle is in the green. You get three shots; the best one goes on your listing."
 msgstr ""
 
-#: scripts/ui/modals/clothing_shop_modal.gd:55 scripts/ui/modals/company_os.gd:1156 scripts/ui/modals/company_os.gd:367 scripts/ui/modals/van_deal_modal.gd:31
+#: scripts/ui/modals/clothing_shop_modal.gd:55 scripts/ui/modals/company_os.gd:1163 scripts/ui/modals/company_os.gd:367 scripts/ui/modals/van_deal_modal.gd:31
 msgid "Price"
 msgstr ""
 
@@ -8097,7 +8501,7 @@ msgstr ""
 msgid "Product"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:41
+#: scripts/ui/modals/month_close_modal.gd:45
 msgid "Profit after life costs"
 msgstr ""
 
@@ -8113,7 +8517,7 @@ msgstr ""
 msgid "Profit on paper. Payroll on Friday."
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:55
+#: scripts/ui/modals/month_close_modal.gd:59
 msgid "Profit this month: %s. Cash moved by %s. The gap (%s) is sitting in stock, in ShopLane's hands, or in unpaid invoices."
 msgstr ""
 
@@ -8189,7 +8593,7 @@ msgstr ""
 msgid "Quit to title"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1218
+#: scripts/ui/modals/company_os.gd:1225
 msgid "RATING"
 msgstr ""
 
@@ -8237,11 +8641,11 @@ msgstr ""
 msgid "RULES"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1343
+#: scripts/ui/modals/company_os.gd:1350
 msgid "RUNS ON THE BOARD"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1344
+#: scripts/ui/modals/company_os.gd:1351
 msgid "RUNS PAID, 7 DAYS"
 msgstr ""
 
@@ -8269,7 +8673,7 @@ msgstr ""
 msgid "Raise {product} ads 40%"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1289
+#: scripts/ui/modals/company_os.gd:1296
 msgid "Ran out"
 msgstr ""
 
@@ -8289,12 +8693,16 @@ msgstr ""
 msgid "Rating"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1227
+#: scripts/ui/modals/company_os.gd:1234
 msgid "Rating ★ %.1f: queues, running out and high prices pull it down."
 msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:7
 msgid "Ravi"
+msgstr ""
+
+#: data/story/chapters.json
+msgid "Reach the next month-end and read its exchange gain / loss line"
 msgstr ""
 
 #: data/buildings/customs_house.json scripts/ui/customs_ui.gd:38
@@ -8306,7 +8714,15 @@ msgid "Read Maya's message"
 msgstr ""
 
 #: data/story/chapters.json
+msgid "Read the Auroria currency news at Bloom Coffee"
+msgstr ""
+
+#: data/story/chapters.json
 msgid "Read the Year 9 news at Bloom Coffee"
+msgstr ""
+
+#: data/help/help.json
+msgid "Read the actual exchange gain / loss line at the next month close."
 msgstr ""
 
 #: data/buildings/popup_unit.json
@@ -8329,7 +8745,7 @@ msgstr ""
 msgid "Read: 'Small Business Lending'"
 msgstr ""
 
-#: scripts/ui/global_market_ui.gd:102
+#: scripts/ui/global_market_ui.gd:105
 msgid "Ready to convert (%s)"
 msgstr ""
 
@@ -8341,7 +8757,7 @@ msgstr ""
 msgid "Real Estate"
 msgstr ""
 
-#: scripts/ui/global_market_ui.gd:90 scripts/ui/global_market_ui.gd:91
+#: scripts/ui/global_market_ui.gd:93 scripts/ui/global_market_ui.gd:94 scripts/ui/modals/month_close_modal.gd:31
 msgid "Realized exchange gain / loss"
 msgstr ""
 
@@ -8351,6 +8767,10 @@ msgstr ""
 
 #: scripts/sim/insolvency.gd:101
 msgid "Receivables sold to a collector (80%)"
+msgstr ""
+
+#: data/story/chapters.json
+msgid "Receive actual income through your Lumina channel, or review an unsuccessful expansion after 45 days"
 msgstr ""
 
 #: data/story/chapters.json
@@ -8365,7 +8785,7 @@ msgstr ""
 msgid "Recent orders"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1402
+#: scripts/ui/modals/company_os.gd:1409
 msgid "Recent runs"
 msgstr ""
 
@@ -8417,7 +8837,7 @@ msgstr ""
 msgid "Refund"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1163
+#: scripts/sim/ecommerce.gd:1166
 msgid "Refund %s: %s (return label paid)"
 msgstr ""
 
@@ -8513,7 +8933,7 @@ msgstr ""
 msgid "Register your company at City Hall (Civic Center, take the Metro)"
 msgstr ""
 
-#: scripts/sim/contracts.gd:160
+#: scripts/sim/contracts.gd:167
 msgid "Register your company first."
 msgstr ""
 
@@ -8605,7 +9025,7 @@ msgstr ""
 msgid "Ren Tanaka"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1308
+#: scripts/ui/modals/company_os.gd:1315
 msgid "Rename"
 msgstr ""
 
@@ -8625,11 +9045,11 @@ msgstr ""
 msgid "Rent $1,250 due the 14th"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:40
+#: scripts/ui/modals/month_close_modal.gd:44
 msgid "Rent (home) + living"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:35
+#: scripts/ui/modals/month_close_modal.gd:39
 msgid "Rent (premises)"
 msgstr ""
 
@@ -8681,7 +9101,7 @@ msgstr ""
 msgid "Replacement on its way. {customer}: \"Oh — nice. Didn't expect that.\""
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1172
+#: scripts/sim/ecommerce.gd:1175
 msgid "Replacement sent %s: %s (express)"
 msgstr ""
 
@@ -8701,8 +9121,16 @@ msgstr ""
 msgid "Reports"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:980
+#: data/story/chapters.json
+msgid "Reprice overseas goods, sign a forward, or choose home-currency invoices"
+msgstr ""
+
+#: scripts/ui/modals/company_os.gd:987
 msgid "Reputation %.1f · rate about %s/h · %d delivered · %d late"
+msgstr ""
+
+#: scripts/ui/modals/overseas_partner_modal.gd:60
+msgid "Request distributor contract"
 msgstr ""
 
 #: data/help/glossary.json
@@ -8761,7 +9189,7 @@ msgstr ""
 msgid "Restructuring fee — loan %s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1407
+#: scripts/ui/modals/company_os.gd:1414
 msgid "Result"
 msgstr ""
 
@@ -8779,6 +9207,10 @@ msgstr ""
 
 #: data/world/years.json
 msgid "Retailers warn of empty shelves before the holidays."
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:75 scripts/sim/overseas_partners.gd:84
+msgid "Return"
 msgstr ""
 
 #: scripts/sim/ledger.gd:28 scripts/ui/modals/purchase_return_modal.gd:45
@@ -8805,11 +9237,15 @@ msgstr ""
 msgid "Return stock to supplier"
 msgstr ""
 
+#: scripts/ui/modals/overseas_partner_modal.gd:42
+msgid "Return — %s"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:596
 msgid "Returned %d units · %s · %s"
 msgstr ""
 
-#: scripts/sim/global_market.gd:313
+#: scripts/sim/global_market.gd:317
 msgid "Returned overseas goods restocked"
 msgstr ""
 
@@ -8829,7 +9265,7 @@ msgstr ""
 msgid "Revenue has to hold. I'm not asking you to grow it. I'm asking you not to lose it."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:938
+#: scripts/ui/modals/company_os.gd:945
 msgid "Revenue is booked. The cash isn't here yet."
 msgstr ""
 
@@ -8837,8 +9273,16 @@ msgstr ""
 msgid "Revenue isn't cash: check the cash forecast (Company OS → Finance)"
 msgstr ""
 
+#: scripts/ui/modals/overseas_partner_modal.gd:110
+msgid "Review expansion without claiming income"
+msgstr ""
+
 #: scripts/ui/customs_ui.gd:48
 msgid "Review results and pause expansion"
+msgstr ""
+
+#: scripts/sim/overseas_partners.gd:112
+msgid "Review slow overseas stock after 45 days."
 msgstr ""
 
 #: data/events/unexpected_large_order.json
@@ -8937,7 +9381,7 @@ msgstr ""
 msgid "Rough going. Practice makes it easier."
 msgstr ""
 
-#: scripts/sim/month_close.gd:93
+#: scripts/sim/month_close.gd:94
 msgid "Rough month. The shock hit everyone. Next month counts too."
 msgstr ""
 
@@ -8953,7 +9397,7 @@ msgstr ""
 msgid "Round glasses"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1407
+#: scripts/ui/modals/company_os.gd:1414
 msgid "Route"
 msgstr ""
 
@@ -8965,11 +9409,11 @@ msgstr ""
 msgid "Route planning"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1407
+#: scripts/ui/modals/company_os.gd:1414
 msgid "Run"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1435
+#: scripts/ui/modals/company_os.gd:1442
 msgid "Run %s done: paid %s, fuel %s, %s on the road."
 msgstr ""
 
@@ -9017,7 +9461,7 @@ msgstr ""
 msgid "Rush-order {moq} more (1-day, +20% cost)"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1151
+#: scripts/ui/modals/company_os.gd:1158
 msgid "SERVERS"
 msgstr ""
 
@@ -9053,11 +9497,11 @@ msgstr ""
 msgid "STARTUP HUB →"
 msgstr ""
 
-#: scripts/ui/modals/bank_modal.gd:72
+#: scripts/ui/modals/bank_modal.gd:75
 msgid "STATEMENT"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1147
+#: scripts/ui/modals/company_os.gd:1154
 msgid "SUBSCRIBERS"
 msgstr ""
 
@@ -9065,7 +9509,7 @@ msgstr ""
 msgid "SUITE 2B\nAVAILABLE"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1219
+#: scripts/ui/modals/company_os.gd:1226
 msgid "SUPPLIES"
 msgstr ""
 
@@ -9085,7 +9529,7 @@ msgstr ""
 msgid "Sale at delivery (home dollars)"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1077
+#: scripts/sim/ecommerce.gd:1080
 msgid "Sale delivered %s: %d × %s @ %s"
 msgstr ""
 
@@ -9157,7 +9601,7 @@ msgstr ""
 msgid "Save game"
 msgstr ""
 
-#: scripts/ui/global_market_ui.gd:65
+#: scripts/ui/global_market_ui.gd:66
 msgid "Save local price"
 msgstr ""
 
@@ -9181,7 +9625,7 @@ msgstr ""
 msgid "Schools, parks, families."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1407
+#: scripts/ui/modals/company_os.gd:1414
 msgid "Score"
 msgstr ""
 
@@ -9189,7 +9633,7 @@ msgstr ""
 msgid "Score %d%%"
 msgstr ""
 
-#: scripts/ui/modals/info_modal.gd:87
+#: scripts/ui/modals/info_modal.gd:91
 msgid "Scribbled in the corner: 'profit is an opinion, cash is a fact.'"
 msgstr ""
 
@@ -9217,12 +9661,16 @@ msgstr ""
 msgid "Sell some stock first, or lease more space."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:966
+#: scripts/ui/modals/company_os.gd:973
 msgid "Sell your time: clients post small projects every morning. Accept a gig, work it here in 2-hour sessions, deliver before the deadline and invoice. Payment follows the client's terms. On-time work earns stars; stars raise your rate."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:836 scripts/ui/modals/trade_quote_modal.gd:33
 msgid "Seller"
+msgstr ""
+
+#: scripts/ui/modals/fx_risk_modal.gd:27
+msgid "Selling foreign receipts forward locks a rate. You pay a fee and refundable collateral; the hedge loses if foreign currency strengthens. It does not replace collecting your invoices."
 msgstr ""
 
 #: data/regions/zenkai.json
@@ -9251,6 +9699,10 @@ msgstr ""
 
 #: data/dialogue/lina_rails.json
 msgid "Send me the terms."
+msgstr ""
+
+#: scripts/ui/modals/overseas_partner_modal.gd:92
+msgid "Send stock by sea"
 msgstr ""
 
 #: data/events/crestline_big_offer.json
@@ -9353,6 +9805,10 @@ msgstr ""
 msgid "Shifts worked: %d"
 msgstr ""
 
+#: data/help/glossary.json
+msgid "Ship stock overseas first, then pay storage and local fulfilment charges."
+msgstr ""
+
 #: scripts/ui/minigames/pack_game.gd:95
 msgid "Ship to: %s"
 msgstr ""
@@ -9365,7 +9821,7 @@ msgstr ""
 msgid "Shipped %d parcel%s — %s."
 msgstr ""
 
-#: scripts/sim/ledger.gd:28 scripts/ui/modals/global_region_modal.gd:21 scripts/ui/modals/month_close_modal.gd:32
+#: scripts/sim/ledger.gd:28 scripts/ui/modals/global_region_modal.gd:21 scripts/ui/modals/month_close_modal.gd:36
 msgid "Shipping"
 msgstr ""
 
@@ -9401,7 +9857,7 @@ msgstr ""
 msgid "ShopLane Global"
 msgstr ""
 
-#: scripts/sim/global_market.gd:211
+#: scripts/sim/global_market.gd:214
 msgid "ShopLane Global payout: %s %s"
 msgstr ""
 
@@ -9409,7 +9865,7 @@ msgstr ""
 msgid "ShopLane Seller"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1259
+#: scripts/sim/ecommerce.gd:1262
 msgid "ShopLane ads: %s"
 msgstr ""
 
@@ -9417,7 +9873,7 @@ msgstr ""
 msgid "ShopLane balance (paid Mondays)"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1213
+#: scripts/sim/ecommerce.gd:1216
 msgid "ShopLane dispute lost %s: forced refund + $15 fee"
 msgstr ""
 
@@ -9425,11 +9881,11 @@ msgstr ""
 msgid "ShopLane marketplace: 10% fee, weekly payouts, personal sellers capped at $2,500/month."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1251
+#: scripts/sim/ecommerce.gd:1254
 msgid "ShopLane negative balance charged to card"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:852
+#: scripts/sim/ecommerce.gd:853
 msgid "ShopLane paused your listings: personal seller limit reached."
 msgstr ""
 
@@ -9437,7 +9893,7 @@ msgstr ""
 msgid "ShopLane payout"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1246
+#: scripts/sim/ecommerce.gd:1249
 msgid "ShopLane payout received: %s"
 msgstr ""
 
@@ -9457,7 +9913,7 @@ msgstr ""
 msgid "ShopLane seller cap lifted · B2B contracts unlocked · office leases unlocked · supplier net terms unlocked"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1244
+#: scripts/sim/ecommerce.gd:1247
 msgid "ShopLane weekly payout"
 msgstr ""
 
@@ -9497,6 +9953,10 @@ msgstr ""
 msgid "Shots"
 msgstr ""
 
+#: data/dialogue/marcus_fx.json data/dialogue/omar_trade.json
+msgid "Show me the costs and risks."
+msgstr ""
+
 #: data/dialogue/marcus_lending.json
 msgid "Show me what you can do."
 msgstr ""
@@ -9511,6 +9971,14 @@ msgstr ""
 
 #: data/events/supply_shock_plan.json
 msgid "Sign a 60-day supply agreement with {supplier} ($600 fee)"
+msgstr ""
+
+#: data/story/chapters.json
+msgid "Sign a distributor contract or dispatch your first overseas warehouse batch"
+msgstr ""
+
+#: scripts/ui/modals/fx_risk_modal.gd:60
+msgid "Sign forward hedge"
 msgstr ""
 
 #: scripts/ui/modals/lease_modal.gd:39
@@ -9529,7 +9997,7 @@ msgstr ""
 msgid "Signed by the applicant"
 msgstr ""
 
-#: scripts/sim/contracts.gd:137
+#: scripts/sim/contracts.gd:144
 msgid "Signed contract %s with %s: %s."
 msgstr ""
 
@@ -9689,7 +10157,7 @@ msgstr ""
 msgid "Solar installs to grid-scale. Policy-driven."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1297
+#: scripts/sim/ecommerce.gd:1300
 msgid "Sold %d × %s to liquidator (%d%% of cost)"
 msgstr ""
 
@@ -9769,6 +10237,10 @@ msgstr ""
 msgid "Space"
 msgstr ""
 
+#: data/story/chapters.json
+msgid "Speak with Marcus about exchange risk, at Nexus Bank or by phone"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:572
 msgid "Speed up"
 msgstr ""
@@ -9813,7 +10285,7 @@ msgstr ""
 msgid "Start an ecommerce side business"
 msgstr ""
 
-#: scripts/ui/modals/business_board.gd:78 scripts/ui/modals/company_os.gd:967
+#: scripts/ui/modals/business_board.gd:78 scripts/ui/modals/company_os.gd:974
 msgid "Start freelancing"
 msgstr ""
 
@@ -9857,6 +10329,10 @@ msgstr ""
 msgid "Started freelancing as a consultant."
 msgstr ""
 
+#: scripts/ui/overseas_partner_ui.gd:49
+msgid "Starting receipt estimate (foreign units)"
+msgstr ""
+
 #: data/character/options.json
 msgid "Startup Casual"
 msgstr ""
@@ -9889,7 +10365,7 @@ msgstr ""
 msgid "Stock (at cost)"
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:49
+#: scripts/ui/modals/month_close_modal.gd:53
 msgid "Stock at cost"
 msgstr ""
 
@@ -9947,6 +10423,10 @@ msgstr ""
 
 #: scripts/ui/modals/lease_modal.gd:27
 msgid "Storage"
+msgstr ""
+
+#: scripts/ui/modals/overseas_partner_modal.gd:91
+msgid "Storage / local shipping (home dollars/unit)"
 msgstr ""
 
 #: scripts/sim/wardrobe.gd:66 scripts/ui/modals/clothing_shop_modal.gd:17
@@ -10053,7 +10533,7 @@ msgstr ""
 msgid "Suppliers sell in minimum order quantities (MOQ). You pay up front and the stock arrives in a few days (ARRIVES shows when)."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1247
+#: scripts/ui/modals/company_os.gd:1254
 msgid "Supplies and the bakery"
 msgstr ""
 
@@ -10125,7 +10605,7 @@ msgstr ""
 msgid "THREADLINE"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1217
+#: scripts/ui/modals/company_os.gd:1224
 msgid "TILL TODAY"
 msgstr ""
 
@@ -10441,12 +10921,20 @@ msgstr ""
 msgid "The bridge was already hit."
 msgstr ""
 
+#: scripts/sim/overseas_partners.gd:108 scripts/sim/overseas_partners.gd:120
+msgid "The buyer declined the home-currency quote. Try a new quote tomorrow or choose overseas warehousing."
+msgstr ""
+
 #: data/help/glossary.json
 msgid "The buyer pays destination duty when the parcel arrives. You do not prepay it."
 msgstr ""
 
 #: data/help/glossary.json
 msgid "The buyer pays the invoice 30 or 60 days after delivery, not on the day they get the goods."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "The buyer takes exchange risk and may decline or offer a lower price."
 msgstr ""
 
 #: data/help/help.json
@@ -10473,11 +10961,15 @@ msgstr ""
 msgid "The company can't pay its debts"
 msgstr ""
 
-#: scripts/sim/contracts.gd:77
+#: data/story/chapters.json
+msgid "The company closed or the expansion was reviewed without income. Continue without claiming a sale, payment or recovery."
+msgstr ""
+
+#: scripts/sim/contracts.gd:82
 msgid "The company closed. This unanswered offer was withdrawn."
 msgstr ""
 
-#: scripts/sim/contracts.gd:83
+#: scripts/sim/contracts.gd:88
 msgid "The company closed. This undelivered contract was terminated with no additional penalty."
 msgstr ""
 
@@ -10495,6 +10987,10 @@ msgstr ""
 
 #: scripts/sim/rails.gd:202
 msgid "The digital-dollar bridge was exploited. Transfers are frozen until about %s."
+msgstr ""
+
+#: scripts/ui/overseas_partner_ui.gd:80
+msgid "The distributor owns the customers and pays wholesale. With your warehouse, you own the customers and also fund stock, rent and unsold risk."
 msgstr ""
 
 #: scripts/sim/logistics.gd:532
@@ -10525,7 +11021,7 @@ msgstr ""
 msgid "The fit-out costs %s."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1200
+#: scripts/ui/modals/company_os.gd:1207
 msgid "The fitters start tonight. Ready %s."
 msgstr ""
 
@@ -10665,6 +11161,10 @@ msgstr ""
 msgid "The trial needs 10 delivered units with returns below 15%. After two weeks, it needs 5 units; reviewing and pausing expansion is an honest alternative, not a sales success."
 msgstr ""
 
+#: scripts/ui/overseas_partner_ui.gd:45
+msgid "The unhedged comparison values the starting estimated foreign receipts at today's quote versus the quote before the shock. It is not a second simulated business or guaranteed profit."
+msgstr ""
+
 #: scripts/sim/cafe.gd:98
 msgid "The unit is already fitted out."
 msgstr ""
@@ -10717,6 +11217,10 @@ msgstr ""
 msgid "There's no bank loan to restructure."
 msgstr ""
 
+#: scripts/ui/overseas_partner_ui.gd:79
+msgid "These use the current product price and domestic stock cost, assume all units sell, and exclude duties, refunds, packing, FX movement and other overhead. They are comparisons, not guaranteed profit. No second business was run."
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:895
 msgid "They agreed to your terms. Accept to sign."
 msgstr ""
@@ -10729,7 +11233,7 @@ msgstr ""
 msgid "They keep it. Meh review."
 msgstr ""
 
-#: scripts/sim/contracts.gd:119
+#: scripts/sim/contracts.gd:124
 msgid "They need an invoice from a registered company."
 msgstr ""
 
@@ -10749,11 +11253,11 @@ msgstr ""
 msgid "This allocates the conversion quote and pickup fee to this order. Stock, packing, duties and refunds still reduce profit; revenue is not cash."
 msgstr ""
 
-#: scripts/sim/global_market.gd:306
+#: scripts/sim/global_market.gd:310
 msgid "This company's books are closed."
 msgstr ""
 
-#: scripts/sim/contracts.gd:207
+#: scripts/sim/contracts.gd:223
 msgid "This contract belongs to another company."
 msgstr ""
 
@@ -10769,7 +11273,11 @@ msgstr ""
 msgid "This game autosaves to slot %d."
 msgstr ""
 
-#: scripts/sim/contracts.gd:86
+#: scripts/sim/fx_forward.gd:73
+msgid "This hedge is not due or was already settled."
+msgstr ""
+
+#: scripts/sim/contracts.gd:91
 msgid "This invoice was sold to a collector as part of the company liquidation. The buyer will not pay the closed company again."
 msgstr ""
 
@@ -10781,7 +11289,7 @@ msgstr ""
 msgid "This is Suite 2B's desk. Talk to Tom about leasing it."
 msgstr ""
 
-#: scripts/sim/contracts.gd:117 scripts/sim/contracts.gd:158 scripts/sim/contracts.gd:205 scripts/sim/contracts.gd:312
+#: scripts/sim/contracts.gd:122 scripts/sim/contracts.gd:165 scripts/sim/contracts.gd:221 scripts/sim/contracts.gd:361
 msgid "This is a contract of a closed company."
 msgstr ""
 
@@ -10789,11 +11297,15 @@ msgstr ""
 msgid "This is the same form you'll file for your own company, so the rules are worth remembering."
 msgstr ""
 
-#: scripts/ui/modals/info_modal.gd:84
+#: scripts/sim/overseas_partners.gd:71
+msgid "This journey was already completed."
+msgstr ""
+
+#: scripts/ui/modals/info_modal.gd:88
 msgid "This month revenue"
 msgstr ""
 
-#: scripts/sim/contracts.gd:115 scripts/sim/contracts.gd:156
+#: scripts/sim/contracts.gd:120 scripts/sim/contracts.gd:163
 msgid "This offer is no longer open."
 msgstr ""
 
@@ -10837,7 +11349,7 @@ msgstr ""
 msgid "Ticket A-%d. Now serving A-%d."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1289
+#: scripts/ui/modals/company_os.gd:1296
 msgid "Till"
 msgstr ""
 
@@ -10877,7 +11389,7 @@ msgstr ""
 msgid "Tobi Okafor"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1012
+#: scripts/ui/modals/company_os.gd:1019
 msgid "Today's offers"
 msgstr ""
 
@@ -10985,6 +11497,10 @@ msgstr ""
 msgid "TradeTransport"
 msgstr ""
 
+#: scripts/sim/overseas_partners.gd:137
+msgid "Transfer company cash for warehouse opening, or choose a distributor."
+msgstr ""
+
 #: scripts/sim/company.gd:107
 msgid "Transfer to %s"
 msgstr ""
@@ -11033,7 +11549,7 @@ msgstr ""
 msgid "Tutorial skipped. You can replay it from the pause menu (Esc)."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1069
+#: scripts/ui/modals/company_os.gd:1076
 msgid "Two focused hours: %.1f hours of the work done. %s"
 msgstr ""
 
@@ -11045,11 +11561,11 @@ msgstr ""
 msgid "Two missed payments. The bank has called loan %s: %s is due in full within 7 days."
 msgstr ""
 
-#: scripts/sim/month_close.gd:82
+#: scripts/sim/month_close.gd:83
 msgid "Two month-ends with negative cash. That isn't a recovery yet, but you've seen the gap. Cut costs or work shifts while you rebuild; the story carries on."
 msgstr ""
 
-#: scripts/sim/month_close.gd:90
+#: scripts/sim/month_close.gd:91
 msgid "Two months in the red, but you're still open. Plenty of shops aren't. Keep the prices you set and the local supplier; the shock won't last forever."
 msgstr ""
 
@@ -11089,6 +11605,10 @@ msgstr ""
 msgid "Unexpected large order"
 msgstr ""
 
+#: scripts/ui/overseas_partner_ui.gd:50
+msgid "Unhedged quote change (home dollars)"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:837
 msgid "Unit price"
 msgstr ""
@@ -11101,7 +11621,7 @@ msgstr ""
 msgid "University District"
 msgstr ""
 
-#: scripts/sim/customs.gd:97 scripts/sim/ecommerce.gd:1189 scripts/sim/global_market.gd:320
+#: scripts/sim/customs.gd:97 scripts/sim/ecommerce.gd:1192 scripts/sim/global_market.gd:324
 msgid "Unknown choice."
 msgstr ""
 
@@ -11147,6 +11667,10 @@ msgstr ""
 
 #: scripts/ui/modals/loan_modal.gd:100
 msgid "Use the Metro to Financial District, then enter Nexus Bank and go to the manager desk."
+msgstr ""
+
+#: data/dialogue/marcus_fx.json data/dialogue/omar_trade.json
+msgid "Use the actual company books, not revenue alone. Stock and money on the way still tie up cash."
 msgstr ""
 
 #: data/help/help.json
@@ -11205,7 +11729,7 @@ msgstr ""
 msgid "Van insurance: monthly"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1335
+#: scripts/ui/modals/company_os.gd:1342
 msgid "Van kept at Pier 7 · insurance %s a month · %.0f km driven"
 msgstr ""
 
@@ -11293,12 +11817,20 @@ msgstr ""
 msgid "Victor: \"You'll get it, with conditions. Read them twice.\""
 msgstr ""
 
+#: scripts/ui/modals/overseas_partner_modal.gd:29
+msgid "Video call Omar"
+msgstr ""
+
 #: scripts/ui/modals/loan_modal.gd:86
 msgid "View City Hall on city map"
 msgstr ""
 
 #: scripts/ui/modals/loan_modal.gd:97
 msgid "View Nexus Bank on city map"
+msgstr ""
+
+#: scripts/ui/modals/overseas_partner_modal.gd:42
+msgid "Visit Lumina — %s"
 msgstr ""
 
 #: data/story/chapters.json
@@ -11329,7 +11861,7 @@ msgstr ""
 msgid "WRITTEN OFF"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:236 scripts/ui/modals/month_close_modal.gd:38
+#: scripts/ui/modals/company_os.gd:236 scripts/ui/modals/month_close_modal.gd:42
 msgid "Wages from your job"
 msgstr ""
 
@@ -11365,6 +11897,10 @@ msgstr ""
 msgid "Wait. Someone actually bought one??"
 msgstr ""
 
+#: data/dialogue/marcus_fx.json data/dialogue/omar_trade.json
+msgid "Waiting is a choice too. Watch the deadlines, fees and stock before you decide."
+msgstr ""
+
 #: scripts/ui/modals/city_map_modal.gd:106
 msgid "Walk between neighbouring districts, or take the Metro from any station."
 msgstr ""
@@ -11385,7 +11921,7 @@ msgstr ""
 msgid "Walk with WASD or the arrow keys. Hold Shift to run."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1289
+#: scripts/ui/modals/company_os.gd:1296
 msgid "Walked out"
 msgstr ""
 
@@ -11401,12 +11937,20 @@ msgstr ""
 msgid "Wardrobe"
 msgstr ""
 
+#: scripts/ui/overseas_partner_ui.gd:78
+msgid "Warehouse margin estimate (home dollars)"
+msgstr ""
+
 #: scripts/sim/ledger.gd:33
 msgid "Warehouse rent"
 msgstr ""
 
 #: data/help/glossary.json
 msgid "Warehouse space costs far less per unit than an office, and more room means bigger orders and fewer sell-outs. But each location's rent is due every month, full or empty."
+msgstr ""
+
+#: scripts/ui/overseas_partner_ui.gd:78
+msgid "Warehouse with three months' slow-stock rent (home dollars)"
 msgstr ""
 
 #: data/character/options.json
@@ -11445,7 +11989,7 @@ msgstr ""
 msgid "We want 120 insulated bottles for our members. $21 each, Net 30."
 msgstr ""
 
-#: scripts/sim/contracts.gd:179
+#: scripts/sim/contracts.gd:189
 msgid "We'll source elsewhere. Thanks anyway."
 msgstr ""
 
@@ -11541,8 +12085,16 @@ msgstr ""
 msgid "White, 140,000 km, a sighing gearbox and an honest engine. Parked at Pier 7 once it's yours."
 msgstr ""
 
-#: data/buildings/small_office.json scripts/ui/modals/info_modal.gd:83
+#: data/buildings/small_office.json scripts/ui/modals/info_modal.gd:87
 msgid "Whiteboard"
+msgstr ""
+
+#: data/help/glossary.json scripts/ui/modals/overseas_partner_modal.gd:108
+msgid "Who owns the customer"
+msgstr ""
+
+#: data/story/chapters.json
+msgid "Who owns the customer owns both margin and risk."
 msgstr ""
 
 #: data/help/glossary.json
@@ -11609,7 +12161,7 @@ msgstr ""
 msgid "Wood desk"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1009
+#: scripts/ui/modals/company_os.gd:1016
 msgid "Work 2 h"
 msgstr ""
 
@@ -11773,6 +12325,10 @@ msgstr ""
 msgid "You have three ways to pay abroad now."
 msgstr ""
 
+#: scripts/ui/modals/overseas_partner_modal.gd:74
+msgid "You keep the customer relationship and retail margin. Pay sea freight and duty before dispatch, monthly rent per unsold unit, and shipping for each sale. Slow stock still ties up cash."
+msgstr ""
+
 #: data/story/chapters.json
 msgid "You kept the shelves full while half the city ran out. That's a real business."
 msgstr ""
@@ -11805,7 +12361,7 @@ msgstr ""
 msgid "You look like you're plotting something."
 msgstr ""
 
-#: scripts/sim/contracts.gd:211
+#: scripts/sim/contracts.gd:227
 msgid "You need %d in stock (have %d)."
 msgstr ""
 
@@ -11841,7 +12397,7 @@ msgstr ""
 msgid "You only have %s personally."
 msgstr ""
 
-#: scripts/ui/modals/month_close_modal.gd:48
+#: scripts/ui/modals/month_close_modal.gd:52
 msgid "You owe (suppliers)"
 msgstr ""
 
@@ -11859,6 +12415,14 @@ msgstr ""
 
 #: scripts/frontend/arrival_scene.gd:97
 msgid "You quit your job. You have savings, a laptop, a phone — and a lease."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "You receive less per unit but avoid managing the final customers."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "You retain retail customers and margin but fund slow stock and returns."
 msgstr ""
 
 #: data/story/chapters.json
@@ -11921,7 +12485,7 @@ msgstr ""
 msgid "You're here about the corner unit, I can tell. Everybody looks at it the same way."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:984
+#: scripts/sim/ecommerce.gd:985
 msgid "You're not carrying any parcels."
 msgstr ""
 
@@ -11937,7 +12501,7 @@ msgstr ""
 msgid "You've got the look of someone whose parcels keep going the long way round. A van fixes that."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:843
+#: scripts/sim/ecommerce.gd:844
 msgid "You've sold %s of your %s personal seller limit this month. Register a business to lift it."
 msgstr ""
 
@@ -12073,7 +12637,7 @@ msgstr ""
 msgid "Your money is locked with a neutral party and released to the supplier only when the goods arrive."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1417
+#: scripts/ui/modals/company_os.gd:1424
 msgid "Your own parcels"
 msgstr ""
 
@@ -12109,7 +12673,7 @@ msgstr ""
 msgid "Your route: %.1f km. The shortest possible: %.1f km."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1375
+#: scripts/ui/modals/company_os.gd:1382
 msgid "Your runs"
 msgstr ""
 
@@ -12213,7 +12777,7 @@ msgstr ""
 msgid "battery"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1223
+#: scripts/ui/modals/company_os.gd:1230
 msgid "behind the counter: %d barista(s)"
 msgstr ""
 
@@ -12315,6 +12879,10 @@ msgstr ""
 
 #: data/businesses/real_estate.json
 msgid "development"
+msgstr ""
+
+#: data/npcs/omar.json
+msgid "distributor in Lumina"
 msgstr ""
 
 #: data/businesses/logistics.json
@@ -12585,7 +13153,7 @@ msgstr ""
 msgid "needs an office (lease Suite 2B)"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1021
+#: scripts/ui/modals/company_os.gd:1028
 msgid "net %d"
 msgstr ""
 
@@ -12645,7 +13213,7 @@ msgstr ""
 msgid "oem orders"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1006
+#: scripts/ui/modals/company_os.gd:1013
 msgid "on delivery"
 msgstr ""
 
@@ -12661,7 +13229,7 @@ msgstr ""
 msgid "open a business bank account first"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1218
+#: scripts/ui/modals/company_os.gd:1225
 msgid "out of 5"
 msgstr ""
 
@@ -12673,7 +13241,7 @@ msgstr ""
 msgid "own brand"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1021
+#: scripts/ui/modals/company_os.gd:1028
 msgid "paid on delivery"
 msgstr ""
 
@@ -12681,7 +13249,7 @@ msgstr ""
 msgid "paused: cap"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1149 scripts/ui/modals/company_os.gd:1151
+#: scripts/ui/modals/company_os.gd:1156 scripts/ui/modals/company_os.gd:1158
 msgid "per month"
 msgstr ""
 
@@ -12793,7 +13361,7 @@ msgstr ""
 msgid "store sales"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1246
+#: scripts/ui/modals/company_os.gd:1253
 msgid "street price %s · costs you %s"
 msgstr ""
 
@@ -12865,7 +13433,7 @@ msgstr ""
 msgid "too late for a shift today"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1364
+#: scripts/ui/modals/company_os.gd:1371
 msgid "too late to make it if you leave now"
 msgstr ""
 
@@ -12877,7 +13445,7 @@ msgstr ""
 msgid "too tight"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1273
+#: scripts/ui/modals/company_os.gd:1280
 msgid "unsold ones are binned at closing"
 msgstr ""
 
@@ -13013,7 +13581,7 @@ msgstr ""
 msgid "“I'd like to withdraw %s, please.”"
 msgstr ""
 
-#: scripts/ui/modals/info_modal.gd:70
+#: scripts/ui/modals/info_modal.gd:74
 msgid "• Base rate: %s. Credit is cheap — for now."
 msgstr ""
 
@@ -13021,11 +13589,11 @@ msgstr ""
 msgid "• Build a software product: SaaS on the Business Board."
 msgstr ""
 
-#: scripts/ui/modals/info_modal.gd:73
+#: scripts/ui/modals/info_modal.gd:77
 msgid "• Digital-dollar bridge: FROZEN until about %s."
 msgstr ""
 
-#: scripts/ui/modals/info_modal.gd:75
+#: scripts/ui/modals/info_modal.gd:79
 msgid "• Digital-dollar bridge: open."
 msgstr ""
 
@@ -13045,11 +13613,11 @@ msgstr ""
 msgid "• Make it official: register a company at City Hall (Civic Center), then open a business account at Nexus Bank."
 msgstr ""
 
-#: scripts/ui/modals/info_modal.gd:71
+#: scripts/ui/modals/info_modal.gd:75
 msgid "• Shipping index: %.2f (1.00 = normal)."
 msgstr ""
 
-#: scripts/ui/modals/info_modal.gd:76
+#: scripts/ui/modals/info_modal.gd:80
 msgid "• ShopLane fee 10%. Payouts every Monday."
 msgstr ""
 
@@ -13057,7 +13625,7 @@ msgstr ""
 msgid "• Take consulting work you do yourself: Company OS → Freelance."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:933
+#: scripts/ui/modals/company_os.gd:938
 msgid "…or on supplier credit terms"
 msgstr ""
 
@@ -13125,11 +13693,23 @@ msgstr ""
 msgid "✓ Exact"
 msgstr ""
 
-#: scripts/ui/modals/bank_modal.gd:52
+#: scripts/ui/modals/company_os.gd:942
+msgid "✓ Goods in transit. Arrival: %s. Revenue is not booked yet."
+msgstr ""
+
+#: scripts/ui/overseas_partner_ui.gd:25
+msgid "✓ Hedge open. Wait for maturity; both gains and losses settle automatically."
+msgstr ""
+
+#: scripts/ui/modals/bank_modal.gd:55
 msgid "✓ International account ready. Open Overseas sales in Company OS next."
 msgstr ""
 
-#: scripts/ui/global_market_ui.gd:43
+#: scripts/ui/modals/overseas_partner_modal.gd:36
+msgid "✓ Omar contacted. Compare the two channels and choose your next step."
+msgstr ""
+
+#: scripts/ui/global_market_ui.gd:44
 msgid "✓ Ready to open this region's storefront. Set local prices next."
 msgstr ""
 
@@ -13141,7 +13721,7 @@ msgstr ""
 msgid "✓ Rejected for the right reason"
 msgstr ""
 
-#: scripts/ui/global_market_ui.gd:48
+#: scripts/ui/global_market_ui.gd:49
 msgid "✓ Storefront open. Choose local prices; unsaved prices do not take orders."
 msgstr ""
 
@@ -13177,6 +13757,10 @@ msgstr ""
 msgid "✗ %s gave up waiting"
 msgstr ""
 
+#: scripts/ui/modals/overseas_partner_modal.gd:56
+msgid "✗ Create an active product listing first. You can review this expansion after 45 days if the company cannot trade."
+msgstr ""
+
 #: scripts/ui/modals/trade_quote_modal.gd:69
 msgid "✗ Deals cannot be signed in this build. Compare route estimates first."
 msgstr ""
@@ -13191,6 +13775,10 @@ msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:124
 msgid "✗ Not quite: %s wanted %s"
+msgstr ""
+
+#: scripts/ui/modals/overseas_partner_modal.gd:26
+msgid "✗ Register a live company first. Closed-company deals cannot resume."
 msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:123

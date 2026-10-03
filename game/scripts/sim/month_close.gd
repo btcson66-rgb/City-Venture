@@ -43,6 +43,7 @@ static func compute(entity: String, t0: int, t1: int) -> Dictionary:
 		"rent": _premises(opex) + float(personal.get("rent_home", 0.0)),
 		"rent_office": _premises(opex), "rent_home": float(personal.get("rent_home", 0.0)),
 		"personal": personal, "personal_total": personal_total, "other_income": other_income,
+		"fx_gain_loss": -float(mv.get("fx_gain_loss", 0.0)),
 		"business_profit": business_profit, "profit": business_profit + wages - personal_total, "wages": wages,
 		"cash_open": cash_open, "cash_close": cash_close, "cash_change": cash_close - cash_open, "owner_moves": owner_moves,
 		"ar": Ledger.balance_at(entity, "marketplace_balance", t1) + Ledger.balance_at(entity, "accounts_receivable", t1),

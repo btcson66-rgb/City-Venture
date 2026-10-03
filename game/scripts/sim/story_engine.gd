@@ -195,6 +195,7 @@ static func check() -> void:
 
 static func _check_all() -> void:
 	Customs.reconcile()
+	OverseasPartners.reconcile()
 	Contracts.reconcile_tags()
 	# A closing company cannot leave a side objective waiting for a business action forever.
 	for id in side_progress().keys():
@@ -224,6 +225,8 @@ static func _check_all() -> void:
 	var changed := true
 	if "ch12_regulation_scale" in St()["chapters_done"] and not "ch13_first_order_abroad" in St()["chapters_done"] and St().get("chapter", "") == "ch12_regulation_scale":
 		start_chapter("ch13_first_order_abroad")
+	if "ch14_customs" in St()["chapters_done"] and not "ch15_currency_swing" in St()["chapters_done"] and St().get("chapter", "") == "ch14_customs":
+		start_chapter("ch15_currency_swing")
 	var guard := 0
 	var limit: int = DataDB.story.get("side", []).size() + 1
 	for c in chapters():
@@ -273,6 +276,12 @@ static func run_actions(actions: Array) -> void:
 		if a.has("if") and not Cond.eval(str(a["if"])):
 			continue
 		match a.get("do", ""):
+			"fx_comparison_card":
+				OverseasPartnerUI.fx_card()
+			"partner_comparison_card":
+				OverseasPartnerUI.partner_card()
+			"overseas_begin":
+				OverseasPartners.begin(str(a["chapter"]))
 			"customs_begin":
 				Customs.begin(str(a["chapter"]))
 			"export_income_card":

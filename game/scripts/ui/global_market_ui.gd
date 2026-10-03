@@ -5,6 +5,7 @@ extends RefCounted
 
 static func sales(os: CompanyOS, box: VBoxContainer) -> void:
 	box.add_child(UIK.label_tip("ShopLane Global", "overseas_storefront", 10, Art.C_GOLD, true))
+	OverseasPartnerUI.sales(box)
 	var select := OptionButton.new()
 	select.name = "GlobalRegion"
 	var regions: Array = GlobalMarket.cfg().get("regions", {}).keys()
@@ -70,6 +71,7 @@ static func sales(os: CompanyOS, box: VBoxContainer) -> void:
 		first = false
 		save.name = "SaveGlobalPrice_" + str(l["id"])
 		row.add_child(save)
+		OverseasPartnerUI.price(box, region, float(prices.get(l["id"], edit.value)))
 		CustomsUI.declaration(os, box, region, str(l["id"]))
 		box.add_child(UIK.label(I18n.t("Expected demand: %.1f orders/day") % GlobalMarket.demand(region, l), 7, Art.C_MUTED))
 	if Ecommerce.E()["listings"].is_empty():
@@ -86,6 +88,7 @@ static func finance(os: CompanyOS, box: VBoxContainer) -> void:
 	if not GlobalMarket.live(GameState.company_id()) or not GlobalMarket.company()["bank"]:
 		return
 	box.add_child(UIK.title("Overseas payouts", 10, Art.C_GOLD))
+	OverseasPartnerUI.finance(box)
 	box.add_child(UIK.label_tip(I18n.t("Bank spread: %.1f%%") % (float(FX.cfg().get("bank_spread", 0.015)) * 100), "fx_spread"))
 	box.add_child(UIK.label_tip("Realized exchange gain / loss", "fx_gain_loss"))
 	box.add_child(UIK.kv("Realized exchange gain / loss", Fmt.money(-Ledger.balance(GameState.company_id(), "fx_gain_loss"))))

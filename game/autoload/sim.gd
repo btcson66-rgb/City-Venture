@@ -80,6 +80,8 @@ func _dispatch(kind: String, p: Dictionary) -> void:
 	phase = kind
 	var mod := kind.get_slice(".", 0)
 	match mod:
+		"partners":
+			OverseasPartners.handle(kind, p)
 		"rail":
 			Rails.handle(kind, p)
 		"cmp":
@@ -111,6 +113,7 @@ func _dispatch(kind: String, p: Dictionary) -> void:
 
 
 func _on_hour(t: int, h: int) -> void:
+	OverseasPartners.on_hour()
 	phase = "hour:compliance"
 	Compliance.on_hour(t, h)
 	phase = "hour:ecommerce"

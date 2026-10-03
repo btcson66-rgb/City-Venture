@@ -98,7 +98,10 @@ static func set_price(region: String, listing: String, price: float) -> Dictiona
 	var max_price := float(p["price_max"]) / quote
 	if price < min_price or price > max_price:
 		return {"ok": false, "error": I18n.t("Price range: %s–%s %s per unit.") % [Fmt.money(min_price), Fmt.money(max_price), currency(region)]}
+	var previous := float(company()["stores"][region]["prices"].get(listing, 0))
 	company()["stores"][region]["prices"][listing] = snappedf(price, 0.01)
+	if not OverseasPartners.S()["shock"].is_empty() and currency(region) == OverseasPartners.S()["shock"]["currency"] and not is_equal_approx(previous, price):
+		GameState.set_flag("fx_response_reprice")
 	StoryEngine.check()
 	return {"ok": true}
 
@@ -275,6 +278,7 @@ static func refund(o: Dictionary, fraction: float, fee_refund := false) -> void:
 
 
 static func close_for_entity(entity: String) -> void:
+	OverseasPartners.close_for_entity(entity)
 	if not S()["companies"].has(entity):
 		return
 	# Flush receivables at their carrying value before the existing company liquidation.

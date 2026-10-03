@@ -49,6 +49,9 @@ func build() -> void:
 			lb.name = "Lending"
 			left.add_child(lb)
 			if GlobalMarket.company()["bank"]:
+				var forward := UIK.button("Manage exchange risk", func(): UIRoot.open_modal(FXRiskModal.new()), "primary")
+				forward.name = "BankFXRisk"
+				left.add_child(forward)
 				left.add_child(UIK.wrap("✓ International account ready. Open Overseas sales in Company OS next.", 7, Art.C_GREEN, 196))
 			else:
 				left.add_child(UIK.label_tip("International account", "overseas_storefront"))

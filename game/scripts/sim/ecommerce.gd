@@ -784,7 +784,7 @@ static func _h_order_place(p: Dictionary) -> void:
 	var l: Dictionary = E()["listings"].get(p["listing"], {})
 	if l.is_empty() or not l.get("active", false):
 		return
-	var loc := best_location(l["product"])
+	var loc := OverseasPartners.order_location(region, str(l["product"]), best_location(l["product"]))
 	if loc == "":
 		GameState.inc_stat("missed_sales")
 		l["missed"] = int(l.get("missed", 0)) + 1
@@ -812,6 +812,7 @@ static func _h_order_place(p: Dictionary) -> void:
 	GameState.inc_stat("orders_placed")
 	EventBus.notify.emit(I18n.t("New order %s — %s — %s") % [oid, I18n.t(DataDB.product(o["product"])["name"]), Fmt.money(o["unit_price"])], "good", "orders")
 	EventBus.order_placed.emit(oid)
+	OverseasPartners.fulfil(o)
 	_check_cap()
 
 
@@ -1028,6 +1029,8 @@ static func _ship(o: Dictionary) -> void:
 		eta = int(o["ship"]["van_eta"])   # your own van: same day, and you know the address (Logistics.ship_own_van)
 	if o.has("region"):
 		eta = Clock.now() + GlobalMarket.shipping_days(o, str(o["ship"]["method"])) * Clock.DAY
+	if o.get("partner_channel", "") == "3pl":
+		eta = Clock.now() + int(OverseasPartners.cfg()["warehouse_delivery_days"]) * Clock.DAY
 	o["ship"]["eta"] = eta
 	Sim.schedule(eta, "eco.deliver", {"order": o["id"]})
 	GameState.inc_stat("orders_shipped")

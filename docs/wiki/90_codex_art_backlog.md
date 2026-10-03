@@ -739,3 +739,7 @@ Planned art requests (existing region images remain the interim display): seven 
 ### Season 2 — Chapters 13–14 (#31)
 
 Planned: backdrops/chapter_13 and backdrops/chapter_14; dedicated Ines sprites/portrait; Customs House counter, X-ray machine, shelves and filing cabinets; events/customs_hold. The existing room and uniform_officer are interim art. This ticket changes no assets.
+
+### Season 2 — Chapters 15–16 (#42)
+
+Planned: backdrops/chapter_15, backdrops/chapter_16; dedicated Omar sprites/portrait; airport/cabin journey scene; Lumina warehouse interior; events/fx_shock. Interim executive outfit, existing bank/OS and explicit journey/comparison cards are used. No assets changed.
