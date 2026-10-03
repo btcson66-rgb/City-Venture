@@ -55,4 +55,3 @@ func run() -> void:
 	bot.expect(latest.get_global_rect().end.y <= scroll.get_global_rect().end.y + 1, "latest outgoing reply is visible without losing history")
 	await bot.shot("proactive_result")
 	UIRoot.phone.close()
-
