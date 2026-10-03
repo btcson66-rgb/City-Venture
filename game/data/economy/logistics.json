@@ -272,6 +272,70 @@
    "district": "startup_hub",
    "x": 466,
    "y": 166
+  },
+  {
+   "id": "corner_cafe_unit",
+   "name": "Your café",
+   "district": "old_town",
+   "x": 120,
+   "y": 120
   }
- ]
+ ],
+ "fleet": {
+  "max": 2,
+  "models": {
+   "used": {
+    "name": "Used panel van",
+    "price": 9800,
+    "l_per_km": 0.14,
+    "condition": 90,
+    "failure_mult": 1.2,
+    "insurance_month": 165
+   },
+   "new": {
+    "name": "New efficient delivery van",
+    "price": 16800,
+    "l_per_km": 0.09,
+    "condition": 100,
+    "failure_mult": 0.7,
+    "insurance_month": 210
+   }
+  },
+  "wear_per_km": 0.025,
+  "breakdown_per_condition": 0.0015,
+  "breakdown_cap": 0.85,
+  "delay_minutes": 120,
+  "pay_mult": 0.6,
+  "tow": 140,
+  "repair": 260,
+  "service_cost": 180,
+  "service_minutes": 720,
+  "service_condition": 90,
+  "remind_below": 60
+ },
+ "delivery_routes": {
+  "days": 90,
+  "runs_week": 3,
+  "pay_run": 110,
+  "penalty_run": 55,
+  "offer_days": 7,
+  "counter_factor": 1.12,
+  "clients": [
+   {
+    "id": "bloom_coffee",
+    "name": "Bloom Coffee",
+    "place": "bloom_coffee"
+   },
+   {
+    "id": "lantern_bistro",
+    "name": "Lantern Bistro",
+    "place": "lantern_bistro"
+   },
+   {
+    "id": "threadline",
+    "name": "Threadline",
+    "place": "threadline"
+   }
+  ]
+ }
 }

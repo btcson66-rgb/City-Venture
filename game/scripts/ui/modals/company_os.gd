@@ -900,7 +900,7 @@ func _trait_text(tid: String) -> String:
 # ============================================================== CONTRACTS
 func _tab_contracts() -> void:
 	_concepts(["net_terms", "upfront", "late_penalty", "early_payment"])
-	var list := Contracts.open_list()
+	var list := Contracts.open_list().filter(func(c):return c.get("type","")!="delivery_route")
 	if list.is_empty():
 		content.add_child(UIK.wrap("No contracts yet. B2B customers want invoices from a registered company — and they usually pay later (Net 30).", 8, Art.C_MUTED, 480))
 		return
@@ -1428,6 +1428,8 @@ func _cafe_step(text: String, done: bool, note: String) -> HBoxContainer:
 
 # ============================================================== LOGISTICS
 func _tab_logistics() -> void:
+	var fleet:=UIK.button("Fleet, route contracts and maintenance",func():UIRoot.open_modal(LogisticsDepthModal.new()))
+	fleet.name="LogisticsDepthConsole";content.add_child(fleet)
 	var s := Logistics.S()
 	var head := UIK.hbox(6)
 	content.add_child(head)

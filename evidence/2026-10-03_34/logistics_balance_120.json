@@ -1,0 +1,207 @@
+{
+	"days": 120,
+	"failures": [],
+	"runs": [
+		{
+			"balanced": true,
+			"balances": {
+				"cash": 73640.87,
+				"equity": -60000.0,
+				"exp:fuel": 2560.04,
+				"exp:insurance": 660.0,
+				"exp:maintenance": 4240.0,
+				"exp:vehicle": 10409.47,
+				"revenue": -31510.38
+			},
+			"profit": 13640.87,
+			"revenue_dollars": 31510.38,
+			"scenario": "baseline",
+			"segment_sum_matches": true,
+			"strategy": "conservative",
+			"trips": 228.0
+		},
+		{
+			"balanced": true,
+			"balances": {
+				"cash": 73274.9,
+				"equity": -60000.0,
+				"exp:fuel": 2640.73,
+				"exp:insurance": 660.0,
+				"exp:maintenance": 3040.0,
+				"exp:vehicle": 10428.6,
+				"revenue": -30044.23
+			},
+			"profit": 13274.9,
+			"revenue_dollars": 30044.23,
+			"scenario": "mild",
+			"segment_sum_matches": true,
+			"strategy": "conservative",
+			"trips": 233.0
+		},
+		{
+			"balanced": true,
+			"balances": {
+				"cash": 59914.05,
+				"equity": -60000.0,
+				"exp:fuel": 2513.3,
+				"exp:insurance": 660.0,
+				"exp:maintenance": 3040.0,
+				"exp:vehicle": 10398.27,
+				"revenue": -16525.62
+			},
+			"profit": -85.95,
+			"revenue_dollars": 16525.62,
+			"scenario": "stress",
+			"segment_sum_matches": true,
+			"strategy": "conservative",
+			"trips": 225.0
+		},
+		{
+			"balanced": true,
+			"balances": {
+				"cash": 66180.21,
+				"equity": -60000.0,
+				"exp:fuel": 2998.84,
+				"exp:insurance": 660.0,
+				"exp:maintenance": 5480.0,
+				"exp:payroll": 8245.0,
+				"exp:recruiting": 40.0,
+				"exp:registration": 150.0,
+				"exp:vehicle": 10514.22,
+				"revenue": -34268.27
+			},
+			"profit": 6180.21,
+			"revenue_dollars": 34268.27,
+			"scenario": "baseline",
+			"segment_sum_matches": true,
+			"strategy": "normal",
+			"trips": 248.0
+		},
+		{
+			"balanced": true,
+			"balances": {
+				"cash": 64498.91,
+				"equity": -60000.0,
+				"exp:fuel": 2832.97,
+				"exp:insurance": 660.0,
+				"exp:maintenance": 3300.0,
+				"exp:payroll": 7735.0,
+				"exp:recruiting": 40.0,
+				"exp:registration": 150.0,
+				"exp:vehicle": 10474.58,
+				"revenue": -29691.46
+			},
+			"profit": 4498.91,
+			"revenue_dollars": 29691.46,
+			"scenario": "mild",
+			"segment_sum_matches": true,
+			"strategy": "normal",
+			"trips": 231.0
+		},
+		{
+			"balanced": true,
+			"balances": {
+				"cash": 52075.27,
+				"equity": -60000.0,
+				"exp:fuel": 2863.13,
+				"exp:insurance": 660.0,
+				"exp:maintenance": 2900.0,
+				"exp:payroll": 8245.0,
+				"exp:recruiting": 40.0,
+				"exp:registration": 150.0,
+				"exp:vehicle": 10481.89,
+				"revenue": -17415.29
+			},
+			"profit": -7924.73,
+			"revenue_dollars": 17415.29,
+			"scenario": "stress",
+			"segment_sum_matches": true,
+			"strategy": "normal",
+			"trips": 236.0
+		},
+		{
+			"balanced": true,
+			"balances": {
+				"cash": 45041.98,
+				"equity": -60000.0,
+				"exp:depreciation": 1110.27,
+				"exp:fuel": 3319.85,
+				"exp:insurance": 1500.0,
+				"exp:maintenance": 5960.0,
+				"exp:payroll": 15045.0,
+				"exp:recruiting": 80.0,
+				"exp:registration": 150.0,
+				"exp:vehicle": 10712.91,
+				"fixed_assets": 15689.73,
+				"revenue": -38609.74
+			},
+			"profit": 731.71,
+			"revenue_dollars": 38609.74,
+			"scenario": "baseline",
+			"segment_sum_matches": true,
+			"strategy": "aggressive",
+			"trips": 285.0
+		},
+		{
+			"balanced": true,
+			"balances": {
+				"cash": 43042.56,
+				"equity": -60000.0,
+				"exp:depreciation": 1110.27,
+				"exp:fuel": 3366.12,
+				"exp:insurance": 1500.0,
+				"exp:maintenance": 5160.0,
+				"exp:payroll": 14705.0,
+				"exp:recruiting": 80.0,
+				"exp:registration": 150.0,
+				"exp:vehicle": 10715.07,
+				"fixed_assets": 15689.73,
+				"revenue": -35518.75
+			},
+			"profit": -1267.71,
+			"revenue_dollars": 35518.75,
+			"scenario": "mild",
+			"segment_sum_matches": true,
+			"strategy": "aggressive",
+			"trips": 282.0
+		},
+		{
+			"balanced": true,
+			"balances": {
+				"cash": 26315.69,
+				"equity": -60000.0,
+				"exp:depreciation": 1110.27,
+				"exp:fuel": 3190.05,
+				"exp:insurance": 1500.0,
+				"exp:maintenance": 5560.0,
+				"exp:payroll": 16575.0,
+				"exp:recruiting": 80.0,
+				"exp:registration": 150.0,
+				"exp:vehicle": 10659.74,
+				"fixed_assets": 15689.73,
+				"revenue": -20830.48
+			},
+			"profit": -17994.58,
+			"revenue_dollars": 20830.48,
+			"scenario": "stress",
+			"segment_sum_matches": true,
+			"strategy": "aggressive",
+			"trips": 286.0
+		}
+	],
+	"scenarios": "baseline/mild/stress run pay per stop 20/18/8 dollars; route fees 110/100/45 dollars; randomized jobs and failures; no artificial receipts",
+	"strategies": {
+		"aggressive": {
+			"losses": 2,
+			"mean_profit_dollars": -6176.86
+		},
+		"conservative": {
+			"losses": 1,
+			"mean_profit_dollars": 8943.27
+		},
+		"normal": {
+			"losses": 1,
+			"mean_profit_dollars": 918.13
+		}
+	}
+}

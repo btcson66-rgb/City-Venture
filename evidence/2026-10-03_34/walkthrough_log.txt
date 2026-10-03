@@ -1,0 +1,43 @@
+   0.0s STEP Main menu → New Game
+   0.6s   shot 01_main_menu.png
+   0.6s   click [NewGame] New Game
+   1.9s STEP Character Creator
+   2.0s   shot 02_creator_default.png
+   2.1s   click [Tab_hair] Hair
+   2.2s   click [Next_hair] ▶
+   2.6s   click [Tab_face] Face
+   2.8s   click [Next_face] ▶
+   3.0s   click [Next_eye_shape] ▶
+   3.2s   click [Tab_body] Body
+   3.3s   click [Next_presentation] ▶
+   4.0s   shot 03_creator_customised.png
+   4.2s   click [Tab_outfit] Outfit
+   4.3s   click "Startup Casual"
+   4.9s   ok  appearance changed from default (short_neat)
+   5.0s   shot 04_creator_final.png
+   5.1s   click [Start] Start in Aurelia  →
+   5.2s [6月1日（週日） 下午 2:00] STEP Arrival sequence
+   7.9s [6月1日（週日） 下午 2:00]   shot 05_arrival_train.png
+  11.5s [6月1日（週日） 下午 2:00]   shot 06_arrival_phone.png
+  16.6s [6月1日（週日） 下午 2:01]   ok  spawned in the Riverside apartment
+  16.6s [6月1日（週日） 下午 2:01]   ok  starting cash $30,000
+  16.6s [6月1日（週日） 下午 2:01]   ok  name saved
+  18.4s [6月1日（週日） 下午 2:03]   shot 07_apartment_arrival.png
+  23.3s [6月1日（週日） 下午 2:10]   use "Fleet, route contracts and maintenance"
+  23.9s [6月1日（週日） 下午 2:11]   shot 08_fleet_first_vehicle_and_routes.png
+  24.9s [6月1日（週日） 下午 2:11]   click [FleetBuy_new] 購買 新款節能貨車：$16,800.00，另加保險 $210.00
+  25.5s [6月1日（週日） 下午 2:11]   ok  second showroom purchase real
+  26.5s [6月1日（週日） 下午 2:11]   click [FleetSelect_van2] 二號貨車 · 新款節能貨車
+  27.2s [6月1日（週日） 下午 2:11]   shot 09_fleet_new_vehicle_report.png
+  28.2s [6月1日（週日） 下午 2:11]   click [RouteCounter_C-001] Counter +5% per trip
+  29.9s [6月1日（週日） 下午 2:11]   click [RouteSign_C-001] Sign ninety-day route
+  31.6s [6月1日（週日） 下午 2:11]   click [RouteDrive_C-001] Drive planned route
+  32.2s [6月1日（週日） 下午 3:50]   ok  native route drive fulfilled
+  35.3s [6月1日（週日） 下午 3:50]   shot 10_fleet_actual_trip_report.png
+  36.3s [6月1日（週日） 下午 3:50]   click [FleetService_van2] 保養 二號貨車：$180.00，需停用半天
+  36.9s [6月1日（週日） 下午 3:50]   ok  service actually blocks vehicle
+  37.0s [6月1日（週日） 下午 3:50]   shot 11_fleet_half_day_service.png
+  37.0s [6月2日（週一） 上午 3:50]   ok  half-day service returns vehicle
+  37.0s [6月2日（週一） 上午 3:50]   ok  fleet money balanced
+  37.0s [6月2日（週一） 上午 3:50]   ok  played fleet save
+  37.1s [6月2日（週一） 上午 3:50] BOT FINISHED — 0 failure(s) · 37.1s real

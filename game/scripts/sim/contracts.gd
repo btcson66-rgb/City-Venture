@@ -11,6 +11,7 @@ static func C() -> Dictionary:
 
 
 static func create_offer(t: Dictionary) -> String:
+	if t.get("type","")=="delivery_route":return LogisticsDepth.offer(t)
 	var n := C().size() + 1
 	var cid := "C-%03d" % n
 	var p := DataDB.product(t["product"])
@@ -122,6 +123,7 @@ static func accept(cid: String) -> Dictionary:
 		return {"ok": false, "error": I18n.t("This is a contract of a closed company.")}
 	if not can_trade():
 		return {"ok": false, "error": "They need an invoice from a registered company."}
+	if c.get("type","")=="delivery_route":return LogisticsDepth.sign(c)
 	c["seller"] = GameState.business_entity()
 	c["status"] = "active"
 	c["accepted"] = Clock.now()
@@ -150,6 +152,7 @@ static func reject(cid: String) -> void:
 	var c: Dictionary = C().get(cid, {})
 	if c.is_empty():
 		return
+	if c.get("type","")=="delivery_route" and c["status"]!="offered":return
 	c["status"] = "rejected"
 	c["history"].append({"t": Clock.now(), "by": GameState.business_entity(), "text": "Declined."})
 	_tag(c, "declined")
@@ -167,6 +170,7 @@ static func counter(cid: String, unit_price: float, terms_days: int, upfront_rat
 		return {"ok": false, "error": "Register your company first."}
 	if c.get("type", "") == "lumina_distributor" and upfront_rate > 0:
 		return {"ok": false, "error": "Lumina distributor invoices are paid after arrival; choose 0% upfront."}
+	if c.get("type","")=="delivery_route":return LogisticsDepth.counter(c,unit_price,terms_days,upfront_rate)
 	var neg: Dictionary = DataDB.companies.get(c["buyer"], {}).get("negotiation", {})
 	c["history"].append({"t": Clock.now(), "by": GameState.business_entity(),
 		"text": I18n.t("Counter: %s/unit, Net %d%s") % [Fmt.money(unit_price), terms_days, (I18n.t(", %d%% upfront") % int(upfront_rate * 100)) if upfront_rate > 0 else ""]})
@@ -223,6 +227,7 @@ static func delivery_block(cid: String) -> String:
 		return I18n.t("This contract belongs to another company.")
 	if c.is_empty() or c["status"] != "active":
 		return I18n.t("Nothing to deliver.")
+	if c.get("type","")=="delivery_route":return "Run this route from the fleet console; no stock shipment is required."
 	if stock_for(c) < int(c["qty"]):
 		return I18n.t("You need %d in stock (have %d).") % [int(c["qty"]), stock_for(c)]
 	return ""

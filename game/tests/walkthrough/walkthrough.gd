@@ -17,6 +17,9 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "logistics_depth":
+		await _logistics_depth_fixture()
+		return
 	if _arg("from") == "cafe_depth":
 		await _cafe_depth_fixture()
 		return
@@ -3067,3 +3070,31 @@ func _cafe_depth_fixture() -> void:
 	await bot.shot("cafe_thirty_day_actual_report")
 	bot.expect(Ledger.check_balanced(),"two cafés books balance")
 	bot.expect(SaveSystem.save_to(bot.out_dir.path_join("cafe_depth.json")),"played two café save")
+
+
+func _logistics_depth_fixture() -> void:
+	await bot.wait(4)
+	UIRoot._suppress_decisions=true;UIRoot.tutorial.st()["off"]=true;StoryEngine.St()["active"].clear()
+	Company.register("Harbor Fleet","logistics","Pier 7");Company.open_business_account(20000)
+	Ledger.post(GameState.company_id(),"Controlled fleet capital",[{"acct":"cash","dr":60000},{"acct":"equity","cr":60000}],{"type":"qa_fixture"})
+	Logistics.buy_van();LogisticsDepth.on_hour(Clock.now(),7)
+	UIRoot.close_all();SceneRouter._enter("interior","dockside_motors","door","up")
+	await bot.wait(.8);await bot.use_action("logistics_depth")
+	await bot.wait(.4);await bot.shot("fleet_first_vehicle_and_routes")
+	await _export_row_input("FleetBuy_new")
+	bot.expect(LogisticsDepth.vehicles().has("van2"),"second showroom purchase real")
+	await _export_row_input("FleetSelect_van2")
+	await bot.shot("fleet_new_vehicle_report")
+	var id: String=Contracts.C().values().filter(func(c):return c.get("type","")=="delivery_route")[0]["id"]
+	await _export_row_input("RouteCounter_"+id)
+	await _export_row_input("RouteSign_"+id)
+	await _export_row_input("RouteDrive_"+id)
+	bot.expect(int(Contracts.C()[id]["completed"])==1,"native route drive fulfilled")
+	await bot.wait(3);await bot.shot("fleet_actual_trip_report")
+	await _export_row_input("FleetService_van2")
+	bot.expect(not LogisticsDepth.available("van2"),"service actually blocks vehicle")
+	await bot.shot("fleet_half_day_service")
+	UIRoot.close_all();Clock.advance(12*60)
+	bot.expect(LogisticsDepth.available("van2"),"half-day service returns vehicle")
+	bot.expect(Ledger.check_balanced(),"fleet money balanced")
+	bot.expect(SaveSystem.save_to(bot.out_dir.path_join("logistics_depth.json")),"played fleet save")
