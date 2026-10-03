@@ -206,3 +206,14 @@ static func contact_name(npc: String) -> String:
 		"shoplane":
 			return I18n.t("ShopLane")
 	return npc.replace("_", " ").capitalize()
+
+static func finish_call(npc: String, conversation: String) -> void:
+	if GameState.flag("phone_call_" + conversation): return
+	GameState.set_flag("phone_call_" + conversation)
+	for message in GameState.data["messages"]:
+		if message["from"] == npc and message.get("direction", "incoming") == "incoming" and not message.has("answered"):
+			prepare(message)
+			message["answered"] = "dialogue:" + conversation
+			S()["expiry"].erase(message["id"])
+			break
+	outgoing(npc, I18n.t("Phone conversation completed."))

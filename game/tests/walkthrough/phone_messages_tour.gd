@@ -10,6 +10,14 @@ func run() -> void:
 	GameState.data["tutorial"] = {"v": 3, "off": true, "seen": {}}
 	SceneRouter._enter("district", "riverside", "door_home", "up")
 	UIRoot.set_hud_visible(true)
+	GameState.add_message("maya", "So you actually quit?")
+	UIRoot.phone.open()
+	await bot.wait(0.3)
+	await bot.click_named("App_messages")
+	await bot.click_named("Thread_maya")
+	await bot.talk_through_dialogue()
+	bot.expect(GameState.flag("maya_intro_done"), "Maya phone conversation unlocks the first chapter")
+	bot.expect(GameState.flag("phone_call_maya_intro"), "completed call has a saved receipt")
 	Bank.book_appointment()
 	var message: Dictionary = GameState.data["messages"].back()
 	UIRoot.phone.open()
@@ -47,3 +55,4 @@ func run() -> void:
 	bot.expect(latest.get_global_rect().end.y <= scroll.get_global_rect().end.y + 1, "latest outgoing reply is visible without losing history")
 	await bot.shot("proactive_result")
 	UIRoot.phone.close()
+

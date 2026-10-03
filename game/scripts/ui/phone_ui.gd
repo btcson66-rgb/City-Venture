@@ -212,6 +212,10 @@ func _open_thread(from: String) -> void:
 	for m in GameState.data["messages"]:
 		if m["from"] == from:
 			m["read"] = true
+	if from == "maya" and not GameState.flag("maya_intro_done"):
+		close()
+		UIRoot.play_dialogue("maya_intro", PhoneMessages.finish_call.bind("maya", "maya_intro"))
+		return
 	_go("thread")
 
 

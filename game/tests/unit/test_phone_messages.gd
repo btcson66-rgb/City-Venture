@@ -153,3 +153,20 @@ func test_thread_has_only_one_available_recommended_primary() -> void:
 		if not button.is_queued_for_deletion() and button.has_theme_stylebox_override("normal"): primary += 1
 	runner.eq(primary, 1, "one primary across the entire thread")
 	UIRoot.phone.close()
+
+func test_maya_intro_phone_gate_and_completed_call_are_not_replayed() -> void:
+	GameState.add_message("maya", "Hello")
+	var id: String = GameState.data["messages"].back()["id"]
+	UIRoot.phone.open()
+	UIRoot.phone._open_thread("maya")
+	runner.check(UIRoot.dialogue.active and UIRoot.dialogue.conv_id == "maya_intro", "phone still opens first-chapter conversation")
+	UIRoot.dialogue._end()
+	runner.check(GameState.flag("maya_intro_done"), "actual dialogue completion unlocks first chapter")
+	runner.eq(PhoneMessages.get_message(id)["answered"], "dialogue:maya_intro", "call receipt saved in thread")
+	var count: int = GameState.data["messages"].size()
+	PhoneMessages.finish_call("maya", "maya_intro")
+	runner.eq(GameState.data["messages"].size(), count, "completed call not duplicated")
+	UIRoot.phone.open()
+	UIRoot.phone._open_thread("maya")
+	runner.check(not UIRoot.dialogue.active and UIRoot.phone.app == "thread", "already completed conversation opens normal history")
+	UIRoot.phone.close()

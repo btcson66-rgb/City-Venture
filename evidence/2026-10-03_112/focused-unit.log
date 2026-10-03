@@ -1,16 +1,17 @@
 Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
 
   PASS test_phone_messages.gd::test_reply_exactly_once_and_old_save_migration (1 ms)
-  PASS test_phone_messages.gd::test_expired_default_and_unavailable_effect_do_not_stall (0 ms)
+  PASS test_phone_messages.gd::test_expired_default_and_unavailable_effect_do_not_stall (1 ms)
   PASS test_phone_messages.gd::test_conditions_contacts_cooldown_and_saved_agenda (19 ms)
-  PASS test_phone_messages.gd::test_missed_meeting_can_rebook_without_softlock (26 ms)
-  PASS test_phone_messages.gd::test_bank_appointment_reply_creates_agenda_and_decline_cancels (1 ms)
-  PASS test_phone_messages.gd::test_contract_details_accept_decline_and_closed_guard (0 ms)
+  PASS test_phone_messages.gd::test_missed_meeting_can_rebook_without_softlock (33 ms)
+  PASS test_phone_messages.gd::test_bank_appointment_reply_creates_agenda_and_decline_cancels (0 ms)
+  PASS test_phone_messages.gd::test_contract_details_accept_decline_and_closed_guard (1 ms)
   PASS test_phone_messages.gd::test_payment_extension_reschedules_once_without_debt_forgiveness (0 ms)
-  PASS test_phone_messages.gd::test_event_reply_uses_existing_queue_and_resolved_elsewhere_is_readonly (0 ms)
-  PASS test_phone_messages.gd::test_group_offer_reply_and_decline_are_actual_saved_decisions (3 ms)
-  PASS test_phone_messages.gd::test_multi_effect_failure_restores_receipts_before_retry (0 ms)
+  PASS test_phone_messages.gd::test_event_reply_uses_existing_queue_and_resolved_elsewhere_is_readonly (1 ms)
+  PASS test_phone_messages.gd::test_group_offer_reply_and_decline_are_actual_saved_decisions (4 ms)
+  PASS test_phone_messages.gd::test_multi_effect_failure_restores_receipts_before_retry (1 ms)
   PASS test_phone_messages.gd::test_failed_multi_effect_timeout_ends_in_current_saved_state (0 ms)
-  PASS test_phone_messages.gd::test_thread_has_only_one_available_recommended_primary (7 ms)
+  PASS test_phone_messages.gd::test_thread_has_only_one_available_recommended_primary (8 ms)
+  PASS test_phone_messages.gd::test_maya_intro_phone_gate_and_completed_call_are_not_replayed (49 ms)
 
-12/12 tests passed in 3.3s
+13/13 tests passed in 3.1s
