@@ -135,7 +135,8 @@ func _room(slot: String) -> void:
 		flash("✗ Already booked. Offer a free room or another hour.", false)
 		return
 	rooms[slot] = visitors[round_i]["name"]
-	var quality := visitor_quality * 0.6 + 0.4
+	var weight := float(FreelanceWorkflow.cfg()["service_first_weight"])
+	var quality := visitor_quality * weight + (1.0 - weight)
 	if quality >= 0.99: right += 1
 	award(quality)
 	next_round()

@@ -297,7 +297,7 @@ static func _deliver(g: Dictionary) -> Dictionary:
 		f["late"] = int(f["late"]) + 1
 		f["rep"] = clampf(rep() - 0.5, 0.0, 5.0)
 	else:
-		f["rep"] = clampf(rep() + ((int(g["workflow"]["rating"]) - 3) * 0.125 if g.has("workflow") else 0.25), 0.0, 5.0)
+		f["rep"] = clampf(rep() + ((int(g["workflow"]["rating"]) - 3) * float(FreelanceWorkflow.cfg()["rating_rep_per_star"]) if g.has("workflow") else 0.25), 0.0, 5.0)
 	GameState.inc_stat("gigs_delivered")
 	GameState.add_message("client", I18n.t("%s: Received, thanks! Invoice for %s noted.") % [str(g["client"]), Fmt.money(fee)] if not late
 		else I18n.t("%s: It's late, so we've knocked 20%% off. Invoice for %s noted.") % [str(g["client"]), Fmt.money(fee)])

@@ -54,7 +54,7 @@ static func work(id: String, hours: float, quality: float) -> Dictionary:
 	Careers.C()["daily_freelance_hours"][day] = used + clock_h
 	w["quality"] = float(w["quality"]) + quality
 	w["sessions"] = int(w["sessions"]) + 1
-	g["done"] = minf(float(g["hours"]), float(g["done"]) + clock_h * (0.5 + 0.75 * quality))
+	g["done"] = minf(float(g["hours"]), float(g["done"]) + clock_h * (float(cfg()["work_base_efficiency"]) + float(cfg()["work_quality_efficiency"]) * quality))
 	Careers.C()["last_freelance_day"] = Clock.day_index()
 	Clock.advance(roundi(clock_h * 60))
 	GameState.inc_stat("gig_hours", clock_h)

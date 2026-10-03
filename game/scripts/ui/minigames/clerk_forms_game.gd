@@ -127,7 +127,8 @@ func _decide(approve: bool) -> void:
 
 func _call(correct: bool) -> void:
 	if service_stage != "call": return
-	var quality := form_quality * 0.6 + (0.4 if correct else 0.0)
+	var weight := float(FreelanceWorkflow.cfg()["service_first_weight"])
+	var quality := form_quality * weight + ((1.0 - weight) if correct else 0.0)
 	if quality >= 0.99: right += 1
 	award(quality)
 	next_round()

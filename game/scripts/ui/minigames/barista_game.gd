@@ -95,7 +95,7 @@ func _process(dt: float) -> void:
 func _deliver(destination: int) -> void:
 	if want["station"] != "deliver": return
 	var correct := destination == int(want["destination"])
-	want["quality"] = float(want["quality"]) * (1.0 if correct else 0.5)
+	want["quality"] = float(want["quality"]) * (1.0 if correct else float(FreelanceWorkflow.cfg()["wrong_table_quality"]))
 	completed_stations["deliver"] += int(correct)
 	want["station"] = "clean"
 	if int(want["destination"]) > 0: tables[int(want["destination"])] = "dirty"

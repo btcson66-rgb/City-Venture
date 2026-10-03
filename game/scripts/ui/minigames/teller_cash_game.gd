@@ -125,7 +125,8 @@ func _hand() -> void:
 
 func _refund(approve: bool) -> void:
 	if service_stage != "refund": return
-	var quality := cash_quality * 0.6 + (0.4 if approve == receipt_valid else 0.0)
+	var weight := float(FreelanceWorkflow.cfg()["service_first_weight"])
+	var quality := cash_quality * weight + ((1.0 - weight) if approve == receipt_valid else 0.0)
 	if quality >= 0.99: right += 1
 	award(quality)
 	next_round()
