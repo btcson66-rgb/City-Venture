@@ -1,4 +1,4 @@
-# #40 self-review in progress
+# #40 self-review completed
 
 Shop short tour: 104 steps, 22 screenshots, zero failures in 170.0 seconds. It purchases actual stock, researches shelf prices, sees the Company OS badge, travels to Rosa's reception, pays AUD$12.00 for a single class, waits for the actual timetable and attends a one-hour class. A seeded networking opportunity is chosen through the real DecisionModal. Save/load and books remain consistent. Raw English audit has three inherited branding/id/beta findings; no new shop or fitness text remains.
 
@@ -11,3 +11,5 @@ Rosa uses existing outfit art; requested outfit/portrait in art backlog. Main st
 Final closure review binds queued opportunities to their original business account. After closure or a different active seller, accepting cannot charge the new account or create a contract; decline still works. Seven related tests include this path. The earlier complete run stopped without a completion report on August 30, so it is not counted as passed; the current reviewed full run is pending.
 
 The reviewed full run finished 2611 steps/349 screenshots in 5529.2 seconds with exactly two reception-button failures after an overnight time jump. All story chapters and industry checks completed, including real September shock-month business profit about AUD$1407; this is not a zero-failure pass. The short tour now waits for the one-second NPC schedule refresh and explicitly verifies Rosa leaves at 20:00 and returns next weekday. Its 104 steps/22 screenshots pass with zero failures. The final complete run is still pending.
+
+Final cadence run: 2533 steps, 366 screenshots, zero failures in 4923.3 seconds. All twelve story chapters and registered industry fixtures complete; chapter seven records actual monthly profit AUD$1869 and survived_losses=false. The periodic reception refresh fix passes in the complete run. Full raw English audit retains 74 inherited names/direction/beta findings; short shop audit has no new shop text. Historical failed/interrupted runs above remain recorded and are superseded by this final report. #28 may now begin.
