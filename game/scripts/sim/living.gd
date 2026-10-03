@@ -77,6 +77,7 @@ static func _charge_lease(pid: String, ls: Dictionary) -> void:
 
 ## Sign a lease. Office: deposit + first month. Co-work desk: first month.
 static func lease(pid: String) -> Dictionary:
+	if pid=="popup_cafe" and D()["leases"].has("popup_retail"):return {"ok":false,"error":"Pop-up Unit 5 already has a retail tenant. End that lease before opening a café."}
 	var prop: Dictionary = DataDB.properties.get(pid, {})
 	if prop.is_empty():
 		return {"ok": false, "error": "Unknown property."}

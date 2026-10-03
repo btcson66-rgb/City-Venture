@@ -17,6 +17,9 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "cafe_depth":
+		await _cafe_depth_fixture()
+		return
 	if _arg("from") == "personal_assets":
 		await _personal_assets_fixture()
 		return
@@ -1403,6 +1406,11 @@ func _shock_restock() -> void:
 			if Ecommerce.space_block("riverside_studio", qty) != "" or Ledger.cash(GameState.business_entity()) < qty * Ecommerce.unit_cost("tradelink_wholesale", pid): break
 			await bot.click_named("Buy_tradelink_wholesale_" + pid, 3.0)
 	await close_modal()
+	# The integrated tour has already opened a café. Keep its real supplies alive while the company faces the shock.
+	if Cafe.leased() and Cafe.ready_to_open() and int(Cafe.S()["supplies"])+int(Cafe.S()["incoming"])<int(Cafe.expected_day_demand()*3):
+		await _home_laptop("cafe")
+		await bot.click_named("CafeSupplies_large",3.0)
+		await close_modal()
 
 
 func _chapters_7_to_9() -> void:
@@ -3002,3 +3010,60 @@ func _personal_assets_fixture() -> void:
 	await bot.shot("personal_home_furniture")
 	bot.expect(Ledger.check_balanced(),"personal property/car books balanced")
 	bot.expect(SaveSystem.save_to(bot.out_dir.path_join("personal_assets.json")),"played owned home and car save")
+
+
+func _cafe_depth_fixture() -> void:
+	await bot.wait(4)
+	UIRoot._suppress_decisions=true
+	UIRoot.tutorial.st()["off"]=true
+	StoryEngine.St()["active"].clear()
+	Company.register("Lantern Café","retail_online","Lantern Row")
+	Company.open_business_account(20000)
+	Ledger.post(GameState.company_id(),"Controlled operating fixture",[{"acct":"cash","dr":80000},{"acct":"equity","cr":80000}],{"type":"qa_fixture"})
+	Living.lease("corner_cafe");Cafe.fit_out();Cafe.apply_permit();Cafe.order_supplies("large")
+	Clock.advance(3*Clock.DAY)
+	Staff.register_employer();Staff.post_job("barista");Clock.advance(19*60)
+	Staff.hire(Staff.S()["applicants"][0]["id"])
+	UIRoot.close_all()
+	SceneRouter._enter("interior","corner_cafe_unit","door","up")
+	await bot.wait(.8)
+	UIRoot.open_modal(CafeDepthModal.new())
+	await bot.wait(.5)
+	await bot.shot("cafe_six_item_menu")
+	for id in ["milk","tea","food"]:await _export_row_input("CafeMaterial_"+id)
+	await bot.click_named("CafePage_shifts")
+	await bot.wait(.4)
+	await bot.shot("cafe_weekly_roster")
+	await bot.click_named("CafeShop_popup_cafe")
+	await _export_row_input("CafeDepthLease")
+	await _export_row_input("CafeDepthFit")
+	await _export_row_input("CafeDepthPermit")
+	bot.expect(not Cafe.in_shop("popup_cafe",Cafe.permitted),"second premises require own licence")
+	UIRoot.close_all();Clock.advance(3*Clock.DAY)
+	Cafe.in_shop("popup_cafe",func():Cafe.order_supplies("large"))
+	Clock.advance(Clock.DAY)
+	bot.expect(Cafe.in_shop("popup_cafe",Cafe.ready_to_open),"actual second café open requirements")
+	UIRoot.open_modal(CafeDepthModal.new("popup_cafe"))
+	await bot.wait(.4)
+	await bot.click_named("CafePage_menu")
+	await bot.shot("cafe_second_location")
+	await bot.click_named("CafePage_inspection")
+	await _export_row_input("CafeClosingClean")
+	Cafe.in_shop("popup_cafe",func():Cafe.S()["inspection_next"]=Clock.now();CafeDepth.inspection_due())
+	UIRoot.close_all();UIRoot.open_modal(CafeDepthModal.new("popup_cafe"))
+	await bot.wait(.3)
+	await bot.click_named("CafePage_inspection")
+	await _export_row_input("CafeInspectNow")
+	await bot.shot("cafe_inspection_outcome")
+	UIRoot.close_all()
+	GameState.data["clock"]["minutes"]=Clock.DAY*15+8*60
+	var shift:=Cafe.owner_shift(.9)
+	bot.expect(shift["ok"],"actual owner counter shift")
+	Clock.advance(7*60)
+	bot.expect(Cafe.last_days(30,"rev")>0,"actual counter customers create till revenue")
+	UIRoot.close_all();UIRoot.open_modal(CafeDepthModal.new())
+	await bot.wait(.4)
+	await bot.click_named("CafePage_report")
+	await bot.shot("cafe_thirty_day_actual_report")
+	bot.expect(Ledger.check_balanced(),"two cafés books balance")
+	bot.expect(SaveSystem.save_to(bot.out_dir.path_join("cafe_depth.json")),"played two café save")

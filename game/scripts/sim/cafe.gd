@@ -16,12 +16,34 @@ extends RefCounted
 const SUPPLIER := "old_town_roasters"
 
 
+static var view_property: String="corner_cafe"
+static var _game_stamp: float=-1
+static func _fresh() -> Dictionary:
+	return {"fit_ready":-1,"permit_ready":-1,"supplies":0,"incoming":0,"pastries":0,"pastry_order":20,"prices":{"coffee":4.2,"pastry":3.8},"ads":0.0,"rating":float(cfg().get("rating_start",3.4)),"owner_from":-1,"owner_until":-1,"today":{},"days":[],"name":"","first_sale":-1,"shut_warned":-1}
 static func S() -> Dictionary:
-	if not GameState.data.has("cafe"):
-		GameState.data["cafe"] = {"fit_ready": -1, "permit_ready": -1, "supplies": 0, "incoming": 0, "pastries": 0,
-			"pastry_order": 20, "prices": {"coffee": 4.2, "pastry": 3.8}, "ads": 0.0, "rating": float(cfg().get("rating_start", 3.4)),
-			"owner_from": -1, "owner_until": -1, "today": {}, "days": [], "name": "", "first_sale": -1, "shut_warned": -1}
-	return GameState.data["cafe"]
+	if not GameState.data.has("cafe"):GameState.data["cafe"]=_fresh()
+	var stamp:=float(GameState.data["meta"].get("created_unix",0))
+	if stamp!=_game_stamp:_game_stamp=stamp;view_property="corner_cafe"
+	var root: Dictionary=GameState.data["cafe"]
+	if not root.has("branches"):root["branches"]={}
+	if not root.has("roster"):root["roster"]={}
+	if not root.has("work_hours"):root["work_hours"]={}
+	var result: Dictionary=root
+	if view_property!="corner_cafe":
+		if not root["branches"].has(view_property):root["branches"][view_property]=_fresh()
+		result=root["branches"][view_property]
+	CafeDepth.enrich(result)
+	return result
+static func in_shop(property: String,fn: Callable) -> Variant:
+	S()
+	var previous:=view_property
+	view_property=property
+	var result=fn.call()
+	view_property=previous
+	return result
+static func select_shop(property: String) -> void:
+	S()
+	if cfg()["locations"].has(property):view_property=property
 
 
 static func cfg() -> Dictionary:
@@ -33,7 +55,8 @@ static func item(id: String) -> Dictionary:
 
 
 static func property_id() -> String:
-	return str(cfg().get("property", "corner_cafe"))
+	S()
+	return view_property
 
 
 static func leased() -> bool:
@@ -68,7 +91,7 @@ static func fitting() -> bool:
 
 
 static func permitted() -> bool:
-	return GameState.flag("food_permit")
+	return GameState.flag("food_permit") if property_id()=="corner_cafe" else bool(S().get("food_permit",false))
 
 
 static func permit_pending() -> bool:
@@ -99,7 +122,7 @@ static func fit_out() -> Dictionary:
 	var cost := float(cfg().get("fitout_cost", 5800))
 	if Ledger.cash(entity()) < cost:
 		return {"ok": false, "error": I18n.t("The fit-out costs %s.") % Fmt.money0(cost)}
-	Ledger.expense(entity(), "fitout", cost, I18n.t("Café fit-out: espresso machine, counter, tables"), {"segment": "cafe", "type": "cafe"})
+	Ledger.expense(entity(), "fitout", cost, I18n.t("Café fit-out: espresso machine, counter, tables"), {"segment":"cafe","type":"cafe","property":property_id()})
 	S()["fit_ready"] = Clock.now() + Clock.DAY
 	GameState.timeline(I18n.t("Fitted out %s.") % display_name(), "business")
 	return {"ok": true, "cost": cost, "ready": int(S()["fit_ready"])}
@@ -124,10 +147,10 @@ static func apply_permit() -> Dictionary:
 		return {"ok": false, "error": why}
 	var fee := float(cfg().get("permit_fee", 280))
 	if Ledger.cash(entity()) < fee:
-		return {"ok": false, "error": I18n.t("The licence fee is %s.") % Fmt.money0(fee)}
+		return {"ok": false, "error": I18n.t("The licence fee is %s.") % Fmt.money(fee)}
 	Ledger.expense(entity(), "registration", fee, "Food handling licence", {"segment": "cafe", "type": "permit"})
 	S()["permit_ready"] = Clock.now() + int(cfg().get("permit_hours", 48)) * 60
-	Sim.schedule(int(S()["permit_ready"]), "cafe.permit", {})
+	Sim.schedule(int(S()["permit_ready"]), "cafe.permit", {"property":property_id()})
 	return {"ok": true, "fee": fee, "ready": int(S()["permit_ready"])}
 
 
@@ -140,7 +163,7 @@ static func pack(id: String) -> Dictionary:
 
 
 static func pack_cost(id: String) -> float:
-	return snappedf(float(pack(id).get("cost", 0.0)) * World.cost_mult(SUPPLIER), 1.0)
+	return snappedf(float(pack(id).get("cost", 0.0)) * World.cost_mult(SUPPLIER), .01)
 
 
 ## Coffee, milk and cups from Old Town Roasters: delivered at 6:00 the next morning.
@@ -156,14 +179,15 @@ static func order_supplies(id: String) -> Dictionary:
 	if Ledger.cash(entity()) < cost:
 		return {"ok": false, "error": I18n.t("You need %s.") % Fmt.money0(cost)}
 	Ledger.post(entity(), I18n.t("Old Town Roasters: supplies for %d cups") % int(p["cups"]),
-		[{"acct": "cogs", "dr": cost}, {"acct": "cash", "cr": cost}], {"segment": "cafe", "type": "cafe"})
+		[{"acct": "cogs", "dr": cost}, {"acct": "cash", "cr": cost}], {"segment":"cafe","type":"cafe","property":property_id()})
 	S()["incoming"] = int(S()["incoming"]) + int(p["cups"])
 	var t := Clock.now() - Clock.now() % Clock.DAY + Clock.DAY + 6 * 60
-	Sim.schedule(t, "cafe.supplies", {"cups": int(p["cups"])})
+	Sim.schedule(t, "cafe.supplies", {"cups": int(p["cups"]),"property":property_id()})
 	return {"ok": true, "cost": cost, "eta": t}
 
 
 static func set_price(id: String, p: float) -> void:
+	if not is_finite(p) or not cfg()["items"].has(id):return
 	var it := item(id)
 	S()["prices"][id] = clampf(snappedf(p, 0.05), float(it.get("min", 1.0)), float(it.get("max", 10.0)))
 
@@ -191,7 +215,7 @@ static func open_day(t := -1) -> bool:
 ## True while the doors are open (an open day, between opening and closing time, fitted and licensed).
 static func is_open_now() -> bool:
 	var h := Clock.hour()
-	return ready_to_open() and open_day() and h >= int(cfg().get("open_hour", 7)) and h < int(cfg().get("close_hour", 17))
+	return ready_to_open() and Clock.now()>=int(S()["inspection_until"]) and open_day() and h >= int(cfg().get("open_hour", 7)) and h < int(cfg().get("close_hour", 17))
 
 
 # ------------------------------------------------------------------ demand model
@@ -211,8 +235,8 @@ static func ads_factor() -> float:
 ## Expected customers who want a coffee in hour `hh` (before the counter's capacity and the supplies).
 static func expected_demand(hh: int, saturday := false) -> float:
 	var share := float(cfg().get("hour_share", {}).get(str(hh), 0.0))
-	var foot := float(cfg().get("footfall_day", 210)) * share * (float(cfg().get("saturday_mult", 1.3)) if saturday else 1.0)
-	return foot * float(cfg().get("base_conversion", 0.3)) * _price_factor("coffee") * rating_factor() * ads_factor()
+	var foot := float(cfg()["locations"][property_id()]["footfall_mult"]) * float(cfg().get("footfall_day", 210)) * share * (float(cfg().get("saturday_mult", 1.3)) if saturday else 1.0)
+	return foot * (1+float(cfg()["drink_shares"]["seasonal"])*float(cfg()["seasonal_demand_bonus"]) if CafeDepth.seasonal("seasonal") else 1) * float(cfg().get("base_conversion", 0.3)) * _price_factor("coffee") * rating_factor() * ads_factor()
 
 
 ## A normal weekday at today's prices, rating and flyers.
@@ -229,7 +253,7 @@ static func pastry_attach() -> float:
 
 ## Baristas on staff behind the counter at minute t.
 static func baristas_at(t: int) -> Array:
-	return Staff.people().filter(func(p): return p["role"] == "barista" and Staff.is_working(p, t))
+	return Staff.people().filter(func(p): return p["role"] == "barista" and CafeDepth.scheduled(p,t,property_id()))
 
 
 static func barista_capacity(t: int) -> float:
@@ -289,11 +313,16 @@ static func _today() -> Dictionary:
 
 
 static func on_hour(t: int, h: int) -> void:
+	if not GameState.data.has("cafe"):return
+	for property in cfg()["locations"]:
+		in_shop(property,func():_shop_hour(t,h))
+static func _shop_hour(t: int, h: int) -> void:
 	if not GameState.data.has("cafe") or not leased():
 		return
 	var oh := int(cfg().get("open_hour", 7))
 	var ch := int(cfg().get("close_hour", 17))
-	if not ready_to_open() or not open_day(t - 60):
+	CafeDepth.inspection_due()
+	if not ready_to_open() or not open_day(t - 60) or Clock.now()<int(S()["inspection_until"]):
 		return
 	if h == oh:
 		_open_doors()
@@ -309,10 +338,10 @@ static func _open_doors() -> void:
 	var n := int(s["pastry_order"])
 	if n > 0:
 		var cost := snappedf(n * float(item("pastry").get("unit_cost", 1.3)) * World.cost_mult(SUPPLIER), 0.01)
-		Ledger.post(entity(), I18n.t("Bakery delivery: %d pastries") % n, [{"acct": "cogs", "dr": cost}, {"acct": "cash", "cr": cost}], {"segment": "cafe", "type": "cafe"})
+		Ledger.post(entity(), I18n.t("Bakery delivery: %d pastries") % n, [{"acct": "cogs", "dr": cost}, {"acct": "cash", "cr": cost}], {"segment":"cafe","type":"cafe","property":property_id()})
 		s["pastries"] = n
 	if float(s["ads"]) > 0.0:
-		Ledger.expense(entity(), "advertising", float(s["ads"]), I18n.t("Flyers and a board for %s") % display_name(), {"segment": "cafe", "type": "cafe"})
+		Ledger.expense(entity(), "advertising", float(s["ads"]), I18n.t("Flyers and a board for %s") % display_name(), {"segment":"cafe","type":"cafe","property":property_id()})
 
 
 static func _serve_hour(t0: int, hh: int) -> void:
@@ -325,16 +354,19 @@ static func _serve_hour(t0: int, hh: int) -> void:
 	td["open_hours"] = int(td["open_hours"]) + 1
 	var want := GameState.poisson(expected_demand(hh, Clock.weekday(t0) == 6))
 	var can := mini(want, int(round(cap)))
-	var served := mini(can, int(s["supplies"]))
-	var ps := mini(int(s["pastries"]), GameState.poisson(served * pastry_attach()))
-	s["supplies"] = int(s["supplies"]) - served
-	s["pastries"] = int(s["pastries"]) - ps
-	td["demand"] = int(td["demand"]) + want
-	td["served"] = int(td["served"]) + served
-	td["pastries"] = int(td["pastries"]) + ps
-	td["queue_lost"] = int(td["queue_lost"]) + (want - can)
-	td["stock_lost"] = int(td["stock_lost"]) + (can - served)
-	td["rev"] = snappedf(float(td["rev"]) + served * price("coffee") + ps * price("pastry"), 0.01)
+	CafeDepth.record_hours(t0)
+	var sale:=CafeDepth.sell(can)
+	var served:=int(sale["served"])
+	var ps:=mini(int(s["pastries"]),GameState.poisson(served*pastry_attach()))
+	s["pastries"]=int(s["pastries"])-ps
+	td["demand"]=int(td["demand"])+want
+	td["served"]=int(td["served"])+served
+	td["pastries"]=int(td["pastries"])+ps
+	td["queue_lost"]=int(td["queue_lost"])+(want-can)
+	td["stock_lost"]=int(td["stock_lost"])+(can-served)
+	td["rev"]=snappedf(float(td["rev"])+float(sale["revenue"])+ps*price("pastry"),.01)
+	td["menu_cost"]=float(td.get("menu_cost",0))+float(sale["cost"])+ps*float(item("pastry")["unit_cost"])
+
 	if served > 0 and int(s["first_sale"]) < 0:
 		s["first_sale"] = Clock.now()
 		GameState.set_flag("cafe_first_sale")
@@ -347,11 +379,13 @@ static func _close_day() -> void:
 	var td := _today()
 	td["waste"] = int(s["pastries"])
 	s["pastries"] = 0
+	if td.get("settled",false):return
+	td["settled"]=true
 	var gross := float(td["rev"])
 	if gross > 0.0:
 		var fee := snappedf(gross * float(cfg().get("card_fee", 0.019)), 0.01)
 		Ledger.post(entity(), I18n.t("%s till: %d customers") % [display_name(), int(td["served"])],
-			[{"acct": "cash", "dr": gross - fee}, {"acct": "exp:platform_fees", "dr": fee}, {"acct": "revenue", "cr": gross}], {"segment": "cafe", "type": "cafe"})
+			[{"acct": "cash", "dr": gross - fee}, {"acct": "exp:platform_fees", "dr": fee}, {"acct": "revenue", "cr": gross}], {"segment":"cafe","type":"cafe","property":property_id()})
 	if int(td["open_hours"]) > 0:
 		_update_rating(td)
 		GameState.inc_stat("cafe_customers", int(td["served"]))
@@ -370,6 +404,7 @@ static func _close_day() -> void:
 	var days: Array = s["days"]
 	var rec: Dictionary = td.duplicate()
 	rec["rating"] = snappedf(float(s["rating"]), 0.01)
+	rec["gross_margin"]=CafeDepth.booked_margin(int(rec["d"]),float(rec["rev"]))
 	days.append(rec)
 	while days.size() > 60:
 		days.pop_front()
@@ -399,6 +434,10 @@ static func last_days(n: int, key: String) -> float:
 
 
 static func handle(kind: String, p: Dictionary) -> void:
+	in_shop(str(p.get("property","corner_cafe")),func():_shop_handle(kind,p))
+static func _shop_handle(kind: String,p: Dictionary) -> void:
+	if not leased():return
+	if kind=="cafe.materials":CafeDepth.receive(p);return
 	match kind:
 		"cafe.supplies":
 			var n := int(p.get("cups", 0))
@@ -407,13 +446,16 @@ static func handle(kind: String, p: Dictionary) -> void:
 			EventBus.notify.emit(I18n.t("Old Town Roasters delivered supplies for %d cups.") % n, "info", "coffee")
 		"cafe.permit":
 			if not permitted() and int(S()["permit_ready"]) <= Clock.now():
-				GameState.set_flag("food_permit")
+				if property_id()=="corner_cafe":GameState.set_flag("food_permit")
+				else:S()["food_permit"]=true
 				GameState.timeline("Food handling licence granted.", "business")
 				EventBus.notify.emit("City Hall: your food handling licence is approved.", "good", "civic")
 
 
 static func is_running() -> bool:
-	return leased()
+	for id in cfg()["locations"]:
+		if Living.has_lease(id):return true
+	return false
 
 
 static func os_tab() -> Dictionary:
@@ -429,6 +471,6 @@ static func segment_tag() -> String:
 
 
 static func on_company_closed(ent: String) -> void:
-	if entity() == ent:
-		S()["owner_until"] = -1
-		S()["owner_from"] = -1
+	for property in cfg()["locations"]:
+		in_shop(property,func():
+			if entity()==ent:S()["owner_until"]=-1;S()["owner_from"]=-1;S()["inspection_pending"]=false)

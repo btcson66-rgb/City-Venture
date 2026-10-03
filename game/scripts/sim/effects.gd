@@ -15,6 +15,8 @@ static func apply(e: Dictionary, ctx: Dictionary) -> Dictionary:
 	var op: String = e.get("op", "")
 	var ent := GameState.business_entity()
 	match op:
+		"cafe_inspection":
+			return CafeDepth.decision(ctx,bool(e.get("prepare",false)))
 		"market_strategy":
 			return LegacyBusiness.choose(str(e["strategy"]))
 		"customs_hold":

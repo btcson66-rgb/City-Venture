@@ -1,0 +1,41 @@
+{
+ "id": "cafe_inspection",
+ "category": "operations",
+ "status": "active",
+ "trigger": {
+  "when": "manual"
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "landlord",
+  "title": "Café health inspection",
+  "icon": "warning",
+  "lines": [
+   "An inspector is coming within a day. Waste, stockouts, recent ratings and cleaning affect the outcome. Prepare now or accept the current condition. Ignoring the notice does not stop the inspection."
+  ]
+ },
+ "choices": [
+  {
+   "id": "prepare",
+   "label": "Clean for fifteen minutes, then inspect",
+   "effects": [
+    {
+     "op": "cafe_inspection",
+     "prepare": true
+    }
+   ],
+   "outcome": "The inspector checks the cleaned shop; stock and past service still matter."
+  },
+  {
+   "id": "as_is",
+   "label": "Inspect the current shop without preparation",
+   "effects": [
+    {
+     "op": "cafe_inspection",
+     "prepare": false
+    }
+   ],
+   "outcome": "The current condition determines pass, improvement closure or a fine."
+  }
+ ]
+}

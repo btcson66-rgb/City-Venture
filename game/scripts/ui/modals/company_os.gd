@@ -1272,11 +1272,13 @@ func _tab_saas() -> void:
 
 # ============================================================== CAFÉ
 func _tab_cafe() -> void:
+	var console:=UIK.button("Café menu, shifts and inspections",func():UIRoot.open_modal(CafeDepthModal.new(Cafe.property_id())))
+	console.name="CafeDepthConsole";content.add_child(console)
 	var s := Cafe.S()
 	var head := UIK.hbox(6)
 	content.add_child(head)
 	head.add_child(UIK.title(Cafe.display_name(), 11, Art.C_GOLD))
-	head.add_child(UIK.label(I18n.t("Lantern Row, Old Town · open Mon–Sat 7:00–17:00"), 7, Art.C_DIM))
+	head.add_child(UIK.label(I18n.t(DataDB.properties[Cafe.property_id()]["name"])+" · "+I18n.t("open Mon–Sat 7:00–17:00"), 7, Art.C_DIM))
 	var why := Cafe.open_block()
 	if why != "":
 		_section("Before the first customer")
@@ -1303,7 +1305,7 @@ func _tab_cafe() -> void:
 		if Cafe.permit_pending():
 			ptxt = I18n.t("City Hall is processing it (ready %s)") % Clock.fmt_short(int(s["permit_ready"]))
 		elif not Cafe.permitted():
-			ptxt = I18n.t("Apply at City Hall → Permits (%s)") % Fmt.money0(float(Cafe.cfg().get("permit_fee", 280)))
+			ptxt = I18n.t("Apply at City Hall → Permits (%s)") % Fmt.money(float(Cafe.cfg().get("permit_fee", 280)))
 		_cafe_step("Food handling licence", Cafe.permitted(), ptxt)
 	else:
 		var g := GridContainer.new()
@@ -1327,7 +1329,7 @@ func _tab_cafe() -> void:
 	if Staff.count("barista") == 0:
 		content.add_child(UIK.wrap("Nobody's on staff behind the counter: the café only opens while you work it yourself (the counter, inside the café). Hire a Barista in the People tab to open every day.", 7, Art.C_GOLD, 480))
 	_section_tip("Menu", "gross_margin")
-	for id in ["coffee", "pastry"]:
+	for id in Cafe.cfg()["items"]:
 		var it := Cafe.item(id)
 		var r := UIK.hbox(4)
 		content.add_child(r)
@@ -1345,7 +1347,7 @@ func _tab_cafe() -> void:
 	_section_tip("Supplies and the bakery", "food_waste")
 	var sr := UIK.hbox(4)
 	content.add_child(sr)
-	sr.add_child(UIK.label(I18n.t("Coffee, milk and cups: %d cups in stock") % int(s["supplies"]), 8, Art.C_WHITE))
+	sr.add_child(UIK.label(I18n.t("Coffee beans: %d portions in stock") % int(s["supplies"]), 8, Art.C_WHITE))
 	sr.add_child(UIK.expand())
 	for pk in Cafe.cfg().get("supply_packs", []):
 		var pid := str(pk["id"])
@@ -1374,7 +1376,7 @@ func _tab_cafe() -> void:
 	ar.add_child(UIK.label(I18n.t("Flyers and a street board, per day:"), 8, Art.C_WHITE))
 	for a in Cafe.cfg().get("ads", [0, 15, 40]):
 		var av := float(a)
-		var ab := UIK.button(Fmt.money0(av), func(): Cafe.set_ads(av); rebuild(), "tab_active" if is_equal_approx(float(s["ads"]), av) else "tab")
+		var ab := UIK.button(Fmt.money(av), func(): Cafe.set_ads(av); rebuild(), "tab_active" if is_equal_approx(float(s["ads"]), av) else "tab")
 		ab.name = "CafeAds_%d" % int(av)
 		ar.add_child(ab)
 	var days: Array = s["days"]

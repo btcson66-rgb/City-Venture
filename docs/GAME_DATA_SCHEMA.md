@@ -608,3 +608,8 @@ Every `kind: home` property provides `building`, `bed`, `bed_position`, `invento
 
 ## Personal assets (#94)
 `living.personal_assets` is global household state: homes keyed by property (status, historical book/base price, mortgage balance/months/paid_n/next/arrears, tenant, rent, actual invoices, optional leave notice); car (model/price/electric/luxury, location, energy, service due); style keyed by home; visits (npc/day/home); parking and insurance month. Old saves lazily start empty; company contexts never include this state. Owner home data has owner_purchase, tier, management_month, guests, metro_access_minutes plus #32 home fields. `economy/personal_assets` defines fees, travel/parking/energy, service, furniture/car options. Source-tagged Ledger transactions maintain personal property_assets, personal_vehicle, loan_payable and actual tenant AR.
+
+
+### Café depth (#33)
+`economy/cafe.json`: `locations` maps property to building and foot-traffic multiplier; `items` defines six `ref_price`, `unit_cost`, `materials` recipes and optional seasonal `months`; `materials` names bins; `material_packs` provides paid next-morning deliveries; `drink_shares`, `seasonal_demand_bonus`, `inspection` and `overtime` tune demand and consequences.
+Saved `cafe` retains the old single-store keys and lazily adds `branches`, shared `roster` and `work_hours`. Each shop adds `materials`, `material_incoming`, `cleaned`, `inspection_next`, `inspection_until`, `inspection_pending`, optional `inspection_iid`/`inspection_deadline`, `inspections` and a per-premises branch `food_permit`. Old corner licences continue using the old flag. Daily records add `gross_margin` from actual posted costs. Events/scheduled deliveries include company and property ownership.

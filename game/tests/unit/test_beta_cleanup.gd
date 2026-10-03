@@ -22,11 +22,14 @@ func test_scenery_keeps_data_but_has_no_public_destination() -> void:
 	var listed := []
 	for g in BuildingInfo.guide_groups():
 		listed.append_array(g["buildings"])
-	for bid in ["popup_unit", "harbor_point_fitness"]:
+	for bid in ["harbor_point_fitness"]:
 		runner.check(not BuildingInfo.building_enterable(bid), bid + " is scenery")
 		runner.check(not bid in listed, bid + " is absent from guide")
 		runner.check(DataDB.building(bid).has("interior"), bid + " retains interior data")
 		runner.check(not SceneRouter.building_open(bid)["open"], bid + " cannot be entered")
+
+	runner.check(BuildingInfo.building_enterable("popup_unit"),"active second café is enterable")
+	runner.check("popup_unit" in listed,"active second café appears in guide")
 
 
 func test_status_activation_is_data_driven_and_explicit_switch_wins() -> void:

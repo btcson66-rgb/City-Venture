@@ -20,7 +20,7 @@
   ],
   "floor": "concrete",
   "wall": "white_modern",
-  "ambient": "",
+  "ambient": "cafe",
   "props": [
    {
     "sprite": "window_day",
@@ -48,25 +48,67 @@
     "sprite": "box",
     "x": 200,
     "y": 120
+   },
+   {
+    "sprite": "espresso_machine",
+    "fallback": "desk_laptop",
+    "x": 40,
+    "y": 30
+   },
+   {
+    "sprite": "counter",
+    "fallback": "table",
+    "x": 40,
+    "y": 64
+   },
+   {
+    "sprite": "table",
+    "x": 132,
+    "y": 58
    }
   ],
   "interactables": [
    {
-    "id": "notice",
+    "id": "lease_cafe",
     "at": [
      128,
      80
     ],
-    "label": "Read the lease notice",
-    "action": "look",
+    "label": "Lease a café branch",
+    "action": "lease_property",
     "params": {
-     "icon": "shop",
-     "text": "Pop-up Unit 5: short leases for shops and cafés. Leasing opens with the retail business (planned)."
+     "property": "popup_cafe"
+    }
+   },
+   {
+    "id": "cafe",
+    "at": [
+     88,
+     105
+    ],
+    "label": "Work the café counter",
+    "action": "cafe_counter",
+    "params": {
+     "property": "popup_cafe",
+     "requires": "lease:popup_cafe"
+    }
+   },
+   {
+    "id": "cafe_desk",
+    "at": [
+     142,
+     100
+    ],
+    "label": "Café menu, shifts and inspections",
+    "action": "cafe_depth",
+    "params": {
+     "property": "popup_cafe",
+     "requires": "lease:popup_cafe"
     }
    }
   ],
   "npc_spots": {}
  },
  "category": "Retail premises",
- "status": "planned"
+ "status": "active"
 }

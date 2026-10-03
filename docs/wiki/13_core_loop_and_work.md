@@ -277,3 +277,9 @@ World Map → regional facts → Compare trade route opens an RFQ estimate, not 
 ## Personal property and driving (#94)
 Implemented: rent → personal Maple apartment → Penthouse → Villa; mortgages reuse #65 amortization and market interest/price rules while personal balances remain outside brokerage/company ownership. 20–30% down over 20–30 years, 3% purchase/5% sale fees, taxes, management and upkeep. Move out before rental/sale. Tenant matching uses #65 vacancy formula; rent invoices name the actual tenant, may be unpaid, and collection has a 30-day delay. Tenant exit has 30-day notice. Negative equity needs cash before a sale. Unpaid mortgage interest remains payable; raise cash or sell/rent other property, with no homelessness forced.
 Personal cars share #68 dealer locations and fictional model identities with explicit personal retail prices; buy at Dockside, pay insurance/maintenance/fuel/parking, drive only from the car's district. Peak traffic and parking search can be slower than metro. EV requires an actually open #69 station; metered kWh transfers cash to the operator with grid cost. Furniture changes appearance only; housing invitation capacity and one-hour guest conversations write Timeline messages with no company productivity bonus.
+
+
+### 咖啡館深化（#33）
+`popup_cafe` 是 Shopping Street 的第二間店，使用 `popup_unit`，與零售租約互斥。六款商品各有食材成本與售價；咖啡豆沿用舊存檔的杯數，牛奶、茶葉、食品則分開採購配送。限定飲品僅在指定月份出售，該品項需求增加 15%。兩店的庫存、評分、裝潢、食物執照及報表獨立；員工排班共用，一個班次只能在一家店。
+`cafe_inspection` 每 60–90 天觸發，兩個選擇是花 15 分鐘清潔後檢查，或直接接受現況；忽略通知會在一天後自動檢查。缺貨、浪費、近七日評分與清潔會造成一天改善停業或 $250.00 罰款，停業會消退。超過每週 40 小時的實際工時以 1.5 倍計薪。
+Company OS 的 `CafeDepthConsole` 與第二店內控制台提供菜單、班表、檢查及近 30 天三張圖。毛利使用實際帳目；材料採購當日認列成本，因此補貨日可能呈負值。保留舊咖啡館帳務方法，未改成食材存貨資產。

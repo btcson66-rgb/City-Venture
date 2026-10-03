@@ -25,7 +25,7 @@ static func lock_reason(action: String, params: Dictionary) -> String:
 		"legacy_mentor":
 			return "Choose the mentor ending first." if LegacyBusiness.S()["ending"] != "mentor" else ""
 		"cafe_counter":
-			return Cafe.counter_block()
+			return Cafe.in_shop(str(params.get("property","corner_cafe")),Cafe.counter_block)
 		"register_company":
 			if not npc_present("ana"):return "Nobody at the counter. Registration: Mon–Fri 9:00–17:00."
 		"bank_counter":
@@ -74,6 +74,7 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 			StoryEngine.check()
 			UIRoot.open_modal(Help.card("customs"))
 		"cafe_counter":
+			Cafe.select_shop(str(params.get("property","corner_cafe")))
 			_cafe_counter()
 		"open_company_os":
 			UIRoot.open_modal(CompanyOS.new(params.get("terminal", "laptop")))
@@ -121,6 +122,8 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 			UIRoot.open_modal(LeaseModal.new("suite_2b"))
 		"personal_assets":
 			UIRoot.open_modal(PersonalAssetsModal.new())
+		"cafe_depth":
+			UIRoot.open_modal(CafeDepthModal.new(str(params.get("property","corner_cafe"))))
 		"home_letting":
 			UIRoot.open_modal(HomeMoveModal.new())
 		"lease_property":
