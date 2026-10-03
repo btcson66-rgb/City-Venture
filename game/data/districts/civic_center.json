@@ -2,7 +2,7 @@
  "id": "civic_center",
  "name": "Civic Center",
  "size_tiles": [
-  80,
+  96,
   44
  ],
  "music": "civic",
@@ -97,6 +97,15 @@
     25,
     3,
     5
+   ]
+  },
+  {
+   "type": "sidewalk",
+   "rect": [
+    80,
+    0,
+    16,
+    44
    ]
   }
  ],
@@ -964,34 +973,75 @@
  },
  "exits": [
   {
-   "id": "west",
+   "id": "walk_riverside",
+   "direction": "S",
    "rect": [
-    0,
-    320,
-    16,
-    244
+    1304,
+    688,
+    48,
+    16
    ],
-   "to": "shopping_street",
+   "to": "riverside",
    "spawn": "from_civic_center",
-   "walk_min": 8
+   "walk_min": 11
   },
   {
-   "id": "east",
+   "id": "walk_startup_hub",
+   "direction": "E",
    "rect": [
-    1264,
-    320,
+    1520,
+    324,
     16,
-    244
+    48
+   ],
+   "to": "startup_hub",
+   "spawn": "from_civic_center",
+   "walk_min": 11
+  },
+  {
+   "id": "walk_financial",
+   "direction": "W",
+   "rect": [
+    0,
+    324,
+    16,
+    48
    ],
    "to": "financial",
    "spawn": "from_civic_center",
-   "walk_min": 6
+   "walk_min": 9
+  },
+  {
+   "id": "walk_luxury_heights",
+   "direction": "N",
+   "rect": [
+    1304,
+    0,
+    48,
+    16
+   ],
+   "to": "luxury_heights",
+   "spawn": "from_civic_center",
+   "walk_min": 9
+  },
+  {
+   "id": "walk_airport",
+   "direction": "E",
+   "rect": [
+    1520,
+    404,
+    16,
+    48
+   ],
+   "to": "airport",
+   "spawn": "from_civic_center",
+   "walk_min": 14
   }
  ],
  "spawns": {
   "from_financial": [
-   1240,
-   430
+   40,
+   348
   ],
   "metro": [
    860,
@@ -1000,6 +1050,22 @@
   "from_shopping_street": [
    40,
    430
+  ],
+  "from_riverside": [
+   1328,
+   664
+  ],
+  "from_startup_hub": [
+   1496,
+   348
+  ],
+  "from_luxury_heights": [
+   1328,
+   40
+  ],
+  "from_airport": [
+   1496,
+   428
   ]
  },
  "bounds": {
@@ -1041,5 +1107,13 @@
   "evening": 5,
   "night": 2
  },
- "minimap_color": "#8a8470"
+ "minimap_color": "#8a8470",
+ "walk_corridors": [
+  [
+   1280,
+   0,
+   256,
+   704
+  ]
+ ]
 }

@@ -313,3 +313,7 @@ Implemented #67: M5 connects the district. Enter `the_aster`, `skyline_grand`, `
 
 
 Implemented #68: M4 connects the Airport district. Enter `airport_terminal`, `gateway_car_rental`, `aurelia_auto_auction` and look at `cargo_terminal`; Frank Doyle, Jun Ito and Mara Quinn support the automotive business. Full workflow in [23_automotive.md](23_automotive.md).
+
+
+## Walking connections (#111)
+Implemented: all 12 active Aurelia districts have canonical reciprocal foot routes, including Industrial, Residential, University, Luxury Heights and Airport. The city map has a Walking routes diagram; gold minimap rays and directional edge signs show the next district. Entering from an eastbound route places the player on the destination's west side, and similarly for north/south. A 40-transition rendered tour walks every directed link via real movement and checks that arrivals stay in their destination. The checker runs in a dedicated CI workflow and before release packaging. Facades and existing building/spawn coordinates are preserved, with east-side pedestrian passages and ground extensions where maps previously ended in unpainted space.

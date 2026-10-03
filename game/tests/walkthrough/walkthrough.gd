@@ -125,6 +125,7 @@ func run() -> void:
 		await wait_world()
 		await _automotive()
 		await _save_load()
+		await load("res://tests/walkthrough/map_adjacency_tour.gd").new(bot).run()
 
 
 func _arg(name: String) -> String:
@@ -500,16 +501,33 @@ func exit_building() -> bool:
 
 
 func walk_exit(to_district: String) -> bool:
-	var s := SceneRouter.world_scene()
-	for ex in s.def.get("exits", []):
-		if ex["to"] == to_district:
-			var r: Array = ex["rect"]
-			var target := Vector2(float(r[0]) + float(r[2]) / 2.0, 430)
-			await bot.walk_to(target, 6.0, 60.0)
-			break
-	var ok: bool = await bot.until(func(): return in_scene("district", to_district), 5.0)
-	await wait_world()
-	return bot.expect(ok, "walked to " + DataDB.districts[to_district]["name"])
+	var origin := str(SceneRouter.world_scene().scene_id)
+	var queue: Array = [[origin]]
+	var visited := {origin: true}
+	var route: Array = []
+	while not queue.is_empty():
+		var path: Array = queue.pop_front()
+		var last := str(path[-1])
+		if last == to_district: route = path; break
+		for neighbor in DataDB.city.get("adjacency", {}).get(last, {}):
+			if visited.has(neighbor): continue
+			visited[neighbor] = true
+			queue.append(path + [neighbor])
+	if route.is_empty(): return bot.expect(false, "no foot route to " + to_district)
+	for next in route.slice(1):
+		var world := SceneRouter.world_scene() as District
+		var exits: Array = world.def.get("exits", []).filter(func(e): return e["to"] == next)
+		if exits.size() != 1: return bot.expect(false, "missing foot exit to " + str(next))
+		var ex: Dictionary = exits[0]
+		var r: Array = ex["rect"]
+		var target := Vector2(float(r[0]) + float(r[2]) / 2.0, float(r[1]) + float(r[3]) / 2.0)
+		var inward: Vector2 = {"N": Vector2.DOWN, "E": Vector2.LEFT, "S": Vector2.UP, "W": Vector2.RIGHT}[str(ex["direction"])]
+		await bot.walk_to(target + inward * 80, 5.0, 60.0)
+		await bot.walk_to(target, 3.0, 60.0)
+		var ok: bool = await bot.until(func(): return in_scene("district", str(next)) and not SceneRouter.transitioning, 8.0)
+		await wait_world()
+		if not bot.expect(ok, "walked to " + DataDB.districts[next]["name"]): return false
+	return true
 
 
 func metro_to(to: String) -> bool:

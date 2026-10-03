@@ -2026,7 +2026,7 @@ msgstr "奥瑞利亚机场航厦"
 msgid "Aurelia Auto Auction"
 msgstr "奥瑞利亚汽车拍卖场"
 
-#: data/city/aurelia.json scripts/ui/modals/city_map_modal.gd:16
+#: data/city/aurelia.json scripts/ui/modals/city_map_modal.gd:17
 msgid "Aurelia City"
 msgstr "奥瑞莉亚市"
 
@@ -3910,6 +3910,10 @@ msgstr "市府能源局"
 msgid "City event cancelled"
 msgstr "城市活动取消"
 
+#: scripts/ui/modals/city_map_modal.gd:115
+msgid "City illustration"
+msgstr "城市图鉴"
+
 #: data/help/patch_notes.json
 msgid "City lists show businesses and places that are ready to use. Your next action follows the prerequisites you have met."
 msgstr "城市清单只显示可以使用的生意与场所；主要按钮会带你做现在能做的下一步。"
@@ -4038,7 +4042,7 @@ msgstr "客户每天早上会张贴小案子。接下一个，在任何笔电上
 msgid "Climate"
 msgstr "气候"
 
-#: scripts/ui/modals/business_board.gd:31 scripts/ui/modals/city_guide_modal.gd:44 scripts/ui/modals/city_map_modal.gd:127 scripts/ui/modals/clothing_shop_modal.gd:27
+#: scripts/ui/modals/business_board.gd:31 scripts/ui/modals/city_guide_modal.gd:44 scripts/ui/modals/city_map_modal.gd:142 scripts/ui/modals/clothing_shop_modal.gd:27
 msgid "Close"
 msgstr "关闭"
 
@@ -6866,6 +6870,10 @@ msgstr "出门"
 msgid "Going twice…"
 msgstr "第二次……"
 
+#: scripts/ui/modals/city_map_modal.gd:219
+msgid "Gold lines: walkable district connections"
+msgstr "金线：可步行的街区连通路线"
+
 #: data/dialogue/maya_intro.json
 msgid "Gonna build something of my own."
 msgstr "要做点属于自己的东西。"
@@ -8606,7 +8614,7 @@ msgstr "逾期"
 msgid "LED Desk Lamp"
 msgstr "LED 台灯"
 
-#: scripts/ui/modals/city_map_modal.gd:61
+#: scripts/ui/modals/city_map_modal.gd:70
 msgid "LEGEND"
 msgstr "图例"
 
@@ -9834,7 +9842,7 @@ msgstr "蓬乱"
 msgid "Metal supplier"
 msgstr "金属供应商"
 
-#: scripts/ui/tutorial.gd:698 scripts/world/district.gd:77
+#: scripts/ui/tutorial.gd:698 scripts/world/district.gd:80
 msgid "Metro"
 msgstr "捷运"
 
@@ -9850,7 +9858,7 @@ msgstr "捷运车资：往%s"
 msgid "Metro · 5 lines"
 msgstr "捷运 · 5 条路线"
 
-#: scripts/world/district.gd:76
+#: scripts/world/district.gd:79
 msgid "Metro — %s Station"
 msgstr "捷运——%s站"
 
@@ -11186,7 +11194,7 @@ msgstr "只有已登记的公司能申请。"
 msgid "Only registered companies can hold an import licence."
 msgstr "只有登记过的公司才能持有进口执照。"
 
-#: autoload/save_system.gd:385 scripts/ui/hotel_ui.gd:273 scripts/ui/modals/city_map_modal.gd:112 scripts/ui/modals/city_map_modal.gd:158
+#: autoload/save_system.gd:385 scripts/ui/hotel_ui.gd:273 scripts/ui/modals/city_map_modal.gd:127 scripts/ui/modals/city_map_modal.gd:174
 msgid "Open"
 msgstr "打开"
 
@@ -12486,7 +12494,7 @@ msgstr "快闪店面 5 号：短期出租给商店和咖啡店。零售业开放
 msgid "Population 3.2 million. One more, as of today."
 msgstr "人口 320 万。从今天起，再多一个。"
 
-#: scripts/ui/modals/city_map_modal.gd:116
+#: scripts/ui/modals/city_map_modal.gd:131
 msgid "Population: 3.2 million people · 62 km² · 5 Metro lines"
 msgstr "人口 320 万人 · 面积 62 平方公里 · 5 条捷运线"
 
@@ -17978,7 +17986,7 @@ msgstr "等等。真的有人买了？？"
 msgid "Waiting for subsidy decision"
 msgstr "等待补助审核"
 
-#: scripts/ui/modals/city_map_modal.gd:117
+#: scripts/ui/modals/city_map_modal.gd:132
 msgid "Walk between neighbouring districts, or take the Metro from any station."
 msgstr "相邻的区域可以走路，也可以从任一捷运站搭车。"
 
@@ -18017,6 +18025,10 @@ msgstr "被赶走的客人"
 #: scripts/ui/modals/company_os.gd:1339
 msgid "Walked out"
 msgstr "走掉"
+
+#: scripts/ui/modals/city_map_modal.gd:115
+msgid "Walking routes"
+msgstr "步行路线"
 
 #: autoload/scene_router.gd:216
 msgid "Walking to %s… (%d min)"
@@ -18386,7 +18398,7 @@ msgstr "世界"
 msgid "World Map"
 msgstr "世界地图"
 
-#: scripts/ui/modals/city_map_modal.gd:124
+#: scripts/ui/modals/city_map_modal.gd:139
 msgid "World map"
 msgstr "世界地图"
 
@@ -18462,11 +18474,11 @@ msgstr "你已经租了这里。"
 msgid "You already work here."
 msgstr "你已经在这里工作了。"
 
-#: scripts/ui/modals/city_map_modal.gd:158 scripts/ui/modals/city_map_modal.gd:74
+#: scripts/ui/modals/city_map_modal.gd:174 scripts/ui/modals/city_map_modal.gd:216 scripts/ui/modals/city_map_modal.gd:83
 msgid "You are here"
 msgstr "你在这里"
 
-#: scripts/ui/modals/city_map_modal.gd:114
+#: scripts/ui/modals/city_map_modal.gd:129
 msgid "You are here."
 msgstr "你在这里。"
 
@@ -19994,7 +20006,7 @@ msgstr "−100 件"
 msgid "◆ %s needs a decision"
 msgstr "◆ %s 需要你做决定"
 
-#: scripts/ui/modals/city_map_modal.gd:63
+#: scripts/ui/modals/city_map_modal.gd:72
 msgid "◆ You are here"
 msgstr "◆ 你在这里"
 
@@ -20006,7 +20018,7 @@ msgstr "◉  快门"
 msgid "● %d new"
 msgstr "● %d 则新消息"
 
-#: scripts/ui/modals/city_map_modal.gd:62
+#: scripts/ui/modals/city_map_modal.gd:71
 msgid "● Open in this build"
 msgstr "● 本版本开放"
 

@@ -10,9 +10,9 @@ func test_shopping_street_is_open_and_linked() -> void:
 	runner.check(DataDB.districts.has("shopping_street"), "district data loads")
 	runner.eq(str(DataDB.district_def_in_city("shopping_street").get("status", "")), "active", "open on the city map")
 	var linked := false
-	for ex in DataDB.districts["civic_center"]["exits"]:
+	for ex in DataDB.districts["old_town"]["exits"]:
 		linked = linked or ex["to"] == "shopping_street"
-	runner.check(linked, "walkable from Civic Center")
+	runner.check(linked, "walkable from the canonical Old Town neighbor")
 	for bid in ["threadline_apparel", "lantern_bistro", "crestline_flagship", "popup_unit"]:
 		runner.eq(str(DataDB.building(bid).get("district", "")), "shopping_street", bid + " is on Shopping Street")
 		runner.check(DataDB.buildings_meta.has(DataDB.building(bid)["exterior"]["sprite"]), bid + " has facade metadata")

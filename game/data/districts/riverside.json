@@ -2,7 +2,7 @@
  "id": "riverside",
  "name": "Riverside",
  "size_tiles": [
-  120,
+  136,
   48
  ],
  "music": "day_city",
@@ -169,6 +169,15 @@
     34,
     14,
     3
+   ]
+  },
+  {
+   "type": "sidewalk",
+   "rect": [
+    120,
+    0,
+    16,
+    48
    ]
   }
  ],
@@ -1727,26 +1736,78 @@
  },
  "exits": [
   {
-   "id": "east",
+   "id": "walk_startup_hub",
+   "direction": "E",
    "rect": [
-    1904,
-    320,
+    2160,
+    324,
     16,
-    244
+    48
    ],
    "to": "startup_hub",
    "spawn": "from_riverside",
    "walk_min": 12
+  },
+  {
+   "id": "walk_civic_center",
+   "direction": "N",
+   "rect": [
+    1944,
+    0,
+    48,
+    16
+   ],
+   "to": "civic_center",
+   "spawn": "from_riverside",
+   "walk_min": 11
+  },
+  {
+   "id": "walk_financial",
+   "direction": "N",
+   "rect": [
+    2008,
+    0,
+    48,
+    16
+   ],
+   "to": "financial",
+   "spawn": "from_riverside",
+   "walk_min": 9
+  },
+  {
+   "id": "walk_harbor",
+   "direction": "W",
+   "rect": [
+    0,
+    324,
+    16,
+    48
+   ],
+   "to": "harbor",
+   "spawn": "from_riverside",
+   "walk_min": 7
   }
  ],
  "spawns": {
   "from_startup_hub": [
-   1880,
-   430
+   2136,
+   348
   ],
   "metro": [
    1040,
    630
+  ],
+  "from_civic_center": [
+   1968,
+   40
+  ],
+  "from_financial": [
+   2032,
+   40
+  ],
+  "from_harbor": [
+   40,
+   348
   ]
  },
  "bounds": {
@@ -1793,5 +1854,13 @@
   "evening": 10,
   "night": 4
  },
- "minimap_color": "#5f8a5a"
+ "minimap_color": "#5f8a5a",
+ "walk_corridors": [
+  [
+   1920,
+   0,
+   256,
+   768
+  ]
+ ]
 }

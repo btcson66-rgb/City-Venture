@@ -73,6 +73,8 @@ func _ready() -> void:
 	if out_dir == "":
 		out_dir = ProjectSettings.globalize_path("user://bot")
 	DirAccess.make_dir_recursive_absolute(out_dir + "/screenshots")
+	# Automation owns its output saves and never replaces a player save when all slots are occupied.
+	SaveSystem.DIR = out_dir.path_join("saves")
 	t0 = Time.get_ticks_msec()
 	UIRoot.toasted.connect(func(text: String, kind: String): if kind == "bad": log_line("  toast: " + text))
 	if I18n.locale().begins_with("zh"):
@@ -169,6 +171,8 @@ func _audit_one(t: String, ctl: Control) -> void:
 func _run() -> void:
 	await wait(1.0)
 	match mode:
+		"map_adjacency":
+			await load("res://tests/walkthrough/map_adjacency_tour.gd").new(self).run()
 		"lease_end":
 			await load("res://tests/walkthrough/lease_end_tour.gd").new(self).run()
 		"player_feedback":

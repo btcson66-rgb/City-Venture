@@ -2,7 +2,7 @@
  "id": "residential",
  "name": "Residential",
  "size_tiles": [
-  108,
+  124,
   46
  ],
  "music": "day_city",
@@ -115,6 +115,15 @@
     3,
     5
    ]
+  },
+  {
+   "type": "sidewalk",
+   "rect": [
+    108,
+    0,
+    16,
+    46
+   ]
   }
  ],
  "buildings": [
@@ -132,16 +141,43 @@
  },
  "exits": [
   {
-   "id": "west",
+   "id": "walk_shopping_street",
+   "direction": "S",
    "rect": [
-    0,
-    320,
+    1752,
+    720,
+    48,
+    16
+   ],
+   "to": "shopping_street",
+   "spawn": "from_residential",
+   "walk_min": 8
+  },
+  {
+   "id": "walk_old_town",
+   "direction": "E",
+   "rect": [
+    1968,
+    324,
     16,
-    244
+    48
    ],
    "to": "old_town",
    "spawn": "from_residential",
-   "walk_min": 5
+   "walk_min": 7
+  },
+  {
+   "id": "walk_industrial",
+   "direction": "W",
+   "rect": [
+    0,
+    324,
+    16,
+    48
+   ],
+   "to": "industrial",
+   "spawn": "from_residential",
+   "walk_min": 10
   }
  ],
  "spawns": {
@@ -150,8 +186,16 @@
    642
   ],
   "from_old_town": [
-   28,
-   430
+   1944,
+   348
+  ],
+  "from_shopping_street": [
+   1776,
+   696
+  ],
+  "from_industrial": [
+   40,
+   348
   ]
  },
  "bounds": {
@@ -217,5 +261,13 @@
  "traffic_types": [
   "compact",
   "sedan"
+ ],
+ "walk_corridors": [
+  [
+   1728,
+   0,
+   256,
+   736
+  ]
  ]
 }

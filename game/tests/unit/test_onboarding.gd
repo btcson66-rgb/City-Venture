@@ -8,7 +8,7 @@ func test_guide_routes_by_street_or_metro() -> void:
 	runner.eq(Tutorial._next_hop("riverside", "startup_hub"), "startup_hub", "Riverside → Startup Hub on foot (east edge)")
 	runner.eq(Tutorial._next_hop("startup_hub", "riverside"), "riverside", "and back")
 	runner.eq(Tutorial._next_hop("civic_center", "financial"), "financial", "Civic Center → Financial on foot")
-	runner.eq(Tutorial._next_hop("riverside", "civic_center"), "", "no street route across the river: take the Metro")
+	runner.eq(Tutorial._next_hop("riverside", "civic_center"), "civic_center", "new canonical northern foot route")
 
 
 func test_every_main_objective_target_is_resolvable() -> void:

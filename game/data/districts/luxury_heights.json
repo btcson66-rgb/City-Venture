@@ -2,7 +2,7 @@
  "id": "luxury_heights",
  "name": "Luxury Heights",
  "size_tiles": [
-  120,
+  136,
   46
  ],
  "music": "day_city",
@@ -12,7 +12,7 @@
    "rect": [
     0,
     0,
-    108,
+    120,
     20
    ]
   },
@@ -21,7 +21,7 @@
    "rect": [
     0,
     20,
-    108,
+    120,
     4
    ]
   },
@@ -30,7 +30,7 @@
    "rect": [
     0,
     24,
-    108,
+    120,
     1
    ]
   },
@@ -39,7 +39,7 @@
    "rect": [
     0,
     25,
-    108,
+    120,
     5
    ]
   },
@@ -48,7 +48,7 @@
    "rect": [
     0,
     27,
-    108,
+    120,
     1
    ],
    "step": 2
@@ -58,7 +58,7 @@
    "rect": [
     0,
     30,
-    108,
+    120,
     1
    ]
   },
@@ -67,7 +67,7 @@
    "rect": [
     0,
     31,
-    108,
+    120,
     3
    ]
   },
@@ -76,7 +76,7 @@
    "rect": [
     0,
     34,
-    108,
+    120,
     10
    ]
   },
@@ -96,6 +96,15 @@
     25,
     3,
     5
+   ]
+  },
+  {
+   "type": "sidewalk",
+   "rect": [
+    120,
+    0,
+    16,
+    46
    ]
   }
  ],
@@ -243,11 +252,63 @@
   "y": 560,
   "label": "Metro — Luxury Heights"
  },
- "exits": [],
+ "exits": [
+  {
+   "id": "walk_civic_center",
+   "direction": "S",
+   "rect": [
+    1944,
+    720,
+    48,
+    16
+   ],
+   "to": "civic_center",
+   "spawn": "from_luxury_heights",
+   "walk_min": 9
+  },
+  {
+   "id": "walk_financial",
+   "direction": "S",
+   "rect": [
+    2008,
+    720,
+    48,
+    16
+   ],
+   "to": "financial",
+   "spawn": "from_luxury_heights",
+   "walk_min": 10
+  },
+  {
+   "id": "walk_old_town",
+   "direction": "W",
+   "rect": [
+    0,
+    324,
+    16,
+    48
+   ],
+   "to": "old_town",
+   "spawn": "from_luxury_heights",
+   "walk_min": 9
+  }
+ ],
  "spawns": {
   "metro": [
    1220,
    642
+  ],
+  "from_civic_center": [
+   1968,
+   696
+  ],
+  "from_financial": [
+   2032,
+   696
+  ],
+  "from_old_town": [
+   40,
+   348
   ]
  },
  "bounds": {
@@ -311,5 +372,13 @@
  "traffic_types": [
   "sedan",
   "compact"
+ ],
+ "walk_corridors": [
+  [
+   1920,
+   0,
+   256,
+   736
+  ]
  ]
 }

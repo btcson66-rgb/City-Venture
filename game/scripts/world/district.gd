@@ -43,20 +43,23 @@ func build(district_id: String) -> void:
 	_add_water_sparkles()
 	# north edge: building fronts / back of the block are not walkable
 	var b: Dictionary = def.get("bounds", {"top": 322, "bottom": size_px.y - 8})
-	add_solid(Rect2(0, 0, size_px.x, float(b["top"]) - 2.0))
-	add_solid(Rect2(0, float(b["bottom"]), size_px.x, size_px.y - float(b["bottom"])))
+	_edge_solids(Rect2(0, 0, size_px.x, float(b["top"]) - 2.0))
+	_edge_solids(Rect2(0, float(b["bottom"]), size_px.x, size_px.y - float(b["bottom"])))
 	var has_west := false
 	var has_east := false
 	for ex in def.get("exits", []):
-		if float(ex["rect"][0]) < 20:
+		if str(ex.get("direction", "")) == "W":
 			has_west = true
-		else:
+		elif str(ex.get("direction", "")) == "E":
 			has_east = true
 	if not has_west:
 		add_solid(Rect2(-8, 0, 10, size_px.y))
 	else:
 		add_solid(Rect2(-8, 0, 8, size_px.y))
 	add_solid(Rect2(size_px.x - (0 if has_east else 2), 0, 10, size_px.y))
+	# Outer collision walls keep an unconnected corridor end inside the map. Exit strips remain on the inner edge.
+	add_solid(Rect2(0, -8, size_px.x, 8))
+	add_solid(Rect2(0, size_px.y, size_px.x, 8))
 	# buildings
 	for bid in def.get("buildings", []):
 		var bd: Dictionary = DataDB.buildings[bid]
@@ -82,7 +85,7 @@ func build(district_id: String) -> void:
 		area.setup(ex, self)
 		add_child(area)
 		var r: Array = ex["rect"]
-		poi.append({"pos": Vector2(float(r[0]) + float(r[2]) / 2.0, float(r[1]) + float(r[3]) / 2.0), "icon": "arrow_right", "label": I18n.t(DataDB.districts[ex["to"]]["name"])})
+		poi.append({"pos": Vector2(float(r[0]) + float(r[2]) / 2.0, float(r[1]) + float(r[3]) / 2.0), "icon": "arrow_right", "direction": str(ex.get("direction", "E")), "label": I18n.t(DataDB.districts[ex["to"]]["name"])})
 	for k in def.get("spawns", {}):
 		var s: Array = def["spawns"][k]
 		spawns[k] = Vector2(float(s[0]), float(s[1]))
@@ -176,7 +179,7 @@ func _add_building(sprite: String, x: float, bid: String, bd: Dictionary) -> voi
 			sign_labels[bid] = lb
 	# door → interior
 	if bid != "":
-		var door: Array = meta.get("door", [w / 2 - 10, h - 34, 20, 30])
+		var door: Array = meta["door"] if meta.get("door") is Array else [w / 2 - 10, h - 34, 20, 30]
 		var dx := x + float(door[0]) + float(door[2]) / 2.0
 		spawns["door_" + bid] = Vector2(dx, BASE_Y + 22)
 		if not BuildingInfo.building_enterable(bid):
@@ -266,7 +269,11 @@ func _build_sky() -> void:
 	var rows := int(BASE_Y / T)
 	for y in rows:
 		for x in range(0, int(def["size_tiles"][0])):
-			ground.erase_cell(Vector2i(x, y))
+			var point := Vector2(x * T + T / 2.0, y * T + T / 2.0)
+			var passage := false
+			for c in def.get("walk_corridors", []):
+				if Rect2(float(c[0]), float(c[1]), float(c[2]), float(c[3])).has_point(point): passage = true
+			if not passage: ground.erase_cell(Vector2i(x, y))
 	sky_layer = CanvasLayer.new()
 	sky_layer.layer = -1
 	sky_layer.follow_viewport_enabled = true
@@ -390,3 +397,17 @@ func minimap_shapes() -> Array:
 			col2 = Color8(210, 190, 130)
 		shapes.append({"rect": Rect2(n.position.x, BASE_Y - 60, w, 58), "color": col2})
 	return shapes
+
+
+## North/south pedestrian corridors carve apertures in the opaque block bounds, without moving any facade.
+func _edge_solids(rect: Rect2) -> void:
+	var spans: Array[Rect2] = [rect]
+	for c in def.get("walk_corridors", []):
+		var cut := Rect2(float(c[0]), float(c[1]), float(c[2]), float(c[3]))
+		var next: Array[Rect2] = []
+		for span in spans:
+			if not span.intersects(cut): next.append(span); continue
+			if cut.position.x > span.position.x: next.append(Rect2(span.position, Vector2(cut.position.x - span.position.x, span.size.y)))
+			if cut.end.x < span.end.x: next.append(Rect2(cut.end.x, span.position.y, span.end.x - cut.end.x, span.size.y))
+		spans = next
+	for span in spans: add_solid(span)

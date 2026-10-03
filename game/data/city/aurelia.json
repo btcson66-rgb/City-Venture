@@ -438,5 +438,71 @@
    985,
    805
   ]
+ },
+ "adjacency": {
+  "riverside": {
+   "startup_hub": "E",
+   "civic_center": "N",
+   "financial": "N",
+   "harbor": "W"
+  },
+  "startup_hub": {
+   "riverside": "W",
+   "civic_center": "W",
+   "university": "E"
+  },
+  "civic_center": {
+   "riverside": "S",
+   "startup_hub": "E",
+   "financial": "W",
+   "luxury_heights": "N",
+   "airport": "E"
+  },
+  "financial": {
+   "riverside": "S",
+   "civic_center": "E",
+   "harbor": "S",
+   "luxury_heights": "N",
+   "old_town": "W"
+  },
+  "shopping_street": {
+   "harbor": "E",
+   "residential": "N",
+   "old_town": "E",
+   "industrial": "W"
+  },
+  "harbor": {
+   "riverside": "E",
+   "financial": "N",
+   "shopping_street": "W"
+  },
+  "residential": {
+   "shopping_street": "S",
+   "old_town": "E",
+   "industrial": "W"
+  },
+  "luxury_heights": {
+   "civic_center": "S",
+   "financial": "S",
+   "old_town": "W"
+  },
+  "airport": {
+   "civic_center": "W",
+   "university": "S"
+  },
+  "old_town": {
+   "financial": "E",
+   "shopping_street": "W",
+   "residential": "W",
+   "luxury_heights": "E"
+  },
+  "university": {
+   "startup_hub": "W",
+   "airport": "N"
+  },
+  "industrial": {
+   "shopping_street": "E",
+   "residential": "E"
+  }
  }
 }
