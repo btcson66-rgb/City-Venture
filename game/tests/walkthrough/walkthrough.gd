@@ -28,6 +28,7 @@ func run() -> void:
 		Ecommerce.create_listing("water_bottle", float(DataDB.product("water_bottle")["ref_price"]), "self")
 		await _shop_research()
 		await _fitness_visit()
+		await _fitness_reception_schedule()
 		await _save_load()
 		return
 	if _arg("from") == "discoverability":
@@ -2170,7 +2171,34 @@ func _fitness_visit() -> void:
 func _shop_wait_hours(weekday: bool) -> void:
 	# Bounded fixture idle time; never tries to sleep in a shop/district.
 	for hour in 7*24:
-		if (not weekday or _is_weekday()) and Clock.hour()>=11 and Clock.hour()<17:return
+		if (not weekday or _is_weekday()) and Clock.hour()>=11 and Clock.hour()<17:
+			# Schedule rendering refreshes once per real second after a clock jump.
+			if weekday and SceneRouter.world_scene().scene_id=="harbor_point_fitness":
+				bot.expect(await bot.until(func():return Actions.npc_present("harbor_point"),3.0),"Rosa arrived before using reception")
+			return
 		Clock.advance(60)
 		await popups()
 	bot.fail("Shop opening hours unavailable after seven days")
+
+
+func _fitness_reception_schedule() -> void:
+	bot.step("Fitness reception — evening departure and next weekday arrival")
+	await popups()
+	await close_modal()
+	await exit_building()
+	await metro_to("harbor")
+	await _shop_wait_hours(true)
+	await enter_building("harbor_point_fitness")
+	Clock.advance_to(Clock.next_time_of_day(20*60))
+	await popups()
+	await bot.wait(1.2)
+	bot.expect(not Actions.npc_present("harbor_point"),"Rosa leaves reception at 20:00")
+	await _shop_wait_hours(true)
+	bot.expect(Actions.npc_present("harbor_point"),"Rosa returns on the next weekday")
+	await bot.use(func(n):return n.action=="fitness" and bool(n.params.get("desk",false)),"Rosa's reception after overnight wait")
+	bot.expect(await bot.until(func():return UIRoot.top_modal() is FitnessModal,3.0),"reception opens after NPC schedule refresh")
+	await bot.shot("fitness_reception_next_day")
+	await close_modal()
+	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")

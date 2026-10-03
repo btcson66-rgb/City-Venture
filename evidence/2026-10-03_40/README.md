@@ -1,6 +1,6 @@
 # #40 self-review in progress
 
-Shop short tour: 90 steps, 19 screenshots, zero failures in 121.2 seconds. It purchases actual stock, researches shelf prices, sees the Company OS badge, travels to Rosa's reception, pays AUD$12.00 for a single class, waits for the actual timetable and attends a one-hour class. A seeded networking opportunity is chosen through the real DecisionModal. Save/load and books remain consistent. Raw English audit has three inherited branding/id/beta findings; no new shop or fitness text remains.
+Shop short tour: 104 steps, 22 screenshots, zero failures in 170.0 seconds. It purchases actual stock, researches shelf prices, sees the Company OS badge, travels to Rosa's reception, pays AUD$12.00 for a single class, waits for the actual timetable and attends a one-hour class. A seeded networking opportunity is chosen through the real DecisionModal. Save/load and books remain consistent. Raw English audit has three inherited branding/id/beta findings; no new shop or fitness text remains.
 
 Seven related unit tests pass; the complete suite is 491/491 in 147.1 seconds (unit.xml). Complete Chinese cadence walkthrough is still in progress. No complete walkthrough pass is claimed. i18n 5240 translated/missing 0, wiki_check OK (3830 assets/302 IDs), beta_audit zero hits.
 
@@ -9,3 +9,5 @@ Self-review: seven-day free research cache; repeated fee/renewal prevention; can
 Rosa uses existing outfit art; requested outfit/portrait in art backlog. Main story, other-session features and assets are untouched. The full cadence run is required before advancing to #28.
 
 Final closure review binds queued opportunities to their original business account. After closure or a different active seller, accepting cannot charge the new account or create a contract; decline still works. Seven related tests include this path. The earlier complete run stopped without a completion report on August 30, so it is not counted as passed; the current reviewed full run is pending.
+
+The reviewed full run finished 2611 steps/349 screenshots in 5529.2 seconds with exactly two reception-button failures after an overnight time jump. All story chapters and industry checks completed, including real September shock-month business profit about AUD$1407; this is not a zero-failure pass. The short tour now waits for the one-second NPC schedule refresh and explicitly verifies Rosa leaves at 20:00 and returns next weekday. Its 104 steps/22 screenshots pass with zero failures. The final complete run is still pending.
