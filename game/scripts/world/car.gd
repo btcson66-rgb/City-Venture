@@ -39,7 +39,8 @@ func _pick_look() -> void:
 	detail.texture = Art.tex("vehicles/%s_side_detail" % t)
 	for s in [body, detail]:
 		s.centered = false
-		s.offset = Vector2(-s.texture.get_width() / 2.0, -s.texture.get_height())
+		var key := "vehicles/%s_side_%s" % [t, "body" if s == body else "detail"]
+		Art.fit_world_sprite(s, key, Vector2(-s.texture.get_width() / 2.0, -s.texture.get_height()))
 		s.flip_h = dir < 0
 		add_child(s)
 	match t:
@@ -51,7 +52,7 @@ func _pick_look() -> void:
 			body.modulate = [Color8(236, 238, 242), Color8(224, 132, 64)][_rng.randi_range(0, 1)]
 		_:
 			body.modulate = COLORS[_rng.randi_range(0, COLORS.size() - 1)]
-	length = float(body.texture.get_width())
+	length = float(body.texture.get_width()) * body.scale.x
 	speed = _rng.randf_range(55.0, 85.0) * (0.8 if t == "bus" else 1.0)
 	cur_speed = speed
 	head = Sprite2D.new()

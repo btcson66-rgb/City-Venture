@@ -2,12 +2,18 @@ extends RefCounted
 var runner
 
 func test_tile_atlas_uses_physical_native_regions() -> void:
-	var atlas := WorldScene.tileset().get_source(0) as TileSetAtlasSource
-	var native := load("res://assets/tiles/atlas.png") as Texture2D
-	runner.eq(atlas.texture.get_image().get_size(), native.get_image().get_size(), "atlas cell coordinates address native pixels")
-	var coords: Array = DataDB.tiles["tiles"]["sidewalk"]
-	var region := Rect2i(Vector2i(int(coords[0])*16, int(coords[1])*16), Vector2i(16,16))
-	runner.eq(atlas.texture.get_image().get_region(region).get_data(), native.get_image().get_region(region).get_data(), "industrial sidewalk samples the correct tile")
+	var original := Art.detail_enabled
+	for enabled in [false, true]:
+		Art.set_detail_enabled(enabled)
+		var atlas := WorldScene.tileset().get_source(0) as TileSetAtlasSource
+		var factor := WorldScene._tile_factor
+		var source := load("res://assets/world_detail/tiles/atlas.png" if factor == 4 else "res://assets/tiles/atlas.png") as Texture2D
+		runner.eq(atlas.texture.get_image().get_size(), source.get_image().get_size(), "atlas uses physical source dimensions")
+		var coords: Array = DataDB.tiles["tiles"]["sidewalk"]
+		var region := Rect2i(Vector2i(int(coords[0])*16*factor, int(coords[1])*16*factor), Vector2i(16,16)*factor)
+		runner.check(atlas.texture.get_image().get_region(region).get_data() == source.get_image().get_region(region).get_data(), "industrial sidewalk samples correct physical tile in both modes")
+	Art.set_detail_enabled(original)
+
 
 func setup_factory() -> String:
 	Company.register("OEM Test", "manufacturing", "Unit 12")

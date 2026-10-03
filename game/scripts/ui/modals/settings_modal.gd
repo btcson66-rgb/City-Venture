@@ -30,6 +30,7 @@ func build() -> void:
 			for row in [["master", "Master volume"], ["music", "Music"], ["sfx", "Sound effects"], ["ambience", "Ambience"]]:
 				_slider(row[0], row[1], 0, 100, 1, "%", 100)
 		1:
+			_toggle("high_detail_art", "High-resolution art")
 			if not OS.has_feature("web"):
 				_options("window_mode", "Window mode", ["Windowed", "Fullscreen", "Borderless"])
 			_slider("ui_scale", "UI scale", 80, 150, 5, "%", 100)

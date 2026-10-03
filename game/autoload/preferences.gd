@@ -5,7 +5,7 @@ signal changed
 const PATH := "user://settings.cfg"
 const DEFAULTS := {"master": 1.0, "music": 0.8, "sfx": 0.9, "ambience": 0.8,
 	"window_mode": 0, "ui_scale": 1.0, "font_size": 1, "color_mode": 0,
-	"reduce_motion": false, "subtitle_seconds": 0.0, "notification_seconds": 4.2,
+	"high_detail_art": true, "reduce_motion": false, "subtitle_seconds": 0.0, "notification_seconds": 4.2,
 	"autosave_seconds": 15.0, "default_speed": 1.5, "tutorial_hints": true}
 const BINDINGS := {"move_left": [KEY_A, KEY_LEFT], "move_right": [KEY_D, KEY_RIGHT],
 	"move_up": [KEY_W, KEY_UP], "move_down": [KEY_S, KEY_DOWN], "run": [KEY_SHIFT],
@@ -169,6 +169,8 @@ func _style(node: Node) -> void:
 
 
 func apply() -> void:
+	if Art.set_detail_enabled(bool(values["high_detail_art"])):
+		_reload_art_scene.call_deferred()
 	for bus in ["Master", "Music", "SFX", "Ambience"]:
 		var index := AudioServer.get_bus_index(bus)
 		if index < 0:
@@ -214,3 +216,10 @@ func _process(_delta: float) -> void:
 
 func key_caption(action: String) -> String:
 	return OS.get_keycode_string(int(bindings[action][0]))
+
+
+## Rebuild live sprites after cache invalidation at the exact position and facing.
+func _reload_art_scene() -> void:
+	var world := SceneRouter.world_scene()
+	if world != null and is_instance_valid(world.player):
+		SceneRouter._enter(world.kind, world.scene_id, "", world.player.facing, world.player.position)

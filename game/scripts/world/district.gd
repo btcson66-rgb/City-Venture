@@ -143,12 +143,12 @@ func _add_building(sprite: String, x: float, bid: String, bd: Dictionary) -> voi
 	var s := Sprite2D.new()
 	s.texture = tex
 	s.centered = false
-	s.offset = Vector2(0, -h + 2)
+	Art.fit_world_sprite(s, "buildings/" + sprite, Vector2(0, -h + 2))
 	holder.add_child(s)
 	var lt := Sprite2D.new()
 	lt.texture = Art.tex("buildings/" + sprite + "_lights")
 	lt.centered = false
-	lt.offset = s.offset
+	Art.fit_world_sprite(lt, "buildings/" + sprite + "_lights", Vector2(0, -h + 2))
 	var mat := CanvasItemMaterial.new()
 	mat.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
 	lt.material = mat
@@ -221,12 +221,12 @@ func _add_metro(mp: Dictionary) -> Node2D:
 	var s := Sprite2D.new()
 	s.texture = tex
 	s.centered = false
-	s.offset = Vector2(0, -h)
+	Art.fit_world_sprite(s, "buildings/metro_entrance", Vector2(0, -h))
 	holder.add_child(s)
 	var lt := Sprite2D.new()
 	lt.texture = Art.tex("buildings/metro_entrance_lights")
 	lt.centered = false
-	lt.offset = s.offset
+	Art.fit_world_sprite(lt, "buildings/metro_entrance_lights", Vector2(0, -h))
 	var mat := CanvasItemMaterial.new()
 	mat.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
 	lt.material = mat

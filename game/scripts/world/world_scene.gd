@@ -8,6 +8,7 @@ const NAV_CELL := 8
 
 static var _tileset: TileSet
 static var _tile_index := {}
+static var _tile_factor := 1
 
 var kind := ""          # "district" | "interior"
 var scene_id := ""
@@ -33,12 +34,12 @@ static func tileset() -> TileSet:
 	if _tileset != null:
 		return _tileset
 	var ts := TileSet.new()
-	ts.tile_size = Vector2i(T, T)
+	_tile_factor = 4 if Art.detail_enabled and ResourceLoader.exists("res://assets/world_detail/tiles/atlas.png") else 1
+	ts.tile_size = Vector2i(T, T) * _tile_factor
 	var src := TileSetAtlasSource.new()
-	# TileSetAtlasSource addresses physical image regions; unlike Sprite2D, it ignores a
-	# texture's logical size override. Keep the native atlas so sidewalks cannot sample grass.
-	src.texture = load("res://assets/tiles/atlas.png")
-	src.texture_region_size = Vector2i(T, T)
+	# Physical 64px regions with a 0.25 layer scale keep the same logical 16px cells.
+	src.texture = load("res://assets/world_detail/tiles/atlas.png" if _tile_factor == 4 else "res://assets/tiles/atlas.png")
+	src.texture_region_size = Vector2i(T, T) * _tile_factor
 	var tiles: Dictionary = DataDB.tiles.get("tiles", {})
 	for n in tiles:
 		var c := Vector2i(int(tiles[n][0]), int(tiles[n][1]))
@@ -53,6 +54,7 @@ func _init_layers() -> void:
 	y_sort_enabled = false
 	ground = TileMapLayer.new()
 	ground.tile_set = tileset()
+	ground.scale = Vector2.ONE / float(_tile_factor)
 	ground.name = "Ground"
 	add_child(ground)
 	back_layer = Node2D.new()

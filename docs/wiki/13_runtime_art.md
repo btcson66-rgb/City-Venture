@@ -2024,3 +2024,5 @@ sprite keys：`bollard`, `hydrant`, `cone`, `trash_bin`, `parking_meter`, `digit
 
 
 #28 Okafor sitting expression wiring: current npc_okafor_sit / detail has repeated breathing columns, no distinct sitting emotion columns. Keep its two-frame pose. CharacterRig.set_expression updates the standing npc_detail emotion column; sitting uses the breathing frame unless optional `<npc_detail_base>_sit_expressions` four-column/three-row art exists. Optional pose expression sheet then selects neutral/happy/thinking/surprised independently. No assets changed.
+
+#26：暫停選單 → 設定 → 顯示新增「高解析美術」（預設開），設定僅存於 user://settings.cfg。開／關均採相同設計座標；建築、捷運與車輛細節依素材尺寸缩放，燈光可獨立 fallback。地磚使用 64 px 素材並以 0.25 縮放顯示，每格仍是 16 px，atlas 索引及 8 px 導航格不變；切換清除 Art 與 TileSet 快取並在相同位置重建現有場景。

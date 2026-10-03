@@ -570,3 +570,6 @@ Shared properties may have `purchase_price`, `rooms`, investment_home kind and s
 
 ### #28 van appearance and route art coordinates
 Logistics `van.body_colors` is an array of `{id, name, hex}` choices; `van.parking{x,y}` uses logical Harbor world pixels. Saved `logistics.van.body_color` is optional and defaults to white for old saves. Changing colour requires ownership, never charges cash, and emits world_refresh. CompanyVan uses owner entity name, body tint and untinted detail at 72×36 logical pixels; 8→5px name sizing with ellipsis for extreme names. Map depot/stops/river/bridges use the existing 580×236 route_map logical coordinates; straight-distance legs via painted bridges retain existing scoring.
+
+### #26 device art rendering
+Preferences `high_detail_art` is a boolean defaulting true, saved only in user://settings.cfg. Art clears logical/detail and existence caches and WorldScene static TileSet cache on a change; the live scene rebuilds at the same logical player position/facing. Buildings, metro and vehicle Sprite2D fit physical detail to native dimensions/offsets independently for body/detail/lights. TileSet uses physical 64px atlas cells with TileMapLayer scale 0.25 (fallback 16px/1.0), preserving atlas indices, collisions and navigation coordinates. Missing detail falls back per texture; no assets modified.

@@ -20,6 +20,7 @@ const C_PURPLE := Color8(170, 130, 214)
 const LARGE_CACHE_LIMIT := 8
 const LARGE_TEXTURE_GROUPS := ["backdrops", "cards", "events", "city_map", "world_map"]
 
+var detail_enabled := true
 var _cache := {}
 # Dictionary insertion order is least to most recently used. Erasing releases our reference;
 # live scenes may keep their own texture until they leave the tree.
@@ -49,7 +50,7 @@ func tex(path: String) -> Texture2D:
 	var full := "res://assets/" + path + ".png"
 	var t: Texture2D = null
 	var detail := "res://assets/world_detail/" + path + ".png"
-	if not path.begins_with("world_detail/") and ResourceLoader.exists(detail):
+	if detail_enabled and not path.begins_with("world_detail/") and ResourceLoader.exists(detail):
 		var source: Texture2D = load(detail)
 		var native: Texture2D = load(full) if ResourceLoader.exists(full) else null
 		var logical := Vector2i(native.get_size()) if native != null else Vector2i(source.get_size() / 4.0)
@@ -75,6 +76,8 @@ func tex(path: String) -> Texture2D:
 ## (logos, chapter cards, poses, NPC sheets...) shows up as soon as the file is committed; until then callers
 ## keep their current look.
 func has_tex(path: String) -> bool:
+	if not detail_enabled and path.begins_with("world_detail/"):
+		return false
 	var cache: Dictionary = _large_cache if _is_large_texture(path) else _cache
 	if cache.has(path):
 		return cache[path] != null
@@ -90,6 +93,30 @@ func has_tex(path: String) -> bool:
 ## tex() for optional art: null when the file isn't there yet (no warning).
 func opt_tex(path: String) -> Texture2D:
 	return tex(path) if has_tex(path) else null
+
+
+## Switch renderer caches only; art preferences never enter company saves.
+func set_detail_enabled(enabled: bool) -> bool:
+	if enabled == detail_enabled:
+		return false
+	detail_enabled = enabled
+	_cache.clear()
+	_large_cache.clear()
+	_absent.clear()
+	WorldScene._tileset = null
+	WorldScene._tile_index.clear()
+	return true
+
+
+## Fit physical detail to the existing logical offset, keeping lights and collision aligned.
+func fit_world_sprite(sprite: Sprite2D, key: String, logical_offset: Vector2) -> void:
+	var design := tex(key)
+	if design == null:
+		return
+	var detail := opt_tex("world_detail/" + key) if detail_enabled else null
+	sprite.texture = detail if detail != null else design
+	sprite.scale = design.get_size() / sprite.texture.get_size()
+	sprite.offset = logical_offset / sprite.scale
 
 
 func icon(name: String) -> Texture2D:
@@ -110,7 +137,7 @@ func opt_color(group: String, id: String, fallback := Color.WHITE) -> Color:
 ##  - outfit_<o>_<pres>_top_detail / _bottom_detail: untinted details (shirt, tie, badge, bag) drawn over the
 ##    tinted fabric, so one suit can be charcoal on Marcus and navy on Daniel
 func character_layers(app: Dictionary, outfit: String, outfit_tints := {}, npc_id := "") -> Array:
-	if npc_id != "" and has_tex("world_detail/characters/npc_" + npc_id):
+	if detail_enabled and npc_id != "" and has_tex("world_detail/characters/npc_" + npc_id):
 		return [{"tex": "world_detail/characters/npc_" + npc_id, "tint": Color.WHITE, "name": "npc_detail"}]
 	if npc_id != "" and has_tex("characters/npc_" + npc_id):
 		return [{"tex": "characters/npc_" + npc_id, "tint": Color.WHITE, "name": "npc"}]

@@ -54,8 +54,9 @@ func _exit_tree() -> void:
 
 
 func _ready() -> void:
-	_watchdog = Thread.new()
-	_watchdog.start(_watch)
+	if not OS.has_feature("web"):
+		_watchdog = Thread.new()
+		_watchdog.start(_watch)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	for a in OS.get_cmdline_user_args():
 		if a.begins_with("--out="):
@@ -704,6 +705,9 @@ func _screens() -> void:
 
 
 func _shots() -> void:
+	if "--detail-comparison" in OS.get_cmdline_user_args():
+		await load("res://tests/walkthrough/detail_tour.gd").new(self).run()
+		return
 	await shot("main_menu")
 	var rep: String = await BugReport.capture(get_tree())
 	expect(FileAccess.file_exists(rep + "/info.txt"), "F12 bug report written (%s)" % rep)
