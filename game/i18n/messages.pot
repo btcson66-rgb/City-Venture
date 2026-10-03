@@ -73,6 +73,10 @@ msgstr ""
 msgid " today"
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:172
+msgid " · %d days late"
+msgstr ""
+
 #: scripts/ui/energy_ui.gd:101
 msgid " · %d days left"
 msgstr ""
@@ -85,7 +89,7 @@ msgstr ""
 msgid " · Net"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:170
+#: scripts/ui/energy_ui.gd:172
 msgid " · due in %d days"
 msgstr ""
 
@@ -329,7 +333,7 @@ msgstr ""
 msgid "%d × %s from %s: %s"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:278
+#: scripts/ui/energy_ui.gd:280
 msgid "%d%% revenue share"
 msgstr ""
 
@@ -601,7 +605,7 @@ msgstr ""
 msgid "%s · %s · %d hours · %s"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:259
+#: scripts/ui/energy_ui.gd:261
 msgid "%s · %s · %s · %d ports · price %s/kWh · demand about %d kWh/day · margin %s/kWh · %d kWh sold, %s revenue"
 msgstr ""
 
@@ -661,7 +665,7 @@ msgstr ""
 msgid "%s · sold %d · service visits %d · in stock %d · on order %d · discount %d%%"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:278
+#: scripts/ui/energy_ui.gd:280
 msgid "%s · terms agreed: %s"
 msgstr ""
 
@@ -717,7 +721,7 @@ msgstr ""
 msgid "%s: We had to cancel the project. We won't be paying for it."
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:221
+#: scripts/ui/energy_ui.gd:223
 msgid "%s: grant %s, %s"
 msgstr ""
 
@@ -1761,7 +1765,7 @@ msgstr ""
 msgid "Application filed. The licence should be through %s."
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:212
+#: scripts/ui/energy_ui.gd:214
 msgid "Applications are open this year."
 msgstr ""
 
@@ -1785,7 +1789,7 @@ msgstr ""
 msgid "Apply at the permits kiosk in City Hall. The money lands in the company account."
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:218
+#: scripts/ui/energy_ui.gd:220
 msgid "Apply for %s · fee %s"
 msgstr ""
 
@@ -2661,7 +2665,7 @@ msgstr ""
 msgid "Budget, rooms, neighborhood and urgency determine client fit. Negotiation changes commission and acceptance."
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:285
+#: scripts/ui/energy_ui.gd:287
 msgid "Build %s · %s"
 msgstr ""
 
@@ -2701,15 +2705,15 @@ msgstr ""
 msgid "Build this"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:286
+#: scripts/ui/energy_ui.gd:288
 msgid "BuildGrant_%s_%s"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:287
+#: scripts/ui/energy_ui.gd:289
 msgid "BuildLoan_%s_%s"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:285
+#: scripts/ui/energy_ui.gd:287
 msgid "Build_%s_%s"
 msgstr ""
 
@@ -3409,7 +3413,7 @@ msgstr ""
 msgid "Certain cost, no fine."
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:190
+#: scripts/ui/energy_ui.gd:192
 msgid "CertifyStorage"
 msgstr ""
 
@@ -3477,7 +3481,7 @@ msgstr ""
 msgid "Charger vandalism repair"
 msgstr ""
 
-#: data/help/glossary.json data/milestones.json scripts/ui/energy_ui.gd:228 scripts/ui/energy_ui.gd:63
+#: data/help/glossary.json data/milestones.json scripts/ui/energy_ui.gd:230 scripts/ui/energy_ui.gd:63
 msgid "Charging network"
 msgstr ""
 
@@ -3501,7 +3505,7 @@ msgstr ""
 msgid "Charging station: %s"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:234
+#: scripts/ui/energy_ui.gd:236
 msgid "ChargingNextInstalls"
 msgstr ""
 
@@ -3845,7 +3849,7 @@ msgstr ""
 msgid "City Curb Office"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:230
+#: scripts/ui/energy_ui.gd:232
 msgid "City EV adoption %s (+%s a year) · %d of %d stations open · grid electricity %s/kWh"
 msgstr ""
 
@@ -3865,7 +3869,7 @@ msgstr ""
 msgid "City Hall"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:209
+#: scripts/ui/energy_ui.gd:211
 msgid "City Hall energy subsidy desk (Ms. Okoro)"
 msgstr ""
 
@@ -4281,7 +4285,7 @@ msgstr ""
 msgid "Complete two campaigns and hire a designer and media buyer before buying Campus Radio."
 msgstr ""
 
-#: scripts/sim/energy.gd:50 scripts/ui/energy_ui.gd:189 scripts/ui/energy_ui.gd:233
+#: scripts/sim/energy.gd:50 scripts/ui/energy_ui.gd:191 scripts/ui/energy_ui.gd:235
 msgid "Complete two solar installs before the battery course."
 msgstr ""
 
@@ -5293,7 +5297,7 @@ msgstr ""
 msgid "Dispute lost on %s: −%s"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:182
+#: scripts/ui/energy_ui.gd:184
 msgid "Dispute the claim"
 msgstr ""
 
@@ -7993,11 +7997,11 @@ msgstr ""
 msgid "Install deposit refunded: %s"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:213
+#: scripts/ui/energy_ui.gd:215
 msgid "Install grant quota remains."
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:214
+#: scripts/ui/energy_ui.gd:216
 msgid "Install grants: %d%% of the quote up to %s per system. Quota left %s of %s. Charger grants: %d%% up to %s, quota left %s. Filing fee %s, decision in about %d days; some applications are rejected."
 msgstr ""
 
@@ -8029,7 +8033,7 @@ msgstr ""
 msgid "Installs"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:234 scripts/ui/energy_ui.gd:63
+#: scripts/ui/energy_ui.gd:236 scripts/ui/energy_ui.gd:63
 msgid "Installs & warranty"
 msgstr ""
 
@@ -8177,7 +8181,7 @@ msgstr ""
 msgid "Investors own %s of it, so your share is %s."
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:175
+#: scripts/ui/energy_ui.gd:177
 msgid "Invoice %s · %s · warranty to %s"
 msgstr ""
 
@@ -10161,6 +10165,10 @@ msgstr ""
 msgid "NAME"
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:294
+msgid "NE"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:889
 msgid "NEGOTIATION"
 msgstr ""
@@ -10175,6 +10183,10 @@ msgstr ""
 
 #: data/../assets/buildings/buildings_meta.json data/buildings/nexus_cowork.json
 msgid "NEXUS CO-WORK"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:294
+msgid "NW"
 msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:8
@@ -10229,11 +10241,11 @@ msgstr ""
 msgid "Negotiate a rate lock"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:275
+#: scripts/ui/energy_ui.gd:277
 msgid "Negotiate fixed fee"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:276
+#: scripts/ui/energy_ui.gd:278
 msgid "Negotiate revenue share"
 msgstr ""
 
@@ -11585,7 +11597,7 @@ msgstr ""
 msgid "Order from Lumina Direct: factory prices, but you pay before it ships"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:173
+#: scripts/ui/energy_ui.gd:175
 msgid "Order materials and start · %s"
 msgstr ""
 
@@ -12361,7 +12373,7 @@ msgstr ""
 msgid "Pick a box to start"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:249
+#: scripts/ui/energy_ui.gd:251
 msgid "Pick a district on the map. Free spots are limited; landlords want a fee or a share, your own property needs none."
 msgstr ""
 
@@ -12621,7 +12633,7 @@ msgstr ""
 msgid "Price %s without subsidy · materials %s · margin %d%% · %.1f crew-days (about %d days)%s"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:265
+#: scripts/ui/energy_ui.gd:267
 msgid "Price +%s"
 msgstr ""
 
@@ -12649,7 +12661,7 @@ msgstr ""
 msgid "Price too high and the bays empty; too low and each kWh loses money."
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:264
+#: scripts/ui/energy_ui.gd:266
 msgid "Price −%s"
 msgstr ""
 
@@ -13261,7 +13273,7 @@ msgstr ""
 msgid "Recruit a realty agent"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:184
+#: scripts/ui/energy_ui.gd:186
 msgid "Recruit electrician · %s a week"
 msgstr ""
 
@@ -13277,7 +13289,7 @@ msgstr ""
 msgid "RecruitRealtyAgent"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:184
+#: scripts/ui/energy_ui.gd:186
 msgid "Recruit_electrician"
 msgstr ""
 
@@ -13681,7 +13693,7 @@ msgstr ""
 msgid "Repair and add cameras"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:266
+#: scripts/ui/energy_ui.gd:268
 msgid "Repair and service · %s"
 msgstr ""
 
@@ -13697,7 +13709,7 @@ msgstr ""
 msgid "Repair the damage now"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:181
+#: scripts/ui/energy_ui.gd:183
 msgid "Repair under warranty · %s"
 msgstr ""
 
@@ -14117,7 +14129,7 @@ msgstr ""
 msgid "Roof faces %s (%d%% of south-facing yield) · load limit %d kg = %d panels max · each cell shows the sun it keeps after building and tree shade."
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:113 scripts/ui/energy_ui.gd:224 scripts/ui/energy_ui.gd:63 scripts/ui/energy_ui.gd:96
+#: scripts/ui/energy_ui.gd:113 scripts/ui/energy_ui.gd:226 scripts/ui/energy_ui.gd:63 scripts/ui/energy_ui.gd:96
 msgid "Roof leads"
 msgstr ""
 
@@ -14321,6 +14333,10 @@ msgstr ""
 msgid "Rush-order {moq} more (1-day, +20% cost)"
 msgstr ""
 
+#: scripts/ui/energy_ui.gd:294
+msgid "SE"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1199
 msgid "SERVERS"
 msgstr ""
@@ -14379,6 +14395,10 @@ msgstr ""
 
 #: data/economy/automotive.json
 msgid "SUV"
+msgstr ""
+
+#: scripts/ui/energy_ui.gd:294
+msgid "SW"
 msgstr ""
 
 #: data/regions/northridge.json scripts/sim/saas.gd:201
@@ -15861,7 +15881,7 @@ msgstr ""
 msgid "Subsidy rush filing"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:224
+#: scripts/ui/energy_ui.gd:226
 msgid "SubsidyNextLeads"
 msgstr ""
 
@@ -16081,11 +16101,11 @@ msgstr ""
 msgid "Take over the Aster Inn · %s"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:232
+#: scripts/ui/energy_ui.gd:234
 msgid "Take the battery course first."
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:190
+#: scripts/ui/energy_ui.gd:192
 msgid "Take the battery course · %s"
 msgstr ""
 
@@ -17665,7 +17685,7 @@ msgstr ""
 msgid "Use the tabs on the left. Every laptop and work desk opens the same system: home, co-work hot desk, café table, office."
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:271
+#: scripts/ui/energy_ui.gd:273
 msgid "Use your own property"
 msgstr ""
 
@@ -18061,7 +18081,7 @@ msgstr ""
 msgid "Warranty"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:178
+#: scripts/ui/energy_ui.gd:180
 msgid "Warranty claim from %s: %s, repair cost %s, decide within %d days"
 msgstr ""
 
@@ -18073,7 +18093,7 @@ msgstr ""
 msgid "Warranty dispute lost: %s"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:183
+#: scripts/ui/energy_ui.gd:185
 msgid "Warranty exposure: about %s a year in expected repairs on installed systems."
 msgstr ""
 
@@ -19041,7 +19061,7 @@ msgstr ""
 msgid "brokerage"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:258
+#: scripts/ui/energy_ui.gd:260
 msgid "building until %s"
 msgstr ""
 
@@ -19185,7 +19205,7 @@ msgstr ""
 msgid "fit out the unit"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:278
+#: scripts/ui/energy_ui.gd:280
 msgid "fixed fee %s/month"
 msgstr ""
 
@@ -19309,7 +19329,7 @@ msgstr ""
 msgid "landlord"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:270
+#: scripts/ui/energy_ui.gd:272
 msgid "landlord wants %s/month or %d%% of revenue"
 msgstr ""
 
@@ -19517,7 +19537,7 @@ msgstr ""
 msgid "out of 5"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:258
+#: scripts/ui/energy_ui.gd:260
 msgid "out of service"
 msgstr ""
 
@@ -19525,7 +19545,7 @@ msgstr ""
 msgid "own brand"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:278
+#: scripts/ui/energy_ui.gd:280
 msgid "own property"
 msgstr ""
 
@@ -19793,11 +19813,11 @@ msgstr ""
 msgid "waste"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:287
+#: scripts/ui/energy_ui.gd:289
 msgid "with bank loan"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:286
+#: scripts/ui/energy_ui.gd:288
 msgid "with grant request"
 msgstr ""
 
@@ -19817,7 +19837,7 @@ msgstr ""
 msgid "you need a van (Dockside Motors, Harbor)"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:270
+#: scripts/ui/energy_ui.gd:272
 msgid "your own property, no landlord fee"
 msgstr ""
 
@@ -20073,7 +20093,7 @@ msgstr ""
 msgid "✗ %s gave up waiting"
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:215
+#: scripts/ui/energy_ui.gd:217
 msgid "✗ A policy cut is reducing grants; the rate recovers over time."
 msgstr ""
 
@@ -20101,7 +20121,7 @@ msgstr ""
 msgid "✗ It doesn't fit. Try a bigger box."
 msgstr ""
 
-#: scripts/ui/energy_ui.gd:176
+#: scripts/ui/energy_ui.gd:178
 msgid "✗ No installs yet. Survey a roof and send a quote."
 msgstr ""
 
