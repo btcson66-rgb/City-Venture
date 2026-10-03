@@ -1,20 +1,20 @@
 # Session A progress — 2026-10-03
 
-Not complete. Draft PRs remain unmerged. Earlier progression followed the user's instruction to defer final gates; the latest instruction restores self-review before advancing. Work remains on #90 until its integration/acceptance gates pass. Session B content has not been implemented here.
+Continuous work remains in progress. All PRs are Drafts targeting claude/exciting-bardeen-y71ixv. The #108 baseline (f097b906) was merged into the first branch #98 and propagated through the stack without rebasing. Session B/C functionality is outside this session; shared industry hooks are integrated.
 
-| Issue | Draft PR | Unit tests | Self-review fixes | Remaining concerns |
+| Issue | Draft PR | Integrated unit tests | Self-review fixes | Remaining concerns |
 |---|---|---|---|---|
-| #98 | [#100](https://github.com/btcson66-rgb/City-Venture/pull/100) | 273/273 game; 12/12 Python | reservation index, save/new-game invalidation, reject invalid measurements, ten-year day count | performance budget/long-run/industry coverage not passed; older target lacks beta/industry baseline |
-| #87 | [#101](https://github.com/btcson66-rgb/City-Venture/pull/101) | 278/278 | responsive settings/scrolling, bounded persistent values, input conflicts, timed subtitle progression | native short tour 112 checks; full integration/hardware and inherited gates pending |
-| #88 | [#104](https://github.com/btcson66-rgb/City-Venture/pull/104) | 283/283 | reachable touch paths, focus/targets, creator viewport, web audio stream playback and gesture unlock | native 275 checks and Chrome touch smoke passed; real Safari/controller hardware and inherited gates pending |
-| #89 | [#107](https://github.com/btcson66-rgb/City-Venture/pull/107) | 289/289 | sticky setup primary, unread-card restore, corrupt-history preservation, attempt dedup, fixed week, evidence-based rating; walkthrough new setup/nested-scroll fix | short tour 24 samples/0 failures; #92 simple-card fallback; full rerun/target integration pending |
-| #90 | [#117](https://github.com/btcson66-rgb/City-Venture/pull/117) | 295/295 | quantization bounds, numeric JSON round trip, day indexing, navigation, neutral choices, deferred dialog guard, purchased-asset value/write-off, quantity × price receipts | short tour 3 seeds / 3 policies/0 failures; beta 16 inherited hits; RFQ/brief baseline absent; full walkthrough failed on popup timing; harness fixed; full rerun pending; awaiting base integration choice |
+| #98 | [#100](https://github.com/btcson66-rgb/City-Venture/pull/100) | 457/457; original Python 12/12 | reservation index/invalidation; preserve new_game bool and framework; bot save isolation before menu | performance budgets and long-run coverage remain unmet; industries tour 0 failures |
+| #87 | [#101](https://github.com/btcson66-rgb/City-Venture/pull/101) | 462/462 | preserve export/import; bind building activities; timed-subtitle fixture isolation; settings tour constructors | hardware accessibility checks remain; settings 121 checks / 0 failures; industries 0 failures |
+| #88 | [#104](https://github.com/btcson66-rgb/City-Venture/pull/104) | 467/467 | preserve active-region guard; scroll all nested ancestors; reachable industry launchers; minigame fixtures | real Safari/controller hardware unverified; input 333 checks / 0 failures; industries 0 failures |
+| #89 | [#107](https://github.com/btcson66-rgb/City-Venture/pull/107) | 475/475 | preserve all registry dispatch; real estate scenario rent via Jobs/Segments; framework assets in settlement | #92 simple-card fallback; replay 24 samples / 0 failures; industries 0 failures; full story rerun pending |
+| #90 | [#117](https://github.com/btcson66-rgb/City-Venture/pull/117) | 484/484 | registered demand; shared RFQ/brief competitor snapshots and odds; segment acquisition/write-off; news priority; real-input quote retry and poach handling | market 9 samples / 0 failures; industries 357 steps / 0 failures; full story rerun pending; inherited performance/hardware gaps |
 | #40 | — | Not run | Not started | after #90 self-review |
 | #28 | — | Not run | Not started | after preceding ticket |
 | #26 | — | Not run | Not started | after preceding ticket |
 | #27 | — | Not run | Not started | after preceding ticket |
-| #96 | — | Not run | Not started | after preceding ticket; industry framework dependency |
+| #96 | — | Not run | Not started | after preceding ticket |
 | #97 | — | Not run | Not started | after preceding ticket |
 | #95 | — | Not run | Not started | after preceding ticket |
 
-Latest source mismatch: the requested Continuous mode and session lists exist on `origin/claude/gifted-franklin-9hr8ju`; specified PR target `origin/claude/exciting-bardeen-y71ixv` remains `a9124264`. The newer branch's beta audit was executed read-only against this checkout. Fixing its 16 inherited findings includes Session B-owned content and cannot be silently treated as #90 implementation. PRs retain explicit unchecked gates. This table supersedes the historical initial #98 delivery snapshot; it is not a completed-delivery claim.
+Every integrated branch has i18n missing 0, wiki_check OK and beta_audit 0 hits. Raw walkthrough English audits preserve remaining inherited findings; proper names are not translated, and a zero missing catalog does not mean the raw audit has no findings. The earlier stopped full story walkthrough is not a passing run. Performance and physical-device acceptance remain explicit limits, not silently passed gates.

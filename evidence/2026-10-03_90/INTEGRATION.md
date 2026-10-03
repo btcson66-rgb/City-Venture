@@ -1,0 +1,11 @@
+# #90 integration after #108
+
+Target f097b906 was merged into #98 and propagated through #87, #88, #89 to #90 without rebase. #90 merges e0434e27 from #89. Registry dispatch/tabs/closure remain authoritative; all eleven registered modules use the shared market demand helper where customer volume responds to the market. RFQs/briefs and shared Jobs preserve dynamic opponent snapshots and use them in real winning odds. Old records without opponents keep prior odds. Acquisition/write-off sources retain industry segments. News prioritizes player events/achievements without exceeding three stories per day.
+
+Final unit suite: 484/484 passed in 129.0 seconds, including nine market tests. i18n: 5167 translated / missing 0. wiki_check: OK (3830 assets / 299 data IDs). beta_audit: 0 hits. Native Chinese industries walkthrough: 357 steps, 66 screenshots, 0 failures in 381.2 seconds. Raw English audit retains 14 inherited/proper-name findings; the exact report is preserved. This is not a raw-audit-zero claim.
+
+Native market tour: nine balanced samples / zero failures. Normal net worth gains over 120 days were AUD$13,500.67 / AUD$18,528.32 / AUD$16,132.58 (mean AUD$16,053.86); all normal cash balances remained positive. Higher spending earned more revenue but less wealth. All idle controls lost AUD$14,685.30–AUD$14,848.39. These three seeds demonstrate variation and downside, not a universal balance proof.
+
+Self-review fixes: new industry participation and demand, shared bid snapshots, displayed odds consistent with actual odds, closure segment attribution, player-news starvation, poach input coordinates, walkthrough handling of poach dialogs, and a real-input OEM policy that tries competitive quotes/other RFQs after a genuine rejection. No winner or income is fabricated. Manufacturing customer identity is retained separately from AI rivals. Company closure, old-save neutral behavior, JSON round trips and segment reconciliation are tested.
+
+The complete story walkthrough previously failed and is pending the next cadence run, with recruitment-popup handling now added. Inherited #98 performance/long-run and physical Safari/controller checks remain explicit limits. Only market hooks to Session B/C foundation are changed. No other-session feature implemented.

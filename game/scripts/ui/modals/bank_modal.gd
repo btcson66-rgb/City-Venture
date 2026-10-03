@@ -22,10 +22,11 @@ func build() -> void:
 	var left := UIK.vbox(3)
 	left.custom_minimum_size = Vector2(200, 0)
 	cols.add_child(left)
-	left.add_child(UIK.label("ACCOUNTS", 7, Art.C_DIM, true))
-	left.add_child(UIK.kv("Personal checking", Fmt.money(Ledger.cash("player")), UIK.money_color(Ledger.cash("player")), 8, true))
+	left.add_child(UIK.label_tip("ACCOUNTS", "overdraft", 7, Art.C_DIM, true))
+	left.add_child(UIK.label_tip("Credit history", "credit_history", 7, Art.C_SKY))
+	left.add_child(UIK.kv("Personal checking", Fmt.money0(Ledger.cash("player")), UIK.money_color(Ledger.cash("player")), 8, true))
 	if GameState.flag("business_account_opened"):
-		left.add_child(UIK.kv(GameState.entity_name(cid).left(18), Fmt.money(Ledger.cash(cid)), UIK.money_color(Ledger.cash(cid)), 8, true))
+		left.add_child(UIK.kv(GameState.entity_name(cid).left(18), Fmt.money0(Ledger.cash(cid)), UIK.money_color(Ledger.cash(cid)), 8, true))
 	left.add_child(UIK.sep())
 	if not atm:
 		if cid == "":
@@ -36,16 +37,19 @@ func build() -> void:
 			for amt in [2000.0, 5000.0, 10000.0, 15000.0]:
 				h.add_child(UIK.button(Fmt.money0(amt), func(): capital = amt; rebuild(), "tab_active" if is_equal_approx(capital, amt) else "tab"))
 			left.add_child(h)
-			var ob := UIK.button(I18n.t("Open account with %s") % Fmt.money0(capital), _open, "primary")
+			var ob := UIK.button(I18n.t("Open account with %s") % Fmt.money0(capital), _open, "primary" if Ledger.cash("player") >= capital else "")
 			ob.name = "OpenAccount"
+			ob.disabled = Ledger.cash("player") < capital
 			left.add_child(ob)
+			if ob.disabled:
+				left.add_child(UIK.wrap(I18n.t("You only have %s in personal checking. Pick a smaller amount.") % Fmt.money0(Ledger.cash("player")), 7, Art.C_GOLD, 196))
 		else:
 			left.add_child(UIK.label("Transfers", 8, Art.C_MUTED, true))
 			var th := UIK.hbox(3)
 			th.add_child(UIK.button("→ Company $1,000", func(): _xfer("player", cid, 1000.0)))
 			th.add_child(UIK.button("← Draw $500", func(): _xfer(cid, "player", 500.0)))
 			left.add_child(th)
-			var lb := UIK.button(I18n.t("Business lending · credit %d") % Bank.credit(), func(): UIRoot.open_modal(LoanModal.new(false)))
+			var lb := UIK.button(I18n.t("Business lending · credit %d points") % Bank.credit(), func(): UIRoot.open_modal(LoanModal.new(false)))
 			lb.name = "Lending"
 			left.add_child(lb)
 	var right := UIK.vbox(2)
@@ -64,10 +68,10 @@ func build() -> void:
 			continue
 		var row := UIK.hbox(3)
 		row.add_child(UIK.label(Clock.fmt_short(int(e["t"])).left(6), 6, Art.C_DIM))
-		var m := UIK.label(str(e["memo"]).left(30), 7, Art.C_WHITE)
+		var m := UIK.label(SavedText.display(str(e["memo"])).left(30), 7, Art.C_WHITE)
 		m.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(m)
-		row.add_child(UIK.label(Fmt.money(c, true), 7, UIK.money_color(c), true))
+		row.add_child(UIK.label(Fmt.money0(c, true), 7, UIK.money_color(c), true))
 		list.add_child(row)
 	right.add_child(UIK.scroll(list, Vector2(200, 170)))
 	footer.add_child(UIK.button("Done", close, "", 70))

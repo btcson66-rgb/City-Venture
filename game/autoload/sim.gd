@@ -78,6 +78,8 @@ var phase := ""
 
 func _dispatch(kind: String, p: Dictionary) -> void:
 	phase = kind
+	if Industries.dispatch(kind, p):
+		return
 	var mod := kind.get_slice(".", 0)
 	match mod:
 		"rail":
@@ -86,8 +88,8 @@ func _dispatch(kind: String, p: Dictionary) -> void:
 			Compliance.handle(kind, p)
 		"acq":
 			Acquisition.handle(kind, p)
-		"eco":
-			Ecommerce.handle(kind, p)
+		"job":
+			Jobs.handle(kind, p)
 		"con":
 			Contracts.handle(kind, p)
 		"evt":
@@ -96,16 +98,10 @@ func _dispatch(kind: String, p: Dictionary) -> void:
 			Living.handle(kind, p)
 		"story":
 			StoryEngine.handle(kind, p)
-		"car":
-			Careers.handle(kind, p)
 		"stf":
 			Staff.handle(kind, p)
 		"bank":
 			Bank.handle(kind, p)
-		"cafe":
-			Cafe.handle(kind, p)
-		"log":
-			Logistics.handle(kind, p)
 		_:
 			push_warning("Sim: unknown scheduled kind " + kind)
 
@@ -116,7 +112,7 @@ func _on_hour(t: int, h: int) -> void:
 	phase = "hour:compliance"
 	Compliance.on_hour(t, h)
 	phase = "hour:ecommerce"
-	Ecommerce.on_hour(t, h)
+	Industries.on_hour(t, h, "sales")
 	phase = "hour:contracts"
 	Contracts.on_hour(t, h)
 	phase = "hour:living"
@@ -124,15 +120,17 @@ func _on_hour(t: int, h: int) -> void:
 	phase = "hour:events"
 	EventEngine.on_hour(t, h)
 	phase = "hour:careers"
-	Careers.on_hour(t, h)
+	Industries.on_hour(t, h, "careers")
 	phase = "hour:staff"
 	Staff.on_hour(t, h)
 	phase = "hour:saas"
-	Saas.on_hour(t, h)
-	phase = "hour:cafe"
-	Cafe.on_hour(t, h)
-	phase = "hour:logistics"
-	Logistics.on_hour(t, h)
+	Industries.on_hour(t, h, "business")
+	Assets.on_hour(t, h)
+	Jobs.on_hour(t, h)
+	phase = "hour:group"
+	InternalSupply.on_hour(t, h)
+	GroupJobs.on_hour(t, h)
+	Milestones.on_hour(t, h)
 	phase = "hour:scenario"
 	Replay.on_hour(t, h)
 	phase = "hour:story"

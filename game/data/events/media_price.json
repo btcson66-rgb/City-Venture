@@ -1,0 +1,51 @@
+{
+ "id": "media_price",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:media_active"
+  ],
+  "chance": 0.018,
+  "cooldown_days": 21,
+  "earliest_day": 4
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "imani_cole",
+  "title": "Media channel price increase",
+  "icon": "warning",
+  "lines": [
+   "Channels raised CPM for about two weeks. Pay the higher rates, or pay a fee to lock in half the increase."
+  ]
+ },
+ "choices": [
+  {
+   "id": "respond",
+   "label": "Pay the higher rates",
+   "detail": "CPMs rise 30% for two weeks. Adjust the mix to protect your KPIs.",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "media",
+     "kind": "price"
+    }
+   ],
+   "outcome": "Channels raised CPM for two weeks. Adjust the mix before the next daily buying cycle."
+  },
+  {
+   "id": "lock",
+   "label": "Negotiate a rate lock",
+   "detail": "Pay $900 to halve the increase for two weeks.",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "media",
+     "kind": "price_lock"
+    }
+   ],
+   "outcome": "The channels agreed a locked rate: only half the increase applies for two weeks."
+  }
+ ]
+}

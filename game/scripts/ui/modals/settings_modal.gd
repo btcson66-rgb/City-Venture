@@ -134,6 +134,8 @@ func _input(event: InputEvent) -> void:
 
 
 static func action_name(action: String) -> String:
+	if action == "building_activities":
+		return I18n.t("What can I do here?")
 	if action.begins_with("pick_"):
 		return I18n.t("Choice %d") % int(action.trim_prefix("pick_"))
 	if action == "undo":

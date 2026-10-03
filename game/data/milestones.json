@@ -1,0 +1,449 @@
+{
+ "id": "milestones",
+ "milestones": [
+  {
+   "id": "eco_first",
+   "industry": "ecommerce",
+   "name": "First parcel out",
+   "desc": "Deliver your first marketplace order.",
+   "metric": "stat:orders_delivered",
+   "value": 1
+  },
+  {
+   "id": "eco_100",
+   "industry": "ecommerce",
+   "name": "Hundred happy buyers",
+   "desc": "Deliver 100 marketplace orders.",
+   "metric": "stat:orders_delivered",
+   "value": 100
+  },
+  {
+   "id": "eco_1000",
+   "industry": "ecommerce",
+   "name": "Thousand-order shop",
+   "desc": "Deliver 1,000 marketplace orders.",
+   "metric": "stat:orders_delivered",
+   "value": 1000
+  },
+  {
+   "id": "eco_revenue",
+   "industry": "ecommerce",
+   "name": "Twenty-five grand in sales",
+   "desc": "Reach $25,000 of lifetime sales revenue.",
+   "metric": "stat:revenue_total",
+   "value": 25000,
+   "money": true
+  },
+  {
+   "id": "eco_listings",
+   "industry": "ecommerce",
+   "name": "Full shelf",
+   "desc": "Keep five listings live at once.",
+   "metric": "stat:listings_active",
+   "value": 5
+  },
+  {
+   "id": "con_first",
+   "industry": "consulting",
+   "name": "First client delivered",
+   "desc": "Deliver one freelance gig.",
+   "metric": "stat:gigs_delivered",
+   "value": 1
+  },
+  {
+   "id": "con_5",
+   "industry": "consulting",
+   "name": "Repeat business",
+   "desc": "Deliver five freelance gigs.",
+   "metric": "stat:gigs_delivered",
+   "value": 5
+  },
+  {
+   "id": "con_15",
+   "industry": "consulting",
+   "name": "Booked solid",
+   "desc": "Deliver 15 freelance gigs.",
+   "metric": "stat:gigs_delivered",
+   "value": 15
+  },
+  {
+   "id": "con_hours",
+   "industry": "consulting",
+   "name": "Hundred-fifty billable hours",
+   "desc": "Log 150 hours of gig work.",
+   "metric": "stat:gig_hours",
+   "value": 150
+  },
+  {
+   "id": "con_30",
+   "industry": "consulting",
+   "name": "Boutique practice",
+   "desc": "Deliver 30 freelance gigs.",
+   "metric": "stat:gigs_delivered",
+   "value": 30
+  },
+  {
+   "id": "saas_launch",
+   "industry": "saas",
+   "name": "Version 1.0 ships",
+   "desc": "Launch your product.",
+   "metric": "fn:saas_launched",
+   "value": 1
+  },
+  {
+   "id": "saas_100",
+   "industry": "saas",
+   "name": "Hundred subscribers",
+   "desc": "Hold 100 paying subscribers.",
+   "metric": "data:saas.subs",
+   "value": 100
+  },
+  {
+   "id": "saas_1000",
+   "industry": "saas",
+   "name": "Thousand subscribers",
+   "desc": "Hold 1,000 paying subscribers.",
+   "metric": "data:saas.subs",
+   "value": 1000
+  },
+  {
+   "id": "saas_features",
+   "industry": "saas",
+   "name": "Roadmap delivered",
+   "desc": "Ship three features after launch.",
+   "metric": "data:saas.features",
+   "value": 3
+  },
+  {
+   "id": "saas_signups",
+   "industry": "saas",
+   "name": "Five hundred sign-ups",
+   "desc": "Collect 500 lifetime sign-ups.",
+   "metric": "data:saas.signups",
+   "value": 500
+  },
+  {
+   "id": "cafe_100",
+   "industry": "cafe",
+   "name": "Regulars forming",
+   "desc": "Serve 100 cafe customers.",
+   "metric": "stat:cafe_customers",
+   "value": 100
+  },
+  {
+   "id": "cafe_1000",
+   "industry": "cafe",
+   "name": "A thousand cups",
+   "desc": "Serve 1,000 cafe customers.",
+   "metric": "stat:cafe_customers",
+   "value": 1000
+  },
+  {
+   "id": "cafe_5000",
+   "industry": "cafe",
+   "name": "Old Town institution",
+   "desc": "Serve 5,000 cafe customers.",
+   "metric": "stat:cafe_customers",
+   "value": 5000
+  },
+  {
+   "id": "cafe_30d",
+   "industry": "cafe",
+   "name": "A month behind the counter",
+   "desc": "Open the cafe on 30 days.",
+   "metric": "stat:cafe_days_open",
+   "value": 30
+  },
+  {
+   "id": "cafe_100d",
+   "industry": "cafe",
+   "name": "Hundred trading days",
+   "desc": "Open the cafe on 100 days.",
+   "metric": "stat:cafe_days_open",
+   "value": 100
+  },
+  {
+   "id": "log_van",
+   "industry": "logistics",
+   "name": "Keys in hand",
+   "desc": "Buy your first van.",
+   "metric": "stat:vans_bought",
+   "value": 1
+  },
+  {
+   "id": "log_runs_10",
+   "industry": "logistics",
+   "name": "Ten runs",
+   "desc": "Complete ten van runs.",
+   "metric": "stat:van_runs",
+   "value": 10
+  },
+  {
+   "id": "log_runs_50",
+   "industry": "logistics",
+   "name": "Known on every street",
+   "desc": "Complete 50 van runs.",
+   "metric": "stat:van_runs",
+   "value": 50
+  },
+  {
+   "id": "log_parcels",
+   "industry": "logistics",
+   "name": "Two hundred parcels",
+   "desc": "Deliver 200 parcels by van.",
+   "metric": "stat:van_parcels",
+   "value": 200
+  },
+  {
+   "id": "log_km",
+   "industry": "logistics",
+   "name": "Round the city twice",
+   "desc": "Drive 500 km.",
+   "metric": "stat:van_km",
+   "value": 500
+  },
+  {
+   "id": "mfg_first",
+   "industry": "manufacturing",
+   "name": "First batch shipped",
+   "desc": "Deliver an OEM production order.",
+   "metric": "count:manufacturing.orders|status=delivered",
+   "value": 1
+  },
+  {
+   "id": "mfg_5",
+   "industry": "manufacturing",
+   "name": "Five orders on time",
+   "desc": "Deliver five OEM production orders.",
+   "metric": "count:manufacturing.orders|status=delivered",
+   "value": 5
+  },
+  {
+   "id": "mfg_yield",
+   "industry": "manufacturing",
+   "name": "Clean line",
+   "desc": "Hold factory yield at 97% or better for 30 production days running.",
+   "metric": "fn:mfg_yield_today",
+   "value": 0.97,
+   "streak_days": 30,
+   "pct": true
+  },
+  {
+   "id": "mfg_stage2",
+   "industry": "manufacturing",
+   "name": "Automated line",
+   "desc": "Reach the automated line stage.",
+   "metric": "data:manufacturing.stage",
+   "value": 2
+  },
+  {
+   "id": "mfg_stage3",
+   "industry": "manufacturing",
+   "name": "Full-scale plant",
+   "desc": "Reach the third factory stage.",
+   "metric": "data:manufacturing.stage",
+   "value": 3
+  },
+  {
+   "id": "re_first",
+   "industry": "real_estate",
+   "name": "First commission",
+   "desc": "Close a brokerage mandate.",
+   "metric": "count:real_estate.mandates|status=closed",
+   "value": 1
+  },
+  {
+   "id": "re_10",
+   "industry": "real_estate",
+   "name": "Ten mandates closed",
+   "desc": "Close ten brokerage mandates.",
+   "metric": "count:real_estate.mandates|status=closed",
+   "value": 10
+  },
+  {
+   "id": "re_landlord",
+   "industry": "real_estate",
+   "name": "Landlord",
+   "desc": "Reach the rental portfolio stage.",
+   "metric": "data:real_estate.stage",
+   "value": 2
+  },
+  {
+   "id": "re_developer",
+   "industry": "real_estate",
+   "name": "Developer",
+   "desc": "Reach the development stage.",
+   "metric": "data:real_estate.stage",
+   "value": 3
+  },
+  {
+   "id": "re_tower",
+   "industry": "real_estate",
+   "name": "Ribbon cutting",
+   "desc": "Complete a development project.",
+   "metric": "stat:re_projects_completed",
+   "value": 1
+  },
+  {
+   "id": "media_first",
+   "industry": "media",
+   "name": "First campaign wrapped",
+   "desc": "Finish a client campaign.",
+   "metric": "data:media.completed",
+   "value": 1
+  },
+  {
+   "id": "media_5",
+   "industry": "media",
+   "name": "Five campaigns",
+   "desc": "Finish five client campaigns.",
+   "metric": "data:media.completed",
+   "value": 5
+  },
+  {
+   "id": "media_15",
+   "industry": "media",
+   "name": "Agency of record",
+   "desc": "Finish 15 client campaigns.",
+   "metric": "data:media.completed",
+   "value": 15
+  },
+  {
+   "id": "media_agency",
+   "industry": "media",
+   "name": "A proper agency",
+   "desc": "Reach the agency stage.",
+   "metric": "fn:media_stage",
+   "value": 2
+  },
+  {
+   "id": "media_radio",
+   "industry": "media",
+   "name": "On the air",
+   "desc": "Own Campus Radio.",
+   "metric": "fn:media_stage",
+   "value": 3
+  },
+  {
+   "id": "hotel_block",
+   "industry": "hotel",
+   "name": "First group block",
+   "desc": "Complete a travel-agency room block.",
+   "metric": "data:hotel.completed_blocks",
+   "value": 1
+  },
+  {
+   "id": "hotel_90",
+   "industry": "hotel",
+   "name": "Nearly full house",
+   "desc": "Average 90% occupancy across 30 nights.",
+   "metric": "fn:hotel_occupancy_30",
+   "value": 0.9,
+   "pct": true
+  },
+  {
+   "id": "hotel_blocks_5",
+   "industry": "hotel",
+   "name": "Trusted by agencies",
+   "desc": "Complete five group blocks.",
+   "metric": "data:hotel.completed_blocks",
+   "value": 5
+  },
+  {
+   "id": "hotel_brasserie",
+   "industry": "hotel",
+   "name": "Inn and Brasserie",
+   "desc": "Reach hotel stage two.",
+   "metric": "data:hotel.stage",
+   "value": 2
+  },
+  {
+   "id": "hotel_resort",
+   "industry": "hotel",
+   "name": "Harbor Resort",
+   "desc": "Reach hotel stage three.",
+   "metric": "data:hotel.stage",
+   "value": 3
+  },
+  {
+   "id": "auto_first",
+   "industry": "automotive",
+   "name": "First car sold",
+   "desc": "Sell a car.",
+   "metric": "stat:cars_sold",
+   "value": 1
+  },
+  {
+   "id": "auto_10",
+   "industry": "automotive",
+   "name": "Ten cars sold",
+   "desc": "Sell ten cars.",
+   "metric": "stat:cars_sold",
+   "value": 10
+  },
+  {
+   "id": "auto_40",
+   "industry": "automotive",
+   "name": "Forty cars sold",
+   "desc": "Sell 40 cars.",
+   "metric": "stat:cars_sold",
+   "value": 40
+  },
+  {
+   "id": "auto_fleet",
+   "industry": "automotive",
+   "name": "Rental fleet running",
+   "desc": "Reach the rental fleet stage.",
+   "metric": "fn:automotive_stage",
+   "value": 2
+  },
+  {
+   "id": "auto_franchise",
+   "industry": "automotive",
+   "name": "Franchised dealer",
+   "desc": "Reach the franchise stage.",
+   "metric": "fn:automotive_stage",
+   "value": 3
+  },
+  {
+   "id": "en_first",
+   "industry": "energy",
+   "name": "First roof lit",
+   "desc": "Deliver a solar install.",
+   "metric": "stat:energy_installs",
+   "value": 1
+  },
+  {
+   "id": "en_5",
+   "industry": "energy",
+   "name": "Five installs",
+   "desc": "Deliver five solar installs.",
+   "metric": "stat:energy_installs",
+   "value": 5
+  },
+  {
+   "id": "en_15",
+   "industry": "energy",
+   "name": "Solar installer of the year",
+   "desc": "Deliver 15 solar installs.",
+   "metric": "stat:energy_installs",
+   "value": 15
+  },
+  {
+   "id": "en_storage",
+   "industry": "energy",
+   "name": "Storage certified",
+   "desc": "Reach the storage stage.",
+   "metric": "fn:energy_stage",
+   "value": 2
+  },
+  {
+   "id": "en_network",
+   "industry": "energy",
+   "name": "Charging network",
+   "desc": "Open an EV charging station.",
+   "metric": "fn:energy_stations_open",
+   "value": 1
+  }
+ ]
+}

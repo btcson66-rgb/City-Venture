@@ -158,7 +158,7 @@ static func net_worth() -> float:
 			continue
 		if entity != "player":
 			total += Ledger.balance(entity, "investments")
-		for account in ["cash", "marketplace_balance", "accounts_receivable", "inventory", "inventory_in_transit", "goods_out", "deposits", "property", "escrow_held", "frozen_funds", "loan_payable", "wages_payable", "accounts_payable", "deferred_revenue"]:
+		for account in ["cash", "marketplace_balance", "accounts_receivable", "inventory", "inventory_in_transit", "goods_out", "deposits", "property", "fixed_assets", "property_assets", "construction_in_progress", "escrow_held", "frozen_funds", "loan_payable", "wages_payable", "accounts_payable", "deferred_revenue"]:
 			total += Ledger.balance(entity, account)
 	return snappedf(total, 0.01)
 
@@ -189,10 +189,17 @@ static func on_hour(_t: int, h: int) -> void:
 		var random := GameState.randf()
 		if random >= float(initial["vacancy_chance"]):
 			var rent := float(initial["rent"])
-			Ledger.post("player", I18n.t("Property rent — %s") % str(initial["property"]), [{"acct": "cash", "dr": rent}, {"acct": "revenue", "cr": rent}], {"type": "property"})
-		Ledger.expense("player", "other", float(initial["maintenance"]), I18n.t("Property maintenance — %s") % str(initial["property"]), {"type": "property"})
+			var tenants: Array = RealEstate.cfg()["tenant_names"]
+			var client: String = tenants[posmod(int(S()["seed"]), tenants.size())]
+			var job := Jobs.offer({"entity": "player", "client": client, "scope": I18n.t("Property rent — %s") % str(initial["property"]), "price": rent, "work": 1, "due": Clock.now() + Clock.DAY, "terms": 0, "segment": "real_estate", "property": initial["property"], "period": S()["rent_period"]})
+			if job != "":
+				Jobs.accept(job)
+				Jobs.progress(job, 1)
+				Jobs.deliver(job)
+				Jobs.invoice(job)
+		Ledger.expense("player", "other", float(initial["maintenance"]), I18n.t("Property maintenance — %s") % str(initial["property"]), {"type": "property", "segment": "real_estate"})
 		if GameState.randf() < float(initial["repair_chance"]):
-			Ledger.expense("player", "other", float(initial["repair_cost"]), I18n.t("Property repair — %s") % str(initial["property"]), {"type": "property"})
+			Ledger.expense("player", "other", float(initial["repair_cost"]), I18n.t("Property repair — %s") % str(initial["property"]), {"type": "property", "segment": "real_estate"})
 	evaluate()
 
 

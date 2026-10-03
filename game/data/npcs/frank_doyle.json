@@ -1,0 +1,40 @@
+{
+ "id": "frank_doyle",
+ "name": "Frank Doyle",
+ "role": "Auctioneer",
+ "appearance": {
+  "presentation": "masculine",
+  "face": "square",
+  "hair": "messy",
+  "hair_color": "black",
+  "skin": "s3",
+  "eye_shape": "round",
+  "eye_color": "dark",
+  "brows": "thick",
+  "mouth": "grin",
+  "accessory": "none"
+ },
+ "outfit": "office_professional",
+ "outfit_tints": {
+  "top": "#6a2f2f",
+  "bottom": "#2c3038"
+ },
+ "schedule": [
+  {
+   "days": "mon,tue,wed,thu,fri,sat",
+   "from": "08:00",
+   "to": "18:00",
+   "location": "interior:aurelia_auto_auction",
+   "spot": "podium",
+   "pose": "idle"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [],
+   "conversation": "frank_doyle_intro",
+   "action": "automotive_open"
+  }
+ ],
+ "phone_contact": false
+}

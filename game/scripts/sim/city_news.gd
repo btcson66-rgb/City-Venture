@@ -33,7 +33,15 @@ static func publish_day() -> void:
 	S()["event_cursor"] = history.size()
 	var items: Array = S()["items"]
 	items.append({"day": Clock.day_index(), "t": Clock.now(), "kind": "macro", "text": I18n.t("%s · base rate %s · price level %.2f × baseline") % [I18n.t(Macro.phase()), Fmt.pct(Macro.rate(), 2), Macro.costs()]})
-	for index in mini(2, S()["queue"].size()):
+	# Keep player events visible despite the weekly batch of AI company reports.
+	# One player story per edition; the remaining slot drains older city news.
+	var queue: Array = S()["queue"]
+	var player_index := queue.find_custom(func(story): return story["kind"] in ["event", "achievement"])
+	if player_index > 0:
+		var player_story = queue[player_index]
+		queue.remove_at(player_index)
+		queue.push_front(player_story)
+	for index in mini(2, queue.size()):
 		var story: Dictionary = S()["queue"].pop_front()
 		story.merge({"day": Clock.day_index(), "t": Clock.now()}, true)
 		items.append(story)

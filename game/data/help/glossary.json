@@ -1,4 +1,9 @@
 {
+ "save_export": {
+  "title": "Save backup",
+  "what": "Export save downloads your current game as a .cvsave file. Import save continues that game in an empty slot, or a slot you explicitly choose to replace.",
+  "why": "Browser saves stay on this device. Clearing browser data or changing computers can lose them. Export a copy before an update; keep it somewhere safe. The last three local backups help recover a damaged save."
+ },
  "settlement_wire": {
   "title": "International wire",
   "what": "A bank transfer across borders through a chain of banks. Each one checks it, so it takes days.",
@@ -193,6 +198,326 @@
   "title": "Loan eligibility",
   "what": "Check all six lending conditions before signing. A missed condition shows its gap and where to fix it.",
   "why": "An appointment gets you to Marcus; it does not waive the company, account, credit, payment history, age or collateral requirements."
+ },
+ "accounts_receivable": {
+  "title": "Receivables",
+  "what": "Money customers owe for delivered goods or work; ShopLane also holds sales before payout.",
+  "why": "A $1,000 invoice on Net 30 earns revenue today but cannot pay payroll until the cash arrives."
+ },
+ "cash_forecast": {
+  "title": "Cash forecast",
+  "what": "An estimate of cash coming in and going out over the next nine weeks. It includes bills and expected sales, but not new stock purchases.",
+  "why": "If payroll lands before a customer pays, profitable sales can still leave cash below zero. Order stock only after allowing for that gap."
+ },
+ "opex": {
+  "title": "Operating expenses",
+  "what": "Costs of running the business beyond the stock sold: advertising, shipping, rent, staff and servers.",
+  "why": "Revenue of $1,000 minus $600 stock cost leaves $400 gross profit; $300 operating expenses leave only $100 business profit."
+ },
+ "marketplace_fee": {
+  "title": "Marketplace fee",
+  "what": "ShopLane keeps 10% of each sale before paying you.",
+  "why": "A $20 sale leaves $18 before stock, advertising and shipping. Set prices using the amount you keep."
+ },
+ "payout_schedule": {
+  "title": "Weekly payouts",
+  "what": "ShopLane holds completed sales in a marketplace balance and transfers them on its weekly payout schedule.",
+  "why": "A busy sales day raises receivables before checking cash. Keep enough cash for bills until the payout."
+ },
+ "ads_cpc": {
+  "title": "Advertising budget",
+  "what": "Your daily ad budget buys product exposure; clicks can cost money without creating an order.",
+  "why": "An extra $20 of ads must earn more than $20 of additional margin to help profit. Pause ads when cash is tight."
+ },
+ "price_elasticity": {
+  "title": "Price and demand",
+  "what": "Demand changes when your price moves relative to the market price. A higher price earns more per sale but can reduce orders.",
+  "why": "Compare orders per day and unit margin after a price change; selling twice as many units is not useful if each loses money."
+ },
+ "product_photo": {
+  "title": "Product photos",
+  "what": "A listing needs photos. You can spend time shooting them or pay Studio Lumen for professional photos.",
+  "why": "Self photos take 1 hour 20 minutes; studio photos cost $120. Better presentation can help orders, but keep cash for stock."
+ },
+ "supplier_terms": {
+  "title": "Supplier credit",
+  "what": "Eligible registered companies can buy from some suppliers now and pay after the stated number of days.",
+  "why": "Net 30 leaves cash available today but creates a bill in 30 days. Reserve money for that bill in your forecast."
+ },
+ "avg_cost": {
+  "title": "Average stock cost",
+  "what": "The ledger averages what you paid for the units of a product at a stock location.",
+  "why": "Buy 10 units at $5 and 10 at $7: average cost is $6. This cost determines profit when a unit sells."
+ },
+ "defect_rate": {
+  "title": "Defect rate",
+  "what": "The supplier offer estimates the share of incoming units that may be unusable. The actual receipt can differ.",
+  "why": "At 5%, a 100-unit order averages about 5 duds. Allow spare stock before promising a large delivery."
+ },
+ "morale": {
+  "title": "Staff morale",
+  "what": "A staff member morale score measures how they feel about work and pay.",
+  "why": "Late wages hurt morale and can make staff leave. A raise helps, but adds to every weekly payroll."
+ },
+ "employer_registration": {
+  "title": "Employer registration",
+  "what": "Register your company as an employer at City Hall before hiring staff.",
+  "why": "Registration costs $150. After hiring, reserve cash for wages every Friday at 17:00."
+ },
+ "upfront": {
+  "title": "Upfront payment",
+  "what": "The buyer pays a percentage of the contract before delivery; the remainder follows the payment terms.",
+  "why": "A 30% advance on $1,000 brings $300 now and leaves $700 to collect later. It helps fund stock without increasing total revenue."
+ },
+ "late_penalty": {
+  "title": "Late delivery penalty",
+  "what": "Delivering after a contract deadline reduces the amount the buyer pays by the agreed penalty rate.",
+  "why": "A 10% penalty on $1,000 costs $100. Check stock and supplier lead time before signing."
+ },
+ "mrr": {
+  "title": "Monthly recurring revenue",
+  "what": "SaaS MRR is subscribers multiplied by the monthly subscription price. Freelance invoices are separate, non-recurring income.",
+  "why": "100 subscribers at $20 produce $2,000 MRR before churn, servers and staff. MRR is not profit."
+ },
+ "churn": {
+  "title": "Subscriber churn",
+  "what": "The monthly share of subscribers expected to leave your SaaS product. Features and support help them stay.",
+  "why": "At 5% churn with 100 subscribers, about 5 leave in a month. New signups must replace them before the business grows."
+ },
+ "server_costs": {
+  "title": "Server costs",
+  "what": "The SaaS server bill has a monthly base cost plus a cost for each subscriber.",
+  "why": "More subscribers increase revenue and server costs together. Leave room for this bill when pricing subscriptions."
+ },
+ "interest_rate": {
+  "title": "Annual interest",
+  "what": "APR is the annual rate charged on the unpaid loan balance. Credit and the base rate affect your offer.",
+  "why": "At 12% APR, $1,000 outstanding accrues about $10 interest for a month before principal repayment."
+ },
+ "amortization": {
+  "title": "Monthly loan payment",
+  "what": "A regular payment covers interest and repays part of the principal until the loan is paid off.",
+  "why": "A longer term lowers the monthly burden but can increase total interest. Compare both before borrowing."
+ },
+ "credit_history": {
+  "title": "Credit history",
+  "what": "Your credit score and record of repayments affect whether the bank lends and how much it offers.",
+  "why": "Pay bills on time to protect credit; an appointment alone cannot override unpaid arrears or a low score."
+ },
+ "overdraft": {
+  "title": "Overdraft",
+  "what": "Cash below zero is money you owe rather than cash available to spend.",
+  "why": "A negative account can trigger warnings and insolvency. Review the forecast and reduce costs before more bills arrive."
+ },
+ "company_registration": {
+  "title": "Company registration",
+  "what": "City Hall registers a separate company that can open a bank account, hire staff and sign business contracts.",
+  "why": "Registration does not move personal cash into the company. Open the business account at Nexus Bank and choose founder capital next."
+ },
+ "food_licence": {
+  "title": "Food handling licence",
+  "what": "Your cafe needs an inspection and City Hall permission before serving food and drinks.",
+  "why": "Apply after leasing the premises. Processing takes 2 days, so plan fit-out and opening around that wait."
+ },
+ "green_grant": {
+  "title": "Green business grant",
+  "what": "From Year 4, registered companies using recycled packaging and selling a green product can apply for a grant.",
+  "why": "The permit screen lists the next missing step. Switching packaging alone is not enough without a green product on sale."
+ },
+ "courier_tiers": {
+  "title": "Courier or self delivery",
+  "what": "Economy and Express couriers charge money; carrying parcels to PostPoint uses your own time.",
+  "why": "Economy takes 3 days and Express 1 day. Compare the quoted batch cost with the time a PostPoint trip takes."
+ },
+ "revenue": {
+  "title": "Revenue",
+  "what": "Sales earned for goods or work, before subtracting refunds and costs. Earning revenue does not always mean receiving cash today.",
+  "why": "A $1,000 delivered invoice can appear in revenue while its cash is still due in 30 days."
+ },
+ "cogs": {
+  "title": "Cost of goods sold",
+  "what": "The average book cost of stock sold to customers during the month. Stock still on the shelf is inventory, not this expense.",
+  "why": "Sell 10 units with average cost $6: COGS is $60. Subtract it from net revenue to find gross profit."
+ },
+ "segments": {
+  "title": "Business segments",
+  "what": "A segment groups transactions from one industry.",
+  "why": "Separate results show which business pays for shared office and staff costs."
+ },
+ "manufacturing": {
+  "title": "Manufacturing",
+  "what": "Turn raw materials into OEM orders using paid machine capacity.",
+  "why": "Deposits are liabilities until delivery. Idle machines still cost rent."
+ },
+ "manufacturing_rfq": {
+  "title": "OEM orders",
+  "what": "An RFQ specifies units, deadline, price range and maximum defects.",
+  "why": "A low quote may lose money; a high quote loses the client."
+ },
+ "manufacturing_schedule": {
+  "title": "Machine schedule",
+  "what": "Allocate weekly hours. Each machine needs one hour between batches.",
+  "why": "Overlapping orders cannot share a machine; overtime costs 1.5 times normal wages."
+ },
+ "manufacturing_quality": {
+  "title": "Sampling inspection",
+  "what": "Inspection slows production and catches defects that need paid rework.",
+  "why": "Escaped defects trigger refunds, fines and lower credit."
+ },
+ "real_estate": {
+  "title": "Real Estate",
+  "what": "Brokerage earns a commission only on a completed client match. Ownership adds mortgage and tenant risks.",
+  "why": "Start with brokerage, then buy a rental, then develop Lot 7."
+ },
+ "realty_match": {
+  "title": "Match score",
+  "what": "Budget, rooms, neighborhood and urgency determine client fit. Negotiation changes commission and acceptance.",
+  "why": "A high asking price can fail. Viewings still cost time and money."
+ },
+ "mortgage": {
+  "title": "Property mortgage",
+  "what": "Borrow against a specific home with a down payment and a long monthly amortization.",
+  "why": "Variable interest and vacancy can make cash flow negative."
+ },
+ "development": {
+  "title": "Ruiz development",
+  "what": "Pay construction milestones on an approved, named project. Delays and overruns change the budget.",
+  "why": "Completion creates saleable or rentable units and a visible building."
+ },
+ "media": {
+  "title": "Campaign agency",
+  "what": "Pitch for client Jobs, run a budgeted campaign, then settle actual work.",
+  "why": "A rejected pitch still costs time and money."
+ },
+ "media_mix": {
+  "title": "CPM and saturation",
+  "what": "CPM is the cost of one thousand impressions. Repeated spending on one channel produces less fresh reach.",
+  "why": "Distribute spending by audience, not just the cheapest CPM."
+ },
+ "creative_pitch": {
+  "title": "Creative quality",
+  "what": "Slogan, visual and tone should match the client audience preferences.",
+  "why": "Quality changes click-through and KPI results."
+ },
+ "media_kpi": {
+  "title": "Campaign KPI",
+  "what": "A campaign aims for relevant reach or conversions, then reports actual measured results.",
+  "why": "A missed target lowers reputation and future brief opportunities."
+ },
+ "owned_media": {
+  "title": "Owned audience and inventory",
+  "what": "Buy Campus Radio as a depreciating asset and sell finite audience impressions.",
+  "why": "Ad contracts earn money; an unsold audience still costs upkeep."
+ },
+ "hotel": {
+  "title": "Hotel revenue management",
+  "what": "Rooms are perishable: an empty room tonight earns nothing tomorrow. You choose prices, channels and overbooking; a night audit sells the rooms.",
+  "why": "Occupancy times average daily rate (ADR) is room revenue."
+ },
+ "hotel_calendar": {
+  "title": "Demand calendar",
+  "what": "Expected demand per day comes from weekday, season and city events such as festivals or trade fairs.",
+  "why": "Raise prices on gold days and be careful before locking group rooms on them."
+ },
+ "hotel_adr": {
+  "title": "ADR and RevPAR",
+  "what": "ADR is revenue per sold room. RevPAR is revenue per available room, whether sold or not.",
+  "why": "A high price with empty rooms can earn less than a lower price that sells out."
+ },
+ "hotel_channels": {
+  "title": "Channels and commission",
+  "what": "Direct guests pay you with no commission. The OTA takes 15% (standard) or 18% (featured) of each night and pays a weekly statement Net 30. Agency blocks give 25% off.",
+  "why": "Use the OTA to fill empty nights, not nights you could sell directly."
+ },
+ "hotel_overbook": {
+  "title": "Overbooking",
+  "what": "Some booked guests never arrive. Selling up to 10% more bookings than rooms fills those gaps.",
+  "why": "If everyone arrives, you pay walk compensation and the review suffers."
+ },
+ "hotel_housekeeping": {
+  "title": "Housekeeping capacity",
+  "what": "Each checkout needs a full clean, each stayover a light one. Rooms nobody cleaned cannot be sold tonight.",
+  "why": "Capacity, not demand, can be the real limit on a busy weekend."
+ },
+ "hotel_supplies": {
+  "title": "Supplies and breakfast",
+  "what": "Linen, laundry, amenities and breakfast are variable costs for each occupied room-night. Your own cafe kitchen supplies breakfast at wholesale cost.",
+  "why": "Breakfast lifts the service score; the cafe makes it cheaper."
+ },
+ "hotel_equipment": {
+  "title": "Room equipment",
+  "what": "Room fit-outs are assets that wear out, need service and can break. Renovation restores condition but takes the rooms off sale.",
+  "why": "Tired rooms lower cleanliness and value scores in every review."
+ },
+ "hotel_blocks": {
+  "title": "Group blocks",
+  "what": "A travel agency locks rooms weeks ahead at 25% off and pays 30 days after the stay, with a 20% deposit.",
+  "why": "Reliable volume, but the rooms are gone if demand later spikes."
+ },
+ "hotel_ota": {
+  "title": "OTA statements",
+  "what": "Voyago invoices your OTA nights each week. The commission is deducted from the receivable and the rest is paid Net 30.",
+  "why": "Cash arrives a month after the guests, so keep a buffer."
+ },
+ "hotel_reviews": {
+  "title": "Guest reviews",
+  "what": "Score 1 to 5 from cleanliness, service and value for money. Only the last 60 days count. Critic Vera Stone's review weighs five times.",
+  "why": "Rating changes your direct bookings and your OTA ranking."
+ },
+ "hotel_growth": {
+  "title": "Growth stages",
+  "what": "Aster Inn (12 rooms), then the Brasserie expansion (30 rooms), then a Harbor resort (50 rooms).",
+  "why": "Each stage needs occupancy, rating, reviews and staff, not only cash."
+ },
+ "energy": {
+  "title": "Solar and charging business",
+  "what": "Quote rooftop solar for real clients, then build an EV charging network.",
+  "why": "Installs pay once with a warranty tail; chargers earn per kWh and track EV adoption."
+ },
+ "energy_roof": {
+  "title": "Roof Survey",
+  "what": "Place panels on roof cells. Shade, direction and the load limit change annual kWh and the client's payback.",
+  "why": "A shorter payback wins more quotes."
+ },
+ "energy_subsidy": {
+  "title": "Energy subsidy",
+  "what": "City Hall pays part of a system's price from a yearly quota. You file for the client, pay a fee and wait for a decision.",
+  "why": "Grants lower the client's price but can be rejected, run out or be cut by policy."
+ },
+ "energy_charging": {
+  "title": "Charging network",
+  "what": "Revenue is kWh sold times price, minus grid electricity. Demand follows the city EV adoption rate and falls as your price rises.",
+  "why": "Price too high and the bays empty; too low and each kWh loses money."
+ },
+ "energy_warranty": {
+  "title": "Warranty",
+  "what": "Installed systems are covered for a year. A claim costs a share of the price to repair.",
+  "why": "Ignoring a claim damages your reputation."
+ },
+ "automotive": {
+  "title": "Used cars, rentals and dealership",
+  "what": "Win cars at the Wednesday auction, recondition and sell them, run an airport rental fleet, then sign a dealership franchise.",
+  "why": "Each stage uses real cars and real customers: stock cars back bank loans, rentals follow airport passengers, and the franchise adds steady sales and service income."
+ },
+ "auction": {
+  "title": "Auction and hidden defects",
+  "what": "Bidders have private ceilings. A paid inspection reveals hidden defects such as flood damage, engine wear or a rolled-back odometer.",
+  "why": "Winning an uninspected car can mean paying visible-condition prices for a worse car, and a later warranty claim."
+ },
+ "fleet_util": {
+  "title": "Fleet utilisation",
+  "what": "Utilisation is rented car-days divided by available car-days. Airport passengers, season, rates and ratings set the requests.",
+  "why": "A cheap car sitting idle earns nothing; a high price loses requests. Service skipped means breakdowns and bad reviews."
+ },
+ "franchise": {
+  "title": "Franchise deposit and minimum stock",
+  "what": "A dealership needs a deposit, a showroom and a minimum number of new cars in stock or on order each month.",
+  "why": "Miss the stock minimum twice and the factory ends the franchise and keeps part of the deposit."
+ },
+ "transfer_price": {
+  "title": "Transfer price",
+  "what": "The price one of your businesses charges another for goods or services inside the group.",
+  "why": "It moves profit between segments, not into the group. The consolidated totals cancel it out, so only real savings versus buying outside count."
  },
  "macro_cycle": {
   "title": "Market cycle",

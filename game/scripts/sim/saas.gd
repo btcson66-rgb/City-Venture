@@ -139,7 +139,7 @@ static func signup_rate() -> float:
 	var ads := 0.0 if b <= 0.0 else float(cfg().get("ad_max_boost", 1.0)) * b / (b + float(cfg().get("ad_half_budget", 20)))
 	var wom := minf(1.0, int(s["subs"]) / 150.0)
 	var room := clampf(1.0 - int(s["subs"]) / float(i.get("market", 1000)), 0.0, 1.0)
-	return float(i["base_signups"]) * Macro.demand("saas") * Rivals.demand("saas") * pf * quality() * (1.0 + ads + Staff.demand_boost()) * (1.0 + wom) * room
+	return float(i["base_signups"]) * Industries.market_demand("saas") * pf * quality() * (1.0 + ads + Staff.demand_boost()) * (1.0 + wom) * room
 
 
 static func on_hour(_t: int, h: int) -> void:
@@ -172,11 +172,11 @@ static func _day() -> void:
 	if gross > 0.0:
 		var fee := snappedf(gross * float(cfg().get("processor_fee", 0.03)), 0.01)
 		Ledger.post(ent, I18n.t("%s subscriptions — %d users") % [str(idea()["name"]), int(s["subs"])],
-			[{"acct": "cash", "dr": gross - fee}, {"acct": "exp:platform_fees", "dr": fee}, {"acct": "revenue", "cr": gross}], {"type": "saas"})
+			[{"acct": "cash", "dr": gross - fee}, {"acct": "exp:platform_fees", "dr": fee}, {"acct": "revenue", "cr": gross}], {"segment": "saas", "type": "saas"})
 	var servers := snappedf((float(cfg().get("server_base_month", 40)) + float(cfg().get("server_per_user_month", 0.35)) * int(s["subs"])) / 30.0, 0.01)
-	Ledger.expense(ent, "servers", servers, I18n.t("%s servers") % str(idea()["name"]), {"type": "saas"})
+	Ledger.expense(ent, "servers", servers, I18n.t("%s servers") % str(idea()["name"]), {"segment": "saas", "type": "saas"})
 	if float(s["ads_per_day"]) > 0.0:
-		Ledger.expense(ent, "advertising", float(s["ads_per_day"]), I18n.t("%s ads") % str(idea()["name"]), {"type": "saas"})
+		Ledger.expense(ent, "advertising", float(s["ads_per_day"]), I18n.t("%s ads") % str(idea()["name"]), {"segment": "saas", "type": "saas"})
 	var days: Array = s["days"]
 	days.append({"t": Clock.now(), "subs": int(s["subs"]), "new": new, "lost": lost})
 	while days.size() > 60:
@@ -191,3 +191,28 @@ static func last_days(n: int, key: String) -> int:
 	for i in range(maxi(0, days.size() - n), days.size()):
 		t += int(days[i][key])
 	return t
+
+
+static func is_running() -> bool:
+	return active()
+
+
+static func os_tab() -> Dictionary:
+	return {"id":"saas", "label":"SaaS", "icon":"laptop", "start_label":"Start a software product", "method":"_tab_saas", "order":2}
+
+
+static func board_detail() -> Callable:
+	return IndustryViews.saas
+
+
+static func segment_tag() -> String:
+	return "saas"
+
+
+static func handle(_kind: String, _p: Dictionary) -> void:
+	pass
+
+
+static func on_company_closed(ent: String) -> void:
+	if str(S().get("entity", "")) == ent or (str(S().get("entity", "")) == "" and entity() == ent):
+		S()["active"] = false

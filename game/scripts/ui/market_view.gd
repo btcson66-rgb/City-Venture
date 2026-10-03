@@ -11,7 +11,7 @@ static func render(owner: CompanyOS) -> void:
 		return
 	content.add_child(UIK.wrap(I18n.t("%s · base rate %s · price level %.2f × baseline") % [I18n.t(Macro.phase()), Fmt.pct(Macro.rate(), 2), Macro.costs()], 8, Art.C_SKY, 440))
 	content.add_child(UIK.label_tip("Market share", "market_competition"))
-	var industries: Array = DataDB.businesses.keys()
+	var industries: Array = Industries.all().map(func(entry): return str(entry["id"]))
 	industries.sort()
 	for industry in industries:
 		var definition: Dictionary = DataDB.businesses[industry]

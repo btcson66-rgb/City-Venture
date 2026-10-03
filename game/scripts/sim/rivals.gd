@@ -35,12 +35,9 @@ static func participates(industry: String) -> bool:
 	var entity: Dictionary = GameState.data["entities"].get(GameState.company_id(), {})
 	if entity.has("closed"):
 		return false
-	match industry:
-		"ecommerce": return not GameState.data["ecommerce"]["listings"].is_empty() or entity.get("type", "") == industry
-		"cafe": return Cafe.leased()
-		"saas": return GameState.data.get("saas", {}).get("active", false)
-		"logistics": return Logistics.has_van()
-		"consulting": return GameState.data.get("careers", {}).get("freelance", {}).get("active", false)
+	var registration := Industries.find(industry)
+	if not registration.is_empty() and registration["sim_class"].is_running():
+		return true
 	return entity.get("type", "") == industry
 
 
@@ -216,7 +213,7 @@ static func acquire(id: String) -> Dictionary:
 	var price := acquire_price(id)
 	if Ledger.cash(entity) < price:
 		return {"ok": false, "error": I18n.t("✗ Insufficient company cash — save %s first.") % Fmt.money(price)}
-	Ledger.post(entity, I18n.t("Rival acquisition: %s — %s") % [rival["name"], Fmt.money(price)], [{"acct": "investments", "dr": price}, {"acct": "cash", "cr": price}], {"type": "acquisition", "rival": id})
+	Ledger.post(entity, I18n.t("Rival acquisition: %s — %s") % [rival["name"], Fmt.money(price)], [{"acct": "investments", "dr": price}, {"acct": "cash", "cr": price}], {"type": "acquisition", "rival": id, "segment": rival["industry"]})
 	# Buying market presence does not award cash or guaranteed dividends.
 	rival["status"] = "acquired"
 	rival["buyer"] = entity
@@ -228,15 +225,28 @@ static func acquire(id: String) -> Dictionary:
 static func on_company_closed(entity: String) -> void:
 	if not active():
 		return
-	var cost := 0.0
 	for rival in companies():
-		if rival["status"] == "acquired" and rival.get("buyer", "") == entity:
-			cost += float(rival.get("acquired_cost", 0))
-			rival["status"] = "bankrupt"
-			rival["acquired_cost"] = 0.0
-	cost = minf(cost, maxf(0.0, Ledger.balance(entity, "investments")))
-	if cost > 0:
-		Ledger.post(entity, I18n.t("Acquired market presence written off: %s") % Fmt.money(cost), [{"acct": "exp:other", "dr": cost}, {"acct": "investments", "cr": cost}], {"type": "liquidation"})
+		if rival["status"] != "acquired" or rival.get("buyer", "") != entity:
+			continue
+		var cost := minf(float(rival.get("acquired_cost", 0)), maxf(0.0, Ledger.balance(entity, "investments")))
+		rival["status"] = "bankrupt"
+		rival["acquired_cost"] = 0.0
+		if cost > 0:
+			Ledger.post(entity, I18n.t("Acquired market presence written off: %s") % Fmt.money(cost), [{"acct": "exp:other", "dr": cost}, {"acct": "investments", "cr": cost}], {"type": "liquidation", "segment": rival["industry"]})
 	for offer in pending():
 		if offer["company"] == entity:
 			offer["status"] = "closed"
+
+
+## Opponents use their saved price/quality; inactive legacy markets preserve the old odds.
+static func bid_chance(base: float, opponents: Array) -> float:
+	if opponents.is_empty():
+		return base
+	var strength := 0.0
+	for opponent in opponents:
+		strength = maxf(strength, float(opponent.get("quality", 1.0)) / maxf(float(cfg()["price_min"]), float(opponent.get("price", 1.0))))
+	return clampf(base / (1.0 + strength * float(cfg()["bid_pressure"])), 0.0, 1.0)
+
+
+static func competing_text(opponents: Array) -> String:
+	return I18n.t("Competing firms: %s") % ", ".join(opponents.map(func(r): return str(r["name"])))

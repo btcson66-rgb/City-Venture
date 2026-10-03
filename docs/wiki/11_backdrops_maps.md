@@ -1,5 +1,17 @@
 # 11 背景、卡片與地圖
 
+## 4× 程式接線（#62，2026-10-01，Implemented）
+
+`Art.tex()` 與 `Art.opt_tex()` 會優先讀取同路徑的 `world_detail/` 圖，保留高解析像素，
+但回報原圖的邏輯尺寸。背景平移、地點卡、城市／世界／捷運地圖與小遊戲點擊座標沿用原尺寸。
+同規則也涵蓋 UI 圖示／面板、事件、標誌、商品與特效；九宮格切邊、動畫格及碰撞不放大。
+直接指定 `world_detail/` 的既有程式仍取得實際尺寸。
+
+4× 背景及城市／世界地圖使用品質 0.85 的 lossy WebP 匯入，不修改 PNG 原稿。
+各平台匯出只排除 `tests/*`。`tools/package_release.sh` 結尾執行
+`tools/qa/build_size_check.py`，Web `index.pck` 上限 160 MB、Windows zip 上限 180 MB（十進位）。
+證據及兩種解析度原圖／4× 對照見 `evidence/2026-10-01_62/`。
+
 ## 全螢幕背景（`game/assets/backdrops/`）
 
 | 檔案 | 尺寸 | 用在 | 美術 | 內容 |

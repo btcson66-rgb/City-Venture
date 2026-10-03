@@ -1,0 +1,3 @@
+Merged the first stacked branch (#98, ceb15209), retaining all beta/industry base features and settings/save import/export. Added the I activity shortcut to rebindable InputMap/HUD. Isolated subtitle fixture from prior queued modals. Updated the short settings tool to construct new industry minigame intros with explicit inputs (not gameplay/balance fixtures).
+
+462/462 unit tests passed in 120.7 s; i18n --check 5013 translated / missing 0; wiki OK (3830 assets / 269 IDs); beta_audit 0 hits. Industries walkthrough 0 failures / 304 steps / 358.1 s. Settings tour 121 modal checks / 0 failures. The industry English auditor retains the same 26 baseline findings recorded in #98; no new untranslated settings text. Full story/hardware/performance acceptance remains separate.

@@ -67,8 +67,27 @@ func _run() -> void:
 	UIRoot.open_modal(PoachModal.new(employee))
 	await _settle()
 	await _shot("poach_offer")
+	var modal := UIRoot.top_modal()
+	var retain := modal.find_child("RetainEmployee", true, false) as Button
+	var point := get_viewport().get_final_transform() * retain.get_global_rect().get_center()
+	var motion := InputEventMouseMotion.new()
+	motion.position = point
+	motion.global_position = point
+	Input.parse_input_event(motion)
+	await get_tree().process_frame
+	for pressed in [true, false]:
+		var mouse := InputEventMouseButton.new()
+		mouse.position = point
+		mouse.global_position = point
+		mouse.button_index = MOUSE_BUTTON_LEFT
+		mouse.pressed = pressed
+		Input.parse_input_event(mouse)
+		await get_tree().process_frame
+	await _settle()
+	if UIRoot.top_modal() is PoachModal:
+		failures.append("Walkthrough cannot answer competing job offer")
 	var file := FileAccess.open(out.path_join("market_result.json"), FileAccess.WRITE)
-	file.store_string(JSON.stringify({"samples": samples, "average_gain": average, "failures": failures, "limits": ["Three seeds illustrate variability, not a universal balance proof.", "RFQ/brief systems are unmerged in the PR target; competitor API awaits integration."]}, "\t"))
+	file.store_string(JSON.stringify({"samples": samples, "average_gain": average, "failures": failures, "limits": ["Three seeds illustrate variability, not a universal balance proof."]}, "\t"))
 	file.close()
 	print("Market tour: %d samples, %d failures" % [samples.size(), failures.size()])
 	get_tree().quit(0 if failures.is_empty() else 1)

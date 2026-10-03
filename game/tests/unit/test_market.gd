@@ -112,6 +112,7 @@ func test_acquisition_cash_double_entry_and_closed_company() -> void:
 	runner.check(Insolvency.close_company()["ok"], "company closes normally")
 	runner.eq(Ledger.balance(entity, "investments"), 0.0, "acquired investment written off at closure")
 	runner.eq(rival["status"], "bankrupt", "owned rival exits at closure")
+	runner.check(float(Segments.compute(entity, 0, Clock.now()+1)["rows"]["cafe"]["opex"]) >= price, "acquisition write-off belongs to the acquired industry segment")
 	runner.check(not Acquisition.buy_rival("cafe_2")["ok"] and not Rivals.participates("cafe"), "closed company cannot acquire or claim share")
 	runner.check(Ledger.check_balanced(), "acquisition ledger balances")
 
@@ -133,3 +134,58 @@ func test_news_daily_count_dedup_bounds_and_legacy_quotes() -> void:
 	runner.eq(Macro.demand("cafe"), 1.0, "old save neutral until play initializes")
 	runner.eq(Rivals.demand("ecommerce"), 1.0, "old save neutral market")
 	runner.check(not Macro.active() and not Rivals.active(), "passive quotes do not mutate old save")
+
+
+func test_registry_market_and_shared_job_competitors_survive_load() -> void:
+	_start()
+	Company.register("Factory market", "manufacturing", "Unit 12")
+	Company.open_business_account(25000)
+	Living.lease("unit12_factory")
+	runner.check(Manufacturing.start()["ok"], "registered factory starts")
+	runner.check(Rivals.participates("manufacturing"), "registered factory participates")
+	var rfq: Dictionary = Manufacturing.S()["rfqs"].values()[0]
+	runner.eq(rfq["competitors"].size(), 2, "RFQ snapshots active firms")
+	var snapshot: Array = rfq["competitors"].duplicate(true)
+	var base := 0.8
+	runner.check(Rivals.bid_chance(base, snapshot) < base, "opponent strength changes actual bid odds")
+	runner.eq(Rivals.bid_chance(base, []), base, "legacy RFQ odds unchanged without competitors")
+	var job := Jobs.offer({"entity": GameState.company_id(), "scope": "market_integration", "client": "Kessler Precision", "terms": 30, "segment": "manufacturing", "price": 100, "work": 1, "due": Clock.now()+Clock.DAY})
+	runner.eq(Jobs.get_job(job)["competitors"], snapshot, "shared Jobs stores same market competitors")
+	Rivals.S()["companies"][snapshot[0]["id"]]["status"] = "bankrupt"
+	GameState.data = JSON.parse_string(JSON.stringify(GameState.data))
+	runner.eq(Jobs.get_job(job)["competitors"].size(), 2, "already issued bids retain snapshot after save/load")
+	runner.eq(Rivals.competitors("manufacturing").size(), 1, "future bids exclude bankrupt rivals")
+	runner.eq(Industries.market_demand("unknown_industry"), 1.0, "unregistered industries remain neutral")
+	Macro.S()["index"] = 0.7
+	Macro.S()["rate"] = 0.09
+	runner.check(Industries.market_demand("manufacturing") < 1.0, "registered sector receives downturn")
+	var entity := GameState.company_id()
+	runner.check(Insolvency.close_company()["ok"], "registry handles factory closure")
+	runner.check(not Rivals.participates("manufacturing"), "closed factory leaves market")
+	runner.check(Ledger.check_balanced(), "integrated Jobs and closure preserve books")
+	runner.check(absf(float(Segments.compute(entity,0,Clock.now()+1)["totals"]["operating_profit"])-float(MonthClose.compute(entity,0,Clock.now()+1)["business_profit"])) < 0.011, "integrated segment totals equal ledger")
+
+
+func test_media_briefs_share_market_snapshot() -> void:
+	_start()
+	Company.register("Media market", "media", "The Loft")
+	Company.open_business_account(25000)
+	Living.lease("loft_office")
+	runner.check(Media.start()["ok"], "registered media agency starts")
+	var brief: Dictionary = Media.S()["briefs"].values()[0]
+	runner.eq(brief["competitors"].size(), 2, "agency brief includes actual market competitors")
+	runner.eq(brief["competitors"], Jobs.get_job(brief["id"])["competitors"], "brief and shared Job use the same snapshot")
+	var rival: Dictionary = Rivals.S()["companies"][brief["competitors"][0]["id"]]
+	var saved_price: float = brief["competitors"][0]["price"]
+	rival["price"] = 0.65
+	runner.eq(brief["competitors"][0]["price"], saved_price, "later rival repricing does not mutate issued briefs")
+
+
+func test_player_news_cannot_starve_behind_ai_reports() -> void:
+	_start()
+	for index in 24:
+		CityNews.enqueue("AI report %d" % index, "rival")
+	CityNews.enqueue("Player milestone", "achievement")
+	CityNews.publish_day()
+	runner.check(CityNews.S()["items"].any(func(item): return item["text"] == "Player milestone"), "player milestone reaches next daily edition")
+	runner.eq(CityNews.S()["items"].size(), 3, "priority preserves daily cap")

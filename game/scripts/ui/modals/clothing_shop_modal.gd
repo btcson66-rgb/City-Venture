@@ -52,17 +52,17 @@ func build() -> void:
 	v.add_child(UIK.sep())
 	v.add_child(UIK.label(I18n.t(it["name"]), 10, Art.C_WHITE, true))
 	v.add_child(UIK.wrap(I18n.t(it.get("blurb", "")), 7, Art.C_MUTED, 280))
-	v.add_child(UIK.kv("Price", Fmt.money(float(it["price"])), Art.C_GOLD))
-	v.add_child(UIK.kv("Your cash", Fmt.money(Ledger.cash("player")), UIK.money_color(Ledger.cash("player"))))
+	v.add_child(UIK.kv("Price", Fmt.money0(float(it["price"])), Art.C_GOLD))
+	v.add_child(UIK.kv("Your cash", Fmt.money0(Ledger.cash("player")), UIK.money_color(Ledger.cash("player"))))
 	footer.add_child(UIK.button("Close", close))
 	if Wardrobe.owns(sel):
-		var w := UIK.button("Wearing it" if Wardrobe.wearing() == sel else "Wear it now", _wear, "primary")
+		var w := UIK.button("Wearing it" if Wardrobe.wearing() == sel else "Wear it now", _wear, "primary" if Wardrobe.wearing() != sel else "")
 		w.name = "Wear"
 		w.disabled = Wardrobe.wearing() == sel
 		footer.add_child(w)
 	else:
 		var why := Wardrobe.buy_block(sel)
-		var b2 := UIK.button(I18n.t("Buy — %s") % Fmt.money(float(it["price"])) if why == "" else I18n.t(why), _buy, "primary")
+		var b2 := UIK.button(I18n.t("Buy — %s") % Fmt.money0(float(it["price"])) if why == "" else I18n.t(why), _buy, "primary" if why == "" else "")
 		b2.name = "Buy"
 		b2.disabled = why != ""
 		footer.add_child(b2)
