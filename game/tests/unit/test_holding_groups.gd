@@ -185,3 +185,11 @@ func test_corrupt_portfolio_import_rejects_invalid_ids_and_context_shapes() -> v
 		var payload:={"format":GameState.SAVE_FORMAT,"summary":{},"data":data}
 		runner.check(not SaveCodec.decode(JSON.stringify(payload))["ok"],"reject malformed portfolio: "+kind)
 	runner.eq(GameState.company_id(),ent,"failed imports leave live company intact")
+
+func test_registration_prompt_is_read_only_and_requires_the_clerk() -> void:
+	company("Prompt Owner")
+	var before:=UIRoot.top_modal()
+	var seq:=int(GameState.data["ledger"]["seq"])
+	for i in 3:runner.eq(Actions.lock_reason("register_company",{}),"Nobody at the counter. Registration: Mon–Fri 9:00–17:00.","missing clerk explains next opening")
+	runner.eq(UIRoot.top_modal(),before,"reading prompt cannot open registration")
+	runner.eq(GameState.data["ledger"]["seq"],seq,"reading prompt cannot spend")

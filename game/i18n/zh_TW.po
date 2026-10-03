@@ -282,7 +282,7 @@ msgstr "%d 筆訂單%s等待打包——到打包桌（家裡或辦公室）。"
 msgid "%d orders"
 msgstr "%d 筆訂單"
 
-#: scripts/world/actions.gd:300
+#: scripts/world/actions.gd:292
 msgid "%d orders waiting to be packed. I'm on it."
 msgstr "還有 %d 筆訂單等著打包，我正在處理。"
 
@@ -458,11 +458,7 @@ msgstr "%s 有一筆需要多個事業合作的大案：%s。報酬 %s。請到�
 msgid "%s has room: choose it under \"Deliver to\" in Operations."
 msgstr "%s 還有空間：請在「營運」的「送貨到」選它。"
 
-#: scripts/world/actions.gd:110
-msgid "%s is already registered (%s)."
-msgstr "%s 已經登記過了（%s）。"
-
-#: scripts/world/actions.gd:251
+#: scripts/world/actions.gd:243
 msgid "%s is busy."
 msgstr "%s 在忙。"
 
@@ -1854,7 +1850,7 @@ msgstr "全部事件"
 msgid "All good? Approve it. Something wrong? Click the wrong field first, then Reject."
 msgstr "都沒問題就「核准」。有錯的話，先點出錯的欄位，再按「退件」。"
 
-#: scripts/world/actions.gd:300
+#: scripts/world/actions.gd:292
 msgid "All packed. The courier comes at 16:00."
 msgstr "都打包好了，快遞 16:00 來收。"
 
@@ -3226,7 +3222,7 @@ msgstr "種生意"
 msgid "Businesses: choose from the businesses available now, or find a part-time job."
 msgstr "生意：選擇目前可經營的生意，或找一份兼職工作。"
 
-#: scripts/world/actions.gd:293
+#: scripts/world/actions.gd:285
 msgid "Busy day. All good."
 msgstr "今天很忙，一切順利。"
 
@@ -3690,7 +3686,7 @@ msgstr "還不能聘人：%s。"
 msgid "Can't start a shift now: %s."
 msgstr "現在不能上班：%s。"
 
-#: scripts/world/actions.gd:273
+#: scripts/world/actions.gd:265
 msgid "Can't work the counter: %s."
 msgstr "現在不能站吧台：%s。"
 
@@ -4406,7 +4402,7 @@ msgstr "請選實際商品種類。更正被扣包裹須付關稅與罰款；補
 msgid "Choose the mentor ending and hold five actual advisory sessions."
 msgstr "選擇導師結局，實際完成五次輔導。"
 
-#: scripts/world/actions.gd:25 scripts/world/actions.gd:70
+#: scripts/world/actions.gd:25 scripts/world/actions.gd:67
 msgid "Choose the mentor ending first."
 msgstr "先選擇退居導師的結局。"
 
@@ -4750,7 +4746,7 @@ msgstr "寫完了：完成 %.1f 小時的工作量。"
 msgid "Coding session — %s"
 msgstr "寫程式：%s"
 
-#: data/economy/cafe.json scripts/sim/ledger.gd:33 scripts/world/actions.gd:262
+#: data/economy/cafe.json scripts/sim/ledger.gd:33 scripts/world/actions.gd:254
 msgid "Coffee"
 msgstr "咖啡"
 
@@ -4758,11 +4754,11 @@ msgstr "咖啡"
 msgid "Coffee machine, printer, Wi-Fi: you fix all three before lunch."
 msgstr "咖啡機、印表機、Wi-Fi：午餐前你三個都修好了。"
 
-#: scripts/world/actions.gd:266
+#: scripts/world/actions.gd:258
 msgid "Coffee — %s."
 msgstr "咖啡——%s。"
 
-#: scripts/world/actions.gd:166
+#: scripts/world/actions.gd:158
 msgid "Coffee — %s. Tastes like possibility."
 msgstr "咖啡——%s。喝起來是可能性的味道。"
 
@@ -5282,7 +5278,7 @@ msgstr "成本變高了：調高售價保住毛利（Company OS → 銷售）"
 msgid "Could I get a loan?"
 msgstr "我可以貸款嗎？"
 
-#: scripts/world/actions.gd:293
+#: scripts/world/actions.gd:285
 msgid "Could use a bit more support around here."
 msgstr "這裡有點需要更多支援。"
 
@@ -8846,7 +8842,7 @@ msgstr "本國幣開票"
 msgid "Honest. I respect it."
 msgstr "很誠實。我欣賞。"
 
-#: scripts/world/actions.gd:293
+#: scripts/world/actions.gd:285
 msgid "Honestly? I'm looking at other jobs."
 msgstr "老實說？我在看其他工作了。"
 
@@ -12330,11 +12326,11 @@ msgstr "沒有新案子。每天早上 8:00 會有新的。"
 msgid "No new opportunities right now. Check again after your company grows."
 msgstr "目前沒有新機會。公司有新進展後，再來看看。"
 
-#: scripts/world/actions.gd:178
+#: scripts/world/actions.gd:170
 msgid "No one's at the till."
 msgstr "櫃台沒有人。"
 
-#: scripts/world/actions.gd:151
+#: scripts/world/actions.gd:143
 msgid "No one's behind the counter."
 msgstr "櫃檯沒有人。"
 
@@ -12438,7 +12434,7 @@ msgstr "不是。電匯也會出問題，只是慢一點、文件多一點。我
 msgid "Noah"
 msgstr "Noah"
 
-#: scripts/world/actions.gd:112 scripts/world/actions.gd:30
+#: scripts/world/actions.gd:104 scripts/world/actions.gd:29
 msgid "Nobody at the counter. Registration: Mon–Fri 9:00–17:00."
 msgstr "櫃檯沒人。公司登記：週一至週五 9:00–17:00。"
 
@@ -12630,7 +12626,7 @@ msgstr "沒有要交的貨。"
 msgid "Nothing to discuss until you've read my number."
 msgstr "你看過我的數字之前，沒什麼好談的。"
 
-#: scripts/world/actions.gd:102
+#: scripts/world/actions.gd:99
 msgid "Nothing to drop off. Pack orders at your packing table and choose 'Carry to PostPoint'."
 msgstr "沒有要寄的東西。先到打包桌打包，再選「自己拿去 PostPoint」。"
 
@@ -19726,7 +19722,7 @@ msgstr "團隊留下來，沒有任何房間受影響。"
 msgid "The teller is open weekdays 9 to 16. Loans are at the manager's desk."
 msgstr "櫃台平日 9 點到 16 點營業。貸款請找經理。"
 
-#: scripts/world/actions.gd:117
+#: scripts/world/actions.gd:109
 msgid "The teller window is closed."
 msgstr "櫃檯窗口已關閉。"
 
@@ -19934,11 +19930,11 @@ msgstr "這題已回答或目前無法回答，請接續現在的步驟。"
 msgid "This invoice was sold to a collector as part of the company liquidation. The buyer will not pay the closed company again."
 msgstr "這張發票已隨清算賣給催收公司，買方不會再付款給已結束的公司。"
 
-#: scripts/world/actions.gd:59
+#: scripts/world/actions.gd:56
 msgid "This is Bay 3's kit. Lease the warehouse at the lettings desk by the door first."
 msgstr "這是 3 號倉位的設備。請先到門口的租賃櫃檯租下這座倉庫。"
 
-#: scripts/world/actions.gd:61
+#: scripts/world/actions.gd:58
 msgid "This is Suite 2B's desk. Talk to Tom about leasing it."
 msgstr "這是 2B 室的辦公桌。想租的話找 Tom 談。"
 
@@ -20046,7 +20042,7 @@ msgstr "這項供應隨事業運作，無法暫停。"
 msgid "This target is no longer independent. Review another company."
 msgstr "這個標的已不再獨立，請查看其他公司。"
 
-#: scripts/world/actions.gd:57
+#: scripts/world/actions.gd:54
 msgid "This till comes with the lease. Mr. Okafor at Okafor Lettings handles it."
 msgstr "這台收銀機跟著租約走。請找 Okafor 租屋行的 Okafor 先生。"
 
@@ -20110,7 +20106,7 @@ msgstr "走過供應衝擊"
 msgid "Thu"
 msgstr "四"
 
-#: scripts/world/actions.gd:134
+#: scripts/world/actions.gd:126
 msgid "Ticket A-%d. Now serving A-%d."
 msgstr "號碼 A-%d。目前叫號 A-%d。"
 
@@ -20446,7 +20442,7 @@ msgstr "具備兩個完整獲利年度、達標年營收與一年無違規紀錄
 msgid "Two focused hours: %.1f hours of the work done. %s"
 msgstr "專心工作兩小時：完成 %.1f 小時的工作量。%s"
 
-#: scripts/world/actions.gd:283
+#: scripts/world/actions.gd:275
 msgid "Two hours behind your own counter: %d customers served."
 msgstr "在自己的吧台站了兩小時：服務了 %d 位客人。"
 
@@ -21318,7 +21314,7 @@ msgstr "最濃的那種。"
 msgid "When a company closes, its undelivered contracts end and its unpaid invoices go to a collector. Old contracts stay visible, but the closed company cannot deliver or collect again."
 msgstr "公司關閉時，未交貨合約終止，未收款發票讓售催收公司。舊合約保留供查閱，但已結束公司不能再交貨或收款。"
 
-#: scripts/world/actions.gd:295
+#: scripts/world/actions.gd:287
 msgid "When are we getting paid? Rent's due."
 msgstr "什麼時候發薪水？房租要繳了。"
 
@@ -21726,7 +21722,7 @@ msgstr "需要 %s（首月租金%s）。"
 msgid "You need %s."
 msgstr "需要 %s。"
 
-#: scripts/world/actions.gd:53
+#: scripts/world/actions.gd:50
 msgid "You need a day pass or a desk plan. Ask at reception."
 msgstr "你需要日票或座位方案。到櫃檯問問。"
 
@@ -21970,7 +21966,7 @@ msgstr "公司成立並達到條件後，就會出現新機會。完成步驟可
 msgid "Your cost / outside market"
 msgstr "你的成本／外部市價"
 
-#: scripts/world/actions.gd:277
+#: scripts/world/actions.gd:269
 msgid "Your counter — %s"
 msgstr "你的吧台——%s"
 
@@ -22502,7 +22498,7 @@ msgstr "光線太硬"
 msgid "has a requirement you don't meet yet"
 msgstr "有你還沒達成的條件"
 
-#: scripts/world/actions.gd:45
+#: scripts/world/actions.gd:42
 msgid "hiring — ask about the job"
 msgstr "徵人中——詢問這份工作"
 
@@ -22690,7 +22686,7 @@ msgstr "新增信貸"
 msgid "no coffee supplies"
 msgstr "沒有咖啡材料"
 
-#: scripts/world/actions.gd:38
+#: scripts/world/actions.gd:35
 msgid "no one at the till"
 msgstr "櫃台沒人"
 
@@ -22734,7 +22730,7 @@ msgstr "獲利算不出價值（去年獲利：%s）"
 msgid "nothing packed here"
 msgstr "這裡沒有打包好的包裹"
 
-#: scripts/world/actions.gd:41
+#: scripts/world/actions.gd:38
 msgid "nothing to drop off"
 msgstr "沒有要寄的"
 
@@ -22750,7 +22746,7 @@ msgstr "關 ✗"
 msgid "on delivery"
 msgstr "交件時"
 
-#: scripts/world/actions.gd:166
+#: scripts/world/actions.gd:158
 msgid "on the house (staff)"
 msgstr "員工免費"
 
@@ -22950,7 +22946,7 @@ msgstr "供應商業務——TradeLink 批發"
 msgid "talent"
 msgstr "人才"
 
-#: scripts/world/actions.gd:35
+#: scripts/world/actions.gd:32
 msgid "teller closed"
 msgstr "櫃檯已關"
 

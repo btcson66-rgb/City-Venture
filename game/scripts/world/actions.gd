@@ -26,10 +26,7 @@ static func lock_reason(action: String, params: Dictionary) -> String:
 		"cafe_counter":
 			return Cafe.counter_block()
 		"register_company":
-			if not npc_present("ana"):
-				UIRoot.toast("Nobody at the counter. Registration: Mon–Fri 9:00–17:00.", "warn", "lock")
-			elif GameState.company_id() != "": UIRoot.open_modal(RegistrationModal.new())
-			else: UIRoot.play_dialogue("ana_register", func(): UIRoot.open_modal(RegistrationModal.new()))
+			if not npc_present("ana"):return "Nobody at the counter. Registration: Mon–Fri 9:00–17:00."
 		"bank_counter":
 			if not npc_present("sofia"):
 				return "teller closed"
@@ -103,15 +100,10 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 			else:
 				UIRoot.open_modal(DropoffModal.new())
 		"register_company":
-			if GameState.company_id() != "":
-				UIRoot.open_modal(RegistrationModal.new())
-				return
-				var e: Dictionary = GameState.data["entities"][GameState.company_id()]
-				UIRoot.toast(I18n.t("%s is already registered (%s).") % [e["name"], e.get("registration_no", "")], "info", "civic")
-			elif not npc_present("ana"):
-				UIRoot.toast("Nobody at the counter. Registration: Mon–Fri 9:00–17:00.", "warn", "lock")
-			else:
-				UIRoot.play_dialogue("ana_register", func(): UIRoot.open_modal(RegistrationModal.new()))
+			if not npc_present("ana"):
+				UIRoot.toast("Nobody at the counter. Registration: Mon–Fri 9:00–17:00.","warn","lock")
+			elif GameState.company_id()!="":UIRoot.open_modal(RegistrationModal.new())
+			else:UIRoot.play_dialogue("ana_register",func():UIRoot.open_modal(RegistrationModal.new()))
 		"bank_counter":
 			if not npc_present("sofia"):
 				UIRoot.toast("The teller window is closed.", "warn", "lock")
