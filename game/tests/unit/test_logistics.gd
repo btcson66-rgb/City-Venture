@@ -496,3 +496,35 @@ func test_a_full_stockroom_names_the_warehouse_with_room() -> void:
 	runner.check(not r.get("ok", true) and str(r.get("error", "")) == why, "the order says the same")
 	runner.check(Ecommerce.buy("tradelink_wholesale", "phone_stand", 200, "pier7_warehouse").get("ok", false), "and goes to Pier 7")
 	runner.check(Ledger.check_balanced(), "ledger balanced")
+
+
+func test_company_van_name_scale_bounds() -> void:
+	runner.eq(CompanyVan.name_font_size(20.0, 34.0), 8, "short company uses 8px")
+	runner.eq(CompanyVan.name_font_size(40.0, 34.0), 6, "long company shrinks to board width")
+	runner.eq(CompanyVan.name_font_size(1000.0, 34.0), 5, "pathological name keeps minimum 5px")
+	runner.eq(CompanyVan.name_font_size(0.0, 34.0), 8, "empty label is bounded")
+	runner.eq(CompanyVan.name_font_size(12.0, 0.0), 5, "zero-width board cannot loop")
+
+
+func test_van_colour_old_save_roundtrip_and_closed_guard() -> void:
+	var cid := _van()
+	runner.eq(Logistics.body_color_id(), "white", "old save without colour defaults white")
+	var cash := Ledger.cash(cid)
+	runner.check(Logistics.set_body_color("blue"), "owned body can turn blue")
+	runner.check(not Logistics.set_body_color("invalid"), "unknown palette id rejected")
+	GameState.data = JSON.parse_string(JSON.stringify(GameState.data))
+	runner.eq(Logistics.body_color_id(), "blue", "colour survives serialized save")
+	runner.eq(Ledger.cash(cid), cash, "appearance never books fake transactions")
+	Logistics.on_company_closed(cid)
+	runner.check(not Logistics.set_body_color("red"), "sold van cannot change colour")
+	runner.check(Ledger.check_balanced(), "auction remains balanced")
+
+
+func test_route_stops_match_map_land_and_bridges() -> void:
+	runner.eq(Logistics.depot(), Vector2(156, 162), "Pier 7 yard is on painted land")
+	for p in Logistics.places():
+		var pos := Logistics.place_pos(str(p["id"]))
+		runner.check(pos.x > 10 and pos.x < 570 and pos.y > 10 and pos.y < 226, "map margins " + str(p["id"]))
+		runner.check(absf(pos.x - Logistics.river_x(pos.y)) > 25, "stop on a river bank " + str(p["id"]))
+	var crossing := Logistics.leg(Vector2(224, 100), Vector2(450, 128))
+	runner.check(crossing.size() == 3 and Logistics.bridges().has(crossing[1]), "opposite bank route uses painted bridge")

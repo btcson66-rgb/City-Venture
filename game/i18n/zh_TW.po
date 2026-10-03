@@ -154,7 +154,7 @@ msgstr "你獲得 $500,000 創投資金。請在 18 個月內達成營收目標�
 msgid "%%|%[-+0-9.]*[sdif]"
 msgstr "%%|%[-+0-9.]*[sdif]"
 
-#: scripts/ui/modals/company_os.gd:1395
+#: scripts/ui/modals/company_os.gd:1407
 msgid "%.1f L per 100 km"
 msgstr "每 100 公里 %.1f 公升"
 
@@ -162,7 +162,7 @@ msgstr "每 100 公里 %.1f 公升"
 msgid "%.1f days"
 msgstr "%.1f 天"
 
-#: scripts/ui/modals/company_os.gd:1465
+#: scripts/ui/modals/company_os.gd:1477
 msgid "%.1f km"
 msgstr "%.1f 公里"
 
@@ -186,7 +186,7 @@ msgstr "%d / %d 小時 · 截止 %s · %s · 付款：%s"
 msgid "%d / %d units"
 msgstr "%d / %d 件"
 
-#: scripts/ui/modals/company_os.gd:1393
+#: scripts/ui/modals/company_os.gd:1405
 msgid "%d accepted"
 msgstr "已接 %d 單"
 
@@ -226,7 +226,7 @@ msgstr "簽約後 %d 天"
 msgid "%d days left"
 msgstr "剩 %d 天"
 
-#: scripts/ui/modals/company_os.gd:1445
+#: scripts/ui/modals/company_os.gd:1457
 msgid "%d driver(s) take one posted run each workday from 9:00 and bank the fee. They plan the route less well than you do."
 msgstr "%d 位司機每個工作日 9:00 起各接一趟外送，並把運費收進帳上。他們排路線沒有你排得好。"
 
@@ -270,7 +270,7 @@ msgstr "還差 %d 天，或到 Company OS → 合約接受有效合約。"
 msgid "%d more shift(s) to %s"
 msgstr "再做 %d 班升為%s"
 
-#: scripts/sim/logistics.gd:380
+#: scripts/sim/logistics.gd:404
 msgid "%d new delivery runs are posted (Company OS → Logistics)."
 msgstr "有 %d 趟新的外送單上架了（Company OS → 物流）。"
 
@@ -310,7 +310,7 @@ msgstr "%d 個包裹標籤貼錯，會晚到。"
 msgid "%d parcels"
 msgstr "%d 件包裹"
 
-#: scripts/ui/modals/company_os.gd:1396
+#: scripts/ui/modals/company_os.gd:1408
 msgid "%d parcels a trip"
 msgstr "每趟 %d 件包裹"
 
@@ -334,7 +334,7 @@ msgstr "%d 分"
 msgid "%d points · %s"
 msgstr "%d 分 · %s"
 
-#: scripts/ui/modals/company_os.gd:1394 scripts/ui/modals/run_card_modal.gd:55
+#: scripts/ui/modals/company_os.gd:1406 scripts/ui/modals/run_card_modal.gd:55
 msgid "%d runs"
 msgstr "%d 趟"
 
@@ -342,7 +342,7 @@ msgstr "%d 趟"
 msgid "%d shifts"
 msgstr "%d 班次"
 
-#: scripts/ui/modals/company_os.gd:1413
+#: scripts/ui/modals/company_os.gd:1425
 msgid "%d stops · deliver by %s · about %s on the road"
 msgstr "%d 個停靠點 · %s 前送達 · 路上約 %s"
 
@@ -462,11 +462,11 @@ msgstr "%s 已結束營業：最後分配"
 msgid "%s closed: final distribution, rest of the investment written off"
 msgstr "%s 已結束營業：最後分配，其餘投資認列損失"
 
-#: scripts/sim/logistics.gd:445
+#: scripts/sim/logistics.gd:469
 msgid "%s drove run %s: paid %s."
 msgstr "%s 跑完 %s 號外送單：收入 %s。"
 
-#: scripts/sim/logistics.gd:516
+#: scripts/sim/logistics.gd:540
 msgid "%s found no run to take today."
 msgstr "今天 %s 沒有接得到的外送單。"
 
@@ -770,7 +770,7 @@ msgstr "%s：%d × %s，票期 %d 天"
 msgid "%s: It's late, so we've knocked 20%% off. Invoice for %s noted."
 msgstr "%s：遲交了，所以費用打八折。已收到 %s 的發票。"
 
-#: scripts/sim/logistics.gd:563
+#: scripts/sim/logistics.gd:587
 msgid "%s: Nobody came for our delivery, so we've booked another courier. No fee to pay, and no more work from us this month."
 msgstr "%s：一直沒人來送貨，我們已經改找別的快遞。不用付你錢，這個月也不會再找你了。"
 
@@ -1434,11 +1434,11 @@ msgstr "AURELIA · 公司登記申請書"
 msgid "AWAITING PICKUP"
 msgstr "等待收件"
 
-#: scripts/ui/modals/company_os.gd:1072 scripts/ui/modals/company_os.gd:1416 scripts/ui/modals/company_os.gd:914
+#: scripts/ui/modals/company_os.gd:1072 scripts/ui/modals/company_os.gd:1428 scripts/ui/modals/company_os.gd:914
 msgid "Accept"
 msgstr "接受"
 
-#: scripts/ui/modals/company_os.gd:1427
+#: scripts/ui/modals/company_os.gd:1439
 msgid "Accept a run above, then drive it: you plan the route on a map. Every kilometre saved is fuel and time kept."
 msgstr "先接上面的外送單，再開車去送：你要在地圖上規劃路線。每省一公里，就省下油錢和時間。"
 
@@ -1722,7 +1722,7 @@ msgstr "將預算分配至各管道。曝光費用決定曝光量；客群符合
 msgid "Allocate weekly hours. Each machine needs one hour between batches."
 msgstr "安排本週機台時段。每台機器換線需要一小時。"
 
-#: scripts/ui/modals/company_os.gd:1512
+#: scripts/ui/modals/company_os.gd:1524
 msgid "Allocated"
 msgstr "分攤"
 
@@ -2058,7 +2058,7 @@ msgstr "100 位訂戶、流失率 5%，一個月約流失 5 人；新增訂戶�
 msgid "At 5%, a 100-unit order averages about 5 duds. Allow spare stock before promising a large delivery."
 msgstr "瑕疵率 5% 時，100 件平均約有 5 件瑕疵；承諾大量交貨前要留備用庫存。"
 
-#: scripts/ui/modals/company_os.gd:1468
+#: scripts/ui/modals/company_os.gd:1480
 msgid "At any packing table the shipping options include \"Own van\": fuel instead of a courier fee, delivered the same day. The Pier 7 warehouse can hold your stock too."
 msgstr "每張打包桌的出貨選項都多了「自己的貨車」：付油錢代替快遞費，當天送到。7 號碼頭倉庫也能放你的庫存。"
 
@@ -2574,7 +2574,7 @@ msgstr "Bloom Coffee"
 msgid "Bloom Coffee's right downstairs. Best flat white in Riverside."
 msgstr "樓下就是 Bloom Coffee。河濱區最好喝的小白咖啡。"
 
-#: data/character/options.json
+#: data/character/options.json data/economy/logistics.json
 msgid "Blue"
 msgstr "藍色"
 
@@ -2654,7 +2654,7 @@ msgstr "向 Nexus 銀行借了 %s（%d 個月，年利率 %s）。"
 msgid "Both businesses must run on the same company's books."
 msgstr "兩個事業必須記在同一家公司的帳上。"
 
-#: scripts/sim/logistics.gd:91
+#: scripts/sim/logistics.gd:114
 msgid "Bought a used van from Sam Okoro at Dockside Motors for %s."
 msgstr "向 Dockside Motors 的 Sam Okoro 買了一台二手貨車，花了 %s。"
 
@@ -3398,7 +3398,7 @@ msgstr "一週內能交貨嗎？"
 msgid "Can't do that."
 msgstr "沒辦法這樣做。"
 
-#: scripts/ui/modals/company_os.gd:1449 scripts/ui/modals/company_os.gd:786
+#: scripts/ui/modals/company_os.gd:1461 scripts/ui/modals/company_os.gd:786
 msgid "Can't hire yet: %s."
 msgstr "還不能聘人：%s。"
 
@@ -3446,7 +3446,7 @@ msgstr "已超過取消期限。"
 msgid "Cancellation window ended. Return eligible stock within %d days of arrival."
 msgstr "已超過取消期限。符合條件的庫存可於到貨後 %d 天內退貨。"
 
-#: scripts/ui/modals/company_os.gd:1463
+#: scripts/ui/modals/company_os.gd:1475
 msgid "Cancelled"
 msgstr "已取消"
 
@@ -5014,7 +5014,7 @@ msgstr "申訴中"
 msgid "DOCKSIDE MOTORS"
 msgstr "DOCKSIDE MOTORS"
 
-#: scripts/ui/modals/company_os.gd:1396
+#: scripts/ui/modals/company_os.gd:1408
 msgid "DRIVERS"
 msgstr "司機"
 
@@ -5286,7 +5286,7 @@ msgstr "交貨並開立發票"
 msgid "Deliver before the deadline for the full fee; late work loses 20% and your reputation. Clients pay on their terms."
 msgstr "在期限前交件拿全額；遲交扣 20%，信譽也會下降。客戶照約定的帳期付款。"
 
-#: scripts/ui/modals/company_os.gd:1437
+#: scripts/ui/modals/company_os.gd:1449
 msgid "Deliver by %s"
 msgstr "%s 前送達"
 
@@ -5366,7 +5366,7 @@ msgstr "交貨"
 msgid "Delivery in 21 days, Net 60. Strict SLA: late is 10% off."
 msgstr "21 天內交貨，60 天付款。服務條款很嚴：遲交扣 10%。"
 
-#: scripts/sim/logistics.gd:423
+#: scripts/sim/logistics.gd:447
 msgid "Delivery run %s: %s (%d stops)"
 msgstr "外送單 %s：%s（%d 個停靠點）"
 
@@ -5430,7 +5430,7 @@ msgstr "押金"
 msgid "Deposits are liabilities until delivery. Idle machines still cost rent."
 msgstr "交貨前，訂金仍是負債。機台閒置也要付租金。"
 
-#: scripts/ui/minigames/route_game.gd:319
+#: scripts/ui/minigames/route_game.gd:323
 msgid "Depot"
 msgstr "車場"
 
@@ -5602,7 +5602,7 @@ msgstr "Dockside Motors · 現收 %s"
 msgid "Dockside Motors, Harbor (bay at Pier 7 optional)."
 msgstr "港區 Dockside Motors（7 號碼頭車位可選）。"
 
-#: scripts/sim/logistics.gd:80
+#: scripts/sim/logistics.gd:103
 msgid "Dockside Motors: %s"
 msgstr "Dockside Motors：%s"
 
@@ -5670,7 +5670,7 @@ msgstr "完全做對的飲品：%d / %d"
 msgid "Drive 500 km."
 msgstr "開 500 公里。"
 
-#: scripts/ui/modals/company_os.gd:1439
+#: scripts/ui/modals/company_os.gd:1451
 msgid "Drive it"
 msgstr "開去送"
 
@@ -5678,7 +5678,7 @@ msgstr "開去送"
 msgid "Drive the route"
 msgstr "照這條路線出發"
 
-#: scripts/ui/modals/company_os.gd:1442
+#: scripts/ui/modals/company_os.gd:1454
 msgid "Drivers"
 msgstr "司機"
 
@@ -6298,7 +6298,7 @@ msgstr "正面"
 msgid "FROZEN · BACK "
 msgstr "凍結 · 預計恢復 "
 
-#: scripts/ui/modals/company_os.gd:1395
+#: scripts/ui/modals/company_os.gd:1407
 msgid "FUEL, 7 DAYS"
 msgstr "近 7 天油資"
 
@@ -6594,7 +6594,7 @@ msgstr "交付第一位客戶"
 msgid "First commission"
 msgstr "第一筆佣金"
 
-#: scripts/sim/logistics.gd:442
+#: scripts/sim/logistics.gd:466
 msgid "First delivery run for %s: %s."
 msgstr "第一趟外送單，客戶 %s：%s。"
 
@@ -7026,7 +7026,7 @@ msgstr "油價飆漲"
 msgid "Fuel used: %.1f L (%s)"
 msgstr "用油：%.1f 公升（%s）"
 
-#: scripts/sim/logistics.gd:426
+#: scripts/sim/logistics.gd:450
 msgid "Fuel: run %s, %.1f km"
 msgstr "油資：%s 號外送單，%.1f 公里"
 
@@ -7182,6 +7182,10 @@ msgstr "出門"
 msgid "Going twice…"
 msgstr "第二次……"
 
+#: data/economy/logistics.json
+msgid "Gold"
+msgstr "金色"
+
 #: data/dialogue/maya_intro.json
 msgid "Gonna build something of my own."
 msgstr "要做點屬於自己的東西。"
@@ -7254,7 +7258,7 @@ msgstr "灰色"
 msgid "Great value, would buy again."
 msgstr "超值，會回購。"
 
-#: data/character/options.json
+#: data/character/options.json data/economy/logistics.json
 msgid "Green"
 msgstr "綠色"
 
@@ -7318,7 +7322,7 @@ msgstr "咧嘴笑"
 msgid "Gross margin"
 msgstr "毛利率"
 
-#: scripts/ui/modals/company_os.gd:1512 scripts/ui/modals/company_os.gd:268 scripts/ui/modals/info_modal.gd:87 scripts/ui/modals/month_close_modal.gd:30
+#: scripts/ui/modals/company_os.gd:1524 scripts/ui/modals/company_os.gd:268 scripts/ui/modals/info_modal.gd:87 scripts/ui/modals/month_close_modal.gd:30
 msgid "Gross profit"
 msgstr "毛利"
 
@@ -8222,7 +8226,7 @@ msgstr "在 Company OS 打開「營運」，按商品旁的「購買」。先從
 msgid "In plain words: the van is a company expense today. It only pays back if you keep it busy, with your own parcels and delivery runs."
 msgstr "簡單說：這台貨車今天先算公司的一筆支出。要讓它一直有事做，靠自己的包裹和外送單，才回得了本。"
 
-#: scripts/ui/modals/company_os.gd:1424
+#: scripts/ui/modals/company_os.gd:1436
 msgid "In plain words: you get the fee if you finish by the deadline; a late run pays %d%% less, and one left undone for hours is cancelled."
 msgstr "簡單說：截止前送完才拿全額運費；遲到的單少拿 %d%%，放了好幾個小時沒送的單會被取消。"
 
@@ -8250,7 +8254,7 @@ msgstr "整備中"
 msgid "In transit"
 msgstr "運送中"
 
-#: scripts/ui/modals/company_os.gd:1516
+#: scripts/ui/modals/company_os.gd:1528
 msgid "Included internal media cost"
 msgstr "其中：集團內部媒體成本"
 
@@ -8462,7 +8466,7 @@ msgstr "內部宣傳活動依媒體成本或成本加成執行，沒有代理費
 msgid "Internal purchase from %s: %s"
 msgstr "向%s內部採購：%s"
 
-#: scripts/ui/modals/company_os.gd:1515
+#: scripts/ui/modals/company_os.gd:1527
 msgid "Internal purchases from the group"
 msgstr "向集團內部採購"
 
@@ -8478,7 +8482,7 @@ msgstr "內部銷售與採購不一致；請檢查帳本。"
 msgid "Internal sales equal internal purchases."
 msgstr "內部銷售與內部採購相等。"
 
-#: scripts/ui/modals/company_os.gd:1514
+#: scripts/ui/modals/company_os.gd:1526
 msgid "Internal sales to the group"
 msgstr "對集團內部銷售"
 
@@ -8486,7 +8490,7 @@ msgstr "對集團內部銷售"
 msgid "Internal supply"
 msgstr "內部供應"
 
-#: scripts/ui/modals/company_os.gd:1517
+#: scripts/ui/modals/company_os.gd:1529
 msgid "Internal trade eliminated in group total"
 msgstr "集團合計已沖銷的內部交易"
 
@@ -8642,7 +8646,7 @@ msgstr "它是靠軟體跑的，軟體會有漏洞。我的合約審計過兩次
 msgid "It shows what your business is worth today, and why both profit and cash matter."
 msgstr "它告訴你事業今天值多少，也說明為什麼獲利和現金都重要。"
 
-#: scripts/sim/logistics.gd:447
+#: scripts/sim/logistics.gd:471
 msgid "It was late, so the pay was cut."
 msgstr "這單遲到了，所以報酬被扣。"
 
@@ -9046,11 +9050,11 @@ msgstr "最後一次……"
 msgid "Last days"
 msgstr "最近幾天"
 
-#: scripts/ui/modals/company_os.gd:1506
+#: scripts/ui/modals/company_os.gd:1518
 msgid "Last month"
 msgstr "上月"
 
-#: scripts/ui/modals/company_os.gd:1463
+#: scripts/ui/modals/company_os.gd:1475
 msgid "Late"
 msgstr "遲到"
 
@@ -9538,7 +9542,7 @@ msgstr "貸款"
 msgid "Local challenge history"
 msgstr "本機挑戰排行榜"
 
-#: scripts/sim/logistics.gd:355 scripts/ui/minigames/route_game.gd:27
+#: scripts/sim/logistics.gd:379 scripts/ui/minigames/route_game.gd:27
 msgid "Local client"
 msgstr "本地客戶"
 
@@ -9598,7 +9602,7 @@ msgstr "已鎖定：%d 間%s，共 %d 晚，已住 %d 晚。團體在住宿結�
 msgid "Log 150 hours of gig work."
 msgstr "累計 150 小時接案工時。"
 
-#: data/businesses/logistics.json data/regions/karu.json data/regions/lumina.json scripts/sim/logistics.gd:623
+#: data/businesses/logistics.json data/regions/karu.json data/regions/lumina.json scripts/sim/logistics.gd:647
 msgid "Logistics"
 msgstr "物流"
 
@@ -10674,7 +10678,7 @@ msgstr "票期 %d 天%s"
 msgid "Net 30 leaves cash available today but creates a bill in 30 days. Reserve money for that bill in your forecast."
 msgstr "票期 30 天今天保留了現金，但 30 天後要付款；現金預測要預留這筆帳款。"
 
-#: scripts/ui/modals/company_os.gd:1512
+#: scripts/ui/modals/company_os.gd:1524
 msgid "Net revenue"
 msgstr "淨營收"
 
@@ -10926,7 +10930,7 @@ msgstr "到貨無瑕疵 · 期限內交貨"
 msgid "No delivered batch to recall."
 msgstr "沒有已交貨的批次可召回。"
 
-#: scripts/ui/modals/company_os.gd:1447
+#: scripts/ui/modals/company_os.gd:1459
 msgid "No driver yet. Hire a Van Driver in the People tab to have the van work while you do something else."
 msgstr "還沒有司機。到人員分頁請一位貨車司機，你去忙別的，貨車也在賺錢。"
 
@@ -11022,7 +11026,7 @@ msgstr "這裡沒有可退庫存：商品已售出、預留、移走或退貨。
 msgid "No risk. No revenue."
 msgstr "沒有風險，也沒有營收。"
 
-#: scripts/ui/modals/company_os.gd:1399
+#: scripts/ui/modals/company_os.gd:1411
 msgid "No runs on the board. Clients post new ones every morning at 7:00."
 msgstr "目前沒有外送單。客戶每天早上 7:00 會刊登新的。"
 
@@ -11574,7 +11578,7 @@ msgstr "在車場"
 msgid "On the way from suppliers: %d units"
 msgstr "供應商運送中：%d 件"
 
-#: scripts/ui/modals/company_os.gd:1463
+#: scripts/ui/modals/company_os.gd:1475
 msgid "On time"
 msgstr "準時"
 
@@ -11946,11 +11950,11 @@ msgstr "營運資產：%s"
 msgid "Operating costs"
 msgstr "營運成本"
 
-#: data/help/glossary.json scripts/ui/modals/company_os.gd:1512
+#: data/help/glossary.json scripts/ui/modals/company_os.gd:1524
 msgid "Operating expenses"
 msgstr "營業費用"
 
-#: scripts/ui/modals/company_os.gd:1512
+#: scripts/ui/modals/company_os.gd:1524
 msgid "Operating profit"
 msgstr "營業利益"
 
@@ -12222,7 +12226,7 @@ msgstr "自有品牌商品已完工，可供電商銷售。"
 msgid "Own-brand mould fee"
 msgstr "自有品牌模具費"
 
-#: scripts/sim/logistics.gd:606
+#: scripts/sim/logistics.gd:630
 msgid "Own-van delivery: %d parcels"
 msgstr "自己貨車配送：%d 件包裹"
 
@@ -12398,7 +12402,7 @@ msgstr "每個工作天在辦公室打包訂單，16:00 叫快遞。庫存要放
 msgid "Padding should reach the green zone. Too little and things arrive broken; that means returns and bad reviews."
 msgstr "緩衝材要塞到綠色區間。太少的話商品會壓壞，接著就是退貨和負評。"
 
-#: scripts/ui/modals/company_os.gd:1457
+#: scripts/ui/modals/company_os.gd:1469
 msgid "Paid"
 msgstr "收入"
 
@@ -12518,7 +12522,7 @@ msgstr "部分退款已送出。"
 msgid "Passenger flow"
 msgstr "旅客流量"
 
-#: scripts/ui/modals/company_os.gd:1437
+#: scripts/ui/modals/company_os.gd:1449
 msgid "Past its deadline (%s): the pay is cut"
 msgstr "已過截止時間（%s）：報酬會被扣"
 
@@ -12898,7 +12902,7 @@ msgstr "幫 %s 規劃新品上市"
 msgid "Plan the route"
 msgstr "規劃路線"
 
-#: scripts/ui/modals/company_os.gd:1477
+#: scripts/ui/modals/company_os.gd:1489
 msgid "Plan the route: run %s"
 msgstr "規劃路線：%s 號外送單"
 
@@ -13014,7 +13018,7 @@ msgstr "看郵遞區號就知道區域：1xxx 河濱區、2xxx 新創園區、3x
 msgid "Posted by Ken (TradeLink Wholesale): %s. MOQs apply. Order via laptop."
 msgstr "Ken（TradeLink 批發）張貼：%s。各商品有最低訂購量，請用筆電下單。"
 
-#: scripts/ui/modals/company_os.gd:1397
+#: scripts/ui/modals/company_os.gd:1409
 msgid "Posted runs"
 msgstr "上架的外送單"
 
@@ -13302,6 +13306,10 @@ msgstr "採購單"
 msgid "Purchased residential property: %s."
 msgstr "購入住宅物件：%s。"
 
+#: data/economy/logistics.json
+msgid "Purple"
+msgstr "紫色"
+
 #: scripts/ui/modals/insolvency_modal.gd:32
 msgid "Put in %s of your own money"
 msgstr "拿出自己的 %s"
@@ -13430,11 +13438,11 @@ msgstr "ROOF-"
 msgid "RULES"
 msgstr "規則"
 
-#: scripts/ui/modals/company_os.gd:1393
+#: scripts/ui/modals/company_os.gd:1405
 msgid "RUNS ON THE BOARD"
 msgstr "上架中的單"
 
-#: scripts/ui/modals/company_os.gd:1394
+#: scripts/ui/modals/company_os.gd:1406
 msgid "RUNS PAID, 7 DAYS"
 msgstr "近 7 天外送收入"
 
@@ -13734,7 +13742,7 @@ msgstr "收到了。應付帳款部會處理你的發票，照約定 60 天付�
 msgid "Recent orders"
 msgstr "最近訂單"
 
-#: scripts/ui/modals/company_os.gd:1452
+#: scripts/ui/modals/company_os.gd:1464
 msgid "Recent runs"
 msgstr "最近的外送單"
 
@@ -13817,6 +13825,10 @@ msgstr "回收紙緩衝材稍微貴一點，但不用繳這筆稅，重視環保
 #: scripts/ui/modals/company_os.gd:525
 msgid "Recycled paper"
 msgstr "回收紙"
+
+#: data/economy/logistics.json
+msgid "Red"
+msgstr "紅色"
 
 #: scripts/ui/modals/settings_modal.gd:55
 msgid "Red-green"
@@ -14402,7 +14414,7 @@ msgstr "和 Nexus 銀行重整貸款（24 個月，利率 +3%，信用受損）"
 msgid "Restructuring fee — loan %s"
 msgstr "重整手續費——貸款 %s"
 
-#: scripts/ui/modals/company_os.gd:1457
+#: scripts/ui/modals/company_os.gd:1469
 msgid "Result"
 msgstr "結果"
 
@@ -14522,7 +14534,7 @@ msgstr "查看代工單"
 msgid "Review my lot"
 msgstr "檢視我的車場"
 
-#: scripts/ui/modals/company_os.gd:1499
+#: scripts/ui/modals/company_os.gd:1511
 msgid "Review next action"
 msgstr "查看下一步"
 
@@ -14762,7 +14774,7 @@ msgstr "圓框眼鏡"
 msgid "Round the city twice"
 msgstr "繞城兩圈"
 
-#: scripts/ui/modals/company_os.gd:1457
+#: scripts/ui/modals/company_os.gd:1469
 msgid "Route"
 msgstr "路線"
 
@@ -14810,11 +14822,11 @@ msgstr "Ruiz 建案工程"
 msgid "Ruiz needs more time. Milestones pause and the completion date moves."
 msgstr "Ruiz 需要更多時間，工程里程碑暫停，完工日期延後。"
 
-#: scripts/ui/modals/company_os.gd:1457 scripts/ui/modals/settings_modal.gd:7
+#: scripts/ui/modals/company_os.gd:1469 scripts/ui/modals/settings_modal.gd:7
 msgid "Run"
 msgstr "跑步"
 
-#: scripts/ui/modals/company_os.gd:1485
+#: scripts/ui/modals/company_os.gd:1497
 msgid "Run %s done: paid %s, fuel %s, %s on the road."
 msgstr "%s 號外送單完成：收入 %s，油資 %s，路上花了 %s。"
 
@@ -14822,15 +14834,15 @@ msgstr "%s 號外送單完成：收入 %s，油資 %s，路上花了 %s。"
 msgid "Run %s internal campaign · %s"
 msgstr "投放%s內部活動 · %s"
 
-#: scripts/sim/logistics.gd:567
+#: scripts/sim/logistics.gd:591
 msgid "Run %s is past its deadline. Deliver soon, the pay drops."
 msgstr "%s 號外送單已超過截止時間。快送去，報酬會被打折。"
 
-#: scripts/sim/logistics.gd:443
+#: scripts/sim/logistics.gd:467
 msgid "Run %s paid %s."
 msgstr "%s 號外送單收入 %s。"
 
-#: scripts/sim/logistics.gd:564
+#: scripts/sim/logistics.gd:588
 msgid "Run %s was cancelled: the deadline passed."
 msgstr "%s 號外送單被取消了：超過截止時間。"
 
@@ -15278,7 +15290,7 @@ msgstr "排程維修"
 msgid "Schools, parks, families."
 msgstr "學校、公園、家庭。"
 
-#: scripts/ui/modals/company_os.gd:1457
+#: scripts/ui/modals/company_os.gd:1469
 msgid "Score"
 msgstr "得分"
 
@@ -15314,7 +15326,7 @@ msgstr "利率和需求每天依種子變化，年代事件會疊加影響。"
 msgid "Segment sales added up"
 msgstr "各分部銷售加總"
 
-#: scripts/ui/modals/company_os.gd:1498 scripts/ui/modals/company_os.gd:8
+#: scripts/ui/modals/company_os.gd:1510 scripts/ui/modals/company_os.gd:8
 msgid "Segments"
 msgstr "分部損益"
 
@@ -15590,11 +15602,11 @@ msgstr "遮蔭、方位和屋頂承重決定發電量。朝南又沒有遮蔭的
 msgid "Shah"
 msgstr "Shah"
 
-#: scripts/ui/modals/company_os.gd:1510
+#: scripts/ui/modals/company_os.gd:1522
 msgid "Shared"
 msgstr "共用"
 
-#: scripts/ui/modals/company_os.gd:1502
+#: scripts/ui/modals/company_os.gd:1514
 msgid "Shared costs are allocated by net revenue. With no revenue, they stay in Shared."
 msgstr "共用費用依淨營收比例分攤；沒有營收時，留在「共用」。"
 
@@ -16974,15 +16986,15 @@ msgstr "那個管道已凍結。"
 msgid "That room type is being renovated during the stay."
 msgstr "入住期間這個房型正在翻新。"
 
-#: scripts/sim/logistics.gd:406
+#: scripts/sim/logistics.gd:430
 msgid "That route doesn't visit every stop once."
 msgstr "這條路線沒有把每個停靠點各走一次。"
 
-#: scripts/sim/logistics.gd:387
+#: scripts/sim/logistics.gd:411
 msgid "That run has been taken."
 msgstr "這張單已經被接走了。"
 
-#: scripts/sim/logistics.gd:401
+#: scripts/sim/logistics.gd:425
 msgid "That run isn't on your list."
 msgstr "這張單不在你的清單上。"
 
@@ -17274,7 +17286,7 @@ msgstr "差別是：獲利歸我，錯誤一起扛。別浪費先發優勢。"
 msgid "The digital-dollar bridge was exploited. Transfers are frozen until about %s."
 msgstr "數位美元跨鏈橋遭駭。轉帳凍結，預計 %s 前後恢復。"
 
-#: scripts/sim/logistics.gd:532
+#: scripts/sim/logistics.gd:556
 msgid "The driver"
 msgstr "司機"
 
@@ -17746,7 +17758,7 @@ msgstr "這就是你之後登記自己公司要填的表，規則值得記住。
 msgid "This job is no longer available."
 msgstr "這張工單已無法承接。"
 
-#: scripts/ui/modals/company_os.gd:1506
+#: scripts/ui/modals/company_os.gd:1518
 msgid "This month"
 msgstr "本月"
 
@@ -17990,7 +18002,7 @@ msgstr "總額"
 msgid "Total interest"
 msgstr "總利息"
 
-#: scripts/ui/modals/company_os.gd:1518
+#: scripts/ui/modals/company_os.gd:1530
 msgid "Total operating profit"
 msgstr "營業利益合計"
 
@@ -18366,7 +18378,7 @@ msgstr "中古車售出：%s"
 msgid "Used cars, rentals and dealership"
 msgstr "中古車、租車與經銷"
 
-#: data/economy/logistics.json scripts/sim/logistics.gd:80 scripts/ui/modals/van_deal_modal.gd:28
+#: data/economy/logistics.json scripts/sim/logistics.gd:103 scripts/ui/modals/van_deal_modal.gd:28
 msgid "Used panel van"
 msgstr "二手廂型貨車"
 
@@ -18414,6 +18426,10 @@ msgstr "價值感"
 msgid "Van Driver"
 msgstr "貨車司機"
 
+#: scripts/ui/modals/company_os.gd:1390
+msgid "Van body colour"
+msgstr "貨車車身顏色"
+
 #: data/help/glossary.json
 msgid "Van capacity"
 msgstr "貨車載量"
@@ -18422,11 +18438,11 @@ msgstr "貨車載量"
 msgid "Van driver"
 msgstr "貨車司機"
 
-#: scripts/sim/logistics.gd:81
+#: scripts/sim/logistics.gd:104
 msgid "Van insurance: first month"
 msgstr "貨車保險：第一個月"
 
-#: scripts/sim/logistics.gd:573
+#: scripts/sim/logistics.gd:597
 msgid "Van insurance: monthly"
 msgstr "貨車保險：每月"
 
@@ -18446,7 +18462,7 @@ msgstr "貨車跑完了：送出 %d 件包裹，油錢 %s，路上花了 %s。"
 msgid "Van sold at auction"
 msgstr "貨車拍賣變現"
 
-#: scripts/sim/logistics.gd:428
+#: scripts/sim/logistics.gd:452
 msgid "Van upkeep: run %s"
 msgstr "貨車維護：%s 號外送單"
 
@@ -18950,6 +18966,10 @@ msgstr "%s 要在哪裡辦公？新創園區的共享辦公桌（$350／月）�
 msgid "While your first parcel travels, the tutorial takes you to Bloom Coffee to find a job."
 msgstr "等待第一件包裹寄達時，教學會帶你到 Bloom Coffee 找工作。"
 
+#: data/economy/logistics.json
+msgid "White"
+msgstr "白色"
+
 #: scripts/ui/minigames/photo_shoot_game.gd:7
 msgid "White sweep"
 msgstr "白色無縫背景"
@@ -19158,7 +19178,7 @@ msgstr "你已經有一則徵才廣告在刊登中。"
 msgid "You already have as many gigs as you can handle."
 msgstr "你手上的案子已經滿了。"
 
-#: scripts/sim/logistics.gd:389
+#: scripts/sim/logistics.gd:413
 msgid "You already have as many runs as you can handle."
 msgstr "你手上的單已經夠多了。"
 
@@ -19306,7 +19326,7 @@ msgstr "需要 %s。"
 msgid "You need a day pass or a desk plan. Ask at reception."
 msgstr "你需要日票或座位方案。到櫃檯問問。"
 
-#: scripts/sim/logistics.gd:403
+#: scripts/sim/logistics.gd:427
 msgid "You need a van."
 msgstr "你需要一台貨車。"
 
@@ -19614,7 +19634,7 @@ msgstr "錢先交給中立的第三方保管，貨到了才放給供應商。"
 msgid "Your opening card shows the objective, seed and deadline. Cash, debts and assets are real ledger entries."
 msgstr "開場卡顯示目標、種子與截止時間。現金、債務及資產都會登錄帳本。"
 
-#: scripts/ui/modals/company_os.gd:1467
+#: scripts/ui/modals/company_os.gd:1479
 msgid "Your own parcels"
 msgstr "你自己的包裹"
 
@@ -19662,7 +19682,7 @@ msgstr "你的屋頂發電開始併網：%s。"
 msgid "Your route: %.1f km. The shortest possible: %.1f km."
 msgstr "你的路線：%.1f 公里。最短可能：%.1f 公里。"
 
-#: scripts/ui/modals/company_os.gd:1425
+#: scripts/ui/modals/company_os.gd:1437
 msgid "Your runs"
 msgstr "你接的單"
 
@@ -20226,7 +20246,7 @@ msgstr "（還）不是你的"
 msgid "nothing for earnings (last year's profit: %s)"
 msgstr "獲利算不出價值（去年獲利：%s）"
 
-#: scripts/sim/logistics.gd:582
+#: scripts/sim/logistics.gd:606
 msgid "nothing packed here"
 msgstr "這裡沒有打包好的包裹"
 
@@ -20258,7 +20278,7 @@ msgstr "開 ✓"
 msgid "on-time payment"
 msgstr "準時還款"
 
-#: scripts/sim/logistics.gd:65 scripts/sim/staff.gd:73
+#: scripts/sim/logistics.gd:88 scripts/sim/staff.gd:73
 msgid "open a business bank account first"
 msgstr "先開公司銀行帳戶"
 
@@ -20318,7 +20338,7 @@ msgstr "生產"
 msgid "qc"
 msgstr "品管"
 
-#: scripts/sim/cafe.gd:111 scripts/sim/logistics.gd:63 scripts/sim/staff.gd:71
+#: scripts/sim/cafe.gd:111 scripts/sim/logistics.gd:86 scripts/sim/staff.gd:71
 msgid "register a company first"
 msgstr "先登記公司"
 
@@ -20454,7 +20474,7 @@ msgstr "櫃檯已關"
 msgid "the café is closed now"
 msgstr "咖啡店現在沒營業"
 
-#: scripts/sim/logistics.gd:68
+#: scripts/sim/logistics.gd:91
 msgid "the company account needs %s (van and first month's insurance)"
 msgstr "公司帳戶要有 %s（貨車加第一個月保險）"
 
@@ -20498,7 +20518,7 @@ msgstr "給供應商"
 msgid "too late for a shift today"
 msgstr "今天太晚了，不夠上一個班"
 
-#: scripts/ui/modals/company_os.gd:1414
+#: scripts/ui/modals/company_os.gd:1426
 msgid "too late to make it if you leave now"
 msgstr "現在出發也趕不上截止時間"
 
@@ -20558,11 +20578,11 @@ msgstr "標籤貼錯！"
 msgid "you + %d staff"
 msgstr "你＋%d 位員工"
 
-#: scripts/sim/logistics.gd:61
+#: scripts/sim/logistics.gd:84
 msgid "you already own the van"
 msgstr "你已經有這台貨車了"
 
-#: scripts/sim/logistics.gd:580
+#: scripts/sim/logistics.gd:604
 msgid "you need a van (Dockside Motors, Harbor)"
 msgstr "你需要一台貨車（港區的 Dockside Motors）"
 

@@ -2022,3 +2022,5 @@ sprite keys：`bollard`, `hydrant`, `cone`, `trash_bin`, `parking_meter`, `digit
 
 美術：六個16×16商品sprite已重新製作，附64×64透明高解析版本；六個程序光影／水面特效以SVG輸出原尺寸及4×，動畫格位不變；兩個app圖示識別不變，補4×輸出（4096圖為插值）。251/251測試、53張巡禮0失敗。七街區日夜實拍與商品add_prop渲染比例檢查已交；QA商品擺放不代表遊戲原本的擺設。高解析光罩及陰影載入仍待Claude保持logical尺寸接入。證據：`evidence/20261001_product_quality/README.md`。
 
+
+#28 Okafor sitting expression wiring: current npc_okafor_sit / detail has repeated breathing columns, no distinct sitting emotion columns. Keep its two-frame pose. CharacterRig.set_expression updates the standing npc_detail emotion column; sitting uses the breathing frame unless optional `<npc_detail_base>_sit_expressions` four-column/three-row art exists. Optional pose expression sheet then selects neutral/happy/thinking/surprised independently. No assets changed.

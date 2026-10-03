@@ -87,6 +87,12 @@ func build(district_id: String) -> void:
 		var s: Array = def["spawns"][k]
 		spawns[k] = Vector2(float(s[0]), float(s[1]))
 	_ped_rng.seed = hash(district_id) + Clock.day_index()
+	if district_id == "harbor":
+		var van := CompanyVan.new()
+		van.name = "OwnedCompanyVan"
+		var parking: Dictionary = Logistics.van_cfg().get("parking", {"x":350,"y":572})
+		van.position = Vector2(float(parking["x"]), float(parking["y"]))
+		entities.add_child(van)
 	_spawn_traffic()
 	_spawn_pedestrians(true)
 	update_lighting()

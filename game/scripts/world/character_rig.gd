@@ -176,6 +176,12 @@ func _apply() -> void:
 			s.frame = row * 4 + face_frame
 			# Facial expression frames are independent of the body's walk/breathing frames.
 			s.position.y = ([0.0, -0.45, 0.0, -0.45][_frame] if pose in ["", "carry"] else 0.0 if pose == "sit" else [0.0, -0.18, 0.0, -0.18][_frame])
+		elif s.name == "npc_detail" and pose != "" and Art.has_tex(base + "_" + pose + "_expressions"):
+			# Optional pose-expression art uses four columns, independent of the two-frame breathing loop.
+			s.texture = Art.tex(base + "_" + pose + "_expressions")
+			_fit_sheet(s)
+			var face_frame: int = {"neutral": 0, "happy": 1, "thinking": 2, "surprised": 3}.get(expression, 0)
+			s.frame = row * 4 + face_frame
 		elif s.name == "npc_detail" and pose == "":
 			var face_frame: int = {"neutral": 0, "happy": 1, "thinking": 2, "surprised": 3}.get(expression, 0)
 			s.frame = row * 4 + face_frame

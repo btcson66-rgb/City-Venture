@@ -5,7 +5,43 @@
   "price": 9800,
   "insurance_month": 165,
   "resale": 0.55,
-  "capacity_parcels": 40
+  "capacity_parcels": 40,
+  "body_colors": [
+   {
+    "id": "white",
+    "name": "White",
+    "hex": "#f0eee4"
+   },
+   {
+    "id": "blue",
+    "name": "Blue",
+    "hex": "#669fe0"
+   },
+   {
+    "id": "green",
+    "name": "Green",
+    "hex": "#86b88c"
+   },
+   {
+    "id": "gold",
+    "name": "Gold",
+    "hex": "#e5bb67"
+   },
+   {
+    "id": "red",
+    "name": "Red",
+    "hex": "#d97777"
+   },
+   {
+    "id": "purple",
+    "name": "Purple",
+    "hex": "#b39acd"
+   }
+  ],
+  "parking": {
+   "x": 350,
+   "y": 572
+  }
  },
  "fuel": {
   "l_per_km": 0.14,
@@ -119,51 +155,47 @@
   "km_per_px": 0.045,
   "depot": {
    "name": "Pier 7 yard",
-   "x": 58,
-   "y": 192
+   "x": 156,
+   "y": 162
   },
   "river": [
    [
-    500,
+    409,
     0
    ],
    [
-    468,
-    58
-   ],
-   [
     404,
-    104
+    46
    ],
    [
-    338,
-    146
+    413,
+    84
    ],
    [
-    262,
-    180
+    333,
+    119
    ],
    [
-    188,
-    206
+    261,
+    158
    ],
    [
-    128,
+    267,
+    198
+   ],
+   [
+    340,
     236
    ]
   ],
   "bridges": [
    [
-    426,
-    88
+    408,
+    84
    ],
    [
-    300,
-    163
-   ],
-   [
-    196,
-    203
+    261,
+    158
    ]
   ]
  },
@@ -172,106 +204,106 @@
    "id": "lantern_books",
    "name": "Lantern Books",
    "district": "old_town",
-   "x": 100,
-   "y": 108
+   "x": 62,
+   "y": 88
   },
   {
    "id": "okafor_lettings",
    "name": "Okafor Lettings",
    "district": "old_town",
-   "x": 150,
-   "y": 148
+   "x": 106,
+   "y": 104
   },
   {
    "id": "threadline",
    "name": "Threadline",
    "district": "shopping_street",
-   "x": 214,
-   "y": 62
+   "x": 174,
+   "y": 78
   },
   {
    "id": "lantern_bistro",
    "name": "Lantern Bistro",
    "district": "shopping_street",
-   "x": 262,
-   "y": 104
+   "x": 224,
+   "y": 100
   },
   {
    "id": "crestline",
    "name": "Crestline",
    "district": "shopping_street",
-   "x": 186,
-   "y": 122
+   "x": 160,
+   "y": 116
   },
   {
    "id": "city_hall",
    "name": "Aurelia City Hall",
    "district": "civic_center",
-   "x": 336,
-   "y": 44
+   "x": 288,
+   "y": 72
   },
   {
    "id": "tax_office",
    "name": "Tax Office",
    "district": "civic_center",
-   "x": 388,
-   "y": 68
+   "x": 348,
+   "y": 76
   },
   {
    "id": "nexus_bank",
    "name": "Nexus Bank",
    "district": "financial",
-   "x": 320,
-   "y": 96
+   "x": 450,
+   "y": 128
   },
   {
    "id": "arc_capital",
    "name": "Arc Capital",
    "district": "financial",
-   "x": 352,
-   "y": 122
+   "x": 506,
+   "y": 156
   },
   {
    "id": "bloom_coffee",
    "name": "Bloom Coffee",
    "district": "riverside",
-   "x": 312,
-   "y": 196
+   "x": 334,
+   "y": 179
   },
   {
    "id": "postpoint",
    "name": "PostPoint",
    "district": "riverside",
-   "x": 368,
-   "y": 176
+   "x": 382,
+   "y": 192
   },
   {
    "id": "fresh_market",
    "name": "Fresh+ Market",
    "district": "riverside",
-   "x": 276,
-   "y": 216
+   "x": 419,
+   "y": 171
   },
   {
    "id": "nexus_cowork",
    "name": "Nexus Co-work",
    "district": "startup_hub",
-   "x": 498,
-   "y": 92
+   "x": 476,
+   "y": 208
   },
   {
    "id": "horizon_labs",
    "name": "Horizon Labs",
    "district": "startup_hub",
-   "x": 540,
-   "y": 140
+   "x": 543,
+   "y": 184
   },
   {
    "id": "bean_byte",
    "name": "Bean & Byte",
    "district": "startup_hub",
-   "x": 466,
-   "y": 166
+   "x": 521,
+   "y": 220
   }
  ]
 }

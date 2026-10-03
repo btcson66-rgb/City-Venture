@@ -155,7 +155,7 @@ func result_lines() -> Array:
 		return []
 	var lines: Array = [I18n.t("Your route: %.1f km. The shortest possible: %.1f km.") % [float(stats["km"]), float(stats["best_km"])],
 		I18n.t("Time on the road: %s") % Fmt.duration_min(int(stats["minutes"])),
-		I18n.t("Fuel used: %.1f L (%s)") % [float(stats["fuel_l"]), Fmt.money0(float(stats["fuel_cost"]))]]
+		I18n.t("Fuel used: %.1f L (%s)") % [float(stats["fuel_l"]), Fmt.money(float(stats["fuel_cost"]))]]
 	if int(job.get("by", 0)) > 0:
 		lines.append(I18n.t("Back at the depot around %s. Deadline: %s.") % [Clock.fmt_short(Clock.now() + int(stats["minutes"])), Clock.fmt_short(int(job["by"]))])
 	return lines
@@ -216,6 +216,10 @@ class RouteView:
 
 	func _ready() -> void:
 		clip_contents = true
+		if Logistics.has_van():
+			var van := CompanyVan.new()
+			van.position = Vector2(8, 198)
+			add_child(van)
 
 	func _draw() -> void:
 		var sz := size

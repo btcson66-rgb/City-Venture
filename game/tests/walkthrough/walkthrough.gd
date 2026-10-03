@@ -17,6 +17,11 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "van_route":
+		await _fast_forward_to_ch10()
+		await _van_route_fixture()
+		await _save_load()
+		return
 	if _arg("from") == "shops":
 		await _fast_forward_to_ch10()
 		# Capitalized founder fixture purchases actual stock before visiting shops.
@@ -2202,3 +2207,48 @@ func _fitness_reception_schedule() -> void:
 	await exit_building()
 	await metro_to("riverside")
 	await enter_building("riverside_apartment")
+
+
+## Isolated appearance/map regression; real van purchase and UI clicks, no fabricated run income.
+func _van_route_fixture() -> void:
+	bot.expect(Logistics.buy_van().get("ok", false), "fixture buys actual company van")
+	await exit_building()
+	await metro_to("harbor")
+	await enter_building("pier7_warehouse")
+	await bot.use_action("lease_property", "Pier 7 lettings desk")
+	await bot.click_named("SignLease_pier7_warehouse", 3.0)
+	await close_modal()
+	bot.expect(Living.has_lease("pier7_warehouse"), "fixture leases real yard before its office")
+	var original_name := GameState.entity_name(Logistics.entity())
+	for sample in [{"name":"Haul", "color":"blue"}, {"name":"Aurelia Harbour Sustainable Delivery Company", "color":"red"}]:
+		GameState.data["entities"][Logistics.entity()]["name"] = sample["name"]
+		await open_os_at(func(n): return n.action == "open_company_os", "yard office desk")
+		await bot.click_named("Tab_logistics", 3.0)
+		await bot.click_named("VanColor_" + str(sample["color"]), 3.0)
+		bot.expect(Logistics.body_color_id() == sample["color"], "company colour saved")
+		await bot.shot("van_palette_" + str(sample["color"]))
+		await close_modal()
+		await exit_building()
+		await bot.walk_to(Vector2(460, 618), 8.0, 60.0)
+		await bot.wait(0.5)
+		await bot.shot("van_" + str(sample["color"]))
+		await enter_building("pier7_warehouse")
+	var rounds := [
+		["lantern_books", "threadline", "city_hall", "nexus_bank"],
+		["bloom_coffee", "postpoint", "fresh_market", "nexus_cowork"],
+		["okafor_lettings", "crestline", "arc_capital", "horizon_labs", "bean_byte"]]
+	for index in rounds.size():
+		var game := RouteGame.new({"id":"MapQA", "client":"Local client", "stops":rounds[index], "by":0})
+		UIRoot.open_modal(game)
+		await bot.wait(0.4)
+		await bot.click_named("StartGame", 3.0)
+		var best := Logistics.best_order(game.stops)
+		for stop in best["order"]:
+			await bot.click_named("Stop_%d" % (int(stop) + 1), 3.0)
+		await bot.shot("route_alignment_%d" % (index + 1))
+		await bot.click_named("DriveRoute", 3.0)
+		await bot.wait(0.4)
+		bot.expect(game.score() > 0.99, "route round %d best distance" % (index + 1))
+		await bot.click_named("FinishGame", 3.0)
+	GameState.data["entities"][Logistics.entity()]["name"] = original_name
+	bot.expect(Ledger.check_balanced(), "appearance and map fixture balanced")

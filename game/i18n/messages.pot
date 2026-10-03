@@ -153,7 +153,7 @@ msgstr ""
 msgid "%%|%[-+0-9.]*[sdif]"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1395
+#: scripts/ui/modals/company_os.gd:1407
 msgid "%.1f L per 100 km"
 msgstr ""
 
@@ -161,7 +161,7 @@ msgstr ""
 msgid "%.1f days"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1465
+#: scripts/ui/modals/company_os.gd:1477
 msgid "%.1f km"
 msgstr ""
 
@@ -185,7 +185,7 @@ msgstr ""
 msgid "%d / %d units"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1393
+#: scripts/ui/modals/company_os.gd:1405
 msgid "%d accepted"
 msgstr ""
 
@@ -225,7 +225,7 @@ msgstr ""
 msgid "%d days left"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1445
+#: scripts/ui/modals/company_os.gd:1457
 msgid "%d driver(s) take one posted run each workday from 9:00 and bank the fee. They plan the route less well than you do."
 msgstr ""
 
@@ -269,7 +269,7 @@ msgstr ""
 msgid "%d more shift(s) to %s"
 msgstr ""
 
-#: scripts/sim/logistics.gd:380
+#: scripts/sim/logistics.gd:404
 msgid "%d new delivery runs are posted (Company OS → Logistics)."
 msgstr ""
 
@@ -309,7 +309,7 @@ msgstr ""
 msgid "%d parcels"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1396
+#: scripts/ui/modals/company_os.gd:1408
 msgid "%d parcels a trip"
 msgstr ""
 
@@ -333,7 +333,7 @@ msgstr ""
 msgid "%d points · %s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1394 scripts/ui/modals/run_card_modal.gd:55
+#: scripts/ui/modals/company_os.gd:1406 scripts/ui/modals/run_card_modal.gd:55
 msgid "%d runs"
 msgstr ""
 
@@ -341,7 +341,7 @@ msgstr ""
 msgid "%d shifts"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1413
+#: scripts/ui/modals/company_os.gd:1425
 msgid "%d stops · deliver by %s · about %s on the road"
 msgstr ""
 
@@ -461,11 +461,11 @@ msgstr ""
 msgid "%s closed: final distribution, rest of the investment written off"
 msgstr ""
 
-#: scripts/sim/logistics.gd:445
+#: scripts/sim/logistics.gd:469
 msgid "%s drove run %s: paid %s."
 msgstr ""
 
-#: scripts/sim/logistics.gd:516
+#: scripts/sim/logistics.gd:540
 msgid "%s found no run to take today."
 msgstr ""
 
@@ -769,7 +769,7 @@ msgstr ""
 msgid "%s: It's late, so we've knocked 20%% off. Invoice for %s noted."
 msgstr ""
 
-#: scripts/sim/logistics.gd:563
+#: scripts/sim/logistics.gd:587
 msgid "%s: Nobody came for our delivery, so we've booked another courier. No fee to pay, and no more work from us this month."
 msgstr ""
 
@@ -1433,11 +1433,11 @@ msgstr ""
 msgid "AWAITING PICKUP"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1072 scripts/ui/modals/company_os.gd:1416 scripts/ui/modals/company_os.gd:914
+#: scripts/ui/modals/company_os.gd:1072 scripts/ui/modals/company_os.gd:1428 scripts/ui/modals/company_os.gd:914
 msgid "Accept"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1427
+#: scripts/ui/modals/company_os.gd:1439
 msgid "Accept a run above, then drive it: you plan the route on a map. Every kilometre saved is fuel and time kept."
 msgstr ""
 
@@ -1721,7 +1721,7 @@ msgstr ""
 msgid "Allocate weekly hours. Each machine needs one hour between batches."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1512
+#: scripts/ui/modals/company_os.gd:1524
 msgid "Allocated"
 msgstr ""
 
@@ -2057,7 +2057,7 @@ msgstr ""
 msgid "At 5%, a 100-unit order averages about 5 duds. Allow spare stock before promising a large delivery."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1468
+#: scripts/ui/modals/company_os.gd:1480
 msgid "At any packing table the shipping options include \"Own van\": fuel instead of a courier fee, delivered the same day. The Pier 7 warehouse can hold your stock too."
 msgstr ""
 
@@ -2573,7 +2573,7 @@ msgstr ""
 msgid "Bloom Coffee's right downstairs. Best flat white in Riverside."
 msgstr ""
 
-#: data/character/options.json
+#: data/character/options.json data/economy/logistics.json
 msgid "Blue"
 msgstr ""
 
@@ -2653,7 +2653,7 @@ msgstr ""
 msgid "Both businesses must run on the same company's books."
 msgstr ""
 
-#: scripts/sim/logistics.gd:91
+#: scripts/sim/logistics.gd:114
 msgid "Bought a used van from Sam Okoro at Dockside Motors for %s."
 msgstr ""
 
@@ -3397,7 +3397,7 @@ msgstr ""
 msgid "Can't do that."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1449 scripts/ui/modals/company_os.gd:786
+#: scripts/ui/modals/company_os.gd:1461 scripts/ui/modals/company_os.gd:786
 msgid "Can't hire yet: %s."
 msgstr ""
 
@@ -3445,7 +3445,7 @@ msgstr ""
 msgid "Cancellation window ended. Return eligible stock within %d days of arrival."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1463
+#: scripts/ui/modals/company_os.gd:1475
 msgid "Cancelled"
 msgstr ""
 
@@ -5013,7 +5013,7 @@ msgstr ""
 msgid "DOCKSIDE MOTORS"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1396
+#: scripts/ui/modals/company_os.gd:1408
 msgid "DRIVERS"
 msgstr ""
 
@@ -5285,7 +5285,7 @@ msgstr ""
 msgid "Deliver before the deadline for the full fee; late work loses 20% and your reputation. Clients pay on their terms."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1437
+#: scripts/ui/modals/company_os.gd:1449
 msgid "Deliver by %s"
 msgstr ""
 
@@ -5365,7 +5365,7 @@ msgstr ""
 msgid "Delivery in 21 days, Net 60. Strict SLA: late is 10% off."
 msgstr ""
 
-#: scripts/sim/logistics.gd:423
+#: scripts/sim/logistics.gd:447
 msgid "Delivery run %s: %s (%d stops)"
 msgstr ""
 
@@ -5429,7 +5429,7 @@ msgstr ""
 msgid "Deposits are liabilities until delivery. Idle machines still cost rent."
 msgstr ""
 
-#: scripts/ui/minigames/route_game.gd:319
+#: scripts/ui/minigames/route_game.gd:323
 msgid "Depot"
 msgstr ""
 
@@ -5601,7 +5601,7 @@ msgstr ""
 msgid "Dockside Motors, Harbor (bay at Pier 7 optional)."
 msgstr ""
 
-#: scripts/sim/logistics.gd:80
+#: scripts/sim/logistics.gd:103
 msgid "Dockside Motors: %s"
 msgstr ""
 
@@ -5669,7 +5669,7 @@ msgstr ""
 msgid "Drive 500 km."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1439
+#: scripts/ui/modals/company_os.gd:1451
 msgid "Drive it"
 msgstr ""
 
@@ -5677,7 +5677,7 @@ msgstr ""
 msgid "Drive the route"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1442
+#: scripts/ui/modals/company_os.gd:1454
 msgid "Drivers"
 msgstr ""
 
@@ -6297,7 +6297,7 @@ msgstr ""
 msgid "FROZEN · BACK "
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1395
+#: scripts/ui/modals/company_os.gd:1407
 msgid "FUEL, 7 DAYS"
 msgstr ""
 
@@ -6593,7 +6593,7 @@ msgstr ""
 msgid "First commission"
 msgstr ""
 
-#: scripts/sim/logistics.gd:442
+#: scripts/sim/logistics.gd:466
 msgid "First delivery run for %s: %s."
 msgstr ""
 
@@ -7025,7 +7025,7 @@ msgstr ""
 msgid "Fuel used: %.1f L (%s)"
 msgstr ""
 
-#: scripts/sim/logistics.gd:426
+#: scripts/sim/logistics.gd:450
 msgid "Fuel: run %s, %.1f km"
 msgstr ""
 
@@ -7181,6 +7181,10 @@ msgstr ""
 msgid "Going twice…"
 msgstr ""
 
+#: data/economy/logistics.json
+msgid "Gold"
+msgstr ""
+
 #: data/dialogue/maya_intro.json
 msgid "Gonna build something of my own."
 msgstr ""
@@ -7253,7 +7257,7 @@ msgstr ""
 msgid "Great value, would buy again."
 msgstr ""
 
-#: data/character/options.json
+#: data/character/options.json data/economy/logistics.json
 msgid "Green"
 msgstr ""
 
@@ -7317,7 +7321,7 @@ msgstr ""
 msgid "Gross margin"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1512 scripts/ui/modals/company_os.gd:268 scripts/ui/modals/info_modal.gd:87 scripts/ui/modals/month_close_modal.gd:30
+#: scripts/ui/modals/company_os.gd:1524 scripts/ui/modals/company_os.gd:268 scripts/ui/modals/info_modal.gd:87 scripts/ui/modals/month_close_modal.gd:30
 msgid "Gross profit"
 msgstr ""
 
@@ -8221,7 +8225,7 @@ msgstr ""
 msgid "In plain words: the van is a company expense today. It only pays back if you keep it busy, with your own parcels and delivery runs."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1424
+#: scripts/ui/modals/company_os.gd:1436
 msgid "In plain words: you get the fee if you finish by the deadline; a late run pays %d%% less, and one left undone for hours is cancelled."
 msgstr ""
 
@@ -8249,7 +8253,7 @@ msgstr ""
 msgid "In transit"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1516
+#: scripts/ui/modals/company_os.gd:1528
 msgid "Included internal media cost"
 msgstr ""
 
@@ -8461,7 +8465,7 @@ msgstr ""
 msgid "Internal purchase from %s: %s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1515
+#: scripts/ui/modals/company_os.gd:1527
 msgid "Internal purchases from the group"
 msgstr ""
 
@@ -8477,7 +8481,7 @@ msgstr ""
 msgid "Internal sales equal internal purchases."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1514
+#: scripts/ui/modals/company_os.gd:1526
 msgid "Internal sales to the group"
 msgstr ""
 
@@ -8485,7 +8489,7 @@ msgstr ""
 msgid "Internal supply"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1517
+#: scripts/ui/modals/company_os.gd:1529
 msgid "Internal trade eliminated in group total"
 msgstr ""
 
@@ -8641,7 +8645,7 @@ msgstr ""
 msgid "It shows what your business is worth today, and why both profit and cash matter."
 msgstr ""
 
-#: scripts/sim/logistics.gd:447
+#: scripts/sim/logistics.gd:471
 msgid "It was late, so the pay was cut."
 msgstr ""
 
@@ -9045,11 +9049,11 @@ msgstr ""
 msgid "Last days"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1506
+#: scripts/ui/modals/company_os.gd:1518
 msgid "Last month"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1463
+#: scripts/ui/modals/company_os.gd:1475
 msgid "Late"
 msgstr ""
 
@@ -9537,7 +9541,7 @@ msgstr ""
 msgid "Local challenge history"
 msgstr ""
 
-#: scripts/sim/logistics.gd:355 scripts/ui/minigames/route_game.gd:27
+#: scripts/sim/logistics.gd:379 scripts/ui/minigames/route_game.gd:27
 msgid "Local client"
 msgstr ""
 
@@ -9597,7 +9601,7 @@ msgstr ""
 msgid "Log 150 hours of gig work."
 msgstr ""
 
-#: data/businesses/logistics.json data/regions/karu.json data/regions/lumina.json scripts/sim/logistics.gd:623
+#: data/businesses/logistics.json data/regions/karu.json data/regions/lumina.json scripts/sim/logistics.gd:647
 msgid "Logistics"
 msgstr ""
 
@@ -10673,7 +10677,7 @@ msgstr ""
 msgid "Net 30 leaves cash available today but creates a bill in 30 days. Reserve money for that bill in your forecast."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1512
+#: scripts/ui/modals/company_os.gd:1524
 msgid "Net revenue"
 msgstr ""
 
@@ -10925,7 +10929,7 @@ msgstr ""
 msgid "No delivered batch to recall."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1447
+#: scripts/ui/modals/company_os.gd:1459
 msgid "No driver yet. Hire a Van Driver in the People tab to have the van work while you do something else."
 msgstr ""
 
@@ -11021,7 +11025,7 @@ msgstr ""
 msgid "No risk. No revenue."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1399
+#: scripts/ui/modals/company_os.gd:1411
 msgid "No runs on the board. Clients post new ones every morning at 7:00."
 msgstr ""
 
@@ -11573,7 +11577,7 @@ msgstr ""
 msgid "On the way from suppliers: %d units"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1463
+#: scripts/ui/modals/company_os.gd:1475
 msgid "On time"
 msgstr ""
 
@@ -11945,11 +11949,11 @@ msgstr ""
 msgid "Operating costs"
 msgstr ""
 
-#: data/help/glossary.json scripts/ui/modals/company_os.gd:1512
+#: data/help/glossary.json scripts/ui/modals/company_os.gd:1524
 msgid "Operating expenses"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1512
+#: scripts/ui/modals/company_os.gd:1524
 msgid "Operating profit"
 msgstr ""
 
@@ -12221,7 +12225,7 @@ msgstr ""
 msgid "Own-brand mould fee"
 msgstr ""
 
-#: scripts/sim/logistics.gd:606
+#: scripts/sim/logistics.gd:630
 msgid "Own-van delivery: %d parcels"
 msgstr ""
 
@@ -12397,7 +12401,7 @@ msgstr ""
 msgid "Padding should reach the green zone. Too little and things arrive broken; that means returns and bad reviews."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1457
+#: scripts/ui/modals/company_os.gd:1469
 msgid "Paid"
 msgstr ""
 
@@ -12517,7 +12521,7 @@ msgstr ""
 msgid "Passenger flow"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1437
+#: scripts/ui/modals/company_os.gd:1449
 msgid "Past its deadline (%s): the pay is cut"
 msgstr ""
 
@@ -12897,7 +12901,7 @@ msgstr ""
 msgid "Plan the route"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1477
+#: scripts/ui/modals/company_os.gd:1489
 msgid "Plan the route: run %s"
 msgstr ""
 
@@ -13013,7 +13017,7 @@ msgstr ""
 msgid "Posted by Ken (TradeLink Wholesale): %s. MOQs apply. Order via laptop."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1397
+#: scripts/ui/modals/company_os.gd:1409
 msgid "Posted runs"
 msgstr ""
 
@@ -13301,6 +13305,10 @@ msgstr ""
 msgid "Purchased residential property: %s."
 msgstr ""
 
+#: data/economy/logistics.json
+msgid "Purple"
+msgstr ""
+
 #: scripts/ui/modals/insolvency_modal.gd:32
 msgid "Put in %s of your own money"
 msgstr ""
@@ -13429,11 +13437,11 @@ msgstr ""
 msgid "RULES"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1393
+#: scripts/ui/modals/company_os.gd:1405
 msgid "RUNS ON THE BOARD"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1394
+#: scripts/ui/modals/company_os.gd:1406
 msgid "RUNS PAID, 7 DAYS"
 msgstr ""
 
@@ -13733,7 +13741,7 @@ msgstr ""
 msgid "Recent orders"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1452
+#: scripts/ui/modals/company_os.gd:1464
 msgid "Recent runs"
 msgstr ""
 
@@ -13815,6 +13823,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:525
 msgid "Recycled paper"
+msgstr ""
+
+#: data/economy/logistics.json
+msgid "Red"
 msgstr ""
 
 #: scripts/ui/modals/settings_modal.gd:55
@@ -14401,7 +14413,7 @@ msgstr ""
 msgid "Restructuring fee — loan %s"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1457
+#: scripts/ui/modals/company_os.gd:1469
 msgid "Result"
 msgstr ""
 
@@ -14521,7 +14533,7 @@ msgstr ""
 msgid "Review my lot"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1499
+#: scripts/ui/modals/company_os.gd:1511
 msgid "Review next action"
 msgstr ""
 
@@ -14761,7 +14773,7 @@ msgstr ""
 msgid "Round the city twice"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1457
+#: scripts/ui/modals/company_os.gd:1469
 msgid "Route"
 msgstr ""
 
@@ -14809,11 +14821,11 @@ msgstr ""
 msgid "Ruiz needs more time. Milestones pause and the completion date moves."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1457 scripts/ui/modals/settings_modal.gd:7
+#: scripts/ui/modals/company_os.gd:1469 scripts/ui/modals/settings_modal.gd:7
 msgid "Run"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1485
+#: scripts/ui/modals/company_os.gd:1497
 msgid "Run %s done: paid %s, fuel %s, %s on the road."
 msgstr ""
 
@@ -14821,15 +14833,15 @@ msgstr ""
 msgid "Run %s internal campaign · %s"
 msgstr ""
 
-#: scripts/sim/logistics.gd:567
+#: scripts/sim/logistics.gd:591
 msgid "Run %s is past its deadline. Deliver soon, the pay drops."
 msgstr ""
 
-#: scripts/sim/logistics.gd:443
+#: scripts/sim/logistics.gd:467
 msgid "Run %s paid %s."
 msgstr ""
 
-#: scripts/sim/logistics.gd:564
+#: scripts/sim/logistics.gd:588
 msgid "Run %s was cancelled: the deadline passed."
 msgstr ""
 
@@ -15277,7 +15289,7 @@ msgstr ""
 msgid "Schools, parks, families."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1457
+#: scripts/ui/modals/company_os.gd:1469
 msgid "Score"
 msgstr ""
 
@@ -15313,7 +15325,7 @@ msgstr ""
 msgid "Segment sales added up"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1498 scripts/ui/modals/company_os.gd:8
+#: scripts/ui/modals/company_os.gd:1510 scripts/ui/modals/company_os.gd:8
 msgid "Segments"
 msgstr ""
 
@@ -15589,11 +15601,11 @@ msgstr ""
 msgid "Shah"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1510
+#: scripts/ui/modals/company_os.gd:1522
 msgid "Shared"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1502
+#: scripts/ui/modals/company_os.gd:1514
 msgid "Shared costs are allocated by net revenue. With no revenue, they stay in Shared."
 msgstr ""
 
@@ -16973,15 +16985,15 @@ msgstr ""
 msgid "That room type is being renovated during the stay."
 msgstr ""
 
-#: scripts/sim/logistics.gd:406
+#: scripts/sim/logistics.gd:430
 msgid "That route doesn't visit every stop once."
 msgstr ""
 
-#: scripts/sim/logistics.gd:387
+#: scripts/sim/logistics.gd:411
 msgid "That run has been taken."
 msgstr ""
 
-#: scripts/sim/logistics.gd:401
+#: scripts/sim/logistics.gd:425
 msgid "That run isn't on your list."
 msgstr ""
 
@@ -17273,7 +17285,7 @@ msgstr ""
 msgid "The digital-dollar bridge was exploited. Transfers are frozen until about %s."
 msgstr ""
 
-#: scripts/sim/logistics.gd:532
+#: scripts/sim/logistics.gd:556
 msgid "The driver"
 msgstr ""
 
@@ -17745,7 +17757,7 @@ msgstr ""
 msgid "This job is no longer available."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1506
+#: scripts/ui/modals/company_os.gd:1518
 msgid "This month"
 msgstr ""
 
@@ -17989,7 +18001,7 @@ msgstr ""
 msgid "Total interest"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1518
+#: scripts/ui/modals/company_os.gd:1530
 msgid "Total operating profit"
 msgstr ""
 
@@ -18365,7 +18377,7 @@ msgstr ""
 msgid "Used cars, rentals and dealership"
 msgstr ""
 
-#: data/economy/logistics.json scripts/sim/logistics.gd:80 scripts/ui/modals/van_deal_modal.gd:28
+#: data/economy/logistics.json scripts/sim/logistics.gd:103 scripts/ui/modals/van_deal_modal.gd:28
 msgid "Used panel van"
 msgstr ""
 
@@ -18413,6 +18425,10 @@ msgstr ""
 msgid "Van Driver"
 msgstr ""
 
+#: scripts/ui/modals/company_os.gd:1390
+msgid "Van body colour"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Van capacity"
 msgstr ""
@@ -18421,11 +18437,11 @@ msgstr ""
 msgid "Van driver"
 msgstr ""
 
-#: scripts/sim/logistics.gd:81
+#: scripts/sim/logistics.gd:104
 msgid "Van insurance: first month"
 msgstr ""
 
-#: scripts/sim/logistics.gd:573
+#: scripts/sim/logistics.gd:597
 msgid "Van insurance: monthly"
 msgstr ""
 
@@ -18445,7 +18461,7 @@ msgstr ""
 msgid "Van sold at auction"
 msgstr ""
 
-#: scripts/sim/logistics.gd:428
+#: scripts/sim/logistics.gd:452
 msgid "Van upkeep: run %s"
 msgstr ""
 
@@ -18949,6 +18965,10 @@ msgstr ""
 msgid "While your first parcel travels, the tutorial takes you to Bloom Coffee to find a job."
 msgstr ""
 
+#: data/economy/logistics.json
+msgid "White"
+msgstr ""
+
 #: scripts/ui/minigames/photo_shoot_game.gd:7
 msgid "White sweep"
 msgstr ""
@@ -19157,7 +19177,7 @@ msgstr ""
 msgid "You already have as many gigs as you can handle."
 msgstr ""
 
-#: scripts/sim/logistics.gd:389
+#: scripts/sim/logistics.gd:413
 msgid "You already have as many runs as you can handle."
 msgstr ""
 
@@ -19305,7 +19325,7 @@ msgstr ""
 msgid "You need a day pass or a desk plan. Ask at reception."
 msgstr ""
 
-#: scripts/sim/logistics.gd:403
+#: scripts/sim/logistics.gd:427
 msgid "You need a van."
 msgstr ""
 
@@ -19613,7 +19633,7 @@ msgstr ""
 msgid "Your opening card shows the objective, seed and deadline. Cash, debts and assets are real ledger entries."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1467
+#: scripts/ui/modals/company_os.gd:1479
 msgid "Your own parcels"
 msgstr ""
 
@@ -19661,7 +19681,7 @@ msgstr ""
 msgid "Your route: %.1f km. The shortest possible: %.1f km."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1425
+#: scripts/ui/modals/company_os.gd:1437
 msgid "Your runs"
 msgstr ""
 
@@ -20225,7 +20245,7 @@ msgstr ""
 msgid "nothing for earnings (last year's profit: %s)"
 msgstr ""
 
-#: scripts/sim/logistics.gd:582
+#: scripts/sim/logistics.gd:606
 msgid "nothing packed here"
 msgstr ""
 
@@ -20257,7 +20277,7 @@ msgstr ""
 msgid "on-time payment"
 msgstr ""
 
-#: scripts/sim/logistics.gd:65 scripts/sim/staff.gd:73
+#: scripts/sim/logistics.gd:88 scripts/sim/staff.gd:73
 msgid "open a business bank account first"
 msgstr ""
 
@@ -20317,7 +20337,7 @@ msgstr ""
 msgid "qc"
 msgstr ""
 
-#: scripts/sim/cafe.gd:111 scripts/sim/logistics.gd:63 scripts/sim/staff.gd:71
+#: scripts/sim/cafe.gd:111 scripts/sim/logistics.gd:86 scripts/sim/staff.gd:71
 msgid "register a company first"
 msgstr ""
 
@@ -20453,7 +20473,7 @@ msgstr ""
 msgid "the café is closed now"
 msgstr ""
 
-#: scripts/sim/logistics.gd:68
+#: scripts/sim/logistics.gd:91
 msgid "the company account needs %s (van and first month's insurance)"
 msgstr ""
 
@@ -20497,7 +20517,7 @@ msgstr ""
 msgid "too late for a shift today"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:1414
+#: scripts/ui/modals/company_os.gd:1426
 msgid "too late to make it if you leave now"
 msgstr ""
 
@@ -20557,11 +20577,11 @@ msgstr ""
 msgid "you + %d staff"
 msgstr ""
 
-#: scripts/sim/logistics.gd:61
+#: scripts/sim/logistics.gd:84
 msgid "you already own the van"
 msgstr ""
 
-#: scripts/sim/logistics.gd:580
+#: scripts/sim/logistics.gd:604
 msgid "you need a van (Dockside Motors, Harbor)"
 msgstr ""
 

@@ -1,0 +1,9 @@
+# #28 self-review complete
+
+495/495 full unit tests in 129.8 seconds; four new tests cover pure name sizing, old-save colour default/JSON roundtrip/closed van, map land/bridges, and optional sitting expressions/fallback. i18n 5245 translated/missing 0; wiki_check OK (3830 assets/302 IDs); beta_audit 0 hits.
+
+Chinese real-input van/route short tour: 88 steps, 16 screenshots, zero failures in 91.0 seconds. Actual van purchase and warehouse lease precede office use. Palette buttons choose blue/short name and red/long name. Three different manifests play through route buttons and reach 100% best-distance results; map QA games do not book fabricated run revenue. Save/reload restores cash/time/location. JPG screenshots under 20 MB; no art changed. Seven raw English findings are user-entered company names, registration identifier and beta branding; no new untranslated UI text.
+
+The native yard uses one CompanyVan implementation with the map view: only body tinted; detail keeps original colour; label centred within 34×10 logical px, font 8 down to 5 px, extreme names ellipsized. Map coordinates align district colour blocks, depot land and two painted bridges. Existing straight-distance/bridge scoring remains.
+
+Okafor's delivered sitting sheet repeats its breathing columns and contains no distinct sitting expressions. It keeps two-frame animation. CharacterRig.set_expression uses standing detail columns; optional *_sit_expressions sheet enables sitting emotion columns when provided, tested with fake art without changing any asset. Closure emits refresh to hide the sold van. Fee values retain decimals; active delivery takes primary-button priority over accepting another job. Full walkthrough follows the authorized every-third-ticket cadence: prior #40 full run passed; next full run is #27.
