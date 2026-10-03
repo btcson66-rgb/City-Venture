@@ -1,6 +1,6 @@
 # #112 Phone replies review
 
-486/486 unit tests passed in 140.4s on the latest mandated base. Final rendered tour, including Maya intro: 0 failures in 12.9s, 0 English audit hits, six JPGs about 1.3 MB. The UI tour confirms the newest outgoing reply is visible and history remains scrollable. i18n --check: 5093 msgids, missing 0; wiki OK; beta audit 0. Thirteen focused phone tests include the single-primary rule, effect rollback and timeout receipts.
+486/486 unit tests passed in 137.2s on the latest mandated base. Final rendered tour, including Maya intro: 0 failures in 13.3s, 0 English audit hits, seven JPGs about 1.5 MB. The UI tour confirms the newest outgoing reply is visible and history remains scrollable. i18n --check: 5102 msgids, missing 0; wiki OK; beta audit 0. Thirteen focused phone tests include the single-primary rule, effect rollback and timeout receipts.
 
 An intermediate full suite caught a group-offer expiry being recorded as declined (481/482); the lifecycle now preserves expired while recording the data default. The succeeding full suite passes.
 
@@ -13,3 +13,5 @@ Saved state: message IDs, incoming/outgoing direction, reply receipt, expiry/def
 Self-review fixes: preserved the first-chapter Maya phone conversation and added a saved, non-repeatable call receipt, with real-input and unit verification; live countdown formerly rebuilt buttons during click; now only labels update. Company closure guards contract/group/payment actions. Detail replies preserve an undecided offer. Bank declining/timeout cancels the same appointment only, avoiding cancellation of a newer booking. Late-payment follow-up shows the actual retry date. Multi-effect failures restore saved state before a retry; failed timeout receipts apply to the restored state. A thread caps available data-recommended primary buttons at one. Templates show their actual invoice/meeting prerequisites. Deadline sweeps use an expiry index; failed defaults terminate visibly rather than endlessly extend. Unknown meeting locations reject; weekday/closing-time bookings avoid no-show soft-locks.
 
 Dependency: #95 is not merged; social interactions use saved phone_met_NPC flags and counts, without inventing an affinity or fatigue API. #111 full rendered gate is still pending, so the next ticket must wait for that result. All PRs remain Draft, no merge/deployment.
+
+Additional self-review: documented saved message/agenda/expiry fields in GAME_DATA_SCHEMA, added phone help and reply-deadline glossary badges, and displayed each timed message’s data default beside its countdown. Full suite 486/486, focused 13/13, rendered tour 0 failures and 0 audit hits after these fixes.

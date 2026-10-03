@@ -241,11 +241,11 @@ msgstr ""
 msgid "%d new delivery runs are posted (Company OS → Logistics)."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:411
+#: scripts/ui/phone_ui.gd:425
 msgid "%d of %d days"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:396
+#: scripts/ui/phone_ui.gd:410
 msgid "%d of %d reached"
 msgstr ""
 
@@ -1078,6 +1078,10 @@ msgid "A member asks where to find cheap suppliers. You point them to Ken."
 msgstr ""
 
 #: data/help/glossary.json
+msgid "A missed reply must not stall a task. Review Tasks or book a new meeting from Contacts if the original action is unavailable."
+msgstr ""
+
+#: data/help/glossary.json
 msgid "A missed target lowers reputation and future brief opportunities."
 msgstr ""
 
@@ -1445,7 +1449,7 @@ msgstr ""
 msgid "Accuracy and speed decide how much of the work gets done in this session."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:377
+#: scripts/ui/phone_ui.gd:391
 msgid "Achievements"
 msgstr ""
 
@@ -1553,7 +1557,7 @@ msgstr ""
 msgid "Agency proposal"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:141 scripts/ui/phone_ui.gd:304
+#: scripts/ui/phone_ui.gd:150 scripts/ui/phone_ui.gd:318
 msgid "Agenda"
 msgstr ""
 
@@ -2245,7 +2249,7 @@ msgstr ""
 msgid "Balanced negotiation"
 msgstr ""
 
-#: data/buildings/nexus_bank.json scripts/ui/phone_ui.gd:140
+#: data/buildings/nexus_bank.json scripts/ui/phone_ui.gd:149
 msgid "Bank"
 msgstr ""
 
@@ -2469,7 +2473,7 @@ msgstr ""
 msgid "Bold. Love it."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:310
+#: scripts/ui/phone_ui.gd:324
 msgid "Book a new time from Contacts if needed."
 msgstr ""
 
@@ -3869,7 +3873,7 @@ msgstr ""
 msgid "Chris Walsh"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:141
+#: scripts/ui/phone_ui.gd:150
 msgid "City"
 msgstr ""
 
@@ -3885,7 +3889,7 @@ msgstr ""
 msgid "City Fleet Refresh"
 msgstr ""
 
-#: scripts/ui/modals/city_guide_modal.gd:7 scripts/ui/phone_ui.gd:142
+#: scripts/ui/modals/city_guide_modal.gd:7 scripts/ui/phone_ui.gd:151
 msgid "City Guide"
 msgstr ""
 
@@ -4313,7 +4317,7 @@ msgstr ""
 msgid "Complete the previous growth stage."
 msgstr ""
 
-#: scripts/sim/phone_messages.gd:66 scripts/ui/phone_ui.gd:249
+#: scripts/sim/phone_messages.gd:66 scripts/ui/phone_ui.gd:263
 msgid "Complete the reply's requirements first."
 msgstr ""
 
@@ -4413,7 +4417,7 @@ msgstr ""
 msgid "Consumer-protection fine for an undisclosed flood car"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:837 scripts/ui/phone_ui.gd:141 scripts/ui/phone_ui.gd:269
+#: scripts/ui/modals/company_os.gd:837 scripts/ui/phone_ui.gd:150 scripts/ui/phone_ui.gd:283
 msgid "Contacts"
 msgstr ""
 
@@ -4897,8 +4901,16 @@ msgstr ""
 msgid "Day rate %d%% · week rate %d%% of standard"
 msgstr ""
 
+#: scripts/ui/phone_ui.gd:251
+msgid "Deadline default: %s"
+msgstr ""
+
 #: scripts/sim/careers.gd:317
 msgid "Deadline missed: %s. Deliver soon, the fee drops."
+msgstr ""
+
+#: data/help/help.json
+msgid "Deadlines use the shown default result. Contacts can invite known people; Agenda shows the full meeting window and place. Missed meetings can be booked again."
 msgstr ""
 
 #: data/story/chapters.json
@@ -6913,7 +6925,7 @@ msgstr ""
 msgid "Go to the company registration counter"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:309
+#: scripts/ui/phone_ui.gd:323
 msgid "Go to the meeting location during its time window. The conversation starts when you arrive."
 msgstr ""
 
@@ -7989,7 +8001,7 @@ msgstr ""
 msgid "In the workshop"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:509 scripts/ui/phone_ui.gd:360
+#: scripts/ui/modals/company_os.gd:509 scripts/ui/phone_ui.gd:374
 msgid "In transit"
 msgstr ""
 
@@ -8997,7 +9009,7 @@ msgstr ""
 msgid "Leased %s for %s/month."
 msgstr ""
 
-#: scripts/ui/modals/lease_end_modal.gd:13 scripts/ui/phone_ui.gd:142
+#: scripts/ui/modals/lease_end_modal.gd:13 scripts/ui/phone_ui.gd:151
 msgid "Leases"
 msgstr ""
 
@@ -9101,7 +9113,7 @@ msgstr ""
 msgid "Licensing Officer"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:374
+#: scripts/ui/phone_ui.gd:388
 msgid "Life Timeline"
 msgstr ""
 
@@ -9881,15 +9893,15 @@ msgstr ""
 msgid "Meet this contact or receive their message first."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:297
+#: scripts/ui/phone_ui.gd:311
 msgid "Meeting completed"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:299
+#: scripts/ui/phone_ui.gd:313
 msgid "Meeting missed"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:295
+#: scripts/ui/phone_ui.gd:309
 msgid "Meeting scheduled"
 msgstr ""
 
@@ -9929,7 +9941,7 @@ msgstr ""
 msgid "Meridian and Volt sell steady volume on thin margins. You need a ten-car fleet, a showroom and a deposit, and you must always keep new cars on the floor. Service tickets after the sale are where the dealership earns."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:140 scripts/ui/phone_ui.gd:197
+#: scripts/ui/phone_ui.gd:149 scripts/ui/phone_ui.gd:206
 msgid "Messages"
 msgstr ""
 
@@ -10101,7 +10113,7 @@ msgstr ""
 msgid "Month close"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:361
+#: scripts/ui/phone_ui.gd:375
 msgid "Month sales"
 msgstr ""
 
@@ -10985,7 +10997,7 @@ msgstr ""
 msgid "Notice rent"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:354
+#: scripts/ui/phone_ui.gd:368
 msgid "Notifications only.\nManage at a desk: Company OS."
 msgstr ""
 
@@ -11177,7 +11189,7 @@ msgstr ""
 msgid "Okafor Lettings"
 msgstr ""
 
-#: scripts/sim/bank.gd:291 scripts/sim/phone_messages.gd:24 scripts/sim/phone_messages.gd:84 scripts/ui/phone_ui.gd:241
+#: scripts/sim/bank.gd:291 scripts/sim/phone_messages.gd:24 scripts/sim/phone_messages.gd:84 scripts/ui/phone_ui.gd:250
 msgid "Okay, thanks."
 msgstr ""
 
@@ -11403,6 +11415,10 @@ msgstr ""
 
 #: scripts/sim/energy.gd:727
 msgid "Open a charging station first."
+msgstr ""
+
+#: data/help/help.json
+msgid "Open a contact thread to reply. A reply changes the actual offer or event; acknowledgements confirm notifications only."
 msgstr ""
 
 #: scripts/sim/internal_supply.gd:183
@@ -12057,7 +12073,7 @@ msgstr ""
 msgid "Packed well"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:359
+#: scripts/ui/phone_ui.gd:373
 msgid "Packed, not shipped"
 msgstr ""
 
@@ -12441,7 +12457,7 @@ msgstr ""
 msgid "Permits & regulations"
 msgstr ""
 
-#: scripts/ui/modals/bank_modal.gd:60 scripts/ui/phone_ui.gd:315
+#: scripts/ui/modals/bank_modal.gd:60 scripts/ui/phone_ui.gd:329
 msgid "Personal"
 msgstr ""
 
@@ -12453,7 +12469,7 @@ msgstr ""
 msgid "Personal Banker"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:363
+#: scripts/ui/phone_ui.gd:377
 msgid "Personal cap"
 msgstr ""
 
@@ -12475,6 +12491,10 @@ msgstr ""
 
 #: scripts/sim/phone_messages.gd:219
 msgid "Phone conversation completed."
+msgstr ""
+
+#: data/help/help.json
+msgid "Phone replies and meetings"
 msgstr ""
 
 #: scripts/ui/minigames/photo_shoot_game.gd:32
@@ -13533,7 +13553,7 @@ msgstr ""
 msgid "Register a company and open its bank account first."
 msgstr ""
 
-#: scripts/sim/company.gd:83 scripts/ui/phone_ui.gd:249 scripts/ui/phone_ui.gd:283
+#: scripts/sim/company.gd:83 scripts/ui/phone_ui.gd:263 scripts/ui/phone_ui.gd:297
 msgid "Register a company at City Hall first."
 msgstr ""
 
@@ -13725,7 +13745,7 @@ msgstr ""
 msgid "Rent"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:321
+#: scripts/ui/phone_ui.gd:335
 msgid "Rent $1,250 due the 14th"
 msgstr ""
 
@@ -13889,8 +13909,12 @@ msgstr ""
 msgid "Replay tutorial"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:235 scripts/ui/phone_ui.gd:51
+#: scripts/ui/phone_ui.gd:244 scripts/ui/phone_ui.gd:51
 msgid "Reply by %s · %d minutes remaining"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Reply deadlines"
 msgstr ""
 
 #: scripts/ui/modals/pause_menu.gd:84
@@ -13981,7 +14005,7 @@ msgstr ""
 msgid "Resources & Agriculture"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:164
+#: scripts/ui/phone_ui.gd:173
 msgid "Respond"
 msgstr ""
 
@@ -14625,7 +14649,7 @@ msgstr ""
 msgid "Sato"
 msgstr ""
 
-#: autoload/save_system.gd:385 scripts/ui/phone_ui.gd:142
+#: autoload/save_system.gd:385 scripts/ui/phone_ui.gd:151
 msgid "Save"
 msgstr ""
 
@@ -14657,7 +14681,7 @@ msgstr ""
 msgid "Save exported. Keep this file outside your browser."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:420
+#: scripts/ui/phone_ui.gd:434
 msgid "Save game"
 msgstr ""
 
@@ -14665,7 +14689,7 @@ msgstr ""
 msgid "Save imported. Continue where you left off."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:421
+#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:435
 msgid "Save now"
 msgstr ""
 
@@ -14805,7 +14829,7 @@ msgstr ""
 msgid "Saved %s"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:423
+#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:437
 msgid "Saved (slot %d)."
 msgstr ""
 
@@ -15213,7 +15237,7 @@ msgstr ""
 msgid "Shop roof"
 msgstr ""
 
-#: data/economy/marketplace.json data/npcs/shoplane.json scripts/sim/phone_messages.gd:207 scripts/ui/phone_ui.gd:141
+#: data/economy/marketplace.json data/npcs/shoplane.json scripts/sim/phone_messages.gd:207 scripts/ui/phone_ui.gd:150
 msgid "ShopLane"
 msgstr ""
 
@@ -15225,7 +15249,7 @@ msgstr ""
 msgid "ShopLane Ads: a big brand campaign is bidding up placements."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:353
+#: scripts/ui/phone_ui.gd:367
 msgid "ShopLane Seller"
 msgstr ""
 
@@ -15269,7 +15293,7 @@ msgstr ""
 msgid "ShopLane payout received: %s"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:320
+#: scripts/ui/phone_ui.gd:334
 msgid "ShopLane pending"
 msgstr ""
 
@@ -15641,7 +15665,7 @@ msgstr ""
 msgid "Someone must be behind the counter: hire a Barista (People tab), or work the counter yourself inside the café. Walk-outs and running out of coffee pull the rating down."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:162
+#: scripts/ui/phone_ui.gd:171
 msgid "Something"
 msgstr ""
 
@@ -16305,7 +16329,7 @@ msgstr ""
 msgid "Tape seam %d"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:140 scripts/ui/phone_ui.gd:333
+#: scripts/ui/phone_ui.gd:149 scripts/ui/phone_ui.gd:347
 msgid "Tasks"
 msgstr ""
 
@@ -17189,7 +17213,7 @@ msgstr ""
 msgid "This equipment needs no service today."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:428
+#: scripts/ui/phone_ui.gd:442
 msgid "This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen."
 msgstr ""
 
@@ -17397,7 +17421,11 @@ msgstr ""
 msgid "Time to finish"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:141 scripts/ui/phone_ui.gd:377
+#: data/help/glossary.json
+msgid "Time-limited messages resolve their saved default when the deadline passes. Read the outcome in the same thread."
+msgstr ""
+
+#: scripts/ui/phone_ui.gd:150 scripts/ui/phone_ui.gd:391
 msgid "Timeline"
 msgstr ""
 
@@ -17417,7 +17445,7 @@ msgstr ""
 msgid "To Startup Hub"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:509 scripts/ui/phone_ui.gd:358
+#: scripts/ui/modals/company_os.gd:509 scripts/ui/phone_ui.gd:372
 msgid "To pack"
 msgstr ""
 
@@ -18133,7 +18161,7 @@ msgstr ""
 msgid "Wages — %s shift at %s"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:282
+#: scripts/ui/phone_ui.gd:296
 msgid "Wait %d minutes before messaging again."
 msgstr ""
 
@@ -18557,6 +18585,10 @@ msgstr ""
 msgid "Work a shift"
 msgstr ""
 
+#: data/help/help.json
+msgid "Work and payment templates use current briefs and invoices. They do not promise new work or force an early payment."
+msgstr ""
+
 #: data/buildings/nexus_cowork.json
 msgid "Work at a hot desk — Company OS"
 msgstr ""
@@ -18585,7 +18617,7 @@ msgstr ""
 msgid "Workshop roof"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:144
+#: scripts/ui/phone_ui.gd:153
 msgid "World"
 msgstr ""
 
@@ -18637,7 +18669,7 @@ msgstr ""
 msgid "Year 8: importing needs an import licence ($450 a year). A registered company also pays a monthly compliance cost."
 msgstr ""
 
-#: scripts/ui/minigames/auction_game.gd:56 scripts/ui/phone_ui.gd:232
+#: scripts/ui/minigames/auction_game.gd:56 scripts/ui/phone_ui.gd:241
 msgid "You"
 msgstr ""
 
@@ -19753,7 +19785,7 @@ msgstr ""
 msgid "paid on delivery"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:366
+#: scripts/ui/phone_ui.gd:380
 msgid "paused: cap"
 msgstr ""
 
@@ -20205,7 +20237,7 @@ msgstr ""
 msgid "−100 units"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:162
+#: scripts/ui/phone_ui.gd:171
 msgid "◆ %s needs a decision"
 msgstr ""
 

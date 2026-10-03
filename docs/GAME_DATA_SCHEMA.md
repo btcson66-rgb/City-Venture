@@ -498,6 +498,24 @@ data.bank             {credit, loans{}, seq, no_loans_until?, appointment?}
                         the reminder; meeting Marcus removes both. Missed slots stay in phone Tasks with rebooking advice.
                         Loan records keep their existing fields and repayment schedule unchanged.
 
+data.messages         [{id, t, from, text, read, direction?: incoming|outgoing, replies?, ctx?, decision?,
+                        expires?, default_reply?, answered?, expired?}]
+                        Each reply: {id, label, requires[], effects[], recommended?, keep_open?, outcome?}.
+                        Conditions and effects use EventEngine/Effects; decision references the original pending iid.
+                        Old messages receive IDs and acknowledgement replies lazily; outgoing entries are already read.
+                        Keep-open details preserve the choice. Expiry runs the data default once, or records
+                        expired_unavailable with a Tasks/Contacts next step if its underlying action cannot run.
+
+data.phone_messages   {seq, agenda[{id,npc,at,until,location,conversation,status: planned|met|missed}],
+                        cooldowns{"npc:template": absolute minute}, social{npc: meeting count}, expiry{message_id: minute}}
+                        Created lazily by PhoneMessages.S; missing expiry indexes rebuild from saved messages.
+                        data/economy/messages.json defines lead/window minutes and templates {label,requires[],cooldown_minutes}.
+                        Meetings search complete NPC and building opening windows; arrival plays existing dialogue.
+                        phone_met_<npc> flags and counts are the additive relationship hook while #95 is unmerged.
+                        phone_call_<conversation> is a once-only completion receipt; Maya's opening call still gates ch1.
+                        A loan may add phone_extended and retry_at: its one extension reschedules bank.payment,
+                        preserving debt, credit consequences and paid/due fees; never posts operating income.
+
 data.npcs.<id>         {met, relationship, convo_done[]}
 data.timeline          [{t, text, kind}]
 data.reports           {month_closes:[{period, entities:{id:{revenue, refunds, cogs, gross, opex{...}, rent, profit,

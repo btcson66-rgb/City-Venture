@@ -26,6 +26,11 @@ func run() -> void:
 	await bot.shot("message_threads")
 	await bot.click_named("Thread_marcus")
 	await bot.shot("quick_replies")
+	await bot.click_named("PhoneMessagesHelp")
+	bot.expect(UIRoot.top_modal() is InfoModal, "phone help card is available")
+	await bot.shot("phone_help")
+	await bot.click_named("CloseInfo")
+
 	await bot.click_named("Reply_" + str(message["id"]) + "_confirm")
 	bot.expect(PhoneMessages.S()["agenda"].size() == 1, "reply creates real agenda")
 	await bot.shot("reply_history")

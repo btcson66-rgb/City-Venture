@@ -98,6 +98,15 @@ func _header(t: String, back := true) -> void:
 		h.add_child(b)
 	h.add_child(UIK.title(t, 10))
 	content.add_child(h)
+	if app in ["messages", "thread", "contacts", "agenda"]:
+		var tools := UIK.hbox(3)
+		tools.add_child(UIK.tip("phone_replies"))
+		var help := UIK.button("?", func(): Help.open("phone_messages"))
+		help.name = "PhoneMessagesHelp"
+		help.custom_minimum_size = Vector2(14, 12)
+		tools.add_child(help)
+		content.add_child(tools)
+
 
 
 func _render() -> void:
@@ -236,6 +245,11 @@ func _thread() -> void:
 			deadline.name = "ReplyDeadline"
 			deadline.set_meta("deadline", int(m["expires"]))
 			v.add_child(deadline)
+			var defaults: Array = PhoneMessages.choices(m).filter(func(choice): return str(choice["id"]) == str(m.get("default_reply", "ack")))
+			if not defaults.is_empty():
+				var default_label := EventEngine.fill(str(defaults[0].get("label", defaults[0].get("text", "Okay, thanks."))), PhoneMessages.context(m))
+				v.add_child(UIK.wrap(I18n.t("Deadline default: %s") % I18n.t(default_label), 6, Art.C_MUTED, 118))
+
 		for c in PhoneMessages.choices(m):
 			var available := EventEngine.choice_available(c, PhoneMessages.context(m))
 			var label := EventEngine.fill(str(c.get("label", c.get("text", "Okay, thanks."))), PhoneMessages.context(m))
