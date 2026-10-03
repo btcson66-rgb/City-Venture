@@ -326,6 +326,9 @@ func _timeline() -> void:
 
 ## Five milestones per industry (data/milestones.json): unlocked ones with their date, locked ones with progress.
 func _achievements() -> void:
+	var story := UIK.button("Main-story achievements", func(): UIRoot.open_modal(GrowthModal.new("achievements")))
+	story.name = "OpenStoryAchievements"
+	content.add_child(story)
 	var total := Milestones.count()
 	content.add_child(UIK.label(I18n.t("%d of %d reached") % [total[0], total[1]], 7, Art.C_SKY, true))
 	for entry in Industries.all():

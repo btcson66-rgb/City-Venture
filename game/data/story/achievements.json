@@ -1,0 +1,229 @@
+{
+ "achievements": [
+  {
+   "id": "first_money",
+   "title": "The first dollar",
+   "metric": "earned_revenue",
+   "value": 1,
+   "hint": "Complete a real sale.",
+   "unit": "home dollars",
+   "company": false
+  },
+  {
+   "id": "first_delivery",
+   "title": "A parcel arrived",
+   "metric": "stat:orders_delivered",
+   "value": 1,
+   "hint": "Deliver an order.",
+   "unit": "Orders",
+   "company": false
+  },
+  {
+   "id": "first_return",
+   "title": "The first return",
+   "metric": "stat:returns_requested",
+   "value": 1,
+   "hint": "Receive a genuine return request.",
+   "unit": "Requests",
+   "company": false
+  },
+  {
+   "id": "return_resolved",
+   "title": "Make it right",
+   "metric": "stat:returns_resolved",
+   "value": 1,
+   "hint": "Resolve a customer return.",
+   "unit": "Requests",
+   "company": false
+  },
+  {
+   "id": "supply_survived",
+   "title": "Through the supply shock",
+   "metric": "flag:ch7_month_profit",
+   "value": 1,
+   "hint": "Reach the supply-shock review.",
+   "unit": "condition",
+   "company": false
+  },
+  {
+   "id": "never_overdrawn",
+   "title": "Thirty days in the black",
+   "metric": "never_overdrawn",
+   "value": 30,
+   "hint": "Live thirty days without any personal or company cash account becoming negative.",
+   "unit": "Days",
+   "company": false
+  },
+  {
+   "id": "bargain",
+   "title": "A better deal",
+   "metric": "negotiation",
+   "value": 1,
+   "hint": "Negotiate a contract that the buyer actually accepts.",
+   "unit": "Deals",
+   "company": false
+  },
+  {
+   "id": "founder",
+   "title": "A company of your own",
+   "metric": "registered",
+   "value": 1,
+   "hint": "Register a company.",
+   "unit": "condition",
+   "company": false
+  },
+  {
+   "id": "company_bank",
+   "title": "Separate the books",
+   "metric": "flag:business_account_opened",
+   "value": 1,
+   "hint": "Open a business account.",
+   "unit": "condition",
+   "company": false
+  },
+  {
+   "id": "first_hire",
+   "title": "A colleague",
+   "metric": "staff",
+   "value": 1,
+   "hint": "Hire a current employee.",
+   "unit": "People",
+   "company": false
+  },
+  {
+   "id": "team_ten",
+   "title": "Ten colleagues",
+   "metric": "staff",
+   "value": 10,
+   "hint": "Hire ten current employees.",
+   "unit": "People",
+   "company": false
+  },
+  {
+   "id": "repaid",
+   "title": "Keep your word",
+   "metric": "debt_free",
+   "value": 1,
+   "hint": "Pay an actual loan in full.",
+   "unit": "condition",
+   "company": false
+  },
+  {
+   "id": "reviewed",
+   "title": "Customers speak",
+   "metric": "stat:reviews",
+   "value": 25,
+   "hint": "Receive twenty-five customer reviews.",
+   "unit": "Reviews",
+   "company": false
+  },
+  {
+   "id": "paid_out",
+   "title": "Money reaches the bank",
+   "metric": "stat:payouts",
+   "value": 1,
+   "hint": "Receive a marketplace payout.",
+   "unit": "Payouts",
+   "company": false
+  },
+  {
+   "id": "imported",
+   "title": "Across the water",
+   "metric": "stat:import_received",
+   "value": 1,
+   "hint": "Receive an actual imported shipment.",
+   "unit": "Shipments",
+   "company": false
+  },
+  {
+   "id": "customs",
+   "title": "Through customs",
+   "metric": "stat:import_cleared",
+   "value": 1,
+   "hint": "Clear a shipment through customs.",
+   "unit": "Shipments",
+   "company": false
+  },
+  {
+   "id": "abroad",
+   "title": "Sold abroad",
+   "metric": "foreign_deliveries",
+   "value": 1,
+   "hint": "Deliver an actual overseas customer order.",
+   "unit": "Orders",
+   "company": false
+  },
+  {
+   "id": "world_store",
+   "title": "Open to the world",
+   "metric": "foreign_stores",
+   "value": 1,
+   "hint": "Open a live foreign store with a product.",
+   "unit": "Markets",
+   "company": false
+  },
+  {
+   "id": "declined",
+   "title": "Stay independent",
+   "metric": "flag:offer_declined",
+   "value": 1,
+   "hint": "Turn down the first acquisition offer.",
+   "unit": "condition",
+   "company": false
+  },
+  {
+   "id": "countered",
+   "title": "Ask for more",
+   "metric": "flag:offer_countered",
+   "value": 1,
+   "hint": "Counter the acquisition offer.",
+   "unit": "condition",
+   "company": false
+  },
+  {
+   "id": "sold",
+   "title": "A change of owner",
+   "metric": "flag:offer_accepted",
+   "value": 1,
+   "hint": "Accept an acquisition offer.",
+   "unit": "condition",
+   "company": false
+  },
+  {
+   "id": "team_owner",
+   "title": "Built with the team",
+   "metric": "ending:employees",
+   "value": 1,
+   "hint": "Choose employee ownership in the legacy chapter.",
+   "unit": "condition",
+   "company": false
+  },
+  {
+   "id": "mentor",
+   "title": "Make room",
+   "metric": "ending:mentor",
+   "value": 1,
+   "hint": "Choose mentoring in the legacy chapter.",
+   "unit": "condition",
+   "company": false
+  },
+  {
+   "id": "legacy",
+   "title": "Your next chapter",
+   "metric": "flag:legacy_cards_viewed",
+   "value": 1,
+   "hint": "Read the complete legacy epilogue.",
+   "unit": "condition",
+   "company": false
+  },
+  {
+   "id": "diversified",
+   "title": "Three ways to earn",
+   "metric": "industries",
+   "value": 3,
+   "hint": "Operate three different businesses.",
+   "unit": "Businesses",
+   "company": false
+  }
+ ]
+}

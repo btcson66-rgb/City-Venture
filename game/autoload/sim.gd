@@ -35,6 +35,7 @@ func _do_story_check() -> void:
 	_story_check_pending = false
 	if GameState.has_game():
 		StoryEngine.check()
+		Growth.check()
 
 
 ## Schedule `kind` at absolute minute `t`. Kinds are "<module>.<handler>".
@@ -111,6 +112,7 @@ func _dispatch(kind: String, p: Dictionary) -> void:
 func _on_hour(t: int, h: int) -> void:
 	OverseasPartners.on_hour()
 	LegacyBusiness.on_hour()
+	Growth.check()
 	phase = "hour:compliance"
 	Compliance.on_hour(t, h)
 	phase = "hour:ecommerce"

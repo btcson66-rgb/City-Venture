@@ -766,3 +766,5 @@ Requested named facades: `airport_terminal.png`, `gateway_car_rental.png`, `aure
 ### Season 2 — Chapters 17–18 (#43)
 
 Requested: backdrops/chapter_17, backdrops/chapter_18; dedicated Kai Moreno sprites/portrait; events/rival_undercut; five epilogue backdrops (city, people, company, timeline, next chapter). Existing executive outfit and UI cards are interim. No art assets changed.
+
+#35 — Planned: 25 achievement icons, 16×16, `achievements/<id>.png`; IDs follow data/story/achievements.json. Existing star icons and text remain functional fallback.

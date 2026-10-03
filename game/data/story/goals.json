@@ -1,0 +1,112 @@
+{
+ "goals": [
+  {
+   "id": "steady_profit",
+   "title": "Three profitable months",
+   "metric": "profit_months",
+   "value": 3,
+   "hint": "Close three consecutive months above $5,000 net profit.",
+   "unit": "Months",
+   "company": true
+  },
+  {
+   "id": "three_businesses",
+   "title": "A diversified business",
+   "metric": "industries",
+   "value": 3,
+   "hint": "Operate three different business types in the same company.",
+   "unit": "Businesses",
+   "company": true
+  },
+  {
+   "id": "ten_people",
+   "title": "A team of ten",
+   "metric": "staff",
+   "value": 10,
+   "hint": "Hire ten current employees.",
+   "unit": "People",
+   "company": true
+  },
+  {
+   "id": "debt_free",
+   "title": "Loans paid in full",
+   "metric": "debt_free",
+   "value": 1,
+   "hint": "Repay a loan you actually borrowed; keep all current loans settled.",
+   "unit": "condition",
+   "company": true
+  },
+  {
+   "id": "cafe_fans",
+   "title": "A well-loved cafe",
+   "metric": "cafe_rating",
+   "value": 4.5,
+   "hint": "Serve actual cafe customers and reach a 4.5 out of 5 rating.",
+   "unit": "Rating",
+   "company": true
+  },
+  {
+   "id": "annual_revenue",
+   "title": "A quarter-million year",
+   "metric": "annual_revenue",
+   "value": 250000,
+   "hint": "Earn $250,000 net revenue in the last 365 days.",
+   "unit": "home dollars",
+   "company": true
+  },
+  {
+   "id": "overseas_market",
+   "title": "A market abroad",
+   "metric": "foreign_stores",
+   "value": 1,
+   "hint": "Open a live overseas market with a listed product.",
+   "unit": "Markets",
+   "company": true
+  },
+  {
+   "id": "hundred_orders",
+   "title": "One hundred deliveries",
+   "metric": "stat:orders_delivered",
+   "value": 100,
+   "hint": "Deliver one hundred real orders.",
+   "unit": "Count",
+   "company": false
+  },
+  {
+   "id": "fifty_reviews",
+   "title": "Fifty customer reviews",
+   "metric": "stat:reviews",
+   "value": 50,
+   "hint": "Collect fifty actual customer reviews.",
+   "unit": "Count",
+   "company": false
+  },
+  {
+   "id": "mentor_five",
+   "title": "Room for five founders",
+   "metric": "stat:founders_mentored",
+   "value": 5,
+   "hint": "Choose the mentor ending and hold five actual advisory sessions.",
+   "unit": "Sessions",
+   "company": false
+  },
+  {
+   "id": "rebuild",
+   "title": "Build a new company",
+   "metric": "registered",
+   "value": 1,
+   "hint": "Register a live company at City Hall.",
+   "unit": "condition",
+   "company": false
+  },
+  {
+   "id": "first_shift_goal",
+   "title": "Keep earning while rebuilding",
+   "metric": "stat:shifts_worked",
+   "value": 10,
+   "hint": "Finish ten paid shifts.",
+   "unit": "Shifts",
+   "company": false
+  }
+ ]
+}

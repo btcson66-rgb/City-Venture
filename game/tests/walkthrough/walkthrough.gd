@@ -17,6 +17,9 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "growth":
+		await _growth_fixture()
+		return
 	if _arg("from") == "ch17":
 		await _chapters_17_to_18(true)
 		return
@@ -503,6 +506,7 @@ func _loan_access_fixture() -> void:
 
 
 func _summary() -> void:
+	await _growth_review()
 	await _save_load()
 	bot.step("Summary")
 	var be := GameState.business_entity()
@@ -2650,3 +2654,39 @@ func _chapters_17_to_18(fast := false) -> void:
 		await bot.click_named("MentorTopic_pricing")
 		bot.expect(GameState.stat("founders_mentored") == 1, "actual one-hour mentoring recorded")
 	bot.expect(Ledger.check_balanced(), "all chapter17–18 books balance")
+
+func _growth_fixture() -> void:
+	await bot.wait(4.0)
+	UIRoot._suppress_decisions = true
+	UIRoot.tutorial.st()["off"] = true
+	StoryEngine.St()["active"].clear()
+	bot.step("Growth fixture — existing company and completed legacy")
+	var fixture = load("res://tests/unit/test_global.gd").new()
+	fixture._setup()
+	StoryEngine.St()["chapter"] = "ch18_legacy"
+	GameState.set_flag("legacy_cards_viewed")
+	await _growth_review()
+
+func _growth_review() -> void:
+	bot.step("Growth — three optional goals, achievements and actual timeline")
+	Growth.check(true)
+	UIRoot.close_all()
+	UIRoot.open_modal(GrowthModal.new())
+	await bot.wait(0.8)
+	var guard := 0
+	while bot.button_named("GrowthAcknowledge") != null and guard < 32:
+		await bot.click_named("GrowthAcknowledge")
+		guard += 1
+	bot.expect(Growth.S()["active"].size() >= 3, "at least three free-play goals")
+	await bot.shot("growth_three_goals")
+	await bot.click_named("GrowthTab_achievements")
+	await bot.shot("growth_achievements")
+	await bot.click_named("GrowthTab_timeline")
+	await bot.shot("growth_timeline")
+	await bot.click_named("GrowthReturn")
+	UIRoot.open_modal(PauseMenu.new())
+	await _export_row_input("PauseAchievements")
+	bot.expect(UIRoot.top_modal() is GrowthModal, "pause menu opens achievements")
+	await bot.shot("growth_pause_achievements")
+	UIRoot.close_all()
+	bot.expect(Ledger.check_balanced(), "growth UI never changes financial books")

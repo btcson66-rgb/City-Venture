@@ -195,6 +195,13 @@ func _concepts(ids: Array) -> void:
 
 # ============================================================== OVERVIEW
 func _tab_overview() -> void:
+	var journey := UIK.button("The journey so far", func(): UIRoot.open_modal(GrowthModal.new("timeline")))
+	journey.name = "OpenJourneyReview"
+	content.add_child(journey)
+	if Growth.enabled():
+		var goals := UIK.button("Growth goals", func(): UIRoot.open_modal(GrowthModal.new()))
+		goals.name = "OpenGrowthGoals"
+		content.add_child(goals)
 	if terminal == "cowork" and LegacyBusiness.S()["ending"] == "mentor":
 		var mentor := UIK.button("Mentor a new founder", func(): UIRoot.open_modal(LegacyMentorModal.new()))
 		mentor.name = "OpenLegacyMentoring"

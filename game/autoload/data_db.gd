@@ -60,6 +60,8 @@ func load_all() -> void:
 	glossary = gl if typeof(gl) == TYPE_DICTIONARY else {}
 	patch_notes = _read("res://data/help/patch_notes.json")
 	story = _read("res://data/story/chapters.json")
+	story["goals"] = _read("res://data/story/goals.json").get("goals", [])
+	story["achievements"] = _read("res://data/story/achievements.json").get("achievements", [])
 	story["side_stories"] = {}
 	for path in _json_files("res://data/story/side_stories"):
 		var side: Dictionary = _read(path)
