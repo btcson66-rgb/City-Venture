@@ -17,6 +17,10 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "era_props":
+		await _era_props_fixture()
+		await _save_load()
+		return
 	if _arg("from") == "van_route":
 		await _fast_forward_to_ch10()
 		await _van_route_fixture()
@@ -2252,3 +2256,21 @@ func _van_route_fixture() -> void:
 		await bot.click_named("FinishGame", 3.0)
 	GameState.data["entities"][Logistics.entity()]["name"] = original_name
 	bot.expect(Ledger.check_balanced(), "appearance and map fixture balanced")
+
+
+func _era_props_fixture() -> void:
+	GameState.data["tutorial"] = {"off":true, "step":99, "seen":{}, "v":99}
+	for year in [2, 3, 4]:
+		World.set_year(year)
+		for district in ["riverside", "shopping_street", "financial"]:
+			SceneRouter._enter("district", district, "door_" + str(DataDB.districts[district]["buildings"][0]), "down")
+			SceneRouter.world_scene().player.camera.zoom = Vector2(0.7, 0.7)
+			await bot.wait(4.0)
+			Clock.world_active = false
+			await bot.shot("era_%d_%s_roof" % [year, district])
+			if district == "riverside":
+				SceneRouter.world_scene().player.camera.zoom = Vector2.ONE
+				await bot.walk_to(Vector2(1140, 624), 20.0, 36.0)
+				await bot.shot("era_%d_riverside_far_port" % year)
+	bot.expect(World.year() == 4, "era progression saved")
+	bot.expect(Ledger.check_balanced(), "era decoration tour balanced")

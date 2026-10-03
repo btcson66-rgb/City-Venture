@@ -201,7 +201,7 @@ def layout(did):
     for p in old:
         y_base = p["y"]
         name = p["sprite"]
-        if p.get("_gen") or name in ("railing", "hedge"):
+        if p.get("_era") or p.get("_gen") or name in ("railing", "hedge"):
             continue  # generated dressing is rebuilt below
         if p.get("_base", y_base + OLD_H.get(p["sprite"], 0)) < 470:
             continue  # north side regenerated above
@@ -227,6 +227,7 @@ def layout(did):
         props += old_town_square()
     if did == "harbor":
         props += harbor_quay()   # rebuilt on every run (no _base): the quay has no hand-placed dressing to keep
+    props += era_props(did)  # regenerated explicitly; retain conditions and far layer
     # river railing / hedges along the park
     if did == "riverside":
         for rx in range(0, width, 64):
@@ -290,6 +291,17 @@ def old_town_square():
         out.append(dict(P("tree_round_b", tx, 626, [28, 84, 8, 6]), _base=626))
     out.append(dict(P("trash_bin", 760, 660, [1, 14, 16, 6]), _base=660))
     return out
+
+
+def era_props(did):
+    """Decorative era additions are rebuilt without borrowing business charging income."""
+    if did == "riverside":
+        return [{"sprite": "port_cranes_far", "x": 1050, "y": 694,
+                 "if": "world_year>=3", "wall": True, "solid": False, "_era": True}]
+    if did in ("shopping_street", "financial"):
+        return [{"sprite": "ev_charger", "x": x, "y": 348,
+                 "if": "world_year>=4", "solid": False, "_era": True} for x in (100, 180)]
+    return []
 
 
 def harbor_quay():

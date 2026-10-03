@@ -1,0 +1,9 @@
+# #27 era streets — full cadence pending
+
+501/501 unit tests in 135.1 seconds; three new tests verify year 2/3/4 prop counts, unchanged collision/navigation, roof offsets in logical facade coordinates and live era refresh preserving feet/facing. Short Chinese era tour: 46 steps / 20 screenshots / 0 failures in 82.2 seconds. Uses World.set_year to show all three districts in years 2, 3, 4, plus Riverside far port. QA camera zoom 0.7 shows the full tall bank roof; riverside far-port shots use default zoom. Save/reload checks cash/time/location; catalog missing 0. Raw English audit finds only beta branding.
+
+Year two: no era additions. Year three: one distant crane sprite in Riverside's background layer beyond walkable river rail, non-solid. Year four: four roof arrays (Bloom Coffee, Threadline, Lantern Bistro, Nexus Bank), two public decorative EV chargers each in Shopping Street and Financial, and one translated headline. Decorative charging is separate from player-built Energy sites and books no revenue. No art files or Session B/C functionality changed.
+
+Self-review fixed roof heights against actual transparent margins/rooflines (the first Threadline panels floated), kept roof/ground decoration non-solid, added live outside-era refresh, and widened QA framing so the tall bank roof is visible. gen_districts preservation was verified by regenerating all three districts in isolated temporary data: 3/3 era lists and 4/4 named roof entries survive. Building and filler roofs share the optional roof_props path. JPG evidence below 20 MB.
+
+i18n 5247 translated/missing 0; wiki_check OK (3830 assets/302 IDs); beta_audit zero hits. Final whole-game Chinese rendered walkthrough is running as ticket nine's cadence gate (cv27-cadence-full); no full pass is claimed, and #96 must wait for this self-review gate. Inherited performance/device gaps remain recorded.

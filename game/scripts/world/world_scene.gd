@@ -173,6 +173,7 @@ func add_prop(p: Dictionary, parent: Node = null) -> Node2D:
 		return null
 	var tex := Art.tex(key)
 	var holder := Node2D.new()
+	holder.set_meta("prop_sprite", sprite_path)
 	var s := Sprite2D.new()
 	s.texture = tex
 	# Keep placement, sorting and collision in design pixels; only the artwork
