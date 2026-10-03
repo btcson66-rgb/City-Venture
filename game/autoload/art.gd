@@ -17,7 +17,13 @@ const C_RED := Color8(234, 112, 92)
 const C_GOLD := Color8(226, 180, 82)
 const C_PURPLE := Color8(170, 130, 214)
 
+const LARGE_CACHE_LIMIT := 8
+const LARGE_TEXTURE_GROUPS := ["backdrops", "cards", "events", "city_map", "world_map"]
+
 var _cache := {}
+# Dictionary insertion order is least to most recently used. Erasing releases our reference;
+# live scenes may keep their own texture until they leave the tree.
+var _large_cache := {}
 var _absent := {}
 var font_title: FontFile
 var font_body: FontFile
@@ -28,22 +34,40 @@ func _ready() -> void:
 	font_body = load("res://assets/fonts/Inter.ttf")
 
 
+func _is_large_texture(path: String) -> bool:
+	return path.trim_prefix("world_detail/").get_slice("/", 0) in LARGE_TEXTURE_GROUPS
+
+
 func tex(path: String) -> Texture2D:
-	if _cache.has(path):
-		return _cache[path]
+	var cache: Dictionary = _large_cache if _is_large_texture(path) else _cache
+	if cache.has(path):
+		var cached: Texture2D = cache[path]
+		if _is_large_texture(path):
+			cache.erase(path)
+			cache[path] = cached
+		return cached
 	var full := "res://assets/" + path + ".png"
-	# Customisation keeps stable logical keys (also used by pose probes and saved appearances).
-	# Native and detail layers share geometry; prefer their direct 4x rendering when present.
-	if (path.begins_with("characters/") or path.begins_with("portraits/")) and not path.get_file().begins_with("npc_"):
-		var detail := "res://assets/world_detail/" + path + ".png"
-		if ResourceLoader.exists(detail):
-			full = detail
 	var t: Texture2D = null
-	if ResourceLoader.exists(full):
+	var detail := "res://assets/world_detail/" + path + ".png"
+	if not path.begins_with("world_detail/") and ResourceLoader.exists(detail):
+		var source: Texture2D = load(detail)
+		var native: Texture2D = load(full) if ResourceLoader.exists(full) else null
+		var logical := Vector2i(native.get_size()) if native != null else Vector2i(source.get_size() / 4.0)
+		# Keep every caller's geometry (including atlas regions and nine-slice source margins) in
+		# native pixels. Size override changes UV coordinates, not the high-resolution image data.
+		var image_texture := ImageTexture.create_from_image(source.get_image())
+		image_texture.set_size_override(logical)
+		image_texture.set_meta("detail_path", detail)
+		t = image_texture
+	elif ResourceLoader.exists(full):
 		t = load(full)
 	else:
 		push_warning("Art: missing texture " + full)
-	_cache[path] = t
+	if t == null and _is_large_texture(path):
+		return null   # a missing large texture must not take a slot and push a real one out of the LRU
+	cache[path] = t
+	if _is_large_texture(path) and cache.size() > LARGE_CACHE_LIMIT:
+		cache.erase(cache.keys()[0])
 	return t
 
 
@@ -51,11 +75,13 @@ func tex(path: String) -> Texture2D:
 ## (logos, chapter cards, poses, NPC sheets...) shows up as soon as the file is committed; until then callers
 ## keep their current look.
 func has_tex(path: String) -> bool:
-	if _cache.has(path):
-		return _cache[path] != null
+	var cache: Dictionary = _large_cache if _is_large_texture(path) else _cache
+	if cache.has(path):
+		return cache[path] != null
 	if _absent.has(path):
 		return false
-	var ok := ResourceLoader.exists("res://assets/" + path + ".png")
+	var ok := ResourceLoader.exists("res://assets/" + path + ".png") or (
+		not path.begins_with("world_detail/") and ResourceLoader.exists("res://assets/world_detail/" + path + ".png"))
 	if not ok:
 		_absent[path] = true   # characters spawn all day; don't hit the filesystem for the same missing pose again
 	return ok

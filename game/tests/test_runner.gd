@@ -43,7 +43,7 @@ func _run() -> void:
 			current_failures = []
 			inst.set("runner", self)
 			var t0 := Time.get_ticks_msec()
-			inst.call(name)
+			await inst.call(name)
 			var dt := Time.get_ticks_msec() - t0
 			results.append({"suite": path.get_file().get_basename(), "name": name, "ok": current_failures.is_empty(),
 				"failures": current_failures.duplicate(), "ms": dt})

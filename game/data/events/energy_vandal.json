@@ -1,0 +1,50 @@
+{
+ "id": "energy_vandal",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:energy_active",
+   "flag:energy_chargers"
+  ],
+  "chance": 0.015,
+  "cooldown_days": 25,
+  "earliest_day": 4
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "sunny_adeyemi",
+  "title": "Charger vandalism",
+  "icon": "warning",
+  "lines": [
+   "Someone damaged a charging station. Repair it quickly, or pay more to harden it with cameras and shields."
+  ]
+ },
+ "choices": [
+  {
+   "id": "repair",
+   "label": "Repair the damage now",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "energy",
+     "kind": "vandal_repair"
+    }
+   ],
+   "outcome": "The station is back in three days."
+  },
+  {
+   "id": "secure",
+   "label": "Repair and add cameras",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "energy",
+     "kind": "vandal_secure"
+    }
+   ],
+   "outcome": "Costs more but cuts outage risk for two months."
+  }
+ ]
+}

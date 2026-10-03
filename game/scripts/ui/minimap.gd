@@ -42,6 +42,8 @@ func _draw() -> void:
 		if Rect2(Vector2.ZERO, size).has_point(p):
 			draw_rect(Rect2(p - Vector2(2, 1), Vector2(4, 2)), Color8(220, 220, 230))
 	for poi in ws.poi:
+		if poi.has("building") and not BuildingInfo.building_available(str(poi["building"])):
+			continue
 		var p2: Vector2 = (poi["pos"] - origin) * SCALE
 		p2 = p2.clamp(Vector2(4, 4), size - Vector2(4, 4))
 		var tex := Art.icon(str(poi["icon"]))

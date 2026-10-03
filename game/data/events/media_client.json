@@ -1,0 +1,51 @@
+{
+ "id": "media_client",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:media_active"
+  ],
+  "chance": 0.012,
+  "cooldown_days": 21,
+  "earliest_day": 4
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "imani_cole",
+  "title": "Client switches agencies",
+  "icon": "warning",
+  "lines": [
+   "A major client is thinking of leaving. Let them go and refund the unused advance, or offer a discount to keep the campaign."
+  ]
+ },
+ "choices": [
+  {
+   "id": "respond",
+   "label": "Let them go and refund the advance",
+   "detail": "The campaign stops. The unused advance is refunded and your reputation takes a hit.",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "media",
+     "kind": "client"
+    }
+   ],
+   "outcome": "The client left. The remaining media plan was cancelled and the unused advance refunded."
+  },
+  {
+   "id": "keep",
+   "label": "Offer a retention discount",
+   "detail": "Pay $1,500 to keep the campaign running.",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "media",
+     "kind": "client_keep"
+    }
+   ],
+   "outcome": "The client stayed after the discount. The campaign carries on."
+  }
+ ]
+}

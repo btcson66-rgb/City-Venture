@@ -1,0 +1,198 @@
+{
+ "id": "kessler_precision",
+ "name": "Kessler Precision",
+ "category": "Factory",
+ "district": "industrial",
+ "type": "warehouse",
+ "hours": {
+  "open": "00:00",
+  "close": "24:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "kessler_precision",
+  "fallback": "brick_shops",
+  "x": 950,
+  "sign": "KESSLER"
+ },
+ "interior": {
+  "size": [
+   36,
+   18
+  ],
+  "floor": "concrete",
+  "wall": "concrete_wall",
+  "ambient": "warehouse",
+  "props": [
+   {
+    "sprite": "cork_board",
+    "x": 20,
+    "y": 8,
+    "wall": true
+   },
+   {
+    "sprite": "window_wide_day",
+    "x": 110,
+    "y": 0,
+    "wall": true,
+    "night": "window_wide_night"
+   },
+   {
+    "sprite": "window_wide_day",
+    "x": 250,
+    "y": 0,
+    "wall": true,
+    "night": "window_wide_night"
+   },
+   {
+    "sprite": "loading_dock_door",
+    "x": 388,
+    "y": 0,
+    "wall": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 100,
+    "y": 0,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 260,
+    "y": 0,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "hanging_light",
+    "x": 420,
+    "y": 0,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "desk_laptop",
+    "x": 20,
+    "y": 66
+   },
+   {
+    "sprite": "office_chair",
+    "x": 34,
+    "y": 108,
+    "solid": false
+   },
+   {
+    "sprite": "filing_cabinet",
+    "x": 76,
+    "y": 58
+   },
+   {
+    "sprite": "water_cooler",
+    "x": 8,
+    "y": 172
+   },
+   {
+    "sprite": "pallet_rack",
+    "fallback": "parcel_shelf",
+    "x": 104,
+    "y": 56
+   },
+   {
+    "sprite": "pallet_rack",
+    "fallback": "parcel_shelf",
+    "x": 176,
+    "y": 56
+   },
+   {
+    "sprite": "pallet_rack",
+    "fallback": "parcel_shelf",
+    "x": 248,
+    "y": 56
+   },
+   {
+    "sprite": "pallet_rack",
+    "fallback": "parcel_shelf",
+    "x": 104,
+    "y": 144
+   },
+   {
+    "sprite": "pallet_rack",
+    "fallback": "parcel_shelf",
+    "x": 176,
+    "y": 144
+   },
+   {
+    "sprite": "pallet_rack",
+    "fallback": "parcel_shelf",
+    "x": 248,
+    "y": 144
+   },
+   {
+    "sprite": "packing_bench_large",
+    "fallback": "packing_table",
+    "x": 440,
+    "y": 140
+   },
+   {
+    "sprite": "forklift_parked",
+    "x": 380,
+    "y": 66
+   },
+   {
+    "sprite": "box",
+    "x": 420,
+    "y": 82,
+    "solid": false
+   },
+   {
+    "sprite": "box",
+    "x": 436,
+    "y": 86,
+    "solid": false
+   },
+   {
+    "sprite": "box",
+    "x": 428,
+    "y": 74,
+    "solid": false
+   },
+   {
+    "sprite": "box",
+    "x": 520,
+    "y": 70,
+    "solid": false
+   },
+   {
+    "sprite": "box",
+    "x": 536,
+    "y": 74,
+    "solid": false
+   },
+   {
+    "sprite": "plant_big",
+    "x": 540,
+    "y": 226
+   }
+  ],
+  "interactables": [
+   {
+    "id": "kessler_precision_desk",
+    "label": "Open Line Planner",
+    "icon": "company",
+    "action": "manufacturing_open",
+    "at": [
+     46,
+     112
+    ]
+   }
+  ],
+  "npc_spots": {
+   "desk": [
+    94,
+    114
+   ]
+  },
+  "staff_spots": {}
+ }
+}

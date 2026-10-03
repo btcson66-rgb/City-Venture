@@ -1,0 +1,50 @@
+{
+ "id": "energy_typhoon",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:energy_active",
+   "stat:energy_installs>=1"
+  ],
+  "chance": 0.008,
+  "cooldown_days": 40,
+  "earliest_day": 4
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "rafael_costa",
+  "title": "Typhoon damage claims",
+  "icon": "warning",
+  "lines": [
+   "A typhoon tore panels off roofs you installed. Honour every claim at once, or inspect and triage the cheapest repairs."
+  ]
+ },
+ "choices": [
+  {
+   "id": "honour",
+   "label": "Honour every claim and repair now",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "energy",
+     "kind": "typhoon_honour"
+    }
+   ],
+   "outcome": "Repairs cost real money but clients trust you."
+  },
+  {
+   "id": "triage",
+   "label": "Inspect first and repair only the worst",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "energy",
+     "kind": "typhoon_triage"
+    }
+   ],
+   "outcome": "Repairs cost less, but clients remember the wait."
+  }
+ ]
+}

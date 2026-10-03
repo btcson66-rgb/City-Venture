@@ -1,0 +1,40 @@
+{
+ "id": "manufacturing_recall",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:manufacturing_active"
+  ],
+  "chance": 0.025,
+  "cooldown_days": 28,
+  "once": false,
+  "earliest_day": 4
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "lena_park",
+  "title": "Factory quality recall",
+  "icon": "warning",
+  "lines": [
+   "Refund 20% of a shipped batch, pay a quality penalty and lose credit."
+  ]
+ },
+ "choices": [
+  {
+   "id": "recall",
+   "label": "Refund the affected batch",
+   "detail": "Refund 20% of a shipped batch, pay a quality penalty and lose credit.",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "manufacturing",
+     "kind": "recall",
+     "retain": true
+    }
+   ],
+   "outcome": "The factory ledger and schedule have been updated."
+  }
+ ]
+}
