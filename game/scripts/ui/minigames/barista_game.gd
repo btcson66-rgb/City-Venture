@@ -181,19 +181,20 @@ func _layout() -> void:
 	for table in tables:
 		left.add_child(UIK.label(I18n.t("Table %d: %s") % [int(table), I18n.t("Clean" if tables[table] == "" else ("Dirty — clean before seating" if tables[table] == "dirty" else "Occupied"))], 8, Art.C_MUTED))
 		if tables[table] == "dirty":
-			var cleanup := UIK.button(I18n.t("Clean table %d") % int(table), _clean_dirty_table.bind(int(table)))
+			var cleanup := UIK.button(I18n.t("Clean table %d") % int(table), _clean_dirty_table.bind(int(table)), "primary" if want["station"] == "order" and int(want["destination"]) == int(table) else "")
 			cleanup.name = "CleanDirtyTable_%d" % int(table)
 			left.add_child(cleanup)
 	# the machine
 	var right := UIK.vbox(5)
 	h.add_child(right)
-	var confirm := UIK.button("Confirm order", _confirm, "primary" if want["station"] == "order" else "")
+	var table_ready: bool = int(want["destination"]) == 0 or tables[int(want["destination"])] == ""
+	var confirm := UIK.button("Confirm order", _confirm, "primary" if want["station"] == "order" and table_ready else "")
 	confirm.name = "ConfirmOrder"
-	confirm.disabled = want["station"] != "order"
+	confirm.disabled = want["station"] != "order" or not table_ready
 	right.add_child(confirm)
 	var recommend := UIK.button("Recommend the selected drink", _confirm.bind(true))
 	recommend.name = "RecommendDrink"
-	recommend.disabled = want["station"] != "order"
+	recommend.disabled = want["station"] != "order" or not table_ready
 	right.add_child(recommend)
 	right.add_child(choice_row("Cup", SIZES, got["size"], _pick.bind("size"), "Size"))
 	right.add_child(choice_row("Drink", DRINKS.slice(0, 3), got["drink"], _pick.bind("drink"), "Drink"))

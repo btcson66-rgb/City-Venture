@@ -150,6 +150,20 @@ func test_dirty_table_can_be_cleaned_from_another_ticket() -> void:
 	game._serve()
 	game._deliver(1)
 	game._select_customer(0)
+	# A waiting ticket for a dirty table must route to cleanup, not an unusable confirmation.
+	game.want["destination"] = 1
+	game._layout()
+	var confirm := game.stage.find_child("ConfirmOrder", true, false) as Button
+	runner.check(confirm.disabled, "dirty table blocks confirmation button")
+	var primaries := 0
+	var primary_name := ""
+	for button in game.stage.find_children("*", "Button", true, false):
+		var box = button.get_theme_stylebox("normal")
+		if box is StyleBoxTexture and box.texture == Art.tex("ui/button_primary"):
+			primaries += 1
+			primary_name = button.name
+	runner.eq(primaries, 1, "one useful primary while table dirty")
+	runner.eq(primary_name, "CleanDirtyTable_1", "cleanup is the next sensible step")
 	game._clean_dirty_table(1)
 	runner.eq(game.tables[1], "", "another guest can release dirty table")
 	runner.eq(game.completed_stations["clean"], 1, "cleaned once")
