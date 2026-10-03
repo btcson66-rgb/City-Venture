@@ -134,3 +134,21 @@ func test_new_shop_destinations_hours_and_preserved_story_look() -> void:
 	runner.check(lighting["action"]=="look" and not lighting["params"]["alt"].is_empty(),"chapter five lighting alt preserved")
 	GameState.data["clock"]["minutes"]=Clock.at_day_time(0,23*60)
 	runner.check(not SceneRouter.building_open("crestline_flagship")["open"],"shop hours still enforced")
+
+
+func test_queued_network_opportunity_keeps_original_account_after_closure() -> void:
+	Company.register("Fitness founder", "ecommerce", "22 Founders Lane")
+	Company.open_business_account(1000.0)
+	var original := GameState.business_entity()
+	var inst := EventEngine.trigger("fitness_press", {"entity":original,"product_id":"water_bottle"})
+	var cash := Ledger.cash("player")
+	GameState.data["entities"][original]["closed"]=Clock.now()
+	GameState.data["company"]=""
+	GameState.set_flag("business_account_opened",false)
+	var contracts: int = GameState.data["contracts"].size()
+	runner.check(not EventEngine.choose(inst["iid"],"accept")["ok"],"old report cannot charge personal seller after closure")
+	runner.eq(Ledger.cash("player"),cash,"closure rejection never charges new account")
+	runner.check(EventEngine.choose(inst["iid"],"decline")["ok"],"stale opportunity remains declinable")
+	runner.check(not ShopLife.network_choice("order",{"entity":original})["ok"],"closed company's queued order cannot transfer")
+	runner.eq(GameState.data["contracts"].size(),contracts,"closure rejection creates no contract")
+	runner.check(Ledger.check_balanced(),"closure rejection preserves books")

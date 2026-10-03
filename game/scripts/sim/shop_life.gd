@@ -102,14 +102,16 @@ static func network() -> String:
 	if candidates.is_empty(): return ""
 	var id: String = GameState.pick(candidates)
 	S()["network"][id]=Clock.now()+int(cfg()["network_cooldown_days"])*Clock.DAY
-	EventEngine.trigger(id,{"product_id":str(products()[0]) if not products().is_empty() else "water_bottle", "press_fee":Fmt.money(float(cfg()["press_cost"])), "press_days":int(cfg()["press_days"]), "trial_days":int(cfg()["carrier_days"]), "trial_discount":Fmt.pct(1.0-float(cfg()["carrier_discount"]))})
+	EventEngine.trigger(id,{"entity":GameState.business_entity(), "product_id":str(products()[0]) if not products().is_empty() else "water_bottle", "press_fee":Fmt.money(float(cfg()["press_cost"])), "press_days":int(cfg()["press_days"]), "trial_days":int(cfg()["carrier_days"]), "trial_discount":Fmt.pct(1.0-float(cfg()["carrier_discount"]))})
 	return id
 
 static func network_choice(kind: String, ctx: Dictionary) -> Dictionary:
+	# Persist the originating account so a queued opportunity never transfers after closure/restart.
+	var entity := str(ctx.get("entity",GameState.business_entity()))
+	if entity!=GameState.business_entity() or GameState.data["entities"].get(entity,{}).has("closed"):
+		return error("Company closed — decline this opportunity.")
 	if kind=="carrier": S()["shipping_until"]=Clock.now()+int(cfg()["carrier_days"])*Clock.DAY
 	elif kind=="order":
-		var entity: Dictionary=GameState.data["entities"].get(GameState.business_entity(),{})
-		if entity.has("closed"): return error("Company closed — decline this opportunity.")
 		Contracts.create_offer({"buyer":"harbor_point_fitness","product":"water_bottle","qty":cfg()["contract_qty"],"unit_price":snappedf(float(DataDB.product("water_bottle")["ref_price"])*float(cfg()["contract_price_factor"]),0.01),"delivery_days":7,"payment_terms_days":30,"tag":"fitness_order"})
 	elif kind=="press":
 		var cost := float(cfg()["press_cost"])
