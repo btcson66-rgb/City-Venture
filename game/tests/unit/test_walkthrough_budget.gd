@@ -46,3 +46,45 @@ func test_retention_rejects_wage_spiral_expired_other_or_closed_company() -> voi
 	GameState.data["entities"][company]["closed"] = Clock.now()
 	runner.check(not Walkthrough.retention_affordable("E1"), "closed company cannot retain")
 	runner.check(not Walkthrough.retention_affordable("unknown"), "missing employee rejected")
+
+
+class MissedCloseInput:
+	extends RefCounted
+	var runner
+	var popup_handler: Callable
+	var clicks := 0
+	var cancels := 0
+	func _init(r): runner = r
+	func click(_control):
+		clicks += 1
+		await runner.get_tree().process_frame
+		return false  # pointer click lost during relayout
+	func key_action(_action):
+		cancels += 1
+		var ev := InputEventAction.new()
+		ev.action = "pause"
+		ev.pressed = true
+		Input.parse_input_event(ev)
+		await runner.get_tree().process_frame
+		ev = InputEventAction.new()
+		ev.action = "pause"
+		ev.pressed = false
+		Input.parse_input_event(ev)
+	func wait(_seconds):
+		await runner.get_tree().create_timer(0.02).timeout
+	func log_line(_line): pass
+	func fail(msg): runner.check(false, msg)
+
+func test_missed_packing_close_uses_real_cancel_before_movement() -> void:
+	Help.auto = false
+	var panel := PackShipModal.new("riverside_studio")
+	UIRoot.open_modal(panel)
+	await runner.get_tree().process_frame
+	var input := MissedCloseInput.new(runner)
+	await Walkthrough.new(input).close_modal()
+	await runner.get_tree().process_frame
+	runner.eq(input.clicks, 1, "first pointer attempt was consumed")
+	runner.eq(input.cancels, 1, "real cancel action dismisses the remaining panel")
+	runner.check(not (UIRoot.top_modal() is PackShipModal), "movement is no longer blocked")
+	UIRoot.close_all()
+	Help.auto = true

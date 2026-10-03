@@ -16,10 +16,16 @@ func _init(b) -> void:
 
 
 func run() -> void:
+	if _arg("resume") == "ch9_import":
+		await _resume_ch9_import()
+		return
 	if _arg("resume") == "ch6_close":
 		await _resume_ch6_close()
 		return
 	await _new_game()
+	if _arg("from") == "modal_close":
+		await _modal_close_fixture()
+		return
 	if _arg("from") == "era_props":
 		await _era_props_fixture()
 		await _save_load()
@@ -133,12 +139,51 @@ func _resume_ch6_close() -> void:
 func _remaining_story() -> void:
 	await _shop_research()
 	await _chapters_7_to_9()
+	await _after_ch9()
+
+
+func _after_ch9() -> void:
 	await _old_town_cafe()
 	await _harbor_logistics()
 	await _fitness_visit()
 	await _chapters_10_to_12()
 	await _summary()
 	await _industry_fixtures()
+
+
+## Actual pre-failure morning save: preserve prior profitable chapters, invoice and RNG.
+func _resume_ch9_import() -> void:
+	bot.step("Resume genuine chapter-nine import checkpoint")
+	if not SaveSystem.load_data(1):
+		bot.expect(false, "chapter-nine checkpoint loads through normal save validation")
+		return
+	var st := StoryEngine.St()
+	var valid := str(st.get("chapter", "")) == "ch9_clearing_crisis" and GameState.flag("met_lina")
+	for chapter in ["ch1_arrival", "ch2_first_customer", "ch3_open_for_business", "ch4_growing_pains", "ch5_big_contract", "ch6_cash_is_oxygen", "ch7_supply_shock", "ch8_green_shift"]:
+		valid = valid and chapter in st.get("chapters_done", [])
+	valid = valid and not GameState.flag("ch7_survived_losses") and GameState.stat("import_orders") >= 1
+	bot.expect(valid, "checkpoint preserves genuine profitable chapters 1–8 and paid import")
+	if not valid: return
+	SceneRouter.restore_location()
+	await wait_world()
+	await popups()
+	await _chapter9_close()
+	await _after_ch9()
+
+
+func _modal_close_fixture() -> void:
+	bot.step("Packing modal dismissal releases movement")
+	await bot.use_action("pack_orders")
+	await bot.wait(0.4)
+	bot.expect(UIRoot.top_modal() is PackShipModal, "real packing screen opened")
+	await bot.shot("packing_close_before")
+	await close_modal()
+	bot.expect(not (UIRoot.top_modal() is PackShipModal), "packing screen really closed")
+	await bot.use_action("sleep")
+	bot.expect(UIRoot.top_modal() is SleepModal, "can walk to and use bed after dismissal")
+	await bot.shot("packing_close_bed_reachable")
+	await close_modal()
+	await _save_load()
 
 
 
@@ -548,14 +593,23 @@ func dialogue() -> void:
 
 
 func close_modal() -> void:
-	var m = UIRoot.top_modal()
-	if m != null:
+	# Verify dismissal: a layout handoff may consume the pointer click.
+	for attempt in range(3):
+		var m = UIRoot.top_modal()
+		if m == null: return
+		if m is DecisionModal or m is MonthCloseModal or m is InfoModal or m is PoachModal:
+			await popups()
+			m = UIRoot.top_modal()
+			if m == null: return
 		var b: Button = m.find_child("Close", true, false)
-		if b != null:
+		if attempt == 0 and b != null:
 			await bot.click(b)
 		else:
 			await bot.key_action("pause")
-	await bot.wait(0.3)
+		await bot.wait(0.3)
+		if not is_instance_valid(m) or m.is_queued_for_deletion(): return
+		bot.log_line("  close input left panel open; retry with cancel")
+	bot.fail("modal did not close after three real input attempts")
 
 
 func enter_building(bid: String) -> bool:
@@ -1426,6 +1480,10 @@ func _chapters_7_to_9() -> void:
 		await bot.wait(0.4)
 	await close_modal()
 	await close_modal()
+	await _chapter9_close()
+
+
+func _chapter9_close() -> void:
 	await pass_time_at_home(func(): return "ch9_clearing_crisis" in StoryEngine.St()["chapters_done"], 30, true)   # the import takes weeks
 	bot.expect("ch9_clearing_crisis" in StoryEngine.St()["chapters_done"], "Chapter 9 complete: the import got through")
 	bot.expect(Ledger.check_balanced(), "ledger balanced after chapters 7–9")
