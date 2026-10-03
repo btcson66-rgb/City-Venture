@@ -59,6 +59,8 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 	if Industries.run_action(action, params, source):
 		return
 	match action:
+		"clinic", "health_insurance":
+			UIRoot.open_modal(TrafficModal.new())
 		"cafe_counter":
 			_cafe_counter()
 		"open_company_os":
@@ -196,6 +198,9 @@ static func _look(params: Dictionary) -> void:
 
 
 static func _talk(npc_id: String) -> void:
+	if npc_id == "dr_lin":
+		run("clinic", {})
+		return
 	var def := DataDB.npc(npc_id)
 	for d in def.get("dialogue", []):
 		if Cond.all(d.get("when", [])):

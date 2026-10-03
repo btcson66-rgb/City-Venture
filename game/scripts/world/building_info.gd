@@ -6,7 +6,7 @@ const ACTION_ICONS := {
 	"energy_open": "company", "energy_subsidy": "civic",
 	"buy_item": "shop", "clothing_shop": "shop", "cafe_counter": "coffee",
 	"work_shift": "tasks", "open_company_os": "laptop", "cowork_desk": "laptop",
-	"sleep": "sleep", "read_news": "info", "bank_counter": "bank", "atm": "bank",
+	"sleep": "sleep", "read_news": "info", "clinic": "civic", "health_insurance": "bank", "bank_counter": "bank", "atm": "bank",
 	"loans_info": "bank", "register_company": "civic", "permits_info": "civic", "take_number": "civic",
 	"pack_orders": "parcel", "dropoff_parcels": "parcel", "change_outfit": "shirt",
 	"lease_property": "home", "whiteboard": "objective", "look": "info", "talk": "people",
@@ -194,7 +194,7 @@ static func guide_tags(id: String) -> String:
 			"buy_item", "cafe_counter": tag = I18n.t("Eat")
 			"clothing_shop": tag = I18n.t("Shop")
 			"work_shift", "open_company_os", "cowork_desk", "business_board", "pack_orders": tag = I18n.t("Work")
-			"bank_counter", "atm", "loans_info", "register_company", "permits_info", "take_number", "dropoff_parcels": tag = I18n.t("Services")
+			"clinic", "health_insurance", "bank_counter", "atm", "loans_info", "register_company", "permits_info", "take_number", "dropoff_parcels": tag = I18n.t("Services")
 			"lease_property": tag = I18n.t("Property")
 			"sleep": tag = I18n.t("Housing")
 		if tag != "" and not tag in tags:

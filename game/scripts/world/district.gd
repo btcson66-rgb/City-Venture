@@ -39,6 +39,11 @@ func build(district_id: String) -> void:
 		if g.has("fallback") and not has_tile(tile):
 			tile = str(g["fallback"])   # a ground tile still being drawn (Old Town cobbles, Harbor quay)
 		paint(tile, g["rect"], int(g.get("step", 1)))
+	for ground in def.get("ground", []):
+		if ground["type"] == "crosswalk_h":
+			var signal_node := CrossingSignal.new()
+			signal_node.position = Vector2(float(ground["rect"][0])*16-8, float(ground["rect"][1])*16)
+			add_child(signal_node)
 	_build_sky()
 	_add_water_sparkles()
 	# north edge: building fronts / back of the block are not walkable

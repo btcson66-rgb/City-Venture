@@ -15,20 +15,20 @@ extends RefCounted
 
 const EXPENSE_CATEGORIES := ["advertising", "shipping", "restocking", "platform_fees", "packaging", "photography", "registration", "compliance",
 	"rent_office", "coworking", "inventory_writeoff", "bank_fees", "late_fees", "rent_home", "living", "coffee", "transport",
-	"clothing", "dining", "penalties", "payroll", "recruiting", "interest", "servers", "rent_shop", "rent_warehouse", "fitout",
+	"clothing", "dining", "medical", "personal_health", "penalties", "payroll", "recruiting", "interest", "servers", "rent_shop", "rent_warehouse", "fitout",
 	"fuel", "vehicle", "insurance", "depreciation", "maintenance", "asset_rent", "other"]
 const OPEX_BUSINESS := ["advertising", "shipping", "restocking", "platform_fees", "packaging", "photography", "registration", "compliance",
 	"rent_office", "coworking", "inventory_writeoff", "bank_fees", "late_fees", "penalties", "payroll", "recruiting", "interest",
 	"servers", "rent_shop", "rent_warehouse", "fitout", "fuel", "vehicle", "insurance", "depreciation", "maintenance", "asset_rent", "other"]
 ## Rent on business premises, whatever the kind (office, shop, warehouse): one line on the month-end report.
 const PREMISES_RENT := ["rent_office", "rent_shop", "rent_warehouse"]
-const PERSONAL := ["rent_home", "living", "coffee", "transport", "clothing", "dining"]
+const PERSONAL := ["rent_home", "living", "coffee", "transport", "clothing", "dining", "medical", "personal_health"]
 ## How each expense category reads on a report (translated through the catalogue).
 const CATEGORY_NAMES := {"advertising": "Advertising", "shipping": "Shipping", "restocking": "Return & cancellation fees", "platform_fees": "Platform fees",
 	"packaging": "Packaging", "photography": "Photography", "registration": "Registration fees", "compliance": "Compliance", "rent_office": "Office rent",
 	"coworking": "Co-working", "inventory_writeoff": "Inventory write-off", "bank_fees": "Bank fees", "late_fees": "Late fees",
 	"rent_home": "Home rent", "living": "Living costs", "coffee": "Coffee", "transport": "Transport", "clothing": "Clothing",
-	"dining": "Dining", "penalties": "Penalties", "payroll": "Payroll", "recruiting": "Recruiting", "interest": "Interest",
+	"personal_health": "Personal health insurance", "medical": "Medical care", "dining": "Dining", "penalties": "Penalties", "payroll": "Payroll", "recruiting": "Recruiting", "interest": "Interest",
 	"servers": "Servers", "rent_shop": "Shop rent", "rent_warehouse": "Warehouse rent", "fitout": "Fit-out & equipment",
 	"fuel": "Fuel", "vehicle": "Vehicles & upkeep", "insurance": "Insurance", "depreciation": "Depreciation", "maintenance": "Maintenance", "asset_rent": "Asset rent", "other": "Other"}
 

@@ -30,11 +30,16 @@ var _delta_t := -1
 var _delta := 0.0
 var welcome: BuildingWelcome
 var here_button: Button
+var safety_button: Button
 
 
 func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	safety_button = UIK.button("Use crosswalks for safer crossing", func(): UIRoot.open_modal(TrafficModal.new("accident")))
+	safety_button.position = Vector2(220,330)
+	safety_button.custom_minimum_size = Vector2(240,20)
+	add_child(safety_button)
 	# time card
 	var tp := UIK.panel("ui/panel_glass", 5)
 	tp.position = Vector2(6, 6)
@@ -226,6 +231,10 @@ func set_prompt(text: String) -> void:
 
 
 func _process(_d: float) -> void:
+	if GameState.has_game():
+		var ws := SceneRouter.world_scene()
+		safety_button.visible = ws != null and ws.kind == "district"
+		safety_button.text = I18n.t("Injury: %s") % TrafficSafety.severity_label(str(TrafficSafety.S()["injury"])) if TrafficSafety.S()["injury"] != "none" else I18n.t("Use crosswalks for safer crossing")
 	if not visible or not GameState.has_game():
 		return
 	time_label.text = Clock.fmt_time()

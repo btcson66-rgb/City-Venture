@@ -1,0 +1,134 @@
+{
+ "id": "civic_clinic",
+ "name": "Civic Clinic & Pharmacy",
+ "district": "civic_center",
+ "type": "civic",
+ "hours": {
+  "open": "00:00",
+  "close": "24:00",
+  "days": "mon,tue,wed,thu,fri,sat,sun"
+ },
+ "exterior": {
+  "sprite": "office_slab",
+  "x": 506,
+  "sign": "CIVIC CLINIC"
+ },
+ "interior": {
+  "size": [
+   32,
+   17
+  ],
+  "floor": "marble",
+  "wall": "marble_wall",
+  "ambient": "civic",
+  "props": [
+   {
+    "sprite": "framed_art",
+    "x": 330,
+    "y": 10,
+    "wall": true
+   },
+   {
+    "sprite": "sconce",
+    "x": 296,
+    "y": 14,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "sconce",
+    "x": 200,
+    "y": 14,
+    "wall": true,
+    "glow": true
+   },
+   {
+    "sprite": "window_day",
+    "x": 380,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "window_day",
+    "x": 440,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "civic_counter",
+    "x": 184,
+    "y": 56
+   },
+   {
+    "sprite": "ticket_machine",
+    "x": 140,
+    "y": 62
+   },
+   {
+    "sprite": "info_kiosk",
+    "x": 400,
+    "y": 92
+   },
+   {
+    "sprite": "bench_civic",
+    "x": 90,
+    "y": 170
+   },
+   {
+    "sprite": "bench_civic",
+    "x": 190,
+    "y": 170
+   },
+   {
+    "sprite": "bench_civic",
+    "x": 290,
+    "y": 170
+   },
+   {
+    "sprite": "plant_big",
+    "x": 8,
+    "y": 56
+   },
+   {
+    "sprite": "plant_big",
+    "x": 484,
+    "y": 56
+   },
+   {
+    "sprite": "rug_navy",
+    "x": 224,
+    "y": 200,
+    "floor": true
+   }
+  ],
+  "interactables": [
+   {
+    "id": "doctor",
+    "at": [
+     256,
+     108
+    ],
+    "label": "Doctor — treatment & admission",
+    "action": "clinic"
+   },
+   {
+    "id": "pharmacy",
+    "at": [
+     411,
+     130
+    ],
+    "label": "Pharmacy & health insurance",
+    "action": "health_insurance"
+   }
+  ],
+  "npc_spots": {
+   "doctor": [
+    256,
+    66
+   ]
+  }
+ },
+ "category": "Civic services"
+}

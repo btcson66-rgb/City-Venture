@@ -9,7 +9,7 @@ msgstr ""
 msgid "\n%dxxx"
 msgstr ""
 
-#: scripts/ui/hud.gd:257
+#: scripts/ui/hud.gd:266
 msgid "   ◆ decision"
 msgstr ""
 
@@ -25,7 +25,7 @@ msgstr ""
 msgid "  of which on hold (<2 days)"
 msgstr ""
 
-#: scripts/ui/hud.gd:232
+#: scripts/ui/hud.gd:241
 msgid "  ·  DAY %d"
 msgstr ""
 
@@ -65,7 +65,7 @@ msgstr ""
 msgid " ltd"
 msgstr ""
 
-#: scripts/ui/hud.gd:243
+#: scripts/ui/hud.gd:252
 msgid " today"
 msgstr ""
 
@@ -257,7 +257,7 @@ msgstr ""
 msgid "%d orders"
 msgstr ""
 
-#: scripts/world/actions.gd:287
+#: scripts/world/actions.gd:292
 msgid "%d orders waiting to be packed. I'm on it."
 msgstr ""
 
@@ -437,11 +437,11 @@ msgstr ""
 msgid "%s has room: choose it under \"Deliver to\" in Operations."
 msgstr ""
 
-#: scripts/world/actions.gd:95
+#: scripts/world/actions.gd:97
 msgid "%s is already registered (%s)."
 msgstr ""
 
-#: scripts/world/actions.gd:238
+#: scripts/world/actions.gd:243
 msgid "%s is busy."
 msgstr ""
 
@@ -1145,6 +1145,10 @@ msgstr ""
 msgid "A place to work"
 msgstr ""
 
+#: data/help/glossary.json
+msgid "A policy covers most medical costs only if active before the collision. Unpaid emergency bills remain debts."
+msgstr ""
+
 #: scripts/ui/modals/lease_end_modal.gd:47
 msgid "A premises-dependent business pauses when its lease ends. Finish its jobs first, or settle cancellations. Existing delivered invoices remain collectible."
 msgstr ""
@@ -1381,6 +1385,10 @@ msgstr ""
 msgid "Accept it to start the clock."
 msgstr ""
 
+#: scripts/ui/modals/traffic_modal.gd:54
+msgid "Accept partial settlement"
+msgstr ""
+
 #: data/quests/city_fleet_refresh.json
 msgid "Accept runs in Company OS and plan each route."
 msgstr ""
@@ -1473,6 +1481,10 @@ msgstr ""
 msgid "Accident repair: %s"
 msgstr ""
 
+#: scripts/ui/modals/traffic_modal.gd:47
+msgid "Accident_%d"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Accounts payable"
 msgstr ""
@@ -1519,6 +1531,10 @@ msgstr ""
 
 #: scripts/ui/minigames/pack_game.gd:138
 msgid "Add bubble wrap"
+msgstr ""
+
+#: scripts/ui/modals/traffic_modal.gd:40
+msgid "Add cash before buying medicine, or wait for natural recovery."
 msgstr ""
 
 #: scripts/sim/automotive.gd:385
@@ -1581,7 +1597,7 @@ msgstr ""
 msgid "After-sales service ticket"
 msgstr ""
 
-#: scripts/ui/hud.gd:235
+#: scripts/ui/hud.gd:244
 msgid "Afternoon · Sunny"
 msgstr ""
 
@@ -1661,7 +1677,7 @@ msgstr ""
 msgid "All good? Approve it. Something wrong? Click the wrong field first, then Reject."
 msgstr ""
 
-#: scripts/world/actions.gd:287
+#: scripts/world/actions.gd:292
 msgid "All packed. The courier comes at 16:00."
 msgstr ""
 
@@ -1725,12 +1741,20 @@ msgstr ""
 msgid "Ambitious: works harder, expects a raise within two months."
 msgstr ""
 
+#: scripts/ui/modals/traffic_modal.gd:30
+msgid "Ambulance"
+msgstr ""
+
 #: scripts/ui/minigames/barista_game.gd:7
 msgid "Americano"
 msgstr ""
 
 #: data/help/glossary.json
 msgid "An RFQ specifies units, deadline, price range and maximum defects."
+msgstr ""
+
+#: scripts/ui/modals/traffic_modal.gd:29
+msgid "An ambulance can take you to Civic Clinic. Admission takes one to three days; your business keeps running. Arrange staff before crossing roads."
 msgstr ""
 
 #: data/help/glossary.json
@@ -2901,7 +2925,7 @@ msgstr ""
 msgid "Businesses: choose from the businesses available now, or find a part-time job."
 msgstr ""
 
-#: scripts/world/actions.gd:280
+#: scripts/world/actions.gd:285
 msgid "Busy day. All good."
 msgstr ""
 
@@ -2939,6 +2963,10 @@ msgstr ""
 
 #: scripts/sim/internal_supply.gd:148
 msgid "Buy a van first."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Buy coverage before taking risks. A new policy cannot reimburse an earlier accident; cancelling renewal does not refund the current premium."
 msgstr ""
 
 #: data/story/chapters.json
@@ -2995,6 +3023,10 @@ msgstr ""
 
 #: scripts/ui/media_ui.gd:177
 msgid "BuyCampusRadio"
+msgstr ""
+
+#: scripts/ui/modals/traffic_modal.gd:43
+msgid "BuyHealthPolicy"
 msgstr ""
 
 #: scripts/ui/manufacturing_ui.gd:93
@@ -3103,6 +3135,10 @@ msgstr ""
 
 #: data/districts/shopping_street.json
 msgid "CIVIC CENTER →"
+msgstr ""
+
+#: data/buildings/civic_clinic.json
+msgid "CIVIC CLINIC"
 msgstr ""
 
 #: scripts/sim/energy.gd:391
@@ -3317,7 +3353,7 @@ msgstr ""
 msgid "Can't start a shift now: %s."
 msgstr ""
 
-#: scripts/world/actions.gd:260
+#: scripts/world/actions.gd:265
 msgid "Can't work the counter: %s."
 msgstr ""
 
@@ -3327,6 +3363,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "Cancel a purchase still on the way within the supplier cancellation window (normally 24 hours). The normal fee is 5%; payments that have not cleared return the full principal."
+msgstr ""
+
+#: scripts/ui/modals/traffic_modal.gd:44
+msgid "Cancel automatic renewal"
 msgstr ""
 
 #: scripts/ui/modals/lease_end_modal.gd:51
@@ -3347,6 +3387,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "Cancel within the supplier window while the goods are on the way. Unpaid terms reduce accounts payable; any cancellation fee remains due. Unsettled cross-border payments return the principal, but settlement fees stay paid."
+msgstr ""
+
+#: scripts/ui/modals/traffic_modal.gd:44
+msgid "CancelHealthRenewal"
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:343
@@ -3405,7 +3449,7 @@ msgstr ""
 msgid "Carry them to PostPoint yourself (cheaper, costs your time)"
 msgstr ""
 
-#: scripts/ui/hud.gd:262
+#: scripts/ui/hud.gd:271
 msgid "Carrying %d parcel%s"
 msgstr ""
 
@@ -4053,8 +4097,16 @@ msgstr ""
 msgid "Civic Center"
 msgstr ""
 
-#: data/buildings/city_hall.json
+#: data/buildings/civic_clinic.json
+msgid "Civic Clinic & Pharmacy"
+msgstr ""
+
+#: data/buildings/city_hall.json data/buildings/civic_clinic.json
 msgid "Civic services"
+msgstr ""
+
+#: scripts/ui/modals/traffic_modal.gd:57
+msgid "Claim collection: %s"
 msgstr ""
 
 #: data/buildings/harbor_point_fitness.json
@@ -4257,6 +4309,10 @@ msgstr ""
 msgid "Climate"
 msgstr ""
 
+#: scripts/ui/modals/traffic_modal.gd:7
+msgid "Clinic & health insurance"
+msgstr ""
+
 #: scripts/ui/modals/business_board.gd:31 scripts/ui/modals/city_guide_modal.gd:44 scripts/ui/modals/city_map_modal.gd:142 scripts/ui/modals/clothing_shop_modal.gd:27
 msgid "Close"
 msgstr ""
@@ -4357,7 +4413,7 @@ msgstr ""
 msgid "Coding session — %s"
 msgstr ""
 
-#: data/economy/cafe.json scripts/sim/ledger.gd:30 scripts/world/actions.gd:249
+#: data/economy/cafe.json scripts/sim/ledger.gd:30 scripts/world/actions.gd:254
 msgid "Coffee"
 msgstr ""
 
@@ -4365,11 +4421,11 @@ msgstr ""
 msgid "Coffee machine, printer, Wi-Fi: you fix all three before lunch."
 msgstr ""
 
-#: scripts/world/actions.gd:253
+#: scripts/world/actions.gd:258
 msgid "Coffee — %s."
 msgstr ""
 
-#: scripts/world/actions.gd:153
+#: scripts/world/actions.gd:155
 msgid "Coffee — %s. Tastes like possibility."
 msgstr ""
 
@@ -4387,6 +4443,14 @@ msgstr ""
 
 #: data/story/chapters.json
 msgid "Collect the money Crestline owes you"
+msgstr ""
+
+#: scripts/ui/modals/traffic_modal.gd:58
+msgid "Collect verified claim"
+msgstr ""
+
+#: scripts/ui/modals/traffic_modal.gd:58
+msgid "CollectTrafficClaim"
 msgstr ""
 
 #: scripts/sim/bank.gd:143
@@ -4741,7 +4805,7 @@ msgstr ""
 msgid "Could I get a loan?"
 msgstr ""
 
-#: scripts/world/actions.gd:280
+#: scripts/world/actions.gd:285
 msgid "Could use a bit more support around here."
 msgstr ""
 
@@ -4763,6 +4827,10 @@ msgstr ""
 
 #: data/events/acquisition_offer.json
 msgid "Counter: ask for {counter_price}"
+msgstr ""
+
+#: scripts/sim/traffic_safety.gd:101 scripts/sim/traffic_safety.gd:99
+msgid "Counterparty medical settlement: %s"
 msgstr ""
 
 #: scripts/ui/modals/pack_ship_modal.gd:98
@@ -4795,6 +4863,10 @@ msgstr ""
 
 #: scripts/ui/modals/pack_ship_modal.gd:50
 msgid "Courier · Express 1 day (%s)"
+msgstr ""
+
+#: scripts/ui/modals/traffic_modal.gd:42
+msgid "Covered until %s"
 msgstr ""
 
 #: scripts/ui/minigames/creative_pitch.gd:11
@@ -4899,6 +4971,10 @@ msgstr ""
 
 #: data/world/years.json
 msgid "Cross-border payments stuck: correspondent banks slow down checks."
+msgstr ""
+
+#: data/help/help.json
+msgid "Crossings, treatment and insurance"
 msgstr ""
 
 #: data/economy/logistics.json
@@ -5645,6 +5721,10 @@ msgstr ""
 msgid "Dockside Motors: used van"
 msgstr ""
 
+#: data/buildings/civic_clinic.json
+msgid "Doctor — treatment & admission"
+msgstr ""
+
 #: data/economy/marketplace.json
 msgid "Does the job."
 msgstr ""
@@ -5683,6 +5763,10 @@ msgstr ""
 
 #: data/npcs/imani_cole.json
 msgid "Dr. Imani Cole"
+msgstr ""
+
+#: data/npcs/dr_lin.json
+msgid "Dr. Lin"
 msgstr ""
 
 #: scripts/ui/minigames/photo_shoot_game.gd:104
@@ -5969,6 +6053,10 @@ msgstr ""
 msgid "Eliminated internal sales"
 msgstr ""
 
+#: scripts/ui/modals/traffic_modal.gd:35
+msgid "Emergency care is available even without cash. Unpaid medical bills remain payable here. Insurance must already be active when the collision happens."
+msgstr ""
+
 #: scripts/sim/hotel.gd:669
 msgid "Emergency repair"
 msgstr ""
@@ -6073,7 +6161,7 @@ msgstr ""
 msgid "Equity investment"
 msgstr ""
 
-#: scripts/ui/hud.gd:113
+#: scripts/ui/hud.gd:118
 msgid "Esc"
 msgstr ""
 
@@ -6137,7 +6225,7 @@ msgstr ""
 msgid "Estimated sales"
 msgstr ""
 
-#: scripts/ui/hud.gd:235
+#: scripts/ui/hud.gd:244
 msgid "Evening"
 msgstr ""
 
@@ -6493,6 +6581,10 @@ msgstr ""
 msgid "Fight the dispute"
 msgstr ""
 
+#: scripts/ui/modals/traffic_modal.gd:55
+msgid "File claim — wait seven days"
+msgstr ""
+
 #: data/events/energy_rule.json
 msgid "File for an exemption"
 msgstr ""
@@ -6503,6 +6595,10 @@ msgstr ""
 
 #: autoload/save_system.gd:400
 msgid "FileReader"
+msgstr ""
+
+#: scripts/ui/modals/traffic_modal.gd:55
+msgid "FileTrafficClaim"
 msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:82
@@ -7161,6 +7257,10 @@ msgstr ""
 msgid "Give notice"
 msgstr ""
 
+#: scripts/sim/traffic_safety.gd:9
+msgid "Glancing contact"
+msgstr ""
+
 #: data/world/years.json
 msgid "Global Consolidation"
 msgstr ""
@@ -7689,6 +7789,22 @@ msgstr ""
 msgid "Heads up. Factory just raised prices."
 msgstr ""
 
+#: scripts/sim/traffic_safety.gd:73
+msgid "Health insurance claim: %s"
+msgstr ""
+
+#: data/help/help.json
+msgid "Health insurance must be active at impact. Claims cover incurred medical costs; counterparty settlements cannot duplicate insured costs."
+msgstr ""
+
+#: scripts/ui/modals/traffic_modal.gd:43
+msgid "Health insurance: %s / 30 days"
+msgstr ""
+
+#: scripts/sim/traffic_safety.gd:62
+msgid "Health policy expired: add cash and buy a new policy."
+msgstr ""
+
 #: data/events/real_estate_neighbors.json
 msgid "Hear the neighbors, pay mediation costs and pause construction."
 msgstr ""
@@ -7917,7 +8033,7 @@ msgstr ""
 msgid "Honest. I respect it."
 msgstr ""
 
-#: scripts/world/actions.gd:280
+#: scripts/world/actions.gd:285
 msgid "Honestly? I'm looking at other jobs."
 msgstr ""
 
@@ -8311,6 +8427,10 @@ msgstr ""
 
 #: data/regions/almeria.json data/regions/karu.json data/regions/solterra.json
 msgid "Infrastructure"
+msgstr ""
+
+#: scripts/ui/hud.gd:237 scripts/ui/modals/traffic_modal.gd:27
+msgid "Injury: %s"
 msgstr ""
 
 #: data/milestones.json
@@ -9933,7 +10053,7 @@ msgstr ""
 msgid "Manufacturing & Logistics"
 msgstr ""
 
-#: scripts/ui/hud.gd:112
+#: scripts/ui/hud.gd:117
 msgid "Map"
 msgstr ""
 
@@ -10177,6 +10297,14 @@ msgstr ""
 msgid "Media studio"
 msgstr ""
 
+#: scripts/sim/ledger.gd:31
+msgid "Medical care"
+msgstr ""
+
+#: scripts/sim/traffic_safety.gd:71
+msgid "Medical treatment: %s"
+msgstr ""
+
 #: data/economy/ecommerce.json scripts/ui/minigames/pack_game.gd:7
 msgid "Medium box"
 msgstr ""
@@ -10225,7 +10353,7 @@ msgstr ""
 msgid "Meeting: %s at %s. Check Agenda; if you miss it, book again."
 msgstr ""
 
-#: scripts/ui/hud.gd:113 scripts/ui/modals/company_os.gd:1284
+#: scripts/ui/hud.gd:118 scripts/ui/modals/company_os.gd:1284
 msgid "Menu"
 msgstr ""
 
@@ -10269,7 +10397,7 @@ msgstr ""
 msgid "Metal supplier"
 msgstr ""
 
-#: scripts/ui/tutorial.gd:698 scripts/world/district.gd:80
+#: scripts/ui/tutorial.gd:698 scripts/world/district.gd:85
 msgid "Metro"
 msgstr ""
 
@@ -10285,7 +10413,7 @@ msgstr ""
 msgid "Metro · 5 lines"
 msgstr ""
 
-#: scripts/world/district.gd:79
+#: scripts/world/district.gd:84
 msgid "Metro — %s Station"
 msgstr ""
 
@@ -10343,6 +10471,18 @@ msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:154
 msgid "Minimum tenant credit: %d points"
+msgstr ""
+
+#: data/help/help.json
+msgid "Minor injuries recover after three days or medicine. Ambulance admission takes one to three days while your business keeps running."
+msgstr ""
+
+#: scripts/ui/modals/traffic_modal.gd:32
+msgid "Minor injuries slow walking for three days. Buy medicine at the Civic Clinic pharmacy to recover sooner."
+msgstr ""
+
+#: scripts/sim/traffic_safety.gd:9
+msgid "Minor injury"
 msgstr ""
 
 #: data/help/glossary.json
@@ -10493,7 +10633,7 @@ msgstr ""
 msgid "Moreau"
 msgstr ""
 
-#: scripts/ui/hud.gd:235
+#: scripts/ui/hud.gd:244
 msgid "Morning · Sunny"
 msgstr ""
 
@@ -10869,7 +11009,7 @@ msgstr ""
 msgid "Nia Park"
 msgstr ""
 
-#: scripts/ui/hud.gd:235
+#: scripts/ui/hud.gd:244
 msgid "Night"
 msgstr ""
 
@@ -10887,6 +11027,10 @@ msgstr ""
 
 #: scripts/sim/jobs.gd:50
 msgid "No active job to work on."
+msgstr ""
+
+#: scripts/ui/modals/traffic_modal.gd:42
+msgid "No active policy — buy coverage before an accident."
 msgstr ""
 
 #: scripts/ui/energy_ui.gd:136
@@ -10969,6 +11113,10 @@ msgstr ""
 msgid "No group job on offer."
 msgstr ""
 
+#: scripts/sim/traffic_safety.gd:10 scripts/sim/traffic_safety.gd:9
+msgid "No injury"
+msgstr ""
+
 #: scripts/sim/bank.gd:137
 msgid "No lending ban"
 msgstr ""
@@ -11009,11 +11157,11 @@ msgstr ""
 msgid "No new offers. More arrive every morning at 8:00."
 msgstr ""
 
-#: scripts/world/actions.gd:165
+#: scripts/world/actions.gd:167
 msgid "No one's at the till."
 msgstr ""
 
-#: scripts/world/actions.gd:138
+#: scripts/world/actions.gd:140
 msgid "No one's behind the counter."
 msgstr ""
 
@@ -11105,7 +11253,7 @@ msgstr ""
 msgid "Noah"
 msgstr ""
 
-#: scripts/world/actions.gd:97
+#: scripts/world/actions.gd:99
 msgid "Nobody at the counter. Registration: Mon–Fri 9:00–17:00."
 msgstr ""
 
@@ -11289,7 +11437,7 @@ msgstr ""
 msgid "Nothing to discuss until you've read my number."
 msgstr ""
 
-#: scripts/world/actions.gd:89
+#: scripts/world/actions.gd:91
 msgid "Nothing to drop off. Pack orders at your packing table and choose 'Carry to PostPoint'."
 msgstr ""
 
@@ -12329,7 +12477,7 @@ msgstr ""
 msgid "PERMITS & REGISTRATIONS (AURELIA)"
 msgstr ""
 
-#: scripts/ui/hud.gd:209 scripts/ui/hud.gd:83
+#: scripts/ui/hud.gd:214 scripts/ui/hud.gd:88
 msgid "PERSONAL"
 msgstr ""
 
@@ -12471,6 +12619,10 @@ msgstr ""
 
 #: scripts/ui/modals/van_deal_modal.gd:41
 msgid "Paid from"
+msgstr ""
+
+#: scripts/sim/traffic_safety.gd:107 scripts/sim/traffic_safety.gd:75
+msgid "Paid medical bill: %s"
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:308
@@ -12657,6 +12809,10 @@ msgstr ""
 msgid "Pay invoice"
 msgstr ""
 
+#: scripts/ui/modals/traffic_modal.gd:51
+msgid "Pay medical balance: %s"
+msgstr ""
+
 #: data/help/help.json
 msgid "Pay notice rent and any early exit fee before leaving. Deposits return only on exit, less damage."
 msgstr ""
@@ -12691,6 +12847,10 @@ msgstr ""
 
 #: scripts/ui/modals/insolvency_modal.gd:32
 msgid "Pay what's owed from company cash and carry on"
+msgstr ""
+
+#: scripts/ui/modals/traffic_modal.gd:51
+msgid "PayMedicalDebt"
 msgstr ""
 
 #: data/help/help.json
@@ -12829,6 +12989,14 @@ msgstr ""
 msgid "Personal checking"
 msgstr ""
 
+#: scripts/sim/ledger.gd:31
+msgid "Personal health insurance"
+msgstr ""
+
+#: scripts/sim/traffic_safety.gd:53
+msgid "Personal health premium: %s / 30 days"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:224
 msgid "Personal seller cap: %s of %s used this month."
 msgstr ""
@@ -12837,7 +13005,11 @@ msgstr ""
 msgid "Personal seller limit reached. Your listings are paused until next month — or until you register a business."
 msgstr ""
 
-#: scripts/ui/hud.gd:110
+#: data/buildings/civic_clinic.json
+msgid "Pharmacy & health insurance"
+msgstr ""
+
+#: scripts/ui/hud.gd:115
 msgid "Phone"
 msgstr ""
 
@@ -13083,6 +13255,10 @@ msgstr ""
 
 #: data/regions/zenkai.json
 msgid "Precision manufacturing"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Preexisting health coverage"
 msgstr ""
 
 #: scripts/sim/lease_end.gd:140
@@ -14577,6 +14753,10 @@ msgstr ""
 msgid "Review OEM orders"
 msgstr ""
 
+#: scripts/ui/modals/traffic_modal.gd:47
+msgid "Review accident #%d"
+msgstr ""
+
 #: scripts/ui/modals/lease_end_modal.gd:30
 msgid "Review lease"
 msgstr ""
@@ -15273,7 +15453,7 @@ msgstr ""
 msgid "Save transfer"
 msgstr ""
 
-#: scripts/ui/hud.gd:153 scripts/ui/hud.gd:296
+#: scripts/ui/hud.gd:158 scripts/ui/hud.gd:305
 msgid "Saved"
 msgstr ""
 
@@ -15593,6 +15773,10 @@ msgstr ""
 msgid "SettleGig"
 msgstr ""
 
+#: scripts/ui/modals/traffic_modal.gd:54
+msgid "SettleTraffic"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:883
 msgid "Settlement"
 msgstr ""
@@ -15603,6 +15787,10 @@ msgstr ""
 
 #: scripts/sim/staff.gd:155
 msgid "Severance — %s"
+msgstr ""
+
+#: scripts/sim/traffic_safety.gd:9
+msgid "Severe injury"
 msgstr ""
 
 #: data/dialogue/sunny_adeyemi_intro.json
@@ -16701,7 +16889,7 @@ msgstr ""
 msgid "TOMAS"
 msgstr ""
 
-#: scripts/ui/hud.gd:110 scripts/ui/tutorial.gd:27
+#: scripts/ui/hud.gd:115 scripts/ui/tutorial.gd:27
 msgid "Tab"
 msgstr ""
 
@@ -16727,6 +16915,10 @@ msgstr ""
 
 #: data/dialogue/ana_register.json
 msgid "Take a number whenever you're ready."
+msgstr ""
+
+#: scripts/ui/modals/traffic_modal.gd:30
+msgid "Take ambulance"
 msgstr ""
 
 #: scripts/ui/modals/city_guide_modal.gd:32
@@ -17585,7 +17777,7 @@ msgstr ""
 msgid "The teller is open weekdays 9 to 16. Loans are at the manager's desk."
 msgstr ""
 
-#: scripts/world/actions.gd:102
+#: scripts/world/actions.gd:104
 msgid "The teller window is closed."
 msgstr ""
 
@@ -17901,7 +18093,7 @@ msgstr ""
 msgid "Thu"
 msgstr ""
 
-#: scripts/world/actions.gd:121
+#: scripts/world/actions.gd:123
 msgid "Ticket A-%d. Now serving A-%d."
 msgstr ""
 
@@ -18089,6 +18281,14 @@ msgstr ""
 msgid "Traded %s %s · internal sales %s · saved versus outside %s"
 msgstr ""
 
+#: scripts/sim/traffic_safety.gd:93
+msgid "Traffic claim filed. Return after seven days to collect the verified medical reimbursement."
+msgstr ""
+
+#: scripts/sim/traffic_safety.gd:43
+msgid "Traffic collision: %s. Visit the clinic or pharmacy."
+msgstr ""
+
 #: data/economy/automotive.json
 msgid "Trailhead SUV"
 msgstr ""
@@ -18141,6 +18341,18 @@ msgstr ""
 msgid "Treat her like any other guest"
 msgstr ""
 
+#: scripts/ui/modals/traffic_modal.gd:41
+msgid "Treatment"
+msgstr ""
+
+#: scripts/ui/modals/traffic_modal.gd:41
+msgid "Treatment / medicine: %s"
+msgstr ""
+
+#: scripts/sim/traffic_safety.gd:86 scripts/ui/modals/traffic_modal.gd:49
+msgid "Treatment complete: %d hospital days; medical bill %s; health claim %s."
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Tried the new payment rails."
 msgstr ""
@@ -18181,7 +18393,7 @@ msgstr ""
 msgid "Two focused hours: %.1f hours of the work done. %s"
 msgstr ""
 
-#: scripts/world/actions.gd:270
+#: scripts/world/actions.gd:275
 msgid "Two hours behind your own counter: %d customers served."
 msgstr ""
 
@@ -18379,6 +18591,18 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "Upfront payment"
+msgstr ""
+
+#: scripts/ui/modals/traffic_modal.gd:26
+msgid "Use a green crosswalk. Crossing elsewhere or on red can cause a collision."
+msgstr ""
+
+#: data/help/help.json
+msgid "Use a green crosswalk; cars yield there. A collision depends on actual speed and braking distance."
+msgstr ""
+
+#: scripts/ui/hud.gd:237 scripts/ui/hud.gd:39
+msgid "Use crosswalks for safer crossing"
 msgstr ""
 
 #: scripts/ui/modals/freelance_modal.gd:63
@@ -18637,8 +18861,16 @@ msgstr ""
 msgid "Visit Threadline on Shopping Street to browse the outfits available now."
 msgstr ""
 
+#: scripts/ui/modals/traffic_modal.gd:33
+msgid "Visit clinic"
+msgstr ""
+
 #: scripts/sim/gates.gd:49
 msgid "Visit or lease the location."
+msgstr ""
+
+#: scripts/ui/modals/traffic_modal.gd:33
+msgid "VisitClinic"
 msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:38
@@ -18957,7 +19189,7 @@ msgstr ""
 msgid "What are the payment and delivery terms?"
 msgstr ""
 
-#: scripts/ui/hud.gd:163
+#: scripts/ui/hud.gd:168
 msgid "What can I do here?"
 msgstr ""
 
@@ -19009,7 +19241,7 @@ msgstr ""
 msgid "When a company closes, its undelivered contracts end and its unpaid invoices go to a collector. Old contracts stay visible, but the closed company cannot deliver or collect again."
 msgstr ""
 
-#: scripts/world/actions.gd:282
+#: scripts/world/actions.gd:287
 msgid "When are we getting paid? Rent's due."
 msgstr ""
 
@@ -19569,7 +19801,7 @@ msgstr ""
 msgid "Your cost / outside market"
 msgstr ""
 
-#: scripts/world/actions.gd:264
+#: scripts/world/actions.gd:269
 msgid "Your counter — %s"
 msgstr ""
 
@@ -19871,6 +20103,10 @@ msgstr ""
 
 #: data/businesses/media.json
 msgid "client fees"
+msgstr ""
+
+#: data/npcs/dr_lin.json
+msgid "clinic doctor"
 msgstr ""
 
 #: scripts/sim/careers.gd:132 scripts/ui/tutorial.gd:464 scripts/ui/tutorial.gd:597
@@ -20297,7 +20533,7 @@ msgstr ""
 msgid "on delivery"
 msgstr ""
 
-#: scripts/world/actions.gd:153
+#: scripts/world/actions.gd:155
 msgid "on the house (staff)"
 msgstr ""
 
@@ -20789,7 +21025,7 @@ msgstr ""
 msgid "◉  Shutter"
 msgstr ""
 
-#: scripts/ui/hud.gd:257
+#: scripts/ui/hud.gd:266
 msgid "● %d new"
 msgstr ""
 

@@ -10,7 +10,7 @@ msgstr ""
 msgid "\n%dxxx"
 msgstr "\n%dxxx"
 
-#: scripts/ui/hud.gd:257
+#: scripts/ui/hud.gd:266
 msgid "   ◆ decision"
 msgstr "   ◆ 待决定"
 
@@ -26,7 +26,7 @@ msgstr "  （员工折扣）"
 msgid "  of which on hold (<2 days)"
 msgstr "  其中保留中（未满 2 天）"
 
-#: scripts/ui/hud.gd:232
+#: scripts/ui/hud.gd:241
 msgid "  ·  DAY %d"
 msgstr "  ·  第 %d 天"
 
@@ -66,7 +66,7 @@ msgstr "（逾期，罚款 %s）"
 msgid " ltd"
 msgstr " ltd"
 
-#: scripts/ui/hud.gd:243
+#: scripts/ui/hud.gd:252
 msgid " today"
 msgstr " 今日"
 
@@ -258,7 +258,7 @@ msgstr "%d 笔订单%s等待打包——到打包桌（家里或办公室）。"
 msgid "%d orders"
 msgstr "%d 笔订单"
 
-#: scripts/world/actions.gd:287
+#: scripts/world/actions.gd:292
 msgid "%d orders waiting to be packed. I'm on it."
 msgstr "还有 %d 笔订单等着打包，我正在处理。"
 
@@ -438,11 +438,11 @@ msgstr "%s 有一笔需要多个事业合作的大案：%s。报酬 %s。请到�
 msgid "%s has room: choose it under \"Deliver to\" in Operations."
 msgstr "%s 还有空间：请在「营运」的「送货到」选它。"
 
-#: scripts/world/actions.gd:95
+#: scripts/world/actions.gd:97
 msgid "%s is already registered (%s)."
 msgstr "%s 已经登记过了（%s）。"
 
-#: scripts/world/actions.gd:238
+#: scripts/world/actions.gd:243
 msgid "%s is busy."
 msgstr "%s 在忙。"
 
@@ -1146,6 +1146,10 @@ msgstr "会卖的照片。"
 msgid "A place to work"
 msgstr "找个地方工作"
 
+#: data/help/glossary.json
+msgid "A policy covers most medical costs only if active before the collision. Unpaid emergency bills remain debts."
+msgstr "保单须于碰撞前有效，才能支付大部分医疗费。急救的未付帐款仍是债务。"
+
 #: scripts/ui/modals/lease_end_modal.gd:47
 msgid "A premises-dependent business pauses when its lease ends. Finish its jobs first, or settle cancellations. Existing delivered invoices remain collectible."
 msgstr "依赖处所的产业会在退租后暂停。先完成工单，或结清取消费用。已交付的应收款仍可收取。"
@@ -1382,6 +1386,10 @@ msgstr "接下集团委托"
 msgid "Accept it to start the clock."
 msgstr "接单后才开始计时。"
 
+#: scripts/ui/modals/traffic_modal.gd:54
+msgid "Accept partial settlement"
+msgstr "接受部分和解"
+
 #: data/quests/city_fleet_refresh.json
 msgid "Accept runs in Company OS and plan each route."
 msgstr "在公司后台接配送单，并自己规划每条路线。"
@@ -1474,6 +1482,10 @@ msgstr "事故纪录"
 msgid "Accident repair: %s"
 msgstr "事故维修：%s"
 
+#: scripts/ui/modals/traffic_modal.gd:47
+msgid "Accident_%d"
+msgstr "Accident_%d"
+
 #: data/help/glossary.json
 msgid "Accounts payable"
 msgstr "应付帐款"
@@ -1521,6 +1533,10 @@ msgstr "加一个在地备援：奥瑞莉亚职人合作社"
 #: scripts/ui/minigames/pack_game.gd:138
 msgid "Add bubble wrap"
 msgstr "塞气泡纸"
+
+#: scripts/ui/modals/traffic_modal.gd:40
+msgid "Add cash before buying medicine, or wait for natural recovery."
+msgstr "补足现金后买药，或等候自然康复。"
 
 #: scripts/sim/automotive.gd:385
 msgid "Added %s to the rental fleet."
@@ -1582,7 +1598,7 @@ msgstr "上完疲累的班可以回家睡觉。第一次创业期间下午 4 点
 msgid "After-sales service ticket"
 msgstr "售后保养工单"
 
-#: scripts/ui/hud.gd:235
+#: scripts/ui/hud.gd:244
 msgid "Afternoon · Sunny"
 msgstr "下午 · 晴"
 
@@ -1662,7 +1678,7 @@ msgstr "所有文件 (*)"
 msgid "All good? Approve it. Something wrong? Click the wrong field first, then Reject."
 msgstr "都没问题就「核准」。有错的话，先点出错的字段，再按「退件」。"
 
-#: scripts/world/actions.gd:287
+#: scripts/world/actions.gd:292
 msgid "All packed. The courier comes at 16:00."
 msgstr "都打包好了，快递 16:00 来收。"
 
@@ -1726,6 +1742,10 @@ msgstr "看起来很业余，会少一些订单；之后可以重拍。"
 msgid "Ambitious: works harder, expects a raise within two months."
 msgstr "有企图心：做得更拚，两个月内会期待加薪。"
 
+#: scripts/ui/modals/traffic_modal.gd:30
+msgid "Ambulance"
+msgstr "Ambulance"
+
 #: scripts/ui/minigames/barista_game.gd:7
 msgid "Americano"
 msgstr "美式咖啡"
@@ -1733,6 +1753,10 @@ msgstr "美式咖啡"
 #: data/help/glossary.json
 msgid "An RFQ specifies units, deadline, price range and maximum defects."
 msgstr "询价单列出数量、期限、价格范围及不良率上限。"
+
+#: scripts/ui/modals/traffic_modal.gd:29
+msgid "An ambulance can take you to Civic Clinic. Admission takes one to three days; your business keeps running. Arrange staff before crossing roads."
+msgstr "救护车可送你到市民诊所。住院需一至三天，生意仍继续运作。过马路前请安排好人手。"
 
 #: data/help/glossary.json
 msgid "An appointment gets you to Marcus; it does not waive the company, account, credit, payment history, age or collateral requirements."
@@ -2902,7 +2926,7 @@ msgstr "事业"
 msgid "Businesses: choose from the businesses available now, or find a part-time job."
 msgstr "生意：选择目前可经营的生意，或找一份兼职工作。"
 
-#: scripts/world/actions.gd:280
+#: scripts/world/actions.gd:285
 msgid "Busy day. All good."
 msgstr "今天很忙，一切顺利。"
 
@@ -2941,6 +2965,10 @@ msgstr "向港区 Dockside Motors 的 Sam Okoro 买一台二手货车，有两�
 #: scripts/sim/internal_supply.gd:148
 msgid "Buy a van first."
 msgstr "请先买一台货车。"
+
+#: data/help/glossary.json
+msgid "Buy coverage before taking risks. A new policy cannot reimburse an earlier accident; cancelling renewal does not refund the current premium."
+msgstr "冒险前先投保。新保单不能理赔较早发生的事故；取消续保不会退还本期保费。"
 
 #: data/story/chapters.json
 msgid "Buy low. Sell less low. Got it, haha."
@@ -2997,6 +3025,10 @@ msgstr "购买——%s"
 #: scripts/ui/media_ui.gd:177
 msgid "BuyCampusRadio"
 msgstr "BuyCampusRadio"
+
+#: scripts/ui/modals/traffic_modal.gd:43
+msgid "BuyHealthPolicy"
+msgstr "BuyHealthPolicy"
 
 #: scripts/ui/manufacturing_ui.gd:93
 msgid "BuyMachine"
@@ -3105,6 +3137,10 @@ msgstr "CITY VENTURE"
 #: data/districts/shopping_street.json
 msgid "CIVIC CENTER →"
 msgstr "市政中心 →"
+
+#: data/buildings/civic_clinic.json
+msgid "CIVIC CLINIC"
+msgstr "市民诊所"
 
 #: scripts/sim/energy.gd:391
 msgid "CLAIM-"
@@ -3318,7 +3354,7 @@ msgstr "还不能聘人：%s。"
 msgid "Can't start a shift now: %s."
 msgstr "现在不能上班：%s。"
 
-#: scripts/world/actions.gd:260
+#: scripts/world/actions.gd:265
 msgid "Can't work the counter: %s."
 msgstr "现在不能站吧台：%s。"
 
@@ -3329,6 +3365,10 @@ msgstr "取消"
 #: data/help/glossary.json
 msgid "Cancel a purchase still on the way within the supplier cancellation window (normally 24 hours). The normal fee is 5%; payments that have not cleared return the full principal."
 msgstr "在供应商取消期限内（通常为 24 小时）可取消运送中的进货单。一般收取 5% 手续费；尚未清算的款项退回全部本金。"
+
+#: scripts/ui/modals/traffic_modal.gd:44
+msgid "Cancel automatic renewal"
+msgstr "取消自动续保"
 
 #: scripts/ui/modals/lease_end_modal.gd:51
 msgid "Cancel jobs with penalty"
@@ -3349,6 +3389,10 @@ msgstr "取消进货"
 #: data/help/help.json
 msgid "Cancel within the supplier window while the goods are on the way. Unpaid terms reduce accounts payable; any cancellation fee remains due. Unsettled cross-border payments return the principal, but settlement fees stay paid."
 msgstr "货物尚未送达且在供应商取消期限内，可取消进货。未付款票期单减少应付帐款，取消手续费仍须支付。未清算的跨境款项退回本金，清算手续费不退还。"
+
+#: scripts/ui/modals/traffic_modal.gd:44
+msgid "CancelHealthRenewal"
+msgstr "CancelHealthRenewal"
 
 #: scripts/sim/ecommerce.gd:343
 msgid "Cancellation window ended."
@@ -3406,7 +3450,7 @@ msgstr "自己拿去 PostPoint"
 msgid "Carry them to PostPoint yourself (cheaper, costs your time)"
 msgstr "自己拿去 PostPoint（比较便宜，但花你的时间）"
 
-#: scripts/ui/hud.gd:262
+#: scripts/ui/hud.gd:271
 msgid "Carrying %d parcel%s"
 msgstr "携带 %d 件包裹%s"
 
@@ -4054,9 +4098,17 @@ msgstr "CityVenture_%s_%04d-%02d-%02d.cvsave"
 msgid "Civic Center"
 msgstr "市政中心"
 
-#: data/buildings/city_hall.json
+#: data/buildings/civic_clinic.json
+msgid "Civic Clinic & Pharmacy"
+msgstr "市民诊所与药局"
+
+#: data/buildings/city_hall.json data/buildings/civic_clinic.json
 msgid "Civic services"
 msgstr "市政服务"
+
+#: scripts/ui/modals/traffic_modal.gd:57
+msgid "Claim collection: %s"
+msgstr "理赔可领日期：%s"
 
 #: data/buildings/harbor_point_fitness.json
 msgid "Class timetable"
@@ -4258,6 +4310,10 @@ msgstr "客户每天早上会张贴小案子。接下一个，在任何笔电上
 msgid "Climate"
 msgstr "气候"
 
+#: scripts/ui/modals/traffic_modal.gd:7
+msgid "Clinic & health insurance"
+msgstr "诊所与健康保险"
+
 #: scripts/ui/modals/business_board.gd:31 scripts/ui/modals/city_guide_modal.gd:44 scripts/ui/modals/city_map_modal.gd:142 scripts/ui/modals/clothing_shop_modal.gd:27
 msgid "Close"
 msgstr "关闭"
@@ -4358,7 +4414,7 @@ msgstr "写完了：完成 %.1f 小时的工作量。"
 msgid "Coding session — %s"
 msgstr "写程序：%s"
 
-#: data/economy/cafe.json scripts/sim/ledger.gd:30 scripts/world/actions.gd:249
+#: data/economy/cafe.json scripts/sim/ledger.gd:30 scripts/world/actions.gd:254
 msgid "Coffee"
 msgstr "咖啡"
 
@@ -4366,11 +4422,11 @@ msgstr "咖啡"
 msgid "Coffee machine, printer, Wi-Fi: you fix all three before lunch."
 msgstr "咖啡机、打印机、Wi-Fi：午餐前你三个都修好了。"
 
-#: scripts/world/actions.gd:253
+#: scripts/world/actions.gd:258
 msgid "Coffee — %s."
 msgstr "咖啡——%s。"
 
-#: scripts/world/actions.gd:153
+#: scripts/world/actions.gd:155
 msgid "Coffee — %s. Tastes like possibility."
 msgstr "咖啡——%s。喝起来是可能性的味道。"
 
@@ -4389,6 +4445,14 @@ msgstr "累计 500 个注册。"
 #: data/story/chapters.json
 msgid "Collect the money Crestline owes you"
 msgstr "收回 Crestline 欠你的钱"
+
+#: scripts/ui/modals/traffic_modal.gd:58
+msgid "Collect verified claim"
+msgstr "领取核定理赔"
+
+#: scripts/ui/modals/traffic_modal.gd:58
+msgid "CollectTrafficClaim"
+msgstr "CollectTrafficClaim"
 
 #: scripts/sim/bank.gd:143
 msgid "Come back when %s has %d days of statements, or a signed contract."
@@ -4742,7 +4806,7 @@ msgstr "成本变高了：调高售价保住毛利（Company OS → 销售）"
 msgid "Could I get a loan?"
 msgstr "我可以贷款吗？"
 
-#: scripts/world/actions.gd:280
+#: scripts/world/actions.gd:285
 msgid "Could use a bit more support around here."
 msgstr "这里有点需要更多支持。"
 
@@ -4765,6 +4829,10 @@ msgstr "还价：每件 %s，票期 %d 天%s"
 #: data/events/acquisition_offer.json
 msgid "Counter: ask for {counter_price}"
 msgstr "还价：开价 {counter_price}"
+
+#: scripts/sim/traffic_safety.gd:101 scripts/sim/traffic_safety.gd:99
+msgid "Counterparty medical settlement: %s"
+msgstr "肇事方医疗补偿：%s"
 
 #: scripts/ui/modals/pack_ship_modal.gd:98
 msgid "Courier booked: %d parcel%s, %s. Pickup %s."
@@ -4797,6 +4865,10 @@ msgstr "快递 · 经济 3 天（%s）"
 #: scripts/ui/modals/pack_ship_modal.gd:50
 msgid "Courier · Express 1 day (%s)"
 msgstr "快递 · 快捷 1 天（%s）"
+
+#: scripts/ui/modals/traffic_modal.gd:42
+msgid "Covered until %s"
+msgstr "保障至 %s"
 
 #: scripts/ui/minigames/creative_pitch.gd:11
 msgid "Creative Pitch"
@@ -4901,6 +4973,10 @@ msgstr "跨境付款大塞车：去看看新闻看板"
 #: data/world/years.json
 msgid "Cross-border payments stuck: correspondent banks slow down checks."
 msgstr "跨境付款卡关：通汇银行放慢审查。"
+
+#: data/help/help.json
+msgid "Crossings, treatment and insurance"
+msgstr "过马路、就医与保险"
 
 #: data/economy/logistics.json
 msgid "Crumb & Co. Bakery"
@@ -5646,6 +5722,10 @@ msgstr "Dockside Motors：%s"
 msgid "Dockside Motors: used van"
 msgstr "Dockside Motors：二手货车"
 
+#: data/buildings/civic_clinic.json
+msgid "Doctor — treatment & admission"
+msgstr "医师——治疗与住院"
+
 #: data/economy/marketplace.json
 msgid "Does the job."
 msgstr "堪用。"
@@ -5685,6 +5765,10 @@ msgstr "头期款：%.0f%%"
 #: data/npcs/imani_cole.json
 msgid "Dr. Imani Cole"
 msgstr "Dr. Imani Cole"
+
+#: data/npcs/dr_lin.json
+msgid "Dr. Lin"
+msgstr "林医师"
 
 #: scripts/ui/minigames/photo_shoot_game.gd:104
 msgid "Drag the product in the frame"
@@ -5970,6 +6054,10 @@ msgstr "符合条件的登记公司可向部分供应商先买货，在指定天
 msgid "Eliminated internal sales"
 msgstr "冲销内部销售"
 
+#: scripts/ui/modals/traffic_modal.gd:35
+msgid "Emergency care is available even without cash. Unpaid medical bills remain payable here. Insurance must already be active when the collision happens."
+msgstr "没有现金也能接受急救。未付医疗帐款可在此缴清。保单须于碰撞前生效。"
+
 #: scripts/sim/hotel.gd:669
 msgid "Emergency repair"
 msgstr "紧急维修"
@@ -6074,7 +6162,7 @@ msgstr "设备会老化。老旧房间会拉低每则评价，直到你翻新；
 msgid "Equity investment"
 msgstr "股权投资"
 
-#: scripts/ui/hud.gd:113
+#: scripts/ui/hud.gd:118
 msgid "Esc"
 msgstr "Esc"
 
@@ -6138,7 +6226,7 @@ msgstr "房地产仲介"
 msgid "Estimated sales"
 msgstr "预估销售"
 
-#: scripts/ui/hud.gd:235
+#: scripts/ui/hud.gd:244
 msgid "Evening"
 msgstr "傍晚"
 
@@ -6494,6 +6582,10 @@ msgstr "Ferro 提供批量原料。请注意最低采购量、交期及每周价
 msgid "Fight the dispute"
 msgstr "打官司争议"
 
+#: scripts/ui/modals/traffic_modal.gd:55
+msgid "File claim — wait seven days"
+msgstr "申请理赔——等候七天"
+
 #: data/events/energy_rule.json
 msgid "File for an exemption"
 msgstr "申请豁免"
@@ -6505,6 +6597,10 @@ msgstr "文件："
 #: autoload/save_system.gd:400
 msgid "FileReader"
 msgstr "FileReader"
+
+#: scripts/ui/modals/traffic_modal.gd:55
+msgid "FileTrafficClaim"
+msgstr "FileTrafficClaim"
 
 #: scripts/ui/minigames/clerk_forms_game.gd:82
 msgid "Filing fee paid"
@@ -7162,6 +7258,10 @@ msgstr "给我 $150 和半小时，我就告诉你车子底下哪里有问题。
 msgid "Give notice"
 msgstr "提出退租通知"
 
+#: scripts/sim/traffic_safety.gd:9
+msgid "Glancing contact"
+msgstr "轻擦"
+
 #: data/world/years.json
 msgid "Global Consolidation"
 msgstr "全球整并"
@@ -7690,6 +7790,22 @@ msgstr "先跟你说。货柜运费刚翻倍，港口也塞住了。交期会很
 msgid "Heads up. Factory just raised prices."
 msgstr "先跟你说一声。工厂刚涨价了。"
 
+#: scripts/sim/traffic_safety.gd:73
+msgid "Health insurance claim: %s"
+msgstr "健康保险理赔：%s"
+
+#: data/help/help.json
+msgid "Health insurance must be active at impact. Claims cover incurred medical costs; counterparty settlements cannot duplicate insured costs."
+msgstr "健康保单须于碰撞前有效。理赔仅支付已发生医疗费，肇事方补偿不得重复领取已理赔部分。"
+
+#: scripts/ui/modals/traffic_modal.gd:43
+msgid "Health insurance: %s / 30 days"
+msgstr "健康保险：%s／30 天"
+
+#: scripts/sim/traffic_safety.gd:62
+msgid "Health policy expired: add cash and buy a new policy."
+msgstr "健康保单已到期：补足现金后重新投保。"
+
 #: data/events/real_estate_neighbors.json
 msgid "Hear the neighbors, pay mediation costs and pause construction."
 msgstr "听取邻居意见、支付协调费用并暂停工程。"
@@ -7918,7 +8034,7 @@ msgstr "住宅屋顶"
 msgid "Honest. I respect it."
 msgstr "很诚实。我欣赏。"
 
-#: scripts/world/actions.gd:280
+#: scripts/world/actions.gd:285
 msgid "Honestly? I'm looking at other jobs."
 msgstr "老实说？我在看其他工作了。"
 
@@ -8313,6 +8429,10 @@ msgstr "Ines"
 #: data/regions/almeria.json data/regions/karu.json data/regions/solterra.json
 msgid "Infrastructure"
 msgstr "基础建设"
+
+#: scripts/ui/hud.gd:237 scripts/ui/modals/traffic_modal.gd:27
+msgid "Injury: %s"
+msgstr "伤势：%s"
 
 #: data/milestones.json
 msgid "Inn and Brasserie"
@@ -9934,7 +10054,7 @@ msgstr "制造"
 msgid "Manufacturing & Logistics"
 msgstr "制造与物流"
 
-#: scripts/ui/hud.gd:112
+#: scripts/ui/hud.gd:117
 msgid "Map"
 msgstr "地图"
 
@@ -10178,6 +10298,14 @@ msgstr "媒体配置"
 msgid "Media studio"
 msgstr "媒体工作室"
 
+#: scripts/sim/ledger.gd:31
+msgid "Medical care"
+msgstr "医疗费用"
+
+#: scripts/sim/traffic_safety.gd:71
+msgid "Medical treatment: %s"
+msgstr "医疗费用：%s"
+
 #: data/economy/ecommerce.json scripts/ui/minigames/pack_game.gd:7
 msgid "Medium box"
 msgstr "中箱子"
@@ -10226,7 +10354,7 @@ msgstr "已预约"
 msgid "Meeting: %s at %s. Check Agenda; if you miss it, book again."
 msgstr "约见：%s，地点为 %s。请查看行程；错过后可重新预约。"
 
-#: scripts/ui/hud.gd:113 scripts/ui/modals/company_os.gd:1284
+#: scripts/ui/hud.gd:118 scripts/ui/modals/company_os.gd:1284
 msgid "Menu"
 msgstr "菜单"
 
@@ -10270,7 +10398,7 @@ msgstr "蓬乱"
 msgid "Metal supplier"
 msgstr "金属供应商"
 
-#: scripts/ui/tutorial.gd:698 scripts/world/district.gd:80
+#: scripts/ui/tutorial.gd:698 scripts/world/district.gd:85
 msgid "Metro"
 msgstr "捷运"
 
@@ -10286,7 +10414,7 @@ msgstr "捷运车资：往%s"
 msgid "Metro · 5 lines"
 msgstr "捷运 · 5 条路线"
 
-#: scripts/world/district.gd:79
+#: scripts/world/district.gd:84
 msgid "Metro — %s Station"
 msgstr "捷运——%s站"
 
@@ -10345,6 +10473,18 @@ msgstr "最低起步资金"
 #: scripts/ui/real_estate_ui.gd:154
 msgid "Minimum tenant credit: %d points"
 msgstr "房客最低信用：%d 分"
+
+#: data/help/help.json
+msgid "Minor injuries recover after three days or medicine. Ambulance admission takes one to three days while your business keeps running."
+msgstr "轻伤三天后自然康复，或买药治疗。救护车送医住院需一至三天，生意仍继续运作。"
+
+#: scripts/ui/modals/traffic_modal.gd:32
+msgid "Minor injuries slow walking for three days. Buy medicine at the Civic Clinic pharmacy to recover sooner."
+msgstr "轻伤会让步行减速三天。可到市民诊所药局买药以提早康复。"
+
+#: scripts/sim/traffic_safety.gd:9
+msgid "Minor injury"
+msgstr "轻伤"
 
 #: data/help/glossary.json
 msgid "Miss the stock minimum twice and the factory ends the franchise and keeps part of the deposit."
@@ -10494,7 +10634,7 @@ msgstr "订户增加时，营收与服务器费用一起增加；订阅定价要
 msgid "Moreau"
 msgstr "Moreau"
 
-#: scripts/ui/hud.gd:235
+#: scripts/ui/hud.gd:244
 msgid "Morning · Sunny"
 msgstr "早上 · 晴"
 
@@ -10870,7 +11010,7 @@ msgstr "Nexus Property"
 msgid "Nia Park"
 msgstr "Nia Park"
 
-#: scripts/ui/hud.gd:235
+#: scripts/ui/hud.gd:244
 msgid "Night"
 msgstr "夜晚"
 
@@ -10889,6 +11029,10 @@ msgstr "没有%s的库存可以寄。"
 #: scripts/sim/jobs.gd:50
 msgid "No active job to work on."
 msgstr "没有可进行的工单。"
+
+#: scripts/ui/modals/traffic_modal.gd:42
+msgid "No active policy — buy coverage before an accident."
+msgstr "尚无有效保单——请于事故前投保。"
 
 #: scripts/ui/energy_ui.gd:136
 msgid "No battery"
@@ -10970,6 +11114,10 @@ msgstr "目前没有待处理的团体房。新的提案每周一早上送来。
 msgid "No group job on offer."
 msgstr "目前没有集团委托。"
 
+#: scripts/sim/traffic_safety.gd:10 scripts/sim/traffic_safety.gd:9
+msgid "No injury"
+msgstr "无伤势"
+
 #: scripts/sim/bank.gd:137
 msgid "No lending ban"
 msgstr "目前没有禁贷期"
@@ -11010,11 +11158,11 @@ msgstr "不必交代样本数"
 msgid "No new offers. More arrive every morning at 8:00."
 msgstr "没有新案子。每天早上 8:00 会有新的。"
 
-#: scripts/world/actions.gd:165
+#: scripts/world/actions.gd:167
 msgid "No one's at the till."
 msgstr "柜台没有人。"
 
-#: scripts/world/actions.gd:138
+#: scripts/world/actions.gd:140
 msgid "No one's behind the counter."
 msgstr "柜台没有人。"
 
@@ -11106,7 +11254,7 @@ msgstr "不是。电汇也会出问题，只是慢一点、文档多一点。我
 msgid "Noah"
 msgstr "Noah"
 
-#: scripts/world/actions.gd:97
+#: scripts/world/actions.gd:99
 msgid "Nobody at the counter. Registration: Mon–Fri 9:00–17:00."
 msgstr "柜台没人。公司登记：周一至周五 9:00–17:00。"
 
@@ -11290,7 +11438,7 @@ msgstr "没有要交的货。"
 msgid "Nothing to discuss until you've read my number."
 msgstr "你看过我的数字之前，没什么好谈的。"
 
-#: scripts/world/actions.gd:89
+#: scripts/world/actions.gd:91
 msgid "Nothing to drop off. Pack orders at your packing table and choose 'Carry to PostPoint'."
 msgstr "没有要寄的东西。先到打包桌打包，再选「自己拿去 PostPoint」。"
 
@@ -12330,7 +12478,7 @@ msgstr "人数"
 msgid "PERMITS & REGISTRATIONS (AURELIA)"
 msgstr "许可与登记（奥瑞莉亚）"
 
-#: scripts/ui/hud.gd:209 scripts/ui/hud.gd:83
+#: scripts/ui/hud.gd:214 scripts/ui/hud.gd:88
 msgid "PERSONAL"
 msgstr "个人"
 
@@ -12473,6 +12621,10 @@ msgstr "提前付款：%s（折扣 %s）。"
 #: scripts/ui/modals/van_deal_modal.gd:41
 msgid "Paid from"
 msgstr "付款帐户"
+
+#: scripts/sim/traffic_safety.gd:107 scripts/sim/traffic_safety.gd:75
+msgid "Paid medical bill: %s"
+msgstr "支付医疗帐款：%s"
 
 #: scripts/sim/ecommerce.gd:308
 msgid "Paid supplier invoice %s: %s"
@@ -12658,6 +12810,10 @@ msgstr "花钱彻底修复"
 msgid "Pay invoice"
 msgstr "支付帐单"
 
+#: scripts/ui/modals/traffic_modal.gd:51
+msgid "Pay medical balance: %s"
+msgstr "缴清医疗余款：%s"
+
 #: data/help/help.json
 msgid "Pay notice rent and any early exit fee before leaving. Deposits return only on exit, less damage."
 msgstr "离开前先付通知期租金与提前解约金。押金到退租时才退，并扣除损坏。"
@@ -12693,6 +12849,10 @@ msgstr "用这个方式付"
 #: scripts/ui/modals/insolvency_modal.gd:32
 msgid "Pay what's owed from company cash and carry on"
 msgstr "用公司现金付清欠款，继续经营"
+
+#: scripts/ui/modals/traffic_modal.gd:51
+msgid "PayMedicalDebt"
+msgstr "PayMedicalDebt"
 
 #: data/help/help.json
 msgid "Paying a supplier abroad"
@@ -12830,6 +12990,14 @@ msgstr "个人上限"
 msgid "Personal checking"
 msgstr "个人活存"
 
+#: scripts/sim/ledger.gd:31
+msgid "Personal health insurance"
+msgstr "个人健康保险"
+
+#: scripts/sim/traffic_safety.gd:53
+msgid "Personal health premium: %s / 30 days"
+msgstr "个人健康保险保费：%s／30 天"
+
 #: scripts/ui/modals/company_os.gd:224
 msgid "Personal seller cap: %s of %s used this month."
 msgstr "个人卖家上限：本月已用 %s／%s。"
@@ -12838,7 +13006,11 @@ msgstr "个人卖家上限：本月已用 %s／%s。"
 msgid "Personal seller limit reached. Your listings are paused until next month — or until you register a business."
 msgstr "已达个人卖家上限。你的商品会暂停到下个月——或直到你登记公司。"
 
-#: scripts/ui/hud.gd:110
+#: data/buildings/civic_clinic.json
+msgid "Pharmacy & health insurance"
+msgstr "药局与健康保险"
+
+#: scripts/ui/hud.gd:115
 msgid "Phone"
 msgstr "手机"
 
@@ -13085,6 +13257,10 @@ msgstr "拍卖前验车"
 #: data/regions/zenkai.json
 msgid "Precision manufacturing"
 msgstr "精密制造"
+
+#: data/help/glossary.json
+msgid "Preexisting health coverage"
+msgstr "事故前健康保障"
 
 #: scripts/sim/lease_end.gd:140
 msgid "Premises lease ended"
@@ -14578,6 +14754,10 @@ msgstr "按产业列出本月与上月的营收、毛利、费用及营业利益
 msgid "Review OEM orders"
 msgstr "查看代工单"
 
+#: scripts/ui/modals/traffic_modal.gd:47
+msgid "Review accident #%d"
+msgstr "查看事故 #%d"
+
 #: scripts/ui/modals/lease_end_modal.gd:30
 msgid "Review lease"
 msgstr "查看租约"
@@ -15274,7 +15454,7 @@ msgstr "请先备好顶让费用。"
 msgid "Save transfer"
 msgstr "存盘导入／导出"
 
-#: scripts/ui/hud.gd:153 scripts/ui/hud.gd:296
+#: scripts/ui/hud.gd:158 scripts/ui/hud.gd:305
 msgid "Saved"
 msgstr "已保存"
 
@@ -15594,6 +15774,10 @@ msgstr "半价和解"
 msgid "SettleGig"
 msgstr "SettleGig"
 
+#: scripts/ui/modals/traffic_modal.gd:54
+msgid "SettleTraffic"
+msgstr "SettleTraffic"
+
 #: scripts/ui/modals/company_os.gd:883
 msgid "Settlement"
 msgstr "结算方式"
@@ -15605,6 +15789,10 @@ msgstr "已付资遣费：%s。"
 #: scripts/sim/staff.gd:155
 msgid "Severance — %s"
 msgstr "资遣费——%s"
+
+#: scripts/sim/traffic_safety.gd:9
+msgid "Severe injury"
+msgstr "重伤"
 
 #: data/dialogue/sunny_adeyemi_intro.json
 msgid "Shade, direction and the roof load limit decide the yield. A south roof with clean cells pays back fastest; add a battery when the client uses power at the evening peak."
@@ -16702,7 +16890,7 @@ msgstr "今日预约"
 msgid "TOMAS"
 msgstr "TOMAS"
 
-#: scripts/ui/hud.gd:110 scripts/ui/tutorial.gd:27
+#: scripts/ui/hud.gd:115 scripts/ui/tutorial.gd:27
 msgid "Tab"
 msgstr "Tab"
 
@@ -16729,6 +16917,10 @@ msgstr "抽号码牌"
 #: data/dialogue/ana_register.json
 msgid "Take a number whenever you're ready."
 msgstr "准备好了就抽号码牌。"
+
+#: scripts/ui/modals/traffic_modal.gd:30
+msgid "Take ambulance"
+msgstr "搭乘救护车"
 
 #: scripts/ui/modals/city_guide_modal.gd:32
 msgid "Take me there"
@@ -17586,7 +17778,7 @@ msgstr "团队留下来，没有任何房间受影响。"
 msgid "The teller is open weekdays 9 to 16. Loans are at the manager's desk."
 msgstr "柜台平日 9 点到 16 点营业。贷款请找经理。"
 
-#: scripts/world/actions.gd:102
+#: scripts/world/actions.gd:104
 msgid "The teller window is closed."
 msgstr "柜台窗口已关闭。"
 
@@ -17902,7 +18094,7 @@ msgstr "有三种做法。我把选项传给你。趁情况还没更糟，挑一
 msgid "Thu"
 msgstr "四"
 
-#: scripts/world/actions.gd:121
+#: scripts/world/actions.gd:123
 msgid "Ticket A-%d. Now serving A-%d."
 msgstr "号码 A-%d。目前叫号 A-%d。"
 
@@ -18090,6 +18282,14 @@ msgstr "TradeLink 批发"
 msgid "Traded %s %s · internal sales %s · saved versus outside %s"
 msgstr "已交易 %s %s · 内部销售 %s · 相对外购省下 %s"
 
+#: scripts/sim/traffic_safety.gd:93
+msgid "Traffic claim filed. Return after seven days to collect the verified medical reimbursement."
+msgstr "交通理赔已申请。七天后回来领取核定医疗补偿。"
+
+#: scripts/sim/traffic_safety.gd:43
+msgid "Traffic collision: %s. Visit the clinic or pharmacy."
+msgstr "交通碰撞：%s。请至诊所或药局就医。"
+
 #: data/economy/automotive.json
 msgid "Trailhead SUV"
 msgstr "Trailhead 休旅车"
@@ -18142,6 +18342,18 @@ msgstr "当作 VIP 招待，免费升等套房"
 msgid "Treat her like any other guest"
 msgstr "和其他客人一视同仁"
 
+#: scripts/ui/modals/traffic_modal.gd:41
+msgid "Treatment"
+msgstr "Treatment"
+
+#: scripts/ui/modals/traffic_modal.gd:41
+msgid "Treatment / medicine: %s"
+msgstr "治疗／药品：%s"
+
+#: scripts/sim/traffic_safety.gd:86 scripts/ui/modals/traffic_modal.gd:49
+msgid "Treatment complete: %d hospital days; medical bill %s; health claim %s."
+msgstr "治疗完成：住院 %d 天；医疗费 %s；健康理赔 %s。"
+
 #: data/story/chapters.json
 msgid "Tried the new payment rails."
 msgstr "试了新的支付管道。"
@@ -18182,7 +18394,7 @@ msgstr "两万五千销售额"
 msgid "Two focused hours: %.1f hours of the work done. %s"
 msgstr "专心工作两小时：完成 %.1f 小时的工作量。%s"
 
-#: scripts/world/actions.gd:270
+#: scripts/world/actions.gd:275
 msgid "Two hours behind your own counter: %d customers served."
 msgstr "在自己的吧台站了两小时：服务了 %d 位客人。"
 
@@ -18381,6 +18593,18 @@ msgstr "更新上架"
 #: data/help/glossary.json
 msgid "Upfront payment"
 msgstr "预付款"
+
+#: scripts/ui/modals/traffic_modal.gd:26
+msgid "Use a green crosswalk. Crossing elsewhere or on red can cause a collision."
+msgstr "请走绿灯斑马线。在其他位置或闯红灯过马路可能遭碰撞。"
+
+#: data/help/help.json
+msgid "Use a green crosswalk; cars yield there. A collision depends on actual speed and braking distance."
+msgstr "走绿灯斑马线，车辆会停让。碰撞伤势取决于实际车速与煞车距离。"
+
+#: scripts/ui/hud.gd:237 scripts/ui/hud.gd:39
+msgid "Use crosswalks for safer crossing"
+msgstr "从斑马线过马路比较安全"
 
 #: scripts/ui/modals/freelance_modal.gd:63
 msgid "Use included revision"
@@ -18638,9 +18862,17 @@ msgstr "请先到豪景高地的 The Aster 拜访 Henri Dubois。"
 msgid "Visit Threadline on Shopping Street to browse the outfits available now."
 msgstr "到商店街的 Threadline 看看目前贩售的服装。"
 
+#: scripts/ui/modals/traffic_modal.gd:33
+msgid "Visit clinic"
+msgstr "前往诊所"
+
 #: scripts/sim/gates.gd:49
 msgid "Visit or lease the location."
 msgstr "亲自去看或租下该地点。"
+
+#: scripts/ui/modals/traffic_modal.gd:33
+msgid "VisitClinic"
+msgstr "VisitClinic"
 
 #: scripts/ui/minigames/cowork_host_game.gd:38
 msgid "Visitor %d / %d"
@@ -18958,7 +19190,7 @@ msgstr "跟着城市一起转型绿色。"
 msgid "What are the payment and delivery terms?"
 msgstr "付款与交货条款是什么？"
 
-#: scripts/ui/hud.gd:163
+#: scripts/ui/hud.gd:168
 msgid "What can I do here?"
 msgstr "这里能做什么？"
 
@@ -19010,7 +19242,7 @@ msgstr "最浓的那种。"
 msgid "When a company closes, its undelivered contracts end and its unpaid invoices go to a collector. Old contracts stay visible, but the closed company cannot deliver or collect again."
 msgstr "公司关闭时，未交货合约终止，未收款发票让售催收公司。旧合约保留供查阅，但已结束公司不能再交货或收款。"
 
-#: scripts/world/actions.gd:282
+#: scripts/world/actions.gd:287
 msgid "When are we getting paid? Rent's due."
 msgstr "什么时候发薪水？房租要缴了。"
 
@@ -19570,7 +19802,7 @@ msgstr "你的现金"
 msgid "Your cost / outside market"
 msgstr "你的成本／外部市价"
 
-#: scripts/world/actions.gd:264
+#: scripts/world/actions.gd:269
 msgid "Your counter — %s"
 msgstr "你的吧台——%s"
 
@@ -19873,6 +20105,10 @@ msgstr "充电销售"
 #: data/businesses/media.json
 msgid "client fees"
 msgstr "客户费用"
+
+#: data/npcs/dr_lin.json
+msgid "clinic doctor"
+msgstr "诊所医师"
 
 #: scripts/sim/careers.gd:132 scripts/ui/tutorial.gd:464 scripts/ui/tutorial.gd:597
 msgid "closed now"
@@ -20298,7 +20534,7 @@ msgstr "关 ✗"
 msgid "on delivery"
 msgstr "交件时"
 
-#: scripts/world/actions.gd:153
+#: scripts/world/actions.gd:155
 msgid "on the house (staff)"
 msgstr "员工免费"
 
@@ -20790,7 +21026,7 @@ msgstr "◆ 你在这里"
 msgid "◉  Shutter"
 msgstr "◉  快门"
 
-#: scripts/ui/hud.gd:257
+#: scripts/ui/hud.gd:266
 msgid "● %d new"
 msgstr "● %d 则新消息"
 

@@ -116,6 +116,7 @@ func _on_hour(t: int, h: int) -> void:
 	Contracts.on_hour(t, h)
 	phase = "hour:living"
 	Living.on_hour(t, h)
+	TrafficSafety.on_hour(t, h)
 	phase = "hour:events"
 	EventEngine.on_hour(t, h)
 	phase = "hour:careers"
