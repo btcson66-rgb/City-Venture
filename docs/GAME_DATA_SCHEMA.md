@@ -504,3 +504,4 @@ Lazy save keys: fx {rates, history[code]: [{day,rate}], last_day, rng as signed 
 ## Trade RFQ preview (issue70)
 
 `economy/trade.json` contains terms with origin/freight/insurance/duty payers, risk_transfer and insurance_required; goods keyed by product with tariff_code and regional local-unit price/capacity/demand; routes with freight_factor/default_risk; transport with base_fee/unit_fee/days/departure_weekday/loss_risk; payments with fee_rate/fixed_fee/days/default_multiplier. Other numeric keys tune quote expiry, handling, insurance, stress and warehouse rent. TradeQuote.sheet returns an immutable estimate with units and quoted_at/valid_until. No persistent trade state or executed job exists in this preview.
+Customs decision choices may set `recommended: true`; only the first available explicitly recommended choice gets primary styling. An unavailable recommendation does not promote an unmarked choice.

@@ -75,15 +75,10 @@ func build() -> void:
 		footer.add_child(ok)
 		return
 	var recommended := ""
-	if pres.has("recommended_choice"):
-		for c in def.get("choices", []):
-			if c["id"] == pres["recommended_choice"] and EventEngine.choice_available(c, inst["ctx"]):
-				recommended = str(c["id"])
-		if recommended == "":
-			for c in def.get("choices", []):
-				if EventEngine.choice_available(c, inst["ctx"]):
-					recommended = str(c["id"])
-					break
+	for c in def.get("choices", []):
+		if c.get("recommended", false) and EventEngine.choice_available(c, inst["ctx"]):
+			recommended = str(c["id"])
+			break
 	for c in def.get("choices", []):
 		var avail := EventEngine.choice_available(c, inst["ctx"])
 		var row := UIK.vbox(0)
@@ -101,7 +96,7 @@ func build() -> void:
 			row.add_child(b)
 		if c.has("detail"):
 			var suffix := "" if avail else I18n.t("  (not possible now)")
-			if pres.has("recommended_choice") and not avail:
+			if def.get("id", "") == "customs_hold" and not avail:
 				suffix = I18n.t(" ✗ Transfer company cash or choose withdrawal.")
 			var dl := UIK.wrap(EventEngine.fill(c["detail"], inst["ctx"]) + suffix, 7, Art.C_MUTED, 370)
 			var pad := MarginContainer.new()

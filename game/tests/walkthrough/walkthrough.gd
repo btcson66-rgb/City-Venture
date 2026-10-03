@@ -552,6 +552,10 @@ func _pack_and_ship_home() -> void:
 	await popups()
 	if Ecommerce.orders_with(["placed"], "riverside_studio").is_empty():
 		return
+	# Defer new decisions until this atomic packing/courier interaction finishes.
+	# The queue remains intact and is handled by the next popups() call.
+	var decisions_were_suppressed: bool = UIRoot._suppress_decisions
+	UIRoot._suppress_decisions = true
 	await bot.use_action("pack_orders")
 	await bot.wait(0.6)
 	await once_shot("packing_table")
@@ -561,6 +565,7 @@ func _pack_and_ship_home() -> void:
 	await bot.click_named("CourierExpress", 3.0)
 	await bot.wait(0.6)
 	await close_modal()
+	UIRoot._suppress_decisions = decisions_were_suppressed
 
 
 func open_os_at(action_pred: Callable, what: String) -> void:
@@ -1651,6 +1656,21 @@ func _chapters_10_to_12() -> void:
 ## 2B, the exchange account) so Chapters 10–12 can be rerun in minutes.
 ## Season-two input flow. --from=ch13 uses explicit company/stock/customer/time fixtures.
 ## The full walkthrough keeps its earned company and waits through the existing sleep/packing loop.
+## Wait for the export row's layout before native input; long played saves have several rows.
+func _export_row_input(button_name: String) -> void:
+	await bot.wait(0.5)
+	var button: Button = bot.button_named(button_name)
+	if button != null:
+		var parent: Node = button.get_parent()
+		while parent != null and not parent is ScrollContainer:
+			parent = parent.get_parent()
+		if parent != null:
+			(parent as ScrollContainer).ensure_control_visible(button)
+			await bot.wait(0.5)
+	await bot.click_named(button_name)
+	await bot.wait(0.5)
+
+
 func _chapters_13_to_14(fast := false) -> void:
 	await bot.wait(4.0)
 	if fast:
@@ -1660,6 +1680,12 @@ func _chapters_13_to_14(fast := false) -> void:
 		Company.open_business_account(15000)
 		Ecommerce._add_stock("riverside_studio", "wireless_earbuds", 30, 18.0, 0.0)
 		Ledger.post(GameState.company_id(), I18n.t("Inventory"), [{"acct": "inventory", "dr": 540}, {"acct": "cash", "cr": 540}])
+		# Keep the export row below the fold, as in a played season-one save.
+		for product in ["water_bottle", "desk_lamp", "phone_stand", "solar_lamp"]:
+			Ecommerce._add_stock("riverside_studio", product, 1, 1.0, 0.0)
+			Ledger.post(GameState.company_id(), I18n.t("Inventory"), [{"acct": "inventory", "dr": 1}, {"acct": "cash", "cr": 1}])
+			Ecommerce.create_listing(product, float(DataDB.product(product)["price_min"]), "self", 0.9)
+			Ecommerce.set_active(str(Ecommerce.listing_for(product)["id"]), false)
 		Ecommerce.create_listing("wireless_earbuds", 60.0, "self", 0.9)
 		StoryEngine.St()["active"].clear()
 		StoryEngine.start_chapter("ch13_first_order_abroad")
@@ -1700,13 +1726,16 @@ func _chapters_13_to_14(fast := false) -> void:
 		await bot.click_named("OpenGlobalStore_northridge")
 	var listing: Dictionary = {}
 	for l in Ecommerce.E()["listings"].values():
-		if l.get("active", false) and Ecommerce.best_location(str(l["product"])) != "":
-			listing = l
-			break
+		if l.get("active", false) and Ecommerce.best_location(str(l["product"])) == "riverside_studio":
+			if listing.is_empty() or Ecommerce.available("riverside_studio", str(l["product"])) > Ecommerce.available("riverside_studio", str(listing["product"])):
+				listing = l
 	if listing.is_empty():
-		bot.fail("season two has no active in-stock listing; restocking is required")
+		bot.fail("season two has no active listing stocked at the home packing table; restocking is required")
 		return
-	await bot.click_named("SaveGlobalPrice_" + str(listing["id"]))
+	await _export_row_input("SaveGlobalPrice_" + str(listing["id"]))
+	bot.expect(GlobalMarket.order_allowed("northridge", str(listing["id"])), "selected export listing really has a saved price")
+	if not GlobalMarket.order_allowed("northridge", str(listing["id"])):
+		return
 	await bot.shot("ch13_storefront")
 	await close_modal()
 	var first: Dictionary = {}
@@ -1756,7 +1785,7 @@ func _chapters_13_to_14(fast := false) -> void:
 	bot.step("Chapter 14 — DDP declaration and accurate tariff classification")
 	await _home_laptop("sales")
 	await bot.click_named("SalesPage_overseas")
-	await bot.click_named("ExportPolicy_ddp_" + str(listing["id"]))
+	await _export_row_input("ExportPolicy_ddp_" + str(listing["id"]))
 	await bot.click_named("TariffCode_" + str(listing["id"]))
 	# Sorted options start with electronics; other full-walk products choose their actual category.
 	var keys: Array = Customs.cfg()["codes"].keys()
@@ -1786,7 +1815,7 @@ func _chapters_13_to_14(fast := false) -> void:
 		Clock.advance(3 * Clock.DAY)   # let real scheduled returns surface before judging the trial
 		StoryEngine.check()
 	else:
-		await pass_time_at_home(func(): return "ch14_customs" in StoryEngine.St()["chapters_done"], 45, true)
+		await pass_time_at_home(func(): return "ch14_customs" in StoryEngine.St()["chapters_done"] or Customs.review_available(), 16, true)
 	await _home_laptop("sales")
 	await bot.click_named("SalesPage_overseas")
 	if not "ch14_customs" in StoryEngine.St()["chapters_done"] and Customs.review_available():
