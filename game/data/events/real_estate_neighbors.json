@@ -1,0 +1,38 @@
+{
+ "id": "real_estate_neighbors",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:real_estate_active"
+  ],
+  "chance": 0.025,
+  "cooldown_days": 28,
+  "once": false,
+  "earliest_day": 4
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "diane_harlow",
+  "title": "Neighbors oppose the project",
+  "icon": "warning",
+  "lines": [
+   "Hear the neighbors, pay mediation costs and pause construction."
+  ]
+ },
+ "choices": [
+  {
+   "id": "respond",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "real_estate",
+     "kind": "neighbors"
+    }
+   ],
+   "outcome": "Hear the neighbors, pay mediation costs and pause construction.",
+   "label": "Review properties and respond"
+  }
+ ]
+}

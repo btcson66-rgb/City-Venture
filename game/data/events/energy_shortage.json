@@ -1,0 +1,49 @@
+{
+ "id": "energy_shortage",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:energy_active"
+  ],
+  "chance": 0.012,
+  "cooldown_days": 30,
+  "earliest_day": 4
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "sunny_adeyemi",
+  "title": "Solar panel shortage",
+  "icon": "warning",
+  "lines": [
+   "A shipment of panels is stuck. Pay a premium supplier for an allocation, or wait and absorb the higher materials price."
+  ]
+ },
+ "choices": [
+  {
+   "id": "premium",
+   "label": "Pay Helio a premium allocation fee",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "energy",
+     "kind": "shortage_premium"
+    }
+   ],
+   "outcome": "Materials stay about 10% higher for three weeks."
+  },
+  {
+   "id": "wait",
+   "label": "Wait for the shipment and pay the shortage price",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "energy",
+     "kind": "shortage_wait"
+    }
+   ],
+   "outcome": "Materials cost 35% more, easing over six weeks."
+  }
+ ]
+}

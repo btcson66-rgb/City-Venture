@@ -1,11 +1,24 @@
 # CITY VENTURE — Game Data Schema
 
+### Economy balance overlays
+
+`economy/balance.json` has `definitions: {products: {id: {numeric_field: value}}}`. DataDB applies these values after
+loading the original definitions. Only existing numeric fields may be replaced; unknown ids or nonnumeric fields
+produce an error. Saved inventory cost, orders, contracts, cash and ledger entries are never rewritten by an overlay.
+`baseline_shipping_costs` stores the pre-tuning economy/express cost table for the headless `--baseline` experiment only.
+The production simulation reads the current shipping table. New industry definitions are unaffected unless a designer
+explicitly adds their numeric fields to a later overlay.
+
 All content lives in `game/data/` as JSON, loaded by `DataDB` at boot.
+
+Art keys keep their existing logical pixel contract (`#62`): a matching `assets/world_detail/<key>.png`
+overrides the rendered image through `Art`, while native dimensions, sprite metadata, atlas coordinates,
+map positions and collision alpha masks remain authoritative. No saved fields or format versions change.
 Conventions:
 - `id` is a `snake_case` string, unique within its folder.
 - Money is a float in the entity's currency (Aurelia Dollar, `AUD$`, displayed as `$`).
 - Time durations are in **game minutes** (`*_min`) or **days** (`*_days`).
-- `status` on definitions: `active` (in this build) or `planned` (defined, not playable. The UI must say so).
+- `status` on definitions: `active` (playable) or `planned` (retained data, hidden from player lists).
 - Text shown to players lives in `text`/`lines` fields so it can be localised later.
 
 `DataDB.validate()` checks everything marked **(ref)**.
@@ -113,7 +126,7 @@ Contacts without an `appearance` (`"phone_only": true`) may set `"logo": "<id>"`
 ### 1.8 Buildings — `data/buildings/<id>.json`
 ```json
 {
-  "id": "bloom_coffee", "name": "Bloom Coffee", "district": "riverside", "type": "cafe",
+  "id": "bloom_coffee", "name": "Bloom Coffee", "district": "riverside", "type": "cafe", "category": "Cafe",
   "hours": {"open":"07:00","close":"20:00","days":"all"},
   "exterior": {"sprite":"buildings/mixed_use_bloom","x":512,"y":160,"door":{"x":64,"y":142},"sign":"Bloom Coffee"},
   "interior": {
@@ -159,6 +172,29 @@ Building keys added with Old Town:
   `lettings`, `flat_to_let` (the last two only pick a minimap icon).
 
 `type` sets the minimap icon and how many ambient customers sit down: `cafe` 3, `restaurant` 4, `retail` 2 (on its sofas and benches), `coworking` 5, `bank` 2, `civic` 3, `parcel` 1.
+
+`category` is a translated, player-facing building type (Restaurant, Clothing store, Bank, Office, Warehouse, etc.).
+Doors and City Guide read it directly; adding a building requires its data and translation, not a UI list edit.
+`BuildingInfo` derives activities from enabled interior interactables except `look`, and from actual present NPC
+interactables in the live room. A room with no such activity explicitly says it is sightseeing-only. Guide tags
+come from action kinds; station instructions come from the district's `metro` data. District status comes from
+`data/districts/<id>.json` when supplied, otherwise the city district definition. Inactive districts have no guide
+destinations or labels; active buildings are discovered by their `district`. Optional building `status` defaults to
+`active`; `enterable` defaults to `true`. `planned` or explicit `enterable:false` retains the facade and interior data
+but removes public entry and guide navigation. Changing only `status` to `active` enables completed future content.
+An otherwise active room needs an unlocked non-look interactable or an NPC whose real schedule/condition matches
+now. NPC-only rooms and unleased café premises have no public prompt until something can be done there. Existing
+triggers for active buildings recheck this each frame, so NPC arrival restores entry without scene reload.
+Loading an old save inside a hidden room returns to `district:building.district`, spawn `door_<building_id>`;
+all saved finance, inventory, contracts and leases remain unchanged. Facades keep this street spawn even as scenery.
+Inactive districts are plain map blocks with no labels/stations and are absent from guide lists.
+
+Save data adds `building_visits: {building_id: count}` lazily on entry; the first two entries show a dismissible
+four-second room introduction. Missing counts in older saves start at zero and existing `visited` flags are preserved.
+`user://settings.cfg` stores `[general] interaction_markers` (boolean, default true), independent of saves.
+`interior.interactables[].enabled` defaults to true. Marker offsets only affect drawing, never action coordinates.
+All data actions must map to an existing icon in `BuildingInfo.ACTION_ICONS`; the unit test fails on unknown actions.
+Phone destinations temporarily override the existing Tutorial resolver/arrow until the target interior is reached.
 
 Prop keys (districts and interiors): `sprite`, `x`, `y` (top-left of the design footprint), `solid` (`false` or `[x,y,w,h]`), `wall`, `floor`, `glow`, `night`, `label`, `interact`, plus:
 
@@ -398,6 +434,10 @@ Staff role `driver` (`data/economy/staff.json`) uses the generic role keys `work
 
 ## 2. Runtime state (save file)
 
+Save transfer (#22) retains `SAVE_FORMAT = 1`: `.cvsave` has the same `{format, summary, data}` envelope as slots. Imports validate core records and reconciled ledger balances before adding missing historical fields. They never rewrite historical money or RNG state. Slots use atomic temporary-file replacement, three `slot_n.bak1..3` backups, and a separately copied `saves/replaced/` archive before explicit replacement. Invalid primaries remain visible for recovery; imports preserve the source `meta.version` for the subsequent update notice. No new mandatory saved keys are introduced.
+
+Release notes (#23): `data/help/patch_notes.json` maps version strings to `{date: "YYYY-MM-DD", lines: [English player-facing strings]}`. DataDB reads this map. After `load_and_enter` completes its scene transition, notes with `saved < version <= installed` are sorted numerically and shown once. Closing the card atomically saves the installed `meta.version`; failure restores the earlier version in memory. Closing a card from a replaced game cannot modify the new game. `load_data` and imports retain source versions; new games already start at the installed version. Future entries remain hidden until that version is installed.
+
 ```
 data.player            {name, appearance{presentation,face,hair,hair_color,skin,eye_shape,eye_color,brows,mouth},
                         outfit, wardrobe[outfit ids owned], home:"riverside_studio", location{kind,id,x,y,facing}, flags{}}
@@ -476,3 +516,31 @@ data.living.leases     {<property_id>: {rent, day (of month), since, entity}}   
 Flags and stats the café sets: `met_okafor`, `leased_corner_cafe`, `food_permit`, `cafe_first_sale`; stats `cafe_customers`,
 `cafe_days_open`, `cafe_owner_shifts`, `cafe_rating`. Ledger expense categories added with it: `rent_shop`, `rent_warehouse`,
 `fitout` (`fuel`, `vehicle` and `insurance` are reserved for the logistics business; nothing posts to them yet).
+
+
+## Industry framework state (#63)
+
+- Every ledger journal source includes `segment`: industry id or `shared`. Old entries need not be rewritten.
+- `jobs_service`: lazy `{seq, items}`. Each job has `id`, `entity`, `segment`, `client`, `scope`, `status`, `price` (AUD$), `work`/`progress` (caller-defined work units), `due`/`delivered`/`pay_due` (absolute game minutes), `terms` (0/30/60 days), `deposit` and `penalty_rate` (fractions), `deposit_paid` and `receivable` (AUD$). States: offered → active → delivered → invoiced → paid; company closure gives closed.
+- `operating_assets`: lazy `{seq, items}`. Owned/rented assets retain price/book/deposit (AUD$), life_days/rent_days/maintenance_days (game days), bought/next_rent (absolute minutes), depreciation_day/maintenance_day (day index), failure_chance (daily probability when maintenance overdue), status working/broken/sold, and segment/entity. `legacy_expensed` marks logistics vans whose purchase was already charged to vehicle expense.
+- `economy/industries.json`: asset service_hour, maintenance_days/cost, failure_chance and resale. Individual asset specifications can override these fields. Resale is clamped to 0.4–0.6.
+- MonthClose adds `segments: {rows, totals, shared_pool}` without changing existing totals. Each row includes revenue, refunds, net_revenue, cogs, gross_profit, opex, allocated, other_income and operating_profit in AUD$. Shared expenses are allocated only to positive-revenue segments; exact cents are preserved.
+- Industry registration fields: id, sim_class, prefixes, hour slot, optional actions. Tab descriptors: id, label, icon, order, render Callable or legacy method, optional start_label. Player-visible content still needs help/glossary/i18n.
+# Manufacturing extension (#64)
+
+`economy/manufacturing.json` configures RFQ price/quantity/due/quality terms, materials/MOQ/lead/capacity, machine purchase/rent/capacity/life/maintenance/failure, overtime, sampling/rework, crises, CNC and brand costs. `GameState.data.manufacturing` is lazy and save-compatible: entity, active, machines (Assets IDs), lots (qty/unit/quality), pos (cost/due/status), rfqs, orders (Jobs ID/produced/escaped/cost/refund), slots (start/end/machine/job/overtime/outsource/status), stage, inspection, quality history and recall deduplication. Scheduled prefixes: `mfg.arrival`, `mfg.outsource`, `mfg.brand`. Event effect `industry` routes a named crisis through the registry. District optional `traffic_types` chooses existing vehicle types without changing other districts.
+
+# Real Estate extension (#65)
+
+Shared properties may have `purchase_price`, `rooms`, investment_home kind and segment. `real_estate` lazy state contains active/entity/stage, mandates, clients, owned properties (book/base_price/uplift/rent/screen/tenant/renovation/mortgage/status), tenant invoices, project (budget/paid/units/milestones/due/delay/job/status), market (index/rate_shift/month/last_rate), seq/week. `real_estate_landmark` holds completed/name independently of company closure. Compliance.permits is `{id: {entity,status,due}}`; `cmp.property_permit` completes a paid process. Bank mortgage records keep existing loan fields plus type/property; rates reset each payment. Jobs direction=purchase uses accept_purchase/purchase_milestone, capitalizes costs and excludes incoming deposits/invoices/collateral. Scheduled `re.tenant/rent/collect/renovation/build` persist. Economy controls all permit/matching/rent/credit/renovation/development/market/crisis costs. Property equity is market minus the linked mortgage; unrealized market moves are disclosure, not income.
+
+### Media (#66)
+`economy/media.json` defines brief budgets/targets, creative card preferences, fees/time, staff skill multipliers, normalized channel mixes, CPM/audience/saturation, reputation, capacity, owned-media asset/inventory/upkeep and crises. `GameState.data.media` lazily stores entity/active, briefs, campaigns (mix, cumulative channel spend, daily report, status, KPI), reputation, completed count, radio asset/audience/inventory/day/offers and expiring per-industry demand boosts. Client jobs reference incoming Jobs; inventory asset uses Assets. Events have registry `industry:media` effects.
+
+### Hotel (#67)
+`economy/hotel.json` defines room types (market price/range, fit-out and renovation costs), the 12/30/50 room stages with their gates, demand (weekday, season, rating pull, price elasticity), channels (OTA tiers/commission, no-shows, overbooking), housekeeping, supplies, reviews (weights and formulas), city events, group blocks and crisis effects. `GameState.data.hotel` lazily stores active/entity/mode/stage, rooms (count, price, condition, asset ids, renovation end), channel settings, overbooking, breakfast, peak surcharge, temporary cleaners, city events, monthly demand trend, group blocks (Jobs ids), reviews (day/kind/weight/score), expiring modifiers, OTA accrual, history and stats. Properties `aster_inn` gives the lease; staff roles `housekeeper`/`front_desk` use `needs_flag: hotel_active`. Scheduled `hotel.reno` persists. Events use `industry:hotel` crisis kinds; old saves without hotel state initialise inactive.
+### Energy (#69)
+`economy/energy.json` holds tariffs (peak, off-peak, export, feed-in), panel kW/kg, orientation yield, roof kinds (grid size, load, usage, payback tolerance, terms, deposit), shade generation, margins, crew productivity, subsidy rates/quotas/fees/season, warranty, weather, EV adoption, charging types/spots/district traffic and crisis numbers. `GameState.data.energy` lazily stores active/entity/reputation/week, leads (roof grid, shade, layout, options), installs (Jobs id keyed: kW, materials, price, gross, grant, subsidy state, crew-days done, warranty end), warranty claims, subsidy year/used/applications, charging sites and deals (asset id, price, kWh/revenue/downtime), own rooftop arrays, decaying `mods` (materials, subsidy, tariff, security), weather and `ev_boost`. Scheduled `energy.decision/grant/open` persist. Optional hook: `GameState.data.automotive.ev_boost` raises EV adoption when present. Events use `industry:energy` effects; roles add `electrician`.
+
+### Automotive (#68)
+`economy/automotive.json` holds the licence, lot slots per stage, the auction (weekday, lots, bidder range, buyer fee, inspection), used car models and defects, reconditioning options, listing sale curve, airport passenger flow (base, season, weekday), rental classes with rates, damage, accident and insurance tables, service intervals, dealership brands (EV flag, margin, models), deposit, minimum stock and floor-plan interest, the four crisis settings and `hooks` for Hotel guests, Energy chargers and `ev_boost`. Events `automotive_*` use `op: industry`, `industry: automotive`.

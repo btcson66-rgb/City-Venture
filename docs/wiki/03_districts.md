@@ -203,7 +203,9 @@ Old Town 本身已開放（見上）。以下是設定稿裡**還沒做**的部�
 | 捷運 | 已開放（M5 Loop Line 的最後一站） |
 | 音樂 | 規劃：爵士吉他、手風琴（現在沿用 `day_city`） |
 
-### Residential 住宅區 · `residential` · P1
+### Residential 住宅區 · `residential` · Implemented #65
+
+已開放 Maple Court、Birch Row、Harlow & Finch、Lot 7 與 M5 Loop／Old Town 步行連接。房產玩法見 [房地產](20_real_estate.md)。下表的 FreshMart、社區中心、Maya 搬家及公園物件保留為後續生活擴充規劃。
 
 | 項目 | 設定 |
 |------|------|
@@ -214,10 +216,12 @@ Old Town 本身已開放（見上）。以下是設定稿裡**還沒做**的部�
 | 可進入建築 | `maple_court` Maple Court 公寓（**住宅第 2 階**；Maya 的新家，支線「幫 Maya 搬家」）· `freshmart` FreshMart 超市（生活費、買日用品）· `community_center` 社區中心（活動、招募兼職員工） |
 | 填充建築 | `apartment_balcony` 陽台公寓 · `townhouse_row` 連棟透天 · `school_front` 小學正門（不可進入） |
 | 新街道物件 | `swing_set` 鞦韆、`slide` 溜滑梯、`sandbox` 沙坑、`basketball_hoop` 籃球架、`mailbox_bank` 信箱牆、`laundry_line` 晾衣繩（陽台用） |
-| 捷運 | 無（規劃公車站） |
+| 捷運 | M5 Loop 已開放；另有 Old Town 步行出口 |
 | 音樂 | 溫暖木吉他 |
 
 ### University 大學區 · `university` · P1
+
+Implemented #66: M1 connects the district. Enter `aurelia_university`, `the_loft`, `campus_radio`; mentor Dr. Imani Cole, Kai Morgan and Nia Park provide client/recruitment access. Full current media workflow is in [21_media.md](21_media.md). The older institute/innovation-lab and M2 extension concepts below remain future art/world requests.
 
 | 項目 | 設定 |
 |------|------|
@@ -233,6 +237,8 @@ Old Town 本身已開放（見上）。以下是設定稿裡**還沒做**的部�
 | 音樂 | 明亮 lo-fi |
 
 ### Luxury Heights 豪宅區 · `luxury_heights` · P3
+
+Implemented #67: M5 connects the district. Enter `the_aster`, `skyline_grand`, `observation_deck`; Henri Dubois, Priya Nair, Owen Blake and Vera Stone support the hotel business. Full workflow in [22_hotel.md](22_hotel.md). The penthouse, villa, club, motors and Aurum dining concepts below remain future requests.
 
 | 項目 | 設定 |
 |------|------|
@@ -305,3 +311,5 @@ Old Town 本身已開放（見上）。以下是設定稿裡**還沒做**的部�
 
 美術：25 個城市／世界／捷運素材的原尺寸及 4× 已交，含匯入檔。城市主圖、12 個街區選取、8 個世界區域選取與捷運原生 UI 已驗收（英文與繁中），53 張實拍巡禮 0 失敗。其餘一張車站預覽和備用世界背景只交素材，沒有 runtime call site。點位、地圖資料和狀態未改。高解析載入仍待 Claude 接線，須保留邏輯尺寸與點擊座標。證據：`evidence/20261001_map_quality/README.md`。
 
+
+Implemented #68: M4 connects the Airport district. Enter `airport_terminal`, `gateway_car_rental`, `aurelia_auto_auction` and look at `cargo_terminal`; Frank Doyle, Jun Ito and Mara Quinn support the automotive business. Full workflow in [23_automotive.md](23_automotive.md).

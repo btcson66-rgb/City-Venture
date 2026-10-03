@@ -110,6 +110,8 @@ func set_pose(p: String) -> bool:
 
 func _fit_sheet(s: Sprite2D) -> void:
 	# High-detail atlases keep the same logical feet anchor and walk footprint.
+	if s.texture == null:   # a missing layer is already warned about by Art; draw the rest
+		return
 	var cell := s.texture.get_size() / Vector2(4, 3)
 	s.scale = Vector2(FRAME_W, FRAME_H) / cell
 	s.offset = -FEET / s.scale

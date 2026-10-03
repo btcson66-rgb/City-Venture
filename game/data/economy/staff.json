@@ -95,6 +95,217 @@
     17
    ],
    "desc": "Takes your van out on one posted delivery run every workday from 9:00 and banks the pay. Drivers rarely plan the route as well as you can: expect a longer way round, and rush runs they can't reach in time."
+  },
+  "technician": {
+   "name": "Factory technician",
+   "salary_week": [
+    1100,
+    1100
+   ],
+   "needs_office": false,
+   "needs_lease": "unit12_factory",
+   "needs_text": "Lease Unit 12 before hiring a technician.",
+   "workplace": "unit12_factory",
+   "work_days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "work_hours": [
+    9,
+    17
+   ],
+   "desc": "Runs factory machines. Skill lowers defects; payroll remains due during downtime."
+  },
+  "realty_agent": {
+   "name": "Realty agent",
+   "salary_week": [
+    900,
+    900
+   ],
+   "needs_office": false,
+   "needs_lease": "realty_office",
+   "workplace": "harlow_finch",
+   "work_days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "work_hours": [
+    9,
+    17
+   ],
+   "desc": "Assists brokerage client matches. Payroll is due even when deals fail.",
+   "needs_text": "Lease Harlow & Finch before hiring an agent."
+  },
+  "media_designer": {
+   "name": "Campaign designer",
+   "salary_week": [
+    950,
+    950
+   ],
+   "needs_office": false,
+   "needs_lease": "loft_office",
+   "workplace": "the_loft",
+   "work_days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "work_hours": [
+    9,
+    17
+   ],
+   "desc": "Creative skill improves campaign click-through. Salary is due even when a pitch loses.",
+   "needs_text": "Lease The Loft before hiring campaign staff."
+  },
+  "media_buyer": {
+   "name": "Media buyer",
+   "salary_week": [
+    900,
+    900
+   ],
+   "needs_office": false,
+   "needs_lease": "loft_office",
+   "workplace": "the_loft",
+   "work_days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "work_hours": [
+    9,
+    17
+   ],
+   "desc": "A designer and media buyer unlock three simultaneous client campaigns.",
+   "needs_text": "Lease The Loft before hiring campaign staff."
+  },
+  "media_intern": {
+   "name": "Student intern",
+   "salary_week": [
+    350,
+    350
+   ],
+   "needs_office": false,
+   "needs_lease": "loft_office",
+   "workplace": "the_loft",
+   "work_days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "work_hours": [
+    9,
+    17
+   ],
+   "desc": "Low weekly pay, but slower production than an experienced designer.",
+   "needs_text": "Lease The Loft before hiring campaign staff."
+  },
+  "housekeeper": {
+   "name": "Housekeeper",
+   "salary_week": [
+    700,
+    700
+   ],
+   "needs_office": false,
+   "needs_flag": "hotel_active",
+   "workplace": "the_aster",
+   "work_days": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    0
+   ],
+   "work_hours": [
+    8,
+    16
+   ],
+   "desc": "Each housekeeper cleans about five rooms a day; rooms left dirty cannot be sold. Payroll is due even in low season.",
+   "needs_text": "Take over or lease the Aster Inn before hiring hotel staff."
+  },
+  "front_desk": {
+   "name": "Front desk agent",
+   "salary_week": [
+    800,
+    800
+   ],
+   "needs_office": false,
+   "needs_flag": "hotel_active",
+   "workplace": "the_aster",
+   "work_days": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    0
+   ],
+   "work_hours": [
+    8,
+    16
+   ],
+   "desc": "Check-in coverage lifts the service score in guest reviews.",
+   "needs_text": "Take over or lease the Aster Inn before hiring hotel staff."
+  },
+  "electrician": {
+   "name": "Electrician",
+   "salary_week": [
+    1050,
+    1050
+   ],
+   "needs_office": false,
+   "needs_lease": "helio_warehouse",
+   "workplace": "helio_warehouse",
+   "work_days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "work_hours": [
+    8,
+    17
+   ],
+   "desc": "Each electrician adds crew-days to installs on weekdays. Salary is due even when weather stops work.",
+   "needs_text": "Lease the Helio warehouse before hiring an electrician."
+  },
+  "auto_mechanic": {
+   "name": "Auto technician",
+   "salary_week": [
+    1000,
+    1000
+   ],
+   "needs_office": false,
+   "needs_flag": "automotive_active",
+   "workplace": "aurelia_auto_auction",
+   "work_days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "work_hours": [
+    9,
+    17
+   ],
+   "desc": "Cuts reconditioning and service costs by 20%, saves a workshop day and adds two dealership service bays. Salary is due even in a slow week.",
+   "needs_text": "Open the auto desk before hiring a technician."
   }
  },
  "traits": [

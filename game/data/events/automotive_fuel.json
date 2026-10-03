@@ -1,0 +1,50 @@
+{
+ "id": "automotive_fuel",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:automotive_active",
+   "flag:automotive_fleet"
+  ],
+  "chance": 0.012,
+  "cooldown_days": 30,
+  "earliest_day": 4
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "mara_quinn",
+  "title": "Fuel price spike",
+  "icon": "warning",
+  "lines": [
+   "Pump prices jumped and airport travellers are renting fewer cars. Cut rates for two weeks to keep the fleet moving, or hold your prices and ride out weaker demand."
+  ]
+ },
+ "choices": [
+  {
+   "id": "fuel_cut",
+   "label": "Cut rates for two weeks",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "automotive",
+     "kind": "fuel_cut"
+    }
+   ],
+   "outcome": "Rates drop 8% for 14 days and demand recovers faster."
+  },
+  {
+   "id": "fuel_hold",
+   "label": "Hold prices",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "automotive",
+     "kind": "fuel_hold"
+    }
+   ],
+   "outcome": "Rental demand falls and recovers slowly over three weeks."
+  }
+ ]
+}

@@ -30,7 +30,9 @@ func setup(s: Node, y: float, d: int, rng: RandomNumberGenerator) -> void:
 func _pick_look() -> void:
 	for c in get_children():
 		c.queue_free()
-	var t: String = TYPES[_rng.randi_range(0, TYPES.size() - 1)]
+	var choices: Array = scene.def.get("traffic_types", TYPES)
+	if choices.is_empty(): choices = TYPES
+	var t: String = choices[_rng.randi_range(0, choices.size() - 1)]
 	body = Sprite2D.new()
 	body.texture = Art.tex("vehicles/%s_side_body" % t)
 	detail = Sprite2D.new()

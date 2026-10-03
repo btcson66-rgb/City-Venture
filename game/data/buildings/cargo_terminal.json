@@ -1,0 +1,116 @@
+{
+ "id": "cargo_terminal",
+ "name": "Aurelia Air Cargo Terminal",
+ "category": "Air cargo",
+ "district": "airport",
+ "type": "public",
+ "hours": {
+  "open": "06:00",
+  "close": "22:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "cargo_terminal",
+  "fallback": "container_stack",
+  "x": 1060,
+  "sign": "AIR CARGO"
+ },
+ "interior": {
+  "size": [
+   16,
+   12
+  ],
+  "floor": "concrete",
+  "wall": "brick",
+  "ambient": "office",
+  "props": [
+   {
+    "sprite": "listing_board",
+    "fallback": "cork_board",
+    "x": 30,
+    "y": 8,
+    "wall": true
+   },
+   {
+    "sprite": "framed_art",
+    "x": 150,
+    "y": 12,
+    "wall": true
+   },
+   {
+    "sprite": "window_day",
+    "x": 196,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "old_desk",
+    "fallback": "desk",
+    "x": 96,
+    "y": 70
+   },
+   {
+    "sprite": "office_chair",
+    "x": 112,
+    "y": 56,
+    "solid": false
+   },
+   {
+    "sprite": "chair",
+    "x": 112,
+    "y": 118,
+    "solid": false
+   },
+   {
+    "sprite": "filing_cabinet",
+    "x": 12,
+    "y": 50
+   },
+   {
+    "sprite": "plant",
+    "x": 216,
+    "y": 56
+   },
+   {
+    "sprite": "waiting_sofa",
+    "x": 160,
+    "y": 130
+   },
+   {
+    "sprite": "rug_small",
+    "x": 90,
+    "y": 150,
+    "floor": true
+   }
+  ],
+  "interactables": [
+   {
+    "id": "cargo_board",
+    "at": [
+     60,
+     100
+    ],
+    "label": "Read the cargo apron notice board",
+    "action": "look",
+    "params": {
+     "icon": "info",
+     "text": "AIR CARGO: bonded freight apron. Pallets and containers from Pier 7 and the Industrial Zone are screened here before they fly. Visitors may watch the apron from the gate."
+    }
+   },
+   {
+    "id": "cargo_manifest",
+    "at": [
+     160,
+     100
+    ],
+    "label": "Look at the manifest screen",
+    "action": "look",
+    "params": {
+     "icon": "parcel",
+     "text": "MANIFEST: 14 pallets of electronics, 6 crates of machine parts and a pallet of coffee are waiting for the evening freighter."
+    }
+   }
+  ]
+ }
+}
