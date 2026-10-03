@@ -762,3 +762,7 @@ Requested named facades: `buildings/helio_supply.png` and `buildings/helio_wareh
 
 ## #68 Automotive / Airport
 Requested named facades: `airport_terminal.png`, `gateway_car_rental.png`, `aurelia_auto_auction.png`, `cargo_terminal.png` plus corresponding `_lights.png`, a car sprite sheet for the lot and an auction paddle icon. Runtime district facades check Art.has_tex and use existing glass_tower, civic_annex, warehouse and shop_row_awning art as named fallbacks.
+
+### Season 2 — Chapters 17–18 (#43)
+
+Requested: backdrops/chapter_17, backdrops/chapter_18; dedicated Kai Moreno sprites/portrait; events/rival_undercut; five epilogue backdrops (city, people, company, timeline, next chapter). Existing executive outfit and UI cards are interim. No art assets changed.

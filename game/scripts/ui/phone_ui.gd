@@ -104,6 +104,9 @@ func _render() -> void:
 			_bank()
 		"tasks":
 			_tasks()
+		"legacy":
+			UIRoot.open_modal(LegacyModal.new())
+			_go("home")
 		"opportunities":
 			_opportunities()
 		"shoplane":
@@ -129,6 +132,8 @@ func _home() -> void:
 	var apps := [["messages", "mail", I18n.t("Messages") + (" %d" % unread if unread > 0 else "")], ["bank", "bank", "Bank"], ["tasks", "tasks", "Tasks"],
 		["map", "map", "City"], ["shoplane", "orders", "ShopLane"], ["timeline", "calendar", "Timeline"],
 		["guide", "info", "City Guide"], ["opportunities", "tasks", "Opportunities"], ["save", "save", "Save"], ["close", "close", "Close"]]
+	if GameState.flag("consolidation_started") or GameState.flag("legacy_invited"):
+		apps.insert(apps.size() - 1, ["legacy", "company", "Legacy"])
 	if BuildingInfo.world_travel_available():
 		apps.insert(apps.size() - 1, ["world", "world", "World"])
 	for a in apps:

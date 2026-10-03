@@ -1,0 +1,57 @@
+{
+ "id": "rival_undercut",
+ "category": "market",
+ "status": "active",
+ "bind": {},
+ "presentation": {
+  "channel": "phone",
+  "speaker": "kai",
+  "title": "A rival cuts prices",
+  "icon": "company",
+  "lines": [
+   "{rival} is cutting prices in {market}. Big groups are buying smaller brands. Choose a position, then make the corresponding price and operating changes."
+  ],
+  "tips": [
+   "market_consolidation",
+   "niche_vs_scale"
+  ]
+ },
+ "choices": [
+  {
+   "id": "niche",
+   "label": "Choose niche",
+   "detail": "Raise prices; rely on good reviews or pay for a brand campaign. Lower volume, lower price sensitivity.",
+   "effects": [
+    {
+     "op": "market_strategy",
+     "strategy": "niche"
+    }
+   ],
+   "outcome": "The direction is recorded. Apply its real price and operating response from the company terminal or phone."
+  },
+  {
+   "id": "scale",
+   "label": "Choose scale",
+   "detail": "Lower prices and buy more inventory. Volume rises, but margin thins and stock consumes cash.",
+   "effects": [
+    {
+     "op": "market_strategy",
+     "strategy": "scale"
+    }
+   ],
+   "outcome": "The direction is recorded. Apply its real price and operating response from the company terminal or phone."
+  },
+  {
+   "id": "review",
+   "label": "Review a market that can no longer operate",
+   "detail": "Continue the story without claiming a price response, sales or survival. Use this if the company closed or the retail route is unavailable.",
+   "effects": [
+    {
+     "op": "market_strategy",
+     "strategy": "review"
+    }
+   ],
+   "outcome": "The unavailable route is recorded honestly. Maya can help you choose the next chapter."
+  }
+ ]
+}

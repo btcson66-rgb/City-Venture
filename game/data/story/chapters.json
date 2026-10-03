@@ -1428,7 +1428,7 @@
    "id": "ch16_partner_overseas",
    "title": "CHAPTER 16 — A PARTNER OVERSEAS",
    "subtitle": "Who owns the customer owns both margin and risk.",
-   "next": "",
+   "next": "ch17_consolidation",
    "objectives": [
     {
      "id": "ch16_omar",
@@ -1491,6 +1491,171 @@
     {
      "do": "partner_comparison_card",
      "if": "!flag:ch16_partner_overseas_unavailable"
+    }
+   ]
+  },
+  {
+   "id": "ch17_consolidation",
+   "title": "CONSOLIDATION",
+   "subtitle": "Find a position the big group does not want.",
+   "year": 9,
+   "next": "ch18_legacy",
+   "objectives": [
+    {
+     "id": "ch17_news",
+     "main": true,
+     "goal": "Consolidation",
+     "text": "Read the consolidation news",
+     "complete_when": [
+      "flag:consolidation_news_read"
+     ],
+     "skip_when": [
+      "flag:consolidation_unavailable"
+     ],
+     "skip_text": "This market can no longer operate. Continue without claiming sales or surviving a shutdown.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": [
+      {
+       "do": "world_year",
+       "year": 9
+      },
+      {
+       "do": "legacy_begin",
+       "chapter": "ch17_consolidation"
+      }
+     ]
+    },
+    {
+     "id": "ch17_response",
+     "main": true,
+     "goal": "Consolidation",
+     "text": "Choose niche or scale and apply its actual price and operating changes",
+     "complete_when": [
+      "flag:consolidation_response"
+     ],
+     "skip_when": [
+      "flag:consolidation_unavailable"
+     ],
+     "skip_text": "This market can no longer operate. Continue without claiming sales or surviving a shutdown.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    },
+    {
+     "id": "ch17_survive",
+     "main": true,
+     "goal": "Consolidation",
+     "text": "Keep this market operating for 60 days after the response",
+     "complete_when": [
+      "flag:consolidation_survived"
+     ],
+     "skip_when": [
+      "flag:consolidation_unavailable"
+     ],
+     "skip_text": "This market can no longer operate. Continue without claiming sales or surviving a shutdown.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    },
+    {
+     "id": "ch17_interview",
+     "main": true,
+     "goal": "Consolidation",
+     "text": "Accept Kai Moreno’s interview using the actual market records",
+     "complete_when": [
+      "flag:kai_interviewed"
+     ],
+     "skip_when": [
+      "flag:consolidation_unavailable"
+     ],
+     "skip_text": "This market can no longer operate. Continue without claiming sales or surviving a shutdown.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "consolidation_comparison",
+     "if": "!flag:consolidation_unavailable"
+    }
+   ]
+  },
+  {
+   "id": "ch18_legacy",
+   "title": "LEGACY",
+   "subtitle": "What do you leave room for?",
+   "year": 10,
+   "next": "",
+   "objectives": [
+    {
+     "id": "ch18_maya",
+     "main": true,
+     "goal": "Legacy",
+     "text": "Meet Maya at Bloom Coffee or speak by phone",
+     "complete_when": [
+      "flag:legacy_met_maya"
+     ],
+     "skip_when": [],
+     "skip_text": "This market can no longer operate. Continue without claiming sales or surviving a shutdown.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": [
+      {
+       "do": "world_year",
+       "year": 10
+      },
+      {
+       "do": "legacy_begin",
+       "chapter": "ch18_legacy"
+      }
+     ]
+    },
+    {
+     "id": "ch18_choice",
+     "main": true,
+     "goal": "Legacy",
+     "text": "Choose how your founder story continues",
+     "complete_when": [
+      "flag:legacy_chosen"
+     ],
+     "skip_when": [],
+     "skip_text": "This market can no longer operate. Continue without claiming sales or surviving a shutdown.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    },
+    {
+     "id": "ch18_cards",
+     "main": true,
+     "goal": "Legacy",
+     "text": "View every epilogue card and return to free play",
+     "complete_when": [
+      "flag:legacy_cards_viewed"
+     ],
+     "skip_when": [],
+     "skip_text": "This market can no longer operate. Continue without claiming sales or surviving a shutdown.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "set_flag",
+     "flag": "story_complete"
+    },
+    {
+     "do": "start",
+     "objective": "goal_growth"
     }
    ]
   }

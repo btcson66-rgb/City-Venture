@@ -67,6 +67,9 @@ static func register(name: String, business_type: String, address: String) -> Di
 	GameState.data["entities"][cid] = {"id": cid, "name": n, "kind": "company", "type": business_type, "address": address,
 		"founded": Clock.now(), "bank_account": false, "seller_account": "business", "registration_no": "AUR-%06d" % (GameState.randi_range(100000, 999999))}
 	GameState.data["company"] = cid
+	# A restarted company has new shares; historical offer receipts remain on the timeline.
+	GameState.data["cap_table"] = {"founder": 1.0}
+	GameState.set_flag("company_sold", false)
 	Ledger.expense("player", "registration", fee, I18n.t("Company registration fee — %s") % n, {"type": "registration"})
 	GameState.set_flag("company_registered")
 	Ecommerce.lift_cap()

@@ -195,6 +195,14 @@ func _concepts(ids: Array) -> void:
 
 # ============================================================== OVERVIEW
 func _tab_overview() -> void:
+	if terminal == "cowork" and LegacyBusiness.S()["ending"] == "mentor":
+		var mentor := UIK.button("Mentor a new founder", func(): UIRoot.open_modal(LegacyMentorModal.new()))
+		mentor.name = "OpenLegacyMentoring"
+		content.add_child(mentor)
+	if GameState.flag("consolidation_started") or GameState.flag("legacy_invited"):
+		var legacy := UIK.button("Consolidation and legacy", func(): UIRoot.open_modal(LegacyModal.new()))
+		legacy.name = "OpenLegacyStory"
+		content.add_child(legacy)
 	var be := GameState.business_entity()
 	var cur := MonthClose.current(be)
 	var g := GridContainer.new()

@@ -1,0 +1,37 @@
+{
+ "id": "maya_legacy",
+ "with": "maya",
+ "nodes": {
+  "start": [
+   {
+    "who": "maya",
+    "text": "I remember your first day in Aurelia. A company can change owners, a team can share its future, and a founder can help someone else begin. None of those choices erases what happened."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "I want to keep building.",
+      "next": "reflect"
+     },
+     {
+      "text": "I want to make room for something new.",
+      "next": "reflect"
+     }
+    ]
+   }
+  ],
+  "reflect": [
+   {
+    "who": "maya",
+    "text": "Then choose from the actual books. Even after a closure, you can carry on. Let us look at the people, the company and the timeline together."
+   }
+  ]
+ },
+ "on_end": [
+  {
+   "do": "set_flag",
+   "flag": "legacy_met_maya"
+  }
+ ]
+}

@@ -31,6 +31,13 @@
  ],
  "dialogue": [
   {
+   "when": [
+    "flag:legacy_invited",
+    "!flag:legacy_met_maya"
+   ],
+   "conversation": "maya_legacy"
+  },
+  {
    "when": [],
    "conversation": "maya_cafe"
   }

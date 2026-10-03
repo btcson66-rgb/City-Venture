@@ -17,6 +17,9 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "ch17":
+		await _chapters_17_to_18(true)
+		return
 	if _arg("from") == "ch15":
 		await _chapters_15_to_16(true)
 		return
@@ -80,6 +83,7 @@ func run() -> void:
 		await _chapters_10_to_12()
 		await _chapters_13_to_14()
 		await _chapters_15_to_16()
+		await _chapters_17_to_18()
 		await _summary()
 		return
 	await _chapter1()
@@ -103,6 +107,7 @@ func run() -> void:
 		await _chapters_10_to_12()
 		await _chapters_13_to_14()
 		await _chapters_15_to_16()
+		await _chapters_17_to_18()
 	await _summary()
 	if not bot.video_mode:
 		await _industry_fixtures()
@@ -2556,3 +2561,92 @@ func _energy() -> void:
 	await exit_building()
 	await metro_to("riverside")
 	await enter_building("riverside_apartment")
+
+
+## Chapter17 short tour capital/time/staff snapshots are fixtures; all story choices use native input.
+func _chapters_17_to_18(fast := false) -> void:
+	if fast:
+		UIRoot._suppress_decisions = true
+		UIRoot.tutorial.st()["off"] = true
+		Company.register("Riverlight Legacy", "retail_online", "22 Founders Lane")
+		Company.open_business_account(15000)
+		GameState.data["world"]["year"] = 9
+		GlobalMarket.open_bank()
+		GlobalMarket.open_store("northridge")
+		Ecommerce._add_stock("riverside_studio", "wireless_earbuds", 200, 18, 0)
+		Ledger.post(GameState.company_id(), "Tour stock capital fixture", [{"acct": "inventory", "dr": 3600}, {"acct": "cash", "cr": 3600}])
+		Ecommerce.create_listing("wireless_earbuds", 60, "self", .9)
+		GlobalMarket.set_price("northridge", str(Ecommerce.listing_for("wireless_earbuds")["id"]), 60)
+		Acquisition.decide("decline", Acquisition.context())
+		StoryEngine.St()["active"].clear()
+		StoryEngine.start_chapter("ch17_consolidation")
+		UIRoot._suppress_decisions = false
+		await bot.wait(.6)
+		await popups()
+		UIRoot._suppress_decisions = true
+	bot.step("Chapter17 — native market news and real niche response")
+	await close_modal()
+	await _home_laptop("overview")
+	await bot.click_named("OpenLegacyStory")
+	await popups()
+	if not GameState.flag("legacy_invited"):
+		if not GameState.flag("consolidation_news_read"):
+			await bot.click_named("read_consolidation_news")
+			await bot.shot("ch17_news")
+			await bot.click_named("CloseInfo")
+			await bot.wait(.4)
+		await bot.shot("ch17_market_choice")
+		await _export_row_input("Strategy_niche")
+		await _export_row_input("apply_market_response")
+		await bot.shot("ch17_price_and_campaign")
+		bot.expect(GameState.flag("consolidation_response"), "real price and operating action recorded")
+		await close_modal()
+		await close_modal()
+		if fast:
+			GameState.data["clock"]["minutes"] += 60 * Clock.DAY
+			LegacyBusiness.reconcile()
+			StoryEngine.check()
+		else:
+			await pass_time_at_home(func(): return GameState.flag("consolidation_survived") or GameState.flag("consolidation_unavailable"), 65, true)
+		await _home_laptop("overview")
+		await bot.click_named("OpenLegacyStory")
+		await popups()
+		await bot.shot("ch17_survival_review")
+		if GameState.flag("consolidation_survived"):
+			await _export_row_input("kai_interview")
+			await bot.wait(.4)
+			await bot.shot("ch17_comparison")
+			await popups()
+	bot.expect("ch17_consolidation" in StoryEngine.St()["chapters_done"], "chapter17 complete or honestly unavailable")
+	bot.step("Chapter18 — actual Maya dialogue, ending and every epilogue card")
+	await bot.click_named("meet_maya_legacy")
+	await talk_through_dialogue_first_choice()
+	await bot.wait(.5)
+	await bot.shot("ch18_ending_choices")
+	bot.expect(GameState.flag("legacy_met_maya"), "actual legacy conversation completed")
+	var base: Dictionary = GameState.data.duplicate(true)
+	var choices := ["independent", "sale", "employees", "mentor"] if fast else ["independent"]
+	for choice in choices:
+		if choice != "independent":
+			UIRoot.close_all()
+			GameState.data = base.duplicate(true)
+			# Current-employee snapshot, not a fabricated hire or wage payment.
+			if choice == "employees":
+				Staff.S()["people"]["EMP1"] = {"id": "EMP1", "name": "Existing tour employee", "role": "support", "salary_week": 500, "skill": 2, "morale": 70, "hired": Clock.now()}
+			UIRoot.open_modal(LegacyModal.new())
+			await bot.wait(.5)
+		await _export_row_input("LegacyChoice_" + choice)
+		for card in 5:
+			await bot.shot("ch18_" + choice + "_card_" + str(card + 1))
+			await _export_row_input("legacy_next_card")
+		bot.expect(GameState.flag("legacy_cards_viewed") and "ch18_legacy" in StoryEngine.St()["chapters_done"], "all epilogue cards viewed: " + choice)
+		await bot.click_named("legacy_free_play")
+	await close_modal()
+	if fast:
+		SceneRouter._enter("interior", "nexus_cowork", "door", "up")
+		await wait_world()
+		await bot.use_action("legacy_mentor")
+		await bot.shot("ch18_real_mentoring")
+		await bot.click_named("MentorTopic_pricing")
+		bot.expect(GameState.stat("founders_mentored") == 1, "actual one-hour mentoring recorded")
+	bot.expect(Ledger.check_balanced(), "all chapter17–18 books balance")

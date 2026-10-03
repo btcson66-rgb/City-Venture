@@ -70,6 +70,9 @@ static func news() -> InfoModal:
 	var ls: Array = [I18n.t("# AURELIA DAILY · Year %d — %s") % [int(y.get("year", 1)), I18n.t(str(y.get("name", "")))]]
 	if GameState.flag("fx_shock_started"):
 		ls.append(I18n.t("Exchange-risk briefing: Auroria fell %.0f%% at the start of this chapter. Unchanged local prices bring home less cash; compare repricing, forward hedging and home-currency invoices.") % (float(OverseasPartners.cfg()["shock"]["drop"]) * 100))
+	if GameState.flag("consolidation_started"):
+		GameState.set_flag("consolidation_news_read")
+		ls.append(I18n.t("Large groups buy small brands. %s cut prices in %s; the original demand shock decays over %d days. Choose a niche or build volume, then change the actual price and operations.") % [LegacyBusiness.rival(), LegacyBusiness.region_name(), int(LegacyBusiness.cfg()["rival_days"])])
 	for h in Rails.headlines(y):   # Year 7's headlines follow the bridge exploit
 		ls.append("• " + I18n.t(str(h)))
 	ls.append("---")

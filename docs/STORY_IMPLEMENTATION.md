@@ -368,7 +368,7 @@ share) take theirs. The event lays the arithmetic out. Choices:
 Whichever is chosen, Chapter 12 ends with an **ending card** (`ENDING — A NEW OWNER` / `ON YOUR TERMS` / `STILL YOURS`,
 `UIRoot.show_chapter_card`), `story_complete` is set, and free play continues with `goal_growth`.
 
-## 10. Season 2 — Going Global (Chapters 13–16 Implemented; 17–18 Planned)
+## 10. Season 2 — Going Global (Chapters 13–18 Implemented)
 
 Season one (Chapters 1–12) ends in Year 8 and continues into Chapter 13 in Year 9. Seven regional storefront systems are active; overseas travel remains Planned. Each chapter teaches one real thing about
 selling across borders, and each one is playable with any business the player runs (ecommerce first; café and logistics
@@ -380,8 +380,8 @@ get their own beats). Tickets: GitHub issues labelled `season-2`.
 | 14 | **CUSTOMS · Implemented** (Year 9) | Ines Duarte, the customs officer, explains duties and paperwork. Choose **DDP** (you pay the duty up front, the buyer gets a clean price) or **DDU** (the buyer pays at the door, more refusals and returns). Classify a product (tariff code) correctly or pay a penalty. | Ines Duarte | duties by region and product category; DDP/DDU per listing; refusals/returns abroad; customs penalty event |
 | 15 | **THE CURRENCY SWING · Implemented** (Year 9) | The Auroria currency drops 12% in a week: overseas prices are suddenly too low. Options: reprice, lock a rate with a **forward contract** at Nexus Bank, or invoice B2B buyers in Aurelian dollars. Lesson: revenue in one currency and costs in another is a risk you manage, not a bet. | Marcus Reed | FX shock event; forward contracts (rate, notional, date, settlement P/L); invoice currency on contracts |
 | 16 | **A PARTNER OVERSEAS · Implemented** (Year 9) | Omar Haddad, a trader, offers two ways into Lumina: a **distributor** (they buy in bulk at a discount, they own the customer) or a **3PL warehouse** there (you keep margin and risk, stock sits abroad). Fly there (time passes, flight cost) to sign. | Omar Haddad | region travel (a trip scene); overseas stock location (3PL fees per unit per month); distributor contract type |
-| 17 | **CONSOLIDATION** (Year 9–10) | Big players buy up small brands. A rival undercuts prices in the region you opened. Choose: niche (premium, smaller volume) or scale (lower prices, bigger stock). If Victor's offer was declined in Chapter 12, Hale Group is the rival; if accepted, you run the division that must hit targets. | Victor Hale, Kai Moreno (press) | rival pricing pressure on a market; brand/premium positioning; valuation reuse |
-| 18 | **LEGACY** (Year 10, "Legacy") | Decide what the company becomes: keep it independent, sell, hand shares to the team (employee ownership), or step back and mentor founders at Nexus Co-work. An epilogue shows the city and the people you met, shaped by your choices. | Maya, everyone | ending choices and epilogue scenes; timeline recap; new game+ seed (Planned) |
+| 17 | **CONSOLIDATION · Implemented** (Year 9–10) | Big players buy up small brands. A rival undercuts prices in the region you opened. Choose: niche (premium, smaller volume) or scale (lower prices, bigger stock). If Victor's offer was declined in Chapter 12, Hale Group is the rival; if accepted, you run the division that must hit targets. | Victor Hale, Kai Moreno (press) | rival pricing pressure on a market; brand/premium positioning; valuation reuse |
+| 18 | **LEGACY · Implemented** (Year 10, "Legacy") | Decide what the company becomes: keep it independent, sell, hand shares to the team (employee ownership), or step back and mentor founders at Nexus Co-work. An epilogue shows the city and the people you met, shaped by your choices. | Maya, everyone | ending choices and epilogue scenes; timeline recap; new game+ seed (Planned) |
 
 Order of work: the systems of 13 (World Map unlock, regional marketplace, FX) come first; Chapters 13–14 ship
 together, 15–16 next, 17–18 last. Art needs (chapter cards 13–18, Ines and Omar sheets, a customs office interior, an
@@ -421,3 +421,7 @@ Chapter 13: Year 9 news → international banking → Northridge local price →
 ### Chapters 15–16 implementation (#42)
 
 See wiki/23_overseas_partners.md for the single expiring currency shock, collateral-backed forwards, real invoice-currency choices, paid journey card, distributor transit/arrival/payment, overseas stock fees, 45-day clearance/review and company-bound no-soft-lock alternatives. Implementation status concerns systems/story; dedicated art and new Lumina city/warehouse scenes remain Planned.
+
+### Chapters 17–18 — Implemented (#43)
+
+See wiki/24_consolidation_and_legacy.md for market receipts, three acquisition branches, real price/ad/stock actions, expiring rival effects, Kai’s actual records and disclosed share estimate, four outcomes, employee equity, fee-based management and resumable five-card epilogue. Unavailable retail routes and company closure skip market success honestly; Maya and free play remain available without a company. New game plus remains Planned.

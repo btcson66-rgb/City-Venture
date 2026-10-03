@@ -21,6 +21,8 @@ static func lock_reason(action: String, params: Dictionary) -> String:
 	if req.begins_with("lease:") and not Living.has_lease(req.substr(6)):
 		return "not your office (yet)" if req == "lease:suite_2b" else "not yours (yet)"
 	match action:
+		"legacy_mentor":
+			return "Choose the mentor ending first." if LegacyBusiness.S()["ending"] != "mentor" else ""
 		"cafe_counter":
 			return Cafe.counter_block()
 		"register_company":
@@ -59,6 +61,11 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 	if Industries.run_action(action, params, source):
 		return
 	match action:
+		"legacy_mentor":
+			if LegacyBusiness.S()["ending"] == "mentor" and _scene() != null and _scene().scene_id == "nexus_cowork":
+				UIRoot.open_modal(LegacyMentorModal.new())
+			else:
+				UIRoot.toast("Choose the mentor ending first.", "info", "people")
 		"customs_guide":
 			GameState.set_flag("customs_brief_read")
 			StoryEngine.check()

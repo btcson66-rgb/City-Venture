@@ -178,7 +178,7 @@ static func _finish_chapter(id: String) -> void:
 		if not o["id"] in St()["done"]:
 			return
 	St()["chapters_done"].append(id)
-	GameState.timeline(I18n.t("Completed %s.") % c.get("title", id), "chapter")
+	GameState.timeline(I18n.t("Completed %s.") % I18n.t(str(c.get("title", id))), "chapter")
 	EventBus.chapter_completed.emit(id)
 	run_actions(c.get("on_complete", []))
 	if c.get("next", "") != "":
@@ -227,6 +227,9 @@ static func _check_all() -> void:
 		start_chapter("ch13_first_order_abroad")
 	if "ch14_customs" in St()["chapters_done"] and not "ch15_currency_swing" in St()["chapters_done"] and St().get("chapter", "") == "ch14_customs":
 		start_chapter("ch15_currency_swing")
+	LegacyBusiness.reconcile()
+	if "ch16_partner_overseas" in St()["chapters_done"] and not "ch17_consolidation" in St()["chapters_done"] and St().get("chapter", "") == "ch16_partner_overseas":
+		start_chapter("ch17_consolidation")
 	var guard := 0
 	var limit: int = DataDB.story.get("side", []).size() + 1
 	for c in chapters():
@@ -276,6 +279,10 @@ static func run_actions(actions: Array) -> void:
 		if a.has("if") and not Cond.eval(str(a["if"])):
 			continue
 		match a.get("do", ""):
+			"legacy_begin":
+				LegacyBusiness.begin(str(a["chapter"]))
+			"consolidation_comparison":
+				UIRoot.open_modal(LegacyBusiness.comparison())
 			"fx_comparison_card":
 				OverseasPartnerUI.fx_card()
 			"partner_comparison_card":

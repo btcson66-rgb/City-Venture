@@ -737,16 +737,16 @@ static func demand_mult(product_id: String) -> float:
 
 
 ## Expected orders/day for a listing (also shown in Company OS so pricing is a readable decision).
-static func lambda_day(l: Dictionary) -> float:
+static func lambda_day(l: Dictionary, region := "home") -> float:
 	var p := DataDB.product(l["product"])
 	var price := maxf(1.0, float(l["price"]))
-	var pf := pow(float(p["ref_price"]) / price, float(p["elasticity"]))
+	var pf := pow(float(p["ref_price"]) / price, LegacyBusiness.elasticity(l, region, float(p["elasticity"])))
 	pf = clampf(pf, 0.05, 3.0)
 	var photo_f := photo_factor(l)
 	var fresh := 1.0
 	if Clock.now() - int(l.get("created", 0)) < int(mk().get("new_listing_days", 3)) * Clock.DAY:
 		fresh = float(mk().get("new_listing_boost", 1.6))   # marketplaces promote new listings
-	return float(p["base_daily_demand"]) * pf * rating_factor(l) * photo_f * ad_factor(l) * demand_mult(l["product"]) * fresh
+	return float(p["base_daily_demand"]) * pf * rating_factor(l) * photo_f * ad_factor(l) * demand_mult(l["product"]) * fresh * LegacyBusiness.demand_factor(l, region)
 
 
 static func on_hour(t: int, h: int) -> void:

@@ -119,7 +119,7 @@ static func demand(region: String, l: Dictionary) -> float:
 	var r: Dictionary = cfg()["regions"][region]
 	var product := DataDB.product(str(l["product"]))
 	var sector := float(r.get("product_multipliers", {}).get(product.get("category", ""), 1.0))
-	return Ecommerce.lambda_day(copy) * float(r.get("demand_multiplier", 1.0)) * sector * float(r.get("population_millions", 10)) / float(cfg().get("population_reference", 10))
+	return Ecommerce.lambda_day(copy, region) * float(r.get("demand_multiplier", 1.0)) * sector * float(r.get("population_millions", 10)) / float(cfg().get("population_reference", 10))
 
 
 static func on_hour(t: int, h: int) -> void:

@@ -21,7 +21,10 @@ static func sold() -> bool:
 ## debts, founder_share, take}.
 static func quote() -> Dictionary:
 	var c := cfg()
-	var ent := GameState.business_entity()
+	var ent := GameState.company_id()
+	if ent == "" or not GameState.data["entities"].get(ent, {}).get("bank_account", false):
+		return {"price": 0.0, "basis": "assets", "profit_year": 0.0, "revenue_year": 0.0, "enterprise": 0.0,
+			"cash": 0.0, "stock": 0.0, "owed": 0.0, "debts": 0.0, "founder_share": 0.0, "take": 0.0}
 	var days := int(c.get("window_days", 90))
 	var year_factor := 365.0 / float(days)
 	var m := MonthClose.compute(ent, Clock.now() - days * Clock.DAY, Clock.now() + 1)
@@ -32,10 +35,13 @@ static func quote() -> Dictionary:
 	var cash := maxf(0.0, Ledger.cash(ent))
 	var stock := maxf(0.0, Ledger.balance(ent, "inventory") + Ledger.balance(ent, "inventory_in_transit") + Ledger.balance(ent, "goods_out")) * float(c.get("stock_haircut", 0.8))
 	var owed := maxf(0.0, Ledger.balance(ent, "marketplace_balance") + Ledger.balance(ent, "accounts_receivable") + Ledger.balance(ent, "escrow_held") + Ledger.balance(ent, "frozen_funds"))
+	for account in GameState.data["ledger"]["balances"].get(ent, {}):
+		if str(account).begins_with("fx_wallet:") or str(account).begins_with("fx_receivable:"):
+			owed += maxf(0, Ledger.balance(ent, str(account)))
 	var debts := Insolvency.liabilities(ent)
 	var raw := snappedf(maxf(by_profit, by_revenue) + cash + stock + owed - debts, 1.0)
 	var price := maxf(float(c.get("min_price", 5000.0)), raw)
-	var founder := float(GameState.data.get("cap_table", {"founder": 1.0}).get("founder", 1.0))
+	var founder := float(GameState.data.get("cap_table", {"founder": 1.0}).get("founder", 0.0))
 	var basis := "assets"   # no earnings to price: the company lost money and has no revenue worth a multiple
 	if by_profit > 0.0 and by_profit >= by_revenue:
 		basis = "profit"
@@ -68,6 +74,7 @@ static func context() -> Dictionary:
 	else:
 		share = I18n.t("Investors own %s of it, so your share is %s.") % [Fmt.pct(1.0 - founder), Fmt.money0(float(q["take"]))]
 	return {
+		"entity": GameState.company_id(),
 		"price": Fmt.money0(price), "price_v": price, "basis": basis, "share_line": share,
 		"assets": Fmt.money0(float(q["cash"]) + float(q["stock"]) + float(q["owed"])), "debts": Fmt.money0(float(q["debts"])),
 		"take": Fmt.money0(float(q["take"])), "take_v": float(q["take"]), "founder_share": founder,
@@ -80,9 +87,14 @@ static func context() -> Dictionary:
 
 ## The player's answer to the offer. `ctx` is the decision's context, so the price is the one that was shown.
 static func decide(choice: String, ctx: Dictionary) -> Dictionary:
+	if GameState.company_id() == "" or str(ctx.get("entity", GameState.company_id())) != GameState.company_id():
+		return {"ok": false, "error": "There is no offer on the table."}
+	if choice in ["accept", "counter"] and float(quote()["founder_share"]) <= 0:
+		return {"ok": false, "error": "The existing owner holds these shares. No second founder sale can be paid."}
 	var price := float(ctx.get("price_v", 0.0))
 	if price <= 0.0:
 		return {"ok": false, "error": "There is no offer on the table."}
+	GameState.data["acquisition_receipt"] = {"entity": GameState.company_id(), "price": price, "choice": choice, "t": Clock.now()}
 	match choice:
 		"accept":
 			_sell(price, 0.0, ctx)
@@ -120,12 +132,12 @@ static func _sell(now_total: float, later_total: float, ctx: Dictionary) -> void
 	if later_total > 0.01:
 		var c := cfg()
 		Sim.schedule(Clock.now() + int(c.get("earnout_days", 365)) * Clock.DAY, "acq.earnout",
-			{"amount": snappedf(later_total * founder, 0.01), "base": float(ctx.get("revenue_year_v", 0.0))})
+			{"entity": GameState.company_id(), "amount": snappedf(later_total * founder, 0.01), "base": float(ctx.get("revenue_year_v", 0.0))})
 
 
-static func _revenue_year() -> float:
+static func _revenue_year(ent := "") -> float:
 	var days := int(cfg().get("window_days", 90))
-	var m := MonthClose.compute(GameState.business_entity(), Clock.now() - days * Clock.DAY, Clock.now() + 1)
+	var m := MonthClose.compute(ent if ent != "" else GameState.business_entity(), Clock.now() - days * Clock.DAY, Clock.now() + 1)
 	return float(m["net_revenue"]) * 365.0 / float(days)
 
 
@@ -136,8 +148,10 @@ static func handle(kind: String, p: Dictionary) -> void:
 	var amount := float(p.get("amount", 0.0))
 	var base := float(p.get("base", 0.0))
 	var floor_r := float(cfg().get("earnout_floor", 0.9))
-	var now_rev := _revenue_year()
-	if now_rev >= base * floor_r:
+	var ent := str(p.get("entity", GameState.company_id()))
+	var now_rev := _revenue_year(ent)
+	var closed: bool = ent == "" or GameState.data["entities"].get(ent, {}).has("closed")
+	if not closed and now_rev >= base * floor_r:
 		Ledger.post("player", "Hale Group earn-out", [{"acct": "cash", "dr": amount}, {"acct": "other_income", "cr": amount}], {"type": "sale"})
 		GameState.add_message("victor", I18n.t("Victor Hale. Twelve months, targets met. The second payment is in your account: %s.") % Fmt.money0(amount))
 		GameState.timeline(I18n.t("Hale Group paid the earn-out: %s.") % Fmt.money0(amount), "milestone")
