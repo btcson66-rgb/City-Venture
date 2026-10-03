@@ -265,3 +265,5 @@ Pier 倉庫：`pallet_rack`、`loading_dock_door`、`forklift_parked`、`packing
 
 
 #32：Studio 1A 的 14×11 室內保留 `bed_single`、`kitchenette`、`radiator`，加上 `desk_laptop`、`packing_table` 與 200 件容量的實際庫存顯示。床位由 home property 的 `bed_position` 定義。現任房客可睡覺、操作 Company OS 與打包；退租後設備會鎖定，不提供另一間免費住處。租屋行新增租屋／搬家入口，兩種退租方式都會實際入帳。
+
+#94 owner interiors: maple_owner_home, heights_penthouse, garden_villa. Each has bed, laptop, packing table and a personal assets desk. Penthouse has a sofa; villa has a garden plant. Paid warm/modern decoration tints furniture and changes guest messages. Facades/interiors currently reuse existing assets; dedicated art remains Planned.

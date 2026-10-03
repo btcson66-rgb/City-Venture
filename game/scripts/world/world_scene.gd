@@ -182,6 +182,10 @@ func add_prop(p: Dictionary, parent: Node = null) -> Node2D:
 	s.centered = false
 	if p.has("tint"):
 		s.modulate = Color(str(p["tint"]))   # greyscale props dyed per placement (Threadline's mannequins)
+	if kind=="interior" and scene_id==Living.home_building():
+		var style: String=PersonalAssets.S()["style"].get(Living.home(),"")
+		if style!="" and not p.get("wall",false):s.modulate=Color(PersonalAssets.cfg()["furniture"][style]["tint"])
+
 	# board-converted art may overhang its design footprint (top/left); placement uses the footprint
 	var sm: Dictionary = DataDB.sprite_meta.get(key, {})
 	var top := int(sm.get("top", 0))

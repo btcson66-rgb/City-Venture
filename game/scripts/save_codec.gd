@@ -66,6 +66,26 @@ static func decode(text: String) -> Dictionary:
 		data["flags"][key] = _truthy(data["flags"][key])
 	for entry in data["schedule"]:
 		if not _record(entry, {"t": 0, "kind": "", "p": {}}): return invalid
+	var personal = data.get("living",{}).get("personal_assets",null)
+	if personal!=null:
+		if not _record(personal,{"homes":{},"car":{},"style":{},"visits":[],"parking":{},"month":0}):return invalid
+		for id in personal["homes"]:
+			if not DataDB.properties.get(id,{}).get("owner_purchase",false):return invalid
+			var h=personal["homes"][id]
+			if not _record(h,{"status":"","tier":0,"book":0,"base_price":0,"balance":0,"months":0,"paid_n":0,"next":0,"arrears":0,"tenant":{},"rent":0,"invoices":[]}):return invalid
+			if h["status"] not in ["empty","occupied","listed","tenanted","sold"] or float(h["balance"])<0 or float(h["months"])<=0 or float(h["arrears"])<0:return invalid
+			if h.has("leave") and not _numeric(h["leave"]):return invalid
+			if h["status"]=="tenanted" and not _record(h["tenant"],{"name":""}):return invalid
+			for row in h["invoices"]:
+				if not _record(row,{"t":0,"amount":0,"paid":false}):return invalid
+		var car=personal["car"]
+		if not car.is_empty():
+			if not _record(car,{"id":"","name":"","price":0,"electric":false,"luxury":false,"location":"","energy":0,"service":0}):return invalid
+			if not DataDB.districts.has(car["location"]) or float(car["energy"])<0 or float(car["price"])<=0:return invalid
+		for style in personal["style"].values():
+			if not style is String or not DataDB.economy["personal_assets"]["furniture"].has(style):return invalid
+		for visit in personal["visits"]:
+			if not _record(visit,{"npc":"","day":0,"home":""}):return invalid
 	var totals := {}
 	for entry in data["ledger"]["journal"]:
 		if not _record(entry, {"n": 0, "t": 0, "entity": "", "memo": "", "lines": []}): return invalid

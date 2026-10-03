@@ -1,7 +1,7 @@
 {
- "id": "old_town_studio",
- "name": "Studio 1A, Lantern Row",
- "district": "old_town",
+ "id": "maple_owner_home",
+ "name": "Maple Court owner apartment",
+ "district": "residential",
  "type": "home",
  "hours": {
   "open": "00:00",
@@ -9,9 +9,9 @@
   "days": "all"
  },
  "exterior": {
-  "sprite": "old_town_studio",
+  "sprite": "maple_owner_home",
   "fallback": "riverside_walkup",
-  "x": 870,
+  "x": 1660,
   "sign": "LANTERN ROW FLATS"
  },
  "interior": {
@@ -75,7 +75,7 @@
     "label": "Sleep",
     "action": "sleep",
     "params": {
-     "requires": "home:old_town_studio"
+     "requires": "home:maple_owner_home"
     }
    },
    {
@@ -88,7 +88,7 @@
     "action": "open_company_os",
     "params": {
      "terminal": "home_laptop",
-     "requires": "home:old_town_studio"
+     "requires": "home:maple_owner_home"
     }
    },
    {
@@ -100,8 +100,8 @@
     "label": "Packing table",
     "action": "pack_orders",
     "params": {
-     "location": "old_town_studio",
-     "requires": "home:old_town_studio"
+     "location": "maple_owner_home",
+     "requires": "home:maple_owner_home"
     }
    },
    {
@@ -114,7 +114,7 @@
     "action": "look",
     "params": {
      "icon": "home",
-     "text": "Studio 1A: $780/month, 200 storage units. Sign a home lease at Okafor Lettings; the first move is free."
+     "text": "Owned homes have mortgage payments, management, maintenance and tax. Visit the personal assets desk to compare costs or arrange a move."
     }
    },
    {
@@ -126,14 +126,14 @@
      80
     ],
     "params": {
-     "requires": "home:old_town_studio"
+     "requires": "home:maple_owner_home"
     }
    }
   ],
   "npc_spots": {},
-  "property": "old_town_studio",
+  "property": "maple_owner_home",
   "stock_display": {
-   "location": "old_town_studio",
+   "location": "maple_owner_home",
    "x": 24,
    "y": 132,
    "cols": 3,

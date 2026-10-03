@@ -33,7 +33,7 @@ func build() -> void:
 		var primary:=false
 		for pid in DataDB.properties:
 			var property: Dictionary=DataDB.properties[pid]
-			if property.get("kind","")!="home" or pid==Living.home():continue
+			if property.get("kind","")!="home" or pid==Living.home() or property.get("owner_purchase",false):continue
 			box.add_child(UIK.label(I18n.t(property["name"]),9,Art.C_GOLD))
 			var deposit:=float(property["monthly_rent"])*World.rent_mult()
 			box.add_child(UIK.wrap(I18n.t("%s per month · one-month deposit %s · storage %d units · moving service %s")%[Fmt.money(deposit),Fmt.money(deposit),int(property["inventory_units"]),Fmt.money(Housing.fee())],8,Art.C_WHITE,410))

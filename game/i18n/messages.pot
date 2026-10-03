@@ -53,7 +53,7 @@ msgstr ""
 msgid " (late: -20%)"
 msgstr ""
 
-#: scripts/sim/living.gd:91
+#: scripts/sim/living.gd:92
 msgid " + deposit"
 msgstr ""
 
@@ -281,7 +281,7 @@ msgstr ""
 msgid "%d orders"
 msgstr ""
 
-#: scripts/world/actions.gd:298
+#: scripts/world/actions.gd:300
 msgid "%d orders waiting to be packed. I'm on it."
 msgstr ""
 
@@ -457,7 +457,7 @@ msgstr ""
 msgid "%s has room: choose it under \"Deliver to\" in Operations."
 msgstr ""
 
-#: scripts/world/actions.gd:249
+#: scripts/world/actions.gd:251
 msgid "%s is busy."
 msgstr ""
 
@@ -515,6 +515,10 @@ msgstr ""
 
 #: scripts/sim/contracts.gd:350
 msgid "%s paid invoice %s: %s"
+msgstr ""
+
+#: scripts/ui/modals/personal_assets_modal.gd:60
+msgid "%s parked in %s · insurance %s per month · no business performance bonus"
 msgstr ""
 
 #: scripts/sim/forecast.gd:65
@@ -709,8 +713,12 @@ msgstr ""
 msgid "%s × last year's revenue of %s"
 msgstr ""
 
-#: scripts/sim/living.gd:74
+#: scripts/sim/living.gd:75
 msgid "%s — monthly"
+msgstr ""
+
+#: scripts/ui/modals/personal_drive_modal.gd:23
+msgid "%s → %s · %d min driving and parking · parking %s"
 msgstr ""
 
 #: scripts/sim/life_legacy.gd:98
@@ -873,6 +881,10 @@ msgstr ""
 msgid "2  Padding"
 msgstr ""
 
+#: scripts/ui/modals/personal_assets_modal.gd:40
+msgid "20% down, 20-year mortgage"
+msgstr ""
+
 #: data/../assets/buildings/buildings_meta.json data/buildings/small_office.json
 msgid "22 FOUNDERS LANE"
 msgstr ""
@@ -891,6 +903,10 @@ msgstr ""
 
 #: scripts/sim/bank.gd:113
 msgid "3 × last 30 days' gross profit"
+msgstr ""
+
+#: scripts/ui/modals/personal_assets_modal.gd:41
+msgid "30% down, 30-year mortgage"
 msgstr ""
 
 #: data/events/customer_return.json
@@ -1149,6 +1165,10 @@ msgstr ""
 msgid "A higher rating brings more customers every day, for free."
 msgstr ""
 
+#: data/help/glossary.json
+msgid "A home carries a mortgage, management, maintenance and tax. A personal car adds insurance, fuel or charging and parking. Furniture changes appearance only."
+msgstr ""
+
 #: data/economy/settlement_methods.json
 msgid "A licensed exchange turns your dollars into digital dollars and sends them in minutes. You carry the platform's risk."
 msgstr ""
@@ -1209,7 +1229,7 @@ msgstr ""
 msgid "A monthly premium that covers accidents, theft and damage to your van and what is in it."
 msgstr ""
 
-#: scripts/sim/housing.gd:44
+#: scripts/sim/housing.gd:48
 msgid "A move is already booked. Keep it, cancel it or resolve the storage problem."
 msgstr ""
 
@@ -1861,7 +1881,7 @@ msgstr ""
 msgid "All good? Approve it. Something wrong? Click the wrong field first, then Reject."
 msgstr ""
 
-#: scripts/world/actions.gd:298
+#: scripts/world/actions.gd:300
 msgid "All packed. The courier comes at 16:00."
 msgstr ""
 
@@ -2037,7 +2057,7 @@ msgstr ""
 msgid "Anything you buy goes in your wardrobe at home. The fitting room's at the back."
 msgstr ""
 
-#: data/buildings/birch_row.json data/buildings/maple_court.json data/buildings/old_town_studio.json
+#: data/buildings/birch_row.json data/buildings/garden_villa.json data/buildings/heights_penthouse.json data/buildings/maple_court.json
 msgid "Apartment"
 msgstr ""
 
@@ -2901,6 +2921,10 @@ msgstr ""
 msgid "Bought a used van from Sam Okoro at Dockside Motors for %s."
 msgstr ""
 
+#: scripts/sim/personal_assets.gd:106
+msgid "Bought personal car: %s."
+msgstr ""
+
 #: scripts/sim/wardrobe.gd:69
 msgid "Bought the %s outfit at %s."
 msgstr ""
@@ -3237,7 +3261,7 @@ msgstr ""
 msgid "Businesses: choose from the businesses available now, or find a part-time job."
 msgstr ""
 
-#: scripts/world/actions.gd:291
+#: scripts/world/actions.gd:293
 msgid "Busy day. All good."
 msgstr ""
 
@@ -3251,6 +3275,10 @@ msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:173
 msgid "Buy %s · price %s · down %s"
+msgstr ""
+
+#: scripts/ui/modals/personal_assets_modal.gd:58
+msgid "Buy %s: %s"
 msgstr ""
 
 #: data/help/glossary.json
@@ -3267,6 +3295,10 @@ msgstr ""
 
 #: scripts/ui/modals/cowork_desk_modal.gd:23
 msgid "Buy a day pass ($15)"
+msgstr ""
+
+#: data/help/help.json
+msgid "Buy a personal car at Dockside Motors. Return to its parking district before driving; compare metro time, parking and energy. A luxury car has no output bonus."
 msgstr ""
 
 #: scripts/ui/industry_views.gd:56
@@ -3297,8 +3329,20 @@ msgstr ""
 msgid "Buy stock → shoot and list → sell → pack → ship → get paid. Then a job on the side, a shift, and a night's sleep."
 msgstr ""
 
+#: data/help/help.json
+msgid "Buy the previous housing tier before upgrading. Compare the down payment and amortized monthly payment; ownership has fees and tax."
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:16
+msgid "Buy the previous housing tier first; it remains an asset you may sell or rent."
+msgstr ""
+
 #: scripts/ui/modals/van_deal_modal.gd:44
 msgid "Buy the van (%s)"
+msgstr ""
+
+#: scripts/sim/housing.gd:36 scripts/sim/housing.gd:38
+msgid "Buy this home before arranging a move."
 msgstr ""
 
 #: scripts/ui/tutorial.gd:56
@@ -3701,11 +3745,11 @@ msgstr ""
 msgid "Can't start a shift now: %s."
 msgstr ""
 
-#: scripts/world/actions.gd:271
+#: scripts/world/actions.gd:273
 msgid "Can't work the counter: %s."
 msgstr ""
 
-#: autoload/save_system.gd:388 scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57 scripts/ui/modals/registration_modal.gd:60
+#: autoload/save_system.gd:388 scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57 scripts/ui/modals/personal_drive_modal.gd:30
 msgid "Cancel"
 msgstr ""
 
@@ -3913,6 +3957,10 @@ msgstr ""
 msgid "Central Station"
 msgstr ""
 
+#: scripts/sim/personal_assets.gd:127
+msgid "Central parking is full today. Take the metro or drive to another district."
+msgstr ""
+
 #: data/events/energy_rule.json
 msgid "Certain cost, no fine."
 msgstr ""
@@ -3979,6 +4027,14 @@ msgstr ""
 
 #: data/help/patch_notes.json
 msgid "Chapters 7–9 add supply shocks, greener packaging and products, a green-business grant, and international payment choices."
+msgstr ""
+
+#: scripts/ui/modals/personal_assets_modal.gd:61
+msgid "Charge at a Helio station"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:130
+msgid "Charge at an open Helio station before driving, or take the metro."
 msgstr ""
 
 #: scripts/sim/energy.gd:524
@@ -4133,6 +4189,10 @@ msgstr ""
 msgid "Choose a car class."
 msgstr ""
 
+#: scripts/sim/personal_assets.gd:99
+msgid "Choose a car from the personal showroom."
+msgstr ""
+
 #: scripts/sim/energy.gd:471
 msgid "Choose a contracted install first."
 msgstr ""
@@ -4179,6 +4239,10 @@ msgstr ""
 
 #: scripts/sim/housing.gd:35
 msgid "Choose a home that is available for moving."
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:15
+msgid "Choose a home you do not already own."
 msgstr ""
 
 #: scripts/sim/energy.gd:246
@@ -4305,8 +4369,16 @@ msgstr ""
 msgid "Choose an available ending."
 msgstr ""
 
+#: scripts/sim/personal_assets.gd:158
+msgid "Choose an available furniture style."
+msgstr ""
+
 #: scripts/sim/capital_market.gd:49
 msgid "Choose an available offer."
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:141
+msgid "Choose an electric personal car first."
 msgstr ""
 
 #: scripts/sim/real_estate.gd:107 scripts/sim/real_estate.gd:97
@@ -4369,12 +4441,20 @@ msgstr ""
 msgid "Choose an outstanding bank loan of this holding company's subsidiary."
 msgstr ""
 
+#: scripts/sim/personal_assets.gd:186 scripts/sim/personal_assets.gd:54
+msgid "Choose an owned home first."
+msgstr ""
+
 #: scripts/sim/capital_market.gd:114
 msgid "Choose an underwriter."
 msgstr ""
 
 #: scripts/sim/real_estate.gd:86
 msgid "Choose an unowned residential unit."
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:123
+msgid "Choose another open district."
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:434
@@ -4403,6 +4483,10 @@ msgstr ""
 
 #: data/story/achievements.json
 msgid "Choose mentoring in the legacy chapter."
+msgstr ""
+
+#: scripts/ui/modals/personal_assets_modal.gd:39
+msgid "Choose mortgage terms to buy."
 msgstr ""
 
 #: data/events/rival_undercut.json
@@ -4453,8 +4537,12 @@ msgstr ""
 msgid "Choose thirty days of notice or pay one month to leave today. Deposits remain your asset, not income; stock and incoming orders must fit."
 msgstr ""
 
-#: scripts/sim/housing.gd:43
+#: scripts/sim/housing.gd:47
 msgid "Choose thirty days' notice or pay one month's termination fee."
+msgstr ""
+
+#: scripts/ui/modals/personal_assets_modal.gd:47
+msgid "Choose to live here, earn uncertain tenant rent or sell after fees."
 msgstr ""
 
 #: scripts/sim/hotel.gd:47
@@ -4785,7 +4873,7 @@ msgstr ""
 msgid "Coding session — %s"
 msgstr ""
 
-#: data/economy/cafe.json scripts/sim/ledger.gd:33 scripts/world/actions.gd:260
+#: data/economy/cafe.json scripts/sim/ledger.gd:33 scripts/world/actions.gd:262
 msgid "Coffee"
 msgstr ""
 
@@ -4793,11 +4881,11 @@ msgstr ""
 msgid "Coffee machine, printer, Wi-Fi: you fix all three before lunch."
 msgstr ""
 
-#: scripts/world/actions.gd:264
+#: scripts/world/actions.gd:266
 msgid "Coffee — %s."
 msgstr ""
 
-#: scripts/world/actions.gd:164
+#: scripts/world/actions.gd:166
 msgid "Coffee — %s. Tastes like possibility."
 msgstr ""
 
@@ -4821,8 +4909,20 @@ msgstr ""
 msgid "Collect fifty actual customer reviews."
 msgstr ""
 
+#: scripts/ui/modals/personal_assets_modal.gd:53
+msgid "Collect outstanding tenant invoices"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:42
+msgid "Collect outstanding tenant invoices before selling; wait thirty days after each invoice."
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Collect the money Crestline owes you"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:192
+msgid "Collected tenant invoices: %s"
 msgstr ""
 
 #: scripts/sim/bank.gd:143
@@ -5317,7 +5417,7 @@ msgstr ""
 msgid "Could I get a loan?"
 msgstr ""
 
-#: scripts/world/actions.gd:291
+#: scripts/world/actions.gd:293
 msgid "Could use a bit more support around here."
 msgstr ""
 
@@ -6393,8 +6493,20 @@ msgstr ""
 msgid "Drive the route"
 msgstr ""
 
+#: scripts/ui/modals/personal_assets_modal.gd:65
+msgid "Drive to %s: %d min · metro %d min · parking %s · fuel %s"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1490
 msgid "Drivers"
+msgstr ""
+
+#: autoload/scene_router.gd:222
+msgid "Driving to %s: %d minutes, including parking."
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:133
+msgid "Driving, parking and maintenance: %s"
 msgstr ""
 
 #: scripts/ui/tutorial.gd:73
@@ -6429,7 +6541,7 @@ msgstr ""
 msgid "Due diligence until %s; expires %s."
 msgstr ""
 
-#: data/economy/automotive.json
+#: data/economy/automotive.json data/economy/personal_assets.json
 msgid "Duke coupe"
 msgstr ""
 
@@ -6463,6 +6575,14 @@ msgstr ""
 
 #: data/story/chapters.json
 msgid "ENDING — STILL YOURS"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:152
+msgid "EV charging: %s"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:154
+msgid "EV grid electricity"
 msgstr ""
 
 #: scripts/world/interior.gd:53
@@ -6715,6 +6835,10 @@ msgstr ""
 
 #: scripts/sim/manufacturing.gd:139
 msgid "Enable overtime outside weekday working hours."
+msgstr ""
+
+#: scripts/ui/modals/personal_assets_modal.gd:52
+msgid "End rental with 30 days' notice"
 msgstr ""
 
 #: scripts/ui/tutorial.gd:89
@@ -7381,6 +7505,10 @@ msgstr ""
 msgid "Finish a sales campaign"
 msgstr ""
 
+#: scripts/sim/personal_assets.gd:12
+msgid "Finish arrival and cancel any reserved move before buying a home."
+msgstr ""
+
 #: scripts/ui/modals/legacy_modal.gd:121
 msgid "Finish epilogue"
 msgstr ""
@@ -7401,7 +7529,7 @@ msgstr ""
 msgid "Finish the agreed scope before delivery."
 msgstr ""
 
-#: scripts/sim/housing.gd:42 scripts/ui/modals/home_move_modal.gd:17
+#: scripts/sim/housing.gd:46 scripts/ui/modals/home_move_modal.gd:17
 msgid "Finish the arrival tutorial before moving. Your first home stays at Riverside."
 msgstr ""
 
@@ -7657,7 +7785,7 @@ msgstr ""
 msgid "Food handling licence granted."
 msgstr ""
 
-#: scripts/sim/living.gd:29
+#: scripts/sim/living.gd:30
 msgid "Food, transit & bills"
 msgstr ""
 
@@ -7969,6 +8097,10 @@ msgstr ""
 msgid "Fund the next construction milestone."
 msgstr ""
 
+#: scripts/ui/modals/personal_assets_modal.gd:24
+msgid "Furniture and invitations"
+msgstr ""
+
 #: scripts/ui/modals/fx_risk_modal.gd:69
 msgid "Future overseas distributor offers can use home currency. Buyers take the exchange risk: acceptance is lower and their offer is cheaper. Existing invoices keep their agreed currency."
 msgstr ""
@@ -7987,6 +8119,10 @@ msgstr ""
 
 #: scripts/sim/media.gd:195
 msgid "GROUP-"
+msgstr ""
+
+#: data/buildings/garden_villa.json data/properties/garden_villa.json
+msgid "Garden Villa"
 msgstr ""
 
 #: data/buildings/gateway_car_rental.json
@@ -8645,6 +8781,10 @@ msgstr ""
 msgid "Heart"
 msgstr ""
 
+#: data/buildings/heights_penthouse.json data/properties/heights_penthouse.json
+msgid "Heights Penthouse"
+msgstr ""
+
 #: scripts/sim/customs.gd:119
 msgid "Held export %s withdrawn; freight remains paid"
 msgstr ""
@@ -8869,12 +9009,28 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: scripts/sim/housing.gd:51
+#: data/buildings/dockside_motors.json data/buildings/garden_villa.json data/buildings/heights_penthouse.json data/buildings/maple_owner_home.json
+msgid "Home and personal car"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:162
+msgid "Home decoration: %s"
+msgstr ""
+
+#: scripts/sim/housing.gd:55
 msgid "Home deposit paid: %s"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:73
+msgid "Home management, maintenance and tax: %s"
 msgstr ""
 
 #: data/regions/aurelia.json
 msgid "Home market"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:24
+msgid "Home purchase fee: %s"
 msgstr ""
 
 #: scripts/sim/forecast.gd:38 scripts/sim/ledger.gd:33
@@ -8893,7 +9049,7 @@ msgstr ""
 msgid "Home rent and location"
 msgstr ""
 
-#: scripts/sim/living.gd:55
+#: scripts/sim/living.gd:56
 msgid "Home rent — %s (%s)"
 msgstr ""
 
@@ -8901,7 +9057,11 @@ msgstr ""
 msgid "Home roof"
 msgstr ""
 
-#: scripts/sim/housing.gd:75
+#: scripts/sim/personal_assets.gd:44
+msgid "Home sale after fees: %s"
+msgstr ""
+
+#: scripts/sim/housing.gd:79
 msgid "Home termination fee: %s"
 msgstr ""
 
@@ -8913,7 +9073,7 @@ msgstr ""
 msgid "Honest. I respect it."
 msgstr ""
 
-#: scripts/world/actions.gd:291
+#: scripts/world/actions.gd:293
 msgid "Honestly? I'm looking at other jobs."
 msgstr ""
 
@@ -8927,6 +9087,10 @@ msgstr ""
 
 #: data/economy/logistics.json
 msgid "Horizon Labs"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:176
+msgid "Hosted %s at home."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:75
@@ -9009,6 +9173,14 @@ msgstr ""
 msgid "Housing"
 msgstr ""
 
+#: scripts/ui/modals/personal_assets_modal.gd:24
+msgid "Housing ladder"
+msgstr ""
+
+#: data/help/help.json
+msgid "Housing ladder and personal car"
+msgstr ""
+
 #: data/dialogue/henri_dubois_intro.json
 msgid "How do I make money from rooms?"
 msgstr ""
@@ -9083,6 +9255,10 @@ msgstr ""
 
 #: data/dialogue/priya_first.json
 msgid "I need somewhere to work."
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:175
+msgid "I noticed the coupe outside. It must be expensive to keep."
 msgstr ""
 
 #: data/dialogue/victor_offer.json
@@ -9401,6 +9577,10 @@ msgstr ""
 msgid "Inspection_%d"
 msgstr ""
 
+#: scripts/ui/modals/personal_assets_modal.gd:70
+msgid "Install %s: %s"
+msgstr ""
+
 #: scripts/ui/manufacturing_ui.gd:128
 msgid "Install CNC · business loan required"
 msgstr ""
@@ -9671,6 +9851,10 @@ msgstr ""
 
 #: scripts/sim/acquisition.gd:75
 msgid "Investors own %s of it, so your share is %s."
+msgstr ""
+
+#: scripts/ui/modals/personal_assets_modal.gd:72
+msgid "Invite %s home for one hour"
 msgstr ""
 
 #: scripts/ui/energy_ui.gd:177
@@ -9949,7 +10133,7 @@ msgstr ""
 msgid "Karu Unit"
 msgstr ""
 
-#: scripts/sim/housing.gd:50
+#: scripts/sim/housing.gd:54
 msgid "Keep %s personally for the new deposit, moving and termination costs."
 msgstr ""
 
@@ -10001,7 +10185,7 @@ msgstr ""
 msgid "Keep enough company cash for the international account fee."
 msgstr ""
 
-#: scripts/sim/housing.gd:71
+#: scripts/sim/housing.gd:75
 msgid "Keep enough personal cash for the agreed moving and termination costs."
 msgstr ""
 
@@ -10043,6 +10227,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "Keep operating, sell at the current Chapter 12 valuation, share ownership with employees, or mentor with a contract manager."
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:132
+msgid "Keep personal cash for parking, fuel and due maintenance, or take the metro."
 msgstr ""
 
 #: data/events/ad_cost_spike.json
@@ -10157,6 +10345,10 @@ msgstr ""
 msgid "Kim"
 msgstr ""
 
+#: data/economy/personal_assets.json
+msgid "Kite hatchback"
+msgstr ""
+
 #: data/economy/automotive.json
 msgid "Kite wagon"
 msgstr ""
@@ -10185,7 +10377,7 @@ msgstr ""
 msgid "LANTERN BISTRO"
 msgstr ""
 
-#: data/buildings/old_town_studio.json
+#: data/buildings/garden_villa.json data/buildings/heights_penthouse.json data/buildings/maple_owner_home.json data/buildings/old_town_studio.json
 msgid "LANTERN ROW FLATS"
 msgstr ""
 
@@ -10305,7 +10497,7 @@ msgstr ""
 msgid "Late penalty"
 msgstr ""
 
-#: scripts/sim/living.gd:58
+#: scripts/sim/living.gd:59
 msgid "Late rent fee"
 msgstr ""
 
@@ -10401,7 +10593,7 @@ msgstr ""
 msgid "Lease signed. Welcome to Suite 2B."
 msgstr ""
 
-#: scripts/sim/living.gd:96
+#: scripts/sim/living.gd:97
 msgid "Lease signed: %s"
 msgstr ""
 
@@ -10477,7 +10669,7 @@ msgstr ""
 msgid "LeaseAster"
 msgstr ""
 
-#: scripts/sim/living.gd:98
+#: scripts/sim/living.gd:99
 msgid "Leased %s for %s/month."
 msgstr ""
 
@@ -10701,6 +10893,10 @@ msgstr ""
 msgid "List it quietly"
 msgstr ""
 
+#: scripts/ui/modals/personal_assets_modal.gd:50
+msgid "List rental at market rent"
+msgstr ""
+
 #: scripts/ui/real_estate_ui.gd:165
 msgid "List rental · estimated vacancy %d days"
 msgstr ""
@@ -10885,7 +11081,7 @@ msgstr ""
 msgid "Look all you like. The mirror's honest, I'm honest-ish."
 msgstr ""
 
-#: data/buildings/old_town_studio.json
+#: data/buildings/garden_villa.json data/buildings/heights_penthouse.json data/buildings/maple_owner_home.json data/buildings/old_town_studio.json
 msgid "Look around the studio"
 msgstr ""
 
@@ -11007,6 +11203,10 @@ msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:10
 msgid "Lumen Tea House"
+msgstr ""
+
+#: data/economy/personal_assets.json
+msgid "Lumen electric hatchback"
 msgstr ""
 
 #: data/regions/lumina.json
@@ -11259,6 +11459,10 @@ msgstr ""
 
 #: data/properties/maple_6.json
 msgid "Maple Court Unit 6"
+msgstr ""
+
+#: data/buildings/maple_owner_home.json data/properties/maple_owner_home.json
+msgid "Maple Court owner apartment"
 msgstr ""
 
 #: autoload/clock.gd:14
@@ -11529,6 +11733,10 @@ msgstr ""
 msgid "Meet me at Bloom Coffee. We can also talk by phone. Your next chapter does not need a profitable company."
 msgstr ""
 
+#: scripts/sim/personal_assets.gd:167
+msgid "Meet this person first, then invite them home."
+msgstr ""
+
 #: data/buildings/nexus_cowork.json scripts/ui/modals/company_os.gd:219 scripts/ui/modals/legacy_mentor_modal.gd:6
 msgid "Mentor a new founder"
 msgstr ""
@@ -11601,7 +11809,11 @@ msgstr ""
 msgid "Metro advertising"
 msgstr ""
 
-#: autoload/scene_router.gd:222
+#: scripts/ui/modals/personal_drive_modal.gd:24
+msgid "Metro alternative: %d min. Your car stays parked here if you cancel."
+msgstr ""
+
+#: autoload/scene_router.gd:227
 msgid "Metro fare to %s"
 msgstr ""
 
@@ -11695,6 +11907,10 @@ msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:7
 msgid "Mocha"
+msgstr ""
+
+#: data/economy/personal_assets.json
+msgid "Modern blue interior"
 msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:168
@@ -11833,16 +12049,28 @@ msgstr ""
 msgid "Morning! %s, I booked for today."
 msgstr ""
 
+#: scripts/ui/modals/personal_assets_modal.gd:44
+msgid "Mortgage balance %s · monthly payment at today's rate %s · unpaid interest %s"
+msgstr ""
+
 #: data/events/real_estate_rate.json
 msgid "Mortgage rate rise"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:45
+msgid "Mortgage repaid: %s"
 msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:154
 msgid "Mortgage term: %d years"
 msgstr ""
 
-#: scripts/sim/bank.gd:61
+#: scripts/sim/bank.gd:61 scripts/sim/personal_assets.gd:17
 msgid "Mortgage terms require 20–30% down and 20–30 years."
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:84
+msgid "Mortgage unpaid. Raise personal cash, rent another home or sell an empty property."
 msgstr ""
 
 #: data/help/help.json
@@ -11857,6 +12085,22 @@ msgstr ""
 msgid "Mouth"
 msgstr ""
 
+#: scripts/ui/modals/personal_assets_modal.gd:49
+msgid "Move into owned home"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:49
+msgid "Move out and choose valid rent terms before listing this home."
+msgstr ""
+
+#: data/help/help.json
+msgid "Move out before renting or selling. A tenant gets thirty days notice; unpaid invoices can be collected after thirty days."
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:36
+msgid "Move out or end the tenancy with notice before selling."
+msgstr ""
+
 #: scripts/ui/modals/home_move_modal.gd:45
 msgid "Move today: termination fee %s"
 msgstr ""
@@ -11865,7 +12109,7 @@ msgstr ""
 msgid "Move two cars through the Auto Desk."
 msgstr ""
 
-#: scripts/sim/housing.gd:85
+#: scripts/sim/housing.gd:93
 msgid "Moved to %s; monthly rent %s."
 msgstr ""
 
@@ -11881,7 +12125,7 @@ msgstr ""
 msgid "Moving home"
 msgstr ""
 
-#: scripts/sim/housing.gd:76
+#: scripts/sim/housing.gd:80
 msgid "Moving service: %s"
 msgstr ""
 
@@ -12221,7 +12465,7 @@ msgstr ""
 msgid "Nexus Co-work"
 msgstr ""
 
-#: scripts/sim/living.gd:110
+#: scripts/sim/living.gd:111
 msgid "Nexus Co-work day pass"
 msgstr ""
 
@@ -12421,7 +12665,7 @@ msgstr ""
 msgid "No milk"
 msgstr ""
 
-#: scripts/sim/housing.gd:66
+#: scripts/sim/housing.gd:70
 msgid "No move is booked. Choose a home first."
 msgstr ""
 
@@ -12433,16 +12677,20 @@ msgstr ""
 msgid "No new opportunities right now. Check again after your company grows."
 msgstr ""
 
-#: scripts/world/actions.gd:176
+#: scripts/world/actions.gd:178
 msgid "No one's at the till."
 msgstr ""
 
-#: scripts/world/actions.gd:149
+#: scripts/world/actions.gd:151
 msgid "No one's behind the counter."
 msgstr ""
 
 #: scripts/sim/internal_supply.gd:208
 msgid "No outside purchase to replace yet."
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:191
+msgid "No overdue tenant invoices are ready. Wait thirty days after the invoice."
 msgstr ""
 
 #: scripts/ui/modals/dropoff_modal.gd:28
@@ -13761,7 +14009,7 @@ msgstr ""
 msgid "Overdraft costs $35 a night. Nothing's over — but something has to give."
 msgstr ""
 
-#: scripts/sim/living.gd:41
+#: scripts/sim/living.gd:42
 msgid "Overdraft fee"
 msgstr ""
 
@@ -13913,6 +14161,10 @@ msgstr ""
 msgid "Owned audience and inventory"
 msgstr ""
 
+#: data/buildings/garden_villa.json data/buildings/heights_penthouse.json data/buildings/maple_owner_home.json
+msgid "Owned homes have mortgage payments, management, maintenance and tax. Visit the personal assets desk to compare costs or arrange a move."
+msgstr ""
+
 #: scripts/ui/media_ui.gd:164 scripts/ui/media_ui.gd:43
 msgid "Owned media"
 msgstr ""
@@ -13931,6 +14183,10 @@ msgstr ""
 
 #: data/help/help.json scripts/ui/modals/capital_market_modal.gd:6 scripts/ui/modals/company_os.gd:227
 msgid "Ownership and public markets"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Ownership does not improve business output. Keep personal cash for these costs. Rent can be unpaid; resale prices move and fees can leave negative equity."
 msgstr ""
 
 #: scripts/sim/capital_market.gd:102 scripts/sim/capital_market.gd:41 scripts/sim/capital_market.gd:72
@@ -14085,7 +14341,7 @@ msgstr ""
 msgid "Packing happens at a packing table where the stock is. Ship by courier (fee, no walk) or carry to PostPoint."
 msgstr ""
 
-#: data/buildings/old_town_studio.json data/buildings/riverside_apartment.json data/buildings/small_office.json scripts/ui/minigames/pack_game.gd:25
+#: data/buildings/garden_villa.json data/buildings/heights_penthouse.json data/buildings/maple_owner_home.json data/buildings/old_town_studio.json
 msgid "Packing table"
 msgstr ""
 
@@ -14191,6 +14447,10 @@ msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:8
 msgid "Park"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:146
+msgid "Park beside an open Helio charging station first."
 msgstr ""
 
 #: data/city/aurelia.json
@@ -14315,6 +14575,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "Pay construction milestones on an approved, named project. Delays and overruns change the budget."
+msgstr ""
+
+#: scripts/ui/modals/personal_drive_modal.gd:25
+msgid "Pay costs and drive"
 msgstr ""
 
 #: data/events/customs_hold.json
@@ -14501,16 +14765,52 @@ msgstr ""
 msgid "Personal Banker"
 msgstr ""
 
+#: scripts/sim/personal_assets.gd:153
+msgid "Personal EV metered charging: %s"
+msgstr ""
+
 #: scripts/ui/modals/overseas_partner_modal.gd:42
 msgid "Personal account"
+msgstr ""
+
+#: data/help/glossary.json scripts/ui/modals/personal_assets_modal.gd:27
+msgid "Personal assets have real costs"
 msgstr ""
 
 #: scripts/ui/phone_ui.gd:297
 msgid "Personal cap"
 msgstr ""
 
+#: scripts/ui/modals/personal_assets_modal.gd:24
+msgid "Personal car and commute"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:105 scripts/sim/personal_assets.gd:93
+msgid "Personal car insurance: %s"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:102
+msgid "Personal car purchase: %s"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:183
+msgid "Personal car sold: %s"
+msgstr ""
+
 #: scripts/ui/modals/bank_modal.gd:27
 msgid "Personal checking"
+msgstr ""
+
+#: scripts/ui/modals/personal_drive_modal.gd:6
+msgid "Personal driving route"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:23
+msgid "Personal home purchase: %s"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:80
+msgid "Personal mortgage payment: %s"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:259
@@ -14519,6 +14819,14 @@ msgstr ""
 
 #: scripts/sim/ecommerce.gd:853
 msgid "Personal seller limit reached. Your listings are paused until next month — or until you register a business."
+msgstr ""
+
+#: scripts/ui/modals/personal_assets_modal.gd:61
+msgid "PersonalCharge"
+msgstr ""
+
+#: scripts/ui/modals/personal_assets_modal.gd:66
+msgid "PersonalSellCar"
 msgstr ""
 
 #: scripts/ui/hud.gd:110
@@ -14809,7 +15117,7 @@ msgstr ""
 msgid "Press the shutter when the focus needle is in the green. You get three shots; the best one goes on your listing."
 msgstr ""
 
-#: scripts/sim/housing.gd:78
+#: scripts/sim/housing.gd:82
 msgid "Previous home deposit returned: %s"
 msgstr ""
 
@@ -15057,6 +15365,10 @@ msgstr ""
 msgid "Pump prices jumped and airport travellers are renting fewer cars. Cut rates for two weeks to keep the fleet moving, or hold your prices and ride out weaker demand."
 msgstr ""
 
+#: scripts/ui/modals/personal_assets_modal.gd:35
+msgid "Purchase %s · management %s per month · tax and maintenance additional · storage %d units · %d guests per day"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Purchase cancellation"
 msgstr ""
@@ -15071,6 +15383,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:629
 msgid "Purchase orders"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:26
+msgid "Purchased home: %s."
 msgstr ""
 
 #: scripts/sim/real_estate.gd:91
@@ -16033,7 +16349,7 @@ msgstr ""
 msgid "Rent asking ratio: %.0f%%"
 msgstr ""
 
-#: scripts/sim/living.gd:59
+#: scripts/sim/living.gd:60
 msgid "Rent bounced. I've added the $%d late fee. Please sort it out this week."
 msgstr ""
 
@@ -16041,11 +16357,11 @@ msgstr ""
 msgid "Rent machine · $1,400/month"
 msgstr ""
 
-#: scripts/sim/living.gd:60
+#: scripts/sim/living.gd:61
 msgid "Rent paid into overdraft. Late fee charged."
 msgstr ""
 
-#: scripts/sim/living.gd:62
+#: scripts/sim/living.gd:63
 msgid "Rent paid: %s"
 msgstr ""
 
@@ -16095,6 +16411,10 @@ msgstr ""
 
 #: scripts/sim/automotive.gd:626
 msgid "Rental interrupted: %s"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:90
+msgid "Rental management fee: %s"
 msgstr ""
 
 #: scripts/sim/automotive.gd:590
@@ -16249,7 +16569,7 @@ msgstr ""
 msgid "Reserved %s. Notice ends %s; current rent continues until moving day."
 msgstr ""
 
-#: scripts/sim/housing.gd:61
+#: scripts/sim/housing.gd:65
 msgid "Reserved home deposit returned: %s"
 msgstr ""
 
@@ -16977,6 +17297,10 @@ msgstr ""
 msgid "Sale delivered %s: %d × %s @ %s"
 msgstr ""
 
+#: scripts/sim/personal_assets.gd:43
+msgid "Sale proceeds do not cover the mortgage. Save the shortfall or keep the home."
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Sales earned for goods or work, before subtracting refunds and costs. Earning revenue does not always mean receiving cash today."
 msgstr ""
@@ -17039,6 +17363,10 @@ msgstr ""
 
 #: autoload/save_system.gd:388 scripts/ui/phone_ui.gd:134
 msgid "Save"
+msgstr ""
+
+#: scripts/ui/modals/personal_assets_modal.gd:39
+msgid "Save a personal down payment and fee; buy the previous tier before upgrading."
 msgstr ""
 
 #: data/help/help.json
@@ -17105,6 +17433,14 @@ msgstr ""
 msgid "Save the battery course fee first."
 msgstr ""
 
+#: scripts/sim/personal_assets.gd:101
+msgid "Save the car price personally first."
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:151
+msgid "Save the charging cost or take the metro."
+msgstr ""
+
 #: scripts/sim/media.gd:249
 msgid "Save the client retention discount first."
 msgstr ""
@@ -17115,6 +17451,10 @@ msgstr ""
 
 #: scripts/sim/automotive.gd:48
 msgid "Save the dealer licence fee first."
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:21
+msgid "Save the down payment and purchase fee personally first."
 msgstr ""
 
 #: scripts/sim/hotel.gd:668
@@ -17139,6 +17479,10 @@ msgstr ""
 
 #: scripts/sim/hotel.gd:677
 msgid "Save the flash-sale cost first."
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:161
+msgid "Save the furniture cost personally first."
 msgstr ""
 
 #: scripts/sim/hotel.gd:663
@@ -17357,6 +17701,14 @@ msgstr ""
 msgid "Sell founder shares to the selected buyer"
 msgstr ""
 
+#: scripts/ui/modals/personal_assets_modal.gd:51
+msgid "Sell home after fees"
+msgstr ""
+
+#: scripts/ui/modals/personal_assets_modal.gd:66
+msgid "Sell personal car after depreciation"
+msgstr ""
+
 #: scripts/sim/ecommerce.gd:509
 msgid "Sell some stock first, or lease more space."
 msgstr ""
@@ -17367,6 +17719,10 @@ msgstr ""
 
 #: data/milestones.json
 msgid "Sell ten cars."
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:97
+msgid "Sell the current personal car before buying another."
 msgstr ""
 
 #: scripts/ui/holding_ui.gd:43
@@ -17977,7 +18333,7 @@ msgstr ""
 msgid "Skyline Observation Deck"
 msgstr ""
 
-#: data/buildings/old_town_studio.json data/buildings/riverside_apartment.json
+#: data/buildings/garden_villa.json data/buildings/heights_penthouse.json data/buildings/maple_owner_home.json data/buildings/old_town_studio.json
 msgid "Sleep"
 msgstr ""
 
@@ -19053,6 +19409,10 @@ msgstr ""
 msgid "Tenant rent arrears"
 msgstr ""
 
+#: scripts/sim/personal_assets.gd:88
+msgid "Tenant rent invoice: %s"
+msgstr ""
+
 #: scripts/ui/real_estate_ui.gd:163
 msgid "Tenant: %s · credit %d points"
 msgstr ""
@@ -19067,6 +19427,10 @@ msgstr ""
 
 #: data/economy/duties.json
 msgid "Textiles"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:174
+msgid "Thank you for inviting me. Let's sit down and talk."
 msgstr ""
 
 #: scripts/ui/modals/registration_modal.gd:28
@@ -19273,6 +19637,10 @@ msgstr ""
 msgid "The bank won't restructure with this credit history."
 msgstr ""
 
+#: scripts/sim/personal_assets.gd:150
+msgid "The battery is already full. Choose a destination."
+msgstr ""
+
 #: scripts/ui/minigames/photo_shoot_game.gd:284
 msgid "The best shot goes on your listing. Photo quality affects how many people buy."
 msgstr ""
@@ -19415,6 +19783,10 @@ msgstr ""
 
 #: data/story/chapters.json
 msgid "The city passed the Clean Packaging Act: read the news board"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:174
+msgid "The clean blue lines suit this room. Let's talk about your plans."
 msgstr ""
 
 #: scripts/ui/energy_ui.gd:34
@@ -19621,7 +19993,7 @@ msgstr ""
 msgid "The landlord declined. Try again tomorrow."
 msgstr ""
 
-#: scripts/sim/living.gd:84
+#: scripts/sim/living.gd:85
 msgid "The landlord needs a registered company on the lease."
 msgstr ""
 
@@ -19677,7 +20049,7 @@ msgstr ""
 msgid "The next life could not be created. Your current life is preserved."
 msgstr ""
 
-#: scripts/sim/housing.gd:67
+#: scripts/sim/housing.gd:71
 msgid "The notice period is still running. Keep living here or cancel the reservation."
 msgstr ""
 
@@ -20049,6 +20421,10 @@ msgstr ""
 msgid "This equipment needs no service today."
 msgstr ""
 
+#: scripts/sim/personal_assets.gd:159
+msgid "This furniture style is already installed. Keep it or choose another."
+msgstr ""
+
 #: scripts/ui/phone_ui.gd:400
 msgid "This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen."
 msgstr ""
@@ -20069,11 +20445,19 @@ msgstr ""
 msgid "This group job is not running."
 msgstr ""
 
+#: scripts/sim/personal_assets.gd:171
+msgid "This guest already visited today. Invite someone else or meet tomorrow."
+msgstr ""
+
 #: scripts/sim/fx_forward.gd:73
 msgid "This hedge is not due or was already settled."
 msgstr ""
 
-#: scripts/sim/housing.gd:39
+#: scripts/sim/personal_assets.gd:57
+msgid "This home has no tenant. Move in, list it or sell it."
+msgstr ""
+
+#: scripts/sim/housing.gd:43
 msgid "This home holds %d units; your stock and incoming orders need %d units. Sell stock or move it to leased storage first."
 msgstr ""
 
@@ -20261,7 +20645,7 @@ msgstr ""
 msgid "Thu"
 msgstr ""
 
-#: scripts/world/actions.gd:132
+#: scripts/world/actions.gd:134
 msgid "Ticket A-%d. Now serving A-%d."
 msgstr ""
 
@@ -20327,6 +20711,10 @@ msgstr ""
 
 #: scripts/ui/automotive_ui.gd:287
 msgid "Today %d passengers · season factor %.2f · about %.1f rental requests a day at your prices."
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:170
+msgid "Today's home invitations are full. Meet elsewhere or invite them tomorrow."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1107
@@ -20597,7 +20985,7 @@ msgstr ""
 msgid "Two focused hours: %.1f hours of the work done. %s"
 msgstr ""
 
-#: scripts/world/actions.gd:281
+#: scripts/world/actions.gd:283
 msgid "Two hours behind your own counter: %d customers served."
 msgstr ""
 
@@ -20773,7 +21161,7 @@ msgstr ""
 msgid "Unknown property crisis."
 msgstr ""
 
-#: scripts/sim/living.gd:81
+#: scripts/sim/living.gd:82
 msgid "Unknown property."
 msgstr ""
 
@@ -20783,6 +21171,10 @@ msgstr ""
 
 #: scripts/sim/manufacturing.gd:274
 msgid "Unlock your own brand and choose a valid batch."
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:83
+msgid "Unpaid mortgage interest: %s"
 msgstr ""
 
 #: scripts/ui/holding_ui.gd:22
@@ -20833,7 +21225,7 @@ msgstr ""
 msgid "Use existing business records to pick your next step. Setting a goal aside never fabricates a reward."
 msgstr ""
 
-#: data/buildings/old_town_studio.json data/buildings/riverside_apartment.json
+#: data/buildings/garden_villa.json data/buildings/heights_penthouse.json data/buildings/maple_owner_home.json data/buildings/old_town_studio.json
 msgid "Use laptop — Company OS"
 msgstr ""
 
@@ -21081,6 +21473,10 @@ msgstr ""
 msgid "View every epilogue card and return to free play"
 msgstr ""
 
+#: scripts/sim/personal_assets.gd:96
+msgid "Visit Dockside Motors or the dealership to buy a personal car."
+msgstr ""
+
 #: scripts/ui/modals/overseas_partner_modal.gd:42
 msgid "Visit Lumina — %s"
 msgstr ""
@@ -21179,6 +21575,10 @@ msgstr ""
 
 #: data/events/energy_shortage.json
 msgid "Wait for the shipment and pay the shortage price"
+msgstr ""
+
+#: scripts/sim/housing.gd:37 scripts/sim/housing.gd:39 scripts/sim/personal_assets.gd:29
+msgid "Wait for the tenancy to end before moving into this home."
 msgstr ""
 
 #: data/story/chapters.json
@@ -21293,6 +21693,10 @@ msgstr ""
 msgid "Warm homes"
 msgstr ""
 
+#: data/economy/personal_assets.json
+msgid "Warm wood interior"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Warranty"
 msgstr ""
@@ -21327,6 +21731,10 @@ msgstr ""
 
 #: data/character/options.json
 msgid "Watches"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:174
+msgid "We can talk over the table here. The warm wood makes this room feel welcoming."
 msgstr ""
 
 #: scripts/sim/media.gd:268
@@ -21469,7 +21877,7 @@ msgstr ""
 msgid "When a company closes, its undelivered contracts end and its unpaid invoices go to a collector. Old contracts stay visible, but the closed company cannot deliver or collect again."
 msgstr ""
 
-#: scripts/world/actions.gd:293
+#: scripts/world/actions.gd:295
 msgid "When are we getting paid? Rent's due."
 msgstr ""
 
@@ -21725,11 +22133,11 @@ msgstr ""
 msgid "You already hold the high bid."
 msgstr ""
 
-#: scripts/sim/housing.gd:36
+#: scripts/sim/housing.gd:40
 msgid "You already live here. Keep this lease or choose another home."
 msgstr ""
 
-#: scripts/sim/living.gd:86
+#: scripts/sim/living.gd:87
 msgid "You already rent this."
 msgstr ""
 
@@ -21805,6 +22213,10 @@ msgstr ""
 msgid "You have an order! Go to your packing table at home and press E. Pack it by hand: box, padding, tape, label."
 msgstr ""
 
+#: scripts/sim/personal_assets.gd:181
+msgid "You have no personal car to sell. Take the metro or buy one."
+msgstr ""
+
 #: data/dialogue/lina_intro.json
 msgid "You have three ways to pay abroad now."
 msgstr ""
@@ -21845,6 +22257,10 @@ msgstr ""
 msgid "You left your job before working a shift. Take a job again at Bloom Coffee's staff door, then work a shift."
 msgstr ""
 
+#: scripts/ui/modals/personal_assets_modal.gd:45
+msgid "You live here. Move to another home before renting or selling."
+msgstr ""
+
 #: data/dialogue/jun_first.json
 msgid "You look like you're plotting something."
 msgstr ""
@@ -21873,7 +22289,7 @@ msgstr ""
 msgid "You need %d in stock (have %d)."
 msgstr ""
 
-#: scripts/sim/living.gd:91
+#: scripts/sim/living.gd:92
 msgid "You need %s (first month%s)."
 msgstr ""
 
@@ -22125,7 +22541,7 @@ msgstr ""
 msgid "Your cost / outside market"
 msgstr ""
 
-#: scripts/world/actions.gd:275
+#: scripts/world/actions.gd:277
 msgid "Your counter — %s"
 msgstr ""
 
@@ -22265,8 +22681,12 @@ msgstr ""
 msgid "Your payment on loan %s bounced. We'll try again in 3 days. It's cheaper to call me before this happens."
 msgstr ""
 
-#: scripts/sim/living.gd:132
+#: scripts/sim/living.gd:133
 msgid "Your personal account"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:122 scripts/sim/personal_assets.gd:144
+msgid "Your personal car is parked elsewhere. Take the metro back to it."
 msgstr ""
 
 #: scripts/ui/modals/insolvency_modal.gd:28
@@ -22905,7 +23325,7 @@ msgstr ""
 msgid "on delivery"
 msgstr ""
 
-#: scripts/world/actions.gd:164
+#: scripts/world/actions.gd:166
 msgid "on the house (staff)"
 msgstr ""
 

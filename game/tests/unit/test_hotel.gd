@@ -28,7 +28,7 @@ func test_opening_gates_district_and_registry() -> void:
 	Ledger.post(entity,"QA equity",[{"acct":"cash","dr":160000},{"acct":"equity","cr":160000}])
 	runner.check(Hotel.start("own")["ok"],"takeover with cash")
 	runner.eq(DataDB.district_def_in_city("luxury_heights")["status"],"active","Luxury Heights active")
-	runner.check(DataDB.districts.has("luxury_heights") and DataDB.districts["luxury_heights"]["buildings"].size()==3,"district has the three hotel buildings")
+	runner.check(DataDB.districts.has("luxury_heights") and DataDB.districts["luxury_heights"]["buildings"].size()>=3,"district has the three hotel buildings")
 	runner.eq(Hotel.total_rooms(),12,"12-room Aster Inn")
 	runner.eq(Hotel.stage(),1,"stage one")
 	runner.check(GameState.flag("hotel_active"),"flag for crisis events and Media demand")

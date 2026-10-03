@@ -33,6 +33,10 @@ static func fee() -> float:
 static func capacity_block(pid: String) -> String:
 	var prop: Dictionary=DataDB.properties.get(pid,{})
 	if prop.get("kind","")!="home" or not DataDB.buildings.has(prop.get("building","")):return "Choose a home that is available for moving."
+	if prop.get("owner_purchase",false) and not PersonalAssets.owned(pid):return "Buy this home before arranging a move."
+	if prop.get("owner_purchase",false) and PersonalAssets.owned(pid) and PersonalAssets.S()["homes"][pid]["status"] not in ["empty","occupied"]:return "Wait for the tenancy to end before moving into this home."
+	if prop.get("owner_purchase",false) and not PersonalAssets.owned(pid):return "Buy this home before arranging a move."
+	if prop.get("owner_purchase",false) and PersonalAssets.owned(pid) and PersonalAssets.S()["homes"][pid]["status"] not in ["empty","occupied"]:return "Wait for the tenancy to end before moving into this home."
 	if pid==Living.home():return "You already live here. Keep this lease or choose another home."
 	var required:=units_at(Living.home())+units_at(pid)
 	var capacity:=int(prop.get("inventory_units",prop.get("capacity",{}).get("inventory_units",0)))
@@ -44,7 +48,7 @@ static func request(pid: String,mode: String) -> Dictionary:
 	if not S()["pending"].is_empty():return {"ok":false,"error":"A move is already booked. Keep it, cancel it or resolve the storage problem."}
 	var why:=capacity_block(pid)
 	if why!="":return {"ok":false,"error":why}
-	var deposit:=snappedf(float(DataDB.properties[pid]["monthly_rent"])*World.rent_mult(),.01)
+	var deposit:=0.0 if DataDB.properties[pid].get("owner_purchase",false) else snappedf(float(DataDB.properties[pid]["monthly_rent"])*World.rent_mult(),.01)
 	var penalty:=Living.home_rent() if mode=="penalty" else 0.0
 	var needed:=deposit+fee()+penalty
 	if Ledger.cash("player")<needed:return {"ok":false,"error":I18n.t("Keep %s personally for the new deposit, moving and termination costs.")%Fmt.money(needed)}
@@ -77,8 +81,12 @@ static func execute() -> Dictionary:
 	var refund:=float(S()["deposits"].get(old,0))
 	if refund>0:Ledger.post("player",I18n.t("Previous home deposit returned: %s")%Fmt.money(refund),[{"acct":"cash","dr":refund},{"acct":"home_deposit","cr":refund}],{"type":"home_lease_end","property":old})
 	S()["deposits"].erase(old)
+	PersonalAssets.released(old)
+	PersonalAssets.released(old)
 	move_stock(old,target)
 	GameState.data["player"]["home"]=target
+	if PersonalAssets.owned(target):PersonalAssets.S()["homes"][target]["status"]="occupied"
+	if PersonalAssets.owned(target):PersonalAssets.S()["homes"][target]["status"]="occupied"
 	S()["moves"]=int(S()["moves"])+1
 	S()["history"].append({"from":old,"to":target,"t":Clock.now(),"penalty":penalty,"moving":moving,"refund":refund})
 	S()["pending"]={}

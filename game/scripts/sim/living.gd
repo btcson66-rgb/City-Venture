@@ -17,7 +17,7 @@ static func home() -> String:
 	return id if DataDB.properties.get(id,{}).get("kind","")=="home" else "riverside_studio"
 static func home_building() -> String:return str(DataDB.properties[home()]["building"])
 static func home_bed() -> String:return str(DataDB.properties[home()].get("bed","bed_side"))
-static func home_rent() -> float:return snappedf(float(DataDB.properties[home()]["monthly_rent"])*World.rent_mult(),.01)
+static func home_rent() -> float:return 0.0 if DataDB.properties[home()].get("owner_purchase",false) else snappedf(float(DataDB.properties[home()]["monthly_rent"])*World.rent_mult(),.01)
 
 static func daily_living() -> float:
 	return float(cfg().get("reduced_daily_living", 18)) if D().get("reduced", false) else float(cfg().get("daily_living", 32))
@@ -25,6 +25,7 @@ static func daily_living() -> float:
 
 static func on_hour(t: int, h: int) -> void:
 	Housing.on_hour()
+	PersonalAssets.on_hour()
 	if h == 0:
 		Ledger.expense("player", "living", daily_living(), "Food, transit & bills", {"type": "living"})
 	if h == 9:

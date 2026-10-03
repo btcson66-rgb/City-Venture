@@ -17,6 +17,9 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "personal_assets":
+		await _personal_assets_fixture()
+		return
 	if _arg("from") == "moving_house":
 		await _moving_house_fixture()
 		return
@@ -2947,3 +2950,55 @@ func _moving_house_fixture() -> void:
 	bot.expect(Housing.S()["pending"].is_empty(),"notice cancellation returns deposit")
 	bot.expect(Ledger.check_balanced(),"moving ledger balances")
 	bot.expect(SaveSystem.save_to(bot.out_dir.path_join("moving_house.json")),"home and stock save")
+
+func _personal_assets_fixture() -> void:
+	await bot.wait(4)
+	UIRoot._suppress_decisions=true
+	UIRoot.tutorial.st()["off"]=true
+	StoryEngine.St()["active"].clear()
+	GameState.data["world"]["year"]=4
+	GameState.data["clock"]["minutes"]=Clock.DAY+12*60
+	Ledger.post("player","Controlled personal capital fixture",[{"acct":"cash","dr":1500000},{"acct":"equity","cr":1500000}],{"type":"qa_fixture"})
+	UIRoot.close_all()
+	SceneRouter._enter("interior","okafor_lettings","door","up")
+	await bot.wait(.8)
+	await bot.use_action("personal_assets")
+	await bot.wait(.4)
+	await bot.shot("personal_housing_ladder")
+	for id in ["maple_owner_home","heights_penthouse","garden_villa"]:
+		await _export_row_input("PersonalBuy20_"+id)
+		bot.expect(PersonalAssets.owned(id),"actual mortgage purchase "+id)
+		await _export_row_input("PersonalMove_"+id)
+		bot.expect(Living.home()==id,"actual owned home move "+id)
+		UIRoot.close_all()
+		SceneRouter._enter("interior",Living.home_building(),Living.home_bed(),"down")
+		await bot.wait(.7)
+		await bot.shot("personal_home_"+id)
+		await bot.use_action("personal_assets")
+		await bot.wait(.4)
+	UIRoot.close_all()
+	SceneRouter._enter("interior","dockside_motors","door","up")
+	await bot.wait(.7)
+	await bot.use_action("personal_assets")
+	await bot.click_named("PersonalTab_car")
+	await bot.wait(.3)
+	await _export_row_input("PersonalCar_kite_hatch")
+	bot.expect(not PersonalAssets.S()["car"].is_empty(),"actual personal showroom purchase")
+	await bot.shot("personal_car_parking_costs")
+	await _export_row_input("PersonalDrive_financial")
+	await bot.wait(.4)
+	await bot.shot("personal_driving_route")
+	await bot.click_named("ConfirmPersonalDrive")
+	await bot.wait(1)
+	bot.expect(GameState.data["player"]["location"]["id"]=="financial","actual driving arrival")
+	await bot.shot("personal_drive_arrival")
+	UIRoot.close_all()
+	SceneRouter._enter("interior",Living.home_building(),Living.home_bed(),"down")
+	await bot.wait(.7)
+	await bot.use_action("personal_assets")
+	await bot.click_named("PersonalTab_visits")
+	await _export_row_input("PersonalStyle_modern")
+	await bot.wait(.5)
+	await bot.shot("personal_home_furniture")
+	bot.expect(Ledger.check_balanced(),"personal property/car books balanced")
+	bot.expect(SaveSystem.save_to(bot.out_dir.path_join("personal_assets.json")),"played owned home and car save")

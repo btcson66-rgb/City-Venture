@@ -119,6 +119,8 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 			UIRoot.open_modal(LoanModal.new(false))
 		"lease_office":
 			UIRoot.open_modal(LeaseModal.new("suite_2b"))
+		"personal_assets":
+			UIRoot.open_modal(PersonalAssetsModal.new())
 		"home_letting":
 			UIRoot.open_modal(HomeMoveModal.new())
 		"lease_property":

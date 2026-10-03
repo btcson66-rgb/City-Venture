@@ -218,6 +218,11 @@ func walk_to_district(to: String, spawn: String, minutes: int) -> void:
 	_fade(func(): _enter("district", to, spawn, ""), minutes)
 
 
+func personal_drive(to_district: String, minutes: int) -> void:
+	EventBus.notify.emit(I18n.t("Driving to %s: %d minutes, including parking.")%[I18n.t(DataDB.districts[to_district]["name"]),minutes],"info","metro")
+	_fade(func(): _enter("district",to_district,"metro","down"),minutes)
+
+
 func metro_travel(to_district: String, minutes: int, fare: float) -> void:
 	Ledger.expense("player", "transport", fare, I18n.t("Metro fare to %s") % I18n.t(DataDB.districts[to_district]["name"]), {"type": "metro"})
 	GameState.inc_stat("metro_rides")

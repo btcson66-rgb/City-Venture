@@ -182,3 +182,6 @@
 ## B2 港區立面 · 美術已交 2026-09-30
 
 `pier7_warehouse` 280×190、`dockside_motors` 240×150、`harbor_point_fitness` 182×173、`customs_house` 240×220、`warehouse_shed` 220×150、`cold_store` 200×170、`container_stack` 180×120。每張附 `_lights` 及 4×；入口和空白招牌位置已寫入 buildings_meta.json，runtime 字串由資料提供。海關是否開放仍由 Claude 線決定。
+
+### #94 Personal housing
+Implemented: `maple_owner_home` (Maple Court owner apartment), `heights_penthouse` (Luxury Heights), `garden_villa` (Residential outskirts). Data-driven home interiors reuse existing furniture/facades as explicit visual fallback; no new art assets. Residential street extends to the villa driveway, retaining existing exits. Buy at Okafor, move with the existing home system, wake/use laptop/pack at the new home. Personal showroom is at Dockside Motors.
