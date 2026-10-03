@@ -116,7 +116,7 @@ static func trigger(id: String, ctx := {}) -> Dictionary:
 	if pres.get("channel", "phone") == "phone" and pres.get("speaker", "") != "":
 		var lines: Array = pres.get("lines", [])
 		if not lines.is_empty():
-			GameState.add_message(pres["speaker"], fill(str(lines[0]), ctx))
+			GameState.add_message(pres["speaker"], fill(str(lines[0]), ctx), {"decision": inst["iid"]})
 	EventBus.decision_requested.emit(inst)
 	return inst
 

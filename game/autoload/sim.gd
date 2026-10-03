@@ -64,6 +64,7 @@ func pending(kind: String) -> Array:
 
 
 func _on_minute(t: int) -> void:
+	PhoneMessages.on_minute(t)
 	var s: Array = GameState.data["schedule"]
 	var guard := 0
 	while not s.is_empty() and int(s[0]["t"]) <= t and guard < 500:

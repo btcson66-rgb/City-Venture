@@ -29,6 +29,11 @@ static func create_offer(t: Dictionary) -> String:
 		"history": [{"t": Clock.now(), "by": t["buyer"], "text": I18n.t("Offer: %d × %s @ %s, Net %d") % [qty, I18n.t(p.get("name", "")), Fmt.money(price), int(t.get("payment_terms_days", 30))]}],
 	}
 	C()[cid] = c
+	GameState.add_message(contact_npc(c), str(c["history"][0]["text"]), {"ctx": {"contract": cid}, "expires": c["expires"], "default_reply": "decline", "replies": [
+		{"id": "accept", "label": "Accept this offer", "requires": ["company_registered"], "effects": [{"op": "phone_contract", "choice": "accept"}]},
+		{"id": "decline", "label": "Decline this offer", "effects": [{"op": "phone_contract", "choice": "decline"}], "outcome": "Thanks for letting us know. This offer is closed."},
+		{"id": "details", "label": "What are the payment and delivery terms?", "effects": [], "outcome": I18n.t("Delivery in %d days; payment Net %d. Review the full contract at a Company OS terminal.") % [int(c["delivery_days"]), int(c["payment_terms_days"])], "keep_open": true}
+	]})
 	Sim.schedule(int(c["expires"]), "con.expire", {"id": cid})
 	EventBus.contract_changed.emit(cid)
 	return cid

@@ -9,6 +9,7 @@ var screen: Control
 var content: VBoxContainer
 var app := "home"
 var thread_with := ""
+var displayed_minute := -1
 
 
 func _ready() -> void:
@@ -40,6 +41,14 @@ func _ready() -> void:
 	var sc := UIK.scroll(content, Vector2(132, 214))
 	sc.size = Vector2(132, 214)
 	screen.add_child(sc)
+
+
+func _process(_delta: float) -> void:
+	if not is_open or not GameState.has_game() or displayed_minute == Clock.now(): return
+	displayed_minute = Clock.now()
+	for label in content.find_children("ReplyDeadline", "Label", true, false):
+		var deadline := int(label.get_meta("deadline"))
+		label.text = I18n.t("Reply by %s · %d minutes remaining") % [Clock.fmt_datetime(deadline), maxi(0, deadline - Clock.now())]
 
 
 func open() -> void:
@@ -100,6 +109,10 @@ func _render() -> void:
 			_messages()
 		"thread":
 			_thread()
+		"contacts":
+			_contacts()
+		"agenda":
+			_agenda()
 		"bank":
 			_bank()
 		"tasks":
@@ -125,7 +138,7 @@ func _home() -> void:
 	grid.add_theme_constant_override("v_separation", 4)
 	var unread := GameState.unread_messages()
 	var apps := [["messages", "mail", I18n.t("Messages") + (" %d" % unread if unread > 0 else "")], ["bank", "bank", "Bank"], ["tasks", "tasks", "Tasks"],
-		["map", "map", "City"], ["shoplane", "orders", "ShopLane"], ["timeline", "calendar", "Timeline"],
+		["contacts", "mail", "Contacts"], ["agenda", "calendar", "Agenda"], ["map", "map", "City"], ["shoplane", "orders", "ShopLane"], ["timeline", "calendar", "Timeline"],
 		["leases", "home", "Leases"], ["guide", "info", "City Guide"], ["save", "save", "Save"], ["close", "close", "Close"]]
 	if BuildingInfo.world_travel_available():
 		apps.insert(apps.size() - 1, ["world", "world", "World"])
@@ -187,7 +200,7 @@ func _messages() -> void:
 		var unread: int = GameState.data["messages"].filter(func(x): return x["from"] == from and not x.get("read", false)).size()
 		var b := UIK.button("", _open_thread.bind(from))
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
-		b.text = "%s%s\n%s" % [I18n.t(DataDB.npc(from).get("name", from)), "  ●" if unread > 0 else "", I18n.t(str(m["text"])).left(26)]
+		b.text = "%s%s\n%s" % [I18n.t(DataDB.npc(from).get("name", from)), "  (%d)" % unread if unread > 0 else "", Clock.fmt_short(int(m["t"])) + "\n" + I18n.t(str(m["text"])).left(26)]
 		b.add_theme_font_size_override("font_size", 7)
 		b.custom_minimum_size = Vector2(126, 24)
 		b.name = "Thread_" + from
@@ -199,10 +212,6 @@ func _open_thread(from: String) -> void:
 	for m in GameState.data["messages"]:
 		if m["from"] == from:
 			m["read"] = true
-	if from == "maya" and not GameState.flag("maya_intro_done"):
-		close()
-		UIRoot.play_dialogue("maya_intro")
-		return
 	_go("thread")
 
 
@@ -214,9 +223,74 @@ func _thread() -> void:
 		var p := UIK.panel("ui/card", 3)
 		var v := UIK.vbox(0)
 		p.add_child(v)
-		v.add_child(UIK.label(Clock.fmt_short(int(m["t"])), 6, Art.C_DIM))
+		PhoneMessages.prepare(m)
+		v.add_child(UIK.label((I18n.t("You") + " · " if m.get("direction", "incoming") == "outgoing" else "") + Clock.fmt_short(int(m["t"])), 6, Art.C_DIM))
 		v.add_child(UIK.wrap(I18n.t(str(m["text"])), 7, Art.C_WHITE, 118))
+		if m.has("expires") and not m.has("answered"):
+			var deadline := UIK.wrap(I18n.t("Reply by %s · %d minutes remaining") % [Clock.fmt_datetime(int(m["expires"])), maxi(0, int(m["expires"]) - Clock.now())], 6, Art.C_GOLD, 118)
+			deadline.name = "ReplyDeadline"
+			deadline.set_meta("deadline", int(m["expires"]))
+			v.add_child(deadline)
+		for c in PhoneMessages.choices(m):
+			var available := EventEngine.choice_available(c, PhoneMessages.context(m))
+			var label := EventEngine.fill(str(c.get("label", c.get("text", "Okay, thanks."))), PhoneMessages.context(m))
+			var button := UIK.button(("✓ " if available else "✗ ") + I18n.t(label), _reply.bind(str(m["id"]), str(c["id"])), "primary" if c.get("recommended", false) else "normal")
+			button.name = "Reply_" + str(m["id"]) + "_" + str(c["id"])
+			button.add_theme_font_size_override("font_size", 6)
+			button.disabled = not available
+			v.add_child(button)
+			if not available: v.add_child(UIK.wrap(EventEngine.fill(str(c.get("detail", "Register a company at City Hall first." if "company_registered" in c.get("requires", []) else "Complete the reply's requirements first.")), PhoneMessages.context(m)), 6, Art.C_MUTED, 118))
 		content.add_child(p)
+
+
+func _reply(id: String, choice: String) -> void:
+	var result := PhoneMessages.reply(id, choice)
+	_render()
+	if not result["ok"]: content.add_child(UIK.wrap(str(result["error"]), 7, Art.C_RED, 122))
+
+
+func _contacts() -> void:
+	_header("Contacts")
+	for npc in PhoneMessages.contacts():
+		content.add_child(UIK.title(I18n.t(DataDB.npc(npc).get("name", npc)), 8))
+		for key in PhoneMessages.cfg().get("templates", {}):
+			var template: Dictionary = PhoneMessages.cfg()["templates"][key]
+			var remaining := maxi(0, int(PhoneMessages.S()["cooldowns"].get(str(npc) + ":" + str(key), 0)) - Clock.now())
+			var available := remaining == 0 and Cond.all(template.get("requires", []))
+			var button := UIK.button(("✓ " if available else "✗ ") + I18n.t(str(template["label"])), _send.bind(str(npc), str(key)))
+			button.name = "Send_" + str(npc) + "_" + str(key)
+			button.add_theme_font_size_override("font_size", 6)
+			button.disabled = not available
+			content.add_child(button)
+			if remaining > 0: content.add_child(UIK.wrap(I18n.t("Wait %d minutes before messaging again.") % remaining, 6, Art.C_MUTED, 122))
+			elif not available: content.add_child(UIK.wrap("Register a company at City Hall first.", 6, Art.C_MUTED, 122))
+
+
+func _send(npc: String, template: String) -> void:
+	var result := PhoneMessages.send(npc, template)
+	if result["ok"]: thread_with = npc; _go("thread")
+	else: _render(); content.add_child(UIK.wrap(str(result["error"]), 7, Art.C_RED, 122))
+
+
+func _meeting_status(status: String) -> String:
+	match status:
+		"planned":
+			return I18n.t("Meeting scheduled")
+		"met":
+			return I18n.t("Meeting completed")
+		"missed":
+			return I18n.t("Meeting missed")
+	return status
+
+
+func _agenda() -> void:
+	_header("Agenda")
+	for meeting in PhoneMessages.S()["agenda"]:
+		content.add_child(UIK.wrap(I18n.t(DataDB.npc(meeting["npc"]).get("name", meeting["npc"])) + " · " + Clock.fmt_datetime(int(meeting["at"])), 7, Art.C_GOLD, 122))
+		content.add_child(UIK.wrap(I18n.t(str(DataDB.building(str(meeting["location"]).get_slice(":", 1)).get("name", str(meeting["location"])))) + " · " + _meeting_status(str(meeting["status"])), 7, Art.C_MUTED, 122))
+		if meeting["status"] == "planned":
+			content.add_child(UIK.wrap("Go to the meeting location during its time window. The conversation starts when you arrive.", 6, Art.C_WHITE, 122))
+		else: content.add_child(UIK.wrap("Book a new time from Contacts if needed.", 6, Art.C_WHITE, 122))
 
 
 func _bank() -> void:
