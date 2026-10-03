@@ -340,3 +340,16 @@ func test_distributor_scenarios_average_profit_and_cost_stress_losses() -> void:
 		if argument.begins_with("--balance-out="):
 			var file := FileAccess.open(argument.trim_prefix("--balance-out="), FileAccess.WRITE)
 			file.store_string(JSON.stringify({"scope": "12 controlled operating cycles after setup; excludes initial bank opening and is not a 120-day economy soak", "scenarios": rows}, "  "))
+
+
+func test_industry_merge_reports_realized_fx_and_keeps_overseas_destinations() -> void:
+	var ent := _setup()
+	var r := FXForward.open("AUR", 100, 30)
+	var f: Dictionary = FXForward.S()["items"][r["id"]]
+	FX.S()["rates"]["AUR"] = float(f["rate"]) * 0.8
+	GameState.data["clock"]["minutes"] = int(f["due"])
+	FXForward.settle(str(f["id"]))
+	var report := MonthClose.compute(ent, 0, Clock.now() + 1)
+	runner.eq(report["segments"]["totals"]["operating_profit"], report["business_profit"], "realized FX is included exactly once in segment and company totals")
+	runner.check(BuildingInfo.world_travel_available(), "global banking keeps overseas information accessible")
+	runner.eq(BuildingInfo.icon_for("customs_guide"), "info", "customs guidance registers its existing icon")

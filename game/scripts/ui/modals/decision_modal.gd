@@ -86,14 +86,9 @@ func build() -> void:
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		b.disabled = not avail
 		b.name = "Choice_" + str(c["id"])
+		row.add_child(b)
 		if c.has("tip"):
-			var head := UIK.hbox(3)
-			b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			head.add_child(b)
-			head.add_child(UIK.tip(str(c["tip"])))
-			row.add_child(head)
-		else:
-			row.add_child(b)
+			row.add_child(UIK.label_tip(str(InfoTip.entry(str(c["tip"])).get("title", "")), str(c["tip"]), 7, Art.C_SKY))
 		if c.has("detail"):
 			var suffix := "" if avail else I18n.t("  (not possible now)")
 			if def.get("id", "") == "customs_hold" and not avail:

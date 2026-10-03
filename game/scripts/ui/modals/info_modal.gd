@@ -4,6 +4,7 @@ extends Modal
 
 var lines: Array = []
 var ok_text := "Close"
+var ok_name := "CloseInfo"
 
 
 func _init() -> void:
@@ -33,7 +34,9 @@ func build() -> void:
 		else:
 			v.add_child(UIK.wrap(str(l), 8, Art.C_WHITE, 350))
 	body.add_child(UIK.scroll(v, Vector2(360, panel_size.y - 70)))
-	footer.add_child(UIK.button(ok_text, close, "primary" if ok_text != "Close" else "", 70))
+	var confirm := UIK.button(ok_text, close, "primary" if ok_text != "Close" else "", 70)
+	confirm.name = ok_name
+	footer.add_child(confirm)
 
 
 ## Shown when the guided first venture is done: what the player just did, and what else there is.
@@ -85,7 +88,7 @@ static func whiteboard() -> InfoModal:
 	var be := GameState.business_entity()
 	var cur := MonthClose.current(be)
 	return make("Whiteboard", "tasks", ["# IDEAS · PEOPLE · PRODUCT · GROWTH",
-		["This month revenue", Fmt.money(cur["net_revenue"])], ["Gross profit", Fmt.money(cur["gross_profit"])],
-		["Operating costs", Fmt.money(cur["opex_total"])], ["Cash in bank", Fmt.money(Ledger.cash(be))],
-		["Waiting at ShopLane", Fmt.money(Ledger.balance(be, "marketplace_balance"))], "---",
+		["This month revenue", Fmt.money0(cur["net_revenue"])], ["Gross profit", Fmt.money0(cur["gross_profit"])],
+		["Operating costs", Fmt.money0(cur["opex_total"])], ["Cash in bank", Fmt.money0(Ledger.cash(be))],
+		["Waiting at ShopLane", Fmt.money0(Ledger.balance(be, "marketplace_balance"))], "---",
 		"Scribbled in the corner: 'profit is an opinion, cash is a fact.'"])

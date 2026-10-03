@@ -12,8 +12,9 @@ func _init() -> void:
 func build() -> void:
 	if not Actions.npc_present("priya"):
 		body.add_child(UIK.wrap("Reception is unstaffed. Self-service kiosk:", 8, Art.C_MUTED, 340))
-	body.add_child(UIK.kv("Day pass (desk + wifi, today)", "$15.00", Art.C_WHITE))
-	body.add_child(UIK.kv("Hot desk — monthly", "$350.00", Art.C_WHITE))
+	var property: Dictionary = DataDB.properties.get("nexus_cowork_desk", {})
+	body.add_child(UIK.kv("Day pass (desk + wifi, today)", Fmt.money0(float(property.get("day_pass", 15))), Art.C_WHITE))
+	body.add_child(UIK.kv("Hot desk — monthly", Fmt.money0(float(property.get("monthly_rent", 350))), Art.C_WHITE))
 	if Living.has_lease("nexus_cowork_desk"):
 		body.add_child(UIK.label("You have a monthly desk.", 8, Art.C_GREEN, true))
 	elif Living.has_desk_access():

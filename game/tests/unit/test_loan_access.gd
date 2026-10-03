@@ -178,7 +178,7 @@ func test_checklist_boolean_rows_and_numeric_units() -> void:
 	var age := m.find_child("Eligibility_age", true, false)
 	runner.eq(age.get_child(1).text, "Current 0 days · required 14 days · 14 more days", "age states remaining days")
 	var credit := m.find_child("Eligibility_credit", true, false)
-	runner.eq(credit.get_child(1).text, "Current 680 · required 560 · gap 0", "credit remains numeric")
+	runner.eq(credit.get_child(1).text, "Current 680 points · required 560 points · gap 0 points", "credit remains numeric with units")
 	m.free()
 	runner.check(Ledger.check_balanced(), "display does not change money")
 

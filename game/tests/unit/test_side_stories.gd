@@ -21,7 +21,7 @@ func _fixture() -> void:
 		"on_unavailable": [{"do": "set_flag", "flag": "test_side_unavailable"}]}}
 	DataDB.story["side"].append_array(objectives)
 	GameState.data["company"] = "co_side_test"
-	GameState.data["entities"]["co_side_test"] = {"id": "co_side_test", "kind": "company"}
+	GameState.data["entities"]["co_side_test"] = {"id": "co_side_test", "name": "Side Story Test", "kind": "company", "bank_account": false}
 	GameState.data["world"]["year"] = 2
 
 
