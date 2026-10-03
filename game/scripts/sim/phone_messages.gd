@@ -67,9 +67,13 @@ static func reply(id: String, choice_id: String, expired := false) -> Dictionary
 	var result := {"ok": true}
 	if message.has("decision"): result = EventEngine.choose(message["decision"], choice_id)
 	else:
-		for effect in choice.get("effects", []):
+		var effects: Array = choice.get("effects", [])
+		var before: Dictionary = GameState.data.duplicate(true) if effects.size() > 1 else {}
+		for effect in effects:
 			result = Effects.apply(effect, ctx)
-			if not result.get("ok", true): return result
+			if not result.get("ok", true):
+				if not before.is_empty(): GameState.data = before
+				return result
 	if not result["ok"]: return result
 	# Mark the incoming message once; history remains intact across saves.
 	if not choice.get("keep_open", false):
@@ -87,7 +91,7 @@ static func outgoing(npc: String, text: String) -> void:
 	prepare(message)
 	GameState.data["messages"].append(message)
 
-static func send(npc: String, template: String) -> Dictionary:
+static func can_send(npc: String, template: String) -> Dictionary:
 	if not contacts().has(npc): return error("Meet this contact or receive their message first.")
 	if template in ["work", "payment"] and GameState.data["entities"].get(GameState.company_id(), {}).has("closed"): return error("This is a contract of a closed company.")
 	var data: Dictionary = cfg().get("templates", {}).get(template, {})
@@ -95,6 +99,17 @@ static func send(npc: String, template: String) -> Dictionary:
 	var key := npc + ":" + template
 	if Clock.now() < int(S()["cooldowns"].get(key, 0)): return error("Wait for this contact's message cooldown to end.")
 	if not Cond.all(data.get("requires", [])): return error("Complete this message template's requirements first.")
+	if template == "coffee":
+		if S()["agenda"].any(func(m): return m["npc"] == npc and m["status"] == "planned"): return error("You already have a meeting with this contact. Review Agenda first.")
+		if DataDB.npc(npc).get("schedule", []).is_empty(): return error("This contact has no meeting location.")
+	if template == "payment" and not Jobs.S()["items"].values().any(func(j): return j["entity"] == GameState.business_entity() and j["status"] == "invoiced"): return error("Invoice completed work before asking about payment.")
+	return {"ok": true}
+
+static func send(npc: String, template: String) -> Dictionary:
+	var allowed := can_send(npc, template)
+	if not allowed["ok"]: return allowed
+	var data: Dictionary = cfg()["templates"][template]
+	var key := npc + ":" + template
 	var result := {"ok": true}
 	match template:
 		"coffee": result = book(npc)
@@ -128,7 +143,7 @@ static func book(npc: String, at := -1, location := "", conversation := "") -> D
 				at = minute
 				break
 	if at < Clock.now(): return error("No meeting time is currently available. Ask again later.")
-	if S()["agenda"].any(func(m): return m["npc"] == npc and m["status"] == "planned"): return error("You already have a meeting with this contact.")
+	if S()["agenda"].any(func(m): return m["npc"] == npc and m["status"] == "planned"): return error("You already have a meeting with this contact. Review Agenda first.")
 	var meeting := {"id": "MEET-%d" % int(S()["seq"]), "npc": npc, "at": at, "until": at + int(cfg().get("meeting_window_minutes", 60)), "location": location, "conversation": conversation, "status": "planned"}
 	S()["seq"] = int(S()["seq"]) + 1
 	S()["agenda"].append(meeting)
@@ -160,6 +175,7 @@ static func on_minute(t: int) -> void:
 		if not message.is_empty() and not message.has("answered"):
 			var result := reply(str(id), str(message.get("default_reply", "ack")), true)
 			if not result["ok"]:
+				message = get_message(str(id))
 				message["answered"] = "expired_unavailable"
 				message["expired"] = true
 				GameState.add_message(message["from"], "The reply is no longer available. Review current Tasks or book a new time from Contacts.")
@@ -176,3 +192,17 @@ static func check_arrival() -> void:
 		if meeting["status"] == "planned" and Clock.now() >= int(meeting["at"]) and Clock.now() <= int(meeting["until"]) and str(loc.get("kind", "")) + ":" + str(loc.get("id", "")) == meeting["location"]:
 			meet(str(meeting["id"]))
 			return
+
+static func contact_name(npc: String) -> String:
+	var person := DataDB.npc(npc)
+	if not person.is_empty(): return I18n.t(str(person["name"]))
+	match npc:
+		"client":
+			return I18n.t("Client")
+		"landlord":
+			return I18n.t("Landlord")
+		"jobs_board":
+			return I18n.t("Jobs Board")
+		"shoplane":
+			return I18n.t("ShopLane")
+	return npc.replace("_", " ").capitalize()

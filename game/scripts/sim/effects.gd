@@ -21,7 +21,7 @@ static func apply(e: Dictionary, ctx: Dictionary) -> Dictionary:
 			if job.is_empty() or job["status"] != "offered" or GameState.data["entities"].get(job["entity"], {}).has("closed") or GameState.data["entities"].get(GameState.company_id(), {}).has("closed"):
 				return {"ok": false, "error": I18n.t("This group job is no longer on offer.")}
 			if e.get("choice", "") == "accept": return GroupJobs.accept(id)
-			job["status"] = "declined"
+			job["status"] = "expired" if Clock.now() >= int(job["expires"]) else "declined"
 			return {"ok": true}
 		"phone_payment_extension":
 			return Bank.request_payment_extension(str(e["id"]))
@@ -29,6 +29,11 @@ static func apply(e: Dictionary, ctx: Dictionary) -> Dictionary:
 			var id := str(e.get("id", ctx.get("contract", "")))
 			var contract: Dictionary = Contracts.C().get(id, {})
 			if contract.is_empty() or contract["status"] != "offered" or Contracts.seller_closed(contract) or GameState.data["entities"].get(GameState.company_id(), {}).has("closed"): return {"ok": false, "error": I18n.t("This offer is no longer open.")}
+			if Clock.now() >= int(contract["expires"]):
+				contract["status"] = "expired"
+				Contracts._tag(contract, "declined")
+				EventBus.contract_changed.emit(id)
+				return {"ok": true}
 			if e.get("choice", "") == "accept": return Contracts.accept(id)
 			Contracts.reject(id)
 			return {"ok": true}

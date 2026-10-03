@@ -242,11 +242,11 @@ msgstr "再做 %d 班升为%s"
 msgid "%d new delivery runs are posted (Company OS → Logistics)."
 msgstr "有 %d 趟新的外送单上架了（Company OS → 物流）。"
 
-#: scripts/ui/phone_ui.gd:383
+#: scripts/ui/phone_ui.gd:407
 msgid "%d of %d days"
 msgstr "%d／%d 天"
 
-#: scripts/ui/phone_ui.gd:368
+#: scripts/ui/phone_ui.gd:392
 msgid "%d of %d reached"
 msgstr "已达成 %d／%d"
 
@@ -1446,7 +1446,7 @@ msgstr "应付帐款"
 msgid "Accuracy and speed decide how much of the work gets done in this session."
 msgstr "正确率和速度决定这一段时间完成多少工作。"
 
-#: scripts/ui/phone_ui.gd:349
+#: scripts/ui/phone_ui.gd:373
 msgid "Achievements"
 msgstr "成就"
 
@@ -1554,7 +1554,7 @@ msgstr "指定代理商"
 msgid "Agency proposal"
 msgstr "代理商提案"
 
-#: scripts/ui/phone_ui.gd:141 scripts/ui/phone_ui.gd:276
+#: scripts/ui/phone_ui.gd:141 scripts/ui/phone_ui.gd:300
 msgid "Agenda"
 msgstr "行程"
 
@@ -1854,7 +1854,7 @@ msgstr "ArrangeViewing"
 msgid "Arrival"
 msgstr "抵达"
 
-#: scripts/sim/phone_messages.gd:142
+#: scripts/sim/phone_messages.gd:157
 msgid "Arrive during this meeting's time window, or book again."
 msgstr "请在约见时段内抵达，或重新预约。"
 
@@ -2470,7 +2470,7 @@ msgstr "鲜明色彩"
 msgid "Bold. Love it."
 msgstr "有胆。我喜欢。"
 
-#: scripts/ui/phone_ui.gd:282
+#: scripts/ui/phone_ui.gd:306
 msgid "Book a new time from Contacts if needed."
 msgstr "如有需要，请从联系人预约新时段。"
 
@@ -3578,7 +3578,7 @@ msgstr "看看现金预测：{company} 撑得到下一笔大款项入帐吗？"
 msgid "Check the competitor's rates"
 msgstr "查看对手房价"
 
-#: scripts/sim/phone_messages.gd:101
+#: scripts/sim/phone_messages.gd:116
 msgid "Check the current freelance offers at a co-work desk. Each brief lists its requirements and payment terms."
 msgstr "请在共享办公桌查看目前接案机会。每份需求都列有条件与付款条款。"
 
@@ -3686,7 +3686,7 @@ msgstr "请选择列出的电池容量和毛利率。"
 msgid "Choose a listed car."
 msgstr "请选择已上架的车。"
 
-#: scripts/sim/phone_messages.gd:94
+#: scripts/sim/phone_messages.gd:98
 msgid "Choose a message template."
 msgstr "请选择消息范本。"
 
@@ -4022,7 +4022,7 @@ msgstr "清算危机"
 msgid "Click! %d%% (%s)"
 msgstr "喀嚓！%d%%（%s）"
 
-#: data/npcs/client.json
+#: data/npcs/client.json scripts/sim/phone_messages.gd:201
 msgid "Client"
 msgstr "客户"
 
@@ -4314,11 +4314,11 @@ msgstr "完成十趟货车配送。"
 msgid "Complete the previous growth stage."
 msgstr "请先完成上一个成长阶段。"
 
-#: scripts/sim/phone_messages.gd:66 scripts/ui/phone_ui.gd:242
+#: scripts/sim/phone_messages.gd:66 scripts/ui/phone_ui.gd:245
 msgid "Complete the reply's requirements first."
 msgstr "请先完成此回复的条件。"
 
-#: scripts/sim/phone_messages.gd:97
+#: scripts/sim/phone_messages.gd:101
 msgid "Complete this message template's requirements first."
 msgstr "请先完成此消息范本的条件。"
 
@@ -4414,7 +4414,7 @@ msgstr "消费"
 msgid "Consumer-protection fine for an undisclosed flood car"
 msgstr "未揭露泡水车的消费者保护罚款"
 
-#: scripts/ui/modals/company_os.gd:837 scripts/ui/phone_ui.gd:141 scripts/ui/phone_ui.gd:253
+#: scripts/ui/modals/company_os.gd:837 scripts/ui/phone_ui.gd:141 scripts/ui/phone_ui.gd:265
 msgid "Contacts"
 msgstr "联系人"
 
@@ -5822,7 +5822,7 @@ msgstr "参加周三拍卖"
 msgid "Equipment ages. Tired rooms drag down every review until you renovate, and a renovated room is off sale while the painters work."
 msgstr "设备会老化。老旧房间会拉低每则评价，直到你翻新；翻新期间该房型不能卖。"
 
-#: scripts/sim/effects.gd:114
+#: scripts/sim/effects.gd:119
 msgid "Equity investment"
 msgstr "股权投资"
 
@@ -5898,11 +5898,11 @@ msgstr "傍晚"
 msgid "Evening cut-off: everything out by 19:00, and it is."
 msgstr "晚上截件：19:00 前全部出货，而且做到了。"
 
-#: scripts/sim/effects.gd:53
+#: scripts/sim/effects.gd:58
 msgid "Event cost"
 msgstr "事件支出"
 
-#: scripts/sim/effects.gd:55
+#: scripts/sim/effects.gd:60
 msgid "Event income"
 msgstr "事件收入"
 
@@ -6914,11 +6914,11 @@ msgstr "前往拍卖"
 msgid "Go to the company registration counter"
 msgstr "到公司登记柜台"
 
-#: scripts/ui/phone_ui.gd:281
+#: scripts/ui/phone_ui.gd:305
 msgid "Go to the meeting location during its time window. The conversation starts when you arrive."
 msgstr "请于约见时段前往地点。抵达后将开始对话。"
 
-#: scripts/sim/phone_messages.gd:144
+#: scripts/sim/phone_messages.gd:159
 msgid "Go to the meeting location shown in Agenda first."
 msgstr "请先前往行程中显示的约见地点。"
 
@@ -7990,7 +7990,7 @@ msgstr "清算危机（第 5 年）期间，汇到国外的钱要好几天才到
 msgid "In the workshop"
 msgstr "整备中"
 
-#: scripts/ui/modals/company_os.gd:509 scripts/ui/phone_ui.gd:332
+#: scripts/ui/modals/company_os.gd:509 scripts/ui/phone_ui.gd:356
 msgid "In transit"
 msgstr "运送中"
 
@@ -8250,7 +8250,7 @@ msgstr "存货报废"
 msgid "Inventory: what you have and where"
 msgstr "库存：你有什么、放在哪里"
 
-#: scripts/sim/effects.gd:113
+#: scripts/sim/effects.gd:118
 msgid "Investors buy shares in a registered company."
 msgstr "投资人只能入股已登记的公司。"
 
@@ -8266,7 +8266,7 @@ msgstr "发票 %s · %s · 保固至 %s"
 msgid "Invoice %s · due %s"
 msgstr "发票 %s · %s 到期"
 
-#: scripts/sim/phone_messages.gd:103
+#: scripts/sim/phone_messages.gd:105 scripts/sim/phone_messages.gd:118
 msgid "Invoice completed work before asking about payment."
 msgstr "请先替已完成工作开立发票，再询问付款。"
 
@@ -8437,6 +8437,10 @@ msgstr "工单收款：%s"
 #: scripts/ui/modals/lease_end_modal.gd:73
 msgid "Job penalties"
 msgstr "工单违约金"
+
+#: scripts/sim/phone_messages.gd:205
+msgid "Jobs Board"
+msgstr "征才公告"
 
 #: scripts/ui/minigames/clerk_forms_game.gd:8
 msgid "Jon Silva"
@@ -8702,7 +8706,7 @@ msgstr "已领执照"
 msgid "LIVE"
 msgstr "贩售中"
 
-#: data/milestones.json
+#: data/milestones.json scripts/sim/phone_messages.gd:203
 msgid "Landlord"
 msgstr "房东"
 
@@ -9098,7 +9102,7 @@ msgstr "执照已续期到 %s。"
 msgid "Licensing Officer"
 msgstr "执照承办员"
 
-#: scripts/ui/phone_ui.gd:346
+#: scripts/ui/phone_ui.gd:370
 msgid "Life Timeline"
 msgstr "人生纪录"
 
@@ -9874,23 +9878,23 @@ msgstr "请先满足所有经销条件。"
 msgid "Meet every growth condition first."
 msgstr "请先满足所有成长条件。"
 
-#: scripts/sim/phone_messages.gd:91
+#: scripts/sim/phone_messages.gd:95
 msgid "Meet this contact or receive their message first."
 msgstr "请先认识此联系人，或收到对方消息。"
 
-#: scripts/ui/phone_ui.gd:279
+#: scripts/ui/phone_ui.gd:293
 msgid "Meeting completed"
 msgstr "已会面"
 
-#: scripts/ui/phone_ui.gd:279
+#: scripts/ui/phone_ui.gd:295
 msgid "Meeting missed"
 msgstr "已错过"
 
-#: scripts/ui/phone_ui.gd:279
+#: scripts/ui/phone_ui.gd:291
 msgid "Meeting scheduled"
 msgstr "已预约"
 
-#: scripts/sim/phone_messages.gd:135
+#: scripts/sim/phone_messages.gd:150
 msgid "Meeting: %s at %s. Check Agenda; if you miss it, book again."
 msgstr "约见：%s，地点为 %s。请查看行程；错过后可重新预约。"
 
@@ -10098,7 +10102,7 @@ msgstr "月结——%s"
 msgid "Month close"
 msgstr "月结"
 
-#: scripts/ui/phone_ui.gd:333
+#: scripts/ui/phone_ui.gd:357
 msgid "Month sales"
 msgstr "本月销售"
 
@@ -10658,7 +10662,7 @@ msgstr "还没有上架商品。先进货（营运），再上架（销售）。
 msgid "No lost rentals, but each car may break down over the next three weeks."
 msgstr "不会损失租赁，但每辆车未来三周都可能抛锚。"
 
-#: scripts/sim/phone_messages.gd:130
+#: scripts/sim/phone_messages.gd:145
 msgid "No meeting time is currently available. Ask again later."
 msgstr "目前没有可约见的时段。请稍后再询问。"
 
@@ -10982,7 +10986,7 @@ msgstr "已提出退租通知，请查看进行中的通知。"
 msgid "Notice rent"
 msgstr "通知期租金"
 
-#: scripts/ui/phone_ui.gd:326
+#: scripts/ui/phone_ui.gd:350
 msgid "Notifications only.\nManage at a desk: Company OS."
 msgstr "这里只显示通知。\n要管理请到办公桌：Company OS。"
 
@@ -11174,7 +11178,7 @@ msgstr "Okafor"
 msgid "Okafor Lettings"
 msgstr "Okafor 租屋行"
 
-#: scripts/sim/bank.gd:291 scripts/sim/phone_messages.gd:24 scripts/sim/phone_messages.gd:80 scripts/ui/phone_ui.gd:236
+#: scripts/sim/bank.gd:291 scripts/sim/phone_messages.gd:24 scripts/sim/phone_messages.gd:84 scripts/ui/phone_ui.gd:237
 msgid "Okay, thanks."
 msgstr "好的，谢谢。"
 
@@ -12054,7 +12058,7 @@ msgstr "已打包订单 %s"
 msgid "Packed well"
 msgstr "打包得很好"
 
-#: scripts/ui/phone_ui.gd:331
+#: scripts/ui/phone_ui.gd:355
 msgid "Packed, not shipped"
 msgstr "已打包未出货"
 
@@ -12334,7 +12338,7 @@ msgstr "每周五 17:00 从公司帐户付员工薪水。"
 msgid "Payment"
 msgstr "还款"
 
-#: scripts/sim/phone_messages.gd:104
+#: scripts/sim/phone_messages.gd:119
 msgid "Payment follows the invoice due date. Review receivables in Company OS; a reminder does not create a new payment."
 msgstr "款项依发票到期日支付。请在 Company OS 查看应收帐款；提醒不会产生额外付款。"
 
@@ -12438,7 +12442,7 @@ msgstr "许可"
 msgid "Permits & regulations"
 msgstr "许可与法规"
 
-#: scripts/ui/modals/bank_modal.gd:60 scripts/ui/phone_ui.gd:287
+#: scripts/ui/modals/bank_modal.gd:60 scripts/ui/phone_ui.gd:311
 msgid "Personal"
 msgstr "个人"
 
@@ -12450,7 +12454,7 @@ msgstr "个人／独资"
 msgid "Personal Banker"
 msgstr "理财专员"
 
-#: scripts/ui/phone_ui.gd:335
+#: scripts/ui/phone_ui.gd:359
 msgid "Personal cap"
 msgstr "个人上限"
 
@@ -13526,7 +13530,7 @@ msgstr "登记（%s）"
 msgid "Register a company and open its bank account first."
 msgstr "先登记公司并开设公司银行帐户。"
 
-#: scripts/sim/company.gd:83 scripts/ui/phone_ui.gd:242 scripts/ui/phone_ui.gd:266
+#: scripts/sim/company.gd:83 scripts/ui/phone_ui.gd:245 scripts/ui/phone_ui.gd:279
 msgid "Register a company at City Hall first."
 msgstr "请先到市政厅登记公司。"
 
@@ -13718,7 +13722,7 @@ msgstr "翻修还需 %d 天完工"
 msgid "Rent"
 msgstr "租金"
 
-#: scripts/ui/phone_ui.gd:293
+#: scripts/ui/phone_ui.gd:317
 msgid "Rent $1,250 due the 14th"
 msgstr "房租 $1,250，14 号到期"
 
@@ -13882,7 +13886,7 @@ msgstr "新品已寄出。"
 msgid "Replay tutorial"
 msgstr "重新播放教学"
 
-#: scripts/ui/phone_ui.gd:230 scripts/ui/phone_ui.gd:51
+#: scripts/ui/phone_ui.gd:231 scripts/ui/phone_ui.gd:51
 msgid "Reply by %s · %d minutes remaining"
 msgstr "请于 %s 前回复 · 剩余 %d 分钟"
 
@@ -14650,7 +14654,7 @@ msgstr "请先备妥通知期租金、费用、搬运与合约结算现金。"
 msgid "Save exported. Keep this file outside your browser."
 msgstr "存盘已导出。请把文件保存在浏览器以外的地方。"
 
-#: scripts/ui/phone_ui.gd:392
+#: scripts/ui/phone_ui.gd:416
 msgid "Save game"
 msgstr "保存游戏"
 
@@ -14658,7 +14662,7 @@ msgstr "保存游戏"
 msgid "Save imported. Continue where you left off."
 msgstr "存盘已导入，可以接着玩。"
 
-#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:393
+#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:417
 msgid "Save now"
 msgstr "立即存盘"
 
@@ -14798,7 +14802,7 @@ msgstr "已保存"
 msgid "Saved %s"
 msgstr "存于 %s"
 
-#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:395
+#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:419
 msgid "Saved (slot %d)."
 msgstr "已存盘（字段 %d）。"
 
@@ -15206,7 +15210,7 @@ msgstr "店面租金"
 msgid "Shop roof"
 msgstr "店面屋顶"
 
-#: data/economy/marketplace.json data/npcs/shoplane.json scripts/ui/phone_ui.gd:141
+#: data/economy/marketplace.json data/npcs/shoplane.json scripts/sim/phone_messages.gd:207 scripts/ui/phone_ui.gd:141
 msgid "ShopLane"
 msgstr "ShopLane"
 
@@ -15218,7 +15222,7 @@ msgstr "ShopLane＋发票"
 msgid "ShopLane Ads: a big brand campaign is bidding up placements."
 msgstr "ShopLane 广告：有大品牌在抢版位，价格被推高了。"
 
-#: scripts/ui/phone_ui.gd:325
+#: scripts/ui/phone_ui.gd:349
 msgid "ShopLane Seller"
 msgstr "ShopLane 卖家"
 
@@ -15262,7 +15266,7 @@ msgstr "ShopLane 拨款"
 msgid "ShopLane payout received: %s"
 msgstr "收到 ShopLane 拨款：%s"
 
-#: scripts/ui/phone_ui.gd:292
+#: scripts/ui/phone_ui.gd:316
 msgid "ShopLane pending"
 msgstr "ShopLane 待拨款"
 
@@ -15586,7 +15590,7 @@ msgstr "已售 %d 辆 · 目前获利 %s"
 msgid "Sold %d × %s to liquidator (%d%% of cost)"
 msgstr "卖给清仓商：%d × %s（成本的 %d%%）"
 
-#: scripts/sim/effects.gd:121
+#: scripts/sim/effects.gd:126
 msgid "Sold %d%% of %s for %s."
 msgstr "卖出 %d%% 的 %s 股份，换得 %s。"
 
@@ -16050,7 +16054,7 @@ msgstr "应付供应商帐款"
 msgid "Supplier credit"
 msgstr "供应商票期"
 
-#: scripts/sim/effects.gd:69
+#: scripts/sim/effects.gd:74
 msgid "Supplier doesn't carry that."
 msgstr "供应商没有这个商品。"
 
@@ -16298,7 +16302,7 @@ msgstr "Tanaka"
 msgid "Tape seam %d"
 msgstr "贴第 %d 条接缝"
 
-#: scripts/ui/phone_ui.gd:140 scripts/ui/phone_ui.gd:305
+#: scripts/ui/phone_ui.gd:140 scripts/ui/phone_ui.gd:329
 msgid "Tasks"
 msgstr "任务"
 
@@ -16954,7 +16958,7 @@ msgstr "修复能去除大部分损坏，但要花钱和工作天。"
 msgid "The reply deadline has passed. Review the outcome in this thread."
 msgstr "回复期限已过。请在对话串查看结果。"
 
-#: scripts/sim/phone_messages.gd:165
+#: scripts/sim/phone_messages.gd:181
 msgid "The reply is no longer available. Review current Tasks or book a new time from Contacts."
 msgstr "此回复已失效。请查看目前任务，或从联系人重新预约。"
 
@@ -17170,7 +17174,7 @@ msgstr "此客户需求在制作期间已到期。"
 msgid "This company is already closed."
 msgstr "这家公司已结束营业。"
 
-#: scripts/sim/phone_messages.gd:112 scripts/sim/phone_messages.gd:115 scripts/sim/phone_messages.gd:119
+#: scripts/sim/phone_messages.gd:104 scripts/sim/phone_messages.gd:127 scripts/sim/phone_messages.gd:130 scripts/sim/phone_messages.gd:134
 msgid "This contact has no meeting location."
 msgstr "此联系人目前没有可约见的地点。"
 
@@ -17182,7 +17186,7 @@ msgstr "这份合约属于其他公司。"
 msgid "This equipment needs no service today."
 msgstr "这些设备今天不需要保养。"
 
-#: scripts/ui/phone_ui.gd:400
+#: scripts/ui/phone_ui.gd:424
 msgid "This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen."
 msgstr "这场游戏每隔几秒自动存到字段 %d。新游戏会用自己的字段；其他存盘可以在标题画面读取。"
 
@@ -17238,7 +17242,7 @@ msgstr "这张工单已无法承接。"
 msgid "This lease has ended."
 msgstr "这份租约已结束。"
 
-#: scripts/sim/phone_messages.gd:140
+#: scripts/sim/phone_messages.gd:155
 msgid "This meeting is unavailable."
 msgstr "此约见目前无法进行。"
 
@@ -17390,7 +17394,7 @@ msgstr "时间只会随着你的生活前进：上班工作，或晚上睡觉。
 msgid "Time to finish"
 msgstr "完成期限"
 
-#: scripts/ui/phone_ui.gd:141 scripts/ui/phone_ui.gd:349
+#: scripts/ui/phone_ui.gd:141 scripts/ui/phone_ui.gd:373
 msgid "Timeline"
 msgstr "人生纪录"
 
@@ -17410,7 +17414,7 @@ msgstr "老旧房间会拉低每则评价的清洁与价值感分数。"
 msgid "To Startup Hub"
 msgstr "前往新创园区"
 
-#: scripts/ui/modals/company_os.gd:509 scripts/ui/phone_ui.gd:330
+#: scripts/ui/modals/company_os.gd:509 scripts/ui/phone_ui.gd:354
 msgid "To pack"
 msgstr "待打包"
 
@@ -17770,7 +17774,7 @@ msgstr "未知的旅馆危机。"
 msgid "Unknown idea."
 msgstr "未知的点子。"
 
-#: scripts/sim/effects.gd:47
+#: scripts/sim/effects.gd:52
 msgid "Unknown industry event."
 msgstr "未知的产业事件。"
 
@@ -18126,7 +18130,7 @@ msgstr "积欠团队薪资：%s"
 msgid "Wages — %s shift at %s"
 msgstr "薪资——%s 在 %s 的班"
 
-#: scripts/ui/phone_ui.gd:265
+#: scripts/ui/phone_ui.gd:278
 msgid "Wait %d minutes before messaging again."
 msgstr "再等 %d 分钟即可传讯。"
 
@@ -18142,7 +18146,7 @@ msgstr "等待延迟的原料"
 msgid "Wait for the shipment and pay the shortage price"
 msgstr "等货到并付缺货价"
 
-#: scripts/sim/phone_messages.gd:96
+#: scripts/sim/phone_messages.gd:100
 msgid "Wait for this contact's message cooldown to end."
 msgstr "请等此联系人的消息冷却时间结束。"
 
@@ -18294,7 +18298,7 @@ msgstr "我们结束了 %s 的活动：媒体采购太久没有资金。未使�
 msgid "We lend to registered companies."
 msgstr "我们只借钱给已登记的公司。"
 
-#: scripts/sim/phone_messages.gd:170
+#: scripts/sim/phone_messages.gd:186
 msgid "We missed the meeting. You can book a new time from Contacts."
 msgstr "我们错过约见了。你可以从联系人重新预约。"
 
@@ -18630,7 +18634,7 @@ msgstr "第 8 年：超过 $2,500 的付款要先过 KYC 审查：要付费，�
 msgid "Year 8: importing needs an import licence ($450 a year). A registered company also pays a monthly compliance cost."
 msgstr "第 8 年：进口需要进口执照（每年 $450）。登记过的公司每个月还要付合规成本。"
 
-#: scripts/ui/minigames/auction_game.gd:56 scripts/ui/phone_ui.gd:227
+#: scripts/ui/minigames/auction_game.gd:56 scripts/ui/phone_ui.gd:228
 msgid "You"
 msgstr "你"
 
@@ -18638,9 +18642,9 @@ msgstr "你"
 msgid "You already have a job ad running."
 msgstr "你已经有一则征才广告在刊登中。"
 
-#: scripts/sim/phone_messages.gd:131
-msgid "You already have a meeting with this contact."
-msgstr "你已与此联系人有约。"
+#: scripts/sim/phone_messages.gd:103 scripts/sim/phone_messages.gd:146
+msgid "You already have a meeting with this contact. Review Agenda first."
+msgstr "你已与此联系人有约，请先查看行程。"
 
 #: scripts/sim/careers.gd:230
 msgid "You already have as many gigs as you can handle."
@@ -19746,7 +19750,7 @@ msgstr "自有媒体"
 msgid "paid on delivery"
 msgstr "交件即付款"
 
-#: scripts/ui/phone_ui.gd:338
+#: scripts/ui/phone_ui.gd:362
 msgid "paused: cap"
 msgstr "暂停：已达上限"
 

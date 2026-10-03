@@ -200,7 +200,7 @@ func _messages() -> void:
 		var unread: int = GameState.data["messages"].filter(func(x): return x["from"] == from and not x.get("read", false)).size()
 		var b := UIK.button("", _open_thread.bind(from))
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
-		b.text = "%s%s\n%s" % [I18n.t(DataDB.npc(from).get("name", from)), "  (%d)" % unread if unread > 0 else "", Clock.fmt_short(int(m["t"])) + "\n" + I18n.t(str(m["text"])).left(26)]
+		b.text = "%s%s\n%s" % [PhoneMessages.contact_name(from), "  (%d)" % unread if unread > 0 else "", Clock.fmt_short(int(m["t"])) + "\n" + I18n.t(str(m["text"])).left(26)]
 		b.add_theme_font_size_override("font_size", 7)
 		b.custom_minimum_size = Vector2(126, 24)
 		b.name = "Thread_" + from
@@ -216,7 +216,8 @@ func _open_thread(from: String) -> void:
 
 
 func _thread() -> void:
-	_header(I18n.t(DataDB.npc(thread_with).get("name", thread_with)))
+	var primary_used := false
+	_header(PhoneMessages.contact_name(thread_with))
 	for m in GameState.data["messages"]:
 		if m["from"] != thread_with:
 			continue
@@ -234,13 +235,24 @@ func _thread() -> void:
 		for c in PhoneMessages.choices(m):
 			var available := EventEngine.choice_available(c, PhoneMessages.context(m))
 			var label := EventEngine.fill(str(c.get("label", c.get("text", "Okay, thanks."))), PhoneMessages.context(m))
-			var button := UIK.button(("✓ " if available else "✗ ") + I18n.t(label), _reply.bind(str(m["id"]), str(c["id"])), "primary" if c.get("recommended", false) else "normal")
+			var primary: bool = available and c.get("recommended", false) and not primary_used
+			primary_used = primary_used or primary
+			var button := UIK.button(("✓ " if available else "✗ ") + I18n.t(label), _reply.bind(str(m["id"]), str(c["id"])), "primary" if primary else "normal")
 			button.name = "Reply_" + str(m["id"]) + "_" + str(c["id"])
 			button.add_theme_font_size_override("font_size", 6)
 			button.disabled = not available
 			v.add_child(button)
 			if not available: v.add_child(UIK.wrap(EventEngine.fill(str(c.get("detail", "Register a company at City Hall first." if "company_registered" in c.get("requires", []) else "Complete the reply's requirements first.")), PhoneMessages.context(m)), 6, Art.C_MUTED, 118))
 		content.add_child(p)
+
+	_scroll_bottom.call_deferred()
+
+func _scroll_bottom() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	if not is_open or app != "thread": return
+	var scroll := content.get_parent() as ScrollContainer
+	if scroll != null: scroll.scroll_vertical = int(scroll.get_v_scroll_bar().max_value)
 
 
 func _reply(id: String, choice: String) -> void:
@@ -252,18 +264,19 @@ func _reply(id: String, choice: String) -> void:
 func _contacts() -> void:
 	_header("Contacts")
 	for npc in PhoneMessages.contacts():
-		content.add_child(UIK.title(I18n.t(DataDB.npc(npc).get("name", npc)), 8))
+		content.add_child(UIK.title(PhoneMessages.contact_name(str(npc)), 8))
 		for key in PhoneMessages.cfg().get("templates", {}):
 			var template: Dictionary = PhoneMessages.cfg()["templates"][key]
 			var remaining := maxi(0, int(PhoneMessages.S()["cooldowns"].get(str(npc) + ":" + str(key), 0)) - Clock.now())
-			var available := remaining == 0 and Cond.all(template.get("requires", []))
+			var allowed := PhoneMessages.can_send(str(npc), str(key))
+			var available: bool = allowed["ok"]
 			var button := UIK.button(("✓ " if available else "✗ ") + I18n.t(str(template["label"])), _send.bind(str(npc), str(key)))
 			button.name = "Send_" + str(npc) + "_" + str(key)
 			button.add_theme_font_size_override("font_size", 6)
 			button.disabled = not available
 			content.add_child(button)
 			if remaining > 0: content.add_child(UIK.wrap(I18n.t("Wait %d minutes before messaging again.") % remaining, 6, Art.C_MUTED, 122))
-			elif not available: content.add_child(UIK.wrap("Register a company at City Hall first.", 6, Art.C_MUTED, 122))
+			elif not available: content.add_child(UIK.wrap("Register a company at City Hall first." if not Cond.all(template.get("requires", [])) else str(allowed["error"]), 6, Art.C_MUTED, 122))
 
 
 func _send(npc: String, template: String) -> void:
@@ -286,7 +299,7 @@ func _meeting_status(status: String) -> String:
 func _agenda() -> void:
 	_header("Agenda")
 	for meeting in PhoneMessages.S()["agenda"]:
-		content.add_child(UIK.wrap(I18n.t(DataDB.npc(meeting["npc"]).get("name", meeting["npc"])) + " · " + Clock.fmt_datetime(int(meeting["at"])), 7, Art.C_GOLD, 122))
+		content.add_child(UIK.wrap(PhoneMessages.contact_name(str(meeting["npc"])) + " · " + Clock.fmt_datetime(int(meeting["at"])), 7, Art.C_GOLD, 122))
 		content.add_child(UIK.wrap(I18n.t(str(DataDB.building(str(meeting["location"]).get_slice(":", 1)).get("name", str(meeting["location"])))) + " · " + _meeting_status(str(meeting["status"])), 7, Art.C_MUTED, 122))
 		if meeting["status"] == "planned":
 			content.add_child(UIK.wrap("Go to the meeting location during its time window. The conversation starts when you arrive.", 6, Art.C_WHITE, 122))

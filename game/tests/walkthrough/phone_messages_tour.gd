@@ -41,5 +41,9 @@ func run() -> void:
 	await bot.wait(0.3)
 	await bot.click_named("Send_marcus_coffee")
 	bot.expect(PhoneMessages.S()["agenda"].size() == 2, "proactive invitation creates next meeting")
+	await bot.wait(0.2)
+	var latest: Control = UIRoot.phone.content.get_child(UIRoot.phone.content.get_child_count() - 1)
+	var scroll := UIRoot.phone.content.get_parent() as ScrollContainer
+	bot.expect(latest.get_global_rect().end.y <= scroll.get_global_rect().end.y + 1, "latest outgoing reply is visible without losing history")
 	await bot.shot("proactive_result")
 	UIRoot.phone.close()

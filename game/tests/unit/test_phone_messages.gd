@@ -77,7 +77,7 @@ func test_contract_details_accept_decline_and_closed_guard() -> void:
 	message = GameState.data["messages"].back()
 	GameState.data["clock"]["minutes"] = int(message["expires"])
 	PhoneMessages.on_minute(Clock.now())
-	runner.eq(Contracts.C()[cid]["status"], "rejected", "default decline")
+	runner.eq(Contracts.C()[cid]["status"], "expired", "default decline retains expiry lifecycle")
 	cid = Contracts.create_offer({"buyer": "harbor_point_fitness", "product": "water_bottle", "qty": 10, "unit_price": 20.0})
 	message = GameState.data["messages"].back()
 	GameState.data["entities"][GameState.company_id()]["closed"] = Clock.now()
@@ -125,3 +125,31 @@ func test_group_offer_reply_and_decline_are_actual_saved_decisions() -> void:
 	message = GameState.data["messages"].back()
 	runner.check(PhoneMessages.reply(message["id"], "decline")["ok"], "decline through reply")
 	runner.eq(GroupJobs.get_job(id)["status"], "declined", "no completion reward on decline")
+
+func test_multi_effect_failure_restores_receipts_before_retry() -> void:
+	GameState.add_message("maya", "Choose", {"replies": [{"id": "book", "label": "Confirm the meeting", "effects": [{"op": "set_flag", "flag": "partial_phone"}, {"op": "phone_meeting", "npc": "missing"}]}]})
+	var id: String = GameState.data["messages"].back()["id"]
+	runner.check(not PhoneMessages.reply(id, "book")["ok"], "failed chain rejected")
+	runner.check(not GameState.flag("partial_phone"), "earlier effect rolled back")
+	runner.check(not PhoneMessages.get_message(id).has("answered"), "no false receipt")
+	runner.check(not PhoneMessages.reply(id, "book")["ok"], "retry remains harmless")
+	runner.check(not GameState.flag("partial_phone"), "no side effect from repeated retry")
+
+func test_failed_multi_effect_timeout_ends_in_current_saved_state() -> void:
+	GameState.add_message("maya", "Choose", {"expires": Clock.now(), "default_reply": "book", "replies": [{"id": "book", "effects": [{"op": "set_flag", "flag": "partial_timeout"}, {"op": "phone_meeting", "npc": "missing"}]}]})
+	var id: String = GameState.data["messages"].back()["id"]
+	PhoneMessages.on_minute(Clock.now())
+	runner.check(not GameState.flag("partial_timeout"), "rollback before timeout receipt")
+	runner.eq(PhoneMessages.get_message(id)["answered"], "expired_unavailable", "timeout ends on current save")
+	runner.check(not PhoneMessages.S()["expiry"].has(id), "no repeated expiry")
+
+func test_thread_has_only_one_available_recommended_primary() -> void:
+	for i in 2:
+		GameState.add_message("marcus", "Hello", {"replies": [{"id": "ack", "label": "Okay, thanks.", "recommended": true, "effects": []}]})
+	UIRoot.phone.thread_with = "marcus"
+	UIRoot.phone._go("thread")
+	var primary := 0
+	for button in UIRoot.phone.content.find_children("Reply_*", "Button", true, false):
+		if not button.is_queued_for_deletion() and button.has_theme_stylebox_override("normal"): primary += 1
+	runner.eq(primary, 1, "one primary across the entire thread")
+	UIRoot.phone.close()
