@@ -1,6 +1,6 @@
 # #40 self-review in progress
 
-Shop short tour: 84 steps, 18 screenshots, zero failures in 120.1 seconds. It purchases actual stock, researches shelf prices, sees the Company OS badge, travels to Rosa's reception, pays AUD$12.00 for a single class, waits for the actual timetable and attends a one-hour class. A seeded networking opportunity is chosen through the real DecisionModal. Save/load and books remain consistent. Raw English audit has three inherited branding/id/beta findings; no new shop or fitness text remains.
+Shop short tour: 90 steps, 19 screenshots, zero failures in 124.3 seconds. It purchases actual stock, researches shelf prices, sees the Company OS badge, travels to Rosa's reception, pays AUD$12.00 for a single class, waits for the actual timetable and attends a one-hour class. A seeded networking opportunity is chosen through the real DecisionModal. Save/load and books remain consistent. Raw English audit has three inherited branding/id/beta findings; no new shop or fitness text remains.
 
 Six related unit tests pass; the complete suite is 490/490 in 150.3 seconds (unit.xml). Complete Chinese cadence walkthrough is still in progress. No complete walkthrough pass is claimed. i18n 5240 translated/missing 0, wiki_check OK (3830 assets/302 IDs), beta_audit zero hits.
 
