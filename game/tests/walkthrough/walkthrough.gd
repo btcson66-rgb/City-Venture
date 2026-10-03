@@ -16,6 +16,26 @@ func _init(b) -> void:
 
 
 func run() -> void:
+	if _arg("resume") == "ch9_import":
+		if not SaveSystem.load_and_enter(1):
+			bot.fail("cannot load original chapter-nine backup")
+			return
+		await wait_world()
+		if StoryEngine.St()["chapter"] != "ch9_clearing_crisis" or StoryEngine.St()["chapters_done"].size() != 8 or not "ch9_settle" in StoryEngine.St()["done"]:
+			bot.fail("resume backup lacks original chapter-nine receipts")
+			return
+		for event in EventEngine.S()["history"]: _tried[event["iid"]] = true
+		bot.step("Resume original full replay before the unavailable basket replacement")
+		await pass_time_at_home(func(): return "ch9_clearing_crisis" in StoryEngine.St()["chapters_done"], 30, true)
+		bot.expect("ch9_clearing_crisis" in StoryEngine.St()["chapters_done"], "Chapter 9 complete: actual import arrived")
+		bot.expect(Ledger.check_balanced(), "ledger balanced after original replay continuation")
+		await _old_town_cafe()
+		await _harbor_logistics()
+		await _chapters_10_to_12()
+		await _summary()
+		await _industry_fixtures()
+		await load("res://tests/walkthrough/map_adjacency_tour.gd").new(bot).run()
+		return
 	if _arg("resume") == "ch7_close":
 		# Resume an interrupted full replay from its own autosave, never an economic fixture.
 		if not SaveSystem.load_and_enter(1):
