@@ -264,7 +264,7 @@ static func _pack_hour(p: Dictionary, h: int) -> void:
 	if not Living.has_lease(loc):
 		return
 	var cap := int(round(4.0 * _output(p)))
-	var n := Ecommerce.pack_orders(loc, cap)
+	var n := Ecommerce.pack_orders(loc, cap, {}, int(p["skill"]))
 	if n > 0:
 		GameState.inc_stat("orders_packed_by_staff", n)
 	if h == 16 and not Ecommerce.orders_with(["packed"], loc).is_empty():

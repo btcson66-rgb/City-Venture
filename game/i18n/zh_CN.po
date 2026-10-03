@@ -270,7 +270,7 @@ msgstr "还有 %d 笔订单等着打包，我正在处理。"
 msgid "%d panels · %.1f kW · %s kWh/year · average shading loss %d%% · load %d of %d kg"
 msgstr "%d 片面板 · %.1f kW · 每年 %s kWh · 平均遮荫损失 %d%% · 承重 %d／%d kg"
 
-#: scripts/ui/minigames/pack_game.gd:201
+#: scripts/ui/minigames/pack_game.gd:239
 msgid "%d parcel(s) have the wrong label and will arrive late."
 msgstr "%d 个包裹标签贴错，会晚到。"
 
@@ -402,7 +402,7 @@ msgstr "%s 叫了快递：%d 件包裹（%s）。"
 msgid "%s can't pay its debts. You have to decide what happens next."
 msgstr "%s 付不出债务了，你必须决定接下来怎么做。"
 
-#: scripts/sim/ecommerce.gd:387
+#: scripts/sim/ecommerce.gd:390
 msgid "%s cancelled: %s refunded or removed from your unpaid invoice; fee %s. Settlement fees are not refundable."
 msgstr "%s 已取消：退回 %s，或从未付发票扣除；手续费 %s。清算手续费不退还。"
 
@@ -434,7 +434,7 @@ msgstr "今天 %s 没有接得到的外送单。"
 msgid "%s has a big order that needs several of your businesses: %s. Reward %s. Open Company OS, Group tab."
 msgstr "%s 有一笔需要多个事业合作的大案：%s。报酬 %s。请到公司后台的「集团」分页查看。"
 
-#: scripts/sim/ecommerce.gd:507
+#: scripts/sim/ecommerce.gd:510
 msgid "%s has room: choose it under \"Deliver to\" in Operations."
 msgstr "%s 还有空间：请在「营运」的「送货到」选它。"
 
@@ -450,7 +450,7 @@ msgstr "%s 在忙。"
 msgid "%s is closed. Open %s–%s, %s."
 msgstr "%s 目前没开。营业时间 %s–%s，%s。"
 
-#: scripts/sim/ecommerce.gd:498
+#: scripts/sim/ecommerce.gd:501
 msgid "%s is full: %d of %d units, counting stock on the way."
 msgstr "%s 已经放满了：%d / %d 件（含运送中的货）。"
 
@@ -694,15 +694,15 @@ msgstr "每人每月 %s"
 msgid "%s: %d passengers/day"
 msgstr "%s：每日 %d 名旅客"
 
-#: scripts/sim/ecommerce.gd:111
+#: scripts/sim/ecommerce.gd:114
 msgid "%s: %d × %s (into escrow)"
 msgstr "%s：%d × %s（存入托管）"
 
-#: scripts/sim/ecommerce.gd:120
+#: scripts/sim/ecommerce.gd:123
 msgid "%s: %d × %s (prepaid)"
 msgstr "%s：%d × %s（预付）"
 
-#: scripts/sim/ecommerce.gd:116
+#: scripts/sim/ecommerce.gd:119
 msgid "%s: %d × %s on Net %d"
 msgstr "%s：%d × %s，票期 %d 天"
 
@@ -726,11 +726,11 @@ msgstr "%s：我们只好取消这个案子，不会付款。"
 msgid "%s: grant %s, %s"
 msgstr "%s：补助 %s，%s"
 
-#: scripts/sim/ecommerce.gd:262
+#: scripts/sim/ecommerce.gd:265
 msgid "%s: money moved into escrow"
 msgstr "%s：款项改存入托管"
 
-#: scripts/sim/ecommerce.gd:262
+#: scripts/sim/ecommerce.gd:265
 msgid "%s: money moved out of escrow"
 msgstr "%s：款项改为直接付给供应商"
 
@@ -742,11 +742,11 @@ msgstr "%s：只剩 %d 件。到「营运」补货。"
 msgid "%s: paid again by %s (rerouted)"
 msgstr "%s：改用%s重新付款（绕道）"
 
-#: scripts/sim/ecommerce.gd:474
+#: scripts/sim/ecommerce.gd:477
 msgid "%s: received the returned stock. Refund %s has reached your account."
 msgstr "%s：已收到退货，退款 %s 已入帐。"
 
-#: scripts/sim/ecommerce.gd:455
+#: scripts/sim/ecommerce.gd:458
 msgid "%s: returning %d units. Refund %s on %s; restocking fee %s, shipping %s."
 msgstr "%s：退回 %d 件，退款 %s 预计于 %s 入帐；退货手续费 %s，运费 %s。"
 
@@ -806,7 +806,7 @@ msgstr "手续费 0.6%，最低 $15，不用等电汇。货要是一直没到，
 msgid "06:30 boxing · 07:30 spin · 12:15 lunchtime circuits · 18:00 strength. Bring your own water bottle."
 msgstr "06:30 拳击 · 07:30 飞轮 · 12:15 午间循环训练 · 18:00 肌力训练。请自备水壶。"
 
-#: scripts/ui/minigames/pack_game.gd:113
+#: scripts/ui/minigames/pack_game.gd:130
 msgid "1  Box"
 msgstr "1  箱子"
 
@@ -822,7 +822,7 @@ msgstr "自己的包裹在 PostPoint 寄件运费 85 折。"
 msgid "1★ review, dispute risk."
 msgstr "一星评价，还可能被申诉。"
 
-#: scripts/ui/minigames/pack_game.gd:115
+#: scripts/ui/minigames/pack_game.gd:135
 msgid "2  Padding"
 msgstr "2  缓冲"
 
@@ -838,7 +838,7 @@ msgstr "创办人巷 22 号"
 msgid "22 Founders Lane, Suite 2B"
 msgstr "创办人巷 22 号 2B 室"
 
-#: scripts/ui/minigames/pack_game.gd:130
+#: scripts/ui/minigames/pack_game.gd:150
 msgid "3  Tape all three seams (buttons under the box)"
 msgstr "3  三条接缝都粘贴胶带（箱子下方的按钮）"
 
@@ -858,7 +858,7 @@ msgstr "30 天需求日历"
 msgid "30-day occupancy at least %d%% (now %d%%)."
 msgstr "近 30 天住房率至少 %d%%（目前 %d%%）。"
 
-#: scripts/ui/minigames/pack_game.gd:131
+#: scripts/ui/minigames/pack_game.gd:151
 msgid "4  Label"
 msgstr "4  标签"
 
@@ -1486,7 +1486,7 @@ msgstr "加一项绿色商品：跟 Verdant Supply 进太阳能台灯并上架"
 msgid "Add a local backup: Aurelia Makers Co-op"
 msgstr "加一个在地备援：奥瑞莉亚职人合作社"
 
-#: scripts/ui/minigames/pack_game.gd:118
+#: scripts/ui/minigames/pack_game.gd:138
 msgid "Add bubble wrap"
 msgstr "塞气泡纸"
 
@@ -1590,7 +1590,7 @@ msgstr "机场航厦"
 msgid "AirportNextFleet"
 msgstr "AirportNextFleet"
 
-#: autoload/game_state.gd:56 autoload/game_state.gd:65 scripts/sim/ecommerce.gd:794 scripts/sim/staff.gd:120
+#: autoload/game_state.gd:56 autoload/game_state.gd:65 scripts/sim/ecommerce.gd:798 scripts/sim/staff.gd:120
 msgid "Alex"
 msgstr "Alex"
 
@@ -2550,7 +2550,7 @@ msgstr "精品旅馆、观光客与评论家。"
 msgid "Boutique practice"
 msgstr "精品事务所"
 
-#: scripts/ui/minigames/pack_game.gd:113
+#: scripts/ui/minigames/pack_game.gd:130
 msgid "Box"
 msgstr "Box"
 
@@ -2778,7 +2778,7 @@ msgstr "公司登记——奥瑞莉亚市"
 msgid "Business account opened. %s now runs on its own books."
 msgstr "企业帐户已开立。%s 从此有自己的帐本了。"
 
-#: scripts/sim/ecommerce.gd:1288
+#: scripts/sim/ecommerce.gd:1332
 msgid "Business assets contributed to %s (in kind)"
 msgstr "以实物出资给 %s"
 
@@ -2938,7 +2938,7 @@ msgstr "BuyMaterials"
 msgid "Buyer"
 msgstr "买方"
 
-#: scripts/sim/ecommerce.gd:1178
+#: scripts/sim/ecommerce.gd:1222
 msgid "Buyer %s opened a dispute on order %s. We refunded them and charged a $15 dispute fee."
 msgstr "买家 %s 对订单 %s 提出申诉。我们已退款给对方，并收取 $15 申诉处理费。"
 
@@ -3278,11 +3278,11 @@ msgstr "取消进货"
 msgid "Cancel within the supplier window while the goods are on the way. Unpaid terms reduce accounts payable; any cancellation fee remains due. Unsettled cross-border payments return the principal, but settlement fees stay paid."
 msgstr "货物尚未送达且在供应商取消期限内，可取消进货。未付款票期单减少应付帐款，取消手续费仍须支付。未清算的跨境款项退回本金，清算手续费不退还。"
 
-#: scripts/sim/ecommerce.gd:340
+#: scripts/sim/ecommerce.gd:343
 msgid "Cancellation window ended."
 msgstr "已超过取消期限。"
 
-#: scripts/sim/ecommerce.gd:341
+#: scripts/sim/ecommerce.gd:344
 msgid "Cancellation window ended. Return eligible stock within %d days of arrival."
 msgstr "已超过取消期限。符合条件的库存可于到货后 %d 天内退货。"
 
@@ -3302,7 +3302,7 @@ msgstr "旺季周末真正的上限可能是房务产能，而不是需求。"
 msgid "Capital"
 msgstr "资金"
 
-#: scripts/sim/ecommerce.gd:1289
+#: scripts/sim/ecommerce.gd:1333
 msgid "Capital contributed in kind by founder"
 msgstr "创办人实物出资"
 
@@ -3590,7 +3590,7 @@ msgstr "请在共享办公桌查看目前接案机会。每份需求都列有条
 msgid "Check the departures hall"
 msgstr "查看出境大厅"
 
-#: scripts/ui/minigames/pack_game.gd:37
+#: scripts/ui/minigames/pack_game.gd:45
 msgid "Check the label against the order: the wrong one sends the parcel to the wrong address and it arrives late."
 msgstr "标签要跟订单对照。贴错的话包裹会先送到错的地址，晚到。"
 
@@ -3838,7 +3838,7 @@ msgstr "请选择其他可用库存地点，接手未完成订单与到货。"
 msgid "Choose another leased workplace for employees."
 msgstr "请为员工选择另一个已租工作地点。"
 
-#: scripts/sim/ecommerce.gd:434
+#: scripts/sim/ecommerce.gd:437
 msgid "Choose between 1 and %d returnable units."
 msgstr "请选择 1 至 %d 件可退库存。"
 
@@ -4017,6 +4017,10 @@ msgstr "清洁"
 #: scripts/sim/energy.gd:77 scripts/ui/minigames/route_game.gd:85
 msgid "Clear"
 msgstr "清除"
+
+#: scripts/ui/minigames/pack_game.gd:163
+msgid "Clear box"
+msgstr "清空箱子"
 
 #: data/story/chapters.json data/world/years.json
 msgid "Clearing Crisis"
@@ -4578,7 +4582,7 @@ msgstr "叫快递来收（或自己拿去）"
 msgid "Courier or self delivery"
 msgstr "快递或自行送货"
 
-#: scripts/sim/ecommerce.gd:1001
+#: scripts/sim/ecommerce.gd:1037
 msgid "Courier picked up %d parcel%s."
 msgstr "快递收走了 %d 件包裹%s。"
 
@@ -4586,7 +4590,7 @@ msgstr "快递收走了 %d 件包裹%s。"
 msgid "Courier picks up in ~2 hours and adds a %s pickup fee."
 msgstr "快递约 2 小时后来收，另收 %s 收件费。"
 
-#: scripts/sim/ecommerce.gd:946
+#: scripts/sim/ecommerce.gd:982
 msgid "Courier pickup: %d parcels (%s)"
 msgstr "快递收件：%d 件包裹（%s）"
 
@@ -5122,7 +5126,7 @@ msgstr "已交货%s。发票 %s，%d 天后到期。"
 msgid "Delivered. Invoice %s due in %d days."
 msgstr "已交货。发票 %s，%d 天后到期。"
 
-#: scripts/sim/ecommerce.gd:173
+#: scripts/sim/ecommerce.gd:176
 msgid "Delivered: %d × %s → %s"
 msgstr "已到货：%d × %s → %s"
 
@@ -5246,6 +5250,10 @@ msgstr "办公桌 · 2B 室"
 msgid "Desks"
 msgstr "办公桌"
 
+#: data/products/desk_monitor.json
+msgid "Desktop Monitor"
+msgstr "桌面型屏幕"
+
 #: data/economy/energy.json
 msgid "Destination chargers"
 msgstr "目的地充电桩"
@@ -5362,7 +5370,7 @@ msgstr "DiscountMore"
 msgid "Dismiss staff"
 msgstr "资遣员工"
 
-#: scripts/sim/ecommerce.gd:1179
+#: scripts/sim/ecommerce.gd:1223
 msgid "Dispute lost on %s: −%s"
 msgstr "申诉败诉 %s：−%s"
 
@@ -5414,7 +5422,7 @@ msgstr "堪用。"
 msgid "Doesn't turn on."
 msgstr "开不了机。"
 
-#: scripts/sim/ecommerce.gd:1100
+#: scripts/sim/ecommerce.gd:1137
 msgid "Doesn't work. Out of the box."
 msgstr "一拆开就不能用。"
 
@@ -5486,7 +5494,7 @@ msgstr "拿到 PostPoint 寄"
 msgid "Drop off parcels"
 msgstr "寄包裹"
 
-#: scripts/sim/ecommerce.gd:176
+#: scripts/sim/ecommerce.gd:179
 msgid "Dropped %d %s at %s. Don't let them sit around."
 msgstr "%d 个%s已经送到%s。别让它们一直堆着。"
 
@@ -5642,7 +5650,7 @@ msgstr "取得电池安装认证。"
 msgid "Eat"
 msgstr "吃"
 
-#: data/businesses/ecommerce.json scripts/sim/ecommerce.gd:1344 scripts/ui/media_ui.gd:160
+#: data/businesses/ecommerce.json scripts/sim/ecommerce.gd:1388 scripts/ui/media_ui.gd:160
 msgid "Ecommerce"
 msgstr "电商"
 
@@ -5854,7 +5862,7 @@ msgstr "托管（第 6 年，找 Lina Zhao）：钱锁在一份合约里，货�
 msgid "Escrow (pay on delivery)"
 msgstr "托管付款（货到才放款）"
 
-#: scripts/sim/ecommerce.gd:288
+#: scripts/sim/ecommerce.gd:291
 msgid "Escrow funded: %s ships %s (arrives %s). The money is released when it lands."
 msgstr "托管已入金：%s 出货 %s（%s 抵达）。货到时才放款。"
 
@@ -6342,7 +6350,7 @@ msgstr "请先完成目前的招募。"
 msgid "First Customer"
 msgstr "第一位客人"
 
-#: scripts/sim/ecommerce.gd:650
+#: scripts/sim/ecommerce.gd:654
 msgid "First ShopLane listing: %s at %s."
 msgstr "第一个 ShopLane 商品上架：%s，售价 %s。"
 
@@ -6374,7 +6382,7 @@ msgstr "第一趟外送单，客户 %s：%s。"
 msgid "First group block"
 msgstr "第一个团体包房"
 
-#: scripts/sim/ecommerce.gd:148
+#: scripts/sim/ecommerce.gd:151
 msgid "First inventory order: %d × %s from %s."
 msgstr "第一次进货：%d × %s，来自 %s。"
 
@@ -6382,7 +6390,7 @@ msgstr "第一次进货：%d × %s，来自 %s。"
 msgid "First parcel out"
 msgstr "第一件包裹出货"
 
-#: scripts/sim/ecommerce.gd:1210
+#: scripts/sim/ecommerce.gd:1254
 msgid "First payout from ShopLane: %s."
 msgstr "第一笔 ShopLane 拨款：%s。"
 
@@ -6406,7 +6414,7 @@ msgstr "第一笔营收！ShopLane 每周一拨款。"
 msgid "First roof lit"
 msgstr "第一个屋顶亮灯"
 
-#: scripts/sim/ecommerce.gd:1038
+#: scripts/sim/ecommerce.gd:1074
 msgid "First sale: %s bought %s for %s."
 msgstr "第一笔销售：%s 买了%s，%s。"
 
@@ -7077,6 +7085,10 @@ msgstr "自有屋顶发电售电：%s"
 #: scripts/ui/energy_ui.gd:149
 msgid "Grid export pays %s/kWh: about %s/year; payback %.1f years. Materials %s."
 msgstr "趸购电价 %s/kWh：每年约 %s；回本 %.1f 年。材料费 %s。"
+
+#: data/help/glossary.json scripts/ui/minigames/pack_game.gd:108
+msgid "Grid packing and postage"
+msgstr "格子装箱与运费"
 
 #: data/synergies.json
 msgid "Grid permits per job; subsidies at City Hall."
@@ -8418,7 +8430,7 @@ msgstr "1月"
 msgid "Jewelry"
 msgstr "饰品"
 
-#: scripts/ui/minigames/pack_game.gd:76
+#: scripts/ui/minigames/pack_game.gd:86
 msgid "Jo"
 msgstr "Jo"
 
@@ -8526,7 +8538,7 @@ msgstr "KYC 审查（认识你的客户）"
 msgid "KYC check on payments over %s: a fee and a day's delay."
 msgstr "超过 %s 的付款要过 KYC 审查：要付费，还会多等一天。"
 
-#: scripts/sim/ecommerce.gd:134
+#: scripts/sim/ecommerce.gd:137
 msgid "KYC check — %s"
 msgstr "KYC 审查 — %s"
 
@@ -8666,7 +8678,7 @@ msgstr "Kettle Labs"
 msgid "Keys in hand"
 msgstr "钥匙到手"
 
-#: scripts/ui/minigames/pack_game.gd:76 scripts/ui/minigames/parcel_sort_game.gd:9
+#: scripts/ui/minigames/pack_game.gd:86 scripts/ui/minigames/parcel_sort_game.gd:9
 msgid "Kim"
 msgstr "Kim"
 
@@ -8754,13 +8766,17 @@ msgstr "笔电 · 河滨大楼 7C"
 msgid "Laptop · café table"
 msgstr "笔电 · 咖啡厅"
 
-#: scripts/ui/minigames/pack_game.gd:7
+#: data/economy/ecommerce.json scripts/ui/minigames/pack_game.gd:7
 msgid "Large box"
 msgstr "大箱子"
 
 #: scripts/ui/minigames/barista_game.gd:6
 msgid "Large cup"
 msgstr "大杯"
+
+#: data/help/glossary.json data/help/help.json scripts/ui/minigames/pack_game.gd:42
+msgid "Larger boxes cost more in materials and dimensional postage. Fragile goods need padding."
+msgstr "大箱子会增加材料费与材积运费。易碎商品需要缓冲材。"
 
 #: scripts/ui/minigames/auction_game.gd:61
 msgid "Last call…"
@@ -9026,7 +9042,7 @@ msgstr "提早离开"
 msgid "Leave immediately"
 msgstr "立即退租"
 
-#: data/npcs/lee.json scripts/sim/staff.gd:120 scripts/ui/minigames/pack_game.gd:76
+#: data/npcs/lee.json scripts/sim/staff.gd:120 scripts/ui/minigames/pack_game.gd:86
 msgid "Lee"
 msgstr "Lee"
 
@@ -9806,7 +9822,7 @@ msgstr "材料价高约 10%，持续三周。"
 msgid "Mature regulation"
 msgstr "法规成熟"
 
-#: scripts/ui/minigames/pack_game.gd:76
+#: scripts/ui/minigames/pack_game.gd:86
 msgid "Max"
 msgstr "Max"
 
@@ -9862,7 +9878,7 @@ msgstr "媒体配置"
 msgid "Media studio"
 msgstr "媒体工作室"
 
-#: scripts/ui/minigames/pack_game.gd:7
+#: data/economy/ecommerce.json scripts/ui/minigames/pack_game.gd:7
 msgid "Medium box"
 msgstr "中箱子"
 
@@ -10018,7 +10034,7 @@ msgstr "开户最低存款是 $500。"
 msgid "Minimum order (MOQ)"
 msgstr "最低订购量（MOQ）"
 
-#: scripts/sim/ecommerce.gd:72
+#: scripts/sim/ecommerce.gd:75
 msgid "Minimum order is %d units."
 msgstr "最低订购量是 %d 件。"
 
@@ -10034,7 +10050,7 @@ msgstr "房客最低信用：%d 分"
 msgid "Miss the stock minimum twice and the factory ends the franchise and keeps part of the deposit."
 msgstr "连续两次没达到最低库存，原厂会终止经销权并没收部分保证金。"
 
-#: scripts/sim/ecommerce.gd:789
+#: scripts/sim/ecommerce.gd:793
 msgid "Missed a sale: %s is out of stock."
 msgstr "错过一笔订单：%s 缺货。"
 
@@ -10426,11 +10442,11 @@ msgstr "新游戏"
 msgid "New group job: %s"
 msgstr "新的集团委托：%s"
 
-#: scripts/sim/ecommerce.gd:806
+#: scripts/sim/ecommerce.gd:829
 msgid "New order %s — %s — %s"
 msgstr "新订单 %s——%s——%s"
 
-#: scripts/sim/ecommerce.gd:1083
+#: scripts/sim/ecommerce.gd:1120
 msgid "New review %s: %s \"%s\""
 msgstr "新评价 %s：%s「%s」"
 
@@ -10566,7 +10582,7 @@ msgstr "Nina"
 msgid "Nineteen hundred a month, two months' deposit. It comes empty: you fit it out, and City Hall wants a food licence before you sell a single croissant."
 msgstr "每月一千九，押金两个月。交屋是空的：你自己装修，而且卖出第一个可颂之前，市政厅要先看到你的食品执照。"
 
-#: scripts/sim/ecommerce.gd:1136
+#: scripts/sim/ecommerce.gd:1175
 msgid "No %s in stock to send."
 msgstr "没有%s的库存可以寄。"
 
@@ -10710,7 +10726,7 @@ msgstr "自己拿来寄就不用收件费。"
 msgid "No product yet."
 msgstr "还没有产品。"
 
-#: scripts/sim/ecommerce.gd:412
+#: scripts/sim/ecommerce.gd:415
 msgid "No returnable stock here: units were sold, reserved, moved, or already returned."
 msgstr "这里没有可退库存：商品已售出、预留、移走或退货。"
 
@@ -10854,7 +10870,7 @@ msgstr "现金不足以支付加工成本。"
 msgid "Not enough cash for renovation."
 msgstr "现金不足以支付翻修费用。"
 
-#: scripts/sim/ecommerce.gd:439 scripts/ui/modals/purchase_return_modal.gd:52
+#: scripts/sim/ecommerce.gd:442 scripts/ui/modals/purchase_return_modal.gd:52
 msgid "Not enough cash for return shipping: %s."
 msgstr "现金不足以支付退货运费：%s。"
 
@@ -10878,7 +10894,7 @@ msgstr "现金不足以支付这笔采购。"
 msgid "Not enough cash."
 msgstr "现金不够。"
 
-#: scripts/sim/ecommerce.gd:254 scripts/sim/ecommerce.gd:94 scripts/sim/rails.gd:271 scripts/sim/rails.gd:301
+#: scripts/sim/ecommerce.gd:257 scripts/sim/ecommerce.gd:97 scripts/sim/rails.gd:271 scripts/sim/rails.gd:301
 msgid "Not enough cash. You need %s."
 msgstr "现金不够。需要 %s。"
 
@@ -10950,7 +10966,7 @@ msgstr "一切照旧：跟清算危机时一样付款到国外。之后还是可
 msgid "Nothing on the rails today."
 msgstr "今天衣架上没有东西。"
 
-#: scripts/sim/ecommerce.gd:940
+#: scripts/sim/ecommerce.gd:976
 msgid "Nothing packed here."
 msgstr "这里没有已打包的货。"
 
@@ -10978,7 +10994,7 @@ msgstr "没有可以上线的产品。"
 msgid "Nothing to pack here: is the stock at this location?"
 msgstr "这里没有可以打包的：货在这个地点吗？"
 
-#: scripts/sim/ecommerce.gd:1116
+#: scripts/sim/ecommerce.gd:1153
 msgid "Nothing to resolve."
 msgstr "没有需要处理的事。"
 
@@ -11062,7 +11078,7 @@ msgstr "好"
 msgid "OKAFOR LETTINGS"
 msgstr "OKAFOR LETTINGS"
 
-#: scripts/ui/minigames/pack_game.gd:91
+#: scripts/ui/minigames/pack_game.gd:101
 msgid "ORDER %s"
 msgstr "订单 %s"
 
@@ -11306,7 +11322,7 @@ msgstr "网络零售消费年增 14%。"
 msgid "Only a delivered, unpaid invoice can be paid early."
 msgstr "只有已交货、尚未付款的发票能提前付款。"
 
-#: scripts/sim/ecommerce.gd:334
+#: scripts/sim/ecommerce.gd:337
 msgid "Only a purchase still on the way can be cancelled."
 msgstr "只有尚未到货的进货单可以取消。"
 
@@ -11318,7 +11334,7 @@ msgstr "只有还没到货的托管订单可以退款。"
 msgid "Only completed job parts earn their share. Review deliverables, deadline and subcontracting fees in Company OS, Group tab."
 msgstr "只有完成的工作部分能取得对应报酬。请在 Company OS 的集团分页查看交付项目、期限与外包费用。"
 
-#: scripts/sim/ecommerce.gd:405
+#: scripts/sim/ecommerce.gd:408
 msgid "Only delivered purchases can be returned."
 msgstr "只有已到货的进货单可以退货。"
 
@@ -11694,7 +11710,7 @@ msgstr "或是通过持牌交易所付数字美元。几分钟、手续费很低
 msgid "Order"
 msgstr "订单"
 
-#: scripts/ui/minigames/pack_game.gd:44
+#: scripts/ui/minigames/pack_game.gd:52
 msgid "Order %d / %d"
 msgstr "订单 %d / %d"
 
@@ -11774,7 +11790,7 @@ msgstr "已订购 %d × %s——%s。预计 %s 到货。"
 msgid "Ordered. Old Town Roasters delivers %s."
 msgstr "已下单。Old Town Roasters 会在 %s 送到。"
 
-#: scripts/ui/minigames/pack_game.gd:198
+#: scripts/ui/minigames/pack_game.gd:236
 msgid "Orders packed by hand: %d"
 msgstr "亲手打包的订单：%d"
 
@@ -12026,7 +12042,7 @@ msgstr "打包 %d 笔订单%s（%s）"
 msgid "Pack & deliver %d units (B2B freight $40)"
 msgstr "打包并交货 %d 件（B2B 货运 $40）"
 
-#: scripts/ui/minigames/pack_game.gd:35
+#: scripts/ui/minigames/pack_game.gd:43
 msgid "Pack each order by hand, in four steps: a box that fits, padding, tape on all three seams, and the right label."
 msgstr "每张订单亲手打包，共四步：选合适的箱子、塞缓冲材、三条接缝都贴胶带、贴对标签。"
 
@@ -12066,11 +12082,11 @@ msgstr "打包了 %d 笔订单%s。"
 msgid "Packed and ready: %d"
 msgstr "已打包待出货：%d"
 
-#: scripts/sim/ecommerce.gd:902
+#: scripts/sim/ecommerce.gd:933
 msgid "Packed order %s"
 msgstr "已打包订单 %s"
 
-#: scripts/ui/minigames/pack_game.gd:189
+#: scripts/ui/minigames/pack_game.gd:227
 msgid "Packed well"
 msgstr "打包得很好"
 
@@ -12086,7 +12102,7 @@ msgstr "打包台"
 msgid "Packing happens at a packing table where the stock is. Ship by courier (fee, no walk) or carry to PostPoint."
 msgstr "要在有库存的打包桌打包。可以叫快递（要付费，不用跑）或自己拿去 PostPoint。"
 
-#: data/buildings/riverside_apartment.json data/buildings/small_office.json scripts/ui/minigames/pack_game.gd:25
+#: data/buildings/riverside_apartment.json data/buildings/small_office.json scripts/ui/minigames/pack_game.gd:29
 msgid "Packing table"
 msgstr "打包桌"
 
@@ -12098,7 +12114,7 @@ msgstr "打包桌——%s"
 msgid "Packs orders at the office every workday and books the courier at 16:00. Needs stock at Suite 2B."
 msgstr "每个工作天在办公室打包订单，16:00 叫快递。库存要放在 2B 办公室。"
 
-#: scripts/ui/minigames/pack_game.gd:36
+#: scripts/ui/minigames/pack_game.gd:44
 msgid "Padding should reach the green zone. Too little and things arrive broken; that means returns and bad reviews."
 msgstr "缓冲材要塞到绿色区间。太少的话商品会压坏，接着就是退货和负评。"
 
@@ -12126,7 +12142,7 @@ msgstr "提前付款：%s（折扣 %s）。"
 msgid "Paid from"
 msgstr "付款帐户"
 
-#: scripts/sim/ecommerce.gd:305
+#: scripts/sim/ecommerce.gd:308
 msgid "Paid supplier invoice %s: %s"
 msgstr "已付供应商发票 %s：%s"
 
@@ -12210,7 +12226,7 @@ msgstr "兼职、商品摄影、打包、写程序与接案都有亲手操作的
 msgid "Part-time jobs: take one to earn a wage. You work the shifts yourself at the workplace (staff door, press E)."
 msgstr "「兼职工作」：选一份赚薪水。班要自己到工作地点上（员工信道按 E）。"
 
-#: scripts/sim/ecommerce.gd:1147
+#: scripts/sim/ecommerce.gd:1191
 msgid "Partial refund 30%% %s: %s"
 msgstr "部分退款 30%% %s：%s"
 
@@ -12358,7 +12374,7 @@ msgstr "还款"
 msgid "Payment follows the invoice due date. Review receivables in Company OS; a reminder does not create a new payment."
 msgstr "款项依发票到期日支付。请在 Company OS 查看应收帐款；提醒不会产生额外付款。"
 
-#: scripts/sim/ecommerce.gd:336
+#: scripts/sim/ecommerce.gd:339
 msgid "Payment is frozen. Wait for the bridge to reopen before cancelling."
 msgstr "款项正在冻结中。请等跨链桥恢复后再取消。"
 
@@ -12366,7 +12382,7 @@ msgstr "款项正在冻结中。请等跨链桥恢复后再取消。"
 msgid "Payment landed, boxes arrived. Remember who held your money in between. That's this year's lesson."
 msgstr "钱到了，货也到了。记得中间是谁拿着你的钱。这就是今年的一课。"
 
-#: scripts/sim/ecommerce.gd:290
+#: scripts/sim/ecommerce.gd:293
 msgid "Payment landed: %s ships %s (arrives %s)."
 msgstr "款项已入帐：%s 出货 %s（预计 %s 到）。"
 
@@ -12386,11 +12402,11 @@ msgstr "《支付诚信法》生效：超过 $2,500 的转帐要做 KYC 审查�
 msgid "Payments start-ups promise audits and an insurance pool."
 msgstr "支付新创承诺接受稽核，并成立保险基金。"
 
-#: scripts/sim/ecommerce.gd:1208
+#: scripts/sim/ecommerce.gd:1252
 msgid "Payout sent: %s to your business account."
 msgstr "拨款已送出：%s 导入你的公司帐户。"
 
-#: scripts/sim/ecommerce.gd:1208
+#: scripts/sim/ecommerce.gd:1252
 msgid "Payout sent: %s to your personal account."
 msgstr "拨款已送出：%s 导入你的个人帐户。"
 
@@ -12482,7 +12498,7 @@ msgstr "个人活存"
 msgid "Personal seller cap: %s of %s used this month."
 msgstr "个人卖家上限：本月已用 %s／%s。"
 
-#: scripts/sim/ecommerce.gd:844
+#: scripts/sim/ecommerce.gd:867
 msgid "Personal seller limit reached. Your listings are paused until next month — or until you register a business."
 msgstr "已达个人卖家上限。你的商品会暂停到下个月——或直到你登记公司。"
 
@@ -12518,7 +12534,7 @@ msgstr "摄影"
 msgid "Pick E-commerce"
 msgstr "选电商"
 
-#: scripts/ui/minigames/pack_game.gd:221
+#: scripts/ui/minigames/pack_game.gd:303
 msgid "Pick a box to start"
 msgstr "先选一个箱子"
 
@@ -12585,6 +12601,10 @@ msgstr "只能把面板放在空的屋顶格子上。"
 #: data/help/glossary.json
 msgid "Place panels on roof cells. Shade, direction and the load limit change annual kWh and the client's payback."
 msgstr "把面板放在屋顶格子上。遮荫、方位和承重上限会改变年发电量与客户回本期。"
+
+#: scripts/ui/minigames/pack_game.gd:133
+msgid "Placed %d/%d · damage risk %d%%"
+msgstr "已放入 %d/%d 件・破损风险 %d%%"
 
 #: data/economy/freelance.json
 msgid "Plan a month of social posts for %s"
@@ -12686,7 +12706,7 @@ msgstr "PostPoint 河滨分店"
 msgid "PostPoint clerk"
 msgstr "PostPoint 店员"
 
-#: scripts/sim/ecommerce.gd:989
+#: scripts/sim/ecommerce.gd:1025
 msgid "PostPoint drop-off: %d parcels (%s)"
 msgstr "PostPoint 寄件：%d 件包裹（%s）"
 
@@ -12970,7 +12990,7 @@ msgstr "进货取消"
 msgid "Purchase cancelled."
 msgstr "已取消进货。"
 
-#: scripts/sim/ecommerce.gd:371
+#: scripts/sim/ecommerce.gd:374
 msgid "Purchase cancelled: %s"
 msgstr "取消进货：%s"
 
@@ -13478,7 +13498,7 @@ msgstr "精致"
 msgid "Refund"
 msgstr "退款"
 
-#: scripts/sim/ecommerce.gd:1131
+#: scripts/sim/ecommerce.gd:1169
 msgid "Refund %s: %s (return label paid)"
 msgstr "退款 %s：%s（已付退货运费）"
 
@@ -13702,7 +13722,7 @@ msgstr "量稳定，但如果之后需求暴增，这些房间已经卖掉了。
 msgid "Reliable: morale drops half as fast."
 msgstr "可靠：士气下降速度减半。"
 
-#: scripts/ui/minigames/pack_game.gd:76
+#: scripts/ui/minigames/pack_game.gd:86
 msgid "Ren"
 msgstr "Ren"
 
@@ -13898,7 +13918,7 @@ msgstr "要取代 %s（第 %d 天）吗？"
 msgid "Replacement on its way. {customer}: \"Oh — nice. Didn't expect that.\""
 msgstr "新品已在路上。{customer}：「喔——不错耶，没想到。」"
 
-#: scripts/sim/ecommerce.gd:1140
+#: scripts/sim/ecommerce.gd:1184
 msgid "Replacement sent %s: %s (express)"
 msgstr "已寄出替换品 %s：%s（快捷）"
 
@@ -14094,7 +14114,7 @@ msgstr "退货申请"
 msgid "Return shipping"
 msgstr "退货运费"
 
-#: scripts/sim/ecommerce.gd:446
+#: scripts/sim/ecommerce.gd:449
 msgid "Return shipping: %s"
 msgstr "退货运费：%s"
 
@@ -14350,6 +14370,10 @@ msgstr "Rosa：「寄出了！合约在你的 Company OS 里。」"
 msgid "Rose dye"
 msgstr "玫瑰挑染"
 
+#: scripts/ui/minigames/pack_game.gd:160
+msgid "Rotate item"
+msgstr "旋转商品"
+
 #: scripts/ui/minigames/mini_game.gd:184
 msgid "Rough going. Practice makes it easier."
 msgstr "有点吃力。多练习就会越来越顺。"
@@ -14586,9 +14610,13 @@ msgstr "SaaS：做软件产品"
 msgid "Sale"
 msgstr "售屋"
 
-#: scripts/sim/ecommerce.gd:1030
+#: scripts/sim/ecommerce.gd:12
 msgid "Sale delivered %s: %d × %s @ %s"
 msgstr "销售已送达 %s：%d × %s @ %s"
+
+#: scripts/sim/ecommerce.gd:1066
+msgid "Sale delivered %s: %s — %s"
+msgstr "订单 %s 已送达：%s — %s"
 
 #: data/help/glossary.json
 msgid "Sales earned for goods or work, before subtracting refunds and costs. Earning revenue does not always mean receiving cash today."
@@ -14602,7 +14630,7 @@ msgstr "卖出的钱会先卡在 ShopLane，之后才进你的银行。帐期很
 msgid "Sales: listings on ShopLane"
 msgstr "销售：ShopLane 上的商品"
 
-#: scripts/ui/minigames/barista_game.gd:10 scripts/ui/minigames/pack_game.gd:76
+#: scripts/ui/minigames/barista_game.gd:10 scripts/ui/minigames/pack_game.gd:86
 msgid "Sam"
 msgstr "Sam"
 
@@ -14866,7 +14894,7 @@ msgstr "依清洁、服务与价值感打 1 到 5 分，只计算最近 60 天�
 msgid "Scribbled in the corner: 'profit is an opinion, cash is a fact.'"
 msgstr "角落潦草写着：「利润是观点，现金是事实。」"
 
-#: scripts/ui/minigames/pack_game.gd:138
+#: scripts/ui/minigames/pack_game.gd:174
 msgid "Seal & next"
 msgstr "封箱，下一张"
 
@@ -14881,6 +14909,10 @@ msgstr "分部损益"
 #: data/help/help.json
 msgid "Segments: each business and its shared costs"
 msgstr "分部损益：各产业与共用费用"
+
+#: data/help/glossary.json data/help/help.json scripts/ui/minigames/pack_game.gd:41
+msgid "Select an item, rotate it if needed, then click a free grid cell. Every item must fit before sealing."
+msgstr "先选商品，必要时旋转，再点空格放入。全部放好才能封箱。"
 
 #: scripts/ui/real_estate_ui.gd:134
 msgid "Select client"
@@ -14930,7 +14962,7 @@ msgstr "请出售已完工的空屋。"
 msgid "Sell empty unit"
 msgstr "出售空屋"
 
-#: scripts/sim/ecommerce.gd:508
+#: scripts/sim/ecommerce.gd:511
 msgid "Sell some stock first, or lease more space."
 msgstr "先卖掉一些库存，或租更大的空间。"
 
@@ -15194,7 +15226,7 @@ msgstr "已上班 %d 班"
 msgid "Ship three features after launch."
 msgstr "上市后再推出三个功能。"
 
-#: scripts/ui/minigames/pack_game.gd:95
+#: scripts/ui/minigames/pack_game.gd:105
 msgid "Ship to: %s"
 msgstr "寄到：%s"
 
@@ -15254,7 +15286,7 @@ msgstr "ShopLane 广告：有大品牌在抢版位，价格被推高了。"
 msgid "ShopLane Seller"
 msgstr "ShopLane 卖家"
 
-#: scripts/sim/ecommerce.gd:1220
+#: scripts/sim/ecommerce.gd:1264
 msgid "ShopLane ads: %s"
 msgstr "ShopLane 广告：%s"
 
@@ -15262,7 +15294,7 @@ msgstr "ShopLane 广告：%s"
 msgid "ShopLane balance (paid Mondays)"
 msgstr "ShopLane 余额（每周一拨款）"
 
-#: scripts/sim/ecommerce.gd:1174
+#: scripts/sim/ecommerce.gd:1218
 msgid "ShopLane dispute lost %s: forced refund + $15 fee"
 msgstr "ShopLane 申诉败诉 %s：强制退款＋$15 手续费"
 
@@ -15278,11 +15310,11 @@ msgstr "ShopLane 每笔销售先扣 10% 手续费，再拨款给你。"
 msgid "ShopLane marketplace: %d%% fee, weekly payouts, personal sellers capped at %s/month."
 msgstr "ShopLane 平台：抽成 %d%%，每周拨款，个人卖家每月上限 %s。"
 
-#: scripts/sim/ecommerce.gd:1212
+#: scripts/sim/ecommerce.gd:1256
 msgid "ShopLane negative balance charged to card"
 msgstr "ShopLane 负余额已从信用卡扣款"
 
-#: scripts/sim/ecommerce.gd:845
+#: scripts/sim/ecommerce.gd:868
 msgid "ShopLane paused your listings: personal seller limit reached."
 msgstr "ShopLane 暂停了你的商品：已达个人卖家上限。"
 
@@ -15290,7 +15322,7 @@ msgstr "ShopLane 暂停了你的商品：已达个人卖家上限。"
 msgid "ShopLane payout"
 msgstr "ShopLane 拨款"
 
-#: scripts/sim/ecommerce.gd:1207
+#: scripts/sim/ecommerce.gd:1251
 msgid "ShopLane payout received: %s"
 msgstr "收到 ShopLane 拨款：%s"
 
@@ -15310,11 +15342,11 @@ msgstr "已达 ShopLane 个人卖家上限——到市政厅登记公司。"
 msgid "ShopLane seller cap lifted · B2B contracts unlocked · office leases unlocked · supplier net terms unlocked"
 msgstr "解除 ShopLane 卖家上限 · 解锁 B2B 合约 · 解锁办公室租约 · 解锁供应商票期"
 
-#: scripts/sim/ecommerce.gd:1205
+#: scripts/sim/ecommerce.gd:1249
 msgid "ShopLane weekly payout"
 msgstr "ShopLane 每周拨款"
 
-#: scripts/sim/ecommerce.gd:695
+#: scripts/sim/ecommerce.gd:699
 msgid "ShopLane: personal seller limit reached this month."
 msgstr "ShopLane：本月已达个人卖家上限。"
 
@@ -15502,7 +15534,7 @@ msgstr "小嘴"
 msgid "Small OEM runs. Yield, downtime, defects."
 msgstr "小量代工。良率、停机、瑕疵。"
 
-#: scripts/ui/minigames/pack_game.gd:7
+#: data/economy/ecommerce.json scripts/ui/minigames/pack_game.gd:7
 msgid "Small box"
 msgstr "小箱子"
 
@@ -15614,7 +15646,7 @@ msgstr "已售出"
 msgid "Sold %d cars · profit so far %s"
 msgstr "已售 %d 辆 · 目前获利 %s"
 
-#: scripts/sim/ecommerce.gd:1258
+#: scripts/sim/ecommerce.gd:1302
 msgid "Sold %d × %s to liquidator (%d%% of cost)"
 msgstr "卖给清仓商：%d × %s（成本的 %d%%）"
 
@@ -15902,11 +15934,11 @@ msgstr "库存现在扣除，也须先支付运费。供应商收到货后，按
 msgid "Stock on the way"
 msgstr "在途库存"
 
-#: scripts/sim/ecommerce.gd:168
+#: scripts/sim/ecommerce.gd:171
 msgid "Stock received: %s"
 msgstr "到货：%s"
 
-#: scripts/sim/ecommerce.gd:445
+#: scripts/sim/ecommerce.gd:448
 msgid "Stock returned to supplier: %s (%d units)"
 msgstr "退货给供应商：%s（%d 件）"
 
@@ -15998,7 +16030,7 @@ msgstr "Studio Lumen"
 msgid "Studio Lumen photos ($120) & list"
 msgstr "找 Studio Lumen 拍照（$120）并上架"
 
-#: scripts/sim/ecommerce.gd:638
+#: scripts/sim/ecommerce.gd:642
 msgid "Studio Lumen product photos: %s"
 msgstr "Studio Lumen 商品摄影：%s"
 
@@ -16006,7 +16038,7 @@ msgstr "Studio Lumen 商品摄影：%s"
 msgid "Studio Nine Yoga"
 msgstr "Studio Nine 瑜伽"
 
-#: scripts/sim/ecommerce.gd:637
+#: scripts/sim/ecommerce.gd:641
 msgid "Studio photos cost %s."
 msgstr "摄影棚拍照要 %s。"
 
@@ -16090,7 +16122,7 @@ msgstr "供应商没有这个商品。"
 msgid "Supplier invoice"
 msgstr "供应商帐单"
 
-#: scripts/sim/ecommerce.gd:303
+#: scripts/sim/ecommerce.gd:306
 msgid "Supplier invoice paid: %s"
 msgstr "已付供应商发票：%s"
 
@@ -16102,7 +16134,7 @@ msgstr "你欠供应商、尚未付款的帐单。"
 msgid "Supplier price increase"
 msgstr "供应商涨价"
 
-#: scripts/sim/ecommerce.gd:472
+#: scripts/sim/ecommerce.gd:475
 msgid "Supplier return refund: %s"
 msgstr "供应商退货退款：%s"
 
@@ -16326,7 +16358,7 @@ msgstr "小麦色"
 msgid "Tanaka"
 msgstr "Tanaka"
 
-#: scripts/ui/minigames/pack_game.gd:105
+#: scripts/ui/minigames/pack_game.gd:117
 msgid "Tape seam %d"
 msgstr "贴第 %d 条接缝"
 
@@ -16450,7 +16482,7 @@ msgstr "这个案子已经没了。"
 msgid "That order isn't on the way any more."
 msgstr "那张订单已经不在运送途中了。"
 
-#: scripts/sim/ecommerce.gd:242
+#: scripts/sim/ecommerce.gd:245
 msgid "That payment already went through."
 msgstr "这笔款项已经过了。"
 
@@ -16458,7 +16490,7 @@ msgstr "这笔款项已经过了。"
 msgid "That payment isn't stuck on the bridge."
 msgstr "那笔款项没有卡在跨链桥上。"
 
-#: scripts/sim/ecommerce.gd:209
+#: scripts/sim/ecommerce.gd:212
 msgid "That payment method isn't available."
 msgstr "目前不能用这种付款方式。"
 
@@ -16466,7 +16498,7 @@ msgstr "目前不能用这种付款方式。"
 msgid "That price is outside the allowed range."
 msgstr "这个价格超出允许范围。"
 
-#: scripts/sim/ecommerce.gd:320 scripts/ui/modals/purchase_return_modal.gd:23
+#: scripts/sim/ecommerce.gd:323 scripts/ui/modals/purchase_return_modal.gd:23
 msgid "That purchase order no longer exists."
 msgstr "这张进货单已不存在。"
 
@@ -16490,11 +16522,11 @@ msgstr "这张单已经被接走了。"
 msgid "That run isn't on your list."
 msgstr "这张单不在你的清单上。"
 
-#: scripts/sim/ecommerce.gd:65
+#: scripts/sim/ecommerce.gd:68
 msgid "That supplier doesn't sell this."
 msgstr "这家供应商没卖这个。"
 
-#: scripts/sim/ecommerce.gd:67
+#: scripts/sim/ecommerce.gd:70
 msgid "That supplier isn't open to you yet."
 msgstr "这家供应商还不跟你往来。"
 
@@ -16502,11 +16534,11 @@ msgstr "这家供应商还不跟你往来。"
 msgid "That went badly. It counts for little."
 msgstr "这次不太顺利，效果有限。"
 
-#: scripts/sim/ecommerce.gd:251
+#: scripts/sim/ecommerce.gd:254
 msgid "That wouldn't be any faster."
 msgstr "这样不会比较快。"
 
-#: scripts/sim/ecommerce.gd:410
+#: scripts/sim/ecommerce.gd:413
 msgid "The %d-day return window has ended."
 msgstr "已超过 %d 天的退货期限。"
 
@@ -16934,9 +16966,9 @@ msgstr "你走访各停靠点的顺序。最短的来回路线，通常不是客
 msgid "The organisers cancelled the next big city event. Group guests are leaving."
 msgstr "主办单位取消了下一场城市大型活动，团体客人要退订。"
 
-#: scripts/ui/minigames/pack_game.gd:203
-msgid "The other %d orders are packed at the same standard."
-msgstr "其余 %d 张订单照同样水准打包。"
+#: scripts/ui/minigames/pack_game.gd:241
+msgid "The other %d orders use skilled automatic packing."
+msgstr "其余 %d 张订单采熟练自动装箱规则。"
 
 #: data/help/help.json
 msgid "The packing table"
@@ -17174,7 +17206,7 @@ msgstr "对方放弃了。"
 msgid "Thick"
 msgstr "浓眉"
 
-#: scripts/sim/ecommerce.gd:216
+#: scripts/sim/ecommerce.gd:219
 msgid "This %s."
 msgstr "这个方式%s。"
 
@@ -17189,6 +17221,10 @@ msgstr "此广告时段无法出售，或库存已耗尽。"
 #: scripts/sim/energy.gd:467
 msgid "This application is already filed."
 msgstr "这份申请已经送出。"
+
+#: scripts/ui/minigames/pack_game.gd:132
+msgid "This box: materials %s · economy postage %s"
+msgstr "这箱材料 %s・经济运费 %s"
 
 #: data/help/help.json
 msgid "This card lists updates after the version that last saved your game. Scroll to read all release notes."
@@ -17314,11 +17350,11 @@ msgstr "这处所没有有效租约。"
 msgid "This property has no pending notice."
 msgstr "这处所没有待完成的退租通知。"
 
-#: scripts/sim/ecommerce.gd:322
+#: scripts/sim/ecommerce.gd:325
 msgid "This purchase belongs to a closed company."
 msgstr "这张进货单属于已关闭的公司。"
 
-#: scripts/sim/ecommerce.gd:324
+#: scripts/sim/ecommerce.gd:327
 msgid "This purchase belongs to another business."
 msgstr "这张进货单属于其他企业。"
 
@@ -17338,7 +17374,7 @@ msgstr "这个存盘来自更新的 City Venture 版本。"
 msgid "This slot overlaps production or changeover."
 msgstr "此时段与生产或换线时间重叠。"
 
-#: scripts/sim/ecommerce.gd:340 scripts/sim/ecommerce.gd:408
+#: scripts/sim/ecommerce.gd:343 scripts/sim/ecommerce.gd:411
 msgid "This supplier does not accept returns after delivery."
 msgstr "这家供应商不接受到货后退货。"
 
@@ -17778,7 +17814,7 @@ msgstr "未知的代理商危机。"
 msgid "Unknown automotive crisis."
 msgstr "未知的汽车危机。"
 
-#: scripts/sim/ecommerce.gd:1157
+#: scripts/sim/ecommerce.gd:1201
 msgid "Unknown choice."
 msgstr "未知的选项。"
 
@@ -17918,7 +17954,7 @@ msgstr "创业大楼"
 msgid "VIP suite upgrade for a critic"
 msgstr "为评论家升等 VIP 套房"
 
-#: scripts/ui/minigames/pack_game.gd:76
+#: scripts/ui/minigames/pack_game.gd:86
 msgid "Val"
 msgstr "Val"
 
@@ -18822,7 +18858,7 @@ msgstr "你需要日票或座位方案。到柜台问问。"
 msgid "You need a van."
 msgstr "你需要一台货车。"
 
-#: scripts/sim/ecommerce.gd:630
+#: scripts/sim/ecommerce.gd:634
 msgid "You need the product in hand to photograph it."
 msgstr "商品要在手上才能拍照。"
 
@@ -18850,9 +18886,9 @@ msgstr "你欠别人（供应商）"
 msgid "You own all of it, so the whole amount is yours: %s."
 msgstr "公司全部归你，所以整笔都是你的：%s。"
 
-#: scripts/ui/minigames/pack_game.gd:39
-msgid "You pack %d by hand; the other %d get packed the same way once you have the rhythm."
-msgstr "你亲手打包 %d 张；上手之后，其余 %d 张照同样的水准打包。"
+#: scripts/ui/minigames/pack_game.gd:47
+msgid "You pack %d by hand; the other %d use the skilled automatic packing policy."
+msgstr "你会手动包装 %d 张，其余 %d 张采熟练自动装箱规则。"
 
 #: data/story/chapters.json
 msgid "You packed boxes until 1 AM again, didn't you. You need help. Like, a person."
@@ -18926,7 +18962,7 @@ msgstr "你正拿着包裹。走到河滨区的 PostPoint，在柜台交寄。"
 msgid "You're here about the corner unit, I can tell. Everybody looks at it the same way."
 msgstr "你是为了转角那间店面来的吧，我看得出来。每个人看它的眼神都一样。"
 
-#: scripts/sim/ecommerce.gd:974
+#: scripts/sim/ecommerce.gd:1010
 msgid "You're not carrying any parcels."
 msgstr "你身上没有包裹。"
 
@@ -18942,7 +18978,7 @@ msgstr "这是你应得的：你是我们新的%s。新时薪：每小时 $%d。
 msgid "You've got the look of someone whose parcels keep going the long way round. A van fixes that."
 msgstr "你看起来就像包裹老是绕远路的人。有一台货车就解决了。"
 
-#: scripts/sim/ecommerce.gd:836
+#: scripts/sim/ecommerce.gd:859
 msgid "You've sold %s of your %s personal seller limit this month. Register a business to lift it."
 msgstr "你这个月已经卖了 %s，个人卖家上限是 %s。登记公司就能解除限制。"
 
@@ -19274,7 +19310,7 @@ msgstr "帐面价值"
 msgid "boutique firm"
 msgstr "精品事务所"
 
-#: scripts/ui/minigames/pack_game.gd:184
+#: scripts/ui/minigames/pack_game.gd:222
 msgid "box too big"
 msgstr "箱子太大"
 
@@ -19498,7 +19534,7 @@ msgstr "港湾度假村"
 msgid "harsh light"
 msgstr "光线太硬"
 
-#: scripts/sim/ecommerce.gd:216
+#: scripts/sim/ecommerce.gd:219
 msgid "has a requirement you don't meet yet"
 msgstr "有你还没达成的条件"
 
@@ -19690,7 +19726,7 @@ msgstr "柜台没人"
 msgid "no reviews"
 msgstr "尚无评价"
 
-#: scripts/ui/minigames/pack_game.gd:186
+#: scripts/ui/minigames/pack_game.gd:224
 msgid "not enough padding"
 msgstr "缓冲不够"
 
@@ -20050,7 +20086,7 @@ msgstr "银行贷款"
 msgid "with grant request"
 msgstr "并申请补助"
 
-#: scripts/ui/minigames/pack_game.gd:188
+#: scripts/ui/minigames/pack_game.gd:226
 msgid "wrong label!"
 msgstr "标签贴错！"
 
@@ -20346,7 +20382,11 @@ msgstr "✗ 完成两场活动，聘用设计师与媒体采购员后，再收�
 msgid "✗ Fund the next construction milestone."
 msgstr "✗ 请备妥下一期工程款。"
 
-#: scripts/ui/minigames/pack_game.gd:147
+#: scripts/ui/minigames/pack_game.gd:269
+msgid "✗ It doesn't fit. Rotate it or choose a free cell."
+msgstr "✗ 放不下，请旋转或换个空格。"
+
+#: scripts/ui/minigames/pack_game.gd:183
 msgid "✗ It doesn't fit. Try a bigger box."
 msgstr "✗ 装不下，换大一点的箱子。"
 
@@ -20389,6 +20429,10 @@ msgstr "✗ 请先到代工单租用机台。"
 #: scripts/ui/media_ui.gd:131
 msgid "✗ Select a running campaign to adjust media shares."
 msgstr "✗ 请选择进行中的活动，再调整媒体占比。"
+
+#: scripts/ui/minigames/pack_game.gd:173
+msgid "✗ Select an item, rotate if needed, then click a free grid cell."
+msgstr "✗ 请选商品，必要时旋转，再点空格放入。"
 
 #: scripts/ui/real_estate_ui.gd:142
 msgid "✗ Select an owner mandate and a client, then arrange a viewing."

@@ -1,0 +1,83 @@
+{
+ "basket_chance": 0.28,
+ "quantity_chance": 0.2,
+ "max_quantity": 3,
+ "combinations": {
+  "phone_stand": [
+   "desk_lamp",
+   "wireless_earbuds"
+  ],
+  "desk_lamp": [
+   "phone_stand",
+   "water_bottle"
+  ],
+  "water_bottle": [
+   "wireless_earbuds"
+  ],
+  "wireless_earbuds": [
+   "phone_stand"
+  ],
+  "solar_lamp": [
+   "water_bottle"
+  ]
+ },
+ "boxes": {
+  "small": {
+   "name": "Small box",
+   "grid": [
+    4,
+    3
+   ],
+   "height": 2,
+   "cost": 0.3,
+   "dimensions_cm": [
+    20,
+    15,
+    10
+   ]
+  },
+  "medium": {
+   "name": "Medium box",
+   "grid": [
+    6,
+    4
+   ],
+   "height": 3,
+   "cost": 0.65,
+   "dimensions_cm": [
+    30,
+    20,
+    15
+   ]
+  },
+  "large": {
+   "name": "Large box",
+   "grid": [
+    9,
+    6
+   ],
+   "height": 4,
+   "cost": 1.1,
+   "dimensions_cm": [
+    45,
+    30,
+    20
+   ]
+  }
+ },
+ "padding": {
+  "safe": 0.6,
+  "unit_cost": 0.4,
+  "damage_max": 0.45
+ },
+ "shipping": {
+  "dimensional_divisor": 5000,
+  "included_kg": 1.0,
+  "extra_kg": 1.25
+ },
+ "staff": {
+  "padding_base": 0.4,
+  "padding_per_skill": 0.06,
+  "oversize_below_skill": 3
+ }
+}

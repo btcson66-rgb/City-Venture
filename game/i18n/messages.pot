@@ -269,7 +269,7 @@ msgstr ""
 msgid "%d panels · %.1f kW · %s kWh/year · average shading loss %d%% · load %d of %d kg"
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:201
+#: scripts/ui/minigames/pack_game.gd:239
 msgid "%d parcel(s) have the wrong label and will arrive late."
 msgstr ""
 
@@ -401,7 +401,7 @@ msgstr ""
 msgid "%s can't pay its debts. You have to decide what happens next."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:387
+#: scripts/sim/ecommerce.gd:390
 msgid "%s cancelled: %s refunded or removed from your unpaid invoice; fee %s. Settlement fees are not refundable."
 msgstr ""
 
@@ -433,7 +433,7 @@ msgstr ""
 msgid "%s has a big order that needs several of your businesses: %s. Reward %s. Open Company OS, Group tab."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:507
+#: scripts/sim/ecommerce.gd:510
 msgid "%s has room: choose it under \"Deliver to\" in Operations."
 msgstr ""
 
@@ -449,7 +449,7 @@ msgstr ""
 msgid "%s is closed. Open %s–%s, %s."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:498
+#: scripts/sim/ecommerce.gd:501
 msgid "%s is full: %d of %d units, counting stock on the way."
 msgstr ""
 
@@ -693,15 +693,15 @@ msgstr ""
 msgid "%s: %d passengers/day"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:111
+#: scripts/sim/ecommerce.gd:114
 msgid "%s: %d × %s (into escrow)"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:120
+#: scripts/sim/ecommerce.gd:123
 msgid "%s: %d × %s (prepaid)"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:116
+#: scripts/sim/ecommerce.gd:119
 msgid "%s: %d × %s on Net %d"
 msgstr ""
 
@@ -725,11 +725,11 @@ msgstr ""
 msgid "%s: grant %s, %s"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:262
+#: scripts/sim/ecommerce.gd:265
 msgid "%s: money moved into escrow"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:262
+#: scripts/sim/ecommerce.gd:265
 msgid "%s: money moved out of escrow"
 msgstr ""
 
@@ -741,11 +741,11 @@ msgstr ""
 msgid "%s: paid again by %s (rerouted)"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:474
+#: scripts/sim/ecommerce.gd:477
 msgid "%s: received the returned stock. Refund %s has reached your account."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:455
+#: scripts/sim/ecommerce.gd:458
 msgid "%s: returning %d units. Refund %s on %s; restocking fee %s, shipping %s."
 msgstr ""
 
@@ -805,7 +805,7 @@ msgstr ""
 msgid "06:30 boxing · 07:30 spin · 12:15 lunchtime circuits · 18:00 strength. Bring your own water bottle."
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:113
+#: scripts/ui/minigames/pack_game.gd:130
 msgid "1  Box"
 msgstr ""
 
@@ -821,7 +821,7 @@ msgstr ""
 msgid "1★ review, dispute risk."
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:115
+#: scripts/ui/minigames/pack_game.gd:135
 msgid "2  Padding"
 msgstr ""
 
@@ -837,7 +837,7 @@ msgstr ""
 msgid "22 Founders Lane, Suite 2B"
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:130
+#: scripts/ui/minigames/pack_game.gd:150
 msgid "3  Tape all three seams (buttons under the box)"
 msgstr ""
 
@@ -857,7 +857,7 @@ msgstr ""
 msgid "30-day occupancy at least %d%% (now %d%%)."
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:131
+#: scripts/ui/minigames/pack_game.gd:151
 msgid "4  Label"
 msgstr ""
 
@@ -1485,7 +1485,7 @@ msgstr ""
 msgid "Add a local backup: Aurelia Makers Co-op"
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:118
+#: scripts/ui/minigames/pack_game.gd:138
 msgid "Add bubble wrap"
 msgstr ""
 
@@ -1589,7 +1589,7 @@ msgstr ""
 msgid "AirportNextFleet"
 msgstr ""
 
-#: autoload/game_state.gd:56 autoload/game_state.gd:65 scripts/sim/ecommerce.gd:794 scripts/sim/staff.gd:120
+#: autoload/game_state.gd:56 autoload/game_state.gd:65 scripts/sim/ecommerce.gd:798 scripts/sim/staff.gd:120
 msgid "Alex"
 msgstr ""
 
@@ -2549,7 +2549,7 @@ msgstr ""
 msgid "Boutique practice"
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:113
+#: scripts/ui/minigames/pack_game.gd:130
 msgid "Box"
 msgstr ""
 
@@ -2777,7 +2777,7 @@ msgstr ""
 msgid "Business account opened. %s now runs on its own books."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1288
+#: scripts/sim/ecommerce.gd:1332
 msgid "Business assets contributed to %s (in kind)"
 msgstr ""
 
@@ -2937,7 +2937,7 @@ msgstr ""
 msgid "Buyer"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1178
+#: scripts/sim/ecommerce.gd:1222
 msgid "Buyer %s opened a dispute on order %s. We refunded them and charged a $15 dispute fee."
 msgstr ""
 
@@ -3277,11 +3277,11 @@ msgstr ""
 msgid "Cancel within the supplier window while the goods are on the way. Unpaid terms reduce accounts payable; any cancellation fee remains due. Unsettled cross-border payments return the principal, but settlement fees stay paid."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:340
+#: scripts/sim/ecommerce.gd:343
 msgid "Cancellation window ended."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:341
+#: scripts/sim/ecommerce.gd:344
 msgid "Cancellation window ended. Return eligible stock within %d days of arrival."
 msgstr ""
 
@@ -3301,7 +3301,7 @@ msgstr ""
 msgid "Capital"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1289
+#: scripts/sim/ecommerce.gd:1333
 msgid "Capital contributed in kind by founder"
 msgstr ""
 
@@ -3589,7 +3589,7 @@ msgstr ""
 msgid "Check the departures hall"
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:37
+#: scripts/ui/minigames/pack_game.gd:45
 msgid "Check the label against the order: the wrong one sends the parcel to the wrong address and it arrives late."
 msgstr ""
 
@@ -3837,7 +3837,7 @@ msgstr ""
 msgid "Choose another leased workplace for employees."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:434
+#: scripts/sim/ecommerce.gd:437
 msgid "Choose between 1 and %d returnable units."
 msgstr ""
 
@@ -4015,6 +4015,10 @@ msgstr ""
 
 #: scripts/sim/energy.gd:77 scripts/ui/minigames/route_game.gd:85
 msgid "Clear"
+msgstr ""
+
+#: scripts/ui/minigames/pack_game.gd:163
+msgid "Clear box"
 msgstr ""
 
 #: data/story/chapters.json data/world/years.json
@@ -4577,7 +4581,7 @@ msgstr ""
 msgid "Courier or self delivery"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1001
+#: scripts/sim/ecommerce.gd:1037
 msgid "Courier picked up %d parcel%s."
 msgstr ""
 
@@ -4585,7 +4589,7 @@ msgstr ""
 msgid "Courier picks up in ~2 hours and adds a %s pickup fee."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:946
+#: scripts/sim/ecommerce.gd:982
 msgid "Courier pickup: %d parcels (%s)"
 msgstr ""
 
@@ -5121,7 +5125,7 @@ msgstr ""
 msgid "Delivered. Invoice %s due in %d days."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:173
+#: scripts/sim/ecommerce.gd:176
 msgid "Delivered: %d × %s → %s"
 msgstr ""
 
@@ -5245,6 +5249,10 @@ msgstr ""
 msgid "Desks"
 msgstr ""
 
+#: data/products/desk_monitor.json
+msgid "Desktop Monitor"
+msgstr ""
+
 #: data/economy/energy.json
 msgid "Destination chargers"
 msgstr ""
@@ -5361,7 +5369,7 @@ msgstr ""
 msgid "Dismiss staff"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1179
+#: scripts/sim/ecommerce.gd:1223
 msgid "Dispute lost on %s: −%s"
 msgstr ""
 
@@ -5413,7 +5421,7 @@ msgstr ""
 msgid "Doesn't turn on."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1100
+#: scripts/sim/ecommerce.gd:1137
 msgid "Doesn't work. Out of the box."
 msgstr ""
 
@@ -5485,7 +5493,7 @@ msgstr ""
 msgid "Drop off parcels"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:176
+#: scripts/sim/ecommerce.gd:179
 msgid "Dropped %d %s at %s. Don't let them sit around."
 msgstr ""
 
@@ -5641,7 +5649,7 @@ msgstr ""
 msgid "Eat"
 msgstr ""
 
-#: data/businesses/ecommerce.json scripts/sim/ecommerce.gd:1344 scripts/ui/media_ui.gd:160
+#: data/businesses/ecommerce.json scripts/sim/ecommerce.gd:1388 scripts/ui/media_ui.gd:160
 msgid "Ecommerce"
 msgstr ""
 
@@ -5853,7 +5861,7 @@ msgstr ""
 msgid "Escrow (pay on delivery)"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:288
+#: scripts/sim/ecommerce.gd:291
 msgid "Escrow funded: %s ships %s (arrives %s). The money is released when it lands."
 msgstr ""
 
@@ -6341,7 +6349,7 @@ msgstr ""
 msgid "First Customer"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:650
+#: scripts/sim/ecommerce.gd:654
 msgid "First ShopLane listing: %s at %s."
 msgstr ""
 
@@ -6373,7 +6381,7 @@ msgstr ""
 msgid "First group block"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:148
+#: scripts/sim/ecommerce.gd:151
 msgid "First inventory order: %d × %s from %s."
 msgstr ""
 
@@ -6381,7 +6389,7 @@ msgstr ""
 msgid "First parcel out"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1210
+#: scripts/sim/ecommerce.gd:1254
 msgid "First payout from ShopLane: %s."
 msgstr ""
 
@@ -6405,7 +6413,7 @@ msgstr ""
 msgid "First roof lit"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1038
+#: scripts/sim/ecommerce.gd:1074
 msgid "First sale: %s bought %s for %s."
 msgstr ""
 
@@ -7075,6 +7083,10 @@ msgstr ""
 
 #: scripts/ui/energy_ui.gd:149
 msgid "Grid export pays %s/kWh: about %s/year; payback %.1f years. Materials %s."
+msgstr ""
+
+#: data/help/glossary.json scripts/ui/minigames/pack_game.gd:108
+msgid "Grid packing and postage"
 msgstr ""
 
 #: data/synergies.json
@@ -8417,7 +8429,7 @@ msgstr ""
 msgid "Jewelry"
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:76
+#: scripts/ui/minigames/pack_game.gd:86
 msgid "Jo"
 msgstr ""
 
@@ -8525,7 +8537,7 @@ msgstr ""
 msgid "KYC check on payments over %s: a fee and a day's delay."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:134
+#: scripts/sim/ecommerce.gd:137
 msgid "KYC check — %s"
 msgstr ""
 
@@ -8665,7 +8677,7 @@ msgstr ""
 msgid "Keys in hand"
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:76 scripts/ui/minigames/parcel_sort_game.gd:9
+#: scripts/ui/minigames/pack_game.gd:86 scripts/ui/minigames/parcel_sort_game.gd:9
 msgid "Kim"
 msgstr ""
 
@@ -8753,12 +8765,16 @@ msgstr ""
 msgid "Laptop · café table"
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:7
+#: data/economy/ecommerce.json scripts/ui/minigames/pack_game.gd:7
 msgid "Large box"
 msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:6
 msgid "Large cup"
+msgstr ""
+
+#: data/help/glossary.json data/help/help.json scripts/ui/minigames/pack_game.gd:42
+msgid "Larger boxes cost more in materials and dimensional postage. Fragile goods need padding."
 msgstr ""
 
 #: scripts/ui/minigames/auction_game.gd:61
@@ -9025,7 +9041,7 @@ msgstr ""
 msgid "Leave immediately"
 msgstr ""
 
-#: data/npcs/lee.json scripts/sim/staff.gd:120 scripts/ui/minigames/pack_game.gd:76
+#: data/npcs/lee.json scripts/sim/staff.gd:120 scripts/ui/minigames/pack_game.gd:86
 msgid "Lee"
 msgstr ""
 
@@ -9805,7 +9821,7 @@ msgstr ""
 msgid "Mature regulation"
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:76
+#: scripts/ui/minigames/pack_game.gd:86
 msgid "Max"
 msgstr ""
 
@@ -9861,7 +9877,7 @@ msgstr ""
 msgid "Media studio"
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:7
+#: data/economy/ecommerce.json scripts/ui/minigames/pack_game.gd:7
 msgid "Medium box"
 msgstr ""
 
@@ -10017,7 +10033,7 @@ msgstr ""
 msgid "Minimum order (MOQ)"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:72
+#: scripts/sim/ecommerce.gd:75
 msgid "Minimum order is %d units."
 msgstr ""
 
@@ -10033,7 +10049,7 @@ msgstr ""
 msgid "Miss the stock minimum twice and the factory ends the franchise and keeps part of the deposit."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:789
+#: scripts/sim/ecommerce.gd:793
 msgid "Missed a sale: %s is out of stock."
 msgstr ""
 
@@ -10425,11 +10441,11 @@ msgstr ""
 msgid "New group job: %s"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:806
+#: scripts/sim/ecommerce.gd:829
 msgid "New order %s — %s — %s"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1083
+#: scripts/sim/ecommerce.gd:1120
 msgid "New review %s: %s \"%s\""
 msgstr ""
 
@@ -10565,7 +10581,7 @@ msgstr ""
 msgid "Nineteen hundred a month, two months' deposit. It comes empty: you fit it out, and City Hall wants a food licence before you sell a single croissant."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1136
+#: scripts/sim/ecommerce.gd:1175
 msgid "No %s in stock to send."
 msgstr ""
 
@@ -10709,7 +10725,7 @@ msgstr ""
 msgid "No product yet."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:412
+#: scripts/sim/ecommerce.gd:415
 msgid "No returnable stock here: units were sold, reserved, moved, or already returned."
 msgstr ""
 
@@ -10853,7 +10869,7 @@ msgstr ""
 msgid "Not enough cash for renovation."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:439 scripts/ui/modals/purchase_return_modal.gd:52
+#: scripts/sim/ecommerce.gd:442 scripts/ui/modals/purchase_return_modal.gd:52
 msgid "Not enough cash for return shipping: %s."
 msgstr ""
 
@@ -10877,7 +10893,7 @@ msgstr ""
 msgid "Not enough cash."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:254 scripts/sim/ecommerce.gd:94 scripts/sim/rails.gd:271 scripts/sim/rails.gd:301
+#: scripts/sim/ecommerce.gd:257 scripts/sim/ecommerce.gd:97 scripts/sim/rails.gd:271 scripts/sim/rails.gd:301
 msgid "Not enough cash. You need %s."
 msgstr ""
 
@@ -10949,7 +10965,7 @@ msgstr ""
 msgid "Nothing on the rails today."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:940
+#: scripts/sim/ecommerce.gd:976
 msgid "Nothing packed here."
 msgstr ""
 
@@ -10977,7 +10993,7 @@ msgstr ""
 msgid "Nothing to pack here: is the stock at this location?"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1116
+#: scripts/sim/ecommerce.gd:1153
 msgid "Nothing to resolve."
 msgstr ""
 
@@ -11061,7 +11077,7 @@ msgstr ""
 msgid "OKAFOR LETTINGS"
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:91
+#: scripts/ui/minigames/pack_game.gd:101
 msgid "ORDER %s"
 msgstr ""
 
@@ -11305,7 +11321,7 @@ msgstr ""
 msgid "Only a delivered, unpaid invoice can be paid early."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:334
+#: scripts/sim/ecommerce.gd:337
 msgid "Only a purchase still on the way can be cancelled."
 msgstr ""
 
@@ -11317,7 +11333,7 @@ msgstr ""
 msgid "Only completed job parts earn their share. Review deliverables, deadline and subcontracting fees in Company OS, Group tab."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:405
+#: scripts/sim/ecommerce.gd:408
 msgid "Only delivered purchases can be returned."
 msgstr ""
 
@@ -11693,7 +11709,7 @@ msgstr ""
 msgid "Order"
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:44
+#: scripts/ui/minigames/pack_game.gd:52
 msgid "Order %d / %d"
 msgstr ""
 
@@ -11773,7 +11789,7 @@ msgstr ""
 msgid "Ordered. Old Town Roasters delivers %s."
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:198
+#: scripts/ui/minigames/pack_game.gd:236
 msgid "Orders packed by hand: %d"
 msgstr ""
 
@@ -12025,7 +12041,7 @@ msgstr ""
 msgid "Pack & deliver %d units (B2B freight $40)"
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:35
+#: scripts/ui/minigames/pack_game.gd:43
 msgid "Pack each order by hand, in four steps: a box that fits, padding, tape on all three seams, and the right label."
 msgstr ""
 
@@ -12065,11 +12081,11 @@ msgstr ""
 msgid "Packed and ready: %d"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:902
+#: scripts/sim/ecommerce.gd:933
 msgid "Packed order %s"
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:189
+#: scripts/ui/minigames/pack_game.gd:227
 msgid "Packed well"
 msgstr ""
 
@@ -12085,7 +12101,7 @@ msgstr ""
 msgid "Packing happens at a packing table where the stock is. Ship by courier (fee, no walk) or carry to PostPoint."
 msgstr ""
 
-#: data/buildings/riverside_apartment.json data/buildings/small_office.json scripts/ui/minigames/pack_game.gd:25
+#: data/buildings/riverside_apartment.json data/buildings/small_office.json scripts/ui/minigames/pack_game.gd:29
 msgid "Packing table"
 msgstr ""
 
@@ -12097,7 +12113,7 @@ msgstr ""
 msgid "Packs orders at the office every workday and books the courier at 16:00. Needs stock at Suite 2B."
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:36
+#: scripts/ui/minigames/pack_game.gd:44
 msgid "Padding should reach the green zone. Too little and things arrive broken; that means returns and bad reviews."
 msgstr ""
 
@@ -12125,7 +12141,7 @@ msgstr ""
 msgid "Paid from"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:305
+#: scripts/sim/ecommerce.gd:308
 msgid "Paid supplier invoice %s: %s"
 msgstr ""
 
@@ -12209,7 +12225,7 @@ msgstr ""
 msgid "Part-time jobs: take one to earn a wage. You work the shifts yourself at the workplace (staff door, press E)."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1147
+#: scripts/sim/ecommerce.gd:1191
 msgid "Partial refund 30%% %s: %s"
 msgstr ""
 
@@ -12357,7 +12373,7 @@ msgstr ""
 msgid "Payment follows the invoice due date. Review receivables in Company OS; a reminder does not create a new payment."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:336
+#: scripts/sim/ecommerce.gd:339
 msgid "Payment is frozen. Wait for the bridge to reopen before cancelling."
 msgstr ""
 
@@ -12365,7 +12381,7 @@ msgstr ""
 msgid "Payment landed, boxes arrived. Remember who held your money in between. That's this year's lesson."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:290
+#: scripts/sim/ecommerce.gd:293
 msgid "Payment landed: %s ships %s (arrives %s)."
 msgstr ""
 
@@ -12385,11 +12401,11 @@ msgstr ""
 msgid "Payments start-ups promise audits and an insurance pool."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1208
+#: scripts/sim/ecommerce.gd:1252
 msgid "Payout sent: %s to your business account."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1208
+#: scripts/sim/ecommerce.gd:1252
 msgid "Payout sent: %s to your personal account."
 msgstr ""
 
@@ -12481,7 +12497,7 @@ msgstr ""
 msgid "Personal seller cap: %s of %s used this month."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:844
+#: scripts/sim/ecommerce.gd:867
 msgid "Personal seller limit reached. Your listings are paused until next month — or until you register a business."
 msgstr ""
 
@@ -12517,7 +12533,7 @@ msgstr ""
 msgid "Pick E-commerce"
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:221
+#: scripts/ui/minigames/pack_game.gd:303
 msgid "Pick a box to start"
 msgstr ""
 
@@ -12583,6 +12599,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "Place panels on roof cells. Shade, direction and the load limit change annual kWh and the client's payback."
+msgstr ""
+
+#: scripts/ui/minigames/pack_game.gd:133
+msgid "Placed %d/%d · damage risk %d%%"
 msgstr ""
 
 #: data/economy/freelance.json
@@ -12685,7 +12705,7 @@ msgstr ""
 msgid "PostPoint clerk"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:989
+#: scripts/sim/ecommerce.gd:1025
 msgid "PostPoint drop-off: %d parcels (%s)"
 msgstr ""
 
@@ -12969,7 +12989,7 @@ msgstr ""
 msgid "Purchase cancelled."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:371
+#: scripts/sim/ecommerce.gd:374
 msgid "Purchase cancelled: %s"
 msgstr ""
 
@@ -13477,7 +13497,7 @@ msgstr ""
 msgid "Refund"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1131
+#: scripts/sim/ecommerce.gd:1169
 msgid "Refund %s: %s (return label paid)"
 msgstr ""
 
@@ -13701,7 +13721,7 @@ msgstr ""
 msgid "Reliable: morale drops half as fast."
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:76
+#: scripts/ui/minigames/pack_game.gd:86
 msgid "Ren"
 msgstr ""
 
@@ -13897,7 +13917,7 @@ msgstr ""
 msgid "Replacement on its way. {customer}: \"Oh — nice. Didn't expect that.\""
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1140
+#: scripts/sim/ecommerce.gd:1184
 msgid "Replacement sent %s: %s (express)"
 msgstr ""
 
@@ -14093,7 +14113,7 @@ msgstr ""
 msgid "Return shipping"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:446
+#: scripts/sim/ecommerce.gd:449
 msgid "Return shipping: %s"
 msgstr ""
 
@@ -14349,6 +14369,10 @@ msgstr ""
 msgid "Rose dye"
 msgstr ""
 
+#: scripts/ui/minigames/pack_game.gd:160
+msgid "Rotate item"
+msgstr ""
+
 #: scripts/ui/minigames/mini_game.gd:184
 msgid "Rough going. Practice makes it easier."
 msgstr ""
@@ -14585,8 +14609,12 @@ msgstr ""
 msgid "Sale"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1030
+#: scripts/sim/ecommerce.gd:12
 msgid "Sale delivered %s: %d × %s @ %s"
+msgstr ""
+
+#: scripts/sim/ecommerce.gd:1066
+msgid "Sale delivered %s: %s — %s"
 msgstr ""
 
 #: data/help/glossary.json
@@ -14601,7 +14629,7 @@ msgstr ""
 msgid "Sales: listings on ShopLane"
 msgstr ""
 
-#: scripts/ui/minigames/barista_game.gd:10 scripts/ui/minigames/pack_game.gd:76
+#: scripts/ui/minigames/barista_game.gd:10 scripts/ui/minigames/pack_game.gd:86
 msgid "Sam"
 msgstr ""
 
@@ -14865,7 +14893,7 @@ msgstr ""
 msgid "Scribbled in the corner: 'profit is an opinion, cash is a fact.'"
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:138
+#: scripts/ui/minigames/pack_game.gd:174
 msgid "Seal & next"
 msgstr ""
 
@@ -14879,6 +14907,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "Segments: each business and its shared costs"
+msgstr ""
+
+#: data/help/glossary.json data/help/help.json scripts/ui/minigames/pack_game.gd:41
+msgid "Select an item, rotate it if needed, then click a free grid cell. Every item must fit before sealing."
 msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:134
@@ -14929,7 +14961,7 @@ msgstr ""
 msgid "Sell empty unit"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:508
+#: scripts/sim/ecommerce.gd:511
 msgid "Sell some stock first, or lease more space."
 msgstr ""
 
@@ -15193,7 +15225,7 @@ msgstr ""
 msgid "Ship three features after launch."
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:95
+#: scripts/ui/minigames/pack_game.gd:105
 msgid "Ship to: %s"
 msgstr ""
 
@@ -15253,7 +15285,7 @@ msgstr ""
 msgid "ShopLane Seller"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1220
+#: scripts/sim/ecommerce.gd:1264
 msgid "ShopLane ads: %s"
 msgstr ""
 
@@ -15261,7 +15293,7 @@ msgstr ""
 msgid "ShopLane balance (paid Mondays)"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1174
+#: scripts/sim/ecommerce.gd:1218
 msgid "ShopLane dispute lost %s: forced refund + $15 fee"
 msgstr ""
 
@@ -15277,11 +15309,11 @@ msgstr ""
 msgid "ShopLane marketplace: %d%% fee, weekly payouts, personal sellers capped at %s/month."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1212
+#: scripts/sim/ecommerce.gd:1256
 msgid "ShopLane negative balance charged to card"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:845
+#: scripts/sim/ecommerce.gd:868
 msgid "ShopLane paused your listings: personal seller limit reached."
 msgstr ""
 
@@ -15289,7 +15321,7 @@ msgstr ""
 msgid "ShopLane payout"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1207
+#: scripts/sim/ecommerce.gd:1251
 msgid "ShopLane payout received: %s"
 msgstr ""
 
@@ -15309,11 +15341,11 @@ msgstr ""
 msgid "ShopLane seller cap lifted · B2B contracts unlocked · office leases unlocked · supplier net terms unlocked"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1205
+#: scripts/sim/ecommerce.gd:1249
 msgid "ShopLane weekly payout"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:695
+#: scripts/sim/ecommerce.gd:699
 msgid "ShopLane: personal seller limit reached this month."
 msgstr ""
 
@@ -15501,7 +15533,7 @@ msgstr ""
 msgid "Small OEM runs. Yield, downtime, defects."
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:7
+#: data/economy/ecommerce.json scripts/ui/minigames/pack_game.gd:7
 msgid "Small box"
 msgstr ""
 
@@ -15613,7 +15645,7 @@ msgstr ""
 msgid "Sold %d cars · profit so far %s"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1258
+#: scripts/sim/ecommerce.gd:1302
 msgid "Sold %d × %s to liquidator (%d%% of cost)"
 msgstr ""
 
@@ -15901,11 +15933,11 @@ msgstr ""
 msgid "Stock on the way"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:168
+#: scripts/sim/ecommerce.gd:171
 msgid "Stock received: %s"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:445
+#: scripts/sim/ecommerce.gd:448
 msgid "Stock returned to supplier: %s (%d units)"
 msgstr ""
 
@@ -15997,7 +16029,7 @@ msgstr ""
 msgid "Studio Lumen photos ($120) & list"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:638
+#: scripts/sim/ecommerce.gd:642
 msgid "Studio Lumen product photos: %s"
 msgstr ""
 
@@ -16005,7 +16037,7 @@ msgstr ""
 msgid "Studio Nine Yoga"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:637
+#: scripts/sim/ecommerce.gd:641
 msgid "Studio photos cost %s."
 msgstr ""
 
@@ -16089,7 +16121,7 @@ msgstr ""
 msgid "Supplier invoice"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:303
+#: scripts/sim/ecommerce.gd:306
 msgid "Supplier invoice paid: %s"
 msgstr ""
 
@@ -16101,7 +16133,7 @@ msgstr ""
 msgid "Supplier price increase"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:472
+#: scripts/sim/ecommerce.gd:475
 msgid "Supplier return refund: %s"
 msgstr ""
 
@@ -16325,7 +16357,7 @@ msgstr ""
 msgid "Tanaka"
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:105
+#: scripts/ui/minigames/pack_game.gd:117
 msgid "Tape seam %d"
 msgstr ""
 
@@ -16449,7 +16481,7 @@ msgstr ""
 msgid "That order isn't on the way any more."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:242
+#: scripts/sim/ecommerce.gd:245
 msgid "That payment already went through."
 msgstr ""
 
@@ -16457,7 +16489,7 @@ msgstr ""
 msgid "That payment isn't stuck on the bridge."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:209
+#: scripts/sim/ecommerce.gd:212
 msgid "That payment method isn't available."
 msgstr ""
 
@@ -16465,7 +16497,7 @@ msgstr ""
 msgid "That price is outside the allowed range."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:320 scripts/ui/modals/purchase_return_modal.gd:23
+#: scripts/sim/ecommerce.gd:323 scripts/ui/modals/purchase_return_modal.gd:23
 msgid "That purchase order no longer exists."
 msgstr ""
 
@@ -16489,11 +16521,11 @@ msgstr ""
 msgid "That run isn't on your list."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:65
+#: scripts/sim/ecommerce.gd:68
 msgid "That supplier doesn't sell this."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:67
+#: scripts/sim/ecommerce.gd:70
 msgid "That supplier isn't open to you yet."
 msgstr ""
 
@@ -16501,11 +16533,11 @@ msgstr ""
 msgid "That went badly. It counts for little."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:251
+#: scripts/sim/ecommerce.gd:254
 msgid "That wouldn't be any faster."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:410
+#: scripts/sim/ecommerce.gd:413
 msgid "The %d-day return window has ended."
 msgstr ""
 
@@ -16933,8 +16965,8 @@ msgstr ""
 msgid "The organisers cancelled the next big city event. Group guests are leaving."
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:203
-msgid "The other %d orders are packed at the same standard."
+#: scripts/ui/minigames/pack_game.gd:241
+msgid "The other %d orders use skilled automatic packing."
 msgstr ""
 
 #: data/help/help.json
@@ -17173,7 +17205,7 @@ msgstr ""
 msgid "Thick"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:216
+#: scripts/sim/ecommerce.gd:219
 msgid "This %s."
 msgstr ""
 
@@ -17187,6 +17219,10 @@ msgstr ""
 
 #: scripts/sim/energy.gd:467
 msgid "This application is already filed."
+msgstr ""
+
+#: scripts/ui/minigames/pack_game.gd:132
+msgid "This box: materials %s · economy postage %s"
 msgstr ""
 
 #: data/help/help.json
@@ -17313,11 +17349,11 @@ msgstr ""
 msgid "This property has no pending notice."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:322
+#: scripts/sim/ecommerce.gd:325
 msgid "This purchase belongs to a closed company."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:324
+#: scripts/sim/ecommerce.gd:327
 msgid "This purchase belongs to another business."
 msgstr ""
 
@@ -17337,7 +17373,7 @@ msgstr ""
 msgid "This slot overlaps production or changeover."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:340 scripts/sim/ecommerce.gd:408
+#: scripts/sim/ecommerce.gd:343 scripts/sim/ecommerce.gd:411
 msgid "This supplier does not accept returns after delivery."
 msgstr ""
 
@@ -17777,7 +17813,7 @@ msgstr ""
 msgid "Unknown automotive crisis."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1157
+#: scripts/sim/ecommerce.gd:1201
 msgid "Unknown choice."
 msgstr ""
 
@@ -17917,7 +17953,7 @@ msgstr ""
 msgid "VIP suite upgrade for a critic"
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:76
+#: scripts/ui/minigames/pack_game.gd:86
 msgid "Val"
 msgstr ""
 
@@ -18821,7 +18857,7 @@ msgstr ""
 msgid "You need a van."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:630
+#: scripts/sim/ecommerce.gd:634
 msgid "You need the product in hand to photograph it."
 msgstr ""
 
@@ -18849,8 +18885,8 @@ msgstr ""
 msgid "You own all of it, so the whole amount is yours: %s."
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:39
-msgid "You pack %d by hand; the other %d get packed the same way once you have the rhythm."
+#: scripts/ui/minigames/pack_game.gd:47
+msgid "You pack %d by hand; the other %d use the skilled automatic packing policy."
 msgstr ""
 
 #: data/story/chapters.json
@@ -18925,7 +18961,7 @@ msgstr ""
 msgid "You're here about the corner unit, I can tell. Everybody looks at it the same way."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:974
+#: scripts/sim/ecommerce.gd:1010
 msgid "You're not carrying any parcels."
 msgstr ""
 
@@ -18941,7 +18977,7 @@ msgstr ""
 msgid "You've got the look of someone whose parcels keep going the long way round. A van fixes that."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:836
+#: scripts/sim/ecommerce.gd:859
 msgid "You've sold %s of your %s personal seller limit this month. Register a business to lift it."
 msgstr ""
 
@@ -19273,7 +19309,7 @@ msgstr ""
 msgid "boutique firm"
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:184
+#: scripts/ui/minigames/pack_game.gd:222
 msgid "box too big"
 msgstr ""
 
@@ -19497,7 +19533,7 @@ msgstr ""
 msgid "harsh light"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:216
+#: scripts/sim/ecommerce.gd:219
 msgid "has a requirement you don't meet yet"
 msgstr ""
 
@@ -19689,7 +19725,7 @@ msgstr ""
 msgid "no reviews"
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:186
+#: scripts/ui/minigames/pack_game.gd:224
 msgid "not enough padding"
 msgstr ""
 
@@ -20049,7 +20085,7 @@ msgstr ""
 msgid "with grant request"
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:188
+#: scripts/ui/minigames/pack_game.gd:226
 msgid "wrong label!"
 msgstr ""
 
@@ -20345,7 +20381,11 @@ msgstr ""
 msgid "✗ Fund the next construction milestone."
 msgstr ""
 
-#: scripts/ui/minigames/pack_game.gd:147
+#: scripts/ui/minigames/pack_game.gd:269
+msgid "✗ It doesn't fit. Rotate it or choose a free cell."
+msgstr ""
+
+#: scripts/ui/minigames/pack_game.gd:183
 msgid "✗ It doesn't fit. Try a bigger box."
 msgstr ""
 
@@ -20387,6 +20427,10 @@ msgstr ""
 
 #: scripts/ui/media_ui.gd:131
 msgid "✗ Select a running campaign to adjust media shares."
+msgstr ""
+
+#: scripts/ui/minigames/pack_game.gd:173
+msgid "✗ Select an item, rotate if needed, then click a free grid cell."
 msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:142

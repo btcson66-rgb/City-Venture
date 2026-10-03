@@ -171,6 +171,8 @@ func _audit_one(t: String, ctl: Control) -> void:
 func _run() -> void:
 	await wait(1.0)
 	match mode:
+		"packing":
+			await load("res://tests/walkthrough/packing_tour.gd").new(self).run()
 		"phone_messages":
 			await load("res://tests/walkthrough/phone_messages_tour.gd").new(self).run()
 		"map_adjacency":
@@ -845,6 +847,11 @@ func _minigames() -> void:
 		orders.append({"id": "O10%d" % i, "product": ["wireless_earbuds", "desk_lamp", "water_bottle"][i], "qty": 1, "customer": "Rin Tanaka"})
 	var pk: PackGame = await _mg_open(PackGame.new(orders), "pack")
 	await click_named("Box_" + pk.need_box(), 1.0)
+	for place in Packing.plan(pk._order(), pk.box):
+		await click_named("PackItem_%d" % int(place["item"]), 1.0)
+		if place["rotated"]: await click_named("RotateItem", 1.0)
+		await click_named("Grid_%d_%d" % [int(place["x"]), int(place["y"])], 1.0)
+		if place["rotated"]: await click_named("RotateItem", 1.0)
 	for i in 5:
 		await click_named("Pad", 1.0)
 	for i in 3:

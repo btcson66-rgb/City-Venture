@@ -455,10 +455,10 @@ func _tab_sales() -> void:
 	for o in orders.slice(0, 10):
 		var row := UIK.hbox(4)
 		row.add_child(UIK.label(o["id"], 7, Art.C_DIM))
-		var t := UIK.label("%s · %s" % [I18n.t(DataDB.product(o["product"])["name"]), o["customer"]], 7, Art.C_WHITE)
+		var t := UIK.label("%s · %s" % [Packing.summary(o), o["customer"]], 7, Art.C_WHITE)
 		t.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(t)
-		row.add_child(UIK.label(Fmt.money(o["unit_price"]), 7, Art.C_WHITE))
+		row.add_child(UIK.label(Fmt.money(Packing.total(o)), 7, Art.C_WHITE))
 		row.add_child(UIK.chip(status_text(str(o["status"])), _status_col(o["status"])))
 		if o.has("review"):
 			row.add_child(UIK.label("★".repeat(int(o["review"]["stars"])), 7, Art.C_GOLD))
