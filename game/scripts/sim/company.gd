@@ -47,15 +47,15 @@ static func registration_fee() -> float:
 
 
 static func register(name: String, business_type: String, address: String) -> Dictionary:
-	if GameState.company_id() != "":
-		return {"ok": false, "error": "You already own a registered company."}
 	var err := validate_name(name)
 	if err != "":
 		return {"ok": false, "error": err}
+	for entity in GameState.data["entities"].values():
+		if entity.get("kind","")=="company" and not entity.has("closed") and str(entity["name"]).to_lower()==name.strip_edges().to_lower(): return {"ok":false,"error":"That name is already registered in Aurelia."}
 	var reg := registration()
 	var fee := registration_fee()
 	if Ledger.cash("player") < fee:
-		return {"ok": false, "error": I18n.t("The registration fee is %s.") % Fmt.money0(fee)}
+		return {"ok": false, "error": I18n.t("The registration fee is %s.") % Fmt.money(fee)}
 	var cid := "co_" + slug(name)
 	var k := 2
 	while GameState.data["entities"].has(cid):   # a closed company keeps its books; a restart gets a fresh id
@@ -66,7 +66,7 @@ static func register(name: String, business_type: String, address: String) -> Di
 		pass
 	GameState.data["entities"][cid] = {"id": cid, "name": n, "kind": "company", "type": business_type, "address": address,
 		"founded": Clock.now(), "bank_account": false, "seller_account": "business", "registration_no": "AUR-%06d" % (GameState.randi_range(100000, 999999))}
-	GameState.data["company"] = cid
+	CompanyPortfolio.register_new(cid)
 	# A restarted company has new shares; historical offer receipts remain on the timeline.
 	GameState.data["cap_table"] = {"founder": 1.0}
 	GameState.set_flag("company_sold", false)
@@ -90,11 +90,13 @@ static func open_business_account(capital: float) -> Dictionary:
 		return {"ok": false, "error": "Minimum opening deposit is $500."}
 	if Ledger.cash("player") < capital:
 		return {"ok": false, "error": I18n.t("You only have %s personally.") % Fmt.money0(Ledger.cash("player"))}
+	var previous_investment := Ledger.balance("player","investments")
 	Ledger.post("player", I18n.t("Capital injected into %s") % GameState.entity_name(cid), [{"acct": "investments", "dr": capital}, {"acct": "cash", "cr": capital}], {"type": "capital"})
 	Ledger.post(cid, "Founder capital (opening deposit)", [{"acct": "cash", "dr": capital}, {"acct": "equity", "cr": capital}], {"type": "capital"})
 	GameState.data["entities"][cid]["bank_account"] = true
 	GameState.set_flag("business_account_opened")
 	Ecommerce.transfer_business_to(cid)
+	HoldingGroups.add_basis(cid,Ledger.balance("player","investments")-previous_investment)
 	GameState.timeline(I18n.t("Opened a business account at Nexus Bank with %s of founder capital.") % Fmt.money0(capital), "business")
 	EventBus.world_refresh.emit()
 	return {"ok": true}
@@ -104,12 +106,19 @@ static func open_business_account(capital: float) -> Dictionary:
 static func transfer(from_ent: String, to_ent: String, amount: float) -> Dictionary:
 	if Acquisition.sold():
 		return {"ok": false, "error": "The company belongs to Hale Group now: no money moves between it and you."}
-	if amount <= 0.0 or Ledger.cash(from_ent) < amount:
+	if not is_finite(amount) or amount <= 0.0 or Ledger.cash(from_ent) < amount:
 		return {"ok": false, "error": "Not enough cash."}
+	if from_ent != "player" and to_ent != "player": return {"ok":false,"error":"Use a group loan or an actual internal trade to move company funds."}
+	var company := to_ent if from_ent=="player" else from_ent
+	if company=="player" or not CompanyPortfolio.ids().has(company) or HoldingGroups.owner(company)!="player":return {"ok":false,"error":"Subsidiary funds belong to its holding company. Use a group loan or management service."}
+	var shares: Dictionary = CompanyPortfolio.run_in(company,func():return GameState.data.get("cap_table",{"founder":1.0}))
+	if float(shares.get("founder",0))<=0:return {"ok":false,"error":"The existing owner holds these shares. No founder withdrawal is available."}
 	if from_ent == "player":
 		Ledger.post("player", I18n.t("Transfer to %s") % GameState.entity_name(to_ent), [{"acct": "investments", "dr": amount}, {"acct": "cash", "cr": amount}], {"type": "transfer"})
+		HoldingGroups.add_basis(to_ent,amount)
 		Ledger.post(to_ent, "Additional founder capital", [{"acct": "cash", "dr": amount}, {"acct": "equity", "cr": amount}], {"type": "transfer"})
 	else:
+		HoldingGroups.add_basis(from_ent,-amount)
 		Ledger.post(from_ent, "Owner withdrawal", [{"acct": "equity", "dr": amount}, {"acct": "cash", "cr": amount}], {"type": "transfer"})
 		Ledger.post("player", I18n.t("Withdrawal from %s") % GameState.entity_name(from_ent), [{"acct": "cash", "dr": amount}, {"acct": "investments", "cr": amount}], {"type": "transfer"})
 	return {"ok": true}

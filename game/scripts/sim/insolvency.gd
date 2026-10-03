@@ -31,7 +31,10 @@ static func begin(ent: String, reason: String) -> void:
 
 ## Everything the company owes right now.
 static func liabilities(ent: String) -> float:
-	return -(Ledger.balance(ent, "loan_payable") + Ledger.balance(ent, "wages_payable") + Ledger.balance(ent, "accounts_payable"))
+	var owed := -(Ledger.balance(ent, "loan_payable") + Ledger.balance(ent, "wages_payable") + Ledger.balance(ent, "accounts_payable"))
+	for acct in GameState.data["ledger"]["balances"].get(ent,{}):
+		if str(acct).begins_with("group_loan_payable:") or str(acct).begins_with("group_interest_payable:"):owed-=Ledger.balance(ent,acct)
+	return owed
 
 
 static func shortfall(ent: String) -> float:
@@ -86,6 +89,8 @@ static func close_company() -> Dictionary:
 	var ent := str(state().get("entity", GameState.company_id()))
 	if ent == "" or ent == "player":
 		return {"ok": false, "error": "No company to close."}
+	if GameState.data["entities"].get(ent,{}).has("closed"): return {"ok":false,"error":"Company closure is already recorded. Continue with another company."}
+	if HoldingGroups.parent_closure_block(ent): return {"ok":false,"error":"Release or sell the live subsidiaries before closing their holding company."}
 	var rep := {"stock": 0.0, "receivables": 0.0, "deposit": 0.0, "paid": {}, "written_off": 0.0}
 	Industries.on_company_closed(ent)   # work/assets close here; the AR sale below is collected once
 	Contracts.close_for_entity(ent)
@@ -113,7 +118,7 @@ static func close_company() -> Dictionary:
 	Staff.S()["applicants"] = []
 	Staff.S()["posting"] = {}
 	# 3. pay creditors in order, write off the rest
-	for acct in ["wages_payable", "loan_payable", "accounts_payable"]:
+	for acct in ["wages_payable", "loan_payable", "accounts_payable"]+HoldingGroups.debt_accounts(ent):
 		var owed := -Ledger.balance(ent, acct)
 		if owed <= 0.01:
 			continue
@@ -121,9 +126,11 @@ static func close_company() -> Dictionary:
 		if pay > 0.01:
 			Ledger.post(ent, I18n.t("Liquidation payment — %s") % acct.replace("_", " "), [{"acct": acct, "dr": pay}, {"acct": "cash", "cr": pay}], {"type": "liquidation"})
 		var rest := snappedf(owed - pay, 0.01)
+		if acct=="loan_payable":rest-=HoldingGroups.cover_guarantees(ent,rest)
 		if rest > 0.01:
 			Ledger.post(ent, I18n.t("Debt written off in liquidation — %s") % acct.replace("_", " "), [{"acct": acct, "dr": rest}, {"acct": "other_income", "cr": rest}], {"type": "liquidation"})
 			rep["written_off"] = float(rep["written_off"]) + rest
+		if str(acct).begins_with("group_"):HoldingGroups.settle_group_debt(ent,acct,pay,rest)
 		rep["paid"][acct] = pay
 	for l in Bank.B()["loans"].values():
 		if l["entity"] == ent and l["status"] != "closed":
@@ -138,22 +145,24 @@ static func close_company() -> Dictionary:
 	var left := maxf(0.0, Ledger.cash(ent))
 	if left > 0.01:
 		Ledger.post(ent, "Final distribution to the founder", [{"acct": "equity", "dr": left}, {"acct": "cash", "cr": left}], {"type": "capital"})
-	var inv := Ledger.balance("player", "investments")
+	var investor := HoldingGroups.owner(ent)
+	var account := "investments" if investor=="player" else "investment_in_subsidiary:"+ent
+	var inv := HoldingGroups.basis(ent) if investor=="player" else maxf(0,Ledger.balance(investor,account))
+	var distribution := left
+	if investor=="player":distribution=snappedf(left*float(GameState.data.get("cap_table",{"founder":1.0}).get("founder",0)),.01)
+	# Outside shareholders receive their own distribution; it is never founder income.
+	if left>distribution:Ledger.post(ent,"External shareholder liquidation payable",[{"acct":"cash","dr":left-distribution},{"acct":"accounts_payable","cr":left-distribution}],{"type":"external_shareholder_liquidation"})
 	var lines: Array = []
-	if left > 0.01:
-		lines.append({"acct": "cash", "dr": left})
-	if inv - left > 0.01:
-		lines.append({"acct": "exp:other", "dr": inv - left})
-	if inv > 0.01:
-		lines.append({"acct": "investments", "cr": inv})
-		if left>inv:lines.append({"acct":"other_income","cr":snappedf(left-inv,.01)})
-		Ledger.post("player", I18n.t("%s closed: final distribution, rest of the investment written off") % GameState.entity_name(ent), lines, {"type": "liquidation"})
-	elif left > 0.01:
-		Ledger.post("player", I18n.t("%s closed: final distribution") % GameState.entity_name(ent), [{"acct": "cash", "dr": left}, {"acct": "other_income", "cr": left}], {"type": "liquidation"})
-	rep["returned"] = left
+	if distribution>0:lines.append({"acct":"cash","dr":distribution})
+	if inv>0:lines.append({"acct":account,"cr":inv})
+	if inv>distribution:lines.append({"acct":"exp:other","dr":inv-distribution})
+	elif distribution>inv:lines.append({"acct":"other_income","cr":distribution-inv})
+	if not lines.is_empty():Ledger.post(investor,I18n.t("Subsidiary or founder liquidation: %s")%Fmt.money(left),lines,{"type":"liquidation" if investor=="player" else "subsidiary_liquidation","subsidiary":ent})
+	HoldingGroups.liquidated_margin(ent)
+	rep["returned"] = distribution
 	# 5. the founder carries on
 	GameState.data["entities"][ent]["closed"] = Clock.now()
-	GameState.data["company"] = ""
+
 	for f in ["business_account_opened", "workspace_chosen", "employer_registered", "company_os_opened_as_company"]:
 		GameState.set_flag(f, false)
 	var prior := int(GameState.stat("companies_closed"))
@@ -167,6 +176,7 @@ static func close_company() -> Dictionary:
 		_resolve("closed")
 	else:
 		GameState.data["insolvency"] = {"entity": ent, "reason": "voluntary", "t": Clock.now(), "stage": "closed"}
+	CompanyPortfolio.on_closed(ent)
 	EventBus.world_refresh.emit()
 	var _u := prior
 	return {"ok": true, "report": rep}

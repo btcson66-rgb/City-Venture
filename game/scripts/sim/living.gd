@@ -36,10 +36,8 @@ static func on_hour(t: int, h: int) -> void:
 
 
 static func _entities() -> Array:
-	var e := ["player"]
-	if GameState.company_id() != "":
-		e.append(GameState.company_id())
-	return e
+	return ["player"] + CompanyPortfolio.ids()
+
 
 
 static func pay_home_rent() -> void:
@@ -95,7 +93,7 @@ static func lease(pid: String) -> Dictionary:
 
 
 static func has_lease(pid: String) -> bool:
-	return D()["leases"].has(pid)
+	return D()["leases"].has(pid) and (D()["leases"][pid].get("entity","player")=="player" or D()["leases"][pid].get("entity","")==GameState.business_entity())
 
 
 static func buy_day_pass() -> Dictionary:

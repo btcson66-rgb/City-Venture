@@ -476,7 +476,7 @@ static func _h_return_refund(p: Dictionary) -> void:
 
 # ================================================================ inventory
 static func default_stock_location() -> String:
-	if GameState.data["living"]["leases"].has("suite_2b"):
+	if Living.has_lease("suite_2b"):
 		return "suite_2b"
 	return "riverside_studio"
 
@@ -510,11 +510,11 @@ static func space_block(location: String, qty: int) -> String:
 
 static func stock_locations() -> Array:
 	var out: Array = ["riverside_studio"]
-	if GameState.data["living"]["leases"].has("suite_2b"):
+	if Living.has_lease("suite_2b"):
 		out.append("suite_2b")
 	# any leased warehouse holds stock too (Pier 7, Harbor)
 	for pid in GameState.data["living"]["leases"]:
-		if str(DataDB.properties.get(pid, {}).get("kind", "")) == "warehouse":
+		if str(DataDB.properties.get(pid, {}).get("kind", "")) == "warehouse" and Living.has_lease(pid):
 			out.append(pid)
 	return out
 
@@ -898,6 +898,7 @@ static func pack_orders(loc: String, max_n := -1, quality := {}) -> int:
 			continue
 		var l := inv(loc)
 		var cost := snappedf(avg_cost(loc, o["product"]) * int(o["qty"]), 0.01)
+		HoldingGroups.pack_margin(o,loc,int(l[o["product"]]["qty"]))
 		l[o["product"]]["qty"] = int(l[o["product"]]["qty"]) - int(o["qty"])
 		o["cogs"] = cost
 		o["status"] = "packed"
@@ -1044,6 +1045,7 @@ static func _h_deliver(p: Dictionary) -> void:
 	if o.has("region") and not GlobalMarket.live(str(o["entity"])):
 		o["status"] = "cancelled"
 		return
+	HoldingGroups.deliver_margin(o)
 	o["status"] = "delivered"
 	o["delivered"] = Clock.now()
 	var price := snappedf(float(o["unit_price"]) * int(o["qty"]), 0.01)
@@ -1160,6 +1162,7 @@ static func resolve_return(order_id: String, choice: String) -> Dictionary:
 			var label := float(DataDB.ship_method("economy")["cost"].get("small", 4.2))
 			lines += [{"acct": "exp:shipping", "dr": label}, {"acct": "cash", "cr": label}]
 			if not o.get("defective", false):
+				HoldingGroups.return_margin(o)
 				# resellable: back into stock, reverse the COGS
 				_add_stock(o["location"], o["product"], int(o["qty"]), float(o.get("cogs", 0.0)) / maxi(1, int(o["qty"])), 0.0)
 				lines += [{"acct": "inventory", "dr": float(o.get("cogs", 0.0))}, {"acct": "cogs", "cr": float(o.get("cogs", 0.0))}]
@@ -1170,6 +1173,7 @@ static func resolve_return(order_id: String, choice: String) -> Dictionary:
 			if loc == "":
 				return {"ok": false, "error": I18n.t("No %s in stock to send.") % pname}
 			var uc := avg_cost(loc, o["product"])
+			HoldingGroups.consume_stock_margin(ent,loc,str(o["product"]),1,stock(loc,o["product"]))
 			inv(loc)[o["product"]]["qty"] = stock(loc, o["product"]) - 1
 			var ship := ship_cost(o, "express")
 			Ledger.post(ent, I18n.t("Replacement sent %s: %s (express)") % [order_id, pname], [

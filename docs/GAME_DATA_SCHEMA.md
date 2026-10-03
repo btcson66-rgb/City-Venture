@@ -591,3 +591,10 @@ Growth: data/story/goals.json and achievements.json define id/title/metric/value
 #92: data/legacy.json defines seven archetype formulas (metric/divisor/weight/cap), inheritance limits in home dollars, event category weights, and difficulty factors. Optional timeline metadata art/category/entity/npc preserves old row shapes. life_legacy holds immutable review snapshot, retired/shown flags. meta.previous_life stores prior slot/kind/review; difficulty increments per next life. paid_work_minutes, cafe_work_minutes, saas_work_minutes count actual clock minutes; gig_hours remains hours. New-life capital and inheritance are opening equity entries, never income. Separate slots preserve prior saves.
 
 `capital_market`（#93，lazy）：公司 entity、route、具價格／盡調／期限／status 的 offers、獨立 NPC targets 與 owner、npc_mergers、integrations、ipo 階段與答案／定價／next_quarter、實際 quarter_reports、pressure 的 until／各員工實際 hit、reputation、last_vote。新公司重設股權事件狀態，原事件文字仍在 timeline；舊狀態不移植為新公司的營收或投資。
+
+
+## Company portfolio and holding groups (#91)
+
+`company` is an array of entity IDs; `active_company` selects the visible operational record. The legacy string becomes the first array item. `company_contexts[id]` stores operational states, entity-specific flags and credit/cooldown. Global bank loans retain entity IDs; new business scheduler payloads carry `company_context`. First registration transfers sole-proprietor schedules to the new operational view, retaining receivable owner IDs. Terminal records remain inspectable after closure; new firms receive fresh active modules.
+
+`holding_groups` stores `basis`, `parents`, `loans`, `guarantees`, physical `trades`, stock/pending `margin` and timestamped `margin_events`, plus immutable month-end `reports`. Paired ledger accounts are `investment_in_subsidiary:<entity>`, `group_loan_receivable/payable:<loan>`, `group_interest_receivable/payable:<loan>`, `ic_revenue` and `ic_cost`. Goods orders carry optional internal margin metadata for delivery/refund elimination. City landmarks remain global; operating company state is separate. Configuration is `data/economy/holding_groups.json`.

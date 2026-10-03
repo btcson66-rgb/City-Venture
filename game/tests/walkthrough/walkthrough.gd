@@ -17,6 +17,9 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") == "holding_groups":
+		await _holding_groups_fixture()
+		return
 	if _arg("from") == "capital_market":
 		await _capital_market_fixture()
 		return
@@ -2831,3 +2834,70 @@ func _capital_market_fixture() -> void:
 		await bot.shot("capital_"+route+"_life_review")
 		bot.expect(SaveSystem.save_to(bot.out_dir.path_join("capital_"+route+".json")),"save ownership route")
 		bot.expect(Ledger.check_balanced(),"ownership route double-entry balance")
+
+func _holding_groups_fixture() -> void:
+	await bot.wait(4)
+	UIRoot._suppress_decisions=true
+	UIRoot.tutorial.st()["off"]=true
+	Clock.world_active=false
+	Company.register("River Original","retail_online","Riverside")
+	Company.open_business_account(3000)
+	var old:=GameState.company_id()
+	Ecommerce._add_stock("riverside_studio","phone_stand",10,5,0)
+	Ledger.post(old,"Paid stock fixture",[{"acct":"inventory","dr":50},{"acct":"cash","cr":50}])
+	StoryEngine.St()["active"].clear()
+	await bot.wait(4)
+	bot.step("Holding registration and funding")
+	UIRoot.close_all()
+	UIRoot.open_modal(RegistrationModal.new())
+	await bot.wait(.5)
+	var registration: RegistrationModal=UIRoot.top_modal()
+	await bot.type_into(registration.name_edit,"River Holding")
+	await bot.click_named("TypeHolding")
+	await bot.shot("holding_registration")
+	await bot.click_named("Submit")
+	var parent:=GameState.company_id()
+	bot.expect(GameState.data["entities"][parent]["type"]=="holding","holding registered through real choice")
+	Company.open_business_account(3000)
+	UIRoot.close_all()
+	UIRoot.open_modal(CompanyOS.new("home_laptop"))
+	await bot.click_named("Tab_group")
+	await _export_row_input("HoldingAdd_"+old)
+	await bot.shot("holding_first_subsidiary")
+	UIRoot.close_all()
+	UIRoot.open_modal(RegistrationModal.new())
+	await bot.wait(.4)
+	registration=UIRoot.top_modal()
+	await bot.type_into(registration.name_edit,"River Second")
+	await bot.click_named("Submit")
+	var second:=GameState.company_id()
+	Company.open_business_account(3000)
+	UIRoot.close_all()
+	UIRoot.open_modal(CompanyOS.new("home_laptop"))
+	await bot.wait(.4)
+	await bot.click_named("SwitchCompanyPrevious")
+	bot.expect(GameState.company_id()==parent,"actual company selector switches operational view")
+	await bot.click_named("Tab_group")
+	await _export_row_input("HoldingAdd_"+second)
+	await bot.shot("holding_ownership_graph")
+	await _export_row_input("HoldingLoan_"+old)
+	await bot.shot("holding_loan_and_elimination")
+	bot.expect(HoldingGroups.S()["loans"].size()==1,"actual parent funding")
+	bot.expect(HoldingGroups.goods(old,second,"phone_stand",2,8)["ok"],"stock physically transferred")
+	GameState.data["clock"]["minutes"]+=31*Clock.DAY
+	HoldingGroups.on_hour()
+	MonthClose.run(Clock.date()["year"],Clock.date()["month"])
+	UIRoot.top_modal().reset_scroll=true
+	UIRoot.top_modal().rebuild()
+	await bot.wait(.5)
+	await bot.shot("holding_consolidated_month_close")
+	bot.expect(HoldingGroups.S()["reports"].size()>0,"monthly consolidated statement persisted")
+	bot.expect(Ledger.check_balanced(),"all entity books balance")
+	bot.expect(SaveSystem.save_to(bot.out_dir.path_join("holding_group.json")),"portfolio evidence save")
+
+func _holding_key(code: int) -> void:
+	for pressed in [true,false]:
+		var event:=InputEventKey.new()
+		event.keycode=code;event.pressed=pressed
+		Input.parse_input_event(event)
+		await bot.wait(.12)

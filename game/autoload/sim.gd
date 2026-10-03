@@ -40,6 +40,8 @@ func _do_story_check() -> void:
 
 ## Schedule `kind` at absolute minute `t`. Kinds are "<module>.<handler>".
 func schedule(t: int, kind: String, payload := {}) -> void:
+	payload=payload.duplicate(true)
+	if kind.get_slice(".",0) in CompanyPortfolio.cfg()["business_prefixes"] and kind!="bank.appointment": payload["company_context"]=GameState.company_id()
 	var s: Array = GameState.data["schedule"]
 	var item := {"t": t, "kind": kind, "p": payload}
 	var lo := 0
@@ -56,7 +58,7 @@ func schedule(t: int, kind: String, payload := {}) -> void:
 func cancel(kind: String, key: String, value: Variant) -> void:
 	var s: Array = GameState.data["schedule"]
 	for i in range(s.size() - 1, -1, -1):
-		if s[i]["kind"] == kind and s[i]["p"].get(key) == value:
+		if s[i]["kind"] == kind and s[i]["p"].get(key) == value and str(s[i]["p"].get("company_context",GameState.company_id()))==GameState.company_id():
 			s.remove_at(i)
 
 
@@ -78,6 +80,12 @@ var phase := ""
 
 
 func _dispatch(kind: String, p: Dictionary) -> void:
+	var owner := str(p.get("company_context",GameState.company_id()))
+	if owner!=GameState.company_id():
+		CompanyPortfolio.run_in(owner,func():_dispatch_owned(kind,p))
+	else: _dispatch_owned(kind,p)
+
+func _dispatch_owned(kind: String,p: Dictionary) -> void:
 	phase = kind
 	if Industries.dispatch(kind, p):
 		return
@@ -110,6 +118,22 @@ func _dispatch(kind: String, p: Dictionary) -> void:
 
 
 func _on_hour(t: int, h: int) -> void:
+	if CompanyPortfolio.is_multi():
+		for id in CompanyPortfolio.ids(): CompanyPortfolio.run_in(str(id),func():_company_hour(t,h))
+	else:
+		_single_company_hour(t,h)
+		HoldingGroups.on_hour()
+		return
+	HoldingGroups.on_hour()
+	Living.on_hour(t,h)
+	EventEngine.on_hour(t,h)
+	Industries.on_hour(t,h,"careers")
+	Milestones.on_hour(t,h)
+	Growth.check()
+	_request_story_check()
+	phase=""
+
+func _single_company_hour(t: int, h: int) -> void:
 	OverseasPartners.on_hour()
 	LegacyBusiness.on_hour()
 	CapitalMarket.on_hour()
@@ -139,6 +163,21 @@ func _on_hour(t: int, h: int) -> void:
 	phase = "hour:story"
 	_request_story_check()
 	phase = ""
+
+
+func _company_hour(t: int,h: int) -> void:
+	OverseasPartners.on_hour()
+	LegacyBusiness.on_hour()
+	CapitalMarket.on_hour()
+	Compliance.on_hour(t,h)
+	Industries.on_hour(t,h,"sales")
+	Contracts.on_hour(t,h)
+	Staff.on_hour(t,h)
+	Industries.on_hour(t,h,"business")
+	Assets.on_hour(t,h)
+	Jobs.on_hour(t,h)
+	InternalSupply.on_hour(t,h)
+	GroupJobs.on_hour(t,h)
 
 
 func _on_month_end(year: int, month: int) -> void:

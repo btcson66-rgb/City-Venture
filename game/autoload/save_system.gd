@@ -175,6 +175,7 @@ func save_to(path: String, slot := -1, manual := true) -> bool:
 	SceneRouter.capture_location()
 	GameState.pack_rng()
 	DirAccess.make_dir_recursive_absolute(DIR)
+	CompanyPortfolio.capture()
 	var d := GameState.data
 	var summary_d := {
 		"name": d["player"]["name"], "company": GameState.business_display_name(),
@@ -240,6 +241,7 @@ func autosave() -> void:
 func _migrate(d: Dictionary) -> Dictionary:
 	# a save from an older build: add whatever sections and fields this build has that it doesn't
 	_fill_missing(d, GameState.template())
+	CompanyPortfolio.migrate(d)
 	# Before era-specific receipts, the generic news flag referred to the save's current era.
 	if d["flags"].get("news_read", false):
 		d["flags"]["news_read_y%d" % int(d["world"].get("year", 1))] = true

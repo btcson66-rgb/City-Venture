@@ -6,6 +6,7 @@ var name_edit: LineEdit
 var address := ""
 var error_label: Label
 var done := false
+var selected_type := "retail_online"
 
 
 func _init() -> void:
@@ -34,8 +35,14 @@ func build() -> void:
 	name_edit.name = "CompanyName"
 	body.add_child(name_edit)
 	body.add_child(UIK.label("Business type", 8, Art.C_MUTED, true))
-	for t in reg.get("business_types", []):
-		body.add_child(UIK.label("  ● " + I18n.t(t["name"]), 8, Art.C_WHITE))
+	var types := UIK.hbox(4)
+	var type_label:=UIK.label(I18n.t("Holding company") if selected_type=="holding" else I18n.t("Operating company"),8,Art.C_GOLD)
+	for option in [["retail_online","Operating company","TypeOperating"],["holding","Holding company","TypeHolding"]]:
+		var choice:=UIK.button(option[1],func():selected_type=option[0];type_label.text=I18n.t(option[1]),"tab")
+		choice.name=option[2]
+		types.add_child(choice)
+	body.add_child(types)
+	body.add_child(type_label)
 	body.add_child(UIK.label("Registered address", 8, Art.C_MUTED, true))
 	var ah := UIK.hbox(4)
 	var opts := [["Riverside Tower 7C (home)", "Riverside Tower 7C, Riverside"]]
@@ -46,7 +53,7 @@ func build() -> void:
 	for o in opts:
 		ah.add_child(UIK.button(o[0], func(): address = o[1]; rebuild(), "tab_active" if address == o[1] else "tab"))
 	body.add_child(ah)
-	body.add_child(UIK.kv("Registration fee", Fmt.money0(Company.registration_fee()) + (I18n.t("  (staff discount)") if Careers.has_perk("registration_discount") else ""), Art.C_GOLD))
+	body.add_child(UIK.kv("Registration fee", Fmt.money(Company.registration_fee()) + (I18n.t("  (staff discount)") if Careers.has_perk("registration_discount") else ""), Art.C_GOLD))
 	body.add_child(UIK.kv("Processing time", Fmt.duration_min(int(reg.get("processing_min", 45)))))
 	error_label = UIK.label("", 8, Art.C_RED)
 	body.add_child(error_label)
@@ -57,7 +64,7 @@ func build() -> void:
 
 
 func _submit() -> void:
-	var r := Company.register(name_edit.text, "retail_online", address)
+	var r := Company.register(name_edit.text, selected_type, address)
 	if not r["ok"]:
 		error_label.text = r["error"]
 		return

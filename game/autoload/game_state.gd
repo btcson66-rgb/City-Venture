@@ -65,7 +65,9 @@ func template(setup := {}, seed_v := 1) -> Dictionary:
 			"player": {"id": "player", "name": setup.get("name", "Alex"), "kind": "person", "bank_account": true,
 				"seller_account": "personal"},
 		},
-		"company": "",
+		"company": [],
+		"active_company": "",
+		"company_contexts": {},
 		"ledger": {"seq": 0, "journal": [], "balances": {}},
 		"ecommerce": {"listings": {}, "orders": {}, "purchase_orders": {}, "inventory": {}, "supplier_mods": [],
 			"counters": {"order": 1000, "po": 100, "listing": 1}, "demand_mods": [], "ad_price_mult": 1.0,
@@ -170,7 +172,7 @@ func stat(name: String) -> float:
 
 # ------------------------------------------------------------------ entities
 func company_id() -> String:
-	return str(data.get("company", ""))
+	return CompanyPortfolio.active_of(data)
 
 
 ## The entity whose books the business currently runs on.

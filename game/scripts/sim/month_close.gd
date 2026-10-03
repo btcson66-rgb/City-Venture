@@ -26,7 +26,8 @@ static func compute(entity: String, t0: int, t1: int) -> Dictionary:
 			personal_total += v2
 	var other_income := -float(mv.get("other_income", 0.0)) - float(mv.get("fx_gain_loss", 0.0))
 	var wages := -float(mv.get("wages", 0.0))   # part-time job pay (personal income, not business profit)
-	var business_profit := net_rev - cogs - opex_total + other_income
+	var internal_net := -float(mv.get("ic_revenue",0))-float(mv.get("ic_cost",0))
+	var business_profit := net_rev - cogs - opex_total + other_income + internal_net
 	var cash_open := Ledger.balance_at(entity, "cash", t0)
 	var cash_close := Ledger.balance_at(entity, "cash", t1)
 	# owner money in/out during the period (arrival savings, founder capital) - not operating cash
@@ -45,7 +46,7 @@ static func compute(entity: String, t0: int, t1: int) -> Dictionary:
 		"rent_office": _premises(opex), "rent_home": float(personal.get("rent_home", 0.0)),
 		"personal": personal, "personal_total": personal_total, "other_income": other_income,
 		"fx_gain_loss": -float(mv.get("fx_gain_loss", 0.0)),
-		"business_profit": business_profit, "profit": business_profit + wages - personal_total, "wages": wages,
+		"internal_net":internal_net, "business_profit": business_profit, "profit": business_profit + wages - personal_total, "wages": wages,
 		"cash_open": cash_open, "cash_close": cash_close, "cash_change": cash_close - cash_open, "owner_moves": owner_moves,
 		"ar": Ledger.balance_at(entity, "marketplace_balance", t1) + Ledger.balance_at(entity, "accounts_receivable", t1),
 		"ap": -Ledger.balance_at(entity, "accounts_payable", t1),
@@ -65,14 +66,13 @@ static func run(year: int, month: int) -> Dictionary:
 	var d := Time.get_datetime_dict_from_unix_time(int(Time.get_unix_time_from_datetime_dict({"year": year, "month": month, "day": 1, "hour": 0, "minute": 0, "second": 0})))
 	var t0 := t1 - _days_in_month(year, month) * Clock.DAY
 	t0 = maxi(0, t0)
-	var ents := ["player"]
-	if GameState.company_id() != "":
-		ents.append(GameState.company_id())
+	var ents: Array = ["player"]+CompanyPortfolio.ids()
 	var rep := {"period": "%04d-%02d" % [year, month], "label": "%s %d" % [Clock.MONTHS[month - 1], year], "t0": t0, "t1": t1, "entities": {}}
 	for e in ents:
 		rep["entities"][e] = compute(e, t0, t1)
 	GameState.data["reports"]["month_closes"].append(rep)
-	var main: Dictionary = rep["entities"][ents[-1]]
+	HoldingGroups.on_month_end(t0,t1)
+	var main: Dictionary = rep["entities"][GameState.company_id() if GameState.company_id()!="" else "player"]
 	GameState.data["stats"]["best_month_revenue"] = maxf(GameState.stat("best_month_revenue"), float(main["revenue"]))
 	if StoryEngine.St().get("chapter", "") == "ch6_cash_is_oxygen":
 		if float(main["cash_close"]) >= 0.0:

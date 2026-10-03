@@ -312,6 +312,7 @@ static func resolve_return(o: Dictionary, choice: String) -> Dictionary:
 		refund(o, 1.0, true)
 		Ledger.expense(str(o["entity"]), "shipping", shipping_cost(o, "economy"), "International return postage", {"type": "global_return"})
 		if not o.get("defective", false):
+			HoldingGroups.return_margin(o)
 			var cost := float(o.get("cogs", 0))
 			Ecommerce._add_stock(str(o["location"]), str(o["product"]), int(o["qty"]), cost / maxi(1, int(o["qty"])), 0.0)
 			Ledger.post(str(o["entity"]), "Returned overseas goods restocked", [{"acct": "inventory", "dr": cost}, {"acct": "cogs", "cr": cost}])

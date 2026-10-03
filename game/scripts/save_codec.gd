@@ -22,9 +22,23 @@ static func decode(text: String) -> Dictionary:
 	if float(payload["format"]) != GameState.SAVE_FORMAT or not payload.get("data") is Dictionary or not payload.get("summary") is Dictionary: return invalid
 	var data: Dictionary = payload["data"]
 	var tpl := GameState.template()
+	if data.get("company") is String: tpl["company"]=""
 	for key in ["meta", "player", "clock", "entities", "ledger", "ecommerce", "contracts", "schedule", "events", "story", "flags", "rng"]:
 		if not data.has(key): return invalid
 	if not _shape(data, tpl): return invalid
+	if data.get("company") is Array:
+		var known := {}
+		for id in data["company"]:
+			if not id is String or known.has(id) or not data["entities"].has(id) or data["entities"][id].get("kind","")!="company":return invalid
+			known[id]=true
+		var active:=str(data.get("active_company",""))
+		if active!="" and not known.has(active):return invalid
+		for id in data.get("company_contexts",{}):
+			if id!="" and not known.has(id):return invalid
+			var view=data["company_contexts"][id]
+			if not _record(view,{"states":{},"flags":{},"bank":{}}):return invalid
+			for key in view["states"]:
+				if tpl.has(key) and not _shape(view["states"][key],tpl[key]):return invalid
 	for pair in [["player", ["name", "location"]], ["clock", ["minutes", "start"]], ["ledger", ["seq", "journal", "balances"]], ["rng", ["seed", "state"]], ["meta", ["version", "format"]], ["story", ["chapter", "active", "done", "chapters_done"]]]:
 		for key in pair[1]:
 			if not data[pair[0]].has(key): return invalid

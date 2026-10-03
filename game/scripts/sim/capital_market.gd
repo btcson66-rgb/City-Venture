@@ -54,7 +54,7 @@ static func sell(id: String) -> Dictionary:
 	var founder := float(GameState.data.get("cap_table",{}).get("founder",1))
 	var sale_price := final_offer_price(offer)
 	var take := snappedf(sale_price*founder,.01)
-	var carrying := maxf(0,Ledger.balance("player","investments"))
+	var carrying := HoldingGroups.basis(GameState.company_id())
 	var gain := take-carrying
 	var lines: Array = [{"acct":"cash","dr":take},{"acct":"investments","cr":carrying}]
 	lines.append({"acct":"other_income","cr":gain} if gain >= 0 else {"acct":"exp:other","dr":-gain})

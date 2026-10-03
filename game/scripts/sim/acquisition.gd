@@ -121,7 +121,7 @@ static func decide(choice: String, ctx: Dictionary) -> Dictionary:
 static func _sell(now_total: float, later_total: float, ctx: Dictionary) -> void:
 	var founder := float(ctx.get("founder_share", 1.0))
 	var take := snappedf(now_total * founder, 0.01)
-	var carrying := maxf(0.0, Ledger.balance("player", "investments"))   # what the founder has put into the company
+	var carrying := HoldingGroups.basis(GameState.company_id())   # what the founder has put into the company
 	var gain := take - carrying
 	var lines: Array = [{"acct": "cash", "dr": take}, {"acct": "investments", "cr": carrying}]
 	lines.append({"acct": "other_income", "cr": gain} if gain >= 0.0 else {"acct": "exp:other", "dr": -gain})

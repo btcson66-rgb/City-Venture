@@ -76,7 +76,19 @@ func build() -> void:
 		"cafe": "Laptop · café table", "cafe_till": "Till · your café", "pier7": "Desk · Pier 7 yard office"}.get(terminal, terminal)
 	var top := UIK.hbox(6)
 	body.add_child(top)
-	top.add_child(UIK.title(GameState.business_display_name(), 11, Art.C_GOLD))
+	var companies := CompanyPortfolio.ids()
+	if companies.size()>1:
+		var selector := OptionButton.new()
+		selector.name="CompanySelector"
+		selector.custom_minimum_size=Vector2(130,18)
+		for id in companies:selector.add_item(GameState.entity_name(id))
+		selector.select(companies.find(GameState.company_id()))
+		selector.item_selected.connect(func(i):CompanyPortfolio.switch(str(companies[i]));tab="overview";rebuild())
+		top.add_child(selector)
+		var previous:=UIK.button("‹",func():CompanyPortfolio.switch(str(companies[posmod(companies.find(GameState.company_id())-1,companies.size())]));tab="overview";rebuild())
+		previous.name="SwitchCompanyPrevious"
+		top.add_child(previous)
+	else:top.add_child(UIK.title(GameState.business_display_name(), 11, Art.C_GOLD))
 	top.add_child(UIK.label(where, 7, Art.C_DIM))
 	top.add_child(UIK.expand())
 	_clock_label = UIK.label(Clock.fmt_datetime(), 7, Art.C_MUTED, true)
