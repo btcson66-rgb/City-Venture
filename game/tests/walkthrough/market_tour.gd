@@ -1,5 +1,5 @@
 extends "res://tests/walkthrough/settings_tour.gd"
-## Short market tour with three normal-policy seeds; no fixture income/orders.
+## Short market tour with three policies and seeds; no fixture income/orders.
 
 
 func _run() -> void:
@@ -16,27 +16,34 @@ func _run() -> void:
 	UIRoot._suppress_decisions = true
 	Replay.rank_path = out.path_join("history.json")
 	var samples: Array = []
-	for seed_value in [90, 91, 92]:
-		ReplayPolicy.start("inherited_cafe", seed_value)
-		Macro.initialize()
-		var opening := Replay.net_worth()
-		for day in 120:
-			ReplayPolicy.work(day)
-			# Normal business policy chooses retaining at its disclosed payroll cost.
-			for offer in Rivals.pending():
-				Rivals.answer(str(offer["employee"]), true)
-			if day % 10 == 0:
-				await get_tree().process_frame
-		var sample := {"seed": seed_value, "net_worth_gain": Replay.net_worth() - opening, "cash": Replay.metrics()["cash"], "revenue": Replay.metrics()["revenue"], "balanced": Ledger.check_balanced(), "rate": Macro.rate(), "cycle": Macro.S()["index"]}
-		samples.append(sample)
-		print("Market normal policy: " + JSON.stringify(sample))
-		if not sample["balanced"] or float(sample["cash"]) <= 0:
-			failures.append("Unbalanced or dead normal strategy for seed " + str(seed_value))
+	for policy in ["normal", "high_spending", "idle"]:
+		for seed_value in [90, 91, 92]:
+			ReplayPolicy.start("inherited_cafe", seed_value)
+			Macro.initialize()
+			var opening := Replay.net_worth()
+			if policy == "high_spending":
+				Cafe.set_ads(200.0)
+				Cafe.set_pastry_order(80)
+			for day in 120:
+				ReplayPolicy.work(day, policy == "idle")
+				# Active policies retain staff at their disclosed payroll cost.
+				if policy != "idle":
+					for offer in Rivals.pending():
+						Rivals.answer(str(offer["employee"]), true)
+				if day % 10 == 0:
+					await get_tree().process_frame
+			var sample := {"policy": policy, "seed": seed_value, "days": 120, "net_worth_gain": Replay.net_worth() - opening, "cash": Replay.metrics()["cash"], "revenue": Replay.metrics()["revenue"], "balanced": Ledger.check_balanced(), "rate": Macro.rate(), "cycle": Macro.S()["index"]}
+			samples.append(sample)
+			print("Market policy: " + JSON.stringify(sample))
+			if not sample["balanced"] or (policy == "normal" and float(sample["cash"]) <= 0):
+				failures.append("Unbalanced ledger or dead normal strategy for seed " + str(seed_value))
 	var average := 0.0
-	for sample in samples:
-		average += float(sample["net_worth_gain"]) / samples.size()
+	for sample in samples.filter(func(s): return s["policy"] == "normal"):
+		average += float(sample["net_worth_gain"]) / 3.0
 	if average <= 0:
 		failures.append("Normal policy does not profit on average")
+	if not samples.any(func(s): return float(s["net_worth_gain"]) < 0):
+		failures.append("No downside observed across the three policies")
 	ReplayPolicy.start("inherited_cafe", 90)
 	Macro.initialize()
 	Clock.advance(8 * Clock.DAY)
