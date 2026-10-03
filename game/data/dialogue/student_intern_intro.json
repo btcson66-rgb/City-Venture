@@ -1,0 +1,22 @@
+{
+ "id": "student_intern_intro",
+ "with": "student_intern",
+ "nodes": {
+  "start": [
+   {
+    "who": "student_intern",
+    "text": "Interns cost less but work slowly. Hire a designer and a media buyer to run three campaigns at once."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Open Campaign Mixer",
+      "next": "end"
+     }
+    ]
+   }
+  ],
+  "end": []
+ }
+}

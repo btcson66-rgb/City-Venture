@@ -1,0 +1,40 @@
+{
+ "id": "diane_harlow",
+ "name": "Diane Harlow",
+ "role": "Realty mentor",
+ "appearance": {
+  "presentation": "masculine",
+  "face": "square",
+  "hair": "messy",
+  "hair_color": "black",
+  "skin": "s5",
+  "eye_shape": "round",
+  "eye_color": "dark",
+  "brows": "thick",
+  "mouth": "grin",
+  "accessory": "none"
+ },
+ "outfit": "office_professional",
+ "outfit_tints": {
+  "top": "#2a3f66",
+  "bottom": "#2c3038"
+ },
+ "schedule": [
+  {
+   "days": "mon,tue,wed,thu,fri,sat",
+   "from": "08:00",
+   "to": "18:00",
+   "location": "interior:harlow_finch",
+   "spot": "agent",
+   "pose": "idle"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [],
+   "conversation": "diane_harlow_intro",
+   "action": "real_estate_open"
+  }
+ ],
+ "phone_contact": false
+}

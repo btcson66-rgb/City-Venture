@@ -1,0 +1,22 @@
+{
+ "id": "mara_quinn_intro",
+ "with": "mara_quinn",
+ "nodes": {
+  "start": [
+   {
+    "who": "mara_quinn",
+    "text": "Meridian and Volt sell steady volume on thin margins. You need a ten-car fleet, a showroom and a deposit, and you must always keep new cars on the floor. Service tickets after the sale are where the dealership earns."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Talk franchise",
+      "next": "end"
+     }
+    ]
+   }
+  ],
+  "end": []
+ }
+}

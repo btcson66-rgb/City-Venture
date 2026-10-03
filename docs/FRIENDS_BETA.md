@@ -12,10 +12,12 @@ contract for the beta. Work order: #21 → #36 → #39 → #44 → #29 → #22 �
 | Area | In the beta |
 |---|---|
 | Story | Chapters 1–12, then free play with the growth goal. Season 2 (Chapters 13–18) is not visible. |
-| Businesses | E-commerce, freelance consulting, SaaS, the Old Town café, Harbor logistics. |
-| Districts | Riverside, Startup Hub, Civic Center, Financial, Shopping Street, Old Town, Harbor. |
+| Businesses | E-commerce, freelance consulting, SaaS, the Old Town café, Harbor logistics, manufacturing (#64), real estate (#65), media (#66). |
+| Districts | Riverside, Startup Hub, Civic Center, Financial, Shopping Street, Old Town, Harbor, Industrial (#64), Residential (#65), University (#66). |
 | Systems | Company, bank, loans, staff, contracts, month close, forecast, settlement rails, compliance, insolvency, wardrobe, minigames, tutorial, "!" badges, help cards, autosave, save slots, F12 problem report. |
 | New for the beta | Purchase cancel/returns (#21), safe company closure (#36), interaction markers + City Guide (#39), economy balance (#29), save export/import (#22), "what's new" card and itch.io publishing (#23), "!" badges everywhere (#25). |
+
+> Release note: the industry framework and new industries (#62 art wiring, #63 registry, #64 manufacturing, #65 real estate, #66 media) are merged into 0.2.0-beta. Their districts and businesses are `active`, so the "planned stays hidden" rules above keep covering the rest.
 
 ## 2. The "nothing unfinished" rules
 
@@ -51,17 +53,21 @@ contract for the beta. Work order: #21 → #36 → #39 → #44 → #29 → #22 �
 
 ## 4. How we know it is ready (release checklist)
 
-- [ ] Every beta ticket merged: #21, #36, #39, #44, #29, #22, #23, #25.
-- [ ] `python3 tools/beta_audit.py`: 0 hits (banned words in player-visible data and `I18n.t()` strings).
-- [ ] Unit tests all pass; `python3 tools/i18n_extract.py` missing 0; `python3 tools/wiki_check.py` OK.
-- [ ] Full walkthrough in Chinese from New Game: 0 failures; english_audit lists only names, brands and IDs.
-- [ ] Web build checked in a real browser (headless Chromium, see below): tutorial bot 0 failures; no hex boxes;
-      refresh keeps the save.
-- [ ] A fresh-eyes pass: a bot (`--bot=beta_tour`, new) enters every enterable building in every open district, checks
-      that each has a working interaction, opens every list (Business Board, City Map, Metro, Permits, City Guide) and
-      screenshots them; the screenshots are read by a person before release.
-- [ ] Version `0.2.0-beta`, patch notes in `game/data/help/patch_notes.json`, tester notes updated.
-- [ ] Published with `bash tools/release/publish_itch.sh`; an old 0.1.8 browser save loads in 0.2.0.
+Local acceptance completed for #45 on 2026-10-02. See `evidence/2026-10-02_45/README.md` for the exact results,
+logs, reviewed JPG frames, archive checks and remaining external gates. The user authorized stacked Draft PRs;
+dependency merges and itch publication are intentionally recorded separately.
+
+- [ ] Every beta ticket merged: #21 and #36 are closed; Draft PRs #75, #77, #79, #80, #81, #83 must merge in order.
+- [x] `python3 tools/beta_audit.py`: 0 hits.
+- [x] Unit tests 296/296; `python3 tools/i18n_extract.py --check` missing 0; `python3 tools/wiki_check.py` OK.
+- [x] Full English and Traditional Chinese walkthroughs from New Game: 0 failures; audit candidates checked as names, brands, IDs and locale/version labels.
+- [x] Real Chromium tutorial: 0 failures, 20 reviewed frames without glyph boxes; refresh preserves the save.
+- [x] English and Traditional Chinese `beta_tour`: 0 failures; every enterable building in all active districts checked; 39 reviewed frames per locale.
+- [x] English and Traditional Chinese screen tour: 0 failures; 40 reviewed frames per locale, including loans, permits, company tabs, closure, save slots and badges.
+- [x] Version `0.2.0-beta`, nine bilingual patch-note lines, tester instructions updated.
+- [x] Genuine 0.1.8 browser save imports and continues in 0.2.0; update card acknowledgment survives refresh.
+- [x] `bash tools/package_release.sh`: Windows, Linux, macOS and Web archives produced; SHA-256 manifest recorded.
+- [ ] Published to itch.io. Claude performs this after sequential review/merge with `bash tools/package_release.sh && bash tools/release/publish_itch.sh`.
 
 Web check recipe (what Claude used for 0.1.8-test8.1): export the Web preset with `exclude_filter=""` to a scratch
 folder (do not commit that change), set `"args":["--","--bot=tutorial","--lang=zh_TW"]` in the scratch `index.html`,

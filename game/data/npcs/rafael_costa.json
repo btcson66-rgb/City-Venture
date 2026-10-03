@@ -1,0 +1,40 @@
+{
+ "id": "rafael_costa",
+ "name": "Rafael Costa",
+ "role": "Electrician",
+ "appearance": {
+  "presentation": "masculine",
+  "face": "oval",
+  "hair": "short_neat",
+  "hair_color": "black",
+  "skin": "s3",
+  "eye_shape": "narrow",
+  "eye_color": "dark",
+  "brows": "thick",
+  "mouth": "neutral",
+  "accessory": "none"
+ },
+ "outfit": "logistics_site",
+ "outfit_tints": {
+  "top": "#2f7d5b",
+  "bottom": "#2c3038"
+ },
+ "schedule": [
+  {
+   "days": "mon,tue,wed,thu,fri,sat",
+   "from": "08:00",
+   "to": "18:00",
+   "location": "interior:helio_warehouse",
+   "spot": "electrician",
+   "pose": "idle"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [],
+   "conversation": "rafael_costa_intro",
+   "action": "energy_open"
+  }
+ ],
+ "phone_contact": false
+}

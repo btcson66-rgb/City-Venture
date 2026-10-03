@@ -3,6 +3,30 @@ extends RefCounted
 var runner
 
 
+func test_framework_assets_are_included_in_settlement_wealth() -> void:
+	_start("part_time_start")
+	var before := Replay.net_worth()
+	Ledger.post("player", "QA inherited industry assets", [{"acct": "fixed_assets", "dr": 200}, {"acct": "property_assets", "dr": 300}, {"acct": "construction_in_progress", "dr": 400}, {"acct": "equity", "cr": 900}], {"type": "opening"})
+	runner.eq(Replay.net_worth(), before + 900, "framework asset books count once")
+	runner.check(Ledger.check_balanced(), "inherited asset journal balances")
+
+
+func test_property_income_uses_jobs_and_real_estate_segment() -> void:
+	_start("family_property")
+	Clock.advance(90 * Clock.DAY)
+	var rents: Array = Jobs.S()["items"].values().filter(func(job): return job.has("property"))
+	runner.check(not rents.is_empty(), "occupied months have rental contracts")
+	for job in rents:
+		runner.check(job["status"] == "paid" and job["segment"] == "real_estate" and job["client"] in RealEstate.cfg()["tenant_names"], "named tenant, real invoice/payment, registered segment")
+	var count := rents.size()
+	GameState.data = JSON.parse_string(JSON.stringify(GameState.data))
+	Replay.on_hour(Clock.now(), 9)
+	runner.eq(Jobs.S()["items"].size(), count, "restored period cannot collect twice")
+	var segments := Segments.compute("player", 0, Clock.now() + 1)
+	runner.eq(segments["rows"]["real_estate"]["revenue"], -Ledger.balance("player", "revenue"), "rental receipts reach the industry report")
+	runner.check(Ledger.check_balanced(), "rental invoices and receipts balance")
+
+
 func _start(id: String, seed_value := 89, extra := {}) -> void:
 	var options := {"difficulty": "standard", "scenario": id, "story": false}
 	options.merge(extra, true)

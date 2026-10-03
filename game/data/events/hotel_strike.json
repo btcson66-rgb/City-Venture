@@ -1,0 +1,62 @@
+{
+ "id": "hotel_strike",
+ "category": "market",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:hotel_active",
+   "flag:hotel_staffed"
+  ],
+  "chance": 0.012,
+  "cooldown_days": 30,
+  "earliest_day": 10
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "henri_dubois",
+  "title": "Housekeeping strike",
+  "icon": "warning",
+  "lines": [
+   "Your housekeepers are threatening to walk out over the rota."
+  ]
+ },
+ "choices": [
+  {
+   "id": "raise",
+   "label": "Pay a $350 settlement bonus each",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "hotel",
+     "kind": "strike_raise"
+    }
+   ],
+   "outcome": "The team stays and no rooms are lost."
+  },
+  {
+   "id": "replace",
+   "label": "Hire replacement cleaners",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "hotel",
+     "kind": "strike_replace"
+    }
+   ],
+   "outcome": "Cleaning capacity drops to sixty percent for six days."
+  },
+  {
+   "id": "hold",
+   "label": "Hold firm",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "hotel",
+     "kind": "strike_hold"
+    }
+   ],
+   "outcome": "Cleaning nearly stops for ten days and morale falls."
+  }
+ ]
+}

@@ -33,6 +33,8 @@ func test_settings_round_trip_preserves_unknown_sections_and_game() -> void:
 
 
 func test_subtitles_wait_for_choices_manual_mode_and_settings() -> void:
+	UIRoot.close_all()
+	await runner.get_tree().process_frame
 	var dialogue := DialogueBox.new()
 	runner.get_tree().root.add_child(dialogue)
 	dialogue.active = true
@@ -71,6 +73,7 @@ func test_remap_conflict_reset_and_persistence() -> void:
 	runner.eq(store.reset_bindings(), OK, "defaults saved")
 	store.load_settings()
 	runner.eq(store.bindings, store.BINDINGS, "defaults survived restart")
+	runner.eq(store.key_caption("building_activities"), "I", "new activity shortcut uses a registered binding")
 	runner.eq(InputMap.action_get_events("phone").size(), 2, "no duplicate bindings")
 	store.apply_input()
 	runner.eq(InputMap.action_get_events("phone").size(), 2, "repeat application idempotent")

@@ -1,0 +1,40 @@
+{
+ "id": "mara_quinn",
+ "name": "Mara Quinn",
+ "role": "Franchise sales manager",
+ "appearance": {
+  "presentation": "feminine",
+  "face": "oval",
+  "hair": "bob",
+  "hair_color": "brown",
+  "skin": "s3",
+  "eye_shape": "round",
+  "eye_color": "dark",
+  "brows": "arched",
+  "mouth": "smile",
+  "accessory": "none"
+ },
+ "outfit": "office_professional",
+ "outfit_tints": {
+  "top": "#2a3f66",
+  "bottom": "#2c3038"
+ },
+ "schedule": [
+  {
+   "days": "mon,tue,wed,thu,fri,sat",
+   "from": "09:00",
+   "to": "18:00",
+   "location": "interior:gateway_car_rental",
+   "spot": "sales",
+   "pose": "idle"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [],
+   "conversation": "mara_quinn_intro",
+   "action": "automotive_open"
+  }
+ ],
+ "phone_contact": false
+}

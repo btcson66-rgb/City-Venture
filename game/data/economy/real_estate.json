@@ -1,0 +1,139 @@
+{
+ "licence_fee": 250,
+ "licence_days": 3,
+ "permit_fee": 4800,
+ "permit_days": 7,
+ "broker_rent": 2200,
+ "show_minutes": 90,
+ "show_cost": 180,
+ "commission_rates": {
+  "hard": 0.03,
+  "balanced": 0.025,
+  "soft": 0.02
+ },
+ "negotiation_chance": {
+  "hard": -0.08,
+  "balanced": 0,
+  "soft": 0.08
+ },
+ "match_chance": 0.35,
+ "weekly_mandates": 2,
+ "weekly_clients": 3,
+ "market_walk": 0.07,
+ "rate_impact": 3,
+ "market_min": 0.55,
+ "market_max": 1.7,
+ "mortgage_margin": 0.025,
+ "down_min": 0.2,
+ "down_max": 0.3,
+ "mortgage_credit": 620,
+ "screen_min": 450,
+ "screen_max": 800,
+ "vacancy_base_days": 4,
+ "vacancy_price_days": 35,
+ "vacancy_screen_days": 25,
+ "monthly_tax_rate": 0.0005,
+ "monthly_management": 120,
+ "tenant_types": {
+  "steady": {
+   "arrears": 0.04,
+   "damage": 0.02,
+   "credit": [
+    700,
+    800
+   ]
+  },
+  "student": {
+   "arrears": 0.16,
+   "damage": 0.1,
+   "credit": [
+    550,
+    740
+   ]
+  },
+  "freelancer": {
+   "arrears": 0.24,
+   "damage": 0.06,
+   "credit": [
+    480,
+    780
+   ]
+  }
+ },
+ "repair_cost": 1800,
+ "damage_cost": 1200,
+ "renovations": {
+  "basic": {
+   "cost": 15000,
+   "days": 10,
+   "uplift": 0.08
+  },
+  "modern": {
+   "cost": 35000,
+   "days": 20,
+   "uplift": 0.18
+  },
+  "premium": {
+   "cost": 60000,
+   "days": 35,
+   "uplift": 0.28
+  }
+ },
+ "overrun_chance": 0.3,
+ "overrun_fraction": 0.2,
+ "development": {
+  "small": {
+   "cost": 1200000,
+   "days": 60,
+   "units": 6
+  },
+  "medium": {
+   "cost": 2000000,
+   "days": 90,
+   "units": 10
+  },
+  "large": {
+   "cost": 3000000,
+   "days": 120,
+   "units": 15
+  }
+ },
+ "development_unit_price": 260000,
+ "development_unit_rent": 1850,
+ "development_delay_days": 14,
+ "neighbor_delay_days": 7,
+ "neighbor_cost": 6000,
+ "material_increase": 0.12,
+ "rate_shock": 0.015,
+ "rate_shift_decay": 0.25,
+ "closure_recovery": 0.65,
+ "agent_salary_week": 900,
+ "tenant_names": [
+  "Avery Brooks",
+  "Jordan Lin",
+  "Casey Morgan",
+  "Samira Chen",
+  "Noah Ellis",
+  "Mina Cole"
+ ],
+ "market_heat_floor": 0.2,
+ "market_heat_rate_sensitivity": 20,
+ "equity_factor": 0.5,
+ "urgency_chance": 0.01,
+ "agent_chance": 0.03,
+ "collection_chance": 0.65,
+ "budget_range": [
+  0.85,
+  1.15
+ ],
+ "rent_min": 0.7,
+ "rent_max": 1.6,
+ "mortgage_year_min": 20,
+ "mortgage_year_max": 30,
+ "default_screen": 650,
+ "match_weights": [
+  0.5,
+  0.3,
+  0.2
+ ]
+}

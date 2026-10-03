@@ -6,7 +6,7 @@ func _init() -> void:
 	pauses_time = true
 	title_text = "Paused"
 	icon_name = "settings"
-	panel_size = Vector2(330, 318)
+	panel_size = Vector2(420, 344)
 
 
 func build() -> void:
@@ -32,6 +32,21 @@ func build() -> void:
 		var overview := UIK.button("Scenario progress", func(): UIRoot.open_modal(RunCardModal.new(Replay.S().get("status", "running") == "running")))
 		overview.name = "RunOverview"
 		body.add_child(overview)
+	var transfers := UIK.hbox(4)
+	var export_button := UIK.button("Export save", SaveSystem.show_export)
+	export_button.name = "ExportSave"
+	transfers.add_child(export_button)
+	var import_button := UIK.button("Import save", SaveSystem.show_import)
+	import_button.name = "ImportSave"
+	transfers.add_child(import_button)
+	transfers.add_child(UIK.tip("save_export"))
+	body.add_child(transfers)
+	var sp := UIK.hbox(4)
+	sp.add_child(UIK.label("Day length", 8, Art.C_MUTED))
+	for opt in [[1.0, "Slow"], [1.5, "Normal"]]:
+		sp.add_child(UIK.button(opt[1], func(): Clock.speed = opt[0]; rebuild(), "tab_active" if is_equal_approx(Clock.speed, opt[0]) else "tab"))
+	body.add_child(sp)
+	body.add_child(UIK.label("Time only moves forward by living it: working a shift, or sleeping at night.", 7, Art.C_DIM))
 	var lang := UIK.hbox(4)
 	lang.add_child(UIK.label("Language", 8, Art.C_MUTED))
 	for l in I18n.LOCALES:
@@ -49,6 +64,15 @@ func build() -> void:
 		UIRoot.tutorial.restart()
 		close()))
 	body.add_child(help)
+	var markers := UIK.hbox(4)
+	markers.add_child(UIK.label("Show interaction markers", 8, Art.C_MUTED))
+	var markers_on := Interactable.markers_enabled()
+	for setting in [[true, "On"], [false, "Off"]]:
+		var value: bool = setting[0]
+		var toggle := UIK.button(setting[1], func(): Interactable.set_markers(value); rebuild(), "tab_active" if value == markers_on else "tab")
+		toggle.name = "InteractionMarkersOn" if value else "InteractionMarkersOff"
+		markers.add_child(toggle)
+	body.add_child(markers)
 	body.add_child(UIK.button("Report a problem (F12)", func():
 		close()
 		UIRoot.report_problem()))

@@ -1,0 +1,117 @@
+{
+ "id": "observation_deck",
+ "name": "Skyline Observation Deck",
+ "category": "Tourist attraction",
+ "district": "luxury_heights",
+ "type": "public",
+ "hours": {
+  "open": "08:00",
+  "close": "22:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "observation_deck",
+  "fallback": "civic_annex",
+  "x": 860,
+  "sign": "Observation Deck"
+ },
+ "interior": {
+  "size": [
+   24,
+   14
+  ],
+  "floor": "wood_warm",
+  "wall": "navy_panel",
+  "ambient": "office",
+  "props": [
+   {
+    "sprite": "window_wide_day",
+    "fallback": "window_day",
+    "x": 40,
+    "y": 4,
+    "wall": true,
+    "night": "window_wide_night"
+   },
+   {
+    "sprite": "brochure_stand",
+    "x": 24,
+    "y": 70
+   },
+   {
+    "sprite": "info_kiosk",
+    "x": 270,
+    "y": 60
+   },
+   {
+    "sprite": "desk",
+    "x": 130,
+    "y": 62
+   },
+   {
+    "sprite": "office_chair",
+    "x": 146,
+    "y": 50,
+    "solid": false
+   },
+   {
+    "sprite": "waiting_sofa",
+    "x": 60,
+    "y": 140
+   },
+   {
+    "sprite": "plant_big",
+    "x": 346,
+    "y": 140
+   },
+   {
+    "sprite": "framed_art",
+    "x": 200,
+    "y": 12,
+    "wall": true
+   },
+   {
+    "sprite": "rug_small",
+    "x": 220,
+    "y": 150,
+    "floor": true
+   }
+  ],
+  "interactables": [
+   {
+    "id": "tour_desk",
+    "at": [
+     150,
+     100
+    ],
+    "label": "Ask about group tours",
+    "action": "talk",
+    "params": {
+     "npc": "owen_blake"
+    }
+   },
+   {
+    "id": "view",
+    "at": [
+     90,
+     40
+    ],
+    "label": "Look at the city view",
+    "action": "look",
+    "params": {
+     "icon": "info",
+     "text": "Tour groups gather here before and after the evening view. Festival weekends fill every hotel in the city."
+    }
+   }
+  ],
+  "npc_spots": {
+   "agent": [
+    150,
+    84
+   ],
+   "tour": [
+    90,
+    150
+   ]
+  }
+ }
+}

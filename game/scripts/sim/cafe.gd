@@ -99,7 +99,7 @@ static func fit_out() -> Dictionary:
 	var cost := float(cfg().get("fitout_cost", 5800))
 	if Ledger.cash(entity()) < cost:
 		return {"ok": false, "error": I18n.t("The fit-out costs %s.") % Fmt.money0(cost)}
-	Ledger.expense(entity(), "fitout", cost, I18n.t("Café fit-out: espresso machine, counter, tables"), {"type": "cafe"})
+	Ledger.expense(entity(), "fitout", cost, I18n.t("Café fit-out: espresso machine, counter, tables"), {"segment": "cafe", "type": "cafe"})
 	S()["fit_ready"] = Clock.now() + Clock.DAY
 	GameState.timeline(I18n.t("Fitted out %s.") % display_name(), "business")
 	return {"ok": true, "cost": cost, "ready": int(S()["fit_ready"])}
@@ -125,7 +125,7 @@ static func apply_permit() -> Dictionary:
 	var fee := float(cfg().get("permit_fee", 280))
 	if Ledger.cash(entity()) < fee:
 		return {"ok": false, "error": I18n.t("The licence fee is %s.") % Fmt.money0(fee)}
-	Ledger.expense(entity(), "registration", fee, "Food handling licence", {"type": "permit"})
+	Ledger.expense(entity(), "registration", fee, "Food handling licence", {"segment": "cafe", "type": "permit"})
 	S()["permit_ready"] = Clock.now() + int(cfg().get("permit_hours", 48)) * 60
 	Sim.schedule(int(S()["permit_ready"]), "cafe.permit", {})
 	return {"ok": true, "fee": fee, "ready": int(S()["permit_ready"])}
@@ -156,7 +156,7 @@ static func order_supplies(id: String) -> Dictionary:
 	if Ledger.cash(entity()) < cost:
 		return {"ok": false, "error": I18n.t("You need %s.") % Fmt.money0(cost)}
 	Ledger.post(entity(), I18n.t("Old Town Roasters: supplies for %d cups") % int(p["cups"]),
-		[{"acct": "cogs", "dr": cost}, {"acct": "cash", "cr": cost}], {"type": "cafe"})
+		[{"acct": "cogs", "dr": cost}, {"acct": "cash", "cr": cost}], {"segment": "cafe", "type": "cafe"})
 	S()["incoming"] = int(S()["incoming"]) + int(p["cups"])
 	var t := Clock.now() - Clock.now() % Clock.DAY + Clock.DAY + 6 * 60
 	Sim.schedule(t, "cafe.supplies", {"cups": int(p["cups"])})
@@ -205,7 +205,7 @@ static func rating_factor() -> float:
 
 
 static func ads_factor() -> float:
-	return 1.0 + 0.35 * (1.0 - exp(-float(S()["ads"]) / 25.0))
+	return (1.0 + 0.35 * (1.0 - exp(-float(S()["ads"]) / 25.0))) * Media.demand_boost("cafe")
 
 
 ## Expected customers who want a coffee in hour `hh` (before the counter's capacity and the supplies).
@@ -308,10 +308,10 @@ static func _open_doors() -> void:
 	var n := int(s["pastry_order"])
 	if n > 0:
 		var cost := snappedf(n * float(item("pastry").get("unit_cost", 1.3)) * World.cost_mult(SUPPLIER), 0.01)
-		Ledger.post(entity(), I18n.t("Bakery delivery: %d pastries") % n, [{"acct": "cogs", "dr": cost}, {"acct": "cash", "cr": cost}], {"type": "cafe"})
+		Ledger.post(entity(), I18n.t("Bakery delivery: %d pastries") % n, [{"acct": "cogs", "dr": cost}, {"acct": "cash", "cr": cost}], {"segment": "cafe", "type": "cafe"})
 		s["pastries"] = n
 	if float(s["ads"]) > 0.0:
-		Ledger.expense(entity(), "advertising", float(s["ads"]), I18n.t("Flyers and a board for %s") % display_name(), {"type": "cafe"})
+		Ledger.expense(entity(), "advertising", float(s["ads"]), I18n.t("Flyers and a board for %s") % display_name(), {"segment": "cafe", "type": "cafe"})
 
 
 static func _serve_hour(t0: int, hh: int) -> void:
@@ -350,12 +350,12 @@ static func _close_day() -> void:
 	if gross > 0.0:
 		var fee := snappedf(gross * float(cfg().get("card_fee", 0.019)), 0.01)
 		Ledger.post(entity(), I18n.t("%s till: %d customers") % [display_name(), int(td["served"])],
-			[{"acct": "cash", "dr": gross - fee}, {"acct": "exp:platform_fees", "dr": fee}, {"acct": "revenue", "cr": gross}], {"type": "cafe"})
+			[{"acct": "cash", "dr": gross - fee}, {"acct": "exp:platform_fees", "dr": fee}, {"acct": "revenue", "cr": gross}], {"segment": "cafe", "type": "cafe"})
 	if int(td["open_hours"]) > 0:
 		_update_rating(td)
 		GameState.inc_stat("cafe_customers", int(td["served"]))
 		GameState.inc_stat("cafe_days_open")
-		var msg := I18n.t("%s closed: %d customers, %s in the till.") % [display_name(), int(td["served"]), Fmt.money(gross)]
+		var msg := I18n.t("%s closed: %d customers, %s in the till.") % [display_name(), int(td["served"]), Fmt.money0(gross)]
 		if int(td["queue_lost"]) > 0:
 			msg += " " + I18n.t("%d walked out of the queue.") % int(td["queue_lost"])
 		if int(td["stock_lost"]) > 0:
@@ -409,3 +409,25 @@ static func handle(kind: String, p: Dictionary) -> void:
 				GameState.set_flag("food_permit")
 				GameState.timeline("Food handling licence granted.", "business")
 				EventBus.notify.emit("City Hall: your food handling licence is approved.", "good", "civic")
+
+
+static func is_running() -> bool:
+	return leased()
+
+
+static func os_tab() -> Dictionary:
+	return {"id":"cafe", "label":"Café", "icon":"coffee", "method":"_tab_cafe", "order":3}
+
+
+static func board_detail() -> Callable:
+	return IndustryViews.cafe
+
+
+static func segment_tag() -> String:
+	return "cafe"
+
+
+static func on_company_closed(ent: String) -> void:
+	if entity() == ent:
+		S()["owner_until"] = -1
+		S()["owner_from"] = -1

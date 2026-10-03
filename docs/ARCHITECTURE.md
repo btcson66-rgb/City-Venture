@@ -208,6 +208,17 @@ Each objective has `complete_when` conditions (tiny condition DSL shared with ev
 
 ## 13. Rendering and presentation
 
+- Detail art resolution (`#62`): `Art.tex(path)` prefers `assets/world_detail/<path>.png`. Its cached ImageTexture retains
+  the full imported image and overrides only the logical size to the native image's dimensions (or one quarter for
+  detail-only files). Atlas regions, nine-slice margins, backdrop pan and UI hit targets remain in native pixels.
+  `backdrops/`, `cards/`, `events/`, `city_map/` and `world_map/` share an eight-entry LRU cache, including
+  explicit `world_detail/` paths. Texture reads refresh recency; existence probes do not. Eviction releases only
+  the cache reference so active scenes remain valid. All other texture categories stay permanently cached.
+  Explicit `world_detail/` keys retain physical dimensions for existing world/character fitting code. World collision
+  continues reading the native alpha mask. Backgrounds and maps use lossy WebP import at quality 0.85; other art stays
+  lossless. Release presets exclude only `tests/*`; packaging enforces decimal MB ceilings through
+  `tools/qa/build_size_check.py`: Web `index.pck` <= 160 MB, Windows release zip <= 180 MB.
+
 - Base resolution **640×360**, `canvas_items` stretch, `keep` aspect, nearest filtering, 2D transform snapping. Default window 1280×720 (2×), and 1920×1080 renders at 3×.
 - Characters: layered 32×48 frames (body/skin, face details, hair back/front, outfit, accessories), three directions (down, side, up) × four walk frames. Hair, skin and eye colours use `modulate` on grayscale-ramp layers so a small number of sheets produces the whole creator space.
 - Environment: 16 px tile grid. Buildings are pre-composed modular facades with a separate night-lights overlay.
@@ -250,3 +261,16 @@ Each objective has `complete_when` conditions (tiny condition DSL shared with ev
 | Integration | `tests/integration/*.gd` boots real scenes headless: router, doors, interactables, closed hours, Company OS gating. |
 | Walkthrough bot | `tests/walkthrough/bot.gd` drives the real game with synthetic input events (movement actions and mouse clicks on UI) through New Game → Creator → Apartment → City → Cafe → Co-work → Business → First Sale → Registration → Company OS → Month Close. Run headless for PASS/FAIL, and under Xvfb + Movie Maker for the video. |
 | Human playtest | Needs a human. Tracked in `QA_REPORT.md` and never marked PASS by the agent. |
+
+
+## Industry framework (#63)
+
+`Industries.all()` defines the five existing modules, event prefixes, legacy hour slots, and optional world action callbacks. Each sim module exposes `is_running`, `os_tab`, `board_detail`, `segment_tag`, and `on_company_closed` in addition to its hourly/event handlers. The sales → contracts → living → events → consulting → staff → SaaS → café → logistics order is preserved. Company OS renders registered running tabs and separately offers inactive consulting/software setup actions; the business board invokes module render callbacks in IndustryViews. New modules can provide a render Callable in their tab descriptor.
+
+Every new journal entry gets source.segment. Existing untagged saves are attributed when reported without rewriting the journal. Segments reports this/last month and allocates shared operating expenses by positive net revenue, rounding cents and placing the remainder in the final recipient. With no revenue, expenses remain in Shared. The sum uses MonthClose's established business-profit convention, including other income.
+
+Jobs provides product-independent offer/accept/progress/deliver/invoice and Net 0/30/60 settlement, deposit liability, penalties, terminal closure and collection guards. Contracts reuses the deposit/invoice line builders and retains negotiation, inventory, quantities, story receipts and closure handling. Old product-contract fields and schedule names are unchanged.
+
+Assets manages capitalized purchases, rentals/deposits, straight-line daily depreciation (exp:depreciation), maintenance and faults, and auctions at 40–60% of purchase price. Book asset values and accepted Jobs join lending collateral. Legacy logistics vans are registered as already expensed assets: their original exp:vehicle purchase, insurance, upkeep and resale journals stay numerically identical; they are not depreciated a second time. Generic assets use fixed_assets and book depreciation. All new state is lazy and serializable.
+
+QA `--bot=walkthrough --seed=<n> --daily-trace` and Godot `--fixed-fps 60` permit identical-clock migration comparisons. daily_results.json records day, ledger balances, statistics and RNG state; wall-clock/render metadata are excluded. Normal games continue using random seeds and real-time pacing.

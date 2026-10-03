@@ -1,0 +1,49 @@
+{
+ "id": "hotel_slump",
+ "category": "market",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:hotel_active"
+  ],
+  "chance": 0.02,
+  "cooldown_days": 30,
+  "earliest_day": 3
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "henri_dubois",
+  "title": "Low-season slump",
+  "icon": "warning",
+  "lines": [
+   "Bookings have dried up. You can discount or wait for the season to turn."
+  ]
+ },
+ "choices": [
+  {
+   "id": "wait",
+   "label": "Wait it out",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "hotel",
+     "kind": "slump"
+    }
+   ],
+   "outcome": "Demand is lower for four weeks, then returns on its own."
+  },
+  {
+   "id": "promo",
+   "label": "Run a $1,800 discount campaign",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "hotel",
+     "kind": "slump_promo"
+    }
+   ],
+   "outcome": "The promotion softens the dip for two weeks, then it fades."
+  }
+ ]
+}

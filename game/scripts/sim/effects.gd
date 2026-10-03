@@ -15,6 +15,11 @@ static func apply(e: Dictionary, ctx: Dictionary) -> Dictionary:
 	var op: String = e.get("op", "")
 	var ent := GameState.business_entity()
 	match op:
+		"industry":
+			var module := Industries.find(str(e.get("industry", "")))
+			if module.is_empty() or not module["sim_class"].has_method("crisis"):
+				return {"ok":false, "error":I18n.t("Unknown industry event.")}
+			return module["sim_class"].crisis(str(e.get("kind", "")), bool(e.get("retain", true)))
 		"cash":
 			var amt := _num(e.get("amount", 0), ctx)
 			var cat: String = e.get("category", "other")
