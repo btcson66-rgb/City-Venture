@@ -8,7 +8,7 @@ const ACTION_ICONS := {
 	"buy_item": "shop", "clothing_shop": "shop", "cafe_counter": "coffee",
 	"work_shift": "tasks", "open_company_os": "laptop", "cowork_desk": "laptop",
 	"sleep": "sleep", "read_news": "info", "bank_counter": "bank", "atm": "bank",
-	"loans_info": "bank", "register_company": "civic", "permits_info": "civic", "take_number": "civic",
+	"customs_guide": "info", "loans_info": "bank", "register_company": "civic", "permits_info": "civic", "take_number": "civic",
 	"pack_orders": "parcel", "dropoff_parcels": "parcel", "change_outfit": "shirt",
 	"lease_property": "home", "whiteboard": "objective", "look": "info", "talk": "people",
 	"talk_staff": "people", "business_board": "company", "metro": "metro",

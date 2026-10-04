@@ -257,6 +257,7 @@ Nexus Bank opens international banking for a registered company with domestic ba
 World Map → regional facts → Compare trade route opens an RFQ estimate, not an active industry. See [trade route estimates](22_trade_route_estimates.md) for scope and blocked execution dependencies.
 
 
+
 ## 產業框架與分部損益（Implemented，#63）
 
 咖啡、物流、SaaS、電商與接案都由 Industries 註冊表分派，保留原有收支與每小時處理順序。未開始的接案與軟體產品有獨立起步按鈕，開業後才顯示經營分頁。Company OS 的「分部損益」列出本月、上月營收、毛利、費用與營業利益；共用費用按淨營收分攤並標示「分攤」，沒有營收時留在「共用」。分部加總採原有月結口徑，與公司報表相同，包含其他收入。

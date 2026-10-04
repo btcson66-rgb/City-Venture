@@ -369,6 +369,7 @@ func _forecast(be: String) -> void:
 
 # ============================================================== SALES
 func _tab_sales() -> void:
+	_concepts(["marketplace_fee", "payout_schedule", "ads_cpc", "price_elasticity", "product_photo"])
 	var pages := UIK.hbox(4)
 	content.add_child(pages)
 	for entry in [["domestic", "Domestic"], ["overseas", "Overseas"]]:
@@ -379,7 +380,6 @@ func _tab_sales() -> void:
 		GlobalMarketUI.sales(self, content)
 		return
 
-	_concepts(["marketplace_fee", "payout_schedule", "ads_cpc", "price_elasticity", "product_photo"])
 	if Ecommerce.is_personal():
 		var capbar := ProgressBar.new()
 		capbar.max_value = Ecommerce.seller_cap()

@@ -761,3 +761,4 @@ Requested named facades: `airport_terminal.png`, `gateway_car_rental.png`, `aure
 
 ## #70 International trade
 Requested `buildings/meridian_trade_desk.png` and `_lights.png`; existing `nexus_cowork` facade is the validated fallback. Customs House and the airport cargo terminal reuse existing art. Ingrid Solberg uses a generated appearance, with existing office desk and world/parcel icons. No art assets changed.
+

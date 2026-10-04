@@ -2109,12 +2109,29 @@ func _chapters_13_to_14(fast := false) -> void:
 		await bot.click_named("OpenGlobalStore_northridge")
 	var listing: Dictionary = {}
 	for l in Ecommerce.E()["listings"].values():
-		if l.get("active", false) and Ecommerce.best_location(str(l["product"])) == "riverside_studio":
+		if l.get("active", false) and Ecommerce.available("riverside_studio",str(l["product"]))>0:
 			if listing.is_empty() or Ecommerce.available("riverside_studio", str(l["product"])) > Ecommerce.available("riverside_studio", str(listing["product"])):
 				listing = l
 	if listing.is_empty():
-		bot.fail("season two has no active listing stocked at the home packing table; restocking is required")
-		return
+		# Long integrated tours can exhaust the original home batch. Replenish through the real purchase controls.
+		for l in Ecommerce.E()["listings"].values():
+			if l.get("active",false):listing=l;break
+		if listing.is_empty():bot.fail("season two has no active product listing");return
+	if Ecommerce.best_location(str(listing["product"]))!="riverside_studio":
+		var product: String=listing["product"]
+		var other_max:=0
+		for location in Ecommerce.stock_locations():
+			if location!="riverside_studio":other_max=maxi(other_max,Ecommerce.available(location,product))
+		var moq: int=Ecommerce.offer("tradelink_wholesale",product)["moq"]
+		var batches: int=maxi(1,int(ceil(float(other_max+moq-Ecommerce.available("riverside_studio",product))/moq)))
+		await close_modal();await _home_laptop("operations");await _intro_control("DeliverTo_riverside_studio")
+		for batch in batches:
+			if Ecommerce.space_block("riverside_studio",moq)!="" or Ledger.cash(GameState.business_entity())<moq*Ecommerce.unit_cost("tradelink_wholesale",product):break
+			await _intro_control("Buy_tradelink_wholesale_"+product)
+		await close_modal()
+		await pass_time_at_home(func():return Ecommerce.best_location(product)=="riverside_studio",8,true)
+		if Ecommerce.best_location(product)!="riverside_studio":bot.fail("export restock could not fund or fit the real home purchase");return
+		await _home_laptop("sales");await _intro_control("SalesPage_overseas")
 	await _export_row_input("SaveGlobalPrice_" + str(listing["id"]))
 	bot.expect(GlobalMarket.order_allowed("northridge", str(listing["id"])), "selected export listing really has a saved price")
 	if not GlobalMarket.order_allowed("northridge", str(listing["id"])):
@@ -2211,11 +2228,19 @@ func _chapters_13_to_14(fast := false) -> void:
 	bot.expect(Ledger.check_balanced(), "chapters 13–14 Ledger balanced")
 	if fast:
 		bot.step("Customs hold — wrong-code fixture, real document-correction input")
+		if not await _restock_product(str(listing["product"]),30):return
+		# Honest trial pause cleared prices; reopen pricing through the real saved-price control.
+		await _home_laptop("sales");await _intro_control("SalesPage_overseas")
+		await _export_row_input("SaveGlobalPrice_"+str(listing["id"]))
+		await close_modal()
 		Customs.set_declaration("northridge", str(listing["id"]), "ddp", "textiles")
+		var before_order: int=Ecommerce.E()["counters"]["order"]
 		Ecommerce._h_order_place({"listing": listing["id"], "region": "northridge"})
+		if not bot.expect(int(Ecommerce.E()["counters"]["order"])>before_order,"wrong-code fixture created a new real order"):return
 		var held_id := "#%d" % int(Ecommerce.E()["counters"]["order"])
 		await _pack_and_ship_home()
 		Ecommerce._h_pickup({"ids": [held_id]})
+		if not bot.expect(Ecommerce.E()["orders"][held_id]["status"]=="customs_hold","actual wrong-code order is held before document choice"):return
 		for q in EventEngine.S()["queue"]:
 			if q["id"] == "customs_hold" and q["ctx"]["order"] == held_id:
 				UIRoot.open_modal(DecisionModal.new(q))
@@ -2228,6 +2253,18 @@ func _chapters_13_to_14(fast := false) -> void:
 		await bot.click_named("DecisionOK")
 		bot.expect(Ecommerce.E()["orders"][held_id]["status"] == "shipped", "real documents choice releases hold")
 		bot.expect(Ledger.check_balanced(), "document correction Ledger balanced")
+
+func _restock_product(product: String, target: int) -> bool:
+	if Ecommerce.available_anywhere(product)>=target:return true
+	UIRoot.close_all();await _home_laptop("operations");await _intro_control("DeliverTo_riverside_studio")
+	var moq: int=Ecommerce.offer("tradelink_wholesale",product)["moq"]
+	var batches: int=int(ceil(float(target-Ecommerce.available_anywhere(product))/moq))
+	for batch in batches:
+		if Ecommerce.space_block("riverside_studio",moq)!="" or Ledger.cash(GameState.business_entity())<moq*Ecommerce.unit_cost("tradelink_wholesale",product):break
+		await _intro_control("Buy_tradelink_wholesale_"+product)
+	await close_modal()
+	await pass_time_at_home(func():return Ecommerce.available_anywhere(product)>=target,8,true)
+	return bot.expect(Ecommerce.available_anywhere(product)>=target,"real purchase supplies upcoming export or distributor shipment")
 
 
 func _fast_forward_to_ch10() -> void:

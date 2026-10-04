@@ -87,10 +87,8 @@ static func close_company() -> Dictionary:
 	if ent == "" or ent == "player":
 		return {"ok": false, "error": "No company to close."}
 	var rep := {"stock": 0.0, "receivables": 0.0, "deposit": 0.0, "paid": {}, "written_off": 0.0}
-	Contracts.close_for_entity(ent)   # terminal states only; the existing AR sale below is the sole journal entry
-	GlobalMarket.close_for_entity(ent)
-
 	Industries.on_company_closed(ent)   # work/assets close here; the AR sale below is collected once
+	GlobalMarket.close_for_entity(ent)
 	# 1. assets to cash
 	rep["stock"] = Ecommerce.liquidate_all(LIQUIDATION_RATE)
 	var ar := maxf(0.0, Ledger.balance(ent, "accounts_receivable")) + maxf(0.0, Ledger.balance(ent, "marketplace_balance"))
