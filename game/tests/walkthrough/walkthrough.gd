@@ -2163,16 +2163,16 @@ func _chapters_13_to_14(fast := false) -> void:
 		bot.expect(Ledger.check_balanced(), "document correction Ledger balanced")
 
 func _restock_product(product: String, target: int) -> bool:
-	if Ecommerce.available_anywhere(product)>=target:return true
+	if Ecommerce.available("riverside_studio",product)>=target:return true
 	UIRoot.close_all();await _home_laptop("operations");await _intro_control("DeliverTo_riverside_studio")
 	var moq: int=Ecommerce.offer("tradelink_wholesale",product)["moq"]
-	var batches: int=int(ceil(float(target-Ecommerce.available_anywhere(product))/moq))
+	var batches: int=int(ceil(float(target-Ecommerce.available("riverside_studio",product))/moq))
 	for batch in batches:
 		if Ecommerce.space_block("riverside_studio",moq)!="" or Ledger.cash(GameState.business_entity())<moq*Ecommerce.unit_cost("tradelink_wholesale",product):break
 		await _intro_control("Buy_tradelink_wholesale_"+product)
 	await close_modal()
-	await pass_time_at_home(func():return Ecommerce.available_anywhere(product)>=target,8,true)
-	return bot.expect(Ecommerce.available_anywhere(product)>=target,"real purchase supplies upcoming export or distributor shipment")
+	await pass_time_at_home(func():return Ecommerce.available("riverside_studio",product)>=target,8,true)
+	return bot.expect(Ecommerce.available("riverside_studio",product)>=target,"real purchase supplies upcoming export or distributor shipment")
 
 
 func _fast_forward_to_ch10() -> void:
