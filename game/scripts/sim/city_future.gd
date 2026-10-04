@@ -39,17 +39,24 @@ static func sponsor() -> String:
 		Ledger.post(id,I18n.t("Council-authorized civic appropriation"),[{"acct":"cash","dr":float(cfg()["municipal_budget"])},{"acct":"equity","cr":float(cfg()["municipal_budget"])}],{"type":"civic_budget"})
 	return id
 static func private_payer(c: Dictionary) -> String:
-	var ent: String=c.get("entity","")
-	return ent if ent!="" and ent==GameState.company_id() and GlobalMarket.live(ent) and GameState.business_entity()==ent else "player"
+	# The chapter keeps the company chosen when it began; a closed owner returns "" so nothing silently falls back to personal cash.
+	var ent: String=str(c.get("entity",""))
+	if ent=="":return "player"
+	return ent if GlobalMarket.live(ent) else ""
+static func _in_owner(c: Dictionary,fn: Callable) -> Variant:return CompanyPortfolio.run_in(str(c.get("entity","")),fn)
 static func contract_cost(number: int,premium: bool) -> float:
 	var total:=0.0
 	for service in definition(number).get("services",[]):total+=int(service["units"])*float(service["unit_cost"])
 	return snappedf(total*(float(cfg()["premium_cost_factor"]) if premium else 1.0),.01)
 static func procure(mode: String,premium := false) -> Dictionary:
 	var c:=chapter()
+	if c.is_empty():return error("Join the city proposal first.")
+	return _in_owner(c,func():return _procure(c,mode,premium))
+static func _procure(c: Dictionary,mode: String,premium: bool) -> Dictionary:
 	if c.is_empty() or c["status"]!="active" or c["mode"]!="" or Clock.now()>int(c["deadline"]):return error("This service plan is already arranged or its deadline has passed.")
 	if mode not in ["fund","partner"]:return error("Choose funded delivery or the civic partnership.")
 	var payer: String=private_payer(c) if mode=="fund" else sponsor()
+	if payer=="":return error("The company that owns this proposal is closed. Join the civic partnership instead.")
 	var cost:=contract_cost(int(c["number"]),premium)
 	if Ledger.cash(payer)<cost:return error("Keep the service budget or join the civic partnership instead.")
 	c["mode"]=mode;c["tier"]="premium" if premium else "basic"
@@ -63,6 +70,9 @@ static func procure(mode: String,premium := false) -> Dictionary:
 	return {"ok":true}
 static func _settle(c: Dictionary,receipt: Dictionary) -> void:
 	if receipt["status"]!="paid" or Clock.now()<int(receipt["eta"]):return
+	_in_owner(c,func():_settle_here(c,receipt))
+## Jobs live in the company that procured them, so settlement always runs inside that company.
+static func _settle_here(c: Dictionary,receipt: Dictionary) -> void:
 	var job:=Jobs.get_job(receipt["job"])
 	if not Assets._valid_entity(receipt["payer"]):receipt["status"]="closed";return
 	var premium: bool=c["tier"]=="premium"
@@ -78,16 +88,20 @@ static func choice_block(choice: String) -> String:
 	if not choice in definition(int(c["number"]))["choices"]:return "Choose an available civic decision."
 	if not GameState.flag("city%d_plan"%int(c["number"])):return "Wait for paid suppliers to deliver, or review their failure at the deadline."
 	if int(c["number"])==22 and choice in ["salary","options"]:
-		if private_payer(c)=="player" or Staff.people().is_empty():return "No owned team is available. Choose the culture partnership instead."
+		if private_payer(c) in ["player",""] or Staff.people().is_empty():return "No owned team is available. Choose the culture partnership instead."
 		if choice=="options" and float(GameState.data.get("cap_table",{}).get("founder",0))<=.5:return "The board will not authorize options. Choose wages or culture instead."
 	return ""
 static func _expense(c: Dictionary,amount: float,memo: String) -> bool:
 	var payer: String=sponsor() if c["mode"]=="partner" else private_payer(c)
-	if Ledger.cash(payer)<amount:return false
+	if payer=="" or Ledger.cash(payer)<amount:return false
 	Ledger.expense(payer,"other",amount,I18n.t(memo),{"type":"civic_choice","chapter":c["number"]})
 	return true
 static func choose(choice: String) -> Dictionary:
 	reconcile()
+	var owner:=chapter()
+	if owner.is_empty():return error("Join the city proposal first.")
+	return _in_owner(owner,func():return _choose(choice))
+static func _choose(choice: String) -> Dictionary:
 	var why:=choice_block(choice)
 	if why!="":return error(why)
 	var c:=chapter();var num: int=c["number"]
@@ -101,9 +115,7 @@ static func choose(choice: String) -> Dictionary:
 			var rival_quality: float=GameState.rng.randf_range(float(cfg()["rival_quality_min"]),float(cfg()["rival_quality_max"]))
 			var quality: float=clampf(float(c["quality"])-(float(cfg()["low_bid_quality_penalty"]) if choice=="low_bid" else 0.0),0,1)
 			if choice=="favor":
-				# No bribe payment is possible: the prohibited approach is reported and disqualified.
-				quality=0;GameState.set_flag("city_disqualified");S()["brand"]=float(S()["brand"])-float(cfg()["secret_favor_brand_loss"])
-				GameState.timeline(I18n.t("The secret-favor approach was reported. No bribe was paid; the bid was disqualified."),"crisis")
+				quality=0;_favor_consequences(c)
 			if choice=="low_bid":
 				for receipt in c["contracts"]:
 					if receipt["service"]["industry"]!="manufacturing" or receipt["status"]!="delivered" or not Assets._valid_entity(receipt["payer"]):continue
@@ -119,6 +131,7 @@ static func choose(choice: String) -> Dictionary:
 				if not _expense(c,cost,"Public vehicle transition consultation"):return error("Keep the consultation budget or join the city partnership.")
 			else:
 				var payer: String=sponsor() if c["mode"]=="partner" else private_payer(c)
+				if payer=="":return error("The company that owns this proposal is closed. Join the civic partnership instead.")
 				var asset:=Assets.buy({"entity":payer,"name":"Civic charging network","price":cost,"life_days":int(cfg()["charging_life_days"]),"maintenance_cost":float(cfg()["charging_maintenance_cost"]),"maintenance_days":int(cfg()["charging_maintenance_days"]),"failure_chance":float(cfg()["charging_failure_chance"]),"segment":"energy"})
 				if not asset["ok"]:return asset
 				c["network_asset"]=asset["id"]
@@ -136,7 +149,7 @@ static func choose(choice: String) -> Dictionary:
 			else:
 				if c["mode"]!="partner" and not _expense(c,float(cfg()["workshop_fee"]),"Paid workplace culture workshop"):return error("Fund the workshop or continue the civic volunteer program.")
 				Clock.advance(int(cfg()["workshop_minutes"]))
-				if private_payer(c)!="player":
+				if not private_payer(c) in ["player",""]:
 					for person in Staff.people():person["morale"]=mini(100,int(person["morale"])+int(cfg()["culture_morale_bonus"]));affected.append(person["id"])
 			S()["brand"]=float(S()["brand"])+float(cfg()["culture_brand_gain"] if choice=="culture" else cfg()["volunteer_brand_gain"] if choice=="volunteer" else cfg()["other_talent_brand_gain"])
 			c["result"]={"people":affected,"policy":choice,"retention_until":Clock.now()+int(cfg()["retention_days"])*Clock.DAY}
@@ -159,6 +172,20 @@ static func choose(choice: String) -> Dictionary:
 			c["result"]={"expo":S()["expo_awarded"],"harbor_quality":S()["harbor_quality"],"mayor":S()["elected"],"event":choice}
 	c["decision"]=choice;c["review_at"]=Clock.now()+int(cfg()["review_days"])*Clock.DAY
 	GameState.set_flag("city%d_choice"%num);StoryEngine.check();return {"ok":true}
+## No payment to an official is ever possible: the approach is reported, disqualified and investigated (red line, see wiki 35).
+static func _favor_consequences(c: Dictionary) -> void:
+	GameState.set_flag("city_disqualified");S()["brand"]=float(S()["brand"])-float(cfg()["secret_favor_brand_loss"])
+	var owner:=private_payer(c)
+	if owner=="player":owner=""
+	if owner!="":
+		Brand.record(owner,"news",-float(cfg()["favor_news_brand_hit"]))
+		Legal.open_integrity_probe(owner,float(cfg()["favor_fine"]),I18n.t("Anti-corruption office"))
+	else:
+		# A private citizen has no company books: the fine and legal cost are paid from personal cash.
+		var total:=float(cfg()["favor_fine"])+float(Legal.options()[Legal.cfg()["integrity_option"]]["fee"])
+		Ledger.expense("player","legal",total,I18n.t("Anti-corruption fine and legal cost"),{"type":"integrity_fine","chapter":c["number"]},"cash" if Ledger.cash("player")>=total else "accounts_payable")
+	PersonalLife.change(str(definition(19).get("npc","expo_officer")),-float(cfg()["favor_relationship_loss"]))
+	GameState.timeline(I18n.t("The secret-favor approach was reported to the anti-corruption office. No payment was made; the bid was disqualified, a fine and legal costs follow, and the expo office trusts you less."),"crisis",{"category":"city"})
 static func review() -> Dictionary:
 	reconcile();var c:=chapter()
 	if c.is_empty():return error("Join the city proposal first.")

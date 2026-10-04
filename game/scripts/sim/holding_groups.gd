@@ -26,8 +26,9 @@ static func hold(parent: String,child: String) -> Dictionary:
 	if float(shares.get("founder",0))<1: return {"ok":false,"error":"Only wholly founder-owned companies can enter this holding group. Other shareholders keep their rights."}
 	var value := basis(child)
 	if value>0:
-		Ledger.post("player",I18n.t("Subsidiary shares transferred: %s")%Fmt.money(value),[{"acct":"investments","cr":value},{"acct":"investments","dr":value}],{"type":"ownership","subsidiary":child})
+		# The founder's investments account is unchanged: the carrying cost moves from the child to the holding company in the basis record.
 		Ledger.post(parent,I18n.t("Investment in subsidiary: %s")%Fmt.money(value),[{"acct":"investment_in_subsidiary:"+child,"dr":value},{"acct":"equity","cr":value}],{"type":"capital","subsidiary":child})
+		add_basis(child,-value)
 		add_basis(parent,value)
 	S()["parents"][child]=parent
 	CompanyPortfolio.run_in(child,func():GameState.data["cap_table"]={parent:1.0})
@@ -39,6 +40,7 @@ static func release(parent: String,child: String) -> Dictionary:
 	if value>0:
 		Ledger.post(parent,I18n.t("Subsidiary released at book value: %s")%Fmt.money(value),[{"acct":"equity","dr":value},{"acct":"investment_in_subsidiary:"+child,"cr":value}],{"type":"ownership"})
 		add_basis(parent,-value)
+		add_basis(child,value)
 	S()["parents"].erase(child)
 	CompanyPortfolio.run_in(child,func():GameState.data["cap_table"]={"founder":1.0})
 	return {"ok":true}
@@ -109,6 +111,28 @@ static func on_hour() -> void:
 			Ledger.post(loan["from"],I18n.t("Group interest accrued: %s")%Fmt.money(interest),[{"acct":"group_interest_receivable:"+str(loan["id"]),"dr":interest},{"acct":"other_income","cr":interest}],source)
 			loan["interest_owed"]=float(loan["interest_owed"])+interest
 		loan["next"]=int(loan["next"])+int(cfg()["monthly_days"])*Clock.DAY
+## One journal pass per company and date gives every account balance; consolidation reads many accounts at the same month end.
+static var _snapshots := {}
+static var _snapshot_journal: Variant = null
+static var _snapshot_size := -1
+static func balances_at(id: String,t: int) -> Dictionary:
+	var journal: Array = GameState.data["ledger"]["journal"]
+	if not is_same(journal,_snapshot_journal) or journal.size()!=_snapshot_size:
+		_snapshots.clear()
+		_snapshot_journal=journal
+		_snapshot_size=journal.size()
+	var k := "%s|%d"%[id,t]
+	if _snapshots.has(k):return _snapshots[k]
+	var totals := {}
+	for e in journal:
+		if int(e["t"])>=t:break
+		if e["entity"]!=id:continue
+		for l in e["lines"]:totals[l["acct"]]=float(totals.get(l["acct"],0.0))+float(l.get("dr",0.0))-float(l.get("cr",0.0))
+	for acct in totals:totals[acct]=snappedf(totals[acct],.01)
+	if _snapshots.size()>64:_snapshots.clear()
+	_snapshots[k]=totals
+	return totals
+static func balance_at(id: String,acct: String,t: int) -> float:return float(balances_at(id,t).get(acct,0.0))
 static func margin_at(ids: Array,t: int) -> float:
 	var amount := 0.0
 	for row in S()["margin_events"]:
@@ -124,10 +148,10 @@ static func consolidated(parent: String,t0: int,t1: int) -> Dictionary:
 		result["cash"]+=float(row["cash_close"])
 		result["assets"]+=asset_total(id,t1)
 		result["liabilities"]+=liability_total(id,t1)
-		for child in ids:result["investment_elimination"]+=maxf(0,Ledger.balance_at(id,"investment_in_subsidiary:"+child,t1))
+		for child in ids:result["investment_elimination"]+=maxf(0,balance_at(id,"investment_in_subsidiary:"+child,t1))
 	for loan in S()["loans"].values():
-		if loan["from"] in ids and loan["to"] in ids:result["loan_elimination"]+=maxf(0,Ledger.balance_at(loan["from"],"group_loan_receivable:"+str(loan["id"]),t1))
-		if loan["from"] in ids and loan["to"] in ids:result["interest_elimination"]+=maxf(0,Ledger.balance_at(loan["from"],"group_interest_receivable:"+str(loan["id"]),t1))
+		if loan["from"] in ids and loan["to"] in ids:result["loan_elimination"]+=maxf(0,balance_at(loan["from"],"group_loan_receivable:"+str(loan["id"]),t1))
+		if loan["from"] in ids and loan["to"] in ids:result["interest_elimination"]+=maxf(0,balance_at(loan["from"],"group_interest_receivable:"+str(loan["id"]),t1))
 	result["assets"]-=float(result["investment_elimination"])+float(result["loan_elimination"])+float(result["interest_elimination"])+float(result["unrealized_margin"])
 	result["liabilities"]-=float(result["loan_elimination"])+float(result["interest_elimination"])
 	result["profit"]-=margin_at(ids,t1)-margin_at(ids,t0)
@@ -222,10 +246,10 @@ static func sell_subsidiary(parent: String,child: String,buyer: String) -> Dicti
 static func asset_total(id: String,t: int) -> float:
 	var total := 0.0
 	for acct in GameState.data["ledger"]["balances"].get(id,{}):
-		if acct in ["cash","inventory","inventory_in_transit","goods_out","deposits","investments","accounts_receivable","marketplace_balance","escrow_held","frozen_funds","fixed_assets","property_assets","forward_collateral"] or str(acct).begins_with("fx_wallet:") or str(acct).begins_with("fx_receivable:") or str(acct).begins_with("investment_in_subsidiary:") or str(acct).begins_with("group_loan_receivable:") or str(acct).begins_with("group_interest_receivable:"):total+=Ledger.balance_at(id,acct,t)
+		if acct in ["cash","inventory","inventory_in_transit","goods_out","deposits","investments","accounts_receivable","marketplace_balance","escrow_held","frozen_funds","fixed_assets","property_assets","forward_collateral"] or str(acct).begins_with("fx_wallet:") or str(acct).begins_with("fx_receivable:") or str(acct).begins_with("investment_in_subsidiary:") or str(acct).begins_with("group_loan_receivable:") or str(acct).begins_with("group_interest_receivable:"):total+=balance_at(id,acct,t)
 	return total
 static func liability_total(id: String,t: int) -> float:
 	var total := 0.0
 	for acct in GameState.data["ledger"]["balances"].get(id,{}):
-		if acct in ["loan_payable","wages_payable","accounts_payable","deferred_revenue"] or str(acct).begins_with("group_loan_payable:") or str(acct).begins_with("group_interest_payable:"):total-=Ledger.balance_at(id,acct,t)
+		if acct in ["loan_payable","wages_payable","accounts_payable","deferred_revenue"] or str(acct).begins_with("group_loan_payable:") or str(acct).begins_with("group_interest_payable:"):total-=balance_at(id,acct,t)
 	return total

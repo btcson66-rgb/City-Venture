@@ -13,9 +13,15 @@ static func valuation(revenue: float, previous: float) -> float:
 	if not is_finite(revenue) or not is_finite(previous): return 0
 	var growth := clampf((revenue - previous) / maxf(1, previous), -float(cfg()["growth_cap"]), float(cfg()["growth_cap"]))
 	return snappedf(maxf(0,revenue) * float(cfg()["revenue_multiple"]) * (1 + growth), .01)
+## Yearly closes rescan the journal, so results are kept for the current ledger state and hour; any new entry or time step recomputes.
 static func annual(ent: String, offset := 0) -> Dictionary:
+	var cache: Dictionary = S().get_or_add("cache", {})
+	var key := "%s|%d|%d|%d" % [ent, offset, GameState.data["ledger"]["journal"].size(), Clock.now() / int(cfg()["valuation_cache_minutes"])]
+	if cache.has(key): return cache[key]
+	if cache.size() > 16: cache.clear()
 	var end := Clock.now() + 1 - offset * int(cfg()["window_days"]) * Clock.DAY
-	return MonthClose.compute(ent, end - int(cfg()["window_days"]) * Clock.DAY, end)
+	cache[key] = MonthClose.compute(ent, end - int(cfg()["window_days"]) * Clock.DAY, end)
+	return cache[key]
 static func begin() -> void:
 	if World.year() < 9: return
 	if S()["entity"] != GameState.company_id():
@@ -29,13 +35,17 @@ static func begin() -> void:
 	if not S()["offers"].is_empty():
 		if S()["offers"].any(func(o):return o["status"]=="open" and Clock.now()<=int(o["expires"])): return
 		S()["offers"].clear()
+		S()["next_offers"]=Clock.now()+int(cfg()["offer_cooldown_days"])*Clock.DAY
+	if Clock.now()<int(S().get("next_offers",0)): return
 	var price := company_valuation()
 	for i in cfg()["npc_companies"].size():
 		var npc: Dictionary = cfg()["npc_companies"][i]
 		S()["offers"].append({"id":npc["id"],"name":npc["name"],"factor":1+float(cfg()["offer_premium_step"])*i,"price":snappedf(price*(1+float(cfg()["offer_premium_step"])*i),.01),"ready":Clock.now()+int(cfg()["due_days"])*Clock.DAY,"expires":Clock.now()+int(cfg()["offer_days"])*Clock.DAY,"status":"open"})
 		if not S()["targets"].has(npc["id"]): S()["targets"][npc["id"]] = npc.duplicate(true)
 	if S()["npc_mergers"].is_empty(): S()["npc_mergers"] = [{"buyer":"hale","target":"meridian","at":Clock.now()+3*Clock.DAY,"done":false}]
-	GameState.timeline("Consolidation opens: NPC companies review acquisitions and public listings.", "world")
+	if not S().get("announced",false):
+		S()["announced"]=true
+		GameState.timeline(I18n.t("Consolidation opens: NPC companies review acquisitions and public listings."), "world")
 static func offer_block(id: String) -> String:
 	if not live(): return "This company is closed or replaced. Continue with your current life."
 	if S()["route"] in ["acquired","public"]: return "Ownership is already committed. Review the recorded route."
@@ -72,7 +82,7 @@ static func private_route() -> Dictionary:
 	if S()["route"] in ["acquired","public"]: return {"ok":false,"error":"Ownership is already committed. Review the recorded route."}
 	S()["route"]="private"
 	if S()["ipo"].get("stage","") in ["audit","roadshow","priced"]: S()["ipo"]["stage"]="withdrawn"
-	GameState.timeline("Kept the company private: no listing capital, no public quarterly obligation.", "company")
+	GameState.timeline(I18n.t("Kept the company private: no listing capital, no public quarterly obligation."), "company")
 	return {"ok":true}
 static func board_approve(cost: float) -> bool:
 	if S()["route"] != "public": return true
@@ -133,11 +143,17 @@ static func answer(index: int, transparent: bool) -> Dictionary:
 	if not live() or ipo.get("stage","") != "roadshow" or index != ipo["answers"].size() or index >= cfg()["questions"].size(): return {"ok":false,"error":"This investor question is already answered or unavailable. Continue the current step."}
 	ipo["answers"].append(transparent)
 	if transparent: ipo["score"]=int(ipo["score"])+1
+	# Each answer trades price against time and risk: detail is slower and prices lower, a bold promise prices higher but investors may see through it.
+	var effect: Dictionary = cfg()["questions"][index]["good_effect" if transparent else "risk_effect"]
+	ipo["factor"]=float(ipo.get("factor",1.0))*float(effect["price_factor"])
+	ipo["delay_days"]=int(ipo.get("delay_days",0))+int(effect["delay_days"])
+	if float(effect["caught_chance"])>0 and GameState.randf()<float(effect["caught_chance"]): ipo["caught"]=true
 	if ipo["answers"].size() == cfg()["questions"].size():
-		ipo["stage"]="priced" if int(ipo["score"])>0 else "failed"
+		ipo["stage"]="failed" if ipo.get("caught",false) else "priced"
 		ipo["failure"]="Investors declined unsupported promises. The audit fee is not refunded."
-		ipo["valuation"] = company_valuation() * float(cfg()["roadshow_factors"][int(ipo["score"])])
+		ipo["valuation"] = company_valuation() * float(ipo["factor"])
 		ipo["price"] = snappedf(float(ipo["valuation"])/int(cfg()["shares"]),.01)
+		ipo["list_after"] = Clock.now()+int(ipo["delay_days"])*Clock.DAY
 	return {"ok":true}
 static func list_company() -> Dictionary:
 	var ipo: Dictionary = S()["ipo"]
@@ -145,7 +161,8 @@ static func list_company() -> Dictionary:
 	if why != "": return {"ok":false,"error":why}
 	if ipo.get("stage","") != "priced": return {"ok":false,"error":"Complete the roadshow and review the price first."}
 	var u: Dictionary = cfg()["underwriters"].filter(func(row):return row["id"]==ipo["underwriter"])[0]
-	if company_valuation()*float(cfg()["roadshow_factors"][int(ipo["score"])])+.01 < float(ipo["valuation"]):
+	if Clock.now() < int(ipo.get("list_after",0)): return {"ok":false,"error":"Detailed disclosures are still being reviewed. Continue operating until the stated listing date."}
+	if company_valuation()*float(ipo["factor"])+.01 < float(ipo["valuation"]):
 		ipo["stage"]="failed"
 		ipo["failure"]="The company books changed after pricing. Rebuild the record and reapply, or remain private."
 		return {"ok":false,"error":ipo["failure"]}
@@ -172,13 +189,13 @@ static func on_hour() -> void:
 			var target: Dictionary = S()["targets"].get(merger["target"],{})
 			if not target.has("owner"):
 				target["owner"]=merger["buyer"]
-				GameState.timeline("Hale Group acquired Meridian Supply; it is no longer an independent target.","world")
+				GameState.timeline(I18n.t("Hale Group acquired Meridian Supply; it is no longer an independent target."),"world")
 			merger["done"]=true
 	for task in S()["integrations"]:
 		if not task["done"] and Clock.now() >= int(task["ready"]):
 			S()["targets"][task["target"]]["staff"]=task["staff_after"]
 			task["done"]=true
-			GameState.timeline("Acquisition integration completed; the staff attrition is recorded, without invented sales.","company")
+			GameState.timeline(I18n.t("Acquisition integration completed; the staff attrition is recorded, without invented sales."),"company")
 	var ipo: Dictionary = S()["ipo"]
 	if S()["route"] == "public" and Clock.now() >= int(ipo.get("next_quarter",9223372036854775807)):
 		var report := MonthClose.compute(S()["entity"],int(ipo["quarter_start"]),int(ipo["next_quarter"]))
@@ -193,7 +210,7 @@ static func on_hour() -> void:
 				person["morale"] = int(person["morale"])-hit
 				hits[person["id"]] = hit
 			S()["pressure"]={"until":Clock.now()+int(cfg()["pressure_days"])*Clock.DAY,"hits":hits}
-		GameState.timeline("Quarterly report published: actual results changed the quoted share price.","company")
+		GameState.timeline(I18n.t("Quarterly report published: actual results changed the quoted share price."),"company")
 		ipo["quarter_start"]=ipo["next_quarter"]
 		ipo["next_quarter"]=int(ipo["next_quarter"])+int(cfg()["quarter_days"])*Clock.DAY
 	if not S()["pressure"].is_empty() and Clock.now() >= int(S()["pressure"]["until"]):

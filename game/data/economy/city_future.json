@@ -257,9 +257,12 @@
  "low_bid_quality_penalty": 0.15,
  "material_return_fraction": 0.2,
  "secret_favor_brand_loss": 0.2,
+ "favor_fine": 4000,
+ "favor_news_brand_hit": 8,
+ "favor_relationship_loss": 30,
  "transition_costs": {
   "charging": 5000,
-  "both": 2500,
+  "both": 6500,
   "delay": 750
  },
  "charging_life_days": 3650,

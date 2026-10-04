@@ -28,7 +28,6 @@ static func units_at(pid: String,incoming := true) -> int:
 			if order["location"]==pid and order["status"] in ["packed","awaiting_pickup"]:total+=int(order["qty"])
 	return total
 static func fee() -> float:
-	if int(S()["moves"])==0:return 0
 	return snappedf(float(Living.cfg()["moving_fee"])+float(Living.cfg()["moving_unit_fee"])*units_at(Living.home(),false),.01)
 static func capacity_block(pid: String) -> String:
 	for view in views():
@@ -36,8 +35,6 @@ static func capacity_block(pid: String) -> String:
 		if blocked:return "Finish the pop-up weekend before moving home. Its unsold stock must return to this home."
 	var prop: Dictionary=DataDB.properties.get(pid,{})
 	if prop.get("kind","")!="home" or not DataDB.buildings.has(prop.get("building","")):return "Choose a home that is available for moving."
-	if prop.get("owner_purchase",false) and not PersonalAssets.owned(pid):return "Buy this home before arranging a move."
-	if prop.get("owner_purchase",false) and PersonalAssets.owned(pid) and PersonalAssets.S()["homes"][pid]["status"] not in ["empty","occupied"]:return "Wait for the tenancy to end before moving into this home."
 	if prop.get("owner_purchase",false) and not PersonalAssets.owned(pid):return "Buy this home before arranging a move."
 	if prop.get("owner_purchase",false) and PersonalAssets.owned(pid) and PersonalAssets.S()["homes"][pid]["status"] not in ["empty","occupied"]:return "Wait for the tenancy to end before moving into this home."
 	if pid==Living.home():return "You already live here. Keep this lease or choose another home."
@@ -85,10 +82,8 @@ static func execute() -> Dictionary:
 	if refund>0:Ledger.post("player",I18n.t("Previous home deposit returned: %s")%Fmt.money(refund),[{"acct":"cash","dr":refund},{"acct":"home_deposit","cr":refund}],{"type":"home_lease_end","property":old})
 	S()["deposits"].erase(old)
 	PersonalAssets.released(old)
-	PersonalAssets.released(old)
 	move_stock(old,target)
 	GameState.data["player"]["home"]=target
-	if PersonalAssets.owned(target):PersonalAssets.S()["homes"][target]["status"]="occupied"
 	if PersonalAssets.owned(target):PersonalAssets.S()["homes"][target]["status"]="occupied"
 	S()["moves"]=int(S()["moves"])+1
 	S()["history"].append({"from":old,"to":target,"t":Clock.now(),"penalty":penalty,"moving":moving,"refund":refund})

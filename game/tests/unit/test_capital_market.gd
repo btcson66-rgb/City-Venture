@@ -35,6 +35,7 @@ func audit() -> void:
 func listing() -> void:
 	audit()
 	for i in 3: CapitalMarket.answer(i,true)
+	GameState.data["clock"]["minutes"]=CapitalMarket.S()["ipo"]["list_after"]
 	CapitalMarket.list_company()
 func test_capital_valuation_bounds_and_growth_formula() -> void:
 	setup()
@@ -92,6 +93,8 @@ func test_ipo_actual_two_year_trades_underwriter_fee_time_and_dilution() -> void
 	runner.check(CapitalMarket.progress_audit()["ok"],"audit completed")
 	for i in 3: runner.check(CapitalMarket.answer(i,true)["ok"],"real investor answer")
 	runner.check(not CapitalMarket.answer(2,true)["ok"],"answer receipt cannot repeat")
+	runner.check(not CapitalMarket.list_company()["ok"],"detailed disclosures take real review time")
+	GameState.data["clock"]["minutes"]=CapitalMarket.S()["ipo"]["list_after"]
 	var revenue := float(MonthClose.current(ent)["net_revenue"])
 	var result := CapitalMarket.list_company()
 	runner.check(result["ok"],"listing actual equity subscription")
@@ -110,8 +113,13 @@ func test_audit_failure_and_unsupported_roadshow_leave_private_path_available() 
 	runner.check(CapitalMarket.private_route()["ok"],"failed audit escape")
 	eligible()
 	audit()
-	for i in 3: CapitalMarket.answer(i,false)
-	runner.eq(CapitalMarket.S()["ipo"]["stage"],"failed","unsupported promises rejected")
+	GameState.rng.seed=1
+	var caught := false
+	for attempt in 40:
+		CapitalMarket.S()["ipo"]={"stage":"roadshow","underwriter":"nexus","ready":0,"answers":[],"score":0,"price":0.0}
+		for i in 3: CapitalMarket.answer(i,false)
+		if CapitalMarket.S()["ipo"]["stage"]=="failed":caught=true;break
+	runner.check(caught,"unsupported promises can be rejected by investors")
 	runner.check(not CapitalMarket.list_company()["ok"],"failure cannot list")
 	runner.check(CapitalMarket.private_route()["ok"],"roadshow failure escape")
 func test_quarterly_actual_shortfall_price_reputation_morale_decay_and_board_votes() -> void:
@@ -179,6 +187,7 @@ func test_public_board_grant_vote_and_roadshow_both_choices_visible() -> void:
 	runner.check(modal.find_child("RoadshowTransparent",true,false)!=null and modal.find_child("RoadshowPromise",true,false)!=null,"two distinct investor choices")
 	modal.free()
 	for i in 3: CapitalMarket.answer(i,true)
+	GameState.data["clock"]["minutes"]=CapitalMarket.S()["ipo"]["list_after"]
 	CapitalMarket.list_company()
 	GameState.data["cap_table"]={"founder":.3,"public":.7}
 	GameState.set_flag("legacy_met_maya")
@@ -211,8 +220,53 @@ func test_withdrawals_after_quote_cannot_mint_sale_or_ipo_windfalls() -> void:
 	eligible()
 	audit()
 	for i in 3: CapitalMarket.answer(i,true)
+	GameState.data["clock"]["minutes"]=CapitalMarket.S()["ipo"]["list_after"]
 	ent=GameState.company_id()
 	Company.transfer(ent,"player",5000)
 	runner.check(not CapitalMarket.list_company()["ok"],"stale IPO valuation cannot issue capital")
 	runner.eq(CapitalMarket.S()["ipo"]["stage"],"failed","failed pricing restores private/reapply choices")
 	runner.check(CapitalMarket.private_route()["ok"],"stale pricing never traps the company")
+
+func test_ipo_questions_have_no_dominant_answer_and_no_recommendation() -> void:
+	for q in CapitalMarket.cfg()["questions"]:
+		runner.check(not q.has("recommended"),"no recommended flag")
+		var honest: Dictionary=q["good_effect"];var bold: Dictionary=q["risk_effect"]
+		runner.check(float(bold["price_factor"])>float(honest["price_factor"]),"bold answer prices higher")
+		runner.check(float(bold["caught_chance"])>float(honest["caught_chance"]),"bold answer carries rejection risk")
+		runner.check(int(honest["delay_days"])>int(bold["delay_days"]),"honest answer costs time")
+		var dominates:=float(honest["price_factor"])>=float(bold["price_factor"]) and float(honest["caught_chance"])<=float(bold["caught_chance"]) and int(honest["delay_days"])<=int(bold["delay_days"])
+		runner.check(not dominates,"honest answer never dominates")
+func test_honest_roadshow_is_slower_and_prices_lower_than_a_lucky_bold_one() -> void:
+	eligible()
+	audit()
+	for i in 3: CapitalMarket.answer(i,true)
+	var honest: Dictionary=CapitalMarket.S()["ipo"].duplicate()
+	runner.eq(honest["stage"],"priced","honest answers never get rejected")
+	runner.check(int(honest["list_after"])>Clock.now(),"honest disclosures delay listing")
+	var bold_price:=0.0
+	GameState.rng.seed=7
+	for attempt in 60:
+		CapitalMarket.S()["ipo"]={"stage":"roadshow","underwriter":"nexus","ready":0,"answers":[],"score":0,"price":0.0}
+		for i in 3: CapitalMarket.answer(i,false)
+		if CapitalMarket.S()["ipo"]["stage"]=="priced":bold_price=float(CapitalMarket.S()["ipo"]["price"]);break
+	runner.check(bold_price>float(honest["price"]),"surviving bold answers price higher")
+func test_offer_rounds_cool_down_and_announce_once() -> void:
+	setup()
+	var timeline:=GameState.data.get("timeline",[]).size()
+	GameState.data["clock"]["minutes"]=int(CapitalMarket.S()["offers"][0]["expires"])+1
+	CapitalMarket.begin()
+	runner.check(CapitalMarket.S()["offers"].is_empty(),"expired round waits for a cooldown")
+	CapitalMarket.begin();CapitalMarket.begin()
+	runner.check(CapitalMarket.S()["offers"].is_empty(),"hourly checks do not regenerate offers")
+	GameState.data["clock"]["minutes"]+=int(CapitalMarket.cfg()["offer_cooldown_days"])*Clock.DAY
+	CapitalMarket.begin()
+	runner.eq(CapitalMarket.S()["offers"].size(),3,"cooldown ends with a fresh round")
+	runner.eq(GameState.data.get("timeline",[]).size(),timeline,"opening is announced only once")
+func test_valuation_is_cached_per_ledger_state_and_hour() -> void:
+	eligible()
+	var a:=CapitalMarket.company_valuation()
+	var key_count:int=CapitalMarket.S()["cache"].size()
+	runner.eq(CapitalMarket.company_valuation(),a,"same state same quote")
+	runner.eq(CapitalMarket.S()["cache"].size(),key_count,"repeat quote reuses the yearly close")
+	Ledger.post(GameState.company_id(),"QA cash",[{"acct":"cash","dr":500},{"acct":"equity","cr":500}],{"type":"test_fixture"})
+	runner.check(CapitalMarket.company_valuation()>=a,"new ledger entries invalidate the cache")

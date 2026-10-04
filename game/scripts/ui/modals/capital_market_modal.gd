@@ -104,7 +104,15 @@ func roadshow(box: Control,ipo: Dictionary) -> void:
 	box.add_child(UIK.kv("Supported answers (answers)",str(int(ipo["score"]))))
 	box.add_child(UIK.wrap(q["text"],9,Art.C_GOLD,458))
 	box.add_child(UIK.wrap("Answers change pricing confidence. Unsupported promises may cause investors to decline; no answer guarantees profitable future operations.",7,Art.C_MUTED,458))
-	action(box,q["good"],"RoadshowTransparent",func():result(CapitalMarket.answer(index,true)),bool(q.get("recommended",false)))
+	action(box,q["good"],"RoadshowTransparent",func():result(CapitalMarket.answer(index,true)))
+	box.add_child(UIK.wrap(_effect_text(q["good_effect"]),7,Art.C_MUTED,458))
 	action(box,q["risk"],"RoadshowPromise",func():result(CapitalMarket.answer(index,false)))
+	box.add_child(UIK.wrap(_effect_text(q["risk_effect"]),7,Art.C_MUTED,458))
 	action(body,"Withdraw listing and stay private","WithdrawIPO",func():result(CapitalMarket.private_route()))
 	action(body,"Keep operating","CapitalContinue",close)
+
+## Both answers show their full price, time and risk terms; neither is marked as the better one.
+func _effect_text(effect: Dictionary) -> String:
+	var text := I18n.t("Price effect %+d%%, listing delay %d days.")%[roundi((float(effect["price_factor"])-1.0)*100),int(effect["delay_days"])]
+	if float(effect["caught_chance"])>0:text+=" "+I18n.t("%d%% chance investors reject the listing.")%roundi(float(effect["caught_chance"])*100)
+	return text

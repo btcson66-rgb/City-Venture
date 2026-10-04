@@ -65,7 +65,12 @@ static func can_retire() -> bool:
 
 static func review(retire := false) -> Dictionary:
 	if retire and not can_retire(): return {"ok":false, "error":"Live thirty days or finish the main story before retiring."}
-	if not S()["review"].is_empty(): return {"ok":true, "review":S()["review"]}
+	# A review is a snapshot of the life so far: it is refreshed once after the civic finale and again when the player records retirement.
+	var existing: Dictionary = S()["review"]
+	if not existing.is_empty():
+		var civic_done := GameState.flag("city24_review") and not existing.get("after_civic",false)
+		var retiring := retire and not S()["retired"]
+		if not civic_done and not retiring: return {"ok":true, "review":existing}
 	var values := metrics()
 	var ranked := scores(values)
 	var primary: Dictionary = cfg()["archetypes"].filter(func(a): return a["id"] == ranked[0]["id"])[0]
@@ -74,7 +79,8 @@ static func review(retire := false) -> Dictionary:
 		"moments":key_moments(GameState.data["timeline"]), "player":GameState.data["player"].duplicate(true),
 		"epilogue":I18n.t("%s's story leans toward %s, with a trace of %s. %s The next life begins with fewer resources; this record preserves what actually happened.") % [GameState.data["player"]["name"], I18n.t(primary["name"]), I18n.t(secondary["name"]), I18n.t(primary["text"])]}
 	S()["review"]["epilogue"] += " " + CapitalMarket.route_text()
-	S()["retired"] = retire
+	S()["review"]["after_civic"] = GameState.flag("city24_review")
+	S()["retired"] = bool(S()["retired"]) or retire
 	S()["shown"] = true
 	return {"ok":true, "review":S()["review"]}
 
@@ -106,7 +112,7 @@ static func next_life(kind: String) -> Dictionary:
 	GameState.data["meta"]["previous_life"] = {"slot":old_slot, "kind":kind, "review":snapshot}
 	var base := float(DataDB.living().get("start_cash", 30000))
 	var reduced := snappedf(base * pow(float(cfg()["difficulty"]["opening_cash_factor"]), level), 0.01)
-	Ledger.post("player", "Next-life starting capital adjustment", [{"acct":"cash", "cr":base - reduced}, {"acct":"equity", "dr":base - reduced}], {"type":"opening"})
+	Ledger.post("player", I18n.t("Next-life starting capital adjustment"), [{"acct":"cash", "cr":base - reduced}, {"acct":"equity", "dr":base - reduced}], {"type":"opening"})
 	if inheritance > 0:
 		Ledger.post("player", I18n.t("Inherited capital: %s") % Fmt.money(inheritance), [{"acct":"cash", "dr":inheritance}, {"acct":"equity", "cr":inheritance}], {"type":"opening"})
 	if d["id"] == "local_legend": GameState.set_flag("met_maya")

@@ -162,3 +162,48 @@ func test_import_rejects_malformed_personal_assets_before_loading() -> void:
 	payload["data"]["living"]["personal_assets"]["homes"]["maple_owner_home"]["invoices"]="bad"
 	runner.check(not SaveCodec.decode(JSON.stringify(payload))["ok"],"reject malformed invoice array")
 	runner.check(PersonalAssets.owned("maple_owner_home"),"rejection did not alter active game")
+func test_home_sale_books_only_gain_or_loss_against_book_value() -> void:
+	setup()
+	PersonalAssets.buy_home("maple_owner_home",.2,20)
+	var book:=float(PersonalAssets.S()["homes"]["maple_owner_home"]["book"])
+	var income:=Ledger.balance("player","other_income")
+	runner.check(PersonalAssets.sell_home("maple_owner_home")["ok"],"sell at a loss after fees")
+	runner.eq(Ledger.balance("player","other_income"),income,"proceeds are not income when sold below book")
+	runner.check(Ledger.balance("player","exp:other")>=book-171000,"loss against carrying value is expensed")
+	runner.eq(Ledger.balance("player","property_assets"),0,"asset leaves the books at its carrying value")
+	PersonalAssets.buy_home("maple_owner_home",.2,20)
+	RealEstateMarket.S()["index"]=1.4
+	var before:=Ledger.balance("player","other_income")
+	runner.check(PersonalAssets.sell_home("maple_owner_home")["ok"],"sell after the market rose")
+	var h: Dictionary=PersonalAssets.S()["homes"]["maple_owner_home"]
+	var proceeds:=snappedf(snappedf(float(h["base_price"])*1.4,.01)*(1-float(PersonalAssets.cfg()["sale_fee"])),.01)
+	runner.eq(Ledger.balance("player","other_income"),before-(proceeds-float(h["book"])),"only the gain above book is income (credit-negative balance)")
+	runner.check(Ledger.check_balanced(),"disposal balanced")
+func test_repeated_missed_mortgage_payments_end_in_foreclosure_without_homelessness() -> void:
+	setup()
+	PersonalAssets.buy_home("maple_owner_home",.2,20)
+	runner.check(PersonalAssets.move_home("maple_owner_home")["ok"],"live in the owned home")
+	Ledger.expense("player","other",Ledger.cash("player"),"QA personal cash drain")
+	var credit:=PersonalAssets.personal_credit()
+	var home: Dictionary=PersonalAssets.S()["homes"]["maple_owner_home"]
+	for month in int(PersonalAssets.cfg()["foreclosure_missed"]):
+		GameState.data["clock"]["minutes"]=int(home["next"])
+		PersonalAssets.on_hour()
+	runner.eq(home["status"],"sold","lender repossesses after repeated default")
+	runner.eq(float(home["balance"]),0.0,"no mortgage remains after the forced sale")
+	runner.eq(Ledger.balance("player","property_assets"),0,"home leaves the personal books")
+	runner.check(PersonalAssets.personal_credit()<credit,"foreclosure damages credit")
+	runner.eq(Living.home(),"riverside_studio","the player is never left without a home")
+	runner.check(Ledger.check_balanced(),"foreclosure books balance")
+	runner.check(not PersonalAssets.sell_home("maple_owner_home")["ok"],"a foreclosed home cannot be sold again")
+func test_personal_market_reads_do_not_switch_company_context() -> void:
+	setup()
+	Company.register("Housing Reader","retail_online","Riverside")
+	Company.open_business_account(1000)
+	var active:=GameState.company_id()
+	RealEstateMarket.S()
+	CompanyPortfolio.capture()
+	var quote:=PersonalAssets.price("maple_owner_home")
+	runner.check(quote>0,"personal price is available from a company view")
+	runner.eq(GameState.company_id(),active,"quote never switches the viewed company")
+	runner.eq(PersonalAssets.personal_credit(),CompanyPortfolio.run_in("",func():return Bank.credit()),"stored personal credit matches the personal context")

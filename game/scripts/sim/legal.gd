@@ -48,6 +48,11 @@ static func supplier_breach(job_id: String) -> String:
 static func employee_dispute(entity: String) -> String:
 	var wages := maxf(0,-Ledger.balance(entity,"wages_payable"))
 	return _open(entity,"employee","",wages,I18n.t("Employee wages")) if wages>0 else ""
+## An anti-corruption investigation is opened by the authorities, runs through the court option (legal fee plus days) and always ends in a fine.
+static func open_integrity_probe(entity: String,fine: float,party: String) -> String:
+	var id := _open(entity,"integrity","",fine,party)
+	if id!="":choose(id,str(cfg()["integrity_option"]),true)
+	return id
 static func ip_dispute(job_id: String) -> String:
 	var job := Jobs.get_job(job_id)
 	if job.is_empty() or job.get("status","")!="paid" or job.get("segment","") not in ["media","manufacturing"]:return ""
@@ -100,6 +105,12 @@ static func _resolve(c: Dictionary) -> void:
 		if damages>0:Ledger.expense(entity,"legal",damages,I18n.t("Employee dispute compensation: %s")%Fmt.money(damages),Insurance.loss_source(src,"liability"),"cash" if Ledger.cash(entity)>=damages else "accounts_payable")
 		c["paid"]=amount+damages
 		Brand.record(entity,"employees",-4 if not win else 2)
+	elif c["kind"]=="integrity":
+		# Cooperation can halve the fine, but the investigation never ends without a penalty.
+		var pay := snappedf(amount*(0.5 if win else 1.0),.01)
+		Ledger.expense(entity,"legal",pay,I18n.t("Anti-corruption fine: %s")%Fmt.money(pay),src,"cash" if Ledger.cash(entity)>=pay else "accounts_payable")
+		c["paid"]=pay
+		Brand.record(entity,"news",-6)
 	elif c["kind"]=="ip":
 		var pay := snappedf(amount*(1.0-share),.01)
 		if pay>0:Ledger.expense(entity,"legal",pay,I18n.t("IP licence settlement: %s")%Fmt.money(pay),Insurance.loss_source(src,"liability"),"cash" if Ledger.cash(entity)>=pay else "accounts_payable")

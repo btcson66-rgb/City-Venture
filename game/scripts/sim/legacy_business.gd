@@ -219,7 +219,6 @@ static func end_story(choice: String) -> Dictionary:
 	if choice == "employees":
 		var shares: Dictionary = GameState.data.get("cap_table", {"founder": 1.0}).duplicate()
 		var grant := float(cfg()["employee_share"])
-		var founder_grant := float(shares.get("founder", 0)) * grant
 		for owner in shares:
 			shares[owner] = float(shares[owner]) * (1.0 - grant)
 		shares["employees"] = float(shares.get("employees", 0)) + grant
@@ -227,9 +226,11 @@ static func end_story(choice: String) -> Dictionary:
 		var book := snappedf(maxf(0, -Ledger.balance(ent, "equity")) * grant, 0.01)
 		if book > 0:
 			Ledger.post(ent, I18n.t("Board-approved employee ownership: %s") % Fmt.pct(grant), [{"acct": "equity", "dr": book}, {"acct": "equity:employees", "cr": book}], {"type": "ownership"})
-		var carrying := snappedf(maxf(0, Ledger.balance("player", "investments")) * founder_grant / maxf(0.01, float(shares.get("founder", 0)) / (1.0 - grant)), 0.01)
+		# The founder gives up this company's own carrying cost, in the ledger and in the basis record together.
+		var carrying := snappedf(minf(HoldingGroups.basis(ent), maxf(0, Ledger.balance("player", "investments"))) * grant, 0.01)
 		if carrying > 0:
-			Ledger.post("player", "Founder shares granted to the team", [{"acct": "exp:other", "dr": carrying}, {"acct": "investments", "cr": carrying}], {"type": "ownership"})
+			Ledger.post("player", I18n.t("Founder shares granted to the team"), [{"acct": "exp:other", "dr": carrying}, {"acct": "investments", "cr": carrying}], {"type": "ownership", "company": ent})
+			HoldingGroups.add_basis(ent, -carrying)
 	if choice == "mentor" and GlobalMarket.live(ent):
 		S()["manager"] = {"entity": ent, "next_fee": Clock.now(), "last_day": -1, "unpaid": 0.0}
 	S()["ending"] = choice
@@ -301,7 +302,7 @@ static func on_hour() -> void:
 		mgr["unpaid"] = float(mgr["unpaid"]) + fee
 		mgr["next_fee"] = Clock.now() + int(cfg()["manager_fee_days"]) * Clock.DAY
 	if float(mgr["unpaid"]) > 0 and Ledger.cash(str(mgr["entity"])) >= float(mgr["unpaid"]):
-		Ledger.post(str(mgr["entity"]), "Contract manager fee paid", [{"acct": "wages_payable", "dr": mgr["unpaid"]}, {"acct": "cash", "cr": mgr["unpaid"]}], {"type": "manager"})
+		Ledger.post(str(mgr["entity"]), I18n.t("Contract manager fee paid"), [{"acct": "wages_payable", "dr": mgr["unpaid"]}, {"acct": "cash", "cr": mgr["unpaid"]}], {"type": "manager"})
 		mgr["unpaid"] = 0.0
 	if float(mgr["unpaid"]) > 0 or int(mgr["last_day"]) == Clock.day_index() or Clock.hour() < 9:
 		return

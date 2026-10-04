@@ -49,7 +49,8 @@ static func rescue_with_savings() -> Dictionary:
 		return {"ok": false, "error": I18n.t("You'd need %s of your own money.") % Fmt.money0(need)}
 	if need > 0.0:
 		Ledger.post("player", I18n.t("Rescue capital into %s") % GameState.entity_name(ent), [{"acct": "investments", "dr": need}, {"acct": "cash", "cr": need}], {"type": "capital"})
-		Ledger.post(ent, "Founder rescue capital", [{"acct": "cash", "dr": need}, {"acct": "equity", "cr": need}], {"type": "capital"})
+		HoldingGroups.add_basis(ent, need)
+		Ledger.post(ent, I18n.t("Founder rescue capital"), [{"acct": "cash", "dr": need}, {"acct": "equity", "cr": need}], {"type": "capital"})
 	for l in Bank.loans(ent):
 		if l["status"] == "called" or l["status"] == "defaulted":
 			l["status"] = "called"

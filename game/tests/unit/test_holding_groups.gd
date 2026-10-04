@@ -355,3 +355,37 @@ func test_another_company_cannot_open_trade_in_the_first_companys_paid_office() 
 	CompanyPortfolio.switch(owner)
 	runner.check(TradeIndustry.valid(),"real office owner remains running")
 
+func _basis_sum() -> float:
+	var total := 0.0
+	for id in CompanyPortfolio.ids(true):total+=HoldingGroups.basis(str(id))
+	return snappedf(total,.01)
+func test_basis_always_equals_ledger_investments_through_hold_release_rescue_and_grant() -> void:
+	var g := group()
+	runner.eq(_basis_sum(),snappedf(Ledger.balance("player","investments"),.01),"holding transfers only move carrying cost")
+	runner.check(HoldingGroups.release(g[0],g[1])["ok"],"release a subsidiary")
+	runner.eq(_basis_sum(),snappedf(Ledger.balance("player","investments"),.01),"release returns carrying cost to the child")
+	Ledger.post("player","QA founder cash",[{"acct":"cash","dr":9000},{"acct":"equity","cr":9000}],{"type":"test_fixture"})
+	CompanyPortfolio.switch(g[2])
+	Ledger.expense(g[2],"other",Ledger.cash(g[2]),"QA cash drain")
+	Insolvency.begin(g[2],"QA shortfall")
+	var need := Insolvency.shortfall(g[2])
+	runner.check(need>0,"rescue is needed")
+	runner.check(Insolvency.rescue_with_savings()["ok"],"founder rescue")
+	runner.eq(_basis_sum(),snappedf(Ledger.balance("player","investments"),.01),"rescue capital raises basis with investments")
+func test_employee_grant_reduces_only_that_companys_basis() -> void:
+	var a := company("Team Owned")
+	Staff.S()["people"]["QA"]={"id":"QA","morale":70}
+	GameState.set_flag("legacy_met_maya")
+	var before := HoldingGroups.basis(a)
+	var other := company("Other Owned")
+	CompanyPortfolio.switch(a)
+	runner.check(LegacyBusiness.end_story("employees")["ok"],"employee ownership ending")
+	runner.check(HoldingGroups.basis(a)<before,"granted share lowers this company's carrying cost")
+	runner.eq(HoldingGroups.basis(other),3000.0,"other company untouched")
+	runner.eq(_basis_sum(),snappedf(Ledger.balance("player","investments"),.01),"basis still equals ledger investments")
+func test_group_snapshot_matches_ledger_balance_at_and_invalidates_on_new_entries() -> void:
+	var g := group()
+	var t := Clock.now()+1
+	runner.eq(HoldingGroups.balance_at(g[1],"cash",t),Ledger.balance_at(g[1],"cash",t),"single pass equals journal scan")
+	Ledger.post(g[1],"QA cash",[{"acct":"cash","dr":50},{"acct":"equity","cr":50}],{"type":"test_fixture"})
+	runner.eq(HoldingGroups.balance_at(g[1],"cash",t+1),Ledger.balance_at(g[1],"cash",t+1),"new entry invalidates the snapshot")

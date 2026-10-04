@@ -41,10 +41,42 @@ static func sell_home(id: String) -> Dictionary:
 	var debt:=principal+arrears
 	if h["invoices"].any(func(row):return not row["paid"]):return error("Collect outstanding tenant invoices before selling; wait thirty days after each invoice.")
 	if Ledger.cash("player")+proceeds<debt:return error("Sale proceeds do not cover the mortgage. Save the shortfall or keep the home.")
-	Ledger.post("player",I18n.t("Home sale after fees: %s")%Fmt.money(proceeds),[{"acct":"cash","dr":proceeds},{"acct":"other_income","cr":proceeds},{"acct":"exp:other","dr":h["book"]},{"acct":"property_assets","cr":h["book"]}],{"type":"personal_home_sale","id":id})
+	# Only the difference between the net proceeds and the carrying value is a gain or loss; the whole price is never income.
+	var book:=float(h["book"])
+	var lines:Array=[{"acct":"cash","dr":proceeds},{"acct":"property_assets","cr":book}]
+	var gain:=snappedf(proceeds-book,.01)
+	if gain>0:lines.append({"acct":"other_income","cr":gain})
+	elif gain<0:lines.append({"acct":"exp:other","dr":-gain})
+	Ledger.post("player",I18n.t("Home sale after fees: %s")%Fmt.money(proceeds),lines,{"type":"personal_home_sale","id":id})
 	if debt>0:Ledger.post("player",I18n.t("Mortgage repaid: %s")%Fmt.money(debt),[{"acct":"loan_payable","dr":principal},{"acct":"accounts_payable","dr":arrears},{"acct":"cash","cr":debt}],{"type":"personal_home"})
 	h["balance"]=0;h["arrears"]=0;h["status"]="sold"
 	return {"ok":true,"value":proceeds}
+## After repeated missed payments the lender repossesses and sells the home at a forced discount. The lender has no further claim,
+## the owner keeps any surplus, books the real loss against the carrying value and takes a lasting credit hit.
+static func foreclose(id: String) -> Dictionary:
+	if not owned(id):return error("Choose an owned home first.")
+	var h: Dictionary=S()["homes"][id]
+	var forced:=snappedf(snappedf(float(h["base_price"])*market_index(),.01)*(1-float(cfg()["foreclosure_discount"])),.01)
+	var principal:=float(h["balance"]);var arrears:=float(h["arrears"])
+	var surplus:=snappedf(maxf(0,forced-principal-arrears),.01)
+	var book:=float(h["book"])
+	var lines:Array=[{"acct":"property_assets","cr":book}]
+	if principal>0:lines.append({"acct":"loan_payable","dr":principal})
+	if arrears>0:lines.append({"acct":"accounts_payable","dr":arrears})
+	if surplus>0:lines.append({"acct":"cash","dr":surplus})
+	var net:=snappedf(principal+arrears+surplus-book,.01)
+	if net>0:lines.append({"acct":"other_income","cr":net})
+	elif net<0:lines.append({"acct":"exp:other","dr":-net})
+	Ledger.post("player",I18n.t("Foreclosure sale of %s: the lender takes the home")%I18n.t(DataDB.properties[id]["name"]),lines,{"type":"personal_foreclosure","id":id})
+	for row in h["invoices"]:row["paid"]=true
+	h["balance"]=0;h["arrears"]=0;h["missed"]=0;h["status"]="sold";h["tenant"]={};h.erase("leave")
+	if Living.home()==id:
+		# Never leave the player homeless: they fall back to the starter flat with no moving fee.
+		Housing.move_stock(id,"riverside_studio");GameState.data["player"]["home"]="riverside_studio"
+		EventBus.world_refresh.emit()
+	CompanyPortfolio.run_in("",func():Bank.adjust_credit(-int(cfg()["foreclosure_credit_hit"]),"home foreclosure"))
+	GameState.timeline(I18n.t("The lender foreclosed on %s after missed mortgage payments.")%I18n.t(DataDB.properties[id]["name"]),"home")
+	return {"ok":true,"surplus":surplus}
 static func rent_home(id: String,ratio: float) -> Dictionary:
 	if not owned(id) or Living.home()==id or S()["homes"][id]["status"] not in ["empty","listed"] or not is_finite(ratio) or ratio<float(RealEstate.cfg()["rent_min"]) or ratio>float(RealEstate.cfg()["rent_max"]):return error("Move out and choose valid rent terms before listing this home.")
 	var h: Dictionary=S()["homes"][id]
@@ -58,7 +90,8 @@ static func end_tenancy(id: String) -> Dictionary:
 	if not h.has("leave"):h["leave"]=Clock.now()+int(cfg()["move_notice_days"])*Clock.DAY
 	return {"ok":true}
 static func on_hour() -> void:
-	if not S()["homes"].is_empty():CompanyPortfolio.run_in("",func():RealEstateMarket.update())
+	# The household market moves monthly: enter the personal context only when a new month is due.
+	if not S()["homes"].is_empty() and int(_personal_state("real_estate",{}).get("market",{}).get("month",-1))!=Clock.day_index()/30:CompanyPortfolio.run_in("",func():RealEstateMarket.update())
 	for id in S()["homes"]:
 		var h: Dictionary=S()["homes"][id]
 		if h["status"]=="sold":continue
@@ -78,10 +111,13 @@ static func on_hour() -> void:
 			if Ledger.cash("player")>=due:
 				var principal:=maxf(0,due-interest-float(h["arrears"]))
 				Ledger.post("player",I18n.t("Personal mortgage payment: %s")%Fmt.money(due),[{"acct":"loan_payable","dr":principal},{"acct":"exp:interest","dr":interest},{"acct":"accounts_payable","dr":h["arrears"]},{"acct":"cash","cr":due}],{"type":"personal_mortgage","id":id})
-				h["balance"]=snappedf(float(h["balance"])-principal,.01);h["arrears"]=0;h["paid_n"]=int(h["paid_n"])+1
+				h["balance"]=snappedf(float(h["balance"])-principal,.01);h["arrears"]=0;h["paid_n"]=int(h["paid_n"])+1;h["missed"]=0
 			else:
 				Ledger.post("player",I18n.t("Unpaid mortgage interest: %s")%Fmt.money(interest),[{"acct":"exp:interest","dr":interest},{"acct":"accounts_payable","cr":interest}],{"type":"personal_mortgage","id":id});h["arrears"]=float(h["arrears"])+interest
+				h["missed"]=int(h.get("missed",0))+1
 				EventBus.notify.emit(I18n.t("Mortgage unpaid. Raise personal cash, rent another home or sell an empty property."),"warn","home")
+				if int(h["missed"])>=int(cfg()["foreclosure_missed"]):foreclose(id)
+				if h["status"]=="sold":continue
 		if h["status"]=="tenanted":
 			var rent:=float(h["rent"])
 			var paid:=GameState.rng.randf()<float(cfg()["rent_payment_chance"])
@@ -203,6 +239,20 @@ static func commute(to: String,hour: int,driving: bool) -> int:
 	return int(trip(from,to,hour)["minutes"]) if driving else metro_minutes(from,to)+int(p.get("metro_access_minutes",5))
 
 ## Resolve household market/credit in the personal context: switching companies cannot refresh a home's price.
-static func market_index() -> float:return float(CompanyPortfolio.run_in("",func():return RealEstateMarket.index()))
-static func market_rate() -> float:return float(CompanyPortfolio.run_in("",func():return RealEstateMarket.rate()))
-static func personal_credit() -> int:return int(CompanyPortfolio.run_in("",func():return Bank.credit()))
+## The household view is read straight from the stored personal context, so price quotes never switch companies.
+static func _personal_state(key: String,fallback: Variant) -> Variant:
+	if CompanyPortfolio.active_of(GameState.data)=="":return GameState.data.get(key,fallback)
+	return GameState.data.get("company_contexts",{}).get("",{}).get("states",{}).get(key,fallback)
+static func market_index() -> float:
+	var market: Dictionary=_personal_state("real_estate",{}).get("market",{})
+	if not market.has("index"):return float(CompanyPortfolio.run_in("",func():return RealEstateMarket.index()))
+	return float(market["index"])
+static func market_rate() -> float:
+	var market: Dictionary=_personal_state("real_estate",{}).get("market",{})
+	if not market.has("rate_shift"):return float(CompanyPortfolio.run_in("",func():return RealEstateMarket.rate()))
+	return Bank.base_rate()+float(market["rate_shift"])
+static func personal_credit() -> int:
+	if CompanyPortfolio.active_of(GameState.data)=="":return Bank.credit()
+	var view: Dictionary=GameState.data.get("company_contexts",{}).get("",{})
+	if not view.get("bank",{}).has("credit"):return int(CompanyPortfolio.run_in("",func():return Bank.credit()))
+	return int(view["bank"]["credit"])

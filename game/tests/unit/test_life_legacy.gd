@@ -134,3 +134,26 @@ func test_negative_net_worth_and_productivity_bonus_do_not_rewrite_actual_hours(
 	var result := LifeLegacy.next_life("next")
 	runner.check(result["ok"], "negative wealth never traps next life")
 	if result["ok"]: runner.eq(result["inherited"], 0, "no wealth creates no inherited capital")
+
+func test_review_resnapshots_after_civic_finale_and_when_retiring() -> void:
+	setup()
+	GameState.data["clock"]["minutes"] = 31 * Clock.DAY
+	var first: Dictionary = LifeLegacy.review()["review"]
+	runner.check(not first.get("after_civic", false), "first open predates the civic finale")
+	runner.check(not LifeLegacy.S()["retired"], "opening is not retirement")
+	GameState.timeline("QA civic finale", "story")
+	GameState.set_flag("city24_review")
+	GameState.data["clock"]["minutes"] += Clock.DAY
+	var second: Dictionary = LifeLegacy.review()["review"]
+	runner.check(second["after_civic"] and int(second["t"]) > int(first["t"]), "review refreshed after chapter 24")
+	runner.check(second["moments"].any(func(row): return row["text"] == "QA civic finale"), "new civic moment is in the review")
+	var again: Dictionary = LifeLegacy.review()["review"]
+	runner.eq(again["t"], second["t"], "further opens do not churn the snapshot")
+	GameState.data["clock"]["minutes"] += Clock.DAY
+	LifeLegacy.review(true)
+	runner.check(LifeLegacy.S()["retired"], "retiring marks the existing review retired")
+	runner.check(int(LifeLegacy.S()["review"]["t"]) > int(second["t"]), "retirement records the latest state")
+	var recorded: int = LifeLegacy.S()["review"]["t"]
+	GameState.data["clock"]["minutes"] += Clock.DAY
+	LifeLegacy.review(true)
+	runner.eq(LifeLegacy.S()["review"]["t"], recorded, "retiring twice records once")
