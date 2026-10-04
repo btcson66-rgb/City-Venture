@@ -88,8 +88,9 @@ static func _setup_scenario(initial: Dictionary) -> void:
 		Bank.B()["no_loans_until"] = Clock.now() + int(initial.get("ban_days", 0)) * Clock.DAY
 	if initial.has("company"):
 		var registration := Company.register(str(initial["company"]), str(initial["type"]), "riverside_studio")
-		assert(registration.get("ok", false))
-		assert(Company.open_business_account(float(initial["capital"])).get("ok", false))
+		var account := Company.open_business_account(float(initial["capital"]))
+		if not registration.get("ok", false) or not account.get("ok", false):
+			push_error("Scenario setup failed: company registration or business account")
 		S()["company"] = GameState.company_id()
 	var entity := GameState.business_entity()
 	if initial.get("cafe", false):
@@ -106,7 +107,8 @@ static func _setup_scenario(initial: Dictionary) -> void:
 	if initial.has("loan"):
 		_open_loan(entity, float(initial["loan"]), int(initial["loan_months"]))
 	if initial.get("van", false):
-		assert(Logistics.buy_van().get("ok", false))
+		var van := Logistics.buy_van()
+		if not van.get("ok", false): push_error("Scenario setup failed: delivery van")
 		for index in int(initial.get("contracts", 2)):
 			var job := Logistics._make_job()
 			Logistics.S()["jobs"][job["id"]] = job
@@ -148,7 +150,7 @@ static func demand(key: String) -> float:
 	if population > 0:
 		preference = lerpf(1.0, preference, float(budget) / population)
 	seeded.seed = int(S()["seed"]) ^ (key + str(Clock.day_index())).hash()
-	return maxf(0.1, base * preference * (1.0 + seeded.randf_range(-1.0, 1.0) * number("demand_volatility", 0.0)))
+	return clampf(base * preference * (1.0 + seeded.randf_range(-1.0, 1.0) * number("demand_volatility", 0.0)), 0.75, 1.35)  # bounded so Macro x Rivals x Replay cannot compound
 
 
 static func net_worth() -> float:
@@ -167,6 +169,9 @@ static func metrics() -> Dictionary:
 	var revenue := 0.0
 	for entity in GameState.data["entities"]:
 		revenue -= Ledger.balance(entity, "revenue") + Ledger.balance(entity, "refunds")
+		# Win thresholds are gross-of-VAT sales: add back the VAT these companies collected (net of refunds).
+		for collected in Tax.E(entity)["sales"].values() if Tax.S()["entities"].has(entity) else []:
+			revenue += float(collected)
 	var rating := -1.0
 	if GameState.data.has("cafe") and Cafe.ready_to_open():
 		rating = float(GameState.data["cafe"]["rating"])

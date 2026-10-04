@@ -273,6 +273,12 @@ func _open_thread(from: String) -> void:
 func _thread() -> void:
 	var primary_used := false
 	_header(PhoneMessages.contact_name(thread_with))
+	# Only the newest message that still has a recommended reply carries the primary button.
+	var primary_message := ""
+	for m in GameState.data["messages"]:
+		if m["from"] != thread_with or m.get("direction", "incoming") == "outgoing" or m.has("answered"): continue
+		if PhoneMessages.choices(m).any(func(c): return c.get("recommended", false) and EventEngine.choice_available(c, PhoneMessages.context(m))):
+			primary_message = str(m["id"])
 	for m in GameState.data["messages"]:
 		if m["from"] != thread_with:
 			continue
@@ -295,7 +301,7 @@ func _thread() -> void:
 		for c in PhoneMessages.choices(m):
 			var available := EventEngine.choice_available(c, PhoneMessages.context(m))
 			var label := EventEngine.fill(str(c.get("label", c.get("text", "Okay, thanks."))), PhoneMessages.context(m))
-			var primary: bool = available and c.get("recommended", false) and not primary_used
+			var primary: bool = available and c.get("recommended", false) and not primary_used and str(m["id"]) == primary_message
 			primary_used = primary_used or primary
 			var button := UIK.button(("✓ " if available else "✗ ") + I18n.t(label), _reply.bind(str(m["id"]), str(c["id"])), "primary" if primary else "normal")
 			button.name = "Reply_" + str(m["id"]) + "_" + str(c["id"])

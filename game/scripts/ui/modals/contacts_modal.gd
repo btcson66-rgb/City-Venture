@@ -56,7 +56,7 @@ func _request(id: String,node: Dictionary,index: int) -> void:
 	visible=false
 	MiniGames.play(PersonalRequestGame.new(node),func(result):
 		visible=true
-		if not result.get("aborted",false):_result(PersonalLife.request_done(id,index,float(result["score"])))
+		if not result.get("aborted",false):_result(PersonalLife.request_done(id,index,float(result["score"]),str(result.get("approach","thorough"))))
 	)
 func _referral(v: VBoxContainer,id: String,c: Dictionary) -> void:
 	var def: Dictionary=PersonalLife.stories()[id]["referral"]

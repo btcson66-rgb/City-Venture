@@ -34,7 +34,7 @@ static func obligations(pid: String) -> Array:
 	return result
 
 
-static func quote(pid: String, mode: String, plan: Dictionary = {}) -> Dictionary:
+static func quote(pid: String, mode: String, plan: Dictionary = {}, pending_ok := false) -> Dictionary:
 	var prop := policy(pid)
 	var lease: Dictionary = Living.D()["leases"].get(pid, {})
 	if prop.is_empty() or lease.is_empty(): return error("This property has no active lease.")
@@ -43,9 +43,9 @@ static func quote(pid: String, mode: String, plan: Dictionary = {}) -> Dictionar
 	if not is_finite(float(lease.get("rent", 0))) or float(lease.get("rent", 0)) < 0 or int(prop.get("notice_days", 30)) < 0 or float(prop.get("early_exit_fee_months", 0)) < 0:
 		return error("Invalid lease terms. Review the property data before ending this lease.")
 	if GameState.data["entities"].get(ent, {}).has("closed"): return error("This company is already closed.")
-	if lease.has("ending"): return error("Notice has already been given. Review the pending notice.")
+	if lease.has("ending") and not pending_ok: return error("Notice has already been given. Review the pending notice.")
 	if str(prop.get("kind", "")) == "home" and Living.home() == pid:
-		return error("Choose a new home before ending your current home lease.")
+		return error("Your current home lease ends when you move: book a new home at the Home move sign (30 days' notice or a termination fee).")
 	var count := Ecommerce.total_units_at(pid)
 	var due := obligations(pid)
 	var team := workers(pid)
@@ -116,9 +116,7 @@ static func _finish(pid: String) -> Dictionary:
 	if Clock.now() < int(q["due"]): return error("The notice period has not ended yet. Keep using the premises until the exit date.")
 	var plan: Dictionary = q["plan"]
 	# Revalidate a fresh quote without charging the already-paid notice a second time.
-	lease.erase("ending")
-	var current := quote(pid, q["mode"], plan)
-	lease["ending"] = q
+	var current := quote(pid, q["mode"], plan, true)
 	if not current["ok"]:
 		q["blocked"] = current["error"]
 		return current

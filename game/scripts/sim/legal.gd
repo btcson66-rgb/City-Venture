@@ -90,6 +90,7 @@ static func _resolve(c: Dictionary) -> void:
 		var got := snappedf(amount*share,.01)
 		Ledger.post(entity,I18n.t("Disputed invoice recovered: %s")%Fmt.money(got),[{"acct":"cash","dr":got},{"acct":"exp:bad_debt","dr":amount-got},{"acct":"accounts_receivable","cr":amount}],src)
 		c["recovered"]=got
+		Tax.bad_debt_relief(entity,amount-got,str(src["segment"]))
 		job["receivable"]=0.0
 		job["status"]="paid" if got>=amount-.01 else "written_off"
 	elif c["kind"]=="supplier":

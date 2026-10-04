@@ -4118,6 +4118,7 @@ func _personal_life_fixture() -> void:
 	MiniGames.auto=-1
 	for id in ["maya","priya","nina","sam","ken"]:
 		PersonalLife.meet(id) # Component fixture: each met contact's own three requests, not main-story flags.
+		PersonalLife.change(id,60);PersonalLife.note_kind(id,"event");PersonalLife.note_kind(id,"gift") # relationship built through events and gifts
 		UIRoot.open_modal(ContactsModal.new(id))
 		await bot.wait(.25)
 		for index in 3:

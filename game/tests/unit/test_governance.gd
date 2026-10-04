@@ -140,7 +140,7 @@ func test_court_loss_timeout_and_customer_risk_resume_without_soft_lock() -> voi
 	Legal.choose(id,"court");Legal.get_case(id)["terms"]["win"]=0.0
 	Clock.advance(21*Clock.DAY)
 	runner.eq(Legal.get_case(id)["recovered"],0.0,"lost court collects nothing")
-	runner.eq(Ledger.balance(entity,"exp:bad_debt"),1050.0,"actual invoice written off")
+	runner.eq(Ledger.balance(entity,"exp:bad_debt"),1000.0,"written-off invoice net of its recovered 50 output VAT")
 	runner.check(not Jobs.get_job(job)["dispute_pause"],"case pause ends")
 	var next := _job(entity);var next_id := Legal.unpaid(next)
 	Clock.advance(17*Clock.DAY)
@@ -292,3 +292,67 @@ func test_brand_uses_actual_hotel_review_array_and_wages() -> void:
 	Ledger.post(entity,"Actual earned wages",[{"acct":"exp:payroll","dr":200},{"acct":"wages_payable","cr":200}],{"type":"payroll"})
 	runner.check(Brand.components(entity)["employees"]<50,"unpaid actual wages reduce employee standing")
 	runner.check(Ledger.check_balanced(),"brand observations do not invent money")
+
+func test_legal_routes_each_win_for_some_dispute_size_and_none_is_recommended() -> void:
+	var options: Dictionary = Legal.options()
+	var best := {}
+	for amount in [100.0, 600.0, 2000.0, 6000.0]:
+		var top := ""
+		var top_ev := -INF
+		for route in options:
+			var terms: Dictionary = options[route]
+			runner.check(not terms.has("recommended"), "no recommended legal route: " + route)
+			var ev := float(amount) * float(terms["win"]) * float(terms["recovery"]) - float(terms["fee"])
+			if ev > top_ev:
+				top_ev = ev
+				top = route
+		best[top] = true
+	runner.eq(best.size(), 3, "settle, letter and court each have the best expected value somewhere")
+
+func test_input_vat_credit_reduces_the_return_and_offsets_cost_not_income() -> void:
+	var entity := _company()
+	_sale(entity, 2100)
+	Ledger.post(entity, "Stock purchase", [{"acct": "inventory_in_transit", "dr": 1050}, {"acct": "cash", "cr": 1050}], {"type": "po", "id": "PO-X", "segment": "ecommerce"})
+	var income_before := Ledger.balance(entity, "other_income")
+	_jump(2031, 7)
+	Tax.close_period(entity)
+	var r: Dictionary = Tax.returns(entity)[0]
+	runner.eq(float(r["amount"]), 50.0, "100 output VAT less 50 recoverable input VAT")
+	runner.eq(Ledger.balance(entity, "other_income"), income_before, "credit is not income")
+	runner.eq(Ledger.balance(entity, "cogs"), -50.0, "credit offsets the cost of goods")
+	runner.check(Ledger.check_balanced(), "balanced")
+
+func test_written_off_invoice_recovers_its_vat_against_bad_debt() -> void:
+	var entity := _company()
+	var job := _job(entity)
+	var id := Legal.unpaid(job)
+	Legal.choose(id, "letter")
+	Legal.get_case(id)["terms"]["win"] = 0.0
+	var vat_before := -Ledger.balance(entity, "tax_payable")
+	Legal.handle("gov.legal_result", {"id": id, "entity": entity})
+	runner.check(-Ledger.balance(entity, "tax_payable") < vat_before - 40.0, "output VAT on the lost invoice is recovered")
+	runner.check(Ledger.check_balanced(), "balanced")
+
+func test_late_return_accrues_interest_per_period_and_nil_returns_send_no_reminder() -> void:
+	var entity := _company()
+	_sale(entity, 1050)
+	_jump(2031, 7)
+	Tax.close_period(entity)
+	var r: Dictionary = Tax.returns(entity)[0]
+	GameState.data["clock"]["minutes"] = int(r["due"]) + 1
+	Tax.on_hour()
+	var fine := float(r["fine"])
+	GameState.data["clock"]["minutes"] = int(r["due"]) + 65 * Clock.DAY
+	Tax.on_hour()
+	runner.check(float(r["fine"]) > fine, "interest accrues for each further period")
+	var again := float(r["fine"])
+	Tax.on_hour()
+	runner.eq(float(r["fine"]), again, "same period never repeats")
+
+func test_nil_return_sends_no_reminder() -> void:
+	var entity := _company()
+	var messages: int = GameState.data["messages"].size()
+	_jump(2031, 7)
+	Tax.close_period(entity)
+	runner.eq(GameState.data["messages"].size(), messages, "a nil return creates no reminder")
+	runner.eq(Tax.returns(entity)[0]["status"], "filed", "nothing to file")

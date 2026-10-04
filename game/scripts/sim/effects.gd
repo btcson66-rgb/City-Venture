@@ -11,6 +11,32 @@ static func _num(v: Variant, ctx: Dictionary) -> float:
 	return float(v)
 
 
+## Cheap validation of the effects that can refuse, so a multi-effect reply is applied whole or not at all
+## without copying the entire game state. Unknown or always-succeeding ops pass.
+static func preflight(e: Dictionary, ctx: Dictionary) -> Dictionary:
+	match str(e.get("op", "")):
+		"phone_group_job":
+			var job := GroupJobs.get_job(str(e.get("id", ctx.get("group_job", ""))))
+			if job.is_empty() or job["status"] != "offered" or GameState.data["entities"].get(job["entity"], {}).has("closed") or GameState.data["entities"].get(GameState.company_id(), {}).has("closed"):
+				return {"ok": false, "error": I18n.t("This group job is no longer on offer.")}
+		"phone_contract":
+			var contract: Dictionary = Contracts.C().get(str(e.get("id", ctx.get("contract", ""))), {})
+			if contract.is_empty() or contract["status"] != "offered" or Contracts.seller_closed(contract) or GameState.data["entities"].get(GameState.company_id(), {}).has("closed"):
+				return {"ok": false, "error": I18n.t("This offer is no longer open.")}
+		"purchase", "rush_order":
+			if Ecommerce.offer(str(ctx.get("supplier_id", e.get("supplier", "tradelink_wholesale"))), str(ctx.get("product_id", e.get("product", "")))).is_empty():
+				return {"ok": false, "error": "Supplier doesn't carry that."}
+		"phone_meeting":
+			var person := DataDB.npc(str(e.get("npc", ctx.get("npc", ""))))
+			if person.is_empty() or (person.get("schedule", []).is_empty() and str(e.get("location", "")) == ""):
+				return {"ok": false, "error": I18n.t("This contact has no meeting location.")}
+		"industry":
+			var module := Industries.find(str(e.get("industry", "")))
+			if module.is_empty() or not module["sim_class"].has_method("crisis"):
+				return {"ok": false, "error": I18n.t("Unknown industry event.")}
+	return {"ok": true}
+
+
 static func apply(e: Dictionary, ctx: Dictionary) -> Dictionary:
 	var op: String = e.get("op", "")
 	var ent := GameState.business_entity()

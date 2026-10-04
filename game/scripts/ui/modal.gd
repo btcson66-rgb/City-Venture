@@ -37,6 +37,7 @@ func _ready() -> void:
 	panel.size = panel_size
 	_fit_panel()
 	get_viewport().size_changed.connect(_fit_panel)
+	Preferences.changed.connect(_fit_panel)   # UI scale and font changes; no per-frame refit
 	add_child(panel)
 	var outer := UIK.vbox(5)
 	accessibility_scroll = ScrollContainer.new()
@@ -88,6 +89,7 @@ func rebuild() -> void:
 	UIK.clear(body)
 	UIK.clear(footer)
 	build()
+	_fit_panel()
 	if not keep.is_empty():
 		_restore_scroll.call_deferred(keep)
 
@@ -121,10 +123,16 @@ func _fit_panel() -> void:
 		return
 	var available := get_viewport_rect().size
 	var desired := Vector2(panel_size.x, panel_size.y if panel_size.y > 0.0 else 280.0)
-	panel.size = desired.min((available - Vector2(16, 16)).max(Vector2(100, 80)))
-	panel.position = (available - panel.size) / 2.0
+	var target := desired.min((available - Vector2(16, 16)).max(Vector2(100, 80)))
+	if panel.size != target:
+		panel.size = target
+	var spot := (available - panel.size) / 2.0
+	if panel.position != spot:
+		panel.position = spot
 
 
+## Some modals resize their own panel after building (decision cards, pinned footers); the guarded fit puts it back
+## without touching the layout when nothing changed.
 func _process(_delta: float) -> void:
 	_fit_panel()
 

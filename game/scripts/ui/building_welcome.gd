@@ -36,8 +36,16 @@ func _ready() -> void:
 func _entered(kind: String, id: String) -> void:
 	hide_card()
 	building_id = id if kind == "interior" else ""
-	if kind == "interior" and BuildingInfo.record_entry(id) <= 2:
+	if kind != "interior": return
+	var visits := BuildingInfo.record_entry(id)
+	# The card introduces a place on the first visits; later, it still appears when the doors are about to close.
+	if visits <= 2 or closes_soon(id):
 		show_card()
+
+
+static func closes_soon(id: String) -> bool:
+	var close := int(DestinationHours.status(id)["close"])
+	return close >= 0 and close - Clock.now() <= 60
 
 
 func show_card() -> void:

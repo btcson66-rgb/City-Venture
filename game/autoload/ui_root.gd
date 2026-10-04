@@ -20,6 +20,8 @@ var _suppress_decisions := false
 func _ready() -> void:
 	layer = 10
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	# A planned meeting is checked once per game minute, not every frame.
+	Clock.minute_tick.connect(func(_t): PhoneMessages.check_arrival())
 	root = Control.new()
 	root.set_anchors_preset(Control.PRESET_FULL_RECT)
 	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -134,7 +136,6 @@ func play_dialogue(id: String, done := Callable()) -> void:
 
 
 func _process(_delta: float) -> void:
-	PhoneMessages.check_arrival()
 	# toasts sit at the top in the world; while a management screen is open they drop to the bottom
 	# edge so they never cover a modal's title bar
 	# toasts sit at the top in the world. With a screen open, only the newest one shows, tucked under

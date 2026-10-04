@@ -191,3 +191,35 @@ func test_genuine_pre_phone_twelve_chapter_save_keeps_books_and_history() -> voi
 	runner.eq(GameState.data["messages"].size(), count + 1, "actual historical messages plus one outgoing reply survive load")
 	runner.eq(Ledger.cash(GameState.business_entity()), cash, "loading and acknowledging do not change genuine books")
 	runner.check(Ledger.check_balanced(), "actual twelve-chapter books remain balanced")
+
+func test_multi_effect_reply_is_atomic_without_state_snapshot() -> void:
+	GameState.add_message("marcus", "Two things", {"replies": [{"id": "both", "label": "Both", "effects": [{"op": "set_flag", "flag": "phone_atomic_a"}, {"op": "phone_meeting", "npc": "nobody_here"}]}]})
+	var m: Dictionary = GameState.data["messages"].back()
+	var result := PhoneMessages.reply(m["id"], "both")
+	runner.check(not result["ok"], "refused effect rejects the reply")
+	runner.check(not GameState.flag("phone_atomic_a"), "earlier effect was not applied")
+	runner.check(not m.has("answered"), "message stays answerable")
+
+func test_payment_reminder_collects_only_overdue_invoice_without_new_income() -> void:
+	Company.register("Reminder Co", "ecommerce", "22 Founders Lane")
+	GameState.add_message("marcus", "Hello")
+	var id := Jobs.offer({"entity": GameState.business_entity(), "client": "c", "scope": "s", "price": 500.0, "work": 1, "due": Clock.now() + Clock.DAY, "terms": 30, "deposit": 0.0, "segment": "media"})
+	var job := Jobs.get_job(id)
+	job["status"] = "invoiced"
+	job["receivable"] = 500.0
+	job["pay_due"] = Clock.now() - 10
+	Ledger.post(GameState.business_entity(), "Test invoice", [{"acct": "accounts_receivable", "dr": 500.0}, {"acct": "revenue", "cr": 500.0}])
+	DataDB.economy["messages"]["templates"]["payment"]["early_payment_chance"] = 1.0
+	var cash := Ledger.cash(GameState.business_entity())
+	runner.check(PhoneMessages.send("marcus", "payment")["ok"], "reminder sent")
+	runner.eq(job["status"], "paid", "overdue invoice paid after the reminder")
+	runner.eq(Ledger.cash(GameState.business_entity()), cash + 500.0, "cash arrives from the real receivable")
+	runner.eq(Ledger.balance(GameState.business_entity(), "accounts_receivable"), 0.0, "receivable settled, not new revenue")
+	runner.check(Ledger.check_balanced(), "balanced")
+
+func test_bank_appointment_default_reply_keeps_the_appointment() -> void:
+	var t := Bank.book_appointment()
+	var message: Dictionary = GameState.data["messages"].back()
+	runner.eq(message["default_reply"], "keep", "expiry keeps the booking")
+	Clock.advance_to(int(message["expires"]) + 1)
+	runner.eq(int(Bank.B().get("appointment", -1)), t, "appointment still booked after the reply window")

@@ -68,12 +68,13 @@ static func reply(id: String, choice_id: String, expired := false) -> Dictionary
 	if message.has("decision"): result = EventEngine.choose(message["decision"], choice_id)
 	else:
 		var effects: Array = choice.get("effects", [])
-		var before: Dictionary = GameState.data.duplicate(true) if effects.size() > 1 else {}
+		# Validate every effect first so a refusal cannot leave a half-applied reply; no full-state snapshot is needed.
+		for effect in effects:
+			var check := Effects.preflight(effect, ctx)
+			if not check.get("ok", true): return check
 		for effect in effects:
 			result = Effects.apply(effect, ctx)
-			if not result.get("ok", true):
-				if not before.is_empty(): GameState.data = before
-				return result
+			if not result.get("ok", true): return result
 	if not result["ok"]: return result
 	# Mark the incoming message once; history remains intact across saves.
 	if not choice.get("keep_open", false):
@@ -116,7 +117,16 @@ static func send(npc: String, template: String) -> Dictionary:
 		"work": Careers.refresh_offers(); GameState.add_message(npc, "Check the current freelance offers at a co-work desk. Each brief lists its requirements and payment terms.")
 		"payment":
 			if not Jobs.S()["items"].values().any(func(j): return j["entity"] == GameState.business_entity() and j["status"] == "invoiced"): return error("Invoice completed work before asking about payment.")
-			GameState.add_message(npc, "Payment follows the invoice due date. Review receivables in Company OS; a reminder does not create a new payment.")
+			# A reminder can nudge a customer whose invoice is already overdue; it never creates a payment that was not owed.
+			var overdue: Array = Jobs.S()["items"].values().filter(func(j): return j["entity"] == GameState.business_entity() and j["status"] == "invoiced" and Clock.now() > int(j.get("pay_due", 0)))
+			overdue.sort_custom(func(a, b): return int(a["pay_due"]) < int(b["pay_due"]))
+			var paid_now := false
+			if not overdue.is_empty() and GameState.randf() < float(data.get("early_payment_chance", 0.4)):
+				Jobs.handle("job.pay", {"id": overdue[0]["id"]})
+				paid_now = overdue[0]["status"] == "paid"
+			if paid_now: GameState.add_message(npc, I18n.t("Sorry for the delay: invoice %s has just been paid.") % overdue[0]["id"])
+			elif overdue.is_empty(): GameState.add_message(npc, "Payment follows the invoice due date. Review receivables in Company OS; a reminder does not create a new payment.")
+			else: GameState.add_message(npc, "Noted, but the invoice is still overdue. Check Company OS receivables and the payment terms.")
 	if not result["ok"]: return result
 	S()["cooldowns"][key] = Clock.now() + int(data["cooldown_minutes"])
 	outgoing(npc, I18n.t(str(data["label"])))
@@ -134,12 +144,26 @@ static func book(npc: String, at := -1, location := "", conversation := "") -> D
 	if kind not in ["interior", "district"] or kind == "interior" and not DataDB.buildings.has(place) or kind == "district" and not DataDB.districts.has(place): return error("This contact has no meeting location.")
 	if at < 0:
 		var earliest := Clock.now() + int(cfg().get("meeting_lead_minutes", 60))
-		for minute in range(earliest, earliest + 8 * Clock.DAY):
+		var window := int(cfg().get("meeting_window_minutes", 60))
+		# Candidates are the earliest minute, every schedule slot start and a coarse 15-minute grid, not all 11,520 minutes.
+		var candidates: Array = [earliest]
+		var day0 := earliest - earliest % Clock.DAY
+		for day in range(9):
+			for slot in schedule:
+				if slot.get("location", "") == location:
+					var start := day0 + day * Clock.DAY + Clock.parse_hm(str(slot.get("from", "00:00")))
+					if start >= earliest: candidates.append(start)
+		var grid := earliest + 15 - earliest % 15
+		while grid < earliest + 8 * Clock.DAY:
+			candidates.append(grid)
+			grid += 15
+		candidates.sort()
+		for minute in candidates:
 			var present := false
 			for slot in schedule:
-				if slot.get("location", "") == location and Cond.all([str(slot.get("if", ""))]) and DestinationHours._window(slot, minute, "from", "to") and DestinationHours._window(slot, minute + int(cfg().get("meeting_window_minutes", 60)) - 1, "from", "to"):
+				if slot.get("location", "") == location and Cond.all([str(slot.get("if", ""))]) and DestinationHours._window(slot, minute, "from", "to") and DestinationHours._window(slot, minute + window - 1, "from", "to"):
 					present = true
-			if present and (kind != "interior" or DestinationHours._open(DataDB.building(place), minute, npc) and DestinationHours._open(DataDB.building(place), minute + int(cfg().get("meeting_window_minutes", 60)) - 1, npc)):
+			if present and (kind != "interior" or DestinationHours._open(DataDB.building(place), minute, npc) and DestinationHours._open(DataDB.building(place), minute + window - 1, npc)):
 				at = minute
 				break
 	if at < Clock.now(): return error("No meeting time is currently available. Ask again later.")

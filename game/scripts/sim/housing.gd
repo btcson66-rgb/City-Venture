@@ -9,6 +9,7 @@ static func opening() -> void:
 	if amount>0:
 		Ledger.post("player",I18n.t("Opening tenant deposit held before arrival"),[{"acct":"home_deposit","dr":amount},{"acct":"equity","cr":amount}],{"type":"opening"})
 		S()["deposits"][Living.home()]=amount
+	Living.D()["home_property"]=Living.home()
 static func views() -> Array:
 	CompanyPortfolio.capture()
 	var out: Array=[]
@@ -81,9 +82,12 @@ static func execute() -> Dictionary:
 	var refund:=float(S()["deposits"].get(old,0))
 	if refund>0:Ledger.post("player",I18n.t("Previous home deposit returned: %s")%Fmt.money(refund),[{"acct":"cash","dr":refund},{"acct":"home_deposit","cr":refund}],{"type":"home_lease_end","property":old})
 	S()["deposits"].erase(old)
+	# A lease record for the home being left would keep charging rent and could never be ended later.
+	if Living.D()["leases"].has(old) and str(DataDB.properties.get(old, {}).get("kind", "")) == "home": Living.D()["leases"].erase(old)
 	PersonalAssets.released(old)
 	move_stock(old,target)
 	GameState.data["player"]["home"]=target
+	Living.D()["home_property"]=target
 	if PersonalAssets.owned(target):PersonalAssets.S()["homes"][target]["status"]="occupied"
 	S()["moves"]=int(S()["moves"])+1
 	S()["history"].append({"from":old,"to":target,"t":Clock.now(),"penalty":penalty,"moving":moving,"refund":refund})

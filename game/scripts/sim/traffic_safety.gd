@@ -14,11 +14,20 @@ static func grade(speed: float) -> String:
 	return "major" if speed >= float(cfg()["major_from_px_s"]) else "minor"
 static func green(t := -1) -> bool:
 	return posmod(Clock.now() if t < 0 else t, int(cfg()["crossing_cycle_minutes"])) < int(cfg()["crossing_green_minutes"])
+static var _crosswalks := {}
+## Crosswalk rectangles in pixels, computed once per district.
+static func crosswalk_rects(district: String) -> Array:
+	if not _crosswalks.has(district):
+		var rects: Array = []
+		for g in DataDB.districts.get(district, {}).get("ground", []):
+			if str(g["type"]) == "crosswalk_h":
+				var r: Array = g["rect"]
+				rects.append(Rect2(float(r[0])*16, float(r[1])*16, float(r[2])*16, float(r[3])*16))
+		_crosswalks[district] = rects
+	return _crosswalks[district]
 static func crossing(district: String, point: Vector2) -> bool:
-	for g in DataDB.districts.get(district, {}).get("ground", []):
-		if str(g["type"]) == "crosswalk_h":
-			var r: Array = g["rect"]
-			if Rect2(float(r[0])*16, float(r[1])*16, float(r[2])*16, float(r[3])*16).has_point(point): return true
+	for r in crosswalk_rects(district):
+		if r.has_point(point): return true
 	return false
 static func protected_crossing(district: String, point: Vector2) -> bool: return crossing(district, point) and green()
 static func speed_multiplier() -> float:
@@ -47,6 +56,13 @@ static func accident(id: int) -> Dictionary:
 		if int(a["id"]) == id: return a
 	return {}
 static func latest() -> Dictionary: return S()["accidents"].back() if not S()["accidents"].is_empty() else {}
+## True while an injury, unpaid medical bill or open claim needs the player (drives the HUD button).
+static func needs_attention() -> bool:
+	if not GameState.data.has("traffic_safety"): return false
+	if S()["injury"] != "none": return true
+	for a in S()["accidents"]:
+		if float(a.get("debt", 0)) > 0 or (a["counterparty_fault"] and a["treated"] and not a["settled"]): return true
+	return false
 static func insured() -> bool: return Clock.now() < int(S()["policy_until"])
 static func buy_policy() -> Dictionary:
 	if insured() or Ledger.cash("player") < float(cfg()["premium"]): return {"ok": false}
@@ -70,7 +86,7 @@ static func treat() -> Dictionary:
 	var claim := snappedf(fee * float(cfg()["coverage"]), 0.01) if a["insured_at_hit"] else 0.0
 	Ledger.post("player", I18n.t("Medical treatment: %s") % Fmt.money(fee), [{"acct":"exp:medical", "dr":fee},{"acct":"accounts_payable", "cr":fee}], {"type":"traffic_medical", "accident":a["id"]})
 	if claim > 0:
-		Ledger.post("player", I18n.t("Health insurance claim: %s") % Fmt.money(claim), [{"acct":"accounts_payable", "dr":claim},{"acct":"other_income", "cr":claim}], {"type":"health_claim", "accident":a["id"]})
+		Ledger.post("player", I18n.t("Health insurance claim: %s") % Fmt.money(claim), [{"acct":"accounts_payable", "dr":claim},{"acct":"exp:medical", "cr":claim}], {"type":"health_claim", "accident":a["id"]})
 	var paid := minf(maxf(0.0, Ledger.cash("player")), fee-claim)
 	if paid > 0: Ledger.post("player", I18n.t("Paid medical bill: %s") % Fmt.money(paid), [{"acct":"accounts_payable", "dr":paid},{"acct":"cash", "cr":paid}], {"type":"traffic_medical_payment", "accident":a["id"]})
 	a["medical_paid"] = fee
@@ -78,13 +94,58 @@ static func treat() -> Dictionary:
 	a["debt"] = snappedf(fee-claim-paid, 0.01)
 	a["treated"] = true
 	var days := GameState.randi_range(int(cfg()["hospital_min_days"]), int(cfg()["hospital_max_days"])) if a["severity"] == "major" else 0
+	var cap := stay_cap_days()
+	var early := false
+	if days > cap:
+		days = cap
+		early = true
 	a["hospital_days"] = days
+	a["discharged_early"] = early
 	# Mark the bill and treatment before advancing so a resumed save cannot bill twice.
 	S()["injury"] = "none"
 	S()["startle_until"] = 0
-	if days > 0: Clock.advance(days * Clock.DAY)
+	if days > 0:
+		shift_soft_deadlines(days * Clock.DAY)
+		Clock.advance(days * Clock.DAY)
+	if early: GameState.timeline(I18n.t("Discharged early after %d days: a chapter, contract or job deadline would have passed during a longer stay.") % days, "life")
 	GameState.timeline(I18n.t("Treatment complete: %d hospital days; medical bill %s; health claim %s.") % [days, Fmt.money(fee), Fmt.money(claim)], "life")
 	return {"ok": true, "days": days, "fee":fee, "claim":claim}
+## Hard deadlines (a lost chapter, expired contract or group job) cannot be paused, so the stay ends before the nearest one.
+static func hard_deadline() -> int:
+	var times: Array = []
+	if GameState.data.has("city_future"):
+		for c in GameState.data["city_future"].get("chapters", {}).values():
+			if str(c.get("status", "")) == "active" and str(c.get("decision", "")) == "": times.append(int(c["deadline"]))
+	if GameState.data.has("contracts"):
+		for c in GameState.data["contracts"].values():
+			if c is Dictionary and str(c.get("status", "")) == "offered": times.append(int(c.get("expires", 0)))
+	if GameState.data.has("synergy") and GameState.data["synergy"].has("jobs"):
+		for j in GameState.data["synergy"]["jobs"]["items"].values():
+			if str(j.get("status", "")) == "active": times.append(int(j["deadline"]))
+	var best := -1
+	for t in times:
+		if t > Clock.now() and (best < 0 or t < best): best = t
+	return best
+## Whole hospital days that fit before the nearest hard deadline (large when none).
+static func stay_cap_days() -> int:
+	var d := hard_deadline()
+	return 99 if d < 0 else maxi(0, (d - Clock.now() - 1) / Clock.DAY)
+## Reply windows, meetings and the bank appointment wait for the patient: their deadlines move by the stay length.
+static func shift_soft_deadlines(delta: int) -> void:
+	if delta <= 0: return
+	var pm: Dictionary = PhoneMessages.S()
+	for id in pm["expiry"].keys(): pm["expiry"][id] = int(pm["expiry"][id]) + delta
+	for m in GameState.data["messages"]:
+		if m.has("expires") and not m.has("answered"): m["expires"] = int(m["expires"]) + delta
+	for meeting in pm["agenda"]:
+		if meeting["status"] == "planned":
+			meeting["at"] = int(meeting["at"]) + delta
+			meeting["until"] = int(meeting["until"]) + delta
+	if int(Bank.B().get("appointment", -1)) > Clock.now():
+		Bank.B()["appointment"] = int(Bank.B()["appointment"]) + delta
+		for item in GameState.data["schedule"]:
+			if item["kind"] == "bank.appointment": item["t"] = int(item["t"]) + delta
+		GameState.data["schedule"].sort_custom(func(x, y): return int(x["t"]) < int(y["t"]))
 static func settle(procedure := false, id := 0) -> Dictionary:
 	var a := latest() if id == 0 else accident(id)
 	if a.is_empty() or not a["counterparty_fault"] or not a["treated"] or a["settled"]: return {"ok": false}
@@ -96,7 +157,7 @@ static func settle(procedure := false, id := 0) -> Dictionary:
 	var amount := snappedf((float(a["medical_paid"])-float(a["health_claim"])) * (1.0 if int(a["procedure_due"]) > 0 else float(cfg()["settlement_share"])), 0.01)
 	a["settled"] = true
 	var debt := minf(float(a.get("debt",0)), amount)
-	Ledger.post("player", I18n.t("Counterparty medical settlement: %s") % Fmt.money(amount), [{"acct":"cash", "dr":amount-debt},{"acct":"accounts_payable", "dr":debt},{"acct":"other_income", "cr":amount}], {"type":"traffic_settlement", "accident":a["id"]})
+	Ledger.post("player", I18n.t("Counterparty medical settlement: %s") % Fmt.money(amount), [{"acct":"cash", "dr":amount-debt},{"acct":"accounts_payable", "dr":debt},{"acct":"exp:medical", "cr":amount}], {"type":"traffic_settlement", "accident":a["id"]})
 	a["debt"] = float(a.get("debt",0))-debt
 	GameState.timeline(I18n.t("Counterparty medical settlement: %s") % Fmt.money(amount), "life")
 	return {"ok":true, "amount":amount}

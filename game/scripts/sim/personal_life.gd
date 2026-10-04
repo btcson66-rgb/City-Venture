@@ -17,7 +17,7 @@ static func S() -> Dictionary:
 		GameState.data["personal_life"]={"energy":100.0,"stress":0.0,"work_minutes":0,"contacts":{},"events":{},"illness_until":0,"cooldown_until":0}
 	return GameState.data["personal_life"]
 static func contact(id: String) -> Dictionary:
-	if not S()["contacts"].has(id):S()["contacts"][id]={"affinity":0.0,"known":id=="maya","step":0,"entity":"","retired":false,"gift_day":-1,"job":"","honesty":{}}
+	if not S()["contacts"].has(id):S()["contacts"][id]={"affinity":0.0,"known":id=="maya","step":0,"entity":"","retired":false,"gift_day":-1,"job":"","honesty":{},"kinds":{}}
 	return S()["contacts"][id]
 static func meet(id: String) -> void:
 	if DataDB.npc(id).has("relationship"):contact(id)["known"]=true
@@ -28,7 +28,16 @@ static func stage(id: String) -> int:
 	var value := float(contact(id)["affinity"])
 	var thresholds: Array=DataDB.npc(id).get("relationship",{}).get("stages",[0,cfg()["friend"],cfg()["partner"]])
 	return 2 if value>=float(thresholds[2]) else (1 if value>=float(thresholds[1]) else 0)
-static func stage_name(id: String) -> String:return I18n.t(["Acquaintance","Friend","Partner"][stage(id)])
+static func stage_name(id: String) -> String:return I18n.t(["Acquaintance","Friend","Trusted contact"][stage(id)])
+## Partners are earned through variety: favours alone never reach the top stage.
+static func note_kind(id: String,kind: String) -> void:
+	if DataDB.npc(id).has("relationship"):contact(id).get_or_add("kinds",{})[kind]=Clock.now()
+static func has_variety(id: String) -> bool:return contact(id).get("kinds",{}).size()>=int(cfg()["variety_kinds"])
+static func approaches() -> Dictionary:return cfg()["approaches"]
+## Cost and time of a request approach: every approach trades time, money and trust differently.
+static func approach_terms(node: Dictionary,approach: String) -> Dictionary:
+	var a: Dictionary=approaches().get(approach,approaches()["thorough"])
+	return {"minutes":maxi(5,roundi(float(node["minutes"])*float(a["minutes"]))),"cost":float(node["cost"])*float(a["cost"])+float(a["extra_cost"]),"affinity":float(cfg()["request_affinity"])*float(a["affinity"])}
 static func valid_entity(entity: String) -> bool:return GameState.data["entities"].has(entity) and not GameState.data["entities"][entity].has("closed")
 static func next(id: String) -> Dictionary:
 	var c := contact(id)
@@ -38,23 +47,25 @@ static func next(id: String) -> Dictionary:
 	if not known(id):return {"ok":false,"reason":"Meet this person in town or at a city event first."}
 	var node: Dictionary=stories()[id]["steps"][int(c["step"])]
 	if stage(id)<int(node["stage"]):return {"ok":false,"reason":"Attend events or offer a preferred gift to reach the next relationship stage."}
+	if int(node["stage"])>=2 and not has_variety(id):return {"ok":false,"reason":"Trust needs more than favours — attend a city event, offer a gift or complete a deal with them first."}
 	return {"ok":true,"node":node}
-static func request_done(id: String,index: int,quality: float) -> Dictionary:
+static func request_done(id: String,index: int,quality: float,approach := "thorough") -> Dictionary:
 	var n := next(id)
 	if not n["ok"] or int(contact(id)["step"])!=index or not is_finite(quality) or quality<0 or quality>1:return error("This request is no longer available — check Contacts.")
 	var node: Dictionary=n["node"]
-	var cost := float(node["cost"])
+	var terms := approach_terms(node,approach)
+	var cost := float(terms["cost"])
 	if Ledger.cash("player")<cost:return error("Insufficient personal cash — earn money before this request.")
 	var c := contact(id)
 	if c["entity"]=="":c["entity"]=GameState.business_entity()
 	if cost>0:Ledger.expense("player","dining",cost,I18n.t("Personal request supplies: %s")%Fmt.money(cost),{"type":"personal_request","npc":id})
-	work(int(node["minutes"]))
-	Clock.advance(int(node["minutes"]))
+	work(int(terms["minutes"]))
+	Clock.advance(int(terms["minutes"]))
 	# Hourly processing can close the originating business during the work.
 	if not valid_entity(str(c["entity"])):c["retired"]=true;return error("This business closed — the personal chain is retired.")
 	if quality<float(cfg()["request_quality"]):return error("Review the evidence and try again. The time and supplies were used.")
 	c["step"]=index+1
-	change(id,float(cfg()["request_affinity"]))
+	change(id,float(terms["affinity"]))
 	return {"ok":true}
 static func gift(id: String,item: String) -> Dictionary:
 	if not known(id) or not DataDB.npc(id).has("relationship") or not cfg()["gifts"].has(item):return error("Meet this person before offering a gift.")
@@ -64,6 +75,7 @@ static func gift(id: String,item: String) -> Dictionary:
 	if Ledger.cash("player")<cost:return error("Insufficient personal cash — earn money before this request.")
 	Ledger.expense("player","dining",cost,I18n.t("Personal gift: %s")%Fmt.money(cost),{"type":"personal_gift","npc":id})
 	c["gift_day"]=Clock.day_index()
+	note_kind(id,"gift")
 	change(id,float(cfg()["preferred_gift_affinity"]) if item in DataDB.npc(id)["relationship"]["preferences"] else float(cfg()["other_gift_affinity"]))
 	Clock.advance(int(cfg()["gift_minutes"]))
 	return {"ok":true}
@@ -80,7 +92,7 @@ static func attend(id: String) -> Dictionary:
 	if Ledger.cash("player")<cost:return error("Insufficient personal cash — earn money before this request.")
 	Ledger.expense("player","dining",cost,I18n.t("City social event: %s")%Fmt.money(cost),{"type":"personal_social","id":id})
 	S()["events"][event_key(id)]=Clock.now()
-	for npc in event["npcs"]:meet(npc);change(npc,float(cfg()["event_affinity"]))
+	for npc in event["npcs"]:meet(npc);change(npc,float(cfg()["event_affinity"]));note_kind(npc,"event")
 	rest(int(event["minutes"]),float(cfg()["social_stress_relief"]))
 	# Keep at most one year of receipts; lifetime contacts and affinity remain saved.
 	for key in S()["events"].keys():
@@ -120,12 +132,14 @@ static func recover(medical: bool) -> Dictionary:
 	return {"ok":true}
 static func on_hour(t: int,h: int) -> void:
 	if not GameState.data.has("personal_life"):return
-	if _sleeping or _resting:return
-	if int(S()["illness_until"])>0 and t>=int(S()["illness_until"]):S()["illness_until"]=0;S()["stress"]=minf(float(S()["stress"]),float(cfg()["recovered_stress"]))
-	if h==20:
+	# Daily debt and crisis stress is processed even while sleeping or resting; only the hour-by-hour recovery checks wait.
+	if h==20 and S().get("stress_day",-1)!=Clock.day_index():
+		S()["stress_day"]=Clock.day_index()
 		var debt := Bank.debt(GameState.business_entity())
 		var crises := not EventEngine.pending().is_empty()
-		S()["stress"]=clampf(float(S()["stress"])+(float(cfg()["debt_daily_stress"]) if debt>0 else 0)+(float(cfg()["crisis_daily_stress"]) if crises else 0)-float(cfg()["daily_stress_decay"]),0,100)
+		S()["stress"]=clampf(float(S()["stress"])+(float(cfg()["debt_daily_stress"]) if debt>0 else 0)+(float(cfg()["crisis_daily_stress"]) if crises else 0)-(0.0 if _sleeping or _resting else float(cfg()["daily_stress_decay"])),0,100)
+	if _sleeping or _resting:return
+	if int(S()["illness_until"])>0 and t>=int(S()["illness_until"]):S()["illness_until"]=0;S()["stress"]=minf(float(S()["stress"]),float(cfg()["recovered_stress"]))
 	if float(S()["stress"])>=float(cfg()["illness_threshold"]) and not ill() and t>=int(S()["cooldown_until"]):
 		S()["illness_until"]=t+int(cfg()["illness_days"])*Clock.DAY
 		S()["cooldown_until"]=t+int(cfg()["illness_cooldown_days"])*Clock.DAY
@@ -153,12 +167,12 @@ static func on_ledger(entry: Dictionary) -> void:
 	if c["honesty"].has(key):return
 	if cash_out and real_purchase:
 		change(id,-float(cfg()["honesty_affinity"]) if late else float(cfg()["honesty_affinity"]))
-		c["honesty"][key]=Clock.now()
+		note_kind(id,"deal");c["honesty"][key]=Clock.now()
 	elif real_revenue and source.get("type","")=="job":
 		var job := Jobs.get_job(str(source.get("id","")))
 		if job.get("status","") in ["delivered","invoiced"]:
 			change(id,float(cfg()["honesty_affinity"]) if int(job["delivered"])<=int(job["due"]) else -float(cfg()["honesty_affinity"]))
-			c["honesty"][key]=Clock.now()
+			note_kind(id,"deal");c["honesty"][key]=Clock.now()
 	for old in c["honesty"].keys():
 		if Clock.now()-int(c["honesty"][old])>90*Clock.DAY:c["honesty"].erase(old)
 static func referral(id: String) -> Dictionary:

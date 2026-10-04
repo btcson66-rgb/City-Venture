@@ -222,3 +222,19 @@ func test_a_new_game_never_overwrites_another_save() -> void:
 	runner.eq(str(SaveSystem.summary(first).get("name", "")), "Third Founder", "chosen slot now contains completed new save")
 	for s in [first, second]:
 		DirAccess.remove_absolute(SaveSystem._path(s))
+
+func test_rivals_quality_costs_cash_reverts_and_bankrupt_rivals_re_enter() -> void:
+	Rivals.initialize()
+	var rival: Dictionary = Rivals.companies()[0]
+	var base := float(rival["base_quality"])
+	rival["strategy"] = "quality"
+	rival["quality"] = base + 0.4
+	var cash := float(rival["cash"])
+	Rivals.decide_week()
+	runner.check(float(rival["quality"]) < base + 0.4 + float(Rivals.cfg()["quality_move"]), "quality drifts back toward the baseline")
+	rival["status"] = "bankrupt"
+	rival["exit_week"] = int(Rivals.S()["week"]) - int(Rivals.cfg()["reentry_weeks"]) - 1
+	Rivals.decide_week()
+	runner.eq(rival["status"], "active", "a new entrant fills the empty market")
+	var low: float = Industries.market_demand("cafe")
+	runner.check(low >= float(Rivals.cfg()["combined_demand_min"]) and low <= float(Rivals.cfg()["combined_demand_max"]), "combined demand multiplier is bounded")

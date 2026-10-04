@@ -68,6 +68,11 @@ func build() -> void:
 	footer.add_child(done)
 
 
+func close() -> void:
+	Preferences.flush()
+	super.close()
+
+
 func _result(error: Error) -> void:
 	if error != OK:
 		UIRoot.toast("Settings could not be saved. Check available storage and try again.", "warn", "save")
@@ -90,7 +95,7 @@ func _slider(key: String, caption: String, low: float, high: float, step_size: f
 	row.add_child(value)
 	slider.value_changed.connect(func(number):
 		value.text = str(number) + " " + unit
-		_result(Preferences.set_value(key, number / multiplier)))
+		_result(Preferences.set_value(key, number / multiplier, true)))
 	body.add_child(row)
 
 

@@ -130,8 +130,12 @@ static func launchers() -> Array:
 
 
 ## Shared market overlay for registered industries; legacy saves remain neutral.
+## Macro and rivals stack multiplicatively, so the product is bounded (the run's seeded Replay factor stays within about 0.77-1.27 on its own).
 static func market_demand(id: String) -> float:
-	return Macro.demand(id) * Rivals.demand(id) if not find(id).is_empty() else 1.0
+	if find(id).is_empty():
+		return 1.0
+	var rivals: Dictionary = DataDB.economy.get("rivals", {})
+	return clampf(Macro.demand(id) * Rivals.demand(id), float(rivals.get("combined_demand_min", 0.6)), float(rivals.get("combined_demand_max", 1.6)))
 
 static func prepare_journal(entity: String,lines: Array,source: Dictionary) -> Array:
 	for entry in all(true):

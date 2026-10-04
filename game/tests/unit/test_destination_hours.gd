@@ -64,3 +64,9 @@ func test_wait_rechecks_and_simulates_time() -> void:
 	DestinationHours.wait_until_open("bloom_coffee")
 	runner.eq(Clock.now(), Clock.DAY + 7 * 60, "already open is a no-op")
 	runner.check(Ledger.check_balanced(), "normal simulation preserves books")
+
+func test_welcome_card_reappears_when_doors_are_about_to_close() -> void:
+	_at(1, 16 * 60 + 30)
+	runner.check(BuildingWelcome.closes_soon("city_hall"), "closing within the hour is flagged on later visits")
+	_at(1, 10 * 60)
+	runner.check(not BuildingWelcome.closes_soon("city_hall"), "plenty of time left: no repeated card")

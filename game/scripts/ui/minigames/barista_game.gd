@@ -64,8 +64,13 @@ func _select_customer(index: int) -> void:
 	selected = index
 	want = queue[index]
 	got = want["got"]
-	if float(want["age"]) > float(FreelanceWorkflow.cfg()["barista_patience"]): round_timeout(); return
+	if _gives_up(want): round_timeout(); return
 	_layout()
+
+
+## A guest still waiting for the order, the drink or the delivery gives up; one who is only waiting for the table to be cleaned was already served.
+func _gives_up(ticket: Dictionary) -> bool:
+	return ticket["station"] != "clean" and float(ticket["age"]) > float(FreelanceWorkflow.cfg()["barista_patience"])
 
 func _confirm(recommend := false) -> void:
 	if want["station"] != "order": return
@@ -90,7 +95,14 @@ func _process(dt: float) -> void:
 		if button is Button:
 			var remaining := maxi(0, roundi(float(FreelanceWorkflow.cfg()["barista_patience"]) - float(customer["age"])))
 			button.text = I18n.t("Guest %d · %d s") % [int(customer["id"]), remaining]
-	if not queue.is_empty() and float(want["age"]) > float(FreelanceWorkflow.cfg()["barista_patience"]): round_timeout()
+	# Every waiting guest's patience runs, not only the selected one.
+	for index in queue.size():
+		if _gives_up(queue[index]):
+			selected = index
+			want = queue[index]
+			got = want["got"]
+			round_timeout()
+			return
 
 func _deliver(destination: int) -> void:
 	if want["station"] != "deliver": return

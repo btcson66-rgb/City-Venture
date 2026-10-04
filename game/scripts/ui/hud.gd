@@ -170,7 +170,9 @@ func _ready() -> void:
 	EventBus.cash_changed.connect(_on_cash)
 	EventBus.objective_changed.connect(refresh)
 	Clock.minute_tick.connect(func(_t):
-		if visible and Clock.world_active: _refresh_objective_hours())
+		if visible and Clock.world_active:
+			_refresh_objective_hours()
+			_refresh_safety())
 	EventBus.message_received.connect(func(_a, _b): refresh())
 	welcome = BuildingWelcome.new()
 	add_child(welcome)
@@ -241,10 +243,6 @@ func set_prompt(text: String) -> void:
 
 
 func _process(_d: float) -> void:
-	if GameState.has_game():
-		var ws := SceneRouter.world_scene()
-		safety_button.visible = ws != null and ws.kind == "district"
-		safety_button.text = I18n.t("Injury: %s") % TrafficSafety.severity_label(str(TrafficSafety.S()["injury"])) if TrafficSafety.S()["injury"] != "none" else I18n.t("Use crosswalks for safer crossing")
 	if not visible or not GameState.has_game():
 		return
 	vitality_label.text=I18n.t("Energy %d%% · stress %d%%")%[roundi(PersonalLife.energy()),roundi(PersonalLife.S()["stress"])]
@@ -301,16 +299,40 @@ func refresh() -> void:
 	obj_panel.visible = not o.is_empty()
 	goal_label.text = I18n.t(str(o.get("goal", ""))).to_upper()
 	_refresh_objective_hours()
+	_refresh_safety()
 	var ws := SceneRouter.world_scene()
 	if ws != null:
 		loc_label.text = (I18n.t(DataDB.districts[ws.scene_id]["name"]) if ws.kind == "district" else I18n.t(DataDB.building(ws.scene_id).get("name", ""))).to_upper()
 
 
+## The safety button shows only while an injury, medical bill or claim needs attention; refreshed on signals, not per frame.
+func _refresh_safety() -> void:
+	if safety_button == null or not GameState.has_game(): return
+	var ws := SceneRouter.world_scene()
+	safety_button.visible = ws != null and ws.kind == "district" and TrafficSafety.needs_attention()
+	if safety_button.visible:
+		var injury := str(TrafficSafety.S()["injury"])
+		safety_button.text = I18n.t("Injury: %s") % TrafficSafety.severity_label(injury) if injury != "none" else I18n.t("Medical bill or claim open")
+
+
+var _hours_key := ""
+var _hours_text := ""
+var _hours_until := -1
+
+
+## The opening-hours line only changes when a door opens or closes, so it is cached until that minute (or the objective changes).
 func _refresh_objective_hours() -> void:
 	var o := StoryEngine.main_objective()
 	obj_label.text = o.get("text", "")
-	var hours := DestinationHours.target_text(o)
-	if hours != "": obj_label.text += "\n" + hours
+	var key := "%s|%s|%s" % [str(o.get("target", "")), I18n.locale(), str(Clock.day_index())]
+	if key != _hours_key or _hours_until < 0 or Clock.now() >= _hours_until:
+		_hours_key = key
+		_hours_text = DestinationHours.target_text(o)
+		var t := DestinationHours.target(o)
+		var state: Dictionary = DestinationHours.status(str(t["building"]), str(t.get("npc", ""))) if t.has("building") else {}
+		var boundary := int(state.get("close", -1)) if state.get("open", false) else int(state.get("next", -1))
+		_hours_until = boundary if boundary > Clock.now() else Clock.now() + Clock.DAY - Clock.minute_of_day()
+	if _hours_text != "": obj_label.text += "\n" + _hours_text
 
 
 func _on_saved(slot: int) -> void:

@@ -149,3 +149,21 @@ func test_return_choice_requires_whole_basket_quantities() -> void:
 	runner.check(Ecommerce.resolve_return(order["id"],"replace")["ok"], "enabled replacement actually resolves")
 	runner.check(not EventEngine.choice_available(choice,context), "already resolved choice disabled")
 	runner.check(Ledger.check_balanced(), "replacement UI path balances")
+func test_large_basket_plan_is_capped_and_small_plan_is_valid() -> void:
+	var o := basket()
+	var small_plan := Packing.plan(o, Packing.smallest(o))
+	runner.eq(small_plan.size(), Packing.pieces(o).size(), "normal basket still gets a complete plan")
+	runner.check(Packing.placement_ok(o, Packing.smallest(o), small_plan), "plan is a valid placement")
+	var huge := {"id": "M2", "items": [{"product": "phone_stand", "qty": 54, "unit_price": 1.0}, {"product": "desk_lamp", "qty": 54, "unit_price": 1.0}]}
+	var t0 := Time.get_ticks_msec()
+	runner.eq(Packing.plan(huge, "large").size(), 0, "oversized basket returns no plan immediately")
+	runner.check(Time.get_ticks_msec() - t0 < 500, "no brute-force search for large baskets")
+
+func test_pack_orders_reports_skipped_invalid_placements() -> void:
+	var o := basket()
+	seed_order(o)
+	var n := Ecommerce.pack_orders(LOC, -1, {"M1": {"box": "small", "padding": 0.0, "placements": [], "q": 0.8, "label_ok": true}})
+	runner.eq(n, 0, "invalid placements are not packed")
+	runner.eq(Ecommerce.last_pack_skipped, ["M1"], "skipped order is reported")
+	runner.eq(Ecommerce.pack_orders(LOC), 1, "automatic packing still works afterwards")
+	runner.check(Ecommerce.last_pack_skipped.is_empty(), "report resets each call")

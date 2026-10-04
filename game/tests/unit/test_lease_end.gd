@@ -193,3 +193,12 @@ func test_brokerage_and_new_vehicle_trade_pause_without_premises() -> void:
 	Automotive._rental_day()
 	runner.eq(Automotive.S()["rentals"].size(), 0, "no new rentals without counter")
 	runner.check(Ledger.check_balanced(), "paused businesses do not invent trades")
+func test_pending_notice_quote_does_not_mutate_lease() -> void:
+	_company()
+	Living.lease("suite_2b")
+	runner.check(Living.end_lease("suite_2b", "notice")["ok"], "notice given")
+	var ending: Dictionary = Living.D()["leases"]["suite_2b"]["ending"]
+	var q := LeaseEnd.quote("suite_2b", "notice", ending["plan"], true)
+	runner.check(q["ok"], "pending notice can be re-quoted")
+	runner.check(Living.D()["leases"]["suite_2b"]["ending"] == ending, "quote left the pending notice untouched")
+	runner.check(not LeaseEnd.quote("suite_2b", "notice", ending["plan"])["ok"], "a second notice is still refused")

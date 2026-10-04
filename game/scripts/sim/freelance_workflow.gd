@@ -106,6 +106,6 @@ static func accept_delivery(id: String, discount := false) -> Dictionary:
 		return {"ok": false, "error": I18n.t("Acceptance failed. Revise the work or settle at a discount.")}
 	if discount: g["fee"] = snappedf(float(g["fee"]) * float(cfg()["settlement_rate"]), 0.01)
 	w["stage"] = "accepted"
-	w["rating"] = 2 if discount else clampi(roundi(quality * 5), 1, 5)
+	w["rating"] = 3 if discount else clampi(roundi(quality * 5), 1, 5)
 	return Careers._deliver(g)
 static func blocked() -> Dictionary: return {"ok": false, "error": I18n.t("This stage is unavailable. Finish the previous step first.")}
