@@ -1,0 +1,51 @@
+{
+ "id": "trade_fx_volatility",
+ "category": "finance",
+ "status": "active",
+ "trigger": {
+  "when": "manual",
+  "conditions": [
+   "flag:trade_active"
+  ],
+  "chance": 0,
+  "once": false
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "marcus",
+  "title": "Foreign receipt volatility",
+  "icon": "warning",
+  "lines": [
+   "Shipment owner: {company} · {trade}",
+   "The receipt currency is volatile for seven days. Keep the spot exposure or pay for a collateralized forward."
+  ]
+ },
+ "choices": [
+  {
+   "id": "spot",
+   "label": "Keep the contracted receipt at spot FX",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "international_trade",
+     "kind": "fx",
+     "retain": false
+    }
+   ],
+   "outcome": "The trade worktable shows the actual shipment and cash result."
+  },
+  {
+   "id": "hedge",
+   "label": "Hedge contracted receipts for 30 days",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "international_trade",
+     "kind": "fx",
+     "retain": true
+    }
+   ],
+   "outcome": "The trade worktable shows the actual shipment and cash result."
+  }
+ ]
+}

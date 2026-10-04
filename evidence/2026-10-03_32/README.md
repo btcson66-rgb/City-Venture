@@ -7,3 +7,5 @@ Validation: 572/572 unit tests (213.9 seconds), 9 housing tests; targeted render
 Self-review fixes: inactive Studio status caused street fallback; home-specific bed position; only current tenant can use home equipment; storage counts incoming PO and packed orders across all companies; old home no longer accepts new POs; notice expiration with insufficient cash/storage keeps old home, retries or refunds deposit; previews require current tenancy; readonly registration checks fixed separately on #91 PR130. Save round-trip and pre-feature fixture tested.
 
 Limits: notice is extended if unable to move rather than forcing homelessness; no owner housing or personal vehicle until #94. Integrated full tour from #93 failed (58 failures/6875.4 seconds); chapter 7 profit policy and bank/navigation cascades remain under investigation. This ticket does not claim a full walkthrough PASS.
+
+上游合併複驗（eee64e72）：全套單元603/603（310.6秒），相關短版0失敗／43步／13張原始擷取；兩者無SCRIPT ERROR。i18n missing0、wiki OK、beta0。保留兩邊新增內容與功能；最終完整整合流程在#99執行中，未完成不標PASS。

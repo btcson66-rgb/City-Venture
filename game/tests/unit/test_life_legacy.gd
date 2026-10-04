@@ -2,6 +2,10 @@ extends RefCounted
 var runner
 
 func setup() -> String:
+	# These tests create new-life slots; isolate them from earlier runs.
+	assert(SaveSystem.DIR == "user://test_saves")
+	for slot in SaveSystem.GAME_SLOTS:
+		DirAccess.remove_absolute(SaveSystem._path(slot))
 	GameState.new_game({"name":"Legacy Founder", "seed":92001})
 	return load("res://tests/unit/test_global.gd").new()._setup()
 

@@ -42,7 +42,7 @@ func _keys() -> Array:
 
 # ------------------------------------------------------------------ data
 func test_data_is_complete_and_wellformed() -> void:
-	runner.eq(DataDB.milestones.size(), 55, "five milestones for each of eleven industries")
+	runner.eq(DataDB.milestones.size(), 60, "five milestones for each of twelve industries")
 	for entry in Industries.all():
 		runner.eq(Milestones.list(entry["id"]).size(), 5, "five milestones: " + str(entry["id"]))
 	for m in DataDB.milestones.values():

@@ -553,6 +553,7 @@ Customs decision choices may set `recommended: true`; only the first available e
 Lazy `fx_forwards` = {items[id]{entity,currency,notional,days,rate,fee,collateral,status,opened,due,settled,spot,gain_loss,early},seq}. Lazy `overseas_partners` = {companies[entity]{warehouse{opened,last_month},transfers[{index,status,product,qty,unit_cost,cost,defect_rate,eta}],home_invoices,visiting,next_offer},chapters[id]{entity,started,month_closes},shock{currency,before,after,started,exposure_estimate}}. Optional distributor contract keys: type,region,invoice_currency,foreign_total,foreign_receivable,shipped,shipment_cost,eta,closure_written_off. Existing contracts keep their original lifecycle. `lumina_3pl:<entity>` inventory stays outside domestic stock locations. Orders use partner_channel=3pl. Month-close FX uses the existing fx_gain_loss account; no account rename/migration is needed.
 
 
+
 ## Industry framework state (#63)
 
 - Every ledger journal source includes `segment`: industry id or `shared`. Old entries need not be rewritten.
@@ -613,3 +614,11 @@ Every `kind: home` property provides `building`, `bed`, `bed_position`, `invento
 ### Café depth (#33)
 `economy/cafe.json`: `locations` maps property to building and foot-traffic multiplier; `items` defines six `ref_price`, `unit_cost`, `materials` recipes and optional seasonal `months`; `materials` names bins; `material_packs` provides paid next-morning deliveries; `drink_shares`, `seasonal_demand_bonus`, `inspection` and `overtime` tune demand and consequences.
 Saved `cafe` retains the old single-store keys and lazily adds `branches`, shared `roster` and `work_hours`. Each shop adds `materials`, `material_incoming`, `cleaned`, `inspection_next`, `inspection_until`, `inspection_pending`, optional `inspection_iid`/`inspection_deadline`, `inspections` and a per-premises branch `food_permit`. Old corner licences continue using the old flag. Daily records add `gross_margin` from actual posted costs. Events/scheduled deliveries include company and property ownership.
+
+### Industry introductions (#86)
+
+`data/story/side_stories/intro_<industry>.json` defines four real objectives, company/capital-or-era eligibility, mentor/building, optional `guided_event`, timeline/contact reward and unavailable receipt. `met:<npc>` reads the existing NPC meeting receipt. `metric:<SynergyMetrics source><comparison>` reuses actual saved counts, industry stats and functions. `story.side_stories[id].started` controls a ninety-day opportunity expiry; old active receipts acquire the current time lazily. Other-company progress waits for its owning company; closure and skipped/expired steps never award the success reward.
+
+`intro_factory_quality` schedules actual `Manufacturing.plan` slots marked `story_recovery`; repeat choices cannot reserve another. Native subcontract completion carries actual COGS; overtime uses existing materials/wage/yield rules. No synthetic revenue or forced car defect is created. Optional guides use `tutorial.industries[company:industry]` with step/seen/shown/skipped fields; completed steps and explicit skips survive load.
+
+Trade portfolio integration (#91/#70): `trade`, `trade_active`, and `trade.*` schedules follow the brokerage owner. Pre-registry multi-company saves move the old global brokerage and untagged cargo departures to its recorded entity without changing cash or contracts, and restore the selected company view. Old single-company migration binds actual scheduled departures before any switch.
