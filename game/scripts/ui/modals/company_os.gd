@@ -19,6 +19,8 @@ var new_price := {}
 var deliver_to := ""
 var sales_page := "domestic"
 var global_region := "northridge"
+
+
 var _primary_chosen := false
 
 
@@ -291,6 +293,8 @@ func _tab_overview() -> void:
 # ============================================================== FINANCE
 func _tab_finance() -> void:
 	GlobalMarketUI.finance(self, content)
+
+
 	_concepts(["gross_margin", "opex", "credit_history"])
 	var be := GameState.business_entity()
 	var cur := MonthClose.current(be)
@@ -399,6 +403,7 @@ func _forecast(be: String) -> void:
 
 # ============================================================== SALES
 func _tab_sales() -> void:
+	_concepts(["marketplace_fee", "payout_schedule", "ads_cpc", "price_elasticity", "product_photo"])
 	var pages := UIK.hbox(4)
 	content.add_child(pages)
 	for entry in [["domestic", "Domestic"], ["overseas", "Overseas"]]:
@@ -409,6 +414,8 @@ func _tab_sales() -> void:
 		GlobalMarketUI.sales(self, content)
 		return
 	_concepts(["marketplace_fee", "payout_schedule", "ads_cpc", "price_elasticity", "product_photo"])
+
+
 	if Ecommerce.is_personal():
 		var capbar := ProgressBar.new()
 		capbar.max_value = Ecommerce.seller_cap()

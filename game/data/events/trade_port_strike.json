@@ -16,6 +16,7 @@
   "title": "Temporary port closure",
   "icon": "warning",
   "lines": [
+   "Shipment owner: {company} · {trade}",
    "A port strike delays booked cargo for three days. Wait for reopening or pay for air freight."
   ]
  },
@@ -35,7 +36,7 @@
   },
   {
    "id": "air",
-   "label": "Pay to reroute cargo by air",
+   "label": "Pay to reroute cargo by air · {reroute_fee} home dollars",
    "effects": [
     {
      "op": "industry",

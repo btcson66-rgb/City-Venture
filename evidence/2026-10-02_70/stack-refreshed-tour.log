@@ -1,0 +1,51 @@
+   0.0s STEP Main menu → New Game
+   0.8s   shot 01_main_menu.png
+   0.8s   click [NewGame] New Game
+   2.0s STEP Character Creator
+   2.1s   shot 02_creator_default.png
+   2.1s   click [Tab_hair] Hair
+   2.2s   click [Next_hair] ▶
+   2.6s   click [Tab_face] Face
+   2.7s   click [Next_face] ▶
+   2.8s   click [Next_eye_shape] ▶
+   2.9s   click [Tab_body] Body
+   3.0s   click [Next_presentation] ▶
+   3.7s   shot 03_creator_customised.png
+   3.7s   click [Tab_outfit] Outfit
+   3.7s   click "Startup Casual"
+   4.3s   ok  appearance changed from default (short_neat)
+   4.4s   shot 04_creator_final.png
+   4.4s   click [Start] Start in Aurelia  →
+   4.4s [6月1日（週日） 下午 2:00] STEP Arrival sequence
+   7.1s [6月1日（週日） 下午 2:00]   shot 05_arrival_train.png
+  10.7s [6月1日（週日） 下午 2:00]   shot 06_arrival_phone.png
+  16.5s [6月1日（週日） 下午 2:01]   ok  spawned in the Riverside apartment
+  16.5s [6月1日（週日） 下午 2:01]   ok  starting cash $30,000
+  16.5s [6月1日（週日） 下午 2:01]   ok  name saved
+  18.3s [6月1日（週日） 下午 2:03]   shot 07_apartment_arrival.png
+  19.2s [6月1日（週日） 下午 2:04]   click [RegisterTrade] Register import and export business
+  19.7s [6月1日（週日） 下午 2:05]   ok  paid import/export registration through native control
+  19.9s [6月1日（週日） 下午 2:05]   shot 08_trade_execution_registered.png
+  20.5s [6月1日（週日） 下午 2:06]   click [SignLease_meridian_trade_office] Sign the lease
+  21.6s [6月1日（週日） 下午 2:08]   click [StartTrade] Open the trade brokerage
+  22.1s [6月1日（週日） 下午 2:08]   ok  registered leased office opens brokerage
+  22.1s [6月1日（週日） 下午 2:08]   shot 09_trade_execution_office.png
+  22.6s [6月1日（週日） 下午 2:09]   click [Region_northridge] 
+  23.1s [6月1日（週日） 下午 2:09]   shot 10_trade_execution_region.png
+  23.3s [6月1日（週日） 下午 2:10]   click [TradeRoute_northridge] Compare trade route
+  23.8s [6月1日（週日） 下午 2:10]   shot 11_trade_execution_sheet.png
+  24.1s [6月1日（週日） 下午 2:10]   click [TradeSign] Sign buyer contract and buy supplier cargo
+  24.5s [6月1日（週日） 下午 2:10]   ok  native buyer contract signs shared job
+  25.2s [6月1日（週日） 下午 2:11]   click [TradeDoc_TRD-0001_packing_list] ✓ 裝箱單
+  26.0s [6月3日（週二） 下午 2:10]   ok  incomplete actual documents hold shipment
+  26.0s [6月3日（週二） 下午 2:10]   shot 12_trade_execution_customs_hold.png
+  26.7s [6月3日（週二） 下午 2:11]   click [TradeDoc_TRD-0001_packing_list] ✗ 裝箱單
+  27.9s [6月3日（週二） 下午 2:13]   click [ClearTrade_TRD-0001] Correct documents and clear cargo
+  29.1s [6月3日（週二） 下午 2:15]   click [TradeBank_TRD-0001] Submit documents to the issuing bank
+  29.6s [6月3日（週二） 下午 2:16]   ok  actual bank document receipt
+  29.6s [6月3日（週二） 下午 2:16]   shot 13_trade_execution_bank_documents.png
+  29.9s [7月1日（週二） 下午 2:13]   ok  actual cargo delivered and LC collected with balanced ledger
+  29.9s [7月1日（週二） 下午 2:13]   shot 14_trade_execution_collected.png
+  29.9s [7月1日（週二） 下午 2:13]   ok  actual trade state save roundtrip
+  29.9s [7月1日（週二） 下午 2:13]   ok  paid receipt retained after load
+  29.9s [7月1日（週二） 下午 2:13] BOT FINISHED — 0 failure(s) · 29.9s real

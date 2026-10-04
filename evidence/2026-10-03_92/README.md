@@ -9,3 +9,5 @@ Self-review fixed actual-clock work accounting, negative book net worth, a misle
 Full rendered walkthrough cadence: #43 was interrupted at 2502.5 seconds without a completion result; the earlier #31 full walkthrough failed and is not represented as a pass. This ticket adds no synthetic trade income or fixed profitable strategy.
 
 Final unit regression: **538/538**, 196.9 seconds. Chapter 17–18 integration: **0 failures**, 88.7 seconds; all four endings return through life review to free play. The integration English audit records 13 words, preserved in its output.
+
+上游合併複驗（8ebc4ff9）：全套單元564/564（282.8秒），相關短版0失敗／64步／16張原始擷取；兩者無SCRIPT ERROR。i18n missing0、wiki OK、beta0。保留兩邊新增內容與功能；最終完整整合流程在#99執行中，未完成不標PASS。
