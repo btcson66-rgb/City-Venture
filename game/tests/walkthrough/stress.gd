@@ -217,10 +217,12 @@ func _texture_soak() -> void:
 	for i in range(paths.size() - 1, -1, -1):
 		Art.tex(paths[i])
 	report["texture_bytes"] = Art.peak_texture_bytes
+	var held := Art.texture_bytes()
+	Art.clear_caches()   # the soak is over; the simulation timings below must not carry 900 MB of art
 	report["texture_source"] = "accounted"
-	report["texture_soak"] = {"textures_requested": asked, "budget_bytes": Art.TEXTURE_BUDGET_BYTES, "held_bytes": Art.texture_bytes(),
+	report["texture_soak"] = {"textures_requested": asked, "budget_bytes": Art.TEXTURE_BUDGET_BYTES, "held_bytes": held,
 		"ms": (Time.get_ticks_usec() - begin) / 1000.0}
-	print("TEXTURES requested %d, peak accounted %d MB, held %d MB" % [asked, Art.peak_texture_bytes / 1048576, Art.texture_bytes() / 1048576])
+	print("TEXTURES requested %d, peak accounted %d MB, held %d MB" % [asked, Art.peak_texture_bytes / 1048576, held / 1048576])
 
 
 func _collect_pngs(dir_path: String, prefix: String, out: Array) -> void:

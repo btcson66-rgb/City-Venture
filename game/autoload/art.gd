@@ -35,6 +35,7 @@ var _detail_lru := {}
 var _detail_bytes := 0
 var _large_sizes := {}
 var peak_texture_bytes := 0
+var texture_budget := TEXTURE_BUDGET_BYTES   # a var so tests can shrink it
 var font_title: FontFile
 var font_body: FontFile
 
@@ -91,6 +92,7 @@ func tex(path: String) -> Texture2D:
 			var evicted: String = cache.keys()[0]
 			cache.erase(evicted)
 			_large_sizes.erase(evicted)
+		_enforce_budget(path)
 	elif t != null and bytes > 0:
 		_detail_lru[path] = bytes
 		_detail_bytes += bytes
@@ -106,7 +108,7 @@ static func _accounted_bytes(image: Image) -> int:
 ## Evict the least recently used detail textures until the cache fits its budget. The texture just
 ## requested is never evicted; scenes that still hold an evicted texture keep it until they leave the tree.
 func _enforce_budget(keep: String) -> void:
-	while _detail_bytes + _large_bytes() > TEXTURE_BUDGET_BYTES and _detail_lru.size() > 1:
+	while _detail_bytes + _large_bytes() > texture_budget and _detail_lru.size() > 1:
 		var oldest: String = _detail_lru.keys()[0]
 		if oldest == keep:
 			break
@@ -120,6 +122,15 @@ func _large_bytes() -> int:
 	for key in _large_sizes:
 		total += int(_large_sizes[key])
 	return total
+
+
+## Drop every cached texture (a measuring harness uses this between phases; scenes keep what they already hold).
+func clear_caches() -> void:
+	_cache.clear()
+	_large_cache.clear()
+	_detail_lru.clear()
+	_large_sizes.clear()
+	_detail_bytes = 0
 
 
 ## Accounted bytes of every detail texture the caches hold right now.

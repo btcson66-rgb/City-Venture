@@ -187,3 +187,29 @@ func test_big_saves_are_gzip_and_the_active_company_is_written_once() -> void:
 	runner.eq(Ecommerce.E()["orders"].size(), 700, "nothing reset by a switch")
 	var plain := SaveSystem.read_text("res://tests/fixtures/saves/industry_intro.json")
 	runner.check(plain.begins_with("{"), "plain JSON saves still read")
+
+
+func test_detail_textures_are_held_to_a_byte_budget() -> void:
+	var paths: Array = []
+	var dir := DirAccess.open("res://assets/world_detail/props")
+	for file in dir.get_files():
+		if file.ends_with(".png"):
+			paths.append("world_detail/props/" + file.get_basename())
+	paths.sort()
+	runner.check(paths.size() >= 13, "enough real detail textures to exercise the cache")
+	var saved: int = Art.texture_budget
+	Art.clear_caches()
+	for path in paths.slice(0, 12):
+		runner.check(Art.tex(path) != null, "loaded " + path)
+	var all_bytes: int = Art.texture_bytes()
+	runner.check(all_bytes > 0, "bytes are accounted")
+	Art.texture_budget = all_bytes / 2
+	var last: String = paths[12]
+	Art.tex(last)
+	runner.check(Art.texture_bytes() <= Art.texture_budget, "cache shrinks to the budget (%d of %d)" % [Art.texture_bytes(), Art.texture_budget])
+	runner.check(Art._cache.has(last), "the texture just asked for is never the one evicted")
+	runner.check(not Art._cache.has(paths[0]), "the least recently used texture goes first")
+	Art.tex(paths[0])
+	runner.check(Art._cache.has(paths[0]), "an evicted texture simply reloads")
+	Art.texture_budget = saved
+	Art.clear_caches()
