@@ -225,6 +225,10 @@ func _tab_overview() -> void:
 		var legacy := UIK.button("Consolidation and legacy", func(): UIRoot.open_modal(LegacyModal.new()))
 		legacy.name = "OpenLegacyStory"
 		content.add_child(legacy)
+	if CityFuture.available():
+		var civic := UIK.button(I18n.t("City future"), func(): UIRoot.open_modal(CityFutureModal.new()))
+		civic.name = "OpenCityFuture"
+		content.add_child(civic)
 	if World.year() >= 9:
 		var capital := UIK.button("Ownership and public markets", func(): UIRoot.open_modal(CapitalMarketModal.new()))
 		capital.name = "OpenCapitalMarket"

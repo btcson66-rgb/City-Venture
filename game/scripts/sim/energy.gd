@@ -181,7 +181,7 @@ static func refresh() -> void:
 		if lead["kind"] != "own" and lead["status"] == "open" and Clock.now() > int(lead["expires"]): lead["status"] = "expired"
 		if lead["status"] in ["expired", "declined", "won"] and Clock.now() > int(lead["expires"]) + 28 * Clock.DAY: S()["leads"].erase(id)
 	var count := int(cfg()["weekly_leads"]) + GameState.rng.randi_range(-int(cfg()["weekly_leads_spread"]), int(cfg()["weekly_leads_spread"])) + (1 if float(S()["reputation"]) >= 0.7 else 0)
-	for n in count: _new_lead()
+	for n in ceili(count*CityFuture.demand_factor("energy")): _new_lead()
 	_own_leads()
 static func _new_lead() -> void:
 	var kinds: Dictionary = cfg()["roof_kinds"]
@@ -440,7 +440,7 @@ static func quota_left(program: String) -> float:
 	return maxf(0.0, quota_total(program) - float(sb["used" if program == "install" else "charger_used"]))
 static func grant_amount(program: String, price: float) -> float:
 	var s: Dictionary = cfg()["subsidy"]
-	var rate := float(s["rate" if program == "install" else "charger_rate"]) * mod("subsidy")
+	var rate := float(s["rate" if program == "install" else "charger_rate"]) * mod("subsidy") * CityFuture.policy_factor("subsidy")
 	return snappedf(minf(float(s["cap" if program == "install" else "charger_cap"]), price * rate), 0.01)
 static func subsidy_block(program: String) -> String:
 	if int(Clock.date()["month"]) > int(cfg()["subsidy"]["season_last_month"]): return "This year's subsidy applications are closed."

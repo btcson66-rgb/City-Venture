@@ -21,7 +21,8 @@ static func sheet(origin: String, destination: String, product: String, quantity
 		return {"ok": false, "error": "FOB and CIF require sea transport. For air, choose EXW or DDP."}
 	var goods: Dictionary = c["goods"][product]
 	var supply: Dictionary = goods.get("regions", {}).get(origin, {})
-	var demand: Dictionary = goods.get("regions", {}).get(destination, {})
+	var demand: Dictionary = goods.get("regions", {}).get(destination, {}).duplicate(true)
+	demand["demand"] = ceili(float(demand.get("demand",0))*CityFuture.demand_factor("international_trade"))
 	if quantity < 1 or quantity > int(supply.get("capacity", 0)) or quantity > int(demand.get("demand", 0)) or not is_finite(markup) or markup < 0 or markup > 1:
 		return {"ok": false, "error": "Quantity exceeds regional capacity or demand, or markup is outside 0–100%."}
 	var source_rate := FX.rate(currency(origin))

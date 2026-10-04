@@ -1658,6 +1658,550 @@
      "objective": "goal_growth"
     }
    ]
+  },
+  {
+   "id": "ch19_expo_bid",
+   "subtitle": "The expo bid",
+   "objectives": [
+    {
+     "id": "city19_read",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Read the civic briefing.",
+     "complete_when": [
+      "flag:city19_read"
+     ],
+     "skip_when": [
+      "flag:city19_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": [
+      {
+       "do": "city_begin",
+       "chapter": 19
+      },
+      {
+       "do": "world_year",
+       "year": 11
+      }
+     ]
+    },
+    {
+     "id": "city19_plan",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Arrange paid suppliers or join the city partnership.",
+     "complete_when": [
+      "flag:city19_plan"
+     ],
+     "skip_when": [
+      "flag:city19_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city19_choice",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Choose how this chapter will change the city.",
+     "complete_when": [
+      "flag:city19_choice"
+     ],
+     "skip_when": [
+      "flag:city19_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city19_review",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Review actual deliveries and the civic result.",
+     "complete_when": [
+      "flag:city19_review"
+     ],
+     "skip_when": [
+      "flag:city19_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "chapter",
+     "id": "ch20_harbor_rebuild"
+    }
+   ],
+   "title": "The expo bid"
+  },
+  {
+   "id": "ch20_harbor_rebuild",
+   "subtitle": "Rebuilding Harbor",
+   "objectives": [
+    {
+     "id": "city20_read",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Read the civic briefing.",
+     "complete_when": [
+      "flag:city20_read"
+     ],
+     "skip_when": [
+      "flag:city20_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": [
+      {
+       "do": "city_begin",
+       "chapter": 20
+      },
+      {
+       "do": "world_year",
+       "year": 11
+      }
+     ]
+    },
+    {
+     "id": "city20_plan",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Arrange paid suppliers or join the city partnership.",
+     "complete_when": [
+      "flag:city20_plan"
+     ],
+     "skip_when": [
+      "flag:city20_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city20_choice",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Choose how this chapter will change the city.",
+     "complete_when": [
+      "flag:city20_choice"
+     ],
+     "skip_when": [
+      "flag:city20_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city20_review",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Review actual deliveries and the civic result.",
+     "complete_when": [
+      "flag:city20_review"
+     ],
+     "skip_when": [
+      "flag:city20_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "chapter",
+     "id": "ch21_energy_transition"
+    }
+   ],
+   "title": "Rebuilding Harbor"
+  },
+  {
+   "id": "ch21_energy_transition",
+   "subtitle": "The 2040 transition",
+   "objectives": [
+    {
+     "id": "city21_read",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Read the civic briefing.",
+     "complete_when": [
+      "flag:city21_read"
+     ],
+     "skip_when": [
+      "flag:city21_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": [
+      {
+       "do": "city_begin",
+       "chapter": 21
+      },
+      {
+       "do": "world_year",
+       "year": 11
+      }
+     ]
+    },
+    {
+     "id": "city21_plan",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Arrange paid suppliers or join the city partnership.",
+     "complete_when": [
+      "flag:city21_plan"
+     ],
+     "skip_when": [
+      "flag:city21_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city21_choice",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Choose how this chapter will change the city.",
+     "complete_when": [
+      "flag:city21_choice"
+     ],
+     "skip_when": [
+      "flag:city21_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city21_review",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Review actual deliveries and the civic result.",
+     "complete_when": [
+      "flag:city21_review"
+     ],
+     "skip_when": [
+      "flag:city21_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "chapter",
+     "id": "ch22_talent_war"
+    }
+   ],
+   "title": "The 2040 transition"
+  },
+  {
+   "id": "ch22_talent_war",
+   "subtitle": "The graduate talent war",
+   "objectives": [
+    {
+     "id": "city22_read",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Read the civic briefing.",
+     "complete_when": [
+      "flag:city22_read"
+     ],
+     "skip_when": [
+      "flag:city22_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": [
+      {
+       "do": "city_begin",
+       "chapter": 22
+      },
+      {
+       "do": "world_year",
+       "year": 11
+      }
+     ]
+    },
+    {
+     "id": "city22_plan",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Arrange paid suppliers or join the city partnership.",
+     "complete_when": [
+      "flag:city22_plan"
+     ],
+     "skip_when": [
+      "flag:city22_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city22_choice",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Choose how this chapter will change the city.",
+     "complete_when": [
+      "flag:city22_choice"
+     ],
+     "skip_when": [
+      "flag:city22_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city22_review",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Review actual deliveries and the civic result.",
+     "complete_when": [
+      "flag:city22_review"
+     ],
+     "skip_when": [
+      "flag:city22_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "chapter",
+     "id": "ch23_city_election"
+    }
+   ],
+   "title": "The graduate talent war"
+  },
+  {
+   "id": "ch23_city_election",
+   "subtitle": "Aurelia votes",
+   "objectives": [
+    {
+     "id": "city23_read",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Read the civic briefing.",
+     "complete_when": [
+      "flag:city23_read"
+     ],
+     "skip_when": [
+      "flag:city23_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": [
+      {
+       "do": "city_begin",
+       "chapter": 23
+      },
+      {
+       "do": "world_year",
+       "year": 12
+      }
+     ]
+    },
+    {
+     "id": "city23_plan",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Arrange paid suppliers or join the city partnership.",
+     "complete_when": [
+      "flag:city23_plan"
+     ],
+     "skip_when": [
+      "flag:city23_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city23_choice",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Choose how this chapter will change the city.",
+     "complete_when": [
+      "flag:city23_choice"
+     ],
+     "skip_when": [
+      "flag:city23_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city23_review",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Review actual deliveries and the civic result.",
+     "complete_when": [
+      "flag:city23_review"
+     ],
+     "skip_when": [
+      "flag:city23_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "chapter",
+     "id": "ch24_expo_opening"
+    }
+   ],
+   "title": "Aurelia votes"
+  },
+  {
+   "id": "ch24_expo_opening",
+   "subtitle": "The city opens its doors",
+   "objectives": [
+    {
+     "id": "city24_read",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Read the civic briefing.",
+     "complete_when": [
+      "flag:city24_read"
+     ],
+     "skip_when": [
+      "flag:city24_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": [
+      {
+       "do": "city_begin",
+       "chapter": 24
+      },
+      {
+       "do": "world_year",
+       "year": 12
+      }
+     ]
+    },
+    {
+     "id": "city24_plan",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Arrange paid suppliers or join the city partnership.",
+     "complete_when": [
+      "flag:city24_plan"
+     ],
+     "skip_when": [
+      "flag:city24_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city24_choice",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Choose how this chapter will change the city.",
+     "complete_when": [
+      "flag:city24_choice"
+     ],
+     "skip_when": [
+      "flag:city24_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city24_review",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Review actual deliveries and the civic result.",
+     "complete_when": [
+      "flag:city24_review"
+     ],
+     "skip_when": [
+      "flag:city24_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "set_flag",
+     "flag": "city_future_complete"
+    },
+    {
+     "do": "timeline",
+     "text": "The city chapter ended with recorded deliveries and choices, without a fictional windfall."
+    }
+   ],
+   "title": "The city opens its doors"
   }
  ],
  "side": [

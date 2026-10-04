@@ -64,6 +64,8 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 	if Industries.run_action(action, params, source):
 		return
 	match action:
+		"city_future":
+			UIRoot.open_modal(CityFutureModal.new())
 		"legacy_mentor":
 			if LegacyBusiness.S()["ending"] == "mentor" and _scene() != null and _scene().scene_id == "nexus_cowork":
 				UIRoot.open_modal(LegacyMentorModal.new())

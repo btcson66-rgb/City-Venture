@@ -17,6 +17,9 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from") in ["city_future","city_future_os"]:
+		await _city_future_fixture()
+		return
 	if _arg("from")=="bank_exit":
 		SceneRouter._enter("interior","nexus_bank","door","up");await bot.wait(.5)
 		SceneRouter.world_scene().player.position=Vector2(178,100)
@@ -123,6 +126,7 @@ func run() -> void:
 		await _chapters_13_to_14()
 		await _chapters_15_to_16()
 		await _chapters_17_to_18()
+		await _city_future_season()
 		await _summary()
 		return
 	await _chapter1()
@@ -148,6 +152,7 @@ func run() -> void:
 		await _chapters_13_to_14()
 		await _chapters_15_to_16()
 		await _chapters_17_to_18()
+		await _city_future_season()
 	await _summary()
 	if not bot.video_mode:
 		await _industry_fixtures()
@@ -3340,3 +3345,59 @@ func _intro_control(name: String) -> void:
 		while p!=null and not p is ScrollContainer:p=p.get_parent()
 		if p!=null:(p as ScrollContainer).ensure_control_visible(b);await bot.wait(.4)
 	await bot.click_named(name);await bot.wait(.3)
+
+func _city_future_fixture() -> void:
+	await bot.wait(4)
+	UIRoot._suppress_decisions=true;UIRoot.tutorial.st()["off"]=true
+	StoryEngine.St()["active"].clear()
+	bot.step("Third-season fixture: existing second-season eligibility; all city deliveries, spending and choices played below")
+	Company.register("Civic Partners","retail_online","22 Founders Lane")
+	Company.open_business_account(15000)
+	GameState.set_flag("legacy_cards_viewed")
+	LegacyBusiness.S()["ending"]="independent"
+	await _city_future_season()
+func _city_future_season() -> void:
+	var prior_business_ending: String=LegacyBusiness.S()["ending"]
+	UIRoot.close_all();UIRoot._suppress_decisions=true;UIRoot.tutorial.st()["off"]=true
+	# Only the isolated fixture enters City Hall directly. The full tour continues through its real home laptop.
+	if _arg("from")=="city_future":
+		SceneRouter._enter("interior","city_hall","door","up");await bot.wait(1)
+	await _open_city_future()
+	await _intro_control("city_start")
+	var choices: Dictionary={19:"balanced",20:"transparent",21:"both",22:"culture",23:"neutral",24:"resilient"}
+	for number in range(19,25):
+		bot.step("Civic chapter %d — real supplier invoices and player decision"%number)
+		if not UIRoot.top_modal() is CityFutureModal:await _open_city_future()
+		await _intro_control("city_read")
+		await bot.shot("city%d_supplier_budget"%number)
+		await _intro_control("city_partner")
+		await _intro_control("city_wait")
+		# Time acceleration is disclosed; Clock still runs every real simulated hour and purchase delivery.
+		Clock.advance(8*Clock.DAY);StoryEngine.check();await bot.wait(.5)
+		await _open_city_future()
+		await bot.shot("city%d_real_decisions"%number)
+		await _intro_control("CityChoice_"+str(choices[number]))
+		await _intro_control("city_wait_result")
+		Clock.advance(2*Clock.DAY+60);StoryEngine.check();await bot.wait(.5)
+		await _open_city_future()
+		await bot.shot("city%d_recorded_result"%number)
+		await _intro_control("city_review")
+		bot.expect(CityFuture.definition(number)["id"] in StoryEngine.St()["chapters_done"],"city chapter completed from actual services and result %d"%number)
+		bot.expect(Ledger.check_balanced(),"city chapter %d balanced books"%number)
+	bot.expect(GameState.flag("city_future_complete"),"all six civic chapters completed")
+	bot.expect(LegacyBusiness.S()["ending"]==prior_business_ending,"city result preserves the earlier actual business ending")
+	for card in 6:
+		await bot.shot("city_legacy_card_%d"%(card+1))
+		await _intro_control("city_next_card")
+	await bot.shot("city_business_legacy_handoff")
+	await _intro_control("city_legacy")
+	bot.expect(UIRoot.top_modal() is LegacyModal,"city legacy connects to actual business legacy")
+	UIRoot.close_all()
+	bot.expect(SaveSystem.save_to(bot.out_dir.path_join("city_future_played.json")),"played third-season save with real supplier receipts")
+
+func _open_city_future() -> void:
+	if _arg("from")=="city_future":await bot.use_action("city_future")
+	else:
+		await popups()
+		if not UIRoot.top_modal() is CompanyOS:await _home_laptop("overview")
+		await _intro_control("OpenCityFuture")

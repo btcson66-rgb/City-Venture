@@ -431,3 +431,7 @@ See wiki/24_consolidation_and_legacy.md for market receipts, three acquisition b
 #92 life review / New Game+ — Implemented: seven data-defined archetypes, chronological/category filtering, immutable ending or retirement review, and separate-slot new lives with limited opening equity inheritance and increased actual difficulty.
 
 #93 Implemented：第九／十年事件、NPC 整併與反向收購整合、完整 IPO 審計／路演／掛牌／季報、董事會表決，以及三條股權路線對傳承的影響。參閱 wiki/27_capital_markets.md；NPC 情境與治理涵蓋範圍明列，未接入尚未合併的 #90。
+
+## Third season: civic delivery (#99)
+
+Chapters 19–24 each use four ordinary StoryEngine objectives. The first objective begins a lazy CityFuture chapter and selects world year 11 or 12; objective flags come only from briefing, real purchase-job delivery or failure, player choice, and result review. Deadline expiry is an explicit unavailable path; an already performed action is idempotent. Municipal appropriation is equity in a separate municipal entity, never player revenue. All choices, costs, delivery risk and world modifiers are data in economy/city_future.json and world/years.json. See wiki/35_city_future.md for each chapter and policy.

@@ -1,0 +1,27 @@
+{
+ "id": "mayor_green_civic",
+ "with": "mayor_green",
+ "start": "start",
+ "nodes": {
+  "start": [
+   {
+    "who": "mayor_green",
+    "text": "I favor charging infrastructure and green subsidies, with a higher business tax to fund them."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "I will review the proposal and actual costs.",
+      "next": "end"
+     },
+     {
+      "text": "I will participate through a city partnership.",
+      "next": "end"
+     }
+    ]
+   }
+  ],
+  "end": []
+ }
+}

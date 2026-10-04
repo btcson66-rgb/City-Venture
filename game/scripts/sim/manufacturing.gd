@@ -88,7 +88,7 @@ static func refresh_rfqs() -> void:
 		if rfq["status"] == "open" and Clock.now() > int(rfq["due"]): rfq["status"] = "expired"
 	if int(S()["last_rfqs"]) == Clock.day_index(): return
 	S()["last_rfqs"] = Clock.day_index()
-	for i in range(int(cfg()["rfqs_per_week"])):
+	for i in range(ceili(float(cfg()["rfqs_per_week"])*CityFuture.demand_factor("manufacturing"))):
 		var id := "RFQ-%d" % int(S()["seq"])
 		S()["seq"] = int(S()["seq"])+1
 		var qty := GameState.rng.randi_range(int(cfg()["rfq_qty_min"]), int(cfg()["rfq_qty_max"]))

@@ -211,6 +211,122 @@
     "Founders compare listed, acquired and private legacies."
    ],
    "event_group": "legacy_ownership"
+  },
+  {
+   "year": 11,
+   "name": "The civic decade",
+   "status": "active",
+   "interest_rate": 0.055,
+   "shipping_index": 1.03,
+   "lead_mult": 1,
+   "import_lead_mult": 1,
+   "cost_mult": 1.02,
+   "import_cost_mult": 1.02,
+   "rent_mult": 1.2,
+   "packaging_levy": 0.4,
+   "eco_demand_mult": 1.1,
+   "cross_border_delay": true,
+   "wire_clear_mult": 0.6,
+   "compliance": true,
+   "headlines": [
+    "Aurelia prepares an expo bid and an open Harbor reconstruction tender.",
+    "A 2040 vehicle transition plan changes energy and transport demand."
+   ],
+   "event_group": "city_future",
+   "city_modifiers": {
+    "storm_days": 7,
+    "storm_mult": 0.8,
+    "event_peak_mult": 1.35,
+    "local_event_mult": 1.15,
+    "event_crisis_days": 7,
+    "resilient_crisis_mult": 0.85,
+    "economy_crisis_mult": 0.6,
+    "harbor_quality_crisis_weight": 0.08,
+    "transition": {
+     "charging": {
+      "energy": 1.2,
+      "automotive": 0.9
+     },
+     "both": {
+      "energy": 1.08,
+      "automotive": 0.98
+     },
+     "delay": {
+      "energy": 0.95,
+      "automotive": 1.1
+     }
+    },
+    "mayors": {
+     "green": {
+      "tax": 1.1,
+      "subsidy": 1.2,
+      "zoning": 1.05
+     },
+     "enterprise": {
+      "tax": 0.9,
+      "subsidy": 0.8,
+      "zoning": 0.95
+     }
+    }
+   }
+  },
+  {
+   "year": 12,
+   "name": "The city we chose",
+   "status": "active",
+   "interest_rate": 0.055,
+   "shipping_index": 1.03,
+   "lead_mult": 1,
+   "import_lead_mult": 1,
+   "cost_mult": 1.02,
+   "import_cost_mult": 1.02,
+   "rent_mult": 1.2,
+   "packaging_levy": 0.4,
+   "eco_demand_mult": 1.1,
+   "cross_border_delay": true,
+   "wire_clear_mult": 0.6,
+   "compliance": true,
+   "headlines": [
+    "Graduate recruitment and the mayoral election shape the city event.",
+    "Event demand is temporary; delivered services determine the final civic legacy."
+   ],
+   "event_group": "city_future",
+   "city_modifiers": {
+    "storm_days": 7,
+    "storm_mult": 0.8,
+    "event_peak_mult": 1.35,
+    "local_event_mult": 1.15,
+    "event_crisis_days": 7,
+    "resilient_crisis_mult": 0.85,
+    "economy_crisis_mult": 0.6,
+    "harbor_quality_crisis_weight": 0.08,
+    "transition": {
+     "charging": {
+      "energy": 1.2,
+      "automotive": 0.9
+     },
+     "both": {
+      "energy": 1.08,
+      "automotive": 0.98
+     },
+     "delay": {
+      "energy": 0.95,
+      "automotive": 1.1
+     }
+    },
+    "mayors": {
+     "green": {
+      "tax": 1.1,
+      "subsidy": 1.2,
+      "zoning": 1.05
+     },
+     "enterprise": {
+      "tax": 0.9,
+      "subsidy": 0.8,
+      "zoning": 0.95
+     }
+    }
+   }
   }
  ]
 }

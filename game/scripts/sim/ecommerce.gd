@@ -734,7 +734,7 @@ static func demand_mult(product_id: String) -> float:
 	for d in E()["demand_mods"]:
 		if int(d["until"]) > t and (d.get("product", "*") == "*" or d["product"] == product_id):
 			m *= float(d["mult"])
-	return m
+	return m * CityFuture.demand_factor("ecommerce")
 
 
 ## Expected orders/day for a listing (also shown in Company OS so pricing is a readable decision).

@@ -479,9 +479,9 @@ static func _review(score: float, weight := 1.0) -> void:
 # ------------------------------------------------------------------ the airport and demand
 static func demand_mult() -> float:
 	var d: Dictionary = S()["demand"]
-	if Clock.now() >= int(d["until"]): return 1.0
+	if Clock.now() >= int(d["until"]): return CityFuture.demand_factor("automotive")
 	var fraction := float(int(d["until"]) - Clock.now()) / maxf(1.0, float(int(d["until"]) - int(d["from"])))
-	return 1.0 + (float(d["start"]) - 1.0) * clampf(fraction, 0.0, 1.0)
+	return (1.0 + (float(d["start"]) - 1.0) * clampf(fraction, 0.0, 1.0)) * CityFuture.demand_factor("automotive")
 
 static func _set_demand(multiplier: float, days: int) -> void:
 	S()["demand"] = {"start":multiplier, "from":Clock.now(), "until":Clock.now() + days * Clock.DAY}

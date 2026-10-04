@@ -786,3 +786,6 @@ Requested: backdrops/chapter_17, backdrops/chapter_18; dedicated Kai Moreno spri
 - 週末立牌：標示週六、週日 10:00–18:00。營業中逛街客使用既有角色外觀，未新增貼圖。
 ## #70 International trade
 Requested `buildings/meridian_trade_desk.png` and `_lights.png`; existing `nexus_cowork` facade is the validated fallback. Customs House and the airport cargo terminal reuse existing art. Ingrid Solberg uses a generated appearance, with existing office desk and world/parcel icons. No art assets changed.
+
+## #99 第三季城市素材
+Planned：博覽會場館 `interiors/expo_venue`、重建後港口 `backdrops/harbor_rebuilt`、兩位候選人的選舉海報 `props/election_green` / `props/election_enterprise`。目前用 City Hall 桌、既有 Harbor 和職業角色素材；功能已接上，不改動 game/assets。專用素材完成後以 Art.has_tex()/opt_tex() 接替。

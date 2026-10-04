@@ -161,7 +161,7 @@ static func price_at(type: String,day: int) -> float:
 # ---------------------------------------------------------------- demand calendar
 static func demand_index(day: int) -> float:
 	var date := Clock.date_at((day-1)*Clock.DAY+12*60)
-	return float(cfg()["dow"][int(date["weekday"])])*float(cfg()["season"][int(date["month"])-1])*event_mult(day)*float(S()["trend"].get(_month_of(day),1.0))
+	return float(cfg()["dow"][int(date["weekday"])])*float(cfg()["season"][int(date["month"])-1])*event_mult(day)*float(S()["trend"].get(_month_of(day),1.0))*CityFuture.demand_factor("hotel")
 static func _month_of(day: int) -> String:
 	var date := Clock.date_at((day-1)*Clock.DAY+12*60)
 	return "%d-%02d"%[int(date["year"]),int(date["month"])]

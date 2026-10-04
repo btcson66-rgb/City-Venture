@@ -1,0 +1,294 @@
+{
+ "municipal_budget": 150000,
+ "contract_failure_basic": 0.15,
+ "contract_failure_premium": 0.05,
+ "premium_cost_factor": 1.35,
+ "premium_quality": 0.9,
+ "basic_quality": 0.65,
+ "peak_days": 14,
+ "chapters": {
+  "19": {
+   "id": "ch19_expo_bid",
+   "title": "The expo bid",
+   "deadline_days": 90,
+   "npc": "expo_officer",
+   "services": [
+    {
+     "id": "19_0",
+     "industry": "hotel",
+     "scope": "Group accommodation",
+     "units": 30,
+     "unit": "room nights",
+     "unit_cost": 90,
+     "days": 5,
+     "name": "Group accommodation"
+    },
+    {
+     "id": "19_1",
+     "industry": "logistics",
+     "scope": "Visitor transport",
+     "units": 60,
+     "unit": "passenger trips",
+     "unit_cost": 12,
+     "days": 3,
+     "name": "Visitor transport"
+    },
+    {
+     "id": "19_2",
+     "industry": "real_estate",
+     "scope": "Exhibition venue planning",
+     "units": 1,
+     "unit": "venue plans",
+     "unit_cost": 2400,
+     "days": 7,
+     "name": "Exhibition venue planning"
+    }
+   ],
+   "choices": [
+    "balanced",
+    "premium",
+    "withdraw"
+   ]
+  },
+  "20": {
+   "id": "ch20_harbor_rebuild",
+   "title": "Rebuilding Harbor",
+   "deadline_days": 45,
+   "npc": "rival_owner",
+   "services": [
+    {
+     "id": "20_0",
+     "industry": "manufacturing",
+     "scope": "Reconstruction materials",
+     "units": 100,
+     "unit": "material units",
+     "unit_cost": 24,
+     "days": 5,
+     "name": "Reconstruction materials"
+    },
+    {
+     "id": "20_1",
+     "industry": "energy",
+     "scope": "Grid restoration",
+     "units": 1,
+     "unit": "grid projects",
+     "unit_cost": 2800,
+     "days": 7,
+     "name": "Grid restoration"
+    },
+    {
+     "id": "20_2",
+     "industry": "media",
+     "scope": "Public consultation",
+     "units": 1,
+     "unit": "Campaigns",
+     "unit_cost": 1000,
+     "days": 3,
+     "name": "Public consultation"
+    }
+   ],
+   "choices": [
+    "transparent",
+    "low_bid",
+    "favor"
+   ]
+  },
+  "21": {
+   "id": "ch21_energy_transition",
+   "title": "The 2040 transition",
+   "deadline_days": 45,
+   "npc": "mayor_green",
+   "services": [
+    {
+     "id": "21_0",
+     "industry": "energy",
+     "scope": "Charging network design",
+     "units": 1,
+     "unit": "network plans",
+     "unit_cost": 1800,
+     "days": 5,
+     "name": "Charging network design"
+    },
+    {
+     "id": "21_1",
+     "industry": "automotive",
+     "scope": "Vehicle transition assessment",
+     "units": 20,
+     "unit": "Vehicles",
+     "unit_cost": 45,
+     "days": 3,
+     "name": "Vehicle transition assessment"
+    }
+   ],
+   "choices": [
+    "charging",
+    "delay",
+    "both"
+   ]
+  },
+  "22": {
+   "id": "ch22_talent_war",
+   "title": "The graduate talent war",
+   "deadline_days": 30,
+   "npc": "rival_owner",
+   "services": [
+    {
+     "id": "22_0",
+     "industry": "media",
+     "scope": "Employer culture workshop",
+     "units": 1,
+     "unit": "Workshops",
+     "unit_cost": 850,
+     "days": 3,
+     "name": "Employer culture workshop"
+    },
+    {
+     "id": "22_1",
+     "industry": "saas",
+     "scope": "Recruitment and training platform",
+     "units": 1,
+     "unit": "platform deployments",
+     "unit_cost": 1100,
+     "days": 4,
+     "name": "Recruitment and training platform"
+    }
+   ],
+   "choices": [
+    "salary",
+    "culture",
+    "options",
+    "volunteer"
+   ]
+  },
+  "23": {
+   "id": "ch23_city_election",
+   "title": "Aurelia votes",
+   "deadline_days": 30,
+   "npc": "mayor_enterprise",
+   "services": [
+    {
+     "id": "23_0",
+     "industry": "media",
+     "scope": "Public policy debate",
+     "units": 1,
+     "unit": "Debates",
+     "unit_cost": 900,
+     "days": 3,
+     "name": "Public policy debate"
+    },
+    {
+     "id": "23_1",
+     "industry": "real_estate",
+     "scope": "Zoning impact assessment",
+     "units": 1,
+     "unit": "Assessments",
+     "unit_cost": 1200,
+     "days": 4,
+     "name": "Zoning impact assessment"
+    }
+   ],
+   "choices": [
+    "green",
+    "enterprise",
+    "neutral"
+   ]
+  },
+  "24": {
+   "id": "ch24_expo_opening",
+   "title": "The city opens its doors",
+   "deadline_days": 21,
+   "npc": "expo_officer",
+   "services": [
+    {
+     "id": "24_0",
+     "industry": "hotel",
+     "scope": "Event accommodation",
+     "units": 20,
+     "unit": "room nights",
+     "unit_cost": 90,
+     "days": 3,
+     "name": "Event accommodation"
+    },
+    {
+     "id": "24_1",
+     "industry": "logistics",
+     "scope": "Emergency transport",
+     "units": 40,
+     "unit": "passenger trips",
+     "unit_cost": 12,
+     "days": 3,
+     "name": "Emergency transport"
+    },
+    {
+     "id": "24_2",
+     "industry": "energy",
+     "scope": "Event power supply",
+     "units": 1,
+     "unit": "power projects",
+     "unit_cost": 1600,
+     "days": 4,
+     "name": "Event power supply"
+    },
+    {
+     "id": "24_3",
+     "industry": "media",
+     "scope": "Event communication",
+     "units": 1,
+     "unit": "Campaigns",
+     "unit_cost": 800,
+     "days": 2,
+     "name": "Event communication"
+    }
+   ],
+   "choices": [
+    "resilient",
+    "economy",
+    "cancel"
+   ]
+  }
+ },
+ "assurance_fee": 1500,
+ "assurance_quality_bonus": 0.1,
+ "expo_probability_base": 0.15,
+ "expo_probability_quality": 0.75,
+ "expo_probability_max": 0.85,
+ "rival_quality_min": 0.55,
+ "rival_quality_max": 0.85,
+ "low_bid_quality_penalty": 0.15,
+ "material_return_fraction": 0.2,
+ "secret_favor_brand_loss": 0.2,
+ "transition_costs": {
+  "charging": 5000,
+  "both": 2500,
+  "delay": 750
+ },
+ "charging_life_days": 3650,
+ "charging_maintenance_cost": 75,
+ "charging_maintenance_days": 30,
+ "charging_failure_chance": 0.05,
+ "workshop_fee": 350,
+ "workshop_minutes": 240,
+ "volunteer_minutes": 120,
+ "culture_morale_bonus": 10,
+ "culture_brand_gain": 0.1,
+ "volunteer_brand_gain": 0.02,
+ "other_talent_brand_gain": 0.04,
+ "option_share": 0.05,
+ "vesting_days": 30,
+ "retention_days": 30,
+ "poaching_delay_days": 7,
+ "poaching_risks": {
+  "salary": 0.08,
+  "culture": 0.15,
+  "options": 0.12,
+  "volunteer": 0.2
+ },
+ "campaign_minutes": 180,
+ "election_base": 0.5,
+ "campaign_probability_change": 0.15,
+ "brand_probability_weight": 0.1,
+ "election_probability_min": 0.2,
+ "election_probability_max": 0.8,
+ "standby_fee": 1000,
+ "review_days": 2
+}

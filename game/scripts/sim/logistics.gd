@@ -372,7 +372,7 @@ static func post_jobs() -> int:
 	if not has_van():
 		return 0
 	var r := runs_cfg()
-	var want := GameState.randi_range(int(r["per_day"][0]), int(r["per_day"][1]))
+	var want := ceili(GameState.randi_range(int(r["per_day"][0]), int(r["per_day"][1])) * CityFuture.demand_factor("logistics"))
 	var n := 0
 	while n < want and open_jobs().size() < int(r.get("max_open", 8)):
 		var j := _make_job()

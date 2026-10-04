@@ -231,6 +231,7 @@ static func _check_all() -> void:
 		start_chapter("ch13_first_order_abroad")
 	if "ch14_customs" in St()["chapters_done"] and not "ch15_currency_swing" in St()["chapters_done"] and St().get("chapter", "") == "ch14_customs":
 		start_chapter("ch15_currency_swing")
+	CityFuture.reconcile()
 	LegacyBusiness.reconcile()
 	if "ch16_partner_overseas" in St()["chapters_done"] and not "ch17_consolidation" in St()["chapters_done"] and St().get("chapter", "") == "ch16_partner_overseas":
 		start_chapter("ch17_consolidation")
@@ -285,6 +286,8 @@ static func run_actions(actions: Array) -> void:
 		if a.has("if") and not Cond.eval(str(a["if"])):
 			continue
 		match a.get("do", ""):
+			"city_begin":
+				CityFuture.begin(int(a["chapter"]))
 			"legacy_begin":
 				LegacyBusiness.begin(str(a["chapter"]))
 			"consolidation_comparison":

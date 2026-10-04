@@ -48,7 +48,7 @@ static func refresh() -> void:
 		var price := float(home["purchase_price"])*RealEstateMarket.index() if sale else float(home["monthly_rent"])
 		var id := _id("M-")
 		S()["mandates"][id]={"id":id,"property":home["id"],"rooms":int(home["rooms"]),"district":"residential","kind":"sale" if sale else "rent","floor":snappedf(price,.01),"status":"open"}
-	for i in int(cfg()["weekly_clients"]):
+	for i in ceili(float(cfg()["weekly_clients"])*CityFuture.demand_factor("real_estate")):
 		var mandate: Dictionary=S()["mandates"].values()[-1-i%int(cfg()["weekly_mandates"])]
 		var id := _id("C-")
 		S()["clients"][id]={"id":id,"name":cfg()["tenant_names"][GameState.rng.randi_range(0,cfg()["tenant_names"].size()-1)],"kind":mandate["kind"],"budget":snappedf(float(mandate["floor"])*GameState.rng.randf_range(float(cfg()["budget_range"][0]),float(cfg()["budget_range"][1])),.01),"rooms":int(mandate["rooms"]),"district":"residential","urgency":GameState.rng.randi_range(1,5),"status":"open"}
@@ -123,7 +123,8 @@ static func renovate(id: String, grade: String) -> Dictionary:
 static func develop(scale: String, name: String) -> Dictionary:
 	if not valid() or int(S()["stage"])<2 or not Compliance.permit_valid("building"):return error("Own a rental and obtain the Lot 7 building permit at City Hall first.")
 	if not cfg()["development"].has(scale) or not S()["project"].is_empty() or name.strip_edges()=="" or name.length()>32:return error("Choose a project scale and a name of 1–32 characters.")
-	var spec: Dictionary=cfg()["development"][scale]
+	var spec: Dictionary=cfg()["development"][scale].duplicate(true)
+	spec["days"]=ceili(float(spec["days"])*CityFuture.policy_factor("zoning"))
 	var months := ceili(int(spec["days"])/30.0)
 	var installment := snappedf(float(spec["cost"])/months,.01)
 	if Ledger.cash(entity())<installment:return error("Fund the first construction milestone before breaking ground.")
@@ -150,7 +151,7 @@ static func _milestone() -> void:
 			return
 		project["paid"]=snappedf(float(project["paid"])+amount,.01)
 		project["status"]="building"
-		project["next"]=Clock.now()+30*Clock.DAY
+		project["next"]=Clock.now()+ceili(30*CityFuture.policy_factor("zoning"))*Clock.DAY
 		Sim.schedule(int(project["next"]),"re.build",{})
 	if float(job["progress"])>=float(job["work"]) and float(project["paid"])+.01<float(project["budget"]):
 		var amount := snappedf(float(project["budget"])-float(project["paid"]),.01)
@@ -276,7 +277,7 @@ static func on_hour(_t: int, h: int) -> void:
 	if Clock.day_index()%30!=0:return
 	for property in S()["properties"].values():
 		if property["status"]=="sold":continue
-		var cost := snappedf(RealEstateMarket.value(property)*float(cfg()["monthly_tax_rate"])+float(cfg()["monthly_management"]),.01)
+		var cost := snappedf(RealEstateMarket.value(property)*float(cfg()["monthly_tax_rate"])*CityFuture.policy_factor("tax")+float(cfg()["monthly_management"]),.01)
 		Ledger.expense(entity(),"other",cost,I18n.t("Property taxes and management"),source(property["id"]),"cash" if Ledger.cash(entity())>=cost else "accounts_payable")
 static func on_company_closed(closed: String) -> void:
 	if not is_running() or entity()!=closed:return

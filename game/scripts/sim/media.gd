@@ -51,7 +51,7 @@ static func refresh() -> void:
 	S()["week"]=week
 	for brief in S()["briefs"].values():
 		if brief["status"]=="open":brief["status"]="expired"
-	var count := maxi(int(cfg()["brief_min"]),ceili(float(cfg()["weekly_briefs"])*float(S()["reputation"])))
+	var count := maxi(int(cfg()["brief_min"]),ceili(float(cfg()["weekly_briefs"])*float(S()["reputation"])*CityFuture.demand_factor("media")))
 	for n in count:
 		var audience := GameState.rng.randi_range(0,3)
 		var goal := "awareness" if GameState.rng.randf()<.5 else "conversions"

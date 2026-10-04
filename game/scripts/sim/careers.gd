@@ -206,7 +206,7 @@ static func refresh_offers(force := false) -> void:
 			pool.append(t)
 	var clients: Array = cfg().get("clients", [])
 	var offers: Array = []
-	for i in n:
+	for i in ceili(n*CityFuture.demand_factor("freelance")):
 		if pool.is_empty() or clients.is_empty():
 			break
 		var t: Dictionary = GameState.pick(pool)

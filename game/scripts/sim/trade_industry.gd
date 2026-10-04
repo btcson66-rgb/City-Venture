@@ -87,7 +87,7 @@ static func available(q: Dictionary, procurement := false) -> String:
 	if not procurement and not q.get("competitive",false):return "The buyer cannot accept this landed price. Reduce the markup or choose another route."
 	for region in [q["origin"],q["destination"]]:
 		var r: Dictionary=TradeQuote.cfg()["goods"][q["product"]]["regions"][region]
-		var limit: int=int(r["capacity"] if region==q["origin"] else r["demand"])
+		var limit: int=int(r["capacity"]) if region==q["origin"] else ceili(float(r["demand"])*CityFuture.demand_factor("international_trade"))
 		if int(S()["usage"].get(_usage_key(region,q["product"]),0))+int(q["quantity"])>limit:return "This month's regional capacity or demand is used. Wait for renewal or choose another route."
 	if Ledger.cash(entity())<_initial_cost(q):return "Fund the supplier purchase and seller-paid route costs first."
 	return ""
