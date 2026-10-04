@@ -306,6 +306,18 @@
    ],
    "desc": "Cuts reconditioning and service costs by 20%, saves a workshop day and adds two dealership service bays. Salary is due even in a slow week.",
    "needs_text": "Open the auto desk before hiring a technician."
+  },
+  "trade_coordinator": {
+   "name": "Trade Coordinator",
+   "salary_week": [
+    520,
+    680
+   ],
+   "needs_office": false,
+   "needs_lease": "meridian_trade_office",
+   "needs_text": "Lease Meridian Trade Desk before hiring a coordinator.",
+   "workplace": "meridian_trade_office",
+   "desc": "Processes paid supplier shipping papers, customs corrections and bank documents during work hours."
   }
  },
  "traits": [

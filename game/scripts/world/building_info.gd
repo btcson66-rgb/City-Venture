@@ -3,11 +3,13 @@ extends RefCounted
 ## Shared, live building information for doors, welcome cards and the phone guide.
 
 const ACTION_ICONS := {
-	"legacy_mentor": "people", "energy_open": "company", "energy_subsidy": "civic",
+	"legacy_mentor": "people",
+	"customs_guide":"info", "trade_open":"world",
+	"energy_open": "company", "energy_subsidy": "civic",
 	"buy_item": "shop", "clothing_shop": "shop", "cafe_counter": "coffee",
 	"work_shift": "tasks", "open_company_os": "laptop", "cowork_desk": "laptop",
 	"sleep": "sleep", "read_news": "info", "bank_counter": "bank", "atm": "bank",
-	"customs_guide": "info", "loans_info": "bank", "register_company": "civic", "permits_info": "civic", "take_number": "civic",
+	"loans_info": "bank", "register_company": "civic", "permits_info": "civic", "take_number": "civic",
 	"pack_orders": "parcel", "dropoff_parcels": "parcel", "change_outfit": "shirt",
 	"personal_assets": "home", "cafe_depth": "coffee", "logistics_depth": "map", "home_letting": "home", "lease_property": "home", "whiteboard": "objective", "look": "info", "talk": "people",
 	"talk_staff": "people", "business_board": "company", "metro": "metro",

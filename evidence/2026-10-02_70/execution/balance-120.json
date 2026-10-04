@@ -1,0 +1,150 @@
+{
+	"days": 120,
+	"failures": [],
+	"limits": "Three seeds do not establish a probability of loss. Every signed quote also records its feasible cargo/FX downside.",
+	"runs": [
+		{
+			"balanced": true,
+			"cargo_or_credit_losses": 4,
+			"cash": 86296.58,
+			"crises": 5,
+			"days": 120,
+			"downside_quotes": 30,
+			"paid": 40,
+			"profit": -3624.92000000001,
+			"revenue": 36754.55,
+			"seed": 70001,
+			"signed": 60,
+			"strategy": "conservative"
+		},
+		{
+			"balanced": true,
+			"cargo_or_credit_losses": 1,
+			"cash": 85128.6,
+			"crises": 6,
+			"days": 120,
+			"downside_quotes": 34,
+			"paid": 45,
+			"profit": -2976.95,
+			"revenue": 40105.72,
+			"seed": 70002,
+			"signed": 65,
+			"strategy": "conservative"
+		},
+		{
+			"balanced": true,
+			"cargo_or_credit_losses": 1,
+			"cash": 87596.99,
+			"crises": 4,
+			"days": 120,
+			"downside_quotes": 29,
+			"paid": 45,
+			"profit": -2059.04,
+			"revenue": 39261.74,
+			"seed": 70003,
+			"signed": 62,
+			"strategy": "conservative"
+		},
+		{
+			"balanced": true,
+			"cargo_or_credit_losses": 7,
+			"cash": 95629.68,
+			"crises": 12,
+			"days": 120,
+			"downside_quotes": 25,
+			"paid": 76,
+			"profit": 2494.11999999998,
+			"revenue": 41875.64,
+			"seed": 70001,
+			"signed": 104,
+			"strategy": "normal"
+		},
+		{
+			"balanced": true,
+			"cargo_or_credit_losses": 1,
+			"cash": 97485.51,
+			"crises": 7,
+			"days": 120,
+			"downside_quotes": 23,
+			"paid": 78,
+			"profit": 5210.29,
+			"revenue": 42835.12,
+			"seed": 70002,
+			"signed": 101,
+			"strategy": "normal"
+		},
+		{
+			"balanced": true,
+			"cargo_or_credit_losses": 1,
+			"cash": 97908.35,
+			"crises": 7,
+			"days": 120,
+			"downside_quotes": 23,
+			"paid": 78,
+			"profit": 5437.05999999999,
+			"revenue": 40484.98,
+			"seed": 70003,
+			"signed": 100,
+			"strategy": "normal"
+		},
+		{
+			"balanced": true,
+			"cargo_or_credit_losses": 3,
+			"cash": 84272.57,
+			"crises": 3,
+			"days": 120,
+			"downside_quotes": 32,
+			"paid": 21,
+			"profit": -2122.79000000001,
+			"revenue": 45538.7,
+			"seed": 70001,
+			"signed": 32,
+			"strategy": "aggressive"
+		},
+		{
+			"balanced": true,
+			"cargo_or_credit_losses": 3,
+			"cash": 83831.43,
+			"crises": 1,
+			"days": 120,
+			"downside_quotes": 32,
+			"paid": 21,
+			"profit": -3740.29000000001,
+			"revenue": 44512.9,
+			"seed": 70002,
+			"signed": 32,
+			"strategy": "aggressive"
+		},
+		{
+			"balanced": true,
+			"cargo_or_credit_losses": 3,
+			"cash": 77857.67,
+			"crises": 3,
+			"days": 120,
+			"downside_quotes": 33,
+			"paid": 20,
+			"profit": -7401.80999999999,
+			"revenue": 45644.24,
+			"seed": 70003,
+			"signed": 33,
+			"strategy": "aggressive"
+		}
+	],
+	"strategies": {
+		"aggressive": {
+			"losses": 3,
+			"mean_profit_home_dollars": -4421.63,
+			"runs": 3
+		},
+		"conservative": {
+			"losses": 3,
+			"mean_profit_home_dollars": -2886.97,
+			"runs": 3
+		},
+		"normal": {
+			"losses": 0,
+			"mean_profit_home_dollars": 4380.49,
+			"runs": 3
+		}
+	}
+}

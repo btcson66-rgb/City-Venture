@@ -4,7 +4,7 @@ extends RefCounted
 
 
 static func cfg() -> Dictionary:
-	return DataDB.economy.get("overseas_partners", {}).get("forward", {})
+	return DataDB.economy.get("overseas_partners", {}).get("forward", DataDB.economy.get("trade", {}).get("forward", {}))
 
 
 static func S() -> Dictionary:
@@ -26,6 +26,9 @@ static func exposure(entity: String, ccy: String, days: int) -> float:
 			var l: Dictionary = Ecommerce.E()["listings"].get(listing, {})
 			if not l.is_empty():
 				total += float(c["stores"][region]["prices"][listing]) * GlobalMarket.demand(region, l) * days
+	for deal in GameState.data.get("trade",{}).get("deals",{}).values():
+		if deal["entity"]==entity and deal["quote"]["buyer_currency"]==ccy and deal["quote"]["payment"]!="tt_prepaid" and not deal.get("procurement",false) and deal["status"] in ["booked","delayed","customs_hold","in_transit","awaiting_bank","receivable"]:
+			total+=float(deal["quote"]["buyer_quote"])
 	for f in S()["items"].values():
 		if f["entity"] == entity and f["currency"] == ccy and f["status"] == "open":
 			total -= float(f["notional"])

@@ -1,0 +1,8 @@
+WARNING: Ecommerce: unknown eco.missing
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] handle (res://scripts/sim/ecommerce.gd:1371)
+       [1] dispatch (res://scripts/sim/industries.gd:42)
+       [2] test_registry_contract_dispatch_and_active_tabs (res://tests/unit/test_industries.gd:19)
+       [3] _run (res://tests/test_runner.gd:46)
+       [4] test_closed_view_checks_and_single_primary (res://tests/unit/test_hotel.gd:370)

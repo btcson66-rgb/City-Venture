@@ -1,0 +1,51 @@
+{
+ "id": "trade_port_strike",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "manual",
+  "conditions": [
+   "flag:trade_active"
+  ],
+  "chance": 0,
+  "once": false
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "omar_haddad",
+  "title": "Temporary port closure",
+  "icon": "warning",
+  "lines": [
+   "Shipment owner: {company} · {trade}",
+   "A port strike delays booked cargo for three days. Wait for reopening or pay for air freight."
+  ]
+ },
+ "choices": [
+  {
+   "id": "wait",
+   "label": "Wait three days for the port",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "international_trade",
+     "kind": "port",
+     "retain": false
+    }
+   ],
+   "outcome": "The trade worktable shows the actual shipment and cash result."
+  },
+  {
+   "id": "air",
+   "label": "Pay to reroute cargo by air · {reroute_fee} home dollars",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "international_trade",
+     "kind": "port",
+     "retain": true
+    }
+   ],
+   "outcome": "The trade worktable shows the actual shipment and cash result."
+  }
+ ]
+}

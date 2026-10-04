@@ -1,0 +1,17 @@
+{
+ "id": "meridian_bonded_warehouse",
+ "name": "Meridian Bonded Warehouse",
+ "district": "harbor",
+ "kind": "warehouse",
+ "building": "customs_house",
+ "segment": "international_trade",
+ "monthly_rent": 600,
+ "deposit_months": 2,
+ "requires": [
+  "company_registered"
+ ],
+ "capacity": {
+  "staff": 3,
+  "inventory_units": 1000
+ }
+}

@@ -61,7 +61,7 @@ func route(destination: String) -> Dictionary:
 	return {"ok":true}
 
 func check(content: Control, ok: bool, text: String) -> void:
-	content.add_child(UIK.wrap(("✓ " if ok else "✗ ") + text, 8, Art.C_WHITE if ok else Art.C_GOLD, 550))
+	content.add_child(UIK.wrap(("✓ " if ok else "✗ ") + I18n.t(text), 8, Art.C_WHITE if ok else Art.C_GOLD, 550))
 
 func build() -> void:
 	has_primary = false
@@ -90,11 +90,12 @@ func not_open(content: Control) -> void:
 	var account := GameState.flag("business_account_opened")
 	var cash := company and Ledger.cash(GameState.company_id()) >= float(Automotive.cfg()["license_fee"])
 	content.add_child(UIK.label_tip("Automotive", "automotive", 9))
-	check(content, company, "Register a company first.")
-	check(content, account, "Open a business bank account.")
-	check(content, cash, "Keep the dealer licence fee in the business account.")
+	if not company: check(content, false, "Register a company first.")
+	elif not account: check(content, false, "Open a business bank account.")
+	elif not cash: check(content, false, "Keep the dealer licence fee in the business account.")
+	else: check(content, true, "Ready; apply for the dealer licence below.")
 	if company and account and cash:
-		button(content, I18n.t("Open the auto desk · licence %s") % Fmt.money0(Automotive.cfg()["license_fee"]), "OpenAutoDesk", Automotive.start, true)
+		button(content, I18n.t("Open the auto desk · licence %s") % Fmt.money(Automotive.cfg()["license_fee"]), "OpenAutoDesk", Automotive.start, true)
 	else:
 		var destination := "civic_center" if not company else "financial"
 		button(content, I18n.t(DataDB.districts[destination]["name"]), "RouteAutoPrerequisite", route.bind(destination), true)
