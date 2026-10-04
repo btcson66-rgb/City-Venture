@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="test_holding_groups" tests="14" failures="2">
+    <testcase classname="test_holding_groups" name="test_company_contexts_stock_staff_flags_credit_and_accounts_are_separate" time="0.000"></testcase>
+    <testcase classname="test_holding_groups" name="test_old_single_company_schedule_migration_and_save_reload_preserve_views" time="0.009"></testcase>
+    <testcase classname="test_holding_groups" name="test_hold_release_already_done_impossible_and_owner_fund_guards" time="0.002"></testcase>
+    <testcase classname="test_holding_groups" name="test_transfer_markup_eliminated_until_external_delivery_and_refund" time="0.006"></testcase>
+    <testcase classname="test_holding_groups" name="test_group_loans_interest_management_consolidation_and_nonfinite_edges" time="0.007"></testcase>
+    <testcase classname="test_holding_groups" name="test_subsidiary_bankruptcy_leaves_sibling_state_and_investment_intact" time="0.002"></testcase>
+    <testcase classname="test_holding_groups" name="test_npc_subsidiary_sale_is_parent_proceeds_and_cannot_pay_twice" time="0.003"></testcase>
+    <testcase classname="test_holding_groups" name="test_parent_guarantee_exposes_only_guaranteeing_parent_and_settles_once" time="0.002"></testcase>
+    <testcase classname="test_holding_groups" name="test_scheduled_work_runs_owner_context_and_restores_current_view" time="0.001"></testcase>
+    <testcase classname="test_holding_groups" name="test_group_company_selector_and_registration_are_reachable" time="0.060"></testcase>
+    <testcase classname="test_holding_groups" name="test_corrupt_portfolio_import_rejects_invalid_ids_and_context_shapes" time="0.003"></testcase>
+    <testcase classname="test_holding_groups" name="test_registration_prompt_is_read_only_and_requires_the_clerk" time="0.000"></testcase>
+    <testcase classname="test_holding_groups" name="test_actual_trade_contract_schedule_and_save_are_isolated_when_switching_company" time="0.110"><failure message="actual departure belongs to cargo owner (got , expected co_trade_test)"/><failure message="second company has no inherited brokerage"/><failure message="second company does not operate owner cargo (got co_trade_test, expected )"/><failure message="no cloned trade cargo"/><failure message="trade licence flag follows selected company"/><failure message="scheduled owner does not leak cargo into viewer"/><failure message="loaded viewer has no other-company cargo"/><failure message="closed brokerage cannot contaminate survivor"/></testcase>
+    <testcase classname="test_holding_groups" name="test_old_single_company_trade_departure_acquires_owner_before_switch" time="0.001"><failure message="legacy trade schedule migrated to real owner (got , expected co_trade_test)"/><failure message="legacy owner cargo is not cloned on registration"/></testcase>
+  </testsuite>
+</testsuites>

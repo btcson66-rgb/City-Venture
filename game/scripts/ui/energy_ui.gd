@@ -289,7 +289,7 @@ func spot_row(content: Control, spot: Dictionary) -> void:
 		button(build_row, I18n.t("with bank loan"), "BuildLoan_%s_%s" % [id, type], Energy.build_station.bind(id, type, false, true))
 
 
-## Compass points read in the player's language ("SW" → "southwest").
+## Compass points read in the player's language ("SW" → "Southwest").
 static func _facing(code: String) -> String:
-	var names := {"N": "north", "NE": "northeast", "E": "east", "SE": "southeast", "S": "south", "SW": "southwest", "W": "west", "NW": "northwest"}
+	var names := {"N": "North", "NE": "Northeast", "E": "East", "SE": "Southeast", "S": "South", "SW": "Southwest", "W": "West", "NW": "Northwest"}
 	return I18n.t(names.get(code, code))
