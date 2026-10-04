@@ -18,7 +18,7 @@
   {
    "id": "accept",
    "label": "Try the courier introduction",
-   "detail": "Pay {trial_discount} less on actual parcel labels for {trial_days} days. No cash award.",
+   "detail": "Pay a {trial_fee} sign-up fee, then {trial_discount} less on actual parcel labels for {trial_days} days. It only pays off if you ship enough parcels; no cash award.",
    "effects": [
     {
      "op": "shop_network",
@@ -30,7 +30,7 @@
   {
    "id": "decline",
    "label": "Decline and keep your current plan",
-   "detail": "No fee, order or commitment. Another opportunity may arrive after 30 days.",
+   "detail": "No fee, order or commitment; you pay the full label price. Another opportunity may arrive after 30 days.",
    "effects": [],
    "outcome": "You keep your current plan."
   }

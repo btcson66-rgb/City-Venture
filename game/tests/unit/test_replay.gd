@@ -158,3 +158,12 @@ func test_corrupt_local_history_is_preserved_and_reported() -> void:
 	runner.check(not Replay.S()["recorded"] and not Replay.history_error.is_empty(), "corrupt history is an explicit storage failure")
 	runner.eq(FileAccess.get_file_as_string(Replay.rank_path), "[7,{\"result\":{\"score\":\"bad\"}}]", "existing bytes preserved")
 	Replay.rank_path = original_path
+
+func test_event_frequency_has_a_positive_minimum_and_win_revenue_is_gross_of_vat() -> void:
+	runner.check(float(DataDB.difficulty["fields"]["event_frequency"]["min"]) > 0.0, "events are never fully disabled")
+	Company.register("Gross Co", "ecommerce", "22 Founders Lane")
+	Company.open_business_account(100)
+	var entity := GameState.business_entity()
+	var before := float(Replay.metrics()["revenue"])
+	Ledger.post(entity, "Sale", [{"acct": "cash", "dr": 1050.0}, {"acct": "revenue", "cr": 1050.0}], {"type": "sale", "id": "gross", "segment": "ecommerce"})
+	runner.eq(snappedf(float(Replay.metrics()["revenue"]) - before, 0.01), 1050.0, "win threshold counts the VAT-inclusive price")

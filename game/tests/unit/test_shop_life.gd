@@ -11,7 +11,7 @@ func test_research_premium_tiers_cache_and_invalid_product() -> void:
 	var result := ShopLife.research("water_bottle")
 	runner.check(result["ok"],"owned product researched")
 	var ref := float(DataDB.product("water_bottle")["ref_price"])
-	runner.check(float(result["card"]["price"])>=ref*1.3-0.01 and float(result["card"]["price"])<=ref*1.6+0.01,"premium interval")
+	runner.check(float(result["card"]["price"])>=ref*1.0-0.01 and float(result["card"]["price"])<=ref*1.15+0.01,"premium interval stays inside the Typical tier")
 	runner.eq(Clock.now()-before,30,"research uses 30 minutes")
 	before=Clock.now()
 	var again := ShopLife.research("water_bottle")
@@ -152,3 +152,12 @@ func test_queued_network_opportunity_keeps_original_account_after_closure() -> v
 	runner.check(not ShopLife.network_choice("order",{"entity":original})["ok"],"closed company's queued order cannot transfer")
 	runner.eq(GameState.data["contracts"].size(),contracts,"closure rejection creates no contract")
 	runner.check(Ledger.check_balanced(),"closure rejection preserves books")
+
+func test_courier_trial_costs_a_sign_up_fee_and_research_never_exceeds_expensive_tier() -> void:
+	Company.register("Courier Co", "ecommerce", "22 Founders Lane")
+	Company.open_business_account(500)
+	var cash := Ledger.cash(GameState.business_entity())
+	var result := ShopLife.network_choice("carrier", {"entity": GameState.business_entity()})
+	runner.check(result["ok"], "trial starts")
+	runner.eq(Ledger.cash(GameState.business_entity()), cash - float(ShopLife.cfg()["carrier_fee"]), "sign-up fee is real")
+	runner.check(float(ShopLife.cfg()["premium_max"]) <= float(ShopLife.cfg()["expensive_ratio"]), "suggested price never reads as Expensive")

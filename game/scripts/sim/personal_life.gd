@@ -132,12 +132,14 @@ static func recover(medical: bool) -> Dictionary:
 	return {"ok":true}
 static func on_hour(t: int,h: int) -> void:
 	if not GameState.data.has("personal_life"):return
-	if _sleeping or _resting:return
-	if int(S()["illness_until"])>0 and t>=int(S()["illness_until"]):S()["illness_until"]=0;S()["stress"]=minf(float(S()["stress"]),float(cfg()["recovered_stress"]))
-	if h==20:
+	# Daily debt and crisis stress is processed even while sleeping or resting; only the hour-by-hour recovery checks wait.
+	if h==20 and S().get("stress_day",-1)!=Clock.day_index():
+		S()["stress_day"]=Clock.day_index()
 		var debt := Bank.debt(GameState.business_entity())
 		var crises := not EventEngine.pending().is_empty()
-		S()["stress"]=clampf(float(S()["stress"])+(float(cfg()["debt_daily_stress"]) if debt>0 else 0)+(float(cfg()["crisis_daily_stress"]) if crises else 0)-float(cfg()["daily_stress_decay"]),0,100)
+		S()["stress"]=clampf(float(S()["stress"])+(float(cfg()["debt_daily_stress"]) if debt>0 else 0)+(float(cfg()["crisis_daily_stress"]) if crises else 0)-(0.0 if _sleeping or _resting else float(cfg()["daily_stress_decay"])),0,100)
+	if _sleeping or _resting:return
+	if int(S()["illness_until"])>0 and t>=int(S()["illness_until"]):S()["illness_until"]=0;S()["stress"]=minf(float(S()["stress"]),float(cfg()["recovered_stress"]))
 	if float(S()["stress"])>=float(cfg()["illness_threshold"]) and not ill() and t>=int(S()["cooldown_until"]):
 		S()["illness_until"]=t+int(cfg()["illness_days"])*Clock.DAY
 		S()["cooldown_until"]=t+int(cfg()["illness_cooldown_days"])*Clock.DAY

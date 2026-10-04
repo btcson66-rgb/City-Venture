@@ -21,6 +21,7 @@ static func vat(gross: float) -> float:
 ## Split actual, tagged customer transactions in the same balanced journal entry; refunds cannot exceed collected VAT.
 static func separate(entity: String, lines: Array, source: Dictionary) -> Array:
 	if not vat_entity(entity) or source.get("internal",false) or str(source.get("type",""))=="": return lines
+	_note_input(entity, lines, source)
 	if not lines.any(func(l):return l["acct"] in ["revenue","refunds"]):return lines
 	close_period(entity)
 	var state := E(entity)
@@ -46,13 +47,44 @@ static func separate(entity: String, lines: Array, source: Dictionary) -> Array:
 			tax_lines.append({"acct":"tax_payable", "cr":tax} if tax>0 else {"acct":"tax_payable", "dr":-tax})
 	return result+tax_lines
 
+## Supplier purchase orders carry VAT in their price, like every tagged price here; it is recoverable against output VAT.
+static func _note_input(entity: String, lines: Array, source: Dictionary) -> void:
+	if str(source.get("type",""))!="po":return
+	var gross := 0.0
+	for line in lines:
+		if line["acct"]=="inventory_in_transit" and float(line.get("dr",0))>0:gross+=float(line["dr"])
+	if gross>0:
+		var state := E(entity)
+		state["input"]=snappedf(float(state.get("input",0))+vat(gross),.01)
+
+## Recoverable input VAT reduces the return, never below zero; the rest carries forward. The credit offsets the cost of goods, not income.
+static func _claim_input(entity: String, state: Dictionary, amount: float) -> float:
+	var credit := snappedf(minf(float(state.get("input",0)),maxf(0,amount)),.01)
+	if credit<=0:return amount
+	state["input"]=snappedf(float(state["input"])-credit,.01)
+	Ledger.post(entity,I18n.t("Input VAT credit on purchases: %s")%Fmt.money(credit),[{"acct":"tax_payable","dr":credit},{"acct":"cogs","cr":credit}],{"type":"tax","segment":"shared"})
+	state["pending"]=snappedf(float(state["pending"])-credit,.01)
+	return snappedf(amount-credit,.01)
+
+## A customer invoice written off as a bad debt takes its output VAT with it; the credit offsets the bad-debt expense.
+static func bad_debt_relief(entity: String, loss: float, segment: String) -> float:
+	if not valid(entity) or loss<=0:return 0.0
+	var state := E(entity)
+	var relief := minf(vat(loss),maxf(0,-Ledger.balance(entity,"tax_payable")))
+	if relief<=0:return 0.0
+	Ledger.post(entity,I18n.t("VAT recovered on written-off invoice: %s")%Fmt.money(relief),[{"acct":"tax_payable","dr":relief},{"acct":"exp:bad_debt","cr":relief}],{"type":"tax","segment":segment})
+	state["pending"]=snappedf(float(state["pending"])-relief,.01)
+	state["pending_segments"][segment]=snappedf(float(state["pending_segments"].get(segment,0))-relief,.01)
+	return relief
+
 static func _new_return(entity: String, kind: String, amount: float, label: String) -> Dictionary:
 	var state := E(entity)
 	state["seq"]=int(state["seq"])+1
 	var id := "TAX-%d"%int(state["seq"])
 	var r := {"id":id,"entity":entity,"kind":kind,"period":label,"amount":snappedf(amount,.01),"fine":0.0,"due":Clock.now()+int(cfg()["filing_due_days"])*Clock.DAY,"status":"filed" if amount<=0 else "due","late":false}
 	state["returns"][id]=r
-	GameState.add_message("ana",I18n.t("Tax return ready: %s. File by %s.")%[label,Clock.fmt_short(int(r["due"]))])
+	# A nil return needs no action, so it creates no reminder.
+	if amount>0:GameState.add_message("ana",I18n.t("Tax return ready: %s. File by %s.")%[label,Clock.fmt_short(int(r["due"]))])
 	return r
 
 static func close_period(entity: String) -> void:
@@ -60,6 +92,7 @@ static func close_period(entity: String) -> void:
 	var state := E(entity)
 	if int(state["period"])!=period():
 		var amount := maxf(0,float(state["pending"]))
+		if valid(entity):amount=_claim_input(entity,state,amount)
 		_new_return(entity,"vat",amount,I18n.t("VAT: year %d, period %d / 6")%[int(int(state["period"])/6),int(state["period"])%6+1])
 		state["pending"]=snappedf(float(state["pending"])-amount,.01)
 		state["pending_segments"]={"shared":state["pending"]} if float(state["pending"])!=0 else {}
@@ -136,6 +169,15 @@ static func on_hour() -> void:
 				Ledger.post(entity,I18n.t("Late filing penalty: %s")%Fmt.money(float(r["fine"])),[{"acct":"exp:penalties","dr":r["fine"]},{"acct":account(r),"cr":r["fine"]}],{"type":"tax","id":r["id"],"segment":"shared"})
 				Bank.adjust_credit(int(cfg()["late_credit"]),"late tax")
 				Brand.record(entity,"payments",-8)
+			elif r["status"]=="due" and r["late"] and float(r["amount"])>0:
+				# Unfiled returns keep accruing interest for every further period.
+				var periods := int((Clock.now()-int(r["due"]))/(int(cfg()["interest_days"])*Clock.DAY))
+				var fresh := periods-int(r.get("interest_periods",0))
+				if fresh>0:
+					var interest := snappedf(float(r["amount"])*float(cfg()["interest_rate"])*fresh,.01)
+					r["interest_periods"]=periods
+					r["fine"]=snappedf(float(r["fine"])+interest,.01)
+					Ledger.post(entity,I18n.t("Late filing interest: %s")%Fmt.money(interest),[{"acct":"exp:interest","dr":interest},{"acct":account(r),"cr":interest}],{"type":"tax","id":r["id"],"segment":"shared"})
 
 static func on_company_closed(entity: String) -> void:
 	if not S()["entities"].has(entity):return

@@ -376,7 +376,8 @@ func _update_sparkles(delta: float) -> void:
 
 
 func _process(delta: float) -> void:
-	if _era_rendered != World.year():
+	# The rebuild waits until no dialogue, phone, modal or minigame is open, so the player's screen never vanishes mid-task.
+	if _era_rendered != World.year() and not UIRoot.is_blocking():
 		_era_rendered = World.year()
 		_reload_era.call_deferred()
 	super._process(delta)

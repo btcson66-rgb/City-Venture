@@ -21,7 +21,7 @@ func build() -> void:
 			var ready := Ledger.cash(str(c["entity"]))>=float(terms["fee"])
 			var label := I18n.t("%s · fee %s · %d days · success %.0f%% · recovery %.0f%% · relationship %d points")%[I18n.t(str(terms["name"])),Fmt.money(float(terms["fee"])),int(terms["days"]),float(terms["win"])*100,float(terms["recovery"])*100,int(terms["relationship"])]
 			body.add_child(UIK.wrap(label,8,Art.C_MUTED,500))
-			var b := UIK.button(str(terms["name"]),_choose.bind(str(option)),"primary" if terms.get("recommended",false) and ready else "")
+			var b := UIK.button(str(terms["name"]),_choose.bind(str(option)))  # each route wins for some dispute size; none is recommended
 			b.name="LegalChoice_"+str(option)
 			b.disabled=not ready
 			body.add_child(b)

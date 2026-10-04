@@ -150,7 +150,7 @@ static func demand(key: String) -> float:
 	if population > 0:
 		preference = lerpf(1.0, preference, float(budget) / population)
 	seeded.seed = int(S()["seed"]) ^ (key + str(Clock.day_index())).hash()
-	return maxf(0.1, base * preference * (1.0 + seeded.randf_range(-1.0, 1.0) * number("demand_volatility", 0.0)))
+	return clampf(base * preference * (1.0 + seeded.randf_range(-1.0, 1.0) * number("demand_volatility", 0.0)), 0.75, 1.35)  # bounded so Macro x Rivals x Replay cannot compound
 
 
 static func net_worth() -> float:
@@ -169,6 +169,9 @@ static func metrics() -> Dictionary:
 	var revenue := 0.0
 	for entity in GameState.data["entities"]:
 		revenue -= Ledger.balance(entity, "revenue") + Ledger.balance(entity, "refunds")
+		# Win thresholds are gross-of-VAT sales: add back the VAT these companies collected (net of refunds).
+		for collected in Tax.E(entity)["sales"].values() if Tax.S()["entities"].has(entity) else []:
+			revenue += float(collected)
 	var rating := -1.0
 	if GameState.data.has("cafe") and Cafe.ready_to_open():
 		rating = float(GameState.data["cafe"]["rating"])

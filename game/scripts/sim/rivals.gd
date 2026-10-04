@@ -23,7 +23,7 @@ static func initialize() -> void:
 	GameState.data["rivals"] = {"version": 1, "rng_state": str(random.state), "week": -1, "companies": {}, "offers": {}, "poach_after": 0}
 	for id in DataDB.rivals:
 		var rival: Dictionary = DataDB.rivals[id].duplicate(true)
-		rival.merge({"cash": rival["capital"], "ads": 0.0, "status": "active", "last": "", "buyer": "", "trades": []}, true)
+		rival.merge({"cash": rival["capital"], "ads": 0.0, "status": "active", "last": "", "buyer": "", "trades": [], "base_quality": rival["quality"], "base_price": rival["price"], "exit_week": -1}, true)
 		S()["companies"][id] = rival
 
 
@@ -126,6 +126,7 @@ static func decide_week() -> void:
 	random.state = int(S()["rng_state"])
 	for rival in companies():
 		if rival["status"] != "active":
+			_maybe_reenter(rival)
 			continue
 		var industry := str(rival["industry"])
 		var before := shares(industry)
@@ -148,21 +149,55 @@ static func decide_week() -> void:
 					rival["status"] = "acquired"
 					rival["buyer"] = buyer["id"]
 					break
+			rival["exit_week"] = int(S()["week"])
 			rival["last"] = I18n.t("%s left the market.") % rival["name"]
 		else:
 			match str(rival["strategy"]):
 				"low_price": rival["price"] = clampf(float(rival["price"]) + random.randf_range(-float(cfg()["price_move"]), float(cfg()["price_move"]) * 0.5), float(cfg()["price_min"]), float(cfg()["price_max"]))
-				"quality": rival["quality"] = clampf(float(rival["quality"]) + float(cfg()["quality_move"]), float(cfg()["quality_min"]), float(cfg()["quality_max"]))
+				"quality":
+					# Investing in quality costs cash every week; it only improves while the firm can pay for it.
+					if float(rival["cash"]) > float(cfg()["quality_cost"]) * 4:
+						rival["cash"] = snappedf(float(rival["cash"]) - float(cfg()["quality_cost"]), 0.01)
+						rival["quality"] = clampf(float(rival["quality"]) + float(cfg()["quality_move"]), float(cfg()["quality_min"]), float(cfg()["quality_max"]))
 				"expansion":
 					if float(rival["cash"]) > float(cfg()["location_cost"]) * 2 and int(rival["locations"]) < int(cfg()["max_locations"]):
 						rival["cash"] = float(rival["cash"]) - float(cfg()["location_cost"])
 						rival["locations"] = int(rival["locations"]) + 1
+			# Standards drift back toward the firm's own baseline when nobody keeps pushing them.
+			var base_quality := float(rival.get("base_quality", rival["quality"]))
+			var base_price := float(rival.get("base_price", rival["price"]))
+			rival["quality"] = clampf(float(rival["quality"]) + (base_quality - float(rival["quality"])) * float(cfg()["quality_revert"]), float(cfg()["quality_min"]), float(cfg()["quality_max"]))
+			rival["price"] = clampf(float(rival["price"]) + (base_price - float(rival["price"])) * float(cfg()["price_revert"]), float(cfg()["price_min"]), float(cfg()["price_max"]))
 			rival["ads"] = clampf(float(rival["ads"]) + random.randf_range(-float(cfg()["ads_move"]), float(cfg()["ads_move"])), 0.0, float(cfg()["ads_max"]))
 			rival["last"] = I18n.t("%s: price %.2f × street level; %d locations.") % [rival["name"], float(rival["price"]), int(rival["locations"])]
 			if participates(industry) and Clock.now() >= int(S()["poach_after"]) and random.randf() < float(cfg()["poach_chance"]) and not Staff.people().is_empty():
 				make_offer(str(Staff.people()[random.randi_range(0, Staff.count() - 1)]["id"]), str(rival["id"]))
 		CityNews.enqueue(str(rival["last"]), "rival")
 	S()["rng_state"] = str(random.state)
+
+
+## A market with a hole in it attracts a fresh entrant; rivals the player bought stay owned.
+static func _maybe_reenter(rival: Dictionary) -> void:
+	if rival.get("buyer", "") == GameState.company_id() and rival["status"] == "acquired" and GameState.company_id() != "":
+		return
+	if rival["status"] == "bankrupt" and rival.get("acquired_cost", 0.0) != 0.0:
+		return
+	var left := int(rival.get("exit_week", -1))
+	if left < 0:
+		rival["exit_week"] = int(S()["week"])
+		return
+	if int(S()["week"]) - left < int(cfg()["reentry_weeks"]):
+		return
+	rival["status"] = "active"
+	rival["cash"] = float(rival["capital"])
+	rival["locations"] = 1
+	rival["ads"] = 0.0
+	rival["buyer"] = ""
+	rival["quality"] = rival.get("base_quality", rival["quality"])
+	rival["price"] = rival.get("base_price", rival["price"])
+	rival["exit_week"] = -1
+	rival["last"] = I18n.t("%s opened as a new entrant.") % rival["name"]
+	CityNews.enqueue(str(rival["last"]), "rival")
 
 
 static func pending() -> Array:
@@ -208,7 +243,7 @@ static func acquire_price(id: String) -> float:
 static func acquire(id: String) -> Dictionary:
 	var rival: Dictionary = S().get("companies", {}).get(id, {})
 	var entity := GameState.company_id()
-	if rival.is_empty() or rival.get("status", "") != "active" or entity == "" or GameState.data["entities"][entity].has("closed") or Acquisition.sold() or Clock.day_index() < int(cfg()["acquire_after_days"]):
+	if rival.is_empty() or rival.get("status", "") != "active" or entity == "" or GameState.data["entities"][entity].has("closed") or Acquisition.sold() or Clock.now() - int(GameState.data["entities"][entity].get("founded", 0)) < int(cfg()["acquire_after_days"]) * Clock.DAY:
 		return {"ok": false, "error": "✗ Acquisition unavailable — operate an independent company for 180 days."}
 	var price := acquire_price(id)
 	if Ledger.cash(entity) < price:

@@ -186,3 +186,13 @@ func test_request_approaches_trade_time_money_and_trust_and_favours_alone_never_
 	PersonalLife.note_kind("maya","event");PersonalLife.note_kind("maya","gift")
 	runner.check(PersonalLife.request_done("maya",2,1,"lean")["ok"],"variety unlocks the third request")
 	runner.eq(PersonalLife.stage_name("maya"),I18n.t("Trusted contact"),"top stage label")
+
+func test_daily_debt_and_crisis_stress_applies_even_while_sleeping() -> void:
+	PersonalLife.S()["stress"] = 10.0
+	PersonalLife.sleep_begin()
+	PersonalLife.on_hour(Clock.now(), 20)
+	PersonalLife.sleep_end(480)
+	runner.eq(PersonalLife.S()["stress_day"], Clock.day_index(), "daily processing ran while sleeping")
+	var seen := float(PersonalLife.S()["stress"])
+	PersonalLife.on_hour(Clock.now(), 20)
+	runner.eq(PersonalLife.S()["stress"], seen, "the same day is never processed twice")
