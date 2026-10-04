@@ -281,6 +281,33 @@ func test_old_multi_company_trade_capture_loads_without_giving_viewer_the_cargo(
 		if str(item["kind"]).begins_with("trade."):runner.eq(item["p"].get("company_context",""),owner,"legacy trade schedule bound to recorded owner")
 	runner.eq(GameState.data["ledger"]["journal"].size(),journals,"migration creates no money or extra purchase")
 	runner.check(Ledger.check_balanced(),"loaded historical cargo books balanced")
+	# Preserve an intermediate portfolio save: viewer selected, owner parked, decision not yet priced.
+	var deal: Dictionary=TradeIndustry.S()["deals"][signed["id"]]
+	var probe:=RandomNumberGenerator.new()
+	for value in 10000:
+		probe.seed=value
+		if probe.randf()<float(TradeIndustry.cfg().get("port_disruption_risk",.08)):GameState.rng.seed=value;break
+	GameState.data["clock"]["minutes"]=int(deal["depart"])
+	TradeIndustry.handle("trade.depart",{"id":signed["id"]})
+	runner.eq(deal["status"],"delayed","real parked cargo awaits a port decision")
+	CompanyPortfolio.switch(other);CompanyPortfolio.capture()
+	var parked: Dictionary=GameState.data.duplicate(true)
+	var port: Array=parked["events"]["queue"].filter(func(q):return q["id"]=="trade_port_strike" and q["ctx"].get("trade_entity","")==owner)
+	runner.check(not port.is_empty(),"parked actual port decision exists")
+	if port.is_empty():return
+	var iid: String=port[0]["iid"];port[0]["ctx"].erase("reroute_fee");port[0]["ctx"].erase("company")
+	file=FileAccess.open(SaveSystem.DIR.path_join("slot_5.json"),FileAccess.WRITE)
+	file.store_string(JSON.stringify({"format":GameState.SAVE_FORMAT,"summary":{},"data":parked}));file.close()
+	runner.check(SaveSystem.load_data(5),"old parked-owner port decision loads normally")
+	var loaded_port: Array=EventEngine.pending().filter(func(q):return q["iid"]==iid)
+	runner.check(not loaded_port.is_empty() and loaded_port[0]["ctx"].has("reroute_fee"),"actual owner fee recovered from parked cargo")
+	if loaded_port.is_empty() or not loaded_port[0]["ctx"].has("reroute_fee"):return
+	var cash:=Ledger.cash(owner)
+	runner.check(EventEngine.choose(iid,"air")["ok"],"loaded owner rerouting executes")
+	runner.eq(Fmt.money(cash-Ledger.cash(owner)),loaded_port[0]["ctx"]["reroute_fee"],"loaded fee equals actual original-owner payment")
+	runner.eq(GameState.company_id(),other,"loaded decision restores historical viewer")
+	runner.check(Ledger.check_balanced(),"loaded actual rerouting books balance")
+
 
 func test_pending_trade_port_decision_reroutes_the_owner_and_restores_another_viewer() -> void:
 	var fixture=load("res://tests/unit/test_trade_execution.gd").new();fixture.runner=runner;fixture.setup()

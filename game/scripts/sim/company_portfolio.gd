@@ -18,6 +18,7 @@ static func migrate(data: Dictionary) -> void:
 	if not data.has("active_company"): data["active_company"]=""
 	if not data.has("company_contexts"): data["company_contexts"]={}
 	_migrate_trade_owner(data)
+	_migrate_trade_decisions(data)
 static func _migrate_trade_owner(data: Dictionary) -> void:
 	# Before trade entered the portfolio registry, one global brokerage could be shown in another company's view.
 	if not data.get("trade",{}) is Dictionary:return
@@ -31,12 +32,6 @@ static func _migrate_trade_owner(data: Dictionary) -> void:
 		if inst["id"] in ["trade_port_strike","trade_fx_volatility"] and not inst["ctx"].has("trade_entity"):
 			inst["ctx"]["trade_entity"]=owner
 			inst["ctx"]["company"]=str(data["entities"].get(owner,{}).get("name",owner))
-	for inst in data.get("events",{}).get("queue",[]):
-		if inst["id"]!="trade_port_strike" or inst["ctx"].has("reroute_fee"):continue
-		var cargo: Dictionary=trade.get("deals",{}).get(str(inst["ctx"].get("trade","")),{})
-		if not cargo.is_empty():
-			var air: Dictionary=DataDB.economy.get("trade",{}).get("transport",{}).get("air",{})
-			inst["ctx"]["reroute_fee"]=Fmt.money(float(air.get("base_fee",0))+float(air.get("unit_fee",0))*int(cargo.get("quantity",0)))
 	var active:=active_of(data)
 	if owner==active:return
 	var view: Dictionary=data["company_contexts"].get(owner,{"states":{},"flags":{},"bank":{}})
@@ -49,6 +44,23 @@ static func _migrate_trade_owner(data: Dictionary) -> void:
 		data["trade"]=selected
 	else:data.erase("trade")
 	data["flags"]["trade_active"]=bool(selected.get("active",false)) if str(selected.get("entity",""))==active else false
+static func _migrate_trade_decisions(data: Dictionary) -> void:
+	# An earlier portfolio save can have a parked owner brokerage while the visible company has none.
+	for inst in data.get("events",{}).get("queue",[]):
+		if inst["id"] not in ["trade_port_strike","trade_fx_volatility"]:continue
+		var ctx: Dictionary=inst["ctx"]
+		var owner: String=str(ctx.get("trade_entity",""))
+		if owner=="" or not data["entities"].has(owner):continue
+		if not ctx.has("company"):ctx["company"]=str(data["entities"][owner].get("name",owner))
+		if inst["id"]!="trade_port_strike" or ctx.has("reroute_fee"):continue
+		var source: Variant=data.get("trade",{})
+		if not source is Dictionary or str(source.get("entity",""))!=owner:
+			source=data["company_contexts"].get(owner,{}).get("states",{}).get("trade",{})
+		if not source is Dictionary:continue
+		var cargo: Dictionary=source.get("deals",{}).get(str(ctx.get("trade","")),{})
+		if cargo.is_empty():continue
+		var air: Dictionary=DataDB.economy.get("trade",{}).get("transport",{}).get("air",{})
+		ctx["reroute_fee"]=Fmt.money(float(air.get("base_fee",0))+float(air.get("unit_fee",0))*int(cargo.get("quantity",0)))
 static func ids(include_closed := false) -> Array:
 	migrate(GameState.data)
 	return GameState.data["company"].filter(func(id):return include_closed or GlobalMarket.live(str(id)))
