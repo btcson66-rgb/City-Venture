@@ -25,3 +25,5 @@ The complete integrated walkthrough is still pending; the earlier #93 run failed
 - Prevented another company's expiry from modifying selected-company flags.
 - Moved guide button names off translation extraction lines, translated OEM invoice text and clarified subcontract costs.
 - Added the guide help card, actual mentor map caption, played save and JPG evidence.
+
+Native tour follow-up: select the customer floor through the actual quote buttons; the default quote can legitimately lose after the stack changes RNG consumption. Gameplay competition is preserved. Fresh isolated save directories prevent occupied test slots from stopping New Game.
