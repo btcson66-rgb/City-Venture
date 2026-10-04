@@ -31,7 +31,7 @@ static func begin(ent: String, reason: String) -> void:
 
 ## Everything the company owes right now.
 static func liabilities(ent: String) -> float:
-	return -(Ledger.balance(ent, "loan_payable") + Ledger.balance(ent, "wages_payable") + Ledger.balance(ent, "accounts_payable"))
+	return -(Ledger.balance(ent, "loan_payable") + Ledger.balance(ent, "wages_payable") + Ledger.balance(ent, "accounts_payable") + Ledger.balance(ent,"tax_payable") + Ledger.balance(ent,"income_tax_payable"))
 
 
 static func shortfall(ent: String) -> float:
@@ -111,7 +111,7 @@ static func close_company() -> Dictionary:
 	Staff.S()["applicants"] = []
 	Staff.S()["posting"] = {}
 	# 3. pay creditors in order, write off the rest
-	for acct in ["wages_payable", "loan_payable", "accounts_payable"]:
+	for acct in ["wages_payable", "tax_payable", "income_tax_payable", "loan_payable", "accounts_payable"]:
 		var owed := -Ledger.balance(ent, acct)
 		if owed <= 0.01:
 			continue

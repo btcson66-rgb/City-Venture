@@ -51,7 +51,7 @@ func test_zero_revenue_shared_cost_and_old_untagged_journal() -> void:
 func test_jobs_deposit_work_delivery_net_terms_and_no_double_payment() -> void:
 	var entity := _company()
 	for terms in [0,30,60]:
-		var id := Jobs.offer({"client":"client", "scope":"installation", "price":100, "work":2.0, "terms":terms, "deposit":0.3, "segment":"consulting", "entity":entity})
+		var id := Jobs.offer({"client":"client", "scope":"installation", "price":100, "work":2.0, "terms":terms, "payment_risk":0.0, "deposit":0.3, "segment":"consulting", "entity":entity})
 		runner.check(Jobs.accept(id)["ok"], "accept")
 		runner.check(not Jobs.invoice(id)["ok"], "no premature invoice")
 		runner.check(not Jobs.deliver(id)["ok"], "scope required")

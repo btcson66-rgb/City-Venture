@@ -346,7 +346,7 @@ static func handle(kind: String, p: Dictionary) -> void:
 			if S()["posting"].get("role", "") != role:
 				return
 			var list: Array = []
-			for i in int(cfg().get("applicants", 3)):
+			for i in Brand.applicant_count(int(cfg().get("applicants", 3))):
 				list.append(_make_person(role))
 			S()["applicants"] = list
 			GameState.add_message("jobs_board", I18n.t("%d people applied for %s. Review them in Company OS → People.") % [list.size(), I18n.t(str(role_def(role)["name"]))])

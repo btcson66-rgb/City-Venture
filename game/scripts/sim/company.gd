@@ -67,6 +67,7 @@ static func register(name: String, business_type: String, address: String) -> Di
 	GameState.data["entities"][cid] = {"id": cid, "name": n, "kind": "company", "type": business_type, "address": address,
 		"founded": Clock.now(), "bank_account": false, "seller_account": "business", "registration_no": "AUR-%06d" % (GameState.randi_range(100000, 999999))}
 	GameState.data["company"] = cid
+	Industries.on_company_registered(cid)
 	Ledger.expense("player", "registration", fee, I18n.t("Company registration fee — %s") % n, {"type": "registration"})
 	GameState.set_flag("company_registered")
 	Ecommerce.lift_cap()
@@ -92,6 +93,7 @@ static func open_business_account(capital: float) -> Dictionary:
 	GameState.data["entities"][cid]["bank_account"] = true
 	GameState.set_flag("business_account_opened")
 	Ecommerce.transfer_business_to(cid)
+	Industries.on_business_transferred(cid)
 	GameState.timeline(I18n.t("Opened a business account at Nexus Bank with %s of founder capital.") % Fmt.money0(capital), "business")
 	EventBus.world_refresh.emit()
 	return {"ok": true}
@@ -117,6 +119,7 @@ static func company_value() -> float:
 	return Ledger.cash(e) + Ledger.balance(e, "inventory") + Ledger.balance(e, "inventory_in_transit") + Ledger.balance(e, "goods_out") \
 		+ Ledger.balance(e, "marketplace_balance") + Ledger.balance(e, "accounts_receivable") + Ledger.balance(e, "deposits") \
 		+ Ledger.balance(e, "accounts_payable") + Ledger.balance(e, "deferred_revenue") + Ledger.balance(e, "escrow_held") + Ledger.balance(e, "frozen_funds") + Ledger.balance(e, "fixed_assets") \
+		+ Ledger.balance(e,"tax_payable") + Ledger.balance(e,"income_tax_payable") + Ledger.balance(e,"insurance_receivable") \
 		+ (Ledger.balance(e, "investments") if e != "player" else 0.0)
 
 

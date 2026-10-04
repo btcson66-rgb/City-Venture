@@ -45,7 +45,7 @@ static func base_rate() -> float:
 
 
 static func apr() -> float:
-	return clampf(base_rate() + Replay.number("interest_surcharge", 0.0) + 0.06 + (720 - credit()) * 0.0004, 0.06, 0.24)
+	return clampf(base_rate() + Replay.number("interest_surcharge", 0.0) + 0.06 + (720 - credit()) * 0.0004 + Brand.apr_adjustment(), 0.06, 0.24)
 
 
 static func monthly_payment(principal: float, months: int, rate := -1.0) -> float:

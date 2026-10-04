@@ -240,6 +240,7 @@ static func on_company_closed(entity: String) -> void:
 
 ## Opponents use their saved price/quality; inactive legacy markets preserve the old odds.
 static func bid_chance(base: float, opponents: Array) -> float:
+	base=clampf(base*Brand.customer_willingness(),0,1)
 	if opponents.is_empty():
 		return base
 	var strength := 0.0

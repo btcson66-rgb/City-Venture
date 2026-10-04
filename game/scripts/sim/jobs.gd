@@ -20,6 +20,9 @@ static func offer(spec: Dictionary) -> String:
 		"due":spec.get("due", Clock.now()+Clock.DAY), "work":spec.get("work", 1.0),
 		"segment":spec.get("segment", "shared"), "deposit":clampf(float(spec.get("deposit", 0)), 0, 1),
 		"penalty_rate":clampf(float(spec.get("penalty_rate", 0)), 0, 1), "deposit_paid":0.0}, true)
+	if job.get("direction","")!="purchase":
+		job["client_relationship"]=Legal.client_relationship(str(job["entity"]),str(job["client"]))
+		job["deposit"]=float(job["deposit"])*float(job["client_relationship"])/50.0
 	# An offer nobody takes lapses at its due time (or an explicit `expires_at`) instead of sitting in the list forever.
 	job["expires_at"] = int(spec.get("expires_at", job["due"]))
 	job["competitors"] = spec.get("competitors", Rivals.competitors(str(job["segment"]))).duplicate(true)
@@ -27,7 +30,7 @@ static func offer(spec: Dictionary) -> String:
 	return id
 
 static func _available(job: Dictionary) -> bool:
-	return not job.is_empty() and GameState.data["entities"].has(job["entity"]) and not GameState.data["entities"][job["entity"]].has("closed")
+	return not job.is_empty() and GameState.data["entities"].has(job["entity"]) and not GameState.data["entities"][job["entity"]].has("closed") and not job.get("dispute_pause",false)
 
 static func deposit_lines(amount: float) -> Array:
 	return [{"acct":"cash", "dr":amount}, {"acct":"deferred_revenue", "cr":amount}]
@@ -97,6 +100,7 @@ static func invoice(id: String) -> Dictionary:
 static func handle(kind: String, payload: Dictionary) -> void:
 	var job := get_job(str(payload.get("id", "")))
 	if kind != "job.pay" or not _available(job) or job["status"] != "invoiced": return
+	if not Legal.customer_payment(job):return
 	var amount := float(job["receivable"])
 	Ledger.post(job["entity"], I18n.t("Job payment: %s") % job["id"], [{"acct":"cash", "dr":amount}, {"acct":"accounts_receivable", "cr":amount}], {"type":"job", "id":job["id"], "segment":job["segment"]})
 	job["status"] = "paid"

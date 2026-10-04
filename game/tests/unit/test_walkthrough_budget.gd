@@ -11,7 +11,7 @@ func _offer() -> String:
 	return company
 
 func _trade(company: String) -> void:
-	var id := Jobs.offer({"client":"Budget customer", "scope":"Completed consultancy", "segment":"consulting", "entity":company, "price":5000.0, "terms":0})
+	var id := Jobs.offer({"client":"Budget customer", "scope":"Completed consultancy", "segment":"consulting", "entity":company, "price":5000.0, "terms":0, "payment_risk":0.0})
 	Jobs.accept(id)
 	Jobs.progress(id, 1)
 	Jobs.deliver(id)

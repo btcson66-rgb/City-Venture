@@ -20,7 +20,7 @@ func _args() -> Dictionary:
 
 
 func _run() -> void:
-	SaveSystem.DIR = "user://test_saves"
+	SaveSystem.DIR = "user://test_saves_%d" % OS.get_process_id()
 	var args := _args()
 	var filter: String = args.get("filter", "")
 	var files: Array = []
@@ -58,6 +58,8 @@ func _run() -> void:
 
 
 func _fresh_game() -> void:
+	# Concurrent sessions share user://; never delete or overwrite another runner's saves.
+	SaveSystem.DIR = "user://test_saves_%d" % OS.get_process_id()
 	# tests assert on English text; a Chinese OS locale (or test_i18n restoring it) must not leak in
 	TranslationServer.set_locale("en")
 	Clock.clear_pauses()

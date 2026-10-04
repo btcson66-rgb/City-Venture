@@ -235,7 +235,7 @@ static func handle(kind: String, payload: Dictionary) -> void:
 			Ledger.post(entity(),I18n.t("Tenant monthly rent"),[{"acct":"accounts_receivable" if unpaid else "cash","dr":property["rent"]},{"acct":"revenue","cr":property["rent"]}],source(invoice))
 			S()["invoices"][invoice]={"id":invoice,"property":id,"amount":property["rent"],"status":"unpaid" if unpaid else "paid","tenant":property["tenant"]["name"]}
 			if unpaid:Sim.schedule(Clock.now()+30*Clock.DAY,"re.collect",{"id":invoice})
-			if GameState.rng.randf()<float(spec["damage"]):Ledger.expense(entity(),"maintenance",float(cfg()["damage_cost"]),I18n.t("Tenant damage repair"),source(id),"cash" if Ledger.cash(entity())>=float(cfg()["damage_cost"]) else "accounts_payable")
+			if GameState.rng.randf()<float(spec["damage"]):Ledger.expense(entity(),"maintenance",float(cfg()["damage_cost"]),I18n.t("Tenant damage repair"),Insurance.loss_source(source(id),"property"),"cash" if Ledger.cash(entity())>=float(cfg()["damage_cost"]) else "accounts_payable")
 			Sim.schedule(Clock.now()+30*Clock.DAY,"re.rent",payload)
 		"re.renovation":
 			var work: Dictionary=property["renovation"]

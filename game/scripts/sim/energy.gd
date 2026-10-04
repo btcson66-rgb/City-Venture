@@ -398,7 +398,7 @@ static func resolve_claim(id: String, honour: bool, markup := 1.0) -> Dictionary
 	var cost := snappedf(float(claim["cost"]) * markup, 0.01)
 	if honour:
 		var from := "cash" if Ledger.cash(entity()) >= cost else "accounts_payable"
-		Ledger.expense(entity(), "maintenance", cost, I18n.t("Warranty repair: %s") % claim["client"], source("warranty", claim["install"]), from)
+		Ledger.expense(entity(), "maintenance", cost, I18n.t("Warranty repair: %s") % claim["client"], Insurance.loss_source(source("warranty", claim["install"]),"property"), from)
 		claim["status"] = "repaired"
 		claim["paid"] = cost
 		_reputation(0.01)

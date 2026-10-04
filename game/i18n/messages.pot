@@ -193,7 +193,7 @@ msgstr ""
 msgid "%d cars are due for service; skipping it risks a breakdown during a rental."
 msgstr ""
 
-#: scripts/sim/automotive.gd:647
+#: scripts/sim/automotive.gd:655
 msgid "%d completed rentals"
 msgstr ""
 
@@ -273,11 +273,11 @@ msgstr ""
 msgid "%d new delivery runs are posted (Company OS → Logistics)."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:325
+#: scripts/ui/phone_ui.gd:328
 msgid "%d of %d days"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:310
+#: scripts/ui/phone_ui.gd:313
 msgid "%d of %d reached"
 msgstr ""
 
@@ -681,6 +681,10 @@ msgstr ""
 msgid "%s · %s/car/mo"
 msgstr ""
 
+#: scripts/ui/governance_ui.gd:23
+msgid "%s · amount %s"
+msgstr ""
+
 #: scripts/ui/minigames/creative_pitch.gd:22
 msgid "%s · audience: %s"
 msgstr ""
@@ -709,12 +713,24 @@ msgstr ""
 msgid "%s · condition %d%% · %s"
 msgstr ""
 
+#: scripts/ui/modals/legal_case_modal.gd:16
+msgid "%s · disputed amount %s"
+msgstr ""
+
+#: scripts/ui/modals/legal_case_modal.gd:22
+msgid "%s · fee %s · %d days · success %.0f%% · recovery %.0f%% · relationship %d points"
+msgstr ""
+
 #: scripts/ui/automotive_ui.gd:80
 msgid "%s · lot %d/%d cars · fleet %d · cash %s"
 msgstr ""
 
 #: scripts/ui/automotive_ui.gd:166
 msgid "%s · paid %s (incl. repairs %s) · market %s · %s"
+msgstr ""
+
+#: scripts/ui/governance_ui.gd:32
+msgid "%s · premium %s / 30 days"
 msgstr ""
 
 #: scripts/ui/energy_ui.gd:72
@@ -747,6 +763,10 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1196
 msgid "%s/month each"
+msgstr ""
+
+#: scripts/ui/governance_ui.gd:11
+msgid "%s: %.1f / 100 points · weight %.0f%%"
 msgstr ""
 
 #: scripts/ui/automotive_ui.gd:291
@@ -1071,6 +1091,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "A dealership needs a deposit, a showroom and a minimum number of new cars in stock or on order each month."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "A deductible and policy limit leave real downside. Claims are receivables until paid; fines, ordinary investment and hypothetical lost sales are not insured."
 msgstr ""
 
 #: data/economy/staff.json
@@ -1489,7 +1513,7 @@ msgstr ""
 msgid "Accepted group job: %s"
 msgstr ""
 
-#: scripts/sim/jobs.gd:45
+#: scripts/sim/jobs.gd:48
 msgid "Accepted job %s: %s"
 msgstr ""
 
@@ -1525,15 +1549,23 @@ msgstr ""
 msgid "Accident history"
 msgstr ""
 
-#: scripts/sim/automotive.gd:614
+#: scripts/sim/automotive.gd:620
 msgid "Accident repair: %s"
+msgstr ""
+
+#: scripts/ui/modals/tax_filing_modal.gd:53
+msgid "Accountant correction · %s"
+msgstr ""
+
+#: scripts/sim/tax.gd:93
+msgid "Accountant filing fee: %s"
 msgstr ""
 
 #: scripts/ui/minigames/typing_game.gd:50
 msgid "Accuracy and speed decide how much of the work gets done in this session."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:291
+#: scripts/ui/phone_ui.gd:294
 msgid "Achievements"
 msgstr ""
 
@@ -1585,7 +1617,7 @@ msgstr ""
 msgid "Added %s to the rental fleet."
 msgstr ""
 
-#: scripts/sim/company.gd:108
+#: scripts/sim/company.gd:110
 msgid "Additional founder capital"
 msgstr ""
 
@@ -1637,7 +1669,7 @@ msgstr ""
 msgid "After a tiring shift you can return home to sleep. The first venture allows sleep after 4 PM and guides you home when it is too late to work."
 msgstr ""
 
-#: scripts/sim/automotive.gd:730
+#: scripts/sim/automotive.gd:738
 msgid "After-sales service ticket"
 msgstr ""
 
@@ -1741,7 +1773,7 @@ msgstr ""
 msgid "Already attended — choose another class."
 msgstr ""
 
-#: scripts/sim/company.gd:140
+#: scripts/sim/company.gd:143
 msgid "Already granted."
 msgstr ""
 
@@ -1833,6 +1865,10 @@ msgstr ""
 msgid "And watch the pastries. What you don't sell by closing goes in the bin, and the bin doesn't pay rent."
 msgstr ""
 
+#: scripts/sim/tax.gd:76
+msgid "Annual income tax: %s"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Annual interest"
 msgstr ""
@@ -1877,7 +1913,7 @@ msgstr ""
 msgid "Applicants for %s:"
 msgstr ""
 
-#: scripts/ui/modals/permits_modal.gd:118 scripts/ui/modals/permits_modal.gd:152
+#: scripts/ui/modals/permits_modal.gd:122 scripts/ui/modals/permits_modal.gd:156
 msgid "Application filed. The licence should be through %s."
 msgstr ""
 
@@ -1885,11 +1921,11 @@ msgstr ""
 msgid "Applications are open this year."
 msgstr ""
 
-#: scripts/ui/modals/permits_modal.gd:140 scripts/ui/modals/permits_modal.gd:71
+#: scripts/ui/modals/permits_modal.gd:144 scripts/ui/modals/permits_modal.gd:75
 msgid "Apply"
 msgstr ""
 
-#: scripts/ui/modals/permits_modal.gd:103
+#: scripts/ui/modals/permits_modal.gd:107
 msgid "Apply (%s)"
 msgstr ""
 
@@ -1927,6 +1963,10 @@ msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:94
 msgid "Approve"
+msgstr ""
+
+#: scripts/sim/insurance.gd:57
+msgid "Approved insurance claim: %s"
 msgstr ""
 
 #: autoload/clock.gd:14
@@ -2241,11 +2281,15 @@ msgstr ""
 msgid "Automated line"
 msgstr ""
 
+#: scripts/sim/tax.gd:124
+msgid "Automatic filing correction: %s"
+msgstr ""
+
 #: scripts/sim/manufacturing.gd:50
 msgid "Automation is already installed."
 msgstr ""
 
-#: data/businesses/automotive.json scripts/sim/automotive.gd:911 scripts/ui/automotive_ui.gd:22 scripts/ui/automotive_ui.gd:92
+#: data/businesses/automotive.json scripts/sim/automotive.gd:919 scripts/ui/automotive_ui.gd:22 scripts/ui/automotive_ui.gd:92
 msgid "Automotive"
 msgstr ""
 
@@ -2351,6 +2395,10 @@ msgstr ""
 
 #: data/character/options.json
 msgid "Backpack"
+msgstr ""
+
+#: scripts/sim/ledger.gd:33
+msgid "Bad debts"
 msgstr ""
 
 #: data/character/options.json
@@ -2689,11 +2737,23 @@ msgstr ""
 msgid "Boxing"
 msgstr ""
 
+#: scripts/ui/governance_ui.gd:12
+msgid "Brand influences recruitment, B2B willingness and borrowing rates. Event effects fade over 90 days; paid advertising alone is not reputation."
+msgstr ""
+
+#: scripts/ui/governance_ui.gd:13
+msgid "Brand loan adjustment: %+.2f percentage points"
+msgstr ""
+
 #: scripts/ui/modals/research_modal.gd:24
 msgid "Brand positioning, warranty and packaging support this premium price."
 msgstr ""
 
-#: scripts/sim/automotive.gd:627
+#: scripts/ui/governance_ui.gd:8
+msgid "Brand: %.1f / 100 points"
+msgstr ""
+
+#: scripts/sim/automotive.gd:635
 msgid "Breakdown compensation voucher"
 msgstr ""
 
@@ -2949,6 +3009,10 @@ msgstr ""
 msgid "Business gross profit passed one month of rent."
 msgstr ""
 
+#: data/economy/governance.json
+msgid "Business interruption insurance"
+msgstr ""
+
 #: scripts/ui/modals/bank_modal.gd:52
 msgid "Business lending · credit %d points"
 msgstr ""
@@ -3025,6 +3089,10 @@ msgstr ""
 msgid "Buy a van first."
 msgstr ""
 
+#: scripts/ui/governance_ui.gd:41
+msgid "Buy cover"
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Buy low. Sell less low. Got it, haha."
 msgstr ""
@@ -3037,7 +3105,7 @@ msgstr ""
 msgid "Buy phone stands"
 msgstr ""
 
-#: scripts/sim/automotive.gd:646
+#: scripts/sim/automotive.gd:654
 msgid "Buy rental cars at Gateway Car Rental."
 msgstr ""
 
@@ -3449,7 +3517,7 @@ msgstr ""
 msgid "Cancelled"
 msgstr ""
 
-#: scripts/sim/jobs.gd:122
+#: scripts/sim/jobs.gd:126
 msgid "Cancelled job deposit: %s"
 msgstr ""
 
@@ -3465,7 +3533,7 @@ msgstr ""
 msgid "Capital contributed in kind by founder"
 msgstr ""
 
-#: scripts/sim/company.gd:90
+#: scripts/sim/company.gd:91
 msgid "Capital injected into %s"
 msgstr ""
 
@@ -3793,7 +3861,7 @@ msgstr ""
 msgid "Choose Own cafe kitchen on the Rate Board: the hotel buys breakfast from the cafe at the transfer price."
 msgstr ""
 
-#: scripts/sim/automotive.gd:653
+#: scripts/sim/automotive.gd:661
 msgid "Choose a brand you can sign."
 msgstr ""
 
@@ -3901,11 +3969,11 @@ msgstr ""
 msgid "Choose a save slot to replace. Its existing save will be backed up."
 msgstr ""
 
-#: scripts/sim/automotive.gd:457
+#: scripts/sim/automotive.gd:462
 msgid "Choose a service interval."
 msgstr ""
 
-#: scripts/sim/automotive.gd:463
+#: scripts/sim/automotive.gd:468
 msgid "Choose a showroom discount between 0% and 6%."
 msgstr ""
 
@@ -3945,7 +4013,7 @@ msgstr ""
 msgid "Choose an insurance cover."
 msgstr ""
 
-#: scripts/sim/jobs.gd:58
+#: scripts/sim/jobs.gd:61
 msgid "Choose an offered construction contract."
 msgstr ""
 
@@ -3959,6 +4027,10 @@ msgstr ""
 
 #: scripts/sim/media.gd:75
 msgid "Choose an open client brief."
+msgstr ""
+
+#: scripts/sim/legal.gd:60
+msgid "Choose an open dispute for this company."
 msgstr ""
 
 #: data/help/help.json
@@ -3985,6 +4057,10 @@ msgstr ""
 msgid "Choose an open warranty claim."
 msgstr ""
 
+#: scripts/sim/tax.gd:88
+msgid "Choose an unfiled return for this company."
+msgstr ""
+
 #: scripts/sim/real_estate.gd:86
 msgid "Choose an unowned residential unit."
 msgstr ""
@@ -3995,6 +4071,10 @@ msgstr ""
 
 #: scripts/sim/internal_supply.gd:99
 msgid "Choose cost, cost plus or market price for a listed supply pair."
+msgstr ""
+
+#: scripts/sim/insurance.gd:13
+msgid "Choose cover for an open company."
 msgstr ""
 
 #: data/help/help.json
@@ -4093,7 +4173,7 @@ msgstr ""
 msgid "City map"
 msgstr ""
 
-#: scripts/ui/market_view.gd:33 scripts/ui/phone_ui.gd:137 scripts/ui/phone_ui.gd:346
+#: scripts/ui/market_view.gd:33 scripts/ui/phone_ui.gd:137 scripts/ui/phone_ui.gd:349
 msgid "City news"
 msgstr ""
 
@@ -4115,6 +4195,26 @@ msgstr ""
 
 #: data/buildings/city_hall.json
 msgid "Civic services"
+msgstr ""
+
+#: scripts/ui/governance_ui.gd:48
+msgid "Claim %s · %s · %s"
+msgstr ""
+
+#: scripts/ui/governance_ui.gd:48
+msgid "Claim paid"
+msgstr ""
+
+#: scripts/ui/governance_ui.gd:48
+msgid "Claim pending"
+msgstr ""
+
+#: scripts/ui/governance_ui.gd:45
+msgid "Claims reimburse actual crisis costs after a deductible, up to the paid policy limit. Fines and hypothetical lost sales are excluded; vehicle premiums keep their existing cover."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Claims settle actual invoices, paid contracts, earned wages or completed IP work. Ignored disputes automatically settle after 14 days; no claim creates a new sale."
 msgstr ""
 
 #: scripts/sim/shop_life.gd:84
@@ -4149,7 +4249,7 @@ msgstr ""
 msgid "Clean up the books of %s"
 msgstr ""
 
-#: scripts/sim/automotive.gd:591
+#: scripts/sim/automotive.gd:597
 msgid "Cleaning and refuelling"
 msgstr ""
 
@@ -4353,6 +4453,14 @@ msgstr ""
 msgid "Collect the money Crestline owes you"
 msgstr ""
 
+#: scripts/ui/modals/tax_filing_modal.gd:25
+msgid "Collected VAT owed %s · income tax owed %s"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Collected tax is owed money, not revenue. Filing yourself uses time and risks a form correction; an accountant charges a fee for accurate filing."
+msgstr ""
+
 #: scripts/ui/modals/settings_modal.gd:56
 msgid "Color assistance"
 msgstr ""
@@ -4409,12 +4517,20 @@ msgstr ""
 msgid "Company OS: your business computer"
 msgstr ""
 
+#: data/help/glossary.json scripts/ui/governance_ui.gd:7
+msgid "Company brand"
+msgstr ""
+
 #: scripts/sim/shop_life.gd:112
 msgid "Company closed — decline this opportunity."
 msgstr ""
 
 #: scripts/sim/bank.gd:140
 msgid "Company days or an active contract"
+msgstr ""
+
+#: data/help/glossary.json scripts/ui/governance_ui.gd:27
+msgid "Company insurance"
 msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:68 scripts/ui/modals/registration_modal.gd:29
@@ -4437,8 +4553,12 @@ msgstr ""
 msgid "Company registration"
 msgstr ""
 
-#: scripts/sim/company.gd:70
+#: scripts/sim/company.gd:71
 msgid "Company registration fee — %s"
+msgstr ""
+
+#: scripts/ui/modals/tax_filing_modal.gd:21
+msgid "Company tax returns"
 msgstr ""
 
 #: data/help/glossary.json
@@ -4457,7 +4577,7 @@ msgstr ""
 msgid "Compare the cycle, base rate, price level and rival shares. Your prices and quality affect your share."
 msgstr ""
 
-#: scripts/sim/rivals.gd:252
+#: scripts/sim/rivals.gd:253
 msgid "Competing firms: %s"
 msgstr ""
 
@@ -4545,7 +4665,7 @@ msgstr ""
 msgid "Compliance cost"
 msgstr ""
 
-#: scripts/ui/modals/permits_modal.gd:90
+#: scripts/ui/modals/permits_modal.gd:94
 msgid "Compliance cost: %s a month, more with staff."
 msgstr ""
 
@@ -4605,7 +4725,7 @@ msgstr ""
 msgid "Consumer"
 msgstr ""
 
-#: scripts/sim/automotive.gd:881
+#: scripts/sim/automotive.gd:889
 msgid "Consumer-protection fine for an undisclosed flood car"
 msgstr ""
 
@@ -4653,7 +4773,11 @@ msgstr ""
 msgid "Contract %s is overdue. Late penalty %s applies."
 msgstr ""
 
-#: scripts/sim/jobs.gd:65
+#: scripts/sim/legal.gd:20
+msgid "Contract dispute with %s. Choose settlement, a lawyer letter or court in Company OS → Governance."
+msgstr ""
+
+#: scripts/sim/jobs.gd:68
 msgid "Contractor milestone paid"
 msgstr ""
 
@@ -4695,6 +4819,10 @@ msgstr ""
 
 #: data/synergies.json
 msgid "Corner unit in Old Town."
+msgstr ""
+
+#: scripts/ui/modals/tax_filing_modal.gd:50
+msgid "Correct yourself · %d minutes"
 msgstr ""
 
 #: data/economy/automotive.json
@@ -4791,6 +4919,10 @@ msgstr ""
 
 #: scripts/ui/modals/pack_ship_modal.gd:50
 msgid "Courier · Express 1 day (%s)"
+msgstr ""
+
+#: scripts/ui/governance_ui.gd:28
+msgid "Cover %.0f%% of eligible loss · deductible %s · limit %s per %d days"
 msgstr ""
 
 #: scripts/ui/modals/new_run_modal.gd:145
@@ -4893,6 +5025,10 @@ msgstr ""
 msgid "Crestline's offer is in Company OS → Contracts: accept, counter or decline"
 msgstr ""
 
+#: scripts/ui/governance_ui.gd:9
+msgid "Crisis handling"
+msgstr ""
+
 #: scripts/sim/hotel.gd:484
 msgid "Critic Vera Stone published her review: %.1f stars."
 msgstr ""
@@ -4957,12 +5093,24 @@ msgstr ""
 msgid "Customer Support"
 msgstr ""
 
+#: scripts/ui/modals/tax_filing_modal.gd:24
+msgid "Customer prices include collected VAT. File every two months; annual income tax uses pretax profit after carried losses. Filing is a process, not a quiz."
+msgstr ""
+
+#: scripts/ui/modals/legal_case_modal.gd:28
+msgid "Customer recovery settles existing receivables. Earned employee wages remain owed even after a successful defence. IP success avoids compensation; it creates no income."
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1339
 msgid "Customers"
 msgstr ""
 
 #: data/help/help.json
 msgid "Customers come from the street: Old Town's foot traffic × how many stop (price and rating) × how many cups the counter can make."
+msgstr ""
+
+#: data/help/help.json
+msgid "Customers may not pay existing receivables. Supplier disputes require paid, overdue, unfinished work; compensation does not erase construction or manufacture cash from an unpaid contract."
 msgstr ""
 
 #: data/buildings/customs_house.json
@@ -5309,7 +5457,7 @@ msgstr ""
 msgid "Deliver one freelance gig."
 msgstr ""
 
-#: scripts/sim/jobs.gd:81
+#: scripts/sim/jobs.gd:84
 msgid "Deliver this job before invoicing."
 msgstr ""
 
@@ -5413,7 +5561,7 @@ msgstr ""
 msgid "Deposit %s, minimum stock %d new cars, minimum order %d cars. Margins are thin (about 5–7%%) but sales are steady and service tickets follow every car you sell."
 msgstr ""
 
-#: scripts/sim/automotive.gd:649
+#: scripts/sim/automotive.gd:657
 msgid "Deposit and first order in cash"
 msgstr ""
 
@@ -5579,6 +5727,10 @@ msgstr ""
 
 #: scripts/ui/energy_ui.gd:184
 msgid "Dispute the claim"
+msgstr ""
+
+#: scripts/sim/legal.gd:86
+msgid "Disputed invoice recovered: %s"
 msgstr ""
 
 #: data/help/glossary.json
@@ -5953,6 +6105,26 @@ msgstr ""
 msgid "Emerging Market"
 msgstr ""
 
+#: scripts/sim/legal.gd:100
+msgid "Employee dispute compensation: %s"
+msgstr ""
+
+#: scripts/ui/governance_ui.gd:9
+msgid "Employee treatment"
+msgstr ""
+
+#: scripts/sim/legal.gd:50
+msgid "Employee wages"
+msgstr ""
+
+#: data/help/help.json
+msgid "Employee wages remain owed. IP disputes refer to completed media or manufacturing jobs; court success avoids compensation but never pays fictitious income."
+msgstr ""
+
+#: scripts/sim/legal.gd:98
+msgid "Employee wages settled: %s"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Employer registration"
 msgstr ""
@@ -6053,7 +6225,7 @@ msgstr ""
 msgid "Equipment ages. Tired rooms drag down every review until you renovate, and a renovated room is off sale while the painters work."
 msgstr ""
 
-#: scripts/sim/effects.gd:90
+#: scripts/sim/effects.gd:94
 msgid "Equity investment"
 msgstr ""
 
@@ -6125,7 +6297,7 @@ msgstr ""
 msgid "Evening cut-off: everything out by 19:00, and it is."
 msgstr ""
 
-#: scripts/sim/effects.gd:29
+#: scripts/sim/effects.gd:33
 msgid "Event cost"
 msgstr ""
 
@@ -6133,7 +6305,7 @@ msgstr ""
 msgid "Event frequency"
 msgstr ""
 
-#: scripts/sim/effects.gd:31
+#: scripts/sim/effects.gd:35
 msgid "Event income"
 msgstr ""
 
@@ -6195,6 +6367,10 @@ msgstr ""
 
 #: data/character/options.json
 msgid "Executive"
+msgstr ""
+
+#: data/help/help.json
+msgid "Existing vehicle premiums retain their cover through the central claims service. A loss can be reimbursed once per policy category, never more than its recorded eligible cost."
 msgstr ""
 
 #: scripts/ui/tutorial.gd:627
@@ -6329,7 +6505,7 @@ msgstr ""
 msgid "Factory cash: %s · materials: %d units"
 msgstr ""
 
-#: scripts/sim/automotive.gd:688
+#: scripts/sim/automotive.gd:696
 msgid "Factory delivery: %s"
 msgstr ""
 
@@ -6341,11 +6517,11 @@ msgstr ""
 msgid "Factory materials liquidated"
 msgstr ""
 
-#: scripts/sim/automotive.gd:770 scripts/sim/automotive.gd:892
+#: scripts/sim/automotive.gd:778 scripts/sim/automotive.gd:900
 msgid "Factory order cancelled"
 msgstr ""
 
-#: scripts/sim/automotive.gd:678
+#: scripts/sim/automotive.gd:686
 msgid "Factory order: %s"
 msgstr ""
 
@@ -6477,12 +6653,24 @@ msgstr ""
 msgid "File for an exemption"
 msgstr ""
 
+#: scripts/ui/modals/tax_filing_modal.gd:39
+msgid "File yourself · %d minutes · %.0f%% form-error chance"
+msgstr ""
+
 #: autoload/save_system.gd:385
 msgid "File:"
 msgstr ""
 
 #: autoload/save_system.gd:400
 msgid "FileReader"
+msgstr ""
+
+#: scripts/sim/tax.gd:106
+msgid "Filing correction: %s"
+msgstr ""
+
+#: scripts/sim/tax.gd:120
+msgid "Filing documents need correction. Fix them yourself or hire an accountant; ignored forms incur a processing fee."
 msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:69
@@ -6557,7 +6745,7 @@ msgstr ""
 msgid "Finish one measured promotion campaign"
 msgstr ""
 
-#: scripts/sim/jobs.gd:73
+#: scripts/sim/jobs.gd:76
 msgid "Finish the agreed scope before delivery."
 msgstr ""
 
@@ -6721,7 +6909,7 @@ msgstr ""
 msgid "Flat white"
 msgstr ""
 
-#: scripts/sim/automotive.gd:739
+#: scripts/sim/automotive.gd:747
 msgid "Fleet and lot insurance"
 msgstr ""
 
@@ -6729,7 +6917,7 @@ msgstr ""
 msgid "Fleet car sold: %s"
 msgstr ""
 
-#: scripts/sim/automotive.gd:646
+#: scripts/sim/automotive.gd:654
 msgid "Fleet of %d cars and the rental counter"
 msgstr ""
 
@@ -6761,7 +6949,7 @@ msgstr ""
 msgid "Flood-damaged car on your lot"
 msgstr ""
 
-#: scripts/sim/automotive.gd:746
+#: scripts/sim/automotive.gd:754
 msgid "Floor-plan interest"
 msgstr ""
 
@@ -6793,7 +6981,7 @@ msgstr ""
 msgid "Food handling licence"
 msgstr ""
 
-#: scripts/ui/modals/permits_modal.gd:129
+#: scripts/ui/modals/permits_modal.gd:133
 msgid "Food handling licence (%s)"
 msgstr ""
 
@@ -6829,11 +7017,11 @@ msgstr ""
 msgid "For delivered local stock, choose a return quantity up to the unsold and unreserved units at its original location. Pay return freight now; cash arrives after the supplier receives the stock."
 msgstr ""
 
-#: scripts/ui/modals/permits_modal.gd:64
+#: scripts/ui/modals/permits_modal.gd:68
 msgid "For registered companies with recycled packaging and a green product on sale."
 msgstr ""
 
-#: scripts/ui/modals/permits_modal.gd:130
+#: scripts/ui/modals/permits_modal.gd:134
 msgid "For serving food and drink from your own premises. An inspector checks the unit; it takes two days."
 msgstr ""
 
@@ -6861,11 +7049,11 @@ msgstr ""
 msgid "Found it cheaper elsewhere."
 msgstr ""
 
-#: scripts/sim/company.gd:73
+#: scripts/sim/company.gd:74
 msgid "Founded %s (registration %s)."
 msgstr ""
 
-#: scripts/sim/company.gd:91
+#: scripts/sim/company.gd:92
 msgid "Founder capital (opening deposit)"
 msgstr ""
 
@@ -6881,15 +7069,15 @@ msgstr ""
 msgid "Franchise deposit and minimum stock"
 msgstr ""
 
-#: scripts/sim/automotive.gd:763 scripts/sim/automotive.gd:894
+#: scripts/sim/automotive.gd:771 scripts/sim/automotive.gd:902
 msgid "Franchise deposit settled"
 msgstr ""
 
-#: scripts/sim/automotive.gd:657
+#: scripts/sim/automotive.gd:665
 msgid "Franchise deposit: %s"
 msgstr ""
 
-#: scripts/sim/automotive.gd:750
+#: scripts/sim/automotive.gd:758
 msgid "Franchise minimum-stock shortfall"
 msgstr ""
 
@@ -7061,15 +7249,19 @@ msgstr ""
 msgid "Fund the first construction milestone before breaking ground."
 msgstr ""
 
-#: scripts/sim/jobs.gd:64
+#: scripts/sim/jobs.gd:67
 msgid "Fund the next construction milestone."
+msgstr ""
+
+#: scripts/sim/tax.gd:91
+msgid "Fund the tax payment and filing fee first."
 msgstr ""
 
 #: data/buildings/gateway_car_rental.json
 msgid "GATEWAY CAR RENTAL"
 msgstr ""
 
-#: scripts/ui/modals/permits_modal.gd:132 scripts/ui/modals/permits_modal.gd:66
+#: scripts/ui/modals/permits_modal.gd:136 scripts/ui/modals/permits_modal.gd:70
 msgid "GRANTED"
 msgstr ""
 
@@ -7213,6 +7405,10 @@ msgstr ""
 msgid "Good shifts count toward promotion, and each rank pays more. Every job comes with a perk."
 msgstr ""
 
+#: data/help/glossary.json
+msgid "Good standing changes recruitment, B2B willingness and loan pricing. Short-lived event effects decay; paying for ads does not buy reputation."
+msgstr ""
+
 #: data/dialogue/marcus_loan.json
 msgid "Good. Banks like people before they need us."
 msgstr ""
@@ -7233,11 +7429,19 @@ msgstr ""
 msgid "Got it"
 msgstr ""
 
+#: scripts/sim/governance.gd:6
+msgid "Governance"
+msgstr ""
+
+#: data/help/help.json
+msgid "Governance: brand, tax, legal and insurance"
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Grab a coffee at Bloom Coffee"
 msgstr ""
 
-#: scripts/ui/modals/permits_modal.gd:162
+#: scripts/ui/modals/permits_modal.gd:166
 msgid "Grant approved: %s is on its way to the company account."
 msgstr ""
 
@@ -7269,11 +7473,11 @@ msgstr ""
 msgid "Green Business Grant"
 msgstr ""
 
-#: scripts/ui/modals/permits_modal.gd:63
+#: scripts/ui/modals/permits_modal.gd:67
 msgid "Green Business Grant (%s)"
 msgstr ""
 
-#: scripts/sim/company.gd:154
+#: scripts/sim/company.gd:157
 msgid "Green Business Grant — City of Aurelia"
 msgstr ""
 
@@ -7813,6 +8017,10 @@ msgstr ""
 msgid "Hire a technician first."
 msgstr ""
 
+#: scripts/ui/modals/tax_filing_modal.gd:43
+msgid "Hire accountant · %s · %d minutes · accurate filing"
+msgstr ""
+
 #: scripts/sim/hotel.gd:96
 msgid "Hire at least %d hotel staff (now %d)."
 msgstr ""
@@ -8137,6 +8345,10 @@ msgstr ""
 msgid "INVOICED"
 msgstr ""
 
+#: scripts/sim/legal.gd:105
+msgid "IP licence settlement: %s"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "If everyone arrives, you pay walk compensation and the review suffers."
 msgstr ""
@@ -8185,7 +8397,7 @@ msgstr ""
 msgid "Import licence"
 msgstr ""
 
-#: scripts/ui/modals/permits_modal.gd:84
+#: scripts/ui/modals/permits_modal.gd:88
 msgid "Import licence (%s a year)"
 msgstr ""
 
@@ -8253,7 +8465,7 @@ msgstr ""
 msgid "In the workshop"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:513 scripts/ui/phone_ui.gd:274
+#: scripts/ui/modals/company_os.gd:513 scripts/ui/phone_ui.gd:277
 msgid "In transit"
 msgstr ""
 
@@ -8263,6 +8475,14 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:350
 msgid "Includes payroll, rent, loans, supplier bills, invoices due and estimated ShopLane sales (%s/day). Excludes restocking."
+msgstr ""
+
+#: scripts/sim/ledger.gd:33
+msgid "Income tax"
+msgstr ""
+
+#: scripts/sim/tax.gd:74
+msgid "Income tax year %d"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:695
@@ -8417,8 +8637,20 @@ msgstr ""
 msgid "Insurance claim dispute"
 msgstr ""
 
-#: scripts/sim/automotive.gd:616
+#: scripts/sim/insurance.gd:77
 msgid "Insurance claim received: %s"
+msgstr ""
+
+#: scripts/sim/insurance.gd:18
+msgid "Insurance premium: %s"
+msgstr ""
+
+#: scripts/sim/insurance.gd:95
+msgid "Insurance receivable transferred for liquidation"
+msgstr ""
+
+#: scripts/sim/insurance.gd:88
+msgid "Insurance renewal: %s"
 msgstr ""
 
 #: scripts/ui/modals/van_deal_modal.gd:32
@@ -8429,7 +8661,7 @@ msgstr ""
 msgid "Insure it, keep it moving, and it earns. Leave it on the kerb and it is just a very expensive shed."
 msgstr ""
 
-#: scripts/sim/automotive.gd:807
+#: scripts/sim/automotive.gd:815
 msgid "Insurer dispute settled at a discount"
 msgstr ""
 
@@ -8545,7 +8777,7 @@ msgstr ""
 msgid "Inventory: what you have and where"
 msgstr ""
 
-#: scripts/sim/effects.gd:89
+#: scripts/sim/effects.gd:93
 msgid "Investors buy shares in a registered company."
 msgstr ""
 
@@ -8577,7 +8809,7 @@ msgstr ""
 msgid "Invoice: %s · %s"
 msgstr ""
 
-#: scripts/sim/jobs.gd:93
+#: scripts/sim/jobs.gd:96
 msgid "Invoiced job %s: %s"
 msgstr ""
 
@@ -8709,15 +8941,15 @@ msgstr ""
 msgid "Job ad — %s"
 msgstr ""
 
-#: scripts/sim/jobs.gd:44
+#: scripts/sim/jobs.gd:47
 msgid "Job deposit: %s"
 msgstr ""
 
-#: scripts/sim/jobs.gd:88
+#: scripts/sim/jobs.gd:91
 msgid "Job invoice: %s"
 msgstr ""
 
-#: scripts/sim/jobs.gd:101
+#: scripts/sim/jobs.gd:105
 msgid "Job payment: %s"
 msgstr ""
 
@@ -8793,7 +9025,7 @@ msgstr ""
 msgid "KYC check (know your customer)"
 msgstr ""
 
-#: scripts/ui/modals/permits_modal.gd:89
+#: scripts/ui/modals/permits_modal.gd:93
 msgid "KYC check on payments over %s: a fee and a day's delay."
 msgstr ""
 
@@ -8877,7 +9109,7 @@ msgstr ""
 msgid "Keep the dealer licence fee in the business account."
 msgstr ""
 
-#: scripts/sim/automotive.gd:647
+#: scripts/sim/automotive.gd:655
 msgid "Keep the fleet on rent."
 msgstr ""
 
@@ -8985,7 +9217,7 @@ msgstr ""
 msgid "LEGEND"
 msgstr ""
 
-#: scripts/ui/modals/permits_modal.gd:98
+#: scripts/ui/modals/permits_modal.gd:102
 msgid "LICENSED"
 msgstr ""
 
@@ -9073,6 +9305,14 @@ msgstr ""
 msgid "Late fees"
 msgstr ""
 
+#: data/help/help.json
+msgid "Late filing adds one penalty and lowers credit. Refund VAT credits carry forward; old saves start new tax periods without retroactively changing their journals."
+msgstr ""
+
+#: scripts/sim/tax.gd:136
+msgid "Late filing penalty: %s"
+msgstr ""
+
 #: scripts/sim/bank.gd:278
 msgid "Late payment fee — loan %s"
 msgstr ""
@@ -9107,6 +9347,10 @@ msgstr ""
 
 #: scripts/sim/saas.gd:104
 msgid "Launched %s at %s/month."
+msgstr ""
+
+#: data/economy/governance.json
+msgid "Lawyer letter"
 msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:8
@@ -9229,7 +9473,7 @@ msgstr ""
 msgid "Lease the showroom"
 msgstr ""
 
-#: scripts/sim/automotive.gd:648
+#: scripts/sim/automotive.gd:656
 msgid "Lease the showroom at Gateway Car Rental."
 msgstr ""
 
@@ -9281,8 +9525,28 @@ msgstr ""
 msgid "Legacy"
 msgstr ""
 
-#: scripts/sim/automotive.gd:809
+#: data/help/help.json scripts/ui/modals/legal_case_modal.gd:6
+msgid "Legal Dispute"
+msgstr ""
+
+#: scripts/sim/legal.gd:117
+msgid "Legal case %s closed. Recovered %s; paid %s."
+msgstr ""
+
+#: scripts/sim/ledger.gd:33
+msgid "Legal costs"
+msgstr ""
+
+#: data/help/glossary.json scripts/ui/governance_ui.gd:20 scripts/ui/modals/legal_case_modal.gd:15
+msgid "Legal disputes"
+msgstr ""
+
+#: scripts/sim/automotive.gd:817
 msgid "Legal fee for an insurer dispute"
+msgstr ""
+
+#: scripts/sim/legal.gd:64
+msgid "Legal fee: %s"
 msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:7
@@ -9345,11 +9609,15 @@ msgstr ""
 msgid "Lettings desk: lease Bay 3"
 msgstr ""
 
+#: data/economy/governance.json
+msgid "Liability insurance"
+msgstr ""
+
 #: scripts/sim/gates.gd:46
 msgid "Licence"
 msgstr ""
 
-#: scripts/ui/modals/permits_modal.gd:116
+#: scripts/ui/modals/permits_modal.gd:120
 msgid "Licence renewed until %s."
 msgstr ""
 
@@ -9357,7 +9625,7 @@ msgstr ""
 msgid "Licensing Officer"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:288
+#: scripts/ui/phone_ui.gd:291
 msgid "Life Timeline"
 msgstr ""
 
@@ -9445,7 +9713,7 @@ msgstr ""
 msgid "Liquidation payment — %s"
 msgstr ""
 
-#: scripts/sim/company.gd:146
+#: scripts/sim/company.gd:149
 msgid "List a green product on ShopLane first."
 msgstr ""
 
@@ -9689,6 +9957,10 @@ msgstr ""
 msgid "Lose the sale + return label. Rating stays safe."
 msgstr ""
 
+#: scripts/ui/modals/tax_filing_modal.gd:26
+msgid "Loss available to carry forward: %s"
+msgstr ""
+
 #: data/buildings/lot7.json
 msgid "Lot 7"
 msgstr ""
@@ -9709,7 +9981,7 @@ msgstr ""
 msgid "Lot 7 development land"
 msgstr ""
 
-#: scripts/sim/automotive.gd:851
+#: scripts/sim/automotive.gd:859
 msgid "Lot storage and preparation"
 msgstr ""
 
@@ -10001,7 +10273,7 @@ msgstr ""
 msgid "Market competition"
 msgstr ""
 
-#: scripts/ui/market_view.gd:8 scripts/ui/phone_ui.gd:347
+#: scripts/ui/market_view.gd:8 scripts/ui/phone_ui.gd:350
 msgid "Market conditions"
 msgstr ""
 
@@ -10193,7 +10465,7 @@ msgstr ""
 msgid "Meet Marcus Reed now"
 msgstr ""
 
-#: scripts/sim/automotive.gd:655
+#: scripts/sim/automotive.gd:663
 msgid "Meet every franchise requirement first."
 msgstr ""
 
@@ -10245,7 +10517,7 @@ msgstr ""
 msgid "Meridian and Volt sell steady volume on thin margins. You need a ten-car fleet, a showroom and a deposit, and you must always keep new cars on the floor. Service tickets after the sale are where the dealership earns."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:135 scripts/ui/phone_ui.gd:189
+#: scripts/ui/phone_ui.gd:135 scripts/ui/phone_ui.gd:192
 msgid "Messages"
 msgstr ""
 
@@ -10309,7 +10581,7 @@ msgstr ""
 msgid "Minimal luxury"
 msgstr ""
 
-#: scripts/sim/company.gd:87
+#: scripts/sim/company.gd:88
 msgid "Minimum opening deposit is $500."
 msgstr ""
 
@@ -10413,7 +10685,7 @@ msgstr ""
 msgid "Month close"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:275
+#: scripts/ui/phone_ui.gd:278
 msgid "Month sales"
 msgstr ""
 
@@ -10637,7 +10909,7 @@ msgstr ""
 msgid "Needed before you hire anyone. Payroll runs every Friday at 17:00 from the company account."
 msgstr ""
 
-#: scripts/ui/modals/permits_modal.gd:88
+#: scripts/ui/modals/permits_modal.gd:92
 msgid "Needed to import from abroad. Renew it in its last two months, or imports stop."
 msgstr ""
 
@@ -10705,11 +10977,11 @@ msgstr ""
 msgid "New Neighbourhood Opening"
 msgstr ""
 
-#: scripts/sim/automotive.gd:766
+#: scripts/sim/automotive.gd:774
 msgid "New car returned to the factory: %s"
 msgstr ""
 
-#: scripts/sim/automotive.gd:718
+#: scripts/sim/automotive.gd:726
 msgid "New car sold: %s"
 msgstr ""
 
@@ -10743,6 +11015,10 @@ msgstr ""
 
 #: data/story/chapters.json
 msgid "New rules for big payments and imports: read the news board at Bloom Coffee"
+msgstr ""
+
+#: scripts/ui/governance_ui.gd:9
+msgid "News"
 msgstr ""
 
 #: scripts/ui/modals/info_modal.gd:80
@@ -10877,7 +11153,7 @@ msgstr ""
 msgid "No %s in stock to send."
 msgstr ""
 
-#: scripts/sim/jobs.gd:51
+#: scripts/sim/jobs.gd:54
 msgid "No active job to work on."
 msgstr ""
 
@@ -11193,7 +11469,7 @@ msgstr ""
 msgid "Not enough cash for this purchase."
 msgstr ""
 
-#: scripts/sim/bank.gd:232 scripts/sim/company.gd:105
+#: scripts/sim/bank.gd:232 scripts/sim/company.gd:107
 msgid "Not enough cash."
 msgstr ""
 
@@ -11213,7 +11489,7 @@ msgstr ""
 msgid "Not great. Feels cheap."
 msgstr ""
 
-#: scripts/ui/modals/permits_modal.gd:86
+#: scripts/ui/modals/permits_modal.gd:90
 msgid "Not needed yet. Commercial importers need one from the Regulation Wave (Year 8)."
 msgstr ""
 
@@ -11309,7 +11585,7 @@ msgstr ""
 msgid "Notification duration"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:268
+#: scripts/ui/phone_ui.gd:271
 msgid "Notifications only.\nManage at a desk: Company OS."
 msgstr ""
 
@@ -11589,6 +11865,14 @@ msgstr ""
 msgid "On time pays the full fee, a shorter route pays a little more, and a late run pays 40% less. A run left undone for hours is cancelled. Fuel and upkeep come off every run."
 msgstr ""
 
+#: scripts/ui/governance_ui.gd:9
+msgid "On-time payments"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "One score combines reviews, published news, crisis handling, on-time payments and employee treatment."
+msgstr ""
+
 #: data/events/customer_return.json
 msgid "One unit + express shipping."
 msgstr ""
@@ -11633,7 +11917,7 @@ msgstr ""
 msgid "Only delivered purchases can be returned."
 msgstr ""
 
-#: scripts/sim/company.gd:142
+#: scripts/sim/company.gd:145
 msgid "Only registered companies can apply."
 msgstr ""
 
@@ -11657,7 +11941,7 @@ msgstr ""
 msgid "Open %s · %s"
 msgstr ""
 
-#: scripts/sim/automotive.gd:911 scripts/ui/automotive_ui.gd:24 scripts/ui/automotive_ui.gd:30
+#: scripts/sim/automotive.gd:919 scripts/ui/automotive_ui.gd:24 scripts/ui/automotive_ui.gd:30
 msgid "Open Auto Desk"
 msgstr ""
 
@@ -11785,7 +12069,7 @@ msgstr ""
 msgid "Open the auto desk before hiring a technician."
 msgstr ""
 
-#: scripts/sim/automotive.gd:369 scripts/sim/automotive.gd:785
+#: scripts/sim/automotive.gd:369 scripts/sim/automotive.gd:793
 msgid "Open the auto desk first."
 msgstr ""
 
@@ -11909,7 +12193,7 @@ msgstr ""
 msgid "Opened Harlow & Finch brokerage."
 msgstr ""
 
-#: scripts/sim/company.gd:95
+#: scripts/sim/company.gd:97
 msgid "Opened a business account at Nexus Bank with %s of founder capital."
 msgstr ""
 
@@ -12021,7 +12305,7 @@ msgstr ""
 msgid "Order an oat latte ($5.20)"
 msgstr ""
 
-#: scripts/sim/automotive.gd:672
+#: scripts/sim/automotive.gd:680
 msgid "Order at least the franchise minimum quantity."
 msgstr ""
 
@@ -12253,7 +12537,7 @@ msgstr ""
 msgid "Owner money in / out"
 msgstr ""
 
-#: scripts/sim/company.gd:110
+#: scripts/sim/company.gd:112
 msgid "Owner withdrawal"
 msgstr ""
 
@@ -12313,7 +12597,7 @@ msgstr ""
 msgid "POSTPOINT"
 msgstr ""
 
-#: scripts/ui/modals/permits_modal.gd:135 scripts/ui/modals/permits_modal.gd:94
+#: scripts/ui/modals/permits_modal.gd:139 scripts/ui/modals/permits_modal.gd:98
 msgid "PROCESSING"
 msgstr ""
 
@@ -12377,7 +12661,7 @@ msgstr ""
 msgid "Packed well"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:273
+#: scripts/ui/phone_ui.gd:276
 msgid "Packed, not shipped"
 msgstr ""
 
@@ -12633,6 +12917,10 @@ msgstr ""
 msgid "Pay the repair yourself"
 msgstr ""
 
+#: data/help/help.json
+msgid "Pay the tax and choose time-consuming DIY filing or a paid accountant. Correct incomplete forms yourself or pay for assistance; ignored corrections finish automatically with a fee."
+msgstr ""
+
 #: scripts/ui/modals/settlement_modal.gd:95
 msgid "Pay this way"
 msgstr ""
@@ -12659,6 +12947,10 @@ msgstr ""
 
 #: scripts/ui/modals/loan_modal.gd:119
 msgid "Payment"
+msgstr ""
+
+#: scripts/ui/modals/tax_filing_modal.gd:32
+msgid "Payment %s · penalty %s · due %s"
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:379
@@ -12765,7 +13057,7 @@ msgstr ""
 msgid "Permits & regulations"
 msgstr ""
 
-#: scripts/ui/modals/bank_modal.gd:60 scripts/ui/phone_ui.gd:229
+#: scripts/ui/modals/bank_modal.gd:60 scripts/ui/phone_ui.gd:232
 msgid "Personal"
 msgstr ""
 
@@ -12777,7 +13069,7 @@ msgstr ""
 msgid "Personal Banker"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:277
+#: scripts/ui/phone_ui.gd:280
 msgid "Personal cap"
 msgstr ""
 
@@ -12787,6 +13079,10 @@ msgstr ""
 
 #: scripts/sim/ledger.gd:31
 msgid "Personal fitness"
+msgstr ""
+
+#: scripts/ui/modals/tax_filing_modal.gd:21
+msgid "Personal seller VAT"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:224
@@ -13089,6 +13385,10 @@ msgstr ""
 msgid "Press the shutter when the focus needle is in the green. You get three shots; the best one goes on your listing."
 msgstr ""
 
+#: scripts/ui/modals/tax_filing_modal.gd:33
+msgid "Pretax profit %s · carried loss used %s"
+msgstr ""
+
 #: scripts/ui/modals/clothing_shop_modal.gd:55 scripts/ui/modals/company_os.gd:1204 scripts/ui/modals/company_os.gd:404 scripts/ui/modals/van_deal_modal.gd:31
 msgid "Price"
 msgstr ""
@@ -13233,6 +13533,10 @@ msgstr ""
 msgid "Property closure auction"
 msgstr ""
 
+#: data/economy/governance.json
+msgid "Property insurance"
+msgstr ""
+
 #: scripts/sim/compliance.gd:33
 msgid "Property licence and application fee"
 msgstr ""
@@ -13249,7 +13553,7 @@ msgstr ""
 msgid "Property permit granted."
 msgstr ""
 
-#: scripts/ui/modals/permits_modal.gd:51 scripts/ui/real_estate_ui.gd:84
+#: scripts/ui/modals/permits_modal.gd:55 scripts/ui/real_estate_ui.gd:84
 msgid "Property permits"
 msgstr ""
 
@@ -13271,6 +13575,10 @@ msgstr ""
 
 #: scripts/sim/bank.gd:117
 msgid "Property worth less than its mortgage"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Property, liability and interruption policies collect premiums before losses, wait 7 days and reimburse eligible actual crisis costs."
 msgstr ""
 
 #: scripts/ui/media_ui.gd:85
@@ -13713,7 +14021,7 @@ msgstr ""
 msgid "Rebuild savings after the lending ban."
 msgstr ""
 
-#: scripts/sim/automotive.gd:823
+#: scripts/sim/automotive.gd:831
 msgid "Recall handling: %s"
 msgstr ""
 
@@ -13933,7 +14241,7 @@ msgstr ""
 msgid "Register a company and open its bank account first."
 msgstr ""
 
-#: scripts/sim/company.gd:83
+#: scripts/sim/company.gd:84
 msgid "Register a company at City Hall first."
 msgstr ""
 
@@ -13989,7 +14297,7 @@ msgstr ""
 msgid "Registered address"
 msgstr ""
 
-#: scripts/ui/modals/permits_modal.gd:191
+#: scripts/ui/modals/permits_modal.gd:195
 msgid "Registered as an employer (%s). You can post jobs in Company OS → People."
 msgstr ""
 
@@ -14049,7 +14357,7 @@ msgstr ""
 msgid "Regulation Wave"
 msgstr ""
 
-#: scripts/ui/modals/permits_modal.gd:49
+#: scripts/ui/modals/permits_modal.gd:53
 msgid "Regulations here are operating conditions, not quizzes: each one has a cost, a process, and a reason."
 msgstr ""
 
@@ -14093,7 +14401,7 @@ msgstr ""
 msgid "Rename"
 msgstr ""
 
-#: scripts/ui/modals/permits_modal.gd:103
+#: scripts/ui/modals/permits_modal.gd:107
 msgid "Renew (%s)"
 msgstr ""
 
@@ -14125,7 +14433,7 @@ msgstr ""
 msgid "Rent"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:235
+#: scripts/ui/phone_ui.gd:238
 msgid "Rent $1,250 due the 14th"
 msgstr ""
 
@@ -14181,7 +14489,7 @@ msgstr ""
 msgid "RentRealtyBuilding"
 msgstr ""
 
-#: scripts/sim/automotive.gd:614
+#: scripts/sim/automotive.gd:620
 msgid "Rental damage repair: %s"
 msgstr ""
 
@@ -14205,11 +14513,11 @@ msgstr ""
 msgid "Rental fleet: lease the Gateway counter, buy cars, set day and week rates and schedule services. Skipped service causes breakdowns mid-rental."
 msgstr ""
 
-#: scripts/sim/automotive.gd:626
+#: scripts/sim/automotive.gd:634
 msgid "Rental interrupted: %s"
 msgstr ""
 
-#: scripts/sim/automotive.gd:590
+#: scripts/sim/automotive.gd:596
 msgid "Rental returned: %s"
 msgstr ""
 
@@ -14225,11 +14533,11 @@ msgstr ""
 msgid "Repair and service · %s"
 msgstr ""
 
-#: scripts/sim/automotive.gd:811
+#: scripts/sim/automotive.gd:819
 msgid "Repair paid after a lost dispute"
 msgstr ""
 
-#: scripts/sim/automotive.gd:806
+#: scripts/sim/automotive.gd:814
 msgid "Repair paid after an insurer dispute"
 msgstr ""
 
@@ -14537,12 +14845,24 @@ msgstr ""
 msgid "Review OEM orders"
 msgstr ""
 
+#: scripts/ui/governance_ui.gd:24
+msgid "Review dispute"
+msgstr ""
+
+#: data/help/help.json
+msgid "Review due tax filings or legal disputes first. Insurance is bought before losses, renews every 30 days and may lapse if cash is insufficient; funded renewal resumes automatically."
+msgstr ""
+
 #: scripts/ui/automotive_ui.gd:132
 msgid "Review my lot"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1511
 msgid "Review next action"
+msgstr ""
+
+#: data/help/help.json
+msgid "Review personal seller VAT separately from company returns. Sales prices include VAT; company tax starts from its actual formation date."
 msgstr ""
 
 #: data/events/real_estate_arrears.json data/events/real_estate_delay.json data/events/real_estate_neighbors.json data/events/real_estate_rate.json
@@ -14555,6 +14875,10 @@ msgstr ""
 
 #: data/events/hotel_review_storm.json scripts/ui/hotel_ui.gd:252
 msgid "Review storm"
+msgstr ""
+
+#: scripts/ui/governance_ui.gd:17
+msgid "Review tax returns"
 msgstr ""
 
 #: data/events/unexpected_large_order.json
@@ -14571,6 +14895,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "Review your own selling price at a terminal. Research does not automatically change it."
+msgstr ""
+
+#: scripts/ui/governance_ui.gd:9
+msgid "Reviews"
 msgstr ""
 
 #: scripts/ui/hotel_ui.gd:260
@@ -14673,7 +15001,7 @@ msgstr ""
 msgid "Roadmap delivered"
 msgstr ""
 
-#: scripts/sim/automotive.gd:628
+#: scripts/sim/automotive.gd:636
 msgid "Roadside tow: %s"
 msgstr ""
 
@@ -15077,7 +15405,7 @@ msgstr ""
 msgid "Save backup"
 msgstr ""
 
-#: scripts/sim/automotive.gd:649
+#: scripts/sim/automotive.gd:657
 msgid "Save cash or arrange a bank loan."
 msgstr ""
 
@@ -15089,7 +15417,7 @@ msgstr ""
 msgid "Save enough cash for the bid and the buyer fee first."
 msgstr ""
 
-#: scripts/sim/automotive.gd:675
+#: scripts/sim/automotive.gd:683
 msgid "Save enough cash for the factory order first."
 msgstr ""
 
@@ -15097,7 +15425,7 @@ msgstr ""
 msgid "Save exported. Keep this file outside your browser."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:334
+#: scripts/ui/phone_ui.gd:337
 msgid "Save game"
 msgstr ""
 
@@ -15105,7 +15433,7 @@ msgstr ""
 msgid "Save imported. Continue where you left off."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:335
+#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:338
 msgid "Save now"
 msgstr ""
 
@@ -15131,6 +15459,10 @@ msgstr ""
 
 #: scripts/sim/media.gd:252
 msgid "Save the client retention discount first."
+msgstr ""
+
+#: scripts/sim/tax.gd:105
+msgid "Save the correction fee first."
 msgstr ""
 
 #: scripts/sim/media.gd:76 scripts/ui/media_ui.gd:106
@@ -15175,6 +15507,14 @@ msgstr ""
 
 #: scripts/sim/automotive.gd:179
 msgid "Save the inspection fee first."
+msgstr ""
+
+#: scripts/sim/insurance.gd:17
+msgid "Save the insurance premium first."
+msgstr ""
+
+#: scripts/sim/legal.gd:63
+msgid "Save the legal fee first."
 msgstr ""
 
 #: scripts/sim/energy.gd:288
@@ -15233,6 +15573,10 @@ msgstr ""
 msgid "Save the takeover price first."
 msgstr ""
 
+#: scripts/sim/insurance.gd:137
+msgid "Save the vehicle-cover upgrade premium first."
+msgstr ""
+
 #: autoload/save_system.gd:439
 msgid "Save transfer"
 msgstr ""
@@ -15245,7 +15589,7 @@ msgstr ""
 msgid "Saved %s"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:337
+#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:340
 msgid "Saved (slot %d)."
 msgstr ""
 
@@ -15421,6 +15765,10 @@ msgstr ""
 msgid "Seller"
 msgstr ""
 
+#: scripts/sim/tax.gd:154
+msgid "Seller VAT obligation assumed"
+msgstr ""
+
 #: data/regions/zenkai.json
 msgid "Semiconductors"
 msgstr ""
@@ -15585,12 +15933,24 @@ msgstr ""
 msgid "Settings could not be saved. Check available storage and try again."
 msgstr ""
 
+#: data/economy/governance.json
+msgid "Settle"
+msgstr ""
+
 #: data/events/automotive_claim.json
 msgid "Settle for half"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:885
 msgid "Settlement"
+msgstr ""
+
+#: data/help/help.json
+msgid "Settlement is faster and cheaper but collects less. Letters and court take longer, cost more and have different odds and relationship consequences."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Settlement, a lawyer letter and court have different costs, delays, recovery chances and client consequences."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:777
@@ -15729,7 +16089,7 @@ msgstr ""
 msgid "ShopLane Ads: a big brand campaign is bidding up placements."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:267
+#: scripts/ui/phone_ui.gd:270
 msgid "ShopLane Seller"
 msgstr ""
 
@@ -15773,7 +16133,7 @@ msgstr ""
 msgid "ShopLane payout received: %s"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:234
+#: scripts/ui/phone_ui.gd:237
 msgid "ShopLane pending"
 msgstr ""
 
@@ -15837,7 +16197,7 @@ msgstr ""
 msgid "Showroom discount"
 msgstr ""
 
-#: scripts/sim/automotive.gd:648
+#: scripts/sim/automotive.gd:656
 msgid "Showroom leased"
 msgstr ""
 
@@ -15857,7 +16217,7 @@ msgstr ""
 msgid "Sign a 60-day supply agreement with {supplier} ($600 fee)"
 msgstr ""
 
-#: scripts/sim/automotive.gd:668 scripts/sim/automotive.gd:757
+#: scripts/sim/automotive.gd:676 scripts/sim/automotive.gd:765
 msgid "Sign a franchise first."
 msgstr ""
 
@@ -15881,7 +16241,7 @@ msgstr ""
 msgid "Signed contract %s with %s: %s."
 msgstr ""
 
-#: scripts/sim/automotive.gd:661
+#: scripts/sim/automotive.gd:669
 msgid "Signed the %s franchise."
 msgstr ""
 
@@ -16101,7 +16461,7 @@ msgstr ""
 msgid "Sold %d × %s to liquidator (%d%% of cost)"
 msgstr ""
 
-#: scripts/sim/effects.gd:97
+#: scripts/sim/effects.gd:101
 msgid "Sold %d%% of %s for %s."
 msgstr ""
 
@@ -16385,7 +16745,7 @@ msgstr ""
 msgid "Stock at cost"
 msgstr ""
 
-#: scripts/sim/automotive.gd:888
+#: scripts/sim/automotive.gd:896
 msgid "Stock car auctioned: %s"
 msgstr ""
 
@@ -16439,6 +16799,10 @@ msgstr ""
 
 #: scripts/ui/minigames/auction_game.gd:47
 msgid "Stop bidding"
+msgstr ""
+
+#: scripts/ui/governance_ui.gd:36
+msgid "Stop next renewal"
 msgstr ""
 
 #: data/economy/marketplace.json
@@ -16597,11 +16961,15 @@ msgstr ""
 msgid "Supplier bills payable"
 msgstr ""
 
+#: scripts/sim/legal.gd:94
+msgid "Supplier breach settlement: %s"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Supplier credit"
 msgstr ""
 
-#: scripts/sim/effects.gd:45
+#: scripts/sim/effects.gd:49
 msgid "Supplier doesn't carry that."
 msgstr ""
 
@@ -16681,7 +17049,7 @@ msgstr ""
 msgid "Switch to recycled packaging (Company OS → Operations)"
 msgstr ""
 
-#: scripts/sim/company.gd:144
+#: scripts/sim/company.gd:147
 msgid "Switch to recycled packaging first (Company OS → Operations)."
 msgstr ""
 
@@ -16797,6 +17165,10 @@ msgstr ""
 msgid "Take the refund"
 msgstr ""
 
+#: data/economy/governance.json
+msgid "Take to court"
+msgstr ""
+
 #: data/dialogue/lina_intro.json
 msgid "Take your time. The ships certainly are."
 msgstr ""
@@ -16845,12 +17217,32 @@ msgstr ""
 msgid "Tape seam %d"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:135 scripts/ui/phone_ui.gd:247
+#: scripts/ui/phone_ui.gd:135 scripts/ui/phone_ui.gd:250
 msgid "Tasks"
+msgstr ""
+
+#: data/help/help.json scripts/ui/modals/permits_modal.gd:47 scripts/ui/modals/tax_filing_modal.gd:7 scripts/ui/phone_ui.gd:137
+msgid "Tax Filing"
 msgstr ""
 
 #: data/economy/logistics.json
 msgid "Tax Office"
+msgstr ""
+
+#: scripts/ui/governance_ui.gd:15
+msgid "Tax filing"
+msgstr ""
+
+#: scripts/sim/ledger.gd:33
+msgid "Tax filing costs"
+msgstr ""
+
+#: scripts/sim/tax.gd:92
+msgid "Tax payment: %s"
+msgstr ""
+
+#: scripts/sim/tax.gd:55
+msgid "Tax return ready: %s. File by %s."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:745
@@ -17093,7 +17485,7 @@ msgstr ""
 msgid "The Transit Office is renewing its service fleet: parts built to drawing, cars sourced and delivery runs flown across the city."
 msgstr ""
 
-#: scripts/sim/company.gd:85
+#: scripts/sim/company.gd:86
 msgid "The account is already open."
 msgstr ""
 
@@ -17139,6 +17531,10 @@ msgstr ""
 
 #: data/story/chapters.json
 msgid "The boxes are stuck at sea."
+msgstr ""
+
+#: data/help/help.json
+msgid "The brand breakdown comes from actual company activity. Events fade over 90 days, while current reviews and employee conditions still matter."
 msgstr ""
 
 #: data/events/rail_frozen.json
@@ -17257,7 +17653,7 @@ msgstr ""
 msgid "The clock keeps running while you're at the computer, just like in real life. Buying, listing and working also take their own time."
 msgstr ""
 
-#: scripts/sim/company.gd:103
+#: scripts/sim/company.gd:105
 msgid "The company belongs to Hale Group now: no money moves between it and you."
 msgstr ""
 
@@ -17349,7 +17745,7 @@ msgstr ""
 msgid "The flash sale refills some rooms for a week. Group deposits are refunded."
 msgstr ""
 
-#: scripts/sim/company.gd:138
+#: scripts/sim/company.gd:141
 msgid "The grant opens with the Green Shift."
 msgstr ""
 
@@ -17537,7 +17933,7 @@ msgstr ""
 msgid "The shortest way there is. Textbook."
 msgstr ""
 
-#: scripts/sim/automotive.gd:673
+#: scripts/sim/automotive.gd:681
 msgid "The showroom does not have room for that many cars."
 msgstr ""
 
@@ -17709,11 +18105,15 @@ msgstr ""
 msgid "This contract belongs to another company."
 msgstr ""
 
+#: scripts/sim/insurance.gd:15
+msgid "This cover is already active."
+msgstr ""
+
 #: scripts/sim/hotel.gd:610
 msgid "This equipment needs no service today."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:342
+#: scripts/ui/phone_ui.gd:345
 msgid "This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen."
 msgstr ""
 
@@ -17761,7 +18161,7 @@ msgstr ""
 msgid "This is the same form you'll file for your own company, so the rules are worth remembering."
 msgstr ""
 
-#: scripts/sim/energy.gd:275 scripts/sim/hotel.gd:568 scripts/sim/jobs.gd:41 scripts/sim/media.gd:226
+#: scripts/sim/energy.gd:275 scripts/sim/hotel.gd:568 scripts/sim/jobs.gd:44 scripts/sim/media.gd:226
 msgid "This job is no longer available."
 msgstr ""
 
@@ -17799,6 +18199,10 @@ msgstr ""
 
 #: scripts/sim/ecommerce.gd:367
 msgid "This purchase belongs to another business."
+msgstr ""
+
+#: scripts/sim/tax.gd:103
+msgid "This return needs no correction."
 msgstr ""
 
 #: scripts/sim/energy.gd:268
@@ -17909,7 +18313,7 @@ msgstr ""
 msgid "Time to finish"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:136 scripts/ui/phone_ui.gd:291
+#: scripts/ui/phone_ui.gd:136 scripts/ui/phone_ui.gd:294
 msgid "Timeline"
 msgstr ""
 
@@ -17929,7 +18333,7 @@ msgstr ""
 msgid "To Startup Hub"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:513 scripts/ui/phone_ui.gd:272
+#: scripts/ui/modals/company_os.gd:513 scripts/ui/phone_ui.gd:275
 msgid "To pack"
 msgstr ""
 
@@ -18065,7 +18469,7 @@ msgstr ""
 msgid "Transfer price per %s"
 msgstr ""
 
-#: scripts/sim/company.gd:107
+#: scripts/sim/company.gd:109
 msgid "Transfer to %s"
 msgstr ""
 
@@ -18221,6 +18625,10 @@ msgstr ""
 msgid "Unexpected large order"
 msgstr ""
 
+#: scripts/sim/tax.gd:153
+msgid "Unfiled seller VAT transferred with business"
+msgstr ""
+
 #: scripts/sim/real_estate.gd:292
 msgid "Unfinished construction auction"
 msgstr ""
@@ -18265,7 +18673,7 @@ msgstr ""
 msgid "Unknown agency crisis."
 msgstr ""
 
-#: scripts/sim/automotive.gd:826
+#: scripts/sim/automotive.gd:834
 msgid "Unknown automotive crisis."
 msgstr ""
 
@@ -18285,7 +18693,7 @@ msgstr ""
 msgid "Unknown factory crisis."
 msgstr ""
 
-#: scripts/sim/automotive.gd:465
+#: scripts/sim/automotive.gd:470
 msgid "Unknown fleet policy."
 msgstr ""
 
@@ -18401,6 +18809,22 @@ msgstr ""
 msgid "Utilisation is rented car-days divided by available car-days. Airport passengers, season, rates and ratings set the requests."
 msgstr ""
 
+#: scripts/ui/modals/tax_filing_modal.gd:17
+msgid "VAT %.0f%% · annual company income tax %.0f%%"
+msgstr ""
+
+#: data/help/glossary.json scripts/ui/modals/tax_filing_modal.gd:16
+msgid "VAT and income tax"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "VAT is collected within customer prices and paid every two months. Company income tax applies to annual pretax profit after carried losses."
+msgstr ""
+
+#: scripts/sim/tax.gd:63
+msgid "VAT: year %d, period %d / 6"
+msgstr ""
+
 #: scripts/ui/real_estate_ui.gd:12 scripts/ui/real_estate_ui.gd:15
 msgid "VENTURE TOWER"
 msgstr ""
@@ -18413,7 +18837,7 @@ msgstr ""
 msgid "Val"
 msgstr ""
 
-#: scripts/ui/modals/permits_modal.gd:92
+#: scripts/ui/modals/permits_modal.gd:96
 msgid "Valid until %s."
 msgstr ""
 
@@ -18479,6 +18903,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "Variable interest and vacancy can make cash flow negative."
+msgstr ""
+
+#: scripts/sim/insurance.gd:138
+msgid "Vehicle cover premium: %s"
 msgstr ""
 
 #: data/buildings/dockside_motors.json
@@ -18789,7 +19217,7 @@ msgstr ""
 msgid "Warranty claim from %s: %s, repair cost %s, decide within %d days"
 msgstr ""
 
-#: scripts/sim/automotive.gd:879
+#: scripts/sim/automotive.gd:887
 msgid "Warranty claim on a used car"
 msgstr ""
 
@@ -19057,7 +19485,7 @@ msgstr ""
 msgid "With storage certification and two installs you can build charging stations. Set a price per kWh and watch demand."
 msgstr ""
 
-#: scripts/sim/company.gd:111
+#: scripts/sim/company.gd:113
 msgid "Withdrawal from %s"
 msgstr ""
 
@@ -19073,7 +19501,7 @@ msgstr ""
 msgid "Won %s at auction for %s."
 msgstr ""
 
-#: scripts/sim/company.gd:157
+#: scripts/sim/company.gd:160
 msgid "Won the city's Green Business Grant: %s."
 msgstr ""
 
@@ -19353,7 +19781,7 @@ msgstr ""
 msgid "You only have %s in personal checking. Pick a smaller amount."
 msgstr ""
 
-#: scripts/sim/company.gd:89
+#: scripts/sim/company.gd:90
 msgid "You only have %s personally."
 msgstr ""
 
@@ -20105,6 +20533,14 @@ msgstr ""
 msgid "lands in about %d hour(s)"
 msgstr ""
 
+#: scripts/sim/tax.gd:126
+msgid "late correction"
+msgstr ""
+
+#: scripts/sim/tax.gd:137
+msgid "late tax"
+msgstr ""
+
 #: scripts/sim/cafe.gd:113
 msgid "lease the café unit first"
 msgstr ""
@@ -20317,7 +20753,7 @@ msgstr ""
 msgid "paid on delivery"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:280
+#: scripts/ui/phone_ui.gd:283
 msgid "paused: cap"
 msgstr ""
 
@@ -20801,12 +21237,28 @@ msgstr ""
 msgid "✓ Building complete. Sell or rent units in Properties."
 msgstr ""
 
+#: scripts/ui/modals/legal_case_modal.gd:30
+msgid "✓ Closed; recovered %s, paid %s."
+msgstr ""
+
 #: scripts/ui/minigames/teller_cash_game.gd:108
 msgid "✓ Exact"
 msgstr ""
 
+#: scripts/ui/modals/tax_filing_modal.gd:57
+msgid "✓ Filing recorded; next review the following tax period."
+msgstr ""
+
 #: scripts/ui/modals/fitness_modal.gd:15
 msgid "✓ Membership paid until %s — choose a class."
+msgstr ""
+
+#: scripts/ui/modals/tax_filing_modal.gd:28
+msgid "✓ No return due yet; the next calendar period creates it automatically."
+msgstr ""
+
+#: scripts/ui/governance_ui.gd:34
+msgid "✓ Paid cover until %s; waiting period ends %s."
 msgstr ""
 
 #: scripts/ui/modals/permits_modal.gd:24
@@ -20815,6 +21267,10 @@ msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:117
 msgid "✓ Rejected for the right reason"
+msgstr ""
+
+#: scripts/ui/modals/legal_case_modal.gd:29
+msgid "✓ Response submitted; next review the outcome on %s."
 msgstr ""
 
 #: scripts/ui/modals/research_modal.gd:32
@@ -20889,12 +21345,20 @@ msgstr ""
 msgid "✗ Complete two campaigns and hire a designer and media buyer before buying Campus Radio."
 msgstr ""
 
+#: scripts/ui/modals/tax_filing_modal.gd:49
+msgid "✗ Documents need correction; fix them now or automatic correction charges a fee in 7 days."
+msgstr ""
+
 #: scripts/ui/real_estate_ui.gd:180
 msgid "✗ Fund the next construction milestone."
 msgstr ""
 
 #: scripts/sim/rivals.gd:215
 msgid "✗ Insufficient company cash — save %s first."
+msgstr ""
+
+#: scripts/ui/modals/tax_filing_modal.gd:47
+msgid "✗ Insufficient company cash; visit a terminal → Finance to fund the payment."
 msgstr ""
 
 #: scripts/ui/minigames/pack_game.gd:147
@@ -20907,6 +21371,10 @@ msgstr ""
 
 #: scripts/ui/modals/fitness_modal.gd:17
 msgid "✗ No class pass — buy one at Rosa's reception."
+msgstr ""
+
+#: scripts/ui/governance_ui.gd:40
+msgid "✗ No cover; buy before a loss, then wait 7 days."
 msgstr ""
 
 #: scripts/ui/energy_ui.gd:178
@@ -20923,6 +21391,10 @@ msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:116
 msgid "✗ No: %s"
+msgstr ""
+
+#: scripts/ui/modals/tax_filing_modal.gd:35
+msgid "✗ Not filed; choose a filing method below."
 msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:124
@@ -20943,6 +21415,10 @@ msgstr ""
 
 #: scripts/ui/energy_ui.gd:145
 msgid "✗ Place at least one panel on the roof."
+msgstr ""
+
+#: scripts/ui/modals/tax_filing_modal.gd:14
+msgid "✗ Register an open company first; visit City Hall's registration counter."
 msgstr ""
 
 #: scripts/ui/modals/permits_modal.gd:24
@@ -20981,12 +21457,20 @@ msgstr ""
 msgid "✗ The queue is getting long"
 msgstr ""
 
+#: scripts/ui/modals/legal_case_modal.gd:13
+msgid "✗ This company or dispute is closed; return to your current company's terminal."
+msgstr ""
+
 #: scripts/ui/minigames/teller_cash_game.gd:111
 msgid "✗ Till error: you handed over %s"
 msgstr ""
 
 #: scripts/ui/modals/settings_modal.gd:113
 msgid "✗ Turn on"
+msgstr ""
+
+#: scripts/ui/modals/legal_case_modal.gd:18
+msgid "✗ Unresolved; choose a route. No response by %s uses settlement automatically, including its fee and risks."
 msgstr ""
 
 #: scripts/ui/modals/settings_modal.gd:130

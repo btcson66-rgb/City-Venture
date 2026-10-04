@@ -254,3 +254,13 @@ Crestline 的撤回／拒絕／過期均可接續；簽約公司關閉則明說�
 通用 Assets 支援購買、租賃、直線折舊、保養、故障與公司關閉拍賣，殘值為購入價 40–60%。固定資產帳面價值與已簽工單納入銀行擔保額度。物流貨車已在購買時列費用，遷移後不再重複折舊；保留原保險、油耗、維護費與拍賣數字。舊存檔延遲建立新區段，不改既有帳本。
 
 #28：Company OS 物流頁可選六種貨車車身顏色，細節層保持原色；港區 Pier 7 停車位與路線畫面顯示同一車身和車主公司名。字級 8 至 5 px，超長名字以刪節號留在側板內。舊存檔預設白色；出售後不再顯示。路線站點對齊既有 580×236 地圖陸地與街區，跨河仍經橋。
+
+
+## Company governance: tax, disputes, insurance and brand (#96)
+Company OS → Governance combines real activity into five brand components and shows their weights plus loan-rate adjustment. Reviews, published news, crisis outcomes, payment history and current employee conditions affect recruitment, customer willingness and borrowing rates; event effects fade within 90 days. Advertising alone does not buy reputation.
+
+Phone → Tax Filing and City Hall → Permits → Tax Filing provide the same entity-bound service. Customer prices include 5% VAT, payable every two months. Annual company income tax is 20% of pretax profit after accumulated losses. DIY filing uses 240 minutes with a 12% correction risk; an accountant costs AUD 120 and 60 minutes. Corrections offer time or paid assistance and automatically complete with a fee after seven days. Late filing adds one fine and affects credit; old journals are not taxed retroactively. Personal seller returns remain separately reviewable when a company forms.
+
+Actual unpaid customer invoices, overdue paid supplier work, earned wages and completed media/manufacturing IP work can create disputes. Settlement, lawyer letters and court differ in fee, delay, odds, recovery and counterpart advance-payment terms. Ignored cases auto-settle; paid construction is preserved and work resumes. Winning an employer defence still requires earned wages; winning an IP defence does not invent income.
+
+Property, liability and interruption policies charge premiums before losses, wait seven days and reimburse 80% of eligible actual costs less an AUD 150 deductible, capped at AUD 5,000 per 30 days. Fines, investments, routine costs and hypothetical lost sales are excluded. Claims first become receivables and are paid two days later. Vehicle premiums retain their existing terms through the central claims service. Automatic renewal lapses without funds and resumes when funded. Company closure cancels unresolved processes and hands insurer receivables to liquidation.

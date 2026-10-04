@@ -121,7 +121,7 @@ func test_weekly_seed_history_dedup_and_save_round_trip() -> void:
 	runner.eq(week, Replay.weekly(1790908800 + 3600), "same UTC week")
 	runner.check(week != Replay.weekly(1790908800 + 7 * 86400), "next week changes")
 	var original_path := Replay.rank_path
-	Replay.rank_path = "user://test_saves/replay_history.json"
+	Replay.rank_path = SaveSystem.DIR+"/replay_history.json"
 	if FileAccess.file_exists(Replay.rank_path):
 		DirAccess.remove_absolute(Replay.rank_path)
 	_start("part_time_start", 89, {"week": "QA"})
@@ -147,7 +147,7 @@ func test_weekly_seed_history_dedup_and_save_round_trip() -> void:
 
 func test_corrupt_local_history_is_preserved_and_reported() -> void:
 	var original_path := Replay.rank_path
-	Replay.rank_path = "user://test_saves/replay_corrupt.json"
+	Replay.rank_path = SaveSystem.DIR+"/replay_corrupt.json"
 	var file := FileAccess.open(Replay.rank_path, FileAccess.WRITE)
 	file.store_string("[7,{\"result\":{\"score\":\"bad\"}}]")
 	file.close()

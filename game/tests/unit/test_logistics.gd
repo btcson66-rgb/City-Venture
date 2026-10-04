@@ -332,7 +332,7 @@ func test_jobs_are_posted_accepted_driven_and_paid() -> void:
 	runner.eq(bool(r["late"]), not on_time, "late only if the deadline passed")
 	var want := float(j0["pay"]) * 1.1 * (1.0 if on_time else 0.6)
 	runner.check(absf(float(r["pay"]) - want) < 0.02, "the best route pays 110%% of the fee, less 40%% if late (%.2f vs %.2f)" % [float(r["pay"]), want])
-	runner.check(absf(-Ledger.balance(cid, "revenue") - rev0 - float(r["pay"])) < 0.011, "the pay is banked as revenue")
+	runner.check(absf(-Ledger.balance(cid, "revenue") - rev0 - (float(r["pay"])-Tax.vat(float(r["pay"])))) < 0.011, "gross pay is banked; collected VAT is excluded from revenue")
 	runner.check(absf(Ledger.balance(cid, "exp:fuel") - fuel0 - float(r["fuel"])) < 0.011 and float(r["fuel"]) > 1.0, "fuel charged ($%.2f)" % float(r["fuel"]))
 	runner.check(Ledger.balance(cid, "exp:vehicle") - veh0 > 0.0, "and a little upkeep")
 	runner.check(Ledger.cash(cid) - cash0 > 0.0, "a run leaves you better off in cash")

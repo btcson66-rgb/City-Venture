@@ -45,6 +45,8 @@ static func publish_day() -> void:
 		var story: Dictionary = S()["queue"].pop_front()
 		story.merge({"day": Clock.day_index(), "t": Clock.now()}, true)
 		items.append(story)
+		if story["kind"] in ["achievement","event"]:
+			Brand.record(GameState.company_id(),"news",0.5 if story["kind"]=="achievement" else -1.0)
 	while items.size() > int(Rivals.cfg()["news_limit"]):
 		items.pop_front()
 	S()["day"] = Clock.day_index()

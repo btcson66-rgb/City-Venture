@@ -194,7 +194,7 @@ msgstr "已接 %d 單"
 msgid "%d cars are due for service; skipping it risks a breakdown during a rental."
 msgstr "有 %d 輛車該保養了；不保養可能在租期中拋錨。"
 
-#: scripts/sim/automotive.gd:647
+#: scripts/sim/automotive.gd:655
 msgid "%d completed rentals"
 msgstr "完成 %d 筆租賃"
 
@@ -274,11 +274,11 @@ msgstr "再做 %d 班升為%s"
 msgid "%d new delivery runs are posted (Company OS → Logistics)."
 msgstr "有 %d 趟新的外送單上架了（Company OS → 物流）。"
 
-#: scripts/ui/phone_ui.gd:325
+#: scripts/ui/phone_ui.gd:328
 msgid "%d of %d days"
 msgstr "%d／%d 天"
 
-#: scripts/ui/phone_ui.gd:310
+#: scripts/ui/phone_ui.gd:313
 msgid "%d of %d reached"
 msgstr "已達成 %d／%d"
 
@@ -682,6 +682,10 @@ msgstr "%s · %s · 出租 %d 次 · 營收 %s"
 msgid "%s · %s/car/mo"
 msgstr "%s · 每車每月 %s"
 
+#: scripts/ui/governance_ui.gd:23
+msgid "%s · amount %s"
+msgstr "%s・金額 %s"
+
 #: scripts/ui/minigames/creative_pitch.gd:22
 msgid "%s · audience: %s"
 msgstr "%s · 受眾：%s"
@@ -710,6 +714,14 @@ msgstr "%s · 預算 %s · 已付 %s · 預計 %d 天完工"
 msgid "%s · condition %d%% · %s"
 msgstr "%s · 設備狀況 %d%% · %s"
 
+#: scripts/ui/modals/legal_case_modal.gd:16
+msgid "%s · disputed amount %s"
+msgstr "%s・爭議金額 %s"
+
+#: scripts/ui/modals/legal_case_modal.gd:22
+msgid "%s · fee %s · %d days · success %.0f%% · recovery %.0f%% · relationship %d points"
+msgstr "%s・費用 %s・%d 天・成功率 %.0f%%・回收率 %.0f%%・關係 %d 點"
+
 #: scripts/ui/automotive_ui.gd:80
 msgid "%s · lot %d/%d cars · fleet %d · cash %s"
 msgstr "%s · 車場 %d／%d 輛 · 車隊 %d · 現金 %s"
@@ -717,6 +729,10 @@ msgstr "%s · 車場 %d／%d 輛 · 車隊 %d · 現金 %s"
 #: scripts/ui/automotive_ui.gd:166
 msgid "%s · paid %s (incl. repairs %s) · market %s · %s"
 msgstr "%s · 成本 %s（含整備 %s）· 市價 %s · %s"
+
+#: scripts/ui/governance_ui.gd:32
+msgid "%s · premium %s / 30 days"
+msgstr "%s・每 30 天保費 %s"
 
 #: scripts/ui/energy_ui.gd:72
 msgid "%s · reputation %d%% · cash %s · weather %s · crew %.1f crew-days/day"
@@ -749,6 +765,10 @@ msgstr "我是 %s，我有月租座位。應該有吧。"
 #: scripts/ui/modals/company_os.gd:1196
 msgid "%s/month each"
 msgstr "每人每月 %s"
+
+#: scripts/ui/governance_ui.gd:11
+msgid "%s: %.1f / 100 points · weight %.0f%%"
+msgstr "%s：%.1f／100 點・權重 %.0f%%"
 
 #: scripts/ui/automotive_ui.gd:291
 msgid "%s: %d passengers/day"
@@ -1073,6 +1093,10 @@ msgstr "物流商介紹"
 #: data/help/glossary.json
 msgid "A dealership needs a deposit, a showroom and a minimum number of new cars in stock or on order each month."
 msgstr "經銷權需要保證金、展示中心，且每月庫存或在途新車不得低於最低量。"
+
+#: data/help/glossary.json
+msgid "A deductible and policy limit leave real downside. Claims are receivables until paid; fines, ordinary investment and hypothetical lost sales are not insured."
+msgstr "自負額和保單上限仍會留下損失風險。核准理賠先列應收款，實際收到才入現金；罰款、一般投資及假設的營收損失不承保。"
 
 #: data/economy/staff.json
 msgid "A designer and media buyer unlock three simultaneous client campaigns."
@@ -1490,7 +1514,7 @@ msgstr "接受：以 {price} 賣掉 {company}"
 msgid "Accepted group job: %s"
 msgstr "接下集團委託：%s"
 
-#: scripts/sim/jobs.gd:45
+#: scripts/sim/jobs.gd:48
 msgid "Accepted job %s: %s"
 msgstr "承接工單 %s：%s"
 
@@ -1526,15 +1550,23 @@ msgstr "配件"
 msgid "Accident history"
 msgstr "事故紀錄"
 
-#: scripts/sim/automotive.gd:614
+#: scripts/sim/automotive.gd:620
 msgid "Accident repair: %s"
 msgstr "事故維修：%s"
+
+#: scripts/ui/modals/tax_filing_modal.gd:53
+msgid "Accountant correction · %s"
+msgstr "會計師補正・%s"
+
+#: scripts/sim/tax.gd:93
+msgid "Accountant filing fee: %s"
+msgstr "會計師申報費：%s"
 
 #: scripts/ui/minigames/typing_game.gd:50
 msgid "Accuracy and speed decide how much of the work gets done in this session."
 msgstr "正確率和速度決定這一段時間完成多少工作。"
 
-#: scripts/ui/phone_ui.gd:291
+#: scripts/ui/phone_ui.gd:294
 msgid "Achievements"
 msgstr "成就"
 
@@ -1586,7 +1618,7 @@ msgstr "塞氣泡紙"
 msgid "Added %s to the rental fleet."
 msgstr "已將 %s 加入租車車隊。"
 
-#: scripts/sim/company.gd:108
+#: scripts/sim/company.gd:110
 msgid "Additional founder capital"
 msgstr "創辦人增資"
 
@@ -1638,7 +1670,7 @@ msgstr "上完班累了：回家睡覺吧（下班後隨時可以睡，或晚上
 msgid "After a tiring shift you can return home to sleep. The first venture allows sleep after 4 PM and guides you home when it is too late to work."
 msgstr "上完疲累的班可以回家睡覺。第一次創業期間下午 4 點後可睡，太晚無法工作時會引導你回家。"
 
-#: scripts/sim/automotive.gd:730
+#: scripts/sim/automotive.gd:738
 msgid "After-sales service ticket"
 msgstr "售後保養工單"
 
@@ -1742,7 +1774,7 @@ msgstr "杏眼"
 msgid "Already attended — choose another class."
 msgstr "已上過這堂課——請選擇另一堂。"
 
-#: scripts/sim/company.gd:140
+#: scripts/sim/company.gd:143
 msgid "Already granted."
 msgstr "已經核發過了。"
 
@@ -1834,6 +1866,10 @@ msgstr "還有，不管有沒有人買咖啡，房租都照收。這句話我跟
 msgid "And watch the pastries. What you don't sell by closing goes in the bin, and the bin doesn't pay rent."
 msgstr "還有，糕點要算好。打烊前賣不掉的只能丟，垃圾桶可不會幫你付房租。"
 
+#: scripts/sim/tax.gd:76
+msgid "Annual income tax: %s"
+msgstr "年度所得稅：%s"
+
 #: data/help/glossary.json
 msgid "Annual interest"
 msgstr "年利率"
@@ -1878,7 +1914,7 @@ msgstr "申請人"
 msgid "Applicants for %s:"
 msgstr "%s 的應徵者："
 
-#: scripts/ui/modals/permits_modal.gd:118 scripts/ui/modals/permits_modal.gd:152
+#: scripts/ui/modals/permits_modal.gd:122 scripts/ui/modals/permits_modal.gd:156
 msgid "Application filed. The licence should be through %s."
 msgstr "申請已送出。執照預計 %s 核發。"
 
@@ -1886,11 +1922,11 @@ msgstr "申請已送出。執照預計 %s 核發。"
 msgid "Applications are open this year."
 msgstr "今年補助仍在受理。"
 
-#: scripts/ui/modals/permits_modal.gd:140 scripts/ui/modals/permits_modal.gd:71
+#: scripts/ui/modals/permits_modal.gd:144 scripts/ui/modals/permits_modal.gd:75
 msgid "Apply"
 msgstr "申請"
 
-#: scripts/ui/modals/permits_modal.gd:103
+#: scripts/ui/modals/permits_modal.gd:107
 msgid "Apply (%s)"
 msgstr "申請（%s）"
 
@@ -1929,6 +1965,10 @@ msgstr "申請：%s · %d 天"
 #: scripts/ui/minigames/clerk_forms_game.gd:94
 msgid "Approve"
 msgstr "核准"
+
+#: scripts/sim/insurance.gd:57
+msgid "Approved insurance claim: %s"
+msgstr "核准保險理賠：%s"
 
 #: autoload/clock.gd:14
 msgid "Apr"
@@ -2242,11 +2282,15 @@ msgstr "AutoService"
 msgid "Automated line"
 msgstr "自動化產線"
 
+#: scripts/sim/tax.gd:124
+msgid "Automatic filing correction: %s"
+msgstr "自動申報補正：%s"
+
 #: scripts/sim/manufacturing.gd:50
 msgid "Automation is already installed."
 msgstr "已安裝自動化設備。"
 
-#: data/businesses/automotive.json scripts/sim/automotive.gd:911 scripts/ui/automotive_ui.gd:22 scripts/ui/automotive_ui.gd:92
+#: data/businesses/automotive.json scripts/sim/automotive.gd:919 scripts/ui/automotive_ui.gd:22 scripts/ui/automotive_ui.gd:92
 msgid "Automotive"
 msgstr "汽車"
 
@@ -2353,6 +2397,10 @@ msgstr "背景"
 #: data/character/options.json
 msgid "Backpack"
 msgstr "後背包"
+
+#: scripts/sim/ledger.gd:33
+msgid "Bad debts"
+msgstr "呆帳損失"
 
 #: data/character/options.json
 msgid "Bags"
@@ -2690,11 +2738,23 @@ msgstr "Box"
 msgid "Boxing"
 msgstr "拳擊"
 
+#: scripts/ui/governance_ui.gd:12
+msgid "Brand influences recruitment, B2B willingness and borrowing rates. Event effects fade over 90 days; paid advertising alone is not reputation."
+msgstr "品牌影響招募、企業客戶意願和借款利率。事件影響會在 90 天內消退，單靠付費廣告不會增加聲譽。"
+
+#: scripts/ui/governance_ui.gd:13
+msgid "Brand loan adjustment: %+.2f percentage points"
+msgstr "品牌借款利率調整：%+.2f 個百分點"
+
 #: scripts/ui/modals/research_modal.gd:24
 msgid "Brand positioning, warranty and packaging support this premium price."
 msgstr "品牌定位、保固與包裝，支撐了這個較高的價格。"
 
-#: scripts/sim/automotive.gd:627
+#: scripts/ui/governance_ui.gd:8
+msgid "Brand: %.1f / 100 points"
+msgstr "品牌：%.1f／100 點"
+
+#: scripts/sim/automotive.gd:635
 msgid "Breakdown compensation voucher"
 msgstr "拋錨補償券"
 
@@ -2950,6 +3010,10 @@ msgstr "商業人脈"
 msgid "Business gross profit passed one month of rent."
 msgstr "公司毛利超過了一個月的房租。"
 
+#: data/economy/governance.json
+msgid "Business interruption insurance"
+msgstr "營業中斷保險"
+
 #: scripts/ui/modals/bank_modal.gd:52
 msgid "Business lending · credit %d points"
 msgstr "企業貸款 · 信用分數 %d 分"
@@ -3026,6 +3090,10 @@ msgstr "向港區 Dockside Motors 的 Sam Okoro 買一台二手貨車，有兩�
 msgid "Buy a van first."
 msgstr "請先買一台貨車。"
 
+#: scripts/ui/governance_ui.gd:41
+msgid "Buy cover"
+msgstr "投保"
+
 #: data/story/chapters.json
 msgid "Buy low. Sell less low. Got it, haha."
 msgstr "低價買進，沒那麼低地賣出。懂了，哈哈。"
@@ -3038,7 +3106,7 @@ msgstr "購買機台 · $28,000"
 msgid "Buy phone stands"
 msgstr "買手機架"
 
-#: scripts/sim/automotive.gd:646
+#: scripts/sim/automotive.gd:654
 msgid "Buy rental cars at Gateway Car Rental."
 msgstr "到 Gateway 租車購買租賃車。"
 
@@ -3450,7 +3518,7 @@ msgstr "已超過取消期限。符合條件的庫存可於到貨後 %d 天內�
 msgid "Cancelled"
 msgstr "已取消"
 
-#: scripts/sim/jobs.gd:122
+#: scripts/sim/jobs.gd:126
 msgid "Cancelled job deposit: %s"
 msgstr "取消工單的應退訂金：%s"
 
@@ -3466,7 +3534,7 @@ msgstr "資金"
 msgid "Capital contributed in kind by founder"
 msgstr "創辦人實物出資"
 
-#: scripts/sim/company.gd:90
+#: scripts/sim/company.gd:91
 msgid "Capital injected into %s"
 msgstr "注資給 %s"
 
@@ -3794,7 +3862,7 @@ msgstr "選項一律等你選擇。盈虧除了顏色，也用文字與金額正
 msgid "Choose Own cafe kitchen on the Rate Board: the hotel buys breakfast from the cafe at the transfer price."
 msgstr "在房價看板選「自家咖啡店廚房」：飯店以轉撥價向咖啡店買早餐。"
 
-#: scripts/sim/automotive.gd:653
+#: scripts/sim/automotive.gd:661
 msgid "Choose a brand you can sign."
 msgstr "請選擇可簽約的品牌。"
 
@@ -3902,11 +3970,11 @@ msgstr "請選擇營運中的集團業務及有效媒體預算。"
 msgid "Choose a save slot to replace. Its existing save will be backed up."
 msgstr "選擇要覆蓋的存檔槽。原有存檔會先備份。"
 
-#: scripts/sim/automotive.gd:457
+#: scripts/sim/automotive.gd:462
 msgid "Choose a service interval."
 msgstr "請選擇保養週期。"
 
-#: scripts/sim/automotive.gd:463
+#: scripts/sim/automotive.gd:468
 msgid "Choose a showroom discount between 0% and 6%."
 msgstr "請選擇 0% 到 6% 的展示中心折扣。"
 
@@ -3946,7 +4014,7 @@ msgstr "請選擇未來一週內的整點時段。"
 msgid "Choose an insurance cover."
 msgstr "請選擇保險方案。"
 
-#: scripts/sim/jobs.gd:58
+#: scripts/sim/jobs.gd:61
 msgid "Choose an offered construction contract."
 msgstr "請選擇待接受的工程合約。"
 
@@ -3961,6 +4029,10 @@ msgstr "請選擇有效需求，並保留一個活動名額。"
 #: scripts/sim/media.gd:75
 msgid "Choose an open client brief."
 msgstr "請選擇尚未結案的客戶需求。"
+
+#: scripts/sim/legal.gd:60
+msgid "Choose an open dispute for this company."
+msgstr "請選擇這家公司的未結爭議。"
 
 #: data/help/help.json
 msgid "Choose an open district to see its location and travel routes."
@@ -3986,6 +4058,10 @@ msgstr "請選擇營運中的充電站。"
 msgid "Choose an open warranty claim."
 msgstr "請選擇待處理的保固理賠。"
 
+#: scripts/sim/tax.gd:88
+msgid "Choose an unfiled return for this company."
+msgstr "請選擇這家公司的未申報稅單。"
+
 #: scripts/sim/real_estate.gd:86
 msgid "Choose an unowned residential unit."
 msgstr "請選擇尚未持有的住宅單位。"
@@ -3997,6 +4073,10 @@ msgstr "請選擇 1 至 %d 件可退庫存。"
 #: scripts/sim/internal_supply.gd:99
 msgid "Choose cost, cost plus or market price for a listed supply pair."
 msgstr "請為列出的供應組合選擇成本、成本加成或市價。"
+
+#: scripts/sim/insurance.gd:13
+msgid "Choose cover for an open company."
+msgstr "請選擇營業中公司的保險。"
 
 #: data/help/help.json
 msgid "Choose the name carefully: it goes on your sign and your invoices."
@@ -4094,7 +4174,7 @@ msgstr "城市清單只顯示可以使用的生意與場所；主要按鈕會帶
 msgid "City map"
 msgstr "城市地圖"
 
-#: scripts/ui/market_view.gd:33 scripts/ui/phone_ui.gd:137 scripts/ui/phone_ui.gd:346
+#: scripts/ui/market_view.gd:33 scripts/ui/phone_ui.gd:137 scripts/ui/phone_ui.gd:349
 msgid "City news"
 msgstr "城市新聞"
 
@@ -4117,6 +4197,26 @@ msgstr "市政中心"
 #: data/buildings/city_hall.json
 msgid "Civic services"
 msgstr "市政服務"
+
+#: scripts/ui/governance_ui.gd:48
+msgid "Claim %s · %s · %s"
+msgstr "理賠 %s・%s・%s"
+
+#: scripts/ui/governance_ui.gd:48
+msgid "Claim paid"
+msgstr "理賠已入帳"
+
+#: scripts/ui/governance_ui.gd:48
+msgid "Claim pending"
+msgstr "理賠待入帳"
+
+#: scripts/ui/governance_ui.gd:45
+msgid "Claims reimburse actual crisis costs after a deductible, up to the paid policy limit. Fines and hypothetical lost sales are excluded; vehicle premiums keep their existing cover."
+msgstr "理賠須扣除自負額，且不超過已付保單上限，只補償實際危機成本。罰款與假設的營收損失不承保；車輛保費保留原有保障。"
+
+#: data/help/glossary.json
+msgid "Claims settle actual invoices, paid contracts, earned wages or completed IP work. Ignored disputes automatically settle after 14 days; no claim creates a new sale."
+msgstr "爭議處理實際發票、已付款合約、已賺取薪資或已完成的智財工作。14 天未回應會自動採用和解，任何索賠都不會憑空產生銷售。"
 
 #: scripts/sim/shop_life.gd:84
 msgid "Class is not starting — check the timetable."
@@ -4150,7 +4250,7 @@ msgstr "乾淨的房間、親切的櫃台、合理的價格。沒人清的房間
 msgid "Clean up the books of %s"
 msgstr "幫 %s 整理帳務"
 
-#: scripts/sim/automotive.gd:591
+#: scripts/sim/automotive.gd:597
 msgid "Cleaning and refuelling"
 msgstr "清潔與加油"
 
@@ -4354,6 +4454,14 @@ msgstr "累計 500 個註冊。"
 msgid "Collect the money Crestline owes you"
 msgstr "收回 Crestline 欠你的錢"
 
+#: scripts/ui/modals/tax_filing_modal.gd:25
+msgid "Collected VAT owed %s · income tax owed %s"
+msgstr "應繳營業稅 %s・應繳所得稅 %s"
+
+#: data/help/glossary.json
+msgid "Collected tax is owed money, not revenue. Filing yourself uses time and risks a form correction; an accountant charges a fee for accurate filing."
+msgstr "代收稅款是負債，不是營收。自行申報要花時間，且可能需要補正；會計師則收費準確申報。"
+
 #: scripts/ui/modals/settings_modal.gd:56
 msgid "Color assistance"
 msgstr "色彩輔助"
@@ -4410,6 +4518,10 @@ msgstr "Company OS"
 msgid "Company OS: your business computer"
 msgstr "Company OS：你的工作電腦"
 
+#: data/help/glossary.json scripts/ui/governance_ui.gd:7
+msgid "Company brand"
+msgstr "公司品牌"
+
 #: scripts/sim/shop_life.gd:112
 msgid "Company closed — decline this opportunity."
 msgstr "公司已關閉——請婉拒這個機會。"
@@ -4417,6 +4529,10 @@ msgstr "公司已關閉——請婉拒這個機會。"
 #: scripts/sim/bank.gd:140
 msgid "Company days or an active contract"
 msgstr "公司成立天數，或有效合約"
+
+#: data/help/glossary.json scripts/ui/governance_ui.gd:27
+msgid "Company insurance"
+msgstr "公司保險"
 
 #: scripts/ui/minigames/clerk_forms_game.gd:68 scripts/ui/modals/registration_modal.gd:29
 msgid "Company name"
@@ -4438,9 +4554,13 @@ msgstr "公司名稱至少要 3 個字。"
 msgid "Company registration"
 msgstr "公司登記"
 
-#: scripts/sim/company.gd:70
+#: scripts/sim/company.gd:71
 msgid "Company registration fee — %s"
 msgstr "公司登記規費——%s"
+
+#: scripts/ui/modals/tax_filing_modal.gd:21
+msgid "Company tax returns"
+msgstr "公司稅務申報"
 
 #: data/help/glossary.json
 msgid "Compare cash buffers and costs before expanding. Shocks expire; prices and wages can rise or fall."
@@ -4458,7 +4578,7 @@ msgstr "定價前，先比較實際貨架價格、包裝與保固。"
 msgid "Compare the cycle, base rate, price level and rival shares. Your prices and quality affect your share."
 msgstr "比較景氣、基準利率、物價和對手市占。你的價格和品質會影響市占。"
 
-#: scripts/sim/rivals.gd:252
+#: scripts/sim/rivals.gd:253
 msgid "Competing firms: %s"
 msgstr "參與比稿的公司：%s"
 
@@ -4546,7 +4666,7 @@ msgstr "合規"
 msgid "Compliance cost"
 msgstr "合規成本"
 
-#: scripts/ui/modals/permits_modal.gd:90
+#: scripts/ui/modals/permits_modal.gd:94
 msgid "Compliance cost: %s a month, more with staff."
 msgstr "合規成本：每月 %s，員工越多越貴。"
 
@@ -4606,7 +4726,7 @@ msgstr "Consulting Vale"
 msgid "Consumer"
 msgstr "消費"
 
-#: scripts/sim/automotive.gd:881
+#: scripts/sim/automotive.gd:889
 msgid "Consumer-protection fine for an undisclosed flood car"
 msgstr "未揭露泡水車的消費者保護罰款"
 
@@ -4654,7 +4774,11 @@ msgstr "合約 %s 已交貨給 %s：%d × %s @ %s"
 msgid "Contract %s is overdue. Late penalty %s applies."
 msgstr "合約 %s 已逾期。將收取 %s 的逾期罰款。"
 
-#: scripts/sim/jobs.gd:65
+#: scripts/sim/legal.gd:20
+msgid "Contract dispute with %s. Choose settlement, a lawyer letter or court in Company OS → Governance."
+msgstr "與 %s 發生合約爭議。請到公司系統 → 治理，選擇和解、律師函或訴訟。"
+
+#: scripts/sim/jobs.gd:68
 msgid "Contractor milestone paid"
 msgstr "已支付工程里程碑款"
 
@@ -4697,6 +4821,10 @@ msgstr "燈籠巷轉角咖啡店面：每月 $1,900，押金 2 個月。請洽 O
 #: data/synergies.json
 msgid "Corner unit in Old Town."
 msgstr "舊城的轉角店面。"
+
+#: scripts/ui/modals/tax_filing_modal.gd:50
+msgid "Correct yourself · %d minutes"
+msgstr "自行補正・%d 分鐘"
 
 #: data/economy/automotive.json
 msgid "Corvo Compact"
@@ -4793,6 +4921,10 @@ msgstr "快遞 · 經濟 3 天（%s）"
 #: scripts/ui/modals/pack_ship_modal.gd:50
 msgid "Courier · Express 1 day (%s)"
 msgstr "快遞 · 快捷 1 天（%s）"
+
+#: scripts/ui/governance_ui.gd:28
+msgid "Cover %.0f%% of eligible loss · deductible %s · limit %s per %d days"
+msgstr "符合資格損失承保 %.0f%%・自負額 %s・理賠上限 %s／%d 天"
 
 #: scripts/ui/modals/new_run_modal.gd:145
 msgid "Create character"
@@ -4894,6 +5026,10 @@ msgstr "Crestline 的秋季燈具系列。有一層架子還空著。"
 msgid "Crestline's offer is in Company OS → Contracts: accept, counter or decline"
 msgstr "Crestline 的報價在 Company OS →「合約」：接受、還價或拒絕"
 
+#: scripts/ui/governance_ui.gd:9
+msgid "Crisis handling"
+msgstr "危機處理"
+
 #: scripts/sim/hotel.gd:484
 msgid "Critic Vera Stone published her review: %.1f stars."
 msgstr "評論家 Vera Stone 發表了評價：%.1f 顆星。"
@@ -4958,6 +5094,14 @@ msgstr "客人 %d / %d"
 msgid "Customer Support"
 msgstr "客服人員"
 
+#: scripts/ui/modals/tax_filing_modal.gd:24
+msgid "Customer prices include collected VAT. File every two months; annual income tax uses pretax profit after carried losses. Filing is a process, not a quiz."
+msgstr "售價內含代收營業稅，每兩個月申報；年度所得稅以扣抵累積虧損後的稅前盈餘計算。申報是辦理流程，不是問答測驗。"
+
+#: scripts/ui/modals/legal_case_modal.gd:28
+msgid "Customer recovery settles existing receivables. Earned employee wages remain owed even after a successful defence. IP success avoids compensation; it creates no income."
+msgstr "客戶回款只沖銷既有應收款。即使雇主勝訴，已賺取薪資仍須支付。智財勝訴可減免賠償，不會產生收入。"
+
 #: scripts/ui/modals/company_os.gd:1339
 msgid "Customers"
 msgstr "客人"
@@ -4965,6 +5109,10 @@ msgstr "客人"
 #: data/help/help.json
 msgid "Customers come from the street: Old Town's foot traffic × how many stop (price and rating) × how many cups the counter can make."
 msgstr "客人來自街上：舊城區的人流 × 願意走進來的比例（價格和評分）× 吧台一小時做得出幾杯。"
+
+#: data/help/help.json
+msgid "Customers may not pay existing receivables. Supplier disputes require paid, overdue, unfinished work; compensation does not erase construction or manufacture cash from an unpaid contract."
+msgstr "客戶可能拖欠既有應收款。供應商爭議必須有已付款、逾期且未完成的工作；賠償不會抹除在建工程，也不會從未付款合約憑空生出現金。"
 
 #: data/buildings/customs_house.json
 msgid "Customs"
@@ -5310,7 +5458,7 @@ msgstr "交付一張代工生產單"
 msgid "Deliver one freelance gig."
 msgstr "交付一件接案。"
 
-#: scripts/sim/jobs.gd:81
+#: scripts/sim/jobs.gd:84
 msgid "Deliver this job before invoicing."
 msgstr "先交付這張工單，才能開立發票。"
 
@@ -5414,7 +5562,7 @@ msgstr "押金"
 msgid "Deposit %s, minimum stock %d new cars, minimum order %d cars. Margins are thin (about 5–7%%) but sales are steady and service tickets follow every car you sell."
 msgstr "保證金 %s，最低庫存 %d 輛新車，最低訂購 %d 輛。毛利很薄（約 5–7%%），但銷量穩定，每賣一輛車都會帶來保養工單。"
 
-#: scripts/sim/automotive.gd:649
+#: scripts/sim/automotive.gd:657
 msgid "Deposit and first order in cash"
 msgstr "保證金與首張訂單的現金"
 
@@ -5581,6 +5729,10 @@ msgstr "申訴敗訴 %s：−%s"
 #: scripts/ui/energy_ui.gd:184
 msgid "Dispute the claim"
 msgstr "拒絕理賠"
+
+#: scripts/sim/legal.gd:86
+msgid "Disputed invoice recovered: %s"
+msgstr "爭議發票回收：%s"
 
 #: data/help/glossary.json
 msgid "Distribute spending by audience, not just the cheapest CPM."
@@ -5954,6 +6106,26 @@ msgstr "緊急維修"
 msgid "Emerging Market"
 msgstr "新興市場"
 
+#: scripts/sim/legal.gd:100
+msgid "Employee dispute compensation: %s"
+msgstr "員工爭議賠償：%s"
+
+#: scripts/ui/governance_ui.gd:9
+msgid "Employee treatment"
+msgstr "員工待遇"
+
+#: scripts/sim/legal.gd:50
+msgid "Employee wages"
+msgstr "員工薪資"
+
+#: data/help/help.json
+msgid "Employee wages remain owed. IP disputes refer to completed media or manufacturing jobs; court success avoids compensation but never pays fictitious income."
+msgstr "已賺取的員工薪資仍須支付。智財爭議針對已完成的媒體或製造工作；勝訴能減免賠償，不能產生虛構收入。"
+
+#: scripts/sim/legal.gd:98
+msgid "Employee wages settled: %s"
+msgstr "員工薪資結清：%s"
+
 #: data/help/glossary.json
 msgid "Employer registration"
 msgstr "雇主登記"
@@ -6054,7 +6226,7 @@ msgstr "參加週三拍賣"
 msgid "Equipment ages. Tired rooms drag down every review until you renovate, and a renovated room is off sale while the painters work."
 msgstr "設備會老化。老舊房間會拉低每則評價，直到你翻新；翻新期間該房型不能賣。"
 
-#: scripts/sim/effects.gd:90
+#: scripts/sim/effects.gd:94
 msgid "Equity investment"
 msgstr "股權投資"
 
@@ -6126,7 +6298,7 @@ msgstr "傍晚"
 msgid "Evening cut-off: everything out by 19:00, and it is."
 msgstr "晚上截件：19:00 前全部出貨，而且做到了。"
 
-#: scripts/sim/effects.gd:29
+#: scripts/sim/effects.gd:33
 msgid "Event cost"
 msgstr "事件支出"
 
@@ -6134,7 +6306,7 @@ msgstr "事件支出"
 msgid "Event frequency"
 msgstr "事件頻率"
 
-#: scripts/sim/effects.gd:31
+#: scripts/sim/effects.gd:35
 msgid "Event income"
 msgstr "事件收入"
 
@@ -6197,6 +6369,10 @@ msgstr "做得非常好。"
 #: data/character/options.json
 msgid "Executive"
 msgstr "主管"
+
+#: data/help/help.json
+msgid "Existing vehicle premiums retain their cover through the central claims service. A loss can be reimbursed once per policy category, never more than its recorded eligible cost."
+msgstr "既有車輛保費透過統一理賠服務保留保障。同一損失每種保障只能理賠一次，且不得超過帳上符合資格的實際成本。"
 
 #: scripts/ui/tutorial.gd:627
 msgid "Exit"
@@ -6330,7 +6506,7 @@ msgstr "工廠"
 msgid "Factory cash: %s · materials: %d units"
 msgstr "工廠現金：%s · 原料：%d 件"
 
-#: scripts/sim/automotive.gd:688
+#: scripts/sim/automotive.gd:696
 msgid "Factory delivery: %s"
 msgstr "原廠交車：%s"
 
@@ -6342,11 +6518,11 @@ msgstr "供應 ShopLane 的工廠商品"
 msgid "Factory materials liquidated"
 msgstr "工廠原料清算"
 
-#: scripts/sim/automotive.gd:770 scripts/sim/automotive.gd:892
+#: scripts/sim/automotive.gd:778 scripts/sim/automotive.gd:900
 msgid "Factory order cancelled"
 msgstr "原廠訂單已取消"
 
-#: scripts/sim/automotive.gd:678
+#: scripts/sim/automotive.gd:686
 msgid "Factory order: %s"
 msgstr "原廠訂購：%s"
 
@@ -6478,6 +6654,10 @@ msgstr "打官司爭議"
 msgid "File for an exemption"
 msgstr "申請豁免"
 
+#: scripts/ui/modals/tax_filing_modal.gd:39
+msgid "File yourself · %d minutes · %.0f%% form-error chance"
+msgstr "自行申報・%d 分鐘・表單錯誤率 %.0f%%"
+
 #: autoload/save_system.gd:385
 msgid "File:"
 msgstr "檔案："
@@ -6485,6 +6665,14 @@ msgstr "檔案："
 #: autoload/save_system.gd:400
 msgid "FileReader"
 msgstr "FileReader"
+
+#: scripts/sim/tax.gd:106
+msgid "Filing correction: %s"
+msgstr "申報補正：%s"
+
+#: scripts/sim/tax.gd:120
+msgid "Filing documents need correction. Fix them yourself or hire an accountant; ignored forms incur a processing fee."
+msgstr "申報文件需要補正。可自行修正或聘請會計師；未處理的表單將收取處理費。"
 
 #: scripts/ui/minigames/clerk_forms_game.gd:69
 msgid "Filing fee paid"
@@ -6558,7 +6746,7 @@ msgstr "完成五檔客戶宣傳活動。"
 msgid "Finish one measured promotion campaign"
 msgstr "完成一檔可量測的宣傳活動"
 
-#: scripts/sim/jobs.gd:73
+#: scripts/sim/jobs.gd:76
 msgid "Finish the agreed scope before delivery."
 msgstr "完成約定範圍後才能交付。"
 
@@ -6722,7 +6910,7 @@ msgstr "活動取消後的限時特賣"
 msgid "Flat white"
 msgstr "馥列白"
 
-#: scripts/sim/automotive.gd:739
+#: scripts/sim/automotive.gd:747
 msgid "Fleet and lot insurance"
 msgstr "車隊與車場保險"
 
@@ -6730,7 +6918,7 @@ msgstr "車隊與車場保險"
 msgid "Fleet car sold: %s"
 msgstr "車隊車輛出售：%s"
 
-#: scripts/sim/automotive.gd:646
+#: scripts/sim/automotive.gd:654
 msgid "Fleet of %d cars and the rental counter"
 msgstr "%d 輛車隊與租車櫃台"
 
@@ -6762,7 +6950,7 @@ msgstr "泡水損壞"
 msgid "Flood-damaged car on your lot"
 msgstr "車場上的泡水車"
 
-#: scripts/sim/automotive.gd:746
+#: scripts/sim/automotive.gd:754
 msgid "Floor-plan interest"
 msgstr "車輛融資利息"
 
@@ -6794,7 +6982,7 @@ msgstr "食品"
 msgid "Food handling licence"
 msgstr "食品處理許可"
 
-#: scripts/ui/modals/permits_modal.gd:129
+#: scripts/ui/modals/permits_modal.gd:133
 msgid "Food handling licence (%s)"
 msgstr "食品處理執照（%s）"
 
@@ -6830,11 +7018,11 @@ msgstr "開企業帳戶需要公司登記和開戶存款。最低 $500。"
 msgid "For delivered local stock, choose a return quantity up to the unsold and unreserved units at its original location. Pay return freight now; cash arrives after the supplier receives the stock."
 msgstr "已到貨的本地庫存，可退數量以原到貨地點尚未售出、未預留的庫存為上限。現在支付退貨運費，供應商收到貨後才退回現金。"
 
-#: scripts/ui/modals/permits_modal.gd:64
+#: scripts/ui/modals/permits_modal.gd:68
 msgid "For registered companies with recycled packaging and a green product on sale."
 msgstr "給使用回收包材、並有綠色商品在賣的已登記公司。"
 
-#: scripts/ui/modals/permits_modal.gd:130
+#: scripts/ui/modals/permits_modal.gd:134
 msgid "For serving food and drink from your own premises. An inspector checks the unit; it takes two days."
 msgstr "在自己的店面賣吃的喝的就需要。稽查員會來看店，大約兩天。"
 
@@ -6862,11 +7050,11 @@ msgstr "賣出四十台車"
 msgid "Found it cheaper elsewhere."
 msgstr "別家比較便宜。"
 
-#: scripts/sim/company.gd:73
+#: scripts/sim/company.gd:74
 msgid "Founded %s (registration %s)."
 msgstr "成立 %s（登記字號 %s）。"
 
-#: scripts/sim/company.gd:91
+#: scripts/sim/company.gd:92
 msgid "Founder capital (opening deposit)"
 msgstr "創辦人出資（開戶存款）"
 
@@ -6882,15 +7070,15 @@ msgstr "創辦人 · 別人不做的都你做"
 msgid "Franchise deposit and minimum stock"
 msgstr "經銷保證金與最低庫存"
 
-#: scripts/sim/automotive.gd:763 scripts/sim/automotive.gd:894
+#: scripts/sim/automotive.gd:771 scripts/sim/automotive.gd:902
 msgid "Franchise deposit settled"
 msgstr "經銷保證金已結清"
 
-#: scripts/sim/automotive.gd:657
+#: scripts/sim/automotive.gd:665
 msgid "Franchise deposit: %s"
 msgstr "經銷保證金：%s"
 
-#: scripts/sim/automotive.gd:750
+#: scripts/sim/automotive.gd:758
 msgid "Franchise minimum-stock shortfall"
 msgstr "經銷最低庫存不足"
 
@@ -7062,15 +7250,19 @@ msgstr "全螢幕"
 msgid "Fund the first construction milestone before breaking ground."
 msgstr "動工前請備妥第一期工程款。"
 
-#: scripts/sim/jobs.gd:64
+#: scripts/sim/jobs.gd:67
 msgid "Fund the next construction milestone."
 msgstr "請備妥下一期工程款。"
+
+#: scripts/sim/tax.gd:91
+msgid "Fund the tax payment and filing fee first."
+msgstr "請先備妥稅款和申報費。"
 
 #: data/buildings/gateway_car_rental.json
 msgid "GATEWAY CAR RENTAL"
 msgstr "GATEWAY 租車"
 
-#: scripts/ui/modals/permits_modal.gd:132 scripts/ui/modals/permits_modal.gd:66
+#: scripts/ui/modals/permits_modal.gd:136 scripts/ui/modals/permits_modal.gd:70
 msgid "GRANTED"
 msgstr "已核發"
 
@@ -7214,6 +7406,10 @@ msgstr "好消息：剛好有貨車在你附近，你的貨提早到了。"
 msgid "Good shifts count toward promotion, and each rank pays more. Every job comes with a perk."
 msgstr "做得好的班才計入升職，職級越高時薪越高。每份工作都有福利。"
 
+#: data/help/glossary.json
+msgid "Good standing changes recruitment, B2B willingness and loan pricing. Short-lived event effects decay; paying for ads does not buy reputation."
+msgstr "良好聲譽會影響招募、企業客戶意願和借款利率。事件影響會消退，買廣告不等於買聲譽。"
+
 #: data/dialogue/marcus_loan.json
 msgid "Good. Banks like people before they need us."
 msgstr "很好。銀行喜歡還不需要我們的人。"
@@ -7234,11 +7430,19 @@ msgstr "在清算危機中完成了一筆進口。"
 msgid "Got it"
 msgstr "知道了"
 
+#: scripts/sim/governance.gd:6
+msgid "Governance"
+msgstr "公司治理"
+
+#: data/help/help.json
+msgid "Governance: brand, tax, legal and insurance"
+msgstr "公司治理：品牌、稅務、法務及保險"
+
 #: data/story/chapters.json
 msgid "Grab a coffee at Bloom Coffee"
 msgstr "去 Bloom Coffee 買杯咖啡"
 
-#: scripts/ui/modals/permits_modal.gd:162
+#: scripts/ui/modals/permits_modal.gd:166
 msgid "Grant approved: %s is on its way to the company account."
 msgstr "補助核准：%s 正匯進公司帳戶。"
 
@@ -7270,11 +7474,11 @@ msgstr "綠色又賺錢？你到底是誰。"
 msgid "Green Business Grant"
 msgstr "綠色企業補助"
 
-#: scripts/ui/modals/permits_modal.gd:63
+#: scripts/ui/modals/permits_modal.gd:67
 msgid "Green Business Grant (%s)"
 msgstr "綠色企業補助（%s）"
 
-#: scripts/sim/company.gd:154
+#: scripts/sim/company.gd:157
 msgid "Green Business Grant — City of Aurelia"
 msgstr "綠色企業補助——奧瑞莉亞市政府"
 
@@ -7814,6 +8018,10 @@ msgstr "聘一位軟體工程師（「人員」分頁），你做別的事時他
 msgid "Hire a technician first."
 msgstr "請先雇用技師。"
 
+#: scripts/ui/modals/tax_filing_modal.gd:43
+msgid "Hire accountant · %s · %d minutes · accurate filing"
+msgstr "聘請會計師・%s・%d 分鐘・準確申報"
+
 #: scripts/sim/hotel.gd:96
 msgid "Hire at least %d hotel staff (now %d)."
 msgstr "至少聘 %d 位旅館員工（目前 %d）。"
@@ -8138,6 +8346,10 @@ msgstr "運送中"
 msgid "INVOICED"
 msgstr "已開發票"
 
+#: scripts/sim/legal.gd:105
+msgid "IP licence settlement: %s"
+msgstr "智財授權和解：%s"
+
 #: data/help/glossary.json
 msgid "If everyone arrives, you pay walk compensation and the review suffers."
 msgstr "如果大家都來，你得付出趕客補償，評價也會下降。"
@@ -8186,7 +8398,7 @@ msgstr "進口交期穩定在兩週左右。"
 msgid "Import licence"
 msgstr "進口執照"
 
-#: scripts/ui/modals/permits_modal.gd:84
+#: scripts/ui/modals/permits_modal.gd:88
 msgid "Import licence (%s a year)"
 msgstr "進口執照（每年 %s）"
 
@@ -8254,7 +8466,7 @@ msgstr "清算危機（第 5 年）期間，匯到國外的錢要好幾天才到
 msgid "In the workshop"
 msgstr "整備中"
 
-#: scripts/ui/modals/company_os.gd:513 scripts/ui/phone_ui.gd:274
+#: scripts/ui/modals/company_os.gd:513 scripts/ui/phone_ui.gd:277
 msgid "In transit"
 msgstr "運送中"
 
@@ -8265,6 +8477,14 @@ msgstr "其中：集團內部媒體成本"
 #: scripts/ui/modals/company_os.gd:350
 msgid "Includes payroll, rent, loans, supplier bills, invoices due and estimated ShopLane sales (%s/day). Excludes restocking."
 msgstr "包含薪資、租金、貸款、供應商帳單、到期應收款，以及預估的 ShopLane 銷售（每天 %s）。不含補貨。"
+
+#: scripts/sim/ledger.gd:33
+msgid "Income tax"
+msgstr "所得稅"
+
+#: scripts/sim/tax.gd:74
+msgid "Income tax year %d"
+msgstr "%d 年度所得稅"
 
 #: scripts/ui/modals/company_os.gd:695
 msgid "Incoming"
@@ -8418,9 +8638,21 @@ msgstr "保險"
 msgid "Insurance claim dispute"
 msgstr "保險理賠爭議"
 
-#: scripts/sim/automotive.gd:616
+#: scripts/sim/insurance.gd:77
 msgid "Insurance claim received: %s"
 msgstr "收到保險理賠：%s"
+
+#: scripts/sim/insurance.gd:18
+msgid "Insurance premium: %s"
+msgstr "保險保費：%s"
+
+#: scripts/sim/insurance.gd:95
+msgid "Insurance receivable transferred for liquidation"
+msgstr "保險應收款轉入清算"
+
+#: scripts/sim/insurance.gd:88
+msgid "Insurance renewal: %s"
+msgstr "保險續保：%s"
 
 #: scripts/ui/modals/van_deal_modal.gd:32
 msgid "Insurance, every month"
@@ -8430,7 +8662,7 @@ msgstr "保險（每月）"
 msgid "Insure it, keep it moving, and it earns. Leave it on the kerb and it is just a very expensive shed."
 msgstr "保好險、讓它一直跑，它就會賺錢；停在路邊，它只是一間很貴的棚子。"
 
-#: scripts/sim/automotive.gd:807
+#: scripts/sim/automotive.gd:815
 msgid "Insurer dispute settled at a discount"
 msgstr "與保險公司折價和解"
 
@@ -8546,7 +8778,7 @@ msgstr "存貨報廢"
 msgid "Inventory: what you have and where"
 msgstr "庫存：你有什麼、放在哪裡"
 
-#: scripts/sim/effects.gd:89
+#: scripts/sim/effects.gd:93
 msgid "Investors buy shares in a registered company."
 msgstr "投資人只能入股已登記的公司。"
 
@@ -8578,7 +8810,7 @@ msgstr "發票——%s"
 msgid "Invoice: %s · %s"
 msgstr "發票：%s · %s"
 
-#: scripts/sim/jobs.gd:93
+#: scripts/sim/jobs.gd:96
 msgid "Invoiced job %s: %s"
 msgstr "工單 %s 已開立發票：%s"
 
@@ -8710,15 +8942,15 @@ msgstr "%s 的徵才廣告已上線，應徵者通常一天內會回覆。"
 msgid "Job ad — %s"
 msgstr "徵才廣告——%s"
 
-#: scripts/sim/jobs.gd:44
+#: scripts/sim/jobs.gd:47
 msgid "Job deposit: %s"
 msgstr "工單訂金：%s"
 
-#: scripts/sim/jobs.gd:88
+#: scripts/sim/jobs.gd:91
 msgid "Job invoice: %s"
 msgstr "工單發票：%s"
 
-#: scripts/sim/jobs.gd:101
+#: scripts/sim/jobs.gd:105
 msgid "Job payment: %s"
 msgstr "工單收款：%s"
 
@@ -8794,7 +9026,7 @@ msgstr "KURO 拉麵"
 msgid "KYC check (know your customer)"
 msgstr "KYC 審查（認識你的客戶）"
 
-#: scripts/ui/modals/permits_modal.gd:89
+#: scripts/ui/modals/permits_modal.gd:93
 msgid "KYC check on payments over %s: a fee and a day's delay."
 msgstr "超過 %s 的付款要過 KYC 審查：要付費，還會多等一天。"
 
@@ -8878,7 +9110,7 @@ msgstr "讓咖啡店開門且備足貨；展覽訪客會自己走進來。"
 msgid "Keep the dealer licence fee in the business account."
 msgstr "請在公司帳戶保留車商執照費。"
 
-#: scripts/sim/automotive.gd:647
+#: scripts/sim/automotive.gd:655
 msgid "Keep the fleet on rent."
 msgstr "讓車隊持續出租。"
 
@@ -8986,7 +9218,7 @@ msgstr "LED 檯燈"
 msgid "LEGEND"
 msgstr "圖例"
 
-#: scripts/ui/modals/permits_modal.gd:98
+#: scripts/ui/modals/permits_modal.gd:102
 msgid "LICENSED"
 msgstr "已領執照"
 
@@ -9074,6 +9306,14 @@ msgstr "延遲交貨罰款"
 msgid "Late fees"
 msgstr "滯納金"
 
+#: data/help/help.json
+msgid "Late filing adds one penalty and lowers credit. Refund VAT credits carry forward; old saves start new tax periods without retroactively changing their journals."
+msgstr "逾期申報會加收一次罰款並降低信用。退貨營業稅抵額留待後期扣抵；舊存檔從新的稅期開始，不會追溯改寫帳目。"
+
+#: scripts/sim/tax.gd:136
+msgid "Late filing penalty: %s"
+msgstr "逾期申報罰款：%s"
+
 #: scripts/sim/bank.gd:278
 msgid "Late payment fee — loan %s"
 msgstr "遲繳手續費——貸款 %s"
@@ -9109,6 +9349,10 @@ msgstr "推出你的產品。"
 #: scripts/sim/saas.gd:104
 msgid "Launched %s at %s/month."
 msgstr "%s 上線，每月 %s。"
+
+#: data/economy/governance.json
+msgid "Lawyer letter"
+msgstr "律師函"
 
 #: scripts/ui/minigames/clerk_forms_game.gd:8
 msgid "Lea Novak"
@@ -9230,7 +9474,7 @@ msgstr "承租租車櫃台"
 msgid "Lease the showroom"
 msgstr "承租展示中心"
 
-#: scripts/sim/automotive.gd:648
+#: scripts/sim/automotive.gd:656
 msgid "Lease the showroom at Gateway Car Rental."
 msgstr "到 Gateway 租車承租展示中心。"
 
@@ -9282,9 +9526,29 @@ msgstr "離開了%s的工作。"
 msgid "Legacy"
 msgstr "傳承"
 
-#: scripts/sim/automotive.gd:809
+#: data/help/help.json scripts/ui/modals/legal_case_modal.gd:6
+msgid "Legal Dispute"
+msgstr "法律爭議"
+
+#: scripts/sim/legal.gd:117
+msgid "Legal case %s closed. Recovered %s; paid %s."
+msgstr "法律案件 %s 已結案。回收 %s；支付 %s。"
+
+#: scripts/sim/ledger.gd:33
+msgid "Legal costs"
+msgstr "法務成本"
+
+#: data/help/glossary.json scripts/ui/governance_ui.gd:20 scripts/ui/modals/legal_case_modal.gd:15
+msgid "Legal disputes"
+msgstr "法律爭議"
+
+#: scripts/sim/automotive.gd:817
 msgid "Legal fee for an insurer dispute"
 msgstr "保險爭議律師費"
+
+#: scripts/sim/legal.gd:64
+msgid "Legal fee: %s"
+msgstr "法務費用：%s"
 
 #: scripts/ui/minigames/cowork_host_game.gd:7
 msgid "Lena"
@@ -9346,11 +9610,15 @@ msgstr "租賃服務"
 msgid "Lettings desk: lease Bay 3"
 msgstr "租賃櫃檯：租 3 號倉位"
 
+#: data/economy/governance.json
+msgid "Liability insurance"
+msgstr "責任保險"
+
 #: scripts/sim/gates.gd:46
 msgid "Licence"
 msgstr "執照"
 
-#: scripts/ui/modals/permits_modal.gd:116
+#: scripts/ui/modals/permits_modal.gd:120
 msgid "Licence renewed until %s."
 msgstr "執照已續期到 %s。"
 
@@ -9358,7 +9626,7 @@ msgstr "執照已續期到 %s。"
 msgid "Licensing Officer"
 msgstr "執照承辦員"
 
-#: scripts/ui/phone_ui.gd:288
+#: scripts/ui/phone_ui.gd:291
 msgid "Life Timeline"
 msgstr "人生紀錄"
 
@@ -9446,7 +9714,7 @@ msgstr "床單、洗滌、備品與早餐是每間入住房晚的變動成本。
 msgid "Liquidation payment — %s"
 msgstr "清算還款——%s"
 
-#: scripts/sim/company.gd:146
+#: scripts/sim/company.gd:149
 msgid "List a green product on ShopLane first."
 msgstr "先在 ShopLane 上架一項綠色商品。"
 
@@ -9690,6 +9958,10 @@ msgstr "這筆銷售沒了，還要付退貨運費。"
 msgid "Lose the sale + return label. Rating stays safe."
 msgstr "這筆銷售沒了，還要付退貨運費。評價保得住。"
 
+#: scripts/ui/modals/tax_filing_modal.gd:26
+msgid "Loss available to carry forward: %s"
+msgstr "可結轉虧損：%s"
+
 #: data/buildings/lot7.json
 msgid "Lot 7"
 msgstr "7 號地"
@@ -9710,7 +9982,7 @@ msgstr "7 號地工程"
 msgid "Lot 7 development land"
 msgstr "7 號開發地"
 
-#: scripts/sim/automotive.gd:851
+#: scripts/sim/automotive.gd:859
 msgid "Lot storage and preparation"
 msgstr "車場停放與整備"
 
@@ -10002,7 +10274,7 @@ msgstr "市場"
 msgid "Market competition"
 msgstr "市場競爭"
 
-#: scripts/ui/market_view.gd:8 scripts/ui/phone_ui.gd:347
+#: scripts/ui/market_view.gd:8 scripts/ui/phone_ui.gd:350
 msgid "Market conditions"
 msgstr "市場狀況"
 
@@ -10194,7 +10466,7 @@ msgstr "請達到 Ferro 的最低採購量。"
 msgid "Meet Marcus Reed now"
 msgstr "現在找 Marcus Reed 洽談"
 
-#: scripts/sim/automotive.gd:655
+#: scripts/sim/automotive.gd:663
 msgid "Meet every franchise requirement first."
 msgstr "請先滿足所有經銷條件。"
 
@@ -10246,7 +10518,7 @@ msgstr "Meridian Trail 休旅車"
 msgid "Meridian and Volt sell steady volume on thin margins. You need a ten-car fleet, a showroom and a deposit, and you must always keep new cars on the floor. Service tickets after the sale are where the dealership earns."
 msgstr "Meridian 與 Volt 靠薄利穩定走量。你需要十輛車隊、展示中心和保證金，而且展場必須隨時有新車。賣車後的保養工單才是經銷商真正賺錢的地方。"
 
-#: scripts/ui/phone_ui.gd:135 scripts/ui/phone_ui.gd:189
+#: scripts/ui/phone_ui.gd:135 scripts/ui/phone_ui.gd:192
 msgid "Messages"
 msgstr "訊息"
 
@@ -10310,7 +10582,7 @@ msgstr "奶類"
 msgid "Minimal luxury"
 msgstr "極簡奢華"
 
-#: scripts/sim/company.gd:87
+#: scripts/sim/company.gd:88
 msgid "Minimum opening deposit is $500."
 msgstr "開戶最低存款是 $500。"
 
@@ -10414,7 +10686,7 @@ msgstr "月結——%s"
 msgid "Month close"
 msgstr "月結"
 
-#: scripts/ui/phone_ui.gd:275
+#: scripts/ui/phone_ui.gd:278
 msgid "Month sales"
 msgstr "本月銷售"
 
@@ -10638,7 +10910,7 @@ msgstr "幾乎客滿"
 msgid "Needed before you hire anyone. Payroll runs every Friday at 17:00 from the company account."
 msgstr "聘人之前必須登記。每週五 17:00 從公司帳戶發薪。"
 
-#: scripts/ui/modals/permits_modal.gd:88
+#: scripts/ui/modals/permits_modal.gd:92
 msgid "Needed to import from abroad. Renew it in its last two months, or imports stop."
 msgstr "從國外進口必須有它。到期前兩個月內要續期，否則進口會中斷。"
 
@@ -10706,11 +10978,11 @@ msgstr "新遊戲"
 msgid "New Neighbourhood Opening"
 msgstr "新社區開幕"
 
-#: scripts/sim/automotive.gd:766
+#: scripts/sim/automotive.gd:774
 msgid "New car returned to the factory: %s"
 msgstr "新車退回原廠：%s"
 
-#: scripts/sim/automotive.gd:718
+#: scripts/sim/automotive.gd:726
 msgid "New car sold: %s"
 msgstr "新車售出：%s"
 
@@ -10745,6 +11017,10 @@ msgstr "新評價 %s：%s「%s」"
 #: data/story/chapters.json
 msgid "New rules for big payments and imports: read the news board at Bloom Coffee"
 msgstr "大額付款與進口有新規定：到 Bloom Coffee 看新聞板"
+
+#: scripts/ui/governance_ui.gd:9
+msgid "News"
+msgstr "新聞"
 
 #: scripts/ui/modals/info_modal.gd:80
 msgid "News board"
@@ -10878,7 +11154,7 @@ msgstr "每月一千九，押金兩個月。交屋是空的：你自己裝修，
 msgid "No %s in stock to send."
 msgstr "沒有%s的庫存可以寄。"
 
-#: scripts/sim/jobs.gd:51
+#: scripts/sim/jobs.gd:54
 msgid "No active job to work on."
 msgstr "沒有可進行的工單。"
 
@@ -11194,7 +11470,7 @@ msgstr "現金不足以支付轉包費。"
 msgid "Not enough cash for this purchase."
 msgstr "現金不足以支付這筆採購。"
 
-#: scripts/sim/bank.gd:232 scripts/sim/company.gd:105
+#: scripts/sim/bank.gd:232 scripts/sim/company.gd:107
 msgid "Not enough cash."
 msgstr "現金不夠。"
 
@@ -11214,7 +11490,7 @@ msgstr "放不下再多 %d 件（最多只剩 %d 件空間）。租下 2B 辦公
 msgid "Not great. Feels cheap."
 msgstr "不太好。感覺很廉價。"
 
-#: scripts/ui/modals/permits_modal.gd:86
+#: scripts/ui/modals/permits_modal.gd:90
 msgid "Not needed yet. Commercial importers need one from the Regulation Wave (Year 8)."
 msgstr "還不用。商業進口商要到監管浪潮（第 8 年）才需要。"
 
@@ -11310,7 +11586,7 @@ msgstr "沒有可交易的內容。"
 msgid "Notification duration"
 msgstr "通知停留時間"
 
-#: scripts/ui/phone_ui.gd:268
+#: scripts/ui/phone_ui.gd:271
 msgid "Notifications only.\nManage at a desk: Company OS."
 msgstr "這裡只顯示通知。\n要管理請到辦公桌：Company OS。"
 
@@ -11590,6 +11866,14 @@ msgstr "準時"
 msgid "On time pays the full fee, a shorter route pays a little more, and a late run pays 40% less. A run left undone for hours is cancelled. Fuel and upkeep come off every run."
 msgstr "準時送到拿全額運費，路線越短報酬多一點，遲到的單少拿 40%。放了好幾個小時沒送的單會被取消。每趟都要扣油資和維護費。"
 
+#: scripts/ui/governance_ui.gd:9
+msgid "On-time payments"
+msgstr "準時付款"
+
+#: data/help/glossary.json
+msgid "One score combines reviews, published news, crisis handling, on-time payments and employee treatment."
+msgstr "綜合評價、已刊新聞、危機處理、準時付款及員工待遇，計算單一品牌分數。"
+
 #: data/events/customer_return.json
 msgid "One unit + express shipping."
 msgstr "多花一件商品＋快捷運費。"
@@ -11634,7 +11918,7 @@ msgstr "只有還沒到貨的託管訂單可以退款。"
 msgid "Only delivered purchases can be returned."
 msgstr "只有已到貨的進貨單可以退貨。"
 
-#: scripts/sim/company.gd:142
+#: scripts/sim/company.gd:145
 msgid "Only registered companies can apply."
 msgstr "只有已登記的公司能申請。"
 
@@ -11658,7 +11942,7 @@ msgstr "開設%s，才能供應給%s。"
 msgid "Open %s · %s"
 msgstr "開幕 %s · %s"
 
-#: scripts/sim/automotive.gd:911 scripts/ui/automotive_ui.gd:24 scripts/ui/automotive_ui.gd:30
+#: scripts/sim/automotive.gd:919 scripts/ui/automotive_ui.gd:24 scripts/ui/automotive_ui.gd:30
 msgid "Open Auto Desk"
 msgstr "開設汽車櫃台"
 
@@ -11786,7 +12070,7 @@ msgstr "開啟拍賣櫃台"
 msgid "Open the auto desk before hiring a technician."
 msgstr "請先開設汽車櫃台再雇用技師。"
 
-#: scripts/sim/automotive.gd:369 scripts/sim/automotive.gd:785
+#: scripts/sim/automotive.gd:369 scripts/sim/automotive.gd:793
 msgid "Open the auto desk first."
 msgstr "請先開設汽車櫃台。"
 
@@ -11910,7 +12194,7 @@ msgstr "「%s」開幕了。"
 msgid "Opened Harlow & Finch brokerage."
 msgstr "已開設 Harlow & Finch 仲介店。"
 
-#: scripts/sim/company.gd:95
+#: scripts/sim/company.gd:97
 msgid "Opened a business account at Nexus Bank with %s of founder capital."
 msgstr "在 Nexus 銀行開了企業帳戶，創辦人出資 %s。"
 
@@ -12022,7 +12306,7 @@ msgstr "向 Ferro 採購原料"
 msgid "Order an oat latte ($5.20)"
 msgstr "點杯燕麥拿鐵（$5.20）"
 
-#: scripts/sim/automotive.gd:672
+#: scripts/sim/automotive.gd:680
 msgid "Order at least the franchise minimum quantity."
 msgstr "請至少訂購經銷最低數量。"
 
@@ -12254,7 +12538,7 @@ msgstr "屋主委託"
 msgid "Owner money in / out"
 msgstr "業主資金投入／提領"
 
-#: scripts/sim/company.gd:110
+#: scripts/sim/company.gd:112
 msgid "Owner withdrawal"
 msgstr "業主提款"
 
@@ -12314,7 +12598,7 @@ msgstr "下午"
 msgid "POSTPOINT"
 msgstr "POSTPOINT"
 
-#: scripts/ui/modals/permits_modal.gd:135 scripts/ui/modals/permits_modal.gd:94
+#: scripts/ui/modals/permits_modal.gd:139 scripts/ui/modals/permits_modal.gd:98
 msgid "PROCESSING"
 msgstr "審核中"
 
@@ -12378,7 +12662,7 @@ msgstr "已打包訂單 %s"
 msgid "Packed well"
 msgstr "打包得很好"
 
-#: scripts/ui/phone_ui.gd:273
+#: scripts/ui/phone_ui.gd:276
 msgid "Packed, not shipped"
 msgstr "已打包未出貨"
 
@@ -12634,6 +12918,10 @@ msgstr "支付較高費率"
 msgid "Pay the repair yourself"
 msgstr "自行付修理費"
 
+#: data/help/help.json
+msgid "Pay the tax and choose time-consuming DIY filing or a paid accountant. Correct incomplete forms yourself or pay for assistance; ignored corrections finish automatically with a fee."
+msgstr "繳稅後可自行花時間申報，或付費聘請會計師。缺漏文件可自行補正或付費協助；未處理的補正會收費自動完成。"
+
 #: scripts/ui/modals/settlement_modal.gd:95
 msgid "Pay this way"
 msgstr "用這個方式付"
@@ -12661,6 +12949,10 @@ msgstr "每週五 17:00 從公司帳戶付員工薪水。"
 #: scripts/ui/modals/loan_modal.gd:119
 msgid "Payment"
 msgstr "還款"
+
+#: scripts/ui/modals/tax_filing_modal.gd:32
+msgid "Payment %s · penalty %s · due %s"
+msgstr "稅款 %s・罰款 %s・期限 %s"
 
 #: scripts/sim/ecommerce.gd:379
 msgid "Payment is frozen. Wait for the bridge to reopen before cancelling."
@@ -12766,7 +13058,7 @@ msgstr "許可"
 msgid "Permits & regulations"
 msgstr "許可與法規"
 
-#: scripts/ui/modals/bank_modal.gd:60 scripts/ui/phone_ui.gd:229
+#: scripts/ui/modals/bank_modal.gd:60 scripts/ui/phone_ui.gd:232
 msgid "Personal"
 msgstr "個人"
 
@@ -12778,7 +13070,7 @@ msgstr "個人／獨資"
 msgid "Personal Banker"
 msgstr "理財專員"
 
-#: scripts/ui/phone_ui.gd:277
+#: scripts/ui/phone_ui.gd:280
 msgid "Personal cap"
 msgstr "個人上限"
 
@@ -12789,6 +13081,10 @@ msgstr "個人活存"
 #: scripts/sim/ledger.gd:31
 msgid "Personal fitness"
 msgstr "個人健身"
+
+#: scripts/ui/modals/tax_filing_modal.gd:21
+msgid "Personal seller VAT"
+msgstr "個人賣家營業稅"
 
 #: scripts/ui/modals/company_os.gd:224
 msgid "Personal seller cap: %s of %s used this month."
@@ -13090,6 +13386,10 @@ msgstr "請按下按鍵。Esc 可取消設定按鍵。"
 msgid "Press the shutter when the focus needle is in the green. You get three shots; the best one goes on your listing."
 msgstr "對焦指針在綠色區間時按快門。可以拍三張，最好的一張會放上商品頁。"
 
+#: scripts/ui/modals/tax_filing_modal.gd:33
+msgid "Pretax profit %s · carried loss used %s"
+msgstr "稅前盈餘 %s・已扣抵虧損 %s"
+
 #: scripts/ui/modals/clothing_shop_modal.gd:55 scripts/ui/modals/company_os.gd:1204 scripts/ui/modals/company_os.gd:404 scripts/ui/modals/van_deal_modal.gd:31
 msgid "Price"
 msgstr "售價"
@@ -13234,6 +13534,10 @@ msgstr "房屋仲介佣金"
 msgid "Property closure auction"
 msgstr "公司關閉後房產拍賣"
 
+#: data/economy/governance.json
+msgid "Property insurance"
+msgstr "財產保險"
+
 #: scripts/sim/compliance.gd:33
 msgid "Property licence and application fee"
 msgstr "不動產執照與申請費"
@@ -13250,7 +13554,7 @@ msgstr "房屋貸款"
 msgid "Property permit granted."
 msgstr "不動產許可已核發。"
 
-#: scripts/ui/modals/permits_modal.gd:51 scripts/ui/real_estate_ui.gd:84
+#: scripts/ui/modals/permits_modal.gd:55 scripts/ui/real_estate_ui.gd:84
 msgid "Property permits"
 msgstr "不動產許可"
 
@@ -13273,6 +13577,10 @@ msgstr "房屋帶看"
 #: scripts/sim/bank.gd:117
 msgid "Property worth less than its mortgage"
 msgstr "房產市值低於房貸"
+
+#: data/help/glossary.json
+msgid "Property, liability and interruption policies collect premiums before losses, wait 7 days and reimburse eligible actual crisis costs."
+msgstr "財產、責任和營業中斷保險須在損失前付保費，等待 7 天後才承保符合資格的實際危機成本。"
 
 #: scripts/ui/media_ui.gd:85
 msgid "Propose · %s · %d minutes"
@@ -13714,7 +14022,7 @@ msgstr "安心"
 msgid "Rebuild savings after the lending ban."
 msgstr "在禁貸期結束後重建積蓄。"
 
-#: scripts/sim/automotive.gd:823
+#: scripts/sim/automotive.gd:831
 msgid "Recall handling: %s"
 msgstr "召回處理：%s"
 
@@ -13934,7 +14242,7 @@ msgstr "登記（%s）"
 msgid "Register a company and open its bank account first."
 msgstr "先登記公司並開設公司銀行帳戶。"
 
-#: scripts/sim/company.gd:83
+#: scripts/sim/company.gd:84
 msgid "Register a company at City Hall first."
 msgstr "請先到市政廳登記公司。"
 
@@ -13990,7 +14298,7 @@ msgstr "幫 {company} 辦雇主登記（市政中心，市政廳許可服務機�
 msgid "Registered address"
 msgstr "登記地址"
 
-#: scripts/ui/modals/permits_modal.gd:191
+#: scripts/ui/modals/permits_modal.gd:195
 msgid "Registered as an employer (%s). You can post jobs in Company OS → People."
 msgstr "雇主登記完成（%s）。可以到 Company OS →「人員」刊登職缺了。"
 
@@ -14050,7 +14358,7 @@ msgstr "監管與規模"
 msgid "Regulation Wave"
 msgstr "監管浪潮"
 
-#: scripts/ui/modals/permits_modal.gd:49
+#: scripts/ui/modals/permits_modal.gd:53
 msgid "Regulations here are operating conditions, not quizzes: each one has a cost, a process, and a reason."
 msgstr "這裡的法規是經營條件，不是考題：每一條都有成本、流程和理由。"
 
@@ -14094,7 +14402,7 @@ msgstr "Ren Tanaka"
 msgid "Rename"
 msgstr "改名"
 
-#: scripts/ui/modals/permits_modal.gd:103
+#: scripts/ui/modals/permits_modal.gd:107
 msgid "Renew (%s)"
 msgstr "續期（%s）"
 
@@ -14126,7 +14434,7 @@ msgstr "翻修還需 %d 天完工"
 msgid "Rent"
 msgstr "租金"
 
-#: scripts/ui/phone_ui.gd:235
+#: scripts/ui/phone_ui.gd:238
 msgid "Rent $1,250 due the 14th"
 msgstr "房租 $1,250，14 號到期"
 
@@ -14182,7 +14490,7 @@ msgstr "RentMachine"
 msgid "RentRealtyBuilding"
 msgstr "RentRealtyBuilding"
 
-#: scripts/sim/automotive.gd:614
+#: scripts/sim/automotive.gd:620
 msgid "Rental damage repair: %s"
 msgstr "租賃損壞維修：%s"
 
@@ -14206,11 +14514,11 @@ msgstr "租賃車隊上路"
 msgid "Rental fleet: lease the Gateway counter, buy cars, set day and week rates and schedule services. Skipped service causes breakdowns mid-rental."
 msgstr "租車車隊：承租 Gateway 櫃台、買車、設定日租與週租費率並安排保養。跳過保養會在租期中拋錨。"
 
-#: scripts/sim/automotive.gd:626
+#: scripts/sim/automotive.gd:634
 msgid "Rental interrupted: %s"
 msgstr "租賃中斷：%s"
 
-#: scripts/sim/automotive.gd:590
+#: scripts/sim/automotive.gd:596
 msgid "Rental returned: %s"
 msgstr "租賃還車：%s"
 
@@ -14226,11 +14534,11 @@ msgstr "修復並加裝監視器"
 msgid "Repair and service · %s"
 msgstr "修復與保養 · %s"
 
-#: scripts/sim/automotive.gd:811
+#: scripts/sim/automotive.gd:819
 msgid "Repair paid after a lost dispute"
 msgstr "爭議敗訴後支付維修費"
 
-#: scripts/sim/automotive.gd:806
+#: scripts/sim/automotive.gd:814
 msgid "Repair paid after an insurer dispute"
 msgstr "保險爭議後支付維修費"
 
@@ -14538,6 +14846,14 @@ msgstr "按產業列出本月與上月的營收、毛利、費用及營業利益
 msgid "Review OEM orders"
 msgstr "查看代工單"
 
+#: scripts/ui/governance_ui.gd:24
+msgid "Review dispute"
+msgstr "查看爭議"
+
+#: data/help/help.json
+msgid "Review due tax filings or legal disputes first. Insurance is bought before losses, renews every 30 days and may lapse if cash is insufficient; funded renewal resumes automatically."
+msgstr "先處理到期稅務或法律爭議。保險須在損失前投保，每 30 天續保；現金不足會失效，資金備妥後自動續保。"
+
 #: scripts/ui/automotive_ui.gd:132
 msgid "Review my lot"
 msgstr "檢視我的車場"
@@ -14545,6 +14861,10 @@ msgstr "檢視我的車場"
 #: scripts/ui/modals/company_os.gd:1511
 msgid "Review next action"
 msgstr "查看下一步"
+
+#: data/help/help.json
+msgid "Review personal seller VAT separately from company returns. Sales prices include VAT; company tax starts from its actual formation date."
+msgstr "個人賣家營業稅與公司稅單分開查看。售價內含營業稅，公司稅務從實際成立日起計算。"
 
 #: data/events/real_estate_arrears.json data/events/real_estate_delay.json data/events/real_estate_neighbors.json data/events/real_estate_rate.json
 msgid "Review properties and respond"
@@ -14557,6 +14877,10 @@ msgstr "查看分部損益"
 #: data/events/hotel_review_storm.json scripts/ui/hotel_ui.gd:252
 msgid "Review storm"
 msgstr "負評風暴"
+
+#: scripts/ui/governance_ui.gd:17
+msgid "Review tax returns"
+msgstr "查看稅務申報"
 
 #: data/events/unexpected_large_order.json
 msgid "Review terms in Company OS → Contracts. Accept, counter or decline there."
@@ -14573,6 +14897,10 @@ msgstr "幫 %s 檢視定價"
 #: data/help/help.json
 msgid "Review your own selling price at a terminal. Research does not automatically change it."
 msgstr "請在電腦查看自己的售價，調查不會自動改價。"
+
+#: scripts/ui/governance_ui.gd:9
+msgid "Reviews"
+msgstr "評價"
 
 #: scripts/ui/hotel_ui.gd:260
 msgid "ReviewsNextGrowth"
@@ -14674,7 +15002,7 @@ msgstr "Riverstone Bakery"
 msgid "Roadmap delivered"
 msgstr "路線圖兌現"
 
-#: scripts/sim/automotive.gd:628
+#: scripts/sim/automotive.gd:636
 msgid "Roadside tow: %s"
 msgstr "路邊拖吊：%s"
 
@@ -15078,7 +15406,7 @@ msgstr "存檔"
 msgid "Save backup"
 msgstr "存檔備份"
 
-#: scripts/sim/automotive.gd:649
+#: scripts/sim/automotive.gd:657
 msgid "Save cash or arrange a bank loan."
 msgstr "請存足現金或申請銀行貸款。"
 
@@ -15090,7 +15418,7 @@ msgstr "省下現金。銷量會下滑。"
 msgid "Save enough cash for the bid and the buyer fee first."
 msgstr "請先存足出價與買方手續費的現金。"
 
-#: scripts/sim/automotive.gd:675
+#: scripts/sim/automotive.gd:683
 msgid "Save enough cash for the factory order first."
 msgstr "請先存足原廠訂單的現金。"
 
@@ -15098,7 +15426,7 @@ msgstr "請先存足原廠訂單的現金。"
 msgid "Save exported. Keep this file outside your browser."
 msgstr "存檔已匯出。請把檔案保存在瀏覽器以外的地方。"
 
-#: scripts/ui/phone_ui.gd:334
+#: scripts/ui/phone_ui.gd:337
 msgid "Save game"
 msgstr "儲存遊戲"
 
@@ -15106,7 +15434,7 @@ msgstr "儲存遊戲"
 msgid "Save imported. Continue where you left off."
 msgstr "存檔已匯入，可以接著玩。"
 
-#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:335
+#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:338
 msgid "Save now"
 msgstr "立即存檔"
 
@@ -15133,6 +15461,10 @@ msgstr "請先備妥電池課程費。"
 #: scripts/sim/media.gd:252
 msgid "Save the client retention discount first."
 msgstr "請先備好挽留客戶的折扣金額。"
+
+#: scripts/sim/tax.gd:105
+msgid "Save the correction fee first."
+msgstr "請先備妥補正費用。"
 
 #: scripts/sim/media.gd:76 scripts/ui/media_ui.gd:106
 msgid "Save the creative production cost first."
@@ -15177,6 +15509,14 @@ msgstr "請先備好房務獎金。"
 #: scripts/sim/automotive.gd:179
 msgid "Save the inspection fee first."
 msgstr "請先存足驗車費。"
+
+#: scripts/sim/insurance.gd:17
+msgid "Save the insurance premium first."
+msgstr "請先備妥保費。"
+
+#: scripts/sim/legal.gd:63
+msgid "Save the legal fee first."
+msgstr "請先備妥法務費用。"
 
 #: scripts/sim/energy.gd:288
 msgid "Save the panel materials cost first."
@@ -15234,6 +15574,10 @@ msgstr "請先備妥補助申請費。"
 msgid "Save the takeover price first."
 msgstr "請先備好頂讓費用。"
 
+#: scripts/sim/insurance.gd:137
+msgid "Save the vehicle-cover upgrade premium first."
+msgstr "請先備妥車輛保障升級保費。"
+
 #: autoload/save_system.gd:439
 msgid "Save transfer"
 msgstr "存檔匯入／匯出"
@@ -15246,7 +15590,7 @@ msgstr "已儲存"
 msgid "Saved %s"
 msgstr "存於 %s"
 
-#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:337
+#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:340
 msgid "Saved (slot %d)."
 msgstr "已存檔（欄位 %d）。"
 
@@ -15422,6 +15766,10 @@ msgstr "出賣你的時間：客戶每天早上會張貼小案子。接案後在
 msgid "Seller"
 msgstr "賣方"
 
+#: scripts/sim/tax.gd:154
+msgid "Seller VAT obligation assumed"
+msgstr "承接賣家營業稅負債"
+
 #: data/regions/zenkai.json
 msgid "Semiconductors"
 msgstr "半導體"
@@ -15586,6 +15934,10 @@ msgstr "設定立即套用，並與遊戲存檔分開儲存。"
 msgid "Settings could not be saved. Check available storage and try again."
 msgstr "設定無法儲存，請檢查儲存空間後再試。"
 
+#: data/economy/governance.json
+msgid "Settle"
+msgstr "和解"
+
 #: data/events/automotive_claim.json
 msgid "Settle for half"
 msgstr "半價和解"
@@ -15593,6 +15945,14 @@ msgstr "半價和解"
 #: scripts/ui/modals/company_os.gd:885
 msgid "Settlement"
 msgstr "結算方式"
+
+#: data/help/help.json
+msgid "Settlement is faster and cheaper but collects less. Letters and court take longer, cost more and have different odds and relationship consequences."
+msgstr "和解較快且便宜，但回收較少。律師函和訴訟花費較高、時間較長，勝算及客戶關係後果也不同。"
+
+#: data/help/glossary.json
+msgid "Settlement, a lawyer letter and court have different costs, delays, recovery chances and client consequences."
+msgstr "和解、律師函和訴訟各有不同費用、等待時間、回收機率和客戶關係後果。"
 
 #: scripts/ui/modals/company_os.gd:777
 msgid "Severance paid: %s."
@@ -15730,7 +16090,7 @@ msgstr "ShopLane＋發票"
 msgid "ShopLane Ads: a big brand campaign is bidding up placements."
 msgstr "ShopLane 廣告：有大品牌在搶版位，價格被推高了。"
 
-#: scripts/ui/phone_ui.gd:267
+#: scripts/ui/phone_ui.gd:270
 msgid "ShopLane Seller"
 msgstr "ShopLane 賣家"
 
@@ -15774,7 +16134,7 @@ msgstr "ShopLane 撥款"
 msgid "ShopLane payout received: %s"
 msgstr "收到 ShopLane 撥款：%s"
 
-#: scripts/ui/phone_ui.gd:234
+#: scripts/ui/phone_ui.gd:237
 msgid "ShopLane pending"
 msgstr "ShopLane 待撥款"
 
@@ -15838,7 +16198,7 @@ msgstr "讓我看看你能借多少。"
 msgid "Showroom discount"
 msgstr "展示中心折扣"
 
-#: scripts/sim/automotive.gd:648
+#: scripts/sim/automotive.gd:656
 msgid "Showroom leased"
 msgstr "已承租展示中心"
 
@@ -15858,7 +16218,7 @@ msgstr "簽約 %s%s · 保證金 %s"
 msgid "Sign a 60-day supply agreement with {supplier} ($600 fee)"
 msgstr "跟 {supplier} 簽 60 天供貨協議（費用 $600）"
 
-#: scripts/sim/automotive.gd:668 scripts/sim/automotive.gd:757
+#: scripts/sim/automotive.gd:676 scripts/sim/automotive.gd:765
 msgid "Sign a franchise first."
 msgstr "請先簽下經銷權。"
 
@@ -15882,7 +16242,7 @@ msgstr "申請人有簽名"
 msgid "Signed contract %s with %s: %s."
 msgstr "簽訂合約 %s，對象 %s：%s。"
 
-#: scripts/sim/automotive.gd:661
+#: scripts/sim/automotive.gd:669
 msgid "Signed the %s franchise."
 msgstr "簽下了 %s 經銷權。"
 
@@ -16102,7 +16462,7 @@ msgstr "已售 %d 輛 · 目前獲利 %s"
 msgid "Sold %d × %s to liquidator (%d%% of cost)"
 msgstr "賣給清倉商：%d × %s（成本的 %d%%）"
 
-#: scripts/sim/effects.gd:97
+#: scripts/sim/effects.gd:101
 msgid "Sold %d%% of %s for %s."
 msgstr "賣出 %d%% 的 %s 股份，換得 %s。"
 
@@ -16386,7 +16746,7 @@ msgstr "庫存（成本）"
 msgid "Stock at cost"
 msgstr "庫存（成本）"
 
-#: scripts/sim/automotive.gd:888
+#: scripts/sim/automotive.gd:896
 msgid "Stock car auctioned: %s"
 msgstr "庫存車拍賣處分：%s"
 
@@ -16441,6 +16801,10 @@ msgstr "Stockroom"
 #: scripts/ui/minigames/auction_game.gd:47
 msgid "Stop bidding"
 msgstr "停止出價"
+
+#: scripts/ui/governance_ui.gd:36
+msgid "Stop next renewal"
+msgstr "停止下次續保"
 
 #: data/economy/marketplace.json
 msgid "Stopped working after a day."
@@ -16598,11 +16962,15 @@ msgstr "Sunny Adeyemi"
 msgid "Supplier bills payable"
 msgstr "應付供應商帳款"
 
+#: scripts/sim/legal.gd:94
+msgid "Supplier breach settlement: %s"
+msgstr "供應商違約和解：%s"
+
 #: data/help/glossary.json
 msgid "Supplier credit"
 msgstr "供應商票期"
 
-#: scripts/sim/effects.gd:45
+#: scripts/sim/effects.gd:49
 msgid "Supplier doesn't carry that."
 msgstr "供應商沒有這個商品。"
 
@@ -16682,7 +17050,7 @@ msgstr "改用"
 msgid "Switch to recycled packaging (Company OS → Operations)"
 msgstr "改用回收包材（Company OS → 營運）"
 
-#: scripts/sim/company.gd:144
+#: scripts/sim/company.gd:147
 msgid "Switch to recycled packaging first (Company OS → Operations)."
 msgstr "先改用回收包材（Company OS → 營運）。"
 
@@ -16798,6 +17166,10 @@ msgstr "接受這份工作"
 msgid "Take the refund"
 msgstr "接受退款"
 
+#: data/economy/governance.json
+msgid "Take to court"
+msgstr "提起訴訟"
+
 #: data/dialogue/lina_intro.json
 msgid "Take your time. The ships certainly are."
 msgstr "慢慢想。船也慢慢來。"
@@ -16846,13 +17218,33 @@ msgstr "Tanaka"
 msgid "Tape seam %d"
 msgstr "貼第 %d 條接縫"
 
-#: scripts/ui/phone_ui.gd:135 scripts/ui/phone_ui.gd:247
+#: scripts/ui/phone_ui.gd:135 scripts/ui/phone_ui.gd:250
 msgid "Tasks"
 msgstr "任務"
+
+#: data/help/help.json scripts/ui/modals/permits_modal.gd:47 scripts/ui/modals/tax_filing_modal.gd:7 scripts/ui/phone_ui.gd:137
+msgid "Tax Filing"
+msgstr "稅務申報"
 
 #: data/economy/logistics.json
 msgid "Tax Office"
 msgstr "稅務局"
+
+#: scripts/ui/governance_ui.gd:15
+msgid "Tax filing"
+msgstr "稅務申報"
+
+#: scripts/sim/ledger.gd:33
+msgid "Tax filing costs"
+msgstr "稅務申報成本"
+
+#: scripts/sim/tax.gd:92
+msgid "Tax payment: %s"
+msgstr "稅款支付：%s"
+
+#: scripts/sim/tax.gd:55
+msgid "Tax return ready: %s. File by %s."
+msgstr "稅單已備妥：%s。請於 %s 前申報。"
 
 #: scripts/ui/modals/company_os.gd:745
 msgid "Team"
@@ -17094,7 +17486,7 @@ msgstr "SaaS 伺服器帳單包含每月基本費與每位訂戶的額外成本�
 msgid "The Transit Office is renewing its service fleet: parts built to drawing, cars sourced and delivery runs flown across the city."
 msgstr "交通局要更新服務車隊：依圖面生產零件、採購車輛，並在全市跑配送。"
 
-#: scripts/sim/company.gd:85
+#: scripts/sim/company.gd:86
 msgid "The account is already open."
 msgstr "帳戶已經開好了。"
 
@@ -17141,6 +17533,10 @@ msgstr "這筆大交易沒有成。會把你拖垮的成長，不算成長。"
 #: data/story/chapters.json
 msgid "The boxes are stuck at sea."
 msgstr "貨卡在海上。"
+
+#: data/help/help.json
+msgid "The brand breakdown comes from actual company activity. Events fade over 90 days, while current reviews and employee conditions still matter."
+msgstr "品牌明細來自公司的實際活動。事件影響會在 90 天內消退，現有評價和員工狀況仍會影響分數。"
 
 #: data/events/rail_frozen.json
 msgid "The bridge is frozen"
@@ -17258,7 +17654,7 @@ msgstr "客戶因折扣留了下來。活動繼續進行。"
 msgid "The clock keeps running while you're at the computer, just like in real life. Buying, listing and working also take their own time."
 msgstr "用電腦時時間照樣在走，跟現實一樣。進貨、上架、工作也各自要花時間。"
 
-#: scripts/sim/company.gd:103
+#: scripts/sim/company.gd:105
 msgid "The company belongs to Hale Group now: no money moves between it and you."
 msgstr "公司現在屬於 Hale Group：你和公司之間不能再轉帳。"
 
@@ -17350,7 +17746,7 @@ msgstr "裝修師傅今晚開工，%s 完工。"
 msgid "The flash sale refills some rooms for a week. Group deposits are refunded."
 msgstr "限時特賣讓部分房間在一週內重新賣出，團體訂金全數退還。"
 
-#: scripts/sim/company.gd:138
+#: scripts/sim/company.gd:141
 msgid "The grant opens with the Green Shift."
 msgstr "補助要等綠色轉型才開放。"
 
@@ -17538,7 +17934,7 @@ msgstr "組長把郵遞區號表收走了，現在要靠記憶！"
 msgid "The shortest way there is. Textbook."
 msgstr "這就是最短的路線，教科書等級。"
 
-#: scripts/sim/automotive.gd:673
+#: scripts/sim/automotive.gd:681
 msgid "The showroom does not have room for that many cars."
 msgstr "展示中心放不下那麼多車。"
 
@@ -17710,11 +18106,15 @@ msgstr "此客戶需求在製作期間已到期。"
 msgid "This contract belongs to another company."
 msgstr "這份合約屬於其他公司。"
 
+#: scripts/sim/insurance.gd:15
+msgid "This cover is already active."
+msgstr "這項保障已生效。"
+
 #: scripts/sim/hotel.gd:610
 msgid "This equipment needs no service today."
 msgstr "這些設備今天不需要保養。"
 
-#: scripts/ui/phone_ui.gd:342
+#: scripts/ui/phone_ui.gd:345
 msgid "This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen."
 msgstr "這場遊戲每隔幾秒自動存到欄位 %d。新遊戲會用自己的欄位；其他存檔可以在標題畫面讀取。"
 
@@ -17762,7 +18162,7 @@ msgstr "這不是 City Venture 的存檔。"
 msgid "This is the same form you'll file for your own company, so the rules are worth remembering."
 msgstr "這就是你之後登記自己公司要填的表，規則值得記住。"
 
-#: scripts/sim/energy.gd:275 scripts/sim/hotel.gd:568 scripts/sim/jobs.gd:41 scripts/sim/media.gd:226
+#: scripts/sim/energy.gd:275 scripts/sim/hotel.gd:568 scripts/sim/jobs.gd:44 scripts/sim/media.gd:226
 msgid "This job is no longer available."
 msgstr "這張工單已無法承接。"
 
@@ -17801,6 +18201,10 @@ msgstr "這張進貨單屬於已關閉的公司。"
 #: scripts/sim/ecommerce.gd:367
 msgid "This purchase belongs to another business."
 msgstr "這張進貨單屬於其他企業。"
+
+#: scripts/sim/tax.gd:103
+msgid "This return needs no correction."
+msgstr "這份申報不需要補正。"
 
 #: scripts/sim/energy.gd:268
 msgid "This roof survey is no longer available."
@@ -17910,7 +18314,7 @@ msgstr "經過時間"
 msgid "Time to finish"
 msgstr "完成期限"
 
-#: scripts/ui/phone_ui.gd:136 scripts/ui/phone_ui.gd:291
+#: scripts/ui/phone_ui.gd:136 scripts/ui/phone_ui.gd:294
 msgid "Timeline"
 msgstr "人生紀錄"
 
@@ -17930,7 +18334,7 @@ msgstr "老舊房間會拉低每則評價的清潔與價值感分數。"
 msgid "To Startup Hub"
 msgstr "前往新創園區"
 
-#: scripts/ui/modals/company_os.gd:513 scripts/ui/phone_ui.gd:272
+#: scripts/ui/modals/company_os.gd:513 scripts/ui/phone_ui.gd:275
 msgid "To pack"
 msgstr "待打包"
 
@@ -18066,7 +18470,7 @@ msgstr "轉撥價"
 msgid "Transfer price per %s"
 msgstr "每%s轉撥價"
 
-#: scripts/sim/company.gd:107
+#: scripts/sim/company.gd:109
 msgid "Transfer to %s"
 msgstr "轉帳給 %s"
 
@@ -18222,6 +18626,10 @@ msgstr "「收回」會拿回最後一張。"
 msgid "Unexpected large order"
 msgstr "意外的大訂單"
 
+#: scripts/sim/tax.gd:153
+msgid "Unfiled seller VAT transferred with business"
+msgstr "未申報賣家營業稅隨業務移轉"
+
 #: scripts/sim/real_estate.gd:292
 msgid "Unfinished construction auction"
 msgstr "未完工工程拍賣"
@@ -18266,7 +18674,7 @@ msgstr "大學客戶導師"
 msgid "Unknown agency crisis."
 msgstr "未知的代理商危機。"
 
-#: scripts/sim/automotive.gd:826
+#: scripts/sim/automotive.gd:834
 msgid "Unknown automotive crisis."
 msgstr "未知的汽車危機。"
 
@@ -18286,7 +18694,7 @@ msgstr "未知的能源危機。"
 msgid "Unknown factory crisis."
 msgstr "未知的工廠危機。"
 
-#: scripts/sim/automotive.gd:465
+#: scripts/sim/automotive.gd:470
 msgid "Unknown fleet policy."
 msgstr "未知的車隊政策。"
 
@@ -18402,6 +18810,22 @@ msgstr "用中文輸入法的話，請先切換成英文輸入。"
 msgid "Utilisation is rented car-days divided by available car-days. Airport passengers, season, rates and ratings set the requests."
 msgstr "使用率 = 出租車天 ÷ 可用車天。機場旅客、季節、租金與評分決定詢問量。"
 
+#: scripts/ui/modals/tax_filing_modal.gd:17
+msgid "VAT %.0f%% · annual company income tax %.0f%%"
+msgstr "營業稅 %.0f%%・年度公司所得稅 %.0f%%"
+
+#: data/help/glossary.json scripts/ui/modals/tax_filing_modal.gd:16
+msgid "VAT and income tax"
+msgstr "營業稅與所得稅"
+
+#: data/help/glossary.json
+msgid "VAT is collected within customer prices and paid every two months. Company income tax applies to annual pretax profit after carried losses."
+msgstr "營業稅包含在售價內，每兩個月繳納。公司所得稅以扣抵累積虧損後的年度稅前盈餘計算。"
+
+#: scripts/sim/tax.gd:63
+msgid "VAT: year %d, period %d / 6"
+msgstr "營業稅：%d 年・第 %d／6 期"
+
 #: scripts/ui/real_estate_ui.gd:12 scripts/ui/real_estate_ui.gd:15
 msgid "VENTURE TOWER"
 msgstr "創業大樓"
@@ -18414,7 +18838,7 @@ msgstr "為評論家升等 VIP 套房"
 msgid "Val"
 msgstr "Val"
 
-#: scripts/ui/modals/permits_modal.gd:92
+#: scripts/ui/modals/permits_modal.gd:96
 msgid "Valid until %s."
 msgstr "有效期限到 %s。"
 
@@ -18481,6 +18905,10 @@ msgstr "Varga"
 #: data/help/glossary.json
 msgid "Variable interest and vacancy can make cash flow negative."
 msgstr "浮動利率及空置都可能讓現金流變成負值。"
+
+#: scripts/sim/insurance.gd:138
+msgid "Vehicle cover premium: %s"
+msgstr "車輛保障保費：%s"
 
 #: data/buildings/dockside_motors.json
 msgid "Vehicle dealer"
@@ -18790,7 +19218,7 @@ msgstr "保固"
 msgid "Warranty claim from %s: %s, repair cost %s, decide within %d days"
 msgstr "%s 的保固理賠：%s，修復成本 %s，請在 %d 天內處理"
 
-#: scripts/sim/automotive.gd:879
+#: scripts/sim/automotive.gd:887
 msgid "Warranty claim on a used car"
 msgstr "中古車保固求償"
 
@@ -19058,7 +19486,7 @@ msgstr "電匯恢復：跨境付款現在 3 到 5 天入帳。"
 msgid "With storage certification and two installs you can build charging stations. Set a price per kWh and watch demand."
 msgstr "取得儲能認證並完成兩件安裝後，就能蓋充電站。設定每度電價格並觀察需求。"
 
-#: scripts/sim/company.gd:111
+#: scripts/sim/company.gd:113
 msgid "Withdrawal from %s"
 msgstr "從 %s 提款"
 
@@ -19074,7 +19502,7 @@ msgstr "沒有有效的執照，進口就會被擋。在到期前續期，不然
 msgid "Won %s at auction for %s."
 msgstr "標下 %s，成交價 %s。"
 
-#: scripts/sim/company.gd:157
+#: scripts/sim/company.gd:160
 msgid "Won the city's Green Business Grant: %s."
 msgstr "拿到市府的綠色企業補助：%s。"
 
@@ -19354,7 +19782,7 @@ msgstr "貨沒到就不用付錢，供應商也知道錢確實準備好了。跟
 msgid "You only have %s in personal checking. Pick a smaller amount."
 msgstr "個人帳戶只有 %s。請選較小的金額。"
 
-#: scripts/sim/company.gd:89
+#: scripts/sim/company.gd:90
 msgid "You only have %s personally."
 msgstr "你個人只有 %s。"
 
@@ -20106,6 +20534,14 @@ msgstr "%d–%d 天入帳"
 msgid "lands in about %d hour(s)"
 msgstr "約 %d 小時入帳"
 
+#: scripts/sim/tax.gd:126
+msgid "late correction"
+msgstr "補正逾期"
+
+#: scripts/sim/tax.gd:137
+msgid "late tax"
+msgstr "稅務逾期"
+
 #: scripts/sim/cafe.gd:113
 msgid "lease the café unit first"
 msgstr "請先租下咖啡店面"
@@ -20318,7 +20754,7 @@ msgstr "自有媒體"
 msgid "paid on delivery"
 msgstr "交件即付款"
 
-#: scripts/ui/phone_ui.gd:280
+#: scripts/ui/phone_ui.gd:283
 msgid "paused: cap"
 msgstr "暫停：已達上限"
 
@@ -20802,13 +21238,29 @@ msgstr "✓ 已核准：資料齊全"
 msgid "✓ Building complete. Sell or rent units in Properties."
 msgstr "✓ 大樓已完工，請到物件管理出售或出租各戶。"
 
+#: scripts/ui/modals/legal_case_modal.gd:30
+msgid "✓ Closed; recovered %s, paid %s."
+msgstr "✓ 已結案；回收 %s，支付 %s。"
+
 #: scripts/ui/minigames/teller_cash_game.gd:108
 msgid "✓ Exact"
 msgstr "✓ 金額正確"
 
+#: scripts/ui/modals/tax_filing_modal.gd:57
+msgid "✓ Filing recorded; next review the following tax period."
+msgstr "✓ 申報已記錄；接著查看下一個稅期。"
+
 #: scripts/ui/modals/fitness_modal.gd:15
 msgid "✓ Membership paid until %s — choose a class."
 msgstr "✓ 會員已付費至 %s——請選擇課程。"
+
+#: scripts/ui/modals/tax_filing_modal.gd:28
+msgid "✓ No return due yet; the next calendar period creates it automatically."
+msgstr "✓ 尚無到期稅單；下一個曆期會自動產生。"
+
+#: scripts/ui/governance_ui.gd:34
+msgid "✓ Paid cover until %s; waiting period ends %s."
+msgstr "✓ 已付保障至 %s；等待期於 %s 結束。"
 
 #: scripts/ui/modals/permits_modal.gd:24
 msgid "✓ Registered"
@@ -20817,6 +21269,10 @@ msgstr "✓ 已登記"
 #: scripts/ui/minigames/clerk_forms_game.gd:117
 msgid "✓ Rejected for the right reason"
 msgstr "✓ 退件，理由正確"
+
+#: scripts/ui/modals/legal_case_modal.gd:29
+msgid "✓ Response submitted; next review the outcome on %s."
+msgstr "✓ 已提交回應；請於 %s 查看結果。"
 
 #: scripts/ui/modals/research_modal.gd:32
 msgid "✓ Saved until %s — return to your terminal to review pricing."
@@ -20890,6 +21346,10 @@ msgstr "✗ 請先到代工單選擇訂單。"
 msgid "✗ Complete two campaigns and hire a designer and media buyer before buying Campus Radio."
 msgstr "✗ 完成兩場活動，聘用設計師與媒體採購員後，再收購 校園電台。"
 
+#: scripts/ui/modals/tax_filing_modal.gd:49
+msgid "✗ Documents need correction; fix them now or automatic correction charges a fee in 7 days."
+msgstr "✗ 文件待補正；現在修正，或 7 天後付費自動補正。"
+
 #: scripts/ui/real_estate_ui.gd:180
 msgid "✗ Fund the next construction milestone."
 msgstr "✗ 請備妥下一期工程款。"
@@ -20897,6 +21357,10 @@ msgstr "✗ 請備妥下一期工程款。"
 #: scripts/sim/rivals.gd:215
 msgid "✗ Insufficient company cash — save %s first."
 msgstr "✗ 公司現金不足 — 先存下 %s。"
+
+#: scripts/ui/modals/tax_filing_modal.gd:47
+msgid "✗ Insufficient company cash; visit a terminal → Finance to fund the payment."
+msgstr "✗ 公司現金不足；請到電腦 → 財務備妥稅款。"
 
 #: scripts/ui/minigames/pack_game.gd:147
 msgid "✗ It doesn't fit. Try a bigger box."
@@ -20909,6 +21373,10 @@ msgstr "✗ 尚無市場紀錄 — 進入城市後開始追蹤。"
 #: scripts/ui/modals/fitness_modal.gd:17
 msgid "✗ No class pass — buy one at Rosa's reception."
 msgstr "✗ 尚無課程資格——請到 Rosa 櫃台購買。"
+
+#: scripts/ui/governance_ui.gd:40
+msgid "✗ No cover; buy before a loss, then wait 7 days."
+msgstr "✗ 尚無保障；請先投保，等待 7 天後才承保損失。"
 
 #: scripts/ui/energy_ui.gd:178
 msgid "✗ No installs yet. Survey a roof and send a quote."
@@ -20925,6 +21393,10 @@ msgstr "✗ 沒有成交。下一步：看看其他拍賣車。"
 #: scripts/ui/minigames/cowork_host_game.gd:116
 msgid "✗ No: %s"
 msgstr "✗ 不對：%s"
+
+#: scripts/ui/modals/tax_filing_modal.gd:35
+msgid "✗ Not filed; choose a filing method below."
+msgstr "✗ 尚未申報；請選擇下方申報方式。"
 
 #: scripts/ui/minigames/barista_game.gd:124
 msgid "✗ Not quite: %s wanted %s"
@@ -20945,6 +21417,10 @@ msgstr "✗ 尚無可調查商品——請先買進庫存或建立上架。"
 #: scripts/ui/energy_ui.gd:145
 msgid "✗ Place at least one panel on the roof."
 msgstr "✗ 請至少在屋頂放一片面板。"
+
+#: scripts/ui/modals/tax_filing_modal.gd:14
+msgid "✗ Register an open company first; visit City Hall's registration counter."
+msgstr "✗ 請先成立營業中的公司；前往市政廳登記櫃檯。"
 
 #: scripts/ui/modals/permits_modal.gd:24
 msgid "✗ Registration counter · %s"
@@ -20982,6 +21458,10 @@ msgstr "✗ 客人要找經理了"
 msgid "✗ The queue is getting long"
 msgstr "✗ 排隊的人越來越多了"
 
+#: scripts/ui/modals/legal_case_modal.gd:13
+msgid "✗ This company or dispute is closed; return to your current company's terminal."
+msgstr "✗ 這家公司或爭議已關閉；請回到目前公司的電腦。"
+
 #: scripts/ui/minigames/teller_cash_game.gd:111
 msgid "✗ Till error: you handed over %s"
 msgstr "✗ 帳差：你給了 %s"
@@ -20989,6 +21469,10 @@ msgstr "✗ 帳差：你給了 %s"
 #: scripts/ui/modals/settings_modal.gd:113
 msgid "✗ Turn on"
 msgstr "✗ 開啟"
+
+#: scripts/ui/modals/legal_case_modal.gd:18
+msgid "✗ Unresolved; choose a route. No response by %s uses settlement automatically, including its fee and risks."
+msgstr "✗ 尚未解決；請選擇處理方式。%s 前未回應會自動採用和解，仍須支付費用並承擔風險。"
 
 #: scripts/ui/modals/settings_modal.gd:130
 msgid "✗ Used by %s. Choose another key."

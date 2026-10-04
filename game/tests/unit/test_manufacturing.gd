@@ -105,7 +105,7 @@ func test_bad_quote_quality_refund_and_no_double_refund() -> void:
 	runner.check(result["ok"], "defect returns issued")
 	runner.eq(float(result["refund"]), 220, "refund at invoiced selling price")
 	runner.check(Bank.credit() < credit, "customer defects reduce credit")
-	runner.check(Ledger.balance(entity, "refunds") >= 220, "contra revenue")
+	runner.check(absf(Ledger.balance(entity, "refunds")-(220-Tax.vat(220)))<.011, "refund reduces net revenue and reverses collected VAT")
 	runner.check(Ledger.balance(entity, "exp:penalties") > 0, "quality penalty")
 	Manufacturing.customer_return(job, 999999, false)
 	runner.check(not Manufacturing.customer_return(job, 1)["ok"], "refund capped at actual sale")
