@@ -165,7 +165,7 @@ msgstr ""
 msgid "%%|%[-+0-9.]*[sdif]"
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:290
+#: scripts/sim/legacy_business.gd:291
 msgid "%.0f units · price %s home dollars/unit · estimated contribution %s home dollars before other costs"
 msgstr ""
 
@@ -213,7 +213,7 @@ msgstr ""
 msgid "%d completed rentals"
 msgstr ""
 
-#: scripts/sim/insolvency.gd:202
+#: scripts/sim/insolvency.gd:203
 msgid "%d consecutive payrolls went unpaid"
 msgstr ""
 
@@ -333,7 +333,7 @@ msgstr ""
 msgid "%d parcels a trip"
 msgstr ""
 
-#: scripts/sim/cafe.gd:399
+#: scripts/sim/cafe.gd:404
 msgid "%d pastries binned."
 msgstr ""
 
@@ -389,12 +389,16 @@ msgstr ""
 msgid "%d units · %s/unit"
 msgstr ""
 
-#: scripts/sim/cafe.gd:395
+#: scripts/sim/cafe.gd:400
 msgid "%d walked out of the queue."
 msgstr ""
 
 #: scripts/ui/modals/settlement_modal.gd:56
 msgid "%d × %s from %s: %s"
+msgstr ""
+
+#: scripts/ui/modals/capital_market_modal.gd:117
+msgid "%d%% chance investors reject the listing."
 msgstr ""
 
 #: scripts/ui/energy_ui.gd:280
@@ -437,7 +441,7 @@ msgstr ""
 msgid "%s = %d%% of market · about %d days to sell"
 msgstr ""
 
-#: scripts/sim/cafe.gd:76
+#: scripts/sim/cafe.gd:81
 msgid "%s Café"
 msgstr ""
 
@@ -481,7 +485,7 @@ msgstr ""
 msgid "%s chose a rival quote. Review your price and try another RFQ."
 msgstr ""
 
-#: scripts/sim/cafe.gd:393
+#: scripts/sim/cafe.gd:398
 msgid "%s closed: %d customers, %s in the till."
 msgstr ""
 
@@ -613,11 +617,11 @@ msgstr ""
 msgid "%s rooms"
 msgstr ""
 
-#: scripts/sim/cafe.gd:374
+#: scripts/sim/cafe.gd:379
 msgid "%s served its first customer!"
 msgstr ""
 
-#: scripts/sim/cafe.gd:373
+#: scripts/sim/cafe.gd:378
 msgid "%s served its first customer."
 msgstr ""
 
@@ -633,7 +637,7 @@ msgstr ""
 msgid "%s shipped: %s."
 msgstr ""
 
-#: scripts/sim/cafe.gd:403
+#: scripts/sim/cafe.gd:408
 msgid "%s stayed shut today: nobody was behind the counter. Hire a barista (People tab) or work the counter yourself."
 msgstr ""
 
@@ -641,7 +645,7 @@ msgstr ""
 msgid "%s subscriptions — %d users"
 msgstr ""
 
-#: scripts/sim/cafe.gd:387
+#: scripts/sim/cafe.gd:392
 msgid "%s till: %d customers"
 msgstr ""
 
@@ -825,11 +829,11 @@ msgstr ""
 msgid "%s → %s · %d min driving and parking · parking %s"
 msgstr ""
 
-#: scripts/sim/life_legacy.gd:98
+#: scripts/sim/life_legacy.gd:104
 msgid "%s's next generation"
 msgstr ""
 
-#: scripts/sim/life_legacy.gd:75
+#: scripts/sim/life_legacy.gd:80
 msgid "%s's story leans toward %s, with a trace of %s. %s The next life begins with fewer resources; this record preserves what actually happened."
 msgstr ""
 
@@ -1065,7 +1069,7 @@ msgstr ""
 msgid "800 LED desk lamps for our autumn range. $28 each: $22,400."
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:279
+#: scripts/sim/legacy_business.gd:280
 msgid "90-day route comparison — explicit assumptions"
 msgstr ""
 
@@ -1173,7 +1177,7 @@ msgstr ""
 msgid "A change of owner"
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:243
+#: scripts/sim/legacy_business.gd:244
 msgid "A change of ownership"
 msgstr ""
 
@@ -1337,7 +1341,7 @@ msgstr ""
 msgid "A listing needs photos. You can spend time shooting them or pay Studio Lumen for professional photos."
 msgstr ""
 
-#: scripts/sim/global_market.gd:226
+#: scripts/sim/global_market.gd:227
 msgid "A live company and international account are required."
 msgstr ""
 
@@ -1397,7 +1401,7 @@ msgstr ""
 msgid "A monthly premium that covers accidents, theft and damage to your van and what is in it."
 msgstr ""
 
-#: scripts/sim/housing.gd:51
+#: scripts/sim/housing.gd:48
 msgid "A move is already booked. Keep it, cancel it or resolve the storage problem."
 msgstr ""
 
@@ -1421,7 +1425,7 @@ msgstr ""
 msgid "A new founder at Nexus Co-work has enough cash for one batch. Discuss product pricing or inventory cash flow; either conversation takes one hour and pays no fee."
 msgstr ""
 
-#: scripts/sim/life_legacy.gd:115
+#: scripts/sim/life_legacy.gd:121
 msgid "A new life at difficulty %d, carrying %s home dollars. Previous save: slot %d."
 msgstr ""
 
@@ -1429,7 +1433,7 @@ msgstr ""
 msgid "A new rule requires an accessible bay at every public charging station. Retrofit now, or apply for an exemption and risk fines."
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:267
+#: scripts/sim/legacy_business.gd:268
 msgid "A new start is still a story."
 msgstr ""
 
@@ -1757,7 +1761,7 @@ msgstr ""
 msgid "A staff member morale score measures how they feel about work and pay."
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:176
+#: scripts/sim/holding_groups.gd:200
 msgid "A subsidiary guarantee is unpaid."
 msgstr ""
 
@@ -2149,7 +2153,7 @@ msgstr ""
 msgid "Acquired market presence written off: %s"
 msgstr ""
 
-#: scripts/sim/capital_market.gd:181
+#: scripts/sim/capital_market.gd:198
 msgid "Acquisition integration completed; the staff attrition is recorded, without invented sales."
 msgstr ""
 
@@ -2633,6 +2637,18 @@ msgstr ""
 msgid "Answers customers and settles returns for you (replace if in stock, otherwise refund)."
 msgstr ""
 
+#: scripts/sim/city_future.gd:186
+msgid "Anti-corruption fine and legal cost"
+msgstr ""
+
+#: scripts/sim/legal.gd:111
+msgid "Anti-corruption fine: %s"
+msgstr ""
+
+#: scripts/sim/city_future.gd:182
+msgid "Anti-corruption office"
+msgstr ""
+
 #: data/synergies.json
 msgid "Any laptop or the co-working hot desk."
 msgstr ""
@@ -3097,7 +3113,7 @@ msgstr ""
 msgid "Aurelia goes electric."
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:264
+#: scripts/sim/legacy_business.gd:265
 msgid "Aurelia is still moving. Your ending opens free play; it does not manufacture a final profit."
 msgstr ""
 
@@ -3309,7 +3325,7 @@ msgstr ""
 msgid "Bags"
 msgstr ""
 
-#: scripts/sim/cafe.gd:341
+#: scripts/sim/cafe.gd:346
 msgid "Bakery delivery: %d pastries"
 msgstr ""
 
@@ -3325,7 +3341,7 @@ msgstr ""
 msgid "Bank"
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:173
+#: scripts/sim/holding_groups.gd:197
 msgid "Bank debt covered by holding guarantee: %s"
 msgstr ""
 
@@ -3569,7 +3585,7 @@ msgstr ""
 msgid "Board capital withdrawn: %s"
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:229
+#: scripts/sim/legacy_business.gd:228
 msgid "Board-approved employee ownership: %s"
 msgstr ""
 
@@ -3665,11 +3681,11 @@ msgstr ""
 msgid "Both businesses must run on the same company's books."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:106
+#: scripts/sim/capital_market.gd:116
 msgid "Both consecutive complete operating years must be profitable."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:98
+#: scripts/sim/capital_market.gd:108
 msgid "Bought %s; integration carries staff attrition and systems cost, without assumed revenue."
 msgstr ""
 
@@ -3677,7 +3693,7 @@ msgstr ""
 msgid "Bought a used van from Sam Okoro at Dockside Motors for %s."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:106
+#: scripts/sim/personal_assets.gd:142
 msgid "Bought personal car: %s."
 msgstr ""
 
@@ -3893,7 +3909,7 @@ msgstr ""
 msgid "Build a cash-flow spreadsheet for %s"
 msgstr ""
 
-#: scripts/sim/capital_market.gd:107
+#: scripts/sim/capital_market.gd:117
 msgid "Build a complete clean compliance year before applying; prior fines remain disclosed."
 msgstr ""
 
@@ -3933,7 +3949,7 @@ msgstr ""
 msgid "Build the client pitch from slogan, visual and tone cards."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:104
+#: scripts/sim/capital_market.gd:114
 msgid "Build the required actual annual revenue before applying."
 msgstr ""
 
@@ -3977,7 +3993,7 @@ msgstr ""
 msgid "Builds software. Each developer adds dev hours to your SaaS product every workday."
 msgstr ""
 
-#: data/story/achievements.json scripts/sim/legacy_business.gd:243
+#: data/story/achievements.json scripts/sim/legacy_business.gd:244
 msgid "Built with the team"
 msgstr ""
 
@@ -4189,7 +4205,7 @@ msgstr ""
 msgid "Buy the van (%s)"
 msgstr ""
 
-#: scripts/sim/housing.gd:39 scripts/sim/housing.gd:41
+#: scripts/sim/housing.gd:38
 msgid "Buy this home before arranging a move."
 msgstr ""
 
@@ -4493,7 +4509,7 @@ msgstr ""
 msgid "CafeInspectNow"
 msgstr ""
 
-#: scripts/sim/cafe.gd:462 scripts/ui/minigames/clerk_forms_game.gd:11
+#: scripts/sim/cafe.gd:467 scripts/ui/minigames/clerk_forms_game.gd:11
 msgid "Café"
 msgstr ""
 
@@ -4501,7 +4517,7 @@ msgstr ""
 msgid "Café Manager"
 msgstr ""
 
-#: scripts/sim/cafe.gd:125
+#: scripts/sim/cafe.gd:130
 msgid "Café fit-out: espresso machine, counter, tables"
 msgstr ""
 
@@ -4765,7 +4781,7 @@ msgstr ""
 msgid "Capital injected into %s"
 msgstr ""
 
-#: scripts/ui/modals/capital_market_modal.gd:110 scripts/ui/modals/capital_market_modal.gd:31 scripts/ui/modals/capital_market_modal.gd:58 scripts/ui/modals/capital_market_modal.gd:66
+#: scripts/ui/modals/capital_market_modal.gd:112 scripts/ui/modals/capital_market_modal.gd:31 scripts/ui/modals/capital_market_modal.gd:58 scripts/ui/modals/capital_market_modal.gd:66
 msgid "CapitalContinue"
 msgstr ""
 
@@ -4953,7 +4969,7 @@ msgstr ""
 msgid "Central Station"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:127
+#: scripts/sim/personal_assets.gd:163
 msgid "Central parking is full today. Take the metro or drive to another district."
 msgstr ""
 
@@ -5049,7 +5065,7 @@ msgstr ""
 msgid "Charge at a Helio station"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:130
+#: scripts/sim/personal_assets.gd:166
 msgid "Charge at an open Helio station before driving, or take the metro."
 msgstr ""
 
@@ -5249,7 +5265,7 @@ msgstr ""
 msgid "Choose a car class."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:99
+#: scripts/sim/personal_assets.gd:135
 msgid "Choose a car from the personal showroom."
 msgstr ""
 
@@ -5297,7 +5313,7 @@ msgstr ""
 msgid "Choose a fleet car."
 msgstr ""
 
-#: scripts/sim/fx_forward.gd:43
+#: scripts/sim/fx_forward.gd:56
 msgid "Choose a foreign currency, positive notional and a 30- or 60-day maturity."
 msgstr ""
 
@@ -5309,7 +5325,7 @@ msgstr ""
 msgid "Choose a free charging site."
 msgstr ""
 
-#: scripts/sim/housing.gd:38
+#: scripts/sim/housing.gd:37
 msgid "Choose a home that is available for moving."
 msgstr ""
 
@@ -5325,11 +5341,11 @@ msgstr ""
 msgid "Choose a listed car."
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:202
+#: scripts/sim/holding_groups.gd:226
 msgid "Choose a live subsidiary owned by this holding company."
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:61
+#: scripts/sim/holding_groups.gd:63
 msgid "Choose a live subsidiary with cash for the management service."
 msgstr ""
 
@@ -5461,11 +5477,11 @@ msgstr ""
 msgid "Choose an active route and an available company vehicle."
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:204
+#: scripts/sim/holding_groups.gd:228
 msgid "Choose an available buyer."
 msgstr ""
 
-#: scripts/sim/city_future.gd:78
+#: scripts/sim/city_future.gd:88
 msgid "Choose an available civic decision."
 msgstr ""
 
@@ -5473,11 +5489,11 @@ msgstr ""
 msgid "Choose an available ending."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:158
+#: scripts/sim/personal_assets.gd:194
 msgid "Choose an available furniture style."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:49
+#: scripts/sim/capital_market.gd:59
 msgid "Choose an available offer."
 msgstr ""
 
@@ -5485,7 +5501,7 @@ msgstr ""
 msgid "Choose an available vehicle. Wait for its current run or service to finish."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:141
+#: scripts/sim/personal_assets.gd:177
 msgid "Choose an electric personal car first."
 msgstr ""
 
@@ -5521,7 +5537,7 @@ msgstr ""
 msgid "Choose an open client brief."
 msgstr ""
 
-#: scripts/sim/legal.gd:60
+#: scripts/sim/legal.gd:65
 msgid "Choose an open dispute for this company."
 msgstr ""
 
@@ -5549,15 +5565,15 @@ msgstr ""
 msgid "Choose an open warranty claim."
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:95
+#: scripts/sim/holding_groups.gd:97
 msgid "Choose an outstanding bank loan of this holding company's subsidiary."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:191 scripts/sim/personal_assets.gd:54
+#: scripts/sim/personal_assets.gd:227 scripts/sim/personal_assets.gd:57 scripts/sim/personal_assets.gd:86
 msgid "Choose an owned home first."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:114
+#: scripts/sim/capital_market.gd:124
 msgid "Choose an underwriter."
 msgstr ""
 
@@ -5577,7 +5593,7 @@ msgstr ""
 msgid "Choose another leased workplace for employees."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:123
+#: scripts/sim/personal_assets.gd:159
 msgid "Choose another open district."
 msgstr ""
 
@@ -5605,11 +5621,11 @@ msgstr ""
 msgid "Choose employee ownership in the legacy chapter."
 msgstr ""
 
-#: scripts/sim/city_future.gd:51
+#: scripts/sim/city_future.gd:57
 msgid "Choose funded delivery or the civic partnership."
 msgstr ""
 
-#: scripts/ui/modals/fx_risk_modal.gd:70
+#: scripts/ui/modals/fx_risk_modal.gd:73
 msgid "Choose home-currency invoices"
 msgstr ""
 
@@ -5653,7 +5669,7 @@ msgstr ""
 msgid "Choose scale"
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:77
+#: scripts/sim/holding_groups.gd:79
 msgid "Choose sibling subsidiaries, actual stock and an affordable transfer price."
 msgstr ""
 
@@ -5673,7 +5689,7 @@ msgstr ""
 msgid "Choose the name carefully: it goes on your sign and your invoices."
 msgstr ""
 
-#: scripts/sim/life_legacy.gd:87
+#: scripts/sim/life_legacy.gd:93
 msgid "Choose the next generation or the next chapter of this character."
 msgstr ""
 
@@ -5685,7 +5701,7 @@ msgstr ""
 msgid "Choose thirty days of notice or pay one month to leave today. Deposits remain your asset, not income; stock and incoming orders must fit."
 msgstr ""
 
-#: scripts/sim/housing.gd:50
+#: scripts/sim/housing.gd:47
 msgid "Choose thirty days' notice or pay one month's termination fee."
 msgstr ""
 
@@ -5777,7 +5793,7 @@ msgstr ""
 msgid "City Hall, permits, registration, public services."
 msgstr ""
 
-#: scripts/sim/cafe.gd:452
+#: scripts/sim/cafe.gd:457
 msgid "City Hall: your food handling licence is approved."
 msgstr ""
 
@@ -5853,11 +5869,11 @@ msgstr ""
 msgid "Civic Clinic & Pharmacy"
 msgstr ""
 
-#: scripts/sim/city_future.gd:171
+#: scripts/sim/city_future.gd:198
 msgid "Civic chapter %d reviewed from recorded deliveries and decisions."
 msgstr ""
 
-#: scripts/sim/city_future.gd:122
+#: scripts/sim/city_future.gd:135
 msgid "Civic charging network"
 msgstr ""
 
@@ -5877,11 +5893,11 @@ msgstr ""
 msgid "Civic services and city decisions"
 msgstr ""
 
-#: scripts/sim/city_future.gd:62
+#: scripts/sim/city_future.gd:69
 msgid "Civic services ordered: %s home dollars."
 msgstr ""
 
-#: scripts/sim/city_future.gd:58
+#: scripts/sim/city_future.gd:65
 msgid "Civic supplier"
 msgstr ""
 
@@ -6181,7 +6197,7 @@ msgstr ""
 msgid "CloseInfo"
 msgstr ""
 
-#: scripts/sim/insolvency.gd:174
+#: scripts/sim/insolvency.gd:175
 msgid "Closed %s. Stock sold for %s; %s of debt written off. Starting again."
 msgstr ""
 
@@ -6345,7 +6361,7 @@ msgstr ""
 msgid "Collected tax is owed money, not revenue. Filing yourself uses time and risks a form correction; an accountant charges a fee for accurate filing."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:197
+#: scripts/sim/personal_assets.gd:233
 msgid "Collected tenant invoices: %s"
 msgstr ""
 
@@ -6425,7 +6441,7 @@ msgstr ""
 msgid "Company account"
 msgstr ""
 
-#: scripts/sim/capital_market.gd:94
+#: scripts/sim/capital_market.gd:104
 msgid "Company acquisition: %s"
 msgstr ""
 
@@ -6441,7 +6457,7 @@ msgstr ""
 msgid "Company cash must cover sea freight and arrival duty before dispatch."
 msgstr ""
 
-#: scripts/sim/fx_forward.gd:51
+#: scripts/sim/fx_forward.gd:64
 msgid "Company cash must cover the fee and refundable hedge collateral. Transfer cash or reduce the amount."
 msgstr ""
 
@@ -6449,7 +6465,7 @@ msgstr ""
 msgid "Company closed — decline this opportunity."
 msgstr ""
 
-#: scripts/sim/insolvency.gd:92
+#: scripts/sim/insolvency.gd:93
 msgid "Company closure is already recorded. Continue with another company."
 msgstr ""
 
@@ -6509,7 +6525,7 @@ msgstr ""
 msgid "Compare cash buffers and costs before expanding. Shocks expire; prices and wages can rise or fall."
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:291
+#: scripts/sim/legacy_business.gd:292
 msgid "Compare consolidation routes"
 msgstr ""
 
@@ -6669,7 +6685,7 @@ msgstr ""
 msgid "Complete the reply's requirements first."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:146
+#: scripts/sim/capital_market.gd:162
 msgid "Complete the roadshow and review the price first."
 msgstr ""
 
@@ -6829,7 +6845,7 @@ msgstr ""
 msgid "Consolidation and legacy"
 msgstr ""
 
-#: scripts/sim/capital_market.gd:38
+#: scripts/sim/capital_market.gd:48
 msgid "Consolidation opens: NPC companies review acquisitions and public listings."
 msgstr ""
 
@@ -6941,11 +6957,11 @@ msgstr ""
 msgid "Contract manager (home dollars / month)"
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:304
+#: scripts/sim/legacy_business.gd:305
 msgid "Contract manager fee paid"
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:300
+#: scripts/sim/legacy_business.gd:301
 msgid "Contract manager monthly fee: %s"
 msgstr ""
 
@@ -6977,7 +6993,7 @@ msgstr ""
 msgid "Conversions"
 msgstr ""
 
-#: scripts/sim/global_market.gd:236
+#: scripts/sim/global_market.gd:237
 msgid "Convert %s %s to home cash: %s"
 msgstr ""
 
@@ -6989,7 +7005,7 @@ msgstr ""
 msgid "Convert your first weekly foreign payout in Finance"
 msgstr ""
 
-#: scripts/sim/cafe.gd:76
+#: scripts/sim/cafe.gd:81
 msgid "Corner"
 msgstr ""
 
@@ -7729,7 +7745,7 @@ msgstr ""
 msgid "Debt written off"
 msgstr ""
 
-#: scripts/sim/insolvency.gd:131
+#: scripts/sim/insolvency.gd:132
 msgid "Debt written off in liquidation — %s"
 msgstr ""
 
@@ -8189,6 +8205,10 @@ msgstr ""
 msgid "Detail · %s"
 msgstr ""
 
+#: scripts/sim/capital_market.gd:164
+msgid "Detailed disclosures are still being reviewed. Continue operating until the stated listing date."
+msgstr ""
+
 #: scripts/ui/modals/business_board.gd:123
 msgid "Details / apply"
 msgstr ""
@@ -8377,7 +8397,7 @@ msgstr ""
 msgid "Dispute the claim"
 msgstr ""
 
-#: scripts/sim/legal.gd:86
+#: scripts/sim/legal.gd:91
 msgid "Disputed invoice recovered: %s"
 msgstr ""
 
@@ -8577,7 +8597,7 @@ msgstr ""
 msgid "Driving to %s: %d minutes, including parking."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:133
+#: scripts/sim/personal_assets.gd:169
 msgid "Driving, parking and maintenance: %s"
 msgstr ""
 
@@ -8605,7 +8625,7 @@ msgstr ""
 msgid "Due %s"
 msgstr ""
 
-#: scripts/sim/capital_market.gd:45
+#: scripts/sim/capital_market.gd:55
 msgid "Due diligence is still running. Continue operating until its stated date."
 msgstr ""
 
@@ -8649,11 +8669,11 @@ msgstr ""
 msgid "ENDING — STILL YOURS"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:152
+#: scripts/sim/personal_assets.gd:188
 msgid "EV charging: %s"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:154
+#: scripts/sim/personal_assets.gd:190
 msgid "EV grid electricity"
 msgstr ""
 
@@ -8957,7 +8977,7 @@ msgstr ""
 msgid "Emerging Market"
 msgstr ""
 
-#: scripts/sim/legal.gd:100
+#: scripts/sim/legal.gd:105
 msgid "Employee dispute compensation: %s"
 msgstr ""
 
@@ -8981,7 +9001,7 @@ msgstr ""
 msgid "Employee wages remain owed. IP disputes refer to completed media or manufacturing jobs; court success avoids compensation but never pays fictitious income."
 msgstr ""
 
-#: scripts/sim/legal.gd:98
+#: scripts/sim/legal.gd:103
 msgid "Employee wages settled: %s"
 msgstr ""
 
@@ -9195,6 +9215,10 @@ msgstr ""
 
 #: scripts/sim/forecast.gd:107
 msgid "Estimated sales"
+msgstr ""
+
+#: scripts/ui/modals/fx_risk_modal.gd:56
+msgid "Estimated unbooked sales of about %s %s are not hedgeable until they are booked."
 msgstr ""
 
 #: scripts/ui/hud.gd:255
@@ -9449,7 +9473,7 @@ msgstr ""
 msgid "External revenue"
 msgstr ""
 
-#: scripts/sim/insolvency.gd:154
+#: scripts/sim/insolvency.gd:155
 msgid "External shareholder liquidation payable"
 msgstr ""
 
@@ -9665,7 +9689,7 @@ msgstr ""
 msgid "Fee / collateral (home dollars)"
 msgstr ""
 
-#: scripts/ui/modals/fx_risk_modal.gd:57
+#: scripts/ui/modals/fx_risk_modal.gd:60
 msgid "Fee / refundable collateral (home dollars)"
 msgstr ""
 
@@ -9753,7 +9777,7 @@ msgstr ""
 msgid "Fill a group room block"
 msgstr ""
 
-#: scripts/sim/insolvency.gd:147
+#: scripts/sim/insolvency.gd:148
 msgid "Final distribution to the founder"
 msgstr ""
 
@@ -9865,7 +9889,7 @@ msgstr ""
 msgid "Finish the agreed scope before delivery."
 msgstr ""
 
-#: scripts/sim/housing.gd:49 scripts/ui/modals/home_move_modal.gd:17
+#: scripts/sim/housing.gd:46 scripts/ui/modals/home_move_modal.gd:17
 msgid "Finish the arrival tutorial before moving. Your first home stays at Riverside."
 msgstr ""
 
@@ -9873,7 +9897,7 @@ msgstr ""
 msgid "Finish the current recruitment first."
 msgstr ""
 
-#: scripts/sim/life_legacy.gd:82
+#: scripts/sim/life_legacy.gd:88
 msgid "Finish the epilogue or choose retirement before starting another life."
 msgstr ""
 
@@ -9885,7 +9909,7 @@ msgstr ""
 msgid "Finish the main story to start optional growth goals. Achievements already track your progress."
 msgstr ""
 
-#: scripts/sim/housing.gd:36
+#: scripts/sim/housing.gd:35
 msgid "Finish the pop-up weekend before moving home. Its unsold stock must return to this home."
 msgstr ""
 
@@ -9985,7 +10009,7 @@ msgstr ""
 msgid "First unhappy customer"
 msgstr ""
 
-#: scripts/sim/logistics_depth.gd:173
+#: scripts/sim/logistics_depth.gd:181
 msgid "First van"
 msgstr ""
 
@@ -10029,7 +10053,7 @@ msgstr ""
 msgid "Fitness studio"
 msgstr ""
 
-#: scripts/sim/cafe.gd:127
+#: scripts/sim/cafe.gd:132
 msgid "Fitted out %s."
 msgstr ""
 
@@ -10137,7 +10161,7 @@ msgstr ""
 msgid "Flowers gift"
 msgstr ""
 
-#: scripts/sim/cafe.gd:344
+#: scripts/sim/cafe.gd:349
 msgid "Flyers and a board for %s"
 msgstr ""
 
@@ -10161,7 +10185,7 @@ msgstr ""
 msgid "Food"
 msgstr ""
 
-#: data/help/glossary.json scripts/sim/cafe.gd:151 scripts/ui/modals/company_os.gd:1339
+#: data/help/glossary.json scripts/sim/cafe.gd:156 scripts/ui/modals/company_os.gd:1339
 msgid "Food handling licence"
 msgstr ""
 
@@ -10173,7 +10197,7 @@ msgstr ""
 msgid "Food handling licence at City Hall."
 msgstr ""
 
-#: scripts/sim/cafe.gd:451
+#: scripts/sim/cafe.gd:456
 msgid "Food handling licence granted."
 msgstr ""
 
@@ -10213,6 +10237,10 @@ msgstr ""
 msgid "For serving food and drink from your own premises. An inspector checks the unit; it takes two days."
 msgstr ""
 
+#: scripts/sim/personal_assets.gd:70
+msgid "Foreclosure sale of %s: the lender takes the home"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Foreign payouts keep their currency. Check the current rate before converting."
 msgstr ""
@@ -10229,7 +10257,7 @@ msgstr ""
 msgid "Foreign receipts retain their historical home-dollar book value until you convert them."
 msgstr ""
 
-#: scripts/sim/global_market.gd:289
+#: scripts/sim/global_market.gd:291
 msgid "Foreign receipts transferred for company closure"
 msgstr ""
 
@@ -10253,15 +10281,15 @@ msgstr ""
 msgid "Forty cars sold"
 msgstr ""
 
-#: scripts/sim/fx_forward.gd:65
+#: scripts/sim/fx_forward.gd:78
 msgid "Forward %s fee: %s"
 msgstr ""
 
-#: scripts/sim/fx_forward.gd:66
+#: scripts/sim/fx_forward.gd:79
 msgid "Forward %s refundable collateral: %s"
 msgstr ""
 
-#: scripts/sim/fx_forward.gd:85
+#: scripts/sim/fx_forward.gd:98
 msgid "Forward %s settled at %s: exchange result %s"
 msgstr ""
 
@@ -10289,7 +10317,7 @@ msgstr ""
 msgid "Founder payout (home dollars)"
 msgstr ""
 
-#: scripts/sim/insolvency.gd:52
+#: scripts/sim/insolvency.gd:53
 msgid "Founder rescue capital"
 msgstr ""
 
@@ -10297,7 +10325,7 @@ msgstr ""
 msgid "Founder sale proceeds (home dollars)"
 msgstr ""
 
-#: scripts/sim/capital_market.gd:61
+#: scripts/sim/capital_market.gd:71
 msgid "Founder share sale to %s: %s"
 msgstr ""
 
@@ -10305,7 +10333,7 @@ msgstr ""
 msgid "Founder shares granted to the team"
 msgstr ""
 
-#: scripts/sim/city_future.gd:209
+#: scripts/sim/city_future.gd:236
 msgid "Founder shares vested to the employee team"
 msgstr ""
 
@@ -10561,7 +10589,7 @@ msgstr ""
 msgid "Fund the air rerouting fee or wait for the port to reopen."
 msgstr ""
 
-#: scripts/sim/city_future.gd:96
+#: scripts/sim/city_future.gd:110
 msgid "Fund the assurance fee or submit the balanced bid."
 msgstr ""
 
@@ -10589,7 +10617,7 @@ msgstr ""
 msgid "Fund the regional agency application fee first."
 msgstr ""
 
-#: scripts/sim/city_future.gd:154
+#: scripts/sim/city_future.gd:167
 msgid "Fund the standby crew or choose the economy event."
 msgstr ""
 
@@ -10601,7 +10629,7 @@ msgstr ""
 msgid "Fund the tax payment and filing fee first."
 msgstr ""
 
-#: scripts/sim/city_future.gd:137
+#: scripts/sim/city_future.gd:150
 msgid "Fund the workshop or continue the civic volunteer program."
 msgstr ""
 
@@ -10609,7 +10637,7 @@ msgstr ""
 msgid "Furniture and invitations"
 msgstr ""
 
-#: scripts/ui/modals/fx_risk_modal.gd:69
+#: scripts/ui/modals/fx_risk_modal.gd:72
 msgid "Future overseas distributor offers can use home currency. Buyers take the exchange risk: acceptance is lower and their offer is cheaper. Existing invoices keep their agreed currency."
 msgstr ""
 
@@ -10989,15 +11017,15 @@ msgstr ""
 msgid "Group cash"
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:88
+#: scripts/sim/holding_groups.gd:90
 msgid "Group goods purchase: %s per unit"
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:87
+#: scripts/sim/holding_groups.gd:89
 msgid "Group goods sale: %s per unit"
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:108 scripts/sim/holding_groups.gd:109
+#: scripts/sim/holding_groups.gd:110 scripts/sim/holding_groups.gd:111
 msgid "Group interest accrued: %s"
 msgstr ""
 
@@ -11021,19 +11049,19 @@ msgstr ""
 msgid "Group jobs are big orders that need two or more industries. Unfinished parts can be subcontracted for a fee."
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:105 scripts/sim/holding_groups.gd:106
+#: scripts/sim/holding_groups.gd:107 scripts/sim/holding_groups.gd:108
 msgid "Group loan interest: %s"
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:49 scripts/sim/holding_groups.gd:50
+#: scripts/sim/holding_groups.gd:51 scripts/sim/holding_groups.gd:52
 msgid "Group loan principal: %s"
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:56 scripts/sim/holding_groups.gd:57
+#: scripts/sim/holding_groups.gd:58 scripts/sim/holding_groups.gd:59
 msgid "Group loan repayment: %s"
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:63 scripts/sim/holding_groups.gd:64
+#: scripts/sim/holding_groups.gd:65 scripts/sim/holding_groups.gd:66
 msgid "Group management service: %s"
 msgstr ""
 
@@ -11209,11 +11237,11 @@ msgstr ""
 msgid "Hairstyle"
 msgstr ""
 
-#: data/economy/capital_market.json scripts/sim/capital_market.gd:27 scripts/sim/legacy_business.gd:62
+#: data/economy/capital_market.json scripts/sim/capital_market.gd:33 scripts/sim/legacy_business.gd:62
 msgid "Hale Group"
 msgstr ""
 
-#: scripts/sim/capital_market.gd:175
+#: scripts/sim/capital_market.gd:192
 msgid "Hale Group acquired Meridian Supply; it is no longer an independent target."
 msgstr ""
 
@@ -11545,7 +11573,7 @@ msgstr ""
 msgid "Hey, did you get my messages? Call me when you can."
 msgstr ""
 
-#: scripts/sim/insolvency.gd:173
+#: scripts/sim/insolvency.gd:174
 msgid "Hey. I heard. Most founders I know closed something before the thing that worked. Dinner's on me."
 msgstr ""
 
@@ -11661,7 +11689,7 @@ msgstr ""
 msgid "HireTomas"
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:248 scripts/sim/staff.gd:146
+#: scripts/sim/legacy_business.gd:249 scripts/sim/staff.gd:146
 msgid "Hired %s as %s."
 msgstr ""
 
@@ -11729,15 +11757,15 @@ msgstr ""
 msgid "Home and personal car"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:162
+#: scripts/sim/personal_assets.gd:198
 msgid "Home decoration: %s"
 msgstr ""
 
-#: scripts/sim/housing.gd:58
+#: scripts/sim/housing.gd:55
 msgid "Home deposit paid: %s"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:73
+#: scripts/sim/personal_assets.gd:106
 msgid "Home management, maintenance and tax: %s"
 msgstr ""
 
@@ -11773,15 +11801,15 @@ msgstr ""
 msgid "Home roof"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:44
+#: scripts/sim/personal_assets.gd:50
 msgid "Home sale after fees: %s"
 msgstr ""
 
-#: scripts/sim/housing.gd:82
+#: scripts/sim/housing.gd:79
 msgid "Home termination fee: %s"
 msgstr ""
 
-#: data/help/glossary.json scripts/ui/modals/fx_risk_modal.gd:68
+#: data/help/glossary.json scripts/ui/modals/fx_risk_modal.gd:71
 msgid "Home-currency invoices"
 msgstr ""
 
@@ -11805,7 +11833,7 @@ msgstr ""
 msgid "Horizon Labs"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:176
+#: scripts/sim/personal_assets.gd:212
 msgid "Hosted %s at home."
 msgstr ""
 
@@ -11997,7 +12025,7 @@ msgstr ""
 msgid "I need somewhere to work."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:175
+#: scripts/sim/personal_assets.gd:211
 msgid "I noticed the coupe outside. It must be expensive to keep."
 msgstr ""
 
@@ -12117,7 +12145,7 @@ msgstr ""
 msgid "INVOICED"
 msgstr ""
 
-#: scripts/sim/legal.gd:105
+#: scripts/sim/legal.gd:116
 msgid "IP licence settlement: %s"
 msgstr ""
 
@@ -12289,7 +12317,7 @@ msgstr ""
 msgid "Incoming"
 msgstr ""
 
-#: scripts/sim/city_future.gd:96
+#: scripts/sim/city_future.gd:110
 msgid "Independent expo assurance fee"
 msgstr ""
 
@@ -12349,7 +12377,7 @@ msgstr ""
 msgid "Inherited café supplies: %d cups"
 msgstr ""
 
-#: scripts/sim/life_legacy.gd:111
+#: scripts/sim/life_legacy.gd:117
 msgid "Inherited capital: %s"
 msgstr ""
 
@@ -12553,7 +12581,7 @@ msgstr ""
 msgid "Integration staffing: %d people before, %d people after; systems fee %s home dollars."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:95
+#: scripts/sim/capital_market.gd:105
 msgid "Integration systems fee: %s"
 msgstr ""
 
@@ -12677,7 +12705,7 @@ msgstr ""
 msgid "International freight (home dollars)"
 msgstr ""
 
-#: scripts/sim/global_market.gd:313
+#: scripts/sim/global_market.gd:316
 msgid "International return postage"
 msgstr ""
 
@@ -12797,7 +12825,7 @@ msgstr ""
 msgid "Investors buy shares in a registered company."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:138
+#: scripts/sim/capital_market.gd:153
 msgid "Investors declined unsupported promises. The audit fee is not refunded."
 msgstr ""
 
@@ -13001,7 +13029,7 @@ msgstr ""
 msgid "Join the city proposal"
 msgstr ""
 
-#: scripts/sim/city_future.gd:164 scripts/sim/city_future.gd:32
+#: scripts/sim/city_future.gd:102 scripts/sim/city_future.gd:191 scripts/sim/city_future.gd:32 scripts/sim/city_future.gd:53
 msgid "Join the city proposal first."
 msgstr ""
 
@@ -13181,7 +13209,7 @@ msgstr ""
 msgid "Karu Unit"
 msgstr ""
 
-#: scripts/sim/housing.gd:57
+#: scripts/sim/housing.gd:54
 msgid "Keep %s personally for the new deposit, moving and termination costs."
 msgstr ""
 
@@ -13193,7 +13221,7 @@ msgstr ""
 msgid "Keep at most the incurred production cost from the deposit; refund the rest."
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:243
+#: scripts/sim/legacy_business.gd:244
 msgid "Keep building"
 msgstr ""
 
@@ -13229,7 +13257,7 @@ msgstr ""
 msgid "Keep enough cash for the ticket, or call Omar by video."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:116
+#: scripts/sim/capital_market.gd:126
 msgid "Keep enough company cash for the audit fee."
 msgstr ""
 
@@ -13241,11 +13269,11 @@ msgstr ""
 msgid "Keep enough company cash for the weekend rent."
 msgstr ""
 
-#: scripts/sim/housing.gd:78
+#: scripts/sim/housing.gd:75
 msgid "Keep enough personal cash for the agreed moving and termination costs."
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:55
+#: scripts/sim/holding_groups.gd:57
 msgid "Keep enough subsidiary cash and choose an outstanding principal amount."
 msgstr ""
 
@@ -13281,7 +13309,7 @@ msgstr ""
 msgid "Keep my plans"
 msgstr ""
 
-#: scripts/ui/modals/capital_market_modal.gd:110 scripts/ui/modals/capital_market_modal.gd:58 scripts/ui/modals/capital_market_modal.gd:66 scripts/ui/modals/capital_market_modal.gd:72
+#: scripts/ui/modals/capital_market_modal.gd:112 scripts/ui/modals/capital_market_modal.gd:58 scripts/ui/modals/capital_market_modal.gd:66 scripts/ui/modals/capital_market_modal.gd:72
 msgid "Keep operating"
 msgstr ""
 
@@ -13289,7 +13317,7 @@ msgstr ""
 msgid "Keep operating, sell at the current Chapter 12 valuation, share ownership with employees, or mentor with a contract manager."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:132
+#: scripts/sim/personal_assets.gd:168
 msgid "Keep personal cash for parking, fuel and due maintenance, or take the metro."
 msgstr ""
 
@@ -13317,7 +13345,7 @@ msgstr ""
 msgid "Keep the company private"
 msgstr ""
 
-#: scripts/sim/city_future.gd:119
+#: scripts/sim/city_future.gd:131
 msgid "Keep the consultation budget or join the city partnership."
 msgstr ""
 
@@ -13349,7 +13377,7 @@ msgstr ""
 msgid "Keep the old hours to avoid admitting a mistake"
 msgstr ""
 
-#: scripts/sim/city_future.gd:54
+#: scripts/sim/city_future.gd:61
 msgid "Keep the service budget or join the civic partnership instead."
 msgstr ""
 
@@ -13433,7 +13461,7 @@ msgstr ""
 msgid "Ken: supplier invoice checklist · part 3"
 msgstr ""
 
-#: scripts/sim/capital_market.gd:75
+#: scripts/sim/capital_market.gd:85
 msgid "Kept the company private: no listing capital, no public quarterly obligation."
 msgstr ""
 
@@ -13837,7 +13865,7 @@ msgstr ""
 msgid "Lease the brokerage office"
 msgstr ""
 
-#: scripts/sim/cafe.gd:175
+#: scripts/sim/cafe.gd:180
 msgid "Lease the café unit first."
 msgstr ""
 
@@ -13857,7 +13885,7 @@ msgstr ""
 msgid "Lease the showroom at Gateway Car Rental."
 msgstr ""
 
-#: scripts/sim/cafe.gd:119
+#: scripts/sim/cafe.gd:124
 msgid "Lease the unit first."
 msgstr ""
 
@@ -13941,7 +13969,7 @@ msgstr ""
 msgid "Left the job at %s."
 msgstr ""
 
-#: data/story/chapters.json data/world/years.json scripts/sim/legacy_business.gd:243 scripts/ui/phone_ui.gd:166
+#: data/story/chapters.json data/world/years.json scripts/sim/legacy_business.gd:244 scripts/ui/phone_ui.gd:166
 msgid "Legacy"
 msgstr ""
 
@@ -13949,7 +13977,7 @@ msgstr ""
 msgid "Legacy archetypes"
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:238
+#: scripts/sim/legacy_business.gd:239
 msgid "Legacy choice: %s."
 msgstr ""
 
@@ -13961,7 +13989,7 @@ msgstr ""
 msgid "Legal Dispute"
 msgstr ""
 
-#: scripts/sim/legal.gd:117
+#: scripts/sim/legal.gd:128
 msgid "Legal case %s closed. Recovered %s; paid %s."
 msgstr ""
 
@@ -13977,7 +14005,7 @@ msgstr ""
 msgid "Legal fee for an insurer dispute"
 msgstr ""
 
-#: scripts/sim/legal.gd:64
+#: scripts/sim/legal.gd:69
 msgid "Legal fee: %s"
 msgstr ""
 
@@ -14217,7 +14245,7 @@ msgstr ""
 msgid "Liquidate stock"
 msgstr ""
 
-#: scripts/sim/insolvency.gd:127
+#: scripts/sim/insolvency.gd:128
 msgid "Liquidation payment — %s"
 msgstr ""
 
@@ -14257,11 +14285,11 @@ msgstr ""
 msgid "Listed %s at %s. Took %s."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:165
+#: scripts/sim/capital_market.gd:182
 msgid "Listed shares at %s home dollars per share; quarterly reporting and board votes now apply."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:117
+#: scripts/sim/capital_market.gd:127
 msgid "Listing audit fee: %s"
 msgstr ""
 
@@ -14417,7 +14445,7 @@ msgstr ""
 msgid "Locked a group block of %d rooms for %s."
 msgstr ""
 
-#: scripts/ui/modals/fx_risk_modal.gd:56
+#: scripts/ui/modals/fx_risk_modal.gd:59
 msgid "Locked quote (home dollars/foreign unit)"
 msgstr ""
 
@@ -14789,7 +14817,7 @@ msgstr ""
 msgid "Make room"
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:243
+#: scripts/sim/legacy_business.gd:244
 msgid "Make room for new founders"
 msgstr ""
 
@@ -15329,7 +15357,7 @@ msgstr ""
 msgid "Meet this person before offering a gift."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:167
+#: scripts/sim/personal_assets.gd:203
 msgid "Meet this person first, then invite them home."
 msgstr ""
 
@@ -15741,7 +15769,7 @@ msgstr ""
 msgid "Mortgage rate rise"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:45
+#: scripts/sim/personal_assets.gd:51
 msgid "Mortgage repaid: %s"
 msgstr ""
 
@@ -15753,7 +15781,7 @@ msgstr ""
 msgid "Mortgage terms require 20–30% down and 20–30 years."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:84
+#: scripts/sim/personal_assets.gd:118
 msgid "Mortgage unpaid. Raise personal cash, rent another home or sell an empty property."
 msgstr ""
 
@@ -15785,7 +15813,7 @@ msgstr ""
 msgid "Move left"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:49
+#: scripts/sim/personal_assets.gd:81
 msgid "Move out and choose valid rent terms before listing this home."
 msgstr ""
 
@@ -15833,11 +15861,11 @@ msgstr ""
 msgid "Move up"
 msgstr ""
 
-#: scripts/sim/housing.gd:96
+#: scripts/sim/housing.gd:91
 msgid "Moved to %s; monthly rent %s."
 msgstr ""
 
-#: autoload/game_state.gd:45 scripts/sim/life_legacy.gd:114
+#: autoload/game_state.gd:45 scripts/sim/life_legacy.gd:120
 msgid "Moved to Aurelia City with $%s in savings."
 msgstr ""
 
@@ -15857,7 +15885,7 @@ msgstr ""
 msgid "Moving home"
 msgstr ""
 
-#: scripts/sim/housing.gd:83
+#: scripts/sim/housing.gd:80
 msgid "Moving service: %s"
 msgstr ""
 
@@ -16249,7 +16277,7 @@ msgstr ""
 msgid "Next! Hi. What can I do for you?"
 msgstr ""
 
-#: scripts/sim/life_legacy.gd:109
+#: scripts/sim/life_legacy.gd:115
 msgid "Next-life starting capital adjustment"
 msgstr ""
 
@@ -16377,7 +16405,7 @@ msgstr ""
 msgid "Nia Park: internship learning portfolio · part 3"
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:134 scripts/sim/legacy_business.gd:192 scripts/sim/legacy_business.gd:290 scripts/ui/modals/legacy_modal.gd:61
+#: scripts/sim/legacy_business.gd:134 scripts/sim/legacy_business.gd:192 scripts/sim/legacy_business.gd:291 scripts/ui/modals/legacy_modal.gd:61
 msgid "Niche"
 msgstr ""
 
@@ -16441,7 +16469,7 @@ msgstr ""
 msgid "No active product price is available. The expansion ended through the review or company-closure alternative, without invented sales."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:122
+#: scripts/sim/capital_market.gd:132
 msgid "No audit is waiting. Review the current listing step."
 msgstr ""
 
@@ -16461,7 +16489,7 @@ msgstr ""
 msgid "No changes."
 msgstr ""
 
-#: scripts/sim/insolvency.gd:91
+#: scripts/sim/insolvency.gd:92
 msgid "No company to close."
 msgstr ""
 
@@ -16469,7 +16497,7 @@ msgstr ""
 msgid "No completed challenges yet."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:204
+#: scripts/sim/capital_market.gd:221
 msgid "No consolidation ownership route was recorded."
 msgstr ""
 
@@ -16513,7 +16541,7 @@ msgstr ""
 msgid "No employees yet. Every order is packed by you, which is why time matters."
 msgstr ""
 
-#: scripts/sim/life_legacy.gd:83
+#: scripts/sim/life_legacy.gd:89
 msgid "No empty save slot. Keep this life and manage saves from the title screen."
 msgstr ""
 
@@ -16525,7 +16553,7 @@ msgstr ""
 msgid "No fleet car needs service."
 msgstr ""
 
-#: scripts/sim/global_market.gd:230
+#: scripts/sim/global_market.gd:231
 msgid "No foreign payout is ready to convert."
 msgstr ""
 
@@ -16589,7 +16617,7 @@ msgstr ""
 msgid "No milk"
 msgstr ""
 
-#: scripts/sim/housing.gd:73
+#: scripts/sim/housing.gd:70
 msgid "No move is booked. Choose a home first."
 msgstr ""
 
@@ -16621,11 +16649,11 @@ msgstr ""
 msgid "No outside purchase to replace yet."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:196
+#: scripts/sim/personal_assets.gd:232
 msgid "No overdue tenant invoices are ready. Wait thirty days after the invoice."
 msgstr ""
 
-#: scripts/sim/city_future.gd:81
+#: scripts/sim/city_future.gd:91
 msgid "No owned team is available. Choose the culture partnership instead."
 msgstr ""
 
@@ -16645,7 +16673,7 @@ msgstr ""
 msgid "No rating yet"
 msgstr ""
 
-#: scripts/sim/industry_guidance.gd:78
+#: scripts/sim/industry_guidance.gd:83
 msgid "No recovery slot fits this week. Free a machine or choose outsourcing."
 msgstr ""
 
@@ -16993,8 +17021,8 @@ msgstr ""
 msgid "Notifications only.\nManage at a desk: Company OS."
 msgstr ""
 
-#: scripts/sim/fx_forward.gd:45
-msgid "Notional exceeds receipts and estimated sales available to hedge. Reduce the amount."
+#: scripts/sim/fx_forward.gd:58
+msgid "Notional exceeds booked receipts and invoices available to hedge. Estimated sales can be hedged once they are booked."
 msgstr ""
 
 #: autoload/clock.gd:14
@@ -17193,7 +17221,7 @@ msgstr ""
 msgid "Office Professional"
 msgstr ""
 
-#: scripts/sim/insolvency.gd:113 scripts/ui/modals/insolvency_modal.gd:65
+#: scripts/sim/insolvency.gd:114 scripts/ui/modals/insolvency_modal.gd:65
 msgid "Office deposit returned"
 msgstr ""
 
@@ -17241,11 +17269,11 @@ msgstr ""
 msgid "Old Town"
 msgstr ""
 
-#: scripts/sim/cafe.gd:446
+#: scripts/sim/cafe.gd:451
 msgid "Old Town Roasters delivered supplies for %d cups."
 msgstr ""
 
-#: scripts/sim/cafe.gd:181
+#: scripts/sim/cafe.gd:186
 msgid "Old Town Roasters: supplies for %d cups"
 msgstr ""
 
@@ -17577,7 +17605,7 @@ msgstr ""
 msgid "Open an international account at Nexus Bank; Marcus can explain the fee"
 msgstr ""
 
-#: scripts/sim/fx_forward.gd:41
+#: scripts/sim/fx_forward.gd:54
 msgid "Open an international company account first."
 msgstr ""
 
@@ -17705,7 +17733,7 @@ msgstr ""
 msgid "Open the factory"
 msgstr ""
 
-#: scripts/sim/industry_guidance.gd:63
+#: scripts/sim/industry_guidance.gd:68
 msgid "Open the factory before planning recovery."
 msgstr ""
 
@@ -17749,7 +17777,7 @@ msgstr ""
 msgid "Open the solar business"
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:209
+#: scripts/sim/holding_groups.gd:233
 msgid "Open the subsidiary business account before seeking an acquisition offer."
 msgstr ""
 
@@ -17873,7 +17901,7 @@ msgstr ""
 msgid "Operate three different businesses."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:103
+#: scripts/sim/capital_market.gd:113
 msgid "Operate through two complete years before applying."
 msgstr ""
 
@@ -18061,7 +18089,7 @@ msgstr ""
 msgid "Other operating expense"
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:212
+#: scripts/sim/holding_groups.gd:236
 msgid "Other shareholders keep their rights. Sell only a wholly held subsidiary."
 msgstr ""
 
@@ -18169,7 +18197,7 @@ msgstr ""
 msgid "Overseas markets open in Chapter 13."
 msgstr ""
 
-#: scripts/sim/global_market.gd:300
+#: scripts/sim/global_market.gd:303
 msgid "Overseas parcel written off at closure"
 msgstr ""
 
@@ -18181,7 +18209,7 @@ msgstr ""
 msgid "Overseas payouts"
 msgstr ""
 
-#: scripts/sim/global_market.gd:275
+#: scripts/sim/global_market.gd:277
 msgid "Overseas refund %s: %s %s"
 msgstr ""
 
@@ -18337,7 +18365,7 @@ msgstr ""
 msgid "Ownership does not improve business output. Keep personal cash for these costs. Rent can be unpaid; resale prices move and fees can leave negative equity."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:102 scripts/sim/capital_market.gd:41 scripts/sim/capital_market.gd:72
+#: scripts/sim/capital_market.gd:112 scripts/sim/capital_market.gd:51 scripts/sim/capital_market.gd:82
 msgid "Ownership is already committed. Review the recorded route."
 msgstr ""
 
@@ -18549,7 +18577,7 @@ msgstr ""
 msgid "Paid medical bill: %s"
 msgstr ""
 
-#: scripts/sim/city_future.gd:154
+#: scripts/sim/city_future.gd:167
 msgid "Paid standby crew for the city event"
 msgstr ""
 
@@ -18557,7 +18585,7 @@ msgstr ""
 msgid "Paid supplier invoice %s: %s"
 msgstr ""
 
-#: scripts/sim/city_future.gd:137
+#: scripts/sim/city_future.gd:150
 msgid "Paid workplace culture workshop"
 msgstr ""
 
@@ -18621,7 +18649,7 @@ msgstr ""
 msgid "Park"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:146
+#: scripts/sim/personal_assets.gd:182
 msgid "Park beside an open Helio charging station first."
 msgstr ""
 
@@ -18969,7 +18997,7 @@ msgstr ""
 msgid "People"
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:265
+#: scripts/sim/legacy_business.gd:266
 msgid "People along the way"
 msgstr ""
 
@@ -19001,7 +19029,7 @@ msgstr ""
 msgid "Personal Banker"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:153
+#: scripts/sim/personal_assets.gd:189
 msgid "Personal EV metered charging: %s"
 msgstr ""
 
@@ -19021,15 +19049,15 @@ msgstr ""
 msgid "Personal car and commute"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:105 scripts/sim/personal_assets.gd:93
+#: scripts/sim/personal_assets.gd:129 scripts/sim/personal_assets.gd:141
 msgid "Personal car insurance: %s"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:102
+#: scripts/sim/personal_assets.gd:138
 msgid "Personal car purchase: %s"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:183
+#: scripts/sim/personal_assets.gd:219
 msgid "Personal car sold: %s"
 msgstr ""
 
@@ -19065,7 +19093,7 @@ msgstr ""
 msgid "Personal home purchase: %s"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:80
+#: scripts/sim/personal_assets.gd:113
 msgid "Personal mortgage payment: %s"
 msgstr ""
 
@@ -19229,7 +19257,7 @@ msgstr ""
 msgid "Placed %d/%d · damage risk %d%%"
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:34
+#: scripts/sim/holding_groups.gd:35
 msgid "Placed %s into %s through a book-value share transfer."
 msgstr ""
 
@@ -19517,7 +19545,7 @@ msgstr ""
 msgid "Preventive maintenance: %s"
 msgstr ""
 
-#: scripts/sim/housing.gd:85
+#: scripts/sim/housing.gd:82
 msgid "Previous home deposit returned: %s"
 msgstr ""
 
@@ -19547,6 +19575,10 @@ msgstr ""
 
 #: data/economy/workflows.json
 msgid "Price confusion"
+msgstr ""
+
+#: scripts/ui/modals/capital_market_modal.gd:116
+msgid "Price effect %+d%%, listing delay %d days."
 msgstr ""
 
 #: scripts/ui/modals/legacy_modal.gd:80
@@ -19861,11 +19893,11 @@ msgstr ""
 msgid "Public reputation (percent)"
 msgstr ""
 
-#: scripts/sim/capital_market.gd:154
+#: scripts/sim/capital_market.gd:171
 msgid "Public share subscription: %s"
 msgstr ""
 
-#: scripts/sim/city_future.gd:119
+#: scripts/sim/city_future.gd:131
 msgid "Public vehicle transition consultation"
 msgstr ""
 
@@ -19981,7 +20013,7 @@ msgstr ""
 msgid "Quarter: actual %s home dollars, expected %s home dollars. Share price %s home dollars per share."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:196
+#: scripts/sim/capital_market.gd:213
 msgid "Quarterly report published: actual results changed the quoted share price."
 msgstr ""
 
@@ -20197,7 +20229,7 @@ msgstr ""
 msgid "Ran out"
 msgstr ""
 
-#: scripts/sim/cafe.gd:397
+#: scripts/sim/cafe.gd:402
 msgid "Ran out of coffee for %d."
 msgstr ""
 
@@ -20497,7 +20529,7 @@ msgstr ""
 msgid "Receivables sold (80%)"
 msgstr ""
 
-#: scripts/sim/insolvency.gd:103
+#: scripts/sim/insolvency.gd:104
 msgid "Receivables sold to a collector (80%)"
 msgstr ""
 
@@ -20593,7 +20625,7 @@ msgstr ""
 msgid "Record retirement and review this life"
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:266
+#: scripts/sim/legacy_business.gd:267
 msgid "Recorded deliveries reached %d overseas regions. Company cash now: %s home dollars."
 msgstr ""
 
@@ -20621,7 +20653,7 @@ msgstr ""
 msgid "Recovery consultation: %s"
 msgstr ""
 
-#: scripts/sim/industry_guidance.gd:64
+#: scripts/sim/industry_guidance.gd:69
 msgid "Recovery is already planned. Finish the real order."
 msgstr ""
 
@@ -20997,7 +21029,7 @@ msgstr ""
 msgid "Relationships introduce paid work and useful information. They never increase demand, scores or profit by themselves."
 msgstr ""
 
-#: scripts/sim/insolvency.gd:93
+#: scripts/sim/insolvency.gd:94
 msgid "Release or sell the live subsidiaries before closing their holding company."
 msgstr ""
 
@@ -21149,7 +21181,7 @@ msgstr ""
 msgid "Rental interrupted: %s"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:90
+#: scripts/sim/personal_assets.gd:126
 msgid "Rental management fee: %s"
 msgstr ""
 
@@ -21385,7 +21417,7 @@ msgstr ""
 msgid "Reserved %s. Notice ends %s; current rent continues until moving day."
 msgstr ""
 
-#: scripts/sim/housing.gd:68
+#: scripts/sim/housing.gd:65
 msgid "Reserved home deposit returned: %s"
 msgstr ""
 
@@ -21477,7 +21509,7 @@ msgstr ""
 msgid "Restructure the loan with Nexus Bank (24 months, +3% interest, credit hit)"
 msgstr ""
 
-#: scripts/sim/insolvency.gd:72
+#: scripts/sim/insolvency.gd:73
 msgid "Restructuring fee — loan %s"
 msgstr ""
 
@@ -21521,7 +21553,7 @@ msgstr ""
 msgid "Retailers warn of empty shelves before the holidays."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:92
+#: scripts/sim/capital_market.gd:102
 msgid "Retain cash for the purchase and integration fee, or arrange a bank loan."
 msgstr ""
 
@@ -21597,7 +21629,7 @@ msgstr ""
 msgid "Return to free play"
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:268
+#: scripts/sim/legacy_business.gd:269
 msgid "Return to free play and keep building from the actual books. Growth goals continue."
 msgstr ""
 
@@ -21621,7 +21653,7 @@ msgstr ""
 msgid "Returned %d units · %s · %s"
 msgstr ""
 
-#: scripts/sim/global_market.gd:318
+#: scripts/sim/global_market.gd:321
 msgid "Returned overseas goods restocked"
 msgstr ""
 
@@ -21933,7 +21965,7 @@ msgstr ""
 msgid "Roadmap delivered"
 msgstr ""
 
-#: scripts/ui/modals/capital_market_modal.gd:108
+#: scripts/ui/modals/capital_market_modal.gd:109
 msgid "RoadshowPromise"
 msgstr ""
 
@@ -22557,11 +22589,11 @@ msgstr ""
 msgid "Save the battery course fee first."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:101
+#: scripts/sim/personal_assets.gd:137
 msgid "Save the car price personally first."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:151
+#: scripts/sim/personal_assets.gd:187
 msgid "Save the charging cost or take the metro."
 msgstr ""
 
@@ -22609,7 +22641,7 @@ msgstr ""
 msgid "Save the flash-sale cost first."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:161
+#: scripts/sim/personal_assets.gd:197
 msgid "Save the furniture cost personally first."
 msgstr ""
 
@@ -22629,7 +22661,7 @@ msgstr ""
 msgid "Save the insurance premium first."
 msgstr ""
 
-#: scripts/sim/legal.gd:63
+#: scripts/sim/legal.gd:68
 msgid "Save the legal fee first."
 msgstr ""
 
@@ -22713,7 +22745,7 @@ msgstr ""
 msgid "Saved (slot %d)."
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:134 scripts/sim/legacy_business.gd:192 scripts/sim/legacy_business.gd:290 scripts/ui/modals/legacy_modal.gd:61
+#: scripts/sim/legacy_business.gd:134 scripts/sim/legacy_business.gd:192 scripts/sim/legacy_business.gd:291 scripts/ui/modals/legacy_modal.gd:61
 msgid "Scale"
 msgstr ""
 
@@ -22817,7 +22849,7 @@ msgstr ""
 msgid "Second location"
 msgstr ""
 
-#: scripts/sim/logistics_depth.gd:173
+#: scripts/sim/logistics_depth.gd:181
 msgid "Second van"
 msgstr ""
 
@@ -22949,7 +22981,7 @@ msgstr ""
 msgid "Sell ten cars."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:97
+#: scripts/sim/personal_assets.gd:133
 msgid "Sell the current personal car before buying another."
 msgstr ""
 
@@ -23389,7 +23421,7 @@ msgstr ""
 msgid "ShopLane Global"
 msgstr ""
 
-#: scripts/sim/global_market.gd:214
+#: scripts/sim/global_market.gd:215
 msgid "ShopLane Global payout: %s %s"
 msgstr ""
 
@@ -23569,7 +23601,7 @@ msgstr ""
 msgid "Sign buyer contract and buy supplier cargo"
 msgstr ""
 
-#: scripts/ui/modals/fx_risk_modal.gd:60
+#: scripts/ui/modals/fx_risk_modal.gd:63
 msgid "Sign forward hedge"
 msgstr ""
 
@@ -23865,7 +23897,7 @@ msgstr ""
 msgid "Sold abroad"
 msgstr ""
 
-#: scripts/sim/capital_market.gd:68
+#: scripts/sim/capital_market.gd:78
 msgid "Sold founder shares to %s for %s; the company continues under its new owner."
 msgstr ""
 
@@ -24441,7 +24473,7 @@ msgstr ""
 msgid "Subsidiary funds belong to its holding company. Use a group loan or management service."
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:172
+#: scripts/sim/holding_groups.gd:196
 msgid "Subsidiary guarantee settled: %s"
 msgstr ""
 
@@ -24449,24 +24481,20 @@ msgstr ""
 msgid "Subsidiary investment removed"
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:198
+#: scripts/sim/holding_groups.gd:222
 msgid "Subsidiary loan collected or written off: %s"
 msgstr ""
 
-#: scripts/sim/insolvency.gd:160
+#: scripts/sim/insolvency.gd:161
 msgid "Subsidiary or founder liquidation: %s"
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:40
+#: scripts/sim/holding_groups.gd:41
 msgid "Subsidiary released at book value: %s"
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:215
+#: scripts/sim/holding_groups.gd:239
 msgid "Subsidiary sale: %s"
-msgstr ""
-
-#: scripts/sim/holding_groups.gd:29
-msgid "Subsidiary shares transferred: %s"
 msgstr ""
 
 #: scripts/ui/energy_ui.gd:63
@@ -24553,7 +24581,7 @@ msgstr ""
 msgid "Supplier bills payable"
 msgstr ""
 
-#: scripts/sim/legal.gd:94
+#: scripts/sim/legal.gd:99
 msgid "Supplier breach settlement: %s"
 msgstr ""
 
@@ -25017,7 +25045,7 @@ msgstr ""
 msgid "Tenant rent arrears"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:88
+#: scripts/sim/personal_assets.gd:124
 msgid "Tenant rent invoice: %s"
 msgstr ""
 
@@ -25041,7 +25069,7 @@ msgstr ""
 msgid "Textiles"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:174
+#: scripts/sim/personal_assets.gd:210
 msgid "Thank you for inviting me. Let's sit down and talk."
 msgstr ""
 
@@ -25265,7 +25293,7 @@ msgstr ""
 msgid "The auction runs Wednesdays 09:00–17:00. Next one in %d days: inspect lots now, bid then."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:123
+#: scripts/sim/capital_market.gd:133
 msgid "The audit is still running. Continue operating until its stated date."
 msgstr ""
 
@@ -25285,11 +25313,11 @@ msgstr ""
 msgid "The bank deducts 1.5% from a foreign payout conversion at the current rate."
 msgstr ""
 
-#: scripts/sim/insolvency.gd:69
+#: scripts/sim/insolvency.gd:70
 msgid "The bank won't restructure with this credit history."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:150
+#: scripts/sim/personal_assets.gd:186
 msgid "The battery is already full. Choose a destination."
 msgstr ""
 
@@ -25317,15 +25345,15 @@ msgstr ""
 msgid "The board rejected dilution for the team grant. Choose another legacy route."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:93
+#: scripts/sim/capital_market.gd:103
 msgid "The board rejected this large purchase. Reduce the commitment or keep operating."
 msgstr ""
 
-#: scripts/sim/city_future.gd:131 scripts/sim/city_future.gd:82
+#: scripts/sim/city_future.gd:144 scripts/sim/city_future.gd:92
 msgid "The board will not authorize options. Choose wages or culture instead."
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:266
+#: scripts/sim/legacy_business.gd:267
 msgid "The board-approved team grant transfers existing shares. It creates no revenue or personal payout."
 msgstr ""
 
@@ -25477,7 +25505,7 @@ msgstr ""
 msgid "The civic decade"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:174
+#: scripts/sim/personal_assets.gd:210
 msgid "The clean blue lines suit this room. Let's talk about your plans."
 msgstr ""
 
@@ -25513,7 +25541,7 @@ msgstr ""
 msgid "The company belongs to Hale Group now: no money moves between it and you."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:150
+#: scripts/sim/capital_market.gd:167
 msgid "The company books changed after pricing. Rebuild the record and reapply, or remain private."
 msgstr ""
 
@@ -25537,8 +25565,12 @@ msgstr ""
 msgid "The company is solvent again. Your savings took the hit."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:47
+#: scripts/sim/capital_market.gd:57
 msgid "The company no longer has positive sale value. Keep operating or remain private."
+msgstr ""
+
+#: scripts/sim/city_future.gd:134 scripts/sim/city_future.gd:59
+msgid "The company that owns this proposal is closed. Join the civic partnership instead."
 msgstr ""
 
 #: data/story/personal/ruiz.json
@@ -25553,7 +25585,7 @@ msgstr ""
 msgid "The current condition determines pass, improvement closure or a fine."
 msgstr ""
 
-#: scripts/sim/life_legacy.gd:92
+#: scripts/sim/life_legacy.gd:98
 msgid "The current life could not be saved. Keep playing and try again."
 msgstr ""
 
@@ -25681,7 +25713,7 @@ msgstr ""
 msgid "The first-home viewing guide now has conflicting notes. Diane Harlow wants a version that other people can check. How do you resolve the conflict?"
 msgstr ""
 
-#: scripts/sim/cafe.gd:124
+#: scripts/sim/cafe.gd:129
 msgid "The fit-out costs %s."
 msgstr ""
 
@@ -25785,7 +25817,11 @@ msgstr ""
 msgid "The ledger averages what you paid for the units of a product at a stock location."
 msgstr ""
 
-#: scripts/sim/cafe.gd:150 scripts/sim/compliance.gd:95
+#: scripts/sim/personal_assets.gd:78
+msgid "The lender foreclosed on %s after missed mortgage payments."
+msgstr ""
+
+#: scripts/sim/cafe.gd:155 scripts/sim/compliance.gd:95
 msgid "The licence fee is %s."
 msgstr ""
 
@@ -25801,7 +25837,7 @@ msgstr ""
 msgid "The liquidator's van is on its way."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:112
+#: scripts/sim/capital_market.gd:122
 msgid "The listing process is already running. Continue its next step."
 msgstr ""
 
@@ -25829,11 +25865,11 @@ msgstr ""
 msgid "The new game could not be started because no save slot was available."
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:268
+#: scripts/sim/legacy_business.gd:269
 msgid "The next chapter is yours"
 msgstr ""
 
-#: scripts/sim/life_legacy.gd:104
+#: scripts/sim/life_legacy.gd:110
 msgid "The next life could not be created. Your current life is preserved."
 msgstr ""
 
@@ -25841,7 +25877,7 @@ msgstr ""
 msgid "The notice period has not ended yet. Keep using the premises until the exit date."
 msgstr ""
 
-#: scripts/sim/housing.gd:74
+#: scripts/sim/housing.gd:71
 msgid "The notice period is still running. Keep living here or cancel the reservation."
 msgstr ""
 
@@ -25885,7 +25921,7 @@ msgstr ""
 msgid "The other %d orders use skilled automatic packing."
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:266
+#: scripts/sim/legacy_business.gd:267
 msgid "The ownership record is retained. A completed prior sale pays nothing again; without a live company there is no new sale."
 msgstr ""
 
@@ -26029,15 +26065,15 @@ msgstr ""
 msgid "The seasonal drink is offered in June, July, August, December, January and February, with fifteen percent more demand for that item."
 msgstr ""
 
-#: scripts/sim/city_future.gd:106
-msgid "The secret-favor approach was reported. No bribe was paid; the bid was disqualified."
+#: scripts/sim/city_future.gd:188
+msgid "The secret-favor approach was reported to the anti-corruption office. No payment was made; the bid was disqualified, a fine and legal costs follow, and the expo office trusts you less."
 msgstr ""
 
 #: data/help/glossary.json
 msgid "The seller pays destination duty before the parcel leaves. The buyer sees a complete price."
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:79
+#: scripts/sim/holding_groups.gd:81
 msgid "The selling subsidiary does not have these units."
 msgstr ""
 
@@ -26081,7 +26117,7 @@ msgstr ""
 msgid "The steady cost of following the rules: filings, checks and the person who keeps them in order."
 msgstr ""
 
-#: scripts/sim/cafe.gd:177
+#: scripts/sim/cafe.gd:182
 msgid "The storeroom can't take that much."
 msgstr ""
 
@@ -26089,7 +26125,7 @@ msgstr ""
 msgid "The student enterprise workshop now has conflicting notes. Dr. Imani Cole wants a version that other people can check. How do you resolve the conflict?"
 msgstr ""
 
-#: scripts/sim/city_future.gd:77
+#: scripts/sim/city_future.gd:87
 msgid "The submission deadline passed. Review the failed proposal and continue."
 msgstr ""
 
@@ -26153,7 +26189,7 @@ msgstr ""
 msgid "The unhedged comparison values the starting estimated foreign receipts at today's quote versus the quote before the shock. It is not a second simulated business or guaranteed profit."
 msgstr ""
 
-#: scripts/sim/cafe.gd:121
+#: scripts/sim/cafe.gd:126
 msgid "The unit is already fitted out."
 msgstr ""
 
@@ -26217,7 +26253,7 @@ msgstr ""
 msgid "There is no public entrance here."
 msgstr ""
 
-#: scripts/sim/industry_guidance.gd:66
+#: scripts/sim/industry_guidance.gd:71
 msgid "There is no unfinished defective batch. Continue with the next order."
 msgstr ""
 
@@ -26229,15 +26265,15 @@ msgstr ""
 msgid "There you are. Crestline's autumn range needs desk lamps."
 msgstr ""
 
-#: scripts/sim/insolvency.gd:67
+#: scripts/sim/insolvency.gd:68
 msgid "There's no bank loan to restructure."
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:279
+#: scripts/sim/legacy_business.gd:280
 msgid "These are estimates from the current product cost and reference demand, not a second company or booked revenue. FX, duties, returns, rent and debt interest can reduce either result."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:46
+#: scripts/sim/capital_market.gd:56
 msgid "These founder shares have already been sold. Continue operating."
 msgstr ""
 
@@ -26333,7 +26369,7 @@ msgstr ""
 msgid "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue."
 msgstr ""
 
-#: scripts/sim/city_future.gd:76
+#: scripts/sim/city_future.gd:86
 msgid "This civic decision is already recorded. Review its result."
 msgstr ""
 
@@ -26345,7 +26381,7 @@ msgstr ""
 msgid "This company is already closed."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:101 scripts/sim/capital_market.gd:40 scripts/sim/capital_market.gd:87
+#: scripts/sim/capital_market.gd:111 scripts/sim/capital_market.gd:50 scripts/sim/capital_market.gd:97
 msgid "This company is closed or replaced. Continue with your current life."
 msgstr ""
 
@@ -26353,7 +26389,7 @@ msgstr ""
 msgid "This company is closed or unavailable. Choose another live company."
 msgstr ""
 
-#: scripts/sim/global_market.gd:310
+#: scripts/sim/global_market.gd:313
 msgid "This company's books are closed."
 msgstr ""
 
@@ -26377,7 +26413,7 @@ msgstr ""
 msgid "This equipment needs no service today."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:159
+#: scripts/sim/personal_assets.gd:195
 msgid "This furniture style is already installed. Keep it or choose another."
 msgstr ""
 
@@ -26401,19 +26437,19 @@ msgstr ""
 msgid "This group job is not running."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:171
+#: scripts/sim/personal_assets.gd:207
 msgid "This guest already visited today. Invite someone else or meet tomorrow."
 msgstr ""
 
-#: scripts/sim/fx_forward.gd:76
+#: scripts/sim/fx_forward.gd:89
 msgid "This hedge is not due or was already settled."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:57
+#: scripts/sim/personal_assets.gd:89
 msgid "This home has no tenant. Move in, list it or sell it."
 msgstr ""
 
-#: scripts/sim/housing.gd:46
+#: scripts/sim/housing.gd:43
 msgid "This home holds %d units; your stock and incoming orders need %d units. Sell stock or move it to leased storage first."
 msgstr ""
 
@@ -26421,7 +26457,7 @@ msgstr ""
 msgid "This industry introduction is no longer possible. Continue with another opportunity."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:133
+#: scripts/sim/capital_market.gd:143
 msgid "This investor question is already answered or unavailable. Continue the current step."
 msgstr ""
 
@@ -26505,7 +26541,7 @@ msgstr ""
 msgid "This monthly event is closed or already attended — check its next date."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:44
+#: scripts/sim/capital_market.gd:54
 msgid "This offer has expired or was declined. Choose another route."
 msgstr ""
 
@@ -26585,7 +26621,7 @@ msgstr ""
 msgid "This save comes from a newer version of City Venture."
 msgstr ""
 
-#: scripts/sim/city_future.gd:50
+#: scripts/sim/city_future.gd:56
 msgid "This service plan is already arranged or its deadline has passed."
 msgstr ""
 
@@ -26605,7 +26641,7 @@ msgstr ""
 msgid "This story opens after the overseas partner chapter."
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:37
+#: scripts/sim/holding_groups.gd:38
 msgid "This subsidiary is no longer held here. Choose another company."
 msgstr ""
 
@@ -26617,7 +26653,7 @@ msgstr ""
 msgid "This supply runs with the business and cannot be paused."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:89
+#: scripts/sim/capital_market.gd:99
 msgid "This target is no longer independent. Review another company."
 msgstr ""
 
@@ -26793,7 +26829,7 @@ msgstr ""
 msgid "Today's consulting hours are used. Rest and continue tomorrow."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:170
+#: scripts/sim/personal_assets.gd:206
 msgid "Today's home invitations are full. Meet elsewhere or invite them tomorrow."
 msgstr ""
 
@@ -27241,7 +27277,7 @@ msgstr ""
 msgid "Two months in the red, but you're still open. Plenty of shops aren't. Keep the prices you set and the local supplier; the shock won't last forever."
 msgstr ""
 
-#: scripts/sim/customs.gd:182
+#: scripts/sim/customs.gd:186
 msgid "Two weeks abroad: try a lower local price or more ads. The trial now needs 5 delivered units; check returns and your actual cash. You can also review the results and pause expansion."
 msgstr ""
 
@@ -27301,7 +27337,7 @@ msgstr ""
 msgid "Undelivered trade buyer advance returned"
 msgstr ""
 
-#: scripts/sim/capital_market.gd:155
+#: scripts/sim/capital_market.gd:172
 msgid "Underwriting commission: %s"
 msgstr ""
 
@@ -27377,7 +27413,7 @@ msgstr ""
 msgid "Unknown automotive crisis."
 msgstr ""
 
-#: scripts/sim/customs.gd:97 scripts/sim/ecommerce.gd:1301 scripts/sim/global_market.gd:325
+#: scripts/sim/customs.gd:97 scripts/sim/ecommerce.gd:1301 scripts/sim/global_market.gd:328
 msgid "Unknown choice."
 msgstr ""
 
@@ -27421,7 +27457,7 @@ msgstr ""
 msgid "Unknown property."
 msgstr ""
 
-#: scripts/sim/cafe.gd:173
+#: scripts/sim/cafe.gd:178
 msgid "Unknown supply pack."
 msgstr ""
 
@@ -27433,7 +27469,7 @@ msgstr ""
 msgid "Unpaid documents expired"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:83
+#: scripts/sim/personal_assets.gd:116
 msgid "Unpaid mortgage interest: %s"
 msgstr ""
 
@@ -27449,7 +27485,7 @@ msgstr ""
 msgid "Unused materials written off: %s"
 msgstr ""
 
-#: scripts/sim/city_future.gd:113
+#: scripts/sim/city_future.gd:125
 msgid "Unused reconstruction materials returned to the supplier"
 msgstr ""
 
@@ -27477,7 +27513,7 @@ msgstr ""
 msgid "Use Finance when you need home cash. Waiting can improve the rate or make it worse; it is not a guaranteed gain."
 msgstr ""
 
-#: scripts/sim/holding_groups.gd:46
+#: scripts/sim/holding_groups.gd:48
 msgid "Use a funded holding company and its live subsidiary for this loan."
 msgstr ""
 
@@ -27801,7 +27837,7 @@ msgstr ""
 msgid "Vessel loading"
 msgstr ""
 
-#: scripts/sim/city_future.gd:212
+#: scripts/sim/city_future.gd:239
 msgid "Vested civic employee options"
 msgstr ""
 
@@ -27889,7 +27925,7 @@ msgstr ""
 msgid "View every epilogue card and return to free play"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:96
+#: scripts/sim/personal_assets.gd:132
 msgid "Visit Dockside Motors or the dealership to buy a personal car."
 msgstr ""
 
@@ -27993,7 +28029,7 @@ msgstr ""
 msgid "Wages from your job"
 msgstr ""
 
-#: scripts/sim/insolvency.gd:188
+#: scripts/sim/insolvency.gd:189
 msgid "Wages owed paid"
 msgstr ""
 
@@ -28021,11 +28057,11 @@ msgstr ""
 msgid "Wait for delivery or review supplier failure."
 msgstr ""
 
-#: scripts/sim/city_future.gd:79
+#: scripts/sim/city_future.gd:89
 msgid "Wait for paid suppliers to deliver, or review their failure at the deadline."
 msgstr ""
 
-#: scripts/sim/city_future.gd:166
+#: scripts/sim/city_future.gd:193
 msgid "Wait for the civic result before reviewing this chapter."
 msgstr ""
 
@@ -28041,7 +28077,7 @@ msgstr ""
 msgid "Wait for the shipment and pay the shortage price"
 msgstr ""
 
-#: scripts/sim/housing.gd:40 scripts/sim/housing.gd:42 scripts/sim/personal_assets.gd:29
+#: scripts/sim/housing.gd:39 scripts/sim/personal_assets.gd:29
 msgid "Wait for the tenancy to end before moving into this home."
 msgstr ""
 
@@ -28213,7 +28249,7 @@ msgstr ""
 msgid "Watches"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:174
+#: scripts/sim/personal_assets.gd:210
 msgid "We can talk over the table here. The warm wood makes this room feel welcoming."
 msgstr ""
 
@@ -28541,7 +28577,7 @@ msgstr ""
 msgid "With storage certification and two installs you can build charging stations. Set a price per kWh and watch demand."
 msgstr ""
 
-#: scripts/ui/modals/capital_market_modal.gd:109
+#: scripts/ui/modals/capital_market_modal.gd:111
 msgid "Withdraw listing and stay private"
 msgstr ""
 
@@ -28553,7 +28589,7 @@ msgstr ""
 msgid "Withdraw the parcel"
 msgstr ""
 
-#: scripts/ui/modals/capital_market_modal.gd:109
+#: scripts/ui/modals/capital_market_modal.gd:111
 msgid "WithdrawIPO"
 msgstr ""
 
@@ -28741,7 +28777,7 @@ msgstr ""
 msgid "You already have as many runs as you can handle."
 msgstr ""
 
-#: scripts/sim/cafe.gd:142
+#: scripts/sim/cafe.gd:147
 msgid "You already have the licence."
 msgstr ""
 
@@ -28749,7 +28785,7 @@ msgstr ""
 msgid "You already hold the high bid."
 msgstr ""
 
-#: scripts/sim/housing.gd:43
+#: scripts/sim/housing.gd:40
 msgid "You already live here. Keep this lease or choose another home."
 msgstr ""
 
@@ -28813,7 +28849,7 @@ msgstr ""
 msgid "You connected goods, customers and places through real trades."
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:266
+#: scripts/sim/legacy_business.gd:267
 msgid "You continue operating under the existing ownership. Previous investors and sales stay on the books."
 msgstr ""
 
@@ -28845,11 +28881,11 @@ msgstr ""
 msgid "You have an order! Go to your packing table at home and press E. Pack it by hand: box, padding, tape, label."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:181
+#: scripts/sim/personal_assets.gd:217
 msgid "You have no personal car to sell. Take the metro or buy one."
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:188
+#: scripts/sim/personal_assets.gd:224
 msgid "You have no personal car. Take the metro or buy one."
 msgstr ""
 
@@ -28921,11 +28957,11 @@ msgstr ""
 msgid "You manage a Hale Group division. The revenue goal is a management benchmark; the chapter only requires continued operations, not growth."
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:266
+#: scripts/sim/legacy_business.gd:267
 msgid "You mentor at Nexus Co-work. A live company uses a contract manager with monthly fees; after closure, there is no company to hand over."
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:265
+#: scripts/sim/legacy_business.gd:266
 msgid "You met %d contacts and hired %d employees across your journey."
 msgstr ""
 
@@ -28937,7 +28973,7 @@ msgstr ""
 msgid "You need %s (first month%s)."
 msgstr ""
 
-#: scripts/sim/cafe.gd:180
+#: scripts/sim/cafe.gd:185
 msgid "You need %s."
 msgstr ""
 
@@ -28997,7 +29033,7 @@ msgstr ""
 msgid "You quit your job. You have savings, a laptop, a phone — and a lease."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:204
+#: scripts/sim/capital_market.gd:221
 msgid "You raised equity rather than sales income; quarterly disclosure and board votes now limit your freedom."
 msgstr ""
 
@@ -29013,7 +29049,7 @@ msgstr ""
 msgid "You retain retail customers and margin but fund slow stock and returns."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:204
+#: scripts/sim/capital_market.gd:221
 msgid "You retained private ownership and its risks, without public capital or quarterly market pressure."
 msgstr ""
 
@@ -29033,7 +29069,7 @@ msgstr ""
 msgid "You set up chairs for a pitch night. Two founders argue about pricing the whole time."
 msgstr ""
 
-#: scripts/sim/capital_market.gd:204
+#: scripts/sim/capital_market.gd:221
 msgid "You sold existing founder shares; the payout is an ownership transaction and your company answers to its new owner."
 msgstr ""
 
@@ -29125,7 +29161,7 @@ msgstr ""
 msgid "Your Maple Court unit"
 msgstr ""
 
-#: scripts/sim/cafe.gd:144
+#: scripts/sim/cafe.gd:149
 msgid "Your application is being processed."
 msgstr ""
 
@@ -29173,7 +29209,7 @@ msgstr ""
 msgid "Your cash"
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:266
+#: scripts/sim/legacy_business.gd:267
 msgid "Your company"
 msgstr ""
 
@@ -29249,7 +29285,7 @@ msgstr ""
 msgid "Your first venture guides you through buying stock, listing, packing, shipping, and getting paid. Gold arrows and button highlights show your next step."
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:262
+#: scripts/sim/legacy_business.gd:263
 msgid "Your founder journey"
 msgstr ""
 
@@ -29337,7 +29373,7 @@ msgstr ""
 msgid "Your personal account"
 msgstr ""
 
-#: scripts/sim/personal_assets.gd:122 scripts/sim/personal_assets.gd:144
+#: scripts/sim/personal_assets.gd:158 scripts/sim/personal_assets.gd:180
 msgid "Your personal car is parked elsewhere. Take the metro back to it."
 msgstr ""
 
@@ -29409,7 +29445,7 @@ msgstr ""
 msgid "Your time is the inventory. Take client gigs, work them at any laptop, invoice, get paid. Reputation raises your rate."
 msgstr ""
 
-#: scripts/sim/legacy_business.gd:267
+#: scripts/sim/legacy_business.gd:268
 msgid "Your timeline"
 msgstr ""
 
@@ -29593,7 +29629,7 @@ msgstr ""
 msgid "community manager"
 msgstr ""
 
-#: scripts/sim/insolvency.gd:169
+#: scripts/sim/insolvency.gd:170
 msgid "company closed"
 msgstr ""
 
@@ -29689,7 +29725,7 @@ msgstr ""
 msgid "fees"
 msgstr ""
 
-#: scripts/sim/cafe.gd:111
+#: scripts/sim/cafe.gd:116
 msgid "fit out the unit"
 msgstr ""
 
@@ -29733,7 +29769,7 @@ msgstr ""
 msgid "gave a refund"
 msgstr ""
 
-#: scripts/sim/cafe.gd:113
+#: scripts/sim/cafe.gd:118
 msgid "get the food handling licence at City Hall"
 msgstr ""
 
@@ -29771,6 +29807,10 @@ msgstr ""
 
 #: data/story/achievements.json data/story/goals.json scripts/ui/modals/growth_modal.gd:50 scripts/ui/modals/growth_modal.gd:51
 msgid "home dollars"
+msgstr ""
+
+#: scripts/sim/personal_assets.gd:77
+msgid "home foreclosure"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:247
@@ -29849,11 +29889,11 @@ msgstr ""
 msgid "late tax"
 msgstr ""
 
-#: scripts/sim/cafe.gd:136
+#: scripts/sim/cafe.gd:141
 msgid "lease the café unit first"
 msgstr ""
 
-#: scripts/sim/cafe.gd:109
+#: scripts/sim/cafe.gd:114
 msgid "lease the corner unit in Old Town (Okafor Lettings)"
 msgstr ""
 
@@ -29965,7 +30005,7 @@ msgstr ""
 msgid "new credit"
 msgstr ""
 
-#: scripts/sim/cafe.gd:282
+#: scripts/sim/cafe.gd:287
 msgid "no coffee supplies"
 msgstr ""
 
@@ -29993,7 +30033,7 @@ msgstr ""
 msgid "not registered (personal seller)"
 msgstr ""
 
-#: scripts/sim/cafe.gd:275
+#: scripts/sim/cafe.gd:280
 msgid "not your café (yet)"
 msgstr ""
 
@@ -30121,7 +30161,7 @@ msgstr ""
 msgid "qc"
 msgstr ""
 
-#: scripts/sim/cafe.gd:134 scripts/sim/logistics.gd:87 scripts/sim/staff.gd:71
+#: scripts/sim/cafe.gd:139 scripts/sim/logistics.gd:87 scripts/sim/staff.gd:71
 msgid "register a company first"
 msgstr ""
 
@@ -30265,7 +30305,7 @@ msgstr ""
 msgid "teller closed"
 msgstr ""
 
-#: scripts/sim/cafe.gd:280
+#: scripts/sim/cafe.gd:285
 msgid "the café is closed now"
 msgstr ""
 
@@ -30273,11 +30313,11 @@ msgstr ""
 msgid "the company account needs %s (van and first month's insurance)"
 msgstr ""
 
-#: scripts/sim/cafe.gd:111
+#: scripts/sim/cafe.gd:116
 msgid "the fit-out is still going"
 msgstr ""
 
-#: scripts/sim/cafe.gd:113
+#: scripts/sim/cafe.gd:118
 msgid "the food licence is being processed"
 msgstr ""
 

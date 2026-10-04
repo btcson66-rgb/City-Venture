@@ -166,7 +166,7 @@ msgstr "你获得 $500,000 创投资金。请在 18 个月内达成营收目标�
 msgid "%%|%[-+0-9.]*[sdif]"
 msgstr "%%|%[-+0-9.]*[sdif]"
 
-#: scripts/sim/legacy_business.gd:290
+#: scripts/sim/legacy_business.gd:291
 msgid "%.0f units · price %s home dollars/unit · estimated contribution %s home dollars before other costs"
 msgstr "%.0f 件 · 单价 %s 本国元／件 · 扣除其他费用前的预估贡献 %s 本国元"
 
@@ -214,7 +214,7 @@ msgstr "有 %d 辆车该保养了；不保养可能在租期中抛锚。"
 msgid "%d completed rentals"
 msgstr "完成 %d 笔租赁"
 
-#: scripts/sim/insolvency.gd:202
+#: scripts/sim/insolvency.gd:203
 msgid "%d consecutive payrolls went unpaid"
 msgstr "已连续 %d 次未支付薪资"
 
@@ -334,7 +334,7 @@ msgstr "%d 件包裹"
 msgid "%d parcels a trip"
 msgstr "每趟 %d 件包裹"
 
-#: scripts/sim/cafe.gd:399
+#: scripts/sim/cafe.gd:404
 msgid "%d pastries binned."
 msgstr "丢掉了 %d 个糕点。"
 
@@ -390,13 +390,17 @@ msgstr "%d 件 · %s → %s"
 msgid "%d units · %s/unit"
 msgstr "%d 件 · 每件 %s"
 
-#: scripts/sim/cafe.gd:395
+#: scripts/sim/cafe.gd:400
 msgid "%d walked out of the queue."
 msgstr "%d 位客人排不到就走了。"
 
 #: scripts/ui/modals/settlement_modal.gd:56
 msgid "%d × %s from %s: %s"
 msgstr "%d 件 %s，来自 %s：%s"
+
+#: scripts/ui/modals/capital_market_modal.gd:117
+msgid "%d%% chance investors reject the listing."
+msgstr "投资人有 %d%% 几率拒绝这次上市。"
 
 #: scripts/ui/energy_ui.gd:280
 msgid "%d%% revenue share"
@@ -438,7 +442,7 @@ msgstr "%s（客服）处理了 %s 的退货：%s。"
 msgid "%s = %d%% of market · about %d days to sell"
 msgstr "%s = 市价的 %d%% · 约 %d 天卖出"
 
-#: scripts/sim/cafe.gd:76
+#: scripts/sim/cafe.gd:81
 msgid "%s Café"
 msgstr "%s 咖啡"
 
@@ -482,7 +486,7 @@ msgstr "%s 采取%s策略，市场是%s。实际营收 %s 本国元，交付 %d 
 msgid "%s chose a rival quote. Review your price and try another RFQ."
 msgstr "%s 选了竞争者的报价。请检查单价，再尝试另一张询价单。"
 
-#: scripts/sim/cafe.gd:393
+#: scripts/sim/cafe.gd:398
 msgid "%s closed: %d customers, %s in the till."
 msgstr "%s 打烊了：%d 位客人，收银 %s。"
 
@@ -614,11 +618,11 @@ msgstr "%s 辞职了。"
 msgid "%s rooms"
 msgstr "%s客房"
 
-#: scripts/sim/cafe.gd:374
+#: scripts/sim/cafe.gd:379
 msgid "%s served its first customer!"
 msgstr "%s 迎来第一位客人！"
 
-#: scripts/sim/cafe.gd:373
+#: scripts/sim/cafe.gd:378
 msgid "%s served its first customer."
 msgstr "%s 迎来第一位客人。"
 
@@ -634,7 +638,7 @@ msgstr "%s 推出新功能：%s。"
 msgid "%s shipped: %s."
 msgstr "%s 推出：%s。"
 
-#: scripts/sim/cafe.gd:403
+#: scripts/sim/cafe.gd:408
 msgid "%s stayed shut today: nobody was behind the counter. Hire a barista (People tab) or work the counter yourself."
 msgstr "%s 今天没开门：吧台没人顾。去雇一位咖啡师（人员分页），或自己站吧台。"
 
@@ -642,7 +646,7 @@ msgstr "%s 今天没开门：吧台没人顾。去雇一位咖啡师（人员分
 msgid "%s subscriptions — %d users"
 msgstr "%s 订阅收入——%d 位用户"
 
-#: scripts/sim/cafe.gd:387
+#: scripts/sim/cafe.gd:392
 msgid "%s till: %d customers"
 msgstr "%s 收银：%d 位客人"
 
@@ -826,11 +830,11 @@ msgstr "%s——月租"
 msgid "%s → %s · %d min driving and parking · parking %s"
 msgstr "%s → %s・行车与停车共 %d 分钟・停车费 %s"
 
-#: scripts/sim/life_legacy.gd:98
+#: scripts/sim/life_legacy.gd:104
 msgid "%s's next generation"
 msgstr "%s 的下一代"
 
-#: scripts/sim/life_legacy.gd:75
+#: scripts/sim/life_legacy.gd:80
 msgid "%s's story leans toward %s, with a trace of %s. %s The next life begins with fewer resources; this record preserves what actually happened."
 msgstr "%s 的人生最接近「%s」，也带着「%s」的色彩。%s 下一段人生会以较少资源起步；这份回顾保留的是实际发生的事。"
 
@@ -1066,7 +1070,7 @@ msgstr "应收帐款的 70%"
 msgid "800 LED desk lamps for our autumn range. $28 each: $22,400."
 msgstr "秋季系列要 800 盏 LED 台灯，每盏 $28，总共 $22,400。"
 
-#: scripts/sim/legacy_business.gd:279
+#: scripts/sim/legacy_business.gd:280
 msgid "90-day route comparison — explicit assumptions"
 msgstr "90 天策略比较：依据明列的假设估算"
 
@@ -1174,7 +1178,7 @@ msgstr "活动消息引起客群不满。可付费修复，或以较差的创意
 msgid "A change of owner"
 msgstr "换一位主人"
 
-#: scripts/sim/legacy_business.gd:243
+#: scripts/sim/legacy_business.gd:244
 msgid "A change of ownership"
 msgstr "公司换了主人"
 
@@ -1338,7 +1342,7 @@ msgstr "持牌交易所把你的钱换成数字美元，几分钟就送到。平
 msgid "A listing needs photos. You can spend time shooting them or pay Studio Lumen for professional photos."
 msgstr "上架需要照片，可以自己花时间拍摄，或付费请 Studio Lumen 拍专业照片。"
 
-#: scripts/sim/global_market.gd:226
+#: scripts/sim/global_market.gd:227
 msgid "A live company and international account are required."
 msgstr "需要营运中的公司及国际帐户。"
 
@@ -1398,7 +1402,7 @@ msgstr "吧台满一个月"
 msgid "A monthly premium that covers accidents, theft and damage to your van and what is in it."
 msgstr "每月缴的保费，涵盖货车和车上货物的意外、失窃和损坏。"
 
-#: scripts/sim/housing.gd:51
+#: scripts/sim/housing.gd:48
 msgid "A move is already booked. Keep it, cancel it or resolve the storage problem."
 msgstr "搬家已预约。可以保留、取消，或先解决库存容量问题。"
 
@@ -1422,7 +1426,7 @@ msgstr "奥瑞莉亚进入新时代：第 %d 年——%s。"
 msgid "A new founder at Nexus Co-work has enough cash for one batch. Discuss product pricing or inventory cash flow; either conversation takes one hour and pays no fee."
 msgstr "Nexus Co-work 有一位新创办人，手上的现金只够买一批货。你可以陪他讨论定价或库存现金流；交谈都需一小时，不收取费用。"
 
-#: scripts/sim/life_legacy.gd:115
+#: scripts/sim/life_legacy.gd:121
 msgid "A new life at difficulty %d, carrying %s home dollars. Previous save: slot %d."
 msgstr "展开难度 %d 的新人生，带入 %s 本国元资本。上一局保存在第 %d 槽。"
 
@@ -1430,7 +1434,7 @@ msgstr "展开难度 %d 的新人生，带入 %s 本国元资本。上一局保�
 msgid "A new rule requires an accessible bay at every public charging station. Retrofit now, or apply for an exemption and risk fines."
 msgstr "新规定要求每座公共充电站都要有无障碍车位。现在改建，或申请豁免但可能被罚款。"
 
-#: scripts/sim/legacy_business.gd:267
+#: scripts/sim/legacy_business.gd:268
 msgid "A new start is still a story."
 msgstr "重新开始，也是一段值得留下的故事。"
 
@@ -1758,7 +1762,7 @@ msgstr "转角的小店面，旧城区一半的人每天都会经过。交屋是
 msgid "A staff member morale score measures how they feel about work and pay."
 msgstr "员工士气分数反映工作与薪资带来的感受。"
 
-#: scripts/sim/holding_groups.gd:176
+#: scripts/sim/holding_groups.gd:200
 msgid "A subsidiary guarantee is unpaid."
 msgstr "子公司的担保债务尚未清偿。"
 
@@ -2150,7 +2154,7 @@ msgstr "已收购 校园电台 及其有限广告库存。"
 msgid "Acquired market presence written off: %s"
 msgstr "已收购的市场资产冲销：%s"
 
-#: scripts/sim/capital_market.gd:181
+#: scripts/sim/capital_market.gd:198
 msgid "Acquisition integration completed; the staff attrition is recorded, without invented sales."
 msgstr "收购集成完成，员工流失已记录；没有凭空增加营收。"
 
@@ -2634,6 +2638,18 @@ msgstr "回答会影响投资人的信心与定价。没有根据的承诺可能
 msgid "Answers customers and settles returns for you (replace if in stock, otherwise refund)."
 msgstr "回复客人、帮你处理退货（有库存就换货，否则退款）。"
 
+#: scripts/sim/city_future.gd:186
+msgid "Anti-corruption fine and legal cost"
+msgstr "反贪腐罚款与法律费用"
+
+#: scripts/sim/legal.gd:111
+msgid "Anti-corruption fine: %s"
+msgstr "反贪腐罚款：%s"
+
+#: scripts/sim/city_future.gd:182
+msgid "Anti-corruption office"
+msgstr "反贪腐办公室"
+
 #: data/synergies.json
 msgid "Any laptop or the co-working hot desk."
 msgstr "任一台笔电或共同工作空间的弹性座位。"
@@ -3098,7 +3114,7 @@ msgstr "Aurelia University"
 msgid "Aurelia goes electric."
 msgstr "奥瑞莉亚全面电气化。"
 
-#: scripts/sim/legacy_business.gd:264
+#: scripts/sim/legacy_business.gd:265
 msgid "Aurelia is still moving. Your ending opens free play; it does not manufacture a final profit."
 msgstr "Aurelia 的生活仍在继续。故事结束后可以自由经营，结局不会凭空增加利润。"
 
@@ -3310,7 +3326,7 @@ msgstr "呆帐损失"
 msgid "Bags"
 msgstr "包包"
 
-#: scripts/sim/cafe.gd:341
+#: scripts/sim/cafe.gd:346
 msgid "Bakery delivery: %d pastries"
 msgstr "面包店送货：%d 个糕点"
 
@@ -3326,7 +3342,7 @@ msgstr "中性议价"
 msgid "Bank"
 msgstr "银行"
 
-#: scripts/sim/holding_groups.gd:173
+#: scripts/sim/holding_groups.gd:197
 msgid "Bank debt covered by holding guarantee: %s"
 msgstr "控股公司代偿银行借款：%s"
 
@@ -3570,7 +3586,7 @@ msgstr "蓝黄色辨识"
 msgid "Board capital withdrawn: %s"
 msgstr "董事会撤回资金：%s"
 
-#: scripts/sim/legacy_business.gd:229
+#: scripts/sim/legacy_business.gd:228
 msgid "Board-approved employee ownership: %s"
 msgstr "董事会核准员工持股：%s"
 
@@ -3666,11 +3682,11 @@ msgstr "双轨并行"
 msgid "Both businesses must run on the same company's books."
 msgstr "两个事业必须记在同一家公司的帐上。"
 
-#: scripts/sim/capital_market.gd:106
+#: scripts/sim/capital_market.gd:116
 msgid "Both consecutive complete operating years must be profitable."
 msgstr "连续两个完整营运年度都要获利。"
 
-#: scripts/sim/capital_market.gd:98
+#: scripts/sim/capital_market.gd:108
 msgid "Bought %s; integration carries staff attrition and systems cost, without assumed revenue."
 msgstr "已收购 %s；集成要承担员工流失和系统成本，不会直接认列推估营收。"
 
@@ -3678,7 +3694,7 @@ msgstr "已收购 %s；集成要承担员工流失和系统成本，不会直接
 msgid "Bought a used van from Sam Okoro at Dockside Motors for %s."
 msgstr "向 Dockside Motors 的 Sam Okoro 买了一台二手货车，花了 %s。"
 
-#: scripts/sim/personal_assets.gd:106
+#: scripts/sim/personal_assets.gd:142
 msgid "Bought personal car: %s."
 msgstr "已买下自用车：%s。"
 
@@ -3894,7 +3910,7 @@ msgstr "制作创意提案"
 msgid "Build a cash-flow spreadsheet for %s"
 msgstr "帮 %s 做现金流量表"
 
-#: scripts/sim/capital_market.gd:107
+#: scripts/sim/capital_market.gd:117
 msgid "Build a complete clean compliance year before applying; prior fines remain disclosed."
 msgstr "先累积完整一年的无违规纪录，再提出申请；过去的罚款仍会揭露。"
 
@@ -3934,7 +3950,7 @@ msgstr "先以薪资累积储蓄。"
 msgid "Build the client pitch from slogan, visual and tone cards."
 msgstr "选择标语、视觉与语气卡，组合客户提案。"
 
-#: scripts/sim/capital_market.gd:104
+#: scripts/sim/capital_market.gd:114
 msgid "Build the required actual annual revenue before applying."
 msgstr "先达成年营收门槛，再提出申请。"
 
@@ -3978,7 +3994,7 @@ msgstr "工程包商"
 msgid "Builds software. Each developer adds dev hours to your SaaS product every workday."
 msgstr "开发软件。每位工程师每个工作天都会为你的 SaaS 产品增加开发工时。"
 
-#: data/story/achievements.json scripts/sim/legacy_business.gd:243
+#: data/story/achievements.json scripts/sim/legacy_business.gd:244
 msgid "Built with the team"
 msgstr "与团队共同打造"
 
@@ -4190,7 +4206,7 @@ msgstr "请先购买上一阶住宅；升级后仍可出租或出售。"
 msgid "Buy the van (%s)"
 msgstr "买下这台货车（%s）"
 
-#: scripts/sim/housing.gd:39 scripts/sim/housing.gd:41
+#: scripts/sim/housing.gd:38
 msgid "Buy this home before arranging a move."
 msgstr "请先买下这间住宅，再安排搬家。"
 
@@ -4494,7 +4510,7 @@ msgstr "CafeDepthPermit"
 msgid "CafeInspectNow"
 msgstr "CafeInspectNow"
 
-#: scripts/sim/cafe.gd:462 scripts/ui/minigames/clerk_forms_game.gd:11
+#: scripts/sim/cafe.gd:467 scripts/ui/minigames/clerk_forms_game.gd:11
 msgid "Café"
 msgstr "咖啡店"
 
@@ -4502,7 +4518,7 @@ msgstr "咖啡店"
 msgid "Café Manager"
 msgstr "咖啡店店长"
 
-#: scripts/sim/cafe.gd:125
+#: scripts/sim/cafe.gd:130
 msgid "Café fit-out: espresso machine, counter, tables"
 msgstr "咖啡店装修：义式咖啡机、吧台、桌椅"
 
@@ -4766,7 +4782,7 @@ msgstr "创办人实物出资"
 msgid "Capital injected into %s"
 msgstr "注资给 %s"
 
-#: scripts/ui/modals/capital_market_modal.gd:110 scripts/ui/modals/capital_market_modal.gd:31 scripts/ui/modals/capital_market_modal.gd:58 scripts/ui/modals/capital_market_modal.gd:66
+#: scripts/ui/modals/capital_market_modal.gd:112 scripts/ui/modals/capital_market_modal.gd:31 scripts/ui/modals/capital_market_modal.gd:58 scripts/ui/modals/capital_market_modal.gd:66
 msgid "CapitalContinue"
 msgstr "CapitalContinue"
 
@@ -4954,7 +4970,7 @@ msgstr "中央线"
 msgid "Central Station"
 msgstr "中央车站"
 
-#: scripts/sim/personal_assets.gd:127
+#: scripts/sim/personal_assets.gd:163
 msgid "Central parking is full today. Take the metro or drive to another district."
 msgstr "市中心今天没有停车位了，请搭捷运或开到其他街区。"
 
@@ -5050,7 +5066,7 @@ msgstr "刷卡收取 %s"
 msgid "Charge at a Helio station"
 msgstr "到 Helio 充电站充电"
 
-#: scripts/sim/personal_assets.gd:130
+#: scripts/sim/personal_assets.gd:166
 msgid "Charge at an open Helio station before driving, or take the metro."
 msgstr "请先到营业中的 Helio 充电站充电，或改搭捷运。"
 
@@ -5250,7 +5266,7 @@ msgstr "选择店面，采购食材，比较六款商品的售价与成本。食
 msgid "Choose a car class."
 msgstr "请选择车型。"
 
-#: scripts/sim/personal_assets.gd:99
+#: scripts/sim/personal_assets.gd:135
 msgid "Choose a car from the personal showroom."
 msgstr "请选择自用车展示间的车款。"
 
@@ -5298,7 +5314,7 @@ msgstr "请选择没有出租中的车队车辆。"
 msgid "Choose a fleet car."
 msgstr "请选择车队车辆。"
 
-#: scripts/sim/fx_forward.gd:43
+#: scripts/sim/fx_forward.gd:56
 msgid "Choose a foreign currency, positive notional and a 30- or 60-day maturity."
 msgstr "请选择外币、正数名目金额，以及 30 或 60 天的期限。"
 
@@ -5310,7 +5326,7 @@ msgstr "请选择空的充电地点和站型。"
 msgid "Choose a free charging site."
 msgstr "请选择空的充电地点。"
 
-#: scripts/sim/housing.gd:38
+#: scripts/sim/housing.gd:37
 msgid "Choose a home that is available for moving."
 msgstr "请选择可以搬入的住处。"
 
@@ -5326,11 +5342,11 @@ msgstr "请选择列出的电池容量和毛利率。"
 msgid "Choose a listed car."
 msgstr "请选择已上架的车。"
 
-#: scripts/sim/holding_groups.gd:202
+#: scripts/sim/holding_groups.gd:226
 msgid "Choose a live subsidiary owned by this holding company."
 msgstr "请选择这家控股公司旗下仍在营运的子公司。"
 
-#: scripts/sim/holding_groups.gd:61
+#: scripts/sim/holding_groups.gd:63
 msgid "Choose a live subsidiary with cash for the management service."
 msgstr "请选择仍在营运、且有现金支付管理服务费的子公司。"
 
@@ -5462,11 +5478,11 @@ msgstr "请选择进行中的代工单。"
 msgid "Choose an active route and an available company vehicle."
 msgstr "请选择有效路线合约与可用的公司车辆。"
 
-#: scripts/sim/holding_groups.gd:204
+#: scripts/sim/holding_groups.gd:228
 msgid "Choose an available buyer."
 msgstr "请选择可承接的买方。"
 
-#: scripts/sim/city_future.gd:78
+#: scripts/sim/city_future.gd:88
 msgid "Choose an available civic decision."
 msgstr "选择目前可运行的城市决策。"
 
@@ -5474,11 +5490,11 @@ msgstr "选择目前可运行的城市决策。"
 msgid "Choose an available ending."
 msgstr "请选择目前可用的结局。"
 
-#: scripts/sim/personal_assets.gd:158
+#: scripts/sim/personal_assets.gd:194
 msgid "Choose an available furniture style."
 msgstr "请选择可购买的家具风格。"
 
-#: scripts/sim/capital_market.gd:49
+#: scripts/sim/capital_market.gd:59
 msgid "Choose an available offer."
 msgstr "请选择仍有效的提案。"
 
@@ -5486,7 +5502,7 @@ msgstr "请选择仍有效的提案。"
 msgid "Choose an available vehicle. Wait for its current run or service to finish."
 msgstr "请选择可用车辆，或等配送、保养完成。"
 
-#: scripts/sim/personal_assets.gd:141
+#: scripts/sim/personal_assets.gd:177
 msgid "Choose an electric personal car first."
 msgstr "请先购买电动自用车。"
 
@@ -5522,7 +5538,7 @@ msgstr "请选择有效需求，并保留一个活动名额。"
 msgid "Choose an open client brief."
 msgstr "请选择尚未结案的客户需求。"
 
-#: scripts/sim/legal.gd:60
+#: scripts/sim/legal.gd:65
 msgid "Choose an open dispute for this company."
 msgstr "请选择这家公司的未结争议。"
 
@@ -5550,15 +5566,15 @@ msgstr "请选择营运中的充电站。"
 msgid "Choose an open warranty claim."
 msgstr "请选择待处理的保固理赔。"
 
-#: scripts/sim/holding_groups.gd:95
+#: scripts/sim/holding_groups.gd:97
 msgid "Choose an outstanding bank loan of this holding company's subsidiary."
 msgstr "请选择旗下子公司尚未清偿的银行借款。"
 
-#: scripts/sim/personal_assets.gd:191 scripts/sim/personal_assets.gd:54
+#: scripts/sim/personal_assets.gd:227 scripts/sim/personal_assets.gd:57 scripts/sim/personal_assets.gd:86
 msgid "Choose an owned home first."
 msgstr "请先选择自有住宅。"
 
-#: scripts/sim/capital_market.gd:114
+#: scripts/sim/capital_market.gd:124
 msgid "Choose an underwriter."
 msgstr "请先选择承销商。"
 
@@ -5578,7 +5594,7 @@ msgstr "请选择其他可用库存地点，接手未完成订单与到货。"
 msgid "Choose another leased workplace for employees."
 msgstr "请为员工选择另一个已租工作地点。"
 
-#: scripts/sim/personal_assets.gd:123
+#: scripts/sim/personal_assets.gd:159
 msgid "Choose another open district."
 msgstr "请选择另一个已开放街区。"
 
@@ -5606,11 +5622,11 @@ msgstr "依实际商品选择电子产品、家用品、纺织品或一般商品
 msgid "Choose employee ownership in the legacy chapter."
 msgstr "在传承章节选择员工持股。"
 
-#: scripts/sim/city_future.gd:51
+#: scripts/sim/city_future.gd:57
 msgid "Choose funded delivery or the civic partnership."
 msgstr "选择自行出资，或加入城市合作。"
 
-#: scripts/ui/modals/fx_risk_modal.gd:70
+#: scripts/ui/modals/fx_risk_modal.gd:73
 msgid "Choose home-currency invoices"
 msgstr "未来合约改用本国币开票"
 
@@ -5654,7 +5670,7 @@ msgstr "请选择此消息提供的回复。"
 msgid "Choose scale"
 msgstr "选择规模竞争"
 
-#: scripts/sim/holding_groups.gd:77
+#: scripts/sim/holding_groups.gd:79
 msgid "Choose sibling subsidiaries, actual stock and an affordable transfer price."
 msgstr "请选择同一控股公司旗下的两家子公司，并确认库存与移转价格。"
 
@@ -5674,7 +5690,7 @@ msgstr "先选择退居导师的结局。"
 msgid "Choose the name carefully: it goes on your sign and your invoices."
 msgstr "名字要想清楚：它会出现在招牌和发票上。"
 
-#: scripts/sim/life_legacy.gd:87
+#: scripts/sim/life_legacy.gd:93
 msgid "Choose the next generation or the next chapter of this character."
 msgstr "选择下一代，或让同一角色展开新人生。"
 
@@ -5686,7 +5702,7 @@ msgstr "选择符合实际商品的税则分类"
 msgid "Choose thirty days of notice or pay one month to leave today. Deposits remain your asset, not income; stock and incoming orders must fit."
 msgstr "可以提前三十天通知，或付一个月租金今天退租。押金是你的资产，不是收入；库存与在途订单都必须放得下。"
 
-#: scripts/sim/housing.gd:50
+#: scripts/sim/housing.gd:47
 msgid "Choose thirty days' notice or pay one month's termination fee."
 msgstr "请选择提前三十天通知，或支付一个月违约金。"
 
@@ -5778,7 +5794,7 @@ msgstr "市政厅——许可"
 msgid "City Hall, permits, registration, public services."
 msgstr "市政厅、许可、公司登记、公共服务。"
 
-#: scripts/sim/cafe.gd:452
+#: scripts/sim/cafe.gd:457
 msgid "City Hall: your food handling licence is approved."
 msgstr "市政厅：你的食品处理执照核准了。"
 
@@ -5854,11 +5870,11 @@ msgstr "市政中心"
 msgid "Civic Clinic & Pharmacy"
 msgstr "市民诊所与药局"
 
-#: scripts/sim/city_future.gd:171
+#: scripts/sim/city_future.gd:198
 msgid "Civic chapter %d reviewed from recorded deliveries and decisions."
 msgstr "城市第 %d 章已依实际交付与决策完成回顾。"
 
-#: scripts/sim/city_future.gd:122
+#: scripts/sim/city_future.gd:135
 msgid "Civic charging network"
 msgstr "城市充电网络"
 
@@ -5878,11 +5894,11 @@ msgstr "市政服务"
 msgid "Civic services and city decisions"
 msgstr "城市服务与公共决策"
 
-#: scripts/sim/city_future.gd:62
+#: scripts/sim/city_future.gd:69
 msgid "Civic services ordered: %s home dollars."
 msgstr "已订购城市服务：%s 本国币。"
 
-#: scripts/sim/city_future.gd:58
+#: scripts/sim/city_future.gd:65
 msgid "Civic supplier"
 msgstr "城市计划供应商"
 
@@ -6182,7 +6198,7 @@ msgstr "连续三个月结帐，每月净利超过 5,000 本国元。"
 msgid "CloseInfo"
 msgstr "CloseInfo"
 
-#: scripts/sim/insolvency.gd:174
+#: scripts/sim/insolvency.gd:175
 msgid "Closed %s. Stock sold for %s; %s of debt written off. Starting again."
 msgstr "%s 结束营业。库存卖了 %s；%s 的债务被注销。重新出发。"
 
@@ -6346,7 +6362,7 @@ msgstr "应缴营业税 %s・应缴所得税 %s"
 msgid "Collected tax is owed money, not revenue. Filing yourself uses time and risks a form correction; an accountant charges a fee for accurate filing."
 msgstr "代收税款是负债，不是营收。自行申报要花时间，且可能需要补正；会计师则收费准确申报。"
 
-#: scripts/sim/personal_assets.gd:197
+#: scripts/sim/personal_assets.gd:233
 msgid "Collected tenant invoices: %s"
 msgstr "收回租客欠款：%s"
 
@@ -6426,7 +6442,7 @@ msgstr "Company OS：你的工作电脑"
 msgid "Company account"
 msgstr "公司帐户"
 
-#: scripts/sim/capital_market.gd:94
+#: scripts/sim/capital_market.gd:104
 msgid "Company acquisition: %s"
 msgstr "公司收购款：%s"
 
@@ -6442,7 +6458,7 @@ msgstr "公司现金"
 msgid "Company cash must cover sea freight and arrival duty before dispatch."
 msgstr "出货前，公司现金必须足以支付海运费与进口关税。"
 
-#: scripts/sim/fx_forward.gd:51
+#: scripts/sim/fx_forward.gd:64
 msgid "Company cash must cover the fee and refundable hedge collateral. Transfer cash or reduce the amount."
 msgstr "公司现金不足以支付手续费与可退保证金。请转入资金，或降低名目金额。"
 
@@ -6450,7 +6466,7 @@ msgstr "公司现金不足以支付手续费与可退保证金。请转入资金
 msgid "Company closed — decline this opportunity."
 msgstr "公司已关闭——请婉拒这个机会。"
 
-#: scripts/sim/insolvency.gd:92
+#: scripts/sim/insolvency.gd:93
 msgid "Company closure is already recorded. Continue with another company."
 msgstr "公司已完成关闭。请继续经营另一家公司。"
 
@@ -6510,7 +6526,7 @@ msgstr "先比较买方到岸成本与需求价格，再决定交易路线。"
 msgid "Compare cash buffers and costs before expanding. Shocks expire; prices and wages can rise or fall."
 msgstr "扩张前先比较现金缓冲与成本。冲击会消退，物价和薪资可能上升或下降。"
 
-#: scripts/sim/legacy_business.gd:291
+#: scripts/sim/legacy_business.gd:292
 msgid "Compare consolidation routes"
 msgstr "比较整并下的经营策略"
 
@@ -6670,7 +6686,7 @@ msgstr "请先完成上一个成长阶段。"
 msgid "Complete the reply's requirements first."
 msgstr "请先完成此回复的条件。"
 
-#: scripts/sim/capital_market.gd:146
+#: scripts/sim/capital_market.gd:162
 msgid "Complete the roadshow and review the price first."
 msgstr "先完成路演，并确认发行价格。"
 
@@ -6830,7 +6846,7 @@ msgstr "产业整并"
 msgid "Consolidation and legacy"
 msgstr "产业整并与传承"
 
-#: scripts/sim/capital_market.gd:38
+#: scripts/sim/capital_market.gd:48
 msgid "Consolidation opens: NPC companies review acquisitions and public listings."
 msgstr "整并潮开始，NPC 公司正在评估收购与上市。"
 
@@ -6942,11 +6958,11 @@ msgstr "与 %s 发生合约争议。请到公司系统 → 治理，选择和解
 msgid "Contract manager (home dollars / month)"
 msgstr "委任经理人费用（本国元／月）"
 
-#: scripts/sim/legacy_business.gd:304
+#: scripts/sim/legacy_business.gd:305
 msgid "Contract manager fee paid"
 msgstr "支付委任经理人费用"
 
-#: scripts/sim/legacy_business.gd:300
+#: scripts/sim/legacy_business.gd:301
 msgid "Contract manager monthly fee: %s"
 msgstr "委任经理人月费：%s"
 
@@ -6978,7 +6994,7 @@ msgstr "换汇差额会记为汇兑收益或损失。退款若需要重新买入
 msgid "Conversions"
 msgstr "转换人次"
 
-#: scripts/sim/global_market.gd:236
+#: scripts/sim/global_market.gd:237
 msgid "Convert %s %s to home cash: %s"
 msgstr "换汇 %s %s，入帐本国币：%s"
 
@@ -6990,7 +7006,7 @@ msgstr "换导入帐（%s）"
 msgid "Convert your first weekly foreign payout in Finance"
 msgstr "到财务页，将第一次海外周拨款换导入帐"
 
-#: scripts/sim/cafe.gd:76
+#: scripts/sim/cafe.gd:81
 msgid "Corner"
 msgstr "转角"
 
@@ -7730,7 +7746,7 @@ msgstr "债务容忍度"
 msgid "Debt written off"
 msgstr "注销的债务"
 
-#: scripts/sim/insolvency.gd:131
+#: scripts/sim/insolvency.gd:132
 msgid "Debt written off in liquidation — %s"
 msgstr "清算时注销的债务——%s"
 
@@ -8190,6 +8206,10 @@ msgstr "库存、订单和员工搬迁目的地"
 msgid "Detail · %s"
 msgstr "美容 · %s"
 
+#: scripts/sim/capital_market.gd:164
+msgid "Detailed disclosures are still being reviewed. Continue operating until the stated listing date."
+msgstr "详细揭露仍在审查中。请继续经营，直到公告的上市日期。"
+
 #: scripts/ui/modals/business_board.gd:123
 msgid "Details / apply"
 msgstr "详情／应征"
@@ -8378,7 +8398,7 @@ msgstr "申诉败诉 %s：−%s"
 msgid "Dispute the claim"
 msgstr "拒绝理赔"
 
-#: scripts/sim/legal.gd:86
+#: scripts/sim/legal.gd:91
 msgid "Disputed invoice recovered: %s"
 msgstr "争议发票回收：%s"
 
@@ -8578,7 +8598,7 @@ msgstr "司机"
 msgid "Driving to %s: %d minutes, including parking."
 msgstr "开车前往 %s：含停车共 %d 分钟。"
 
-#: scripts/sim/personal_assets.gd:133
+#: scripts/sim/personal_assets.gd:169
 msgid "Driving, parking and maintenance: %s"
 msgstr "开车、停车与保养：%s"
 
@@ -8606,7 +8626,7 @@ msgstr "Duarte"
 msgid "Due %s"
 msgstr "截止 %s"
 
-#: scripts/sim/capital_market.gd:45
+#: scripts/sim/capital_market.gd:55
 msgid "Due diligence is still running. Continue operating until its stated date."
 msgstr "尽职调查尚未完成，请先继续经营，等到指定日期再确认。"
 
@@ -8650,11 +8670,11 @@ msgstr "结局 — 照你的条件"
 msgid "ENDING — STILL YOURS"
 msgstr "结局 — 仍然是你的"
 
-#: scripts/sim/personal_assets.gd:152
+#: scripts/sim/personal_assets.gd:188
 msgid "EV charging: %s"
 msgstr "电动车充电：%s"
 
-#: scripts/sim/personal_assets.gd:154
+#: scripts/sim/personal_assets.gd:190
 msgid "EV grid electricity"
 msgstr "电动车充电用电"
 
@@ -8958,7 +8978,7 @@ msgstr "紧急接驳"
 msgid "Emerging Market"
 msgstr "新兴市场"
 
-#: scripts/sim/legal.gd:100
+#: scripts/sim/legal.gd:105
 msgid "Employee dispute compensation: %s"
 msgstr "员工争议赔偿：%s"
 
@@ -8982,7 +9002,7 @@ msgstr "员工薪资"
 msgid "Employee wages remain owed. IP disputes refer to completed media or manufacturing jobs; court success avoids compensation but never pays fictitious income."
 msgstr "已赚取的员工薪资仍须支付。智财争议针对已完成的媒体或制造工作；胜诉能减免赔偿，不能产生虚构收入。"
 
-#: scripts/sim/legal.gd:98
+#: scripts/sim/legal.gd:103
 msgid "Employee wages settled: %s"
 msgstr "员工薪资结清：%s"
 
@@ -9197,6 +9217,10 @@ msgstr "预估交易余额（本国元）"
 #: scripts/sim/forecast.gd:107
 msgid "Estimated sales"
 msgstr "预估销售"
+
+#: scripts/ui/modals/fx_risk_modal.gd:56
+msgid "Estimated unbooked sales of about %s %s are not hedgeable until they are booked."
+msgstr "约 %s %s 的预估未入帐销售，入帐前无法避险。"
 
 #: scripts/ui/hud.gd:255
 msgid "Evening"
@@ -9450,7 +9474,7 @@ msgstr "表情 ▶"
 msgid "External revenue"
 msgstr "对外营收"
 
-#: scripts/sim/insolvency.gd:154
+#: scripts/sim/insolvency.gd:155
 msgid "External shareholder liquidation payable"
 msgstr "应付外部股东清算款"
 
@@ -9666,7 +9690,7 @@ msgstr "2月"
 msgid "Fee / collateral (home dollars)"
 msgstr "手续费／保证金（本国币）"
 
-#: scripts/ui/modals/fx_risk_modal.gd:57
+#: scripts/ui/modals/fx_risk_modal.gd:60
 msgid "Fee / refundable collateral (home dollars)"
 msgstr "手续费／可退保证金（本国币）"
 
@@ -9754,7 +9778,7 @@ msgstr "已缴规费：$300"
 msgid "Fill a group room block"
 msgstr "住满一个团体包房"
 
-#: scripts/sim/insolvency.gd:147
+#: scripts/sim/insolvency.gd:148
 msgid "Final distribution to the founder"
 msgstr "最后分配给创办人"
 
@@ -9866,7 +9890,7 @@ msgstr "完成十次有薪班次。"
 msgid "Finish the agreed scope before delivery."
 msgstr "完成约定范围后才能交付。"
 
-#: scripts/sim/housing.gd:49 scripts/ui/modals/home_move_modal.gd:17
+#: scripts/sim/housing.gd:46 scripts/ui/modals/home_move_modal.gd:17
 msgid "Finish the arrival tutorial before moving. Your first home stays at Riverside."
 msgstr "请先完成抵达教学。你的第一个家仍在河滨。"
 
@@ -9874,7 +9898,7 @@ msgstr "请先完成抵达教学。你的第一个家仍在河滨。"
 msgid "Finish the current recruitment first."
 msgstr "请先完成目前的招募。"
 
-#: scripts/sim/life_legacy.gd:82
+#: scripts/sim/life_legacy.gd:88
 msgid "Finish the epilogue or choose retirement before starting another life."
 msgstr "先读完尾声或选择退休，再展开新人生。"
 
@@ -9886,7 +9910,7 @@ msgstr "完成第一个客户行销案，查看实际成效。"
 msgid "Finish the main story to start optional growth goals. Achievements already track your progress."
 msgstr "完成主线后就能开始选择成长目标。成就已在记录你的进度。"
 
-#: scripts/sim/housing.gd:36
+#: scripts/sim/housing.gd:35
 msgid "Finish the pop-up weekend before moving home. Its unsold stock must return to this home."
 msgstr "请等快闪店周末结束再搬家，剩货需要先退回目前住处。"
 
@@ -9986,7 +10010,7 @@ msgstr "第一笔销售：%s 买了%s，%s。"
 msgid "First unhappy customer"
 msgstr "第一位不满意的客人"
 
-#: scripts/sim/logistics_depth.gd:173
+#: scripts/sim/logistics_depth.gd:181
 msgid "First van"
 msgstr "一号货车"
 
@@ -10030,7 +10054,7 @@ msgstr "个人现金不足，健身会员已停止续约。"
 msgid "Fitness studio"
 msgstr "健身工作室"
 
-#: scripts/sim/cafe.gd:127
+#: scripts/sim/cafe.gd:132
 msgid "Fitted out %s."
 msgstr "%s 装修完成。"
 
@@ -10138,7 +10162,7 @@ msgstr "车辆融资利息"
 msgid "Flowers gift"
 msgstr "花束礼物"
 
-#: scripts/sim/cafe.gd:344
+#: scripts/sim/cafe.gd:349
 msgid "Flyers and a board for %s"
 msgstr "%s 的传单和立牌"
 
@@ -10162,7 +10186,7 @@ msgstr "跟着金色箭头走到 Bloom Coffee，从门口走进去。在柜台�
 msgid "Food"
 msgstr "食品"
 
-#: data/help/glossary.json scripts/sim/cafe.gd:151 scripts/ui/modals/company_os.gd:1339
+#: data/help/glossary.json scripts/sim/cafe.gd:156 scripts/ui/modals/company_os.gd:1339
 msgid "Food handling licence"
 msgstr "食品处理许可"
 
@@ -10174,7 +10198,7 @@ msgstr "食品处理执照（%s）"
 msgid "Food handling licence at City Hall."
 msgstr "到市政厅申请食品处理执照。"
 
-#: scripts/sim/cafe.gd:451
+#: scripts/sim/cafe.gd:456
 msgid "Food handling licence granted."
 msgstr "食品处理执照核发了。"
 
@@ -10214,6 +10238,10 @@ msgstr "给使用回收包材、并有绿色商品在卖的已登记公司。"
 msgid "For serving food and drink from your own premises. An inspector checks the unit; it takes two days."
 msgstr "在自己的店面卖吃的喝的就需要。稽查员会来看店，大约两天。"
 
+#: scripts/sim/personal_assets.gd:70
+msgid "Foreclosure sale of %s: the lender takes the home"
+msgstr "法拍 %s：贷款机构收回住宅"
+
 #: data/help/glossary.json
 msgid "Foreign payouts keep their currency. Check the current rate before converting."
 msgstr "海外拨款会保留原币别；换汇前先确认目前汇率。"
@@ -10230,7 +10258,7 @@ msgstr "汇率变动，外币收入换回的本国币金额也会改变。"
 msgid "Foreign receipts retain their historical home-dollar book value until you convert them."
 msgstr "外币应收款保留入帐时的本国币帐面价值，换汇时才结算差额。"
 
-#: scripts/sim/global_market.gd:289
+#: scripts/sim/global_market.gd:291
 msgid "Foreign receipts transferred for company closure"
 msgstr "公司结束营业：转入外币应收款"
 
@@ -10254,15 +10282,15 @@ msgstr "正确处理的表单：%d / %d"
 msgid "Forty cars sold"
 msgstr "卖出四十台车"
 
-#: scripts/sim/fx_forward.gd:65
+#: scripts/sim/fx_forward.gd:78
 msgid "Forward %s fee: %s"
 msgstr "远期合约 %s 手续费：%s"
 
-#: scripts/sim/fx_forward.gd:66
+#: scripts/sim/fx_forward.gd:79
 msgid "Forward %s refundable collateral: %s"
 msgstr "远期合约 %s 可退保证金：%s"
 
-#: scripts/sim/fx_forward.gd:85
+#: scripts/sim/fx_forward.gd:98
 msgid "Forward %s settled at %s: exchange result %s"
 msgstr "远期合约 %s 以汇率 %s 结算：汇兑损益 %s"
 
@@ -10290,7 +10318,7 @@ msgstr "创办人出资（开户存款）"
 msgid "Founder payout (home dollars)"
 msgstr "创办人可取得款项（本国元）"
 
-#: scripts/sim/insolvency.gd:52
+#: scripts/sim/insolvency.gd:53
 msgid "Founder rescue capital"
 msgstr "创办人纾困资金"
 
@@ -10298,7 +10326,7 @@ msgstr "创办人纾困资金"
 msgid "Founder sale proceeds (home dollars)"
 msgstr "创办人出售所得（本国元）"
 
-#: scripts/sim/capital_market.gd:61
+#: scripts/sim/capital_market.gd:71
 msgid "Founder share sale to %s: %s"
 msgstr "创办人持股出售予 %s：%s"
 
@@ -10306,7 +10334,7 @@ msgstr "创办人持股出售予 %s：%s"
 msgid "Founder shares granted to the team"
 msgstr "创办人将股份交给团队"
 
-#: scripts/sim/city_future.gd:209
+#: scripts/sim/city_future.gd:236
 msgid "Founder shares vested to the employee team"
 msgstr "创办人股份转归员工团队"
 
@@ -10562,7 +10590,7 @@ msgstr "以集团贷款挹注子公司"
 msgid "Fund the air rerouting fee or wait for the port to reopen."
 msgstr "先备妥改走空运的费用，或等待港口恢复。"
 
-#: scripts/sim/city_future.gd:96
+#: scripts/sim/city_future.gd:110
 msgid "Fund the assurance fee or submit the balanced bid."
 msgstr "先备妥查核费，或提交均衡提案。"
 
@@ -10590,7 +10618,7 @@ msgstr "先备妥引荐工作的材料费再开工。"
 msgid "Fund the regional agency application fee first."
 msgstr "先备妥区域代理权申请费。"
 
-#: scripts/sim/city_future.gd:154
+#: scripts/sim/city_future.gd:167
 msgid "Fund the standby crew or choose the economy event."
 msgstr "先备妥待命团队费用，或选择节约方案。"
 
@@ -10602,7 +10630,7 @@ msgstr "先备妥货款与卖方应负担的运输费用。"
 msgid "Fund the tax payment and filing fee first."
 msgstr "请先备妥税款和申报费。"
 
-#: scripts/sim/city_future.gd:137
+#: scripts/sim/city_future.gd:150
 msgid "Fund the workshop or continue the civic volunteer program."
 msgstr "先备妥工作坊预算，或参与城市志工方案。"
 
@@ -10610,7 +10638,7 @@ msgstr "先备妥工作坊预算，或参与城市志工方案。"
 msgid "Furniture and invitations"
 msgstr "家具与招待"
 
-#: scripts/ui/modals/fx_risk_modal.gd:69
+#: scripts/ui/modals/fx_risk_modal.gd:72
 msgid "Future overseas distributor offers can use home currency. Buyers take the exchange risk: acceptance is lower and their offer is cheaper. Existing invoices keep their agreed currency."
 msgstr "未来的海外经销报价可改用本国币。买方承担汇率风险，因此成交率较低、报价也较低；已签发票维持原约定币别。"
 
@@ -10990,15 +11018,15 @@ msgstr "集团活动"
 msgid "Group cash"
 msgstr "集团现金"
 
-#: scripts/sim/holding_groups.gd:88
+#: scripts/sim/holding_groups.gd:90
 msgid "Group goods purchase: %s per unit"
 msgstr "集团内进货：每件 %s"
 
-#: scripts/sim/holding_groups.gd:87
+#: scripts/sim/holding_groups.gd:89
 msgid "Group goods sale: %s per unit"
 msgstr "集团内销货：每件 %s"
 
-#: scripts/sim/holding_groups.gd:108 scripts/sim/holding_groups.gd:109
+#: scripts/sim/holding_groups.gd:110 scripts/sim/holding_groups.gd:111
 msgid "Group interest accrued: %s"
 msgstr "集团内应计利息：%s"
 
@@ -11022,19 +11050,19 @@ msgstr "集团委托"
 msgid "Group jobs are big orders that need two or more industries. Unfinished parts can be subcontracted for a fee."
 msgstr "集团委托是需要两个以上产业的大案。没完成的部分可付费转包。"
 
-#: scripts/sim/holding_groups.gd:105 scripts/sim/holding_groups.gd:106
+#: scripts/sim/holding_groups.gd:107 scripts/sim/holding_groups.gd:108
 msgid "Group loan interest: %s"
 msgstr "集团贷款利息：%s"
 
-#: scripts/sim/holding_groups.gd:49 scripts/sim/holding_groups.gd:50
+#: scripts/sim/holding_groups.gd:51 scripts/sim/holding_groups.gd:52
 msgid "Group loan principal: %s"
 msgstr "集团贷款本金：%s"
 
-#: scripts/sim/holding_groups.gd:56 scripts/sim/holding_groups.gd:57
+#: scripts/sim/holding_groups.gd:58 scripts/sim/holding_groups.gd:59
 msgid "Group loan repayment: %s"
 msgstr "偿还集团贷款：%s"
 
-#: scripts/sim/holding_groups.gd:63 scripts/sim/holding_groups.gd:64
+#: scripts/sim/holding_groups.gd:65 scripts/sim/holding_groups.gd:66
 msgid "Group management service: %s"
 msgstr "集团管理服务费：%s"
 
@@ -11210,11 +11238,11 @@ msgstr "发色"
 msgid "Hairstyle"
 msgstr "发型"
 
-#: data/economy/capital_market.json scripts/sim/capital_market.gd:27 scripts/sim/legacy_business.gd:62
+#: data/economy/capital_market.json scripts/sim/capital_market.gd:33 scripts/sim/legacy_business.gd:62
 msgid "Hale Group"
 msgstr "Hale Group"
 
-#: scripts/sim/capital_market.gd:175
+#: scripts/sim/capital_market.gd:192
 msgid "Hale Group acquired Meridian Supply; it is no longer an independent target."
 msgstr "Hale Group 已收购 Meridian Supply，后者不再是独立的收购标的。"
 
@@ -11546,7 +11574,7 @@ msgstr "嗨！欢迎来到 Nexus。第一次来？"
 msgid "Hey, did you get my messages? Call me when you can."
 msgstr "欸，有收到我的消息吗？有空打给我。"
 
-#: scripts/sim/insolvency.gd:173
+#: scripts/sim/insolvency.gd:174
 msgid "Hey. I heard. Most founders I know closed something before the thing that worked. Dinner's on me."
 msgstr "嘿，我听说了。我认识的创办人大多收掉过一间公司，才做出成功的那个。晚餐我请。"
 
@@ -11662,7 +11690,7 @@ msgstr "聘用你的第一位员工（应征者一天内会回复）"
 msgid "HireTomas"
 msgstr "HireTomas"
 
-#: scripts/sim/legacy_business.gd:248 scripts/sim/staff.gd:146
+#: scripts/sim/legacy_business.gd:249 scripts/sim/staff.gd:146
 msgid "Hired %s as %s."
 msgstr "聘用 %s 担任%s。"
 
@@ -11730,15 +11758,15 @@ msgstr "居家"
 msgid "Home and personal car"
 msgstr "住家与自用车"
 
-#: scripts/sim/personal_assets.gd:162
+#: scripts/sim/personal_assets.gd:198
 msgid "Home decoration: %s"
 msgstr "住家装潢：%s"
 
-#: scripts/sim/housing.gd:58
+#: scripts/sim/housing.gd:55
 msgid "Home deposit paid: %s"
 msgstr "支付租屋押金：%s"
 
-#: scripts/sim/personal_assets.gd:73
+#: scripts/sim/personal_assets.gd:106
 msgid "Home management, maintenance and tax: %s"
 msgstr "住家管理、维修与税费：%s"
 
@@ -11774,15 +11802,15 @@ msgstr "住处房租——%s（%s）"
 msgid "Home roof"
 msgstr "住宅屋顶"
 
-#: scripts/sim/personal_assets.gd:44
+#: scripts/sim/personal_assets.gd:50
 msgid "Home sale after fees: %s"
 msgstr "售屋扣除费用后：%s"
 
-#: scripts/sim/housing.gd:82
+#: scripts/sim/housing.gd:79
 msgid "Home termination fee: %s"
 msgstr "提前退租违约金：%s"
 
-#: data/help/glossary.json scripts/ui/modals/fx_risk_modal.gd:68
+#: data/help/glossary.json scripts/ui/modals/fx_risk_modal.gd:71
 msgid "Home-currency invoices"
 msgstr "本国币开票"
 
@@ -11806,7 +11834,7 @@ msgstr "接受所有理赔并立刻修复"
 msgid "Horizon Labs"
 msgstr "Horizon 实验室"
 
-#: scripts/sim/personal_assets.gd:176
+#: scripts/sim/personal_assets.gd:212
 msgid "Hosted %s at home."
 msgstr "在家招待了 %s。"
 
@@ -11998,7 +12026,7 @@ msgstr "我借钱看现金流，不看点子。"
 msgid "I need somewhere to work."
 msgstr "我需要一个工作的地方。"
 
-#: scripts/sim/personal_assets.gd:175
+#: scripts/sim/personal_assets.gd:211
 msgid "I noticed the coupe outside. It must be expensive to keep."
 msgstr "我看到外面的跑车了，养车应该不便宜吧。"
 
@@ -12118,7 +12146,7 @@ msgstr "运送中"
 msgid "INVOICED"
 msgstr "已开发票"
 
-#: scripts/sim/legal.gd:105
+#: scripts/sim/legal.gd:116
 msgid "IP licence settlement: %s"
 msgstr "智财授权和解：%s"
 
@@ -12290,7 +12318,7 @@ msgstr "%d 年度所得税"
 msgid "Incoming"
 msgstr "在途"
 
-#: scripts/sim/city_future.gd:96
+#: scripts/sim/city_future.gd:110
 msgid "Independent expo assurance fee"
 msgstr "博览会独立查核费"
 
@@ -12350,7 +12378,7 @@ msgstr "继承一间咖啡店"
 msgid "Inherited café supplies: %d cups"
 msgstr "继承咖啡店备料：可制作 %d 杯"
 
-#: scripts/sim/life_legacy.gd:111
+#: scripts/sim/life_legacy.gd:117
 msgid "Inherited capital: %s"
 msgstr "继承资本：%s"
 
@@ -12554,7 +12582,7 @@ msgstr "集成费 %s 本国元，需 %d 天，估计流失 %s 员工。请保留
 msgid "Integration staffing: %d people before, %d people after; systems fee %s home dollars."
 msgstr "集成前 %d 位员工，集成后 %d 位；系统集成费 %s 本国元。"
 
-#: scripts/sim/capital_market.gd:95
+#: scripts/sim/capital_market.gd:105
 msgid "Integration systems fee: %s"
 msgstr "系统集成费：%s"
 
@@ -12678,7 +12706,7 @@ msgstr "国际快捷运送"
 msgid "International freight (home dollars)"
 msgstr "国际运费（奥瑞莉亚元）"
 
-#: scripts/sim/global_market.gd:313
+#: scripts/sim/global_market.gd:316
 msgid "International return postage"
 msgstr "国际退货运费"
 
@@ -12798,7 +12826,7 @@ msgstr "投资人问：为什么营收不等于现金？"
 msgid "Investors buy shares in a registered company."
 msgstr "投资人只能入股已登记的公司。"
 
-#: scripts/sim/capital_market.gd:138
+#: scripts/sim/capital_market.gd:153
 msgid "Investors declined unsupported promises. The audit fee is not refunded."
 msgstr "投资人不接受缺乏根据的承诺。审计费不退还。"
 
@@ -13002,7 +13030,7 @@ msgstr "征才公告"
 msgid "Join the city proposal"
 msgstr "加入城市提案"
 
-#: scripts/sim/city_future.gd:164 scripts/sim/city_future.gd:32
+#: scripts/sim/city_future.gd:102 scripts/sim/city_future.gd:191 scripts/sim/city_future.gd:32 scripts/sim/city_future.gd:53
 msgid "Join the city proposal first."
 msgstr "先加入城市提案。"
 
@@ -13182,7 +13210,7 @@ msgstr "卡鲁"
 msgid "Karu Unit"
 msgstr "Karu 元"
 
-#: scripts/sim/housing.gd:57
+#: scripts/sim/housing.gd:54
 msgid "Keep %s personally for the new deposit, moving and termination costs."
 msgstr "请预留个人现金 %s，支付新押金、搬家与退租费用。"
 
@@ -13194,7 +13222,7 @@ msgstr "保留 100%，用别的方法找钱。"
 msgid "Keep at most the incurred production cost from the deposit; refund the rest."
 msgstr "最多保留已发生的生产成本，其余订金退还客户。"
 
-#: scripts/sim/legacy_business.gd:243
+#: scripts/sim/legacy_business.gd:244
 msgid "Keep building"
 msgstr "继续经营"
 
@@ -13230,7 +13258,7 @@ msgstr "请预留足够现金，等通知期届满后再搬入。"
 msgid "Keep enough cash for the ticket, or call Omar by video."
 msgstr "请留足机票费用，或改用免费视频联系 Omar。"
 
-#: scripts/sim/capital_market.gd:116
+#: scripts/sim/capital_market.gd:126
 msgid "Keep enough company cash for the audit fee."
 msgstr "先保留足够的公司现金支付审计费。"
 
@@ -13242,11 +13270,11 @@ msgstr "先补足公司现金，再支付国际帐户开户费。"
 msgid "Keep enough company cash for the weekend rent."
 msgstr "请先准备足够公司现金支付周末租金。"
 
-#: scripts/sim/housing.gd:78
+#: scripts/sim/housing.gd:75
 msgid "Keep enough personal cash for the agreed moving and termination costs."
 msgstr "请预留足够个人现金，支付约定的搬家与退租费用。"
 
-#: scripts/sim/holding_groups.gd:55
+#: scripts/sim/holding_groups.gd:57
 msgid "Keep enough subsidiary cash and choose an outstanding principal amount."
 msgstr "请确认子公司有足够现金，并选择尚未偿还的本金金额。"
 
@@ -13282,7 +13310,7 @@ msgstr "预算不变"
 msgid "Keep my plans"
 msgstr "维持原计划"
 
-#: scripts/ui/modals/capital_market_modal.gd:110 scripts/ui/modals/capital_market_modal.gd:58 scripts/ui/modals/capital_market_modal.gd:66 scripts/ui/modals/capital_market_modal.gd:72
+#: scripts/ui/modals/capital_market_modal.gd:112 scripts/ui/modals/capital_market_modal.gd:58 scripts/ui/modals/capital_market_modal.gd:66 scripts/ui/modals/capital_market_modal.gd:72
 msgid "Keep operating"
 msgstr "先继续经营"
 
@@ -13290,7 +13318,7 @@ msgstr "先继续经营"
 msgid "Keep operating, sell at the current Chapter 12 valuation, share ownership with employees, or mentor with a contract manager."
 msgstr "继续经营、按第 12 章的算法出售公司、让员工持股，或交给经理人管理后退居导师。"
 
-#: scripts/sim/personal_assets.gd:132
+#: scripts/sim/personal_assets.gd:168
 msgid "Keep personal cash for parking, fuel and due maintenance, or take the metro."
 msgstr "请保留个人停车、油钱与到期保养费，或改搭捷运。"
 
@@ -13318,7 +13346,7 @@ msgstr "让咖啡店开门且备足货；展览访客会自己走进来。"
 msgid "Keep the company private"
 msgstr "维持公司私有"
 
-#: scripts/sim/city_future.gd:119
+#: scripts/sim/city_future.gd:131
 msgid "Keep the consultation budget or join the city partnership."
 msgstr "先备妥咨询预算，或加入城市合作。"
 
@@ -13350,7 +13378,7 @@ msgstr "不查核，直接采用最新纪录"
 msgid "Keep the old hours to avoid admitting a mistake"
 msgstr "保留旧时间以免承认错误"
 
-#: scripts/sim/city_future.gd:54
+#: scripts/sim/city_future.gd:61
 msgid "Keep the service budget or join the civic partnership instead."
 msgstr "先备妥服务预算，也可改采城市合作。"
 
@@ -13434,7 +13462,7 @@ msgstr "Ken：供应商发票核对表・第 2 段"
 msgid "Ken: supplier invoice checklist · part 3"
 msgstr "Ken：供应商发票核对表・第 3 段"
 
-#: scripts/sim/capital_market.gd:75
+#: scripts/sim/capital_market.gd:85
 msgid "Kept the company private: no listing capital, no public quarterly obligation."
 msgstr "决定维持公司私有，不募集上市资本，也不承担公开市场的季报义务。"
 
@@ -13838,7 +13866,7 @@ msgstr "先承租保税仓，再申请区域代理权。"
 msgid "Lease the brokerage office"
 msgstr "承租仲介店"
 
-#: scripts/sim/cafe.gd:175
+#: scripts/sim/cafe.gd:180
 msgid "Lease the café unit first."
 msgstr "请先租下咖啡店面。"
 
@@ -13858,7 +13886,7 @@ msgstr "承租展示中心"
 msgid "Lease the showroom at Gateway Car Rental."
 msgstr "到 Gateway 租车承租展示中心。"
 
-#: scripts/sim/cafe.gd:119
+#: scripts/sim/cafe.gd:124
 msgid "Lease the unit first."
 msgstr "请先租下店面。"
 
@@ -13942,7 +13970,7 @@ msgstr "左耳一拆开就没声音。"
 msgid "Left the job at %s."
 msgstr "离开了%s的工作。"
 
-#: data/story/chapters.json data/world/years.json scripts/sim/legacy_business.gd:243 scripts/ui/phone_ui.gd:166
+#: data/story/chapters.json data/world/years.json scripts/sim/legacy_business.gd:244 scripts/ui/phone_ui.gd:166
 msgid "Legacy"
 msgstr "传承"
 
@@ -13950,7 +13978,7 @@ msgstr "传承"
 msgid "Legacy archetypes"
 msgstr "传承类型"
 
-#: scripts/sim/legacy_business.gd:238
+#: scripts/sim/legacy_business.gd:239
 msgid "Legacy choice: %s."
 msgstr "传承选择：%s。"
 
@@ -13962,7 +13990,7 @@ msgstr "旧版案件"
 msgid "Legal Dispute"
 msgstr "法律争议"
 
-#: scripts/sim/legal.gd:117
+#: scripts/sim/legal.gd:128
 msgid "Legal case %s closed. Recovered %s; paid %s."
 msgstr "法律案件 %s 已结案。回收 %s；支付 %s。"
 
@@ -13978,7 +14006,7 @@ msgstr "法律争议"
 msgid "Legal fee for an insurer dispute"
 msgstr "保险争议律师费"
 
-#: scripts/sim/legal.gd:64
+#: scripts/sim/legal.gd:69
 msgid "Legal fee: %s"
 msgstr "法务费用：%s"
 
@@ -14218,7 +14246,7 @@ msgstr "工厂退租前，请先选择清算原料与预付运送中的采购。
 msgid "Liquidate stock"
 msgstr "折价出清库存"
 
-#: scripts/sim/insolvency.gd:127
+#: scripts/sim/insolvency.gd:128
 msgid "Liquidation payment — %s"
 msgstr "清算还款——%s"
 
@@ -14258,11 +14286,11 @@ msgstr "已上架"
 msgid "Listed %s at %s. Took %s."
 msgstr "已上架%s，售价 %s。花了 %s。"
 
-#: scripts/sim/capital_market.gd:165
+#: scripts/sim/capital_market.gd:182
 msgid "Listed shares at %s home dollars per share; quarterly reporting and board votes now apply."
 msgstr "以每股 %s 本国元挂牌上市；从现在起需要发布季报，重大收购须经董事会表决。"
 
-#: scripts/sim/capital_market.gd:117
+#: scripts/sim/capital_market.gd:127
 msgid "Listing audit fee: %s"
 msgstr "上市审计费：%s"
 
@@ -14418,7 +14446,7 @@ msgstr "用今天的价格再订 {moq} 件"
 msgid "Locked a group block of %d rooms for %s."
 msgstr "已锁定 %d 间团体房（客户：%s）。"
 
-#: scripts/ui/modals/fx_risk_modal.gd:56
+#: scripts/ui/modals/fx_risk_modal.gd:59
 msgid "Locked quote (home dollars/foreign unit)"
 msgstr "锁定汇率（本国币／1 外币）"
 
@@ -14790,7 +14818,7 @@ msgstr "把问题处理好"
 msgid "Make room"
 msgstr "留一点空间给后来的人"
 
-#: scripts/sim/legacy_business.gd:243
+#: scripts/sim/legacy_business.gd:244
 msgid "Make room for new founders"
 msgstr "陪新创办人踏出第一步"
 
@@ -15330,7 +15358,7 @@ msgstr "请先认识此联系人，或收到对方消息。"
 msgid "Meet this person before offering a gift."
 msgstr "先认识这个人再送礼。"
 
-#: scripts/sim/personal_assets.gd:167
+#: scripts/sim/personal_assets.gd:203
 msgid "Meet this person first, then invite them home."
 msgstr "请先认识这位人物，再邀请到家里。"
 
@@ -15742,7 +15770,7 @@ msgstr "房贷余额 %s・以目前利率计算每月还款 %s・未付利息 %s
 msgid "Mortgage rate rise"
 msgstr "房贷升息"
 
-#: scripts/sim/personal_assets.gd:45
+#: scripts/sim/personal_assets.gd:51
 msgid "Mortgage repaid: %s"
 msgstr "清偿房贷：%s"
 
@@ -15754,7 +15782,7 @@ msgstr "房贷期限：%d 年"
 msgid "Mortgage terms require 20–30% down and 20–30 years."
 msgstr "房贷需付 20–30% 头期款，期限为 20–30 年。"
 
-#: scripts/sim/personal_assets.gd:84
+#: scripts/sim/personal_assets.gd:118
 msgid "Mortgage unpaid. Raise personal cash, rent another home or sell an empty property."
 msgstr "房贷尚未支付，请筹个人现金、出租其他住宅，或出售空屋。"
 
@@ -15786,7 +15814,7 @@ msgstr "搬进自有住宅"
 msgid "Move left"
 msgstr "向左移动"
 
-#: scripts/sim/personal_assets.gd:49
+#: scripts/sim/personal_assets.gd:81
 msgid "Move out and choose valid rent terms before listing this home."
 msgstr "请先搬出这间住宅，再选择合理租金招租。"
 
@@ -15834,11 +15862,11 @@ msgstr "通过汽车柜台卖出两台车。"
 msgid "Move up"
 msgstr "向上移动"
 
-#: scripts/sim/housing.gd:96
+#: scripts/sim/housing.gd:91
 msgid "Moved to %s; monthly rent %s."
 msgstr "已搬到 %s，每月房租 %s。"
 
-#: autoload/game_state.gd:45 scripts/sim/life_legacy.gd:114
+#: autoload/game_state.gd:45 scripts/sim/life_legacy.gd:120
 msgid "Moved to Aurelia City with $%s in savings."
 msgstr "带着 $%s 的存款搬到奥瑞莉亚市。"
 
@@ -15858,7 +15886,7 @@ msgstr "搬运费"
 msgid "Moving home"
 msgstr "搬家"
 
-#: scripts/sim/housing.gd:83
+#: scripts/sim/housing.gd:80
 msgid "Moving service: %s"
 msgstr "搬家服务费：%s"
 
@@ -16250,7 +16278,7 @@ msgstr "下个可预约周末：%s 日"
 msgid "Next! Hi. What can I do for you?"
 msgstr "下一位！你好，要办什么？"
 
-#: scripts/sim/life_legacy.gd:109
+#: scripts/sim/life_legacy.gd:115
 msgid "Next-life starting capital adjustment"
 msgstr "新人生起始资本调整"
 
@@ -16378,7 +16406,7 @@ msgstr "Nia Park：实习学习作品集・第 2 段"
 msgid "Nia Park: internship learning portfolio · part 3"
 msgstr "Nia Park：实习学习作品集・第 3 段"
 
-#: scripts/sim/legacy_business.gd:134 scripts/sim/legacy_business.gd:192 scripts/sim/legacy_business.gd:290 scripts/ui/modals/legacy_modal.gd:61
+#: scripts/sim/legacy_business.gd:134 scripts/sim/legacy_business.gd:192 scripts/sim/legacy_business.gd:291 scripts/ui/modals/legacy_modal.gd:61
 msgid "Niche"
 msgstr "利基"
 
@@ -16442,7 +16470,7 @@ msgstr "尚无有效保单——请于事故前投保。"
 msgid "No active product price is available. The expansion ended through the review or company-closure alternative, without invented sales."
 msgstr "目前没有上架中的商品售价。本次扩张通过检讨或关闭公司的替代路径结束，未认列任何不存在的销售。"
 
-#: scripts/sim/capital_market.gd:122
+#: scripts/sim/capital_market.gd:132
 msgid "No audit is waiting. Review the current listing step."
 msgstr "目前没有待确认的审计，请查看上市流程的下一步。"
 
@@ -16462,7 +16490,7 @@ msgstr "不供早餐"
 msgid "No changes."
 msgstr "不做任何改变。"
 
-#: scripts/sim/insolvency.gd:91
+#: scripts/sim/insolvency.gd:92
 msgid "No company to close."
 msgstr "没有可以结束的公司。"
 
@@ -16470,7 +16498,7 @@ msgstr "没有可以结束的公司。"
 msgid "No completed challenges yet."
 msgstr "尚无已完成的挑战。"
 
-#: scripts/sim/capital_market.gd:204
+#: scripts/sim/capital_market.gd:221
 msgid "No consolidation ownership route was recorded."
 msgstr "尚未记录整并后的股权路线。"
 
@@ -16514,7 +16542,7 @@ msgstr "还没有司机。到人员分页请一位货车司机，你去忙别的
 msgid "No employees yet. Every order is packed by you, which is why time matters."
 msgstr "还没有员工。每笔订单都是你自己打包，所以时间很重要。"
 
-#: scripts/sim/life_legacy.gd:83
+#: scripts/sim/life_legacy.gd:89
 msgid "No empty save slot. Keep this life and manage saves from the title screen."
 msgstr "没有空白存盘槽。先继续这一局，再到标题画面管理存盘。"
 
@@ -16526,7 +16554,7 @@ msgstr "不收费、不接单、不作承诺。三十天后可能再遇到同类
 msgid "No fleet car needs service."
 msgstr "没有需要保养的车队车辆。"
 
-#: scripts/sim/global_market.gd:230
+#: scripts/sim/global_market.gd:231
 msgid "No foreign payout is ready to convert."
 msgstr "目前没有可换汇的海外拨款。"
 
@@ -16590,7 +16618,7 @@ msgstr "目前没有可约见的时段。请稍后再询问。"
 msgid "No milk"
 msgstr "不加奶"
 
-#: scripts/sim/housing.gd:73
+#: scripts/sim/housing.gd:70
 msgid "No move is booked. Choose a home first."
 msgstr "尚未预约搬家。请先选择住处。"
 
@@ -16622,11 +16650,11 @@ msgstr "目前没有可用的开门时间。"
 msgid "No outside purchase to replace yet."
 msgstr "目前还没有可以取代的外部采购。"
 
-#: scripts/sim/personal_assets.gd:196
+#: scripts/sim/personal_assets.gd:232
 msgid "No overdue tenant invoices are ready. Wait thirty days after the invoice."
 msgstr "目前没有可收回的到期欠款，请等帐单开立三十天后再处理。"
 
-#: scripts/sim/city_future.gd:81
+#: scripts/sim/city_future.gd:91
 msgid "No owned team is available. Choose the culture partnership instead."
 msgstr "目前没有你能管理的团队。改采文化合作方案。"
 
@@ -16646,7 +16674,7 @@ msgstr "还没有产品。"
 msgid "No rating yet"
 msgstr "尚无评分"
 
-#: scripts/sim/industry_guidance.gd:78
+#: scripts/sim/industry_guidance.gd:83
 msgid "No recovery slot fits this week. Free a machine or choose outsourcing."
 msgstr "这周没有可用的补救时段。请空出机台，或改选外包。"
 
@@ -16994,9 +17022,9 @@ msgstr "通知停留时间"
 msgid "Notifications only.\nManage at a desk: Company OS."
 msgstr "这里只显示通知。\n要管理请到办公桌：Company OS。"
 
-#: scripts/sim/fx_forward.gd:45
-msgid "Notional exceeds receipts and estimated sales available to hedge. Reduce the amount."
-msgstr "名目金额超过可避险的收入与预估销售。请降低金额。"
+#: scripts/sim/fx_forward.gd:58
+msgid "Notional exceeds booked receipts and invoices available to hedge. Estimated sales can be hedged once they are booked."
+msgstr "名目金额超过可避险的已入帐应收款与发票。预估销售在入帐后即可避险。"
 
 #: autoload/clock.gd:14
 msgid "Nov"
@@ -17194,7 +17222,7 @@ msgstr "办公室"
 msgid "Office Professional"
 msgstr "上班族正装"
 
-#: scripts/sim/insolvency.gd:113 scripts/ui/modals/insolvency_modal.gd:65
+#: scripts/sim/insolvency.gd:114 scripts/ui/modals/insolvency_modal.gd:65
 msgid "Office deposit returned"
 msgstr "办公室押金退回"
 
@@ -17242,11 +17270,11 @@ msgstr "Okoro 女士与第一个屋顶——机会已结束。"
 msgid "Old Town"
 msgstr "旧城区"
 
-#: scripts/sim/cafe.gd:446
+#: scripts/sim/cafe.gd:451
 msgid "Old Town Roasters delivered supplies for %d cups."
 msgstr "Old Town Roasters 送来了 %d 杯份的材料。"
 
-#: scripts/sim/cafe.gd:181
+#: scripts/sim/cafe.gd:186
 msgid "Old Town Roasters: supplies for %d cups"
 msgstr "Old Town Roasters：%d 杯份的材料"
 
@@ -17578,7 +17606,7 @@ msgstr "先到 Nexus Bank 开立国际帐户，再到公司电脑 → 销售 →
 msgid "Open an international account at Nexus Bank; Marcus can explain the fee"
 msgstr "到 Nexus Bank 开立国际帐户；Marcus 会说明费用"
 
-#: scripts/sim/fx_forward.gd:41
+#: scripts/sim/fx_forward.gd:54
 msgid "Open an international company account first."
 msgstr "请先开立公司国际帐户。"
 
@@ -17706,7 +17734,7 @@ msgstr "还是帮我开托管帐户吧。"
 msgid "Open the factory"
 msgstr "开设工厂"
 
-#: scripts/sim/industry_guidance.gd:63
+#: scripts/sim/industry_guidance.gd:68
 msgid "Open the factory before planning recovery."
 msgstr "先开设工厂，再安排补救生产。"
 
@@ -17750,7 +17778,7 @@ msgstr "打开租车车队"
 msgid "Open the solar business"
 msgstr "开办太阳能事业"
 
-#: scripts/sim/holding_groups.gd:209
+#: scripts/sim/holding_groups.gd:233
 msgid "Open the subsidiary business account before seeking an acquisition offer."
 msgstr "请先为子公司开立企业帐户，再洽谈收购。"
 
@@ -17874,7 +17902,7 @@ msgstr "在同一家公司同时经营三种不同生意。"
 msgid "Operate three different businesses."
 msgstr "同时经营三种不同生意。"
 
-#: scripts/sim/capital_market.gd:103
+#: scripts/sim/capital_market.gd:113
 msgid "Operate through two complete years before applying."
 msgstr "先经营满两个完整年度，再提出申请。"
 
@@ -18062,7 +18090,7 @@ msgstr "其他"
 msgid "Other operating expense"
 msgstr "其他营业费用"
 
-#: scripts/sim/holding_groups.gd:212
+#: scripts/sim/holding_groups.gd:236
 msgid "Other shareholders keep their rights. Sell only a wholly held subsidiary."
 msgstr "其他股东仍保有权益。只能出售控股公司全资持有的子公司。"
 
@@ -18170,7 +18198,7 @@ msgstr "海外市集"
 msgid "Overseas markets open in Chapter 13."
 msgstr "海外市集于第 13 章开放；先继续目前的章节。"
 
-#: scripts/sim/global_market.gd:300
+#: scripts/sim/global_market.gd:303
 msgid "Overseas parcel written off at closure"
 msgstr "公司结束营业：冲销海外在途商品"
 
@@ -18182,7 +18210,7 @@ msgstr "海外伙伴"
 msgid "Overseas payouts"
 msgstr "海外拨款"
 
-#: scripts/sim/global_market.gd:275
+#: scripts/sim/global_market.gd:277
 msgid "Overseas refund %s: %s %s"
 msgstr "海外订单 %s 退款：%s %s"
 
@@ -18338,7 +18366,7 @@ msgstr "股权与公开市场"
 msgid "Ownership does not improve business output. Keep personal cash for these costs. Rent can be unpaid; resale prices move and fees can leave negative equity."
 msgstr "买房买车不增加事业产能，请保留个人现金负担费用；租客可能欠租，房价下跌及交易费也可能让售价低于房贷。"
 
-#: scripts/sim/capital_market.gd:102 scripts/sim/capital_market.gd:41 scripts/sim/capital_market.gd:72
+#: scripts/sim/capital_market.gd:112 scripts/sim/capital_market.gd:51 scripts/sim/capital_market.gd:82
 msgid "Ownership is already committed. Review the recorded route."
 msgstr "股权路线已确定，请查看已记录的结果。"
 
@@ -18550,7 +18578,7 @@ msgstr "付款帐户"
 msgid "Paid medical bill: %s"
 msgstr "支付医疗帐款：%s"
 
-#: scripts/sim/city_future.gd:154
+#: scripts/sim/city_future.gd:167
 msgid "Paid standby crew for the city event"
 msgstr "城市活动待命团队费用"
 
@@ -18558,7 +18586,7 @@ msgstr "城市活动待命团队费用"
 msgid "Paid supplier invoice %s: %s"
 msgstr "已付供应商发票 %s：%s"
 
-#: scripts/sim/city_future.gd:137
+#: scripts/sim/city_future.gd:150
 msgid "Paid workplace culture workshop"
 msgstr "付费职场文化工作坊"
 
@@ -18622,7 +18650,7 @@ msgstr "母公司担保：尚欠 %s。若子公司关闭时未还清，母公司
 msgid "Park"
 msgstr "Park"
 
-#: scripts/sim/personal_assets.gd:146
+#: scripts/sim/personal_assets.gd:182
 msgid "Park beside an open Helio charging station first."
 msgstr "请先把车停到有营业中 Helio 充电站的街区。"
 
@@ -18970,7 +18998,7 @@ msgstr "审核中的申请维持原补助；新申请 90 天内只给一半。"
 msgid "People"
 msgstr "人"
 
-#: scripts/sim/legacy_business.gd:265
+#: scripts/sim/legacy_business.gd:266
 msgid "People along the way"
 msgstr "一路遇见的人"
 
@@ -19002,7 +19030,7 @@ msgstr "个人／独资"
 msgid "Personal Banker"
 msgstr "理财专员"
 
-#: scripts/sim/personal_assets.gd:153
+#: scripts/sim/personal_assets.gd:189
 msgid "Personal EV metered charging: %s"
 msgstr "自用电动车充电收入：%s"
 
@@ -19022,15 +19050,15 @@ msgstr "个人上限"
 msgid "Personal car and commute"
 msgstr "自用车与通勤"
 
-#: scripts/sim/personal_assets.gd:105 scripts/sim/personal_assets.gd:93
+#: scripts/sim/personal_assets.gd:129 scripts/sim/personal_assets.gd:141
 msgid "Personal car insurance: %s"
 msgstr "自用车保险：%s"
 
-#: scripts/sim/personal_assets.gd:102
+#: scripts/sim/personal_assets.gd:138
 msgid "Personal car purchase: %s"
 msgstr "购买自用车：%s"
 
-#: scripts/sim/personal_assets.gd:183
+#: scripts/sim/personal_assets.gd:219
 msgid "Personal car sold: %s"
 msgstr "出售自用车：%s"
 
@@ -19066,7 +19094,7 @@ msgstr "个人健康保险保费：%s／30 天"
 msgid "Personal home purchase: %s"
 msgstr "个人购屋：%s"
 
-#: scripts/sim/personal_assets.gd:80
+#: scripts/sim/personal_assets.gd:113
 msgid "Personal mortgage payment: %s"
 msgstr "个人房贷还款：%s"
 
@@ -19230,7 +19258,7 @@ msgstr "把面板放在屋顶格子上。遮荫、方位和承重上限会改变
 msgid "Placed %d/%d · damage risk %d%%"
 msgstr "已放入 %d/%d 件・破损风险 %d%%"
 
-#: scripts/sim/holding_groups.gd:34
+#: scripts/sim/holding_groups.gd:35
 msgid "Placed %s into %s through a book-value share transfer."
 msgstr "已按帐面价值移转股权，将 %s 纳入 %s。"
 
@@ -19518,7 +19546,7 @@ msgstr "预防性保养"
 msgid "Preventive maintenance: %s"
 msgstr "预防性保养：%s"
 
-#: scripts/sim/housing.gd:85
+#: scripts/sim/housing.gd:82
 msgid "Previous home deposit returned: %s"
 msgstr "退回原住处押金：%s"
 
@@ -19549,6 +19577,10 @@ msgstr "定价请介于市价的 80% 到 130% 之间。"
 #: data/economy/workflows.json
 msgid "Price confusion"
 msgstr "价格不清楚"
+
+#: scripts/ui/modals/capital_market_modal.gd:116
+msgid "Price effect %+d%%, listing delay %d days."
+msgstr "价格影响 %+d%%，上市延后 %d 天。"
 
 #: scripts/ui/modals/legacy_modal.gd:80
 msgid "Price elasticity"
@@ -19862,11 +19894,11 @@ msgstr "公开政策辩论"
 msgid "Public reputation (percent)"
 msgstr "公开市场信誉（百分比）"
 
-#: scripts/sim/capital_market.gd:154
+#: scripts/sim/capital_market.gd:171
 msgid "Public share subscription: %s"
 msgstr "公开发行认股款：%s"
 
-#: scripts/sim/city_future.gd:119
+#: scripts/sim/city_future.gd:131
 msgid "Public vehicle transition consultation"
 msgstr "车辆转型公开咨询"
 
@@ -19982,7 +20014,7 @@ msgstr "本季营收预期（本国元）"
 msgid "Quarter: actual %s home dollars, expected %s home dollars. Share price %s home dollars per share."
 msgstr "本季实际营收 %s 本国元，预期 %s 本国元；股价为每股 %s 本国元。"
 
-#: scripts/sim/capital_market.gd:196
+#: scripts/sim/capital_market.gd:213
 msgid "Quarterly report published: actual results changed the quoted share price."
 msgstr "季报已发布，实际表现影响了市场股价。"
 
@@ -20198,7 +20230,7 @@ msgstr "{product}广告预算提高 40%"
 msgid "Ran out"
 msgstr "缺货"
 
-#: scripts/sim/cafe.gd:397
+#: scripts/sim/cafe.gd:402
 msgid "Ran out of coffee for %d."
 msgstr "咖啡材料用完，%d 位客人没买到。"
 
@@ -20498,7 +20530,7 @@ msgstr "应收款"
 msgid "Receivables sold (80%)"
 msgstr "应收帐款出售（80%）"
 
-#: scripts/sim/insolvency.gd:103
+#: scripts/sim/insolvency.gd:104
 msgid "Receivables sold to a collector (80%)"
 msgstr "应收帐款以 80% 卖给催收公司"
 
@@ -20594,7 +20626,7 @@ msgstr "登记损坏并隔离"
 msgid "Record retirement and review this life"
 msgstr "记录退休，回顾这段人生"
 
-#: scripts/sim/legacy_business.gd:266
+#: scripts/sim/legacy_business.gd:267
 msgid "Recorded deliveries reached %d overseas regions. Company cash now: %s home dollars."
 msgstr "实际交付的商品到达 %d 个海外地区。目前公司现金：%s 本国元。"
 
@@ -20622,7 +20654,7 @@ msgstr "收回商品，但已付运费不退还。不会产生销售或拨款。
 msgid "Recovery consultation: %s"
 msgstr "复原咨询：%s"
 
-#: scripts/sim/industry_guidance.gd:64
+#: scripts/sim/industry_guidance.gd:69
 msgid "Recovery is already planned. Finish the real order."
 msgstr "已安排补救生产，请完成这张订单。"
 
@@ -20998,7 +21030,7 @@ msgstr "人际关系"
 msgid "Relationships introduce paid work and useful information. They never increase demand, scores or profit by themselves."
 msgstr "关系带来付费工作引荐与有用情报，本身不会提高需求、分数或利润。"
 
-#: scripts/sim/insolvency.gd:93
+#: scripts/sim/insolvency.gd:94
 msgid "Release or sell the live subsidiaries before closing their holding company."
 msgstr "请先移出或出售仍在营运的子公司，再关闭控股公司。"
 
@@ -21150,7 +21182,7 @@ msgstr "租车车队：承租 Gateway 柜台、买车、设置日租与周租费
 msgid "Rental interrupted: %s"
 msgstr "租赁中断：%s"
 
-#: scripts/sim/personal_assets.gd:90
+#: scripts/sim/personal_assets.gd:126
 msgid "Rental management fee: %s"
 msgstr "出租管理费：%s"
 
@@ -21386,7 +21418,7 @@ msgstr "已保留"
 msgid "Reserved %s. Notice ends %s; current rent continues until moving day."
 msgstr "已预约 %s，通知期于 %s 届满；搬家前仍支付原住处房租。"
 
-#: scripts/sim/housing.gd:68
+#: scripts/sim/housing.gd:65
 msgid "Reserved home deposit returned: %s"
 msgstr "退回预约住处押金：%s"
 
@@ -21478,7 +21510,7 @@ msgstr "还原缺省按键"
 msgid "Restructure the loan with Nexus Bank (24 months, +3% interest, credit hit)"
 msgstr "和 Nexus 银行重整贷款（24 个月，利率 +3%，信用受损）"
 
-#: scripts/sim/insolvency.gd:72
+#: scripts/sim/insolvency.gd:73
 msgid "Restructuring fee — loan %s"
 msgstr "重整手续费——贷款 %s"
 
@@ -21522,7 +21554,7 @@ msgstr "零售、餐饮、夜生活。"
 msgid "Retailers warn of empty shelves before the holidays."
 msgstr "零售商警告：节前恐怕会缺货。"
 
-#: scripts/sim/capital_market.gd:92
+#: scripts/sim/capital_market.gd:102
 msgid "Retain cash for the purchase and integration fee, or arrange a bank loan."
 msgstr "请保留收购款与集成费所需的现金，或先洽银行贷款。"
 
@@ -21598,7 +21630,7 @@ msgstr "将子公司股权移回创办人"
 msgid "Return to free play"
 msgstr "回到自由经营"
 
-#: scripts/sim/legacy_business.gd:268
+#: scripts/sim/legacy_business.gd:269
 msgid "Return to free play and keep building from the actual books. Growth goals continue."
 msgstr "回到自由经营，沿用现在的帐目与进度，继续挑战成长目标。"
 
@@ -21622,7 +21654,7 @@ msgstr "回程 — %s"
 msgid "Returned %d units · %s · %s"
 msgstr "已退 %d 件 · %s · %s"
 
-#: scripts/sim/global_market.gd:318
+#: scripts/sim/global_market.gd:321
 msgid "Returned overseas goods restocked"
 msgstr "海外退货重新入库"
 
@@ -21934,7 +21966,7 @@ msgstr "Riverstone Bakery"
 msgid "Roadmap delivered"
 msgstr "路线图兑现"
 
-#: scripts/ui/modals/capital_market_modal.gd:108
+#: scripts/ui/modals/capital_market_modal.gd:109
 msgid "RoadshowPromise"
 msgstr "RoadshowPromise"
 
@@ -22558,11 +22590,11 @@ msgstr "请先备妥无障碍改建费用。"
 msgid "Save the battery course fee first."
 msgstr "请先备妥电池课程费。"
 
-#: scripts/sim/personal_assets.gd:101
+#: scripts/sim/personal_assets.gd:137
 msgid "Save the car price personally first."
 msgstr "请先备妥个人购车款与保险费。"
 
-#: scripts/sim/personal_assets.gd:151
+#: scripts/sim/personal_assets.gd:187
 msgid "Save the charging cost or take the metro."
 msgstr "请先准备充电费，或改搭捷运。"
 
@@ -22610,7 +22642,7 @@ msgstr "请先备好首月租金与设备费。"
 msgid "Save the flash-sale cost first."
 msgstr "请先备好特卖费用。"
 
-#: scripts/sim/personal_assets.gd:161
+#: scripts/sim/personal_assets.gd:197
 msgid "Save the furniture cost personally first."
 msgstr "请先备妥个人家具费用。"
 
@@ -22630,7 +22662,7 @@ msgstr "请先存足验车费。"
 msgid "Save the insurance premium first."
 msgstr "请先备妥保费。"
 
-#: scripts/sim/legal.gd:63
+#: scripts/sim/legal.gd:68
 msgid "Save the legal fee first."
 msgstr "请先备妥法务费用。"
 
@@ -22714,7 +22746,7 @@ msgstr "存于 %s"
 msgid "Saved (slot %d)."
 msgstr "已存盘（字段 %d）。"
 
-#: scripts/sim/legacy_business.gd:134 scripts/sim/legacy_business.gd:192 scripts/sim/legacy_business.gd:290 scripts/ui/modals/legacy_modal.gd:61
+#: scripts/sim/legacy_business.gd:134 scripts/sim/legacy_business.gd:192 scripts/sim/legacy_business.gd:291 scripts/ui/modals/legacy_modal.gd:61
 msgid "Scale"
 msgstr "规模"
 
@@ -22818,7 +22850,7 @@ msgstr "季节菜单"
 msgid "Second location"
 msgstr "第二间店"
 
-#: scripts/sim/logistics_depth.gd:173
+#: scripts/sim/logistics_depth.gd:181
 msgid "Second van"
 msgstr "二号货车"
 
@@ -22950,7 +22982,7 @@ msgstr "将子公司出售给 %s"
 msgid "Sell ten cars."
 msgstr "卖出十台车。"
 
-#: scripts/sim/personal_assets.gd:97
+#: scripts/sim/personal_assets.gd:133
 msgid "Sell the current personal car before buying another."
 msgstr "请先出售目前的自用车，再购买另一辆。"
 
@@ -23390,7 +23422,7 @@ msgstr "ShopLane 广告：有大品牌在抢版位，价格被推高了。"
 msgid "ShopLane Global"
 msgstr "ShopLane Global 海外市集"
 
-#: scripts/sim/global_market.gd:214
+#: scripts/sim/global_market.gd:215
 msgid "ShopLane Global payout: %s %s"
 msgstr "ShopLane Global 拨款：%s %s"
 
@@ -23570,7 +23602,7 @@ msgstr "请先签下经销权。"
 msgid "Sign buyer contract and buy supplier cargo"
 msgstr "签订买方合约并支付进货款"
 
-#: scripts/ui/modals/fx_risk_modal.gd:60
+#: scripts/ui/modals/fx_risk_modal.gd:63
 msgid "Sign forward hedge"
 msgstr "签署远期避险合约"
 
@@ -23866,7 +23898,7 @@ msgstr "把 %s 卖给 Hale Group：付给你 %s。"
 msgid "Sold abroad"
 msgstr "卖到海外"
 
-#: scripts/sim/capital_market.gd:68
+#: scripts/sim/capital_market.gd:78
 msgid "Sold founder shares to %s for %s; the company continues under its new owner."
 msgstr "已将创办人持股出售给 %s，取得 %s；公司在新股东旗下继续营运。"
 
@@ -24442,7 +24474,7 @@ msgstr "订户流失率"
 msgid "Subsidiary funds belong to its holding company. Use a group loan or management service."
 msgstr "子公司的资金属于控股公司。请通过集团贷款或实际管理服务往来。"
 
-#: scripts/sim/holding_groups.gd:172
+#: scripts/sim/holding_groups.gd:196
 msgid "Subsidiary guarantee settled: %s"
 msgstr "子公司担保代偿款：%s"
 
@@ -24450,25 +24482,21 @@ msgstr "子公司担保代偿款：%s"
 msgid "Subsidiary investment removed"
 msgstr "冲销子公司投资"
 
-#: scripts/sim/holding_groups.gd:198
+#: scripts/sim/holding_groups.gd:222
 msgid "Subsidiary loan collected or written off: %s"
 msgstr "收回或冲销子公司借款：%s"
 
-#: scripts/sim/insolvency.gd:160
+#: scripts/sim/insolvency.gd:161
 msgid "Subsidiary or founder liquidation: %s"
 msgstr "子公司或创办人清算款：%s"
 
-#: scripts/sim/holding_groups.gd:40
+#: scripts/sim/holding_groups.gd:41
 msgid "Subsidiary released at book value: %s"
 msgstr "按帐面价值移出子公司：%s"
 
-#: scripts/sim/holding_groups.gd:215
+#: scripts/sim/holding_groups.gd:239
 msgid "Subsidiary sale: %s"
 msgstr "出售子公司：%s"
-
-#: scripts/sim/holding_groups.gd:29
-msgid "Subsidiary shares transferred: %s"
-msgstr "移转子公司股权：%s"
 
 #: scripts/ui/energy_ui.gd:63
 msgid "Subsidy desk"
@@ -24554,7 +24582,7 @@ msgstr "Sunny Adeyemi：太阳能客户说明・第 3 段"
 msgid "Supplier bills payable"
 msgstr "应付供应商帐款"
 
-#: scripts/sim/legal.gd:94
+#: scripts/sim/legal.gd:99
 msgid "Supplier breach settlement: %s"
 msgstr "供应商违约和解：%s"
 
@@ -25018,7 +25046,7 @@ msgstr "房客月租金"
 msgid "Tenant rent arrears"
 msgstr "房客欠租"
 
-#: scripts/sim/personal_assets.gd:88
+#: scripts/sim/personal_assets.gd:124
 msgid "Tenant rent invoice: %s"
 msgstr "租客房租帐单：%s"
 
@@ -25042,7 +25070,7 @@ msgstr "文本大小"
 msgid "Textiles"
 msgstr "纺织品"
 
-#: scripts/sim/personal_assets.gd:174
+#: scripts/sim/personal_assets.gd:210
 msgid "Thank you for inviting me. Let's sit down and talk."
 msgstr "谢谢你邀我来，我们坐下聊聊吧。"
 
@@ -25266,7 +25294,7 @@ msgstr "拍卖进行到 %02d:00。请在拍卖游戏中出价；买方手续费 
 msgid "The auction runs Wednesdays 09:00–17:00. Next one in %d days: inspect lots now, bid then."
 msgstr "拍卖在周三 09:00–17:00。下一场在 %d 天后：现在先验车，到时再出价。"
 
-#: scripts/sim/capital_market.gd:123
+#: scripts/sim/capital_market.gd:133
 msgid "The audit is still running. Continue operating until its stated date."
 msgstr "审计还在进行，请先继续经营，等到指定日期再查看。"
 
@@ -25286,11 +25314,11 @@ msgstr "本月售出商品的平均帐面成本；仍在架上的商品算库存
 msgid "The bank deducts 1.5% from a foreign payout conversion at the current rate."
 msgstr "银行依当下汇率换算海外拨款，再扣除 1.5% 价差。"
 
-#: scripts/sim/insolvency.gd:69
+#: scripts/sim/insolvency.gd:70
 msgid "The bank won't restructure with this credit history."
 msgstr "以这种信用纪录，银行不愿意重整。"
 
-#: scripts/sim/personal_assets.gd:150
+#: scripts/sim/personal_assets.gd:186
 msgid "The battery is already full. Choose a destination."
 msgstr "电池已充满，请选择目的地。"
 
@@ -25318,15 +25346,15 @@ msgstr "经董事会核准，把股东现有股份转给员工，不会产生新
 msgid "The board rejected dilution for the team grant. Choose another legacy route."
 msgstr "董事会否决了团队持股的稀释方案，请选择其他传承路线。"
 
-#: scripts/sim/capital_market.gd:93
+#: scripts/sim/capital_market.gd:103
 msgid "The board rejected this large purchase. Reduce the commitment or keep operating."
 msgstr "董事会否决了这笔大型收购。请缩小承诺，或先继续经营。"
 
-#: scripts/sim/city_future.gd:131 scripts/sim/city_future.gd:82
+#: scripts/sim/city_future.gd:144 scripts/sim/city_future.gd:92
 msgid "The board will not authorize options. Choose wages or culture instead."
 msgstr "董事会未同意选择权方案。请改采加薪或文化方案。"
 
-#: scripts/sim/legacy_business.gd:266
+#: scripts/sim/legacy_business.gd:267
 msgid "The board-approved team grant transfers existing shares. It creates no revenue or personal payout."
 msgstr "董事会核准把现有股份分给团队，不会添加营收，也不会让创办人拿到现金。"
 
@@ -25478,7 +25506,7 @@ msgstr "我们选择的城市"
 msgid "The civic decade"
 msgstr "城市共创年代"
 
-#: scripts/sim/personal_assets.gd:174
+#: scripts/sim/personal_assets.gd:210
 msgid "The clean blue lines suit this room. Let's talk about your plans."
 msgstr "清爽的蓝色线条很适合这里，聊聊你接下来的打算吧。"
 
@@ -25514,7 +25542,7 @@ msgstr "本章的公司已结束营业，剩下的交易无法完成。继续后
 msgid "The company belongs to Hale Group now: no money moves between it and you."
 msgstr "公司现在属于 Hale Group：你和公司之间不能再转帐。"
 
-#: scripts/sim/capital_market.gd:150
+#: scripts/sim/capital_market.gd:167
 msgid "The company books changed after pricing. Rebuild the record and reapply, or remain private."
 msgstr "定价后公司帐目已变动。请改善纪录后重新申请，或维持私有。"
 
@@ -25538,9 +25566,13 @@ msgstr "公司结束营业，未交货合约已终止，不另收违约金。"
 msgid "The company is solvent again. Your savings took the hit."
 msgstr "公司恢复偿债能力了，代价是你的积蓄。"
 
-#: scripts/sim/capital_market.gd:47
+#: scripts/sim/capital_market.gd:57
 msgid "The company no longer has positive sale value. Keep operating or remain private."
 msgstr "公司目前已没有正的出售价值，请继续经营或维持私有。"
+
+#: scripts/sim/city_future.gd:134 scripts/sim/city_future.gd:59
+msgid "The company that owns this proposal is closed. Join the civic partnership instead."
+msgstr "拥有这份提案的公司已关闭。请改为加入公共合作。"
 
 #: data/story/personal/ruiz.json
 msgid "The construction handover checklist now has conflicting notes. Ruiz Construction wants a version that other people can check. How do you resolve the conflict?"
@@ -25554,7 +25586,7 @@ msgstr "柜台每月租金 %s。请到机场区的 Gateway 租车承租。"
 msgid "The current condition determines pass, improvement closure or a fine."
 msgstr "依现况判定合格、停业改善或罚款。"
 
-#: scripts/sim/life_legacy.gd:92
+#: scripts/sim/life_legacy.gd:98
 msgid "The current life could not be saved. Keep playing and try again."
 msgstr "目前这一局无法保存。先继续游戏，稍后再试。"
 
@@ -25682,7 +25714,7 @@ msgstr "第一次退货"
 msgid "The first-home viewing guide now has conflicting notes. Diane Harlow wants a version that other people can check. How do you resolve the conflict?"
 msgstr "首购看屋指南现在出现互相矛盾的纪录。Diane Harlow 希望其他人也能查核，该如何处理？"
 
-#: scripts/sim/cafe.gd:124
+#: scripts/sim/cafe.gd:129
 msgid "The fit-out costs %s."
 msgstr "装修要 %s。"
 
@@ -25786,7 +25818,11 @@ msgstr "房东要求用登记过的公司签租约。"
 msgid "The ledger averages what you paid for the units of a product at a stock location."
 msgstr "帐本依同一存放地点的商品进价，计算每件平均成本。"
 
-#: scripts/sim/cafe.gd:150 scripts/sim/compliance.gd:95
+#: scripts/sim/personal_assets.gd:78
+msgid "The lender foreclosed on %s after missed mortgage payments."
+msgstr "因多次未缴房贷，贷款机构已法拍 %s。"
+
+#: scripts/sim/cafe.gd:155 scripts/sim/compliance.gd:95
 msgid "The licence fee is %s."
 msgstr "执照费是 %s。"
 
@@ -25802,7 +25838,7 @@ msgstr "电梯与热水在同一周坏了。"
 msgid "The liquidator's van is on its way."
 msgstr "清仓商的货车在路上了。"
 
-#: scripts/sim/capital_market.gd:112
+#: scripts/sim/capital_market.gd:122
 msgid "The listing process is already running. Continue its next step."
 msgstr "上市流程已开始，请接续目前的下一步。"
 
@@ -25830,11 +25866,11 @@ msgstr "已支付模具费。"
 msgid "The new game could not be started because no save slot was available."
 msgstr "没有可用的存盘字段，无法开始新游戏。"
 
-#: scripts/sim/legacy_business.gd:268
+#: scripts/sim/legacy_business.gd:269
 msgid "The next chapter is yours"
 msgstr "下一段故事，由你决定"
 
-#: scripts/sim/life_legacy.gd:104
+#: scripts/sim/life_legacy.gd:110
 msgid "The next life could not be created. Your current life is preserved."
 msgstr "无法创建新人生，原本这一局已保留。"
 
@@ -25842,7 +25878,7 @@ msgstr "无法创建新人生，原本这一局已保留。"
 msgid "The notice period has not ended yet. Keep using the premises until the exit date."
 msgstr "通知期尚未结束，退租日期前仍可使用处所。"
 
-#: scripts/sim/housing.gd:74
+#: scripts/sim/housing.gd:71
 msgid "The notice period is still running. Keep living here or cancel the reservation."
 msgstr "通知期还没届满。可以继续住在这里，或取消预约。"
 
@@ -25886,7 +25922,7 @@ msgstr "主办单位取消了下一场城市大型活动，团体客人要退订
 msgid "The other %d orders use skilled automatic packing."
 msgstr "其余 %d 张订单采熟练自动装箱规则。"
 
-#: scripts/sim/legacy_business.gd:266
+#: scripts/sim/legacy_business.gd:267
 msgid "The ownership record is retained. A completed prior sale pays nothing again; without a live company there is no new sale."
 msgstr "保留实际股权纪录。已完成的出售不会再次付款，没有仍在经营的公司就不会产生新交易。"
 
@@ -26030,15 +26066,15 @@ msgstr "规模方案的供应商没有这项商品。请改选利基，或到营
 msgid "The seasonal drink is offered in June, July, August, December, January and February, with fifteen percent more demand for that item."
 msgstr "限定饮品在六月、七月、八月、十二月、一月及二月供应；该品项需求增加百分之十五。"
 
-#: scripts/sim/city_future.gd:106
-msgid "The secret-favor approach was reported. No bribe was paid; the bid was disqualified."
-msgstr "私下打点的要求遭检举。没有支付贿款，提案已被取消资格。"
+#: scripts/sim/city_future.gd:188
+msgid "The secret-favor approach was reported to the anti-corruption office. No payment was made; the bid was disqualified, a fine and legal costs follow, and the expo office trusts you less."
+msgstr "秘密关说被检举至反贪腐办公室。没有任何款项付出；投标被取消资格，随后有罚款与法律费用，博览会办公室也更不信任你。"
 
 #: data/help/glossary.json
 msgid "The seller pays destination duty before the parcel leaves. The buyer sees a complete price."
 msgstr "包裹出发前，由卖家付目的地关税，买家看到的是完整价格。"
 
-#: scripts/sim/holding_groups.gd:79
+#: scripts/sim/holding_groups.gd:81
 msgid "The selling subsidiary does not have these units."
 msgstr "卖方子公司的实际库存不足。"
 
@@ -26082,7 +26118,7 @@ msgstr "充电站三天后恢复营运。"
 msgid "The steady cost of following the rules: filings, checks and the person who keeps them in order."
 msgstr "遵守规定的固定成本：申报、审查，还有负责把这些整理好的人。"
 
-#: scripts/sim/cafe.gd:177
+#: scripts/sim/cafe.gd:182
 msgid "The storeroom can't take that much."
 msgstr "储藏室放不下这么多。"
 
@@ -26090,7 +26126,7 @@ msgstr "储藏室放不下这么多。"
 msgid "The student enterprise workshop now has conflicting notes. Dr. Imani Cole wants a version that other people can check. How do you resolve the conflict?"
 msgstr "学生创业工作坊现在出现互相矛盾的纪录。Dr. Imani Cole 希望其他人也能查核，该如何处理？"
 
-#: scripts/sim/city_future.gd:77
+#: scripts/sim/city_future.gd:87
 msgid "The submission deadline passed. Review the failed proposal and continue."
 msgstr "提案期限已过。查看失败提案，继续下一章。"
 
@@ -26154,7 +26190,7 @@ msgstr "已如实记录无法继续的策略。Maya 会陪你决定下一步。"
 msgid "The unhedged comparison values the starting estimated foreign receipts at today's quote versus the quote before the shock. It is not a second simulated business or guaranteed profit."
 msgstr "未避险试算以期初预估外币收入，比较目前与冲击前汇率；并未另外仿真一家公司，也不保证获利。"
 
-#: scripts/sim/cafe.gd:121
+#: scripts/sim/cafe.gd:126
 msgid "The unit is already fitted out."
 msgstr "店面已经装修好了。"
 
@@ -26218,7 +26254,7 @@ msgstr "目前没有任何收购提案。"
 msgid "There is no public entrance here."
 msgstr "这里没有对外开放的入口。"
 
-#: scripts/sim/industry_guidance.gd:66
+#: scripts/sim/industry_guidance.gd:71
 msgid "There is no unfinished defective batch. Continue with the next order."
 msgstr "目前没有尚未完成的瑕疵批量，请继续下一张订单。"
 
@@ -26230,15 +26266,15 @@ msgstr "你在这！"
 msgid "There you are. Crestline's autumn range needs desk lamps."
 msgstr "你来了。Crestline 的秋季系列需要台灯。"
 
-#: scripts/sim/insolvency.gd:67
+#: scripts/sim/insolvency.gd:68
 msgid "There's no bank loan to restructure."
 msgstr "没有可以重整的银行贷款。"
 
-#: scripts/sim/legacy_business.gd:279
+#: scripts/sim/legacy_business.gd:280
 msgid "These are estimates from the current product cost and reference demand, not a second company or booked revenue. FX, duties, returns, rent and debt interest can reduce either result."
 msgstr "这是依目前商品成本与参考需求估算的比较，不是另一家公司的实际营收。汇率、关税、退货、租金与贷款利息都可能让结果变差。"
 
-#: scripts/sim/capital_market.gd:46
+#: scripts/sim/capital_market.gd:56
 msgid "These founder shares have already been sold. Continue operating."
 msgstr "这些创办人持股已出售，请继续经营。"
 
@@ -26334,7 +26370,7 @@ msgstr "这批货已不能撤回。"
 msgid "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue."
 msgstr "这一章已无法履约。查看失败或撤回的提案，继续下一步。"
 
-#: scripts/sim/city_future.gd:76
+#: scripts/sim/city_future.gd:86
 msgid "This civic decision is already recorded. Review its result."
 msgstr "这项决策已记录。请查看成果。"
 
@@ -26346,7 +26382,7 @@ msgstr "此客户需求在制作期间已到期。"
 msgid "This company is already closed."
 msgstr "这家公司已结束营业。"
 
-#: scripts/sim/capital_market.gd:101 scripts/sim/capital_market.gd:40 scripts/sim/capital_market.gd:87
+#: scripts/sim/capital_market.gd:111 scripts/sim/capital_market.gd:50 scripts/sim/capital_market.gd:97
 msgid "This company is closed or replaced. Continue with your current life."
 msgstr "这家公司已关闭或已被新公司取代，请继续目前的人生。"
 
@@ -26354,7 +26390,7 @@ msgstr "这家公司已关闭或已被新公司取代，请继续目前的人生
 msgid "This company is closed or unavailable. Choose another live company."
 msgstr "这家公司已关闭或无法使用。请选择另一家仍在营运的公司。"
 
-#: scripts/sim/global_market.gd:310
+#: scripts/sim/global_market.gd:313
 msgid "This company's books are closed."
 msgstr "这家公司已结束营业并结清帐目。"
 
@@ -26378,7 +26414,7 @@ msgstr "这笔海关扣留已结束。"
 msgid "This equipment needs no service today."
 msgstr "这些设备今天不需要保养。"
 
-#: scripts/sim/personal_assets.gd:159
+#: scripts/sim/personal_assets.gd:195
 msgid "This furniture style is already installed. Keep it or choose another."
 msgstr "家里已是这个风格；可保留或改选其他家具。"
 
@@ -26402,19 +26438,19 @@ msgstr "这个集团委托已不再开放。"
 msgid "This group job is not running."
 msgstr "这个集团委托没有进行中。"
 
-#: scripts/sim/personal_assets.gd:171
+#: scripts/sim/personal_assets.gd:207
 msgid "This guest already visited today. Invite someone else or meet tomorrow."
 msgstr "这位客人今天已来访，请邀请别人或明天再见。"
 
-#: scripts/sim/fx_forward.gd:76
+#: scripts/sim/fx_forward.gd:89
 msgid "This hedge is not due or was already settled."
 msgstr "这笔避险尚未到期，或已结算。"
 
-#: scripts/sim/personal_assets.gd:57
+#: scripts/sim/personal_assets.gd:89
 msgid "This home has no tenant. Move in, list it or sell it."
 msgstr "这间住宅没有租客，可搬入、招租或出售。"
 
-#: scripts/sim/housing.gd:46
+#: scripts/sim/housing.gd:43
 msgid "This home holds %d units; your stock and incoming orders need %d units. Sell stock or move it to leased storage first."
 msgstr "这间住处可放 %d 件，你的库存与在途订单需要 %d 件。请先卖出库存，或转放已租用的仓储。"
 
@@ -26422,7 +26458,7 @@ msgstr "这间住处可放 %d 件，你的库存与在途订单需要 %d 件。�
 msgid "This industry introduction is no longer possible. Continue with another opportunity."
 msgstr "这段产业入门已无法继续，请选其他机会。"
 
-#: scripts/sim/capital_market.gd:133
+#: scripts/sim/capital_market.gd:143
 msgid "This investor question is already answered or unavailable. Continue the current step."
 msgstr "这题已回答或目前无法回答，请接续现在的步骤。"
 
@@ -26506,7 +26542,7 @@ msgstr "本期区域产能或需求已用完，请等待下一期或改选路线
 msgid "This monthly event is closed or already attended — check its next date."
 msgstr "本月活动未开放或已参加，请查看下一次日期。"
 
-#: scripts/sim/capital_market.gd:44
+#: scripts/sim/capital_market.gd:54
 msgid "This offer has expired or was declined. Choose another route."
 msgstr "这份提案已到期或已婉拒，请选择其他路线。"
 
@@ -26586,7 +26622,7 @@ msgstr "这条路线已有车辆在配送，请等完成。"
 msgid "This save comes from a newer version of City Venture."
 msgstr "这个存盘来自更新的 City Venture 版本。"
 
-#: scripts/sim/city_future.gd:50
+#: scripts/sim/city_future.gd:56
 msgid "This service plan is already arranged or its deadline has passed."
 msgstr "这份服务计划已安排，或已超过期限。"
 
@@ -26606,7 +26642,7 @@ msgstr "目前不能进行这个阶段，请先完成上一步。"
 msgid "This story opens after the overseas partner chapter."
 msgstr "完成海外合作伙伴章节后，才会打开这段故事。"
 
-#: scripts/sim/holding_groups.gd:37
+#: scripts/sim/holding_groups.gd:38
 msgid "This subsidiary is no longer held here. Choose another company."
 msgstr "这家子公司已不属于此集团。请选择另一家公司。"
 
@@ -26618,7 +26654,7 @@ msgstr "这家供应商不接受到货后退货。"
 msgid "This supply runs with the business and cannot be paused."
 msgstr "这项供应随事业运作，无法暂停。"
 
-#: scripts/sim/capital_market.gd:89
+#: scripts/sim/capital_market.gd:99
 msgid "This target is no longer independent. Review another company."
 msgstr "这个标的已不再独立，请查看其他公司。"
 
@@ -26794,7 +26830,7 @@ msgstr "今日 %d 名旅客 · 季节系数 %.2f · 以你的价格每日约 %.1
 msgid "Today's consulting hours are used. Rest and continue tomorrow."
 msgstr "今天的接案工时已用完，请休息后明天继续。"
 
-#: scripts/sim/personal_assets.gd:170
+#: scripts/sim/personal_assets.gd:206
 msgid "Today's home invitations are full. Meet elsewhere or invite them tomorrow."
 msgstr "今天的居家招待名额已满，请改约外面或明天再邀请。"
 
@@ -27242,7 +27278,7 @@ msgstr "连续两次月结现金都是负的。还没恢复，但你已看见资
 msgid "Two months in the red, but you're still open. Plenty of shops aren't. Keep the prices you set and the local supplier; the shock won't last forever."
 msgstr "连续两个月亏损，但你还开着。很多店已经撑不下去了。维持你调过的价格和在地供应商，供应冲击不会永远持续。"
 
-#: scripts/sim/customs.gd:182
+#: scripts/sim/customs.gd:186
 msgid "Two weeks abroad: try a lower local price or more ads. The trial now needs 5 delivered units; check returns and your actual cash. You can also review the results and pause expansion."
 msgstr "海外试销已过两周：可以调低当地售价或增加广告。目标降为送达 5 件，也要检查退件与实际现金。你也可以检讨结果，暂停扩张。"
 
@@ -27302,7 +27338,7 @@ msgstr "本周尚未出帐的 OTA 房晚：总额 %s，佣金 %s。每 %d 天出
 msgid "Undelivered trade buyer advance returned"
 msgstr "未交货的买方预付款退回"
 
-#: scripts/sim/capital_market.gd:155
+#: scripts/sim/capital_market.gd:172
 msgid "Underwriting commission: %s"
 msgstr "承销佣金：%s"
 
@@ -27378,7 +27414,7 @@ msgstr "未知的代理商危机。"
 msgid "Unknown automotive crisis."
 msgstr "未知的汽车危机。"
 
-#: scripts/sim/customs.gd:97 scripts/sim/ecommerce.gd:1301 scripts/sim/global_market.gd:325
+#: scripts/sim/customs.gd:97 scripts/sim/ecommerce.gd:1301 scripts/sim/global_market.gd:328
 msgid "Unknown choice."
 msgstr "未知的选项。"
 
@@ -27422,7 +27458,7 @@ msgstr "未知的不动产危机。"
 msgid "Unknown property."
 msgstr "未知的对象。"
 
-#: scripts/sim/cafe.gd:173
+#: scripts/sim/cafe.gd:178
 msgid "Unknown supply pack."
 msgstr "没有这种材料包。"
 
@@ -27434,7 +27470,7 @@ msgstr "先解锁自有品牌，再选择有效的批量数量。"
 msgid "Unpaid documents expired"
 msgstr "文档逾期，货款未收"
 
-#: scripts/sim/personal_assets.gd:83
+#: scripts/sim/personal_assets.gd:116
 msgid "Unpaid mortgage interest: %s"
 msgstr "未付房贷利息：%s"
 
@@ -27450,7 +27486,7 @@ msgstr "退还未使用的活动预付款"
 msgid "Unused materials written off: %s"
 msgstr "未使用材料注销：%s"
 
-#: scripts/sim/city_future.gd:113
+#: scripts/sim/city_future.gd:125
 msgid "Unused reconstruction materials returned to the supplier"
 msgstr "未使用的重建材料退回供应商"
 
@@ -27478,7 +27514,7 @@ msgstr "预付款"
 msgid "Use Finance when you need home cash. Waiting can improve the rate or make it worse; it is not a guaranteed gain."
 msgstr "需要本国币现金时，到财务页换汇。等待可能让汇率变好，也可能变差，不是稳赚的选择。"
 
-#: scripts/sim/holding_groups.gd:46
+#: scripts/sim/holding_groups.gd:48
 msgid "Use a funded holding company and its live subsidiary for this loan."
 msgstr "请使用有足够现金的控股公司，借款对象须为旗下仍在营运的子公司。"
 
@@ -27802,7 +27838,7 @@ msgstr "Vesper Brands"
 msgid "Vessel loading"
 msgstr "装船时"
 
-#: scripts/sim/city_future.gd:212
+#: scripts/sim/city_future.gd:239
 msgid "Vested civic employee options"
 msgstr "员工城市计划选择权已归属"
 
@@ -27890,7 +27926,7 @@ msgstr "在城市地图查看 Nexus Bank"
 msgid "View every epilogue card and return to free play"
 msgstr "看完所有尾声卡，回到自由经营"
 
-#: scripts/sim/personal_assets.gd:96
+#: scripts/sim/personal_assets.gd:132
 msgid "Visit Dockside Motors or the dealership to buy a personal car."
 msgstr "请到 Dockside Motors 或经销商购买自用车。"
 
@@ -27994,7 +28030,7 @@ msgstr "已注销"
 msgid "Wages from your job"
 msgstr "兼职薪资"
 
-#: scripts/sim/insolvency.gd:188
+#: scripts/sim/insolvency.gd:189
 msgid "Wages owed paid"
 msgstr "已付清积欠薪资"
 
@@ -28022,11 +28058,11 @@ msgstr "请等市府补助审核结果再订材料。"
 msgid "Wait for delivery or review supplier failure."
 msgstr "等待交付，或查看供应商履约失败的结果。"
 
-#: scripts/sim/city_future.gd:79
+#: scripts/sim/city_future.gd:89
 msgid "Wait for paid suppliers to deliver, or review their failure at the deadline."
 msgstr "等待付费供应商交付；若履约失败，期限届满后可查看结果。"
 
-#: scripts/sim/city_future.gd:166
+#: scripts/sim/city_future.gd:193
 msgid "Wait for the civic result before reviewing this chapter."
 msgstr "等待城市成果公布，再查看本章结果。"
 
@@ -28042,7 +28078,7 @@ msgstr "等候下一堂课 · %d 分钟"
 msgid "Wait for the shipment and pay the shortage price"
 msgstr "等货到并付缺货价"
 
-#: scripts/sim/housing.gd:40 scripts/sim/housing.gd:42 scripts/sim/personal_assets.gd:29
+#: scripts/sim/housing.gd:39 scripts/sim/personal_assets.gd:29
 msgid "Wait for the tenancy to end before moving into this home."
 msgstr "请等租客退租后，再搬进这间住宅。"
 
@@ -28214,7 +28250,7 @@ msgstr "浪费钱。"
 msgid "Watches"
 msgstr "手表"
 
-#: scripts/sim/personal_assets.gd:174
+#: scripts/sim/personal_assets.gd:210
 msgid "We can talk over the table here. The warm wood makes this room feel welcoming."
 msgstr "我们可以坐在桌边聊，暖木色让这里很有家的感觉。"
 
@@ -28542,7 +28578,7 @@ msgstr "电汇恢复：跨境付款现在 3 到 5 天入帐。"
 msgid "With storage certification and two installs you can build charging stations. Set a price per kWh and watch demand."
 msgstr "取得储能认证并完成两件安装后，就能盖充电站。设置每度电价格并观察需求。"
 
-#: scripts/ui/modals/capital_market_modal.gd:109
+#: scripts/ui/modals/capital_market_modal.gd:111
 msgid "Withdraw listing and stay private"
 msgstr "撤回上市申请，维持私有"
 
@@ -28554,7 +28590,7 @@ msgstr "撤回申办，改办地方活动"
 msgid "Withdraw the parcel"
 msgstr "撤回包裹"
 
-#: scripts/ui/modals/capital_market_modal.gd:109
+#: scripts/ui/modals/capital_market_modal.gd:111
 msgid "WithdrawIPO"
 msgstr "WithdrawIPO"
 
@@ -28742,7 +28778,7 @@ msgstr "你手上的案子已经满了。"
 msgid "You already have as many runs as you can handle."
 msgstr "你手上的单已经够多了。"
 
-#: scripts/sim/cafe.gd:142
+#: scripts/sim/cafe.gd:147
 msgid "You already have the licence."
 msgstr "你已经有执照了。"
 
@@ -28750,7 +28786,7 @@ msgstr "你已经有执照了。"
 msgid "You already hold the high bid."
 msgstr "你已经是最高出价者。"
 
-#: scripts/sim/housing.gd:43
+#: scripts/sim/housing.gd:40
 msgid "You already live here. Keep this lease or choose another home."
 msgstr "你已住在这里。可以保留租约，或选择另一间住处。"
 
@@ -28814,7 +28850,7 @@ msgstr "你可以：%s"
 msgid "You connected goods, customers and places through real trades."
 msgstr "一笔笔实际交易，让你串起商品、顾客与不同地方。"
 
-#: scripts/sim/legacy_business.gd:266
+#: scripts/sim/legacy_business.gd:267
 msgid "You continue operating under the existing ownership. Previous investors and sales stay on the books."
 msgstr "沿用现有股权继续经营。先前的投资人与出售纪录都会保留。"
 
@@ -28846,11 +28882,11 @@ msgstr "你有月租座位了。"
 msgid "You have an order! Go to your packing table at home and press E. Pack it by hand: box, padding, tape, label."
 msgstr "有订单了！到家里的打包桌按 E。亲手打包：箱子、缓冲材、胶带、标签。"
 
-#: scripts/sim/personal_assets.gd:181
+#: scripts/sim/personal_assets.gd:217
 msgid "You have no personal car to sell. Take the metro or buy one."
 msgstr "目前没有自用车可出售；可搭捷运或先购车。"
 
-#: scripts/sim/personal_assets.gd:188
+#: scripts/sim/personal_assets.gd:224
 msgid "You have no personal car. Take the metro or buy one."
 msgstr "你没有私家车。请搭地铁或先买一辆。"
 
@@ -28922,11 +28958,11 @@ msgstr "资产承担了一部分工作，让你也能留时间给生活。"
 msgid "You manage a Hale Group division. The revenue goal is a management benchmark; the chapter only requires continued operations, not growth."
 msgstr "你负责 Hale Group 旗下的部门。营收目标只是管理上的参考；本章要求持续经营，不要求营收成长。"
 
-#: scripts/sim/legacy_business.gd:266
+#: scripts/sim/legacy_business.gd:267
 msgid "You mentor at Nexus Co-work. A live company uses a contract manager with monthly fees; after closure, there is no company to hand over."
 msgstr "你在 Nexus Co-work 辅导创业者。仍在经营的公司交由委任经理人管理并按月付费；公司已关闭时，就没有生意需要交接。"
 
-#: scripts/sim/legacy_business.gd:265
+#: scripts/sim/legacy_business.gd:266
 msgid "You met %d contacts and hired %d employees across your journey."
 msgstr "这一路，你结识了 %d 位联系人，聘用了 %d 名员工。"
 
@@ -28938,7 +28974,7 @@ msgstr "需要 %d 件库存（目前 %d 件）。"
 msgid "You need %s (first month%s)."
 msgstr "需要 %s（首月租金%s）。"
 
-#: scripts/sim/cafe.gd:180
+#: scripts/sim/cafe.gd:185
 msgid "You need %s."
 msgstr "需要 %s。"
 
@@ -28998,7 +29034,7 @@ msgstr "你付全额 $3,200，事情就此结案。"
 msgid "You quit your job. You have savings, a laptop, a phone — and a lease."
 msgstr "你辞掉了工作。你有一笔存款、一台笔电、一支手机——还有一纸租约。"
 
-#: scripts/sim/capital_market.gd:204
+#: scripts/sim/capital_market.gd:221
 msgid "You raised equity rather than sales income; quarterly disclosure and board votes now limit your freedom."
 msgstr "你以股权募集资本，没有增加销售营收；季报义务和董事会表决也限制了你的自由。"
 
@@ -29014,7 +29050,7 @@ msgstr "每件收入较低，但不必管理终端客户。"
 msgid "You retain retail customers and margin but fund slow stock and returns."
 msgstr "保有零售客户与毛利，也须负担滞销与退货。"
 
-#: scripts/sim/capital_market.gd:204
+#: scripts/sim/capital_market.gd:221
 msgid "You retained private ownership and its risks, without public capital or quarterly market pressure."
 msgstr "你保留私有股权，也承担原有风险；没有公开募集的资本，也没有市场季报压力。"
 
@@ -29034,7 +29070,7 @@ msgstr "你看到了。我们管道底下的跨链桥被骇了。不是我的合
 msgid "You set up chairs for a pitch night. Two founders argue about pricing the whole time."
 msgstr "你为提案之夜排椅子。两位创办人整晚都在吵定价。"
 
-#: scripts/sim/capital_market.gd:204
+#: scripts/sim/capital_market.gd:221
 msgid "You sold existing founder shares; the payout is an ownership transaction and your company answers to its new owner."
 msgstr "你出售原有创办人持股，取得股权交易款；公司今后需要对新股东负责。"
 
@@ -29126,7 +29162,7 @@ msgstr "你的 LED 台灯上了 Crestline 的货架。八百盏都是从你家�
 msgid "Your Maple Court unit"
 msgstr "你的 Maple Court 住户"
 
-#: scripts/sim/cafe.gd:144
+#: scripts/sim/cafe.gd:149
 msgid "Your application is being processed."
 msgstr "你的申请正在审核中。"
 
@@ -29174,7 +29210,7 @@ msgstr "你决定。"
 msgid "Your cash"
 msgstr "你的现金"
 
-#: scripts/sim/legacy_business.gd:266
+#: scripts/sim/legacy_business.gd:267
 msgid "Your company"
 msgstr "你的公司"
 
@@ -29250,7 +29286,7 @@ msgstr "第一笔生意完成了！再兼一份差，钱会进来得更快。Blo
 msgid "Your first venture guides you through buying stock, listing, packing, shipping, and getting paid. Gold arrows and button highlights show your next step."
 msgstr "第一次创业带你跑完进货、上架、打包、寄送与收款。金色箭头和按钮提示会指出下一步。"
 
-#: scripts/sim/legacy_business.gd:262
+#: scripts/sim/legacy_business.gd:263
 msgid "Your founder journey"
 msgstr "你的创业旅程"
 
@@ -29338,7 +29374,7 @@ msgstr "你的贷款 %s 扣款失败，3 天后会再扣一次。下次先打给
 msgid "Your personal account"
 msgstr "你的个人帐户"
 
-#: scripts/sim/personal_assets.gd:122 scripts/sim/personal_assets.gd:144
+#: scripts/sim/personal_assets.gd:158 scripts/sim/personal_assets.gd:180
 msgid "Your personal car is parked elsewhere. Take the metro back to it."
 msgstr "自用车停在别的街区，请搭捷运回去取车。"
 
@@ -29410,7 +29446,7 @@ msgstr "货到了。在 Company OS 打开「销售」，按「自己拍照并上
 msgid "Your time is the inventory. Take client gigs, work them at any laptop, invoice, get paid. Reputation raises your rate."
 msgstr "你的时间就是库存。接客户的案子，在任何笔电上完成，开发票、收款。信誉越好，时薪越高。"
 
-#: scripts/sim/legacy_business.gd:267
+#: scripts/sim/legacy_business.gd:268
 msgid "Your timeline"
 msgstr "一路的纪录"
 
@@ -29594,7 +29630,7 @@ msgstr "佣金"
 msgid "community manager"
 msgstr "社群经理"
 
-#: scripts/sim/insolvency.gd:169
+#: scripts/sim/insolvency.gd:170
 msgid "company closed"
 msgstr "公司结束"
 
@@ -29690,7 +29726,7 @@ msgstr "手续费 %s"
 msgid "fees"
 msgstr "费用"
 
-#: scripts/sim/cafe.gd:111
+#: scripts/sim/cafe.gd:116
 msgid "fit out the unit"
 msgstr "先把店面装修好"
 
@@ -29734,7 +29770,7 @@ msgstr "汇差"
 msgid "gave a refund"
 msgstr "退款"
 
-#: scripts/sim/cafe.gd:113
+#: scripts/sim/cafe.gd:118
 msgid "get the food handling licence at City Hall"
 msgstr "到市政厅办食品处理执照"
 
@@ -29773,6 +29809,10 @@ msgstr "征人中——询问这份工作"
 #: data/story/achievements.json data/story/goals.json scripts/ui/modals/growth_modal.gd:50 scripts/ui/modals/growth_modal.gd:51
 msgid "home dollars"
 msgstr "本国元"
+
+#: scripts/sim/personal_assets.gd:77
+msgid "home foreclosure"
+msgstr "住宅遭法拍"
 
 #: scripts/ui/modals/company_os.gd:247
 msgid "in the bank"
@@ -29850,11 +29890,11 @@ msgstr "补正逾期"
 msgid "late tax"
 msgstr "税务逾期"
 
-#: scripts/sim/cafe.gd:136
+#: scripts/sim/cafe.gd:141
 msgid "lease the café unit first"
 msgstr "请先租下咖啡店面"
 
-#: scripts/sim/cafe.gd:109
+#: scripts/sim/cafe.gd:114
 msgid "lease the corner unit in Old Town (Okafor Lettings)"
 msgstr "租下旧城区的转角店面（Okafor 租屋行）"
 
@@ -29966,7 +30006,7 @@ msgstr "份网络规划"
 msgid "new credit"
 msgstr "添加信贷"
 
-#: scripts/sim/cafe.gd:282
+#: scripts/sim/cafe.gd:287
 msgid "no coffee supplies"
 msgstr "没有咖啡材料"
 
@@ -29994,7 +30034,7 @@ msgstr "你没有在这里工作"
 msgid "not registered (personal seller)"
 msgstr "未登记（个人卖家）"
 
-#: scripts/sim/cafe.gd:275
+#: scripts/sim/cafe.gd:280
 msgid "not your café (yet)"
 msgstr "（还）不是你的店"
 
@@ -30122,7 +30162,7 @@ msgstr "生产"
 msgid "qc"
 msgstr "品管"
 
-#: scripts/sim/cafe.gd:134 scripts/sim/logistics.gd:87 scripts/sim/staff.gd:71
+#: scripts/sim/cafe.gd:139 scripts/sim/logistics.gd:87 scripts/sim/staff.gd:71
 msgid "register a company first"
 msgstr "先登记公司"
 
@@ -30266,7 +30306,7 @@ msgstr "人才"
 msgid "teller closed"
 msgstr "柜台已关"
 
-#: scripts/sim/cafe.gd:280
+#: scripts/sim/cafe.gd:285
 msgid "the café is closed now"
 msgstr "咖啡店现在没营业"
 
@@ -30274,11 +30314,11 @@ msgstr "咖啡店现在没营业"
 msgid "the company account needs %s (van and first month's insurance)"
 msgstr "公司帐户要有 %s（货车加第一个月保险）"
 
-#: scripts/sim/cafe.gd:111
+#: scripts/sim/cafe.gd:116
 msgid "the fit-out is still going"
 msgstr "还在装修"
 
-#: scripts/sim/cafe.gd:113
+#: scripts/sim/cafe.gd:118
 msgid "the food licence is being processed"
 msgstr "食品执照审核中"
 
