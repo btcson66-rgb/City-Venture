@@ -14,3 +14,5 @@ Self-review fixes: FOB/CIF reject air; home-region imports have explicit tariffs
 Not implemented / unresolved: RFQ acceptance, actual Jobs lifecycle, L/C documents and release, warehouse rent Ledger and Customs adapter, insured cargo crises, forward settlement (shared issue42), all three growth tiers, Meridian premises / NPCs, staff / lending / agency / factory integration, 120-day three-strategy balance, actual trading route and customs execution screenshots. Airport exterior depends on issue68. This PR must remain Draft until these issue70 acceptance items are completed; preview tests are not business acceptance.
 
 前張#31正常merge複驗：511/511（147.5秒），native trade_execution 0 failures /29.9秒，無SCRIPT ERROR；i18n5434 missing0、wiki280 OK、beta0。保留海關兩位NPC與進出口動作、產業事件、海外帳目與所有關閉清理；重複customs_guide圖示鍵已移除，未動素材。翻譯/wikidata兩邊新增保留，沒有rebase。最後整合完整gate仍待#99尾端验证。
+
+最後補入#31選品及季節性供應缺席檢查後（788cd29b），完整單元測試511/511（138.7秒）、國貿短版0失敗（29.2秒），皆無SCRIPT ERROR。誤用未定義的--from=trade所啟動流程已停止，不列驗收；正確短版為--from=trade_execution。
