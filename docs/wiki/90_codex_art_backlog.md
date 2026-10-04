@@ -744,6 +744,8 @@ Planned: backdrops/chapter_13 and backdrops/chapter_14; dedicated Ines sprites/p
 
 Planned: backdrops/chapter_15, backdrops/chapter_16; dedicated Omar sprites/portrait; airport/cabin journey scene; Lumina warehouse interior; events/fx_shock. Interim executive outfit, existing bank/OS and explicit journey/comparison cards are used. No assets changed.
 
+
+
 # Manufacturing (#64)
 
 Facade requests: `facades/unit12_factory.png`, `facades/ferro_supply.png`, `facades/kessler_precision.png`, `facades/shift_diner.png`; existing `brick_shops` / `byte_bean` are rendered through Art.has_tex fallback. Future industrial freight sprite: `vehicles/industrial_truck_side_body.png` and `vehicles/industrial_truck_side_detail.png`; existing vans provide current freight traffic. Interior machine request: `props/cnc_machine.png` (packing bench fallback), material rack request `props/ferro_material_rack.png` (parcel shelf fallback). No art files are modified by this ticket.

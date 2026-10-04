@@ -553,6 +553,8 @@ Customs decision choices may set `recommended: true`; only the first available e
 Lazy `fx_forwards` = {items[id]{entity,currency,notional,days,rate,fee,collateral,status,opened,due,settled,spot,gain_loss,early},seq}. Lazy `overseas_partners` = {companies[entity]{warehouse{opened,last_month},transfers[{index,status,product,qty,unit_cost,cost,defect_rate,eta}],home_invoices,visiting,next_offer},chapters[id]{entity,started,month_closes},shock{currency,before,after,started,exposure_estimate}}. Optional distributor contract keys: type,region,invoice_currency,foreign_total,foreign_receivable,shipped,shipment_cost,eta,closure_written_off. Existing contracts keep their original lifecycle. `lumina_3pl:<entity>` inventory stays outside domestic stock locations. Orders use partner_channel=3pl. Month-close FX uses the existing fx_gain_loss account; no account rename/migration is needed.
 
 
+
+
 ## Industry framework state (#63)
 
 - Every ledger journal source includes `segment`: industry id or `shared`. Old entries need not be rewritten.
@@ -626,6 +628,7 @@ Per-company `popup` is lazily initialized as `{active: {}, history: []}` for old
 
 Sales use the existing canonical `Ledger` account `revenue`; report field `sales_revenue` aliases that total, never an additional revenue entry. All postings carry `segment: popup`. Counterfactual ShopLane comparisons are report-only and use current marketplace fees, excluding online shipping and returns. Staff assignment overrides other company duties only during assigned weekend opening hours. Stable UI names: `SignPopup`, `PopupQty_<product>`, `PopupStock_<product>`, `PopupTill`, `PopupStaff_<employee>_<weekday>`, `PopupCharge_<index>`.
 
+
 ### Industry introductions (#86)
 
 `data/story/side_stories/intro_<industry>.json` defines four real objectives, company/capital-or-era eligibility, mentor/building, optional `guided_event`, timeline/contact reward and unavailable receipt. `met:<npc>` reads the existing NPC meeting receipt. `metric:<SynergyMetrics source><comparison>` reuses actual saved counts, industry stats and functions. `story.side_stories[id].started` controls a ninety-day opportunity expiry; old active receipts acquire the current time lazily. Other-company progress waits for its owning company; closure and skipped/expired steps never award the success reward.
@@ -634,3 +637,6 @@ Sales use the existing canonical `Ledger` account `revenue`; report field `sales
 
 ### CityFuture (#99)
 `economy/city_future.json` holds six civic chapter definitions, service scope/name, integer quantity/unit and days, home-currency unit_cost, permitted choices, supplier quality/failure probabilities, municipal appropriation, choice costs and durations. Each service is a real Jobs purchase, with price/paid_cost and delivered_units. `GameState.data.city_future` is lazy: current, chapters keyed 19–24 (entity, started, deadline, contracts, mode, tier, decision, quality, status, review_at, result), expo_awarded, harbor_quality, transition, candidate/elected, brand, peak/crises intervals, option commitments, cards/viewed. Municipal-budget state lives in entities and the same ledger as all other entities; choices cannot award income. Employee options retain original company and staff IDs and can vest once or forfeit. `world/years.json` years 11/12 city_modifiers control storm/peak/crisis duration and demand, transition curves and mayor tax/subsidy/construction multipliers. Existing saves without civic state have all factors equal to one.
+
+
+Trade portfolio integration (#91/#70): `trade`, `trade_active`, and `trade.*` schedules follow the brokerage owner. Pre-registry multi-company saves move the old global brokerage and untagged cargo departures to its recorded entity without changing cash or contracts, and restore the selected company view. Old single-company migration binds actual scheduled departures before any switch.
