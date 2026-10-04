@@ -1,0 +1,121 @@
+{
+ "id": "intro_hotel",
+ "business": "hotel",
+ "title": "Henri and the first busy season",
+ "text": "Meet Henri at the Aster and discuss the handover.",
+ "mentor": "henri_dubois",
+ "building": "the_aster",
+ "trigger": [
+  "cash>=100000 || world_year>=2"
+ ],
+ "objectives": [
+  {
+   "id": "side_hotel_1",
+   "text": "Meet Henri at the Aster and discuss the handover.",
+   "complete_when": [
+    "met:henri_dubois"
+   ],
+   "skip_when": [
+    "flag:side_hotel_declined"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "building": "the_aster"
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "henri_dubois",
+     "text": "Meet Henri at the Aster and discuss the handover."
+    }
+   ]
+  },
+  {
+   "id": "side_hotel_2",
+   "text": "Take over the hotel with a paid lease or purchase.",
+   "complete_when": [
+    "flag:hotel_active"
+   ],
+   "skip_when": [
+    "flag:side_hotel_declined"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "os": true
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "henri_dubois",
+     "text": "Take over the hotel with a paid lease or purchase."
+    }
+   ]
+  },
+  {
+   "id": "side_hotel_3",
+   "text": "Serve the first group booking in the busy season.",
+   "complete_when": [
+    "metric:data:hotel.completed_blocks>=1"
+   ],
+   "skip_when": [
+    "flag:side_hotel_declined"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "os": true
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "henri_dubois",
+     "text": "Serve the first group booking in the busy season."
+    }
+   ]
+  },
+  {
+   "id": "side_hotel_4",
+   "text": "Decide how to host Vera Stone and review the cost of her stay.",
+   "complete_when": [
+    "metric:count:events.history|id=hotel_vera_visit>=1"
+   ],
+   "skip_when": [
+    "flag:side_hotel_declined"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "os": true
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "henri_dubois",
+     "text": "Decide how to host Vera Stone and review the cost of her stay."
+    }
+   ]
+  }
+ ],
+ "on_complete": [
+  {
+   "do": "timeline",
+   "text": "Henri and the first busy season — introduction complete.",
+   "kind": "side_story"
+  },
+  {
+   "do": "set_flag",
+   "flag": "contact_henri_dubois"
+  },
+  {
+   "do": "message",
+   "from": "henri_dubois",
+   "text": "You can reach me through this phone thread. Keep the real costs and risks in view before expanding."
+  }
+ ],
+ "on_unavailable": [
+  {
+   "do": "timeline",
+   "text": "Henri and the first busy season — opportunity ended.",
+   "kind": "side_story"
+  }
+ ],
+ "guided_event": "hotel_vera_visit"
+}

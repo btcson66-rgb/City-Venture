@@ -1,0 +1,33 @@
+{
+ "id": "ingrid_freight",
+ "with": "ingrid_solberg",
+ "start": "start",
+ "nodes": {
+  "start": [
+   {
+    "who": "ingrid_solberg",
+    "text": "Compare ship schedules with air freight. Air is faster and costs more; a strike can make waiting cheaper than rerouting."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Show me the shipping choices.",
+      "next": "routes"
+     },
+     {
+      "text": "I will review my cash buffer first.",
+      "next": "end"
+     }
+    ]
+   }
+  ],
+  "routes": [
+   {
+    "who": "ingrid_solberg",
+    "text": "Sea freight waits for the weekly departure. Air can depart today. Both routes need complete customs documents, and neither guarantees a profit."
+   }
+  ],
+  "end": []
+ }
+}

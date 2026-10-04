@@ -1,0 +1,53 @@
+   0.0s STEP Main menu → New Game
+   0.6s   shot 01_main_menu.png
+   0.6s   click [NewGame] New Game
+   1.9s STEP Character Creator
+   2.0s   shot 02_creator_default.png
+   2.0s   click [Tab_hair] Hair
+   2.1s   click [Next_hair] ▶
+   2.5s   click [Tab_face] Face
+   2.6s   click [Next_face] ▶
+   2.8s   click [Next_eye_shape] ▶
+   3.1s   click [Tab_body] Body
+   3.2s   click [Next_presentation] ▶
+   3.9s   shot 03_creator_customised.png
+   3.9s   click [Tab_outfit] Outfit
+   4.0s   click "Startup Casual"
+   4.5s   ok  appearance changed from default (short_neat)
+   4.6s   shot 04_creator_final.png
+   4.6s   click [Start] Start in Aurelia  →
+   4.7s [6月1日（週日） 下午 2:00] STEP Arrival sequence
+   7.4s [6月1日（週日） 下午 2:00]   shot 05_arrival_train.png
+  10.9s [6月1日（週日） 下午 2:00]   shot 06_arrival_phone.png
+  16.6s [6月1日（週日） 下午 2:01]   ok  spawned in the Riverside apartment
+  16.6s [6月1日（週日） 下午 2:01]   ok  starting cash $30,000
+  16.6s [6月1日（週日） 下午 2:01]   ok  name saved
+  18.4s [6月1日（週日） 下午 2:03]   shot 07_apartment_arrival.png
+  22.2s [6月1日（週日） 下午 2:09] STEP International bank account
+  22.7s [6月1日（週日） 下午 2:09]   shot 08_global_bank_fee.png
+  22.7s [6月1日（週日） 下午 2:09]   click [OpenInternationalAccount] 開立國際帳戶（$150.00）
+  22.8s [6月1日（週日） 下午 2:40]   ok  actual bank button opens international account
+  23.2s [6月1日（週日） 下午 2:40] STEP Local currency storefront and price
+  23.7s [6月1日（週日） 下午 2:41]   click [Tab_sales] Ecommerce
+  23.9s [6月1日（週日） 下午 2:41]   click [SalesPage_overseas] Overseas
+  24.1s [6月1日（週日） 下午 2:42]   click [OpenGlobalStore_northridge] Open storefront
+  24.2s [6月1日（週日） 下午 2:42]   click [SaveGlobalPrice_L2] Save local price
+  24.4s [6月1日（週日） 下午 2:42]   ok  saved price allows regional orders
+  24.4s [6月1日（週日） 下午 2:42]   shot 09_global_local_price.png
+  24.8s [6月1日（週日） 下午 2:43] STEP International economy shipping
+  25.3s [6月1日（週日） 下午 2:43]   click [Pack] 打包 1 筆訂單（8 分鐘）
+  26.0s [6月1日（週日） 下午 2:52]   shot 10_global_courier_choices.png
+  26.0s [6月1日（週日） 下午 2:52]   click [CourierEconomy] 經濟快遞／國際 7–14 天（$23.60）
+  26.5s [6月1日（週日） 下午 2:53]   ok  courier uses international route
+  26.5s [6月18日（週三） 下午 2:53] STEP Foreign wallet conversion
+  27.0s [6月18日（週三） 下午 2:54]   click [Tab_finance] Finance
+  27.2s [6月18日（週三） 下午 2:54]   shot 11_global_foreign_wallet.png
+  27.2s [6月18日（週三） 下午 2:54]   click [ConvertGlobal_NRD] 換匯入帳（$53.19）
+  27.4s [6月18日（週三） 下午 2:55]   ok  real finance button converts wallet once
+  27.5s [6月18日（週三） 下午 2:55]   shot 12_global_realized_fx.png
+  27.8s [6月18日（週三） 下午 2:55] STEP World map regional facts
+  28.3s [6月18日（週三） 下午 2:56]   click [Region_northridge] 
+  28.5s [6月18日（週三） 下午 2:56]   ok  region card opens facts without travel
+  28.6s [6月18日（週三） 下午 2:56]   shot 13_global_region_facts.png
+  28.6s [6月18日（週三） 下午 2:56]   ok  global tour ledger balanced
+  28.6s [6月18日（週三） 下午 2:56] BOT FINISHED — 0 failure(s) · 28.6s real

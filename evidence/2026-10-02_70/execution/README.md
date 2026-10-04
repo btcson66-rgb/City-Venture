@@ -1,0 +1,11 @@
+# Issue 70 execution follow-up - 2026-10-04
+
+Actual brokerage execution uses shared Industries/Jobs/Ledger, paid office/warehouse leases, supplier cargo, customs documents, LC bank documents and delivered receipts. Three paid deliveries unlock repeat Jobs; the leased warehouse and paid agency enable procurement into shared ecommerce inventory. Trade Coordinator uses normal recruitment and payroll. Bank lending includes paid trade cargo. The shared #42 FXForward module includes contracted trade receipts and real fee/collateral.
+
+Validation: full unit suite 510/510, 138.3s; subsequent trade review 13/13, 2.6s. i18n 5425/5425, missing 0; wiki_check OK (280 IDs); beta_audit 0. Native 720p zh_TW execution tour: 0 failures, 29.1s, 7 feature JPGs. English audit findings are fixture company names, stable TRD contract IDs, the English language selector and existing beta version text; new prose was visually checked in Chinese.
+
+120-day report: three strategies, three seeds each. Conservative mean -2886.97 home dollars, normal +4380.49, aggressive -4421.63. Actual cargo/credit losses occur. This small sample does not establish a probability of loss; the unit adverse-supplier case proves insured LC is not a guaranteed strategy and does not fabricate delivery or revenue.
+
+Self-review fixed: unknown facade fallback; required industry segment interface; gate copy; untranslated status strings; missing markup control; LC premature ordinary Jobs payment; duplicate refunds/receipts; delivered cargo cannot be resurrected; warehouse-capacity holds cannot be cleared by staff into an endless shipping loop; supplier insolvency is not insured cargo; FX missing from segment totals; 720p worktable clipping; lease fees now retain decimals.
+
+Limits: full cadence walkthrough remains unresolved. The latest integrated #41 run had 174 failures; its popup-to-home handoff was fixed and passed its short tour, but the entire walkthrough has not passed again. The #70 tour uses a documented isolated founder capital fixture and advances delivery/settlement timestamps; it is not a full city-navigation acceptance run. Bonded supply currently feeds existing ecommerce stock; it does not create another factory inventory. Airport air routing is functional; no new dedicated cargo artwork is included. All screenshots are JPG and total issue evidence is below 20 MB. Keep Draft.

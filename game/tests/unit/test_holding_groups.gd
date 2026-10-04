@@ -193,3 +193,165 @@ func test_registration_prompt_is_read_only_and_requires_the_clerk() -> void:
 	for i in 3:runner.eq(Actions.lock_reason("register_company",{}),"Nobody at the counter. Registration: Mon–Fri 9:00–17:00.","missing clerk explains next opening")
 	runner.eq(UIRoot.top_modal(),before,"reading prompt cannot open registration")
 	runner.eq(GameState.data["ledger"]["seq"],seq,"reading prompt cannot spend")
+
+func test_actual_trade_contract_schedule_and_save_are_isolated_when_switching_company() -> void:
+	var fixture=load("res://tests/unit/test_trade_execution.gd").new();fixture.runner=runner;fixture.setup()
+	var owner:=GameState.company_id()
+	var signed: Dictionary=TradeIndustry.sign(fixture.quote())
+	runner.check(signed["ok"],"real owner signs paid supplier cargo")
+	if not signed["ok"]:return
+	var deal_id: String=signed["id"]
+	var deal: Dictionary=TradeIndustry.S()["deals"][deal_id]
+	var pending: Array=GameState.data["schedule"].filter(func(item):return item["kind"]=="trade.depart" and item["p"].get("id","")==deal_id)
+	runner.check(not pending.is_empty(),"actual cargo departure scheduled")
+	if pending.is_empty():return
+	var scheduled: Dictionary=pending[0].duplicate(true)
+	runner.eq(scheduled["p"].get("company_context",""),owner,"actual departure belongs to cargo owner")
+	var other:=company("Other without brokerage")
+	runner.check(not TradeIndustry.is_running(),"second company has no inherited brokerage")
+	runner.eq(TradeIndustry.entity(),"","second company does not operate owner cargo")
+	runner.check(TradeIndustry.S()["deals"].is_empty(),"no cloned trade cargo")
+	runner.check(not GameState.flag("trade_active"),"trade licence flag follows selected company")
+	var other_cash:=Ledger.cash(other)
+	GameState.data["clock"]["minutes"]=int(deal["depart"])
+	Sim._dispatch(scheduled["kind"],scheduled["p"])
+	runner.eq(GameState.company_id(),other,"scheduled cargo restores the viewer")
+	runner.check(TradeIndustry.S()["deals"].is_empty(),"scheduled owner does not leak cargo into viewer")
+	runner.eq(Ledger.cash(other),other_cash,"another company's departure never charges viewer")
+	CompanyPortfolio.switch(owner)
+	runner.eq(TradeIndustry.entity(),owner,"real brokerage owner restored")
+	runner.check(GameState.flag("trade_active"),"owner trade licence restored")
+	runner.check(TradeIndustry.S()["deals"][deal_id]["status"]!="booked","actual owner cargo departure was processed")
+	runner.check(SaveSystem.save(5),"real multi-company cargo serializes")
+	runner.check(SaveSystem.load_data(5),"real multi-company cargo loads")
+	CompanyPortfolio.switch(other)
+	runner.check(TradeIndustry.S()["deals"].is_empty(),"loaded viewer has no other-company cargo")
+	CompanyPortfolio.switch(owner)
+	runner.check(TradeIndustry.S()["deals"].has(deal_id),"loaded owner retains actual contract")
+	runner.check(Insolvency.close_company()["ok"],"cargo owner closes through actual insolvency action")
+	runner.eq(GameState.company_id(),other,"remaining company becomes available after closure")
+	runner.check(not GameState.flag("trade_active") and TradeIndustry.S()["deals"].is_empty(),"closed brokerage cannot contaminate survivor")
+	runner.check(Ledger.check_balanced(),"all actual supplier and closure postings balance")
+
+func test_old_single_company_trade_departure_acquires_owner_before_switch() -> void:
+	var fixture=load("res://tests/unit/test_trade_execution.gd").new();fixture.runner=runner;fixture.setup()
+	var owner:=GameState.company_id()
+	var signed: Dictionary=TradeIndustry.sign(fixture.quote())
+	runner.check(signed["ok"],"actual old-format cargo purchase")
+	if not signed["ok"]:return
+	var pending: Array=GameState.data["schedule"].filter(func(item):return item["kind"]=="trade.depart" and item["p"].get("id","")==signed["id"])
+	runner.check(not pending.is_empty(),"legacy cargo schedule exists")
+	if pending.is_empty():return
+	pending[0]["p"].erase("company_context")
+	GameState.data["company"]=owner;GameState.data.erase("active_company")
+	CompanyPortfolio.migrate(GameState.data)
+	runner.eq(pending[0]["p"].get("company_context",""),owner,"legacy trade schedule migrated to real owner")
+	company("Legacy viewer")
+	runner.check(TradeIndustry.S()["deals"].is_empty(),"legacy owner cargo is not cloned on registration")
+	CompanyPortfolio.switch(owner)
+	runner.check(TradeIndustry.S()["deals"].has(signed["id"]),"migrated owner retains real paid cargo")
+
+func test_old_multi_company_trade_capture_loads_without_giving_viewer_the_cargo() -> void:
+	var fixture=load("res://tests/unit/test_trade_execution.gd").new();fixture.runner=runner;fixture.setup()
+	var owner:=GameState.company_id()
+	var signed: Dictionary=TradeIndustry.sign(fixture.quote())
+	runner.check(signed["ok"],"actual historical brokerage signs cargo")
+	if not signed["ok"]:return
+	var legacy_trade:=TradeIndustry.S().duplicate(true)
+	var other:=company("Historical viewer")
+	CompanyPortfolio.capture()
+	var legacy: Dictionary=GameState.data.duplicate(true)
+	for view in legacy["company_contexts"].values():
+		view["states"].erase("trade");view["flags"].erase("trade_active")
+	legacy["trade"]=legacy_trade;legacy["flags"]["trade_active"]=true
+	for item in legacy["schedule"]:
+		if str(item["kind"]).begins_with("trade."):item["p"].erase("company_context")
+	var journals: int=legacy["ledger"]["journal"].size()
+	DirAccess.make_dir_recursive_absolute(SaveSystem.DIR)
+	var file:=FileAccess.open(SaveSystem.DIR.path_join("slot_5.json"),FileAccess.WRITE)
+	file.store_string(JSON.stringify({"format":GameState.SAVE_FORMAT,"summary":{},"data":legacy}));file.close()
+	runner.check(SaveSystem.load_data(5),"pre-registry multi-company save loads through normal validation: "+SaveSystem.last_error)
+	runner.eq(GameState.company_id(),other,"historical viewer stays selected")
+	runner.check(not TradeIndustry.is_running() and TradeIndustry.S()["deals"].is_empty(),"migration does not give viewer old owner's brokerage")
+	runner.check(not GameState.flag("trade_active"),"viewer does not inherit owner's licence")
+	CompanyPortfolio.switch(owner)
+	runner.check(TradeIndustry.S()["deals"].has(signed["id"]),"real paid cargo restored to recorded owner")
+	runner.check(GameState.flag("trade_active"),"owner licence recovered")
+	for item in GameState.data["schedule"]:
+		if str(item["kind"]).begins_with("trade."):runner.eq(item["p"].get("company_context",""),owner,"legacy trade schedule bound to recorded owner")
+	runner.eq(GameState.data["ledger"]["journal"].size(),journals,"migration creates no money or extra purchase")
+	runner.check(Ledger.check_balanced(),"loaded historical cargo books balanced")
+	# Preserve an intermediate portfolio save: viewer selected, owner parked, decision not yet priced.
+	var deal: Dictionary=TradeIndustry.S()["deals"][signed["id"]]
+	var probe:=RandomNumberGenerator.new()
+	for value in 10000:
+		probe.seed=value
+		if probe.randf()<float(TradeIndustry.cfg().get("port_disruption_risk",.08)):GameState.rng.seed=value;break
+	GameState.data["clock"]["minutes"]=int(deal["depart"])
+	TradeIndustry.handle("trade.depart",{"id":signed["id"]})
+	runner.eq(deal["status"],"delayed","real parked cargo awaits a port decision")
+	CompanyPortfolio.switch(other);CompanyPortfolio.capture()
+	var parked: Dictionary=GameState.data.duplicate(true)
+	var port: Array=parked["events"]["queue"].filter(func(q):return q["id"]=="trade_port_strike" and q["ctx"].get("trade_entity","")==owner)
+	runner.check(not port.is_empty(),"parked actual port decision exists")
+	if port.is_empty():return
+	var iid: String=port[0]["iid"];port[0]["ctx"].erase("reroute_fee");port[0]["ctx"].erase("company")
+	file=FileAccess.open(SaveSystem.DIR.path_join("slot_5.json"),FileAccess.WRITE)
+	file.store_string(JSON.stringify({"format":GameState.SAVE_FORMAT,"summary":{},"data":parked}));file.close()
+	runner.check(SaveSystem.load_data(5),"old parked-owner port decision loads normally")
+	var loaded_port: Array=EventEngine.pending().filter(func(q):return q["iid"]==iid)
+	runner.check(not loaded_port.is_empty() and loaded_port[0]["ctx"].has("reroute_fee"),"actual owner fee recovered from parked cargo")
+	if loaded_port.is_empty() or not loaded_port[0]["ctx"].has("reroute_fee"):return
+	var cash:=Ledger.cash(owner)
+	runner.check(EventEngine.choose(iid,"air")["ok"],"loaded owner rerouting executes")
+	runner.eq(Fmt.money(cash-Ledger.cash(owner)),loaded_port[0]["ctx"]["reroute_fee"],"loaded fee equals actual original-owner payment")
+	runner.eq(GameState.company_id(),other,"loaded decision restores historical viewer")
+	runner.check(Ledger.check_balanced(),"loaded actual rerouting books balance")
+
+
+func test_pending_trade_port_decision_reroutes_the_owner_and_restores_another_viewer() -> void:
+	var fixture=load("res://tests/unit/test_trade_execution.gd").new();fixture.runner=runner;fixture.setup()
+	var owner:=GameState.company_id()
+	var signed: Dictionary=TradeIndustry.sign(fixture.quote())
+	runner.check(signed["ok"],"actual sea cargo purchased")
+	if not signed["ok"]:return
+	var deal: Dictionary=TradeIndustry.S()["deals"][signed["id"]]
+	var probe:=RandomNumberGenerator.new()
+	for value in 10000:
+		probe.seed=value
+		if probe.randf()<float(TradeIndustry.cfg().get("port_disruption_risk",.08)):GameState.rng.seed=value;break
+	GameState.data["clock"]["minutes"]=int(deal["depart"])
+	TradeIndustry.handle("trade.depart",{"id":signed["id"]})
+	runner.eq(deal["status"],"delayed","real disruption generated by actual departure handler")
+	var pending: Array=EventEngine.S()["queue"].filter(func(q):return q["id"]=="trade_port_strike" and q["ctx"].get("trade","")==signed["id"])
+	runner.check(not pending.is_empty(),"actual owner cargo queued port choices")
+	if pending.is_empty():return
+	var inst: Dictionary=pending[0]
+	runner.eq(inst["ctx"].get("trade_entity",""),owner,"queued decision identifies actual brokerage")
+	var other:=company("Port decision viewer")
+	var other_cash:=Ledger.cash(other);var owner_cash:=Ledger.cash(owner)
+	runner.check(EventEngine.choose(inst["iid"],"air")["ok"],"real rerouting choice applies to original cargo")
+	runner.eq(GameState.company_id(),other,"decision restores selected other company")
+	runner.eq(Ledger.cash(other),other_cash,"viewer never pays another company's rerouting")
+	runner.check(Ledger.cash(owner)<owner_cash,"original owner actually pays air freight")
+	runner.eq(Fmt.money(owner_cash-Ledger.cash(owner)),inst["ctx"]["reroute_fee"],"displayed rerouting fee equals actual owner cash payment")
+	CompanyPortfolio.switch(owner)
+	runner.check(TradeIndustry.S()["deals"][signed["id"]].has("reroute_receipt"),"rerouting belongs to actual owner contract")
+	EventEngine.trigger("trade_fx_volatility",{"trade":signed["id"],"trade_entity":owner,"company":GameState.business_display_name()})
+	runner.check(Insolvency.close_company()["ok"],"real closure resolves queued brokerage decisions")
+	runner.eq(GameState.company_id(),other,"closed trade owner leaves available viewer")
+	runner.check(not EventEngine.S()["queue"].any(func(q):return q["id"] in ["trade_port_strike","trade_fx_volatility"] and str(q["ctx"].get("trade_entity",""))==owner),"closed cargo cannot block or charge a later company")
+	runner.check(Ledger.check_balanced(),"actual event rerouting posts balance")
+
+func test_another_company_cannot_open_trade_in_the_first_companys_paid_office() -> void:
+	var fixture=load("res://tests/unit/test_trade_execution.gd").new();fixture.runner=runner;fixture.setup()
+	var owner:=GameState.company_id()
+	var other:=company("Office licence viewer","international_trade")
+	runner.check(TradeIndustry.register()["ok"],"other firm pays its own trade registration")
+	var cash:=Ledger.cash(other)
+	runner.check(not TradeIndustry.start()["ok"],"other firm's paid office cannot satisfy this company's lease")
+	runner.check(not TradeIndustry.is_running(),"unleased company remains inactive")
+	runner.eq(Ledger.cash(other),cash,"failed opening invents no rent or income")
+	CompanyPortfolio.switch(owner)
+	runner.check(TradeIndustry.valid(),"real office owner remains running")
+

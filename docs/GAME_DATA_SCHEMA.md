@@ -553,6 +553,7 @@ Customs decision choices may set `recommended: true`; only the first available e
 Lazy `fx_forwards` = {items[id]{entity,currency,notional,days,rate,fee,collateral,status,opened,due,settled,spot,gain_loss,early},seq}. Lazy `overseas_partners` = {companies[entity]{warehouse{opened,last_month},transfers[{index,status,product,qty,unit_cost,cost,defect_rate,eta}],home_invoices,visiting,next_offer},chapters[id]{entity,started,month_closes},shock{currency,before,after,started,exposure_estimate}}. Optional distributor contract keys: type,region,invoice_currency,foreign_total,foreign_receivable,shipped,shipment_cost,eta,closure_written_off. Existing contracts keep their original lifecycle. `lumina_3pl:<entity>` inventory stays outside domestic stock locations. Orders use partner_channel=3pl. Month-close FX uses the existing fx_gain_loss account; no account rename/migration is needed.
 
 
+
 ## Industry framework state (#63)
 
 - Every ledger journal source includes `segment`: industry id or `shared`. Old entries need not be rewritten.
@@ -605,3 +606,11 @@ Growth: data/story/goals.json and achievements.json define id/title/metric/value
 Every `kind: home` property provides `building`, `bed`, `bed_position`, `inventory_units`, and `monthly_rent` (capacity is also mirrored for existing ecommerce). `player.home` selects the home property. `Living.home/home_building/home_bed/home_rent` resolve location and era-adjusted rent; old saves default to Riverside. `living.housing` lazily stores actual per-property deposits, a cancellable notice reservation (`from/to/mode/ready/stage`), move count and receipts. Personal `home_deposit` is separate from business deposits, excluded from business asset contribution, and counted in personal net worth. New games record the configured pre-arrival deposit as opening equity; legacy saves never receive an invented deposit.
 
 `home_letting` opens the in-world rental modal at Okafor Lettings. `requires: home:<property>` protects tenant equipment. Move completion transfers physical inventory and corresponding operational locations across company views, preserving cost, supplier refunds, scheduled jobs and unrealized internal markup; assets and income are not transferred to a different owner. Notice completion is hourly and persists after save/load; changed capacity/cash blocks execution with retry/cancel instead of displacing the player.
+
+### Industry introductions (#86)
+
+`data/story/side_stories/intro_<industry>.json` defines four real objectives, company/capital-or-era eligibility, mentor/building, optional `guided_event`, timeline/contact reward and unavailable receipt. `met:<npc>` reads the existing NPC meeting receipt. `metric:<SynergyMetrics source><comparison>` reuses actual saved counts, industry stats and functions. `story.side_stories[id].started` controls a ninety-day opportunity expiry; old active receipts acquire the current time lazily. Other-company progress waits for its owning company; closure and skipped/expired steps never award the success reward.
+
+`intro_factory_quality` schedules actual `Manufacturing.plan` slots marked `story_recovery`; repeat choices cannot reserve another. Native subcontract completion carries actual COGS; overtime uses existing materials/wage/yield rules. No synthetic revenue or forced car defect is created. Optional guides use `tutorial.industries[company:industry]` with step/seen/shown/skipped fields; completed steps and explicit skips survive load.
+
+Trade portfolio integration (#91/#70): `trade`, `trade_active`, and `trade.*` schedules follow the brokerage owner. Pre-registry multi-company saves move the old global brokerage and untagged cargo departures to its recorded entity without changing cash or contracts, and restore the selected company view. Old single-company migration binds actual scheduled departures before any switch.
