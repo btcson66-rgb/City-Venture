@@ -18,3 +18,9 @@
 實際遊玩存檔讀回抓到市府實體缺少既有存檔必要欄位 `id` 與 `bank_account`。源提交 704fc55c 的原始捕獲 `game/tests/fixtures/saves/city_future_704fc55c.json` 雖然 tour 畫面通過，**讀回無效**；保留未改動原檔作為拒絕無效存檔的回歸 fixture，不能視為有效版本存檔。先前滿槽與新遊戲攔截也涉及這些無效城市存檔，撤回「僅因滿槽測試資料」的歸因。已補齊市府實體欄位並通過實際採購存讀檔測試；修正提交對應的六章遊玩捕獲與讀回驗證尚待完成。
 
 修正後有效捕獲：源提交 `4a5319d5a13f760284aeffeb81dce8f5290f1ad3`，原始檔 `game/tests/fixtures/saves/city_future_4a5319d5.json`。六章 Company OS tour **0 failures、162 steps、34 screenshots、125.1 秒**，沒有 SCRIPT ERROR，並新增正常匯入驗證檢查。27/27 專項測試再以正常 SaveSystem.load_data 讀回同一檔案，確認六章完成、六卡已閱讀、企業 independent 結局、實際採購收據、帳目平衡與重複 reconciliation 不重新付款。Hash 與來源見 valid-played-save-source.json；先前無效原檔保留為負向回歸。
+
+## Fresh integrated full run — FAILED, preserved
+
+Source 70a0bdd5 ran New Game through chapters1–24 and subsequent independent industry fixtures: **2 failures / 3418 steps / 403 screenshots / 8021.9 seconds**, no SCRIPT ERROR. Both failures are chapter-seven profitability: actual September operating profit -$826.09; the chapter honestly used the two-loss fallback. All remaining functional assertions completed, including valid third-season save export. The full run is FAILED, not PASS. The original played save is compressed without editing; source and SHA-256 are recorded alongside raw result/log. Automotive sentence/compass leaks were repaired and separately rendered on #86.
+
+The native strategy now uses actual PriceUp buttons to target 1.5x reference prices during the 1.8x-freight supply shock; demand still reacts through normal elasticity. No money, RNG, inventory or profit flags are injected and neither assertion was weakened. A genuine chapter-seven starting checkpoint is exported for repeatable diagnosis. Fresh single full rerun source f5e3c75a is RUNNING, awaiting acceptance. An earlier startup attempt during unresolved generated-PO conflicts exited before gameplay and is excluded from acceptance.
