@@ -23,7 +23,7 @@ static func initialize() -> void:
 	GameState.data["rivals"] = {"version": 1, "rng_state": str(random.state), "week": -1, "companies": {}, "offers": {}, "poach_after": 0}
 	for id in DataDB.rivals:
 		var rival: Dictionary = DataDB.rivals[id].duplicate(true)
-		rival.merge({"cash": rival["capital"], "ads": 0.0, "status": "active", "last": "", "buyer": "", "trades": [], "base_quality": rival["quality"], "base_price": rival["price"], "exit_week": -1}, true)
+		rival.merge({"cash": rival["capital"], "ads": 0.0, "status": "active", "last": "", "buyer": "", "trades": [], "base_quality": rival["quality"], "base_price": rival["price"], "exit_week": -9999}, true)
 		S()["companies"][id] = rival
 
 
@@ -182,8 +182,8 @@ static func _maybe_reenter(rival: Dictionary) -> void:
 		return
 	if rival["status"] == "bankrupt" and rival.get("acquired_cost", 0.0) != 0.0:
 		return
-	var left := int(rival.get("exit_week", -1))
-	if left < 0:
+	var left := int(rival.get("exit_week", -9999))
+	if left == -9999:
 		rival["exit_week"] = int(S()["week"])
 		return
 	if int(S()["week"]) - left < int(cfg()["reentry_weeks"]):
@@ -195,7 +195,7 @@ static func _maybe_reenter(rival: Dictionary) -> void:
 	rival["buyer"] = ""
 	rival["quality"] = rival.get("base_quality", rival["quality"])
 	rival["price"] = rival.get("base_price", rival["price"])
-	rival["exit_week"] = -1
+	rival["exit_week"] = -9999
 	rival["last"] = I18n.t("%s opened as a new entrant.") % rival["name"]
 	CityNews.enqueue(str(rival["last"]), "rival")
 

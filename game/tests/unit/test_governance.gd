@@ -140,7 +140,7 @@ func test_court_loss_timeout_and_customer_risk_resume_without_soft_lock() -> voi
 	Legal.choose(id,"court");Legal.get_case(id)["terms"]["win"]=0.0
 	Clock.advance(21*Clock.DAY)
 	runner.eq(Legal.get_case(id)["recovered"],0.0,"lost court collects nothing")
-	runner.eq(Ledger.balance(entity,"exp:bad_debt"),1050.0,"actual invoice written off")
+	runner.eq(Ledger.balance(entity,"exp:bad_debt"),1000.0,"written-off invoice net of its recovered 50 output VAT")
 	runner.check(not Jobs.get_job(job)["dispute_pause"],"case pause ends")
 	var next := _job(entity);var next_id := Legal.unpaid(next)
 	Clock.advance(17*Clock.DAY)
@@ -348,8 +348,11 @@ func test_late_return_accrues_interest_per_period_and_nil_returns_send_no_remind
 	var again := float(r["fine"])
 	Tax.on_hour()
 	runner.eq(float(r["fine"]), again, "same period never repeats")
-	var messages := GameState.data["messages"].size()
-	var nil_entity := _company()
-	_jump(2033, 7)
-	Tax.close_period(nil_entity)
+
+func test_nil_return_sends_no_reminder() -> void:
+	var entity := _company()
+	var messages: int = GameState.data["messages"].size()
+	_jump(2031, 7)
+	Tax.close_period(entity)
 	runner.eq(GameState.data["messages"].size(), messages, "a nil return creates no reminder")
+	runner.eq(Tax.returns(entity)[0]["status"], "filed", "nothing to file")

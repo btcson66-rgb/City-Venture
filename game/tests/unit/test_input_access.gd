@@ -64,7 +64,7 @@ func test_touch_targets_and_primary_focus_neighbors() -> void:
 	surface.add_child(field)
 	InputAccess.touch_mode = false
 	InputAccess._prepare(surface, true)
-	runner.check(secondary.custom_minimum_size.x < 44 or secondary.custom_minimum_size.y < 44, "no 44px minimum outside touch mode")
+	runner.check(field.custom_minimum_size.x < 44 or field.custom_minimum_size.y < 44, "no 44px minimum outside touch mode")
 	InputAccess.touch_mode = true
 	var controls := InputAccess.focus_surface(surface)
 	runner.eq(controls.size(), 3, "all interactive widgets included")

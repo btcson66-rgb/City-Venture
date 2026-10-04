@@ -51,9 +51,13 @@ func test_live_era_refresh_preserves_player_feet() -> void:
 	var pos := Vector2(1140, 624)
 	SceneRouter._enter("district", "riverside", "", "left", pos)
 	await runner.get_tree().process_frame
+	UIRoot.close_all()  # the rebuild deliberately waits while any modal, phone or dialogue is open
+	UIRoot.dialogue.active = false
 	World.set_year(3)
-	for frame in range(4):
+	for frame in range(30):
 		await runner.get_tree().process_frame
+		if _props(SceneRouter.world_scene(), "port_cranes_far").size() == 1:
+			break
 	var world := SceneRouter.world_scene()
 	runner.eq(world.player.position, pos, "era refresh preserves feet")
 	runner.eq(world.player.facing, "left", "era refresh preserves facing")
