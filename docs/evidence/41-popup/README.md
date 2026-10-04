@@ -47,3 +47,9 @@ Source 9667176e completed resume_ch17 from the exact automatic save: **0 failure
 The earlier chapter10–16 replay is an unfinished, deliberately restarted prefix with zero observed assertion/script failures. genuine-checkpoints.zip contains both original byte-preserved automatic saves; source/hash/clock identity and the final continuation result are in genuine-checkpoints-source.json. This proves segmented rendered coverage, not a fresh single-run full result. A new source70a0bdd5 walkthrough covering chapters1–24 is running on the #99 tail; final full gate remains pending.
 
 English audit has 30 hits. Proper names, brands, language selection and kg/kWh units are retained; three actual automotive prerequisite sentence leaks and roof compass directions were found, and a display-only repair is being rendered on original #86 branch. Do not call the entire English audit clean before that follow-up passes.
+
+## Final stack review update
+
+The genuine chapter17–18 continuation completed 0 failures / 727.3 seconds. Fresh #99-tail New Game chapters1–24 source70a0bdd5 subsequently completed 2 failures / 8021.9 seconds, no SCRIPT ERROR. Both are actual chapter-seven profit assertions (-$826.09); all other functional assertions passed, including the prior crisis handoff/rescue regressions. This is still FAILED. The original raw result/save is preserved on #99. Actual-price strategy correction is being rerun from New Game; no profit assertion or loss fallback has been removed.
+
+Original #86 display follow-up passed 471/471 and native industries 0 failures / 357.9 seconds. It repairs automotive prerequisite sentences and all roof compass labels and has been merged here, regenerating both translation catalogues with 6439 missing0. Latest full unit suite passed 640/640 (230.5 seconds), no SCRIPT ERROR; the known unknown-dispatch warning is asserted by test_registry.
