@@ -2429,6 +2429,10 @@ func _industry_intro_fixture() -> void:
 	await bot.click_named("IndustryGuideContinue");await bot.wait(.3)
 	await bot.click_named("OpenLinePlanner");await bot.wait(.3)
 	var rfq: Dictionary=Manufacturing.S()["rfqs"].values()[0]
+	# Choose the customer's floor with native controls; default quotes can lose legitimately.
+	var quote_ui: ManufacturingUI=UIRoot.top_modal()
+	while float(quote_ui.quotes.get(rfq["id"],quote_ui._default_quote(rfq["id"])))>float(rfq["min_price"]):
+		await _intro_control("QuoteLess_"+rfq["id"])
 	await _intro_control("Quote_"+rfq["id"])
 	bot.expect(not Manufacturing.S()["orders"].is_empty(),"native OEM contract accepted")
 	if Manufacturing.S()["orders"].is_empty():return
