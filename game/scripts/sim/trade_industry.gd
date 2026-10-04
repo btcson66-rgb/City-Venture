@@ -265,7 +265,7 @@ static func handle(kind: String, payload: Dictionary) -> void:
 				d["status"]="delayed";d["resume"]=Clock.now()+3*Clock.DAY
 				S()["freight_until"]=Clock.now()+7*Clock.DAY;S()["freight_mult"]=1.8
 				Sim.schedule(d["resume"],"trade.resume",{"id":d["id"]})
-				EventEngine.trigger("trade_port_strike",{"trade":d["id"],"trade_entity":entity(),"company":GameState.data["entities"][entity()]["name"]})
+				EventEngine.trigger("trade_port_strike",{"trade":d["id"],"trade_entity":entity(),"company":GameState.data["entities"][entity()]["name"],"reroute_fee":Fmt.money(float(TradeQuote.cfg()["transport"]["air"]["base_fee"])+float(TradeQuote.cfg()["transport"]["air"]["unit_fee"])*int(d["quantity"]))})
 				return
 		d["clearance"]={"code":d["code"],"at":Clock.now(),"entity":entity()}
 		if GameState.rng.randf()<float(cfg().get("supplier_failure_risk",.03)):_lost(d,false);return

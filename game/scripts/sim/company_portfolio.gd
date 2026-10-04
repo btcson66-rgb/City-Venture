@@ -31,6 +31,12 @@ static func _migrate_trade_owner(data: Dictionary) -> void:
 		if inst["id"] in ["trade_port_strike","trade_fx_volatility"] and not inst["ctx"].has("trade_entity"):
 			inst["ctx"]["trade_entity"]=owner
 			inst["ctx"]["company"]=str(data["entities"].get(owner,{}).get("name",owner))
+	for inst in data.get("events",{}).get("queue",[]):
+		if inst["id"]!="trade_port_strike" or inst["ctx"].has("reroute_fee"):continue
+		var cargo: Dictionary=trade.get("deals",{}).get(str(inst["ctx"].get("trade","")),{})
+		if not cargo.is_empty():
+			var air: Dictionary=DataDB.economy.get("trade",{}).get("transport",{}).get("air",{})
+			inst["ctx"]["reroute_fee"]=Fmt.money(float(air.get("base_fee",0))+float(air.get("unit_fee",0))*int(cargo.get("quantity",0)))
 	var active:=active_of(data)
 	if owner==active:return
 	var view: Dictionary=data["company_contexts"].get(owner,{"states":{},"flags":{},"bank":{}})

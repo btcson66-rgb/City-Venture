@@ -307,6 +307,7 @@ func test_pending_trade_port_decision_reroutes_the_owner_and_restores_another_vi
 	runner.eq(GameState.company_id(),other,"decision restores selected other company")
 	runner.eq(Ledger.cash(other),other_cash,"viewer never pays another company's rerouting")
 	runner.check(Ledger.cash(owner)<owner_cash,"original owner actually pays air freight")
+	runner.eq(Fmt.money(owner_cash-Ledger.cash(owner)),inst["ctx"]["reroute_fee"],"displayed rerouting fee equals actual owner cash payment")
 	CompanyPortfolio.switch(owner)
 	runner.check(TradeIndustry.S()["deals"][signed["id"]].has("reroute_receipt"),"rerouting belongs to actual owner contract")
 	EventEngine.trigger("trade_fx_volatility",{"trade":signed["id"],"trade_entity":owner,"company":GameState.business_display_name()})

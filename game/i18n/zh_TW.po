@@ -14758,9 +14758,13 @@ msgstr "自行付修理費"
 msgid "Pay this way"
 msgstr "用這個方式付"
 
-#: data/events/trade_port_strike.json scripts/ui/trade_desk_ui.gd:61
+#: scripts/ui/trade_desk_ui.gd:61
 msgid "Pay to reroute cargo by air"
 msgstr "付費改走空運"
+
+#: data/events/trade_port_strike.json
+msgid "Pay to reroute cargo by air · {reroute_fee} home dollars"
+msgstr "改走空運 · 支付 {reroute_fee} 本國元"
 
 #: scripts/ui/modals/insolvency_modal.gd:32
 msgid "Pay what's owed from company cash and carry on"
@@ -20562,7 +20566,7 @@ msgstr "此客戶需求在製作期間已到期。"
 msgid "This company is closed or replaced. Continue with your current life."
 msgstr "這家公司已關閉或已被新公司取代，請繼續目前的人生。"
 
-#: scripts/sim/company_portfolio.gd:75
+#: scripts/sim/company_portfolio.gd:81
 msgid "This company is closed or unavailable. Choose another live company."
 msgstr "這家公司已關閉或無法使用。請選擇另一家仍在營運的公司。"
 
