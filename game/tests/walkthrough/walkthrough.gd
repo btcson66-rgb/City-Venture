@@ -53,7 +53,7 @@ func run() -> void:
 	if _arg("from") == "ch17":
 		await _chapters_17_to_18(true)
 		return
-	if _arg("from") == "ch15":
+	if _arg("from") in ["ch15", "ch15_home"]:
 		await _chapters_15_to_16(true)
 		return
 	if _arg("from")=="trade_execution":
@@ -636,6 +636,10 @@ func popups() -> void:
 				await bot.shot("decision_outcome_" + str(inst["id"]))
 				await bot.click_text("OK")
 			await bot.wait(0.4)
+		elif m is InsolvencyModal:
+			bot.fail("company closed during the walkthrough; recovery is required before business steps")
+			await bot.click_named("StartOver")
+			continue
 		elif m is InfoModal:
 			bot.log_line("  info card: %s" % str(m.title_text))
 			await bot.shot("info_" + str(m.title_text).to_lower().replace(" ", "_").left(24))
@@ -814,7 +818,7 @@ func pass_time_at_home(pred: Callable, max_naps := 12, sleep_only := false) -> b
 		await bot.wait(0.6)
 		await _pack_and_ship_home()
 	await popups()
-	return pred.call()
+	return bool(pred.call())
 
 
 func _pack_and_ship_home() -> void:
@@ -2417,7 +2421,7 @@ func _chapters_15_to_16(fast := false) -> void:
 	await bot.wait(0.5)
 	await bot.click_named("BankFXRisk")
 	await bot.shot("ch15_forward_quote")
-	if FXForward.quote("AUR", 100, 30)["ok"]:
+	if _arg("from")!="ch15_home" and FXForward.quote("AUR", 100, 30)["ok"]:
 		await bot.click_named("SignForward")
 	else:
 		await bot.click_named("ChooseHomeInvoices")
@@ -2466,13 +2470,29 @@ func _chapters_15_to_16(fast := false) -> void:
 	if not supplier_listing.is_empty() and Ecommerce.available_anywhere(supplier_listing["product"])<int(OverseasPartners.cfg()["distributor_units"]):
 		if not await _restock_product(supplier_listing["product"],int(OverseasPartners.cfg()["distributor_units"])+20):return
 		await _home_laptop("sales");await _intro_control("SalesPage_overseas");await _intro_control("CompareLuminaPartners")
-	await bot.click_named("RequestOmarContract")
-	await bot.wait(0.5)
+	# Home-currency invoices can be rejected; make fresh quotes only after the actual cooldown.
+	# Deterministic adverse seed for the dedicated home-invoice regression only.
+	if _arg("from")=="ch15_home":GameState.rng.seed=4
+	var offered := false
+	for attempt in 8:
+		await bot.click_named("RequestOmarContract")
+		await bot.wait(0.5)
+		var pending := Contracts.by_tag("lumina_distributor")
+		if not pending.is_empty() and pending.get("status", "") == "offered":
+			offered = true
+			break
+		bot.log_line("  home-currency distributor quote declined; wait for a new quote")
+		UIRoot.close_all()
+		await pass_time_at_home(func(): return Clock.now() >= int(OverseasPartners.company()["next_offer"]), 3, true)
+		await _home_laptop("sales");await _intro_control("SalesPage_overseas");await _intro_control("CompareLuminaPartners")
+	if not bot.expect(offered, "a fresh distributor quote is accepted before contract controls"):
+		# Stop this fixture on repeated rejection; never poll an absent contract as if it shipped.
+		return
 	await bot.shot("ch16_distributor_offer")
 	await bot.click_named("AcceptContract")
 	await bot.click_named("DeliverContract")
 	var contract := Contracts.by_tag("lumina_distributor")
-	bot.expect(not contract.is_empty() and contract["status"] == "shipped", "native signing and dispatch put goods in transit")
+	if not bot.expect(not contract.is_empty() and contract.get("status", "") == "shipped", "native signing and dispatch put goods in transit"):return
 	await bot.shot("ch16_goods_in_transit")
 	await close_modal()
 	await close_modal()
@@ -2483,7 +2503,7 @@ func _chapters_15_to_16(fast := false) -> void:
 		GameState.data["clock"]["minutes"] = int(contract["pay_due"])
 		Contracts.handle("con.pay", {"id": contract["id"]})
 	else:
-		await pass_time_at_home(func(): return contract["status"] == "paid", 30, true)
+		await pass_time_at_home(func(): return contract.get("status", "") == "paid", 30, true)
 	StoryEngine.check()
 	await bot.wait(0.6)
 	await bot.shot("ch16_90_day_comparison")
