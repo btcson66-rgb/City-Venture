@@ -14,7 +14,7 @@ func _init() -> void:
 ## first venture (so a new player is never stuck waiting for 7 PM).
 static func can_sleep() -> bool:
 	var h := Clock.hour()
-	return h >= 19 or h < 5 or Careers.worked_today() or (Tutorial.first_venture_active() and h >= 16)
+	return PersonalLife.energy()<30 or PersonalLife.ill() or h >= 19 or h < 5 or Careers.worked_today() or (Tutorial.first_venture_active() and h >= 16)
 
 
 func build() -> void:
@@ -38,7 +38,10 @@ func _sleep() -> void:
 	var target := Clock.next_time_of_day(7 * 60)
 	if target - Clock.now() > 20 * 60:
 		target = Clock.at_day_time(1, 7 * 60) if Clock.hour() >= 7 else Clock.at_day_time(0, 7 * 60)
+	var slept := target-Clock.now()
+	PersonalLife.sleep_begin()
 	Clock.advance_to(target)
+	PersonalLife.sleep_end(slept)
 	GameState.inc_stat("nights_slept")
 	SaveSystem.autosave()
 	await UIRoot.fade_in(0.6)

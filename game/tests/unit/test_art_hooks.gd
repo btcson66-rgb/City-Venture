@@ -186,3 +186,23 @@ func test_named_npcs_are_told_apart() -> void:
 			runner.check(CharacterRig.POSES.has(p), "%s: pose '%s' is known" % [id, p])
 		if d.has("logo"):
 			runner.check(str(d["logo"]) != "" and not d.has("appearance"), "%s: a logo only for faceless contacts" % id)
+
+
+func test_optional_npc_sitting_expression_sheet_and_fallback() -> void:
+	var base := "world_detail/characters/npc_pose_regression"
+	_art(base, 512, 576)
+	_art(base + "_sit", 512, 576)
+	var rig := CharacterRig.new()
+	runner.get_tree().root.add_child(rig)
+	rig.setup(DataDB.npc("maya")["appearance"], "casual_jacket", {}, "pose_regression")
+	runner.check(rig.set_pose("sit"), "sitting sheet accepted")
+	rig.set_expression("surprised")
+	runner.eq(rig._layers[0].frame, 0, "without sitting expressions keep breathing frame")
+	_art(base + "_sit_expressions", 512, 576)
+	rig.set_expression("surprised")
+	runner.eq(rig._layers[0].frame, 3, "optional sitting sheet uses surprised column")
+	rig.set_pose("")
+	runner.eq(rig._layers[0].frame, 3, "standing expression survives pose exit")
+	runner.check(rig._layers[0].texture == Art.tex(base), "standing texture restored")
+	rig.free()
+	_cleanup()

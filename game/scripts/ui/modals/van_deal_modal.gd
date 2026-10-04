@@ -28,11 +28,11 @@ func build() -> void:
 	col.add_child(UIK.title(I18n.t(str(v.get("name", "Used panel van"))), 11, Art.C_GOLD))
 	col.add_child(UIK.wrap(I18n.t("White, 140,000 km, a sighing gearbox and an honest engine. Parked at Pier 7 once it's yours."), 8, Art.C_MUTED, 250))
 	body.add_child(UIK.sep())
-	body.add_child(UIK.kv("Price", Fmt.money0(price), Art.C_GOLD, 9, true))
-	var r2 := UIK.kv("Insurance, every month", Fmt.money0(ins))
+	body.add_child(UIK.kv("Price", Fmt.money(price), Art.C_GOLD, 9, true))
+	var r2 := UIK.kv("Insurance, every month", Fmt.money(ins))
 	r2.add_child(UIK.tip("vehicle_insurance"))
 	body.add_child(r2)
-	var r3 := UIK.kv("Fuel and upkeep", I18n.t("about %s per 100 km") % Fmt.money0(100.0 * (Logistics.fuel_cost_per_km() + Logistics.upkeep_per_km())))
+	var r3 := UIK.kv("Fuel and upkeep", I18n.t("about %s per 100 km") % Fmt.money(100.0 * (Logistics.fuel_cost_per_km() + Logistics.upkeep_per_km())))
 	r3.add_child(UIK.tip("fuel_cost"))
 	body.add_child(r3)
 	var r4 := UIK.kv("Room for", I18n.t("%d parcels") % int(v.get("capacity_parcels", 40)))
@@ -41,7 +41,7 @@ func build() -> void:
 	body.add_child(UIK.kv("Paid from", "%s · %s" % [GameState.business_display_name(), Fmt.money0(Ledger.cash(GameState.business_entity()))]))
 	body.add_child(UIK.wrap("In plain words: the van is a company expense today. It only pays back if you keep it busy, with your own parcels and delivery runs.", 7, Art.C_SKY, 390))
 	var why := Logistics.buy_block()
-	_buy = UIK.button(I18n.t("Buy the van (%s)") % Fmt.money0(price), _do_buy, "primary")
+	_buy = UIK.button(I18n.t("Buy the van (%s)") % Fmt.money(price), _do_buy, "primary")
 	_buy.name = "BuyVan"
 	_buy.disabled = why != ""
 	if why != "":

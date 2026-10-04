@@ -20,6 +20,7 @@ var _typing := 0.0
 var _full := ""
 var active := false
 var _waiting_choice := false
+var _subtitle_elapsed := 0.0
 
 
 func _ready() -> void:
@@ -117,6 +118,7 @@ func _show() -> void:
 	text_label.text = _full
 	text_label.visible_characters = 0
 	_typing = 0.0
+	_subtitle_elapsed = 0.0
 	hint.visible = true
 
 
@@ -179,6 +181,13 @@ func _end() -> void:
 
 
 func _process(delta: float) -> void:
+	hint.text = Preferences.key_caption("interact") + " / " + I18n.t("click") + " ›"
+	if active and not _waiting_choice and text_label.visible_characters == -1 and UIRoot.modal_layer.get_child_count() == 0:
+		var delay := float(Preferences.values["subtitle_seconds"])
+		if delay > 0.0:
+			_subtitle_elapsed += delta
+			if _subtitle_elapsed >= delay:
+				advance()
 	if active and not _waiting_choice and text_label.visible_characters >= 0:
 		_typing += delta * 55.0
 		text_label.visible_characters = int(_typing)
@@ -192,6 +201,6 @@ func _on_panel_input(ev: InputEvent) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if active and event.is_action_pressed("interact"):
+	if active and (event.is_action_pressed("interact") or event.is_action_pressed("confirm")):
 		get_viewport().set_input_as_handled()
 		advance()

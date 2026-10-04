@@ -54,8 +54,9 @@ func _exit_tree() -> void:
 
 
 func _ready() -> void:
-	_watchdog = Thread.new()
-	_watchdog.start(_watch)
+	if not OS.has_feature("web"):
+		_watchdog = Thread.new()
+		_watchdog.start(_watch)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	for a in OS.get_cmdline_user_args():
 		if a.begins_with("--out="):
@@ -72,6 +73,9 @@ func _ready() -> void:
 	MiniGames.auto = 0.85
 	if out_dir == "":
 		out_dir = ProjectSettings.globalize_path("user://bot")
+	# Set before the title menu reads save slots; QA must not share player/unit-test saves.
+	SaveSystem.DIR = out_dir.path_join("saves")
+	SaveSystem.autosave_enabled = false
 	DirAccess.make_dir_recursive_absolute(out_dir + "/screenshots")
 	t0 = Time.get_ticks_msec()
 	UIRoot.toasted.connect(func(text: String, kind: String): if kind == "bad": log_line("  toast: " + text))
@@ -85,13 +89,22 @@ func _ready() -> void:
 ## Bloom Coffee, ShopLane, Company OS), people's names, key names.
 func _audit_setup() -> void:
 	audit_on = true
-	var catalogue_path := ProjectSettings.globalize_path("res://").path_join("../tools/i18n/zh_TW.json")
-	# QA Web exports contain game resources, not the repository's tools directory.
-	var tr = JSON.parse_string(FileAccess.get_file_as_string(catalogue_path)) if FileAccess.file_exists(catalogue_path) else {}
-	if typeof(tr) == TYPE_DICTIONARY:
-		for v in tr.values():
-			for m in _word_re.search_all(str(v)):
-				_allowed[m.get_string()] = true
+	var folder := ProjectSettings.globalize_path("res://").path_join("../tools/i18n")
+	for path in DataDB._json_files(folder):
+		if not path.get_file().begins_with("zh_TW"):
+			continue
+		var tr = JSON.parse_string(FileAccess.get_file_as_string(path))
+		if tr is Dictionary:
+			for value in tr.values():
+				for word in _word_re.search_all(str(value)):
+					_allowed[word.get_string()] = true
+	# Language self-names and configured hardware-key names deliberately keep their spelling.
+	for locale in I18n.LOCALES:
+		for word in _word_re.search_all(str(locale[1])):
+			_allowed[word.get_string()] = true
+	for action in Preferences.bindings:
+		for word in _word_re.search_all(Preferences.key_caption(action)):
+			_allowed[word.get_string()] = true
 	for n in DataDB.npcs.values():
 		for w in str(n.get("name", "")).split(" "):
 			_allowed[w] = true
@@ -341,11 +354,12 @@ func click(b: Control) -> bool:
 	if b == null:
 		return false
 	var sc: Node = b.get_parent()
-	while sc != null and not sc is ScrollContainer:
+	# Nested accessible modals can have both a list scroll and a page scroll.
+	while sc != null:
+		if sc is ScrollContainer:
+			(sc as ScrollContainer).ensure_control_visible(b)
+			await frames(3)
 		sc = sc.get_parent()
-	if sc != null:
-		(sc as ScrollContainer).ensure_control_visible(b)
-		await frames(3)
 	var center := b.get_global_rect().get_center()
 	var screen := get_viewport().get_final_transform() * center
 	var mv := InputEventMouseMotion.new()
@@ -520,7 +534,7 @@ func find_interactable(pred: Callable) -> Interactable:
 
 
 ## Walk up to an interactable and press E. Returns true if the prompt matched and we interacted.
-func use(pred: Callable, what: String) -> bool:
+func use(pred: Callable, what: String, retries := 2) -> bool:
 	if UIRoot.is_blocking() and popup_handler.is_valid():
 		await popup_handler.call()
 	var it := find_interactable(pred)
@@ -558,6 +572,10 @@ func use(pred: Callable, what: String) -> bool:
 		await walk_to(it.global_position + Vector2(0, 2), 2.0, 5.0, false, focused)
 		await frames(4)
 	if player() == null or player().focus != it:
+		# A newly surfaced decision can interrupt the last approach/facing frames.
+		if retries > 0 and UIRoot.is_blocking() and popup_handler.is_valid():
+			await popup_handler.call()
+			return await use(pred, what, retries - 1)
 		fail("interaction focus did not match: " + what)
 		return false
 	log_line("  use \"%s\"" % it.label)
@@ -698,6 +716,9 @@ func _screens() -> void:
 
 
 func _shots() -> void:
+	if "--detail-comparison" in OS.get_cmdline_user_args():
+		await load("res://tests/walkthrough/detail_tour.gd").new(self).run()
+		return
 	await shot("main_menu")
 	var rep: String = await BugReport.capture(get_tree())
 	expect(FileAccess.file_exists(rep + "/info.txt"), "F12 bug report written (%s)" % rep)

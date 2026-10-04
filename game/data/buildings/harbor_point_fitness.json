@@ -93,10 +93,9 @@
      104
     ],
     "label": "Front desk",
-    "action": "look",
+    "action": "fitness",
     "params": {
-     "icon": "people",
-     "text": "Harbor Point Fitness. Rosa Lim runs it: early classes, a boxing corner and a very firm view on prices. She is out on the floor today, and memberships are not sold in this build. If she needs something she will message you."
+     "desk": true
     }
    },
    {
@@ -106,15 +105,19 @@
      100
     ],
     "label": "Class timetable",
-    "action": "look",
+    "action": "fitness",
     "params": {
-     "icon": "calendar",
-     "text": "06:30 boxing · 07:30 spin · 12:15 lunchtime circuits · 18:00 strength. Bring your own water bottle."
+     "desk": false
     }
    }
   ],
-  "npc_spots": {}
+  "npc_spots": {
+   "counter": [
+    142,
+    68
+   ]
+  }
  },
  "category": "Fitness studio",
- "status": "planned"
+ "status": "active"
 }

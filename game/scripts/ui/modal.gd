@@ -20,9 +20,11 @@ var body: VBoxContainer
 var header: HBoxContainer
 var footer: HBoxContainer
 var _built := false
+var accessibility_scroll: ScrollContainer
 
 
 func _ready() -> void:
+	add_to_group("accessible_modal")
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	var dim := ColorRect.new()
@@ -31,12 +33,17 @@ func _ready() -> void:
 	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(dim)
 	panel = UIK.panel("ui/panel", 8)
-	panel.custom_minimum_size = panel_size
+	panel.custom_minimum_size = Vector2.ZERO
 	panel.size = panel_size
-	panel.position = (Vector2(640, 360) - panel_size) / 2.0
+	_fit_panel()
+	get_viewport().size_changed.connect(_fit_panel)
 	add_child(panel)
 	var outer := UIK.vbox(5)
-	panel.add_child(outer)
+	accessibility_scroll = ScrollContainer.new()
+	accessibility_scroll.name = "AccessibleContent"
+	panel.add_child(accessibility_scroll)
+	outer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	accessibility_scroll.add_child(outer)
 	header = UIK.hbox(5)
 	outer.add_child(header)
 	if icon_name != "":
@@ -63,6 +70,7 @@ func _ready() -> void:
 	outer.add_child(footer)
 	build()
 	_built = true
+	_fit_panel.call_deferred()
 	if help_key != "":
 		Help.show_once.call_deferred(help_key)
 
@@ -107,13 +115,27 @@ func _restore_scroll(keep: Array) -> void:
 			now[i].scroll_vertical = int(keep[i])
 
 
+## Viewport coordinates change with UI scale. Content can grow inside the scroll, never the panel.
+func _fit_panel() -> void:
+	if not is_instance_valid(panel):
+		return
+	var available := get_viewport_rect().size
+	var desired := Vector2(panel_size.x, panel_size.y if panel_size.y > 0.0 else 280.0)
+	panel.size = desired.min((available - Vector2(16, 16)).max(Vector2(100, 80)))
+	panel.position = (available - panel.size) / 2.0
+
+
+func _process(_delta: float) -> void:
+	_fit_panel()
+
+
 func close() -> void:
 	closed.emit()
 	queue_free()
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if closable and event.is_action_pressed("pause"):
+	if closable and (event.is_action_pressed("pause") or event.is_action_pressed("cancel")):
 		get_viewport().set_input_as_handled()
 		close()
 

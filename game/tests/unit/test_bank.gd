@@ -29,7 +29,8 @@ func test_offer_comes_from_the_books() -> void:
 	_with_history(cid, 6000.0)
 	var o := Bank.offer()
 	runner.check(o["ok"], "offer after two weeks of trading: %s" % str(o))
-	runner.check(float(o["max"]) >= 18000.0 - 0.01, "3 × gross profit supports at least $18k (got %s)" % str(o.get("max")))
+	runner.eq(float(o["max"]), 16000.0, "VAT is owed, not gross profit: net GP supports the rounded $16k offer")
+	runner.eq(-Ledger.balance(cid,"tax_payable"),571.43,"sales include collected VAT")
 	runner.check(float(o["apr"]) >= 0.06 and float(o["apr"]) <= 0.24, "APR in range")
 
 

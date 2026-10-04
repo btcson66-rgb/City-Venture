@@ -181,7 +181,7 @@ static func refresh() -> void:
 		if lead["kind"] != "own" and lead["status"] == "open" and Clock.now() > int(lead["expires"]): lead["status"] = "expired"
 		if lead["status"] in ["expired", "declined", "won"] and Clock.now() > int(lead["expires"]) + 28 * Clock.DAY: S()["leads"].erase(id)
 	var count := int(cfg()["weekly_leads"]) + GameState.rng.randi_range(-int(cfg()["weekly_leads_spread"]), int(cfg()["weekly_leads_spread"])) + (1 if float(S()["reputation"]) >= 0.7 else 0)
-	for n in ceili(count*CityFuture.demand_factor("energy")): _new_lead()
+	for n in maxi(0, roundi(ceili(count*CityFuture.demand_factor("energy")) * Industries.market_demand("energy"))): _new_lead()
 	_own_leads()
 static func _new_lead() -> void:
 	var kinds: Dictionary = cfg()["roof_kinds"]
@@ -398,7 +398,7 @@ static func resolve_claim(id: String, honour: bool, markup := 1.0) -> Dictionary
 	var cost := snappedf(float(claim["cost"]) * markup, 0.01)
 	if honour:
 		var from := "cash" if Ledger.cash(entity()) >= cost else "accounts_payable"
-		Ledger.expense(entity(), "maintenance", cost, I18n.t("Warranty repair: %s") % claim["client"], source("warranty", claim["install"]), from)
+		Ledger.expense(entity(), "maintenance", cost, I18n.t("Warranty repair: %s") % claim["client"], Insurance.loss_source(source("warranty", claim["install"]),"property"), from)
 		claim["status"] = "repaired"
 		claim["paid"] = cost
 		_reputation(0.01)
@@ -626,7 +626,7 @@ static func demand_kwh(site: Dictionary, weather_kind := "clear") -> float:
 	var c: Dictionary = cfg()["charging"]
 	var t: Dictionary = c["types"][site["type"]]
 	var base := float(t["ports"]) * float(t["kwh_port_day"])
-	var d := base * adoption() / float(cfg()["ev"]["adoption_ref"]) * float(c["districts"].get(site["district"], 1.0)) * util_factor(float(site["price"])) * float(c["weather_factor"][weather_kind]) * network_mult()
+	var d := base * adoption() / float(cfg()["ev"]["adoption_ref"]) * float(c["districts"].get(site["district"], 1.0)) * util_factor(float(site["price"])) * float(c["weather_factor"][weather_kind]) * network_mult() * Industries.market_demand("energy")
 	return minf(d, float(t["ports"]) * float(t["kw"]) * 24.0 * float(c["util_cap"]))
 static func grid_cost() -> float:
 	var t: Dictionary = cfg()["tariff"]

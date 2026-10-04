@@ -139,6 +139,8 @@ func _process(_delta: float) -> void:
 	# toasts sit at the top in the world. With a screen open, only the newest one shows, tucked under
 	# the panel when there is room, so it never stacks over choices or report lines.
 	var tm := top_modal()
+	var floor_y := root.get_viewport_rect().size.y - 2.0
+	toast_box.position.x = maxf(8.0, (root.get_viewport_rect().size.x - toast_box.size.x) / 2.0)
 	var n := toast_box.get_child_count()
 	for i in n:
 		(toast_box.get_child(i) as Control).visible = tm == null or i == n - 1
@@ -149,8 +151,8 @@ func _process(_delta: float) -> void:
 		var md := tm as Modal
 		if md != null and md.panel != null:
 			pb = md.panel.position.y + md.panel.size.y
-		ty = pb + 3.0 if pb + 3.0 + th <= 358.0 else 358.0 - th
-	toast_box.position.y = lerpf(toast_box.position.y, ty, 0.35)
+		ty = pb + 3.0 if pb + 3.0 + th <= floor_y else floor_y - th
+	toast_box.position.y = ty if bool(Preferences.values["reduce_motion"]) else lerpf(toast_box.position.y, ty, 0.35)
 	# a first-visit card never sits on top of a conversation or a management screen
 	var busy := dialogue.active or modal_layer.get_child_count() > 0 or phone.is_open
 	for c in get_tree().get_nodes_in_group("location_card"):
@@ -291,7 +293,7 @@ func toast(text: String, kind := "info", icon := "info") -> void:
 	p.modulate.a = 0.0
 	var tw := p.create_tween()
 	tw.tween_property(p, "modulate:a", 1.0, 0.2)
-	tw.tween_interval(4.2)
+	tw.tween_interval(float(Preferences.values["notification_seconds"]))
 	tw.tween_property(p, "modulate:a", 0.0, 0.5)
 	tw.tween_callback(p.queue_free)
 

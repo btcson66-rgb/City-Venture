@@ -3,7 +3,7 @@ extends Node
 ## Content is data-driven (Handoff §73): scene scripts only reference ids.
 
 const FOLDERS := ["businesses", "products", "suppliers", "companies", "npcs", "buildings", "districts",
-	"regions", "regulations", "events", "dialogue", "properties", "jobs", "quests"]
+	"regions", "regulations", "events", "dialogue", "properties", "jobs", "scenarios", "rivals", "quests"]
 
 var businesses := {}
 var products := {}
@@ -18,6 +18,9 @@ var events := {}
 var dialogue := {}
 var properties := {}
 var jobs := {}
+var scenarios := {}
+var rivals := {}
+var difficulty := {}
 var quests := {}         # data/quests/*.json: multi-industry mega-jobs (#71)
 var synergies := {}      # data/synergies.json: internal supply links + Business Board gates
 var legacy := {}
@@ -52,6 +55,7 @@ func load_all() -> void:
 					target[it["id"]] = it
 	for path in _json_files("res://data/economy"):
 		economy[path.get_file().get_basename()] = _read(path)
+	difficulty = _read("res://data/difficulty.json")
 	city = _read("res://data/city/aurelia.json")
 	synergies = _read("res://data/synergies.json")
 	legacy = _read("res://data/legacy.json")
@@ -240,7 +244,7 @@ func validate() -> Array:
 	var impactful := ["cash", "purchase", "refund_order", "replace_order", "partial_refund", "refuse_return",
 		"inventory_delta", "supplier_price_mod", "create_contract_offer", "listing_mod", "ad_price_mod", "demand_mod",
 		"liquidate_inventory", "reduce_spending", "price_all_mod", "rush_order", "equity_investment", "open_escrow", "rail_choice",
-		"shipment_lost", "acquisition", "customs_hold", "industry", "market_strategy", "cafe_inspection"]
+		"shipment_lost", "acquisition", "customs_hold", "industry", "market_strategy", "cafe_inspection", "shop_network"]
 	for eid in events:
 		var ok := false
 		for c in events[eid].get("choices", []):

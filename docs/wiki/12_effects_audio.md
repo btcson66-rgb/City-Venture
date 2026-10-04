@@ -58,7 +58,7 @@
 
 ## 音效與音樂
 
-目前所有聲音都是 `tools/media/make_game_audio.py` 產生的**佔位音**，規劃換成有商業授權的正式音樂和音效。播放邏輯在 `autoload/sound.gd`，音量分成 Music 和 SFX 兩條，存在 `user://settings.cfg`。
+原有五段循環及十二種音效保留作為舊版本的自製後備素材。#97 另有十六首自製配樂（三層 stem）、十二街區的日夜環境音、四種室內環境音與七種工作回饋音，來源及檔案清單見 `docs/AUDIO_CREDITS.md`。播放邏輯在 `autoload/sound.gd`，音量分成 Music 和 SFX 兩條，存在 `user://settings.cfg`。
 
 ### 音樂（`game/assets/audio/music/`，Ogg，循環）
 
@@ -102,3 +102,95 @@
 
 美術：六個16×16商品sprite已重新製作，附64×64透明高解析版本；六個程序光影／水面特效以SVG輸出原尺寸及4×，動畫格位不變；兩個app圖示識別不變，補4×輸出（4096圖為插值）。251/251測試、53張巡禮0失敗。七街區日夜實拍與商品add_prop渲染比例檢查已交；QA商品擺放不代表遊戲原本的擺設。高解析光罩及陰影載入仍待Claude保持logical尺寸接入。證據：`evidence/20261001_product_quality/README.md`。
 
+
+
+### #97 原創配樂、環境音與工作回饋
+`tools/media/compose_city_audio.py` 以各曲獨立的速度、和弦、旋律與編曲產生十六首原創曲目，沒有引用外部錄音。每首三層保持相同循環長度、同步播放；現金不足開啟節奏層，危機或路演開啟第三層，短暫情緒結束即回到場景配樂。主選單會清除世界音景。切換交叉淡入淡出 1.2 秒，快速切換會取消過期 tween，避免舊回呼停止新曲。
+
+Music 管配樂及 stem；SFX 管操作；Ambient 環境音送入 SFX，沿用現有音量設定與 Web 手勢解鎖。原創音訊總量約 6.84 MB，上限 25 MB；Web PCK 上限另計 160 MB。工廠、旅館、辦公室與咖啡店各有環境音；街區各有日夜版本，機場以廣播提示鈴及機械背景呈現，沒有語音廣播。工作回饋接到 Line Planner、Matchmaker、Campaign Mixer、Creative Pitch、Rate Board、Auction、Roof Survey 的真實按鈕，僅改播放，不改分數、資金或產業功能。
+
+| Audio file | Source |
+|---|---|
+| `ambient/airport_day.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/airport_night.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/cafe.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/civic_center_day.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/civic_center_night.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/factory.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/financial_day.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/financial_night.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/harbor_day.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/harbor_night.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/hotel.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/industrial_day.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/industrial_night.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/luxury_heights_day.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/luxury_heights_night.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/office.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/old_town_day.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/old_town_night.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/residential_day.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/residential_night.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/riverside_day.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/riverside_night.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/shopping_street_day.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/shopping_street_night.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/startup_hub_day.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/startup_hub_night.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/university_day.ogg` | 原創配樂或合成環境音／回饋音 |
+| `ambient/university_night.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/auto_work.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/auto_work_lift.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/auto_work_pulse.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/cafe_work.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/cafe_work_lift.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/cafe_work_pulse.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/city_night.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/city_night_lift.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/city_night_pulse.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/consulting.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/consulting_lift.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/consulting_pulse.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/crisis.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/crisis_lift.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/crisis_pulse.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/energy_work.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/energy_work_lift.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/energy_work_pulse.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/factory_work.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/factory_work_lift.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/factory_work_pulse.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/founders.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/founders_lift.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/founders_pulse.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/hotel_work.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/hotel_work_lift.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/hotel_work_pulse.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/logistics_work.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/logistics_work_lift.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/logistics_work_pulse.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/media_work.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/media_work_lift.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/media_work_pulse.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/property_work.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/property_work_lift.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/property_work_pulse.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/roadshow.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/roadshow_lift.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/roadshow_pulse.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/saas_work.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/saas_work_lift.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/saas_work_pulse.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/season_festival.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/season_festival_lift.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/season_festival_pulse.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/victory.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/victory_lift.ogg` | 原創配樂或合成環境音／回饋音 |
+| `music/victory_pulse.ogg` | 原創配樂或合成環境音／回饋音 |
+| `sfx/auction.ogg` | 原創配樂或合成環境音／回饋音 |
+| `sfx/campaign_mixer.ogg` | 原創配樂或合成環境音／回饋音 |
+| `sfx/creative_pitch.ogg` | 原創配樂或合成環境音／回饋音 |
+| `sfx/line_planner.ogg` | 原創配樂或合成環境音／回饋音 |
+| `sfx/matchmaker.ogg` | 原創配樂或合成環境音／回饋音 |
+| `sfx/rate_board.ogg` | 原創配樂或合成環境音／回饋音 |
+| `sfx/roof_survey.ogg` | 原創配樂或合成環境音／回饋音 |

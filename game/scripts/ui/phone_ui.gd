@@ -45,13 +45,19 @@ func _ready() -> void:
 func open() -> void:
 	is_open = true
 	visible = true
+	var holder := get_child(0) as Control
+	holder.position.x = maxf(8.0, get_viewport_rect().size.x - 162.0)
+	screen.size.y = maxf(80.0, minf(214.0, get_viewport_rect().size.y - 54.0))
+	var scroll := screen.get_child(0) as ScrollContainer
+	scroll.custom_minimum_size.y = screen.size.y
+	scroll.size.y = screen.size.y
 	app = "home"
 	_player_pose("phone")
 	GameState.set_flag("phone_opened")
 	_render()
 	var h: Control = get_child(0)
-	h.position.y = 360
-	create_tween().tween_property(h, "position:y", 56.0, 0.18)
+	h.position.y = get_viewport_rect().size.y
+	create_tween().tween_property(h, "position:y", maxf(8.0, minf(56.0, get_viewport_rect().size.y - 250.0)), 0.18)
 
 
 func close() -> void:
@@ -68,7 +74,7 @@ func _player_pose(p: String) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if is_open and event.is_action_pressed("pause"):
+	if is_open and (event.is_action_pressed("pause") or event.is_action_pressed("cancel")):
 		get_viewport().set_input_as_handled()
 		if app == "home":
 			close()
@@ -113,6 +119,8 @@ func _render() -> void:
 			_shoplane()
 		"timeline":
 			_timeline()
+		"news":
+			_news()
 		"save":
 			_save()
 
@@ -131,7 +139,7 @@ func _home() -> void:
 	var unread := GameState.unread_messages()
 	var apps := [["messages", "mail", I18n.t("Messages") + (" %d" % unread if unread > 0 else "")], ["bank", "bank", "Bank"], ["tasks", "tasks", "Tasks"],
 		["map", "map", "City"], ["shoplane", "orders", "ShopLane"], ["timeline", "calendar", "Timeline"],
-		["guide", "info", "City Guide"], ["opportunities", "tasks", "Opportunities"], ["save", "save", "Save"], ["close", "close", "Close"]]
+		["contacts", "people", "Contacts"], ["tax_filing", "finance", "Tax Filing"], ["news", "mail", "City news"], ["guide", "info", "City Guide"], ["opportunities", "tasks", "Opportunities"], ["save", "save", "Save"], ["close", "close", "Close"]]
 	if GameState.flag("consolidation_started") or GameState.flag("legacy_invited"):
 		apps.insert(apps.size() - 1, ["legacy", "company", "Legacy"])
 	if BuildingInfo.world_travel_available():
@@ -160,6 +168,12 @@ func _home() -> void:
 
 func _open_app(a: String) -> void:
 	match a:
+		"contacts":
+			close()
+			UIRoot.open_modal(ContactsModal.new())
+		"tax_filing":
+			close()
+			Industries.run_action("tax_filing",{},self)
 		"guide":
 			close()
 			UIRoot.open_modal(CityGuideModal.new())
@@ -398,3 +412,12 @@ func _save() -> void:
 	b.add_theme_font_size_override("font_size", 7)
 	content.add_child(b)
 	content.add_child(UIK.wrap(I18n.t("This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen.") % SaveSystem.current_slot(), 6, Art.C_DIM, 124))
+
+
+func _news() -> void:
+	_header("City news")
+	content.add_child(UIK.label_tip("Market conditions", "macro_cycle", 7))
+	var items: Array = CityNews.S()["items"]
+	for index in range(items.size() - 1, -1, -1):
+		content.add_child(UIK.label(Clock.fmt_short(int(items[index]["t"])), 6, Art.C_GOLD))
+		content.add_child(UIK.wrap(str(items[index]["text"]), 7, Art.C_WHITE, 124))

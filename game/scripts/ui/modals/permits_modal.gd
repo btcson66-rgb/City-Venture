@@ -43,6 +43,10 @@ func build() -> void:
 			v.add_child(UIK.label("Register the company first.", 7, Art.C_GOLD, true))
 	if World.year() >= 4:
 		_green_grant()
+	if reg:
+		var tax := UIK.button("Tax Filing",func():Industries.run_action("tax_filing",{},self))
+		tax.name="TaxFiling"
+		body.add_child(tax)
 	_import_licence()
 	_food_licence()
 	body.add_child(UIK.sep())

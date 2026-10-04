@@ -64,7 +64,7 @@ static func viewing(mandate_id: String, client_id: String, negotiation: String) 
 	Ledger.expense(entity(),"other",float(cfg()["show_cost"]),I18n.t("Property viewing"),source(mandate_id))
 	var chance := float(cfg()["match_chance"])*score(mandate,client)*RealEstateMarket.index()+float(cfg()["negotiation_chance"][negotiation])+int(client["urgency"])*float(cfg()["urgency_chance"])+Staff.count("realty_agent")*float(cfg()["agent_chance"])
 	# Rate shocks reduce buyer financing appetite even when their nominal budget fits.
-	chance*=maxf(float(cfg()["market_heat_floor"]),1-maxf(0,RealEstateMarket.rate()-Bank.base_rate())*float(cfg()["market_heat_rate_sensitivity"]))
+	chance*=Industries.market_demand("real_estate")*maxf(float(cfg()["market_heat_floor"]),1-maxf(0,RealEstateMarket.rate()-Bank.base_rate())*float(cfg()["market_heat_rate_sensitivity"]))
 	var success: bool = mandate["kind"]==client["kind"] and float(client["budget"])>=float(mandate["floor"]) and GameState.rng.randf()<clampf(chance,.02,.9)
 	client["status"]="matched" if success else "declined"
 	Clock.advance(int(cfg()["show_minutes"]))
@@ -236,7 +236,7 @@ static func handle(kind: String, payload: Dictionary) -> void:
 			Ledger.post(entity(),I18n.t("Tenant monthly rent"),[{"acct":"accounts_receivable" if unpaid else "cash","dr":property["rent"]},{"acct":"revenue","cr":property["rent"]}],source(invoice))
 			S()["invoices"][invoice]={"id":invoice,"property":id,"amount":property["rent"],"status":"unpaid" if unpaid else "paid","tenant":property["tenant"]["name"]}
 			if unpaid:Sim.schedule(Clock.now()+30*Clock.DAY,"re.collect",{"id":invoice})
-			if GameState.rng.randf()<float(spec["damage"]):Ledger.expense(entity(),"maintenance",float(cfg()["damage_cost"]),I18n.t("Tenant damage repair"),source(id),"cash" if Ledger.cash(entity())>=float(cfg()["damage_cost"]) else "accounts_payable")
+			if GameState.rng.randf()<float(spec["damage"]):Ledger.expense(entity(),"maintenance",float(cfg()["damage_cost"]),I18n.t("Tenant damage repair"),Insurance.loss_source(source(id),"property"),"cash" if Ledger.cash(entity())>=float(cfg()["damage_cost"]) else "accounts_payable")
 			Sim.schedule(Clock.now()+30*Clock.DAY,"re.rent",payload)
 		"re.renovation":
 			var work: Dictionary=property["renovation"]

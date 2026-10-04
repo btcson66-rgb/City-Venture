@@ -11,7 +11,15 @@
  "exterior": {
   "sprite": "nexus_bank",
   "x": 232,
-  "sign": "NEXUS BANK"
+  "sign": "NEXUS BANK",
+  "roof_props": [
+   {
+    "sprite": "solar_roof_large",
+    "x": 66,
+    "y": -12,
+    "if": "world_year>=4"
+   }
+  ]
  },
  "interior": {
   "size": [

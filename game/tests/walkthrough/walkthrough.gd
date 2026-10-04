@@ -57,6 +57,12 @@ func run() -> void:
 		await _summary()
 		await _industry_fixtures()
 		return
+	if _arg("resume") == "ch9_import":
+		await _resume_ch9_import()
+		return
+	if _arg("resume") == "ch6_close":
+		await _resume_ch6_close()
+		return
 	await _new_game()
 	if _arg("from")=="city_portfolio":
 		await _city_portfolio_fixture()
@@ -123,6 +129,43 @@ func run() -> void:
 		return
 	if _arg("from") == "opportunities":
 		await _opportunities_fixture()
+		return
+	if _arg("from") == "personal_life":
+		await _personal_life_fixture()
+		await _save_load()
+		return
+	if _arg("from") == "audio":
+		await _audio_fixture()
+		return
+	if _arg("from") == "governance":
+		await _governance_fixture()
+		await _save_load()
+		return
+	if _arg("from") == "modal_close":
+		await _modal_close_fixture()
+		return
+	if _arg("from") == "era_props":
+		await _era_props_fixture()
+		await _save_load()
+		return
+	if _arg("from") == "van_route":
+		await _fast_forward_to_ch10()
+		await _van_route_fixture()
+		await _save_load()
+		return
+	if _arg("from") == "shops":
+		await _fast_forward_to_ch10()
+		# Capitalized founder fixture purchases actual stock before visiting shops.
+		var offer := Ecommerce.offer("tradelink_wholesale", "water_bottle")
+		var po := Ecommerce.buy("tradelink_wholesale", "water_bottle", int(offer["moq"]))
+		bot.expect(po.get("ok",false), "shop fixture purchased real stock")
+		Clock.advance(7*Clock.DAY)
+		await popups()
+		Ecommerce.create_listing("water_bottle", float(DataDB.product("water_bottle")["ref_price"]), "self")
+		await _shop_research()
+		await _fitness_visit()
+		await _fitness_reception_schedule()
+		await _save_load()
 		return
 	if _arg("from") == "discoverability":
 		await _discoverability_fixture()
@@ -191,18 +234,85 @@ func run() -> void:
 	else:
 		await _month()
 		await _chapters_4_to_6()
-		await _chapters_7_to_9()
-		await _popup_weekend()
-		await _old_town_cafe()
-		await _harbor_logistics()
-		await _chapters_10_to_12()
-		await _chapters_13_to_14()
-		await _chapters_15_to_16()
-		await _chapters_17_to_18()
-		await _city_future_season()
+		await _remaining_story()
+		return
 	await _summary()
-	if not bot.video_mode:
-		await _industry_fixtures()
+
+
+## Continue only an actual earlier walkthrough save. No outcome flags, funding or RNG are invented.
+func _resume_ch6_close() -> void:
+	bot.step("Resume genuine chapter-six month-close checkpoint")
+	if not SaveSystem.load_data(1):
+		bot.expect(false, "resume checkpoint loads through normal save validation")
+		return
+	var st := StoryEngine.St()
+	var valid := str(st.get("chapter", "")) == "ch6_cash_is_oxygen" and GameState.flag("big_contract_paid")
+	for chapter in ["ch1_arrival", "ch2_first_customer", "ch3_open_for_business", "ch4_growing_pains", "ch5_big_contract"]:
+		valid = valid and chapter in st.get("chapters_done", [])
+	bot.expect(valid, "checkpoint contains genuine chapters 1–5 and paid contract")
+	if not valid: return
+	SceneRouter.restore_location()
+	await wait_world()
+	await popups()
+	await _chapter6_close()
+	await _remaining_story()
+
+
+func _remaining_story() -> void:
+	await _shop_research()
+	await _chapters_7_to_9()
+	await _after_ch9()
+
+
+func _after_ch9() -> void:
+	await _popup_weekend()
+	await _old_town_cafe()
+	await _harbor_logistics()
+	await _fitness_visit()
+	await _chapters_10_to_12()
+	await _chapters_13_to_14()
+	await _chapters_15_to_16()
+	await _chapters_17_to_18()
+	await _city_future_season()
+	await _summary()
+	await _industry_fixtures()
+	await _personal_life_fixture()
+	await _save_load()
+
+
+## Actual pre-failure morning save: preserve prior profitable chapters, invoice and RNG.
+func _resume_ch9_import() -> void:
+	bot.step("Resume genuine chapter-nine import checkpoint")
+	if not SaveSystem.load_data(1):
+		bot.expect(false, "chapter-nine checkpoint loads through normal save validation")
+		return
+	var st := StoryEngine.St()
+	var valid := str(st.get("chapter", "")) == "ch9_clearing_crisis" and GameState.flag("met_lina")
+	for chapter in ["ch1_arrival", "ch2_first_customer", "ch3_open_for_business", "ch4_growing_pains", "ch5_big_contract", "ch6_cash_is_oxygen", "ch7_supply_shock", "ch8_green_shift"]:
+		valid = valid and chapter in st.get("chapters_done", [])
+	valid = valid and not GameState.flag("ch7_survived_losses") and GameState.stat("import_orders") >= 1
+	bot.expect(valid, "checkpoint preserves genuine profitable chapters 1–8 and paid import")
+	if not valid: return
+	SceneRouter.restore_location()
+	await wait_world()
+	await popups()
+	await _chapter9_close()
+	await _after_ch9()
+
+
+func _modal_close_fixture() -> void:
+	bot.step("Packing modal dismissal releases movement")
+	await bot.use_action("pack_orders")
+	await bot.wait(0.4)
+	bot.expect(UIRoot.top_modal() is PackShipModal, "real packing screen opened")
+	await bot.shot("packing_close_before")
+	await close_modal()
+	bot.expect(not (UIRoot.top_modal() is PackShipModal), "packing screen really closed")
+	await bot.use_action("sleep")
+	bot.expect(UIRoot.top_modal() is SleepModal, "can walk to and use bed after dismissal")
+	await bot.shot("packing_close_bed_reachable")
+	await close_modal()
+	await _save_load()
 
 
 ## Region entry is a fixture; route selection and quote comparisons use native controls.
@@ -717,6 +827,12 @@ func popups() -> void:
 			await bot.wait(0.3)
 			if is_instance_valid(m) and UIRoot.top_modal() == m:
 				m.close()
+		elif m is PoachModal:
+			await bot.shot("competing_job_offer")
+			var retain := retention_affordable(m.employee)
+			bot.log_line("  retention budget %s" % ("retain" if retain else "release"))
+			await bot.click_named("RetainEmployee" if retain else "ReleaseEmployee", 3.0)
+			await bot.wait(0.4)
 		elif m is MonthCloseModal:
 			await bot.wait(1.5)
 			await bot.shot("month_close_report")
@@ -731,6 +847,22 @@ func popups() -> void:
 		else:
 			return
 	bot.fail("queued popup drain exceeded 64 real decisions/reports")
+
+
+## QA founder policy: retain only when current trading supports payroll, rather than compounding every bid.
+static func retention_affordable(employee: String) -> bool:
+	var offer: Dictionary = Rivals.S().get("offers", {}).get(employee, {})
+	var person: Dictionary = Staff.S()["people"].get(employee, {})
+	var company := GameState.company_id()
+	if offer.is_empty() or person.is_empty() or company == "" or offer.get("company", "") != company:
+		return false
+	if offer.get("status", "") != "pending" or Clock.now() >= int(offer.get("expires", 0)):
+		return false
+	if GameState.data["entities"][company].has("closed"): return false
+	var wage := float(offer.get("salary", 0))
+	var range: Array = Staff.role_def(str(person["role"])).get("salary_week", [0, 0])
+	return wage > 0 and wage <= float(range[1]) * 1.25 and Ledger.cash(company) >= wage * 4 \
+		and float(MonthClose.current(company)["business_profit"]) > 0
 
 
 func _pick_choice(inst: Dictionary) -> String:
@@ -786,14 +918,23 @@ func dialogue() -> void:
 
 
 func close_modal() -> void:
-	var m = UIRoot.top_modal()
-	if m != null:
+	# Verify dismissal: a layout handoff may consume the pointer click.
+	for attempt in range(3):
+		var m = UIRoot.top_modal()
+		if m == null: return
+		if m is DecisionModal or m is MonthCloseModal or m is InfoModal or m is PoachModal:
+			await popups()
+			m = UIRoot.top_modal()
+			if m == null: return
 		var b: Button = m.find_child("Close", true, false)
-		if b != null:
+		if attempt == 0 and b != null:
 			await bot.click(b)
 		else:
 			await bot.key_action("pause")
-	await bot.wait(0.3)
+		await bot.wait(0.3)
+		if not is_instance_valid(m) or m.is_queued_for_deletion(): return
+		bot.log_line("  close input left panel open; retry with cancel")
+	bot.fail("modal did not close after three real input attempts")
 
 
 func enter_building(bid: String) -> bool:
@@ -939,6 +1080,7 @@ func _new_game() -> void:
 	await bot.wait(1.5)
 	await bot.shot("main_menu")
 	await bot.click_named("NewGame")
+	await bot.click_named("CreateRunCharacter")
 	await bot.until(func(): return SceneRouter.current is CharacterCreator, 5.0)
 	await bot.wait(1.0)
 	bot.step("Character Creator")
@@ -1511,6 +1653,10 @@ func _chapters_4_to_6() -> void:
 	await bot.shot("early_payment")
 	await close_modal()
 	bot.expect(GameState.flag("big_contract_paid"), "Crestline paid early (3% discount)")
+	await _chapter6_close()
+
+
+func _chapter6_close() -> void:
 	await pass_time_at_home(func(): return GameState.flag("ch6_month_in_black") or GameState.data["reports"]["month_closes"].size() >= 2, 20, true)
 	await bot.wait(1.0)
 	await popups()
@@ -1680,6 +1826,10 @@ func _chapters_7_to_9() -> void:
 		await bot.wait(0.4)
 	await close_modal()
 	await close_modal()
+	await _chapter9_close()
+
+
+func _chapter9_close() -> void:
 	await pass_time_at_home(func(): return "ch9_clearing_crisis" in StoryEngine.St()["chapters_done"], 30, true)   # the import takes weeks
 	bot.expect("ch9_clearing_crisis" in StoryEngine.St()["chapters_done"], "Chapter 9 complete: the import got through")
 	bot.expect(Ledger.check_balanced(), "ledger balanced after chapters 7–9")
@@ -1827,10 +1977,23 @@ func _manufacturing() -> void:
 	if not Staff.employer_registered(): await bot.click_named("FactoryEmployer")
 	await bot.click_named("HireTomas")
 	bot.expect(Staff.count("technician") > 0, "hired a production technician")
-	var rfq: Dictionary = Manufacturing.S()["rfqs"].values()[0]
-	await bot.click_named("Quote_"+str(rfq["id"]))
+	var rfq: Dictionary = {}
 	var job := ""
-	for id in Manufacturing.S()["orders"]: job = id
+	for week in 4:
+		for offer in Manufacturing.S()["rfqs"].values().duplicate():
+			if offer["status"] != "open": continue
+			# Try a competitive price through the same controls used by a player.
+			for adjustment in 3: await bot.click_named("QuoteLess_"+str(offer["id"]))
+			await bot.click_named("Quote_"+str(offer["id"]))
+			for id in Manufacturing.S()["orders"]: job = id
+			if job != "":
+				rfq = offer
+				break
+		if job != "": break
+		await close_modal()
+		Clock.advance(7*Clock.DAY)
+		await popups()
+		await bot.use_action("manufacturing_open")
 	bot.expect(job != "", "OEM quote became a Jobs contract with deposit")
 	if job == "": return
 	for i in 10: await bot.click_named("MaterialMore")
@@ -3585,3 +3748,368 @@ func _trade_portfolio_fixture() -> void:
 	bot.expect(not EventEngine.S()["queue"].any(func(q):return q["id"] in ["trade_port_strike","trade_fx_volatility"] and str(q["ctx"].get("trade_entity",""))==owner),"closed cargo has no blocking crisis decision")
 	bot.expect(Ledger.check_balanced(),"actual supplier, air freight and closure books balance")
 	bot.expect(SaveSystem.save_to(bot.out_dir.path_join("portfolio_trade_played.json")),"save real controlled portfolio outcome")
+func _shop_research() -> void:
+	bot.step("Shopping Street — compare Crestline shelf prices")
+	await popups()
+	await close_modal()
+	if SceneRouter.world_scene().kind=="interior":await exit_building()
+	await metro_to("shopping_street")
+	await _shop_wait_hours(false)
+	await enter_building("crestline_flagship")
+	await bot.use_action("market_research")
+	var products := ShopLife.products()
+	bot.expect(not products.is_empty(), "owned/listed product available for research")
+	if products.is_empty():await close_modal();return
+	var id: String=products[0]
+	await bot.click_named("Research_"+id)
+	bot.expect(ShopLife.S()["research"].has(id), "real thirty-minute research saved")
+	await bot.shot("crestline_competitor_research")
+	await bot.click_named("ResearchDone")
+	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")
+	await _home_laptop("sales")
+	await bot.shot("sales_research_badge")
+	await close_modal()
+
+
+func _fitness_visit() -> void:
+	bot.step("Harbor — buy a single class and meet business connections")
+	await popups()
+	await close_modal()
+	if SceneRouter.world_scene().kind=="interior":await exit_building()
+	await metro_to("harbor")
+	await _shop_wait_hours(true)
+	await enter_building("harbor_point_fitness")
+	await bot.use(func(n):return n.action=="fitness" and bool(n.params.get("desk",false)), "Rosa's reception")
+	var before := Ledger.cash("player")
+	await bot.click_named("FitnessSingle")
+	bot.expect(absf(Ledger.cash("player")-before+float(ShopLife.cfg()["single_fee"]))<0.01,"single class charged to personal cash")
+	await bot.shot("fitness_timetable")
+	await bot.click_named("FitnessWait")
+	await bot.shot("fitness_class_ready")
+	var minute := Clock.minute_of_day()
+	var chosen := ""
+	for item in ShopLife.cfg()["class_times"]:
+		if minute>=int(item["minute"]) and minute<int(item["minute"])+10:chosen=item["id"]
+	bot.expect(chosen!="", "timetable reaches actual class start")
+	if chosen!="":await bot.click_named("FitnessClass_"+chosen)
+	await bot.wait(1.0)
+	bot.expect(not bool(ShopLife.S()["single"]), "class consumed saved single pass")
+	# Observe seeded chance by actually taking subsequent classes, with real pass fees.
+	for attempt in 12:
+		var opportunity := EventEngine.pending().filter(func(e):return str(e["id"]).begins_with("fitness_"))
+		if not opportunity.is_empty():
+			await bot.shot("fitness_networking_opportunity")
+			break
+		await popups()
+		await bot.use_action("fitness")
+		if not ShopLife.has_pass():
+			await close_modal()
+			await _shop_wait_hours(true)
+			await bot.use(func(n):return n.action=="fitness" and bool(n.params.get("desk",false)), "Rosa's reception")
+			await bot.click_named("FitnessSingle")
+		await bot.click_named("FitnessWait")
+		for item in ShopLife.cfg()["class_times"]:
+			if Clock.minute_of_day()>=int(item["minute"]) and Clock.minute_of_day()<int(item["minute"])+10:
+				await bot.click_named("FitnessClass_"+str(item["id"]))
+				break
+		await bot.wait(1.0)
+	await popups()
+	bot.expect(Ledger.check_balanced(), "fitness and networking books balance")
+	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")
+
+
+func _shop_wait_hours(weekday: bool) -> void:
+	# Bounded fixture idle time; never tries to sleep in a shop/district.
+	for hour in 7*24:
+		if (not weekday or _is_weekday()) and Clock.hour()>=11 and Clock.hour()<17:
+			# Schedule rendering refreshes once per real second after a clock jump.
+			if weekday and SceneRouter.world_scene().scene_id=="harbor_point_fitness":
+				bot.expect(await bot.until(func():return Actions.npc_present("harbor_point"),3.0),"Rosa arrived before using reception")
+			return
+		Clock.advance(60)
+		await popups()
+	bot.fail("Shop opening hours unavailable after seven days")
+
+
+func _fitness_reception_schedule() -> void:
+	bot.step("Fitness reception — evening departure and next weekday arrival")
+	await popups()
+	await close_modal()
+	await exit_building()
+	await metro_to("harbor")
+	await _shop_wait_hours(true)
+	await enter_building("harbor_point_fitness")
+	Clock.advance_to(Clock.next_time_of_day(20*60))
+	await popups()
+	await bot.wait(1.2)
+	bot.expect(not Actions.npc_present("harbor_point"),"Rosa leaves reception at 20:00")
+	await _shop_wait_hours(true)
+	bot.expect(Actions.npc_present("harbor_point"),"Rosa returns on the next weekday")
+	await bot.use(func(n):return n.action=="fitness" and bool(n.params.get("desk",false)),"Rosa's reception after overnight wait")
+	bot.expect(await bot.until(func():return UIRoot.top_modal() is FitnessModal,3.0),"reception opens after NPC schedule refresh")
+	await bot.shot("fitness_reception_next_day")
+	await close_modal()
+	await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")
+
+
+## Isolated appearance/map regression; real van purchase and UI clicks, no fabricated run income.
+func _van_route_fixture() -> void:
+	bot.expect(Logistics.buy_van().get("ok", false), "fixture buys actual company van")
+	await exit_building()
+	await metro_to("harbor")
+	await enter_building("pier7_warehouse")
+	await bot.use_action("lease_property", "Pier 7 lettings desk")
+	await bot.click_named("SignLease_pier7_warehouse", 3.0)
+	await close_modal()
+	bot.expect(Living.has_lease("pier7_warehouse"), "fixture leases real yard before its office")
+	var original_name := GameState.entity_name(Logistics.entity())
+	for sample in [{"name":"Haul", "color":"blue"}, {"name":"Aurelia Harbour Sustainable Delivery Company", "color":"red"}]:
+		GameState.data["entities"][Logistics.entity()]["name"] = sample["name"]
+		await open_os_at(func(n): return n.action == "open_company_os", "yard office desk")
+		await bot.click_named("Tab_logistics", 3.0)
+		await bot.click_named("VanColor_" + str(sample["color"]), 3.0)
+		bot.expect(Logistics.body_color_id() == sample["color"], "company colour saved")
+		await bot.shot("van_palette_" + str(sample["color"]))
+		await close_modal()
+		await exit_building()
+		await bot.walk_to(Vector2(460, 618), 8.0, 60.0)
+		await bot.wait(0.5)
+		await bot.shot("van_" + str(sample["color"]))
+		await enter_building("pier7_warehouse")
+	var rounds := [
+		["lantern_books", "threadline", "city_hall", "nexus_bank"],
+		["bloom_coffee", "postpoint", "fresh_market", "nexus_cowork"],
+		["okafor_lettings", "crestline", "arc_capital", "horizon_labs", "bean_byte"]]
+	for index in rounds.size():
+		var game := RouteGame.new({"id":"MapQA", "client":"Local client", "stops":rounds[index], "by":0})
+		UIRoot.open_modal(game)
+		await bot.wait(0.4)
+		await bot.click_named("StartGame", 3.0)
+		var best := Logistics.best_order(game.stops)
+		for stop in best["order"]:
+			await bot.click_named("Stop_%d" % (int(stop) + 1), 3.0)
+		await bot.shot("route_alignment_%d" % (index + 1))
+		await bot.click_named("DriveRoute", 3.0)
+		await bot.wait(0.4)
+		bot.expect(game.score() > 0.99, "route round %d best distance" % (index + 1))
+		await bot.click_named("FinishGame", 3.0)
+	GameState.data["entities"][Logistics.entity()]["name"] = original_name
+	bot.expect(Ledger.check_balanced(), "appearance and map fixture balanced")
+
+
+func _era_props_fixture() -> void:
+	GameState.data["tutorial"] = {"off":true, "step":99, "seen":{}, "v":99}
+	for year in [2, 3, 4]:
+		World.set_year(year)
+		for district in ["riverside", "shopping_street", "financial"]:
+			SceneRouter._enter("district", district, "door_" + str(DataDB.districts[district]["buildings"][0]), "down")
+			SceneRouter.world_scene().player.camera.zoom = Vector2(0.7, 0.7)
+			await bot.wait(4.0)
+			Clock.world_active = false
+			await bot.shot("era_%d_%s_roof" % [year, district])
+			if district == "riverside":
+				SceneRouter.world_scene().player.camera.zoom = Vector2.ONE
+				await bot.walk_to(Vector2(1140, 624), 20.0, 36.0)
+				await bot.shot("era_%d_riverside_far_port" % year)
+			else:
+				SceneRouter.world_scene().player.camera.zoom = Vector2.ONE
+				await bot.walk_to(Vector2(150, 404), 25.0, 24.0)
+				await bot.shot("era_%d_%s_chargers" % [year, district])
+	bot.expect(World.year() == 4, "era progression saved")
+	bot.expect(Ledger.check_balanced(), "era decoration tour balanced")
+
+## Isolated paid founder fixture. Trades use Jobs; tax and legal results use ordinary scheduled service handlers.
+func _governance_fixture() -> void:
+	bot.step("Governance founder fixture: actual work, filing and claims")
+	GameState.data["tutorial"]={"off":true,"step":99,"seen":{},"v":99}
+	Help.auto=false
+	Company.register("Riverlight Goods","ecommerce","22 Founders Lane")
+	Company.open_business_account(20000)
+	var entity := GameState.company_id()
+	var job := Jobs.offer({"entity":entity,"client":"Ana","scope":"Delivered research","segment":"consulting","price":1050,"terms":0,"payment_risk":0.0})
+	Jobs.accept(job);Jobs.progress(job,1);Jobs.deliver(job);Jobs.invoice(job)
+	bot.expect(Jobs.get_job(job)["status"]=="paid","actual completed customer job paid")
+	bot.expect(-Ledger.balance(entity,"tax_payable")==50.0,"actual customer price includes VAT")
+	Clock.advance(61*Clock.DAY)
+	await popups()
+	await bot.key_action("phone")
+	await bot.wait(.5)
+	await bot.click_named("App_tax_filing")
+	await bot.wait(.5)
+	bot.expect(UIRoot.top_modal() is TaxFilingModal,"phone opens real filing service")
+	await bot.shot("governance_tax_due")
+	var r: Dictionary=Tax.returns(entity)[0]
+	await bot.click_named("FileTax_"+str(r["id"])+"_accountant")
+	await bot.wait(.5)
+	bot.expect(r["status"]=="filed","accountant filing advances time and completes")
+	await bot.shot("governance_tax_filed")
+	await close_modal();UIRoot.close_all()
+	SceneRouter._enter("interior","city_hall","spawn","down")
+	await wait_world()
+	await bot.use_action("permits_info")
+	await bot.click_named("TaxFiling")
+	await bot.wait(.5)
+	bot.expect(UIRoot.top_modal() is TaxFilingModal,"City Hall opens the same filing service")
+	await bot.shot("governance_city_hall_tax")
+	await close_modal();UIRoot.close_all()
+	job=Jobs.offer({"entity":entity,"client":"Elias","scope":"Delivered design","segment":"media","price":1050,"terms":30,"payment_risk":1.0})
+	Jobs.accept(job);Jobs.progress(job,1);Jobs.deliver(job);Jobs.invoice(job)
+	Clock.advance(30*Clock.DAY)
+	await popups()
+	var disputes := Legal.cases(entity).filter(func(c):return c["job"]==job and c["status"]=="open")
+	bot.expect(not disputes.is_empty(),"forced test counterparty withholds an actual receivable")
+	if disputes.is_empty():return
+	var c: Dictionary=disputes[0]
+	SceneRouter._enter("interior","riverside_apartment","spawn","down")
+	await wait_world()
+	await open_os_at(func(n):return n.action=="open_company_os","laptop")
+	await bot.click_named("Tab_governance")
+	await bot.wait(.5)
+	await bot.shot("governance_brand")
+	await bot.click_named("ReviewLegal_"+str(c["id"]))
+	await bot.wait(.5)
+	await bot.shot("governance_legal_choices")
+	await bot.click_named("LegalChoice_settle")
+	await bot.wait(.5)
+	bot.expect(c["status"]=="pending","real settlement option paid and scheduled")
+	await close_modal();UIRoot.close_all()
+	Clock.advance(2*Clock.DAY)
+	bot.expect(c["status"]=="resolved" and not Jobs.get_job(job)["dispute_pause"],"scheduled legal outcome resumes job")
+	await open_os_at(func(n):return n.action=="open_company_os","laptop")
+	await bot.click_named("Tab_governance")
+	await bot.click_named("BuyInsurance_property")
+	await bot.wait(.5)
+	bot.expect(Insurance.policies(entity).get("property",{}).get("active",false),"actual UI purchase paid the premium")
+	await bot.click(bot.button_named("CancelInsurance_property"))
+	await bot.shot("governance_paid_cover")
+	await close_modal();UIRoot.close_all()
+	Clock.advance(7*Clock.DAY)
+	# Forced damage fixture books an actual paid repair, not hypothetical lost revenue.
+	Ledger.expense(entity,"maintenance",1000,"Storm repair",Insurance.loss_source({"type":"crisis","segment":"hotel"},"property"))
+	bot.expect(Ledger.balance(entity,"insurance_receivable")==650.0,"actual deductible and cover create a receivable")
+	Clock.advance(2*Clock.DAY)
+	await popups()
+	await open_os_at(func(n):return n.action=="open_company_os","laptop")
+	await bot.click_named("Tab_governance")
+	await bot.wait(.5)
+	var claim_label := UIRoot.top_modal().find_child("InsuranceClaim_INS-1",true,false)
+	await bot.click(claim_label)
+	await bot.wait(.3)
+	await bot.shot("governance_insurance_paid")
+	bot.expect(Ledger.balance(entity,"insurance_receivable")==0.0,"insurer actually paid its receivable")
+	bot.expect(Ledger.check_balanced(),"all governance trades and losses balance")
+	await close_modal();UIRoot.close_all()
+	Help.auto=true
+
+## Native listening route: real scene dispatcher, day/night clock fixtures and actual work-screen buttons.
+func _audio_fixture() -> void:
+	bot.step("Audio listening route: district day/night, work rooms, cues and stems")
+	GameState.data["tutorial"]={"off":true,"step":99,"seen":{},"v":99};Help.auto=false
+	Sound.music_volume=.7;Sound.sfx_volume=.6;Sound._apply_volumes()
+	Sound.trace.clear();Sound.tracing=true
+	var start := Time.get_ticks_msec();var noon := Clock.now()
+	for id in DataDB.districts:
+		GameState.data["clock"]["minutes"]=noon
+		SceneRouter._enter("district",str(id),"door_"+str(DataDB.districts[id]["buildings"][0]),"down")
+		await bot.wait(2.0);Clock.world_active=false
+		bot.expect(Sound._ambient_current==Sound.ambient_for_scene("district",str(id),false),"real day ambience "+str(id))
+		GameState.data["clock"]["minutes"]=noon+10*60
+		Sound.music_for_scene("district",str(id));await bot.wait(1.5)
+		bot.expect(Sound._ambient_current==Sound.ambient_for_scene("district",str(id),true),"real night ambience "+str(id))
+		if id in ["riverside","industrial","airport"]:await bot.shot("audio_"+str(id)+"_night")
+	GameState.data["clock"]["minutes"]=noon
+	for id in ["unit12_factory","the_aster","nexus_cowork","bloom_coffee"]:
+		SceneRouter._enter("interior",id,"spawn","down")
+		await bot.wait(2.0);Clock.world_active=false
+		bot.expect(Sound._a.playing and Sound._ambient_pair[Sound._ambient_front].playing,"actual Music/Ambient playback "+id)
+	for modal in [ManufacturingUI.new(),RealEstateUI.new(),MediaUI.new(),CreativePitch.new({}),HotelUI.new(),AuctionGame.new(""),EnergyUI.new()]:
+		UIRoot.open_modal(modal);await bot.wait(.3)
+		await bot.click_named("Close");await bot.wait(.3)
+	Sound.set_mood("founders",2);await bot.wait(.15);Sound.set_mood("city_night",2);await bot.wait(.15);Sound.set_mood("consulting",2)
+	await bot.wait(1.4)
+	bot.expect(Sound._a.playing and Sound._current=="consulting","rapid crossfades cannot stop the latest track")
+	Sound.set_mood("crisis",3);await bot.wait(1.5)
+	bot.expect(Sound._intensity==2 and Sound._stems_a.all(func(p):return p.playing),"crisis stems actually synchronized and playing")
+	for player in Sound._stems_a:bot.expect(absf(player.get_playback_position()-Sound._a.get_playback_position())<.05,"stem playback position stays within 50 milliseconds")
+	Sound.set_mood("roadshow",2);await bot.wait(1.5)
+	Sound.set_mood("victory",2);await bot.wait(1.5)
+	await bot.wait(2.5)
+	bot.expect(Sound._current!="victory","victory returns to scene score after expiry")
+	for cue in ["click","close","error","cash","spend","fanfare"]:
+		Sound.play(cue);await bot.wait(.2)
+	var seconds := float(Time.get_ticks_msec()-start)/1000
+	if seconds<60:await bot.wait(60-seconds)
+	seconds=float(Time.get_ticks_msec()-start)/1000
+	var out := _arg("out")
+	var f := FileAccess.open(out+"/audio_trace.json",FileAccess.WRITE)
+	f.store_string(JSON.stringify({"duration_seconds":seconds,"entries":Sound.trace,"scope":"Native actual player playback; scene changes and QA day/night clocks, real work-screen close buttons; mood cues demonstrate future roadshow presentation integration, not an IPO economic feature."},"\t"))
+	Sound.tracing=false;Help.auto=true
+	bot.expect(seconds>=60,"at least sixty seconds of native audio trigger evidence")
+	bot.expect(Ledger.check_balanced(),"audio route does not invent revenue")
+
+
+## Contacts, evidence-based personal requests, actual referral work, social cost and finite illness.
+func _personal_life_fixture() -> void:
+	bot.step("Personal-life route: earned relationships, social event, referral and recovery")
+	Help.auto=false
+	var previous_auto := MiniGames.auto
+	MiniGames.auto=-1
+	for id in ["maya","priya","nina","sam","ken"]:
+		PersonalLife.meet(id) # Component fixture: each met contact's own three requests, not main-story flags.
+		UIRoot.open_modal(ContactsModal.new(id))
+		await bot.wait(.25)
+		for index in 3:
+			await bot.click_named("PersonalRequest")
+			await bot.wait(.2)
+			await bot.click_named("StartGame")
+			await bot.wait(.2)
+			var choice: String=["document","compare","scope"][index]
+			await bot.click_named("PersonalAnswer_"+choice)
+			await bot.wait(.2)
+			await bot.click_named("FinishGame")
+			await bot.wait(.3)
+			bot.expect(int(PersonalLife.contact(id)["step"])==index+1,"real personal request: "+id+" part "+str(index+1))
+		if id=="sam":
+			await bot.shot("personal_sam_partner")
+			var before := Ledger.cash(GameState.business_entity())
+			await bot.click_named("ReferralReview");await bot.wait(.2)
+			await bot.click_named("ReferralAccept");await bot.wait(.2)
+			await bot.click_named("ReferralWork");await bot.wait(.2)
+			await bot.click_named("StartGame");await bot.wait(.2)
+			await bot.click_named("PersonalAnswer_scope");await bot.wait(.2)
+			await bot.click_named("FinishGame");await bot.wait(.3)
+			var job := Jobs.get_job(str(PersonalLife.contact(id)["job"]))
+			bot.expect(job.get("status","")=="invoiced" and float(job.get("receivable",0))>0,"real Jobs referral waits for payment")
+			bot.expect(Ledger.cash(str(job["entity"]))<before,"referred work pays actual supplies before collection")
+			await bot.shot("personal_referral_invoice")
+		await close_modal()
+	# Calendar timestamp is advanced normally; no backwards date, funding or outcome flags.
+	var target := Clock.now()-Clock.minute_of_day()+18*60
+	while target<Clock.now() or int(Clock.date_at(target)["day"])!=5:target+=Clock.DAY
+	Clock.advance_to(target)
+	await popups()
+	UIRoot.open_modal(SocialCalendarModal.new());await bot.wait(.3)
+	await bot.shot("personal_social_calendar")
+	var cash := Ledger.cash("player")
+	await bot.click_named("Social_chamber");await bot.wait(.3)
+	bot.expect(Ledger.cash("player")<=cash-65+.01,"social event meal really paid")
+	await bot.shot("personal_social_information")
+	await close_modal()
+	# Deliberate stress fixture verifies the actual two recovery controls and finite state.
+	PersonalLife.S()["stress"]=90;PersonalLife.S()["cooldown_until"]=0
+	PersonalLife.on_hour(Clock.now(),12)
+	UIRoot.open_modal(ContactsModal.new());await bot.wait(.3)
+	bot.expect(PersonalLife.ill(),"high-stress illness fixture triggered")
+	await bot.shot("personal_stress_choices")
+	await bot.click_named("RecoveryRest");await bot.wait(.4)
+	bot.expect(not PersonalLife.ill(),"real free rest button ends illness")
+	await bot.shot("personal_recovered_contacts")
+	await close_modal()
+	MiniGames.auto=previous_auto;Help.auto=true
+	bot.expect(Ledger.check_balanced(),"personal requests, gifts and referral journals balance")

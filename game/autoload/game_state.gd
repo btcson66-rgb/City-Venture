@@ -23,7 +23,8 @@ func default_appearance() -> Dictionary:
 ## Build a fresh world. `setup` = {name, appearance{}, outfit, seed?}
 ## Returns false (and leaves no game in memory) when no save slot could be claimed; SaveSystem.last_error says why.
 func new_game(setup: Dictionary) -> bool:
-	var living := DataDB.living()
+	Ecommerce.invalidate_reservations()
+	var start_cash := Replay.opening_cash(setup)
 	var seed_v: int = int(setup.get("seed", Time.get_ticks_usec() % 2147483647))
 	# Explicit reproducible seeds are restricted to QA bot runs.
 	if Array(OS.get_cmdline_user_args()).any(func(a): return a.begins_with("--bot=")):
@@ -38,10 +39,12 @@ func new_game(setup: Dictionary) -> bool:
 	data = template(setup, seed_v)
 	data["meta"]["slot"] = slot
 	Ledger.post("player", "Opening balance — savings", [
-		{"acct": "cash", "dr": float(living.get("start_cash", 30000))},
-		{"acct": "equity", "cr": float(living.get("start_cash", 30000))}], {"type": "opening"})
+		{"acct": "cash", "dr": start_cash},
+		{"acct": "equity", "cr": start_cash}], {"type": "opening"})
 	Housing.opening()
-	timeline(I18n.t("Moved to Aurelia City with $%s in savings.") % Fmt.money0(float(living.get("start_cash", 30000))))
+	timeline(I18n.t("Moved to Aurelia City with $%s in savings.") % Fmt.money0(start_cash))
+	if setup.has("run"):
+		Replay.initialize(setup["run"])
 	return true
 
 

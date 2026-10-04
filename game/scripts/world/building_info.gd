@@ -6,6 +6,7 @@ const ACTION_ICONS := {
 	"city_future":"civic",
 	"legacy_mentor": "people",
 	"customs_guide":"info", "trade_open":"world",
+	"market_research": "info", "fitness": "people",
 	"energy_open": "company", "energy_subsidy": "civic",
 	"buy_item": "shop", "clothing_shop": "shop", "cafe_counter": "coffee",
 	"work_shift": "tasks", "open_company_os": "laptop", "cowork_desk": "laptop",

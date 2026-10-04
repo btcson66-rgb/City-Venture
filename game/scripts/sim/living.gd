@@ -26,6 +26,7 @@ static func daily_living() -> float:
 static func on_hour(t: int, h: int) -> void:
 	Housing.on_hour()
 	PersonalAssets.on_hour()
+	ShopLife.on_hour(t)
 	if h == 0:
 		Ledger.expense("player", "living", daily_living(), "Food, transit & bills", {"type": "living"})
 	if h == 9:

@@ -223,7 +223,7 @@ static func demand(type: String,day: int,rating_value := -1.0) -> Dictionary:
 	var pf := clampf(pow(price/ref,-float(c["price_elasticity"])),.15,2.4)
 	var boost := mod_mult("demand")*Media.demand_boost("hotel")*(float(c["stages"]["3"]["tourism_boost"]) if stage()>=3 else 1.0)
 	var pull := clampf(1+float(c["market_pull"])*(rating_value-3.5),.45,1.5)
-	var base := rooms_of(type)*float(c["base_demand_per_room"])*demand_index(day)*pf*boost*pull
+	var base := rooms_of(type)*float(c["base_demand_per_room"])*demand_index(day)*pf*boost*pull*Industries.market_demand("hotel")
 	var share := clampf(float(c["direct_base"])+float(c["direct_rating_slope"])*(rating_value-3),.12,.6)
 	var rank := clampf(.7+float(c["rank_slope"])*(rating_value-3),.5,1.35)
 	var ota := base*float(c["ota_volume"])*float(tier["visibility"])*rank if bool(S()["channels"]["ota_open"]) else 0.0

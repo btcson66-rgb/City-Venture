@@ -791,3 +791,5 @@ Requested `buildings/meridian_trade_desk.png` and `_lights.png`; existing `nexus
 
 ## #99 第三季城市素材
 Planned：博覽會場館 `interiors/expo_venue`、重建後港口 `backdrops/harbor_rebuilt`、兩位候選人的選舉海報 `props/election_green` / `props/election_enterprise`。目前用 City Hall 桌、既有 Harbor 和職業角色素材；功能已接上，不改動 game/assets。專用素材完成後以 Art.has_tex()/opt_tex() 接替。
+## #40 Rosa Lim
+Rosa Lim (`harbor_point`) currently uses an existing startup_casual outfit and idle pose. A fitness-owner outfit/portrait is requested; no new art is required for the current playable membership/class flow.

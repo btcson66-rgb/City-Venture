@@ -452,7 +452,12 @@ static func set_policy(key: String, value: Variant) -> Dictionary:
 			p[key] = snappedf(v, 0.05)
 		"insurance":
 			if not rental()["insurance"].has(str(value)): return error("Choose an insurance cover.")
+			var old: String=str(p[key])
 			p[key] = str(value)
+			var result := Insurance.ensure_vehicle_cover(entity())
+			if not result["ok"]:
+				p[key]=old
+				return result
 		"service_days":
 			if not rental()["service_days"].any(func(d): return int(d) == int(value)): return error("Choose a service interval.")
 			p[key] = int(value)
@@ -479,9 +484,9 @@ static func _review(score: float, weight := 1.0) -> void:
 # ------------------------------------------------------------------ the airport and demand
 static func demand_mult() -> float:
 	var d: Dictionary = S()["demand"]
-	if Clock.now() >= int(d["until"]): return CityFuture.demand_factor("automotive")
+	if Clock.now() >= int(d["until"]): return CityFuture.demand_factor("automotive") * Industries.market_demand("automotive")
 	var fraction := float(int(d["until"]) - Clock.now()) / maxf(1.0, float(int(d["until"]) - int(d["from"])))
-	return (1.0 + (float(d["start"]) - 1.0) * clampf(fraction, 0.0, 1.0)) * CityFuture.demand_factor("automotive")
+	return (1.0 + (float(d["start"]) - 1.0) * clampf(fraction, 0.0, 1.0)) * CityFuture.demand_factor("automotive") * Industries.market_demand("automotive")
 
 static func _set_demand(multiplier: float, days: int) -> void:
 	S()["demand"] = {"start":multiplier, "from":Clock.now(), "until":Clock.now() + days * Clock.DAY}
@@ -577,6 +582,7 @@ static func _rental_day() -> void:
 	if S()["days"].size() > 60: S()["days"].pop_front()
 
 static func _start_rental(car_id: String, cls: String, days: int, day: int) -> void:
+	Insurance.ensure_vehicle_cover(entity(),true)
 	var id := "RNT-%d" % int(S()["seq"])
 	S()["seq"] = int(S()["seq"]) + 1
 	var per_day := weekly_rate(cls) / 7.0 if days >= 7 else daily_rate(cls)
@@ -611,10 +617,12 @@ static func _damage(car_id: String, cost: float, days: int, day: int, accident: 
 	cost = snappedf(cost, 1.0)
 	var cover: Dictionary = rental()["insurance"][policy()["insurance"]]
 	var pay := snappedf(maxf(0.0, cost - float(cover["deductible"])) * float(cover["cover"]), 0.01)
-	Ledger.expense(entity(), "vehicle", cost, I18n.t("Accident repair: %s") % car["plate"] if accident else I18n.t("Rental damage repair: %s") % car["plate"], source("rental_damage", car_id), _pay_from(cost))
+	var loss := Ledger.expense(entity(), "vehicle", cost, I18n.t("Accident repair: %s") % car["plate"] if accident else I18n.t("Rental damage repair: %s") % car["plate"], source("rental_damage", car_id), _pay_from(cost))
 	if pay > 0:
-		Ledger.post(entity(), I18n.t("Insurance claim received: %s") % car["plate"], [{"acct":"cash", "dr":pay}, {"acct":"other_income", "cr":pay}], source("insurance_claim", car_id))
-		S()["claims"] = int(S()["claims"]) + 1
+		var covered := Insurance.claim(entity(),"property",int(loss["n"]),pay)
+		if covered<=0:covered=Insurance.claim(entity(),"property",int(loss["n"]))
+		if covered>0:S()["claims"] = int(S()["claims"]) + 1
+	else:Insurance.claim(entity(),"property",int(loss["n"]))
 	car["out"] = day + days
 
 static func _breakdown(contract: Dictionary, day: int) -> void:
@@ -876,7 +884,7 @@ static func handle(kind: String, payload: Dictionary) -> void:
 	match kind:
 		"auto.claim":
 			var amount := snappedf(float(payload["price"]) * float(payload["hit"]), 0.01)
-			Ledger.post(entity(), I18n.t("Warranty claim on a used car"), [{"acct":"refunds", "dr":amount}, {"acct":_pay_from(amount), "cr":amount}], source("warranty_claim"))
+			Ledger.post(entity(), I18n.t("Warranty claim on a used car"), [{"acct":"refunds", "dr":amount}, {"acct":_pay_from(amount), "cr":amount}], Insurance.loss_source(source("warranty_claim"),"liability"))
 			if bool(payload.get("fine", false)):
 				Ledger.expense(entity(), "penalties", float(cfg()["crisis"]["flood_fine"]), I18n.t("Consumer-protection fine for an undisclosed flood car"), source("warranty_claim"), _pay_from(float(cfg()["crisis"]["flood_fine"])))
 		"auto.delivery": _deliver(str(payload.get("id", "")))

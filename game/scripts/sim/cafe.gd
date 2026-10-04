@@ -236,7 +236,7 @@ static func ads_factor() -> float:
 static func expected_demand(hh: int, saturday := false) -> float:
 	var share := float(cfg().get("hour_share", {}).get(str(hh), 0.0))
 	var foot := float(cfg()["locations"][property_id()]["footfall_mult"]) * float(cfg().get("footfall_day", 210)) * share * (float(cfg().get("saturday_mult", 1.3)) if saturday else 1.0)
-	return foot * (1+float(cfg()["drink_shares"]["seasonal"])*float(cfg()["seasonal_demand_bonus"]) if CafeDepth.seasonal("seasonal") else 1) * float(cfg().get("base_conversion", 0.3)) * _price_factor("coffee") * rating_factor() * ads_factor() * CityFuture.demand_factor("cafe")
+	return foot * (1+float(cfg()["drink_shares"]["seasonal"])*float(cfg()["seasonal_demand_bonus"]) if CafeDepth.seasonal("seasonal") else 1) * float(cfg().get("base_conversion", 0.3)) * Replay.demand("cafe") * Industries.market_demand("cafe") * _price_factor("coffee") * rating_factor() * ads_factor() * CityFuture.demand_factor("cafe")
 
 
 ## A normal weekday at today's prices, rating and flyers.

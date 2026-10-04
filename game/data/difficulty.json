@@ -1,0 +1,77 @@
+{
+ "presets": {
+  "easy": {
+   "name": "Easy",
+   "initial_cash": 50000,
+   "demand_volatility": 0.1,
+   "event_frequency": 0.6,
+   "interest_surcharge": -0.02,
+   "debt_tolerance": 1.5
+  },
+  "standard": {
+   "name": "Standard",
+   "initial_cash": 30000,
+   "demand_volatility": 0.25,
+   "event_frequency": 1.0,
+   "interest_surcharge": 0,
+   "debt_tolerance": 1.0
+  },
+  "hard": {
+   "name": "Hard",
+   "initial_cash": 15000,
+   "demand_volatility": 0.5,
+   "event_frequency": 1.5,
+   "interest_surcharge": 0.04,
+   "debt_tolerance": 0.5
+  }
+ },
+ "fields": {
+  "initial_cash": {
+   "name": "Starting cash",
+   "min": 500,
+   "max": 500000,
+   "step": 500
+  },
+  "demand_volatility": {
+   "name": "Demand fluctuation",
+   "min": 0,
+   "max": 0.7,
+   "step": 0.05
+  },
+  "event_frequency": {
+   "name": "Event frequency",
+   "min": 0,
+   "max": 2,
+   "step": 0.1
+  },
+  "interest_surcharge": {
+   "name": "Interest surcharge",
+   "min": -0.02,
+   "max": 0.1,
+   "step": 0.01
+  },
+  "debt_tolerance": {
+   "name": "Debt tolerance",
+   "min": 0.5,
+   "max": 2,
+   "step": 0.25
+  }
+ },
+ "market": {
+  "base_min": 0.85,
+  "base_max": 1.15,
+  "preference_min": 0.9,
+  "preference_max": 1.1,
+  "preferences": [
+   "budget",
+   "quality",
+   "speed"
+  ]
+ },
+ "leaderboard_limit": 100,
+ "score": {
+  "wealth_divisor": 100,
+  "day_penalty": 10,
+  "rating_weight": 1000
+ }
+}

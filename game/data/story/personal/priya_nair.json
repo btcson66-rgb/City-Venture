@@ -1,0 +1,88 @@
+{
+ "id": "personal_priya_nair",
+ "npc": "priya_nair",
+ "steps": [
+  {
+   "stage": 0,
+   "title": "Priya Nair: OTA placement page · part 1",
+   "detail": "Priya Nair asks for a OTA placement page. Their evidence contains an unresolved question. What should the first draft do?",
+   "minutes": 45,
+   "cost": 0,
+   "order": 2,
+   "choices": [
+    {
+     "id": "document",
+     "label": "Document the question and ask for evidence",
+     "correct": true
+    },
+    {
+     "id": "invent",
+     "label": "Invent a confident answer",
+     "correct": false
+    },
+    {
+     "id": "hide",
+     "label": "Hide the unresolved section",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "stage": 1,
+   "title": "Priya Nair: OTA placement page · part 2",
+   "detail": "The OTA placement page now has conflicting notes. Priya Nair wants a version that other people can check. How do you resolve the conflict?",
+   "minutes": 60,
+   "cost": 10,
+   "order": 0,
+   "choices": [
+    {
+     "id": "compare",
+     "label": "Compare sources and record what remains uncertain",
+     "correct": true
+    },
+    {
+     "id": "latest",
+     "label": "Keep the newest note without checking",
+     "correct": false
+    },
+    {
+     "id": "delete",
+     "label": "Delete both notes to make the file look complete",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "stage": 2,
+   "title": "Priya Nair: OTA placement page · part 3",
+   "detail": "Priya Nair is ready to introduce a paying client for the OTA placement page. The client asks for a promise you cannot verify. What do you put in the handover?",
+   "minutes": 90,
+   "cost": 20,
+   "order": 1,
+   "choices": [
+    {
+     "id": "scope",
+     "label": "State the agreed scope, limits and evidence",
+     "correct": true
+    },
+    {
+     "id": "guarantee",
+     "label": "Guarantee the result to win the introduction",
+     "correct": false
+    },
+    {
+     "id": "omit",
+     "label": "Leave the risks out of the handover",
+     "correct": false
+    }
+   ]
+  }
+ ],
+ "referral": {
+  "client": "Priya Nair referral",
+  "detail": "A referred client commissions a documented OTA placement page. Complete the agreed work; no revenue is earned merely for knowing Priya Nair.",
+  "price": 810,
+  "cost": 290,
+  "minutes": 240
+ }
+}

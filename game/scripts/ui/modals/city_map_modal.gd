@@ -40,10 +40,15 @@ func build() -> void:
 	footer.visible = false
 	var h := UIK.hbox(8)
 	body.add_child(h)
+	var map_frame := Control.new()
+	map_frame.custom_minimum_size = MAP_SIZE
 	var mapc := Control.new()
+	mapc.name = "TouchMap"
+	mapc.set_meta("map_base_size", MAP_SIZE)
+	map_frame.add_child(mapc)
 	mapc.custom_minimum_size = MAP_SIZE
 	mapc.clip_contents = true
-	h.add_child(mapc)
+	h.add_child(map_frame)
 	var img := TextureRect.new()
 	img.texture = Art.tex("city_map/board")
 	img.size = MAP_SIZE

@@ -111,7 +111,7 @@ func _input(event: InputEvent) -> void:
 	if phase != "play" or not (event is InputEventKey) or not event.pressed:
 		return
 	var k := event as InputEventKey
-	if k.keycode == KEY_ESCAPE:
+	if event.is_action_pressed("pause") or event.is_action_pressed("cancel"):
 		return   # MiniGame handles leaving
 	var s := _cur()
 	if col >= s.length():
@@ -149,7 +149,7 @@ func _line_done() -> void:
 func _process(delta: float) -> void:
 	super._process(delta)
 	if phase == "play":
-		_line_t += delta
+		_line_t += delta * PersonalLife.response_speed()
 		if _err_flash > 0.0:
 			_err_flash -= delta
 			if view != null and is_instance_valid(view):

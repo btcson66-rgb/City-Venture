@@ -1,0 +1,85 @@
+{
+	"calendar_1440_calls_ms": 2.757,
+	"completed": true,
+	"coverage": {
+		"industries": [
+			"ecommerce"
+		],
+		"missing_industries": [
+			"manufacturing",
+			"real_estate",
+			"media",
+			"hotel",
+			"automotive",
+			"energy",
+			"international_trade"
+		],
+		"notes": [
+			"Forced orders and staff are saturation fixtures, not normal gameplay.",
+			"Additional company/industry activation requires the upstream gameplay implementations.",
+			"Compressed bytes measure a gzip copy; shipping saves still use JSON."
+		],
+		"playable_companies": 1
+	},
+	"engine": "4.5.1-stable (official)",
+	"errors": [],
+	"options": {
+		"days": 2,
+		"orders": 5000,
+		"out": "C:/Users/User/.codex/tmp/cv98-profile",
+		"seed": 98001,
+		"staff": 50,
+		"wall_seconds": 120
+	},
+	"platform": "Windows",
+	"renderer": "gl_compatibility",
+	"samples": [
+		{
+			"balanced": true,
+			"day": 1,
+			"gzip_bytes": 138797,
+			"journal_entries": 5008,
+			"json_bytes": 3133535,
+			"load_ms": 185.328,
+			"loaded": true,
+			"memory_bytes": 116810830,
+			"order_phases_ms": {
+				"courier_ms": 80.107,
+				"fixture_ms": 0.08,
+				"pack_ms": 206.992,
+				"place_ms": 7853.882
+			},
+			"orders": 5000,
+			"orders_ms": 8141.068,
+			"save_ms": 174.844,
+			"simulation_ms": 8235.57,
+			"staff": 50,
+			"ticks_ms": 94.502
+		},
+		{
+			"balanced": true,
+			"day": 2,
+			"gzip_bytes": 277656,
+			"journal_entries": 10011,
+			"json_bytes": 6351366,
+			"load_ms": 389.706,
+			"loaded": true,
+			"memory_bytes": 171791170,
+			"order_phases_ms": {
+				"courier_ms": 84.957,
+				"fixture_ms": 0.058,
+				"pack_ms": 208.032,
+				"place_ms": 19943.216
+			},
+			"orders": 5000,
+			"orders_ms": 20236.271,
+			"save_ms": 343.653,
+			"simulation_ms": 20329.604,
+			"staff": 50,
+			"ticks_ms": 93.333
+		}
+	],
+	"schema": 1,
+	"texture_bytes": null,
+	"wall_ms": 29728.247
+}

@@ -313,3 +313,6 @@ Implemented #67: M5 connects the district. Enter `the_aster`, `skyline_grand`, `
 
 
 Implemented #68: M4 connects the Airport district. Enter `airport_terminal`, `gateway_car_rental`, `aurelia_auto_auction` and look at `cargo_terminal`; Frank Doyle, Jun Ito and Mara Quinn support the automotive business. Full workflow in [23_automotive.md](23_automotive.md).
+
+## #27 年代街景（Implemented）
+第 2 年保留原貌。第 3 年起河濱河對岸出現遠景 port_cranes_far（非碰撞、背景層）；第 4 年 Bloom Coffee、Threadline、Lantern Bistro、Nexus Bank 屋頂出現 solar_roof_small／solar_roof_large，購物街與金融區各新增兩個公共 ev_charger，不擋門、不提供玩家充電收入。第 4 年新聞提到公共充電樁。切換年代會在同一玩家位置刷新街景；重新產生街區資料保留這些條件與屋頂資料。

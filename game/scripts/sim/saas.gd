@@ -140,7 +140,7 @@ static func signup_rate() -> float:
 	var ads := 0.0 if b <= 0.0 else float(cfg().get("ad_max_boost", 1.0)) * b / (b + float(cfg().get("ad_half_budget", 20)))
 	var wom := minf(1.0, int(s["subs"]) / 150.0)
 	var room := clampf(1.0 - int(s["subs"]) / float(i.get("market", 1000)), 0.0, 1.0)
-	return float(i["base_signups"]) * pf * quality() * (1.0 + ads + Staff.demand_boost()) * (1.0 + wom) * room * CityFuture.demand_factor("saas")
+	return float(i["base_signups"]) * Industries.market_demand("saas") * pf * quality() * (1.0 + ads + Staff.demand_boost()) * (1.0 + wom) * room * CityFuture.demand_factor("saas")
 
 
 static func on_hour(_t: int, h: int) -> void:

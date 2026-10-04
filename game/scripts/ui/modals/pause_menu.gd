@@ -31,6 +31,13 @@ func build() -> void:
 	var retirement := UIK.button("Retirement and life review", func(): UIRoot.open_modal(LifeReviewModal.new()))
 	retirement.name = "OpenLifeReview"
 	body.add_child(retirement)
+	var settings := UIK.button("Settings", func(): UIRoot.open_modal(SettingsModal.new()))
+	settings.name = "Settings"
+	body.add_child(settings)
+	if Replay.active() and not Replay.S().get("scenario", {}).is_empty():
+		var overview := UIK.button("Scenario progress", func(): UIRoot.open_modal(RunCardModal.new(Replay.S().get("status", "running") == "running")))
+		overview.name = "RunOverview"
+		body.add_child(overview)
 	var transfers := UIK.hbox(4)
 	var export_button := UIK.button("Export save", SaveSystem.show_export)
 	export_button.name = "ExportSave"
@@ -54,21 +61,6 @@ func build() -> void:
 		b.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 		lang.add_child(b)
 	body.add_child(lang)
-	for row in [["Music", "music"], ["Sound effects", "sfx"]]:
-		var ah := UIK.hbox(3)
-		ah.add_child(UIK.label(row[0], 8, Art.C_MUTED))
-		var cur: float = Sound.music_volume if row[1] == "music" else Sound.sfx_volume
-		for lv in [[0.0, "Off"], [0.4, "Low"], [0.8, "Mid"], [1.0, "High"]]:
-			var key: String = row[1]
-			var b := UIK.button(lv[1], func():
-				if key == "music":
-					Sound.set_volumes(lv[0], Sound.sfx_volume)
-				else:
-					Sound.set_volumes(Sound.music_volume, lv[0])
-				rebuild(), "tab_active" if absf(cur - float(lv[0])) < 0.05 else "tab")
-			b.name = "Vol_%s_%d" % [key, int(float(lv[0]) * 100)]
-			ah.add_child(b)
-		body.add_child(ah)
 	var help := UIK.hbox(4)
 	help.add_child(UIK.label("Guide arrow", 8, Art.C_MUTED))
 	var on := Tutorial.guide_enabled()

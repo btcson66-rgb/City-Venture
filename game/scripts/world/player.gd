@@ -11,6 +11,8 @@ var facing := "down"
 var focus: Node = null  # current Interactable in reach
 var input_enabled := true
 var moving := false
+var click_route := PackedVector2Array()
+var _stuck_seconds := 0.0
 
 
 func _ready() -> void:
@@ -60,6 +62,15 @@ func _physics_process(_delta: float) -> void:
 	var v := Vector2.ZERO
 	if can_move():
 		v = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	if v.length() > 0.1:
+		click_route.clear()
+	elif can_move() and not click_route.is_empty():
+		while not click_route.is_empty() and global_position.distance_to(click_route[0]) <= 2.0:
+			click_route.remove_at(0)
+		if not click_route.is_empty():
+			v = global_position.direction_to(click_route[0])
+	elif not can_move():
+		click_route.clear()
 	var speed := RUN_SPEED if Input.is_action_pressed("run") else WALK_SPEED
 	velocity = v.normalized() * speed if v.length() > 0.1 else Vector2.ZERO
 	moving = velocity.length() > 0.1
@@ -72,6 +83,13 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	if moving and global_position.distance_to(before) < speed * _delta * 0.25:
 		_corner_slide(v, speed * _delta)
+	if not click_route.is_empty() and global_position.distance_to(before) < 0.1:
+		_stuck_seconds += _delta
+		if _stuck_seconds > 1.0:
+			click_route.clear()
+	else:
+		_stuck_seconds = 0.0
+	PersonalLife.movement(global_position.distance_to(before))
 	_update_focus()
 
 
@@ -126,7 +144,14 @@ func _facing_vec() -> Vector2:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("interact") and focus != null and can_move():
+	if event.is_action_pressed("company_os_hint") and can_move():
+		get_viewport().set_input_as_handled()
+		if focus != null and focus.action == "open_company_os":
+			interact_now()
+		else:
+			UIRoot.toast("Walk to a laptop or work desk, then use Company OS.", "info", "laptop")
+		return
+	if (event.is_action_pressed("interact") or event.is_action_pressed("confirm")) and focus != null and can_move():
 		get_viewport().set_input_as_handled()
 		interact_now()
 
@@ -140,3 +165,13 @@ func interact_now() -> void:
 	UIRoot.set_prompt("")
 	focus = null
 	target.activate(self)
+
+
+func walk_to(target: Vector2) -> bool:
+	if not can_move():
+		return false
+	click_route = ClickPath.plan(SceneRouter.world_scene(), global_position, target)
+	_stuck_seconds = 0.0
+	if click_route.is_empty():
+		UIRoot.toast("No walking route. Tap another spot on the ground.", "info", "map")
+	return not click_route.is_empty()

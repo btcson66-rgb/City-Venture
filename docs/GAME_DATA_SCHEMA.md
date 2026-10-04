@@ -11,6 +11,10 @@ explicitly adds their numeric fields to a later overlay.
 
 All content lives in `game/data/` as JSON, loaded by `DataDB` at boot.
 
+Performance QA (`docs/PERFORMANCE.md`) adds no persisted gameplay keys. Ecommerce
+order reservations use a derived, disposable index rebuilt from existing orders;
+legacy saves require no new field or migration.
+
 Art keys keep their existing logical pixel contract (`#62`): a matching `assets/world_detail/<key>.png`
 overrides the rendered image through `Art`, while native dimensions, sprite metadata, atlas coordinates,
 map positions and collision alpha masks remain authoritative. No saved fields or format versions change.
@@ -555,6 +559,22 @@ Lazy `fx_forwards` = {items[id]{entity,currency,notional,days,rate,fee,collatera
 
 
 
+Device settings (#87) are outside GameState and game saves: `Preferences` persists audio, display, accessibility,
+input bindings and launch defaults in `user://settings.cfg`. Unknown ConfigFile sections and legacy audio keys are
+preserved; old company saves need no migration. See [SETTINGS.md](SETTINGS.md) for units, limits and validation.
+
+### Input accessibility (#88)
+
+InputAccess stores touch contacts, transient walking routes and controller focus only in memory; no saved game keys or migrations. See [INPUT_ACCESS.md](INPUT_ACCESS.md).
+
+### Replay rules and scenarios (#89)
+
+`difficulty.json` supplies bounded presets/custom fields, market variation and score weights; `scenarios/*.json` supplies `{id, name, description, goal, initial, win, limit_days|limit_months}`. DataDB loads both. Optional saved `run` snapshots rules/seed/preferences, full scenario definition, started/deadline minutes, original company id, starting net worth, status/result and read/recorded flags. Missing `run` preserves original behavior. `property` is a ledger asset; scenario mortgages remain `loan_payable` and ordinary Bank loan schedules. Local challenge history is separate from game saves and preserves corrupt files. See [REPLAY.md](REPLAY.md) for all keys, units and six IDs.
+
+
+## Market state (#90)
+
+`economy/macro.json`: bounded daily mean reversion/noise/shock settings, phase thresholds and per-industry cycle/rate sensitivity. `economy/rivals.json`: weekly price/quality/advertising/location and payroll/acquisition/news limits. `data/rivals/*.json`: `{id,name,industry,strategy,capital,price,quality,locations}`. Optional saved `macro` contains private RNG string, daily index/rate/inflation/trend/shock expiry and bounded path; `rivals` contains private RNG string, last week, virtual-company books/status/buyer/acquired cost and timed staff offers; `city_news` contains last day, timeline/event cursors and bounded published/queued items. Contract/freelance offers, shared Jobs, manufacturing RFQs and media briefs carry optional dynamic `competitors` snapshots (`id,name,price,quality,share`). Old records without snapshots retain neutral competition odds. `rivals.bid_pressure` is the opponent-strength coefficient; acquisitions and closure write-offs retain the rival industry segment. No existing keys renamed. Acquisition purchases post cash to investments; closure writes the asset off. See MARKET.md for neutral legacy quotes and dependency boundaries.
 ## Industry framework state (#63)
 
 - Every ledger journal source includes `segment`: industry id or `shared`. Old entries need not be rewritten.
@@ -640,3 +660,37 @@ Sales use the existing canonical `Ledger` account `revenue`; report field `sales
 
 
 Trade portfolio integration (#91/#70): `trade`, `trade_active`, and `trade.*` schedules follow the brokerage owner. Pre-registry multi-company saves move the old global brokerage and untagged cargo departures to its recorded entity without changing cash or contracts, and restore the selected company view. Old single-company migration binds actual scheduled departures before any switch.
+## Shop research and fitness (#40)
+`economy/shop_life.json` tunes research duration/cache/premium range, price tiers, personal fees, class times/grace/duration, networking probability/cooldown and opportunity terms. Lazy saved `shop_life` has product research `{product,price,at,until}`, membership auto-renew boolean, paid_until absolute minute, single-class pass boolean, dated class receipts, per-event networking expiry and shipping_until. Fitness fees use `personal_fitness` in Ledger.PERSONAL and CATEGORY_NAMES. Existing hourly Living dispatch checks renewal once; cancellation preserves paid access, insufficient cash disables renewal. Event op `shop_network` delegates real contract, shipping and paid press choices; declined offers create no costs or income. Shared shipping cost applies the finite trial factor only to actual parcel labels. Networking contexts persist the originating `entity`; accepting rejects a closed or different active account while decline remains available. Older events without this field use the current seller.
+
+### #28 van appearance and route art coordinates
+Logistics `van.body_colors` is an array of `{id, name, hex}` choices; `van.parking{x,y}` uses logical Harbor world pixels. Saved `logistics.van.body_color` is optional and defaults to white for old saves. Changing colour requires ownership, never charges cash, and emits world_refresh. CompanyVan uses owner entity name, body tint and untinted detail at 72×36 logical pixels; 8→5px name sizing with ellipsis for extreme names. Map depot/stops/river/bridges use the existing 580×236 route_map logical coordinates; straight-distance legs via painted bridges retain existing scoring.
+
+### #26 device art rendering
+Preferences `high_detail_art` is a boolean defaulting true, saved only in user://settings.cfg. Art clears logical/detail and existence caches and WorldScene static TileSet cache on a change; the live scene rebuilds at the same logical player position/facing. Buildings, metro and vehicle Sprite2D fit physical detail to native dimensions/offsets independently for body/detail/lights. TileSet uses physical 64px atlas cells with TileMapLayer scale 0.25 (fallback 16px/1.0), preserving atlas indices, collisions and navigation coordinates. Missing detail falls back per texture; no assets modified.
+
+### #27 era street and roof decorations
+Building `exterior.roof_props` and filler `roof_props` are arrays of `{sprite, x, y, if}`: logical px relative to facade top-left, existing Cond expression, decorative non-solid wall sprites parented to the facade. District props support the existing `if` condition: `world_year>=3` for port_cranes_far in Riverside back layer across the river, `world_year>=4` for two public decorative ev_charger props in each Shopping Street/Financial. Four roof panels appear from year four. These props never create Energy sites/income or change navigation. Live district rebuilds at the same feet on era change. gen_districts regenerates `_era` entries explicitly and retains named buildings roof data.
+
+
+## Shared governance (#96)
+`Industries` registers `governance` as a service, excluded from sales segments. Optional journal preparation/observation and company registration/transfer hooks keep accounting integrated with the registry. `economy/tax.json` holds fictional VAT/income rates and filing fees, minutes, deadlines, correction risks and penalties. Customer gross sales split into net revenue and `tax_payable`; refunds reverse only proved collected VAT. Personal ecommerce unfiled VAT and refund rights follow business contributions; already-created personal returns stay personal. `tax_service.entities` stores year/period/from/year_from, pending and per-segment pending VAT, bounded-to-original-sale refundable tax, loss carry and returns (amount/fine/due/status/late/pretax_profit/loss_used/loss_carried). `income_tax_payable`, `exp:income_tax` and tax service expenses remain balanced; annual taxable profit adds back its own income-tax expense. Old saves start at load time without rewriting journals.
+
+`economy/governance.json` defines legal options and probabilities, brand weights/decay and insurance policies/limits. `legal_service` stores original company/job cases, fees/terms snapshots, recovery/payment, expires/resolves/relationship_until, sequence and daily cooldown. Jobs have dispute_pause, payment_checked, supplier_checked, ip_checked and client_relationship; overdue paid construction retains CIP and resumes after disputes. Recent same-counterparty cases change subsequent advance-payment terms for 30 days, not NPC story relationships. Scheduled `gov.legal_timeout/result` resolve or auto-settle cases. Earned wages remain payable regardless of defence; IP defence does not create fictitious income.
+
+`insurance_service` stores per-company policies (from/ready/until/paid/active/auto), loss-journal keyed claims (amount/eligible loss/due/status/segment) and legacy cover proved by premium journals. Approved claims create `insurance_receivable` and actual other_income; `gov.insurance_claim` collects it once. Waiting periods prevent retrospective cover; deductibles, limits and exclusions leave downside. Unfunded renewals lapse and resume when funded. Closing a company transfers insurer receivables to the ordinary liquidation collector and cancels service schedules. `brand_service.companies` holds up to 64 decaying events and cached score/components. Current reviews, wages and published news feed recruitment pools, B2B willingness and APR. Tax filing uses `gov.tax_file/timeout`; lazy state preserves old save compatibility.
+
+
+## Original audio and dynamic stems (#97)
+`economy/audio.json` tunes byte budget, fade durations/volumes, low-cash threshold, festival months, crisis categories, district day/night sound ids, building type/id mappings, registered-industry work tracks and seven work-screen feedback mappings. Sound owns runtime crossfade pairs, synchronized stems, bounded-by-session trace output and expiring presentation moods; none is saved economic state. Existing settings.cfg Music/SFX volumes remain authoritative; Ambient routes into SFX. Scene/menu changes clear work contexts, modal closure removes its override, and Web playback waits for pressed touch/mouse/key input. All new files are original synthesized Ogg material recorded in AUDIO_CREDITS.md; artwork and industry scoring stay untouched.
+
+
+## Personal life service (#95)
+
+`npcs/*.json.relationship`: `preferences` gift ids, `stages` [0, friend points, partner points], `personal_story` matching NPC id. Thirty-seven human contacts; abstract business/account senders have no relationship block.
+
+`story/personal/<npc>.json`: `id`, `npc`, exactly three `steps` with relationship `stage` (0/1/2), translated `title`, `detail`, actual `minutes`, `cost` AUD, answer `order` and `choices` (`id`, translated `label`, `correct`). `referral` has `client`, translated scope `detail`, contract `price` AUD, paid supply `cost` AUD and work `minutes`. Completion awards an opportunity, never revenue.
+
+`economy/personal_life.json`: gift prices/preferences rewards, request quality threshold/time limit, monthly social `events` (calendar day/hour/end_hour, fee AUD, duration minutes, contact ids and information), energy per logical pixel/work minute, sleep/rest restoration, fatigue timer factor, stress rates/threshold/decay, illness duration/cooldown in days and recovery fees/minutes.
+
+Saved `personal_life`: energy/stress percentages, continuous work minutes, contacts (`affinity`, `known`, step, originating entity, retired, gift day, Jobs referral id, honesty observations), monthly event receipts and illness/cooldown deadlines in Clock minutes. Lazy initialization keeps old saves neutral. Transient sleeping/resting flags are not saved. Registered as an Industries service; referral accounting uses consulting Segments and Jobs, with actual expenses and deferred collection.

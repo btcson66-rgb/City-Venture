@@ -37,6 +37,29 @@ static func van_cfg() -> Dictionary:
 	return cfg().get("van", {})
 
 
+## Appearance is optional saved van state: pre-colour saves keep the stock white body.
+static func body_color_id() -> String:
+	return str(S()["van"].get("body_color", "white"))
+
+
+static func body_color() -> Color:
+	for c in van_cfg().get("body_colors", []):
+		if str(c["id"]) == body_color_id():
+			return Color(str(c["hex"]))
+	return Color.WHITE
+
+
+static func set_body_color(id: String) -> bool:
+	if not has_van():
+		return false
+	for c in van_cfg().get("body_colors", []):
+		if str(c["id"]) == id:
+			S()["van"]["body_color"] = id
+			EventBus.world_refresh.emit()
+			return true
+	return false
+
+
 static func property_id() -> String:
 	return str(cfg().get("property", "pier7_warehouse"))
 
@@ -89,7 +112,7 @@ static func buy_van() -> Dictionary:
 	Assets.register_expensed_van()
 	GameState.set_flag("van_owned")
 	GameState.inc_stat("vans_bought")
-	GameState.timeline(I18n.t("Bought a used van from Sam Okoro at Dockside Motors for %s.") % Fmt.money0(price), "business")
+	GameState.timeline(I18n.t("Bought a used van from Sam Okoro at Dockside Motors for %s.") % Fmt.money(price), "business")
 	EventBus.world_refresh.emit()
 	return {"ok": true, "cost": price, "insurance": ins}
 
@@ -103,6 +126,7 @@ static func on_company_closed(ent: String) -> float:
 	S()["van"]["owned"] = false
 	S()["jobs"] = {}
 	GameState.set_flag("van_owned", false)
+	EventBus.world_refresh.emit()
 	return got
 
 
@@ -114,7 +138,7 @@ static func fuel_mult() -> float:
 
 static func fuel_cost_per_km() -> float:
 	var f: Dictionary = cfg().get("fuel", {})
-	return float(f.get("l_per_km", 0.14)) * float(f.get("price_l", 2.1)) * fuel_mult()
+	return float(f.get("l_per_km", 0.14)) * float(f.get("price_l", 2.1)) * fuel_mult() * Macro.costs()
 
 
 static func upkeep_per_km() -> float:
@@ -372,7 +396,7 @@ static func post_jobs() -> int:
 	if not has_van():
 		return 0
 	var r := runs_cfg()
-	var want := ceili(GameState.randi_range(int(r["per_day"][0]), int(r["per_day"][1])) * CityFuture.demand_factor("logistics"))
+	var want := roundi(ceili(GameState.randi_range(int(r["per_day"][0]), int(r["per_day"][1])) * CityFuture.demand_factor("logistics")) * Industries.market_demand("logistics"))
 	var n := 0
 	while n < want and open_jobs().size() < int(r.get("max_open", 8)):
 		var j := _make_job()

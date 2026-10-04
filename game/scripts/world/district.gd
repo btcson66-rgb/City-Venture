@@ -16,6 +16,7 @@ var _ped_rng := RandomNumberGenerator.new()
 var _density_acc := 0.0
 var sky_layer: CanvasLayer
 var _lot_rendered := ""
+var _era_rendered := 1
 var sky_day: Sprite2D
 var sky_dusk: Sprite2D
 var sky_night: Sprite2D
@@ -27,6 +28,7 @@ const SKY_PARALLAX := 0.55
 func build(district_id: String) -> void:
 	kind = "district"
 	scene_id = district_id
+	_era_rendered = World.year()
 	def = DataDB.districts[district_id]
 	if district_id=="residential":
 		_lot_rendered=JSON.stringify(RealEstate.lot_definition(DataDB.buildings["lot7"])["exterior"])
@@ -63,7 +65,7 @@ func build(district_id: String) -> void:
 		if bid=="lot7":bd=RealEstate.lot_definition(bd)
 		_add_building(facade(bd["exterior"]), float(bd["exterior"]["x"]), bid, bd)
 	for f in def.get("fillers", []):
-		_add_building(facade(f), float(f["x"]), "", {})
+		_add_building(facade(f), float(f["x"]), "", {"exterior":f})
 	for p in def.get("props", []):
 		add_prop(p)
 	for p in Energy.street_props(district_id):   # chargers the player built stand on the pavement
@@ -87,6 +89,12 @@ func build(district_id: String) -> void:
 		var s: Array = def["spawns"][k]
 		spawns[k] = Vector2(float(s[0]), float(s[1]))
 	_ped_rng.seed = hash(district_id) + Clock.day_index()
+	if district_id == "harbor":
+		var van := CompanyVan.new()
+		van.name = "OwnedCompanyVan"
+		var parking: Dictionary = Logistics.van_cfg().get("parking", {"x":350,"y":572})
+		van.position = Vector2(float(parking["x"]), float(parking["y"]))
+		entities.add_child(van)
 	_spawn_traffic()
 	_spawn_pedestrians(true)
 	update_lighting()
@@ -137,12 +145,12 @@ func _add_building(sprite: String, x: float, bid: String, bd: Dictionary) -> voi
 	var s := Sprite2D.new()
 	s.texture = tex
 	s.centered = false
-	s.offset = Vector2(0, -h + 2)
+	Art.fit_world_sprite(s, "buildings/" + sprite, Vector2(0, -h + 2))
 	holder.add_child(s)
 	var lt := Sprite2D.new()
 	lt.texture = Art.tex("buildings/" + sprite + "_lights")
 	lt.centered = false
-	lt.offset = s.offset
+	Art.fit_world_sprite(lt, "buildings/" + sprite + "_lights", Vector2(0, -h + 2))
 	var mat := CanvasItemMaterial.new()
 	mat.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
 	lt.material = mat
@@ -150,6 +158,15 @@ func _add_building(sprite: String, x: float, bid: String, bd: Dictionary) -> voi
 	light_nodes.append({"node": lt, "interior": false})
 	entities.add_child(holder)
 	building_nodes[bid if bid != "" else sprite + str(x)] = holder
+	# Roof coordinates stay relative to the facade's logical top-left, independent of detail resolution.
+	for roof in bd.get("exterior", {}).get("roof_props", []):
+		var prop: Dictionary = (roof as Dictionary).duplicate(true)
+		prop["y"] = float(prop.get("y", 0)) - h + 2.0
+		prop["wall"] = true
+		prop["solid"] = false
+		var decoration := add_prop(prop, holder)
+		if decoration != null:
+			decoration.name = "Roof_" + str(prop["sprite"])
 	# soft contact shadow the facade casts onto the sidewalk
 	var sh := Sprite2D.new()
 	sh.texture = _shadow_tex()
@@ -215,12 +232,12 @@ func _add_metro(mp: Dictionary) -> Node2D:
 	var s := Sprite2D.new()
 	s.texture = tex
 	s.centered = false
-	s.offset = Vector2(0, -h)
+	Art.fit_world_sprite(s, "buildings/metro_entrance", Vector2(0, -h))
 	holder.add_child(s)
 	var lt := Sprite2D.new()
 	lt.texture = Art.tex("buildings/metro_entrance_lights")
 	lt.centered = false
-	lt.offset = s.offset
+	Art.fit_world_sprite(lt, "buildings/metro_entrance_lights", Vector2(0, -h))
 	var mat := CanvasItemMaterial.new()
 	mat.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
 	lt.material = mat
@@ -347,6 +364,9 @@ func _update_sparkles(delta: float) -> void:
 
 
 func _process(delta: float) -> void:
+	if _era_rendered != World.year():
+		_era_rendered = World.year()
+		_reload_era.call_deferred()
 	super._process(delta)
 	_update_sky()
 	_update_sparkles(delta)
@@ -391,3 +411,9 @@ func minimap_shapes() -> Array:
 			col2 = Color8(210, 190, 130)
 		shapes.append({"rect": Rect2(n.position.x, BASE_Y - 60, w, 58), "color": col2})
 	return shapes
+
+
+## An era can change while the player stands outside; rebuild at their current feet.
+func _reload_era() -> void:
+	if is_instance_valid(player) and SceneRouter.world_scene() == self:
+		SceneRouter._enter("district", scene_id, "", player.facing, player.position)

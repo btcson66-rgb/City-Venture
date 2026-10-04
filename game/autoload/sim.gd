@@ -118,6 +118,8 @@ func _dispatch_owned(kind: String,p: Dictionary) -> void:
 
 
 func _on_hour(t: int, h: int) -> void:
+	phase = "hour:macro"
+	Macro.on_hour(t, h)
 	if CompanyPortfolio.is_multi():
 		for id in CompanyPortfolio.ids(): CompanyPortfolio.run_in(str(id),func():_company_hour(t,h))
 	else:
@@ -129,6 +131,7 @@ func _on_hour(t: int, h: int) -> void:
 	EventEngine.on_hour(t,h)
 	Industries.on_hour(t,h,"careers")
 	Milestones.on_hour(t,h)
+	Replay.on_hour(t, h)
 	Growth.check()
 	_request_story_check()
 	phase=""
@@ -160,6 +163,8 @@ func _single_company_hour(t: int, h: int) -> void:
 	InternalSupply.on_hour(t, h)
 	GroupJobs.on_hour(t, h)
 	Milestones.on_hour(t, h)
+	phase = "hour:scenario"
+	Replay.on_hour(t, h)
 	phase = "hour:story"
 	_request_story_check()
 	phase = ""

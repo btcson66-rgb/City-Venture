@@ -18,22 +18,22 @@ extends RefCounted
 
 const EXPENSE_CATEGORIES := ["advertising", "shipping", "restocking", "platform_fees", "packaging", "photography", "registration", "compliance",
 	"rent_office", "coworking", "inventory_writeoff", "bank_fees", "late_fees", "rent_home", "living", "coffee", "transport",
-	"clothing", "dining", "penalties", "payroll", "recruiting", "interest", "servers", "rent_shop", "rent_warehouse", "fitout",
-	"fuel", "vehicle", "insurance", "depreciation", "maintenance", "asset_rent", "other"]
+	"clothing", "dining", "personal_fitness", "penalties", "payroll", "recruiting", "interest", "servers", "rent_shop", "rent_warehouse", "fitout",
+	"fuel", "vehicle", "insurance", "depreciation", "maintenance", "asset_rent", "income_tax", "tax_service", "legal", "bad_debt", "other"]
 const OPEX_BUSINESS := ["advertising", "shipping", "restocking", "platform_fees", "packaging", "photography", "registration", "compliance",
 	"rent_office", "coworking", "inventory_writeoff", "bank_fees", "late_fees", "penalties", "payroll", "recruiting", "interest",
-	"servers", "rent_shop", "rent_warehouse", "fitout", "fuel", "vehicle", "insurance", "depreciation", "maintenance", "asset_rent", "other"]
+	"servers", "rent_shop", "rent_warehouse", "fitout", "fuel", "vehicle", "insurance", "depreciation", "maintenance", "asset_rent", "income_tax", "tax_service", "legal", "bad_debt", "other"]
 ## Rent on business premises, whatever the kind (office, shop, warehouse): one line on the month-end report.
 const PREMISES_RENT := ["rent_office", "rent_shop", "rent_warehouse"]
-const PERSONAL := ["rent_home", "living", "coffee", "transport", "clothing", "dining"]
+const PERSONAL := ["rent_home", "living", "coffee", "transport", "clothing", "dining", "personal_fitness"]
 ## How each expense category reads on a report (translated through the catalogue).
 const CATEGORY_NAMES := {"advertising": "Advertising", "shipping": "Shipping", "restocking": "Return & cancellation fees", "platform_fees": "Platform fees",
 	"packaging": "Packaging", "photography": "Photography", "registration": "Registration fees", "compliance": "Compliance", "rent_office": "Office rent",
 	"coworking": "Co-working", "inventory_writeoff": "Inventory write-off", "bank_fees": "Bank fees", "late_fees": "Late fees",
 	"rent_home": "Home rent", "living": "Living costs", "coffee": "Coffee", "transport": "Transport", "clothing": "Clothing",
-	"dining": "Dining", "penalties": "Penalties", "payroll": "Payroll", "recruiting": "Recruiting", "interest": "Interest",
+	"dining": "Dining", "personal_fitness": "Personal fitness", "penalties": "Penalties", "payroll": "Payroll", "recruiting": "Recruiting", "interest": "Interest",
 	"servers": "Servers", "rent_shop": "Shop rent", "rent_warehouse": "Warehouse rent", "fitout": "Fit-out & equipment",
-	"fuel": "Fuel", "vehicle": "Vehicles & upkeep", "insurance": "Insurance", "depreciation": "Depreciation", "maintenance": "Maintenance", "asset_rent": "Asset rent", "other": "Other"}
+	"fuel": "Fuel", "vehicle": "Vehicles & upkeep", "insurance": "Insurance", "depreciation": "Depreciation", "maintenance": "Maintenance", "asset_rent": "Asset rent", "income_tax": "Income tax", "tax_service": "Tax filing costs", "legal": "Legal costs", "bad_debt": "Bad debts", "other": "Other"}
 
 
 static func category_name(k: String) -> String:
@@ -61,6 +61,14 @@ static func post(entity: String, memo: String, lines: Array, source := {}) -> Di
 		if c != 0.0:
 			e["cr"] = c
 		clean.append(e)
+	source = source.duplicate(true)
+	if not source.has("segment"):source["segment"] = Industries.infer_segment(source, clean)
+	clean = Industries.prepare_journal(entity,clean,source)
+	dr=0.0
+	cr=0.0
+	for line in clean:
+		dr+=float(line.get("dr",0))
+		cr+=float(line.get("cr",0))
 	assert(absf(dr - cr) < 0.011, "Unbalanced journal entry: %s (dr %.2f cr %.2f)" % [memo, dr, cr])
 	if clean.is_empty():
 		return {}
@@ -80,6 +88,7 @@ static func post(entity: String, memo: String, lines: Array, source := {}) -> Di
 		bal[e["acct"]] = snappedf(float(bal.get(e["acct"], 0.0)) + v, 0.01)
 		if e["acct"] == "cash":
 			cash_delta += v
+	Industries.on_ledger(entry)
 	EventBus.ledger_posted.emit(entry)
 	if cash_delta != 0.0:
 		EventBus.cash_changed.emit(entity, cash_delta)

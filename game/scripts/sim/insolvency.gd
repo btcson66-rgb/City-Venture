@@ -31,7 +31,7 @@ static func begin(ent: String, reason: String) -> void:
 
 ## Everything the company owes right now.
 static func liabilities(ent: String) -> float:
-	var owed := -(Ledger.balance(ent, "loan_payable") + Ledger.balance(ent, "wages_payable") + Ledger.balance(ent, "accounts_payable"))
+	var owed := -(Ledger.balance(ent, "loan_payable") + Ledger.balance(ent, "wages_payable") + Ledger.balance(ent, "accounts_payable") + Ledger.balance(ent,"tax_payable") + Ledger.balance(ent,"income_tax_payable"))
 	for acct in GameState.data["ledger"]["balances"].get(ent,{}):
 		if str(acct).begins_with("group_loan_payable:") or str(acct).begins_with("group_interest_payable:"):owed-=Ledger.balance(ent,acct)
 	return owed
@@ -118,7 +118,7 @@ static func close_company() -> Dictionary:
 	Staff.S()["applicants"] = []
 	Staff.S()["posting"] = {}
 	# 3. pay creditors in order, write off the rest
-	for acct in ["wages_payable", "loan_payable", "accounts_payable"]+HoldingGroups.debt_accounts(ent):
+	for acct in ["wages_payable", "tax_payable", "income_tax_payable", "loan_payable", "accounts_payable"]+HoldingGroups.debt_accounts(ent):
 		var owed := -Ledger.balance(ent, acct)
 		if owed <= 0.01:
 			continue
@@ -198,5 +198,5 @@ static func _resolve(how: String) -> void:
 
 ## Called every Friday after payroll: three missed payrolls in a row means the company is insolvent.
 static func check_payroll(ent: String) -> void:
-	if int(Staff.S().get("missed_run", 0)) >= 3:
-		begin(ent, I18n.t("three payrolls in a row went unpaid"))
+	if int(Staff.S().get("missed_run", 0)) >= maxi(1, ceili(3 * Replay.number("debt_tolerance", 1.0))):
+		begin(ent, I18n.t("%d consecutive payrolls went unpaid") % int(Staff.S().get("missed_run", 0)))

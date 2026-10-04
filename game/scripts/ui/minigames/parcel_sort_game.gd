@@ -23,7 +23,7 @@ func _init() -> void:
 
 
 func intro_lines() -> Array:
-	return ["Parcels come down the belt one at a time. Send each to its district's bin: click the bin or press 1–5.",
+	return ["Parcels come down the belt one at a time. Click the district bin or use the Choice 1–5 bindings in Settings.",
 		"Postcodes tell you the district: 1xxx Riverside, 2xxx Startup Hub, 3xxx Civic Center, 4xxx Financial District, 5xxx Shopping Street.",
 		"The first parcels show the district name. Later ones only have a postcode, and halfway through the cheat sheet goes away."]
 
@@ -121,10 +121,11 @@ func round_timeout() -> void:
 func _unhandled_key_input(event: InputEvent) -> void:
 	if phase != "play" or not (event is InputEventKey) or not event.pressed or event.echo:
 		return
-	var k := int((event as InputEventKey).keycode) - KEY_1
-	if k >= 0 and k < BINS.size():
-		get_viewport().set_input_as_handled()
-		_drop(str(BINS[k][0]))
+	for index in BINS.size():
+		if event.is_action_pressed("pick_%d" % (index + 1)):
+			get_viewport().set_input_as_handled()
+			_drop(str(BINS[index][0]))
+			return
 
 
 func extra_result() -> Dictionary:

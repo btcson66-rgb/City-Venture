@@ -22,13 +22,21 @@ static func apply(e: Dictionary, ctx: Dictionary) -> Dictionary:
 		"customs_hold":
 			return Customs.resolve(str(ctx.get("order", "")), str(e.get("choice", "")))
 
+		"shop_network":
+			return ShopLife.network_choice(str(e.get("kind", "")), ctx)
 		"industry":
 			var module := Industries.find(str(e.get("industry", "")))
 			if module.is_empty() or not module["sim_class"].has_method("crisis"):
 				return {"ok":false, "error":I18n.t("Unknown industry event.")}
+			Insurance.crisis_context={"entity":ent,"industry":e.get("industry","")}
+			var result: Dictionary
 			if module["sim_class"].has_method("crisis_context"):
-				return module["sim_class"].crisis_context(str(e.get("kind","")),bool(e.get("retain",true)),ctx)
-			return module["sim_class"].crisis(str(e.get("kind", "")), bool(e.get("retain", true)))
+				result=module["sim_class"].crisis_context(str(e.get("kind","")),bool(e.get("retain",true)),ctx)
+			else:
+				result=module["sim_class"].crisis(str(e.get("kind", "")), bool(e.get("retain", true)))
+			Insurance.crisis_context={}
+			if result.get("ok",false):Brand.record(ent,"crises",2 if e.get("retain",true) else -2)
+			return result
 		"cash":
 			var amt := _num(e.get("amount", 0), ctx)
 			var cat: String = e.get("category", "other")

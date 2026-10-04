@@ -1,0 +1,3 @@
+Merged origin/claude/exciting-bardeen-y71ixv at f097b906 (#108), preserving the new-game failure return and reservation invalidation. QA saves are isolated before the title reads slots.
+
+457/457 unit tests passed in 127.8 s. i18n --check: 4968 translated / missing 0; wiki_check OK (3830 assets / 269 IDs); beta_audit 0 hits. Rendered industries walkthrough: 304 steps / 53 screenshots / 0 failures, 357.1 s. English auditor retained 26 findings in the baseline industry UI (mostly proper names/units; also a lease prerequisite and roof direction); no untranslated #98 player text was introduced. This short run does not replace full story or full performance acceptance. Performance/multicompany workload gaps remain.

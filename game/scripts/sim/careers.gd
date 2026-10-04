@@ -59,7 +59,7 @@ static func next_rank(id: String) -> Dictionary:
 
 
 static func wage(id: String) -> float:
-	return float(rank(id).get("wage", 15))
+	return float(rank(id).get("wage", 15)) * Macro.costs() * Rivals.wages()
 
 
 static func shift_pay(id: String) -> float:
@@ -160,6 +160,7 @@ static func work_shift(id: String, score := 1.0, tips := 0.0) -> Dictionary:
 		C()["shifts"][id] = shifts(id) + 1
 	C()["last_shift_day"] = Clock.day_index()
 	GameState.inc_stat("shifts_worked")
+	Replay.record_work_score(score)
 	var lines: Array = j.get("lines", [])
 	var moment: String = I18n.t(str(lines[(shifts(id) - 1) % lines.size()])) if not lines.is_empty() else ""
 	var promoted := rank_index(id) > before
@@ -200,6 +201,7 @@ static func refresh_offers(force := false) -> void:
 		return
 	f["offers_day"] = Clock.day_index()
 	var n := int(cfg().get("offers_base", 3)) + (1 if rep() >= 4.0 else 0) - (1 if rep() < 2.0 else 0)
+	n = maxi(1, roundi(n * Industries.market_demand("consulting")))
 	var pool: Array = []
 	for t in cfg().get("templates", []):
 		if rep() >= float(t.get("min_rep", 0.0)):
@@ -216,7 +218,7 @@ static func refresh_offers(force := false) -> void:
 		var terms: Array = cfg().get("terms_days", [0, 7, 14])
 		var days := int(ceil(hours / 4.0)) + GameState.randi_range(1, 3)
 		offers.append({"id": "G%d" % int(f["seq"]), "template": t["id"], "title": t["title"], "client": GameState.pick(clients),
-			"hours": hours, "fee": fee, "terms": int(GameState.pick(terms)), "days": days})
+			"competitors": Rivals.competitors("consulting") if Rivals.active() else [], "hours": hours, "fee": fee, "terms": int(GameState.pick(terms)), "days": days})
 		f["seq"] = int(f["seq"]) + 1
 	f["offers"] = offers
 

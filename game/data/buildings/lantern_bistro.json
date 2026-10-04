@@ -11,7 +11,15 @@
  "exterior": {
   "sprite": "lantern_bistro",
   "x": 415,
-  "sign": "LANTERN BISTRO"
+  "sign": "LANTERN BISTRO",
+  "roof_props": [
+   {
+    "sprite": "solar_roof_small",
+    "x": 22,
+    "y": 28,
+    "if": "world_year>=4"
+   }
+  ]
  },
  "interior": {
   "size": [

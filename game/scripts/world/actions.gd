@@ -24,6 +24,8 @@ static func lock_reason(action: String, params: Dictionary) -> String:
 	match action:
 		"legacy_mentor":
 			return "Choose the mentor ending first." if LegacyBusiness.S()["ending"] != "mentor" else ""
+		"fitness":
+			if params.get("desk", false) and not npc_present("harbor_point"): return "Rosa is at reception weekdays, 06:00–20:00."
 		"cafe_counter":
 			return Cafe.in_shop(str(params.get("property","corner_cafe")),Cafe.counter_block)
 		"register_company":
@@ -75,6 +77,12 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 			GameState.set_flag("customs_brief_read")
 			StoryEngine.check()
 			UIRoot.open_modal(Help.card("customs"))
+		"market_research":
+			UIRoot.open_modal(ResearchModal.new())
+		"fitness":
+			if params.get("desk", false) and not npc_present("harbor_point"):
+				UIRoot.toast("Rosa is at reception weekdays, 06:00–20:00.", "warn", "people")
+			else: UIRoot.open_modal(FitnessModal.new(bool(params.get("desk", false))))
 		"cafe_counter":
 			Cafe.select_shop(str(params.get("property","corner_cafe")))
 			_cafe_counter()
@@ -220,6 +228,7 @@ static func _look(params: Dictionary) -> void:
 
 
 static func _talk(npc_id: String) -> void:
+	PersonalLife.meet(npc_id)
 	var def := DataDB.npc(npc_id)
 	for d in def.get("dialogue", []):
 		if Cond.all(d.get("when", [])):

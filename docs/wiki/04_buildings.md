@@ -195,3 +195,5 @@ Implemented: `maple_owner_home` (Maple Court owner apartment), `heights_penthous
 自己到店站櫃台一小時，或在 People 指派員工週六／週日值班。員工每小時另付 $18，同一時間停止原店／物流工作。沒人值班不營業。週日 18:00 剩貨自動搬回來源，租約結束。
 
 資料識別：`popup_retail` 店面、`popup` 銷售通路、`popup_shopper` 週末逛街客。
+## Store activities (#40)
+Crestline Flagship (`crestline_flagship`) retains its lighting look and Chapter 5 alt text. The shelf now offers `market_research` for owned/listed products, thirty game minutes with a seven-day saved cache. Harbor Point Fitness (`harbor_point_fitness`) sells personal memberships/single classes through Rosa Lim (`harbor_point`), at reception weekdays 06:00–20:00. Four timed hour-long classes can introduce real business opportunities: `fitness_order`, `fitness_carrier`, `fitness_press`.

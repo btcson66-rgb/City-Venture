@@ -1,0 +1,687 @@
+{
+	"checks": [
+		{
+			"sticky_primary_visible": true
+		},
+		{
+			"normal_policy_can_win": true,
+			"scenario": "family_property"
+		},
+		{
+			"normal_policy_can_win": true,
+			"scenario": "fresh_restart"
+		},
+		{
+			"normal_policy_can_win": true,
+			"scenario": "harbor_cargo"
+		},
+		{
+			"normal_policy_can_win": true,
+			"scenario": "inherited_cafe"
+		},
+		{
+			"normal_policy_can_win": true,
+			"scenario": "part_time_start"
+		},
+		{
+			"normal_policy_can_win": true,
+			"scenario": "venture_fund"
+		}
+	],
+	"failures": [],
+	"limits": [
+		"Normal APIs and time costs; no forced orders or fixture money.",
+		"Three seeds per scenario are examples, not a proof of every strategy or seed.",
+		"Venture funding's deadline is 18 calendar months, beyond this 120-day sample."
+	],
+	"samples": [
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": 11007.69,
+				"elapsed_days": 120.0,
+				"net_worth": 62562.28,
+				"net_worth_gain": 5062.28,
+				"rating": 4.07678862990335,
+				"revenue": 7200.0,
+				"runs": 0,
+				"shifts": 86
+			},
+			"policy": "normal",
+			"result": {
+				"cash": 11527.66,
+				"elapsed_days": 91.7916666666667,
+				"net_worth": 62691.42,
+				"net_worth_gain": 5191.42,
+				"rating": 4.06868446331758,
+				"revenue": 7200.0,
+				"runs": 0,
+				"score": 3778,
+				"shifts": 65,
+				"status": "won"
+			},
+			"scenario": "family_property",
+			"seed": 89,
+			"status": "won"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": 9191.88,
+				"elapsed_days": 120.0,
+				"net_worth": 60746.47,
+				"net_worth_gain": 3246.47,
+				"rating": 4.05290216554043,
+				"revenue": 5400.0,
+				"runs": 0,
+				"shifts": 86
+			},
+			"policy": "normal",
+			"result": {
+				"cash": 10140.85,
+				"elapsed_days": 120.0,
+				"net_worth": 61304.61,
+				"net_worth_gain": 3804.61,
+				"rating": 4.05290216554043,
+				"revenue": 5400.0,
+				"runs": 0,
+				"score": 3466,
+				"shifts": 86,
+				"status": "lost"
+			},
+			"scenario": "family_property",
+			"seed": 90,
+			"status": "lost"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": 10126.25,
+				"elapsed_days": 120.0,
+				"net_worth": 61680.84,
+				"net_worth_gain": 4180.84,
+				"rating": 4.1048347360866,
+				"revenue": 7200.0,
+				"runs": 0,
+				"shifts": 86
+			},
+			"policy": "normal",
+			"result": {
+				"cash": 10856.47,
+				"elapsed_days": 93.0,
+				"net_worth": 62020.23,
+				"net_worth_gain": 4520.23,
+				"rating": 4.13956251607012,
+				"revenue": 7200.0,
+				"runs": 0,
+				"score": 3830,
+				"shifts": 67,
+				"status": "won"
+			},
+			"scenario": "family_property",
+			"seed": 91,
+			"status": "won"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": 2364.12,
+				"elapsed_days": 120.0,
+				"net_worth": 53918.71,
+				"net_worth_gain": -3581.29,
+				"rating": -1.0,
+				"revenue": 7200.0,
+				"runs": 0,
+				"shifts": 0
+			},
+			"policy": "idle",
+			"scenario": "family_property",
+			"seed": 89,
+			"status": "lost"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": 4983.57,
+				"elapsed_days": 120.0,
+				"net_worth": 4983.57,
+				"net_worth_gain": 1483.57,
+				"rating": 4.07678862990335,
+				"revenue": 0.0,
+				"runs": 0,
+				"shifts": 86
+			},
+			"policy": "normal",
+			"result": {
+				"cash": 5013.45,
+				"elapsed_days": 96.0,
+				"net_worth": 5013.45,
+				"net_worth_gain": 1513.45,
+				"rating": 4.08877624784197,
+				"revenue": 0.0,
+				"runs": 0,
+				"score": 3179,
+				"shifts": 70,
+				"status": "won"
+			},
+			"scenario": "fresh_restart",
+			"seed": 89,
+			"status": "won"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": 4967.76,
+				"elapsed_days": 120.0,
+				"net_worth": 4967.76,
+				"net_worth_gain": 1467.76,
+				"rating": 4.05290216554043,
+				"revenue": 0.0,
+				"runs": 0,
+				"shifts": 86
+			},
+			"policy": "normal",
+			"result": {
+				"cash": 5035.02,
+				"elapsed_days": 99.0,
+				"net_worth": 5035.02,
+				"net_worth_gain": 1535.02,
+				"rating": 4.04028739727719,
+				"revenue": 0.0,
+				"runs": 0,
+				"score": 3101,
+				"shifts": 71,
+				"status": "won"
+			},
+			"scenario": "fresh_restart",
+			"seed": 90,
+			"status": "won"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": 5002.13,
+				"elapsed_days": 120.0,
+				"net_worth": 5002.13,
+				"net_worth_gain": 1502.13,
+				"rating": 4.1048347360866,
+				"revenue": 0.0,
+				"runs": 0,
+				"shifts": 86
+			},
+			"policy": "normal",
+			"result": {
+				"cash": 5035.66,
+				"elapsed_days": 96.0,
+				"net_worth": 5035.66,
+				"net_worth_gain": 1535.66,
+				"rating": 4.12904832618577,
+				"revenue": 0.0,
+				"runs": 0,
+				"score": 3219,
+				"shifts": 70,
+				"status": "won"
+			},
+			"scenario": "fresh_restart",
+			"seed": 91,
+			"status": "won"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": -3810.0,
+				"elapsed_days": 120.0,
+				"net_worth": -3810.0,
+				"net_worth_gain": -7310.0,
+				"rating": -1.0,
+				"revenue": 0.0,
+				"runs": 0,
+				"shifts": 0
+			},
+			"policy": "idle",
+			"scenario": "fresh_restart",
+			"seed": 89,
+			"status": "lost"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": 36882.91,
+				"elapsed_days": 120.099305555556,
+				"net_worth": 36882.91,
+				"net_worth_gain": 19147.91,
+				"rating": 4.09273147583008,
+				"revenue": 30396.96,
+				"runs": 239,
+				"shifts": 1
+			},
+			"policy": "normal",
+			"result": {
+				"cash": 22847.38,
+				"elapsed_days": 33.0416666666667,
+				"net_worth": 22847.38,
+				"net_worth_gain": 5112.38,
+				"rating": 4.09273147583008,
+				"revenue": 8042.32,
+				"runs": 65,
+				"score": 3991,
+				"shifts": 1,
+				"status": "won"
+			},
+			"scenario": "harbor_cargo",
+			"seed": 89,
+			"status": "won"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": 36540.89,
+				"elapsed_days": 120.095833333333,
+				"net_worth": 36540.89,
+				"net_worth_gain": 18805.89,
+				"rating": -1.0,
+				"revenue": 30120.86,
+				"runs": 240,
+				"shifts": 0
+			},
+			"policy": "normal",
+			"result": {
+				"cash": 22755.85,
+				"elapsed_days": 32.9583333333333,
+				"net_worth": 22755.85,
+				"net_worth_gain": 5020.85,
+				"rating": -1.0,
+				"revenue": 8009.1,
+				"runs": 65,
+				"score": 0,
+				"shifts": 0,
+				"status": "won"
+			},
+			"scenario": "harbor_cargo",
+			"seed": 90,
+			"status": "won"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": 37021.91,
+				"elapsed_days": 120.102777777778,
+				"net_worth": 37021.91,
+				"net_worth_gain": 19286.91,
+				"rating": -1.0,
+				"revenue": 30628.62,
+				"runs": 240,
+				"shifts": 0
+			},
+			"policy": "normal",
+			"result": {
+				"cash": 22863.09,
+				"elapsed_days": 31.0833333333333,
+				"net_worth": 22863.09,
+				"net_worth_gain": 5128.09,
+				"rating": -1.0,
+				"revenue": 8063.66,
+				"runs": 62,
+				"score": 0,
+				"shifts": 0,
+				"status": "won"
+			},
+			"scenario": "harbor_cargo",
+			"seed": 91,
+			"status": "won"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": 10080.0,
+				"elapsed_days": 120.0,
+				"net_worth": 10080.0,
+				"net_worth_gain": -7655.0,
+				"rating": -1.0,
+				"revenue": 0.0,
+				"runs": 0,
+				"shifts": 0
+			},
+			"policy": "idle",
+			"scenario": "harbor_cargo",
+			"seed": 89,
+			"status": "lost"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": 55636.05,
+				"elapsed_days": 120.041666666667,
+				"net_worth": 48860.19,
+				"net_worth_gain": 19160.19,
+				"rating": 4.14830502699531,
+				"revenue": 42333.0,
+				"runs": 0,
+				"shifts": 86
+			},
+			"policy": "normal",
+			"result": {
+				"cash": 48422.33,
+				"elapsed_days": 71.125,
+				"net_worth": 41029.27,
+				"net_worth_gain": 11329.27,
+				"rating": 4.18254802391604,
+				"revenue": 25277.4,
+				"runs": 0,
+				"score": 3882,
+				"shifts": 51,
+				"status": "won"
+			},
+			"scenario": "inherited_cafe",
+			"seed": 89,
+			"status": "won"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": 52718.91,
+				"elapsed_days": 120.041666666667,
+				"net_worth": 45943.05,
+				"net_worth_gain": 16243.05,
+				"rating": 4.1689665963403,
+				"revenue": 38723.0,
+				"runs": 0,
+				"shifts": 86
+			},
+			"policy": "normal",
+			"result": {
+				"cash": 47231.79,
+				"elapsed_days": 75.125,
+				"net_worth": 39838.73,
+				"net_worth_gain": 10138.73,
+				"rating": 4.18291681346407,
+				"revenue": 25283.2,
+				"runs": 0,
+				"score": 3830,
+				"shifts": 55,
+				"status": "won"
+			},
+			"scenario": "inherited_cafe",
+			"seed": 90,
+			"status": "won"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": 60144.68,
+				"elapsed_days": 120.041666666667,
+				"net_worth": 53368.82,
+				"net_worth_gain": 23668.82,
+				"rating": 4.14347224775857,
+				"revenue": 48214.8,
+				"runs": 0,
+				"shifts": 86
+			},
+			"policy": "normal",
+			"result": {
+				"cash": 48527.72,
+				"elapsed_days": 61.125,
+				"net_worth": 41134.66,
+				"net_worth_gain": 11434.66,
+				"rating": 4.13777255778276,
+				"revenue": 25079.8,
+				"runs": 0,
+				"score": 3938,
+				"shifts": 45,
+				"status": "won"
+			},
+			"scenario": "inherited_cafe",
+			"seed": 91,
+			"status": "won"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": 13718.16,
+				"elapsed_days": 120.0,
+				"net_worth": 6942.3,
+				"net_worth_gain": -22757.7,
+				"rating": 1.84059454982831,
+				"revenue": 1564.0,
+				"runs": 0,
+				"shifts": 0
+			},
+			"policy": "idle",
+			"scenario": "inherited_cafe",
+			"seed": 89,
+			"status": "lost"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": 1833.57,
+				"elapsed_days": 120.0,
+				"net_worth": 1833.57,
+				"net_worth_gain": 1333.57,
+				"rating": 4.07678862990335,
+				"revenue": 0.0,
+				"runs": 0,
+				"shifts": 86
+			},
+			"policy": "normal",
+			"result": {
+				"cash": 2083.53,
+				"elapsed_days": 101.0,
+				"net_worth": 2083.53,
+				"net_worth_gain": 1583.53,
+				"rating": 4.08659146256643,
+				"revenue": 0.0,
+				"runs": 0,
+				"score": 3097,
+				"shifts": 73,
+				"status": "won"
+			},
+			"scenario": "part_time_start",
+			"seed": 89,
+			"status": "won"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": 1817.76,
+				"elapsed_days": 120.0,
+				"net_worth": 1817.76,
+				"net_worth_gain": 1317.76,
+				"rating": 4.05290216554043,
+				"revenue": 0.0,
+				"runs": 0,
+				"shifts": 86
+			},
+			"policy": "normal",
+			"result": {
+				"cash": 2048.92,
+				"elapsed_days": 101.0,
+				"net_worth": 2048.92,
+				"net_worth_gain": 1548.92,
+				"rating": 4.02973798448092,
+				"revenue": 0.0,
+				"runs": 0,
+				"score": 3040,
+				"shifts": 73,
+				"status": "won"
+			},
+			"scenario": "part_time_start",
+			"seed": 90,
+			"status": "won"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": 1852.13,
+				"elapsed_days": 120.0,
+				"net_worth": 1852.13,
+				"net_worth_gain": 1352.13,
+				"rating": 4.1048347360866,
+				"revenue": 0.0,
+				"runs": 0,
+				"shifts": 86
+			},
+			"policy": "normal",
+			"result": {
+				"cash": 2015.61,
+				"elapsed_days": 100.0,
+				"net_worth": 2015.61,
+				"net_worth_gain": 1515.61,
+				"rating": 4.11906402558088,
+				"revenue": 0.0,
+				"runs": 0,
+				"score": 3139,
+				"shifts": 72,
+				"status": "won"
+			},
+			"scenario": "part_time_start",
+			"seed": 91,
+			"status": "won"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": -6960.0,
+				"elapsed_days": 120.0,
+				"net_worth": -6960.0,
+				"net_worth_gain": -7460.0,
+				"rating": -1.0,
+				"revenue": 0.0,
+				"runs": 0,
+				"shifts": 0
+			},
+			"policy": "idle",
+			"scenario": "part_time_start",
+			"seed": 89,
+			"status": "lost"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": 508537.32,
+				"elapsed_days": 120.352777777778,
+				"net_worth": 515334.12,
+				"net_worth_gain": 15634.12,
+				"rating": 4.13186936002029,
+				"revenue": 99582.0,
+				"runs": 0,
+				"shifts": 38
+			},
+			"policy": "normal",
+			"result": {
+				"cash": 495314.08,
+				"elapsed_days": 53.0,
+				"net_worth": 504322.68,
+				"net_worth_gain": 4622.67999999999,
+				"rating": 4.00671242099059,
+				"revenue": 40262.0,
+				"runs": 0,
+				"score": 8520,
+				"shifts": 19,
+				"status": "won"
+			},
+			"scenario": "venture_fund",
+			"seed": 89,
+			"status": "won"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": 507733.61,
+				"elapsed_days": 120.202777777778,
+				"net_worth": 514365.6,
+				"net_worth_gain": 14665.6,
+				"rating": 3.955553682839,
+				"revenue": 95633.0,
+				"runs": 0,
+				"shifts": 41
+			},
+			"policy": "normal",
+			"result": {
+				"cash": 496562.09,
+				"elapsed_days": 52.3333333333333,
+				"net_worth": 504906.67,
+				"net_worth_gain": 5206.66999999998,
+				"rating": 3.9410219731785,
+				"revenue": 40188.0,
+				"runs": 0,
+				"score": 8467,
+				"shifts": 21,
+				"status": "won"
+			},
+			"scenario": "venture_fund",
+			"seed": 90,
+			"status": "won"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": 509000.62,
+				"elapsed_days": 120.275,
+				"net_worth": 515693.97,
+				"net_worth_gain": 15993.97,
+				"rating": 4.12142437917215,
+				"revenue": 95789.0,
+				"runs": 0,
+				"shifts": 54
+			},
+			"policy": "normal",
+			"result": {
+				"cash": 495973.22,
+				"elapsed_days": 53.125,
+				"net_worth": 504789.39,
+				"net_worth_gain": 5089.39000000001,
+				"rating": 4.09605070948601,
+				"revenue": 40015.0,
+				"runs": 0,
+				"score": 8613,
+				"shifts": 24,
+				"status": "won"
+			},
+			"scenario": "venture_fund",
+			"seed": 91,
+			"status": "won"
+		},
+		{
+			"balanced": true,
+			"days": 120,
+			"metrics": {
+				"cash": 484540.0,
+				"elapsed_days": 120.0,
+				"net_worth": 486140.0,
+				"net_worth_gain": -13560.0,
+				"rating": -1.0,
+				"revenue": 0.0,
+				"runs": 0,
+				"shifts": 0
+			},
+			"policy": "idle",
+			"scenario": "venture_fund",
+			"seed": 89,
+			"status": "running"
+		}
+	]
+}

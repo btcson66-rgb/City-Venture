@@ -5,7 +5,7 @@ extends Modal
 
 const TABS := [["overview", "Overview", "company"], ["finance", "Finance", "finance"],
 	["operations", "Operations", "parcel"], ["inventory", "Inventory", "inventory"], ["people", "People", "people"],
-	["contracts", "Contracts", "contracts"], ["segments", "Segments", "finance"], ["group", "Group", "company"]]
+	["contracts", "Contracts", "contracts"], ["segments", "Segments", "finance"], ["group", "Group", "company"], ["market", "Market", "world"]]
 
 var terminal := "laptop"
 var tab := "overview"
@@ -102,7 +102,7 @@ func build() -> void:
 	var nav := UIK.vbox(2)
 	nav.custom_minimum_size = Vector2(96, 0)
 	# Industry launchers can outgrow the window; keep the content and every navigation action reachable.
-	var nav_scroll := UIK.scroll(nav, Vector2(108, 272))
+	var nav_scroll := UIK.scroll(nav, Vector2(108, 160))
 	nav_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	row.add_child(nav_scroll)
 	var shown: Array = TABS.duplicate(true)
@@ -134,7 +134,7 @@ func build() -> void:
 		nav.add_child(start)
 	nav.add_child(UIK.sep())
 	content = UIK.vbox(3)
-	var sc := UIK.scroll(content, Vector2(500, 272))
+	var sc := UIK.scroll(content, Vector2(500, 160))
 	sc.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(sc)
 	if not Industries.render_tab(tab, self):
@@ -454,6 +454,10 @@ func _tab_sales() -> void:
 		h1.add_child(UIK.expand())
 		h1.add_child(UIK.label(I18n.t("%s (%d reviews)") % [Fmt.stars(Ecommerce.rating(l)), int(l["rating_n"])], 8, Art.C_GOLD))
 		v.add_child(h1)
+		var research: Dictionary = ShopLife.S()["research"].get(str(l["product"]), {})
+		if not research.is_empty():
+			v.add_child(UIK.label(I18n.t("Market research: Crestline %s")%Fmt.money(float(research["price"])),7,Art.C_SKY))
+			if Clock.now()>=int(research["until"]):v.add_child(UIK.label("✗ Research expired — visit Crestline again.",7,Art.C_MUTED))
 		var h2 := UIK.hbox(4)
 		h2.add_child(UIK.label_tip("Price", "price_elasticity", 7, Art.C_MUTED))
 		var pdn := UIK.button("−", func(): Ecommerce.set_price(l["id"], float(l["price"]) - 1.0); rebuild())
@@ -1453,8 +1457,20 @@ func _tab_logistics() -> void:
 	var head := UIK.hbox(6)
 	content.add_child(head)
 	head.add_child(UIK.title("Logistics", 11, Art.C_GOLD))
-	head.add_child(UIK.label(I18n.t("Van kept at Pier 7 · insurance %s a month · %.0f km driven") % [Fmt.money0(float(Logistics.van_cfg().get("insurance_month", 165))),
+	head.add_child(UIK.label(I18n.t("Van kept at Pier 7 · insurance %s a month · %.0f km driven") % [Fmt.money(float(Logistics.van_cfg().get("insurance_month", 165))),
 		float(s["van"].get("km", 0.0))], 7, Art.C_DIM))
+	if Logistics.has_van():
+		var colors := UIK.hbox(4)
+		content.add_child(colors)
+		colors.add_child(UIK.label("Van body colour", 8, Art.C_MUTED))
+		for c in Logistics.van_cfg().get("body_colors", []):
+			var color_id := str(c["id"])
+			var label := I18n.t(str(c["name"])) + (" ✓" if color_id == Logistics.body_color_id() else "")
+			var btn := UIK.button(label, func():
+				Logistics.set_body_color(color_id)
+				rebuild())
+			btn.name = "VanColor_" + color_id
+			colors.add_child(btn)
 	var g := GridContainer.new()
 	g.columns = 4
 	g.add_theme_constant_override("h_separation", 4)
@@ -1483,12 +1499,12 @@ func _tab_logistics() -> void:
 		var too_late := Clock.now() + int(j["est_min"]) > int(j["by"])   # leaving right now, the best route still arrives after the deadline
 		col.add_child(UIK.label(I18n.t("%d stops · deliver by %s · about %s on the road") % [(j["stops"] as Array).size(), Clock.fmt_short(int(j["by"])),
 			Fmt.duration_min(int(j["est_min"]))] + ("  ·  " + I18n.t("too late to make it if you leave now") if too_late else ""), 7, Art.C_RED if too_late else Art.C_MUTED))
-		row.add_child(UIK.label(Fmt.money0(float(j["pay"])), 9, Art.C_GREEN, true))
+		row.add_child(UIK.label(Fmt.money(float(j["pay"])), 9, Art.C_GREEN, true))
 		var ab := UIK.button("Accept", func():
 			var r := Logistics.accept(jid)
 			if not r["ok"]:
 				UIRoot.toast(I18n.t(str(r["error"])), "warn", "lock")
-			rebuild(), _next_style(not too_late))
+			rebuild(), _next_style(mine.is_empty() and not too_late))
 		ab.name = "Accept_" + jid
 		row.add_child(ab)
 	if not open.is_empty():
@@ -1506,7 +1522,7 @@ func _tab_logistics() -> void:
 		col2.add_child(UIK.label("%s · %s" % [jid2, I18n.t(str(j["client"]))], 8, Art.C_WHITE, true))
 		var late: bool = Clock.now() > int(j["by"])
 		col2.add_child(UIK.label((I18n.t("Past its deadline (%s): the pay is cut") if late else I18n.t("Deliver by %s")) % Clock.fmt_short(int(j["by"])), 7, Art.C_RED if late else Art.C_MUTED))
-		row2.add_child(UIK.label(Fmt.money0(float(j["pay"])), 9, Art.C_GREEN, true))
+		row2.add_child(UIK.label(Fmt.money(float(j["pay"])), 9, Art.C_GREEN, true))
 		var db := UIK.button("Drive it", _drive_run.bind(jid2), _next_style(true))
 		db.name = "Drive_" + jid2
 		row2.add_child(db)
@@ -1532,7 +1548,7 @@ func _tab_logistics() -> void:
 			var failed := str(r["status"]) == "failed"
 			grid.add_child(UIK.label("%s · %s" % [r["id"], I18n.t(str(r["client"]))], 7, Art.C_MUTED))
 			grid.add_child(UIK.label(I18n.t("Cancelled") if failed else (I18n.t("On time") if ok else I18n.t("Late")), 7, Art.C_RED if failed else (Art.C_GREEN if ok else Art.C_GOLD), true))
-			grid.add_child(UIK.label(Fmt.money0(float(r["pay"])), 7, Art.C_GREEN if not failed else Art.C_DIM))
+			grid.add_child(UIK.label(Fmt.money(float(r["pay"])), 7, Art.C_GREEN if not failed else Art.C_DIM))
 			grid.add_child(UIK.label("%.1f km" % float(r["km"]) if not failed else "—", 7, Art.C_WHITE))
 			grid.add_child(UIK.label("%d%%" % int(round(float(r["score"]) * 100.0)) if not failed else "—", 7, Art.C_WHITE))
 	_section_tip("Your own parcels", "own_van_shipping")
@@ -1559,6 +1575,8 @@ func _drive_run(id: String) -> void:
 			rebuild())
 
 
+func _tab_market() -> void:
+	MarketView.render(self)
 func _tab_group() -> void:
 	GroupUI.render(self)
 

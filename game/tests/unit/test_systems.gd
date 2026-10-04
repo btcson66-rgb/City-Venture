@@ -82,7 +82,7 @@ func test_contract_counter_deliver_and_net30() -> void:
 	runner.check(d["ok"], "delivered")
 	runner.check(Ledger.balance(cid, "accounts_receivable") > 1000.0, "invoice sits in AR")
 	var rev := -Ledger.balance(cid, "revenue")
-	runner.check(rev >= 120 * 21.5 - 0.01, "revenue booked on delivery")
+	runner.check(absf(rev-(120*21.5-Tax.vat(120*21.5)))<.011, "net revenue booked on delivery; VAT remains payable")
 	_advance_until(func(): return GameState.data["contracts"][k]["status"] == "paid", 24 * 32)
 	runner.eq(GameState.data["contracts"][k]["status"], "paid", "paid at Net 30")
 	runner.eq(Ledger.balance(cid, "accounts_receivable"), 0.0, "AR cleared")

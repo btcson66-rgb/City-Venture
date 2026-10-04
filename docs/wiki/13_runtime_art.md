@@ -2022,3 +2022,7 @@ sprite keys：`bollard`, `hydrant`, `cone`, `trash_bin`, `parking_meter`, `digit
 
 美術：六個16×16商品sprite已重新製作，附64×64透明高解析版本；六個程序光影／水面特效以SVG輸出原尺寸及4×，動畫格位不變；兩個app圖示識別不變，補4×輸出（4096圖為插值）。251/251測試、53張巡禮0失敗。七街區日夜實拍與商品add_prop渲染比例檢查已交；QA商品擺放不代表遊戲原本的擺設。高解析光罩及陰影載入仍待Claude保持logical尺寸接入。證據：`evidence/20261001_product_quality/README.md`。
 
+
+#28 Okafor sitting expression wiring: current npc_okafor_sit / detail has repeated breathing columns, no distinct sitting emotion columns. Keep its two-frame pose. CharacterRig.set_expression updates the standing npc_detail emotion column; sitting uses the breathing frame unless optional `<npc_detail_base>_sit_expressions` four-column/three-row art exists. Optional pose expression sheet then selects neutral/happy/thinking/surprised independently. No assets changed.
+
+#26：暫停選單 → 設定 → 顯示新增「高解析美術」（預設開），設定僅存於 user://settings.cfg。開／關均採相同設計座標；建築、捷運與車輛細節依素材尺寸缩放，燈光可獨立 fallback。地磚使用 64 px 素材並以 0.25 縮放顯示，每格仍是 16 px，atlas 索引及 8 px 導航格不變；切換清除 Art 與 TileSet 快取並在相同位置重建現有場景。

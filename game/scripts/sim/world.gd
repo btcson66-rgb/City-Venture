@@ -30,7 +30,7 @@ static func is_import(supplier_id: String) -> bool:
 static func cost_mult(supplier_id: String) -> float:
 	if bool(DataDB.supplier(supplier_id).get("shock_exempt", false)):
 		return 1.0
-	return _num("import_cost_mult" if is_import(supplier_id) else "cost_mult", 1.0)
+	return _num("import_cost_mult" if is_import(supplier_id) else "cost_mult", 1.0) * Macro.costs()
 
 
 static func lead_mult(supplier_id: String) -> float:

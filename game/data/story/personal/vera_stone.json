@@ -1,0 +1,88 @@
+{
+ "id": "personal_vera_stone",
+ "npc": "vera_stone",
+ "steps": [
+  {
+   "stage": 0,
+   "title": "Vera Stone: guest review evidence guide · part 1",
+   "detail": "Vera Stone asks for a guest review evidence guide. Their evidence contains an unresolved question. What should the first draft do?",
+   "minutes": 45,
+   "cost": 0,
+   "order": 2,
+   "choices": [
+    {
+     "id": "document",
+     "label": "Document the question and ask for evidence",
+     "correct": true
+    },
+    {
+     "id": "invent",
+     "label": "Invent a confident answer",
+     "correct": false
+    },
+    {
+     "id": "hide",
+     "label": "Hide the unresolved section",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "stage": 1,
+   "title": "Vera Stone: guest review evidence guide · part 2",
+   "detail": "The guest review evidence guide now has conflicting notes. Vera Stone wants a version that other people can check. How do you resolve the conflict?",
+   "minutes": 60,
+   "cost": 10,
+   "order": 0,
+   "choices": [
+    {
+     "id": "compare",
+     "label": "Compare sources and record what remains uncertain",
+     "correct": true
+    },
+    {
+     "id": "latest",
+     "label": "Keep the newest note without checking",
+     "correct": false
+    },
+    {
+     "id": "delete",
+     "label": "Delete both notes to make the file look complete",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "stage": 2,
+   "title": "Vera Stone: guest review evidence guide · part 3",
+   "detail": "Vera Stone is ready to introduce a paying client for the guest review evidence guide. The client asks for a promise you cannot verify. What do you put in the handover?",
+   "minutes": 90,
+   "cost": 20,
+   "order": 1,
+   "choices": [
+    {
+     "id": "scope",
+     "label": "State the agreed scope, limits and evidence",
+     "correct": true
+    },
+    {
+     "id": "guarantee",
+     "label": "Guarantee the result to win the introduction",
+     "correct": false
+    },
+    {
+     "id": "omit",
+     "label": "Leave the risks out of the handover",
+     "correct": false
+    }
+   ]
+  }
+ ],
+ "referral": {
+  "client": "Vera Stone referral",
+  "detail": "A referred client commissions a documented guest review evidence guide. Complete the agreed work; no revenue is earned merely for knowing Vera Stone.",
+  "price": 945,
+  "cost": 335,
+  "minutes": 240
+ }
+}
