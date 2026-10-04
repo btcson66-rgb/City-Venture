@@ -255,8 +255,10 @@ func _prepare_orders(n: int) -> Dictionary:
 	# The saturation fixture counts one-unit orders; random multi-unit baskets (#113) would exhaust the stock early.
 	DataDB.economy["ecommerce"]["basket_chance"] = 0.0
 	DataDB.economy["ecommerce"]["quantity_chance"] = 0.0
-	Ecommerce._add_stock("riverside_studio", "phone_stand", n, 5.0, 0.02)
-	Ledger.post(ent, "Stress fixture stock", [{"acct": "inventory", "dr": n * 5.0}, {"acct": "equity", "cr": n * 5.0}], {"type": "opening"})
+	# Support agents replace some returned parcels from stock, so the fixture restocks a little above the order count.
+	var stock := n + n / 5
+	Ecommerce._add_stock("riverside_studio", "phone_stand", stock, 5.0, 0.02)
+	Ledger.post(ent, "Stress fixture stock", [{"acct": "inventory", "dr": stock * 5.0}, {"acct": "equity", "cr": stock * 5.0}], {"type": "opening"})
 	var listing := Ecommerce.listing_for("phone_stand")
 	if listing.is_empty():
 		var result := Ecommerce.create_listing("phone_stand", 16.0, "self")
