@@ -123,13 +123,18 @@ func _fit_panel() -> void:
 		return
 	var available := get_viewport_rect().size
 	var desired := Vector2(panel_size.x, panel_size.y if panel_size.y > 0.0 else 280.0)
-	panel.size = desired.min((available - Vector2(16, 16)).max(Vector2(100, 80)))
-	panel.position = (available - panel.size) / 2.0
+	var target := desired.min((available - Vector2(16, 16)).max(Vector2(100, 80)))
+	if panel.size != target:
+		panel.size = target
+	var spot := (available - panel.size) / 2.0
+	if panel.position != spot:
+		panel.position = spot
 
 
-## Panels refit on resize, preference change and rebuild; subclasses that animate their own panel override this.
+## Some modals resize their own panel after building (decision cards, pinned footers); the guarded fit puts it back
+## without touching the layout when nothing changed.
 func _process(_delta: float) -> void:
-	pass
+	_fit_panel()
 
 
 func close() -> void:
