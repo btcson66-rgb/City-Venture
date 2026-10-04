@@ -16,17 +16,26 @@ const PACK_MIN := 2000
 const PACK_MAX_BYTES := 512 * 1024 * 1024
 
 
+static func _sum(bytes: PackedByteArray) -> String:
+	var hasher := HashingContext.new()
+	hasher.start(HashingContext.HASH_SHA256)
+	hasher.update(bytes)
+	return hasher.finish().hex_encode()
+
+
 static func _packed(value: Variant) -> Dictionary:
 	var bytes := var_to_bytes(value).compress(FileAccess.COMPRESSION_GZIP)
-	return {"packed": 1, "n": value.size(), "z": Marshalls.raw_to_base64(bytes)}
+	return {"packed": 1, "n": value.size(), "sum": _sum(bytes), "z": Marshalls.raw_to_base64(bytes)}
 
 
-static func _unpacked(blob: Variant) -> Variant:
+## Value of a packed blob (null when damaged). `verified[name]` records that its checksum matched what the game wrote.
+static func _unpacked(blob: Variant, verified := {}, name := "") -> Variant:
 	if not blob is Dictionary or not blob.has("packed"):
 		return blob
 	if not blob.get("z") is String: return null
 	var raw := Marshalls.base64_to_raw(blob["z"])
 	if raw.is_empty(): return null
+	verified[name] = blob.get("sum", "") == _sum(raw)
 	var bytes := raw.decompress_dynamic(PACK_MAX_BYTES, FileAccess.COMPRESSION_GZIP)
 	if bytes.is_empty(): return null
 	return bytes_to_var(bytes)
@@ -61,25 +70,26 @@ static func pack(data: Dictionary) -> Dictionary:
 
 
 ## In place, on freshly parsed data. Returns false when a blob is damaged.
-static func unpack(data: Dictionary) -> bool:
+static func unpack(data: Dictionary, verified := {}) -> bool:
 	if data.get("schedule") is Dictionary:
-		var schedule = _unpacked(data["schedule"])
+		var schedule = _unpacked(data["schedule"], verified, "schedule")
 		if not schedule is Array: return false
 		data["schedule"] = schedule
 	if data.get("ledger") is Dictionary and data["ledger"].get("journal") is Dictionary:
-		var journal = _unpacked(data["ledger"]["journal"])
+		var journal = _unpacked(data["ledger"]["journal"], verified, "journal")
 		if not journal is Array: return false
 		data["ledger"]["journal"] = journal
 	if data.get("ecommerce") is Dictionary and data["ecommerce"].get("orders") is Dictionary and data["ecommerce"]["orders"].has("packed"):
-		var orders = _unpacked(data["ecommerce"]["orders"])
+		var orders = _unpacked(data["ecommerce"]["orders"], verified, "orders")
 		if not orders is Dictionary: return false
 		data["ecommerce"]["orders"] = orders
 	if data.get("company_contexts") is Dictionary:
-		for view in data["company_contexts"].values():
+		for id in data["company_contexts"]:
+			var view = data["company_contexts"][id]
 			if not view is Dictionary or not view.get("states") is Dictionary: continue
 			var eco = view["states"].get("ecommerce")
 			if eco is Dictionary and eco.get("orders") is Dictionary and eco["orders"].has("packed"):
-				var orders = _unpacked(eco["orders"])
+				var orders = _unpacked(eco["orders"], verified, "orders:" + str(id))
 				if not orders is Dictionary: return false
 				eco["orders"] = orders
 	return true
@@ -93,7 +103,10 @@ static func _truthy(v) -> bool:
 	return true
 
 
-static func decode(text: String) -> Dictionary:
+## `trusted` is for files this game wrote to its own save folder: a packed collection whose checksum matches is
+## exactly what the game packed, so its records are not re-validated one by one (that was half the load time).
+## Imports and anything else keep the full check.
+static func decode(text: String, trusted := false) -> Dictionary:
 	var invalid := {"ok": false, "error": "This is not a City Venture save."}
 	if text.length() > MAX_TEXT: return invalid
 	var parser := JSON.new()
@@ -104,7 +117,9 @@ static func decode(text: String) -> Dictionary:
 		return {"ok": false, "error": "This save comes from a newer version of City Venture."}
 	if float(payload["format"]) != GameState.SAVE_FORMAT or not payload.get("data") is Dictionary or not payload.get("summary") is Dictionary: return invalid
 	var data: Dictionary = payload["data"]
-	if not unpack(data): return invalid
+	var verified := {}
+	if not unpack(data, verified): return invalid
+	var skip := func(name: String) -> bool: return trusted and bool(verified.get(name, false))
 	var tpl := GameState.template()
 	if data.get("company") is String: tpl["company"]=""
 	for key in ["meta", "player", "clock", "entities", "ledger", "ecommerce", "contracts", "schedule", "events", "story", "flags", "rng"]:
@@ -133,6 +148,7 @@ static func decode(text: String) -> Dictionary:
 	for entity in data["entities"].values():
 		if not _record(entity, {"id": "", "name": "", "kind": "", "bank_account": false}): return invalid
 	for pair in [["listings", {"id": "", "product": "", "price": 0, "active": false}], ["orders", {"id": "", "product": "", "entity": "", "qty": 0, "status": "", "unit_price": 0}], ["purchase_orders", {"id": "", "product": "", "entity": "", "qty": 0, "status": "", "total": 0, "eta": 0}]]:
+		if pair[0] == "orders" and skip.call("orders"): continue
 		for record in data["ecommerce"].get(pair[0], {}).values():
 			if not _record(record, pair[1]): return invalid
 	for inventory in data["ecommerce"].get("inventory", {}).values():
@@ -148,7 +164,7 @@ static func decode(text: String) -> Dictionary:
 	if not data["flags"] is Dictionary: return invalid
 	for key in data["flags"].keys():       # an older or hand-edited save may hold 1/0/"yes": read it as the truth value, don't reject the save
 		data["flags"][key] = _truthy(data["flags"][key])
-	for entry in data["schedule"]:
+	for entry in ([] if skip.call("schedule") else data["schedule"]):
 		if not _record(entry, {"t": 0, "kind": "", "p": {}}): return invalid
 	var personal = data.get("living",{}).get("personal_assets",null)
 	if personal!=null:
@@ -171,21 +187,33 @@ static func decode(text: String) -> Dictionary:
 		for visit in personal["visits"]:
 			if not _record(visit,{"npc":"","day":0,"home":""}):return invalid
 	var totals := {}
-	for entry in data["ledger"]["journal"]:
-		if not _record(entry, {"n": 0, "t": 0, "entity": "", "memo": "", "lines": []}): return invalid
-		if not data["entities"].has(entry["entity"]): return invalid
+	var entry_shape := {"n": 0, "t": 0, "entity": "", "memo": "", "lines": []}
+	var line_shape := {"acct": ""}
+	var entities: Dictionary = data["entities"]
+	var journal_checked: bool = skip.call("journal")
+	for entry in ([] if journal_checked else data["ledger"]["journal"]):
+		if not _record(entry, entry_shape): return invalid
+		var who: String = entry["entity"]
+		if not entities.has(who): return invalid
 		var difference := 0.0
-		if not totals.has(entry["entity"]): totals[entry["entity"]] = {}
+		if not totals.has(who): totals[who] = {}
+		var mine: Dictionary = totals[who]
 		for line in entry["lines"]:
-			if not _record(line, {"acct": ""}): return invalid
-			for side in ["dr", "cr"]:
-				if not _numeric(line.get(side, 0)): return invalid
-			var delta := float(line.get("dr", 0)) - float(line.get("cr", 0))
+			if not _record(line, line_shape): return invalid
+			var dr = line.get("dr", 0)
+			var cr = line.get("cr", 0)
+			if not _numeric(dr) or not _numeric(cr): return invalid
+			var delta := float(dr) - float(cr)
 			difference += delta
-			totals[entry["entity"]][line["acct"]] = float(totals[entry["entity"]].get(line["acct"], 0)) + delta
+			var acct: String = line["acct"]
+			mine[acct] = float(mine.get(acct, 0)) + delta
 		if absf(difference) > 0.011: return invalid
 	for entity in data["ledger"]["balances"]:
 		if not data["ledger"]["balances"][entity] is Dictionary: return invalid
+		if journal_checked:
+			for account in data["ledger"]["balances"][entity]:
+				if not _numeric(data["ledger"]["balances"][entity][account]): return invalid
+			continue
 		for account in data["ledger"]["balances"][entity]:
 			var amount = data["ledger"]["balances"][entity][account]
 			if not _numeric(amount) or absf(float(amount) - float(totals.get(entity, {}).get(account, 0))) > 0.02: return invalid
@@ -196,22 +224,33 @@ static func decode(text: String) -> Dictionary:
 
 
 static func _numeric(value: Variant) -> bool:
-	return typeof(value) in [TYPE_INT, TYPE_FLOAT] and is_finite(float(value))
+	var kind := typeof(value)
+	return (kind == TYPE_INT or kind == TYPE_FLOAT) and is_finite(float(value))
 
 
 static func _shape(value: Variant, expected: Variant) -> bool:
-	if typeof(expected) in [TYPE_INT, TYPE_FLOAT]: return _numeric(value)
-	if typeof(value) != typeof(expected): return false
-	if value is Dictionary:
+	var want := typeof(expected)
+	if want == TYPE_INT or want == TYPE_FLOAT: return _numeric(value)
+	if typeof(value) != want: return false
+	if want == TYPE_DICTIONARY:
 		for key in expected:
 			if value.has(key) and not _shape(value[key], expected[key]): return false
 	return true
 
 
+## Hot in big saves (every order, journal entry and scheduled item): scalars are compared inline.
 static func _record(value: Variant, expected: Dictionary) -> bool:
-	if not value is Dictionary: return false
+	if typeof(value) != TYPE_DICTIONARY: return false
 	for key in expected:
-		if not value.has(key) or not _shape(value[key], expected[key]): return false
+		if not value.has(key): return false
+		var want = expected[key]
+		var kind := typeof(want)
+		var got = value[key]
+		if kind == TYPE_INT or kind == TYPE_FLOAT:
+			var have := typeof(got)
+			if (have != TYPE_INT and have != TYPE_FLOAT) or not is_finite(float(got)): return false
+		elif typeof(got) != kind: return false
+		elif kind == TYPE_DICTIONARY and not _shape(got, want): return false
 	return true
 
 

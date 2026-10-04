@@ -36,4 +36,13 @@ func _run() -> void:
 	GameState.unpack_rng()
 	EventBus.state_loaded.emit()
 	print("LOAD unpack+state_loaded %.0f ms" % [(Time.get_ticks_usec() - t) / 1000.0])
+	# The real entry point, twice: the second load also frees the first load's state, as loading over a running game does.
+	var dir := "user://loadprobe"
+	DirAccess.make_dir_recursive_absolute(dir)
+	SaveSystem.DIR = dir
+	DirAccess.copy_absolute(path, dir.path_join("slot_98.json"))
+	for round in 2:
+		t = Time.get_ticks_usec()
+		var ok := SaveSystem.load_data(98)
+		print("LOAD load_data #%d %.0f ms ok=%s" % [round + 1, (Time.get_ticks_usec() - t) / 1000.0, str(ok)])
 	get_tree().quit()

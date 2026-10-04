@@ -240,6 +240,14 @@ func test_big_journal_and_schedule_round_trip_through_packed_saves() -> void:
 	# A damaged or hand-edited blob is rejected, never half loaded.
 	parsed["data"]["ledger"]["journal"]["z"] = "AAAA"
 	runner.check(not SaveSystem.validate_text(JSON.stringify(parsed))["ok"], "damaged blob is rejected")
+	# Local saves skip the per-record check only for blobs whose checksum matches what the game wrote.
+	runner.check(SaveSystem.validate_text(text, true)["ok"], "own save loads on the trusted path")
+	var forged: Dictionary = JSON.parse_string(text)
+	var edited: Array = SaveCodec._unpacked(forged["data"]["ledger"]["journal"])
+	edited[7]["lines"][0]["dr"] = float(edited[7]["lines"][0]["dr"]) + 50.0
+	forged["data"]["ledger"]["journal"] = SaveCodec._packed(edited)
+	forged["data"]["ledger"]["journal"]["sum"] = "not the game's checksum"
+	runner.check(not SaveSystem.validate_text(JSON.stringify(forged), true)["ok"], "a blob that fails its checksum is fully validated even on the trusted path")
 	# An edited ledger line still fails the same balance check as plain JSON.
 	var tampered: Dictionary = JSON.parse_string(text)
 	var journal: Array = SaveCodec._unpacked(tampered["data"]["ledger"]["journal"])

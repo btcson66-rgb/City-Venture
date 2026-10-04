@@ -168,7 +168,7 @@ func summary(slot: int) -> Dictionary:
 	var hit: Dictionary = _summary_cache.get(slot, {})
 	if not hit.is_empty() and int(hit["mt"]) == mt:
 		return hit["sm"]
-	var result := validate_text(read_text(_path(slot)))
+	var result := validate_text(read_text(_path(slot)), true)
 	var sm: Dictionary = result["payload"].get("summary", {}) if result["ok"] else {}
 	_summary_cache[slot] = {"mt": mt, "sm": sm}
 	return sm
@@ -247,7 +247,7 @@ static func _restore_lean(d: Dictionary) -> void:
 func load_data(slot: int) -> bool:
 	if not has_save(slot):
 		return false
-	var result := validate_text(read_text(_path(slot)))
+	var result := validate_text(read_text(_path(slot)), true)
 	if not result["ok"]:
 		last_error = result["error"]
 		return false
@@ -313,8 +313,8 @@ static func _fill_missing(d: Dictionary, tpl: Dictionary) -> void:
 
 
 ## Validate without changing the running game; migrations run only on the decoded copy.
-func validate_text(text: String) -> Dictionary:
-	var result := SaveCodec.decode(text)
+func validate_text(text: String, trusted := false) -> Dictionary:
+	var result := SaveCodec.decode(text, trusted)
 	if result["ok"]:
 		result["payload"]["data"] = _migrate(result["payload"]["data"])
 	return result
@@ -347,7 +347,7 @@ func _atomic_write(path: String, text: String, rotate := false) -> bool:
 func recovery_index(slot: int) -> int:
 	for index in [1, 2, 3]:
 		var path := _path(slot).trim_suffix(".json") + ".bak%d" % index
-		if FileAccess.file_exists(path) and validate_text(read_text(path))["ok"]:
+		if FileAccess.file_exists(path) and validate_text(read_text(path), true)["ok"]:
 			return index
 	return -1
 
