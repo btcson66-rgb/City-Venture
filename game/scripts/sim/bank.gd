@@ -88,7 +88,7 @@ static func lending_basis() -> Dictionary:
 		age = int((Clock.now() - int(GameState.data["entities"][cid].get("founded", 0))) / Clock.DAY)
 		gp = maxf(0.0, float(MonthClose.compute(cid, Clock.now() - 30 * Clock.DAY, Clock.now())["gross_profit"]))
 		ar = maxf(0.0, Ledger.balance(cid, "accounts_receivable") + Ledger.balance(cid, "marketplace_balance"))
-		stock = maxf(0.0, Ledger.balance(cid, "inventory") + Ledger.balance(cid, "inventory_in_transit"))
+		stock = maxf(0.0, Ledger.balance(cid, "inventory") + Ledger.balance(cid, "inventory_in_transit")) + TradeIndustry.paid_cargo_assets(cid)
 		# Cars hold value better than general stock: move them out of the 50% bucket (rental fleet is already in operating assets).
 		vehicle_stock = minf(stock, Automotive.stock_cost())
 		stock -= vehicle_stock

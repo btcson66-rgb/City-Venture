@@ -211,5 +211,24 @@
  "home_import_rates": {
   "electronics": 0.04,
   "household": 0.06
+ },
+ "execution": {
+  "registration_fee": 200,
+  "contract_threshold": 3,
+  "capacity_period_days": 30,
+  "maximum_delay_days": 14,
+  "supplier_failure_risk": 0.03,
+  "supplier_return_fraction": 0.5,
+  "office_rent_month": 850,
+  "warehouse_fee": 6000,
+  "agency_fee": 2500
+ },
+ "forward": {
+  "fixed_fee": 5,
+  "fee_rates": {
+   "30": 0.008,
+   "60": 0.015
+  },
+  "maximum_notional": 10000
  }
 }

@@ -51,7 +51,7 @@ static func available_side_stories() -> Array:
 static func start_side_story(id: String) -> bool:
 	if not side_available(id):
 		return false
-	side_progress()[id] = {"company": GameState.company_id(), "status": "active", "skipped": false}
+	side_progress()[id] = {"company": GameState.company_id(), "status": "active", "skipped": false, "started":Clock.now()}
 	_advance_side_story(id)
 	check()
 	return true
@@ -189,6 +189,7 @@ static func check() -> void:
 	if _checking or not GameState.has_game():
 		return
 	_checking = true   # on_complete can start another chapter; the outer loop drains it
+	IndustryGuidance.check()
 	_check_all()
 	_checking = false   # cleared out here, so a script error inside can never leave the story stuck
 
@@ -208,7 +209,7 @@ static func _check_all() -> void:
 			for o in side_stories().get(id, {}).get("objectives", []):
 				St()["active"].erase(o["id"])
 			run_actions(side_stories().get(id, {}).get("on_unavailable", []))
-		else:
+		elif str(p.get("company",""))==GameState.company_id():
 			_advance_side_story(str(id))
 	# saves that finished the June sandbox before chapters 4–6 existed carry on into Chapter 4
 	if St().get("chapter", "") == "ch3_open_for_business" and "goal_month" in St()["done"] and not chapter_def("ch4_growing_pains").is_empty():
@@ -237,6 +238,8 @@ static func _check_all() -> void:
 		for id in St()["active"].duplicate():
 			last_phase = str(id)
 			var d := objective_def(id)
+			var side_id: String=d.get("_side_story","")
+			if side_id!="" and str(side_progress().get(side_id,{}).get("company",""))!=GameState.company_id():continue
 			var conds: Array = d.get("complete_when", [])
 			if conds.is_empty():
 				continue

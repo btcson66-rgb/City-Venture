@@ -1,0 +1,55 @@
+{
+ "id": "meridian_trade_desk",
+ "name": "Meridian Trade Desk",
+ "district": "financial",
+ "type": "office",
+ "category": "Services",
+ "status": "active",
+ "hours": {
+  "open": "08:00",
+  "close": "20:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "meridian_trade_desk",
+  "fallback": "nexus_cowork",
+  "x": 1000,
+  "sign": "MERIDIAN TRADE DESK"
+ },
+ "interior": {
+  "size": [
+   12,
+   8
+  ],
+  "floor": "wood",
+  "wall": "plaster_warm",
+  "ambient": "office",
+  "props": [],
+  "interactables": [
+   {
+    "id": "lease",
+    "at": [
+     60,
+     80
+    ],
+    "label": "Lease Meridian Trade Desk",
+    "action": "lease_property",
+    "params": {
+     "property": "meridian_trade_office"
+    }
+   },
+   {
+    "id": "trade",
+    "at": [
+     150,
+     80
+    ],
+    "label": "Open Trade Desk",
+    "action": "trade_open",
+    "params": {}
+   }
+  ],
+  "npc_spots": {}
+ },
+ "enterable": true
+}
