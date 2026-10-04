@@ -1,0 +1,40 @@
+{
+ "id": "manufacturing_cancel",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:manufacturing_active"
+  ],
+  "chance": 0.025,
+  "cooldown_days": 28,
+  "once": false,
+  "earliest_day": 4
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "lena_park",
+  "title": "OEM client cancellation",
+  "icon": "warning",
+  "lines": [
+   "Keep at most the incurred production cost from the deposit; refund the rest."
+  ]
+ },
+ "choices": [
+  {
+   "id": "retain",
+   "label": "Keep documented production costs",
+   "detail": "Keep at most the incurred production cost from the deposit; refund the rest.",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "manufacturing",
+     "kind": "cancel",
+     "retain": true
+    }
+   ],
+   "outcome": "The factory ledger and schedule have been updated."
+  }
+ ]
+}

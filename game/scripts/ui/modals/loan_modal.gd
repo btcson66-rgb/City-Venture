@@ -21,11 +21,12 @@ func _init(with_officer := false) -> void:
 func build() -> void:
 	var top := UIK.hbox(8)
 	body.add_child(top)
-	top.add_child(UIK.label(I18n.t("Credit score %d · %s") % [Bank.credit(), I18n.t(Bank.credit_band())], 9,
+	top.add_child(UIK.label(I18n.t("Credit score %d points · %s") % [Bank.credit(), I18n.t(Bank.credit_band())], 9,
 		Art.C_GREEN if Bank.credit() >= 690 else (Art.C_GOLD if Bank.credit() >= 620 else Art.C_RED), true))
 	top.add_child(UIK.tip("loan_eligibility"))
+	top.add_child(UIK.tip("credit_history"))
 	top.add_child(UIK.expand())
-	top.add_child(UIK.label(I18n.t("Base rate %s") % Fmt.pct(Bank.base_rate(), 1), 7, Art.C_MUTED))
+	top.add_child(UIK.label_tip(I18n.t("Base rate %s") % Fmt.pct(Bank.base_rate(), 1), "interest_rate", 7, Art.C_MUTED))
 	var cols := UIK.hbox(10)
 	body.add_child(UIK.scroll(cols, Vector2(548, 215)))
 	var left := UIK.vbox(3)
@@ -49,7 +50,7 @@ func build() -> void:
 			elif requirement["id"] == "age":
 				row.add_child(UIK.wrap(I18n.t("Current %d days · required %d days · %d more days") % [int(requirement["value"]), int(requirement["need"]), int(requirement["gap"])], 7, Art.C_WHITE, 240))
 			elif not requirement["id"] in ["company", "account", "arrears"]:
-				row.add_child(UIK.wrap(I18n.t("Current %s · required %s · gap %s") % [str(requirement["value"]), str(requirement["need"]), str(requirement["gap"])], 7, Art.C_WHITE, 240))
+				row.add_child(UIK.wrap(I18n.t("Current %s · required %s · gap %s") % [I18n.t("%d points") % int(requirement["value"]), I18n.t("%d points") % int(requirement["need"]), I18n.t("%d points") % int(requirement["gap"])], 7, Art.C_WHITE, 240))
 			row.add_child(UIK.wrap(requirement["hint_action"], 7, Art.C_SKY, 240))
 		left.add_child(UIK.label("WHAT YOUR BOOKS SUPPORT", 7, Art.C_DIM, true))
 		for part in Bank.lending_basis()["parts"]:
@@ -59,7 +60,7 @@ func build() -> void:
 		for r in o["reasons"]:
 			left.add_child(UIK.kv(str(r[0]), Fmt.money0(float(r[1])), Art.C_WHITE if float(r[1]) >= 0 else Art.C_RED, 7))
 		left.add_child(UIK.kv("Up to", Fmt.money0(float(o["max"])), Art.C_GREEN, 9, true))
-		left.add_child(UIK.kv("Interest (APR)", Fmt.pct(float(o["apr"]), 1), Art.C_GOLD, 8))
+		left.add_child(UIK.kv_tip("Interest (APR)", Fmt.pct(float(o["apr"]), 1), "interest_rate", Art.C_GOLD, 8))
 		var amt := _amount(o)
 		var ah := UIK.hbox(3)
 		left.add_child(ah)
@@ -74,8 +75,8 @@ func build() -> void:
 			tb.name = "Term_%d" % m
 			th.add_child(tb)
 		var pmt := Bank.monthly_payment(amt, months)
-		left.add_child(UIK.kv("Monthly payment", Fmt.money(pmt), Art.C_WHITE, 8, true))
-		left.add_child(UIK.kv("Total interest", Fmt.money(pmt * months - amt), Art.C_MUTED, 7))
+		left.add_child(UIK.kv_tip("Monthly payment", Fmt.money0(pmt), "amortization", Art.C_WHITE, 8, true))
+		left.add_child(UIK.kv("Total interest", Fmt.money0(pmt * months - amt), Art.C_MUTED, 7))
 		if officer and Bank.at_bank() and Bank.marcus_on_duty():
 			var tk := UIK.button(I18n.t("Borrow %s") % Fmt.money0(amt), _take, "primary")
 			tk.name = "TakeLoan"
@@ -114,8 +115,8 @@ func build() -> void:
 		p.add_child(v)
 		var status_col := Art.C_GREEN if l["status"] == "active" else Art.C_RED
 		v.add_child(UIK.label("%s · %s" % [l["id"], CompanyOS.status_text(l["status"])], 8, status_col, true))
-		v.add_child(UIK.kv("Balance", Fmt.money(float(l["balance"])), Art.C_WHITE, 7))
-		v.add_child(UIK.kv("Payment", I18n.t("%s on %s") % [Fmt.money(float(l["payment"])), Clock.fmt_date(int(l["next"]))], Art.C_MUTED, 7))
+		v.add_child(UIK.kv("Balance", Fmt.money0(float(l["balance"])), Art.C_WHITE, 7))
+		v.add_child(UIK.kv("Payment", I18n.t("%s on %s") % [Fmt.money0(float(l["payment"])), Clock.fmt_date(int(l["next"]))], Art.C_MUTED, 7))
 		var lid: String = l["id"]
 		var rh := UIK.hbox(3)
 		v.add_child(rh)

@@ -131,10 +131,10 @@ static func accept(cid: String) -> Dictionary:
 		var up := snappedf(float(c["total"]) * float(c["upfront_rate"]), 0.01)
 		c["upfront_paid"] = up
 		Ledger.post(c["seller"], I18n.t("Deposit received from %s (%s)") % [GameState.entity_name(c["buyer"]), cid],
-			[{"acct": "cash", "dr": up}, {"acct": "deferred_revenue", "cr": up}], {"type": "contract", "id": cid})
+			Jobs.deposit_lines(up), {"type": "contract", "id": cid})
 	Sim.schedule(int(c["due"]), "con.due", {"id": cid})
 	_tag(c, "accepted")
-	GameState.timeline(I18n.t("Signed contract %s with %s: %s.") % [cid, GameState.entity_name(c["buyer"]), Fmt.money(c["total"])], "business")
+	GameState.timeline(I18n.t("Signed contract %s with %s: %s.") % [cid, GameState.entity_name(c["buyer"]), Fmt.money0(c["total"])], "business")
 	EventBus.contract_changed.emit(cid)
 	return {"ok": true}
 
@@ -250,8 +250,7 @@ static func deliver(cid: String) -> Dictionary:
 	var penalty := snappedf(total * float(c["penalty_rate"]), 0.01) if late else 0.0
 	var freight := float(DataDB.shipping()["b2b_freight"]["flat_fee"])
 	var ent: String = c["seller"]
-	var lines := [
-		{"acct": "accounts_receivable", "dr": total - up}, {"acct": "deferred_revenue", "dr": up}, {"acct": "revenue", "cr": total},
+	var lines := Jobs.invoice_lines(total, up) + [
 		{"acct": "cogs", "dr": cogs}, {"acct": "inventory", "cr": cogs},
 		{"acct": "exp:shipping", "dr": freight}, {"acct": "cash", "cr": freight}]
 	if penalty > 0:
@@ -262,7 +261,7 @@ static func deliver(cid: String) -> Dictionary:
 	c["delivered"] = Clock.now()
 	c["receivable"] = snappedf(total - up - penalty, 0.01)
 	c["pay_due"] = Clock.now() + int(c["payment_terms_days"]) * Clock.DAY
-	c["history"].append({"t": Clock.now(), "by": ent, "text": I18n.t("Delivered%s. Invoice %s due in %d days.") % [I18n.t(" late (penalty %s)") % Fmt.money(penalty) if late else "", Fmt.money(c["receivable"]), int(c["payment_terms_days"])]})
+	c["history"].append({"t": Clock.now(), "by": ent, "text": I18n.t("Delivered%s. Invoice %s due in %d days.") % [I18n.t(" late (penalty %s)") % Fmt.money0(penalty) if late else "", Fmt.money0(c["receivable"]), int(c["payment_terms_days"])]})
 	Sim.cancel("con.due", "id", cid)
 	Sim.schedule(int(c["pay_due"]), "con.pay", {"id": cid})
 	GameState.inc_stat("contracts_delivered")
@@ -299,9 +298,9 @@ static func handle(kind: String, p: Dictionary) -> void:
 				Ledger.post(c["seller"], I18n.t("Invoice paid by %s (%s)") % [GameState.entity_name(c["buyer"]), c["id"]],
 					[{"acct": "cash", "dr": amt}, {"acct": "accounts_receivable", "cr": amt}], {"type": "contract", "id": c["id"]})
 				c["status"] = "paid"
-				c["history"].append({"t": Clock.now(), "by": c["buyer"], "text": I18n.t("Paid %s.") % Fmt.money(amt)})
+				c["history"].append({"t": Clock.now(), "by": c["buyer"], "text": I18n.t("Paid %s.") % Fmt.money0(amt)})
 				_tag(c, "paid")
-				EventBus.notify.emit(I18n.t("%s paid invoice %s: %s") % [GameState.entity_name(c["buyer"]), c["id"], Fmt.money(amt)], "good", "cash")
+				EventBus.notify.emit(I18n.t("%s paid invoice %s: %s") % [GameState.entity_name(c["buyer"]), c["id"], Fmt.money0(amt)], "good", "cash")
 				EventBus.contract_changed.emit(c["id"])
 
 
@@ -317,7 +316,7 @@ static func early_payment(cid: String, rate := 0.03) -> Dictionary:
 	Ledger.post(c["seller"], I18n.t("Early payment from %s (%s), %s discount") % [GameState.entity_name(c["buyer"]), cid, Fmt.pct(rate)],
 		[{"acct": "cash", "dr": amt - disc}, {"acct": "exp:bank_fees", "dr": disc}, {"acct": "accounts_receivable", "cr": amt}], {"type": "contract", "id": cid})
 	c["status"] = "paid"
-	c["history"].append({"t": Clock.now(), "by": c["buyer"], "text": I18n.t("Paid early: %s (discount %s).") % [Fmt.money(amt - disc), Fmt.money(disc)]})
+	c["history"].append({"t": Clock.now(), "by": c["buyer"], "text": I18n.t("Paid early: %s (discount %s).") % [Fmt.money0(amt - disc), Fmt.money0(disc)]})
 	Sim.cancel("con.pay", "id", cid)
 	GameState.set_flag("early_payment_agreed")
 	_tag(c, "paid")

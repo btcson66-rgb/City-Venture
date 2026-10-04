@@ -1,0 +1,22 @@
+{
+ "id": "rafael_costa_intro",
+ "with": "rafael_costa",
+ "nodes": {
+  "start": [
+   {
+    "who": "rafael_costa",
+    "text": "More electricians mean more crew-days each day, but they are paid every week even when rain stops the work. Hire me from the console once you have the warehouse."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Open Energy Console",
+      "next": "end"
+     }
+    ]
+   }
+  ],
+  "end": []
+ }
+}

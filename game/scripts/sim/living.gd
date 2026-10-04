@@ -53,7 +53,7 @@ static func pay_home_rent() -> void:
 		GameState.add_message("landlord", I18n.t("Rent bounced. I've added the $%d late fee. Please sort it out this week.") % int(cfg().get("late_rent_fee", 75)))
 		EventBus.notify.emit("Rent paid into overdraft. Late fee charged.", "bad", "home")
 	else:
-		EventBus.notify.emit(I18n.t("Rent paid: %s") % Fmt.money(rent), "info", "home")
+		EventBus.notify.emit(I18n.t("Rent paid: %s") % Fmt.money0(rent), "info", "home")
 	GameState.inc_stat("rent_paid")
 
 
@@ -82,7 +82,7 @@ static func lease(pid: String) -> Dictionary:
 	var rent := float(prop["monthly_rent"])
 	var deposit := rent * float(prop.get("deposit_months", 0))
 	if Ledger.cash(ent) < rent + deposit:
-		return {"ok": false, "error": I18n.t("You need %s (first month%s).") % [Fmt.money(rent + deposit), " + deposit" if deposit > 0 else ""]}
+		return {"ok": false, "error": I18n.t("You need %s (first month%s).") % [Fmt.money0(rent + deposit), " + deposit" if deposit > 0 else ""]}
 	var cat := rent_category(str(prop["kind"]))
 	var lines := [{"acct": "exp:" + cat, "dr": rent}, {"acct": "cash", "cr": rent + deposit}]
 	if deposit > 0:
@@ -124,7 +124,7 @@ static func check_solvency() -> void:
 			GameState.data["events"]["cooldowns"][key] = Clock.now() + 3 * Clock.DAY
 			EventBus.solvency_warning.emit(ent)
 			EventEngine.trigger("low_cash_warning", {"entity": ent, "entity_name": GameState.entity_name(ent) if ent != "player" else "Your personal account",
-				"cash": Fmt.money(c), "upcoming": Fmt.money(upcoming)})
+				"cash": Fmt.money0(c), "upcoming": Fmt.money0(upcoming)})
 
 
 static func handle(_kind: String, _p: Dictionary) -> void:

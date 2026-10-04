@@ -17,6 +17,25 @@ static func S() -> Dictionary:
 static func cfg() -> Dictionary:
 	return DataDB.economy.get("compliance", {})
 
+## Property permits use the same fee, processing queue and company-owned permission as import licences.
+static func permit_valid(id: String) -> bool:
+	var permit: Dictionary=S().get("permits",{}).get(id,{})
+	return permit.get("entity","")==GameState.company_id() and GameState.company_id()!="" and permit.get("status","")=="granted"
+static func apply_permit(id: String) -> Dictionary:
+	if id not in ["brokerage","building"] or GameState.company_id()=="":return {"ok":false,"error":I18n.t("Register a company before applying for this permit.")}
+	if id=="building" and (not RealEstate.is_running() or int(RealEstate.S()["stage"])<2):return {"ok":false,"error":I18n.t("Own a rental before applying for a building permit.")}
+	if not S().has("permits"):S()["permits"]={}
+	var old: Dictionary=S()["permits"].get(id,{})
+	if old.get("entity","")==GameState.company_id() and old.get("status","") in ["pending","granted"]:return {"ok":false,"error":I18n.t("This permit is already granted or being processed.")}
+	var config := RealEstate.cfg()
+	var fee := float(config["licence_fee"] if id=="brokerage" else config["permit_fee"])
+	if Ledger.cash(GameState.company_id())<fee:return {"ok":false,"error":I18n.t("Not enough cash for the permit fee.")}
+	Ledger.expense(GameState.company_id(),"registration",fee,I18n.t("Property licence and application fee"),{"segment":"real_estate","type":"permit","id":id})
+	var due := Clock.now()+int(config["licence_days"] if id=="brokerage" else config["permit_days"])*Clock.DAY
+	S()["permits"][id]={"entity":GameState.company_id(),"status":"pending","due":due}
+	Sim.schedule(due,"cmp.property_permit",{"id":id,"entity":GameState.company_id()})
+	return {"ok":true,"due":due}
+
 
 static func active() -> bool:
 	return GameState.has_game() and World.compliance()
@@ -128,6 +147,12 @@ static func on_hour(_t: int, h: int) -> void:
 
 
 static func handle(kind: String, p: Dictionary) -> void:
+	if kind=="cmp.property_permit":
+		var permit: Dictionary=S().get("permits",{}).get(p.get("id",""),{})
+		if permit.get("entity","")==p.get("entity","") and Assets._valid_entity(str(p.get("entity",""))) and permit.get("status","")=="pending" and Clock.now()>=int(permit["due"]):
+			permit["status"]="granted"
+			GameState.timeline(I18n.t("Property permit granted."),"milestone")
+		return
 	match kind:
 		"cmp.licence":
 			var ready := int(S().get("licence_ready", -1))

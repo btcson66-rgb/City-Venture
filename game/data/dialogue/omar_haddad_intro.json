@@ -1,0 +1,32 @@
+{
+ "id": "omar_haddad_intro",
+ "start": "start",
+ "nodes": {
+  "start": [
+   {
+    "who": "omar_haddad",
+    "text": "I introduce suppliers and buyers across borders. Compare freight, duty, insurance and payment risk before accepting a trade; a good quote can still lose money."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Where should I begin?",
+      "next": "routes"
+     },
+     {
+      "text": "I will review my cash and documents first.",
+      "next": "end"
+     }
+    ]
+   }
+  ],
+  "routes": [
+   {
+    "who": "omar_haddad",
+    "text": "Start with the world map and the trade desk. Register your company and keep a cash buffer for customs delays."
+   }
+  ],
+  "end": []
+ }
+}

@@ -70,7 +70,7 @@
  "business_board": {
   "title": "The Business Board",
   "lines": [
-   "Businesses: choose what to start. E-commerce is open now; planned ones say so.",
+   "Businesses: choose from the businesses available now, or find a part-time job.",
    "Part-time jobs: take one to earn a wage. You work the shifts yourself at the workplace (staff door, press E).",
    "You can run a business and keep a job at the same time."
   ]
@@ -145,7 +145,7 @@
  "city_map": {
   "title": "The city map",
   "lines": [
-   "Districts marked Open can be visited now. Planned ones arrive in later updates."
+   "Choose an open district to see its location and travel routes."
   ]
  },
  "wardrobe": {
@@ -254,6 +254,156 @@
    "Save a price in local currency for each listing. All regions share your stock, so avoid accepting more orders than you can fulfill.",
    "Pack at your existing table and book an international courier. After delivery and the hold period, weekly payouts enter your foreign wallet.",
    "Finance lets you keep foreign currency or convert it now. Automatic conversion runs after weekly payouts. Both choices carry currency risk."
+  ]
+ },
+ "city_guide": {
+  "title": "City Guide: find your next stop",
+  "lines": [
+   "Browse buildings by district to see what you can do, opening hours and the nearest Metro station.",
+   "Take me there sets the existing gold guide arrow to the building door. Closed buildings still show their hours; you can enter once they open.",
+   "Interaction markers show usable spots. Grey markers with a lock explain what you need first. Press I in a room to reopen its introduction."
+  ]
+ },
+ "patch_notes": {
+  "title": "What's new: continuing an older game",
+  "lines": [
+   "This card lists updates after the version that last saved your game. Scroll to read all release notes.",
+   "Continue game keeps your progress and records this version so the card does not repeat. New games start with the current version.",
+   "Export your save before clearing browser data or switching computers."
+  ]
+ },
+ "os_segments": {
+  "title": "Segments: each business and its shared costs",
+  "lines": [
+   "Revenue, gross profit, expenses and operating profit are shown by business, for this month and last month.",
+   "Allocated costs come from common expenses, split by net revenue. Segment totals equal the company report."
+  ]
+ },
+ "manufacturing": {
+  "title": "Line Planner: OEM production",
+  "lines": [
+   "Lease Unit 12, rent a machine and hire Tomas. Fixed costs continue even when the line is idle.",
+   "Quote orders, order materials and reserve machine hours within the next week. Changeovers need one hour.",
+   "Inspect more to catch defects, or accept refunds and credit risk. Maintenance repairs broken machines."
+  ]
+ },
+ "os_manufacturing": {
+  "title": "Line Planner: OEM production",
+  "lines": [
+   "Lease Unit 12, rent a machine and hire Tomas. Fixed costs continue even when the line is idle.",
+   "Quote orders, order materials and reserve machine hours within the next week. Changeovers need one hour.",
+   "Inspect more to catch defects, or accept refunds and credit risk. Maintenance repairs broken machines."
+  ]
+ },
+ "real_estate": {
+  "title": "Matchmaker and property management",
+  "lines": [
+   "Get the brokerage licence at City Hall, then lease Harlow & Finch. Choose a mandate and a client, compare rooms, budget and urgency, then arrange a viewing.",
+   "Mortgages need 20–30% down and run for 20–30 years. Rent and screening affect vacancy; tenants can miss payments or cause damage.",
+   "Own a rental before applying for the Lot 7 building permit. Ruiz construction uses paid monthly milestones; unfinished buildings cannot be sold."
+  ],
+  "help_key": "real_estate"
+ },
+ "os_real_estate": {
+  "title": "Matchmaker and property management",
+  "lines": [
+   "Get the brokerage licence at City Hall, then lease Harlow & Finch. Choose a mandate and a client, compare rooms, budget and urgency, then arrange a viewing.",
+   "Mortgages need 20–30% down and run for 20–30 years. Rent and screening affect vacancy; tenants can miss payments or cause damage.",
+   "Own a rental before applying for the Lot 7 building permit. Ruiz construction uses paid monthly milestones; unfinished buildings cannot be sold."
+  ],
+  "help_key": "real_estate"
+ },
+ "media": {
+  "title": "Campaign Mixer: brief to results",
+  "lines": [
+   "Read audience, goal and deadline. Create a pitch, then submit it; losing costs time and money.",
+   "Allocate the budget across channels. CPM buys impressions, audience fit and saturation limit relevant reach. Adjust the mix while running.",
+   "Daily reports track impressions, clicks and conversions. Finish the scope, then invoice service fees, media rebates and earned KPI bonuses."
+  ]
+ },
+ "os_media": {
+  "title": "Campaign Mixer: brief to results",
+  "lines": [
+   "Read audience, goal and deadline. Create a pitch, then submit it; losing costs time and money.",
+   "Allocate the budget across channels. CPM buys impressions, audience fit and saturation limit relevant reach. Adjust the mix while running.",
+   "Daily reports track impressions, clicks and conversions. Finish the scope, then invoice service fees, media rebates and earned KPI bonuses."
+  ]
+ },
+ "creative_pitch": {
+  "title": "Creative Pitch: read the client preferences",
+  "lines": [
+   "Choose a slogan, visual and tone. The brief and university mentor explain the audience preferences.",
+   "Matching cards improves creative quality and click-through; cheap interns assist more slowly than designers."
+  ]
+ },
+ "hotel": {
+  "title": "Rate Board: price, channels, rooms",
+  "lines": [
+   "Take over or lease the Aster Inn, then set prices per room type against the 30-day demand calendar.",
+   "Direct guests pay no commission, the OTA brings volume for 15% to 18%, and agency blocks lock rooms at 25% off weeks ahead.",
+   "Housekeepers decide how many rooms can be sold. Reviews of cleanliness, service and value drive your OTA ranking and demand."
+  ]
+ },
+ "os_hotel": {
+  "title": "Rate Board: price, channels, rooms",
+  "lines": [
+   "Take over or lease the Aster Inn, then set prices per room type against the 30-day demand calendar.",
+   "Direct guests pay no commission, the OTA brings volume for 15% to 18%, and agency blocks lock rooms at 25% off weeks ahead.",
+   "Housekeepers decide how many rooms can be sold. Reviews of cleanliness, service and value drive your OTA ranking and demand."
+  ]
+ },
+ "energy": {
+  "title": "Energy Console: roof to charging network",
+  "lines": [
+   "Survey a roof, place panels around shade and the load limit, then send a quote with or without a subsidy.",
+   "Order materials from Helio Supply, then crew-days finish the install. Rain slows work and storms stop it.",
+   "With storage certification and two installs you can build charging stations. Set a price per kWh and watch demand."
+  ]
+ },
+ "os_energy": {
+  "title": "Energy Console: roof to charging network",
+  "lines": [
+   "Survey a roof, place panels around shade and the load limit, then send a quote with or without a subsidy.",
+   "Order materials from Helio Supply, then crew-days finish the install. Rain slows work and storms stop it.",
+   "With storage certification and two installs you can build charging stations. Set a price per kWh and watch demand."
+  ]
+ },
+ "automotive": {
+  "title": "Auto Desk: auction, fleet, showroom",
+  "lines": [
+   "Auction: inspect lots before Wednesday, bid live on auction day, then recondition and list the car. A higher price means more days to sell.",
+   "Rental fleet: lease the Gateway counter, buy cars, set day and week rates and schedule services. Skipped service causes breakdowns mid-rental.",
+   "Dealership: build a ten-car fleet and 25 rentals, lease the showroom, pay the deposit and keep new cars in stock."
+  ]
+ },
+ "os_automotive": {
+  "title": "Auto Desk: auction, fleet, showroom",
+  "lines": [
+   "Auction: inspect lots before Wednesday, bid live on auction day, then recondition and list the car. A higher price means more days to sell.",
+   "Rental fleet: lease the Gateway counter, buy cars, set day and week rates and schedule services. Skipped service causes breakdowns mid-rental.",
+   "Dealership: build a ten-car fleet and 25 rentals, lease the showroom, pay the deposit and keep new cars in stock."
+  ]
+ },
+ "auction": {
+  "title": "Auction: bid before the hammer falls",
+  "lines": [
+   "Press Bid to raise by one step. Bidders raise until they reach private limits; after a few quiet ticks the hammer falls.",
+   "The buyer fee is added to the price. Stop bidding when the price passes what the car is worth to you."
+  ]
+ },
+ "os_group": {
+  "title": "Group: trade between your businesses",
+  "lines": [
+   "Set a transfer price for each running pair: at cost, cost plus a markup or market price. Both businesses show the trade in Segments.",
+   "Group totals eliminate internal trade, so moving money between your own businesses never makes the group richer or poorer; only real savings do.",
+   "Group jobs are big orders that need two or more industries. Unfinished parts can be subcontracted for a fee."
+  ]
+ },
+ "industry_first_order": {
+  "title": "First industry order",
+  "lines": [
+   "This optional guide follows real industry work. Close it to operate in Company OS, then reopen the industry tab for the next step.",
+   "Already completed work is skipped. Skip this guide hides the coaching; your accepted phone opportunity keeps its own progress."
   ]
  }
 }

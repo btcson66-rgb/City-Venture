@@ -735,3 +735,22 @@ Claude 線接下來要開放兩個街區和兩個新產業：
 ## Season 2 — overseas systems (#30)
 
 Planned art requests (existing region images remain the interim display): seven world-map region cards, one each for Northridge, Auroria, Lumina, Zenkai, Almeria, Solterra and Karu; an international courier container; seven abstract currency icons (NRD, AUR, LUM, ZEN, ALM, SOL, KAR). Do not use real currency symbols or logos. This systems ticket changes no assets.
+
+# Manufacturing (#64)
+
+Facade requests: `facades/unit12_factory.png`, `facades/ferro_supply.png`, `facades/kessler_precision.png`, `facades/shift_diner.png`; existing `brick_shops` / `byte_bean` are rendered through Art.has_tex fallback. Future industrial freight sprite: `vehicles/industrial_truck_side_body.png` and `vehicles/industrial_truck_side_detail.png`; existing vans provide current freight traffic. Interior machine request: `props/cnc_machine.png` (packing bench fallback), material rack request `props/ferro_material_rack.png` (parcel shelf fallback). No art files are modified by this ticket.
+
+# Real Estate (#65)
+
+Facade requests: `buildings/maple_court.png`, `buildings/birch_row.png`, `buildings/harlow_finch.png`, `buildings/lot7.png`, `buildings/lot7_construction.png`, `buildings/venture_tower.png`, with lights variants. Existing apartment, rowhouse, lettings, warehouse and office facades use Art.has_tex fallback; construction and completion are distinct live saved states, including the player's name. New furniture request `props/realty_listings_board.png` uses a cork-board fallback. Existing furnished homes/lettings office provide explorable interiors. No asset files changed.
+
+## #66 University / media
+Requested named facades: `aurelia_university.png`, `the_loft.png`, `campus_radio.png` plus corresponding `_lights.png`. Runtime district facades check Art.has_tex and use civic_annex, nexus_cowork and office_slab metadata/doors as supported fallbacks. Decorative bookshop and cafe use brick_shops/corner_cafe_unit. No unavailable textures are loaded.
+
+## #67 Hotel / Luxury Heights
+Requested named facades: `the_aster.png`, `skyline_grand.png`, `observation_deck.png`, `boutique_row.png`, `gallery_row.png` plus corresponding `_lights.png`. Runtime district facades check Art.has_tex and use riverside_tower, glass_tower, civic_annex, shop_row_awning and brick_shops as supported fallbacks. Requested portraits for Henri Dubois, Priya Nair, Owen Blake and Vera Stone fall back to the generated appearance. Requested furniture: `interiors/reception_desk.png`, `interiors/luggage_cart.png`, `interiors/hotel_bed_made.png`, `interiors/chandelier.png` (current lobbies use sales_desk, lounge_sofa, key_board and plant props). Requested icon `ui/icons/hotel.png` (the sleep icon is used). No unavailable textures are loaded and no asset files changed.
+## #69 Energy
+Requested named facades: `buildings/helio_supply.png` and `buildings/helio_warehouse.png` with `_lights` variants. Runtime district facades check Art.has_tex and use warehouse_shed and cold_store as supported fallbacks. Player-built chargers use `props/ev_charger.png` (exists) while open and `props/cone.png` while building; requested upgrades are `props/ev_charger_fast.png` (two-bay hub) and `props/solar_roof_sign.png` for rooftop leads, with ev_charger/bollard fallbacks. Interiors reuse existing warehouse props. No asset files changed.
+
+## #68 Automotive / Airport
+Requested named facades: `airport_terminal.png`, `gateway_car_rental.png`, `aurelia_auto_auction.png`, `cargo_terminal.png` plus corresponding `_lights.png`, a car sprite sheet for the lot and an auction paddle icon. Runtime district facades check Art.has_tex and use existing glass_tower, civic_annex, warehouse and shop_row_awning art as named fallbacks.

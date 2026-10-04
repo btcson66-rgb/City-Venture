@@ -43,22 +43,17 @@ func build() -> void:
 	var v := UIK.vbox(3)
 	v.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	h.add_child(v)
-	v.add_child(UIK.label(I18n.t("DESTINATIONS · fare %s") % Fmt.money(float(DataDB.city["metro"]["fare"])), 7, Art.C_DIM, true))
+	v.add_child(UIK.label(I18n.t("DESTINATIONS · fare %s") % Fmt.money0(float(DataDB.city["metro"]["fare"])), 7, Art.C_DIM, true))
 	for d in DataDB.city["districts"]:
 		if d["id"] == from:
 			continue
-		if d["status"] != "active":
+		if not BuildingInfo.district_open(str(d["id"])):
 			continue
 		var b := UIK.button(I18n.t("%s  ·  %d min") % [I18n.t(d["name"]), _minutes(d["id"])], _go.bind(d["id"]))
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		b.name = "Go_" + d["id"]
 		v.add_child(b)
 	v.add_child(UIK.sep())
-	var planned := []
-	for d in DataDB.city["districts"]:
-		if d["status"] != "active":
-			planned.append(I18n.t(d["name"]))
-	v.add_child(UIK.wrap(I18n.t("Planned stations (P1): ") + ", ".join(planned), 7, Art.C_DIM, 210))
 	footer.add_child(UIK.button("Cancel", close))
 
 

@@ -56,6 +56,8 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 		else:
 			UIRoot.toast("This is Suite 2B's desk. Talk to Tom about leasing it.", "warn", "lock")
 		return
+	if Industries.run_action(action, params, source):
+		return
 	match action:
 		"cafe_counter":
 			_cafe_counter()
@@ -141,7 +143,7 @@ static func _buy_item(params: Dictionary) -> void:
 				break
 	var buy := func():
 		var price := 0.0 if _staff_coffee(params) else float(params.get("price", 4.5))
-		Ledger.expense("player", "coffee", price, "%s — %s" % [str(params.get("item", "coffee")).capitalize(), DataDB.building(params.get("building", "")).get("name", "")], {"type": "purchase"})
+		Ledger.expense("player", str(params.get("category", "coffee")), price, "%s — %s" % [str(params.get("item", "coffee")).capitalize(), DataDB.building(params.get("building", "")).get("name", "")], {"type": "purchase"})
 		Clock.advance(int(params.get("minutes", 10)))
 		if params.has("flag"):
 			GameState.set_flag(params["flag"])
@@ -178,7 +180,7 @@ static func _buy_meal(params: Dictionary) -> void:
 	if params.has("flag"):
 		GameState.set_flag(params["flag"])
 	GameState.inc_stat("meals")
-	UIRoot.toast(I18n.t("%s at %s — %s.") % [what, where, Fmt.money(price)], "info", "coffee")
+	UIRoot.toast(I18n.t("%s — %s") % [what, Fmt.money(price)], "info", "shop")
 
 
 ## Read a sign or look at something. Params: text, and optional alt: [{if, text}] (first match wins).

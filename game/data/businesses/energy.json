@@ -1,23 +1,25 @@
 {
  "id": "energy",
  "name": "Energy",
- "status": "planned",
- "tier": "future",
- "module": "",
- "pitch": "Solar installs to grid-scale. Policy-driven.",
- "starting_capital_min": 80000,
+ "status": "active",
+ "tier": "p2",
+ "module": "energy",
+ "pitch": "Solar installs, storage and an EV charging network.",
+ "starting_capital_min": 50000,
  "revenue_models": [
   "installs",
-  "power_sales"
+  "charging_sales"
  ],
  "cost_types": [
   "equipment",
+  "labor",
+  "electricity",
   "capital"
  ],
  "growth_paths": [
-  "solar_farm",
-  "battery",
-  "charging"
+  "installer",
+  "storage",
+  "charging_network"
  ],
  "icon": "ui/icons/sun"
 }
