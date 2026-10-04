@@ -1798,6 +1798,10 @@ msgstr "看起來很業餘，會少一些訂單；之後可以重拍。"
 msgid "Ambience"
 msgstr "環境音"
 
+#: autoload/sound.gd:234 autoload/sound.gd:47 autoload/sound.gd:48 autoload/sound.gd:49
+msgid "Ambient"
+msgstr "環境音"
+
 #: data/economy/staff.json
 msgid "Ambitious: works harder, expects a raise within two months."
 msgstr "有企圖心：做得更拚，兩個月內會期待加薪。"
@@ -2366,7 +2370,7 @@ msgstr "跨鏈橋遭駭：駭客掏空數位美元管道背後的準備金。"
 msgid "BUILD  ·  LIVE  ·  CONNECT  ·  GROW"
 msgstr "創業  ·  生活  ·  連結  ·  成長"
 
-#: scripts/frontend/character_creator.gd:110
+#: autoload/sound.gd:286 scripts/frontend/character_creator.gd:110
 msgid "Back"
 msgstr "返回"
 
@@ -3478,7 +3482,7 @@ msgstr "現在不能上班：%s。"
 msgid "Can't work the counter: %s."
 msgstr "現在不能站吧台：%s。"
 
-#: autoload/save_system.gd:385 scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57 scripts/ui/modals/registration_modal.gd:53
+#: autoload/save_system.gd:385 autoload/sound.gd:286 scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57
 msgid "Cancel"
 msgstr "取消"
 
@@ -4330,7 +4334,7 @@ msgstr "客戶每天早上會張貼小案子。接下一個，在任何筆電上
 msgid "Climate"
 msgstr "氣候"
 
-#: scripts/ui/modals/business_board.gd:31 scripts/ui/modals/city_guide_modal.gd:40 scripts/ui/modals/city_map_modal.gd:132 scripts/ui/modals/clothing_shop_modal.gd:27
+#: autoload/sound.gd:286 scripts/ui/modals/business_board.gd:31 scripts/ui/modals/city_guide_modal.gd:40 scripts/ui/modals/city_map_modal.gd:132
 msgid "Close"
 msgstr "關閉"
 
@@ -10314,7 +10318,7 @@ msgstr "陽剛"
 msgid "Masculine, feminine or neutral changes the body shape only. There are no ability differences."
 msgstr "陽剛、陰柔或中性只會改變體型，沒有任何能力差異。"
 
-#: autoload/preferences.gd:174 autoload/preferences.gd:180 autoload/sound.gd:49
+#: autoload/preferences.gd:174 autoload/preferences.gd:180 autoload/sound.gd:76
 msgid "Master"
 msgstr "Master"
 
@@ -10826,7 +10830,7 @@ msgstr "Okafor 先生：「鑰匙、水電表讀數，還有我的電話。咖�
 msgid "Ms. Okoro"
 msgstr "Ms. Okoro"
 
-#: autoload/preferences.gd:174 autoload/sound.gd:26 autoload/sound.gd:33 autoload/sound.gd:34
+#: autoload/preferences.gd:174 autoload/sound.gd:173 autoload/sound.gd:262 autoload/sound.gd:45
 msgid "Music"
 msgstr "音樂"
 
@@ -15246,7 +15250,7 @@ msgstr "東南"
 msgid "SERVERS"
 msgstr "伺服器"
 
-#: autoload/preferences.gd:174 autoload/sound.gd:27 autoload/sound.gd:36 autoload/sound.gd:65
+#: autoload/preferences.gd:174 autoload/sound.gd:132 autoload/sound.gd:46 autoload/sound.gd:48
 msgid "SFX"
 msgstr "SFX"
 

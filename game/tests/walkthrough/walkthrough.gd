@@ -23,6 +23,9 @@ func run() -> void:
 		await _resume_ch6_close()
 		return
 	await _new_game()
+	if _arg("from") == "audio":
+		await _audio_fixture()
+		return
 	if _arg("from") == "governance":
 		await _governance_fixture()
 		await _save_load()
@@ -2472,3 +2475,49 @@ func _governance_fixture() -> void:
 	bot.expect(Ledger.check_balanced(),"all governance trades and losses balance")
 	await close_modal();UIRoot.close_all()
 	Help.auto=true
+
+## Native listening route: real scene dispatcher, day/night clock fixtures and actual work-screen buttons.
+func _audio_fixture() -> void:
+	bot.step("Audio listening route: district day/night, work rooms, cues and stems")
+	GameState.data["tutorial"]={"off":true,"step":99,"seen":{},"v":99};Help.auto=false
+	Sound.music_volume=.7;Sound.sfx_volume=.6;Sound._apply_volumes()
+	Sound.trace.clear();Sound.tracing=true
+	var start := Time.get_ticks_msec();var noon := Clock.now()
+	for id in DataDB.districts:
+		GameState.data["clock"]["minutes"]=noon
+		SceneRouter._enter("district",str(id),"door_"+str(DataDB.districts[id]["buildings"][0]),"down")
+		await bot.wait(2.0);Clock.world_active=false
+		bot.expect(Sound._ambient_current==Sound.ambient_for_scene("district",str(id),false),"real day ambience "+str(id))
+		GameState.data["clock"]["minutes"]=noon+10*60
+		Sound.music_for_scene("district",str(id));await bot.wait(1.5)
+		bot.expect(Sound._ambient_current==Sound.ambient_for_scene("district",str(id),true),"real night ambience "+str(id))
+		if id in ["riverside","industrial","airport"]:await bot.shot("audio_"+str(id)+"_night")
+	GameState.data["clock"]["minutes"]=noon
+	for id in ["unit12_factory","the_aster","nexus_cowork","bloom_coffee"]:
+		SceneRouter._enter("interior",id,"spawn","down")
+		await bot.wait(2.0);Clock.world_active=false
+		bot.expect(Sound._a.playing and Sound._ambient_pair[Sound._ambient_front].playing,"actual Music/Ambient playback "+id)
+	for modal in [ManufacturingUI.new(),RealEstateUI.new(),MediaUI.new(),CreativePitch.new({}),HotelUI.new(),AuctionGame.new(""),EnergyUI.new()]:
+		UIRoot.open_modal(modal);await bot.wait(.3)
+		await bot.click_named("Close");await bot.wait(.3)
+	Sound.set_mood("founders",2);await bot.wait(.15);Sound.set_mood("city_night",2);await bot.wait(.15);Sound.set_mood("consulting",2)
+	await bot.wait(1.4)
+	bot.expect(Sound._a.playing and Sound._current=="consulting","rapid crossfades cannot stop the latest track")
+	Sound.set_mood("crisis",3);await bot.wait(1.5)
+	bot.expect(Sound._intensity==2 and Sound._stems_a.all(func(p):return p.playing),"crisis stems actually synchronized and playing")
+	for player in Sound._stems_a:bot.expect(absf(player.get_playback_position()-Sound._a.get_playback_position())<.05,"stem playback position stays within 50 milliseconds")
+	Sound.set_mood("roadshow",2);await bot.wait(1.5)
+	Sound.set_mood("victory",2);await bot.wait(1.5)
+	await bot.wait(2.5)
+	bot.expect(Sound._current!="victory","victory returns to scene score after expiry")
+	for cue in ["click","close","error","cash","spend","fanfare"]:
+		Sound.play(cue);await bot.wait(.2)
+	var seconds := float(Time.get_ticks_msec()-start)/1000
+	if seconds<60:await bot.wait(60-seconds)
+	seconds=float(Time.get_ticks_msec()-start)/1000
+	var out := _arg("out")
+	var f := FileAccess.open(out+"/audio_trace.json",FileAccess.WRITE)
+	f.store_string(JSON.stringify({"duration_seconds":seconds,"entries":Sound.trace,"scope":"Native actual player playback; scene changes and QA day/night clocks, real work-screen close buttons; mood cues demonstrate future roadshow presentation integration, not an IPO economic feature."},"\t"))
+	Sound.tracing=false;Help.auto=true
+	bot.expect(seconds>=60,"at least sixty seconds of native audio trigger evidence")
+	bot.expect(Ledger.check_balanced(),"audio route does not invent revenue")
