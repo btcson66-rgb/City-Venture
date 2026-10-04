@@ -126,7 +126,9 @@ func _dispatch_owned(kind: String,p: Dictionary) -> void:
 
 func _on_hour(t: int, h: int) -> void:
 	if h == 0:
+		var t0 := Time.get_ticks_usec() if Prof.enabled else 0
 		Ledger.compact_old(t)
+		if Prof.enabled: Prof.add("ledger_compact", Time.get_ticks_usec() - t0)
 	phase = "hour:macro"
 	Macro.on_hour(t, h)
 	if CompanyPortfolio.is_multi():
@@ -148,7 +150,7 @@ func _on_hour(t: int, h: int) -> void:
 
 func _single_company_hour(t: int, h: int) -> void:
 	if h == 0:
-		Ecommerce.archive_settled(t)
+		_archive_orders(t)
 	OverseasPartners.on_hour()
 	LegacyBusiness.on_hour()
 	CapitalMarket.on_hour()
@@ -183,9 +185,15 @@ func _single_company_hour(t: int, h: int) -> void:
 	phase = ""
 
 
+func _archive_orders(t: int) -> void:
+	var t0 := Time.get_ticks_usec() if Prof.enabled else 0
+	Ecommerce.archive_settled(t)
+	if Prof.enabled: Prof.add("order_archive", Time.get_ticks_usec() - t0)
+
+
 func _company_hour(t: int,h: int) -> void:
 	if h == 0:
-		Ecommerce.archive_settled(t)
+		_archive_orders(t)
 	OverseasPartners.on_hour()
 	LegacyBusiness.on_hour()
 	CapitalMarket.on_hour()

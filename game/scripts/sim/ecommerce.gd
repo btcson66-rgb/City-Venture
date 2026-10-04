@@ -997,16 +997,20 @@ static func archive_settled(now: int, min_orders := ARCHIVE_MIN_ORDERS, grace_da
 	if old.size() < min_orders / 2:
 		return 0
 	var arch: Dictionary = E().get("order_archive", {})
+	var month_keys := {}
 	for id in old:
 		var o: Dictionary = orders[id]
-		var d := Clock.date_at(int(o["placed"]))
-		var key := "%04d-%02d" % [int(d["year"]), int(d["month"])]
+		var day := int(o["placed"]) / Clock.DAY
+		if not month_keys.has(day):
+			var d := Clock.date_at(int(o["placed"]))
+			month_keys[day] = "%04d-%02d" % [int(d["year"]), int(d["month"])]
+		var key: String = month_keys[day]
 		var row: Dictionary = arch.get(key, {"orders": 0, "units": 0, "gross": 0.0, "refunded": 0})
 		row["orders"] = int(row["orders"]) + 1
 		for item in Packing.items(o):
 			row["units"] = int(row["units"]) + int(item["qty"])
 		if not o["status"] in ["refunded", "cancelled"]:
-			row["gross"] = snappedf(float(row["gross"]) + Packing.total(o), 0.01)
+			row["gross"] = snappedf(float(row["gross"]) + float(o["total"] if o.has("total") else Packing.total(o)), 0.01)
 		else:
 			row["refunded"] = int(row["refunded"]) + 1
 		arch[key] = row

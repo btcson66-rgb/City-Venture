@@ -212,20 +212,23 @@ static func compact_old(now: int, min_group := COMPACT_MIN_GROUP, keep_days := C
 		L["compact_from"] = cutoff
 		return 0
 	var counts := {}
+	var keys := PackedStringArray()
+	keys.resize(i1 - i0)
 	for i in range(i0, i1):
 		if _compactable(journal[i]):
 			var k := _group_key(journal[i])
+			keys[i - i0] = k
 			counts[k] = int(counts.get(k, 0)) + 1
 	var groups := {}
 	var out: Array = journal.slice(0, i0)
 	for i in range(i0, i1):
 		var e: Dictionary = journal[i]
-		if not _compactable(e) or int(counts[_group_key(e)]) < min_group:
+		var key: String = keys[i - i0]
+		if key == "" or int(counts[key]) < min_group:
 			out.append(e)
 			continue
 		var src: Dictionary = e["source"]
 		var day := int(e["t"]) / Clock.DAY
-		var key := _group_key(e)
 		if groups.has(key):
 			var g: Dictionary = groups[key]
 			g["n"] = e["n"]

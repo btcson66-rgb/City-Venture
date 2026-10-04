@@ -4,7 +4,32 @@ extends RefCounted
 
 static var _extra: Array = []
 
+## The registry is built once (it used to be rebuilt, with its callables, on every ledger post and event); callers
+## treat the returned arrays as read-only. Registering a module rebuilds it.
+static var _built: Array = []
+static var _built_public: Array = []
+static var _built_extra := -1
+static var _hooks: Dictionary = {}
+
+
 static func all(include_services := false) -> Array:
+	if _built_extra != _extra.size() or _built.is_empty():
+		_built = _registry()
+		_built_public = _built.filter(func(e): return not e.get("service",false))
+		_built_extra = _extra.size()
+		_hooks = {}
+	return _built if include_services else _built_public
+
+
+## Modules that implement an optional hook, resolved once instead of probing every module on every ledger post.
+static func _with_hook(hook: String) -> Array:
+	all(true)
+	if not _hooks.has(hook):
+		_hooks[hook] = _built.filter(func(e): return e["sim_class"].has_method(hook))
+	return _hooks[hook]
+
+
+static func _registry() -> Array:
 	var entries: Array = [{"id":"ecommerce", "sim_class":Ecommerce, "prefixes":["eco"], "slot":"sales"},
 		{"id":"consulting", "sim_class":Careers, "prefixes":["car"], "slot":"careers"},
 		{"id":"saas", "sim_class":Saas, "prefixes":["saas"], "slot":"business"},
@@ -20,7 +45,7 @@ static func all(include_services := false) -> Array:
 		{"id":"international_trade", "sim_class":TradeIndustry, "prefixes":["trade"], "slot":"business", "actions":{"trade_open":TradeIndustry.open_action}},
 		{"id":"governance", "sim_class":Governance, "prefixes":["gov"], "slot":"business", "service":true, "actions":{"tax_filing":Governance.open_action}},
 		{"id":"personal_life", "sim_class":PersonalLife,"prefixes":["life"],"slot":"business","service":true,"global":true}] + _extra
-	return entries if include_services else entries.filter(func(e): return not e.get("service",false))
+	return entries
 
 static func register(record: Dictionary) -> bool:
 	if str(record.get("id", "")) == "" or record.get("sim_class") == null:
@@ -73,7 +98,7 @@ static func on_company_closed(entity: String) -> void:
 static func tabs() -> Array:
 	var result: Array = []
 	# Keep the established tab order, irrespective of hourly routing order.
-	var entries := all(true)
+	var entries := all(true).duplicate()
 	entries.sort_custom(func(a,b): return int(a["sim_class"].os_tab().get("order", 100)) < int(b["sim_class"].os_tab().get("order", 100)))
 	for entry in entries:
 		if entry["sim_class"].is_running():
@@ -136,12 +161,10 @@ static func market_demand(id: String) -> float:
 	return Macro.demand(id) * Rivals.demand(id) if not find(id).is_empty() else 1.0
 
 static func prepare_journal(entity: String,lines: Array,source: Dictionary) -> Array:
-	for entry in all(true):
-		if entry["sim_class"].has_method("prepare_journal"):lines=entry["sim_class"].prepare_journal(entity,lines,source)
+	for entry in _with_hook("prepare_journal"):lines=entry["sim_class"].prepare_journal(entity,lines,source)
 	return lines
 static func on_ledger(journal: Dictionary) -> void:
-	for entry in all(true):
-		if entry["sim_class"].has_method("on_ledger"):entry["sim_class"].on_ledger(journal)
+	for entry in _with_hook("on_ledger"):entry["sim_class"].on_ledger(journal)
 static func on_company_registered(entity: String) -> void:
 	for entry in all(true):
 		if entry["sim_class"].has_method("on_company_registered"):entry["sim_class"].on_company_registered(entity)
