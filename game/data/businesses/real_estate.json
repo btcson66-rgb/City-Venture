@@ -1,9 +1,9 @@
 {
  "id": "real_estate",
  "name": "Real Estate",
- "status": "planned",
+ "status": "active",
  "tier": "p0",
- "module": "",
+ "module": "real_estate",
  "pitch": "Commissions first. Buildings on the skyline later.",
  "starting_capital_min": 3000,
  "revenue_models": [
@@ -17,9 +17,9 @@
   "construction"
  ],
  "growth_paths": [
-  "commercial",
-  "development",
-  "luxury"
+  "brokerage",
+  "landlord",
+  "developer"
  ],
  "icon": "ui/icons/home"
 }

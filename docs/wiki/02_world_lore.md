@@ -39,7 +39,7 @@
 | `shopping_street` | Shopping Street 購物街 | 已實作 | 零售、餐廳、夜生活 |
 | `harbor` | Harbor 港區 | 規劃中 P1 | 貨櫃、海關、貨運 |
 | `old_town` | Old Town 老城區 | 規劃中 P1 | 低租金、老店、藝術 |
-| `residential` | Residential 住宅區 | 規劃中 P1 | 學校、公園、家庭 |
+| `residential` | Residential 住宅區 | Implemented #65 | 仲介、收租與建案；社區生活擴充保留規劃 |
 | `university` | University 大學區 | 規劃中 P1 | 研究和人才 |
 | `luxury_heights` | Luxury Heights 豪宅區 | 規劃中 P3 | 頂樓豪宅、俱樂部、高級餐廳 |
 | `airport` | International Airport 國際機場 | 規劃中 P2 | 國內、國際、貨運、私人航空 |

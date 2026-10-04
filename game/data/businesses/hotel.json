@@ -1,21 +1,24 @@
 {
  "id": "hotel",
  "name": "Hotel / Tourism",
- "status": "planned",
- "tier": "future",
- "module": "",
+ "status": "active",
+ "tier": "p1",
+ "module": "hotel",
  "pitch": "Occupancy, ADR, seasons.",
  "starting_capital_min": 120000,
  "revenue_models": [
-  "rooms"
+  "rooms",
+  "group_blocks",
+  "restaurant"
  ],
  "cost_types": [
   "labor",
   "maintenance"
  ],
  "growth_paths": [
-  "resort",
-  "hotel_group"
+  "aster_inn",
+  "brasserie",
+  "harbor_resort"
  ],
  "icon": "ui/icons/sleep"
 }

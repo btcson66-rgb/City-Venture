@@ -76,7 +76,7 @@ func test_harbor_is_open_and_linked() -> void:
 
 
 func test_the_gym_and_customs_house_have_actual_hours() -> void:
-	runner.check(SceneRouter.building_open("harbor_point_fitness")["open"], "Harbor Point Fitness is open in the afternoon")
+	runner.check(not SceneRouter.building_open("harbor_point_fitness")["open"], "Harbor Point Fitness is scenery until enabled")
 	var g := DataDB.building("harbor_point_fitness")
 	runner.check(g["interior"]["interactables"].any(func(i): return i["action"] == "look"), "with something to look at inside")
 	var st := SceneRouter.building_open("customs_house")

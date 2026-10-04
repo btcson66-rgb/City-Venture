@@ -46,7 +46,7 @@ func build() -> void:
 	for o in opts:
 		ah.add_child(UIK.button(o[0], func(): address = o[1]; rebuild(), "tab_active" if address == o[1] else "tab"))
 	body.add_child(ah)
-	body.add_child(UIK.kv("Registration fee", Fmt.money(Company.registration_fee()) + (I18n.t("  (staff discount)") if Careers.has_perk("registration_discount") else ""), Art.C_GOLD))
+	body.add_child(UIK.kv("Registration fee", Fmt.money0(Company.registration_fee()) + (I18n.t("  (staff discount)") if Careers.has_perk("registration_discount") else ""), Art.C_GOLD))
 	body.add_child(UIK.kv("Processing time", Fmt.duration_min(int(reg.get("processing_min", 45)))))
 	error_label = UIK.label("", 8, Art.C_RED)
 	body.add_child(error_label)

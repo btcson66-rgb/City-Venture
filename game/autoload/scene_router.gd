@@ -56,6 +56,8 @@ func _fade(cb: Callable, minutes := 0) -> void:
 
 # ------------------------------------------------------------------ front-end
 func go_menu() -> void:
+	if UIRoot.tutorial != null:
+		UIRoot.tutorial.clear_destination()
 	Sound.music("menu")
 	Clock.world_active = false
 	UIRoot.set_hud_visible(false)
@@ -72,7 +74,13 @@ func go_creator() -> void:
 
 
 func go_arrival(setup: Dictionary) -> void:
-	GameState.new_game(setup)
+	if UIRoot.tutorial != null:
+		UIRoot.tutorial.clear_destination()
+	if not GameState.new_game(setup):
+		# Never carry on into a game that cannot be saved: say why and go back to the title screen.
+		go_menu()
+		UIRoot.open_modal(InfoModal.make("New game", "save", [I18n.t(SaveSystem.last_error) if SaveSystem.last_error != "" else I18n.t("The new game could not be started because no save slot was available.")]))
+		return
 	Clock.world_active = false
 	UIRoot.set_hud_visible(false)
 	_fade(func(): _set_scene(ArrivalScene.new()))
@@ -90,6 +98,10 @@ func begin_world() -> void:
 
 # ------------------------------------------------------------------ world
 func _enter(kind: String, id: String, spawn: String, facing: String, pos := Vector2(-1, -1)) -> void:
+	var safe := BuildingInfo.safe_location({"kind": kind, "id": id, "x": pos.x, "y": pos.y, "facing": facing})
+	if str(safe["kind"]) != kind or str(safe["id"]) != id:
+		_enter(str(safe["kind"]), str(safe["id"]), str(safe.get("spawn", "")), str(safe["facing"]))
+		return
 	var scene: WorldScene
 	if kind == "district":
 		var d := District.new()
@@ -155,6 +167,8 @@ func world_scene() -> WorldScene:
 
 func building_open(bid: String) -> Dictionary:
 	var b := DataDB.building(bid)
+	if not BuildingInfo.building_available(bid):
+		return {"open": false, "reason": I18n.t("There is no public entrance here.")}
 	var h: Dictionary = b.get("hours", {})
 	if b.has("closed_reason"):
 		return {"open": false, "reason": I18n.t(str(b["closed_reason"]))}   # not enterable in this build (Customs House): say why
@@ -222,9 +236,9 @@ func capture_location() -> void:
 
 
 func restore_location() -> void:
-	var loc: Dictionary = GameState.data["player"]["location"]
+	var loc := BuildingInfo.safe_location(GameState.data["player"]["location"])
 	UIRoot.close_all()
-	_fade(func(): _enter(str(loc.get("kind", "interior")), str(loc.get("id", "riverside_apartment")), "door", str(loc.get("facing", "down")),
+	_fade(func(): _enter(str(loc.get("kind", "interior")), str(loc.get("id", "riverside_apartment")), str(loc.get("spawn", "door")), str(loc.get("facing", "down")),
 		Vector2(float(loc.get("x", -1)), float(loc.get("y", -1)))))
 
 

@@ -1,0 +1,56 @@
+{
+ "id": "henri_dubois_intro",
+ "with": "henri_dubois",
+ "nodes": {
+  "start": [
+   {
+    "who": "henri_dubois",
+    "text": "Welcome to The Aster. Twelve rooms, one lift that sulks, and a night manager who has not slept since 2019. I am selling it before it sells me."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "How do I make money from rooms?",
+      "next": "rates"
+     },
+     {
+      "text": "What keeps guests coming back?",
+      "next": "reviews"
+     },
+     {
+      "text": "Open the Rate Board",
+      "next": "end"
+     }
+    ]
+   }
+  ],
+  "rates": [
+   {
+    "who": "henri_dubois",
+    "text": "Price is the whole game. Look at the thirty-day calendar: weekends and festivals sell themselves, Tuesdays do not. Raise prices when the calendar is gold, and never leave rooms empty for pride."
+   },
+   {
+    "who": "henri_dubois",
+    "text": "Direct guests pay no commission but are few. The booking platform brings volume and takes fifteen to eighteen percent. Overbook a little, because some guests never arrive, but a walked guest costs you a room and a review."
+   },
+   {
+    "goto": "start"
+   }
+  ],
+  "reviews": [
+   {
+    "who": "henri_dubois",
+    "text": "Clean rooms, a friendly desk and a fair price. A room nobody cleaned cannot be sold at all, so hire housekeepers before you chase more guests."
+   },
+   {
+    "who": "henri_dubois",
+    "text": "Equipment ages. Tired rooms drag down every review until you renovate, and a renovated room is off sale while the painters work."
+   },
+   {
+    "goto": "start"
+   }
+  ],
+  "end": []
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "id": "vera_stone",
+ "name": "Vera Stone",
+ "role": "Hotel critic",
+ "appearance": {
+  "presentation": "feminine",
+  "face": "oval",
+  "hair": "long",
+  "hair_color": "dark_brown",
+  "skin": "s1",
+  "eye_shape": "narrow",
+  "eye_color": "gray",
+  "brows": "arched",
+  "mouth": "neutral",
+  "accessory": "glasses_square"
+ },
+ "outfit": "office_professional",
+ "outfit_tints": {
+  "top": "#1f2a3d",
+  "bottom": "#1f2a3d"
+ },
+ "schedule": [
+  {
+   "days": "fri,sat,sun",
+   "from": "17:00",
+   "to": "22:00",
+   "location": "interior:skyline_grand",
+   "spot": "lounge",
+   "pose": "idle"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [],
+   "conversation": "vera_stone_intro"
+  }
+ ],
+ "phone_contact": false
+}

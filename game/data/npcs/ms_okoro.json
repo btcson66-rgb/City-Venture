@@ -1,0 +1,40 @@
+{
+ "id": "ms_okoro",
+ "name": "Ms. Okoro",
+ "role": "City energy office",
+ "appearance": {
+  "presentation": "feminine",
+  "face": "heart",
+  "hair": "bun",
+  "hair_color": "silver",
+  "skin": "s5",
+  "eye_shape": "wide",
+  "eye_color": "dark",
+  "brows": "straight",
+  "mouth": "neutral",
+  "accessory": "glasses_round"
+ },
+ "outfit": "office_professional",
+ "outfit_tints": {
+  "top": "#6b3f8a",
+  "bottom": "#2c3038"
+ },
+ "schedule": [
+  {
+   "days": "mon,tue,wed,thu,fri",
+   "from": "09:00",
+   "to": "17:00",
+   "location": "interior:city_hall",
+   "spot": "okoro",
+   "pose": "idle"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [],
+   "conversation": "ms_okoro_intro",
+   "action": "energy_subsidy"
+  }
+ ],
+ "phone_contact": false
+}

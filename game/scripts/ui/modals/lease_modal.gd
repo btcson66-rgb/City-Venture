@@ -19,8 +19,8 @@ func build() -> void:
 		body.add_child(UIK.wrap(I18n.t(str(p.get("agent_line", "Tom: \"It's all yours. Sign's up out front.\""))), 9, Art.C_WHITE, 360))
 		footer.add_child(UIK.button("Close", close))
 		return
-	body.add_child(UIK.kv("Monthly rent", Fmt.money(float(p["monthly_rent"])), Art.C_GOLD, 9, true))
-	var dep := UIK.kv("Deposit", Fmt.money(float(p["monthly_rent"]) * float(p.get("deposit_months", 0))))
+	body.add_child(UIK.kv("Monthly rent", Fmt.money0(float(p["monthly_rent"])), Art.C_GOLD, 9, true))
+	var dep := UIK.kv("Deposit", Fmt.money0(float(p["monthly_rent"]) * float(p.get("deposit_months", 0))))
 	dep.add_child(UIK.tip("deposit"))
 	body.add_child(dep)
 	if int(p.get("capacity", {}).get("inventory_units", 0)) > 0:
@@ -36,7 +36,9 @@ func build() -> void:
 		body.add_child(UIK.wrap(I18n.t("A real office: your company name on the door and the sign, a proper desk for Company OS, and a stockroom so boxes stop living in your apartment. It's also %s every month whether you sell anything or not.") % Fmt.money0(float(p["monthly_rent"])), 8, Art.C_MUTED, 360))
 	if p.get("kind", "") == "warehouse":
 		body.add_child(UIK.wrap(I18n.t("In plain words: you pay %s every month for the space, full or empty. Lease it once you have stock to put in it.") % Fmt.money0(float(p["monthly_rent"])), 7, Art.C_SKY, 360))
-	var lb := UIK.button("Sign the lease", _sign, "primary")
+	var can_sign := GameState.company_id() != "" and Ledger.cash(GameState.business_entity()) >= float(p["monthly_rent"]) * (1.0 + float(p.get("deposit_months", 0)))
+	var lb := UIK.button("Sign the lease", _sign, "primary" if can_sign else "")
+	lb.disabled = not can_sign
 	if GameState.company_id() == "":
 		lb.disabled = true
 		body.add_child(UIK.label("Leases must be in a registered company's name.", 8, Art.C_RED))

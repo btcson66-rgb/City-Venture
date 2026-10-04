@@ -36,6 +36,7 @@ static func compute(entity: String, t0: int, t1: int) -> Dictionary:
 		if tt >= t0 and tt < t1 and str(je.get("source", {}).get("type", "")) in ["opening", "capital", "transfer"]:
 			owner_moves += Ledger.entry_cash(je)
 	return {
+		"segments": Segments.compute(entity, t0, t1),
 		"entity": entity, "name": GameState.entity_name(entity) if entity != "player" else "Personal / sole proprietor",
 		"revenue": revenue, "refunds": refunds, "net_revenue": net_rev, "cogs": cogs, "gross_profit": net_rev - cogs,
 		"opex": opex, "opex_total": opex_total,

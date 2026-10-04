@@ -58,7 +58,7 @@ static func register_employer() -> Dictionary:
 	var fee := float(cfg().get("employer_registration_fee", 150))
 	var ent := entity()
 	if Ledger.cash(ent) < fee:
-		return {"ok": false, "error": I18n.t("The employer registration fee is %s.") % Fmt.money(fee)}
+		return {"ok": false, "error": I18n.t("The employer registration fee is %s.") % Fmt.money0(fee)}
 	Ledger.expense(ent, "registration", fee, I18n.t("Employer registration — %s") % GameState.business_display_name(), {"type": "registration"})
 	GameState.set_flag("employer_registered")
 	GameState.timeline(I18n.t("%s registered as an employer.") % GameState.business_display_name(), "business")
@@ -73,7 +73,7 @@ static func hire_block(role := "") -> String:
 		return "open a business bank account first"
 	if not employer_registered():
 		return "register as an employer at City Hall"
-	if count() >= int(cfg().get("max_staff", 6)):
+	if count() >= (int(Hotel.cfg().get("business", {}).get("max_staff", 12)) if Hotel.is_running() else int(cfg().get("max_staff", 6))):
 		return "the team is full"
 	if role != "" and bool(role_def(role).get("needs_office", false)) and not Living.has_lease("suite_2b"):
 		return "needs an office (lease Suite 2B)"
@@ -270,7 +270,7 @@ static func _pack_hour(p: Dictionary, h: int) -> void:
 	if h == 16 and not Ecommerce.orders_with(["packed"], loc).is_empty():
 		var r := Ecommerce.courier_pickup(loc, "economy")
 		if r.get("ok", false):
-			EventBus.notify.emit(I18n.t("%s booked the courier: %d parcels (%s).") % [p["name"], int(r["count"]), Fmt.money(r["cost"])], "info", "parcel")
+			EventBus.notify.emit(I18n.t("%s booked the courier: %d parcels (%s).") % [p["name"], int(r["count"]), Fmt.money0(r["cost"])], "info", "parcel")
 	# a backlog the packer can't clear wears them down
 	if Ecommerce.orders_with(["placed"], loc).size() > cap * 4:
 		p["morale"] = clampi(int(p["morale"]) - 1, 0, 100)
@@ -306,7 +306,7 @@ static func run_payroll() -> Dictionary:
 			if p.get("trait", "") == "friendly":
 				for o in people():
 					o["morale"] = clampi(int(o["morale"]) + 1, 0, 90)
-		EventBus.notify.emit(I18n.t("Payroll paid: %s.") % Fmt.money(total), "info", "cash")
+		EventBus.notify.emit(I18n.t("Payroll paid: %s.") % Fmt.money0(total), "info", "cash")
 		_check_quits()
 		return {"ok": true, "paid": total}
 	Ledger.post(ent, I18n.t("Payroll owed (not paid) — %d people") % count(), [{"acct": "exp:payroll", "dr": due}, {"acct": "wages_payable", "cr": due}],
@@ -317,7 +317,7 @@ static func run_payroll() -> Dictionary:
 	for p in people():
 		var hit := 35 if p.get("trait", "") != "reliable" else 18
 		p["morale"] = clampi(int(p["morale"]) - hit, 0, 100)
-	EventBus.notify.emit(I18n.t("Payroll bounced: not enough cash for %s. Your team is owed %s.") % [Fmt.money(total), Fmt.money(wages_owed())], "bad", "warning")
+	EventBus.notify.emit(I18n.t("Payroll bounced: not enough cash for %s. Your team is owed %s.") % [Fmt.money0(total), Fmt.money0(wages_owed())], "bad", "warning")
 	_check_quits()
 	Insolvency.check_payroll(ent)
 	return {"ok": false, "owed": wages_owed()}

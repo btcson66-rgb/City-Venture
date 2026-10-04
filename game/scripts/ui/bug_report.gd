@@ -46,7 +46,7 @@ static func _info() -> PackedStringArray:
 		var loc: Dictionary = GameState.data["player"].get("location", {})
 		out.append("game time: %s (day %d)" % [Clock.fmt_datetime(), Clock.day_index()])
 		out.append("location: %s %s" % [str(loc.get("kind", "")), str(loc.get("id", ""))])
-		out.append("cash: personal %s · business %s" % [Fmt.money(Ledger.cash("player")), Fmt.money(Ledger.cash(GameState.business_entity()))])
+		out.append("cash: personal %s · business %s" % [Fmt.money0(Ledger.cash("player")), Fmt.money0(Ledger.cash(GameState.business_entity()))])
 		out.append("company: %s" % GameState.business_display_name())
 		out.append("chapters done: %s · active objectives: %s" % [str(GameState.data["story"]["chapters_done"]), str(GameState.data["story"]["active"])])
 		out.append("orders delivered: %d · pending decisions: %d" % [int(GameState.stat("orders_delivered")), EventEngine.pending().size()])

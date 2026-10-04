@@ -1,0 +1,50 @@
+{
+ "id": "automotive_recall",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "daily",
+  "conditions": [
+   "flag:automotive_active",
+   "flag:automotive_fleet"
+  ],
+  "chance": 0.01,
+  "cooldown_days": 40,
+  "earliest_day": 4
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "jun_ito",
+  "title": "Manufacturer recall",
+  "icon": "warning",
+  "lines": [
+   "A maker has recalled a part used in some of your rental cars. Pull them from service for three days, or keep renting them and risk breakdowns."
+  ]
+ },
+ "choices": [
+  {
+   "id": "recall_pull",
+   "label": "Pull the cars for repair",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "automotive",
+     "kind": "recall_pull"
+    }
+   ],
+   "outcome": "Handling costs $120 per car and they are off the road for three days."
+  },
+  {
+   "id": "recall_run",
+   "label": "Keep renting them",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "automotive",
+     "kind": "recall_run"
+    }
+   ],
+   "outcome": "No lost rentals, but each car may break down over the next three weeks."
+  }
+ ]
+}

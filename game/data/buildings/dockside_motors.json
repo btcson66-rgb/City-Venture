@@ -101,8 +101,21 @@
     "action": "look",
     "params": {
      "icon": "info",
-     "text": "USED VANS, AS SEEN: white panel van, 140,000 km, $9,800. Insurance about $165 a month, fuel about 14 L per 100 km. Two on the lot. Ask Sam."
+     "text": "USED VANS, AS SEEN: white panel van, 140,000 km, $9,800. Insurance about $165 a month, fuel about 14 L per 100 km. Two on the lot. Ask Sam. Sam also buys used cars at 80% of their true value, paid on the spot."
     }
+   },
+   {
+    "id": "used_car_buyer",
+    "at": [
+     120,
+     100
+    ],
+    "label": "Sell a used car to Dockside Motors",
+    "action": "automotive_open",
+    "params": {
+     "page": "stock"
+    },
+    "icon": "metro"
    }
   ],
   "npc_spots": {
@@ -111,5 +124,6 @@
     76
    ]
   }
- }
+ },
+ "category": "Vehicle dealer"
 }
