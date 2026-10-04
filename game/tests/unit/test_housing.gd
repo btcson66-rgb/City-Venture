@@ -129,3 +129,11 @@ func test_notice_cash_shortfall_keeps_home_and_refund_escape_without_fee() -> vo
 	runner.eq(Housing.S()["pending"]["stage"],"blocked","no auto overdraft moving fee")
 	runner.check(Housing.cancel()["ok"],"refund escape remains")
 	runner.eq(Ledger.cash("player"),780,"deposit refund remains real cash")
+func test_move_sets_home_property_and_closes_stale_old_home_lease() -> void:
+	setup()
+	Living.D()["leases"]["riverside_studio"]={"entity":"player","rent":1250.0,"since":0}
+	runner.check(not LeaseEnd.quote("riverside_studio","immediate")["ok"],"current home cannot end directly")
+	runner.check(str(LeaseEnd.quote("riverside_studio","immediate")["error"]).contains("move"),"error explains the move flow")
+	runner.check(Housing.request("old_town_studio","penalty")["ok"],"move")
+	runner.eq(Living.D()["home_property"],"old_town_studio","home_property recorded")
+	runner.check(not Living.D()["leases"].has("riverside_studio"),"old home lease record closed on moving day")

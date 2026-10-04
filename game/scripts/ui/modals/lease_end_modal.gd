@@ -30,7 +30,7 @@ func build() -> void:
 			var view := UIK.button("Review lease", func(): pid = property_id; rebuild())
 			view.name = "ReviewLease_" + property_id
 			list.add_child(view)
-		list.add_child(UIK.wrap("Your current home cannot be ended until you have a replacement home.", 8, Art.C_MUTED, 468))
+		list.add_child(UIK.wrap("Your current home lease ends through the Home move sign: book a replacement home and the old lease closes on moving day.", 8, Art.C_MUTED, 468))
 	else:
 		_detail(list)
 	var done := UIK.button("Close", close)
@@ -59,9 +59,7 @@ func _detail(list: Control) -> void:
 	var quote := LeaseEnd.quote(pid, mode, plan)
 	if lease.has("ending"):
 		var pending_quote: Dictionary = lease["ending"]
-		lease.erase("ending")
-		quote = LeaseEnd.quote(pid, str(pending_quote["mode"]), plan)
-		lease["ending"] = pending_quote
+		quote = LeaseEnd.quote(pid, str(pending_quote["mode"]), plan, true)
 		quote["due"] = pending_quote["due"]
 		if quote["ok"]:
 			quote["notice_rent"] = 0.0
