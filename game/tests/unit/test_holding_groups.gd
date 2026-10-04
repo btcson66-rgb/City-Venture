@@ -193,3 +193,91 @@ func test_registration_prompt_is_read_only_and_requires_the_clerk() -> void:
 	for i in 3:runner.eq(Actions.lock_reason("register_company",{}),"Nobody at the counter. Registration: Mon–Fri 9:00–17:00.","missing clerk explains next opening")
 	runner.eq(UIRoot.top_modal(),before,"reading prompt cannot open registration")
 	runner.eq(GameState.data["ledger"]["seq"],seq,"reading prompt cannot spend")
+
+func test_actual_trade_contract_schedule_and_save_are_isolated_when_switching_company() -> void:
+	var fixture=load("res://tests/unit/test_trade_execution.gd").new();fixture.runner=runner;fixture.setup()
+	var owner:=GameState.company_id()
+	var signed: Dictionary=TradeIndustry.sign(fixture.quote())
+	runner.check(signed["ok"],"real owner signs paid supplier cargo")
+	if not signed["ok"]:return
+	var deal_id: String=signed["id"]
+	var deal: Dictionary=TradeIndustry.S()["deals"][deal_id]
+	var pending: Array=GameState.data["schedule"].filter(func(item):return item["kind"]=="trade.depart" and item["p"].get("id","")==deal_id)
+	runner.check(not pending.is_empty(),"actual cargo departure scheduled")
+	if pending.is_empty():return
+	var scheduled: Dictionary=pending[0].duplicate(true)
+	runner.eq(scheduled["p"].get("company_context",""),owner,"actual departure belongs to cargo owner")
+	var other:=company("Other without brokerage")
+	runner.check(not TradeIndustry.is_running(),"second company has no inherited brokerage")
+	runner.eq(TradeIndustry.entity(),"","second company does not operate owner cargo")
+	runner.check(TradeIndustry.S()["deals"].is_empty(),"no cloned trade cargo")
+	runner.check(not GameState.flag("trade_active"),"trade licence flag follows selected company")
+	var other_cash:=Ledger.cash(other)
+	GameState.data["clock"]["minutes"]=int(deal["depart"])
+	Sim._dispatch(scheduled["kind"],scheduled["p"])
+	runner.eq(GameState.company_id(),other,"scheduled cargo restores the viewer")
+	runner.check(TradeIndustry.S()["deals"].is_empty(),"scheduled owner does not leak cargo into viewer")
+	runner.eq(Ledger.cash(other),other_cash,"another company's departure never charges viewer")
+	CompanyPortfolio.switch(owner)
+	runner.eq(TradeIndustry.entity(),owner,"real brokerage owner restored")
+	runner.check(GameState.flag("trade_active"),"owner trade licence restored")
+	runner.check(TradeIndustry.S()["deals"][deal_id]["status"]!="booked","actual owner cargo departure was processed")
+	runner.check(SaveSystem.save(5),"real multi-company cargo serializes")
+	runner.check(SaveSystem.load_data(5),"real multi-company cargo loads")
+	CompanyPortfolio.switch(other)
+	runner.check(TradeIndustry.S()["deals"].is_empty(),"loaded viewer has no other-company cargo")
+	CompanyPortfolio.switch(owner)
+	runner.check(TradeIndustry.S()["deals"].has(deal_id),"loaded owner retains actual contract")
+	runner.check(Insolvency.close_company()["ok"],"cargo owner closes through actual insolvency action")
+	runner.eq(GameState.company_id(),other,"remaining company becomes available after closure")
+	runner.check(not GameState.flag("trade_active") and TradeIndustry.S()["deals"].is_empty(),"closed brokerage cannot contaminate survivor")
+	runner.check(Ledger.check_balanced(),"all actual supplier and closure postings balance")
+
+func test_old_single_company_trade_departure_acquires_owner_before_switch() -> void:
+	var fixture=load("res://tests/unit/test_trade_execution.gd").new();fixture.runner=runner;fixture.setup()
+	var owner:=GameState.company_id()
+	var signed: Dictionary=TradeIndustry.sign(fixture.quote())
+	runner.check(signed["ok"],"actual old-format cargo purchase")
+	if not signed["ok"]:return
+	var pending: Array=GameState.data["schedule"].filter(func(item):return item["kind"]=="trade.depart" and item["p"].get("id","")==signed["id"])
+	runner.check(not pending.is_empty(),"legacy cargo schedule exists")
+	if pending.is_empty():return
+	pending[0]["p"].erase("company_context")
+	GameState.data["company"]=owner;GameState.data.erase("active_company")
+	CompanyPortfolio.migrate(GameState.data)
+	runner.eq(pending[0]["p"].get("company_context",""),owner,"legacy trade schedule migrated to real owner")
+	company("Legacy viewer")
+	runner.check(TradeIndustry.S()["deals"].is_empty(),"legacy owner cargo is not cloned on registration")
+	CompanyPortfolio.switch(owner)
+	runner.check(TradeIndustry.S()["deals"].has(signed["id"]),"migrated owner retains real paid cargo")
+
+func test_old_multi_company_trade_capture_loads_without_giving_viewer_the_cargo() -> void:
+	var fixture=load("res://tests/unit/test_trade_execution.gd").new();fixture.runner=runner;fixture.setup()
+	var owner:=GameState.company_id()
+	var signed: Dictionary=TradeIndustry.sign(fixture.quote())
+	runner.check(signed["ok"],"actual historical brokerage signs cargo")
+	if not signed["ok"]:return
+	var legacy_trade:=TradeIndustry.S().duplicate(true)
+	var other:=company("Historical viewer")
+	CompanyPortfolio.capture()
+	var legacy: Dictionary=GameState.data.duplicate(true)
+	for view in legacy["company_contexts"].values():
+		view["states"].erase("trade");view["flags"].erase("trade_active")
+	legacy["trade"]=legacy_trade;legacy["flags"]["trade_active"]=true
+	for item in legacy["schedule"]:
+		if str(item["kind"]).begins_with("trade."):item["p"].erase("company_context")
+	var journals: int=legacy["ledger"]["journal"].size()
+	DirAccess.make_dir_recursive_absolute(SaveSystem.DIR)
+	var file:=FileAccess.open(SaveSystem.DIR.path_join("slot_5.json"),FileAccess.WRITE)
+	file.store_string(JSON.stringify({"format":GameState.SAVE_FORMAT,"summary":{},"data":legacy}));file.close()
+	runner.check(SaveSystem.load_data(5),"pre-registry multi-company save loads through normal validation: "+SaveSystem.last_error)
+	runner.eq(GameState.company_id(),other,"historical viewer stays selected")
+	runner.check(not TradeIndustry.is_running() and TradeIndustry.S()["deals"].is_empty(),"migration does not give viewer old owner's brokerage")
+	runner.check(not GameState.flag("trade_active"),"viewer does not inherit owner's licence")
+	CompanyPortfolio.switch(owner)
+	runner.check(TradeIndustry.S()["deals"].has(signed["id"]),"real paid cargo restored to recorded owner")
+	runner.check(GameState.flag("trade_active"),"owner licence recovered")
+	for item in GameState.data["schedule"]:
+		if str(item["kind"]).begins_with("trade."):runner.eq(item["p"].get("company_context",""),owner,"legacy trade schedule bound to recorded owner")
+	runner.eq(GameState.data["ledger"]["journal"].size(),journals,"migration creates no money or extra purchase")
+	runner.check(Ledger.check_balanced(),"loaded historical cargo books balanced")

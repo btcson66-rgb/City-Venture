@@ -17,6 +17,28 @@ static func migrate(data: Dictionary) -> void:
 		data["active_company"] = str(value)
 	if not data.has("active_company"): data["active_company"]=""
 	if not data.has("company_contexts"): data["company_contexts"]={}
+	_migrate_trade_owner(data)
+static func _migrate_trade_owner(data: Dictionary) -> void:
+	# Before trade entered the portfolio registry, one global brokerage could be shown in another company's view.
+	if not data.get("trade",{}) is Dictionary:return
+	var trade: Dictionary=data.get("trade",{})
+	var owner: String=str(trade.get("entity",""))
+	if owner=="" or not owner in data["company"]:return
+	for item in data.get("schedule",[]):
+		if str(item.get("kind","")).get_slice(".",0)=="trade" and not item["p"].has("company_context"):
+			item["p"]["company_context"]=owner
+	var active:=active_of(data)
+	if owner==active:return
+	var view: Dictionary=data["company_contexts"].get(owner,{"states":{},"flags":{},"bank":{}})
+	view["states"]["trade"]=trade
+	view["flags"]["trade_active"]=bool(trade.get("active",false))
+	data["company_contexts"][owner]=view
+	var saved_trade: Variant=data["company_contexts"].get(active,{}).get("states",{}).get("trade",{})
+	var selected: Dictionary=saved_trade if saved_trade is Dictionary else {}
+	if not selected.is_empty() and str(selected.get("entity",""))==active:
+		data["trade"]=selected
+	else:data.erase("trade")
+	data["flags"]["trade_active"]=bool(selected.get("active",false)) if str(selected.get("entity",""))==active else false
 static func ids(include_closed := false) -> Array:
 	migrate(GameState.data)
 	return GameState.data["company"].filter(func(id):return include_closed or GlobalMarket.live(str(id)))
