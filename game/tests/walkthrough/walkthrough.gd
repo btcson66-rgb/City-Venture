@@ -3393,7 +3393,7 @@ func _city_future_season() -> void:
 	await _intro_control("city_legacy")
 	bot.expect(UIRoot.top_modal() is LegacyModal,"city legacy connects to actual business legacy")
 	UIRoot.close_all()
-	var played_path:=bot.out_dir.path_join("city_future_played.json")
+	var played_path: String=bot.out_dir.path_join("city_future_played.json")
 	bot.expect(SaveSystem.save_to(played_path),"played third-season save with real supplier receipts")
 	var validated: Dictionary=SaveSystem.validate_text(FileAccess.get_file_as_string(played_path))
 	bot.expect(validated["ok"],"actual played city save passes normal import validation")
