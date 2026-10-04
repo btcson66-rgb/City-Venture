@@ -4,8 +4,8 @@
 
 - 第三季完整短版 tour：0 failures、134 steps、34 screenshots、89.3 秒。另外同提交家中 Company OS 路徑 **0 failures、161 steps、34 screenshots、125.3 秒**，確認不改寫先前企業結局。每章附三張 JPG（採購預算、決策、成果），另有六張成果卡與 Legacy 接續。
 - 專項單元測試 27/27；包含六章 already-done / impossible、舊存檔無效果、實際存讀檔、公司關閉、公共合作、重複付款/選擇防護、禁止行賄、調薪/文化/導師時間、選擇權歸屬/離職失效與股權守恆、真正補助/建案工期/房產稅、危機逐步消退、零品質與無交付不得退款、過期不得付保證費、返回世界清除底層 Company OS。
-- 修正前完整單元測試 **665/665，213.0 秒**；沒有 SCRIPT ERROR。新增真正市府存檔讀回測試後，666/666 完整測試通過（226.5 秒），沒有 SCRIPT ERROR。新增已完成原始捕獲檔的讀回測試後，再跑 667 項完整測試。
-- 翻譯 6594/6594，missing 0；wiki_check OK（307 data IDs）；beta_audit 0 hits。English audit 五筆為公司名、語言選單、beta 版本、既有 NPC 稱謂與 Legacy 名稱；新增服務、費用、單位與下一步均已翻譯。
+- 修正前完整單元測試 **665/665，213.0 秒**；沒有 SCRIPT ERROR。新增真正市府存檔讀回測試後，666/666 完整測試通過（226.5 秒），沒有 SCRIPT ERROR。新增已完成原始捕獲檔的讀回測試後，**667/667 完整測試通過（221.2 秒）**，沒有 SCRIPT ERROR。
+- 翻譯 6594/6594，missing 0；wiki_check OK（307 data IDs）；beta_audit 0 hits。English audit 六筆為公司名、語言選單、beta 版本、既有 NPC 稱謂與 Legacy 名稱；新增服務、費用、單位與下一步均已翻譯。
 - 120 天三策略、三 seeds、九次真實交易：全部六章完成、每次六個決策、帳目平衡、Segments 與公司營運利潤吻合。保守平均 -$2,659.54，一般 +$4,048.07，激進 -$29,127.84。一般也有真正貨損/信用損失且每次有負數壓力情境報價，三個 seed 不足以推論獲利機率。
 - JPG evidence 與報告約 1.7 MB，低於 20 MB；不修改 assets。
 
