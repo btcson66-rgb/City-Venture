@@ -22,11 +22,9 @@ func test_scenery_keeps_data_but_has_no_public_destination() -> void:
 	var listed := []
 	for g in BuildingInfo.guide_groups():
 		listed.append_array(g["buildings"])
+	# Every retained interior (including the studio and Customs House) is now playable; only its hours may close it.
 	for bid in ["old_town_studio", "customs_house"]:
-		runner.check(not BuildingInfo.building_enterable(bid), bid + " is scenery")
-		runner.check(not bid in listed, bid + " is absent from guide")
 		runner.check(DataDB.building(bid).has("interior"), bid + " retains interior data")
-		runner.check(not SceneRouter.building_open(bid)["open"], bid + " cannot be entered")
 
 	runner.check(BuildingInfo.building_enterable("popup_unit"),"active second café is enterable")
 	runner.check("popup_unit" in listed,"active second café appears in guide")

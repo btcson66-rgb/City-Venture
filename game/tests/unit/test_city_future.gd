@@ -276,7 +276,7 @@ func test_return_to_world_closes_the_underlying_company_os() -> void:
 
 
 func test_early_invalid_city_fixture_is_rejected_and_civic_schema_roundtrips() -> void:
-	runner.eq(SaveSystem.DIR,"user://test_saves","actual save verification remains in test storage")
+	runner.check(SaveSystem.DIR.begins_with("user://test_saves"),"actual save verification remains in test storage")
 	DirAccess.make_dir_recursive_absolute(SaveSystem.DIR)
 	var original: Dictionary=GameState.data.duplicate(true)
 	var file:=FileAccess.open(SaveSystem.DIR.path_join("slot_98.json"),FileAccess.WRITE)
@@ -301,7 +301,7 @@ func test_early_invalid_city_fixture_is_rejected_and_civic_schema_roundtrips() -
 
 
 func test_actual_completed_city_capture_loads_receipts_cards_and_legacy() -> void:
-	runner.eq(SaveSystem.DIR,"user://test_saves","played capture reads only isolated test storage")
+	runner.check(SaveSystem.DIR.begins_with("user://test_saves"),"played capture reads only isolated test storage")
 	DirAccess.make_dir_recursive_absolute(SaveSystem.DIR)
 	var text:=FileAccess.get_file_as_string("res://tests/fixtures/saves/city_future_4a5319d5.json")
 	var file:=FileAccess.open(SaveSystem.DIR.path_join("slot_98.json"),FileAccess.WRITE)

@@ -60,7 +60,7 @@ func test_real_checkout_fee_cogs_report_and_leftovers() -> void:
 	runner.eq(Ledger.balance(ent,"revenue"),-float(a["revenue"]),"sales canonical revenue")
 	runner.eq(Ledger.balance(ent,"exp:platform_fees"),float(a["fee"]),"card fee actual cents")
 	runner.eq(Ledger.balance(ent,"cogs"),sold*5,"inventory cost recognized")
-	runner.eq(Ledger.cash(ent),snappedf(before+float(a["revenue"])-float(a["fee"]),.01),"net cash traceable")
+	runner.eq(Ledger.cash(ent),snappedf(before+float(a["revenue"])-Ledger.balance(ent,"tax_payable")-float(a["fee"]),.01),"net cash traceable (revenue plus collected VAT, less fee)")
 	PopupStore.on_hour(start+60,11);runner.eq(a["units"],sold,"repeated hour earns nothing")
 	GameState.data["clock"]["minutes"]=a["end"];PopupStore.handle("popup.close",{"start":start})
 	var r: Dictionary=PopupStore.S()["history"][-1]

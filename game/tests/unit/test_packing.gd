@@ -23,11 +23,12 @@ func test_basket_checkout_refund_all_lines_and_ledger() -> void:
 	o["status"] = "shipped"
 	o["ship"] = {"method": "economy"}
 	Ecommerce.handle("eco.deliver", {"order": o["id"]})
-	runner.eq(-Ledger.balance("player", "revenue"), 59.0, "income only on delivery")
+	var net := snappedf(59.0 - Tax.vat(59.0), 0.01)   # the seller VAT (#96) is collected, not income
+	runner.eq(-Ledger.balance("player", "revenue"), net, "income only on delivery")
 	o["defective"] = false
 	o["status"] = "return_requested"
 	runner.check(Ecommerce.resolve_return(o["id"], "refund")["ok"], "whole basket refunded")
-	runner.eq(Ledger.balance("player", "refunds"), 59.0, "full basket refund")
+	runner.eq(Ledger.balance("player", "refunds"), net, "full basket refund")
 	runner.eq(Ecommerce.stock(LOC, "phone_stand"), 7, "all first units returned")
 	runner.eq(Ecommerce.stock(LOC, "desk_lamp"), 6, "second SKU returned")
 	runner.eq(Ledger.balance("player", "cogs"), 0.0, "COGS reversed")

@@ -17,7 +17,7 @@ func test_route_negotiation_actual_trip_and_idempotence() -> void:
 	var start:=Clock.now();var before:=Ledger.balance(entity,"revenue")
 	runner.check(LogisticsDepth.run_route(id,"van1")["ok"],"actual route completes")
 	runner.check(Clock.now()>start,"driving uses time")
-	runner.eq(Ledger.balance(entity,"revenue"),before-115,"only completed trip earns fee")
+	runner.check(absf(Ledger.balance(entity,"revenue")-(before-(115-Tax.vat(115.0))))<.011,"only completed trip earns fee (net of collected VAT)")
 	runner.eq(Contracts.C()[id]["completed"],1,"trip counted once")
 	LogisticsDepth.run_route(id,"van1");LogisticsDepth.run_route(id,"van1")
 	var cash:=Ledger.cash(entity)

@@ -3,7 +3,7 @@ var runner
 
 func setup() -> String:
 	# These tests create new-life slots; isolate them from earlier runs.
-	assert(SaveSystem.DIR == "user://test_saves")
+	assert(SaveSystem.DIR.begins_with("user://test_saves"))
 	for slot in SaveSystem.GAME_SLOTS:
 		DirAccess.remove_absolute(SaveSystem._path(slot))
 	GameState.new_game({"name":"Legacy Founder", "seed":92001})

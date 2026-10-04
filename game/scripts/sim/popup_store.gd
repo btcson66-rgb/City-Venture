@@ -109,7 +109,9 @@ static func sell(product: String,quantity: int) -> void:
 	var remaining:=qty
 	for row in a["origins"][product]:
 		var used:=mini(remaining,int(row["qty"]));row["qty"]=int(row["qty"])-used;remaining-=used
-	for pair in [["units",qty],["revenue",revenue],["cogs",cost],["fee",fee]]:a[pair[0]]=a[pair[0]]+pair[1]
+	# Reported sales revenue is the canonical ledger revenue: net of collected seller VAT (#96).
+	var net_revenue:=snappedf(revenue-(Tax.vat(revenue) if Tax.vat_entity(str(a["entity"])) else 0.0),.01)
+	for pair in [["units",qty],["revenue",net_revenue],["cogs",cost],["fee",fee]]:a[pair[0]]=a[pair[0]]+pair[1]
 static func on_hour(t: int,_h: int) -> void:
 	var a:=active();var t0:=t-60
 	if not is_open(t0) or int(a["last_hour"])>=t:return

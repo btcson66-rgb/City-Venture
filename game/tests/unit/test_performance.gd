@@ -5,6 +5,9 @@ var runner
 
 
 func _setup_listing() -> Dictionary:
+	# Reservations are counted per unit; these fixtures need one-unit orders, not random baskets (#113).
+	# The guided first venture only generates one-unit orders.
+	GameState.data["tutorial"] = {"v": Tutorial.VERSION, "off": false, "step": 0, "seen": {}}
 	Ecommerce._add_stock("riverside_studio", "phone_stand", 100, 5.0, 0.0)
 	Ledger.post("player", "Fixture stock", [{"acct": "inventory", "dr": 500.0}, {"acct": "equity", "cr": 500.0}])
 	var result := Ecommerce.create_listing("phone_stand", 16.0, "self")
