@@ -2,7 +2,12 @@ extends Node
 ## Touch layout, controller focus and gestures. No business or story state is persisted here.
 
 const TARGET := Vector2(44, 44)
-var touch_mode := false
+var touch_mode := false:
+	set(value):
+		var entering := value and not touch_mode
+		touch_mode = value
+		if entering and is_inside_tree():
+			_enter_touch_mode()
 var controller_mode := false
 var fingers := {}
 var starts := {}
@@ -17,13 +22,20 @@ var interact: Button
 var rotate: PanelContainer
 var _targets: Array[WeakRef] = []
 var _locale := ""
+var _dirty := true
+var _focus_moved := false
+var _since_rebuild := 0.0
 
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	install_controller()
-	get_tree().node_added.connect(func(node): _prepare_id.call_deferred(node.get_instance_id()))
-	_prepare(get_tree().root)
+	get_tree().node_added.connect(func(node):
+		_dirty = true
+		_prepare_id.call_deferred(node.get_instance_id()))
+	get_tree().node_removed.connect(func(_node): _dirty = true)
+	get_viewport().gui_focus_changed.connect(func(_control): _focus_moved = true)
+	_prepare(get_tree().root, true)
 	_make_overlay()
 	if OS.has_feature("web"):
 		_hook_web()
@@ -34,20 +46,27 @@ func install_controller() -> void:
 		"cancel": JOY_BUTTON_B, "ui_cancel": JOY_BUTTON_B, "phone": JOY_BUTTON_Y,
 		"company_os_hint": JOY_BUTTON_X, "pause": JOY_BUTTON_START,
 		"ui_left": JOY_BUTTON_DPAD_LEFT, "ui_right": JOY_BUTTON_DPAD_RIGHT,
-		"ui_up": JOY_BUTTON_DPAD_UP, "ui_down": JOY_BUTTON_DPAD_DOWN}
+		"ui_up": JOY_BUTTON_DPAD_UP, "ui_down": JOY_BUTTON_DPAD_DOWN,
+		"map": JOY_BUTTON_BACK, "run": JOY_BUTTON_LEFT_STICK, "fast_forward": JOY_BUTTON_RIGHT_SHOULDER,
+		"undo": JOY_BUTTON_LEFT_SHOULDER, "building_activities": JOY_BUTTON_RIGHT_STICK}
 	for action in buttons:
+		if not InputMap.has_action(action):
+			continue
 		var event := InputEventJoypadButton.new()
 		event.button_index = buttons[action]
 		if not InputMap.action_has_event(action, event):
 			InputMap.action_add_event(action, event)
 	for row in [["move_left", JOY_AXIS_LEFT_X, -1.0], ["move_right", JOY_AXIS_LEFT_X, 1.0],
-		["move_up", JOY_AXIS_LEFT_Y, -1.0], ["move_down", JOY_AXIS_LEFT_Y, 1.0]]:
+		["move_up", JOY_AXIS_LEFT_Y, -1.0], ["move_down", JOY_AXIS_LEFT_Y, 1.0],
+		# Triggers pick the first two choices; every other choice is a focusable button reached with the D-pad and A.
+		["pick_1", JOY_AXIS_TRIGGER_LEFT, 1.0], ["pick_2", JOY_AXIS_TRIGGER_RIGHT, 1.0]]:
 		var event := InputEventJoypadMotion.new()
 		event.axis = row[1]
 		event.axis_value = row[2]
-		if not InputMap.action_has_event(row[0], event):
+		if InputMap.has_action(row[0]) and not InputMap.action_has_event(row[0], event):
 			InputMap.action_add_event(row[0], event)
-		InputMap.action_set_deadzone(row[0], 0.2)
+		if InputMap.has_action(row[0]):
+			InputMap.action_set_deadzone(row[0], 0.2)
 
 
 func _prepare_id(id: int) -> void:
@@ -56,17 +75,31 @@ func _prepare_id(id: int) -> void:
 		_prepare(node)
 
 
-func _prepare(node: Node) -> void:
+## Every added node fires its own node_added, so only the first sweep walks a whole tree.
+func _prepare(node: Node, recurse := false) -> void:
 	if node is BaseButton or node is LineEdit or node is HSlider or node is SpinBox or node is InfoTip:
 		var control := node as Control
-		control.custom_minimum_size = control.custom_minimum_size.max(TARGET)
+		if touch_mode:
+			control.custom_minimum_size = control.custom_minimum_size.max(TARGET)
 		control.focus_mode = Control.FOCUS_ALL
 		if not control.has_meta("input_access_ready"):
 			control.set_meta("input_access_ready", true)
 			_targets.append(weakref(control))
 			control.add_theme_stylebox_override("focus", UIK.flat(Color(0, 0, 0, 0), Art.C_GOLD, 2, 2))
-	for child in node.get_children():
-		_prepare(child)
+	if recurse:
+		for child in node.get_children():
+			_prepare(child, true)
+
+
+## The 44x44 touch minimum applies only once a touch is seen.
+func _enter_touch_mode() -> void:
+	var live: Array[WeakRef] = []
+	for reference in _targets:
+		var control: Variant = reference.get_ref()
+		if is_instance_valid(control):
+			control.custom_minimum_size = control.custom_minimum_size.max(TARGET)
+			live.append(reference)
+	_targets = live
 
 
 func _make_overlay() -> void:
@@ -136,28 +169,26 @@ func focus_surface(surface: Control, first := true) -> Array[Control]:
 
 
 func _process(delta: float) -> void:
-	var live: Array[WeakRef] = []
-	for reference in _targets:
-		var control: Variant = reference.get_ref()
-		if is_instance_valid(control):
-			# A few legacy widgets refit themselves after layout; preserve the touch minimum afterwards.
-			control.custom_minimum_size = control.custom_minimum_size.max(TARGET)
-			live.append(reference)
-	_targets = live
 	var surface := _active_surface()
 	if controller_mode:
-		var focus := get_viewport().gui_get_focus_owner()
-		var changed := surface != _surface or not is_instance_valid(focus) or (surface != null and not surface.is_ancestor_of(focus))
-		focus_surface(surface, changed)
-		if surface == null and focus != null:
-			focus.release_focus()
-	var focused := get_viewport().gui_get_focus_owner()
-	if controller_mode and focused != null:
-		var ancestor := focused.get_parent()
-		while ancestor != null:
-			if ancestor is ScrollContainer:
-				ancestor.ensure_control_visible(focused)
-			ancestor = ancestor.get_parent()
+		_since_rebuild += delta
+		# Rebuild the focus list only when the tree or the top modal changed (1 s fallback for visibility flips).
+		if _dirty or surface != _surface or _since_rebuild > 1.0:
+			var focus := get_viewport().gui_get_focus_owner()
+			var changed := surface != _surface or not is_instance_valid(focus) or (surface != null and not surface.is_ancestor_of(focus))
+			focus_surface(surface, changed)
+			if surface == null and focus != null:
+				focus.release_focus()
+			_dirty = false
+			_since_rebuild = 0.0
+		if _focus_moved:
+			_focus_moved = false
+			var focused := get_viewport().gui_get_focus_owner()
+			var ancestor: Node = focused.get_parent() if focused != null else null
+			while ancestor != null:
+				if ancestor is ScrollContainer:
+					ancestor.ensure_control_visible(focused)
+				ancestor = ancestor.get_parent()
 	_surface = surface
 	if _locale != I18n.locale():
 		_locale = I18n.locale()
@@ -185,7 +216,8 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
 		controller_mode = true
-		focus_surface(_active_surface(), _surface != _active_surface() or get_viewport().gui_get_focus_owner() == null)
+		if event is InputEventJoypadButton:
+			_dirty = true
 	if event is InputEventScreenTouch:
 		touch_mode = true
 		get_window().content_scale_aspect = Window.CONTENT_SCALE_ASPECT_EXPAND

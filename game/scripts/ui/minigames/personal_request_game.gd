@@ -1,21 +1,28 @@
 class_name PersonalRequestGame
 extends MiniGame
-## Read the person's evidence and choose a useful response; no affinity until real work completes.
+## Choose how to help: every approach is honest work that trades time, money and trust differently.
 var request: Dictionary
+var approach := "thorough"
 func _init(node: Dictionary) -> void:
 	super._init()
 	request=node
 	title_text=node["title"]
 	rounds=1
 	round_time=float(PersonalLife.cfg()["request_round_seconds"])
-func intro_lines() -> Array:return [request["detail"],"Read the evidence, then choose a response. A wrong answer uses the time and supplies but the request remains available."]
+func intro_lines() -> Array:return [request["detail"],"Choose how to help. Each approach is real work with its own time, cost and trust; the work completes either way."]
+func extra_result() -> Dictionary:return {"approach":approach}
+func _options() -> Array:
+	var out: Array=[]
+	for answer in request["choices"]:out.append({"id":str(answer["id"]),"label":str(answer["label"]),"approach":"thorough"})
+	for key in PersonalLife.approaches():
+		if key!="thorough":out.append({"id":key,"label":str(PersonalLife.approaches()[key]["label"]),"approach":key})
+	return out
 func build_round() -> void:
 	var v := UIK.vbox(7);stage.add_child(v)
 	v.add_child(UIK.wrap(I18n.t(request["detail"]),9,Art.C_WHITE,530))
-	var answers: Array=request["choices"].duplicate()
-	# The useful answer is not always the first button.
-	var offset := int(request.get("order",0)) % answers.size()
-	answers=answers.slice(offset)+answers.slice(0,offset)
-	for answer in answers:
-		var b := UIK.button(str(answer["label"]),func():award(1.0 if answer["correct"] else 0.0);next_round())
-		b.name="PersonalAnswer_"+str(answer["id"]);v.add_child(b)
+	for option in _options():
+		var terms := PersonalLife.approach_terms(request,str(option["approach"]))
+		var text := "%s\n%s"%[I18n.t(option["label"]),I18n.t("%d min · supplies %s · +%d trust")%[int(terms["minutes"]),Fmt.money(float(terms["cost"])),roundi(float(terms["affinity"]))]]
+		var key := str(option["approach"])
+		var b := UIK.button(text,func():approach=key;award(1.0);next_round())
+		b.name="PersonalAnswer_"+str(option["id"]);v.add_child(b)

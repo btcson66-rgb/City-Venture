@@ -1,7 +1,7 @@
 {
  "friend": 30,
  "partner": 60,
- "request_affinity": 35,
+ "request_affinity": 10,
  "request_quality": 0.67,
  "preferred_gift_affinity": 6,
  "other_gift_affinity": 1,
@@ -100,6 +100,29 @@
     "priya_nair"
    ],
    "detail": "Hotel channels charge commission; an OTA placement still needs a truthful page and paying guests."
+  }
+ },
+ "variety_kinds": 2,
+ "approaches": {
+  "thorough": {
+   "minutes": 1.0,
+   "cost": 1.0,
+   "extra_cost": 0,
+   "affinity": 1.0
+  },
+  "lean": {
+   "minutes": 0.5,
+   "cost": 1.0,
+   "extra_cost": 0,
+   "affinity": 0.6,
+   "label": "Quick version: cover the essentials yourself and finish sooner"
+  },
+  "hire": {
+   "minutes": 0.25,
+   "cost": 1.0,
+   "extra_cost": 24,
+   "affinity": 0.7,
+   "label": "Pay a freelancer to prepare it while you keep working"
   }
  }
 }

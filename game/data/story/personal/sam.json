@@ -8,22 +8,11 @@
    "detail": "Sam is documenting a used van for a new fleet customer. A service record shows brake work is due. Which handover note protects the customer?",
    "minutes": 45,
    "cost": 0,
-   "order": 0,
    "choices": [
     {
      "id": "document",
      "label": "Disclose the brake work and ask for a repair quote",
-     "correct": true
-    },
-    {
-     "id": "invent",
-     "label": "Describe the van as needing no maintenance",
-     "correct": false
-    },
-    {
-     "id": "hide",
-     "label": "Remove the service record",
-     "correct": false
+     "approach": "thorough"
     }
    ]
   },
@@ -33,22 +22,11 @@
    "detail": "Sam notices a fleet brochure promises unlimited uptime, but the rental contract allows maintenance days. What should his corrected guide say?",
    "minutes": 60,
    "cost": 10,
-   "order": 1,
    "choices": [
     {
      "id": "compare",
      "label": "State maintenance days and the replacement process",
-     "correct": true
-    },
-    {
-     "id": "latest",
-     "label": "Keep the unlimited-uptime promise",
-     "correct": false
-    },
-    {
-     "id": "delete",
-     "label": "Delete all maintenance terms",
-     "correct": false
+     "approach": "thorough"
     }
    ]
   },
@@ -58,22 +36,11 @@
    "detail": "Sam introduces a large fleet buyer for a paid handover project. The buyer wants every vehicle certified without inspections. What do you agree to deliver?",
    "minutes": 90,
    "cost": 20,
-   "order": 2,
    "choices": [
     {
      "id": "scope",
      "label": "A checked handover pack with inspection exceptions",
-     "correct": true
-    },
-    {
-     "id": "guarantee",
-     "label": "Certificates for uninspected vehicles",
-     "correct": false
-    },
-    {
-     "id": "omit",
-     "label": "Only the flattering photos",
-     "correct": false
+     "approach": "thorough"
     }
    ]
   }

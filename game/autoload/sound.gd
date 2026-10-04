@@ -47,10 +47,10 @@ func _ready() -> void:
 	_ensure_bus("Ambient")
 	AudioServer.set_bus_send(AudioServer.get_bus_index("Ambient"),"SFX")
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Ambient"),float(cfg().get("ambience_db",-14)))
-	var cfg := ConfigFile.new()
-	if cfg.load(SETTINGS) == OK:
-		music_volume = float(cfg.get_value("audio", "music", music_volume))
-		sfx_volume = float(cfg.get_value("audio", "sfx", sfx_volume))
+	var settings := ConfigFile.new()
+	if settings.load(SETTINGS) == OK:
+		music_volume = float(settings.get_value("audio", "music", music_volume))
+		sfx_volume = float(settings.get_value("audio", "sfx", sfx_volume))
 	_apply_volumes()
 	_a = _player("Music")
 	_b = _player("Music")
@@ -184,7 +184,7 @@ func intensity() -> int:
 	if not GameState.has_game():return 0
 	if _mood in ["crisis","roadshow","victory"] and Time.get_ticks_msec()<_mood_until:return 2
 	if crisis_active():return 2
-	return 1 if Ledger.cash(GameState.business_entity())<float(cfg().get("cash_low_aud",1000)) else 0
+	return 1 if Ledger.cash(GameState.business_entity())<float(cfg().get("cash_low",1000)) else 0
 
 func crisis_active() -> bool:
 	if not GameState.has_game():return false

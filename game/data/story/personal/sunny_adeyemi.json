@@ -8,22 +8,11 @@
    "detail": "Sunny Adeyemi asks for a solar customer explainer. Their evidence contains an unresolved question. What should the first draft do?",
    "minutes": 45,
    "cost": 0,
-   "order": 2,
    "choices": [
     {
      "id": "document",
      "label": "Document the question and ask for evidence",
-     "correct": true
-    },
-    {
-     "id": "invent",
-     "label": "Invent a confident answer",
-     "correct": false
-    },
-    {
-     "id": "hide",
-     "label": "Hide the unresolved section",
-     "correct": false
+     "approach": "thorough"
     }
    ]
   },
@@ -33,22 +22,11 @@
    "detail": "The solar customer explainer now has conflicting notes. Sunny Adeyemi wants a version that other people can check. How do you resolve the conflict?",
    "minutes": 60,
    "cost": 10,
-   "order": 0,
    "choices": [
     {
      "id": "compare",
      "label": "Compare sources and record what remains uncertain",
-     "correct": true
-    },
-    {
-     "id": "latest",
-     "label": "Keep the newest note without checking",
-     "correct": false
-    },
-    {
-     "id": "delete",
-     "label": "Delete both notes to make the file look complete",
-     "correct": false
+     "approach": "thorough"
     }
    ]
   },
@@ -58,22 +36,11 @@
    "detail": "Sunny Adeyemi is ready to introduce a paying client for the solar customer explainer. The client asks for a promise you cannot verify. What do you put in the handover?",
    "minutes": 90,
    "cost": 20,
-   "order": 1,
    "choices": [
     {
      "id": "scope",
      "label": "State the agreed scope, limits and evidence",
-     "correct": true
-    },
-    {
-     "id": "guarantee",
-     "label": "Guarantee the result to win the introduction",
-     "correct": false
-    },
-    {
-     "id": "omit",
-     "label": "Leave the risks out of the handover",
-     "correct": false
+     "approach": "thorough"
     }
    ]
   }

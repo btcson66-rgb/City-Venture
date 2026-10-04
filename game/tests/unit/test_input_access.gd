@@ -62,7 +62,10 @@ func test_touch_targets_and_primary_focus_neighbors() -> void:
 	surface.add_child(secondary)
 	surface.add_child(primary)
 	surface.add_child(field)
-	InputAccess._prepare(surface)
+	InputAccess.touch_mode = false
+	InputAccess._prepare(surface, true)
+	runner.check(secondary.custom_minimum_size.x < 44 or secondary.custom_minimum_size.y < 44, "no 44px minimum outside touch mode")
+	InputAccess.touch_mode = true
 	var controls := InputAccess.focus_surface(surface)
 	runner.eq(controls.size(), 3, "all interactive widgets included")
 	runner.eq(primary.get_viewport().gui_get_focus_owner(), primary, "first focus is next action")
@@ -70,6 +73,7 @@ func test_touch_targets_and_primary_focus_neighbors() -> void:
 		runner.check(control.custom_minimum_size.x >= 44 and control.custom_minimum_size.y >= 44, "44 logical pixels")
 		runner.check(control.has_node(control.focus_neighbor_bottom), "D-pad down neighbor exists")
 		runner.check(control.has_node(control.focus_neighbor_top), "D-pad up neighbor exists")
+	InputAccess.touch_mode = false
 	surface.free()
 
 
@@ -92,3 +96,42 @@ func test_map_gesture_limits_and_invalid_ratios() -> void:
 	InputAccess._zoom_map(-1.0)
 	runner.eq(map.scale, Vector2(0.75, 0.75), "invalid gesture leaves the map usable")
 	modal.free()
+
+
+func test_controller_covers_map_run_fast_forward_undo_and_picks_and_cancel_is_not_backspace() -> void:
+	InputAccess.install_controller()
+	for row in [["map", JOY_BUTTON_BACK], ["run", JOY_BUTTON_LEFT_STICK], ["fast_forward", JOY_BUTTON_RIGHT_SHOULDER], ["undo", JOY_BUTTON_LEFT_SHOULDER]]:
+		var event := InputEventJoypadButton.new()
+		event.button_index = row[1]
+		runner.check(InputMap.event_is_action(event, row[0]), "pad button for " + row[0])
+	var trigger := InputEventJoypadMotion.new()
+	trigger.axis = JOY_AXIS_TRIGGER_LEFT
+	trigger.axis_value = 1.0
+	runner.check(InputMap.event_is_action(trigger, "pick_1"), "trigger picks choice 1")
+	runner.eq(Preferences.BINDINGS["cancel"], [KEY_ESCAPE], "cancel is Escape so Backspace only deletes text")
+	runner.eq(Preferences.conflict("pause", KEY_ESCAPE), "", "pause and cancel may share Escape")
+
+func test_ambience_slider_drives_the_bus_sound_uses() -> void:
+	Preferences.apply()
+	var index := AudioServer.get_bus_index(Preferences.AMBIENT_BUS)
+	runner.check(index >= 0 and AudioServer.get_bus_index("Ambience") < 0, "one ambient bus name")
+	Preferences.values["ambience"] = 0.0
+	Preferences.apply()
+	runner.check(AudioServer.is_bus_mute(index), "slider at zero mutes the ambience bus")
+	Preferences.values["ambience"] = 0.8
+	Preferences.apply()
+
+func test_slider_changes_debounce_the_settings_write() -> void:
+	var old_path := Preferences.path
+	var old_values := Preferences.values.duplicate()
+	Preferences.path = "user://debounce_test.cfg"
+	DirAccess.remove_absolute(Preferences.path)
+	for step in 5:
+		Preferences.set_value("music", 0.1 * step, true)
+	runner.check(not FileAccess.file_exists(Preferences.path), "drag steps do not write")
+	runner.eq(Preferences.flush(), OK, "flush writes once")
+	runner.check(FileAccess.file_exists(Preferences.path), "written")
+	DirAccess.remove_absolute(Preferences.path)
+	Preferences.path = old_path
+	Preferences.values = old_values
+	Preferences.apply()

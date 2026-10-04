@@ -8,22 +8,11 @@
    "detail": "Maya is making a welcome walk for a neighbour who uses a wheelchair. The park has a step-free path, while the shortcut has stairs. Which route belongs in the guide?",
    "minutes": 45,
    "cost": 0,
-   "order": 0,
    "choices": [
     {
      "id": "document",
      "label": "Use the step-free path and state the longer walk",
-     "correct": true
-    },
-    {
-     "id": "invent",
-     "label": "Recommend the stairs because the route is shorter",
-     "correct": false
-    },
-    {
-     "id": "hide",
-     "label": "Describe both as equally accessible",
-     "correct": false
+     "approach": "thorough"
     }
    ]
   },
@@ -33,22 +22,11 @@
    "detail": "Maya found that her old welcome guide lists a cafe as open at night, but its current timetable ends at 18:00. What should the revision say?",
    "minutes": 60,
    "cost": 10,
-   "order": 1,
    "choices": [
     {
      "id": "compare",
      "label": "Publish the current hours and note the earlier error",
-     "correct": true
-    },
-    {
-     "id": "latest",
-     "label": "Keep the old hours to avoid admitting a mistake",
-     "correct": false
-    },
-    {
-     "id": "delete",
-     "label": "Remove every cafe from the guide",
-     "correct": false
+     "approach": "thorough"
     }
    ]
   },
@@ -58,22 +36,11 @@
    "detail": "A residents association asks Maya to introduce you for a paid welcome guide. They want a guarantee that every visitor will find a home. What can you offer?",
    "minutes": 90,
    "cost": 20,
-   "order": 2,
    "choices": [
     {
      "id": "scope",
      "label": "A checked guide with contacts and clear limits",
-     "correct": true
-    },
-    {
-     "id": "guarantee",
-     "label": "A guarantee of housing for every visitor",
-     "correct": false
-    },
-    {
-     "id": "omit",
-     "label": "Addresses copied without checking availability",
-     "correct": false
+     "approach": "thorough"
     }
    ]
   }

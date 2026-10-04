@@ -37,6 +37,7 @@ func _ready() -> void:
 	panel.size = panel_size
 	_fit_panel()
 	get_viewport().size_changed.connect(_fit_panel)
+	Preferences.changed.connect(_fit_panel)   # UI scale and font changes; no per-frame refit
 	add_child(panel)
 	var outer := UIK.vbox(5)
 	accessibility_scroll = ScrollContainer.new()
@@ -88,6 +89,7 @@ func rebuild() -> void:
 	UIK.clear(body)
 	UIK.clear(footer)
 	build()
+	_fit_panel()
 	if not keep.is_empty():
 		_restore_scroll.call_deferred(keep)
 
@@ -125,8 +127,9 @@ func _fit_panel() -> void:
 	panel.position = (available - panel.size) / 2.0
 
 
+## Panels refit on resize, preference change and rebuild; subclasses that animate their own panel override this.
 func _process(_delta: float) -> void:
-	_fit_panel()
+	pass
 
 
 func close() -> void:

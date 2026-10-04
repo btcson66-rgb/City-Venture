@@ -8,22 +8,11 @@
    "detail": "Nina is helping a customer repair a favourite jacket. A seam repair costs less than a replacement and the fabric is sound. What should the consultation offer?",
    "minutes": 45,
    "cost": 0,
-   "order": 2,
    "choices": [
     {
      "id": "document",
      "label": "Explain the repair and show both real prices",
-     "correct": true
-    },
-    {
-     "id": "invent",
-     "label": "Claim that replacement is the only option",
-     "correct": false
-    },
-    {
-     "id": "hide",
-     "label": "Promise a repair without checking the seam",
-     "correct": false
+     "approach": "thorough"
     }
    ]
   },
@@ -33,22 +22,11 @@
    "detail": "A supplier calls Nina's fabric sustainable without a certificate. Nina wants an honest catalogue for her students. Which wording is safe?",
    "minutes": 60,
    "cost": 10,
-   "order": 0,
    "choices": [
     {
      "id": "compare",
      "label": "Describe the material and leave the claim unverified",
-     "correct": true
-    },
-    {
-     "id": "latest",
-     "label": "Repeat the claim as a certified fact",
-     "correct": false
-    },
-    {
-     "id": "delete",
-     "label": "Invent a certificate number",
-     "correct": false
+     "approach": "thorough"
     }
    ]
   },
@@ -58,22 +36,11 @@
    "detail": "Nina refers a clothing workshop that wants a repair catalogue. They ask you to promise every garment can be repaired. What scope can you agree to?",
    "minutes": 90,
    "cost": 20,
-   "order": 1,
    "choices": [
     {
      "id": "scope",
      "label": "Document repairable examples and inspection limits",
-     "correct": true
-    },
-    {
-     "id": "guarantee",
-     "label": "Guarantee every garment without inspection",
-     "correct": false
-    },
-    {
-     "id": "omit",
-     "label": "Hide the cases that cannot be repaired",
-     "correct": false
+     "approach": "thorough"
     }
    ]
   }

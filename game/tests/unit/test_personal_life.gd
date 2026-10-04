@@ -2,6 +2,8 @@ extends RefCounted
 var runner
 func _finish(id: String) -> void:
 	PersonalLife.meet(id)
+	# Fixture: the relationship already exists through events and gifts; requests alone never reach Partner.
+	PersonalLife.change(id,60);PersonalLife.note_kind(id,"event");PersonalLife.note_kind(id,"gift")
 	for index in 3:runner.check(PersonalLife.request_done(id,index,1)["ok"],"actual request completes: "+id)
 func test_affinity_clamps_and_three_stages_do_not_change_demand_or_apr() -> void:
 	var demand := Industries.market_demand("ecommerce");var apr: float = float(Bank.offer().get("apr",0))
@@ -166,3 +168,21 @@ func test_contacts_and_stress_screens_keep_one_primary_and_two_real_recovery_con
 	runner.check(_primaries(screen)<=1,"recovery replaces request as primary")
 	runner.check(screen.find_child("RecoveryRest",true,false)!=null and screen.find_child("RecoveryMedical",true,false)!=null,"two genuine recovery choices")
 	screen.queue_free();await runner.get_tree().process_frame
+
+func test_request_approaches_trade_time_money_and_trust_and_favours_alone_never_make_a_partner() -> void:
+	var node: Dictionary=PersonalLife.stories()["maya"]["steps"][1]
+	var thorough := PersonalLife.approach_terms(node,"thorough")
+	var lean := PersonalLife.approach_terms(node,"lean")
+	var hire := PersonalLife.approach_terms(node,"hire")
+	runner.check(float(lean["minutes"])<float(thorough["minutes"]) and float(hire["minutes"])<float(lean["minutes"]),"shorter approaches save time")
+	runner.check(float(hire["cost"])>float(thorough["cost"]),"hiring costs more")
+	runner.check(float(thorough["affinity"])>float(lean["affinity"]) and float(thorough["affinity"])>float(hire["affinity"]),"the careful approach earns most trust")
+	PersonalLife.meet("maya")
+	for index in 3:
+		PersonalLife.change("maya",60.0-float(PersonalLife.contact("maya")["affinity"]) if index>0 else 0)
+		var result := PersonalLife.request_done("maya",index,1)
+		if index<2:runner.check(result["ok"],"request %d"%index)
+		else:runner.check(not result["ok"],"third request needs variety beyond favours")
+	PersonalLife.note_kind("maya","event");PersonalLife.note_kind("maya","gift")
+	runner.check(PersonalLife.request_done("maya",2,1,"lean")["ok"],"variety unlocks the third request")
+	runner.eq(PersonalLife.stage_name("maya"),I18n.t("Trusted contact"),"top stage label")
