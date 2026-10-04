@@ -443,7 +443,7 @@ func test_civic_settlement_runs_in_the_procuring_company_after_switching() -> vo
 	CityFuture.reconcile()
 	for receipt in CityFuture.chapter(19)["contracts"]:
 		runner.check(receipt["status"] in ["delivered","failed"],"receipt settled while another company is viewed")
-		runner.eq(Jobs.get_job(receipt["job"])["entity"],owner,"job stays in the procuring company")
+		runner.eq(CompanyPortfolio.run_in(owner,func():return Jobs.get_job(receipt["job"]).get("entity","")),owner,"job stays in the procuring company")
 	runner.eq(GameState.company_id(),viewer,"viewer restored")
 	runner.eq(Ledger.cash(viewer),viewer_cash,"viewer company never paid or refunded")
 	runner.eq(Ledger.balance(owner,"exp:other"),paid,"owner books unchanged by settlement")

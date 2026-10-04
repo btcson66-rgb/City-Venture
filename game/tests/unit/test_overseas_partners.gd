@@ -10,6 +10,10 @@ func _setup() -> String:
 	GlobalMarket.open_store("auroria")
 	GlobalMarket.set_price("auroria", str(Ecommerce.listing_for("wireless_earbuds")["id"]), 60)
 	GameState.set_flag("met_omar")
+	# Forwards hedge only booked foreign money: hold a real wallet balance carried at its historical value.
+	var book := snappedf(500.0 * FX.rate("AUR"), 0.01)
+	Ledger.post(ent, "QA booked foreign receipts", [{"acct": "fx_wallet:AUR", "dr": book}, {"acct": "equity", "cr": book}], {"type": "test_fixture"})
+	GlobalMarket.balance(ent, "AUR")["wallet"] = 500.0
 	return ent
 
 

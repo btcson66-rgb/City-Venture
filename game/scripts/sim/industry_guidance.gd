@@ -3,23 +3,18 @@ extends RefCounted
 ## Saved optional guides share the first-venture tutorial state and condition DSL.
 static func definitions() -> Dictionary:return DataDB.story.get("side_stories",{})
 static func guide(id: String) -> Dictionary:return definitions().get("intro_"+id,{})
-## Guide progress rides in the shared tutorial record once the tutorial has initialised itself; before that it waits in its own
-## record so this module never writes the tutorial's on/off state first.
 static func progress(id: String) -> Dictionary:
-	var holder: Dictionary
-	if GameState.data.has("tutorial") and not GameState.data["tutorial"].is_empty():
-		holder=GameState.data["tutorial"]
-		if not holder.has("industries"):holder["industries"]={}
-		var waiting: Dictionary=GameState.data.get("industry_guides",{})
-		for k in waiting:
-			if not holder["industries"].has(k):holder["industries"][k]=waiting[k]
-		GameState.data.erase("industry_guides")
-	else:
-		if not GameState.data.has("industry_guides"):GameState.data["industry_guides"]={}
-		holder={"industries":GameState.data["industry_guides"]}
+	if not GameState.data.has("tutorial"):GameState.data["tutorial"]={}
+	var root: Dictionary=GameState.data["tutorial"]
+	# Keep the shared first-venture schema valid even before its UI initializes.
+	var fresh: bool=str(GameState.data["story"].get("chapter","")) in ["","ch1_arrival"]
+	var defaults: Dictionary={"step":0,"seen":{},"off":not fresh,"v":Tutorial.VERSION}
+	for field in defaults:
+		if not root.has(field):root[field]=defaults[field]
+	if not root.has("industries"):root["industries"]={}
 	var key:=GameState.company_id()+":"+id
-	if not holder["industries"].has(key):holder["industries"][key]={"step":0,"seen":false,"skipped":false,"company":GameState.company_id()}
-	return holder["industries"][key]
+	if not root["industries"].has(key):root["industries"][key]={"step":0,"seen":false,"skipped":false,"company":GameState.company_id()}
+	return root["industries"][key]
 static func open_first(id: String) -> void:
 	if guide(id).is_empty() or GameState.company_id()=="":return
 	var p:=progress(id)

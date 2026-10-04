@@ -171,6 +171,8 @@ func test_renewed_offer_round_keeps_acquired_targets_and_prior_sales_truthful() 
 	CapitalMarket.acquire("vesper")
 	GameState.data["clock"]["minutes"]+=31*Clock.DAY
 	CapitalMarket.begin()
+	GameState.data["clock"]["minutes"]+=int(CapitalMarket.cfg()["offer_cooldown_days"])*Clock.DAY
+	CapitalMarket.begin()
 	runner.check(CapitalMarket.S()["targets"]["vesper"].has("owner"),"renewal cannot restore bought company for second purchase")
 	runner.check(int(CapitalMarket.S()["offers"][0]["expires"])>Clock.now(),"new live proposal round")
 	GameState.set_flag("company_sold")
@@ -252,7 +254,7 @@ func test_honest_roadshow_is_slower_and_prices_lower_than_a_lucky_bold_one() -> 
 	runner.check(bold_price>float(honest["price"]),"surviving bold answers price higher")
 func test_offer_rounds_cool_down_and_announce_once() -> void:
 	setup()
-	var timeline:=GameState.data.get("timeline",[]).size()
+	var timeline: int=GameState.data.get("timeline",[]).size()
 	GameState.data["clock"]["minutes"]=int(CapitalMarket.S()["offers"][0]["expires"])+1
 	CapitalMarket.begin()
 	runner.check(CapitalMarket.S()["offers"].is_empty(),"expired round waits for a cooldown")

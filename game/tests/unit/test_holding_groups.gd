@@ -367,6 +367,7 @@ func test_basis_always_equals_ledger_investments_through_hold_release_rescue_and
 	Ledger.post("player","QA founder cash",[{"acct":"cash","dr":9000},{"acct":"equity","cr":9000}],{"type":"test_fixture"})
 	CompanyPortfolio.switch(g[2])
 	Ledger.expense(g[2],"other",Ledger.cash(g[2]),"QA cash drain")
+	Ledger.post(g[2],"QA unpaid supplier",[{"acct":"exp:other","dr":800},{"acct":"accounts_payable","cr":800}],{"type":"test_fixture"})
 	Insolvency.begin(g[2],"QA shortfall")
 	var need := Insolvency.shortfall(g[2])
 	runner.check(need>0,"rescue is needed")
