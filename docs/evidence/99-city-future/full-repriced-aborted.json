@@ -1,0 +1,12 @@
+{
+  "source": "f5e3c75a5839fbaef0f5f9bd5b9ab5f5fd89c7d6",
+  "status": "ABORTED_FAILED",
+  "failures": [
+    "4895.6s [12月16日（週二） 上午 7:01] FAIL export restock could not fund or fit the real home purchase",
+    "4955.0s [12月16日（週二） 下午 2:27] FAIL button 'BankFXRisk' not found",
+    "4960.1s [12月16日（週二） 下午 2:27] FAIL button 'ChooseHomeInvoices' not found",
+    "4960.1s [12月16日（週二） 下午 2:27] FAIL native risk response recorded"
+  ],
+  "last_line": "5023.8s [12月20日（週六） 上午 7:56]   click [CourierEconomy] 快遞 · 經濟 3 天（$29.10）",
+  "note": "Chapter7 real profitable gate passed (~2711), then chapter13 tried to outstock a fuller remote warehouse. Stopped after observed export failure and three consequent chapter15 assertions. No completed full PASS."
+}
