@@ -8,6 +8,83 @@ extends RefCounted
 const MAX_TEXT := 128 * 1024 * 1024
 
 
+## Large collections (a saturated company's orders, journal and schedule) are written as one packed Variant blob
+## instead of JSON text: parsing millions of small JSON values was most of the load time. Small saves stay plain,
+## readable JSON, and every older save loads unchanged. `unpack` runs before validation, so imports are checked
+## exactly like plain JSON; the decoder never instantiates objects.
+const PACK_MIN := 2000
+const PACK_MAX_BYTES := 512 * 1024 * 1024
+
+
+static func _packed(value: Variant) -> Dictionary:
+	var bytes := var_to_bytes(value).compress(FileAccess.COMPRESSION_GZIP)
+	return {"packed": 1, "n": value.size(), "z": Marshalls.raw_to_base64(bytes)}
+
+
+static func _unpacked(blob: Variant) -> Variant:
+	if not blob is Dictionary or not blob.has("packed"):
+		return blob
+	if not blob.get("z") is String: return null
+	var raw := Marshalls.base64_to_raw(blob["z"])
+	if raw.is_empty(): return null
+	var bytes := raw.decompress_dynamic(PACK_MAX_BYTES, FileAccess.COMPRESSION_GZIP)
+	if bytes.is_empty(): return null
+	return bytes_to_var(bytes)
+
+
+## Copy of `data` with its big collections packed (live state is never modified).
+static func pack(data: Dictionary) -> Dictionary:
+	var lean := data.duplicate(false)
+	if data.get("schedule") is Array and data["schedule"].size() >= PACK_MIN:
+		lean["schedule"] = _packed(data["schedule"])
+	if data.get("ledger") is Dictionary and data["ledger"].get("journal") is Array and data["ledger"]["journal"].size() >= PACK_MIN:
+		lean["ledger"] = data["ledger"].duplicate(false)
+		lean["ledger"]["journal"] = _packed(data["ledger"]["journal"])
+	if data.get("ecommerce") is Dictionary and data["ecommerce"].get("orders") is Dictionary and data["ecommerce"]["orders"].size() >= PACK_MIN:
+		lean["ecommerce"] = data["ecommerce"].duplicate(false)
+		lean["ecommerce"]["orders"] = _packed(data["ecommerce"]["orders"])
+	if data.get("company_contexts") is Dictionary:
+		var contexts := {}
+		for id in data["company_contexts"]:
+			var view = data["company_contexts"][id]
+			var states = view.get("states") if view is Dictionary else null
+			if states is Dictionary and states.get("ecommerce") is Dictionary and states["ecommerce"].get("orders") is Dictionary and states["ecommerce"]["orders"].size() >= PACK_MIN:
+				var copy: Dictionary = view.duplicate(false)
+				copy["states"] = states.duplicate(false)
+				copy["states"]["ecommerce"] = states["ecommerce"].duplicate(false)
+				copy["states"]["ecommerce"]["orders"] = _packed(states["ecommerce"]["orders"])
+				contexts[id] = copy
+			else:
+				contexts[id] = view
+		lean["company_contexts"] = contexts
+	return lean
+
+
+## In place, on freshly parsed data. Returns false when a blob is damaged.
+static func unpack(data: Dictionary) -> bool:
+	if data.get("schedule") is Dictionary:
+		var schedule = _unpacked(data["schedule"])
+		if not schedule is Array: return false
+		data["schedule"] = schedule
+	if data.get("ledger") is Dictionary and data["ledger"].get("journal") is Dictionary:
+		var journal = _unpacked(data["ledger"]["journal"])
+		if not journal is Array: return false
+		data["ledger"]["journal"] = journal
+	if data.get("ecommerce") is Dictionary and data["ecommerce"].get("orders") is Dictionary and data["ecommerce"]["orders"].has("packed"):
+		var orders = _unpacked(data["ecommerce"]["orders"])
+		if not orders is Dictionary: return false
+		data["ecommerce"]["orders"] = orders
+	if data.get("company_contexts") is Dictionary:
+		for view in data["company_contexts"].values():
+			if not view is Dictionary or not view.get("states") is Dictionary: continue
+			var eco = view["states"].get("ecommerce")
+			if eco is Dictionary and eco.get("orders") is Dictionary and eco["orders"].has("packed"):
+				var orders = _unpacked(eco["orders"])
+				if not orders is Dictionary: return false
+				eco["orders"] = orders
+	return true
+
+
 static func _truthy(v) -> bool:
 	if v is bool: return v
 	if v == null: return false
@@ -27,6 +104,7 @@ static func decode(text: String) -> Dictionary:
 		return {"ok": false, "error": "This save comes from a newer version of City Venture."}
 	if float(payload["format"]) != GameState.SAVE_FORMAT or not payload.get("data") is Dictionary or not payload.get("summary") is Dictionary: return invalid
 	var data: Dictionary = payload["data"]
+	if not unpack(data): return invalid
 	var tpl := GameState.template()
 	if data.get("company") is String: tpl["company"]=""
 	for key in ["meta", "player", "clock", "entities", "ledger", "ecommerce", "contracts", "schedule", "events", "story", "flags", "rng"]:

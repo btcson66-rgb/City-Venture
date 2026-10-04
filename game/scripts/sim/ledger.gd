@@ -38,7 +38,7 @@ const CATEGORY_NAMES := {"advertising": "Advertising", "shipping": "Shipping", "
 
 ## Archiving (#98). Order-driven postings are the only unbounded journal growth. Once a day, entries of these
 ## high-volume types older than COMPACT_KEEP_DAYS fold into one summary entry per entity, type, segment and
-## day, and only when that group holds at least COMPACT_MIN_GROUP entries, so ordinary play keeps every
+## day, and only when that entity-day holds at least COMPACT_MIN_GROUP of them, so ordinary play keeps every
 ## line. Account balances, month windows and segment/earned totals are unchanged because day boundaries
 ## are preserved and every line's debit/credit is summed per account.
 const COMPACT_TYPES := ["order", "return", "ship"]
@@ -211,20 +211,24 @@ static func compact_old(now: int, min_group := COMPACT_MIN_GROUP, keep_days := C
 	if i1 <= i0:
 		L["compact_from"] = cutoff
 		return 0
+	# A busy day (many order-driven entries for one entity) folds every group of those types; a quiet day stays line by line.
 	var counts := {}
 	var keys := PackedStringArray()
+	var busy := PackedStringArray()
 	keys.resize(i1 - i0)
+	busy.resize(i1 - i0)
 	for i in range(i0, i1):
 		if _compactable(journal[i]):
-			var k := _group_key(journal[i])
-			keys[i - i0] = k
-			counts[k] = int(counts.get(k, 0)) + 1
+			keys[i - i0] = _group_key(journal[i])
+			var d := "%s|%d" % [journal[i]["entity"], int(journal[i]["t"]) / Clock.DAY]
+			busy[i - i0] = d
+			counts[d] = int(counts.get(d, 0)) + 1
 	var groups := {}
 	var out: Array = journal.slice(0, i0)
 	for i in range(i0, i1):
 		var e: Dictionary = journal[i]
 		var key: String = keys[i - i0]
-		if key == "" or int(counts[key]) < min_group:
+		if key == "" or int(counts[busy[i - i0]]) < min_group:
 			out.append(e)
 			continue
 		var src: Dictionary = e["source"]

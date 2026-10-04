@@ -166,25 +166,31 @@ func test_settled_orders_are_archived_into_monthly_totals() -> void:
 func test_big_saves_are_gzip_and_the_active_company_is_written_once() -> void:
 	Company.register("Perf Co", "llc", "riverside_studio")
 	var orders: Dictionary = Ecommerce.E()["orders"]
-	for i in 700:
+	for i in 2100:
 		orders["#p%d" % i] = {"id": "#p%d" % i, "product": "phone_stand", "qty": 1, "unit_price": 16.0, "entity": GameState.company_id(),
 			"status": "delivered", "placed": i, "delivered": i + 10, "customer": "Pat Perf", "location": "riverside_studio", "note": "x".repeat(300),
 			"items": [{"product": "phone_stand", "qty": 1, "unit_price": 16.0}]}
+	for i in 1500:   # plain-JSON bulk, so the file crosses the gzip threshold even with the orders packed
+		GameState.data["messages"].append({"t": i, "from": "x", "text": "Message %d %s" % [i, "y".repeat(250)], "read": true})
 	runner.check(SaveSystem.save(4, true), "saved")
 	var bytes := FileAccess.get_file_as_bytes(SaveSystem._path(4))
 	runner.check(bytes.size() > 2 and bytes[0] == 0x1f and bytes[1] == 0x8b, "large save is gzip")
 	var text := SaveSystem.read_text(SaveSystem._path(4))
 	var parsed: Dictionary = JSON.parse_string(text)
-	runner.eq(text.count("Pat Perf"), 700, "the active company's orders are serialized once, not twice")
+	var packed: Dictionary = parsed["data"]["ecommerce"]["orders"]
+	runner.check(packed.has("packed") and int(packed["n"]) == 2100, "a big order book is written as one packed blob")
+	runner.eq(text.count("Pat Perf"), 0, "no per-order JSON text is left in a packed save")
+	runner.check(text.length() < 600000, "the saved text is small (%d chars)" % text.length())
 	runner.check(parsed["data"]["company_contexts"][GameState.company_id()].get("lean", false), "context view marked lean")
 	var seq: int = GameState.data["ledger"]["seq"]
 	runner.check(SaveSystem.load_data(4), "gzip save loads")
 	runner.eq(GameState.data["ledger"]["seq"], seq, "state restored")
-	runner.eq(Ecommerce.E()["orders"].size(), 700, "orders restored")
+	runner.eq(Ecommerce.E()["orders"].size(), 2100, "orders restored")
+	runner.eq(JSON.stringify(Ecommerce.E()["orders"]["#p2099"]), JSON.stringify(orders["#p2099"]), "an order comes back field for field")
 	var view: Dictionary = GameState.data["company_contexts"][GameState.company_id()]
 	runner.check(not view.has("lean") and is_same(view["states"]["ecommerce"], GameState.data["ecommerce"]), "active view shares the live state again")
 	runner.check(CompanyPortfolio.switch(GameState.company_id()).get("ok", false), "switching still works")
-	runner.eq(Ecommerce.E()["orders"].size(), 700, "nothing reset by a switch")
+	runner.eq(Ecommerce.E()["orders"].size(), 2100, "nothing reset by a switch")
 	var plain := SaveSystem.read_text("res://tests/fixtures/saves/industry_intro.json")
 	runner.check(plain.begins_with("{"), "plain JSON saves still read")
 
@@ -213,3 +219,30 @@ func test_detail_textures_are_held_to_a_byte_budget() -> void:
 	runner.check(Art._cache.has(paths[0]), "an evicted texture simply reloads")
 	Art.texture_budget = saved
 	Art.clear_caches()
+
+
+func test_big_journal_and_schedule_round_trip_through_packed_saves() -> void:
+	for i in 2100:
+		Ledger.post("player", "Fixture %d" % i, [{"acct": "exp:dining", "dr": 1.0 + i % 7}, {"acct": "cash", "cr": 1.0 + i % 7}], {"segment": "shared", "type": "living"})
+		Sim.schedule(Clock.now() + 600 + i, "eco.review", {"order": "#none%d" % i})
+	var journal_before: int = GameState.data["ledger"]["journal"].size()
+	var balances_before := JSON.stringify(GameState.data["ledger"]["balances"])
+	var schedule_before: int = GameState.data["schedule"].size()
+	runner.check(SaveSystem.save(4, true), "saved")
+	var text := SaveSystem.read_text(SaveSystem._path(4))
+	var parsed: Dictionary = JSON.parse_string(text)
+	runner.check(parsed["data"]["ledger"]["journal"].has("packed") and parsed["data"]["schedule"].has("packed"), "journal and schedule packed")
+	runner.check(SaveSystem.load_data(4), "packed save loads and validates: " + SaveSystem.last_error)
+	runner.eq(GameState.data["ledger"]["journal"].size(), journal_before, "journal restored")
+	runner.eq(GameState.data["schedule"].size(), schedule_before, "schedule restored")
+	runner.eq(JSON.stringify(GameState.data["ledger"]["balances"]), balances_before, "balances restored")
+	runner.check(Ledger.check_balanced(), "ledger balanced after load")
+	# A damaged or hand-edited blob is rejected, never half loaded.
+	parsed["data"]["ledger"]["journal"]["z"] = "AAAA"
+	runner.check(not SaveSystem.validate_text(JSON.stringify(parsed))["ok"], "damaged blob is rejected")
+	# An edited ledger line still fails the same balance check as plain JSON.
+	var tampered: Dictionary = JSON.parse_string(text)
+	var journal: Array = SaveCodec._unpacked(tampered["data"]["ledger"]["journal"])
+	journal[5]["lines"][0]["dr"] = float(journal[5]["lines"][0]["dr"]) + 50.0
+	tampered["data"]["ledger"]["journal"] = SaveCodec._packed(journal)
+	runner.check(not SaveSystem.validate_text(JSON.stringify(tampered))["ok"], "tampered packed journal fails validation")

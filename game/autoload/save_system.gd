@@ -198,7 +198,7 @@ func save_to(path: String, slot := -1, manual := true) -> bool:
 		"location": d["player"]["location"].get("id", ""), "saved_unix": Time.get_unix_time_from_system(),
 		"chapter": d["story"].get("chapter", ""),
 	}
-	var payload := {"format": GameState.SAVE_FORMAT, "summary": summary_d, "data": _lean_data(d)}
+	var payload := {"format": GameState.SAVE_FORMAT, "summary": summary_d, "data": SaveCodec.pack(_lean_data(d))}
 	var rotate := slot >= 0 and (manual or _backup_due(slot))
 	if not _atomic_write(path, JSON.stringify(payload), rotate):
 		last_error = "The save could not be written. Your existing save is unchanged."
