@@ -2136,6 +2136,10 @@ func _chapters_13_to_14(fast := false) -> void:
 	if fast:
 		bot.step("Customs hold — wrong-code fixture, real document-correction input")
 		if not await _restock_product(str(listing["product"]),30):return
+		# Honest trial pause cleared prices; reopen pricing through the real saved-price control.
+		await _home_laptop("sales");await _intro_control("SalesPage_overseas")
+		await _export_row_input("SaveGlobalPrice_"+str(listing["id"]))
+		await close_modal()
 		Customs.set_declaration("northridge", str(listing["id"]), "ddp", "textiles")
 		var before_order: int=Ecommerce.E()["counters"]["order"]
 		Ecommerce._h_order_place({"listing": listing["id"], "region": "northridge"})
