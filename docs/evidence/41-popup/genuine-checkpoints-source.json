@@ -1,0 +1,34 @@
+{
+  "checkpoints": [
+    {
+      "archive_entry": "chapter10_01e5652d.json",
+      "source_commit": "01e5652dbb9c8a85ba6b80e4cfeb3e8f4abd3ee1",
+      "bytes": 6597775,
+      "sha256": "d1fc074865d3d1639e3666367e0626e7b1da7502e90175b541cfc98e5070cb58",
+      "chapter": "ch10_digital_rails",
+      "minutes": 219458,
+      "note": "Unmodified automatic save from actual native full-run history; no cash, inventory, RNG, clock or flags changed."
+    },
+    {
+      "archive_entry": "chapter17_316a4c39.json",
+      "source_commit": "316a4c39218cf01efe5dc770f47e1e63b6e1ded5",
+      "bytes": 8091515,
+      "sha256": "063d6a9afe70ea1f8f6fd206dc5d738a6644f77af8ebdcab939c49e0b9bcc34e",
+      "chapter": "ch17_consolidation",
+      "minutes": 441060,
+      "note": "Unmodified automatic save from actual native full-run history; no cash, inventory, RNG, clock or flags changed."
+    }
+  ],
+  "prefix_replay_source": "316a4c39218cf01efe5dc770f47e1e63b6e1ded5",
+  "continuation_source": "9667176ee6db4e5cf4c4e2de822fc8658200bc6d",
+  "continuation_command": "--bot=walkthrough --lang=zh_TW --from=resume_ch17",
+  "isolation": "CityVenture_QA41_Continuation9667176e",
+  "status": "SEGMENTED_CONTINUATION_COMPLETED_FUNCTIONALLY; FRESH_SINGLE_RUN_PENDING",
+  "continuation_result": {
+    "failures": [],
+    "screenshots": 74,
+    "steps": 545
+  },
+  "continuation_seconds": 727.3,
+  "english_audit": "30 hits manually reviewed: proper names/brands/language and scientific units, plus three automotive prerequisite sentences and untranslated roof compass directions; display repair is on the original #86 branch, pending rendered verification. Not a clean English audit."
+}
