@@ -1,0 +1,121 @@
+{
+ "id": "intro_automotive",
+ "business": "automotive",
+ "title": "Frank and the first fleet",
+ "text": "Meet Frank and inspect the first auction lot.",
+ "mentor": "frank_doyle",
+ "building": "aurelia_auto_auction",
+ "trigger": [
+  "cash>=30000 || world_year>=2"
+ ],
+ "objectives": [
+  {
+   "id": "side_automotive_1",
+   "text": "Meet Frank and inspect the first auction lot.",
+   "complete_when": [
+    "met:frank_doyle"
+   ],
+   "skip_when": [
+    "flag:side_automotive_declined"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "building": "aurelia_auto_auction"
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "frank_doyle",
+     "text": "Meet Frank and inspect the first auction lot."
+    }
+   ]
+  },
+  {
+   "id": "side_automotive_2",
+   "text": "Buy the first real auction car.",
+   "complete_when": [
+    "metric:data:automotive.stock>=1"
+   ],
+   "skip_when": [
+    "flag:side_automotive_declined"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "os": true
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "frank_doyle",
+     "text": "Buy the first real auction car."
+    }
+   ]
+  },
+  {
+   "id": "side_automotive_3",
+   "text": "Disclose or repair the defective car before selling it.",
+   "complete_when": [
+    "metric:count:events.history|id=automotive_flood>=1"
+   ],
+   "skip_when": [
+    "flag:side_automotive_declined || stat:cars_sold>=1"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "os": true
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "frank_doyle",
+     "text": "Disclose or repair the defective car before selling it."
+    }
+   ]
+  },
+  {
+   "id": "side_automotive_4",
+   "text": "Start the first real rental fleet.",
+   "complete_when": [
+    "metric:fn:automotive_stage>=2"
+   ],
+   "skip_when": [
+    "flag:side_automotive_declined"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "os": true
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "frank_doyle",
+     "text": "Start the first real rental fleet."
+    }
+   ]
+  }
+ ],
+ "on_complete": [
+  {
+   "do": "timeline",
+   "text": "Frank and the first fleet — introduction complete.",
+   "kind": "side_story"
+  },
+  {
+   "do": "set_flag",
+   "flag": "contact_frank_doyle"
+  },
+  {
+   "do": "message",
+   "from": "frank_doyle",
+   "text": "You can reach me through this phone thread. Keep the real costs and risks in view before expanding."
+  }
+ ],
+ "on_unavailable": [
+  {
+   "do": "timeline",
+   "text": "Frank and the first fleet — opportunity ended.",
+   "kind": "side_story"
+  }
+ ],
+ "guided_event": "automotive_flood"
+}

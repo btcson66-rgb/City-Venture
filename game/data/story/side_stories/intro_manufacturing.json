@@ -1,0 +1,121 @@
+{
+ "id": "intro_manufacturing",
+ "business": "manufacturing",
+ "title": "Lena and the first production run",
+ "text": "Meet Lena at Unit 12 and discuss the first OEM quote.",
+ "mentor": "lena_park",
+ "building": "kessler_precision",
+ "trigger": [
+  "cash>=30000 || world_year>=2"
+ ],
+ "objectives": [
+  {
+   "id": "side_manufacturing_1",
+   "text": "Meet Lena at Unit 12 and discuss the first OEM quote.",
+   "complete_when": [
+    "met:lena_park"
+   ],
+   "skip_when": [
+    "flag:side_manufacturing_declined"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "building": "kessler_precision"
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "lena_park",
+     "text": "Meet Lena at Unit 12 and discuss the first OEM quote."
+    }
+   ]
+  },
+  {
+   "id": "side_manufacturing_2",
+   "text": "Accept a real OEM order and reserve production capacity.",
+   "complete_when": [
+    "metric:data:manufacturing.orders>=1"
+   ],
+   "skip_when": [
+    "flag:side_manufacturing_declined"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "os": true
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "lena_park",
+     "text": "Accept a real OEM order and reserve production capacity."
+    }
+   ]
+  },
+  {
+   "id": "side_manufacturing_3",
+   "text": "Inspect the first batch. If quality fails, compare outsourcing with overtime; if it already passed, continue without replaying a failure.",
+   "complete_when": [
+    "metric:count:manufacturing.slots|story_recovery=true>=1 || stat:manufacturing_deliveries>=1"
+   ],
+   "skip_when": [
+    "flag:side_manufacturing_declined"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "os": true
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "lena_park",
+     "text": "Inspect the first batch. If quality fails, compare outsourcing with overtime; if it already passed, continue without replaying a failure."
+    }
+   ]
+  },
+  {
+   "id": "side_manufacturing_4",
+   "text": "Deliver the first OEM batch and review the actual quality cost.",
+   "complete_when": [
+    "stat:manufacturing_deliveries>=1"
+   ],
+   "skip_when": [
+    "flag:side_manufacturing_declined"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "os": true
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "lena_park",
+     "text": "Deliver the first OEM batch and review the actual quality cost."
+    }
+   ]
+  }
+ ],
+ "on_complete": [
+  {
+   "do": "timeline",
+   "text": "Lena and the first production run — introduction complete.",
+   "kind": "side_story"
+  },
+  {
+   "do": "set_flag",
+   "flag": "contact_lena_park"
+  },
+  {
+   "do": "message",
+   "from": "lena_park",
+   "text": "You can reach me through this phone thread. Keep the real costs and risks in view before expanding."
+  }
+ ],
+ "on_unavailable": [
+  {
+   "do": "timeline",
+   "text": "Lena and the first production run — opportunity ended.",
+   "kind": "side_story"
+  }
+ ],
+ "guided_event": "intro_factory_quality"
+}

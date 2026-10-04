@@ -59,6 +59,9 @@ func run() -> void:
 	if _arg("from") == "global_markets":
 		await _global_markets_fixture()
 		return
+	if _arg("from")=="industry_intro":
+		await _industry_intro_fixture()
+		return
 	if _arg("from") == "opportunities":
 		await _opportunities_fixture()
 		return
@@ -559,6 +562,9 @@ func popups() -> void:
 			m = UIRoot.top_modal()
 			if m == null:
 				return
+		if m is IndustryGuideModal:
+			await bot.click_named("IndustryGuideSkip")
+			continue
 		if m is DecisionModal:
 			var inst: Dictionary = m.inst
 			await bot.shot("decision_" + str(inst["id"]))
@@ -3158,3 +3164,57 @@ func _popup_weekend(fixture:=false) -> void:
 	bot.expect(Ledger.check_balanced(),"pop-up all journals balanced")
 	bot.expect(SaveSystem.save_to(bot.out_dir.path_join("popup_weekend.json")),"played pop-up save")
 	UIRoot.close_all()
+
+func _industry_intro_fixture() -> void:
+	await bot.wait(4)
+	UIRoot._suppress_decisions=true;UIRoot.tutorial.st()["off"]=true;StoryEngine.St()["active"].clear()
+	Company.register("First OEM","manufacturing","Unit 12");Company.open_business_account(25000)
+	Ledger.post(GameState.company_id(),"Controlled introduction capital",[{"acct":"cash","dr":200000},{"acct":"equity","cr":200000}],{"type":"qa_fixture"})
+	UIRoot.phone.open();await bot.wait(.3);await bot.click_named("App_opportunities")
+	await bot.shot("six_actual_industry_opportunities")
+	await _intro_control("AcceptOpportunity_intro_manufacturing")
+	bot.expect(StoryEngine.side_progress().has("intro_manufacturing"),"real manufacturing story accepted")
+	UIRoot.phone.close()
+	GameState.data["clock"]["minutes"]=Clock.DAY+10*60
+	SceneRouter._enter("interior","kessler_precision","door","up");await bot.wait(.8)
+	await bot.use(func(n):return n.action=="talk" and n.params.get("npc","")=="lena_park","Lena Park")
+	await dialogue();UIRoot.close_all();StoryEngine.check()
+	bot.expect(Cond.eval("met:lena_park"),"actual mentor meeting receipt")
+	Living.lease("unit12_factory");Manufacturing.start();Manufacturing.acquire_machine();Staff.register_employer();Manufacturing.hire_tomas()
+	SceneRouter._enter("interior","unit12_factory","door","up");await bot.wait(.7)
+	UIRoot.open_modal(CompanyOS.new(I18n.t("Manufacturing")));await bot.wait(.3);await bot.click_named("Tab_manufacturing");await bot.wait(.5)
+	bot.expect(UIRoot.top_modal() is IndustryGuideModal,"first OS industry tab opens saved guide")
+	await bot.shot("manufacturing_first_order_guide")
+	await bot.click_named("IndustryGuideContinue");await bot.wait(.3)
+	await bot.click_named("OpenLinePlanner");await bot.wait(.3)
+	var rfq: Dictionary=Manufacturing.S()["rfqs"].values()[0]
+	await _intro_control("Quote_"+rfq["id"])
+	bot.expect(not Manufacturing.S()["orders"].is_empty(),"native OEM contract accepted")
+	if Manufacturing.S()["orders"].is_empty():return
+	var order: Dictionary=Manufacturing.S()["orders"].values()[0]
+	Manufacturing.order_material(1000);UIRoot.close_all();Clock.advance(2*Clock.DAY)
+	ManufacturingUI.open();await bot.wait(.3)
+	await _intro_control("Select_"+order["job"]);await _intro_control("FactoryOvertime");await _intro_control("ReserveSlot")
+	UIRoot.close_all()
+	var slot: Dictionary=Manufacturing.S()["slots"][-1]
+	Clock.advance_to(int(slot["start"])+60);StoryEngine.check()
+	var pending: Array=EventEngine.S()["queue"].filter(func(e):return e["id"]=="intro_factory_quality")
+	bot.expect(not pending.is_empty(),"actual first-hour defects create two-choice recovery")
+	if pending.is_empty():return
+	UIRoot.open_modal(DecisionModal.new(pending[0]));await bot.wait(.4);await bot.shot("manufacturing_real_quality_recovery")
+	await bot.click_named("Choice_outsource");await bot.wait(.3)
+	if UIRoot.top_modal() is InfoModal:await bot.click_text("OK")
+	UIRoot.close_all();Clock.advance(3*60)
+	ManufacturingUI.open();await bot.wait(.3);await _intro_control("Deliver_"+order["job"]);UIRoot.close_all();StoryEngine.check()
+	bot.expect(StoryEngine.side_progress()["intro_manufacturing"]["status"]=="completed","real completed side story")
+	UIRoot.phone.open();await bot.wait(.3);await bot.click_named("App_timeline");await bot.wait(.4);await bot.shot("manufacturing_side_story_receipt")
+	UIRoot.phone.close();bot.expect(Ledger.check_balanced(),"story recovery actual ledger balanced")
+	SaveSystem.save_to(bot.out_dir.path_join("industry_intro.json"))
+func _intro_control(name: String) -> void:
+	await bot.wait(.3)
+	var b: Button=bot.button_named(name)
+	if b!=null:
+		var p: Node=b.get_parent()
+		while p!=null and not p is ScrollContainer:p=p.get_parent()
+		if p!=null:(p as ScrollContainer).ensure_control_visible(b);await bot.wait(.4)
+	await bot.click_named(name);await bot.wait(.3)

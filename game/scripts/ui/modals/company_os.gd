@@ -137,6 +137,8 @@ func build() -> void:
 	row.add_child(sc)
 	if not Industries.render_tab(tab, self):
 		call("_tab_" + tab)
+	if not IndustryGuidance.guide(tab).is_empty():
+		call_deferred("_industry_guide",tab)
 
 
 func _set_tab(t: String) -> void:
@@ -1572,3 +1574,6 @@ func _tab_segments() -> void:
 			if float(row["internal_cost"])-float(row["internal_charge"])>0.004:content.add_child(UIK.kv("Included internal media cost",Fmt.money(float(row["internal_cost"])-float(row["internal_charge"]))))
 		if float(report["totals"]["internal_revenue"])>0:content.add_child(UIK.kv("Internal trade eliminated in group total",Fmt.money(report["totals"]["internal_revenue"])))
 		content.add_child(UIK.kv("Total operating profit", Fmt.money(report["totals"]["operating_profit"])))
+
+func _industry_guide(id: String) -> void:
+	if is_inside_tree() and UIRoot.top_modal()==self:IndustryGuidance.open_first(id)

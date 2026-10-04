@@ -2,36 +2,54 @@ Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
 OpenGL API 3.3.0 NVIDIA 462.59 - Compatibility - Using Device: NVIDIA - Quadro RTX 4000
 
    0.0s STEP Main menu → New Game
-   1.0s   shot 01_main_menu.png
-   1.0s   click [NewGame] New Game
-   2.3s STEP Character Creator
-   2.4s   shot 02_creator_default.png
-   2.4s   click [Tab_hair] Hair
-   2.4s   click [Next_hair] ▶
-   2.8s   click [Tab_face] Face
-   2.9s   click [Next_face] ▶
-   3.0s   click [Next_eye_shape] ▶
-   3.1s   click [Tab_body] Body
-   3.2s   click [Next_presentation] ▶
-   3.8s   shot 03_creator_customised.png
-   3.8s   click [Tab_outfit] Outfit
-   3.9s   click "Startup Casual"
-   4.4s   ok  appearance changed from default (short_neat)
-   4.5s   shot 04_creator_final.png
-   4.5s   click [Start] Start in Aurelia  →
-   4.6s [6月1日（週日） 下午 2:00] STEP Arrival sequence
+   0.9s   shot 01_main_menu.png
+   0.9s   click [NewGame] New Game
+   2.1s STEP Character Creator
+   2.2s   shot 02_creator_default.png
+   2.2s   click [Tab_hair] Hair
+   2.3s   click [Next_hair] ▶
+   2.7s   click [Tab_face] Face
+   2.8s   click [Next_face] ▶
+   2.9s   click [Next_eye_shape] ▶
+   3.0s   click [Tab_body] Body
+   3.1s   click [Next_presentation] ▶
+   3.7s   shot 03_creator_customised.png
+   3.7s   click [Tab_outfit] Outfit
+   3.8s   click "Startup Casual"
+   4.3s   ok  appearance changed from default (short_neat)
+   4.4s   shot 04_creator_final.png
+   4.4s   click [Start] Start in Aurelia  →
+   4.5s [6月1日（週日） 下午 2:00] STEP Arrival sequence
    7.1s [6月1日（週日） 下午 2:00]   shot 05_arrival_train.png
   10.7s [6月1日（週日） 下午 2:00]   shot 06_arrival_phone.png
   15.8s [6月1日（週日） 下午 2:01]   ok  spawned in the Riverside apartment
   15.8s [6月1日（週日） 下午 2:01]   ok  starting cash $30,000
   15.8s [6月1日（週日） 下午 2:01]   ok  name saved
-  17.4s [6月1日（週日） 下午 2:03]   shot 07_apartment_arrival.png
-  21.3s [6月1日（週日） 下午 2:09] STEP Phone opportunities: no unavailable industry can offer a story
-  21.8s [6月1日（週日） 下午 2:10]   click [App_opportunities] Opportunities
-  21.9s [6月1日（週日） 下午 2:10]   ok  phone opens Opportunities through its app button
-  21.9s [6月1日（週日） 下午 2:10]   ok  unmerged industries offer no fictional content
-  21.9s [6月1日（週日） 下午 2:10]   ok  empty state has no acceptance action
-  22.1s [6月1日（週日） 下午 2:10]   shot 08_opportunities_empty.png
-  22.1s [6月1日（週日） 下午 2:10]   ok  opportunity view keeps ledger balanced
-  22.1s [6月1日（週日） 下午 2:10] BOT FINISHED — 0 failure(s) · 22.1s real
-  22.1s [6月1日（週日） 下午 2:10] English audit: 1 on-screen text(s) with untranslated words
+  17.6s [6月1日（週日） 下午 2:03]   shot 07_apartment_arrival.png
+  21.7s [6月1日（週日） 下午 2:09]   click [App_opportunities] Opportunities
+  22.0s [6月1日（週日） 下午 2:09]   shot 08_six_actual_industry_opportunities.png
+  22.6s [6月1日（週日） 下午 2:11]   click [AcceptOpportunity_intro_manufacturing] Accept opportunity
+  23.0s [6月1日（週日） 下午 2:11]   ok  real manufacturing story accepted
+  26.1s [6月2日（週一） 上午 10:05]   use "和 Lena Park 說話"
+  28.0s [6月2日（週一） 上午 10:05]   choose "› 開啟產線排程"
+  28.4s [6月2日（週一） 上午 10:05]   ok  actual mentor meeting receipt
+  29.5s [6月2日（週一） 上午 10:07]   click [Tab_manufacturing] Manufacturing
+  30.1s [6月2日（週一） 上午 10:07]   ok  first OS industry tab opens saved guide
+  30.2s [6月2日（週一） 上午 10:07]   shot 09_manufacturing_first_order_guide.png
+  30.2s [6月2日（週一） 上午 10:07]   click [IndustryGuideContinue] Continue in the industry tab
+  30.5s [6月2日（週一） 上午 10:07]   click [OpenLinePlanner] Open Line Planner
+  31.7s [6月2日（週一） 上午 10:09]   click [Quote_RFQ-1] Send quote
+  32.1s [6月2日（週一） 上午 10:09]   ok  native OEM contract accepted
+  33.2s [6月4日（週三） 上午 10:11]   click [Select_JOB-1] Schedule this order
+  34.4s [6月4日（週三） 上午 10:13]   click [FactoryOvertime] ✗ 加班 · 工資 ×1.5、良率降低 2 個百分點
+  35.5s [6月4日（週三） 上午 10:15]   click [ReserveSlot] Reserve production slot
+  36.0s [6月5日（週四） 上午 10:00]   ok  actual first-hour defects create two-choice recovery
+  36.5s [6月5日（週四） 上午 10:00]   shot 10_manufacturing_real_quality_recovery.png
+  36.5s [6月5日（週四） 上午 10:00]   click [Choice_outsource] 外包補救生產
+  38.0s [6月5日（週四） 下午 1:01]   click [Deliver_JOB-1] Deliver and invoice
+  38.4s [6月5日（週四） 下午 1:02]   ok  real completed side story
+  38.8s [6月5日（週四） 下午 1:02]   click [App_timeline] Timeline
+  39.4s [6月5日（週四） 下午 1:03]   shot 11_manufacturing_side_story_receipt.png
+  39.4s [6月5日（週四） 下午 1:03]   ok  story recovery actual ledger balanced
+  39.4s [6月5日（週四） 下午 1:03] BOT FINISHED — 0 failure(s) · 39.4s real
+  39.4s [6月5日（週四） 下午 1:03] English audit: 8 on-screen text(s) with untranslated words
