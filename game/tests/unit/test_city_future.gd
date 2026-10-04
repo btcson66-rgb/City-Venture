@@ -298,3 +298,31 @@ func test_early_invalid_city_fixture_is_rejected_and_civic_schema_roundtrips() -
 	CityFuture.reconcile();StoryEngine.check()
 	runner.eq(GameState.data["ledger"]["journal"].size(),journals,"loaded services cannot pay twice")
 	runner.check(Ledger.check_balanced(),"actual civic books remain balanced after load")
+
+
+func test_actual_completed_city_capture_loads_receipts_cards_and_legacy() -> void:
+	runner.eq(SaveSystem.DIR,"user://test_saves","played capture reads only isolated test storage")
+	DirAccess.make_dir_recursive_absolute(SaveSystem.DIR)
+	var text:=FileAccess.get_file_as_string("res://tests/fixtures/saves/city_future_4a5319d5.json")
+	var file:=FileAccess.open(SaveSystem.DIR.path_join("slot_98.json"),FileAccess.WRITE)
+	file.store_string(text);file.close()
+	var loaded: bool=SaveSystem.load_data(98)
+	runner.check(loaded,"actual six-chapter native capture loads: "+SaveSystem.last_error)
+	if not loaded:return
+	runner.eq(CityFuture.S()["cards"].size(),6,"all six actual result cards survive")
+	runner.eq(int(CityFuture.S()["viewed"]),6,"actual viewed progress survives")
+	runner.eq(LegacyBusiness.S()["ending"],"independent","earlier enterprise ending survives city tour and load")
+	runner.check(GameState.flag("city_future_complete"),"actual full third-season completion survives")
+	for number in range(19,25):
+		var chapter:=CityFuture.chapter(number)
+		runner.eq(chapter["status"],"reviewed","actual native chapter reviewed %d"%number)
+		runner.check(CityFuture.definition(number)["id"] in StoryEngine.St()["chapters_done"],"actual story completion survives %d"%number)
+		for receipt in chapter["contracts"]:
+			var job:=Jobs.get_job(receipt["job"])
+			runner.eq(job["direction"],"purchase","native receipt is a paid purchase")
+			runner.eq(job["paid_cost"],job["price"],"actual supplier payment survives load")
+	var journals: int=GameState.data["ledger"]["journal"].size()
+	CityFuture.reconcile();StoryEngine.check()
+	runner.eq(GameState.data["ledger"]["journal"].size(),journals,"completed native capture never pays or refunds twice")
+	runner.eq(CityFuture.S()["cards"].size(),6,"loaded review cannot duplicate city cards")
+	runner.check(Ledger.check_balanced(),"full played civic save remains balanced")
