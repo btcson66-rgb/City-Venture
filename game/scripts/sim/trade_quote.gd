@@ -32,7 +32,9 @@ static func sheet(origin: String, destination: String, product: String, quantity
 	var transport: Dictionary = c["transport"][mode]
 	var pay: Dictionary = c["payments"][payment]
 	var purchase := snappedf(float(supply["price"]) * source_rate * quantity, 0.01)
-	var freight := snappedf((float(transport["base_fee"]) + float(transport["unit_fee"]) * quantity) * float(c["routes"][destination]["freight_factor"]), 0.01)
+	var trade_state: Dictionary=GameState.data.get("trade",{})
+	var freight_factor: float=float(trade_state.get("freight_mult",1.0)) if Clock.now()<int(trade_state.get("freight_until",0)) else 1.0
+	var freight := snappedf((float(transport["base_fee"]) + float(transport["unit_fee"]) * quantity) * float(c["routes"][destination]["freight_factor"])*freight_factor, 0.01)
 	var origin_cost := snappedf(float(c["origin_handling_per_unit"]) * quantity, 0.01)
 	var insured_now: bool = insured or bool(terms["insurance_required"])
 	var insurance := snappedf(purchase * float(c["insurance_rate"]), 0.01) if insured_now else 0.0

@@ -1,0 +1,39 @@
+{
+ "id": "ingrid_solberg",
+ "name": "Ingrid Solberg",
+ "role": "Freight forwarder",
+ "appearance": {
+  "presentation": "feminine",
+  "face": "square",
+  "hair": "bob",
+  "hair_color": "blonde",
+  "skin": "s5",
+  "eye_shape": "round",
+  "eye_color": "dark",
+  "brows": "thick",
+  "mouth": "grin",
+  "accessory": "none"
+ },
+ "outfit": "office_professional",
+ "outfit_tints": {
+  "top": "#2a3f66",
+  "bottom": "#2c3038"
+ },
+ "schedule": [
+  {
+   "days": "all",
+   "from": "08:00",
+   "to": "18:00",
+   "location": "interior:cargo_terminal",
+   "spot": "forwarder",
+   "pose": "idle"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [],
+   "conversation": "ingrid_freight"
+  }
+ ],
+ "phone_contact": true
+}

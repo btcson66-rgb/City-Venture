@@ -444,6 +444,46 @@
    "desc": "Open an EV charging station.",
    "metric": "fn:energy_stations_open",
    "value": 1
+  },
+  {
+   "id": "trade_register",
+   "industry": "international_trade",
+   "name": "Cross-border registration",
+   "desc": "Complete import and export registration.",
+   "metric": "data:trade.registered",
+   "value": 1
+  },
+  {
+   "id": "trade_first",
+   "industry": "international_trade",
+   "name": "First cargo delivered",
+   "desc": "Deliver and collect one actual trade.",
+   "metric": "stat:trade_deliveries",
+   "value": 1
+  },
+  {
+   "id": "trade_three",
+   "industry": "international_trade",
+   "name": "Three completed trades",
+   "desc": "Deliver and collect three actual trades.",
+   "metric": "stat:trade_deliveries",
+   "value": 3
+  },
+  {
+   "id": "trade_ten",
+   "industry": "international_trade",
+   "name": "Ten completed trades",
+   "desc": "Deliver and collect ten actual trades.",
+   "metric": "stat:trade_deliveries",
+   "value": 10
+  },
+  {
+   "id": "trade_twenty",
+   "industry": "international_trade",
+   "name": "Twenty completed trades",
+   "desc": "Deliver and collect twenty actual trades.",
+   "metric": "stat:trade_deliveries",
+   "value": 20
   }
  ]
 }
