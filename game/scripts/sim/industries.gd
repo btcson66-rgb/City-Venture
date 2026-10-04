@@ -19,7 +19,7 @@ static func all(include_services := false) -> Array:
 		{"id":"automotive", "sim_class":Automotive, "prefixes":["auto"], "slot":"business", "actions":{"automotive_open":Automotive.open_action}},
 		{"id":"international_trade", "sim_class":TradeIndustry, "prefixes":["trade"], "slot":"business", "actions":{"trade_open":TradeIndustry.open_action}},
 		{"id":"governance", "sim_class":Governance, "prefixes":["gov"], "slot":"business", "service":true, "actions":{"tax_filing":Governance.open_action}},
-		{"id":"personal_life", "sim_class":PersonalLife,"prefixes":["life"],"slot":"business","service":true}] + _extra
+		{"id":"personal_life", "sim_class":PersonalLife,"prefixes":["life"],"slot":"business","service":true,"global":true}] + _extra
 	return entries if include_services else entries.filter(func(e): return not e.get("service",false))
 
 static func register(record: Dictionary) -> bool:
@@ -47,9 +47,17 @@ static func dispatch(kind: String, payload: Dictionary) -> bool:
 			return true
 	return false
 
-static func on_hour(t: int, h: int, slot: String) -> void:
+## `per_company` is the multi-company pass (#91): player-level ("global") modules wait for on_hour_global, so a
+## household's stress and illness tick once an hour however many companies are run.
+static func on_hour(t: int, h: int, slot: String, per_company := false) -> void:
 	for entry in all(true):
-		if entry.get("slot", "business") == slot:
+		if entry.get("slot", "business") == slot and not (per_company and entry.get("global", false)):
+			Sim.phase = "hour:" + str(entry["id"])
+			entry["sim_class"].on_hour(t, h)
+
+static func on_hour_global(t: int, h: int, slot := "business") -> void:
+	for entry in all(true):
+		if entry.get("slot", "business") == slot and entry.get("global", false):
 			Sim.phase = "hour:" + str(entry["id"])
 			entry["sim_class"].on_hour(t, h)
 

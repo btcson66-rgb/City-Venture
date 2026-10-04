@@ -123,9 +123,13 @@ static func handle(kind: String,p: Dictionary) -> void:
 	elif kind=="gov.legal_result" and c["status"]=="pending":_resolve(c)
 static func on_hour() -> void:
 	var day := Clock.day_index()
-	if int(S()["last_day"])==day:return
-	S()["last_day"]=day
 	var entity := GameState.business_entity()
+	# One draw per company per day (#91): a portfolio pass visits each company with its own entity.
+	if not S().has("last_days"):S()["last_days"]={}
+	var seen := int(S()["last_days"].get(entity,-1 if CompanyPortfolio.is_multi() else int(S()["last_day"])))
+	if seen==day:return
+	S()["last_day"]=day
+	S()["last_days"][entity]=day
 	if not Tax.valid(entity) or Clock.now()<int(S()["cooldowns"].get(entity,0)):return
 	var id := ""
 	if Ledger.balance(entity,"wages_payable")<0 and GameState.randf()<float(cfg()["employee_chance"]):id=employee_dispute(entity)

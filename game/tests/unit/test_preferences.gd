@@ -34,6 +34,7 @@ func test_settings_round_trip_preserves_unknown_sections_and_game() -> void:
 
 func test_subtitles_wait_for_choices_manual_mode_and_settings() -> void:
 	UIRoot.close_all()
+	UIRoot._pending_reports.clear()   # month-close reports queued by earlier simulation tests must not open here
 	await runner.get_tree().process_frame
 	var dialogue := DialogueBox.new()
 	runner.get_tree().root.add_child(dialogue)

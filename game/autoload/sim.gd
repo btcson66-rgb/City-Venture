@@ -128,6 +128,7 @@ func _on_hour(t: int, h: int) -> void:
 		HoldingGroups.on_hour()
 		return
 	HoldingGroups.on_hour()
+	Industries.on_hour_global(t,h)
 	Living.on_hour(t,h)
 	EventEngine.on_hour(t,h)
 	Industries.on_hour(t,h,"careers")
@@ -180,7 +181,7 @@ func _company_hour(t: int,h: int) -> void:
 	Industries.on_hour(t,h,"sales")
 	Contracts.on_hour(t,h)
 	Staff.on_hour(t,h)
-	Industries.on_hour(t,h,"business")
+	Industries.on_hour(t,h,"business",true)
 	Assets.on_hour(t,h)
 	Jobs.on_hour(t,h)
 	InternalSupply.on_hour(t,h)

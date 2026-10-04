@@ -37,7 +37,7 @@ func test_every_stage_invoice_only_after_client_acceptance() -> void:
 	runner.eq(FreelanceWorkflow.stage(g), "acceptance", "client review after revision")
 	var result := FreelanceWorkflow.accept_delivery(g["id"])
 	runner.check(result["ok"], "acceptance invoices")
-	runner.eq(-Ledger.balance("player", "revenue"), result["fee"], "invoice is actual service revenue")
+	runner.eq(-Ledger.balance("player", "revenue"), snappedf(float(result["fee"]) - Tax.vat(float(result["fee"])), 0.01), "invoice is actual service revenue (net of collected VAT)")
 	runner.check(not FreelanceWorkflow.accept_delivery(g["id"])["ok"], "exactly once")
 	Clock.advance((int(g["terms"]) + 1) * Clock.DAY)
 	runner.eq(g["status"], "paid", "real scheduled payment")
