@@ -83,6 +83,8 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 			if params.get("desk", false) and not npc_present("harbor_point"):
 				UIRoot.toast("Rosa is at reception weekdays, 06:00–20:00.", "warn", "people")
 			else: UIRoot.open_modal(FitnessModal.new(bool(params.get("desk", false))))
+		"clinic", "health_insurance":
+			UIRoot.open_modal(TrafficModal.new())
 		"cafe_counter":
 			Cafe.select_shop(str(params.get("property","corner_cafe")))
 			_cafe_counter()
@@ -142,6 +144,8 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 			UIRoot.open_modal(CafeDepthModal.new(str(params.get("property","corner_cafe"))))
 		"home_letting":
 			UIRoot.open_modal(HomeMoveModal.new())
+		"manage_leases":
+			UIRoot.open_modal(LeaseEndModal.new(str(params.get("property", ""))))
 		"lease_property":
 			UIRoot.open_modal(LeaseModal.new(str(params.get("property", ""))))
 		"cowork_desk":
@@ -229,6 +233,9 @@ static func _look(params: Dictionary) -> void:
 
 static func _talk(npc_id: String) -> void:
 	PersonalLife.meet(npc_id)
+	if npc_id == "dr_lin":
+		run("clinic", {})
+		return
 	var def := DataDB.npc(npc_id)
 	for d in def.get("dialogue", []):
 		if Cond.all(d.get("when", [])):

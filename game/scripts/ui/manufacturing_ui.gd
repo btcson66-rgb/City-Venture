@@ -30,6 +30,7 @@ static func render(owner: Node) -> void:
 	owner.content.add_child(go)
 static func board(det: Control, _board: Node) -> void:
 	det.add_child(UIK.wrap("Lease Unit 12 in Industrial. Rent a machine, register as an employer and hire Tomas. OEM clients pay deposits and settle invoices on Net 30 terms.", 8, Art.C_WHITE, 300))
+	det.add_child(UIK.tip("net_terms"))
 	var go := UIK.button("Open Line Planner", open, "primary")
 	go.name = "OpenLinePlanner"
 	det.add_child(go)

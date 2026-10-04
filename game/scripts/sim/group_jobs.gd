@@ -65,7 +65,11 @@ static func offer(def_id: String) -> String:
 	S()["items"][id] = {"id": id, "def": def_id, "status": "offered", "offered": Clock.now(), "expires": Clock.now() + int(def["offer_days"]) * Clock.DAY,
 		"deadline": 0, "base": {}, "sub": {}, "paid": 0.0, "fees": 0.0, "entity": GameState.business_entity()}
 	S()["last_offer"][def_id] = Clock.now()
-	GameState.add_message(str(def.get("npc", "")), I18n.t("%s has a big order that needs several of your businesses: %s. Reward %s. Open Company OS, Group tab.") % [I18n.t(str(def["client_name"])), I18n.t(str(def["title"])), Fmt.money0(float(def["reward"]))])
+	GameState.add_message(str(def.get("npc", "")), I18n.t("%s has a big order that needs several of your businesses: %s. Reward %s. Open Company OS, Group tab.") % [I18n.t(str(def["client_name"])), I18n.t(str(def["title"])), Fmt.money0(float(def["reward"]))], {"ctx": {"group_job": id}, "expires": S()["items"][id]["expires"], "default_reply": "decline", "replies": [
+		{"id": "accept", "label": "Accept this offer", "requires": ["company_registered"], "effects": [{"op": "phone_group_job", "choice": "accept"}]},
+		{"id": "decline", "label": "Decline this offer", "effects": [{"op": "phone_group_job", "choice": "decline"}]},
+		{"id": "details", "label": "What are the payment and delivery terms?", "effects": [], "keep_open": true, "outcome": "Only completed job parts earn their share. Review deliverables, deadline and subcontracting fees in Company OS, Group tab."}
+	]})
 	EventBus.notify.emit(I18n.t("New group job: %s") % I18n.t(str(def["title"])), "info", "contracts")
 	return id
 

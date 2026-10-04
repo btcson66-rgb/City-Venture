@@ -96,6 +96,7 @@ var card: PanelContainer
 var head: Label
 var body: Label
 var keys_row: HBoxContainer
+var opening_choices: VBoxContainer
 var _t := 0.0
 var _step_t := 0.0
 var _last_pos := Vector2.INF
@@ -152,6 +153,8 @@ func _ready() -> void:
 	v.add_child(body)
 	keys_row = UIK.hbox(2)
 	v.add_child(keys_row)
+	opening_choices = UIK.vbox(2)
+	v.add_child(opening_choices)
 	# the guide arrow draws above the card, so a target behind the card still shows its label
 	_guide = Control.new()
 	_guide.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -412,6 +415,8 @@ func _show_step(i: int) -> void:
 	if _completing:
 		return
 	var txt := I18n.t(step_text(STEPS[i]))
+	var opening := DestinationHours.target_text(STEPS[i])
+	if opening != "": txt += "\n" + opening
 	if _shown == i and _shown_loc == I18n.locale() and _shown_txt == txt:
 		return
 	_shown = i
@@ -431,7 +436,20 @@ func _show_step(i: int) -> void:
 		kl.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 		kc.add_child(kl)
 		keys_row.add_child(kc)
-	keys_row.visible = not s.get("keys", []).is_empty()
+	UIK.clear(opening_choices)
+	var dest := DestinationHours.target(s)
+	if dest.has("building"):
+		var bid := str(dest["building"])
+		var npc := str(dest.get("npc", ""))
+		var state := DestinationHours.status(bid, npc)
+		if not state["open"] and int(state["next"]) > Clock.now():
+			var wait := UIK.button("Fast-forward to opening", DestinationHours.wait_until_open.bind(bid, npc))
+			wait.name = "TutorialWaitOpening"
+			opening_choices.add_child(wait)
+			var other := UIK.button("Do something else first", func(): UIRoot.open_modal(CityGuideModal.new()))
+			other.name = "TutorialOtherActivity"
+			opening_choices.add_child(other)
+	keys_row.visible = keys_row.get_child_count() > 0
 	_fit_card.call_deferred()
 
 
@@ -592,7 +610,7 @@ func _resolve(ws: WorldScene) -> Dictionary:
 	if tgt.is_empty() or tgt.get("phone", false):
 		return {}
 	if tgt.has("building"):
-		return _route_to_building(ws, str(tgt["building"]), str(tgt.get("action", "")))
+		return _route_to_building(ws, str(tgt["building"]), str(tgt.get("action", "")), str(tgt.get("npc", "")))
 	if tgt.has("action"):
 		var near := _interactable(ws, str(tgt["action"]))
 		if not near.is_empty():
@@ -650,7 +668,7 @@ func _interactable(ws: WorldScene, action: String) -> Dictionary:
 	return {"pos": best.global_position, "label": lb}
 
 
-func _route_to_building(ws: WorldScene, bid: String, action: String) -> Dictionary:
+func _route_to_building(ws: WorldScene, bid: String, action: String, npc := "") -> Dictionary:
 	if ws.kind == "interior":
 		if ws.scene_id == bid:
 			return _interactable(ws, action) if action != "" else {}
@@ -661,7 +679,7 @@ func _route_to_building(ws: WorldScene, bid: String, action: String) -> Dictiona
 		var dp: Vector2 = ws.spawns.get("door_" + bid, Vector2.ZERO)
 		if dp == Vector2.ZERO:
 			return {}
-		return {"pos": dp - Vector2(0, 20), "label": I18n.t(str(b.get("name", bid)))}
+		return {"pos": dp - Vector2(0, 20), "label": I18n.t(str(b.get("name", bid))) + " · " + str(DestinationHours.status(bid, npc)["text"])}
 	return _route_to_district(ws, district)
 
 
@@ -733,7 +751,7 @@ func _draw_guide() -> void:
 			_guide.draw_polyline(arrow, ink, 1.5)
 		if label != "":
 			var w := font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, 8).x
-			var lp := Vector2(sp.x - w / 2.0, y - 22)
+			var lp := Vector2(clampf(sp.x - w / 2.0, 6, 634 - w), maxf(14, y - 22))
 			_guide.draw_rect(Rect2(lp + Vector2(-4, -9), Vector2(w + 8, 13)), gold)
 			_guide.draw_string(font, lp + Vector2(0, 1), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 8, ink)
 		return

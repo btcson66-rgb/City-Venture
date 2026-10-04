@@ -34,7 +34,8 @@
    "hours": [
     4,
     8
-   ]
+   ],
+   "work_type": "brand"
   },
   {
    "id": "sheet",
@@ -42,7 +43,8 @@
    "hours": [
     6,
     10
-   ]
+   ],
+   "work_type": "finance"
   },
   {
    "id": "audit",
@@ -50,7 +52,8 @@
    "hours": [
     5,
     9
-   ]
+   ],
+   "work_type": "operations"
   },
   {
    "id": "social",
@@ -58,7 +61,8 @@
    "hours": [
     6,
     12
-   ]
+   ],
+   "work_type": "brand"
   },
   {
    "id": "pricing",
@@ -66,7 +70,8 @@
    "hours": [
     4,
     7
-   ]
+   ],
+   "work_type": "finance"
   },
   {
    "id": "suppliers",
@@ -74,7 +79,8 @@
    "hours": [
     6,
     10
-   ]
+   ],
+   "work_type": "market"
   },
   {
    "id": "launch",
@@ -83,7 +89,8 @@
     10,
     16
    ],
-   "min_rep": 3.5
+   "min_rep": 3.5,
+   "work_type": "brand"
   },
   {
    "id": "books",
@@ -92,7 +99,8 @@
     8,
     14
    ],
-   "min_rep": 3.0
+   "min_rep": 3.0,
+   "work_type": "finance"
   },
   {
    "id": "pitch",
@@ -101,7 +109,17 @@
     12,
     18
    ],
-   "min_rep": 4.0
+   "min_rep": 4.0,
+   "work_type": "brand"
+  },
+  {
+   "id": "market",
+   "title": "Research the market for %s",
+   "hours": [
+    6,
+    10
+   ],
+   "work_type": "market"
   }
  ]
 }

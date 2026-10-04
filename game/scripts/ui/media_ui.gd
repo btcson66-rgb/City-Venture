@@ -76,6 +76,7 @@ func briefs(content: Control) -> void:
 		var preferences: Array=brief["preferences"]
 		content.add_child(UIK.wrap(I18n.t("Client preferences: %s / %s / %s")%[I18n.t(Media.cfg()["creative_cards"]["slogan"][int(preferences[0])]),I18n.t(Media.cfg()["creative_cards"]["visual"][int(preferences[1])]),I18n.t(Media.cfg()["creative_cards"]["tone"][int(preferences[2])])],8,Art.C_SKY,550))
 		content.add_child(UIK.label(I18n.t("Creative quality %.0f%% · service fee %s · media rebate %.0f%% · Net 30")%[float(brief["quality"])*100,Fmt.money0(Media.cfg()["service_fee"]),float(Media.cfg()["media_rebate"])*100],8))
+		content.add_child(UIK.tip("net_terms"))
 		var row := UIK.hbox(4)
 		content.add_child(row)
 		var creative := UIK.button("Build Creative Pitch",play_creative.bind(brief["id"]),"primary" if float(brief["quality"])==0 and not has_primary else "button")

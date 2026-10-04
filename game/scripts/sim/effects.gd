@@ -24,6 +24,37 @@ static func apply(e: Dictionary, ctx: Dictionary) -> Dictionary:
 
 		"shop_network":
 			return ShopLife.network_choice(str(e.get("kind", "")), ctx)
+		"phone_group_job":
+			var id := str(e.get("id", ctx.get("group_job", "")))
+			var job := GroupJobs.get_job(id)
+			if job.is_empty() or job["status"] != "offered" or GameState.data["entities"].get(job["entity"], {}).has("closed") or GameState.data["entities"].get(GameState.company_id(), {}).has("closed"):
+				return {"ok": false, "error": I18n.t("This group job is no longer on offer.")}
+			if e.get("choice", "") == "accept": return GroupJobs.accept(id)
+			job["status"] = "expired" if Clock.now() >= int(job["expires"]) else "declined"
+			return {"ok": true}
+		"phone_payment_extension":
+			return Bank.request_payment_extension(str(e["id"]))
+		"phone_contract":
+			var id := str(e.get("id", ctx.get("contract", "")))
+			var contract: Dictionary = Contracts.C().get(id, {})
+			if contract.is_empty() or contract["status"] != "offered" or Contracts.seller_closed(contract) or GameState.data["entities"].get(GameState.company_id(), {}).has("closed"): return {"ok": false, "error": I18n.t("This offer is no longer open.")}
+			if Clock.now() >= int(contract["expires"]):
+				contract["status"] = "expired"
+				Contracts._tag(contract, "declined")
+				EventBus.contract_changed.emit(id)
+				return {"ok": true}
+			if e.get("choice", "") == "accept": return Contracts.accept(id)
+			Contracts.reject(id)
+			return {"ok": true}
+		"phone_bank_later":
+			if int(Bank.B().get("appointment", -1)) == int(e["at"]):
+				Bank.B()["appointment"] = -1
+				Sim.cancel("bank.appointment", "id", "lending")
+			return {"ok": true}
+		"phone_meeting":
+			return PhoneMessages.book(str(e.get("npc", ctx.get("npc", ""))), int(e.get("at", -1)), str(e.get("location", "")), str(e.get("conversation", "")))
+		"lease_damage":
+			return LeaseEnd.record_damage(str(e.get("property", ctx.get("property", ""))), _num(e.get("amount", 0), ctx))
 		"industry":
 			var module := Industries.find(str(e.get("industry", "")))
 			if module.is_empty() or not module["sim_class"].has_method("crisis"):
@@ -123,7 +154,7 @@ static func apply(e: Dictionary, ctx: Dictionary) -> Dictionary:
 		"set_flag":
 			GameState.set_flag(e["flag"], e.get("value", true))
 		"message":
-			GameState.add_message(e["from"], EventEngine.fill(e["text"], ctx))
+			GameState.add_message(e["from"], EventEngine.fill(e["text"], ctx), e.get("options", {}))
 		"timeline":
 			GameState.timeline(EventEngine.fill(e["text"], ctx), e.get("kind", "event"))
 		"none":

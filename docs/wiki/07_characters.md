@@ -265,3 +265,5 @@ Rosa Lim、Ines Duarte、Sam Okoro 均交 `characters/npc_<id>` 128×144（三�
 ### Ines Duarte — implemented interaction (#31)
 
 `ines` now attends `customs_house` weekdays 09:00–16:00. `ines_customs` explains duty classification and DDP/DDU. `uniform_officer` is the interim outfit; dedicated sprites/portraits remain Planned. A permanent notice and Overseas-sales guide provide an office-hours alternative.
+## Dr. Lin (`dr_lin`)
+The clinic doctor uses an existing civic_staff outfit and works at civic_clinic every day. Talking opens the same treatment and admission window as the counter.

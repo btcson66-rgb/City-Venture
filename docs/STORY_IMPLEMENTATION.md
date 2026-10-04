@@ -435,3 +435,5 @@ See wiki/24_consolidation_and_legacy.md for market receipts, three acquisition b
 ## Third season: civic delivery (#99)
 
 Chapters 19–24 each use four ordinary StoryEngine objectives. The first objective begins a lazy CityFuture chapter and selects world year 11 or 12; objective flags come only from briefing, real purchase-job delivery or failure, player choice, and result review. Deadline expiry is an explicit unavailable path; an already performed action is idempotent. Municipal appropriation is equity in a separate municipal entity, never player revenue. All choices, costs, delivery risk and world modifiers are data in economy/city_future.json and world/years.json. See wiki/35_city_future.md for each chapter and policy.
+### NPC destination schedules (#109)
+Meet Daniel, Ken and Lina objectives carry an NPC target so initial guidance and the arrow reflect their scheduled presence, not just the building opening hours. Hours are displayed without changing completion conditions or story progression.

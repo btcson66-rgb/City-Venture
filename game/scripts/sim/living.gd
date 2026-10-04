@@ -27,15 +27,19 @@ static func on_hour(t: int, h: int) -> void:
 	Housing.on_hour()
 	PersonalAssets.on_hour()
 	ShopLife.on_hour(t)
+	LeaseEnd.on_hour()
 	if h == 0:
 		Ledger.expense("player", "living", daily_living(), "Food, transit & bills", {"type": "living"})
+		for pid in D()["leases"]:
+			if Ecommerce.total_units_at(pid) > 0 or not LeaseEnd.workers(pid).is_empty():
+				LeaseEnd.record_damage(pid, float(LeaseEnd.policy(pid).get("damage_per_used_day", 0)))
 	if h == 9:
 		var dom := int(Clock.date()["day"])
 		if dom == int(cfg().get("rent_due_day_of_month", 14)):
 			pay_home_rent()
 		for pid in D()["leases"]:
 			var ls: Dictionary = D()["leases"][pid]
-			if int(ls.get("day", 0)) == dom and t - int(ls.get("since", 0)) > 20 * Clock.DAY:
+			if (not ls.has("ending") or ls["ending"].has("blocked")) and int(ls.get("day", 0)) == dom and t - int(ls.get("since", 0)) > 20 * Clock.DAY:
 				_charge_lease(pid, ls)
 	if h == 23:
 		for ent in _entities():
@@ -99,7 +103,7 @@ static func lease(pid: String) -> Dictionary:
 	if deposit > 0:
 		lines.append({"acct": "deposits", "dr": deposit})
 	Ledger.post(ent, I18n.t("Lease signed: %s") % I18n.t(prop["name"]), lines, {"type": "lease", "id": pid})
-	D()["leases"][pid] = {"rent": rent, "day": int(Clock.date()["day"]), "since": Clock.now(), "entity": ent}
+	D()["leases"][pid] = {"rent": rent, "day": int(Clock.date()["day"]), "since": Clock.now(), "entity": ent, "deposit": deposit, "damage": 0.0}
 	GameState.timeline(I18n.t("Leased %s for %s/month.") % [I18n.t(prop["name"]), Fmt.money0(rent)], "business")
 	EventBus.world_refresh.emit()
 	return {"ok": true}
@@ -140,3 +144,7 @@ static func check_solvency() -> void:
 
 static func handle(_kind: String, _p: Dictionary) -> void:
 	pass
+
+
+static func end_lease(property_id: String, mode: String, plan: Dictionary = {}) -> Dictionary:
+	return LeaseEnd.end_lease(property_id, mode, plan)

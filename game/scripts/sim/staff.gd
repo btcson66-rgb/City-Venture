@@ -262,11 +262,11 @@ static func on_hour(t: int, h: int) -> void:
 
 
 static func _pack_hour(p: Dictionary, h: int) -> void:
-	var loc := "suite_2b"
+	var loc := str(p.get("workplace", "suite_2b"))
 	if not Living.has_lease(loc):
 		return
 	var cap := int(round(4.0 * _output(p)))
-	var n := Ecommerce.pack_orders(loc, cap)
+	var n := Ecommerce.pack_orders(loc, cap, {}, int(p["skill"]))
 	if n > 0:
 		GameState.inc_stat("orders_packed_by_staff", n)
 	if h == 16 and not Ecommerce.orders_with(["packed"], loc).is_empty():

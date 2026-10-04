@@ -307,6 +307,7 @@ func test_growth_tiers_need_conditions_and_add_rooms() -> void:
 	runner.check(Ledger.check_balanced(),"growth balanced")
 func test_media_group_campaign_lifts_hotel_demand() -> void:
 	setup()
+	runner.check(Living.lease("loft_office")["ok"], "media has an operating office")
 	var before := float(Hotel.demand("standard",Clock.day_index()+1)["direct"])
 	Media.S()["boosts"]["hotel"]={"until":Clock.now()+3*Clock.DAY,"value":.2,"id":"QA"}
 	Media.S()["active"]=true

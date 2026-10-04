@@ -201,9 +201,11 @@ func business_display_name() -> String:
 
 
 # ------------------------------------------------------------------ messages / timeline
-func add_message(from_id: String, text: String) -> void:
+func add_message(from_id: String, text: String, options: Dictionary = {}) -> void:
 	text = I18n.t(text)   # a plain English line becomes the player's language; already-translated text passes through
-	data["messages"].append({"t": Clock.now(), "from": from_id, "text": text, "read": false})
+	var message := {"t": Clock.now(), "from": from_id, "text": text, "read": false}
+	PhoneMessages.prepare(message, options)
+	data["messages"].append(message)
 	EventBus.message_received.emit(from_id, text)
 
 

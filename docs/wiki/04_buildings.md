@@ -197,3 +197,5 @@ Implemented: `maple_owner_home` (Maple Court owner apartment), `heights_penthous
 資料識別：`popup_retail` 店面、`popup` 銷售通路、`popup_shopper` 週末逛街客。
 ## Store activities (#40)
 Crestline Flagship (`crestline_flagship`) retains its lighting look and Chapter 5 alt text. The shelf now offers `market_research` for owned/listed products, thirty game minutes with a seven-day saved cache. Harbor Point Fitness (`harbor_point_fitness`) sells personal memberships/single classes through Rosa Lim (`harbor_point`), at reception weekdays 06:00–20:00. Four timed hour-long classes can introduce real business opportunities: `fitness_order`, `fitness_carrier`, `fitness_press`.
+## Civic Clinic & Pharmacy (`civic_clinic`)
+Civic Center replaces the office_slab filler at x=506 with an enterable 24-hour clinic. Existing facade and civic interior props are reused. Treatment, pharmacy and health insurance are reached through its counters.

@@ -37,6 +37,12 @@ func _draw() -> void:
 		var rr := Rect2((r2.position - origin) * SCALE, r2.size * SCALE)
 		if rr.intersects(Rect2(Vector2.ZERO, size)):
 			draw_rect(rr, s["color"])
+	if ws.kind == "district":
+		for ex in ws.def.get("exits", []):
+			var r: Array = ex["rect"]
+			var edge := Vector2(float(r[0]) + float(r[2]) / 2, float(r[1]) + float(r[3]) / 2)
+			var end := ((edge - origin) * SCALE).clamp(Vector2(4, 4), size - Vector2(4, 4))
+			draw_line(size / 2, end, Color(0.8, 0.7, 0.25, 0.5), 1.0)
 	for c in ws.get_tree().get_nodes_in_group("cars"):
 		var p: Vector2 = (c.position - origin) * SCALE
 		if Rect2(Vector2.ZERO, size).has_point(p):
@@ -48,7 +54,12 @@ func _draw() -> void:
 		p2 = p2.clamp(Vector2(4, 4), size - Vector2(4, 4))
 		var tex := Art.icon(str(poi["icon"]))
 		if tex:
-			draw_texture_rect(tex, Rect2(p2 - Vector2(5, 5), Vector2(10, 10)), false)
+			if poi.has("direction"):
+				draw_set_transform(p2, {"N": -PI / 2, "E": 0.0, "S": PI / 2, "W": PI}[str(poi["direction"])])
+				draw_texture_rect(tex, Rect2(Vector2(-5, -5), Vector2(10, 10)), false)
+				draw_set_transform(Vector2.ZERO)
+			else:
+				draw_texture_rect(tex, Rect2(p2 - Vector2(5, 5), Vector2(10, 10)), false)
 	var pp := (center - origin) * SCALE
 	draw_circle(pp, 3.0, Color8(12, 18, 30))
 	draw_circle(pp, 2.2, Color.WHITE if int(Time.get_ticks_msec() / 400) % 2 == 0 else Art.C_SKY)

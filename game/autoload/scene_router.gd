@@ -246,3 +246,9 @@ func reenter_current() -> void:
 	capture_location()
 	var loc: Dictionary = GameState.data["player"]["location"]
 	_enter(str(loc["kind"]), str(loc["id"]), "", str(loc["facing"]), Vector2(float(loc["x"]), float(loc["y"])))
+
+
+## Persistent router owns the ambulance coroutine after the initiating modal is freed.
+func ambulance_clinic() -> void:
+	await _fade(func(): _enter("interior", "civic_clinic", "door", "up"))
+	UIRoot.open_modal(TrafficModal.new())

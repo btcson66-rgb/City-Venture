@@ -16,7 +16,7 @@ func _init(loc: String) -> void:
 
 func build() -> void:
 	var waiting := Ecommerce.orders_with(["placed"], location)
-	var packable := waiting.filter(func(o): return Ecommerce.stock(location, str(o["product"])) >= int(o["qty"]))
+	var packable := waiting.filter(func(o): return Ecommerce.can_pack(o, location))
 	var packed := Ecommerce.orders_with(["packed"], location)
 	var inv := Ecommerce.inv(location)
 	var stock_line := []
@@ -27,7 +27,7 @@ func build() -> void:
 	body.add_child(UIK.sep())
 	body.add_child(UIK.label(I18n.t("Orders waiting to be packed: %d") % waiting.size(), 9, Art.C_WHITE, true))
 	for o in waiting.slice(0, 5):
-		body.add_child(UIK.label("  %s · %s · %s · %s" % [o["id"], I18n.t(DataDB.product(o["product"])["name"]), o["customer"], Fmt.money(o["unit_price"])], 8, Art.C_MUTED))
+		body.add_child(UIK.label("  %s · %s · %s · %s" % [o["id"], Packing.summary(o), o["customer"], Fmt.money(Packing.total(o))], 8, Art.C_MUTED))
 	if waiting.size() > 5:
 		body.add_child(UIK.label(I18n.t("  …and %d more") % (waiting.size() - 5), 8, Art.C_DIM))
 	var mins := int(DataDB.shipping().get("pack_minutes_per_order", 8))
@@ -74,7 +74,7 @@ func build() -> void:
 
 ## You pack by hand (PackGame): each order's quality follows it to the customer.
 func _pack() -> void:
-	var waiting := Ecommerce.orders_with(["placed"], location).filter(func(o): return Ecommerce.stock(location, str(o["product"])) >= int(o["qty"]))
+	var waiting := Ecommerce.orders_with(["placed"], location).filter(func(o): return Ecommerce.can_pack(o, location))
 	if waiting.is_empty():
 		UIRoot.toast("Nothing to pack here: is the stock at this location?", "warn", "warning")
 		return

@@ -1,0 +1,23 @@
+{
+ "meeting_lead_minutes": 60,
+ "meeting_window_minutes": 60,
+ "templates": {
+  "coffee": {
+   "label": "Would you like to meet for coffee?",
+   "cooldown_minutes": 1440,
+   "requires": []
+  },
+  "work": {
+   "label": "Do you have any work briefs?",
+   "cooldown_minutes": 1440,
+   "requires": [
+    "company_registered"
+   ]
+  },
+  "payment": {
+   "label": "Could you confirm the invoice payment date?",
+   "cooldown_minutes": 1440,
+   "requires": []
+  }
+ }
+}

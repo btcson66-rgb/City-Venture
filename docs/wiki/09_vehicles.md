@@ -87,3 +87,6 @@
 
 - `props/bike` 是停著的腳踏車，已有。
 - 規劃：騎腳踏車的路人（大學區），需要**騎車姿勢**的角色圖層，優先度低。
+
+## Traffic safety (#115)
+Cars use their actual pixel/second speed and swept body contact. Green marked crosswalks are protected and stop vehicles. Red or unmarked crossings may exceed braking distance. Personal injuries, incurred medical costs, preexisting insurance and dated claims are saved; emergency care can create an unpaid bill. Minor injuries recover naturally after three days or immediately with medicine. Major admission advances 1–3 simulation days, including real business ticks. #96 is unmerged: seven-day administrative medical claims use a local pending state, not its legal workflow. #94 receives a pure driver liability quote hook; no invented collision income is posted.

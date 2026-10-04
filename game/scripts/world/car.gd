@@ -83,11 +83,28 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if Clock.is_paused() and UIRoot.is_blocking():
+	if Clock.is_paused() or UIRoot.is_blocking():
 		return
-	var target := 0.0 if _blocked() else speed
-	cur_speed = move_toward(cur_speed, target, 160.0 * delta)
+	var protected := false
+	for p in get_tree().get_nodes_in_group("player"):
+		if TrafficSafety.protected_crossing(scene.scene_id, p.global_position) and absf(p.global_position.y-lane_y) < float(TrafficSafety.cfg()["green_lane_margin_px"]):
+			var gap: float = (p.global_position.x-position.x)*dir
+			if gap > -length/2.0 and gap < length/2.0 + cur_speed*cur_speed/(2.0*float(TrafficSafety.cfg()["brake_px_s2"])) + float(TrafficSafety.cfg()["green_stop_padding_px"]): protected = true
+	var previous_center := position.x
+	var impact_speed := cur_speed
+	var target := 0.0 if _blocked() or protected else speed
+	cur_speed = move_toward(cur_speed, target, float(TrafficSafety.cfg()["brake_px_s2"]) * delta)
+	if protected: cur_speed = 0.0
 	position.x += dir * cur_speed * delta
+	var current_center := position.x
+	var margin := float(TrafficSafety.cfg()["contact_margin_px"])
+	for p in get_tree().get_nodes_in_group("player"):
+		var pp: Vector2 = p.global_position
+		if absf(pp.y-lane_y) < float(TrafficSafety.cfg()["contact_half_height_px"]) and pp.x >= minf(previous_center,current_center)-length/2.0-margin and pp.x <= maxf(previous_center,current_center)+length/2.0+margin and impact_speed > 0:
+			var result := TrafficSafety.hit(impact_speed, scene.scene_id, pp)
+			if result["ok"]:
+				cur_speed = 0.0
+				UIRoot.open_modal.call_deferred(TrafficModal.new("accident"))
 	var w: float = scene.size_px.x
 	if dir > 0 and position.x > w + 80:
 		position.x = -80 - _rng.randf() * 200

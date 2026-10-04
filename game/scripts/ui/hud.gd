@@ -31,11 +31,16 @@ var _delta_t := -1
 var _delta := 0.0
 var welcome: BuildingWelcome
 var here_button: Button
+var safety_button: Button
 
 
 func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	safety_button = UIK.button("Use crosswalks for safer crossing", func(): UIRoot.open_modal(TrafficModal.new("accident")))
+	safety_button.position = Vector2(220,330)
+	safety_button.custom_minimum_size = Vector2(240,20)
+	add_child(safety_button)
 	# time card
 	var tp := UIK.panel("ui/panel_glass", 5)
 	tp.position = Vector2(6, 6)
@@ -164,6 +169,8 @@ func _ready() -> void:
 	SaveSystem.saved.connect(_on_saved)
 	EventBus.cash_changed.connect(_on_cash)
 	EventBus.objective_changed.connect(refresh)
+	Clock.minute_tick.connect(func(_t):
+		if visible and Clock.world_active: _refresh_objective_hours())
 	EventBus.message_received.connect(func(_a, _b): refresh())
 	welcome = BuildingWelcome.new()
 	add_child(welcome)
@@ -234,6 +241,10 @@ func set_prompt(text: String) -> void:
 
 
 func _process(_d: float) -> void:
+	if GameState.has_game():
+		var ws := SceneRouter.world_scene()
+		safety_button.visible = ws != null and ws.kind == "district"
+		safety_button.text = I18n.t("Injury: %s") % TrafficSafety.severity_label(str(TrafficSafety.S()["injury"])) if TrafficSafety.S()["injury"] != "none" else I18n.t("Use crosswalks for safer crossing")
 	if not visible or not GameState.has_game():
 		return
 	vitality_label.text=I18n.t("Energy %d%% · stress %d%%")%[roundi(PersonalLife.energy()),roundi(PersonalLife.S()["stress"])]
@@ -289,10 +300,17 @@ func refresh() -> void:
 	var o := StoryEngine.main_objective()
 	obj_panel.visible = not o.is_empty()
 	goal_label.text = I18n.t(str(o.get("goal", ""))).to_upper()
-	obj_label.text = o.get("text", "")
+	_refresh_objective_hours()
 	var ws := SceneRouter.world_scene()
 	if ws != null:
 		loc_label.text = (I18n.t(DataDB.districts[ws.scene_id]["name"]) if ws.kind == "district" else I18n.t(DataDB.building(ws.scene_id).get("name", ""))).to_upper()
+
+
+func _refresh_objective_hours() -> void:
+	var o := StoryEngine.main_objective()
+	obj_label.text = o.get("text", "")
+	var hours := DestinationHours.target_text(o)
+	if hours != "": obj_label.text += "\n" + hours
 
 
 func _on_saved(slot: int) -> void:

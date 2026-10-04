@@ -10,7 +10,7 @@ const ACTION_ICONS := {
 	"energy_open": "company", "energy_subsidy": "civic",
 	"buy_item": "shop", "clothing_shop": "shop", "cafe_counter": "coffee",
 	"work_shift": "tasks", "open_company_os": "laptop", "cowork_desk": "laptop",
-	"sleep": "sleep", "read_news": "info", "bank_counter": "bank", "atm": "bank",
+	"sleep": "sleep", "read_news": "info", "clinic": "civic", "health_insurance": "bank", "bank_counter": "bank", "atm": "bank",
 	"loans_info": "bank", "register_company": "civic", "permits_info": "civic", "take_number": "civic",
 	"pack_orders": "parcel", "dropoff_parcels": "parcel", "change_outfit": "shirt",
 	"personal_assets": "home", "cafe_depth": "coffee", "logistics_depth": "map", "popup_store": "shop", "popup_till": "cash", "home_letting": "home", "lease_property": "home", "whiteboard": "objective", "look": "info", "talk": "people",
@@ -117,11 +117,11 @@ static func hours(id: String) -> String:
 
 static func status(id: String) -> String:
 	if SceneRouter.building_open(id)["open"]:
-		return I18n.t("Open now")
+		return str(DestinationHours.status(id)["text"])
 	var b := DataDB.building(id)
 	if b.has("closed_reason"):
 		return I18n.t("Not open yet")
-	return I18n.t("Closed · opens %s") % str(b.get("hours", {}).get("open", "00:00"))
+	return str(DestinationHours.status(id)["text"])
 
 
 static func door_text(id: String) -> String:
@@ -199,7 +199,7 @@ static func guide_tags(id: String) -> String:
 			"buy_item", "cafe_counter": tag = I18n.t("Eat")
 			"clothing_shop": tag = I18n.t("Shop")
 			"work_shift", "open_company_os", "cowork_desk", "business_board", "pack_orders": tag = I18n.t("Work")
-			"bank_counter", "atm", "loans_info", "register_company", "permits_info", "take_number", "dropoff_parcels": tag = I18n.t("Services")
+			"clinic", "health_insurance", "bank_counter", "atm", "loans_info", "register_company", "permits_info", "take_number", "dropoff_parcels": tag = I18n.t("Services")
 			"lease_property": tag = I18n.t("Property")
 			"sleep": tag = I18n.t("Housing")
 		if tag != "" and not tag in tags:

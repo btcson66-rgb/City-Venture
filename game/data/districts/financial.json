@@ -2,7 +2,7 @@
  "id": "financial",
  "name": "Financial District",
  "size_tiles": [
-  80,
+  96,
   44
  ],
  "music": "financial",
@@ -87,6 +87,15 @@
     25,
     3,
     5
+   ]
+  },
+  {
+   "type": "sidewalk",
+   "rect": [
+    80,
+    0,
+    16,
+    44
    ]
   }
  ],
@@ -911,26 +920,95 @@
  },
  "exits": [
   {
-   "id": "west",
+   "id": "walk_riverside",
+   "direction": "S",
    "rect": [
-    0,
-    320,
+    1304,
+    688,
+    48,
+    16
+   ],
+   "to": "riverside",
+   "spawn": "from_financial",
+   "walk_min": 9
+  },
+  {
+   "id": "walk_civic_center",
+   "direction": "E",
+   "rect": [
+    1520,
+    324,
     16,
-    244
+    48
    ],
    "to": "civic_center",
    "spawn": "from_financial",
-   "walk_min": 6
+   "walk_min": 9
+  },
+  {
+   "id": "walk_harbor",
+   "direction": "S",
+   "rect": [
+    1368,
+    688,
+    48,
+    16
+   ],
+   "to": "harbor",
+   "spawn": "from_financial",
+   "walk_min": 12
+  },
+  {
+   "id": "walk_luxury_heights",
+   "direction": "N",
+   "rect": [
+    1304,
+    0,
+    48,
+    16
+   ],
+   "to": "luxury_heights",
+   "spawn": "from_financial",
+   "walk_min": 10
+  },
+  {
+   "id": "walk_old_town",
+   "direction": "W",
+   "rect": [
+    0,
+    324,
+    16,
+    48
+   ],
+   "to": "old_town",
+   "spawn": "from_financial",
+   "walk_min": 7
   }
  ],
  "spawns": {
   "from_civic_center": [
-   40,
-   430
+   1496,
+   348
   ],
   "metro": [
    920,
    642
+  ],
+  "from_riverside": [
+   1328,
+   664
+  ],
+  "from_harbor": [
+   1392,
+   664
+  ],
+  "from_luxury_heights": [
+   1328,
+   40
+  ],
+  "from_old_town": [
+   40,
+   348
   ]
  },
  "bounds": {
@@ -977,5 +1055,13 @@
   "evening": 6,
   "night": 2
  },
- "minimap_color": "#4a5a80"
+ "minimap_color": "#4a5a80",
+ "walk_corridors": [
+  [
+   1280,
+   0,
+   256,
+   704
+  ]
+ ]
 }

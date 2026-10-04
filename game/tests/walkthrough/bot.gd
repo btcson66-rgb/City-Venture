@@ -77,6 +77,8 @@ func _ready() -> void:
 	SaveSystem.DIR = out_dir.path_join("saves")
 	SaveSystem.autosave_enabled = false
 	DirAccess.make_dir_recursive_absolute(out_dir + "/screenshots")
+	# Automation owns its output saves and never replaces a player save when all slots are occupied.
+	SaveSystem.DIR = out_dir.path_join("saves")
 	t0 = Time.get_ticks_msec()
 	UIRoot.toasted.connect(func(text: String, kind: String): if kind == "bad": log_line("  toast: " + text))
 	if I18n.locale().begins_with("zh"):
@@ -185,6 +187,20 @@ func _audit_one(t: String, ctl: Control) -> void:
 func _run() -> void:
 	await wait(1.0)
 	match mode:
+		"traffic_safety":
+			await load("res://tests/walkthrough/traffic_safety_tour.gd").new(self).run()
+		"workflows":
+			await load("res://tests/walkthrough/workflows_tour.gd").new(self).run()
+		"packing":
+			await load("res://tests/walkthrough/packing_tour.gd").new(self).run()
+		"phone_messages":
+			await load("res://tests/walkthrough/phone_messages_tour.gd").new(self).run()
+		"map_adjacency":
+			await load("res://tests/walkthrough/map_adjacency_tour.gd").new(self).run()
+		"lease_end":
+			await load("res://tests/walkthrough/lease_end_tour.gd").new(self).run()
+		"player_feedback":
+			await load("res://tests/walkthrough/player_feedback_tour.gd").new(self).run()
 		"save_transfer":
 			await load("res://tests/walkthrough/save_transfer_tour.gd").new(self).run()
 		"patch_notes":
@@ -825,7 +841,10 @@ func _minigames() -> void:
 	for f in [["Size", b.want["size"]], ["Drink", b.want["drink"]], ["Milk", b.want["milk"]], ["Shots", b.want["shots"]]]:
 		await click_named("%s_%s" % [f[0], f[1]], 1.0)
 	await shot("mg_barista_built")
+	await click_named("ConfirmOrder", 1.0)
 	await click_named("Serve", 1.0)
+	await click_named("Deliver_%d" % int(b.want["destination"]), 1.0)
+	await click_named("CleanTable", 1.0)
 	await wait(0.3)
 	expect(b.points >= 0.99, "a correctly built drink scores full points (%.2f)" % b.points)
 	await _mg_finish(b, "barista")
@@ -835,6 +854,7 @@ func _minigames() -> void:
 	await _mg_finish(ps, "parcels")
 	var ch: CoworkHostGame = await _mg_open(CoworkHostGame.new(), "cowork")
 	await click_named("Desk_" + str(ch.visitors[0]["answer"]), 1.0)
+	await click_named("Room_A_10", 1.0)
 	expect(ch.points > 0.7, "handling a visitor right scores")
 	await _mg_finish(ch, "cowork")
 	var cf: ClerkFormsGame = await _mg_open(ClerkFormsGame.new(), "clerk")
@@ -844,6 +864,7 @@ func _minigames() -> void:
 		await click_named("Field_" + str(cf.form["bad"]), 1.0)
 		await shot("mg_clerk_marked")
 		await click_named("Reject", 1.0)
+	await click_named("Complaint_verify", 1.0)
 	expect(cf.points >= 0.99, "the right call on a form scores full points")
 	await _mg_finish(cf, "clerk")
 	var tc: TellerCashGame = await _mg_open(TellerCashGame.new(), "teller")
@@ -854,6 +875,7 @@ func _minigames() -> void:
 			left -= d
 	await shot("mg_teller_counted")
 	await click_named("HandOver", 1.0)
+	await click_named("Refund_" + ("yes" if tc.receipt_valid else "no"), 1.0)
 	expect(tc.points >= 0.99, "an exact, tidy withdrawal scores full points")
 	await _mg_finish(tc, "teller")
 	var ph: PhotoShootGame = await _mg_open(PhotoShootGame.new("desk_lamp"), "photo")
@@ -867,6 +889,11 @@ func _minigames() -> void:
 		orders.append({"id": "O10%d" % i, "product": ["wireless_earbuds", "desk_lamp", "water_bottle"][i], "qty": 1, "customer": "Rin Tanaka"})
 	var pk: PackGame = await _mg_open(PackGame.new(orders), "pack")
 	await click_named("Box_" + pk.need_box(), 1.0)
+	for place in Packing.plan(pk._order(), pk.box):
+		await click_named("PackItem_%d" % int(place["item"]), 1.0)
+		if place["rotated"]: await click_named("RotateItem", 1.0)
+		await click_named("Grid_%d_%d" % [int(place["x"]), int(place["y"])], 1.0)
+		if place["rotated"]: await click_named("RotateItem", 1.0)
 	for i in 5:
 		await click_named("Pad", 1.0)
 	for i in 3:

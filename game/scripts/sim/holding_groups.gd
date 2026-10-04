@@ -136,8 +136,13 @@ static func on_month_end(t0: int,t1: int) -> void:
 	for id in CompanyPortfolio.ids():
 		if GameState.data["entities"][id]["type"]==cfg()["holding_type"]: S()["reports"].append({"parent":id,"t0":t0,"t1":t1,"report":consolidated(id,t0,t1)})
 
-static func pack_margin(order: Dictionary,loc: String,before: int) -> void:
-	var amount := stock_margin(str(order["entity"]),loc,str(order["product"]),int(order["qty"]),before)
+static func pack_margin(order: Dictionary,loc: String,before: Variant) -> void:
+	# `before` is stock before packing: a product -> units dictionary for multi-item orders (or one legacy int).
+	var amount := 0.0
+	for item in Packing.items(order):
+		var units := int(before.get(item["product"],0)) if typeof(before)==TYPE_DICTIONARY else int(before)
+		amount+=stock_margin(str(order["entity"]),loc,str(item["product"]),int(item["qty"]),units)
+	amount=snappedf(amount,.01)
 	if is_zero_approx(amount): return
 	order["group_internal_margin"]=amount
 	order["group_margin_key"]=key(str(order["entity"]),"pending",str(order["id"]))

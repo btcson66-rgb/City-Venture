@@ -72,6 +72,7 @@ func _physics_process(_delta: float) -> void:
 	elif not can_move():
 		click_route.clear()
 	var speed := RUN_SPEED if Input.is_action_pressed("run") else WALK_SPEED
+	speed *= TrafficSafety.speed_multiplier()
 	velocity = v.normalized() * speed if v.length() > 0.1 else Vector2.ZERO
 	moving = velocity.length() > 0.1
 	if moving:

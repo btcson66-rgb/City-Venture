@@ -567,6 +567,8 @@ static func _rental_day() -> void:
 	for id in fleet_cars():
 		var item := fleet_item(id)
 		if bool(policy()["auto_service"]) and (bool(item.get("maintenance_due", false)) or item["status"] == "broken") and str(S()["fleet"][id]["rental"]) == "" and Ledger.cash(entity()) >= service_cost(id): service(id)
+	# Existing trips still return and settle after the counter closes.
+	if not Living.has_lease("gateway_counter"): return
 	var requests := 0
 	var started := 0
 	for cls in r["class_weight"]:
@@ -673,7 +675,7 @@ static func unit_cost(model: Dictionary) -> float:
 	return snappedf(float(model["msrp"]) * (1.0 - float(brand_def()["margin"])), 1.0)
 
 static func order_new(model_id: String, qty: int) -> Dictionary:
-	if not valid() or not dealership_active(): return error("Sign a franchise first.")
+	if not valid() or not dealership_active() or not Living.has_lease("gateway_showroom"): return error("Sign a franchise first.")
 	var model := {}
 	for m in brand_def()["models"]:
 		if m["id"] == model_id: model = m
@@ -706,6 +708,7 @@ static func new_stock(model_id := "") -> Array:
 static func new_car_price(msrp: float) -> float: return snappedf(msrp * (1.0 - float(policy()["discount"])), 1.0)
 
 static func _walk_ins() -> void:
+	if not Living.has_lease("gateway_showroom"): return
 	if not dealership_active(): return
 	var d := dealer()
 	var brand := brand_def()
@@ -728,6 +731,7 @@ static func _walk_ins() -> void:
 		GameState.inc_stat("cars_sold")
 
 static func _after_sales() -> void:
+	if not Living.has_lease("gateway_showroom"): return
 	if not dealership_active(): return
 	var d := dealer()
 	var visits := GameState.poisson(float(S()["franchise"]["sold"]) * float(d["service_rate"]))
@@ -762,7 +766,7 @@ static func _monthly() -> void:
 		S()["franchise"]["short"] = 0
 
 static func terminate(forced := false) -> Dictionary:
-	if not valid() or not dealership_active(): return error("Sign a franchise first.")
+	if not valid() or not dealership_active() or not Living.has_lease("gateway_showroom"): return error("Sign a franchise first.")
 	var d := dealer()
 	var deposit := float(S()["franchise"]["deposit"])
 	var forfeit := snappedf(deposit * float(d["deposit_forfeit"]), 0.01) if forced else 0.0

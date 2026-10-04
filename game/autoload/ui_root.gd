@@ -134,6 +134,7 @@ func play_dialogue(id: String, done := Callable()) -> void:
 
 
 func _process(_delta: float) -> void:
+	PhoneMessages.check_arrival()
 	# toasts sit at the top in the world; while a management screen is open they drop to the bottom
 	# edge so they never cover a modal's title bar
 	# toasts sit at the top in the world. With a screen open, only the newest one shows, tucked under

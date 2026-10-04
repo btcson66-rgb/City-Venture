@@ -37,6 +37,10 @@ func build() -> void:
 			v.add_child(UIK.wrap(I18n.t(group["name"]) + " · " + BuildingInfo.station(bid), 7, Art.C_MUTED, 520))
 			if not SceneRouter.building_open(bid)["open"]:
 				v.add_child(UIK.wrap("The arrow guides you to the door; wait until opening hours to enter.", 7, Art.C_DIM, 520))
+				if int(DestinationHours.status(bid)["next"]) > Clock.now():
+					var wait := UIK.button("Fast-forward to opening", _wait_open.bind(bid))
+					wait.name = "GuideWait_" + bid
+					v.add_child(wait)
 	var done := UIK.button("Close", close)
 	done.name = "CloseCityGuide"
 	footer.add_child(done)
@@ -46,3 +50,8 @@ func _guide(bid: String) -> void:
 	UIRoot.tutorial.guide_to_building(bid)
 	close()
 	UIRoot.toast(I18n.t("Follow the gold arrow to %s.") % I18n.t(str(DataDB.building(bid)["name"])), "info", "map")
+
+
+func _wait_open(bid: String) -> void:
+	close()
+	DestinationHours.wait_until_open(bid)

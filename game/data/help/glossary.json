@@ -25,9 +25,9 @@
   "why": "You never pay for goods that don't show up, and the supplier knows the money is there. Useful with a supplier you haven't worked with before."
  },
  "net_terms": {
-  "title": "Payment terms (Net 30 / Net 60)",
-  "what": "The buyer pays the invoice 30 or 60 days after delivery, not on the day they get the goods.",
-  "why": "A big sale can still leave you short of cash for two months. Check the cash forecast before you say yes."
+  "title": "Payment terms (Net 0 / Net 30 / Net 60)",
+  "what": "Net 0 means pay now. Net 30 or Net 60 means pay within 30 or 60 days after delivery or invoicing.",
+  "why": "Longer supplier terms delay your cash outflow, but may cost a higher price or require credit. Customer terms delay your receipts: check your cash forecast before accepting."
  },
  "early_payment": {
   "title": "Early payment discount",
@@ -783,5 +783,30 @@
   "title": "Personal relationships",
   "what": "Affinity ranges from 0 to 100. Acquaintance, friend and partner stages unlock three personal requests. Gifts have individual preferences.",
   "why": "Relationships introduce paid work and useful information. They never increase demand, scores or profit by themselves."
+ },
+ "accounts_payable": {
+  "title": "Accounts payable",
+  "what": "Supplier invoices you owe but have not paid yet.",
+  "why": "Buying on terms leaves cash in your bank today, but the invoice still falls due. Reserve enough cash for it."
+ },
+ "phone_replies": {
+  "title": "Reply deadlines",
+  "what": "Time-limited messages resolve their saved default when the deadline passes. Read the outcome in the same thread.",
+  "why": "A missed reply must not stall a task. Review Tasks or book a new meeting from Contacts if the original action is unavailable."
+ },
+ "grid_packing": {
+  "title": "Grid packing and postage",
+  "what": "Select an item, rotate it if needed, then click a free grid cell. Every item must fit before sealing.",
+  "why": "Larger boxes cost more in materials and dimensional postage. Fragile goods need padding."
+ },
+ "freelance_stages": {
+  "title": "Interview, scope and acceptance",
+  "what": "Use the client's brief. Research, financial models, operating processes and brand strategy each need different work.",
+  "why": "Your work quality affects acceptance. A session uses real consulting hours; no payment is earned before acceptance."
+ },
+ "personal_health": {
+  "title": "Preexisting health coverage",
+  "what": "A policy covers most medical costs only if active before the collision. Unpaid emergency bills remain debts.",
+  "why": "Buy coverage before taking risks. A new policy cannot reimburse an earlier accident; cancelling renewal does not refund the current premium."
  }
 }

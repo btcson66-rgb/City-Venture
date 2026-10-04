@@ -16,14 +16,16 @@ func setup(r: Rect2, d: Vector2, t: String) -> void:
 	dir = d
 	text = t
 	z_index = 5
-	_label = UIK.world_label(t, 6, Color(1.0, 0.86, 0.42))
+	_label = UIK.world_label(t, 8, Color(1.0, 0.86, 0.42))
 	_label.add_theme_font_override("font", UIK.bold_font())
 	_label.add_theme_constant_override("outline_size", 3)
-	var w := 90.0
-	_label.size = Vector2(w, 9)
+	var w := 144.0
+	_label.size = Vector2(w, 12)
 	var c := rect.get_center()
 	if dir == Vector2.DOWN:
 		_label.position = Vector2(c.x - w / 2.0, rect.position.y - 16)
+	elif dir == Vector2.UP:
+		_label.position = Vector2(c.x - w / 2.0, rect.end.y + 48)
 	elif dir == Vector2.RIGHT:
 		_label.position = Vector2(rect.position.x - w - 4, c.y - 34)
 		_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -41,13 +43,13 @@ func _process(delta: float) -> void:
 func _draw() -> void:
 	var pulse := 0.5 + 0.5 * sin(_t * 3.5)
 	var gold := Color(1.0, 0.82, 0.3)
-	if dir == Vector2.DOWN:
+	if dir.y != 0:
 		draw_rect(rect.grow(1), Color(gold, 0.18 + 0.2 * pulse), true)
 		draw_rect(rect.grow(1), Color(gold, 0.55 + 0.35 * pulse), false, 1.0)
 		var c := rect.get_center()
 		for i in 2:
-			var y := rect.position.y - 7.0 + i * 3.0 + 2.0 * pulse
-			draw_polyline(PackedVector2Array([Vector2(c.x - 4, y), Vector2(c.x, y + 3), Vector2(c.x + 4, y)]), Color(gold, 0.6 + 0.4 * pulse), 1.0)
+			var y := (rect.position.y - 7.0 if dir.y > 0 else rect.end.y + 7.0) + dir.y * (i * 3.0 + 2.0 * pulse)
+			draw_polyline(PackedVector2Array([Vector2(c.x - 4, y), Vector2(c.x, y + dir.y * 3), Vector2(c.x + 4, y)]), Color(gold, 0.6 + 0.4 * pulse), 1.0)
 		return
 	# street edge: a column of chevrons on the road, pointing off the map
 	var cx := rect.position.x - 10.0 if dir == Vector2.RIGHT else rect.end.x + 10.0

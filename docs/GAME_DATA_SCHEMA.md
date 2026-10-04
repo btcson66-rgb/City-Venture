@@ -514,6 +514,24 @@ data.bank             {credit, loans{}, seq, no_loans_until?, appointment?}
                         the reminder; meeting Marcus removes both. Missed slots stay in phone Tasks with rebooking advice.
                         Loan records keep their existing fields and repayment schedule unchanged.
 
+data.messages         [{id, t, from, text, read, direction?: incoming|outgoing, replies?, ctx?, decision?,
+                        expires?, default_reply?, answered?, expired?}]
+                        Each reply: {id, label, requires[], effects[], recommended?, keep_open?, outcome?}.
+                        Conditions and effects use EventEngine/Effects; decision references the original pending iid.
+                        Old messages receive IDs and acknowledgement replies lazily; outgoing entries are already read.
+                        Keep-open details preserve the choice. Expiry runs the data default once, or records
+                        expired_unavailable with a Tasks/Contacts next step if its underlying action cannot run.
+
+data.phone_messages   {seq, agenda[{id,npc,at,until,location,conversation,status: planned|met|missed}],
+                        cooldowns{"npc:template": absolute minute}, social{npc: meeting count}, expiry{message_id: minute}}
+                        Created lazily by PhoneMessages.S; missing expiry indexes rebuild from saved messages.
+                        data/economy/messages.json defines lead/window minutes and templates {label,requires[],cooldown_minutes}.
+                        Meetings search complete NPC and building opening windows; arrival plays existing dialogue.
+                        phone_met_<npc> flags and counts are the additive relationship hook while #95 is unmerged.
+                        phone_call_<conversation> is a once-only completion receipt; Maya's opening call still gates ch1.
+                        A loan may add phone_extended and retry_at: its one extension reschedules bank.payment,
+                        preserving debt, credit consequences and paid/due fees; never posts operating income.
+
 data.npcs.<id>         {met, relationship, convo_done[]}
 data.timeline          [{t, text, kind}]
 data.reports           {month_closes:[{period, entities:{id:{revenue, refunds, cogs, gross, opex{...}, rent, profit,
@@ -694,3 +712,28 @@ Building `exterior.roof_props` and filler `roof_props` are arrays of `{sprite, x
 `economy/personal_life.json`: gift prices/preferences rewards, request quality threshold/time limit, monthly social `events` (calendar day/hour/end_hour, fee AUD, duration minutes, contact ids and information), energy per logical pixel/work minute, sleep/rest restoration, fatigue timer factor, stress rates/threshold/decay, illness duration/cooldown in days and recovery fees/minutes.
 
 Saved `personal_life`: energy/stress percentages, continuous work minutes, contacts (`affinity`, `known`, step, originating entity, retired, gift day, Jobs referral id, honesty observations), monthly event receipts and illness/cooldown deadlines in Clock minutes. Lazy initialization keeps old saves neutral. Transient sleeping/resting flags are not saved. Registered as an Industries service; referral accounting uses consulting Segments and Jobs, with actual expenses and deferred collection.
+### Destination opening windows (#109)
+Objective targets may include `npc` alongside `building`. DestinationHours intersects building hours with that NPC schedule, including weekdays and conditional slots, and finds the next actual opening. Queries are read-only; explicit waiting advances Clock normally. No save keys or format changes.
+
+
+### Lease termination (#110)
+Properties tune `notice_days` (30 by default), `min_term_months`, `early_exit_fee_months`, `moving_cost_per_unit`, `moving_minutes_per_unit`, `liquidation_rate`, `damage_per_used_day` and `lease_segment`. `Living.end_lease(property_id, mode, plan)` accepts notice/immediate, a stock move/liquidate choice, staff transfer/dismiss choice, destination and industry jobs cancel/finish choice. Lease records lazily retain deposit/damage and a saved `ending` quote with due/plan/blocked. Old leases infer deposits from existing terms, capped by the entity deposit account. Notice rent is prepaid; regular rent resumes if exit is blocked. Settlement revalidates current obligations and cash, refunds actual held deposits less damage, records moving/severance/cancellation costs and preserves delivered invoices. Stock plus orders moves together, preserving unit cost. Factory raw materials and prepaid arrivals must be liquidated; their schedules are cancelled. Staff workplace overrides persist in saves. Owned hotels and owned residential rent collection continue without leased offices; leased industry operations pause until premises are restored. Home switching remains Blocked by #32: the current residence cannot be ended without a replacement.
+
+
+### Walking adjacency (#111)
+`city/aurelia.json.adjacency` maps district ids to `{neighbor: N|E|S|W}`. Directions use the dominant component of neighbor `map_pos` minus origin `map_pos` (vertical wins ties), and inverse sides must agree. The initial 20 local links use the Gabriel neighborhood of the existing map points: no intermediate district center lies inside an edge's diameter circle. This is an explicit designer-editable graph, not a runtime recomputation. District exits retain `to`, target `spawn`, rectangle and walking minutes, plus `direction`; exactly one exit per canonical neighbor is required. `walk_corridors` are pixel rectangles which carve open passages through north/south block bounds. Eastern pedestrian gutters add painted ground and space without moving facades or existing spawns. Saved scene positions are unchanged; named arrival spawns are corrected to the opposite edge. `tools/qa/map_adjacency_check.py` checks coverage, reciprocal directions, edge placement, painted ground, clearance, paths from metro, opposite target spawns and retrigger risks. The walking diagram uses map_pos; the illustrated map remains available as a separate view.
+
+### Multi-item ecommerce parcels (#113)
+`economy/ecommerce.json` defines combo/quantity probabilities, box grid/height/material cost/dimensions, padding damage and staff policies, dimensional divisor and excess kg rate. Products carry `size:[width,depth,height]`, `weight` (kg), `fragile`. Orders retain legacy `product/qty/unit_price` (primary line) and new `items:[{product,qty,unit_price,cogs?}]`, `total`, `pack:{box,padding,placements:[{item,x,y,rotated}],q,label_ok}`. Old single-line orders are interpreted lazily without deleting keys. Saved pack selection controls postage and damage. Returns apply to the whole basket; one defective line makes the whole returned basket non-resellable.
+
+
+### Work stations and client consulting (#114)
+`economy/workflows.json` holds revision allowance/max rounds, additional revision hours/fee (AUD$), quote multipliers/reputation ceiling, player-wide daily consulting hours, scope chance/extra work/surcharge, acceptance quality and discounted settlement rate. It also tunes service-stage score weight, work base/quality efficiency, wrong-table quality multiplier and reputation gain per rating star. It also defines barista queue size, patience in real seconds, fast/slow tips (AUD$), four three-round `cases` sets (`market`, `finance`, `operations`, `brand`) and `interview_answers` by type and topic. Case `{text, options, answer}` uses an option index except operations, whose answer is an ordered array of option text. All displayed text is extracted for localization.
+`freelance.json.templates[].work_type` chooses the task. New offers save `workflow_version: 2` and a deterministic `scope_draw`. On acceptance their gig lazily stores `workflow` with `stage`, asked topics/knowledge, quality sum/session count, contract fee/hours/revision allowance, revisions used, scope choice, per-project daily hours and final rating. The existing outer gig status/invoice/terms/payment schedule remain authoritative. Old offers and gigs with no workflow keep the old typing/delivery route.
+`careers.daily_freelance_hours` aggregates all projects by saved day string (hours), migrating previous per-project usage lazily. `last_freelance_day` participates in the existing early-rest rule. `manager_ratings` holds score sum/count per job; `shift_counts` holds total shifts by saved day. Job ranks optionally specify `manager_rating` (0..1) and `shifts_per_day`; missing fields preserve existing behavior. Legacy earned shifts retain their promotion eligibility until a new real review exists. Barista station/table queues belong only to the paused minigame, so aborting never pays a partial shift. Energy integration is Blocked until #95 merges; no parallel fatigue state is introduced.
+
+Return-event replacement requirements use `can_replace:{order}`. The predicate checks every basket SKU and full quantity of unreserved stock; the replacement action retains its atomic preflight. Labels state whole-parcel replacement rather than one unit.
+
+### Personal traffic safety (#115)
+`data.traffic_safety` is lazily initialized without changing the ledger. Fields: `injury`, `until`, `startle_until`, `cooldown`, `active_accident`, `policy_until`, `renew`, and `accidents[]`. Each accident carries a stable id, actual speed in px/s, severity, timestamp, liability, insurance-at-impact snapshot, medical bill, health claim, treatment flag, hospital days, medical debt, settlement flag and procedure due minute. The active injury references its accident independently of later glancing contacts. Historical unpaid bills/claims remain addressable by id.
+`economy/traffic_safety.json` owns new speed thresholds, braking, collision bounds, green phase, injury duration, medicine/medical fees, hospital-day range, premium/coverage, liability draw and settlement timing/share. Clock-backed lights and injury/claim deadlines survive saves. Emergency medical payables cannot be waived by saving, purchasing insurance afterward, or opening a different company. Minor medicine needs cash; emergency admission does not. Health claims cover the incurred provider invoice, never more; counterparty compensation covers only its remaining uninsured part. Driver responsibility is a pure quote hook for #94. #96 is currently unmerged; independent seven-day administrative claims do not claim to implement its legal system.

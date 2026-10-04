@@ -67,6 +67,7 @@ func pending(kind: String) -> Array:
 
 
 func _on_minute(t: int) -> void:
+	PhoneMessages.on_minute(t)
 	var s: Array = GameState.data["schedule"]
 	var guard := 0
 	while not s.is_empty() and int(s[0]["t"]) <= t and guard < 500:
@@ -149,6 +150,7 @@ func _single_company_hour(t: int, h: int) -> void:
 	Contracts.on_hour(t, h)
 	phase = "hour:living"
 	Living.on_hour(t, h)
+	TrafficSafety.on_hour(t, h)
 	phase = "hour:events"
 	EventEngine.on_hour(t, h)
 	phase = "hour:careers"

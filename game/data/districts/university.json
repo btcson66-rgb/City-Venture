@@ -2,7 +2,7 @@
  "id": "university",
  "name": "University",
  "size_tiles": [
-  120,
+  136,
   46
  ],
  "music": "day_city",
@@ -12,7 +12,7 @@
    "rect": [
     0,
     0,
-    108,
+    120,
     20
    ]
   },
@@ -21,7 +21,7 @@
    "rect": [
     0,
     20,
-    108,
+    120,
     4
    ]
   },
@@ -30,7 +30,7 @@
    "rect": [
     0,
     24,
-    108,
+    120,
     1
    ]
   },
@@ -39,7 +39,7 @@
    "rect": [
     0,
     25,
-    108,
+    120,
     5
    ]
   },
@@ -48,7 +48,7 @@
    "rect": [
     0,
     27,
-    108,
+    120,
     1
    ],
    "step": 2
@@ -58,7 +58,7 @@
    "rect": [
     0,
     30,
-    108,
+    120,
     1
    ]
   },
@@ -67,7 +67,7 @@
    "rect": [
     0,
     31,
-    108,
+    120,
     3
    ]
   },
@@ -76,7 +76,7 @@
    "rect": [
     0,
     34,
-    108,
+    120,
     7
    ]
   },
@@ -85,7 +85,7 @@
    "rect": [
     0,
     41,
-    108,
+    120,
     1
    ]
   },
@@ -94,7 +94,7 @@
    "rect": [
     0,
     42,
-    108,
+    120,
     4
    ]
   },
@@ -114,6 +114,15 @@
     25,
     3,
     5
+   ]
+  },
+  {
+   "type": "sidewalk",
+   "rect": [
+    120,
+    0,
+    16,
+    46
    ]
   }
  ],
@@ -141,7 +150,34 @@
   "y": 560,
   "label": "Metro — University"
  },
- "exits": [],
+ "exits": [
+  {
+   "id": "walk_startup_hub",
+   "direction": "W",
+   "rect": [
+    0,
+    324,
+    16,
+    48
+   ],
+   "to": "startup_hub",
+   "spawn": "from_university",
+   "walk_min": 9
+  },
+  {
+   "id": "walk_airport",
+   "direction": "N",
+   "rect": [
+    1944,
+    0,
+    48,
+    16
+   ],
+   "to": "airport",
+   "spawn": "from_university",
+   "walk_min": 8
+  }
+ ],
  "spawns": {
   "metro": [
    1220,
@@ -150,6 +186,14 @@
   "from_old_town": [
    28,
    430
+  ],
+  "from_startup_hub": [
+   40,
+   348
+  ],
+  "from_airport": [
+   1968,
+   40
   ]
  },
  "bounds": {
@@ -211,5 +255,13 @@
  "traffic_types": [
   "compact",
   "sedan"
+ ],
+ "walk_corridors": [
+  [
+   1920,
+   0,
+   256,
+   736
+  ]
  ]
 }

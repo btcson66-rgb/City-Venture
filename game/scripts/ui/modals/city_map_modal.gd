@@ -6,6 +6,7 @@ extends Modal
 const MAP_BOX := Rect2(14, 155, 976, 650)   # board-F crop the map texture was made from
 const MAP_SIZE := Vector2(458, 305)
 
+var walking := false
 var sel := ""
 var here := ""
 var _t := 0.0
@@ -49,6 +50,14 @@ func build() -> void:
 	mapc.custom_minimum_size = MAP_SIZE
 	mapc.clip_contents = true
 	h.add_child(map_frame)
+	if walking:
+		_build_routes(mapc)
+	else:
+		_build_illustration(mapc)
+	_build_info(h)
+
+
+func _build_illustration(mapc: Control) -> void:
 	var img := TextureRect.new()
 	img.texture = Art.tex("city_map/board")
 	img.size = MAP_SIZE
@@ -100,11 +109,17 @@ func build() -> void:
 		_pin.position = board_to_map(Vector2(float(hd["board"]["pin"][0]), float(hd["board"]["pin"][1])))
 		_pin.draw.connect(_draw_pin)
 		mapc.add_child(_pin)
+
+
+func _build_info(h: Control) -> void:
 	# info column
 	var info := UIK.vbox(3)
 	info.custom_minimum_size = Vector2(150, 0)
 	info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	h.add_child(info)
+	var route_toggle := UIK.button("Walking routes" if not walking else "City illustration", func(): walking = not walking; rebuild())
+	route_toggle.name = "ToggleWalkingRoutes"
+	info.add_child(route_toggle)
 	var dd := DataDB.district_def_in_city(sel)
 	var pic := TextureRect.new()
 	pic.texture = Art.tex("city_map/i_" + sel)
@@ -160,9 +175,10 @@ func _label_card(r: Rect2, title: String, sub: String, icon: String, accent: Col
 	var t := UIK.label(title, 7, Art.C_WHITE, true)
 	t.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	v.add_child(t)
-	var s := UIK.label(sub, 6, Art.C_GOLD if sub == "You are here" else (Art.C_GREEN if sub == "Open" else Art.C_MUTED))
-	s.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	v.add_child(s)
+	if sub != "":
+		var s := UIK.label(sub, 6, Art.C_GOLD if sub == "You are here" else (Art.C_GREEN if sub == "Open" else Art.C_MUTED))
+		s.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		v.add_child(s)
 	UIK.fit_card.call_deferred(b, hb, r, Vector2(6, 4))
 	return b
 
@@ -179,3 +195,32 @@ func _process(delta: float) -> void:
 	_t += delta
 	if _pin != null:
 		_pin.queue_redraw()
+
+
+## The walking diagram uses map_pos directly; the painted board remains a separate illustrated view.
+static func route_point(d: Dictionary) -> Vector2:
+	var p: Array = d["map_pos"]
+	return Vector2(float(p[0]) * 0.65 + 16, float(p[1]) * 0.72 + 8)
+
+
+func _build_routes(mapc: Control) -> void:
+	var graph := Control.new()
+	graph.name = "WalkingConnections"
+	graph.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	graph.size = MAP_SIZE
+	mapc.add_child(graph)
+	graph.draw.connect(func():
+		for a in DataDB.city.get("adjacency", {}):
+			for b in DataDB.city["adjacency"][a]:
+				if str(a) >= str(b): continue
+				graph.draw_line(route_point(DataDB.district_def_in_city(a)), route_point(DataDB.district_def_in_city(b)), Art.C_GOLD, 2.0))
+	for d in DataDB.city["districts"]:
+		if not BuildingInfo.district_open(str(d["id"])): continue
+		var did := str(d["id"])
+		var point := route_point(d)
+		var card := _label_card(Rect2(point + Vector2(-42, -10), Vector2(84, 24 if did == here else 18)), str(d["name"]), "You are here" if did == here else "", str(d.get("icon", "info")), Art.C_GOLD, did == sel, func(): sel = did; rebuild())
+		card.name = "District_" + did
+		mapc.add_child(card)
+	var legend := UIK.label("Gold lines: walkable district connections", 7, Art.C_GOLD)
+	legend.position = Vector2(16, 270)
+	mapc.add_child(legend)
