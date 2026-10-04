@@ -191,7 +191,12 @@ func test_crisis_decisions_already_ended_and_closed_company_never_soft_lock() ->
 	runner.check(EventEngine.choose(evt["iid"],"wait")["ok"],"already ended delay decision dismisses safely")
 	evt=EventEngine.trigger("trade_fx_volatility",{"trade":d["id"]})
 	GameState.data["entities"][GameState.company_id()]["closed"]=Clock.now();TradeIndustry.on_company_closed(GameState.company_id())
-	runner.check(EventEngine.choose(evt["iid"],"spot")["ok"],"impossible closed-company decision dismisses safely")
+	var cash:=Ledger.cash(GameState.company_id())
+	var journals: int=GameState.data["ledger"]["journal"].size()
+	runner.check(not EventEngine.pending().any(func(q):return q["iid"]==evt["iid"]),"impossible closed-company decision is removed from pending work")
+	runner.check(not EventEngine.choose(evt["iid"],"spot")["ok"],"closed removed decision cannot be chosen again")
+	runner.eq(Ledger.cash(GameState.company_id()),cash,"closed removed decision cannot pay or earn money")
+	runner.eq(GameState.data["ledger"]["journal"].size(),journals,"removed choice creates no journal")
 	runner.check(not EventEngine.choose(evt["iid"],"hedge")["ok"],"already dismissed decision cannot change cash")
 	runner.check(Ledger.check_balanced(),"ended decisions preserve ledger")
 
