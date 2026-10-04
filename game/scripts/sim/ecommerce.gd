@@ -12,7 +12,7 @@ extends RefCounted
 const LEGACY_SALE_MEMO := "Sale delivered %s: %d × %s @ %s"
 
 const OPEN_STATUSES := ["placed", "packed", "awaiting_pickup", "carried", "shipped", "customs_hold"]
-const PICKUP_CHUNK := 250
+const PICKUP_CHUNK := 100
 ## Orders still waiting at the shelf; the only ones the hourly fulfilment scans ask for. Orders enter this set only when placed.
 const PRE_SHIP := ["placed", "packed"]
 

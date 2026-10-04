@@ -26,11 +26,15 @@ static func _scan_journal() -> void:
 		_journal_index = 0
 		_earned = 0.0
 		_segments = {}
+	var entities: Dictionary = GameState.data["entities"]
+	var counted := {}   # entity -> whether its revenue counts, resolved once per scan instead of once per entry
 	while _journal_index < journal.size():
 		var entry: Dictionary = journal[_journal_index]
 		_journal_index += 1
 		var company := str(entry["entity"])
-		var counts: bool = company == "player" or GameState.data["entities"].get(company, {}).get("kind", "") == "company"
+		if not counted.has(company):
+			counted[company] = company == "player" or entities.get(company, {}).get("kind", "") == "company"
+		var counts: bool = counted[company]
 		for line in entry["lines"]:
 			if line["acct"] != "revenue": continue
 			if counts: _earned += float(line.get("cr", 0)) - float(line.get("dr", 0))
@@ -107,18 +111,27 @@ static func profit_streak(ent: String) -> int:
 
 static func observe_cash() -> void:
 	var journal: Array = GameState.data["ledger"]["journal"]
+	var state := S()
+	var seen := int(state["cash_seq"])
+	var start := 0
 	for i in range(journal.size() - 1, -1, -1):
-		if int(journal[i]["n"]) <= int(S()["cash_seq"]):
-			journal = journal.slice(i + 1)
+		if int(journal[i]["n"]) <= seen:
+			start = i + 1
 			break
-	for entry in journal:
+	if start >= journal.size():
+		return
+	var entities: Dictionary = GameState.data["entities"]
+	var history: Dictionary = state["cash_history"]
+	var counted := {}
+	for i in range(start, journal.size()):
+		var entry: Dictionary = journal[i]
 		var ent := str(entry["entity"])
-		if ent != "player" and GameState.data["entities"].get(ent, {}).get("kind", "") != "company":
-			S()["cash_seq"] = int(entry["n"])
-			continue
-		S()["cash_history"][ent] = float(S()["cash_history"].get(ent, 0)) + Ledger.entry_cash(entry)
-		if float(S()["cash_history"][ent]) < -0.01: S()["overdrawn"] = true
-		S()["cash_seq"] = int(entry["n"])
+		if not counted.has(ent):
+			counted[ent] = ent == "player" or entities.get(ent, {}).get("kind", "") == "company"
+		if counted[ent]:
+			history[ent] = float(history.get(ent, 0)) + Ledger.entry_cash(entry)
+			if float(history[ent]) < -0.01: state["overdrawn"] = true
+		state["cash_seq"] = int(entry["n"])
 
 static func met(d: Dictionary) -> bool:
 	return metric(str(d["metric"])) >= float(d["value"])
