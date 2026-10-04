@@ -1539,6 +1539,7 @@ func _chapters_7_to_9() -> void:
 	bot.expect(World.year() == 3, "Year 3: the Supply Shock")
 	# ---------------------------------------------------------------- chapter 7
 	bot.step("Chapter 7 — the news, and Ken's options")
+	bot.expect(SaveSystem.save_to(bot.out_dir.path_join("chapter7_start_played.json")), "genuine chapter seven starting checkpoint saved")
 	await _read_news("supply_shock")
 	await pass_time_at_home(func(): return GameState.flag("ch7_supply_plan"), 6, true)   # Ken calls within two days
 	bot.expect(World.supplier_available("aurelia_makers"), "the local co-op is a supplier now")
@@ -1557,7 +1558,9 @@ func _chapters_7_to_9() -> void:
 	for pid in ["wireless_earbuds", "water_bottle", "desk_lamp", "phone_stand"]:
 		var listing := Ecommerce.listing_for(pid)
 		if listing.is_empty(): continue
-		var target := float(DataDB.product(pid)["ref_price"]) * 1.2
+		# Freight is 1.8x during the shock; preserve a margin after freight, fees and payroll.
+		# Real PriceUp inputs change demand through the existing elasticity model.
+		var target := float(DataDB.product(pid)["ref_price"]) * 1.5
 		for step in int(ceil(maxf(0.0, target - float(listing["price"])))):
 			await bot.click_named("PriceUp_" + pid, 3.0)
 	await bot.wait(0.4)
