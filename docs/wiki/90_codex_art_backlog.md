@@ -744,6 +744,7 @@ Planned: backdrops/chapter_13 and backdrops/chapter_14; dedicated Ines sprites/p
 
 Planned: backdrops/chapter_15, backdrops/chapter_16; dedicated Omar sprites/portrait; airport/cabin journey scene; Lumina warehouse interior; events/fx_shock. Interim executive outfit, existing bank/OS and explicit journey/comparison cards are used. No assets changed.
 
+
 # Manufacturing (#64)
 
 Facade requests: `facades/unit12_factory.png`, `facades/ferro_supply.png`, `facades/kessler_precision.png`, `facades/shift_diner.png`; existing `brick_shops` / `byte_bean` are rendered through Art.has_tex fallback. Future industrial freight sprite: `vehicles/industrial_truck_side_body.png` and `vehicles/industrial_truck_side_detail.png`; existing vans provide current freight traffic. Interior machine request: `props/cnc_machine.png` (packing bench fallback), material rack request `props/ferro_material_rack.png` (parcel shelf fallback). No art files are modified by this ticket.
@@ -768,3 +769,8 @@ Requested named facades: `airport_terminal.png`, `gateway_car_rental.png`, `aure
 Requested: backdrops/chapter_17, backdrops/chapter_18; dedicated Kai Moreno sprites/portrait; events/rival_undercut; five epilogue backdrops (city, people, company, timeline, next chapter). Existing executive outfit and UI cards are interim. No art assets changed.
 
 #35 — Planned: 25 achievement icons, 16×16, `achievements/<id>.png`; IDs follow data/story/achievements.json. Existing star icons and text remain functional fallback.
+
+
+## #70 International trade
+Requested `buildings/meridian_trade_desk.png` and `_lights.png`; existing `nexus_cowork` facade is the validated fallback. Customs House and the airport cargo terminal reuse existing art. Ingrid Solberg uses a generated appearance, with existing office desk and world/parcel icons. No art assets changed.
+
