@@ -71,12 +71,6 @@ const MAX_EVENTS_PER_MINUTE := 120
 
 
 func _on_minute(t: int) -> void:
-	var _m0 := Time.get_ticks_usec()
-	_on_minute_inner(t)
-	Prof.add("TICK:minute", Time.get_ticks_usec() - _m0)
-
-
-func _on_minute_inner(t: int) -> void:
 	PhoneMessages.on_minute(t)
 	var s: Array = GameState.data["schedule"]
 	var guard := 0
@@ -131,125 +125,59 @@ func _dispatch_owned(kind: String,p: Dictionary) -> void:
 
 
 func _on_hour(t: int, h: int) -> void:
-	var _h0 := Time.get_ticks_usec()
-	_on_hour_inner(t, h)
-	Prof.add("TICK:hour", Time.get_ticks_usec() - _h0)
-
-
-func _on_hour_inner(t: int, h: int) -> void:
 	if h == 0:
 		Ledger.compact_old(t)
-	var _t := Time.get_ticks_usec()
 	phase = "hour:macro"
-	_t = Time.get_ticks_usec()
 	Macro.on_hour(t, h)
-	Prof.add("Macro.on_hour(t, h)", Time.get_ticks_usec() - _t)
 	if CompanyPortfolio.is_multi():
-		_t = Time.get_ticks_usec()
 		for id in CompanyPortfolio.ids(): CompanyPortfolio.run_in(str(id),func():_company_hour(t,h))
-		Prof.add("portfolio_loop", Time.get_ticks_usec() - _t)
 	else:
 		_single_company_hour(t,h)
 		HoldingGroups.on_hour()
 		return
-	_t = Time.get_ticks_usec()
 	HoldingGroups.on_hour()
-	Prof.add("HoldingGroups.on_hour()", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	Industries.on_hour_global(t,h)
-	Prof.add("Industries.on_hour_global(t,h)", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	Living.on_hour(t,h)
-	Prof.add("Living.on_hour(t,h)", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	EventEngine.on_hour(t,h)
-	Prof.add("EventEngine.on_hour(t,h)", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	Industries.on_hour(t,h,"careers")
-	Prof.add("Industries.on_hour(t,h,'careers')", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	Milestones.on_hour(t,h)
-	Prof.add("Milestones.on_hour(t,h)", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	Replay.on_hour(t, h)
-	Prof.add("Replay.on_hour(t, h)", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	Growth.check()
-	Prof.add("Growth.check()", Time.get_ticks_usec() - _t)
 	_request_story_check()
 	phase=""
 
 func _single_company_hour(t: int, h: int) -> void:
 	if h == 0:
 		Ecommerce.archive_settled(t)
-	var _t := Time.get_ticks_usec()
-	_t = Time.get_ticks_usec()
 	OverseasPartners.on_hour()
-	Prof.add("OverseasPartners.on_hour()", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	LegacyBusiness.on_hour()
-	Prof.add("LegacyBusiness.on_hour()", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	CapitalMarket.on_hour()
-	Prof.add("CapitalMarket.on_hour()", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	Growth.check()
-	Prof.add("Growth.check()", Time.get_ticks_usec() - _t)
 	phase = "hour:compliance"
-	_t = Time.get_ticks_usec()
 	Compliance.on_hour(t, h)
-	Prof.add("Compliance.on_hour(t, h)", Time.get_ticks_usec() - _t)
 	phase = "hour:ecommerce"
-	_t = Time.get_ticks_usec()
 	Industries.on_hour(t, h, "sales")
-	Prof.add("Industries.on_hour(t, h, 'sales')", Time.get_ticks_usec() - _t)
 	phase = "hour:contracts"
-	_t = Time.get_ticks_usec()
 	Contracts.on_hour(t, h)
-	Prof.add("Contracts.on_hour(t, h)", Time.get_ticks_usec() - _t)
 	phase = "hour:living"
-	_t = Time.get_ticks_usec()
 	Living.on_hour(t, h)
-	Prof.add("Living.on_hour(t, h)", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	TrafficSafety.on_hour(t, h)
-	Prof.add("TrafficSafety.on_hour(t, h)", Time.get_ticks_usec() - _t)
 	phase = "hour:events"
-	_t = Time.get_ticks_usec()
 	EventEngine.on_hour(t, h)
-	Prof.add("EventEngine.on_hour(t, h)", Time.get_ticks_usec() - _t)
 	phase = "hour:careers"
-	_t = Time.get_ticks_usec()
 	Industries.on_hour(t, h, "careers")
-	Prof.add("Industries.on_hour(t, h, 'careers')", Time.get_ticks_usec() - _t)
 	phase = "hour:staff"
-	_t = Time.get_ticks_usec()
 	Staff.on_hour(t, h)
-	Prof.add("Staff.on_hour(t, h)", Time.get_ticks_usec() - _t)
 	phase = "hour:saas"
-	_t = Time.get_ticks_usec()
 	Industries.on_hour(t, h, "business")
-	Prof.add("Industries.on_hour(t, h, 'business')", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	Assets.on_hour(t, h)
-	Prof.add("Assets.on_hour(t, h)", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	Jobs.on_hour(t, h)
-	Prof.add("Jobs.on_hour(t, h)", Time.get_ticks_usec() - _t)
 	phase = "hour:group"
-	_t = Time.get_ticks_usec()
 	InternalSupply.on_hour(t, h)
-	Prof.add("InternalSupply.on_hour(t, h)", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	GroupJobs.on_hour(t, h)
-	Prof.add("GroupJobs.on_hour(t, h)", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	Milestones.on_hour(t, h)
-	Prof.add("Milestones.on_hour(t, h)", Time.get_ticks_usec() - _t)
 	phase = "hour:scenario"
-	_t = Time.get_ticks_usec()
 	Replay.on_hour(t, h)
-	Prof.add("Replay.on_hour(t, h)", Time.get_ticks_usec() - _t)
 	phase = "hour:story"
 	_request_story_check()
 	phase = ""
@@ -258,43 +186,18 @@ func _single_company_hour(t: int, h: int) -> void:
 func _company_hour(t: int,h: int) -> void:
 	if h == 0:
 		Ecommerce.archive_settled(t)
-	var _t := Time.get_ticks_usec()
-	_t = Time.get_ticks_usec()
 	OverseasPartners.on_hour()
-	Prof.add("OverseasPartners.on_hour()", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	LegacyBusiness.on_hour()
-	Prof.add("LegacyBusiness.on_hour()", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	CapitalMarket.on_hour()
-	Prof.add("CapitalMarket.on_hour()", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	Compliance.on_hour(t,h)
-	Prof.add("Compliance.on_hour(t,h)", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	Industries.on_hour(t,h,"sales")
-	Prof.add("Industries.on_hour(t,h,'sales')", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	Contracts.on_hour(t,h)
-	Prof.add("Contracts.on_hour(t,h)", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	Staff.on_hour(t,h)
-	Prof.add("Staff.on_hour(t,h)", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	Industries.on_hour(t,h,"business",true)
-	Prof.add("Industries.on_hour(t,h,'business',true)", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	Assets.on_hour(t,h)
-	Prof.add("Assets.on_hour(t,h)", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	Jobs.on_hour(t,h)
-	Prof.add("Jobs.on_hour(t,h)", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	InternalSupply.on_hour(t,h)
-	Prof.add("InternalSupply.on_hour(t,h)", Time.get_ticks_usec() - _t)
-	_t = Time.get_ticks_usec()
 	GroupJobs.on_hour(t,h)
-	Prof.add("GroupJobs.on_hour(t,h)", Time.get_ticks_usec() - _t)
 
 
 func _on_month_end(year: int, month: int) -> void:

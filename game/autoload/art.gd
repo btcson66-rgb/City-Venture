@@ -18,6 +18,8 @@ const C_GOLD := Color8(226, 180, 82)
 const C_PURPLE := Color8(170, 130, 214)
 
 const LARGE_CACHE_LIMIT := 8
+## Accounted budget for cached detail textures (RGBA8 plus a third for mipmaps), kept clear of the 1.2 GB limit.
+const TEXTURE_BUDGET_BYTES := 900 * 1024 * 1024
 const LARGE_TEXTURE_GROUPS := ["backdrops", "cards", "events", "city_map", "world_map"]
 
 var detail_enabled := true
@@ -26,6 +28,13 @@ var _cache := {}
 # live scenes may keep their own texture until they leave the tree.
 var _large_cache := {}
 var _absent := {}
+## High-resolution textures held by the small-art cache, least to most recently used: path -> accounted bytes.
+## The set is bounded by bytes (TEXTURE_BUDGET_BYTES), not entries, so a long session that walks every district,
+## NPC and outfit cannot grow past the web build's 1.2 GB texture budget (#98).
+var _detail_lru := {}
+var _detail_bytes := 0
+var _large_sizes := {}
+var peak_texture_bytes := 0
 var font_title: FontFile
 var font_body: FontFile
 
@@ -46,9 +55,14 @@ func tex(path: String) -> Texture2D:
 		if _is_large_texture(path):
 			cache.erase(path)
 			cache[path] = cached
+		elif _detail_lru.has(path):
+			var held: int = _detail_lru[path]
+			_detail_lru.erase(path)
+			_detail_lru[path] = held
 		return cached
 	var full := "res://assets/" + path + ".png"
 	var t: Texture2D = null
+	var bytes := 0
 	var detail := "res://assets/world_detail/" + path + ".png"
 	if detail_enabled and not path.begins_with("world_detail/") and ResourceLoader.exists(detail):
 		var source: Texture2D = load(detail)
@@ -56,20 +70,61 @@ func tex(path: String) -> Texture2D:
 		var logical := Vector2i(native.get_size()) if native != null else Vector2i(source.get_size() / 4.0)
 		# Keep every caller's geometry (including atlas regions and nine-slice source margins) in
 		# native pixels. Size override changes UV coordinates, not the high-resolution image data.
-		var image_texture := ImageTexture.create_from_image(source.get_image())
+		var image := source.get_image()
+		var image_texture := ImageTexture.create_from_image(image)
 		image_texture.set_size_override(logical)
 		image_texture.set_meta("detail_path", detail)
+		bytes = _accounted_bytes(image)
 		t = image_texture
 	elif ResourceLoader.exists(full):
 		t = load(full)
+		if t != null and path.begins_with("world_detail/"):
+			bytes = int(t.get_width()) * int(t.get_height()) * 16 / 3
 	else:
 		push_warning("Art: missing texture " + full)
 	if t == null and _is_large_texture(path):
 		return null   # a missing large texture must not take a slot and push a real one out of the LRU
 	cache[path] = t
-	if _is_large_texture(path) and cache.size() > LARGE_CACHE_LIMIT:
-		cache.erase(cache.keys()[0])
+	if _is_large_texture(path):
+		_large_sizes[path] = bytes
+		if cache.size() > LARGE_CACHE_LIMIT:
+			var evicted: String = cache.keys()[0]
+			cache.erase(evicted)
+			_large_sizes.erase(evicted)
+	elif t != null and bytes > 0:
+		_detail_lru[path] = bytes
+		_detail_bytes += bytes
+		_enforce_budget(path)
+	peak_texture_bytes = maxi(peak_texture_bytes, texture_bytes())
 	return t
+
+
+static func _accounted_bytes(image: Image) -> int:
+	return int(image.get_width()) * int(image.get_height()) * 4 * 4 / 3
+
+
+## Evict the least recently used detail textures until the cache fits its budget. The texture just
+## requested is never evicted; scenes that still hold an evicted texture keep it until they leave the tree.
+func _enforce_budget(keep: String) -> void:
+	while _detail_bytes + _large_bytes() > TEXTURE_BUDGET_BYTES and _detail_lru.size() > 1:
+		var oldest: String = _detail_lru.keys()[0]
+		if oldest == keep:
+			break
+		_detail_bytes -= int(_detail_lru[oldest])
+		_detail_lru.erase(oldest)
+		_cache.erase(oldest)
+
+
+func _large_bytes() -> int:
+	var total := 0
+	for key in _large_sizes:
+		total += int(_large_sizes[key])
+	return total
+
+
+## Accounted bytes of every detail texture the caches hold right now.
+func texture_bytes() -> int:
+	return _detail_bytes + _large_bytes()
 
 
 ## True when an optional art file exists, without the missing-texture warning. New art from the visuals track
@@ -102,6 +157,9 @@ func set_detail_enabled(enabled: bool) -> bool:
 	detail_enabled = enabled
 	_cache.clear()
 	_large_cache.clear()
+	_detail_lru.clear()
+	_large_sizes.clear()
+	_detail_bytes = 0
 	_absent.clear()
 	WorldScene._tileset = null
 	WorldScene._tile_index.clear()

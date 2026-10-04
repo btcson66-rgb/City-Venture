@@ -2,7 +2,7 @@ extends Node
 ## Real ecommerce/clock/save load probe. QA fixtures exceed the hiring limit;
 ## they are not a winning strategy or evidence of unimplemented industries.
 
-var options := {"days": 3653, "orders": 5000, "staff": 50, "seed": 98001, "out": "user://stress", "wall_seconds": 120, "save_every": 1, "profile": 0}
+var options := {"days": 3653, "orders": 5000, "staff": 50, "seed": 98001, "out": "user://stress", "wall_seconds": 120, "save_every": 1, "profile": 0, "textures": 0}
 var report := {}
 var samples: Array = []
 var started := 0
@@ -59,12 +59,16 @@ func _run() -> void:
 	Company.open_business_account(10000)
 	var ent := GameState.business_entity()
 	Ledger.post(ent, "Stress fixture capital", [{"acct": "cash", "dr": 1000000000.0}, {"acct": "equity", "cr": 1000000000.0}], {"type": "opening"})
+	# A 50-person shop has support agents who settle returns (otherwise every return waits for a modal that nobody answers).
+	GameState.set_flag("first_issue_resolved")
 	for i in int(options["staff"]):
 		var id := "stress_%d" % i
-		Staff.S()["people"][id] = {"id": id, "name": id, "role": "packer", "skill": 0.8,
+		Staff.S()["people"][id] = {"id": id, "name": id, "role": "support" if i % 10 == 0 else "packer", "skill": 0.8,
 			"morale": 80, "salary_week": 600.0, "start": Clock.now(), "hired": Clock.now(), "trait": "steady", "weeks": 0}
 	_open_industries()
 	_measure_coverage()
+	if int(options["textures"]) > 0:
+		_texture_soak()
 	# Flat clock profile is independent of the load and identifies calendar overhead.
 	var calendar_start := Time.get_ticks_usec()
 	for i in 1440:
@@ -194,6 +198,40 @@ func _run_day_ticks(listing: Dictionary, n_orders: int) -> Dictionary:
 	var rank := int(ceil(times.size() * 0.99)) - 1
 	return {"mean": total / times.size(), "p99": sorted[rank], "max": sorted[sorted.size() - 1],
 		"hour_mean": hour_sum / maxf(1.0, hours.size()), "placed": placed, "order_ms": order_ms, "total_wall_ms": (Time.get_ticks_usec() - wall0) / 1000.0, "frame_mean": frame_sum / frames.size(), "frame_p99": fsorted[rank], "total_ms": total}
+
+
+## A player who walks every district, NPC and outfit asks the art cache for every detail texture. The cache keeps
+## its own byte accounting (RGBA8 plus mipmaps), so the peak it reports is what the renderer would have to hold.
+## It is an accounted figure, not a GPU read-out; the report says so.
+func _texture_soak() -> void:
+	var begin := Time.get_ticks_usec()
+	var paths: Array = []
+	_collect_pngs("res://assets/world_detail", "world_detail", paths)
+	paths.sort()
+	Art.peak_texture_bytes = 0
+	var asked := 0
+	for path in paths:
+		Art.tex(path)
+		asked += 1
+	# A second walk in reverse order proves eviction keeps the budget when textures are re-requested.
+	for i in range(paths.size() - 1, -1, -1):
+		Art.tex(paths[i])
+	report["texture_bytes"] = Art.peak_texture_bytes
+	report["texture_source"] = "accounted"
+	report["texture_soak"] = {"textures_requested": asked, "budget_bytes": Art.TEXTURE_BUDGET_BYTES, "held_bytes": Art.texture_bytes(),
+		"ms": (Time.get_ticks_usec() - begin) / 1000.0}
+	print("TEXTURES requested %d, peak accounted %d MB, held %d MB" % [asked, Art.peak_texture_bytes / 1048576, Art.texture_bytes() / 1048576])
+
+
+func _collect_pngs(dir_path: String, prefix: String, out: Array) -> void:
+	var dir := DirAccess.open(dir_path)
+	if dir == null:
+		return
+	for sub in dir.get_directories():
+		_collect_pngs(dir_path.path_join(sub), prefix + "/" + sub, out)
+	for file in dir.get_files():
+		if file.ends_with(".png"):
+			out.append(prefix + "/" + file.get_basename())
 
 
 func _expired() -> bool:

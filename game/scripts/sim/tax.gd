@@ -15,6 +15,9 @@ static func E(entity: String) -> Dictionary:
 		S()["entities"][entity] = {"from":Clock.now(), "year_from":Clock.now(), "year":int(Clock.date()["year"]), "period":period(), "pending":0.0, "pending_segments":{}, "loss":0.0, "returns":{}, "seq":0, "sales":{}}
 	if not S()["entities"][entity].has("pending_segments"):S()["entities"][entity]["pending_segments"]={}
 	return S()["entities"][entity]
+## Drop the per-order VAT memo once an order can no longer be refunded (see Ecommerce.archive_settled).
+static func forget_sale(entity: String, key: String) -> void:
+	if S()["entities"].has(entity): S()["entities"][entity]["sales"].erase(key)
 static func vat(gross: float) -> float:
 	return snappedf(maxf(0,gross)*float(cfg()["vat_rate"])/(1.0+float(cfg()["vat_rate"])),.01)
 

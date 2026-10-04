@@ -469,7 +469,7 @@ msgstr ""
 msgid "%s can't pay its debts. You have to decide what happens next."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:435
+#: scripts/sim/ecommerce.gd:460
 msgid "%s cancelled: %s refunded or removed from your unpaid invoice; fee %s. Settlement fees are not refundable."
 msgstr ""
 
@@ -501,7 +501,7 @@ msgstr ""
 msgid "%s has an offer from %s: %s per week. Respond by %s."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:556
+#: scripts/sim/ecommerce.gd:581
 msgid "%s has room: choose it under \"Deliver to\" in Operations."
 msgstr ""
 
@@ -517,7 +517,7 @@ msgstr ""
 msgid "%s is cutting prices in %s. The demand shock fades over %d days."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:547
+#: scripts/sim/ecommerce.gd:572
 msgid "%s is full: %d of %d units, counting stock on the way."
 msgstr ""
 
@@ -853,15 +853,15 @@ msgstr ""
 msgid "%s: %d units · %d units arriving"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:159
+#: scripts/sim/ecommerce.gd:184
 msgid "%s: %d × %s (into escrow)"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:168
+#: scripts/sim/ecommerce.gd:193
 msgid "%s: %d × %s (prepaid)"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:164
+#: scripts/sim/ecommerce.gd:189
 msgid "%s: %d × %s on Net %d"
 msgstr ""
 
@@ -889,11 +889,11 @@ msgstr ""
 msgid "%s: grant %s, %s"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:310
+#: scripts/sim/ecommerce.gd:335
 msgid "%s: money moved into escrow"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:310
+#: scripts/sim/ecommerce.gd:335
 msgid "%s: money moved out of escrow"
 msgstr ""
 
@@ -909,11 +909,11 @@ msgstr ""
 msgid "%s: price %.2f × street level; %d locations."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:522
+#: scripts/sim/ecommerce.gd:547
 msgid "%s: received the returned stock. Refund %s has reached your account."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:503
+#: scripts/sim/ecommerce.gd:528
 msgid "%s: returning %d units. Refund %s on %s; restocking fee %s, shipping %s."
 msgstr ""
 
@@ -929,11 +929,11 @@ msgstr ""
 msgid "(Order {order} — {product}, {price})"
 msgstr ""
 
-#: autoload/save_system.gd:351
+#: autoload/save_system.gd:402
 msgid "*.cvsave ; "
 msgstr ""
 
-#: autoload/save_system.gd:373
+#: autoload/save_system.gd:424
 msgid "*.cvsave,*.json ; "
 msgstr ""
 
@@ -1105,7 +1105,7 @@ msgstr ""
 msgid "A Van Driver (People tab) takes one run each workday from 9:00. Your own ecommerce parcels can go out in the van too: choose \"Own van\" at the packing table."
 msgstr ""
 
-#: autoload/save_system.gd:114 autoload/save_system.gd:319 scripts/ui/modals/save_list_modal.gd:63
+#: autoload/save_system.gd:128 autoload/save_system.gd:370 scripts/ui/modals/save_list_modal.gd:63
 msgid "A backup could not be created. Your existing save is unchanged."
 msgstr ""
 
@@ -2093,7 +2093,7 @@ msgstr ""
 msgid "Accountant correction · %s"
 msgstr ""
 
-#: scripts/sim/tax.gd:93
+#: scripts/sim/tax.gd:96
 msgid "Accountant filing fee: %s"
 msgstr ""
 
@@ -2365,7 +2365,7 @@ msgstr ""
 msgid "AirportNextFleet"
 msgstr ""
 
-#: autoload/game_state.gd:60 autoload/game_state.gd:69 scripts/sim/ecommerce.gd:845 scripts/sim/staff.gd:121
+#: autoload/game_state.gd:60 autoload/game_state.gd:69 scripts/sim/ecommerce.gd:870 scripts/sim/staff.gd:121
 msgid "Alex"
 msgstr ""
 
@@ -2377,7 +2377,7 @@ msgstr ""
 msgid "All %d stops planned  ·  round trip %.1f km"
 msgstr ""
 
-#: autoload/save_system.gd:388
+#: autoload/save_system.gd:439
 msgid "All Files (*)"
 msgstr ""
 
@@ -2613,7 +2613,7 @@ msgstr ""
 msgid "And watch the pastries. What you don't sell by closing goes in the bin, and the bin doesn't pay rent."
 msgstr ""
 
-#: scripts/sim/tax.gd:76
+#: scripts/sim/tax.gd:79
 msgid "Annual income tax: %s"
 msgstr ""
 
@@ -2759,6 +2759,10 @@ msgstr ""
 
 #: data/character/options.json
 msgid "Arched"
+msgstr ""
+
+#: scripts/sim/ledger.gd:262
+msgid "Archived %d %s entries (day %d)"
 msgstr ""
 
 #: scripts/sim/manufacturing.gd:49
@@ -3165,7 +3169,7 @@ msgstr ""
 msgid "Automated line"
 msgstr ""
 
-#: scripts/sim/tax.gd:124
+#: scripts/sim/tax.gd:127
 msgid "Automatic filing correction: %s"
 msgstr ""
 
@@ -4001,7 +4005,7 @@ msgstr ""
 msgid "Business account opened. %s now runs on its own books."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1439
+#: scripts/sim/ecommerce.gd:1552
 msgid "Business assets contributed to %s (in kind)"
 msgstr ""
 
@@ -4241,7 +4245,7 @@ msgstr ""
 msgid "Buyer"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1329
+#: scripts/sim/ecommerce.gd:1442
 msgid "Buyer %s opened a dispute on order %s. We refunded them and charged a $15 dispute fee."
 msgstr ""
 
@@ -4677,7 +4681,7 @@ msgstr ""
 msgid "Can't work the counter: %s."
 msgstr ""
 
-#: autoload/save_system.gd:388 autoload/sound.gd:286 scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57
+#: autoload/save_system.gd:439 autoload/sound.gd:286 scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57
 msgid "Cancel"
 msgstr ""
 
@@ -4729,11 +4733,11 @@ msgstr ""
 msgid "CancelHomeMove"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:388
+#: scripts/sim/ecommerce.gd:413
 msgid "Cancellation window ended."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:389
+#: scripts/sim/ecommerce.gd:414
 msgid "Cancellation window ended. Return eligible stock within %d days of arrival."
 msgstr ""
 
@@ -4757,7 +4761,7 @@ msgstr ""
 msgid "Capital"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1440
+#: scripts/sim/ecommerce.gd:1553
 msgid "Capital contributed in kind by founder"
 msgstr ""
 
@@ -5401,7 +5405,7 @@ msgstr ""
 msgid "Choose a running group business and a valid media budget."
 msgstr ""
 
-#: autoload/save_system.gd:316 scripts/ui/modals/save_list_modal.gd:22
+#: autoload/save_system.gd:367 scripts/ui/modals/save_list_modal.gd:22
 msgid "Choose a save slot to replace. Its existing save will be backed up."
 msgstr ""
 
@@ -5521,7 +5525,7 @@ msgstr ""
 msgid "Choose an open client brief."
 msgstr ""
 
-#: scripts/sim/legal.gd:60
+#: scripts/sim/legal.gd:63
 msgid "Choose an open dispute for this company."
 msgstr ""
 
@@ -5561,7 +5565,7 @@ msgstr ""
 msgid "Choose an underwriter."
 msgstr ""
 
-#: scripts/sim/tax.gd:88
+#: scripts/sim/tax.gd:91
 msgid "Choose an unfiled return for this company."
 msgstr ""
 
@@ -5585,7 +5589,7 @@ msgstr ""
 msgid "Choose available stock at your home or leased storage; committed orders stay there."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:482
+#: scripts/sim/ecommerce.gd:507
 msgid "Choose between 1 and %d returnable units."
 msgstr ""
 
@@ -5785,7 +5789,7 @@ msgstr ""
 msgid "City Marathon Weekend"
 msgstr ""
 
-#: autoload/save_system.gd:351 autoload/save_system.gd:373
+#: autoload/save_system.gd:402 autoload/save_system.gd:424
 msgid "City Venture save"
 msgstr ""
 
@@ -5841,7 +5845,7 @@ msgstr ""
 msgid "City update: %s"
 msgstr ""
 
-#: autoload/save_system.gd:335
+#: autoload/save_system.gd:386
 msgid "CityVenture_%s_%04d-%02d-%02d.cvsave"
 msgstr ""
 
@@ -7141,7 +7145,7 @@ msgstr ""
 msgid "Courier or self delivery"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1100
+#: scripts/sim/ecommerce.gd:1213
 msgid "Courier picked up %d parcel%s."
 msgstr ""
 
@@ -7149,7 +7153,7 @@ msgstr ""
 msgid "Courier picks up in ~2 hours and adds a %s pickup fee."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1044
+#: scripts/sim/ecommerce.gd:1153
 msgid "Courier pickup: %d parcels (%s)"
 msgstr ""
 
@@ -8009,7 +8013,7 @@ msgstr ""
 msgid "Delivered. Invoice %s due in %d days."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:221
+#: scripts/sim/ecommerce.gd:246
 msgid "Delivered: %d × %s → %s"
 msgstr ""
 
@@ -8309,7 +8313,7 @@ msgstr ""
 msgid "Directional evidence; collect a larger sample"
 msgstr ""
 
-#: autoload/save_system.gd:388
+#: autoload/save_system.gd:439
 msgid "Directories & Files:"
 msgstr ""
 
@@ -8369,7 +8373,7 @@ msgstr ""
 msgid "Display"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1330
+#: scripts/sim/ecommerce.gd:1443
 msgid "Dispute lost on %s: −%s"
 msgstr ""
 
@@ -8377,7 +8381,7 @@ msgstr ""
 msgid "Dispute the claim"
 msgstr ""
 
-#: scripts/sim/legal.gd:86
+#: scripts/sim/legal.gd:89
 msgid "Disputed invoice recovered: %s"
 msgstr ""
 
@@ -8473,7 +8477,7 @@ msgstr ""
 msgid "Doesn't turn on."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1223
+#: scripts/sim/ecommerce.gd:1336
 msgid "Doesn't work. Out of the box."
 msgstr ""
 
@@ -8589,7 +8593,7 @@ msgstr ""
 msgid "Drop off parcels"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:224
+#: scripts/sim/ecommerce.gd:249
 msgid "Dropped %d %s at %s. Don't let them sit around."
 msgstr ""
 
@@ -8801,7 +8805,7 @@ msgstr ""
 msgid "Eat"
 msgstr ""
 
-#: data/businesses/ecommerce.json scripts/sim/ecommerce.gd:1495 scripts/ui/media_ui.gd:162
+#: data/businesses/ecommerce.json scripts/sim/ecommerce.gd:1608 scripts/ui/media_ui.gd:162
 msgid "Ecommerce"
 msgstr ""
 
@@ -8957,7 +8961,7 @@ msgstr ""
 msgid "Emerging Market"
 msgstr ""
 
-#: scripts/sim/legal.gd:100
+#: scripts/sim/legal.gd:103
 msgid "Employee dispute compensation: %s"
 msgstr ""
 
@@ -8973,7 +8977,7 @@ msgstr ""
 msgid "Employee treatment"
 msgstr ""
 
-#: scripts/sim/legal.gd:50
+#: scripts/sim/legal.gd:53
 msgid "Employee wages"
 msgstr ""
 
@@ -8981,7 +8985,7 @@ msgstr ""
 msgid "Employee wages remain owed. IP disputes refer to completed media or manufacturing jobs; court success avoids compensation but never pays fictitious income."
 msgstr ""
 
-#: scripts/sim/legal.gd:98
+#: scripts/sim/legal.gd:101
 msgid "Employee wages settled: %s"
 msgstr ""
 
@@ -9145,7 +9149,7 @@ msgstr ""
 msgid "Escrow (pay on delivery)"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:336
+#: scripts/sim/ecommerce.gd:361
 msgid "Escrow funded: %s ships %s (arrives %s). The money is released when it lands."
 msgstr ""
 
@@ -9417,7 +9421,7 @@ msgstr ""
 msgid "Export duty %s: %s"
 msgstr ""
 
-#: autoload/save_system.gd:387 scripts/ui/modals/pause_menu.gd:42 scripts/ui/modals/save_list_modal.gd:25
+#: autoload/save_system.gd:438 scripts/ui/modals/pause_menu.gd:42 scripts/ui/modals/save_list_modal.gd:25
 msgid "Export save"
 msgstr ""
 
@@ -9649,7 +9653,7 @@ msgstr ""
 msgid "Fast: +30% work output."
 msgstr ""
 
-#: autoload/save_system.gd:388
+#: autoload/save_system.gd:439
 msgid "Favorites:"
 msgstr ""
 
@@ -9721,11 +9725,11 @@ msgstr ""
 msgid "File yourself · %d minutes · %.0f%% form-error chance"
 msgstr ""
 
-#: autoload/save_system.gd:388
+#: autoload/save_system.gd:439
 msgid "File:"
 msgstr ""
 
-#: autoload/save_system.gd:403
+#: autoload/save_system.gd:454
 msgid "FileReader"
 msgstr ""
 
@@ -9733,11 +9737,11 @@ msgstr ""
 msgid "FileTrafficClaim"
 msgstr ""
 
-#: scripts/sim/tax.gd:106
+#: scripts/sim/tax.gd:109
 msgid "Filing correction: %s"
 msgstr ""
 
-#: scripts/sim/tax.gd:120
+#: scripts/sim/tax.gd:123
 msgid "Filing documents need correction. Fix them yourself or hire an accountant; ignored forms incur a processing fee."
 msgstr ""
 
@@ -9897,7 +9901,7 @@ msgstr ""
 msgid "First Customer"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:697
+#: scripts/sim/ecommerce.gd:722
 msgid "First ShopLane listing: %s at %s."
 msgstr ""
 
@@ -9941,7 +9945,7 @@ msgstr ""
 msgid "First industry order"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:196
+#: scripts/sim/ecommerce.gd:221
 msgid "First inventory order: %d × %s from %s."
 msgstr ""
 
@@ -9953,7 +9957,7 @@ msgstr ""
 msgid "First parcel out"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1361
+#: scripts/sim/ecommerce.gd:1474
 msgid "First payout from ShopLane: %s."
 msgstr ""
 
@@ -9977,7 +9981,7 @@ msgstr ""
 msgid "First roof lit"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1149
+#: scripts/sim/ecommerce.gd:1262
 msgid "First sale: %s bought %s for %s."
 msgstr ""
 
@@ -10597,7 +10601,7 @@ msgstr ""
 msgid "Fund the supplier purchase and seller-paid route costs first."
 msgstr ""
 
-#: scripts/sim/tax.gd:91
+#: scripts/sim/tax.gd:94
 msgid "Fund the tax payment and filing fee first."
 msgstr ""
 
@@ -12117,7 +12121,7 @@ msgstr ""
 msgid "INVOICED"
 msgstr ""
 
-#: scripts/sim/legal.gd:105
+#: scripts/sim/legal.gd:108
 msgid "IP licence settlement: %s"
 msgstr ""
 
@@ -12205,7 +12209,7 @@ msgstr ""
 msgid "Import prices ease as the ports catch up."
 msgstr ""
 
-#: autoload/save_system.gd:387 scripts/ui/modals/pause_menu.gd:45 scripts/ui/modals/save_list_modal.gd:13 scripts/ui/modals/save_list_modal.gd:29
+#: autoload/save_system.gd:438 scripts/ui/modals/pause_menu.gd:45 scripts/ui/modals/save_list_modal.gd:13 scripts/ui/modals/save_list_modal.gd:29
 msgid "Import save"
 msgstr ""
 
@@ -12281,7 +12285,7 @@ msgstr ""
 msgid "Income tax"
 msgstr ""
 
-#: scripts/sim/tax.gd:74
+#: scripts/sim/tax.gd:77
 msgid "Income tax year %d"
 msgstr ""
 
@@ -13125,7 +13129,7 @@ msgstr ""
 msgid "KYC check on payments over %s: a fee and a day's delay."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:182
+#: scripts/sim/ecommerce.gd:207
 msgid "KYC check — %s"
 msgstr ""
 
@@ -13621,7 +13625,7 @@ msgstr ""
 msgid "Late filing adds one penalty and lowers credit. Refund VAT credits carry forward; old saves start new tax periods without retroactively changing their journals."
 msgstr ""
 
-#: scripts/sim/tax.gd:136
+#: scripts/sim/tax.gd:139
 msgid "Late filing penalty: %s"
 msgstr ""
 
@@ -13961,7 +13965,7 @@ msgstr ""
 msgid "Legal Dispute"
 msgstr ""
 
-#: scripts/sim/legal.gd:117
+#: scripts/sim/legal.gd:120
 msgid "Legal case %s closed. Recovered %s; paid %s."
 msgstr ""
 
@@ -13977,7 +13981,7 @@ msgstr ""
 msgid "Legal fee for an insurer dispute"
 msgstr ""
 
-#: scripts/sim/legal.gd:64
+#: scripts/sim/legal.gd:67
 msgid "Legal fee: %s"
 msgstr ""
 
@@ -15529,7 +15533,7 @@ msgstr ""
 msgid "Minimum order (MOQ)"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:120
+#: scripts/sim/ecommerce.gd:145
 msgid "Minimum order is %d units."
 msgstr ""
 
@@ -15557,7 +15561,7 @@ msgstr ""
 msgid "Miss the stock minimum twice and the factory ends the franchise and keeps part of the deposit."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:840
+#: scripts/sim/ecommerce.gd:865
 msgid "Missed a sale: %s is out of stock."
 msgstr ""
 
@@ -16181,11 +16185,11 @@ msgstr ""
 msgid "New group job: %s"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:881
+#: scripts/sim/ecommerce.gd:906
 msgid "New order %s — %s — %s"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1206
+#: scripts/sim/ecommerce.gd:1319
 msgid "New review %s: %s \"%s\""
 msgstr ""
 
@@ -16425,7 +16429,7 @@ msgstr ""
 msgid "Nineteen hundred a month, two months' deposit. It comes empty: you fit it out, and City Hall wants a food licence before you sell a single croissant."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1274
+#: scripts/sim/ecommerce.gd:1387
 msgid "No %s in stock to send."
 msgstr ""
 
@@ -16653,7 +16657,7 @@ msgstr ""
 msgid "No remaining goal suits this run. Keep playing, reopen goals you set aside, or start a company; completed goals stay recorded."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:460
+#: scripts/sim/ecommerce.gd:485
 msgid "No returnable stock here: units were sold, reserved, moved, or already returned."
 msgstr ""
 
@@ -16837,7 +16841,7 @@ msgstr ""
 msgid "Not enough cash for renovation."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:487 scripts/ui/modals/purchase_return_modal.gd:52
+#: scripts/sim/ecommerce.gd:512 scripts/ui/modals/purchase_return_modal.gd:52
 msgid "Not enough cash for return shipping: %s."
 msgstr ""
 
@@ -16861,7 +16865,7 @@ msgstr ""
 msgid "Not enough cash."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:142 scripts/sim/ecommerce.gd:302 scripts/sim/rails.gd:271 scripts/sim/rails.gd:301
+#: scripts/sim/ecommerce.gd:167 scripts/sim/ecommerce.gd:327 scripts/sim/rails.gd:271 scripts/sim/rails.gd:301
 msgid "Not enough cash. You need %s."
 msgstr ""
 
@@ -16937,7 +16941,7 @@ msgstr ""
 msgid "Nothing on the rails today."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1038
+#: scripts/sim/ecommerce.gd:1147
 msgid "Nothing packed here."
 msgstr ""
 
@@ -16965,7 +16969,7 @@ msgstr ""
 msgid "Nothing to pack here: is the stock at this location?"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1249
+#: scripts/sim/ecommerce.gd:1362
 msgid "Nothing to resolve."
 msgstr ""
 
@@ -17385,7 +17389,7 @@ msgstr ""
 msgid "Only a delivered, unpaid invoice can be paid early."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:382
+#: scripts/sim/ecommerce.gd:407
 msgid "Only a purchase still on the way can be cancelled."
 msgstr ""
 
@@ -17397,7 +17401,7 @@ msgstr ""
 msgid "Only completed job parts earn their share. Review deliverables, deadline and subcontracting fees in Company OS, Group tab."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:453
+#: scripts/sim/ecommerce.gd:478
 msgid "Only delivered purchases can be returned."
 msgstr ""
 
@@ -17417,7 +17421,7 @@ msgstr ""
 msgid "Only wholly founder-owned companies can enter this holding group. Other shareholders keep their rights."
 msgstr ""
 
-#: autoload/save_system.gd:388 scripts/ui/hotel_ui.gd:273 scripts/ui/modals/city_map_modal.gd:132 scripts/ui/modals/city_map_modal.gd:179
+#: autoload/save_system.gd:439 scripts/ui/hotel_ui.gd:273 scripts/ui/modals/city_map_modal.gd:132 scripts/ui/modals/city_map_modal.gd:179
 msgid "Open"
 msgstr ""
 
@@ -18157,7 +18161,7 @@ msgstr ""
 msgid "Overseas delivery %s: %s %s"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1320
+#: scripts/sim/ecommerce.gd:1433
 msgid "Overseas dispute fee"
 msgstr ""
 
@@ -18473,7 +18477,7 @@ msgstr ""
 msgid "Packed and ready: %d"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:993
+#: scripts/sim/ecommerce.gd:1102
 msgid "Packed order %s"
 msgstr ""
 
@@ -18553,7 +18557,7 @@ msgstr ""
 msgid "Paid standby crew for the city event"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:353
+#: scripts/sim/ecommerce.gd:378
 msgid "Paid supplier invoice %s: %s"
 msgstr ""
 
@@ -18653,7 +18657,7 @@ msgstr ""
 msgid "Part-time jobs: take one to earn a wage. You work the shifts yourself at the workplace (staff door, press E)."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1291
+#: scripts/sim/ecommerce.gd:1404
 msgid "Partial refund 30%% %s: %s"
 msgstr ""
 
@@ -18689,7 +18693,7 @@ msgstr ""
 msgid "Patel"
 msgstr ""
 
-#: autoload/save_system.gd:388
+#: autoload/save_system.gd:439
 msgid "Path:"
 msgstr ""
 
@@ -18873,7 +18877,7 @@ msgstr ""
 msgid "Payment follows the invoice due date. Review receivables in Company OS; a reminder does not create a new payment."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:384
+#: scripts/sim/ecommerce.gd:409
 msgid "Payment is frozen. Wait for the bridge to reopen before cancelling."
 msgstr ""
 
@@ -18881,7 +18885,7 @@ msgstr ""
 msgid "Payment landed, boxes arrived. Remember who held your money in between. That's this year's lesson."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:338
+#: scripts/sim/ecommerce.gd:363
 msgid "Payment landed: %s ships %s (arrives %s)."
 msgstr ""
 
@@ -18901,11 +18905,11 @@ msgstr ""
 msgid "Payments start-ups promise audits and an insurance pool."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1359
+#: scripts/sim/ecommerce.gd:1472
 msgid "Payout sent: %s to your business account."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1359
+#: scripts/sim/ecommerce.gd:1472
 msgid "Payout sent: %s to your personal account."
 msgstr ""
 
@@ -19085,7 +19089,7 @@ msgstr ""
 msgid "Personal seller cap: %s of %s used this month."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:920
+#: scripts/sim/ecommerce.gd:945
 msgid "Personal seller limit reached. Your listings are paused until next month — or until you register a business."
 msgstr ""
 
@@ -19269,7 +19273,7 @@ msgstr ""
 msgid "Play this week's challenge"
 msgstr ""
 
-#: autoload/save_system.gd:333
+#: autoload/save_system.gd:384
 msgid "Player"
 msgstr ""
 
@@ -19401,7 +19405,7 @@ msgstr ""
 msgid "PostPoint clerk"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1088
+#: scripts/sim/ecommerce.gd:1197
 msgid "PostPoint drop-off: %d parcels (%s)"
 msgstr ""
 
@@ -19905,7 +19909,7 @@ msgstr ""
 msgid "Purchase cancelled."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:419
+#: scripts/sim/ecommerce.gd:444
 msgid "Purchase cancelled: %s"
 msgstr ""
 
@@ -20549,7 +20553,7 @@ msgstr ""
 msgid "Recent transactions"
 msgstr ""
 
-#: autoload/save_system.gd:388
+#: autoload/save_system.gd:439
 msgid "Recent:"
 msgstr ""
 
@@ -20721,7 +20725,7 @@ msgstr ""
 msgid "Refund"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1268
+#: scripts/sim/ecommerce.gd:1381
 msgid "Refund %s: %s (return label paid)"
 msgstr ""
 
@@ -21237,7 +21241,7 @@ msgstr ""
 msgid "Replacement on its way. {customer}: \"Oh — nice. Didn't expect that.\""
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1284
+#: scripts/sim/ecommerce.gd:1397
 msgid "Replacement sent %s: %s (express)"
 msgstr ""
 
@@ -21577,7 +21581,7 @@ msgstr ""
 msgid "Return shipping"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:494
+#: scripts/sim/ecommerce.gd:519
 msgid "Return shipping: %s"
 msgstr ""
 
@@ -22357,7 +22361,7 @@ msgstr ""
 msgid "Sale delivered %s: %d × %s @ %s"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1170
+#: scripts/sim/ecommerce.gd:1283
 msgid "Sale delivered %s: %s — %s"
 msgstr ""
 
@@ -22469,7 +22473,7 @@ msgstr ""
 msgid "Saturday and Sunday 10:00–18:00 · %s/weekend · reserve at least one day ahead · capacity %d units"
 msgstr ""
 
-#: autoload/save_system.gd:388 scripts/ui/phone_ui.gd:164
+#: autoload/save_system.gd:439 scripts/ui/phone_ui.gd:164
 msgid "Save"
 msgstr ""
 
@@ -22517,7 +22521,7 @@ msgstr ""
 msgid "Save enough company cash for the vehicle and first insurance payment."
 msgstr ""
 
-#: autoload/save_system.gd:357
+#: autoload/save_system.gd:408
 msgid "Save exported. Keep this file outside your browser."
 msgstr ""
 
@@ -22525,7 +22529,7 @@ msgstr ""
 msgid "Save game"
 msgstr ""
 
-#: autoload/save_system.gd:437
+#: autoload/save_system.gd:488
 msgid "Save imported. Continue where you left off."
 msgstr ""
 
@@ -22569,7 +22573,7 @@ msgstr ""
 msgid "Save the client retention discount first."
 msgstr ""
 
-#: scripts/sim/tax.gd:105
+#: scripts/sim/tax.gd:108
 msgid "Save the correction fee first."
 msgstr ""
 
@@ -22629,7 +22633,7 @@ msgstr ""
 msgid "Save the insurance premium first."
 msgstr ""
 
-#: scripts/sim/legal.gd:63
+#: scripts/sim/legal.gd:66
 msgid "Save the legal fee first."
 msgstr ""
 
@@ -22697,7 +22701,7 @@ msgstr ""
 msgid "Save this life and start the selected next life"
 msgstr ""
 
-#: autoload/save_system.gd:442
+#: autoload/save_system.gd:493
 msgid "Save transfer"
 msgstr ""
 
@@ -22937,7 +22941,7 @@ msgstr ""
 msgid "Sell personal car after depreciation"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:557
+#: scripts/sim/ecommerce.gd:582
 msgid "Sell some stock first, or lease more space."
 msgstr ""
 
@@ -22973,7 +22977,7 @@ msgstr ""
 msgid "Seller"
 msgstr ""
 
-#: scripts/sim/tax.gd:154
+#: scripts/sim/tax.gd:157
 msgid "Seller VAT obligation assumed"
 msgstr ""
 
@@ -23397,7 +23401,7 @@ msgstr ""
 msgid "ShopLane Seller"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1371
+#: scripts/sim/ecommerce.gd:1484
 msgid "ShopLane ads: %s"
 msgstr ""
 
@@ -23405,7 +23409,7 @@ msgstr ""
 msgid "ShopLane balance (paid Mondays)"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1325
+#: scripts/sim/ecommerce.gd:1438
 msgid "ShopLane dispute lost %s: forced refund + $15 fee"
 msgstr ""
 
@@ -23425,11 +23429,11 @@ msgstr ""
 msgid "ShopLane marketplace: %d%% fee, weekly payouts, personal sellers capped at %s/month."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1363
+#: scripts/sim/ecommerce.gd:1476
 msgid "ShopLane negative balance charged to card"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:921
+#: scripts/sim/ecommerce.gd:946
 msgid "ShopLane paused your listings: personal seller limit reached."
 msgstr ""
 
@@ -23437,7 +23441,7 @@ msgstr ""
 msgid "ShopLane payout"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1358
+#: scripts/sim/ecommerce.gd:1471
 msgid "ShopLane payout received: %s"
 msgstr ""
 
@@ -23461,11 +23465,11 @@ msgstr ""
 msgid "ShopLane seller cap lifted · B2B contracts unlocked · office leases unlocked · supplier net terms unlocked"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1356
+#: scripts/sim/ecommerce.gd:1469
 msgid "ShopLane weekly payout"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:742
+#: scripts/sim/ecommerce.gd:767
 msgid "ShopLane: personal seller limit reached this month."
 msgstr ""
 
@@ -23845,7 +23849,7 @@ msgstr ""
 msgid "Sold %d cars · profit so far %s"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1409
+#: scripts/sim/ecommerce.gd:1522
 msgid "Sold %d × %s to liquidator (%d%% of cost)"
 msgstr ""
 
@@ -24249,11 +24253,11 @@ msgstr ""
 msgid "Stock on the way"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:216
+#: scripts/sim/ecommerce.gd:241
 msgid "Stock received: %s"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:493
+#: scripts/sim/ecommerce.gd:518
 msgid "Stock returned to supplier: %s (%d units)"
 msgstr ""
 
@@ -24393,7 +24397,7 @@ msgstr ""
 msgid "Studio Lumen photos ($120) & list"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:685
+#: scripts/sim/ecommerce.gd:710
 msgid "Studio Lumen product photos: %s"
 msgstr ""
 
@@ -24401,7 +24405,7 @@ msgstr ""
 msgid "Studio Nine Yoga"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:684
+#: scripts/sim/ecommerce.gd:709
 msgid "Studio photos cost %s."
 msgstr ""
 
@@ -24553,7 +24557,7 @@ msgstr ""
 msgid "Supplier bills payable"
 msgstr ""
 
-#: scripts/sim/legal.gd:94
+#: scripts/sim/legal.gd:97
 msgid "Supplier breach settlement: %s"
 msgstr ""
 
@@ -24585,7 +24589,7 @@ msgstr ""
 msgid "Supplier invoice"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:351
+#: scripts/sim/ecommerce.gd:376
 msgid "Supplier invoice paid: %s"
 msgstr ""
 
@@ -24597,7 +24601,7 @@ msgstr ""
 msgid "Supplier price increase"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:520
+#: scripts/sim/ecommerce.gd:545
 msgid "Supplier return refund: %s"
 msgstr ""
 
@@ -24913,11 +24917,11 @@ msgstr ""
 msgid "Tax filing costs"
 msgstr ""
 
-#: scripts/sim/tax.gd:92
+#: scripts/sim/tax.gd:95
 msgid "Tax payment: %s"
 msgstr ""
 
-#: scripts/sim/tax.gd:55
+#: scripts/sim/tax.gd:58
 msgid "Tax return ready: %s. File by %s."
 msgstr ""
 
@@ -25065,7 +25069,7 @@ msgstr ""
 msgid "That didn't work."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:542
+#: scripts/sim/ecommerce.gd:567
 msgid "That home is no longer your stock location. Choose your current home or leased storage."
 msgstr ""
 
@@ -25081,7 +25085,7 @@ msgstr ""
 msgid "That order isn't on the way any more."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:290
+#: scripts/sim/ecommerce.gd:315
 msgid "That payment already went through."
 msgstr ""
 
@@ -25089,7 +25093,7 @@ msgstr ""
 msgid "That payment isn't stuck on the bridge."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:257
+#: scripts/sim/ecommerce.gd:282
 msgid "That payment method isn't available."
 msgstr ""
 
@@ -25101,7 +25105,7 @@ msgstr ""
 msgid "That price is outside the allowed range."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:368 scripts/ui/modals/purchase_return_modal.gd:23
+#: scripts/sim/ecommerce.gd:393 scripts/ui/modals/purchase_return_modal.gd:23
 msgid "That purchase order no longer exists."
 msgstr ""
 
@@ -25125,11 +25129,11 @@ msgstr ""
 msgid "That run isn't on your list."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:113
+#: scripts/sim/ecommerce.gd:138
 msgid "That supplier doesn't sell this."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:115
+#: scripts/sim/ecommerce.gd:140
 msgid "That supplier isn't open to you yet."
 msgstr ""
 
@@ -25137,11 +25141,11 @@ msgstr ""
 msgid "That went badly. It counts for little."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:299
+#: scripts/sim/ecommerce.gd:324
 msgid "That wouldn't be any faster."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:458
+#: scripts/sim/ecommerce.gd:483
 msgid "The %d-day return window has ended."
 msgstr ""
 
@@ -25653,7 +25657,7 @@ msgstr ""
 msgid "The factory quotation checklist now has conflicting notes. Rita Hale wants a version that other people can check. How do you resolve the conflict?"
 msgstr ""
 
-#: autoload/save_system.gd:409
+#: autoload/save_system.gd:460
 msgid "The file could not be read. Your existing save is unchanged."
 msgstr ""
 
@@ -26017,7 +26021,7 @@ msgstr ""
 msgid "The same seed, rules and choices reproduce the simulation. Daily market previews do not consume the event RNG. Weekly challenges lock standard rules and save results locally."
 msgstr ""
 
-#: autoload/save_system.gd:190 autoload/save_system.gd:323
+#: autoload/save_system.gd:204 autoload/save_system.gd:374
 msgid "The save could not be written. Your existing save is unchanged."
 msgstr ""
 
@@ -26285,7 +26289,7 @@ msgstr ""
 msgid "Thirty-day café report"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:264
+#: scripts/sim/ecommerce.gd:289
 msgid "This %s."
 msgstr ""
 
@@ -26349,7 +26353,7 @@ msgstr ""
 msgid "This company is closed or replaced. Continue with your current life."
 msgstr ""
 
-#: scripts/sim/company_portfolio.gd:93
+#: scripts/sim/company_portfolio.gd:96
 msgid "This company is closed or unavailable. Choose another live company."
 msgstr ""
 
@@ -26445,7 +26449,7 @@ msgstr ""
 msgid "This is a sightseeing-only location right now."
 msgstr ""
 
-#: autoload/save_system.gd:317 scripts/save_codec.gd:15
+#: autoload/save_system.gd:368 scripts/save_codec.gd:15
 msgid "This is not a City Venture save."
 msgstr ""
 
@@ -26545,11 +26549,11 @@ msgstr ""
 msgid "This property has no pending notice."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:370
+#: scripts/sim/ecommerce.gd:395
 msgid "This purchase belongs to a closed company."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:372
+#: scripts/sim/ecommerce.gd:397
 msgid "This purchase belongs to another business."
 msgstr ""
 
@@ -26565,7 +26569,7 @@ msgstr ""
 msgid "This request is no longer available — check Contacts."
 msgstr ""
 
-#: scripts/sim/tax.gd:103
+#: scripts/sim/tax.gd:106
 msgid "This return needs no correction."
 msgstr ""
 
@@ -26609,7 +26613,7 @@ msgstr ""
 msgid "This subsidiary is no longer held here. Choose another company."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:388 scripts/sim/ecommerce.gd:456
+#: scripts/sim/ecommerce.gd:413 scripts/sim/ecommerce.gd:481
 msgid "This supplier does not accept returns after delivery."
 msgstr ""
 
@@ -27317,7 +27321,7 @@ msgstr ""
 msgid "Unexpected large order"
 msgstr ""
 
-#: scripts/sim/tax.gd:153
+#: scripts/sim/tax.gd:156
 msgid "Unfiled seller VAT transferred with business"
 msgstr ""
 
@@ -27377,7 +27381,7 @@ msgstr ""
 msgid "Unknown automotive crisis."
 msgstr ""
 
-#: scripts/sim/customs.gd:97 scripts/sim/ecommerce.gd:1301 scripts/sim/global_market.gd:325
+#: scripts/sim/customs.gd:97 scripts/sim/ecommerce.gd:1414 scripts/sim/global_market.gd:325
 msgid "Unknown choice."
 msgstr ""
 
@@ -27605,7 +27609,7 @@ msgstr ""
 msgid "VAT is collected within customer prices and paid every two months. Company income tax applies to annual pretax profit after carried losses."
 msgstr ""
 
-#: scripts/sim/tax.gd:63
+#: scripts/sim/tax.gd:66
 msgid "VAT: year %d, period %d / 6"
 msgstr ""
 
@@ -28949,7 +28953,7 @@ msgstr ""
 msgid "You need a van."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:677
+#: scripts/sim/ecommerce.gd:702
 msgid "You need the product in hand to photograph it."
 msgstr ""
 
@@ -29081,7 +29085,7 @@ msgstr ""
 msgid "You're here about the corner unit, I can tell. Everybody looks at it the same way."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:1073
+#: scripts/sim/ecommerce.gd:1182
 msgid "You're not carrying any parcels."
 msgstr ""
 
@@ -29097,7 +29101,7 @@ msgstr ""
 msgid "You've got the look of someone whose parcels keep going the long way round. A van fixes that."
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:912
+#: scripts/sim/ecommerce.gd:937
 msgid "You've sold %s of your %s personal seller limit this month. Register a business to lift it."
 msgstr ""
 
@@ -29761,7 +29765,7 @@ msgstr ""
 msgid "harsh light"
 msgstr ""
 
-#: scripts/sim/ecommerce.gd:264
+#: scripts/sim/ecommerce.gd:289
 msgid "has a requirement you don't meet yet"
 msgstr ""
 
@@ -29841,11 +29845,11 @@ msgstr ""
 msgid "lands in about %d hour(s)"
 msgstr ""
 
-#: scripts/sim/tax.gd:126
+#: scripts/sim/tax.gd:129
 msgid "late correction"
 msgstr ""
 
-#: scripts/sim/tax.gd:137
+#: scripts/sim/tax.gd:140
 msgid "late tax"
 msgstr ""
 

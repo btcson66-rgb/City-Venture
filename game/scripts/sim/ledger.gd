@@ -42,7 +42,7 @@ const CATEGORY_NAMES := {"advertising": "Advertising", "shipping": "Shipping", "
 ## line. Account balances, month windows and segment/earned totals are unchanged because day boundaries
 ## are preserved and every line's debit/credit is summed per account.
 const COMPACT_TYPES := ["order", "return", "ship"]
-const COMPACT_KEEP_DAYS := 45
+const COMPACT_KEEP_DAYS := 5
 const COMPACT_MIN_ENTRIES := 20000
 
 
@@ -259,7 +259,7 @@ static func compact_old(now: int, min_entries := COMPACT_MIN_ENTRIES, keep_days 
 			lines.append({"acct": acct, "dr": v} if v > 0.0 else {"acct": acct, "cr": -v})
 		g.erase("_sums")
 		g["lines"] = lines
-		g["memo"] = "Archived %d %s entries (day %d)" % [int(g["source"]["count"]), g["source"]["type"], int(g["source"]["day"])]
+		g["memo"] = I18n.t("Archived %d %s entries (day %d)") % [int(g["source"]["count"]), g["source"]["type"], int(g["source"]["day"])]
 	var removed := (i1 - i0) - (out.size() - i0)
 	out.append_array(journal.slice(i1))
 	L["journal"] = out   # a new array so incremental journal scanners restart on the compacted history

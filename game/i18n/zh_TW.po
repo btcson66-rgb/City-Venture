@@ -470,7 +470,7 @@ msgstr "%s 叫了快遞：%d 件包裹（%s）。"
 msgid "%s can't pay its debts. You have to decide what happens next."
 msgstr "%s 付不出債務了，你必須決定接下來怎麼做。"
 
-#: scripts/sim/ecommerce.gd:435
+#: scripts/sim/ecommerce.gd:460
 msgid "%s cancelled: %s refunded or removed from your unpaid invoice; fee %s. Settlement fees are not refundable."
 msgstr "%s 已取消：退回 %s，或從未付發票扣除；手續費 %s。清算手續費不退還。"
 
@@ -502,7 +502,7 @@ msgstr "%s 有一筆需要多個事業合作的大案：%s。報酬 %s。請到�
 msgid "%s has an offer from %s: %s per week. Respond by %s."
 msgstr "%s 收到 %s 的 offer：每週 %s。請在 %s 前回覆。"
 
-#: scripts/sim/ecommerce.gd:556
+#: scripts/sim/ecommerce.gd:581
 msgid "%s has room: choose it under \"Deliver to\" in Operations."
 msgstr "%s 還有空間：請在「營運」的「送貨到」選它。"
 
@@ -518,7 +518,7 @@ msgstr "%s 目前沒開。營業時間 %s–%s，%s。"
 msgid "%s is cutting prices in %s. The demand shock fades over %d days."
 msgstr "%s 正在%s降價競爭。需求衝擊會在 %d 天內逐漸消退。"
 
-#: scripts/sim/ecommerce.gd:547
+#: scripts/sim/ecommerce.gd:572
 msgid "%s is full: %d of %d units, counting stock on the way."
 msgstr "%s 已經放滿了：%d / %d 件（含運送中的貨）。"
 
@@ -854,15 +854,15 @@ msgstr "%s：每日 %d 名旅客"
 msgid "%s: %d units · %d units arriving"
 msgstr "%s：現有 %d 份 · 配送中 %d 份"
 
-#: scripts/sim/ecommerce.gd:159
+#: scripts/sim/ecommerce.gd:184
 msgid "%s: %d × %s (into escrow)"
 msgstr "%s：%d × %s（存入託管）"
 
-#: scripts/sim/ecommerce.gd:168
+#: scripts/sim/ecommerce.gd:193
 msgid "%s: %d × %s (prepaid)"
 msgstr "%s：%d × %s（預付）"
 
-#: scripts/sim/ecommerce.gd:164
+#: scripts/sim/ecommerce.gd:189
 msgid "%s: %d × %s on Net %d"
 msgstr "%s：%d × %s，票期 %d 天"
 
@@ -890,11 +890,11 @@ msgstr "%s：審計費 %s 本國元，承銷佣金 %s"
 msgid "%s: grant %s, %s"
 msgstr "%s：補助 %s，%s"
 
-#: scripts/sim/ecommerce.gd:310
+#: scripts/sim/ecommerce.gd:335
 msgid "%s: money moved into escrow"
 msgstr "%s：款項改存入託管"
 
-#: scripts/sim/ecommerce.gd:310
+#: scripts/sim/ecommerce.gd:335
 msgid "%s: money moved out of escrow"
 msgstr "%s：款項改為直接付給供應商"
 
@@ -910,11 +910,11 @@ msgstr "%s：改用%s重新付款（繞道）"
 msgid "%s: price %.2f × street level; %d locations."
 msgstr "%s：價格為市價的 %.2f 倍；%d 個據點。"
 
-#: scripts/sim/ecommerce.gd:522
+#: scripts/sim/ecommerce.gd:547
 msgid "%s: received the returned stock. Refund %s has reached your account."
 msgstr "%s：已收到退貨，退款 %s 已入帳。"
 
-#: scripts/sim/ecommerce.gd:503
+#: scripts/sim/ecommerce.gd:528
 msgid "%s: returning %d units. Refund %s on %s; restocking fee %s, shipping %s."
 msgstr "%s：退回 %d 件，退款 %s 預計於 %s 入帳；退貨手續費 %s，運費 %s。"
 
@@ -930,11 +930,11 @@ msgstr "（訂單 {order}——{product}）"
 msgid "(Order {order} — {product}, {price})"
 msgstr "（訂單 {order}——{product}，{price}）"
 
-#: autoload/save_system.gd:351
+#: autoload/save_system.gd:402
 msgid "*.cvsave ; "
 msgstr "*.cvsave ; "
 
-#: autoload/save_system.gd:373
+#: autoload/save_system.gd:424
 msgid "*.cvsave,*.json ; "
 msgstr "*.cvsave,*.json ; "
 
@@ -1106,7 +1106,7 @@ msgstr "日票（$15）今天可以使用共享座位和電腦。常來的話，
 msgid "A Van Driver (People tab) takes one run each workday from 9:00. Your own ecommerce parcels can go out in the van too: choose \"Own van\" at the packing table."
 msgstr "貨車司機（人員分頁）每個工作日 9:00 起接一趟外送。你自己的電商包裹也能用貨車送：在打包桌選「自己的貨車」。"
 
-#: autoload/save_system.gd:114 autoload/save_system.gd:319 scripts/ui/modals/save_list_modal.gd:63
+#: autoload/save_system.gd:128 autoload/save_system.gd:370 scripts/ui/modals/save_list_modal.gd:63
 msgid "A backup could not be created. Your existing save is unchanged."
 msgstr "無法建立備份。原有存檔仍完整保留。"
 
@@ -2094,7 +2094,7 @@ msgstr "Accident_%d"
 msgid "Accountant correction · %s"
 msgstr "會計師補正・%s"
 
-#: scripts/sim/tax.gd:93
+#: scripts/sim/tax.gd:96
 msgid "Accountant filing fee: %s"
 msgstr "會計師申報費：%s"
 
@@ -2366,7 +2366,7 @@ msgstr "機場航廈"
 msgid "AirportNextFleet"
 msgstr "AirportNextFleet"
 
-#: autoload/game_state.gd:60 autoload/game_state.gd:69 scripts/sim/ecommerce.gd:845 scripts/sim/staff.gd:121
+#: autoload/game_state.gd:60 autoload/game_state.gd:69 scripts/sim/ecommerce.gd:870 scripts/sim/staff.gd:121
 msgid "Alex"
 msgstr "Alex"
 
@@ -2378,7 +2378,7 @@ msgstr "Alex Chen"
 msgid "All %d stops planned  ·  round trip %.1f km"
 msgstr "%d 個停靠點都排好了  ·  來回共 %.1f 公里"
 
-#: autoload/save_system.gd:388
+#: autoload/save_system.gd:439
 msgid "All Files (*)"
 msgstr "所有檔案 (*)"
 
@@ -2614,7 +2614,7 @@ msgstr "還有，不管有沒有人買咖啡，房租都照收。這句話我跟
 msgid "And watch the pastries. What you don't sell by closing goes in the bin, and the bin doesn't pay rent."
 msgstr "還有，糕點要算好。打烊前賣不掉的只能丟，垃圾桶可不會幫你付房租。"
 
-#: scripts/sim/tax.gd:76
+#: scripts/sim/tax.gd:79
 msgid "Annual income tax: %s"
 msgstr "年度所得稅：%s"
 
@@ -2761,6 +2761,10 @@ msgstr "Arcade Garage"
 #: data/character/options.json
 msgid "Arched"
 msgstr "挑眉"
+
+#: scripts/sim/ledger.gd:262
+msgid "Archived %d %s entries (day %d)"
+msgstr "已封存 %d 筆%s分錄（第 %d 天）"
 
 #: scripts/sim/manufacturing.gd:49
 msgid "Arrange a business loan before automation."
@@ -3166,7 +3170,7 @@ msgstr "AutoService"
 msgid "Automated line"
 msgstr "自動化產線"
 
-#: scripts/sim/tax.gd:124
+#: scripts/sim/tax.gd:127
 msgid "Automatic filing correction: %s"
 msgstr "自動申報補正：%s"
 
@@ -4002,7 +4006,7 @@ msgstr "公司登記——奧瑞莉亞市"
 msgid "Business account opened. %s now runs on its own books."
 msgstr "企業帳戶已開立。%s 從此有自己的帳本了。"
 
-#: scripts/sim/ecommerce.gd:1439
+#: scripts/sim/ecommerce.gd:1552
 msgid "Business assets contributed to %s (in kind)"
 msgstr "以實物出資給 %s"
 
@@ -4242,7 +4246,7 @@ msgstr "BuyMaterials"
 msgid "Buyer"
 msgstr "買方負擔"
 
-#: scripts/sim/ecommerce.gd:1329
+#: scripts/sim/ecommerce.gd:1442
 msgid "Buyer %s opened a dispute on order %s. We refunded them and charged a $15 dispute fee."
 msgstr "買家 %s 對訂單 %s 提出申訴。我們已退款給對方，並收取 $15 申訴處理費。"
 
@@ -4678,7 +4682,7 @@ msgstr "現在不能上班：%s。"
 msgid "Can't work the counter: %s."
 msgstr "現在不能站吧台：%s。"
 
-#: autoload/save_system.gd:388 autoload/sound.gd:286 scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57
+#: autoload/save_system.gd:439 autoload/sound.gd:286 scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57
 msgid "Cancel"
 msgstr "取消"
 
@@ -4730,11 +4734,11 @@ msgstr "CancelHealthRenewal"
 msgid "CancelHomeMove"
 msgstr "取消搬家"
 
-#: scripts/sim/ecommerce.gd:388
+#: scripts/sim/ecommerce.gd:413
 msgid "Cancellation window ended."
 msgstr "已超過取消期限。"
 
-#: scripts/sim/ecommerce.gd:389
+#: scripts/sim/ecommerce.gd:414
 msgid "Cancellation window ended. Return eligible stock within %d days of arrival."
 msgstr "已超過取消期限。符合條件的庫存可於到貨後 %d 天內退貨。"
 
@@ -4758,7 +4762,7 @@ msgstr "旺季週末真正的上限可能是房務產能，而不是需求。"
 msgid "Capital"
 msgstr "資金"
 
-#: scripts/sim/ecommerce.gd:1440
+#: scripts/sim/ecommerce.gd:1553
 msgid "Capital contributed in kind by founder"
 msgstr "創辦人實物出資"
 
@@ -5402,7 +5406,7 @@ msgstr "請選擇進行中的活動。"
 msgid "Choose a running group business and a valid media budget."
 msgstr "請選擇營運中的集團業務及有效媒體預算。"
 
-#: autoload/save_system.gd:316 scripts/ui/modals/save_list_modal.gd:22
+#: autoload/save_system.gd:367 scripts/ui/modals/save_list_modal.gd:22
 msgid "Choose a save slot to replace. Its existing save will be backed up."
 msgstr "選擇要覆蓋的存檔槽。原有存檔會先備份。"
 
@@ -5522,7 +5526,7 @@ msgstr "請選擇有效需求，並保留一個活動名額。"
 msgid "Choose an open client brief."
 msgstr "請選擇尚未結案的客戶需求。"
 
-#: scripts/sim/legal.gd:60
+#: scripts/sim/legal.gd:63
 msgid "Choose an open dispute for this company."
 msgstr "請選擇這家公司的未結爭議。"
 
@@ -5562,7 +5566,7 @@ msgstr "請先選擇自有住宅。"
 msgid "Choose an underwriter."
 msgstr "請先選擇承銷商。"
 
-#: scripts/sim/tax.gd:88
+#: scripts/sim/tax.gd:91
 msgid "Choose an unfiled return for this company."
 msgstr "請選擇這家公司的未申報稅單。"
 
@@ -5586,7 +5590,7 @@ msgstr "請選擇另一個已開放街區。"
 msgid "Choose available stock at your home or leased storage; committed orders stay there."
 msgstr "請選住處或承租倉位的可用庫存；已分配給訂單的貨要留在原處。"
 
-#: scripts/sim/ecommerce.gd:482
+#: scripts/sim/ecommerce.gd:507
 msgid "Choose between 1 and %d returnable units."
 msgstr "請選擇 1 至 %d 件可退庫存。"
 
@@ -5786,7 +5790,7 @@ msgstr "市政廳：你的食品處理執照核准了。"
 msgid "City Marathon Weekend"
 msgstr "城市馬拉松週末"
 
-#: autoload/save_system.gd:351 autoload/save_system.gd:373
+#: autoload/save_system.gd:402 autoload/save_system.gd:424
 msgid "City Venture save"
 msgstr "City Venture 存檔"
 
@@ -5842,7 +5846,7 @@ msgstr "城市社交活動：%s"
 msgid "City update: %s"
 msgstr "城市動態：%s"
 
-#: autoload/save_system.gd:335
+#: autoload/save_system.gd:386
 msgid "CityVenture_%s_%04d-%02d-%02d.cvsave"
 msgstr "CityVenture_%s_%04d-%02d-%02d.cvsave"
 
@@ -7142,7 +7146,7 @@ msgstr "叫快遞來收（或自己拿去）"
 msgid "Courier or self delivery"
 msgstr "快遞或自行送貨"
 
-#: scripts/sim/ecommerce.gd:1100
+#: scripts/sim/ecommerce.gd:1213
 msgid "Courier picked up %d parcel%s."
 msgstr "快遞收走了 %d 件包裹%s。"
 
@@ -7150,7 +7154,7 @@ msgstr "快遞收走了 %d 件包裹%s。"
 msgid "Courier picks up in ~2 hours and adds a %s pickup fee."
 msgstr "快遞約 2 小時後來收，另收 %s 收件費。"
 
-#: scripts/sim/ecommerce.gd:1044
+#: scripts/sim/ecommerce.gd:1153
 msgid "Courier pickup: %d parcels (%s)"
 msgstr "快遞收件：%d 件包裹（%s）"
 
@@ -8010,7 +8014,7 @@ msgstr "已交貨%s。發票 %s，%d 天後到期。"
 msgid "Delivered. Invoice %s due in %d days."
 msgstr "已交貨。發票 %s，%d 天後到期。"
 
-#: scripts/sim/ecommerce.gd:221
+#: scripts/sim/ecommerce.gd:246
 msgid "Delivered: %d × %s → %s"
 msgstr "已到貨：%d × %s → %s"
 
@@ -8310,7 +8314,7 @@ msgstr "直訂：沒有佣金，量較少。OTA「%s」：每晚抽 %d%% 佣金�
 msgid "Directional evidence; collect a larger sample"
 msgstr "僅為方向性證據，需要更多樣本"
 
-#: autoload/save_system.gd:388
+#: autoload/save_system.gd:439
 msgid "Directories & Files:"
 msgstr "資料夾與檔案："
 
@@ -8370,7 +8374,7 @@ msgstr "已出貨；到貨時才認列營收，之後依約收款。"
 msgid "Display"
 msgstr "顯示"
 
-#: scripts/sim/ecommerce.gd:1330
+#: scripts/sim/ecommerce.gd:1443
 msgid "Dispute lost on %s: −%s"
 msgstr "申訴敗訴 %s：−%s"
 
@@ -8378,7 +8382,7 @@ msgstr "申訴敗訴 %s：−%s"
 msgid "Dispute the claim"
 msgstr "拒絕理賠"
 
-#: scripts/sim/legal.gd:86
+#: scripts/sim/legal.gd:89
 msgid "Disputed invoice recovered: %s"
 msgstr "爭議發票回收：%s"
 
@@ -8474,7 +8478,7 @@ msgstr "堪用。"
 msgid "Doesn't turn on."
 msgstr "開不了機。"
 
-#: scripts/sim/ecommerce.gd:1223
+#: scripts/sim/ecommerce.gd:1336
 msgid "Doesn't work. Out of the box."
 msgstr "一拆開就不能用。"
 
@@ -8590,7 +8594,7 @@ msgstr "拿到 PostPoint 寄"
 msgid "Drop off parcels"
 msgstr "寄包裹"
 
-#: scripts/sim/ecommerce.gd:224
+#: scripts/sim/ecommerce.gd:249
 msgid "Dropped %d %s at %s. Don't let them sit around."
 msgstr "%d 個%s已經送到%s。別讓它們一直堆著。"
 
@@ -8802,7 +8806,7 @@ msgstr "輕鬆"
 msgid "Eat"
 msgstr "吃"
 
-#: data/businesses/ecommerce.json scripts/sim/ecommerce.gd:1495 scripts/ui/media_ui.gd:162
+#: data/businesses/ecommerce.json scripts/sim/ecommerce.gd:1608 scripts/ui/media_ui.gd:162
 msgid "Ecommerce"
 msgstr "電商"
 
@@ -8958,7 +8962,7 @@ msgstr "緊急接駁"
 msgid "Emerging Market"
 msgstr "新興市場"
 
-#: scripts/sim/legal.gd:100
+#: scripts/sim/legal.gd:103
 msgid "Employee dispute compensation: %s"
 msgstr "員工爭議賠償：%s"
 
@@ -8974,7 +8978,7 @@ msgstr "員工持股"
 msgid "Employee treatment"
 msgstr "員工待遇"
 
-#: scripts/sim/legal.gd:50
+#: scripts/sim/legal.gd:53
 msgid "Employee wages"
 msgstr "員工薪資"
 
@@ -8982,7 +8986,7 @@ msgstr "員工薪資"
 msgid "Employee wages remain owed. IP disputes refer to completed media or manufacturing jobs; court success avoids compensation but never pays fictitious income."
 msgstr "已賺取的員工薪資仍須支付。智財爭議針對已完成的媒體或製造工作；勝訴能減免賠償，不能產生虛構收入。"
 
-#: scripts/sim/legal.gd:98
+#: scripts/sim/legal.gd:101
 msgid "Employee wages settled: %s"
 msgstr "員工薪資結清：%s"
 
@@ -9146,7 +9150,7 @@ msgstr "託管（第 6 年，找 Lina Zhao）：錢鎖在一份合約裡，貨�
 msgid "Escrow (pay on delivery)"
 msgstr "託管付款（貨到才放款）"
 
-#: scripts/sim/ecommerce.gd:336
+#: scripts/sim/ecommerce.gd:361
 msgid "Escrow funded: %s ships %s (arrives %s). The money is released when it lands."
 msgstr "託管已入金：%s 出貨 %s（%s 抵達）。貨到時才放款。"
 
@@ -9418,7 +9422,7 @@ msgstr "博覽會申辦"
 msgid "Export duty %s: %s"
 msgstr "出口訂單 %s 關稅：%s"
 
-#: autoload/save_system.gd:387 scripts/ui/modals/pause_menu.gd:42 scripts/ui/modals/save_list_modal.gd:25
+#: autoload/save_system.gd:438 scripts/ui/modals/pause_menu.gd:42 scripts/ui/modals/save_list_modal.gd:25
 msgid "Export save"
 msgstr "匯出存檔"
 
@@ -9650,7 +9654,7 @@ msgstr "快轉到開門"
 msgid "Fast: +30% work output."
 msgstr "手腳快：工作產出 +30%。"
 
-#: autoload/save_system.gd:388
+#: autoload/save_system.gd:439
 msgid "Favorites:"
 msgstr "我的最愛："
 
@@ -9722,11 +9726,11 @@ msgstr "申請豁免"
 msgid "File yourself · %d minutes · %.0f%% form-error chance"
 msgstr "自行申報・%d 分鐘・表單錯誤率 %.0f%%"
 
-#: autoload/save_system.gd:388
+#: autoload/save_system.gd:439
 msgid "File:"
 msgstr "檔案："
 
-#: autoload/save_system.gd:403
+#: autoload/save_system.gd:454
 msgid "FileReader"
 msgstr "FileReader"
 
@@ -9734,11 +9738,11 @@ msgstr "FileReader"
 msgid "FileTrafficClaim"
 msgstr "FileTrafficClaim"
 
-#: scripts/sim/tax.gd:106
+#: scripts/sim/tax.gd:109
 msgid "Filing correction: %s"
 msgstr "申報補正：%s"
 
-#: scripts/sim/tax.gd:120
+#: scripts/sim/tax.gd:123
 msgid "Filing documents need correction. Fix them yourself or hire an accountant; ignored forms incur a processing fee."
 msgstr "申報文件需要補正。可自行修正或聘請會計師；未處理的表單將收取處理費。"
 
@@ -9898,7 +9902,7 @@ msgstr "先看完第二季結局，再加入城市提案。"
 msgid "First Customer"
 msgstr "第一位客人"
 
-#: scripts/sim/ecommerce.gd:697
+#: scripts/sim/ecommerce.gd:722
 msgid "First ShopLane listing: %s at %s."
 msgstr "第一個 ShopLane 商品上架：%s，售價 %s。"
 
@@ -9942,7 +9946,7 @@ msgstr "第一個團體包房"
 msgid "First industry order"
 msgstr "產業首單導引"
 
-#: scripts/sim/ecommerce.gd:196
+#: scripts/sim/ecommerce.gd:221
 msgid "First inventory order: %d × %s from %s."
 msgstr "第一次進貨：%d × %s，來自 %s。"
 
@@ -9954,7 +9958,7 @@ msgstr "第一張海外訂單"
 msgid "First parcel out"
 msgstr "第一件包裹出貨"
 
-#: scripts/sim/ecommerce.gd:1361
+#: scripts/sim/ecommerce.gd:1474
 msgid "First payout from ShopLane: %s."
 msgstr "第一筆 ShopLane 撥款：%s。"
 
@@ -9978,7 +9982,7 @@ msgstr "第一筆營收！ShopLane 每週一撥款。"
 msgid "First roof lit"
 msgstr "第一個屋頂亮燈"
 
-#: scripts/sim/ecommerce.gd:1149
+#: scripts/sim/ecommerce.gd:1262
 msgid "First sale: %s bought %s for %s."
 msgstr "第一筆銷售：%s 買了%s，%s。"
 
@@ -10598,7 +10602,7 @@ msgstr "先備妥待命團隊費用，或選擇節約方案。"
 msgid "Fund the supplier purchase and seller-paid route costs first."
 msgstr "先備妥貨款與賣方應負擔的運輸費用。"
 
-#: scripts/sim/tax.gd:91
+#: scripts/sim/tax.gd:94
 msgid "Fund the tax payment and filing fee first."
 msgstr "請先備妥稅款和申報費。"
 
@@ -12118,7 +12122,7 @@ msgstr "運送中"
 msgid "INVOICED"
 msgstr "已開發票"
 
-#: scripts/sim/legal.gd:105
+#: scripts/sim/legal.gd:108
 msgid "IP licence settlement: %s"
 msgstr "智財授權和解：%s"
 
@@ -12206,7 +12210,7 @@ msgstr "進口執照要等監管浪潮才會實施。"
 msgid "Import prices ease as the ports catch up."
 msgstr "港口趕上進度，進口價格回穩。"
 
-#: autoload/save_system.gd:387 scripts/ui/modals/pause_menu.gd:45 scripts/ui/modals/save_list_modal.gd:13 scripts/ui/modals/save_list_modal.gd:29
+#: autoload/save_system.gd:438 scripts/ui/modals/pause_menu.gd:45 scripts/ui/modals/save_list_modal.gd:13 scripts/ui/modals/save_list_modal.gd:29
 msgid "Import save"
 msgstr "匯入存檔"
 
@@ -12282,7 +12286,7 @@ msgstr "包含薪資、租金、貸款、供應商帳單、到期應收款，以
 msgid "Income tax"
 msgstr "所得稅"
 
-#: scripts/sim/tax.gd:74
+#: scripts/sim/tax.gd:77
 msgid "Income tax year %d"
 msgstr "%d 年度所得稅"
 
@@ -13126,7 +13130,7 @@ msgstr "KYC 審查（認識你的客戶）"
 msgid "KYC check on payments over %s: a fee and a day's delay."
 msgstr "超過 %s 的付款要過 KYC 審查：要付費，還會多等一天。"
 
-#: scripts/sim/ecommerce.gd:182
+#: scripts/sim/ecommerce.gd:207
 msgid "KYC check — %s"
 msgstr "KYC 審查 — %s"
 
@@ -13622,7 +13626,7 @@ msgstr "滯納金"
 msgid "Late filing adds one penalty and lowers credit. Refund VAT credits carry forward; old saves start new tax periods without retroactively changing their journals."
 msgstr "逾期申報會加收一次罰款並降低信用。退貨營業稅抵額留待後期扣抵；舊存檔從新的稅期開始，不會追溯改寫帳目。"
 
-#: scripts/sim/tax.gd:136
+#: scripts/sim/tax.gd:139
 msgid "Late filing penalty: %s"
 msgstr "逾期申報罰款：%s"
 
@@ -13962,7 +13966,7 @@ msgstr "舊版案件"
 msgid "Legal Dispute"
 msgstr "法律爭議"
 
-#: scripts/sim/legal.gd:117
+#: scripts/sim/legal.gd:120
 msgid "Legal case %s closed. Recovered %s; paid %s."
 msgstr "法律案件 %s 已結案。回收 %s；支付 %s。"
 
@@ -13978,7 +13982,7 @@ msgstr "法律爭議"
 msgid "Legal fee for an insurer dispute"
 msgstr "保險爭議律師費"
 
-#: scripts/sim/legal.gd:64
+#: scripts/sim/legal.gd:67
 msgid "Legal fee: %s"
 msgstr "法務費用：%s"
 
@@ -15530,7 +15534,7 @@ msgstr "開戶最低存款是 $500。"
 msgid "Minimum order (MOQ)"
 msgstr "最低訂購量（MOQ）"
 
-#: scripts/sim/ecommerce.gd:120
+#: scripts/sim/ecommerce.gd:145
 msgid "Minimum order is %d units."
 msgstr "最低訂購量是 %d 件。"
 
@@ -15558,7 +15562,7 @@ msgstr "輕傷"
 msgid "Miss the stock minimum twice and the factory ends the franchise and keeps part of the deposit."
 msgstr "連續兩次沒達到最低庫存，原廠會終止經銷權並沒收部分保證金。"
 
-#: scripts/sim/ecommerce.gd:840
+#: scripts/sim/ecommerce.gd:865
 msgid "Missed a sale: %s is out of stock."
 msgstr "錯過一筆訂單：%s 缺貨。"
 
@@ -16182,11 +16186,11 @@ msgstr "新遊戲設定"
 msgid "New group job: %s"
 msgstr "新的集團委託：%s"
 
-#: scripts/sim/ecommerce.gd:881
+#: scripts/sim/ecommerce.gd:906
 msgid "New order %s — %s — %s"
 msgstr "新訂單 %s——%s——%s"
 
-#: scripts/sim/ecommerce.gd:1206
+#: scripts/sim/ecommerce.gd:1319
 msgid "New review %s: %s \"%s\""
 msgstr "新評價 %s：%s「%s」"
 
@@ -16426,7 +16430,7 @@ msgstr "Nina：可修補服裝目錄・第 3 段"
 msgid "Nineteen hundred a month, two months' deposit. It comes empty: you fit it out, and City Hall wants a food licence before you sell a single croissant."
 msgstr "每月一千九，押金兩個月。交屋是空的：你自己裝修，而且賣出第一個可頌之前，市政廳要先看到你的食品執照。"
 
-#: scripts/sim/ecommerce.gd:1274
+#: scripts/sim/ecommerce.gd:1387
 msgid "No %s in stock to send."
 msgstr "沒有%s的庫存可以寄。"
 
@@ -16654,7 +16658,7 @@ msgstr "這週沒有可用的補救時段。請空出機台，或改選外包。
 msgid "No remaining goal suits this run. Keep playing, reopen goals you set aside, or start a company; completed goals stay recorded."
 msgstr "這次遊戲已沒有適合的待辦目標。可以繼續玩、重新考慮擱置的目標或開公司；已達成的紀錄都會保留。"
 
-#: scripts/sim/ecommerce.gd:460
+#: scripts/sim/ecommerce.gd:485
 msgid "No returnable stock here: units were sold, reserved, moved, or already returned."
 msgstr "這裡沒有可退庫存：商品已售出、預留、移走或退貨。"
 
@@ -16838,7 +16842,7 @@ msgstr "現金不足以支付加工成本。"
 msgid "Not enough cash for renovation."
 msgstr "現金不足以支付翻修費用。"
 
-#: scripts/sim/ecommerce.gd:487 scripts/ui/modals/purchase_return_modal.gd:52
+#: scripts/sim/ecommerce.gd:512 scripts/ui/modals/purchase_return_modal.gd:52
 msgid "Not enough cash for return shipping: %s."
 msgstr "現金不足以支付退貨運費：%s。"
 
@@ -16862,7 +16866,7 @@ msgstr "現金不足以支付這筆採購。"
 msgid "Not enough cash."
 msgstr "現金不夠。"
 
-#: scripts/sim/ecommerce.gd:142 scripts/sim/ecommerce.gd:302 scripts/sim/rails.gd:271 scripts/sim/rails.gd:301
+#: scripts/sim/ecommerce.gd:167 scripts/sim/ecommerce.gd:327 scripts/sim/rails.gd:271 scripts/sim/rails.gd:301
 msgid "Not enough cash. You need %s."
 msgstr "現金不夠。需要 %s。"
 
@@ -16938,7 +16942,7 @@ msgstr "一切照舊：跟清算危機時一樣付款到國外。之後還是可
 msgid "Nothing on the rails today."
 msgstr "今天衣架上沒有東西。"
 
-#: scripts/sim/ecommerce.gd:1038
+#: scripts/sim/ecommerce.gd:1147
 msgid "Nothing packed here."
 msgstr "這裡沒有已打包的貨。"
 
@@ -16966,7 +16970,7 @@ msgstr "沒有可以上線的產品。"
 msgid "Nothing to pack here: is the stock at this location?"
 msgstr "這裡沒有可以打包的：貨在這個地點嗎？"
 
-#: scripts/sim/ecommerce.gd:1249
+#: scripts/sim/ecommerce.gd:1362
 msgid "Nothing to resolve."
 msgstr "沒有需要處理的事。"
 
@@ -17386,7 +17390,7 @@ msgstr "只訪談了 20 位客人，應如何報告結果？"
 msgid "Only a delivered, unpaid invoice can be paid early."
 msgstr "只有已交貨、尚未付款的發票能提前付款。"
 
-#: scripts/sim/ecommerce.gd:382
+#: scripts/sim/ecommerce.gd:407
 msgid "Only a purchase still on the way can be cancelled."
 msgstr "只有尚未到貨的進貨單可以取消。"
 
@@ -17398,7 +17402,7 @@ msgstr "只有還沒到貨的託管訂單可以退款。"
 msgid "Only completed job parts earn their share. Review deliverables, deadline and subcontracting fees in Company OS, Group tab."
 msgstr "只有完成的工作部分能取得對應報酬。請在 Company OS 的集團分頁查看交付項目、期限與外包費用。"
 
-#: scripts/sim/ecommerce.gd:453
+#: scripts/sim/ecommerce.gd:478
 msgid "Only delivered purchases can be returned."
 msgstr "只有已到貨的進貨單可以退貨。"
 
@@ -17418,7 +17422,7 @@ msgstr "只交付好看的照片"
 msgid "Only wholly founder-owned companies can enter this holding group. Other shareholders keep their rights."
 msgstr "只有創辦人全資持有的公司才能移入集團，其他股東的權益不會被移轉。"
 
-#: autoload/save_system.gd:388 scripts/ui/hotel_ui.gd:273 scripts/ui/modals/city_map_modal.gd:132 scripts/ui/modals/city_map_modal.gd:179
+#: autoload/save_system.gd:439 scripts/ui/hotel_ui.gd:273 scripts/ui/modals/city_map_modal.gd:132 scripts/ui/modals/city_map_modal.gd:179
 msgid "Open"
 msgstr "開啟"
 
@@ -18158,7 +18162,7 @@ msgstr "海外交付（筆）"
 msgid "Overseas delivery %s: %s %s"
 msgstr "海外訂單 %s 送達：%s %s"
 
-#: scripts/sim/ecommerce.gd:1320
+#: scripts/sim/ecommerce.gd:1433
 msgid "Overseas dispute fee"
 msgstr "海外交易爭議處理費"
 
@@ -18474,7 +18478,7 @@ msgstr "打包了 %d 筆訂單%s。"
 msgid "Packed and ready: %d"
 msgstr "已打包待出貨：%d"
 
-#: scripts/sim/ecommerce.gd:993
+#: scripts/sim/ecommerce.gd:1102
 msgid "Packed order %s"
 msgstr "已打包訂單 %s"
 
@@ -18554,7 +18558,7 @@ msgstr "支付醫療帳款：%s"
 msgid "Paid standby crew for the city event"
 msgstr "城市活動待命團隊費用"
 
-#: scripts/sim/ecommerce.gd:353
+#: scripts/sim/ecommerce.gd:378
 msgid "Paid supplier invoice %s: %s"
 msgstr "已付供應商發票 %s：%s"
 
@@ -18654,7 +18658,7 @@ msgstr "兼職、商品攝影、打包、寫程式與接案都有親手操作的
 msgid "Part-time jobs: take one to earn a wage. You work the shifts yourself at the workplace (staff door, press E)."
 msgstr "「兼職工作」：選一份賺薪水。班要自己到工作地點上（員工通道按 E）。"
 
-#: scripts/sim/ecommerce.gd:1291
+#: scripts/sim/ecommerce.gd:1404
 msgid "Partial refund 30%% %s: %s"
 msgstr "部分退款 30%% %s：%s"
 
@@ -18690,7 +18694,7 @@ msgstr "糕點"
 msgid "Patel"
 msgstr "Patel"
 
-#: autoload/save_system.gd:388
+#: autoload/save_system.gd:439
 msgid "Path:"
 msgstr "路徑："
 
@@ -18874,7 +18878,7 @@ msgstr "稅款 %s・罰款 %s・期限 %s"
 msgid "Payment follows the invoice due date. Review receivables in Company OS; a reminder does not create a new payment."
 msgstr "款項依發票到期日支付。請在 Company OS 查看應收帳款；提醒不會產生額外付款。"
 
-#: scripts/sim/ecommerce.gd:384
+#: scripts/sim/ecommerce.gd:409
 msgid "Payment is frozen. Wait for the bridge to reopen before cancelling."
 msgstr "款項正在凍結中。請等跨鏈橋恢復後再取消。"
 
@@ -18882,7 +18886,7 @@ msgstr "款項正在凍結中。請等跨鏈橋恢復後再取消。"
 msgid "Payment landed, boxes arrived. Remember who held your money in between. That's this year's lesson."
 msgstr "錢到了，貨也到了。記得中間是誰拿著你的錢。這就是今年的一課。"
 
-#: scripts/sim/ecommerce.gd:338
+#: scripts/sim/ecommerce.gd:363
 msgid "Payment landed: %s ships %s (arrives %s)."
 msgstr "款項已入帳：%s 出貨 %s（預計 %s 到）。"
 
@@ -18902,11 +18906,11 @@ msgstr "《支付誠信法》生效：超過 $2,500 的轉帳要做 KYC 審查�
 msgid "Payments start-ups promise audits and an insurance pool."
 msgstr "支付新創承諾接受稽核，並成立保險基金。"
 
-#: scripts/sim/ecommerce.gd:1359
+#: scripts/sim/ecommerce.gd:1472
 msgid "Payout sent: %s to your business account."
 msgstr "撥款已送出：%s 匯入你的公司帳戶。"
 
-#: scripts/sim/ecommerce.gd:1359
+#: scripts/sim/ecommerce.gd:1472
 msgid "Payout sent: %s to your personal account."
 msgstr "撥款已送出：%s 匯入你的個人帳戶。"
 
@@ -19086,7 +19090,7 @@ msgstr "個人賣家營業稅"
 msgid "Personal seller cap: %s of %s used this month."
 msgstr "個人賣家上限：本月已用 %s／%s。"
 
-#: scripts/sim/ecommerce.gd:920
+#: scripts/sim/ecommerce.gd:945
 msgid "Personal seller limit reached. Your listings are paused until next month — or until you register a business."
 msgstr "已達個人賣家上限。你的商品會暫停到下個月——或直到你登記公司。"
 
@@ -19270,7 +19274,7 @@ msgstr "平台手續費"
 msgid "Play this week's challenge"
 msgstr "遊玩本週挑戰"
 
-#: autoload/save_system.gd:333
+#: autoload/save_system.gd:384
 msgid "Player"
 msgstr "玩家"
 
@@ -19402,7 +19406,7 @@ msgstr "PostPoint 河濱分店"
 msgid "PostPoint clerk"
 msgstr "PostPoint 店員"
 
-#: scripts/sim/ecommerce.gd:1088
+#: scripts/sim/ecommerce.gd:1197
 msgid "PostPoint drop-off: %d parcels (%s)"
 msgstr "PostPoint 寄件：%d 件包裹（%s）"
 
@@ -19906,7 +19910,7 @@ msgstr "進貨取消"
 msgid "Purchase cancelled."
 msgstr "已取消進貨。"
 
-#: scripts/sim/ecommerce.gd:419
+#: scripts/sim/ecommerce.gd:444
 msgid "Purchase cancelled: %s"
 msgstr "取消進貨：%s"
 
@@ -20550,7 +20554,7 @@ msgstr "最近的外送單"
 msgid "Recent transactions"
 msgstr "最近交易"
 
-#: autoload/save_system.gd:388
+#: autoload/save_system.gd:439
 msgid "Recent:"
 msgstr "最近使用："
 
@@ -20722,7 +20726,7 @@ msgstr "更新詢價試算"
 msgid "Refund"
 msgstr "退款"
 
-#: scripts/sim/ecommerce.gd:1268
+#: scripts/sim/ecommerce.gd:1381
 msgid "Refund %s: %s (return label paid)"
 msgstr "退款 %s：%s（已付退貨運費）"
 
@@ -21238,7 +21242,7 @@ msgstr "要取代 %s（第 %d 天）嗎？"
 msgid "Replacement on its way. {customer}: \"Oh — nice. Didn't expect that.\""
 msgstr "新品已在路上。{customer}：「喔——不錯耶，沒想到。」"
 
-#: scripts/sim/ecommerce.gd:1284
+#: scripts/sim/ecommerce.gd:1397
 msgid "Replacement sent %s: %s (express)"
 msgstr "已寄出替換品 %s：%s（快捷）"
 
@@ -21578,7 +21582,7 @@ msgstr "退貨申請：退款前請檢查收據與期限。"
 msgid "Return shipping"
 msgstr "退貨運費"
 
-#: scripts/sim/ecommerce.gd:494
+#: scripts/sim/ecommerce.gd:519
 msgid "Return shipping: %s"
 msgstr "退貨運費：%s"
 
@@ -22358,7 +22362,7 @@ msgstr "送達時售價（奧瑞莉亞元）"
 msgid "Sale delivered %s: %d × %s @ %s"
 msgstr "銷售已送達 %s：%d × %s @ %s"
 
-#: scripts/sim/ecommerce.gd:1170
+#: scripts/sim/ecommerce.gd:1283
 msgid "Sale delivered %s: %s — %s"
 msgstr "訂單 %s 已送達：%s — %s"
 
@@ -22470,7 +22474,7 @@ msgstr "週六"
 msgid "Saturday and Sunday 10:00–18:00 · %s/weekend · reserve at least one day ahead · capacity %d units"
 msgstr "週六、週日 10:00–18:00 · 每週末 %s · 至少提前一天預約 · 最多 %d 件"
 
-#: autoload/save_system.gd:388 scripts/ui/phone_ui.gd:164
+#: autoload/save_system.gd:439 scripts/ui/phone_ui.gd:164
 msgid "Save"
 msgstr "存檔"
 
@@ -22518,7 +22522,7 @@ msgstr "先備妥足夠公司現金，再預約保養。"
 msgid "Save enough company cash for the vehicle and first insurance payment."
 msgstr "先備妥購車與首期保險所需的公司現金。"
 
-#: autoload/save_system.gd:357
+#: autoload/save_system.gd:408
 msgid "Save exported. Keep this file outside your browser."
 msgstr "存檔已匯出。請把檔案保存在瀏覽器以外的地方。"
 
@@ -22526,7 +22530,7 @@ msgstr "存檔已匯出。請把檔案保存在瀏覽器以外的地方。"
 msgid "Save game"
 msgstr "儲存遊戲"
 
-#: autoload/save_system.gd:437
+#: autoload/save_system.gd:488
 msgid "Save imported. Continue where you left off."
 msgstr "存檔已匯入，可以接著玩。"
 
@@ -22570,7 +22574,7 @@ msgstr "請先準備充電費，或改搭捷運。"
 msgid "Save the client retention discount first."
 msgstr "請先備好挽留客戶的折扣金額。"
 
-#: scripts/sim/tax.gd:105
+#: scripts/sim/tax.gd:108
 msgid "Save the correction fee first."
 msgstr "請先備妥補正費用。"
 
@@ -22630,7 +22634,7 @@ msgstr "請先存足驗車費。"
 msgid "Save the insurance premium first."
 msgstr "請先備妥保費。"
 
-#: scripts/sim/legal.gd:63
+#: scripts/sim/legal.gd:66
 msgid "Save the legal fee first."
 msgstr "請先備妥法務費用。"
 
@@ -22698,7 +22702,7 @@ msgstr "請先備妥車輛保障升級保費。"
 msgid "Save this life and start the selected next life"
 msgstr "保存這一局，展開選好的新人生"
 
-#: autoload/save_system.gd:442
+#: autoload/save_system.gd:493
 msgid "Save transfer"
 msgstr "存檔匯入／匯出"
 
@@ -22938,7 +22942,7 @@ msgstr "扣除費用後出售住宅"
 msgid "Sell personal car after depreciation"
 msgstr "折舊後出售自用車"
 
-#: scripts/sim/ecommerce.gd:557
+#: scripts/sim/ecommerce.gd:582
 msgid "Sell some stock first, or lease more space."
 msgstr "先賣掉一些庫存，或租更大的空間。"
 
@@ -22974,7 +22978,7 @@ msgstr "出賣你的時間：客戶每天早上會張貼小案子。接案後在
 msgid "Seller"
 msgstr "賣方負擔"
 
-#: scripts/sim/tax.gd:154
+#: scripts/sim/tax.gd:157
 msgid "Seller VAT obligation assumed"
 msgstr "承接賣家營業稅負債"
 
@@ -23398,7 +23402,7 @@ msgstr "ShopLane Global 撥款：%s %s"
 msgid "ShopLane Seller"
 msgstr "ShopLane 賣家"
 
-#: scripts/sim/ecommerce.gd:1371
+#: scripts/sim/ecommerce.gd:1484
 msgid "ShopLane ads: %s"
 msgstr "ShopLane 廣告：%s"
 
@@ -23406,7 +23410,7 @@ msgstr "ShopLane 廣告：%s"
 msgid "ShopLane balance (paid Mondays)"
 msgstr "ShopLane 餘額（每週一撥款）"
 
-#: scripts/sim/ecommerce.gd:1325
+#: scripts/sim/ecommerce.gd:1438
 msgid "ShopLane dispute lost %s: forced refund + $15 fee"
 msgstr "ShopLane 申訴敗訴 %s：強制退款＋$15 手續費"
 
@@ -23426,11 +23430,11 @@ msgstr "ShopLane 每筆銷售先扣 10% 手續費，再撥款給你。"
 msgid "ShopLane marketplace: %d%% fee, weekly payouts, personal sellers capped at %s/month."
 msgstr "ShopLane 平台：抽成 %d%%，每週撥款，個人賣家每月上限 %s。"
 
-#: scripts/sim/ecommerce.gd:1363
+#: scripts/sim/ecommerce.gd:1476
 msgid "ShopLane negative balance charged to card"
 msgstr "ShopLane 負餘額已從信用卡扣款"
 
-#: scripts/sim/ecommerce.gd:921
+#: scripts/sim/ecommerce.gd:946
 msgid "ShopLane paused your listings: personal seller limit reached."
 msgstr "ShopLane 暫停了你的商品：已達個人賣家上限。"
 
@@ -23438,7 +23442,7 @@ msgstr "ShopLane 暫停了你的商品：已達個人賣家上限。"
 msgid "ShopLane payout"
 msgstr "ShopLane 撥款"
 
-#: scripts/sim/ecommerce.gd:1358
+#: scripts/sim/ecommerce.gd:1471
 msgid "ShopLane payout received: %s"
 msgstr "收到 ShopLane 撥款：%s"
 
@@ -23462,11 +23466,11 @@ msgstr "同樣成交放在 ShopLane 的利潤估算"
 msgid "ShopLane seller cap lifted · B2B contracts unlocked · office leases unlocked · supplier net terms unlocked"
 msgstr "解除 ShopLane 賣家上限 · 解鎖 B2B 合約 · 解鎖辦公室租約 · 解鎖供應商票期"
 
-#: scripts/sim/ecommerce.gd:1356
+#: scripts/sim/ecommerce.gd:1469
 msgid "ShopLane weekly payout"
 msgstr "ShopLane 每週撥款"
 
-#: scripts/sim/ecommerce.gd:742
+#: scripts/sim/ecommerce.gd:767
 msgid "ShopLane: personal seller limit reached this month."
 msgstr "ShopLane：本月已達個人賣家上限。"
 
@@ -23846,7 +23850,7 @@ msgstr "已售出"
 msgid "Sold %d cars · profit so far %s"
 msgstr "已售 %d 輛 · 目前獲利 %s"
 
-#: scripts/sim/ecommerce.gd:1409
+#: scripts/sim/ecommerce.gd:1522
 msgid "Sold %d × %s to liquidator (%d%% of cost)"
 msgstr "賣給清倉商：%d × %s（成本的 %d%%）"
 
@@ -24250,11 +24254,11 @@ msgstr "庫存現在扣除，也須先支付運費。供應商收到貨後，按
 msgid "Stock on the way"
 msgstr "在途庫存"
 
-#: scripts/sim/ecommerce.gd:216
+#: scripts/sim/ecommerce.gd:241
 msgid "Stock received: %s"
 msgstr "到貨：%s"
 
-#: scripts/sim/ecommerce.gd:493
+#: scripts/sim/ecommerce.gd:518
 msgid "Stock returned to supplier: %s (%d units)"
 msgstr "退貨給供應商：%s（%d 件）"
 
@@ -24394,7 +24398,7 @@ msgstr "Studio Lumen"
 msgid "Studio Lumen photos ($120) & list"
 msgstr "找 Studio Lumen 拍照（$120）並上架"
 
-#: scripts/sim/ecommerce.gd:685
+#: scripts/sim/ecommerce.gd:710
 msgid "Studio Lumen product photos: %s"
 msgstr "Studio Lumen 商品攝影：%s"
 
@@ -24402,7 +24406,7 @@ msgstr "Studio Lumen 商品攝影：%s"
 msgid "Studio Nine Yoga"
 msgstr "Studio Nine 瑜伽"
 
-#: scripts/sim/ecommerce.gd:684
+#: scripts/sim/ecommerce.gd:709
 msgid "Studio photos cost %s."
 msgstr "攝影棚拍照要 %s。"
 
@@ -24554,7 +24558,7 @@ msgstr "Sunny Adeyemi：太陽能客戶說明・第 3 段"
 msgid "Supplier bills payable"
 msgstr "應付供應商帳款"
 
-#: scripts/sim/legal.gd:94
+#: scripts/sim/legal.gd:97
 msgid "Supplier breach settlement: %s"
 msgstr "供應商違約和解：%s"
 
@@ -24586,7 +24590,7 @@ msgstr "供應商交付失敗；依其餘已交付服務選擇方案。"
 msgid "Supplier invoice"
 msgstr "供應商帳單"
 
-#: scripts/sim/ecommerce.gd:351
+#: scripts/sim/ecommerce.gd:376
 msgid "Supplier invoice paid: %s"
 msgstr "已付供應商發票：%s"
 
@@ -24598,7 +24602,7 @@ msgstr "你欠供應商、尚未付款的帳單。"
 msgid "Supplier price increase"
 msgstr "供應商漲價"
 
-#: scripts/sim/ecommerce.gd:520
+#: scripts/sim/ecommerce.gd:545
 msgid "Supplier return refund: %s"
 msgstr "供應商退貨退款：%s"
 
@@ -24914,11 +24918,11 @@ msgstr "稅務申報"
 msgid "Tax filing costs"
 msgstr "稅務申報成本"
 
-#: scripts/sim/tax.gd:92
+#: scripts/sim/tax.gd:95
 msgid "Tax payment: %s"
 msgstr "稅款支付：%s"
 
-#: scripts/sim/tax.gd:55
+#: scripts/sim/tax.gd:58
 msgid "Tax return ready: %s. File by %s."
 msgstr "稅單已備妥：%s。請於 %s 前申報。"
 
@@ -25066,7 +25070,7 @@ msgstr "佣金可以忽略"
 msgid "That didn't work."
 msgstr "沒有成功。"
 
-#: scripts/sim/ecommerce.gd:542
+#: scripts/sim/ecommerce.gd:567
 msgid "That home is no longer your stock location. Choose your current home or leased storage."
 msgstr "那間住處已不再是你的庫存位置。請選擇目前住處或已租用的倉儲。"
 
@@ -25082,7 +25086,7 @@ msgstr "這個案子已經沒了。"
 msgid "That order isn't on the way any more."
 msgstr "那張訂單已經不在運送途中了。"
 
-#: scripts/sim/ecommerce.gd:290
+#: scripts/sim/ecommerce.gd:315
 msgid "That payment already went through."
 msgstr "這筆款項已經過了。"
 
@@ -25090,7 +25094,7 @@ msgstr "這筆款項已經過了。"
 msgid "That payment isn't stuck on the bridge."
 msgstr "那筆款項沒有卡在跨鏈橋上。"
 
-#: scripts/sim/ecommerce.gd:257
+#: scripts/sim/ecommerce.gd:282
 msgid "That payment method isn't available."
 msgstr "目前不能用這種付款方式。"
 
@@ -25102,7 +25106,7 @@ msgstr "版位保證旅館客滿"
 msgid "That price is outside the allowed range."
 msgstr "這個價格超出允許範圍。"
 
-#: scripts/sim/ecommerce.gd:368 scripts/ui/modals/purchase_return_modal.gd:23
+#: scripts/sim/ecommerce.gd:393 scripts/ui/modals/purchase_return_modal.gd:23
 msgid "That purchase order no longer exists."
 msgstr "這張進貨單已不存在。"
 
@@ -25126,11 +25130,11 @@ msgstr "這張單已經被接走了。"
 msgid "That run isn't on your list."
 msgstr "這張單不在你的清單上。"
 
-#: scripts/sim/ecommerce.gd:113
+#: scripts/sim/ecommerce.gd:138
 msgid "That supplier doesn't sell this."
 msgstr "這家供應商沒賣這個。"
 
-#: scripts/sim/ecommerce.gd:115
+#: scripts/sim/ecommerce.gd:140
 msgid "That supplier isn't open to you yet."
 msgstr "這家供應商還不跟你往來。"
 
@@ -25138,11 +25142,11 @@ msgstr "這家供應商還不跟你往來。"
 msgid "That went badly. It counts for little."
 msgstr "這次不太順利，效果有限。"
 
-#: scripts/sim/ecommerce.gd:299
+#: scripts/sim/ecommerce.gd:324
 msgid "That wouldn't be any faster."
 msgstr "這樣不會比較快。"
 
-#: scripts/sim/ecommerce.gd:458
+#: scripts/sim/ecommerce.gd:483
 msgid "The %d-day return window has ended."
 msgstr "已超過 %d 天的退貨期限。"
 
@@ -25654,7 +25658,7 @@ msgstr "工廠帳本和排程已更新。"
 msgid "The factory quotation checklist now has conflicting notes. Rita Hale wants a version that other people can check. How do you resolve the conflict?"
 msgstr "工廠報價核對表現在出現互相矛盾的紀錄。Rita Hale 希望其他人也能查核，該如何處理？"
 
-#: autoload/save_system.gd:409
+#: autoload/save_system.gd:460
 msgid "The file could not be read. Your existing save is unchanged."
 msgstr "無法讀取檔案。原有存檔仍完整保留。"
 
@@ -26018,7 +26022,7 @@ msgstr "這筆出售無法還清房貸，公司也付不起差額。請先籌措
 msgid "The same seed, rules and choices reproduce the simulation. Daily market previews do not consume the event RNG. Weekly challenges lock standard rules and save results locally."
 msgstr "相同種子、規則與選擇可重現模擬。查看每日市場不會改變事件隨機序列。每週挑戰固定標準規則，並在本機保存成績。"
 
-#: autoload/save_system.gd:190 autoload/save_system.gd:323
+#: autoload/save_system.gd:204 autoload/save_system.gd:374
 msgid "The save could not be written. Your existing save is unchanged."
 msgstr "無法寫入存檔。原有存檔仍完整保留。"
 
@@ -26286,7 +26290,7 @@ msgstr "提前三十天通知，期間仍住在原住處並付原房租；支付
 msgid "Thirty-day café report"
 msgstr "咖啡館近三十天報表"
 
-#: scripts/sim/ecommerce.gd:264
+#: scripts/sim/ecommerce.gd:289
 msgid "This %s."
 msgstr "這個方式%s。"
 
@@ -26350,7 +26354,7 @@ msgstr "這家公司已結束營業。"
 msgid "This company is closed or replaced. Continue with your current life."
 msgstr "這家公司已關閉或已被新公司取代，請繼續目前的人生。"
 
-#: scripts/sim/company_portfolio.gd:93
+#: scripts/sim/company_portfolio.gd:96
 msgid "This company is closed or unavailable. Choose another live company."
 msgstr "這家公司已關閉或無法使用。請選擇另一家仍在營運的公司。"
 
@@ -26446,7 +26450,7 @@ msgstr "這是已結束公司的合約。"
 msgid "This is a sightseeing-only location right now."
 msgstr "這裡目前只能參觀。"
 
-#: autoload/save_system.gd:317 scripts/save_codec.gd:15
+#: autoload/save_system.gd:368 scripts/save_codec.gd:15
 msgid "This is not a City Venture save."
 msgstr "這不是 City Venture 的存檔。"
 
@@ -26546,11 +26550,11 @@ msgstr "這處所沒有有效租約。"
 msgid "This property has no pending notice."
 msgstr "這處所沒有待完成的退租通知。"
 
-#: scripts/sim/ecommerce.gd:370
+#: scripts/sim/ecommerce.gd:395
 msgid "This purchase belongs to a closed company."
 msgstr "這張進貨單屬於已關閉的公司。"
 
-#: scripts/sim/ecommerce.gd:372
+#: scripts/sim/ecommerce.gd:397
 msgid "This purchase belongs to another business."
 msgstr "這張進貨單屬於其他企業。"
 
@@ -26566,7 +26570,7 @@ msgstr "這份長約已結束。"
 msgid "This request is no longer available — check Contacts."
 msgstr "此請求已無法進行，請查看聯絡人。"
 
-#: scripts/sim/tax.gd:103
+#: scripts/sim/tax.gd:106
 msgid "This return needs no correction."
 msgstr "這份申報不需要補正。"
 
@@ -26610,7 +26614,7 @@ msgstr "完成海外合作夥伴章節後，才會開啟這段故事。"
 msgid "This subsidiary is no longer held here. Choose another company."
 msgstr "這家子公司已不屬於此集團。請選擇另一家公司。"
 
-#: scripts/sim/ecommerce.gd:388 scripts/sim/ecommerce.gd:456
+#: scripts/sim/ecommerce.gd:413 scripts/sim/ecommerce.gd:481
 msgid "This supplier does not accept returns after delivery."
 msgstr "這家供應商不接受到貨後退貨。"
 
@@ -27318,7 +27322,7 @@ msgstr "「收回」會拿回最後一張。"
 msgid "Unexpected large order"
 msgstr "意外的大訂單"
 
-#: scripts/sim/tax.gd:153
+#: scripts/sim/tax.gd:156
 msgid "Unfiled seller VAT transferred with business"
 msgstr "未申報賣家營業稅隨業務移轉"
 
@@ -27378,7 +27382,7 @@ msgstr "未知的代理商危機。"
 msgid "Unknown automotive crisis."
 msgstr "未知的汽車危機。"
 
-#: scripts/sim/customs.gd:97 scripts/sim/ecommerce.gd:1301 scripts/sim/global_market.gd:325
+#: scripts/sim/customs.gd:97 scripts/sim/ecommerce.gd:1414 scripts/sim/global_market.gd:325
 msgid "Unknown choice."
 msgstr "未知的選項。"
 
@@ -27606,7 +27610,7 @@ msgstr "營業稅與所得稅"
 msgid "VAT is collected within customer prices and paid every two months. Company income tax applies to annual pretax profit after carried losses."
 msgstr "營業稅包含在售價內，每兩個月繳納。公司所得稅以扣抵累積虧損後的年度稅前盈餘計算。"
 
-#: scripts/sim/tax.gd:63
+#: scripts/sim/tax.gd:66
 msgid "VAT: year %d, period %d / 6"
 msgstr "營業稅：%d 年・第 %d／6 期"
 
@@ -28950,7 +28954,7 @@ msgstr "你需要日票或座位方案。到櫃檯問問。"
 msgid "You need a van."
 msgstr "你需要一台貨車。"
 
-#: scripts/sim/ecommerce.gd:677
+#: scripts/sim/ecommerce.gd:702
 msgid "You need the product in hand to photograph it."
 msgstr "商品要在手上才能拍照。"
 
@@ -29082,7 +29086,7 @@ msgstr "你正拿著包裹。走到河濱區的 PostPoint，在櫃台交寄。"
 msgid "You're here about the corner unit, I can tell. Everybody looks at it the same way."
 msgstr "你是為了轉角那間店面來的吧，我看得出來。每個人看它的眼神都一樣。"
 
-#: scripts/sim/ecommerce.gd:1073
+#: scripts/sim/ecommerce.gd:1182
 msgid "You're not carrying any parcels."
 msgstr "你身上沒有包裹。"
 
@@ -29098,7 +29102,7 @@ msgstr "這是你應得的：你是我們新的%s。新時薪：每小時 $%d。
 msgid "You've got the look of someone whose parcels keep going the long way round. A van fixes that."
 msgstr "你看起來就像包裹老是繞遠路的人。有一台貨車就解決了。"
 
-#: scripts/sim/ecommerce.gd:912
+#: scripts/sim/ecommerce.gd:937
 msgid "You've sold %s of your %s personal seller limit this month. Register a business to lift it."
 msgstr "你這個月已經賣了 %s，個人賣家上限是 %s。登記公司就能解除限制。"
 
@@ -29762,7 +29766,7 @@ msgstr "港灣度假村"
 msgid "harsh light"
 msgstr "光線太硬"
 
-#: scripts/sim/ecommerce.gd:264
+#: scripts/sim/ecommerce.gd:289
 msgid "has a requirement you don't meet yet"
 msgstr "有你還沒達成的條件"
 
@@ -29842,11 +29846,11 @@ msgstr "%d–%d 天入帳"
 msgid "lands in about %d hour(s)"
 msgstr "約 %d 小時入帳"
 
-#: scripts/sim/tax.gd:126
+#: scripts/sim/tax.gd:129
 msgid "late correction"
 msgstr "補正逾期"
 
-#: scripts/sim/tax.gd:137
+#: scripts/sim/tax.gd:140
 msgid "late tax"
 msgstr "稅務逾期"
 
