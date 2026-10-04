@@ -27,3 +27,9 @@ Rendered regression tours: bank exit **0 failures / 23.2 seconds**; chapters 13â
 ## Home-invoice rejection follow-up
 
 The second full run was stopped after a real buyer declined the home-currency quote. It recorded 74 failures and 32 script errors after the absent contract was polled; full-integrated-rerun-aborted.json preserves the failure. The tour now waits through the actual next-day cooldown and requests fresh quotes, with bounded retries and an explicit failed stop before touching absent contract controls. Dedicated adverse native seed 4 triggers the real rejection: **0 failures / 107.4 seconds**, including a successful fresh-day contract and actual shipment/payment. A new unit test proves no phantom contract/cash and no same-day reroll. Third full run is RUNNING. It is not a PASS.
+
+## Queued crisis handoff review
+
+Third full run reached the bridge crisis with eight native assertions/input failures and no script errors: the purchase handoff left a management layer open, so the queued crisis was delayed and the tour read its result too early. Raw failure log remains preserved. The tour now drains visible management screens through actual Close input before waiting for the queued crisis, and reuses an already-open Company OS rather than attempting blocked world movement.
+
+A byte-for-byte automatic backup from the genuine full run is being replayed with load_and_enter, without fabricated company, cash, stock, clock or story flags. Chapters 10â€“12 replay has passed the actual bridge reroute and payment; later chapters and industry fixtures remain RUNNING. The earlier full result remains FAILED until final acceptance evidence is complete. Checkpoint identity and replay outcomes will be recorded after completion.
