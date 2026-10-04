@@ -88,8 +88,9 @@ static func _setup_scenario(initial: Dictionary) -> void:
 		Bank.B()["no_loans_until"] = Clock.now() + int(initial.get("ban_days", 0)) * Clock.DAY
 	if initial.has("company"):
 		var registration := Company.register(str(initial["company"]), str(initial["type"]), "riverside_studio")
-		assert(registration.get("ok", false))
-		assert(Company.open_business_account(float(initial["capital"])).get("ok", false))
+		var account := Company.open_business_account(float(initial["capital"]))
+		if not registration.get("ok", false) or not account.get("ok", false):
+			push_error("Scenario setup failed: company registration or business account")
 		S()["company"] = GameState.company_id()
 	var entity := GameState.business_entity()
 	if initial.get("cafe", false):
@@ -106,7 +107,8 @@ static func _setup_scenario(initial: Dictionary) -> void:
 	if initial.has("loan"):
 		_open_loan(entity, float(initial["loan"]), int(initial["loan_months"]))
 	if initial.get("van", false):
-		assert(Logistics.buy_van().get("ok", false))
+		var van := Logistics.buy_van()
+		if not van.get("ok", false): push_error("Scenario setup failed: delivery van")
 		for index in int(initial.get("contracts", 2)):
 			var job := Logistics._make_job()
 			Logistics.S()["jobs"][job["id"]] = job
