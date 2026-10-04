@@ -27,6 +27,23 @@ func run() -> void:
 		await _summary()
 		await _industry_fixtures()
 		return
+	if _arg("from")=="resume_insolvency":
+		bot.step("Actual full-run insolvency checkpoint; existing personal savings only")
+		if not bot.expect(SaveSystem.load_and_enter(1),"genuine insolvent full-run save loaded"):return
+		await wait_world();await popups()
+		bot.expect(Insolvency.state().get("stage","")=="rescued","actual founder rescue recorded")
+		bot.expect(GlobalMarket.live(GameState.company_id()),"actual rescued company remains live")
+		bot.expect(Ledger.check_balanced(),"actual rescue books balanced")
+		bot.expect(SaveSystem.save_to(bot.out_dir.path_join("actual_rescue_played.json")),"actual rescued state saved")
+		return
+	if _arg("from")=="resume_ch17":
+		bot.step("resume_ch17: genuine saved operating history, including actual insolvency if present")
+		if not bot.expect(SaveSystem.load_and_enter(1),"actual chapter17 checkpoint loaded"):return
+		await wait_world();await popups()
+		await _chapters_17_to_18()
+		await _summary()
+		await _industry_fixtures()
+		return
 	await _new_game()
 	if _arg("from")=="bank_exit":
 		SceneRouter._enter("interior","nexus_bank","door","up");await bot.wait(.5)
@@ -648,8 +665,26 @@ func popups() -> void:
 				await bot.click_text("OK")
 			await bot.wait(0.4)
 		elif m is InsolvencyModal:
-			bot.fail("company closed during the walkthrough; recovery is required before business steps")
-			await bot.click_named("StartOver")
+			await bot.shot("actual_insolvency_choices")
+			if not m.report.is_empty():
+				await bot.click_named("StartOver")
+			else:
+				var rescue: Button=m.find_child("Rescue",true,false) as Button
+				var restructure: Button=m.find_child("Restructure",true,false) as Button
+				if rescue!=null and not rescue.disabled:
+					var personal_before: float=Ledger.cash("player")
+					var need: float=Insolvency.shortfall(str(Insolvency.state()["entity"]))
+					await bot.click_named("Rescue")
+					bot.expect(not Insolvency.active(),"actual founder savings resolve insolvency")
+					bot.expect(absf(Ledger.cash("player")-(personal_before-need))<.02,"rescue spends existing personal savings without invented capital")
+				elif restructure!=null and not restructure.disabled and Bank.credit()>=350:
+					await bot.click_named("Restructure")
+					bot.expect(not Insolvency.active(),"actual bank restructuring resolves insolvency")
+				else:
+					await bot.click_named("CloseCompany")
+					await bot.shot("actual_insolvency_closing_statement")
+					await bot.click_named("StartOver")
+				bot.expect(Ledger.check_balanced(),"actual insolvency choice preserves balanced books")
 			continue
 		elif m is InfoModal:
 			bot.log_line("  info card: %s" % str(m.title_text))
@@ -2761,16 +2796,17 @@ func _chapters_17_to_18(fast := false) -> void:
 	await bot.click_named("OpenLegacyStory")
 	await popups()
 	if not GameState.flag("legacy_invited"):
-		if not GameState.flag("consolidation_news_read"):
-			await bot.click_named("read_consolidation_news")
-			await bot.shot("ch17_news")
-			await bot.click_named("CloseInfo")
-			await bot.wait(.4)
-		await bot.shot("ch17_market_choice")
-		await _export_row_input("Strategy_niche")
-		await _export_row_input("apply_market_response")
-		await bot.shot("ch17_price_and_campaign")
-		bot.expect(GameState.flag("consolidation_response"), "real price and operating action recorded")
+		if not GameState.flag("consolidation_response") and not GameState.flag("consolidation_unavailable"):
+			if not GameState.flag("consolidation_news_read"):
+				await bot.click_named("read_consolidation_news")
+				await bot.shot("ch17_news")
+				await bot.click_named("CloseInfo")
+				await bot.wait(.4)
+			await bot.shot("ch17_market_choice")
+			await _export_row_input("Strategy_niche")
+			await _export_row_input("apply_market_response")
+			await bot.shot("ch17_price_and_campaign")
+			bot.expect(GameState.flag("consolidation_response"), "real price and operating action recorded")
 		await close_modal()
 		await close_modal()
 		if fast:
