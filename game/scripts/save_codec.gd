@@ -1,6 +1,7 @@
 class_name SaveCodec
 extends RefCounted
 ## Untrusted imports are checked before migration, storage, or changing the live game.
+## The text cap covers the 3-day 5,000-order stress save once orders carry baskets and packing records (#113).
 
 static func _truthy(v) -> bool:
 	if v is bool: return v
@@ -12,7 +13,7 @@ static func _truthy(v) -> bool:
 
 static func decode(text: String) -> Dictionary:
 	var invalid := {"ok": false, "error": "This is not a City Venture save."}
-	if text.length() > 20 * 1024 * 1024: return invalid
+	if text.length() > 32 * 1024 * 1024: return invalid
 	var parser := JSON.new()
 	if parser.parse(text) != OK: return invalid
 	var payload = parser.data

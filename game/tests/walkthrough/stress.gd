@@ -96,6 +96,7 @@ func _run() -> void:
 		_write_report()
 		if not loaded or not bool(sample["balanced"]) or count != int(options["orders"]):
 			report["errors"].append("Incomplete workload, failed load or unbalanced ledger")
+			if not loaded: report["errors"].append("Load failed: " + str(SaveSystem.last_error))
 			break
 		if int(sample["memory_bytes"]) > 512000000:
 			report["errors"].append("512 MB process allocation safety limit reached")
@@ -124,6 +125,9 @@ static func safe_output_directory(path: String) -> bool:
 func _orders(n: int) -> int:
 	var start := Time.get_ticks_usec()
 	var ent := GameState.business_entity()
+	# The saturation fixture counts one-unit orders; random multi-unit baskets (#113) would exhaust the stock early.
+	DataDB.economy["ecommerce"]["basket_chance"] = 0.0
+	DataDB.economy["ecommerce"]["quantity_chance"] = 0.0
 	Ecommerce._add_stock("riverside_studio", "phone_stand", n, 5.0, 0.02)
 	Ledger.post(ent, "Stress fixture stock", [{"acct": "inventory", "dr": n * 5.0}, {"acct": "equity", "cr": n * 5.0}], {"type": "opening"})
 	var listing := Ecommerce.listing_for("phone_stand")

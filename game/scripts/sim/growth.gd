@@ -13,26 +13,43 @@ static func enabled() -> bool:
 static func definitions(kind := "goals") -> Array:
 	return DataDB.story.get(kind, [])
 
+## Journal-derived metrics read each entry once (entries are append-only); a new or shorter journal restarts the scan.
+static var _journal_ref: Array = []
+static var _journal_index := 0
+static var _earned := 0.0
+static var _segments: Dictionary = {}
+
+static func _scan_journal() -> void:
+	var journal: Array = GameState.data["ledger"]["journal"]
+	if not is_same(journal, _journal_ref) or journal.size() < _journal_index:
+		_journal_ref = journal
+		_journal_index = 0
+		_earned = 0.0
+		_segments = {}
+	while _journal_index < journal.size():
+		var entry: Dictionary = journal[_journal_index]
+		_journal_index += 1
+		var company := str(entry["entity"])
+		var counts: bool = company == "player" or GameState.data["entities"].get(company, {}).get("kind", "") == "company"
+		for line in entry["lines"]:
+			if line["acct"] != "revenue": continue
+			if counts: _earned += float(line.get("cr", 0)) - float(line.get("dr", 0))
+			if float(line.get("cr", 0)) > 0:
+				if not _segments.has(company): _segments[company] = {}
+				_segments[company][entry.get("source", {}).get("segment", "")] = true
+
 static func metric(source: String) -> float:
 	var ent := GameState.company_id()
 	match source:
 		"earned_revenue":
-			var earned := 0.0
-			for entry in GameState.data["ledger"]["journal"]:
-				var company := str(entry["entity"])
-				if company != "player" and GameState.data["entities"].get(company, {}).get("kind", "") != "company": continue
-				for line in entry["lines"]:
-					if line["acct"] == "revenue": earned += float(line.get("cr", 0)) - float(line.get("dr", 0))
-			return maxf(0, earned)
+			_scan_journal()
+			return maxf(0, _earned)
 		"registered": return 1.0 if GlobalMarket.live(ent) else 0.0
 		"staff": return float(Staff.count()) if GlobalMarket.live(ent) else 0.0
 		"industries":
 			if not GlobalMarket.live(ent): return 0.0
-			var sources := {}
-			for entry in GameState.data["ledger"]["journal"]:
-				if entry["entity"] != ent: continue
-				for line in entry["lines"]:
-					if line["acct"] == "revenue" and float(line.get("cr", 0)) > 0: sources[entry.get("source", {}).get("segment", "")] = true
+			_scan_journal()
+			var sources: Dictionary = _segments.get(ent, {})
 			var count := 0
 			for entry in Industries.all():
 				if sources.has(entry["id"]) and entry["sim_class"].is_running(): count += 1
@@ -48,7 +65,10 @@ static func metric(source: String) -> float:
 						break
 			return float(count)
 		"foreign_deliveries":
-			return float(Ecommerce.E()["orders"].values().filter(func(o): return o.get("region", "home") != "home" and o.has("delivered") and not o.get("status", "") in ["refunded", "refused"]).size())
+			var delivered := 0
+			for o in Ecommerce.E()["orders"].values():
+				if o.has("delivered") and o.get("region", "home") != "home" and not o.get("status", "") in ["refunded", "refused"]: delivered += 1
+			return float(delivered)
 		"debt_free":
 			var borrowed := false
 			for loan in Bank.B()["loans"].values():
