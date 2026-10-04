@@ -1,0 +1,105 @@
+{
+ "friend": 30,
+ "partner": 60,
+ "request_affinity": 35,
+ "request_quality": 0.67,
+ "preferred_gift_affinity": 6,
+ "other_gift_affinity": 1,
+ "honesty_affinity": 3,
+ "event_affinity": 8,
+ "gift_minutes": 15,
+ "request_round_seconds": 30,
+ "low_energy": 30,
+ "fatigue_timer_multiplier": 0.6,
+ "energy_per_pixel": 0.0008,
+ "energy_per_work_minute": 0.055,
+ "continuous_work_minutes": 360,
+ "work_stress_per_minute": 0.035,
+ "rest_energy_per_minute": 0.04,
+ "sleep_energy_per_minute": 0.2,
+ "sleep_stress_relief": 18,
+ "social_stress_relief": 12,
+ "break_stress_relief": 10,
+ "gym_stress_relief": 15,
+ "medical_fee": 80,
+ "medical_minutes": 90,
+ "recovery_minutes": 480,
+ "recovery_stress_relief": 40,
+ "debt_daily_stress": 3,
+ "crisis_daily_stress": 4,
+ "daily_stress_decay": 2,
+ "illness_threshold": 85,
+ "illness_days": 3,
+ "illness_cooldown_days": 7,
+ "recovered_stress": 55,
+ "minigame_work_minutes": 30,
+ "gifts": {
+  "coffee": {
+   "name": "Coffee gift",
+   "cost": 8
+  },
+  "book": {
+   "name": "Book gift",
+   "cost": 18
+  },
+  "flowers": {
+   "name": "Flowers gift",
+   "cost": 16
+  }
+ },
+ "events": {
+  "chamber": {
+   "id": "chamber",
+   "title": "Chamber dinner",
+   "day": 5,
+   "hour": 18,
+   "end_hour": 22,
+   "minutes": 120,
+   "cost": 65,
+   "npcs": [
+    "sam",
+    "ken",
+    "daniel",
+    "marcus",
+    "victor"
+   ],
+   "detail": "Suppliers still require their stated MOQ and delivery dates. A referral is not a guaranteed sale."
+  },
+  "alumni": {
+   "id": "alumni",
+   "title": "Alumni gathering",
+   "day": 15,
+   "hour": 18,
+   "end_hour": 22,
+   "minutes": 120,
+   "cost": 35,
+   "npcs": [
+    "maya",
+    "priya",
+    "nina",
+    "imani_cole",
+    "student_intern",
+    "kai_morgan"
+   ],
+   "detail": "A service job pays after delivery and its payment terms. Keep cash for the work and the wait."
+  },
+  "port_festival": {
+   "id": "port_festival",
+   "title": "Port music festival",
+   "day": 25,
+   "hour": 18,
+   "end_hour": 22,
+   "minutes": 120,
+   "cost": 25,
+   "npcs": [
+    "sam",
+    "ken",
+    "dara",
+    "owen_blake",
+    "lina",
+    "priya_nair"
+   ],
+   "detail": "Hotel channels charge commission; an OTA placement still needs a truthful page and paying guests."
+  }
+ }
+}

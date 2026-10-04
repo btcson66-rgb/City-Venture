@@ -90,6 +90,7 @@ static func attend(id: String) -> Dictionary:
 	S()["classes"][key]=Clock.now()
 	if Clock.now()>=int(S()["paid_until"]): S()["single"]=false
 	Clock.advance(int(cfg()["class_minutes"]))
+	PersonalLife.rest(0,float(PersonalLife.cfg()["gym_stress_relief"]))
 	var event := network()
 	return {"ok":true,"event":event}
 

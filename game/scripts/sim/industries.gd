@@ -16,7 +16,8 @@ static func all(include_services := false) -> Array:
 		{"id":"hotel", "sim_class":Hotel, "prefixes":["hotel"], "slot":"business", "actions":{"hotel_open":Hotel.open_action}},
 		{"id":"energy", "sim_class":Energy, "prefixes":["energy"], "slot":"business", "actions":{"energy_open":Energy.open_action, "energy_subsidy":Energy.subsidy_action}},
 		{"id":"automotive", "sim_class":Automotive, "prefixes":["auto"], "slot":"business", "actions":{"automotive_open":Automotive.open_action}},
-		{"id":"governance", "sim_class":Governance, "prefixes":["gov"], "slot":"business", "service":true, "actions":{"tax_filing":Governance.open_action}}] + _extra
+		{"id":"governance", "sim_class":Governance, "prefixes":["gov"], "slot":"business", "service":true, "actions":{"tax_filing":Governance.open_action}},
+		{"id":"personal_life", "sim_class":PersonalLife,"prefixes":["life"],"slot":"business","service":true}] + _extra
 	return entries if include_services else entries.filter(func(e): return not e.get("service",false))
 
 static func register(record: Dictionary) -> bool:

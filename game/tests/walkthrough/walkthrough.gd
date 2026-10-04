@@ -23,6 +23,10 @@ func run() -> void:
 		await _resume_ch6_close()
 		return
 	await _new_game()
+	if _arg("from") == "personal_life":
+		await _personal_life_fixture()
+		await _save_load()
+		return
 	if _arg("from") == "audio":
 		await _audio_fixture()
 		return
@@ -156,6 +160,8 @@ func _after_ch9() -> void:
 	await _chapters_10_to_12()
 	await _summary()
 	await _industry_fixtures()
+	await _personal_life_fixture()
+	await _save_load()
 
 
 ## Actual pre-failure morning save: preserve prior profitable chapters, invoice and RNG.
@@ -2521,3 +2527,64 @@ func _audio_fixture() -> void:
 	Sound.tracing=false;Help.auto=true
 	bot.expect(seconds>=60,"at least sixty seconds of native audio trigger evidence")
 	bot.expect(Ledger.check_balanced(),"audio route does not invent revenue")
+
+
+## Contacts, evidence-based personal requests, actual referral work, social cost and finite illness.
+func _personal_life_fixture() -> void:
+	bot.step("Personal-life route: earned relationships, social event, referral and recovery")
+	Help.auto=false
+	var previous_auto := MiniGames.auto
+	MiniGames.auto=-1
+	for id in ["maya","priya","nina","sam","ken"]:
+		PersonalLife.meet(id) # Component fixture: each met contact's own three requests, not main-story flags.
+		UIRoot.open_modal(ContactsModal.new(id))
+		await bot.wait(.25)
+		for index in 3:
+			await bot.click_named("PersonalRequest")
+			await bot.wait(.2)
+			await bot.click_named("StartGame")
+			await bot.wait(.2)
+			var choice: String=["document","compare","scope"][index]
+			await bot.click_named("PersonalAnswer_"+choice)
+			await bot.wait(.2)
+			await bot.click_named("FinishGame")
+			await bot.wait(.3)
+			bot.expect(int(PersonalLife.contact(id)["step"])==index+1,"real personal request: "+id+" part "+str(index+1))
+		if id=="sam":
+			await bot.shot("personal_sam_partner")
+			var before := Ledger.cash(GameState.business_entity())
+			await bot.click_named("ReferralReview");await bot.wait(.2)
+			await bot.click_named("ReferralAccept");await bot.wait(.2)
+			await bot.click_named("ReferralWork");await bot.wait(.2)
+			await bot.click_named("StartGame");await bot.wait(.2)
+			await bot.click_named("PersonalAnswer_scope");await bot.wait(.2)
+			await bot.click_named("FinishGame");await bot.wait(.3)
+			var job := Jobs.get_job(str(PersonalLife.contact(id)["job"]))
+			bot.expect(job.get("status","")=="invoiced" and float(job.get("receivable",0))>0,"real Jobs referral waits for payment")
+			bot.expect(Ledger.cash(str(job["entity"]))<before,"referred work pays actual supplies before collection")
+			await bot.shot("personal_referral_invoice")
+		await close_modal()
+	# Calendar timestamp is advanced normally; no backwards date, funding or outcome flags.
+	var target := Clock.now()-Clock.minute_of_day()+18*60
+	while target<Clock.now() or int(Clock.date_at(target)["day"])!=5:target+=Clock.DAY
+	Clock.advance_to(target)
+	await popups()
+	UIRoot.open_modal(SocialCalendarModal.new());await bot.wait(.3)
+	await bot.shot("personal_social_calendar")
+	var cash := Ledger.cash("player")
+	await bot.click_named("Social_chamber");await bot.wait(.3)
+	bot.expect(Ledger.cash("player")<=cash-65+.01,"social event meal really paid")
+	await bot.shot("personal_social_information")
+	await close_modal()
+	# Deliberate stress fixture verifies the actual two recovery controls and finite state.
+	PersonalLife.S()["stress"]=90;PersonalLife.S()["cooldown_until"]=0
+	PersonalLife.on_hour(Clock.now(),12)
+	UIRoot.open_modal(ContactsModal.new());await bot.wait(.3)
+	bot.expect(PersonalLife.ill(),"high-stress illness fixture triggered")
+	await bot.shot("personal_stress_choices")
+	await bot.click_named("RecoveryRest");await bot.wait(.4)
+	bot.expect(not PersonalLife.ill(),"real free rest button ends illness")
+	await bot.shot("personal_recovered_contacts")
+	await close_modal()
+	MiniGames.auto=previous_auto;Help.auto=true
+	bot.expect(Ledger.check_balanced(),"personal requests, gifts and referral journals balance")

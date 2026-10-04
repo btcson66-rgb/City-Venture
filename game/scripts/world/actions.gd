@@ -202,6 +202,7 @@ static func _look(params: Dictionary) -> void:
 
 
 static func _talk(npc_id: String) -> void:
+	PersonalLife.meet(npc_id)
 	var def := DataDB.npc(npc_id)
 	for d in def.get("dialogue", []):
 		if Cond.all(d.get("when", [])):

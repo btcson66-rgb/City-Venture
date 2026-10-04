@@ -151,7 +151,7 @@ func time_left() -> float:
 func _process(delta: float) -> void:
 	if phase != "play" or round_time <= 0.0:
 		return
-	_round_t += delta
+	_round_t += delta * PersonalLife.response_speed()
 	if _timer_bar != null and is_instance_valid(_timer_bar):
 		_timer_bar.value = time_left()
 	if _round_t >= round_time:
@@ -212,6 +212,8 @@ func _send(r: Dictionary) -> void:
 	if _done_sent:
 		return
 	_done_sent = true
+	if not r.get("aborted",false) and not self is PersonalRequestGame:
+		PersonalLife.work(int(PersonalLife.cfg()["minigame_work_minutes"]))
 	finished.emit(r)
 	if on_done.is_valid():
 		on_done.call(r)

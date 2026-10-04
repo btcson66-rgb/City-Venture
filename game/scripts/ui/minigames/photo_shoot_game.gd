@@ -160,7 +160,7 @@ func _frame_input(e: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	super._process(delta)
-	_needle += delta
+	_needle += delta * PersonalLife.response_speed()
 	if needle_bar != null and is_instance_valid(needle_bar):
 		needle_bar.queue_redraw()
 

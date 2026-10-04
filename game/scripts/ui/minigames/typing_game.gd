@@ -149,7 +149,7 @@ func _line_done() -> void:
 func _process(delta: float) -> void:
 	super._process(delta)
 	if phase == "play":
-		_line_t += delta
+		_line_t += delta * PersonalLife.response_speed()
 		if _err_flash > 0.0:
 			_err_flash -= delta
 			if view != null and is_instance_valid(view):

@@ -9,7 +9,7 @@ msgstr ""
 msgid "\n%dxxx"
 msgstr ""
 
-#: scripts/ui/hud.gd:258
+#: scripts/ui/hud.gd:266
 msgid "   ◆ decision"
 msgstr ""
 
@@ -25,7 +25,7 @@ msgstr ""
 msgid "  of which on hold (<2 days)"
 msgstr ""
 
-#: scripts/ui/hud.gd:233
+#: scripts/ui/hud.gd:241
 msgid "  ·  DAY %d"
 msgstr ""
 
@@ -69,7 +69,7 @@ msgstr ""
 msgid " ltd"
 msgstr ""
 
-#: scripts/ui/hud.gd:244
+#: scripts/ui/hud.gd:252
 msgid " today"
 msgstr ""
 
@@ -273,11 +273,11 @@ msgstr ""
 msgid "%d new delivery runs are posted (Company OS → Logistics)."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:328
+#: scripts/ui/phone_ui.gd:331
 msgid "%d of %d days"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:313
+#: scripts/ui/phone_ui.gd:316
 msgid "%d of %d reached"
 msgstr ""
 
@@ -293,7 +293,7 @@ msgstr ""
 msgid "%d orders"
 msgstr ""
 
-#: scripts/world/actions.gd:293
+#: scripts/world/actions.gd:294
 msgid "%d orders waiting to be packed. I'm on it."
 msgstr ""
 
@@ -485,7 +485,7 @@ msgstr ""
 msgid "%s is already registered (%s)."
 msgstr ""
 
-#: scripts/world/actions.gd:244
+#: scripts/world/actions.gd:245
 msgid "%s is busy."
 msgstr ""
 
@@ -679,6 +679,10 @@ msgstr ""
 
 #: scripts/ui/automotive_ui.gd:222
 msgid "%s · %s/car/mo"
+msgstr ""
+
+#: scripts/ui/modals/contacts_modal.gd:34
+msgid "%s · affinity %d / 100"
 msgstr ""
 
 #: scripts/ui/governance_ui.gd:23
@@ -1065,8 +1069,20 @@ msgstr ""
 msgid "A cheap car sitting idle earns nothing; a high price loses requests. Service skipped means breakdowns and bad reviews."
 msgstr ""
 
+#: data/story/personal/maya.json
+msgid "A checked guide with contacts and clear limits"
+msgstr ""
+
+#: data/story/personal/sam.json
+msgid "A checked handover pack with inspection exceptions"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "A client posts a job with several stops, a fee and a deadline. On time pays the full fee, late pays less, and a run left undone is cancelled."
+msgstr ""
+
+#: data/help/help.json
+msgid "A closed originating business retires its requests. Completed or expired work cannot pay twice."
 msgstr ""
 
 #: scripts/ui/modals/insolvency_modal.gd:74
@@ -1117,6 +1133,10 @@ msgstr ""
 msgid "A fuller van spreads the fixed time of a trip over more parcels, so each parcel costs less to deliver."
 msgstr ""
 
+#: data/story/personal/maya.json
+msgid "A guarantee of housing for every visitor"
+msgstr ""
+
 #: data/events/hotel_review_storm.json
 msgid "A guest's angry post is spreading across the booking platform."
 msgstr ""
@@ -1127,6 +1147,10 @@ msgstr ""
 
 #: data/events/fitness_carrier.json
 msgid "A gym member introduces a courier with a seven-day trial price."
+msgstr ""
+
+#: data/story/personal/priya.json
+msgid "A hidden commission line"
 msgstr ""
 
 #: data/help/glossary.json
@@ -1245,6 +1269,10 @@ msgstr ""
 msgid "A premium brand can charge more. Your reviews and margin matter as much as being cheaper."
 msgstr ""
 
+#: data/story/personal/priya.json
+msgid "A promise of placement with no channel approval"
+msgstr ""
+
 #: data/milestones.json
 msgid "A proper agency"
 msgstr ""
@@ -1261,6 +1289,154 @@ msgstr ""
 msgid "A real office: your company name on the door and the sign, a proper desk for Company OS, and a stockroom so boxes stop living in your apartment. It's also %s every month whether you sell anything or not."
 msgstr ""
 
+#: data/story/personal/lena_park.json
+msgid "A referred client commissions a documented OEM quality evidence. Complete the agreed work; no revenue is earned merely for knowing Lena Park."
+msgstr ""
+
+#: data/story/personal/priya_nair.json
+msgid "A referred client commissions a documented OTA placement page. Complete the agreed work; no revenue is earned merely for knowing Priya Nair."
+msgstr ""
+
+#: data/story/personal/okafor.json
+msgid "A referred client commissions a documented Old Town lease explanation. Complete the agreed work; no revenue is earned merely for knowing Mr. Okafor."
+msgstr ""
+
+#: data/story/personal/lee.json
+msgid "A referred client commissions a documented accessible cafe signage. Complete the agreed work; no revenue is earned merely for knowing Lee."
+msgstr ""
+
+#: data/story/personal/sofia.json
+msgid "A referred client commissions a documented account fee comparison. Complete the agreed work; no revenue is earned merely for knowing Sofia."
+msgstr ""
+
+#: data/story/personal/frank_doyle.json
+msgid "A referred client commissions a documented auction condition disclosure. Complete the agreed work; no revenue is earned merely for knowing Frank Doyle."
+msgstr ""
+
+#: data/story/personal/harbor_point.json
+msgid "A referred client commissions a documented beginner exercise timetable. Complete the agreed work; no revenue is earned merely for knowing Rosa · Harbor Point Fitness."
+msgstr ""
+
+#: data/story/personal/ms_okoro.json
+msgid "A referred client commissions a documented community energy questions. Complete the agreed work; no revenue is earned merely for knowing Ms. Okoro."
+msgstr ""
+
+#: data/story/personal/ruiz.json
+msgid "A referred client commissions a documented construction handover checklist. Complete the agreed work; no revenue is earned merely for knowing Ruiz Construction."
+msgstr ""
+
+#: data/story/personal/priya.json
+msgid "A referred client commissions a documented coworking guest programme. Complete the agreed work; no revenue is earned merely for knowing Priya."
+msgstr ""
+
+#: data/story/personal/rafael_costa.json
+msgid "A referred client commissions a documented electrical safety checklist. Complete the agreed work; no revenue is earned merely for knowing Rafael Costa."
+msgstr ""
+
+#: data/story/personal/victor.json
+msgid "A referred client commissions a documented enterprise succession interview. Complete the agreed work; no revenue is earned merely for knowing Victor Hale."
+msgstr ""
+
+#: data/story/personal/rita_hale.json
+msgid "A referred client commissions a documented factory quotation checklist. Complete the agreed work; no revenue is earned merely for knowing Rita Hale."
+msgstr ""
+
+#: data/story/personal/diane_harlow.json
+msgid "A referred client commissions a documented first-home viewing guide. Complete the agreed work; no revenue is earned merely for knowing Diane Harlow."
+msgstr ""
+
+#: data/story/personal/sam.json
+msgid "A referred client commissions a documented fleet customer handover. Complete the agreed work; no revenue is earned merely for knowing Sam Okoro."
+msgstr ""
+
+#: data/story/personal/elena.json
+msgid "A referred client commissions a documented founder due-diligence notes. Complete the agreed work; no revenue is earned merely for knowing Elena Park."
+msgstr ""
+
+#: data/story/personal/mara_quinn.json
+msgid "A referred client commissions a documented franchise training outline. Complete the agreed work; no revenue is earned merely for knowing Mara Quinn."
+msgstr ""
+
+#: data/story/personal/owen_blake.json
+msgid "A referred client commissions a documented group travel accessibility plan. Complete the agreed work; no revenue is earned merely for knowing Owen Blake."
+msgstr ""
+
+#: data/story/personal/vera_stone.json
+msgid "A referred client commissions a documented guest review evidence guide. Complete the agreed work; no revenue is earned merely for knowing Vera Stone."
+msgstr ""
+
+#: data/story/personal/henri_dubois.json
+msgid "A referred client commissions a documented hotel history archive. Complete the agreed work; no revenue is earned merely for knowing Henri Dubois."
+msgstr ""
+
+#: data/story/personal/lina.json
+msgid "A referred client commissions a documented import document checklist. Complete the agreed work; no revenue is earned merely for knowing Lina Zhao."
+msgstr ""
+
+#: data/story/personal/student_intern.json
+msgid "A referred client commissions a documented internship learning portfolio. Complete the agreed work; no revenue is earned merely for knowing Nia Park."
+msgstr ""
+
+#: data/story/personal/marcus.json
+msgid "A referred client commissions a documented loan application cash-flow guide. Complete the agreed work; no revenue is earned merely for knowing Marcus Reed."
+msgstr ""
+
+#: data/story/personal/maya.json
+msgid "A referred client commissions a documented neighbour welcome guide. Complete the agreed work; no revenue is earned merely for knowing Maya."
+msgstr ""
+
+#: data/story/personal/tom.json
+msgid "A referred client commissions a documented office move-in inventory. Complete the agreed work; no revenue is earned merely for knowing Tom."
+msgstr ""
+
+#: data/story/personal/dara.json
+msgid "A referred client commissions a documented parcel address guide. Complete the agreed work; no revenue is earned merely for knowing Dara."
+msgstr ""
+
+#: data/story/personal/tomas_varga.json
+msgid "A referred client commissions a documented production changeover notes. Complete the agreed work; no revenue is earned merely for knowing Tomas Varga."
+msgstr ""
+
+#: data/story/personal/ana.json
+msgid "A referred client commissions a documented registration document guide. Complete the agreed work; no revenue is earned merely for knowing Ana."
+msgstr ""
+
+#: data/story/personal/jun_ito.json
+msgid "A referred client commissions a documented repair appointment checklist. Complete the agreed work; no revenue is earned merely for knowing Jun Ito."
+msgstr ""
+
+#: data/story/personal/nina.json
+msgid "A referred client commissions a documented repairable clothing catalogue. Complete the agreed work; no revenue is earned merely for knowing Nina."
+msgstr ""
+
+#: data/story/personal/daniel.json
+msgid "A referred client commissions a documented retail buyer presentation. Complete the agreed work; no revenue is earned merely for knowing Daniel Wong."
+msgstr ""
+
+#: data/story/personal/jun.json
+msgid "A referred client commissions a documented reusable cup menu. Complete the agreed work; no revenue is earned merely for knowing Jun."
+msgstr ""
+
+#: data/story/personal/sunny_adeyemi.json
+msgid "A referred client commissions a documented solar customer explainer. Complete the agreed work; no revenue is earned merely for knowing Sunny Adeyemi."
+msgstr ""
+
+#: data/story/personal/kai_morgan.json
+msgid "A referred client commissions a documented sponsorship disclosure guide. Complete the agreed work; no revenue is earned merely for knowing Kai Morgan."
+msgstr ""
+
+#: data/story/personal/imani_cole.json
+msgid "A referred client commissions a documented student enterprise workshop. Complete the agreed work; no revenue is earned merely for knowing Dr. Imani Cole."
+msgstr ""
+
+#: data/story/personal/ken.json
+msgid "A referred client commissions a documented supplier invoice checklist. Complete the agreed work; no revenue is earned merely for knowing Ken."
+msgstr ""
+
+#: data/story/personal/landlord.json
+msgid "A referred client commissions a documented tenant maintenance handbook. Complete the agreed work; no revenue is earned merely for knowing Mr. Okafor (landlord)."
+msgstr ""
+
 #: data/help/glossary.json
 msgid "A regular payment covers interest and repays part of the principal until the loan is paid off."
 msgstr ""
@@ -1271,6 +1447,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "A rejected pitch still costs time and money."
+msgstr ""
+
+#: data/story/personal/maya.json
+msgid "A residents association asks Maya to introduce you for a paid welcome guide. They want a guarantee that every visitor will find a home. What can you offer?"
 msgstr ""
 
 #: autoload/ui_root.gd:227
@@ -1287,6 +1467,10 @@ msgstr ""
 
 #: data/jobs/parcel_sorter.json
 msgid "A seller drops off twenty parcels with no labels. You feel their pain."
+msgstr ""
+
+#: data/economy/personal_life.json
+msgid "A service job pays after delivery and its payment terms. Keep cash for the work and the wait."
 msgstr ""
 
 #: data/character/options.json
@@ -1323,6 +1507,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "A staff member morale score measures how they feel about work and pay."
+msgstr ""
+
+#: data/story/personal/nina.json
+msgid "A supplier calls Nina's fabric sustainable without a certificate. Nina wants an honest catalogue for her students. Which wording is safe?"
 msgstr ""
 
 #: data/events/real_estate_arrears.json
@@ -1497,6 +1685,10 @@ msgstr ""
 msgid "Accept the loss"
 msgstr ""
 
+#: scripts/ui/modals/contacts_modal.gd:71
+msgid "Accept the referred job"
+msgstr ""
+
 #: data/events/crestline_big_offer.json
 msgid "Accept, counter or decline in Company OS → Contracts. The catch is working capital (you pay for the lamps now and get paid in 60 days) and space (home holds 600 units, Suite 2B 1,500)."
 msgstr ""
@@ -1565,8 +1757,12 @@ msgstr ""
 msgid "Accuracy and speed decide how much of the work gets done in this session."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:294
+#: scripts/ui/phone_ui.gd:297
 msgid "Achievements"
+msgstr ""
+
+#: scripts/sim/personal_life.gd:31
+msgid "Acquaintance"
 msgstr ""
 
 #: scripts/ui/market_view.gd:26
@@ -1621,6 +1817,10 @@ msgstr ""
 msgid "Additional founder capital"
 msgstr ""
 
+#: data/story/personal/maya.json
+msgid "Addresses copied without checking availability"
+msgstr ""
+
 #: scripts/ui/minigames/cowork_host_game.gd:7
 msgid "Ade"
 msgstr ""
@@ -1657,6 +1857,10 @@ msgstr ""
 msgid "Advertising budget"
 msgstr ""
 
+#: data/help/glossary.json
+msgid "Affinity ranges from 0 to 100. Acquaintance, friend and partner stages unlock three personal requests. Gifts have individual preferences."
+msgstr ""
+
 #: data/help/help.json
 msgid "After 180 days an independent company can buy a rival with company cash. Market presence is an investment, not guaranteed income."
 msgstr ""
@@ -1673,7 +1877,7 @@ msgstr ""
 msgid "After-sales service ticket"
 msgstr ""
 
-#: scripts/ui/hud.gd:236
+#: scripts/ui/hud.gd:244
 msgid "Afternoon · Sunny"
 msgstr ""
 
@@ -1733,7 +1937,7 @@ msgstr ""
 msgid "All good? Approve it. Something wrong? Click the wrong field first, then Reject."
 msgstr ""
 
-#: scripts/world/actions.gd:293
+#: scripts/world/actions.gd:294
 msgid "All packed. The courier comes at 16:00."
 msgstr ""
 
@@ -1773,6 +1977,10 @@ msgstr ""
 msgid "Already attended — choose another class."
 msgstr ""
 
+#: scripts/sim/personal_life.gd:37
+msgid "Already completed — review the referral."
+msgstr ""
+
 #: scripts/sim/company.gd:143
 msgid "Already granted."
 msgstr ""
@@ -1781,12 +1989,24 @@ msgstr ""
 msgid "Already licensed."
 msgstr ""
 
+#: scripts/sim/personal_life.gd:62
+msgid "Already offered a gift today — return tomorrow."
+msgstr ""
+
+#: scripts/sim/personal_life.gd:114
+msgid "Already recovered — return to your plans."
+msgstr ""
+
 #: scripts/sim/staff.gd:57
 msgid "Already registered as an employer."
 msgstr ""
 
 #: data/products/phone_stand.json
 msgid "Aluminium Phone Stand"
+msgstr ""
+
+#: data/economy/personal_life.json
+msgid "Alumni gathering"
 msgstr ""
 
 #: scripts/ui/minigames/photo_shoot_game.gd:293
@@ -1841,8 +2061,16 @@ msgstr ""
 msgid "Ana"
 msgstr ""
 
+#: data/story/personal/ana.json
+msgid "Ana asks for a registration document guide. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Ana at City Hall. The Payments Integrity Act is in force. Commercial importers need an import licence: $450 a year, at the permits kiosk. There's a monthly compliance cost now too."
+msgstr ""
+
+#: data/story/personal/ana.json
+msgid "Ana is ready to introduce a paying client for the registration document guide. The client asks for a promise you cannot verify. What do you put in the handover?"
 msgstr ""
 
 #: data/jobs/city_clerk.json
@@ -1851,6 +2079,18 @@ msgstr ""
 
 #: scripts/ui/modals/registration_modal.gd:25
 msgid "Ana: \"All done. Congratulations. Open a business account at Nexus Bank and you're set.\""
+msgstr ""
+
+#: data/story/personal/ana.json
+msgid "Ana: registration document guide · part 1"
+msgstr ""
+
+#: data/story/personal/ana.json
+msgid "Ana: registration document guide · part 2"
+msgstr ""
+
+#: data/story/personal/ana.json
+msgid "Ana: registration document guide · part 3"
 msgstr ""
 
 #: data/world/years.json
@@ -2101,6 +2341,10 @@ msgstr ""
 msgid "At 5%, a 100-unit order averages about 5 duds. Allow spare stock before promising a large delivery."
 msgstr ""
 
+#: data/help/glossary.json
+msgid "At 85%, illness offers a free 480-minute recovery day or an 80 AUD, 90-minute visit. It also expires within 3 days."
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1480
 msgid "At any packing table the shipping options include \"Own van\": fuel instead of a courier fee, delivered the same day. The Pier 7 warehouse can hold your stock too."
 msgstr ""
@@ -2127,6 +2371,14 @@ msgstr ""
 
 #: data/economy/logistics.json
 msgid "Atlas Movers"
+msgstr ""
+
+#: scripts/ui/modals/social_calendar_modal.gd:16
+msgid "Attend"
+msgstr ""
+
+#: scripts/sim/personal_life.gd:40
+msgid "Attend events or offer a preferred gift to reach the next relationship stage."
 msgstr ""
 
 #: data/character/options.json
@@ -2369,7 +2621,7 @@ msgstr ""
 msgid "BUILD  ·  LIVE  ·  CONNECT  ·  GROW"
 msgstr ""
 
-#: autoload/sound.gd:286 scripts/frontend/character_creator.gd:110
+#: autoload/sound.gd:286 scripts/frontend/character_creator.gd:110 scripts/ui/modals/contacts_modal.gd:52
 msgid "Back"
 msgstr ""
 
@@ -2659,6 +2911,10 @@ msgstr ""
 
 #: scripts/ui/modals/loan_modal.gd:90 scripts/ui/modals/loan_modal.gd:94
 msgid "Book an appointment"
+msgstr ""
+
+#: data/economy/personal_life.json
+msgid "Book gift"
 msgstr ""
 
 #: data/events/hotel_equipment_failure.json
@@ -3049,7 +3305,7 @@ msgstr ""
 msgid "Businesses: choose from the businesses available now, or find a part-time job."
 msgstr ""
 
-#: scripts/world/actions.gd:286
+#: scripts/world/actions.gd:287
 msgid "Busy day. All good."
 msgstr ""
 
@@ -3361,6 +3617,10 @@ msgstr ""
 msgid "Call it a day? You'll wake up at 7:00 AM. The game autosaves."
 msgstr ""
 
+#: data/story/personal/ken.json
+msgid "Call it free money"
+msgstr ""
+
 #: data/dialogue/daniel_cameo.json
 msgid "Call me when you can do volume."
 msgstr ""
@@ -3477,7 +3737,7 @@ msgstr ""
 msgid "Can't start a shift now: %s."
 msgstr ""
 
-#: scripts/world/actions.gd:266
+#: scripts/world/actions.gd:267
 msgid "Can't work the counter: %s."
 msgstr ""
 
@@ -3565,7 +3825,7 @@ msgstr ""
 msgid "Carry them to PostPoint yourself (cheaper, costs your time)"
 msgstr ""
 
-#: scripts/ui/hud.gd:266
+#: scripts/ui/hud.gd:274
 msgid "Carrying %d parcel%s"
 msgstr ""
 
@@ -3661,6 +3921,10 @@ msgstr ""
 msgid "Certain cost, no fine."
 msgstr ""
 
+#: data/story/personal/sam.json
+msgid "Certificates for uninspected vehicles"
+msgstr ""
+
 #: scripts/ui/energy_ui.gd:192
 msgid "CertifyStorage"
 msgstr ""
@@ -3671,6 +3935,10 @@ msgstr ""
 
 #: scripts/ui/modals/run_card_modal.gd:44
 msgid "Challenge score"
+msgstr ""
+
+#: data/economy/personal_life.json
+msgid "Chamber dinner"
 msgstr ""
 
 #: data/buildings/riverside_apartment.json
@@ -4177,12 +4445,20 @@ msgstr ""
 msgid "City map"
 msgstr ""
 
-#: scripts/ui/market_view.gd:33 scripts/ui/phone_ui.gd:137 scripts/ui/phone_ui.gd:349
+#: scripts/ui/market_view.gd:33 scripts/ui/phone_ui.gd:137 scripts/ui/phone_ui.gd:352
 msgid "City news"
 msgstr ""
 
 #: data/world/years.json
 msgid "City opens a $2M Green Business Grant for local sellers."
+msgstr ""
+
+#: scripts/ui/modals/contacts_modal.gd:21 scripts/ui/modals/social_calendar_modal.gd:5
+msgid "City social calendar"
+msgstr ""
+
+#: scripts/sim/personal_life.gd:81
+msgid "City social event: %s"
 msgstr ""
 
 #: scripts/sim/city_news.gd:32
@@ -4211,6 +4487,10 @@ msgstr ""
 
 #: scripts/ui/governance_ui.gd:48
 msgid "Claim pending"
+msgstr ""
+
+#: data/story/personal/nina.json
+msgid "Claim that replacement is the only option"
 msgstr ""
 
 #: scripts/ui/governance_ui.gd:45
@@ -4373,6 +4653,10 @@ msgstr ""
 msgid "Closed now"
 msgstr ""
 
+#: scripts/ui/modals/social_calendar_modal.gd:14
+msgid "Closed or already attended — return on the next monthly date."
+msgstr ""
+
 #: scripts/world/building_info.gd:120
 msgid "Closed · opens %s"
 msgstr ""
@@ -4425,15 +4709,19 @@ msgstr ""
 msgid "Coding session — %s"
 msgstr ""
 
-#: data/economy/cafe.json scripts/sim/ledger.gd:30 scripts/world/actions.gd:255
+#: data/economy/cafe.json scripts/sim/ledger.gd:30 scripts/world/actions.gd:256
 msgid "Coffee"
+msgstr ""
+
+#: data/economy/personal_life.json
+msgid "Coffee gift"
 msgstr ""
 
 #: data/jobs/cowork_host.json
 msgid "Coffee machine, printer, Wi-Fi: you fix all three before lunch."
 msgstr ""
 
-#: scripts/world/actions.gd:259
+#: scripts/world/actions.gd:260
 msgid "Coffee — %s."
 msgstr ""
 
@@ -4525,7 +4813,7 @@ msgstr ""
 msgid "Company brand"
 msgstr ""
 
-#: scripts/sim/shop_life.gd:112
+#: scripts/sim/shop_life.gd:113
 msgid "Company closed — decline this opportunity."
 msgstr ""
 
@@ -4577,6 +4865,10 @@ msgstr ""
 msgid "Compare real shelf prices, packaging and warranty before setting your price."
 msgstr ""
 
+#: data/story/personal/ana.json data/story/personal/daniel.json data/story/personal/dara.json data/story/personal/diane_harlow.json
+msgid "Compare sources and record what remains uncertain"
+msgstr ""
+
 #: data/help/help.json
 msgid "Compare the cycle, base rate, price level and rival shares. Your prices and quality affect your share."
 msgstr ""
@@ -4613,6 +4905,10 @@ msgstr ""
 msgid "Complete every condition before the deadline. Missed loan payments or closing the scenario company can end the attempt; the founder can continue in sandbox."
 msgstr ""
 
+#: data/help/help.json
+msgid "Complete evidence-based requests to earn referrals. Referred work has supplies, a deadline, 30-day payment terms and a risk of non-payment."
+msgstr ""
+
 #: data/milestones.json
 msgid "Complete five group blocks."
 msgstr ""
@@ -4631,6 +4927,10 @@ msgstr ""
 
 #: scripts/sim/hotel.gd:91
 msgid "Complete the previous growth stage."
+msgstr ""
+
+#: scripts/sim/personal_life.gd:166
+msgid "Complete this personal chain before reviewing its referral."
 msgstr ""
 
 #: scripts/sim/media.gd:203
@@ -4733,8 +5033,12 @@ msgstr ""
 msgid "Consumer-protection fine for an undisclosed flood car"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:839
+#: scripts/ui/modals/company_os.gd:839 scripts/ui/modals/contacts_modal.gd:6 scripts/ui/phone_ui.gd:137
 msgid "Contacts"
+msgstr ""
+
+#: data/help/help.json
+msgid "Contacts and personal life"
 msgstr ""
 
 #: data/world/years.json
@@ -4873,7 +5177,7 @@ msgstr ""
 msgid "Could I get a loan?"
 msgstr ""
 
-#: scripts/world/actions.gd:286
+#: scripts/world/actions.gd:287
 msgid "Could use a bit more support around here."
 msgstr ""
 
@@ -5185,6 +5489,14 @@ msgstr ""
 msgid "Daniel Wong"
 msgstr ""
 
+#: data/story/personal/daniel.json
+msgid "Daniel Wong asks for a retail buyer presentation. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/daniel.json
+msgid "Daniel Wong is ready to introduce a paying client for the retail buyer presentation. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
 #: data/events/crestline_big_offer.json
 msgid "Daniel Wong, Crestline Retail."
 msgstr ""
@@ -5195,6 +5507,18 @@ msgstr ""
 
 #: data/dialogue/daniel_cameo.json
 msgid "Daniel Wong. Crestline Retail — buying side."
+msgstr ""
+
+#: data/story/personal/daniel.json
+msgid "Daniel Wong: retail buyer presentation · part 1"
+msgstr ""
+
+#: data/story/personal/daniel.json
+msgid "Daniel Wong: retail buyer presentation · part 2"
+msgstr ""
+
+#: data/story/personal/daniel.json
+msgid "Daniel Wong: retail buyer presentation · part 3"
 msgstr ""
 
 #: data/story/chapters.json
@@ -5209,8 +5533,28 @@ msgstr ""
 msgid "Dara"
 msgstr ""
 
+#: data/story/personal/dara.json
+msgid "Dara asks for a parcel address guide. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/dara.json
+msgid "Dara is ready to introduce a paying client for the parcel address guide. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
 #: scripts/ui/modals/dropoff_modal.gd:21
 msgid "Dara: \"%d parcel%s? Economy's three days, Express is one.\""
+msgstr ""
+
+#: data/story/personal/dara.json
+msgid "Dara: parcel address guide · part 1"
+msgstr ""
+
+#: data/story/personal/dara.json
+msgid "Dara: parcel address guide · part 2"
+msgstr ""
+
+#: data/story/personal/dara.json
+msgid "Dara: parcel address guide · part 3"
 msgstr ""
 
 #: data/character/options.json
@@ -5321,6 +5665,10 @@ msgstr ""
 msgid "Debt written off in liquidation — %s"
 msgstr ""
 
+#: data/help/glossary.json
+msgid "Debt, unresolved crises and continuous work raise stress. Sleep, breaks, city events and Harbor Point classes relieve it."
+msgstr ""
+
 #: autoload/clock.gd:14
 msgid "Dec"
 msgstr ""
@@ -5357,6 +5705,10 @@ msgstr ""
 msgid "Decline and keep your current plan"
 msgstr ""
 
+#: scripts/ui/modals/contacts_modal.gd:73
+msgid "Decline referral"
+msgstr ""
+
 #: data/events/acquisition_offer.json
 msgid "Decline: stay independent"
 msgstr ""
@@ -5383,6 +5735,14 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "Defect rate"
+msgstr ""
+
+#: data/story/personal/sam.json
+msgid "Delete all maintenance terms"
+msgstr ""
+
+#: data/story/personal/ana.json data/story/personal/daniel.json data/story/personal/dara.json data/story/personal/diane_harlow.json
+msgid "Delete both notes to make the file look complete"
 msgstr ""
 
 #: data/milestones.json
@@ -5593,6 +5953,18 @@ msgstr ""
 msgid "Depreciation"
 msgstr ""
 
+#: data/story/personal/maya.json
+msgid "Describe both as equally accessible"
+msgstr ""
+
+#: data/story/personal/nina.json
+msgid "Describe the material and leave the claim unverified"
+msgstr ""
+
+#: data/story/personal/sam.json
+msgid "Describe the van as needing no maintenance"
+msgstr ""
+
 #: data/regions/auroria.json
 msgid "Design"
 msgstr ""
@@ -5639,6 +6011,26 @@ msgstr ""
 
 #: data/npcs/diane_harlow.json
 msgid "Diane Harlow"
+msgstr ""
+
+#: data/story/personal/diane_harlow.json
+msgid "Diane Harlow asks for a first-home viewing guide. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/diane_harlow.json
+msgid "Diane Harlow is ready to introduce a paying client for the first-home viewing guide. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
+#: data/story/personal/diane_harlow.json
+msgid "Diane Harlow: first-home viewing guide · part 1"
+msgstr ""
+
+#: data/story/personal/diane_harlow.json
+msgid "Diane Harlow: first-home viewing guide · part 2"
+msgstr ""
+
+#: data/story/personal/diane_harlow.json
+msgid "Diane Harlow: first-home viewing guide · part 3"
 msgstr ""
 
 #: data/world/years.json
@@ -5709,6 +6101,10 @@ msgstr ""
 msgid "Directories & Files:"
 msgstr ""
 
+#: data/story/personal/sam.json
+msgid "Disclose the brake work and ask for a repair quote"
+msgstr ""
+
 #: data/events/automotive_flood.json
 msgid "Disclose the flood damage"
 msgstr ""
@@ -5741,6 +6137,10 @@ msgstr ""
 msgid "Distribute spending by audience, not just the cheapest CPM."
 msgstr ""
 
+#: scripts/ui/modals/contacts_modal.gd:76
+msgid "Do the referred work"
+msgstr ""
+
 #: data/buildings/dockside_motors.json
 msgid "Dockside Motors"
 msgstr ""
@@ -5763,6 +6163,14 @@ msgstr ""
 
 #: scripts/ui/modals/van_deal_modal.gd:9
 msgid "Dockside Motors: used van"
+msgstr ""
+
+#: data/story/personal/nina.json
+msgid "Document repairable examples and inspection limits"
+msgstr ""
+
+#: data/story/personal/ana.json data/story/personal/daniel.json data/story/personal/dara.json data/story/personal/diane_harlow.json
+msgid "Document the question and ask for evidence"
 msgstr ""
 
 #: data/economy/marketplace.json
@@ -5803,6 +6211,26 @@ msgstr ""
 
 #: data/npcs/imani_cole.json
 msgid "Dr. Imani Cole"
+msgstr ""
+
+#: data/story/personal/imani_cole.json
+msgid "Dr. Imani Cole asks for a student enterprise workshop. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/imani_cole.json
+msgid "Dr. Imani Cole is ready to introduce a paying client for the student enterprise workshop. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
+#: data/story/personal/imani_cole.json
+msgid "Dr. Imani Cole: student enterprise workshop · part 1"
+msgstr ""
+
+#: data/story/personal/imani_cole.json
+msgid "Dr. Imani Cole: student enterprise workshop · part 2"
+msgstr ""
+
+#: data/story/personal/imani_cole.json
+msgid "Dr. Imani Cole: student enterprise workshop · part 3"
 msgstr ""
 
 #: scripts/ui/minigames/photo_shoot_game.gd:104
@@ -6069,12 +6497,32 @@ msgstr ""
 msgid "Elena Park"
 msgstr ""
 
+#: data/story/personal/elena.json
+msgid "Elena Park asks for a founder due-diligence notes. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/elena.json
+msgid "Elena Park is ready to introduce a paying client for the founder due-diligence notes. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
 #: data/events/elena_offer.json
 msgid "Elena Park wants in"
 msgstr ""
 
 #: data/dialogue/elena_cameo.json data/events/elena_offer.json
 msgid "Elena Park, Northlight Capital."
+msgstr ""
+
+#: data/story/personal/elena.json
+msgid "Elena Park: founder due-diligence notes · part 1"
+msgstr ""
+
+#: data/story/personal/elena.json
+msgid "Elena Park: founder due-diligence notes · part 2"
+msgstr ""
+
+#: data/story/personal/elena.json
+msgid "Elena Park: founder due-diligence notes · part 3"
 msgstr ""
 
 #: data/events/elena_offer.json
@@ -6161,6 +6609,10 @@ msgstr ""
 msgid "Energy"
 msgstr ""
 
+#: scripts/ui/hud.gd:239
+msgid "Energy %d%% · stress %d%%"
+msgstr ""
+
 #: scripts/ui/energy_ui.gd:10
 msgid "Energy Console"
 msgstr ""
@@ -6175,6 +6627,10 @@ msgstr ""
 
 #: data/rivals/energy_1.json
 msgid "Energy Vale"
+msgstr ""
+
+#: data/help/help.json
+msgid "Energy changes reaction time, not your points. Use sleep, breaks, gym classes and social events to manage stress."
 msgstr ""
 
 #: data/regions/almeria.json
@@ -6293,7 +6749,7 @@ msgstr ""
 msgid "Estimated sales"
 msgstr ""
 
-#: scripts/ui/hud.gd:236
+#: scripts/ui/hud.gd:244
 msgid "Evening"
 msgstr ""
 
@@ -6399,6 +6855,14 @@ msgstr ""
 
 #: scripts/sim/shop_life.gd:35
 msgid "Expensive"
+msgstr ""
+
+#: data/story/personal/ken.json
+msgid "Explain the due date and the cash needed to pay"
+msgstr ""
+
+#: data/story/personal/nina.json
+msgid "Explain the repair and show both real prices"
 msgstr ""
 
 #: data/help/patch_notes.json
@@ -6957,6 +7421,10 @@ msgstr ""
 msgid "Floor-plan interest"
 msgstr ""
 
+#: data/economy/personal_life.json
+msgid "Flowers gift"
+msgstr ""
+
 #: scripts/sim/cafe.gd:314
 msgid "Flyers and a board for %s"
 msgstr ""
@@ -7101,12 +7569,36 @@ msgstr ""
 msgid "Frank Doyle"
 msgstr ""
 
+#: data/story/personal/frank_doyle.json
+msgid "Frank Doyle asks for a auction condition disclosure. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/frank_doyle.json
+msgid "Frank Doyle is ready to introduce a paying client for the auction condition disclosure. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
+#: data/story/personal/frank_doyle.json
+msgid "Frank Doyle: auction condition disclosure · part 1"
+msgstr ""
+
+#: data/story/personal/frank_doyle.json
+msgid "Frank Doyle: auction condition disclosure · part 2"
+msgstr ""
+
+#: data/story/personal/frank_doyle.json
+msgid "Frank Doyle: auction condition disclosure · part 3"
+msgstr ""
+
 #: data/jobs/barista.json
 msgid "Free coffee at Bloom Coffee while you work there."
 msgstr ""
 
 #: data/jobs/cowork_host.json
 msgid "Free hot-desk access at Nexus Co-work while you work there."
+msgstr ""
+
+#: scripts/ui/modals/contacts_modal.gd:11
+msgid "Free recovery day · 480 minutes"
 msgstr ""
 
 #: data/events/rail_frozen.json
@@ -7139,6 +7631,10 @@ msgstr ""
 
 #: autoload/clock.gd:13
 msgid "Fri"
+msgstr ""
+
+#: scripts/sim/personal_life.gd:31
+msgid "Friend"
 msgstr ""
 
 #: data/economy/staff.json
@@ -7255,6 +7751,10 @@ msgstr ""
 
 #: scripts/sim/jobs.gd:67
 msgid "Fund the next construction milestone."
+msgstr ""
+
+#: scripts/sim/personal_life.gd:175
+msgid "Fund the referral's supplies before working."
 msgstr ""
 
 #: scripts/sim/tax.gd:91
@@ -7397,7 +7897,7 @@ msgstr ""
 msgid "Good for the price."
 msgstr ""
 
-#: scripts/ui/modals/sleep_modal.gd:45
+#: scripts/ui/modals/sleep_modal.gd:48
 msgid "Good morning. %s."
 msgstr ""
 
@@ -7643,6 +8143,14 @@ msgstr ""
 
 #: scripts/ui/hotel_ui.gd:280
 msgid "GrowthNextBoard"
+msgstr ""
+
+#: data/story/personal/nina.json
+msgid "Guarantee every garment without inspection"
+msgstr ""
+
+#: data/story/personal/ana.json data/story/personal/daniel.json data/story/personal/dara.json data/story/personal/diane_harlow.json
+msgid "Guarantee the result to win the introduction"
 msgstr ""
 
 #: scripts/sim/hotel.gd:94
@@ -7921,8 +8429,32 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
+#: scripts/ui/modals/contacts_modal.gd:42
+msgid "Help · %d minutes · %s"
+msgstr ""
+
 #: data/npcs/henri_dubois.json
 msgid "Henri Dubois"
+msgstr ""
+
+#: data/story/personal/henri_dubois.json
+msgid "Henri Dubois asks for a hotel history archive. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/henri_dubois.json
+msgid "Henri Dubois is ready to introduce a paying client for the hotel history archive. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
+#: data/story/personal/henri_dubois.json
+msgid "Henri Dubois: hotel history archive · part 1"
+msgstr ""
+
+#: data/story/personal/henri_dubois.json
+msgid "Henri Dubois: hotel history archive · part 2"
+msgstr ""
+
+#: data/story/personal/henri_dubois.json
+msgid "Henri Dubois: hotel history archive · part 3"
 msgstr ""
 
 #: data/dialogue/okafor_intro.json
@@ -7971,6 +8503,18 @@ msgstr ""
 
 #: scripts/ui/automotive_ui.gd:124
 msgid "Hidden defects unknown. Paid inspection: %s."
+msgstr ""
+
+#: data/story/personal/nina.json
+msgid "Hide the cases that cannot be repaired"
+msgstr ""
+
+#: data/story/personal/ken.json
+msgid "Hide the due date until delivery"
+msgstr ""
+
+#: data/story/personal/ana.json data/story/personal/daniel.json data/story/personal/dara.json data/story/personal/diane_harlow.json
+msgid "Hide the unresolved section"
 msgstr ""
 
 #: scripts/ui/minigames/auction_game.gd:59
@@ -8113,7 +8657,7 @@ msgstr ""
 msgid "Honest. I respect it."
 msgstr ""
 
-#: scripts/world/actions.gd:286
+#: scripts/world/actions.gd:287
 msgid "Honestly? I'm looking at other jobs."
 msgstr ""
 
@@ -8151,6 +8695,10 @@ msgstr ""
 
 #: data/rivals/hotel_1.json
 msgid "Hotel Vale"
+msgstr ""
+
+#: data/economy/personal_life.json
+msgid "Hotel channels charge commission; an OTA placement still needs a truthful page and paying guests."
 msgstr ""
 
 #: data/npcs/vera_stone.json
@@ -8469,7 +9017,7 @@ msgstr ""
 msgid "In the workshop"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:513 scripts/ui/phone_ui.gd:277
+#: scripts/ui/modals/company_os.gd:513 scripts/ui/phone_ui.gd:280
 msgid "In transit"
 msgstr ""
 
@@ -8621,12 +9169,20 @@ msgstr ""
 msgid "Installs pay once with a warranty tail; chargers earn per kWh and track EV adoption."
 msgstr ""
 
-#: scripts/sim/shop_life.gd:118
+#: scripts/sim/shop_life.gd:119
 msgid "Insufficient cash for the sponsored report — decline or earn money."
+msgstr ""
+
+#: scripts/sim/personal_life.gd:47 scripts/sim/personal_life.gd:64 scripts/sim/personal_life.gd:80 scripts/ui/modals/contacts_modal.gd:55
+msgid "Insufficient personal cash — earn money before this request."
 msgstr ""
 
 #: scripts/sim/shop_life.gd:55
 msgid "Insufficient personal cash — return after earning money."
+msgstr ""
+
+#: scripts/sim/personal_life.gd:116
+msgid "Insufficient personal cash — take a free recovery day."
 msgstr ""
 
 #: data/products/water_bottle.json
@@ -8763,6 +9319,18 @@ msgstr ""
 
 #: scripts/sim/manufacturing.gd:115
 msgid "Invalid order terms."
+msgstr ""
+
+#: data/story/personal/nina.json
+msgid "Invent a certificate number"
+msgstr ""
+
+#: data/story/personal/ana.json data/story/personal/daniel.json data/story/personal/dara.json data/story/personal/diane_harlow.json
+msgid "Invent a confident answer"
+msgstr ""
+
+#: data/story/personal/ken.json
+msgid "Invent the missing document"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:7
@@ -8981,6 +9549,10 @@ msgstr ""
 msgid "Jun Ito"
 msgstr ""
 
+#: data/story/personal/jun_ito.json
+msgid "Jun Ito asks for a repair appointment checklist. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
 #: scripts/ui/automotive_ui.gd:122
 msgid "Jun Ito found %s: true value %s."
 msgstr ""
@@ -8989,12 +9561,48 @@ msgstr ""
 msgid "Jun Ito has already inspected this car."
 msgstr ""
 
+#: data/story/personal/jun_ito.json
+msgid "Jun Ito is ready to introduce a paying client for the repair appointment checklist. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
 #: scripts/ui/automotive_ui.gd:120
 msgid "Jun Ito: no hidden defect found."
 msgstr ""
 
+#: data/story/personal/jun_ito.json
+msgid "Jun Ito: repair appointment checklist · part 1"
+msgstr ""
+
+#: data/story/personal/jun_ito.json
+msgid "Jun Ito: repair appointment checklist · part 2"
+msgstr ""
+
+#: data/story/personal/jun_ito.json
+msgid "Jun Ito: repair appointment checklist · part 3"
+msgstr ""
+
+#: data/story/personal/jun.json
+msgid "Jun asks for a reusable cup menu. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/jun.json
+msgid "Jun is ready to introduce a paying client for the reusable cup menu. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
 #: data/events/automotive_flood.json
 msgid "Jun spotted water lines under the carpet of a car you bought at auction. Disclose it and cut the price, pay for a repair, or list it quietly and hope."
+msgstr ""
+
+#: data/story/personal/jun.json
+msgid "Jun: reusable cup menu · part 1"
+msgstr ""
+
+#: data/story/personal/jun.json
+msgid "Jun: reusable cup menu · part 2"
+msgstr ""
+
+#: data/story/personal/jun.json
+msgid "Jun: reusable cup menu · part 3"
 msgstr ""
 
 #: scripts/ui/minigames/barista_game.gd:10
@@ -9057,6 +9665,26 @@ msgstr ""
 msgid "Kai Morgan KOL"
 msgstr ""
 
+#: data/story/personal/kai_morgan.json
+msgid "Kai Morgan asks for a sponsorship disclosure guide. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/kai_morgan.json
+msgid "Kai Morgan is ready to introduce a paying client for the sponsorship disclosure guide. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
+#: data/story/personal/kai_morgan.json
+msgid "Kai Morgan: sponsorship disclosure guide · part 1"
+msgstr ""
+
+#: data/story/personal/kai_morgan.json
+msgid "Kai Morgan: sponsorship disclosure guide · part 2"
+msgstr ""
+
+#: data/story/personal/kai_morgan.json
+msgid "Kai Morgan: sponsorship disclosure guide · part 3"
+msgstr ""
+
 #: data/regions/karu.json
 msgid "Karu"
 msgstr ""
@@ -9097,6 +9725,10 @@ msgstr ""
 msgid "Keep my budget"
 msgstr ""
 
+#: scripts/ui/modals/social_calendar_modal.gd:21
+msgid "Keep my plans"
+msgstr ""
+
 #: data/events/ad_cost_spike.json
 msgid "Keep reach, spend more."
 msgstr ""
@@ -9117,6 +9749,18 @@ msgstr ""
 msgid "Keep the fleet on rent."
 msgstr ""
 
+#: data/story/personal/ana.json data/story/personal/daniel.json data/story/personal/dara.json data/story/personal/diane_harlow.json
+msgid "Keep the newest note without checking"
+msgstr ""
+
+#: data/story/personal/maya.json
+msgid "Keep the old hours to avoid admitting a mistake"
+msgstr ""
+
+#: data/story/personal/sam.json
+msgid "Keep the unlimited-uptime promise"
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Keep {company} stocked through the shock: 100 units in hand or on the way"
 msgstr ""
@@ -9127,6 +9771,18 @@ msgstr ""
 
 #: data/events/supply_shock_plan.json
 msgid "Ken again. Here are your options, straight."
+msgstr ""
+
+#: data/story/personal/ken.json
+msgid "Ken finds a net-term invoice was described as free credit. It actually has a due date and must be paid. What goes into the training guide?"
+msgstr ""
+
+#: data/story/personal/ken.json
+msgid "Ken introduces a buyer asking for a supplier invoice checklist. A missing document cannot be confirmed today. What handover can you provide?"
+msgstr ""
+
+#: data/story/personal/ken.json
+msgid "Ken wants a new founder to understand a wholesale invoice. The offer has a minimum order quantity and a delivery lead time. Which explanation helps?"
 msgstr ""
 
 #: data/dialogue/ken_intro.json
@@ -9159,6 +9815,18 @@ msgstr ""
 
 #: data/events/supplier_price_increase.json
 msgid "Ken: \"Smart. Shipping tomorrow.\""
+msgstr ""
+
+#: data/story/personal/ken.json
+msgid "Ken: supplier invoice checklist · part 1"
+msgstr ""
+
+#: data/story/personal/ken.json
+msgid "Ken: supplier invoice checklist · part 2"
+msgstr ""
+
+#: data/story/personal/ken.json
+msgid "Ken: supplier invoice checklist · part 3"
 msgstr ""
 
 #: data/buildings/kessler_precision.json scripts/sim/manufacturing.gd:95
@@ -9513,8 +10181,32 @@ msgstr ""
 msgid "Leave early"
 msgstr ""
 
+#: data/story/personal/ana.json data/story/personal/daniel.json data/story/personal/dara.json data/story/personal/diane_harlow.json
+msgid "Leave the risks out of the handover"
+msgstr ""
+
 #: data/npcs/lee.json scripts/sim/staff.gd:121 scripts/ui/minigames/pack_game.gd:76
 msgid "Lee"
+msgstr ""
+
+#: data/story/personal/lee.json
+msgid "Lee asks for a accessible cafe signage. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/lee.json
+msgid "Lee is ready to introduce a paying client for the accessible cafe signage. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
+#: data/story/personal/lee.json
+msgid "Lee: accessible cafe signage · part 1"
+msgstr ""
+
+#: data/story/personal/lee.json
+msgid "Lee: accessible cafe signage · part 2"
+msgstr ""
+
+#: data/story/personal/lee.json
+msgid "Lee: accessible cafe signage · part 3"
 msgstr ""
 
 #: data/economy/marketplace.json
@@ -9559,6 +10251,26 @@ msgstr ""
 
 #: data/npcs/lena_park.json scripts/sim/manufacturing.gd:95
 msgid "Lena Park"
+msgstr ""
+
+#: data/story/personal/lena_park.json
+msgid "Lena Park asks for a OEM quality evidence. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/lena_park.json
+msgid "Lena Park is ready to introduce a paying client for the OEM quality evidence. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
+#: data/story/personal/lena_park.json
+msgid "Lena Park: OEM quality evidence · part 1"
+msgstr ""
+
+#: data/story/personal/lena_park.json
+msgid "Lena Park: OEM quality evidence · part 2"
+msgstr ""
+
+#: data/story/personal/lena_park.json
+msgid "Lena Park: OEM quality evidence · part 3"
 msgstr ""
 
 #: scripts/sim/bank.gd:144
@@ -9629,7 +10341,7 @@ msgstr ""
 msgid "Licensing Officer"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:291
+#: scripts/ui/phone_ui.gd:294
 msgid "Life Timeline"
 msgstr ""
 
@@ -9653,8 +10365,16 @@ msgstr ""
 msgid "Lina Zhao"
 msgstr ""
 
+#: data/story/personal/lina.json
+msgid "Lina Zhao asks for a import document checklist. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Lina Zhao has an offer for importers: talk to her at Nexus Bank (weekdays 10–16), or wait for her call"
+msgstr ""
+
+#: data/story/personal/lina.json
+msgid "Lina Zhao is ready to introduce a paying client for the import document checklist. The client asks for a promise you cannot verify. What do you put in the handover?"
 msgstr ""
 
 #: data/dialogue/lina_intro.json
@@ -9671,6 +10391,18 @@ msgstr ""
 
 #: data/story/chapters.json
 msgid "Lina Zhao. We launched something for importers: escrow on delivery. It's optional. Come by Nexus Bank, weekdays 10 to 4, and I'll show you."
+msgstr ""
+
+#: data/story/personal/lina.json
+msgid "Lina Zhao: import document checklist · part 1"
+msgstr ""
+
+#: data/story/personal/lina.json
+msgid "Lina Zhao: import document checklist · part 2"
+msgstr ""
+
+#: data/story/personal/lina.json
+msgid "Lina Zhao: import document checklist · part 3"
 msgstr ""
 
 #: data/events/escrow_offer.json
@@ -9723,6 +10455,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "List a product you have in stock. Shoot the photos yourself (a photo shoot you play) or pay Studio Lumen $120 for pro photos."
+msgstr ""
+
+#: data/story/personal/ken.json
+msgid "List checked documents and the missing item"
 msgstr ""
 
 #: scripts/ui/automotive_ui.gd:188
@@ -10161,7 +10897,7 @@ msgstr ""
 msgid "Manufacturing Vale"
 msgstr ""
 
-#: scripts/ui/hud.gd:112 scripts/ui/modals/settings_modal.gd:7
+#: scripts/ui/hud.gd:119 scripts/ui/modals/settings_modal.gd:7
 msgid "Map"
 msgstr ""
 
@@ -10209,12 +10945,40 @@ msgstr ""
 msgid "Mara Quinn"
 msgstr ""
 
+#: data/story/personal/mara_quinn.json
+msgid "Mara Quinn asks for a franchise training outline. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/mara_quinn.json
+msgid "Mara Quinn is ready to introduce a paying client for the franchise training outline. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
+#: data/story/personal/mara_quinn.json
+msgid "Mara Quinn: franchise training outline · part 1"
+msgstr ""
+
+#: data/story/personal/mara_quinn.json
+msgid "Mara Quinn: franchise training outline · part 2"
+msgstr ""
+
+#: data/story/personal/mara_quinn.json
+msgid "Mara Quinn: franchise training outline · part 3"
+msgstr ""
+
 #: data/npcs/marcus.json
 msgid "Marcus Reed"
 msgstr ""
 
+#: data/story/personal/marcus.json
+msgid "Marcus Reed asks for a loan application cash-flow guide. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Marcus Reed here. Big invoices on long terms are how profitable companies run out of cash. My door's open, weekdays 1 to 4."
+msgstr ""
+
+#: data/story/personal/marcus.json
+msgid "Marcus Reed is ready to introduce a paying client for the loan application cash-flow guide. The client asks for a promise you cannot verify. What do you put in the handover?"
 msgstr ""
 
 #: scripts/ui/modals/loan_modal.gd:85
@@ -10235,6 +10999,18 @@ msgstr ""
 
 #: scripts/sim/rails.gd:204
 msgid "Marcus Reed. Wires and letters of credit are unaffected. If the freeze is squeezing your cash, ask me about a bridge loan: weekdays 1 to 4."
+msgstr ""
+
+#: data/story/personal/marcus.json
+msgid "Marcus Reed: loan application cash-flow guide · part 1"
+msgstr ""
+
+#: data/story/personal/marcus.json
+msgid "Marcus Reed: loan application cash-flow guide · part 2"
+msgstr ""
+
+#: data/story/personal/marcus.json
+msgid "Marcus Reed: loan application cash-flow guide · part 3"
 msgstr ""
 
 #: data/events/rail_frozen.json
@@ -10269,6 +11045,10 @@ msgstr ""
 msgid "Margins shrink while the tariff eases over two months."
 msgstr ""
 
+#: data/story/personal/ken.json
+msgid "Mark every document as confirmed"
+msgstr ""
+
 #: data/help/help.json scripts/ui/modals/company_os.gd:8
 msgid "Market"
 msgstr ""
@@ -10277,7 +11057,7 @@ msgstr ""
 msgid "Market competition"
 msgstr ""
 
-#: scripts/ui/market_view.gd:8 scripts/ui/phone_ui.gd:350
+#: scripts/ui/market_view.gd:8 scripts/ui/phone_ui.gd:353
 msgid "Market conditions"
 msgstr ""
 
@@ -10393,12 +11173,32 @@ msgstr ""
 msgid "Maya"
 msgstr ""
 
+#: data/story/personal/maya.json
+msgid "Maya found that her old welcome guide lists a cafe as open at night, but its current timetable ends at 18:00. What should the revision say?"
+msgstr ""
+
 #: data/help/patch_notes.json
 msgid "Maya helps you resume the tutorial when loading a game, and coding exercises focus on a few key lines."
 msgstr ""
 
+#: data/story/personal/maya.json
+msgid "Maya is making a welcome walk for a neighbour who uses a wheelchair. The park has a step-free path, while the shortcut has stairs. Which route belongs in the guide?"
+msgstr ""
+
 #: data/events/viral_mention.json
 msgid "Maya: \"Enjoy your 15 minutes, superstar.\""
+msgstr ""
+
+#: data/story/personal/maya.json
+msgid "Maya: neighbour welcome guide · part 1"
+msgstr ""
+
+#: data/story/personal/maya.json
+msgid "Maya: neighbour welcome guide · part 2"
+msgstr ""
+
+#: data/story/personal/maya.json
+msgid "Maya: neighbour welcome guide · part 3"
 msgstr ""
 
 #: data/dialogue/marcus_loan.json
@@ -10445,6 +11245,10 @@ msgstr ""
 msgid "Media studio"
 msgstr ""
 
+#: scripts/ui/modals/contacts_modal.gd:13
+msgid "Medical visit · %s · 90 minutes"
+msgstr ""
+
 #: scripts/ui/modals/settings_modal.gd:37
 msgid "Medium"
 msgstr ""
@@ -10477,6 +11281,18 @@ msgstr ""
 msgid "Meet every growth condition first."
 msgstr ""
 
+#: data/help/help.json
+msgid "Meet people in town or at monthly city events. Contacts shows their stage, preferred gifts and next request."
+msgstr ""
+
+#: scripts/sim/personal_life.gd:60
+msgid "Meet this person before offering a gift."
+msgstr ""
+
+#: scripts/sim/personal_life.gd:38
+msgid "Meet this person in town or at a city event first."
+msgstr ""
+
 #: scripts/sim/shop_life.gd:49
 msgid "Membership already renews — choose a class."
 msgstr ""
@@ -10489,7 +11305,7 @@ msgstr ""
 msgid "Membership renews monthly from personal cash. Cancel to stop future fees; paid access lasts to its expiry."
 msgstr ""
 
-#: scripts/ui/hud.gd:113 scripts/ui/modals/company_os.gd:1281
+#: scripts/ui/hud.gd:120 scripts/ui/modals/company_os.gd:1281
 msgid "Menu"
 msgstr ""
 
@@ -10521,7 +11337,7 @@ msgstr ""
 msgid "Meridian and Volt sell steady volume on thin margins. You need a ten-car fleet, a showroom and a deposit, and you must always keep new cars on the floor. Service tickets after the sale are where the dealership earns."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:135 scripts/ui/phone_ui.gd:192
+#: scripts/ui/phone_ui.gd:135 scripts/ui/phone_ui.gd:195
 msgid "Messages"
 msgstr ""
 
@@ -10689,8 +11505,12 @@ msgstr ""
 msgid "Month close"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:278
+#: scripts/ui/phone_ui.gd:281
 msgid "Month sales"
+msgstr ""
+
+#: scripts/ui/modals/social_calendar_modal.gd:12
+msgid "Monthly day %d · %02d:00–%02d:00 · %d minutes · %s"
 msgstr ""
 
 #: scripts/ui/modals/cowork_desk_modal.gd:26
@@ -10749,7 +11569,7 @@ msgstr ""
 msgid "Moreau"
 msgstr ""
 
-#: scripts/ui/hud.gd:236
+#: scripts/ui/hud.gd:244
 msgid "Morning · Sunny"
 msgstr ""
 
@@ -10805,6 +11625,10 @@ msgstr ""
 msgid "Moved to Aurelia City with $%s in savings."
 msgstr ""
 
+#: data/help/glossary.json
+msgid "Movement and hands-on work use energy. Sleep and breaks restore it. Below 30%, timed tasks offer less reaction time; no points are directly deducted."
+msgstr ""
+
 #: scripts/ui/tutorial.gd:20
 msgid "Moving around"
 msgstr ""
@@ -10817,6 +11641,34 @@ msgstr ""
 msgid "Mr. Okafor (landlord)"
 msgstr ""
 
+#: data/story/personal/landlord.json
+msgid "Mr. Okafor (landlord) asks for a tenant maintenance handbook. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/landlord.json
+msgid "Mr. Okafor (landlord) is ready to introduce a paying client for the tenant maintenance handbook. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
+#: data/story/personal/landlord.json
+msgid "Mr. Okafor (landlord): tenant maintenance handbook · part 1"
+msgstr ""
+
+#: data/story/personal/landlord.json
+msgid "Mr. Okafor (landlord): tenant maintenance handbook · part 2"
+msgstr ""
+
+#: data/story/personal/landlord.json
+msgid "Mr. Okafor (landlord): tenant maintenance handbook · part 3"
+msgstr ""
+
+#: data/story/personal/okafor.json
+msgid "Mr. Okafor asks for a Old Town lease explanation. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/okafor.json
+msgid "Mr. Okafor is ready to introduce a paying client for the Old Town lease explanation. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
 #: data/properties/corner_cafe.json
 msgid "Mr. Okafor leases to registered companies only."
 msgstr ""
@@ -10825,8 +11677,40 @@ msgstr ""
 msgid "Mr. Okafor: \"Keys, meter readings, and my number. The espresso smell is included.\""
 msgstr ""
 
+#: data/story/personal/okafor.json
+msgid "Mr. Okafor: Old Town lease explanation · part 1"
+msgstr ""
+
+#: data/story/personal/okafor.json
+msgid "Mr. Okafor: Old Town lease explanation · part 2"
+msgstr ""
+
+#: data/story/personal/okafor.json
+msgid "Mr. Okafor: Old Town lease explanation · part 3"
+msgstr ""
+
 #: data/npcs/ms_okoro.json
 msgid "Ms. Okoro"
+msgstr ""
+
+#: data/story/personal/ms_okoro.json
+msgid "Ms. Okoro asks for a community energy questions. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/ms_okoro.json
+msgid "Ms. Okoro is ready to introduce a paying client for the community energy questions. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
+#: data/story/personal/ms_okoro.json
+msgid "Ms. Okoro: community energy questions · part 1"
+msgstr ""
+
+#: data/story/personal/ms_okoro.json
+msgid "Ms. Okoro: community energy questions · part 2"
+msgstr ""
+
+#: data/story/personal/ms_okoro.json
+msgid "Ms. Okoro: community energy questions · part 3"
 msgstr ""
 
 #: autoload/preferences.gd:174 autoload/sound.gd:173 autoload/sound.gd:262 autoload/sound.gd:45
@@ -11141,12 +12025,52 @@ msgstr ""
 msgid "Nia Park"
 msgstr ""
 
-#: scripts/ui/hud.gd:236
+#: data/story/personal/student_intern.json
+msgid "Nia Park asks for a internship learning portfolio. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/student_intern.json
+msgid "Nia Park is ready to introduce a paying client for the internship learning portfolio. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
+#: data/story/personal/student_intern.json
+msgid "Nia Park: internship learning portfolio · part 1"
+msgstr ""
+
+#: data/story/personal/student_intern.json
+msgid "Nia Park: internship learning portfolio · part 2"
+msgstr ""
+
+#: data/story/personal/student_intern.json
+msgid "Nia Park: internship learning portfolio · part 3"
+msgstr ""
+
+#: scripts/ui/hud.gd:244
 msgid "Night"
 msgstr ""
 
 #: data/npcs/nina.json
 msgid "Nina"
+msgstr ""
+
+#: data/story/personal/nina.json
+msgid "Nina is helping a customer repair a favourite jacket. A seam repair costs less than a replacement and the fabric is sound. What should the consultation offer?"
+msgstr ""
+
+#: data/story/personal/nina.json
+msgid "Nina refers a clothing workshop that wants a repair catalogue. They ask you to promise every garment can be repaired. What scope can you agree to?"
+msgstr ""
+
+#: data/story/personal/nina.json
+msgid "Nina: repairable clothing catalogue · part 1"
+msgstr ""
+
+#: data/story/personal/nina.json
+msgid "Nina: repairable clothing catalogue · part 2"
+msgstr ""
+
+#: data/story/personal/nina.json
+msgid "Nina: repairable clothing catalogue · part 3"
 msgstr ""
 
 #: data/dialogue/okafor_intro.json
@@ -11289,6 +12213,10 @@ msgstr ""
 msgid "No outside purchase to replace yet."
 msgstr ""
 
+#: scripts/sim/personal_life.gd:35
+msgid "No personal request — attend a city event."
+msgstr ""
+
 #: scripts/ui/modals/dropoff_modal.gd:28
 msgid "No pickup fee when you bring them in."
 msgstr ""
@@ -11369,7 +12297,7 @@ msgstr ""
 msgid "No used cars on your lot. Win one at the Wednesday auction."
 msgstr ""
 
-#: scripts/world/player.gd:175
+#: scripts/world/player.gd:176
 msgid "No walking route. Tap another spot on the ground."
 msgstr ""
 
@@ -11589,7 +12517,7 @@ msgstr ""
 msgid "Notification duration"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:271
+#: scripts/ui/phone_ui.gd:274
 msgid "Notifications only.\nManage at a desk: Company OS."
 msgstr ""
 
@@ -11929,6 +12857,10 @@ msgstr ""
 msgid "Only registered companies can hold an import licence."
 msgstr ""
 
+#: data/story/personal/sam.json
+msgid "Only the flattering photos"
+msgstr ""
+
 #: autoload/save_system.gd:385 scripts/ui/hotel_ui.gd:272 scripts/ui/modals/city_map_modal.gd:117 scripts/ui/modals/city_map_modal.gd:163
 msgid "Open"
 msgstr ""
@@ -12167,6 +13099,10 @@ msgstr ""
 
 #: scripts/ui/tutorial.gd:27
 msgid "Open your phone"
+msgstr ""
+
+#: scripts/ui/modals/social_calendar_modal.gd:14
+msgid "Open — attend now or keep your plans."
 msgstr ""
 
 #: scripts/ui/media_ui.gd:52
@@ -12465,8 +13401,28 @@ msgstr ""
 msgid "Owen Blake"
 msgstr ""
 
+#: data/story/personal/owen_blake.json
+msgid "Owen Blake asks for a group travel accessibility plan. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/owen_blake.json
+msgid "Owen Blake is ready to introduce a paying client for the group travel accessibility plan. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
 #: data/dialogue/owen_blake_intro.json
 msgid "Owen Blake, Blake Journeys. I move tour groups. Give me twenty-five percent off the rack rate and I will lock a block of rooms weeks ahead, then pay you thirty days after the stay."
+msgstr ""
+
+#: data/story/personal/owen_blake.json
+msgid "Owen Blake: group travel accessibility plan · part 1"
+msgstr ""
+
+#: data/story/personal/owen_blake.json
+msgid "Owen Blake: group travel accessibility plan · part 2"
+msgstr ""
+
+#: data/story/personal/owen_blake.json
+msgid "Owen Blake: group travel accessibility plan · part 3"
 msgstr ""
 
 #: data/milestones.json
@@ -12581,7 +13537,7 @@ msgstr ""
 msgid "PERMITS & REGISTRATIONS (AURELIA)"
 msgstr ""
 
-#: scripts/ui/hud.gd:210 scripts/ui/hud.gd:83
+#: scripts/ui/hud.gd:217 scripts/ui/hud.gd:90
 msgid "PERSONAL"
 msgstr ""
 
@@ -12665,7 +13621,7 @@ msgstr ""
 msgid "Packed well"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:276
+#: scripts/ui/phone_ui.gd:279
 msgid "Packed, not shipped"
 msgstr ""
 
@@ -12807,6 +13763,10 @@ msgstr ""
 
 #: data/events/customer_return.json
 msgid "Partial refund sent."
+msgstr ""
+
+#: scripts/sim/personal_life.gd:31
+msgid "Partner"
 msgstr ""
 
 #: scripts/ui/automotive_ui.gd:285
@@ -13061,7 +14021,7 @@ msgstr ""
 msgid "Permits & regulations"
 msgstr ""
 
-#: scripts/ui/modals/bank_modal.gd:60 scripts/ui/phone_ui.gd:232
+#: scripts/ui/modals/bank_modal.gd:60 scripts/ui/phone_ui.gd:235
 msgid "Personal"
 msgstr ""
 
@@ -13073,7 +14033,7 @@ msgstr ""
 msgid "Personal Banker"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:280
+#: scripts/ui/phone_ui.gd:283
 msgid "Personal cap"
 msgstr ""
 
@@ -13081,8 +14041,24 @@ msgstr ""
 msgid "Personal checking"
 msgstr ""
 
+#: data/help/glossary.json
+msgid "Personal energy"
+msgstr ""
+
 #: scripts/sim/ledger.gd:31
 msgid "Personal fitness"
+msgstr ""
+
+#: scripts/sim/personal_life.gd:65
+msgid "Personal gift: %s"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Personal relationships"
+msgstr ""
+
+#: scripts/sim/personal_life.gd:50
+msgid "Personal request supplies: %s"
 msgstr ""
 
 #: scripts/ui/modals/tax_filing_modal.gd:21
@@ -13097,7 +14073,11 @@ msgstr ""
 msgid "Personal seller limit reached. Your listings are paused until next month — or until you register a business."
 msgstr ""
 
-#: scripts/ui/hud.gd:110 scripts/ui/modals/settings_modal.gd:7
+#: data/help/glossary.json
+msgid "Personal stress"
+msgstr ""
+
+#: scripts/ui/hud.gd:117 scripts/ui/modals/settings_modal.gd:7
 msgid "Phone"
 msgstr ""
 
@@ -13193,6 +14173,10 @@ msgstr ""
 msgid "Place panels on roof cells. Shade, direction and the load limit change annual kWh and the client's payback."
 msgstr ""
 
+#: data/story/personal/priya.json
+msgid "Placement terms, commission and the need for actual bookings"
+msgstr ""
+
 #: data/economy/freelance.json
 msgid "Plan a month of social posts for %s"
 msgstr ""
@@ -13269,6 +14253,10 @@ msgstr ""
 msgid "Porcelain"
 msgstr ""
 
+#: data/economy/personal_life.json
+msgid "Port music festival"
+msgstr ""
+
 #: data/world/years.json
 msgid "Port of Aurelia backed up for a third week: 40 ships waiting."
 msgstr ""
@@ -13331,6 +14319,10 @@ msgstr ""
 
 #: data/regions/zenkai.json
 msgid "Precision manufacturing"
+msgstr ""
+
+#: scripts/ui/modals/contacts_modal.gd:37
+msgid "Prefers: %s"
 msgstr ""
 
 #: data/economy/automotive.json
@@ -13457,12 +14449,56 @@ msgstr ""
 msgid "Priya Nair"
 msgstr ""
 
+#: data/story/personal/priya_nair.json
+msgid "Priya Nair asks for a OTA placement page. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/priya_nair.json
+msgid "Priya Nair is ready to introduce a paying client for the OTA placement page. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
 #: data/dialogue/priya_nair_intro.json
 msgid "Priya Nair, Voyago. We list your rooms in front of ten thousand travellers. The standard listing costs fifteen percent per night; the featured listing costs eighteen and ranks higher."
 msgstr ""
 
+#: data/story/personal/priya_nair.json
+msgid "Priya Nair: OTA placement page · part 1"
+msgstr ""
+
+#: data/story/personal/priya_nair.json
+msgid "Priya Nair: OTA placement page · part 2"
+msgstr ""
+
+#: data/story/personal/priya_nair.json
+msgid "Priya Nair: OTA placement page · part 3"
+msgstr ""
+
 #: data/jobs/cowork_host.json
 msgid "Priya hands you the event calendar. It's full."
+msgstr ""
+
+#: data/story/personal/priya.json
+msgid "Priya has two versions of an OTA introduction. The attractive one uses an old room photo; the checked one shows the current room. Which should she share?"
+msgstr ""
+
+#: data/story/personal/priya.json
+msgid "Priya introduces a client preparing an OTA placement page. The booking partner requires truthful copy and commission disclosure. What belongs in the agreed work?"
+msgstr ""
+
+#: data/story/personal/priya.json
+msgid "Priya wants to welcome an independent hotel owner to the co-work community. One OTA page promises free placement, but its terms charge commission. What should her introduction explain?"
+msgstr ""
+
+#: data/story/personal/priya.json
+msgid "Priya: coworking guest programme · part 1"
+msgstr ""
+
+#: data/story/personal/priya.json
+msgid "Priya: coworking guest programme · part 2"
+msgstr ""
+
+#: data/story/personal/priya.json
+msgid "Priya: coworking guest programme · part 3"
 msgstr ""
 
 #: autoload/ui_root.gd:351
@@ -13515,6 +14551,18 @@ msgstr ""
 
 #: scripts/ui/real_estate_ui.gd:180
 msgid "Project closed"
+msgstr ""
+
+#: data/story/personal/nina.json
+msgid "Promise a repair without checking the seam"
+msgstr ""
+
+#: data/story/personal/priya.json
+msgid "Promise amenities that might arrive later"
+msgstr ""
+
+#: data/story/personal/ken.json
+msgid "Promise same-day arrival without evidence"
 msgstr ""
 
 #: scripts/sim/careers.gd:167
@@ -13591,6 +14639,10 @@ msgstr ""
 
 #: data/world/years.json
 msgid "Public EV chargers arrive on Shopping Street and in the Financial District."
+msgstr ""
+
+#: data/story/personal/maya.json
+msgid "Publish the current hours and note the earlier error"
 msgstr ""
 
 #: data/jobs/barista.json
@@ -13789,6 +14841,26 @@ msgstr ""
 msgid "Rafael Costa"
 msgstr ""
 
+#: data/story/personal/rafael_costa.json
+msgid "Rafael Costa asks for a electrical safety checklist. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/rafael_costa.json
+msgid "Rafael Costa is ready to introduce a paying client for the electrical safety checklist. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
+#: data/story/personal/rafael_costa.json
+msgid "Rafael Costa: electrical safety checklist · part 1"
+msgstr ""
+
+#: data/story/personal/rafael_costa.json
+msgid "Rafael Costa: electrical safety checklist · part 2"
+msgstr ""
+
+#: data/story/personal/rafael_costa.json
+msgid "Rafael Costa: electrical safety checklist · part 3"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "Rail reliability"
 msgstr ""
@@ -13953,6 +15025,10 @@ msgstr ""
 msgid "Read the cargo apron notice board"
 msgstr ""
 
+#: scripts/ui/minigames/personal_request_game.gd:11
+msgid "Read the evidence, then choose a response. A wrong answer uses the time and supplies but the request remains available."
+msgstr ""
+
 #: data/help/patch_notes.json
 msgid "Read the explanation badges beside cash, invoices, loans, staff, subscriptions, and shipping whenever you need help."
 msgstr ""
@@ -14085,12 +15161,20 @@ msgstr ""
 msgid "Recession"
 msgstr ""
 
+#: data/story/personal/maya.json
+msgid "Recommend the stairs because the route is shorter"
+msgstr ""
+
 #: scripts/sim/automotive.gd:289
 msgid "Reconditioning: %s"
 msgstr ""
 
 #: data/jobs/city_clerk.json
 msgid "Records Clerk"
+msgstr ""
+
+#: scripts/sim/personal_life.gd:117
+msgid "Recovery consultation: %s"
 msgstr ""
 
 #: scripts/ui/media_ui.gd:176 scripts/ui/media_ui.gd:87
@@ -14159,6 +15243,18 @@ msgstr ""
 
 #: scripts/ui/minigames/cowork_host_game.gd:8
 msgid "Reed"
+msgstr ""
+
+#: scripts/ui/modals/contacts_modal.gd:64
+msgid "Referral fee %s · supplies %s · %d minutes · payment in 30 days; the client may default."
+msgstr ""
+
+#: scripts/ui/modals/contacts_modal.gd:83
+msgid "Referral resolved — check the job's invoice or payment in Finance."
+msgstr ""
+
+#: scripts/sim/personal_life.gd:176
+msgid "Referral work supplies: %s"
 msgstr ""
 
 #: data/economy/media.json
@@ -14381,6 +15477,10 @@ msgstr ""
 msgid "Reject (click the wrong field first)"
 msgstr ""
 
+#: data/help/glossary.json
+msgid "Relationships introduce paid work and useful information. They never increase demand, scores or profit by themselves."
+msgstr ""
+
 #: scripts/ui/media_ui.gd:73
 msgid "Relevant reach"
 msgstr ""
@@ -14391,6 +15491,14 @@ msgstr ""
 
 #: data/economy/staff.json
 msgid "Reliable: morale drops half as fast."
+msgstr ""
+
+#: data/story/personal/maya.json
+msgid "Remove every cafe from the guide"
+msgstr ""
+
+#: data/story/personal/sam.json
+msgid "Remove the service record"
 msgstr ""
 
 #: scripts/ui/minigames/pack_game.gd:76
@@ -14437,7 +15545,7 @@ msgstr ""
 msgid "Rent"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:238
+#: scripts/ui/phone_ui.gd:241
 msgid "Rent $1,250 due the 14th"
 msgstr ""
 
@@ -14577,6 +15685,10 @@ msgstr ""
 msgid "Repeat business"
 msgstr ""
 
+#: data/story/personal/nina.json
+msgid "Repeat the claim as a certified fact"
+msgstr ""
+
 #: scripts/ui/modals/save_list_modal.gd:47 scripts/ui/modals/save_list_modal.gd:67 scripts/ui/modals/save_list_modal.gd:93
 msgid "Replace"
 msgstr ""
@@ -14615,6 +15727,10 @@ msgstr ""
 
 #: scripts/ui/media_ui.gd:62
 msgid "Reputation: %d%% · campaign slots: %d/%d · cash: %s"
+msgstr ""
+
+#: scripts/ui/modals/contacts_modal.gd:85
+msgid "Request recorded — check the next step."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:609 scripts/ui/modals/settlement_modal.gd:95
@@ -14695,6 +15811,10 @@ msgstr ""
 
 #: scripts/ui/phone_ui.gd:159
 msgid "Respond"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Rest before precise work. You can sleep early when energy is low; work is never permanently blocked."
 msgstr ""
 
 #: data/buildings/lantern_bistro.json data/buildings/shift_diner.json
@@ -14893,8 +16013,16 @@ msgstr ""
 msgid "Review the campaign and respond"
 msgstr ""
 
+#: scripts/sim/personal_life.gd:179 scripts/sim/personal_life.gd:55
+msgid "Review the evidence and try again. The time and supplies were used."
+msgstr ""
+
 #: data/economy/freelance.json
 msgid "Review the prices of %s"
+msgstr ""
+
+#: scripts/ui/modals/contacts_modal.gd:68
+msgid "Review the referred job"
 msgstr ""
 
 #: data/help/help.json
@@ -14943,6 +16071,26 @@ msgstr ""
 
 #: data/npcs/rita_hale.json
 msgid "Rita Hale"
+msgstr ""
+
+#: data/story/personal/rita_hale.json
+msgid "Rita Hale asks for a factory quotation checklist. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/rita_hale.json
+msgid "Rita Hale is ready to introduce a paying client for the factory quotation checklist. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
+#: data/story/personal/rita_hale.json
+msgid "Rita Hale: factory quotation checklist · part 1"
+msgstr ""
+
+#: data/story/personal/rita_hale.json
+msgid "Rita Hale: factory quotation checklist · part 2"
+msgstr ""
+
+#: data/story/personal/rita_hale.json
+msgid "Rita Hale: factory quotation checklist · part 3"
 msgstr ""
 
 #: scripts/sim/rivals.gd:216
@@ -15077,6 +16225,26 @@ msgstr ""
 msgid "Rosa · Harbor Point Fitness"
 msgstr ""
 
+#: data/story/personal/harbor_point.json
+msgid "Rosa · Harbor Point Fitness asks for a beginner exercise timetable. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/harbor_point.json
+msgid "Rosa · Harbor Point Fitness is ready to introduce a paying client for the beginner exercise timetable. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
+#: data/story/personal/harbor_point.json
+msgid "Rosa · Harbor Point Fitness: beginner exercise timetable · part 1"
+msgstr ""
+
+#: data/story/personal/harbor_point.json
+msgid "Rosa · Harbor Point Fitness: beginner exercise timetable · part 2"
+msgstr ""
+
+#: data/story/personal/harbor_point.json
+msgid "Rosa · Harbor Point Fitness: beginner exercise timetable · part 3"
+msgstr ""
+
 #: data/events/unexpected_large_order.json
 msgid "Rosa: \"No worries. Maybe next time.\""
 msgstr ""
@@ -15147,6 +16315,26 @@ msgstr ""
 
 #: data/npcs/ruiz.json scripts/sim/real_estate.gd:130
 msgid "Ruiz Construction"
+msgstr ""
+
+#: data/story/personal/ruiz.json
+msgid "Ruiz Construction asks for a construction handover checklist. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/ruiz.json
+msgid "Ruiz Construction is ready to introduce a paying client for the construction handover checklist. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
+#: data/story/personal/ruiz.json
+msgid "Ruiz Construction: construction handover checklist · part 1"
+msgstr ""
+
+#: data/story/personal/ruiz.json
+msgid "Ruiz Construction: construction handover checklist · part 2"
+msgstr ""
+
+#: data/story/personal/ruiz.json
+msgid "Ruiz Construction: construction handover checklist · part 3"
 msgstr ""
 
 #: data/events/real_estate_delay.json
@@ -15365,8 +16553,32 @@ msgstr ""
 msgid "Sam Okoro, Dockside Motors. Mind the oil, it gets on everything, including the paperwork."
 msgstr ""
 
+#: data/story/personal/sam.json
+msgid "Sam Okoro: fleet customer handover · part 1"
+msgstr ""
+
+#: data/story/personal/sam.json
+msgid "Sam Okoro: fleet customer handover · part 2"
+msgstr ""
+
+#: data/story/personal/sam.json
+msgid "Sam Okoro: fleet customer handover · part 3"
+msgstr ""
+
 #: scripts/ui/modals/van_deal_modal.gd:78
 msgid "Sam hands over the keys. The van is parked at Pier 7. Delivery runs are posted every morning in Company OS → Logistics."
+msgstr ""
+
+#: data/story/personal/sam.json
+msgid "Sam introduces a large fleet buyer for a paid handover project. The buyer wants every vehicle certified without inspections. What do you agree to deliver?"
+msgstr ""
+
+#: data/story/personal/sam.json
+msgid "Sam is documenting a used van for a new fleet customer. A service record shows brake work is due. Which handover note protects the customer?"
+msgstr ""
+
+#: data/story/personal/sam.json
+msgid "Sam notices a fleet brochure promises unlimited uptime, but the rental contract allows maintenance days. What should his corrected guide say?"
 msgstr ""
 
 #: scripts/ui/modals/van_deal_modal.gd:19
@@ -15429,7 +16641,7 @@ msgstr ""
 msgid "Save exported. Keep this file outside your browser."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:337
+#: scripts/ui/phone_ui.gd:340
 msgid "Save game"
 msgstr ""
 
@@ -15437,7 +16649,7 @@ msgstr ""
 msgid "Save imported. Continue where you left off."
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:338
+#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:341
 msgid "Save now"
 msgstr ""
 
@@ -15585,7 +16797,7 @@ msgstr ""
 msgid "Save transfer"
 msgstr ""
 
-#: scripts/ui/hud.gd:155 scripts/ui/hud.gd:293
+#: scripts/ui/hud.gd:162 scripts/ui/hud.gd:301
 msgid "Saved"
 msgstr ""
 
@@ -15593,7 +16805,7 @@ msgstr ""
 msgid "Saved %s"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:340
+#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:343
 msgid "Saved (slot %d)."
 msgstr ""
 
@@ -16093,7 +17305,7 @@ msgstr ""
 msgid "ShopLane Ads: a big brand campaign is bidding up placements."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:270
+#: scripts/ui/phone_ui.gd:273
 msgid "ShopLane Seller"
 msgstr ""
 
@@ -16137,7 +17349,7 @@ msgstr ""
 msgid "ShopLane payout received: %s"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:237
+#: scripts/ui/phone_ui.gd:240
 msgid "ShopLane pending"
 msgstr ""
 
@@ -16195,6 +17407,14 @@ msgstr ""
 
 #: data/dialogue/marcus_lending.json
 msgid "Show me what you can do."
+msgstr ""
+
+#: data/story/personal/ken.json
+msgid "Show only the total price"
+msgstr ""
+
+#: data/story/personal/ken.json
+msgid "Show the quantity, unit price and arrival estimate"
 msgstr ""
 
 #: scripts/ui/automotive_ui.gd:275
@@ -16401,8 +17621,28 @@ msgstr ""
 msgid "Sofia"
 msgstr ""
 
+#: data/story/personal/sofia.json
+msgid "Sofia asks for a account fee comparison. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/sofia.json
+msgid "Sofia is ready to introduce a paying client for the account fee comparison. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
 #: scripts/ui/modals/bank_modal.gd:33
 msgid "Sofia: \"Business accounts need a registered company. City Hall, Civic Center — then come back.\""
+msgstr ""
+
+#: data/story/personal/sofia.json
+msgid "Sofia: account fee comparison · part 1"
+msgstr ""
+
+#: data/story/personal/sofia.json
+msgid "Sofia: account fee comparison · part 2"
+msgstr ""
+
+#: data/story/personal/sofia.json
+msgid "Sofia: account fee comparison · part 3"
 msgstr ""
 
 #: data/character/options.json
@@ -16565,7 +17805,7 @@ msgstr ""
 msgid "Spin"
 msgstr ""
 
-#: scripts/sim/shop_life.gd:119
+#: scripts/sim/shop_life.gd:120
 msgid "Sponsored local report: %s"
 msgstr ""
 
@@ -16721,6 +17961,14 @@ msgstr ""
 msgid "Startup Hub"
 msgstr ""
 
+#: data/story/personal/sam.json
+msgid "State maintenance days and the replacement process"
+msgstr ""
+
+#: data/story/personal/ana.json data/story/personal/daniel.json data/story/personal/dara.json data/story/personal/diane_harlow.json
+msgid "State the agreed scope, limits and evidence"
+msgstr ""
+
 #: data/events/escrow_offer.json
 msgid "Stay with wires and letters of credit"
 msgstr ""
@@ -16853,6 +18101,14 @@ msgstr ""
 msgid "Strength"
 msgstr ""
 
+#: scripts/sim/personal_life.gd:132
+msgid "Stress illness — open Contacts to choose free rest or a shorter medical visit. Recovery also occurs within 3 days."
+msgstr ""
+
+#: scripts/ui/modals/contacts_modal.gd:9
+msgid "Stress illness: take a recovery day or a shorter medical visit. Work is still possible; this expires within 3 days."
+msgstr ""
+
 #: data/regions/auroria.json
 msgid "Strict consumer protection"
 msgstr ""
@@ -16961,6 +18217,26 @@ msgstr ""
 msgid "Sunny Adeyemi"
 msgstr ""
 
+#: data/story/personal/sunny_adeyemi.json
+msgid "Sunny Adeyemi asks for a solar customer explainer. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/sunny_adeyemi.json
+msgid "Sunny Adeyemi is ready to introduce a paying client for the solar customer explainer. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
+#: data/story/personal/sunny_adeyemi.json
+msgid "Sunny Adeyemi: solar customer explainer · part 1"
+msgstr ""
+
+#: data/story/personal/sunny_adeyemi.json
+msgid "Sunny Adeyemi: solar customer explainer · part 2"
+msgstr ""
+
+#: data/story/personal/sunny_adeyemi.json
+msgid "Sunny Adeyemi: solar customer explainer · part 3"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:287
 msgid "Supplier bills payable"
 msgstr ""
@@ -17003,6 +18279,10 @@ msgstr ""
 
 #: data/help/help.json
 msgid "Suppliers sell in minimum order quantities (MOQ). You pay up front and the stock arrives in a few days (ARRIVES shows when)."
+msgstr ""
+
+#: data/economy/personal_life.json
+msgid "Suppliers still require their stated MOQ and delivery dates. A referral is not a guaranteed sale."
 msgstr ""
 
 #: data/help/glossary.json
@@ -17107,6 +18387,10 @@ msgstr ""
 
 #: data/events/elena_offer.json
 msgid "Take $40,000 for 20%"
+msgstr ""
+
+#: scripts/ui/modals/contacts_modal.gd:23
+msgid "Take a break · 120 minutes"
 msgstr ""
 
 #: data/help/help.json
@@ -17221,7 +18505,7 @@ msgstr ""
 msgid "Tape seam %d"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:135 scripts/ui/phone_ui.gd:250
+#: scripts/ui/phone_ui.gd:135 scripts/ui/phone_ui.gd:253
 msgid "Tasks"
 msgstr ""
 
@@ -17345,6 +18629,10 @@ msgstr ""
 msgid "That applicant has moved on."
 msgstr ""
 
+#: data/story/personal/priya.json
+msgid "That commission can be ignored"
+msgstr ""
+
 #: scripts/sim/event_engine.gd:175
 msgid "That didn't work."
 msgstr ""
@@ -17371,6 +18659,10 @@ msgstr ""
 
 #: scripts/sim/ecommerce.gd:252
 msgid "That payment method isn't available."
+msgstr ""
+
+#: data/story/personal/priya.json
+msgid "That placement guarantees a full hotel"
 msgstr ""
 
 #: scripts/sim/hotel.gd:132
@@ -17469,6 +18761,18 @@ msgstr ""
 msgid "The Metro"
 msgstr ""
 
+#: data/story/personal/lena_park.json
+msgid "The OEM quality evidence now has conflicting notes. Lena Park wants a version that other people can check. How do you resolve the conflict?"
+msgstr ""
+
+#: data/story/personal/priya_nair.json
+msgid "The OTA placement page now has conflicting notes. Priya Nair wants a version that other people can check. How do you resolve the conflict?"
+msgstr ""
+
+#: data/story/personal/okafor.json
+msgid "The Old Town lease explanation now has conflicting notes. Mr. Okafor wants a version that other people can check. How do you resolve the conflict?"
+msgstr ""
+
 #: data/world/years.json
 msgid "The Opportunity"
 msgstr ""
@@ -17489,6 +18793,14 @@ msgstr ""
 msgid "The Transit Office is renewing its service fleet: parts built to drawing, cars sourced and delivery runs flown across the city."
 msgstr ""
 
+#: data/story/personal/lee.json
+msgid "The accessible cafe signage now has conflicting notes. Lee wants a version that other people can check. How do you resolve the conflict?"
+msgstr ""
+
+#: data/story/personal/sofia.json
+msgid "The account fee comparison now has conflicting notes. Sofia wants a version that other people can check. How do you resolve the conflict?"
+msgstr ""
+
 #: scripts/sim/company.gd:86
 msgid "The account is already open."
 msgstr ""
@@ -17499,6 +18811,10 @@ msgstr ""
 
 #: scripts/ui/modals/city_guide_modal.gd:39
 msgid "The arrow guides you to the door; wait until opening hours to enter."
+msgstr ""
+
+#: data/story/personal/frank_doyle.json
+msgid "The auction condition disclosure now has conflicting notes. Frank Doyle wants a version that other people can check. How do you resolve the conflict?"
 msgstr ""
 
 #: scripts/ui/automotive_ui.gd:112
@@ -17523,6 +18839,10 @@ msgstr ""
 
 #: scripts/sim/insolvency.gd:66
 msgid "The bank won't restructure with this credit history."
+msgstr ""
+
+#: data/story/personal/harbor_point.json
+msgid "The beginner exercise timetable now has conflicting notes. Rosa · Harbor Point Fitness wants a version that other people can check. How do you resolve the conflict?"
 msgstr ""
 
 #: scripts/ui/minigames/photo_shoot_game.gd:284
@@ -17657,6 +18977,10 @@ msgstr ""
 msgid "The clock keeps running while you're at the computer, just like in real life. Buying, listing and working also take their own time."
 msgstr ""
 
+#: data/story/personal/ms_okoro.json
+msgid "The community energy questions now has conflicting notes. Ms. Okoro wants a version that other people can check. How do you resolve the conflict?"
+msgstr ""
+
 #: scripts/sim/company.gd:105
 msgid "The company belongs to Hale Group now: no money moves between it and you."
 msgstr ""
@@ -17675,6 +18999,10 @@ msgstr ""
 
 #: scripts/ui/modals/insolvency_modal.gd:37
 msgid "The company is solvent again. Your savings took the hit."
+msgstr ""
+
+#: data/story/personal/ruiz.json
+msgid "The construction handover checklist now has conflicting notes. Ruiz Construction wants a version that other people can check. How do you resolve the conflict?"
 msgstr ""
 
 #: scripts/ui/automotive_ui.gd:200
@@ -17701,12 +19029,20 @@ msgstr ""
 msgid "The earn-out did not pay: revenue fell short of the agreed floor."
 msgstr ""
 
+#: data/story/personal/rafael_costa.json
+msgid "The electrical safety checklist now has conflicting notes. Rafael Costa wants a version that other people can check. How do you resolve the conflict?"
+msgstr ""
+
 #: scripts/sim/staff.gd:61
 msgid "The employer registration fee is %s."
 msgstr ""
 
 #: scripts/sim/energy.gd:34
 msgid "The energy business is already open."
+msgstr ""
+
+#: data/story/personal/victor.json
+msgid "The enterprise succession interview now has conflicting notes. Victor Hale wants a version that other people can check. How do you resolve the conflict?"
 msgstr ""
 
 #: data/events/shipment_lost.json
@@ -17729,12 +19065,20 @@ msgstr ""
 msgid "The factory ledger and schedule have been updated."
 msgstr ""
 
+#: data/story/personal/rita_hale.json
+msgid "The factory quotation checklist now has conflicting notes. Rita Hale wants a version that other people can check. How do you resolve the conflict?"
+msgstr ""
+
 #: autoload/save_system.gd:406
 msgid "The file could not be read. Your existing save is unchanged."
 msgstr ""
 
 #: scripts/ui/minigames/parcel_sort_game.gd:28
 msgid "The first parcels show the district name. Later ones only have a postcode, and halfway through the cheat sheet goes away."
+msgstr ""
+
+#: data/story/personal/diane_harlow.json
+msgid "The first-home viewing guide now has conflicting notes. Diane Harlow wants a version that other people can check. How do you resolve the conflict?"
 msgstr ""
 
 #: scripts/sim/cafe.gd:101
@@ -17749,6 +19093,14 @@ msgstr ""
 msgid "The flash sale refills some rooms for a week. Group deposits are refunded."
 msgstr ""
 
+#: data/story/personal/elena.json
+msgid "The founder due-diligence notes now has conflicting notes. Elena Park wants a version that other people can check. How do you resolve the conflict?"
+msgstr ""
+
+#: data/story/personal/mara_quinn.json
+msgid "The franchise training outline now has conflicting notes. Mara Quinn wants a version that other people can check. How do you resolve the conflict?"
+msgstr ""
+
 #: scripts/sim/company.gd:141
 msgid "The grant opens with the Green Shift."
 msgstr ""
@@ -17761,6 +19113,18 @@ msgstr ""
 msgid "The group Campaign Mixer can run an internal hotel campaign at media cost; measured conversions lift real demand for a few days."
 msgstr ""
 
+#: data/story/personal/owen_blake.json
+msgid "The group travel accessibility plan now has conflicting notes. Owen Blake wants a version that other people can check. How do you resolve the conflict?"
+msgstr ""
+
+#: data/story/personal/vera_stone.json
+msgid "The guest review evidence guide now has conflicting notes. Vera Stone wants a version that other people can check. How do you resolve the conflict?"
+msgstr ""
+
+#: data/story/personal/henri_dubois.json
+msgid "The hotel history archive now has conflicting notes. Henri Dubois wants a version that other people can check. How do you resolve the conflict?"
+msgstr ""
+
 #: scripts/sim/hotel.gd:103
 msgid "The hotel is already at its largest size."
 msgstr ""
@@ -17769,12 +19133,20 @@ msgstr ""
 msgid "The hotel is already open."
 msgstr ""
 
+#: data/story/personal/lina.json
+msgid "The import document checklist now has conflicting notes. Lina Zhao wants a version that other people can check. How do you resolve the conflict?"
+msgstr ""
+
 #: data/events/automotive_claim.json
 msgid "The insurer disputes a $3,200 accident repair on one of your rental cars. Pay it yourself, fight it with a lawyer, or settle for half."
 msgstr ""
 
 #: data/help/glossary.json
 msgid "The interest costs far less than missing payroll or rent. Repay it as soon as the money arrives."
+msgstr ""
+
+#: data/story/personal/student_intern.json
+msgid "The internship learning portfolio now has conflicting notes. Nia Park wants a version that other people can check. How do you resolve the conflict?"
 msgstr ""
 
 #: scripts/sim/energy.gd:565
@@ -17809,6 +19181,10 @@ msgstr ""
 msgid "The litres you burn follow the kilometres you drive, and wear and tear add a little more on every kilometre."
 msgstr ""
 
+#: data/story/personal/marcus.json
+msgid "The loan application cash-flow guide now has conflicting notes. Marcus Reed wants a version that other people can check. How do you resolve the conflict?"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "The longer it is, the earlier you must reorder, or you run out and lose sales."
 msgstr ""
@@ -17823,6 +19199,10 @@ msgstr ""
 
 #: autoload/scene_router.gd:66
 msgid "The new game could not be started because no save slot was available."
+msgstr ""
+
+#: data/story/personal/tom.json
+msgid "The office move-in inventory now has conflicting notes. Tom wants a version that other people can check. How do you resolve the conflict?"
 msgstr ""
 
 #: data/dialogue/lina_bridge.json
@@ -17853,6 +19233,10 @@ msgstr ""
 msgid "The packing table"
 msgstr ""
 
+#: data/story/personal/dara.json
+msgid "The parcel address guide now has conflicting notes. Dara wants a version that other people can check. How do you resolve the conflict?"
+msgstr ""
+
 #: scripts/sim/automotive.gd:371
 msgid "The parking lot is full."
 msgstr ""
@@ -17877,8 +19261,16 @@ msgstr ""
 msgid "The price one of your businesses charges another for goods or services inside the group."
 msgstr ""
 
+#: data/story/personal/tomas_varga.json
+msgid "The production changeover notes now has conflicting notes. Tomas Varga wants a version that other people can check. How do you resolve the conflict?"
+msgstr ""
+
 #: data/events/hotel_slump.json
 msgid "The promotion softens the dip for two weeks, then it fades."
+msgstr ""
+
+#: data/story/personal/ana.json
+msgid "The registration document guide now has conflicting notes. Ana wants a version that other people can check. How do you resolve the conflict?"
 msgstr ""
 
 #: scripts/sim/company.gd:58
@@ -17889,8 +19281,20 @@ msgstr ""
 msgid "The renovated %s rooms are back on sale."
 msgstr ""
 
+#: data/story/personal/jun_ito.json
+msgid "The repair appointment checklist now has conflicting notes. Jun Ito wants a version that other people can check. How do you resolve the conflict?"
+msgstr ""
+
 #: data/events/automotive_flood.json
 msgid "The repair removes most of the damage but costs money and workshop days."
+msgstr ""
+
+#: data/story/personal/daniel.json
+msgid "The retail buyer presentation now has conflicting notes. Daniel Wong wants a version that other people can check. How do you resolve the conflict?"
+msgstr ""
+
+#: data/story/personal/jun.json
+msgid "The reusable cup menu now has conflicting notes. Jun wants a version that other people can check. How do you resolve the conflict?"
 msgstr ""
 
 #: data/events/hotel_review_storm.json
@@ -17945,6 +19349,14 @@ msgstr ""
 msgid "The smallest quantity a supplier will sell you in one order."
 msgstr ""
 
+#: data/story/personal/sunny_adeyemi.json
+msgid "The solar customer explainer now has conflicting notes. Sunny Adeyemi wants a version that other people can check. How do you resolve the conflict?"
+msgstr ""
+
+#: data/story/personal/kai_morgan.json
+msgid "The sponsorship disclosure guide now has conflicting notes. Kai Morgan wants a version that other people can check. How do you resolve the conflict?"
+msgstr ""
+
 #: data/help/glossary.json
 msgid "The stars customers give your café. They drift toward how each day felt: queues, running out, prices and service."
 msgstr ""
@@ -17963,6 +19375,10 @@ msgstr ""
 
 #: data/story/chapters.json
 msgid "The story so far ends here. Aurelia keeps going."
+msgstr ""
+
+#: data/story/personal/imani_cole.json
+msgid "The student enterprise workshop now has conflicting notes. Dr. Imani Cole wants a version that other people can check. How do you resolve the conflict?"
 msgstr ""
 
 #: data/help/glossary.json
@@ -17991,6 +19407,10 @@ msgstr ""
 
 #: scripts/world/actions.gd:110
 msgid "The teller window is closed."
+msgstr ""
+
+#: data/story/personal/landlord.json
+msgid "The tenant maintenance handbook now has conflicting notes. Mr. Okafor (landlord) wants a version that other people can check. How do you resolve the conflict?"
 msgstr ""
 
 #: data/help/patch_notes.json
@@ -18097,6 +19517,10 @@ msgstr ""
 msgid "This application is already filed."
 msgstr ""
 
+#: scripts/sim/personal_life.gd:36 scripts/sim/personal_life.gd:54
+msgid "This business closed — the personal chain is retired."
+msgstr ""
+
 #: data/help/help.json
 msgid "This card lists updates after the version that last saved your game. Scroll to read all release notes."
 msgstr ""
@@ -18117,7 +19541,7 @@ msgstr ""
 msgid "This equipment needs no service today."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:345
+#: scripts/ui/phone_ui.gd:348
 msgid "This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen."
 msgstr ""
 
@@ -18165,6 +19589,10 @@ msgstr ""
 msgid "This is the same form you'll file for your own company, so the rules are worth remembering."
 msgstr ""
 
+#: scripts/sim/personal_life.gd:173
+msgid "This job is no longer active — check its status."
+msgstr ""
+
 #: scripts/sim/energy.gd:275 scripts/sim/hotel.gd:568 scripts/sim/jobs.gd:44 scripts/sim/media.gd:226
 msgid "This job is no longer available."
 msgstr ""
@@ -18177,11 +19605,15 @@ msgstr ""
 msgid "This month revenue"
 msgstr ""
 
+#: scripts/sim/personal_life.gd:78
+msgid "This monthly event is closed or already attended — check its next date."
+msgstr ""
+
 #: scripts/sim/contracts.gd:116 scripts/sim/contracts.gd:157
 msgid "This offer is no longer open."
 msgstr ""
 
-#: scripts/sim/shop_life.gd:121
+#: scripts/sim/shop_life.gd:122
 msgid "This opportunity is no longer available — decline it."
 msgstr ""
 
@@ -18203,6 +19635,10 @@ msgstr ""
 
 #: scripts/sim/ecommerce.gd:367
 msgid "This purchase belongs to another business."
+msgstr ""
+
+#: scripts/sim/personal_life.gd:44 scripts/ui/modals/contacts_modal.gd:85
+msgid "This request is no longer available — check Contacts."
 msgstr ""
 
 #: scripts/sim/tax.gd:103
@@ -18317,7 +19753,7 @@ msgstr ""
 msgid "Time to finish"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:136 scripts/ui/phone_ui.gd:294
+#: scripts/ui/phone_ui.gd:136 scripts/ui/phone_ui.gd:297
 msgid "Timeline"
 msgstr ""
 
@@ -18337,7 +19773,7 @@ msgstr ""
 msgid "To Startup Hub"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:513 scripts/ui/phone_ui.gd:275
+#: scripts/ui/modals/company_os.gd:513 scripts/ui/phone_ui.gd:278
 msgid "To pack"
 msgstr ""
 
@@ -18377,12 +19813,52 @@ msgstr ""
 msgid "Tom"
 msgstr ""
 
+#: data/story/personal/tom.json
+msgid "Tom asks for a office move-in inventory. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/tom.json
+msgid "Tom is ready to introduce a paying client for the office move-in inventory. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
 #: scripts/ui/modals/lease_modal.gd:19
 msgid "Tom: \"It's all yours. Sign's up out front.\""
 msgstr ""
 
+#: data/story/personal/tom.json
+msgid "Tom: office move-in inventory · part 1"
+msgstr ""
+
+#: data/story/personal/tom.json
+msgid "Tom: office move-in inventory · part 2"
+msgstr ""
+
+#: data/story/personal/tom.json
+msgid "Tom: office move-in inventory · part 3"
+msgstr ""
+
 #: data/npcs/tomas_varga.json scripts/sim/manufacturing.gd:44
 msgid "Tomas Varga"
+msgstr ""
+
+#: data/story/personal/tomas_varga.json
+msgid "Tomas Varga asks for a production changeover notes. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
+#: data/story/personal/tomas_varga.json
+msgid "Tomas Varga is ready to introduce a paying client for the production changeover notes. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
+#: data/story/personal/tomas_varga.json
+msgid "Tomas Varga: production changeover notes · part 1"
+msgstr ""
+
+#: data/story/personal/tomas_varga.json
+msgid "Tomas Varga: production changeover notes · part 2"
+msgstr ""
+
+#: data/story/personal/tomas_varga.json
+msgid "Tomas Varga: production changeover notes · part 3"
 msgstr ""
 
 #: scripts/sim/manufacturing.gd:39
@@ -18557,7 +20033,7 @@ msgstr ""
 msgid "Two focused hours: %.1f hours of the work done. %s"
 msgstr ""
 
-#: scripts/world/actions.gd:276
+#: scripts/world/actions.gd:277
 msgid "Two hours behind your own counter: %d customers served."
 msgstr ""
 
@@ -18781,6 +20257,18 @@ msgstr ""
 msgid "Use the OTA to fill empty nights, not nights you could sell directly."
 msgstr ""
 
+#: data/story/personal/priya.json
+msgid "Use the current room and label its actual amenities"
+msgstr ""
+
+#: data/story/personal/priya.json
+msgid "Use the old photo because it looks luxurious"
+msgstr ""
+
+#: data/story/personal/maya.json
+msgid "Use the step-free path and state the longer walk"
+msgstr ""
+
 #: data/help/help.json
 msgid "Use the tabs on the left. Every laptop and work desk opens the same system: home, co-work hot desk, café table, office."
 msgstr ""
@@ -18933,12 +20421,32 @@ msgstr ""
 msgid "Vera Stone"
 msgstr ""
 
+#: data/story/personal/vera_stone.json
+msgid "Vera Stone asks for a guest review evidence guide. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
 #: data/events/hotel_vera_visit.json
 msgid "Vera Stone has booked a night under a false name. Her review counts five times."
 msgstr ""
 
+#: data/story/personal/vera_stone.json
+msgid "Vera Stone is ready to introduce a paying client for the guest review evidence guide. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr ""
+
 #: scripts/ui/hotel_ui.gd:251
 msgid "Vera Stone ×5"
+msgstr ""
+
+#: data/story/personal/vera_stone.json
+msgid "Vera Stone: guest review evidence guide · part 1"
+msgstr ""
+
+#: data/story/personal/vera_stone.json
+msgid "Vera Stone: guest review evidence guide · part 2"
+msgstr ""
+
+#: data/story/personal/vera_stone.json
+msgid "Vera Stone: guest review evidence guide · part 3"
 msgstr ""
 
 #: data/suppliers/verdant_supply.json
@@ -18953,6 +20461,10 @@ msgstr ""
 msgid "Verdant Supply opens a warehouse in the Industrial Zone."
 msgstr ""
 
+#: data/story/personal/priya.json
+msgid "Verified room copy and disclosed channel terms"
+msgstr ""
+
 #: data/milestones.json
 msgid "Version 1.0 ships"
 msgstr ""
@@ -18961,8 +20473,16 @@ msgstr ""
 msgid "Victor Hale"
 msgstr ""
 
+#: data/story/personal/victor.json
+msgid "Victor Hale asks for a enterprise succession interview. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr ""
+
 #: data/story/chapters.json
 msgid "Victor Hale has read your numbers: meet him at Crestline (weekdays 11–16), or wait for his call"
+msgstr ""
+
+#: data/story/personal/victor.json
+msgid "Victor Hale is ready to introduce a paying client for the enterprise succession interview. The client asks for a promise you cannot verify. What do you put in the handover?"
 msgstr ""
 
 #: scripts/sim/acquisition.gd:96
@@ -18987,6 +20507,18 @@ msgstr ""
 
 #: scripts/sim/acquisition.gd:100
 msgid "Victor Hale. Understood. Independent suits you. If the number changes, so will the conversation."
+msgstr ""
+
+#: data/story/personal/victor.json
+msgid "Victor Hale: enterprise succession interview · part 1"
+msgstr ""
+
+#: data/story/personal/victor.json
+msgid "Victor Hale: enterprise succession interview · part 2"
+msgstr ""
+
+#: data/story/personal/victor.json
+msgid "Victor Hale: enterprise succession interview · part 3"
 msgstr ""
 
 #: data/events/acquisition_offer.json
@@ -19153,7 +20685,7 @@ msgstr ""
 msgid "Walk onto the glowing EXIT mat at the bottom of the room to go outside."
 msgstr ""
 
-#: scripts/world/player.gd:151
+#: scripts/world/player.gd:152
 msgid "Walk to a laptop or work desk, then use Company OS."
 msgstr ""
 
@@ -19337,7 +20869,7 @@ msgstr ""
 msgid "Went green with the city."
 msgstr ""
 
-#: scripts/ui/hud.gd:163 scripts/ui/modals/settings_modal.gd:139
+#: scripts/ui/hud.gd:170 scripts/ui/modals/settings_modal.gd:139
 msgid "What can I do here?"
 msgstr ""
 
@@ -19389,7 +20921,7 @@ msgstr ""
 msgid "When a company closes, its undelivered contracts end and its unpaid invoices go to a collector. Old contracts stay visible, but the closed company cannot deliver or collect again."
 msgstr ""
 
-#: scripts/world/actions.gd:288
+#: scripts/world/actions.gd:289
 msgid "When are we getting paid? Rent's due."
 msgstr ""
 
@@ -19965,7 +21497,7 @@ msgstr ""
 msgid "Your cost / outside market"
 msgstr ""
 
-#: scripts/world/actions.gd:270
+#: scripts/world/actions.gd:271
 msgid "Your counter — %s"
 msgstr ""
 
@@ -20757,7 +22289,7 @@ msgstr ""
 msgid "paid on delivery"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:283
+#: scripts/ui/phone_ui.gd:286
 msgid "paused: cap"
 msgstr ""
 
@@ -21217,7 +22749,7 @@ msgstr ""
 msgid "◉  Shutter"
 msgstr ""
 
-#: scripts/ui/hud.gd:258
+#: scripts/ui/hud.gd:266
 msgid "● %d new"
 msgstr ""
 

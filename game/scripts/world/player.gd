@@ -89,6 +89,7 @@ func _physics_process(_delta: float) -> void:
 			click_route.clear()
 	else:
 		_stuck_seconds = 0.0
+	PersonalLife.movement(global_position.distance_to(before))
 	_update_focus()
 
 

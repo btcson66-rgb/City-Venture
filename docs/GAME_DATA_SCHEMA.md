@@ -588,3 +588,14 @@ Building `exterior.roof_props` and filler `roof_props` are arrays of `{sprite, x
 
 ## Original audio and dynamic stems (#97)
 `economy/audio.json` tunes byte budget, fade durations/volumes, low-cash threshold, festival months, crisis categories, district day/night sound ids, building type/id mappings, registered-industry work tracks and seven work-screen feedback mappings. Sound owns runtime crossfade pairs, synchronized stems, bounded-by-session trace output and expiring presentation moods; none is saved economic state. Existing settings.cfg Music/SFX volumes remain authoritative; Ambient routes into SFX. Scene/menu changes clear work contexts, modal closure removes its override, and Web playback waits for pressed touch/mouse/key input. All new files are original synthesized Ogg material recorded in AUDIO_CREDITS.md; artwork and industry scoring stay untouched.
+
+
+## Personal life service (#95)
+
+`npcs/*.json.relationship`: `preferences` gift ids, `stages` [0, friend points, partner points], `personal_story` matching NPC id. Thirty-seven human contacts; abstract business/account senders have no relationship block.
+
+`story/personal/<npc>.json`: `id`, `npc`, exactly three `steps` with relationship `stage` (0/1/2), translated `title`, `detail`, actual `minutes`, `cost` AUD, answer `order` and `choices` (`id`, translated `label`, `correct`). `referral` has `client`, translated scope `detail`, contract `price` AUD, paid supply `cost` AUD and work `minutes`. Completion awards an opportunity, never revenue.
+
+`economy/personal_life.json`: gift prices/preferences rewards, request quality threshold/time limit, monthly social `events` (calendar day/hour/end_hour, fee AUD, duration minutes, contact ids and information), energy per logical pixel/work minute, sleep/rest restoration, fatigue timer factor, stress rates/threshold/decay, illness duration/cooldown in days and recovery fees/minutes.
+
+Saved `personal_life`: energy/stress percentages, continuous work minutes, contacts (`affinity`, `known`, step, originating entity, retired, gift day, Jobs referral id, honesty observations), monthly event receipts and illness/cooldown deadlines in Clock minutes. Lazy initialization keeps old saves neutral. Transient sleeping/resting flags are not saved. Registered as an Industries service; referral accounting uses consulting Segments and Jobs, with actual expenses and deferred collection.

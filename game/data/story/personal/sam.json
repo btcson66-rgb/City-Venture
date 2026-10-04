@@ -1,0 +1,88 @@
+{
+ "id": "personal_sam",
+ "npc": "sam",
+ "steps": [
+  {
+   "stage": 0,
+   "title": "Sam Okoro: fleet customer handover · part 1",
+   "detail": "Sam is documenting a used van for a new fleet customer. A service record shows brake work is due. Which handover note protects the customer?",
+   "minutes": 45,
+   "cost": 0,
+   "order": 0,
+   "choices": [
+    {
+     "id": "document",
+     "label": "Disclose the brake work and ask for a repair quote",
+     "correct": true
+    },
+    {
+     "id": "invent",
+     "label": "Describe the van as needing no maintenance",
+     "correct": false
+    },
+    {
+     "id": "hide",
+     "label": "Remove the service record",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "stage": 1,
+   "title": "Sam Okoro: fleet customer handover · part 2",
+   "detail": "Sam notices a fleet brochure promises unlimited uptime, but the rental contract allows maintenance days. What should his corrected guide say?",
+   "minutes": 60,
+   "cost": 10,
+   "order": 1,
+   "choices": [
+    {
+     "id": "compare",
+     "label": "State maintenance days and the replacement process",
+     "correct": true
+    },
+    {
+     "id": "latest",
+     "label": "Keep the unlimited-uptime promise",
+     "correct": false
+    },
+    {
+     "id": "delete",
+     "label": "Delete all maintenance terms",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "stage": 2,
+   "title": "Sam Okoro: fleet customer handover · part 3",
+   "detail": "Sam introduces a large fleet buyer for a paid handover project. The buyer wants every vehicle certified without inspections. What do you agree to deliver?",
+   "minutes": 90,
+   "cost": 20,
+   "order": 2,
+   "choices": [
+    {
+     "id": "scope",
+     "label": "A checked handover pack with inspection exceptions",
+     "correct": true
+    },
+    {
+     "id": "guarantee",
+     "label": "Certificates for uninspected vehicles",
+     "correct": false
+    },
+    {
+     "id": "omit",
+     "label": "Only the flattering photos",
+     "correct": false
+    }
+   ]
+  }
+ ],
+ "referral": {
+  "client": "Sam Okoro referral",
+  "detail": "A referred client commissions a documented fleet customer handover. Complete the agreed work; no revenue is earned merely for knowing Sam Okoro.",
+  "price": 465,
+  "cost": 175,
+  "minutes": 180
+ }
+}

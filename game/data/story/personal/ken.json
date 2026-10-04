@@ -1,0 +1,88 @@
+{
+ "id": "personal_ken",
+ "npc": "ken",
+ "steps": [
+  {
+   "stage": 0,
+   "title": "Ken: supplier invoice checklist · part 1",
+   "detail": "Ken wants a new founder to understand a wholesale invoice. The offer has a minimum order quantity and a delivery lead time. Which explanation helps?",
+   "minutes": 45,
+   "cost": 0,
+   "order": 1,
+   "choices": [
+    {
+     "id": "document",
+     "label": "Show the quantity, unit price and arrival estimate",
+     "correct": true
+    },
+    {
+     "id": "invent",
+     "label": "Show only the total price",
+     "correct": false
+    },
+    {
+     "id": "hide",
+     "label": "Promise same-day arrival without evidence",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "stage": 1,
+   "title": "Ken: supplier invoice checklist · part 2",
+   "detail": "Ken finds a net-term invoice was described as free credit. It actually has a due date and must be paid. What goes into the training guide?",
+   "minutes": 60,
+   "cost": 10,
+   "order": 2,
+   "choices": [
+    {
+     "id": "compare",
+     "label": "Explain the due date and the cash needed to pay",
+     "correct": true
+    },
+    {
+     "id": "latest",
+     "label": "Call it free money",
+     "correct": false
+    },
+    {
+     "id": "delete",
+     "label": "Hide the due date until delivery",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "stage": 2,
+   "title": "Ken: supplier invoice checklist · part 3",
+   "detail": "Ken introduces a buyer asking for a supplier invoice checklist. A missing document cannot be confirmed today. What handover can you provide?",
+   "minutes": 90,
+   "cost": 20,
+   "order": 0,
+   "choices": [
+    {
+     "id": "scope",
+     "label": "List checked documents and the missing item",
+     "correct": true
+    },
+    {
+     "id": "guarantee",
+     "label": "Mark every document as confirmed",
+     "correct": false
+    },
+    {
+     "id": "omit",
+     "label": "Invent the missing document",
+     "correct": false
+    }
+   ]
+  }
+ ],
+ "referral": {
+  "client": "Ken referral",
+  "detail": "A referred client commissions a documented supplier invoice checklist. Complete the agreed work; no revenue is earned merely for knowing Ken.",
+  "price": 480,
+  "cost": 180,
+  "minutes": 210
+ }
+}

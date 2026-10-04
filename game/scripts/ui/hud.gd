@@ -1,8 +1,9 @@
 class_name HUD
 extends Control
-## Light in-world HUD (Handoff §51): time/date, money, objective, minimap, context prompt. Nothing else.
+## Light in-world HUD: time/date, money, objective, minimap, context prompt, energy and stress.
 
 var time_label: Label
+var vitality_label: Label
 var date_label: Label
 var part_icon: TextureRect
 var cash_label: Label
@@ -53,9 +54,15 @@ func _ready() -> void:
 	trow.add_child(time_label)
 	part_label = UIK.label("", 7, Art.C_SKY, true)
 	trow.add_child(part_label)
+	var health := UIK.hbox(3)
+	tv.add_child(health)
+	vitality_label=UIK.label("",7,Art.C_SKY)
+	health.add_child(vitality_label)
+	health.add_child(UIK.tip("personal_energy"))
+	health.add_child(UIK.tip("personal_stress"))
 	# objective
 	obj_panel = UIK.panel("ui/panel_glass", 5)
-	obj_panel.position = Vector2(6, 42)
+	obj_panel.position = Vector2(6, 55)
 	obj_panel.custom_minimum_size = Vector2(196, 0)
 	add_child(obj_panel)
 	var ov := UIK.vbox(1)
@@ -229,6 +236,7 @@ func set_prompt(text: String) -> void:
 func _process(_d: float) -> void:
 	if not visible or not GameState.has_game():
 		return
+	vitality_label.text=I18n.t("Energy %d%% · stress %d%%")%[roundi(PersonalLife.energy()),roundi(PersonalLife.S()["stress"])]
 	time_label.text = Clock.fmt_time()
 	date_label.text = Clock.fmt_date().to_upper() + I18n.t("  ·  DAY %d") % Clock.day_index()
 	var nf := Clock.night_factor()

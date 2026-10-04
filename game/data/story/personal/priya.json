@@ -1,0 +1,88 @@
+{
+ "id": "personal_priya",
+ "npc": "priya",
+ "steps": [
+  {
+   "stage": 0,
+   "title": "Priya: coworking guest programme · part 1",
+   "detail": "Priya wants to welcome an independent hotel owner to the co-work community. One OTA page promises free placement, but its terms charge commission. What should her introduction explain?",
+   "minutes": 45,
+   "cost": 0,
+   "order": 1,
+   "choices": [
+    {
+     "id": "document",
+     "label": "Placement terms, commission and the need for actual bookings",
+     "correct": true
+    },
+    {
+     "id": "invent",
+     "label": "That placement guarantees a full hotel",
+     "correct": false
+    },
+    {
+     "id": "hide",
+     "label": "That commission can be ignored",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "stage": 1,
+   "title": "Priya: coworking guest programme · part 2",
+   "detail": "Priya has two versions of an OTA introduction. The attractive one uses an old room photo; the checked one shows the current room. Which should she share?",
+   "minutes": 60,
+   "cost": 10,
+   "order": 2,
+   "choices": [
+    {
+     "id": "compare",
+     "label": "Use the current room and label its actual amenities",
+     "correct": true
+    },
+    {
+     "id": "latest",
+     "label": "Use the old photo because it looks luxurious",
+     "correct": false
+    },
+    {
+     "id": "delete",
+     "label": "Promise amenities that might arrive later",
+     "correct": false
+    }
+   ]
+  },
+  {
+   "stage": 2,
+   "title": "Priya: coworking guest programme · part 3",
+   "detail": "Priya introduces a client preparing an OTA placement page. The booking partner requires truthful copy and commission disclosure. What belongs in the agreed work?",
+   "minutes": 90,
+   "cost": 20,
+   "order": 0,
+   "choices": [
+    {
+     "id": "scope",
+     "label": "Verified room copy and disclosed channel terms",
+     "correct": true
+    },
+    {
+     "id": "guarantee",
+     "label": "A promise of placement with no channel approval",
+     "correct": false
+    },
+    {
+     "id": "omit",
+     "label": "A hidden commission line",
+     "correct": false
+    }
+   ]
+  }
+ ],
+ "referral": {
+  "client": "Priya referral",
+  "detail": "A referred client commissions a documented coworking guest programme. Complete the agreed work; no revenue is earned merely for knowing Priya.",
+  "price": 435,
+  "cost": 165,
+  "minutes": 210
+ }
+}

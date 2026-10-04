@@ -10,7 +10,7 @@ msgstr ""
 msgid "\n%dxxx"
 msgstr "\n%dxxx"
 
-#: scripts/ui/hud.gd:258
+#: scripts/ui/hud.gd:266
 msgid "   ◆ decision"
 msgstr "   ◆ 待决定"
 
@@ -26,7 +26,7 @@ msgstr "  （员工折扣）"
 msgid "  of which on hold (<2 days)"
 msgstr "  其中保留中（未满 2 天）"
 
-#: scripts/ui/hud.gd:233
+#: scripts/ui/hud.gd:241
 msgid "  ·  DAY %d"
 msgstr "  ·  第 %d 天"
 
@@ -70,7 +70,7 @@ msgstr "（逾期，罚款 %s）"
 msgid " ltd"
 msgstr " ltd"
 
-#: scripts/ui/hud.gd:244
+#: scripts/ui/hud.gd:252
 msgid " today"
 msgstr " 今日"
 
@@ -274,11 +274,11 @@ msgstr "再做 %d 班升为%s"
 msgid "%d new delivery runs are posted (Company OS → Logistics)."
 msgstr "有 %d 趟新的外送单上架了（Company OS → 物流）。"
 
-#: scripts/ui/phone_ui.gd:328
+#: scripts/ui/phone_ui.gd:331
 msgid "%d of %d days"
 msgstr "%d／%d 天"
 
-#: scripts/ui/phone_ui.gd:313
+#: scripts/ui/phone_ui.gd:316
 msgid "%d of %d reached"
 msgstr "已达成 %d／%d"
 
@@ -294,7 +294,7 @@ msgstr "%d 笔订单%s等待打包——到打包桌（家里或办公室）。"
 msgid "%d orders"
 msgstr "%d 笔订单"
 
-#: scripts/world/actions.gd:293
+#: scripts/world/actions.gd:294
 msgid "%d orders waiting to be packed. I'm on it."
 msgstr "还有 %d 笔订单等着打包，我正在处理。"
 
@@ -486,7 +486,7 @@ msgstr "%s 还有空间：请在「营运」的「送货到」选它。"
 msgid "%s is already registered (%s)."
 msgstr "%s 已经登记过了（%s）。"
 
-#: scripts/world/actions.gd:244
+#: scripts/world/actions.gd:245
 msgid "%s is busy."
 msgstr "%s 在忙。"
 
@@ -681,6 +681,10 @@ msgstr "%s · %s · 出租 %d 次 · 营收 %s"
 #: scripts/ui/automotive_ui.gd:222
 msgid "%s · %s/car/mo"
 msgstr "%s · 每车每月 %s"
+
+#: scripts/ui/modals/contacts_modal.gd:34
+msgid "%s · affinity %d / 100"
+msgstr "%s・好感度 %d / 100"
 
 #: scripts/ui/governance_ui.gd:23
 msgid "%s · amount %s"
@@ -1066,9 +1070,21 @@ msgstr "第 4 年《清洁包装法》上路后，用塑料缓冲材的包裹每
 msgid "A cheap car sitting idle earns nothing; a high price loses requests. Service skipped means breakdowns and bad reviews."
 msgstr "便宜的车闲着也赚不到钱；价格太高会流失询问。不保养就会抛锚并得到负评。"
 
+#: data/story/personal/maya.json
+msgid "A checked guide with contacts and clear limits"
+msgstr "经查核的指南、联系方式与明确限制"
+
+#: data/story/personal/sam.json
+msgid "A checked handover pack with inspection exceptions"
+msgstr "经查核的交车文档与尚待检查项目"
+
 #: data/help/glossary.json
 msgid "A client posts a job with several stops, a fee and a deadline. On time pays the full fee, late pays less, and a run left undone is cancelled."
 msgstr "客户会刊登一张外送单：几个停靠点、一笔运费和一个截止时间。准时送到拿全额，迟到拿得比较少，放着没送的单会被取消。"
+
+#: data/help/help.json
+msgid "A closed originating business retires its requests. Completed or expired work cannot pay twice."
+msgstr "原公司关闭后，其请求也会结束。已完成或逾期的工作不能重复收款。"
 
 #: scripts/ui/modals/insolvency_modal.gd:74
 msgid "A company can fail. You don't."
@@ -1118,6 +1134,10 @@ msgstr "重新出发"
 msgid "A fuller van spreads the fixed time of a trip over more parcels, so each parcel costs less to deliver."
 msgstr "货车装得越满，每趟固定的时间就分摊到更多包裹上，每件的送货成本就越低。"
 
+#: data/story/personal/maya.json
+msgid "A guarantee of housing for every visitor"
+msgstr "保证每位访客都有住处"
+
 #: data/events/hotel_review_storm.json
 msgid "A guest's angry post is spreading across the booking platform."
 msgstr "一位房客的怒文正在订房平台上扩散。"
@@ -1129,6 +1149,10 @@ msgstr "健身课可能让你认识买家、物流商或地方记者。每个机
 #: data/events/fitness_carrier.json
 msgid "A gym member introduces a courier with a seven-day trial price."
 msgstr "一位健身会员介绍物流商，提供七天试用运价。"
+
+#: data/story/personal/priya.json
+msgid "A hidden commission line"
+msgstr "隐藏佣金条款"
 
 #: data/help/glossary.json
 msgid "A high asking price can fail. Viewings still cost time and money."
@@ -1246,6 +1270,10 @@ msgstr "找个地方工作"
 msgid "A premium brand can charge more. Your reviews and margin matter as much as being cheaper."
 msgstr "高价品牌有定价空间。除了比较便宜，你的评价与毛利也很重要。"
 
+#: data/story/personal/priya.json
+msgid "A promise of placement with no channel approval"
+msgstr "未经通路核准就承诺版位"
+
 #: data/milestones.json
 msgid "A proper agency"
 msgstr "像样的代理商"
@@ -1262,6 +1290,154 @@ msgstr "悄悄升等要送出一晚套房，但会提高她给的服务分。"
 msgid "A real office: your company name on the door and the sign, a proper desk for Company OS, and a stockroom so boxes stop living in your apartment. It's also %s every month whether you sell anything or not."
 msgstr "真正的办公室：门上和招牌挂着你的公司名，有张像样的办公桌用 Company OS，还有仓库，纸箱不用再堆在你家。不过不管有没有卖出东西，每个月都要 %s。"
 
+#: data/story/personal/lena_park.json
+msgid "A referred client commissions a documented OEM quality evidence. Complete the agreed work; no revenue is earned merely for knowing Lena Park."
+msgstr "引荐客户正式委托有证据可查的OEM 品质证据。完成约定工作才有收入，认识 Lena Park 本身不会带来收入。"
+
+#: data/story/personal/priya_nair.json
+msgid "A referred client commissions a documented OTA placement page. Complete the agreed work; no revenue is earned merely for knowing Priya Nair."
+msgstr "引荐客户正式委托有证据可查的OTA 精选版位页面。完成约定工作才有收入，认识 Priya Nair 本身不会带来收入。"
+
+#: data/story/personal/okafor.json
+msgid "A referred client commissions a documented Old Town lease explanation. Complete the agreed work; no revenue is earned merely for knowing Mr. Okafor."
+msgstr "引荐客户正式委托有证据可查的Old Town 租约说明。完成约定工作才有收入，认识 Mr. Okafor 本身不会带来收入。"
+
+#: data/story/personal/lee.json
+msgid "A referred client commissions a documented accessible cafe signage. Complete the agreed work; no revenue is earned merely for knowing Lee."
+msgstr "引荐客户正式委托有证据可查的咖啡店无障碍标示。完成约定工作才有收入，认识 Lee 本身不会带来收入。"
+
+#: data/story/personal/sofia.json
+msgid "A referred client commissions a documented account fee comparison. Complete the agreed work; no revenue is earned merely for knowing Sofia."
+msgstr "引荐客户正式委托有证据可查的帐户费用比较。完成约定工作才有收入，认识 Sofia 本身不会带来收入。"
+
+#: data/story/personal/frank_doyle.json
+msgid "A referred client commissions a documented auction condition disclosure. Complete the agreed work; no revenue is earned merely for knowing Frank Doyle."
+msgstr "引荐客户正式委托有证据可查的拍卖车况揭露。完成约定工作才有收入，认识 Frank Doyle 本身不会带来收入。"
+
+#: data/story/personal/harbor_point.json
+msgid "A referred client commissions a documented beginner exercise timetable. Complete the agreed work; no revenue is earned merely for knowing Rosa · Harbor Point Fitness."
+msgstr "引荐客户正式委托有证据可查的新手运动课表。完成约定工作才有收入，认识 Rosa · Harbor Point Fitness 本身不会带来收入。"
+
+#: data/story/personal/ms_okoro.json
+msgid "A referred client commissions a documented community energy questions. Complete the agreed work; no revenue is earned merely for knowing Ms. Okoro."
+msgstr "引荐客户正式委托有证据可查的社区能源问题集。完成约定工作才有收入，认识 Ms. Okoro 本身不会带来收入。"
+
+#: data/story/personal/ruiz.json
+msgid "A referred client commissions a documented construction handover checklist. Complete the agreed work; no revenue is earned merely for knowing Ruiz Construction."
+msgstr "引荐客户正式委托有证据可查的工程交付核对表。完成约定工作才有收入，认识 Ruiz Construction 本身不会带来收入。"
+
+#: data/story/personal/priya.json
+msgid "A referred client commissions a documented coworking guest programme. Complete the agreed work; no revenue is earned merely for knowing Priya."
+msgstr "引荐客户正式委托有证据可查的共同工作空间的访客方案。完成约定工作才有收入，认识 Priya 本身不会带来收入。"
+
+#: data/story/personal/rafael_costa.json
+msgid "A referred client commissions a documented electrical safety checklist. Complete the agreed work; no revenue is earned merely for knowing Rafael Costa."
+msgstr "引荐客户正式委托有证据可查的电气安全核对表。完成约定工作才有收入，认识 Rafael Costa 本身不会带来收入。"
+
+#: data/story/personal/victor.json
+msgid "A referred client commissions a documented enterprise succession interview. Complete the agreed work; no revenue is earned merely for knowing Victor Hale."
+msgstr "引荐客户正式委托有证据可查的企业传承访谈。完成约定工作才有收入，认识 Victor Hale 本身不会带来收入。"
+
+#: data/story/personal/rita_hale.json
+msgid "A referred client commissions a documented factory quotation checklist. Complete the agreed work; no revenue is earned merely for knowing Rita Hale."
+msgstr "引荐客户正式委托有证据可查的工厂报价核对表。完成约定工作才有收入，认识 Rita Hale 本身不会带来收入。"
+
+#: data/story/personal/diane_harlow.json
+msgid "A referred client commissions a documented first-home viewing guide. Complete the agreed work; no revenue is earned merely for knowing Diane Harlow."
+msgstr "引荐客户正式委托有证据可查的首购看屋指南。完成约定工作才有收入，认识 Diane Harlow 本身不会带来收入。"
+
+#: data/story/personal/sam.json
+msgid "A referred client commissions a documented fleet customer handover. Complete the agreed work; no revenue is earned merely for knowing Sam Okoro."
+msgstr "引荐客户正式委托有证据可查的车队客户交车流程。完成约定工作才有收入，认识 Sam Okoro 本身不会带来收入。"
+
+#: data/story/personal/elena.json
+msgid "A referred client commissions a documented founder due-diligence notes. Complete the agreed work; no revenue is earned merely for knowing Elena Park."
+msgstr "引荐客户正式委托有证据可查的创办人尽职调查笔记。完成约定工作才有收入，认识 Elena Park 本身不会带来收入。"
+
+#: data/story/personal/mara_quinn.json
+msgid "A referred client commissions a documented franchise training outline. Complete the agreed work; no revenue is earned merely for knowing Mara Quinn."
+msgstr "引荐客户正式委托有证据可查的加盟培训大纲。完成约定工作才有收入，认识 Mara Quinn 本身不会带来收入。"
+
+#: data/story/personal/owen_blake.json
+msgid "A referred client commissions a documented group travel accessibility plan. Complete the agreed work; no revenue is earned merely for knowing Owen Blake."
+msgstr "引荐客户正式委托有证据可查的团体旅游无障碍计划。完成约定工作才有收入，认识 Owen Blake 本身不会带来收入。"
+
+#: data/story/personal/vera_stone.json
+msgid "A referred client commissions a documented guest review evidence guide. Complete the agreed work; no revenue is earned merely for knowing Vera Stone."
+msgstr "引荐客户正式委托有证据可查的旅客评价证据指南。完成约定工作才有收入，认识 Vera Stone 本身不会带来收入。"
+
+#: data/story/personal/henri_dubois.json
+msgid "A referred client commissions a documented hotel history archive. Complete the agreed work; no revenue is earned merely for knowing Henri Dubois."
+msgstr "引荐客户正式委托有证据可查的旅馆历史数据。完成约定工作才有收入，认识 Henri Dubois 本身不会带来收入。"
+
+#: data/story/personal/lina.json
+msgid "A referred client commissions a documented import document checklist. Complete the agreed work; no revenue is earned merely for knowing Lina Zhao."
+msgstr "引荐客户正式委托有证据可查的进口文档核对表。完成约定工作才有收入，认识 Lina Zhao 本身不会带来收入。"
+
+#: data/story/personal/student_intern.json
+msgid "A referred client commissions a documented internship learning portfolio. Complete the agreed work; no revenue is earned merely for knowing Nia Park."
+msgstr "引荐客户正式委托有证据可查的实习学习作品集。完成约定工作才有收入，认识 Nia Park 本身不会带来收入。"
+
+#: data/story/personal/marcus.json
+msgid "A referred client commissions a documented loan application cash-flow guide. Complete the agreed work; no revenue is earned merely for knowing Marcus Reed."
+msgstr "引荐客户正式委托有证据可查的贷款申请现金流指南。完成约定工作才有收入，认识 Marcus Reed 本身不会带来收入。"
+
+#: data/story/personal/maya.json
+msgid "A referred client commissions a documented neighbour welcome guide. Complete the agreed work; no revenue is earned merely for knowing Maya."
+msgstr "引荐客户正式委托有证据可查的邻里迎新指南。完成约定工作才有收入，认识 Maya 本身不会带来收入。"
+
+#: data/story/personal/tom.json
+msgid "A referred client commissions a documented office move-in inventory. Complete the agreed work; no revenue is earned merely for knowing Tom."
+msgstr "引荐客户正式委托有证据可查的办公室入住设备清单。完成约定工作才有收入，认识 Tom 本身不会带来收入。"
+
+#: data/story/personal/dara.json
+msgid "A referred client commissions a documented parcel address guide. Complete the agreed work; no revenue is earned merely for knowing Dara."
+msgstr "引荐客户正式委托有证据可查的包裹地址指南。完成约定工作才有收入，认识 Dara 本身不会带来收入。"
+
+#: data/story/personal/tomas_varga.json
+msgid "A referred client commissions a documented production changeover notes. Complete the agreed work; no revenue is earned merely for knowing Tomas Varga."
+msgstr "引荐客户正式委托有证据可查的生产换线笔记。完成约定工作才有收入，认识 Tomas Varga 本身不会带来收入。"
+
+#: data/story/personal/ana.json
+msgid "A referred client commissions a documented registration document guide. Complete the agreed work; no revenue is earned merely for knowing Ana."
+msgstr "引荐客户正式委托有证据可查的公司登记文档指南。完成约定工作才有收入，认识 Ana 本身不会带来收入。"
+
+#: data/story/personal/jun_ito.json
+msgid "A referred client commissions a documented repair appointment checklist. Complete the agreed work; no revenue is earned merely for knowing Jun Ito."
+msgstr "引荐客户正式委托有证据可查的维修预约核对表。完成约定工作才有收入，认识 Jun Ito 本身不会带来收入。"
+
+#: data/story/personal/nina.json
+msgid "A referred client commissions a documented repairable clothing catalogue. Complete the agreed work; no revenue is earned merely for knowing Nina."
+msgstr "引荐客户正式委托有证据可查的可修补服装目录。完成约定工作才有收入，认识 Nina 本身不会带来收入。"
+
+#: data/story/personal/daniel.json
+msgid "A referred client commissions a documented retail buyer presentation. Complete the agreed work; no revenue is earned merely for knowing Daniel Wong."
+msgstr "引荐客户正式委托有证据可查的零售采购提案。完成约定工作才有收入，认识 Daniel Wong 本身不会带来收入。"
+
+#: data/story/personal/jun.json
+msgid "A referred client commissions a documented reusable cup menu. Complete the agreed work; no revenue is earned merely for knowing Jun."
+msgstr "引荐客户正式委托有证据可查的环保杯饮品菜单。完成约定工作才有收入，认识 Jun 本身不会带来收入。"
+
+#: data/story/personal/sunny_adeyemi.json
+msgid "A referred client commissions a documented solar customer explainer. Complete the agreed work; no revenue is earned merely for knowing Sunny Adeyemi."
+msgstr "引荐客户正式委托有证据可查的太阳能客户说明。完成约定工作才有收入，认识 Sunny Adeyemi 本身不会带来收入。"
+
+#: data/story/personal/kai_morgan.json
+msgid "A referred client commissions a documented sponsorship disclosure guide. Complete the agreed work; no revenue is earned merely for knowing Kai Morgan."
+msgstr "引荐客户正式委托有证据可查的赞助揭露指南。完成约定工作才有收入，认识 Kai Morgan 本身不会带来收入。"
+
+#: data/story/personal/imani_cole.json
+msgid "A referred client commissions a documented student enterprise workshop. Complete the agreed work; no revenue is earned merely for knowing Dr. Imani Cole."
+msgstr "引荐客户正式委托有证据可查的学生创业工作坊。完成约定工作才有收入，认识 Dr. Imani Cole 本身不会带来收入。"
+
+#: data/story/personal/ken.json
+msgid "A referred client commissions a documented supplier invoice checklist. Complete the agreed work; no revenue is earned merely for knowing Ken."
+msgstr "引荐客户正式委托有证据可查的供应商发票核对表。完成约定工作才有收入，认识 Ken 本身不会带来收入。"
+
+#: data/story/personal/landlord.json
+msgid "A referred client commissions a documented tenant maintenance handbook. Complete the agreed work; no revenue is earned merely for knowing Mr. Okafor (landlord)."
+msgstr "引荐客户正式委托有证据可查的租户保养手册。完成约定工作才有收入，认识 Mr. Okafor (landlord) 本身不会带来收入。"
+
 #: data/help/glossary.json
 msgid "A regular payment covers interest and repays part of the principal until the loan is paid off."
 msgstr "每期付款包含利息与一部分本金，持续到贷款还清。"
@@ -1273,6 +1449,10 @@ msgstr "一位熟客说她只买看得到、摆在柜台上的东西。记下来
 #: data/help/glossary.json
 msgid "A rejected pitch still costs time and money."
 msgstr "未得标的提案仍会耗费时间与金钱。"
+
+#: data/story/personal/maya.json
+msgid "A residents association asks Maya to introduce you for a paid welcome guide. They want a guarantee that every visitor will find a home. What can you offer?"
+msgstr "住户协会请 Maya 引荐你编写付费迎新指南，希望保证每位访客都能找到住处。你能提供什么？"
 
 #: autoload/ui_root.gd:227
 msgid "A rough shift: it doesn't count toward your next promotion."
@@ -1289,6 +1469,10 @@ msgstr "分部汇整同一产业的交易。"
 #: data/jobs/parcel_sorter.json
 msgid "A seller drops off twenty parcels with no labels. You feel their pain."
 msgstr "一个卖家拿来二十个没贴标签的包裹。你完全懂那种痛。"
+
+#: data/economy/personal_life.json
+msgid "A service job pays after delivery and its payment terms. Keep cash for the work and the wait."
+msgstr "服务工作在交付后才依票期付款。请保留运行工作及等待收款的现金。"
 
 #: data/character/options.json
 msgid "A sharp three-piece in midnight wool. Pocket square included."
@@ -1325,6 +1509,10 @@ msgstr "转角的小店面，旧城区一半的人每天都会经过。交屋是
 #: data/help/glossary.json
 msgid "A staff member morale score measures how they feel about work and pay."
 msgstr "员工士气分数反映工作与薪资带来的感受。"
+
+#: data/story/personal/nina.json
+msgid "A supplier calls Nina's fabric sustainable without a certificate. Nina wants an honest catalogue for her students. Which wording is safe?"
+msgstr "供应商称 Nina 的布料很永续，却拿不出证明。Nina 想为学生做诚实的目录，应如何写？"
 
 #: data/events/real_estate_arrears.json
 msgid "A tenant has missed rent. Receivables remain visible; collection takes time and may fail."
@@ -1498,6 +1686,10 @@ msgstr "请先接下这个集团委托。"
 msgid "Accept the loss"
 msgstr "接受损失"
 
+#: scripts/ui/modals/contacts_modal.gd:71
+msgid "Accept the referred job"
+msgstr "承接引荐工作"
+
 #: data/events/crestline_big_offer.json
 msgid "Accept, counter or decline in Company OS → Contracts. The catch is working capital (you pay for the lamps now and get paid in 60 days) and space (home holds 600 units, Suite 2B 1,500)."
 msgstr "到 Company OS →「合约」接受、还价或拒绝。难处在营运资金（现在就要付钱进灯，60 天后才收款）和空间（家里放得下 600 件，2B 办公室 1,500 件）。"
@@ -1566,9 +1758,13 @@ msgstr "会计师申报费：%s"
 msgid "Accuracy and speed decide how much of the work gets done in this session."
 msgstr "正确率和速度决定这一段时间完成多少工作。"
 
-#: scripts/ui/phone_ui.gd:294
+#: scripts/ui/phone_ui.gd:297
 msgid "Achievements"
 msgstr "成就"
+
+#: scripts/sim/personal_life.gd:31
+msgid "Acquaintance"
+msgstr "认识"
 
 #: scripts/ui/market_view.gd:26
 msgid "Acquire %s for %s"
@@ -1622,6 +1818,10 @@ msgstr "已将 %s 加入租车车队。"
 msgid "Additional founder capital"
 msgstr "创办人增资"
 
+#: data/story/personal/maya.json
+msgid "Addresses copied without checking availability"
+msgstr "不查房源就抄下地址"
+
 #: scripts/ui/minigames/cowork_host_game.gd:7
 msgid "Ade"
 msgstr "Ade"
@@ -1658,6 +1858,10 @@ msgstr "广告"
 msgid "Advertising budget"
 msgstr "广告预算"
 
+#: data/help/glossary.json
+msgid "Affinity ranges from 0 to 100. Acquaintance, friend and partner stages unlock three personal requests. Gifts have individual preferences."
+msgstr "好感度范围为 0 至 100。认识、朋友、伙伴三个阶段会解锁个人请求，每个人都有送礼偏好。"
+
 #: data/help/help.json
 msgid "After 180 days an independent company can buy a rival with company cash. Market presence is an investment, not guaranteed income."
 msgstr "独立公司经营 180 天后可用公司现金收购对手。市场资产是投资，收益并无保证。"
@@ -1674,7 +1878,7 @@ msgstr "上完疲累的班可以回家睡觉。第一次创业期间下午 4 点
 msgid "After-sales service ticket"
 msgstr "售后保养工单"
 
-#: scripts/ui/hud.gd:236
+#: scripts/ui/hud.gd:244
 msgid "Afternoon · Sunny"
 msgstr "下午 · 晴"
 
@@ -1734,7 +1938,7 @@ msgstr "所有文件 (*)"
 msgid "All good? Approve it. Something wrong? Click the wrong field first, then Reject."
 msgstr "都没问题就「核准」。有错的话，先点出错的字段，再按「退件」。"
 
-#: scripts/world/actions.gd:293
+#: scripts/world/actions.gd:294
 msgid "All packed. The courier comes at 16:00."
 msgstr "都打包好了，快递 16:00 来收。"
 
@@ -1774,6 +1978,10 @@ msgstr "杏眼"
 msgid "Already attended — choose another class."
 msgstr "已上过这堂课——请选择另一堂。"
 
+#: scripts/sim/personal_life.gd:37
+msgid "Already completed — review the referral."
+msgstr "已完成，请查看引荐机会。"
+
 #: scripts/sim/company.gd:143
 msgid "Already granted."
 msgstr "已经核发过了。"
@@ -1782,6 +1990,14 @@ msgstr "已经核发过了。"
 msgid "Already licensed."
 msgstr "已经有执照了。"
 
+#: scripts/sim/personal_life.gd:62
+msgid "Already offered a gift today — return tomorrow."
+msgstr "今天已送过礼，明天再来。"
+
+#: scripts/sim/personal_life.gd:114
+msgid "Already recovered — return to your plans."
+msgstr "已恢复，继续原本的计划。"
+
 #: scripts/sim/staff.gd:57
 msgid "Already registered as an employer."
 msgstr "已经完成雇主登记了。"
@@ -1789,6 +2005,10 @@ msgstr "已经完成雇主登记了。"
 #: data/products/phone_stand.json
 msgid "Aluminium Phone Stand"
 msgstr "铝合金手机架"
+
+#: data/economy/personal_life.json
+msgid "Alumni gathering"
+msgstr "校友聚会"
 
 #: scripts/ui/minigames/photo_shoot_game.gd:293
 msgid "Amateur-looking. It will cost you some sales; you can reshoot later."
@@ -1842,9 +2062,17 @@ msgstr "你有一间可营业的咖啡店、一位咖啡师与待缴贷款。请
 msgid "Ana"
 msgstr "Ana"
 
+#: data/story/personal/ana.json
+msgid "Ana asks for a registration document guide. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Ana 请你协助整理公司登记文档指南，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
 #: data/story/chapters.json
 msgid "Ana at City Hall. The Payments Integrity Act is in force. Commercial importers need an import licence: $450 a year, at the permits kiosk. There's a monthly compliance cost now too."
 msgstr "我是市政厅的 Ana。《支付诚信法》生效了。商业进口商需要进口执照：一年 $450，到许可服务站办。现在每个月还有一笔合规费用。"
+
+#: data/story/personal/ana.json
+msgid "Ana is ready to introduce a paying client for the registration document guide. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Ana 准备引荐愿意付费的客户，委托内容是公司登记文档指南。客户要求你做出无法验证的承诺，交付数据应如何写？"
 
 #: data/jobs/city_clerk.json
 msgid "Ana shows you the queue trick: ticket numbers are a suggestion."
@@ -1853,6 +2081,18 @@ msgstr "Ana 教你排队的诀窍：号码牌只是参考。"
 #: scripts/ui/modals/registration_modal.gd:25
 msgid "Ana: \"All done. Congratulations. Open a business account at Nexus Bank and you're set.\""
 msgstr "Ana：「都办好了，恭喜。再去 Nexus 银行开个企业帐户就搞定了。」"
+
+#: data/story/personal/ana.json
+msgid "Ana: registration document guide · part 1"
+msgstr "Ana：公司登记文档指南・第 1 段"
+
+#: data/story/personal/ana.json
+msgid "Ana: registration document guide · part 2"
+msgstr "Ana：公司登记文档指南・第 2 段"
+
+#: data/story/personal/ana.json
+msgid "Ana: registration document guide · part 3"
+msgstr "Ana：公司登记文档指南・第 3 段"
 
 #: data/world/years.json
 msgid "Analysts: 'Faster rails, thinner buffers.'"
@@ -2102,6 +2342,10 @@ msgstr "100 位订户、流失率 5%，一个月约流失 5 人；添加订户�
 msgid "At 5%, a 100-unit order averages about 5 duds. Allow spare stock before promising a large delivery."
 msgstr "瑕疵率 5% 时，100 件平均约有 5 件瑕疵；承诺大量交货前要留备用库存。"
 
+#: data/help/glossary.json
+msgid "At 85%, illness offers a free 480-minute recovery day or an 80 AUD, 90-minute visit. It also expires within 3 days."
+msgstr "压力达 85% 会引起不适，可免费休养 480 分钟，或付 80 AUD 看诊 90 分钟。最晚 3 天内也会自行恢复。"
+
 #: scripts/ui/modals/company_os.gd:1480
 msgid "At any packing table the shipping options include \"Own van\": fuel instead of a courier fee, delivered the same day. The Pier 7 warehouse can hold your stock too."
 msgstr "每张打包桌的出货选项都多了「自己的货车」：付油钱代替快递费，当天送到。7 号码头仓库也能放你的库存。"
@@ -2129,6 +2373,14 @@ msgstr "以目前价格：平日大约 %d 位客人。每位咖啡师一小时�
 #: data/economy/logistics.json
 msgid "Atlas Movers"
 msgstr "Atlas 搬家公司"
+
+#: scripts/ui/modals/social_calendar_modal.gd:16
+msgid "Attend"
+msgstr "参加"
+
+#: scripts/sim/personal_life.gd:40
+msgid "Attend events or offer a preferred gift to reach the next relationship stage."
+msgstr "参加活动或送上偏好的礼物，提升到下一段关系。"
 
 #: data/character/options.json
 msgid "Auburn"
@@ -2370,7 +2622,7 @@ msgstr "跨链桥遭骇：黑客掏空数字美元管道背后的准备金。"
 msgid "BUILD  ·  LIVE  ·  CONNECT  ·  GROW"
 msgstr "创业  ·  生活  ·  链接  ·  成长"
 
-#: autoload/sound.gd:286 scripts/frontend/character_creator.gd:110
+#: autoload/sound.gd:286 scripts/frontend/character_creator.gd:110 scripts/ui/modals/contacts_modal.gd:52
 msgid "Back"
 msgstr "返回"
 
@@ -2661,6 +2913,10 @@ msgstr "有胆。我喜欢。"
 #: scripts/ui/modals/loan_modal.gd:90 scripts/ui/modals/loan_modal.gd:94
 msgid "Book an appointment"
 msgstr "预约贷款洽谈"
+
+#: data/economy/personal_life.json
+msgid "Book gift"
+msgstr "书籍礼物"
 
 #: data/events/hotel_equipment_failure.json
 msgid "Book the scheduled technician for $700"
@@ -3050,7 +3306,7 @@ msgstr "事业"
 msgid "Businesses: choose from the businesses available now, or find a part-time job."
 msgstr "生意：选择目前可经营的生意，或找一份兼职工作。"
 
-#: scripts/world/actions.gd:286
+#: scripts/world/actions.gd:287
 msgid "Busy day. All good."
 msgstr "今天很忙，一切顺利。"
 
@@ -3362,6 +3618,10 @@ msgstr "咖啡店：经营店面，不是仓库"
 msgid "Call it a day? You'll wake up at 7:00 AM. The game autosaves."
 msgstr "今天就到这里？你会在早上 7:00 起床。游戏会自动存盘。"
 
+#: data/story/personal/ken.json
+msgid "Call it free money"
+msgstr "称它为免费资金"
+
 #: data/dialogue/daniel_cameo.json
 msgid "Call me when you can do volume."
 msgstr "等你有量了再打给我。"
@@ -3478,7 +3738,7 @@ msgstr "还不能聘人：%s。"
 msgid "Can't start a shift now: %s."
 msgstr "现在不能上班：%s。"
 
-#: scripts/world/actions.gd:266
+#: scripts/world/actions.gd:267
 msgid "Can't work the counter: %s."
 msgstr "现在不能站吧台：%s。"
 
@@ -3566,7 +3826,7 @@ msgstr "自己拿去 PostPoint"
 msgid "Carry them to PostPoint yourself (cheaper, costs your time)"
 msgstr "自己拿去 PostPoint（比较便宜，但花你的时间）"
 
-#: scripts/ui/hud.gd:266
+#: scripts/ui/hud.gd:274
 msgid "Carrying %d parcel%s"
 msgstr "携带 %d 件包裹%s"
 
@@ -3662,6 +3922,10 @@ msgstr "中央车站"
 msgid "Certain cost, no fine."
 msgstr "成本确定，没有罚款。"
 
+#: data/story/personal/sam.json
+msgid "Certificates for uninspected vehicles"
+msgstr "替未检查车辆制作合格证明"
+
 #: scripts/ui/energy_ui.gd:192
 msgid "CertifyStorage"
 msgstr "CertifyStorage"
@@ -3673,6 +3937,10 @@ msgstr "Chairly"
 #: scripts/ui/modals/run_card_modal.gd:44
 msgid "Challenge score"
 msgstr "挑战分数"
+
+#: data/economy/personal_life.json
+msgid "Chamber dinner"
+msgstr "商会晚宴"
 
 #: data/buildings/riverside_apartment.json
 msgid "Change outfit"
@@ -4178,13 +4446,21 @@ msgstr "城市清单只显示可以使用的生意与场所；主要按钮会带
 msgid "City map"
 msgstr "城市地图"
 
-#: scripts/ui/market_view.gd:33 scripts/ui/phone_ui.gd:137 scripts/ui/phone_ui.gd:349
+#: scripts/ui/market_view.gd:33 scripts/ui/phone_ui.gd:137 scripts/ui/phone_ui.gd:352
 msgid "City news"
 msgstr "城市新闻"
 
 #: data/world/years.json
 msgid "City opens a $2M Green Business Grant for local sellers."
 msgstr "市府推出 200 万元绿色企业补助，给在地卖家申请。"
+
+#: scripts/ui/modals/contacts_modal.gd:21 scripts/ui/modals/social_calendar_modal.gd:5
+msgid "City social calendar"
+msgstr "城市社交行事历"
+
+#: scripts/sim/personal_life.gd:81
+msgid "City social event: %s"
+msgstr "城市社交活动：%s"
 
 #: scripts/sim/city_news.gd:32
 msgid "City update: %s"
@@ -4213,6 +4489,10 @@ msgstr "理赔已入帐"
 #: scripts/ui/governance_ui.gd:48
 msgid "Claim pending"
 msgstr "理赔待入帐"
+
+#: data/story/personal/nina.json
+msgid "Claim that replacement is the only option"
+msgstr "声称只能换新"
 
 #: scripts/ui/governance_ui.gd:45
 msgid "Claims reimburse actual crisis costs after a deductible, up to the paid policy limit. Fines and hypothetical lost sales are excluded; vehicle premiums keep their existing cover."
@@ -4374,6 +4654,10 @@ msgstr "%s 结算：营业利润 %s，现金 %s。"
 msgid "Closed now"
 msgstr "目前打烊"
 
+#: scripts/ui/modals/social_calendar_modal.gd:14
+msgid "Closed or already attended — return on the next monthly date."
+msgstr "未开放或已参加，请等到下一次每月活动日期。"
+
 #: scripts/world/building_info.gd:120
 msgid "Closed · opens %s"
 msgstr "已打烊 · %s 开门"
@@ -4426,15 +4710,19 @@ msgstr "写完了：完成 %.1f 小时的工作量。"
 msgid "Coding session — %s"
 msgstr "写程序：%s"
 
-#: data/economy/cafe.json scripts/sim/ledger.gd:30 scripts/world/actions.gd:255
+#: data/economy/cafe.json scripts/sim/ledger.gd:30 scripts/world/actions.gd:256
 msgid "Coffee"
 msgstr "咖啡"
+
+#: data/economy/personal_life.json
+msgid "Coffee gift"
+msgstr "咖啡礼物"
 
 #: data/jobs/cowork_host.json
 msgid "Coffee machine, printer, Wi-Fi: you fix all three before lunch."
 msgstr "咖啡机、打印机、Wi-Fi：午餐前你三个都修好了。"
 
-#: scripts/world/actions.gd:259
+#: scripts/world/actions.gd:260
 msgid "Coffee — %s."
 msgstr "咖啡——%s。"
 
@@ -4526,7 +4814,7 @@ msgstr "Company OS：你的工作电脑"
 msgid "Company brand"
 msgstr "公司品牌"
 
-#: scripts/sim/shop_life.gd:112
+#: scripts/sim/shop_life.gd:113
 msgid "Company closed — decline this opportunity."
 msgstr "公司已关闭——请婉拒这个机会。"
 
@@ -4578,6 +4866,10 @@ msgstr "调价后一起看每日订单与单件毛利；如果每件都亏钱，
 msgid "Compare real shelf prices, packaging and warranty before setting your price."
 msgstr "定价前，先比较实际货架价格、包装与保固。"
 
+#: data/story/personal/ana.json data/story/personal/daniel.json data/story/personal/dara.json data/story/personal/diane_harlow.json
+msgid "Compare sources and record what remains uncertain"
+msgstr "比较来源并记录仍不确定的部分"
+
 #: data/help/help.json
 msgid "Compare the cycle, base rate, price level and rival shares. Your prices and quality affect your share."
 msgstr "比较景气、基准利率、物价和对手市占。你的价格和品质会影响市占。"
@@ -4614,6 +4906,10 @@ msgstr "完成一个旅行社包房。"
 msgid "Complete every condition before the deadline. Missed loan payments or closing the scenario company can end the attempt; the founder can continue in sandbox."
 msgstr "请在期限内达成所有条件。贷款违约或关闭情境公司可能使挑战结束；创办人仍可继续沙盒生活。"
 
+#: data/help/help.json
+msgid "Complete evidence-based requests to earn referrals. Referred work has supplies, a deadline, 30-day payment terms and a risk of non-payment."
+msgstr "完成需要查核证据的请求以取得引荐。引荐工作需要材料、有期限及 30 天票期，也有收不到款的风险。"
+
 #: data/milestones.json
 msgid "Complete five group blocks."
 msgstr "完成五个团体包房。"
@@ -4633,6 +4929,10 @@ msgstr "完成十趟货车配送。"
 #: scripts/sim/hotel.gd:91
 msgid "Complete the previous growth stage."
 msgstr "请先完成上一个成长阶段。"
+
+#: scripts/sim/personal_life.gd:166
+msgid "Complete this personal chain before reviewing its referral."
+msgstr "先完成此个人任务链，再查看引荐机会。"
 
 #: scripts/sim/media.gd:203
 msgid "Complete two campaigns and hire a designer and media buyer before buying Campus Radio."
@@ -4734,9 +5034,13 @@ msgstr "消费"
 msgid "Consumer-protection fine for an undisclosed flood car"
 msgstr "未揭露泡水车的消费者保护罚款"
 
-#: scripts/ui/modals/company_os.gd:839
+#: scripts/ui/modals/company_os.gd:839 scripts/ui/modals/contacts_modal.gd:6 scripts/ui/phone_ui.gd:137
 msgid "Contacts"
 msgstr "联系人"
+
+#: data/help/help.json
+msgid "Contacts and personal life"
+msgstr "联系人与个人生活"
 
 #: data/world/years.json
 msgid "Container rates double. Couriers add fuel surcharges."
@@ -4874,7 +5178,7 @@ msgstr "成本变高了：调高售价保住毛利（Company OS → 销售）"
 msgid "Could I get a loan?"
 msgstr "我可以贷款吗？"
 
-#: scripts/world/actions.gd:286
+#: scripts/world/actions.gd:287
 msgid "Could use a bit more support around here."
 msgstr "这里有点需要更多支持。"
 
@@ -5186,6 +5490,14 @@ msgstr "每日报告追踪曝光、点击与转换。完成工作范围后，开
 msgid "Daniel Wong"
 msgstr "Daniel Wong"
 
+#: data/story/personal/daniel.json
+msgid "Daniel Wong asks for a retail buyer presentation. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Daniel Wong 请你协助整理零售采购提案，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/daniel.json
+msgid "Daniel Wong is ready to introduce a paying client for the retail buyer presentation. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Daniel Wong 准备引荐愿意付费的客户，委托内容是零售采购提案。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
 #: data/events/crestline_big_offer.json
 msgid "Daniel Wong, Crestline Retail."
 msgstr "我是 Crestline 零售的 Daniel Wong。"
@@ -5197,6 +5509,18 @@ msgstr "Crestline 的 Daniel Wong。你现在的量做起来了，谈谈吧。�
 #: data/dialogue/daniel_cameo.json
 msgid "Daniel Wong. Crestline Retail — buying side."
 msgstr "Daniel Wong。Crestline Retail 采购部。"
+
+#: data/story/personal/daniel.json
+msgid "Daniel Wong: retail buyer presentation · part 1"
+msgstr "Daniel Wong：零售采购提案・第 1 段"
+
+#: data/story/personal/daniel.json
+msgid "Daniel Wong: retail buyer presentation · part 2"
+msgstr "Daniel Wong：零售采购提案・第 2 段"
+
+#: data/story/personal/daniel.json
+msgid "Daniel Wong: retail buyer presentation · part 3"
+msgstr "Daniel Wong：零售采购提案・第 3 段"
 
 #: data/story/chapters.json
 msgid "Daniel buys by the pallet."
@@ -5210,9 +5534,29 @@ msgstr "Daniel：「文档在你的 Company OS 里，五天内决定。」"
 msgid "Dara"
 msgstr "Dara"
 
+#: data/story/personal/dara.json
+msgid "Dara asks for a parcel address guide. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Dara 请你协助整理包裹地址指南，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/dara.json
+msgid "Dara is ready to introduce a paying client for the parcel address guide. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Dara 准备引荐愿意付费的客户，委托内容是包裹地址指南。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
 #: scripts/ui/modals/dropoff_modal.gd:21
 msgid "Dara: \"%d parcel%s? Economy's three days, Express is one.\""
 msgstr "Dara：「%d 件包裹%s？经济件三天，快捷件一天。」"
+
+#: data/story/personal/dara.json
+msgid "Dara: parcel address guide · part 1"
+msgstr "Dara：包裹地址指南・第 1 段"
+
+#: data/story/personal/dara.json
+msgid "Dara: parcel address guide · part 2"
+msgstr "Dara：包裹地址指南・第 2 段"
+
+#: data/story/personal/dara.json
+msgid "Dara: parcel address guide · part 3"
+msgstr "Dara：包裹地址指南・第 3 段"
 
 #: data/character/options.json
 msgid "Dark"
@@ -5322,6 +5666,10 @@ msgstr "注销的债务"
 msgid "Debt written off in liquidation — %s"
 msgstr "清算时注销的债务——%s"
 
+#: data/help/glossary.json
+msgid "Debt, unresolved crises and continuous work raise stress. Sleep, breaks, city events and Harbor Point classes relieve it."
+msgstr "负债、未解决危机与连续工作会增加压力。睡眠、休息、城市活动与 Harbor Point 课程可减压。"
+
 #: autoload/clock.gd:14
 msgid "Dec"
 msgstr "12月"
@@ -5358,6 +5706,10 @@ msgstr "拒绝"
 msgid "Decline and keep your current plan"
 msgstr "婉拒，维持目前计划"
 
+#: scripts/ui/modals/contacts_modal.gd:73
+msgid "Decline referral"
+msgstr "婉拒引荐"
+
 #: data/events/acquisition_offer.json
 msgid "Decline: stay independent"
 msgstr "婉拒：保持独立"
@@ -5385,6 +5737,14 @@ msgstr "缺省速度于启动时套用。按住快转键以两倍速度前进，
 #: data/help/glossary.json
 msgid "Defect rate"
 msgstr "瑕疵率"
+
+#: data/story/personal/sam.json
+msgid "Delete all maintenance terms"
+msgstr "删除所有保养条款"
+
+#: data/story/personal/ana.json data/story/personal/daniel.json data/story/personal/dara.json data/story/personal/diane_harlow.json
+msgid "Delete both notes to make the file look complete"
+msgstr "删掉两份纪录，让文档看似完整"
 
 #: data/milestones.json
 msgid "Deliver 1,000 marketplace orders."
@@ -5594,6 +5954,18 @@ msgstr "站点主管"
 msgid "Depreciation"
 msgstr "折旧"
 
+#: data/story/personal/maya.json
+msgid "Describe both as equally accessible"
+msgstr "说两条路线都同样无障碍"
+
+#: data/story/personal/nina.json
+msgid "Describe the material and leave the claim unverified"
+msgstr "描述材质并标明永续宣称未经查核"
+
+#: data/story/personal/sam.json
+msgid "Describe the van as needing no maintenance"
+msgstr "声称车辆不需任何保养"
+
 #: data/regions/auroria.json
 msgid "Design"
 msgstr "设计"
@@ -5641,6 +6013,26 @@ msgstr "开发用地"
 #: data/npcs/diane_harlow.json
 msgid "Diane Harlow"
 msgstr "Diane Harlow"
+
+#: data/story/personal/diane_harlow.json
+msgid "Diane Harlow asks for a first-home viewing guide. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Diane Harlow 请你协助整理首购看屋指南，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/diane_harlow.json
+msgid "Diane Harlow is ready to introduce a paying client for the first-home viewing guide. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Diane Harlow 准备引荐愿意付费的客户，委托内容是首购看屋指南。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
+#: data/story/personal/diane_harlow.json
+msgid "Diane Harlow: first-home viewing guide · part 1"
+msgstr "Diane Harlow：首购看屋指南・第 1 段"
+
+#: data/story/personal/diane_harlow.json
+msgid "Diane Harlow: first-home viewing guide · part 2"
+msgstr "Diane Harlow：首购看屋指南・第 2 段"
+
+#: data/story/personal/diane_harlow.json
+msgid "Diane Harlow: first-home viewing guide · part 3"
+msgstr "Diane Harlow：首购看屋指南・第 3 段"
 
 #: data/world/years.json
 msgid "Digital Finance Boom"
@@ -5710,6 +6102,10 @@ msgstr "直订：没有佣金，量较少。OTA「%s」：每晚抽 %d%% 佣金�
 msgid "Directories & Files:"
 msgstr "文件夹与文件："
 
+#: data/story/personal/sam.json
+msgid "Disclose the brake work and ask for a repair quote"
+msgstr "揭露煞车保养需求并索取维修报价"
+
 #: data/events/automotive_flood.json
 msgid "Disclose the flood damage"
 msgstr "揭露泡水损坏"
@@ -5742,6 +6138,10 @@ msgstr "争议发票回收：%s"
 msgid "Distribute spending by audience, not just the cheapest CPM."
 msgstr "应依客群分配预算，不能只选最便宜的曝光。"
 
+#: scripts/ui/modals/contacts_modal.gd:76
+msgid "Do the referred work"
+msgstr "运行引荐工作"
+
 #: data/buildings/dockside_motors.json
 msgid "Dockside Motors"
 msgstr "Dockside Motors"
@@ -5765,6 +6165,14 @@ msgstr "Dockside Motors：%s"
 #: scripts/ui/modals/van_deal_modal.gd:9
 msgid "Dockside Motors: used van"
 msgstr "Dockside Motors：二手货车"
+
+#: data/story/personal/nina.json
+msgid "Document repairable examples and inspection limits"
+msgstr "记录可修补范例与检查限制"
+
+#: data/story/personal/ana.json data/story/personal/daniel.json data/story/personal/dara.json data/story/personal/diane_harlow.json
+msgid "Document the question and ask for evidence"
+msgstr "记录问题并要求证据"
 
 #: data/economy/marketplace.json
 msgid "Does the job."
@@ -5805,6 +6213,26 @@ msgstr "头期款：%.0f%%"
 #: data/npcs/imani_cole.json
 msgid "Dr. Imani Cole"
 msgstr "Dr. Imani Cole"
+
+#: data/story/personal/imani_cole.json
+msgid "Dr. Imani Cole asks for a student enterprise workshop. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Dr. Imani Cole 请你协助整理学生创业工作坊，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/imani_cole.json
+msgid "Dr. Imani Cole is ready to introduce a paying client for the student enterprise workshop. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Dr. Imani Cole 准备引荐愿意付费的客户，委托内容是学生创业工作坊。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
+#: data/story/personal/imani_cole.json
+msgid "Dr. Imani Cole: student enterprise workshop · part 1"
+msgstr "Dr. Imani Cole：学生创业工作坊・第 1 段"
+
+#: data/story/personal/imani_cole.json
+msgid "Dr. Imani Cole: student enterprise workshop · part 2"
+msgstr "Dr. Imani Cole：学生创业工作坊・第 2 段"
+
+#: data/story/personal/imani_cole.json
+msgid "Dr. Imani Cole: student enterprise workshop · part 3"
+msgstr "Dr. Imani Cole：学生创业工作坊・第 3 段"
 
 #: scripts/ui/minigames/photo_shoot_game.gd:104
 msgid "Drag the product in the frame"
@@ -6070,6 +6498,14 @@ msgstr "Elena"
 msgid "Elena Park"
 msgstr "Elena Park"
 
+#: data/story/personal/elena.json
+msgid "Elena Park asks for a founder due-diligence notes. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Elena Park 请你协助整理创办人尽职调查笔记，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/elena.json
+msgid "Elena Park is ready to introduce a paying client for the founder due-diligence notes. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Elena Park 准备引荐愿意付费的客户，委托内容是创办人尽职调查笔记。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
 #: data/events/elena_offer.json
 msgid "Elena Park wants in"
 msgstr "Elena Park 想投资"
@@ -6077,6 +6513,18 @@ msgstr "Elena Park 想投资"
 #: data/dialogue/elena_cameo.json data/events/elena_offer.json
 msgid "Elena Park, Northlight Capital."
 msgstr "我是 Northlight Capital 的 Elena Park。"
+
+#: data/story/personal/elena.json
+msgid "Elena Park: founder due-diligence notes · part 1"
+msgstr "Elena Park：创办人尽职调查笔记・第 1 段"
+
+#: data/story/personal/elena.json
+msgid "Elena Park: founder due-diligence notes · part 2"
+msgstr "Elena Park：创办人尽职调查笔记・第 2 段"
+
+#: data/story/personal/elena.json
+msgid "Elena Park: founder due-diligence notes · part 3"
+msgstr "Elena Park：创办人尽职调查笔记・第 3 段"
 
 #: data/events/elena_offer.json
 msgid "Elena: \"Smart founders say no more than yes. Offer stands for a while.\""
@@ -6162,6 +6610,10 @@ msgstr "EndFranchise"
 msgid "Energy"
 msgstr "能源"
 
+#: scripts/ui/hud.gd:239
+msgid "Energy %d%% · stress %d%%"
+msgstr "体力 %d%%・压力 %d%%"
+
 #: scripts/ui/energy_ui.gd:10
 msgid "Energy Console"
 msgstr "能源控制台"
@@ -6177,6 +6629,10 @@ msgstr "Energy Meridian"
 #: data/rivals/energy_1.json
 msgid "Energy Vale"
 msgstr "Energy Vale"
+
+#: data/help/help.json
+msgid "Energy changes reaction time, not your points. Use sleep, breaks, gym classes and social events to manage stress."
+msgstr "体力会改变反应时间，不会直接扣分。睡眠、休息、健身课程与社交活动都可管理压力。"
 
 #: data/regions/almeria.json
 msgid "Energy price swings"
@@ -6294,7 +6750,7 @@ msgstr "房地产仲介"
 msgid "Estimated sales"
 msgstr "预估销售"
 
-#: scripts/ui/hud.gd:236
+#: scripts/ui/hud.gd:244
 msgid "Evening"
 msgstr "傍晚"
 
@@ -6401,6 +6857,14 @@ msgstr "预估注册：每天 %.1f 位 · 已推出功能：%d · 下一个功�
 #: scripts/sim/shop_life.gd:35
 msgid "Expensive"
 msgstr "偏贵"
+
+#: data/story/personal/ken.json
+msgid "Explain the due date and the cash needed to pay"
+msgstr "说明到期日与付款所需现金"
+
+#: data/story/personal/nina.json
+msgid "Explain the repair and show both real prices"
+msgstr "说明修补方式并列出两种实际价格"
 
 #: data/help/patch_notes.json
 msgid "Explore 10 city districts and build your company through all 12 story chapters."
@@ -6958,6 +7422,10 @@ msgstr "车场上的泡水车"
 msgid "Floor-plan interest"
 msgstr "车辆融资利息"
 
+#: data/economy/personal_life.json
+msgid "Flowers gift"
+msgstr "花束礼物"
+
 #: scripts/sim/cafe.gd:314
 msgid "Flyers and a board for %s"
 msgstr "%s 的传单和立牌"
@@ -7102,6 +7570,26 @@ msgstr "品牌经销商"
 msgid "Frank Doyle"
 msgstr "Frank Doyle"
 
+#: data/story/personal/frank_doyle.json
+msgid "Frank Doyle asks for a auction condition disclosure. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Frank Doyle 请你协助整理拍卖车况揭露，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/frank_doyle.json
+msgid "Frank Doyle is ready to introduce a paying client for the auction condition disclosure. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Frank Doyle 准备引荐愿意付费的客户，委托内容是拍卖车况揭露。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
+#: data/story/personal/frank_doyle.json
+msgid "Frank Doyle: auction condition disclosure · part 1"
+msgstr "Frank Doyle：拍卖车况揭露・第 1 段"
+
+#: data/story/personal/frank_doyle.json
+msgid "Frank Doyle: auction condition disclosure · part 2"
+msgstr "Frank Doyle：拍卖车况揭露・第 2 段"
+
+#: data/story/personal/frank_doyle.json
+msgid "Frank Doyle: auction condition disclosure · part 3"
+msgstr "Frank Doyle：拍卖车况揭露・第 3 段"
+
 #: data/jobs/barista.json
 msgid "Free coffee at Bloom Coffee while you work there."
 msgstr "在 Bloom Coffee 工作期间，咖啡免费。"
@@ -7109,6 +7597,10 @@ msgstr "在 Bloom Coffee 工作期间，咖啡免费。"
 #: data/jobs/cowork_host.json
 msgid "Free hot-desk access at Nexus Co-work while you work there."
 msgstr "在 Nexus 共享办公室工作期间，可免费使用共享座位。"
+
+#: scripts/ui/modals/contacts_modal.gd:11
+msgid "Free recovery day · 480 minutes"
+msgstr "免费休养一天・480 分钟"
 
 #: data/events/rail_frozen.json
 msgid "Free. {supplier} ships once the bridge reopens ({until}). The payment lands at {ratio} and you cover the {lost} gap."
@@ -7141,6 +7633,10 @@ msgstr "Fresh+ 超市"
 #: autoload/clock.gd:13
 msgid "Fri"
 msgstr "五"
+
+#: scripts/sim/personal_life.gd:31
+msgid "Friend"
+msgstr "朋友"
 
 #: data/economy/staff.json
 msgid "Friendly: lifts everyone's morale a little each week."
@@ -7257,6 +7753,10 @@ msgstr "动工前请备妥第一期工程款。"
 #: scripts/sim/jobs.gd:67
 msgid "Fund the next construction milestone."
 msgstr "请备妥下一期工程款。"
+
+#: scripts/sim/personal_life.gd:175
+msgid "Fund the referral's supplies before working."
+msgstr "先备妥引荐工作的材料费再开工。"
 
 #: scripts/sim/tax.gd:91
 msgid "Fund the tax payment and filing fee first."
@@ -7398,7 +7898,7 @@ msgstr "好答案。在需要之前就来找我。"
 msgid "Good for the price."
 msgstr "以这个价格来说不错。"
 
-#: scripts/ui/modals/sleep_modal.gd:45
+#: scripts/ui/modals/sleep_modal.gd:48
 msgid "Good morning. %s."
 msgstr "早安。%s。"
 
@@ -7645,6 +8145,14 @@ msgstr "成长阶段"
 #: scripts/ui/hotel_ui.gd:280
 msgid "GrowthNextBoard"
 msgstr "GrowthNextBoard"
+
+#: data/story/personal/nina.json
+msgid "Guarantee every garment without inspection"
+msgstr "不检查就保证每件都能修补"
+
+#: data/story/personal/ana.json data/story/personal/daniel.json data/story/personal/dara.json data/story/personal/diane_harlow.json
+msgid "Guarantee the result to win the introduction"
+msgstr "保证成果以取得引荐"
 
 #: scripts/sim/hotel.gd:94
 msgid "Guest rating at least %.1f (now %.1f)."
@@ -7922,9 +8430,33 @@ msgstr "你好，我是 %s，来找 %s 开会。"
 msgid "Help"
 msgstr "说明"
 
+#: scripts/ui/modals/contacts_modal.gd:42
+msgid "Help · %d minutes · %s"
+msgstr "协助・%d 分钟・%s"
+
 #: data/npcs/henri_dubois.json
 msgid "Henri Dubois"
 msgstr "Henri Dubois"
+
+#: data/story/personal/henri_dubois.json
+msgid "Henri Dubois asks for a hotel history archive. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Henri Dubois 请你协助整理旅馆历史数据，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/henri_dubois.json
+msgid "Henri Dubois is ready to introduce a paying client for the hotel history archive. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Henri Dubois 准备引荐愿意付费的客户，委托内容是旅馆历史数据。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
+#: data/story/personal/henri_dubois.json
+msgid "Henri Dubois: hotel history archive · part 1"
+msgstr "Henri Dubois：旅馆历史数据・第 1 段"
+
+#: data/story/personal/henri_dubois.json
+msgid "Henri Dubois: hotel history archive · part 2"
+msgstr "Henri Dubois：旅馆历史数据・第 2 段"
+
+#: data/story/personal/henri_dubois.json
+msgid "Henri Dubois: hotel history archive · part 3"
+msgstr "Henri Dubois：旅馆历史数据・第 3 段"
 
 #: data/dialogue/okafor_intro.json
 msgid "Here are the papers. Read them. Then read them again."
@@ -7973,6 +8505,18 @@ msgstr "反光背心、工作裤、钢头靴。仓库日专用。"
 #: scripts/ui/automotive_ui.gd:124
 msgid "Hidden defects unknown. Paid inspection: %s."
 msgstr "隐藏瑕疵未知。付费验车：%s。"
+
+#: data/story/personal/nina.json
+msgid "Hide the cases that cannot be repaired"
+msgstr "隐藏无法修补的案例"
+
+#: data/story/personal/ken.json
+msgid "Hide the due date until delivery"
+msgstr "交货前隐藏到期日"
+
+#: data/story/personal/ana.json data/story/personal/daniel.json data/story/personal/dara.json data/story/personal/diane_harlow.json
+msgid "Hide the unresolved section"
+msgstr "隐藏尚未厘清的部分"
 
 #: scripts/ui/minigames/auction_game.gd:59
 msgid "High bidder: %s · with fee %s"
@@ -8114,7 +8658,7 @@ msgstr "住宅屋顶"
 msgid "Honest. I respect it."
 msgstr "很诚实。我欣赏。"
 
-#: scripts/world/actions.gd:286
+#: scripts/world/actions.gd:287
 msgid "Honestly? I'm looking at other jobs."
 msgstr "老实说？我在看其他工作了。"
 
@@ -8153,6 +8697,10 @@ msgstr "Hotel Meridian"
 #: data/rivals/hotel_1.json
 msgid "Hotel Vale"
 msgstr "Hotel Vale"
+
+#: data/economy/personal_life.json
+msgid "Hotel channels charge commission; an OTA placement still needs a truthful page and paying guests."
+msgstr "旅馆通路会收佣金。OTA 版位仍需要真实的页面内容与付费旅客。"
 
 #: data/npcs/vera_stone.json
 msgid "Hotel critic"
@@ -8470,7 +9018,7 @@ msgstr "清算危机（第 5 年）期间，汇到国外的钱要好几天才到
 msgid "In the workshop"
 msgstr "整备中"
 
-#: scripts/ui/modals/company_os.gd:513 scripts/ui/phone_ui.gd:277
+#: scripts/ui/modals/company_os.gd:513 scripts/ui/phone_ui.gd:280
 msgid "In transit"
 msgstr "运送中"
 
@@ -8622,13 +9170,21 @@ msgstr "安装与保固"
 msgid "Installs pay once with a warranty tail; chargers earn per kWh and track EV adoption."
 msgstr "安装案收一次款但有保固尾巴；充电站按度数赚钱，并随电动车普及率成长。"
 
-#: scripts/sim/shop_life.gd:118
+#: scripts/sim/shop_life.gd:119
 msgid "Insufficient cash for the sponsored report — decline or earn money."
 msgstr "现金不足以支付赞助报导——请婉拒或先赚取收入。"
+
+#: scripts/sim/personal_life.gd:47 scripts/sim/personal_life.gd:64 scripts/sim/personal_life.gd:80 scripts/ui/modals/contacts_modal.gd:55
+msgid "Insufficient personal cash — earn money before this request."
+msgstr "个人现金不足，先赚钱再处理请求。"
 
 #: scripts/sim/shop_life.gd:55
 msgid "Insufficient personal cash — return after earning money."
 msgstr "个人现金不足——请先赚取收入。"
+
+#: scripts/sim/personal_life.gd:116
+msgid "Insufficient personal cash — take a free recovery day."
+msgstr "个人现金不足，请选择免费休养一天。"
 
 #: data/products/water_bottle.json
 msgid "Insulated Water Bottle"
@@ -8765,6 +9321,18 @@ msgstr "实习生薪资较低，但制作较慢。聘用设计师和媒体采购
 #: scripts/sim/manufacturing.gd:115
 msgid "Invalid order terms."
 msgstr "订单条件无效。"
+
+#: data/story/personal/nina.json
+msgid "Invent a certificate number"
+msgstr "编造认证编号"
+
+#: data/story/personal/ana.json data/story/personal/daniel.json data/story/personal/dara.json data/story/personal/diane_harlow.json
+msgid "Invent a confident answer"
+msgstr "编造肯定的答案"
+
+#: data/story/personal/ken.json
+msgid "Invent the missing document"
+msgstr "编造缺漏文档"
 
 #: scripts/ui/modals/company_os.gd:7
 msgid "Inventory"
@@ -8982,6 +9550,10 @@ msgstr "Jun"
 msgid "Jun Ito"
 msgstr "Jun Ito"
 
+#: data/story/personal/jun_ito.json
+msgid "Jun Ito asks for a repair appointment checklist. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Jun Ito 请你协助整理维修预约核对表，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
 #: scripts/ui/automotive_ui.gd:122
 msgid "Jun Ito found %s: true value %s."
 msgstr "Jun Ito 发现%s：实际价值 %s。"
@@ -8990,13 +9562,49 @@ msgstr "Jun Ito 发现%s：实际价值 %s。"
 msgid "Jun Ito has already inspected this car."
 msgstr "Jun Ito 已验过这辆车。"
 
+#: data/story/personal/jun_ito.json
+msgid "Jun Ito is ready to introduce a paying client for the repair appointment checklist. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Jun Ito 准备引荐愿意付费的客户，委托内容是维修预约核对表。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
 #: scripts/ui/automotive_ui.gd:120
 msgid "Jun Ito: no hidden defect found."
 msgstr "Jun Ito：没有发现隐藏瑕疵。"
 
+#: data/story/personal/jun_ito.json
+msgid "Jun Ito: repair appointment checklist · part 1"
+msgstr "Jun Ito：维修预约核对表・第 1 段"
+
+#: data/story/personal/jun_ito.json
+msgid "Jun Ito: repair appointment checklist · part 2"
+msgstr "Jun Ito：维修预约核对表・第 2 段"
+
+#: data/story/personal/jun_ito.json
+msgid "Jun Ito: repair appointment checklist · part 3"
+msgstr "Jun Ito：维修预约核对表・第 3 段"
+
+#: data/story/personal/jun.json
+msgid "Jun asks for a reusable cup menu. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Jun 请你协助整理环保杯饮品菜单，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/jun.json
+msgid "Jun is ready to introduce a paying client for the reusable cup menu. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Jun 准备引荐愿意付费的客户，委托内容是环保杯饮品菜单。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
 #: data/events/automotive_flood.json
 msgid "Jun spotted water lines under the carpet of a car you bought at auction. Disclose it and cut the price, pay for a repair, or list it quietly and hope."
 msgstr "Jun 在你拍卖买的车的地毯下发现水痕。可以揭露并降价、花钱修复，或悄悄上架碰运气。"
+
+#: data/story/personal/jun.json
+msgid "Jun: reusable cup menu · part 1"
+msgstr "Jun：环保杯饮品菜单・第 1 段"
+
+#: data/story/personal/jun.json
+msgid "Jun: reusable cup menu · part 2"
+msgstr "Jun：环保杯饮品菜单・第 2 段"
+
+#: data/story/personal/jun.json
+msgid "Jun: reusable cup menu · part 3"
+msgstr "Jun：环保杯饮品菜单・第 3 段"
 
 #: scripts/ui/minigames/barista_game.gd:10
 msgid "June"
@@ -9058,6 +9666,26 @@ msgstr "Kai Morgan"
 msgid "Kai Morgan KOL"
 msgstr "Kai Morgan 创作者合作"
 
+#: data/story/personal/kai_morgan.json
+msgid "Kai Morgan asks for a sponsorship disclosure guide. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Kai Morgan 请你协助整理赞助揭露指南，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/kai_morgan.json
+msgid "Kai Morgan is ready to introduce a paying client for the sponsorship disclosure guide. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Kai Morgan 准备引荐愿意付费的客户，委托内容是赞助揭露指南。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
+#: data/story/personal/kai_morgan.json
+msgid "Kai Morgan: sponsorship disclosure guide · part 1"
+msgstr "Kai Morgan：赞助揭露指南・第 1 段"
+
+#: data/story/personal/kai_morgan.json
+msgid "Kai Morgan: sponsorship disclosure guide · part 2"
+msgstr "Kai Morgan：赞助揭露指南・第 2 段"
+
+#: data/story/personal/kai_morgan.json
+msgid "Kai Morgan: sponsorship disclosure guide · part 3"
+msgstr "Kai Morgan：赞助揭露指南・第 3 段"
+
 #: data/regions/karu.json
 msgid "Karu"
 msgstr "卡鲁"
@@ -9098,6 +9726,10 @@ msgstr "让商品维持上架且有库存。"
 msgid "Keep my budget"
 msgstr "预算不变"
 
+#: scripts/ui/modals/social_calendar_modal.gd:21
+msgid "Keep my plans"
+msgstr "维持原计划"
+
 #: data/events/ad_cost_spike.json
 msgid "Keep reach, spend more."
 msgstr "维持曝光，花更多钱。"
@@ -9118,6 +9750,18 @@ msgstr "请在公司帐户保留车商执照费。"
 msgid "Keep the fleet on rent."
 msgstr "让车队持续出租。"
 
+#: data/story/personal/ana.json data/story/personal/daniel.json data/story/personal/dara.json data/story/personal/diane_harlow.json
+msgid "Keep the newest note without checking"
+msgstr "不查核，直接采用最新纪录"
+
+#: data/story/personal/maya.json
+msgid "Keep the old hours to avoid admitting a mistake"
+msgstr "保留旧时间以免承认错误"
+
+#: data/story/personal/sam.json
+msgid "Keep the unlimited-uptime promise"
+msgstr "保留永不停驶的承诺"
+
 #: data/story/chapters.json
 msgid "Keep {company} stocked through the shock: 100 units in hand or on the way"
 msgstr "让 {company} 撑过冲击不断货：手上加在途至少 100 件"
@@ -9129,6 +9773,18 @@ msgstr "Ken"
 #: data/events/supply_shock_plan.json
 msgid "Ken again. Here are your options, straight."
 msgstr "又是 Ken。直接说你的选项。"
+
+#: data/story/personal/ken.json
+msgid "Ken finds a net-term invoice was described as free credit. It actually has a due date and must be paid. What goes into the training guide?"
+msgstr "Ken 发现有人把票期发票说成免费额度，其实发票有付款期限且必须付款。培训指南应写什么？"
+
+#: data/story/personal/ken.json
+msgid "Ken introduces a buyer asking for a supplier invoice checklist. A missing document cannot be confirmed today. What handover can you provide?"
+msgstr "Ken 引荐一位需要供应商发票核对表的买方。有份缺漏文档今天无法确认，你能提供什么交付数据？"
+
+#: data/story/personal/ken.json
+msgid "Ken wants a new founder to understand a wholesale invoice. The offer has a minimum order quantity and a delivery lead time. Which explanation helps?"
+msgstr "Ken 希望新创办人看懂批发发票。报价有最低采购量与交货前置时间，哪种说明有帮助？"
 
 #: data/dialogue/ken_intro.json
 msgid "Ken. TradeLink Wholesale."
@@ -9161,6 +9817,18 @@ msgstr "Ken：「急单，明天到。你欠我一杯咖啡。」"
 #: data/events/supplier_price_increase.json
 msgid "Ken: \"Smart. Shipping tomorrow.\""
 msgstr "Ken：「聪明。明天出货。」"
+
+#: data/story/personal/ken.json
+msgid "Ken: supplier invoice checklist · part 1"
+msgstr "Ken：供应商发票核对表・第 1 段"
+
+#: data/story/personal/ken.json
+msgid "Ken: supplier invoice checklist · part 2"
+msgstr "Ken：供应商发票核对表・第 2 段"
+
+#: data/story/personal/ken.json
+msgid "Ken: supplier invoice checklist · part 3"
+msgstr "Ken：供应商发票核对表・第 3 段"
 
 #: data/buildings/kessler_precision.json scripts/sim/manufacturing.gd:95
 msgid "Kessler Precision"
@@ -9514,9 +10182,33 @@ msgstr "租约必须用登记公司的名义签。"
 msgid "Leave early"
 msgstr "提早离开"
 
+#: data/story/personal/ana.json data/story/personal/daniel.json data/story/personal/dara.json data/story/personal/diane_harlow.json
+msgid "Leave the risks out of the handover"
+msgstr "交付数据不提风险"
+
 #: data/npcs/lee.json scripts/sim/staff.gd:121 scripts/ui/minigames/pack_game.gd:76
 msgid "Lee"
 msgstr "Lee"
+
+#: data/story/personal/lee.json
+msgid "Lee asks for a accessible cafe signage. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Lee 请你协助整理咖啡店无障碍标示，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/lee.json
+msgid "Lee is ready to introduce a paying client for the accessible cafe signage. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Lee 准备引荐愿意付费的客户，委托内容是咖啡店无障碍标示。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
+#: data/story/personal/lee.json
+msgid "Lee: accessible cafe signage · part 1"
+msgstr "Lee：咖啡店无障碍标示・第 1 段"
+
+#: data/story/personal/lee.json
+msgid "Lee: accessible cafe signage · part 2"
+msgstr "Lee：咖啡店无障碍标示・第 2 段"
+
+#: data/story/personal/lee.json
+msgid "Lee: accessible cafe signage · part 3"
+msgstr "Lee：咖啡店无障碍标示・第 3 段"
 
 #: data/economy/marketplace.json
 msgid "Left earbud's dead. Out of the box."
@@ -9561,6 +10253,26 @@ msgstr "Lena"
 #: data/npcs/lena_park.json scripts/sim/manufacturing.gd:95
 msgid "Lena Park"
 msgstr "Lena Park"
+
+#: data/story/personal/lena_park.json
+msgid "Lena Park asks for a OEM quality evidence. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Lena Park 请你协助整理OEM 品质证据，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/lena_park.json
+msgid "Lena Park is ready to introduce a paying client for the OEM quality evidence. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Lena Park 准备引荐愿意付费的客户，委托内容是OEM 品质证据。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
+#: data/story/personal/lena_park.json
+msgid "Lena Park: OEM quality evidence · part 1"
+msgstr "Lena Park：OEM 品质证据・第 1 段"
+
+#: data/story/personal/lena_park.json
+msgid "Lena Park: OEM quality evidence · part 2"
+msgstr "Lena Park：OEM 品质证据・第 2 段"
+
+#: data/story/personal/lena_park.json
+msgid "Lena Park: OEM quality evidence · part 3"
+msgstr "Lena Park：OEM 品质证据・第 3 段"
 
 #: scripts/sim/bank.gd:144
 msgid "Lending capacity"
@@ -9630,7 +10342,7 @@ msgstr "执照已续期到 %s。"
 msgid "Licensing Officer"
 msgstr "执照承办员"
 
-#: scripts/ui/phone_ui.gd:291
+#: scripts/ui/phone_ui.gd:294
 msgid "Life Timeline"
 msgstr "人生纪录"
 
@@ -9654,9 +10366,17 @@ msgstr "灯光"
 msgid "Lina Zhao"
 msgstr "Lina Zhao"
 
+#: data/story/personal/lina.json
+msgid "Lina Zhao asks for a import document checklist. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Lina Zhao 请你协助整理进口文档核对表，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
 #: data/story/chapters.json
 msgid "Lina Zhao has an offer for importers: talk to her at Nexus Bank (weekdays 10–16), or wait for her call"
 msgstr "Lina Zhao 有个给进口商的提案：到 Nexus 银行找她（平日 10–16 点），或等她来电"
+
+#: data/story/personal/lina.json
+msgid "Lina Zhao is ready to introduce a paying client for the import document checklist. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Lina Zhao 准备引荐愿意付费的客户，委托内容是进口文档核对表。客户要求你做出无法验证的承诺，交付数据应如何写？"
 
 #: data/dialogue/lina_intro.json
 msgid "Lina Zhao. I run a cross-border payments startup; Nexus lets me hold office hours here. Let me guess: you paid a supplier abroad and the money hasn't landed."
@@ -9673,6 +10393,18 @@ msgstr "我是 Lina Zhao。从春天到现在交易量成长三倍，我认识�
 #: data/story/chapters.json
 msgid "Lina Zhao. We launched something for importers: escrow on delivery. It's optional. Come by Nexus Bank, weekdays 10 to 4, and I'll show you."
 msgstr "我是 Lina Zhao。我们推出了给进口商的新东西：货到放款托管，可用可不用。平日 10 点到 4 点来 Nexus 银行，我带你看。"
+
+#: data/story/personal/lina.json
+msgid "Lina Zhao: import document checklist · part 1"
+msgstr "Lina Zhao：进口文档核对表・第 1 段"
+
+#: data/story/personal/lina.json
+msgid "Lina Zhao: import document checklist · part 2"
+msgstr "Lina Zhao：进口文档核对表・第 2 段"
+
+#: data/story/personal/lina.json
+msgid "Lina Zhao: import document checklist · part 3"
+msgstr "Lina Zhao：进口文档核对表・第 3 段"
 
 #: data/events/escrow_offer.json
 msgid "Lina: \"Done. Use it on one order first and watch what it does.\""
@@ -9725,6 +10457,10 @@ msgstr "先在 ShopLane 上架一项绿色商品。"
 #: data/help/help.json
 msgid "List a product you have in stock. Shoot the photos yourself (a photo shoot you play) or pay Studio Lumen $120 for pro photos."
 msgstr "有库存的商品才能上架。可以自己拍照（亲手操作的拍摄），或付 Studio Lumen $120 拍专业照片。"
+
+#: data/story/personal/ken.json
+msgid "List checked documents and the missing item"
+msgstr "列出已查核文档与缺漏项目"
 
 #: scripts/ui/automotive_ui.gd:188
 msgid "List for sale"
@@ -10162,7 +10898,7 @@ msgstr "Manufacturing Meridian"
 msgid "Manufacturing Vale"
 msgstr "Manufacturing Vale"
 
-#: scripts/ui/hud.gd:112 scripts/ui/modals/settings_modal.gd:7
+#: scripts/ui/hud.gd:119 scripts/ui/modals/settings_modal.gd:7
 msgid "Map"
 msgstr "地图"
 
@@ -10210,13 +10946,41 @@ msgstr "Mara Lindqvist"
 msgid "Mara Quinn"
 msgstr "Mara Quinn"
 
+#: data/story/personal/mara_quinn.json
+msgid "Mara Quinn asks for a franchise training outline. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Mara Quinn 请你协助整理加盟培训大纲，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/mara_quinn.json
+msgid "Mara Quinn is ready to introduce a paying client for the franchise training outline. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Mara Quinn 准备引荐愿意付费的客户，委托内容是加盟培训大纲。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
+#: data/story/personal/mara_quinn.json
+msgid "Mara Quinn: franchise training outline · part 1"
+msgstr "Mara Quinn：加盟培训大纲・第 1 段"
+
+#: data/story/personal/mara_quinn.json
+msgid "Mara Quinn: franchise training outline · part 2"
+msgstr "Mara Quinn：加盟培训大纲・第 2 段"
+
+#: data/story/personal/mara_quinn.json
+msgid "Mara Quinn: franchise training outline · part 3"
+msgstr "Mara Quinn：加盟培训大纲・第 3 段"
+
 #: data/npcs/marcus.json
 msgid "Marcus Reed"
 msgstr "Marcus Reed"
 
+#: data/story/personal/marcus.json
+msgid "Marcus Reed asks for a loan application cash-flow guide. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Marcus Reed 请你协助整理贷款申请现金流指南，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
 #: data/story/chapters.json
 msgid "Marcus Reed here. Big invoices on long terms are how profitable companies run out of cash. My door's open, weekdays 1 to 4."
 msgstr "我是 Marcus Reed。帐期很长的大笔发票，正是赚钱的公司会没现金的原因。平日下午 1 到 4 点，我的门是开着的。"
+
+#: data/story/personal/marcus.json
+msgid "Marcus Reed is ready to introduce a paying client for the loan application cash-flow guide. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Marcus Reed 准备引荐愿意付费的客户，委托内容是贷款申请现金流指南。客户要求你做出无法验证的承诺，交付数据应如何写？"
 
 #: scripts/ui/modals/loan_modal.gd:85
 msgid "Marcus Reed signs loans in person (weekdays 13:00–16:00, Nexus Bank)."
@@ -10237,6 +11001,18 @@ msgstr "我是 Marcus Reed。国际电汇现在要一周以上才入帐。有做
 #: scripts/sim/rails.gd:204
 msgid "Marcus Reed. Wires and letters of credit are unaffected. If the freeze is squeezing your cash, ask me about a bridge loan: weekdays 1 to 4."
 msgstr "我是 Marcus Reed。电汇和信用状不受影响。冻结让你现金吃紧的话，来问我过渡贷款：平日 1 点到 4 点。"
+
+#: data/story/personal/marcus.json
+msgid "Marcus Reed: loan application cash-flow guide · part 1"
+msgstr "Marcus Reed：贷款申请现金流指南・第 1 段"
+
+#: data/story/personal/marcus.json
+msgid "Marcus Reed: loan application cash-flow guide · part 2"
+msgstr "Marcus Reed：贷款申请现金流指南・第 2 段"
+
+#: data/story/personal/marcus.json
+msgid "Marcus Reed: loan application cash-flow guide · part 3"
+msgstr "Marcus Reed：贷款申请现金流指南・第 3 段"
 
 #: data/events/rail_frozen.json
 msgid "Marcus lends {loan} for 3 months at {apr}. You pay {supplier} by wire now, and repay early with no penalty when the frozen money returns."
@@ -10270,6 +11046,10 @@ msgstr "毛利维持，但充电的车主变少。"
 msgid "Margins shrink while the tariff eases over two months."
 msgstr "电价在两个月内逐步回落，期间毛利缩水。"
 
+#: data/story/personal/ken.json
+msgid "Mark every document as confirmed"
+msgstr "将所有文档标为已确认"
+
 #: data/help/help.json scripts/ui/modals/company_os.gd:8
 msgid "Market"
 msgstr "市场"
@@ -10278,7 +11058,7 @@ msgstr "市场"
 msgid "Market competition"
 msgstr "市场竞争"
 
-#: scripts/ui/market_view.gd:8 scripts/ui/phone_ui.gd:350
+#: scripts/ui/market_view.gd:8 scripts/ui/phone_ui.gd:353
 msgid "Market conditions"
 msgstr "市场状况"
 
@@ -10394,13 +11174,33 @@ msgstr "5月"
 msgid "Maya"
 msgstr "Maya"
 
+#: data/story/personal/maya.json
+msgid "Maya found that her old welcome guide lists a cafe as open at night, but its current timetable ends at 18:00. What should the revision say?"
+msgstr "Maya 发现旧迎新指南说咖啡店晚上仍营业，但目前时刻表显示 18:00 关门。修订时应怎么写？"
+
 #: data/help/patch_notes.json
 msgid "Maya helps you resume the tutorial when loading a game, and coding exercises focus on a few key lines."
 msgstr "读档后 Maya 会协助接续教学；程序练习聚焦在几行关键代码。"
 
+#: data/story/personal/maya.json
+msgid "Maya is making a welcome walk for a neighbour who uses a wheelchair. The park has a step-free path, while the shortcut has stairs. Which route belongs in the guide?"
+msgstr "Maya 正为使用轮椅的新邻居规划迎新散步。公园有无阶梯步道，捷径却有楼梯。指南应采用哪条路线？"
+
 #: data/events/viral_mention.json
 msgid "Maya: \"Enjoy your 15 minutes, superstar.\""
 msgstr "Maya：「好好享受你的 15 分钟成名时刻，大明星。」"
+
+#: data/story/personal/maya.json
+msgid "Maya: neighbour welcome guide · part 1"
+msgstr "Maya：邻里迎新指南・第 1 段"
+
+#: data/story/personal/maya.json
+msgid "Maya: neighbour welcome guide · part 2"
+msgstr "Maya：邻里迎新指南・第 2 段"
+
+#: data/story/personal/maya.json
+msgid "Maya: neighbour welcome guide · part 3"
+msgstr "Maya：邻里迎新指南・第 3 段"
 
 #: data/dialogue/marcus_loan.json
 msgid "Maybe. Register a company, open an account with us, and give it a couple of weeks."
@@ -10446,6 +11246,10 @@ msgstr "媒体配置"
 msgid "Media studio"
 msgstr "媒体工作室"
 
+#: scripts/ui/modals/contacts_modal.gd:13
+msgid "Medical visit · %s · 90 minutes"
+msgstr "看诊・%s・90 分钟"
+
 #: scripts/ui/modals/settings_modal.gd:37
 msgid "Medium"
 msgstr "中"
@@ -10478,6 +11282,18 @@ msgstr "请先满足所有经销条件。"
 msgid "Meet every growth condition first."
 msgstr "请先满足所有成长条件。"
 
+#: data/help/help.json
+msgid "Meet people in town or at monthly city events. Contacts shows their stage, preferred gifts and next request."
+msgstr "在城里或每月城市活动认识人。联系人会显示关系阶段、送礼偏好与下一项请求。"
+
+#: scripts/sim/personal_life.gd:60
+msgid "Meet this person before offering a gift."
+msgstr "先认识这个人再送礼。"
+
+#: scripts/sim/personal_life.gd:38
+msgid "Meet this person in town or at a city event first."
+msgstr "先在城里或城市活动认识这个人。"
+
 #: scripts/sim/shop_life.gd:49
 msgid "Membership already renews — choose a class."
 msgstr "会员已自动续约——请选择课程。"
@@ -10490,7 +11306,7 @@ msgstr "会员与商业人脉"
 msgid "Membership renews monthly from personal cash. Cancel to stop future fees; paid access lasts to its expiry."
 msgstr "会员每月从个人现金续约。取消后停止后续收费，已付费资格保留至到期。"
 
-#: scripts/ui/hud.gd:113 scripts/ui/modals/company_os.gd:1281
+#: scripts/ui/hud.gd:120 scripts/ui/modals/company_os.gd:1281
 msgid "Menu"
 msgstr "菜单"
 
@@ -10522,7 +11338,7 @@ msgstr "Meridian Trail 休旅车"
 msgid "Meridian and Volt sell steady volume on thin margins. You need a ten-car fleet, a showroom and a deposit, and you must always keep new cars on the floor. Service tickets after the sale are where the dealership earns."
 msgstr "Meridian 与 Volt 靠薄利稳定走量。你需要十辆车队、展示中心和保证金，而且展场必须随时有新车。卖车后的保养工单才是经销商真正赚钱的地方。"
 
-#: scripts/ui/phone_ui.gd:135 scripts/ui/phone_ui.gd:192
+#: scripts/ui/phone_ui.gd:135 scripts/ui/phone_ui.gd:195
 msgid "Messages"
 msgstr "消息"
 
@@ -10690,9 +11506,13 @@ msgstr "月结——%s"
 msgid "Month close"
 msgstr "月结"
 
-#: scripts/ui/phone_ui.gd:278
+#: scripts/ui/phone_ui.gd:281
 msgid "Month sales"
 msgstr "本月销售"
+
+#: scripts/ui/modals/social_calendar_modal.gd:12
+msgid "Monthly day %d · %02d:00–%02d:00 · %d minutes · %s"
+msgstr "每月 %d 日・%02d:00–%02d:00・%d 分钟・%s"
 
 #: scripts/ui/modals/cowork_desk_modal.gd:26
 msgid "Monthly hot desk ($350)"
@@ -10750,7 +11570,7 @@ msgstr "订户增加时，营收与服务器费用一起增加；订阅定价要
 msgid "Moreau"
 msgstr "Moreau"
 
-#: scripts/ui/hud.gd:236
+#: scripts/ui/hud.gd:244
 msgid "Morning · Sunny"
 msgstr "早上 · 晴"
 
@@ -10806,6 +11626,10 @@ msgstr "向上移动"
 msgid "Moved to Aurelia City with $%s in savings."
 msgstr "带着 $%s 的存款搬到奥瑞莉亚市。"
 
+#: data/help/glossary.json
+msgid "Movement and hands-on work use energy. Sleep and breaks restore it. Below 30%, timed tasks offer less reaction time; no points are directly deducted."
+msgstr "移动与亲手工作会耗体力，睡眠和休息可以恢复。低于 30% 时，限时操作的反应时间变少，不会直接扣分。"
+
 #: scripts/ui/tutorial.gd:20
 msgid "Moving around"
 msgstr "移动"
@@ -10818,6 +11642,34 @@ msgstr "Okafor 先生"
 msgid "Mr. Okafor (landlord)"
 msgstr "Okafor 先生（房东）"
 
+#: data/story/personal/landlord.json
+msgid "Mr. Okafor (landlord) asks for a tenant maintenance handbook. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Mr. Okafor (landlord) 请你协助整理租户保养手册，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/landlord.json
+msgid "Mr. Okafor (landlord) is ready to introduce a paying client for the tenant maintenance handbook. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Mr. Okafor (landlord) 准备引荐愿意付费的客户，委托内容是租户保养手册。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
+#: data/story/personal/landlord.json
+msgid "Mr. Okafor (landlord): tenant maintenance handbook · part 1"
+msgstr "Mr. Okafor (landlord)：租户保养手册・第 1 段"
+
+#: data/story/personal/landlord.json
+msgid "Mr. Okafor (landlord): tenant maintenance handbook · part 2"
+msgstr "Mr. Okafor (landlord)：租户保养手册・第 2 段"
+
+#: data/story/personal/landlord.json
+msgid "Mr. Okafor (landlord): tenant maintenance handbook · part 3"
+msgstr "Mr. Okafor (landlord)：租户保养手册・第 3 段"
+
+#: data/story/personal/okafor.json
+msgid "Mr. Okafor asks for a Old Town lease explanation. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Mr. Okafor 请你协助整理Old Town 租约说明，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/okafor.json
+msgid "Mr. Okafor is ready to introduce a paying client for the Old Town lease explanation. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Mr. Okafor 准备引荐愿意付费的客户，委托内容是Old Town 租约说明。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
 #: data/properties/corner_cafe.json
 msgid "Mr. Okafor leases to registered companies only."
 msgstr "Okafor 先生只租给已登记的公司。"
@@ -10826,9 +11678,41 @@ msgstr "Okafor 先生只租给已登记的公司。"
 msgid "Mr. Okafor: \"Keys, meter readings, and my number. The espresso smell is included.\""
 msgstr "Okafor 先生：「钥匙、水电表读数，还有我的电话。咖啡香是附赠的。」"
 
+#: data/story/personal/okafor.json
+msgid "Mr. Okafor: Old Town lease explanation · part 1"
+msgstr "Mr. Okafor：Old Town 租约说明・第 1 段"
+
+#: data/story/personal/okafor.json
+msgid "Mr. Okafor: Old Town lease explanation · part 2"
+msgstr "Mr. Okafor：Old Town 租约说明・第 2 段"
+
+#: data/story/personal/okafor.json
+msgid "Mr. Okafor: Old Town lease explanation · part 3"
+msgstr "Mr. Okafor：Old Town 租约说明・第 3 段"
+
 #: data/npcs/ms_okoro.json
 msgid "Ms. Okoro"
 msgstr "Ms. Okoro"
+
+#: data/story/personal/ms_okoro.json
+msgid "Ms. Okoro asks for a community energy questions. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Ms. Okoro 请你协助整理社区能源问题集，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/ms_okoro.json
+msgid "Ms. Okoro is ready to introduce a paying client for the community energy questions. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Ms. Okoro 准备引荐愿意付费的客户，委托内容是社区能源问题集。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
+#: data/story/personal/ms_okoro.json
+msgid "Ms. Okoro: community energy questions · part 1"
+msgstr "Ms. Okoro：社区能源问题集・第 1 段"
+
+#: data/story/personal/ms_okoro.json
+msgid "Ms. Okoro: community energy questions · part 2"
+msgstr "Ms. Okoro：社区能源问题集・第 2 段"
+
+#: data/story/personal/ms_okoro.json
+msgid "Ms. Okoro: community energy questions · part 3"
+msgstr "Ms. Okoro：社区能源问题集・第 3 段"
 
 #: autoload/preferences.gd:174 autoload/sound.gd:173 autoload/sound.gd:262 autoload/sound.gd:45
 msgid "Music"
@@ -11142,13 +12026,53 @@ msgstr "Nexus Property"
 msgid "Nia Park"
 msgstr "Nia Park"
 
-#: scripts/ui/hud.gd:236
+#: data/story/personal/student_intern.json
+msgid "Nia Park asks for a internship learning portfolio. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Nia Park 请你协助整理实习学习作品集，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/student_intern.json
+msgid "Nia Park is ready to introduce a paying client for the internship learning portfolio. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Nia Park 准备引荐愿意付费的客户，委托内容是实习学习作品集。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
+#: data/story/personal/student_intern.json
+msgid "Nia Park: internship learning portfolio · part 1"
+msgstr "Nia Park：实习学习作品集・第 1 段"
+
+#: data/story/personal/student_intern.json
+msgid "Nia Park: internship learning portfolio · part 2"
+msgstr "Nia Park：实习学习作品集・第 2 段"
+
+#: data/story/personal/student_intern.json
+msgid "Nia Park: internship learning portfolio · part 3"
+msgstr "Nia Park：实习学习作品集・第 3 段"
+
+#: scripts/ui/hud.gd:244
 msgid "Night"
 msgstr "夜晚"
 
 #: data/npcs/nina.json
 msgid "Nina"
 msgstr "Nina"
+
+#: data/story/personal/nina.json
+msgid "Nina is helping a customer repair a favourite jacket. A seam repair costs less than a replacement and the fabric is sound. What should the consultation offer?"
+msgstr "Nina 想帮客户修补心爱的外套。布料仍完好，缝线修补比换新便宜。咨询应提供什么？"
+
+#: data/story/personal/nina.json
+msgid "Nina refers a clothing workshop that wants a repair catalogue. They ask you to promise every garment can be repaired. What scope can you agree to?"
+msgstr "Nina 引荐一家需要修补目录的服装工作坊，对方要求保证每件衣服都能修补。你能约定什么范围？"
+
+#: data/story/personal/nina.json
+msgid "Nina: repairable clothing catalogue · part 1"
+msgstr "Nina：可修补服装目录・第 1 段"
+
+#: data/story/personal/nina.json
+msgid "Nina: repairable clothing catalogue · part 2"
+msgstr "Nina：可修补服装目录・第 2 段"
+
+#: data/story/personal/nina.json
+msgid "Nina: repairable clothing catalogue · part 3"
+msgstr "Nina：可修补服装目录・第 3 段"
 
 #: data/dialogue/okafor_intro.json
 msgid "Nineteen hundred a month, two months' deposit. It comes empty: you fit it out, and City Hall wants a food licence before you sell a single croissant."
@@ -11290,6 +12214,10 @@ msgstr "柜台没有人。"
 msgid "No outside purchase to replace yet."
 msgstr "目前还没有可以取代的外部采购。"
 
+#: scripts/sim/personal_life.gd:35
+msgid "No personal request — attend a city event."
+msgstr "目前没有个人请求，先参加城市活动。"
+
 #: scripts/ui/modals/dropoff_modal.gd:28
 msgid "No pickup fee when you bring them in."
 msgstr "自己拿来寄就不用收件费。"
@@ -11370,7 +12298,7 @@ msgstr "尚无交易。第一笔会在 22:00 结算。"
 msgid "No used cars on your lot. Win one at the Wednesday auction."
 msgstr "车场上没有中古车。到周三拍卖标一辆吧。"
 
-#: scripts/world/player.gd:175
+#: scripts/world/player.gd:176
 msgid "No walking route. Tap another spot on the ground."
 msgstr "找不到可走的路线，请点击地面其他位置。"
 
@@ -11590,7 +12518,7 @@ msgstr "没有可交易的内容。"
 msgid "Notification duration"
 msgstr "通知停留时间"
 
-#: scripts/ui/phone_ui.gd:271
+#: scripts/ui/phone_ui.gd:274
 msgid "Notifications only.\nManage at a desk: Company OS."
 msgstr "这里只显示通知。\n要管理请到办公桌：Company OS。"
 
@@ -11930,6 +12858,10 @@ msgstr "只有已登记的公司能申请。"
 msgid "Only registered companies can hold an import licence."
 msgstr "只有登记过的公司才能持有进口执照。"
 
+#: data/story/personal/sam.json
+msgid "Only the flattering photos"
+msgstr "只交付好看的照片"
+
 #: autoload/save_system.gd:385 scripts/ui/hotel_ui.gd:272 scripts/ui/modals/city_map_modal.gd:117 scripts/ui/modals/city_map_modal.gd:163
 msgid "Open"
 msgstr "打开"
@@ -12169,6 +13101,10 @@ msgstr "请先开设供应方的事业。"
 #: scripts/ui/tutorial.gd:27
 msgid "Open your phone"
 msgstr "打开手机"
+
+#: scripts/ui/modals/social_calendar_modal.gd:14
+msgid "Open — attend now or keep your plans."
+msgstr "开放中，现在参加或继续原本的计划。"
 
 #: scripts/ui/media_ui.gd:52
 msgid "OpenAgency"
@@ -12466,9 +13402,29 @@ msgstr "别人欠你（ShopLane＋发票）"
 msgid "Owen Blake"
 msgstr "Owen Blake"
 
+#: data/story/personal/owen_blake.json
+msgid "Owen Blake asks for a group travel accessibility plan. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Owen Blake 请你协助整理团体旅游无障碍计划，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/owen_blake.json
+msgid "Owen Blake is ready to introduce a paying client for the group travel accessibility plan. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Owen Blake 准备引荐愿意付费的客户，委托内容是团体旅游无障碍计划。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
 #: data/dialogue/owen_blake_intro.json
 msgid "Owen Blake, Blake Journeys. I move tour groups. Give me twenty-five percent off the rack rate and I will lock a block of rooms weeks ahead, then pay you thirty days after the stay."
 msgstr "我是 Owen Blake，Blake 旅游。我带旅行团。给我定价七五折，我就提前数周锁一批房，住宿结束三十天后付款。"
+
+#: data/story/personal/owen_blake.json
+msgid "Owen Blake: group travel accessibility plan · part 1"
+msgstr "Owen Blake：团体旅游无障碍计划・第 1 段"
+
+#: data/story/personal/owen_blake.json
+msgid "Owen Blake: group travel accessibility plan · part 2"
+msgstr "Owen Blake：团体旅游无障碍计划・第 2 段"
+
+#: data/story/personal/owen_blake.json
+msgid "Owen Blake: group travel accessibility plan · part 3"
+msgstr "Owen Blake：团体旅游无障碍计划・第 3 段"
 
 #: data/milestones.json
 msgid "Own Campus Radio."
@@ -12582,7 +13538,7 @@ msgstr "人数"
 msgid "PERMITS & REGISTRATIONS (AURELIA)"
 msgstr "许可与登记（奥瑞莉亚）"
 
-#: scripts/ui/hud.gd:210 scripts/ui/hud.gd:83
+#: scripts/ui/hud.gd:217 scripts/ui/hud.gd:90
 msgid "PERSONAL"
 msgstr "个人"
 
@@ -12666,7 +13622,7 @@ msgstr "已打包订单 %s"
 msgid "Packed well"
 msgstr "打包得很好"
 
-#: scripts/ui/phone_ui.gd:276
+#: scripts/ui/phone_ui.gd:279
 msgid "Packed, not shipped"
 msgstr "已打包未出货"
 
@@ -12809,6 +13765,10 @@ msgstr "部分退款 30%% %s：%s"
 #: data/events/customer_return.json
 msgid "Partial refund sent."
 msgstr "部分退款已送出。"
+
+#: scripts/sim/personal_life.gd:31
+msgid "Partner"
+msgstr "伙伴"
 
 #: scripts/ui/automotive_ui.gd:285
 msgid "Passenger flow"
@@ -13062,7 +14022,7 @@ msgstr "许可"
 msgid "Permits & regulations"
 msgstr "许可与法规"
 
-#: scripts/ui/modals/bank_modal.gd:60 scripts/ui/phone_ui.gd:232
+#: scripts/ui/modals/bank_modal.gd:60 scripts/ui/phone_ui.gd:235
 msgid "Personal"
 msgstr "个人"
 
@@ -13074,7 +14034,7 @@ msgstr "个人／独资"
 msgid "Personal Banker"
 msgstr "理财专员"
 
-#: scripts/ui/phone_ui.gd:280
+#: scripts/ui/phone_ui.gd:283
 msgid "Personal cap"
 msgstr "个人上限"
 
@@ -13082,9 +14042,25 @@ msgstr "个人上限"
 msgid "Personal checking"
 msgstr "个人活存"
 
+#: data/help/glossary.json
+msgid "Personal energy"
+msgstr "个人体力"
+
 #: scripts/sim/ledger.gd:31
 msgid "Personal fitness"
 msgstr "个人健身"
+
+#: scripts/sim/personal_life.gd:65
+msgid "Personal gift: %s"
+msgstr "个人礼物：%s"
+
+#: data/help/glossary.json
+msgid "Personal relationships"
+msgstr "个人关系"
+
+#: scripts/sim/personal_life.gd:50
+msgid "Personal request supplies: %s"
+msgstr "个人请求的材料：%s"
 
 #: scripts/ui/modals/tax_filing_modal.gd:21
 msgid "Personal seller VAT"
@@ -13098,7 +14074,11 @@ msgstr "个人卖家上限：本月已用 %s／%s。"
 msgid "Personal seller limit reached. Your listings are paused until next month — or until you register a business."
 msgstr "已达个人卖家上限。你的商品会暂停到下个月——或直到你登记公司。"
 
-#: scripts/ui/hud.gd:110 scripts/ui/modals/settings_modal.gd:7
+#: data/help/glossary.json
+msgid "Personal stress"
+msgstr "个人压力"
+
+#: scripts/ui/hud.gd:117 scripts/ui/modals/settings_modal.gd:7
 msgid "Phone"
 msgstr "手机"
 
@@ -13194,6 +14174,10 @@ msgstr "只能把面板放在空的屋顶格子上。"
 msgid "Place panels on roof cells. Shade, direction and the load limit change annual kWh and the client's payback."
 msgstr "把面板放在屋顶格子上。遮荫、方位和承重上限会改变年发电量与客户回本期。"
 
+#: data/story/personal/priya.json
+msgid "Placement terms, commission and the need for actual bookings"
+msgstr "版位条件、佣金与仍需实际订房"
+
 #: data/economy/freelance.json
 msgid "Plan a month of social posts for %s"
 msgstr "帮 %s 规划一个月的社群贴文"
@@ -13270,6 +14254,10 @@ msgstr "人口 320 万人 · 面积 62 平方公里 · 5 条捷运线"
 msgid "Porcelain"
 msgstr "白皙"
 
+#: data/economy/personal_life.json
+msgid "Port music festival"
+msgstr "港口音乐节"
+
 #: data/world/years.json
 msgid "Port of Aurelia backed up for a third week: 40 ships waiting."
 msgstr "奥瑞莉亚港连续第三周塞港：40 艘船在等。"
@@ -13333,6 +14321,10 @@ msgstr "拍卖前验车"
 #: data/regions/zenkai.json
 msgid "Precision manufacturing"
 msgstr "精密制造"
+
+#: scripts/ui/modals/contacts_modal.gd:37
+msgid "Prefers: %s"
+msgstr "偏好：%s"
 
 #: data/economy/automotive.json
 msgid "Premium"
@@ -13458,13 +14450,57 @@ msgstr "Priya"
 msgid "Priya Nair"
 msgstr "Priya Nair"
 
+#: data/story/personal/priya_nair.json
+msgid "Priya Nair asks for a OTA placement page. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Priya Nair 请你协助整理OTA 精选版位页面，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/priya_nair.json
+msgid "Priya Nair is ready to introduce a paying client for the OTA placement page. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Priya Nair 准备引荐愿意付费的客户，委托内容是OTA 精选版位页面。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
 #: data/dialogue/priya_nair_intro.json
 msgid "Priya Nair, Voyago. We list your rooms in front of ten thousand travellers. The standard listing costs fifteen percent per night; the featured listing costs eighteen and ranks higher."
 msgstr "我是 Priya Nair，Voyago 订房平台。我们把你的房间放到一万名旅客眼前。标准上架每晚抽 15%，精选上架抽 18%，排名更前面。"
 
+#: data/story/personal/priya_nair.json
+msgid "Priya Nair: OTA placement page · part 1"
+msgstr "Priya Nair：OTA 精选版位页面・第 1 段"
+
+#: data/story/personal/priya_nair.json
+msgid "Priya Nair: OTA placement page · part 2"
+msgstr "Priya Nair：OTA 精选版位页面・第 2 段"
+
+#: data/story/personal/priya_nair.json
+msgid "Priya Nair: OTA placement page · part 3"
+msgstr "Priya Nair：OTA 精选版位页面・第 3 段"
+
 #: data/jobs/cowork_host.json
 msgid "Priya hands you the event calendar. It's full."
 msgstr "Priya 把活动行事历交给你。排得满满的。"
+
+#: data/story/personal/priya.json
+msgid "Priya has two versions of an OTA introduction. The attractive one uses an old room photo; the checked one shows the current room. Which should she share?"
+msgstr "Priya 有两份 OTA 引荐数据。漂亮的那份用了旧客房照，查核过的那份则是目前客房。她该分享哪份？"
+
+#: data/story/personal/priya.json
+msgid "Priya introduces a client preparing an OTA placement page. The booking partner requires truthful copy and commission disclosure. What belongs in the agreed work?"
+msgstr "Priya 引荐一位准备 OTA 精选版位页面的客户。订房伙伴要求真实文案与佣金揭露。工作约定应包含什么？"
+
+#: data/story/personal/priya.json
+msgid "Priya wants to welcome an independent hotel owner to the co-work community. One OTA page promises free placement, but its terms charge commission. What should her introduction explain?"
+msgstr "Priya 想邀请独立旅馆业主加入共同工作社群。有个 OTA 页面声称版位免费，但条款会收佣金。引荐时应说明什么？"
+
+#: data/story/personal/priya.json
+msgid "Priya: coworking guest programme · part 1"
+msgstr "Priya：共同工作空间的访客方案・第 1 段"
+
+#: data/story/personal/priya.json
+msgid "Priya: coworking guest programme · part 2"
+msgstr "Priya：共同工作空间的访客方案・第 2 段"
+
+#: data/story/personal/priya.json
+msgid "Priya: coworking guest programme · part 3"
+msgstr "Priya：共同工作空间的访客方案・第 3 段"
 
 #: autoload/ui_root.gd:351
 msgid "Problem report saved (screenshot + save + log). Send this folder to whoever invited you to test: %s"
@@ -13517,6 +14553,18 @@ msgstr "本月利润：%s。现金变动：%s。中间的差额（%s）躺在库
 #: scripts/ui/real_estate_ui.gd:180
 msgid "Project closed"
 msgstr "建案已结束"
+
+#: data/story/personal/nina.json
+msgid "Promise a repair without checking the seam"
+msgstr "不检查缝线就承诺修好"
+
+#: data/story/personal/priya.json
+msgid "Promise amenities that might arrive later"
+msgstr "承诺将来可能添加的设施"
+
+#: data/story/personal/ken.json
+msgid "Promise same-day arrival without evidence"
+msgstr "无证据就承诺当天到货"
 
 #: scripts/sim/careers.gd:167
 msgid "Promoted to %s at %s."
@@ -13593,6 +14641,10 @@ msgstr "提出提案 · %s · %d 分钟"
 #: data/world/years.json
 msgid "Public EV chargers arrive on Shopping Street and in the Financial District."
 msgstr "购物街与金融区增设公共电动车充电桩。"
+
+#: data/story/personal/maya.json
+msgid "Publish the current hours and note the earlier error"
+msgstr "公布目前营业时间，并说明旧数据有误"
 
 #: data/jobs/barista.json
 msgid "Pull shots behind Jun's counter and learn how regulars decide what to buy."
@@ -13790,6 +14842,26 @@ msgstr "RadioRecruit"
 msgid "Rafael Costa"
 msgstr "Rafael Costa"
 
+#: data/story/personal/rafael_costa.json
+msgid "Rafael Costa asks for a electrical safety checklist. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Rafael Costa 请你协助整理电气安全核对表，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/rafael_costa.json
+msgid "Rafael Costa is ready to introduce a paying client for the electrical safety checklist. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Rafael Costa 准备引荐愿意付费的客户，委托内容是电气安全核对表。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
+#: data/story/personal/rafael_costa.json
+msgid "Rafael Costa: electrical safety checklist · part 1"
+msgstr "Rafael Costa：电气安全核对表・第 1 段"
+
+#: data/story/personal/rafael_costa.json
+msgid "Rafael Costa: electrical safety checklist · part 2"
+msgstr "Rafael Costa：电气安全核对表・第 2 段"
+
+#: data/story/personal/rafael_costa.json
+msgid "Rafael Costa: electrical safety checklist · part 3"
+msgstr "Rafael Costa：电气安全核对表・第 3 段"
+
 #: data/help/glossary.json
 msgid "Rail reliability"
 msgstr "管道可靠度"
@@ -13954,6 +15026,10 @@ msgstr "阅读拍卖规则"
 msgid "Read the cargo apron notice board"
 msgstr "阅读货运机坪公告栏"
 
+#: scripts/ui/minigames/personal_request_game.gd:11
+msgid "Read the evidence, then choose a response. A wrong answer uses the time and supplies but the request remains available."
+msgstr "先阅读证据再选择回应。答错会耗掉时间与材料，但仍可再次处理请求。"
+
 #: data/help/patch_notes.json
 msgid "Read the explanation badges beside cash, invoices, loans, staff, subscriptions, and shipping whenever you need help."
 msgstr "现金、发票、贷款、员工、订阅与出货旁都有说明小方块，需要时随时阅读。"
@@ -14086,6 +15162,10 @@ msgstr "柜台——座位与日票"
 msgid "Recession"
 msgstr "衰退"
 
+#: data/story/personal/maya.json
+msgid "Recommend the stairs because the route is shorter"
+msgstr "因为距离短而推荐楼梯路线"
+
 #: scripts/sim/automotive.gd:289
 msgid "Reconditioning: %s"
 msgstr "整备：%s"
@@ -14093,6 +15173,10 @@ msgstr "整备：%s"
 #: data/jobs/city_clerk.json
 msgid "Records Clerk"
 msgstr "文件办事员"
+
+#: scripts/sim/personal_life.gd:117
+msgid "Recovery consultation: %s"
+msgstr "复原咨询：%s"
 
 #: scripts/ui/media_ui.gd:176 scripts/ui/media_ui.gd:87
 msgid "Recruit %s"
@@ -14161,6 +15245,18 @@ msgstr "减少画面晃动"
 #: scripts/ui/minigames/cowork_host_game.gd:8
 msgid "Reed"
 msgstr "Reed"
+
+#: scripts/ui/modals/contacts_modal.gd:64
+msgid "Referral fee %s · supplies %s · %d minutes · payment in 30 days; the client may default."
+msgstr "委托费 %s・材料费 %s・%d 分钟・30 天票期；客户可能违约。"
+
+#: scripts/ui/modals/contacts_modal.gd:83
+msgid "Referral resolved — check the job's invoice or payment in Finance."
+msgstr "引荐已处理，请在财务查看工作发票或收款。"
+
+#: scripts/sim/personal_life.gd:176
+msgid "Referral work supplies: %s"
+msgstr "引荐工作的材料：%s"
 
 #: data/economy/media.json
 msgid "Refined"
@@ -14382,6 +15478,10 @@ msgstr "退件"
 msgid "Reject (click the wrong field first)"
 msgstr "退件（先点出错的字段）"
 
+#: data/help/glossary.json
+msgid "Relationships introduce paid work and useful information. They never increase demand, scores or profit by themselves."
+msgstr "关系带来付费工作引荐与有用情报，本身不会提高需求、分数或利润。"
+
 #: scripts/ui/media_ui.gd:73
 msgid "Relevant reach"
 msgstr "有效触及"
@@ -14393,6 +15493,14 @@ msgstr "量稳定，但如果之后需求暴增，这些房间已经卖掉了。
 #: data/economy/staff.json
 msgid "Reliable: morale drops half as fast."
 msgstr "可靠：士气下降速度减半。"
+
+#: data/story/personal/maya.json
+msgid "Remove every cafe from the guide"
+msgstr "把所有咖啡店都删掉"
+
+#: data/story/personal/sam.json
+msgid "Remove the service record"
+msgstr "移除维修纪录"
 
 #: scripts/ui/minigames/pack_game.gd:76
 msgid "Ren"
@@ -14438,7 +15546,7 @@ msgstr "翻修还需 %d 天完工"
 msgid "Rent"
 msgstr "租金"
 
-#: scripts/ui/phone_ui.gd:238
+#: scripts/ui/phone_ui.gd:241
 msgid "Rent $1,250 due the 14th"
 msgstr "房租 $1,250，14 号到期"
 
@@ -14578,6 +15686,10 @@ msgstr "在本画面偿还逾期贷款；公司若已进入清算进程，使用
 msgid "Repeat business"
 msgstr "回头客"
 
+#: data/story/personal/nina.json
+msgid "Repeat the claim as a certified fact"
+msgstr "把宣称当作已认证的事实"
+
 #: scripts/ui/modals/save_list_modal.gd:47 scripts/ui/modals/save_list_modal.gd:67 scripts/ui/modals/save_list_modal.gd:93
 msgid "Replace"
 msgstr "取代"
@@ -14617,6 +15729,10 @@ msgstr "信誉 %.1f · 时薪约 %s · 已交件 %d · 迟交 %d"
 #: scripts/ui/media_ui.gd:62
 msgid "Reputation: %d%% · campaign slots: %d/%d · cash: %s"
 msgstr "声誉：%d%% · 活动名额：%d/%d 场 · 现金：%s"
+
+#: scripts/ui/modals/contacts_modal.gd:85
+msgid "Request recorded — check the next step."
+msgstr "已记录，请查看下一步。"
 
 #: scripts/ui/modals/company_os.gd:609 scripts/ui/modals/settlement_modal.gd:95
 msgid "Reroute"
@@ -14697,6 +15813,10 @@ msgstr "资源与农业"
 #: scripts/ui/phone_ui.gd:159
 msgid "Respond"
 msgstr "回复"
+
+#: data/help/glossary.json
+msgid "Rest before precise work. You can sleep early when energy is low; work is never permanently blocked."
+msgstr "精细工作前先休息。体力不足时可提早睡觉；工作不会永久受阻。"
 
 #: data/buildings/lantern_bistro.json data/buildings/shift_diner.json
 msgid "Restaurant"
@@ -14894,9 +16014,17 @@ msgstr "到 Company OS → 合约查看条款。可以接受、还价或拒绝�
 msgid "Review the campaign and respond"
 msgstr "检阅活动并回应"
 
+#: scripts/sim/personal_life.gd:179 scripts/sim/personal_life.gd:55
+msgid "Review the evidence and try again. The time and supplies were used."
+msgstr "请重新查看证据再试一次。这次已用掉时间与材料。"
+
 #: data/economy/freelance.json
 msgid "Review the prices of %s"
 msgstr "帮 %s 查看定价"
+
+#: scripts/ui/modals/contacts_modal.gd:68
+msgid "Review the referred job"
+msgstr "查看引荐工作"
 
 #: data/help/help.json
 msgid "Review your own selling price at a terminal. Research does not automatically change it."
@@ -14945,6 +16073,26 @@ msgstr "环形灯"
 #: data/npcs/rita_hale.json
 msgid "Rita Hale"
 msgstr "Rita Hale"
+
+#: data/story/personal/rita_hale.json
+msgid "Rita Hale asks for a factory quotation checklist. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Rita Hale 请你协助整理工厂报价核对表，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/rita_hale.json
+msgid "Rita Hale is ready to introduce a paying client for the factory quotation checklist. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Rita Hale 准备引荐愿意付费的客户，委托内容是工厂报价核对表。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
+#: data/story/personal/rita_hale.json
+msgid "Rita Hale: factory quotation checklist · part 1"
+msgstr "Rita Hale：工厂报价核对表・第 1 段"
+
+#: data/story/personal/rita_hale.json
+msgid "Rita Hale: factory quotation checklist · part 2"
+msgstr "Rita Hale：工厂报价核对表・第 2 段"
+
+#: data/story/personal/rita_hale.json
+msgid "Rita Hale: factory quotation checklist · part 3"
+msgstr "Rita Hale：工厂报价核对表・第 3 段"
 
 #: scripts/sim/rivals.gd:216
 msgid "Rival acquisition: %s — %s"
@@ -15078,6 +16226,26 @@ msgstr "Rosa 平日 06:00–20:00 在柜台贩售月费会员与单堂券。"
 msgid "Rosa · Harbor Point Fitness"
 msgstr "Rosa · Harbor Point 健身房"
 
+#: data/story/personal/harbor_point.json
+msgid "Rosa · Harbor Point Fitness asks for a beginner exercise timetable. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Rosa · Harbor Point Fitness 请你协助整理新手运动课表，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/harbor_point.json
+msgid "Rosa · Harbor Point Fitness is ready to introduce a paying client for the beginner exercise timetable. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Rosa · Harbor Point Fitness 准备引荐愿意付费的客户，委托内容是新手运动课表。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
+#: data/story/personal/harbor_point.json
+msgid "Rosa · Harbor Point Fitness: beginner exercise timetable · part 1"
+msgstr "Rosa · Harbor Point Fitness：新手运动课表・第 1 段"
+
+#: data/story/personal/harbor_point.json
+msgid "Rosa · Harbor Point Fitness: beginner exercise timetable · part 2"
+msgstr "Rosa · Harbor Point Fitness：新手运动课表・第 2 段"
+
+#: data/story/personal/harbor_point.json
+msgid "Rosa · Harbor Point Fitness: beginner exercise timetable · part 3"
+msgstr "Rosa · Harbor Point Fitness：新手运动课表・第 3 段"
+
 #: data/events/unexpected_large_order.json
 msgid "Rosa: \"No worries. Maybe next time.\""
 msgstr "Rosa：「没关系，下次吧。」"
@@ -15149,6 +16317,26 @@ msgstr "RouteRealtyPrerequisite"
 #: data/npcs/ruiz.json scripts/sim/real_estate.gd:130
 msgid "Ruiz Construction"
 msgstr "Ruiz Construction"
+
+#: data/story/personal/ruiz.json
+msgid "Ruiz Construction asks for a construction handover checklist. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Ruiz Construction 请你协助整理工程交付核对表，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/ruiz.json
+msgid "Ruiz Construction is ready to introduce a paying client for the construction handover checklist. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Ruiz Construction 准备引荐愿意付费的客户，委托内容是工程交付核对表。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
+#: data/story/personal/ruiz.json
+msgid "Ruiz Construction: construction handover checklist · part 1"
+msgstr "Ruiz Construction：工程交付核对表・第 1 段"
+
+#: data/story/personal/ruiz.json
+msgid "Ruiz Construction: construction handover checklist · part 2"
+msgstr "Ruiz Construction：工程交付核对表・第 2 段"
+
+#: data/story/personal/ruiz.json
+msgid "Ruiz Construction: construction handover checklist · part 3"
+msgstr "Ruiz Construction：工程交付核对表・第 3 段"
 
 #: data/events/real_estate_delay.json
 msgid "Ruiz construction delay"
@@ -15366,9 +16554,33 @@ msgstr "Sam Okoro"
 msgid "Sam Okoro, Dockside Motors. Mind the oil, it gets on everything, including the paperwork."
 msgstr "我是 Dockside Motors 的 Sam Okoro。小心机油，什么东西都会沾到，连文档也一样。"
 
+#: data/story/personal/sam.json
+msgid "Sam Okoro: fleet customer handover · part 1"
+msgstr "Sam Okoro：车队客户交车流程・第 1 段"
+
+#: data/story/personal/sam.json
+msgid "Sam Okoro: fleet customer handover · part 2"
+msgstr "Sam Okoro：车队客户交车流程・第 2 段"
+
+#: data/story/personal/sam.json
+msgid "Sam Okoro: fleet customer handover · part 3"
+msgstr "Sam Okoro：车队客户交车流程・第 3 段"
+
 #: scripts/ui/modals/van_deal_modal.gd:78
 msgid "Sam hands over the keys. The van is parked at Pier 7. Delivery runs are posted every morning in Company OS → Logistics."
 msgstr "Sam 把钥匙交给你。货车停在 7 号码头。外送单每天早上会在 Company OS → 物流上架。"
+
+#: data/story/personal/sam.json
+msgid "Sam introduces a large fleet buyer for a paid handover project. The buyer wants every vehicle certified without inspections. What do you agree to deliver?"
+msgstr "Sam 引荐一位大型车队买方，委托付费交车文档项目。买方想让未检查的车辆全部取得合格证明，你能同意交付什么？"
+
+#: data/story/personal/sam.json
+msgid "Sam is documenting a used van for a new fleet customer. A service record shows brake work is due. Which handover note protects the customer?"
+msgstr "Sam 正为新的车队客户整理二手厢型车数据。维修纪录显示煞车需要保养，哪种交车说明能保障客户？"
+
+#: data/story/personal/sam.json
+msgid "Sam notices a fleet brochure promises unlimited uptime, but the rental contract allows maintenance days. What should his corrected guide say?"
+msgstr "Sam 发现车队文宣承诺永不停驶，但租用合约允许保养日。修正版指南应怎么写？"
 
 #: scripts/ui/modals/van_deal_modal.gd:19
 msgid "Sam: \"She's yours. Keep her moving: the runs are in Company OS → Logistics.\""
@@ -15430,7 +16642,7 @@ msgstr "请先存足原厂订单的现金。"
 msgid "Save exported. Keep this file outside your browser."
 msgstr "存盘已导出。请把文件保存在浏览器以外的地方。"
 
-#: scripts/ui/phone_ui.gd:337
+#: scripts/ui/phone_ui.gd:340
 msgid "Save game"
 msgstr "保存游戏"
 
@@ -15438,7 +16650,7 @@ msgstr "保存游戏"
 msgid "Save imported. Continue where you left off."
 msgstr "存盘已导入，可以接着玩。"
 
-#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:338
+#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:341
 msgid "Save now"
 msgstr "立即存盘"
 
@@ -15586,7 +16798,7 @@ msgstr "请先备妥车辆保障升级保费。"
 msgid "Save transfer"
 msgstr "存盘导入／导出"
 
-#: scripts/ui/hud.gd:155 scripts/ui/hud.gd:293
+#: scripts/ui/hud.gd:162 scripts/ui/hud.gd:301
 msgid "Saved"
 msgstr "已保存"
 
@@ -15594,7 +16806,7 @@ msgstr "已保存"
 msgid "Saved %s"
 msgstr "存于 %s"
 
-#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:340
+#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:343
 msgid "Saved (slot %d)."
 msgstr "已存盘（字段 %d）。"
 
@@ -16094,7 +17306,7 @@ msgstr "ShopLane＋发票"
 msgid "ShopLane Ads: a big brand campaign is bidding up placements."
 msgstr "ShopLane 广告：有大品牌在抢版位，价格被推高了。"
 
-#: scripts/ui/phone_ui.gd:270
+#: scripts/ui/phone_ui.gd:273
 msgid "ShopLane Seller"
 msgstr "ShopLane 卖家"
 
@@ -16138,7 +17350,7 @@ msgstr "ShopLane 拨款"
 msgid "ShopLane payout received: %s"
 msgstr "收到 ShopLane 拨款：%s"
 
-#: scripts/ui/phone_ui.gd:237
+#: scripts/ui/phone_ui.gd:240
 msgid "ShopLane pending"
 msgstr "ShopLane 待拨款"
 
@@ -16197,6 +17409,14 @@ msgstr "显示交互标记"
 #: data/dialogue/marcus_lending.json
 msgid "Show me what you can do."
 msgstr "让我看看你能借多少。"
+
+#: data/story/personal/ken.json
+msgid "Show only the total price"
+msgstr "只显示总价"
+
+#: data/story/personal/ken.json
+msgid "Show the quantity, unit price and arrival estimate"
+msgstr "列出数量、单价与预计到货日"
 
 #: scripts/ui/automotive_ui.gd:275
 msgid "Showroom discount"
@@ -16402,9 +17622,29 @@ msgstr "社群动态"
 msgid "Sofia"
 msgstr "Sofia"
 
+#: data/story/personal/sofia.json
+msgid "Sofia asks for a account fee comparison. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Sofia 请你协助整理帐户费用比较，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/sofia.json
+msgid "Sofia is ready to introduce a paying client for the account fee comparison. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Sofia 准备引荐愿意付费的客户，委托内容是帐户费用比较。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
 #: scripts/ui/modals/bank_modal.gd:33
 msgid "Sofia: \"Business accounts need a registered company. City Hall, Civic Center — then come back.\""
 msgstr "Sofia：「企业帐户要先有登记的公司。先去市政中心的市政厅——再回来找我。」"
+
+#: data/story/personal/sofia.json
+msgid "Sofia: account fee comparison · part 1"
+msgstr "Sofia：帐户费用比较・第 1 段"
+
+#: data/story/personal/sofia.json
+msgid "Sofia: account fee comparison · part 2"
+msgstr "Sofia：帐户费用比较・第 2 段"
+
+#: data/story/personal/sofia.json
+msgid "Sofia: account fee comparison · part 3"
+msgstr "Sofia：帐户费用比较・第 3 段"
 
 #: data/character/options.json
 msgid "Soft"
@@ -16566,7 +17806,7 @@ msgstr "现在花 {moq_cost}，之后才适用新价格。"
 msgid "Spin"
 msgstr "飞轮"
 
-#: scripts/sim/shop_life.gd:119
+#: scripts/sim/shop_life.gd:120
 msgid "Sponsored local report: %s"
 msgstr "地方赞助报导：%s"
 
@@ -16722,6 +17962,14 @@ msgstr "新创休闲"
 msgid "Startup Hub"
 msgstr "新创园区"
 
+#: data/story/personal/sam.json
+msgid "State maintenance days and the replacement process"
+msgstr "说明保养日与替代车流程"
+
+#: data/story/personal/ana.json data/story/personal/daniel.json data/story/personal/dara.json data/story/personal/diane_harlow.json
+msgid "State the agreed scope, limits and evidence"
+msgstr "写明约定范围、限制与证据"
+
 #: data/events/escrow_offer.json
 msgid "Stay with wires and letters of credit"
 msgstr "维持电汇和信用状"
@@ -16854,6 +18102,14 @@ msgstr "要老实答吗？上坡的时候变速箱会叹气，左后照镜是靠
 msgid "Strength"
 msgstr "肌力训练"
 
+#: scripts/sim/personal_life.gd:132
+msgid "Stress illness — open Contacts to choose free rest or a shorter medical visit. Recovery also occurs within 3 days."
+msgstr "压力引起不适，请打开联系人，选择免费休养或较短的付费看诊。最晚 3 天内也会自行恢复。"
+
+#: scripts/ui/modals/contacts_modal.gd:9
+msgid "Stress illness: take a recovery day or a shorter medical visit. Work is still possible; this expires within 3 days."
+msgstr "压力引起不适：休养一天，或选择较短的付费看诊。仍可工作，最晚 3 天内会自行恢复。"
+
 #: data/regions/auroria.json
 msgid "Strict consumer protection"
 msgstr "严格的消费者保护"
@@ -16962,6 +18218,26 @@ msgstr "日"
 msgid "Sunny Adeyemi"
 msgstr "Sunny Adeyemi"
 
+#: data/story/personal/sunny_adeyemi.json
+msgid "Sunny Adeyemi asks for a solar customer explainer. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Sunny Adeyemi 请你协助整理太阳能客户说明，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/sunny_adeyemi.json
+msgid "Sunny Adeyemi is ready to introduce a paying client for the solar customer explainer. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Sunny Adeyemi 准备引荐愿意付费的客户，委托内容是太阳能客户说明。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
+#: data/story/personal/sunny_adeyemi.json
+msgid "Sunny Adeyemi: solar customer explainer · part 1"
+msgstr "Sunny Adeyemi：太阳能客户说明・第 1 段"
+
+#: data/story/personal/sunny_adeyemi.json
+msgid "Sunny Adeyemi: solar customer explainer · part 2"
+msgstr "Sunny Adeyemi：太阳能客户说明・第 2 段"
+
+#: data/story/personal/sunny_adeyemi.json
+msgid "Sunny Adeyemi: solar customer explainer · part 3"
+msgstr "Sunny Adeyemi：太阳能客户说明・第 3 段"
+
 #: scripts/ui/modals/company_os.gd:287
 msgid "Supplier bills payable"
 msgstr "应付供应商帐款"
@@ -17005,6 +18281,10 @@ msgstr "供应商"
 #: data/help/help.json
 msgid "Suppliers sell in minimum order quantities (MOQ). You pay up front and the stock arrives in a few days (ARRIVES shows when)."
 msgstr "供应商有最低订购量（MOQ）。要先付款，货几天后才到（「到货」会显示时间）。"
+
+#: data/economy/personal_life.json
+msgid "Suppliers still require their stated MOQ and delivery dates. A referral is not a guaranteed sale."
+msgstr "供应商仍有明确的最低采购量与交货期限。引荐不保证成交。"
 
 #: data/help/glossary.json
 msgid "Supplies and breakfast"
@@ -17109,6 +18389,10 @@ msgstr "Tab"
 #: data/events/elena_offer.json
 msgid "Take $40,000 for 20%"
 msgstr "以 20% 股份换 $40,000"
+
+#: scripts/ui/modals/contacts_modal.gd:23
+msgid "Take a break · 120 minutes"
+msgstr "休息・120 分钟"
 
 #: data/help/help.json
 msgid "Take a gig from the offers, then work sessions at any laptop. You build the client's spreadsheet yourself by typing it."
@@ -17222,7 +18506,7 @@ msgstr "Tanaka"
 msgid "Tape seam %d"
 msgstr "贴第 %d 条接缝"
 
-#: scripts/ui/phone_ui.gd:135 scripts/ui/phone_ui.gd:250
+#: scripts/ui/phone_ui.gd:135 scripts/ui/phone_ui.gd:253
 msgid "Tasks"
 msgstr "任务"
 
@@ -17346,6 +18630,10 @@ msgstr "谢谢"
 msgid "That applicant has moved on."
 msgstr "这位应征者已经找到别的工作了。"
 
+#: data/story/personal/priya.json
+msgid "That commission can be ignored"
+msgstr "佣金可以忽略"
+
 #: scripts/sim/event_engine.gd:175
 msgid "That didn't work."
 msgstr "没有成功。"
@@ -17373,6 +18661,10 @@ msgstr "那笔款项没有卡在跨链桥上。"
 #: scripts/sim/ecommerce.gd:252
 msgid "That payment method isn't available."
 msgstr "目前不能用这种付款方式。"
+
+#: data/story/personal/priya.json
+msgid "That placement guarantees a full hotel"
+msgstr "版位保证旅馆客满"
 
 #: scripts/sim/hotel.gd:132
 msgid "That price is outside the allowed range."
@@ -17470,6 +18762,18 @@ msgstr "MVP 还需要 %d 开发小时。"
 msgid "The Metro"
 msgstr "捷运"
 
+#: data/story/personal/lena_park.json
+msgid "The OEM quality evidence now has conflicting notes. Lena Park wants a version that other people can check. How do you resolve the conflict?"
+msgstr "OEM 品质证据现在出现互相矛盾的纪录。Lena Park 希望其他人也能查核，该如何处理？"
+
+#: data/story/personal/priya_nair.json
+msgid "The OTA placement page now has conflicting notes. Priya Nair wants a version that other people can check. How do you resolve the conflict?"
+msgstr "OTA 精选版位页面现在出现互相矛盾的纪录。Priya Nair 希望其他人也能查核，该如何处理？"
+
+#: data/story/personal/okafor.json
+msgid "The Old Town lease explanation now has conflicting notes. Mr. Okafor wants a version that other people can check. How do you resolve the conflict?"
+msgstr "Old Town 租约说明现在出现互相矛盾的纪录。Mr. Okafor 希望其他人也能查核，该如何处理？"
+
 #: data/world/years.json
 msgid "The Opportunity"
 msgstr "机会之年"
@@ -17490,6 +18794,14 @@ msgstr "SaaS 服务器帐单包含每月基本费与每位订户的额外成本�
 msgid "The Transit Office is renewing its service fleet: parts built to drawing, cars sourced and delivery runs flown across the city."
 msgstr "交通局要更新服务车队：依图面生产零件、采购车辆，并在全市跑配送。"
 
+#: data/story/personal/lee.json
+msgid "The accessible cafe signage now has conflicting notes. Lee wants a version that other people can check. How do you resolve the conflict?"
+msgstr "咖啡店无障碍标示现在出现互相矛盾的纪录。Lee 希望其他人也能查核，该如何处理？"
+
+#: data/story/personal/sofia.json
+msgid "The account fee comparison now has conflicting notes. Sofia wants a version that other people can check. How do you resolve the conflict?"
+msgstr "帐户费用比较现在出现互相矛盾的纪录。Sofia 希望其他人也能查核，该如何处理？"
+
 #: scripts/sim/company.gd:86
 msgid "The account is already open."
 msgstr "帐户已经开好了。"
@@ -17501,6 +18813,10 @@ msgstr "代理工作室已开业。"
 #: scripts/ui/modals/city_guide_modal.gd:39
 msgid "The arrow guides you to the door; wait until opening hours to enter."
 msgstr "箭头会指向门口；请等营业时间再进入。"
+
+#: data/story/personal/frank_doyle.json
+msgid "The auction condition disclosure now has conflicting notes. Frank Doyle wants a version that other people can check. How do you resolve the conflict?"
+msgstr "拍卖车况揭露现在出现互相矛盾的纪录。Frank Doyle 希望其他人也能查核，该如何处理？"
 
 #: scripts/ui/automotive_ui.gd:112
 msgid "The auction is live until %02d:00. Bid in the Auction game; the buyer fee is %d%%."
@@ -17525,6 +18841,10 @@ msgstr "本月售出商品的平均帐面成本；仍在架上的商品算库存
 #: scripts/sim/insolvency.gd:66
 msgid "The bank won't restructure with this credit history."
 msgstr "以这种信用纪录，银行不愿意重整。"
+
+#: data/story/personal/harbor_point.json
+msgid "The beginner exercise timetable now has conflicting notes. Rosa · Harbor Point Fitness wants a version that other people can check. How do you resolve the conflict?"
+msgstr "新手运动课表现在出现互相矛盾的纪录。Rosa · Harbor Point Fitness 希望其他人也能查核，该如何处理？"
 
 #: scripts/ui/minigames/photo_shoot_game.gd:284
 msgid "The best shot goes on your listing. Photo quality affects how many people buy."
@@ -17658,6 +18978,10 @@ msgstr "客户因折扣留了下来。活动继续进行。"
 msgid "The clock keeps running while you're at the computer, just like in real life. Buying, listing and working also take their own time."
 msgstr "用电脑时时间照样在走，跟现实一样。进货、上架、工作也各自要花时间。"
 
+#: data/story/personal/ms_okoro.json
+msgid "The community energy questions now has conflicting notes. Ms. Okoro wants a version that other people can check. How do you resolve the conflict?"
+msgstr "社区能源问题集现在出现互相矛盾的纪录。Ms. Okoro 希望其他人也能查核，该如何处理？"
+
 #: scripts/sim/company.gd:105
 msgid "The company belongs to Hale Group now: no money moves between it and you."
 msgstr "公司现在属于 Hale Group：你和公司之间不能再转帐。"
@@ -17677,6 +19001,10 @@ msgstr "公司结束营业，未交货合约已终止，不另收违约金。"
 #: scripts/ui/modals/insolvency_modal.gd:37
 msgid "The company is solvent again. Your savings took the hit."
 msgstr "公司恢复偿债能力了，代价是你的积蓄。"
+
+#: data/story/personal/ruiz.json
+msgid "The construction handover checklist now has conflicting notes. Ruiz Construction wants a version that other people can check. How do you resolve the conflict?"
+msgstr "工程交付核对表现在出现互相矛盾的纪录。Ruiz Construction 希望其他人也能查核，该如何处理？"
 
 #: scripts/ui/automotive_ui.gd:200
 msgid "The counter costs %s per month. Lease it at Gateway Car Rental in the Airport district."
@@ -17702,6 +19030,10 @@ msgstr "司机"
 msgid "The earn-out did not pay: revenue fell short of the agreed floor."
 msgstr "绩效尾款没有付：营收低于约定的下限。"
 
+#: data/story/personal/rafael_costa.json
+msgid "The electrical safety checklist now has conflicting notes. Rafael Costa wants a version that other people can check. How do you resolve the conflict?"
+msgstr "电气安全核对表现在出现互相矛盾的纪录。Rafael Costa 希望其他人也能查核，该如何处理？"
+
 #: scripts/sim/staff.gd:61
 msgid "The employer registration fee is %s."
 msgstr "雇主登记费是 %s。"
@@ -17709,6 +19041,10 @@ msgstr "雇主登记费是 %s。"
 #: scripts/sim/energy.gd:34
 msgid "The energy business is already open."
 msgstr "能源事业已经开办。"
+
+#: data/story/personal/victor.json
+msgid "The enterprise succession interview now has conflicting notes. Victor Hale wants a version that other people can check. How do you resolve the conflict?"
+msgstr "企业传承访谈现在出现互相矛盾的纪录。Victor Hale 希望其他人也能查核，该如何处理？"
 
 #: data/events/shipment_lost.json
 msgid "The escrow contract returned your money. The fee is not refunded."
@@ -17730,6 +19066,10 @@ msgstr "工厂已开业。"
 msgid "The factory ledger and schedule have been updated."
 msgstr "工厂帐本和调度已更新。"
 
+#: data/story/personal/rita_hale.json
+msgid "The factory quotation checklist now has conflicting notes. Rita Hale wants a version that other people can check. How do you resolve the conflict?"
+msgstr "工厂报价核对表现在出现互相矛盾的纪录。Rita Hale 希望其他人也能查核，该如何处理？"
+
 #: autoload/save_system.gd:406
 msgid "The file could not be read. Your existing save is unchanged."
 msgstr "无法读取文件。原有存盘仍完整保留。"
@@ -17737,6 +19077,10 @@ msgstr "无法读取文件。原有存盘仍完整保留。"
 #: scripts/ui/minigames/parcel_sort_game.gd:28
 msgid "The first parcels show the district name. Later ones only have a postcode, and halfway through the cheat sheet goes away."
 msgstr "前几个包裹会写区名，后面只有邮递区号；做到一半，小抄还会被收走。"
+
+#: data/story/personal/diane_harlow.json
+msgid "The first-home viewing guide now has conflicting notes. Diane Harlow wants a version that other people can check. How do you resolve the conflict?"
+msgstr "首购看屋指南现在出现互相矛盾的纪录。Diane Harlow 希望其他人也能查核，该如何处理？"
 
 #: scripts/sim/cafe.gd:101
 msgid "The fit-out costs %s."
@@ -17750,6 +19094,14 @@ msgstr "装修师傅今晚开工，%s 完工。"
 msgid "The flash sale refills some rooms for a week. Group deposits are refunded."
 msgstr "限时特卖让部分房间在一周内重新卖出，团体订金全数退还。"
 
+#: data/story/personal/elena.json
+msgid "The founder due-diligence notes now has conflicting notes. Elena Park wants a version that other people can check. How do you resolve the conflict?"
+msgstr "创办人尽职调查笔记现在出现互相矛盾的纪录。Elena Park 希望其他人也能查核，该如何处理？"
+
+#: data/story/personal/mara_quinn.json
+msgid "The franchise training outline now has conflicting notes. Mara Quinn wants a version that other people can check. How do you resolve the conflict?"
+msgstr "加盟培训大纲现在出现互相矛盾的纪录。Mara Quinn 希望其他人也能查核，该如何处理？"
+
 #: scripts/sim/company.gd:141
 msgid "The grant opens with the Green Shift."
 msgstr "补助要等绿色转型才开放。"
@@ -17762,6 +19114,18 @@ msgstr "电网把商用电价调涨 25%。可以维持售价承受毛利冲击�
 msgid "The group Campaign Mixer can run an internal hotel campaign at media cost; measured conversions lift real demand for a few days."
 msgstr "集团的广告活动配置可以用媒体成本替旅馆投放内部广告；有成效的转换会让真实需求提高几天。"
 
+#: data/story/personal/owen_blake.json
+msgid "The group travel accessibility plan now has conflicting notes. Owen Blake wants a version that other people can check. How do you resolve the conflict?"
+msgstr "团体旅游无障碍计划现在出现互相矛盾的纪录。Owen Blake 希望其他人也能查核，该如何处理？"
+
+#: data/story/personal/vera_stone.json
+msgid "The guest review evidence guide now has conflicting notes. Vera Stone wants a version that other people can check. How do you resolve the conflict?"
+msgstr "旅客评价证据指南现在出现互相矛盾的纪录。Vera Stone 希望其他人也能查核，该如何处理？"
+
+#: data/story/personal/henri_dubois.json
+msgid "The hotel history archive now has conflicting notes. Henri Dubois wants a version that other people can check. How do you resolve the conflict?"
+msgstr "旅馆历史数据现在出现互相矛盾的纪录。Henri Dubois 希望其他人也能查核，该如何处理？"
+
 #: scripts/sim/hotel.gd:103
 msgid "The hotel is already at its largest size."
 msgstr "旅馆已经是最大规模。"
@@ -17770,6 +19134,10 @@ msgstr "旅馆已经是最大规模。"
 msgid "The hotel is already open."
 msgstr "旅馆已经开业。"
 
+#: data/story/personal/lina.json
+msgid "The import document checklist now has conflicting notes. Lina Zhao wants a version that other people can check. How do you resolve the conflict?"
+msgstr "进口文档核对表现在出现互相矛盾的纪录。Lina Zhao 希望其他人也能查核，该如何处理？"
+
 #: data/events/automotive_claim.json
 msgid "The insurer disputes a $3,200 accident repair on one of your rental cars. Pay it yourself, fight it with a lawyer, or settle for half."
 msgstr "保险公司对你一辆租赁车 $3,200 的事故维修有争议。可自己付、请律师打官司，或半价和解。"
@@ -17777,6 +19145,10 @@ msgstr "保险公司对你一辆租赁车 $3,200 的事故维修有争议。可�
 #: data/help/glossary.json
 msgid "The interest costs far less than missing payroll or rent. Repay it as soon as the money arrives."
 msgstr "利息远比发不出薪水或付不出房租便宜。钱一到就还掉。"
+
+#: data/story/personal/student_intern.json
+msgid "The internship learning portfolio now has conflicting notes. Nia Park wants a version that other people can check. How do you resolve the conflict?"
+msgstr "实习学习作品集现在出现互相矛盾的纪录。Nia Park 希望其他人也能查核，该如何处理？"
 
 #: scripts/sim/energy.gd:565
 msgid "The landlord asked you to come back tomorrow."
@@ -17810,6 +19182,10 @@ msgstr "清仓商的货车在路上了。"
 msgid "The litres you burn follow the kilometres you drive, and wear and tear add a little more on every kilometre."
 msgstr "用油的公升数跟着开的公里数走，每公里的耗损还要再多算一点。"
 
+#: data/story/personal/marcus.json
+msgid "The loan application cash-flow guide now has conflicting notes. Marcus Reed wants a version that other people can check. How do you resolve the conflict?"
+msgstr "贷款申请现金流指南现在出现互相矛盾的纪录。Marcus Reed 希望其他人也能查核，该如何处理？"
+
 #: data/help/glossary.json
 msgid "The longer it is, the earlier you must reorder, or you run out and lose sales."
 msgstr "交期越长，就要越早补货，不然缺货就会少卖。"
@@ -17825,6 +19201,10 @@ msgstr "已支付模具费。"
 #: autoload/scene_router.gd:66
 msgid "The new game could not be started because no save slot was available."
 msgstr "没有可用的存盘字段，无法开始新游戏。"
+
+#: data/story/personal/tom.json
+msgid "The office move-in inventory now has conflicting notes. Tom wants a version that other people can check. How do you resolve the conflict?"
+msgstr "办公室入住设备清单现在出现互相矛盾的纪录。Tom 希望其他人也能查核，该如何处理？"
 
 #: data/dialogue/lina_bridge.json
 msgid "The operators are tracing the funds. I never asked anyone to trust me blindly. I asked them to trust code. Code has authors, and authors make mistakes."
@@ -17854,6 +19234,10 @@ msgstr "其余 %d 张订单照同样水准打包。"
 msgid "The packing table"
 msgstr "打包桌"
 
+#: data/story/personal/dara.json
+msgid "The parcel address guide now has conflicting notes. Dara wants a version that other people can check. How do you resolve the conflict?"
+msgstr "包裹地址指南现在出现互相矛盾的纪录。Dara 希望其他人也能查核，该如何处理？"
+
 #: scripts/sim/automotive.gd:371
 msgid "The parking lot is full."
 msgstr "停车场已满。"
@@ -17878,9 +19262,17 @@ msgstr "提案未得标。下次提案前请检查创意是否符合客群。"
 msgid "The price one of your businesses charges another for goods or services inside the group."
 msgstr "集团内，一个事业向另一个事业收取商品或服务的价格。"
 
+#: data/story/personal/tomas_varga.json
+msgid "The production changeover notes now has conflicting notes. Tomas Varga wants a version that other people can check. How do you resolve the conflict?"
+msgstr "生产换线笔记现在出现互相矛盾的纪录。Tomas Varga 希望其他人也能查核，该如何处理？"
+
 #: data/events/hotel_slump.json
 msgid "The promotion softens the dip for two weeks, then it fades."
 msgstr "促销能在两周内减缓低迷，之后效果消退。"
+
+#: data/story/personal/ana.json
+msgid "The registration document guide now has conflicting notes. Ana wants a version that other people can check. How do you resolve the conflict?"
+msgstr "公司登记文档指南现在出现互相矛盾的纪录。Ana 希望其他人也能查核，该如何处理？"
 
 #: scripts/sim/company.gd:58
 msgid "The registration fee is %s."
@@ -17890,9 +19282,21 @@ msgstr "登记规费是 %s。"
 msgid "The renovated %s rooms are back on sale."
 msgstr "翻新完成的%s重新开卖。"
 
+#: data/story/personal/jun_ito.json
+msgid "The repair appointment checklist now has conflicting notes. Jun Ito wants a version that other people can check. How do you resolve the conflict?"
+msgstr "维修预约核对表现在出现互相矛盾的纪录。Jun Ito 希望其他人也能查核，该如何处理？"
+
 #: data/events/automotive_flood.json
 msgid "The repair removes most of the damage but costs money and workshop days."
 msgstr "修复能去除大部分损坏，但要花钱和工作天。"
+
+#: data/story/personal/daniel.json
+msgid "The retail buyer presentation now has conflicting notes. Daniel Wong wants a version that other people can check. How do you resolve the conflict?"
+msgstr "零售采购提案现在出现互相矛盾的纪录。Daniel Wong 希望其他人也能查核，该如何处理？"
+
+#: data/story/personal/jun.json
+msgid "The reusable cup menu now has conflicting notes. Jun wants a version that other people can check. How do you resolve the conflict?"
+msgstr "环保杯饮品菜单现在出现互相矛盾的纪录。Jun 希望其他人也能查核，该如何处理？"
 
 #: data/events/hotel_review_storm.json
 msgid "The review stays heavy until fresh reviews dilute it."
@@ -17946,6 +19350,14 @@ msgstr "展示中心放不下那么多车。"
 msgid "The smallest quantity a supplier will sell you in one order."
 msgstr "供应商一次最少要卖给你的数量。"
 
+#: data/story/personal/sunny_adeyemi.json
+msgid "The solar customer explainer now has conflicting notes. Sunny Adeyemi wants a version that other people can check. How do you resolve the conflict?"
+msgstr "太阳能客户说明现在出现互相矛盾的纪录。Sunny Adeyemi 希望其他人也能查核，该如何处理？"
+
+#: data/story/personal/kai_morgan.json
+msgid "The sponsorship disclosure guide now has conflicting notes. Kai Morgan wants a version that other people can check. How do you resolve the conflict?"
+msgstr "赞助揭露指南现在出现互相矛盾的纪录。Kai Morgan 希望其他人也能查核，该如何处理？"
+
 #: data/help/glossary.json
 msgid "The stars customers give your café. They drift toward how each day felt: queues, running out, prices and service."
 msgstr "客人给你的咖啡店打的星等，会慢慢反映每天的体验：排队、缺货、价格和服务。"
@@ -17965,6 +19377,10 @@ msgstr "储藏室放不下这么多。"
 #: data/story/chapters.json
 msgid "The story so far ends here. Aurelia keeps going."
 msgstr "故事到这里告一段落，Aurelia 仍继续运转。"
+
+#: data/story/personal/imani_cole.json
+msgid "The student enterprise workshop now has conflicting notes. Dr. Imani Cole wants a version that other people can check. How do you resolve the conflict?"
+msgstr "学生创业工作坊现在出现互相矛盾的纪录。Dr. Imani Cole 希望其他人也能查核，该如何处理？"
 
 #: data/help/glossary.json
 msgid "The supplier normally deducts 15% of the original purchase value on a return. Aurelia Makers charges no cancellation or restocking fee."
@@ -17993,6 +19409,10 @@ msgstr "柜台平日 9 点到 16 点营业。贷款请找经理。"
 #: scripts/world/actions.gd:110
 msgid "The teller window is closed."
 msgstr "柜台窗口已关闭。"
+
+#: data/story/personal/landlord.json
+msgid "The tenant maintenance handbook now has conflicting notes. Mr. Okafor (landlord) wants a version that other people can check. How do you resolve the conflict?"
+msgstr "租户保养手册现在出现互相矛盾的纪录。Mr. Okafor (landlord) 希望其他人也能查核，该如何处理？"
 
 #: data/help/patch_notes.json
 msgid "The tutorial recovers pending stock deliveries in older saves, keeps your day pass, and continues from the step you reached."
@@ -18098,6 +19518,10 @@ msgstr "此广告时段无法出售，或库存已耗尽。"
 msgid "This application is already filed."
 msgstr "这份申请已经送出。"
 
+#: scripts/sim/personal_life.gd:36 scripts/sim/personal_life.gd:54
+msgid "This business closed — the personal chain is retired."
+msgstr "原公司已关闭，此个人任务链已结束。"
+
 #: data/help/help.json
 msgid "This card lists updates after the version that last saved your game. Scroll to read all release notes."
 msgstr "这张卡片列出原存盘版本之后的更新，可向下卷动阅读全部内容。"
@@ -18118,7 +19542,7 @@ msgstr "这项保障已生效。"
 msgid "This equipment needs no service today."
 msgstr "这些设备今天不需要保养。"
 
-#: scripts/ui/phone_ui.gd:345
+#: scripts/ui/phone_ui.gd:348
 msgid "This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen."
 msgstr "这场游戏每隔几秒自动存到字段 %d。新游戏会用自己的字段；其他存盘可以在标题画面读取。"
 
@@ -18166,6 +19590,10 @@ msgstr "这不是 City Venture 的存盘。"
 msgid "This is the same form you'll file for your own company, so the rules are worth remembering."
 msgstr "这就是你之后登记自己公司要填的表，规则值得记住。"
 
+#: scripts/sim/personal_life.gd:173
+msgid "This job is no longer active — check its status."
+msgstr "此工作已无法进行，请查看状态。"
+
 #: scripts/sim/energy.gd:275 scripts/sim/hotel.gd:568 scripts/sim/jobs.gd:44 scripts/sim/media.gd:226
 msgid "This job is no longer available."
 msgstr "这张工单已无法承接。"
@@ -18178,11 +19606,15 @@ msgstr "本月"
 msgid "This month revenue"
 msgstr "本月营收"
 
+#: scripts/sim/personal_life.gd:78
+msgid "This monthly event is closed or already attended — check its next date."
+msgstr "本月活动未开放或已参加，请查看下一次日期。"
+
 #: scripts/sim/contracts.gd:116 scripts/sim/contracts.gd:157
 msgid "This offer is no longer open."
 msgstr "这个报价已经失效。"
 
-#: scripts/sim/shop_life.gd:121
+#: scripts/sim/shop_life.gd:122
 msgid "This opportunity is no longer available — decline it."
 msgstr "这个机会已不适用——请婉拒。"
 
@@ -18205,6 +19637,10 @@ msgstr "这张进货单属于已关闭的公司。"
 #: scripts/sim/ecommerce.gd:367
 msgid "This purchase belongs to another business."
 msgstr "这张进货单属于其他企业。"
+
+#: scripts/sim/personal_life.gd:44 scripts/ui/modals/contacts_modal.gd:85
+msgid "This request is no longer available — check Contacts."
+msgstr "此请求已无法进行，请查看联系人。"
 
 #: scripts/sim/tax.gd:103
 msgid "This return needs no correction."
@@ -18318,7 +19754,7 @@ msgstr "经过时间"
 msgid "Time to finish"
 msgstr "完成期限"
 
-#: scripts/ui/phone_ui.gd:136 scripts/ui/phone_ui.gd:294
+#: scripts/ui/phone_ui.gd:136 scripts/ui/phone_ui.gd:297
 msgid "Timeline"
 msgstr "人生纪录"
 
@@ -18338,7 +19774,7 @@ msgstr "老旧房间会拉低每则评价的清洁与价值感分数。"
 msgid "To Startup Hub"
 msgstr "前往新创园区"
 
-#: scripts/ui/modals/company_os.gd:513 scripts/ui/phone_ui.gd:275
+#: scripts/ui/modals/company_os.gd:513 scripts/ui/phone_ui.gd:278
 msgid "To pack"
 msgstr "待打包"
 
@@ -18378,13 +19814,53 @@ msgstr "跟着美元价值走的代币，在交易所帐户之间几分钟就能
 msgid "Tom"
 msgstr "Tom"
 
+#: data/story/personal/tom.json
+msgid "Tom asks for a office move-in inventory. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Tom 请你协助整理办公室入住设备清单，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/tom.json
+msgid "Tom is ready to introduce a paying client for the office move-in inventory. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Tom 准备引荐愿意付费的客户，委托内容是办公室入住设备清单。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
 #: scripts/ui/modals/lease_modal.gd:19
 msgid "Tom: \"It's all yours. Sign's up out front.\""
 msgstr "Tom：「现在是你的了。招牌已经挂在门口。」"
 
+#: data/story/personal/tom.json
+msgid "Tom: office move-in inventory · part 1"
+msgstr "Tom：办公室入住设备清单・第 1 段"
+
+#: data/story/personal/tom.json
+msgid "Tom: office move-in inventory · part 2"
+msgstr "Tom：办公室入住设备清单・第 2 段"
+
+#: data/story/personal/tom.json
+msgid "Tom: office move-in inventory · part 3"
+msgstr "Tom：办公室入住设备清单・第 3 段"
+
 #: data/npcs/tomas_varga.json scripts/sim/manufacturing.gd:44
 msgid "Tomas Varga"
 msgstr "Tomas Varga"
+
+#: data/story/personal/tomas_varga.json
+msgid "Tomas Varga asks for a production changeover notes. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Tomas Varga 请你协助整理生产换线笔记，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
+#: data/story/personal/tomas_varga.json
+msgid "Tomas Varga is ready to introduce a paying client for the production changeover notes. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Tomas Varga 准备引荐愿意付费的客户，委托内容是生产换线笔记。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
+#: data/story/personal/tomas_varga.json
+msgid "Tomas Varga: production changeover notes · part 1"
+msgstr "Tomas Varga：生产换线笔记・第 1 段"
+
+#: data/story/personal/tomas_varga.json
+msgid "Tomas Varga: production changeover notes · part 2"
+msgstr "Tomas Varga：生产换线笔记・第 2 段"
+
+#: data/story/personal/tomas_varga.json
+msgid "Tomas Varga: production changeover notes · part 3"
+msgstr "Tomas Varga：生产换线笔记・第 3 段"
 
 #: scripts/sim/manufacturing.gd:39
 msgid "Tomas already works here."
@@ -18558,7 +20034,7 @@ msgstr "两万五千销售额"
 msgid "Two focused hours: %.1f hours of the work done. %s"
 msgstr "专心工作两小时：完成 %.1f 小时的工作量。%s"
 
-#: scripts/world/actions.gd:276
+#: scripts/world/actions.gd:277
 msgid "Two hours behind your own counter: %d customers served."
 msgstr "在自己的吧台站了两小时：服务了 %d 位客人。"
 
@@ -18782,6 +20258,18 @@ msgstr "搭捷运到金融区，进入 Nexus Bank，前往经理桌。"
 msgid "Use the OTA to fill empty nights, not nights you could sell directly."
 msgstr "用 OTA 补空房，不要拿来卖你本来就能直接卖出的夜晚。"
 
+#: data/story/personal/priya.json
+msgid "Use the current room and label its actual amenities"
+msgstr "采用目前客房并列出实际设施"
+
+#: data/story/personal/priya.json
+msgid "Use the old photo because it looks luxurious"
+msgstr "使用较豪华的旧照片"
+
+#: data/story/personal/maya.json
+msgid "Use the step-free path and state the longer walk"
+msgstr "采用无阶梯步道，并说明路程较长"
+
 #: data/help/help.json
 msgid "Use the tabs on the left. Every laptop and work desk opens the same system: home, co-work hot desk, café table, office."
 msgstr "用左边的分页切换。每台笔电和工作座位打开的都是同一套系统：家里、共享座位、咖啡店、办公室。"
@@ -18934,13 +20422,33 @@ msgstr "创投资金"
 msgid "Vera Stone"
 msgstr "Vera Stone"
 
+#: data/story/personal/vera_stone.json
+msgid "Vera Stone asks for a guest review evidence guide. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Vera Stone 请你协助整理旅客评价证据指南，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
 #: data/events/hotel_vera_visit.json
 msgid "Vera Stone has booked a night under a false name. Her review counts five times."
 msgstr "Vera Stone 用假名订了一晚。她的评价算五倍。"
 
+#: data/story/personal/vera_stone.json
+msgid "Vera Stone is ready to introduce a paying client for the guest review evidence guide. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Vera Stone 准备引荐愿意付费的客户，委托内容是旅客评价证据指南。客户要求你做出无法验证的承诺，交付数据应如何写？"
+
 #: scripts/ui/hotel_ui.gd:251
 msgid "Vera Stone ×5"
 msgstr "Vera Stone ×5"
+
+#: data/story/personal/vera_stone.json
+msgid "Vera Stone: guest review evidence guide · part 1"
+msgstr "Vera Stone：旅客评价证据指南・第 1 段"
+
+#: data/story/personal/vera_stone.json
+msgid "Vera Stone: guest review evidence guide · part 2"
+msgstr "Vera Stone：旅客评价证据指南・第 2 段"
+
+#: data/story/personal/vera_stone.json
+msgid "Vera Stone: guest review evidence guide · part 3"
+msgstr "Vera Stone：旅客评价证据指南・第 3 段"
 
 #: data/suppliers/verdant_supply.json
 msgid "Verdant Supply"
@@ -18954,6 +20462,10 @@ msgstr "Verdant Supply 刚在工业区开张。他们的太阳能台灯在 ShopL
 msgid "Verdant Supply opens a warehouse in the Industrial Zone."
 msgstr "Verdant Supply 在工业区开设仓库。"
 
+#: data/story/personal/priya.json
+msgid "Verified room copy and disclosed channel terms"
+msgstr "已查核的客房文案与通路条款揭露"
+
 #: data/milestones.json
 msgid "Version 1.0 ships"
 msgstr "1.0 版上线"
@@ -18962,9 +20474,17 @@ msgstr "1.0 版上线"
 msgid "Victor Hale"
 msgstr "Victor Hale"
 
+#: data/story/personal/victor.json
+msgid "Victor Hale asks for a enterprise succession interview. Their evidence contains an unresolved question. What should the first draft do?"
+msgstr "Victor Hale 请你协助整理企业传承访谈，但数据有一项问题尚未厘清。初稿应该怎么处理？"
+
 #: data/story/chapters.json
 msgid "Victor Hale has read your numbers: meet him at Crestline (weekdays 11–16), or wait for his call"
 msgstr "Victor Hale 看过你的数字了：到 Crestline 找他（平日 11–16 点），或等他来电"
+
+#: data/story/personal/victor.json
+msgid "Victor Hale is ready to introduce a paying client for the enterprise succession interview. The client asks for a promise you cannot verify. What do you put in the handover?"
+msgstr "Victor Hale 准备引荐愿意付费的客户，委托内容是企业传承访谈。客户要求你做出无法验证的承诺，交付数据应如何写？"
 
 #: scripts/sim/acquisition.gd:96
 msgid "Victor Hale. Fine. %s more, part of it now and the rest if revenue holds for a year. %s is in your account. Don't make me regret it."
@@ -18989,6 +20509,18 @@ msgstr "我是 Victor Hale。十二个月，目标达成。第二笔款项已进
 #: scripts/sim/acquisition.gd:100
 msgid "Victor Hale. Understood. Independent suits you. If the number changes, so will the conversation."
 msgstr "我是 Victor Hale。了解。保持独立很适合你。数字变了，谈法也会跟着变。"
+
+#: data/story/personal/victor.json
+msgid "Victor Hale: enterprise succession interview · part 1"
+msgstr "Victor Hale：企业传承访谈・第 1 段"
+
+#: data/story/personal/victor.json
+msgid "Victor Hale: enterprise succession interview · part 2"
+msgstr "Victor Hale：企业传承访谈・第 2 段"
+
+#: data/story/personal/victor.json
+msgid "Victor Hale: enterprise succession interview · part 3"
+msgstr "Victor Hale：企业传承访谈・第 3 段"
 
 #: data/events/acquisition_offer.json
 msgid "Victor: \"Good. My lawyers will call yours. You keep the desk.\""
@@ -19154,7 +20686,7 @@ msgstr "从相邻街区步行前往。"
 msgid "Walk onto the glowing EXIT mat at the bottom of the room to go outside."
 msgstr "走到房间下方发光的「出口」地垫上，就会出门。"
 
-#: scripts/world/player.gd:151
+#: scripts/world/player.gd:152
 msgid "Walk to a laptop or work desk, then use Company OS."
 msgstr "请走到笔电或工作桌旁，再打开 Company OS。"
 
@@ -19338,7 +20870,7 @@ msgstr "欢迎来到 Threadline。我是 Nina。皮尺等一下再用。"
 msgid "Went green with the city."
 msgstr "跟着城市一起转型绿色。"
 
-#: scripts/ui/hud.gd:163 scripts/ui/modals/settings_modal.gd:139
+#: scripts/ui/hud.gd:170 scripts/ui/modals/settings_modal.gd:139
 msgid "What can I do here?"
 msgstr "这里能做什么？"
 
@@ -19390,7 +20922,7 @@ msgstr "最浓的那种。"
 msgid "When a company closes, its undelivered contracts end and its unpaid invoices go to a collector. Old contracts stay visible, but the closed company cannot deliver or collect again."
 msgstr "公司关闭时，未交货合约终止，未收款发票让售催收公司。旧合约保留供查阅，但已结束公司不能再交货或收款。"
 
-#: scripts/world/actions.gd:288
+#: scripts/world/actions.gd:289
 msgid "When are we getting paid? Rent's due."
 msgstr "什么时候发薪水？房租要缴了。"
 
@@ -19966,7 +21498,7 @@ msgstr "你的现金"
 msgid "Your cost / outside market"
 msgstr "你的成本／外部市价"
 
-#: scripts/world/actions.gd:270
+#: scripts/world/actions.gd:271
 msgid "Your counter — %s"
 msgstr "你的吧台——%s"
 
@@ -20758,7 +22290,7 @@ msgstr "自有媒体"
 msgid "paid on delivery"
 msgstr "交件即付款"
 
-#: scripts/ui/phone_ui.gd:283
+#: scripts/ui/phone_ui.gd:286
 msgid "paused: cap"
 msgstr "暂停：已达上限"
 
@@ -21218,7 +22750,7 @@ msgstr "◆ 你在这里"
 msgid "◉  Shutter"
 msgstr "◉  快门"
 
-#: scripts/ui/hud.gd:258
+#: scripts/ui/hud.gd:266
 msgid "● %d new"
 msgstr "● %d 则新消息"
 
