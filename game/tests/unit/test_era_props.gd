@@ -51,10 +51,15 @@ func test_live_era_refresh_preserves_player_feet() -> void:
 	var pos := Vector2(1140, 624)
 	SceneRouter._enter("district", "riverside", "", "left", pos)
 	await runner.get_tree().process_frame
+	Clock.world_active = false  # no month-close or event cards while the era turns over
 	UIRoot.close_all()  # the rebuild deliberately waits while any modal, phone or dialogue is open
 	UIRoot.dialogue.active = false
+	await runner.get_tree().process_frame
+	await runner.get_tree().process_frame
 	World.set_year(3)
 	for frame in range(30):
+		for card in UIRoot.modal_layer.get_children():  # a month-close or first-visit card may open meanwhile
+			card.free()
 		await runner.get_tree().process_frame
 		if _props(SceneRouter.world_scene(), "port_cranes_far").size() == 1:
 			break
