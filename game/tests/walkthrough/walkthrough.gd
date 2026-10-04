@@ -2015,29 +2015,30 @@ func _chapters_13_to_14(fast := false) -> void:
 	if not GlobalMarket.company()["stores"].has("northridge"):
 		await bot.click_named("OpenGlobalStore_northridge")
 	var listing: Dictionary = {}
-	for l in Ecommerce.E()["listings"].values():
-		if l.get("active", false) and Ecommerce.available("riverside_studio",str(l["product"]))>0:
-			if listing.is_empty() or Ecommerce.available("riverside_studio", str(l["product"])) > Ecommerce.available("riverside_studio", str(listing["product"])):
-				listing = l
-	if listing.is_empty():
-		# Long integrated tours can exhaust the original home batch. Replenish through the real purchase controls.
-		for l in Ecommerce.E()["listings"].values():
-			if l.get("active",false):listing=l;break
-		if listing.is_empty():bot.fail("season two has no active product listing");return
-	if Ecommerce.best_location(str(listing["product"]))!="riverside_studio":
+	var best_cost := INF
+	# Choose an affordable home-packed product without trying to outstock a fuller remote warehouse.
+	for candidate in Ecommerce.E()["listings"].values():
+		if not candidate.get("active",false):continue
+		var product: String=candidate["product"]
+		var other_max:=0
+		for location in Ecommerce.stock_locations():
+			if location!="riverside_studio":other_max=maxi(other_max,Ecommerce.available(location,product))
+		var home:=Ecommerce.available("riverside_studio",product)
+		var moq: int=Ecommerce.offer("tradelink_wholesale",product)["moq"]
+		var batches: int=maxi(0,int(ceil(float(other_max+1-home)/moq)))
+		if home==0:batches=maxi(1,batches)
+		var cost:=batches*moq*Ecommerce.unit_cost("tradelink_wholesale",product)
+		if Ecommerce.space_block("riverside_studio",batches*moq)!="" or cost>Ledger.cash(GameState.business_entity()):continue
+		if cost<best_cost:listing=candidate;best_cost=cost
+	if listing.is_empty():bot.fail("no affordable home export product fits the actual remaining capacity");return
+	if best_cost>0:
 		var product: String=listing["product"]
 		var other_max:=0
 		for location in Ecommerce.stock_locations():
 			if location!="riverside_studio":other_max=maxi(other_max,Ecommerce.available(location,product))
-		var moq: int=Ecommerce.offer("tradelink_wholesale",product)["moq"]
-		var batches: int=maxi(1,int(ceil(float(other_max+moq-Ecommerce.available("riverside_studio",product))/moq)))
-		await close_modal();await _home_laptop("operations");await _intro_control("DeliverTo_riverside_studio")
-		for batch in batches:
-			if Ecommerce.space_block("riverside_studio",moq)!="" or Ledger.cash(GameState.business_entity())<moq*Ecommerce.unit_cost("tradelink_wholesale",product):break
-			await _intro_control("Buy_tradelink_wholesale_"+product)
 		await close_modal()
-		await pass_time_at_home(func():return Ecommerce.best_location(product)=="riverside_studio",8,true)
-		if Ecommerce.best_location(product)!="riverside_studio":bot.fail("export restock could not fund or fit the real home purchase");return
+		if not await _restock_product(product,other_max+1):return
+		if Ecommerce.best_location(product)!="riverside_studio":bot.fail("real export restock is not at the home packing table");return
 		await _home_laptop("sales");await _intro_control("SalesPage_overseas")
 	await _export_row_input("SaveGlobalPrice_" + str(listing["id"]))
 	bot.expect(GlobalMarket.order_allowed("northridge", str(listing["id"])), "selected export listing really has a saved price")
