@@ -13,3 +13,7 @@
 Full rendered walkthrough `.qa-full41` was launched for the fifteenth Session B ticket, with daily traces and watchdog output. Its result is **PENDING**, not PASS. Earlier full #93 failed 58 checks; full #94 ended without a result and its exit cause remains unverified. These remain acceptance work before the final Session B closeout.
 
 The dedicated art is recorded in the backlog; current interior uses existing shelf/box and cash-register/desk fallback plus a scheduled shopper. Short tour capital, purchased stock, controlled date jumps and automatic minigame quality are disclosed in the adjacent fixture capture note.
+
+## Integrated follow-up
+
+626/626 unit tests passed after merging #86. Industry introduction native tour: 41.8s, zero failures. Full rendered walkthrough completed in 7398.1s with 174 failures, 344 screenshots and 3175 steps; see full_result.json. First cascade: the pop-up fixture left the player in the shop while the following café chapter tried to sleep at home. Fixed by actual door exit, Metro and home entrance; rendered popup short tour 56.8s, zero failures, explicitly asserts the home handoff. Full acceptance remains FAILED until a corrected integrated run finishes.

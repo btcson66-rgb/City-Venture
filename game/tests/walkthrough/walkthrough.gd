@@ -3163,6 +3163,12 @@ func _popup_weekend(fixture:=false) -> void:
 	bot.expect(PopupStore.active().is_empty() and PopupStore.S()["history"].size()>0,"weekend settles automatically")
 	bot.expect(Ledger.check_balanced(),"pop-up all journals balanced")
 	bot.expect(SaveSystem.save_to(bot.out_dir.path_join("popup_weekend.json")),"played pop-up save")
+	# The following chapter waits using the home bed, so leave the shop through real travel.
+	await close_modal()
+	if SceneRouter.world_scene().kind=="interior":await exit_building()
+	await metro_to("riverside")
+	await enter_building("riverside_apartment")
+	bot.expect(in_scene("interior","riverside_apartment"),"pop-up handoff returns to the home bed")
 	UIRoot.close_all()
 
 func _industry_intro_fixture() -> void:
