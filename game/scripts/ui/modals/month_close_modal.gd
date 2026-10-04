@@ -17,7 +17,10 @@ func _init(r: Dictionary) -> void:
 func build() -> void:
 	var cols := UIK.hbox(10)
 	# scrolls if a language's taller line height (or more entities) would push the footer off-screen
-	body.add_child(UIK.scroll(cols, Vector2(500, 226)))
+	var reports_scroll := UIK.scroll(cols, Vector2(500, 226))
+	# Multiple companies must scroll inside the report, keeping Continue within the viewport.
+	reports_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	body.add_child(reports_scroll)
 	for eid in rep["entities"]:
 		var e: Dictionary = rep["entities"][eid]
 		var v := UIK.vbox(1)

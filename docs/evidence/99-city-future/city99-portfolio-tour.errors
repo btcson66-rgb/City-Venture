@@ -1,0 +1,25 @@
+SCRIPT ERROR: Parse Error: Cannot infer the type of "played" variable because the value doesn't have a set type.
+   at: GDScript::reload (res://tests/walkthrough/walkthrough.gd:3539)
+   GDScript backtrace (most recent call first):
+       [0] _start (res://scripts/boot.gd:20)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://tests/walkthrough/beta_tour.gd:0)
+   GDScript backtrace (most recent call first):
+       [0] _start (res://scripts/boot.gd:20)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "played" variable because the value doesn't have a set type.
+   at: GDScript::reload (res://tests/walkthrough/walkthrough.gd:3539)
+   GDScript backtrace (most recent call first):
+       [0] _start (res://scripts/boot.gd:20)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://tests/walkthrough/bot.gd:0)
+   GDScript backtrace (most recent call first):
+       [0] _start (res://scripts/boot.gd:20)
+ERROR: Failed to load script "res://tests/walkthrough/bot.gd" with error "Compilation failed".
+   at: load (modules/gdscript/gdscript.cpp:3041)
+   GDScript backtrace (most recent call first):
+       [0] _start (res://scripts/boot.gd:20)
+SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'GDScript'.
+   at: _run (res://tests/walkthrough/bot.gd:184)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/walkthrough/bot.gd:184)
+       [1] wait (res://tests/walkthrough/bot.gd:267)

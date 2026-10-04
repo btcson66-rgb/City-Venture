@@ -58,6 +58,9 @@ func run() -> void:
 		await _industry_fixtures()
 		return
 	await _new_game()
+	if _arg("from")=="city_portfolio":
+		await _city_portfolio_fixture()
+		return
 	if _arg("from") in ["city_future","city_future_os"]:
 		await _city_future_fixture()
 		return
@@ -3479,7 +3482,7 @@ func _city_future_season() -> void:
 	bot.expect(validated["ok"],"actual played city save passes normal import validation")
 
 func _open_city_future() -> void:
-	if _arg("from")=="city_future":await bot.use_action("city_future")
+	if _arg("from") in ["city_future","city_portfolio"]:await bot.use_action("city_future")
 	else:
 		await popups()
 		if not UIRoot.top_modal() is CompanyOS:await _home_laptop("overview")
@@ -3495,3 +3498,46 @@ func _close_management_for_decisions() -> void:
 		else:
 			bot.fail("unexpected blocking screen before queued crisis: "+str(modal.get_script().resource_path));return
 	bot.fail("management screens did not close before crisis")
+
+func _city_portfolio_fixture() -> void:
+	await bot.wait(4)
+	UIRoot._suppress_decisions=true;UIRoot.tutorial.st()["off"]=true;StoryEngine.St()["active"].clear();Clock.world_active=false
+	bot.step("Controlled civic team fixture — actual hiring, options and inactive issuer deadline")
+	bot.expect(Company.register("Civic Issuer","ecommerce","22 Founders Lane")["ok"],"issuer genuinely registered")
+	bot.expect(Company.open_business_account(15000)["ok"],"issuer capital actually transferred")
+	var issuer:=GameState.company_id()
+	Staff.register_employer();Staff.post_job("support");Staff.handle("stf.applicants",{"role":"support"})
+	var person: String=Staff.S()["applicants"][0]["id"]
+	bot.expect(Staff.hire(person)["ok"],"actual advertised employee hired")
+	GameState.set_flag("legacy_cards_viewed");StoryEngine.start_chapter(CityFuture.definition(22)["id"])
+	SceneRouter._enter("interior","city_hall","door","up");await bot.wait(.8)
+	await _open_city_future();await _intro_control("city_read");await _intro_control("city_partner");await _intro_control("city_wait")
+	Clock.advance(8*Clock.DAY);StoryEngine.check();await bot.wait(.4)
+	await _open_city_future();await bot.shot("city_portfolio_actual_option_choices")
+	await _intro_control("CityChoice_options");await bot.shot("city_portfolio_actual_option_commitment")
+	if not bot.expect(not CityFuture.S()["options"].is_empty(),"actual founder option commitment"):return
+	var option: Dictionary=CityFuture.S()["options"][0]
+	var basis:=HoldingGroups.basis(issuer)
+	UIRoot.close_all()
+	bot.expect(Company.register("Other Civic Viewer","ecommerce","Other office")["ok"],"second company genuinely registered")
+	bot.expect(Company.open_business_account(3000)["ok"],"second company paid opening capital")
+	var viewer:=GameState.company_id();var other_basis:=HoldingGroups.basis(viewer)
+	var other_shares: Dictionary=GameState.data["cap_table"].duplicate(true)
+	Clock.advance(maxi(0,int(option["vest_at"])-Clock.now()));CityFuture.reconcile();await bot.wait(.4)
+	bot.expect(GameState.company_id()==viewer,"inactive issuer processing restores selected viewer")
+	bot.expect(option["status"] in ["vested","forfeited"],"real retained or departed team resolves options on deadline")
+	bot.expect(GameState.data["cap_table"]==other_shares and HoldingGroups.basis(viewer)==other_basis,"other cap table and cost remain untouched")
+	var grant:=float(option.get("vested_share",0))
+	bot.expect(absf(HoldingGroups.basis(issuer)-basis*(1-grant))<.011,"only actual issuer basis transferred once")
+	await popups()
+	CompanyPortfolio.switch(issuer)
+	bot.expect((option["status"]=="vested")==Staff.people().any(func(p):return p["id"]==person),"actual remaining employee controls vesting outcome")
+	bot.expect(absf(float(GameState.data["cap_table"].get("employees",0))-grant)<.000001,"only actual founder shares become employee shares")
+	UIRoot.close_all();await bot.wait(.4)
+	SceneRouter._enter("interior",Living.home_building(),Living.home_bed(),"down");await bot.wait(.8)
+	await _home_laptop("finance");await bot.shot("city_portfolio_issuer_actual_books")
+	UIRoot.close_all();CompanyPortfolio.switch(viewer)
+	bot.expect(Ledger.check_balanced(),"cross-company options and real payroll balance")
+	var played: String=bot.out_dir.path_join("city_portfolio_played.json")
+	bot.expect(SaveSystem.save_to(played),"save actual payroll and option ownership outcome")
+	bot.expect(SaveSystem.validate_text(FileAccess.get_file_as_string(played))["ok"],"normal played save validation")

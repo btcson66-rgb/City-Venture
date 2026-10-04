@@ -326,3 +326,80 @@ func test_actual_completed_city_capture_loads_receipts_cards_and_legacy() -> voi
 	runner.eq(GameState.data["ledger"]["journal"].size(),journals,"completed native capture never pays or refunds twice")
 	runner.eq(CityFuture.S()["cards"].size(),6,"loaded review cannot duplicate city cards")
 	runner.check(Ledger.check_balanced(),"full played civic save remains balanced")
+
+func test_inactive_issuer_vests_only_its_own_basis_and_restores_viewer() -> void:
+	_team();_services(22)
+	var issuer:=GameState.company_id()
+	runner.check(CityFuture.choose("options")["ok"],"actual options approved")
+	CityFuture.chapter(22)["poaching_resolved"]=true
+	var offer: Dictionary=CityFuture.S()["options"][0]
+	var issuer_basis:=HoldingGroups.basis(issuer)
+	Company.register("Other civic company","ecommerce","Other office");Company.open_business_account(3000)
+	var viewer:=GameState.company_id();var other_basis:=HoldingGroups.basis(viewer)
+	var other_cash:=Ledger.cash(viewer);var carrying:=Ledger.balance("player","investments")
+	var other_shares: Dictionary=GameState.data["cap_table"].duplicate(true)
+	GameState.data["clock"]["minutes"]=int(offer["vest_at"])
+	CityFuture.reconcile()
+	runner.eq(offer["status"],"vested","due options vest while viewing another live company")
+	runner.eq(GameState.company_id(),viewer,"vesting restores selected company")
+	runner.eq(GameState.data["cap_table"],other_shares,"other shares untouched")
+	runner.eq(Ledger.cash(viewer),other_cash,"other cash untouched")
+	runner.eq(HoldingGroups.basis(viewer),other_basis,"other carrying cost untouched")
+	runner.check(absf(HoldingGroups.basis(issuer)-issuer_basis*.95)<.011,"only issuer basis declines five percent")
+	runner.check(absf(Ledger.balance("player","investments")-(carrying-issuer_basis*.05))<.011,"aggregate investments lose only actual issuer cost")
+	CompanyPortfolio.run_in(issuer,func():
+		runner.eq(GameState.data["cap_table"].get("employees",0),.05,"actual issuing team owns five percent")
+		runner.eq(GameState.data["cap_table"]["founder"],.95,"founder holding conserved"))
+	var journal: int=GameState.data["ledger"]["journal"].size()
+	runner.check(SaveSystem.save(99) and SaveSystem.load_data(99),"vested cross-company save loads")
+	CityFuture.reconcile()
+	runner.eq(GameState.data["ledger"]["journal"].size(),journal,"load cannot vest or expense twice")
+	runner.check(Ledger.check_balanced(),"actual option grant balances")
+func test_inactive_talent_poaching_affects_only_recorded_team() -> void:
+	var person:=_team();_services(22);var issuer:=GameState.company_id()
+	runner.check(CityFuture.choose("culture")["ok"],"real culture policy chosen")
+	var talent:=CityFuture.chapter(22)
+	Company.register("Unaffected team","ecommerce","Other office");Company.open_business_account(3000)
+	Staff.register_employer();Staff.post_job("support");Staff.handle("stf.applicants",{"role":"support"})
+	var other: String=Staff.S()["applicants"][0]["id"]
+	runner.check(Staff.hire(other)["ok"],"other team genuinely hired")
+	var viewer:=GameState.company_id();var people: Array=Staff.people().duplicate(true)
+	var risks: Dictionary=CityFuture.cfg()["poaching_risks"];var prior: float=risks["culture"]
+	risks["culture"]=1.0
+	GameState.data["clock"]["minutes"]=int(talent["review_at"])+int(CityFuture.cfg()["poaching_delay_days"])*Clock.DAY
+	CityFuture.reconcile();risks["culture"]=prior
+	runner.check(talent.get("poaching_resolved",false),"inactive team review resolves on deadline")
+	runner.eq(GameState.company_id(),viewer,"poaching restores viewer")
+	runner.eq(Staff.people(),people,"other company's actual team untouched")
+	runner.check(person in talent["result"].get("departed",[]),"recorded issuer employee departs under explicit stress risk")
+	CompanyPortfolio.run_in(issuer,func():runner.check(Staff.people().is_empty(),"original team receives actual departure"))
+	runner.check(SaveSystem.save(99) and SaveSystem.load_data(99),"poaching receipt survives load")
+	CityFuture.reconcile();runner.eq(Staff.people().map(func(p):return str(p["id"])),people.map(func(p):return str(p["id"])),"resolved poaching cannot affect viewer on replay")
+func test_sold_founder_cannot_create_employee_shares_at_vesting() -> void:
+	_team();_services(22)
+	runner.check(CityFuture.choose("options")["ok"],"real options offered before disposal")
+	var offer: Dictionary=CityFuture.S()["options"][0]
+	# A zero-founder cap table represents the saved ownership edge, not a simulated sale receipt.
+	GameState.data["cap_table"]={"founder":0.0,"investors":1.0}
+	CityFuture.chapter(22)["poaching_resolved"]=true
+	GameState.data["clock"]["minutes"]=int(offer["vest_at"])
+	var carrying:=Ledger.balance("player","investments");CityFuture.reconcile()
+	runner.eq(offer["status"],"forfeited","no founder shares available means unvestable offer")
+	runner.eq(GameState.data["cap_table"].get("employees",0),0,"no shares created after founder disposal")
+	runner.eq(Ledger.balance("player","investments"),carrying,"unvestable offer spends no basis")
+func test_closed_pending_issuer_forfeits_without_touching_next_company() -> void:
+	_team();_services(22)
+	runner.check(CityFuture.choose("options")["ok"],"real pending employee commitment")
+	var issuer:=GameState.company_id();var offer: Dictionary=CityFuture.S()["options"][0]
+	Insolvency.close_company()
+	Company.register("Next civic business","ecommerce","New office");Company.open_business_account(3000)
+	var viewer:=GameState.company_id();var cash:=Ledger.cash(viewer)
+	var journal: int=GameState.data["ledger"]["journal"].size()
+	GameState.data["clock"]["minutes"]=int(offer["vest_at"])
+	CityFuture.reconcile()
+	runner.eq(offer["status"],"forfeited","closed issuer never vests pending shares")
+	runner.check(not GlobalMarket.live(issuer),"closed issuer not revived")
+	runner.eq(GameState.company_id(),viewer,"next company remains selected")
+	runner.eq(Ledger.cash(viewer),cash,"no cost charged to next business")
+	runner.eq(GameState.data["cap_table"].get("employees",0),0,"no employees awarded next company shares")
+	runner.eq(GameState.data["ledger"]["journal"].size(),journal,"closed pending offer creates no new ledger posting")

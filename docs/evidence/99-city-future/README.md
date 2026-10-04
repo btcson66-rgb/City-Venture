@@ -27,6 +27,8 @@ The native strategy now uses actual PriceUp buttons to target 1.5x reference pri
 
 Chapter7 native rerun now passes both original assertions with actual monthly profit about $2,711 and survived_losses=false. Later chapter13 attempted to make home stock exceed a remote warehouse and exceeded practical capacity/funding; it caused a failed export and later missing FX controls. Corrected selection uses an affordable home-packable listing and real replenishment, and the helper checks that actual packing location rather than aggregate stock. Original chapter13 autosave is copied byte-for-byte, compressed/hash recorded, and loaded normally by resume_ch13 for recovery. This is segmented diagnosis, not a fresh completed full PASS.
 
-原始第13章自動存檔正常讀回後的接續完成（f3618370）：0失敗，1505步、133張原始擷取、3797.9秒，無SCRIPT ERROR。保留原有現金、庫存、時間與歷史；真實補貨、境外交付、換匯入帳$855.40，第14–24章、後續独立產業fixture及正常存讀檔均完成。45筆英文稽核皆品牌、人名、語言選項或物理單位。原始完成城市存檔未修改，ZIP及SHA-256驗證一致。這是分段接續PASS，不替代仍在執行的新存檔完整流程。
+原始第13章自動存檔正常讀回後的接續完成（f3618370）：0失敗，1505步、133張原始擷取、3797.9秒，無SCRIPT ERROR。保留原有現金、庫存、時間與歷史；真實補貨、境外交付、換匯入帳$855.40，第14–24章、後續獨立產業fixture及正常存讀檔均完成。45筆英文稽核皆品牌、人名、語言選項或物理單位。原始完成城市存檔未修改，ZIP及SHA-256驗證一致。這是分段接續PASS，不替代仍在執行的新存檔完整流程。
 
 新存檔完整第1–24章完成（f3618370）：0失敗／3588步／403張原始擷取／8041.8秒，無SCRIPT ERROR。原始城市存檔保留24章完成與六張成果卡，ZIP/SHA-256一致。執行中有6次watchdog提示，流程有恢復且正常完成；保留原始輸出。原有獲利、境外交付及換匯斷言不降低；後段獨立產業受控fixture另有標示。後續跨公司期權與挖角修正另列源版本和驗證，不宣稱此完整流程覆蓋後改的程式碼。
+
+跨公司追修：新增四項真實招募/期權回歸，先27/30重現到期不歸屬、未處理原團隊挖角及零持股誤標歸屬；修正原公司context與其投資成本、同步減少basis，31/31通過，含關閉待歸屬公司、存讀檔與重複處理。正常招募/選擇/實際Clock薪資與三十天到期的1280×720短版0失敗／42.4秒。原公司與檢視公司隔離；股權可能因真正離職而取消，沒有強制留任或虛構現金。第一輪native有型別錯誤，後兩輪揭露多帳戶月結超出畫面；修正短版住處資料引用與月結內部橫向捲動後正常點擊繼續，原失敗報告保留。這是新存檔full之後的程式修改，另做整合全套與相關短版驗證。

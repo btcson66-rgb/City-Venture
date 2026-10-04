@@ -175,26 +175,13 @@ static func reconcile() -> void:
 	for option in S()["options"]:
 		if option["status"]!="pending":continue
 		if not GlobalMarket.live(option["entity"]):option["status"]="forfeited";continue
-		if Clock.now()<int(option["vest_at"]) or option["entity"]!=GameState.company_id():continue
-		var eligible_people: Array=Staff.people().filter(func(person):return person["id"] in option["people"])
-		if eligible_people.is_empty():option["status"]="forfeited";continue
-		var shares: Dictionary=GameState.data.get("cap_table",{"founder":1.0})
-		var founder_before: float=float(shares.get("founder",0))
-		var grant: float=minf(founder_before,float(option["share"])*eligible_people.size()/maxf(1,float(option["people"].size())))
-		shares["founder"]=float(shares.get("founder",0))-grant;shares["employees"]=float(shares.get("employees",0))+grant
-		GameState.data["cap_table"]=shares
-		var carrying: float=snappedf(maxf(0,Ledger.balance("player","investments"))*grant/maxf(.01,founder_before),.01)
-		if carrying>0:Ledger.post("player",I18n.t("Founder shares vested to the employee team"),[{"acct":"exp:other","dr":carrying},{"acct":"investments","cr":carrying}],{"type":"ownership"})
-		var book: float=snappedf(maxf(0,-Ledger.balance(option["entity"],"equity"))*grant,.01)
-		if book>0:Ledger.post(option["entity"],I18n.t("Vested civic employee options"),[{"acct":"equity","dr":book},{"acct":"equity:employees","cr":book}],{"type":"ownership"})
-		option["status"]="vested";option["vested_share"]=grant
+		if Clock.now()<int(option["vest_at"]):continue
+		CompanyPortfolio.run_in(str(option["entity"]),func():_vest_option(option))
 	var talent: Dictionary=chapter(22)
-	if not talent.is_empty() and talent["decision"]!="" and not talent.get("poaching_resolved",false) and Clock.now()>=int(talent["review_at"])+int(cfg()["poaching_delay_days"])*Clock.DAY and private_payer(talent)!="player":
-		var risks: Dictionary=cfg()["poaching_risks"]
-		var departed: Array=[]
-		for person in Staff.people().duplicate():
-			if GameState.randf()<float(risks[talent["decision"]]):departed.append(person["id"]);Staff._quit(person)
-		talent["result"]["departed"]=departed;talent["poaching_resolved"]=true
+	if not talent.is_empty() and talent["decision"]!="" and not talent.get("poaching_resolved",false) and Clock.now()>=int(talent["review_at"])+int(cfg()["poaching_delay_days"])*Clock.DAY:
+		var owner: String=talent.get("entity","")
+		if owner!="" and GlobalMarket.live(owner):CompanyPortfolio.run_in(owner,func():_resolve_poaching(talent))
+		else:talent["poaching_resolved"]=true;talent["result"]["departed"]=[]
 	for c in S()["chapters"].values():
 		if c["status"]=="reviewed":continue
 		var num: int=c["number"]
@@ -206,6 +193,30 @@ static func reconcile() -> void:
 		if Clock.now()>int(c["deadline"]) and c["decision"]=="":
 			c["status"]="expired";c["result"]={"expired":true,"quality":c["quality"]}
 			GameState.set_flag("city%d_unavailable"%num)
+## Delayed ownership changes follow the issuing company, preserving the selected view.
+static func _vest_option(option: Dictionary) -> void:
+	var eligible_people: Array=Staff.people().filter(func(person):return person["id"] in option["people"])
+	var shares: Dictionary=GameState.data.get("cap_table",{"founder":1.0})
+	var founder_before: float=float(shares.get("founder",0))
+	if eligible_people.is_empty() or founder_before<=0:option["status"]="forfeited";return
+	var grant: float=minf(founder_before,float(option["share"])*eligible_people.size()/maxf(1,float(option["people"].size())))
+	if grant<=0:option["status"]="forfeited";return
+	shares["founder"]=founder_before-grant;shares["employees"]=float(shares.get("employees",0))+grant
+	GameState.data["cap_table"]=shares
+	var issuer: String=option["entity"]
+	var carrying: float=snappedf(HoldingGroups.basis(issuer)*grant/founder_before,.01)
+	if carrying>0:
+		Ledger.post("player",I18n.t("Founder shares vested to the employee team"),[{"acct":"exp:other","dr":carrying},{"acct":"investments","cr":carrying}],{"type":"ownership","company":issuer})
+		HoldingGroups.add_basis(issuer,-carrying)
+	var book: float=snappedf(maxf(0,-Ledger.balance(issuer,"equity"))*grant,.01)
+	if book>0:Ledger.post(issuer,I18n.t("Vested civic employee options"),[{"acct":"equity","dr":book},{"acct":"equity:employees","cr":book}],{"type":"ownership"})
+	option["status"]="vested";option["vested_share"]=grant
+static func _resolve_poaching(talent: Dictionary) -> void:
+	var risks: Dictionary=cfg()["poaching_risks"]
+	var departed: Array=[]
+	for person in Staff.people().duplicate():
+		if GameState.randf()<float(risks[talent["decision"]]):departed.append(person["id"]);Staff._quit(person)
+	talent["result"]["departed"]=departed;talent["poaching_resolved"]=true
 static func demand_factor(industry: String) -> float:
 	if not GameState.data.has("city_future"):return 1.0
 	var factor:=1.0;var peak: Dictionary=S()["peak"]
