@@ -27,3 +27,5 @@ The complete integrated walkthrough is still pending; the earlier #93 run failed
 - Added the guide help card, actual mentor map caption, played save and JPG evidence.
 
 Native tour follow-up: select the customer floor through the actual quote buttons; the default quote can legitimately lose after the stack changes RNG consumption. Gameplay competition is preserved. Fresh isolated save directories prevent occupied test slots from stopping New Game.
+
+Rendered integration audit follow-up: automotive prerequisite text now translates before adding ✓/✗, displays only the current unmet next step (or the ready licence action), and licence fees use Fmt.money. Roof compass labels now use extracted translated display names while preserving all orientation codes and yield values. i18n 5055/5055 missing 0; wiki OK; beta 0. Full unit rerun and relevant rendered industry tour are pending before pushing this follow-up.
