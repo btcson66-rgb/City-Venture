@@ -16,6 +16,36 @@ func _init(b) -> void:
 
 
 func run() -> void:
+	if _arg("from")=="resume_ch10":
+		bot.step("resume_ch10: genuine full-walkthrough backup, no fabricated company, cash, story or inventory")
+		if not bot.expect(SaveSystem.load_and_enter(1),"actual full-run checkpoint loaded"):return
+		await wait_world();await popups()
+		await _chapters_10_to_12()
+		await _chapters_13_to_14()
+		await _chapters_15_to_16()
+		await _chapters_17_to_18()
+		await _city_future_season()
+		await _summary()
+		await _industry_fixtures()
+		return
+	if _arg("from")=="resume_insolvency":
+		bot.step("Actual full-run insolvency checkpoint; existing personal savings only")
+		if not bot.expect(SaveSystem.load_and_enter(1),"genuine insolvent full-run save loaded"):return
+		await wait_world();await popups()
+		bot.expect(Insolvency.state().get("stage","")=="rescued","actual founder rescue recorded")
+		bot.expect(GlobalMarket.live(GameState.company_id()),"actual rescued company remains live")
+		bot.expect(Ledger.check_balanced(),"actual rescue books balanced")
+		bot.expect(SaveSystem.save_to(bot.out_dir.path_join("actual_rescue_played.json")),"actual rescued state saved")
+		return
+	if _arg("from")=="resume_ch17":
+		bot.step("resume_ch17: genuine saved operating history, including actual insolvency if present")
+		if not bot.expect(SaveSystem.load_and_enter(1),"actual chapter17 checkpoint loaded"):return
+		await wait_world();await popups()
+		await _chapters_17_to_18()
+		await _city_future_season()
+		await _summary()
+		await _industry_fixtures()
+		return
 	await _new_game()
 	if _arg("from") in ["city_future","city_future_os"]:
 		await _city_future_fixture()
@@ -642,8 +672,26 @@ func popups() -> void:
 				await bot.click_text("OK")
 			await bot.wait(0.4)
 		elif m is InsolvencyModal:
-			bot.fail("company closed during the walkthrough; recovery is required before business steps")
-			await bot.click_named("StartOver")
+			await bot.shot("actual_insolvency_choices")
+			if not m.report.is_empty():
+				await bot.click_named("StartOver")
+			else:
+				var rescue: Button=m.find_child("Rescue",true,false) as Button
+				var restructure: Button=m.find_child("Restructure",true,false) as Button
+				if rescue!=null and not rescue.disabled:
+					var personal_before: float=Ledger.cash("player")
+					var need: float=Insolvency.shortfall(str(Insolvency.state()["entity"]))
+					await bot.click_named("Rescue")
+					bot.expect(not Insolvency.active(),"actual founder savings resolve insolvency")
+					bot.expect(absf(Ledger.cash("player")-(personal_before-need))<.02,"rescue spends existing personal savings without invented capital")
+				elif restructure!=null and not restructure.disabled and Bank.credit()>=350:
+					await bot.click_named("Restructure")
+					bot.expect(not Insolvency.active(),"actual bank restructuring resolves insolvency")
+				else:
+					await bot.click_named("CloseCompany")
+					await bot.shot("actual_insolvency_closing_statement")
+					await bot.click_named("StartOver")
+				bot.expect(Ledger.check_balanced(),"actual insolvency choice preserves balanced books")
 			continue
 		elif m is InfoModal:
 			bot.log_line("  info card: %s" % str(m.title_text))
@@ -859,6 +907,10 @@ func _pack_and_ship_home() -> void:
 
 
 func open_os_at(action_pred: Callable, what: String) -> void:
+	await popups()
+	if UIRoot.top_modal() is CompanyOS:
+		await bot.wait(.3)
+		return
 	await bot.use(action_pred, what)
 	await bot.until(func(): return UIRoot.top_modal() is CompanyOS, 3.0)
 	await bot.wait(0.5)
@@ -1975,27 +2027,31 @@ func _chapters_10_to_12() -> void:
 	await popups()
 	bot.expect(StoryEngine.St()["chapter"] == "ch10_digital_rails", "Chapter 10 started after Chapter 9")
 	bot.expect(World.year() == 6, "Year 6: the Digital Finance Boom")
-	# ---------------------------------------------------------------- chapter 10
-	bot.step("Chapter 10 — the news, and Lina's escrow offer")
-	await _read_news("digital_rails")
-	await _until_weekday_hours(10, 15)
-	await exit_building()
-	await metro_to("financial")
-	await enter_building("nexus_bank")
-	await bot.use(func(n): return n.action == "talk" and str(n.params.get("npc", "")) == "lina", "Lina Zhao")
-	await bot.wait(0.6)
-	await bot.shot("lina_rails")
-	await talk_through_dialogue_first_choice()
-	await bot.until(func(): return UIRoot.top_modal() is DecisionModal, 12.0)
-	await bot.wait(0.8)
-	await _pin_badge_shot("badge_escrow_pinned")
-	await popups()   # answers the escrow offer: open the account
-	bot.expect(GameState.flag("escrow_open"), "opened an escrow account")
-	bot.step("Chapter 10 — an import paid through escrow")
-	await exit_building()
-	await metro_to("riverside")
-	await enter_building("riverside_apartment")
-	await _buy_import("phone_stand", "escrow", "settlement_escrow")
+	if _arg("from")!="resume_ch10" or not GameState.flag("escrow_open"):
+		# ---------------------------------------------------------------- chapter 10
+		bot.step("Chapter 10 — the news, and Lina's escrow offer")
+		await _read_news("digital_rails")
+		await _until_weekday_hours(10, 15)
+		await exit_building()
+		await metro_to("financial")
+		await enter_building("nexus_bank")
+		await bot.use(func(n): return n.action == "talk" and str(n.params.get("npc", "")) == "lina", "Lina Zhao")
+		await bot.wait(0.6)
+		await bot.shot("lina_rails")
+		await talk_through_dialogue_first_choice()
+		await bot.until(func(): return UIRoot.top_modal() is DecisionModal, 12.0)
+		await bot.wait(0.8)
+		await _pin_badge_shot("badge_escrow_pinned")
+		await popups()   # answers the escrow offer: open the account
+		bot.expect(GameState.flag("escrow_open"), "opened an escrow account")
+		bot.step("Chapter 10 — an import paid through escrow")
+		await exit_building()
+		await metro_to("riverside")
+		await enter_building("riverside_apartment")
+		await _buy_import("phone_stand", "escrow", "settlement_escrow")
+	else:
+		bot.step("resume_ch10: reuse the already paid escrow import and inspect its real receipt")
+		await _home_laptop("operations")
 	Clock.advance(130)   # (harness) the contract locks within two hours: the order shows as held in escrow
 	await bot.click_named("Tab_finance")
 	await bot.click_named("Tab_operations")
@@ -2016,7 +2072,7 @@ func _chapters_10_to_12() -> void:
 	bot.expect(World.year() == 7, "Year 7: the Bridge Exploit")
 	await _read_news("bridge_before")
 	await _buy_import("phone_stand", "escrow", "settlement_before_exploit")
-	await close_modal()
+	await _close_management_for_decisions()
 	bot.expect(int(GameState.stat("import_orders_y7")) >= 1, "restock ordered through escrow (cash %s)" % Fmt.money0(Ledger.cash(GameState.business_entity())))
 	await bot.until(func(): return not EventEngine.pending().is_empty(), 40.0)   # the bridge is hit within the hour
 	await bot.until(func(): return UIRoot.top_modal() is DecisionModal, 20.0)
@@ -2747,16 +2803,17 @@ func _chapters_17_to_18(fast := false) -> void:
 	await bot.click_named("OpenLegacyStory")
 	await popups()
 	if not GameState.flag("legacy_invited"):
-		if not GameState.flag("consolidation_news_read"):
-			await bot.click_named("read_consolidation_news")
-			await bot.shot("ch17_news")
-			await bot.click_named("CloseInfo")
-			await bot.wait(.4)
-		await bot.shot("ch17_market_choice")
-		await _export_row_input("Strategy_niche")
-		await _export_row_input("apply_market_response")
-		await bot.shot("ch17_price_and_campaign")
-		bot.expect(GameState.flag("consolidation_response"), "real price and operating action recorded")
+		if not GameState.flag("consolidation_response") and not GameState.flag("consolidation_unavailable"):
+			if not GameState.flag("consolidation_news_read"):
+				await bot.click_named("read_consolidation_news")
+				await bot.shot("ch17_news")
+				await bot.click_named("CloseInfo")
+				await bot.wait(.4)
+			await bot.shot("ch17_market_choice")
+			await _export_row_input("Strategy_niche")
+			await _export_row_input("apply_market_response")
+			await bot.shot("ch17_price_and_campaign")
+			bot.expect(GameState.flag("consolidation_response"), "real price and operating action recorded")
 		await close_modal()
 		await close_modal()
 		if fast:
@@ -3404,3 +3461,14 @@ func _open_city_future() -> void:
 		await popups()
 		if not UIRoot.top_modal() is CompanyOS:await _home_laptop("overview")
 		await _intro_control("OpenCityFuture")
+
+func _close_management_for_decisions() -> void:
+	for attempt in 8:
+		await popups()
+		var modal=UIRoot.top_modal()
+		if modal==null or modal is DecisionModal:return
+		if modal is CompanyOS or modal is SettlementModal:
+			await close_modal()
+		else:
+			bot.fail("unexpected blocking screen before queued crisis: "+str(modal.get_script().resource_path));return
+	bot.fail("management screens did not close before crisis")
