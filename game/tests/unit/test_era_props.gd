@@ -60,6 +60,9 @@ func test_live_era_refresh_preserves_player_feet() -> void:
 	for frame in range(30):
 		for card in UIRoot.modal_layer.get_children():  # a month-close or first-visit card may open meanwhile
 			card.free()
+		var live := SceneRouter.world_scene()
+		if live != null:
+			live._process(0.0)  # evaluate the era check while no card is open, whatever else opens this frame
 		await runner.get_tree().process_frame
 		if _props(SceneRouter.world_scene(), "port_cranes_far").size() == 1:
 			break
