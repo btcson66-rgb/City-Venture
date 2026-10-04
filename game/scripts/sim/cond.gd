@@ -25,6 +25,8 @@ static func eval(expr: String, ctx := {}) -> bool:
 		return false
 	if expr.begins_with("!"):
 		return not eval(expr.substr(1), ctx)
+	if expr.begins_with("met:"):
+		return bool(GameState.data.get("npcs",{}).get(expr.substr(4),{}).get("met",false))
 	if expr.begins_with("flag:"):
 		return GameState.flag(expr.substr(5))
 	if expr.begins_with("visited:"):
@@ -105,6 +107,7 @@ static func _cmp(expr: String) -> Dictionary:
 
 
 static func _value(name: String, ctx: Dictionary) -> float:
+	if name.begins_with("metric:"):return SynergyMetrics.value(name.substr(7))
 	if name.begins_with("stat:"):
 		return GameState.stat(name.substr(5))
 	match name:

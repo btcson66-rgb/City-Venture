@@ -353,3 +353,32 @@ func test_industry_merge_reports_realized_fx_and_keeps_overseas_destinations() -
 	runner.eq(report["segments"]["totals"]["operating_profit"], report["business_profit"], "realized FX is included exactly once in segment and company totals")
 	runner.check(BuildingInfo.world_travel_available(), "global banking keeps overseas information accessible")
 	runner.eq(BuildingInfo.icon_for("customs_guide"), "info", "customs guidance registers its existing icon")
+
+func test_home_invoice_rejection_has_cooldown_and_fresh_offer_without_phantom_income() -> void:
+	_setup()
+	OverseasPartners.choose_home_invoices()
+	var seed_value := 0
+	for candidate in range(1, 100):
+		var probe := RandomNumberGenerator.new()
+		probe.seed = candidate
+		if probe.randf() > float(OverseasPartners.cfg()["home_invoice_acceptance"]):
+			seed_value = candidate
+			break
+	GameState.rng.seed = seed_value
+	var cash := Ledger.cash(GameState.company_id())
+	var contracts_before := Contracts.C().size()
+	var rejected := OverseasPartners.distributor_offer()
+	runner.check(not rejected["ok"], "actual buyer can reject home-currency exposure")
+	runner.eq(Contracts.C().size(), contracts_before, "rejection creates no contract")
+	runner.eq(Ledger.cash(GameState.company_id()), cash, "rejection creates no cash or revenue")
+	runner.check(not OverseasPartners.distributor_offer()["ok"], "same-day retry cannot bypass cooldown")
+	var accepted := false
+	for retry in 20:
+		GameState.data["clock"]["minutes"] = int(OverseasPartners.company()["next_offer"])
+		var quote := OverseasPartners.distributor_offer()
+		if quote["ok"]:
+			accepted = true
+			break
+	runner.check(accepted, "actual fresh-day offer is obtainable after rejection")
+	runner.check(Ledger.check_balanced(), "rejection and retry preserve real books")
+	print("home-invoice rejection fixture seed: ", seed_value)

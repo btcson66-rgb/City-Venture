@@ -1,0 +1,121 @@
+{
+ "id": "intro_real_estate",
+ "business": "real_estate",
+ "title": "Diane and the first property",
+ "text": "Meet Diane at the realty office and discuss the brokerage licence.",
+ "mentor": "diane_harlow",
+ "building": "harlow_finch",
+ "trigger": [
+  "cash>=20000 || world_year>=2"
+ ],
+ "objectives": [
+  {
+   "id": "side_real_estate_1",
+   "text": "Meet Diane at the realty office and discuss the brokerage licence.",
+   "complete_when": [
+    "met:diane_harlow"
+   ],
+   "skip_when": [
+    "flag:side_real_estate_declined"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "building": "harlow_finch"
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "diane_harlow",
+     "text": "Meet Diane at the realty office and discuss the brokerage licence."
+    }
+   ]
+  },
+  {
+   "id": "side_real_estate_2",
+   "text": "Get the brokerage licence and open the realty office.",
+   "complete_when": [
+    "flag:real_estate_active"
+   ],
+   "skip_when": [
+    "flag:side_real_estate_declined"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "os": true
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "diane_harlow",
+     "text": "Get the brokerage licence and open the realty office."
+    }
+   ]
+  },
+  {
+   "id": "side_real_estate_3",
+   "text": "Complete the first property transaction.",
+   "complete_when": [
+    "metric:count:real_estate.mandates|status=closed>=1"
+   ],
+   "skip_when": [
+    "flag:side_real_estate_declined"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "os": true
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "diane_harlow",
+     "text": "Complete the first property transaction."
+    }
+   ]
+  },
+  {
+   "id": "side_real_estate_4",
+   "text": "Move into landlord operations and acquire the first rental property.",
+   "complete_when": [
+    "metric:data:real_estate.stage>=2",
+    "metric:data:real_estate.properties>=1"
+   ],
+   "skip_when": [
+    "flag:side_real_estate_declined"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "os": true
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "diane_harlow",
+     "text": "Move into landlord operations and acquire the first rental property."
+    }
+   ]
+  }
+ ],
+ "on_complete": [
+  {
+   "do": "timeline",
+   "text": "Diane and the first property — introduction complete.",
+   "kind": "side_story"
+  },
+  {
+   "do": "set_flag",
+   "flag": "contact_diane_harlow"
+  },
+  {
+   "do": "message",
+   "from": "diane_harlow",
+   "text": "You can reach me through this phone thread. Keep the real costs and risks in view before expanding."
+  }
+ ],
+ "on_unavailable": [
+  {
+   "do": "timeline",
+   "text": "Diane and the first property — opportunity ended.",
+   "kind": "side_story"
+  }
+ ]
+}

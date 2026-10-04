@@ -1,70 +1,31 @@
-# 連續作業進度：停在 #86（PARTIAL）
+# #86 industry introductions — refreshed acceptance evidence
 
-2026-10-02（Asia/Taipei）。不是 16 張工單完成報告。
+Six real four-step stories now load from `game/data/story/side_stories/`. Phone Opportunities accepts them; Business Board names the actual mentor/workplace and selects that district on the city map with the mentor/workplace caption. Company OS opens optional saved guidance. Omar Haddad now has NPC data, a customs-house work spot, weekday schedule and an actual dialogue.
 
-工作區 `D:/City-Venture-86`，分支 `codex/86-industry-story-guidance`。
-起始及結束前 fetch 的預設主分支都是 `claude/exciting-bardeen-y71ixv`，HEAD
-`a9124264dc69f1e5ea88f1576c42d042ffefb435`，無新提交可 merge。原工作區與其他 session 的工單未改動。
+The native Traditional Chinese short tour accepts the manufacturing story through the phone, talks to Lena, leases and equips the factory, hires a technician, accepts an actual OEM order, buys materials, schedules production, encounters actual first-hour defects, chooses outsourcing, delivers the batch and reads its Timeline receipt. Ledger balance is checked. No story revenue is injected.
 
-## 為何停在第一張
+## Verification
 
-#86 明定依賴 #64–#69，每個產業合併後才接上該段。現行主分支未包含這六個產業實作。
-#64 的 Draft PR [#78](https://github.com/btcson66-rgb/City-Venture/pull/78)、
-#65 的 Draft PR [#82](https://github.com/btcson66-rgb/City-Venture/pull/82)、
-#66 的 Draft PR [#85](https://github.com/btcson66-rgb/City-Venture/pull/85) 仍 OPEN；
-#67–#69 在這次查詢的 open PR 清單中沒有實作 PR。沒有擅自合併這些 PR。
+See `unit.log` / `unit.xml` for the final complete suite; `tour-final.log` / `short-tour-result.json` for rendered tour counts. New industry tests include all six trigger/completion/previously-completed/closed-company paths, optional guide save compatibility, expiry, inactive-company ownership and both real recovery choices. Generic side-story tests cover every sequential step being already done or impossible.
 
-已先實作共用載入／逐步串接／手機「機會」入口、說明卡及翻譯；沒有加入虛構的產業完成條件。
-尚未完成六段支線及其真正的分歧／衰退效果／人脈或折扣獎勵、Business Board 的入門者／地點／門檻／地圖標記、
-六個 Company OS 首單教學，以及 Omar NPC／對話／出場。
+Translations have zero missing entries; wiki_check passes; beta_audit has zero hits. The English audit's remaining entries are the language selector, player-entered company name, registration code and beta version label. Screenshot evidence is JPG, with the whole ticket directory below 20 MB.
 
-指南要求的 `tools/beta_audit.py` 也未在主分支到位。使用 `D:/City-Venture-39/tools/beta_audit.py`
-（#44 的未合併實作）唯讀掃描本工作區，結果為 **16 hits**（beta-audit.log）。全是既有文案；沒有修改 #44 的範圍。
-依使用者「全部通過才開下一張」規則，沒有開始 #30 或後續工單，也沒有把 #86 標示完成／開成可結案 PR。
+## Disclosed fixtures and limits
 
-## 共用機制的驗證
+The tour uses a controlled capital contribution of $200,000 and advances the calendar/material delivery time. The company name is First OEM. Those are setup/time controls; actual purchases, production, subcontract cost and invoice use existing industry APIs and Ledger. Unit tests use controlled completion/quality receipts to isolate no-replay and scheduler boundaries.
 
-- Godot 4.5.1 匯入：import-retry.log；exit 0，無 ERROR。初次匯入在字型階段 exit 1；
-  複製同機既有 generated import cache 後重新匯入成功，沒有修改素材來源。
-- `275/275 tests passed in 16.4s`：unit.log、unit.xml；包含新增 8 個共用支線機制測試。
-- 涵蓋：公司與年代觸發、未實作產業不顯示、順序完成、每一步提前做完、每一步已不可能、
-  公司關閉、實際 save/load、舊存檔缺少新欄位、手機接受入口與帳本平衡。
-- `i18n: 3060 msgids · zh_TW translated 3060 · missing 0`：i18n.log。
-- `wiki_check: OK (3830 assets, 191 data ids)`：wiki.log。
-- 繁中短版渲染 tour：33 steps、8 screenshots、0 failures，22.1 秒；tour-final.log、short-tour-result.json。
-  此 tour 只驗證手機空機會頁；不是任何產業支線的完成驗收。
-- English audit：新增文字無命中；既有主選單語言按鈕 `English` 一處命中，保留原始 english-audit.json。
-- 保留證據為 JPG quality 85：opportunities_empty.jpg；畫面文字清楚，無遮擋。
-- 未跑完整渲染 walkthrough：尚未完成第一張，不到每三張一次的節點。
-- `git diff --check` 通過；所有改動都是 #86 的共用機制與文件／測試／翻譯；沒有修改 `game/assets/` 或美術工具。
+Existing industry systems supply the detailed license exam, client proposals, hotel group bookings, auction faults, grants and station operations. The hotel story currently accepts the first completed group booking, without requiring a peak-season calendar date. The energy introduction uses Okoro's existing subsidy conversation, without adding a separate seminar scene. Automotive defects are never fabricated for a healthy car; already sold cars skip that opportunity. Those narrative limitations remain visible in the PR.
 
-## 自我審查與仍需處理
+The complete integrated walkthrough is still pending; the earlier #93 run failed 58 assertions and #94's exit was not established. No claim of complete stack acceptance is made here. Keep this PR Draft.
 
-已避免 unavailable 步驟觸發成功動作／故事獎勵；回條在獎勵前儲存，防止重複檢查重發獎勵；
-找不到公司或公司已關閉時拒絕新機會，關閉已接受支線時移除懸掛步驟；新 UI 有說明卡和穩定按鈕名稱。
-最初 tour 誤用非隔離的 Windows user directory，New Game 被既有存檔列表擋住；未覆寫玩家存檔。
-改用臨時 project override 指定獨立 QA 目錄後重跑成功，交付中不保留 override。
+## Self-review fixes
 
-仍需依真正的產業模組接上六段內容並逐段測 no-soft-lock、決策兩個真正選項、危機消退、收益與風險、
-Company OS 教學／公司關閉／舊存檔整合與實際短 tour。共用測試不代替六段內容驗收。
+- Replaced incomplete fake company save fixtures with real registration.
+- Filled shared tutorial defaults without losing earlier coaching progress.
+- Prevented another company's expiry from modifying selected-company flags.
+- Moved guide button names off translation extraction lines, translated OEM invoice text and clarified subcontract costs.
+- Added the guide help card, actual mentor map caption, played save and JPG evidence.
 
-## 指定順序的逐張狀態
+Native tour follow-up: select the customer floor through the actual quote buttons; the default quote can legitimately lose after the stack changes RNG consumption. Gameplay competition is preserved. Fresh isolated save directories prevent occupied test slots from stopping New Game.
 
-| 工單 | PR | 單元測試 | 自我審查／狀態 | 未解事項 |
-|---|---|---|---|---|
-| #86 | 尚未開立 | 275/275（新增 8 個共用機制測試） | PARTIAL；修正跳過步驟仍跑成功動作的風險、拒絕缺失／關閉公司、補說明卡、主要接受按鈕只保留一個 | 六段產業內容、Business Board 預告、首單教學、Omar 場景尚未實作；#64–#69 未到位；beta_audit 16 處既有文案 |
-| #30 | 尚未開立 | 未執行 | 未開始；遵守順序與前張全通過關卡 | 等待 #86 通過 |
-| #31 | 尚未開立 | 未執行 | 未開始；遵守順序與前張全通過關卡 | 等待 #86 通過 |
-| #70 | 尚未開立 | 未執行 | 未開始；遵守順序與前張全通過關卡 | 等待 #86 通過 |
-| #42 | 尚未開立 | 未執行 | 未開始；遵守順序與前張全通過關卡 | 等待 #86 通過 |
-| #43 | 尚未開立 | 未執行 | 未開始；遵守順序與前張全通過關卡 | 等待 #86 通過 |
-| #35 | 尚未開立 | 未執行 | 未開始；遵守順序與前張全通過關卡 | 等待 #86 通過 |
-| #92 | 尚未開立 | 未執行 | 未開始；遵守順序與前張全通過關卡 | 等待 #86 通過 |
-| #93 | 尚未開立 | 未執行 | 未開始；遵守順序與前張全通過關卡 | 等待 #86 通過 |
-| #91 | 尚未開立 | 未執行 | 未開始；遵守順序與前張全通過關卡 | 等待 #86 通過 |
-| #32 | 尚未開立 | 未執行 | 未開始；遵守順序與前張全通過關卡 | 等待 #86 通過 |
-| #94 | 尚未開立 | 未執行 | 未開始；遵守順序與前張全通過關卡 | 等待 #86 通過 |
-| #33 | 尚未開立 | 未執行 | 未開始；遵守順序與前張全通過關卡 | 等待 #86 通過 |
-| #34 | 尚未開立 | 未執行 | 未開始；遵守順序與前張全通過關卡 | 等待 #86 通過 |
-| #41 | 尚未開立 | 未執行 | 未開始；遵守順序與前張全通過關卡 | 等待 #86 通過 |
-| #99 | 尚未開立 | 未執行 | 未開始；遵守順序與前張全通過關卡 | 等待 #86 通過 |
+Rendered integration audit follow-up: automotive prerequisite text now translates before adding ✓/✗, displays only the current unmet next step (or the ready licence action), and licence fees use Fmt.money. Roof compass labels now use extracted translated display names while preserving all orientation codes and yield values. i18n 5055/5055 missing 0; wiki OK; beta 0. Full suite 471/471 (140.3 s); rendered industry tour 0 failures, 304 steps, 53 captures (357.9 s), no SCRIPT ERROR. Source 5835c7dfc7edc15c932dbb395a3ed719b9baffc8. The remaining 28 English audit entries are names, brands, the language selector and physical units; all prerequisite sentences and compass directions are translated.

@@ -110,7 +110,23 @@
      "icon": "parcel",
      "text": "MANIFEST: 14 pallets of electronics, 6 crates of machine parts and a pallet of coffee are waiting for the evening freighter."
     }
+   },
+   {
+    "id": "trade_freight",
+    "at": [
+     60,
+     130
+    ],
+    "label": "Air cargo trade desk",
+    "action": "trade_open",
+    "params": {}
    }
-  ]
+  ],
+  "npc_spots": {
+   "forwarder": [
+    132,
+    96
+   ]
+  }
  }
 }

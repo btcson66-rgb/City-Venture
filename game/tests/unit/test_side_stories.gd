@@ -1,5 +1,5 @@
 extends RefCounted
-## Generic story sequencing. Industry-specific acceptance waits for #64–#69.
+## Generic story sequencing, including valid company save roundtrips.
 
 var runner
 var original: Dictionary
@@ -20,8 +20,7 @@ func _fixture() -> void:
 			{"do": "set_flag", "flag": "test_side_reward"}],
 		"on_unavailable": [{"do": "set_flag", "flag": "test_side_unavailable"}]}}
 	DataDB.story["side"].append_array(objectives)
-	GameState.data["company"] = "co_side_test"
-	GameState.data["entities"]["co_side_test"] = {"id": "co_side_test", "name": "Side Story Test", "kind": "company", "bank_account": false}
+	Company.register("Side Test", "ecommerce", "Riverside")
 	GameState.data["world"]["year"] = 2
 
 

@@ -1,11 +1,12 @@
 class_name TradeQuoteModal
 extends Modal
-## RFQ preview available without owning stock. Never creates a contract or transfers money.
+## RFQ preview needs no stock; explicit signing creates a shared buyer contract and a paid cargo purchase.
 
 var source := "aurelia"
 var destination := "northridge"
 var product := "wireless_earbuds"
 var quantity := 50
+var markup := .3
 var term := "CIF"
 var mode := "sea"
 var payment := "lc"
@@ -25,7 +26,7 @@ func _init(region := "northridge") -> void:
 
 
 func refresh() -> void:
-	quote = TradeQuote.sheet(source, destination, product, quantity, term, mode, payment, insured)
+	quote = TradeQuote.sheet(source, destination, product, quantity, term, mode, payment, insured,markup)
 
 
 static func value_label(value: String) -> String:
@@ -66,7 +67,7 @@ func build() -> void:
 	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(content)
 	body.add_child(scroll)
-	content.add_child(UIK.wrap("✗ Deals cannot be signed in this build. Compare route estimates first.", 7, Art.C_GOLD, 520))
+	content.add_child(UIK.wrap("Compare supplier costs and buyer demand before signing a trade.", 7, Art.C_GOLD, 520))
 	var regions: Array = DataDB.regions.keys()
 	regions.sort()
 	select_row(content, "Supply region", regions, source, func(value): source = value, "TradeSource")
@@ -83,6 +84,12 @@ func build() -> void:
 	qty.value = quantity
 	qty.value_changed.connect(func(value): quantity = int(value); refresh(); rebuild())
 	qty_row.add_child(qty)
+	var markup_row:=UIK.hbox(5)
+	content.add_child(markup_row);markup_row.add_child(UIK.label("Trade markup (%)",7))
+	var markup_edit:=SpinBox.new()
+	markup_edit.name="TradeMarkup";markup_edit.min_value=0;markup_edit.max_value=100;markup_edit.step=5;markup_edit.value=markup*100
+	markup_edit.value_changed.connect(func(value):markup=float(value)/100.0;refresh();rebuild())
+	markup_row.add_child(markup_edit)
 	select_row(content, "Trade term", ["EXW", "FOB", "CIF", "DDP"], term, func(value): term = value, "TradeTerm")
 	content.add_child(UIK.label_tip("Cost ownership and risk transfer", "trade_terms"))
 	select_row(content, "Cargo transport", ["sea", "air"], mode, func(value): mode = value, "TradeTransport")
@@ -109,6 +116,25 @@ func build() -> void:
 		content.add_child(UIK.kv("Cargo loss / buyer default (%)", "%.1f / %.1f" % [100 * float(quote["cargo_risk"]), 100 * float(quote["default_risk"])]))
 		content.add_child(UIK.kv("Hold warehouse rent (home dollars/day)", Fmt.money(float(quote["warehouse_rent_day"]))))
 		content.add_child(UIK.wrap("No stock, contract, payment, insurance claim or forward hedge is created by this estimate.", 7, Art.C_MUTED, 520))
-	var refresh_button := UIK.button("Refresh RFQ estimate", func(): refresh(); rebuild(), "primary")
+	var can_sign: bool=TradeIndustry.valid() and quote.get("ok",false) and TradeIndustry.available(quote)==""
+	var can_import: bool=TradeIndustry.valid() and TradeIndustry.S()["agency"] and destination=="aurelia" and term=="DDP" and quote.get("ok",false) and TradeIndustry.available(quote,true)==""
+	if can_import:
+		var import_button:=UIK.button("Buy cargo for bonded warehouse",_procure,"primary")
+		import_button.name="TradeProcure";footer.add_child(import_button)
+	if can_sign:
+		var sign_button:=UIK.button("Sign buyer contract and buy supplier cargo",_sign,"" if can_import else "primary")
+		sign_button.name="TradeSign";footer.add_child(sign_button)
+	elif TradeIndustry.valid():content.add_child(UIK.wrap("✗ "+I18n.t(TradeIndustry.available(quote)),8,Art.C_GOLD,520))
+	var refresh_button := UIK.button("Refresh RFQ estimate", func(): refresh(); rebuild(), "" if can_sign or can_import else "primary")
 	refresh_button.name = "TradeRefreshRFQ"
 	footer.add_child(refresh_button)
+
+func _sign() -> void:
+	var result:=TradeIndustry.sign(quote)
+	if result["ok"]:close();TradeDeskUI.open()
+	else:UIRoot.open_modal(InfoModal.make("International Trade","world",[str(result["error"])]))
+
+func _procure() -> void:
+	var result:=TradeIndustry.procure(quote)
+	if result["ok"]:close();TradeDeskUI.open()
+	else:UIRoot.open_modal(InfoModal.make("International Trade","world",[str(result["error"])]))
