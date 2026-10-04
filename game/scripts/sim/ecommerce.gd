@@ -951,6 +951,8 @@ static func photo_factor(l: Dictionary) -> float:
 ## Pack every placed order whose stock is at `loc`. Returns number packed. Caller advances time.
 ## quality: order id → {q, label_ok} from the packing minigame; orders beyond the
 ## ones packed by hand get the session's average. Staff packers pass nothing (they pack well).
+## Order ids the last pack_orders call skipped because their box, padding or placements were invalid.
+static var last_pack_skipped: Array = []
 static func pack_orders(loc: String, max_n := -1, quality := {}, staff_skill := 5) -> int:
 	_refresh_reservations()
 	var avg := 0.85
@@ -960,6 +962,7 @@ static func pack_orders(loc: String, max_n := -1, quality := {}, staff_skill := 
 			avg += float(v["q"])
 		avg /= quality.size()
 	var n := 0
+	last_pack_skipped = []
 	for o in orders_with(["placed"], loc):
 		if max_n >= 0 and n >= max_n:
 			break
@@ -969,8 +972,12 @@ static func pack_orders(loc: String, max_n := -1, quality := {}, staff_skill := 
 			var supplied: Dictionary = Packing.auto_pack(o)
 			for key in qv: supplied[key] = qv[key]
 			qv = supplied
-		if float(qv.get("padding", -1.0)) < 0.0 or float(qv.get("padding", 2.0)) > 1.1: continue
-		if qv.is_empty() or not Packing.placement_ok(o, str(qv["box"]), qv["placements"]) or qv["placements"].size() != Packing.pieces(o).size(): continue
+		if float(qv.get("padding", -1.0)) < 0.0 or float(qv.get("padding", 2.0)) > 1.1:
+			last_pack_skipped.append(str(o["id"]))
+			continue
+		if qv.is_empty() or not Packing.placement_ok(o, str(qv["box"]), qv["placements"]) or qv["placements"].size() != Packing.pieces(o).size():
+			last_pack_skipped.append(str(o["id"]))
+			continue
 		var cost := 0.0
 		var stock_before := {}
 		for item in Packing.items(o): stock_before[item["product"]] = stock(loc, item["product"])
@@ -995,6 +1002,8 @@ static func pack_orders(loc: String, max_n := -1, quality := {}, staff_skill := 
 			{"acct": "exp:packaging", "dr": pack}, {"acct": "cash", "cr": pack}], {"segment": "ecommerce", "type": "order", "id": o["id"]})
 		EventBus.order_packed.emit(o["id"])
 		n += 1
+	if not last_pack_skipped.is_empty():
+		EventBus.notify.emit(I18n.t("%d order(s) were not packed: their box, padding or item placement was invalid. Repack them.") % last_pack_skipped.size(), "warn", "parcel")
 	if n > 0:
 		GameState.inc_stat("orders_packed", n)
 	return n

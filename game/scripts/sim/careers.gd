@@ -149,7 +149,7 @@ static func pay_for(id: String, score: float, hours := -1) -> float:
 ## Work one shift (played as a minigame, see MiniGames): time passes, pay follows the score, tips on top, and a
 ## shift that went well enough counts toward promotion.
 static func work_shift(id: String, score := 1.0, tips := 0.0) -> Dictionary:
-	if not is_finite(score) or not is_finite(tips) or tips < 0: return {"ok": false, "error": "Invalid shift result."}
+	if not is_finite(score) or not is_finite(tips) or tips < 0: return {"ok": false, "error": I18n.t("Invalid shift result.")}
 	var why := shift_block(id)
 	if why != "":
 		return {"ok": false, "error": why}

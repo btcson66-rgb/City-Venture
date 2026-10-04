@@ -52,19 +52,45 @@ static func placement_ok(order: Dictionary, box: String, placements: Array) -> b
 				if occupied.has(key): return false
 				occupied[key] = true
 	return true
+## Greedy first-fit on an occupancy set: each candidate is tested incrementally instead of revalidating every placed piece.
+## Baskets that cannot fit by area, or are larger than the cap, return no plan at once.
+const PLAN_MAX_PIECES := 64
 static func plan(order: Dictionary, box: String) -> Array:
+	if not valid(order) or not boxes().has(box): return []
+	var spec: Dictionary = boxes()[box]
+	var units := pieces(order)
+	if units.size() > PLAN_MAX_PIECES: return []
+	var gw := int(spec["grid"][0])
+	var gh := int(spec["grid"][1])
+	var area := 0
+	for u in units: area += int(u["size"][0]) * int(u["size"][1])
+	if area > gw * gh: return []
+	var occupied := {}
 	var placed: Array = []
-	if not boxes().has(box): return []
-	var grid: Array = boxes()[box]["grid"]
-	for index in pieces(order).size():
+	for index in units.size():
+		var dim: Array = units[index]["size"]
+		if int(dim[2]) > int(spec["height"]): return []
 		var found := false
 		for rotated in [false, true]:
 			if found: break
-			for y in int(grid[1]):
+			var w := int(dim[1] if rotated else dim[0])
+			var h := int(dim[0] if rotated else dim[1])
+			for y in range(0, gh - h + 1):
 				if found: break
-				for x in int(grid[0]):
-					var candidate := {"item": index, "x": x, "y": y, "rotated": rotated}
-					if placement_ok(order, box, placed + [candidate]): placed.append(candidate); found = true; break
+				for x in range(0, gw - w + 1):
+					var free := true
+					for row in range(y, y + h):
+						for col in range(x, x + w):
+							if occupied.has(Vector2i(col, row)):
+								free = false
+								break
+						if not free: break
+					if free:
+						for row in range(y, y + h):
+							for col in range(x, x + w): occupied[Vector2i(col, row)] = true
+						placed.append({"item": index, "x": x, "y": y, "rotated": rotated})
+						found = true
+						break
 		if not found: return []
 	return placed
 static func smallest(order: Dictionary) -> String:
