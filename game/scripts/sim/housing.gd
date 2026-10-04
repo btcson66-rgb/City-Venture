@@ -7,7 +7,7 @@ static func S() -> Dictionary:
 static func opening() -> void:
 	var amount:=float(Living.cfg().get("opening_home_deposit",0))
 	if amount>0:
-		Ledger.post("player","Opening tenant deposit held before arrival",[{"acct":"home_deposit","dr":amount},{"acct":"equity","cr":amount}],{"type":"opening"})
+		Ledger.post("player",I18n.t("Opening tenant deposit held before arrival"),[{"acct":"home_deposit","dr":amount},{"acct":"equity","cr":amount}],{"type":"opening"})
 		S()["deposits"][Living.home()]=amount
 static func views() -> Array:
 	CompanyPortfolio.capture()

@@ -35,7 +35,7 @@ static func begin(chapter: String) -> void:
 	if chapter == "ch15_currency_swing" and S()["shock"].is_empty():
 		var ccy := str(cfg()["shock"]["currency"])
 		var before := FX.rate(ccy)
-		var estimated := FXForward.exposure(GameState.company_id(), ccy, 30)
+		var estimated := FXForward.exposure(GameState.company_id(), ccy, 30, true)
 		FX.S()["rates"][ccy] = snappedf(before * (1 - float(cfg()["shock"]["drop"])), 0.000001)
 		FX.add_shock(ccy, float(cfg()["shock"]["volatility"]), int(cfg()["shock"]["days"]))
 		S()["shock"] = {"currency": ccy, "before": before, "after": FX.rate(ccy), "started": Clock.now(), "exposure_estimate": estimated}

@@ -51,6 +51,9 @@ func build() -> void:
 		b.name = "ForwardDays_%d" % duration
 		row.add_child(b)
 	box.add_child(UIK.kv("Available to hedge (foreign units)", Fmt.money(FXForward.exposure(GameState.company_id(), ccy, days)) + " " + ccy))
+	var unbooked := FXForward.projected(GameState.company_id(), ccy, days)
+	if unbooked >= 1:
+		box.add_child(UIK.wrap(I18n.t("Estimated unbooked sales of about %s %s are not hedgeable until they are booked.") % [Fmt.money(unbooked), ccy], 7, Art.C_MUTED, 454))
 	var q := FXForward.quote(ccy, notional, days)
 	if q["ok"]:
 		box.add_child(UIK.kv("Locked quote (home dollars/foreign unit)", Fmt.money(float(q["rate"])) + " / " + ccy))

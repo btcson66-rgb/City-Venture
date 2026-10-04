@@ -13,19 +13,16 @@ static func S() -> Dictionary:
 	return GameState.data["fx_forwards"]
 
 
-static func exposure(entity: String, ccy: String, days: int) -> float:
+## Hedgeable amount: only booked foreign money (wallet, receivables, open trade invoices) can be sold forward. Projected sales are
+## estimates, so they are reported by projected() and only counted when a caller asks for an estimate.
+static func exposure(entity: String, ccy: String, days: int, include_projected := false) -> float:
 	if not GlobalMarket.live(entity):
 		return 0.0
 	var c := GlobalMarket.company(entity)
 	var b := GlobalMarket.balance(entity, ccy)
 	var total := float(b["wallet"]) + float(b["receivable"])
-	for region in c["stores"]:
-		if GlobalMarket.currency(region) != ccy:
-			continue
-		for listing in c["stores"][region]["prices"]:
-			var l: Dictionary = Ecommerce.E()["listings"].get(listing, {})
-			if not l.is_empty():
-				total += float(c["stores"][region]["prices"][listing]) * GlobalMarket.demand(region, l) * days
+	if include_projected:
+		total += projected(entity, ccy, days)
 	for deal in GameState.data.get("trade",{}).get("deals",{}).values():
 		if deal["entity"]==entity and deal["quote"]["buyer_currency"]==ccy and deal["quote"]["payment"]!="tt_prepaid" and not deal.get("procurement",false) and deal["status"] in ["booked","delayed","customs_hold","in_transit","awaiting_bank","receivable"]:
 			total+=float(deal["quote"]["buyer_quote"])
@@ -35,6 +32,22 @@ static func exposure(entity: String, ccy: String, days: int) -> float:
 	return maxf(0, minf(total, float(cfg().get("maximum_notional", 10000))))
 
 
+## Demand-based estimate of unbooked sales in a currency; shown to the player but never hedgeable on its own.
+static func projected(entity: String, ccy: String, days: int) -> float:
+	if not GlobalMarket.live(entity):
+		return 0.0
+	var c := GlobalMarket.company(entity)
+	var total := 0.0
+	for region in c["stores"]:
+		if GlobalMarket.currency(region) != ccy:
+			continue
+		for listing in c["stores"][region]["prices"]:
+			var l: Dictionary = Ecommerce.E()["listings"].get(listing, {})
+			if not l.is_empty():
+				total += float(c["stores"][region]["prices"][listing]) * GlobalMarket.demand(region, l) * days
+	return total
+
+
 static func quote(ccy: String, notional: float, days: int) -> Dictionary:
 	var ent := GameState.company_id()
 	if not GlobalMarket.live(ent) or not GlobalMarket.company()["bank"]:
@@ -42,7 +55,7 @@ static func quote(ccy: String, notional: float, days: int) -> Dictionary:
 	if not FX.cfg().get("currencies", {}).has(ccy) or not days in [30, 60] or not is_finite(notional) or notional < 1:
 		return {"ok": false, "error": "Choose a foreign currency, positive notional and a 30- or 60-day maturity."}
 	if notional > exposure(ent, ccy, days) + 0.001:
-		return {"ok": false, "error": "Notional exceeds receipts and estimated sales available to hedge. Reduce the amount."}
+		return {"ok": false, "error": "Notional exceeds booked receipts and invoices available to hedge. Estimated sales can be hedged once they are booked."}
 	var rate := FX.rate(ccy)
 	var maximum := float(FX.cfg()["currencies"][ccy]["start_rate"]) * float(FX.cfg().get("max_factor", 2))
 	var collateral := snappedf(maxf(0, maximum - rate) * notional, 0.01)

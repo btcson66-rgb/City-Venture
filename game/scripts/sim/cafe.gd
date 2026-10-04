@@ -16,34 +16,39 @@ extends RefCounted
 const SUPPLIER := "old_town_roasters"
 
 
-static var view_property: String="corner_cafe"
+## The shop being viewed is remembered per company, so switching companies never shows another company's branch.
+static var _views: Dictionary={}
 static var _game_stamp: float=-1
+static func _view_key() -> String:return GameState.company_id()
+static func _get_view() -> String:return str(_views.get(_view_key(),"corner_cafe"))
+static func _set_view(property: String) -> void:_views[_view_key()]=property
 static func _fresh() -> Dictionary:
 	return {"fit_ready":-1,"permit_ready":-1,"supplies":0,"incoming":0,"pastries":0,"pastry_order":20,"prices":{"coffee":4.2,"pastry":3.8},"ads":0.0,"rating":float(cfg().get("rating_start",3.4)),"owner_from":-1,"owner_until":-1,"today":{},"days":[],"name":"","first_sale":-1,"shut_warned":-1}
 static func S() -> Dictionary:
 	if not GameState.data.has("cafe"):GameState.data["cafe"]=_fresh()
 	var stamp:=float(GameState.data["meta"].get("created_unix",0))
-	if stamp!=_game_stamp:_game_stamp=stamp;view_property="corner_cafe"
+	if stamp!=_game_stamp:_game_stamp=stamp;_views.clear()
 	var root: Dictionary=GameState.data["cafe"]
 	if not root.has("branches"):root["branches"]={}
 	if not root.has("roster"):root["roster"]={}
 	if not root.has("work_hours"):root["work_hours"]={}
 	var result: Dictionary=root
-	if view_property!="corner_cafe":
-		if not root["branches"].has(view_property):root["branches"][view_property]=_fresh()
-		result=root["branches"][view_property]
+	var view:=_get_view()
+	if view!="corner_cafe":
+		if not root["branches"].has(view):root["branches"][view]=_fresh()
+		result=root["branches"][view]
 	CafeDepth.enrich(result)
 	return result
 static func in_shop(property: String,fn: Callable) -> Variant:
 	S()
-	var previous:=view_property
-	view_property=property
+	var previous:=_get_view()
+	_set_view(property)
 	var result=fn.call()
-	view_property=previous
+	_set_view(previous)
 	return result
 static func select_shop(property: String) -> void:
 	S()
-	if cfg()["locations"].has(property):view_property=property
+	if cfg()["locations"].has(property):_set_view(property)
 
 
 static func cfg() -> Dictionary:
@@ -56,7 +61,7 @@ static func item(id: String) -> Dictionary:
 
 static func property_id() -> String:
 	S()
-	return view_property
+	return _get_view()
 
 
 static func leased() -> bool:

@@ -210,10 +210,11 @@ static func payout(entity: String) -> void:
 			var b := balance(entity, ccy)
 			var available := float(b["receivable"])
 			var book := Ledger.balance(entity, "fx_receivable:" + ccy)
-			var moved := snappedf(book * units / maxf(0.01, available), 0.01)
+			# A stale receivable (no foreign units left) moves its whole remaining book; the share never exceeds one.
+			var moved := snappedf(maxf(0.0, book) * clampf(units / maxf(0.01, available), 0.0, 1.0), 0.01)
 			Ledger.post(entity, I18n.t("ShopLane Global payout: %s %s") % [Fmt.money(units), ccy],
 				[{"acct": "fx_wallet:" + ccy, "dr": moved}, {"acct": "fx_receivable:" + ccy, "cr": moved}], {"type": "global_payout", "id": o["id"]})
-			b["receivable"] = snappedf(available - units, 0.01)
+			b["receivable"] = maxf(0.0, snappedf(available - units, 0.01))
 			b["wallet"] = snappedf(float(b["wallet"]) + units, 0.01)
 		o["global_paid"] = true
 	if company(entity)["auto_fx"]:
@@ -236,6 +237,7 @@ static func convert_currency(entity: String, ccy: String) -> Dictionary:
 	Ledger.post(entity, I18n.t("Convert %s %s to home cash: %s") % [Fmt.money(units), ccy, Fmt.money(cash)], lines,
 		{"type": "fx_conversion", "currency": ccy, "foreign": units, "rate": FX.rate(ccy), "realized": delta})
 	b["wallet"] = 0.0
+	GameState.set_flag("first_export_converted")
 	StoryEngine.check()
 	return {"ok": true, "cash": cash, "gain_loss": delta}
 
@@ -286,9 +288,10 @@ static func close_for_entity(entity: String) -> void:
 		var b := balance(entity, str(ccy))
 		var book := Ledger.balance(entity, "fx_receivable:" + str(ccy))
 		if book > 0:
-			Ledger.post(entity, "Foreign receipts transferred for company closure", [{"acct": "fx_wallet:" + str(ccy), "dr": book}, {"acct": "fx_receivable:" + str(ccy), "cr": book}])
+			Ledger.post(entity, I18n.t("Foreign receipts transferred for company closure"), [{"acct": "fx_wallet:" + str(ccy), "dr": book}, {"acct": "fx_receivable:" + str(ccy), "cr": book}])
 			b["wallet"] = float(b["wallet"]) + float(b["receivable"])
-			b["receivable"] = 0.0
+		# Foreign units with no book value are cleared rather than left behind on a closed company.
+		b["receivable"] = 0.0
 		convert_currency(entity, str(ccy))
 	for o in Ecommerce.E()["orders"].values():
 		if not o.has("region") or o["entity"] != entity:
@@ -297,7 +300,7 @@ static func close_for_entity(entity: String) -> void:
 		if o["status"] in Ecommerce.OPEN_STATUSES:
 			var cost := float(o.get("cogs", 0))
 			if cost > 0:
-				Ledger.post(entity, "Overseas parcel written off at closure", [{"acct": "exp:inventory_writeoff", "dr": cost}, {"acct": "goods_out", "cr": cost}])
+				Ledger.post(entity, I18n.t("Overseas parcel written off at closure"), [{"acct": "exp:inventory_writeoff", "dr": cost}, {"acct": "goods_out", "cr": cost}])
 			o["status"] = "cancelled"
 		for kind in ["eco.deliver", "eco.return_request", "eco.dispute", "eco.review_fixed"]:
 			Sim.cancel(kind, "order", o["id"])
@@ -315,7 +318,7 @@ static func resolve_return(o: Dictionary, choice: String) -> Dictionary:
 			HoldingGroups.return_margin(o)
 			var cost := float(o.get("cogs", 0))
 			Ecommerce._add_stock(str(o["location"]), str(o["product"]), int(o["qty"]), cost / maxi(1, int(o["qty"])), 0.0)
-			Ledger.post(str(o["entity"]), "Returned overseas goods restocked", [{"acct": "inventory", "dr": cost}, {"acct": "cogs", "cr": cost}])
+			Ledger.post(str(o["entity"]), I18n.t("Returned overseas goods restocked"), [{"acct": "inventory", "dr": cost}, {"acct": "cogs", "cr": cost}])
 		o["status"] = "refunded"
 	elif choice == "partial":
 		refund(o, 0.3)

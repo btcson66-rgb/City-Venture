@@ -150,7 +150,15 @@ static func close() -> void:
 	for v in vehicles().values():v["owned"]=false
 	Logistics.S()["assignments"].clear()
 
+## Reports sum the journal and recompute segments: kept per vehicle until the journal grows or an hour passes.
+static var _report_cache: Dictionary={}
 static func report(id: String) -> Dictionary:
+	var key:="%s|%s|%d|%d|%d"%[Logistics.entity(),id,GameState.data["ledger"]["journal"].size(),Clock.now()/60,int(vehicles()[id].get("km",0))]
+	if _report_cache.has(key):return _report_cache[key]
+	if _report_cache.size()>16:_report_cache.clear()
+	_report_cache[key]=_report(id)
+	return _report_cache[key]
+static func _report(id: String) -> Dictionary:
 	var v: Dictionary=vehicles()[id]
 	var insurance:=0.0;var depreciation:=0.0
 	for entry in GameState.data["ledger"]["journal"]:

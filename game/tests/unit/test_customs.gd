@@ -162,3 +162,25 @@ func test_trial_waits_for_return_window_and_counts_actual_refusals() -> void:
 	var result := Customs.trial_results(GameState.company_id())
 	runner.eq(result["count"], 1, "observed delivery counts")
 	runner.eq(result["return_rate"], 1.0, "refusal is not a successful sale")
+
+
+func test_trial_passed_flag_is_monotonic_and_conversion_flag_is_event_driven() -> void:
+	var f = _fixture()
+	_declare()
+	GameState.set_flag("customs_active")
+	GameState.set_flag("customs_trial_passed")
+	var o: Dictionary = f._order()
+	f._deliver(o)
+	GameState.data["clock"]["minutes"] += 3 * Clock.DAY
+	o["customs_refused"] = true
+	Customs.reconcile()
+	runner.check(GameState.flag("customs_trial_passed"), "later refusals never take a passed trial away")
+	runner.check(not GameState.flag("first_export_converted"), "no conversion yet")
+	GameState.set_flag("fx_conversion_scanned")
+	var ent := GameState.company_id()
+	var b := GlobalMarket.balance(ent, "AUR")
+	b["wallet"] = 10.0
+	Ledger.post(ent, "Foreign wallet fixture", [{"acct": "fx_wallet:AUR", "dr": 10.0}, {"acct": "equity", "cr": 10.0}])
+	runner.check(GlobalMarket.convert_currency(ent, "AUR")["ok"], "conversion posts")
+	runner.check(GameState.flag("first_export_converted"), "conversion sets the flag at the event, with no journal scan")
+	runner.check(Ledger.check_balanced(), "balanced")

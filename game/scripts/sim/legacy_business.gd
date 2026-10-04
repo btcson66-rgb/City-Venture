@@ -168,7 +168,7 @@ static func reconcile() -> void:
 
 static func review_unavailable() -> void:
 	GameState.set_flag("consolidation_unavailable")
-	GameState.timeline("Reviewed a market response that cannot proceed. No survival or sales are claimed.", "story")
+	GameState.timeline(I18n.t("Reviewed a market response that cannot proceed. No survival or sales are claimed."), "story")
 	StoryEngine.check()
 
 static func report() -> Dictionary:

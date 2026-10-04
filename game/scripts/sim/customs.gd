@@ -163,7 +163,9 @@ static func reconcile() -> void:
 	for o in Ecommerce.E()["orders"].values():
 		if o.get("entity", "") == ent and o.get("region", "") == "northridge" and o.get("ship", {}).has("shipped"):
 			GameState.set_flag("first_export_shipped")
-	if not GameState.flag("first_export_converted"):
+	# The conversion flag is set by GlobalMarket when a conversion posts; older saves get one history scan, never one per check.
+	if not GameState.flag("first_export_converted") and not GameState.flag("fx_conversion_scanned"):
+		GameState.set_flag("fx_conversion_scanned")
 		for e in Ledger.entries(ent, 100000):
 			if e.get("source", {}).get("type", "") == "fx_conversion":
 				GameState.set_flag("first_export_converted")
@@ -175,7 +177,9 @@ static func reconcile() -> void:
 		if not l.is_empty() and prefs(ent)[key]["code"] == code_for(str(l["product"])):
 			GameState.set_flag("export_code_correct")
 	var results := trial_results(ent)
-	GameState.set_flag("customs_trial_passed", int(results["count"]) >= int(results["target"]) and float(results["return_rate"]) < float(cfg().get("target_return_rate", 0.15)))
+	# Passing is monotonic: later returns or a shifting observation window never take a passed trial away.
+	if int(results["count"]) >= int(results["target"]) and float(results["return_rate"]) < float(cfg().get("target_return_rate", 0.15)):
+		GameState.set_flag("customs_trial_passed")
 	var st14: Dictionary = S()["chapters"].get("ch14_customs", {})
 	if not st14.is_empty() and Clock.now() - int(st14["started"]) >= int(cfg().get("review_after_days", 14)) * Clock.DAY and not GameState.flag("customs_nudge_sent"):
 		GameState.set_flag("customs_nudge_sent")

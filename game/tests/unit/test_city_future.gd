@@ -403,3 +403,48 @@ func test_closed_pending_issuer_forfeits_without_touching_next_company() -> void
 	runner.eq(Ledger.cash(viewer),cash,"no cost charged to next business")
 	runner.eq(GameState.data["cap_table"].get("employees",0),0,"no employees awarded next company shares")
 	runner.eq(GameState.data["ledger"]["journal"].size(),journal,"closed pending offer creates no new ledger posting")
+func test_ch21_transition_costs_are_ordered_by_scope() -> void:
+	var costs: Dictionary=CityFuture.cfg()["transition_costs"]
+	runner.check(float(costs["both"])>=float(costs["charging"])+float(costs["delay"]),"doing both costs at least the sum of its parts")
+	runner.check(float(costs["both"])>float(costs["charging"]) and float(costs["charging"])>float(costs["delay"]),"cost rises with scope")
+func test_secret_favor_has_serious_consequences_and_still_pays_no_official() -> void:
+	load("res://tests/unit/test_global.gd").new()._setup()
+	_start(20)
+	CityFuture.read_brief()
+	runner.check(CityFuture.procure("fund")["ok"],"owned company funds the bid")
+	GameState.data["clock"]["minutes"]+=8*Clock.DAY
+	CityFuture.reconcile()
+	var owner:=GameState.company_id()
+	var brand_before:=float(CityFuture.S()["brand"])
+	var journal_before: int=GameState.data["ledger"]["journal"].size()
+	runner.check(CityFuture.choose("favor")["ok"],"tempting option remains available")
+	runner.check(GameState.flag("city_disqualified"),"disqualified")
+	runner.check(float(CityFuture.S()["brand"])<brand_before,"civic brand falls")
+	var probe:=Legal.cases(owner).filter(func(c):return c["kind"]=="integrity")
+	runner.eq(probe.size(),1,"anti-corruption investigation opened against the owning company")
+	runner.check(Ledger.balance(owner,"exp:legal")>0,"legal cost is paid at once")
+	runner.check(GameState.data["timeline"].any(func(e):return str(e.get("text","")).contains("anti-corruption") or str(e.get("text","")).contains("反貪")),"timeline records the investigation")
+	GameState.data["clock"]["minutes"]+=60*Clock.DAY
+	for e in GameState.data["ledger"]["journal"].slice(journal_before):
+		runner.check(e["entity"]!="official","no entry pays an official")
+	runner.check(Ledger.check_balanced(),"investigation books balanced")
+func test_civic_settlement_runs_in_the_procuring_company_after_switching() -> void:
+	load("res://tests/unit/test_global.gd").new()._setup()
+	_start(19)
+	CityFuture.read_brief()
+	var owner:=GameState.company_id()
+	runner.check(CityFuture.procure("fund")["ok"],"owner pays the service budget")
+	var paid:=Ledger.balance(owner,"exp:other")
+	Company.register("Other viewer","ecommerce","9 Side Street");Company.open_business_account(3000)
+	var viewer:=GameState.company_id()
+	runner.check(viewer!=owner,"another company is active")
+	var viewer_cash:=Ledger.cash(viewer)
+	GameState.data["clock"]["minutes"]+=8*Clock.DAY
+	CityFuture.reconcile()
+	for receipt in CityFuture.chapter(19)["contracts"]:
+		runner.check(receipt["status"] in ["delivered","failed"],"receipt settled while another company is viewed")
+		runner.eq(Jobs.get_job(receipt["job"])["entity"],owner,"job stays in the procuring company")
+	runner.eq(GameState.company_id(),viewer,"viewer restored")
+	runner.eq(Ledger.cash(viewer),viewer_cash,"viewer company never paid or refunded")
+	runner.eq(Ledger.balance(owner,"exp:other"),paid,"owner books unchanged by settlement")
+	runner.check(Ledger.check_balanced(),"balanced")

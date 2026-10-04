@@ -145,10 +145,18 @@ static func decision(ctx: Dictionary,prepare: bool) -> Dictionary:
 			if not result["ok"] and int(Cafe.S()["cleaned"])/Clock.DAY!=Clock.day_index():return result
 		return inspect() if Cafe.S()["inspection_pending"] else {"ok":true}))
 
+## Day margins are read by the UI repeatedly: each (company, shop, day) is summed once per journal length.
+static var _margin_cache: Dictionary={}
+static var _margin_size:=-1
 static func booked_margin(day: int,revenue: float) -> float:
-	var cost:=0.0
-	for row in GameState.data["ledger"]["journal"]:
-		if row["entity"]!=Cafe.entity() or int(row["t"])/Clock.DAY!=day or row.get("source",{}).get("property","")!=Cafe.property_id():continue
-		for line in row["lines"]:
-			if line["acct"]=="cogs":cost+=float(line.get("dr",0))-float(line.get("cr",0))
-	return 100*(revenue-cost)/maxf(1,revenue)
+	var journal: Array=GameState.data["ledger"]["journal"]
+	if journal.size()!=_margin_size or _margin_cache.size()>64:_margin_cache.clear();_margin_size=journal.size()
+	var key:="%s|%s|%d"%[Cafe.entity(),Cafe.property_id(),day]
+	if not _margin_cache.has(key):
+		var cost:=0.0
+		for row in journal:
+			if row["entity"]!=Cafe.entity() or int(row["t"])/Clock.DAY!=day or row.get("source",{}).get("property","")!=Cafe.property_id():continue
+			for line in row["lines"]:
+				if line["acct"]=="cogs":cost+=float(line.get("dr",0))-float(line.get("cr",0))
+		_margin_cache[key]=cost
+	return 100*(revenue-float(_margin_cache[key]))/maxf(1,revenue)
