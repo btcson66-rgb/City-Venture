@@ -273,3 +273,28 @@ func test_return_to_world_closes_the_underlying_company_os() -> void:
 	button.pressed.emit()
 	await runner.get_tree().process_frame
 	runner.eq(UIRoot.top_modal(),null,"return-to-world does not leave OS blocking the player")
+
+
+func test_early_invalid_city_fixture_is_rejected_and_civic_schema_roundtrips() -> void:
+	runner.eq(SaveSystem.DIR,"user://test_saves","actual save verification remains in test storage")
+	DirAccess.make_dir_recursive_absolute(SaveSystem.DIR)
+	var original: Dictionary=GameState.data.duplicate(true)
+	var file:=FileAccess.open(SaveSystem.DIR.path_join("slot_98.json"),FileAccess.WRITE)
+	file.store_string(FileAccess.get_file_as_string("res://tests/fixtures/saves/city_future_704fc55c.json"));file.close()
+	runner.check(not SaveSystem.load_data(98),"historical invalid municipal schema rejected")
+	runner.eq(GameState.data,original,"rejected fixture never overwrites the current game")
+	_services(19)
+	var sponsor: String=CityFuture.sponsor()
+	runner.eq(GameState.data["entities"][sponsor]["id"],sponsor,"municipal entity uses existing save identity schema")
+	runner.eq(GameState.data["entities"][sponsor]["bank_account"],false,"appropriation is not a player bank account")
+	runner.check(SaveSystem.save(98),"real municipal budget and supplier receipts saved")
+	var loaded: bool=SaveSystem.load_data(98)
+	runner.check(loaded,"real civic supplier save loads: "+SaveSystem.last_error)
+	if not loaded:return
+	runner.eq(CityFuture.chapter(19)["contracts"].size(),3,"actual receipt identifiers survive")
+	for receipt in CityFuture.chapter(19)["contracts"]:
+		runner.eq(Jobs.get_job(receipt["job"])["direction"],"purchase","actual paid supplier job survives")
+	var journals: int=GameState.data["ledger"]["journal"].size()
+	CityFuture.reconcile();StoryEngine.check()
+	runner.eq(GameState.data["ledger"]["journal"].size(),journals,"loaded services cannot pay twice")
+	runner.check(Ledger.check_balanced(),"actual civic books remain balanced after load")

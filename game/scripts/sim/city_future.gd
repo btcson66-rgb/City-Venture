@@ -35,7 +35,7 @@ static func read_brief() -> Dictionary:
 static func sponsor() -> String:
 	var id: String="city_future_budget"
 	if not GameState.data["entities"].has(id):
-		GameState.data["entities"][id]={"name":I18n.t("Aurelia Civic Partnership Board"),"kind":"municipal","registered":Clock.now()}
+		GameState.data["entities"][id]={"id":id,"name":I18n.t("Aurelia Civic Partnership Board"),"kind":"municipal","bank_account":false,"registered":Clock.now()}
 		Ledger.post(id,I18n.t("Council-authorized civic appropriation"),[{"acct":"cash","dr":float(cfg()["municipal_budget"])},{"acct":"equity","cr":float(cfg()["municipal_budget"])}],{"type":"civic_budget"})
 	return id
 static func private_payer(c: Dictionary) -> String:
