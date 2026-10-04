@@ -57,19 +57,6 @@
     "label": "Read Ines's customs guide",
     "action": "customs_guide",
     "params": {}
-   },
-   {
-    "id": "notice",
-    "at": [
-     112,
-     100
-    ],
-    "label": "Read the notice",
-    "action": "look",
-    "params": {
-     "icon": "lock",
-     "text": "CLOSED TO VISITORS. Import permits and customs clearance are not part of this build yet."
-    }
    }
   ],
   "npc_spots": {
@@ -85,6 +72,5 @@
  },
  "category": "Customs",
  "status": "active",
- "enterable": true,
- "closed_reason": "The Customs House is not open to visitors yet: import permits and customs clearance arrive in a later build."
+ "enterable": true
 }
