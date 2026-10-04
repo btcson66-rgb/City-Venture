@@ -848,6 +848,11 @@ func popups() -> void:
 			await bot.wait(0.3)
 			if is_instance_valid(m) and UIRoot.top_modal() == m:
 				m.close()
+		elif m is TrafficModal:
+			# A car clipped the walking bot (#115): dismiss the report; the brief startle ends on its own.
+			bot.log_line("  traffic collision report dismissed")
+			m.close()
+			await bot.wait(0.3)
 		elif m is PoachModal:
 			await bot.shot("competing_job_offer")
 			var retain := retention_affordable(m.employee)

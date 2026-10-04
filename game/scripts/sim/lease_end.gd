@@ -44,7 +44,7 @@ static func quote(pid: String, mode: String, plan: Dictionary = {}) -> Dictionar
 		return error("Invalid lease terms. Review the property data before ending this lease.")
 	if GameState.data["entities"].get(ent, {}).has("closed"): return error("This company is already closed.")
 	if lease.has("ending"): return error("Notice has already been given. Review the pending notice.")
-	if str(prop.get("kind", "")) == "home" and str(Living.D().get("home_property", "riverside_studio")) == pid:
+	if str(prop.get("kind", "")) == "home" and Living.home() == pid:
 		return error("Choose a new home before ending your current home lease.")
 	var count := Ecommerce.total_units_at(pid)
 	var due := obligations(pid)

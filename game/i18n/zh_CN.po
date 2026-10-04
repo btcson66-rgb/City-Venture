@@ -1810,7 +1810,7 @@ msgstr "水壶采购订单"
 msgid "A weekend is already reserved. Stock it or wait for its report."
 msgstr "已经预约一个周末。先备货，或等收摊后查看成绩单。"
 
-#: scripts/sim/popup_store.gd:173
+#: scripts/sim/popup_store.gd:175
 msgid "A weekend sales channel for existing stock. Rent and checkout wages can cost more than you sell; this is not a full retail chain."
 msgstr "让现有库存多一个周末销售管道。营收可能不够支付租金与柜台薪资；这里只经营快闪店，尚未提供完整零售连锁。"
 
@@ -5554,7 +5554,7 @@ msgstr "请选择待处理的保固理赔。"
 msgid "Choose an outstanding bank loan of this holding company's subsidiary."
 msgstr "请选择旗下子公司尚未清偿的银行借款。"
 
-#: scripts/sim/personal_assets.gd:186 scripts/sim/personal_assets.gd:54
+#: scripts/sim/personal_assets.gd:191 scripts/sim/personal_assets.gd:54
 msgid "Choose an owned home first."
 msgstr "请先选择自有住宅。"
 
@@ -6346,7 +6346,7 @@ msgstr "应缴营业税 %s・应缴所得税 %s"
 msgid "Collected tax is owed money, not revenue. Filing yourself uses time and risks a form correction; an accountant charges a fee for accurate filing."
 msgstr "代收税款是负债，不是营收。自行申报要花时间，且可能需要补正；会计师则收费准确申报。"
 
-#: scripts/sim/personal_assets.gd:192
+#: scripts/sim/personal_assets.gd:197
 msgid "Collected tenant invoices: %s"
 msgstr "收回租客欠款：%s"
 
@@ -16622,7 +16622,7 @@ msgstr "目前没有可用的开门时间。"
 msgid "No outside purchase to replace yet."
 msgstr "目前还没有可以取代的外部采购。"
 
-#: scripts/sim/personal_assets.gd:191
+#: scripts/sim/personal_assets.gd:196
 msgid "No overdue tenant invoices are ready. Wait thirty days after the invoice."
 msgstr "目前没有可收回的到期欠款，请等帐单开立三十天后再处理。"
 
@@ -19334,7 +19334,7 @@ msgstr "快闪店顾客"
 msgid "Pop-up stock transport: %s"
 msgstr "快闪店搬货费：%s"
 
-#: scripts/sim/popup_store.gd:169
+#: scripts/sim/popup_store.gd:171
 msgid "Pop-up stock, weekend staff and report"
 msgstr "快闪店备货、周末排班与成绩单"
 
@@ -19342,7 +19342,7 @@ msgstr "快闪店备货、周末排班与成绩单"
 msgid "Pop-up weekend checkout: %s per hour in addition to normal wages."
 msgstr "快闪店周末柜台：每小时 %s，另计于一般薪资。"
 
-#: scripts/sim/popup_store.gd:123
+#: scripts/sim/popup_store.gd:125
 msgid "Pop-up weekend hour: %s"
 msgstr "快闪店周末一小时薪资：%s"
 
@@ -21354,7 +21354,7 @@ msgstr "请先预约周末，并留出搬货时间。"
 msgid "Reserve a weekend, then choose a current employee for Saturday or Sunday."
 msgstr "先预约周末，再指派在职员工于周六或周日站柜台。"
 
-#: scripts/sim/popup_store.gd:174
+#: scripts/sim/popup_store.gd:176
 msgid "Reserve or manage a weekend"
 msgstr "预约或管理快闪周末"
 
@@ -25918,7 +25918,7 @@ msgstr "许可画面会列出下一个缺少的步骤；只有换包材、没有
 msgid "The pitch lost. Review creative fit before the next proposal."
 msgstr "提案未得标。下次提案前请检查创意是否符合客群。"
 
-#: scripts/sim/popup_store.gd:128
+#: scripts/sim/popup_store.gd:130
 msgid "The pop-up is closed without checkout staff. Work there yourself or assign an employee for the day."
 msgstr "快闪店没人站柜台，暂停营业。请自己到店工作，或指派员工当天值班。"
 
@@ -28294,7 +28294,7 @@ msgstr "星期 %d"
 msgid "Weekend employee: %s per hour, paid in addition to the normal roster. Assign Saturday or Sunday in People."
 msgstr "周末员工每小时 %s，另计于一般排班薪资。请在「人员」分页 指派周六或周日值班。"
 
-#: data/help/glossary.json data/help/help.json scripts/sim/popup_store.gd:167 scripts/ui/modals/popup_store_modal.gd:16
+#: data/help/glossary.json data/help/help.json scripts/sim/popup_store.gd:169 scripts/ui/modals/popup_store_modal.gd:16
 msgid "Weekend pop-up"
 msgstr "周末快闪店"
 
@@ -28302,7 +28302,7 @@ msgstr "周末快闪店"
 msgid "Weekend pop-up rent: %s"
 msgstr "周末快闪店租金：%s"
 
-#: scripts/sim/popup_store.gd:157
+#: scripts/sim/popup_store.gd:159
 msgid "Weekend pop-up report is ready. Open the pop-up desk to compare channels."
 msgstr "周末快闪店成绩单已完成。打开快闪店管理，比较各通路利润。"
 
@@ -28849,6 +28849,10 @@ msgstr "有订单了！到家里的打包桌按 E。亲手打包：箱子、缓�
 #: scripts/sim/personal_assets.gd:181
 msgid "You have no personal car to sell. Take the metro or buy one."
 msgstr "目前没有自用车可出售；可搭捷运或先购车。"
+
+#: scripts/sim/personal_assets.gd:188
+msgid "You have no personal car. Take the metro or buy one."
+msgstr "你没有私家车。请搭地铁或先买一辆。"
 
 #: data/dialogue/lina_intro.json
 msgid "You have three ways to pay abroad now."

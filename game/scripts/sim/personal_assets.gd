@@ -182,6 +182,11 @@ static func sell_car() -> Dictionary:
 	var value:=snappedf(float(c["price"])*float(cfg()["car_resale_ratio"]),.01)
 	Ledger.post("player",I18n.t("Personal car sold: %s")%Fmt.money(value),[{"acct":"cash","dr":value},{"acct":"exp:other","dr":float(c["price"])-value},{"acct":"personal_vehicle","cr":c["price"]}],{"type":"personal_car_sale"})
 	S()["car"]={};return {"ok":true}
+## #94/#115 bridge: a driver liability quote exists only for an owned (insured) personal car; it books nothing, because
+## the personal car has no accident of its own yet. TrafficSafety supplies the arithmetic.
+static func liability_quote(actual_damages: float) -> Dictionary:
+	if S()["car"].is_empty():return error("You have no personal car. Take the metro or buy one.")
+	return TrafficSafety.driver_quote(actual_damages,float(cfg().get("liability_coverage",TrafficSafety.cfg()["coverage"])))
 static func collect_rent(id: String) -> Dictionary:
 	if not owned(id):return error("Choose an owned home first.")
 	var paid:=0.0
