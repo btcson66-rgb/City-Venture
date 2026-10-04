@@ -101,6 +101,14 @@ func _run() -> void:
 			sample["balanced"] = Ledger.check_balanced()
 			if not sample["loaded"]:
 				report["errors"].append("Load failed: " + str(SaveSystem.last_error))
+		if int(options["profile"]) > 0:
+			var keys := Prof.d.keys()
+			keys.sort_custom(func(a, b): return Prof.d[a] > Prof.d[b])
+			var line := ""
+			for k in keys.slice(0, 14):
+				line += "%s=%.0f " % [k, Prof.d[k] / 1000.0]
+			print("PROF(ms/day) ", line)
+			Prof.d.clear()
 		samples.append(sample)
 		print("STRESS day %d: %d orders (%.3f ms/order), tick mean %.3f p99 %.3f max %.1f ms, frame p99 %.3f, %d MB, %s" % [day + 1, count, sample["order_ms_per_order"], sample["simulation_ms"], sample["tick_p99_ms"], sample["tick_max_ms"], sample["frame_p99_ms"], int(sample["memory_bytes"]) / 1048576, ("gzip %d load %.0f ms" % [sample["gzip_bytes"], sample["load_ms"]]) if save_day else "-"])
 		if day % 10 == 0 or save_day:

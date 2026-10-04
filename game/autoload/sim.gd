@@ -67,13 +67,17 @@ func pending(kind: String) -> Array:
 
 
 func _on_minute(t: int) -> void:
+	var _t0 := Time.get_ticks_usec()
 	PhoneMessages.on_minute(t)
+	Prof.add("minute:phone", Time.get_ticks_usec() - _t0)
+	_t0 = Time.get_ticks_usec()
 	var s: Array = GameState.data["schedule"]
 	var guard := 0
 	while not s.is_empty() and int(s[0]["t"]) <= t and guard < 500:
 		guard += 1
 		var it: Dictionary = s.pop_front()
 		_dispatch(it["kind"], it["p"])
+	Prof.add("minute:sched", Time.get_ticks_usec() - _t0)
 
 
 ## What the simulation is doing right now (read by the bots' watchdog when the game stops responding).
@@ -120,74 +124,152 @@ func _dispatch_owned(kind: String,p: Dictionary) -> void:
 
 func _on_hour(t: int, h: int) -> void:
 	phase = "hour:macro"
+	var _t0=Time.get_ticks_usec()
 	Macro.on_hour(t, h)
+	Prof.add("Macro.on_hour",Time.get_ticks_usec()-_t0)
 	if CompanyPortfolio.is_multi():
 		for id in CompanyPortfolio.ids(): CompanyPortfolio.run_in(str(id),func():_company_hour(t,h))
 	else:
 		_single_company_hour(t,h)
 		HoldingGroups.on_hour()
 		return
+	var _t0=Time.get_ticks_usec()
 	HoldingGroups.on_hour()
+	Prof.add("HoldingGroups.on_hour",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	Industries.on_hour_global(t,h)
+	Prof.add("Industries.on_hour_globalt,h)",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	Living.on_hour(t,h)
+	Prof.add("Living.on_hour",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	EventEngine.on_hour(t,h)
+	Prof.add("EventEngine.on_hour",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	Industries.on_hour(t,h,"careers")
+	Prof.add("Industries.on_hourt,h,'careers')",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	Milestones.on_hour(t,h)
+	Prof.add("Milestones.on_hour",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	Replay.on_hour(t, h)
+	Prof.add("Replay.on_hour",Time.get_ticks_usec()-_t0)
 	Growth.check()
 	_request_story_check()
 	phase=""
 
 func _single_company_hour(t: int, h: int) -> void:
+	var _t0=Time.get_ticks_usec()
 	OverseasPartners.on_hour()
+	Prof.add("OverseasPartners.on_hour",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	LegacyBusiness.on_hour()
+	Prof.add("LegacyBusiness.on_hour",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	CapitalMarket.on_hour()
+	Prof.add("CapitalMarket.on_hour",Time.get_ticks_usec()-_t0)
 	Growth.check()
 	phase = "hour:compliance"
+	var _t0=Time.get_ticks_usec()
 	Compliance.on_hour(t, h)
+	Prof.add("Compliance.on_hour",Time.get_ticks_usec()-_t0)
 	phase = "hour:ecommerce"
+	var _t0=Time.get_ticks_usec()
 	Industries.on_hour(t, h, "sales")
+	Prof.add("Industries.on_hourt, h, 'sales')",Time.get_ticks_usec()-_t0)
 	phase = "hour:contracts"
+	var _t0=Time.get_ticks_usec()
 	Contracts.on_hour(t, h)
+	Prof.add("Contracts.on_hour",Time.get_ticks_usec()-_t0)
 	phase = "hour:living"
+	var _t0=Time.get_ticks_usec()
 	Living.on_hour(t, h)
+	Prof.add("Living.on_hour",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	TrafficSafety.on_hour(t, h)
+	Prof.add("TrafficSafety.on_hour",Time.get_ticks_usec()-_t0)
 	phase = "hour:events"
+	var _t0=Time.get_ticks_usec()
 	EventEngine.on_hour(t, h)
+	Prof.add("EventEngine.on_hour",Time.get_ticks_usec()-_t0)
 	phase = "hour:careers"
+	var _t0=Time.get_ticks_usec()
 	Industries.on_hour(t, h, "careers")
+	Prof.add("Industries.on_hourt, h, 'careers')",Time.get_ticks_usec()-_t0)
 	phase = "hour:staff"
+	var _t0=Time.get_ticks_usec()
 	Staff.on_hour(t, h)
+	Prof.add("Staff.on_hour",Time.get_ticks_usec()-_t0)
 	phase = "hour:saas"
+	var _t0=Time.get_ticks_usec()
 	Industries.on_hour(t, h, "business")
+	Prof.add("Industries.on_hourt, h, 'business')",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	Assets.on_hour(t, h)
+	Prof.add("Assets.on_hour",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	Jobs.on_hour(t, h)
+	Prof.add("Jobs.on_hour",Time.get_ticks_usec()-_t0)
 	phase = "hour:group"
+	var _t0=Time.get_ticks_usec()
 	InternalSupply.on_hour(t, h)
+	Prof.add("InternalSupply.on_hour",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	GroupJobs.on_hour(t, h)
+	Prof.add("GroupJobs.on_hour",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	Milestones.on_hour(t, h)
+	Prof.add("Milestones.on_hour",Time.get_ticks_usec()-_t0)
 	phase = "hour:scenario"
+	var _t0=Time.get_ticks_usec()
 	Replay.on_hour(t, h)
+	Prof.add("Replay.on_hour",Time.get_ticks_usec()-_t0)
 	phase = "hour:story"
 	_request_story_check()
 	phase = ""
 
 
 func _company_hour(t: int,h: int) -> void:
+	var _t0=Time.get_ticks_usec()
 	OverseasPartners.on_hour()
+	Prof.add("OverseasPartners.on_hour",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	LegacyBusiness.on_hour()
+	Prof.add("LegacyBusiness.on_hour",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	CapitalMarket.on_hour()
+	Prof.add("CapitalMarket.on_hour",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	Compliance.on_hour(t,h)
+	Prof.add("Compliance.on_hour",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	Industries.on_hour(t,h,"sales")
+	Prof.add("Industries.on_hourt,h,'sales')",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	Contracts.on_hour(t,h)
+	Prof.add("Contracts.on_hour",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	Staff.on_hour(t,h)
+	Prof.add("Staff.on_hour",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	Industries.on_hour(t,h,"business",true)
+	Prof.add("Industries.on_hourt,h,'business',true)",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	Assets.on_hour(t,h)
+	Prof.add("Assets.on_hour",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	Jobs.on_hour(t,h)
+	Prof.add("Jobs.on_hour",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	InternalSupply.on_hour(t,h)
+	Prof.add("InternalSupply.on_hour",Time.get_ticks_usec()-_t0)
+	var _t0=Time.get_ticks_usec()
 	GroupJobs.on_hour(t,h)
+	Prof.add("GroupJobs.on_hour",Time.get_ticks_usec()-_t0)
 
 
 func _on_month_end(year: int, month: int) -> void:
+	var _t0 := Time.get_ticks_usec()
 	var rep := MonthClose.run(year, month)
+	Prof.add("month_close", Time.get_ticks_usec() - _t0)
 	EventBus.month_closed.emit(rep)
