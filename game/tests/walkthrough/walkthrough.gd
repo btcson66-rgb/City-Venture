@@ -2250,7 +2250,11 @@ func _chapters_13_to_14(fast := false) -> void:
 		for location in Ecommerce.stock_locations():
 			if location!="riverside_studio":other_max=maxi(other_max,Ecommerce.available(location,product))
 		var home:=Ecommerce.available("riverside_studio",product)
-		var moq: int=Ecommerce.offer("tradelink_wholesale",product)["moq"]
+		if home>other_max:
+			listing=candidate;best_cost=0.0;break
+		var offer:=Ecommerce.offer("tradelink_wholesale",product)
+		if offer.is_empty():continue # seasonal products may have no wholesale offer
+		var moq: int=offer["moq"]
 		var batches: int=maxi(0,int(ceil(float(other_max+1-home)/moq)))
 		if home==0:batches=maxi(1,batches)
 		var cost:=batches*moq*Ecommerce.unit_cost("tradelink_wholesale",product)
