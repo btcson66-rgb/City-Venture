@@ -170,7 +170,9 @@ func _ready() -> void:
 	EventBus.cash_changed.connect(_on_cash)
 	EventBus.objective_changed.connect(refresh)
 	Clock.minute_tick.connect(func(_t):
-		if visible and Clock.world_active: _refresh_objective_hours())
+		if visible and Clock.world_active:
+			_refresh_objective_hours()
+			_refresh_safety())
 	EventBus.message_received.connect(func(_a, _b): refresh())
 	welcome = BuildingWelcome.new()
 	add_child(welcome)
@@ -241,10 +243,6 @@ func set_prompt(text: String) -> void:
 
 
 func _process(_d: float) -> void:
-	if GameState.has_game():
-		var ws := SceneRouter.world_scene()
-		safety_button.visible = ws != null and ws.kind == "district"
-		safety_button.text = I18n.t("Injury: %s") % TrafficSafety.severity_label(str(TrafficSafety.S()["injury"])) if TrafficSafety.S()["injury"] != "none" else I18n.t("Use crosswalks for safer crossing")
 	if not visible or not GameState.has_game():
 		return
 	vitality_label.text=I18n.t("Energy %d%% · stress %d%%")%[roundi(PersonalLife.energy()),roundi(PersonalLife.S()["stress"])]
@@ -301,9 +299,20 @@ func refresh() -> void:
 	obj_panel.visible = not o.is_empty()
 	goal_label.text = I18n.t(str(o.get("goal", ""))).to_upper()
 	_refresh_objective_hours()
+	_refresh_safety()
 	var ws := SceneRouter.world_scene()
 	if ws != null:
 		loc_label.text = (I18n.t(DataDB.districts[ws.scene_id]["name"]) if ws.kind == "district" else I18n.t(DataDB.building(ws.scene_id).get("name", ""))).to_upper()
+
+
+## The safety button shows only while an injury, medical bill or claim needs attention; refreshed on signals, not per frame.
+func _refresh_safety() -> void:
+	if safety_button == null or not GameState.has_game(): return
+	var ws := SceneRouter.world_scene()
+	safety_button.visible = ws != null and ws.kind == "district" and TrafficSafety.needs_attention()
+	if safety_button.visible:
+		var injury := str(TrafficSafety.S()["injury"])
+		safety_button.text = I18n.t("Injury: %s") % TrafficSafety.severity_label(injury) if injury != "none" else I18n.t("Medical bill or claim open")
 
 
 func _refresh_objective_hours() -> void:

@@ -14,19 +14,21 @@ func add_button(label: String, name_id: String, fn: Callable, primary := false, 
 	b.name = name_id
 	b.disabled = not enabled
 	_content().add_child(b)
+var _list: VBoxContainer
 func _content() -> Control:
-	return body.get_child(0).get_child(0)
+	return _list
 func build() -> void:
 	var scroll_body := UIK.vbox(4)
 	body.add_child(UIK.scroll(scroll_body, Vector2(470,220)))
 	var content := scroll_body
+	_list = scroll_body
 	content.add_child(UIK.tip("personal_health"))
 	var s := TrafficSafety.S()
 	var a := TrafficSafety.latest() if selected == 0 else TrafficSafety.accident(selected)
 	content.add_child(UIK.wrap("Use a green crosswalk. Crossing elsewhere or on red can cause a collision.",8,Art.C_MUTED,470))
 	content.add_child(UIK.label(I18n.t("Injury: %s") % TrafficSafety.severity_label(str(s["injury"])),9,Art.C_GOLD))
 	if mode == "accident" and s["injury"] == "major":
-		content.add_child(UIK.wrap("An ambulance can take you to Civic Clinic. Admission takes one to three days; your business keeps running. Arrange staff before crossing roads.",8,Art.C_WHITE,470))
+		content.add_child(UIK.wrap("An ambulance can take you to Civic Clinic. Admission takes up to three days and your business keeps running. Phone replies, meetings and the bank appointment wait for you; if a chapter, contract or group-job deadline is nearer, you are discharged early.",8,Art.C_WHITE,470))
 		add_button("Take ambulance", "Ambulance", _ambulance, true)
 	elif mode == "accident":
 		content.add_child(UIK.wrap("Minor injuries slow walking for three days. Buy medicine at the Civic Clinic pharmacy to recover sooner.",8,Art.C_WHITE,470))

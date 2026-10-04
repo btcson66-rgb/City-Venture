@@ -30,8 +30,8 @@ func test_health_claim_only_preexisting_policy_and_real_medical_cost() -> void:
 	var r := TrafficSafety.treat()
 	runner.eq(r["claim"],1530.0,"85 percent of incurred bill")
 	runner.check(Clock.now()-before >= Clock.DAY and Clock.now()-before <= 3*Clock.DAY,"one to three actual days")
-	runner.eq(Ledger.balance("player","exp:medical"),1800.0,"gross medical cost")
-	runner.eq(Ledger.balance("player","other_income"),-1530.0,"traceable health claim")
+	runner.eq(Ledger.balance("player","exp:medical"),270.0,"claim offsets the medical expense (net out-of-pocket)")
+	runner.eq(Ledger.balance("player","other_income"),0.0,"reimbursement is never income")
 	runner.check(Ledger.check_balanced(),"balanced")
 func test_buying_policy_after_collision_does_not_cover_old_bill() -> void:
 	hit()
@@ -152,3 +152,45 @@ func test_clinic_primary_and_insufficient_medicine_cash() -> void:
 	runner.eq(primaries,0,"disabled treatment is not a misleading primary")
 	modal.close()
 	await runner.get_tree().process_frame
+
+func test_settlement_credits_expense_not_income() -> void:
+	hit(30)
+	TrafficSafety.latest()["counterparty_fault"] = true
+	TrafficSafety.treat()
+	TrafficSafety.settle(false)
+	runner.eq(Ledger.balance("player","other_income"),0.0,"no income from settlement")
+	runner.check(Ledger.balance("player","exp:medical") < 35.0,"settlement reduces the medical expense")
+func test_hospital_stay_pauses_replies_meetings_and_appointment() -> void:
+	var t0 := Clock.now()
+	GameState.add_message("marcus","Reply soon",{"expires":t0+Clock.DAY,"default_reply":"ack"})
+	var mid: String = GameState.data["messages"].back()["id"]
+	PhoneMessages.S()["agenda"].append({"id":"MEET-X","npc":"marcus","at":t0+Clock.DAY,"until":t0+Clock.DAY+60,"location":"district:civic_center","conversation":"","status":"planned"})
+	hit()
+	var days_before := Clock.now()
+	var r := TrafficSafety.treat()
+	var stay := Clock.now()-days_before
+	runner.check(stay >= Clock.DAY,"admitted")
+	var m := PhoneMessages.get_message(mid)
+	runner.check(not m.has("answered"),"reply did not expire during admission")
+	runner.eq(int(m["expires"]),t0+Clock.DAY+stay,"reply deadline moved by the stay")
+	var meeting: Dictionary = PhoneMessages.S()["agenda"].back()
+	runner.eq(meeting["status"],"planned","meeting not missed")
+	runner.eq(int(meeting["at"]),t0+Clock.DAY+stay,"meeting moved by the stay")
+	runner.check(r["ok"],"treated")
+func test_hospital_stay_ends_before_a_chapter_deadline() -> void:
+	var deadline := Clock.now()+Clock.DAY+300
+	CityFuture.S()["chapters"]["11"] = {"number":11,"status":"active","decision":"","deadline":deadline,"contracts":[]}
+	hit()
+	var r := TrafficSafety.treat()
+	runner.check(Clock.now() < deadline,"chapter deadline not passed during admission")
+	runner.check(r["days"] <= 1,"stay capped to the whole days that fit")
+	runner.check(TrafficSafety.latest()["discharged_early"] or r["days"] >= 1,"early discharge recorded or full stay fit")
+func test_hospital_with_imminent_hard_deadline_discharges_immediately() -> void:
+	var deadline := Clock.now()+600
+	CityFuture.S()["chapters"]["11"] = {"number":11,"status":"active","decision":"","deadline":deadline,"contracts":[]}
+	hit()
+	var before := Clock.now()
+	var r := TrafficSafety.treat()
+	runner.eq(r["days"],0,"no admission when a deadline is hours away")
+	runner.eq(Clock.now(),before,"no time skipped")
+	runner.check(TrafficSafety.latest()["discharged_early"],"warning flag set")

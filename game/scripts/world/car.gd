@@ -64,10 +64,10 @@ func _pick_look() -> void:
 	add_child(head)
 
 
-func _blocked() -> bool:
+func _blocked(player: Node2D) -> bool:
 	var front := position.x + dir * length / 2.0
-	for p in get_tree().get_nodes_in_group("player"):
-		var pp: Vector2 = p.global_position
+	if player != null:
+		var pp: Vector2 = player.global_position
 		if absf(pp.y - lane_y) < 16 and (pp.x - front) * dir > -4 and (pp.x - front) * dir < 34:
 			return true
 	for c in get_tree().get_nodes_in_group("cars"):
@@ -83,24 +83,30 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if Clock.is_paused() or UIRoot.is_blocking():
+	if Clock.is_paused() and UIRoot.is_blocking():
 		return
+	var player: Node2D = null
+	var players := get_tree().get_nodes_in_group("player")
+	if not players.is_empty(): player = players[0]
+	# The lane test is cheap and decides whether any crosswalk or contact logic can matter at all.
+	var in_lane := player != null and absf(player.global_position.y - lane_y) < maxf(float(TrafficSafety.cfg()["green_lane_margin_px"]), float(TrafficSafety.cfg()["contact_half_height_px"]))
 	var protected := false
-	for p in get_tree().get_nodes_in_group("player"):
-		if TrafficSafety.protected_crossing(scene.scene_id, p.global_position) and absf(p.global_position.y-lane_y) < float(TrafficSafety.cfg()["green_lane_margin_px"]):
-			var gap: float = (p.global_position.x-position.x)*dir
-			if gap > -length/2.0 and gap < length/2.0 + cur_speed*cur_speed/(2.0*float(TrafficSafety.cfg()["brake_px_s2"])) + float(TrafficSafety.cfg()["green_stop_padding_px"]): protected = true
+	if in_lane:
+		var pp: Vector2 = player.global_position
+		if absf(pp.y - lane_y) < float(TrafficSafety.cfg()["green_lane_margin_px"]) and TrafficSafety.protected_crossing(scene.scene_id, pp):
+			var gap: float = (pp.x - position.x) * dir
+			if gap > -length / 2.0 and gap < length / 2.0 + cur_speed * cur_speed / (2.0 * float(TrafficSafety.cfg()["brake_px_s2"])) + float(TrafficSafety.cfg()["green_stop_padding_px"]): protected = true
 	var previous_center := position.x
 	var impact_speed := cur_speed
-	var target := 0.0 if _blocked() or protected else speed
+	var target := 0.0 if protected or _blocked(player) else speed
 	cur_speed = move_toward(cur_speed, target, float(TrafficSafety.cfg()["brake_px_s2"]) * delta)
 	if protected: cur_speed = 0.0
 	position.x += dir * cur_speed * delta
 	var current_center := position.x
-	var margin := float(TrafficSafety.cfg()["contact_margin_px"])
-	for p in get_tree().get_nodes_in_group("player"):
-		var pp: Vector2 = p.global_position
-		if absf(pp.y-lane_y) < float(TrafficSafety.cfg()["contact_half_height_px"]) and pp.x >= minf(previous_center,current_center)-length/2.0-margin and pp.x <= maxf(previous_center,current_center)+length/2.0+margin and impact_speed > 0:
+	if in_lane:
+		var margin := float(TrafficSafety.cfg()["contact_margin_px"])
+		var pp: Vector2 = player.global_position
+		if absf(pp.y - lane_y) < float(TrafficSafety.cfg()["contact_half_height_px"]) and pp.x >= minf(previous_center, current_center) - length / 2.0 - margin and pp.x <= maxf(previous_center, current_center) + length / 2.0 + margin and impact_speed > 0:
 			var result := TrafficSafety.hit(impact_speed, scene.scene_id, pp)
 			if result["ok"]:
 				cur_speed = 0.0
