@@ -14,3 +14,5 @@ NOT PASSED: the previous full third-ticket walkthrough has 63 failures and remai
 Under the latest request to pass every self-review gate before the next ticket, do not advance this stack. Existing issue 42 uncommitted work is preserved; no new issue 43 branch or PR is opened. Session A and Session C issues remain outside this work.
 
 上游 #30 正常 merge 後重驗：491/491（129.2 秒），native 第13–14章0 failures / 163.2秒，無SCRIPT ERROR；i18n5229 missing0，wiki275 OK，beta0。修正前兩個單元／六個tour失敗保留原始報告。保留真正海關入口與 NPC／guide 圖示；健身房仍是未啟用景物，測試反映實際服務邊界。試營運正常暫停會清除海外價格，錯碼留置專項先用真實介面重新儲存價格，再建立新的實際訂單；不再把不存在的訂單當作已留置。整合完整流程正在 #99 尾端重驗，尚未列PASS。
+
+實際長存檔選品追修：tour 避免嘗試用家中有限容量追過遠端倉庫的大批存貨，改選已有家中貨或可負擔補貨的商品；補貨檢查家中實際打包位置。seasonal SKU 沒有批發報價時跳過，既有商品仍可使用。選品追修短tour0 failures/162.4秒，編譯1/1；無報價護欄是其後小型追修，整合真實存檔再驗證中。未更動玩家庫存或供應商規則。
