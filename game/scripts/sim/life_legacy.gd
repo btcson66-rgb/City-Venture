@@ -68,8 +68,8 @@ static func review(retire := false) -> Dictionary:
 	# A review is a snapshot of the life so far: it is refreshed once after the civic finale and again when the player records retirement.
 	var existing: Dictionary = S()["review"]
 	if not existing.is_empty():
-		var civic_done := GameState.flag("city24_review") and not existing.get("after_civic",false)
-		var retiring := retire and not S()["retired"]
+		var civic_done: bool = GameState.flag("city24_review") and not existing.get("after_civic",false)
+		var retiring: bool = retire and not S()["retired"]
 		if not civic_done and not retiring: return {"ok":true, "review":existing}
 	var values := metrics()
 	var ranked := scores(values)
