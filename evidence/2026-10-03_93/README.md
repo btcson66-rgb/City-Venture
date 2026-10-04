@@ -11,3 +11,5 @@ Full rendered cadence: a new integrated full walkthrough is running for this nin
 Final unit regression: **551/551**, 201.4 seconds, including **13** new capital-market tests. i18n **5802/5802**, missing **0**; wiki_check **OK**; beta_audit **0 hits**.
 
 Integrated full completed: FAILED, 58 failures, 6875.4 seconds, 2958 steps, 346 screenshots. Chapter 7 profitability, no home listing at chapter 13, then bank exit navigation cascades remain unresolved. Full success gate remains open.
+
+上游合併複驗（25774beb）：全套單元577/577（294.0秒），相關短版0失敗／65步／22張原始擷取；兩者無SCRIPT ERROR。i18n missing0、wiki OK、beta0。保留兩邊新增內容與功能；最終完整整合流程在#99執行中，未完成不標PASS。
