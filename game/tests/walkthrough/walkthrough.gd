@@ -32,6 +32,9 @@ func run() -> void:
 	if _arg("from") == "ch15":
 		await _chapters_15_to_16(true)
 		return
+	if _arg("from")=="trade_execution":
+		await _trade_execution_fixture()
+		return
 	if _arg("from") == "trade_quote":
 		await _trade_quote_fixture()
 		return
@@ -40,6 +43,9 @@ func run() -> void:
 		return
 	if _arg("from") == "global_markets":
 		await _global_markets_fixture()
+		return
+	if _arg("from")=="industry_intro":
+		await _industry_intro_fixture()
 		return
 	if _arg("from") == "opportunities":
 		await _opportunities_fixture()
@@ -123,6 +129,46 @@ func run() -> void:
 
 
 ## Region entry is a fixture; route selection and quote comparisons use native controls.
+func _trade_execution_fixture() -> void:
+	UIRoot._suppress_decisions=true;UIRoot.tutorial.st()["off"]=true
+	Company.register("Meridian Trading","international_trade","Meridian")
+	Company.open_business_account(20000)
+	# An isolated funded founder; every subsequent trade purchase, fee and receipt is real.
+	Ledger.post(GameState.company_id(),"QA founder capital",[{"acct":"cash","dr":100000},{"acct":"equity","cr":100000}])
+	SceneRouter._enter("interior","customs_house","door","up");await bot.wait(.5)
+	TradeDeskUI.open();await _intro_control("RegisterTrade")
+	bot.expect(TradeIndustry.S()["registered"],"paid import/export registration through native control")
+	await bot.shot("trade_execution_registered");UIRoot.close_all()
+	SceneRouter._enter("interior","meridian_trade_desk","door","up");await bot.wait(.5)
+	UIRoot.open_modal(LeaseModal.new("meridian_trade_office"));await _intro_control("SignLease_meridian_trade_office")
+	UIRoot.close_all();TradeDeskUI.open();await _intro_control("StartTrade")
+	bot.expect(TradeIndustry.valid(),"registered leased office opens brokerage")
+	await bot.shot("trade_execution_office")
+	UIRoot.close_all();UIRoot.open_modal(WorldMapModal.new());await _intro_control("Region_northridge")
+	await bot.shot("trade_execution_region");await _intro_control("TradeRoute_northridge")
+	await bot.shot("trade_execution_sheet");await _intro_control("TradeSign")
+	bot.expect(TradeIndustry.S()["deals"].size()==1,"native buyer contract signs shared job")
+	if TradeIndustry.S()["deals"].is_empty():return
+	var d: Dictionary=TradeIndustry.S()["deals"].values()[0]
+	await _intro_control("TradeDoc_"+d["id"]+"_packing_list")
+	GameState.data["clock"]["minutes"]=d["depart"];TradeIndustry.handle("trade.depart",{"id":d["id"]})
+	(UIRoot.top_modal() as TradeDeskUI).rebuild();await bot.wait(.3)
+	bot.expect(d["status"]=="customs_hold","incomplete actual documents hold shipment")
+	await bot.shot("trade_execution_customs_hold")
+	await _intro_control("TradeDoc_"+d["id"]+"_packing_list")
+	await _intro_control("ClearTrade_"+d["id"])
+	await _intro_control("TradeBank_"+d["id"])
+	bot.expect(d["lc"]=="documents_accepted","actual bank document receipt")
+	await bot.shot("trade_execution_bank_documents")
+	GameState.data["clock"]["minutes"]=d["eta"];TradeIndustry.handle("trade.arrive",{"id":d["id"]})
+	GameState.data["clock"]["minutes"]=d["due"];TradeIndustry.collect(d)
+	(UIRoot.top_modal() as TradeDeskUI).rebuild();await bot.wait(.3)
+	bot.expect(d["status"]=="paid" and Ledger.check_balanced(),"actual cargo delivered and LC collected with balanced ledger")
+	await bot.shot("trade_execution_collected")
+	bot.expect(SaveSystem.save(8) and SaveSystem.load_data(8),"actual trade state save roundtrip")
+	bot.expect(TradeIndustry.S()["deals"][d["id"]]["status"]=="paid","paid receipt retained after load")
+	UIRoot.close_all()
+
 func _trade_quote_fixture() -> void:
 	await bot.wait(4.0)
 	UIRoot._suppress_decisions = true
@@ -540,6 +586,9 @@ func popups() -> void:
 			m = UIRoot.top_modal()
 			if m == null:
 				return
+		if m is IndustryGuideModal:
+			await bot.click_named("IndustryGuideSkip")
+			continue
 		if m is DecisionModal:
 			var inst: Dictionary = m.inst
 			await bot.shot("decision_" + str(inst["id"]))
@@ -2079,13 +2128,35 @@ func _chapters_13_to_14(fast := false) -> void:
 	if not GlobalMarket.company()["stores"].has("northridge"):
 		await bot.click_named("OpenGlobalStore_northridge")
 	var listing: Dictionary = {}
-	for l in Ecommerce.E()["listings"].values():
-		if l.get("active", false) and Ecommerce.best_location(str(l["product"])) == "riverside_studio":
-			if listing.is_empty() or Ecommerce.available("riverside_studio", str(l["product"])) > Ecommerce.available("riverside_studio", str(listing["product"])):
-				listing = l
-	if listing.is_empty():
-		bot.fail("season two has no active listing stocked at the home packing table; restocking is required")
-		return
+	var best_cost := INF
+	# Choose an affordable home-packed product without trying to outstock a fuller remote warehouse.
+	for candidate in Ecommerce.E()["listings"].values():
+		if not candidate.get("active",false):continue
+		var product: String=candidate["product"]
+		var other_max:=0
+		for location in Ecommerce.stock_locations():
+			if location!="riverside_studio":other_max=maxi(other_max,Ecommerce.available(location,product))
+		var home:=Ecommerce.available("riverside_studio",product)
+		if home>other_max:
+			listing=candidate;best_cost=0.0;break
+		var offer:=Ecommerce.offer("tradelink_wholesale",product)
+		if offer.is_empty():continue # seasonal products may have no wholesale offer
+		var moq: int=offer["moq"]
+		var batches: int=maxi(0,int(ceil(float(other_max+1-home)/moq)))
+		if home==0:batches=maxi(1,batches)
+		var cost:=batches*moq*Ecommerce.unit_cost("tradelink_wholesale",product)
+		if Ecommerce.space_block("riverside_studio",batches*moq)!="" or cost>Ledger.cash(GameState.business_entity()):continue
+		if cost<best_cost:listing=candidate;best_cost=cost
+	if listing.is_empty():bot.fail("no affordable home export product fits the actual remaining capacity");return
+	if best_cost>0:
+		var product: String=listing["product"]
+		var other_max:=0
+		for location in Ecommerce.stock_locations():
+			if location!="riverside_studio":other_max=maxi(other_max,Ecommerce.available(location,product))
+		await close_modal()
+		if not await _restock_product(product,other_max+1):return
+		if Ecommerce.best_location(product)!="riverside_studio":bot.fail("real export restock is not at the home packing table");return
+		await _home_laptop("sales");await _intro_control("SalesPage_overseas")
 	await _export_row_input("SaveGlobalPrice_" + str(listing["id"]))
 	bot.expect(GlobalMarket.order_allowed("northridge", str(listing["id"])), "selected export listing really has a saved price")
 	if not GlobalMarket.order_allowed("northridge", str(listing["id"])):
@@ -2182,11 +2253,19 @@ func _chapters_13_to_14(fast := false) -> void:
 	bot.expect(Ledger.check_balanced(), "chapters 13–14 Ledger balanced")
 	if fast:
 		bot.step("Customs hold — wrong-code fixture, real document-correction input")
+		if not await _restock_product(str(listing["product"]),30):return
+		# Honest trial pause cleared prices; reopen pricing through the real saved-price control.
+		await _home_laptop("sales");await _intro_control("SalesPage_overseas")
+		await _export_row_input("SaveGlobalPrice_"+str(listing["id"]))
+		await close_modal()
 		Customs.set_declaration("northridge", str(listing["id"]), "ddp", "textiles")
+		var before_order: int=Ecommerce.E()["counters"]["order"]
 		Ecommerce._h_order_place({"listing": listing["id"], "region": "northridge"})
+		if not bot.expect(int(Ecommerce.E()["counters"]["order"])>before_order,"wrong-code fixture created a new real order"):return
 		var held_id := "#%d" % int(Ecommerce.E()["counters"]["order"])
 		await _pack_and_ship_home()
 		Ecommerce._h_pickup({"ids": [held_id]})
+		if not bot.expect(Ecommerce.E()["orders"][held_id]["status"]=="customs_hold","actual wrong-code order is held before document choice"):return
 		for q in EventEngine.S()["queue"]:
 			if q["id"] == "customs_hold" and q["ctx"]["order"] == held_id:
 				UIRoot.open_modal(DecisionModal.new(q))
@@ -2199,6 +2278,18 @@ func _chapters_13_to_14(fast := false) -> void:
 		await bot.click_named("DecisionOK")
 		bot.expect(Ecommerce.E()["orders"][held_id]["status"] == "shipped", "real documents choice releases hold")
 		bot.expect(Ledger.check_balanced(), "document correction Ledger balanced")
+
+func _restock_product(product: String, target: int) -> bool:
+	if Ecommerce.available("riverside_studio",product)>=target:return true
+	UIRoot.close_all();await _home_laptop("operations");await _intro_control("DeliverTo_riverside_studio")
+	var moq: int=Ecommerce.offer("tradelink_wholesale",product)["moq"]
+	var batches: int=int(ceil(float(target-Ecommerce.available("riverside_studio",product))/moq))
+	for batch in batches:
+		if Ecommerce.space_block("riverside_studio",moq)!="" or Ledger.cash(GameState.business_entity())<moq*Ecommerce.unit_cost("tradelink_wholesale",product):break
+		await _intro_control("Buy_tradelink_wholesale_"+product)
+	await close_modal()
+	await pass_time_at_home(func():return Ecommerce.available("riverside_studio",product)>=target,8,true)
+	return bot.expect(Ecommerce.available("riverside_studio",product)>=target,"real purchase supplies upcoming export or distributor shipment")
 
 
 func _fast_forward_to_ch10() -> void:
@@ -2831,3 +2922,61 @@ func _capital_market_fixture() -> void:
 		await bot.shot("capital_"+route+"_life_review")
 		bot.expect(SaveSystem.save_to(bot.out_dir.path_join("capital_"+route+".json")),"save ownership route")
 		bot.expect(Ledger.check_balanced(),"ownership route double-entry balance")
+
+func _industry_intro_fixture() -> void:
+	await bot.wait(4)
+	UIRoot._suppress_decisions=true;UIRoot.tutorial.st()["off"]=true;StoryEngine.St()["active"].clear()
+	Company.register("First OEM","manufacturing","Unit 12");Company.open_business_account(25000)
+	Ledger.post(GameState.company_id(),"Controlled introduction capital",[{"acct":"cash","dr":200000},{"acct":"equity","cr":200000}],{"type":"qa_fixture"})
+	UIRoot.phone.open();await bot.wait(.3);await bot.click_named("App_opportunities")
+	await bot.shot("six_actual_industry_opportunities")
+	await _intro_control("AcceptOpportunity_intro_manufacturing")
+	bot.expect(StoryEngine.side_progress().has("intro_manufacturing"),"real manufacturing story accepted")
+	UIRoot.phone.close()
+	GameState.data["clock"]["minutes"]=Clock.DAY+10*60
+	SceneRouter._enter("interior","kessler_precision","door","up");await bot.wait(.8)
+	await bot.use(func(n):return n.action=="talk" and n.params.get("npc","")=="lena_park","Lena Park")
+	await dialogue();UIRoot.close_all();StoryEngine.check()
+	bot.expect(Cond.eval("met:lena_park"),"actual mentor meeting receipt")
+	Living.lease("unit12_factory");Manufacturing.start();Manufacturing.acquire_machine();Staff.register_employer();Manufacturing.hire_tomas()
+	SceneRouter._enter("interior","unit12_factory","door","up");await bot.wait(.7)
+	UIRoot.open_modal(CompanyOS.new(I18n.t("Manufacturing")));await bot.wait(.3);await bot.click_named("Tab_manufacturing");await bot.wait(.5)
+	bot.expect(UIRoot.top_modal() is IndustryGuideModal,"first OS industry tab opens saved guide")
+	await bot.shot("manufacturing_first_order_guide")
+	await bot.click_named("IndustryGuideContinue");await bot.wait(.3)
+	await bot.click_named("OpenLinePlanner");await bot.wait(.3)
+	var rfq: Dictionary=Manufacturing.S()["rfqs"].values()[0]
+	# Choose the customer's floor with native controls; default quotes can lose legitimately.
+	var quote_ui: ManufacturingUI=UIRoot.top_modal()
+	while float(quote_ui.quotes.get(rfq["id"],quote_ui._default_quote(rfq["id"])))>float(rfq["min_price"]):
+		await _intro_control("QuoteLess_"+rfq["id"])
+	await _intro_control("Quote_"+rfq["id"])
+	bot.expect(not Manufacturing.S()["orders"].is_empty(),"native OEM contract accepted")
+	if Manufacturing.S()["orders"].is_empty():return
+	var order: Dictionary=Manufacturing.S()["orders"].values()[0]
+	Manufacturing.order_material(1000);UIRoot.close_all();Clock.advance(2*Clock.DAY)
+	ManufacturingUI.open();await bot.wait(.3)
+	await _intro_control("Select_"+order["job"]);await _intro_control("FactoryOvertime");await _intro_control("ReserveSlot")
+	UIRoot.close_all()
+	var slot: Dictionary=Manufacturing.S()["slots"][-1]
+	Clock.advance_to(int(slot["start"])+60);StoryEngine.check()
+	var pending: Array=EventEngine.S()["queue"].filter(func(e):return e["id"]=="intro_factory_quality")
+	bot.expect(not pending.is_empty(),"actual first-hour defects create two-choice recovery")
+	if pending.is_empty():return
+	UIRoot.open_modal(DecisionModal.new(pending[0]));await bot.wait(.4);await bot.shot("manufacturing_real_quality_recovery")
+	await bot.click_named("Choice_outsource");await bot.wait(.3)
+	if UIRoot.top_modal() is InfoModal:await bot.click_text("OK")
+	UIRoot.close_all();Clock.advance(3*60)
+	ManufacturingUI.open();await bot.wait(.3);await _intro_control("Deliver_"+order["job"]);UIRoot.close_all();StoryEngine.check()
+	bot.expect(StoryEngine.side_progress()["intro_manufacturing"]["status"]=="completed","real completed side story")
+	UIRoot.phone.open();await bot.wait(.3);await bot.click_named("App_timeline");await bot.wait(.4);await bot.shot("manufacturing_side_story_receipt")
+	UIRoot.phone.close();bot.expect(Ledger.check_balanced(),"story recovery actual ledger balanced")
+	SaveSystem.save_to(bot.out_dir.path_join("industry_intro.json"))
+func _intro_control(name: String) -> void:
+	await bot.wait(.3)
+	var b: Button=bot.button_named(name)
+	if b!=null:
+		var p: Node=b.get_parent()
+		while p!=null and not p is ScrollContainer:p=p.get_parent()
+		if p!=null:(p as ScrollContainer).ensure_control_visible(b);await bot.wait(.4)
+	await bot.click_named(name);await bot.wait(.3)

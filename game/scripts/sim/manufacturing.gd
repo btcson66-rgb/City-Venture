@@ -111,7 +111,7 @@ static func quote(id: String, price: float) -> Dictionary:
 	if chance <= 0.0 or (chance < 1.0 and GameState.rng.randf() >= chance):
 		rfq["status"] = "rejected"
 		return {"ok":false, "error":I18n.t("%s chose a rival quote. Your price was too high.") % I18n.t(str(rfq["client"]))}
-	var job := Jobs.offer({"entity":entity(), "client":rfq["client"], "scope":"OEM phone stands", "price":snappedf(price*int(rfq["qty"]), 0.01), "work":int(rfq["qty"]), "due":rfq["due"], "terms":int(cfg()["payment_terms"]), "deposit":float(cfg()["deposit_rate"]), "penalty_rate":float(cfg()["late_penalty"]), "segment":"manufacturing"})
+	var job := Jobs.offer({"entity":entity(), "client":rfq["client"], "scope":I18n.t("OEM phone stands"), "price":snappedf(price*int(rfq["qty"]), 0.01), "work":int(rfq["qty"]), "due":rfq["due"], "terms":int(cfg()["payment_terms"]), "deposit":float(cfg()["deposit_rate"]), "penalty_rate":float(cfg()["late_penalty"]), "segment":"manufacturing"})
 	if job == "": return _error("Invalid order terms.")
 	var accepted := Jobs.accept(job)
 	if not accepted["ok"]: return accepted
@@ -230,6 +230,8 @@ static func customer_return(job: String, qty: int, penalty := false) -> Dictiona
 static func crisis(kind: String, retain := true) -> Dictionary:
 	if not valid(): return _error("Open the factory first.")
 	match kind:
+		"story_outsource":return IndustryGuidance.recovery_plan(true)
+		"story_overtime":return IndustryGuidance.recovery_plan(false)
 		"shortage":
 			S()["shortage_until"] = Clock.now()+int(cfg()["shortage_days"])*Clock.DAY
 			for po in S()["pos"].values():

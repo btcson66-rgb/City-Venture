@@ -53,7 +53,7 @@ func test_opening_gates_district_and_registry() -> void:
 	for bid in ["airport_terminal", "gateway_car_rental", "aurelia_auto_auction", "cargo_terminal"]:
 		runner.check(DataDB.buildings.has(bid) and BuildingInfo.building_enterable(bid), bid + " enterable")
 	var cargo: Array = DataDB.buildings["cargo_terminal"]["interior"]["interactables"]
-	runner.check(cargo.size() >= 1 and cargo.all(func(i): return i["action"] == "look"), "cargo terminal is look-only")
+	runner.check(cargo.any(func(i): return i["action"] == "look") and cargo.any(func(i):return i["action"]=="trade_open"), "cargo terminal retains its notices and opens actual air trade")
 	runner.check(not BuildingInfo.welcome("cargo_terminal").contains("planned"), "no planned wording")
 	var groups: Array = BuildingInfo.guide_groups().filter(func(g): return g["id"] == "airport")
 	runner.check(groups.size() == 1 and "airport_terminal" in groups[0]["buildings"] and "aurelia_auto_auction" in groups[0]["buildings"] and "gateway_car_rental" in groups[0]["buildings"], "guide lists airport destinations")

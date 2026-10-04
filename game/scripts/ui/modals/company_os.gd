@@ -19,6 +19,7 @@ var new_price := {}
 var deliver_to := ""
 var sales_page := "domestic"
 var global_region := "northridge"
+
 var _primary_chosen := false
 
 
@@ -124,6 +125,8 @@ func build() -> void:
 	row.add_child(sc)
 	if not Industries.render_tab(tab, self):
 		call("_tab_" + tab)
+	if not IndustryGuidance.guide(tab).is_empty():
+		call_deferred("_industry_guide",tab)
 
 
 func _set_tab(t: String) -> void:
@@ -276,6 +279,7 @@ func _tab_overview() -> void:
 # ============================================================== FINANCE
 func _tab_finance() -> void:
 	GlobalMarketUI.finance(self, content)
+
 	_concepts(["gross_margin", "opex", "credit_history"])
 	var be := GameState.business_entity()
 	var cur := MonthClose.current(be)
@@ -384,6 +388,7 @@ func _forecast(be: String) -> void:
 
 # ============================================================== SALES
 func _tab_sales() -> void:
+	_concepts(["marketplace_fee", "payout_schedule", "ads_cpc", "price_elasticity", "product_photo"])
 	var pages := UIK.hbox(4)
 	content.add_child(pages)
 	for entry in [["domestic", "Domestic"], ["overseas", "Overseas"]]:
@@ -393,7 +398,7 @@ func _tab_sales() -> void:
 	if sales_page == "overseas":
 		GlobalMarketUI.sales(self, content)
 		return
-	_concepts(["marketplace_fee", "payout_schedule", "ads_cpc", "price_elasticity", "product_photo"])
+
 	if Ecommerce.is_personal():
 		var capbar := ProgressBar.new()
 		capbar.max_value = Ecommerce.seller_cap()
@@ -1549,3 +1554,6 @@ func _tab_segments() -> void:
 			if float(row["internal_cost"])-float(row["internal_charge"])>0.004:content.add_child(UIK.kv("Included internal media cost",Fmt.money(float(row["internal_cost"])-float(row["internal_charge"]))))
 		if float(report["totals"]["internal_revenue"])>0:content.add_child(UIK.kv("Internal trade eliminated in group total",Fmt.money(report["totals"]["internal_revenue"])))
 		content.add_child(UIK.kv("Total operating profit", Fmt.money(report["totals"]["operating_profit"])))
+
+func _industry_guide(id: String) -> void:
+	if is_inside_tree() and UIRoot.top_modal()==self:IndustryGuidance.open_first(id)
