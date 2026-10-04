@@ -193,7 +193,7 @@ static func book_appointment() -> int:
 	B()["appointment"] = t
 	Sim.cancel("bank.appointment", "id", "lending")
 	Sim.schedule(t, "bank.appointment", {"id": "lending"})
-	GameState.add_message("marcus", appointment_hint(), {"replies": [{"id": "confirm", "label": "Confirm the meeting", "effects": [{"op": "phone_meeting", "npc": "marcus", "at": t}]}, {"id": "later", "label": "I will book again later.", "effects": [{"op": "phone_bank_later", "at": t}]}], "expires": t + 60, "default_reply": "later"})
+	GameState.add_message("marcus", appointment_hint(), {"replies": [{"id": "confirm", "label": "Confirm the meeting", "effects": [{"op": "phone_meeting", "npc": "marcus", "at": t}]}, {"id": "later", "label": "I will book again later.", "effects": [{"op": "phone_bank_later", "at": t}]}, {"id": "keep", "label": "Leave the appointment as booked.", "effects": []}], "expires": t + 60, "default_reply": "keep"})
 	return t
 
 
