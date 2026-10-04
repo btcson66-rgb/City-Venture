@@ -12,51 +12,76 @@ extends RefCounted
 const LEGACY_SALE_MEMO := "Sale delivered %s: %d × %s @ %s"
 
 const OPEN_STATUSES := ["placed", "packed", "awaiting_pickup", "carried", "shipped", "customs_hold"]
+const PICKUP_CHUNK := 250
+## Orders still waiting at the shelf; the only ones the hourly fulfilment scans ask for. Orders enter this set only when placed.
+const PRE_SHIP := ["placed", "packed"]
 
-## Derived order reservations, never saved. Production only creates placed orders
-## in _h_order_place and releases them in pack_orders. A different loaded/new-game
-## dictionary or external fixture insertion rebuilds the index before it is read.
-static var _reservation_source: Dictionary = {}
-static var _reservation_size := -1
-static var _reservation_units: Dictionary = {}
+## Derived order indexes, never saved, one per company context (the portfolio swaps the order
+## dictionary on every company switch). Fulfilment scans touch only the OPEN orders and the overseas
+## orders; settled home orders drop out lazily. The index is rebuilt when a dictionary changes identity
+## or size outside _h_order_place (loads, new games, fixture insertion).
+static var _ix: Dictionary = {}
 
 
 static func invalidate_reservations() -> void:
-	_reservation_source = {}
-	_reservation_size = -1
-	_reservation_units = {}
+	_ix = {}
 
 
 static func _reservation_key(loc: String, product: String) -> String:
 	return loc + ":" + product
 
 
-static func _refresh_reservations() -> void:
+static func _index() -> Dictionary:
 	if not EventBus.state_loaded.is_connected(invalidate_reservations):
 		EventBus.state_loaded.connect(invalidate_reservations)
 	var orders: Dictionary = E()["orders"]
-	if is_same(orders, _reservation_source) and orders.size() == _reservation_size:
-		return
-	_reservation_source = orders
-	_reservation_size = orders.size()
-	_reservation_units = {}
+	var cid := GameState.company_id()
+	var ix: Dictionary = _ix.get(cid, {})
+	if not ix.is_empty() and is_same(orders, ix["src"]) and orders.size() == ix["size"]:
+		return ix
+	ix = {"src": orders, "size": orders.size(), "active": {}, "pre": {}, "foreign": {}, "units": null}
 	for id in orders:
+		var o: Dictionary = orders[id]
+		if o["status"] in OPEN_STATUSES:
+			ix["active"][id] = true
+		if o["status"] in PRE_SHIP:
+			ix["pre"][id] = true
+		if o.has("region"):
+			ix["foreign"][id] = true
+	_ix[cid] = ix
+	return ix
+
+
+static func _refresh_reservations() -> void:
+	var ix := _index()
+	if ix["units"] != null:
+		return
+	var units := {}
+	var orders: Dictionary = E()["orders"]
+	for id in ix["active"]:
 		var o: Dictionary = orders[id]
 		if o["status"] == "placed":
 			for item in Packing.items(o):
 				var key := _reservation_key(o["location"], item["product"])
-				_reservation_units[key] = int(_reservation_units.get(key, 0)) + int(item["qty"])
+				units[key] = int(units.get(key, 0)) + int(item["qty"])
+	ix["units"] = units
 
 
 static func _reserve_new_order(o: Dictionary) -> void:
 	var orders: Dictionary = E()["orders"]
-	if not is_same(orders, _reservation_source) or orders.size() != _reservation_size + 1:
-		invalidate_reservations()
+	var ix: Dictionary = _ix.get(GameState.company_id(), {})
+	if ix.is_empty() or not is_same(orders, ix["src"]) or orders.size() != int(ix["size"]) + 1:
+		_ix.erase(GameState.company_id())
 		return
-	for item in Packing.items(o):
-		var key := _reservation_key(o["location"], item["product"])
-		_reservation_units[key] = int(_reservation_units.get(key, 0)) + int(item["qty"])
-	_reservation_size = orders.size()
+	ix["size"] = orders.size()
+	ix["active"][o["id"]] = true
+	ix["pre"][o["id"]] = true
+	if o.has("region"):
+		ix["foreign"][o["id"]] = true
+	if ix["units"] != null:
+		for item in Packing.items(o):
+			var key := _reservation_key(o["location"], item["product"])
+			ix["units"][key] = int(ix["units"].get(key, 0)) + int(item["qty"])
 
 
 static func E() -> Dictionary:
@@ -597,7 +622,7 @@ static func avg_cost(loc: String, product_id: String) -> float:
 
 static func reserved(loc: String, product_id: String) -> int:
 	_refresh_reservations()
-	var n := int(_reservation_units.get(_reservation_key(loc, product_id), 0))
+	var n := int(_ix[GameState.company_id()]["units"].get(_reservation_key(loc, product_id), 0))
 	for c in GameState.data["contracts"].values():
 		if c.get("status", "") == "active" and c.get("location", "") == loc and c.get("product", "") == product_id:
 			n += int(c["qty"])
@@ -932,11 +957,87 @@ static func lift_cap() -> void:
 
 
 # ================================================================ fulfilment
-static func orders_with(statuses: Array, loc := "") -> Array:
+## Overseas-region orders only (the ones carrying a "region"); archiving never removes these.
+static func foreign_orders() -> Array:
+	var ix := _index()
+	var orders: Dictionary = E()["orders"]
 	var out: Array = []
-	for o in E()["orders"].values():
-		if o["status"] in statuses and (loc == "" or o["location"] == loc):
-			out.append(o)
+	for id in ix["foreign"]:
+		if orders.has(id):
+			out.append(orders[id])
+	return out
+
+
+## Settled home orders older than this are folded into monthly totals (see archive_settled).
+const ARCHIVE_AFTER_DAYS := 45
+const ARCHIVE_MIN_ORDERS := 2000
+const SETTLED_STATUSES := ["delivered", "refunded", "replaced", "partial_refund", "refused", "cancelled"]
+
+
+## Fold old, fully settled home-region orders into a per-month summary. Orders are hundreds of bytes each
+## and nothing reads a home order after its return/review window, but ordinary play (a few orders a day)
+## never reaches the threshold, so only saturated companies shed history. Returns orders archived.
+static func archive_settled(now: int, min_orders := ARCHIVE_MIN_ORDERS, keep_days := ARCHIVE_AFTER_DAYS) -> int:
+	var orders: Dictionary = E()["orders"]
+	if orders.size() < min_orders:
+		return 0
+	var cutoff := now - keep_days * Clock.DAY
+	var old: Array = []
+	for id in orders:
+		var o: Dictionary = orders[id]
+		if int(o["placed"]) < cutoff and o["status"] in SETTLED_STATUSES and not o.has("region"):
+			old.append(id)
+	if old.size() < min_orders / 2:
+		return 0
+	var arch: Dictionary = E().get("order_archive", {})
+	for id in old:
+		var o: Dictionary = orders[id]
+		var d := Clock.date_at(int(o["placed"]))
+		var key := "%04d-%02d" % [int(d["year"]), int(d["month"])]
+		var row: Dictionary = arch.get(key, {"orders": 0, "units": 0, "gross": 0.0, "refunded": 0})
+		row["orders"] = int(row["orders"]) + 1
+		for item in Packing.items(o):
+			row["units"] = int(row["units"]) + int(item["qty"])
+		if not o["status"] in ["refunded", "cancelled"]:
+			row["gross"] = snappedf(float(row["gross"]) + Packing.total(o), 0.01)
+		else:
+			row["refunded"] = int(row["refunded"]) + 1
+		arch[key] = row
+		orders.erase(id)
+	E()["order_archive"] = arch
+	_ix.erase(GameState.company_id())
+	return old.size()
+
+
+static func orders_with(statuses: Array, loc := "") -> Array:
+	var ix := _index()
+	var orders: Dictionary = E()["orders"]
+	var set_name := "pre"
+	var allowed: Array = PRE_SHIP
+	for st in statuses:
+		if not st in PRE_SHIP:
+			set_name = "active"
+			allowed = OPEN_STATUSES
+		if not st in OPEN_STATUSES:
+			set_name = ""
+			break
+	var out: Array = []
+	if set_name == "":
+		# A status outside the open set (none in production) takes the full scan.
+		for o in orders.values():
+			if o["status"] in statuses and (loc == "" or o["location"] == loc):
+				out.append(o)
+	else:
+		var ids: Dictionary = ix[set_name]
+		var settled: Array = []
+		for id in ids:
+			var o: Dictionary = orders.get(id, {})
+			if o.is_empty() or not o["status"] in allowed:
+				settled.append(id)
+			elif o["status"] in statuses and (loc == "" or o["location"] == loc):
+				out.append(o)
+		for id in settled:
+			ids.erase(id)
 	out.sort_custom(func(a, b): return int(a["placed"]) < int(b["placed"]))
 	return out
 
@@ -984,7 +1085,9 @@ static func pack_orders(loc: String, max_n := -1, quality := {}, staff_skill := 
 		o["status"] = "packed"
 		for item in Packing.items(o):
 			var reservation_key := _reservation_key(loc, item["product"])
-			_reservation_units[reservation_key] = int(_reservation_units.get(reservation_key, 0)) - int(item["qty"])
+			_refresh_reservations()
+			var units: Dictionary = _ix[GameState.company_id()]["units"]
+			units[reservation_key] = int(units.get(reservation_key, 0)) - int(item["qty"])
 		o["packed"] = Clock.now()
 		o["pack"] = qv
 		o["pack_q"] = float(qv.get("q", avg))
@@ -1091,11 +1194,15 @@ static func dropoff_carried(method: String) -> Dictionary:
 
 static func _h_pickup(p: Dictionary) -> void:
 	var n := 0
-	for oid in p.get("ids", []):
+	var ids: Array = p.get("ids", [])
+	for oid in ids.slice(0, PICKUP_CHUNK):
 		var o: Dictionary = E()["orders"].get(oid, {})
 		if not o.is_empty() and o["status"] == "awaiting_pickup":
 			_ship(o)
 			n += 1
+	if ids.size() > PICKUP_CHUNK:
+		# A saturated shop hands over thousands of parcels at once; the rest follow a minute later so no frame stalls.
+		Sim.schedule(Clock.now() + 1, "eco.pickup", {"ids": ids.slice(PICKUP_CHUNK)})
 	if n > 0:
 		EventBus.notify.emit(I18n.t("Courier picked up %d parcel%s.") % [n, I18n.pl(n)], "info", "parcel")
 

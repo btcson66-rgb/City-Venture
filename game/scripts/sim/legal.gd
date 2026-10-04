@@ -36,10 +36,13 @@ static func supplier_breach(job_id: String) -> String:
 	var job := Jobs.get_job(job_id)
 	if job.is_empty() or job.get("direction","")!="purchase" or job.get("status","")!="active" or str(job.get("supplier_dispute_id",""))!="" or float(job.get("paid_cost",0))<=0 or Clock.now()<=int(job["due"]) or float(job["progress"])>=float(job["work"]):return ""
 	var asset := ""
-	for entry in GameState.data["ledger"]["journal"]:
+	var journal: Array=GameState.data["ledger"]["journal"]
+	for i in range(journal.size()-1,-1,-1):  # newest purchase wins, so the first hit from the end is the answer
+		var entry: Dictionary=journal[i]
 		if entry["entity"]!=job["entity"] or entry["source"].get("type","")!="job_purchase" or entry["source"].get("id","")!=job_id:continue
 		for line in entry["lines"]:
 			if float(line.get("dr",0))>0 and line["acct"]!="cash":asset=str(line["acct"])
+		if asset!="":break
 	if asset=="":return ""
 	job["supplier_checked"]=true
 	var id := _open(str(job["entity"]),"supplier",job_id,float(job["paid_cost"])*float(cfg()["supplier_compensation_share"]),str(job["client"]),asset)

@@ -66,7 +66,7 @@ static func metric(source: String) -> float:
 			return float(count)
 		"foreign_deliveries":
 			var delivered := 0
-			for o in Ecommerce.E()["orders"].values():
+			for o in Ecommerce.foreign_orders():
 				if o.has("delivered") and o.get("region", "home") != "home" and not o.get("status", "") in ["refunded", "refused"]: delivered += 1
 			return float(delivered)
 		"debt_free":

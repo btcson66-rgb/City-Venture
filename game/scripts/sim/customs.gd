@@ -142,7 +142,7 @@ static func begin(chapter: String) -> void:
 
 
 static func reconcile() -> void:
-	for o in Ecommerce.E()["orders"].values():
+	for o in Ecommerce.foreign_orders():
 		if o["status"] == "customs_hold":
 			if not GlobalMarket.live(str(o["entity"])):
 				remove_decisions(str(o["id"]))
@@ -160,7 +160,7 @@ static func reconcile() -> void:
 	GameState.set_flag("global_bank_ready", bool(GlobalMarket.company()["bank"]))
 	var store: Dictionary = GlobalMarket.company()["stores"].get("northridge", {})
 	GameState.set_flag("northridge_listing_ready", not store.get("prices", {}).is_empty())
-	for o in Ecommerce.E()["orders"].values():
+	for o in Ecommerce.foreign_orders():
 		if o.get("entity", "") == ent and o.get("region", "") == "northridge" and o.get("ship", {}).has("shipped"):
 			GameState.set_flag("first_export_shipped")
 	if not GameState.flag("first_export_converted"):
@@ -184,7 +184,7 @@ static func reconcile() -> void:
 
 static func trial_results(entity: String) -> Dictionary:
 	var orders: Array = []
-	for o in Ecommerce.E()["orders"].values():
+	for o in Ecommerce.foreign_orders():
 		if o.get("entity", "") == entity and o.has("delivery_rate") and o.get("customs", {}).get("cleared", false) and Clock.now() - int(o["delivered"]) >= int(cfg().get("return_observation_days", 3)) * Clock.DAY:
 			orders.append(o)
 	orders.sort_custom(func(a,b): return int(a["delivered"]) > int(b["delivered"]))

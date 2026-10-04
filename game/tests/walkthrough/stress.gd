@@ -7,6 +7,8 @@ var report := {}
 var samples: Array = []
 var started := 0
 var order_phases := {}
+var worst_ms := 0.0
+var worst_at := 0
 
 
 func _ready() -> void:
@@ -27,6 +29,7 @@ func _run() -> void:
 	SaveSystem.DIR = str(options["out"]).path_join("saves")
 	DirAccess.make_dir_recursive_absolute(SaveSystem.DIR)
 	started = Time.get_ticks_usec()
+	Prof.enabled = int(options["profile"]) > 0
 	report = {"schema": 2, "engine": Engine.get_version_info()["string"], "platform": OS.get_name(),
 		"renderer": RenderingServer.get_current_rendering_method(), "options": options,
 		"coverage": {"industries": [], "playable_companies": 0, "missing_industries": [],
@@ -72,13 +75,16 @@ func _run() -> void:
 			report["errors"].append("Wall time safety limit reached before all requested days")
 			break
 		var begin := Time.get_ticks_usec()
-		var count := _orders(int(options["orders"]))
-		var order_ms := (Time.get_ticks_usec() - begin) / 1000.0
-		var ticks := _run_day_ticks()
+		var listing := _prepare_orders(int(options["orders"]))
+		var fixture_ms := (Time.get_ticks_usec() - begin) / 1000.0
+		var ticks := _run_day_ticks(listing, int(options["orders"]))
+		var count: int = ticks["placed"]
+		var order_ms: float = ticks["order_ms"]
+		order_phases["fixture_ms"] = fixture_ms
 		var tick_ms: float = ticks["total_ms"]
 		var sample := {"day": day + 1, "orders": count, "staff": Staff.count(),
 			"simulation_ms": ticks["mean"], "tick_p99_ms": ticks["p99"], "tick_max_ms": ticks["max"],
-			"hour_tick_mean_ms": ticks["hour_mean"], "frame_mean_ms": ticks["frame_mean"], "frame_p99_ms": ticks["frame_p99"],
+			"hour_tick_mean_ms": ticks["hour_mean"], "tick_max_at_minute": worst_at % Clock.DAY, "frame_mean_ms": ticks["frame_mean"], "frame_p99_ms": ticks["frame_p99"],
 			"day_total_ms": tick_ms, "orders_ms": order_ms, "order_ms_per_order": order_ms / maxf(1.0, count),
 			"order_phases_ms": order_phases.duplicate(),
 			"memory_bytes": int(Performance.get_monitor(Performance.MEMORY_STATIC)),
@@ -99,16 +105,24 @@ func _run() -> void:
 			sample["loaded"] = SaveSystem.load_data(98)
 			sample["load_ms"] = (Time.get_ticks_usec() - begin) / 1000.0
 			sample["balanced"] = Ledger.check_balanced()
+			# A load replaces every state dictionary; release the previous generation now, not inside the next timed tick.
+			for company in CompanyPortfolio.ids():
+				CompanyPortfolio.run_in(str(company), func(): pass)
 			if not sample["loaded"]:
 				report["errors"].append("Load failed: " + str(SaveSystem.last_error))
 		if int(options["profile"]) > 0:
 			var keys := Prof.d.keys()
 			keys.sort_custom(func(a, b): return Prof.d[a] > Prof.d[b])
 			var line := ""
-			for k in keys.slice(0, 14):
+			for k in keys.slice(0, 22):
 				line += "%s=%.0f " % [k, Prof.d[k] / 1000.0]
 			print("PROF(ms/day) ", line)
 			Prof.d.clear()
+			var types := {}
+			for je in GameState.data["ledger"]["journal"]:
+				var key := "%s/%s" % [je.get("source", {}).get("type", "?"), je.get("source", {}).get("segment", "?")]
+				types[key] = int(types.get(key, 0)) + 1
+			print("JOURNAL types ", types)
 		samples.append(sample)
 		print("STRESS day %d: %d orders (%.3f ms/order), tick mean %.3f p99 %.3f max %.1f ms, frame p99 %.3f, %d MB, %s" % [day + 1, count, sample["order_ms_per_order"], sample["simulation_ms"], sample["tick_p99_ms"], sample["tick_max_ms"], sample["frame_p99_ms"], int(sample["memory_bytes"]) / 1048576, ("gzip %d load %.0f ms" % [sample["gzip_bytes"], sample["load_ms"]]) if save_day else "-"])
 		if day % 10 == 0 or save_day:
@@ -127,18 +141,41 @@ func _run() -> void:
 
 ## One game day as 1,440 real minute ticks, each timed. A tick is one frame at 1x speed; the frame
 ## figure adds the time_changed observers a rendered frame also pays.
-func _run_day_ticks() -> Dictionary:
+func _run_day_ticks(listing: Dictionary, n_orders: int) -> Dictionary:
 	var times := PackedFloat64Array()
 	var frames := PackedFloat64Array()
 	var hours := PackedFloat64Array()
 	var total := 0.0
+	worst_ms = 0.0
+	var placed := 0
+	var order_ms := 0.0
+	var wall0 := Time.get_ticks_usec()
+	order_phases = {"place_ms": 0.0, "pack_ms": 0.0, "courier_ms": 0.0}
 	for i in Clock.DAY:
+		# Orders arrive through the day (a share each hour) and are packed and booked at once, like a busy shop.
+		if i % 60 == 0 and not listing.is_empty():
+			var hour := i / 60
+			var share := n_orders / 24 + (1 if hour < n_orders % 24 else 0)
+			var b := Time.get_ticks_usec()
+			placed += _order_batch(listing, share)
+			order_ms += (Time.get_ticks_usec() - b) / 1000.0
+		var before: Dictionary = Prof.d.duplicate() if Prof.enabled else {}
 		var t0 := Time.get_ticks_usec()
 		Clock._tick()
 		var t1 := Time.get_ticks_usec()
 		Clock.time_changed.emit()
 		var t2 := Time.get_ticks_usec()
 		var ms := (t1 - t0) / 1000.0
+		if Prof.enabled and ms > 100.0:
+			var parts := ""
+			for k in Prof.d:
+				var delta: int = int(Prof.d[k]) - int(before.get(k, 0))
+				if delta > 100:
+					parts += "%s=%.0f " % [k, delta / 1000.0]
+			print("SLOW TICK %.0f ms i=%d at minute %d: %s" % [ms, i, Clock.now() % Clock.DAY, parts])
+		if ms > worst_ms:
+			worst_ms = ms
+			worst_at = Clock.now()
 		times.append(ms)
 		frames.append((t2 - t0) / 1000.0)
 		if Clock.now() % 60 == 0:
@@ -156,7 +193,7 @@ func _run_day_ticks() -> Dictionary:
 		frame_sum += f
 	var rank := int(ceil(times.size() * 0.99)) - 1
 	return {"mean": total / times.size(), "p99": sorted[rank], "max": sorted[sorted.size() - 1],
-		"hour_mean": hour_sum / maxf(1.0, hours.size()), "frame_mean": frame_sum / frames.size(), "frame_p99": fsorted[rank], "total_ms": total}
+		"hour_mean": hour_sum / maxf(1.0, hours.size()), "placed": placed, "order_ms": order_ms, "total_wall_ms": (Time.get_ticks_usec() - wall0) / 1000.0, "frame_mean": frame_sum / frames.size(), "frame_p99": fsorted[rank], "total_ms": total}
 
 
 func _expired() -> bool:
@@ -175,8 +212,7 @@ static func safe_output_directory(path: String) -> bool:
 
 ## Exercise the real order placement, packing, shipping and scheduled aftersales.
 ## Stock is fixture-supplied with matching inventory/equity entries, never free cash.
-func _orders(n: int) -> int:
-	var start := Time.get_ticks_usec()
+func _prepare_orders(n: int) -> Dictionary:
 	var ent := GameState.business_entity()
 	# The saturation fixture counts one-unit orders; random multi-unit baskets (#113) would exhaust the stock early.
 	DataDB.economy["ecommerce"]["basket_chance"] = 0.0
@@ -188,27 +224,29 @@ func _orders(n: int) -> int:
 		var result := Ecommerce.create_listing("phone_stand", 16.0, "self")
 		if not result.get("ok", false):
 			report["errors"].append("Fixture listing failed: " + str(result))
-			return 0
+			return {}
 		listing = Ecommerce.E()["listings"][result["listing_id"]]
-	listing["active"] = true
-	var before := int(GameState.stat("orders_placed"))
-	order_phases = {"fixture_ms": (Time.get_ticks_usec() - start) / 1000.0}
-	start = Time.get_ticks_usec()
-	for i in n:
-		Ecommerce._h_order_place({"listing": listing["id"]})
-		if i % 100 == 0 and _expired():
-			break
-	var count := int(GameState.stat("orders_placed")) - before
-	order_phases["place_ms"] = (Time.get_ticks_usec() - start) / 1000.0
-	start = Time.get_ticks_usec()
-	Ecommerce.pack_orders("riverside_studio")
-	order_phases["pack_ms"] = (Time.get_ticks_usec() - start) / 1000.0
-	start = Time.get_ticks_usec()
-	Ecommerce.courier_pickup("riverside_studio", "economy")
-	order_phases["courier_ms"] = (Time.get_ticks_usec() - start) / 1000.0
 	# No extra stochastic demand beyond the requested saturation workload.
 	listing["active"] = false
-	return count
+	return listing
+
+
+## Exercise the real order placement, packing, shipping and scheduled aftersales for one hour's share.
+func _order_batch(listing: Dictionary, n: int) -> int:
+	var before := int(GameState.stat("orders_placed"))
+	var t := Time.get_ticks_usec()
+	listing["active"] = true
+	for i in n:
+		Ecommerce._h_order_place({"listing": listing["id"]})
+	listing["active"] = false
+	order_phases["place_ms"] = float(order_phases["place_ms"]) + (Time.get_ticks_usec() - t) / 1000.0
+	t = Time.get_ticks_usec()
+	Ecommerce.pack_orders("riverside_studio")
+	order_phases["pack_ms"] = float(order_phases["pack_ms"]) + (Time.get_ticks_usec() - t) / 1000.0
+	t = Time.get_ticks_usec()
+	Ecommerce.courier_pickup("riverside_studio", "economy")
+	order_phases["courier_ms"] = float(order_phases["courier_ms"]) + (Time.get_ticks_usec() - t) / 1000.0
+	return int(GameState.stat("orders_placed")) - before
 
 
 func _give_cash(entity: String, amount: float) -> void:

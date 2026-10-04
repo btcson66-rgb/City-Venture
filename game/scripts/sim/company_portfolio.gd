@@ -25,9 +25,12 @@ static func _migrate_trade_owner(data: Dictionary) -> void:
 	var trade: Dictionary=data.get("trade",{})
 	var owner: String=str(trade.get("entity",""))
 	if owner=="" or not owner in data["company"]:return
-	for item in data.get("schedule",[]):
-		if str(item.get("kind","")).get_slice(".",0)=="trade" and not item["p"].has("company_context"):
-			item["p"]["company_context"]=owner
+	# Legacy saves only: the schedule scan is O(pending work), so it runs once per owner instead of on every call.
+	if data.get("trade_owner_migrated","")!=owner:
+		for item in data.get("schedule",[]):
+			if str(item.get("kind","")).get_slice(".",0)=="trade" and not item["p"].has("company_context"):
+				item["p"]["company_context"]=owner
+		data["trade_owner_migrated"]=owner
 	for inst in data.get("events",{}).get("queue",[]):
 		if inst["id"] in ["trade_port_strike","trade_fx_volatility"] and not inst["ctx"].has("trade_entity"):
 			inst["ctx"]["trade_entity"]=owner

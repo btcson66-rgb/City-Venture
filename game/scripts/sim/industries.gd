@@ -53,9 +53,9 @@ static func on_hour(t: int, h: int, slot: String, per_company := false) -> void:
 	for entry in all(true):
 		if entry.get("slot", "business") == slot and not (per_company and entry.get("global", false)):
 			Sim.phase = "hour:" + str(entry["id"])
-			var _t0 := Time.get_ticks_usec()
+			var t0 := Time.get_ticks_usec() if Prof.enabled else 0
 			entry["sim_class"].on_hour(t, h)
-			Prof.add("ind:" + str(entry["id"]), Time.get_ticks_usec() - _t0)
+			if Prof.enabled: Prof.add("ind:" + str(entry["id"]), Time.get_ticks_usec() - t0)
 
 static func on_hour_global(t: int, h: int, slot := "business") -> void:
 	for entry in all(true):
