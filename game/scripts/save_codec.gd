@@ -3,6 +3,11 @@ extends RefCounted
 ## Untrusted imports are checked before migration, storage, or changing the live game.
 ## The text cap covers the 3-day 5,000-order stress save once orders carry baskets and packing records (#113).
 
+## Decoded JSON text cap. A saturated company (50 staff, 5,000 orders a day) holds about a week of open and settled
+## orders; older ones are archived into monthly totals, so a long game stays well below this.
+const MAX_TEXT := 128 * 1024 * 1024
+
+
 static func _truthy(v) -> bool:
 	if v is bool: return v
 	if v == null: return false
@@ -13,7 +18,7 @@ static func _truthy(v) -> bool:
 
 static func decode(text: String) -> Dictionary:
 	var invalid := {"ok": false, "error": "This is not a City Venture save."}
-	if text.length() > 32 * 1024 * 1024: return invalid
+	if text.length() > MAX_TEXT: return invalid
 	var parser := JSON.new()
 	if parser.parse(text) != OK: return invalid
 	var payload = parser.data

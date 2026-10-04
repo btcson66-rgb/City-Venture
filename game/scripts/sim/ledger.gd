@@ -38,12 +38,12 @@ const CATEGORY_NAMES := {"advertising": "Advertising", "shipping": "Shipping", "
 
 ## Archiving (#98). Order-driven postings are the only unbounded journal growth. Once a day, entries of these
 ## high-volume types older than COMPACT_KEEP_DAYS fold into one summary entry per entity, type, segment and
-## day, and only when more than COMPACT_MIN_ENTRIES of them are waiting, so ordinary play keeps every
+## day, and only when that group holds at least COMPACT_MIN_GROUP entries, so ordinary play keeps every
 ## line. Account balances, month windows and segment/earned totals are unchanged because day boundaries
 ## are preserved and every line's debit/credit is summed per account.
 const COMPACT_TYPES := ["order", "return", "ship"]
-const COMPACT_KEEP_DAYS := 5
-const COMPACT_MIN_ENTRIES := 20000
+const COMPACT_KEEP_DAYS := 0
+const COMPACT_MIN_GROUP := 100
 
 
 static func category_name(k: String) -> String:
@@ -198,7 +198,7 @@ static func check_balanced() -> bool:
 
 
 ## Fold old high-volume entries into daily summaries. Returns the number of entries removed.
-static func compact_old(now: int, min_entries := COMPACT_MIN_ENTRIES, keep_days := COMPACT_KEEP_DAYS) -> int:
+static func compact_old(now: int, min_group := COMPACT_MIN_GROUP, keep_days := COMPACT_KEEP_DAYS) -> int:
 	var L := _L()
 	var journal: Array = L["journal"]
 	var cutoff := (now / Clock.DAY - keep_days) * Clock.DAY
@@ -211,22 +211,21 @@ static func compact_old(now: int, min_entries := COMPACT_MIN_ENTRIES, keep_days 
 	if i1 <= i0:
 		L["compact_from"] = cutoff
 		return 0
-	var waiting := 0
+	var counts := {}
 	for i in range(i0, i1):
 		if _compactable(journal[i]):
-			waiting += 1
-	if waiting <= min_entries:
-		return 0
+			var k := _group_key(journal[i])
+			counts[k] = int(counts.get(k, 0)) + 1
 	var groups := {}
 	var out: Array = journal.slice(0, i0)
 	for i in range(i0, i1):
 		var e: Dictionary = journal[i]
-		if not _compactable(e):
+		if not _compactable(e) or int(counts[_group_key(e)]) < min_group:
 			out.append(e)
 			continue
 		var src: Dictionary = e["source"]
 		var day := int(e["t"]) / Clock.DAY
-		var key := "%s|%s|%s|%s|%d" % [e["entity"], src.get("type", ""), src.get("segment", ""), str(bool(src.get("internal", false))), day]
+		var key := _group_key(e)
 		if groups.has(key):
 			var g: Dictionary = groups[key]
 			g["n"] = e["n"]
@@ -265,6 +264,11 @@ static func compact_old(now: int, min_entries := COMPACT_MIN_ENTRIES, keep_days 
 	L["journal"] = out   # a new array so incremental journal scanners restart on the compacted history
 	L["compact_from"] = cutoff
 	return removed
+
+
+static func _group_key(e: Dictionary) -> String:
+	var src: Dictionary = e["source"]
+	return "%s|%s|%s|%s|%d" % [e["entity"], src.get("type", ""), src.get("segment", ""), str(bool(src.get("internal", false))), int(e["t"]) / Clock.DAY]
 
 
 static func _compactable(e: Dictionary) -> bool:

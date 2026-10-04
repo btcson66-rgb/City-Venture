@@ -19,6 +19,9 @@ func _start() -> void:
 		var stress = load("res://tests/walkthrough/stress.gd").new()
 		get_tree().root.add_child(stress)
 		return
+	if bot == "loadprobe":
+		get_tree().root.add_child(load("res://tests/walkthrough/load_probe.gd").new())
+		return
 	if bot == "market":
 		get_tree().root.add_child(load("res://tests/walkthrough/market_tour.gd").new())
 		return

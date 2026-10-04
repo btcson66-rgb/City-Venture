@@ -149,6 +149,8 @@ func test_settled_orders_are_archived_into_monthly_totals() -> void:
 		"placed": 5 * Clock.DAY, "delivered": 8 * Clock.DAY, "location": "riverside_studio"}
 	orders["#late_review"] = {"id": "#late_review", "product": "phone_stand", "qty": 1, "unit_price": 16.0, "entity": "player", "status": "delivered",
 		"placed": 5 * Clock.DAY, "delivered": 8 * Clock.DAY, "review": {"t": now - 100}, "location": "riverside_studio"}
+	for id in ["#recent", "#late_review"]:   # a return or review still scheduled keeps its order on the books
+		Sim.schedule(now + 60, "eco.review", {"order": id})
 	runner.eq(Ecommerce.archive_settled(now, 100), 0, "below the volume threshold nothing is archived")
 	runner.eq(Ecommerce.archive_settled(now, 10), 30, "only old settled home orders go")
 	runner.check(orders.has("#recent") and orders.has("#open") and orders.has("#abroad") and orders.has("#late_review"), "recent, open, overseas and still-active orders stay")

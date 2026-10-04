@@ -968,29 +968,31 @@ static func foreign_orders() -> Array:
 	return out
 
 
-## Settled home orders older than this are folded into monthly totals (see archive_settled).
-const ARCHIVE_AFTER_DAYS := 4
+## Settled home orders with nothing left to happen to them are folded into a per-month summary (see archive_settled).
 const ARCHIVE_MIN_ORDERS := 2000
 const SETTLED_STATUSES := ["delivered", "refunded", "replaced", "partial_refund", "refused", "cancelled"]
+## Scheduled follow-ups that can still touch an already delivered order.
+const FOLLOW_UP_EVENTS := ["eco.review", "eco.review_fixed", "eco.return_request", "eco.dispute", "eco.deliver"]
 
 
-## Fold old, fully settled home-region orders into a per-month summary. Orders are hundreds of bytes each
-## and nothing reads a home order after its return/review window, but ordinary play (a few orders a day)
-## never reaches the threshold, so only saturated companies shed history. Returns orders archived.
-## Newest timestamp on an order: every follow-up (return window, review, dispute) is scheduled within days of these.
-static func _last_activity(o: Dictionary) -> int:
-	return maxi(maxi(int(o["placed"]), int(o.get("delivered", 0))), maxi(int(o.get("return", {}).get("t", 0)), int(o.get("review", {}).get("t", 0))))
-
-
-static func archive_settled(now: int, min_orders := ARCHIVE_MIN_ORDERS, keep_days := ARCHIVE_AFTER_DAYS) -> int:
+## Fold settled home-region orders into a per-month summary once no scheduled follow-up (return window, review,
+## dispute) names them. Orders are about a kilobyte each and nothing reads a home order after that, but ordinary
+## play (a few orders a day) never reaches the threshold, so only saturated companies shed history. `grace_days`
+## keeps recent orders on the books a little longer. Returns the number of orders archived.
+static func archive_settled(now: int, min_orders := ARCHIVE_MIN_ORDERS, grace_days := 0.0) -> int:
 	var orders: Dictionary = E()["orders"]
 	if orders.size() < min_orders:
 		return 0
-	var cutoff := now - keep_days * Clock.DAY
+	var cid := GameState.company_id()
+	var pending := {}
+	for item in GameState.data["schedule"]:
+		if str(item["kind"]) in FOLLOW_UP_EVENTS:
+			pending[str(item["p"].get("company_context", cid)) + "|" + str(item["p"].get("order", ""))] = true
+	var cutoff := now - int(grace_days * Clock.DAY)
 	var old: Array = []
 	for id in orders:
 		var o: Dictionary = orders[id]
-		if o["status"] in SETTLED_STATUSES and not o.has("region") and _last_activity(o) < cutoff:
+		if o["status"] in SETTLED_STATUSES and not o.has("region") and _last_activity(o) < cutoff and not pending.has(cid + "|" + str(id)):
 			old.append(id)
 	if old.size() < min_orders / 2:
 		return 0
@@ -1011,8 +1013,13 @@ static func archive_settled(now: int, min_orders := ARCHIVE_MIN_ORDERS, keep_day
 		Tax.forget_sale(str(o["entity"]), "ecommerce:" + str(id))
 		orders.erase(id)
 	E()["order_archive"] = arch
-	_ix.erase(GameState.company_id())
+	_ix.erase(cid)
 	return old.size()
+
+
+## Newest timestamp on an order.
+static func _last_activity(o: Dictionary) -> int:
+	return maxi(maxi(int(o["placed"]), int(o.get("delivered", 0))), maxi(int(o.get("return", {}).get("t", 0)), int(o.get("review", {}).get("t", 0))))
 
 
 static func orders_with(statuses: Array, loc := "") -> Array:
