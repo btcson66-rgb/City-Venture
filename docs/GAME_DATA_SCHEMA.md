@@ -553,6 +553,7 @@ Customs decision choices may set `recommended: true`; only the first available e
 Lazy `fx_forwards` = {items[id]{entity,currency,notional,days,rate,fee,collateral,status,opened,due,settled,spot,gain_loss,early},seq}. Lazy `overseas_partners` = {companies[entity]{warehouse{opened,last_month},transfers[{index,status,product,qty,unit_cost,cost,defect_rate,eta}],home_invoices,visiting,next_offer},chapters[id]{entity,started,month_closes},shock{currency,before,after,started,exposure_estimate}}. Optional distributor contract keys: type,region,invoice_currency,foreign_total,foreign_receivable,shipped,shipment_cost,eta,closure_written_off. Existing contracts keep their original lifecycle. `lumina_3pl:<entity>` inventory stays outside domestic stock locations. Orders use partner_channel=3pl. Month-close FX uses the existing fx_gain_loss account; no account rename/migration is needed.
 
 
+
 ## Industry framework state (#63)
 
 - Every ledger journal source includes `segment`: industry id or `shared`. Old entries need not be rewritten.
@@ -598,3 +599,9 @@ Growth: data/story/goals.json and achievements.json define id/title/metric/value
 `company` is an array of entity IDs; `active_company` selects the visible operational record. The legacy string becomes the first array item. `company_contexts[id]` stores operational states, entity-specific flags and credit/cooldown. Global bank loans retain entity IDs; new business scheduler payloads carry `company_context`. First registration transfers sole-proprietor schedules to the new operational view, retaining receivable owner IDs. Terminal records remain inspectable after closure; new firms receive fresh active modules.
 
 `holding_groups` stores `basis`, `parents`, `loans`, `guarantees`, physical `trades`, stock/pending `margin` and timestamped `margin_events`, plus immutable month-end `reports`. Paired ledger accounts are `investment_in_subsidiary:<entity>`, `group_loan_receivable/payable:<loan>`, `group_interest_receivable/payable:<loan>`, `ic_revenue` and `ic_cost`. Goods orders carry optional internal margin metadata for delivery/refund elimination. City landmarks remain global; operating company state is separate. Configuration is `data/economy/holding_groups.json`.
+
+### Industry introductions (#86)
+
+`data/story/side_stories/intro_<industry>.json` defines four real objectives, company/capital-or-era eligibility, mentor/building, optional `guided_event`, timeline/contact reward and unavailable receipt. `met:<npc>` reads the existing NPC meeting receipt. `metric:<SynergyMetrics source><comparison>` reuses actual saved counts, industry stats and functions. `story.side_stories[id].started` controls a ninety-day opportunity expiry; old active receipts acquire the current time lazily. Other-company progress waits for its owning company; closure and skipped/expired steps never award the success reward.
+
+`intro_factory_quality` schedules actual `Manufacturing.plan` slots marked `story_recovery`; repeat choices cannot reserve another. Native subcontract completion carries actual COGS; overtime uses existing materials/wage/yield rules. No synthetic revenue or forced car defect is created. Optional guides use `tutorial.industries[company:industry]` with step/seen/shown/skipped fields; completed steps and explicit skips survive load.

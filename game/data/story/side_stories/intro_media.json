@@ -1,0 +1,121 @@
+{
+ "id": "intro_media",
+ "business": "media",
+ "title": "Cole and the first campaign",
+ "text": "Meet Dr. Cole at the university and discuss the client brief.",
+ "mentor": "imani_cole",
+ "building": "aurelia_university",
+ "trigger": [
+  "cash>=15000 || world_year>=2"
+ ],
+ "objectives": [
+  {
+   "id": "side_media_1",
+   "text": "Meet Dr. Cole at the university and discuss the client brief.",
+   "complete_when": [
+    "met:imani_cole"
+   ],
+   "skip_when": [
+    "flag:side_media_declined"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "building": "aurelia_university"
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "imani_cole",
+     "text": "Meet Dr. Cole at the university and discuss the client brief."
+    }
+   ]
+  },
+  {
+   "id": "side_media_2",
+   "text": "Submit the first real campaign pitch.",
+   "complete_when": [
+    "metric:data:media.campaigns>=1"
+   ],
+   "skip_when": [
+    "flag:side_media_declined"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "os": true
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "imani_cole",
+     "text": "Submit the first real campaign pitch."
+    }
+   ]
+  },
+  {
+   "id": "side_media_3",
+   "text": "Run a client campaign and make the public-relations decision.",
+   "complete_when": [
+    "metric:count:events.history|id=media_pr>=1"
+   ],
+   "skip_when": [
+    "flag:side_media_declined || metric:data:media.completed>=1"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "os": true
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "imani_cole",
+     "text": "Run a client campaign and make the public-relations decision."
+    }
+   ]
+  },
+  {
+   "id": "side_media_4",
+   "text": "Finish the first client campaign and review its real results.",
+   "complete_when": [
+    "metric:data:media.completed>=1"
+   ],
+   "skip_when": [
+    "flag:side_media_declined"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "os": true
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "imani_cole",
+     "text": "Finish the first client campaign and review its real results."
+    }
+   ]
+  }
+ ],
+ "on_complete": [
+  {
+   "do": "timeline",
+   "text": "Cole and the first campaign — introduction complete.",
+   "kind": "side_story"
+  },
+  {
+   "do": "set_flag",
+   "flag": "contact_imani_cole"
+  },
+  {
+   "do": "message",
+   "from": "imani_cole",
+   "text": "You can reach me through this phone thread. Keep the real costs and risks in view before expanding."
+  }
+ ],
+ "on_unavailable": [
+  {
+   "do": "timeline",
+   "text": "Cole and the first campaign — opportunity ended.",
+   "kind": "side_story"
+  }
+ ],
+ "guided_event": "media_pr"
+}

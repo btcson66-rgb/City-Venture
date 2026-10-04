@@ -1,0 +1,120 @@
+{
+ "id": "intro_energy",
+ "business": "energy",
+ "title": "Okoro and the first rooftop",
+ "text": "Meet Ms. Okoro and discuss the subsidy conditions.",
+ "mentor": "ms_okoro",
+ "building": "city_hall",
+ "trigger": [
+  "cash>=30000 || world_year>=2"
+ ],
+ "objectives": [
+  {
+   "id": "side_energy_1",
+   "text": "Meet Ms. Okoro and discuss the subsidy conditions.",
+   "complete_when": [
+    "met:ms_okoro"
+   ],
+   "skip_when": [
+    "flag:side_energy_declined"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "building": "city_hall"
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "ms_okoro",
+     "text": "Meet Ms. Okoro and discuss the subsidy conditions."
+    }
+   ]
+  },
+  {
+   "id": "side_energy_2",
+   "text": "Quote the first rooftop with a real panel layout.",
+   "complete_when": [
+    "metric:data:energy.installs>=1"
+   ],
+   "skip_when": [
+    "flag:side_energy_declined"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "os": true
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "ms_okoro",
+     "text": "Quote the first rooftop with a real panel layout."
+    }
+   ]
+  },
+  {
+   "id": "side_energy_3",
+   "text": "Complete the first rooftop installation.",
+   "complete_when": [
+    "stat:energy_installs>=1"
+   ],
+   "skip_when": [
+    "flag:side_energy_declined"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "os": true
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "ms_okoro",
+     "text": "Complete the first rooftop installation."
+    }
+   ]
+  },
+  {
+   "id": "side_energy_4",
+   "text": "Open the first charging station and account for its electricity.",
+   "complete_when": [
+    "metric:fn:energy_stations_open>=1"
+   ],
+   "skip_when": [
+    "flag:side_energy_declined"
+   ],
+   "skip_text": "This industry introduction is no longer possible. Continue with another opportunity.",
+   "target": {
+    "os": true
+   },
+   "on_start": [
+    {
+     "do": "message",
+     "from": "ms_okoro",
+     "text": "Open the first charging station and account for its electricity."
+    }
+   ]
+  }
+ ],
+ "on_complete": [
+  {
+   "do": "timeline",
+   "text": "Okoro and the first rooftop — introduction complete.",
+   "kind": "side_story"
+  },
+  {
+   "do": "set_flag",
+   "flag": "contact_ms_okoro"
+  },
+  {
+   "do": "message",
+   "from": "ms_okoro",
+   "text": "You can reach me through this phone thread. Keep the real costs and risks in view before expanding."
+  }
+ ],
+ "on_unavailable": [
+  {
+   "do": "timeline",
+   "text": "Okoro and the first rooftop — opportunity ended.",
+   "kind": "side_story"
+  }
+ ]
+}

@@ -57,12 +57,26 @@
     "label": "Read Ines's customs guide",
     "action": "customs_guide",
     "params": {}
+   },
+   {
+    "id": "trade_registration",
+    "at": [
+     70,
+     80
+    ],
+    "label": "Register import and export business",
+    "action": "trade_open",
+    "params": {}
    }
   ],
   "npc_spots": {
    "officer": [
     96,
     88
+   ],
+   "trade_mentor": [
+    172,
+    105
    ]
   }
  },
