@@ -73,6 +73,11 @@ static func paid_cargo_assets(ent: String) -> float:
 static func crisis(kind: String, retain: bool) -> Dictionary:
 	return crisis_context(kind,retain,{})
 static func crisis_context(kind: String, retain: bool, ctx: Dictionary) -> Dictionary:
+	var owner: String=str(ctx.get("trade_entity",entity()))
+	if owner!="" and owner!=GameState.company_id():
+		if not GlobalMarket.live(owner):return {"ok":true}
+		var result: Variant=CompanyPortfolio.run_in(owner,func():return crisis_context(kind,retain,ctx))
+		return result if result is Dictionary else {"ok":true}
 	if not valid():return {"ok":true}
 	for d in S()["deals"].values():
 		if ctx.has("trade") and d["id"]!=ctx["trade"]:continue
@@ -143,7 +148,7 @@ static func sign(q: Dictionary) -> Dictionary:
 	GameState.timeline(I18n.t("Trade supplier cargo purchased")+" · "+id+" · "+Fmt.money(purchase),"business")
 	if q["payment"]!="tt_prepaid" and q["buyer_currency"]!=FX.cfg().get("home_currency","AUD") and GameState.rng.randf()<float(cfg().get("fx_shock_risk",.03)):
 		FX.add_shock(q["buyer_currency"],3.0,7)
-		EventEngine.trigger("trade_fx_volatility",{"trade":id})
+		EventEngine.trigger("trade_fx_volatility",{"trade":id,"trade_entity":entity(),"company":GameState.data["entities"][entity()]["name"]})
 	return {"ok":true,"id":id}
 static func set_document(id: String, key: String, present: bool) -> Dictionary:
 	var d: Dictionary=S()["deals"].get(id,{})
@@ -260,7 +265,7 @@ static func handle(kind: String, payload: Dictionary) -> void:
 				d["status"]="delayed";d["resume"]=Clock.now()+3*Clock.DAY
 				S()["freight_until"]=Clock.now()+7*Clock.DAY;S()["freight_mult"]=1.8
 				Sim.schedule(d["resume"],"trade.resume",{"id":d["id"]})
-				EventEngine.trigger("trade_port_strike",{"trade":d["id"]})
+				EventEngine.trigger("trade_port_strike",{"trade":d["id"],"trade_entity":entity(),"company":GameState.data["entities"][entity()]["name"]})
 				return
 		d["clearance"]={"code":d["code"],"at":Clock.now(),"entity":entity()}
 		if GameState.rng.randf()<float(cfg().get("supplier_failure_risk",.03)):_lost(d,false);return
@@ -325,6 +330,7 @@ static func on_company_closed(ent: String) -> void:
 		for kind in ["trade.depart","trade.arrive","trade.collect","trade.resume"]:Sim.cancel(kind,"id",d["id"])
 		if d["status"] not in ["paid","received","defaulted","lost","withdrawn","unpaid_documents"]:d["status"]="closed"
 	S()["active"]=false
+	EventEngine.S()["queue"]=EventEngine.S()["queue"].filter(func(q):return not (q["id"] in ["trade_port_strike","trade_fx_volatility"] and str(q["ctx"].get("trade_entity",ent))==ent))
 	GameState.set_flag("trade_active",false)
 static func os_tab() -> Dictionary:return {"id":"international_trade","label":"International Trade","icon":"world","order":10,"start_label":"Open Trade Desk","render":TradeDeskUI.render}
 static func board_detail() -> Callable:return TradeDeskUI.board

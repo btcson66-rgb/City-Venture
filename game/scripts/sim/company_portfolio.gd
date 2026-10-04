@@ -27,6 +27,10 @@ static func _migrate_trade_owner(data: Dictionary) -> void:
 	for item in data.get("schedule",[]):
 		if str(item.get("kind","")).get_slice(".",0)=="trade" and not item["p"].has("company_context"):
 			item["p"]["company_context"]=owner
+	for inst in data.get("events",{}).get("queue",[]):
+		if inst["id"] in ["trade_port_strike","trade_fx_volatility"] and not inst["ctx"].has("trade_entity"):
+			inst["ctx"]["trade_entity"]=owner
+			inst["ctx"]["company"]=str(data["entities"].get(owner,{}).get("name",owner))
 	var active:=active_of(data)
 	if owner==active:return
 	var view: Dictionary=data["company_contexts"].get(owner,{"states":{},"flags":{},"bank":{}})

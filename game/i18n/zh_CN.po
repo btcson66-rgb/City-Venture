@@ -1802,7 +1802,7 @@ msgstr "售后保养工单"
 msgid "Afternoon · Sunny"
 msgstr "下午 · 晴"
 
-#: scripts/sim/trade_industry.gd:275
+#: scripts/sim/trade_industry.gd:280
 msgid "Agency cargo received into bonded warehouse"
 msgstr "代理货物已收入保税仓"
 
@@ -3062,7 +3062,7 @@ msgstr "经纪考试与执照"
 msgid "Brokerage licence at City Hall."
 msgstr "到市政厅申请仲介执照。"
 
-#: scripts/sim/trade_industry.gd:102 scripts/sim/trade_industry.gd:126
+#: scripts/sim/trade_industry.gd:107 scripts/sim/trade_industry.gd:131
 msgid "Brokered cargo: %d units"
 msgstr "居间贸易货物：%d 件"
 
@@ -3398,7 +3398,7 @@ msgstr "买家 %s 对订单 %s 提出申诉。我们已退款给对方，并收�
 msgid "Buyer defaulted"
 msgstr "买方倒帐"
 
-#: scripts/sim/trade_industry.gd:271 scripts/sim/trade_quote.gd:67
+#: scripts/sim/trade_industry.gd:276 scripts/sim/trade_quote.gd:67
 msgid "Buyer delivery"
 msgstr "送达买方时"
 
@@ -3846,7 +3846,7 @@ msgstr "货物扣关中"
 msgid "Cargo in transit"
 msgstr "货物运送中"
 
-#: scripts/sim/trade_industry.gd:137 scripts/sim/trade_quote.gd:49
+#: scripts/sim/trade_industry.gd:142 scripts/sim/trade_quote.gd:49
 msgid "Cargo insurance"
 msgstr "货物保险"
 
@@ -4338,7 +4338,7 @@ msgstr "请选择可经营的海外地区。"
 msgid "Choose a supported product, term, transport and payment method."
 msgstr "请选择可用的商品、贸易条件、运输与付款方式。"
 
-#: scripts/sim/trade_industry.gd:154
+#: scripts/sim/trade_industry.gd:159
 msgid "Choose a supported tariff code before clearance."
 msgstr "报关前请选择有效的税则分类。"
 
@@ -5090,7 +5090,7 @@ msgstr "完成十趟货车配送。"
 msgid "Complete the 60-day operating period before the interview."
 msgstr "先完成 60 天的持续经营，再接受采访。"
 
-#: data/help/help.json scripts/sim/trade_industry.gd:157
+#: data/help/help.json scripts/sim/trade_industry.gd:162
 msgid "Complete the commercial invoice, packing list and bill of lading."
 msgstr "补齐商业发票、装箱单与提单。"
 
@@ -5386,7 +5386,7 @@ msgstr "补正文档并办理通关"
 msgid "Correct documents with a reduced fine and extra delay, pay the full correction now, or withdraw the goods. After 7 unresolved days, the parcel is withdrawn automatically; freight is not refunded."
 msgstr "可以补文档，减少罚款但多等几天；也能立即付完整费用，或撤回商品。7 天未处理会自动撤回，运费不退还。"
 
-#: scripts/sim/trade_industry.gd:158
+#: scripts/sim/trade_industry.gd:163
 msgid "Correct the cargo tariff code before clearance."
 msgstr "先修正货物税则分类，再办理通关。"
 
@@ -5726,7 +5726,7 @@ msgstr "缩减开支（暂停广告、生活从简）"
 msgid "Cuts reconditioning and service costs by 20%, saves a workshop day and adds two dealership service bays. Salary is due even in a slow week."
 msgstr "整备与保养成本降低 20%，省下一个工作天，并增加两个经销保养工位。即使生意清淡也要发薪。"
 
-#: scripts/sim/trade_industry.gd:97 scripts/ui/modals/trade_quote_modal.gd:120 scripts/ui/modals/trade_quote_modal.gd:93
+#: scripts/sim/trade_industry.gd:102 scripts/ui/modals/trade_quote_modal.gd:120 scripts/ui/modals/trade_quote_modal.gd:93
 msgid "DDP"
 msgstr "DDP（完税交货）"
 
@@ -8170,11 +8170,11 @@ msgstr "全规模工厂"
 msgid "Fund subsidiary with group loan"
 msgstr "以集团贷款挹注子公司"
 
-#: scripts/sim/trade_industry.gd:225
+#: scripts/sim/trade_industry.gd:230
 msgid "Fund the air rerouting fee or wait for the port to reopen."
 msgstr "先备妥改走空运的费用，或等待港口恢复。"
 
-#: scripts/sim/trade_industry.gd:170
+#: scripts/sim/trade_industry.gd:175
 msgid "Fund the document correction fee or withdraw the cargo."
 msgstr "先备妥文档补正费，或撤回货物。"
 
@@ -8194,7 +8194,7 @@ msgstr "请备妥下一期工程款。"
 msgid "Fund the regional agency application fee first."
 msgstr "先备妥区域代理权申请费。"
 
-#: scripts/sim/trade_industry.gd:92
+#: scripts/sim/trade_industry.gd:97
 msgid "Fund the supplier purchase and seller-paid route costs first."
 msgstr "先备妥货款与卖方应负担的运输费用。"
 
@@ -8894,7 +8894,7 @@ msgstr "撤回扣留的出口包裹 %s；已付运费不退还"
 msgid "Held in escrow"
 msgstr "托管中"
 
-#: scripts/sim/trade_industry.gd:320
+#: scripts/sim/trade_industry.gd:325
 msgid "Held trade cargo warehouse rent"
 msgstr "扣关货物仓租"
 
@@ -9474,7 +9474,7 @@ msgstr "进出口登记"
 msgid "Import and export registration is already complete."
 msgstr "已完成进出口登记。"
 
-#: data/help/glossary.json scripts/sim/trade_industry.gd:137 scripts/sim/trade_quote.gd:50
+#: data/help/glossary.json scripts/sim/trade_industry.gd:142 scripts/sim/trade_quote.gd:50
 msgid "Import duty"
 msgstr "进口关税"
 
@@ -9834,7 +9834,7 @@ msgstr "集团合计已冲销的内部交易"
 msgid "International Airport"
 msgstr "国际机场"
 
-#: data/businesses/international_trade.json data/help/help.json scripts/sim/trade_industry.gd:329 scripts/ui/modals/trade_quote_modal.gd:135
+#: data/businesses/international_trade.json data/help/help.json scripts/sim/trade_industry.gd:335 scripts/ui/modals/trade_quote_modal.gd:135
 msgid "International Trade"
 msgstr "国际贸易"
 
@@ -10714,7 +10714,7 @@ msgstr "请先在工业区承租 Helio 仓库办公室。"
 msgid "Lease the Helio warehouse office in Industrial, then survey real roofs and quote systems. Subsidies come from City Hall."
 msgstr "在工业区承租 Helio 仓库办公室，然后勘查真实屋顶并报价。补助由市府核发。"
 
-#: scripts/sim/trade_industry.gd:164 scripts/sim/trade_industry.gd:38
+#: scripts/sim/trade_industry.gd:169 scripts/sim/trade_industry.gd:38
 msgid "Lease the bonded warehouse before applying for an agency."
 msgstr "先承租保税仓，再申请区域代理权。"
 
@@ -13550,7 +13550,7 @@ msgstr "打开房价看板"
 msgid "Open Sales"
 msgstr "打开「销售」"
 
-#: data/buildings/meridian_trade_desk.json scripts/sim/trade_industry.gd:329
+#: data/buildings/meridian_trade_desk.json scripts/sim/trade_industry.gd:335
 msgid "Open Trade Desk"
 msgstr "打开贸易工作台"
 
@@ -13778,7 +13778,7 @@ msgstr "租海外仓前，请先开立国际帐户。"
 msgid "Open the overseas warehouse and choose a positive quantity first."
 msgstr "请先开设海外仓，并输入大于 0 的件数。"
 
-#: scripts/sim/trade_industry.gd:85
+#: scripts/sim/trade_industry.gd:90
 msgid "Open the registered trade brokerage first."
 msgstr "先完成登记并开始经营贸易公司。"
 
@@ -16214,11 +16214,11 @@ msgstr "区域代理权申请"
 msgid "Regional marketplaces open to Aurelia exporters; local-currency prices required."
 msgstr "地区市集开放奥瑞莉亚商家进驻，商品须以当地货币定价。"
 
-#: scripts/sim/trade_industry.gd:102
+#: scripts/sim/trade_industry.gd:107
 msgid "Regional supplier"
 msgstr "区域供应商"
 
-#: scripts/sim/trade_industry.gd:126
+#: scripts/sim/trade_industry.gd:131
 msgid "Regional trade buyer"
 msgstr "区域贸易买家"
 
@@ -18130,6 +18130,10 @@ msgstr "寄到：%s"
 msgid "Shipment lost at sea"
 msgstr "货柜在海上遗失"
 
+#: data/events/trade_fx_volatility.json data/events/trade_port_strike.json
+msgid "Shipment owner: {company} · {trade}"
+msgstr "货物所属公司：{company} · {trade}"
+
 #: data/story/achievements.json
 msgid "Shipments"
 msgstr "批货物"
@@ -19854,11 +19858,11 @@ msgstr "课程期间公司已关闭。"
 msgid "The business closed during the negotiation."
 msgstr "谈判期间公司已关闭。"
 
-#: scripts/sim/trade_industry.gd:87
+#: scripts/sim/trade_industry.gd:92
 msgid "The buyer cannot accept this landed price. Reduce the markup or choose another route."
 msgstr "到岸价格超出买方预算，请降低加价幅度或改选路线。"
 
-#: scripts/sim/trade_industry.gd:103 scripts/sim/trade_industry.gd:127
+#: scripts/sim/trade_industry.gd:108 scripts/sim/trade_industry.gd:132
 msgid "The buyer contract is invalid. Refresh the route quote."
 msgstr "买方合约数据无效，请重新询价。"
 
@@ -20482,7 +20486,7 @@ msgstr "这是依目前商品成本与参考需求估算的比较，不是另一
 msgid "These founder shares have already been sold. Continue operating."
 msgstr "这些创办人持股已出售，请继续经营。"
 
-#: scripts/sim/trade_industry.gd:150
+#: scripts/sim/trade_industry.gd:155
 msgid "These shipping documents can no longer be changed."
 msgstr "这批货的运输文档已不能修改。"
 
@@ -20522,7 +20526,7 @@ msgstr "三十天不透支"
 msgid "This %s."
 msgstr "这个方式%s。"
 
-#: scripts/sim/trade_industry.gd:86
+#: scripts/sim/trade_industry.gd:91
 msgid "This RFQ expired. Refresh the route quote."
 msgstr "询价已过期，请重新取得路线报价。"
 
@@ -20546,7 +20550,7 @@ msgstr "这份申请已经送出。"
 msgid "This card lists updates after the version that last saved your game. Scroll to read all release notes."
 msgstr "这张卡片列出原存盘版本之后的更新，可向下卷动阅读全部内容。"
 
-#: scripts/sim/trade_industry.gd:238
+#: scripts/sim/trade_industry.gd:243
 msgid "This cargo can no longer be withdrawn."
 msgstr "这批货已不能撤回。"
 
@@ -20558,7 +20562,7 @@ msgstr "此客户需求在制作期间已到期。"
 msgid "This company is closed or replaced. Continue with your current life."
 msgstr "这家公司已关闭或已被新公司取代，请继续目前的人生。"
 
-#: scripts/sim/company_portfolio.gd:49
+#: scripts/sim/company_portfolio.gd:75
 msgid "This company is closed or unavailable. Choose another live company."
 msgstr "这家公司已关闭或无法使用。请选择另一家仍在营运的公司。"
 
@@ -20646,7 +20650,7 @@ msgstr "这张工单已无法承接。"
 msgid "This journey was already completed."
 msgstr "这段旅程已完成。"
 
-#: scripts/sim/trade_industry.gd:177
+#: scripts/sim/trade_industry.gd:182
 msgid "This letter of credit is no longer awaiting documents."
 msgstr "这张信用状目前不需提交文档。"
 
@@ -20666,7 +20670,7 @@ msgstr "本月"
 msgid "This month revenue"
 msgstr "本月营收"
 
-#: scripts/sim/trade_industry.gd:91
+#: scripts/sim/trade_industry.gd:96
 msgid "This month's regional capacity or demand is used. Wait for renewal or choose another route."
 msgstr "本期区域产能或需求已用完，请等待下一期或改选路线。"
 
@@ -20722,7 +20726,7 @@ msgstr "这个房型已经在翻新。"
 msgid "This save comes from a newer version of City Venture."
 msgstr "这个存盘来自更新的 City Venture 版本。"
 
-#: scripts/sim/trade_industry.gd:222
+#: scripts/sim/trade_industry.gd:227
 msgid "This shipping delay has already ended."
 msgstr "这次运输延误已结束。"
 
@@ -20754,7 +20758,7 @@ msgstr "这个标的已不再独立，请查看其他公司。"
 msgid "This till comes with the lease. Mr. Okafor at Okafor Lettings handles it."
 msgstr "这台收银机跟着租约走。请找 Okafor 租屋行的 Okafor 先生。"
 
-#: scripts/sim/trade_industry.gd:162
+#: scripts/sim/trade_industry.gd:167
 msgid "This trade customs hold is no longer active."
 msgstr "这批货已不在扣关状态。"
 
@@ -21002,23 +21006,23 @@ msgstr "贸易交易明细：试算"
 msgid "Trade Fair Week"
 msgstr "商展周"
 
-#: scripts/sim/trade_industry.gd:198
+#: scripts/sim/trade_industry.gd:203
 msgid "Trade buyer default"
 msgstr "贸易买方倒帐"
 
-#: scripts/sim/trade_industry.gd:206
+#: scripts/sim/trade_industry.gd:211
 msgid "Trade buyer payment and exchange result"
 msgstr "贸易买方收款与汇差"
 
-#: scripts/sim/trade_industry.gd:212
+#: scripts/sim/trade_industry.gd:217
 msgid "Trade cargo loss and insurance claim"
 msgstr "贸易货损与保险理赔"
 
-#: scripts/sim/trade_industry.gd:226
+#: scripts/sim/trade_industry.gd:231
 msgid "Trade cargo rerouted by air"
 msgstr "贸易货物改走空运"
 
-#: scripts/sim/trade_industry.gd:244
+#: scripts/sim/trade_industry.gd:249
 msgid "Trade cargo returned to supplier"
 msgstr "贸易货物退回供应商"
 
@@ -21026,15 +21030,15 @@ msgstr "贸易货物退回供应商"
 msgid "Trade closed"
 msgstr "贸易已结束"
 
-#: scripts/sim/trade_industry.gd:139
+#: scripts/sim/trade_industry.gd:144
 msgid "Trade currency conversion fee"
 msgstr "贸易换汇手续费"
 
-#: scripts/sim/trade_industry.gd:171
+#: scripts/sim/trade_industry.gd:176
 msgid "Trade customs document correction"
 msgstr "贸易报关文档补正"
 
-#: scripts/sim/trade_industry.gd:281
+#: scripts/sim/trade_industry.gd:286
 msgid "Trade delivered cargo cost"
 msgstr "已交付贸易货物成本"
 
@@ -21058,7 +21062,7 @@ msgstr "贸易已收款"
 msgid "Trade payment"
 msgstr "贸易付款"
 
-#: scripts/sim/trade_industry.gd:134
+#: scripts/sim/trade_industry.gd:139
 msgid "Trade payment arrangement fee"
 msgstr "贸易付款安排费"
 
@@ -21070,7 +21074,7 @@ msgstr "贸易商品"
 msgid "Trade route estimates"
 msgstr "贸易路线试算"
 
-#: scripts/sim/trade_industry.gd:113 scripts/sim/trade_industry.gd:133 scripts/sim/trade_industry.gd:143
+#: scripts/sim/trade_industry.gd:118 scripts/sim/trade_industry.gd:138 scripts/sim/trade_industry.gd:148
 msgid "Trade supplier cargo purchased"
 msgstr "已支付贸易供应商货款"
 
@@ -21306,7 +21310,7 @@ msgstr "未回复报价会撤回，未交货合约会终止，不另收违约金
 msgid "Unbilled OTA nights this week: gross %s, commission %s. Statements are invoiced every %d days, paid Net %d."
 msgstr "本周尚未出帐的 OTA 房晚：总额 %s，佣金 %s。每 %d 天出一次帐单，%d 天后付款。"
 
-#: scripts/sim/trade_industry.gd:217
+#: scripts/sim/trade_industry.gd:222
 msgid "Undelivered trade buyer advance returned"
 msgstr "未交货的买方预付款退回"
 
@@ -21478,7 +21482,7 @@ msgstr "请使用有足够现金的控股公司，借款对象须为旗下仍在
 msgid "Use a group loan or an actual internal trade to move company funds."
 msgstr "公司之间请通过集团贷款或实际内部交易移转资金。"
 
-#: scripts/sim/trade_industry.gd:97
+#: scripts/sim/trade_industry.gd:102
 msgid "Use a home-bound DDP route with an active agency and bonded warehouse."
 msgstr "请选择运往本国的 DDP 路线，并先取得代理权、承租保税仓。"
 
