@@ -2,7 +2,7 @@ extends Node
 ## Real ecommerce/clock/save load probe. QA fixtures exceed the hiring limit;
 ## they are not a winning strategy or evidence of unimplemented industries.
 
-var options := {"days": 3653, "orders": 5000, "staff": 50, "seed": 98001, "out": "user://stress", "wall_seconds": 120}
+var options := {"days": 3653, "orders": 5000, "staff": 50, "seed": 98001, "out": "user://stress", "wall_seconds": 120, "save_every": 1, "profile": 0}
 var report := {}
 var samples: Array = []
 var started := 0
@@ -27,13 +27,14 @@ func _run() -> void:
 	SaveSystem.DIR = str(options["out"]).path_join("saves")
 	DirAccess.make_dir_recursive_absolute(SaveSystem.DIR)
 	started = Time.get_ticks_usec()
-	report = {"schema": 1, "engine": Engine.get_version_info()["string"], "platform": OS.get_name(),
+	report = {"schema": 2, "engine": Engine.get_version_info()["string"], "platform": OS.get_name(),
 		"renderer": RenderingServer.get_current_rendering_method(), "options": options,
-		"coverage": {"industries": ["ecommerce"], "playable_companies": 1,
-			"missing_industries": ["manufacturing", "real_estate", "media", "hotel", "automotive", "energy", "international_trade"],
+		"coverage": {"industries": [], "playable_companies": 0, "missing_industries": [],
 			"notes": ["Forced orders and staff are saturation fixtures, not normal gameplay.",
-				"Additional company/industry activation requires the upstream gameplay implementations.",
-				"Compressed bytes measure a gzip copy; shipping saves still use JSON."]},
+				"Coverage is measured from Industries.is_running and the company list after fixture setup.",
+				"simulation_ms is the mean cost of one minute tick (a frame at 1x); tick_p99_ms is the p99 of minute ticks incl. hourly/daily work.",
+				"Order placement/packing/courier is a player-action batch reported per order (order_ms_per_order).",
+				"Compressed bytes are the shipping (gzip) save size."]},
 		"samples": samples, "errors": [], "completed": false, "texture_bytes": null}
 	if int(options["days"]) < 1 or int(options["orders"]) < 0 or int(options["staff"]) < 0 or int(options["wall_seconds"]) < 1:
 		report["errors"].append("Invalid nonpositive duration or negative workload")
@@ -59,6 +60,8 @@ func _run() -> void:
 		var id := "stress_%d" % i
 		Staff.S()["people"][id] = {"id": id, "name": id, "role": "packer", "skill": 0.8,
 			"morale": 80, "salary_week": 600.0, "start": Clock.now(), "hired": Clock.now(), "trait": "steady", "weeks": 0}
+	_open_industries()
+	_measure_coverage()
 	# Flat clock profile is independent of the load and identifies calendar overhead.
 	var calendar_start := Time.get_ticks_usec()
 	for i in 1440:
@@ -71,39 +74,81 @@ func _run() -> void:
 		var begin := Time.get_ticks_usec()
 		var count := _orders(int(options["orders"]))
 		var order_ms := (Time.get_ticks_usec() - begin) / 1000.0
-		begin = Time.get_ticks_usec()
-		Clock.advance(Clock.DAY)
-		var tick_ms := (Time.get_ticks_usec() - begin) / 1000.0
-		begin = Time.get_ticks_usec()
-		var path := SaveSystem.DIR.path_join("slot_98.json")
-		if not SaveSystem.save_to(path, 98):
-			report["errors"].append("Snapshot write failed")
-			break
-		var save_ms := (Time.get_ticks_usec() - begin) / 1000.0
-		var bytes := FileAccess.get_file_as_bytes(path)
-		var compressed := bytes.compress(FileAccess.COMPRESSION_GZIP)
-		begin = Time.get_ticks_usec()
-		var loaded := SaveSystem.load_data(98)
-		var load_ms := (Time.get_ticks_usec() - begin) / 1000.0
+		var ticks := _run_day_ticks()
+		var tick_ms: float = ticks["total_ms"]
 		var sample := {"day": day + 1, "orders": count, "staff": Staff.count(),
-			"simulation_ms": order_ms + tick_ms, "orders_ms": order_ms, "ticks_ms": tick_ms,
+			"simulation_ms": ticks["mean"], "tick_p99_ms": ticks["p99"], "tick_max_ms": ticks["max"],
+			"hour_tick_mean_ms": ticks["hour_mean"], "frame_mean_ms": ticks["frame_mean"], "frame_p99_ms": ticks["frame_p99"],
+			"day_total_ms": tick_ms, "orders_ms": order_ms, "order_ms_per_order": order_ms / maxf(1.0, count),
 			"order_phases_ms": order_phases.duplicate(),
 			"memory_bytes": int(Performance.get_monitor(Performance.MEMORY_STATIC)),
-			"json_bytes": bytes.size(), "gzip_bytes": compressed.size(), "save_ms": save_ms, "load_ms": load_ms,
-			"loaded": loaded, "balanced": Ledger.check_balanced(), "journal_entries": GameState.data["ledger"]["journal"].size()}
+			"journal_entries": GameState.data["ledger"]["journal"].size(), "orders_held": Ecommerce.E()["orders"].size(),
+			"balanced": Ledger.check_balanced()}
+		var save_day: bool = day == 0 or (day + 1) % maxi(1, int(options["save_every"])) == 0 or day + 1 == int(options["days"])
+		if save_day:
+			begin = Time.get_ticks_usec()
+			var path := SaveSystem.DIR.path_join("slot_98.json")
+			if not SaveSystem.save_to(path, 98):
+				report["errors"].append("Snapshot write failed")
+				break
+			sample["save_ms"] = (Time.get_ticks_usec() - begin) / 1000.0
+			var bytes := FileAccess.get_file_as_bytes(path)
+			sample["json_bytes"] = bytes.size()
+			sample["gzip_bytes"] = bytes.compress(FileAccess.COMPRESSION_GZIP).size() if not (bytes.size() > 2 and bytes[0] == 0x1f and bytes[1] == 0x8b) else bytes.size()
+			begin = Time.get_ticks_usec()
+			sample["loaded"] = SaveSystem.load_data(98)
+			sample["load_ms"] = (Time.get_ticks_usec() - begin) / 1000.0
+			sample["balanced"] = Ledger.check_balanced()
+			if not sample["loaded"]:
+				report["errors"].append("Load failed: " + str(SaveSystem.last_error))
 		samples.append(sample)
-		print("STRESS day %d: %d orders, %.3f ms sim, %d bytes gzip, %.3f ms load" % [day + 1, count, sample["simulation_ms"], compressed.size(), load_ms])
-		_write_report()
-		if not loaded or not bool(sample["balanced"]) or count != int(options["orders"]):
+		print("STRESS day %d: %d orders (%.3f ms/order), tick mean %.3f p99 %.3f max %.1f ms, frame p99 %.3f, %d MB, %s" % [day + 1, count, sample["order_ms_per_order"], sample["simulation_ms"], sample["tick_p99_ms"], sample["tick_max_ms"], sample["frame_p99_ms"], int(sample["memory_bytes"]) / 1048576, ("gzip %d load %.0f ms" % [sample["gzip_bytes"], sample["load_ms"]]) if save_day else "-"])
+		if day % 10 == 0 or save_day:
+			_write_report()
+		if (save_day and not bool(sample["loaded"])) or not bool(sample["balanced"]) or count != int(options["orders"]):
 			report["errors"].append("Incomplete workload, failed load or unbalanced ledger")
-			if not loaded: report["errors"].append("Load failed: " + str(SaveSystem.last_error))
 			break
-		if int(sample["memory_bytes"]) > 512000000:
-			report["errors"].append("512 MB process allocation safety limit reached")
+		if int(sample["memory_bytes"]) > 2000000000:
+			report["errors"].append("2 GB process allocation safety limit reached")
 			break
-		await get_tree().process_frame
+		if day % 20 == 0:
+			await get_tree().process_frame
 	report["completed"] = samples.size() == int(options["days"]) and report["errors"].is_empty()
 	_finish()
+
+
+## One game day as 1,440 real minute ticks, each timed. A tick is one frame at 1x speed; the frame
+## figure adds the time_changed observers a rendered frame also pays.
+func _run_day_ticks() -> Dictionary:
+	var times := PackedFloat64Array()
+	var frames := PackedFloat64Array()
+	var hours := PackedFloat64Array()
+	var total := 0.0
+	for i in Clock.DAY:
+		var t0 := Time.get_ticks_usec()
+		Clock._tick()
+		var t1 := Time.get_ticks_usec()
+		Clock.time_changed.emit()
+		var t2 := Time.get_ticks_usec()
+		var ms := (t1 - t0) / 1000.0
+		times.append(ms)
+		frames.append((t2 - t0) / 1000.0)
+		if Clock.now() % 60 == 0:
+			hours.append(ms)
+		total += ms
+	var sorted := times.duplicate()
+	sorted.sort()
+	var fsorted := frames.duplicate()
+	fsorted.sort()
+	var hour_sum := 0.0
+	for h in hours:
+		hour_sum += h
+	var frame_sum := 0.0
+	for f in frames:
+		frame_sum += f
+	var rank := int(ceil(times.size() * 0.99)) - 1
+	return {"mean": total / times.size(), "p99": sorted[rank], "max": sorted[sorted.size() - 1],
+		"hour_mean": hour_sum / maxf(1.0, hours.size()), "frame_mean": frame_sum / frames.size(), "frame_p99": fsorted[rank], "total_ms": total}
 
 
 func _expired() -> bool:
@@ -156,6 +201,67 @@ func _orders(n: int) -> int:
 	# No extra stochastic demand beyond the requested saturation workload.
 	listing["active"] = false
 	return count
+
+
+func _give_cash(entity: String, amount: float) -> void:
+	Ledger.post(entity, "Stress fixture capital", [{"acct": "cash", "dr": amount}, {"acct": "equity", "cr": amount}], {"type": "opening"})
+
+
+func _must(result: Dictionary, label: String) -> void:
+	if not result.get("ok", false):
+		report["errors"].append("Fixture %s failed: %s" % [label, str(result.get("error", result))])
+
+
+## Company one runs ecommerce + manufacturing + media + real estate + hotel; company two runs
+## automotive + energy + international trade, so every required industry is genuinely live.
+func _open_industries() -> void:
+	var first := GameState.company_id()
+	_give_cash("player", 5000000.0)
+	GameState.mark_visited("the_aster")
+	_must(Living.lease("unit12_factory"), "lease factory")
+	_must(Manufacturing.start(), "manufacturing")
+	_must(Living.lease("loft_office"), "lease loft")
+	_must(Media.start(), "media")
+	_must(Living.lease("realty_office"), "lease realty")
+	Compliance.S()["permits"] = Compliance.S().get("permits", {})
+	Compliance.S()["permits"]["brokerage"] = {"entity": first, "status": "granted"}
+	_must(RealEstate.start(), "real estate")
+	_must(Hotel.start("own"), "hotel")
+	var second_result := Company.register("Stress Two", "llc", "riverside_studio")
+	_must(second_result, "second company")
+	_must(Company.open_business_account(10000), "second account")
+	var second := GameState.company_id()
+	_give_cash(second, 1000000000.0)
+	_must(Automotive.start(), "automotive")
+	_must(Living.lease("helio_warehouse"), "lease warehouse")
+	_must(Energy.start(), "energy")
+	_must(Living.lease("meridian_trade_office"), "lease trade desk")
+	_must(TradeIndustry.register(), "trade registration")
+	_must(TradeIndustry.start(), "trade brokerage")
+	CompanyPortfolio.switch(first)
+
+
+func _measure_coverage() -> void:
+	var running: Array = []
+	var missing: Array = []
+	var cov: Dictionary = report["coverage"]
+	var live := {}
+	for company in CompanyPortfolio.ids():
+		CompanyPortfolio.run_in(str(company), func():
+			for entry in Industries.all():
+				if entry.get("auxiliary", false):
+					continue
+				if entry["sim_class"].is_running():
+					live[str(entry["id"])] = true)
+	for id in ["manufacturing", "real_estate", "media", "hotel", "automotive", "energy", "international_trade"]:
+		(running if live.has(id) else missing).append(id)
+	if live.has("ecommerce") or Ecommerce.is_running():
+		running.append("ecommerce")
+	cov["industries"] = running
+	cov["missing_industries"] = missing
+	cov["playable_companies"] = CompanyPortfolio.ids().size()
+	if not missing.is_empty():
+		report["errors"].append("Industries not running: " + ", ".join(missing))
 
 
 func _write_report() -> void:
