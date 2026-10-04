@@ -17,6 +17,7 @@ static func capital(id: String) -> Dictionary:
 static func licence_ok(id: String) -> bool:
 	match id:
 		"popup": return GameState.company_id()!="" and GameState.business_entity()==GameState.company_id()
+		"international_trade": return bool(TradeIndustry.S()["registered"])
 		"cafe": return Cafe.permitted()
 		"real_estate": return Compliance.permit_valid("brokerage")
 		"automotive": return Automotive.is_running()
@@ -26,6 +27,7 @@ static func licence_ok(id: String) -> bool:
 static func location_ok(id: String) -> bool:
 	match id:
 		"popup": return not PopupStore.active().is_empty()
+		"international_trade": return Living.has_lease("meridian_trade_office")
 		"cafe": return Cafe.leased()
 		"logistics": return Logistics.has_van()
 		"manufacturing": return Living.has_lease("unit12_factory")
@@ -46,7 +48,7 @@ static func rows(id: String) -> Array:
 		"text": I18n.t("%s needed, you have %s") % [Fmt.money0(float(cap["need"])), Fmt.money0(float(cap["have"]))],
 		"next": I18n.t("Earn or borrow the difference first.")})
 	out.append({"label": "Licence", "ok": running or licence_ok(id), "text": I18n.t(str(data.get("licence", "None."))),
-		"next": I18n.t("Get the licence at City Hall.")})
+		"next": I18n.t("Apply for import and export registration at Customs House first.") if id == "international_trade" else I18n.t("Get the licence at City Hall.")})
 	out.append({"label": "Location", "ok": running or location_ok(id), "text": I18n.t(str(data.get("location", ""))),
 		"next": I18n.t("Visit or lease the location.")})
 	return out

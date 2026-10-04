@@ -784,3 +784,5 @@ Requested: backdrops/chapter_17, backdrops/chapter_18; dedicated Kai Moreno spri
 - 可搬移攤位與貨架：目前使用既有 shelf／box fallback。
 - 專用收銀台：目前使用 cash_register／desk_laptop fallback。
 - 週末立牌：標示週六、週日 10:00–18:00。營業中逛街客使用既有角色外觀，未新增貼圖。
+## #70 International trade
+Requested `buildings/meridian_trade_desk.png` and `_lights.png`; existing `nexus_cowork` facade is the validated fallback. Customs House and the airport cargo terminal reuse existing art. Ingrid Solberg uses a generated appearance, with existing office desk and world/parcel icons. No art assets changed.

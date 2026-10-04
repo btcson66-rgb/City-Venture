@@ -42,7 +42,7 @@ func _keys() -> Array:
 
 # ------------------------------------------------------------------ data
 func test_data_is_complete_and_wellformed() -> void:
-	runner.eq(DataDB.milestones.size(), 55, "five milestones for each of eleven industries")
+	runner.eq(DataDB.milestones.size(), 60, "five milestones for each of twelve registered industries")
 	for entry in Industries.all():
 		if entry.get("auxiliary",false):continue # A sales channel shares its parent industry milestones.
 		runner.eq(Milestones.list(entry["id"]).size(), 5, "five milestones: " + str(entry["id"]))

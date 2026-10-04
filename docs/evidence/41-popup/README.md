@@ -17,3 +17,9 @@ The dedicated art is recorded in the backlog; current interior uses existing she
 ## Integrated follow-up
 
 626/626 unit tests passed after merging #86. Industry introduction native tour: 41.8s, zero failures. Full rendered walkthrough completed in 7398.1s with 174 failures, 344 screenshots and 3175 steps; see full_result.json. First cascade: the pop-up fixture left the player in the shop while the following café chapter tried to sleep at home. Fixed by actual door exit, Metro and home entrance; rendered popup short tour 56.8s, zero failures, explicitly asserts the home handoff. Full acceptance remains FAILED until a corrected integrated run finishes.
+
+## Trade integration and walkthrough regression review
+
+Merged the completed #70 execution branch, retaining pop-up, overseas, company and crisis behavior. Integrated unit suite: **639/639**, 212.7 seconds; i18n **6430/6430**, missing 0; wiki 297 IDs; beta audit 0. Previous next-generation test failures were caused by persistent test slots; #92 tests now clear only their asserted `user://test_saves` game slots before each case, preserving the explicit full-slot test.
+
+Rendered regression tours: bank exit **0 failures / 23.2 seconds**; chapters 13–14 **0 failures / 148.7 seconds**; chapters 15–16 **0 failures / 57.0 seconds**. A bank exit now walks around the existing queue barrier. Depleted inventory is replenished through actual wholesale purchases and courier delivery; wrong-code customs checks assert a new order and an actual hold before choosing documents. These are tour fixes, not fabricated inventory or chapter flags. Fresh integrated full walkthrough is RUNNING; prior full result remains FAILED until the new run finishes. Four regression JPGs bring this issue evidence to approximately 2.43 MB. English audit hits in these short tours are proper names, identifiers, language choice and the beta label.
