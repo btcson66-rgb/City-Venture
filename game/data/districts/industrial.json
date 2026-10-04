@@ -1,0 +1,210 @@
+{
+ "id": "industrial",
+ "name": "Industrial",
+ "size_tiles": [
+  108,
+  46
+ ],
+ "music": "day_city",
+ "ground": [
+  {
+   "type": "quay_concrete",
+   "fallback": "plaza_alt",
+   "rect": [
+    0,
+    0,
+    108,
+    20
+   ]
+  },
+  {
+   "type": "sidewalk_alt",
+   "rect": [
+    0,
+    20,
+    108,
+    4
+   ]
+  },
+  {
+   "type": "curb_top",
+   "rect": [
+    0,
+    24,
+    108,
+    1
+   ]
+  },
+  {
+   "type": "road",
+   "rect": [
+    0,
+    25,
+    108,
+    5
+   ]
+  },
+  {
+   "type": "road_dash_h",
+   "rect": [
+    0,
+    27,
+    108,
+    1
+   ],
+   "step": 2
+  },
+  {
+   "type": "curb_bottom",
+   "rect": [
+    0,
+    30,
+    108,
+    1
+   ]
+  },
+  {
+   "type": "sidewalk_alt",
+   "rect": [
+    0,
+    31,
+    108,
+    3
+   ]
+  },
+  {
+   "type": "quay_concrete",
+   "fallback": "plaza",
+   "rect": [
+    0,
+    34,
+    108,
+    7
+   ]
+  },
+  {
+   "type": "quay_edge",
+   "fallback": "boards",
+   "rect": [
+    0,
+    41,
+    108,
+    1
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    0,
+    42,
+    108,
+    4
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    30,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    64,
+    25,
+    3,
+    5
+   ]
+  }
+ ],
+ "buildings": [
+  "unit12_factory",
+  "ferro_supply",
+  "kessler_precision",
+  "shift_diner",
+  "helio_supply",
+  "helio_warehouse"
+ ],
+ "fillers": [],
+ "props": [],
+ "metro": {
+  "station": "industrial",
+  "x": 1180,
+  "y": 560
+ },
+ "exits": [],
+ "spawns": {
+  "metro": [
+   1220,
+   642
+  ]
+ },
+ "bounds": {
+  "top": 322,
+  "bottom": 650
+ },
+ "traffic": [
+  {
+   "y": 424,
+   "dir": -1,
+   "density": 0.5
+  },
+  {
+   "y": 478,
+   "dir": 1,
+   "density": 0.5
+  }
+ ],
+ "ped_paths": [
+  {
+   "y": 350,
+   "x0": 20,
+   "x1": 1708
+  },
+  {
+   "y": 362,
+   "x0": 20,
+   "x1": 1708
+  },
+  {
+   "y": 506,
+   "x0": 20,
+   "x1": 1708
+  },
+  {
+   "y": 590,
+   "x0": 20,
+   "x1": 1160
+  },
+  {
+   "y": 628,
+   "x0": 20,
+   "x1": 1708
+  }
+ ],
+ "ambient_density": {
+  "morning": 8,
+  "afternoon": 9,
+  "evening": 5,
+  "night": 2
+ },
+ "ped_outfits": [
+  "logistics_site",
+  "logistics_site",
+  "logistics_site",
+  "casual_jacket",
+  "casual_jacket",
+  "casual_tee",
+  "courier",
+  "office_professional"
+ ],
+ "minimap_color": "#8a93a6",
+ "traffic_types": [
+  "van",
+  "van",
+  "bus"
+ ]
+}

@@ -1,0 +1,22 @@
+{
+ "id": "vera_stone_intro",
+ "with": "vera_stone",
+ "nodes": {
+  "start": [
+   {
+    "who": "vera_stone",
+    "text": "I review hotels for a living. One of my reviews outweighs five ordinary guests, and I do not announce when I am staying."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Noted. Every guest gets the same care.",
+      "next": "end"
+     }
+    ]
+   }
+  ],
+  "end": []
+ }
+}

@@ -111,9 +111,11 @@ var _coach_step := ""        # "FIRST VENTURE 9/18 · Buy your first stock", abo
 var _coach_i := -1          # which of the step's ui entries was found
 var _coach_target: Control
 var _nudged := false
+var _destination := ""
 
 
 func _ready() -> void:
+	EventBus.state_loaded.connect(clear_destination)
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var cfg := ConfigFile.new()
@@ -278,9 +280,10 @@ func _process(delta: float) -> void:
 	else:
 		card.visible = false
 	var op := UIRoot.hud.obj_panel
-	card.position = Vector2(6, (op.position.y + op.size.y + 4) if op.visible else 42.0)
+	var welcome := UIRoot.hud.welcome
+	card.position = Vector2(6, welcome.position.y + welcome.size.y + 4 if welcome != null and welcome.visible else (op.position.y + op.size.y + 4) if op.visible else 42.0)
 	# the world arrow, and the coach on open screens
-	_target = _resolve(ws) if _guide_on and not blocked else {}
+	_target = _resolve(ws) if (_guide_on or _destination != "") and not blocked else {}
 	_guide.queue_redraw()
 	_update_coach()
 
@@ -414,6 +417,8 @@ func _show_step(i: int) -> void:
 	_shown = i
 	_shown_loc = I18n.locale()
 	_shown_txt = txt
+	var skip := find_child("SkipTutorial", true, false) as Button
+	if skip != null: skip.text = I18n.t("Skip")
 	var s: Dictionary = STEPS[i]
 	head.text = (I18n.t("FIRST VENTURE %d/%d") % [mini(i + 1, STEPS.size()), STEPS.size()]) + "  ·  " + I18n.t(str(s["title"]))
 	body.text = txt
@@ -553,6 +558,11 @@ func _draw_coach() -> void:
 func _resolve(ws: WorldScene) -> Dictionary:
 	if not GameState.has_game():
 		return {}
+	if _destination != "":
+		if ws.kind == "interior" and ws.scene_id == _destination:
+			_destination = ""
+		else:
+			return _route_to_building(ws, _destination, "")
 	var tgt := {}
 	var s := current()
 	if not s.is_empty() and s.has("target"):
@@ -594,6 +604,16 @@ func _resolve(ws: WorldScene) -> Dictionary:
 		if ws.scene_id != str(tgt["district"]):
 			return _route_to_district(ws, str(tgt["district"]))
 	return {}
+
+
+## A phone destination temporarily takes precedence over story/tutorial targets, using the same resolver and draw.
+func guide_to_building(id: String) -> void:
+	_destination = id
+
+
+## A phone destination belongs to one game: it is dropped on a new game, a load and a return to the title screen.
+func clear_destination() -> void:
+	_destination = ""
 
 
 func _workplace() -> String:

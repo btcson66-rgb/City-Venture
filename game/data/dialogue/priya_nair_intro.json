@@ -1,0 +1,26 @@
+{
+ "id": "priya_nair_intro",
+ "with": "priya_nair",
+ "nodes": {
+  "start": [
+   {
+    "who": "priya_nair",
+    "text": "Priya Nair, Voyago. We list your rooms in front of ten thousand travellers. The standard listing costs fifteen percent per night; the featured listing costs eighteen and ranks higher."
+   },
+   {
+    "who": "priya_nair",
+    "text": "Your guest rating sets your ranking. Keep it high and the platform sends you more bookings without you lifting a finger."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Open the Rate Board",
+      "next": "end"
+     }
+    ]
+   }
+  ],
+  "end": []
+ }
+}

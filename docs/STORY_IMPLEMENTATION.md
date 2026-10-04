@@ -1,5 +1,39 @@
 # CITY VENTURE — Story Implementation
 
+## Friends beta balance targets (#29)
+
+Balance is measured with the real simulation scheduler, double-entry ledger, chapter conditions and API actions in
+`game/tests/sim/economy_runner.tscn`. Run headless for 18 calendar months with seeds 101, 202 and 303. Policies are
+cautious (two active products, 20% markup, three weeks of stock), aggressive (four products, advertising, six weeks
+of stock), and casual (fixed prices, occasional stockouts). Registration, Suite 2B, one actual hire, payroll, and
+the big contract happen through their normal simulation APIs. Later imports reserve storage rather than fabricating
+delivery or cash. The Green Shift replaces one retail product with the solar lamp, keeping the policy's product count.
+
+Targets: cautious reaches a genuinely positive Chapter 7 month within six months; aggressive completes each chapter
+within two calendar months (up to 62 days); casual encounters at most one insolvency/company closure before Chapter 12
+over the 18-month observation window. Cash shortfalls are recorded separately from actual insolvency and closure.
+The casual policy never raises a price and therefore cannot satisfy the mandatory Chapter 7 repricing objective;
+later objectives are explicitly right-censored, not reported as zero-day achievements. This is an intentional policy
+consequence, not a claim that all chapters were completed by that policy.
+
+All tuning values are in `game/data/economy/*.json`. `balance.json` overlays existing numeric product fields after
+definition loading, keeping the original product definitions as a reproducible pre-tuning reference. It does not alter
+transaction rules, saved state, chapter gates, or the two-loss recovery route. Other live businesses retain their existing
+economy values; no future industry or chapter beyond 12 is tuned. Shipping remains a tradeoff between price and speed.
+
+Reproduce before/after and the per-objective day distributions:
+
+```bash
+godot --headless --path game res://tests/sim/economy_runner.tscn -- --baseline --out=/tmp/cv_before
+godot --headless --path game res://tests/sim/economy_runner.tscn -- --out=/tmp/cv_after
+python3 tools/sim/economy_report.py --before /tmp/cv_before --after /tmp/cv_after --out evidence/<date>_29
+```
+
+The six-month unit regression asserts positive ledger profit and rejects `ch7_survived_losses`. The full player-input
+walkthrough raises prices, replenishes stock through the laptop, uses economy shipping and prints the actual monthly
+profit that set `ch7_month_profit`. Objective reports include achieved counts, censored counts and min/P10/median/P90/max
+days for every chapter objective; three seeded observations are a regression sample rather than population confidence limits.
+
 This document turns the Master Handoff story (§4, §25–§28, §54–§67, §89) into implementable data: **Chapters → Missions (objectives) → Events → NPC / Dialogue / Business / World-event triggers.**
 
 Writing rules (kickoff §31–§33):

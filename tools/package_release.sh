@@ -14,6 +14,7 @@ rm -rf "$B" "$DIST"
 mkdir -p "$B/windows" "$B/linux" "$B/macos" "$B/web" "$DIST"
 
 python3 "$ROOT/tools/i18n_extract.py" --check
+python3 "$ROOT/tools/beta_audit.py"
 cd "$GAME"
 godot --headless --path . --import >/dev/null 2>&1
 godot --headless --path . res://tests/test_runner.tscn | tail -1
@@ -74,5 +75,6 @@ web = os.path.join(b, "web")
 pack("CityVenture-%s-Web.zip" % ver, [(f, os.path.join(web, f)) for f in sorted(os.listdir(web))] +
      [("HOW_TO_SHARE_WEB.txt", text("HOW_TO_SHARE_WEB.txt", True)), ("README_TESTERS.txt", text("README_TESTERS.txt", True))])
 PY
+python3 "$ROOT/tools/qa/build_size_check.py" --root "$ROOT"
 ( cd "$DIST" && sha256sum *.zip > SHA256SUMS.txt )
 echo "packages -> $DIST"

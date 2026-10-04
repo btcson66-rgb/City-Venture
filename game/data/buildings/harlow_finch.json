@@ -1,0 +1,132 @@
+{
+ "id": "harlow_finch",
+ "name": "Harlow & Finch Realty",
+ "category": "Estate agent",
+ "district": "residential",
+ "type": "lettings",
+ "hours": {
+  "open": "09:00",
+  "close": "18:00",
+  "days": "mon,tue,wed,thu,fri,sat"
+ },
+ "exterior": {
+  "sprite": "harlow_finch",
+  "fallback": "okafor_lettings",
+  "x": 870,
+  "sign": "Harlow & Finch Realty"
+ },
+ "interior": {
+  "size": [
+   16,
+   12
+  ],
+  "floor": "wood_dark",
+  "wall": "wood_panel",
+  "ambient": "office",
+  "props": [
+   {
+    "sprite": "listing_board",
+    "fallback": "cork_board",
+    "x": 30,
+    "y": 8,
+    "wall": true
+   },
+   {
+    "sprite": "framed_art",
+    "x": 150,
+    "y": 12,
+    "wall": true
+   },
+   {
+    "sprite": "window_day",
+    "x": 196,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "old_desk",
+    "fallback": "desk",
+    "x": 96,
+    "y": 70
+   },
+   {
+    "sprite": "office_chair",
+    "x": 112,
+    "y": 56,
+    "solid": false
+   },
+   {
+    "sprite": "chair",
+    "x": 112,
+    "y": 118,
+    "solid": false
+   },
+   {
+    "sprite": "filing_cabinet",
+    "x": 12,
+    "y": 50
+   },
+   {
+    "sprite": "plant",
+    "x": 216,
+    "y": 56
+   },
+   {
+    "sprite": "waiting_sofa",
+    "x": 160,
+    "y": 130
+   },
+   {
+    "sprite": "rug_small",
+    "x": 90,
+    "y": 150,
+    "floor": true
+   }
+  ],
+  "interactables": [
+   {
+    "id": "lease",
+    "at": [
+     120,
+     130
+    ],
+    "label": "Lease the brokerage office",
+    "action": "lease_property",
+    "params": {
+     "property": "realty_office",
+     "hide_if_leased": "realty_office"
+    }
+   },
+   {
+    "id": "realty_terminal",
+    "at": [
+     52,
+     100
+    ],
+    "label": "Open Matchmaker",
+    "action": "real_estate_open",
+    "icon": "home"
+   }
+  ],
+  "npc_spots": {
+   "agent": [
+    120,
+    74
+   ]
+  },
+  "staff_spots": {
+   "realty_agent": [
+    [
+     120,
+     74
+    ],
+    [
+     160,
+     74
+    ]
+   ]
+  }
+ },
+ "property": "realty_office"
+}

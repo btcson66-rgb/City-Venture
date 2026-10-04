@@ -1,39 +1,41 @@
 # CITY VENTURE — Roadmap
 
-## Now (from 0.1.8): tickets on GitHub
+## Now (from 0.2.0): tickets on GitHub
 
 Claude plans and reviews, Codex implements: each item below is a GitHub issue written as a complete spec, labelled
 `codex`, done on its own branch and Draft PR against `claude/exciting-bardeen-y71ixv`, and merged after review.
 The working agreement is `docs/CODEX_GUIDE.md`. Status of the game today: Chapters 1–12 Implemented; businesses
-ecommerce, freelance, SaaS, café (Old Town) and logistics (Harbor) Implemented; districts Riverside, Startup Hub,
-Civic Center, Financial, Shopping Street, Old Town, Harbor Implemented.
+ecommerce, freelance, SaaS, café (Old Town), logistics (Harbor), manufacturing (Industrial), real estate (Residential),
+media (University), hotel (Luxury Heights), automotive (Airport) and energy Implemented on the industry framework (#63),
+with internal supply, group jobs and milestones (#71); districts Riverside, Startup Hub, Civic Center, Financial,
+Shopping Street, Old Town, Harbor, Industrial, Residential, University, Luxury Heights and Airport Implemented.
 
 | Priority | Issue | What |
 |---|---|---|
 | P0 | [#21](https://github.com/btcson66-rgb/City-Venture/issues/21) | Purchase cancellations and returns (fix a wrong stock order) (Implemented, in 0.1.9-test9) |
-| P0 | [#22](https://github.com/btcson66-rgb/City-Venture/issues/22) | Save export/import; old-version save fixtures as regression tests |
-| P0 | [#23](https://github.com/btcson66-rgb/City-Venture/issues/23) | itch.io web publishing (butler) and an in-game "what's new" card |
+| P0 | [#22](https://github.com/btcson66-rgb/City-Venture/issues/22) | Save export/import; old-version save fixtures as regression tests (Implemented, 0.2.0) |
+| P0 | [#23](https://github.com/btcson66-rgb/City-Venture/issues/23) | itch.io web publishing (butler) and an in-game "what's new" card (Implemented, 0.2.0) |
 | P0 | [#24](https://github.com/btcson66-rgb/City-Venture/issues/24) | No soft-locks: every chapter step and tutorial step handles "already done" and "no longer possible" (Implemented, merged in #37) |
 | P0 | [#36](https://github.com/btcson66-rgb/City-Venture/issues/36) | Closing a company ends its B2B contracts; a sold receivable is never collected twice (Implemented, in 0.1.9-test9) |
-| P0 | [#44](https://github.com/btcson66-rgb/City-Venture/issues/44) | Friends Beta: nothing unfinished in sight (hide planned things, scenery for empty buildings, `beta_audit.py`, `--bot=beta_tour`) |
-| P0 | [#45](https://github.com/btcson66-rgb/City-Venture/issues/45) | Friends Beta 0.2.0 release: full checklist, version, patch notes, itch.io |
-| P0 | [#52](https://github.com/btcson66-rgb/City-Venture/issues/52) | Loans you can actually take: every lending entry leads to Borrow or a clear next step, a "why not / what to do" checklist, no 30-day clock jump |
-| P0 | [#39](https://github.com/btcson66-rgb/City-Venture/issues/39) | See where you can do things: interaction markers, a "what you can do here" card, a City Guide phone app |
-| P1 | [#62](https://github.com/btcson66-rgb/City-Venture/issues/62) | Wire the delivered 4× backdrops, cards, maps and UI art at their logical size; web build size budget |
-| P1 | [#63](https://github.com/btcson66-rgb/City-Venture/issues/63) | Industry framework: industry registry, segment P&L, generic B2B Jobs and Assets (base for #64–#71) |
-| P1 | [#64](https://github.com/btcson66-rgb/City-Venture/issues/64) | Manufacturing + Industrial district: OEM orders, Line Planner, yield and QC, own-brand supply to ecommerce |
-| P1 | [#65](https://github.com/btcson66-rgb/City-Venture/issues/65) | Real estate + Residential district: brokerage (Matchmaker), mortgages and rentals, renovation, developing Lot 7 |
-| P1 | [#66](https://github.com/btcson66-rgb/City-Venture/issues/66) | Media / advertising + University district: briefs, Campaign Mixer, Creative Pitch, own media |
-| P1 | [#67](https://github.com/btcson66-rgb/City-Venture/issues/67) | Hotel + Luxury Heights: Rate Board (pricing, channels, overbooking), housekeeping, reviews, expansion |
-| P2 | [#68](https://github.com/btcson66-rgb/City-Venture/issues/68) | Automotive + Airport district: car auctions and reconditioning, rental fleet, dealership |
-| P2 | [#69](https://github.com/btcson66-rgb/City-Venture/issues/69) | Energy: solar installs (Roof Survey), storage, subsidies, EV charging network |
+| P0 | [#44](https://github.com/btcson66-rgb/City-Venture/issues/44) | Friends Beta: nothing unfinished in sight (hide planned things, scenery for empty buildings, `beta_audit.py`, `--bot=beta_tour`) (Implemented, 0.2.0) |
+| P0 | [#45](https://github.com/btcson66-rgb/City-Venture/issues/45) | Friends Beta 0.2.0 release: full checklist, version, patch notes, itch.io (Implemented, 0.2.0) |
+| P0 | [#52](https://github.com/btcson66-rgb/City-Venture/issues/52) | Loans you can actually take: every lending entry leads to Borrow or a clear next step, a "why not / what to do" checklist, no 30-day clock jump (Implemented, 0.2.0) |
+| P0 | [#39](https://github.com/btcson66-rgb/City-Venture/issues/39) | See where you can do things: interaction markers, a "what you can do here" card, a City Guide phone app (Implemented, 0.2.0) |
+| P1 | [#62](https://github.com/btcson66-rgb/City-Venture/issues/62) | Wire the delivered 4× backdrops, cards, maps and UI art at their logical size; web build size budget (Implemented, 0.2.0) |
+| P1 | [#63](https://github.com/btcson66-rgb/City-Venture/issues/63) | Industry framework: industry registry, segment P&L, generic B2B Jobs and Assets (base for #64–#71) (Implemented, 0.2.0) |
+| P1 | [#64](https://github.com/btcson66-rgb/City-Venture/issues/64) | Manufacturing + Industrial district: OEM orders, Line Planner, yield and QC, own-brand supply to ecommerce (Implemented, 0.2.0) |
+| P1 | [#65](https://github.com/btcson66-rgb/City-Venture/issues/65) | Real estate + Residential district: brokerage (Matchmaker), mortgages and rentals, renovation, developing Lot 7 (Implemented, 0.2.0) |
+| P1 | [#66](https://github.com/btcson66-rgb/City-Venture/issues/66) | Media / advertising + University district: briefs, Campaign Mixer, Creative Pitch, own media (Implemented, 0.2.0) |
+| P1 | [#67](https://github.com/btcson66-rgb/City-Venture/issues/67) | Hotel + Luxury Heights: Rate Board (pricing, channels, overbooking), housekeeping, reviews, expansion (Implemented, 0.2.0) |
+| P2 | [#68](https://github.com/btcson66-rgb/City-Venture/issues/68) | Automotive + Airport district: car auctions and reconditioning, rental fleet, dealership (Implemented, 0.2.0) |
+| P2 | [#69](https://github.com/btcson66-rgb/City-Venture/issues/69) | Energy: solar installs (Roof Survey), storage, subsidies, EV charging network (Implemented, 0.2.0) |
 | P2 | [#70](https://github.com/btcson66-rgb/City-Venture/issues/70) | International trade: RFQ, Incoterms Deal Sheet, insurance, customs, FX, letters of credit |
-| P2 | [#71](https://github.com/btcson66-rgb/City-Venture/issues/71) | Industry synergies: internal supply and transfer pricing, multi-industry jobs, industry milestones |
-| P1 | [#25](https://github.com/btcson66-rgb/City-Venture/issues/25) | "!" explanation badges on every existing screen |
+| P2 | [#71](https://github.com/btcson66-rgb/City-Venture/issues/71) | Industry synergies: internal supply and transfer pricing, multi-industry jobs, industry milestones (Implemented, 0.2.0) |
+| P1 | [#25](https://github.com/btcson66-rgb/City-Venture/issues/25) | "!" explanation badges on every existing screen (Implemented, 0.2.0) |
 | P1 | [#26](https://github.com/btcson66-rgb/City-Venture/issues/26) | 4× detail art for buildings, ground tiles and vehicles |
 | P1 | [#27](https://github.com/btcson66-rgb/City-Venture/issues/27) | Era street dressing: port cranes (Year 3), solar roofs and EV chargers (Year 4) |
 | P1 | [#28](https://github.com/btcson66-rgb/City-Venture/issues/28) | Player van colour and lettering, route map alignment, seated expressions |
-| P1 | [#29](https://github.com/btcson66-rgb/City-Venture/issues/29) | Economy balance so every chapter goal is reachable with sensible play |
+| P1 | [#29](https://github.com/btcson66-rgb/City-Venture/issues/29) | Economy balance so every chapter goal is reachable with sensible play (Implemented, 0.2.0) |
 | P1 | [#40](https://github.com/btcson66-rgb/City-Venture/issues/40) | Look-only shops get something to do: Crestline market research, Harbor Point gym membership and networking |
 | P2 | [#30](https://github.com/btcson66-rgb/City-Venture/issues/30) | Season 2 systems: World Map, regional storefronts, currencies and FX |
 | P2 | [#31](https://github.com/btcson66-rgb/City-Venture/issues/31) | Season 2 Chapters 13–14: first order abroad, customs (DDP/DDU) |
@@ -43,15 +45,39 @@ Civic Center, Financial, Shopping Street, Old Town, Harbor Implemented.
 | P2 | [#41](https://github.com/btcson66-rgb/City-Venture/issues/41) | Pop-up Unit 5: a weekend pop-up shop on Shopping Street (physical retail channel) |
 | P2 | [#42](https://github.com/btcson66-rgb/City-Venture/issues/42) | Season 2 Chapters 15–16: the currency swing (forward contracts), a partner overseas (distributor vs 3PL) |
 | P2 | [#43](https://github.com/btcson66-rgb/City-Venture/issues/43) | Season 2 Chapters 17–18: consolidation (niche or scale), legacy (endings and epilogue) |
+| P1 | [#86](https://github.com/btcson66-rgb/City-Venture/issues/86) | Story hooks and onboarding for the new industries: a side story per industry, Business Board teasers, first-order tutorials, Omar Haddad |
+| P1 | [#87](https://github.com/btcson66-rgb/City-Venture/issues/87) | Settings and accessibility: master volume, UI and text scale, key rebinding (InputMap), colour-blind modes, fullscreen |
+| P1 | [#88](https://github.com/btcson66-rgb/City-Venture/issues/88) | Touch and controller: tap to walk, on-screen interact, 44 px targets, gamepad focus navigation, mobile web |
+| P1 | [#89](https://github.com/btcson66-rgb/City-Venture/issues/89) | Replayability: difficulty, six scenario starts, seeds, weekly challenge with a local leaderboard |
+| P1 | [#90](https://github.com/btcson66-rgb/City-Venture/issues/90) | Rival companies and business cycles: AI competitors, random rates and demand cycle, News app |
+| P1 | [#98](https://github.com/btcson66-rgb/City-Venture/issues/98) | Performance budgets, 10-year stress bot, GitHub Actions CI |
+| P2 | [#91](https://github.com/btcson66-rgb/City-Venture/issues/91) | Second company and holding group: subsidiaries, consolidated statements, intra-group loans |
+| P2 | [#92](https://github.com/btcson66-rgb/City-Venture/issues/92) | Life Timeline and Legacy screen: seven archetypes, life recap, New Game+ |
+| P2 | [#93](https://github.com/btcson66-rgb/City-Venture/issues/93) | Years 9–10: consolidation wave, IPO / be acquired / stay private |
+| P2 | [#94](https://github.com/btcson66-rgb/City-Venture/issues/94) | Housing ladder and a personal car: buy a home, Penthouse / Villa, driving and parking |
+| P2 | [#95](https://github.com/btcson66-rgb/City-Venture/issues/95) | NPC relationships and personal life: affinity, personal side stories, social events, energy and stress |
+| P2 | [#96](https://github.com/btcson66-rgb/City-Venture/issues/96) | Tax, legal and brand: VAT and corporate tax filing, disputes, insurance, company reputation |
+| P2 | [#97](https://github.com/btcson66-rgb/City-Venture/issues/97) | Audio pass: district and industry ambience, new music, minigame sound |
+| P2 | [#99](https://github.com/btcson66-rgb/City-Venture/issues/99) | Season 3, Chapters 19–24 “The City’s Future”: expo bid, harbour rebuild, energy transition, talent war, election, expo opening |
+| P0 | [#109](https://github.com/btcson66-rgb/City-Venture/issues/109) | Player-reported fixes: barista ticket always names the shot count, tutorials give opening hours first, glossary for payment terms (票期) |
+| P0 | [#110](https://github.com/btcson66-rgb/City-Venture/issues/110) | End any lease: notice period, deposit return, early-exit fee, moving stock and staff |
+| P1 | [#111](https://github.com/btcson66-rgb/City-Venture/issues/111) | Map adjacency: walking exits match the city map, adjacency checker, edge signposts |
+| P1 | [#112](https://github.com/btcson66-rgb/City-Venture/issues/112) | Phone messages you can answer: threads, quick replies with real effects, time-limited replies, messaging NPCs first |
+| P1 | [#113](https://github.com/btcson66-rgb/City-Venture/issues/113) | Ecommerce multi-item orders and packing: box sizes by volume, packing puzzle, shipping by box and weight |
+| P1 | [#114](https://github.com/btcson66-rgb/City-Venture/issues/114) | Richer part-time jobs and freelance: barista from order to table, deeper shifts, multi-stage consulting projects |
+| P1 | [#115](https://github.com/btcson66-rgb/City-Venture/issues/115) | Traffic safety: car collisions, crossings and lights, injury, hospital, medical bills and insurance |
+| P2 | [#116](https://github.com/btcson66-rgb/City-Venture/issues/116) | Social fundraising and partnerships: dress codes, angels/VCs, pitch, term sheet, cap table, strategic deals |
 | P3 | [#35](https://github.com/btcson66-rgb/City-Venture/issues/35) | Free play after the story: growth goals and achievements |
 
-**Work order for Codex** (one ticket at a time; start the next from the latest `claude/exciting-bardeen-y71ixv` once
-the previous PR is merged). First the **Friends Beta 0.2.0** (`docs/FRIENDS_BETA.md`): ~~#21~~ → ~~#36~~ → #52 → #39 → #44 → #29 →
-#22 → #23 → #25 → #45. After the beta: #62 → #63 → #64 → #65 → #66 → #67 → #40 → #68 → #69 → #71 → #28 → #26 → #27 → #30 → #31 → #70 → #42 → #43 → #41 → #32 → #33 → #34 → #35.
+**Work order for Codex** (two sessions in parallel, "continuous mode": stacked branches, self-review before the next ticket;
+see `docs/CODEX_GUIDE.md`). Friends Beta 0.2.0 and the industries #62–#71 are done.
+- Session A (systems and experience): #98 → #87 → #88 → #89 → #90 → #40 → #28 → #26 → #27 → #96 → #97 → #95
+- Session B (story and content): #86 → #30 → #31 → #70 → #42 → #43 → #35 → #92 → #93 → #91 → #32 → #94 → #33 → #34 → #41 → #99
+- Session C (player feedback): #109 → #110 → #111 → #112 → #113 → #114 → #115 → #116
 A ticket whose dependency is not merged yet waits; take the next one instead.
 
-New districts now come with their industry: Industrial (#64, #69), Residential (#65), University (#66),
-Luxury Heights (#67), Airport (#68, #70).
+Dependencies worth knowing: #88 needs #87 (InputMap); #93 uses #90's rivals; #94 needs #32; #92 needs #35 and #43;
+#99 needs #86 and #43; #70 needs #30 and #31; #116 needs #95 (and uses #91, #92, #93 when merged); #115 leaves a hook for #94.
 
 ---
 

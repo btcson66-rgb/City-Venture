@@ -268,7 +268,7 @@ static func reroute(po_id: String, method := "international_wire") -> Dictionary
 	var fee := Ecommerce.settlement_fee(method, amt)
 	var ent := str(po["entity"])
 	if Ledger.cash(ent) < amt + fee:
-		return {"ok": false, "error": I18n.t("Not enough cash. You need %s.") % Fmt.money(amt + fee)}
+		return {"ok": false, "error": I18n.t("Not enough cash. You need %s.") % Fmt.money0(amt + fee)}
 	Ledger.post(ent, I18n.t("%s: paid again by %s (rerouted)") % [po_id, I18n.t(str(Ecommerce.settlement_def(method)["name"]))],
 		[{"acct": "inventory_in_transit", "dr": amt}, {"acct": "cash", "cr": amt}], {"type": "po", "id": po_id})
 	if fee > 0.0:
@@ -298,7 +298,7 @@ static func reroute_all(method := "international_wire") -> Dictionary:
 			need += float(it["amount"]) + Ecommerce.settlement_fee(method, float(it["amount"]))
 			ent = str(it["entity"])
 	if ent != "" and Ledger.cash(ent) < need:
-		return {"ok": false, "error": I18n.t("Not enough cash. You need %s.") % Fmt.money(need)}
+		return {"ok": false, "error": I18n.t("Not enough cash. You need %s.") % Fmt.money0(need)}
 	var n := 0
 	for it in X().get("items", []):
 		if not bool(it["rerouted"]):

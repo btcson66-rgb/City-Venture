@@ -251,3 +251,12 @@ Nexus Bank opens international banking for a registered company with domestic ba
 ## Customs and export chapters (#31)
 
 [Customs and exports](21_customs_and_exports.md) adds actual DDP/DDU declarations and duty to the shared packing/shipping lifecycle, plus Chapters 13–14. The harbor Customs House now opens weekdays; Ines also provides a laptop guide. Failed expansion can be paused honestly without a fictional sale.
+
+
+## 產業框架與分部損益（Implemented，#63）
+
+咖啡、物流、SaaS、電商與接案都由 Industries 註冊表分派，保留原有收支與每小時處理順序。未開始的接案與軟體產品有獨立起步按鈕，開業後才顯示經營分頁。Company OS 的「分部損益」列出本月、上月營收、毛利、費用與營業利益；共用費用按淨營收分攤並標示「分攤」，沒有營收時留在「共用」。分部加總採原有月結口徑，與公司報表相同，包含其他收入。
+
+通用 Jobs 工單記錄客戶、範圍、工作量、交期、價格、Net 0／30／60、訂金及違約罰則。先完成範圍，再交付及開立發票，付款日前留在應收帳款；公司關閉後不再重收。既有商品合約仍使用原協商與扣庫存流程，只共用訂金與發票分錄。
+
+通用 Assets 支援購買、租賃、直線折舊、保養、故障與公司關閉拍賣，殘值為購入價 40–60%。固定資產帳面價值與已簽工單納入銀行擔保額度。物流貨車已在購買時列費用，遷移後不再重複折舊；保留原保險、油耗、維護費與拍賣數字。舊存檔延遲建立新區段，不改既有帳本。

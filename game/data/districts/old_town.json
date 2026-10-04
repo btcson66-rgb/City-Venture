@@ -944,6 +944,18 @@
    "to": "shopping_street",
    "spawn": "from_old_town",
    "walk_min": 6
+  },
+  {
+   "id": "west",
+   "rect": [
+    0,
+    320,
+    16,
+    244
+   ],
+   "to": "residential",
+   "spawn": "from_old_town",
+   "walk_min": 5
   }
  ],
  "spawns": {
@@ -954,6 +966,10 @@
   "metro": [
    1220,
    642
+  ],
+  "from_residential": [
+   28,
+   430
   ]
  },
  "bounds": {

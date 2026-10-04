@@ -1,0 +1,22 @@
+{
+ "id": "private_label_launch",
+ "title": "Private-Label Launch",
+ "client_name": "Crestline Retail",
+ "npc": "marcus",
+ "pitch": "Crestline wants a private-label line: built by a factory, sold through a marketplace shop and backed by a launch campaign.",
+ "reward": 38000,
+ "deadline_days": 35,
+ "offer_days": 12,
+ "earliest_day": 45,
+ "cooldown_days": 70,
+ "chance": 0.04,
+ "min_running": 2,
+ "parts": [
+  {"id": "build", "industry": "manufacturing", "label": "Deliver one OEM production order", "share": 0.4, "metric": "count:manufacturing.orders|status=delivered", "target": 1, "subcontract": 8000,
+   "hint": "Accept an RFQ, schedule the machines and deliver the batch."},
+  {"id": "sell", "industry": "ecommerce", "label": "Deliver 50 more marketplace orders", "share": 0.35, "metric": "stat:orders_delivered", "target": 50, "subcontract": 5500,
+   "hint": "Keep listings live and stocked."},
+  {"id": "launch", "industry": "media", "label": "Finish a launch campaign", "share": 0.25, "metric": "data:media.completed", "target": 1, "subcontract": 4000,
+   "hint": "Run a measured campaign to its last day."}
+ ]
+}

@@ -1,0 +1,97 @@
+{
+ "id": "campus_radio",
+ "name": "Campus Radio",
+ "category": "Radio station",
+ "district": "university",
+ "type": "office",
+ "hours": {
+  "open": "08:00",
+  "close": "20:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "campus_radio",
+  "fallback": "office_slab",
+  "x": 960,
+  "sign": "Campus Radio"
+ },
+ "interior": {
+  "size": [
+   24,
+   15
+  ],
+  "floor": "wood_dark",
+  "wall": "brick",
+  "ambient": "office",
+  "props": [
+   {
+    "sprite": "cork_board",
+    "x": 40,
+    "y": 8,
+    "wall": true
+   },
+   {
+    "sprite": "box",
+    "x": 160,
+    "y": 80
+   },
+   {
+    "sprite": "packing_table",
+    "x": 20,
+    "y": 60
+   }
+  ],
+  "stock_display": {
+   "location": "suite_2b",
+   "x": 292,
+   "y": 112,
+   "cols": 5
+  },
+  "interactables": [
+   {
+    "id": "campaign_mixer",
+    "at": [
+     52,
+     100
+    ],
+    "label": "Open Campaign Mixer",
+    "action": "media_open",
+    "icon": "star"
+   }
+  ],
+  "npc_spots": {
+   "mentor": [
+    120,
+    74
+   ],
+   "intern": [
+    160,
+    74
+   ]
+  },
+  "staff_spots": {
+   "media_designer": [
+    [
+     120,
+     74
+    ],
+    [
+     160,
+     74
+    ]
+   ],
+   "media_buyer": [
+    [
+     220,
+     74
+    ]
+   ],
+   "media_intern": [
+    [
+     260,
+     74
+    ]
+   ]
+  }
+ }
+}

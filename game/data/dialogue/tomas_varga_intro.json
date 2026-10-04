@@ -1,0 +1,22 @@
+{
+ "id": "tomas_varga_intro",
+ "start": "start",
+ "nodes": {
+  "start": [
+   {
+    "who": "tomas_varga",
+    "text": "I can run your machines for $1,100 a week. Register as an employer and hire me in Line Planner."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Open Line Planner",
+      "next": "end"
+     }
+    ]
+   }
+  ],
+  "end": []
+ }
+}

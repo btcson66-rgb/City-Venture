@@ -1,0 +1,149 @@
+{
+ "id": "gateway_car_rental",
+ "name": "Gateway Car Rental",
+ "category": "Car rental and showroom",
+ "district": "airport",
+ "type": "office_to_let",
+ "hours": {
+  "open": "08:00",
+  "close": "20:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "gateway_car_rental",
+  "fallback": "dockside_motors",
+  "x": 420,
+  "sign": "GATEWAY CAR RENTAL"
+ },
+ "interior": {
+  "size": [
+   16,
+   12
+  ],
+  "floor": "concrete",
+  "wall": "brick",
+  "ambient": "office",
+  "props": [
+   {
+    "sprite": "listing_board",
+    "fallback": "cork_board",
+    "x": 30,
+    "y": 8,
+    "wall": true
+   },
+   {
+    "sprite": "framed_art",
+    "x": 150,
+    "y": 12,
+    "wall": true
+   },
+   {
+    "sprite": "window_day",
+    "x": 196,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "old_desk",
+    "fallback": "desk",
+    "x": 96,
+    "y": 70
+   },
+   {
+    "sprite": "office_chair",
+    "x": 112,
+    "y": 56,
+    "solid": false
+   },
+   {
+    "sprite": "chair",
+    "x": 112,
+    "y": 118,
+    "solid": false
+   },
+   {
+    "sprite": "filing_cabinet",
+    "x": 12,
+    "y": 50
+   },
+   {
+    "sprite": "plant",
+    "x": 216,
+    "y": 56
+   },
+   {
+    "sprite": "waiting_sofa",
+    "x": 160,
+    "y": 130
+   },
+   {
+    "sprite": "rug_small",
+    "x": 90,
+    "y": 150,
+    "floor": true
+   }
+  ],
+  "interactables": [
+   {
+    "id": "lease_counter",
+    "at": [
+     120,
+     130
+    ],
+    "label": "Lease the rental counter",
+    "action": "lease_property",
+    "params": {
+     "property": "gateway_counter",
+     "hide_if_leased": "gateway_counter"
+    }
+   },
+   {
+    "id": "lease_showroom",
+    "at": [
+     200,
+     130
+    ],
+    "label": "Lease the showroom",
+    "action": "lease_property",
+    "params": {
+     "property": "gateway_showroom",
+     "hide_if_leased": "gateway_showroom"
+    }
+   },
+   {
+    "id": "fleet_desk",
+    "at": [
+     52,
+     100
+    ],
+    "label": "Open the fleet desk",
+    "action": "automotive_open",
+    "params": {
+     "page": "fleet"
+    },
+    "icon": "metro"
+   },
+   {
+    "id": "dealer_desk",
+    "at": [
+     170,
+     70
+    ],
+    "label": "Talk franchise with Mara",
+    "action": "automotive_open",
+    "params": {
+     "page": "dealer"
+    },
+    "icon": "metro"
+   }
+  ],
+  "npc_spots": {
+   "sales": [
+    140,
+    74
+   ]
+  }
+ },
+ "property": "gateway_counter"
+}
