@@ -17,6 +17,9 @@ func _init(b) -> void:
 
 func run() -> void:
 	await _new_game()
+	if _arg("from")=="trade_execution":
+		await _trade_execution_fixture()
+		return
 	if _arg("from") == "trade_quote":
 		await _trade_quote_fixture()
 		return
@@ -107,6 +110,46 @@ func run() -> void:
 
 
 ## Region entry is a fixture; route selection and quote comparisons use native controls.
+func _trade_execution_fixture() -> void:
+	UIRoot._suppress_decisions=true;UIRoot.tutorial.st()["off"]=true
+	Company.register("Meridian Trading","international_trade","Meridian")
+	Company.open_business_account(20000)
+	# An isolated funded founder; every subsequent trade purchase, fee and receipt is real.
+	Ledger.post(GameState.company_id(),"QA founder capital",[{"acct":"cash","dr":100000},{"acct":"equity","cr":100000}])
+	SceneRouter._enter("interior","customs_house","door","up");await bot.wait(.5)
+	TradeDeskUI.open();await _intro_control("RegisterTrade")
+	bot.expect(TradeIndustry.S()["registered"],"paid import/export registration through native control")
+	await bot.shot("trade_execution_registered");UIRoot.close_all()
+	SceneRouter._enter("interior","meridian_trade_desk","door","up");await bot.wait(.5)
+	UIRoot.open_modal(LeaseModal.new("meridian_trade_office"));await _intro_control("SignLease_meridian_trade_office")
+	UIRoot.close_all();TradeDeskUI.open();await _intro_control("StartTrade")
+	bot.expect(TradeIndustry.valid(),"registered leased office opens brokerage")
+	await bot.shot("trade_execution_office")
+	UIRoot.close_all();UIRoot.open_modal(WorldMapModal.new());await _intro_control("Region_northridge")
+	await bot.shot("trade_execution_region");await _intro_control("TradeRoute_northridge")
+	await bot.shot("trade_execution_sheet");await _intro_control("TradeSign")
+	bot.expect(TradeIndustry.S()["deals"].size()==1,"native buyer contract signs shared job")
+	if TradeIndustry.S()["deals"].is_empty():return
+	var d: Dictionary=TradeIndustry.S()["deals"].values()[0]
+	await _intro_control("TradeDoc_"+d["id"]+"_packing_list")
+	GameState.data["clock"]["minutes"]=d["depart"];TradeIndustry.handle("trade.depart",{"id":d["id"]})
+	(UIRoot.top_modal() as TradeDeskUI).rebuild();await bot.wait(.3)
+	bot.expect(d["status"]=="customs_hold","incomplete actual documents hold shipment")
+	await bot.shot("trade_execution_customs_hold")
+	await _intro_control("TradeDoc_"+d["id"]+"_packing_list")
+	await _intro_control("ClearTrade_"+d["id"])
+	await _intro_control("TradeBank_"+d["id"])
+	bot.expect(d["lc"]=="documents_accepted","actual bank document receipt")
+	await bot.shot("trade_execution_bank_documents")
+	GameState.data["clock"]["minutes"]=d["eta"];TradeIndustry.handle("trade.arrive",{"id":d["id"]})
+	GameState.data["clock"]["minutes"]=d["due"];TradeIndustry.collect(d)
+	(UIRoot.top_modal() as TradeDeskUI).rebuild();await bot.wait(.3)
+	bot.expect(d["status"]=="paid" and Ledger.check_balanced(),"actual cargo delivered and LC collected with balanced ledger")
+	await bot.shot("trade_execution_collected")
+	bot.expect(SaveSystem.save(8) and SaveSystem.load_data(8),"actual trade state save roundtrip")
+	bot.expect(TradeIndustry.S()["deals"][d["id"]]["status"]=="paid","paid receipt retained after load")
+	UIRoot.close_all()
+
 func _trade_quote_fixture() -> void:
 	await bot.wait(4.0)
 	UIRoot._suppress_decisions = true
