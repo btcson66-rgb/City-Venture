@@ -52,6 +52,7 @@ func run() -> void:
 		var target := Vector2(float(r[0]) + float(r[2]) / 2, float(r[1]) + float(r[3]) / 2)
 		var side := str(ex["direction"])
 		var inward: Vector2 = {"N": Vector2.DOWN, "E": Vector2.LEFT, "S": Vector2.UP, "W": Vector2.RIGHT}[side]
+		await _cross_road_safely(world, target + inward * 80)
 		await bot.walk_to(target + inward * 80, 5.0, 60.0)
 		if not screenshots.has(side):
 			await bot.shot("exit_sign_" + side + "_" + a)
@@ -67,3 +68,26 @@ func run() -> void:
 		bot.expect(SceneRouter.world_scene().scene_id == b, "arrival does not retrigger a return")
 		if "--signs-only" in OS.get_cmdline_user_args() and screenshots.size() == 4: return
 	bot.expect(Ledger.check_balanced(), "all walking time preserves ledger")
+
+
+
+## Since #115 cars hit pedestrians outside a green crosswalk: when the way to an exit crosses a traffic lane,
+## walk to the nearest crosswalk, wait for green and cross there, as a careful player does.
+func _cross_road_safely(world: District, goal: Vector2) -> void:
+	var p := bot.player().global_position
+	var lanes: Array = world.def.get("traffic", []).map(func(l): return float(l["y"]))
+	if not lanes.any(func(y): return (y - p.y) * (y - goal.y) < 0.0):
+		return
+	var walks: Array = TrafficSafety.crosswalk_rects(world.scene_id)
+	if walks.is_empty():
+		return
+	var best: Rect2 = walks[0]
+	for r in walks:
+		if absf((r as Rect2).get_center().x - p.x) < absf(best.get_center().x - p.x):
+			best = r
+	var x := best.get_center().x
+	var above := best.position.y - 6.0
+	var below := best.end.y + 6.0
+	await bot.walk_to(Vector2(x, below if p.y > best.get_center().y else above), 5.0, 60.0)
+	await bot.until(func(): return TrafficSafety.green(), 30.0)
+	await bot.walk_to(Vector2(x, above if p.y > best.get_center().y else below), 5.0, 60.0)
