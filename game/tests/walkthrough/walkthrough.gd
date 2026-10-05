@@ -120,6 +120,9 @@ func run() -> void:
 	if _arg("from") == "capital_market":
 		await _capital_market_fixture()
 		return
+	if _arg("from") == "fundraising":
+		await _fundraising_fixture()
+		return
 	if _arg("from") == "life_legacy":
 		await _life_legacy_fixture()
 		return
@@ -4170,3 +4173,76 @@ func _personal_life_fixture() -> void:
 	await close_modal()
 	MiniGames.auto=previous_auto;Help.auto=true
 	bot.expect(Ledger.check_balanced(),"personal requests, gifts and referral journals balance")
+
+
+func _fundraising_fixture() -> void:
+	await bot.wait(4)
+	UIRoot._suppress_decisions=true
+	UIRoot.tutorial.st()["off"]=true
+	Clock.world_active=false
+	StoryEngine.St()["active"].clear()
+	StoryEngine.St()["chapter"]="ch7_supply_shock"
+	Ledger.post("player","Walkthrough savings",[{"acct":"cash","dr":3000},{"acct":"equity","cr":3000}],{"type":"test_fixture"})
+	Company.register("Fund Walk Co","retail_online","Riverside")
+	Company.open_business_account(5000)
+	var ent:=GameState.company_id()
+	for i in 14:
+		GameState.data["clock"]["minutes"]+=30*Clock.DAY
+		Ledger.post(ent,"Recorded sales",[{"acct":"cash","dr":6000},{"acct":"revenue","cr":6000}],{"type":"test_fixture"})
+	GameState.data["clock"]["minutes"]+=12*60
+	var gala: Dictionary=PersonalLife.cfg()["events"]["investors_gala"]
+	var guard:=0
+	while not PersonalLife.event_available(gala) and guard<24*70:
+		GameState.data["clock"]["minutes"]+=60
+		guard+=1
+	bot.step("Dress code: turned away in casual wear")
+	UIRoot.close_all()
+	UIRoot.open_modal(SocialCalendarModal.new())
+	await bot.wait(.5)
+	await bot.shot("fund_dress_refused")
+	await _export_row_input("Social_investors_gala")
+	bot.expect(not Fundraising.met("ines_calder"),"casual wear is turned away at the gala")
+	bot.step("Buy formal wear at Threadline")
+	UIRoot.close_all()
+	UIRoot.open_modal(ClothingShopModal.new())
+	await bot.wait(.5)
+	await _export_row_input("Item_evening_gown")
+	await bot.shot("fund_formal_shop")
+	await _export_row_input("Buy")
+	bot.expect(Wardrobe.owns("evening_gown"),"formal outfit bought")
+	await _export_row_input("Wear")
+	bot.expect(Wardrobe.wearing()=="evening_gown","formal outfit worn")
+	bot.step("Attend the gala and meet an angel")
+	UIRoot.close_all()
+	UIRoot.open_modal(SocialCalendarModal.new())
+	await bot.wait(.5)
+	await _export_row_input("Social_investors_gala")
+	await bot.shot("fund_gala")
+	bot.expect(Fundraising.met("ines_calder"),"the angel was met at the gala")
+	bot.step("Approach, pitch, term sheet")
+	UIRoot.close_all()
+	UIRoot.open_modal(FundraisingModal.new())
+	await bot.wait(.5)
+	await _export_row_input("Investor_ines_calder")
+	await _export_row_input("ApproachInvestor")
+	await bot.shot("fund_ready_to_pitch")
+	if Fundraising.open_deal_for("ines_calder").get("status","")=="dd":
+		GameState.data["clock"]["minutes"]=int(Fundraising.open_deal_for("ines_calder")["dd"]["ready"])
+		await _export_row_input("ReadDD")
+	await _export_row_input("StartPitch")
+	await bot.until(func(): return not (UIRoot.top_modal() is MiniGame) and Fundraising.open_deal_for("ines_calder").get("status","")!="ready",30.0)
+	await bot.wait(.8)
+	await bot.shot("fund_term_sheet")
+	var deal:=Fundraising.open_deal_for("ines_calder")
+	bot.expect(deal.get("status","")=="offered","the pitch produced a term sheet from real figures")
+	var cash_before:=Ledger.cash(ent)
+	await _export_row_input("SignTerms")
+	bot.expect(Ledger.cash(ent)>cash_before,"signing posts the cash to the company")
+	bot.expect(Fundraising.cap_rows().size()>=2,"the cap table lists the founder and the angel")
+	await bot.shot("fund_signed")
+	UIRoot.close_all()
+	UIRoot.open_modal(FundraisingModal.new("cap"))
+	await bot.wait(.6)
+	await bot.shot("fund_cap_table")
+	bot.expect(Ledger.check_balanced(),"ledger balanced after the round")
+	bot.expect(SaveSystem.save_to(bot.out_dir.path_join("fundraising.json")),"save with the signed round")
