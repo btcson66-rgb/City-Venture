@@ -254,3 +254,25 @@ func test_big_journal_and_schedule_round_trip_through_packed_saves() -> void:
 	journal[5]["lines"][0]["dr"] = float(journal[5]["lines"][0]["dr"]) + 50.0
 	tampered["data"]["ledger"]["journal"] = SaveCodec._packed(journal)
 	runner.check(not SaveSystem.validate_text(JSON.stringify(tampered))["ok"], "tampered packed journal fails validation")
+
+
+func test_big_order_book_splits_into_parts_that_decode_together() -> void:
+	var orders := {}
+	for i in 9500:
+		orders["#t%d" % i] = {"id": "#t%d" % i, "product": "p", "entity": "player", "qty": 1, "status": "shipped", "unit_price": 2.0}
+	var packed := SaveCodec._packed(orders)
+	runner.check(packed.get("parts") is Array and packed["parts"].size() > 1, "9,500 orders are split into several blobs")
+	var holder := {"ecommerce": {"orders": packed}}
+	var verified := {}
+	runner.check(SaveCodec.unpack(holder, verified), "split blobs unpack")
+	runner.eq(holder["ecommerce"]["orders"].size(), 9500, "every order restored")
+	runner.eq(holder["ecommerce"]["orders"].keys()[0], "#t0", "order of the book is kept")
+	runner.eq(holder["ecommerce"]["orders"].keys()[9499], "#t9499", "order of the book is kept to the end")
+	runner.check(verified.get("orders", false), "every part's checksum matched")
+	var broken := {"ecommerce": {"orders": SaveCodec._packed(orders)}}
+	broken["ecommerce"]["orders"]["parts"][1]["sum"] = "forged"
+	var seen := {}
+	runner.check(SaveCodec.unpack(broken, seen) and not seen["orders"], "one bad checksum means the whole blob is fully validated")
+	var damaged := {"ecommerce": {"orders": SaveCodec._packed(orders)}}
+	damaged["ecommerce"]["orders"]["parts"][2]["z"] = "AAAA"
+	runner.check(not SaveCodec.unpack(damaged), "a damaged part is rejected")

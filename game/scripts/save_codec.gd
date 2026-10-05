@@ -14,6 +14,8 @@ const MAX_TEXT := 128 * 1024 * 1024
 ## exactly like plain JSON; the decoder never instantiates objects.
 const PACK_MIN := 2000
 const PACK_MAX_BYTES := 512 * 1024 * 1024
+const PART_MIN := 4000
+const MAX_PARTS := 6
 
 
 static func _sum(bytes: PackedByteArray) -> String:
@@ -24,21 +26,125 @@ static func _sum(bytes: PackedByteArray) -> String:
 
 
 static func _packed(value: Variant) -> Dictionary:
+	if value is Dictionary and value.size() >= PART_MIN:
+		# Several blobs decode on worker threads at once: first-touch memory is most of a big load.
+		var count := mini(MAX_PARTS, 1 + value.size() / PART_MIN)
+		var per := ceili(float(value.size()) / count)
+		var parts := []
+		var keys: Array = value.keys()
+		for i in count:
+			var piece := {}
+			for key in keys.slice(i * per, (i + 1) * per):
+				piece[key] = value[key]
+			var raw := var_to_bytes(piece).compress(FileAccess.COMPRESSION_GZIP)
+			parts.append({"sum": _sum(raw), "z": Marshalls.raw_to_base64(raw)})
+		return {"packed": 1, "n": value.size(), "parts": parts}
 	var bytes := var_to_bytes(value).compress(FileAccess.COMPRESSION_GZIP)
 	return {"packed": 1, "n": value.size(), "sum": _sum(bytes), "z": Marshalls.raw_to_base64(bytes)}
 
 
-## Value of a packed blob (null when damaged). `verified[name]` records that its checksum matched what the game wrote.
+## Decodes one blob (or each part of a split blob) to `[value, checksum_ok]`; null value when damaged. Pure, thread safe.
+static func _decode_part(blob: Dictionary) -> Array:
+	if not blob.get("z") is String: return [null, false]
+	var raw := Marshalls.base64_to_raw(blob["z"])
+	if raw.is_empty(): return [null, false]
+	var good: bool = blob.get("sum", "") == _sum(raw)
+	var bytes := raw.decompress_dynamic(PACK_MAX_BYTES, FileAccess.COMPRESSION_GZIP)
+	if bytes.is_empty(): return [null, false]
+	return [bytes_to_var(bytes), good]
+
+
+## Value of one packed blob (null when damaged); anything that is not a blob is returned as is.
 static func _unpacked(blob: Variant, verified := {}, name := "") -> Variant:
 	if not blob is Dictionary or not blob.has("packed"):
 		return blob
-	if not blob.get("z") is String: return null
-	var raw := Marshalls.base64_to_raw(blob["z"])
-	if raw.is_empty(): return null
-	verified[name] = blob.get("sum", "") == _sum(raw)
-	var bytes := raw.decompress_dynamic(PACK_MAX_BYTES, FileAccess.COMPRESSION_GZIP)
-	if bytes.is_empty(): return null
-	return bytes_to_var(bytes)
+	var holder := {"v": blob}
+	var wrapper := {"schedule": blob} if name == "" else {name: blob}
+	var ok := {}
+	var parts: Array = blob["parts"] if blob.get("parts") is Array else [blob]
+	var merged: Variant = null
+	var good := true
+	for part in parts:
+		if not part is Dictionary: return null
+		var r := _decode_part(part)
+		if r[0] == null: return null
+		good = good and r[1]
+		if merged == null: merged = r[0]
+		elif merged is Dictionary and r[0] is Dictionary: merged.merge(r[0])
+		else: return null
+	verified[name] = good
+	return merged
+
+
+## Every packed blob found in `data`, as [parent, key, blob, name].
+static func _jobs(data: Dictionary) -> Array:
+	var jobs := []
+	if data.get("schedule") is Dictionary:
+		jobs.append([data, "schedule", data["schedule"], "schedule"])
+	if data.get("ledger") is Dictionary and data["ledger"].get("journal") is Dictionary:
+		jobs.append([data["ledger"], "journal", data["ledger"]["journal"], "journal"])
+	if data.get("ecommerce") is Dictionary and data["ecommerce"].get("orders") is Dictionary and data["ecommerce"]["orders"].has("packed"):
+		jobs.append([data["ecommerce"], "orders", data["ecommerce"]["orders"], "orders"])
+	if data.get("company_contexts") is Dictionary:
+		for id in data["company_contexts"]:
+			var view = data["company_contexts"][id]
+			if not view is Dictionary or not view.get("states") is Dictionary: continue
+			var eco = view["states"].get("ecommerce")
+			if eco is Dictionary and eco.get("orders") is Dictionary and eco["orders"].has("packed"):
+				jobs.append([eco, "orders", eco["orders"], "orders:" + str(id)])
+	return jobs
+
+
+## In place, on freshly parsed data. Returns false when a blob is damaged. `verified[name]` records that every
+## checksum matched what the game wrote.
+static func unpack(data: Dictionary, verified := {}) -> bool:
+	var jobs := _jobs(data)
+	var work := []   # one entry per blob part, decoded on the thread pool
+	for job in jobs:
+		var blob = job[2]
+		if not blob.has("packed"):
+			continue
+		var parts = blob.get("parts")
+		if parts != null:
+			if not parts is Array or parts.is_empty(): return false
+			for part in parts:
+				if not part is Dictionary: return false
+				work.append(part)
+		else:
+			work.append(blob)
+	var results := []
+	results.resize(work.size())
+	if work.size() > 1 and OS.has_feature("threads"):
+		var task: int = WorkerThreadPool.add_group_task(func(i: int) -> void: results[i] = _decode_part(work[i]), work.size(), -1, true)
+		WorkerThreadPool.wait_for_group_task_completion(task)
+	else:
+		for i in work.size():
+			results[i] = _decode_part(work[i])
+	var at := 0
+	for job in jobs:
+		var blob = job[2]
+		if not blob.has("packed"):
+			continue
+		var count: int = blob["parts"].size() if blob.get("parts") is Array else 1
+		var value: Variant = null
+		var good := true
+		for i in count:
+			var r: Array = results[at + i]
+			good = good and r[1]
+			if r[0] == null: return false
+			if i == 0:
+				value = r[0]
+			elif value is Dictionary and r[0] is Dictionary:
+				value.merge(r[0])
+			else:
+				return false
+		at += count
+		verified[job[3]] = good
+		var expected_array: bool = job[3] in ["schedule", "journal"]
+		if expected_array and not value is Array: return false
+		if not expected_array and not value is Dictionary: return false
+		job[0][job[1]] = value
+	return true
 
 
 ## Copy of `data` with its big collections packed (live state is never modified).
@@ -67,32 +173,6 @@ static func pack(data: Dictionary) -> Dictionary:
 				contexts[id] = view
 		lean["company_contexts"] = contexts
 	return lean
-
-
-## In place, on freshly parsed data. Returns false when a blob is damaged.
-static func unpack(data: Dictionary, verified := {}) -> bool:
-	if data.get("schedule") is Dictionary:
-		var schedule = _unpacked(data["schedule"], verified, "schedule")
-		if not schedule is Array: return false
-		data["schedule"] = schedule
-	if data.get("ledger") is Dictionary and data["ledger"].get("journal") is Dictionary:
-		var journal = _unpacked(data["ledger"]["journal"], verified, "journal")
-		if not journal is Array: return false
-		data["ledger"]["journal"] = journal
-	if data.get("ecommerce") is Dictionary and data["ecommerce"].get("orders") is Dictionary and data["ecommerce"]["orders"].has("packed"):
-		var orders = _unpacked(data["ecommerce"]["orders"], verified, "orders")
-		if not orders is Dictionary: return false
-		data["ecommerce"]["orders"] = orders
-	if data.get("company_contexts") is Dictionary:
-		for id in data["company_contexts"]:
-			var view = data["company_contexts"][id]
-			if not view is Dictionary or not view.get("states") is Dictionary: continue
-			var eco = view["states"].get("ecommerce")
-			if eco is Dictionary and eco.get("orders") is Dictionary and eco["orders"].has("packed"):
-				var orders = _unpacked(eco["orders"], verified, "orders:" + str(id))
-				if not orders is Dictionary: return false
-				eco["orders"] = orders
-	return true
 
 
 static func _truthy(v) -> bool:
