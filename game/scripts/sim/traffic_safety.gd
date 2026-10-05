@@ -25,11 +25,41 @@ static func crosswalk_rects(district: String) -> Array:
 				rects.append(Rect2(float(r[0])*16, float(r[1])*16, float(r[2])*16, float(r[3])*16))
 		_crosswalks[district] = rects
 	return _crosswalks[district]
+static var _roads := {}
+## Carriageway rectangles (road and crosswalk tiles): only a pedestrian standing on them can be struck.
+static func road_rects(district: String) -> Array:
+	if not _roads.has(district):
+		var rects: Array = []
+		for g in DataDB.districts.get(district, {}).get("ground", []):
+			var t := str(g["type"])
+			if t.begins_with("road") or t == "crosswalk_h":
+				var r: Array = g["rect"]
+				rects.append(Rect2(float(r[0])*16, float(r[1])*16, float(r[2])*16, float(r[3])*16))
+		_roads[district] = rects
+	return _roads[district]
+static func on_road(district: String, point: Vector2) -> bool:
+	for r in road_rects(district):
+		if r.has_point(point): return true
+	return false
 static func crossing(district: String, point: Vector2) -> bool:
 	for r in crosswalk_rects(district):
 		if r.has_point(point): return true
 	return false
-static func protected_crossing(district: String, point: Vector2) -> bool: return crossing(district, point) and green()
+## A pedestrian already on a crosswalk when it turns red keeps right of way on it for a short clearance
+## window, so a light change mid-crossing never turns a lawful crossing into a hit.
+static var _clearance := {"key": "", "since": -1}
+static func protected_crossing(district: String, point: Vector2) -> bool:
+	var rects := crosswalk_rects(district)
+	for i in rects.size():
+		if not (rects[i] as Rect2).has_point(point): continue
+		var key := "%s:%d" % [district, i]
+		if green():
+			_clearance = {"key": key, "since": Clock.now()}
+			return true
+		var since := Clock.now() - int(_clearance["since"])
+		return _clearance["key"] == key and since >= 0 and since <= int(cfg().get("crossing_clearance_minutes", 4))
+	_clearance = {"key": "", "since": -1}
+	return false
 static func speed_multiplier() -> float:
 	if not GameState.has_game(): return 1.0
 	var s := S()

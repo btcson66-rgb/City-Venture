@@ -12,6 +12,21 @@ func test_green_crosswalk_never_hits_and_red_player_fault() -> void:
 	runner.check(not TrafficSafety.hit(85,"civic_center",Vector2(560,424))["ok"],"no green injury")
 	runner.check(hit()["ok"],"red actual collision")
 	runner.check(not TrafficSafety.latest()["counterparty_fault"],"red pedestrian fault")
+func test_light_change_mid_crossing_keeps_clearance_only_briefly() -> void:
+	GameState.data["clock"]["minutes"] = 18*40+7
+	runner.check(TrafficSafety.protected_crossing("civic_center",Vector2(560,424)),"entered on green")
+	GameState.data["clock"]["minutes"] = 18*40+9
+	runner.check(TrafficSafety.protected_crossing("civic_center",Vector2(560,430)),"red mid-crossing keeps clearance")
+	runner.check(not TrafficSafety.hit(70,"civic_center",Vector2(560,430))["ok"],"no injury during clearance")
+	GameState.data["clock"]["minutes"] = 18*40+14
+	runner.check(not TrafficSafety.protected_crossing("civic_center",Vector2(560,430)),"loitering on red loses clearance")
+	runner.check(not TrafficSafety.protected_crossing("civic_center",Vector2(9000,9000)),"off crosswalk")
+	GameState.data["clock"]["minutes"] = 18*41+9
+	runner.check(not TrafficSafety.protected_crossing("civic_center",Vector2(560,424)),"stepping on during red is unprotected")
+func test_only_the_carriageway_can_be_struck() -> void:
+	runner.check(TrafficSafety.on_road("startup_hub",Vector2(100,470)),"road lane")
+	runner.check(TrafficSafety.on_road("old_town",Vector2(100,470)),"cobbled road variant")
+	runner.check(not TrafficSafety.on_road("startup_hub",Vector2(100,486)),"kerb beside the lane is safe")
 func test_minor_medicine_actual_fee_and_recovery() -> void:
 	hit(30)
 	Clock.advance(3)

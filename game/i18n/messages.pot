@@ -993,11 +993,11 @@ msgstr ""
 msgid "(Order {order} — {product}, {price})"
 msgstr ""
 
-#: autoload/save_system.gd:412
+#: autoload/save_system.gd:434
 msgid "*.cvsave ; "
 msgstr ""
 
-#: autoload/save_system.gd:434
+#: autoload/save_system.gd:456
 msgid "*.cvsave,*.json ; "
 msgstr ""
 
@@ -1169,7 +1169,7 @@ msgstr ""
 msgid "A Van Driver (People tab) takes one run each workday from 9:00. Your own ecommerce parcels can go out in the van too: choose \"Own van\" at the packing table."
 msgstr ""
 
-#: autoload/save_system.gd:128 autoload/save_system.gd:380 scripts/ui/modals/save_list_modal.gd:63
+#: autoload/save_system.gd:133 autoload/save_system.gd:400 scripts/ui/modals/save_list_modal.gd:63
 msgid "A backup could not be created. Your existing save is unchanged."
 msgstr ""
 
@@ -1235,6 +1235,10 @@ msgstr ""
 
 #: data/events/media_pr.json
 msgid "A campaign message upset its audience. Repair it at a cost or keep spending with weaker creative."
+msgstr ""
+
+#: scripts/world/car.gd:114
+msgid "A car brushed past you. Cross at a green crosswalk."
 msgstr ""
 
 #: data/story/achievements.json
@@ -2473,7 +2477,7 @@ msgstr ""
 msgid "All %d stops planned  ·  round trip %.1f km"
 msgstr ""
 
-#: autoload/save_system.gd:449
+#: autoload/save_system.gd:471
 msgid "All Files (*)"
 msgstr ""
 
@@ -4949,7 +4953,7 @@ msgstr ""
 msgid "Can't work the counter: %s."
 msgstr ""
 
-#: autoload/save_system.gd:449 autoload/sound.gd:286 scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57
+#: autoload/save_system.gd:471 autoload/sound.gd:286 scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57
 msgid "Cancel"
 msgstr ""
 
@@ -5689,7 +5693,7 @@ msgstr ""
 msgid "Choose a running group business and a valid media budget."
 msgstr ""
 
-#: autoload/save_system.gd:377 scripts/ui/modals/save_list_modal.gd:22
+#: autoload/save_system.gd:397 scripts/ui/modals/save_list_modal.gd:22
 msgid "Choose a save slot to replace. Its existing save will be backed up."
 msgstr ""
 
@@ -6113,7 +6117,7 @@ msgstr ""
 msgid "City Marathon Weekend"
 msgstr ""
 
-#: autoload/save_system.gd:412 autoload/save_system.gd:434
+#: autoload/save_system.gd:434 autoload/save_system.gd:456
 msgid "City Venture save"
 msgstr ""
 
@@ -6169,7 +6173,7 @@ msgstr ""
 msgid "City update: %s"
 msgstr ""
 
-#: autoload/save_system.gd:396
+#: autoload/save_system.gd:416
 msgid "CityVenture_%s_%04d-%02d-%02d.cvsave"
 msgstr ""
 
@@ -7501,7 +7505,7 @@ msgstr ""
 msgid "Counter: ask for {counter_price}"
 msgstr ""
 
-#: scripts/sim/traffic_safety.gd:160 scripts/sim/traffic_safety.gd:162
+#: scripts/sim/traffic_safety.gd:190 scripts/sim/traffic_safety.gd:192
 msgid "Counterparty medical settlement: %s"
 msgstr ""
 
@@ -8725,7 +8729,7 @@ msgstr ""
 msgid "Directional evidence; collect a larger sample"
 msgstr ""
 
-#: autoload/save_system.gd:449
+#: autoload/save_system.gd:471
 msgid "Directories & Files:"
 msgstr ""
 
@@ -8737,7 +8741,7 @@ msgstr ""
 msgid "Dirty — clean before seating"
 msgstr ""
 
-#: scripts/sim/traffic_safety.gd:110
+#: scripts/sim/traffic_safety.gd:140
 msgid "Discharged early after %d days: a chapter, contract or job deadline would have passed during a longer stay."
 msgstr ""
 
@@ -9933,7 +9937,7 @@ msgstr ""
 msgid "Export duty %s: %s"
 msgstr ""
 
-#: autoload/save_system.gd:448 scripts/ui/modals/pause_menu.gd:42 scripts/ui/modals/save_list_modal.gd:25
+#: autoload/save_system.gd:470 scripts/ui/modals/pause_menu.gd:42 scripts/ui/modals/save_list_modal.gd:25
 msgid "Export save"
 msgstr ""
 
@@ -10165,7 +10169,7 @@ msgstr ""
 msgid "Fast: +30% work output."
 msgstr ""
 
-#: autoload/save_system.gd:449
+#: autoload/save_system.gd:471
 msgid "Favorites:"
 msgstr ""
 
@@ -10241,11 +10245,11 @@ msgstr ""
 msgid "File yourself · %d minutes · %.0f%% form-error chance"
 msgstr ""
 
-#: autoload/save_system.gd:449
+#: autoload/save_system.gd:471
 msgid "File:"
 msgstr ""
 
-#: autoload/save_system.gd:464
+#: autoload/save_system.gd:486
 msgid "FileReader"
 msgstr ""
 
@@ -11961,7 +11965,7 @@ msgstr ""
 msgid "Health inspection"
 msgstr ""
 
-#: scripts/sim/traffic_safety.gd:89
+#: scripts/sim/traffic_safety.gd:119
 msgid "Health insurance claim: %s"
 msgstr ""
 
@@ -11973,7 +11977,7 @@ msgstr ""
 msgid "Health insurance: %s / 30 days"
 msgstr ""
 
-#: scripts/sim/traffic_safety.gd:78
+#: scripts/sim/traffic_safety.gd:108
 msgid "Health policy expired: add cash and buy a new policy."
 msgstr ""
 
@@ -12773,7 +12777,7 @@ msgstr ""
 msgid "Import prices ease as the ports catch up."
 msgstr ""
 
-#: autoload/save_system.gd:448 scripts/ui/modals/pause_menu.gd:45 scripts/ui/modals/save_list_modal.gd:13 scripts/ui/modals/save_list_modal.gd:29
+#: autoload/save_system.gd:470 scripts/ui/modals/pause_menu.gd:45 scripts/ui/modals/save_list_modal.gd:13 scripts/ui/modals/save_list_modal.gd:29
 msgid "Import save"
 msgstr ""
 
@@ -15873,7 +15877,7 @@ msgstr ""
 msgid "Medical care"
 msgstr ""
 
-#: scripts/sim/traffic_safety.gd:87
+#: scripts/sim/traffic_safety.gd:117
 msgid "Medical treatment: %s"
 msgstr ""
 
@@ -18185,7 +18189,7 @@ msgstr ""
 msgid "Only wholly founder-owned companies can enter this holding group. Other shareholders keep their rights."
 msgstr ""
 
-#: autoload/save_system.gd:449 scripts/ui/hotel_ui.gd:273 scripts/ui/modals/city_map_modal.gd:132 scripts/ui/modals/city_map_modal.gd:179
+#: autoload/save_system.gd:471 scripts/ui/hotel_ui.gd:273 scripts/ui/modals/city_map_modal.gd:132 scripts/ui/modals/city_map_modal.gd:179
 msgid "Open"
 msgstr ""
 
@@ -19337,7 +19341,7 @@ msgstr ""
 msgid "Paid from"
 msgstr ""
 
-#: scripts/sim/traffic_safety.gd:168 scripts/sim/traffic_safety.gd:91
+#: scripts/sim/traffic_safety.gd:121 scripts/sim/traffic_safety.gd:198
 msgid "Paid medical bill: %s"
 msgstr ""
 
@@ -19493,7 +19497,7 @@ msgstr ""
 msgid "Patel"
 msgstr ""
 
-#: autoload/save_system.gd:449
+#: autoload/save_system.gd:471
 msgid "Path:"
 msgstr ""
 
@@ -19873,7 +19877,7 @@ msgstr ""
 msgid "Personal health insurance"
 msgstr ""
 
-#: scripts/sim/traffic_safety.gd:69
+#: scripts/sim/traffic_safety.gd:99
 msgid "Personal health premium: %s / 30 days"
 msgstr ""
 
@@ -20097,7 +20101,7 @@ msgstr ""
 msgid "Play this week's challenge"
 msgstr ""
 
-#: autoload/save_system.gd:394
+#: autoload/save_system.gd:414
 msgid "Player"
 msgstr ""
 
@@ -21453,7 +21457,7 @@ msgstr ""
 msgid "Recent transactions"
 msgstr ""
 
-#: autoload/save_system.gd:449
+#: autoload/save_system.gd:471
 msgid "Recent:"
 msgstr ""
 
@@ -23405,7 +23409,7 @@ msgstr ""
 msgid "Saturday and Sunday 10:00–18:00 · %s/weekend · reserve at least one day ahead · capacity %d units"
 msgstr ""
 
-#: autoload/save_system.gd:449 scripts/ui/phone_ui.gd:164
+#: autoload/save_system.gd:471 scripts/ui/phone_ui.gd:164
 msgid "Save"
 msgstr ""
 
@@ -23453,7 +23457,7 @@ msgstr ""
 msgid "Save enough company cash for the vehicle and first insurance payment."
 msgstr ""
 
-#: autoload/save_system.gd:418
+#: autoload/save_system.gd:440
 msgid "Save exported. Keep this file outside your browser."
 msgstr ""
 
@@ -23461,7 +23465,7 @@ msgstr ""
 msgid "Save game"
 msgstr ""
 
-#: autoload/save_system.gd:498
+#: autoload/save_system.gd:521
 msgid "Save imported. Continue where you left off."
 msgstr ""
 
@@ -23633,7 +23637,7 @@ msgstr ""
 msgid "Save this life and start the selected next life"
 msgstr ""
 
-#: autoload/save_system.gd:503
+#: autoload/save_system.gd:526
 msgid "Save transfer"
 msgstr ""
 
@@ -26745,7 +26749,7 @@ msgstr ""
 msgid "The factory quotation checklist now has conflicting notes. Rita Hale wants a version that other people can check. How do you resolve the conflict?"
 msgstr ""
 
-#: autoload/save_system.gd:470
+#: autoload/save_system.gd:493
 msgid "The file could not be read. Your existing save is unchanged."
 msgstr ""
 
@@ -27145,7 +27149,7 @@ msgstr ""
 msgid "The same seed, rules and choices reproduce the simulation. Daily market previews do not consume the event RNG. Weekly challenges lock standard rules and save results locally."
 msgstr ""
 
-#: autoload/save_system.gd:204 autoload/save_system.gd:384
+#: autoload/save_system.gd:209 autoload/save_system.gd:404
 msgid "The save could not be written. Your existing save is unchanged."
 msgstr ""
 
@@ -27625,7 +27629,7 @@ msgstr ""
 msgid "This is a sightseeing-only location right now."
 msgstr ""
 
-#: autoload/save_system.gd:378 scripts/save_codec.gd:197
+#: autoload/save_system.gd:398 scripts/save_codec.gd:197
 msgid "This is not a City Venture save."
 msgstr ""
 
@@ -28289,11 +28293,11 @@ msgstr ""
 msgid "Traded %s %s · internal sales %s · saved versus outside %s"
 msgstr ""
 
-#: scripts/sim/traffic_safety.gd:154
+#: scripts/sim/traffic_safety.gd:184
 msgid "Traffic claim filed. Return after seven days to collect the verified medical reimbursement."
 msgstr ""
 
-#: scripts/sim/traffic_safety.gd:52
+#: scripts/sim/traffic_safety.gd:82
 msgid "Traffic collision: %s. Visit the clinic or pharmacy."
 msgstr ""
 
@@ -28369,7 +28373,7 @@ msgstr ""
 msgid "Treatment / medicine: %s"
 msgstr ""
 
-#: scripts/sim/traffic_safety.gd:111 scripts/ui/modals/traffic_modal.gd:51
+#: scripts/sim/traffic_safety.gd:141 scripts/ui/modals/traffic_modal.gd:51
 msgid "Treatment complete: %d hospital days; medical bill %s; health claim %s."
 msgstr ""
 

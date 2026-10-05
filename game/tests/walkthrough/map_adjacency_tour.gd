@@ -74,7 +74,7 @@ func run() -> void:
 ## Since #115 cars hit pedestrians outside a green crosswalk: when the way to an exit crosses a traffic lane,
 ## walk to the nearest crosswalk, wait for green and cross there, as a careful player does.
 func _cross_road_safely(world: District, goal: Vector2) -> void:
-	var p := bot.player().global_position
+	var p: Vector2 = bot.player().global_position
 	var lanes: Array = world.def.get("traffic", []).map(func(l): return float(l["y"]))
 	if not lanes.any(func(y): return (y - p.y) * (y - goal.y) < 0.0):
 		return
@@ -88,6 +88,8 @@ func _cross_road_safely(world: District, goal: Vector2) -> void:
 	var x := best.get_center().x
 	var above := best.position.y - 6.0
 	var below := best.end.y + 6.0
+	# Stay on this side's pavement while heading to the crossing, then step up to its kerb.
+	await bot.walk_to(Vector2(x, p.y), 5.0, 60.0)
 	await bot.walk_to(Vector2(x, below if p.y > best.get_center().y else above), 5.0, 60.0)
 	await bot.until(func(): return TrafficSafety.green(), 30.0)
 	await bot.walk_to(Vector2(x, above if p.y > best.get_center().y else below), 5.0, 60.0)

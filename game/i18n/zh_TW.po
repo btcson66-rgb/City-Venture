@@ -994,11 +994,11 @@ msgstr "（訂單 {order}——{product}）"
 msgid "(Order {order} — {product}, {price})"
 msgstr "（訂單 {order}——{product}，{price}）"
 
-#: autoload/save_system.gd:412
+#: autoload/save_system.gd:434
 msgid "*.cvsave ; "
 msgstr "*.cvsave ; "
 
-#: autoload/save_system.gd:434
+#: autoload/save_system.gd:456
 msgid "*.cvsave,*.json ; "
 msgstr "*.cvsave,*.json ; "
 
@@ -1170,7 +1170,7 @@ msgstr "日票（$15）今天可以使用共享座位和電腦。常來的話，
 msgid "A Van Driver (People tab) takes one run each workday from 9:00. Your own ecommerce parcels can go out in the van too: choose \"Own van\" at the packing table."
 msgstr "貨車司機（人員分頁）每個工作日 9:00 起接一趟外送。你自己的電商包裹也能用貨車送：在打包桌選「自己的貨車」。"
 
-#: autoload/save_system.gd:128 autoload/save_system.gd:380 scripts/ui/modals/save_list_modal.gd:63
+#: autoload/save_system.gd:133 autoload/save_system.gd:400 scripts/ui/modals/save_list_modal.gd:63
 msgid "A backup could not be created. Your existing save is unchanged."
 msgstr "無法建立備份。原有存檔仍完整保留。"
 
@@ -1237,6 +1237,10 @@ msgstr "已有一場募資正在進行，請等待結果。"
 #: data/events/media_pr.json
 msgid "A campaign message upset its audience. Repair it at a cost or keep spending with weaker creative."
 msgstr "活動訊息引起客群不滿。可付費修復，或以較差的創意繼續投放。"
+
+#: scripts/world/car.gd:114
+msgid "A car brushed past you. Cross at a green crosswalk."
+msgstr "有車從你身邊擦過。請走綠燈斑馬線。"
 
 #: data/story/achievements.json
 msgid "A change of owner"
@@ -2474,7 +2478,7 @@ msgstr "Alex Chen"
 msgid "All %d stops planned  ·  round trip %.1f km"
 msgstr "%d 個停靠點都排好了  ·  來回共 %.1f 公里"
 
-#: autoload/save_system.gd:449
+#: autoload/save_system.gd:471
 msgid "All Files (*)"
 msgstr "所有檔案 (*)"
 
@@ -4950,7 +4954,7 @@ msgstr "現在不能上班：%s。"
 msgid "Can't work the counter: %s."
 msgstr "現在不能站吧台：%s。"
 
-#: autoload/save_system.gd:449 autoload/sound.gd:286 scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57
+#: autoload/save_system.gd:471 autoload/sound.gd:286 scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57
 msgid "Cancel"
 msgstr "取消"
 
@@ -5690,7 +5694,7 @@ msgstr "請選擇進行中的活動。"
 msgid "Choose a running group business and a valid media budget."
 msgstr "請選擇營運中的集團業務及有效媒體預算。"
 
-#: autoload/save_system.gd:377 scripts/ui/modals/save_list_modal.gd:22
+#: autoload/save_system.gd:397 scripts/ui/modals/save_list_modal.gd:22
 msgid "Choose a save slot to replace. Its existing save will be backed up."
 msgstr "選擇要覆蓋的存檔槽。原有存檔會先備份。"
 
@@ -6114,7 +6118,7 @@ msgstr "市政廳：你的食品處理執照核准了。"
 msgid "City Marathon Weekend"
 msgstr "城市馬拉松週末"
 
-#: autoload/save_system.gd:412 autoload/save_system.gd:434
+#: autoload/save_system.gd:434 autoload/save_system.gd:456
 msgid "City Venture save"
 msgstr "City Venture 存檔"
 
@@ -6170,7 +6174,7 @@ msgstr "城市社交活動：%s"
 msgid "City update: %s"
 msgstr "城市動態：%s"
 
-#: autoload/save_system.gd:396
+#: autoload/save_system.gd:416
 msgid "CityVenture_%s_%04d-%02d-%02d.cvsave"
 msgstr "CityVenture_%s_%04d-%02d-%02d.cvsave"
 
@@ -7502,7 +7506,7 @@ msgstr "還價：每件 %s，票期 %d 天%s"
 msgid "Counter: ask for {counter_price}"
 msgstr "還價：開價 {counter_price}"
 
-#: scripts/sim/traffic_safety.gd:160 scripts/sim/traffic_safety.gd:162
+#: scripts/sim/traffic_safety.gd:190 scripts/sim/traffic_safety.gd:192
 msgid "Counterparty medical settlement: %s"
 msgstr "肇事方醫療補償：%s"
 
@@ -8726,7 +8730,7 @@ msgstr "直訂：沒有佣金，量較少。OTA「%s」：每晚抽 %d%% 佣金�
 msgid "Directional evidence; collect a larger sample"
 msgstr "僅為方向性證據，需要更多樣本"
 
-#: autoload/save_system.gd:449
+#: autoload/save_system.gd:471
 msgid "Directories & Files:"
 msgstr "資料夾與檔案："
 
@@ -8738,7 +8742,7 @@ msgstr "沒清潔的桌子不能讓新客人入座，等候的客人會失去耐
 msgid "Dirty — clean before seating"
 msgstr "待清潔，清潔後才能入座"
 
-#: scripts/sim/traffic_safety.gd:110
+#: scripts/sim/traffic_safety.gd:140
 msgid "Discharged early after %d days: a chapter, contract or job deadline would have passed during a longer stay."
 msgstr "提前出院（住院 %d 天）：更久的住院會讓章節、合約或任務期限過期。"
 
@@ -9934,7 +9938,7 @@ msgstr "博覽會申辦"
 msgid "Export duty %s: %s"
 msgstr "出口訂單 %s 關稅：%s"
 
-#: autoload/save_system.gd:448 scripts/ui/modals/pause_menu.gd:42 scripts/ui/modals/save_list_modal.gd:25
+#: autoload/save_system.gd:470 scripts/ui/modals/pause_menu.gd:42 scripts/ui/modals/save_list_modal.gd:25
 msgid "Export save"
 msgstr "匯出存檔"
 
@@ -10166,7 +10170,7 @@ msgstr "快轉到開門"
 msgid "Fast: +30% work output."
 msgstr "手腳快：工作產出 +30%。"
 
-#: autoload/save_system.gd:449
+#: autoload/save_system.gd:471
 msgid "Favorites:"
 msgstr "我的最愛："
 
@@ -10242,11 +10246,11 @@ msgstr "申請豁免"
 msgid "File yourself · %d minutes · %.0f%% form-error chance"
 msgstr "自行申報・%d 分鐘・表單錯誤率 %.0f%%"
 
-#: autoload/save_system.gd:449
+#: autoload/save_system.gd:471
 msgid "File:"
 msgstr "檔案："
 
-#: autoload/save_system.gd:464
+#: autoload/save_system.gd:486
 msgid "FileReader"
 msgstr "FileReader"
 
@@ -11962,7 +11966,7 @@ msgstr "先跟你說一聲。工廠剛漲價了。"
 msgid "Health inspection"
 msgstr "衛生檢查"
 
-#: scripts/sim/traffic_safety.gd:89
+#: scripts/sim/traffic_safety.gd:119
 msgid "Health insurance claim: %s"
 msgstr "健康保險理賠：%s"
 
@@ -11974,7 +11978,7 @@ msgstr "健康保單須於碰撞前有效。理賠僅支付已發生醫療費，
 msgid "Health insurance: %s / 30 days"
 msgstr "健康保險：%s／30 天"
 
-#: scripts/sim/traffic_safety.gd:78
+#: scripts/sim/traffic_safety.gd:108
 msgid "Health policy expired: add cash and buy a new policy."
 msgstr "健康保單已到期：補足現金後重新投保。"
 
@@ -12774,7 +12778,7 @@ msgstr "進口執照要等監管浪潮才會實施。"
 msgid "Import prices ease as the ports catch up."
 msgstr "港口趕上進度，進口價格回穩。"
 
-#: autoload/save_system.gd:448 scripts/ui/modals/pause_menu.gd:45 scripts/ui/modals/save_list_modal.gd:13 scripts/ui/modals/save_list_modal.gd:29
+#: autoload/save_system.gd:470 scripts/ui/modals/pause_menu.gd:45 scripts/ui/modals/save_list_modal.gd:13 scripts/ui/modals/save_list_modal.gd:29
 msgid "Import save"
 msgstr "匯入存檔"
 
@@ -15874,7 +15878,7 @@ msgstr "醫療帳款或理賠待處理"
 msgid "Medical care"
 msgstr "醫療費用"
 
-#: scripts/sim/traffic_safety.gd:87
+#: scripts/sim/traffic_safety.gd:117
 msgid "Medical treatment: %s"
 msgstr "醫療費用：%s"
 
@@ -18186,7 +18190,7 @@ msgstr "只有登記過的公司才能持有進口執照。"
 msgid "Only wholly founder-owned companies can enter this holding group. Other shareholders keep their rights."
 msgstr "只有創辦人全資持有的公司才能移入集團，其他股東的權益不會被移轉。"
 
-#: autoload/save_system.gd:449 scripts/ui/hotel_ui.gd:273 scripts/ui/modals/city_map_modal.gd:132 scripts/ui/modals/city_map_modal.gd:179
+#: autoload/save_system.gd:471 scripts/ui/hotel_ui.gd:273 scripts/ui/modals/city_map_modal.gd:132 scripts/ui/modals/city_map_modal.gd:179
 msgid "Open"
 msgstr "開啟"
 
@@ -19338,7 +19342,7 @@ msgstr "提前付款：%s（折扣 %s）。"
 msgid "Paid from"
 msgstr "付款帳戶"
 
-#: scripts/sim/traffic_safety.gd:168 scripts/sim/traffic_safety.gd:91
+#: scripts/sim/traffic_safety.gd:121 scripts/sim/traffic_safety.gd:198
 msgid "Paid medical bill: %s"
 msgstr "支付醫療帳款：%s"
 
@@ -19494,7 +19498,7 @@ msgstr "糕點"
 msgid "Patel"
 msgstr "Patel"
 
-#: autoload/save_system.gd:449
+#: autoload/save_system.gd:471
 msgid "Path:"
 msgstr "路徑："
 
@@ -19874,7 +19878,7 @@ msgstr "個人禮物：%s"
 msgid "Personal health insurance"
 msgstr "個人健康保險"
 
-#: scripts/sim/traffic_safety.gd:69
+#: scripts/sim/traffic_safety.gd:99
 msgid "Personal health premium: %s / 30 days"
 msgstr "個人健康保險保費：%s／30 天"
 
@@ -20098,7 +20102,7 @@ msgstr "平台手續費"
 msgid "Play this week's challenge"
 msgstr "遊玩本週挑戰"
 
-#: autoload/save_system.gd:394
+#: autoload/save_system.gd:414
 msgid "Player"
 msgstr "玩家"
 
@@ -21454,7 +21458,7 @@ msgstr "最近的外送單"
 msgid "Recent transactions"
 msgstr "最近交易"
 
-#: autoload/save_system.gd:449
+#: autoload/save_system.gd:471
 msgid "Recent:"
 msgstr "最近使用："
 
@@ -23406,7 +23410,7 @@ msgstr "週六"
 msgid "Saturday and Sunday 10:00–18:00 · %s/weekend · reserve at least one day ahead · capacity %d units"
 msgstr "週六、週日 10:00–18:00 · 每週末 %s · 至少提前一天預約 · 最多 %d 件"
 
-#: autoload/save_system.gd:449 scripts/ui/phone_ui.gd:164
+#: autoload/save_system.gd:471 scripts/ui/phone_ui.gd:164
 msgid "Save"
 msgstr "存檔"
 
@@ -23454,7 +23458,7 @@ msgstr "先備妥足夠公司現金，再預約保養。"
 msgid "Save enough company cash for the vehicle and first insurance payment."
 msgstr "先備妥購車與首期保險所需的公司現金。"
 
-#: autoload/save_system.gd:418
+#: autoload/save_system.gd:440
 msgid "Save exported. Keep this file outside your browser."
 msgstr "存檔已匯出。請把檔案保存在瀏覽器以外的地方。"
 
@@ -23462,7 +23466,7 @@ msgstr "存檔已匯出。請把檔案保存在瀏覽器以外的地方。"
 msgid "Save game"
 msgstr "儲存遊戲"
 
-#: autoload/save_system.gd:498
+#: autoload/save_system.gd:521
 msgid "Save imported. Continue where you left off."
 msgstr "存檔已匯入，可以接著玩。"
 
@@ -23634,7 +23638,7 @@ msgstr "請先備妥車輛保障升級保費。"
 msgid "Save this life and start the selected next life"
 msgstr "保存這一局，展開選好的新人生"
 
-#: autoload/save_system.gd:503
+#: autoload/save_system.gd:526
 msgid "Save transfer"
 msgstr "存檔匯入／匯出"
 
@@ -26746,7 +26750,7 @@ msgstr "工廠帳本和排程已更新。"
 msgid "The factory quotation checklist now has conflicting notes. Rita Hale wants a version that other people can check. How do you resolve the conflict?"
 msgstr "工廠報價核對表現在出現互相矛盾的紀錄。Rita Hale 希望其他人也能查核，該如何處理？"
 
-#: autoload/save_system.gd:470
+#: autoload/save_system.gd:493
 msgid "The file could not be read. Your existing save is unchanged."
 msgstr "無法讀取檔案。原有存檔仍完整保留。"
 
@@ -27146,7 +27150,7 @@ msgstr "這筆出售無法還清房貸，公司也付不起差額。請先籌措
 msgid "The same seed, rules and choices reproduce the simulation. Daily market previews do not consume the event RNG. Weekly challenges lock standard rules and save results locally."
 msgstr "相同種子、規則與選擇可重現模擬。查看每日市場不會改變事件隨機序列。每週挑戰固定標準規則，並在本機保存成績。"
 
-#: autoload/save_system.gd:204 autoload/save_system.gd:384
+#: autoload/save_system.gd:209 autoload/save_system.gd:404
 msgid "The save could not be written. Your existing save is unchanged."
 msgstr "無法寫入存檔。原有存檔仍完整保留。"
 
@@ -27626,7 +27630,7 @@ msgstr "這是已結束公司的合約。"
 msgid "This is a sightseeing-only location right now."
 msgstr "這裡目前只能參觀。"
 
-#: autoload/save_system.gd:378 scripts/save_codec.gd:197
+#: autoload/save_system.gd:398 scripts/save_codec.gd:197
 msgid "This is not a City Venture save."
 msgstr "這不是 City Venture 的存檔。"
 
@@ -28290,11 +28294,11 @@ msgstr "承租保稅倉"
 msgid "Traded %s %s · internal sales %s · saved versus outside %s"
 msgstr "已交易 %s %s · 內部銷售 %s · 相對外購省下 %s"
 
-#: scripts/sim/traffic_safety.gd:154
+#: scripts/sim/traffic_safety.gd:184
 msgid "Traffic claim filed. Return after seven days to collect the verified medical reimbursement."
 msgstr "交通理賠已申請。七天後回來領取核定醫療補償。"
 
-#: scripts/sim/traffic_safety.gd:52
+#: scripts/sim/traffic_safety.gd:82
 msgid "Traffic collision: %s. Visit the clinic or pharmacy."
 msgstr "交通碰撞：%s。請至診所或藥局就醫。"
 
@@ -28370,7 +28374,7 @@ msgstr "Treatment"
 msgid "Treatment / medicine: %s"
 msgstr "治療／藥品：%s"
 
-#: scripts/sim/traffic_safety.gd:111 scripts/ui/modals/traffic_modal.gd:51
+#: scripts/sim/traffic_safety.gd:141 scripts/ui/modals/traffic_modal.gd:51
 msgid "Treatment complete: %d hospital days; medical bill %s; health claim %s."
 msgstr "治療完成：住院 %d 天；醫療費 %s；健康理賠 %s。"
 

@@ -106,11 +106,13 @@ func _process(delta: float) -> void:
 	if in_lane:
 		var margin := float(TrafficSafety.cfg()["contact_margin_px"])
 		var pp: Vector2 = player.global_position
-		if absf(pp.y - lane_y) < float(TrafficSafety.cfg()["contact_half_height_px"]) and pp.x >= minf(previous_center, current_center) - length / 2.0 - margin and pp.x <= maxf(previous_center, current_center) + length / 2.0 + margin and impact_speed > 0:
+		if absf(pp.y - lane_y) < float(TrafficSafety.cfg()["contact_half_height_px"]) and pp.x >= minf(previous_center, current_center) - length / 2.0 - margin and pp.x <= maxf(previous_center, current_center) + length / 2.0 + margin and impact_speed > 0 and TrafficSafety.on_road(scene.scene_id, pp):
 			var result := TrafficSafety.hit(impact_speed, scene.scene_id, pp)
 			if result["ok"]:
 				cur_speed = 0.0
-				UIRoot.open_modal.call_deferred(TrafficModal.new("accident"))
+				# A glancing brush leaves no injury or bill to act on, so it is a notice, not a blocking dialog.
+				if result["accident"]["severity"] == "glancing": UIRoot.toast.call_deferred(I18n.t("A car brushed past you. Cross at a green crosswalk."), "warn", "warning")
+				else: UIRoot.open_modal.call_deferred(TrafficModal.new("accident"))
 	var w: float = scene.size_px.x
 	if dir > 0 and position.x > w + 80:
 		position.x = -80 - _rng.randf() * 200
