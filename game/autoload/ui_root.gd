@@ -255,7 +255,7 @@ func open_pause() -> void:
 func _on_message(from_id: String, text: String) -> void:
 	if not _hud_wanted:
 		return
-	var n: String = I18n.t(DataDB.npc(from_id).get("name", from_id))
+	var n: String = PhoneMessages.contact_name(from_id)
 	text = I18n.t(text)
 	toast(("%s：%s" if I18n.is_zh() else "%s: %s") % [n, text.left(70) + ("…" if text.length() > 70 else "")], "msg", "mail")
 

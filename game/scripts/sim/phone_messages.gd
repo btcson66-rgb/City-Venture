@@ -229,6 +229,10 @@ static func contact_name(npc: String) -> String:
 			return I18n.t("Jobs Board")
 		"shoplane":
 			return I18n.t("ShopLane")
+	if Fundraising.cfg().get("investors", {}).has(npc):
+		return I18n.t(str(Fundraising.cfg()["investors"][npc].get("name", npc)))
+	if Fundraising.cfg().get("partners", {}).has(npc):
+		return Partnerships.name_of(npc)
 	return npc.replace("_", " ").capitalize()
 
 static func finish_call(npc: String, conversation: String) -> void:
