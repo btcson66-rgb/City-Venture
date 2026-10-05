@@ -3711,7 +3711,7 @@ func _city_future_season() -> void:
 	UIRoot.close_all()
 	var played_path: String=bot.out_dir.path_join("city_future_played.json")
 	bot.expect(SaveSystem.save_to(played_path),"played third-season save with real supplier receipts")
-	var validated: Dictionary=SaveSystem.validate_text(FileAccess.get_file_as_string(played_path))
+	var validated: Dictionary=SaveSystem.validate_text(SaveSystem.read_text(played_path))
 	bot.expect(validated["ok"],"actual played city save passes normal import validation")
 
 func _open_city_future() -> void:
@@ -3773,7 +3773,7 @@ func _city_portfolio_fixture() -> void:
 	bot.expect(Ledger.check_balanced(),"cross-company options and real payroll balance")
 	var played: String=bot.out_dir.path_join("city_portfolio_played.json")
 	bot.expect(SaveSystem.save_to(played),"save actual payroll and option ownership outcome")
-	bot.expect(SaveSystem.validate_text(FileAccess.get_file_as_string(played))["ok"],"normal played save validation")
+	bot.expect(SaveSystem.validate_text(SaveSystem.read_text(played))["ok"],"normal played save validation")
 
 func _trade_portfolio_fixture() -> void:
 	await bot.wait(4)

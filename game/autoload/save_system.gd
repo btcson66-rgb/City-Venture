@@ -87,7 +87,11 @@ const GZIP_ABOVE := 262144
 
 ## Text of a save file, whether it is plain JSON or gzip.
 static func read_text(path: String) -> String:
-	var bytes := FileAccess.get_file_as_bytes(path)
+	return decode_bytes(FileAccess.get_file_as_bytes(path))
+
+
+## Save text from raw file bytes (plain JSON or gzip); shared by file loads and the browser import.
+static func decode_bytes(bytes: PackedByteArray) -> String:
 	if bytes.size() > 2 and bytes[0] == 0x1f and bytes[1] == 0x8b:
 		var raw := bytes.decompress_dynamic(-1, FileAccess.COMPRESSION_GZIP)
 		return raw.get_string_from_utf8()
@@ -417,7 +421,9 @@ func show_export() -> void:
 	if OS.has_feature("web"):
 		var path := "user://export.cvsave"
 		if save_to(path):
-			JavaScriptBridge.download_buffer(FileAccess.get_file_as_bytes(path), export_filename(), "application/json")
+			var out := FileAccess.get_file_as_bytes(path)
+			var gz := out.size() > 2 and out[0] == 0x1f and out[1] == 0x8b
+			JavaScriptBridge.download_buffer(out, export_filename(), "application/octet-stream" if gz else "application/json")
 			exported.emit(export_filename())
 		else: _transfer_error(last_error)
 		return
@@ -480,12 +486,13 @@ func _web_import() -> void:
 	var reader = JavaScriptBridge.create_object("FileReader")
 	var callbacks: Array = []
 	var finish := JavaScriptBridge.create_callback(func(_args):
-		_receive_import(str(reader.result))
+		# Big saves are exported gzip-compressed: read bytes, never text, or the import gets mangled.
+		_receive_import(decode_bytes(JavaScriptBridge.js_buffer_to_packed_byte_array(reader.result)))
 		input.remove()
 		_release_callbacks.call_deferred(callbacks))
 	var failure := JavaScriptBridge.create_callback(func(_args): _transfer_error("The file could not be read. Your existing save is unchanged."); input.remove(); _release_callbacks.call_deferred(callbacks))
 	var selected := JavaScriptBridge.create_callback(func(_args):
-		if int(input.files.length) > 0: reader.readAsText(input.files.item(0))
+		if int(input.files.length) > 0: reader.readAsArrayBuffer(input.files.item(0))
 		else: input.remove(); _release_callbacks.call_deferred(callbacks))
 	var cancel := JavaScriptBridge.create_callback(func(_args): input.remove(); _release_callbacks.call_deferred(callbacks))
 	callbacks.append_array([finish, failure, selected, cancel])
