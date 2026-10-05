@@ -49,7 +49,7 @@ static func quote() -> Dictionary:
 		basis = "revenue"
 	return {"price": price, "basis": basis, "profit_year": profit_year, "revenue_year": revenue_year,
 		"enterprise": maxf(by_profit, by_revenue), "cash": cash, "stock": stock, "owed": owed, "debts": debts,
-		"founder_share": founder, "take": snappedf(price * founder, 0.01)}
+		"founder_share": founder, "take": Fundraising.founder_proceeds(price)}
 
 
 ## The numbers behind the `acquisition_offer` decision (placeholders in data/events/acquisition_offer.json).
@@ -120,7 +120,7 @@ static func decide(choice: String, ctx: Dictionary) -> Dictionary:
 ## `later_total` is the earn-out, paid a year later if revenue holds.
 static func _sell(now_total: float, later_total: float, ctx: Dictionary) -> void:
 	var founder := float(ctx.get("founder_share", 1.0))
-	var take := snappedf(now_total * founder, 0.01)
+	var take := Fundraising.founder_proceeds(now_total)
 	var carrying := HoldingGroups.basis(GameState.company_id())   # what the founder has put into the company
 	var gain := take - carrying
 	var lines: Array = [{"acct": "cash", "dr": take}, {"acct": "investments", "cr": carrying}]

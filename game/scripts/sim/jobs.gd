@@ -105,6 +105,7 @@ static func handle(kind: String, payload: Dictionary) -> void:
 	Ledger.post(job["entity"], I18n.t("Job payment: %s") % job["id"], [{"acct":"cash", "dr":amount}, {"acct":"accounts_receivable", "cr":amount}], {"type":"job", "id":job["id"], "segment":job["segment"]})
 	job["status"] = "paid"
 	Sim.cancel("job.pay", "id", job["id"])
+	Fundraising.on_job_paid(job)
 
 ## Daily sweep: offers past their expiry become "expired" (they can no longer be accepted, and drop out of lending math).
 static func expire_offers() -> int:

@@ -34,7 +34,7 @@ static func scores(values: Dictionary) -> Array:
 			var value := float(values.get(term["metric"], 0))
 			if not is_finite(value): value = 0
 			score += clampf(value / maxf(0.01, float(term["divisor"])), 0, float(term.get("cap", 1))) * float(term["weight"])
-		score = minf(100,score+float(CapitalMarket.cfg()["route_bonus"].get(CapitalMarket.S()["route"],{}).get(d["id"],0)))
+		score = minf(100,score+float(CapitalMarket.cfg()["route_bonus"].get(CapitalMarket.S()["route"],{}).get(d["id"],0))+Fundraising.legacy_bonus(str(d["id"])))
 		out.append({"id":d["id"], "score":score, "name":d["name"]})
 	out.sort_custom(func(a, b): return a["score"] > b["score"] if not is_equal_approx(a["score"], b["score"]) else str(a["id"]) < str(b["id"]))
 	return out

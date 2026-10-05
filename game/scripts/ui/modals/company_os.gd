@@ -231,6 +231,10 @@ func _tab_overview() -> void:
 		var civic := UIK.button(I18n.t("City future"), func(): UIRoot.open_modal(CityFutureModal.new()))
 		civic.name = "OpenCityFuture"
 		content.add_child(civic)
+	if GameState.company_id() != "" and GameState.flag("business_account_opened") and (Fundraising.chapter_rank() >= int(Fundraising.cfg()["min_chapter_angel"]) or Fundraising.has_state() or Fundraising.funded()):
+		var raise := UIK.button("Fundraising and partners", func(): UIRoot.open_modal(FundraisingModal.new()))
+		raise.name = "OpenFundraising"
+		content.add_child(raise)
 	if World.year() >= 9:
 		var capital := UIK.button("Ownership and public markets", func(): UIRoot.open_modal(CapitalMarketModal.new()))
 		capital.name = "OpenCapitalMarket"

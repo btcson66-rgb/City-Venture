@@ -19,6 +19,7 @@ static func all(include_services := false) -> Array:
 		{"id":"automotive", "sim_class":Automotive, "prefixes":["auto"], "slot":"business", "actions":{"automotive_open":Automotive.open_action}},
 		{"id":"international_trade", "sim_class":TradeIndustry, "prefixes":["trade"], "slot":"business", "actions":{"trade_open":TradeIndustry.open_action}},
 		{"id":"governance", "sim_class":Governance, "prefixes":["gov"], "slot":"business", "service":true, "actions":{"tax_filing":Governance.open_action}},
+		{"id":"fundraising", "sim_class":Fundraising, "prefixes":["fund"], "slot":"business", "service":true},
 		{"id":"personal_life", "sim_class":PersonalLife,"prefixes":["life"],"slot":"business","service":true,"global":true}] + _extra
 	return entries if include_services else entries.filter(func(e): return not e.get("service",false))
 

@@ -34,6 +34,14 @@ static func preflight(e: Dictionary, ctx: Dictionary) -> Dictionary:
 			var module := Industries.find(str(e.get("industry", "")))
 			if module.is_empty() or not module["sim_class"].has_method("crisis"):
 				return {"ok": false, "error": I18n.t("Unknown industry event.")}
+		"fund_board":
+			var deal := Fundraising.get_deal(str(e.get("deal", ctx.get("deal", ""))))
+			if deal.is_empty() or deal["status"] != "signed" or str(deal.get("board", {}).get("status", "")) != "open":
+				return {"ok": false, "error": I18n.t("This board review is already closed.")}
+		"fund_partner":
+			var item := Partnerships.get_item(str(e.get("id", ctx.get("partnership", ""))))
+			if item.is_empty() or item["status"] != "offered":
+				return {"ok": false, "error": I18n.t("This proposal is no longer open.")}
 	return {"ok": true}
 
 
@@ -153,20 +161,18 @@ static func apply(e: Dictionary, ctx: Dictionary) -> Dictionary:
 			Ecommerce.pause_all_ads()
 			GameState.data["living"]["reduced"] = true
 		"equity_investment":
-			# an investor buys `stake` of the company for `amount`: cash in, equity up, founder diluted
+			# an investor buys `stake` of the company for `amount`: cash in, equity up, founder diluted (one path with every other round)
 			var amt := _num(e.get("amount", 0), ctx)
-			var stake := float(e.get("stake", 0.1))
-			var who: String = e.get("investor", "investor")
 			if GameState.company_id() == "":
 				return {"ok": false, "error": "Investors buy shares in a registered company."}
-			Ledger.post(GameState.company_id(), EventEngine.fill(e.get("memo", "Equity investment"), ctx), [{"acct": "cash", "dr": amt}, {"acct": "equity", "cr": amt}], {"type": "investment"})
-			var cap: Dictionary = GameState.data.get("cap_table", {"founder": 1.0})
-			for k in cap:
-				cap[k] = float(cap[k]) * (1.0 - stake)
-			cap[who] = float(cap.get(who, 0.0)) + stake
-			GameState.data["cap_table"] = cap
-			GameState.set_flag("investor_" + who)
-			GameState.timeline(I18n.t("Sold %d%% of %s for %s.") % [int(round(stake * 100)), GameState.business_display_name(), Fmt.money0(amt)], "milestone")
+			return Fundraising.issue_equity(str(e.get("investor", "investor")), amt, float(e.get("stake", 0.1)), EventEngine.fill(e.get("memo", "Equity investment"), ctx), {})
+		"fund_intro":
+			var offered := str(e.get("investor", ctx.get("investor", "elena")))
+			return Fundraising.intro_offer(offered) if str(e.get("choice", "sign")) == "review" else Fundraising.intro_sign(offered)
+		"fund_board":
+			return Fundraising.board_decide(str(e.get("deal", ctx.get("deal", ""))), str(e.get("choice", "")))
+		"fund_partner":
+			return Partnerships.respond(str(e.get("id", ctx.get("partnership", ""))), str(e.get("choice", "")))
 		"open_escrow":
 			Rails.open_escrow()
 		"rail_choice":

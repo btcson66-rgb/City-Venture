@@ -63,7 +63,8 @@
     "marcus",
     "victor"
    ],
-   "detail": "Suppliers still require their stated MOQ and delivery dates. A referral is not a guaranteed sale."
+   "detail": "Suppliers still require their stated MOQ and delivery dates. A referral is not a guaranteed sale.",
+   "dress": "business"
   },
   "alumni": {
    "id": "alumni",
@@ -81,7 +82,8 @@
     "student_intern",
     "kai_morgan"
    ],
-   "detail": "A service job pays after delivery and its payment terms. Keep cash for the work and the wait."
+   "detail": "A service job pays after delivery and its payment terms. Keep cash for the work and the wait.",
+   "dress": "casual"
   },
   "port_festival": {
    "id": "port_festival",
@@ -99,7 +101,74 @@
     "lina",
     "priya_nair"
    ],
-   "detail": "Hotel channels charge commission; an OTA placement still needs a truthful page and paying guests."
+   "detail": "Hotel channels charge commission; an OTA placement still needs a truthful page and paying guests.",
+   "dress": "casual"
+  },
+  "founders_mixer": {
+   "id": "founders_mixer",
+   "title": "Founders' mixer",
+   "day": 10,
+   "hour": 17,
+   "end_hour": 20,
+   "minutes": 120,
+   "cost": 40,
+   "npcs": [],
+   "dress": "business",
+   "strict": false,
+   "investors": [
+    "marlow_tan"
+   ],
+   "detail": "Angels chat with founders over coffee. A first conversation is not an offer; pitching comes later and uses only your real figures."
+  },
+  "trade_forum": {
+   "id": "trade_forum",
+   "title": "Trade partners forum",
+   "day": 12,
+   "hour": 10,
+   "end_hour": 13,
+   "minutes": 120,
+   "cost": 30,
+   "npcs": [],
+   "dress": "business",
+   "strict": false,
+   "partners": [
+    "harbormart",
+    "tidewater_foods",
+    "marketlane"
+   ],
+   "detail": "Distributors and food groups meet local suppliers. A partnership means real deliverables, a revenue share and sometimes exclusivity."
+  },
+  "investors_gala": {
+   "id": "investors_gala",
+   "title": "Aurelia Investors' Gala",
+   "day": 20,
+   "hour": 19,
+   "end_hour": 23,
+   "minutes": 180,
+   "cost": 120,
+   "npcs": [],
+   "dress": "formal",
+   "strict": true,
+   "investors": [
+    "ines_calder"
+   ],
+   "detail": "Black-tie dinner for backers and founders. The door asks for formal dress; meeting an angel here is a conversation, not funding."
+  },
+  "maker_market": {
+   "id": "maker_market",
+   "title": "Maker market",
+   "day": 28,
+   "hour": 11,
+   "end_hour": 15,
+   "minutes": 120,
+   "cost": 15,
+   "npcs": [],
+   "dress": "casual",
+   "strict": false,
+   "partners": [
+    "lumen_studio"
+   ],
+   "detail": "Studios and shops share stalls. Co-brand ideas start here and become contracts only when you sign them."
   }
  },
  "variety_kinds": 2,

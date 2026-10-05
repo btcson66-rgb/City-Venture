@@ -1,0 +1,599 @@
+{
+ "min_chapter_angel": 4,
+ "min_chapter_vc": 6,
+ "min_chapter_partner": 6,
+ "quarter_days": 90,
+ "offer_days": 14,
+ "pitch_cooldown_days": 30,
+ "pitch_minutes": 90,
+ "dd_days": 7,
+ "deck_slots": 4,
+ "min_facts": 2,
+ "deck_stale_days": 7,
+ "intro_cooldown_days": 30,
+ "intro_minutes": 30,
+ "slot_weights": [
+  1.0,
+  0.8,
+  0.6,
+  0.4
+ ],
+ "pass_score": 0.2,
+ "unsupported_factor": 0.95,
+ "deck_mult_min": 0.85,
+ "deck_mult_span": 0.3,
+ "price_step": 1000,
+ "board_review_days": 30,
+ "advisor_share": 0.05,
+ "advisor_min": 1000,
+ "plan_minutes": 120,
+ "plan_target_share": 0.85,
+ "advisor_target_share": 0.9,
+ "milestone_min_target": 300,
+ "report_catchup": 8,
+ "wary_price_factor": 0.95,
+ "dress_levels": [
+  {
+   "id": "casual",
+   "label": "Casual"
+  },
+  {
+   "id": "business",
+   "label": "Business"
+  },
+  {
+   "id": "formal",
+   "label": "Formal evening"
+  }
+ ],
+ "legacy_bonus": {
+  "funded": {
+   "builder": 3
+  },
+  "outside_majority": {
+   "innovator": 4
+  },
+  "kept_control": {
+   "local_legend": 3,
+   "quiet_owner": 2
+  }
+ },
+ "expo_quality_bonus": 0.12,
+ "facts": {
+  "revenue": {
+   "category": "traction",
+   "label": "Net revenue, last 12 months",
+   "bench": 60000
+  },
+  "growth": {
+   "category": "traction",
+   "label": "Revenue growth on the previous 12 months",
+   "bench": 0.5
+  },
+  "orders": {
+   "category": "traction",
+   "label": "Orders delivered to customers",
+   "bench": 300
+  },
+  "profit": {
+   "category": "finance",
+   "label": "Business profit, last 12 months",
+   "bench": 15000
+  },
+  "cash": {
+   "category": "finance",
+   "label": "Company cash on hand",
+   "bench": 30000
+  },
+  "runway": {
+   "category": "finance",
+   "label": "Months of costs your cash covers",
+   "bench": 9
+  },
+  "team": {
+   "category": "team",
+   "label": "People on the payroll",
+   "bench": 4
+  },
+  "lines": {
+   "category": "market",
+   "label": "Lines of business earning revenue",
+   "bench": 2
+  },
+  "loss": {
+   "category": "risk",
+   "label": "Business loss, last 12 months (disclosed)",
+   "bench": 0
+  },
+  "debt": {
+   "category": "risk",
+   "label": "Debts owed (disclosed)",
+   "bench": 0
+  }
+ },
+ "risk_strength": 0.55,
+ "personalities": {
+  "analytical": {
+   "label": "Analytical",
+   "blurb": "Presses on the numbers and the margin.",
+   "interest": {
+    "finance": 1.0,
+    "traction": 0.8,
+    "team": 0.4,
+    "market": 0.4,
+    "risk": 0.6
+   },
+   "style": {
+    "numbers": 1.06,
+    "vision": 0.97,
+    "risk": 1.01
+   }
+  },
+  "visionary": {
+   "label": "Visionary",
+   "blurb": "Wants to hear where the market is going.",
+   "interest": {
+    "traction": 1.0,
+    "market": 1.0,
+    "team": 0.7,
+    "finance": 0.4,
+    "risk": 0.4
+   },
+   "style": {
+    "numbers": 0.99,
+    "vision": 1.07,
+    "risk": 0.98
+   }
+  },
+  "cautious": {
+   "label": "Cautious",
+   "blurb": "Probes what could go wrong and how you would cope.",
+   "interest": {
+    "risk": 1.0,
+    "finance": 0.9,
+    "traction": 0.6,
+    "team": 0.6,
+    "market": 0.3
+   },
+   "style": {
+    "numbers": 1.02,
+    "vision": 0.94,
+    "risk": 1.05
+   }
+  }
+ },
+ "styles": {
+  "numbers": {
+   "backing": [
+    "traction",
+    "finance"
+   ],
+   "milestone_growth": 0.05,
+   "board_seat": false
+  },
+  "vision": {
+   "backing": [
+    "market",
+    "team",
+    "traction"
+   ],
+   "milestone_growth": 0.0,
+   "board_seat": true
+  },
+  "risk": {
+   "backing": [
+    "risk",
+    "finance"
+   ],
+   "milestone_growth": -0.05,
+   "board_seat": false
+  }
+ },
+ "questions": {
+  "q_traction": {
+   "text": "What have customers actually paid you so far?",
+   "options": [
+    {
+     "style": "numbers",
+     "label": "Walk through the revenue and the orders delivered."
+    },
+    {
+     "style": "vision",
+     "label": "Explain the customer problem and where demand is heading."
+    },
+    {
+     "style": "risk",
+     "label": "Say plainly how small the sample is and what you are still testing."
+    }
+   ]
+  },
+  "q_margin": {
+   "text": "How does the money flow: what is left after costs?",
+   "options": [
+    {
+     "style": "numbers",
+     "label": "Show profit and cash against the monthly costs."
+    },
+    {
+     "style": "vision",
+     "label": "Describe the scale effects that improve margin over time."
+    },
+    {
+     "style": "risk",
+     "label": "Name the costs that could squeeze the margin and your limit on each."
+    }
+   ]
+  },
+  "q_competition": {
+   "text": "Who else can do this, and why would customers stay?",
+   "options": [
+    {
+     "style": "numbers",
+     "label": "Point to repeat orders and delivered volume as the proof."
+    },
+    {
+     "style": "vision",
+     "label": "Describe the position you are building that others will find hard to copy."
+    },
+    {
+     "style": "risk",
+     "label": "Admit where a rival could beat you and how you would respond."
+    }
+   ]
+  },
+  "q_runway": {
+   "text": "If sales slow for six months, how long can you last?",
+   "options": [
+    {
+     "style": "numbers",
+     "label": "Give the months of cost your cash covers today."
+    },
+    {
+     "style": "vision",
+     "label": "Explain which line of business you would grow to ride it out."
+    },
+    {
+     "style": "risk",
+     "label": "Lay out the costs you would cut first and what you would protect."
+    }
+   ]
+  },
+  "q_team": {
+   "text": "Who does the work, and who would you hire next?",
+   "options": [
+    {
+     "style": "numbers",
+     "label": "State the headcount and what each role earns the company."
+    },
+    {
+     "style": "vision",
+     "label": "Describe the team you are building and the skill you are missing."
+    },
+    {
+     "style": "risk",
+     "label": "Name the one person the company depends on and your backup plan."
+    }
+   ]
+  },
+  "q_use": {
+   "text": "What exactly will you do with the cheque?",
+   "options": [
+    {
+     "style": "numbers",
+     "label": "Break the money down by line with the return you expect from each."
+    },
+    {
+     "style": "vision",
+     "label": "Describe the next step that the money makes possible."
+    },
+    {
+     "style": "risk",
+     "label": "Keep part in reserve and explain the milestones that release the rest."
+    }
+   ]
+  }
+ },
+ "investors": {
+  "elena": {
+   "name": "Elena Park",
+   "firm": "Northlight Capital",
+   "kind": "angel",
+   "personality": "analytical",
+   "npc": "elena",
+   "min": 40000,
+   "max": 300000,
+   "stake_cap": 0.3,
+   "floor": 160000,
+   "price_factor": 1.0,
+   "probes": [
+    "q_traction",
+    "q_margin",
+    "q_runway"
+   ],
+   "terms": {
+    "board_seat": false,
+    "liq_pref": 0,
+    "milestone_growth": 0.05,
+    "strikes": 2
+   },
+   "flex": 2,
+   "patience": 2,
+   "intro_terms": {
+    "amount": 40000,
+    "stake": 0.2,
+    "reports": true
+   },
+   "blurb": "Angel investor at Northlight Capital. She wants monthly numbers."
+  },
+  "marlow_tan": {
+   "name": "Marlow Tan",
+   "firm": "Tan Family Office",
+   "kind": "angel",
+   "personality": "visionary",
+   "event": "founders_mixer",
+   "min": 50000,
+   "max": 250000,
+   "stake_cap": 0.3,
+   "floor": 180000,
+   "price_factor": 1.02,
+   "probes": [
+    "q_traction",
+    "q_competition",
+    "q_team"
+   ],
+   "terms": {
+    "board_seat": false,
+    "liq_pref": 0,
+    "milestone_growth": 0.0,
+    "strikes": 2
+   },
+   "flex": 2,
+   "patience": 2,
+   "blurb": "Retired freight founder who backs people he can picture growing a company."
+  },
+  "ines_calder": {
+   "name": "Ines Calder",
+   "firm": "Calder Hospitality",
+   "kind": "angel",
+   "personality": "cautious",
+   "event": "investors_gala",
+   "min": 75000,
+   "max": 300000,
+   "stake_cap": 0.25,
+   "floor": 200000,
+   "price_factor": 0.98,
+   "probes": [
+    "q_margin",
+    "q_runway",
+    "q_use"
+   ],
+   "terms": {
+    "board_seat": false,
+    "liq_pref": 1,
+    "milestone_growth": 0.05,
+    "strikes": 2
+   },
+   "flex": 3,
+   "patience": 2,
+   "blurb": "Runs three restaurants and asks what happens when the quarter goes wrong."
+  },
+  "northlight_fund": {
+   "name": "Northlight Growth Fund",
+   "firm": "Northlight Capital",
+   "kind": "vc",
+   "personality": "analytical",
+   "introducers": [
+    "elena",
+    "marcus"
+   ],
+   "min": 500000,
+   "max": 900000,
+   "stake_cap": 0.25,
+   "floor": 2500000,
+   "price_factor": 1.0,
+   "probes": [
+    "q_traction",
+    "q_margin",
+    "q_use"
+   ],
+   "terms": {
+    "board_seat": true,
+    "liq_pref": 1,
+    "milestone_growth": 0.1,
+    "strikes": 1
+   },
+   "flex": 3,
+   "patience": 1,
+   "legal_fee": 4000,
+   "blurb": "Growth fund that reads the books line by line and takes a board seat."
+  },
+  "harborline_capital": {
+   "name": "Harborline Capital",
+   "firm": "Harborline Capital",
+   "kind": "vc",
+   "personality": "visionary",
+   "introducers": [
+    "priya_nair",
+    "marlow_tan"
+   ],
+   "min": 600000,
+   "max": 1000000,
+   "stake_cap": 0.28,
+   "floor": 2800000,
+   "price_factor": 1.03,
+   "probes": [
+    "q_competition",
+    "q_team",
+    "q_use"
+   ],
+   "terms": {
+    "board_seat": true,
+    "liq_pref": 2,
+    "milestone_growth": 0.1,
+    "strikes": 1
+   },
+   "flex": 3,
+   "patience": 1,
+   "legal_fee": 4500,
+   "blurb": "Backs category leaders and asks for a strong liquidation preference in return."
+  },
+  "cedar_row_partners": {
+   "name": "Cedar Row Partners",
+   "firm": "Cedar Row Partners",
+   "kind": "vc",
+   "personality": "cautious",
+   "introducers": [
+    "diane_harlow",
+    "ines_calder"
+   ],
+   "min": 500000,
+   "max": 800000,
+   "stake_cap": 0.22,
+   "floor": 2300000,
+   "price_factor": 0.97,
+   "probes": [
+    "q_runway",
+    "q_margin",
+    "q_team"
+   ],
+   "terms": {
+    "board_seat": true,
+    "liq_pref": 1,
+    "milestone_growth": 0.05,
+    "strikes": 2
+   },
+   "flex": 4,
+   "patience": 2,
+   "legal_fee": 3500,
+   "blurb": "Patient fund that prefers steady companies and gives longer to recover."
+  }
+ },
+ "dd": {
+  "revenue_min": 60000,
+  "months_min": 6
+ },
+ "counter_asks": {
+  "valuation": {
+   "label": "Ask for a 10% higher valuation",
+   "cost": 2,
+   "mult": 1.1
+  },
+  "board": {
+   "label": "Ask to drop the board seat",
+   "cost": 2
+  },
+  "liq": {
+   "label": "Ask to drop the liquidation preference",
+   "cost": 2
+  },
+  "milestone": {
+   "label": "Ask for a softer quarterly milestone",
+   "cost": 1,
+   "growth": -0.05
+  }
+ },
+ "crowd": {
+  "label": "Community round",
+  "min_goal": 5000,
+  "max_raise": 50000,
+  "stake_cap": 0.15,
+  "price_factor": 0.9,
+  "floor": 120000,
+  "days": 21,
+  "fee": 0.05,
+  "reach": 4.0,
+  "order_pledge": 12,
+  "ticket": 60,
+  "variance": 0.25,
+  "goals": [
+   5000,
+   15000,
+   40000
+  ],
+  "promos": [
+   300,
+   900,
+   2500
+  ],
+  "page_facts": 3
+ },
+ "partners": {
+  "harbormart": {
+   "name": "HarborMart Distribution",
+   "kind": "distribution",
+   "event": "trade_forum",
+   "blurb": "A regional retail chain that lists local brands on its shelves.",
+   "price": 2400,
+   "share": 0.15,
+   "minutes": 180,
+   "supplies": 120,
+   "periods": 3,
+   "period_days": 30,
+   "exclusive_bonus": 0.15,
+   "exclusive_days": 90,
+   "break_share": 0.25
+  },
+  "lumen_studio": {
+   "name": "Lumen Studio",
+   "kind": "co_brand",
+   "event": "maker_market",
+   "blurb": "A design studio that co-brands limited runs with local companies.",
+   "price": 3200,
+   "share": 0.1,
+   "minutes": 240,
+   "supplies": 200,
+   "periods": 3,
+   "period_days": 30,
+   "exclusive_bonus": 0.15,
+   "exclusive_days": 90,
+   "break_share": 0.25
+  },
+  "tidewater_foods": {
+   "name": "Tidewater Foods",
+   "kind": "supply",
+   "event": "trade_forum",
+   "blurb": "A food group that wants one steady local supplier month after month.",
+   "price": 1800,
+   "share": 0.08,
+   "minutes": 120,
+   "supplies": 90,
+   "periods": 6,
+   "period_days": 30,
+   "exclusive_bonus": 0.12,
+   "exclusive_days": 180,
+   "break_share": 0.2
+  },
+  "marketlane": {
+   "name": "Marketlane Retail",
+   "kind": "distribution",
+   "event": "trade_forum",
+   "blurb": "A department-store group that gives shelf space to a single local brand at a time.",
+   "price": 2800,
+   "share": 0.18,
+   "minutes": 200,
+   "supplies": 150,
+   "periods": 3,
+   "period_days": 30,
+   "exclusive_bonus": 0.2,
+   "exclusive_days": 90,
+   "break_share": 0.3
+  }
+ },
+ "partner_kinds": {
+  "distribution": {
+   "label": "Distribution partnership",
+   "share_label": "Channel fee"
+  },
+  "co_brand": {
+   "label": "Co-brand partnership",
+   "share_label": "Licence royalty"
+  },
+  "supply": {
+   "label": "Long-term supply agreement",
+   "share_label": "Volume rebate"
+  }
+ },
+ "partner_offer_days": 14,
+ "partner_missed_limit": 2,
+ "partner_job_days": 21
+}

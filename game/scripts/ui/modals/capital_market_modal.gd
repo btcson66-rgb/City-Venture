@@ -47,7 +47,7 @@ func build() -> void:
 			action(box,I18n.t("%s offers %s home dollars")%[offer["name"],Fmt.money0(float(offer["price"]))],"SelectOffer_"+str(offer["id"]),func():selected_offer=offer["id"];rebuild())
 		if selected_offer != "":
 			var offer: Dictionary = s["offers"].filter(func(o):return o["id"]==selected_offer)[0]
-			box.add_child(UIK.kv("Founder payout (home dollars)",Fmt.money(CapitalMarket.final_offer_price(offer)*float(GameState.data.get("cap_table",{}).get("founder",1)))))
+			box.add_child(UIK.kv("Founder payout (home dollars)",Fmt.money(Fundraising.founder_proceeds(CapitalMarket.final_offer_price(offer)))))
 			var why := CapitalMarket.offer_block(selected_offer)
 			box.add_child(UIK.wrap("The final sale price cannot exceed current company value after withdrawals or losses.",7,Art.C_MUTED,458))
 			box.add_child(UIK.wrap(I18n.t("Due diligence until %s; expires %s.")%[Clock.fmt_short(int(offer["ready"])),Clock.fmt_short(int(offer["expires"]))],7,Art.C_WHITE,458))

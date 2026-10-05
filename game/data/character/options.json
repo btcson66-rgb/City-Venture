@@ -229,17 +229,20 @@
   {
    "id": "startup_casual",
    "name": "Startup Casual",
-   "category": "STARTUP CASUAL"
+   "category": "STARTUP CASUAL",
+   "dress": "casual"
   },
   {
    "id": "office_professional",
    "name": "Office Professional",
-   "category": "OFFICE PROFESSIONAL"
+   "category": "OFFICE PROFESSIONAL",
+   "dress": "business"
   },
   {
    "id": "home",
    "name": "Home",
-   "category": "HOME"
+   "category": "HOME",
+   "dress": "casual"
   }
  ],
  "outfits_shop": [
@@ -255,7 +258,8 @@
      "top": "#23263a",
      "bottom": "#23263a"
     }
-   }
+   },
+   "dress": "business"
   },
   {
    "id": "luxury_citywear",
@@ -276,7 +280,8 @@
     "#2c3550",
     "#5e2a33",
     "#6b6f5a"
-   ]
+   ],
+   "dress": "business"
   },
   {
    "id": "travel",
@@ -289,6 +294,22 @@
     "tints": {
      "top": "#5f6e44",
      "bottom": "#3d4250"
+    }
+   },
+   "dress": "casual"
+  },
+  {
+   "id": "smart_blazer",
+   "name": "Smart Blazer",
+   "price": 210,
+   "dress": "business",
+   "store": "threadline_apparel",
+   "blurb": "A structured blazer and pressed trousers. Fine for meetings and mixers.",
+   "stand_in": {
+    "outfit": "business_suit",
+    "tints": {
+     "top": "#3b4a5f",
+     "bottom": "#2b303a"
     }
    }
   },
@@ -304,6 +325,22 @@
      "top": "#15161c",
      "bottom": "#15161c"
     }
+   },
+   "dress": "formal"
+  },
+  {
+   "id": "evening_gown",
+   "name": "Evening Gown",
+   "price": 860,
+   "dress": "formal",
+   "store": "threadline_apparel",
+   "blurb": "Floor-length satin in deep wine. Made for the investors' gala.",
+   "stand_in": {
+    "outfit": "business_suit",
+    "tints": {
+     "top": "#5a1f33",
+     "bottom": "#5a1f33"
+    }
    }
   },
   {
@@ -318,7 +355,8 @@
      "top": "#e8742a",
      "bottom": "#3c4048"
     }
-   }
+   },
+   "dress": "casual"
   }
  ],
  "outfits_planned": [],

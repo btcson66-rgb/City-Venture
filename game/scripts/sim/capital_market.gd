@@ -63,7 +63,7 @@ static func sell(id: String) -> Dictionary:
 	var offer: Dictionary = S()["offers"].filter(func(o):return o["id"]==id)[0]
 	var founder := float(GameState.data.get("cap_table",{}).get("founder",1))
 	var sale_price := final_offer_price(offer)
-	var take := snappedf(sale_price*founder,.01)
+	var take := Fundraising.founder_proceeds(sale_price)
 	var carrying := HoldingGroups.basis(GameState.company_id())
 	var gain := take-carrying
 	var lines: Array = [{"acct":"cash","dr":take},{"acct":"investments","cr":carrying}]
@@ -174,6 +174,7 @@ static func list_company() -> Dictionary:
 	for owner in shares: shares[owner]=float(shares[owner])*(1-float(cfg()["public_share"]))
 	shares["public"]=float(shares.get("public",0))+float(cfg()["public_share"])
 	GameState.data["cap_table"]=shares
+	Fundraising.on_public_listing()
 	S()["route"]="public"
 	ipo["stage"]="listed"
 	ipo["next_quarter"]=Clock.now()+int(cfg()["quarter_days"])*Clock.DAY

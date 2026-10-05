@@ -108,7 +108,7 @@ static func _choose(choice: String) -> Dictionary:
 	match num:
 		19:
 			if choice=="premium" and not _expense(c,float(cfg()["assurance_fee"]),"Independent expo assurance fee"):return error("Fund the assurance fee or submit the balanced bid.")
-			var quality: float=clampf(float(c["quality"])+(float(cfg()["assurance_quality_bonus"]) if choice=="premium" else 0.0),0,1)
+			var quality: float=clampf(float(c["quality"])+(float(cfg()["assurance_quality_bonus"]) if choice=="premium" else 0.0)+Partnerships.expo_quality_bonus(),0,1)
 			S()["expo_awarded"]=choice!="withdraw" and GameState.randf()<clampf(float(cfg()["expo_probability_base"])+float(cfg()["expo_probability_quality"])*quality,float(cfg()["expo_probability_base"]),float(cfg()["expo_probability_max"]))
 			c["result"]={"quality":quality,"approved":S()["expo_awarded"]}
 		20:

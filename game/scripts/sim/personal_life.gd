@@ -88,16 +88,20 @@ static func event_available(event: Dictionary) -> bool:
 static func attend(id: String) -> Dictionary:
 	var event: Dictionary=cfg()["events"].get(id,{})
 	if event.is_empty() or not event_available(event):return error("This monthly event is closed or already attended — check its next date.")
+	# Dress code (#116): a strict door refuses entry before anything is charged; otherwise it only colours first conversations.
+	var gate := Fundraising.dress_check(event)
+	if not gate["ok"]:return {"ok":false,"error":gate["error"]}
 	var cost := float(event["cost"])
 	if Ledger.cash("player")<cost:return error("Insufficient personal cash — earn money before this request.")
 	Ledger.expense("player","dining",cost,I18n.t("City social event: %s")%Fmt.money(cost),{"type":"personal_social","id":id})
 	S()["events"][event_key(id)]=Clock.now()
 	for npc in event["npcs"]:meet(npc);change(npc,float(cfg()["event_affinity"]));note_kind(npc,"event")
+	var met_text := Fundraising.on_event(event,gate)
 	rest(int(event["minutes"]),float(cfg()["social_stress_relief"]))
 	# Keep at most one year of receipts; lifetime contacts and affinity remain saved.
 	for key in S()["events"].keys():
 		if Clock.now()-int(S()["events"][key])>366*Clock.DAY:S()["events"].erase(key)
-	return {"ok":true,"info":event["detail"]}
+	return {"ok":true,"info":I18n.t(str(event["detail"]))+(" "+met_text if met_text!="" else "")}
 static func energy() -> float:return float(S()["energy"])
 static func fatigue() -> float:return clampf((float(cfg()["low_energy"])-energy())/float(cfg()["low_energy"]),0,1)
 static func response_speed() -> float:return 1.0+fatigue()*float(cfg()["fatigue_timer_multiplier"])
