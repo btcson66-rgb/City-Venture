@@ -251,6 +251,7 @@ func load_data(slot: int) -> bool:
 	if not result["ok"]:
 		last_error = result["error"]
 		return false
+	_release_later([GameState.data, Growth.release_journal_ref()])
 	GameState.data = result["payload"]["data"]
 	_restore_lean(GameState.data)
 	GameState.data["meta"]["slot"] = slot     # carry on saving where this game was loaded from
@@ -262,6 +263,15 @@ func load_data(slot: int) -> bool:
 	loaded.emit(slot)
 	EventBus.state_loaded.emit()
 	return true
+
+
+## The game being replaced is freed on a worker thread: tearing down tens of thousands of orders and journal
+## entries is a visible part of loading a big save, and nothing reads it any more.
+func _release_later(old: Array) -> void:
+	if OS.has_feature("threads"):
+		WorkerThreadPool.add_task(func() -> void: old.clear())
+	else:
+		old.clear()
 
 
 func load_and_enter(slot: int) -> bool:

@@ -26,16 +26,20 @@ static func _sum(bytes: PackedByteArray) -> String:
 
 
 static func _packed(value: Variant) -> Dictionary:
-	if value is Dictionary and value.size() >= PART_MIN:
+	if (value is Dictionary or value is Array) and value.size() >= PART_MIN:
 		# Several blobs decode on worker threads at once: first-touch memory is most of a big load.
 		var count := mini(MAX_PARTS, 1 + value.size() / PART_MIN)
 		var per := ceili(float(value.size()) / count)
 		var parts := []
-		var keys: Array = value.keys()
+		var keys: Array = value.keys() if value is Dictionary else []
 		for i in count:
-			var piece := {}
-			for key in keys.slice(i * per, (i + 1) * per):
-				piece[key] = value[key]
+			var piece: Variant
+			if value is Dictionary:
+				piece = {}
+				for key in keys.slice(i * per, (i + 1) * per):
+					piece[key] = value[key]
+			else:
+				piece = value.slice(i * per, (i + 1) * per)
 			var raw := var_to_bytes(piece).compress(FileAccess.COMPRESSION_GZIP)
 			parts.append({"sum": _sum(raw), "z": Marshalls.raw_to_base64(raw)})
 		return {"packed": 1, "n": value.size(), "parts": parts}
@@ -71,6 +75,7 @@ static func _unpacked(blob: Variant, verified := {}, name := "") -> Variant:
 		good = good and r[1]
 		if merged == null: merged = r[0]
 		elif merged is Dictionary and r[0] is Dictionary: merged.merge(r[0])
+		elif merged is Array and r[0] is Array: merged.append_array(r[0])
 		else: return null
 	verified[name] = good
 	return merged
@@ -136,6 +141,8 @@ static func unpack(data: Dictionary, verified := {}) -> bool:
 				value = r[0]
 			elif value is Dictionary and r[0] is Dictionary:
 				value.merge(r[0])
+			elif value is Array and r[0] is Array:
+				value.append_array(r[0])
 			else:
 				return false
 		at += count

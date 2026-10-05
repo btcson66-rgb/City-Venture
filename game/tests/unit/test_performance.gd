@@ -276,3 +276,22 @@ func test_big_order_book_splits_into_parts_that_decode_together() -> void:
 	var damaged := {"ecommerce": {"orders": SaveCodec._packed(orders)}}
 	damaged["ecommerce"]["orders"]["parts"][2]["z"] = "AAAA"
 	runner.check(not SaveCodec.unpack(damaged), "a damaged part is rejected")
+
+
+func test_big_journal_array_splits_and_keeps_order() -> void:
+	var rows := []
+	for i in 13000:
+		rows.append({"n": i, "t": i, "entity": "player", "memo": "m", "lines": []})
+	var holder := {"ledger": {"journal": SaveCodec._packed(rows)}}
+	runner.check(holder["ledger"]["journal"]["parts"].size() > 1, "journal split in parts")
+	var verified := {}
+	runner.check(SaveCodec.unpack(holder, verified) and verified["journal"], "journal parts unpack and verify")
+	runner.eq(holder["ledger"]["journal"].size(), 13000, "no entry lost")
+	runner.eq(int(holder["ledger"]["journal"][12999]["n"]), 12999, "entries keep their order")
+
+
+func test_loading_over_a_running_game_releases_the_old_state() -> void:
+	runner.check(SaveSystem.save(5, true), "saved")
+	runner.check(SaveSystem.load_data(5), "first load")
+	runner.check(SaveSystem.load_data(5), "load over a running game: " + SaveSystem.last_error)
+	runner.check(Ledger.check_balanced(), "ledger balanced")

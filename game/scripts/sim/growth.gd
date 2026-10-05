@@ -19,6 +19,14 @@ static var _journal_index := 0
 static var _earned := 0.0
 static var _segments: Dictionary = {}
 
+## Hands the scanned journal to the caller (a save load frees it off the main thread) and restarts the scan.
+static func release_journal_ref() -> Array:
+	var old := _journal_ref
+	_journal_ref = []
+	_journal_index = 0
+	return old
+
+
 static func _scan_journal() -> void:
 	var journal: Array = GameState.data["ledger"]["journal"]
 	if not is_same(journal, _journal_ref) or journal.size() < _journal_index:

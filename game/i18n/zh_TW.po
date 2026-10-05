@@ -930,11 +930,11 @@ msgstr "（訂單 {order}——{product}）"
 msgid "(Order {order} — {product}, {price})"
 msgstr "（訂單 {order}——{product}，{price}）"
 
-#: autoload/save_system.gd:402
+#: autoload/save_system.gd:412
 msgid "*.cvsave ; "
 msgstr "*.cvsave ; "
 
-#: autoload/save_system.gd:424
+#: autoload/save_system.gd:434
 msgid "*.cvsave,*.json ; "
 msgstr "*.cvsave,*.json ; "
 
@@ -1106,7 +1106,7 @@ msgstr "日票（$15）今天可以使用共享座位和電腦。常來的話，
 msgid "A Van Driver (People tab) takes one run each workday from 9:00. Your own ecommerce parcels can go out in the van too: choose \"Own van\" at the packing table."
 msgstr "貨車司機（人員分頁）每個工作日 9:00 起接一趟外送。你自己的電商包裹也能用貨車送：在打包桌選「自己的貨車」。"
 
-#: autoload/save_system.gd:128 autoload/save_system.gd:370 scripts/ui/modals/save_list_modal.gd:63
+#: autoload/save_system.gd:128 autoload/save_system.gd:380 scripts/ui/modals/save_list_modal.gd:63
 msgid "A backup could not be created. Your existing save is unchanged."
 msgstr "無法建立備份。原有存檔仍完整保留。"
 
@@ -2378,7 +2378,7 @@ msgstr "Alex Chen"
 msgid "All %d stops planned  ·  round trip %.1f km"
 msgstr "%d 個停靠點都排好了  ·  來回共 %.1f 公里"
 
-#: autoload/save_system.gd:439
+#: autoload/save_system.gd:449
 msgid "All Files (*)"
 msgstr "所有檔案 (*)"
 
@@ -4682,7 +4682,7 @@ msgstr "現在不能上班：%s。"
 msgid "Can't work the counter: %s."
 msgstr "現在不能站吧台：%s。"
 
-#: autoload/save_system.gd:439 autoload/sound.gd:286 scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57
+#: autoload/save_system.gd:449 autoload/sound.gd:286 scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57
 msgid "Cancel"
 msgstr "取消"
 
@@ -5406,7 +5406,7 @@ msgstr "請選擇進行中的活動。"
 msgid "Choose a running group business and a valid media budget."
 msgstr "請選擇營運中的集團業務及有效媒體預算。"
 
-#: autoload/save_system.gd:367 scripts/ui/modals/save_list_modal.gd:22
+#: autoload/save_system.gd:377 scripts/ui/modals/save_list_modal.gd:22
 msgid "Choose a save slot to replace. Its existing save will be backed up."
 msgstr "選擇要覆蓋的存檔槽。原有存檔會先備份。"
 
@@ -5790,7 +5790,7 @@ msgstr "市政廳：你的食品處理執照核准了。"
 msgid "City Marathon Weekend"
 msgstr "城市馬拉松週末"
 
-#: autoload/save_system.gd:402 autoload/save_system.gd:424
+#: autoload/save_system.gd:412 autoload/save_system.gd:434
 msgid "City Venture save"
 msgstr "City Venture 存檔"
 
@@ -5846,7 +5846,7 @@ msgstr "城市社交活動：%s"
 msgid "City update: %s"
 msgstr "城市動態：%s"
 
-#: autoload/save_system.gd:386
+#: autoload/save_system.gd:396
 msgid "CityVenture_%s_%04d-%02d-%02d.cvsave"
 msgstr "CityVenture_%s_%04d-%02d-%02d.cvsave"
 
@@ -7686,7 +7686,7 @@ msgstr "尚未開放交易簽約。試算不會建立合約、庫存或付款。
 msgid "Deal with an unhappy customer (check your phone)"
 msgstr "處理一位不滿意的客人（看手機）"
 
-#: scripts/sim/contracts.gd:193 scripts/sim/growth.gd:85
+#: scripts/sim/contracts.gd:193 scripts/sim/growth.gd:97
 msgid "Deal. Send it over."
 msgstr "成交。寄過來吧。"
 
@@ -8314,7 +8314,7 @@ msgstr "直訂：沒有佣金，量較少。OTA「%s」：每晚抽 %d%% 佣金�
 msgid "Directional evidence; collect a larger sample"
 msgstr "僅為方向性證據，需要更多樣本"
 
-#: autoload/save_system.gd:439
+#: autoload/save_system.gd:449
 msgid "Directories & Files:"
 msgstr "資料夾與檔案："
 
@@ -9422,7 +9422,7 @@ msgstr "博覽會申辦"
 msgid "Export duty %s: %s"
 msgstr "出口訂單 %s 關稅：%s"
 
-#: autoload/save_system.gd:438 scripts/ui/modals/pause_menu.gd:42 scripts/ui/modals/save_list_modal.gd:25
+#: autoload/save_system.gd:448 scripts/ui/modals/pause_menu.gd:42 scripts/ui/modals/save_list_modal.gd:25
 msgid "Export save"
 msgstr "匯出存檔"
 
@@ -9654,7 +9654,7 @@ msgstr "快轉到開門"
 msgid "Fast: +30% work output."
 msgstr "手腳快：工作產出 +30%。"
 
-#: autoload/save_system.gd:439
+#: autoload/save_system.gd:449
 msgid "Favorites:"
 msgstr "我的最愛："
 
@@ -9726,11 +9726,11 @@ msgstr "申請豁免"
 msgid "File yourself · %d minutes · %.0f%% form-error chance"
 msgstr "自行申報・%d 分鐘・表單錯誤率 %.0f%%"
 
-#: autoload/save_system.gd:439
+#: autoload/save_system.gd:449
 msgid "File:"
 msgstr "檔案："
 
-#: autoload/save_system.gd:454
+#: autoload/save_system.gd:464
 msgid "FileReader"
 msgstr "FileReader"
 
@@ -12210,7 +12210,7 @@ msgstr "進口執照要等監管浪潮才會實施。"
 msgid "Import prices ease as the ports catch up."
 msgstr "港口趕上進度，進口價格回穩。"
 
-#: autoload/save_system.gd:438 scripts/ui/modals/pause_menu.gd:45 scripts/ui/modals/save_list_modal.gd:13 scripts/ui/modals/save_list_modal.gd:29
+#: autoload/save_system.gd:448 scripts/ui/modals/pause_menu.gd:45 scripts/ui/modals/save_list_modal.gd:13 scripts/ui/modals/save_list_modal.gd:29
 msgid "Import save"
 msgstr "匯入存檔"
 
@@ -17422,7 +17422,7 @@ msgstr "只交付好看的照片"
 msgid "Only wholly founder-owned companies can enter this holding group. Other shareholders keep their rights."
 msgstr "只有創辦人全資持有的公司才能移入集團，其他股東的權益不會被移轉。"
 
-#: autoload/save_system.gd:439 scripts/ui/hotel_ui.gd:273 scripts/ui/modals/city_map_modal.gd:132 scripts/ui/modals/city_map_modal.gd:179
+#: autoload/save_system.gd:449 scripts/ui/hotel_ui.gd:273 scripts/ui/modals/city_map_modal.gd:132 scripts/ui/modals/city_map_modal.gd:179
 msgid "Open"
 msgstr "開啟"
 
@@ -18694,7 +18694,7 @@ msgstr "糕點"
 msgid "Patel"
 msgstr "Patel"
 
-#: autoload/save_system.gd:439
+#: autoload/save_system.gd:449
 msgid "Path:"
 msgstr "路徑："
 
@@ -19274,7 +19274,7 @@ msgstr "平台手續費"
 msgid "Play this week's challenge"
 msgstr "遊玩本週挑戰"
 
-#: autoload/save_system.gd:384
+#: autoload/save_system.gd:394
 msgid "Player"
 msgstr "玩家"
 
@@ -20318,7 +20318,7 @@ msgstr "完成供應衝擊的經營回顧。"
 msgid "Reach the third factory stage."
 msgstr "升到工廠第三階段。"
 
-#: scripts/sim/growth.gd:131 scripts/sim/growth.gd:135
+#: scripts/sim/growth.gd:152 scripts/sim/growth.gd:156
 msgid "Reached: %s"
 msgstr "達成：%s"
 
@@ -20554,7 +20554,7 @@ msgstr "最近的外送單"
 msgid "Recent transactions"
 msgstr "最近交易"
 
-#: autoload/save_system.gd:439
+#: autoload/save_system.gd:449
 msgid "Recent:"
 msgstr "最近使用："
 
@@ -22474,7 +22474,7 @@ msgstr "週六"
 msgid "Saturday and Sunday 10:00–18:00 · %s/weekend · reserve at least one day ahead · capacity %d units"
 msgstr "週六、週日 10:00–18:00 · 每週末 %s · 至少提前一天預約 · 最多 %d 件"
 
-#: autoload/save_system.gd:439 scripts/ui/phone_ui.gd:164
+#: autoload/save_system.gd:449 scripts/ui/phone_ui.gd:164
 msgid "Save"
 msgstr "存檔"
 
@@ -22522,7 +22522,7 @@ msgstr "先備妥足夠公司現金，再預約保養。"
 msgid "Save enough company cash for the vehicle and first insurance payment."
 msgstr "先備妥購車與首期保險所需的公司現金。"
 
-#: autoload/save_system.gd:408
+#: autoload/save_system.gd:418
 msgid "Save exported. Keep this file outside your browser."
 msgstr "存檔已匯出。請把檔案保存在瀏覽器以外的地方。"
 
@@ -22530,7 +22530,7 @@ msgstr "存檔已匯出。請把檔案保存在瀏覽器以外的地方。"
 msgid "Save game"
 msgstr "儲存遊戲"
 
-#: autoload/save_system.gd:488
+#: autoload/save_system.gd:498
 msgid "Save imported. Continue where you left off."
 msgstr "存檔已匯入，可以接著玩。"
 
@@ -22702,7 +22702,7 @@ msgstr "請先備妥車輛保障升級保費。"
 msgid "Save this life and start the selected next life"
 msgstr "保存這一局，展開選好的新人生"
 
-#: autoload/save_system.gd:493
+#: autoload/save_system.gd:503
 msgid "Save transfer"
 msgstr "存檔匯入／匯出"
 
@@ -23158,7 +23158,7 @@ msgstr "次輔導"
 msgid "Set a transfer price for each running pair: at cost, cost plus a markup or market price. Both businesses show the trade in Segments."
 msgstr "為每個運作中的組合設定轉撥價：依成本、成本加成或市價。兩邊事業都會在分部報表顯示這筆交易。"
 
-#: scripts/sim/growth.gd:163
+#: scripts/sim/growth.gd:184
 msgid "Set aside an optional growth goal. No completion was claimed."
 msgstr "暫時擱置一項成長目標，並未宣稱達成。"
 
@@ -25658,7 +25658,7 @@ msgstr "工廠帳本和排程已更新。"
 msgid "The factory quotation checklist now has conflicting notes. Rita Hale wants a version that other people can check. How do you resolve the conflict?"
 msgstr "工廠報價核對表現在出現互相矛盾的紀錄。Rita Hale 希望其他人也能查核，該如何處理？"
 
-#: autoload/save_system.gd:460
+#: autoload/save_system.gd:470
 msgid "The file could not be read. Your existing save is unchanged."
 msgstr "無法讀取檔案。原有存檔仍完整保留。"
 
@@ -26022,7 +26022,7 @@ msgstr "這筆出售無法還清房貸，公司也付不起差額。請先籌措
 msgid "The same seed, rules and choices reproduce the simulation. Daily market previews do not consume the event RNG. Weekly challenges lock standard rules and save results locally."
 msgstr "相同種子、規則與選擇可重現模擬。查看每日市場不會改變事件隨機序列。每週挑戰固定標準規則，並在本機保存成績。"
 
-#: autoload/save_system.gd:204 autoload/save_system.gd:374
+#: autoload/save_system.gd:204 autoload/save_system.gd:384
 msgid "The save could not be written. Your existing save is unchanged."
 msgstr "無法寫入存檔。原有存檔仍完整保留。"
 
@@ -26450,7 +26450,7 @@ msgstr "這是已結束公司的合約。"
 msgid "This is a sightseeing-only location right now."
 msgstr "這裡目前只能參觀。"
 
-#: autoload/save_system.gd:368 scripts/save_codec.gd:97
+#: autoload/save_system.gd:378 scripts/save_codec.gd:197
 msgid "This is not a City Venture save."
 msgstr "這不是 City Venture 的存檔。"
 
@@ -26586,7 +26586,7 @@ msgstr "這個房型已經在翻新。"
 msgid "This route is already in progress. Wait for its vehicle."
 msgstr "這條路線已有車輛在配送，請等完成。"
 
-#: scripts/save_codec.gd:104 scripts/save_codec.gd:130
+#: scripts/save_codec.gd:204 scripts/save_codec.gd:232
 msgid "This save comes from a newer version of City Venture."
 msgstr "這個存檔來自更新的 City Venture 版本。"
 
@@ -29006,7 +29006,7 @@ msgstr "你辭掉了工作。你有一筆存款、一台筆電、一支手機—
 msgid "You raised equity rather than sales income; quarterly disclosure and board votes now limit your freedom."
 msgstr "你以股權募集資本，沒有增加銷售營收；季報義務和董事會表決也限制了你的自由。"
 
-#: scripts/sim/growth.gd:134
+#: scripts/sim/growth.gd:155
 msgid "You reached %s. Choose the next goal that fits your business; the reward is the progress you actually made."
 msgstr "你達成了「%s」。接下來挑一個適合自己的目標；真正的收穫就是你做到的進步。"
 
