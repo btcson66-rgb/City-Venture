@@ -197,7 +197,7 @@ func ops_page(content: Control) -> void:
 		var cond := float(Hotel.S()["rooms"][type]["cond"])
 		var renovating: bool=Clock.now()<int(Hotel.S()["rooms"][type]["reno_until"])
 		var ok: bool=not issues["broken"] and not issues["due"] and not renovating
-		var status := I18n.t("working")
+		var status := I18n.t("In service")
 		if renovating:status=I18n.t("renovating until %s")%Clock.fmt_short(int(Hotel.S()["rooms"][type]["reno_until"]))
 		elif issues["broken"]:status=I18n.t("broken: rooms not for sale")
 		elif issues["due"]:status=I18n.t("service due")
