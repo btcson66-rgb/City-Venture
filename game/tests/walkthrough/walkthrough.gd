@@ -1727,6 +1727,14 @@ func _read_news(tag: String) -> void:
 	await bot.wait(0.6)
 	await bot.shot("news_" + tag)
 	await close_modal()
+	if not GameState.flag("news_read"):
+		# A pending decision (e.g. a customer return) can pop up first and take the interaction; a player
+		# answers it and reads the board again.
+		await popups()
+		await close_modal()
+		await bot.use_action("read_news")
+		await bot.wait(0.6)
+		await close_modal()
 	bot.expect(GameState.flag("news_read"), "read the news (%s)" % tag)
 	await exit_building()
 	await enter_building("riverside_apartment")
