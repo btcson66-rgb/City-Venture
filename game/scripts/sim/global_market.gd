@@ -201,7 +201,7 @@ static func payout(entity: String) -> void:
 	if not live(entity):
 		return
 	var hold := int(Ecommerce.mk().get("payout_hold_days", 2)) * Clock.DAY
-	for o in Ecommerce.E()["orders"].values():
+	for o in Ecommerce.foreign_orders():
 		if not o.has("region") or o["entity"] != entity or o.get("global_paid", false) or not o.has("delivery_rate") or Clock.now() - int(o["delivered"]) < hold:
 			continue
 		var ccy := str(o["currency"])
@@ -293,7 +293,7 @@ static func close_for_entity(entity: String) -> void:
 		# Foreign units with no book value are cleared rather than left behind on a closed company.
 		b["receivable"] = 0.0
 		convert_currency(entity, str(ccy))
-	for o in Ecommerce.E()["orders"].values():
+	for o in Ecommerce.foreign_orders():
 		if not o.has("region") or o["entity"] != entity:
 			continue
 		Customs.remove_decisions(str(o["id"]))

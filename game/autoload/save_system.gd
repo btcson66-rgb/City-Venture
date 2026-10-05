@@ -79,6 +79,20 @@ func _path(slot: int) -> String:
 	return "%s/slot_%d.json" % [DIR, slot]
 
 
+## Saves above this size are stored gzip-compressed (the JSON text is highly repetitive); smaller ones stay readable text.
+## Readers accept either form, so every older save loads unchanged.
+const GZIP_ABOVE := 262144
+
+
+## Text of a save file, whether it is plain JSON or gzip.
+static func read_text(path: String) -> String:
+	var bytes := FileAccess.get_file_as_bytes(path)
+	if bytes.size() > 2 and bytes[0] == 0x1f and bytes[1] == 0x8b:
+		var raw := bytes.decompress_dynamic(-1, FileAccess.COMPRESSION_GZIP)
+		return raw.get_string_from_utf8()
+	return bytes.get_string_from_utf8()
+
+
 func has_save(slot: int) -> bool:
 	return FileAccess.file_exists(_path(slot))
 
@@ -154,7 +168,7 @@ func summary(slot: int) -> Dictionary:
 	var hit: Dictionary = _summary_cache.get(slot, {})
 	if not hit.is_empty() and int(hit["mt"]) == mt:
 		return hit["sm"]
-	var result := validate_text(FileAccess.get_file_as_string(_path(slot)))
+	var result := validate_text(read_text(_path(slot)), true)
 	var sm: Dictionary = result["payload"].get("summary", {}) if result["ok"] else {}
 	_summary_cache[slot] = {"mt": mt, "sm": sm}
 	return sm
@@ -184,7 +198,7 @@ func save_to(path: String, slot := -1, manual := true) -> bool:
 		"location": d["player"]["location"].get("id", ""), "saved_unix": Time.get_unix_time_from_system(),
 		"chapter": d["story"].get("chapter", ""),
 	}
-	var payload := {"format": GameState.SAVE_FORMAT, "summary": summary_d, "data": d}
+	var payload := {"format": GameState.SAVE_FORMAT, "summary": summary_d, "data": SaveCodec.pack(_lean_data(d))}
 	var rotate := slot >= 0 and (manual or _backup_due(slot))
 	if not _atomic_write(path, JSON.stringify(payload), rotate):
 		last_error = "The save could not be written. Your existing save is unchanged."
@@ -196,15 +210,50 @@ func save_to(path: String, slot := -1, manual := true) -> bool:
 	return true
 
 
+## The active company's context view holds the same state objects as the top-level keys, so JSON would write
+## every one of them twice. Leave them out of the copy that is serialized; load_data() puts them back.
+static func _lean_data(d: Dictionary) -> Dictionary:
+	var active := CompanyPortfolio.active_of(d)
+	var contexts: Dictionary = d.get("company_contexts", {})
+	if not contexts.has(active) or not contexts[active].get("states") is Dictionary or contexts[active]["states"].is_empty():
+		return d
+	var lean := d.duplicate(false)
+	var view: Dictionary = contexts[active].duplicate(false)
+	var states := {}
+	for key in view["states"]:
+		if not is_same(view["states"][key], d.get(key)):
+			states[key] = view["states"][key]
+	view["states"] = states
+	view["lean"] = true
+	lean["company_contexts"] = contexts.duplicate(false)
+	lean["company_contexts"][active] = view
+	return lean
+
+
+## Reverse of _lean_data: the active view shares the live top-level objects again.
+static func _restore_lean(d: Dictionary) -> void:
+	var contexts: Dictionary = d.get("company_contexts", {})
+	var active := CompanyPortfolio.active_of(d)
+	if not contexts.has(active) or not contexts[active].get("lean", false):
+		return
+	var view: Dictionary = contexts[active]
+	view.erase("lean")
+	for key in CompanyPortfolio.cfg()["context_keys"]:
+		if d.has(key) and not view["states"].has(key):
+			view["states"][key] = d[key]
+
+
 ## Load into GameState only (no scene change). Used by tests and by load_and_enter().
 func load_data(slot: int) -> bool:
 	if not has_save(slot):
 		return false
-	var result := validate_text(FileAccess.get_file_as_string(_path(slot)))
+	var result := validate_text(read_text(_path(slot)), true)
 	if not result["ok"]:
 		last_error = result["error"]
 		return false
+	_release_later([GameState.data, Growth.release_journal_ref()])
 	GameState.data = result["payload"]["data"]
+	_restore_lean(GameState.data)
 	GameState.data["meta"]["slot"] = slot     # carry on saving where this game was loaded from
 	Contracts.reconcile_closed()             # old liquidations sold AR but left live contracts and collection schedules
 	Contracts.reconcile_tags()               # older builds could leave a story step waiting on a settled offer
@@ -214,6 +263,15 @@ func load_data(slot: int) -> bool:
 	loaded.emit(slot)
 	EventBus.state_loaded.emit()
 	return true
+
+
+## The game being replaced is freed on a worker thread: tearing down tens of thousands of orders and journal
+## entries is a visible part of loading a big save, and nothing reads it any more.
+func _release_later(old: Array) -> void:
+	if OS.has_feature("threads"):
+		WorkerThreadPool.add_task(func() -> void: old.clear())
+	else:
+		old.clear()
 
 
 func load_and_enter(slot: int) -> bool:
@@ -265,8 +323,8 @@ static func _fill_missing(d: Dictionary, tpl: Dictionary) -> void:
 
 
 ## Validate without changing the running game; migrations run only on the decoded copy.
-func validate_text(text: String) -> Dictionary:
-	var result := SaveCodec.decode(text)
+func validate_text(text: String, trusted := false) -> Dictionary:
+	var result := SaveCodec.decode(text, trusted)
 	if result["ok"]:
 		result["payload"]["data"] = _migrate(result["payload"]["data"])
 	return result
@@ -278,7 +336,10 @@ func _atomic_write(path: String, text: String, rotate := false) -> bool:
 	var temp := path + ".tmp"
 	var file := FileAccess.open(temp, FileAccess.WRITE)
 	if file == null: return false
-	file.store_string(text)
+	if text.length() > GZIP_ABOVE:
+		file.store_buffer(text.to_utf8_buffer().compress(FileAccess.COMPRESSION_GZIP))
+	else:
+		file.store_string(text)
 	file.flush()
 	var error := file.get_error()
 	file.close()
@@ -286,9 +347,9 @@ func _atomic_write(path: String, text: String, rotate := false) -> bool:
 	if rotate and FileAccess.file_exists(path):
 		for index in [3, 2]:
 			var previous := path.trim_suffix(".json") + ".bak%d" % (index - 1)
-			if FileAccess.file_exists(previous) and not _atomic_write(path.trim_suffix(".json") + ".bak%d" % index, FileAccess.get_file_as_string(previous)):
+			if FileAccess.file_exists(previous) and not _atomic_write(path.trim_suffix(".json") + ".bak%d" % index, read_text(previous)):
 				return false
-		if not _atomic_write(path.trim_suffix(".json") + ".bak1", FileAccess.get_file_as_string(path)):
+		if not _atomic_write(path.trim_suffix(".json") + ".bak1", read_text(path)):
 			return false
 	return DirAccess.rename_absolute(temp, path) == OK
 
@@ -296,7 +357,7 @@ func _atomic_write(path: String, text: String, rotate := false) -> bool:
 func recovery_index(slot: int) -> int:
 	for index in [1, 2, 3]:
 		var path := _path(slot).trim_suffix(".json") + ".bak%d" % index
-		if FileAccess.file_exists(path) and validate_text(FileAccess.get_file_as_string(path))["ok"]:
+		if FileAccess.file_exists(path) and validate_text(read_text(path), true)["ok"]:
 			return index
 	return -1
 
@@ -306,7 +367,7 @@ func restore_backup(slot: int) -> bool:
 	if index < 0: return false
 	if has_save(slot) and not backup(slot): return false
 	var path := _path(slot).trim_suffix(".json") + ".bak%d" % index
-	return _atomic_write(_path(slot), FileAccess.get_file_as_string(path))
+	return _atomic_write(_path(slot), read_text(path))
 
 
 func import_text(text: String, slot := -1, replace := false) -> Dictionary:
@@ -372,7 +433,7 @@ func show_import() -> void:
 	dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 	dialog.filters = PackedStringArray(["*.cvsave,*.json ; " + I18n.t("City Venture save")])
 	get_tree().root.add_child(dialog)
-	dialog.file_selected.connect(func(path): _receive_import(FileAccess.get_file_as_string(path)); dialog.queue_free())
+	dialog.file_selected.connect(func(path): _receive_import(read_text(path)); dialog.queue_free())
 	dialog.canceled.connect(func(): dialog.queue_free())
 	dialog.popup_centered(Vector2i(800, 520))
 	_localize_picker(dialog)

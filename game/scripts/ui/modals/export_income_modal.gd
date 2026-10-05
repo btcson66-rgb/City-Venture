@@ -9,7 +9,7 @@ func _init() -> void:
 	help_key = "global_markets"
 	panel_size = Vector2(430, 290)
 	var order: Dictionary = {}
-	for o in Ecommerce.E()["orders"].values():
+	for o in Ecommerce.foreign_orders():
 		if o.get("entity", "") == GameState.company_id() and o.has("delivery_rate") and o.get("global_paid", false) and (order.is_empty() or int(o["delivered"]) > int(order["delivered"])):
 			order = o
 	if order.is_empty():

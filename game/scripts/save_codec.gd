@@ -3,6 +3,185 @@ extends RefCounted
 ## Untrusted imports are checked before migration, storage, or changing the live game.
 ## The text cap covers the 3-day 5,000-order stress save once orders carry baskets and packing records (#113).
 
+## Decoded JSON text cap. A saturated company (50 staff, 5,000 orders a day) holds about a week of open and settled
+## orders; older ones are archived into monthly totals, so a long game stays well below this.
+const MAX_TEXT := 128 * 1024 * 1024
+
+
+## Large collections (a saturated company's orders, journal and schedule) are written as one packed Variant blob
+## instead of JSON text: parsing millions of small JSON values was most of the load time. Small saves stay plain,
+## readable JSON, and every older save loads unchanged. `unpack` runs before validation, so imports are checked
+## exactly like plain JSON; the decoder never instantiates objects.
+const PACK_MIN := 2000
+const PACK_MAX_BYTES := 512 * 1024 * 1024
+const PART_MIN := 4000
+const MAX_PARTS := 6
+
+
+static func _sum(bytes: PackedByteArray) -> String:
+	var hasher := HashingContext.new()
+	hasher.start(HashingContext.HASH_SHA256)
+	hasher.update(bytes)
+	return hasher.finish().hex_encode()
+
+
+static func _packed(value: Variant) -> Dictionary:
+	if (value is Dictionary or value is Array) and value.size() >= PART_MIN:
+		# Several blobs decode on worker threads at once: first-touch memory is most of a big load.
+		var count := mini(MAX_PARTS, 1 + value.size() / PART_MIN)
+		var per := ceili(float(value.size()) / count)
+		var parts := []
+		var keys: Array = value.keys() if value is Dictionary else []
+		for i in count:
+			var piece: Variant
+			if value is Dictionary:
+				piece = {}
+				for key in keys.slice(i * per, (i + 1) * per):
+					piece[key] = value[key]
+			else:
+				piece = value.slice(i * per, (i + 1) * per)
+			var raw := var_to_bytes(piece).compress(FileAccess.COMPRESSION_GZIP)
+			parts.append({"sum": _sum(raw), "z": Marshalls.raw_to_base64(raw)})
+		return {"packed": 1, "n": value.size(), "parts": parts}
+	var bytes := var_to_bytes(value).compress(FileAccess.COMPRESSION_GZIP)
+	return {"packed": 1, "n": value.size(), "sum": _sum(bytes), "z": Marshalls.raw_to_base64(bytes)}
+
+
+## Decodes one blob (or each part of a split blob) to `[value, checksum_ok]`; null value when damaged. Pure, thread safe.
+static func _decode_part(blob: Dictionary) -> Array:
+	if not blob.get("z") is String: return [null, false]
+	var raw := Marshalls.base64_to_raw(blob["z"])
+	if raw.is_empty(): return [null, false]
+	var good: bool = blob.get("sum", "") == _sum(raw)
+	var bytes := raw.decompress_dynamic(PACK_MAX_BYTES, FileAccess.COMPRESSION_GZIP)
+	if bytes.is_empty(): return [null, false]
+	return [bytes_to_var(bytes), good]
+
+
+## Value of one packed blob (null when damaged); anything that is not a blob is returned as is.
+static func _unpacked(blob: Variant, verified := {}, name := "") -> Variant:
+	if not blob is Dictionary or not blob.has("packed"):
+		return blob
+	var holder := {"v": blob}
+	var wrapper := {"schedule": blob} if name == "" else {name: blob}
+	var ok := {}
+	var parts: Array = blob["parts"] if blob.get("parts") is Array else [blob]
+	var merged: Variant = null
+	var good := true
+	for part in parts:
+		if not part is Dictionary: return null
+		var r := _decode_part(part)
+		if r[0] == null: return null
+		good = good and r[1]
+		if merged == null: merged = r[0]
+		elif merged is Dictionary and r[0] is Dictionary: merged.merge(r[0])
+		elif merged is Array and r[0] is Array: merged.append_array(r[0])
+		else: return null
+	verified[name] = good
+	return merged
+
+
+## Every packed blob found in `data`, as [parent, key, blob, name].
+static func _jobs(data: Dictionary) -> Array:
+	var jobs := []
+	if data.get("schedule") is Dictionary:
+		jobs.append([data, "schedule", data["schedule"], "schedule"])
+	if data.get("ledger") is Dictionary and data["ledger"].get("journal") is Dictionary:
+		jobs.append([data["ledger"], "journal", data["ledger"]["journal"], "journal"])
+	if data.get("ecommerce") is Dictionary and data["ecommerce"].get("orders") is Dictionary and data["ecommerce"]["orders"].has("packed"):
+		jobs.append([data["ecommerce"], "orders", data["ecommerce"]["orders"], "orders"])
+	if data.get("company_contexts") is Dictionary:
+		for id in data["company_contexts"]:
+			var view = data["company_contexts"][id]
+			if not view is Dictionary or not view.get("states") is Dictionary: continue
+			var eco = view["states"].get("ecommerce")
+			if eco is Dictionary and eco.get("orders") is Dictionary and eco["orders"].has("packed"):
+				jobs.append([eco, "orders", eco["orders"], "orders:" + str(id)])
+	return jobs
+
+
+## In place, on freshly parsed data. Returns false when a blob is damaged. `verified[name]` records that every
+## checksum matched what the game wrote.
+static func unpack(data: Dictionary, verified := {}) -> bool:
+	var jobs := _jobs(data)
+	var work := []   # one entry per blob part, decoded on the thread pool
+	for job in jobs:
+		var blob = job[2]
+		if not blob.has("packed"):
+			continue
+		var parts = blob.get("parts")
+		if parts != null:
+			if not parts is Array or parts.is_empty(): return false
+			for part in parts:
+				if not part is Dictionary: return false
+				work.append(part)
+		else:
+			work.append(blob)
+	var results := []
+	results.resize(work.size())
+	if work.size() > 1 and OS.has_feature("threads"):
+		var task: int = WorkerThreadPool.add_group_task(func(i: int) -> void: results[i] = _decode_part(work[i]), work.size(), -1, true)
+		WorkerThreadPool.wait_for_group_task_completion(task)
+	else:
+		for i in work.size():
+			results[i] = _decode_part(work[i])
+	var at := 0
+	for job in jobs:
+		var blob = job[2]
+		if not blob.has("packed"):
+			continue
+		var count: int = blob["parts"].size() if blob.get("parts") is Array else 1
+		var value: Variant = null
+		var good := true
+		for i in count:
+			var r: Array = results[at + i]
+			good = good and r[1]
+			if r[0] == null: return false
+			if i == 0:
+				value = r[0]
+			elif value is Dictionary and r[0] is Dictionary:
+				value.merge(r[0])
+			elif value is Array and r[0] is Array:
+				value.append_array(r[0])
+			else:
+				return false
+		at += count
+		verified[job[3]] = good
+		var expected_array: bool = job[3] in ["schedule", "journal"]
+		if expected_array and not value is Array: return false
+		if not expected_array and not value is Dictionary: return false
+		job[0][job[1]] = value
+	return true
+
+
+## Copy of `data` with its big collections packed (live state is never modified).
+static func pack(data: Dictionary) -> Dictionary:
+	var lean := data.duplicate(false)
+	if data.get("schedule") is Array and data["schedule"].size() >= PACK_MIN:
+		lean["schedule"] = _packed(data["schedule"])
+	if data.get("ledger") is Dictionary and data["ledger"].get("journal") is Array and data["ledger"]["journal"].size() >= PACK_MIN:
+		lean["ledger"] = data["ledger"].duplicate(false)
+		lean["ledger"]["journal"] = _packed(data["ledger"]["journal"])
+	if data.get("ecommerce") is Dictionary and data["ecommerce"].get("orders") is Dictionary and data["ecommerce"]["orders"].size() >= PACK_MIN:
+		lean["ecommerce"] = data["ecommerce"].duplicate(false)
+		lean["ecommerce"]["orders"] = _packed(data["ecommerce"]["orders"])
+	if data.get("company_contexts") is Dictionary:
+		var contexts := {}
+		for id in data["company_contexts"]:
+			var view = data["company_contexts"][id]
+			var states = view.get("states") if view is Dictionary else null
+			if states is Dictionary and states.get("ecommerce") is Dictionary and states["ecommerce"].get("orders") is Dictionary and states["ecommerce"]["orders"].size() >= PACK_MIN:
+				var copy: Dictionary = view.duplicate(false)
+				copy["states"] = states.duplicate(false)
+				copy["states"]["ecommerce"] = states["ecommerce"].duplicate(false)
+				copy["states"]["ecommerce"]["orders"] = _packed(states["ecommerce"]["orders"])
+				contexts[id] = copy
+			else:
+				contexts[id] = view
+		lean["company_contexts"] = contexts
+	return lean
+
+
 static func _truthy(v) -> bool:
 	if v is bool: return v
 	if v == null: return false
@@ -11,9 +190,12 @@ static func _truthy(v) -> bool:
 	return true
 
 
-static func decode(text: String) -> Dictionary:
+## `trusted` is for files this game wrote to its own save folder: a packed collection whose checksum matches is
+## exactly what the game packed, so its records are not re-validated one by one (that was half the load time).
+## Imports and anything else keep the full check.
+static func decode(text: String, trusted := false) -> Dictionary:
 	var invalid := {"ok": false, "error": "This is not a City Venture save."}
-	if text.length() > 32 * 1024 * 1024: return invalid
+	if text.length() > MAX_TEXT: return invalid
 	var parser := JSON.new()
 	if parser.parse(text) != OK: return invalid
 	var payload = parser.data
@@ -22,6 +204,9 @@ static func decode(text: String) -> Dictionary:
 		return {"ok": false, "error": "This save comes from a newer version of City Venture."}
 	if float(payload["format"]) != GameState.SAVE_FORMAT or not payload.get("data") is Dictionary or not payload.get("summary") is Dictionary: return invalid
 	var data: Dictionary = payload["data"]
+	var verified := {}
+	if not unpack(data, verified): return invalid
+	var skip := func(name: String) -> bool: return trusted and bool(verified.get(name, false))
 	var tpl := GameState.template()
 	if data.get("company") is String: tpl["company"]=""
 	for key in ["meta", "player", "clock", "entities", "ledger", "ecommerce", "contracts", "schedule", "events", "story", "flags", "rng"]:
@@ -50,6 +235,7 @@ static func decode(text: String) -> Dictionary:
 	for entity in data["entities"].values():
 		if not _record(entity, {"id": "", "name": "", "kind": "", "bank_account": false}): return invalid
 	for pair in [["listings", {"id": "", "product": "", "price": 0, "active": false}], ["orders", {"id": "", "product": "", "entity": "", "qty": 0, "status": "", "unit_price": 0}], ["purchase_orders", {"id": "", "product": "", "entity": "", "qty": 0, "status": "", "total": 0, "eta": 0}]]:
+		if pair[0] == "orders" and skip.call("orders"): continue
 		for record in data["ecommerce"].get(pair[0], {}).values():
 			if not _record(record, pair[1]): return invalid
 	for inventory in data["ecommerce"].get("inventory", {}).values():
@@ -65,7 +251,7 @@ static func decode(text: String) -> Dictionary:
 	if not data["flags"] is Dictionary: return invalid
 	for key in data["flags"].keys():       # an older or hand-edited save may hold 1/0/"yes": read it as the truth value, don't reject the save
 		data["flags"][key] = _truthy(data["flags"][key])
-	for entry in data["schedule"]:
+	for entry in ([] if skip.call("schedule") else data["schedule"]):
 		if not _record(entry, {"t": 0, "kind": "", "p": {}}): return invalid
 	var personal = data.get("living",{}).get("personal_assets",null)
 	if personal!=null:
@@ -88,21 +274,33 @@ static func decode(text: String) -> Dictionary:
 		for visit in personal["visits"]:
 			if not _record(visit,{"npc":"","day":0,"home":""}):return invalid
 	var totals := {}
-	for entry in data["ledger"]["journal"]:
-		if not _record(entry, {"n": 0, "t": 0, "entity": "", "memo": "", "lines": []}): return invalid
-		if not data["entities"].has(entry["entity"]): return invalid
+	var entry_shape := {"n": 0, "t": 0, "entity": "", "memo": "", "lines": []}
+	var line_shape := {"acct": ""}
+	var entities: Dictionary = data["entities"]
+	var journal_checked: bool = skip.call("journal")
+	for entry in ([] if journal_checked else data["ledger"]["journal"]):
+		if not _record(entry, entry_shape): return invalid
+		var who: String = entry["entity"]
+		if not entities.has(who): return invalid
 		var difference := 0.0
-		if not totals.has(entry["entity"]): totals[entry["entity"]] = {}
+		if not totals.has(who): totals[who] = {}
+		var mine: Dictionary = totals[who]
 		for line in entry["lines"]:
-			if not _record(line, {"acct": ""}): return invalid
-			for side in ["dr", "cr"]:
-				if not _numeric(line.get(side, 0)): return invalid
-			var delta := float(line.get("dr", 0)) - float(line.get("cr", 0))
+			if not _record(line, line_shape): return invalid
+			var dr = line.get("dr", 0)
+			var cr = line.get("cr", 0)
+			if not _numeric(dr) or not _numeric(cr): return invalid
+			var delta := float(dr) - float(cr)
 			difference += delta
-			totals[entry["entity"]][line["acct"]] = float(totals[entry["entity"]].get(line["acct"], 0)) + delta
+			var acct: String = line["acct"]
+			mine[acct] = float(mine.get(acct, 0)) + delta
 		if absf(difference) > 0.011: return invalid
 	for entity in data["ledger"]["balances"]:
 		if not data["ledger"]["balances"][entity] is Dictionary: return invalid
+		if journal_checked:
+			for account in data["ledger"]["balances"][entity]:
+				if not _numeric(data["ledger"]["balances"][entity][account]): return invalid
+			continue
 		for account in data["ledger"]["balances"][entity]:
 			var amount = data["ledger"]["balances"][entity][account]
 			if not _numeric(amount) or absf(float(amount) - float(totals.get(entity, {}).get(account, 0))) > 0.02: return invalid
@@ -113,22 +311,33 @@ static func decode(text: String) -> Dictionary:
 
 
 static func _numeric(value: Variant) -> bool:
-	return typeof(value) in [TYPE_INT, TYPE_FLOAT] and is_finite(float(value))
+	var kind := typeof(value)
+	return (kind == TYPE_INT or kind == TYPE_FLOAT) and is_finite(float(value))
 
 
 static func _shape(value: Variant, expected: Variant) -> bool:
-	if typeof(expected) in [TYPE_INT, TYPE_FLOAT]: return _numeric(value)
-	if typeof(value) != typeof(expected): return false
-	if value is Dictionary:
+	var want := typeof(expected)
+	if want == TYPE_INT or want == TYPE_FLOAT: return _numeric(value)
+	if typeof(value) != want: return false
+	if want == TYPE_DICTIONARY:
 		for key in expected:
 			if value.has(key) and not _shape(value[key], expected[key]): return false
 	return true
 
 
+## Hot in big saves (every order, journal entry and scheduled item): scalars are compared inline.
 static func _record(value: Variant, expected: Dictionary) -> bool:
-	if not value is Dictionary: return false
+	if typeof(value) != TYPE_DICTIONARY: return false
 	for key in expected:
-		if not value.has(key) or not _shape(value[key], expected[key]): return false
+		if not value.has(key): return false
+		var want = expected[key]
+		var kind := typeof(want)
+		var got = value[key]
+		if kind == TYPE_INT or kind == TYPE_FLOAT:
+			var have := typeof(got)
+			if (have != TYPE_INT and have != TYPE_FLOAT) or not is_finite(float(got)): return false
+		elif typeof(got) != kind: return false
+		elif kind == TYPE_DICTIONARY and not _shape(got, want): return false
 	return true
 
 

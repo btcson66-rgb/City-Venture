@@ -94,6 +94,30 @@ class PerfCheckTests(unittest.TestCase):
         self.report["coverage"]["playable_companies"] = float("nan")
         self.assertTrue(validate(self.report, self.budget))
 
+    def test_frame_p99_uses_the_worst_day_not_the_mean_of_days(self):
+        for s in self.report["samples"]:
+            s.update(simulation_ms=1.0, frame_p99_ms=12.0)
+        self.assertEqual(validate(self.report, self.budget), [])
+        self.report["samples"][1]["frame_p99_ms"] = 30.5
+        self.assertTrue(any("p99" in e for e in validate(self.report, self.budget)))
+
+    def test_sparse_saves_are_allowed_but_the_last_day_must_be_measured(self):
+        sparse = copy.deepcopy(self.report)
+        del sparse["samples"][0]["gzip_bytes"], sparse["samples"][0]["load_ms"]
+        self.assertEqual(validate(sparse, self.budget), [])
+        del sparse["samples"][1]["gzip_bytes"], sparse["samples"][1]["load_ms"]
+        self.assertTrue(validate(sparse, self.budget))
+        half = copy.deepcopy(self.report)
+        del half["samples"][0]["load_ms"]
+        self.assertTrue(validate(half, self.budget))
+
+    def test_native_flag_only_waives_the_web_platform_requirement(self):
+        self.report["platform"] = "Linux"
+        self.assertTrue(validate(self.report, self.budget))
+        self.assertEqual(validate(self.report, self.budget, native=True), [])
+        self.report["samples"][0]["simulation_ms"] = 9
+        self.assertTrue(validate(self.report, self.budget, native=True))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -66,14 +66,20 @@ func pending(kind: String) -> Array:
 	return GameState.data["schedule"].filter(func(x): return x["kind"] == kind)
 
 
+## Deterministic cap per minute tick; surplus due events run on the next tick (only a saturated company ever reaches it).
+const MAX_EVENTS_PER_MINUTE := 120
+
+
 func _on_minute(t: int) -> void:
 	PhoneMessages.on_minute(t)
 	var s: Array = GameState.data["schedule"]
 	var guard := 0
-	while not s.is_empty() and int(s[0]["t"]) <= t and guard < 500:
+	while not s.is_empty() and int(s[0]["t"]) <= t and guard < MAX_EVENTS_PER_MINUTE:
 		guard += 1
 		var it: Dictionary = s.pop_front()
+		var t0 := Time.get_ticks_usec() if Prof.enabled else 0
 		_dispatch(it["kind"], it["p"])
+		if Prof.enabled: Prof.add("ev:" + str(it["kind"]), Time.get_ticks_usec() - t0)
 
 
 ## What the simulation is doing right now (read by the bots' watchdog when the game stops responding).
@@ -119,6 +125,10 @@ func _dispatch_owned(kind: String,p: Dictionary) -> void:
 
 
 func _on_hour(t: int, h: int) -> void:
+	if h == 0:
+		var t0 := Time.get_ticks_usec() if Prof.enabled else 0
+		Ledger.compact_old(t)
+		if Prof.enabled: Prof.add("ledger_compact", Time.get_ticks_usec() - t0)
 	phase = "hour:macro"
 	Macro.on_hour(t, h)
 	if CompanyPortfolio.is_multi():
@@ -139,6 +149,8 @@ func _on_hour(t: int, h: int) -> void:
 	phase=""
 
 func _single_company_hour(t: int, h: int) -> void:
+	if h == 0:
+		_archive_orders(t)
 	OverseasPartners.on_hour()
 	LegacyBusiness.on_hour()
 	CapitalMarket.on_hour()
@@ -173,7 +185,15 @@ func _single_company_hour(t: int, h: int) -> void:
 	phase = ""
 
 
+func _archive_orders(t: int) -> void:
+	var t0 := Time.get_ticks_usec() if Prof.enabled else 0
+	Ecommerce.archive_settled(t)
+	if Prof.enabled: Prof.add("order_archive", Time.get_ticks_usec() - t0)
+
+
 func _company_hour(t: int,h: int) -> void:
+	if h == 0:
+		_archive_orders(t)
 	OverseasPartners.on_hour()
 	LegacyBusiness.on_hour()
 	CapitalMarket.on_hour()
