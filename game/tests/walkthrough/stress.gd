@@ -2,7 +2,7 @@ extends Node
 ## Real ecommerce/clock/save load probe. QA fixtures exceed the hiring limit;
 ## they are not a winning strategy or evidence of unimplemented industries.
 
-var options := {"days": 3653, "orders": 5000, "staff": 50, "seed": 98001, "out": "user://stress", "wall_seconds": 120, "save_every": 1, "profile": 0, "textures": 0}
+var options := {"days": 3653, "orders": 5000, "staff": 50, "seed": 98001, "out": "user://stress", "wall_seconds": 120, "save_every": 1, "profile": 0, "textures": 0, "resume": 0}
 var report := {}
 var samples: Array = []
 var started := 0
@@ -74,7 +74,22 @@ func _run() -> void:
 	for i in 1440:
 		Clock.date_at(i)
 	report["calendar_1440_calls_ms"] = (Time.get_ticks_usec() - calendar_start) / 1000.0
-	for day in int(options["days"]):
+	var first_day := 0
+	if int(options["resume"]) > 0:
+		# Continue an interrupted run from its last snapshot in the same --out (samples and the save stay there).
+		var prev := FileAccess.get_file_as_string(str(options["out"]).path_join("stress_result.json"))
+		var parsed = JSON.parse_string(prev) if prev != "" else null
+		if parsed is Dictionary and SaveSystem.load_data(98):
+			for old_sample in parsed.get("samples", []):
+				if int(old_sample["day"]) <= int(options["resume"]):
+					samples.append(old_sample)
+			first_day = int(options["resume"])
+			report["resumed_from_day"] = first_day
+		else:
+			report["errors"].append("Resume requested but the previous report or snapshot could not be loaded")
+			_finish()
+			return
+	for day in range(first_day, int(options["days"])):
 		if _expired():
 			report["errors"].append("Wall time safety limit reached before all requested days")
 			break
