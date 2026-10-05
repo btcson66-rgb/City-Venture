@@ -26,6 +26,7 @@ const BACKUP_EVERY_SEC := 600.0
 var _last_rotate: Dictionary = {}      # slot -> unix time its .bak history last rotated (this session)
 var _summary_cache: Dictionary = {}    # slot -> {"mt": modified time, "sm": decoded summary}
 var pending_import := {}
+var _release_tasks: Array[int] = []   # background frees of replaced games; joined before the engine shuts down
 
 
 func _ready() -> void:
@@ -269,9 +270,24 @@ func load_data(slot: int) -> bool:
 ## entries is a visible part of loading a big save, and nothing reads it any more.
 func _release_later(old: Array) -> void:
 	if OS.has_feature("threads"):
-		WorkerThreadPool.add_task(func() -> void: old.clear())
+		_join_finished_releases()
+		_release_tasks.append(WorkerThreadPool.add_task(func() -> void: old.clear()))
 	else:
 		old.clear()
+
+
+func _join_finished_releases() -> void:
+	for id in _release_tasks.duplicate():
+		if WorkerThreadPool.is_task_completed(id):
+			WorkerThreadPool.wait_for_task_completion(id)
+			_release_tasks.erase(id)
+
+
+## A background free still running at quit would race the engine's teardown (crash on exit).
+func _exit_tree() -> void:
+	for id in _release_tasks:
+		WorkerThreadPool.wait_for_task_completion(id)
+	_release_tasks.clear()
 
 
 func load_and_enter(slot: int) -> bool:
