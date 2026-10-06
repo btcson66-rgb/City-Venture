@@ -104,6 +104,7 @@ func build() -> void:
 	# Industry launchers can outgrow the window; keep the content and every navigation action reachable.
 	var nav_scroll := UIK.scroll(nav, Vector2(108, 160))
 	nav_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	nav_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	row.add_child(nav_scroll)
 	var shown: Array = TABS.duplicate(true)
 	for descriptor in Industries.tabs():
@@ -134,8 +135,10 @@ func build() -> void:
 		nav.add_child(start)
 	nav.add_child(UIK.sep())
 	content = UIK.vbox(3)
-	var sc := UIK.scroll(content, Vector2(500, 160))
+	var sc := UIK.scroll(content, Vector2(100, 160))
+	sc.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 	sc.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	sc.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	row.add_child(sc)
 	if not Industries.render_tab(tab, self):
 		call("_tab_" + tab)

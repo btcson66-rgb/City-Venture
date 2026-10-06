@@ -46,6 +46,7 @@ func build(district_id: String) -> void:
 			var signal_node := CrossingSignal.new()
 			signal_node.position = Vector2(float(ground["rect"][0])*16-8, float(ground["rect"][1])*16)
 			add_child(signal_node)
+	_dress_corridors()
 	_build_sky()
 	_add_water_sparkles()
 	# north edge: building fronts / back of the block are not walkable
@@ -288,6 +289,23 @@ func _spawn_pedestrians(initial: bool) -> void:
 ## Sky + distant skyline (converted from the concept boards' skyline banners) behind the block.
 ## Lives on its own CanvasLayer so the world's day/night CanvasModulate doesn't flatten it; it is
 ## tinted and cross-faded to the night skyline here instead, with a slow parallax.
+func _dress_corridors() -> void:
+	for corridor in def.get("walk_corridors", []):
+		var tx := int(corridor[0]) / T
+		var tw := int(corridor[2]) / T
+		var rows := int(corridor[3]) / T
+		# Two stone borders and inset planting at the outside edge make a deliberate promenade.
+		paint("plaza_alt", [tx, 0, 1, rows])
+		paint("plaza_alt", [tx + tw - 1, 0, 1, rows])
+		for y in range(5, rows - 3, 9):
+			# Keep the road crossing and east/west exit strip clear.
+			if y >= 19 and y <= 32:
+				continue
+			paint("grass", [tx + tw - 3, y, 2, 3])
+			add_prop({"sprite":"tree_round_b", "x":(tx + tw - 3) * T, "y":y * T})
+			add_prop({"sprite":"bollard", "x":(tx + 1) * T, "y":(y + 1) * T})
+
+
 func _build_sky() -> void:
 	var rows := int(BASE_Y / T)
 	for y in rows:
@@ -311,6 +329,9 @@ func _build_sky() -> void:
 		sp.centered = false
 		if sp.texture != null:
 			sp.position = Vector2(0, BASE_Y + 2 - sp.texture.get_height())
+			sp.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
+			sp.region_enabled = true
+			sp.region_rect = Rect2(0, 0, size_px.x + 640, sp.texture.get_height())
 		sky_layer.add_child(sp)   # added even without art so nothing is left orphaned
 	_update_sky()
 

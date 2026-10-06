@@ -13,7 +13,7 @@ var _last_minute := -1
 func _ready() -> void:
 	self.name = "BuildingWelcome"
 	add_theme_stylebox_override("panel", UIK.flat(Color(0.04, 0.08, 0.14, 0.95), Art.C_SKY, 1, 5))
-	custom_minimum_size = Vector2(220, 0)
+	custom_minimum_size = Vector2(188, 0)
 	visible = false
 	var v := UIK.vbox(3)
 	add_child(v)
@@ -26,10 +26,10 @@ func _ready() -> void:
 	var dismiss := UIK.button("×", hide_card)
 	dismiss.name = "DismissBuildingWelcome"
 	h.add_child(dismiss)
-	schedule = UIK.wrap("", 7, Art.C_MUTED, 208)
+	schedule = UIK.wrap("", 7, Art.C_MUTED, 176)
 	v.add_child(schedule)
-	text = UIK.wrap("", 7, Art.C_WHITE, 208)
-	v.add_child(UIK.scroll(text, Vector2(208, 56)))
+	text = UIK.wrap("", 7, Art.C_WHITE, 176)
+	v.add_child(UIK.scroll(text, Vector2(176, 32)))
 	EventBus.location_entered.connect(_entered)
 
 
@@ -67,6 +67,7 @@ func hide_card() -> void:
 func _refresh() -> void:
 	var ws := SceneRouter.world_scene()
 	head.text = I18n.t(str(DataDB.building(building_id).get("name", building_id)))
+	head.tooltip_text = head.text
 	schedule.text = BuildingInfo.hours(building_id) + " · " + BuildingInfo.status(building_id)
 	text.text = BuildingInfo.welcome(building_id, ws)
 	_last_minute = Clock.now()

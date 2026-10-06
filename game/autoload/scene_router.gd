@@ -178,7 +178,7 @@ func building_open(bid: String) -> Dictionary:
 	var day_ok := days == "all" or wd in days.split(",")
 	if day_ok and m >= o and m < c:
 		return {"open": true}
-	var dtxt := I18n.t("daily")
+	var dtxt := I18n.t("every day")
 	if days != "all":
 		dtxt = I18n.t("Mon–Fri") if days == "mon,tue,wed,thu,fri" else (I18n.t("Mon–Sat") if days == "mon,tue,wed,thu,fri,sat" else days.replace(",", "/"))
 	return {"open": false, "reason": I18n.t("%s is closed. Open %s–%s, %s.") % [I18n.t(str(b.get("name", bid))), h.get("open", ""), h.get("close", ""), dtxt]}

@@ -115,7 +115,7 @@ def eye_pair(shape='round',expression=0,direction=0,part='eyes'):
         if expression==1:
             if part=='eyes':result+=line(f'M {x-1.8} {y+.3} Q {x} {y-1.4} {x+1.8} {y+.3}',INK,.48)
             continue
-        hh=height*(1.25 if expression==3 else .85 if expression==2 else 1)
+        hh=height*.72*(1.25 if expression==3 else .85 if expression==2 else 1)
         if part=='eyes':
             result+=path(f'M {x-1.65} {y} Q {x} {y-hh*1.8} {x+1.65} {y} Q {x+1.5} {y+hh} {x} {y+hh} Q {x-1.5} {y+hh} {x-1.65} {y} Z','#f8f8fa','#44383e',.22)
             result+=line(f'M {x-1.75} {y-.15} Q {x} {y-hh*1.7} {x+1.75} {y-.15}','#392d35',.32)
@@ -124,7 +124,7 @@ def eye_pair(shape='round',expression=0,direction=0,part='eyes'):
             result+=ellipse(xx-.26,y-.5,.23,.3,'#fff')+ellipse(xx+.3,y+.48,.11,.14,'#f7f6ee')
         else:
             xx=x+(.4 if expression==2 else 0)
-            result+=ellipse(xx,y,.87,hh*.83,'url(#iris)','#555',.2)+ellipse(xx,y,.34,hh*.71,'#202020')
+            result+=ellipse(xx,y,.65,hh*.83,'url(#iris)','#555',.2)+ellipse(xx,y,.26,hh*.71,'#202020')
             result+=line(f'M {xx-.58} {y+.34} L {xx-.43} {y+.5} M {xx+.56} {y+.34} L {xx+.43} {y+.5}','#a3a3a3',.12)
     return result
 def brow(style='straight',expression=0,direction=0):
@@ -147,11 +147,11 @@ def mouth(style='smile',expression=0,direction=0):
     return line(f'M {x-1.2} {y} Q {x} {y+.9} {x+1.2} {y}','#97717a',.3)
 def body(pres,face,direction,tick,pose):
     b=bob(pose,tick)
-    shift=[0,1.4,-1.4,.8][tick] if pose in ['', 'carry'] else 0
+    shift=[0,2.0,0,-2.0][tick] if pose in ['', 'carry'] else 0
     sx={'masculine':8.8,'feminine':10.4,'neutral':9.6}[pres];right=32-sx
     if direction==1:sx=12;right=21
     yend=43.8
-    result=group(head(face,direction),'translate(2.24 2.66) scale(.86)')
+    result=group(head(face,direction),'translate(3.2 3.8) scale(.80)')
     if pose=='sit':result=group(result,'translate(0 3)')
     result+=path(f'M {sx+2} 20 Q 16 18.5 {right-2} 20 L {right} 32 Q 16 34 {sx} 32 Z','url(#skin)')
     for side,x in enumerate([sx-.5,right-.8]):
@@ -161,13 +161,18 @@ def body(pres,face,direction,tick,pose):
             xx=17 if pose=='phone' else x+(-3 if side else 3)
             result+=path(f'M {x} 22 Q {x-1} 27 {x} 30 Q {x+1} 31 {xx} {yy} L {xx+1.4} {yy+1.5} Q {x+3} 34 {x+2} 30 L {x+2} 22 Z','url(#skin)','#aeaeae',.18)
         else:result+=path(f'M {x} 21 Q {x-1.4} 24 {x-.8+delta*.25} 29 L {x-.8+delta*.25} 33 Q {x+.2} 34.8 {x+1.5+delta*.25} 33 L {x+2} 24 Z','url(#skin)','#a5a5a5',.18)
-    result+=path(f'M {sx+2} 31 L {right-2} 31 L {right-3} {yend} L {right-5.7} {yend} L 16 35 L {sx+5.7} {yend} L {sx+3} {yend} Z','url(#skin)')
+    # All supported outfits cover the legs; a second static skin silhouette leaked through swinging trousers.
+    result+=path(f'M {sx+2} 31 L {right-2} 31 L {right-2} 34 L {sx+2} 34 Z','url(#skin)')
+    # Slim synchronized legs remain visible below skirts, fully covered by trousers.
+    stride=shift*(1.25 if direction==1 else .45)
+    for leg,x in enumerate([sx+(2.6 if direction==1 else 3.5)-stride, right-(4.2 if direction==1 else 4.8)+stride]):
+        result+=path(f'M {x} 35 L {x+1.4} 35 L {x+1.4} 44.3 L {x} 44.3 Z','url(#skin)')
     return group(result,f'translate(0 {b})')
 OUTFITS=['startup_casual','office_professional','home','barista','business_suit','civic_staff','courier','casual_tee','casual_jacket']
 def clothing(oid,pres,direction,tick,pose,part):
     sx={'masculine':8.1,'feminine':9.7,'neutral':8.9}[pres];r=32-sx
     if direction==1:sx=11.7;r=21.6
-    b=bob(pose,tick);swing=[0,1.4,-1.4,.8][tick] if pose in ['', 'carry'] else 0
+    b=bob(pose,tick);swing=[0,2.0,0,-2.0][tick] if pose in ['', 'carry'] else 0
     yend=43.8
     gray=oid in ['business_suit','courier','casual_tee','casual_jacket']
     color='url(#cloth)' if gray else 'url(#white)' if oid=='office_professional' else 'url(#navy)' if oid!='home' else '#a7b4c8'
@@ -178,17 +183,21 @@ def clothing(oid,pres,direction,tick,pose,part):
             if direction==1:result=path('M 12 32 L 21 32 L 27 36 Q 28 37 26 39 L 23 44 L 19.5 44 L 22 38 L 13 38 Z',bottom,INK,.25)
             else:result=path(f'M {sx+2} 31 L {r-2} 31 L {r} 37 L {r-1} 44 L {r-4.2} 44 L {r-4} 38 L 16 35.5 L {sx+4} 38 L {sx+4.2} 44 L {sx+1} 44 L {sx} 37 Z',bottom,INK,.25)
         else:
-            result=path(f'M {sx+2} 31 L {r-2} 31 L {r-2+swing*.18} 44 L {r-5.1+swing*.18} 44 L 16 35 L {sx+5.1-swing*.18} 44 L {sx+2-swing*.18} 44 Z',bottom,INK,.25)
+            result=path(f'M {sx+2} 31 L {r-2} 31 L {r-2+swing*(1.25 if direction==1 else .45)} 44 L {r-5.1+swing*(1.25 if direction==1 else .45)} 44 L 16 35 L {sx+5.1-swing*(1.25 if direction==1 else .45)} 44 L {sx+2-swing*(1.25 if direction==1 else .45)} 44 Z',bottom,INK,.25)
         result+=line(f'M {sx+3} 32 Q {sx+3} 34 {sx+5} 35 M {r-3} 32 Q {r-3} 34 {r-5} 35', '#6f839f' if not gray else '#ddd',.24)
         result+=line(f'M {sx+3.3} 37 L {sx+3.7} 41.8 M {r-3.3} 37 L {r-3.7} 41.8','#53647c' if not gray else '#999',.23)
         if oid=='office_professional' and pres=='feminine' and direction!=1:result=path(f'M {sx+2} 31 L {r-2} 31 L {r} 39 Q 16 40 {sx} 39 Z','url(#navy)',INK,.25)
     elif part=='shoes':
-        xs=[sx+1.1-swing*.18,r-5.5+swing*.18] if direction!=1 else [11.4-swing*.2,17.6+swing*.2]
+        xs=[sx+1.1-swing*.45,r-5.5+swing*.45] if direction!=1 else [12.4-swing*1.25,15.1+swing*1.25]
         if pose=='sit' and direction==1:xs=[19.1,22.3]
-        for x in xs:
+        for foot,x in enumerate(xs):
+            start=len(result)
             result+=path(f'M {x} 43 L {x+3.5} 43 L {x+4.4} 45 Q {x+4.5} 46 {x+.1} 46 L {x-.3} 45 Z','url(#white)' if oid in ['startup_casual','home','casual_tee'] else '#2b3443',INK,.25)
             result+=line(f'M {x} 45.6 L {x+4.1} 45.6','#d8dce4',.25)
             if oid in ['startup_casual','home','casual_tee']:result+=line(f'M {x+1} 43.6 L {x+2.5} 43.6 M {x+1.1} 44.2 L {x+2.7} 44.2','#8c9aaa',.2)
+            if pose in ['', 'carry']:
+                lift=-.7 if (tick==1 and foot==1) or (tick==3 and foot==0) else 0
+                result=result[:start]+group(result[start:],f'translate(0 {lift})')
     elif part=='top':
         result=path(f'M 13.5 19.3 Q {sx+1} 19 {sx} 21 L {sx+1.6} 31.8 Q 16 33 {r-1.6} 31.8 L {r} 21 Q {r-1} 19 18.5 19.3 L 16 22 Z',color,INK,.25)
         for side,x in enumerate([sx-1,r-1.2]):
@@ -266,7 +275,7 @@ def build():
                 for f in range(4):
                     cell=fn(row,f,pose)
                     if name.startswith(('hair_','eyes_','iris_','brows_','mouth_','acc_glasses')):
-                        cell=group(cell,'translate(2.24 2.66) scale(.86)')
+                        cell=group(cell,'translate(3.2 3.8) scale(.80)')
                         dy=3 if pose=='sit' else 0 if name.endswith('_expressions') else bob(pose,f)
                         if name.startswith('acc_glasses') and pose in ['idle','phone','interact']:dy=0
                         cell=group(cell,f'translate(0 {dy})')
