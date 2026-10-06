@@ -4,6 +4,10 @@ extends MiniGame
 
 const NOTES := [100, 50, 20, 10, 5, 1]
 
+var service_stage := "cash"
+var cash_quality := 0.0
+var receipt_valid := true
+
 var amount := 0
 var tray: Array = []
 var right := 0
@@ -30,6 +34,8 @@ func round_name() -> String:
 
 
 func build_round() -> void:
+	service_stage = "cash"
+	receipt_valid = round_i % 3 != 2
 	amount = rng.randi_range(12, 90) if round_i < 2 else rng.randi_range(60, 480)
 	tray = []
 	_layout()
@@ -52,29 +58,40 @@ static func fewest(a: int) -> int:
 
 func _layout() -> void:
 	UIK.clear(stage)
+	if service_stage == "refund":
+		var question := UIK.vbox(8)
+		stage.add_child(question)
+		question.add_child(UIK.wrap("Return request: check the receipt and deadline before refunding.", 10, Art.C_WHITE, 540))
+		question.add_child(UIK.label("✓ Receipt valid and within 14 days" if receipt_valid else "✗ Receipt missing — explain the return policy", 9))
+		for choice in [true, false]:
+			var button := UIK.button("Authorize refund" if choice else "Explain policy and decline refund", _refund.bind(choice))
+			button.name = "Refund_%s" % ("yes" if choice else "no")
+			question.add_child(button)
+		return
 	var v := UIK.vbox(8)
 	stage.add_child(v)
 	var ask := card(Color(0.1, 0.16, 0.28), Art.C_SKY)
-	var al := UIK.title(I18n.t("“I'd like to withdraw %s, please.”") % Fmt.money0(amount), 13, Art.C_WHITE)
+	var request := I18n.t("“I'd like to withdraw %s, please.”") % Fmt.money(amount) if round_i % 2 == 0 else I18n.t("Paid %s for a %s purchase. Count the change.") % [Fmt.money(amount + 50), Fmt.money(50)]
+	var al := UIK.title(request, 13, Art.C_WHITE)
 	al.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	ask.add_child(al)
 	v.add_child(ask)
 	var notes := UIK.hbox(5)
 	v.add_child(notes)
 	for d in NOTES:
-		var b := UIK.button("$%d" % d, _add.bind(d), "", 76)
+		var b := UIK.button(Fmt.money(d), _add.bind(d), "", 76)
 		b.custom_minimum_size = Vector2(76, 34)
 		b.name = "Note_%d" % d
 		notes.add_child(b)
 	var tray_card := card(Color(0.06, 0.1, 0.16), Color(0.3, 0.42, 0.62))
 	tray_card.custom_minimum_size = Vector2(560, 44)
-	var tl := UIK.wrap(I18n.t("Tray: ") + (" + ".join(tray.map(func(n): return "$%d" % n)) if not tray.is_empty() else "—"), 9, Art.C_WHITE, 540)
+	var tl := UIK.wrap(I18n.t("Tray: ") + (" + ".join(tray.map(func(n): return Fmt.money(n))) if not tray.is_empty() else "—"), 9, Art.C_WHITE, 540)
 	tl.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	tray_card.add_child(tl)
 	v.add_child(tray_card)
 	var t := total()
 	var col := Art.C_GREEN if t == amount else (Art.C_RED if t > amount else Art.C_GOLD)
-	var tot := UIK.title(I18n.t("Counted: %s of %s") % [Fmt.money0(t), Fmt.money0(amount)], 12, col)
+	var tot := UIK.title(I18n.t("Counted: %s of %s") % [Fmt.money(t), Fmt.money(amount)], 12, col)
 	tot.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	v.add_child(tot)
 	var acts := UIK.hbox(6)
@@ -101,14 +118,17 @@ func _undo() -> void:
 
 
 func _hand() -> void:
-	if total() == amount:
-		right += 1
-		var best := tray.size() <= fewest(amount)
-		award(1.0 if best else 0.8)
-		flash(I18n.t("✓ Exact") + ("" if best else I18n.t(" (fewer notes would be tidier)")), true)
-	else:
-		award(0.0)
-		flash(I18n.t("✗ Till error: you handed over %s") % Fmt.money0(total()), false)
+	if service_stage != "cash": return
+	cash_quality = (1.0 if tray.size() <= fewest(amount) else 0.8) if total() == amount else 0.0
+	service_stage = "refund"
+	_layout()
+
+func _refund(approve: bool) -> void:
+	if service_stage != "refund": return
+	var weight := float(FreelanceWorkflow.cfg()["service_first_weight"])
+	var quality := cash_quality * weight + ((1.0 - weight) if approve == receipt_valid else 0.0)
+	if quality >= 0.99: right += 1
+	award(quality)
 	next_round()
 
 

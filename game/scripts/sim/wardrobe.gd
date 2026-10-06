@@ -46,6 +46,25 @@ static func shop_items(store: String) -> Array:
 	return DataDB.character.get("outfits_shop", []).filter(func(o): return str(o.get("store", "")) == store)
 
 
+## Dress code (#116): casual < business < formal. It only decides which events you can enter and how a first
+## conversation opens; no outfit changes a number.
+static func dress_of(id: String) -> String:
+	var it := item(id)
+	return str(it.get("dress", "casual"))
+
+
+static func rank_of(level: String) -> int:
+	var levels: Array = Fundraising.cfg()["dress_levels"]
+	for i in levels.size():
+		if levels[i]["id"] == level:
+			return i
+	return 0
+
+
+static func dress_rank(id: String) -> int:
+	return rank_of(dress_of(id))
+
+
 ## "" when the purchase can go ahead, else the reason shown on the button.
 static func buy_block(id: String) -> String:
 	var it := item(id)

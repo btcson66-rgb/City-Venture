@@ -127,7 +127,9 @@
   "title": "The packing table",
   "lines": [
    "Pack orders by hand: box, padding, tape, label. Poor padding means broken items and returns; a wrong label means late delivery.",
-   "Then choose how they leave: book a courier (collects from here for a pickup fee) or carry them to PostPoint yourself."
+   "Then choose how they leave: book a courier (collects from here for a pickup fee) or carry them to PostPoint yourself.",
+   "Select an item, rotate it if needed, then click a free grid cell. Every item must fit before sealing.",
+   "Larger boxes cost more in materials and dimensional postage. Fragile goods need padding."
   ]
  },
  "dropoff": {
@@ -381,6 +383,303 @@
    "Set a transfer price for each running pair: at cost, cost plus a markup or market price. Both businesses show the trade in Segments.",
    "Group totals eliminate internal trade, so moving money between your own businesses never makes the group richer or poorer; only real savings do.",
    "Group jobs are big orders that need two or more industries. Unfinished parts can be subcontracted for a fee."
+  ]
+ },
+ "phone_opportunities": {
+  "title": "Opportunities on your phone",
+  "lines": [
+   "Short business stories you can accept from Opportunities on your phone.",
+   "Your company and its progress unlock opportunities. Complete the steps to earn contacts; unavailable opportunities end without a reward."
+  ]
+ },
+ "global_markets": {
+  "title": "Overseas markets",
+  "lines": [
+   "Open an international account at Nexus Bank, then use Company OS → Sales → Overseas to open a regional storefront.",
+   "Save a price in local currency for each listing. All regions share your stock, so avoid accepting more orders than you can fulfill.",
+   "Pack at your existing table and book an international courier. After delivery and the hold period, weekly payouts enter your foreign wallet.",
+   "Finance lets you keep foreign currency or convert it now. Automatic conversion runs after weekly payouts. Both choices carry currency risk."
+  ]
+ },
+ "customs": {
+  "title": "Ines explains customs",
+  "lines": [
+   "DDP pays duty before shipping and reduces refusals. DDU leaves duty to the buyer on arrival; refusals are more common.",
+   "Choose the actual product category. Correcting a held parcel means duty plus a penalty; documents halve the fine but add 2 days. Withdrawal restores goods, not freight.",
+   "The trial needs 10 delivered units with returns below 15%. After two weeks, it needs 5 units; reviewing and pausing expansion is an honest alternative, not a sales success."
+  ]
+ },
+ "trade_quote": {
+  "title": "Trade route estimates",
+  "lines": [
+   "Compare supply and buyer regions, quantities, trade terms, cargo transport and payment methods.",
+   "All cost rows are in home dollars; the buyer quote is labelled with its own currency.",
+   "Insurance reduces cargo exposure and L/C lowers default exposure; both cost money and neither guarantees a profit.",
+   "Deal signing is unavailable. Estimates create no contract, inventory or payment."
+  ]
+ },
+ "fx_risk": {
+  "title": "Manage exchange risk",
+  "lines": [
+   "Compare local repricing, a paid forward hedge, or future home-currency invoices.",
+   "Read the actual exchange gain / loss line at the next month close."
+  ]
+ },
+ "overseas_partner": {
+  "title": "Overseas partner",
+  "lines": [
+   "Call Omar free, or pay for a one-day flight each way.",
+   "Distributor: wholesale price and Omar owns the customers. Warehouse: retail customers, sea freight, duty and monthly rent.",
+   "After 45 days, offer remaining warehouse stock to Omar or review an unsuccessful expansion honestly."
+  ]
+ },
+ "legacy": {
+  "title": "Consolidation and legacy",
+  "lines": [
+   "Read the news, choose niche or scale, then apply a real price and operating response. The original price-war shock fades over 60 days.",
+   "Keep the listing and company operating for 60 days after responding. Kai reports recorded deliveries, revenue and reviews; market share is explicitly a model estimate.",
+   "Meet Maya in person or by phone. Choose an ending, then view all five cards. Closing a card early preserves your place. Contract-manager fees and shipments remain real costs."
+  ]
+ },
+ "growth": {
+  "title": "Growth and achievements",
+  "lines": [
+   "Read the three current goals; completed ones rotate automatically.",
+   "Goals are optional. Set one aside or reconsider it later. A closed company never traps this screen.",
+   "Achievements backfill from existing records. The journey page keeps your actual timeline."
+  ]
+ },
+ "life_review": {
+  "title": "Life review",
+  "lines": [
+   "Choose a timeline category and year on the phone. Optional thumbnails use existing art when a record names it.",
+   "The life review preserves the seven scores, five key moments and recorded statistics. It never creates profits.",
+   "Choose a next-life route, then confirm. The old game is saved first; only an empty slot may be used."
+  ]
+ },
+ "capital_market": {
+  "title": "Ownership and public markets",
+  "lines": [
+   "Select an offer to inspect due diligence and expiry, then confirm or decline. Staying private remains available after failed audits.",
+   "Select an underwriter, pay for the audit, wait fourteen days, then answer three investor questions. Listing funds are equity and dilute existing shares.",
+   "Read actual quarterly results and purchase integration costs. Reputation pressure expires after sixty days; share prices remain exposed to operating results."
+  ]
+ },
+ "home_moving": {
+  "title": "Moving home",
+  "icon": "home",
+  "lines": [
+   "At Okafor Lettings, choose a home and reserve it with a one-month deposit.",
+   "Thirty days of notice keeps your old home and rent until moving day. Paying one month ends it immediately.",
+   "Stock, incoming deliveries and return addresses follow the new home. If capacity or cash changes, retry after fixing it or cancel for a deposit refund."
+  ]
+ },
+ "personal_assets": {
+  "title": "Housing ladder and personal car",
+  "lines": [
+   "Buy the previous housing tier before upgrading. Compare the down payment and amortized monthly payment; ownership has fees and tax.",
+   "Move out before renting or selling. A tenant gets thirty days notice; unpaid invoices can be collected after thirty days.",
+   "Buy a personal car at Dockside Motors. Return to its parking district before driving; compare metro time, parking and energy. A luxury car has no output bonus."
+  ]
+ },
+ "cafe_depth": {
+  "title": "Café menu, shifts and inspections",
+  "lines": [
+   "Choose a café location, buy ingredients and compare six item prices with ingredient costs. Deliveries arrive the next morning.",
+   "Assign early or late shifts for each weekday. The same employee cannot cover two locations at once.",
+   "Clean daily, answer inspections within a day and compare thirty days of actual customer, revenue and gross margin records."
+  ]
+ },
+ "logistics_depth": {
+  "title": "Fleet, route contracts and maintenance",
+  "lines": [
+   "Buy one second van at Dockside Motors and assign each driver to a separate vehicle.",
+   "Counter, sign or decline ninety-day routes. Drive completed trips for fees; missed weekly obligations incur external-client penalties.",
+   "Book half-day maintenance before condition drops. Compare actual per-vehicle costs; internal café fees cancel in the company total."
+  ]
+ },
+ "popup_store": {
+  "title": "Weekend pop-up",
+  "lines": [
+   "Reserve Saturday and Sunday 10:00–18:00 at Pop-up Unit 5 at least one day ahead. Rent covers one weekend.",
+   "In Company OS, move available stock from your home or leased storage. Moving takes one hour; an available company van is free.",
+   "Work a one-hour checkout shift at the shop, or assign a current employee in People for Saturday or Sunday. Weekend hours cost extra wages.",
+   "Sunday at 18:00, unsold stock returns automatically. The weekend report compares actual margin with estimated ShopLane fees."
+  ]
+ },
+ "industry_first_order": {
+  "title": "First industry order",
+  "lines": [
+   "This optional guide follows real industry work. Close it to operate in Company OS, then reopen the industry tab for the next step.",
+   "Already completed work is skipped. Skip this guide hides the coaching; your accepted phone opportunity keeps its own progress."
+  ]
+ },
+ "trade_desk": {
+  "title": "International Trade",
+  "lines": [
+   "Register at Customs House, lease Meridian Trade Desk, then compare real supplier and buyer quotes.",
+   "Complete the commercial invoice, packing list and bill of lading."
+  ]
+ },
+ "city_future": {
+  "title": "Civic services and city decisions",
+  "lines": [
+   "Municipal partnerships pay actual supplier invoices from a separate authorized budget. They do not award company revenue.",
+   "Supplier delivery can fail. Premium contracts cost more and reduce risk without guaranteeing success.",
+   "Decisions change demand, employee retention and policies. Temporary storms and event disruptions fade; paid orders and choices remain in the city legacy."
+  ]
+ },
+ "settings": {
+  "title": "Settings",
+  "lines": [
+   "Settings apply immediately and are stored separately from your saved games.",
+   "Select an action, then press a key. Esc cancels key capture.",
+   "Large text uses scrollbars. Choices always wait for you."
+  ]
+ },
+ "new_run": {
+  "title": "New game rules",
+  "lines": [
+   "Pick a difficulty, seed and story mode, then create your character. A scenario fixes its opening funds.",
+   "The same seed, rules and choices reproduce the simulation. Daily market previews do not consume the event RNG. Weekly challenges lock standard rules and save results locally."
+  ]
+ },
+ "run_open": {
+  "title": "Scenario objective",
+  "lines": [
+   "Your opening card shows the objective, seed and deadline. Cash, debts and assets are real ledger entries.",
+   "Complete every condition before the deadline. Missed loan payments or closing the scenario company can end the attempt; the founder can continue in sandbox."
+  ]
+ },
+ "run_result": {
+  "title": "Scenario settlement",
+  "lines": [
+   "Results snapshot net worth, time played and rating. Challenge points combine these measures; local history is available from new game setup.",
+   "A completed attempt never settles twice. Continuing preserves your city and assets. Start a new game to try another scenario."
+  ]
+ },
+ "os_market": {
+  "title": "Market",
+  "lines": [
+   "Compare the cycle, base rate, price level and rival shares. Your prices and quality affect your share.",
+   "After 180 days an independent company can buy a rival with company cash. Market presence is an investment, not guaranteed income."
+  ]
+ },
+ "poach": {
+  "title": "Competing job offer",
+  "lines": [
+   "Match the weekly salary to keep the employee, or let them take the competing job.",
+   "Time keeps running. After three days, an unanswered offer expires and the employee leaves."
+  ]
+ },
+ "market_research": {
+  "title": "Crestline competitor research",
+  "lines": [
+   "Choose a product you own or have listed. The first survey takes 30 minutes; its saved result is free to reread for seven days.",
+   "Review your own selling price at a terminal. Research does not automatically change it."
+  ]
+ },
+ "fitness": {
+  "title": "Harbor Point Fitness",
+  "lines": [
+   "Rosa sells monthly memberships and single-class passes at reception on weekdays, 06:00–20:00.",
+   "Membership renews monthly from personal cash. Cancel to stop future fees; paid access lasts to its expiry.",
+   "Classes take one hour. Occasional business introductions offer choices with real costs and deadlines."
+  ]
+ },
+ "tax_filing": {
+  "title": "Tax Filing",
+  "lines": [
+   "Review personal seller VAT separately from company returns. Sales prices include VAT; company tax starts from its actual formation date.",
+   "Pay the tax and choose time-consuming DIY filing or a paid accountant. Correct incomplete forms yourself or pay for assistance; ignored corrections finish automatically with a fee.",
+   "Late filing adds one penalty and lowers credit. Refund VAT credits carry forward; old saves start new tax periods without retroactively changing their journals."
+  ]
+ },
+ "legal_disputes": {
+  "title": "Legal Dispute",
+  "lines": [
+   "Settlement is faster and cheaper but collects less. Letters and court take longer, cost more and have different odds and relationship consequences.",
+   "Customers may not pay existing receivables. Supplier disputes require paid, overdue, unfinished work; compensation does not erase construction or manufacture cash from an unpaid contract.",
+   "Employee wages remain owed. IP disputes refer to completed media or manufacturing jobs; court success avoids compensation but never pays fictitious income."
+  ]
+ },
+ "os_governance": {
+  "title": "Governance: brand, tax, legal and insurance",
+  "lines": [
+   "The brand breakdown comes from actual company activity. Events fade over 90 days, while current reviews and employee conditions still matter.",
+   "Review due tax filings or legal disputes first. Insurance is bought before losses, renews every 30 days and may lapse if cash is insufficient; funded renewal resumes automatically.",
+   "Existing vehicle premiums retain their cover through the central claims service. A loss can be reimbursed once per policy category, never more than its recorded eligible cost."
+  ]
+ },
+ "personal_life": {
+  "title": "Contacts and personal life",
+  "lines": [
+   "Meet people in town or at monthly city events. Contacts shows their stage, preferred gifts and next request.",
+   "Complete evidence-based requests to earn referrals. Referred work has supplies, a deadline, 30-day payment terms and a risk of non-payment.",
+   "Energy changes reaction time, not your points. Use sleep, breaks, gym classes and social events to manage stress.",
+   "A closed originating business retires its requests. Completed or expired work cannot pay twice."
+  ]
+ },
+ "lease_end": {
+  "title": "Ending a lease",
+  "lines": [
+   "Pay notice rent and any early exit fee before leaving. Deposits return only on exit, less damage.",
+   "Move stock with its outstanding orders; transfer or dismiss staff. Finish industry jobs or pay cancellation penalties.",
+   "If costs or obligations change during notice, review the pending exit. Your current home needs a replacement first."
+  ]
+ },
+ "phone_messages": {
+  "title": "Phone replies and meetings",
+  "lines": [
+   "Open a contact thread to reply. A reply changes the actual offer or event; acknowledgements confirm notifications only.",
+   "Deadlines use the shown default result. Contacts can invite known people; Agenda shows the full meeting window and place. Missed meetings can be booked again.",
+   "Work and payment templates use current briefs and invoices. They do not promise new work or force an early payment."
+  ]
+ },
+ "freelance_workflow": {
+  "title": "Client project",
+  "lines": [
+   "Client: ask about the goal, audience and budget. Skipping questions leaves gaps at acceptance.",
+   "Quote the project and choose the included revision allowance. A higher reputation permits a higher quote.",
+   "Your work quality affects acceptance. A session uses real consulting hours; no payment is earned before acceptance."
+  ]
+ },
+ "consulting_work": {
+  "title": "Client work session",
+  "lines": [
+   "Use the client's brief. Research, financial models, operating processes and brand strategy each need different work."
+  ]
+ },
+ "work_stations": {
+  "title": "Complete service at work",
+  "lines": [
+   "Manage the queue: confirm or recommend, make each drink, deliver to the ticket's counter or table, then clean.",
+   "Dirty tables cannot seat another guest. Waiting guests lose patience; choose who to serve first.",
+   "Complete service determines tips and the manager's review. Keep cup, milk and espresso shot counts correct."
+  ]
+ },
+ "traffic_safety": {
+  "title": "Crossings, treatment and insurance",
+  "lines": [
+   "Use a green crosswalk; cars yield there. A collision depends on actual speed and braking distance.",
+   "Minor injuries recover after three days or medicine. Ambulance admission takes one to three days while your business keeps running.",
+   "Health insurance must be active at impact. Claims cover incurred medical costs; counterparty settlements cannot duplicate insured costs."
+  ]
+ },
+ "fundraising": {
+  "title": "Fundraising and partners",
+  "lines": [
+   "Meet angels at city events; dress codes decide who gets in. Venture funds need an introduction from a contact or an angel, then a due diligence review of your books.",
+   "Pitch with figures read from your own books, answer the investor's questions, then read the term sheet. You can counter it, sign it or walk away. Money raised is equity: it dilutes you and is never sales income.",
+   "Signed investors expect quarterly reports. Missing a milestone can open a board review. Partnership contracts bring real jobs with a revenue share and sometimes exclusivity."
+  ]
+ },
+ "pitch_game": {
+  "title": "The investor pitch",
+  "lines": [
+   "Pick the figure to lead with for each slide. Only figures from your real books are offered, and the first slide counts most.",
+   "Then answer the investor's questions. An answer is backed only when your deck holds a figure that supports it.",
+   "Different investors care about different things, and every style of answer trades valuation against the terms they ask for."
   ]
  }
 }

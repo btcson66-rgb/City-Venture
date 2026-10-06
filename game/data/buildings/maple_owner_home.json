@@ -1,0 +1,145 @@
+{
+ "id": "maple_owner_home",
+ "name": "Maple Court owner apartment",
+ "district": "residential",
+ "type": "home",
+ "hours": {
+  "open": "00:00",
+  "close": "24:00",
+  "days": "all"
+ },
+ "exterior": {
+  "sprite": "maple_owner_home",
+  "fallback": "riverside_walkup",
+  "x": 1660,
+  "sign": "LANTERN ROW FLATS"
+ },
+ "interior": {
+  "size": [
+   14,
+   11
+  ],
+  "floor": "wood_warm",
+  "wall": "plaster_warm",
+  "ambient": "home",
+  "props": [
+   {
+    "sprite": "window_day",
+    "x": 40,
+    "y": 4,
+    "wall": true,
+    "night": "window_night"
+   },
+   {
+    "sprite": "radiator",
+    "fallback": "plant",
+    "x": 150,
+    "y": 50
+   },
+   {
+    "sprite": "bed_single",
+    "fallback": "bed",
+    "x": 150,
+    "y": 90
+   },
+   {
+    "sprite": "kitchenette",
+    "fallback": "kitchen",
+    "x": 10,
+    "y": 44
+   },
+   {
+    "sprite": "rug_small",
+    "x": 80,
+    "y": 120,
+    "floor": true
+   },
+   {
+    "sprite": "desk_laptop",
+    "x": 80,
+    "y": 50
+   },
+   {
+    "sprite": "packing_table",
+    "x": 70,
+    "y": 110
+   }
+  ],
+  "interactables": [
+   {
+    "id": "bed",
+    "at": [
+     188,
+     126
+    ],
+    "label": "Sleep",
+    "action": "sleep",
+    "params": {
+     "requires": "home:maple_owner_home"
+    }
+   },
+   {
+    "id": "laptop",
+    "at": [
+     100,
+     86
+    ],
+    "label": "Use laptop — Company OS",
+    "action": "open_company_os",
+    "params": {
+     "terminal": "home_laptop",
+     "requires": "home:maple_owner_home"
+    }
+   },
+   {
+    "id": "packing",
+    "at": [
+     90,
+     148
+    ],
+    "label": "Packing table",
+    "action": "pack_orders",
+    "params": {
+     "location": "maple_owner_home",
+     "requires": "home:maple_owner_home"
+    }
+   },
+   {
+    "id": "viewing",
+    "at": [
+     130,
+     146
+    ],
+    "label": "Look around the studio",
+    "action": "look",
+    "params": {
+     "icon": "home",
+     "text": "Owned homes have mortgage payments, management, maintenance and tax. Visit the personal assets desk to compare costs or arrange a move."
+    }
+   },
+   {
+    "label": "Home and personal car",
+    "action": "personal_assets",
+    "id": "personal_assets",
+    "at": [
+     126,
+     80
+    ],
+    "params": {
+     "requires": "home:maple_owner_home"
+    }
+   }
+  ],
+  "npc_spots": {},
+  "property": "maple_owner_home",
+  "stock_display": {
+   "location": "maple_owner_home",
+   "x": 24,
+   "y": 132,
+   "cols": 3,
+   "max": 8
+  }
+ },
+ "category": "Apartment",
+ "status": "active"
+}

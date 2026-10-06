@@ -1,0 +1,55 @@
+{
+ "id": "personal_nina",
+ "npc": "nina",
+ "steps": [
+  {
+   "stage": 0,
+   "title": "Nina: repairable clothing catalogue · part 1",
+   "detail": "Nina is helping a customer repair a favourite jacket. A seam repair costs less than a replacement and the fabric is sound. What should the consultation offer?",
+   "minutes": 45,
+   "cost": 0,
+   "choices": [
+    {
+     "id": "document",
+     "label": "Explain the repair and show both real prices",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 1,
+   "title": "Nina: repairable clothing catalogue · part 2",
+   "detail": "A supplier calls Nina's fabric sustainable without a certificate. Nina wants an honest catalogue for her students. Which wording is safe?",
+   "minutes": 60,
+   "cost": 10,
+   "choices": [
+    {
+     "id": "compare",
+     "label": "Describe the material and leave the claim unverified",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 2,
+   "title": "Nina: repairable clothing catalogue · part 3",
+   "detail": "Nina refers a clothing workshop that wants a repair catalogue. They ask you to promise every garment can be repaired. What scope can you agree to?",
+   "minutes": 90,
+   "cost": 20,
+   "choices": [
+    {
+     "id": "scope",
+     "label": "Document repairable examples and inspection limits",
+     "approach": "thorough"
+    }
+   ]
+  }
+ ],
+ "referral": {
+  "client": "Nina referral",
+  "detail": "A referred client commissions a documented repairable clothing catalogue. Complete the agreed work; no revenue is earned merely for knowing Nina.",
+  "price": 450,
+  "cost": 170,
+  "minutes": 240
+ }
+}

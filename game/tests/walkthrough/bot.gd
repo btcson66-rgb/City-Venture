@@ -54,8 +54,9 @@ func _exit_tree() -> void:
 
 
 func _ready() -> void:
-	_watchdog = Thread.new()
-	_watchdog.start(_watch)
+	if not OS.has_feature("web"):
+		_watchdog = Thread.new()
+		_watchdog.start(_watch)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	for a in OS.get_cmdline_user_args():
 		if a.begins_with("--out="):
@@ -72,7 +73,12 @@ func _ready() -> void:
 	MiniGames.auto = 0.85
 	if out_dir == "":
 		out_dir = ProjectSettings.globalize_path("user://bot")
+	# Set before the title menu reads save slots; QA must not share player/unit-test saves.
+	SaveSystem.DIR = out_dir.path_join("saves")
+	SaveSystem.autosave_enabled = false
 	DirAccess.make_dir_recursive_absolute(out_dir + "/screenshots")
+	# Automation owns its output saves and never replaces a player save when all slots are occupied.
+	SaveSystem.DIR = out_dir.path_join("saves")
 	t0 = Time.get_ticks_msec()
 	UIRoot.toasted.connect(func(text: String, kind: String): if kind == "bad": log_line("  toast: " + text))
 	if I18n.locale().begins_with("zh"):
@@ -85,16 +91,28 @@ func _ready() -> void:
 ## Bloom Coffee, ShopLane, Company OS), people's names, key names.
 func _audit_setup() -> void:
 	audit_on = true
-	var catalogue_path := ProjectSettings.globalize_path("res://").path_join("../tools/i18n/zh_TW.json")
-	# QA Web exports contain game resources, not the repository's tools directory.
-	var tr = JSON.parse_string(FileAccess.get_file_as_string(catalogue_path)) if FileAccess.file_exists(catalogue_path) else {}
-	if typeof(tr) == TYPE_DICTIONARY:
-		for v in tr.values():
-			for m in _word_re.search_all(str(v)):
-				_allowed[m.get_string()] = true
+	var folder := ProjectSettings.globalize_path("res://").path_join("../tools/i18n")
+	for path in DataDB._json_files(folder):
+		if not path.get_file().begins_with("zh_TW"):
+			continue
+		var tr = JSON.parse_string(FileAccess.get_file_as_string(path))
+		if tr is Dictionary:
+			for value in tr.values():
+				for word in _word_re.search_all(str(value)):
+					_allowed[word.get_string()] = true
+	# Language self-names and configured hardware-key names deliberately keep their spelling.
+	for locale in I18n.LOCALES:
+		for word in _word_re.search_all(str(locale[1])):
+			_allowed[word.get_string()] = true
+	for action in Preferences.bindings:
+		for word in _word_re.search_all(Preferences.key_caption(action)):
+			_allowed[word.get_string()] = true
 	for n in DataDB.npcs.values():
 		for w in str(n.get("name", "")).split(" "):
 			_allowed[w] = true
+	# Currency codes are identifiers printed beside foreign amounts, not untranslated prose.
+	for ccy in DataDB.economy.get("fx", {}).get("currencies", {}):
+		_allowed[str(ccy)] = true
 	var mk: Dictionary = DataDB._read("res://data/economy/marketplace.json")
 	for w in mk.get("customer_first_names", []):
 		_allowed[str(w)] = true
@@ -169,6 +187,20 @@ func _audit_one(t: String, ctl: Control) -> void:
 func _run() -> void:
 	await wait(1.0)
 	match mode:
+		"traffic_safety":
+			await load("res://tests/walkthrough/traffic_safety_tour.gd").new(self).run()
+		"workflows":
+			await load("res://tests/walkthrough/workflows_tour.gd").new(self).run()
+		"packing":
+			await load("res://tests/walkthrough/packing_tour.gd").new(self).run()
+		"phone_messages":
+			await load("res://tests/walkthrough/phone_messages_tour.gd").new(self).run()
+		"map_adjacency":
+			await load("res://tests/walkthrough/map_adjacency_tour.gd").new(self).run()
+		"lease_end":
+			await load("res://tests/walkthrough/lease_end_tour.gd").new(self).run()
+		"player_feedback":
+			await load("res://tests/walkthrough/player_feedback_tour.gd").new(self).run()
 		"save_transfer":
 			await load("res://tests/walkthrough/save_transfer_tour.gd").new(self).run()
 		"patch_notes":
@@ -338,11 +370,12 @@ func click(b: Control) -> bool:
 	if b == null:
 		return false
 	var sc: Node = b.get_parent()
-	while sc != null and not sc is ScrollContainer:
+	# Nested accessible modals can have both a list scroll and a page scroll.
+	while sc != null:
+		if sc is ScrollContainer:
+			(sc as ScrollContainer).ensure_control_visible(b)
+			await frames(3)
 		sc = sc.get_parent()
-	if sc != null:
-		(sc as ScrollContainer).ensure_control_visible(b)
-		await frames(3)
 	var center := b.get_global_rect().get_center()
 	var screen := get_viewport().get_final_transform() * center
 	var mv := InputEventMouseMotion.new()
@@ -517,7 +550,7 @@ func find_interactable(pred: Callable) -> Interactable:
 
 
 ## Walk up to an interactable and press E. Returns true if the prompt matched and we interacted.
-func use(pred: Callable, what: String) -> bool:
+func use(pred: Callable, what: String, retries := 2) -> bool:
 	if UIRoot.is_blocking() and popup_handler.is_valid():
 		await popup_handler.call()
 	var it := find_interactable(pred)
@@ -555,6 +588,10 @@ func use(pred: Callable, what: String) -> bool:
 		await walk_to(it.global_position + Vector2(0, 2), 2.0, 5.0, false, focused)
 		await frames(4)
 	if player() == null or player().focus != it:
+		# A newly surfaced decision can interrupt the last approach/facing frames.
+		if retries > 0 and UIRoot.is_blocking() and popup_handler.is_valid():
+			await popup_handler.call()
+			return await use(pred, what, retries - 1)
 		fail("interaction focus did not match: " + what)
 		return false
 	log_line("  use \"%s\"" % it.label)
@@ -585,6 +622,14 @@ func talk_through_dialogue(max_lines := 30, choose_first := true) -> void:
 ## a big-contract decision, staff in the office, the loan desk, SaaS after launch, insolvency and the
 ## closing statement, the pause menu with audio settings.
 func _screens() -> void:
+	GameState.new_game({"name":"Studio Screens","seed":32})
+	GameState.data["tutorial"]={"off":true}
+	UIRoot._suppress_decisions=true
+	GameState.data["world"]["year"]=3
+	Housing.request("old_town_studio","penalty")
+	SceneRouter._enter("interior",Living.home_building(),Living.home_bed(),"down")
+	await wait(.8)
+	await shot("screen_studio_1a")
 	await load("res://tests/walkthrough/info_badges_tour.gd").new(self).run()
 	# Keep the balanced supplier prices and units visible in the bilingual screenshot tour.
 	GameState.new_game({"name": "Balance Screens", "seed": 29})
@@ -687,6 +732,9 @@ func _screens() -> void:
 
 
 func _shots() -> void:
+	if "--detail-comparison" in OS.get_cmdline_user_args():
+		await load("res://tests/walkthrough/detail_tour.gd").new(self).run()
+		return
 	await shot("main_menu")
 	var rep: String = await BugReport.capture(get_tree())
 	expect(FileAccess.file_exists(rep + "/info.txt"), "F12 bug report written (%s)" % rep)
@@ -793,7 +841,10 @@ func _minigames() -> void:
 	for f in [["Size", b.want["size"]], ["Drink", b.want["drink"]], ["Milk", b.want["milk"]], ["Shots", b.want["shots"]]]:
 		await click_named("%s_%s" % [f[0], f[1]], 1.0)
 	await shot("mg_barista_built")
+	await click_named("ConfirmOrder", 1.0)
 	await click_named("Serve", 1.0)
+	await click_named("Deliver_%d" % int(b.want["destination"]), 1.0)
+	await click_named("CleanTable", 1.0)
 	await wait(0.3)
 	expect(b.points >= 0.99, "a correctly built drink scores full points (%.2f)" % b.points)
 	await _mg_finish(b, "barista")
@@ -803,6 +854,7 @@ func _minigames() -> void:
 	await _mg_finish(ps, "parcels")
 	var ch: CoworkHostGame = await _mg_open(CoworkHostGame.new(), "cowork")
 	await click_named("Desk_" + str(ch.visitors[0]["answer"]), 1.0)
+	await click_named("Room_A_10", 1.0)
 	expect(ch.points > 0.7, "handling a visitor right scores")
 	await _mg_finish(ch, "cowork")
 	var cf: ClerkFormsGame = await _mg_open(ClerkFormsGame.new(), "clerk")
@@ -812,6 +864,7 @@ func _minigames() -> void:
 		await click_named("Field_" + str(cf.form["bad"]), 1.0)
 		await shot("mg_clerk_marked")
 		await click_named("Reject", 1.0)
+	await click_named("Complaint_verify", 1.0)
 	expect(cf.points >= 0.99, "the right call on a form scores full points")
 	await _mg_finish(cf, "clerk")
 	var tc: TellerCashGame = await _mg_open(TellerCashGame.new(), "teller")
@@ -822,6 +875,7 @@ func _minigames() -> void:
 			left -= d
 	await shot("mg_teller_counted")
 	await click_named("HandOver", 1.0)
+	await click_named("Refund_" + ("yes" if tc.receipt_valid else "no"), 1.0)
 	expect(tc.points >= 0.99, "an exact, tidy withdrawal scores full points")
 	await _mg_finish(tc, "teller")
 	var ph: PhotoShootGame = await _mg_open(PhotoShootGame.new("desk_lamp"), "photo")
@@ -835,6 +889,11 @@ func _minigames() -> void:
 		orders.append({"id": "O10%d" % i, "product": ["wireless_earbuds", "desk_lamp", "water_bottle"][i], "qty": 1, "customer": "Rin Tanaka"})
 	var pk: PackGame = await _mg_open(PackGame.new(orders), "pack")
 	await click_named("Box_" + pk.need_box(), 1.0)
+	for place in Packing.plan(pk._order(), pk.box):
+		await click_named("PackItem_%d" % int(place["item"]), 1.0)
+		if place["rotated"]: await click_named("RotateItem", 1.0)
+		await click_named("Grid_%d_%d" % [int(place["x"]), int(place["y"])], 1.0)
+		if place["rotated"]: await click_named("RotateItem", 1.0)
 	for i in 5:
 		await click_named("Pad", 1.0)
 	for i in 3:

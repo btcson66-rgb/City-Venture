@@ -2,7 +2,7 @@
  "id": "airport",
  "name": "Airport",
  "size_tiles": [
-  120,
+  136,
   46
  ],
  "music": "day_city",
@@ -12,7 +12,7 @@
    "rect": [
     0,
     0,
-    108,
+    120,
     20
    ]
   },
@@ -21,7 +21,7 @@
    "rect": [
     0,
     20,
-    108,
+    120,
     4
    ]
   },
@@ -30,7 +30,7 @@
    "rect": [
     0,
     24,
-    108,
+    120,
     1
    ]
   },
@@ -39,7 +39,7 @@
    "rect": [
     0,
     25,
-    108,
+    120,
     5
    ]
   },
@@ -48,7 +48,7 @@
    "rect": [
     0,
     27,
-    108,
+    120,
     1
    ],
    "step": 2
@@ -58,7 +58,7 @@
    "rect": [
     0,
     30,
-    108,
+    120,
     1
    ]
   },
@@ -67,7 +67,7 @@
    "rect": [
     0,
     31,
-    108,
+    120,
     3
    ]
   },
@@ -76,7 +76,7 @@
    "rect": [
     0,
     34,
-    108,
+    120,
     7
    ]
   },
@@ -85,7 +85,7 @@
    "rect": [
     0,
     41,
-    108,
+    120,
     1
    ]
   },
@@ -94,7 +94,7 @@
    "rect": [
     0,
     42,
-    108,
+    120,
     4
    ]
   },
@@ -115,6 +115,51 @@
     3,
     5
    ]
+  },
+  {
+   "type": "sidewalk",
+   "rect": [
+    120,
+    0,
+    16,
+    46
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    14,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    44,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    104,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    122,
+    25,
+    3,
+    5
+   ]
   }
  ],
  "buildings": [
@@ -131,11 +176,46 @@
   "y": 560,
   "label": "Metro — Airport"
  },
- "exits": [],
+ "exits": [
+  {
+   "id": "walk_civic_center",
+   "direction": "W",
+   "rect": [
+    0,
+    324,
+    16,
+    48
+   ],
+   "to": "civic_center",
+   "spawn": "from_airport",
+   "walk_min": 14
+  },
+  {
+   "id": "walk_university",
+   "direction": "S",
+   "rect": [
+    1944,
+    720,
+    48,
+    16
+   ],
+   "to": "university",
+   "spawn": "from_airport",
+   "walk_min": 8
+  }
+ ],
  "spawns": {
   "metro": [
    1220,
    642
+  ],
+  "from_civic_center": [
+   40,
+   348
+  ],
+  "from_university": [
+   1968,
+   696
   ]
  },
  "bounds": {
@@ -197,5 +277,13 @@
  "traffic_types": [
   "compact",
   "sedan"
+ ],
+ "walk_corridors": [
+  [
+   1920,
+   0,
+   256,
+   736
+  ]
  ]
 }

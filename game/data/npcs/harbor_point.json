@@ -2,8 +2,30 @@
  "id": "harbor_point",
  "name": "Rosa · Harbor Point Fitness",
  "role": "customer",
- "phone_only": true,
- "logo": "harbor_point_fitness",
- "schedule": [],
- "dialogue": []
+ "phone_only": false,
+ "schedule": [
+  {
+   "days": "mon,tue,wed,thu,fri",
+   "from": "06:00",
+   "to": "20:00",
+   "location": "interior:harbor_point_fitness",
+   "spot": "counter",
+   "pose": "idle"
+  }
+ ],
+ "dialogue": [],
+ "appearance": {
+  "presentation": "feminine",
+  "face": "oval",
+  "hair": "bob",
+  "hair_color": "black",
+  "skin": "s3",
+  "eye_shape": "round",
+  "eye_color": "brown",
+  "brows": "soft",
+  "mouth": "small",
+  "accessory": "none"
+ },
+ "outfit": "startup_casual",
+ "relationship": {"preferences": ["flowers"], "stages": [0, 30, 60], "personal_story": "harbor_point"}
 }

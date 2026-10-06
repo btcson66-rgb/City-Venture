@@ -2,7 +2,7 @@
  "id": "industrial",
  "name": "Industrial",
  "size_tiles": [
-  108,
+  124,
   46
  ],
  "music": "day_city",
@@ -118,6 +118,42 @@
     3,
     5
    ]
+  },
+  {
+   "type": "sidewalk",
+   "rect": [
+    108,
+    0,
+    16,
+    46
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    14,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    44,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    104,
+    25,
+    3,
+    5
+   ]
   }
  ],
  "buildings": [
@@ -135,11 +171,46 @@
   "x": 1180,
   "y": 560
  },
- "exits": [],
+ "exits": [
+  {
+   "id": "walk_shopping_street",
+   "direction": "E",
+   "rect": [
+    1968,
+    324,
+    16,
+    48
+   ],
+   "to": "shopping_street",
+   "spawn": "from_industrial",
+   "walk_min": 8
+  },
+  {
+   "id": "walk_residential",
+   "direction": "E",
+   "rect": [
+    1968,
+    504,
+    16,
+    48
+   ],
+   "to": "residential",
+   "spawn": "from_industrial",
+   "walk_min": 10
+  }
+ ],
  "spawns": {
   "metro": [
    1220,
    642
+  ],
+  "from_shopping_street": [
+   1944,
+   348
+  ],
+  "from_residential": [
+   1944,
+   390
   ]
  },
  "bounds": {
@@ -206,5 +277,13 @@
   "van",
   "van",
   "bus"
+ ],
+ "walk_corridors": [
+  [
+   1728,
+   0,
+   256,
+   736
+  ]
  ]
 }

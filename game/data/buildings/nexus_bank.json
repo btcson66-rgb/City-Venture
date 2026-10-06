@@ -11,7 +11,15 @@
  "exterior": {
   "sprite": "nexus_bank",
   "x": 232,
-  "sign": "NEXUS BANK"
+  "sign": "NEXUS BANK",
+  "roof_props": [
+   {
+    "sprite": "solar_roof_large",
+    "x": 66,
+    "y": -12,
+    "if": "world_year>=4"
+   }
+  ]
  },
  "interior": {
   "size": [
@@ -203,6 +211,16 @@
     ],
     "label": "Marcus — property mortgages",
     "action": "real_estate_open"
+   },
+   {
+    "id": "trade_finance",
+    "at": [
+     372,
+     165
+    ],
+    "label": "Trade finance desk",
+    "action": "trade_open",
+    "params": {}
    }
   ],
   "npc_spots": {

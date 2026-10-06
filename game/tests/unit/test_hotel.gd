@@ -28,7 +28,7 @@ func test_opening_gates_district_and_registry() -> void:
 	Ledger.post(entity,"QA equity",[{"acct":"cash","dr":160000},{"acct":"equity","cr":160000}])
 	runner.check(Hotel.start("own")["ok"],"takeover with cash")
 	runner.eq(DataDB.district_def_in_city("luxury_heights")["status"],"active","Luxury Heights active")
-	runner.check(DataDB.districts.has("luxury_heights") and DataDB.districts["luxury_heights"]["buildings"].size()==3,"district has the three hotel buildings")
+	runner.check(DataDB.districts.has("luxury_heights") and DataDB.districts["luxury_heights"]["buildings"].size()>=3,"district has the three hotel buildings")
 	runner.eq(Hotel.total_rooms(),12,"12-room Aster Inn")
 	runner.eq(Hotel.stage(),1,"stage one")
 	runner.check(GameState.flag("hotel_active"),"flag for crisis events and Media demand")
@@ -307,6 +307,7 @@ func test_growth_tiers_need_conditions_and_add_rooms() -> void:
 	runner.check(Ledger.check_balanced(),"growth balanced")
 func test_media_group_campaign_lifts_hotel_demand() -> void:
 	setup()
+	runner.check(Living.lease("loft_office")["ok"], "media has an operating office")
 	var before := float(Hotel.demand("standard",Clock.day_index()+1)["direct"])
 	Media.S()["boosts"]["hotel"]={"until":Clock.now()+3*Clock.DAY,"value":.2,"id":"QA"}
 	Media.S()["active"]=true

@@ -20,7 +20,7 @@
   ],
   "floor": "concrete",
   "wall": "white_modern",
-  "ambient": "",
+  "ambient": "cafe",
   "props": [
    {
     "sprite": "window_day",
@@ -48,25 +48,112 @@
     "sprite": "box",
     "x": 200,
     "y": 120
+   },
+   {
+    "sprite": "espresso_machine",
+    "fallback": "desk_laptop",
+    "x": 40,
+    "y": 30
+   },
+   {
+    "sprite": "counter",
+    "fallback": "table",
+    "x": 40,
+    "y": 64
+   },
+   {
+    "sprite": "table",
+    "x": 132,
+    "y": 58
+   },
+   {
+    "sprite": "shelf",
+    "fallback": "box",
+    "x": 176,
+    "y": 52
+   },
+   {
+    "sprite": "cash_register",
+    "fallback": "desk_laptop",
+    "x": 70,
+    "y": 58
    }
   ],
   "interactables": [
    {
-    "id": "notice",
+    "id": "lease_cafe",
     "at": [
      128,
      80
     ],
-    "label": "Read the lease notice",
-    "action": "look",
+    "label": "Lease a café branch",
+    "action": "lease_property",
     "params": {
-     "icon": "shop",
-     "text": "Pop-up Unit 5: short leases for shops and cafés. Leasing opens with the retail business (planned)."
+     "property": "popup_cafe"
     }
+   },
+   {
+    "id": "cafe",
+    "at": [
+     88,
+     105
+    ],
+    "label": "Work the café counter",
+    "action": "cafe_counter",
+    "params": {
+     "property": "popup_cafe",
+     "requires": "lease:popup_cafe"
+    }
+   },
+   {
+    "id": "cafe_desk",
+    "at": [
+     142,
+     100
+    ],
+    "label": "Café menu, shifts and inspections",
+    "action": "cafe_depth",
+    "params": {
+     "property": "popup_cafe",
+     "requires": "lease:popup_cafe"
+    }
+   },
+   {
+    "id": "popup_notice",
+    "at": [
+     112,
+     92
+    ],
+    "label": "Reserve a weekend pop-up",
+    "action": "popup_store",
+    "params": {}
+   },
+   {
+    "id": "popup_till",
+    "at": [
+     66,
+     106
+    ],
+    "label": "Work the pop-up checkout",
+    "action": "popup_till",
+    "params": {}
    }
   ],
-  "npc_spots": {}
+  "npc_spots": {
+   "browse": [
+    174,
+    95
+   ]
+  },
+  "stock_display": {
+   "location": "popup_retail",
+   "x": 170,
+   "y": 74,
+   "cols": 3,
+   "per_box": 10,
+   "max": 15
+  }
  },
  "category": "Retail premises",
- "status": "planned"
+ "status": "active"
 }

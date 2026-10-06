@@ -1,0 +1,27 @@
+{
+ "id": "expo_officer_civic",
+ "with": "expo_officer",
+ "start": "start",
+ "nodes": {
+  "start": [
+   {
+    "who": "expo_officer",
+    "text": "The bid needs accommodation, transport and a venue within ninety days. Paid partnerships are available when you lack an industry."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "I will review the proposal and actual costs.",
+      "next": "end"
+     },
+     {
+      "text": "I will participate through a city partnership.",
+      "next": "end"
+     }
+    ]
+   }
+  ],
+  "end": []
+ }
+}

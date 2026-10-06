@@ -8,7 +8,80 @@ extends RefCounted
 ## delivered: revenue + COGS + platform fee → marketplace balance (NOT cash)
 ## Monday 09:00 payout: marketplace balance → cash.   Returns / reviews follow delivery.
 
-const OPEN_STATUSES := ["placed", "packed", "awaiting_pickup", "carried", "shipped"]
+## Retain the historical gettext pattern so old English journals localize after loading.
+const LEGACY_SALE_MEMO := "Sale delivered %s: %d × %s @ %s"
+
+const OPEN_STATUSES := ["placed", "packed", "awaiting_pickup", "carried", "shipped", "customs_hold"]
+const PICKUP_CHUNK := 100
+## Orders still waiting at the shelf; the only ones the hourly fulfilment scans ask for. Orders enter this set only when placed.
+const PRE_SHIP := ["placed", "packed"]
+
+## Derived order indexes, never saved, one per company context (the portfolio swaps the order
+## dictionary on every company switch). Fulfilment scans touch only the OPEN orders and the overseas
+## orders; settled home orders drop out lazily. The index is rebuilt when a dictionary changes identity
+## or size outside _h_order_place (loads, new games, fixture insertion).
+static var _ix: Dictionary = {}
+
+
+static func invalidate_reservations() -> void:
+	_ix = {}
+
+
+static func _reservation_key(loc: String, product: String) -> String:
+	return loc + ":" + product
+
+
+static func _index() -> Dictionary:
+	if not EventBus.state_loaded.is_connected(invalidate_reservations):
+		EventBus.state_loaded.connect(invalidate_reservations)
+	var orders: Dictionary = E()["orders"]
+	var cid := GameState.company_id()
+	var ix: Dictionary = _ix.get(cid, {})
+	if not ix.is_empty() and is_same(orders, ix["src"]) and orders.size() == ix["size"]:
+		return ix
+	ix = {"src": orders, "size": orders.size(), "active": {}, "pre": {}, "foreign": {}, "units": null}
+	for id in orders:
+		var o: Dictionary = orders[id]
+		if o["status"] in OPEN_STATUSES:
+			ix["active"][id] = true
+		if o["status"] in PRE_SHIP:
+			ix["pre"][id] = true
+		if o.has("region"):
+			ix["foreign"][id] = true
+	_ix[cid] = ix
+	return ix
+
+
+static func _refresh_reservations() -> void:
+	var ix := _index()
+	if ix["units"] != null:
+		return
+	var units := {}
+	var orders: Dictionary = E()["orders"]
+	for id in ix["active"]:
+		var o: Dictionary = orders[id]
+		if o["status"] == "placed":
+			for item in Packing.items(o):
+				var key := _reservation_key(o["location"], item["product"])
+				units[key] = int(units.get(key, 0)) + int(item["qty"])
+	ix["units"] = units
+
+
+static func _reserve_new_order(o: Dictionary) -> void:
+	var orders: Dictionary = E()["orders"]
+	var ix: Dictionary = _ix.get(GameState.company_id(), {})
+	if ix.is_empty() or not is_same(orders, ix["src"]) or orders.size() != int(ix["size"]) + 1:
+		_ix.erase(GameState.company_id())
+		return
+	ix["size"] = orders.size()
+	ix["active"][o["id"]] = true
+	ix["pre"][o["id"]] = true
+	if o.has("region"):
+		ix["foreign"][o["id"]] = true
+	if ix["units"] != null:
+		for item in Packing.items(o):
+			var key := _reservation_key(o["location"], item["product"])
+			ix["units"][key] = int(ix["units"].get(key, 0)) + int(item["qty"])
 
 
 static func E() -> Dictionary:
@@ -476,9 +549,9 @@ static func _h_return_refund(p: Dictionary) -> void:
 
 # ================================================================ inventory
 static func default_stock_location() -> String:
-	if GameState.data["living"]["leases"].has("suite_2b"):
+	if Living.has_lease("suite_2b"):
 		return "suite_2b"
-	return "riverside_studio"
+	return Living.home()
 
 
 static func location_name(loc: String) -> String:
@@ -491,7 +564,8 @@ static func location_capacity(loc: String) -> int:
 
 ## Why `qty` more units won't fit at `location` ("" when they fit), naming the stock location with the most room.
 static func space_block(location: String, qty: int) -> String:
-	var used := total_units_at(location) + incoming_units(location)
+	if DataDB.properties.get(location,{}).get("kind","")=="home" and location!=Living.home():return "That home is no longer your stock location. Choose your current home or leased storage."
+	var used := total_units_at(location) + incoming_units(location) + PopupStore.return_reserved(location)
 	var cap := location_capacity(location)
 	if used + qty <= cap:
 		return ""
@@ -509,12 +583,12 @@ static func space_block(location: String, qty: int) -> String:
 
 
 static func stock_locations() -> Array:
-	var out: Array = ["riverside_studio"]
-	if GameState.data["living"]["leases"].has("suite_2b"):
+	var out: Array = [Living.home()]
+	if Living.has_lease("suite_2b"):
 		out.append("suite_2b")
 	# any leased warehouse holds stock too (Pier 7, Harbor)
 	for pid in GameState.data["living"]["leases"]:
-		if str(DataDB.properties.get(pid, {}).get("kind", "")) == "warehouse":
+		if str(DataDB.properties.get(pid, {}).get("kind", "")) == "warehouse" and Living.has_lease(pid):
 			out.append(pid)
 	return out
 
@@ -547,10 +621,8 @@ static func avg_cost(loc: String, product_id: String) -> float:
 
 
 static func reserved(loc: String, product_id: String) -> int:
-	var n := 0
-	for o in E()["orders"].values():
-		if o["status"] == "placed" and o["location"] == loc and o["product"] == product_id:
-			n += int(o["qty"])
+	_refresh_reservations()
+	var n := int(_ix[GameState.company_id()]["units"].get(_reservation_key(loc, product_id), 0))
 	for c in GameState.data["contracts"].values():
 		if c.get("status", "") == "active" and c.get("location", "") == loc and c.get("product", "") == product_id:
 			n += int(c["qty"])
@@ -572,6 +644,7 @@ static func best_location(product_id: String) -> String:
 	var best := ""
 	var best_n := 0
 	for loc in stock_locations():
+		if Living.D()["leases"].get(loc, {}).has("ending"): continue
 		var a := available(loc, product_id)
 		if a > best_n:
 			best_n = a
@@ -646,7 +719,7 @@ static func create_listing(product_id: String, price: float, photo: String, phot
 		E()["listings"][lid] = l
 		GameState.inc_stat("listings_created")
 		if int(GameState.stat("listings_created")) == 1:
-			GameState.timeline(I18n.t("First ShopLane listing: %s at %s.") % [I18n.t(p["name"]), Fmt.money0(price)], "business")
+			GameState.timeline(I18n.t("First ShopLane listing: %s at %s.") % [I18n.t(p["name"]), Fmt.money(price)], "business")
 	else:
 		l["price"] = price
 		if photo == "studio" or l["photo"] != "studio":
@@ -724,7 +797,7 @@ static func ad_factor(l: Dictionary) -> float:
 
 
 static func demand_mult(product_id: String) -> float:
-	var m := (1.0 + Staff.demand_boost()) * Media.demand_boost("ecommerce")
+	var m := (1.0 + Staff.demand_boost()) * Replay.demand(product_id) * Industries.market_demand("ecommerce") * Media.demand_boost("ecommerce")
 	if bool(DataDB.product(product_id).get("eco", false)):
 		m *= World.eco_demand_mult()   # Year 4 on: green products are in demand
 	if packaging() == "recycled" and World.packaging_levy() > 0.0:
@@ -733,23 +806,24 @@ static func demand_mult(product_id: String) -> float:
 	for d in E()["demand_mods"]:
 		if int(d["until"]) > t and (d.get("product", "*") == "*" or d["product"] == product_id):
 			m *= float(d["mult"])
-	return m
+	return m * CityFuture.demand_factor("ecommerce")
 
 
 ## Expected orders/day for a listing (also shown in Company OS so pricing is a readable decision).
-static func lambda_day(l: Dictionary) -> float:
+static func lambda_day(l: Dictionary, region := "home") -> float:
 	var p := DataDB.product(l["product"])
 	var price := maxf(1.0, float(l["price"]))
-	var pf := pow(float(p["ref_price"]) / price, float(p["elasticity"]))
+	var pf := pow(float(p["ref_price"]) / price, LegacyBusiness.elasticity(l, region, float(p["elasticity"])))
 	pf = clampf(pf, 0.05, 3.0)
 	var photo_f := photo_factor(l)
 	var fresh := 1.0
 	if Clock.now() - int(l.get("created", 0)) < int(mk().get("new_listing_days", 3)) * Clock.DAY:
 		fresh = float(mk().get("new_listing_boost", 1.6))   # marketplaces promote new listings
-	return float(p["base_daily_demand"]) * pf * rating_factor(l) * photo_f * ad_factor(l) * demand_mult(l["product"]) * fresh
+	return float(p["base_daily_demand"]) * pf * rating_factor(l) * photo_f * ad_factor(l) * demand_mult(l["product"]) * fresh * LegacyBusiness.demand_factor(l, region) * LifeLegacy.demand_factor() * CapitalMarket.demand_factor()
 
 
 static func on_hour(t: int, h: int) -> void:
+	GlobalMarket.on_hour(t, h)
 	if h == 0:
 		_charge_ads()
 		_expire_mods()
@@ -777,10 +851,13 @@ static func _generate_demand(t: int, h: int) -> void:
 
 
 static func _h_order_place(p: Dictionary) -> void:
+	var region := str(p.get("region", ""))
+	if region != "" and not GlobalMarket.order_allowed(region, str(p["listing"])):
+		return
 	var l: Dictionary = E()["listings"].get(p["listing"], {})
 	if l.is_empty() or not l.get("active", false):
 		return
-	var loc := best_location(l["product"])
+	var loc := OverseasPartners.order_location(region, str(l["product"]), best_location(l["product"]))
 	if loc == "":
 		GameState.inc_stat("missed_sales")
 		l["missed"] = int(l.get("missed", 0)) + 1
@@ -796,14 +873,39 @@ static func _h_order_place(p: Dictionary) -> void:
 	var o := {"id": oid, "listing": l["id"], "product": l["product"], "qty": 1, "unit_price": float(l["price"]),
 		"customer": "%s %s" % [GameState.pick(names), GameState.pick(inits)], "placed": Clock.now(), "status": "placed",
 		"location": loc, "entity": GameState.business_entity(), "defective": GameState.randf() < dr}
+	if region != "":
+		o["entity"] = GameState.company_id()
+		GlobalMarket.annotate_order(o, region)
+		Customs.annotate(o)
+	var basket: Array = [{"product": l["product"], "qty": 1, "unit_price": float(o["unit_price"])}]
+	if region == "" and not Tutorial.first_venture_active():
+		if GameState.randf() < float(Packing.cfg()["quantity_chance"]):
+			basket[0]["qty"] = mini(available(loc, l["product"]), GameState.randi_range(2, int(Packing.cfg()["max_quantity"])))
+		if GameState.randf() < float(Packing.cfg()["basket_chance"]):
+			for other in Packing.cfg()["combinations"].get(l["product"], []):
+				var extra := listing_for(str(other))
+				if not extra.is_empty() and extra.get("active", false) and available(loc, str(other)) > 0:
+					basket.append({"product": other, "qty": 1, "unit_price": float(extra["price"])})
+					break
+	var trial: Dictionary = o.duplicate(true)
+	trial["items"] = basket
+	if Packing.smallest(trial) == "": basket = [{"product": l["product"], "qty": 1, "unit_price": float(o["unit_price"])}]
+	var survive_defects := 1.0
+	for item in basket: survive_defects *= pow(1.0 - float(inv(loc).get(item["product"], {}).get("defect_rate", 0.0)), int(item["qty"]))
+	o["defective"] = GameState.randf() < 1.0 - survive_defects
+	o["items"] = basket
+	o["qty"] = int(basket[0]["qty"])
+	o["total"] = Packing.total(o)
 	e["orders"][oid] = o
+	_reserve_new_order(o)
 	l["orders"] = int(l["orders"]) + 1
 	l["missed"] = 0
 	var mkey := Clock.month_key()
-	e["month_gmv"][mkey] = float(e["month_gmv"].get(mkey, 0.0)) + float(o["unit_price"])
+	e["month_gmv"][mkey] = float(e["month_gmv"].get(mkey, 0.0)) + Packing.total(o)
 	GameState.inc_stat("orders_placed")
-	EventBus.notify.emit(I18n.t("New order %s — %s — %s") % [oid, I18n.t(DataDB.product(o["product"])["name"]), Fmt.money0(o["unit_price"])], "good", "orders")
+	EventBus.notify.emit(I18n.t("New order %s — %s — %s") % [oid, Packing.summary(o), Fmt.money(Packing.total(o))], "good", "orders")
 	EventBus.order_placed.emit(oid)
+	OverseasPartners.fulfil(o)
 	_check_cap()
 
 
@@ -855,11 +957,104 @@ static func lift_cap() -> void:
 
 
 # ================================================================ fulfilment
-static func orders_with(statuses: Array, loc := "") -> Array:
+## Overseas-region orders only (the ones carrying a "region"); archiving never removes these.
+static func foreign_orders() -> Array:
+	var ix := _index()
+	var orders: Dictionary = E()["orders"]
 	var out: Array = []
-	for o in E()["orders"].values():
-		if o["status"] in statuses and (loc == "" or o["location"] == loc):
-			out.append(o)
+	for id in ix["foreign"]:
+		if orders.has(id):
+			out.append(orders[id])
+	return out
+
+
+## Settled home orders with nothing left to happen to them are folded into a per-month summary (see archive_settled).
+const ARCHIVE_MIN_ORDERS := 2000
+const SETTLED_STATUSES := ["delivered", "refunded", "replaced", "partial_refund", "refused", "cancelled"]
+## Scheduled follow-ups that can still touch an already delivered order.
+const FOLLOW_UP_EVENTS := ["eco.review", "eco.review_fixed", "eco.return_request", "eco.dispute", "eco.deliver"]
+
+
+## Fold settled home-region orders into a per-month summary once no scheduled follow-up (return window, review,
+## dispute) names them. Orders are about a kilobyte each and nothing reads a home order after that, but ordinary
+## play (a few orders a day) never reaches the threshold, so only saturated companies shed history. `grace_days`
+## keeps recent orders on the books a little longer. Returns the number of orders archived.
+static func archive_settled(now: int, min_orders := ARCHIVE_MIN_ORDERS, grace_days := 0.0) -> int:
+	var orders: Dictionary = E()["orders"]
+	if orders.size() < min_orders:
+		return 0
+	var cid := GameState.company_id()
+	var pending := {}
+	for item in GameState.data["schedule"]:
+		if str(item["kind"]) in FOLLOW_UP_EVENTS:
+			pending[str(item["p"].get("company_context", cid)) + "|" + str(item["p"].get("order", ""))] = true
+	var cutoff := now - int(grace_days * Clock.DAY)
+	var old: Array = []
+	for id in orders:
+		var o: Dictionary = orders[id]
+		if o["status"] in SETTLED_STATUSES and not o.has("region") and _last_activity(o) < cutoff and not pending.has(cid + "|" + str(id)):
+			old.append(id)
+	if old.size() < min_orders / 2:
+		return 0
+	var arch: Dictionary = E().get("order_archive", {})
+	var month_keys := {}
+	for id in old:
+		var o: Dictionary = orders[id]
+		var day := int(o["placed"]) / Clock.DAY
+		if not month_keys.has(day):
+			var d := Clock.date_at(int(o["placed"]))
+			month_keys[day] = "%04d-%02d" % [int(d["year"]), int(d["month"])]
+		var key: String = month_keys[day]
+		var row: Dictionary = arch.get(key, {"orders": 0, "units": 0, "gross": 0.0, "refunded": 0})
+		row["orders"] = int(row["orders"]) + 1
+		for item in Packing.items(o):
+			row["units"] = int(row["units"]) + int(item["qty"])
+		if not o["status"] in ["refunded", "cancelled"]:
+			row["gross"] = snappedf(float(row["gross"]) + float(o["total"] if o.has("total") else Packing.total(o)), 0.01)
+		else:
+			row["refunded"] = int(row["refunded"]) + 1
+		arch[key] = row
+		Tax.forget_sale(str(o["entity"]), "ecommerce:" + str(id))
+		orders.erase(id)
+	E()["order_archive"] = arch
+	_ix.erase(cid)
+	return old.size()
+
+
+## Newest timestamp on an order.
+static func _last_activity(o: Dictionary) -> int:
+	return maxi(maxi(int(o["placed"]), int(o.get("delivered", 0))), maxi(int(o.get("return", {}).get("t", 0)), int(o.get("review", {}).get("t", 0))))
+
+
+static func orders_with(statuses: Array, loc := "") -> Array:
+	var ix := _index()
+	var orders: Dictionary = E()["orders"]
+	var set_name := "pre"
+	var allowed: Array = PRE_SHIP
+	for st in statuses:
+		if not st in PRE_SHIP:
+			set_name = "active"
+			allowed = OPEN_STATUSES
+		if not st in OPEN_STATUSES:
+			set_name = ""
+			break
+	var out: Array = []
+	if set_name == "":
+		# A status outside the open set (none in production) takes the full scan.
+		for o in orders.values():
+			if o["status"] in statuses and (loc == "" or o["location"] == loc):
+				out.append(o)
+	else:
+		var ids: Dictionary = ix[set_name]
+		var settled: Array = []
+		for id in ids:
+			var o: Dictionary = orders.get(id, {})
+			if o.is_empty() or not o["status"] in allowed:
+				settled.append(id)
+			elif o["status"] in statuses and (loc == "" or o["location"] == loc):
+				out.append(o)
+		for id in settled:
+			ids.erase(id)
 	out.sort_custom(func(a, b): return int(a["placed"]) < int(b["placed"]))
 	return out
 
@@ -874,7 +1069,10 @@ static func photo_factor(l: Dictionary) -> float:
 ## Pack every placed order whose stock is at `loc`. Returns number packed. Caller advances time.
 ## quality: order id → {q, label_ok} from the packing minigame; orders beyond the
 ## ones packed by hand get the session's average. Staff packers pass nothing (they pack well).
-static func pack_orders(loc: String, max_n := -1, quality := {}) -> int:
+## Order ids the last pack_orders call skipped because their box, padding or placements were invalid.
+static var last_pack_skipped: Array = []
+static func pack_orders(loc: String, max_n := -1, quality := {}, staff_skill := 5) -> int:
+	_refresh_reservations()
 	var avg := 0.85
 	if not quality.is_empty():
 		avg = 0.0
@@ -882,27 +1080,50 @@ static func pack_orders(loc: String, max_n := -1, quality := {}) -> int:
 			avg += float(v["q"])
 		avg /= quality.size()
 	var n := 0
+	last_pack_skipped = []
 	for o in orders_with(["placed"], loc):
 		if max_n >= 0 and n >= max_n:
 			break
-		if stock(loc, o["product"]) < int(o["qty"]):
+		if not can_pack(o, loc): continue
+		var qv: Dictionary = quality.get(str(o["id"]), Packing.auto_pack(o, staff_skill)).duplicate(true)
+		if not qv.has("box"):
+			var supplied: Dictionary = Packing.auto_pack(o)
+			for key in qv: supplied[key] = qv[key]
+			qv = supplied
+		if float(qv.get("padding", -1.0)) < 0.0 or float(qv.get("padding", 2.0)) > 1.1:
+			last_pack_skipped.append(str(o["id"]))
 			continue
-		var l := inv(loc)
-		var cost := snappedf(avg_cost(loc, o["product"]) * int(o["qty"]), 0.01)
-		l[o["product"]]["qty"] = int(l[o["product"]]["qty"]) - int(o["qty"])
-		o["cogs"] = cost
+		if qv.is_empty() or not Packing.placement_ok(o, str(qv["box"]), qv["placements"]) or qv["placements"].size() != Packing.pieces(o).size():
+			last_pack_skipped.append(str(o["id"]))
+			continue
+		var cost := 0.0
+		var stock_before := {}
+		for item in Packing.items(o): stock_before[item["product"]] = stock(loc, item["product"])
+		for item in Packing.items(o):
+			var value := snappedf(avg_cost(loc, item["product"]) * int(item["qty"]), 0.01)
+			item["cogs"] = value
+			cost += value
+			inv(loc)[item["product"]]["qty"] = stock(loc, item["product"]) - int(item["qty"])
+		o["cogs"] = snappedf(cost, 0.01)
+		HoldingGroups.pack_margin(o, loc, stock_before)
 		o["status"] = "packed"
+		for item in Packing.items(o):
+			var reservation_key := _reservation_key(loc, item["product"])
+			_refresh_reservations()
+			var units: Dictionary = _ix[GameState.company_id()]["units"]
+			units[reservation_key] = int(units.get(reservation_key, 0)) - int(item["qty"])
 		o["packed"] = Clock.now()
-		if not quality.is_empty():
-			var qv: Dictionary = quality.get(str(o["id"]), {"q": avg, "label_ok": true})
-			o["pack_q"] = float(qv["q"])
-			o["label_ok"] = bool(qv["label_ok"])
-		var pack := float(DataDB.product(o["product"]).get("packaging_cost", 0.5)) + packaging_extra()
+		o["pack"] = qv
+		o["pack_q"] = float(qv.get("q", avg))
+		o["label_ok"] = bool(qv.get("label_ok", true))
+		var pack := Packing.material(o, str(qv["box"]), float(qv["padding"])) + packaging_extra()
 		Ledger.post(o["entity"], I18n.t("Packed order %s") % o["id"], [
 			{"acct": "goods_out", "dr": cost}, {"acct": "inventory", "cr": cost},
 			{"acct": "exp:packaging", "dr": pack}, {"acct": "cash", "cr": pack}], {"segment": "ecommerce", "type": "order", "id": o["id"]})
 		EventBus.order_packed.emit(o["id"])
 		n += 1
+	if not last_pack_skipped.is_empty():
+		EventBus.notify.emit(I18n.t("%d order(s) were not packed: their box, padding or item placement was invalid. Repack them.") % last_pack_skipped.size(), "warn", "parcel")
 	if n > 0:
 		GameState.inc_stat("orders_packed", n)
 	return n
@@ -927,9 +1148,16 @@ static func packaging_extra() -> float:
 
 
 static func ship_cost(o: Dictionary, method: String) -> float:
-	var m := DataDB.ship_method(method)
-	var cls: String = DataDB.product(o["product"]).get("ship_class", "small")
-	return snappedf(float(m.get("cost", {}).get(cls, 5.0)) * World.shipping_index(), 0.01)   # the era's courier rates
+	if o.has("region"):
+		return GlobalMarket.shipping_cost(o, method)
+	if o.has("pack"): return Packing.postage(o, str(o["pack"]["box"]), method)
+	# Price-margin previews keep accepting a legacy product-only quote.
+	if not o.has("qty") and not o.has("items"):
+		var cls: String = DataDB.product(o["product"]).get("ship_class", "small")
+		return snappedf(float(DataDB.ship_method(method)["cost"].get(cls, 5.0)) * World.shipping_index() * ShopLife.shipping_factor(), 0.01)
+	var box := Packing.smallest(o)
+	return Packing.postage(o, box, method) * ShopLife.shipping_factor() if box != "" else 0.0
+
 
 
 ## Book a courier pickup for all packed orders at `loc`.
@@ -948,6 +1176,7 @@ static func courier_pickup(loc: String, method: String) -> Dictionary:
 		t = Clock.now() + 10   # the guided first parcel: the courier is round the corner
 	for o in packed:
 		o["status"] = "awaiting_pickup"
+		o["pickup_fee_share"] = snappedf(fee / packed.size(), 0.01)
 		o["ship"] = {"method": method, "cost": ship_cost(o, method), "mode": "courier"}
 	Sim.schedule(t, "eco.pickup", {"ids": packed.map(func(x): return x["id"])})
 	return {"ok": true, "count": packed.size(), "cost": total, "pickup_at": t}
@@ -991,16 +1220,24 @@ static func dropoff_carried(method: String) -> Dictionary:
 
 static func _h_pickup(p: Dictionary) -> void:
 	var n := 0
-	for oid in p.get("ids", []):
+	var ids: Array = p.get("ids", [])
+	for oid in ids.slice(0, PICKUP_CHUNK):
 		var o: Dictionary = E()["orders"].get(oid, {})
 		if not o.is_empty() and o["status"] == "awaiting_pickup":
 			_ship(o)
 			n += 1
+	if ids.size() > PICKUP_CHUNK:
+		# A saturated shop hands over thousands of parcels at once; the rest follow a minute later so no frame stalls.
+		Sim.schedule(Clock.now() + 1, "eco.pickup", {"ids": ids.slice(PICKUP_CHUNK)})
 	if n > 0:
 		EventBus.notify.emit(I18n.t("Courier picked up %d parcel%s.") % [n, I18n.pl(n)], "info", "parcel")
 
 
 static func _ship(o: Dictionary) -> void:
+	if o.has("region"):
+		o["ship"]["method"] = GlobalMarket.shipping_method(o, str(o["ship"]["method"]))
+		if not Customs.prepare(o):
+			return
 	var m := DataDB.ship_method(o["ship"]["method"])
 	o["status"] = "shipped"
 	o["ship"]["shipped"] = Clock.now()
@@ -1011,6 +1248,10 @@ static func _ship(o: Dictionary) -> void:
 		eta = Clock.now() + (40 if not bool(o.get("label_ok", true)) else 20)   # the guided first parcel: across town
 	if o["ship"].has("van_eta"):
 		eta = int(o["ship"]["van_eta"])   # your own van: same day, and you know the address (Logistics.ship_own_van)
+	if o.has("region"):
+		eta = Clock.now() + GlobalMarket.shipping_days(o, str(o["ship"]["method"])) * Clock.DAY
+	if o.get("partner_channel", "") == "3pl":
+		eta = Clock.now() + int(OverseasPartners.cfg()["warehouse_delivery_days"]) * Clock.DAY
 	o["ship"]["eta"] = eta
 	Sim.schedule(eta, "eco.deliver", {"order": o["id"]})
 	GameState.inc_stat("orders_shipped")
@@ -1021,33 +1262,49 @@ static func _h_deliver(p: Dictionary) -> void:
 	var o: Dictionary = E()["orders"].get(p["order"], {})
 	if o.is_empty() or o["status"] != "shipped":
 		return
+	if o.has("region") and not GlobalMarket.live(str(o["entity"])):
+		o["status"] = "cancelled"
+		return
+	HoldingGroups.deliver_margin(o)
 	o["status"] = "delivered"
 	o["delivered"] = Clock.now()
-	var price := snappedf(float(o["unit_price"]) * int(o["qty"]), 0.01)
+	var price := snappedf(Packing.total(o), 0.01)
 	var fee := snappedf(price * float(mk().get("fee_rate", 0.1)), 0.01)
-	var pname: String = I18n.t(DataDB.product(o["product"])["name"])
-	Ledger.post(o["entity"], I18n.t("Sale delivered %s: %d × %s @ %s") % [o["id"], int(o["qty"]), pname, Fmt.money(o["unit_price"])], [
-		{"acct": "marketplace_balance", "dr": price}, {"acct": "revenue", "cr": price},
-		{"acct": "cogs", "dr": float(o.get("cogs", 0.0))}, {"acct": "goods_out", "cr": float(o.get("cogs", 0.0))},
-		{"acct": "exp:platform_fees", "dr": fee}, {"acct": "marketplace_balance", "cr": fee}], {"segment": "ecommerce", "type": "order", "id": o["id"]})
-	o["fee"] = fee
+	var pname: String = Packing.summary(o)
+	if o.has("region"):
+		GlobalMarket.deliver(o)
+	else:
+		_post_local_delivery(o, price, fee, pname)
 	GameState.inc_stat("orders_delivered")
-	GameState.inc_stat("revenue_total", price)
+	if not o.has("region"):
+		GameState.inc_stat("revenue_total", price)
 	if int(GameState.stat("orders_delivered")) == 1:
-		GameState.timeline(I18n.t("First sale: %s bought %s for %s.") % [o["customer"], pname, Fmt.money0(price)], "milestone")
+		GameState.timeline(I18n.t("First sale: %s bought %s for %s.") % [o["customer"], pname, Fmt.money(price)], "milestone")
 	EventBus.order_delivered.emit(o["id"])
 	# after-sale: poorly padded parcels arrive broken sometimes (the packing minigame's quality)
 	var pq := float(o.get("pack_q", 1.0))
-	if pq < 0.6 and not o.get("defective", false) and GameState.randf() < (0.6 - pq) * 1.2:
+	var damage := Packing.damage(o, float(o["pack"]["padding"])) if o.has("pack") else maxf(0.0, (0.6 - pq) * 1.2)
+	if not o.get("defective", false) and GameState.randf() < damage:
 		o["defective"] = true
 		o["damaged"] = true
 	# after-sale: returns & reviews
-	var p_ret := 0.8 if o.get("defective", false) else float(DataDB.product(o["product"]).get("return_base_rate", 0.03))
-	if GameState.flag("force_next_return") or GameState.randf() < p_ret:
+	var p_ret := 0.8 if o.get("defective", false) else return_probability(o)
+	if o.has("customs") and GameState.randf() < Customs.refusal_chance(o):
+		o["customs_refused"] = true
+		Sim.schedule(Clock.now() + 1, "eco.return_request", {"order": o["id"]})
+	elif GameState.flag("force_next_return") or GameState.randf() < p_ret:
 		GameState.set_flag("force_next_return", false)
 		Sim.schedule(Clock.now() + GameState.randi_range(12 * 60, 3 * Clock.DAY), "eco.return_request", {"order": o["id"]})
 	elif GameState.randf() < float(DataDB.product(o["product"]).get("review_rate", 0.4)):
 		Sim.schedule(Clock.now() + GameState.randi_range(8 * 60, 3 * Clock.DAY), "eco.review", {"order": o["id"]})
+
+
+static func _post_local_delivery(o: Dictionary, price: float, fee: float, pname: String) -> void:
+	Ledger.post(o["entity"], I18n.t("Sale delivered %s: %s — %s") % [o["id"], pname, Fmt.money(price)], [
+		{"acct": "marketplace_balance", "dr": price}, {"acct": "revenue", "cr": price},
+		{"acct": "cogs", "dr": float(o.get("cogs", 0.0))}, {"acct": "goods_out", "cr": float(o.get("cogs", 0.0))},
+		{"acct": "exp:platform_fees", "dr": fee}, {"acct": "marketplace_balance", "cr": fee}], {"segment": "ecommerce", "type": "order", "id": o["id"]})
+	o["fee"] = fee
 
 
 static func _review_stars(o: Dictionary) -> int:
@@ -1104,8 +1361,18 @@ static func _h_return_request(p: Dictionary) -> void:
 	if GameState.flag("first_issue_resolved") and Staff.auto_resolve_return(o["id"]):
 		return
 	var ev := "customer_return" if GameState.flag("first_issue_resolved") else "customer_return_first"
-	EventEngine.trigger(ev, {"order": o["id"], "customer": o["customer"], "product": I18n.t(DataDB.product(o["product"])["name"]),
-		"product_id": o["product"], "price": Fmt.money0(o["unit_price"]), "reason": reason})
+	EventEngine.trigger(ev, {"order": o["id"], "customer": o["customer"], "product": Packing.summary(o),
+		"product_id": o["product"], "price": Fmt.money(Packing.total(o)), "reason": reason})
+
+
+## Shared UI/action preflight: all unreserved units in the returned basket must be replaceable.
+static func replacement_available(order_id: String) -> bool:
+	var order: Dictionary = E()["orders"].get(order_id, {})
+	if order.is_empty() or order.get("status", "") != "return_requested": return false
+	for item in Packing.items(order):
+		var location := best_location(item["product"])
+		if location == "" or available(location, item["product"]) < int(item["qty"]): return false
+	return true
 
 
 ## Resolve a return request. choice: refund | replace | partial | refuse
@@ -1113,28 +1380,39 @@ static func resolve_return(order_id: String, choice: String) -> Dictionary:
 	var o: Dictionary = E()["orders"].get(order_id, {})
 	if o.is_empty() or o["status"] != "return_requested":
 		return {"ok": false, "error": "Nothing to resolve."}
-	var price := float(o["unit_price"]) * int(o["qty"])
+	if o.has("region") and choice in ["refund", "partial"]:
+		return GlobalMarket.resolve_return(o, choice)
+	var price := Packing.total(o)
 	var fee := float(o.get("fee", 0.0))
 	var ent: String = o["entity"]
-	var pname: String = I18n.t(DataDB.product(o["product"])["name"])
+	var pname: String = Packing.summary(o)
 	match choice:
 		"refund":
 			var lines := [{"acct": "refunds", "dr": price}, {"acct": "marketplace_balance", "cr": price},
 				{"acct": "marketplace_balance", "dr": fee}, {"acct": "exp:platform_fees", "cr": fee}]
-			var label := float(DataDB.ship_method("economy")["cost"].get("small", 4.2))
+			var label := ship_cost(o, "economy")
 			lines += [{"acct": "exp:shipping", "dr": label}, {"acct": "cash", "cr": label}]
 			if not o.get("defective", false):
+				HoldingGroups.return_margin(o)
 				# resellable: back into stock, reverse the COGS
-				_add_stock(o["location"], o["product"], int(o["qty"]), float(o.get("cogs", 0.0)) / maxi(1, int(o["qty"])), 0.0)
+				for item in Packing.items(o):
+					_add_stock(o["location"], item["product"], int(item["qty"]), float(item.get("cogs", o.get("cogs", 0.0))) / maxi(1, int(item["qty"])), 0.0)
 				lines += [{"acct": "inventory", "dr": float(o.get("cogs", 0.0))}, {"acct": "cogs", "cr": float(o.get("cogs", 0.0))}]
 			Ledger.post(ent, I18n.t("Refund %s: %s (return label paid)") % [order_id, pname], lines, {"segment": "ecommerce", "type": "return", "id": order_id})
 			o["status"] = "refunded"
 		"replace":
-			var loc := best_location(o["product"])
-			if loc == "":
-				return {"ok": false, "error": I18n.t("No %s in stock to send.") % pname}
-			var uc := avg_cost(loc, o["product"])
-			inv(loc)[o["product"]]["qty"] = stock(loc, o["product"]) - 1
+			var plan: Array = []
+			for item in Packing.items(o):
+				var loc := best_location(item["product"])
+				if loc == "" or available(loc, item["product"]) < int(item["qty"]): return {"ok": false, "error": I18n.t("No %s in stock to send.") % pname}
+				plan.append({"location": loc, "item": item})
+			var uc := 0.0
+			for row in plan:
+				var item: Dictionary = row["item"]
+				uc += avg_cost(row["location"], item["product"]) * int(item["qty"])
+				HoldingGroups.consume_stock_margin(ent, row["location"], str(item["product"]), int(item["qty"]), stock(row["location"], item["product"]))
+				inv(row["location"])[item["product"]]["qty"] = stock(row["location"], item["product"]) - int(item["qty"])
+			uc = snappedf(uc, 0.01)
 			var ship := ship_cost(o, "express")
 			Ledger.post(ent, I18n.t("Replacement sent %s: %s (express)") % [order_id, pname], [
 				{"acct": "cogs", "dr": uc}, {"acct": "inventory", "cr": uc},
@@ -1168,7 +1446,14 @@ static func _h_dispute(p: Dictionary) -> void:
 	var o: Dictionary = E()["orders"].get(p["order"], {})
 	if o.is_empty() or o["status"] != "refused":
 		return
-	var price := float(o["unit_price"]) * int(o["qty"])
+	if o.has("region"):
+		if not GlobalMarket.live(str(o["entity"])):
+			return
+		GlobalMarket.refund(o, 1.0)
+		Ledger.expense(str(o["entity"]), "platform_fees", 15.0, "Overseas dispute fee", {"type": "global_dispute"})
+		o["status"] = "disputed"
+		return
+	var price := Packing.total(o)
 	var ent: String = o["entity"]
 	Ledger.post(ent, I18n.t("ShopLane dispute lost %s: forced refund + $15 fee") % o["id"], [
 		{"acct": "refunds", "dr": price}, {"acct": "exp:platform_fees", "dr": 15.0}, {"acct": "marketplace_balance", "cr": price + 15.0}],
@@ -1184,8 +1469,8 @@ static func held_amount(entity: String) -> float:
 	var t := Clock.now()
 	var s := 0.0
 	for o in E()["orders"].values():
-		if o["entity"] == entity and o["status"] == "delivered" and t - int(o.get("delivered", 0)) < hold:
-			s += float(o["unit_price"]) * int(o["qty"]) - float(o.get("fee", 0.0))
+		if not o.has("region") and o["entity"] == entity and o["status"] == "delivered" and t - int(o.get("delivered", 0)) < hold:
+			s += Packing.total(o) - float(o.get("fee", 0.0))
 	return s
 
 
@@ -1330,8 +1615,8 @@ static func month_sales_summary() -> Dictionary:
 	var gmv := 0.0
 	for o in E()["orders"].values():
 		if int(o["placed"]) >= t0:
-			units += int(o["qty"])
-			gmv += float(o["unit_price"]) * int(o["qty"])
+			for item in Packing.items(o): units += int(item["qty"])
+			gmv += Packing.total(o)
 	return {"units": units, "gmv": gmv}
 
 
@@ -1356,3 +1641,19 @@ static func on_company_closed(ent: String) -> void:
 	pause_all_ads()
 	for listing in E()["listings"].values():
 		listing["active"] = false
+
+
+## All basket lines must be available together; no partial stock consumption on a failed pack.
+static func can_pack(o: Dictionary, loc: String) -> bool:
+	if GameState.data["entities"].get(o.get("entity", GameState.business_entity()), {}).has("closed"): return false
+	if not Packing.valid(o): return false
+	var quantities := {}
+	for item in Packing.items(o): quantities[item["product"]] = int(quantities.get(item["product"], 0)) + int(item["qty"])
+	for product in quantities:
+		if stock(loc, product) < int(quantities[product]): return false
+	return true
+
+static func return_probability(o: Dictionary) -> float:
+	var survives := 1.0
+	for item in Packing.items(o): survives *= pow(1.0 - float(DataDB.product(item["product"]).get("return_base_rate", 0.03)), int(item["qty"]))
+	return 1.0 - survives

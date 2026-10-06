@@ -1,0 +1,95 @@
+{
+  "checkpoint_sha256": "f39ce8c82042d3a8787cd90e2929ebcb9339bfb42d5746cfd092100a336f525b",
+  "source_run": "cv27-cadence-budget-v2",
+  "source_kind": "genuine SleepModal morning save before packing-close timeout",
+  "clock": {
+    "minutes": 197700,
+    "start": {
+      "day": 1.0,
+      "month": 6.0,
+      "year": 2031.0
+    }
+  },
+  "story": {
+    "active": [
+      "ch9_arrive"
+    ],
+    "chapter": "ch9_clearing_crisis",
+    "chapters_done": [
+      "ch1_arrival",
+      "ch2_first_customer",
+      "ch3_open_for_business",
+      "ch4_growing_pains",
+      "ch5_big_contract",
+      "ch6_cash_is_oxygen",
+      "ch7_supply_shock",
+      "ch8_green_shift"
+    ],
+    "done": [
+      "ch1_phone",
+      "ch1_outside",
+      "ch1_coffee",
+      "ch1_cowork",
+      "ch1_board",
+      "ch2_supplier",
+      "ch2_stock",
+      "ch2_listing",
+      "ch2_order",
+      "ch2_ship",
+      "ch2_first_dollar",
+      "ch2_issue",
+      "ch3_register",
+      "ch3_bank",
+      "ch3_workspace",
+      "ch3_os",
+      "goal_rent",
+      "goal_month",
+      "ch4_employer",
+      "ch4_post",
+      "ch4_hire",
+      "ch4_payroll",
+      "ch4_forecast",
+      "ch5_meet",
+      "ch5_decide",
+      "ch5_stock",
+      "ch5_deliver",
+      "ch6_forecast",
+      "ch6_bridge",
+      "ch6_collect",
+      "ch6_close",
+      "ch7_news",
+      "ch7_ken",
+      "ch7_stock",
+      "ch7_price",
+      "ch7_close",
+      "ch8_news",
+      "ch8_pack",
+      "ch8_product",
+      "ch8_grant",
+      "ch9_news",
+      "ch9_import",
+      "ch9_lina",
+      "ch9_settle"
+    ]
+  },
+  "chapter7_fallback": false,
+  "resumed_with": "--resume=ch9_import",
+  "modifications_to_save": false,
+  "remaining_validation": "completed: full-ch9-final-result.json, zero failures",
+  "import_orders_stat": 1.0,
+  "lumina_purchase_orders": [
+    {
+      "id": "PO-160",
+      "supplier": "lumina_direct",
+      "status": "in_transit",
+      "entity": "co_riverlight_goods",
+      "settlement": {
+        "clears": 186714,
+        "fee": 93.76,
+        "method": "letter_of_credit"
+      },
+      "total": 876.0,
+      "placed": 183725
+    }
+  ]
+}

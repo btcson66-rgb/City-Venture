@@ -1,0 +1,25 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 462.59 - Compatibility - Using Device: NVIDIA - Quadro RTX 4000
+
+   1.8s [6月1日（週日） 下午 2:00]   click [ToggleWalkingRoutes] Walking routes
+   2.4s [6月1日（週日） 下午 2:01]   ok  actual button opens walking diagram
+   2.5s [6月1日（週日） 下午 2:01]   shot 01_city_walking_connections.png
+   2.5s [6月1日（週日） 下午 2:01]   ok  Euler circuit includes every directed walking link
+   2.5s [6月1日（週日） 下午 2:01] STEP Walking riverside > startup_hub
+   3.1s [6月1日（週日） 下午 2:02]   shot 02_exit_sign_E_riverside.png
+   4.2s [6月1日（週日） 下午 2:16]   ok  actual walking transition to startup_hub
+   4.7s [6月1日（週日） 下午 2:17]   ok  arrival does not retrigger a return
+   4.7s [6月1日（週日） 下午 2:17] STEP Walking startup_hub > riverside
+   5.5s [6月1日（週日） 下午 2:17]   shot 03_exit_sign_W_startup_hub.png
+   6.5s [6月1日（週日） 下午 2:31]   ok  actual walking transition to riverside
+   7.0s [6月1日（週日） 下午 2:32]   ok  arrival does not retrigger a return
+   7.0s [6月1日（週日） 下午 2:32] STEP Walking riverside > civic_center
+  10.2s [6月1日（週日） 下午 2:36]   shot 04_exit_sign_N_riverside.png
+  11.3s [6月1日（週日） 下午 2:49]   ok  actual walking transition to civic_center
+  11.8s [6月1日（週日） 下午 2:50]   ok  arrival does not retrigger a return
+  11.8s [6月1日（週日） 下午 2:50] STEP Walking civic_center > riverside
+  12.3s [6月1日（週日） 下午 2:51]   shot 05_exit_sign_S_civic_center.png
+  13.5s [6月1日（週日） 下午 3:04]   ok  actual walking transition to riverside
+  14.0s [6月1日（週日） 下午 3:04]   ok  arrival does not retrigger a return
+  14.0s [6月1日（週日） 下午 3:04] BOT FINISHED — 0 failure(s) · 14.0s real
+  14.0s [6月1日（週日） 下午 3:04] English audit: 0 on-screen text(s) with untranslated words

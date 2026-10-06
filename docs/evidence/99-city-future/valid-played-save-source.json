@@ -1,0 +1,14 @@
+{
+  "status": "VALID_PLAYED_CAPTURE",
+  "source_commit": "4a5319d5a13f760284aeffeb81dce8f5290f1ad3",
+  "fixture": "game/tests/fixtures/saves/city_future_4a5319d5.json",
+  "sha256": "b7adf71468e90f8597623135d4feb85d6718fd98059522dbc4813da085262df7",
+  "command": "--bot=walkthrough --lang=zh_TW --from=city_future_os",
+  "isolation": "CityVenture_QA99_ValidSchema_4a5319d5",
+  "result": {
+    "failures": [],
+    "screenshots": 34,
+    "steps": 162
+  },
+  "save_readback": "27/27 targeted tests: actual completed capture loaded through SaveSystem.load_data; receipts, six cards, prior business ending and balanced books survive; reconcile is idempotent"
+}

@@ -2,7 +2,7 @@
  "id": "startup_hub",
  "name": "Startup Hub",
  "size_tiles": [
-  112,
+  128,
   48
  ],
  "music": "day_city",
@@ -130,6 +130,33 @@
    "type": "crosswalk_h",
    "rect": [
     92,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "sidewalk",
+   "rect": [
+    112,
+    0,
+    16,
+    48
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    44,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    74,
     25,
     3,
     5
@@ -1351,26 +1378,61 @@
  },
  "exits": [
   {
-   "id": "west",
+   "id": "walk_riverside",
+   "direction": "W",
    "rect": [
     0,
-    320,
+    324,
     16,
-    244
+    48
    ],
    "to": "riverside",
    "spawn": "from_startup_hub",
    "walk_min": 12
+  },
+  {
+   "id": "walk_civic_center",
+   "direction": "W",
+   "rect": [
+    0,
+    504,
+    16,
+    48
+   ],
+   "to": "civic_center",
+   "spawn": "from_startup_hub",
+   "walk_min": 11
+  },
+  {
+   "id": "walk_university",
+   "direction": "E",
+   "rect": [
+    2032,
+    324,
+    16,
+    48
+   ],
+   "to": "university",
+   "spawn": "from_startup_hub",
+   "walk_min": 9
   }
  ],
  "spawns": {
   "from_riverside": [
    40,
-   430
+   348
   ],
   "metro": [
    1140,
    642
+  ],
+  "from_civic_center": [
+   40,
+   390
+  ],
+  "from_university": [
+   2008,
+   348
   ]
  },
  "bounds": {
@@ -1422,5 +1484,13 @@
   "evening": 10,
   "night": 4
  },
- "minimap_color": "#5d6f9a"
+ "minimap_color": "#5d6f9a",
+ "walk_corridors": [
+  [
+   1792,
+   0,
+   256,
+   768
+  ]
+ ]
 }

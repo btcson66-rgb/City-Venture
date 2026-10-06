@@ -100,11 +100,13 @@
 
 ## 手機
 
-按 Tab 打開。外框 `phone_frame`（150×250）。主畫面是 3×3 的 App 格子，每格 40×40，上面放圖示、下面放名字：
+按 Tab 打開。外框 `phone_frame`（150×250）。主畫面為三欄可捲動的 App 格子，每格 40×40，上面放圖示、下面放名字：
 
 | App | 圖示 | 內容 |
 |-----|------|------|
-| Messages | `mail` | 訊息（未讀數字由程式畫） |
+| Messages | `mail` | 依聯絡人分組的對話串、未讀數字、時間戳記、條件回覆與期限倒數 |
+| Contacts | `mail` | 已認識 NPC 的主動傳訊範本、冷卻與成功條件 |
+| Agenda | `calendar` | 約見時間、地點與完成／錯過狀態；到場自動觸發對話 |
 | Bank | `bank` | 帳戶、貸款 |
 | Tasks | `tasks` | 主線和支線目標 |
 | City | `map` | 城市地圖 |
@@ -139,3 +141,25 @@
 ## 美術品質更新 · 2026-10-01
 
 43 圖示的SVG語意延續既有A7，並補直接輸出的4×。23表面／外框整理為統一海軍藍漸層與城市藍操作色；危險、停用、滑過、按下、選中狀態分開。sleep改成床，圖檔不寫字。原尺寸與atlas格位不變，已由既有renderer自動替換；高解析UI載入和9-slice的physical／logical邊界由Claude接線。美術來源與21實機狀態、全巡禮證據見ui_quality_20261001。
+
+
+### Device settings (#87)
+
+The title and pause menus open five settings pages (audio, display, controls, accessibility and game). UI scaling
+and extra-large text use scrollable panels. Color assistance retains textual labels and signed money; toggles show
+✓/✗ and the next available action. Settings remain outside company saves. See [settings](../SETTINGS.md).
+
+## Touch and controllers (#88)
+
+Ground taps follow walkable routes; nearby objects show a touch interaction button. Buttons are at least 44 logical pixels. D-pad focuses the next action first; enlarged lists scroll to keep controls reachable. Portrait devices request landscape. See [input support](../INPUT_ACCESS.md) and the explicit device validation limits there.
+
+## Replay setup and cards (#89)
+
+New Game offers Easy/Standard/Hard/Custom rules, a seed and story/sandbox selection, then character creation. Scenario cards show objective, current/required quantities, deadline and a single next action. The six openings are `inherited_cafe`, `fresh_restart`, `venture_fund`, `harbor_cargo`, `family_property`, `part_time_start`. Weekly challenges use fixed standard rules; local history has no online ranking. See [replay rules](../REPLAY.md). Maple Court is a financial scenario asset; a physical property scene remains planned outside this ticket.
+
+
+### Market and City news (#90)
+
+The Company OS Market tab (`MarketView`) shows seeded cycle/base rate/inflation and normalized shares, rivals and bounded daily headlines. Its navigation scrolls to preserve minimum button targets. The phone City news app shows 1–3 items per day. Poaching offers have salary-match and departure choices and expire after three days. `macro_cycle` and `market_competition` explanation badges and `os_market`/`poach` help cards explain the costs.
+
+Rival data IDs: `automotive_1`, `automotive_2`, `cafe_1`, `cafe_2`, `consulting_1`, `consulting_2`, `ecommerce_1`, `ecommerce_2`, `energy_1`, `energy_2`, `hotel_1`, `hotel_2`, `international_trade_1`, `international_trade_2`, `logistics_1`, `logistics_2`, `manufacturing_1`, `manufacturing_2`, `media_1`, `media_2`, `real_estate_1`, `real_estate_2`, `saas_1`, `saas_2`. These cover declared industries; the old PR target does not make every industry playable.

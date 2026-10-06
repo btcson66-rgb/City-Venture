@@ -1,0 +1,18 @@
+{
+ "id": "venture_fund",
+ "name": "Venture funding",
+ "description": "$500,000 of venture backing. Reach the revenue target within 18 months or the board withdraws its capital.",
+ "goal": "Reach the revenue target before the board deadline.",
+ "initial": {
+  "cash": 500000,
+  "company": "Venture Studio",
+  "type": "ecommerce",
+  "capital": 450000,
+  "board_capital": 450000
+ },
+ "win": {
+  "revenue": 40000,
+  "cash": 5000
+ },
+ "limit_months": 18
+}

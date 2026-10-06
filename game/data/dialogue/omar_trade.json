@@ -1,0 +1,43 @@
+{
+ "id": "omar_trade",
+ "with": "omar",
+ "nodes": {
+  "start": [
+   {
+    "who": "omar",
+    "text": "I buy at wholesale and keep the customers. A warehouse leaves the customers and margin with you, but you fund sea freight, duty, storage and slow stock. A video call works if you cannot afford a flight."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Show me the costs and risks.",
+      "next": "costs"
+     },
+     {
+      "text": "I will compare before committing cash.",
+      "next": "wait"
+     }
+    ]
+   }
+  ],
+  "costs": [
+   {
+    "who": "omar",
+    "text": "Use the actual company books, not revenue alone. Stock and money on the way still tie up cash."
+   }
+  ],
+  "wait": [
+   {
+    "who": "omar",
+    "text": "Waiting is a choice too. Watch the deadlines, fees and stock before you decide."
+   }
+  ]
+ },
+ "on_end": [
+  {
+   "do": "set_flag",
+   "flag": "met_omar"
+  }
+ ]
+}

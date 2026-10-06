@@ -1,0 +1,76 @@
+{
+ "id": "personal_assets",
+ "purchase_fee": 0.03,
+ "sale_fee": 0.05,
+ "vacancy_days": 14,
+ "tenant_chance": 0.65,
+ "rent_payment_chance": 0.9,
+ "management_rate": 0.04,
+ "maintenance_rate": 0.0002,
+ "mortgage_late_fee": 50,
+ "move_notice_days": 30,
+ "drive_ratio": 0.65,
+ "rush_ratio": 1.9,
+ "rush_hours": [
+  8,
+  9,
+  17,
+  18
+ ],
+ "parking_minutes": 7,
+ "rush_parking_minutes": 18,
+ "parking_fee": 6,
+ "downtown_fee": 14,
+ "downtown": [
+  "civic_center",
+  "financial",
+  "shopping_street"
+ ],
+ "parking_spaces": 2,
+ "fuel_per_minute": 0.11,
+ "electric_per_minute": 0.18,
+ "electric_capacity": 60,
+ "energy_retail_markup": 0.15,
+ "service_days": 90,
+ "service_cost": 160,
+ "insurance_month": 55,
+ "furniture": {
+  "warm": {
+   "name": "Warm wood interior",
+   "cost": 850,
+   "tint": "bfa277"
+  },
+  "modern": {
+   "name": "Modern blue interior",
+   "cost": 1200,
+   "tint": "91b5cd"
+  }
+ },
+ "cars": [
+  {
+   "id": "kite_hatch",
+   "name": "Kite hatchback",
+   "price": 10800,
+   "electric": false,
+   "luxury": false
+  },
+  {
+   "id": "duke_coupe",
+   "name": "Duke coupe",
+   "price": 30500,
+   "electric": false,
+   "luxury": true
+  },
+  {
+   "id": "lumen_ev",
+   "name": "Lumen electric hatchback",
+   "price": 22800,
+   "electric": true,
+   "luxury": false
+  }
+ ],
+ "car_resale_ratio": 0.8,
+ "foreclosure_missed": 3,
+ "foreclosure_discount": 0.15,
+ "foreclosure_credit_hit": 120
+}

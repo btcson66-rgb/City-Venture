@@ -1,0 +1,55 @@
+{
+ "id": "personal_frank_doyle",
+ "npc": "frank_doyle",
+ "steps": [
+  {
+   "stage": 0,
+   "title": "Frank Doyle: auction condition disclosure · part 1",
+   "detail": "Frank Doyle asks for an auction condition disclosure. Their evidence contains an unresolved question. What should the first draft do?",
+   "minutes": 45,
+   "cost": 0,
+   "choices": [
+    {
+     "id": "document",
+     "label": "Document the question and ask for evidence",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 1,
+   "title": "Frank Doyle: auction condition disclosure · part 2",
+   "detail": "The auction condition disclosure now has conflicting notes. Frank Doyle wants a version that other people can check. How do you resolve the conflict?",
+   "minutes": 60,
+   "cost": 10,
+   "choices": [
+    {
+     "id": "compare",
+     "label": "Compare sources and record what remains uncertain",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 2,
+   "title": "Frank Doyle: auction condition disclosure · part 3",
+   "detail": "Frank Doyle is ready to introduce a paying client for the auction condition disclosure. The client asks for a promise you cannot verify. What do you put in the handover?",
+   "minutes": 90,
+   "cost": 20,
+   "choices": [
+    {
+     "id": "scope",
+     "label": "State the agreed scope, limits and evidence",
+     "approach": "thorough"
+    }
+   ]
+  }
+ ],
+ "referral": {
+  "client": "Frank Doyle referral",
+  "detail": "A referred client commissions a documented auction condition disclosure. Complete the agreed work; no revenue is earned merely for knowing Frank Doyle.",
+  "price": 570,
+  "cost": 210,
+  "minutes": 210
+ }
+}

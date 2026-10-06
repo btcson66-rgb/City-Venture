@@ -1,0 +1,43 @@
+{
+ "id": "marcus_fx",
+ "with": "marcus",
+ "nodes": {
+  "start": [
+   {
+    "who": "marcus",
+    "text": "A forward locks the sale of expected foreign receipts, not free money. You pay a fee and collateral; a stronger foreign currency means the hedge loses while your receipts gain. Repricing or future home-currency invoices are also choices."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "Show me the costs and risks.",
+      "next": "costs"
+     },
+     {
+      "text": "I will compare before committing cash.",
+      "next": "wait"
+     }
+    ]
+   }
+  ],
+  "costs": [
+   {
+    "who": "marcus",
+    "text": "Use the actual company books, not revenue alone. Stock and money on the way still tie up cash."
+   }
+  ],
+  "wait": [
+   {
+    "who": "marcus",
+    "text": "Waiting is a choice too. Watch the deadlines, fees and stock before you decide."
+   }
+  ]
+ },
+ "on_end": [
+  {
+   "do": "set_flag",
+   "flag": "met_marcus_fx"
+  }
+ ]
+}

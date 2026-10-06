@@ -736,8 +736,8 @@ func test_chapters_9_to_12_chain_into_free_play() -> void:
 	_check()
 	runner.check("ch12_regulation_scale" in st["chapters_done"], "chapter 12 done")
 	runner.check(GameState.flag("story_complete"), "the main story is complete")
-	runner.check(_active("goal_growth"), "free play: the growth goal")
-	runner.check(not GameState.data["timeline"].filter(func(t): return str(t["text"]).contains("The story so far ends here")).is_empty(), "the timeline says so")
+	runner.check(_active("ch13_news") and World.year() == 9, "season two: Year 9 news follows the season-one ending")
+	runner.check(not GameState.data["timeline"].filter(func(t): return str(t["text"]).contains("Season one ends here")).is_empty(), "timeline marks the season-one ending")
 	runner.check(Ledger.check_balanced(), "ledger balanced through the whole arc")
 
 
@@ -755,5 +755,5 @@ func test_each_ending_finishes_the_story() -> void:
 		EventEngine.choose(inst["iid"], choice)
 		_check()
 		runner.check("ch12_regulation_scale" in st["chapters_done"] and GameState.flag("story_complete"), "%s: the story ends" % choice)
-		runner.check(_active("goal_growth"), "%s: free play follows" % choice)
+		runner.check(_active("ch13_news") and World.year() == 9, "%s: all season-one endings continue to Chapter 13" % choice)
 		runner.check(Ledger.check_balanced(), "%s: ledger balanced" % choice)

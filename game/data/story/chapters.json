@@ -363,7 +363,8 @@
       "flag:big_contract_offered"
      ],
      "target": {
-      "building": "nexus_cowork"
+      "building": "nexus_cowork",
+      "npc": "daniel"
      },
      "on_start": [
       {
@@ -556,7 +557,8 @@
       "flag:ch7_supply_plan"
      ],
      "target": {
-      "building": "nexus_cowork"
+      "building": "nexus_cowork",
+      "npc": "ken"
      },
      "on_start": [
       {
@@ -753,7 +755,8 @@
       "flag:met_lina"
      ],
      "target": {
-      "building": "nexus_bank"
+      "building": "nexus_bank",
+      "npc": "lina"
      }
     },
     {
@@ -835,7 +838,8 @@
       "flag:ch10_decided"
      ],
      "target": {
-      "building": "nexus_bank"
+      "building": "nexus_bank",
+      "npc": "lina"
      },
      "on_start": [
       {
@@ -995,7 +999,7 @@
    "id": "ch12_regulation_scale",
    "title": "CHAPTER 12 — REGULATION & SCALE",
    "subtitle": "Growing up means paperwork.",
-   "next": "",
+   "next": "ch13_first_order_abroad",
    "objectives": [
     {
      "id": "ch12_news",
@@ -1060,7 +1064,8 @@
       "flag:offer_decided"
      ],
      "target": {
-      "building": "crestline_flagship"
+      "building": "crestline_flagship",
+      "npc": "daniel"
      },
      "on_start": [
       {
@@ -1102,7 +1107,7 @@
     },
     {
      "do": "timeline",
-     "text": "The story so far ends here. Aurelia keeps going.",
+     "text": "Season one ends here. The next market is overseas.",
      "kind": "milestone"
     },
     {
@@ -1114,6 +1119,1094 @@
      "objective": "goal_growth"
     }
    ]
+  },
+  {
+   "id": "ch13_first_order_abroad",
+   "title": "CHAPTER 13 — FIRST ORDER ABROAD",
+   "subtitle": "A foreign sale is not home cash.",
+   "next": "ch14_customs",
+   "objectives": [
+    {
+     "id": "ch13_news",
+     "main": true,
+     "goal": "First order abroad",
+     "text": "Read the Year 9 news at Bloom Coffee",
+     "complete_when": [
+      "flag:news_read_y9"
+     ],
+     "skip_when": [
+      "flag:ch13_first_order_abroad_unavailable"
+     ],
+     "skip_text": "The company behind this chapter closed. The remaining transactions cannot be completed; continue without claiming sales or a payout.",
+     "target": {
+      "building": "bloom_coffee",
+      "action": "read_news"
+     },
+     "on_start": [
+      {
+       "do": "world_year",
+       "year": 9
+      },
+      {
+       "do": "customs_begin",
+       "chapter": "ch13_first_order_abroad"
+      },
+      {
+       "do": "set_flag",
+       "flag": "global_markets_open"
+      },
+      {
+       "do": "message",
+       "from": "maya",
+       "text": "Someone in Northridge recommended your products. Read the news, talk to Marcus about international banking, then price one item locally. Include freight and the bank spread before calling it profit."
+      }
+     ]
+    },
+    {
+     "id": "ch13_bank",
+     "main": true,
+     "goal": "First order abroad",
+     "text": "Open an international account at Nexus Bank; Marcus can explain the fee",
+     "complete_when": [
+      "flag:global_bank_ready"
+     ],
+     "skip_when": [
+      "flag:ch13_first_order_abroad_unavailable"
+     ],
+     "skip_text": "The company behind this chapter closed. The remaining transactions cannot be completed; continue without claiming sales or a payout.",
+     "target": {
+      "building": "nexus_bank",
+      "action": "bank_counter"
+     },
+     "on_start": []
+    },
+    {
+     "id": "ch13_listing",
+     "main": true,
+     "goal": "First order abroad",
+     "text": "Open Northridge and save one local-currency price in Sales → Overseas",
+     "complete_when": [
+      "flag:northridge_listing_ready"
+     ],
+     "skip_when": [
+      "flag:ch13_first_order_abroad_unavailable"
+     ],
+     "skip_text": "The company behind this chapter closed. The remaining transactions cannot be completed; continue without claiming sales or a payout.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    },
+    {
+     "id": "ch13_ship",
+     "main": true,
+     "goal": "First order abroad",
+     "text": "Pack and send your first Northridge order with an international courier",
+     "complete_when": [
+      "flag:first_export_shipped"
+     ],
+     "skip_when": [
+      "flag:ch13_first_order_abroad_unavailable"
+     ],
+     "skip_text": "The company behind this chapter closed. The remaining transactions cannot be completed; continue without claiming sales or a payout.",
+     "target": {
+      "action": "pack_orders"
+     },
+     "on_start": []
+    },
+    {
+     "id": "ch13_convert",
+     "main": true,
+     "goal": "First order abroad",
+     "text": "Convert your first weekly foreign payout in Finance",
+     "complete_when": [
+      "flag:first_export_converted"
+     ],
+     "skip_when": [
+      "flag:ch13_first_order_abroad_unavailable"
+     ],
+     "skip_text": "The company behind this chapter closed. The remaining transactions cannot be completed; continue without claiming sales or a payout.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "export_income_card",
+     "if": "flag:first_export_converted"
+    }
+   ]
+  },
+  {
+   "id": "ch14_customs",
+   "title": "CHAPTER 14 — CUSTOMS",
+   "subtitle": "The price is only part of the promise.",
+   "next": "ch15_currency_swing",
+   "objectives": [
+    {
+     "id": "ch14_ines",
+     "main": true,
+     "goal": "Customs",
+     "text": "Meet Ines at the Customs House (weekdays 9–16), or read her guide in Overseas sales",
+     "complete_when": [
+      "flag:met_ines || flag:customs_brief_read"
+     ],
+     "skip_when": [
+      "flag:ch14_customs_unavailable"
+     ],
+     "skip_text": "The company behind this chapter closed. The remaining transactions cannot be completed; continue without claiming sales or a payout.",
+     "target": {
+      "building": "customs_house",
+      "npc": "ines"
+     },
+     "on_start": [
+      {
+       "do": "customs_begin",
+       "chapter": "ch14_customs"
+      },
+      {
+       "do": "message",
+       "from": "ines",
+       "text": "Ines Duarte, Aurelia Customs. I am at the harbor Customs House on weekdays, nine to four. My guide is also in Overseas sales if our hours do not overlap."
+      }
+     ]
+    },
+    {
+     "id": "ch14_policy",
+     "main": true,
+     "goal": "Customs",
+     "text": "Choose DDP or DDU for an overseas listing",
+     "complete_when": [
+      "flag:export_policy_chosen"
+     ],
+     "skip_when": [
+      "flag:ch14_customs_unavailable"
+     ],
+     "skip_text": "The company behind this chapter closed. The remaining transactions cannot be completed; continue without claiming sales or a payout.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    },
+    {
+     "id": "ch14_code",
+     "main": true,
+     "goal": "Customs",
+     "text": "Choose the tariff code that matches your actual product",
+     "complete_when": [
+      "flag:export_code_correct"
+     ],
+     "skip_when": [
+      "flag:ch14_customs_unavailable"
+     ],
+     "skip_text": "The company behind this chapter closed. The remaining transactions cannot be completed; continue without claiming sales or a payout.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    },
+    {
+     "id": "ch14_trial",
+     "main": true,
+     "goal": "Customs",
+     "text": "Deliver 10 overseas units with returns below 15%; after two weeks, 5 units or an honest review",
+     "complete_when": [
+      "flag:customs_trial_passed || flag:customs_trial_reviewed"
+     ],
+     "skip_when": [
+      "flag:ch14_customs_unavailable"
+     ],
+     "skip_text": "The company behind this chapter closed. The remaining transactions cannot be completed; continue without claiming sales or a payout.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "message",
+     "from": "ines",
+     "if": "flag:customs_trial_passed",
+     "text": "Your trial met the delivery and return targets. Keep checking duty, returns and cash as volumes grow."
+    },
+    {
+     "do": "message",
+     "from": "maya",
+     "if": "flag:customs_trial_reviewed",
+     "text": "You reviewed the trial and paused expansion. That is a business decision, not a sales target achieved. Existing parcels and foreign money still need settling."
+    }
+   ]
+  },
+  {
+   "id": "ch15_currency_swing",
+   "title": "CHAPTER 15 — THE CURRENCY SWING",
+   "subtitle": "A foreign price is not a home-currency promise.",
+   "next": "ch16_partner_overseas",
+   "objectives": [
+    {
+     "id": "ch15_news",
+     "main": true,
+     "goal": "Exchange risk",
+     "text": "Read the Auroria currency news at Bloom Coffee",
+     "complete_when": [
+      "flag:fx_news_read"
+     ],
+     "skip_when": [
+      "flag:ch15_currency_swing_unavailable"
+     ],
+     "skip_text": "The company closed or the expansion was reviewed without income. Continue without claiming a sale, payment or recovery.",
+     "target": {
+      "building": "bloom_coffee",
+      "action": "read_news"
+     },
+     "on_start": [
+      {
+       "do": "overseas_begin",
+       "chapter": "ch15_currency_swing"
+      }
+     ]
+    },
+    {
+     "id": "ch15_marcus",
+     "main": true,
+     "goal": "Exchange risk",
+     "text": "Speak with Marcus about exchange risk, at Nexus Bank or by phone",
+     "complete_when": [
+      "flag:met_marcus_fx"
+     ],
+     "skip_when": [
+      "flag:ch15_currency_swing_unavailable"
+     ],
+     "skip_text": "The company closed or the expansion was reviewed without income. Continue without claiming a sale, payment or recovery.",
+     "target": {
+      "building": "nexus_bank",
+      "npc": "marcus"
+     },
+     "on_start": []
+    },
+    {
+     "id": "ch15_response",
+     "main": true,
+     "goal": "Exchange risk",
+     "text": "Reprice overseas goods, sign a forward, or choose home-currency invoices",
+     "complete_when": [
+      "flag:fx_response_reprice || flag:fx_response_forward || flag:fx_response_home"
+     ],
+     "skip_when": [
+      "flag:ch15_currency_swing_unavailable"
+     ],
+     "skip_text": "The company closed or the expansion was reviewed without income. Continue without claiming a sale, payment or recovery.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    },
+    {
+     "id": "ch15_month",
+     "main": true,
+     "goal": "Exchange risk",
+     "text": "Reach the next month-end and read its exchange gain / loss line",
+     "complete_when": [
+      "flag:fx_month_viewed"
+     ],
+     "skip_when": [
+      "flag:ch15_currency_swing_unavailable"
+     ],
+     "skip_text": "The company closed or the expansion was reviewed without income. Continue without claiming a sale, payment or recovery.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "fx_comparison_card",
+     "if": "!flag:ch15_currency_swing_unavailable"
+    }
+   ]
+  },
+  {
+   "id": "ch16_partner_overseas",
+   "title": "CHAPTER 16 — A PARTNER OVERSEAS",
+   "subtitle": "Who owns the customer owns both margin and risk.",
+   "next": "ch17_consolidation",
+   "objectives": [
+    {
+     "id": "ch16_omar",
+     "main": true,
+     "goal": "Overseas partner",
+     "text": "Contact Omar in Lumina, by video or on a business trip",
+     "complete_when": [
+      "flag:met_omar"
+     ],
+     "skip_when": [
+      "flag:ch16_partner_overseas_unavailable || flag:ch16_reviewed"
+     ],
+     "skip_text": "The company closed or the expansion was reviewed without income. Continue without claiming a sale, payment or recovery.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": [
+      {
+       "do": "overseas_begin",
+       "chapter": "ch16_partner_overseas"
+      }
+     ]
+    },
+    {
+     "id": "ch16_channel",
+     "main": true,
+     "goal": "Overseas partner",
+     "text": "Sign a distributor contract or dispatch your first overseas warehouse batch",
+     "complete_when": [
+      "flag:lumina_channel_ready"
+     ],
+     "skip_when": [
+      "flag:ch16_partner_overseas_unavailable || flag:ch16_reviewed"
+     ],
+     "skip_text": "The company closed or the expansion was reviewed without income. Continue without claiming a sale, payment or recovery.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    },
+    {
+     "id": "ch16_income",
+     "main": true,
+     "goal": "Overseas partner",
+     "text": "Receive actual income through your Lumina channel, or review an unsuccessful expansion after 45 days",
+     "complete_when": [
+      "flag:lumina_channel_income"
+     ],
+     "skip_when": [
+      "flag:ch16_partner_overseas_unavailable || flag:ch16_reviewed"
+     ],
+     "skip_text": "The company closed or the expansion was reviewed without income. Continue without claiming a sale, payment or recovery.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "partner_comparison_card",
+     "if": "!flag:ch16_partner_overseas_unavailable"
+    }
+   ]
+  },
+  {
+   "id": "ch17_consolidation",
+   "title": "CONSOLIDATION",
+   "subtitle": "Find a position the big group does not want.",
+   "year": 9,
+   "next": "ch18_legacy",
+   "objectives": [
+    {
+     "id": "ch17_news",
+     "main": true,
+     "goal": "Consolidation",
+     "text": "Read the consolidation news",
+     "complete_when": [
+      "flag:consolidation_news_read"
+     ],
+     "skip_when": [
+      "flag:consolidation_unavailable"
+     ],
+     "skip_text": "This market can no longer operate. Continue without claiming sales or surviving a shutdown.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": [
+      {
+       "do": "world_year",
+       "year": 9
+      },
+      {
+       "do": "legacy_begin",
+       "chapter": "ch17_consolidation"
+      }
+     ]
+    },
+    {
+     "id": "ch17_response",
+     "main": true,
+     "goal": "Consolidation",
+     "text": "Choose niche or scale and apply its actual price and operating changes",
+     "complete_when": [
+      "flag:consolidation_response"
+     ],
+     "skip_when": [
+      "flag:consolidation_unavailable"
+     ],
+     "skip_text": "This market can no longer operate. Continue without claiming sales or surviving a shutdown.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    },
+    {
+     "id": "ch17_survive",
+     "main": true,
+     "goal": "Consolidation",
+     "text": "Keep this market operating for 60 days after the response",
+     "complete_when": [
+      "flag:consolidation_survived"
+     ],
+     "skip_when": [
+      "flag:consolidation_unavailable"
+     ],
+     "skip_text": "This market can no longer operate. Continue without claiming sales or surviving a shutdown.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    },
+    {
+     "id": "ch17_interview",
+     "main": true,
+     "goal": "Consolidation",
+     "text": "Accept Kai Moreno’s interview using the actual market records",
+     "complete_when": [
+      "flag:kai_interviewed"
+     ],
+     "skip_when": [
+      "flag:consolidation_unavailable"
+     ],
+     "skip_text": "This market can no longer operate. Continue without claiming sales or surviving a shutdown.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "consolidation_comparison",
+     "if": "!flag:consolidation_unavailable"
+    }
+   ]
+  },
+  {
+   "id": "ch18_legacy",
+   "title": "LEGACY",
+   "subtitle": "What do you leave room for?",
+   "year": 10,
+   "next": "",
+   "objectives": [
+    {
+     "id": "ch18_maya",
+     "main": true,
+     "goal": "Legacy",
+     "text": "Meet Maya at Bloom Coffee or speak by phone",
+     "complete_when": [
+      "flag:legacy_met_maya"
+     ],
+     "skip_when": [],
+     "skip_text": "This market can no longer operate. Continue without claiming sales or surviving a shutdown.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": [
+      {
+       "do": "world_year",
+       "year": 10
+      },
+      {
+       "do": "legacy_begin",
+       "chapter": "ch18_legacy"
+      }
+     ]
+    },
+    {
+     "id": "ch18_choice",
+     "main": true,
+     "goal": "Legacy",
+     "text": "Choose how your founder story continues",
+     "complete_when": [
+      "flag:legacy_chosen"
+     ],
+     "skip_when": [],
+     "skip_text": "This market can no longer operate. Continue without claiming sales or surviving a shutdown.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    },
+    {
+     "id": "ch18_cards",
+     "main": true,
+     "goal": "Legacy",
+     "text": "View every epilogue card and return to free play",
+     "complete_when": [
+      "flag:legacy_cards_viewed"
+     ],
+     "skip_when": [],
+     "skip_text": "This market can no longer operate. Continue without claiming sales or surviving a shutdown.",
+     "target": {
+      "action": "open_company_os"
+     },
+     "on_start": []
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "set_flag",
+     "flag": "story_complete"
+    },
+    {
+     "do": "start",
+     "objective": "goal_growth"
+    }
+   ]
+  },
+  {
+   "id": "ch19_expo_bid",
+   "subtitle": "The expo bid",
+   "objectives": [
+    {
+     "id": "city19_read",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Read the civic briefing.",
+     "complete_when": [
+      "flag:city19_read"
+     ],
+     "skip_when": [
+      "flag:city19_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": [
+      {
+       "do": "city_begin",
+       "chapter": 19
+      },
+      {
+       "do": "world_year",
+       "year": 11
+      }
+     ]
+    },
+    {
+     "id": "city19_plan",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Arrange paid suppliers or join the city partnership.",
+     "complete_when": [
+      "flag:city19_plan"
+     ],
+     "skip_when": [
+      "flag:city19_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city19_choice",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Choose how this chapter will change the city.",
+     "complete_when": [
+      "flag:city19_choice"
+     ],
+     "skip_when": [
+      "flag:city19_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city19_review",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Review actual deliveries and the civic result.",
+     "complete_when": [
+      "flag:city19_review"
+     ],
+     "skip_when": [
+      "flag:city19_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "chapter",
+     "id": "ch20_harbor_rebuild"
+    }
+   ],
+   "title": "The expo bid"
+  },
+  {
+   "id": "ch20_harbor_rebuild",
+   "subtitle": "Rebuilding Harbor",
+   "objectives": [
+    {
+     "id": "city20_read",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Read the civic briefing.",
+     "complete_when": [
+      "flag:city20_read"
+     ],
+     "skip_when": [
+      "flag:city20_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": [
+      {
+       "do": "city_begin",
+       "chapter": 20
+      },
+      {
+       "do": "world_year",
+       "year": 11
+      }
+     ]
+    },
+    {
+     "id": "city20_plan",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Arrange paid suppliers or join the city partnership.",
+     "complete_when": [
+      "flag:city20_plan"
+     ],
+     "skip_when": [
+      "flag:city20_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city20_choice",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Choose how this chapter will change the city.",
+     "complete_when": [
+      "flag:city20_choice"
+     ],
+     "skip_when": [
+      "flag:city20_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city20_review",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Review actual deliveries and the civic result.",
+     "complete_when": [
+      "flag:city20_review"
+     ],
+     "skip_when": [
+      "flag:city20_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "chapter",
+     "id": "ch21_energy_transition"
+    }
+   ],
+   "title": "Rebuilding Harbor"
+  },
+  {
+   "id": "ch21_energy_transition",
+   "subtitle": "The 2040 transition",
+   "objectives": [
+    {
+     "id": "city21_read",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Read the civic briefing.",
+     "complete_when": [
+      "flag:city21_read"
+     ],
+     "skip_when": [
+      "flag:city21_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": [
+      {
+       "do": "city_begin",
+       "chapter": 21
+      },
+      {
+       "do": "world_year",
+       "year": 11
+      }
+     ]
+    },
+    {
+     "id": "city21_plan",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Arrange paid suppliers or join the city partnership.",
+     "complete_when": [
+      "flag:city21_plan"
+     ],
+     "skip_when": [
+      "flag:city21_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city21_choice",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Choose how this chapter will change the city.",
+     "complete_when": [
+      "flag:city21_choice"
+     ],
+     "skip_when": [
+      "flag:city21_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city21_review",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Review actual deliveries and the civic result.",
+     "complete_when": [
+      "flag:city21_review"
+     ],
+     "skip_when": [
+      "flag:city21_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "chapter",
+     "id": "ch22_talent_war"
+    }
+   ],
+   "title": "The 2040 transition"
+  },
+  {
+   "id": "ch22_talent_war",
+   "subtitle": "The graduate talent war",
+   "objectives": [
+    {
+     "id": "city22_read",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Read the civic briefing.",
+     "complete_when": [
+      "flag:city22_read"
+     ],
+     "skip_when": [
+      "flag:city22_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": [
+      {
+       "do": "city_begin",
+       "chapter": 22
+      },
+      {
+       "do": "world_year",
+       "year": 11
+      }
+     ]
+    },
+    {
+     "id": "city22_plan",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Arrange paid suppliers or join the city partnership.",
+     "complete_when": [
+      "flag:city22_plan"
+     ],
+     "skip_when": [
+      "flag:city22_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city22_choice",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Choose how this chapter will change the city.",
+     "complete_when": [
+      "flag:city22_choice"
+     ],
+     "skip_when": [
+      "flag:city22_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city22_review",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Review actual deliveries and the civic result.",
+     "complete_when": [
+      "flag:city22_review"
+     ],
+     "skip_when": [
+      "flag:city22_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "chapter",
+     "id": "ch23_city_election"
+    }
+   ],
+   "title": "The graduate talent war"
+  },
+  {
+   "id": "ch23_city_election",
+   "subtitle": "Aurelia votes",
+   "objectives": [
+    {
+     "id": "city23_read",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Read the civic briefing.",
+     "complete_when": [
+      "flag:city23_read"
+     ],
+     "skip_when": [
+      "flag:city23_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": [
+      {
+       "do": "city_begin",
+       "chapter": 23
+      },
+      {
+       "do": "world_year",
+       "year": 12
+      }
+     ]
+    },
+    {
+     "id": "city23_plan",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Arrange paid suppliers or join the city partnership.",
+     "complete_when": [
+      "flag:city23_plan"
+     ],
+     "skip_when": [
+      "flag:city23_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city23_choice",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Choose how this chapter will change the city.",
+     "complete_when": [
+      "flag:city23_choice"
+     ],
+     "skip_when": [
+      "flag:city23_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city23_review",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Review actual deliveries and the civic result.",
+     "complete_when": [
+      "flag:city23_review"
+     ],
+     "skip_when": [
+      "flag:city23_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "chapter",
+     "id": "ch24_expo_opening"
+    }
+   ],
+   "title": "Aurelia votes"
+  },
+  {
+   "id": "ch24_expo_opening",
+   "subtitle": "The city opens its doors",
+   "objectives": [
+    {
+     "id": "city24_read",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Read the civic briefing.",
+     "complete_when": [
+      "flag:city24_read"
+     ],
+     "skip_when": [
+      "flag:city24_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": [
+      {
+       "do": "city_begin",
+       "chapter": 24
+      },
+      {
+       "do": "world_year",
+       "year": 12
+      }
+     ]
+    },
+    {
+     "id": "city24_plan",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Arrange paid suppliers or join the city partnership.",
+     "complete_when": [
+      "flag:city24_plan"
+     ],
+     "skip_when": [
+      "flag:city24_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city24_choice",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Choose how this chapter will change the city.",
+     "complete_when": [
+      "flag:city24_choice"
+     ],
+     "skip_when": [
+      "flag:city24_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    },
+    {
+     "id": "city24_review",
+     "main": true,
+     "goal": "Civic proposal",
+     "text": "Review actual deliveries and the civic result.",
+     "complete_when": [
+      "flag:city24_review"
+     ],
+     "skip_when": [
+      "flag:city24_unavailable"
+     ],
+     "skip_text": "This chapter can no longer be fulfilled. Review the failed or withdrawn proposal and continue.",
+     "target": {
+      "action": "city_future"
+     },
+     "on_start": []
+    }
+   ],
+   "on_complete": [
+    {
+     "do": "set_flag",
+     "flag": "city_future_complete"
+    },
+    {
+     "do": "timeline",
+     "text": "The city chapter ended with recorded deliveries and choices, without a fictional windfall."
+    }
+   ],
+   "title": "The city opens its doors"
   }
  ],
  "side": [

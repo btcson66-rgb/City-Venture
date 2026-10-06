@@ -42,8 +42,9 @@ func _keys() -> Array:
 
 # ------------------------------------------------------------------ data
 func test_data_is_complete_and_wellformed() -> void:
-	runner.eq(DataDB.milestones.size(), 55, "five milestones for each of eleven industries")
+	runner.eq(DataDB.milestones.size(), 60, "five milestones for each of twelve registered industries")
 	for entry in Industries.all():
+		if entry.get("auxiliary",false):continue # A sales channel shares its parent industry milestones.
 		runner.eq(Milestones.list(entry["id"]).size(), 5, "five milestones: " + str(entry["id"]))
 	for m in DataDB.milestones.values():
 		runner.check(str(m["metric"]).get_slice(":", 0) in ["stat", "data", "count", "fn"] and str(m["name"]) != "" and str(m["desc"]) != "", "milestone shape " + str(m["id"]))
@@ -336,7 +337,7 @@ func _exercise(def_id: String) -> void:
 	runner.eq(Ledger.cash(cid) - cash, reward, "full reward paid")
 	var rows: Dictionary = Segments.compute(cid, 0, Clock.now() + 1)["rows"]
 	for part in def["parts"]:
-		runner.check(absf(float(rows[part["industry"]]["revenue"]) - reward * float(part["share"])) < 0.02, "paid into " + str(part["industry"]) + " segment")
+		runner.check(absf(float(rows[part["industry"]]["revenue"]) - (snappedf(reward*float(part["share"]),.01)-Tax.vat(snappedf(reward*float(part["share"]),.01)))) < 0.02, "net reward excluding collected VAT in " + str(part["industry"]) + " segment")
 	runner.check(Ledger.check_balanced(), "balanced after full pay")
 	# --- partial completion: only the first part by the deadline
 	var id2 := GroupJobs.offer(def_id)

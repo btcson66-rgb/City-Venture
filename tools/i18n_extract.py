@@ -23,7 +23,7 @@ OUT = os.path.join(GAME, "i18n")
 SKIP_LINE = re.compile(r'push_warning|push_error|print\(|log_line|assert\(|get_node|find_child|has_node|'
                        r'\.name\s*==|\.name\s*=|InputMap|load\(|preload\(|Art\.tex|Art\.icon|"--|b\.name|tooltip_text = o|'
                        r'\.set_(?:stylebox|color|constant|font|font_size|icon)\(|for sb_name in|ScrollBar"\]|^\s*"done": ')
-DATA_KEYS = {"name", "text", "label", "detail", "outcome", "lines", "risks", "strengths", "industries", "goal", "blurb",
+DATA_KEYS = {"risk", "hint", "unit", "options", "audience", "budget","name", "text", "label", "detail", "outcome", "lines", "risks", "strengths", "industries", "goal", "blurb",
              "skip_text", "audiences", "slogan", "visual", "tone",
              "pitch", "title", "archetype", "entry_requirement", "role", "outfits_planned", "accessories_planned",
              "headlines", "headlines_incident", "headlines_after", "return_reasons_defective", "return_reasons_normal", "subtitle", "category", "quality_req",

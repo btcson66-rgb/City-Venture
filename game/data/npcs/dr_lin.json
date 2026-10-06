@@ -1,0 +1,30 @@
+{
+ "id": "dr_lin",
+ "name": "Dr. Lin",
+ "role": "clinic doctor",
+ "appearance": {
+  "presentation": "feminine",
+  "face": "round",
+  "hair": "bun",
+  "hair_color": "brown",
+  "skin": "s2",
+  "eye_shape": "round",
+  "eye_color": "hazel",
+  "brows": "soft",
+  "mouth": "smile",
+  "accessory": "glasses_square"
+ },
+ "outfit": "civic_staff",
+ "outfit_tints": {},
+ "schedule": [
+  {
+   "days": "mon,tue,wed,thu,fri,sat,sun",
+   "from": "00:00",
+   "to": "24:00",
+   "location": "interior:civic_clinic",
+   "spot": "doctor"
+  }
+ ],
+ "dialogue": [],
+ "phone_contact": false
+}

@@ -16,7 +16,7 @@ func _init(loc: String) -> void:
 
 func build() -> void:
 	var waiting := Ecommerce.orders_with(["placed"], location)
-	var packable := waiting.filter(func(o): return Ecommerce.stock(location, str(o["product"])) >= int(o["qty"]))
+	var packable := waiting.filter(func(o): return Ecommerce.can_pack(o, location))
 	var packed := Ecommerce.orders_with(["packed"], location)
 	var inv := Ecommerce.inv(location)
 	var stock_line := []
@@ -27,7 +27,7 @@ func build() -> void:
 	body.add_child(UIK.sep())
 	body.add_child(UIK.label(I18n.t("Orders waiting to be packed: %d") % waiting.size(), 9, Art.C_WHITE, true))
 	for o in waiting.slice(0, 5):
-		body.add_child(UIK.label("  %s · %s · %s · %s" % [o["id"], I18n.t(DataDB.product(o["product"])["name"]), o["customer"], Fmt.money(o["unit_price"])], 8, Art.C_MUTED))
+		body.add_child(UIK.label("  %s · %s · %s · %s" % [o["id"], Packing.summary(o), o["customer"], Fmt.money(Packing.total(o))], 8, Art.C_MUTED))
 	if waiting.size() > 5:
 		body.add_child(UIK.label(I18n.t("  …and %d more") % (waiting.size() - 5), 8, Art.C_DIM))
 	var mins := int(DataDB.shipping().get("pack_minutes_per_order", 8))
@@ -45,9 +45,10 @@ func build() -> void:
 			exp += Ecommerce.ship_cost(o, "express")
 		var fee := float(DataDB.shipping()["pickup"]["courier_fee_per_batch"])
 		var h := UIK.hbox(4)
-		var b1 := UIK.button(I18n.t("Courier · Economy 3 days (%s)") % Fmt.money(econ + fee), _courier.bind("economy"), "primary" if packable.is_empty() else "")
+		var abroad := packed.any(func(o): return o.has("region"))
+		var b1 := UIK.button((I18n.t("Courier · Economy / international 7–14 days (%s)") if abroad else I18n.t("Courier · Economy 3 days (%s)")) % Fmt.money(econ + fee), _courier.bind("economy"), "primary" if packable.is_empty() else "")
 		b1.name = "CourierEconomy"
-		var b2 := UIK.button(I18n.t("Courier · Express 1 day (%s)") % Fmt.money(exp + fee), _courier.bind("express"))
+		var b2 := UIK.button((I18n.t("Courier · Express / international 7–10 days (%s)") if abroad else I18n.t("Courier · Express 1 day (%s)")) % Fmt.money(exp + fee), _courier.bind("express"))
 		b2.name = "CourierExpress"
 		h.add_child(b1)
 		h.add_child(b2)
@@ -57,6 +58,7 @@ func build() -> void:
 			var vr := UIK.hbox(4)
 			var bv := UIK.button(I18n.t("Own van · same day (%s fuel, about %s of your time)") % [Fmt.money(float(q["fuel"])), Fmt.duration_min(int(q["minutes"]))], _own_van)
 			bv.name = "OwnVan"
+			bv.disabled = int(q["count"]) == 0
 			vr.add_child(bv)
 			vr.add_child(UIK.tip("own_van_shipping"))
 			body.add_child(vr)
@@ -72,7 +74,7 @@ func build() -> void:
 
 ## You pack by hand (PackGame): each order's quality follows it to the customer.
 func _pack() -> void:
-	var waiting := Ecommerce.orders_with(["placed"], location).filter(func(o): return Ecommerce.stock(location, str(o["product"])) >= int(o["qty"]))
+	var waiting := Ecommerce.orders_with(["placed"], location).filter(func(o): return Ecommerce.can_pack(o, location))
 	if waiting.is_empty():
 		UIRoot.toast("Nothing to pack here: is the stock at this location?", "warn", "warning")
 		return

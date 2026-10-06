@@ -2,6 +2,7 @@ class_name CharacterCreator
 extends Control
 ## Character creation (Handoff §36, Board B). Everything here is cosmetic: no stats, no bonuses.
 
+var run_setup := {}
 var app: Dictionary
 var outfit := "startup_casual"
 var name_edit: LineEdit
@@ -12,14 +13,20 @@ var portrait: PortraitView
 var dir_idx := 0
 var expr_idx := 0
 var views_rigs: Array = []
+var _scroll_content: Control
 var options_box: VBoxContainer
 var tab_box: HBoxContainer
 const DIRS := ["down", "right", "up", "left"]
 const EXPRS := ["neutral", "happy", "thinking", "surprised"]
 
 
+func _init(options := {}) -> void:
+	run_setup = options.duplicate(true)
+
+
 func _ready() -> void:
-	set_anchors_preset(Control.PRESET_FULL_RECT)
+	set_anchors_preset(Control.PRESET_TOP_LEFT)
+	size = get_viewport_rect().size
 	theme = UIK.theme()
 	app = GameState.default_appearance()
 	var bg := ColorRect.new()
@@ -105,6 +112,28 @@ func _ready() -> void:
 	go.name = "Start"
 	bottom.add_child(go)
 	_refresh()
+	# Touch targets enlarge option rows: both axes remain reachable on narrow mobile viewports.
+	var children := get_children()
+	var scroll := ScrollContainer.new()
+	scroll.name = "CharacterScroll"
+	scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(scroll)
+	_scroll_content = Control.new()
+	_scroll_content.custom_minimum_size = Vector2(640, 390)
+	scroll.add_child(_scroll_content)
+	for child in children:
+		child.reparent(_scroll_content)
+
+
+func _process(_delta: float) -> void:
+	size = get_viewport_rect().size
+	if _scroll_content == null:
+		return
+	var extent := Vector2(640, 390)
+	for child in _scroll_content.get_children():
+		if child is Control and child.anchor_right == 0 and child.anchor_bottom == 0:
+			extent = extent.max(child.position + child.size + Vector2(8, 8))
+	_scroll_content.custom_minimum_size = extent
 
 
 func _at(c: Control, p: Vector2) -> Control:
@@ -202,4 +231,6 @@ func _start() -> void:
 	var n := name_edit.text.strip_edges()
 	if n == "":
 		n = "Alex Chen"
-	SceneRouter.go_arrival({"name": n, "appearance": app.duplicate(), "outfit": outfit})
+	var setup := run_setup.duplicate(true)
+	setup.merge({"name": n, "appearance": app.duplicate(), "outfit": outfit}, true)
+	SceneRouter.go_arrival(setup)

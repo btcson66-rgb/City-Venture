@@ -3,13 +3,17 @@ extends RefCounted
 ## Shared, live building information for doors, welcome cards and the phone guide.
 
 const ACTION_ICONS := {
+	"city_future":"civic",
+	"legacy_mentor": "people",
+	"customs_guide":"info", "trade_open":"world",
+	"market_research": "info", "fitness": "people",
 	"energy_open": "company", "energy_subsidy": "civic",
 	"buy_item": "shop", "clothing_shop": "shop", "cafe_counter": "coffee",
 	"work_shift": "tasks", "open_company_os": "laptop", "cowork_desk": "laptop",
-	"sleep": "sleep", "read_news": "info", "bank_counter": "bank", "atm": "bank",
+	"sleep": "sleep", "read_news": "info", "clinic": "civic", "health_insurance": "bank", "bank_counter": "bank", "atm": "bank",
 	"loans_info": "bank", "register_company": "civic", "permits_info": "civic", "take_number": "civic",
 	"pack_orders": "parcel", "dropoff_parcels": "parcel", "change_outfit": "shirt",
-	"lease_property": "home", "whiteboard": "objective", "look": "info", "talk": "people",
+	"personal_assets": "home", "cafe_depth": "coffee", "logistics_depth": "map", "popup_store": "shop", "popup_till": "cash", "home_letting": "home", "lease_property": "home", "whiteboard": "objective", "look": "info", "talk": "people",
 	"talk_staff": "people", "business_board": "company", "metro": "metro",
 	"media_open": "company", "hotel_open": "sleep", "real_estate_open": "home", "manufacturing_open": "inventory", "automotive_open": "metro"
 }
@@ -32,7 +36,7 @@ static func building_enterable(id: String) -> bool:
 
 
 static func world_travel_available() -> bool:
-	return DataDB.regions.values().filter(func(r): return r.get("status", "planned") == "active").size() > 1
+	return DataDB.regions.values().filter(func(r): return r.get("status", "planned") == "active").size() > 1 or GlobalMarket.company().get("bank", false)
 
 
 static var _avail_cache: Dictionary = {}
@@ -64,11 +68,12 @@ static func invalidate_availability() -> void:
 static func _compute_available(id: String) -> bool:
 	if not building_enterable(id):
 		return false
-	for it in DataDB.building(id).get("interior", {}).get("interactables", []):
+	for it in interactables(id):
 		if not it.get("enabled", true) or str(it["action"]) == "look":
 			continue
 		# Access checks only. Sim action blockers call building_open(), so evaluating them here would recurse.
 		var requires := str(it.get("params", {}).get("requires", ""))
+		if requires.begins_with("home:") and Living.home()!=requires.substr(5):continue
 		if requires.begins_with("lease:") and not Living.has_lease(requires.substr(6)):
 			continue
 		if requires == "desk_access" and not Living.has_desk_access():
@@ -112,11 +117,11 @@ static func hours(id: String) -> String:
 
 static func status(id: String) -> String:
 	if SceneRouter.building_open(id)["open"]:
-		return I18n.t("Open now")
+		return str(DestinationHours.status(id)["text"])
 	var b := DataDB.building(id)
 	if b.has("closed_reason"):
 		return I18n.t("Not open yet")
-	return I18n.t("Closed · opens %s") % str(b.get("hours", {}).get("open", "00:00"))
+	return str(DestinationHours.status(id)["text"])
 
 
 static func door_text(id: String) -> String:
@@ -134,7 +139,7 @@ static func activities(id: String, scene: WorldScene = null) -> Array[String]:
 			if scene.is_ancestor_of(node) and node.enabled and node.action != "look":
 				out.append(_activity(str(node.label), str(node.action), node.params))
 	else:
-		for it in DataDB.building(id).get("interior", {}).get("interactables", []):
+		for it in interactables(id):
 			var params: Dictionary = it.get("params", {}).duplicate()
 			if params.has("unless_lease") and Living.has_lease(str(params["unless_lease"])):
 				continue
@@ -188,13 +193,13 @@ static func guide_groups() -> Array:
 
 static func guide_tags(id: String) -> String:
 	var tags: Array[String] = []
-	for it in DataDB.building(id).get("interior", {}).get("interactables", []):
+	for it in interactables(id):
 		var tag := ""
 		match str(it["action"]):
 			"buy_item", "cafe_counter": tag = I18n.t("Eat")
 			"clothing_shop": tag = I18n.t("Shop")
 			"work_shift", "open_company_os", "cowork_desk", "business_board", "pack_orders": tag = I18n.t("Work")
-			"bank_counter", "atm", "loans_info", "register_company", "permits_info", "take_number", "dropoff_parcels": tag = I18n.t("Services")
+			"clinic", "health_insurance", "bank_counter", "atm", "loans_info", "register_company", "permits_info", "take_number", "dropoff_parcels": tag = I18n.t("Services")
 			"lease_property": tag = I18n.t("Property")
 			"sleep": tag = I18n.t("Housing")
 		if tag != "" and not tag in tags:
@@ -219,3 +224,11 @@ static func record_entry(id: String) -> int:
 	var visits: Dictionary = GameState.data["building_visits"]
 	visits[id] = int(visits.get(id, 0)) + 1
 	return int(visits[id])
+
+
+static func interactables(id: String) -> Array:
+	var out: Array=DataDB.building(id).get("interior",{}).get("interactables",[])
+	if id=="popup_unit":
+		if Living.D()["leases"].has("popup_retail"):return out.filter(func(it):return not it["action"] in ["cafe_counter","cafe_depth","lease_property"])
+		if Living.D()["leases"].has("popup_cafe"):return out.filter(func(it):return not it["action"] in ["popup_store","popup_till"])
+	return out

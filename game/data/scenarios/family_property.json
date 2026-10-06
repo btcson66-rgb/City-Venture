@@ -1,0 +1,24 @@
+{
+ "id": "family_property",
+ "name": "Family property",
+ "description": "You inherit one Maple Court apartment and its mortgage. Rent can fall vacant; work helps cover the payments.",
+ "goal": "Build net worth while keeping the mortgage current.",
+ "initial": {
+  "cash": 7500,
+  "property": "Maple Court",
+  "property_value": 200000,
+  "mortgage": 150000,
+  "mortgage_months": 240,
+  "rent": 1800,
+  "maintenance": 120,
+  "vacancy_chance": 0.15,
+  "repair_chance": 0.15,
+  "repair_cost": 900,
+  "mortgage_apr": 0.045
+ },
+ "win": {
+  "net_worth_gain": 4500,
+  "cash": 500
+ },
+ "limit_days": 120
+}

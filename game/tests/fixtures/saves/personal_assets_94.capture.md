@@ -1,0 +1,1 @@
+Source: codex/94-housing-cars based on b2c59103, captured before commit. Actual mortgage, move, car purchase, driving confirmation and furniture buttons. Opening controlled personal equity, time, tutorial fixtures disclosed; no fixture sales revenue. Evidence short_result.json.

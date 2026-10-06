@@ -1,0 +1,24 @@
+# Issue 42 — chapters 15–16
+
+Stacked on PR #106; designated base fetched and merged, unchanged a9124264. Draft only. User latest instruction authorizes continuous progress while retaining tests and honest unresolved checks; do not merge or deploy.
+
+Validation: 318/318 unit tests, 17.4 seconds, 16 new overseas-partner tests. i18n 3449/3449, missing 0. wiki_check OK (3830 assets, 199 IDs). Short rendered zh_TW tour has 0 failures in 56.4 seconds, 23 raw screenshots. Feature JPGs only, below 20 MB. Real banking dialogue, hedge signing, report viewing, Omar video conversation, both paid flights, distributor signing/dispatch, warehouse lease/sea batch, local price and foreign-wallet conversion are native UI inputs. Company, stock, buyer orders and elapsed transit/month are explicit fixtures; accounting always uses actual handlers.
+
+English audit retains language-selector English, SHOPLANE and Haddad Distribution company-name hits and the FWD-0001 contract identifier, which the guide preserves as brand names. No new untranslated journey text remains. Existing foreign-bank finance displays raw currency codes intentionally.
+
+Controlled balance evidence: 12 collected distributor cycles, foreign/home invoice strategies, with lower FX and higher input cost scenarios. Both have positive mean operating profit and loss scenarios. The report explicitly excludes the initial bank-account opening fee and is not a 120-day economy soak; initial small wholesale batches alone do not recoup that setup fee. Forward appreciation/depreciation and 3PL rent/returns are separate unit scenarios, not proven long-horizon strategy averages.
+
+Self-review fixes: correct fee-rate key; actual home-invoice negotiation refreshes foreign totals; no unsupported advances or early foreign payment; no duplicate in-transit offer even after older paid deals; stock reservation excludes the contract's own reservation while retaining other customer claims; freight/duty and goods_out precede actual arrival revenue; closure writes off transit and dispatched assets exactly once before liquidation; all actual warehouse stock liquidates; new jobs cannot collect for closed companies; video calls really open conversations instead of remaining hidden behind modals; the trip card charges and describes each journey; SpinBox widened after visual inspection; explicit Return/Outbound strings added after detecting extractor exclusions; currency news labels the original shock historically instead of claiming it is perpetually a new weekly fall.
+
+Remaining integration concerns: the designated base lacks tools/beta_audit.py; the borrowed read-only tool scans this exact worktree and reports 13 pre-existing hits. NOT PASSED. Full third-ticket walkthrough previously failed on #31; no new full run here, next full cadence is #43. Dedicated chapter/Omar/airport/warehouse art remains requested with existing-outfit/card fallback. The 90-day comparison is an assumption-based estimate, not a second full simulation. These are explicit Draft follow-ups, not passed gates.
+
+
+## Integration refresh after base PR 108
+
+The designated base advanced to f097b906 while this ticket was staged. Merged rather than rebased. Both registry dispatch and overseas flows are retained. Regenerated catalogs preserve both translation sets; international and domestic shipping methods have unique IDs. Customs House is now explicitly active and its real guidance has an existing icon, while the gym remains scenery. Unit fixtures use the actual required save fields. Segment totals include realized FX exactly once. International banking also retains access to world information alongside the new City Guide. Industry tabs, shared reporting, business help, explicit decision recommendations and conditional packing remain available.
+
+Latest short rendered tour: 91 steps, 23 screenshots, zero failures, 56.9 seconds; runtime error scan is empty. The capitalized stock fixture now provides 400 units because the newly merged demand model can reserve the former 40-unit stock before warehouse dispatch. This is disclosed fixture capital, not revenue. English audit: selector English, SHOPLANE, Haddad Distribution, FWD identifier and the existing 0.2.0-beta version label. Newer beta_audit is present in this worktree and reports 0 hits. i18n 5364/5364 missing 0; wiki_check 3830 assets, 277 IDs. Full cadence remains next ticket #43; historical failed #31 full run remains unresolved until a new full run passes.
+
+Final merged verification: 503/503 unit tests in 130.9 seconds, including 17 overseas-partner tests; zero runtime errors. Evidence above 318/318 is the pre-merge checkpoint. Latest logs and screenshots replace the prior evidence files.
+
+最新前張#70正常merge複驗529/529（151.3秒），native第15–16章0 failures/57.9秒，無SCRIPT ERROR；i18n5571 missing0，wiki284 OK，beta0。遠期匯率同時保留海外合約與貿易應收曝險，沒有重複關閉/收款，海關與貿易入口保留。移除自動合併重複圖示鍵；兩邊wiki與資料新增保留，沒有rebase。

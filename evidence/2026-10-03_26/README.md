@@ -1,0 +1,11 @@
+# #26 high-detail renderer review
+
+498/498 units pass in 172.2 seconds. Three new rendering tests cover logical sprite dimensions/offset/tint in both modes, TileSet cache rebuild/atlas coordinates/16px cells/8px navigation, and device-only/default/invalid preferences. The existing manufacturing atlas regression now verifies the appropriate physical 16px or 64px source regions instead of forcing the original 16px mode. No business behavior changed.
+
+Native --bot=shots --detail-comparison: 43 steps, 8 screenshots, zero failures in 35.7 seconds. Old Town, Harbor, Shopping Street and Riverside on/off shots use the same building-door position, and real Settings buttons preserve player position. Every JPG inspected: facade baseline, doors/sign and lighting alignment retained, detail sharper. Earlier metro comparison also passed; no script errors in final native/Web runs. The first tour fixture's absent tutorial dictionary was fixed; its false completion report is not used.
+
+Local Web, Chromium 149.0.7827.55, headless WebGL2 SwiftShader, Harbor metro scene: low detail 22.4914 FPS, high detail 21.8934 FPS, sixty seconds each after warm-up; ratio 0.9734 / decrease 2.66%, within 10%. This is local software rendering, not physical-device/browser coverage; concurrent unit validation was running during this measurement. Web result has no JS errors or bot failures. Watchdog threads are disabled on the non-threaded Web export; native watchdog retained. QA export included tests temporarily; export_presets restored byte-for-byte.
+
+Art logical wrappers remain the source of design dimensions; world sprites select physical detail and fit scale/offset independently (including partial light fallback). Cars keep logical braking width and tint. TileSet uses 64px source cells with TileMapLayer scale 0.25; native fallback 16px/1.0. Toggle defaults on, persists only in user://settings.cfg, clears texture/existence/static tile caches and rebuilds at current position/facing. Existing CompanyVan fixed draw rectangles keep sign/body/detail aligned. No assets changed.
+
+i18n 5246 translated/missing 0; wiki_check OK (3830 assets/302 IDs); beta_audit 0 hits. Raw English finding is the typed company name Detail Haul. JPG evidence below 20 MB. Full-render cadence next at #27; prior #40 passed. Inherited #98 performance and hardware gaps remain explicit.

@@ -26,9 +26,9 @@ func build() -> void:
 	body.add_child(UIK.wrap(I18n.t(str(j.get("blurb", ""))), 8, Art.C_SKY, 400))
 	var h: Dictionary = DataDB.building(str(j["building"])).get("hours", {})
 	var days := str(h.get("days", "all"))
-	body.add_child(UIK.kv("Pay", I18n.t("$%d / hour · %s per 4-hour shift") % [int(Careers.wage(job_id)), Fmt.money0(Careers.shift_pay(job_id))], Art.C_GREEN))
-	body.add_child(UIK.kv("Shifts", I18n.t("Any time %s–%s, %s · one shift a day") % [h.get("open", ""), h.get("close", ""),
-		I18n.t("every day") if days == "all" else I18n.t("Mon–Fri")]))
+	body.add_child(UIK.kv("Pay", I18n.t("$%d / hour · %s per 4-hour shift") % [int(Careers.wage(job_id)), Fmt.money(Careers.shift_pay(job_id))], Art.C_GREEN))
+	body.add_child(UIK.kv("Shifts", I18n.t("Any time %s–%s, %s · %d shift(s) a day") % [h.get("open", ""), h.get("close", ""),
+		I18n.t("every day") if days == "all" else I18n.t("Mon–Fri"), int(Careers.rank(job_id).get("shifts_per_day", 1))]))
 	body.add_child(UIK.kv("Perk", I18n.t(str(j.get("perk", {}).get("desc", ""))), Art.C_GOLD))
 	# promotion ladder
 	var ladder := UIK.hbox(4)
@@ -49,7 +49,9 @@ func build() -> void:
 	body.add_child(UIK.label("You do the work yourself: the better the shift goes, the more you earn (60% of the wage is guaranteed).", 7, Art.C_SKY))
 	var nr := Careers.next_rank(job_id)
 	if not nr.is_empty():
-		body.add_child(UIK.label(I18n.t("%d more shift(s) to %s") % [int(nr["shifts"]) - Careers.shifts(job_id), I18n.t(str(nr["title"]))], 7, Art.C_SKY))
+		body.add_child(UIK.label(I18n.t("%d more shift(s) to %s") % [maxi(0, int(nr["shifts"]) - Careers.shifts(job_id)), I18n.t(str(nr["title"]))], 7, Art.C_SKY))
+	if job_id == "barista":
+		body.add_child(UIK.label(I18n.t("No manager review yet — complete a shift.") if Careers.shifts(job_id) == 0 and not Careers.C().get("manager_ratings", {}).has(job_id) else I18n.t("Manager review %d%% · next rank needs %d%%; serve and clean well to improve.") % [roundi(Careers.manager_rating(job_id) * 100), roundi(float(nr.get("manager_rating", 0)) * 100)], 7, Art.C_SKY))
 	# actions
 	if hired:
 		var why := Careers.shift_block(job_id)
@@ -57,7 +59,7 @@ func build() -> void:
 		if not here:
 			why = "go to the workplace to work a shift"
 		var hrs := Careers.shift_hours_now(job_id) if Careers.shift_block(job_id) == "" else int(j.get("shift_hours", 4))
-		var b := UIK.button(I18n.t("Start a %d-hour shift (up to +%s)") % [hrs, Fmt.money0(Careers.pay_for(job_id, 1.0, hrs))], _work, "primary" if why == "" else "")
+		var b := UIK.button(I18n.t("Start a %d-hour shift (up to +%s)") % [hrs, Fmt.money(Careers.pay_for(job_id, 1.0, hrs))], _work, "primary" if why == "" else "")
 		b.name = "WorkShift"
 		b.disabled = why != ""
 		footer.add_child(b)

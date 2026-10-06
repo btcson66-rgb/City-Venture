@@ -1,0 +1,27 @@
+{
+ "id": "mayor_enterprise_civic",
+ "with": "mayor_enterprise",
+ "start": "start",
+ "nodes": {
+  "start": [
+   {
+    "who": "mayor_enterprise",
+    "text": "I favor lower business taxes and faster venue zoning, with smaller energy grants."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "I will review the proposal and actual costs.",
+      "next": "end"
+     },
+     {
+      "text": "I will participate through a city partnership.",
+      "next": "end"
+     }
+    ]
+   }
+  ],
+  "end": []
+ }
+}

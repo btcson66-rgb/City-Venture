@@ -11,6 +11,7 @@ static func C() -> Dictionary:
 
 
 static func create_offer(t: Dictionary) -> String:
+	if t.get("type","")=="delivery_route":return LogisticsDepth.offer(t)
 	var n := C().size() + 1
 	var cid := "C-%03d" % n
 	var p := DataDB.product(t["product"])
@@ -25,10 +26,21 @@ static func create_offer(t: Dictionary) -> String:
 		"upfront_rate": float(t.get("upfront_rate", 0.0)), "currency": "AUD", "settlement": "bank_transfer",
 		"status": "offered", "offered": Clock.now(), "expires": Clock.now() + int(t.get("expires_days", 2)) * Clock.DAY,
 		"tag": str(t.get("tag", "")),
+		"competitors": Rivals.competitors("ecommerce") if Rivals.active() else [],
 		"patience": int(DataDB.companies.get(t["buyer"], {}).get("negotiation", {}).get("patience", 1)),
 		"history": [{"t": Clock.now(), "by": t["buyer"], "text": I18n.t("Offer: %d × %s @ %s, Net %d") % [qty, I18n.t(p.get("name", "")), Fmt.money(price), int(t.get("payment_terms_days", 30))]}],
 	}
 	C()[cid] = c
+	if t.get("type", "") == "lumina_distributor":
+		c["type"] = "lumina_distributor"
+		c["region"] = "lumina"
+		c["invoice_currency"] = "AUD" if t.get("home_invoice", false) else GlobalMarket.currency("lumina")
+		c["foreign_total"] = snappedf(float(c["total"]) / FX.rate(str(c["invoice_currency"])), 0.01)
+	GameState.add_message(contact_npc(c), str(c["history"][0]["text"]), {"ctx": {"contract": cid}, "expires": c["expires"], "default_reply": "decline", "replies": [
+		{"id": "accept", "label": "Accept this offer", "requires": ["company_registered"], "effects": [{"op": "phone_contract", "choice": "accept"}]},
+		{"id": "decline", "label": "Decline this offer", "effects": [{"op": "phone_contract", "choice": "decline"}], "outcome": "Thanks for letting us know. This offer is closed."},
+		{"id": "details", "label": "What are the payment and delivery terms?", "effects": [], "outcome": I18n.t("Delivery in %d days; payment Net %d. Review the full contract at a Company OS terminal.") % [int(c["delivery_days"]), int(c["payment_terms_days"])], "keep_open": true}
+	]})
 	Sim.schedule(int(c["expires"]), "con.expire", {"id": cid})
 	EventBus.contract_changed.emit(cid)
 	return cid
@@ -50,7 +62,7 @@ static func reconcile_tags() -> void:
 		var tag := str(c.get("tag", ""))
 		if tag != "":
 			GameState.set_flag(tag + "_offered")
-			if str(c.get("status", "")) in ["active", "delivered", "paid"]:
+			if str(c.get("status", "")) in ["active", "shipped", "delivered", "paid"]:
 				_tag(c, "accepted")
 			if str(c.get("status", "")) in ["delivered", "paid"]:
 				_tag(c, "delivered")
@@ -75,7 +87,7 @@ static func close_for_entity(entity: String) -> void:
 				c["status"] = "withdrawn"
 				_tag(c, "declined")
 				text = I18n.t("The company closed. This unanswered offer was withdrawn.")
-			"active":
+			"active", "shipped":
 				c["status"] = "terminated"
 				var tag := str(c.get("tag", ""))
 				if tag != "" and not GameState.flag(tag + "_decided"):
@@ -117,6 +129,7 @@ static func accept(cid: String) -> Dictionary:
 		return {"ok": false, "error": I18n.t("This is a contract of a closed company.")}
 	if not can_trade():
 		return {"ok": false, "error": "They need an invoice from a registered company."}
+	if c.get("type","")=="delivery_route":return LogisticsDepth.sign(c)
 	c["seller"] = GameState.business_entity()
 	c["status"] = "active"
 	c["accepted"] = Clock.now()
@@ -126,6 +139,8 @@ static func accept(cid: String) -> Dictionary:
 		if Ecommerce.stock(loc, c["product"]) > Ecommerce.stock(best, c["product"]):
 			best = loc
 	c["location"] = best
+	if c.get("tag", "") == "lumina_clearance":
+		c["location"] = OverseasPartners.warehouse_location()
 	c["history"].append({"t": Clock.now(), "by": c["seller"], "text": "Accepted."})
 	if float(c["upfront_rate"]) > 0.0:
 		var up := snappedf(float(c["total"]) * float(c["upfront_rate"]), 0.01)
@@ -143,6 +158,7 @@ static func reject(cid: String) -> void:
 	var c: Dictionary = C().get(cid, {})
 	if c.is_empty():
 		return
+	if c.get("type","")=="delivery_route" and c["status"]!="offered":return
 	c["status"] = "rejected"
 	c["history"].append({"t": Clock.now(), "by": GameState.business_entity(), "text": "Declined."})
 	_tag(c, "declined")
@@ -158,6 +174,9 @@ static func counter(cid: String, unit_price: float, terms_days: int, upfront_rat
 		return {"ok": false, "error": I18n.t("This is a contract of a closed company.")}
 	if not can_trade():
 		return {"ok": false, "error": "Register your company first."}
+	if c.get("type", "") == "lumina_distributor" and upfront_rate > 0:
+		return {"ok": false, "error": "Lumina distributor invoices are paid after arrival; choose 0% upfront."}
+	if c.get("type","")=="delivery_route":return LogisticsDepth.counter(c,unit_price,terms_days,upfront_rate)
 	var neg: Dictionary = DataDB.companies.get(c["buyer"], {}).get("negotiation", {})
 	c["history"].append({"t": Clock.now(), "by": GameState.business_entity(),
 		"text": I18n.t("Counter: %s/unit, Net %d%s") % [Fmt.money(unit_price), terms_days, (I18n.t(", %d%% upfront") % int(upfront_rate * 100)) if upfront_rate > 0 else ""]})
@@ -170,6 +189,7 @@ static func counter(cid: String, unit_price: float, terms_days: int, upfront_rat
 		c["payment_terms_days"] = terms_days
 		c["upfront_rate"] = upfront_rate
 		c["total"] = snappedf(int(c["qty"]) * float(c["unit_price"]), 0.01)
+		_refresh_foreign_quote(c)
 		c["history"].append({"t": Clock.now(), "by": c["buyer"], "text": "Deal. Send it over."})
 		EventBus.contract_changed.emit(cid)
 		return {"ok": true, "result": "agreed"}
@@ -188,10 +208,16 @@ static func counter(cid: String, unit_price: float, terms_days: int, upfront_rat
 	c["payment_terms_days"] = mid_terms
 	c["upfront_rate"] = mid_up
 	c["total"] = snappedf(int(c["qty"]) * mid_price, 0.01)
+	_refresh_foreign_quote(c)
 	c["history"].append({"t": Clock.now(), "by": c["buyer"],
 		"text": I18n.t("Best we can do: %s/unit, Net %d%s.") % [Fmt.money(mid_price), mid_terms, (I18n.t(", %d%% upfront") % int(mid_up * 100)) if mid_up > 0 else ""]})
 	EventBus.contract_changed.emit(cid)
 	return {"ok": true, "result": "countered"}
+
+
+static func _refresh_foreign_quote(c: Dictionary) -> void:
+	if c.has("invoice_currency"):
+		c["foreign_total"] = snappedf(float(c["total"]) / FX.rate(str(c["invoice_currency"])), 0.01)
 
 
 static func can_deliver(cid: String) -> bool:
@@ -207,6 +233,7 @@ static func delivery_block(cid: String) -> String:
 		return I18n.t("This contract belongs to another company.")
 	if c.is_empty() or c["status"] != "active":
 		return I18n.t("Nothing to deliver.")
+	if c.get("type","")=="delivery_route":return "Run this route from the fleet console; no stock shipment is required."
 	if stock_for(c) < int(c["qty"]):
 		return I18n.t("You need %d in stock (have %d).") % [int(c["qty"]), stock_for(c)]
 	return ""
@@ -215,9 +242,20 @@ static func delivery_block(cid: String) -> String:
 ## Units of the contract's product across every stock location (a big order can ship from two).
 static func stock_for(c: Dictionary) -> int:
 	var n := 0
-	for loc in Ecommerce.stock_locations():
-		n += Ecommerce.stock(loc, c["product"])
+	for loc in _stock_locations(c):
+		n += available_for_contract(c, str(loc)) if c.get("type", "") == "lumina_distributor" else Ecommerce.stock(loc, c["product"])
 	return n
+
+
+static func available_for_contract(c: Dictionary, loc: String) -> int:
+	var own := int(c["qty"]) if c["status"] == "active" and c.get("location", "") == loc else 0
+	return Ecommerce.available(loc, str(c["product"])) + own
+
+
+static func _stock_locations(c: Dictionary) -> Array:
+	if c.get("tag", "") == "lumina_clearance":
+		return [OverseasPartners.warehouse_location(str(c["seller"]))]
+	return Ecommerce.stock_locations()
 
 
 ## Deliver the whole contract quantity from its stock location. Caller advances packing time.
@@ -227,9 +265,11 @@ static func deliver(cid: String) -> Dictionary:
 		return {"ok": false, "error": why}
 	var c: Dictionary = C().get(cid, {})
 	var qty := int(c["qty"])
+	if c.get("type", "") == "lumina_distributor":
+		return OverseasPartners.ship_contract(c)
 	# pick from the signing location first, then anywhere else
 	var locs: Array = [c["location"]]
-	for l2 in Ecommerce.stock_locations():
+	for l2 in _stock_locations(c):
 		if not l2 in locs:
 			locs.append(l2)
 	var left := qty
@@ -245,6 +285,9 @@ static func deliver(cid: String) -> Dictionary:
 			break
 	cogs = snappedf(cogs, 0.01)
 	var total := float(c["total"])
+	if c.has("invoice_currency"):
+		total = snappedf(float(c["foreign_total"]) * FX.rate(str(c["invoice_currency"])), 0.01)
+		c["total"] = total
 	var up := float(c.get("upfront_paid", 0.0))
 	var late := Clock.now() > int(c["due"])
 	var penalty := snappedf(total * float(c["penalty_rate"]), 0.01) if late else 0.0
@@ -281,6 +324,9 @@ static func handle(kind: String, p: Dictionary) -> void:
 		return
 	if seller_closed(c):
 		return   # a missed cleanup must never collect a receivable already sold in liquidation
+	if kind == "con.partner_arrive":
+		OverseasPartners.receive_contract(c)
+		return
 	match kind:
 		"con.expire":
 			if c["status"] == "offered":
@@ -295,6 +341,18 @@ static func handle(kind: String, p: Dictionary) -> void:
 		"con.pay":
 			if c["status"] == "delivered":
 				var amt := float(c["receivable"])
+				if c.has("invoice_currency") and c["invoice_currency"] != "AUD":
+					var foreign := float(c.get("foreign_receivable", c["foreign_total"]))
+					var gross := snappedf(foreign * FX.rate(str(c["invoice_currency"])), 0.01)
+					var cash := FX.to_home(foreign, str(c["invoice_currency"]))
+					var gain := snappedf(gross - amt, 0.01)
+					var lines := [{"acct": "cash", "dr": cash}, {"acct": "accounts_receivable", "cr": amt}, {"acct": "exp:bank_fees", "dr": gross - cash}]
+					lines.append({"acct": "fx_gain_loss", "cr": gain} if gain >= 0 else {"acct": "fx_gain_loss", "dr": -gain})
+					Ledger.post(c["seller"], I18n.t("Lumina invoice %s paid: %s") % [c["id"], Fmt.money(cash)], lines, {"type": "lumina_invoice_fx", "id": c["id"], "realized": gain})
+					c["status"] = "paid"
+					_tag(c, "paid")
+					EventBus.contract_changed.emit(c["id"])
+					return
 				Ledger.post(c["seller"], I18n.t("Invoice paid by %s (%s)") % [GameState.entity_name(c["buyer"]), c["id"]],
 					[{"acct": "cash", "dr": amt}, {"acct": "accounts_receivable", "cr": amt}], {"type": "contract", "id": c["id"]})
 				c["status"] = "paid"
@@ -307,6 +365,8 @@ static func handle(kind: String, p: Dictionary) -> void:
 ## Invoice discounting: the buyer pays a delivered invoice now, minus a discount (default 3%).
 static func early_payment(cid: String, rate := 0.03) -> Dictionary:
 	var c: Dictionary = C().get(cid, {})
+	if c.get("type", "") == "lumina_distributor":
+		return {"ok": false, "error": "Lumina invoices follow their agreed settlement date; early payment is unavailable."}
 	if not c.is_empty() and seller_closed(c):
 		return {"ok": false, "error": I18n.t("This is a contract of a closed company.")}
 	if c.is_empty() or c["status"] != "delivered":

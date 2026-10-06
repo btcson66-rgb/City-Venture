@@ -368,21 +368,20 @@ share) take theirs. The event lays the arithmetic out. Choices:
 Whichever is chosen, Chapter 12 ends with an **ending card** (`ENDING — A NEW OWNER` / `ON YOUR TERMS` / `STILL YOURS`,
 `UIRoot.show_chapter_card`), `story_complete` is set, and free play continues with `goal_growth`.
 
-## 10. Season 2 — Going Global (Planned, Chapters 13–18)
+## 10. Season 2 — Going Global (Chapters 13–18 Implemented)
 
-The main story (Chapters 1–12) ends in Year 8 with free play. Season 2 takes the company abroad: the World Map's seven
-overseas regions (`data/regions/*.json`, all `planned` today) open one by one. Each chapter teaches one real thing about
+Season one (Chapters 1–12) ends in Year 8 and continues into Chapter 13 in Year 9. Seven regional storefront systems are active; overseas travel remains Planned. Each chapter teaches one real thing about
 selling across borders, and each one is playable with any business the player runs (ecommerce first; café and logistics
 get their own beats). Tickets: GitHub issues labelled `season-2`.
 
 | # | Chapter (Year) | What the player learns and does | NPCs | Systems it needs |
 |---|---|---|---|---|
-| 13 | **FIRST ORDER ABROAD** (Year 9, "Global Consolidation") | A Northridge shopper finds the store. Open an overseas storefront on ShopLane Global, set a price in their currency, ship the first international parcel (7–10 days) and get paid in NRD, converted at the bank's rate. Lesson: a sale abroad earns less than it looks after conversion and shipping. | Maya, Marcus | World Map unlock; per-region marketplace (demand, price in local currency); FX module (daily rates, bank spread); international shipping tiers |
-| 14 | **CUSTOMS** (Year 9) | Ines Duarte, the customs officer, explains duties and paperwork. Choose **DDP** (you pay the duty up front, the buyer gets a clean price) or **DDU** (the buyer pays at the door, more refusals and returns). Classify a product (tariff code) correctly or pay a penalty. | Ines Duarte | duties by region and product category; DDP/DDU per listing; refusals/returns abroad; customs penalty event |
-| 15 | **THE CURRENCY SWING** (Year 9) | The Auroria currency drops 12% in a week: overseas prices are suddenly too low. Options: reprice, lock a rate with a **forward contract** at Nexus Bank, or invoice B2B buyers in Aurelian dollars. Lesson: revenue in one currency and costs in another is a risk you manage, not a bet. | Marcus Reed | FX shock event; forward contracts (rate, notional, date, settlement P/L); invoice currency on contracts |
-| 16 | **A PARTNER OVERSEAS** (Year 9) | Omar Haddad, a trader, offers two ways into Lumina: a **distributor** (they buy in bulk at a discount, they own the customer) or a **3PL warehouse** there (you keep margin and risk, stock sits abroad). Fly there (time passes, flight cost) to sign. | Omar Haddad | region travel (a trip scene); overseas stock location (3PL fees per unit per month); distributor contract type |
-| 17 | **CONSOLIDATION** (Year 9–10) | Big players buy up small brands. A rival undercuts prices in the region you opened. Choose: niche (premium, smaller volume) or scale (lower prices, bigger stock). If Victor's offer was declined in Chapter 12, Hale Group is the rival; if accepted, you run the division that must hit targets. | Victor Hale, Kai Moreno (press) | rival pricing pressure on a market; brand/premium positioning; valuation reuse |
-| 18 | **LEGACY** (Year 10, "Legacy") | Decide what the company becomes: keep it independent, sell, hand shares to the team (employee ownership), or step back and mentor founders at Nexus Co-work. An epilogue shows the city and the people you met, shaped by your choices. | Maya, everyone | ending choices and epilogue scenes; timeline recap; new game+ seed (Planned) |
+| 13 | **FIRST ORDER ABROAD · Implemented** (Year 9, "Global Consolidation") | A Northridge shopper finds the store. Open an overseas storefront on ShopLane Global, set a price in their currency, ship the first international parcel (7–14 days) and get paid in NRD, converted at the bank's rate. Lesson: a sale abroad earns less than it looks after conversion and shipping. | Maya, Marcus | World Map unlock; per-region marketplace (demand, price in local currency); FX module (daily rates, bank spread); international shipping tiers |
+| 14 | **CUSTOMS · Implemented** (Year 9) | Ines Duarte, the customs officer, explains duties and paperwork. Choose **DDP** (you pay the duty up front, the buyer gets a clean price) or **DDU** (the buyer pays at the door, more refusals and returns). Classify a product (tariff code) correctly or pay a penalty. | Ines Duarte | duties by region and product category; DDP/DDU per listing; refusals/returns abroad; customs penalty event |
+| 15 | **THE CURRENCY SWING · Implemented** (Year 9) | The Auroria currency drops 12% in a week: overseas prices are suddenly too low. Options: reprice, lock a rate with a **forward contract** at Nexus Bank, or invoice B2B buyers in Aurelian dollars. Lesson: revenue in one currency and costs in another is a risk you manage, not a bet. | Marcus Reed | FX shock event; forward contracts (rate, notional, date, settlement P/L); invoice currency on contracts |
+| 16 | **A PARTNER OVERSEAS · Implemented** (Year 9) | Omar Haddad, a trader, offers two ways into Lumina: a **distributor** (they buy in bulk at a discount, they own the customer) or a **3PL warehouse** there (you keep margin and risk, stock sits abroad). Fly there (time passes, flight cost) to sign. | Omar Haddad | region travel (a trip scene); overseas stock location (3PL fees per unit per month); distributor contract type |
+| 17 | **CONSOLIDATION · Implemented** (Year 9–10) | Big players buy up small brands. A rival undercuts prices in the region you opened. Choose: niche (premium, smaller volume) or scale (lower prices, bigger stock). If Victor's offer was declined in Chapter 12, Hale Group is the rival; if accepted, you run the division that must hit targets. | Victor Hale, Kai Moreno (press) | rival pricing pressure on a market; brand/premium positioning; valuation reuse |
+| 18 | **LEGACY · Implemented** (Year 10, "Legacy") | Decide what the company becomes: keep it independent, sell, hand shares to the team (employee ownership), or step back and mentor founders at Nexus Co-work. An epilogue shows the city and the people you met, shaped by your choices. | Maya, everyone | ending choices and epilogue scenes; timeline recap; new game+ seed (Planned) |
 
 Order of work: the systems of 13 (World Map unlock, regional marketplace, FX) come first; Chapters 13–14 ship
 together, 15–16 next, 17–18 last. Art needs (chapter cards 13–18, Ines and Omar sheets, a customs office interior, an
@@ -414,3 +413,27 @@ and the event pictures `events/rail_frozen` and `events/acquisition_offer` show 
 拒絕、撤回、過期和公司關閉的合約使用失效說明，不顯示未實際備貨／交貨／收款的成功提示；連續跳過相同交易的幾個步驟只通知一次。室內門口出生點須保留玩家碰撞間距；Pier 7 採用基底更新的家具布局，避免貨架覆蓋入口與出口路線。回歸測試檢查所有室內出生點，`--from=harbor` 可用獨立 fixture 快速檢查港區買車、租倉、送貨與存檔讀回，不能代替從新遊戲開始的完整驗收。
 
 逐項 (a) 提前完成、(b) 失效與替代路徑、(c) 箭頭稽核：`evidence/2026-09-30_24/AUDIT.md`（55 個主線目標＋18 個教學步驟）。回歸測試：`test_no_softlocks.gd`；截圖：`--bot=softlocks --lang=zh_TW`。沒有刪除／更名既有存檔欄位，SAVE_FORMAT 仍為 1。
+
+### Chapters 13–14 — Implemented systems and story (#31)
+
+Chapter 13: Year 9 news → international banking → Northridge local price → actual export shipment → weekly foreign payout conversion. An income breakdown allocates sale, platform fee, freight/pickup, rate movement and spread to the converted order. Chapter 14: Ines/guide → DDP or DDU → actual product tariff classification → 10 delivered units with return rate below 15%. After 14 days, target is 5 or an explicit review/pause without success credit. Wrong declarations enter a finite customs_hold with documents/payment/withdrawal choices. `customs` binds chapter receipts to their company; closure skips impossible transactions without forged sale/payout flags. Early receipts drain immediately. Existing Chapter 12 ending remains the season-one ending and now leads into Chapter 13; legacy ending saves continue. Dedicated art remains Planned. See wiki/21_customs_and_exports.md and test_customs.gd.
+
+### Chapters 15–16 implementation (#42)
+
+See wiki/23_overseas_partners.md for the single expiring currency shock, collateral-backed forwards, real invoice-currency choices, paid journey card, distributor transit/arrival/payment, overseas stock fees, 45-day clearance/review and company-bound no-soft-lock alternatives. Implementation status concerns systems/story; dedicated art and new Lumina city/warehouse scenes remain Planned.
+
+### Chapters 17–18 — Implemented (#43)
+
+See wiki/24_consolidation_and_legacy.md for market receipts, three acquisition branches, real price/ad/stock actions, expiring rival effects, Kai’s actual records and disclosed share estimate, four outcomes, employee equity, fee-based management and resumable five-card epilogue. Unavailable retail routes and company closure skip market success honestly; Maya and free play remain available without a company. New game plus remains Planned.
+
+#35 free play — Implemented: optional three-goal rotation, twenty-five data-defined achievements backfilled from existing save records, and Company OS timeline review. Goals may be set aside; company closure does not require fictitious completion. No monetary reward is manufactured.
+
+#92 life review / New Game+ — Implemented: seven data-defined archetypes, chronological/category filtering, immutable ending or retirement review, and separate-slot new lives with limited opening equity inheritance and increased actual difficulty.
+
+#93 Implemented：第九／十年事件、NPC 整併與反向收購整合、完整 IPO 審計／路演／掛牌／季報、董事會表決，以及三條股權路線對傳承的影響。參閱 wiki/27_capital_markets.md；NPC 情境與治理涵蓋範圍明列，未接入尚未合併的 #90。
+
+## Third season: civic delivery (#99)
+
+Chapters 19–24 each use four ordinary StoryEngine objectives. The first objective begins a lazy CityFuture chapter and selects world year 11 or 12; objective flags come only from briefing, real purchase-job delivery or failure, player choice, and result review. Deadline expiry is an explicit unavailable path; an already performed action is idempotent. Municipal appropriation is equity in a separate municipal entity, never player revenue. All choices, costs, delivery risk and world modifiers are data in economy/city_future.json and world/years.json. See wiki/35_city_future.md for each chapter and policy.
+### NPC destination schedules (#109)
+Meet Daniel, Ken and Lina objectives carry an NPC target so initial guidance and the arrow reflect their scheduled presence, not just the building opening hours. Hours are displayed without changing completion conditions or story progression.

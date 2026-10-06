@@ -71,9 +71,12 @@ func briefs(content: Control) -> void:
 	for brief in Media.S()["briefs"].values():
 		if brief["status"]!="open":continue
 		content.add_child(UIK.wrap(I18n.t("%s · budget %s · %s · audience %s · %d days remaining")%[brief["client"],Fmt.money0(brief["budget"]),I18n.t("Relevant reach" if brief["goal"]=="awareness" else "Conversions"),I18n.t(Media.cfg()["audiences"][int(brief["audience"])]),maxi(0,ceili((int(brief["deadline"])-Clock.now())/float(Clock.DAY)))],8,Art.C_WHITE,550))
+		if not brief.get("competitors", []).is_empty():
+			content.add_child(UIK.wrap(Rivals.competing_text(brief["competitors"]), 8, Art.C_SKY, 550))
 		var preferences: Array=brief["preferences"]
 		content.add_child(UIK.wrap(I18n.t("Client preferences: %s / %s / %s")%[I18n.t(Media.cfg()["creative_cards"]["slogan"][int(preferences[0])]),I18n.t(Media.cfg()["creative_cards"]["visual"][int(preferences[1])]),I18n.t(Media.cfg()["creative_cards"]["tone"][int(preferences[2])])],8,Art.C_SKY,550))
 		content.add_child(UIK.label(I18n.t("Creative quality %.0f%% · service fee %s · media rebate %.0f%% · Net 30")%[float(brief["quality"])*100,Fmt.money0(Media.cfg()["service_fee"]),float(Media.cfg()["media_rebate"])*100],8))
+		content.add_child(UIK.tip("net_terms"))
 		var row := UIK.hbox(4)
 		content.add_child(row)
 		var creative := UIK.button("Build Creative Pitch",play_creative.bind(brief["id"]),"primary" if float(brief["quality"])==0 and not has_primary else "button")

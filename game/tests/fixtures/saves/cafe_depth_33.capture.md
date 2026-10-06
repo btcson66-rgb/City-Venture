@@ -1,0 +1,1 @@
+Source: codex/33-cafe-depth, parent 171915ce, implementation captured before commit. Actual native input: CafeMaterial packs, second lease/fit/licence, cleaning/inspection and per-shop report. Controlled company capital, clock and arrival setup; revenue produced by normal café simulation. Capture: evidence/2026-10-03_33/walkthrough_result.json.

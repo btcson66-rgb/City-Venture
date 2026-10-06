@@ -1,0 +1,55 @@
+{
+ "id": "personal_okafor",
+ "npc": "okafor",
+ "steps": [
+  {
+   "stage": 0,
+   "title": "Mr. Okafor: Old Town lease explanation · part 1",
+   "detail": "Mr. Okafor asks for a Old Town lease explanation. Their evidence contains an unresolved question. What should the first draft do?",
+   "minutes": 45,
+   "cost": 0,
+   "choices": [
+    {
+     "id": "document",
+     "label": "Document the question and ask for evidence",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 1,
+   "title": "Mr. Okafor: Old Town lease explanation · part 2",
+   "detail": "The Old Town lease explanation now has conflicting notes. Mr. Okafor wants a version that other people can check. How do you resolve the conflict?",
+   "minutes": 60,
+   "cost": 10,
+   "choices": [
+    {
+     "id": "compare",
+     "label": "Compare sources and record what remains uncertain",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 2,
+   "title": "Mr. Okafor: Old Town lease explanation · part 3",
+   "detail": "Mr. Okafor is ready to introduce a paying client for the Old Town lease explanation. The client asks for a promise you cannot verify. What do you put in the handover?",
+   "minutes": 90,
+   "cost": 20,
+   "choices": [
+    {
+     "id": "scope",
+     "label": "State the agreed scope, limits and evidence",
+     "approach": "thorough"
+    }
+   ]
+  }
+ ],
+ "referral": {
+  "client": "Mr. Okafor referral",
+  "detail": "A referred client commissions a documented Old Town lease explanation. Complete the agreed work; no revenue is earned merely for knowing Mr. Okafor.",
+  "price": 780,
+  "cost": 280,
+  "minutes": 180
+ }
+}

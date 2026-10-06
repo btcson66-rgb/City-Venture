@@ -1,0 +1,55 @@
+{
+ "id": "personal_vera_stone",
+ "npc": "vera_stone",
+ "steps": [
+  {
+   "stage": 0,
+   "title": "Vera Stone: guest review evidence guide · part 1",
+   "detail": "Vera Stone asks for a guest review evidence guide. Their evidence contains an unresolved question. What should the first draft do?",
+   "minutes": 45,
+   "cost": 0,
+   "choices": [
+    {
+     "id": "document",
+     "label": "Document the question and ask for evidence",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 1,
+   "title": "Vera Stone: guest review evidence guide · part 2",
+   "detail": "The guest review evidence guide now has conflicting notes. Vera Stone wants a version that other people can check. How do you resolve the conflict?",
+   "minutes": 60,
+   "cost": 10,
+   "choices": [
+    {
+     "id": "compare",
+     "label": "Compare sources and record what remains uncertain",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 2,
+   "title": "Vera Stone: guest review evidence guide · part 3",
+   "detail": "Vera Stone is ready to introduce a paying client for the guest review evidence guide. The client asks for a promise you cannot verify. What do you put in the handover?",
+   "minutes": 90,
+   "cost": 20,
+   "choices": [
+    {
+     "id": "scope",
+     "label": "State the agreed scope, limits and evidence",
+     "approach": "thorough"
+    }
+   ]
+  }
+ ],
+ "referral": {
+  "client": "Vera Stone referral",
+  "detail": "A referred client commissions a documented guest review evidence guide. Complete the agreed work; no revenue is earned merely for knowing Vera Stone.",
+  "price": 945,
+  "cost": 335,
+  "minutes": 240
+ }
+}

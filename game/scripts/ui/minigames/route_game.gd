@@ -155,7 +155,7 @@ func result_lines() -> Array:
 		return []
 	var lines: Array = [I18n.t("Your route: %.1f km. The shortest possible: %.1f km.") % [float(stats["km"]), float(stats["best_km"])],
 		I18n.t("Time on the road: %s") % Fmt.duration_min(int(stats["minutes"])),
-		I18n.t("Fuel used: %.1f L (%s)") % [float(stats["fuel_l"]), Fmt.money0(float(stats["fuel_cost"]))]]
+		I18n.t("Fuel used: %.1f L (%s)") % [float(stats["fuel_l"]), Fmt.money(float(stats["fuel_cost"]))]]
 	if int(job.get("by", 0)) > 0:
 		lines.append(I18n.t("Back at the depot around %s. Deadline: %s.") % [Clock.fmt_short(Clock.now() + int(stats["minutes"])), Clock.fmt_short(int(job["by"]))])
 	return lines
@@ -199,11 +199,12 @@ static func _perms(n: int) -> Array:
 func _unhandled_key_input(event: InputEvent) -> void:
 	if phase != "play" or not (event is InputEventKey) or not event.pressed or event.echo:
 		return
-	var k := int((event as InputEventKey).keycode)
-	if k >= KEY_1 and k <= KEY_9 and k - KEY_1 < stops.size():
-		get_viewport().set_input_as_handled()
-		_pick(k - KEY_1)
-	elif k == KEY_BACKSPACE:
+	for index in mini(9, stops.size()):
+		if event.is_action_pressed("pick_%d" % (index + 1)):
+			get_viewport().set_input_as_handled()
+			_pick(index)
+			return
+	if event.is_action_pressed("undo"):
 		get_viewport().set_input_as_handled()
 		_undo()
 
@@ -215,6 +216,10 @@ class RouteView:
 
 	func _ready() -> void:
 		clip_contents = true
+		if Logistics.has_van():
+			var van := CompanyVan.new()
+			van.position = Vector2(8, 198)
+			add_child(van)
 
 	func _draw() -> void:
 		var sz := size

@@ -25,6 +25,8 @@ static func eval(expr: String, ctx := {}) -> bool:
 		return false
 	if expr.begins_with("!"):
 		return not eval(expr.substr(1), ctx)
+	if expr.begins_with("met:"):
+		return bool(GameState.data.get("npcs",{}).get(expr.substr(4),{}).get("met",false))
 	if expr.begins_with("flag:"):
 		return GameState.flag(expr.substr(5))
 	if expr.begins_with("visited:"):
@@ -33,6 +35,8 @@ static func eval(expr: String, ctx := {}) -> bool:
 		return Clock.WEEKDAYS[Clock.weekday()].to_lower() == expr.substr(8).to_lower().left(3)
 	if expr.begins_with("ctx:"):
 		return bool(ctx.get(expr.substr(4), false))
+	if expr.begins_with("can_replace:"):
+		return Ecommerce.replacement_available(expr.substr(12))
 	if expr.begins_with("has_stock:"):
 		# unreserved units of one product somewhere the player can ship from
 		return Ecommerce.best_location(expr.substr(10)) != ""
@@ -60,6 +64,8 @@ static func eval(expr: String, ctx := {}) -> bool:
 	if expr == "has_listed":
 		return not Ecommerce.E()["listings"].is_empty() or GameState.stat("orders_placed") >= 1
 	match expr:
+		"popup_open":
+			return PopupStore.is_open(Clock.now()) and Ecommerce.total_units_at("popup_retail")>0
 		"forecast_ok":
 			return Forecast.ok(GameState.business_entity())
 		"company_registered":
@@ -105,6 +111,7 @@ static func _cmp(expr: String) -> Dictionary:
 
 
 static func _value(name: String, ctx: Dictionary) -> float:
+	if name.begins_with("metric:"):return SynergyMetrics.value(name.substr(7))
 	if name.begins_with("stat:"):
 		return GameState.stat(name.substr(5))
 	match name:

@@ -16,6 +16,7 @@ var _ped_rng := RandomNumberGenerator.new()
 var _density_acc := 0.0
 var sky_layer: CanvasLayer
 var _lot_rendered := ""
+var _era_rendered := 1
 var sky_day: Sprite2D
 var sky_dusk: Sprite2D
 var sky_night: Sprite2D
@@ -27,6 +28,7 @@ const SKY_PARALLAX := 0.55
 func build(district_id: String) -> void:
 	kind = "district"
 	scene_id = district_id
+	_era_rendered = World.year()
 	def = DataDB.districts[district_id]
 	if district_id=="residential":
 		_lot_rendered=JSON.stringify(RealEstate.lot_definition(DataDB.buildings["lot7"])["exterior"])
@@ -39,31 +41,39 @@ func build(district_id: String) -> void:
 		if g.has("fallback") and not has_tile(tile):
 			tile = str(g["fallback"])   # a ground tile still being drawn (Old Town cobbles, Harbor quay)
 		paint(tile, g["rect"], int(g.get("step", 1)))
+	for ground in def.get("ground", []):
+		if ground["type"] == "crosswalk_h":
+			var signal_node := CrossingSignal.new()
+			signal_node.position = Vector2(float(ground["rect"][0])*16-8, float(ground["rect"][1])*16)
+			add_child(signal_node)
 	_build_sky()
 	_add_water_sparkles()
 	# north edge: building fronts / back of the block are not walkable
 	var b: Dictionary = def.get("bounds", {"top": 322, "bottom": size_px.y - 8})
-	add_solid(Rect2(0, 0, size_px.x, float(b["top"]) - 2.0))
-	add_solid(Rect2(0, float(b["bottom"]), size_px.x, size_px.y - float(b["bottom"])))
+	_edge_solids(Rect2(0, 0, size_px.x, float(b["top"]) - 2.0))
+	_edge_solids(Rect2(0, float(b["bottom"]), size_px.x, size_px.y - float(b["bottom"])))
 	var has_west := false
 	var has_east := false
 	for ex in def.get("exits", []):
-		if float(ex["rect"][0]) < 20:
+		if str(ex.get("direction", "")) == "W":
 			has_west = true
-		else:
+		elif str(ex.get("direction", "")) == "E":
 			has_east = true
 	if not has_west:
 		add_solid(Rect2(-8, 0, 10, size_px.y))
 	else:
 		add_solid(Rect2(-8, 0, 8, size_px.y))
 	add_solid(Rect2(size_px.x - (0 if has_east else 2), 0, 10, size_px.y))
+	# Outer collision walls keep an unconnected corridor end inside the map. Exit strips remain on the inner edge.
+	add_solid(Rect2(0, -8, size_px.x, 8))
+	add_solid(Rect2(0, size_px.y, size_px.x, 8))
 	# buildings
 	for bid in def.get("buildings", []):
 		var bd: Dictionary = DataDB.buildings[bid]
 		if bid=="lot7":bd=RealEstate.lot_definition(bd)
 		_add_building(facade(bd["exterior"]), float(bd["exterior"]["x"]), bid, bd)
 	for f in def.get("fillers", []):
-		_add_building(facade(f), float(f["x"]), "", {})
+		_add_building(facade(f), float(f["x"]), "", {"exterior":f})
 	for p in def.get("props", []):
 		add_prop(p)
 	for p in Energy.street_props(district_id):   # chargers the player built stand on the pavement
@@ -82,11 +92,17 @@ func build(district_id: String) -> void:
 		area.setup(ex, self)
 		add_child(area)
 		var r: Array = ex["rect"]
-		poi.append({"pos": Vector2(float(r[0]) + float(r[2]) / 2.0, float(r[1]) + float(r[3]) / 2.0), "icon": "arrow_right", "label": I18n.t(DataDB.districts[ex["to"]]["name"])})
+		poi.append({"pos": Vector2(float(r[0]) + float(r[2]) / 2.0, float(r[1]) + float(r[3]) / 2.0), "icon": "arrow_right", "direction": str(ex.get("direction", "E")), "label": I18n.t(DataDB.districts[ex["to"]]["name"])})
 	for k in def.get("spawns", {}):
 		var s: Array = def["spawns"][k]
 		spawns[k] = Vector2(float(s[0]), float(s[1]))
 	_ped_rng.seed = hash(district_id) + Clock.day_index()
+	if district_id == "harbor":
+		var van := CompanyVan.new()
+		van.name = "OwnedCompanyVan"
+		var parking: Dictionary = Logistics.van_cfg().get("parking", {"x":350,"y":572})
+		van.position = Vector2(float(parking["x"]), float(parking["y"]))
+		entities.add_child(van)
 	_spawn_traffic()
 	_spawn_pedestrians(true)
 	update_lighting()
@@ -137,12 +153,12 @@ func _add_building(sprite: String, x: float, bid: String, bd: Dictionary) -> voi
 	var s := Sprite2D.new()
 	s.texture = tex
 	s.centered = false
-	s.offset = Vector2(0, -h + 2)
+	Art.fit_world_sprite(s, "buildings/" + sprite, Vector2(0, -h + 2))
 	holder.add_child(s)
 	var lt := Sprite2D.new()
 	lt.texture = Art.tex("buildings/" + sprite + "_lights")
 	lt.centered = false
-	lt.offset = s.offset
+	Art.fit_world_sprite(lt, "buildings/" + sprite + "_lights", Vector2(0, -h + 2))
 	var mat := CanvasItemMaterial.new()
 	mat.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
 	lt.material = mat
@@ -150,6 +166,15 @@ func _add_building(sprite: String, x: float, bid: String, bd: Dictionary) -> voi
 	light_nodes.append({"node": lt, "interior": false})
 	entities.add_child(holder)
 	building_nodes[bid if bid != "" else sprite + str(x)] = holder
+	# Roof coordinates stay relative to the facade's logical top-left, independent of detail resolution.
+	for roof in bd.get("exterior", {}).get("roof_props", []):
+		var prop: Dictionary = (roof as Dictionary).duplicate(true)
+		prop["y"] = float(prop.get("y", 0)) - h + 2.0
+		prop["wall"] = true
+		prop["solid"] = false
+		var decoration := add_prop(prop, holder)
+		if decoration != null:
+			decoration.name = "Roof_" + str(prop["sprite"])
 	# soft contact shadow the facade casts onto the sidewalk
 	var sh := Sprite2D.new()
 	sh.texture = _shadow_tex()
@@ -215,12 +240,12 @@ func _add_metro(mp: Dictionary) -> Node2D:
 	var s := Sprite2D.new()
 	s.texture = tex
 	s.centered = false
-	s.offset = Vector2(0, -h)
+	Art.fit_world_sprite(s, "buildings/metro_entrance", Vector2(0, -h))
 	holder.add_child(s)
 	var lt := Sprite2D.new()
 	lt.texture = Art.tex("buildings/metro_entrance_lights")
 	lt.centered = false
-	lt.offset = s.offset
+	Art.fit_world_sprite(lt, "buildings/metro_entrance_lights", Vector2(0, -h))
 	var mat := CanvasItemMaterial.new()
 	mat.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
 	lt.material = mat
@@ -267,7 +292,11 @@ func _build_sky() -> void:
 	var rows := int(BASE_Y / T)
 	for y in rows:
 		for x in range(0, int(def["size_tiles"][0])):
-			ground.erase_cell(Vector2i(x, y))
+			var point := Vector2(x * T + T / 2.0, y * T + T / 2.0)
+			var passage := false
+			for c in def.get("walk_corridors", []):
+				if Rect2(float(c[0]), float(c[1]), float(c[2]), float(c[3])).has_point(point): passage = true
+			if not passage: ground.erase_cell(Vector2i(x, y))
 	sky_layer = CanvasLayer.new()
 	sky_layer.layer = -1
 	sky_layer.follow_viewport_enabled = true
@@ -347,6 +376,10 @@ func _update_sparkles(delta: float) -> void:
 
 
 func _process(delta: float) -> void:
+	# The rebuild waits until no dialogue, phone, modal or minigame is open, so the player's screen never vanishes mid-task.
+	if _era_rendered != World.year() and not UIRoot.is_blocking():
+		_era_rendered = World.year()
+		_reload_era.call_deferred()
 	super._process(delta)
 	_update_sky()
 	_update_sparkles(delta)
@@ -391,3 +424,22 @@ func minimap_shapes() -> Array:
 			col2 = Color8(210, 190, 130)
 		shapes.append({"rect": Rect2(n.position.x, BASE_Y - 60, w, 58), "color": col2})
 	return shapes
+
+
+## An era can change while the player stands outside; rebuild at their current feet.
+func _reload_era() -> void:
+	if is_instance_valid(player) and SceneRouter.world_scene() == self:
+		SceneRouter._enter("district", scene_id, "", player.facing, player.position)
+
+## North/south pedestrian corridors carve apertures in the opaque block bounds, without moving any facade.
+func _edge_solids(rect: Rect2) -> void:
+	var spans: Array[Rect2] = [rect]
+	for c in def.get("walk_corridors", []):
+		var cut := Rect2(float(c[0]), float(c[1]), float(c[2]), float(c[3]))
+		var next: Array[Rect2] = []
+		for span in spans:
+			if not span.intersects(cut): next.append(span); continue
+			if cut.position.x > span.position.x: next.append(Rect2(span.position, Vector2(cut.position.x - span.position.x, span.size.y)))
+			if cut.end.x < span.end.x: next.append(Rect2(cut.end.x, span.position.y, span.end.x - cut.end.x, span.size.y))
+		spans = next
+	for span in spans: add_solid(span)

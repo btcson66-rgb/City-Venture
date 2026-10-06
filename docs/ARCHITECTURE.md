@@ -262,6 +262,10 @@ Each objective has `complete_when` conditions (tiny condition DSL shared with ev
 | Walkthrough bot | `tests/walkthrough/bot.gd` drives the real game with synthetic input events (movement actions and mouse clicks on UI) through New Game → Creator → Apartment → City → Cafe → Co-work → Business → First Sale → Registration → Company OS → Month Close. Run headless for PASS/FAIL, and under Xvfb + Movie Maker for the video. |
 | Human playtest | Needs a human. Tracked in `QA_REPORT.md` and never marked PASS by the agent. |
 
+### Foreign-currency Ledger accounts (#30)
+
+`fx_receivable:<currency>` and `fx_wallet:<currency>` are home-dollar historical carrying values, paired with foreign-unit quantities in global_market state. Delivery posts gross home-equivalent revenue, platform fee and net receivable. Weekly payout moves the same book value from receivable to wallet. Conversion debits actual cash after bank spread, credits the wallet carrying value, and credits `fx_gain_loss` for a gain or debits it for a loss. MonthClose includes the signed realized result in other income/profit. Refunds reverse historical revenue and consume foreign assets at carrying value; repurchased currency and carrying differences also use fx_gain_loss. Unconverted quotes never revalue the Ledger. Company closure converts before liquidation and prevents later payouts.
+
 
 ## Industry framework (#63)
 

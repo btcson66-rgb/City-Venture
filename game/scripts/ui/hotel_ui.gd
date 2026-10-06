@@ -197,7 +197,7 @@ func ops_page(content: Control) -> void:
 		var cond := float(Hotel.S()["rooms"][type]["cond"])
 		var renovating: bool=Clock.now()<int(Hotel.S()["rooms"][type]["reno_until"])
 		var ok: bool=not issues["broken"] and not issues["due"] and not renovating
-		var status := I18n.t("working")
+		var status := I18n.t("In service")
 		if renovating:status=I18n.t("renovating until %s")%Clock.fmt_short(int(Hotel.S()["rooms"][type]["reno_until"]))
 		elif issues["broken"]:status=I18n.t("broken: rooms not for sale")
 		elif issues["due"]:status=I18n.t("service due")
@@ -227,6 +227,7 @@ func groups_page(content: Control) -> void:
 	content.add_child(UIK.label_tip("OTA statements","hotel_ota",9))
 	var pending := Hotel.ota_pending()
 	line(content,I18n.t("Unbilled OTA nights this week: gross %s, commission %s. Statements are invoiced every %d days, paid Net %d.")%[Fmt.money(float(pending["gross"])),Fmt.money(float(pending["commission"])),int(Hotel.cfg()["ota_settle_days"]),int(Hotel.cfg()["ota_terms"])],Art.C_MUTED)
+	content.add_child(UIK.tip("net_terms"))
 	for job in Jobs.S()["items"].values():
 		if job["entity"]==Hotel.entity() and job["segment"]=="hotel" and job["status"] in ["invoiced","paid"]:
 			line(content,I18n.t("%s · %s · received %s · %s")%[job["client"],I18n.t(job["scope"]),Fmt.money(float(job["receivable"])),I18n.t(str(CompanyOS.STATUS_TEXT.get(job["status"],str(job["status"]).capitalize())))],Art.C_MUTED)

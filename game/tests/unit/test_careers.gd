@@ -76,11 +76,22 @@ func test_freelance_gig_invoice_and_payment() -> void:
 	var r := Careers.accept(o["id"])
 	runner.check(r["ok"], "accepted")
 	var rep0 := Careers.rep()
+	var gig: Dictionary = r["gig"]
+	for topic in ["goal", "audience", "budget"]: FreelanceWorkflow.ask(o["id"], topic)
+	FreelanceWorkflow.prepare_proposal(o["id"])
+	FreelanceWorkflow.propose(o["id"], 1.0, 1)
 	var guard := 0
 	var res := {}
-	while guard < 20:
+	while guard < 40:
 		guard += 1
-		res = Careers.work_on(o["id"])
+		match FreelanceWorkflow.stage(gig):
+			"work", "revision_work":
+				res = Careers.work_on(o["id"])
+				if not res["ok"]: Clock.advance(Clock.DAY)
+			"scope": res = FreelanceWorkflow.scope(o["id"], true)
+			"delivery": res = FreelanceWorkflow.deliver(o["id"])
+			"revision": res = FreelanceWorkflow.revise(o["id"], false)
+			"acceptance": res = FreelanceWorkflow.accept_delivery(o["id"])
 		if res.get("delivered", false):
 			break
 	runner.check(res.get("delivered", false), "delivered after enough sessions")

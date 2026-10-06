@@ -5,19 +5,119 @@
  "permit_hours": 48,
  "open_hour": 7,
  "close_hour": 17,
- "open_days": [1, 2, 3, 4, 5, 6],
+ "open_days": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6
+ ],
  "footfall_day": 240,
  "saturday_mult": 1.3,
- "hour_share": {"7": 0.12, "8": 0.17, "9": 0.12, "10": 0.09, "11": 0.08, "12": 0.11, "13": 0.1, "14": 0.08, "15": 0.07, "16": 0.06},
+ "hour_share": {
+  "7": 0.12,
+  "8": 0.17,
+  "9": 0.12,
+  "10": 0.09,
+  "11": 0.08,
+  "12": 0.11,
+  "13": 0.1,
+  "14": 0.08,
+  "15": 0.07,
+  "16": 0.06
+ },
  "base_conversion": 0.3,
  "elasticity": 1.6,
  "items": {
-  "coffee": {"name": "Coffee", "ref_price": 4.2, "unit_cost": 0.85, "min": 2.5, "max": 8.0},
-  "pastry": {"name": "Pastry", "ref_price": 3.8, "unit_cost": 1.3, "min": 2.0, "max": 7.0, "attach": 0.35}
+  "coffee": {
+   "name": "Coffee",
+   "ref_price": 4.2,
+   "unit_cost": 0.85,
+   "min": 2.5,
+   "max": 8.0,
+   "materials": {
+    "beans": 1
+   }
+  },
+  "pastry": {
+   "name": "Pastry",
+   "ref_price": 3.8,
+   "unit_cost": 1.3,
+   "min": 2.0,
+   "max": 7.0,
+   "attach": 0.35,
+   "materials": {
+    "bakery_pastry": 1
+   }
+  },
+  "latte": {
+   "name": "Latte",
+   "ref_price": 5.2,
+   "unit_cost": 1.25,
+   "min": 3.2,
+   "max": 9,
+   "materials": {
+    "beans": 1,
+    "milk": 1
+   },
+   "share": 0.24
+  },
+  "tea": {
+   "name": "Tea",
+   "ref_price": 3.8,
+   "unit_cost": 0.45,
+   "min": 2.2,
+   "max": 7,
+   "materials": {
+    "tea": 1
+   },
+   "share": 0.18
+  },
+  "seasonal": {
+   "name": "Seasonal house special",
+   "ref_price": 6.2,
+   "unit_cost": 2.25,
+   "min": 4,
+   "max": 10,
+   "materials": {
+    "beans": 1,
+    "milk": 1,
+    "food": 1
+   },
+   "share": 0.13,
+   "months": [
+    6,
+    7,
+    8,
+    12,
+    1,
+    2
+   ]
+  },
+  "sandwich": {
+   "name": "Sandwich",
+   "ref_price": 6.8,
+   "unit_cost": 2,
+   "min": 4.5,
+   "max": 11,
+   "materials": {
+    "food": 2
+   },
+   "attach": 0.14
+  }
  },
  "supply_packs": [
-  {"id": "small", "cups": 150, "cost": 135},
-  {"id": "large", "cups": 400, "cost": 320}
+  {
+   "id": "small",
+   "cups": 150,
+   "cost": 135
+  },
+  {
+   "id": "large",
+   "cups": 400,
+   "cost": 320
+  }
  ],
  "supplies_max": 1200,
  "pastry_order_max": 80,
@@ -27,5 +127,88 @@
  "card_fee": 0.019,
  "rating_start": 3.4,
  "rating_speed": 0.12,
- "ads": [0, 15, 40]
+ "ads": [
+  0,
+  15,
+  40
+ ],
+ "locations": {
+  "corner_cafe": {
+   "footfall_mult": 1,
+   "building": "corner_cafe_unit"
+  },
+  "popup_cafe": {
+   "footfall_mult": 1.2,
+   "building": "popup_unit"
+  }
+ },
+ "materials": {
+  "beans": {
+   "name": "Coffee beans",
+   "unit_cost": 0.85
+  },
+  "milk": {
+   "name": "Milk",
+   "unit_cost": 0.4
+  },
+  "tea": {
+   "name": "Tea leaves",
+   "unit_cost": 0.45
+  },
+  "food": {
+   "name": "Food ingredients",
+   "unit_cost": 1
+  },
+  "bakery_pastry": {
+   "name": "Fresh bakery pastries",
+   "unit_cost": 1.3
+  }
+ },
+ "material_packs": [
+  {
+   "id": "milk",
+   "name": "Milk supply pack",
+   "materials": {
+    "milk": 100
+   },
+   "cost": 40
+  },
+  {
+   "id": "tea",
+   "name": "Tea supply pack",
+   "materials": {
+    "tea": 100
+   },
+   "cost": 45
+  },
+  {
+   "id": "food",
+   "name": "Food ingredients pack",
+   "materials": {
+    "food": 100
+   },
+   "cost": 100
+  }
+ ],
+ "seasonal_demand_bonus": 0.15,
+ "inspection": {
+  "min_days": 60,
+  "max_days": 90,
+  "fine": 250,
+  "pause_days": 1,
+  "clean_minutes": 15,
+  "waste_limit": 0.25,
+  "rating_min": 3,
+  "clean_days": 1
+ },
+ "overtime": {
+  "hours": 40,
+  "mult": 1.5
+ },
+ "drink_shares": {
+  "coffee": 0.45,
+  "latte": 0.24,
+  "tea": 0.18,
+  "seasonal": 0.13
+ }
 }

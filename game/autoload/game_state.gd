@@ -23,7 +23,8 @@ func default_appearance() -> Dictionary:
 ## Build a fresh world. `setup` = {name, appearance{}, outfit, seed?}
 ## Returns false (and leaves no game in memory) when no save slot could be claimed; SaveSystem.last_error says why.
 func new_game(setup: Dictionary) -> bool:
-	var living := DataDB.living()
+	Ecommerce.invalidate_reservations()
+	var start_cash := Replay.opening_cash(setup)
 	var seed_v: int = int(setup.get("seed", Time.get_ticks_usec() % 2147483647))
 	# Explicit reproducible seeds are restricted to QA bot runs.
 	if Array(OS.get_cmdline_user_args()).any(func(a): return a.begins_with("--bot=")):
@@ -38,9 +39,12 @@ func new_game(setup: Dictionary) -> bool:
 	data = template(setup, seed_v)
 	data["meta"]["slot"] = slot
 	Ledger.post("player", "Opening balance — savings", [
-		{"acct": "cash", "dr": float(living.get("start_cash", 30000))},
-		{"acct": "equity", "cr": float(living.get("start_cash", 30000))}], {"type": "opening"})
-	timeline(I18n.t("Moved to Aurelia City with $%s in savings.") % Fmt.money0(float(living.get("start_cash", 30000))))
+		{"acct": "cash", "dr": start_cash},
+		{"acct": "equity", "cr": start_cash}], {"type": "opening"})
+	Housing.opening()
+	timeline(I18n.t("Moved to Aurelia City with $%s in savings.") % Fmt.money0(start_cash))
+	if setup.has("run"):
+		Replay.initialize(setup["run"])
 	return true
 
 
@@ -65,7 +69,9 @@ func template(setup := {}, seed_v := 1) -> Dictionary:
 			"player": {"id": "player", "name": setup.get("name", "Alex"), "kind": "person", "bank_account": true,
 				"seller_account": "personal"},
 		},
-		"company": "",
+		"company": [],
+		"active_company": "",
+		"company_contexts": {},
 		"ledger": {"seq": 0, "journal": [], "balances": {}},
 		"ecommerce": {"listings": {}, "orders": {}, "purchase_orders": {}, "inventory": {}, "supplier_mods": [],
 			"counters": {"order": 1000, "po": 100, "listing": 1}, "demand_mods": [], "ad_price_mult": 1.0,
@@ -170,7 +176,7 @@ func stat(name: String) -> float:
 
 # ------------------------------------------------------------------ entities
 func company_id() -> String:
-	return str(data.get("company", ""))
+	return CompanyPortfolio.active_of(data)
 
 
 ## The entity whose books the business currently runs on.
@@ -195,9 +201,11 @@ func business_display_name() -> String:
 
 
 # ------------------------------------------------------------------ messages / timeline
-func add_message(from_id: String, text: String) -> void:
+func add_message(from_id: String, text: String, options: Dictionary = {}) -> void:
 	text = I18n.t(text)   # a plain English line becomes the player's language; already-translated text passes through
-	data["messages"].append({"t": Clock.now(), "from": from_id, "text": text, "read": false})
+	var message := {"t": Clock.now(), "from": from_id, "text": text, "read": false}
+	PhoneMessages.prepare(message, options)
+	data["messages"].append(message)
 	EventBus.message_received.emit(from_id, text)
 
 
@@ -209,8 +217,11 @@ func unread_messages() -> int:
 	return n
 
 
-func timeline(text: String, kind := "life") -> void:
-	data["timeline"].append({"t": Clock.now(), "text": text, "kind": kind})
+func timeline(text: String, kind := "life", metadata := {}) -> void:
+	var row := {"t": Clock.now(), "text": text, "kind": kind}
+	for key in ["art", "category", "entity", "npc"]:
+		if metadata.has(key): row[key] = metadata[key]
+	data["timeline"].append(row)
 
 
 func mark_visited(key: String) -> void:

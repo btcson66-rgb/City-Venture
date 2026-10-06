@@ -87,7 +87,7 @@ func _make_custom_tooltip(_for_text: String) -> Object:
 
 
 func _gui_input(ev: InputEvent) -> void:
-	if ev is InputEventMouseButton and ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT:
+	if ev.is_action_pressed("ui_accept") or (ev is InputEventMouseButton and ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT):
 		accept_event()
 		_pin()
 

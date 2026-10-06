@@ -1,0 +1,17 @@
+{
+ "id": "popup_retail",
+ "name": "Pop-up Unit 5 weekend retail",
+ "district": "shopping_street",
+ "kind": "popup",
+ "monthly_rent": 0,
+ "deposit_months": 0,
+ "building": "popup_unit",
+ "requires": [
+  "company_registered"
+ ],
+ "requires_text": "Register a company before reserving a weekend pop-up.",
+ "capacity": {
+  "inventory_units": 150,
+  "staff": 1
+ }
+}

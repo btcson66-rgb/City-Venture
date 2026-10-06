@@ -1,0 +1,55 @@
+{
+ "id": "personal_tom",
+ "npc": "tom",
+ "steps": [
+  {
+   "stage": 0,
+   "title": "Tom: office move-in inventory · part 1",
+   "detail": "Tom asks for an office move-in inventory. Their evidence contains an unresolved question. What should the first draft do?",
+   "minutes": 45,
+   "cost": 0,
+   "choices": [
+    {
+     "id": "document",
+     "label": "Document the question and ask for evidence",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 1,
+   "title": "Tom: office move-in inventory · part 2",
+   "detail": "The office move-in inventory now has conflicting notes. Tom wants a version that other people can check. How do you resolve the conflict?",
+   "minutes": 60,
+   "cost": 10,
+   "choices": [
+    {
+     "id": "compare",
+     "label": "Compare sources and record what remains uncertain",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 2,
+   "title": "Tom: office move-in inventory · part 3",
+   "detail": "Tom is ready to introduce a paying client for the office move-in inventory. The client asks for a promise you cannot verify. What do you put in the handover?",
+   "minutes": 90,
+   "cost": 20,
+   "choices": [
+    {
+     "id": "scope",
+     "label": "State the agreed scope, limits and evidence",
+     "approach": "thorough"
+    }
+   ]
+  }
+ ],
+ "referral": {
+  "client": "Tom referral",
+  "detail": "A referred client commissions a documented office move-in inventory. Complete the agreed work; no revenue is earned merely for knowing Tom.",
+  "price": 915,
+  "cost": 325,
+  "minutes": 180
+ }
+}

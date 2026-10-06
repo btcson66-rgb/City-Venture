@@ -9,6 +9,7 @@ var screen: Control
 var content: VBoxContainer
 var app := "home"
 var thread_with := ""
+var displayed_minute := -1
 
 
 func _ready() -> void:
@@ -42,16 +43,30 @@ func _ready() -> void:
 	screen.add_child(sc)
 
 
+func _process(_delta: float) -> void:
+	if not is_open or not GameState.has_game() or displayed_minute == Clock.now(): return
+	displayed_minute = Clock.now()
+	for label in content.find_children("ReplyDeadline", "Label", true, false):
+		var deadline := int(label.get_meta("deadline"))
+		label.text = I18n.t("Reply by %s · %d minutes remaining") % [Clock.fmt_datetime(deadline), maxi(0, deadline - Clock.now())]
+
+
 func open() -> void:
 	is_open = true
 	visible = true
+	var holder := get_child(0) as Control
+	holder.position.x = maxf(8.0, get_viewport_rect().size.x - 162.0)
+	screen.size.y = maxf(80.0, minf(214.0, get_viewport_rect().size.y - 54.0))
+	var scroll := screen.get_child(0) as ScrollContainer
+	scroll.custom_minimum_size.y = screen.size.y
+	scroll.size.y = screen.size.y
 	app = "home"
 	_player_pose("phone")
 	GameState.set_flag("phone_opened")
 	_render()
 	var h: Control = get_child(0)
-	h.position.y = 360
-	create_tween().tween_property(h, "position:y", 56.0, 0.18)
+	h.position.y = get_viewport_rect().size.y
+	create_tween().tween_property(h, "position:y", maxf(8.0, minf(56.0, get_viewport_rect().size.y - 250.0)), 0.18)
 
 
 func close() -> void:
@@ -68,7 +83,7 @@ func _player_pose(p: String) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if is_open and event.is_action_pressed("pause"):
+	if is_open and (event.is_action_pressed("pause") or event.is_action_pressed("cancel")):
 		get_viewport().set_input_as_handled()
 		if app == "home":
 			close()
@@ -89,6 +104,15 @@ func _header(t: String, back := true) -> void:
 		h.add_child(b)
 	h.add_child(UIK.title(t, 10))
 	content.add_child(h)
+	if app in ["messages", "thread", "contacts", "agenda"]:
+		var tools := UIK.hbox(3)
+		tools.add_child(UIK.tip("phone_replies"))
+		var help := UIK.button("?", func(): Help.open("phone_messages"))
+		help.name = "PhoneMessagesHelp"
+		help.custom_minimum_size = Vector2(14, 12)
+		tools.add_child(help)
+		content.add_child(tools)
+
 
 
 func _render() -> void:
@@ -100,14 +124,25 @@ func _render() -> void:
 			_messages()
 		"thread":
 			_thread()
+		"contacts":
+			_contacts()
+		"agenda":
+			_agenda()
 		"bank":
 			_bank()
 		"tasks":
 			_tasks()
+		"legacy":
+			UIRoot.open_modal(LegacyModal.new())
+			_go("home")
+		"opportunities":
+			_opportunities()
 		"shoplane":
 			_shoplane()
 		"timeline":
 			_timeline()
+		"news":
+			_news()
 		"save":
 			_save()
 
@@ -125,8 +160,10 @@ func _home() -> void:
 	grid.add_theme_constant_override("v_separation", 4)
 	var unread := GameState.unread_messages()
 	var apps := [["messages", "mail", I18n.t("Messages") + (" %d" % unread if unread > 0 else "")], ["bank", "bank", "Bank"], ["tasks", "tasks", "Tasks"],
-		["map", "map", "City"], ["shoplane", "orders", "ShopLane"], ["timeline", "calendar", "Timeline"],
-		["guide", "info", "City Guide"], ["save", "save", "Save"], ["close", "close", "Close"]]
+		["contacts", "mail", "Contacts"], ["agenda", "calendar", "Agenda"], ["map", "map", "City"], ["shoplane", "orders", "ShopLane"], ["timeline", "calendar", "Timeline"],
+		["leases", "home", "Leases"], ["relationships", "people", "Relationships"], ["tax_filing", "finance", "Tax Filing"], ["news", "mail", "City news"], ["guide", "info", "City Guide"], ["opportunities", "tasks", "Opportunities"], ["save", "save", "Save"], ["close", "close", "Close"]]
+	if GameState.flag("consolidation_started") or GameState.flag("legacy_invited"):
+		apps.insert(apps.size() - 1, ["legacy", "company", "Legacy"])
 	if BuildingInfo.world_travel_available():
 		apps.insert(apps.size() - 1, ["world", "world", "World"])
 	for a in apps:
@@ -153,6 +190,15 @@ func _home() -> void:
 
 func _open_app(a: String) -> void:
 	match a:
+		"relationships":
+			close()
+			UIRoot.open_modal(ContactsModal.new())
+		"tax_filing":
+			close()
+			Industries.run_action("tax_filing",{},self)
+		"leases":
+			close()
+			UIRoot.open_modal(LeaseEndModal.new())
 		"guide":
 			close()
 			UIRoot.open_modal(CityGuideModal.new())
@@ -166,6 +212,27 @@ func _open_app(a: String) -> void:
 			close()
 		_:
 			_go(a)
+
+
+func _opportunities() -> void:
+	_header("Opportunities")
+	content.add_child(UIK.label_tip("Side stories", "side_stories"))
+	var help := UIK.button("?", func(): Help.open("phone_opportunities"))
+	help.name = "OpportunitiesHelp"
+	content.add_child(help)
+	var available := StoryEngine.available_side_stories()
+	if available.is_empty():
+		content.add_child(UIK.wrap("No new opportunities right now. Check again after your company grows.", 7, Art.C_MUTED, 128))
+	for i in available.size():
+		var d: Dictionary = available[i]
+		content.add_child(UIK.wrap(str(d.get("title", "")), 8, Art.C_WHITE, 128))
+		content.add_child(UIK.wrap(str(d.get("text", "")), 7, Art.C_MUTED, 128))
+		var id := str(d["id"])
+		var b := UIK.button("Accept opportunity", func():
+			StoryEngine.start_side_story(id)
+			_render(), "primary" if i == 0 else "")
+		b.name = "AcceptOpportunity_" + id
+		content.add_child(b)
 
 
 func _senders() -> Array:
@@ -184,7 +251,7 @@ func _messages() -> void:
 		var unread: int = GameState.data["messages"].filter(func(x): return x["from"] == from and not x.get("read", false)).size()
 		var b := UIK.button("", _open_thread.bind(from))
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
-		b.text = "%s%s\n%s" % [I18n.t(DataDB.npc(from).get("name", from)), "  ●" if unread > 0 else "", I18n.t(str(m["text"])).left(26)]
+		b.text = "%s%s\n%s" % [PhoneMessages.contact_name(from), "  (%d)" % unread if unread > 0 else "", Clock.fmt_short(int(m["t"])) + "\n" + I18n.t(str(m["text"])).left(26)]
 		b.add_theme_font_size_override("font_size", 7)
 		b.custom_minimum_size = Vector2(126, 24)
 		b.name = "Thread_" + from
@@ -198,22 +265,111 @@ func _open_thread(from: String) -> void:
 			m["read"] = true
 	if from == "maya" and not GameState.flag("maya_intro_done"):
 		close()
-		UIRoot.play_dialogue("maya_intro")
+		UIRoot.play_dialogue("maya_intro", PhoneMessages.finish_call.bind("maya", "maya_intro"))
 		return
 	_go("thread")
 
 
 func _thread() -> void:
-	_header(I18n.t(DataDB.npc(thread_with).get("name", thread_with)))
+	var primary_used := false
+	_header(PhoneMessages.contact_name(thread_with))
+	# Only the newest message that still has a recommended reply carries the primary button.
+	var primary_message := ""
+	for m in GameState.data["messages"]:
+		if m["from"] != thread_with or m.get("direction", "incoming") == "outgoing" or m.has("answered"): continue
+		if PhoneMessages.choices(m).any(func(c): return c.get("recommended", false) and EventEngine.choice_available(c, PhoneMessages.context(m))):
+			primary_message = str(m["id"])
 	for m in GameState.data["messages"]:
 		if m["from"] != thread_with:
 			continue
 		var p := UIK.panel("ui/card", 3)
 		var v := UIK.vbox(0)
 		p.add_child(v)
-		v.add_child(UIK.label(Clock.fmt_short(int(m["t"])), 6, Art.C_DIM))
+		PhoneMessages.prepare(m)
+		v.add_child(UIK.label((I18n.t("You") + " · " if m.get("direction", "incoming") == "outgoing" else "") + Clock.fmt_short(int(m["t"])), 6, Art.C_DIM))
 		v.add_child(UIK.wrap(I18n.t(str(m["text"])), 7, Art.C_WHITE, 118))
+		if m.has("expires") and not m.has("answered"):
+			var deadline := UIK.wrap(I18n.t("Reply by %s · %d minutes remaining") % [Clock.fmt_datetime(int(m["expires"])), maxi(0, int(m["expires"]) - Clock.now())], 6, Art.C_GOLD, 118)
+			deadline.name = "ReplyDeadline"
+			deadline.set_meta("deadline", int(m["expires"]))
+			v.add_child(deadline)
+			var defaults: Array = PhoneMessages.choices(m).filter(func(choice): return str(choice["id"]) == str(m.get("default_reply", "ack")))
+			if not defaults.is_empty():
+				var default_label := EventEngine.fill(str(defaults[0].get("label", defaults[0].get("text", "Okay, thanks."))), PhoneMessages.context(m))
+				v.add_child(UIK.wrap(I18n.t("Deadline default: %s") % I18n.t(default_label), 6, Art.C_MUTED, 118))
+
+		for c in PhoneMessages.choices(m):
+			var available := EventEngine.choice_available(c, PhoneMessages.context(m))
+			var label := EventEngine.fill(str(c.get("label", c.get("text", "Okay, thanks."))), PhoneMessages.context(m))
+			var primary: bool = available and c.get("recommended", false) and not primary_used and str(m["id"]) == primary_message
+			primary_used = primary_used or primary
+			var button := UIK.button(("✓ " if available else "✗ ") + I18n.t(label), _reply.bind(str(m["id"]), str(c["id"])), "primary" if primary else "normal")
+			button.name = "Reply_" + str(m["id"]) + "_" + str(c["id"])
+			button.add_theme_font_size_override("font_size", 6)
+			button.disabled = not available
+			v.add_child(button)
+			if not available: v.add_child(UIK.wrap(EventEngine.fill(str(c.get("detail", "Register a company at City Hall first." if "company_registered" in c.get("requires", []) else "Complete the reply's requirements first.")), PhoneMessages.context(m)), 6, Art.C_MUTED, 118))
 		content.add_child(p)
+
+	_scroll_bottom.call_deferred()
+
+func _scroll_bottom() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	if not is_open or app != "thread": return
+	var scroll := content.get_parent() as ScrollContainer
+	if scroll != null: scroll.scroll_vertical = int(scroll.get_v_scroll_bar().max_value)
+
+
+func _reply(id: String, choice: String) -> void:
+	var result := PhoneMessages.reply(id, choice)
+	_render()
+	if not result["ok"]: content.add_child(UIK.wrap(str(result["error"]), 7, Art.C_RED, 122))
+
+
+func _contacts() -> void:
+	_header("Contacts")
+	for npc in PhoneMessages.contacts():
+		content.add_child(UIK.title(PhoneMessages.contact_name(str(npc)), 8))
+		for key in PhoneMessages.cfg().get("templates", {}):
+			var template: Dictionary = PhoneMessages.cfg()["templates"][key]
+			var remaining := maxi(0, int(PhoneMessages.S()["cooldowns"].get(str(npc) + ":" + str(key), 0)) - Clock.now())
+			var allowed := PhoneMessages.can_send(str(npc), str(key))
+			var available: bool = allowed["ok"]
+			var button := UIK.button(("✓ " if available else "✗ ") + I18n.t(str(template["label"])), _send.bind(str(npc), str(key)))
+			button.name = "Send_" + str(npc) + "_" + str(key)
+			button.add_theme_font_size_override("font_size", 6)
+			button.disabled = not available
+			content.add_child(button)
+			if remaining > 0: content.add_child(UIK.wrap(I18n.t("Wait %d minutes before messaging again.") % remaining, 6, Art.C_MUTED, 122))
+			elif not available: content.add_child(UIK.wrap("Register a company at City Hall first." if not Cond.all(template.get("requires", [])) else str(allowed["error"]), 6, Art.C_MUTED, 122))
+
+
+func _send(npc: String, template: String) -> void:
+	var result := PhoneMessages.send(npc, template)
+	if result["ok"]: thread_with = npc; _go("thread")
+	else: _render(); content.add_child(UIK.wrap(str(result["error"]), 7, Art.C_RED, 122))
+
+
+func _meeting_status(status: String) -> String:
+	match status:
+		"planned":
+			return I18n.t("Meeting scheduled")
+		"met":
+			return I18n.t("Meeting completed")
+		"missed":
+			return I18n.t("Meeting missed")
+	return status
+
+
+func _agenda() -> void:
+	_header("Agenda")
+	for meeting in PhoneMessages.S()["agenda"]:
+		content.add_child(UIK.wrap(PhoneMessages.contact_name(str(meeting["npc"])) + " · " + Clock.fmt_datetime(int(meeting["at"])), 7, Art.C_GOLD, 122))
+		content.add_child(UIK.wrap(I18n.t(str(DataDB.building(str(meeting["location"]).get_slice(":", 1)).get("name", str(meeting["location"])))) + " · " + _meeting_status(str(meeting["status"])), 7, Art.C_MUTED, 122))
+		if meeting["status"] == "planned":
+			content.add_child(UIK.wrap("Go to the meeting location during its time window. The conversation starts when you arrive.", 6, Art.C_WHITE, 122))
+		else: content.add_child(UIK.wrap("Book a new time from Contacts if needed.", 6, Art.C_WHITE, 122))
 
 
 func _bank() -> void:
@@ -274,6 +430,8 @@ func _shoplane() -> void:
 
 
 var timeline_page := "life"
+var timeline_filter := "all"
+var timeline_year := -1
 
 
 func _timeline() -> void:
@@ -288,16 +446,52 @@ func _timeline() -> void:
 	if timeline_page == "achievements":
 		_achievements()
 		return
-	var tl: Array = GameState.data["timeline"]
-	for i in range(tl.size() - 1, -1, -1):
+	var filters := UIK.vbox(1)
+	content.add_child(filters)
+	var picker := OptionButton.new()
+	picker.name = "TimelineCategory"
+	var categories := ["all", "company", "life", "people", "crisis", "milestones"]
+	var labels := ["All events", "Company", "Life", "Contacts", "Crises", "Milestones"]
+	for label in labels: picker.add_item(I18n.t(label))
+	picker.select(categories.find(timeline_filter))
+	picker.item_selected.connect(func(index): timeline_filter = categories[index]; _render())
+	filters.add_child(picker)
+	var years := [-1]
+	for entry in GameState.data["timeline"]:
+		var year := int(Clock.date_at(int(entry["t"]))["year"])
+		if not year in years: years.append(year)
+	var year_picker := OptionButton.new()
+	year_picker.name = "TimelineYear"
+	for year in years: year_picker.add_item(I18n.t("All years") if year == -1 else I18n.t("Year %d") % year)
+	year_picker.select(maxi(0, years.find(timeline_year)))
+	year_picker.item_selected.connect(func(index): timeline_year = years[index]; _render())
+	filters.add_child(year_picker)
+	var tl: Array = LifeLegacy.events(timeline_filter, timeline_year)
+	var shown_year := -1
+	for i in tl.size():
+		var year := int(Clock.date_at(int(tl[i]["t"]))["year"])
+		if year != shown_year:
+			content.add_child(UIK.label(I18n.t("Year %d") % year, 8, Art.C_GOLD, true))
+			shown_year = year
 		var e: Dictionary = tl[i]
 		var milestone: bool = str(e.get("kind", "")) == "milestone"
+		var art := str(e.get("art", ""))
+		if art != "" and Art.has_tex(art):
+			var thumb := TextureRect.new()
+			thumb.texture = Art.opt_tex(art)
+			thumb.custom_minimum_size = Vector2(112, 48)
+			thumb.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			thumb.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			content.add_child(thumb)
 		content.add_child(UIK.label(("★ " if milestone else "") + Clock.fmt_short(int(e["t"])), 6, Art.C_GOLD))
 		content.add_child(UIK.wrap(str(e["text"]), 7, Art.C_GOLD if milestone else Art.C_WHITE, 124))
 
 
 ## Five milestones per industry (data/milestones.json): unlocked ones with their date, locked ones with progress.
 func _achievements() -> void:
+	var story := UIK.button("Main-story achievements", func(): UIRoot.open_modal(GrowthModal.new("achievements")))
+	story.name = "OpenStoryAchievements"
+	content.add_child(story)
 	var total := Milestones.count()
 	content.add_child(UIK.label(I18n.t("%d of %d reached") % [total[0], total[1]], 7, Art.C_SKY, true))
 	for entry in Industries.all():
@@ -332,3 +526,12 @@ func _save() -> void:
 	b.add_theme_font_size_override("font_size", 7)
 	content.add_child(b)
 	content.add_child(UIK.wrap(I18n.t("This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen.") % SaveSystem.current_slot(), 6, Art.C_DIM, 124))
+
+
+func _news() -> void:
+	_header("City news")
+	content.add_child(UIK.label_tip("Market conditions", "macro_cycle", 7))
+	var items: Array = CityNews.S()["items"]
+	for index in range(items.size() - 1, -1, -1):
+		content.add_child(UIK.label(Clock.fmt_short(int(items[index]["t"])), 6, Art.C_GOLD))
+		content.add_child(UIK.wrap(str(items[index]["text"]), 7, Art.C_WHITE, 124))

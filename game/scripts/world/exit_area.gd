@@ -19,11 +19,13 @@ func setup(d: Dictionary, scene: Node) -> void:
 	body_entered.connect(_on_enter)
 	# visible "way out" sign on the road at this edge
 	var ws := scene as WorldScene
-	var right: bool = ws == null or float(r[0]) > ws.size_px.x / 2.0
+	var side := str(d.get("direction", "E" if ws == null or float(r[0]) > ws.size_px.x / 2.0 else "W"))
+	var directions := {"N": Vector2.UP, "E": Vector2.RIGHT, "S": Vector2.DOWN, "W": Vector2.LEFT}
+	var arrows := {"N": "↑", "E": "→", "S": "↓", "W": "←"}
 	var dname := I18n.t(str(DataDB.districts.get(d["to"], {}).get("name", d["to"])))
 	var mark := ExitMarker.new()
-	mark.setup(Rect2(float(r[0]), float(r[1]), float(r[2]), float(r[3])), Vector2.RIGHT if right else Vector2.LEFT,
-		(dname + " →") if right else ("← " + dname))
+	mark.name = "ExitSign_" + str(d["to"])
+	mark.setup(Rect2(float(r[0]), float(r[1]), float(r[2]), float(r[3])), directions[side], str(arrows[side]) + " " + dname)
 	add_child(mark)
 
 

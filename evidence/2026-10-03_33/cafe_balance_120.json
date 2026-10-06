@@ -1,0 +1,92 @@
+{
+	"days": 120,
+	"runs": [
+		{
+			"balanced": true,
+			"customers": 3552.0,
+			"profit": 14528.09,
+			"revenue_dollars": 37873.0,
+			"scenario": "baseline",
+			"strategy": "conservative"
+		},
+		{
+			"balanced": true,
+			"customers": 3252.0,
+			"profit": 12998.49,
+			"revenue_dollars": 35743.0,
+			"scenario": "mild",
+			"strategy": "conservative"
+		},
+		{
+			"balanced": true,
+			"customers": 1615.0,
+			"profit": -371.8,
+			"revenue_dollars": 18398.2,
+			"scenario": "stress",
+			"strategy": "conservative"
+		},
+		{
+			"balanced": true,
+			"customers": 3219.0,
+			"profit": 2545.74,
+			"revenue_dollars": 36819.8,
+			"scenario": "baseline",
+			"strategy": "normal"
+		},
+		{
+			"balanced": true,
+			"customers": 3012.0,
+			"profit": 1079.29,
+			"revenue_dollars": 34305.6,
+			"scenario": "mild",
+			"strategy": "normal"
+		},
+		{
+			"balanced": true,
+			"customers": 1364.0,
+			"profit": -13925.52,
+			"revenue_dollars": 16594.8,
+			"scenario": "stress",
+			"strategy": "normal"
+		},
+		{
+			"balanced": true,
+			"customers": 3261.0,
+			"profit": -482.04,
+			"revenue_dollars": 74559.6,
+			"scenario": "baseline",
+			"strategy": "aggressive"
+		},
+		{
+			"balanced": true,
+			"customers": 2869.0,
+			"profit": -5462.26,
+			"revenue_dollars": 67103.2,
+			"scenario": "mild",
+			"strategy": "aggressive"
+		},
+		{
+			"balanced": true,
+			"customers": 1335.0,
+			"profit": -33234.48,
+			"revenue_dollars": 31600.4,
+			"scenario": "stress",
+			"strategy": "aggressive"
+		}
+	],
+	"scenarios": "baseline 240, mild 220, stress 100 passers/day; randomized customer arrivals; no artificial receipts",
+	"strategies": {
+		"aggressive": {
+			"losses": 3,
+			"mean_profit_dollars": -13059.59
+		},
+		"conservative": {
+			"losses": 1,
+			"mean_profit_dollars": 9051.59
+		},
+		"normal": {
+			"losses": 1,
+			"mean_profit_dollars": -3433.5
+		}
+	}
+}

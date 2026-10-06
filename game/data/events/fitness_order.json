@@ -1,0 +1,38 @@
+{
+ "id": "fitness_order",
+ "category": "networking",
+ "status": "active",
+ "trigger": {
+  "when": "fitness",
+  "cooldown_days": 30
+ },
+ "presentation": {
+  "channel": "modal",
+  "title": "A water-bottle order",
+  "icon": "people",
+  "lines": [
+   "Rosa needs water bottles for the gym. Review the terms before accepting."
+  ]
+ },
+ "choices": [
+  {
+   "id": "accept",
+   "label": "Receive the contract for review",
+   "detail": "Receive a real contract; buy, pack and deliver stock to earn payment.",
+   "effects": [
+    {
+     "op": "shop_network",
+     "kind": "order"
+    }
+   ],
+   "outcome": "The opportunity is ready. Follow its terms and next steps."
+  },
+  {
+   "id": "decline",
+   "label": "Decline and keep your current plan",
+   "detail": "No fee, order or commitment. Another opportunity may arrive after 30 days.",
+   "effects": [],
+   "outcome": "You keep your current plan."
+  }
+ ]
+}

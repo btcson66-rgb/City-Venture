@@ -9,25 +9,9 @@ var holder: Node
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	_setup_input()
 	holder = Node.new()
 	holder.name = "SceneHolder"
 	get_tree().root.call_deferred("add_child", holder)
-
-
-func _setup_input() -> void:
-	var map := {
-		"move_left": [KEY_A, KEY_LEFT], "move_right": [KEY_D, KEY_RIGHT], "move_up": [KEY_W, KEY_UP], "move_down": [KEY_S, KEY_DOWN],
-		"run": [KEY_SHIFT], "interact": [KEY_E, KEY_SPACE, KEY_ENTER], "phone": [KEY_TAB, KEY_P], "map": [KEY_M],
-		"pause": [KEY_ESCAPE], "company_os_hint": [KEY_C], "bug_report": [KEY_F12],
-	}
-	for a in map:
-		if not InputMap.has_action(a):
-			InputMap.add_action(a)
-		for k in map[a]:
-			var ev := InputEventKey.new()
-			ev.physical_keycode = k
-			InputMap.action_add_event(a, ev)
 
 
 func _set_scene(n: Node) -> void:
@@ -67,10 +51,10 @@ func go_menu() -> void:
 	_set_scene(MainMenu.new())
 
 
-func go_creator() -> void:
+func go_creator(setup := {}) -> void:
 	Clock.world_active = false
 	UIRoot.set_hud_visible(false)
-	_fade(func(): _set_scene(CharacterCreator.new()))
+	_fade(func(): _set_scene(CharacterCreator.new(setup)))
 
 
 func go_arrival(setup: Dictionary) -> void:
@@ -83,16 +67,25 @@ func go_arrival(setup: Dictionary) -> void:
 		return
 	Clock.world_active = false
 	UIRoot.set_hud_visible(false)
-	_fade(func(): _set_scene(ArrivalScene.new()))
+	if Replay.active() and not Replay.S().get("scenario", {}).is_empty():
+		begin_world()
+	else:
+		_fade(func(): _set_scene(ArrivalScene.new()))
 
 
 ## Called by the arrival sequence when it ends.
 func begin_world() -> void:
+	Macro.initialize()
 	await _fade(func():
 		_enter("interior", "riverside_apartment", "bed_side", ""))
-	StoryEngine.start_chapter("ch1_arrival")
-	GameState.add_message("maya", "So you actually quit?")
-	GameState.add_message("maya", "Call me. Or text. Or whatever.")
+	if Replay.story_enabled():
+		StoryEngine.start_chapter("ch1_arrival")
+		GameState.add_message("maya", "So you actually quit?")
+		GameState.add_message("maya", "Call me. Or text. Or whatever.")
+	else:
+		UIRoot.tutorial.st()["off"] = true
+	if Replay.active() and not Replay.S().get("scenario", {}).is_empty() and not Replay.S().get("opening_seen", false):
+		UIRoot.open_modal(RunCardModal.new(true))
 	SaveSystem.autosave()
 
 
@@ -115,10 +108,11 @@ func _enter(kind: String, id: String, spawn: String, facing: String, pos := Vect
 		scene = it
 	var p: Vector2 = pos
 	if p.x < 0:
-		if spawn == "bed_side":
-			p = Vector2(60, 124)
-		else:
-			p = scene.spawns.get(spawn, scene.spawns.get("door", Vector2(scene.size_px) / 2.0))
+		p = scene.spawns.get(spawn, scene.spawns.get("door", Vector2(scene.size_px) / 2.0))
+		for prop in DataDB.properties.values():
+			if prop.get("kind","")=="home" and prop.get("building","")==id and spawn==str(prop.get("bed","bed_side")):
+				var at: Array=prop.get("bed_position",[60,124])
+				p=Vector2(at[0],at[1])
 	var f := facing
 	if f == "":
 		f = "down" if kind == "district" else "up"
@@ -217,6 +211,11 @@ func walk_to_district(to: String, spawn: String, minutes: int) -> void:
 	_fade(func(): _enter("district", to, spawn, ""), minutes)
 
 
+func personal_drive(to_district: String, minutes: int) -> void:
+	EventBus.notify.emit(I18n.t("Driving to %s: %d minutes, including parking.")%[I18n.t(DataDB.districts[to_district]["name"]),minutes],"info","metro")
+	_fade(func(): _enter("district",to_district,"metro","down"),minutes)
+
+
 func metro_travel(to_district: String, minutes: int, fare: float) -> void:
 	Ledger.expense("player", "transport", fare, I18n.t("Metro fare to %s") % I18n.t(DataDB.districts[to_district]["name"]), {"type": "metro"})
 	GameState.inc_stat("metro_rides")
@@ -224,7 +223,7 @@ func metro_travel(to_district: String, minutes: int, fare: float) -> void:
 
 
 func teleport_home_and_sleep() -> void:
-	_fade(func(): _enter("interior", "riverside_apartment", "bed_side", "down"))
+	_fade(func(): _enter("interior", Living.home_building(), Living.home_bed(), "down"))
 
 
 ## Save support ----------------------------------------------------------------
@@ -238,11 +237,18 @@ func capture_location() -> void:
 func restore_location() -> void:
 	var loc := BuildingInfo.safe_location(GameState.data["player"]["location"])
 	UIRoot.close_all()
-	_fade(func(): _enter(str(loc.get("kind", "interior")), str(loc.get("id", "riverside_apartment")), str(loc.get("spawn", "door")), str(loc.get("facing", "down")),
-		Vector2(float(loc.get("x", -1)), float(loc.get("y", -1)))))
+	_fade(func():
+		_enter(str(loc.get("kind", "interior")), str(loc.get("id", Living.home_building())), str(loc.get("spawn", "door")), str(loc.get("facing", "down")), Vector2(float(loc.get("x", -1)), float(loc.get("y", -1))))
+		Replay.resume_cards())
 
 
 func reenter_current() -> void:
 	capture_location()
 	var loc: Dictionary = GameState.data["player"]["location"]
 	_enter(str(loc["kind"]), str(loc["id"]), "", str(loc["facing"]), Vector2(float(loc["x"]), float(loc["y"])))
+
+
+## Persistent router owns the ambulance coroutine after the initiating modal is freed.
+func ambulance_clinic() -> void:
+	await _fade(func(): _enter("interior", "civic_clinic", "door", "up"))
+	UIRoot.open_modal(TrafficModal.new())

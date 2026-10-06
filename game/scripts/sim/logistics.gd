@@ -21,6 +21,7 @@ static func S() -> Dictionary:
 	if not GameState.data.has("logistics"):
 		GameState.data["logistics"] = {"van": {"owned": false, "bought": -1, "entity": "", "ins_day": 1, "km": 0.0},
 			"jobs": {}, "history": [], "seq": 1, "driver_day": {}}
+	LogisticsDepth.enrich(GameState.data["logistics"])
 	return GameState.data["logistics"]
 
 
@@ -34,6 +35,29 @@ static func runs_cfg() -> Dictionary:
 
 static func van_cfg() -> Dictionary:
 	return cfg().get("van", {})
+
+
+## Appearance is optional saved van state: pre-colour saves keep the stock white body.
+static func body_color_id() -> String:
+	return str(S()["van"].get("body_color", "white"))
+
+
+static func body_color() -> Color:
+	for c in van_cfg().get("body_colors", []):
+		if str(c["id"]) == body_color_id():
+			return Color(str(c["hex"]))
+	return Color.WHITE
+
+
+static func set_body_color(id: String) -> bool:
+	if not has_van():
+		return false
+	for c in van_cfg().get("body_colors", []):
+		if str(c["id"]) == id:
+			S()["van"]["body_color"] = id
+			EventBus.world_refresh.emit()
+			return true
+	return false
 
 
 static func property_id() -> String:
@@ -88,7 +112,7 @@ static func buy_van() -> Dictionary:
 	Assets.register_expensed_van()
 	GameState.set_flag("van_owned")
 	GameState.inc_stat("vans_bought")
-	GameState.timeline(I18n.t("Bought a used van from Sam Okoro at Dockside Motors for %s.") % Fmt.money0(price), "business")
+	GameState.timeline(I18n.t("Bought a used van from Sam Okoro at Dockside Motors for %s.") % Fmt.money(price), "business")
 	EventBus.world_refresh.emit()
 	return {"ok": true, "cost": price, "insurance": ins}
 
@@ -98,9 +122,11 @@ static func on_company_closed(ent: String) -> float:
 	if not has_van() or str(S()["van"].get("entity", "")) != ent:
 		return 0.0
 	var got := Assets.auction_expensed_van(ent)
+	LogisticsDepth.close()
 	S()["van"]["owned"] = false
 	S()["jobs"] = {}
 	GameState.set_flag("van_owned", false)
+	EventBus.world_refresh.emit()
 	return got
 
 
@@ -112,7 +138,7 @@ static func fuel_mult() -> float:
 
 static func fuel_cost_per_km() -> float:
 	var f: Dictionary = cfg().get("fuel", {})
-	return float(f.get("l_per_km", 0.14)) * float(f.get("price_l", 2.1)) * fuel_mult()
+	return float(f.get("l_per_km", 0.14)) * float(f.get("price_l", 2.1)) * fuel_mult() * Macro.costs()
 
 
 static func upkeep_per_km() -> float:
@@ -370,7 +396,7 @@ static func post_jobs() -> int:
 	if not has_van():
 		return 0
 	var r := runs_cfg()
-	var want := GameState.randi_range(int(r["per_day"][0]), int(r["per_day"][1]))
+	var want := roundi(ceili(GameState.randi_range(int(r["per_day"][0]), int(r["per_day"][1])) * CityFuture.demand_factor("logistics")) * Industries.market_demand("logistics"))
 	var n := 0
 	while n < want and open_jobs().size() < int(r.get("max_open", 8)):
 		var j := _make_job()
@@ -395,15 +421,18 @@ static func accept(id: String) -> Dictionary:
 
 ## Drive an accepted run in `order` (indices into the job's stops): the time passes, the client pays, fuel and wear are
 ## charged. Late pays less, and how well the route was planned moves the pay a little (`score_pay`).
-static func drive(id: String, order: Array) -> Dictionary:
+static func drive(id: String, order: Array,vehicle := "van1") -> Dictionary:
 	var j := job(id)
 	if j.is_empty() or j["status"] != "active":
 		return {"ok": false, "error": "That run isn't on your list."}
 	if not has_van():
 		return {"ok": false, "error": "You need a van."}
+	if not LogisticsDepth.available(vehicle):return {"ok":false,"error":"Choose an available vehicle. Wait for its current run or service to finish."}
 	var st := route_stats(j["stops"], order)
 	if st.is_empty():
 		return {"ok": false, "error": "That route doesn't visit every stop once."}
+	j["vehicle"]=vehicle
+	LogisticsDepth.prepare(j,st,vehicle)
 	j["status"] = "driving"
 	Clock.advance(int(st["minutes"]))
 	return _settle(j, st, "")
@@ -418,19 +447,25 @@ static func _settle(j: Dictionary, st: Dictionary, driver: String) -> Dictionary
 	if late:
 		pay *= 1.0 - float(r.get("late_penalty", 0.4))
 	pay = snappedf(pay, 0.01)
+	if j.has("route"):pay=float(j["pay"])*(1.0-float(r.get("late_penalty",0.4)) if late else 1.0)
+	if j.get("breakdown",false):pay=snappedf(pay*float(cfg()["fleet"]["pay_mult"]),.01)
 	var ent := entity()
 	var client := I18n.t(str(j["client"]))
-	Ledger.post(ent, I18n.t("Delivery run %s: %s (%d stops)") % [j["id"], client, (j["stops"] as Array).size()],
-		[{"acct": "cash", "dr": pay}, {"acct": "revenue", "cr": pay}], {"segment": "logistics", "type": "delivery", "id": j["id"]})
+	if j.get("internal",false):
+		Ledger.post(ent,I18n.t("Internal café delivery: %s")%Fmt.money(pay),[{"acct":"ic_cost","dr":pay},{"acct":"ic_clearing","cr":pay}],{"segment":"cafe","internal":true,"vehicle":j.get("vehicle","van1")})
+		Ledger.post(ent,I18n.t("Internal fleet delivery: %s")%Fmt.money(pay),[{"acct":"ic_clearing","dr":pay},{"acct":"ic_revenue","cr":pay}],{"segment":"logistics","internal":true,"vehicle":j.get("vehicle","van1")})
+	else:
+		Ledger.post(ent, I18n.t("Delivery run %s: %s (%d stops)") % [j["id"], client, (j["stops"] as Array).size()],
+			[{"acct": "cash", "dr": pay}, {"acct": "revenue", "cr": pay}], {"segment": "logistics", "type": "delivery", "id": j["id"],"vehicle":j.get("vehicle","van1")})
 	if float(st["fuel_cost"]) > 0.0:
-		Ledger.expense(ent, "fuel", float(st["fuel_cost"]), I18n.t("Fuel: run %s, %.1f km") % [j["id"], float(st["km"])], {"segment": "logistics", "type": "delivery", "id": j["id"]})
+		Ledger.expense(ent, "fuel", float(st["fuel_cost"]), I18n.t("Fuel: run %s, %.1f km") % [j["id"], float(st["km"])], {"segment": "logistics", "type": "delivery", "id": j["id"],"vehicle":j.get("vehicle","van1")})
 	if float(st["upkeep"]) > 0.0:
-		Ledger.expense(ent, "vehicle", float(st["upkeep"]), I18n.t("Van upkeep: run %s") % j["id"], {"segment": "logistics", "type": "delivery", "id": j["id"]})
-	S()["van"]["km"] = float(S()["van"].get("km", 0.0)) + float(st["km"])
+		Ledger.expense(ent, "vehicle", float(st["upkeep"]), I18n.t("Van upkeep: run %s") % j["id"], {"segment": "logistics", "type": "delivery", "id": j["id"],"vehicle":j.get("vehicle","van1")})
+	LogisticsDepth.settle(j,st,pay)
 	j["status"] = "late" if late else "done"
 	j["done"] = Clock.now()
 	var rec := {"id": j["id"], "client": j["client"], "stops": (j["stops"] as Array).size(), "pay": pay, "fuel": st["fuel_cost"], "km": st["km"],
-		"score": snappedf(float(st["score"]), 0.01), "minutes": st["minutes"], "late": late, "status": j["status"], "t": Clock.now(), "who": driver}
+		"score": snappedf(float(st["score"]), 0.01), "minutes": st["minutes"], "late": late, "status": j["status"], "t": Clock.now(), "who": driver,"vehicle":j.get("vehicle","van1")}
 	_archive(j, rec)
 	GameState.inc_stat("van_runs")
 	if late:
@@ -439,10 +474,10 @@ static func _settle(j: Dictionary, st: Dictionary, driver: String) -> Dictionary
 	GameState.inc_stat("van_fuel_l", float(st["fuel_l"]))
 	if int(GameState.stat("van_runs")) == 1:
 		GameState.set_flag("first_delivery_run")
-		GameState.timeline(I18n.t("First delivery run for %s: %s.") % [client, Fmt.money0(pay)], "milestone")
-	var msg := I18n.t("Run %s paid %s.") % [j["id"], Fmt.money0(pay)]
+		GameState.timeline(I18n.t("First delivery run for %s: %s.") % [client, Fmt.money(pay)], "milestone")
+	var msg := I18n.t("Run %s paid %s.") % [j["id"], Fmt.money(pay)]
 	if driver != "":
-		msg = I18n.t("%s drove run %s: paid %s.") % [driver, j["id"], Fmt.money0(pay)]
+		msg = I18n.t("%s drove run %s: paid %s.") % [driver, j["id"], Fmt.money(pay)]
 	if late:
 		msg += " " + I18n.t("It was late, so the pay was cut.")
 	EventBus.notify.emit(msg, "warn" if late else "good", "parcel")
@@ -496,32 +531,11 @@ static func drivers_at(t: int) -> Array:
 
 ## Each working driver takes the best-paying open run they can finish in time.
 static func _dispatch_drivers(t: int) -> void:
-	var day := Clock.day_index_at(t)
-	for p in drivers_at(t):
-		if int(S()["driver_day"].get(p["id"], -1)) == day:
-			continue
-		S()["driver_day"][p["id"]] = day
-		var pick := {}
-		var pick_st := {}
-		for j in open_jobs():
-			var best := best_order(j["stops"])
-			var px := float(best["px"]) / maxf(0.2, driver_score(p))
-			var st := stats_for_px((j["stops"] as Array).size(), px, float(best["px"]))
-			if t + int(st["minutes"]) > int(j["by"]):
-				continue
-			if pick.is_empty() or float(j["pay"]) > float(pick["pay"]):
-				pick = j
-				pick_st = st
-		if pick.is_empty():
-			EventBus.notify.emit(I18n.t("%s found no run to take today.") % str(p["name"]).get_slice(" ", 0), "info", "people")
-			continue
-		pick["status"] = "driving"
-		pick["driver"] = p["id"]
-		pick["driver_stats"] = pick_st
-		Sim.schedule(t + int(pick_st["minutes"]), "log.driver_done", {"job": pick["id"], "driver": p["id"]})
+	LogisticsDepth.dispatch(t)
 
 
 static func handle(kind: String, p: Dictionary) -> void:
+	if kind=="log.service_done":LogisticsDepth.service_done(str(p.get("vehicle","")));return
 	match kind:
 		"log.driver_done":
 			var j := job(str(p.get("job", "")))
@@ -537,6 +551,7 @@ static func on_hour(t: int, h: int) -> void:
 	if not has_van():
 		return
 	var r := runs_cfg()
+	LogisticsDepth.on_hour(t,h)
 	if h == int(r.get("post_hour", 7)):
 		post_jobs()
 	_housekeeping(t)
@@ -578,14 +593,15 @@ static func _insurance(t: int) -> void:
 static func ship_block(loc: String) -> String:
 	if not has_van():
 		return "you need a van (Dockside Motors, Harbor)"
-	if Ecommerce.orders_with(["packed"], loc).is_empty():
+	if not LogisticsDepth.available("van1"):return "The van is busy or in maintenance. Wait before shipping parcels."
+	if Ecommerce.orders_with(["packed"], loc).filter(func(o): return not o.has("region")).is_empty():
 		return "nothing packed here"
 	return ""
 
 
 ## What delivering the packed parcels at `loc` yourself would cost: {count, all, fuel, minutes}.
 static func ship_quote(loc: String) -> Dictionary:
-	var packed := Ecommerce.orders_with(["packed"], loc)
+	var packed := Ecommerce.orders_with(["packed"], loc).filter(func(o): return not o.has("region"))
 	var s: Dictionary = cfg().get("own_van_shipping", {})
 	var n := mini(packed.size(), int(van_cfg().get("capacity_parcels", 40)))
 	return {"count": n, "all": packed.size(), "fuel": snappedf(n * float(s.get("km_per_parcel", 4.5)) * fuel_cost_per_km(), 0.01),
@@ -600,8 +616,14 @@ static func ship_own_van(loc: String) -> Dictionary:
 		return {"ok": false, "error": why}
 	var q := ship_quote(loc)
 	var n := int(q["count"])
-	var packed := Ecommerce.orders_with(["packed"], loc).slice(0, n)
+	var packed := Ecommerce.orders_with(["packed"], loc).filter(func(o): return not o.has("region")).slice(0, n)
 	var ent: String = packed[0]["entity"]
+	var travel_km:=n*float(cfg()["own_van_shipping"]["km_per_parcel"])
+	var travel: Dictionary={"km":travel_km,"minutes":q["minutes"],"fuel_cost":q["fuel"],"fuel_l":travel_km*fuel_l_per_km(),"upkeep":0.0}
+	var trip: Dictionary={"id":"own_shipping","vehicle":"van1"}
+	LogisticsDepth.prepare(trip,travel,"van1")
+	q["minutes"]=travel["minutes"];q["fuel"]=travel["fuel_cost"]
+	LogisticsDepth.settle(trip,travel,0.0)
 	if float(q["fuel"]) > 0.0:
 		Ledger.expense(ent, "fuel", float(q["fuel"]), I18n.t("Own-van delivery: %d parcels") % n, {"segment": "logistics", "type": "ship"})
 	var eta := Clock.now() + int(q["minutes"])
@@ -611,7 +633,6 @@ static func ship_own_van(loc: String) -> Dictionary:
 		Ecommerce._ship(o)
 	GameState.inc_stat("van_parcels", n)
 	var km := n * float((cfg().get("own_van_shipping", {}) as Dictionary).get("km_per_parcel", 4.5))
-	S()["van"]["km"] = float(S()["van"].get("km", 0.0)) + km
 	return {"ok": true, "count": n, "cost": float(q["fuel"]), "minutes": int(q["minutes"]), "eta": eta}
 
 

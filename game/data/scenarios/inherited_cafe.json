@@ -1,0 +1,24 @@
+{
+ "id": "inherited_cafe",
+ "name": "Inherited café",
+ "description": "An operating café, one barista and an outstanding loan. Keep supplies stocked and cover payroll.",
+ "goal": "Earn café revenue while keeping cash positive.",
+ "initial": {
+  "cash": 30000,
+  "company": "Inherited Corner Café",
+  "type": "cafe",
+  "capital": 18000,
+  "cafe": true,
+  "loan": 8000,
+  "loan_months": 24,
+  "supplies": 300,
+  "salary": 500,
+  "skill": 4,
+  "rating": 3.6
+ },
+ "win": {
+  "revenue": 25000,
+  "cash": 500
+ },
+ "limit_days": 120
+}

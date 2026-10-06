@@ -18,13 +18,24 @@ const C_GOLD := Color8(226, 180, 82)
 const C_PURPLE := Color8(170, 130, 214)
 
 const LARGE_CACHE_LIMIT := 8
+## Accounted budget for cached detail textures (RGBA8 plus a third for mipmaps), kept clear of the 1.2 GB limit.
+const TEXTURE_BUDGET_BYTES := 900 * 1024 * 1024
 const LARGE_TEXTURE_GROUPS := ["backdrops", "cards", "events", "city_map", "world_map"]
 
+var detail_enabled := true
 var _cache := {}
 # Dictionary insertion order is least to most recently used. Erasing releases our reference;
 # live scenes may keep their own texture until they leave the tree.
 var _large_cache := {}
 var _absent := {}
+## High-resolution textures held by the small-art cache, least to most recently used: path -> accounted bytes.
+## The set is bounded by bytes (TEXTURE_BUDGET_BYTES), not entries, so a long session that walks every district,
+## NPC and outfit cannot grow past the web build's 1.2 GB texture budget (#98).
+var _detail_lru := {}
+var _detail_bytes := 0
+var _large_sizes := {}
+var peak_texture_bytes := 0
+var texture_budget := TEXTURE_BUDGET_BYTES   # a var so tests can shrink it
 var font_title: FontFile
 var font_body: FontFile
 
@@ -45,36 +56,94 @@ func tex(path: String) -> Texture2D:
 		if _is_large_texture(path):
 			cache.erase(path)
 			cache[path] = cached
+		elif _detail_lru.has(path):
+			var held: int = _detail_lru[path]
+			_detail_lru.erase(path)
+			_detail_lru[path] = held
 		return cached
 	var full := "res://assets/" + path + ".png"
 	var t: Texture2D = null
+	var bytes := 0
 	var detail := "res://assets/world_detail/" + path + ".png"
-	if not path.begins_with("world_detail/") and ResourceLoader.exists(detail):
+	if detail_enabled and not path.begins_with("world_detail/") and ResourceLoader.exists(detail):
 		var source: Texture2D = load(detail)
 		var native: Texture2D = load(full) if ResourceLoader.exists(full) else null
 		var logical := Vector2i(native.get_size()) if native != null else Vector2i(source.get_size() / 4.0)
 		# Keep every caller's geometry (including atlas regions and nine-slice source margins) in
 		# native pixels. Size override changes UV coordinates, not the high-resolution image data.
-		var image_texture := ImageTexture.create_from_image(source.get_image())
+		var image := source.get_image()
+		var image_texture := ImageTexture.create_from_image(image)
 		image_texture.set_size_override(logical)
 		image_texture.set_meta("detail_path", detail)
+		bytes = _accounted_bytes(image)
 		t = image_texture
 	elif ResourceLoader.exists(full):
 		t = load(full)
+		if t != null and path.begins_with("world_detail/"):
+			bytes = int(t.get_width()) * int(t.get_height()) * 16 / 3
 	else:
 		push_warning("Art: missing texture " + full)
 	if t == null and _is_large_texture(path):
 		return null   # a missing large texture must not take a slot and push a real one out of the LRU
 	cache[path] = t
-	if _is_large_texture(path) and cache.size() > LARGE_CACHE_LIMIT:
-		cache.erase(cache.keys()[0])
+	if _is_large_texture(path):
+		_large_sizes[path] = bytes
+		if cache.size() > LARGE_CACHE_LIMIT:
+			var evicted: String = cache.keys()[0]
+			cache.erase(evicted)
+			_large_sizes.erase(evicted)
+		_enforce_budget(path)
+	elif t != null and bytes > 0:
+		_detail_lru[path] = bytes
+		_detail_bytes += bytes
+		_enforce_budget(path)
+	peak_texture_bytes = maxi(peak_texture_bytes, texture_bytes())
 	return t
+
+
+static func _accounted_bytes(image: Image) -> int:
+	return int(image.get_width()) * int(image.get_height()) * 4 * 4 / 3
+
+
+## Evict the least recently used detail textures until the cache fits its budget. The texture just
+## requested is never evicted; scenes that still hold an evicted texture keep it until they leave the tree.
+func _enforce_budget(keep: String) -> void:
+	while _detail_bytes + _large_bytes() > texture_budget and _detail_lru.size() > 1:
+		var oldest: String = _detail_lru.keys()[0]
+		if oldest == keep:
+			break
+		_detail_bytes -= int(_detail_lru[oldest])
+		_detail_lru.erase(oldest)
+		_cache.erase(oldest)
+
+
+func _large_bytes() -> int:
+	var total := 0
+	for key in _large_sizes:
+		total += int(_large_sizes[key])
+	return total
+
+
+## Drop every cached texture (a measuring harness uses this between phases; scenes keep what they already hold).
+func clear_caches() -> void:
+	_cache.clear()
+	_large_cache.clear()
+	_detail_lru.clear()
+	_large_sizes.clear()
+	_detail_bytes = 0
+
+
+## Accounted bytes of every detail texture the caches hold right now.
+func texture_bytes() -> int:
+	return _detail_bytes + _large_bytes()
 
 
 ## True when an optional art file exists, without the missing-texture warning. New art from the visuals track
 ## (logos, chapter cards, poses, NPC sheets...) shows up as soon as the file is committed; until then callers
 ## keep their current look.
 func has_tex(path: String) -> bool:
+	if not detail_enabled and path.begins_with("world_detail/"):
+		return false
 	var cache: Dictionary = _large_cache if _is_large_texture(path) else _cache
 	if cache.has(path):
 		return cache[path] != null
@@ -90,6 +159,33 @@ func has_tex(path: String) -> bool:
 ## tex() for optional art: null when the file isn't there yet (no warning).
 func opt_tex(path: String) -> Texture2D:
 	return tex(path) if has_tex(path) else null
+
+
+## Switch renderer caches only; art preferences never enter company saves.
+func set_detail_enabled(enabled: bool) -> bool:
+	if enabled == detail_enabled:
+		return false
+	detail_enabled = enabled
+	_cache.clear()
+	_large_cache.clear()
+	_detail_lru.clear()
+	_large_sizes.clear()
+	_detail_bytes = 0
+	_absent.clear()
+	WorldScene._tileset = null
+	WorldScene._tile_index.clear()
+	return true
+
+
+## Fit physical detail to the existing logical offset, keeping lights and collision aligned.
+func fit_world_sprite(sprite: Sprite2D, key: String, logical_offset: Vector2) -> void:
+	var design := tex(key)
+	if design == null:
+		return
+	var detail := opt_tex("world_detail/" + key) if detail_enabled else null
+	sprite.texture = detail if detail != null else design
+	sprite.scale = design.get_size() / sprite.texture.get_size()
+	sprite.offset = logical_offset / sprite.scale
 
 
 func icon(name: String) -> Texture2D:
@@ -110,7 +206,7 @@ func opt_color(group: String, id: String, fallback := Color.WHITE) -> Color:
 ##  - outfit_<o>_<pres>_top_detail / _bottom_detail: untinted details (shirt, tie, badge, bag) drawn over the
 ##    tinted fabric, so one suit can be charcoal on Marcus and navy on Daniel
 func character_layers(app: Dictionary, outfit: String, outfit_tints := {}, npc_id := "") -> Array:
-	if npc_id != "" and has_tex("world_detail/characters/npc_" + npc_id):
+	if detail_enabled and npc_id != "" and has_tex("world_detail/characters/npc_" + npc_id):
 		return [{"tex": "world_detail/characters/npc_" + npc_id, "tint": Color.WHITE, "name": "npc_detail"}]
 	if npc_id != "" and has_tex("characters/npc_" + npc_id):
 		return [{"tex": "characters/npc_" + npc_id, "tint": Color.WHITE, "name": "npc"}]

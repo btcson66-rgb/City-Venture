@@ -88,11 +88,11 @@ static func refresh_rfqs() -> void:
 		if rfq["status"] == "open" and Clock.now() > int(rfq["due"]): rfq["status"] = "expired"
 	if int(S()["last_rfqs"]) == Clock.day_index(): return
 	S()["last_rfqs"] = Clock.day_index()
-	for i in range(int(cfg()["rfqs_per_week"])):
+	for i in range(maxi(1, roundi(ceili(float(cfg()["rfqs_per_week"])*CityFuture.demand_factor("manufacturing")) * Industries.market_demand("manufacturing")))):
 		var id := "RFQ-%d" % int(S()["seq"])
 		S()["seq"] = int(S()["seq"])+1
 		var qty := GameState.rng.randi_range(int(cfg()["rfq_qty_min"]), int(cfg()["rfq_qty_max"]))
-		S()["rfqs"][id] = {"id":id, "client":"Lena Park" if i == 0 else "Kessler Precision", "product":"phone_stand", "qty":qty, "min_price":float(cfg()["quote_min"]), "max_price":float(cfg()["quote_max"]), "due":Clock.now()+int(cfg()["rfq_due_days"])*Clock.DAY, "max_defect":float(cfg()["max_defect"]), "status":"open"}
+		S()["rfqs"][id] = {"id":id, "client":"Lena Park" if i == 0 else "Kessler Precision", "product":"phone_stand", "qty":qty, "min_price":float(cfg()["quote_min"]), "max_price":float(cfg()["quote_max"]), "due":Clock.now()+int(cfg()["rfq_due_days"])*Clock.DAY, "max_defect":float(cfg()["max_defect"]), "status":"open", "competitors":Rivals.competitors("manufacturing")}
 
 ## Win probability for a quote: 100% at the client's floor price, falling linearly to `win_at_max` at their ceiling, 0 above it.
 static func win_chance(rfq: Dictionary, price: float) -> float:
@@ -106,12 +106,12 @@ static func quote(id: String, price: float) -> Dictionary:
 	var rfq: Dictionary = S()["rfqs"].get(id, {})
 	if not valid() or rfq.is_empty() or rfq["status"] != "open" or Clock.now() >= int(rfq["due"]): return _error("This RFQ has expired.")
 	if not is_finite(price) or price <= 0: return _error("Enter a positive unit price.")
-	var chance := win_chance(rfq, price)
-	# Quoting at or below the client's floor always wins; the dearer the quote, the likelier a rival (Kessler) takes it.
+	var chance := Rivals.bid_chance(win_chance(rfq, price), rfq.get("competitors", []))
+	# The active market snapshot supplies real competing firms; legacy quotes keep their original odds.
 	if chance <= 0.0 or (chance < 1.0 and GameState.rng.randf() >= chance):
 		rfq["status"] = "rejected"
-		return {"ok":false, "error":I18n.t("%s chose a rival quote. Your price was too high.") % I18n.t(str(rfq["client"]))}
-	var job := Jobs.offer({"entity":entity(), "client":rfq["client"], "scope":"OEM phone stands", "price":snappedf(price*int(rfq["qty"]), 0.01), "work":int(rfq["qty"]), "due":rfq["due"], "terms":int(cfg()["payment_terms"]), "deposit":float(cfg()["deposit_rate"]), "penalty_rate":float(cfg()["late_penalty"]), "segment":"manufacturing"})
+		return {"ok":false, "error":I18n.t("%s chose a rival quote. Review your price and try another RFQ.") % I18n.t(str(rfq["client"]))}
+	var job := Jobs.offer({"entity":entity(), "client":rfq["client"], "scope":I18n.t("OEM phone stands"), "price":snappedf(price*int(rfq["qty"]), 0.01), "work":int(rfq["qty"]), "due":rfq["due"], "terms":int(cfg()["payment_terms"]), "deposit":float(cfg()["deposit_rate"]), "penalty_rate":float(cfg()["late_penalty"]), "segment":"manufacturing", "competitors":rfq.get("competitors", [])})
 	if job == "": return _error("Invalid order terms.")
 	var accepted := Jobs.accept(job)
 	if not accepted["ok"]: return accepted
@@ -230,6 +230,8 @@ static func customer_return(job: String, qty: int, penalty := false) -> Dictiona
 static func crisis(kind: String, retain := true) -> Dictionary:
 	if not valid(): return _error("Open the factory first.")
 	match kind:
+		"story_outsource":return IndustryGuidance.recovery_plan(true)
+		"story_overtime":return IndustryGuidance.recovery_plan(false)
 		"shortage":
 			S()["shortage_until"] = Clock.now()+int(cfg()["shortage_days"])*Clock.DAY
 			for po in S()["pos"].values():

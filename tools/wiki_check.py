@@ -106,7 +106,7 @@ def data_gaps(words: set) -> tuple:
         return out
 
     for folder in ("npcs", "buildings", "districts", "products", "suppliers", "companies", "businesses", "regions",
-                   "events", "jobs"):
+                   "events", "jobs", "scenarios", "rivals"):
         for i in ids(folder):
             need(folder[:6], i)
     with open(os.path.join(GAME, "data", "city", "aurelia.json"), encoding="utf-8") as f:

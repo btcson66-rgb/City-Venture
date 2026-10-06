@@ -111,7 +111,7 @@
 |---------|---------|------|--------|----------|----------|------|------|----------|
 | `okafor_lettings` | `okafor_lettings` | Okafor Lettings | ✓ | 164×164 | OKAFOR LETTINGS | 週一到六 09:00–18:00 | `brick_shops` | 老式租屋行：櫥窗貼滿房屋照片（色塊，無字），綠色木門。租轉角咖啡店面的地方 |
 | `corner_cafe_unit` | `corner_cafe_unit` | Corner Café Unit（玩家的咖啡店） | ✓ | 約 164×164 | 租之前「CORNER UNIT · TO LET」；**租下後改顯示玩家取的店名**（程式畫，預設「<公司名> Café」，可在 Company OS 咖啡店分頁改名） | 租之前 08:00–18:00；租下後 24 小時可進（`always_if_lease`） | `shop_row_awning` | 一樓小店面，大窗、遮陽棚、門口兩張小圓桌。招牌板留空。這棟是 Old Town 最重要的畫面 |
-| `old_town_studio` | `old_town_studio` | Studio 1A, Lantern Row | ✓（只能參觀） | 146×189 | LANTERN ROW FLATS | 每天 09:00–19:00 | `riverside_walkup` | 三層老公寓，外露鐵梯，窗戶小，一樓門口有信箱。最便宜、最溫馨的住處。**搬進去是規劃中** |
+| `old_town_studio` | `old_town_studio` | Studio 1A, Lantern Row | ✓（可承租搬入，#32） | 146×189 | LANTERN ROW FLATS | 房客全天可用 | `riverside_walkup` | 三層老公寓，外露鐵梯，窗戶小，一樓門口有信箱。最便宜、最溫馨的住處。**可在 Okafor 租屋行承租搬入** |
 | `rowhouse_brick` | （填充） | 紅磚連棟屋 ×2 | ✗ | 164×180 | （無） | — | `apartment_mid`（西端）、`riverside_walkup`（東端） | 紅磚，白框窗，爬藤 |
 | `arcade_arches` | （填充） | 拱廊 | ✗ | 200×160 | （無） | — | `retail_arcade` | 拱形騎樓下一排小店 |
 | `clock_tower` | （填充） | 鐘樓 | ✗ | 90×320 | （無） | — | `civic_annex` | 老城地標，全區最高。鐘面沒有數字 |
@@ -168,7 +168,7 @@
 ## 立面的品質要求
 
 朋友測試版入口以 building 的 `status`／`enterable` 與街區的 status 決定，不刪除室內。
-`popup_unit`、`old_town_studio`、`harbor_point_fitness`、`customs_house` 為 planned 景觀。
+`popup_unit`、`harbor_point_fitness` 仍為 planned 景觀；`old_town_studio` 已開放租住，`customs_house` 已有通關說明互動。
 可用互動或實際排程 NPC 出現時才顯示公眾入口；Crestline 依 Daniel／Victor 的劇情條件與
 排程自動顯示。未租咖啡店面先由 Okafor 簽約，租下後才顯示入口。旧存檔站在關閉室內時
 讀檔會移到原立面門口；資料啟用後無需修改 UI 清單。城市指南、捷運、地圖只列 active 街區。
@@ -182,3 +182,20 @@
 ## B2 港區立面 · 美術已交 2026-09-30
 
 `pier7_warehouse` 280×190、`dockside_motors` 240×150、`harbor_point_fitness` 182×173、`customs_house` 240×220、`warehouse_shed` 220×150、`cold_store` 200×170、`container_stack` 180×120。每張附 `_lights` 及 4×；入口和空白招牌位置已寫入 buildings_meta.json，runtime 字串由資料提供。海關是否開放仍由 Claude 線決定。
+
+### #94 Personal housing
+Implemented: `maple_owner_home` (Maple Court owner apartment), `heights_penthouse` (Luxury Heights), `garden_villa` (Residential outskirts). Data-driven home interiors reuse existing furniture/facades as explicit visual fallback; no new art assets. Residential street extends to the villa driveway, retaining existing exits. Buy at Okafor, move with the existing home system, wake/use laptop/pack at the new home. Personal showroom is at Dockside Motors.
+
+## #41：週末快閃店
+
+五號快閃店可租一個週末（週六、週日 10:00–18:00），至少提前一天在店內公告處預約。公司須完成登記與銀行開戶，租金 $380 包含兩天。店面與第二間咖啡店共用同一空間，不能同時出租。
+
+在 Company OS 的「週末快閃店」選商品、來源倉位與件數，搬運一小時，容量 150 件。有空閒公司貨車不另收費，否則每趟 $25；已保留給訂單的貨不能搬。搬出的貨在原倉位保留退回容量，週末結束前不能搬家。店內可見既有貨架與收銀台素材，以及營業時的逛街客；專用快閃店美術仍列入 backlog。
+
+自己到店站櫃台一小時，或在 People 指派員工週六／週日值班。員工每小時另付 $18，同一時間停止原店／物流工作。沒人值班不營業。週日 18:00 剩貨自動搬回來源，租約結束。
+
+資料識別：`popup_retail` 店面、`popup` 銷售通路、`popup_shopper` 週末逛街客。
+## Store activities (#40)
+Crestline Flagship (`crestline_flagship`) retains its lighting look and Chapter 5 alt text. The shelf now offers `market_research` for owned/listed products, thirty game minutes with a seven-day saved cache. Harbor Point Fitness (`harbor_point_fitness`) sells personal memberships/single classes through Rosa Lim (`harbor_point`), at reception weekdays 06:00–20:00. Four timed hour-long classes can introduce real business opportunities: `fitness_order`, `fitness_carrier`, `fitness_press`.
+## Civic Clinic & Pharmacy (`civic_clinic`)
+Civic Center replaces the office_slab filler at x=506 with an enterable 24-hour clinic. Existing facade and civic interior props are reused. Treatment, pharmacy and health insurance are reached through its counters.

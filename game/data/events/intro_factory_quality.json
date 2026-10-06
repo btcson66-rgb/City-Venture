@@ -1,0 +1,45 @@
+{
+ "id": "intro_factory_quality",
+ "category": "supply",
+ "status": "active",
+ "trigger": {
+  "when": "manual"
+ },
+ "presentation": {
+  "channel": "phone",
+  "speaker": "lena_park",
+  "title": "First batch quality review",
+  "icon": "warning",
+  "lines": [
+   "The first production batch has recorded defects. Outsource a two-hour recovery slot or run two hours of overtime; both reserve real capacity and book actual production costs."
+  ]
+ },
+ "choices": [
+  {
+   "id": "outsource",
+   "label": "Outsource the recovery slot",
+   "detail": "Outside production charges subcontracting costs per unit; your own materials remain in stock.",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "manufacturing",
+     "kind": "story_outsource"
+    }
+   ],
+   "outcome": "A real recovery slot is reserved. Finish production and deliver the actual batch."
+  },
+  {
+   "id": "overtime",
+   "label": "Use a two-hour overtime slot",
+   "detail": "Keep production in your factory; overtime can worsen yield and pays extra technician wages.",
+   "effects": [
+    {
+     "op": "industry",
+     "industry": "manufacturing",
+     "kind": "story_overtime"
+    }
+   ],
+   "outcome": "A real recovery slot is reserved. Finish production and deliver the actual batch."
+  }
+ ]
+}

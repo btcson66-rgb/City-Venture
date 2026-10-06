@@ -731,6 +731,21 @@ Claude 線接下來要開放兩個街區和兩個新產業：
 
 美術：六個16×16商品sprite已重新製作，附64×64透明高解析版本；六個程序光影／水面特效以SVG輸出原尺寸及4×，動畫格位不變；兩個app圖示識別不變，補4×輸出（4096圖為插值）。251/251測試、53張巡禮0失敗。七街區日夜實拍與商品add_prop渲染比例檢查已交；QA商品擺放不代表遊戲原本的擺設。高解析光罩及陰影載入仍待Claude保持logical尺寸接入。證據：`evidence/20261001_product_quality/README.md`。
 
+
+## Season 2 — overseas systems (#30)
+
+Planned art requests (existing region images remain the interim display): seven world-map region cards, one each for Northridge, Auroria, Lumina, Zenkai, Almeria, Solterra and Karu; an international courier container; seven abstract currency icons (NRD, AUR, LUM, ZEN, ALM, SOL, KAR). Do not use real currency symbols or logos. This systems ticket changes no assets.
+
+### Season 2 — Chapters 13–14 (#31)
+
+Planned: backdrops/chapter_13 and backdrops/chapter_14; dedicated Ines sprites/portrait; Customs House counter, X-ray machine, shelves and filing cabinets; events/customs_hold. The existing room and uniform_officer are interim art. This ticket changes no assets.
+
+### Season 2 — Chapters 15–16 (#42)
+
+Planned: backdrops/chapter_15, backdrops/chapter_16; dedicated Omar sprites/portrait; airport/cabin journey scene; Lumina warehouse interior; events/fx_shock. Interim executive outfit, existing bank/OS and explicit journey/comparison cards are used. No assets changed.
+
+
+
 # Manufacturing (#64)
 
 Facade requests: `facades/unit12_factory.png`, `facades/ferro_supply.png`, `facades/kessler_precision.png`, `facades/shift_diner.png`; existing `brick_shops` / `byte_bean` are rendered through Art.has_tex fallback. Future industrial freight sprite: `vehicles/industrial_truck_side_body.png` and `vehicles/industrial_truck_side_detail.png`; existing vans provide current freight traffic. Interior machine request: `props/cnc_machine.png` (packing bench fallback), material rack request `props/ferro_material_rack.png` (parcel shelf fallback). No art files are modified by this ticket.
@@ -749,3 +764,32 @@ Requested named facades: `buildings/helio_supply.png` and `buildings/helio_wareh
 
 ## #68 Automotive / Airport
 Requested named facades: `airport_terminal.png`, `gateway_car_rental.png`, `aurelia_auto_auction.png`, `cargo_terminal.png` plus corresponding `_lights.png`, a car sprite sheet for the lot and an auction paddle icon. Runtime district facades check Art.has_tex and use existing glass_tower, civic_annex, warehouse and shop_row_awning art as named fallbacks.
+
+### Season 2 — Chapters 17–18 (#43)
+
+Requested: backdrops/chapter_17, backdrops/chapter_18; dedicated Kai Moreno sprites/portrait; events/rival_undercut; five epilogue backdrops (city, people, company, timeline, next chapter). Existing executive outfit and UI cards are interim. No art assets changed.
+
+#35 — Planned: 25 achievement icons, 16×16, `achievements/<id>.png`; IDs follow data/story/achievements.json. Existing star icons and text remain functional fallback.
+
+#92 — Planned: seven legacy portraits/cards `legacy/<archetype>.png` for builder, merchant, innovator, operator, local_legend, comeback, quiet_owner. Current life review and optional event/chapter thumbnails use existing assets.
+
+- #93：投資人路演、IPO 掛牌日、整併提案插圖 Planned；目前用既有 modal 與文字呈現完整操作。
+
+### #34 車隊深化
+- Planned：第二款新型節能貨車（沿用既有貨車素材作 fallback）。
+- Planned：拖吊車事件插圖（維持文字與警示圖示作 fallback）。
+本工單不修改 game/assets。
+
+## #41 週末快閃店（待製作）
+
+- 快閃店室內佈置：同一 popup_unit 可做咖啡分店或週末零售，兩種租約互斥。
+- 可搬移攤位與貨架：目前使用既有 shelf／box fallback。
+- 專用收銀台：目前使用 cash_register／desk_laptop fallback。
+- 週末立牌：標示週六、週日 10:00–18:00。營業中逛街客使用既有角色外觀，未新增貼圖。
+## #70 International trade
+Requested `buildings/meridian_trade_desk.png` and `_lights.png`; existing `nexus_cowork` facade is the validated fallback. Customs House and the airport cargo terminal reuse existing art. Ingrid Solberg uses a generated appearance, with existing office desk and world/parcel icons. No art assets changed.
+
+## #99 第三季城市素材
+Planned：博覽會場館 `interiors/expo_venue`、重建後港口 `backdrops/harbor_rebuilt`、兩位候選人的選舉海報 `props/election_green` / `props/election_enterprise`。目前用 City Hall 桌、既有 Harbor 和職業角色素材；功能已接上，不改動 game/assets。專用素材完成後以 Art.has_tex()/opt_tex() 接替。
+## #40 Rosa Lim
+Rosa Lim (`harbor_point`) currently uses an existing startup_casual outfit and idle pose. A fitness-owner outfit/portrait is requested; no new art is required for the current playable membership/class flow.

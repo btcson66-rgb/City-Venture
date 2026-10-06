@@ -75,13 +75,15 @@ func test_harbor_is_open_and_linked() -> void:
 	runner.check(DataDB.validate().is_empty(), "data validates: " + str(DataDB.validate()))
 
 
-func test_inactive_gym_and_customs_keep_their_interior_data() -> void:
-	runner.check(not SceneRouter.building_open("harbor_point_fitness")["open"], "Harbor Point Fitness is scenery until enabled")
+func test_the_gym_and_customs_house_have_actual_hours() -> void:
+	runner.check(BuildingInfo.building_enterable("harbor_point_fitness"), "Harbor Point Fitness is enabled by shop activities")
 	var g := DataDB.building("harbor_point_fitness")
-	runner.check(g["interior"]["interactables"].any(func(i): return i["action"] == "look"), "with something to look at inside")
+	runner.check(g["interior"]["interactables"].any(func(i): return i["action"] == "fitness"), "with real class activities inside")
 	var st := SceneRouter.building_open("customs_house")
-	runner.check(not st["open"], "the Customs House is closed")
-	runner.check(str(st["reason"]).contains("no public entrance"), "world reason has no build notes")
+	runner.check(not st["open"], "the Customs House is closed outside office hours")
+	runner.check(str(st["reason"]).contains("09:00–16:00"), "shows actual office hours: " + str(st["reason"]))
+	GameState.data["clock"]["minutes"] = Clock.at_day_time(1, 10 * 60)
+	runner.check(SceneRouter.building_open("customs_house")["open"], "Customs House opens on a weekday morning")
 	runner.check(DataDB.building("customs_house").has("interior"), "it still has a room, so screens and tools can load it")
 
 
@@ -332,7 +334,7 @@ func test_jobs_are_posted_accepted_driven_and_paid() -> void:
 	runner.eq(bool(r["late"]), not on_time, "late only if the deadline passed")
 	var want := float(j0["pay"]) * 1.1 * (1.0 if on_time else 0.6)
 	runner.check(absf(float(r["pay"]) - want) < 0.02, "the best route pays 110%% of the fee, less 40%% if late (%.2f vs %.2f)" % [float(r["pay"]), want])
-	runner.check(absf(-Ledger.balance(cid, "revenue") - rev0 - float(r["pay"])) < 0.011, "the pay is banked as revenue")
+	runner.check(absf(-Ledger.balance(cid, "revenue") - rev0 - (float(r["pay"])-Tax.vat(float(r["pay"])))) < 0.011, "gross pay is banked; collected VAT is excluded from revenue")
 	runner.check(absf(Ledger.balance(cid, "exp:fuel") - fuel0 - float(r["fuel"])) < 0.011 and float(r["fuel"]) > 1.0, "fuel charged ($%.2f)" % float(r["fuel"]))
 	runner.check(Ledger.balance(cid, "exp:vehicle") - veh0 > 0.0, "and a little upkeep")
 	runner.check(Ledger.cash(cid) - cash0 > 0.0, "a run leaves you better off in cash")
@@ -496,3 +498,35 @@ func test_a_full_stockroom_names_the_warehouse_with_room() -> void:
 	runner.check(not r.get("ok", true) and str(r.get("error", "")) == why, "the order says the same")
 	runner.check(Ecommerce.buy("tradelink_wholesale", "phone_stand", 200, "pier7_warehouse").get("ok", false), "and goes to Pier 7")
 	runner.check(Ledger.check_balanced(), "ledger balanced")
+
+
+func test_company_van_name_scale_bounds() -> void:
+	runner.eq(CompanyVan.name_font_size(20.0, 34.0), 8, "short company uses 8px")
+	runner.eq(CompanyVan.name_font_size(40.0, 34.0), 6, "long company shrinks to board width")
+	runner.eq(CompanyVan.name_font_size(1000.0, 34.0), 5, "pathological name keeps minimum 5px")
+	runner.eq(CompanyVan.name_font_size(0.0, 34.0), 8, "empty label is bounded")
+	runner.eq(CompanyVan.name_font_size(12.0, 0.0), 5, "zero-width board cannot loop")
+
+
+func test_van_colour_old_save_roundtrip_and_closed_guard() -> void:
+	var cid := _van()
+	runner.eq(Logistics.body_color_id(), "white", "old save without colour defaults white")
+	var cash := Ledger.cash(cid)
+	runner.check(Logistics.set_body_color("blue"), "owned body can turn blue")
+	runner.check(not Logistics.set_body_color("invalid"), "unknown palette id rejected")
+	GameState.data = JSON.parse_string(JSON.stringify(GameState.data))
+	runner.eq(Logistics.body_color_id(), "blue", "colour survives serialized save")
+	runner.eq(Ledger.cash(cid), cash, "appearance never books fake transactions")
+	Logistics.on_company_closed(cid)
+	runner.check(not Logistics.set_body_color("red"), "sold van cannot change colour")
+	runner.check(Ledger.check_balanced(), "auction remains balanced")
+
+
+func test_route_stops_match_map_land_and_bridges() -> void:
+	runner.eq(Logistics.depot(), Vector2(156, 162), "Pier 7 yard is on painted land")
+	for p in Logistics.places():
+		var pos := Logistics.place_pos(str(p["id"]))
+		runner.check(pos.x > 10 and pos.x < 570 and pos.y > 10 and pos.y < 226, "map margins " + str(p["id"]))
+		runner.check(absf(pos.x - Logistics.river_x(pos.y)) > 25, "stop on a river bank " + str(p["id"]))
+	var crossing := Logistics.leg(Vector2(224, 100), Vector2(450, 128))
+	runner.check(crossing.size() == 3 and Logistics.bridges().has(crossing[1]), "opposite bank route uses painted bridge")

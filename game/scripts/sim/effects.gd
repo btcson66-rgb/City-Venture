@@ -11,15 +11,97 @@ static func _num(v: Variant, ctx: Dictionary) -> float:
 	return float(v)
 
 
+## Cheap validation of the effects that can refuse, so a multi-effect reply is applied whole or not at all
+## without copying the entire game state. Unknown or always-succeeding ops pass.
+static func preflight(e: Dictionary, ctx: Dictionary) -> Dictionary:
+	match str(e.get("op", "")):
+		"phone_group_job":
+			var job := GroupJobs.get_job(str(e.get("id", ctx.get("group_job", ""))))
+			if job.is_empty() or job["status"] != "offered" or GameState.data["entities"].get(job["entity"], {}).has("closed") or GameState.data["entities"].get(GameState.company_id(), {}).has("closed"):
+				return {"ok": false, "error": I18n.t("This group job is no longer on offer.")}
+		"phone_contract":
+			var contract: Dictionary = Contracts.C().get(str(e.get("id", ctx.get("contract", ""))), {})
+			if contract.is_empty() or contract["status"] != "offered" or Contracts.seller_closed(contract) or GameState.data["entities"].get(GameState.company_id(), {}).has("closed"):
+				return {"ok": false, "error": I18n.t("This offer is no longer open.")}
+		"purchase", "rush_order":
+			if Ecommerce.offer(str(ctx.get("supplier_id", e.get("supplier", "tradelink_wholesale"))), str(ctx.get("product_id", e.get("product", "")))).is_empty():
+				return {"ok": false, "error": "Supplier doesn't carry that."}
+		"phone_meeting":
+			var person := DataDB.npc(str(e.get("npc", ctx.get("npc", ""))))
+			if person.is_empty() or (person.get("schedule", []).is_empty() and str(e.get("location", "")) == ""):
+				return {"ok": false, "error": I18n.t("This contact has no meeting location.")}
+		"industry":
+			var module := Industries.find(str(e.get("industry", "")))
+			if module.is_empty() or not module["sim_class"].has_method("crisis"):
+				return {"ok": false, "error": I18n.t("Unknown industry event.")}
+		"fund_board":
+			var deal := Fundraising.get_deal(str(e.get("deal", ctx.get("deal", ""))))
+			if deal.is_empty() or deal["status"] != "signed" or str(deal.get("board", {}).get("status", "")) != "open":
+				return {"ok": false, "error": I18n.t("This board review is already closed.")}
+		"fund_partner":
+			var item := Partnerships.get_item(str(e.get("id", ctx.get("partnership", ""))))
+			if item.is_empty() or item["status"] != "offered":
+				return {"ok": false, "error": I18n.t("This proposal is no longer open.")}
+	return {"ok": true}
+
+
 static func apply(e: Dictionary, ctx: Dictionary) -> Dictionary:
 	var op: String = e.get("op", "")
 	var ent := GameState.business_entity()
 	match op:
+		"cafe_inspection":
+			return CafeDepth.decision(ctx,bool(e.get("prepare",false)))
+		"market_strategy":
+			return LegacyBusiness.choose(str(e["strategy"]))
+		"customs_hold":
+			return Customs.resolve(str(ctx.get("order", "")), str(e.get("choice", "")))
+
+		"shop_network":
+			return ShopLife.network_choice(str(e.get("kind", "")), ctx)
+		"phone_group_job":
+			var id := str(e.get("id", ctx.get("group_job", "")))
+			var job := GroupJobs.get_job(id)
+			if job.is_empty() or job["status"] != "offered" or GameState.data["entities"].get(job["entity"], {}).has("closed") or GameState.data["entities"].get(GameState.company_id(), {}).has("closed"):
+				return {"ok": false, "error": I18n.t("This group job is no longer on offer.")}
+			if e.get("choice", "") == "accept": return GroupJobs.accept(id)
+			job["status"] = "expired" if Clock.now() >= int(job["expires"]) else "declined"
+			return {"ok": true}
+		"phone_payment_extension":
+			return Bank.request_payment_extension(str(e["id"]))
+		"phone_contract":
+			var id := str(e.get("id", ctx.get("contract", "")))
+			var contract: Dictionary = Contracts.C().get(id, {})
+			if contract.is_empty() or contract["status"] != "offered" or Contracts.seller_closed(contract) or GameState.data["entities"].get(GameState.company_id(), {}).has("closed"): return {"ok": false, "error": I18n.t("This offer is no longer open.")}
+			if Clock.now() >= int(contract["expires"]):
+				contract["status"] = "expired"
+				Contracts._tag(contract, "declined")
+				EventBus.contract_changed.emit(id)
+				return {"ok": true}
+			if e.get("choice", "") == "accept": return Contracts.accept(id)
+			Contracts.reject(id)
+			return {"ok": true}
+		"phone_bank_later":
+			if int(Bank.B().get("appointment", -1)) == int(e["at"]):
+				Bank.B()["appointment"] = -1
+				Sim.cancel("bank.appointment", "id", "lending")
+			return {"ok": true}
+		"phone_meeting":
+			return PhoneMessages.book(str(e.get("npc", ctx.get("npc", ""))), int(e.get("at", -1)), str(e.get("location", "")), str(e.get("conversation", "")))
+		"lease_damage":
+			return LeaseEnd.record_damage(str(e.get("property", ctx.get("property", ""))), _num(e.get("amount", 0), ctx))
 		"industry":
 			var module := Industries.find(str(e.get("industry", "")))
 			if module.is_empty() or not module["sim_class"].has_method("crisis"):
 				return {"ok":false, "error":I18n.t("Unknown industry event.")}
-			return module["sim_class"].crisis(str(e.get("kind", "")), bool(e.get("retain", true)))
+			Insurance.crisis_context={"entity":ent,"industry":e.get("industry","")}
+			var result: Dictionary
+			if module["sim_class"].has_method("crisis_context"):
+				result=module["sim_class"].crisis_context(str(e.get("kind","")),bool(e.get("retain",true)),ctx)
+			else:
+				result=module["sim_class"].crisis(str(e.get("kind", "")), bool(e.get("retain", true)))
+			Insurance.crisis_context={}
+			if result.get("ok",false):Brand.record(ent,"crises",2 if e.get("retain",true) else -2)
+			return result
 		"cash":
 			var amt := _num(e.get("amount", 0), ctx)
 			var cat: String = e.get("category", "other")
@@ -79,20 +161,18 @@ static func apply(e: Dictionary, ctx: Dictionary) -> Dictionary:
 			Ecommerce.pause_all_ads()
 			GameState.data["living"]["reduced"] = true
 		"equity_investment":
-			# an investor buys `stake` of the company for `amount`: cash in, equity up, founder diluted
+			# an investor buys `stake` of the company for `amount`: cash in, equity up, founder diluted (one path with every other round)
 			var amt := _num(e.get("amount", 0), ctx)
-			var stake := float(e.get("stake", 0.1))
-			var who: String = e.get("investor", "investor")
 			if GameState.company_id() == "":
 				return {"ok": false, "error": "Investors buy shares in a registered company."}
-			Ledger.post(GameState.company_id(), EventEngine.fill(e.get("memo", "Equity investment"), ctx), [{"acct": "cash", "dr": amt}, {"acct": "equity", "cr": amt}], {"type": "investment"})
-			var cap: Dictionary = GameState.data.get("cap_table", {"founder": 1.0})
-			for k in cap:
-				cap[k] = float(cap[k]) * (1.0 - stake)
-			cap[who] = float(cap.get(who, 0.0)) + stake
-			GameState.data["cap_table"] = cap
-			GameState.set_flag("investor_" + who)
-			GameState.timeline(I18n.t("Sold %d%% of %s for %s.") % [int(round(stake * 100)), GameState.business_display_name(), Fmt.money0(amt)], "milestone")
+			return Fundraising.issue_equity(str(e.get("investor", "investor")), amt, float(e.get("stake", 0.1)), EventEngine.fill(e.get("memo", "Equity investment"), ctx), {})
+		"fund_intro":
+			var offered := str(e.get("investor", ctx.get("investor", "elena")))
+			return Fundraising.intro_offer(offered) if str(e.get("choice", "sign")) == "review" else Fundraising.intro_sign(offered)
+		"fund_board":
+			return Fundraising.board_decide(str(e.get("deal", ctx.get("deal", ""))), str(e.get("choice", "")))
+		"fund_partner":
+			return Partnerships.respond(str(e.get("id", ctx.get("partnership", ""))), str(e.get("choice", "")))
 		"open_escrow":
 			Rails.open_escrow()
 		"rail_choice":
@@ -106,7 +186,7 @@ static func apply(e: Dictionary, ctx: Dictionary) -> Dictionary:
 		"set_flag":
 			GameState.set_flag(e["flag"], e.get("value", true))
 		"message":
-			GameState.add_message(e["from"], EventEngine.fill(e["text"], ctx))
+			GameState.add_message(e["from"], EventEngine.fill(e["text"], ctx), e.get("options", {}))
 		"timeline":
 			GameState.timeline(EventEngine.fill(e["text"], ctx), e.get("kind", "event"))
 		"none":

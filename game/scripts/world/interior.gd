@@ -65,7 +65,7 @@ func build(building_id: String) -> void:
 		if p.has("night"):
 			_light_spill(float(p["x"]), 52.0)
 		add_prop(p)
-	for it in def.get("interactables", []):
+	for it in BuildingInfo.interactables(building_id):
 		if str(it.get("params", {}).get("unless_lease", "")) != "" and Living.has_lease(str(it["params"]["unless_lease"])):
 			continue   # e.g. the TO LET notice, once the unit is yours
 		var a: Array = it["at"]
@@ -80,6 +80,10 @@ func build(building_id: String) -> void:
 		refresh_stock()
 		EventBus.po_arrived.connect(func(_x): refresh_stock())
 		EventBus.order_packed.connect(func(_x): refresh_stock())
+	for property_id in Living.D()["leases"]:
+		if str(DataDB.properties.get(property_id, {}).get("building", "")) == building_id:
+			var lease_control := add_interactable(spawns["door"] + Vector2(24, -12), "Manage lease", "manage_leases", {"property": property_id}, 22.0)
+			lease_control.name = "ManageLease_" + property_id
 	update_lighting()
 	refresh_named_npcs()
 	_spawn_ambient()   # after the named NPCs and staff, so customers don't take their seats
@@ -252,7 +256,7 @@ func refresh_named_npcs() -> void:
 	if Living.has_lease(here):
 		var used := {}
 		for p in Staff.people():
-			if not Staff.is_working(p) or Staff.workplace(str(p["role"])) != here:
+			if not Staff.is_working(p) or str(p.get("workplace", Staff.workplace(str(p["role"])))) != here:
 				continue
 			var kind := str(p["role"]) if spots.has(str(p["role"])) else "desk"
 			used[kind] = int(used.get(kind, 0))

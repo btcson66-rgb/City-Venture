@@ -11,6 +11,10 @@ explicitly adds their numeric fields to a later overlay.
 
 All content lives in `game/data/` as JSON, loaded by `DataDB` at boot.
 
+Performance QA (`docs/PERFORMANCE.md`) adds no persisted gameplay keys. Ecommerce
+order reservations use a derived, disposable index rebuilt from existing orders;
+legacy saves require no new field or migration.
+
 Art keys keep their existing logical pixel contract (`#62`): a matching `assets/world_detail/<key>.png`
 overrides the rendered image through `Art`, while native dimensions, sprite metadata, atlas coordinates,
 map positions and collision alpha masks remain authoritative. No saved fields or format versions change.
@@ -278,6 +282,18 @@ or a conversation) binds itself. Conditions may read the event's context: `ctx:<
 ```
 Story recovery and saved receipts (#24):
 
+Side-story infrastructure (#86, content integration Blocked on #64–#69): definitions load from
+`data/story/side_stories/<id>.json` into `DataDB.story.side_stories`. Each definition has `id`, translated
+`title`/`text`, `business` (must be active), `trigger: [Cond expressions]`, and `objectives` in the same
+format as chapter objectives. Objective ids must be globally unique. Accepting requires a live registered
+company. The phone's Opportunities app accepts eligible stories without replacing the main chapter.
+`story.side_stories[id] = {company, status: active|completed|unavailable, skipped}` initializes lazily on
+old saves. Steps advance sequentially; `on_skip` replaces a side step's success actions when it is impossible.
+The story's `on_complete` runs once only when no step was skipped; otherwise `on_unavailable` runs once.
+Closing/removing the bound company cancels its active steps and runs `on_unavailable`, never the reward.
+There is no production side-story content in this change: each industry's real conditions, choices,
+reward and tutorial require its implementation to be merged first.
+
 Objectives accept optional `skip_when: [Cond expressions]` and `skip_text` (translated player text). When normal completion fails but all skip conditions hold, the engine sends the explanation and completes the step without claiming a successful task. `contract_closed:<tag>` means the contract's original seller entity has a `closed` field; it does not transfer money or rewrite the contract. `has_listed` means any listing exists, including a paused listing, or an order was already placed.
 
 `data/economy/story_recovery.json`: `{loss_months: 2}` controls the Chapter 6 negative-cash month-end fallback. Runtime additions use existing lazy dictionaries: `stats.ch6_cash_loss_months`, `flags.ch6_cash_reviewed`, `flags.ch7_survived_losses`, `flags.news_read_y3`–`news_read_y8`. The legacy `news_read`, `ch6_month_in_black`, `ch7_month_profit` keys remain readable. `_migrate` derives only the saved era's news receipt from the old generic key; era changes clear the generic receipt. Contract receipts reconcile from saved statuses on load and story checks. Tutorial version 3 and step indices are unchanged.
@@ -498,6 +514,24 @@ data.bank             {credit, loans{}, seq, no_loans_until?, appointment?}
                         the reminder; meeting Marcus removes both. Missed slots stay in phone Tasks with rebooking advice.
                         Loan records keep their existing fields and repayment schedule unchanged.
 
+data.messages         [{id, t, from, text, read, direction?: incoming|outgoing, replies?, ctx?, decision?,
+                        expires?, default_reply?, answered?, expired?}]
+                        Each reply: {id, label, requires[], effects[], recommended?, keep_open?, outcome?}.
+                        Conditions and effects use EventEngine/Effects; decision references the original pending iid.
+                        Old messages receive IDs and acknowledgement replies lazily; outgoing entries are already read.
+                        Keep-open details preserve the choice. Expiry runs the data default once, or records
+                        expired_unavailable with a Tasks/Contacts next step if its underlying action cannot run.
+
+data.phone_messages   {seq, agenda[{id,npc,at,until,location,conversation,status: planned|met|missed}],
+                        cooldowns{"npc:template": absolute minute}, social{npc: meeting count}, expiry{message_id: minute}}
+                        Created lazily by PhoneMessages.S; missing expiry indexes rebuild from saved messages.
+                        data/economy/messages.json defines lead/window minutes and templates {label,requires[],cooldown_minutes}.
+                        Meetings search complete NPC and building opening windows; arrival plays existing dialogue.
+                        phone_met_<npc> flags and counts are the additive relationship hook while #95 is unmerged.
+                        phone_call_<conversation> is a once-only completion receipt; Maya's opening call still gates ch1.
+                        A loan may add phone_extended and retry_at: its one extension reschedules bank.payment,
+                        preserving debt, credit consequences and paid/due fees; never posts operating income.
+
 data.npcs.<id>         {met, relationship, convo_done[]}
 data.timeline          [{t, text, kind}]
 data.reports           {month_closes:[{period, entities:{id:{revenue, refunds, cogs, gross, opex{...}, rent, profit,
@@ -517,7 +551,48 @@ Flags and stats the café sets: `met_okafor`, `leased_corner_cafe`, `food_permit
 `cafe_days_open`, `cafe_owner_shifts`, `cafe_rating`. Ledger expense categories added with it: `rent_shop`, `rent_warehouse`,
 `fitout` (`fuel`, `vehicle` and `insurance` are reserved for the logistics business; nothing posts to them yet).
 
+## Overseas systems (#30)
 
+`economy/fx.json`: home_currency; bank_spread (fraction); daily_volatility (fraction); mean_reversion (fraction); min_factor/max_factor (relative to start); history_days (days); seed_offset; era_volatility (year → multiplier); currencies (code → name, start_rate in home dollars/foreign unit). `FX.add_shock` stores temporary volatility and expiry day.
+
+`economy/regions_market.json`: bank_open_fee (home dollars), population_reference (million), regions (id → currency, population_millions, demand_multiplier, product_multipliers by product category, unlock_year). `shipping.json` international methods add base_cost (home dollars), cost_per_day (home dollars/distance-day), days_factor, min_days/max_days.
+
+Lazy save keys: fx {rates, history[code]: [{day,rate}], last_day, rng as signed integer string, shocks}; global_market.companies[entity] {bank, stores[region]: {prices[listing] in local units, revenue in local units}, balances[currency]: {receivable,wallet} in foreign units, auto_fx}. Overseas orders extend existing orders with region, currency, foreign_price, delivery_rate, foreign_due and global_paid. Book values remain in Ledger home dollars. No existing saved key is renamed.
+
+## Duties and season-two chapter receipts (#31)
+
+`economy/duties.json`: categories maps product category to one of codes; codes provide names. regions maps region → tariff code → rate fraction. refusal_rates maps ddp/ddu to probability; misclassification_fine (home dollars), document_fine_factor, document_delay_days, hold_timeout_days, target_units, fallback_units, target_return_rate, review_after_days, return_observation_days (days). Lazy customs save state has companies[entity][region:listing] {policy,code}, chapters[id] {entity,started minute}. Orders snapshot customs {policy,code,expected,duty_paid,penalty,cleared,held_at}; customs_refused marks duty-related refusal. pickup_fee_share allocates the courier batch fee for the income card. Existing saved keys remain intact.
+
+## Trade RFQ preview (issue70)
+
+`economy/trade.json` contains terms with origin/freight/insurance/duty payers, risk_transfer and insurance_required; goods keyed by product with tariff_code and regional local-unit price/capacity/demand; routes with freight_factor/default_risk; transport with base_fee/unit_fee/days/departure_weekday/loss_risk; payments with fee_rate/fixed_fee/days/default_multiplier. Other numeric keys tune quote expiry, handling, insurance, stress and warehouse rent. TradeQuote.sheet returns an immutable estimate with units and quoted_at/valid_until. No persistent trade state or executed job exists in this preview.
+Customs decision choices may set `recommended: true`; only the first available explicitly recommended choice gets primary styling. An unavailable recommendation does not promote an unmarked choice.
+
+## Overseas partners and forwards (#42)
+
+`economy/overseas_partners.json` owns shock {currency,drop,days,volatility}, forward {fixed_fee,fee_rates by days,maximum_notional}, flight_fare/flight_days, distributor_units/wholesale_factor/delivery/payment days, home_invoice_price_factor/acceptance, warehouse opening/capacity/rent/shipping/delivery, transfer freight base/unit/days, clearance_after_days and comparison_units_90. All money is in home dollars except explicitly foreign notional and local prices.
+
+Lazy `fx_forwards` = {items[id]{entity,currency,notional,days,rate,fee,collateral,status,opened,due,settled,spot,gain_loss,early},seq}. Lazy `overseas_partners` = {companies[entity]{warehouse{opened,last_month},transfers[{index,status,product,qty,unit_cost,cost,defect_rate,eta}],home_invoices,visiting,next_offer},chapters[id]{entity,started,month_closes},shock{currency,before,after,started,exposure_estimate}}. Optional distributor contract keys: type,region,invoice_currency,foreign_total,foreign_receivable,shipped,shipment_cost,eta,closure_written_off. Existing contracts keep their original lifecycle. `lumina_3pl:<entity>` inventory stays outside domestic stock locations. Orders use partner_channel=3pl. Month-close FX uses the existing fx_gain_loss account; no account rename/migration is needed.
+
+
+
+
+Device settings (#87) are outside GameState and game saves: `Preferences` persists audio, display, accessibility,
+input bindings and launch defaults in `user://settings.cfg`. Unknown ConfigFile sections and legacy audio keys are
+preserved; old company saves need no migration. See [SETTINGS.md](SETTINGS.md) for units, limits and validation.
+
+### Input accessibility (#88)
+
+InputAccess stores touch contacts, transient walking routes and controller focus only in memory; no saved game keys or migrations. See [INPUT_ACCESS.md](INPUT_ACCESS.md).
+
+### Replay rules and scenarios (#89)
+
+`difficulty.json` supplies bounded presets/custom fields, market variation and score weights; `scenarios/*.json` supplies `{id, name, description, goal, initial, win, limit_days|limit_months}`. DataDB loads both. Optional saved `run` snapshots rules/seed/preferences, full scenario definition, started/deadline minutes, original company id, starting net worth, status/result and read/recorded flags. Missing `run` preserves original behavior. `property` is a ledger asset; scenario mortgages remain `loan_payable` and ordinary Bank loan schedules. Local challenge history is separate from game saves and preserves corrupt files. See [REPLAY.md](REPLAY.md) for all keys, units and six IDs.
+
+
+## Market state (#90)
+
+`economy/macro.json`: bounded daily mean reversion/noise/shock settings, phase thresholds and per-industry cycle/rate sensitivity. `economy/rivals.json`: weekly price/quality/advertising/location and payroll/acquisition/news limits. `data/rivals/*.json`: `{id,name,industry,strategy,capital,price,quality,locations}`. Optional saved `macro` contains private RNG string, daily index/rate/inflation/trend/shock expiry and bounded path; `rivals` contains private RNG string, last week, virtual-company books/status/buyer/acquired cost and timed staff offers; `city_news` contains last day, timeline/event cursors and bounded published/queued items. Contract/freelance offers, shared Jobs, manufacturing RFQs and media briefs carry optional dynamic `competitors` snapshots (`id,name,price,quality,share`). Old records without snapshots retain neutral competition odds. `rivals.bid_pressure` is the opponent-strength coefficient; acquisitions and closure write-offs retain the rival industry segment. No existing keys renamed. Acquisition purchases post cash to investments; closure writes the asset off. See MARKET.md for neutral legacy quotes and dependency boundaries.
 ## Industry framework state (#63)
 
 - Every ledger journal source includes `segment`: industry id or `shared`. Old entries need not be rewritten.
@@ -544,3 +619,121 @@ Shared properties may have `purchase_price`, `rooms`, investment_home kind and s
 
 ### Automotive (#68)
 `economy/automotive.json` holds the licence, lot slots per stage, the auction (weekday, lots, bidder range, buyer fee, inspection), used car models and defects, reconditioning options, listing sale curve, airport passenger flow (base, season, weekday), rental classes with rates, damage, accident and insurance tables, service intervals, dealership brands (EV flag, margin, models), deposit, minimum stock and floor-plan interest, the four crisis settings and `hooks` for Hotel guests, Energy chargers and `ev_boost`. Events `automotive_*` use `op: industry`, `industry: automotive`.
+
+## Consolidation and legacy (#43)
+
+`economy/legacy.json` controls rival demand-share fraction/duration (days), strategy price/demand/elasticity factors, reviews/rating gates, campaign fee (home dollars)/duration, additional stock (units), comparison duration (days), revenue benchmark (home dollars/60 days), employee-share fraction, manager fee (home dollars/30 days) and daily parcel capacity. Lazy `legacy_story` retains market {entity,region,listing,branch,started,price,stock,strategy,responded,ad,purchase?,previous_offer,previous_offer_known,second_offer}, ending string, saved five cards, viewed count, manager {entity,next_fee,last_day,unpaid}, optional mentor_topic. `acquisition_receipt` records the actual entity/price/choice/time of a decided offer; older missing receipts use a disclosed current-valuation reference. Cap-table grants transfer existing shares; equity:employees is a credit-equity account, never revenue. No existing key is renamed or save format changed.
+
+Acquisition receipts and delayed earn-out jobs bind to their company entity. New registrations reset current ownership to founder shares, retaining historical offer flags/receipts. Companies without a business account have no sale quote; personal savings never count as company assets. Legacy chapters set world years 9 and 10 on their first objective.
+
+Growth: data/story/goals.json and achievements.json define id/title/metric/value/hint/unit/company. Save growth has completed and achievements dated entity receipts, three active IDs, reviewed optional goals, pending completion cards, company binding, journal sequence and cumulative cash history/overdrawn guard. Financial rewards are absent; existing ledger/report sources determine progress.
+
+#92: data/legacy.json defines seven archetype formulas (metric/divisor/weight/cap), inheritance limits in home dollars, event category weights, and difficulty factors. Optional timeline metadata art/category/entity/npc preserves old row shapes. life_legacy holds immutable review snapshot, retired/shown flags. meta.previous_life stores prior slot/kind/review; difficulty increments per next life. paid_work_minutes, cafe_work_minutes, saas_work_minutes count actual clock minutes; gig_hours remains hours. New-life capital and inheritance are opening equity entries, never income. Separate slots preserve prior saves.
+
+`capital_market`（#93，lazy）：公司 entity、route、具價格／盡調／期限／status 的 offers、獨立 NPC targets 與 owner、npc_mergers、integrations、ipo 階段與答案／定價／next_quarter、實際 quarter_reports、pressure 的 until／各員工實際 hit、reputation、last_vote。新公司重設股權事件狀態，原事件文字仍在 timeline；舊狀態不移植為新公司的營收或投資。
+
+
+## Company portfolio and holding groups (#91)
+
+`company` is an array of entity IDs; `active_company` selects the visible operational record. The legacy string becomes the first array item. `company_contexts[id]` stores operational states, entity-specific flags and credit/cooldown. Global bank loans retain entity IDs; new business scheduler payloads carry `company_context`. First registration transfers sole-proprietor schedules to the new operational view, retaining receivable owner IDs. Terminal records remain inspectable after closure; new firms receive fresh active modules.
+
+`holding_groups` stores `basis`, `parents`, `loans`, `guarantees`, physical `trades`, stock/pending `margin` and timestamped `margin_events`, plus immutable month-end `reports`. Paired ledger accounts are `investment_in_subsidiary:<entity>`, `group_loan_receivable/payable:<loan>`, `group_interest_receivable/payable:<loan>`, `ic_revenue` and `ic_cost`. Goods orders carry optional internal margin metadata for delivery/refund elimination. City landmarks remain global; operating company state is separate. Configuration is `data/economy/holding_groups.json`.
+
+
+## Moving homes (#32)
+
+Every `kind: home` property provides `building`, `bed`, `bed_position`, `inventory_units`, and `monthly_rent` (capacity is also mirrored for existing ecommerce). `player.home` selects the home property. `Living.home/home_building/home_bed/home_rent` resolve location and era-adjusted rent; old saves default to Riverside. `living.housing` lazily stores actual per-property deposits, a cancellable notice reservation (`from/to/mode/ready/stage`), move count and receipts. Personal `home_deposit` is separate from business deposits, excluded from business asset contribution, and counted in personal net worth. New games record the configured pre-arrival deposit as opening equity; legacy saves never receive an invented deposit.
+
+`home_letting` opens the in-world rental modal at Okafor Lettings. `requires: home:<property>` protects tenant equipment. Move completion transfers physical inventory and corresponding operational locations across company views, preserving cost, supplier refunds, scheduled jobs and unrealized internal markup; assets and income are not transferred to a different owner. Notice completion is hourly and persists after save/load; changed capacity/cash blocks execution with retry/cancel instead of displacing the player.
+
+## Personal assets (#94)
+`living.personal_assets` is global household state: homes keyed by property (status, historical book/base price, mortgage balance/months/paid_n/next/arrears, tenant, rent, actual invoices, optional leave notice); car (model/price/electric/luxury, location, energy, service due); style keyed by home; visits (npc/day/home); parking and insurance month. Old saves lazily start empty; company contexts never include this state. Owner home data has owner_purchase, tier, management_month, guests, metro_access_minutes plus #32 home fields. `economy/personal_assets` defines fees, travel/parking/energy, service, furniture/car options. Source-tagged Ledger transactions maintain personal property_assets, personal_vehicle, loan_payable and actual tenant AR.
+
+
+### Café depth (#33)
+`economy/cafe.json`: `locations` maps property to building and foot-traffic multiplier; `items` defines six `ref_price`, `unit_cost`, `materials` recipes and optional seasonal `months`; `materials` names bins; `material_packs` provides paid next-morning deliveries; `drink_shares`, `seasonal_demand_bonus`, `inspection` and `overtime` tune demand and consequences.
+Saved `cafe` retains the old single-store keys and lazily adds `branches`, shared `roster` and `work_hours`. Each shop adds `materials`, `material_incoming`, `cleaned`, `inspection_next`, `inspection_until`, `inspection_pending`, optional `inspection_iid`/`inspection_deadline`, `inspections` and a per-premises branch `food_permit`. Old corner licences continue using the old flag. Daily records add `gross_margin` from actual posted costs. Events/scheduled deliveries include company and property ownership.
+
+### Logistics depth (#34)
+`economy/logistics.json.fleet` tunes two models, wear, condition-scaled breakdown chance, towing/repair, payment multiplier and 720-minute service restoring condition 90. `delivery_routes` defines clients, ninety days, weekly trips, fee, missed-trip penalty and negotiation tolerance.
+`logistics.fleet.van1` uses the canonical old `logistics.van`; `van2` references an operating-asset id. Vehicles add model, condition, busy_until, service_until, costs, revenue and insurance deadline; assignments map current staff ids to unique vans. Delivery route contracts add type, place, internal, week_start/week_end and completed; jobs carry vehicle, route and route_week. Internal café work uses ic_cost/ic_revenue via ic_clearing; no cash or external revenue is invented.
+
+### Weekend pop-up (#41)
+
+`data/economy/popup.json` controls weekend rent, transfer minutes/fee, capacity, opening hours, footfall, weekend multiplier, conversion/price elasticity, card fee and checkout capacity/wages. `popup_retail` is a temporary `kind: popup` property; Living never charges monthly rent for it. Mutually exclusive with `popup_cafe`.
+
+Per-company `popup` is lazily initialized as `{active: {}, history: []}` for old saves. Active state carries company entity, exact Saturday start/Sunday end, FIFO return origins per product, prices, day-specific employee assignments, idempotent hourly stamp and actual weekend totals. Physical goods live in `ecommerce.inventory.popup_retail`; transfer preserves weighted average cost and defect ratio. Original storage reserves return capacity. Home moves wait until returned; physical inventory is liquidated once on company closure. Persistent `popup.close` scheduler payload includes company context and weekend start to reject stale callbacks.
+
+Sales use the existing canonical `Ledger` account `revenue`; report field `sales_revenue` aliases that total, never an additional revenue entry. All postings carry `segment: popup`. Counterfactual ShopLane comparisons are report-only and use current marketplace fees, excluding online shipping and returns. Staff assignment overrides other company duties only during assigned weekend opening hours. Stable UI names: `SignPopup`, `PopupQty_<product>`, `PopupStock_<product>`, `PopupTill`, `PopupStaff_<employee>_<weekday>`, `PopupCharge_<index>`.
+
+
+### Industry introductions (#86)
+
+`data/story/side_stories/intro_<industry>.json` defines four real objectives, company/capital-or-era eligibility, mentor/building, optional `guided_event`, timeline/contact reward and unavailable receipt. `met:<npc>` reads the existing NPC meeting receipt. `metric:<SynergyMetrics source><comparison>` reuses actual saved counts, industry stats and functions. `story.side_stories[id].started` controls a ninety-day opportunity expiry; old active receipts acquire the current time lazily. Other-company progress waits for its owning company; closure and skipped/expired steps never award the success reward.
+
+`intro_factory_quality` schedules actual `Manufacturing.plan` slots marked `story_recovery`; repeat choices cannot reserve another. Native subcontract completion carries actual COGS; overtime uses existing materials/wage/yield rules. No synthetic revenue or forced car defect is created. Optional guides use `tutorial.industries[company:industry]` with step/seen/shown/skipped fields; completed steps and explicit skips survive load.
+
+### CityFuture (#99)
+`economy/city_future.json` holds six civic chapter definitions, service scope/name, integer quantity/unit and days, home-currency unit_cost, permitted choices, supplier quality/failure probabilities, municipal appropriation, choice costs and durations. Each service is a real Jobs purchase, with price/paid_cost and delivered_units. `GameState.data.city_future` is lazy: current, chapters keyed 19–24 (entity, started, deadline, contracts, mode, tier, decision, quality, status, review_at, result), expo_awarded, harbor_quality, transition, candidate/elected, brand, peak/crises intervals, option commitments, cards/viewed. Municipal-budget state lives in entities and the same ledger as all other entities; choices cannot award income. Employee options retain original company and staff IDs and can vest once or forfeit. `world/years.json` years 11/12 city_modifiers control storm/peak/crisis duration and demand, transition curves and mayor tax/subsidy/construction multipliers. Existing saves without civic state have all factors equal to one.
+
+
+Trade portfolio integration (#91/#70): `trade`, `trade_active`, and `trade.*` schedules follow the brokerage owner. Pre-registry multi-company saves move the old global brokerage and untagged cargo departures to its recorded entity without changing cash or contracts, and restore the selected company view. Old single-company migration binds actual scheduled departures before any switch.
+## Shop research and fitness (#40)
+`economy/shop_life.json` tunes research duration/cache/premium range, price tiers, personal fees, class times/grace/duration, networking probability/cooldown and opportunity terms. Lazy saved `shop_life` has product research `{product,price,at,until}`, membership auto-renew boolean, paid_until absolute minute, single-class pass boolean, dated class receipts, per-event networking expiry and shipping_until. Fitness fees use `personal_fitness` in Ledger.PERSONAL and CATEGORY_NAMES. Existing hourly Living dispatch checks renewal once; cancellation preserves paid access, insufficient cash disables renewal. Event op `shop_network` delegates real contract, shipping and paid press choices; declined offers create no costs or income. Shared shipping cost applies the finite trial factor only to actual parcel labels. Networking contexts persist the originating `entity`; accepting rejects a closed or different active account while decline remains available. Older events without this field use the current seller.
+
+### #28 van appearance and route art coordinates
+Logistics `van.body_colors` is an array of `{id, name, hex}` choices; `van.parking{x,y}` uses logical Harbor world pixels. Saved `logistics.van.body_color` is optional and defaults to white for old saves. Changing colour requires ownership, never charges cash, and emits world_refresh. CompanyVan uses owner entity name, body tint and untinted detail at 72×36 logical pixels; 8→5px name sizing with ellipsis for extreme names. Map depot/stops/river/bridges use the existing 580×236 route_map logical coordinates; straight-distance legs via painted bridges retain existing scoring.
+
+### #26 device art rendering
+Preferences `high_detail_art` is a boolean defaulting true, saved only in user://settings.cfg. Art clears logical/detail and existence caches and WorldScene static TileSet cache on a change; the live scene rebuilds at the same logical player position/facing. Buildings, metro and vehicle Sprite2D fit physical detail to native dimensions/offsets independently for body/detail/lights. TileSet uses physical 64px atlas cells with TileMapLayer scale 0.25 (fallback 16px/1.0), preserving atlas indices, collisions and navigation coordinates. Missing detail falls back per texture; no assets modified.
+
+### #27 era street and roof decorations
+Building `exterior.roof_props` and filler `roof_props` are arrays of `{sprite, x, y, if}`: logical px relative to facade top-left, existing Cond expression, decorative non-solid wall sprites parented to the facade. District props support the existing `if` condition: `world_year>=3` for port_cranes_far in Riverside back layer across the river, `world_year>=4` for two public decorative ev_charger props in each Shopping Street/Financial. Four roof panels appear from year four. These props never create Energy sites/income or change navigation. Live district rebuilds at the same feet on era change. gen_districts regenerates `_era` entries explicitly and retains named buildings roof data.
+
+
+## Shared governance (#96)
+`Industries` registers `governance` as a service, excluded from sales segments. Optional journal preparation/observation and company registration/transfer hooks keep accounting integrated with the registry. `economy/tax.json` holds fictional VAT/income rates and filing fees, minutes, deadlines, correction risks and penalties. Customer gross sales split into net revenue and `tax_payable`; refunds reverse only proved collected VAT. Personal ecommerce unfiled VAT and refund rights follow business contributions; already-created personal returns stay personal. `tax_service.entities` stores year/period/from/year_from, pending and per-segment pending VAT, bounded-to-original-sale refundable tax, loss carry and returns (amount/fine/due/status/late/pretax_profit/loss_used/loss_carried). `income_tax_payable`, `exp:income_tax` and tax service expenses remain balanced; annual taxable profit adds back its own income-tax expense. Old saves start at load time without rewriting journals.
+
+`economy/governance.json` defines legal options and probabilities, brand weights/decay and insurance policies/limits. `legal_service` stores original company/job cases, fees/terms snapshots, recovery/payment, expires/resolves/relationship_until, sequence and daily cooldown. Jobs have dispute_pause, payment_checked, supplier_checked, ip_checked and client_relationship; overdue paid construction retains CIP and resumes after disputes. Recent same-counterparty cases change subsequent advance-payment terms for 30 days, not NPC story relationships. Scheduled `gov.legal_timeout/result` resolve or auto-settle cases. Earned wages remain payable regardless of defence; IP defence does not create fictitious income.
+
+`insurance_service` stores per-company policies (from/ready/until/paid/active/auto), loss-journal keyed claims (amount/eligible loss/due/status/segment) and legacy cover proved by premium journals. Approved claims create `insurance_receivable` and actual other_income; `gov.insurance_claim` collects it once. Waiting periods prevent retrospective cover; deductibles, limits and exclusions leave downside. Unfunded renewals lapse and resume when funded. Closing a company transfers insurer receivables to the ordinary liquidation collector and cancels service schedules. `brand_service.companies` holds up to 64 decaying events and cached score/components. Current reviews, wages and published news feed recruitment pools, B2B willingness and APR. Tax filing uses `gov.tax_file/timeout`; lazy state preserves old save compatibility.
+
+
+## Original audio and dynamic stems (#97)
+`economy/audio.json` tunes byte budget, fade durations/volumes, low-cash threshold, festival months, crisis categories, district day/night sound ids, building type/id mappings, registered-industry work tracks and seven work-screen feedback mappings. Sound owns runtime crossfade pairs, synchronized stems, bounded-by-session trace output and expiring presentation moods; none is saved economic state. Existing settings.cfg Music/SFX volumes remain authoritative; Ambient routes into SFX. Scene/menu changes clear work contexts, modal closure removes its override, and Web playback waits for pressed touch/mouse/key input. All new files are original synthesized Ogg material recorded in AUDIO_CREDITS.md; artwork and industry scoring stay untouched.
+
+
+## Personal life service (#95)
+
+`npcs/*.json.relationship`: `preferences` gift ids, `stages` [0, friend points, partner points], `personal_story` matching NPC id. Thirty-seven human contacts; abstract business/account senders have no relationship block.
+
+`story/personal/<npc>.json`: `id`, `npc`, exactly three `steps` with relationship `stage` (0/1/2), translated `title`, `detail`, actual `minutes`, `cost` AUD, answer `order` and `choices` (`id`, translated `label`, `correct`). `referral` has `client`, translated scope `detail`, contract `price` AUD, paid supply `cost` AUD and work `minutes`. Completion awards an opportunity, never revenue.
+
+`economy/personal_life.json`: gift prices/preferences rewards, request quality threshold/time limit, monthly social `events` (calendar day/hour/end_hour, fee AUD, duration minutes, contact ids and information), energy per logical pixel/work minute, sleep/rest restoration, fatigue timer factor, stress rates/threshold/decay, illness duration/cooldown in days and recovery fees/minutes.
+
+Saved `personal_life`: energy/stress percentages, continuous work minutes, contacts (`affinity`, `known`, step, originating entity, retired, gift day, Jobs referral id, honesty observations), monthly event receipts and illness/cooldown deadlines in Clock minutes. Lazy initialization keeps old saves neutral. Transient sleeping/resting flags are not saved. Registered as an Industries service; referral accounting uses consulting Segments and Jobs, with actual expenses and deferred collection.
+### Destination opening windows (#109)
+Objective targets may include `npc` alongside `building`. DestinationHours intersects building hours with that NPC schedule, including weekdays and conditional slots, and finds the next actual opening. Queries are read-only; explicit waiting advances Clock normally. No save keys or format changes.
+
+
+### Lease termination (#110)
+Properties tune `notice_days` (30 by default), `min_term_months`, `early_exit_fee_months`, `moving_cost_per_unit`, `moving_minutes_per_unit`, `liquidation_rate`, `damage_per_used_day` and `lease_segment`. `Living.end_lease(property_id, mode, plan)` accepts notice/immediate, a stock move/liquidate choice, staff transfer/dismiss choice, destination and industry jobs cancel/finish choice. Lease records lazily retain deposit/damage and a saved `ending` quote with due/plan/blocked. Old leases infer deposits from existing terms, capped by the entity deposit account. Notice rent is prepaid; regular rent resumes if exit is blocked. Settlement revalidates current obligations and cash, refunds actual held deposits less damage, records moving/severance/cancellation costs and preserves delivered invoices. Stock plus orders moves together, preserving unit cost. Factory raw materials and prepaid arrivals must be liquidated; their schedules are cancelled. Staff workplace overrides persist in saves. Owned hotels and owned residential rent collection continue without leased offices; leased industry operations pause until premises are restored. Home switching remains Blocked by #32: the current residence cannot be ended without a replacement.
+
+
+### Walking adjacency (#111)
+`city/aurelia.json.adjacency` maps district ids to `{neighbor: N|E|S|W}`. Directions use the dominant component of neighbor `map_pos` minus origin `map_pos` (vertical wins ties), and inverse sides must agree. The initial 20 local links use the Gabriel neighborhood of the existing map points: no intermediate district center lies inside an edge's diameter circle. This is an explicit designer-editable graph, not a runtime recomputation. District exits retain `to`, target `spawn`, rectangle and walking minutes, plus `direction`; exactly one exit per canonical neighbor is required. `walk_corridors` are pixel rectangles which carve open passages through north/south block bounds. Eastern pedestrian gutters add painted ground and space without moving facades or existing spawns. Saved scene positions are unchanged; named arrival spawns are corrected to the opposite edge. `tools/qa/map_adjacency_check.py` checks coverage, reciprocal directions, edge placement, painted ground, clearance, paths from metro, opposite target spawns and retrigger risks. The walking diagram uses map_pos; the illustrated map remains available as a separate view.
+
+### Multi-item ecommerce parcels (#113)
+`economy/ecommerce.json` defines combo/quantity probabilities, box grid/height/material cost/dimensions, padding damage and staff policies, dimensional divisor and excess kg rate. Products carry `size:[width,depth,height]`, `weight` (kg), `fragile`. Orders retain legacy `product/qty/unit_price` (primary line) and new `items:[{product,qty,unit_price,cogs?}]`, `total`, `pack:{box,padding,placements:[{item,x,y,rotated}],q,label_ok}`. Old single-line orders are interpreted lazily without deleting keys. Saved pack selection controls postage and damage. Returns apply to the whole basket; one defective line makes the whole returned basket non-resellable.
+
+
+### Work stations and client consulting (#114)
+`economy/workflows.json` holds revision allowance/max rounds, additional revision hours/fee (AUD$), quote multipliers/reputation ceiling, player-wide daily consulting hours, scope chance/extra work/surcharge, acceptance quality and discounted settlement rate. It also tunes service-stage score weight, work base/quality efficiency, wrong-table quality multiplier and reputation gain per rating star. It also defines barista queue size, patience in real seconds, fast/slow tips (AUD$), four three-round `cases` sets (`market`, `finance`, `operations`, `brand`) and `interview_answers` by type and topic. Case `{text, options, answer}` uses an option index except operations, whose answer is an ordered array of option text. All displayed text is extracted for localization.
+`freelance.json.templates[].work_type` chooses the task. New offers save `workflow_version: 2` and a deterministic `scope_draw`. On acceptance their gig lazily stores `workflow` with `stage`, asked topics/knowledge, quality sum/session count, contract fee/hours/revision allowance, revisions used, scope choice, per-project daily hours and final rating. The existing outer gig status/invoice/terms/payment schedule remain authoritative. Old offers and gigs with no workflow keep the old typing/delivery route.
+`careers.daily_freelance_hours` aggregates all projects by saved day string (hours), migrating previous per-project usage lazily. `last_freelance_day` participates in the existing early-rest rule. `manager_ratings` holds score sum/count per job; `shift_counts` holds total shifts by saved day. Job ranks optionally specify `manager_rating` (0..1) and `shifts_per_day`; missing fields preserve existing behavior. Legacy earned shifts retain their promotion eligibility until a new real review exists. Barista station/table queues belong only to the paused minigame, so aborting never pays a partial shift. Energy integration is Blocked until #95 merges; no parallel fatigue state is introduced.
+
+Return-event replacement requirements use `can_replace:{order}`. The predicate checks every basket SKU and full quantity of unreserved stock; the replacement action retains its atomic preflight. Labels state whole-parcel replacement rather than one unit.
+
+### Personal traffic safety (#115)
+`data.traffic_safety` is lazily initialized without changing the ledger. Fields: `injury`, `until`, `startle_until`, `cooldown`, `active_accident`, `policy_until`, `renew`, and `accidents[]`. Each accident carries a stable id, actual speed in px/s, severity, timestamp, liability, insurance-at-impact snapshot, medical bill, health claim, treatment flag, hospital days, medical debt, settlement flag and procedure due minute. The active injury references its accident independently of later glancing contacts. Historical unpaid bills/claims remain addressable by id.
+`economy/traffic_safety.json` owns new speed thresholds, braking, collision bounds, green phase, injury duration, medicine/medical fees, hospital-day range, premium/coverage, liability draw and settlement timing/share. Clock-backed lights and injury/claim deadlines survive saves. Emergency medical payables cannot be waived by saving, purchasing insurance afterward, or opening a different company. Minor medicine needs cash; emergency admission does not. Health claims cover the incurred provider invoice, never more; counterparty compensation covers only its remaining uninsured part. Driver responsibility is a pure quote hook for #94. #96 is currently unmerged; independent seven-day administrative claims do not claim to implement its legal system.

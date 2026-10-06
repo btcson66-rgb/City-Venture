@@ -1,0 +1,107 @@
+{
+	"calendar_1440_calls_ms": 1.183,
+	"completed": true,
+	"coverage": {
+		"industries": [
+			"ecommerce"
+		],
+		"missing_industries": [
+			"manufacturing",
+			"real_estate",
+			"media",
+			"hotel",
+			"automotive",
+			"energy",
+			"international_trade"
+		],
+		"notes": [
+			"Forced orders and staff are saturation fixtures, not normal gameplay.",
+			"Additional company/industry activation requires the upstream gameplay implementations.",
+			"Compressed bytes measure a gzip copy; shipping saves still use JSON."
+		],
+		"playable_companies": 1
+	},
+	"engine": "4.5.1-stable (official)",
+	"errors": [],
+	"options": {
+		"days": 3,
+		"orders": 5000,
+		"out": "/tmp/cv-stress",
+		"seed": 98001,
+		"staff": 50,
+		"wall_seconds": 120
+	},
+	"platform": "Linux",
+	"renderer": "gl_compatibility",
+	"samples": [
+		{
+			"balanced": true,
+			"day": 1,
+			"gzip_bytes": 138077,
+			"journal_entries": 5008,
+			"json_bytes": 3118524,
+			"load_ms": 115.432,
+			"loaded": true,
+			"memory_bytes": 116892398,
+			"order_phases_ms": {
+				"courier_ms": 50.319,
+				"fixture_ms": 0.07,
+				"pack_ms": 117.411,
+				"place_ms": 102.092
+			},
+			"orders": 5000,
+			"orders_ms": 269.898,
+			"save_ms": 120.91,
+			"simulation_ms": 334.069,
+			"staff": 50,
+			"ticks_ms": 64.171
+		},
+		{
+			"balanced": true,
+			"day": 2,
+			"gzip_bytes": 277231,
+			"journal_entries": 10011,
+			"json_bytes": 6321349,
+			"load_ms": 303.266,
+			"loaded": true,
+			"memory_bytes": 172192898,
+			"order_phases_ms": {
+				"courier_ms": 51.132,
+				"fixture_ms": 0.065,
+				"pack_ms": 119.298,
+				"place_ms": 103.405
+			},
+			"orders": 5000,
+			"orders_ms": 273.909,
+			"save_ms": 232.497,
+			"simulation_ms": 335.755,
+			"staff": 50,
+			"ticks_ms": 61.846
+		},
+		{
+			"balanced": true,
+			"day": 3,
+			"gzip_bytes": 441240,
+			"journal_entries": 16230,
+			"json_bytes": 9988240,
+			"load_ms": 434.315,
+			"loaded": true,
+			"memory_bytes": 239015026,
+			"order_phases_ms": {
+				"courier_ms": 54.92,
+				"fixture_ms": 0.06,
+				"pack_ms": 122.02,
+				"place_ms": 106.344
+			},
+			"orders": 5000,
+			"orders_ms": 283.35,
+			"save_ms": 360.793,
+			"simulation_ms": 405.461,
+			"staff": 50,
+			"ticks_ms": 122.111
+		}
+	],
+	"schema": 1,
+	"texture_bytes": null,
+	"wall_ms": 2753.639
+}

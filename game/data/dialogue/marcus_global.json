@@ -1,0 +1,43 @@
+{
+ "id": "marcus_global",
+ "with": "marcus",
+ "nodes": {
+  "start": [
+   {
+    "who": "marcus",
+    "text": "International banking has a one-time {international_fee} company fee. The teller opens it. Overseas payouts remain foreign currency until you choose to convert."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "I will convert after each weekly payout.",
+      "next": "auto"
+     },
+     {
+      "text": "I will keep foreign currency and choose when to convert.",
+      "next": "manual"
+     }
+    ]
+   }
+  ],
+  "auto": [
+   {
+    "who": "marcus",
+    "text": "Enable automatic conversion in Finance. You get home cash sooner, but pay the 1.5% spread and accept that week's quote."
+   }
+  ],
+  "manual": [
+   {
+    "who": "marcus",
+    "text": "Use Finance when you need home cash. Waiting can improve the rate or make it worse; it is not a guaranteed gain."
+   }
+  ]
+ },
+ "on_end": [
+  {
+   "do": "set_flag",
+   "flag": "met_marcus_global"
+  }
+ ]
+}

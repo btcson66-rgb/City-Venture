@@ -2,7 +2,7 @@
  "id": "residential",
  "name": "Residential",
  "size_tiles": [
-  108,
+  166,
   46
  ],
  "music": "day_city",
@@ -12,7 +12,7 @@
    "rect": [
     0,
     0,
-    108,
+    150,
     20
    ]
   },
@@ -21,7 +21,7 @@
    "rect": [
     0,
     20,
-    108,
+    150,
     4
    ]
   },
@@ -30,7 +30,7 @@
    "rect": [
     0,
     24,
-    108,
+    150,
     1
    ]
   },
@@ -39,7 +39,7 @@
    "rect": [
     0,
     25,
-    108,
+    150,
     5
    ]
   },
@@ -48,7 +48,7 @@
    "rect": [
     0,
     27,
-    108,
+    150,
     1
    ],
    "step": 2
@@ -58,7 +58,7 @@
    "rect": [
     0,
     30,
-    108,
+    150,
     1
    ]
   },
@@ -67,7 +67,7 @@
    "rect": [
     0,
     31,
-    108,
+    150,
     3
    ]
   },
@@ -76,7 +76,7 @@
    "rect": [
     0,
     34,
-    108,
+    150,
     7
    ]
   },
@@ -85,7 +85,7 @@
    "rect": [
     0,
     41,
-    108,
+    150,
     1
    ]
   },
@@ -94,7 +94,7 @@
    "rect": [
     0,
     42,
-    108,
+    150,
     4
    ]
   },
@@ -115,13 +115,69 @@
     3,
     5
    ]
+  },
+  {
+   "type": "sidewalk",
+   "rect": [
+    150,
+    0,
+    16,
+    46
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    14,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    44,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    104,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    134,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    152,
+    25,
+    3,
+    5
+   ]
   }
  ],
  "buildings": [
   "maple_court",
   "birch_row",
   "harlow_finch",
-  "lot7"
+  "lot7",
+  "maple_owner_home",
+  "garden_villa"
  ],
  "fillers": [],
  "props": [],
@@ -132,16 +188,43 @@
  },
  "exits": [
   {
-   "id": "west",
+   "id": "walk_shopping_street",
+   "direction": "S",
    "rect": [
-    0,
-    320,
+    2424,
+    720,
+    48,
+    16
+   ],
+   "to": "shopping_street",
+   "spawn": "from_residential",
+   "walk_min": 8
+  },
+  {
+   "id": "walk_old_town",
+   "direction": "E",
+   "rect": [
+    2640,
+    324,
     16,
-    244
+    48
    ],
    "to": "old_town",
    "spawn": "from_residential",
-   "walk_min": 5
+   "walk_min": 7
+  },
+  {
+   "id": "walk_industrial",
+   "direction": "W",
+   "rect": [
+    0,
+    324,
+    16,
+    48
+   ],
+   "to": "industrial",
+   "spawn": "from_residential",
+   "walk_min": 10
   }
  ],
  "spawns": {
@@ -150,8 +233,16 @@
    642
   ],
   "from_old_town": [
-   28,
-   430
+   2616,
+   348
+  ],
+  "from_shopping_street": [
+   2448,
+   696
+  ],
+  "from_industrial": [
+   40,
+   348
   ]
  },
  "bounds": {
@@ -217,5 +308,13 @@
  "traffic_types": [
   "compact",
   "sedan"
+ ],
+ "walk_corridors": [
+  [
+   2400,
+   0,
+   256,
+   736
+  ]
  ]
 }

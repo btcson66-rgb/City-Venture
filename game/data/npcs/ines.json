@@ -1,0 +1,39 @@
+{
+ "id": "ines",
+ "name": "Ines Duarte",
+ "role": "customs officer",
+ "appearance": {
+  "presentation": "feminine",
+  "face": "square",
+  "hair": "bun",
+  "hair_color": "brown",
+  "skin": "s4",
+  "eye_shape": "narrow",
+  "brows": "thick",
+  "mouth": "neutral",
+  "accessory": "none"
+ },
+ "outfit": "uniform_officer",
+ "outfit_tints": {
+  "top": "#273c58",
+  "bottom": "#273c58"
+ },
+ "schedule": [
+  {
+   "days": "mon,tue,wed,thu,fri",
+   "from": "09:00",
+   "to": "16:00",
+   "location": "interior:customs_house",
+   "spot": "officer",
+   "pose": "idle"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [],
+   "conversation": "ines_customs",
+   "action": "customs_guide"
+  }
+ ],
+ "phone_contact": true
+}

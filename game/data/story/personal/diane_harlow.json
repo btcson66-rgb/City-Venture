@@ -1,0 +1,55 @@
+{
+ "id": "personal_diane_harlow",
+ "npc": "diane_harlow",
+ "steps": [
+  {
+   "stage": 0,
+   "title": "Diane Harlow: first-home viewing guide · part 1",
+   "detail": "Diane Harlow asks for a first-home viewing guide. Their evidence contains an unresolved question. What should the first draft do?",
+   "minutes": 45,
+   "cost": 0,
+   "choices": [
+    {
+     "id": "document",
+     "label": "Document the question and ask for evidence",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 1,
+   "title": "Diane Harlow: first-home viewing guide · part 2",
+   "detail": "The first-home viewing guide now has conflicting notes. Diane Harlow wants a version that other people can check. How do you resolve the conflict?",
+   "minutes": 60,
+   "cost": 10,
+   "choices": [
+    {
+     "id": "compare",
+     "label": "Compare sources and record what remains uncertain",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 2,
+   "title": "Diane Harlow: first-home viewing guide · part 3",
+   "detail": "Diane Harlow is ready to introduce a paying client for the first-home viewing guide. The client asks for a promise you cannot verify. What do you put in the handover?",
+   "minutes": 90,
+   "cost": 20,
+   "choices": [
+    {
+     "id": "scope",
+     "label": "State the agreed scope, limits and evidence",
+     "approach": "thorough"
+    }
+   ]
+  }
+ ],
+ "referral": {
+  "client": "Diane Harlow referral",
+  "detail": "A referred client commissions a documented first-home viewing guide. Complete the agreed work; no revenue is earned merely for knowing Diane Harlow.",
+  "price": 540,
+  "cost": 200,
+  "minutes": 240
+ }
+}

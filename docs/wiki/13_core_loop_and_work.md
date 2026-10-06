@@ -244,6 +244,20 @@ Company OS → 營運頁列出所有進貨單。尚未到貨的單可在下單�
 
 Crestline 的撤回／拒絕／過期均可接續；簽約公司關閉則明說原交易無法完成，故事往下走，不把失效當成收款成功。費用及收入平衡另由 #29 評估。逐項稽核與回歸證據見 `evidence/2026-09-30_24/`。
 
+## ShopLane Global (#30)
+
+Nexus Bank opens international banking for a registered company with domestic banking ($150 once). Sales → Overseas saves local-currency prices on the same listings and stock. Pack at the existing table; use international economy or express couriers. Weekly foreign payouts can be kept or converted in Finance, with 1.5% spread and realized exchange gain/loss. See [overseas markets](20_global_markets.md). Story and overseas travel are separate tickets.
+
+## Customs and export chapters (#31)
+
+[Customs and exports](21_customs_and_exports.md) adds actual DDP/DDU declarations and duty to the shared packing/shipping lifecycle, plus Chapters 13–14. The harbor Customs House now opens weekdays; Ines also provides a laptop guide. Failed expansion can be paused honestly without a fictional sale.
+
+## Trade route preview (issue70)
+
+World Map → regional facts → Compare trade route opens an RFQ estimate, not an active industry. See [trade route estimates](22_trade_route_estimates.md) for scope and blocked execution dependencies.
+
+
+
 
 ## 產業框架與分部損益（Implemented，#63）
 
@@ -252,3 +266,57 @@ Crestline 的撤回／拒絕／過期均可接續；簽約公司關閉則明說�
 通用 Jobs 工單記錄客戶、範圍、工作量、交期、價格、Net 0／30／60、訂金及違約罰則。先完成範圍，再交付及開立發票，付款日前留在應收帳款；公司關閉後不再重收。既有商品合約仍使用原協商與扣庫存流程，只共用訂金與發票分錄。
 
 通用 Assets 支援購買、租賃、直線折舊、保養、故障與公司關閉拍賣，殘值為購入價 40–60%。固定資產帳面價值與已簽工單納入銀行擔保額度。物流貨車已在購買時列費用，遷移後不再重複折舊；保留原保險、油耗、維護費與拍賣數字。舊存檔延遲建立新區段，不改既有帳本。
+
+
+## 搬家與生活成本（Implemented，#32）
+
+到 Okafor 租屋行可租舊城區 1A 套房，每月基本房租 780 本國元，庫存容量 200 件；河濱 7C 的基本房租 1250 本國元、容量 600 件。房租依世界年代修正，現金預估與低現金提醒使用同一住處資料。舊城省房租，但去工作地點與商業區多一段路程，仍透過城市路線付出通勤時間。
+
+簽約先支付一個月押金；退原住處可選提前三十天通知，期間仍住原家、付原房租，或付一個月租金的違約金當天離開。押金退還只沖銷資產，不是收入。新遊戲的河濱押金 1250 本國元是抵達前已付的期初資產，保留開場現金 30000 本國元；沒有付款證據的舊存檔不補造押金。第一次搬家服務免費，之後收 150 本國元加每件實際搬運庫存 0.40 本國元。
+
+搬家前先核對各公司在家的庫存、已包裝待取件商品與在途訂單，全部須放得下。搬家同步更新庫存、待交貨地址與退貨地址，保留公司的存貨成本、帳務與所有權。睡覺、醒來、筆電與打包桌以 `Living.home()` 查找；已搬離的住處設備不再免費使用。通知期間若容量或現金不足，保留舊住處，允許處理後重試或取消、退回預約押金，沒有 homeless 或 soft-lock。第一章教學仍固定河濱，教學期間不能搬家。
+
+## Personal property and driving (#94)
+Implemented: rent → personal Maple apartment → Penthouse → Villa; mortgages reuse #65 amortization and market interest/price rules while personal balances remain outside brokerage/company ownership. 20–30% down over 20–30 years, 3% purchase/5% sale fees, taxes, management and upkeep. Move out before rental/sale. Tenant matching uses #65 vacancy formula; rent invoices name the actual tenant, may be unpaid, and collection has a 30-day delay. Tenant exit has 30-day notice. Negative equity needs cash before a sale. Unpaid mortgage interest remains payable; raise cash or sell/rent other property, with no homelessness forced.
+Personal cars share #68 dealer locations and fictional model identities with explicit personal retail prices; buy at Dockside, pay insurance/maintenance/fuel/parking, drive only from the car's district. Peak traffic and parking search can be slower than metro. EV requires an actually open #69 station; metered kWh transfers cash to the operator with grid cost. Furniture changes appearance only; housing invitation capacity and one-hour guest conversations write Timeline messages with no company productivity bonus.
+
+
+### 咖啡館深化（#33）
+`popup_cafe` 是 Shopping Street 的第二間店，使用 `popup_unit`，與零售租約互斥。六款商品各有食材成本與售價；咖啡豆沿用舊存檔的杯數，牛奶、茶葉、食品則分開採購配送。限定飲品僅在指定月份出售，該品項需求增加 15%。兩店的庫存、評分、裝潢、食物執照及報表獨立；員工排班共用，一個班次只能在一家店。
+`cafe_inspection` 每 60–90 天觸發，兩個選擇是花 15 分鐘清潔後檢查，或直接接受現況；忽略通知會在一天後自動檢查。缺貨、浪費、近七日評分與清潔會造成一天改善停業或 $250.00 罰款，停業會消退。超過每週 40 小時的實際工時以 1.5 倍計薪。
+Company OS 的 `CafeDepthConsole` 與第二店內控制台提供菜單、班表、檢查及近 30 天三張圖。毛利使用實際帳目；材料採購當日認列成本，因此補貨日可能呈負值。保留舊咖啡館帳務方法，未改成食材存貨資產。
+
+## #41：多一條銷售通路，並不保證賺錢
+
+快閃店用現有電商庫存做實體成交。來客逐一比較售價與市價，櫃台速度限制每小時成交數；自己的結帳小遊戲表現影響成交率。練習不會產生收入。
+
+每筆成交入公司帳：現金淨額、刷卡費（1.5%）、銷售營收、貨品成本與庫存減少。週末成績單列來客、成交、營收、成本、租金、額外薪資、搬運費、刷卡費與淨利。ShopLane 比較使用相同實際成交數量與售價，加上現行 marketplace 的比例／固定費；尚未計入線上運費及退貨，僅為估算，不入帳。
+
+沒貨或沒人可以等到收攤；重複結算不重複付租金、退貨或入帳。公司關閉取消營業並交由既有清算流程處理全部庫存，不能再退回已清算貨品。
+
+#28：Company OS 物流頁可選六種貨車車身顏色，細節層保持原色；港區 Pier 7 停車位與路線畫面顯示同一車身和車主公司名。字級 8 至 5 px，超長名字以刪節號留在側板內。舊存檔預設白色；出售後不再顯示。路線站點對齊既有 580×236 地圖陸地與街區，跨河仍經橋。
+
+
+## Company governance: tax, disputes, insurance and brand (#96)
+Company OS → Governance combines real activity into five brand components and shows their weights plus loan-rate adjustment. Reviews, published news, crisis outcomes, payment history and current employee conditions affect recruitment, customer willingness and borrowing rates; event effects fade within 90 days. Advertising alone does not buy reputation.
+
+Phone → Tax Filing and City Hall → Permits → Tax Filing provide the same entity-bound service. Customer prices include 5% VAT, payable every two months. Annual company income tax is 20% of pretax profit after accumulated losses. DIY filing uses 240 minutes with a 12% correction risk; an accountant costs AUD 120 and 60 minutes. Corrections offer time or paid assistance and automatically complete with a fee after seven days. Late filing adds one fine and affects credit; old journals are not taxed retroactively. Personal seller returns remain separately reviewable when a company forms.
+
+Actual unpaid customer invoices, overdue paid supplier work, earned wages and completed media/manufacturing IP work can create disputes. Settlement, lawyer letters and court differ in fee, delay, odds, recovery and counterpart advance-payment terms. Ignored cases auto-settle; paid construction is preserved and work resumes. Winning an employer defence still requires earned wages; winning an IP defence does not invent income.
+
+Property, liability and interruption policies charge premiums before losses, wait seven days and reimburse 80% of eligible actual costs less an AUD 150 deductible, capped at AUD 5,000 per 30 days. Fines, investments, routine costs and hypothetical lost sales are excluded. Claims first become receivables and are paid two days later. Vehicle premiums retain their existing terms through the central claims service. Automatic renewal lapses without funds and resumes when funded. Company closure cancels unresolved processes and hands insurer receivables to liquidation.
+## Player feedback guidance (#109)
+Every barista ticket explicitly lists Single shot or Double shot, including flat white. Tutorial cards, objective text, navigation and City Guide share live opening windows. Closed destinations offer an explicit wait action; weekend closures name the actual next opening date. NPC-specific objectives use the person’s scheduled availability. Payment terms badges explain Net 0, Net 30 and Net 60, supplier cash timing, deposits/upfront, MOQ, lead time and AR/AP.
+
+
+## Lease exits (#110)
+Implemented: Phone → Leases, property agents/cowork desks and leased interior exits reach one termination screen. Review notice rent, early fee, damage, deposit return, moving, staff severance and unfinished-job settlement before confirming. Notice keeps access until its deadline; changed obligations retain the lease with an actionable pending exit. Move finished stock and its deliveries/orders together or liquidate unreserved stock. Factory materials have an explicit liquidation choice. Delivered invoices remain collectible. Fixed-premises production, media, energy, hotel bookings, brokerage mandates and new vehicle rentals/dealership sales stop without premises. Owned hotels and residential tenant invoices continue. Blocked: current home cannot end before #32 provides a replacement. Automotive fleet/installed equipment relocation and franchise termination remain separate existing asset/contract flows; this change pauses premises operations and does not erase owned assets.
+
+## Multi-item parcel packing (#113)
+Implemented: baskets reserve every SKU/quantity at one location. The packing table places and rotates each unit on a non-overlapping grid. Box height, footprint, actual weight and dimensional weight determine fit and postage. Fragile goods need padding; shipping damage causes actual return/review flows. Whole-basket refunds restore all undamaged stock and reverse all line COGS. Replacement requires every line before consuming any stock. Staff skill selects fitting/oversized cartons and padding. New `desk_monitor` from `harbor_home_goods` needs a large carton; it uses the existing monitor art with a parcel fallback. B2B contract freight remains the separate existing bulk delivery flow.
+
+
+## 多站點打工與接案（#114）
+Implemented：咖啡師同時處理三位客人，確認／推薦、製作、送至取餐台或指定桌號、清理完成才計分。髒桌可從另一張訂單清理；等待時間決定小費，實際店長評價與完成班數共同決定升職、薪資及每日兩班資格。收銀增加找零及退貨審核，共享空間接待增加會議室衝突，包裹分揀增加破損記錄／隔離，文書增加客訴處理；各環節會影響原有班次收入。
+Implemented：新接案依序訪談、報價及約定修改次數、每日跨案分配最多六小時、選擇加價或吸收追加範圍、交付及修改、驗收／折價結案。市場調查分類資料、財務模型計算、營運流程排序、品牌策略選卡各有不同操作；品質與訪談資訊影響驗收，評價影響後續案源與報價上限。只有驗收或協議折價後才開發票，依原有付款條件收款；沒有執行階段的虛構收入。舊存檔中的既有案件繼續使用原交付流程。
+Blocked：#95 尚未合併，暫沿用實際班次／接案工時與既有提早休息條件；待共用體力系統合併後串接，不建立另一套疲勞系統。範圍變更與修改為三回合資料題，不宣稱能編寫任意真實試算表或品牌文件。

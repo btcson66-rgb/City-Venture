@@ -2,7 +2,7 @@
  "id": "shopping_street",
  "name": "Shopping Street",
  "size_tiles": [
-  90,
+  106,
   44
  ],
  "music": "day_city",
@@ -93,6 +93,33 @@
    "type": "crosswalk_h",
    "rect": [
     62,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "sidewalk",
+   "rect": [
+    90,
+    0,
+    16,
+    44
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    44,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    92,
     25,
     3,
     5
@@ -1221,6 +1248,22 @@
     6
    ],
    "_gen": true
+  },
+  {
+   "sprite": "ev_charger",
+   "x": 100,
+   "y": 348,
+   "if": "world_year>=4",
+   "solid": false,
+   "_era": true
+  },
+  {
+   "sprite": "ev_charger",
+   "x": 180,
+   "y": 348,
+   "if": "world_year>=4",
+   "solid": false,
+   "_era": true
   }
  ],
  "metro": {
@@ -1230,42 +1273,82 @@
  },
  "exits": [
   {
-   "id": "east",
+   "id": "walk_harbor",
+   "direction": "E",
    "rect": [
-    1424,
-    320,
+    1680,
+    324,
     16,
-    244
+    48
    ],
-   "to": "civic_center",
+   "to": "harbor",
+   "spawn": "from_shopping_street",
+   "walk_min": 17
+  },
+  {
+   "id": "walk_residential",
+   "direction": "N",
+   "rect": [
+    1464,
+    0,
+    48,
+    16
+   ],
+   "to": "residential",
    "spawn": "from_shopping_street",
    "walk_min": 8
   },
   {
-   "id": "west",
+   "id": "walk_old_town",
+   "direction": "E",
    "rect": [
-    0,
-    320,
+    1680,
+    504,
     16,
-    244
+    48
    ],
    "to": "old_town",
    "spawn": "from_shopping_street",
-   "walk_min": 6
+   "walk_min": 10
+  },
+  {
+   "id": "walk_industrial",
+   "direction": "W",
+   "rect": [
+    0,
+    324,
+    16,
+    48
+   ],
+   "to": "industrial",
+   "spawn": "from_shopping_street",
+   "walk_min": 8
   }
  ],
  "spawns": {
   "from_civic_center": [
    1400,
-   430
+   390
   ],
   "metro": [
    220,
    642
   ],
   "from_old_town": [
+   1656,
+   390
+  ],
+  "from_harbor": [
+   1656,
+   348
+  ],
+  "from_residential": [
+   1488,
+   40
+  ],
+  "from_industrial": [
    40,
-   430
+   348
   ]
  },
  "bounds": {
@@ -1330,5 +1413,13 @@
   "business_suit",
   "home"
  ],
- "minimap_color": "#8a5a78"
+ "minimap_color": "#8a5a78",
+ "walk_corridors": [
+  [
+   1440,
+   0,
+   256,
+   704
+  ]
+ ]
 }

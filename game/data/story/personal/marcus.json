@@ -1,0 +1,55 @@
+{
+ "id": "personal_marcus",
+ "npc": "marcus",
+ "steps": [
+  {
+   "stage": 0,
+   "title": "Marcus Reed: loan application cash-flow guide · part 1",
+   "detail": "Marcus Reed asks for a loan application cash-flow guide. Their evidence contains an unresolved question. What should the first draft do?",
+   "minutes": 45,
+   "cost": 0,
+   "choices": [
+    {
+     "id": "document",
+     "label": "Document the question and ask for evidence",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 1,
+   "title": "Marcus Reed: loan application cash-flow guide · part 2",
+   "detail": "The loan application cash-flow guide now has conflicting notes. Marcus Reed wants a version that other people can check. How do you resolve the conflict?",
+   "minutes": 60,
+   "cost": 10,
+   "choices": [
+    {
+     "id": "compare",
+     "label": "Compare sources and record what remains uncertain",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 2,
+   "title": "Marcus Reed: loan application cash-flow guide · part 3",
+   "detail": "Marcus Reed is ready to introduce a paying client for the loan application cash-flow guide. The client asks for a promise you cannot verify. What do you put in the handover?",
+   "minutes": 90,
+   "cost": 20,
+   "choices": [
+    {
+     "id": "scope",
+     "label": "State the agreed scope, limits and evidence",
+     "approach": "thorough"
+    }
+   ]
+  }
+ ],
+ "referral": {
+  "client": "Marcus Reed referral",
+  "detail": "A referred client commissions a documented loan application cash-flow guide. Complete the agreed work; no revenue is earned merely for knowing Marcus Reed.",
+  "price": 750,
+  "cost": 270,
+  "minutes": 210
+ }
+}

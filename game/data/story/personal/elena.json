@@ -1,0 +1,55 @@
+{
+ "id": "personal_elena",
+ "npc": "elena",
+ "steps": [
+  {
+   "stage": 0,
+   "title": "Elena Park: founder due-diligence notes · part 1",
+   "detail": "Elena Park asks for a founder due-diligence notes. Their evidence contains an unresolved question. What should the first draft do?",
+   "minutes": 45,
+   "cost": 0,
+   "choices": [
+    {
+     "id": "document",
+     "label": "Document the question and ask for evidence",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 1,
+   "title": "Elena Park: founder due-diligence notes · part 2",
+   "detail": "The founder due-diligence notes now has conflicting notes. Elena Park wants a version that other people can check. How do you resolve the conflict?",
+   "minutes": 60,
+   "cost": 10,
+   "choices": [
+    {
+     "id": "compare",
+     "label": "Compare sources and record what remains uncertain",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 2,
+   "title": "Elena Park: founder due-diligence notes · part 3",
+   "detail": "Elena Park is ready to introduce a paying client for the founder due-diligence notes. The client asks for a promise you cannot verify. What do you put in the handover?",
+   "minutes": 90,
+   "cost": 20,
+   "choices": [
+    {
+     "id": "scope",
+     "label": "State the agreed scope, limits and evidence",
+     "approach": "thorough"
+    }
+   ]
+  }
+ ],
+ "referral": {
+  "client": "Elena Park referral",
+  "detail": "A referred client commissions a documented founder due-diligence notes. Complete the agreed work; no revenue is earned merely for knowing Elena Park.",
+  "price": 555,
+  "cost": 205,
+  "minutes": 180
+ }
+}

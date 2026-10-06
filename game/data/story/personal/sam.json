@@ -1,0 +1,55 @@
+{
+ "id": "personal_sam",
+ "npc": "sam",
+ "steps": [
+  {
+   "stage": 0,
+   "title": "Sam Okoro: fleet customer handover · part 1",
+   "detail": "Sam is documenting a used van for a new fleet customer. A service record shows brake work is due. Which handover note protects the customer?",
+   "minutes": 45,
+   "cost": 0,
+   "choices": [
+    {
+     "id": "document",
+     "label": "Disclose the brake work and ask for a repair quote",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 1,
+   "title": "Sam Okoro: fleet customer handover · part 2",
+   "detail": "Sam notices a fleet brochure promises unlimited uptime, but the rental contract allows maintenance days. What should his corrected guide say?",
+   "minutes": 60,
+   "cost": 10,
+   "choices": [
+    {
+     "id": "compare",
+     "label": "State maintenance days and the replacement process",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 2,
+   "title": "Sam Okoro: fleet customer handover · part 3",
+   "detail": "Sam introduces a large fleet buyer for a paid handover project. The buyer wants every vehicle certified without inspections. What do you agree to deliver?",
+   "minutes": 90,
+   "cost": 20,
+   "choices": [
+    {
+     "id": "scope",
+     "label": "A checked handover pack with inspection exceptions",
+     "approach": "thorough"
+    }
+   ]
+  }
+ ],
+ "referral": {
+  "client": "Sam Okoro referral",
+  "detail": "A referred client commissions a documented fleet customer handover. Complete the agreed work; no revenue is earned merely for knowing Sam Okoro.",
+  "price": 465,
+  "cost": 175,
+  "minutes": 180
+ }
+}

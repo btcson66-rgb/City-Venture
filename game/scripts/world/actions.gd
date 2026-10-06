@@ -16,16 +16,20 @@ static func npc_present(npc_id: String) -> bool:
 ## Short reason shown next to the prompt when an action isn't available right now.
 static func lock_reason(action: String, params: Dictionary) -> String:
 	var req: String = params.get("requires", "")
+	if req.begins_with("home:") and Living.home()!=req.substr(5):return "This belongs to the current tenant. Rent this home at Okafor Lettings first."
 	if req == "desk_access" and not Living.has_desk_access():
 		return "needs a desk pass"
 	if req.begins_with("lease:") and not Living.has_lease(req.substr(6)):
 		return "not your office (yet)" if req == "lease:suite_2b" else "not yours (yet)"
 	match action:
+		"legacy_mentor":
+			return "Choose the mentor ending first." if LegacyBusiness.S()["ending"] != "mentor" else ""
+		"fitness":
+			if params.get("desk", false) and not npc_present("harbor_point"): return "Rosa is at reception weekdays, 06:00–20:00."
 		"cafe_counter":
-			return Cafe.counter_block()
+			return Cafe.in_shop(str(params.get("property","corner_cafe")),Cafe.counter_block)
 		"register_company":
-			if not npc_present("ana"):
-				return "counter unattended"
+			if not npc_present("ana"):return "Nobody at the counter. Registration: Mon–Fri 9:00–17:00."
 		"bank_counter":
 			if not npc_present("sofia"):
 				return "teller closed"
@@ -45,6 +49,9 @@ static func lock_reason(action: String, params: Dictionary) -> String:
 
 static func run(action: String, params: Dictionary, source: Node = null) -> void:
 	var req: String = params.get("requires", "")
+	if req.begins_with("home:") and Living.home()!=req.substr(5):
+		UIRoot.toast("This belongs to the current tenant. Rent this home at Okafor Lettings first.","warn","home")
+		return
 	if req == "desk_access" and not Living.has_desk_access():
 		UIRoot.toast("You need a day pass or a desk plan. Ask at reception.", "warn", "lock")
 		return
@@ -59,7 +66,27 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 	if Industries.run_action(action, params, source):
 		return
 	match action:
+		"city_future":
+			UIRoot.open_modal(CityFutureModal.new())
+		"legacy_mentor":
+			if LegacyBusiness.S()["ending"] == "mentor" and _scene() != null and _scene().scene_id == "nexus_cowork":
+				UIRoot.open_modal(LegacyMentorModal.new())
+			else:
+				UIRoot.toast("Choose the mentor ending first.", "info", "people")
+		"customs_guide":
+			GameState.set_flag("customs_brief_read")
+			StoryEngine.check()
+			UIRoot.open_modal(Help.card("customs"))
+		"market_research":
+			UIRoot.open_modal(ResearchModal.new())
+		"fitness":
+			if params.get("desk", false) and not npc_present("harbor_point"):
+				UIRoot.toast("Rosa is at reception weekdays, 06:00–20:00.", "warn", "people")
+			else: UIRoot.open_modal(FitnessModal.new(bool(params.get("desk", false))))
+		"clinic", "health_insurance":
+			UIRoot.open_modal(TrafficModal.new())
 		"cafe_counter":
+			Cafe.select_shop(str(params.get("property","corner_cafe")))
 			_cafe_counter()
 		"open_company_os":
 			UIRoot.open_modal(CompanyOS.new(params.get("terminal", "laptop")))
@@ -83,20 +110,17 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 		"business_board":
 			UIRoot.open_modal(BusinessBoard.new())
 		"pack_orders":
-			UIRoot.open_modal(PackShipModal.new(str(params.get("location", "riverside_studio"))))
+			UIRoot.open_modal(PackShipModal.new(str(params.get("location", Living.home()))))
 		"dropoff_parcels":
 			if Ecommerce.carried_count() == 0:
 				UIRoot.toast("Nothing to drop off. Pack orders at your packing table and choose 'Carry to PostPoint'.", "info", "parcel")
 			else:
 				UIRoot.open_modal(DropoffModal.new())
 		"register_company":
-			if GameState.company_id() != "":
-				var e: Dictionary = GameState.data["entities"][GameState.company_id()]
-				UIRoot.toast(I18n.t("%s is already registered (%s).") % [e["name"], e.get("registration_no", "")], "info", "civic")
-			elif not npc_present("ana"):
-				UIRoot.toast("Nobody at the counter. Registration: Mon–Fri 9:00–17:00.", "warn", "lock")
-			else:
-				UIRoot.play_dialogue("ana_register", func(): UIRoot.open_modal(RegistrationModal.new()))
+			if not npc_present("ana"):
+				UIRoot.toast("Nobody at the counter. Registration: Mon–Fri 9:00–17:00.","warn","lock")
+			elif GameState.company_id()!="":UIRoot.open_modal(RegistrationModal.new())
+			else:UIRoot.play_dialogue("ana_register",func():UIRoot.open_modal(RegistrationModal.new()))
 		"bank_counter":
 			if not npc_present("sofia"):
 				UIRoot.toast("The teller window is closed.", "warn", "lock")
@@ -108,6 +132,20 @@ static func run(action: String, params: Dictionary, source: Node = null) -> void
 			UIRoot.open_modal(LoanModal.new(false))
 		"lease_office":
 			UIRoot.open_modal(LeaseModal.new("suite_2b"))
+		"personal_assets":
+			UIRoot.open_modal(PersonalAssetsModal.new())
+		"popup_store":
+			UIRoot.open_modal(PopupStoreModal.new())
+		"popup_till":
+			PopupStore.open_till()
+		"logistics_depth":
+			UIRoot.open_modal(LogisticsDepthModal.new())
+		"cafe_depth":
+			UIRoot.open_modal(CafeDepthModal.new(str(params.get("property","corner_cafe"))))
+		"home_letting":
+			UIRoot.open_modal(HomeMoveModal.new())
+		"manage_leases":
+			UIRoot.open_modal(LeaseEndModal.new(str(params.get("property", ""))))
 		"lease_property":
 			UIRoot.open_modal(LeaseModal.new(str(params.get("property", ""))))
 		"cowork_desk":
@@ -194,6 +232,10 @@ static func _look(params: Dictionary) -> void:
 
 
 static func _talk(npc_id: String) -> void:
+	PersonalLife.meet(npc_id)
+	if npc_id == "dr_lin":
+		run("clinic", {})
+		return
 	var def := DataDB.npc(npc_id)
 	for d in def.get("dialogue", []):
 		if Cond.all(d.get("when", [])):

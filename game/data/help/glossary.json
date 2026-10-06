@@ -25,9 +25,9 @@
   "why": "You never pay for goods that don't show up, and the supplier knows the money is there. Useful with a supplier you haven't worked with before."
  },
  "net_terms": {
-  "title": "Payment terms (Net 30 / Net 60)",
-  "what": "The buyer pays the invoice 30 or 60 days after delivery, not on the day they get the goods.",
-  "why": "A big sale can still leave you short of cash for two months. Check the cash forecast before you say yes."
+  "title": "Payment terms (Net 0 / Net 30 / Net 60)",
+  "what": "Net 0 means pay now. Net 30 or Net 60 means pay within 30 or 60 days after delivery or invoicing.",
+  "why": "Longer supplier terms delay your cash outflow, but may cost a higher price or require credit. Customer terms delay your receipts: check your cash forecast before accepting."
  },
  "early_payment": {
   "title": "Early payment discount",
@@ -55,9 +55,9 @@
   "why": "Bills are paid in cash. Plenty of profitable companies still run out of it."
  },
  "foot_traffic": {
-  "title": "Foot traffic and conversion",
-  "what": "Foot traffic is how many people walk past; conversion is the share of them who come in and buy.",
-  "why": "Price and your rating move conversion; flyers bring more people past the door."
+  "title": "Foot traffic",
+  "what": "The number of people passing the shop in an hour. Weekend traffic is higher, but each buyer compares your price with the market.",
+  "why": "Visitors are not guaranteed sales. High prices, slow checkout or no staff can leave the weekend unprofitable."
  },
  "food_waste": {
   "title": "Waste",
@@ -518,5 +518,295 @@
   "title": "Transfer price",
   "what": "The price one of your businesses charges another for goods or services inside the group.",
   "why": "It moves profit between segments, not into the group. The consolidated totals cancel it out, so only real savings versus buying outside count."
+ },
+ "side_stories": {
+  "title": "Side stories",
+  "what": "Short business stories you can accept from Opportunities on your phone.",
+  "why": "Your company and its progress unlock opportunities. Complete the steps to earn contacts; unavailable opportunities end without a reward."
+ },
+ "fx_rate": {
+  "title": "Exchange rate",
+  "what": "A quote tells you how many home dollars one foreign unit is worth. Rates move daily with mean reversion.",
+  "why": "Foreign payouts keep their currency. Check the current rate before converting."
+ },
+ "fx_spread": {
+  "title": "Bank spread",
+  "what": "The bank deducts 1.5% from a foreign payout conversion at the current rate.",
+  "why": "A favorable quote is not the amount you receive: include the spread when planning cash."
+ },
+ "fx_gain_loss": {
+  "title": "Exchange gain and loss",
+  "what": "Foreign receipts retain their historical home-dollar book value until you convert them.",
+  "why": "Conversion records the difference as an exchange gain or loss. A refund needing new foreign currency can also realize a difference."
+ },
+ "international_shipping": {
+  "title": "International shipping",
+  "what": "Economy parcels take 7–14 days; express takes 7–10 days. Freight rises with distance and the shipping index.",
+  "why": "Fast shipping costs more. Overseas parcels cannot use your same-day domestic van."
+ },
+ "overseas_storefront": {
+  "title": "Overseas storefront",
+  "what": "After Chapter 13 opens the markets, register a company, open international banking and set local-currency prices in Company OS.",
+  "why": "Regions share your existing stock and packing table. Sales and payouts use foreign currency until conversion."
+ },
+ "ddp": {
+  "title": "DDP — seller pays duty",
+  "what": "The seller pays destination duty before the parcel leaves. The buyer sees a complete price.",
+  "why": "Lower refusal risk, but duty reduces your margin. Set a price that covers it."
+ },
+ "ddu": {
+  "title": "DDU — buyer pays on arrival",
+  "what": "The buyer pays destination duty when the parcel arrives. You do not prepay it.",
+  "why": "Lower upfront cost, but unexpected charges cause more refusals and return freight."
+ },
+ "tariff_code": {
+  "title": "Tariff classification",
+  "what": "Choose electronics, household goods, textiles or general goods according to the actual product.",
+  "why": "Choosing a lower-rate category does not change the goods: wrong declarations lead to duty correction and a fine."
+ },
+ "duty": {
+  "title": "Import duty",
+  "what": "Destination duty is the declared sale value converted to home dollars, multiplied by the region and product-category rate.",
+  "why": "DDP pays now; DDU asks the buyer on arrival. Include duty and return risk in your margin."
+ },
+ "customs_hold": {
+  "title": "Customs hold",
+  "what": "A wrong tariff code or unpaid DDP duty stops the parcel before international transit.",
+  "why": "Correct documents with a reduced fine and extra delay, pay the full correction now, or withdraw the goods. After 7 unresolved days, the parcel is withdrawn automatically; freight is not refunded."
+ },
+ "trade_terms": {
+  "title": "Trade terms",
+  "what": "EXW: buyer collects. FOB: seller loads the vessel. CIF: seller also pays main freight and required insurance, but risk still passes at loading. DDP: seller covers arrival duty and risk until buyer delivery.",
+  "why": "Who pays and who carries risk are different questions. FOB and CIF apply only to sea transport."
+ },
+ "trade_rfq": {
+  "title": "Request for quotation",
+  "what": "A time-limited estimate of goods, transport, bank fees and risk. Prices are expressed in local currency; the Deal Sheet compares home-dollar costs.",
+  "why": "Compare routes before committing cash. This preview does not place an order; refresh after a quote expires."
+ },
+ "fx_risk": {
+  "title": "Exchange risk",
+  "what": "Foreign receipts change home value when exchange quotes move.",
+  "why": "Compare the cash you will collect with costs already paid in home currency."
+ },
+ "forward_contract": {
+  "title": "Forward contract",
+  "what": "Lock a sale rate for expected foreign receipts, with a fee and refundable collateral.",
+  "why": "A hedge can lose when the foreign currency strengthens; it does not guarantee business profit."
+ },
+ "invoice_currency": {
+  "title": "Home-currency invoices",
+  "what": "Ask the overseas buyer to pay home currency on future distributor contracts.",
+  "why": "The buyer takes exchange risk and may decline or offer a lower price."
+ },
+ "distributor": {
+  "title": "Distributor",
+  "what": "Omar buys a batch at wholesale and owns the customer relationship.",
+  "why": "You receive less per unit but avoid managing the final customers."
+ },
+ "third_party_logistics": {
+  "title": "Overseas warehouse",
+  "what": "Ship stock overseas first, then pay storage and local fulfilment charges.",
+  "why": "You retain retail customers and margin but fund slow stock and returns."
+ },
+ "who_owns_the_customer": {
+  "title": "Who owns the customer",
+  "what": "A distributor owns the customers; a warehouse fulfils orders for your customers.",
+  "why": "Customer ownership changes both margin and who bears unsold-stock risk."
+ },
+ "market_consolidation": {
+  "title": "Market consolidation",
+  "what": "Larger groups buy smaller brands and can sustain price cuts for longer.",
+  "why": "Choose a position from your actual costs and customers; ownership and operating choices are separate."
+ },
+ "niche_vs_scale": {
+  "title": "Niche or scale",
+  "what": "Niche raises price with quality or a paid brand campaign. Scale lowers price and finances more stock.",
+  "why": "Niche reaches fewer buyers with less price sensitivity; scale trades margin and cash for volume."
+ },
+ "employee_ownership": {
+  "title": "Employee ownership",
+  "what": "The board approves a transfer of existing owner shares to employees; no new profit is created.",
+  "why": "At least one current employee is required. The equity journal and founder carrying value reflect the transfer."
+ },
+ "exit_options": {
+  "title": "Exit options",
+  "what": "Keep operating, sell at the current Chapter 12 valuation, share ownership with employees, or mentor with a contract manager.",
+  "why": "Earlier sales cannot pay again. Closed companies create no sale; a founder can still finish the story."
+ },
+ "growth_goals": {
+  "title": "Growth goals and achievements",
+  "what": "Three optional goals rotate after real progress. Locked achievements show hints; unlocked ones retain a dated receipt.",
+  "why": "Use existing business records to pick your next step. Setting a goal aside never fabricates a reward."
+ },
+ "legacy_archetypes": {
+  "title": "Legacy archetypes",
+  "what": "Seven weighted formulas summarize real records: business types, people, trade, innovation, city projects, recovery, assets and recorded work.",
+  "why": "Your main and secondary tendencies describe this saved life, not a score that awards cash."
+ },
+ "next_life": {
+  "title": "New Game+",
+  "what": "Start the next generation or another life in an empty slot. Keep the prior save and inherit only a limited amount of capital.",
+  "why": "The difficulty level lowers starting cash and retail demand. Old businesses and sales never become new-life income."
+ },
+ "capital_routes": {
+  "title": "Ownership routes",
+  "what": "A sale transfers existing shares; a listing issues new equity; staying private retains control. None of these transactions is sales revenue.",
+  "why": "Compare ownership, capital and ongoing obligations before committing."
+ },
+ "ipo_process": {
+  "title": "Public listing",
+  "what": "Two complete profitable years, annual revenue and a clean compliance year lead to a paid audit, three investor questions and share issuance.",
+  "why": "Audit fees are lost on failure; public capital creates disclosure and governance obligations."
+ },
+ "acquisition_integration": {
+  "title": "Acquire and integrate",
+  "what": "An NPC company purchase is an investment with an eight percent systems fee and fourteen days of staff attrition. NPC earnings are not posted to your books.",
+  "why": "Cash or a normal bank loan funds the purchase; a listed company may need a majority board vote."
+ },
+ "home_rent_vs_location": {
+  "title": "Home rent and location",
+  "what": "A cheaper home lowers the rent actually paid, but the route to your job and business takes more travel time. Studio 1A holds 200 units; Riverside holds 600.",
+  "why": "Choose thirty days of notice or pay one month to leave today. Deposits remain your asset, not income; stock and incoming orders must fit."
+ },
+ "personal_asset_costs": {
+  "title": "Personal assets have real costs",
+  "what": "A home carries a mortgage, management, maintenance and tax. A personal car adds insurance, fuel or charging and parking. Furniture changes appearance only.",
+  "why": "Ownership does not improve business output. Keep personal cash for these costs. Rent can be unpaid; resale prices move and fees can leave negative equity."
+ },
+ "labor_cost_ratio": {
+  "title": "Labour cost ratio",
+  "what": "Payroll divided by actual café revenue. Weekly shifts share employees across locations; overtime beyond forty hours costs 1.5 times the hourly wage.",
+  "why": "A busy counter can still lose money when staffing costs exceed customer receipts."
+ },
+ "seasonal_menu": {
+  "title": "Seasonal menu",
+  "what": "The seasonal drink is offered in June, July, August, December, January and February, with fifteen percent more demand for that item.",
+  "why": "Buy its beans, milk and food ingredients before the season; unsupplied drinks cannot be sold."
+ },
+ "health_inspection": {
+  "title": "Health inspection",
+  "what": "Every sixty to ninety days, waste, stockouts, recent ratings and cleaning determine pass, one-day improvement closure or a fine.",
+  "why": "Clean daily for fifteen minutes. Preparing improves cleanliness but cannot erase past service problems."
+ },
+ "second_location": {
+  "title": "Second location",
+  "what": "Pop-up Unit 5 café branch has separate ingredients, fit-out, licence, ratings and daily reports. The company shares suppliers and a weekly staff roster.",
+  "why": "Assigning a worker to one counter removes that same shift from the other counter; an empty shift stays closed unless the owner works."
+ },
+ "route_contract": {
+  "title": "Route contract",
+  "what": "Complete a fixed number of delivery trips each week for ninety days. Negotiate a per-trip fee; missed external-client trips incur a penalty.",
+  "why": "Fees are earned only after driving. Internal café transfers cancel in company totals and never create external sales."
+ },
+ "vehicle_condition": {
+  "title": "Vehicle condition",
+  "what": "Mileage wears a vehicle down. Lower condition raises breakdown probability, delays a trip, reduces its fee and incurs towing and repairs.",
+  "why": "Compare used and new vehicles by purchase price, fuel consumption and condition."
+ },
+ "preventive_maintenance": {
+  "title": "Preventive maintenance",
+  "what": "A paid half-day service blocks that vehicle and restores its condition to ninety.",
+  "why": "Assign another available vehicle while maintenance is underway; neither drivers nor parcel deliveries can use a busy van."
+ },
+ "cost_per_km": {
+  "title": "Cost per kilometre",
+  "what": "Compare each vehicle's actual fees, fuel, service, insurance and depreciation per kilometre.",
+  "why": "The displayed vehicle margin excludes driver wages and the original expensed van purchase; company profit includes those costs."
+ },
+ "popup_store": {
+  "title": "Weekend pop-up",
+  "what": "A temporary weekend shop for stock you already own. Reserve at least a day before Saturday.",
+  "why": "Rent covers two days, but sales need stock and checkout staff. Unsold goods return to their original storage Sunday at 18:00."
+ },
+ "channel_margin": {
+  "title": "Channel margin",
+  "what": "Compare actual revenue after stock cost, card fees, rent, wages and transport with the same sold units using ShopLane fees.",
+  "why": "The online figure is an estimate, excludes shipping and returns, and does not assume the entire batch will sell."
+ },
+ "city_future": {
+  "title": "Civic partnership",
+  "what": "Municipal partnerships pay actual supplier invoices from a separate authorized budget. They do not award company revenue.",
+  "why": "Supplier delivery can fail. Premium contracts cost more and reduce risk without guaranteeing success."
+ },
+ "macro_cycle": {
+  "title": "Market cycle",
+  "what": "Seeded interest rates and demand change daily. Scripted eras add their effects to the cycle.",
+  "why": "Compare cash buffers and costs before expanding. Shocks expire; prices and wages can rise or fall."
+ },
+ "market_competition": {
+  "title": "Market competition",
+  "what": "Rivals adjust prices, quality, advertising and locations each week. Market shares include your business and other city firms.",
+  "why": "Your pricing and quality affect demand. Matching a competing job offer raises payroll; letting staff leave reduces capacity."
+ },
+ "market_research": {
+  "title": "Competitor research",
+  "what": "Compare real shelf prices, packaging and warranty before setting your price.",
+  "why": "A premium brand can charge more. Your reviews and margin matter as much as being cheaper."
+ },
+ "networking": {
+  "title": "Business connections",
+  "what": "A gym class can introduce a buyer, courier or local reporter. Each opportunity has terms you can accept or decline.",
+  "why": "Connections can lead to real work. Membership and advertising cost money; an introduction never creates automatic income."
+ },
+ "tax_filing": {
+  "title": "VAT and income tax",
+  "what": "VAT is collected within customer prices and paid every two months. Company income tax applies to annual pretax profit after carried losses.",
+  "why": "Collected tax is owed money, not revenue. Filing yourself uses time and risks a form correction; an accountant charges a fee for accurate filing."
+ },
+ "legal_disputes": {
+  "title": "Legal disputes",
+  "what": "Settlement, a lawyer letter and court have different costs, delays, recovery chances and client consequences.",
+  "why": "Claims settle actual invoices, paid contracts, earned wages or completed IP work. Ignored disputes automatically settle after 14 days; no claim creates a new sale."
+ },
+ "company_insurance": {
+  "title": "Company insurance",
+  "what": "Property, liability and interruption policies collect premiums before losses, wait 7 days and reimburse eligible actual crisis costs.",
+  "why": "A deductible and policy limit leave real downside. Claims are receivables until paid; fines, ordinary investment and hypothetical lost sales are not insured."
+ },
+ "company_brand": {
+  "title": "Company brand",
+  "what": "One score combines reviews, published news, crisis handling, on-time payments and employee treatment.",
+  "why": "Good standing changes recruitment, B2B willingness and loan pricing. Short-lived event effects decay; paying for ads does not buy reputation."
+ },
+ "personal_energy": {
+  "title": "Personal energy",
+  "what": "Movement and hands-on work use energy. Sleep and breaks restore it. Below 30%, timed tasks offer less reaction time; no points are directly deducted.",
+  "why": "Rest before precise work. You can sleep early when energy is low; work is never permanently blocked."
+ },
+ "personal_stress": {
+  "title": "Personal stress",
+  "what": "Debt, unresolved crises and continuous work raise stress. Sleep, breaks, city events and Harbor Point classes relieve it.",
+  "why": "At 85%, illness offers a free 480-minute recovery day or an 80 AUD, 90-minute visit. It also expires within 3 days."
+ },
+ "personal_relationship": {
+  "title": "Personal relationships",
+  "what": "Affinity ranges from 0 to 100. Acquaintance, friend and partner stages unlock three personal requests. Gifts have individual preferences.",
+  "why": "Relationships introduce paid work and useful information. They never increase demand, scores or profit by themselves."
+ },
+ "accounts_payable": {
+  "title": "Accounts payable",
+  "what": "Supplier invoices you owe but have not paid yet.",
+  "why": "Buying on terms leaves cash in your bank today, but the invoice still falls due. Reserve enough cash for it."
+ },
+ "phone_replies": {
+  "title": "Reply deadlines",
+  "what": "Time-limited messages resolve their saved default when the deadline passes. Read the outcome in the same thread.",
+  "why": "A missed reply must not stall a task. Review Tasks or book a new meeting from Contacts if the original action is unavailable."
+ },
+ "grid_packing": {
+  "title": "Grid packing and postage",
+  "what": "Select an item, rotate it if needed, then click a free grid cell. Every item must fit before sealing.",
+  "why": "Larger boxes cost more in materials and dimensional postage. Fragile goods need padding."
+ },
+ "freelance_stages": {
+  "title": "Interview, scope and acceptance",
+  "what": "Use the client's brief. Research, financial models, operating processes and brand strategy each need different work.",
+  "why": "Your work quality affects acceptance. A session uses real consulting hours; no payment is earned before acceptance."
+ },
+ "personal_health": {
+  "title": "Preexisting health coverage",
+  "what": "A policy covers most medical costs only if active before the collision. Unpaid emergency bills remain debts.",
+  "why": "Buy coverage before taking risks. A new policy cannot reimburse an earlier accident; cancelling renewal does not refund the current premium."
  }
 }

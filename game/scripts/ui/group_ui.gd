@@ -7,10 +7,11 @@ extends RefCounted
 static func render(os) -> void:
 	var c: VBoxContainer = os.content
 	var primary := [false]
+	HoldingUI.render(os,primary)
 	os._section_tip("Group", "transfer_price")
 	c.add_child(UIK.wrap(I18n.t("Your businesses can trade with each other. Set the transfer price; both sides show in Segments and the group total never counts it twice."), 8, Art.C_MUTED, 450))
 	var offers := GroupJobs.offered()
-	if offers.is_empty():
+	if offers.is_empty() and not primary[0]:
 		var seg := UIK.button(I18n.t("Review segment results"), os._set_tab.bind("segments"), "primary")
 		seg.name = "GroupNext"
 		c.add_child(seg)

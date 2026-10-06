@@ -1,0 +1,55 @@
+{
+ "id": "personal_landlord",
+ "npc": "landlord",
+ "steps": [
+  {
+   "stage": 0,
+   "title": "Mr. Okafor (landlord): tenant maintenance handbook · part 1",
+   "detail": "Mr. Okafor (landlord) asks for a tenant maintenance handbook. Their evidence contains an unresolved question. What should the first draft do?",
+   "minutes": 45,
+   "cost": 0,
+   "choices": [
+    {
+     "id": "document",
+     "label": "Document the question and ask for evidence",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 1,
+   "title": "Mr. Okafor (landlord): tenant maintenance handbook · part 2",
+   "detail": "The tenant maintenance handbook now has conflicting notes. Mr. Okafor (landlord) wants a version that other people can check. How do you resolve the conflict?",
+   "minutes": 60,
+   "cost": 10,
+   "choices": [
+    {
+     "id": "compare",
+     "label": "Compare sources and record what remains uncertain",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 2,
+   "title": "Mr. Okafor (landlord): tenant maintenance handbook · part 3",
+   "detail": "Mr. Okafor (landlord) is ready to introduce a paying client for the tenant maintenance handbook. The client asks for a promise you cannot verify. What do you put in the handover?",
+   "minutes": 90,
+   "cost": 20,
+   "choices": [
+    {
+     "id": "scope",
+     "label": "State the agreed scope, limits and evidence",
+     "approach": "thorough"
+    }
+   ]
+  }
+ ],
+ "referral": {
+  "client": "Mr. Okafor (landlord) referral",
+  "detail": "A referred client commissions a documented tenant maintenance handbook. Complete the agreed work; no revenue is earned merely for knowing Mr. Okafor (landlord).",
+  "price": 675,
+  "cost": 245,
+  "minutes": 240
+ }
+}

@@ -26,7 +26,7 @@ static func on_hour(t: int, h: int) -> void:
 			continue
 		if not Cond.all(tr.get("conditions", [])):
 			continue
-		if GameState.randf() >= float(tr.get("chance", 0.0)) / 2.0:
+		if GameState.randf() >= clampf(float(tr.get("chance", 0.0)) * Replay.number("event_frequency", 1.0) / 2.0, 0.0, 1.0):
 			continue
 		var ctx := bind(d)
 		if ctx.is_empty() and not d.get("bind", {}).is_empty():
@@ -116,7 +116,7 @@ static func trigger(id: String, ctx := {}) -> Dictionary:
 	if pres.get("channel", "phone") == "phone" and pres.get("speaker", "") != "":
 		var lines: Array = pres.get("lines", [])
 		if not lines.is_empty():
-			GameState.add_message(pres["speaker"], fill(str(lines[0]), ctx))
+			GameState.add_message(pres["speaker"], fill(str(lines[0]), ctx), {"decision": inst["iid"]})
 	EventBus.decision_requested.emit(inst)
 	return inst
 
@@ -137,6 +137,7 @@ static func fill(text: String, ctx: Dictionary) -> String:
 		text = text.replace("{" + str(k) + "}", I18n.t(v) if v is String else str(v))
 	text = text.replace("{company}", GameState.business_display_name())
 	text = text.replace("{player}", str(GameState.data["player"]["name"]))
+	text = text.replace("{international_fee}", Fmt.money(float(GlobalMarket.cfg().get("bank_open_fee", 150))))
 	return text
 
 
@@ -175,6 +176,7 @@ static func choose(iid: String, choice_id: String) -> Dictionary:
 			return {"ok": false, "error": r.get("error", "That didn't work.")}
 	S()["queue"].erase(inst)
 	S()["history"].append({"iid": iid, "id": inst["id"], "t": Clock.now(), "choice": choice_id})
+	GameState.timeline(I18n.t("Decision: %s — %s") % [fill(str(d.get("presentation", {}).get("title", inst["id"])), inst["ctx"]), fill(str(choice.get("label", choice_id)), inst["ctx"])], "crisis", {"art":"events/" + str(inst["id"])})
 	EventBus.world_refresh.emit()
 	return {"ok": true, "results": results, "outcome": fill(str(choice.get("outcome", "")), inst["ctx"])}
 

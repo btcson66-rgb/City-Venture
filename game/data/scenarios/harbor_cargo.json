@@ -1,0 +1,20 @@
+{
+ "id": "harbor_cargo",
+ "name": "Harbor small cargo",
+ "description": "One used van and two accepted delivery contracts. Complete routes on time and keep fuel costs in check.",
+ "goal": "Complete profitable delivery runs.",
+ "initial": {
+  "cash": 28000,
+  "company": "Harbor Cargo",
+  "type": "logistics",
+  "capital": 20000,
+  "van": true,
+  "contracts": 2
+ },
+ "win": {
+  "runs": 45,
+  "revenue": 8000,
+  "cash": 500
+ },
+ "limit_days": 120
+}

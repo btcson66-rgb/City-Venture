@@ -21,7 +21,7 @@ static func segment_tag() -> String: return "energy"
 static func source(type := "energy", id := "") -> Dictionary: return {"type":type, "id":id, "segment":"energy"}
 static func error(text: String) -> Dictionary: return {"ok":false, "error":I18n.t(text)}
 static func is_running() -> bool: return GameState.has_game() and bool(S()["active"])
-static func valid() -> bool: return is_running() and Assets._valid_entity(entity())
+static func valid() -> bool: return is_running() and Assets._valid_entity(entity()) and Living.has_lease("helio_warehouse")
 static func _id(prefix: String) -> String:
 	var id := prefix + str(S()["seq"])
 	S()["seq"] = int(S()["seq"]) + 1
@@ -181,7 +181,7 @@ static func refresh() -> void:
 		if lead["kind"] != "own" and lead["status"] == "open" and Clock.now() > int(lead["expires"]): lead["status"] = "expired"
 		if lead["status"] in ["expired", "declined", "won"] and Clock.now() > int(lead["expires"]) + 28 * Clock.DAY: S()["leads"].erase(id)
 	var count := int(cfg()["weekly_leads"]) + GameState.rng.randi_range(-int(cfg()["weekly_leads_spread"]), int(cfg()["weekly_leads_spread"])) + (1 if float(S()["reputation"]) >= 0.7 else 0)
-	for n in count: _new_lead()
+	for n in maxi(0, roundi(ceili(count*CityFuture.demand_factor("energy")) * Industries.market_demand("energy"))): _new_lead()
 	_own_leads()
 static func _new_lead() -> void:
 	var kinds: Dictionary = cfg()["roof_kinds"]
@@ -398,7 +398,7 @@ static func resolve_claim(id: String, honour: bool, markup := 1.0) -> Dictionary
 	var cost := snappedf(float(claim["cost"]) * markup, 0.01)
 	if honour:
 		var from := "cash" if Ledger.cash(entity()) >= cost else "accounts_payable"
-		Ledger.expense(entity(), "maintenance", cost, I18n.t("Warranty repair: %s") % claim["client"], source("warranty", claim["install"]), from)
+		Ledger.expense(entity(), "maintenance", cost, I18n.t("Warranty repair: %s") % claim["client"], Insurance.loss_source(source("warranty", claim["install"]),"property"), from)
 		claim["status"] = "repaired"
 		claim["paid"] = cost
 		_reputation(0.01)
@@ -440,7 +440,7 @@ static func quota_left(program: String) -> float:
 	return maxf(0.0, quota_total(program) - float(sb["used" if program == "install" else "charger_used"]))
 static func grant_amount(program: String, price: float) -> float:
 	var s: Dictionary = cfg()["subsidy"]
-	var rate := float(s["rate" if program == "install" else "charger_rate"]) * mod("subsidy")
+	var rate := float(s["rate" if program == "install" else "charger_rate"]) * mod("subsidy") * CityFuture.policy_factor("subsidy")
 	return snappedf(minf(float(s["cap" if program == "install" else "charger_cap"]), price * rate), 0.01)
 static func subsidy_block(program: String) -> String:
 	if int(Clock.date()["month"]) > int(cfg()["subsidy"]["season_last_month"]): return "This year's subsidy applications are closed."
@@ -626,7 +626,7 @@ static func demand_kwh(site: Dictionary, weather_kind := "clear") -> float:
 	var c: Dictionary = cfg()["charging"]
 	var t: Dictionary = c["types"][site["type"]]
 	var base := float(t["ports"]) * float(t["kwh_port_day"])
-	var d := base * adoption() / float(cfg()["ev"]["adoption_ref"]) * float(c["districts"].get(site["district"], 1.0)) * util_factor(float(site["price"])) * float(c["weather_factor"][weather_kind]) * network_mult()
+	var d := base * adoption() / float(cfg()["ev"]["adoption_ref"]) * float(c["districts"].get(site["district"], 1.0)) * util_factor(float(site["price"])) * float(c["weather_factor"][weather_kind]) * network_mult() * Industries.market_demand("energy")
 	return minf(d, float(t["ports"]) * float(t["kw"]) * 24.0 * float(c["util_cap"]))
 static func grid_cost() -> float:
 	var t: Dictionary = cfg()["tariff"]

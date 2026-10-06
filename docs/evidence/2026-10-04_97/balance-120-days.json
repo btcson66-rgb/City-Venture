@@ -1,0 +1,208 @@
+{
+	"days": 120,
+	"failures": [],
+	"opening_capital_aud": 20000,
+	"runs": [
+		{
+			"balanced": true,
+			"cash_aud": 28440.0,
+			"days": 120,
+			"disputes": 0,
+			"filings": 2,
+			"profit_aud": 8160.0,
+			"seed": 96001,
+			"strategy": "careful",
+			"tax_payable_aud": 280.0,
+			"trades": 120
+		},
+		{
+			"balanced": true,
+			"cash_aud": 27889.5,
+			"days": 120,
+			"disputes": 3,
+			"filings": 2,
+			"profit_aud": 7819.5,
+			"seed": 96002,
+			"strategy": "careful",
+			"tax_payable_aud": 280.0,
+			"trades": 120
+		},
+		{
+			"balanced": true,
+			"cash_aud": 28213.0,
+			"days": 120,
+			"disputes": 2,
+			"filings": 2,
+			"profit_aud": 7933.0,
+			"seed": 96003,
+			"strategy": "careful",
+			"tax_payable_aud": 280.0,
+			"trades": 120
+		},
+		{
+			"balanced": true,
+			"cash_aud": 28213.0,
+			"days": 120,
+			"disputes": 2,
+			"filings": 2,
+			"profit_aud": 7933.0,
+			"seed": 96004,
+			"strategy": "careful",
+			"tax_payable_aud": 280.0,
+			"trades": 120
+		},
+		{
+			"balanced": true,
+			"cash_aud": 28099.5,
+			"days": 120,
+			"disputes": 3,
+			"filings": 2,
+			"profit_aud": 7819.5,
+			"seed": 96005,
+			"strategy": "careful",
+			"tax_payable_aud": 280.0,
+			"trades": 120
+		},
+		{
+			"balanced": true,
+			"cash_aud": 44320.0,
+			"days": 120,
+			"disputes": 0,
+			"filings": 2,
+			"profit_aud": 23760.0,
+			"seed": 96001,
+			"strategy": "normal",
+			"tax_payable_aud": 560.0,
+			"trades": 120
+		},
+		{
+			"balanced": true,
+			"cash_aud": 43339.0,
+			"days": 120,
+			"disputes": 3,
+			"filings": 2,
+			"profit_aud": 23199.0,
+			"seed": 96002,
+			"strategy": "normal",
+			"tax_payable_aud": 560.0,
+			"trades": 120
+		},
+		{
+			"balanced": true,
+			"cash_aud": 43946.0,
+			"days": 120,
+			"disputes": 2,
+			"filings": 2,
+			"profit_aud": 23386.0,
+			"seed": 96003,
+			"strategy": "normal",
+			"tax_payable_aud": 560.0,
+			"trades": 120
+		},
+		{
+			"balanced": true,
+			"cash_aud": 43946.0,
+			"days": 120,
+			"disputes": 2,
+			"filings": 2,
+			"profit_aud": 23386.0,
+			"seed": 96004,
+			"strategy": "normal",
+			"tax_payable_aud": 560.0,
+			"trades": 120
+		},
+		{
+			"balanced": true,
+			"cash_aud": 43759.0,
+			"days": 120,
+			"disputes": 3,
+			"filings": 2,
+			"profit_aud": 23199.0,
+			"seed": 96005,
+			"strategy": "normal",
+			"tax_payable_aud": 560.0,
+			"trades": 120
+		},
+		{
+			"balanced": true,
+			"cash_aud": 12800.0,
+			"days": 120,
+			"disputes": 20,
+			"filings": 0,
+			"profit_aud": -8156.0,
+			"seed": 96001,
+			"strategy": "reckless",
+			"tax_payable_aud": 3056.0,
+			"trades": 120
+		},
+		{
+			"balanced": true,
+			"cash_aud": 4700.0,
+			"days": 120,
+			"disputes": 30,
+			"filings": 0,
+			"profit_aud": -15206.0,
+			"seed": 96002,
+			"strategy": "reckless",
+			"tax_payable_aud": 3056.0,
+			"trades": 120
+		},
+		{
+			"balanced": true,
+			"cash_aud": 13025.0,
+			"days": 120,
+			"disputes": 17,
+			"filings": 0,
+			"profit_aud": -7931.0,
+			"seed": 96003,
+			"strategy": "reckless",
+			"tax_payable_aud": 3056.0,
+			"trades": 120
+		},
+		{
+			"balanced": true,
+			"cash_aud": 5975.0,
+			"days": 120,
+			"disputes": 27,
+			"filings": 0,
+			"profit_aud": -13931.0,
+			"seed": 96004,
+			"strategy": "reckless",
+			"tax_payable_aud": 3056.0,
+			"trades": 120
+		},
+		{
+			"balanced": true,
+			"cash_aud": 12275.0,
+			"days": 120,
+			"disputes": 20,
+			"filings": 0,
+			"profit_aud": -9206.0,
+			"seed": 96005,
+			"strategy": "reckless",
+			"tax_payable_aud": 3056.0,
+			"trades": 120
+		}
+	],
+	"scope": "Paid service Jobs with real work costs, disputes and filing. Explicit 2.5% or 20% nonpayment risk means observed positive samples are not a guarantee.",
+	"strategies": {
+		"careful": {
+			"average_profit_aud": 7933.0,
+			"losing_seeds": 0,
+			"max_profit_aud": 8160.0,
+			"min_profit_aud": 7819.5
+		},
+		"normal": {
+			"average_profit_aud": 23386.0,
+			"losing_seeds": 0,
+			"max_profit_aud": 23760.0,
+			"min_profit_aud": 23199.0
+		},
+		"reckless": {
+			"average_profit_aud": -10886.0,
+			"losing_seeds": 5,
+			"max_profit_aud": -7931.0,
+			"min_profit_aud": -15206.0
+		}
+	}
+}

@@ -17,6 +17,9 @@ func build() -> void:
 	body.add_child(UIK.kv("Hot desk — monthly", Fmt.money0(float(property.get("monthly_rent", 350))), Art.C_WHITE))
 	if Living.has_lease("nexus_cowork_desk"):
 		body.add_child(UIK.label("You have a monthly desk.", 8, Art.C_GREEN, true))
+		var manage := UIK.button("Manage lease", func(): close(); UIRoot.open_modal(LeaseEndModal.new("nexus_cowork_desk")), "primary")
+		manage.name = "ManageLease_nexus_cowork_desk"
+		body.add_child(manage)
 	elif Living.has_desk_access():
 		body.add_child(UIK.label("Your day pass is active today.", 8, Art.C_GREEN, true))
 	else:

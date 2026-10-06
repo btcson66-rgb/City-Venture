@@ -1,0 +1,157 @@
+{
+ "audio_budget_bytes": 25000000,
+ "crossfade_seconds": 1.2,
+ "ambience_db": -14.0,
+ "layer_fade_seconds": 0.8,
+ "music_db": -7.0,
+ "context_check_seconds": 1.0,
+ "cash_low": 1000.0,
+ "districts": {
+  "airport": {
+   "day": "airport_day",
+   "night": "airport_night"
+  },
+  "civic_center": {
+   "day": "civic_center_day",
+   "night": "civic_center_night"
+  },
+  "financial": {
+   "day": "financial_day",
+   "night": "financial_night"
+  },
+  "harbor": {
+   "day": "harbor_day",
+   "night": "harbor_night"
+  },
+  "industrial": {
+   "day": "industrial_day",
+   "night": "industrial_night"
+  },
+  "luxury_heights": {
+   "day": "luxury_heights_day",
+   "night": "luxury_heights_night"
+  },
+  "old_town": {
+   "day": "old_town_day",
+   "night": "old_town_night"
+  },
+  "residential": {
+   "day": "residential_day",
+   "night": "residential_night"
+  },
+  "riverside": {
+   "day": "riverside_day",
+   "night": "riverside_night"
+  },
+  "shopping_street": {
+   "day": "shopping_street_day",
+   "night": "shopping_street_night"
+  },
+  "startup_hub": {
+   "day": "startup_hub_day",
+   "night": "startup_hub_night"
+  },
+  "university": {
+   "day": "university_day",
+   "night": "university_night"
+  }
+ },
+ "room_types": {
+  "cafe": "cafe",
+  "own_cafe": "cafe",
+  "restaurant": "cafe",
+  "hotel": "hotel",
+  "warehouse": "factory",
+  "office": "office",
+  "office_to_let": "office",
+  "coworking": "office",
+  "bank": "office",
+  "civic": "office",
+  "customs": "office",
+  "retail": "office",
+  "retail_space": "office",
+  "parcel": "factory",
+  "van_dealer": "factory",
+  "gym": "office",
+  "home": "office",
+  "flat_to_let": "office",
+  "lettings": "office",
+  "public": "office"
+ },
+ "room_ids": {
+  "unit12_factory": "factory",
+  "helio_warehouse": "factory",
+  "kessler_precision": "factory"
+ },
+ "tracks": [
+  "founders",
+  "consulting",
+  "saas_work",
+  "cafe_work",
+  "logistics_work",
+  "factory_work",
+  "property_work",
+  "media_work",
+  "hotel_work",
+  "energy_work",
+  "auto_work",
+  "crisis",
+  "roadshow",
+  "victory",
+  "city_night",
+  "season_festival"
+ ],
+ "work_tracks": {
+  "ecommerce": "founders",
+  "consulting": "consulting",
+  "saas": "saas_work",
+  "cafe": "cafe_work",
+  "logistics": "logistics_work",
+  "manufacturing": "factory_work",
+  "real_estate": "property_work",
+  "media": "media_work",
+  "hotel": "hotel_work",
+  "energy": "energy_work",
+  "automotive": "auto_work"
+ },
+ "building_tracks": {
+  "cafe": "cafe_work",
+  "own_cafe": "cafe_work",
+  "restaurant": "cafe_work",
+  "hotel": "hotel_work",
+  "warehouse": "factory_work",
+  "van_dealer": "auto_work"
+ },
+ "feedback": {
+  "manufacturing_ui": "line_planner",
+  "real_estate_ui": "matchmaker",
+  "media_ui": "campaign_mixer",
+  "creative_pitch": "creative_pitch",
+  "hotel_ui": "rate_board",
+  "auction_game": "auction",
+  "energy_ui": "roof_survey"
+ },
+ "festival_months": [
+  4,
+  12
+ ],
+ "crisis_categories": [
+  "supply",
+  "finance",
+  "compliance",
+  "customer",
+  "staff"
+ ],
+ "building_track_ids": {
+  "unit12_factory": "factory_work",
+  "kessler_precision": "factory_work",
+  "helio_warehouse": "energy_work",
+  "pier7_warehouse": "logistics_work",
+  "campus_radio": "media_work",
+  "the_aster": "hotel_work",
+  "skyline_grand": "hotel_work",
+  "lot7": "auto_work",
+  "aurelia_auto_auction": "auto_work",
+  "dockside_motors": "auto_work"
+ }
+}

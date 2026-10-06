@@ -1,0 +1,27 @@
+{
+ "id": "rival_owner_civic",
+ "with": "rival_owner",
+ "start": "start",
+ "nodes": {
+  "start": [
+   {
+    "who": "rival_owner",
+    "text": "We compete for the same contracts and graduates. A secret favor would disqualify your bid; compete in the open."
+   },
+   {
+    "who": "player",
+    "choices": [
+     {
+      "text": "I will review the proposal and actual costs.",
+      "next": "end"
+     },
+     {
+      "text": "I will participate through a city partnership.",
+      "next": "end"
+     }
+    ]
+   }
+  ],
+  "end": []
+ }
+}

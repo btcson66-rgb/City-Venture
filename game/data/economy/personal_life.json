@@ -1,0 +1,197 @@
+{
+ "friend": 30,
+ "partner": 60,
+ "request_affinity": 10,
+ "request_quality": 0.67,
+ "preferred_gift_affinity": 6,
+ "other_gift_affinity": 1,
+ "honesty_affinity": 3,
+ "event_affinity": 8,
+ "gift_minutes": 15,
+ "request_round_seconds": 30,
+ "low_energy": 30,
+ "fatigue_timer_multiplier": 0.6,
+ "energy_per_pixel": 0.0008,
+ "energy_per_work_minute": 0.055,
+ "continuous_work_minutes": 360,
+ "work_stress_per_minute": 0.035,
+ "rest_energy_per_minute": 0.04,
+ "sleep_energy_per_minute": 0.2,
+ "sleep_stress_relief": 18,
+ "social_stress_relief": 12,
+ "break_stress_relief": 10,
+ "gym_stress_relief": 15,
+ "medical_fee": 80,
+ "medical_minutes": 90,
+ "recovery_minutes": 480,
+ "recovery_stress_relief": 40,
+ "debt_daily_stress": 3,
+ "crisis_daily_stress": 4,
+ "daily_stress_decay": 2,
+ "illness_threshold": 85,
+ "illness_days": 3,
+ "illness_cooldown_days": 7,
+ "recovered_stress": 55,
+ "minigame_work_minutes": 30,
+ "gifts": {
+  "coffee": {
+   "name": "Coffee gift",
+   "cost": 8
+  },
+  "book": {
+   "name": "Book gift",
+   "cost": 18
+  },
+  "flowers": {
+   "name": "Flowers gift",
+   "cost": 16
+  }
+ },
+ "events": {
+  "chamber": {
+   "id": "chamber",
+   "title": "Chamber dinner",
+   "day": 5,
+   "hour": 18,
+   "end_hour": 22,
+   "minutes": 120,
+   "cost": 65,
+   "npcs": [
+    "sam",
+    "ken",
+    "daniel",
+    "marcus",
+    "victor"
+   ],
+   "detail": "Suppliers still require their stated MOQ and delivery dates. A referral is not a guaranteed sale.",
+   "dress": "business"
+  },
+  "alumni": {
+   "id": "alumni",
+   "title": "Alumni gathering",
+   "day": 15,
+   "hour": 18,
+   "end_hour": 22,
+   "minutes": 120,
+   "cost": 35,
+   "npcs": [
+    "maya",
+    "priya",
+    "nina",
+    "imani_cole",
+    "student_intern",
+    "kai_morgan"
+   ],
+   "detail": "A service job pays after delivery and its payment terms. Keep cash for the work and the wait.",
+   "dress": "casual"
+  },
+  "port_festival": {
+   "id": "port_festival",
+   "title": "Port music festival",
+   "day": 25,
+   "hour": 18,
+   "end_hour": 22,
+   "minutes": 120,
+   "cost": 25,
+   "npcs": [
+    "sam",
+    "ken",
+    "dara",
+    "owen_blake",
+    "lina",
+    "priya_nair"
+   ],
+   "detail": "Hotel channels charge commission; an OTA placement still needs a truthful page and paying guests.",
+   "dress": "casual"
+  },
+  "founders_mixer": {
+   "id": "founders_mixer",
+   "title": "Founders' mixer",
+   "day": 10,
+   "hour": 17,
+   "end_hour": 20,
+   "minutes": 120,
+   "cost": 40,
+   "npcs": [],
+   "dress": "business",
+   "strict": false,
+   "investors": [
+    "marlow_tan"
+   ],
+   "detail": "Angels chat with founders over coffee. A first conversation is not an offer; pitching comes later and uses only your real figures."
+  },
+  "trade_forum": {
+   "id": "trade_forum",
+   "title": "Trade partners forum",
+   "day": 12,
+   "hour": 10,
+   "end_hour": 13,
+   "minutes": 120,
+   "cost": 30,
+   "npcs": [],
+   "dress": "business",
+   "strict": false,
+   "partners": [
+    "harbormart",
+    "tidewater_foods",
+    "marketlane"
+   ],
+   "detail": "Distributors and food groups meet local suppliers. A partnership means real deliverables, a revenue share and sometimes exclusivity."
+  },
+  "investors_gala": {
+   "id": "investors_gala",
+   "title": "Aurelia Investors' Gala",
+   "day": 20,
+   "hour": 19,
+   "end_hour": 23,
+   "minutes": 180,
+   "cost": 120,
+   "npcs": [],
+   "dress": "formal",
+   "strict": true,
+   "investors": [
+    "ines_calder"
+   ],
+   "detail": "Black-tie dinner for backers and founders. The door asks for formal dress; meeting an angel here is a conversation, not funding."
+  },
+  "maker_market": {
+   "id": "maker_market",
+   "title": "Maker market",
+   "day": 28,
+   "hour": 11,
+   "end_hour": 15,
+   "minutes": 120,
+   "cost": 15,
+   "npcs": [],
+   "dress": "casual",
+   "strict": false,
+   "partners": [
+    "lumen_studio"
+   ],
+   "detail": "Studios and shops share stalls. Co-brand ideas start here and become contracts only when you sign them."
+  }
+ },
+ "variety_kinds": 2,
+ "approaches": {
+  "thorough": {
+   "minutes": 1.0,
+   "cost": 1.0,
+   "extra_cost": 0,
+   "affinity": 1.0
+  },
+  "lean": {
+   "minutes": 0.5,
+   "cost": 1.0,
+   "extra_cost": 0,
+   "affinity": 0.6,
+   "label": "Quick version: cover the essentials yourself and finish sooner"
+  },
+  "hire": {
+   "minutes": 0.25,
+   "cost": 1.0,
+   "extra_cost": 24,
+   "affinity": 0.7,
+   "label": "Pay a freelancer to prepare it while you keep working"
+  }
+ }
+}

@@ -19,7 +19,7 @@ static func segment_tag() -> String:return "hotel"
 static func source(id := "") -> Dictionary:return {"type":"hotel","id":id,"segment":"hotel"}
 static func error(text: String) -> Dictionary:return {"ok":false,"error":I18n.t(text)}
 static func is_running() -> bool:return GameState.has_game() and bool(S()["active"])
-static func valid() -> bool:return is_running() and Assets._valid_entity(entity())
+static func valid() -> bool:return is_running() and Assets._valid_entity(entity()) and (S()["mode"] == "own" or Living.has_lease(str(cfg()["lease_property"])))
 static func stage() -> int:return int(S()["stage"])
 static func rooms_of(type: String) -> int:return int(S()["rooms"].get(type,{}).get("n",0))
 static func total_rooms() -> int:
@@ -161,7 +161,7 @@ static func price_at(type: String,day: int) -> float:
 # ---------------------------------------------------------------- demand calendar
 static func demand_index(day: int) -> float:
 	var date := Clock.date_at((day-1)*Clock.DAY+12*60)
-	return float(cfg()["dow"][int(date["weekday"])])*float(cfg()["season"][int(date["month"])-1])*event_mult(day)*float(S()["trend"].get(_month_of(day),1.0))
+	return float(cfg()["dow"][int(date["weekday"])])*float(cfg()["season"][int(date["month"])-1])*event_mult(day)*float(S()["trend"].get(_month_of(day),1.0))*CityFuture.demand_factor("hotel")
 static func _month_of(day: int) -> String:
 	var date := Clock.date_at((day-1)*Clock.DAY+12*60)
 	return "%d-%02d"%[int(date["year"]),int(date["month"])]
@@ -223,7 +223,7 @@ static func demand(type: String,day: int,rating_value := -1.0) -> Dictionary:
 	var pf := clampf(pow(price/ref,-float(c["price_elasticity"])),.15,2.4)
 	var boost := mod_mult("demand")*Media.demand_boost("hotel")*(float(c["stages"]["3"]["tourism_boost"]) if stage()>=3 else 1.0)
 	var pull := clampf(1+float(c["market_pull"])*(rating_value-3.5),.45,1.5)
-	var base := rooms_of(type)*float(c["base_demand_per_room"])*demand_index(day)*pf*boost*pull
+	var base := rooms_of(type)*float(c["base_demand_per_room"])*demand_index(day)*pf*boost*pull*Industries.market_demand("hotel")
 	var share := clampf(float(c["direct_base"])+float(c["direct_rating_slope"])*(rating_value-3),.12,.6)
 	var rank := clampf(.7+float(c["rank_slope"])*(rating_value-3),.5,1.35)
 	var ota := base*float(c["ota_volume"])*float(tier["visibility"])*rank if bool(S()["channels"]["ota_open"]) else 0.0

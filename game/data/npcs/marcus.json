@@ -32,6 +32,22 @@
  "dialogue": [
   {
    "when": [
+    "flag:fx_shock_started",
+    "!flag:met_marcus_fx"
+   ],
+   "conversation": "marcus_fx",
+   "action": "bank_counter"
+  },
+  {
+   "when": [
+    "world_year>=9",
+    "!flag:met_marcus_global"
+   ],
+   "conversation": "marcus_global",
+   "action": "bank_counter"
+  },
+  {
+   "when": [
     "company_registered",
     "flag:business_account_opened"
    ],
@@ -44,5 +60,6 @@
    "action": "loan_office"
   }
  ],
- "phone_contact": false
+ "phone_contact": false,
+ "relationship": {"preferences": ["book"], "stages": [0, 30, 60], "personal_story": "marcus"}
 }

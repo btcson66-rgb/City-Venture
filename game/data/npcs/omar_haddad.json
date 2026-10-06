@@ -1,0 +1,39 @@
+{
+ "id": "omar_haddad",
+ "name": "Omar Haddad",
+ "role": "International trade introducer",
+ "appearance": {
+  "presentation": "masculine",
+  "face": "square",
+  "hair": "messy",
+  "hair_color": "black",
+  "skin": "s5",
+  "eye_shape": "round",
+  "eye_color": "dark",
+  "brows": "thick",
+  "mouth": "grin",
+  "accessory": "none"
+ },
+ "outfit": "office_professional",
+ "outfit_tints": {
+  "top": "#2a3f66",
+  "bottom": "#2c3038"
+ },
+ "schedule": [
+  {
+   "days": "mon,tue,wed,thu,fri",
+   "from": "09:00",
+   "to": "17:00",
+   "location": "interior:customs_house",
+   "spot": "trade_mentor",
+   "pose": "idle"
+  }
+ ],
+ "dialogue": [
+  {
+   "when": [],
+   "conversation": "omar_haddad_intro"
+  }
+ ],
+ "phone_contact": false
+}

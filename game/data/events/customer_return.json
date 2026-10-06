@@ -31,9 +31,9 @@
   {
    "id": "replace",
    "label": "Send a replacement",
-   "detail": "One unit + express shipping.",
+   "detail": "Every item in this parcel + express shipping.",
    "requires": [
-    "has_stock:{product_id}"
+    "can_replace:{order}"
    ],
    "effects": [
     {

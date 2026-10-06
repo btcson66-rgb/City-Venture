@@ -30,6 +30,7 @@ static func render(owner: Node) -> void:
 	owner.content.add_child(go)
 static func board(det: Control, _board: Node) -> void:
 	det.add_child(UIK.wrap("Lease Unit 12 in Industrial. Rent a machine, register as an employer and hire Tomas. OEM clients pay deposits and settle invoices on Net 30 terms.", 8, Art.C_WHITE, 300))
+	det.add_child(UIK.tip("net_terms"))
 	var go := UIK.button("Open Line Planner", open, "primary")
 	go.name = "OpenLinePlanner"
 	det.add_child(go)
@@ -108,11 +109,13 @@ func orders(content: Control) -> void:
 	for rfq in Manufacturing.S()["rfqs"].values():
 		if rfq["status"] != "open" or int(rfq["due"]) <= Clock.now(): continue
 		content.add_child(UIK.wrap(I18n.t("%s · %d units · %s–%s/unit · due in %d days · defects ≤%.1f%%") % [I18n.t(rfq["client"]), int(rfq["qty"]), Fmt.money(rfq["min_price"]), Fmt.money(rfq["max_price"]), ceili((int(rfq["due"])-Clock.now())/float(Clock.DAY)), float(rfq["max_defect"])*100], 8, Art.C_WHITE, 540))
+		if not rfq.get("competitors", []).is_empty():
+			content.add_child(UIK.wrap(Rivals.competing_text(rfq["competitors"]), 8, Art.C_SKY, 540))
 		var price := float(quotes.get(rfq["id"], _default_quote(rfq["id"])))
 		var quote_row := UIK.hbox(4)
 		content.add_child(quote_row)
 		button(quote_row, "−$0.25", "QuoteLess_"+rfq["id"], change_quote.bind(rfq["id"], -0.25))
-		quote_row.add_child(UIK.label(I18n.t("%s per unit") % Fmt.money(price) + " · " + I18n.t("about %d%% chance to win") % roundi(Manufacturing.win_chance(rfq, price)*100), 8))
+		quote_row.add_child(UIK.label(I18n.t("%s per unit") % Fmt.money(price) + " · " + I18n.t("about %d%% chance to win") % roundi(Rivals.bid_chance(Manufacturing.win_chance(rfq, price), rfq.get("competitors", []))*100), 8))
 		button(quote_row, "+$0.25", "QuoteMore_"+rfq["id"], change_quote.bind(rfq["id"], 0.25))
 		button(quote_row, "Send quote", "Quote_"+rfq["id"], Manufacturing.quote.bind(rfq["id"], price), not Manufacturing.S()["machines"].is_empty() and Staff.count("technician") > 0 and not Manufacturing.S()["orders"].values().any(func(o): return o["status"] == "active"))
 	for order in Manufacturing.S()["orders"].values():

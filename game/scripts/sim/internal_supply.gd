@@ -245,8 +245,12 @@ static func outside_spend(k: String, ent: String) -> float:
 	var t0 := Clock.now() - 30 * Clock.DAY
 	var spent := 0.0
 	var credited := 0.0
-	for e in GameState.data["ledger"]["journal"]:
-		if e["entity"] != ent or int(e["t"]) < t0:
+	var journal: Array = GameState.data["ledger"]["journal"]
+	for i in range(journal.size() - 1, -1, -1):   # newest first: stop at the 30-day horizon instead of walking all history
+		var e: Dictionary = journal[i]
+		if int(e["t"]) < t0:
+			break
+		if e["entity"] != ent:
 			continue
 		var src: Dictionary = e.get("source", {})
 		var mine: bool = str(src.get("type", "")) == "internal_saving" and str(src.get("id", "")) == k

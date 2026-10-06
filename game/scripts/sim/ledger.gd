@@ -11,26 +11,39 @@ extends RefCounted
 ##   equity       equity
 ##   income       revenue, refunds (contra), other_income
 ##   costs        cogs, exp:<category>
+##   foreign      fx_receivable:<ccy>, fx_wallet:<ccy> (historical home-dollar assets)
+##   exchange     fx_gain_loss (credit gain / debit loss; realized on conversion or refund settlement)
+
 ##   group trade  ic_revenue (credit), ic_cost (debit), ic_clearing: internal supply between industries (#71); never in revenue/cogs/opex
 
 const EXPENSE_CATEGORIES := ["advertising", "shipping", "restocking", "platform_fees", "packaging", "photography", "registration", "compliance",
 	"rent_office", "coworking", "inventory_writeoff", "bank_fees", "late_fees", "rent_home", "living", "coffee", "transport",
-	"clothing", "dining", "penalties", "payroll", "recruiting", "interest", "servers", "rent_shop", "rent_warehouse", "fitout",
-	"fuel", "vehicle", "insurance", "depreciation", "maintenance", "asset_rent", "other"]
+	"clothing", "dining", "personal_fitness", "medical", "personal_health", "penalties", "payroll", "recruiting", "interest", "servers", "rent_shop", "rent_warehouse", "fitout",
+	"fuel", "vehicle", "insurance", "depreciation", "maintenance", "asset_rent", "income_tax", "tax_service", "legal", "bad_debt", "other"]
 const OPEX_BUSINESS := ["advertising", "shipping", "restocking", "platform_fees", "packaging", "photography", "registration", "compliance",
 	"rent_office", "coworking", "inventory_writeoff", "bank_fees", "late_fees", "penalties", "payroll", "recruiting", "interest",
-	"servers", "rent_shop", "rent_warehouse", "fitout", "fuel", "vehicle", "insurance", "depreciation", "maintenance", "asset_rent", "other"]
+	"servers", "rent_shop", "rent_warehouse", "fitout", "fuel", "vehicle", "insurance", "depreciation", "maintenance", "asset_rent", "income_tax", "tax_service", "legal", "bad_debt", "other"]
 ## Rent on business premises, whatever the kind (office, shop, warehouse): one line on the month-end report.
 const PREMISES_RENT := ["rent_office", "rent_shop", "rent_warehouse"]
-const PERSONAL := ["rent_home", "living", "coffee", "transport", "clothing", "dining"]
+const PERSONAL := ["rent_home", "living", "coffee", "transport", "clothing", "dining", "personal_fitness", "medical", "personal_health"]
 ## How each expense category reads on a report (translated through the catalogue).
 const CATEGORY_NAMES := {"advertising": "Advertising", "shipping": "Shipping", "restocking": "Return & cancellation fees", "platform_fees": "Platform fees",
 	"packaging": "Packaging", "photography": "Photography", "registration": "Registration fees", "compliance": "Compliance", "rent_office": "Office rent",
 	"coworking": "Co-working", "inventory_writeoff": "Inventory write-off", "bank_fees": "Bank fees", "late_fees": "Late fees",
 	"rent_home": "Home rent", "living": "Living costs", "coffee": "Coffee", "transport": "Transport", "clothing": "Clothing",
-	"dining": "Dining", "penalties": "Penalties", "payroll": "Payroll", "recruiting": "Recruiting", "interest": "Interest",
+	"dining": "Dining", "personal_fitness": "Personal fitness", "personal_health": "Personal health insurance", "medical": "Medical care", "penalties": "Penalties", "payroll": "Payroll", "recruiting": "Recruiting", "interest": "Interest",
 	"servers": "Servers", "rent_shop": "Shop rent", "rent_warehouse": "Warehouse rent", "fitout": "Fit-out & equipment",
-	"fuel": "Fuel", "vehicle": "Vehicles & upkeep", "insurance": "Insurance", "depreciation": "Depreciation", "maintenance": "Maintenance", "asset_rent": "Asset rent", "other": "Other"}
+	"fuel": "Fuel", "vehicle": "Vehicles & upkeep", "insurance": "Insurance", "depreciation": "Depreciation", "maintenance": "Maintenance", "asset_rent": "Asset rent", "income_tax": "Income tax", "tax_service": "Tax filing costs", "legal": "Legal costs", "bad_debt": "Bad debts", "other": "Other"}
+
+
+## Archiving (#98). Order-driven postings are the only unbounded journal growth. Once a day, entries of these
+## high-volume types older than COMPACT_KEEP_DAYS fold into one summary entry per entity, type, segment and
+## day, and only when that entity-day holds at least COMPACT_MIN_GROUP of them, so ordinary play keeps every
+## line. Account balances, month windows and segment/earned totals are unchanged because day boundaries
+## are preserved and every line's debit/credit is summed per account.
+const COMPACT_TYPES := ["order", "return", "ship"]
+const COMPACT_KEEP_DAYS := 0
+const COMPACT_MIN_GROUP := 100
 
 
 static func category_name(k: String) -> String:
@@ -58,6 +71,14 @@ static func post(entity: String, memo: String, lines: Array, source := {}) -> Di
 		if c != 0.0:
 			e["cr"] = c
 		clean.append(e)
+	source = source.duplicate(true)
+	if not source.has("segment"):source["segment"] = Industries.infer_segment(source, clean)
+	clean = Industries.prepare_journal(entity,clean,source)
+	dr=0.0
+	cr=0.0
+	for line in clean:
+		dr+=float(line.get("dr",0))
+		cr+=float(line.get("cr",0))
 	assert(absf(dr - cr) < 0.011, "Unbalanced journal entry: %s (dr %.2f cr %.2f)" % [memo, dr, cr])
 	if clean.is_empty():
 		return {}
@@ -77,6 +98,7 @@ static func post(entity: String, memo: String, lines: Array, source := {}) -> Di
 		bal[e["acct"]] = snappedf(float(bal.get(e["acct"], 0.0)) + v, 0.01)
 		if e["acct"] == "cash":
 			cash_delta += v
+	Industries.on_ledger(entry)
 	EventBus.ledger_posted.emit(entry)
 	if cash_delta != 0.0:
 		EventBus.cash_changed.emit(entity, cash_delta)
@@ -173,3 +195,101 @@ static func check_balanced() -> bool:
 		if absf(s) > 0.05:
 			return false
 	return true
+
+
+## Fold old high-volume entries into daily summaries. Returns the number of entries removed.
+static func compact_old(now: int, min_group := COMPACT_MIN_GROUP, keep_days := COMPACT_KEEP_DAYS) -> int:
+	var L := _L()
+	var journal: Array = L["journal"]
+	var cutoff := (now / Clock.DAY - keep_days) * Clock.DAY
+	var from := int(L.get("compact_from", 0))
+	if cutoff <= from or journal.is_empty():
+		return 0
+	# The journal is appended in clock order; find the first entry not yet considered and the cutoff.
+	var i0 := _first_at_or_after(journal, from)
+	var i1 := _first_at_or_after(journal, cutoff)
+	if i1 <= i0:
+		L["compact_from"] = cutoff
+		return 0
+	# A busy day (many order-driven entries for one entity) folds every group of those types; a quiet day stays line by line.
+	var counts := {}
+	var keys := PackedStringArray()
+	var busy := PackedStringArray()
+	keys.resize(i1 - i0)
+	busy.resize(i1 - i0)
+	for i in range(i0, i1):
+		if _compactable(journal[i]):
+			keys[i - i0] = _group_key(journal[i])
+			var d := "%s|%d" % [journal[i]["entity"], int(journal[i]["t"]) / Clock.DAY]
+			busy[i - i0] = d
+			counts[d] = int(counts.get(d, 0)) + 1
+	var groups := {}
+	var out: Array = journal.slice(0, i0)
+	for i in range(i0, i1):
+		var e: Dictionary = journal[i]
+		var key: String = keys[i - i0]
+		if key == "" or int(counts[busy[i - i0]]) < min_group:
+			out.append(e)
+			continue
+		var src: Dictionary = e["source"]
+		var day := int(e["t"]) / Clock.DAY
+		if groups.has(key):
+			var g: Dictionary = groups[key]
+			g["n"] = e["n"]
+			g["source"]["count"] = int(g["source"]["count"]) + (int(src.get("count", 1)) if src.get("archived", false) else 1)
+			var sums: Dictionary = g["_sums"]
+			for l in e["lines"]:
+				var acct := str(l["acct"])
+				sums[acct] = float(sums.get(acct, 0.0)) + float(l.get("dr", 0.0)) - float(l.get("cr", 0.0))
+		else:
+			var count := int(src.get("count", 1)) if src.get("archived", false) else 1
+			var g := {"n": e["n"], "t": e["t"], "entity": e["entity"], "memo": "", "_sums": {},
+				"source": {"segment": src.get("segment", ""), "type": src.get("type", ""), "archived": true, "count": count, "day": day}}
+			if src.get("internal", false):
+				g["source"]["internal"] = true
+			for l in e["lines"]:
+				var acct := str(l["acct"])
+				g["_sums"][acct] = float(g["_sums"].get(acct, 0.0)) + float(l.get("dr", 0.0)) - float(l.get("cr", 0.0))
+			groups[key] = g
+			out.append(g)
+	# Replace each group's placeholder in place with a finished entry (same position = first member's time).
+	for k in out.size():
+		var g: Dictionary = out[k]
+		if not g.has("_sums"):
+			continue
+		var lines: Array = []
+		for acct in g["_sums"]:
+			var v := snappedf(float(g["_sums"][acct]), 0.01)
+			if v == 0.0:
+				continue
+			lines.append({"acct": acct, "dr": v} if v > 0.0 else {"acct": acct, "cr": -v})
+		g.erase("_sums")
+		g["lines"] = lines
+		g["memo"] = I18n.t("Archived %d %s entries (day %d)") % [int(g["source"]["count"]), g["source"]["type"], int(g["source"]["day"])]
+	var removed := (i1 - i0) - (out.size() - i0)
+	out.append_array(journal.slice(i1))
+	L["journal"] = out   # a new array so incremental journal scanners restart on the compacted history
+	L["compact_from"] = cutoff
+	return removed
+
+
+static func _group_key(e: Dictionary) -> String:
+	var src: Dictionary = e["source"]
+	return "%s|%s|%s|%s|%d" % [e["entity"], src.get("type", ""), src.get("segment", ""), str(bool(src.get("internal", false))), int(e["t"]) / Clock.DAY]
+
+
+static func _compactable(e: Dictionary) -> bool:
+	var src: Dictionary = e.get("source", {})
+	return str(src.get("type", "")) in COMPACT_TYPES and src.has("segment")
+
+
+static func _first_at_or_after(journal: Array, t: int) -> int:
+	var lo := 0
+	var hi := journal.size()
+	while lo < hi:
+		var mid := (lo + hi) / 2
+		if int(journal[mid]["t"]) < t:
+			lo = mid + 1
+		else:
+			hi = mid
+	return lo

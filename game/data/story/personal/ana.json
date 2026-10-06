@@ -1,0 +1,55 @@
+{
+ "id": "personal_ana",
+ "npc": "ana",
+ "steps": [
+  {
+   "stage": 0,
+   "title": "Ana: registration document guide · part 1",
+   "detail": "Ana asks for a registration document guide. Their evidence contains an unresolved question. What should the first draft do?",
+   "minutes": 45,
+   "cost": 0,
+   "choices": [
+    {
+     "id": "document",
+     "label": "Document the question and ask for evidence",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 1,
+   "title": "Ana: registration document guide · part 2",
+   "detail": "The registration document guide now has conflicting notes. Ana wants a version that other people can check. How do you resolve the conflict?",
+   "minutes": 60,
+   "cost": 10,
+   "choices": [
+    {
+     "id": "compare",
+     "label": "Compare sources and record what remains uncertain",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 2,
+   "title": "Ana: registration document guide · part 3",
+   "detail": "Ana is ready to introduce a paying client for the registration document guide. The client asks for a promise you cannot verify. What do you put in the handover?",
+   "minutes": 90,
+   "cost": 20,
+   "choices": [
+    {
+     "id": "scope",
+     "label": "State the agreed scope, limits and evidence",
+     "approach": "thorough"
+    }
+   ]
+  }
+ ],
+ "referral": {
+  "client": "Ana referral",
+  "detail": "A referred client commissions a documented registration document guide. Complete the agreed work; no revenue is earned merely for knowing Ana.",
+  "price": 495,
+  "cost": 185,
+  "minutes": 240
+ }
+}

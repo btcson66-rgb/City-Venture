@@ -2,7 +2,7 @@
  "id": "old_town",
  "name": "Old Town",
  "size_tiles": [
-  88,
+  104,
   44
  ],
  "music": "day_city",
@@ -95,6 +95,33 @@
    "type": "crosswalk_h",
    "rect": [
     66,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "sidewalk",
+   "rect": [
+    88,
+    0,
+    16,
+    44
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    14,
+    25,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "crosswalk_h",
+   "rect": [
+    44,
     25,
     3,
     5
@@ -934,42 +961,78 @@
  },
  "exits": [
   {
-   "id": "east",
+   "id": "walk_financial",
+   "direction": "E",
    "rect": [
-    1392,
-    320,
+    1648,
+    324,
     16,
-    244
+    48
+   ],
+   "to": "financial",
+   "spawn": "from_old_town",
+   "walk_min": 7
+  },
+  {
+   "id": "walk_shopping_street",
+   "direction": "W",
+   "rect": [
+    0,
+    324,
+    16,
+    48
    ],
    "to": "shopping_street",
    "spawn": "from_old_town",
-   "walk_min": 6
+   "walk_min": 10
   },
   {
-   "id": "west",
+   "id": "walk_residential",
+   "direction": "W",
    "rect": [
     0,
-    320,
+    504,
     16,
-    244
+    48
    ],
    "to": "residential",
    "spawn": "from_old_town",
-   "walk_min": 5
+   "walk_min": 7
+  },
+  {
+   "id": "walk_luxury_heights",
+   "direction": "E",
+   "rect": [
+    1648,
+    504,
+    16,
+    48
+   ],
+   "to": "luxury_heights",
+   "spawn": "from_old_town",
+   "walk_min": 9
   }
  ],
  "spawns": {
   "from_shopping_street": [
-   1368,
-   430
+   40,
+   348
   ],
   "metro": [
    1220,
    642
   ],
   "from_residential": [
-   28,
-   430
+   40,
+   390
+  ],
+  "from_financial": [
+   1624,
+   348
+  ],
+  "from_luxury_heights": [
+   1624,
+   390
   ]
  },
  "bounds": {
@@ -1031,5 +1094,13 @@
   "office_professional",
   "luxury_citywear"
  ],
- "minimap_color": "#a0674a"
+ "minimap_color": "#a0674a",
+ "walk_corridors": [
+  [
+   1408,
+   0,
+   256,
+   704
+  ]
+ ]
 }

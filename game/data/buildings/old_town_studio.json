@@ -2,10 +2,10 @@
  "id": "old_town_studio",
  "name": "Studio 1A, Lantern Row",
  "district": "old_town",
- "type": "flat_to_let",
+ "type": "home",
  "hours": {
-  "open": "09:00",
-  "close": "19:00",
+  "open": "00:00",
+  "close": "24:00",
   "days": "all"
  },
  "exterior": {
@@ -21,7 +21,7 @@
   ],
   "floor": "wood_warm",
   "wall": "plaster_warm",
-  "ambient": "",
+  "ambient": "home",
   "props": [
    {
     "sprite": "window_day",
@@ -53,25 +53,93 @@
     "x": 80,
     "y": 120,
     "floor": true
+   },
+   {
+    "sprite": "desk_laptop",
+    "x": 80,
+    "y": 50
+   },
+   {
+    "sprite": "packing_table",
+    "x": 70,
+    "y": 110
    }
   ],
   "interactables": [
    {
+    "id": "bed",
+    "at": [
+     188,
+     126
+    ],
+    "label": "Sleep",
+    "action": "sleep",
+    "params": {
+     "requires": "home:old_town_studio"
+    }
+   },
+   {
+    "id": "laptop",
+    "at": [
+     100,
+     86
+    ],
+    "label": "Use laptop — Company OS",
+    "action": "open_company_os",
+    "params": {
+     "terminal": "home_laptop",
+     "requires": "home:old_town_studio"
+    }
+   },
+   {
+    "id": "packing",
+    "at": [
+     90,
+     148
+    ],
+    "label": "Packing table",
+    "action": "pack_orders",
+    "params": {
+     "location": "old_town_studio",
+     "requires": "home:old_town_studio"
+    }
+   },
+   {
     "id": "viewing",
     "at": [
-     110,
-     100
+     130,
+     146
     ],
     "label": "Look around the studio",
     "action": "look",
     "params": {
      "icon": "home",
-     "text": "Studio 1A: $780/month, radiator that clanks, the bakery's smell at six every morning. Moving house arrives in a later build."
+     "text": "Studio 1A: $780/month, 200 storage units. Sign a home lease at Okafor Lettings; the first move is free."
+    }
+   },
+   {
+    "label": "Home and personal car",
+    "action": "personal_assets",
+    "id": "personal_assets",
+    "at": [
+     126,
+     80
+    ],
+    "params": {
+     "requires": "home:old_town_studio"
     }
    }
   ],
-  "npc_spots": {}
+  "npc_spots": {},
+  "property": "old_town_studio",
+  "stock_display": {
+   "location": "old_town_studio",
+   "x": 24,
+   "y": 132,
+   "cols": 3,
+   "max": 8
+  }
  },
  "category": "Apartment",
- "status": "planned"
+ "status": "active"
 }

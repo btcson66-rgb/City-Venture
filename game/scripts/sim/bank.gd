@@ -41,11 +41,11 @@ static func debt(ent: String) -> float:
 
 
 static func base_rate() -> float:
-	return float(DataDB.year_def(int(GameState.data["world"]["year"])).get("interest_rate", 0.025))
+	return Macro.rate()
 
 
 static func apr() -> float:
-	return clampf(base_rate() + 0.06 + (720 - credit()) * 0.0004, 0.06, 0.24)
+	return clampf(base_rate() + Replay.number("interest_surcharge", 0.0) + 0.06 + (720 - credit()) * 0.0004 + Brand.apr_adjustment(), 0.06, 0.24)
 
 
 static func monthly_payment(principal: float, months: int, rate := -1.0) -> float:
@@ -88,7 +88,7 @@ static func lending_basis() -> Dictionary:
 		age = int((Clock.now() - int(GameState.data["entities"][cid].get("founded", 0))) / Clock.DAY)
 		gp = maxf(0.0, float(MonthClose.compute(cid, Clock.now() - 30 * Clock.DAY, Clock.now())["gross_profit"]))
 		ar = maxf(0.0, Ledger.balance(cid, "accounts_receivable") + Ledger.balance(cid, "marketplace_balance"))
-		stock = maxf(0.0, Ledger.balance(cid, "inventory") + Ledger.balance(cid, "inventory_in_transit"))
+		stock = maxf(0.0, Ledger.balance(cid, "inventory") + Ledger.balance(cid, "inventory_in_transit")) + TradeIndustry.paid_cargo_assets(cid)
 		# Cars hold value better than general stock: move them out of the 50% bucket (rental fleet is already in operating assets).
 		vehicle_stock = minf(stock, Automotive.stock_cost())
 		stock -= vehicle_stock
@@ -193,7 +193,7 @@ static func book_appointment() -> int:
 	B()["appointment"] = t
 	Sim.cancel("bank.appointment", "id", "lending")
 	Sim.schedule(t, "bank.appointment", {"id": "lending"})
-	GameState.add_message("marcus", appointment_hint())
+	GameState.add_message("marcus", appointment_hint(), {"replies": [{"id": "confirm", "label": "Confirm the meeting", "effects": [{"op": "phone_meeting", "npc": "marcus", "at": t}]}, {"id": "later", "label": "I will book again later.", "effects": [{"op": "phone_bank_later", "at": t}]}, {"id": "keep", "label": "Leave the appointment as booked.", "effects": []}], "expires": t + 60, "default_reply": "keep"})
 	return t
 
 
@@ -280,15 +280,15 @@ static func _payment(l: Dictionary) -> void:
 	l["status"] = "late"
 	adjust_credit(-40, "missed payment")
 	GameState.inc_stat("loan_payments_missed")
-	if int(l["missed"]) >= 2:
+	if int(l["missed"]) >= maxi(1, ceili(2 * Replay.number("debt_tolerance", 1.0))):
 		l["status"] = "called"
 		adjust_credit(-60, "loan called")
 		l["call_due"] = Clock.now() + 7 * Clock.DAY
 		Sim.schedule(int(l["call_due"]), "bank.called", {"id": l["id"]})
-		GameState.add_message("marcus", I18n.t("Two missed payments. The bank has called loan %s: %s is due in full within 7 days.") % [l["id"], Fmt.money0(float(l["balance"]))])
-		EventBus.notify.emit(I18n.t("Nexus Bank called loan %s. %s due in 7 days.") % [l["id"], Fmt.money0(float(l["balance"]))], "bad", "warning")
+		GameState.add_message("marcus", I18n.t("%d missed payments. Loan %s is called: %s is due in full within 7 days.") % [int(l["missed"]), l["id"], Fmt.money(float(l["balance"]))])
+		EventBus.notify.emit(I18n.t("Nexus Bank called loan %s. %s due in 7 days.") % [l["id"], Fmt.money(float(l["balance"]))], "bad", "warning")
 		return
-	GameState.add_message("marcus", I18n.t("Your payment on loan %s bounced. We'll try again in 3 days. It's cheaper to call me before this happens.") % l["id"])
+	GameState.add_message("marcus", I18n.t("Your payment on loan %s bounced. We'll try again in 3 days. It's cheaper to call me before this happens.") % l["id"], {"expires": Clock.now() + Clock.DAY, "default_reply": "ack", "replies": [{"id": "extend", "label": "Request three more days to pay", "effects": [{"op": "phone_payment_extension", "id": l["id"]}], "outcome": "One extension granted: the retry is now in six days. Your debt and existing late fee remain due."}, {"id": "ack", "label": "Okay, thanks.", "effects": []}]})
 	Sim.schedule(Clock.now() + 3 * Clock.DAY, "bank.payment", {"id": l["id"]})
 
 
@@ -313,3 +313,17 @@ static func handle(kind: String, p: Dictionary) -> void:
 			adjust_credit(-150, "default")
 			GameState.set_flag("loan_defaulted")
 			Insolvency.begin(ent, I18n.t("Nexus Bank called loan %s and it could not be repaid.") % l["id"])
+
+static func request_payment_extension(id: String) -> Dictionary:
+	var loan: Dictionary = B()["loans"].get(id, {})
+	if loan.is_empty() or loan["status"] != "late" or loan.get("phone_extension", false) or GameState.data["entities"].get(loan["entity"], {}).has("closed"):
+		return {"ok": false, "error": I18n.t("This payment cannot be extended. Review the loan at Nexus Bank.")}
+	var next := -1
+	for event in GameState.data["schedule"]:
+		if event["kind"] == "bank.payment" and event["p"].get("id", "") == id: next = int(event["t"])
+	if next < Clock.now(): return {"ok": false, "error": I18n.t("This payment cannot be extended. Review the loan at Nexus Bank.")}
+	Sim.cancel("bank.payment", "id", id)
+	Sim.schedule(next + 3 * Clock.DAY, "bank.payment", {"id": id})
+	loan["phone_extension"] = true
+	loan["retry_at"] = next + 3 * Clock.DAY
+	return {"ok": true, "outcome": I18n.t("Retry moved to %s. The debt and existing late fee remain due.") % Clock.fmt_datetime(int(loan["retry_at"]))}

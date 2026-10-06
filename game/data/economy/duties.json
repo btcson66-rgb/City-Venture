@@ -1,0 +1,79 @@
+{
+ "categories": {
+  "electronics": "electronics",
+  "home": "household",
+  "accessories": "textiles",
+  "fashion": "textiles"
+ },
+ "codes": {
+  "electronics": {
+   "name": "Electronics"
+  },
+  "household": {
+   "name": "Household goods"
+  },
+  "textiles": {
+   "name": "Textiles"
+  },
+  "general": {
+   "name": "General goods"
+  }
+ },
+ "regions": {
+  "northridge": {
+   "electronics": 0.04,
+   "household": 0.06,
+   "textiles": 0.08,
+   "general": 0.05
+  },
+  "auroria": {
+   "electronics": 0.045,
+   "household": 0.065,
+   "textiles": 0.085,
+   "general": 0.055
+  },
+  "lumina": {
+   "electronics": 0.05,
+   "household": 0.06999999999999999,
+   "textiles": 0.09,
+   "general": 0.060000000000000005
+  },
+  "zenkai": {
+   "electronics": 0.055,
+   "household": 0.075,
+   "textiles": 0.095,
+   "general": 0.065
+  },
+  "almeria": {
+   "electronics": 0.06,
+   "household": 0.08,
+   "textiles": 0.1,
+   "general": 0.07
+  },
+  "solterra": {
+   "electronics": 0.065,
+   "household": 0.08499999999999999,
+   "textiles": 0.10500000000000001,
+   "general": 0.07500000000000001
+  },
+  "karu": {
+   "electronics": 0.07,
+   "household": 0.09,
+   "textiles": 0.11,
+   "general": 0.08
+  }
+ },
+ "refusal_rates": {
+  "ddp": 0.02,
+  "ddu": 0.12
+ },
+ "misclassification_fine": 25,
+ "document_fine_factor": 0.5,
+ "document_delay_days": 2,
+ "hold_timeout_days": 7,
+ "target_units": 10,
+ "fallback_units": 5,
+ "target_return_rate": 0.15,
+ "review_after_days": 14,
+ "return_observation_days": 3
+}

@@ -22,7 +22,7 @@ static func compute(entity: String, t0: int, t1: int) -> Dictionary:
 			if account == "revenue": row["revenue"] -= amount
 			elif account == "refunds": row["refunds"] += amount
 			elif account == "cogs": row["cogs"] += amount
-			elif account == "other_income": row["other_income"] -= amount
+			elif account in ["other_income", "fx_gain_loss"]: row["other_income"] -= amount
 			elif account == "ic_revenue":
 				row["internal_revenue"] -= amount
 			elif account == "ic_cost":

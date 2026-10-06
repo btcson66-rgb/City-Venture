@@ -1,8 +1,9 @@
 class_name HUD
 extends Control
-## Light in-world HUD (Handoff §51): time/date, money, objective, minimap, context prompt. Nothing else.
+## Light in-world HUD: time/date, money, objective, minimap, context prompt, energy and stress.
 
 var time_label: Label
+var vitality_label: Label
 var date_label: Label
 var part_icon: TextureRect
 var cash_label: Label
@@ -30,11 +31,16 @@ var _delta_t := -1
 var _delta := 0.0
 var welcome: BuildingWelcome
 var here_button: Button
+var safety_button: Button
 
 
 func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	safety_button = UIK.button("Use crosswalks for safer crossing", func(): UIRoot.open_modal(TrafficModal.new("accident")))
+	safety_button.position = Vector2(220,330)
+	safety_button.custom_minimum_size = Vector2(240,20)
+	add_child(safety_button)
 	# time card
 	var tp := UIK.panel("ui/panel_glass", 5)
 	tp.position = Vector2(6, 6)
@@ -53,9 +59,15 @@ func _ready() -> void:
 	trow.add_child(time_label)
 	part_label = UIK.label("", 7, Art.C_SKY, true)
 	trow.add_child(part_label)
+	var health := UIK.hbox(3)
+	tv.add_child(health)
+	vitality_label=UIK.label("",7,Art.C_SKY)
+	health.add_child(vitality_label)
+	health.add_child(UIK.tip("personal_energy"))
+	health.add_child(UIK.tip("personal_stress"))
 	# objective
 	obj_panel = UIK.panel("ui/panel_glass", 5)
-	obj_panel.position = Vector2(6, 42)
+	obj_panel.position = Vector2(6, 55)
 	obj_panel.custom_minimum_size = Vector2(196, 0)
 	add_child(obj_panel)
 	var ov := UIK.vbox(1)
@@ -107,10 +119,10 @@ func _ready() -> void:
 	quick.add_child(qrow)
 	quick.alignment = BoxContainer.ALIGNMENT_END
 	qrow.alignment = BoxContainer.ALIGNMENT_END
-	phone_btn = _quick_button("phone", "Phone", "Tab", func(): UIRoot.toggle_phone())
+	phone_btn = _quick_button("phone", "Phone", "phone", func(): UIRoot.toggle_phone())
 	qrow.add_child(phone_btn)
-	qrow.add_child(_quick_button("map", "Map", "M", func(): UIRoot.open_map()))
-	qrow.add_child(_quick_button("settings", "Menu", "Esc", func(): UIRoot.open_pause()))
+	qrow.add_child(_quick_button("map", "Map", "map", func(): UIRoot.open_map()))
+	qrow.add_child(_quick_button("settings", "Menu", "pause", func(): UIRoot.open_pause()))
 	phone_hint = UIK.label("", 7, Art.C_GOLD, true)
 	phone_hint.visible = false
 	phone_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -142,7 +154,9 @@ func _ready() -> void:
 	var ph := UIK.hbox(5)
 	prompt_panel.add_child(ph)
 	var key := UIK.panel("ui/prompt_key", 2)
-	key.add_child(UIK.label(" E ", 7, Art.C_NAVY_800, true))
+	var prompt_key := UIK.label(" " + Preferences.key_caption("interact") + " ", 7, Art.C_NAVY_800, true)
+	key.add_child(prompt_key)
+	Preferences.changed.connect(func(): prompt_key.text = " " + Preferences.key_caption("interact") + " ")
 	ph.add_child(key)
 	prompt_label = UIK.label("", 8, Art.C_WHITE, true)
 	ph.add_child(prompt_label)
@@ -155,10 +169,14 @@ func _ready() -> void:
 	SaveSystem.saved.connect(_on_saved)
 	EventBus.cash_changed.connect(_on_cash)
 	EventBus.objective_changed.connect(refresh)
+	Clock.minute_tick.connect(func(_t):
+		if visible and Clock.world_active:
+			_refresh_objective_hours()
+			_refresh_safety())
 	EventBus.message_received.connect(func(_a, _b): refresh())
 	welcome = BuildingWelcome.new()
 	add_child(welcome)
-	here_button = _quick_button("info", "What can I do here?", "I", func():
+	here_button = _quick_button("info", "What can I do here?", "building_activities", func():
 		if not UIRoot.is_blocking():
 			welcome.show_card())
 	here_button.name = "BuildingActivities"
@@ -189,9 +207,10 @@ func _quick_button(icon_name: String, text: String, key: String, cb: Callable) -
 	ks.content_margin_bottom = 0
 	kc.add_theme_stylebox_override("panel", ks)
 	kc.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var kl := UIK.label(key, 5, Art.C_NAVY_800, true)
+	var kl := UIK.label(Preferences.key_caption(key), 5, Art.C_NAVY_800, true)
 	kl.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	kc.add_child(kl)
+	Preferences.changed.connect(func(): kl.text = Preferences.key_caption(key); _fit_quick.call_deferred(b, h))
 	h.add_child(kc)
 	b.pressed.connect(cb)
 	_fit_quick.call_deferred(b, h)
@@ -200,7 +219,7 @@ func _quick_button(icon_name: String, text: String, key: String, cb: Callable) -
 
 func _fit_quick(b: Button, h: HBoxContainer) -> void:
 	h.reset_size()
-	b.custom_minimum_size = h.get_combined_minimum_size() + Vector2(6, 4)
+	b.custom_minimum_size = (h.get_combined_minimum_size() + Vector2(6, 4)).max(Vector2(44, 44))
 
 
 func relabel() -> void:
@@ -220,12 +239,13 @@ func set_prompt(text: String) -> void:
 	prompt_label.text = text
 	prompt_panel.reset_size()
 	await get_tree().process_frame
-	prompt_panel.position = Vector2((640 - prompt_panel.size.x) / 2.0, 360 - 34)
+	prompt_panel.position = Vector2((get_viewport_rect().size.x - prompt_panel.size.x) / 2.0, get_viewport_rect().size.y - prompt_panel.size.y - 8)
 
 
 func _process(_d: float) -> void:
 	if not visible or not GameState.has_game():
 		return
+	vitality_label.text=I18n.t("Energy %d%% · stress %d%%")%[roundi(PersonalLife.energy()),roundi(PersonalLife.S()["stress"])]
 	time_label.text = Clock.fmt_time()
 	date_label.text = Clock.fmt_date().to_upper() + I18n.t("  ·  DAY %d") % Clock.day_index()
 	var nf := Clock.night_factor()
@@ -255,7 +275,10 @@ func _process(_d: float) -> void:
 	phone_hint.text = ((I18n.t("● %d new") % unread) if unread > 0 else "") + ((I18n.t("   ◆ decision")) if pending else "")
 	phone_hint.visible = phone_hint.text != ""
 	phone_btn.modulate = Color(1, 1, 1) if unread == 0 and not pending else Color(1.0, 0.92, 0.6).lerp(Color(1, 1, 1), 0.5 + 0.5 * sin(Time.get_ticks_msec() / 180.0))
-	quick.position = Vector2(640 - 6 - quick.size.x, money_panel.position.y + money_panel.size.y + 3)
+	quick.position = Vector2(get_viewport_rect().size.x - 6 - quick.size.x, money_panel.position.y + money_panel.size.y + 3)
+	money_panel.position.x = maxf(6.0, get_viewport_rect().size.x - money_panel.size.x - 6.0)
+	minimap.get_parent().visible = not InputAccess.touch_mode or get_viewport_rect().size.x >= 600
+	obj_panel.visible = not InputAccess.touch_mode and not StoryEngine.main_objective().is_empty()
 	var cc2 := Ecommerce.carried_count()
 	parcels_label.text = (I18n.t("Carrying %d parcel%s") % [cc2, I18n.pl(cc2)]) if cc2 > 0 else ""
 	var ws := SceneRouter.world_scene()
@@ -263,7 +286,7 @@ func _process(_d: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if visible and event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_I and not UIRoot.is_blocking():
+	if visible and event.is_action_pressed("building_activities") and not event.is_echo() and not UIRoot.is_blocking():
 		welcome.show_card()
 		get_viewport().set_input_as_handled()
 
@@ -275,10 +298,41 @@ func refresh() -> void:
 	var o := StoryEngine.main_objective()
 	obj_panel.visible = not o.is_empty()
 	goal_label.text = I18n.t(str(o.get("goal", ""))).to_upper()
-	obj_label.text = o.get("text", "")
+	_refresh_objective_hours()
+	_refresh_safety()
 	var ws := SceneRouter.world_scene()
 	if ws != null:
 		loc_label.text = (I18n.t(DataDB.districts[ws.scene_id]["name"]) if ws.kind == "district" else I18n.t(DataDB.building(ws.scene_id).get("name", ""))).to_upper()
+
+
+## The safety button shows only while an injury, medical bill or claim needs attention; refreshed on signals, not per frame.
+func _refresh_safety() -> void:
+	if safety_button == null or not GameState.has_game(): return
+	var ws := SceneRouter.world_scene()
+	safety_button.visible = ws != null and ws.kind == "district" and TrafficSafety.needs_attention()
+	if safety_button.visible:
+		var injury := str(TrafficSafety.S()["injury"])
+		safety_button.text = I18n.t("Injury: %s") % TrafficSafety.severity_label(injury) if injury != "none" else I18n.t("Medical bill or claim open")
+
+
+var _hours_key := ""
+var _hours_text := ""
+var _hours_until := -1
+
+
+## The opening-hours line only changes when a door opens or closes, so it is cached until that minute (or the objective changes).
+func _refresh_objective_hours() -> void:
+	var o := StoryEngine.main_objective()
+	obj_label.text = o.get("text", "")
+	var key := "%s|%s|%s" % [str(o.get("target", "")), I18n.locale(), str(Clock.day_index())]
+	if key != _hours_key or _hours_until < 0 or Clock.now() >= _hours_until:
+		_hours_key = key
+		_hours_text = DestinationHours.target_text(o)
+		var t := DestinationHours.target(o)
+		var state: Dictionary = DestinationHours.status(str(t["building"]), str(t.get("npc", ""))) if t.has("building") else {}
+		var boundary := int(state.get("close", -1)) if state.get("open", false) else int(state.get("next", -1))
+		_hours_until = boundary if boundary > Clock.now() else Clock.now() + Clock.DAY - Clock.minute_of_day()
+	if _hours_text != "": obj_label.text += "\n" + _hours_text
 
 
 func _on_saved(slot: int) -> void:

@@ -1,0 +1,1 @@
+Source: codex/34-logistics-depth, parent 0fa64c68; implementation captured before commit. Native input at Dockside Motors: second vehicle purchase, route counter/sign/drive, vehicle service; real simulated travel and twelve-hour service completion. Controlled initial company capital and arrival; no injected revenue. Capture: evidence/2026-10-03_34/walkthrough_result.json.

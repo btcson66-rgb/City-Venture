@@ -106,6 +106,7 @@ static func _make_person(role: String) -> Dictionary:
 	# better people ask for more: salary spreads across the role's band by skill, with some noise
 	var t := (skill - 1) / 4.0
 	var salary := snappedf(lerpf(float(sal[0]), float(sal[1]), clampf(t + (GameState.randf() - 0.5) * 0.3, 0.0, 1.0)), 5.0)
+	salary = snappedf(salary * Macro.costs() * Rivals.wages(), 0.01)
 	var traits: Array = c.get("traits", [])
 	var ap := GameState.default_appearance()
 	var opts := DataDB.character
@@ -142,7 +143,7 @@ static func hire(applicant_id: String) -> Dictionary:
 	S()["applicants"] = []
 	S()["posting"] = {}
 	GameState.inc_stat("hires")
-	GameState.timeline(I18n.t("Hired %s as %s.") % [p["name"], I18n.t(str(role_def(p["role"])["name"]))], "business")
+	GameState.timeline(I18n.t("Hired %s as %s.") % [p["name"], I18n.t(str(role_def(p["role"])["name"]))], "business", {"category":"people"})
 	EventBus.world_refresh.emit()
 	return {"ok": true, "person": p}
 
@@ -156,7 +157,7 @@ static func let_go(pid: String) -> Dictionary:
 	S()["people"].erase(pid)
 	for o in people():
 		o["morale"] = clampi(int(o["morale"]) - 5, 0, 100)
-	GameState.timeline(I18n.t("Let %s go.") % p["name"], "business")
+	GameState.timeline(I18n.t("Let %s go.") % p["name"], "business", {"category":"people"})
 	EventBus.world_refresh.emit()
 	return {"ok": true, "severance": sev}
 
@@ -172,6 +173,7 @@ static func give_raise(pid: String) -> Dictionary:
 
 
 static func is_working(p: Dictionary, t := -1) -> bool:
+	if PopupStore.assigned_at(str(p["id"]),Clock.now() if t<0 else t):return false
 	if t < 0:
 		t = Clock.now()
 	if t < int(p.get("start", 0)):
@@ -260,11 +262,11 @@ static func on_hour(t: int, h: int) -> void:
 
 
 static func _pack_hour(p: Dictionary, h: int) -> void:
-	var loc := "suite_2b"
+	var loc := str(p.get("workplace", "suite_2b"))
 	if not Living.has_lease(loc):
 		return
 	var cap := int(round(4.0 * _output(p)))
-	var n := Ecommerce.pack_orders(loc, cap)
+	var n := Ecommerce.pack_orders(loc, cap, {}, int(p["skill"]))
 	if n > 0:
 		GameState.inc_stat("orders_packed_by_staff", n)
 	if h == 16 and not Ecommerce.orders_with(["packed"], loc).is_empty():
@@ -334,7 +336,7 @@ static func _quit(p: Dictionary) -> void:
 	GameState.inc_stat("resignations")
 	GameState.add_message("jobs_board", I18n.t("%s resigned from %s.") % [p["name"], GameState.business_display_name()])
 	EventBus.notify.emit(I18n.t("%s quit.") % p["name"], "bad", "people")
-	GameState.timeline(I18n.t("%s resigned.") % p["name"], "business")
+	GameState.timeline(I18n.t("%s resigned.") % p["name"], "business", {"category":"people"})
 	EventBus.world_refresh.emit()
 
 
@@ -345,7 +347,7 @@ static func handle(kind: String, p: Dictionary) -> void:
 			if S()["posting"].get("role", "") != role:
 				return
 			var list: Array = []
-			for i in int(cfg().get("applicants", 3)):
+			for i in Brand.applicant_count(int(cfg().get("applicants", 3))):
 				list.append(_make_person(role))
 			S()["applicants"] = list
 			GameState.add_message("jobs_board", I18n.t("%d people applied for %s. Review them in Company OS → People.") % [list.size(), I18n.t(str(role_def(role)["name"]))])

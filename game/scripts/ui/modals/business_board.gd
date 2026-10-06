@@ -36,7 +36,7 @@ func _businesses() -> void:
 	body.add_child(cols)
 	var list := UIK.vbox(2)
 	list.custom_minimum_size = Vector2(170, 0)
-	cols.add_child(list)
+	cols.add_child(UIK.scroll(list,Vector2(180,236)))
 	list.add_child(UIK.label("START NOW", 7, Art.C_DIM, true))
 	var bs: Array = DataDB.businesses.values().filter(func(b): return b.get("status", "planned") == "active")
 	bs.sort_custom(func(a, b): return _order(a) < _order(b))
@@ -63,6 +63,11 @@ func _businesses() -> void:
 	det.add_child(UIK.kv("Main costs", I18n.join(d["cost_types"], true)))
 	det.add_child(UIK.kv("Can grow into", I18n.join(d["growth_paths"], true)))
 	_gates(det)
+	var intro:=IndustryGuidance.guide(selected)
+	if not intro.is_empty() and not Industries.find(selected)["sim_class"].is_running():
+		det.add_child(UIK.wrap(I18n.t("Mentor: %s · %s")%[DataDB.npcs[intro["mentor"]]["name"],I18n.t(DataDB.buildings[intro["building"]]["name"])],8,Art.C_WHITE,300))
+		var pin:=UIK.button("Mark mentor on map",IndustryGuidance.mentor_pin.bind(selected))
+		pin.name="MentorPin_"+selected;det.add_child(pin)
 	det.add_child(UIK.sep())
 	if not Industries.board_detail(selected, det, self):
 		det.add_child(UIK.wrap(d.get("pitch", ""), 8, Art.C_WHITE, 300))

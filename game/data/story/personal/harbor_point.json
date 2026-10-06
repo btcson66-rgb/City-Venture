@@ -1,0 +1,55 @@
+{
+ "id": "personal_harbor_point",
+ "npc": "harbor_point",
+ "steps": [
+  {
+   "stage": 0,
+   "title": "Rosa · Harbor Point Fitness: beginner exercise timetable · part 1",
+   "detail": "Rosa · Harbor Point Fitness asks for a beginner exercise timetable. Their evidence contains an unresolved question. What should the first draft do?",
+   "minutes": 45,
+   "cost": 0,
+   "choices": [
+    {
+     "id": "document",
+     "label": "Document the question and ask for evidence",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 1,
+   "title": "Rosa · Harbor Point Fitness: beginner exercise timetable · part 2",
+   "detail": "The beginner exercise timetable now has conflicting notes. Rosa · Harbor Point Fitness wants a version that other people can check. How do you resolve the conflict?",
+   "minutes": 60,
+   "cost": 10,
+   "choices": [
+    {
+     "id": "compare",
+     "label": "Compare sources and record what remains uncertain",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 2,
+   "title": "Rosa · Harbor Point Fitness: beginner exercise timetable · part 3",
+   "detail": "Rosa · Harbor Point Fitness is ready to introduce a paying client for the beginner exercise timetable. The client asks for a promise you cannot verify. What do you put in the handover?",
+   "minutes": 90,
+   "cost": 20,
+   "choices": [
+    {
+     "id": "scope",
+     "label": "State the agreed scope, limits and evidence",
+     "approach": "thorough"
+    }
+   ]
+  }
+ ],
+ "referral": {
+  "client": "Rosa · Harbor Point Fitness referral",
+  "detail": "A referred client commissions a documented beginner exercise timetable. Complete the agreed work; no revenue is earned merely for knowing Rosa · Harbor Point Fitness.",
+  "price": 585,
+  "cost": 215,
+  "minutes": 240
+ }
+}

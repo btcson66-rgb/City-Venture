@@ -1,0 +1,55 @@
+{
+ "id": "personal_tomas_varga",
+ "npc": "tomas_varga",
+ "steps": [
+  {
+   "stage": 0,
+   "title": "Tomas Varga: production changeover notes · part 1",
+   "detail": "Tomas Varga asks for a production changeover notes. Their evidence contains an unresolved question. What should the first draft do?",
+   "minutes": 45,
+   "cost": 0,
+   "choices": [
+    {
+     "id": "document",
+     "label": "Document the question and ask for evidence",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 1,
+   "title": "Tomas Varga: production changeover notes · part 2",
+   "detail": "The production changeover notes now has conflicting notes. Tomas Varga wants a version that other people can check. How do you resolve the conflict?",
+   "minutes": 60,
+   "cost": 10,
+   "choices": [
+    {
+     "id": "compare",
+     "label": "Compare sources and record what remains uncertain",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 2,
+   "title": "Tomas Varga: production changeover notes · part 3",
+   "detail": "Tomas Varga is ready to introduce a paying client for the production changeover notes. The client asks for a promise you cannot verify. What do you put in the handover?",
+   "minutes": 90,
+   "cost": 20,
+   "choices": [
+    {
+     "id": "scope",
+     "label": "State the agreed scope, limits and evidence",
+     "approach": "thorough"
+    }
+   ]
+  }
+ ],
+ "referral": {
+  "client": "Tomas Varga referral",
+  "detail": "A referred client commissions a documented production changeover notes. Complete the agreed work; no revenue is earned merely for knowing Tomas Varga.",
+  "price": 930,
+  "cost": 330,
+  "minutes": 210
+ }
+}

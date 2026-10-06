@@ -30,7 +30,7 @@ static func is_import(supplier_id: String) -> bool:
 static func cost_mult(supplier_id: String) -> float:
 	if bool(DataDB.supplier(supplier_id).get("shock_exempt", false)):
 		return 1.0
-	return _num("import_cost_mult" if is_import(supplier_id) else "cost_mult", 1.0)
+	return _num("import_cost_mult" if is_import(supplier_id) else "cost_mult", 1.0) * Macro.costs()
 
 
 static func lead_mult(supplier_id: String) -> float:
@@ -82,6 +82,7 @@ static func set_year(y: int) -> void:
 		return
 	GameState.data["world"]["year"] = y
 	GameState.set_flag("news_read", false)   # the legacy receipt must never migrate into a later unread era
+	if y >= 9: CapitalMarket.begin()
 	var d := DataDB.year_def(y)
 	GameState.timeline(I18n.t("A new era in Aurelia: Year %d — %s.") % [y, I18n.t(str(d.get("name", "")))], "world")
 	EventBus.notify.emit(I18n.t("Year %d — %s. Check the news board.") % [y, I18n.t(str(d.get("name", "")))], "info", "info")

@@ -1,0 +1,55 @@
+{
+ "id": "personal_henri_dubois",
+ "npc": "henri_dubois",
+ "steps": [
+  {
+   "stage": 0,
+   "title": "Henri Dubois: hotel history archive · part 1",
+   "detail": "Henri Dubois asks for a hotel history archive. Their evidence contains an unresolved question. What should the first draft do?",
+   "minutes": 45,
+   "cost": 0,
+   "choices": [
+    {
+     "id": "document",
+     "label": "Document the question and ask for evidence",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 1,
+   "title": "Henri Dubois: hotel history archive · part 2",
+   "detail": "The hotel history archive now has conflicting notes. Henri Dubois wants a version that other people can check. How do you resolve the conflict?",
+   "minutes": 60,
+   "cost": 10,
+   "choices": [
+    {
+     "id": "compare",
+     "label": "Compare sources and record what remains uncertain",
+     "approach": "thorough"
+    }
+   ]
+  },
+  {
+   "stage": 2,
+   "title": "Henri Dubois: hotel history archive · part 3",
+   "detail": "Henri Dubois is ready to introduce a paying client for the hotel history archive. The client asks for a promise you cannot verify. What do you put in the handover?",
+   "minutes": 90,
+   "cost": 20,
+   "choices": [
+    {
+     "id": "scope",
+     "label": "State the agreed scope, limits and evidence",
+     "approach": "thorough"
+    }
+   ]
+  }
+ ],
+ "referral": {
+  "client": "Henri Dubois referral",
+  "detail": "A referred client commissions a documented hotel history archive. Complete the agreed work; no revenue is earned merely for knowing Henri Dubois.",
+  "price": 600,
+  "cost": 220,
+  "minutes": 180
+ }
+}

@@ -11,7 +11,7 @@ static func segment_tag() -> String:return "media"
 static func source(id := "",internal := false) -> Dictionary:return {"type":"campaign","id":id,"segment":"media","internal":internal}
 static func error(text: String) -> Dictionary:return {"ok":false,"error":I18n.t(text)}
 static func is_running() -> bool:return GameState.has_game() and bool(S()["active"])
-static func valid() -> bool:return is_running() and Assets._valid_entity(entity())
+static func valid() -> bool:return is_running() and Assets._valid_entity(entity()) and Living.has_lease("loft_office")
 static func start() -> Dictionary:
 	if GameState.company_id()=="" or not GameState.flag("business_account_opened") or Acquisition.sold():return error("Register a company and open its bank account first.")
 	if not Living.has_lease("loft_office"):return error("Lease The Loft in University before opening the agency.")
@@ -51,7 +51,7 @@ static func refresh() -> void:
 	S()["week"]=week
 	for brief in S()["briefs"].values():
 		if brief["status"]=="open":brief["status"]="expired"
-	var count := maxi(int(cfg()["brief_min"]),ceili(float(cfg()["weekly_briefs"])*float(S()["reputation"])))
+	var count := maxi(int(cfg()["brief_min"]),ceili(float(cfg()["weekly_briefs"])*float(S()["reputation"])*CityFuture.demand_factor("media")*Industries.market_demand("media")))
 	for n in count:
 		var audience := GameState.rng.randi_range(0,3)
 		var goal := "awareness" if GameState.rng.randf()<.5 else "conversions"
@@ -59,7 +59,7 @@ static func refresh() -> void:
 		var client: String=cfg()["client_names"][GameState.rng.randi_range(0,cfg()["client_names"].size()-1)]
 		var price := budget+float(cfg()["service_fee"])
 		var id := Jobs.offer({"entity":entity(),"client":client,"scope":"Measured media campaign","price":price,"work":cfg()["campaign_days"],"due":Clock.now()+int(cfg()["brief_deadline_days"])*Clock.DAY,"terms":30,"deposit":budget*float(cfg()["client_deposit"])/price,"segment":"media"})
-		S()["briefs"][id]={"id":id,"client":client,"budget":budget,"goal":goal,"audience":audience,"deadline":Jobs.get_job(id)["due"],"kpi":budget*float(cfg()["kpi_reach_per_budget"] if goal=="awareness" else cfg()["kpi_conversion_per_budget"]),"status":"open","quality":0.0,"preferences":_roll_preferences()}
+		S()["briefs"][id]={"id":id,"client":client,"budget":budget,"goal":goal,"audience":audience,"deadline":Jobs.get_job(id)["due"],"kpi":budget*float(cfg()["kpi_reach_per_budget"] if goal=="awareness" else cfg()["kpi_conversion_per_budget"]),"status":"open","quality":0.0,"preferences":_roll_preferences(),"competitors":Jobs.get_job(id).get("competitors",[])}
 	if not S()["radio"].is_empty():_radio_offer()
 ## Every brief wants its own slogan / visual / tone mix; it is not fixed by the audience.
 static func _roll_preferences() -> Array:
@@ -90,7 +90,10 @@ static func propose(id: String) -> Dictionary:
 	Clock.advance(int(cfg()["pitch_minutes"]))
 	if not valid() or Clock.now()>int(brief["deadline"]):brief["status"]="expired";return error("This client brief expired during production.")
 	var chance := float(cfg()["proposal_base"])*float(brief["quality"])+float(cfg()["proposal_quality"])+float(cfg()["proposal_rep"])*float(S()["reputation"])
-	if GameState.rng.randf()>clampf(chance,float(cfg()["proposal_min"]),float(cfg()["proposal_max"])):brief["status"]="lost";return {"ok":true,"won":false}
+	if GameState.rng.randf()>Rivals.bid_chance(clampf(chance,float(cfg()["proposal_min"]),float(cfg()["proposal_max"])),brief.get("competitors",[])):
+		brief["status"]="lost"
+		Jobs.get_job(id)["status"]="expired"
+		return {"ok":true,"won":false}
 	if not Jobs.accept(id)["ok"]:return error("This job is no longer available.")
 	brief["status"]="won"
 	S()["campaigns"][id]=_campaign(id,brief,"")

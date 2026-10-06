@@ -71,6 +71,7 @@ func test_barista_orders_follow_the_house_rules() -> void:
 		g.round_i = 0
 		g.stage = Control.new()
 		g.build_round()
+		runner.check(g.order_text().contains(BaristaGame._name(BaristaGame.SHOTS, str(g.want["shots"]))), "every ticket states its shot count, including flat white")
 		if g.want["drink"] == "americano":
 			runner.check(g.want["milk"] == "none", "americano without milk")
 		if g.want["drink"] == "flat_white":
@@ -135,9 +136,24 @@ func test_tutorial_steps_are_well_formed() -> void:
 	tut.free()
 
 
-func test_no_way_to_skip_time() -> void:
-	runner.check(not ("fast_forward" in Clock), "the clock has no fast-forward")
-	runner.check(not InputMap.has_action("fast_forward"), "no fast-forward key")
+func test_fast_forward_is_held_and_respects_pause() -> void:
+	var old_speed := Clock.speed
+	Clock.speed = 1.0
+	Clock._acc = 0.0
+	Clock.world_active = true
+	var start := Clock.now()
+	Input.action_press("fast_forward")
+	Clock._process(1.0)
+	runner.eq(Clock.now() - start, 2, "held doubles ordinary minute ticks")
+	Clock.push_pause("test")
+	Clock._process(10.0)
+	runner.eq(Clock.now() - start, 2, "cannot fast-forward through pause")
+	Clock.pop_pause("test")
+	Input.action_release("fast_forward")
+	Clock._process(1.0)
+	runner.eq(Clock.now() - start, 3, "release automatically resumes normal speed")
+	Clock.speed = old_speed
+	Clock.world_active = false
 
 
 func test_the_guided_first_venture_has_no_waits() -> void:

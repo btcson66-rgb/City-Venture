@@ -17,17 +17,28 @@
   {
    "id": "accept",
    "label": "Take $40,000 for 20%",
-   "detail": "Cash in the company now, no repayments. You own 80% from here on.",
+   "detail": "Sign her term sheet as offered. Cash in the company now, no repayments. You own 80% from here on; she will want quarterly numbers.",
    "effects": [
     {
-     "op": "equity_investment",
-     "amount": 40000,
-     "stake": 0.2,
+     "op": "fund_intro",
      "investor": "elena",
-     "memo": "Northlight Capital — equity investment (20%)"
+     "choice": "sign"
     }
    ],
    "outcome": "Elena: \"Welcome to the portfolio. I'll want monthly numbers.\""
+  },
+  {
+   "id": "review",
+   "label": "Read the term sheet first",
+   "detail": "She leaves the term sheet with you for 30 days. Counter it or sign it later from Fundraising in Company OS; nothing is paid until you sign.",
+   "effects": [
+    {
+     "op": "fund_intro",
+     "investor": "elena",
+     "choice": "review"
+    }
+   ],
+   "outcome": "Elena: \"Read every line. The sheet stands for thirty days.\""
   },
   {
    "id": "decline",

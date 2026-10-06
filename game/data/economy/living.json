@@ -1,6 +1,10 @@
 {
   "start_cash": 30000,
-  "start_date": {"year": 2031, "month": 6, "day": 1},
+  "start_date": {
+    "year": 2031,
+    "month": 6,
+    "day": 1
+  },
   "start_minute_of_day": 840,
   "home_rent": 1250,
   "rent_due_day_of_month": 14,
@@ -10,5 +14,9 @@
   "late_rent_fee": 75,
   "low_cash_warning": 1500,
   "liquidation_rate": 0.4,
-  "coffee_price": 4.5
+  "coffee_price": 4.5,
+  "opening_home_deposit": 1250,
+  "moving_fee": 150,
+  "moving_unit_fee": 0.4,
+  "notice_days": 30
 }

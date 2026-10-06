@@ -8,6 +8,8 @@ const BINS := [["riverside", "Riverside", 1], ["startup_hub", "Startup Hub", 2],
 	["financial", "Financial District", 4], ["shopping_street", "Shopping Street", 5]]
 const SURNAMES := ["Chen", "Okafor", "Lindqvist", "Tanaka", "Moreau", "Silva", "Novak", "Haddad", "Kim", "Patel", "Reyes", "Walsh"]
 
+var damage_resolved := false
+
 var parcel := {}
 var right := 0
 var rng := RandomNumberGenerator.new()
@@ -23,7 +25,7 @@ func _init() -> void:
 
 
 func intro_lines() -> Array:
-	return ["Parcels come down the belt one at a time. Send each to its district's bin: click the bin or press 1–5.",
+	return ["Parcels come down the belt one at a time. Click the district bin or use the Choice 1–5 bindings in Settings.",
 		"Postcodes tell you the district: 1xxx Riverside, 2xxx Startup Hub, 3xxx Civic Center, 4xxx Financial District, 5xxx Shopping Street.",
 		"The first parcels show the district name. Later ones only have a postcode, and halfway through the cheat sheet goes away."]
 
@@ -33,16 +35,26 @@ func round_name() -> String:
 
 
 func build_round() -> void:
+	damage_resolved = false
 	var b: Array = BINS[rng.randi_range(0, BINS.size() - 1)]
 	parcel = {"bin": b[0], "code": "%d%03d" % [int(b[2]), rng.randi_range(0, 999)],
 		"name": "%s. %s" % [char(65 + rng.randi_range(0, 25)), SURNAMES[rng.randi_range(0, SURNAMES.size() - 1)]],
-		"show_name": round_i < 4}
+		"damaged": round_i % 3 == 1, "show_name": round_i < 4}
 	round_time = maxf(3.2, 6.0 - round_i * 0.18)   # the belt speeds up
 	_layout()
 
 
 func _layout() -> void:
 	UIK.clear(stage)
+	if parcel.get("damaged", false) and not damage_resolved:
+		var handling := UIK.vbox(8)
+		stage.add_child(handling)
+		handling.add_child(UIK.wrap("✗ Parcel damaged: contents exposed. Record damage before moving it to the inspection shelf.", 10, Art.C_WHITE, 540))
+		for quarantine in [true, false]:
+			var action := UIK.button("Record damage and quarantine" if quarantine else "Send the damaged parcel onward", _damage.bind(quarantine))
+			action.name = "Damage_" + ("quarantine" if quarantine else "ignore")
+			handling.add_child(action)
+		return
 	# the parcel on the belt
 	var belt := ColorRect.new()
 	belt.color = Color8(46, 50, 60)
@@ -102,6 +114,7 @@ static func _bin_name(id: String) -> String:
 func _drop(bin: String) -> void:
 	if phase != "play":
 		return
+	if parcel.get("damaged", false) and not damage_resolved: return
 	if bin == parcel["bin"]:
 		right += 1
 		award(0.7 + 0.3 * time_left())
@@ -121,10 +134,11 @@ func round_timeout() -> void:
 func _unhandled_key_input(event: InputEvent) -> void:
 	if phase != "play" or not (event is InputEventKey) or not event.pressed or event.echo:
 		return
-	var k := int((event as InputEventKey).keycode) - KEY_1
-	if k >= 0 and k < BINS.size():
-		get_viewport().set_input_as_handled()
-		_drop(str(BINS[k][0]))
+	for index in BINS.size():
+		if event.is_action_pressed("pick_%d" % (index + 1)):
+			get_viewport().set_input_as_handled()
+			_drop(str(BINS[index][0]))
+			return
 
 
 func extra_result() -> Dictionary:
@@ -133,3 +147,12 @@ func extra_result() -> Dictionary:
 
 func result_lines() -> Array:
 	return [I18n.t("Parcels sorted correctly: %d / %d") % [right, rounds]]
+
+func _damage(quarantine: bool) -> void:
+	if phase != "play" or damage_resolved or not parcel.get("damaged", false): return
+	damage_resolved = true
+	if quarantine:
+		right += 1
+		award(1.0)
+	else: award(0.0)
+	next_round()

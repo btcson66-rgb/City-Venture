@@ -1,7 +1,7 @@
 class_name WorldMapModal
 extends Modal
 ## World Map (Handoff §43) on the concept-board-E world art, with in-game region labels over the
-## board's label spots. Overseas play is Planned (P2) and says so.
+## board's label spots. Regional market facts open here; travel remains a separate story feature.
 
 const MAP_BOX := Rect2(12, 150, 928, 395)   # board-E crop the map texture was made from
 const MAP_SIZE := Vector2(600, 255)
@@ -23,13 +23,18 @@ static func b2m(p: Vector2) -> Vector2:
 
 func build() -> void:
 	footer.visible = false
+	var map_frame := Control.new()
+	map_frame.custom_minimum_size = MAP_SIZE
 	if DataDB.regions.get(sel, {}).get("status", "planned") != "active":
 		sel = "aurelia"
 	var mapc := Control.new()
+	mapc.name = "TouchMap"
+	mapc.set_meta("map_base_size", MAP_SIZE)
+	map_frame.add_child(mapc)
 	mapc.custom_minimum_size = MAP_SIZE
 	mapc.clip_contents = true
 	mapc.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	body.add_child(mapc)
+	body.add_child(map_frame)
 	var img := TextureRect.new()
 	img.texture = Art.tex("world_map/board")
 	img.size = MAP_SIZE
@@ -53,7 +58,11 @@ func build() -> void:
 		b.add_theme_stylebox_override("normal", UIK.flat(bg, accent, 1, 2))
 		b.add_theme_stylebox_override("hover", UIK.flat(Color(0.08, 0.13, 0.24, 1.0), Art.C_GOLD, 1, 2))
 		b.add_theme_stylebox_override("pressed", UIK.flat(bg, Art.C_GOLD, 1, 2))
-		b.pressed.connect(func(): sel = rid; rebuild())
+		b.pressed.connect(func():
+			sel = rid
+			rebuild()
+			if not home:
+				UIRoot.open_modal(GlobalRegionModal.new(rid)))
 		mapc.add_child(b)
 		var hb := UIK.hbox(3)
 		hb.position = Vector2(2, 2)
@@ -100,7 +109,7 @@ func build() -> void:
 	if sel == "aurelia":
 		c1.add_child(UIK.chip("YOUR HOME MARKET", Art.C_GREEN))
 	else:
-		c1.add_child(UIK.chip("Open", Art.C_GOLD))
+		c1.add_child(UIK.chip("OVERSEAS", Art.C_GOLD))
 	var c2 := UIK.vbox(0)
 	c2.custom_minimum_size = Vector2(210, 0)
 	row.add_child(c2)
@@ -113,8 +122,9 @@ func build() -> void:
 	c3.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(c3)
 	if sel != "aurelia":
-		c3.add_child(UIK.kv("Flight", "%dh" % int(r2["flight_hours_from_aurelia"]), Art.C_WHITE, 7))
-		c3.add_child(UIK.kv("Shipping", "%dd" % int(r2["shipping_days_from_aurelia"]), Art.C_WHITE, 7))
+		var ccy := GlobalMarket.currency(sel)
+		c3.add_child(UIK.kv(ccy, Fmt.money(FX.rate(ccy)) + I18n.t(" home dollars/unit"), Art.C_WHITE, 7))
+		c3.add_child(UIK.label("✓" if GlobalMarket.unlocked(sel) else "✗ " + I18n.t("Chapter 13"), 7, Art.C_GOLD))
 	var brow := UIK.hbox(4)
 	c3.add_child(brow)
 	brow.add_child(UIK.button("City map", func(): close(); UIRoot.open_modal(CityMapModal.new(false)), "", 56))
