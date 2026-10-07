@@ -27,7 +27,7 @@ static func entity() -> String: return str(S()["entity"])
 static func segment_tag() -> String: return "automotive"
 static func source(type := "auto", id := "") -> Dictionary: return {"type":type, "id":id, "segment":"automotive"}
 static func error(text: String) -> Dictionary: return {"ok":false, "error":I18n.t(text)}
-static func is_running() -> bool: return GameState.has_game() and bool(S()["active"])
+static func is_running() -> bool: return GameState.has_game() and bool(GameState.data.get("automotive", {}).get("active", false))  # read-only: asking must not create the state
 static func valid() -> bool: return is_running() and Assets._valid_entity(entity())
 static func auction() -> Dictionary: return cfg().get("auction", {})
 static func rental() -> Dictionary: return cfg().get("rental", {})

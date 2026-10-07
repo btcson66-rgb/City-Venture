@@ -8,7 +8,7 @@ static func S() -> Dictionary:
 		GameState.data["manufacturing"] = {"active":false, "entity":"", "machines":[], "lots":[], "pos":{}, "rfqs":{}, "orders":{}, "slots":[], "seq":1, "last_week":-1, "price_mult":1.0, "shortage_until":0, "stage":1, "inspection":0.5, "quality":[], "recalls":{}, "last_rfqs":-1}
 	return GameState.data["manufacturing"]
 static func segment_tag() -> String: return "manufacturing"
-static func is_running() -> bool: return GameState.has_game() and bool(S()["active"])
+static func is_running() -> bool: return GameState.has_game() and bool(GameState.data.get("manufacturing", {}).get("active", false))  # read-only: asking must not create the state
 static func source(id := "") -> Dictionary: return {"type":"manufacturing", "segment":"manufacturing", "id":id}
 static func entity() -> String: return str(S()["entity"])
 static func _error(text: String) -> Dictionary: return {"ok":false, "error":I18n.t(text)}
