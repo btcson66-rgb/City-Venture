@@ -54,7 +54,7 @@ func pick(id: String) -> Dictionary:
 	reset_scroll = true
 	return {"ok":true}
 func note(content: Control, text: String, color := Art.C_WHITE) -> void: content.add_child(UIK.wrap(text, 8, color, 550))
-func check(content: Control, ok: bool, text: String) -> void: note(content, ("✓ " if ok else "✗ ") + I18n.t(text), Art.C_WHITE if ok else Art.C_GOLD)
+func check(content: Control, ok: bool, text: String) -> void: note(content, ("✓ " if ok else "✗ ") + I18n.t(text), Art.C_WHITE if ok else Art.C_SKY)
 
 func build() -> void:
 	has_primary = false
@@ -95,7 +95,7 @@ func prerequisites(content: Control) -> void:
 func leads(content: Control) -> void:
 	content.add_child(UIK.label_tip("Roof leads", "energy_roof", 9))
 	var list: Array = Energy.open_leads()
-	if list.is_empty(): note(content, "✗ No roof leads this week. New leads arrive every Monday.", Art.C_GOLD)
+	if list.is_empty(): note(content, "✗ No roof leads this week. New leads arrive every Monday.", Art.C_SKY)
 	for lead in list:
 		var spec: Dictionary = Energy.cfg()["roof_kinds"][lead["kind"]]
 		var days := "" if lead["kind"] == "own" else I18n.t(" · %d days left") % maxi(0, ceili((int(lead["expires"]) - Clock.now()) / float(Clock.DAY)))
@@ -109,7 +109,7 @@ func leads(content: Control) -> void:
 func survey(content: Control) -> void:
 	var lead: Dictionary = Energy.S()["leads"].get(selected, {})
 	if lead.is_empty() or lead["status"] != "open":
-		note(content, "✗ Choose a roof lead to survey first.", Art.C_GOLD)
+		note(content, "✗ Choose a roof lead to survey first.", Art.C_SKY)
 		button(content, I18n.t("Roof leads"), "SurveyNeedsLead", goto_page.bind("leads"), true)
 		return
 	var roof: Dictionary = lead["roof"]
@@ -142,7 +142,7 @@ func survey(content: Control) -> void:
 		button(margins, I18n.t("Subsidy requested: yes") if lead["subsidy"] else I18n.t("Subsidy requested: no"), "ToggleSubsidy", Energy.set_options.bind(lead["id"], float(lead["battery"]), float(lead["margin"]), not bool(lead["subsidy"])))
 	var ev := Energy.lead_eval(lead["id"])
 	if not ev["ok"]:
-		note(content, "✗ Place at least one panel on the roof.", Art.C_GOLD)
+		note(content, "✗ Place at least one panel on the roof.", Art.C_SKY)
 		return
 	note(content, I18n.t("%d panels · %.1f kW · %s kWh/year · average shading loss %d%% · load %d of %d kg") % [int(ev["panels"]), float(ev["kw"]), str(roundi(ev["annual_kwh"])), roundi(float(ev["shade_loss"]) * 100), roundi(ev["load_used"]), roundi(ev["load_cap"])])
 	if lead["kind"] == "own":
@@ -175,7 +175,7 @@ func installs(content: Control) -> void:
 			button(content, I18n.t("Order materials and start · %s") % Fmt.money0(inst["materials"]), "StartInstall_" + inst["id"], Energy.start_install.bind(inst["id"]), inst["subsidy"] != "pending")
 		elif inst["status"] == "delivered" and job.get("status", "") != "":
 			note(content, I18n.t("Invoice %s · %s · warranty to %s") % [Fmt.money0(job["price"]), I18n.t(str(CompanyOS.STATUS_TEXT.get(job["status"], str(job["status"]).capitalize()))), Clock.fmt_date(int(inst["warranty_until"]))], Art.C_SKY)
-	if not any: note(content, "✗ No installs yet. Survey a roof and send a quote.", Art.C_GOLD)
+	if not any: note(content, "✗ No installs yet. Survey a roof and send a quote.", Art.C_SKY)
 	for claim in Energy.claims_open():
 		note(content, I18n.t("Warranty claim from %s: %s, repair cost %s, decide within %d days") % [I18n.t(claim["client"]), I18n.t(claim["reason"]), Fmt.money0(claim["cost"]), maxi(0, ceili((int(claim["due"]) - Clock.now()) / float(Clock.DAY)))], Art.C_GOLD)
 		var row := UIK.hbox(4)
@@ -214,14 +214,14 @@ func subsidy(content: Control) -> void:
 	check(content, int(Clock.date()["month"]) <= int(s["season_last_month"]), "Applications are open this year.")
 	check(content, Energy.quota_left("install") > 0, "Install grant quota remains.")
 	note(content, I18n.t("Install grants: %d%% of the quote up to %s per system. Quota left %s of %s. Charger grants: %d%% up to %s, quota left %s. Filing fee %s, decision in about %d days; some applications are rejected.") % [roundi(float(s["rate"]) * Energy.mod("subsidy") * 100), Fmt.money0(s["cap"]), Fmt.money0(Energy.quota_left("install")), Fmt.money0(Energy.quota_total("install")), roundi(float(s["charger_rate"]) * Energy.mod("subsidy") * 100), Fmt.money0(s["charger_cap"]), Fmt.money0(Energy.quota_left("charger")), Fmt.money0(s["fee"]), int(s["decision_days"])])
-	if Energy.mod("subsidy") < 1.0: note(content, "✗ A policy cut is reducing grants; the rate recovers over time.", Art.C_GOLD)
+	if Energy.mod("subsidy") < 1.0: note(content, "✗ A policy cut is reducing grants; the rate recovers over time.", Art.C_SKY)
 	for inst in Energy.S()["installs"].values():
 		if inst["status"] in ["contracted", "installing"] and inst["subsidy"] == "none" and inst["kind"] != "own":
 			button(content, I18n.t("Apply for %s · fee %s") % [I18n.t(inst["client"]), Fmt.money0(s["fee"])], "ApplySubsidy_" + inst["id"], Energy.apply_subsidy.bind("install", inst["id"]), why == "")
 	for app in Energy.applications():
 		var text: String = {"pending":I18n.t("pending"), "approved":I18n.t("approved"), "rejected":I18n.t("rejected"), "paid":I18n.t("paid"), "cancelled":I18n.t("cancelled")}.get(app["status"], str(app["status"]))
 		note(content, ("✓ " if app["status"] in ["approved", "paid"] else "✗ " if app["status"] == "rejected" else "") + I18n.t("%s: grant %s, %s") % [str(app["ref"]), Fmt.money0(app["grant"]), text])
-	if why != "": note(content, "✗ " + I18n.t(why), Art.C_GOLD)
+	if why != "": note(content, "✗ " + I18n.t(why), Art.C_SKY)
 	if not has_primary:
 		button(content, I18n.t("Roof leads"), "SubsidyNextLeads", goto_page.bind("leads"), true)
 

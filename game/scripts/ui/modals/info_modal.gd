@@ -28,7 +28,7 @@ func build() -> void:
 		elif str(l).begins_with("# "):
 			# the catalogue has the whole line ("# YOU DID THE WHOLE LOOP"): translate it, then drop the marker
 			var hd := I18n.t(str(l))
-			v.add_child(UIK.label(hd.substr(2) if hd.begins_with("# ") else I18n.t(str(l).substr(2)), 8, Art.C_GOLD, true))
+			v.add_child(UIK.label(hd.substr(2) if hd.begins_with("# ") else I18n.t(str(l).substr(2)), 8, Art.C_SKY, true))
 		elif str(l) == "---":
 			v.add_child(UIK.sep())
 		else:

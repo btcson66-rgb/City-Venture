@@ -2077,7 +2077,7 @@ msgstr ""
 msgid "Accept opportunity"
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:56
+#: scripts/ui/modals/traffic_modal.gd:62
 msgid "Accept partial settlement"
 msgstr ""
 
@@ -2181,7 +2181,7 @@ msgstr ""
 msgid "Accident repair: %s"
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:49
+#: scripts/ui/modals/traffic_modal.gd:55
 msgid "Accident_%d"
 msgstr ""
 
@@ -2301,7 +2301,7 @@ msgstr ""
 msgid "Add bubble wrap"
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:42
+#: scripts/ui/modals/traffic_modal.gd:48
 msgid "Add cash before buying medicine, or wait for natural recovery."
 msgstr ""
 
@@ -2605,7 +2605,7 @@ msgstr ""
 msgid "Ambitious: works harder, expects a raise within two months."
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:32
+#: scripts/ui/modals/traffic_modal.gd:38
 msgid "Ambulance"
 msgstr ""
 
@@ -2621,7 +2621,7 @@ msgstr ""
 msgid "An RFQ specifies units, deadline, price range and maximum defects."
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:31
+#: scripts/ui/modals/traffic_modal.gd:37
 msgid "An ambulance can take you to Civic Clinic. Admission takes up to three days and your business keeps running. Phone replies, meetings and the bank appointment wait for you; if a chapter, contract or group-job deadline is nearer, you are discharged early."
 msgstr ""
 
@@ -4505,7 +4505,7 @@ msgstr ""
 msgid "BuyCampusRadio"
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:45
+#: scripts/ui/modals/traffic_modal.gd:51
 msgid "BuyHealthPolicy"
 msgstr ""
 
@@ -4961,7 +4961,7 @@ msgstr ""
 msgid "Cancel a purchase still on the way within the supplier cancellation window (normally 24 hours). The normal fee is 5%; payments that have not cleared return the full principal."
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:46
+#: scripts/ui/modals/traffic_modal.gd:52
 msgid "Cancel automatic renewal"
 msgstr ""
 
@@ -4997,7 +4997,7 @@ msgstr ""
 msgid "Cancel within the supplier window while the goods are on the way. Unpaid terms reduce accounts payable; any cancellation fee remains due. Unsettled cross-border payments return the principal, but settlement fees stay paid."
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:46
+#: scripts/ui/modals/traffic_modal.gd:52
 msgid "CancelHealthRenewal"
 msgstr ""
 
@@ -6221,7 +6221,7 @@ msgstr ""
 msgid "Claim %s · %s · %s"
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:59
+#: scripts/ui/modals/traffic_modal.gd:65
 msgid "Claim collection: %s"
 msgstr ""
 
@@ -6665,11 +6665,11 @@ msgstr ""
 msgid "Collect the money Crestline owes you"
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:60
+#: scripts/ui/modals/traffic_modal.gd:66
 msgid "Collect verified claim"
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:60
+#: scripts/ui/modals/traffic_modal.gd:66
 msgid "CollectTrafficClaim"
 msgstr ""
 
@@ -7561,7 +7561,7 @@ msgstr ""
 msgid "Cover %.0f%% of eligible loss · deductible %s · limit %s per %d days"
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:44
+#: scripts/ui/modals/traffic_modal.gd:50
 msgid "Covered until %s"
 msgstr ""
 
@@ -9417,7 +9417,7 @@ msgstr ""
 msgid "Eliminated internal sales"
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:37
+#: scripts/ui/modals/traffic_modal.gd:43
 msgid "Emergency care is available even without cash. Unpaid medical bills remain payable here. Insurance must already be active when the collision happens."
 msgstr ""
 
@@ -10245,7 +10245,7 @@ msgstr ""
 msgid "Figures you can show (from your books)"
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:57
+#: scripts/ui/modals/traffic_modal.gd:63
 msgid "File claim — wait seven days"
 msgstr ""
 
@@ -10265,7 +10265,7 @@ msgstr ""
 msgid "FileReader"
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:57
+#: scripts/ui/modals/traffic_modal.gd:63
 msgid "FileTrafficClaim"
 msgstr ""
 
@@ -11985,12 +11985,16 @@ msgstr ""
 msgid "Health insurance must be active at impact. Claims cover incurred medical costs; counterparty settlements cannot duplicate insured costs."
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:45
+#: scripts/ui/modals/traffic_modal.gd:51
 msgid "Health insurance: %s / 30 days"
 msgstr ""
 
 #: scripts/sim/traffic_safety.gd:108
 msgid "Health policy expired: add cash and buy a new policy."
+msgstr ""
+
+#: scripts/ui/hud.gd:318
+msgid "Health · %d"
 msgstr ""
 
 #: data/events/real_estate_neighbors.json
@@ -12953,7 +12957,7 @@ msgstr ""
 msgid "Inherited property — %s"
 msgstr ""
 
-#: scripts/ui/hud.gd:315 scripts/ui/modals/traffic_modal.gd:29
+#: scripts/ui/hud.gd:319 scripts/ui/modals/traffic_modal.gd:35
 msgid "Injury: %s"
 msgstr ""
 
@@ -15885,7 +15889,7 @@ msgstr ""
 msgid "Media studio"
 msgstr ""
 
-#: scripts/ui/hud.gd:315
+#: scripts/ui/hud.gd:319
 msgid "Medical bill or claim open"
 msgstr ""
 
@@ -16213,7 +16217,7 @@ msgstr ""
 msgid "Minor injuries recover after three days or medicine. Ambulance admission takes one to three days while your business keeps running."
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:34
+#: scripts/ui/modals/traffic_modal.gd:40
 msgid "Minor injuries slow walking for three days. Buy medicine at the Civic Clinic pharmacy to recover sooner."
 msgstr ""
 
@@ -17153,7 +17157,7 @@ msgstr ""
 msgid "No active job to work on."
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:44
+#: scripts/ui/modals/traffic_modal.gd:50
 msgid "No active policy — buy coverage before an accident."
 msgstr ""
 
@@ -19613,7 +19617,7 @@ msgstr ""
 msgid "Pay invoice"
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:53
+#: scripts/ui/modals/traffic_modal.gd:59
 msgid "Pay medical balance: %s"
 msgstr ""
 
@@ -19677,7 +19681,7 @@ msgstr ""
 msgid "Pay {press_fee} for {press_days} days of exposure. You still need real sales to earn revenue."
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:53
+#: scripts/ui/modals/traffic_modal.gd:59
 msgid "PayMedicalDebt"
 msgstr ""
 
@@ -22629,7 +22633,7 @@ msgstr ""
 msgid "Review a market that can no longer operate"
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:49
+#: scripts/ui/modals/traffic_modal.gd:55
 msgid "Review accident #%d"
 msgstr ""
 
@@ -23669,7 +23673,7 @@ msgstr ""
 msgid "Save transfer"
 msgstr ""
 
-#: scripts/ui/hud.gd:167 scripts/ui/hud.gd:341
+#: scripts/ui/hud.gd:167 scripts/ui/hud.gd:345
 msgid "Saved"
 msgstr ""
 
@@ -24189,7 +24193,7 @@ msgstr ""
 msgid "SettleGig"
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:56
+#: scripts/ui/modals/traffic_modal.gd:62
 msgid "SettleTraffic"
 msgstr ""
 
@@ -25845,7 +25849,7 @@ msgstr ""
 msgid "Take a number whenever you're ready."
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:32
+#: scripts/ui/modals/traffic_modal.gd:38
 msgid "Take ambulance"
 msgstr ""
 
@@ -28405,15 +28409,15 @@ msgstr ""
 msgid "Treat her like any other guest"
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:43
+#: scripts/ui/modals/traffic_modal.gd:49
 msgid "Treatment"
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:43
+#: scripts/ui/modals/traffic_modal.gd:49
 msgid "Treatment / medicine: %s"
 msgstr ""
 
-#: scripts/sim/traffic_safety.gd:141 scripts/ui/modals/traffic_modal.gd:51
+#: scripts/sim/traffic_safety.gd:141 scripts/ui/modals/traffic_modal.gd:57
 msgid "Treatment complete: %d hospital days; medical bill %s; health claim %s."
 msgstr ""
 
@@ -29201,7 +29205,7 @@ msgstr ""
 msgid "Visit Threadline on Shopping Street to browse the outfits available now."
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:35
+#: scripts/ui/modals/traffic_modal.gd:41
 msgid "Visit clinic"
 msgstr ""
 
@@ -29209,7 +29213,7 @@ msgstr ""
 msgid "Visit or lease the location."
 msgstr ""
 
-#: scripts/ui/modals/traffic_modal.gd:35
+#: scripts/ui/modals/traffic_modal.gd:41
 msgid "VisitClinic"
 msgstr ""
 
@@ -29809,7 +29813,7 @@ msgstr ""
 msgid "Whole milk"
 msgstr ""
 
-#: scripts/ui/info_tip.gd:78
+#: scripts/ui/info_tip.gd:88
 msgid "Why it matters: "
 msgstr ""
 

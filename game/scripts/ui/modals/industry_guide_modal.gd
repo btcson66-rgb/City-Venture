@@ -12,7 +12,7 @@ func build() -> void:
 		box.add_child(UIK.wrap("✓ "+I18n.t("Guide finished. Continue from your industry tab."),10,Art.C_GREEN,410))
 		footer.add_child(UIK.button("Close",close,"primary"));return
 	var step: Dictionary=d["objectives"][p["step"]]
-	box.add_child(UIK.label(I18n.t("FIRST ORDER %d/%d")%[int(p["step"])+1,d["objectives"].size()],10,Art.C_GOLD))
+	box.add_child(UIK.label(I18n.t("FIRST ORDER %d/%d")%[int(p["step"])+1,d["objectives"].size()],10,Art.C_SKY))
 	box.add_child(UIK.wrap("✗ "+I18n.t(step["text"]),10,Art.C_WHITE,410))
 	box.add_child(UIK.wrap("You can skip this guide and continue operating. Already completed work is never repeated.",8,Art.C_MUTED,410))
 	var b:=UIK.button("Continue in the industry tab",close,"primary")

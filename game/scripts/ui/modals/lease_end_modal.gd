@@ -24,7 +24,7 @@ func build() -> void:
 		for property_id in Living.D()["leases"]:
 			var lease: Dictionary = Living.D()["leases"][property_id]
 			var title := I18n.t(str(DataDB.properties.get(property_id, {}).get("name", property_id)))
-			list.add_child(UIK.label(title, 9, Art.C_GOLD, true))
+			list.add_child(UIK.label(title, 9, Art.C_SKY, true))
 			list.add_child(UIK.label(I18n.t("Monthly rent: %s") % Fmt.money(float(lease["rent"])), 8))
 			if lease.has("ending"): list.add_child(UIK.label(I18n.t("Notice ends %s") % Clock.fmt_short(int(lease["ending"]["due"])), 8, Art.C_SKY))
 			var view := UIK.button("Review lease", func(): pid = property_id; rebuild())
@@ -43,7 +43,7 @@ func _detail(list: Control) -> void:
 	if lease.is_empty():
 		list.add_child(UIK.label("This lease has ended.", 9, Art.C_GREEN))
 		return
-	list.add_child(UIK.label(I18n.t(str(LeaseEnd.policy(pid)["name"])), 10, Art.C_GOLD, true))
+	list.add_child(UIK.label(I18n.t(str(LeaseEnd.policy(pid)["name"])), 10, Art.C_SKY, true))
 	list.add_child(UIK.wrap("A premises-dependent business pauses when its lease ends. Finish its jobs first, or settle cancellations. Existing delivered invoices remain collectible.", 8, Art.C_MUTED, 468))
 	_select(list, [["notice", "Give notice"], ["immediate", "Leave immediately"]], mode, func(v): mode = v; rebuild(), "LeaseMode_")
 	_select(list, [["move", "Move stock"], ["liquidate", "Liquidate stock"]], stock, func(v): stock = v; rebuild(), "LeaseStock_")
@@ -65,7 +65,7 @@ func _detail(list: Control) -> void:
 			quote["notice_rent"] = 0.0
 			quote["early_fee"] = 0.0
 			quote["total"] = float(quote["moving"]) + float(quote["severance"]) + float(quote["penalties"]) + float(quote["job_refunds"])
-		list.add_child(UIK.label(I18n.t("Notice ends %s") % Clock.fmt_short(int(quote["due"])), 8, Art.C_GOLD))
+		list.add_child(UIK.label(I18n.t("Notice ends %s") % Clock.fmt_short(int(quote["due"])), 8, Art.C_SKY))
 		if quote.has("blocked"): list.add_child(UIK.wrap("✗ " + str(quote["blocked"]), 8, Art.C_RED, 468))
 	if quote["ok"]:
 		for row in [["Notice rent", "notice_rent"], ["Early exit fee", "early_fee"], ["Moving cost", "moving"], ["Staff severance", "severance"], ["Job penalties", "penalties"], ["Job deposit refunds", "job_refunds"], ["Material liquidation proceeds", "materials"], ["Deposit held", "deposit"], ["Damage deduction", "damage"], ["Deposit returned on exit", "refund"]]:
@@ -73,7 +73,7 @@ func _detail(list: Control) -> void:
 		list.add_child(UIK.kv("Exit date", Clock.fmt_short(int(quote["due"]))))
 		list.add_child(UIK.kv("Cash needed before refund", Fmt.money(float(quote["total"])), Art.C_GOLD))
 	else:
-		list.add_child(UIK.wrap("✗ " + str(quote["error"]), 8, Art.C_GOLD, 468))
+		list.add_child(UIK.wrap("✗ " + str(quote["error"]), 8, Art.C_SKY, 468))
 	var pending: bool = lease.has("ending")
 	var ready: bool = quote["ok"] and (not pending or Clock.now() >= int(quote["due"]))
 	var confirm := UIK.button("Resolve pending exit" if pending else "Confirm termination", _confirm.bind(plan), "primary" if ready else "button")

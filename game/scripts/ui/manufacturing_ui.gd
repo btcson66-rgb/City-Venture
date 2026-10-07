@@ -79,7 +79,7 @@ func build() -> void:
 	if not Manufacturing.is_running():
 		var why := Manufacturing.setup_block()
 		content.add_child(UIK.wrap("Quote OEM orders, buy raw materials, schedule machines and inspect each batch.", 8, Art.C_WHITE, 540))
-		if why != "": content.add_child(UIK.wrap("✗ "+I18n.t(why), 9, Art.C_GOLD, 540))
+		if why != "": content.add_child(UIK.wrap("✗ "+I18n.t(why), 9, Art.C_SKY, 540))
 		else: button(content, "Open the factory", "OpenFactory", Manufacturing.start, true)
 		return
 	content.add_child(UIK.label(I18n.t("Factory cash: %s · materials: %d units") % [Fmt.money(Ledger.cash(Manufacturing.entity())), Manufacturing.material_units()], 8))
@@ -136,10 +136,10 @@ func planner(content: Control) -> void:
 	content.add_child(UIK.label_tip("Machine schedule", "manufacturing_schedule", 9))
 	var machines: Array = Manufacturing.S()["machines"]
 	if machines.is_empty():
-		content.add_child(UIK.wrap("✗ Rent a machine in OEM orders first.", 9, Art.C_GOLD, 540))
+		content.add_child(UIK.wrap("✗ Rent a machine in OEM orders first.", 9, Art.C_SKY, 540))
 		return
 	if selected_job == "" or Manufacturing.S()["orders"].get(selected_job, {}).get("status", "") != "active":
-		content.add_child(UIK.wrap("✗ Choose an order in OEM orders first.", 9, Art.C_GOLD, 540))
+		content.add_child(UIK.wrap("✗ Choose an order in OEM orders first.", 9, Art.C_SKY, 540))
 		return
 	machine_index = mini(machine_index, machines.size()-1)
 	var machine := str(machines[machine_index])

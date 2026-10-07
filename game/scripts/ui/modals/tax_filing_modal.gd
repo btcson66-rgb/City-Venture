@@ -11,7 +11,7 @@ func _init(company: String) -> void:
 func build() -> void:
 	_primary=false
 	if not Tax.vat_entity(entity):
-		body.add_child(UIK.wrap("✗ Register an open company first; visit City Hall's registration counter.",8,Art.C_GOLD,520))
+		body.add_child(UIK.wrap("✗ Register an open company first; visit City Hall's registration counter.",8,Art.C_SKY,520))
 		return
 	body.add_child(UIK.label_tip("VAT and income tax","tax_filing",9,Art.C_WHITE,true))
 	body.add_child(UIK.label(I18n.t("VAT %.0f%% · annual company income tax %.0f%%")%[float(Tax.cfg()["vat_rate"])*100,float(Tax.cfg()["income_rate"])*100],8))

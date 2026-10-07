@@ -172,7 +172,7 @@ func _draw_view() -> void:
 				if c < col:
 					colr = Color(0.45, 0.85, 0.55)
 				elif c == col:
-					view.draw_rect(Rect2(x - 1, y - 10, CHAR_W + 1, 13), Art.C_RED if _err_flash > 0.0 else Art.C_GOLD)
+					view.draw_rect(Rect2(x - 1, y - 10, CHAR_W + 1, 13), Art.C_RED if _err_flash > 0.0 else Art.C_SKY)
 					colr = Color(0.08, 0.08, 0.1)
 				else:
 					colr = Color(0.92, 0.94, 1.0)

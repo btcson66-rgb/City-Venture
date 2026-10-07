@@ -20,7 +20,7 @@ func build() -> void:
 	var hired := Careers.current_job() == job_id
 	var top := UIK.hbox(6)
 	body.add_child(top)
-	top.add_child(UIK.title(I18n.t(str(Careers.rank(job_id)["title"])), 13, Art.C_GOLD))
+	top.add_child(UIK.title(I18n.t(str(Careers.rank(job_id)["title"])), 13, Art.C_SKY))
 	top.add_child(UIK.expand())
 	top.add_child(UIK.chip(I18n.t("YOUR JOB") if hired else I18n.t("HIRING"), Art.C_GREEN if hired else Art.C_SKY))
 	body.add_child(UIK.wrap(I18n.t(str(j.get("blurb", ""))), 8, Art.C_SKY, 400))
@@ -29,7 +29,7 @@ func build() -> void:
 	body.add_child(UIK.kv("Pay", I18n.t("$%d / hour · %s per 4-hour shift") % [int(Careers.wage(job_id)), Fmt.money(Careers.shift_pay(job_id))], Art.C_GREEN))
 	body.add_child(UIK.kv("Shifts", I18n.t("Any time %s–%s, %s · %d shift(s) a day") % [h.get("open", ""), h.get("close", ""),
 		I18n.t("every day") if days == "all" else I18n.t("Mon–Fri"), int(Careers.rank(job_id).get("shifts_per_day", 1))]))
-	body.add_child(UIK.kv("Perk", I18n.t(str(j.get("perk", {}).get("desc", ""))), Art.C_GOLD))
+	body.add_child(UIK.kv("Perk", I18n.t(str(j.get("perk", {}).get("desc", ""))), Art.C_SKY))
 	# promotion ladder
 	var ladder := UIK.hbox(4)
 	body.add_child(ladder)
@@ -37,7 +37,7 @@ func build() -> void:
 	var ri := Careers.rank_index(job_id)
 	for i in ranks.size():
 		var r: Dictionary = ranks[i]
-		var col := Art.C_GOLD if i == ri else (Art.C_GREEN if i < ri else Art.C_DIM)
+		var col := Art.C_SKY if i == ri else (Art.C_GREEN if i < ri else Art.C_DIM)
 		var p := PanelContainer.new()
 		p.add_theme_stylebox_override("panel", UIK.flat(Color(0.06, 0.1, 0.18, 0.9), col, 1, 2))
 		var v := UIK.vbox(0)
@@ -72,7 +72,7 @@ func build() -> void:
 	else:
 		var cur := Careers.current_job()
 		if cur != "":
-			body.add_child(UIK.label(I18n.t("Taking this job means leaving %s.") % I18n.t(str(Careers.job_def(cur)["employer"])), 7, Art.C_GOLD, true))
+			body.add_child(UIK.label(I18n.t("Taking this job means leaving %s.") % I18n.t(str(Careers.job_def(cur)["employer"])), 7, Art.C_SKY, true))
 		var a := UIK.button("Take the job", _apply, "primary")
 		a.name = "ApplyJob"
 		footer.add_child(a)

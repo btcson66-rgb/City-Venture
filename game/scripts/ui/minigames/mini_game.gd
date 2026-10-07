@@ -71,7 +71,7 @@ func _build_intro() -> void:
 	v.add_child(UIK.label("HOW IT WORKS", 7, Art.C_DIM, true))
 	for line in intro_lines():
 		var row := UIK.hbox(4)
-		row.add_child(UIK.label("•", 9, Art.C_GOLD, true))
+		row.add_child(UIK.label("•", 9, Art.C_SKY, true))
 		row.add_child(UIK.wrap(I18n.t(str(line)), 9, Art.C_WHITE, 540))
 		v.add_child(row)
 	var go := UIK.button("Start", start, "primary", 110)
@@ -164,7 +164,7 @@ func _build_results() -> void:
 	var v := UIK.vbox(5)
 	body.add_child(v)
 	var stars := 1 + int(s >= 0.5) + int(s >= 0.8)
-	v.add_child(UIK.title("★".repeat(stars) + "☆".repeat(3 - stars), 20, Art.C_GOLD))
+	v.add_child(UIK.title("★".repeat(stars) + "☆".repeat(3 - stars), 20, Art.C_SKY))
 	v.add_child(UIK.title(I18n.t("Score %d%%") % int(round(s * 100.0)), 14, Art.C_WHITE))
 	v.add_child(UIK.wrap(I18n.t(verdict(s)), 9, Art.C_SKY, 540))
 	v.add_child(UIK.sep())

@@ -22,7 +22,7 @@ func build() -> void:
 	if can_sleep():
 		body.add_child(UIK.wrap("Call it a day? You'll wake up at 7:00 AM. The game autosaves.", 9, Art.C_WHITE, 310))
 		if h >= 5 and h < 19:
-			body.add_child(UIK.wrap(I18n.t("It's only %s: sleeping now skips the rest of today.") % Clock.fmt_time(), 7, Art.C_GOLD, 310))
+			body.add_child(UIK.wrap(I18n.t("It's only %s: sleeping now skips the rest of today.") % Clock.fmt_time(), 7, Art.C_SKY, 310))
 		var b := UIK.button("Sleep until 7:00 AM", _sleep, "primary")
 		b.name = "Sleep"
 		body.add_child(b)

@@ -39,7 +39,7 @@ func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	safety_button = UIK.button("Use crosswalks for safer crossing", func(): UIRoot.open_modal(TrafficModal.new("accident")))
 	safety_button.position = Vector2(220,330)
-	safety_button.custom_minimum_size = Vector2(240,20)
+	safety_button.custom_minimum_size = Vector2(120,24)
 	add_child(safety_button)
 	# time card
 	var tp := UIK.panel("ui/panel_glass", 5)
@@ -75,7 +75,7 @@ func _ready() -> void:
 	var oh := UIK.hbox(3)
 	ov.add_child(oh)
 	oh.add_child(UIK.icon("objective", 10))
-	goal_label = UIK.label("", 7, Art.C_GOLD, true)
+	goal_label = UIK.label("", 7, Art.C_SKY, true)
 	oh.add_child(goal_label)
 	obj_label = UIK.wrap("", 8, Art.C_WHITE, 184)
 	ov.add_child(obj_label)
@@ -123,11 +123,11 @@ func _ready() -> void:
 	qrow.add_child(phone_btn)
 	qrow.add_child(_quick_button("map", "Map", "map", func(): UIRoot.open_map()))
 	qrow.add_child(_quick_button("settings", "Menu", "pause", func(): UIRoot.open_pause()))
-	phone_hint = UIK.label("", 7, Art.C_GOLD, true)
+	phone_hint = UIK.label("", 7, Art.C_SKY, true)
 	phone_hint.visible = false
 	phone_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	quick.add_child(phone_hint)
-	parcels_label = UIK.label("", 7, Art.C_GOLD, true)
+	parcels_label = UIK.label("", 7, Art.C_SKY, true)
 	parcels_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	quick.add_child(parcels_label)
 	# minimap
@@ -187,8 +187,8 @@ func _quick_button(icon_name: String, text: String, key: String, cb: Callable) -
 	var b := Button.new()
 	b.focus_mode = Control.FOCUS_NONE
 	b.add_theme_stylebox_override("normal", UIK.flat(Color(0.05, 0.08, 0.15, 0.88), Color(0.45, 0.55, 0.75, 0.55), 1, 2))
-	b.add_theme_stylebox_override("hover", UIK.flat(Color(0.1, 0.15, 0.26, 0.95), Art.C_GOLD, 1, 2))
-	b.add_theme_stylebox_override("pressed", UIK.flat(Color(0.1, 0.15, 0.26, 0.95), Art.C_GOLD, 1, 2))
+	b.add_theme_stylebox_override("hover", UIK.flat(Color(0.1, 0.15, 0.26, 0.95), Art.C_SKY, 1, 2))
+	b.add_theme_stylebox_override("pressed", UIK.flat(Color(0.1, 0.15, 0.26, 0.95), Art.C_SKY, 1, 2))
 	b.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	var h := UIK.hbox(2)
 	h.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -262,14 +262,14 @@ func _process(_d: float) -> void:
 	today_label.add_theme_color_override("font_color", Art.C_GREEN if delta >= 0 else Art.C_RED)
 	var pc := Ledger.cash("player")
 	cash_label.text = Fmt.money0(pc)
-	cash_label.add_theme_color_override("font_color", Art.C_GREEN if pc >= 1500 else (Art.C_GOLD if pc >= 0 else Art.C_RED))
+	cash_label.add_theme_color_override("font_color", Art.C_GREEN if pc >= 1500 else (Art.C_SKY if pc >= 0 else Art.C_RED))
 	var be := GameState.business_entity()
 	co_row.visible = be != "player"
 	if be != "player":
 		co_name.text = GameState.entity_name(be).to_upper()
 		var cc := Ledger.cash(be)
 		co_label.text = Fmt.money0(cc)
-		co_label.add_theme_color_override("font_color", Art.C_GREEN if cc >= 1500 else (Art.C_GOLD if cc >= 0 else Art.C_RED))
+		co_label.add_theme_color_override("font_color", Art.C_GREEN if cc >= 1500 else (Art.C_SKY if cc >= 0 else Art.C_RED))
 	var unread := GameState.unread_messages()
 	var pending := not EventEngine.pending().is_empty()
 	phone_hint.text = ((I18n.t("● %d new") % unread) if unread > 0 else "") + ((I18n.t("   ◆ decision")) if pending else "")
@@ -311,8 +311,12 @@ func _refresh_safety() -> void:
 	var ws := SceneRouter.world_scene()
 	safety_button.visible = ws != null and ws.kind == "district" and TrafficSafety.needs_attention()
 	if safety_button.visible:
-		var injury := str(TrafficSafety.S()["injury"])
-		safety_button.text = I18n.t("Injury: %s") % TrafficSafety.severity_label(injury) if injury != "none" else I18n.t("Medical bill or claim open")
+		var health := TrafficSafety.S()
+		var pending := 0
+		for accident in health["accidents"]:
+			if float(accident.get("debt", 0)) > 0 or (accident.get("counterparty_fault", false) and accident.get("treated", false) and not accident.get("settled", false)): pending += 1
+		safety_button.text = I18n.t("Health · %d") % (maxi(1, pending) if health["injury"] != "none" else pending)
+		safety_button.tooltip_text = I18n.t("Injury: %s") % TrafficSafety.severity_label(str(health["injury"])) if health["injury"] != "none" else I18n.t("Medical bill or claim open")
 
 
 var _hours_key := ""

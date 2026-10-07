@@ -19,7 +19,7 @@ func build_round() -> void:
 	cards.position=Vector2(10,8)
 	cards.size=Vector2(550,220)
 	stage.add_child(cards)
-	cards.add_child(UIK.wrap(I18n.t("%s · audience: %s")%[I18n.t(str(brief.get("client",""))),I18n.t(Media.cfg()["audiences"][int(brief["audience"])])],10,Art.C_GOLD,520))
+	cards.add_child(UIK.wrap(I18n.t("%s · audience: %s")%[I18n.t(str(brief.get("client",""))),I18n.t(Media.cfg()["audiences"][int(brief["audience"])])],10,Art.C_SKY,520))
 	var preferences: Array=brief["preferences"]
 	var wanted: Array=[]
 	for k in 3:wanted.append(I18n.t(Media.cfg()["creative_cards"][["slogan","visual","tone"][k]][int(preferences[k])]))

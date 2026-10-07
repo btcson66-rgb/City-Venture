@@ -21,7 +21,7 @@ func build() -> void:
 	if done:
 		var cid := GameState.company_id()
 		var e: Dictionary = GameState.data["entities"][cid]
-		body.add_child(UIK.title(e["name"], 16, Art.C_GOLD))
+		body.add_child(UIK.title(e["name"], 16, Art.C_SKY))
 		body.add_child(UIK.label(I18n.t("Registration no. %s · Founded %s") % [e["registration_no"], Clock.fmt_date(int(e["founded"]))], 8, Art.C_MUTED))
 		body.add_child(UIK.wrap("Ana: \"All done. Congratulations. Open a business account at Nexus Bank and you're set.\"", 9, Art.C_WHITE, 390))
 		body.add_child(UIK.wrap("ShopLane seller cap lifted · B2B contracts unlocked · office leases unlocked · supplier net terms unlocked", 7, Art.C_GREEN, 390))
@@ -36,7 +36,7 @@ func build() -> void:
 	body.add_child(name_edit)
 	body.add_child(UIK.label("Business type", 8, Art.C_MUTED, true))
 	var types := UIK.hbox(4)
-	var type_label:=UIK.label(I18n.t("Holding company") if selected_type=="holding" else I18n.t("Operating company"),8,Art.C_GOLD)
+	var type_label:=UIK.label(I18n.t("Holding company") if selected_type=="holding" else I18n.t("Operating company"),8,Art.C_SKY)
 	for option in [["retail_online","Operating company","TypeOperating"],["holding","Holding company","TypeHolding"]]:
 		var choice:=UIK.button(option[1],func():selected_type=option[0];type_label.text=I18n.t(option[1]),"tab")
 		choice.name=option[2]
@@ -53,7 +53,7 @@ func build() -> void:
 	for o in opts:
 		ah.add_child(UIK.button(o[0], func(): address = o[1]; rebuild(), "tab_active" if address == o[1] else "tab"))
 	body.add_child(ah)
-	body.add_child(UIK.kv("Registration fee", Fmt.money(Company.registration_fee()) + (I18n.t("  (staff discount)") if Careers.has_perk("registration_discount") else ""), Art.C_GOLD))
+	body.add_child(UIK.kv("Registration fee", Fmt.money(Company.registration_fee()) + (I18n.t("  (staff discount)") if Careers.has_perk("registration_discount") else ""), Art.C_SKY))
 	body.add_child(UIK.kv("Processing time", Fmt.duration_min(int(reg.get("processing_min", 45)))))
 	error_label = UIK.label("", 8, Art.C_RED)
 	body.add_child(error_label)

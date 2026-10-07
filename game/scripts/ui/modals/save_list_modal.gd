@@ -17,9 +17,9 @@ func _init(m := "load") -> void:
 
 func build() -> void:
 	if mode == "replace":
-		body.add_child(UIK.wrap("All save slots are in use. Choose one for the new game. The old save is moved to a backup folder, not deleted.", 7, Art.C_GOLD, 396))
+		body.add_child(UIK.wrap("All save slots are in use. Choose one for the new game. The old save is moved to a backup folder, not deleted.", 7, Art.C_SKY, 396))
 	elif mode == "import":
-		body.add_child(UIK.wrap("Choose a save slot to replace. Its existing save will be backed up.", 7, Art.C_GOLD, 416))
+		body.add_child(UIK.wrap("Choose a save slot to replace. Its existing save will be backed up.", 7, Art.C_SKY, 416))
 	else:
 		var transfers := UIK.hbox(4)
 		var export_button := UIK.button("Export save", SaveSystem.show_export)
@@ -40,7 +40,7 @@ func build() -> void:
 		list.add_child(_row(int(r["slot"]), r["summary"]))
 	if confirm >= 0:
 		var sm := SaveSystem.summary(confirm)
-		var q := UIK.label(I18n.t("Replace %s (day %d)?") % [str(sm.get("name", "")), int(sm.get("day", 0))], 8, Art.C_GOLD, true)
+		var q := UIK.label(I18n.t("Replace %s (day %d)?") % [str(sm.get("name", "")), int(sm.get("day", 0))], 8, Art.C_SKY, true)
 		q.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 		footer.add_child(q)
 		footer.add_child(UIK.expand())
@@ -83,7 +83,7 @@ func _row(slot: int, sm: Dictionary) -> Control:
 	var line := I18n.t("Day %d · personal %s") % [int(sm.get("day", 0)), Fmt.money0(float(sm.get("cash", 0)))]
 	if here:
 		line += "  ·  " + I18n.t("this game")
-	v.add_child(UIK.label(line, 7, Art.C_GOLD if here else Art.C_MUTED))
+	v.add_child(UIK.label(line, 7, Art.C_SKY if here else Art.C_MUTED))
 	v.add_child(UIK.label((I18n.t("Saved %s") % _when(float(sm.get("saved_unix", 0)))) + "  ·  " + (I18n.t("slot %d") % slot), 6, Art.C_DIM))
 	var b: Button
 	if mode == "load":

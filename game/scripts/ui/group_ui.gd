@@ -39,7 +39,7 @@ static func _supply(os, c: VBoxContainer) -> void:
 	os._section("Internal supply")
 	var rows := InternalSupply.pairs()
 	if rows.is_empty():
-		c.add_child(UIK.label("✗ " + I18n.t("No supply pair is running yet."), 8, Art.C_GOLD, true))
+		c.add_child(UIK.label("✗ " + I18n.t("No supply pair is running yet."), 8, Art.C_SKY, true))
 		c.add_child(UIK.wrap(I18n.t("Next step: %s") % InternalSupply.next_step(), 8, Art.C_SKY, 450))
 		return
 	var none := [true]
@@ -52,7 +52,7 @@ static func _supply(os, c: VBoxContainer) -> void:
 		card.add_child(UIK.label("✓ %s → %s · %s" % [InternalSupply.industry_name(p["seller"]), InternalSupply.industry_name(p["buyer"]), I18n.t(str(l["good"]))], 8, Art.C_GREEN, true))
 		card.add_child(UIK.wrap(I18n.t(str(l["effect"])), 7, Art.C_MUTED, 430))
 		var unit := I18n.t(str(l["unit_label"]))
-		card.add_child(UIK.kv(I18n.t("Transfer price per %s") % unit, Fmt.money(float(p["price"])), Art.C_GOLD))
+		card.add_child(UIK.kv(I18n.t("Transfer price per %s") % unit, Fmt.money(float(p["price"])), Art.C_SKY))
 		card.add_child(UIK.kv(I18n.t("Your cost / outside market"), "%s / %s" % [Fmt.money(float(p["cost"])), Fmt.money(float(p["market"]))]))
 		var modes := UIK.hbox(3)
 		card.add_child(modes)
@@ -92,7 +92,7 @@ static func _consolidated(c: VBoxContainer) -> void:
 	c.add_child(UIK.label(I18n.t("GROUP THIS MONTH (internal trade eliminated)"), 7, Art.C_DIM, true))
 	c.add_child(UIK.kv("Segment sales added up", Fmt.money0(float(r["segments_sum_revenue"]))))
 	c.add_child(UIK.kv("Eliminated internal sales", Fmt.money0(-float(r["eliminated"]))))
-	c.add_child(UIK.kv("Group net revenue", Fmt.money0(float(r["net_revenue"])), Art.C_GOLD))
+	c.add_child(UIK.kv("Group net revenue", Fmt.money0(float(r["net_revenue"])), Art.C_SKY))
 	c.add_child(UIK.kv("Group operating profit", Fmt.money0(float(r["operating_profit"])), UIK.money_color(float(r["operating_profit"]))))
 	c.add_child(UIK.label(("✓ " + I18n.t("Internal sales equal internal purchases.")) if r["balanced"] else ("✗ " + I18n.t("Internal sales and purchases differ; check the ledger.")), 7, Art.C_GREEN if r["balanced"] else Art.C_RED))
 
@@ -106,13 +106,13 @@ static func _jobs(os, c: VBoxContainer, primary: Array) -> void:
 		var def: Dictionary = GroupJobs.defs()[job["def"]]
 		var card := UIK.vbox(2)
 		c.add_child(UIK.card(card))
-		card.add_child(UIK.label("%s · %s" % [I18n.t(str(def["title"])), I18n.t(str(def["client_name"]))], 9, Art.C_GOLD, true))
+		card.add_child(UIK.label("%s · %s" % [I18n.t(str(def["title"])), I18n.t(str(def["client_name"]))], 9, Art.C_SKY, true))
 		card.add_child(UIK.wrap(I18n.t(str(def["pitch"])), 7, Art.C_MUTED, 430))
 		card.add_child(UIK.kv("Reward if every part is done", Fmt.money0(float(def["reward"])), Art.C_GREEN))
 		card.add_child(UIK.kv("Time to finish", I18n.t("%d days") % int(def["deadline_days"])))
 		for part in def["parts"]:
 			var mine := InternalSupply.running(str(part["industry"]))
-			card.add_child(UIK.label("%s %s: %s · %s" % ["✓" if mine else "✗", InternalSupply.industry_name(str(part["industry"])), I18n.t(str(part["label"])), Fmt.money0(float(def["reward"]) * float(part["share"]))], 7, Art.C_GREEN if mine else Art.C_GOLD))
+			card.add_child(UIK.label("%s %s: %s · %s" % ["✓" if mine else "✗", InternalSupply.industry_name(str(part["industry"])), I18n.t(str(part["label"])), Fmt.money0(float(def["reward"]) * float(part["share"]))], 7, Art.C_GREEN if mine else Art.C_SKY))
 		card.add_child(UIK.wrap(I18n.t("A part from a business you do not run, or cannot finish, can be subcontracted for a fee. Unfinished parts at the deadline pay nothing."), 7, Art.C_DIM, 430))
 		_btn(os, card, I18n.t("Accept group job"), "GroupAccept_" + str(job["id"]), GroupJobs.accept.bind(job["id"]), primary, true)
 	for job in GroupJobs.active():
@@ -121,7 +121,7 @@ static func _jobs(os, c: VBoxContainer, primary: Array) -> void:
 		var card := UIK.vbox(2)
 		c.add_child(UIK.card(card))
 		var left := maxi(0, int(ceil(float(int(job["deadline"]) - Clock.now()) / Clock.DAY)))
-		card.add_child(UIK.label("%s · %s" % [I18n.t(str(def["title"])), I18n.t("%d days left") % left], 9, Art.C_GOLD, true))
+		card.add_child(UIK.label("%s · %s" % [I18n.t(str(def["title"])), I18n.t("%d days left") % left], 9, Art.C_SKY, true))
 		for part in def["parts"]:
 			var ps := GroupJobs.part_state(job, part)
 			var tag := "✓" if ps["done"] else "✗"
@@ -138,7 +138,7 @@ static func _jobs(os, c: VBoxContainer, primary: Array) -> void:
 		var d: Dictionary = GroupJobs.defs().get(done["def"], {})
 		c.add_child(UIK.label("%s %s · %s %s" % ["✓" if done["status"] == "completed" else "✗", I18n.t(str(d.get("title", done["def"]))), I18n.t("paid"), Fmt.money0(float(done["paid"]))], 7, Art.C_MUTED))
 	if not any:
-		c.add_child(UIK.label("✗ " + I18n.t("No group job on offer."), 8, Art.C_GOLD, true))
+		c.add_child(UIK.label("✗ " + I18n.t("No group job on offer."), 8, Art.C_SKY, true))
 		c.add_child(UIK.wrap(I18n.t("Next step: run two or more businesses. Clients with big orders phone you; the offer lasts about ten days."), 7, Art.C_SKY, 450))
 
 

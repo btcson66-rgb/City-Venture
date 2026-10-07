@@ -19,7 +19,7 @@ func _ready() -> void:
 	add_child(v)
 	var h := UIK.hbox(3)
 	v.add_child(h)
-	head = UIK.label("", 8, Art.C_GOLD, true)
+	head = UIK.label("", 8, Art.C_SKY, true)
 	head.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	head.clip_text = true
 	h.add_child(head)

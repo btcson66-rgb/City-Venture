@@ -22,7 +22,7 @@ func build() -> void:
 		body.add_child(UIK.wrap(I18n.t(str(p.get("agent_line", "Tom: \"It's all yours. Sign's up out front.\""))), 9, Art.C_WHITE, 360))
 		footer.add_child(UIK.button("Close", close))
 		return
-	body.add_child(UIK.kv("Monthly rent", Fmt.money(float(p["monthly_rent"])), Art.C_GOLD, 9, true))
+	body.add_child(UIK.kv("Monthly rent", Fmt.money(float(p["monthly_rent"])), Art.C_SKY, 9, true))
 	var dep := UIK.kv("Deposit", Fmt.money(float(p["monthly_rent"]) * float(p.get("deposit_months", 0))))
 	dep.add_child(UIK.tip("deposit"))
 	body.add_child(dep)

@@ -99,7 +99,7 @@ func _layout() -> void:
 		btn.name = "Bin_" + str(b[0])
 		row.add_child(btn)
 	if round_i >= rounds / 2:
-		var note := UIK.label("The shift lead took the postcode sheet. From memory now!", 7, Art.C_GOLD, true)
+		var note := UIK.label("The shift lead took the postcode sheet. From memory now!", 7, Art.C_SKY, true)
 		note.position = Vector2(0, 190)
 		stage.add_child(note)
 

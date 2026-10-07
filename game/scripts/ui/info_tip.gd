@@ -1,13 +1,14 @@
 class_name InfoTip
 extends PanelContainer
-## A small "!" badge next to a business idea the player may not know yet (escrow, Net 60, gross margin...).
+## Quiet information glyph with a generous touch target; unread is a tiny neutral dot.
 ## Hover shows what it is and why it matters for your business; a click pins the same card, for players on a
 ## trackpad or a touch screen. Text lives in data/help/glossary.json ({title, what, why}), so it is translated
-## like everything else. A badge you haven't opened yet is gold; once read it turns quiet.
+## like everything else. Neither unread nor read information uses an action colour.
 
 var tip_id := ""
 var _mark: Label
 var _pinned: PopupPanel
+var _hovered := false
 
 
 static func make(id: String) -> InfoTip:
@@ -37,33 +38,42 @@ func _ready() -> void:
 		push_warning("InfoTip: no glossary entry " + tip_id)
 		visible = false
 		return
-	custom_minimum_size = Vector2(11, 11)
+	custom_minimum_size = Vector2(24, 24)
 	size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	focus_mode = Control.FOCUS_ALL
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	mouse_default_cursor_shape = Control.CURSOR_HELP
 	tooltip_text = I18n.t(str(e.get("title", tip_id)))   # non-empty so Godot asks for the custom tooltip below
-	_mark = UIK.label("!", 8, Art.C_NAVY_900, true)
+	_mark = UIK.label("i", 9, Art.C_DIM, true)
+	_mark.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_mark.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_mark.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	add_child(_mark)
+	mouse_entered.connect(func(): _hovered = true; _restyle())
+	mouse_exited.connect(func(): _hovered = false; _restyle())
+	focus_entered.connect(_restyle)
+	focus_exited.connect(_restyle)
 	_restyle()
 
 
 func _restyle() -> void:
-	var fresh := not seen(tip_id)
-	var sb := UIK.flat(Art.C_GOLD if fresh else Art.C_NAVY_500, Art.C_WHITE if fresh else Art.C_DIM, 1, 2)
-	sb.content_margin_left = 2
-	sb.content_margin_right = 2
-	add_theme_stylebox_override("panel", sb)
+	add_theme_stylebox_override("panel", StyleBoxEmpty.new())
 	if _mark != null:
-		_mark.add_theme_color_override("font_color", Art.C_NAVY_900 if fresh else Art.C_SKY)
+		_mark.add_theme_color_override("font_color", Art.C_SKY if _hovered or has_focus() else Art.C_DIM)
+	queue_redraw()
+
+
+func _draw() -> void:
+	var col := Art.C_SKY if _hovered or has_focus() else Art.C_DIM
+	draw_arc(size / 2.0, 5.0, 0.0, TAU, 24, col, 0.7)
+	if not seen(tip_id): draw_circle(size / 2.0 + Vector2(7, -5), 1.0, Art.C_SKY)
 
 
 ## The card: title, what it is, and why it matters to you.
 static func card(id: String, width := 250.0) -> Control:
 	var e := entry(id)
 	var p := PanelContainer.new()
-	var sb := UIK.flat(Color8(18, 31, 49, 245), Art.C_GOLD, 1, 3)
+	var sb := UIK.flat(Color8(18, 31, 49, 245), Art.C_DIM, 1, 3)
 	sb.content_margin_left = 6
 	sb.content_margin_right = 6
 	sb.content_margin_top = 4
@@ -71,7 +81,7 @@ static func card(id: String, width := 250.0) -> Control:
 	p.add_theme_stylebox_override("panel", sb)
 	var v := UIK.vbox(2)
 	p.add_child(v)
-	v.add_child(UIK.label(I18n.t(str(e.get("title", id))), 8, Art.C_GOLD, true))
+	v.add_child(UIK.label(I18n.t(str(e.get("title", id))), 8, Art.C_SKY, true))
 	if str(e.get("what", "")) != "":
 		v.add_child(UIK.wrap(I18n.t(str(e["what"])), 7, Art.C_WHITE, width))
 	if str(e.get("why", "")) != "":
@@ -87,7 +97,7 @@ func _make_custom_tooltip(_for_text: String) -> Object:
 
 
 func _gui_input(ev: InputEvent) -> void:
-	if ev.is_action_pressed("ui_accept") or (ev is InputEventMouseButton and ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT):
+	if ev.is_action_pressed("ui_accept") or (ev is InputEventMouseButton and ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT) or (ev is InputEventScreenTouch and ev.pressed):
 		accept_event()
 		_pin()
 

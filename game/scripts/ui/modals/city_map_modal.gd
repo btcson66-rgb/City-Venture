@@ -128,10 +128,10 @@ func _build_info(h: Control) -> void:
 	info.add_child(UIK.title(dd.get("name", "—"), 11))
 	info.add_child(UIK.wrap(dd.get("blurb", ""), 7, Art.C_SKY, 146))
 	if sel=="residential" and GameState.data.get("real_estate_landmark",{}).get("completed",false):
-		info.add_child(UIK.wrap(str(GameState.data["real_estate_landmark"]["name"]),7,Art.C_GOLD,146))
+		info.add_child(UIK.wrap(str(GameState.data["real_estate_landmark"]["name"]),7,Art.C_SKY,146))
 	info.add_child(UIK.chip("Open", Art.C_GREEN))
 	if sel == here:
-		info.add_child(UIK.label("You are here.", 7, Art.C_GOLD, true))
+		info.add_child(UIK.label("You are here.", 7, Art.C_SKY, true))
 	info.add_child(UIK.sep())
 	info.add_child(UIK.wrap("Population: 3.2 million people · 62 km² · 5 Metro lines", 6, Art.C_DIM, 146))
 	info.add_child(UIK.wrap("Walk between neighbouring districts, or take the Metro from any station.", 6, Art.C_MUTED, 146))
@@ -154,9 +154,9 @@ func _label_card(r: Rect2, title: String, sub: String, icon: String, accent: Col
 	b.custom_minimum_size = r.size
 	b.size = r.size
 	var bg := Color(0.04, 0.07, 0.14, 1.0)
-	b.add_theme_stylebox_override("normal", UIK.flat(bg, Art.C_GOLD if selected else accent, 1, 2))
-	b.add_theme_stylebox_override("hover", UIK.flat(Color(0.08, 0.13, 0.24, 1.0), Art.C_GOLD, 1, 2))
-	b.add_theme_stylebox_override("pressed", UIK.flat(bg, Art.C_GOLD, 1, 2))
+	b.add_theme_stylebox_override("normal", UIK.flat(bg, Art.C_SKY if selected else accent, 1, 2))
+	b.add_theme_stylebox_override("hover", UIK.flat(Color(0.08, 0.13, 0.24, 1.0), Art.C_SKY, 1, 2))
+	b.add_theme_stylebox_override("pressed", UIK.flat(bg, Art.C_SKY, 1, 2))
 	if on_press.is_valid():
 		b.pressed.connect(on_press)
 	else:
@@ -176,7 +176,7 @@ func _label_card(r: Rect2, title: String, sub: String, icon: String, accent: Col
 	t.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	v.add_child(t)
 	if sub != "":
-		var s := UIK.label(sub, 6, Art.C_GOLD if sub == "You are here" else (Art.C_GREEN if sub == "Open" else Art.C_MUTED))
+		var s := UIK.label(sub, 6, Art.C_SKY if sub == "You are here" else (Art.C_GREEN if sub == "Open" else Art.C_MUTED))
 		s.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		v.add_child(s)
 	UIK.fit_card.call_deferred(b, hb, r, Vector2(6, 4))
@@ -187,7 +187,7 @@ func _draw_pin() -> void:
 	var bob := sin(_t * 4.0) * 1.5
 	var c := Vector2(0, -6 + bob)
 	_pin.draw_circle(Vector2(0, 0), 4.0 + 1.5 * (0.5 + 0.5 * sin(_t * 3.0)), Color(1, 0.8, 0.3, 0.35))
-	_pin.draw_colored_polygon(PackedVector2Array([c + Vector2(0, -5), c + Vector2(4, 0), c + Vector2(0, 5), c + Vector2(-4, 0)]), Art.C_GOLD)
+	_pin.draw_colored_polygon(PackedVector2Array([c + Vector2(0, -5), c + Vector2(4, 0), c + Vector2(0, 5), c + Vector2(-4, 0)]), Art.C_SKY)
 	_pin.draw_colored_polygon(PackedVector2Array([c + Vector2(0, -3), c + Vector2(2, 0), c + Vector2(0, 3), c + Vector2(-2, 0)]), Color.WHITE)
 
 
@@ -213,14 +213,14 @@ func _build_routes(mapc: Control) -> void:
 		for a in DataDB.city.get("adjacency", {}):
 			for b in DataDB.city["adjacency"][a]:
 				if str(a) >= str(b): continue
-				graph.draw_line(route_point(DataDB.district_def_in_city(a)), route_point(DataDB.district_def_in_city(b)), Art.C_GOLD, 2.0))
+				graph.draw_line(route_point(DataDB.district_def_in_city(a)), route_point(DataDB.district_def_in_city(b)), Art.C_SKY, 2.0))
 	for d in DataDB.city["districts"]:
 		if not BuildingInfo.district_open(str(d["id"])): continue
 		var did := str(d["id"])
 		var point := route_point(d)
-		var card := _label_card(Rect2(point + Vector2(-42, -10), Vector2(84, 24 if did == here else 18)), str(d["name"]), "You are here" if did == here else "", str(d.get("icon", "info")), Art.C_GOLD, did == sel, func(): sel = did; rebuild())
+		var card := _label_card(Rect2(point + Vector2(-42, -10), Vector2(84, 24 if did == here else 18)), str(d["name"]), "You are here" if did == here else "", str(d.get("icon", "info")), Art.C_SKY, did == sel, func(): sel = did; rebuild())
 		card.name = "District_" + did
 		mapc.add_child(card)
-	var legend := UIK.label("Gold lines: walkable district connections", 7, Art.C_GOLD)
+	var legend := UIK.label("Gold lines: walkable district connections", 7, Art.C_SKY)
 	legend.position = Vector2(16, 270)
 	mapc.add_child(legend)

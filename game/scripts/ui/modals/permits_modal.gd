@@ -40,7 +40,7 @@ func build() -> void:
 		b.disabled = not reg or Ledger.cash(GameState.business_entity()) < fee
 		r.add_child(b)
 		if not reg:
-			v.add_child(UIK.label("Register the company first.", 7, Art.C_GOLD, true))
+			v.add_child(UIK.label("Register the company first.", 7, Art.C_SKY, true))
 	if World.year() >= 4:
 		_green_grant()
 	if reg:
@@ -71,7 +71,7 @@ func _green_grant() -> void:
 		return
 	var why := Company.green_grant_block()
 	if why != "":
-		v.add_child(UIK.label(I18n.t(why), 7, Art.C_GOLD, true))
+		v.add_child(UIK.label(I18n.t(why), 7, Art.C_SKY, true))
 	var b := UIK.button("Apply", _apply_grant, _action_style(why == ""))
 	b.name = "ApplyGreenGrant"
 	b.disabled = why != ""
@@ -95,14 +95,14 @@ func _import_licence() -> void:
 	if Compliance.licence_valid():
 		v.add_child(UIK.label(I18n.t("Valid until %s.") % Clock.fmt_date(Compliance.licence_until()), 7, Art.C_GREEN, true))
 	if Compliance.licence_pending():
-		r.add_child(UIK.chip(I18n.t("PROCESSING"), Art.C_GOLD))
+		r.add_child(UIK.chip(I18n.t("PROCESSING"), Art.C_SKY))
 		return
 	var why := Compliance.licence_block()
 	if Compliance.licence_valid() and Compliance.licence_days_left() > Compliance.renew_window():
 		r.add_child(UIK.chip(I18n.t("LICENSED"), Art.C_GREEN))
 		return
 	if why != "":
-		v.add_child(UIK.label(I18n.t(why), 7, Art.C_GOLD, true))
+		v.add_child(UIK.label(I18n.t(why), 7, Art.C_SKY, true))
 	var renew := Compliance.licence_valid()
 	var b := UIK.button(I18n.t("Renew (%s)") % Fmt.money0(Compliance.licence_fee()) if renew else I18n.t("Apply (%s)") % Fmt.money0(Compliance.licence_fee()), _apply_licence, _action_style(why == ""))
 	b.name = "RenewImportLicence" if renew else "ApplyImportLicence"
@@ -136,11 +136,11 @@ func _food_licence() -> void:
 		r.add_child(UIK.chip(I18n.t("GRANTED"), Art.C_GREEN))
 		return
 	if Cafe.permit_pending():
-		r.add_child(UIK.chip(I18n.t("PROCESSING"), Art.C_GOLD))
+		r.add_child(UIK.chip(I18n.t("PROCESSING"), Art.C_SKY))
 		return
 	var why := Cafe.permit_block()
 	if why != "":
-		v.add_child(UIK.label(I18n.t(why), 7, Art.C_GOLD, true))
+		v.add_child(UIK.label(I18n.t(why), 7, Art.C_SKY, true))
 	var b := UIK.button("Apply", _apply_food, _action_style(why == ""))
 	b.name = "ApplyFoodLicence"
 	b.disabled = why != ""

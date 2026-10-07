@@ -5,7 +5,7 @@ extends RefCounted
 
 static func render(owner: CompanyOS) -> void:
 	var content := owner.content
-	content.add_child(UIK.label_tip("Market conditions", "macro_cycle", 9, Art.C_GOLD))
+	content.add_child(UIK.label_tip("Market conditions", "macro_cycle", 9, Art.C_SKY))
 	if not Macro.active():
 		content.add_child(UIK.wrap("✗ Market history is not initialized — enter the city to begin tracking.", 8, Art.C_MUTED, 440))
 		return
@@ -15,7 +15,7 @@ static func render(owner: CompanyOS) -> void:
 	industries.sort()
 	for industry in industries:
 		var definition: Dictionary = DataDB.businesses[industry]
-		content.add_child(UIK.label(str(definition.get("name", industry)), 9, Art.C_GOLD))
+		content.add_child(UIK.label(str(definition.get("name", industry)), 9, Art.C_SKY))
 		var share := Rivals.shares(industry)
 		content.add_child(UIK.wrap(I18n.t("Your share %s · other firms %s · demand %.2f × baseline") % [Fmt.pct(float(share["player"]), 1), Fmt.pct(float(share["outside"]), 1), Macro.demand(industry)], 8, Art.C_SKY, 440))
 		for rival in Rivals.companies(industry):
@@ -30,7 +30,7 @@ static func render(owner: CompanyOS) -> void:
 					owner.rebuild())
 				button.name = "AcquireRival_" + id
 				content.add_child(button)
-	content.add_child(UIK.label_tip("City news", "macro_cycle", 9, Art.C_GOLD))
+	content.add_child(UIK.label_tip("City news", "macro_cycle", 9, Art.C_SKY))
 	var items: Array = CityNews.S()["items"]
 	for index in range(items.size() - 1, maxi(-1, items.size() - 7), -1):
 		content.add_child(UIK.wrap(Clock.fmt_short(int(items[index]["t"])) + " · " + str(items[index]["text"]), 8, Art.C_WHITE, 440))

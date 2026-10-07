@@ -4,7 +4,7 @@ extends RefCounted
 static func render_os(owner: Node) -> void:
 	var box: VBoxContainer=owner.get("content")
 	var entity := GameState.company_id()
-	box.add_child(UIK.label_tip("Company brand","company_brand",10,Art.C_GOLD,true))
+	box.add_child(UIK.label_tip("Company brand","company_brand",10,Art.C_SKY,true))
 	box.add_child(UIK.label(I18n.t("Brand: %.1f / 100 points")%Brand.score(entity)))
 	var labels := {"reviews":I18n.t("Reviews"),"news":I18n.t("News"),"crises":I18n.t("Crisis handling"),"payments":I18n.t("On-time payments"),"employees":I18n.t("Employee treatment")}
 	for key in Brand.components(entity):

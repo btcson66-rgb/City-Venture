@@ -78,7 +78,7 @@ func _businesses() -> void:
 func _gates(det: Control) -> void:
 	det.add_child(UIK.label("TO OPEN THIS", 7, Art.C_DIM, true))
 	for row in Gates.rows(selected):
-		det.add_child(UIK.wrap("%s %s: %s" % ["✓" if row["ok"] else "✗", I18n.t(str(row["label"])), row["text"]], 8, Art.C_GREEN if row["ok"] else Art.C_GOLD, 300))
+		det.add_child(UIK.wrap("%s %s: %s" % ["✓" if row["ok"] else "✗", I18n.t(str(row["label"])), row["text"]], 8, Art.C_GREEN if row["ok"] else Art.C_SKY, 300))
 	var step := Gates.next_step(selected)
 	det.add_child(UIK.wrap(I18n.t("Next step: %s") % step if step != "" else "✓ " + I18n.t("Every gate is open."), 8, Art.C_SKY, 300))
 	var after := Gates.suggested_after(selected)
@@ -108,14 +108,14 @@ func _jobs() -> void:
 		var j: Dictionary = DataDB.jobs[id]
 		var mine: bool = cur == id
 		var card := PanelContainer.new()
-		card.add_theme_stylebox_override("panel", UIK.flat(Color(0.06, 0.1, 0.18, 0.92), Art.C_GOLD if mine else Color(0.4, 0.5, 0.7, 0.5), 1, 3))
+		card.add_theme_stylebox_override("panel", UIK.flat(Color(0.06, 0.1, 0.18, 0.92), Art.C_SKY if mine else Color(0.4, 0.5, 0.7, 0.5), 1, 3))
 		card.custom_minimum_size = Vector2(248, 0)
 		grid.add_child(card)
 		var v := UIK.vbox(1)
 		card.add_child(v)
 		var hr := UIK.hbox(4)
 		v.add_child(hr)
-		hr.add_child(UIK.label(I18n.t(str(Careers.rank(id)["title"])), 8, Art.C_GOLD if mine else Art.C_WHITE, true))
+		hr.add_child(UIK.label(I18n.t(str(Careers.rank(id)["title"])), 8, Art.C_SKY if mine else Art.C_WHITE, true))
 		hr.add_child(UIK.label("· " + I18n.t(str(j["employer"])), 7, Art.C_MUTED))
 		hr.add_child(UIK.expand())
 		hr.add_child(UIK.label(I18n.t("$%d/h") % int(Careers.wage(id)), 8, Art.C_GREEN, true))

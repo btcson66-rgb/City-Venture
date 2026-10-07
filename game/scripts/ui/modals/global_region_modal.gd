@@ -23,7 +23,7 @@ func build() -> void:
 	var revenue := float(GlobalMarket.company()["stores"].get(region, {}).get("revenue", 0)) if GlobalMarket.live(GameState.company_id()) else 0.0
 	body.add_child(UIK.kv("Your regional revenue", Fmt.money(revenue) + " " + ccy))
 	var why := GlobalMarket.store_block(region)
-	body.add_child(UIK.wrap(("✗ " + I18n.t(why)) if why != "" else I18n.t("✓ Region available. Open Company OS → Sales → Overseas next."), 8, Art.C_GOLD if why != "" else Art.C_GREEN, 390))
+	body.add_child(UIK.wrap(("✗ " + I18n.t(why)) if why != "" else I18n.t("✓ Region available. Open Company OS → Sales → Overseas next."), 8, Art.C_SKY if why != "" else Art.C_GREEN, 390))
 	body.add_child(UIK.label_tip("International shipping", "international_shipping"))
 	footer.add_child(UIK.button("Close", close))
 	var trade := UIK.button("Compare trade route", func(): close(); UIRoot.open_modal(TradeQuoteModal.new(region)), "primary")

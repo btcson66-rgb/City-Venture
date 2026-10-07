@@ -17,7 +17,7 @@ func build() -> void:
 			var line := I18n.t("Dress code: %s. You are wearing: %s.")%[Fundraising.dress_name(str(event["dress"])),Fundraising.dress_name(Wardrobe.dress_of(Wardrobe.wearing()))]
 			if not gate["ok"]:line+=" "+I18n.t("The door will turn you away.")
 			elif gate["impression"]=="poor":line+=" "+I18n.t("You may attend, but first impressions will be cooler.")
-			list.add_child(UIK.wrap(("✓ " if gate["ok"] and gate["impression"]!="poor" else "✗ ")+line,8,Art.C_WHITE if gate["ok"] else Art.C_GOLD,475))
+			list.add_child(UIK.wrap(("✓ " if gate["ok"] and gate["impression"]!="poor" else "✗ ")+line,8,Art.C_WHITE if gate["ok"] else Art.C_SKY,475))
 			if not gate["ok"] or gate["impression"]=="poor":
 				var wardrobe := UIK.button("Open my wardrobe",func():UIRoot.open_modal(WardrobeModal.new()))
 				wardrobe.name="SocialWardrobe_"+str(event["id"]);list.add_child(wardrobe)

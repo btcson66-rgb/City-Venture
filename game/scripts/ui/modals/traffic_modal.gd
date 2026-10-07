@@ -26,7 +26,13 @@ func build() -> void:
 	var s := TrafficSafety.S()
 	var a := TrafficSafety.latest() if selected == 0 else TrafficSafety.accident(selected)
 	content.add_child(UIK.wrap("Use a green crosswalk. Crossing elsewhere or on red can cause a collision.",8,Art.C_MUTED,470))
-	content.add_child(UIK.label(I18n.t("Injury: %s") % TrafficSafety.severity_label(str(s["injury"])),9,Art.C_GOLD))
+	var injury_row := UIK.hbox(4)
+	content.add_child(injury_row)
+	var line := ColorRect.new()
+	line.color = Art.C_GOLD if s["injury"] != "none" else Art.C_DIM
+	line.custom_minimum_size = Vector2(2, 12)
+	injury_row.add_child(line)
+	injury_row.add_child(UIK.label(I18n.t("Injury: %s") % TrafficSafety.severity_label(str(s["injury"])),9,Art.C_WHITE))
 	if mode == "accident" and s["injury"] == "major":
 		content.add_child(UIK.wrap("An ambulance can take you to Civic Clinic. Admission takes up to three days and your business keeps running. Phone replies, meetings and the bank appointment wait for you; if a chapter, contract or group-job deadline is nearer, you are discharged early.",8,Art.C_WHITE,470))
 		add_button("Take ambulance", "Ambulance", _ambulance, true)

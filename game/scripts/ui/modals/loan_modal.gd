@@ -22,7 +22,7 @@ func build() -> void:
 	var top := UIK.hbox(8)
 	body.add_child(top)
 	top.add_child(UIK.label(I18n.t("Credit score %d points · %s") % [Bank.credit(), I18n.t(Bank.credit_band())], 9,
-		Art.C_GREEN if Bank.credit() >= 690 else (Art.C_GOLD if Bank.credit() >= 620 else Art.C_RED), true))
+		Art.C_GREEN if Bank.credit() >= 690 else (Art.C_SKY if Bank.credit() >= 620 else Art.C_RED), true))
 	top.add_child(UIK.tip("loan_eligibility"))
 	top.add_child(UIK.tip("credit_history"))
 	top.add_child(UIK.expand())
@@ -60,7 +60,7 @@ func build() -> void:
 		for r in o["reasons"]:
 			left.add_child(UIK.kv(str(r[0]), Fmt.money0(float(r[1])), Art.C_WHITE if float(r[1]) >= 0 else Art.C_RED, 7))
 		left.add_child(UIK.kv("Up to", Fmt.money0(float(o["max"])), Art.C_GREEN, 9, true))
-		left.add_child(UIK.kv_tip("Interest (APR)", Fmt.pct(float(o["apr"]), 1), "interest_rate", Art.C_GOLD, 8))
+		left.add_child(UIK.kv_tip("Interest (APR)", Fmt.pct(float(o["apr"]), 1), "interest_rate", Art.C_SKY, 8))
 		var amt := _amount(o)
 		var ah := UIK.hbox(3)
 		left.add_child(ah)

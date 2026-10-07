@@ -53,11 +53,11 @@ func build() -> void:
 		b.position = a
 		b.custom_minimum_size = z - a
 		b.size = z - a
-		var accent := Art.C_GOLD if home or rid == sel else Color8(90, 130, 200)
+		var accent := Art.C_SKY if home or rid == sel else Color8(90, 130, 200)
 		var bg := Color(0.04, 0.07, 0.14, 1.0)
 		b.add_theme_stylebox_override("normal", UIK.flat(bg, accent, 1, 2))
-		b.add_theme_stylebox_override("hover", UIK.flat(Color(0.08, 0.13, 0.24, 1.0), Art.C_GOLD, 1, 2))
-		b.add_theme_stylebox_override("pressed", UIK.flat(bg, Art.C_GOLD, 1, 2))
+		b.add_theme_stylebox_override("hover", UIK.flat(Color(0.08, 0.13, 0.24, 1.0), Art.C_SKY, 1, 2))
+		b.add_theme_stylebox_override("pressed", UIK.flat(bg, Art.C_SKY, 1, 2))
 		b.pressed.connect(func():
 			sel = rid
 			rebuild()
@@ -79,7 +79,7 @@ func build() -> void:
 		var v := UIK.vbox(0)
 		v.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		hb.add_child(v)
-		var tl := UIK.label(I18n.t(r["name"]).to_upper(), 7, Art.C_GOLD if home else Art.C_WHITE, true)
+		var tl := UIK.label(I18n.t(r["name"]).to_upper(), 7, Art.C_SKY if home else Art.C_WHITE, true)
 		tl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		v.add_child(tl)
 		var st := UIK.label("Your home market" if home else str(r["archetype"]), 6, Art.C_SKY)
@@ -109,7 +109,7 @@ func build() -> void:
 	if sel == "aurelia":
 		c1.add_child(UIK.chip("YOUR HOME MARKET", Art.C_GREEN))
 	else:
-		c1.add_child(UIK.chip("OVERSEAS", Art.C_GOLD))
+		c1.add_child(UIK.chip("OVERSEAS", Art.C_SKY))
 	var c2 := UIK.vbox(0)
 	c2.custom_minimum_size = Vector2(210, 0)
 	row.add_child(c2)
@@ -124,7 +124,7 @@ func build() -> void:
 	if sel != "aurelia":
 		var ccy := GlobalMarket.currency(sel)
 		c3.add_child(UIK.kv(ccy, Fmt.money(FX.rate(ccy)) + I18n.t(" home dollars/unit"), Art.C_WHITE, 7))
-		c3.add_child(UIK.label("✓" if GlobalMarket.unlocked(sel) else "✗ " + I18n.t("Chapter 13"), 7, Art.C_GOLD))
+		c3.add_child(UIK.label("✓" if GlobalMarket.unlocked(sel) else "✗ " + I18n.t("Chapter 13"), 7, Art.C_SKY))
 	var brow := UIK.hbox(4)
 	c3.add_child(brow)
 	brow.add_child(UIK.button("City map", func(): close(); UIRoot.open_modal(CityMapModal.new(false)), "", 56))
@@ -138,7 +138,7 @@ func _draw_home() -> void:
 	for i in 10:
 		var ang := -PI / 2.0 + i * TAU / 10.0
 		pts.append(Vector2(cos(ang), sin(ang)) * (5.0 if i % 2 == 0 else 2.2))
-	_home.draw_colored_polygon(pts, Art.C_GOLD)
+	_home.draw_colored_polygon(pts, Art.C_SKY)
 
 
 func _process(delta: float) -> void:

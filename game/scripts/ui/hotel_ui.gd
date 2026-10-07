@@ -38,7 +38,7 @@ func nav_button(parent: Control,label: String,id: String,next: String,primary :=
 	parent.add_child(action)
 func switch(next: String) -> void:page=next;reset_scroll=true;rebuild()
 func line(content: Control,text: String,color := Art.C_WHITE) -> void:content.add_child(UIK.wrap(text,8,color,550))
-func check(content: Control,ok: bool,text: String) -> void:line(content,("✓ " if ok else "✗ ")+I18n.t(text),Art.C_GREEN if ok else Art.C_GOLD)
+func check(content: Control,ok: bool,text: String) -> void:line(content,("✓ " if ok else "✗ ")+I18n.t(text),Art.C_GREEN if ok else Art.C_SKY)
 func build() -> void:
 	has_primary=false
 	if not Hotel.is_running():
@@ -112,7 +112,7 @@ func board_page(content: Control) -> void:
 	content.add_child(grid)
 	for row in Hotel.calendar(30):
 		var date := Clock.date_at((int(row["day"])-1)*Clock.DAY+12*60)
-		var color := Art.C_PURPLE if str(row["event"])!="" else Art.C_GOLD if float(row["index"])>=float(Hotel.cfg()["peak_threshold"]) else Art.C_BLUE if float(row["index"])<.9 else Art.C_MUTED
+		var color := Art.C_PURPLE if str(row["event"])!="" else Art.C_SKY if float(row["index"])>=float(Hotel.cfg()["peak_threshold"]) else Art.C_BLUE if float(row["index"])<.9 else Art.C_MUTED
 		var cell := UIK.chip("%s %d\n%d%% · ×%.2f\n%s"%[I18n.t(Clock.WEEKDAYS[int(row["weekday"])]),int(date["day"]),roundi(float(row["occupancy"])*100),float(row["index"]),calendar_note(row)],color)
 		cell.custom_minimum_size=Vector2(76,0)
 		grid.add_child(cell)
@@ -187,7 +187,7 @@ func ops_page(content: Control) -> void:
 		var b: Dictionary=Hotel.cfg()["breakfast"][mode]
 		var mark := "● " if Hotel.S()["breakfast"]==mode else ""
 		button(content,mark+I18n.t("%s · %s per guest · service +%.2f")%[I18n.t(b["name"]),Fmt.money(float(b["cost"])),float(b["service"])],"Breakfast_"+mode,Hotel.set_breakfast.bind(mode))
-	if not Cafe.leased():line(content,"✗ "+I18n.t("Lease your corner cafe to serve breakfast from its kitchen at wholesale cost."),Art.C_GOLD)
+	if not Cafe.leased():line(content,"✗ "+I18n.t("Lease your corner cafe to serve breakfast from its kitchen at wholesale cost."),Art.C_SKY)
 	line(content,I18n.t("Linen, laundry and amenities cost %s per occupied room-night; utilities %s per room per day.")%[Fmt.money(float(Hotel.cfg()["supplies_room"])),Fmt.money(float(Hotel.cfg()["utilities_room_day"]))],Art.C_MUTED)
 	content.add_child(UIK.sep())
 	content.add_child(UIK.label_tip("Room equipment and renovation","hotel_equipment",9))
@@ -201,7 +201,7 @@ func ops_page(content: Control) -> void:
 		if renovating:status=I18n.t("renovating until %s")%Clock.fmt_short(int(Hotel.S()["rooms"][type]["reno_until"]))
 		elif issues["broken"]:status=I18n.t("broken: rooms not for sale")
 		elif issues["due"]:status=I18n.t("service due")
-		line(content,("✓ " if ok else "✗ ")+I18n.t("%s · condition %d%% · %s")%[Hotel.type_name(type),roundi(cond),status],Art.C_GREEN if ok else Art.C_GOLD)
+		line(content,("✓ " if ok else "✗ ")+I18n.t("%s · condition %d%% · %s")%[Hotel.type_name(type),roundi(cond),status],Art.C_GREEN if ok else Art.C_SKY)
 		var eq := UIK.hbox(4)
 		content.add_child(eq)
 		if issues["broken"] or issues["due"]:
@@ -214,12 +214,12 @@ func ops_page(content: Control) -> void:
 func groups_page(content: Control) -> void:
 	content.add_child(UIK.label_tip("Travel-agency group blocks","hotel_blocks",9))
 	var offers := Hotel.open_blocks()
-	if offers.is_empty():line(content,"✗ "+I18n.t("No group block is waiting. New offers arrive every Monday morning."),Art.C_GOLD)
+	if offers.is_empty():line(content,"✗ "+I18n.t("No group block is waiting. New offers arrive every Monday morning."),Art.C_SKY)
 	for b in offers:
 		var date := Clock.date_at((int(b["start"])-1)*Clock.DAY+12*60)
 		var conflict := Hotel.block_conflict(b)
 		line(content,I18n.t("%s · %d %s rooms × %d nights from %s %d · group rate %s per room-night (%s off the %s rack) · total %s · 20%% deposit · Net 30")%[Hotel.cfg()["block"]["client"],int(b["rooms"]),Hotel.type_name(b["type"]),int(b["nights"]),I18n.t(Clock.MONTHS[int(date["month"])-1]),int(date["day"]),Fmt.money(float(b["rate"])),Fmt.pct(float(Hotel.cfg()["block"]["discount"])),Fmt.money(float(b["rack"])),Fmt.money0(float(b["rate"])*int(b["rooms"])*int(b["nights"]))])
-		if conflict!="":line(content,"✗ "+I18n.t(conflict),Art.C_GOLD)
+		if conflict!="":line(content,"✗ "+I18n.t(conflict),Art.C_SKY)
 		else:button(content,I18n.t("Lock %d rooms for the group")%int(b["rooms"]),"AcceptBlock_"+b["id"],Hotel.accept_block.bind(b["id"]),true)
 	for b in Hotel.locked_blocks():
 		line(content,"✓ "+I18n.t("Locked: %d %s rooms for %d nights, %d done. The group pays at the end of the stay.")%[int(b["rooms"]),Hotel.type_name(b["type"]),int(b["nights"]),int(b["done"])],Art.C_GREEN)
@@ -252,7 +252,7 @@ func reviews_page(content: Control) -> void:
 		if r["kind"]=="vera":who="Vera Stone ×5"
 		elif r["kind"]=="storm":who="Review storm"
 		elif r["kind"]=="walk":who="Walked guests"
-		line(content,I18n.t("Day %d · %s · %.1f of 5 · weight %d")%[int(r["day"]),I18n.t(who),float(r["score"]),int(r["w"])],Art.C_WHITE if float(r["score"])>=3.5 else Art.C_GOLD)
+		line(content,I18n.t("Day %d · %s · %.1f of 5 · weight %d")%[int(r["day"]),I18n.t(who),float(r["score"]),int(r["w"])],Art.C_WHITE if float(r["score"])>=3.5 else Art.C_SKY)
 	var worst := ""
 	for type in Hotel.TYPES:
 		var r: Dictionary=Hotel.S()["rooms"][type]

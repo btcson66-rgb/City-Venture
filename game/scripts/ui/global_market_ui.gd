@@ -4,7 +4,7 @@ extends RefCounted
 
 
 static func sales(os: CompanyOS, box: VBoxContainer) -> void:
-	box.add_child(UIK.label_tip("ShopLane Global", "overseas_storefront", 10, Art.C_GOLD, true))
+	box.add_child(UIK.label_tip("ShopLane Global", "overseas_storefront", 10, Art.C_SKY, true))
 	OverseasPartnerUI.sales(box)
 	var select := OptionButton.new()
 	select.name = "GlobalRegion"
@@ -21,7 +21,7 @@ static func sales(os: CompanyOS, box: VBoxContainer) -> void:
 	box.add_child(UIK.label_tip(I18n.t("1 %s = %s home dollars") % [ccy, Fmt.money(FX.rate(ccy))], "fx_rate"))
 	var why := GlobalMarket.store_block(region)
 	if why != "":
-		box.add_child(UIK.wrap("✗ " + I18n.t(why), 8, Art.C_GOLD, 460))
+		box.add_child(UIK.wrap("✗ " + I18n.t(why), 8, Art.C_SKY, 460))
 		if not GlobalMarket.unlocked(region):
 			return
 		if not GlobalMarket.live(GameState.company_id()):
@@ -75,7 +75,7 @@ static func sales(os: CompanyOS, box: VBoxContainer) -> void:
 		CustomsUI.declaration(os, box, region, str(l["id"]))
 		box.add_child(UIK.label(I18n.t("Expected demand: %.1f orders/day") % GlobalMarket.demand(region, l), 7, Art.C_MUTED))
 	if Ecommerce.E()["listings"].is_empty():
-		box.add_child(UIK.wrap("Create a product listing in Domestic sales first, then set its overseas price here.", 8, Art.C_GOLD, 460))
+		box.add_child(UIK.wrap("Create a product listing in Domestic sales first, then set its overseas price here.", 8, Art.C_SKY, 460))
 		var go := UIK.button("Domestic", func(): os.sales_page = "domestic"; os.rebuild(), "primary")
 		go.name = "GlobalDomesticRoute"
 		box.add_child(go)
@@ -87,7 +87,7 @@ static func sales(os: CompanyOS, box: VBoxContainer) -> void:
 static func finance(os: CompanyOS, box: VBoxContainer) -> void:
 	if not GlobalMarket.live(GameState.company_id()) or not GlobalMarket.company()["bank"]:
 		return
-	box.add_child(UIK.title("Overseas payouts", 10, Art.C_GOLD))
+	box.add_child(UIK.title("Overseas payouts", 10, Art.C_SKY))
 	OverseasPartnerUI.finance(box)
 	box.add_child(UIK.label_tip(I18n.t("Bank spread: %.1f%%") % (float(FX.cfg().get("bank_spread", 0.015)) * 100), "fx_spread"))
 	box.add_child(UIK.label_tip("Realized exchange gain / loss", "fx_gain_loss"))

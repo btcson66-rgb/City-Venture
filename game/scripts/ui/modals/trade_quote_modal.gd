@@ -67,7 +67,7 @@ func build() -> void:
 	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(content)
 	body.add_child(scroll)
-	content.add_child(UIK.wrap("Compare supplier costs and buyer demand before signing a trade.", 7, Art.C_GOLD, 520))
+	content.add_child(UIK.wrap("Compare supplier costs and buyer demand before signing a trade.", 7, Art.C_SKY, 520))
 	var regions: Array = DataDB.regions.keys()
 	regions.sort()
 	select_row(content, "Supply region", regions, source, func(value): source = value, "TradeSource")
@@ -109,7 +109,7 @@ func build() -> void:
 		content.add_child(UIK.kv("Estimated margin (home dollars)", Fmt.money(float(quote["margin"]))))
 		content.add_child(UIK.kv("Stress margin (home dollars)", Fmt.money(float(quote["stress_margin"])), Art.C_RED))
 		content.add_child(UIK.wrap("Stress estimate: foreign receipts fall 15% and one seller cargo loss occurs. This is a scenario, not a forecast or a guaranteed result.", 7, Art.C_MUTED, 520))
-		content.add_child(UIK.wrap(("✓ " if quote["competitive"] else "✗ ") + I18n.t("Compare buyer landed cost with demand before choosing a route."), 7, Art.C_GOLD, 520))
+		content.add_child(UIK.wrap(("✓ " if quote["competitive"] else "✗ ") + I18n.t("Compare buyer landed cost with demand before choosing a route."), 7, Art.C_SKY, 520))
 		content.add_child(UIK.kv("Buyer landed / ceiling (home dollars)", Fmt.money(float(quote["buyer_landed"])) + " / " + Fmt.money(float(quote["buyer_ceiling"]))))
 		content.add_child(UIK.kv("Cargo risk passes at", value_label(str(quote["risk_transfer"]))))
 		content.add_child(UIK.kv("Departure wait / transit / payment (days)", "%d / %d / %d" % [quote["wait_days"], quote["transit_days"], quote["payment_days"]]))
@@ -124,7 +124,7 @@ func build() -> void:
 	if can_sign:
 		var sign_button:=UIK.button("Sign buyer contract and buy supplier cargo",_sign,"" if can_import else "primary")
 		sign_button.name="TradeSign";footer.add_child(sign_button)
-	elif TradeIndustry.valid():content.add_child(UIK.wrap("✗ "+I18n.t(TradeIndustry.available(quote)),8,Art.C_GOLD,520))
+	elif TradeIndustry.valid():content.add_child(UIK.wrap("✗ "+I18n.t(TradeIndustry.available(quote)),8,Art.C_SKY,520))
 	var refresh_button := UIK.button("Refresh RFQ estimate", func(): refresh(); rebuild(), "" if can_sign or can_import else "primary")
 	refresh_button.name = "TradeRefreshRFQ"
 	footer.add_child(refresh_button)

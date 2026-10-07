@@ -29,7 +29,7 @@ func _draw() -> void:
 			draw_rect(Rect2(off + r.position * sc, r.size * sc), s["color"])
 		for n in ws.named_npcs.values():
 			if is_instance_valid(n):
-				draw_circle(off + n.position * sc, 2.0, Art.C_GOLD)
+				draw_circle(off + n.position * sc, 2.0, Art.C_SKY)
 		draw_circle(off + ws.player.position * sc, 2.5, Color.WHITE)
 		return
 	for s in ws.minimap_shapes():

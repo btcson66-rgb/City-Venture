@@ -50,7 +50,7 @@ func build_round() -> void:
 
 
 func _slide(v: VBoxContainer) -> void:
-	v.add_child(UIK.wrap(I18n.t("Slide %d of %d: choose the figure to show.") % [round_i + 1, deck_n], 9, Art.C_GOLD, 540))
+	v.add_child(UIK.wrap(I18n.t("Slide %d of %d: choose the figure to show.") % [round_i + 1, deck_n], 9, Art.C_SKY, 540))
 	var grid := UIK.vbox(3)
 	v.add_child(UIK.scroll(grid, Vector2(550, 190)))
 	for f in facts:
@@ -74,7 +74,7 @@ func _pick(id: String) -> void:
 
 func _question(v: VBoxContainer) -> void:
 	var q: Dictionary = asked[round_i - deck_n]
-	v.add_child(UIK.wrap("%s: \"%s\"" % [Fundraising.name_of(investor), I18n.t(str(q["text"]))], 10, Art.C_GOLD, 540))
+	v.add_child(UIK.wrap("%s: \"%s\"" % [Fundraising.name_of(investor), I18n.t(str(q["text"]))], 10, Art.C_SKY, 540))
 	var deck: Array = picks.map(func(id): return Fundraising.fact(str(id)))
 	for option in q["options"]:
 		var style := str(option["style"])

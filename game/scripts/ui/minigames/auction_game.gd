@@ -31,7 +31,7 @@ func build_round() -> void:
 	stage.add_child(box)
 	var current := lot()
 	var car: Dictionary = current["car"]
-	box.add_child(UIK.wrap(I18n.t("%s · %d years · %s km · market %s") % [I18n.t(car["name"]), int(car["age"]), Fmt._group(int(car["km"])), Fmt.money0(Automotive.true_value(car) if bool(current["inspected"]) else Automotive.visible_value(car))], 10, Art.C_GOLD, 520))
+	box.add_child(UIK.wrap(I18n.t("%s · %d years · %s km · market %s") % [I18n.t(car["name"]), int(car["age"]), Fmt._group(int(car["km"])), Fmt.money0(Automotive.true_value(car) if bool(current["inspected"]) else Automotive.visible_value(car))], 10, Art.C_SKY, 520))
 	bid_label = UIK.label("", 14, Art.C_WHITE, true)
 	bid_label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	box.add_child(bid_label)

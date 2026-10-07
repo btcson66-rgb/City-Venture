@@ -90,7 +90,7 @@ func _layout() -> void:
 	tray_card.add_child(tl)
 	v.add_child(tray_card)
 	var t := total()
-	var col := Art.C_GREEN if t == amount else (Art.C_RED if t > amount else Art.C_GOLD)
+	var col := Art.C_GREEN if t == amount else (Art.C_RED if t > amount else Art.C_SKY)
 	var tot := UIK.title(I18n.t("Counted: %s of %s") % [Fmt.money(t), Fmt.money(amount)], 12, col)
 	tot.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	v.add_child(tot)

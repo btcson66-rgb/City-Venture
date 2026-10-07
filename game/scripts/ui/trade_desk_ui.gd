@@ -20,14 +20,14 @@ func build() -> void:
 	primary_chosen=false
 	var content:=UIK.vbox(5);body.add_child(UIK.scroll(content,Vector2(570,230)))
 	if not TradeIndustry.S()["registered"]:
-		content.add_child(UIK.wrap("✗ "+I18n.t("Apply for import and export registration at Customs House first."),9,Art.C_GOLD,560))
+		content.add_child(UIK.wrap("✗ "+I18n.t("Apply for import and export registration at Customs House first."),9,Art.C_SKY,560))
 		content.add_child(UIK.kv("Import and export registration",Fmt.money(float(TradeIndustry.cfg().get("registration_fee",200)))))
 		var here=SceneRouter.world_scene()
 		if here!=null and here.kind=="interior" and here.scene_id=="customs_house":add_button(content,"Register import and export business","RegisterTrade",TradeIndustry.register,true)
 		return
 	if not TradeIndustry.is_running():
 		if not Living.has_lease("meridian_trade_office"):
-			content.add_child(UIK.wrap("✗ "+I18n.t("Lease Meridian Trade Desk before opening the brokerage."),9,Art.C_GOLD,560))
+			content.add_child(UIK.wrap("✗ "+I18n.t("Lease Meridian Trade Desk before opening the brokerage."),9,Art.C_SKY,560))
 		else:add_button(content,"Open the trade brokerage","StartTrade",TradeIndustry.start,true)
 		return
 	content.add_child(UIK.kv("Company cash",Fmt.money(Ledger.cash(TradeIndustry.entity()))))
@@ -42,7 +42,7 @@ func build() -> void:
 		var contract: Dictionary=TradeIndustry.S()["contracts"][id]
 		if contract["ended"]:continue
 		content.add_child(UIK.wrap(I18n.t("Repeat contract: %s · %d shipments remaining")%[id,int(contract["remaining"])],8,Art.C_WHITE,560))
-		if contract["error"]!="":content.add_child(UIK.wrap("✗ "+str(contract["error"]),8,Art.C_GOLD,560))
+		if contract["error"]!="":content.add_child(UIK.wrap("✗ "+str(contract["error"]),8,Art.C_SKY,560))
 		add_button(content,"Resume repeat contract" if contract["paused"] else "Pause repeat contract","TradeRepeat_"+id,TradeIndustry.pause_repeat.bind(id,not contract["paused"]),contract["paused"])
 		add_button(content,"End repeat contract","TradeEndRepeat_"+id,TradeIndustry.end_repeat.bind(id))
 	for d in TradeIndustry.S()["deals"].values():
@@ -55,7 +55,7 @@ func build() -> void:
 			if hedge["ok"]:
 				content.add_child(UIK.kv("Forward fee / refundable collateral",Fmt.money(float(hedge["fee"]))+" / "+Fmt.money(float(hedge["collateral"]))))
 				add_button(content,"Hedge contracted receipts for 30 days","TradeHedge_"+d["id"],TradeIndustry.hedge_receipt.bind(d["id"]))
-			else:content.add_child(UIK.wrap("✗ "+str(hedge["error"]),8,Art.C_GOLD,560))
+			else:content.add_child(UIK.wrap("✗ "+str(hedge["error"]),8,Art.C_SKY,560))
 		if d["status"]=="delayed":
 			add_button(content,"Wait three days for the port","TradeWait_"+d["id"],TradeIndustry.resolve_delay.bind(d["id"],false),true)
 			add_button(content,"Pay to reroute cargo by air","TradeAir_"+d["id"],TradeIndustry.resolve_delay.bind(d["id"],true))
@@ -66,7 +66,7 @@ func build() -> void:
 				var label: String={"invoice":"Commercial invoice","packing_list":"Packing list","bill_of_lading":"Bill of lading"}[key]
 				add_button(content,("✓ " if present else "✗ ")+I18n.t(label),"TradeDoc_"+d["id"]+"_"+key,TradeIndustry.set_document.bind(d["id"],key,not present),not present)
 		if d["status"]=="customs_hold":
-			content.add_child(UIK.wrap("✗ "+I18n.t(TradeIndustry.document_block(d)),8,Art.C_GOLD,560))
+			content.add_child(UIK.wrap("✗ "+I18n.t(TradeIndustry.document_block(d)),8,Art.C_SKY,560))
 			add_button(content,"Correct documents and clear cargo","ClearTrade_"+d["id"],TradeIndustry.clear.bind(d["id"]),true)
 			add_button(content,"Return cargo to supplier at a loss","WithdrawTrade_"+d["id"],TradeIndustry.withdraw.bind(d["id"]))
 		if d["quote"]["payment"]=="lc" and d["lc"]=="issued" and d["status"] in ["booked","in_transit","awaiting_bank"]:add_button(content,"Submit documents to the issuing bank","TradeBank_"+d["id"],TradeIndustry.bank_documents.bind(d["id"]),true)

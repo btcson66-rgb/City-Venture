@@ -84,7 +84,7 @@ func _investor_list(box: VBoxContainer) -> void:
 	for id in Fundraising.cfg()["investors"]:
 		var d: Dictionary = Fundraising.inv(id)
 		var kind := I18n.t("Angel") if d["kind"] == "angel" else I18n.t("Venture fund")
-		box.add_child(UIK.title("%s · %s" % [Fundraising.name_of(id), kind], 10, Art.C_GOLD))
+		box.add_child(UIK.title("%s · %s" % [Fundraising.name_of(id), kind], 10, Art.C_SKY))
 		box.add_child(UIK.wrap(I18n.t(str(d["blurb"])), 8, Art.C_WHITE, 520))
 		box.add_child(UIK.wrap("%s · %s–%s · %s" % [I18n.t(str(Fundraising.cfg()["personalities"][d["personality"]]["label"])), Fmt.money0(float(d["min"])), Fmt.money0(float(d["max"])), _status_text(id)], 8, Art.C_SKY, 520))
 		_act(box, "Open", "Investor_" + id, func():
@@ -126,7 +126,7 @@ func _investor(box: VBoxContainer) -> void:
 		for candidate in Fundraising.deals().values():
 			if candidate["investor"] == id and (done.is_empty() or int(candidate["created"]) > int(done["created"])):
 				done = candidate
-	box.add_child(UIK.title("%s · %s" % [Fundraising.name_of(id), I18n.t(str(d["firm"]))], 11, Art.C_GOLD))
+	box.add_child(UIK.title("%s · %s" % [Fundraising.name_of(id), I18n.t(str(d["firm"]))], 11, Art.C_SKY))
 	box.add_child(UIK.wrap(I18n.t(str(d["blurb"])), 8, Art.C_WHITE, 520))
 	var p: Dictionary = Fundraising.cfg()["personalities"][d["personality"]]
 	box.add_child(UIK.wrap("%s: %s" % [I18n.t(str(p["label"])), I18n.t(str(p["blurb"]))], 8, Art.C_SKY, 520))
@@ -182,7 +182,7 @@ func _open_deal(box: VBoxContainer, id: String, deal: Dictionary) -> void:
 
 
 func _ready_facts(box: VBoxContainer) -> void:
-	box.add_child(UIK.label("Figures you can show (from your books)", 9, Art.C_GOLD))
+	box.add_child(UIK.label("Figures you can show (from your books)", 9, Art.C_SKY))
 	for f in Fundraising.facts():
 		box.add_child(UIK.wrap("• %s: %s" % [I18n.t(str(f["label"])), str(f["text"])], 8, Art.C_WHITE, 520))
 
@@ -224,7 +224,7 @@ func _pitch(deal_id: String) -> void:
 func _offered(box: VBoxContainer, id: String, deal: Dictionary) -> void:
 	_terms_box(box, deal)
 	if deal.has("deck"):
-		box.add_child(UIK.label("The deck you showed", 9, Art.C_GOLD))
+		box.add_child(UIK.label("The deck you showed", 9, Art.C_SKY))
 		for f in deal["deck"]:
 			box.add_child(UIK.wrap("• %s: %s" % [I18n.t(str(f["label"])), str(f["text"])], 8, Art.C_WHITE, 520))
 	var left := Fundraising.counters_left(deal)
@@ -263,18 +263,18 @@ func _offered(box: VBoxContainer, id: String, deal: Dictionary) -> void:
 
 # ------------------------------------------------------------------ cap table
 func _cap(box: VBoxContainer) -> void:
-	box.add_child(UIK.label("Ownership", 10, Art.C_GOLD))
+	box.add_child(UIK.label("Ownership", 10, Art.C_SKY))
 	for r in Fundraising.cap_rows():
-		box.add_child(UIK.kv(str(r["name"]), Fmt.pct(float(r["share"]), 1), Art.C_GOLD if r["id"] == "founder" else Art.C_WHITE))
+		box.add_child(UIK.kv(str(r["name"]), Fmt.pct(float(r["share"]), 1), Art.C_SKY if r["id"] == "founder" else Art.C_WHITE))
 	box.add_child(UIK.wrap("Equity is ownership, not income. Each round dilutes every existing holder in proportion.", 8, Art.C_MUTED, 520))
 	var rows := Fundraising.rounds()
 	if not rows.is_empty():
-		box.add_child(UIK.label("Rounds and dilution", 10, Art.C_GOLD))
+		box.add_child(UIK.label("Rounds and dilution", 10, Art.C_SKY))
 		for r in rows:
 			box.add_child(UIK.wrap(I18n.t("%s: %s for %s. Your share %s → %s.") % [Fundraising.holder_name(str(r["holder"])), Fmt.money(float(r["amount"])), Fmt.pct(float(r["stake"]), 1), Fmt.pct(float(r["founder_before"]), 1), Fmt.pct(float(r["founder_after"]), 1)], 8, Art.C_WHITE, 520))
 	var value := Fundraising.book_value()
 	if value > 0.0:
-		box.add_child(UIK.label("If the company were sold at its book value", 10, Art.C_GOLD))
+		box.add_child(UIK.label("If the company were sold at its book value", 10, Art.C_SKY))
 		box.add_child(UIK.kv("Book value", Fmt.money0(value)))
 		box.add_child(UIK.kv("You would receive", Fmt.money0(Fundraising.founder_proceeds(value)), Art.C_GREEN))
 		for deal in Fundraising.prefs():
@@ -290,7 +290,7 @@ func _reports(box: VBoxContainer) -> void:
 		if deal["status"] != "signed":
 			continue
 		any = true
-		box.add_child(UIK.title("%s · %s" % [Fundraising.name_of(str(deal["investor"])), Fmt.money(float(deal["terms"]["amount"]))], 10, Art.C_GOLD))
+		box.add_child(UIK.title("%s · %s" % [Fundraising.name_of(str(deal["investor"])), Fmt.money(float(deal["terms"]["amount"]))], 10, Art.C_SKY))
 		if bool(deal.get("reports", false)):
 			box.add_child(UIK.kv("Next quarterly report", Clock.fmt_short(int(deal["next_report"]))))
 			if float(deal.get("target", 0.0)) > 0.0:
@@ -324,7 +324,7 @@ func _partners(box: VBoxContainer) -> void:
 	box.add_child(UIK.wrap("A partnership is a contract: the partner issues real jobs, pays after the job's terms, and takes a share of what it pays. An exclusive deal pays more but shuts out rivals of the same kind.", 8, Art.C_MUTED, 520))
 	for id in Fundraising.cfg()["partners"]:
 		var d := Partnerships.def(id)
-		box.add_child(UIK.title("%s · %s" % [Partnerships.name_of(id), Partnerships.kind_label(str(d["kind"]))], 10, Art.C_GOLD))
+		box.add_child(UIK.title("%s · %s" % [Partnerships.name_of(id), Partnerships.kind_label(str(d["kind"]))], 10, Art.C_SKY))
 		box.add_child(UIK.wrap(I18n.t(str(d["blurb"])), 8, Art.C_WHITE, 520))
 		var item := Partnerships.item_for(id)
 		var why := Partnerships.block(id)
@@ -339,7 +339,7 @@ func _partners(box: VBoxContainer) -> void:
 func _partner(box: VBoxContainer, id: String) -> void:
 	var d := Partnerships.def(id)
 	var t := Partnerships.terms_for(id)
-	box.add_child(UIK.title("%s · %s" % [Partnerships.name_of(id), Partnerships.kind_label(str(d["kind"]))], 11, Art.C_GOLD))
+	box.add_child(UIK.title("%s · %s" % [Partnerships.name_of(id), Partnerships.kind_label(str(d["kind"]))], 11, Art.C_SKY))
 	box.add_child(UIK.wrap(I18n.t(str(d["blurb"])), 8, Art.C_WHITE, 520))
 	var item := Partnerships.item_for(id)
 	if item.is_empty():
@@ -386,7 +386,7 @@ func _active_partner(box: VBoxContainer, item: Dictionary) -> void:
 	box.add_child(UIK.kv("Deliverables issued / done / paid", "%d / %d / %d (%d)" % [int(item["issued"]), int(item["delivered"]), int(item["paid"]), int(item["terms"]["periods"])]))
 	box.add_child(UIK.kv("Shared with the partner so far", Fmt.money(float(item["share_paid"]))))
 	if bool(item["exclusive"]):
-		box.add_child(UIK.wrap(I18n.t("Exclusive until %s: you cannot sign another %s deal until then.") % [Clock.fmt_short(int(item["exclusive_until"])), Partnerships.kind_label(str(item["kind"])).to_lower()], 8, Art.C_GOLD, 520))
+		box.add_child(UIK.wrap(I18n.t("Exclusive until %s: you cannot sign another %s deal until then.") % [Clock.fmt_short(int(item["exclusive_until"])), Partnerships.kind_label(str(item["kind"])).to_lower()], 8, Art.C_SKY, 520))
 	var job := Partnerships.current_job(item)
 	if not job.is_empty():
 		box.add_child(UIK.wrap(I18n.t("Waiting: %s, due %s.") % [str(job["scope"]), Clock.fmt_short(int(job["due"]))], 8, Art.C_WHITE, 520))

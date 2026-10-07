@@ -35,7 +35,7 @@ func goals(box: VBoxContainer) -> void:
 	var pending: Array = Growth.S()["pending"]
 	if not pending.is_empty():
 		var d: Dictionary = Growth.definitions().filter(func(g): return g["id"] == pending[0])[0]
-		box.add_child(UIK.label("✓ " + I18n.t(str(d["title"])), 10, Art.C_GOLD, true))
+		box.add_child(UIK.label("✓ " + I18n.t(str(d["title"])), 10, Art.C_SKY, true))
 		box.add_child(UIK.wrap("A real milestone, without a cash grant. Maya has sent you a message.", 8, Art.C_WHITE, 452))
 		var card := UIK.button("Put the card in your timeline", func(): pending.pop_front(); rebuild(), "primary")
 		card.name = "GrowthAcknowledge"
@@ -43,7 +43,7 @@ func goals(box: VBoxContainer) -> void:
 	box.add_child(UIK.label_tip("Three goals at a time", "growth_goals", 9, Art.C_SKY))
 	for id in Growth.S()["active"]:
 		var d: Dictionary = Growth.definitions().filter(func(g): return g["id"] == id)[0]
-		box.add_child(UIK.label(I18n.t(str(d["title"])), 9, Art.C_GOLD, true))
+		box.add_child(UIK.label(I18n.t(str(d["title"])), 9, Art.C_SKY, true))
 		box.add_child(UIK.wrap("✗ " + I18n.t(str(d["hint"])), 8, Art.C_WHITE, 452))
 		if d["unit"] != "condition":
 			var have := Growth.metric(d["metric"])
@@ -61,7 +61,7 @@ func goals(box: VBoxContainer) -> void:
 		box.add_child(restore)
 
 func achievements(box: VBoxContainer) -> void:
-	box.add_child(UIK.label_tip("Main-story achievements", "growth_goals", 9, Art.C_GOLD))
+	box.add_child(UIK.label_tip("Main-story achievements", "growth_goals", 9, Art.C_SKY))
 	for d in Growth.definitions("achievements"):
 		if Growth.S()["achievements"].has(d["id"]):
 			box.add_child(UIK.wrap("✓ %s · %s" % [I18n.t(str(d["title"])), Clock.fmt_short(int(Growth.S()["achievements"][d["id"]]["t"]))], 8, Art.C_GREEN, 452))
@@ -74,5 +74,5 @@ func achievements(box: VBoxContainer) -> void:
 func timeline(box: VBoxContainer) -> void:
 	var rows: Array = GameState.data["timeline"]
 	for i in range(rows.size() - 1, -1, -1):
-		box.add_child(UIK.label(Clock.fmt_short(int(rows[i]["t"])), 7, Art.C_GOLD))
+		box.add_child(UIK.label(Clock.fmt_short(int(rows[i]["t"])), 7, Art.C_SKY))
 		box.add_child(UIK.wrap(str(rows[i]["text"]), 8, Art.C_WHITE, 452))

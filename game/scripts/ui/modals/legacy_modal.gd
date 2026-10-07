@@ -36,7 +36,7 @@ func market_response(box: VBoxContainer) -> void:
 	if m.is_empty():
 		box.add_child(UIK.wrap("This story opens after the overseas partner chapter.", 8, Art.C_MUTED, 452))
 		return
-	box.add_child(UIK.label_tip("Market consolidation", "market_consolidation", 10, Art.C_GOLD, true))
+	box.add_child(UIK.label_tip("Market consolidation", "market_consolidation", 10, Art.C_SKY, true))
 	box.add_child(UIK.wrap(I18n.t("%s is cutting prices in %s. The demand shock fades over %d days.") % [LegacyBusiness.rival(), LegacyBusiness.region_name(), int(LegacyBusiness.cfg()["rival_days"])], 8, Art.C_WHITE, 452))
 	if m["branch"] != "independent":
 		box.add_child(UIK.wrap("You manage a Hale Group division. The revenue goal is a management benchmark; the chapter only requires continued operations, not growth.", 8, Art.C_WHITE, 452))
@@ -45,7 +45,7 @@ func market_response(box: VBoxContainer) -> void:
 		box.add_child(UIK.kv("Victor's second offer (home dollars)", Fmt.money0(float(m["second_offer"]))))
 		box.add_child(UIK.wrap("The call is a lower repeat offer. Compare the operating choices; the final ownership decision remains in the legacy chapter.", 7, Art.C_MUTED, 452))
 	if GameState.flag("consolidation_unavailable"):
-		box.add_child(UIK.wrap("This market is no longer available. Review the closure and continue.", 8, Art.C_GOLD, 452))
+		box.add_child(UIK.wrap("This market is no longer available. Review the closure and continue.", 8, Art.C_SKY, 452))
 		add_action(box, "Review unavailable market", "review_unavailable_market", func(): LegacyBusiness.review_unavailable(); rebuild(), true)
 		return
 	if not GameState.flag("consolidation_news_read"):
@@ -67,7 +67,7 @@ func market_response(box: VBoxContainer) -> void:
 		if str(m["strategy"]) != "":
 			var commit := add_action(box, "Apply price and operating response", "apply_market_response", func(): result(LegacyBusiness.respond()), why == "")
 			commit.disabled = why != ""
-			box.add_child(UIK.wrap(("✓ " + I18n.t("Ready to apply the response.")) if why == "" else "✗ " + I18n.t(why), 7, Art.C_GOLD, 452))
+			box.add_child(UIK.wrap(("✓ " + I18n.t("Ready to apply the response.")) if why == "" else "✗ " + I18n.t(why), 7, Art.C_SKY, 452))
 			if why != "":
 				add_action(box, "Review unavailable market", "review_unavailable_market", func(): LegacyBusiness.review_unavailable(); rebuild())
 	else:
@@ -84,7 +84,7 @@ func market_response(box: VBoxContainer) -> void:
 	add_action(box, "Compare 90-day assumptions", "compare_consolidation", func(): UIRoot.open_modal(LegacyBusiness.comparison()))
 
 func ending_choices(box: VBoxContainer) -> void:
-	box.add_child(UIK.label_tip("Exit options", "exit_options", 10, Art.C_GOLD, true))
+	box.add_child(UIK.label_tip("Exit options", "exit_options", 10, Art.C_SKY, true))
 	if not GameState.flag("legacy_met_maya"):
 		add_action(box, "Call Maya or meet at Bloom Coffee", "meet_maya_legacy", func():
 			UIRoot.close_all()
@@ -96,7 +96,7 @@ func ending_choices(box: VBoxContainer) -> void:
 		b.disabled = why != ""
 		box.add_child(UIK.wrap(I18n.t({"independent": "Keep the current business and ownership; continue free play.", "sale": "Use today's Chapter 12 valuation. Previous sales never pay twice, and a closed company cannot be sold.", "employees": "Board-approved transfer of existing shares to the team, with an equity journal and no fabricated income.", "mentor": "Mentor at Nexus Co-work. A contract manager packs real orders and bills monthly; unpaid fees suspend the service."}[choice]), 7, Art.C_MUTED, 452))
 		if why != "":
-			box.add_child(UIK.wrap("✗ " + I18n.t(why), 7, Art.C_GOLD, 452))
+			box.add_child(UIK.wrap("✗ " + I18n.t(why), 7, Art.C_SKY, 452))
 	box.add_child(UIK.label_tip("Employee ownership", "employee_ownership"))
 	box.add_child(UIK.kv("Current valuation (home dollars)", Fmt.money0(Acquisition.quote()["price"])))
 	box.add_child(UIK.kv("Founder sale proceeds (home dollars)", Fmt.money(Acquisition.quote()["take"])))

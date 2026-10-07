@@ -130,7 +130,7 @@ func mixer(content: Control) -> void:
 		button(content,campaign["client"],"SelectCampaign_"+campaign["id"],pick.bind(campaign["id"]),selected=="")
 	var campaign: Dictionary=Media.S()["campaigns"].get(selected,{})
 	if campaign.get("status","") not in ["running","paused"]:campaign={};selected=""
-	if campaign.is_empty():content.add_child(UIK.wrap("✗ Select a running campaign to adjust media shares.",8,Art.C_GOLD,550));return
+	if campaign.is_empty():content.add_child(UIK.wrap("✗ Select a running campaign to adjust media shares.",8,Art.C_SKY,550));return
 	content.add_child(UIK.wrap(I18n.t("Spend %s/%s · impressions %d · clicks %d · conversions %d")%[Fmt.money0(campaign["spent"]),Fmt.money0(campaign["budget"]),roundi(campaign["impressions"]),roundi(campaign["clicks"]),roundi(campaign["conversions"])],8,Art.C_WHITE,550))
 	if campaign["status"]=="paused":button(content,"Resume after funding the media purchase","ResumeCampaign_"+selected,Media.resume.bind(selected),true)
 	for cid in Media.cfg()["channels"]:
@@ -167,7 +167,7 @@ func radio(content: Control) -> void:
 	content.add_child(UIK.label_tip("Owned media","owned_media",9))
 	if Media.S()["radio"].is_empty():
 		if Media.stage()<2:
-			content.add_child(UIK.wrap("✗ Complete two campaigns and hire a designer and media buyer before buying Campus Radio.",8,Art.C_GOLD,550))
+			content.add_child(UIK.wrap("✗ Complete two campaigns and hire a designer and media buyer before buying Campus Radio.",8,Art.C_SKY,550))
 			if int(Media.S()["completed"])<int(Media.cfg()["agency_completed"]):
 				var next := UIK.button("Client briefs",switch.bind("briefs"),"primary")
 				next.name="RadioNextBrief"

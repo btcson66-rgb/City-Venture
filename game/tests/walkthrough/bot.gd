@@ -187,6 +187,8 @@ func _audit_one(t: String, ctl: Control) -> void:
 func _run() -> void:
 	await wait(1.0)
 	match mode:
+		"calm_info":
+			await load("res://tests/walkthrough/calm_info_tour.gd").new(self).run()
 		"traffic_safety":
 			await load("res://tests/walkthrough/traffic_safety_tour.gd").new(self).run()
 		"workflows":

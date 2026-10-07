@@ -42,7 +42,7 @@ Read these before touching an area:
 - Every release must add a save actually played in that version to `game/tests/fixtures/saves/`, with its source commit and capture log.
 - Player-facing honesty: if a feature is a stand-in or planned, the text says so. Status words in docs:
   Implemented / Mocked / Placeholder / Planned / Blocked.
-- New business ideas the player meets get a "!" explanation badge: `UIK.tip("<id>")` or `UIK.label_tip(text, "<id>")`,
+- New business ideas the player meets get a quiet "i" explanation icon: `UIK.tip("<id>")` or `UIK.label_tip(text, "<id>")`,
   text in `game/data/help/glossary.json` as `{title, what, why}`. A new screen gets a help card in
   `game/data/help/help.json` (the `help_key` of the modal).
 - Every new interactive button gets a stable `name` (e.g. `ReturnPO_<id>`) so the bots can click it.
@@ -97,7 +97,7 @@ python3 tools/i18n_extract.py                                        # missing 0
 - [ ] Walkthrough (zh_TW): 0 failures (paste the last line); english_audit clean for new text
 - [ ] python3 tools/i18n_extract.py: missing 0; python3 tools/wiki_check.py: OK
 - [ ] Old saves still load (test or manual check described)
-- [ ] New ideas have "!" badges (glossary) and new screens have a help card
+- [ ] New ideas have quiet information icons (glossary) and new screens have a help card
 - [ ] Docs updated (GAME_DATA_SCHEMA, wiki page, STORY_IMPLEMENTATION if story)
 - [ ] Screenshots of the change in evidence/<date>_<ticket>/
 - [ ] Anything not done or uncertain is listed in the PR body
