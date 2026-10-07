@@ -5,6 +5,7 @@ func frames(n := 3) -> void:
 	for i in n: await UIRoot.get_tree().process_frame
 
 func test_all_games_tolerate_unlimited_relaxed_waiting() -> void:
+	Media.S() # created lazily by hourly sims; make the snapshot independent of timing
 	for game in Fixtures.games():
 		game.work_mode = 0
 		game.mark_tutorial_seen()

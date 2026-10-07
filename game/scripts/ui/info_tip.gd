@@ -1,6 +1,6 @@
 class_name InfoTip
-extends PanelContainer
-## Quiet information glyph with a generous touch target; unread is a tiny neutral dot.
+extends Control
+## Quiet information glyph (~12px, so dense rows stay compact) with a 24px touch target; unread is a tiny neutral dot.
 ## Hover shows what it is and why it matters for your business; a click pins the same card, for players on a
 ## trackpad or a touch screen. Text lives in data/help/glossary.json ({title, what, why}), so it is translated
 ## like everything else. Neither unread nor read information uses an action colour.
@@ -9,6 +9,9 @@ var tip_id := ""
 var _mark: Label
 var _pinned: PopupPanel
 var _hovered := false
+var _tap: Control
+const ICON := 12.0
+const TAP := 24.0
 
 
 static func make(id: String) -> InfoTip:
@@ -38,26 +41,41 @@ func _ready() -> void:
 		push_warning("InfoTip: no glossary entry " + tip_id)
 		visible = false
 		return
-	custom_minimum_size = Vector2(24, 24)
+	custom_minimum_size = Vector2(ICON, ICON)
 	size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	focus_mode = Control.FOCUS_ALL
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	mouse_default_cursor_shape = Control.CURSOR_HELP
 	tooltip_text = I18n.t(str(e.get("title", tip_id)))   # non-empty so Godot asks for the custom tooltip below
-	_mark = UIK.label("i", 9, Art.C_DIM, true)
+	_mark = UIK.label("i", 7, Art.C_DIM, true)
 	_mark.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_mark.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_mark.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_mark.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	add_child(_mark)
-	mouse_entered.connect(func(): _hovered = true; _restyle())
-	mouse_exited.connect(func(): _hovered = false; _restyle())
+	# The visible glyph stays small; an invisible sibling-sized hit area reaches 6px past each edge, and Godot
+	# picks controls by their own rect. Tooltip text is found on this parent, so the same card shows.
+	_tap = Control.new()
+	_tap.name = "TapTarget"
+	_tap.set_anchors_preset(Control.PRESET_FULL_RECT)
+	var pad := -(TAP - ICON) / 2.0
+	_tap.offset_left = pad
+	_tap.offset_top = pad
+	_tap.offset_right = -pad
+	_tap.offset_bottom = -pad
+	_tap.mouse_filter = Control.MOUSE_FILTER_STOP
+	_tap.mouse_default_cursor_shape = Control.CURSOR_HELP
+	_tap.gui_input.connect(_gui_input)
+	add_child(_tap)
+	for c in [self, _tap]:
+		c.mouse_entered.connect(func(): _hovered = true; _restyle())
+		c.mouse_exited.connect(func(): _hovered = false; _restyle())
 	focus_entered.connect(_restyle)
 	focus_exited.connect(_restyle)
 	_restyle()
 
 
 func _restyle() -> void:
-	add_theme_stylebox_override("panel", StyleBoxEmpty.new())
 	if _mark != null:
 		_mark.add_theme_color_override("font_color", Art.C_SKY if _hovered or has_focus() else Art.C_DIM)
 	queue_redraw()
@@ -65,8 +83,8 @@ func _restyle() -> void:
 
 func _draw() -> void:
 	var col := Art.C_SKY if _hovered or has_focus() else Art.C_DIM
-	draw_arc(size / 2.0, 5.0, 0.0, TAU, 24, col, 0.7)
-	if not seen(tip_id): draw_circle(size / 2.0 + Vector2(7, -5), 1.0, Art.C_SKY)
+	draw_arc(size / 2.0, 5.0, 0.0, TAU, 24, col, 0.7)   # ~11px ring
+	if not seen(tip_id): draw_circle(size / 2.0 + Vector2(5, -4), 1.0, Art.C_SKY)
 
 
 ## The card: title, what it is, and why it matters to you.

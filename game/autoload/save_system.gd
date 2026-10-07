@@ -262,6 +262,7 @@ func load_data(slot: int) -> bool:
 	GameState.data["meta"]["slot"] = slot     # carry on saving where this game was loaded from
 	Contracts.reconcile_closed()             # old liquidations sold AR but left live contracts and collection schedules
 	Contracts.reconcile_tags()               # older builds could leave a story step waiting on a settled offer
+	MiniGame.backfill_tutorials_seen()       # work already done in an older save is not a first time
 	Growth.check(true)
 	GameState.unpack_rng()
 	Clock.clear_pauses()
