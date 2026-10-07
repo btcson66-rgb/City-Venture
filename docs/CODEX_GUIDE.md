@@ -1,5 +1,7 @@
 # Engineering guide for Codex tickets
 
+Read [AGENTS.md](../AGENTS.md) first: fun-first principles F1–F8 take precedence when they conflict with the R rules below. Project review/capture skills are linked there.
+
 This is the working agreement for implementing GitHub issues labelled `codex`. Claude writes the tickets and reviews
 every pull request before it merges. Read this file, the ticket, and the files the ticket names before you start.
 
