@@ -84,6 +84,7 @@ func test_daily_hours_quote_guard_save_and_closed_company() -> void:
 	runner.check(not FreelanceWorkflow.work(g["id"], 2.0, 1.0)["ok"], "closed entity blocked")
 func test_barista_stations_tables_and_priority() -> void:
 	var game := BaristaGame.new()
+	game.mark_tutorial_seen()
 	UIRoot.open_modal(game)
 	await runner.get_tree().process_frame
 	game.start()
@@ -141,6 +142,7 @@ func test_legacy_gig_retains_delivery_and_old_promotions() -> void:
 
 func test_dirty_table_can_be_cleaned_from_another_ticket() -> void:
 	var game := BaristaGame.new()
+	game.mark_tutorial_seen()
 	UIRoot.open_modal(game)
 	await runner.get_tree().process_frame
 	game.start()
@@ -175,6 +177,7 @@ func test_dirty_table_can_be_cleaned_from_another_ticket() -> void:
 
 func test_additional_job_stages_preserve_scores_and_conflicts() -> void:
 	var teller := TellerCashGame.new()
+	teller.mark_tutorial_seen()
 	UIRoot.open_modal(teller)
 	await runner.get_tree().process_frame
 	teller.start()
@@ -186,6 +189,7 @@ func test_additional_job_stages_preserve_scores_and_conflicts() -> void:
 	teller.close()
 	await runner.get_tree().process_frame
 	var host := CoworkHostGame.new()
+	host.mark_tutorial_seen()
 	UIRoot.open_modal(host)
 	await runner.get_tree().process_frame
 	host.start()
@@ -197,6 +201,7 @@ func test_additional_job_stages_preserve_scores_and_conflicts() -> void:
 	host.close()
 	await runner.get_tree().process_frame
 	var parcel := ParcelSortGame.new()
+	parcel.mark_tutorial_seen()
 	UIRoot.open_modal(parcel)
 	await runner.get_tree().process_frame
 	parcel.start()
@@ -209,6 +214,7 @@ func test_additional_job_stages_preserve_scores_and_conflicts() -> void:
 	parcel.close()
 	await runner.get_tree().process_frame
 	var clerk := ClerkFormsGame.new()
+	clerk.mark_tutorial_seen()
 	UIRoot.open_modal(clerk)
 	await runner.get_tree().process_frame
 	clerk.start()
@@ -221,6 +227,7 @@ func test_additional_job_stages_preserve_scores_and_conflicts() -> void:
 	await runner.get_tree().process_frame
 func test_barista_every_waiting_guest_loses_patience_but_served_guest_does_not() -> void:
 	var game := BaristaGame.new()
+	game.mark_tutorial_seen()
 	UIRoot.open_modal(game)
 	await runner.get_tree().process_frame
 	game.start()

@@ -70,7 +70,7 @@ func _select_customer(index: int) -> void:
 
 ## A guest still waiting for the order, the drink or the delivery gives up; one who is only waiting for the table to be cleaned was already served.
 func _gives_up(ticket: Dictionary) -> bool:
-	return ticket["station"] != "clean" and float(ticket["age"]) > float(FreelanceWorkflow.cfg()["barista_patience"])
+	return not practice_only and ticket["station"] != "clean" and float(ticket["age"]) > float(FreelanceWorkflow.cfg()["barista_patience"])
 
 func _confirm(recommend := false) -> void:
 	if want["station"] != "order": return
@@ -87,7 +87,7 @@ func _confirm(recommend := false) -> void:
 	_layout()
 
 func _process(dt: float) -> void:
-	if phase != "play": return
+	if practice_only or phase != "play": return
 	for index in queue.size():
 		var customer: Dictionary = queue[index]
 		customer["age"] = float(customer["age"]) + dt
@@ -135,7 +135,11 @@ func _clean() -> void:
 		served_right += 1
 		var tip := float(FreelanceWorkflow.cfg()["barista_tip_fast"] if float(want["age"]) < float(FreelanceWorkflow.cfg()["barista_patience"]) * 0.5 else FreelanceWorkflow.cfg()["barista_tip_slow"])
 		if not own_counter: tips += tip
-		flash(I18n.t("✓ %s enjoyed the service.") % str(want["who"]) if own_counter else I18n.t("✓ %s is happy (+%s tip)") % [str(want["who"]), Fmt.money(tip)], true)
+		if practice_only:
+			tips = 0.0
+			flash("✓ Delivered. Clean the table for the next guest.", true)
+		else:
+			flash(I18n.t("✓ %s enjoyed the service.") % str(want["who"]) if own_counter else I18n.t("✓ %s is happy (+%s tip)") % [str(want["who"]), Fmt.money(tip)], true)
 	queue.remove_at(selected)
 	next_round()
 
@@ -167,7 +171,8 @@ func _layout() -> void:
 	layout.add_child(queue_row)
 	for index in queue.size():
 		var ticket: Dictionary = queue[index]
-		var customer_button := UIK.button(I18n.t("Guest %d · %d s") % [int(ticket["id"]), maxi(0, roundi(float(FreelanceWorkflow.cfg()["barista_patience"]) - float(ticket["age"])))], _select_customer.bind(index), "tab_active" if selected == index else "tab")
+		var guest_text := I18n.t("Guest %d") % int(ticket["id"]) if practice_only else I18n.t("Guest %d · %d s") % [int(ticket["id"]), maxi(0, roundi(float(FreelanceWorkflow.cfg()["barista_patience"]) - float(ticket["age"])))]
+		var customer_button := UIK.button(guest_text, _select_customer.bind(index), "tab_active" if selected == index else "tab")
 		customer_button.name = "Guest_%d" % index
 		queue_row.add_child(customer_button)
 	layout.add_child(h)

@@ -87,6 +87,7 @@ func build_round() -> void:
 	bg.custom_minimum_size = Vector2(580, 200)
 	stage.add_child(bg)
 	view = Control.new()
+	view.name = "TypingView"
 	view.custom_minimum_size = Vector2(566, 190)
 	view.draw.connect(_draw_view)
 	bg.add_child(view)
@@ -133,7 +134,7 @@ func _input(event: InputEvent) -> void:
 		if col >= s.length():
 			_line_done()
 	else:
-		errors += 1
+		errors += int(not practice_only)
 		_err_flash = 0.35
 	view.queue_redraw()
 
@@ -172,7 +173,7 @@ func _draw_view() -> void:
 				if c < col:
 					colr = Color(0.45, 0.85, 0.55)
 				elif c == col:
-					view.draw_rect(Rect2(x - 1, y - 10, CHAR_W + 1, 13), Art.C_RED if _err_flash > 0.0 else Art.C_SKY)
+					view.draw_rect(Rect2(x - 1, y - 10, CHAR_W + 1, 13), Art.C_SKY if practice_only else Art.C_RED if _err_flash > 0.0 else Art.C_SKY)
 					colr = Color(0.08, 0.08, 0.1)
 				else:
 					colr = Color(0.92, 0.94, 1.0)

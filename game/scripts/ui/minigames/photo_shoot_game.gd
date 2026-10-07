@@ -64,6 +64,7 @@ func build_round() -> void:
 	stage.add_child(h)
 	# viewfinder
 	frame_box = Control.new()
+	frame_box.name = "PhotoFrame"
 	frame_box.custom_minimum_size = FRAME
 	frame_box.clip_contents = true
 	frame_box.mouse_filter = Control.MOUSE_FILTER_PASS
@@ -166,7 +167,7 @@ func _process(delta: float) -> void:
 
 
 func needle() -> float:
-	return 0.5 + 0.5 * sin(_needle * 2.6)
+	return 0.5 if practice_only else 0.5 + 0.5 * sin(_needle * 2.6)
 
 
 # ------------------------------------------------------------------ drawing

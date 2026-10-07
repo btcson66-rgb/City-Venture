@@ -22,5 +22,6 @@ func build_round() -> void:
 	for i in options.size():
 		var amount: float=options[i]
 		var button:=UIK.button(I18n.t("Charge %s")%Fmt.money(amount),func():award(1.0 if is_equal_approx(amount,correct) else 0.0);next_round())
+		button.set_meta("practice_correct", is_equal_approx(amount,correct))
 		button.name="PopupCharge_"+str(i);box.add_child(button)
 func result_lines() -> Array:return [I18n.t("Checkout practice complete. Your one-hour shift now uses real visitors and available stock.")]

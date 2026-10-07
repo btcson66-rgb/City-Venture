@@ -153,6 +153,7 @@ func test_creative_cards_have_distinct_clickable_positions() -> void:
 	setup()
 	var brief: Dictionary=Media.S()["briefs"].values()[0]
 	var game := CreativePitch.new(brief)
+	game.mark_tutorial_seen()
 	UIRoot.open_modal(game)
 	await UIRoot.get_tree().process_frame
 	game.start()
@@ -239,6 +240,7 @@ func test_creative_pitch_is_timed_shows_preferences_and_has_no_default_primary()
 	var brief: Dictionary=Media.S()["briefs"].values()[0]
 	var game := CreativePitch.new(brief)
 	runner.check(game.round_time>0.0,"each round has a timer")
+	game.mark_tutorial_seen()
 	UIRoot.open_modal(game)
 	await UIRoot.get_tree().process_frame
 	game.start()

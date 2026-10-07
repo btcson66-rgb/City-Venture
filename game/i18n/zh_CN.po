@@ -478,7 +478,7 @@ msgstr "%s 广告"
 msgid "%s became insolvent: %s"
 msgstr "%s 无力偿债：%s"
 
-#: scripts/ui/minigames/auction_game.gd:80
+#: scripts/ui/minigames/auction_game.gd:90
 msgid "%s bids %s"
 msgstr "%s 出价 %s"
 
@@ -742,7 +742,7 @@ msgstr "%s · %d 件 · 不良率 %.1f%% · 抽检 %.0f%% · 漏检 %.1f 件"
 msgid "%s · %d years · %s km · body %s · mechanics %s · market %s · opens %s"
 msgstr "%s · %d 年 · %s 公里 · 外观 %s · 机械 %s · 市价 %s · 起标 %s"
 
-#: scripts/ui/minigames/auction_game.gd:34
+#: scripts/ui/minigames/auction_game.gd:38
 msgid "%s · %d years · %s km · market %s"
 msgstr "%s · %d 年 · %s 公里 · 市价 %s"
 
@@ -1546,7 +1546,7 @@ msgstr "卡在电汇的款项之后可以改用更快的方式：Company OS → 
 msgid "A payroll. You're somebody's boss now. That's terrifying. Proud of you."
 msgstr "发薪水了。你现在是别人的老板了，好可怕。以你为荣。"
 
-#: scripts/ui/minigames/photo_shoot_game.gd:290
+#: scripts/ui/minigames/photo_shoot_game.gd:291
 msgid "A photo that sells."
 msgstr "会卖的照片。"
 
@@ -2306,6 +2306,14 @@ msgstr "塞气泡纸"
 msgid "Add cash before buying medicine, or wait for natural recovery."
 msgstr "补足现金后买药，或等候自然康复。"
 
+#: data/help/minigame_tutorials.json
+msgid "Add padding until it reaches the green zone."
+msgstr "加填充物，让刻度到绿色区域。"
+
+#: data/help/minigame_tutorials.json
+msgid "Add this note. Repeat until the amount matches."
+msgstr "加这张钞票，继续加到金额刚好。"
+
 #: scripts/sim/automotive.gd:385
 msgid "Added %s to the rental fleet."
 msgstr "已将 %s 加入租车车队。"
@@ -2590,7 +2598,7 @@ msgstr "铝合金手机架"
 msgid "Alumni gathering"
 msgstr "校友聚会"
 
-#: scripts/ui/minigames/photo_shoot_game.gd:293
+#: scripts/ui/minigames/photo_shoot_game.gd:294
 msgid "Amateur-looking. It will cost you some sales; you can reshoot later."
 msgstr "看起来很业余，会少一些订单；之后可以重拍。"
 
@@ -2745,6 +2753,10 @@ msgstr "年利率"
 #: scripts/ui/modals/capital_market_modal.gd:77
 msgid "Annual revenue threshold (home dollars)"
 msgstr "年营收门槛（本国元）"
+
+#: data/help/minigame_tutorials.json
+msgid "Answer a question using the practice deck."
+msgstr "用练习演示文稿回答一个问题。"
 
 #: scripts/sim/fundraising.gd:348
 msgid "Answer each of the investor's questions."
@@ -3170,7 +3182,7 @@ msgstr "参加活动或送上偏好的礼物，提升到下一段关系。"
 msgid "Auburn"
 msgstr "红棕"
 
-#: scripts/ui/automotive_ui.gd:70 scripts/ui/minigames/auction_game.gd:20
+#: scripts/ui/automotive_ui.gd:70 scripts/ui/minigames/auction_game.gd:21
 msgid "Auction"
 msgstr "拍卖"
 
@@ -3506,9 +3518,13 @@ msgstr "回到投资人"
 msgid "BackPartners"
 msgstr "回到合作伙伴"
 
-#: scripts/ui/minigames/photo_shoot_game.gd:89 scripts/ui/minigames/photo_shoot_game.gd:90
+#: scripts/ui/minigames/photo_shoot_game.gd:90 scripts/ui/minigames/photo_shoot_game.gd:91
 msgid "Backdrop"
 msgstr "背景"
+
+#: data/help/minigame_tutorials.json
+msgid "Backdrop → light → frame"
+msgstr "背景 → 灯光 → 构图"
 
 #: scripts/ui/minigames/pitch_game.gd:82
 msgid "Backed by your deck"
@@ -3654,6 +3670,10 @@ msgstr "大额款项导出前，银行会确认付款的人是谁、收款的人
 msgid "Before the first customer"
 msgstr "迎接第一位客人之前"
 
+#: scripts/ui/minigames/mini_game.gd:191
+msgid "Begin practice"
+msgstr "开始练习"
+
 #: scripts/ui/modals/run_card_modal.gd:36
 msgid "Begin scenario"
 msgstr "开始情境"
@@ -3686,23 +3706,27 @@ msgstr "品质较好的居家用品。最低订购量较高。"
 msgid "Between $1,000 and %s."
 msgstr "金额需在 $1,000 到 %s 之间。"
 
-#: scripts/ui/minigames/auction_game.gd:44
+#: scripts/ui/minigames/auction_game.gd:48
 msgid "Bid"
 msgstr "出价"
 
-#: scripts/ui/minigames/auction_game.gd:62
+#: scripts/ui/minigames/auction_game.gd:66
 msgid "Bid %s"
 msgstr "出价 %s"
 
-#: scripts/ui/minigames/auction_game.gd:26
+#: scripts/ui/minigames/auction_game.gd:30
 msgid "Bid against live bidders. Press Bid to raise; stop bidding when the price passes what the car is worth to you."
 msgstr "与现场买家竞标。按「出价」加价；价格超过这辆车对你的价值就停手。"
+
+#: data/help/minigame_tutorials.json
+msgid "Bid within your budget, or stop."
+msgstr "在预算内出价，也可以停手。"
 
 #: data/help/glossary.json
 msgid "Bidders have private ceilings. A paid inspection reveals hidden defects such as flood damage, engine wear or a rolled-back odometer."
 msgstr "买家各有私下的价格上限。付费验车可揭露泡水、引擎磨损或调表等隐藏瑕疵。"
 
-#: scripts/ui/minigames/auction_game.gd:61
+#: scripts/ui/minigames/auction_game.gd:65
 msgid "Bidding is open."
 msgstr "开放竞标中。"
 
@@ -3954,6 +3978,10 @@ msgstr "精品事务所"
 msgid "Box"
 msgstr "Box"
 
+#: data/help/minigame_tutorials.json
+msgid "Box → place → seal"
+msgstr "选箱 → 摆放 → 封箱"
+
 #: data/economy/shop_life.json
 msgid "Boxing"
 msgstr "拳击"
@@ -4149,6 +4177,10 @@ msgstr "先累积完整一年的无违规纪录，再提出申请；过去的罚
 #: scripts/sim/fundraising.gd:337
 msgid "Build a deck from two to four real figures."
 msgstr "用两到四个真实数字制作演示文稿。"
+
+#: data/help/minigame_tutorials.json
+msgid "Build a deck from your real company figures."
+msgstr "用公司的真实数字做好演示文稿。"
 
 #: data/story/goals.json
 msgid "Build a new company"
@@ -5342,6 +5374,10 @@ msgstr "请先到营业中的 Helio 充电站充电，或改搭捷运。"
 msgid "Charge for added scope"
 msgstr "追加范围加价"
 
+#: data/help/minigame_tutorials.json
+msgid "Charge the correct basket total."
+msgstr "收取购物篮的正确金额。"
+
 #: scripts/sim/energy.gd:524
 msgid "Charger capital grant: %s"
 msgstr "充电站建置补助：%s"
@@ -5454,6 +5490,10 @@ msgstr "请在共享办公桌查看目前接案机会。每份需求都列有条
 msgid "Check the departures hall"
 msgstr "查看出境大厅"
 
+#: data/help/minigame_tutorials.json
+msgid "Check the form, then help the caller."
+msgstr "检查表单，再帮来电的人处理问题。"
+
 #: scripts/ui/minigames/pack_game.gd:45
 msgid "Check the label against the order: the wrong one sends the parcel to the wrong address and it arrives late."
 msgstr "标签要跟订单对照。贴错的话包裹会先送到错的地址，晚到。"
@@ -5461,6 +5501,10 @@ msgstr "标签要跟订单对照。贴错的话包裹会先送到错的地址，
 #: data/buildings/corner_cafe_unit.json
 msgid "Check the till — Company OS"
 msgstr "看看收银——Company OS"
+
+#: data/help/minigame_tutorials.json
+msgid "Check this field against the rules."
+msgstr "对照规则，检查这个字段。"
 
 #: data/story/chapters.json
 msgid "Check your phone (Tab)"
@@ -5474,7 +5518,7 @@ msgstr "柜台服务涵盖率越高，住客评价的服务分越高。"
 msgid "Checklist: 12 months of revenue, trading history, a clean tax record and no unpaid penalties."
 msgstr "检查清单：12 个月营收、交易纪录、干净的税务纪录，且无未缴罚款。"
 
-#: scripts/ui/minigames/popup_checkout_game.gd:26
+#: scripts/ui/minigames/popup_checkout_game.gd:27
 msgid "Checkout practice complete. Your one-hour shift now uses real visitors and available stock."
 msgstr "结帐练习完成。接下来站柜台一小时，依实际来客与店内库存成交。"
 
@@ -5521,6 +5565,14 @@ msgstr "在房价看板选「自家咖啡店厨房」：饭店以转拨价向咖
 #: scripts/sim/popup_store.gd:21
 msgid "Choose Saturday 10:00 at least one day ahead."
 msgstr "请预约周六上午十点开始的周末，至少提前一天。"
+
+#: data/help/minigame_tutorials.json
+msgid "Choose a backdrop that suits this product."
+msgstr "选适合商品的背景。"
+
+#: data/help/minigame_tutorials.json
+msgid "Choose a box that fits this order."
+msgstr "选能装下这张订单的箱子。"
 
 #: scripts/sim/automotive.gd:663
 msgid "Choose a brand you can sign."
@@ -5573,6 +5625,10 @@ msgstr "请选择没有正在退租的搬迁目的地。"
 #: scripts/sim/manufacturing.gd:132
 msgid "Choose a factory machine."
 msgstr "请选择厂内机台。"
+
+#: data/help/minigame_tutorials.json
+msgid "Choose a figure for the practice slide."
+msgstr "替这张练习投视频选个数字。"
 
 #: scripts/sim/automotive.gd:311
 msgid "Choose a finished used car on your lot."
@@ -5705,6 +5761,10 @@ msgstr "请选择保养周期。"
 #: scripts/sim/automotive.gd:468
 msgid "Choose a showroom discount between 0% and 6%."
 msgstr "请选择 0% 到 6% 的展示中心折扣。"
+
+#: data/help/minigame_tutorials.json
+msgid "Choose a slogan, visual and tone for the client."
+msgstr "帮客户选标语、视觉和语气。"
 
 #: data/help/help.json
 msgid "Choose a slogan, visual and tone. The brief and university mentor explain the audience preferences."
@@ -5934,6 +5994,10 @@ msgstr "请选择如何回应董事会。"
 msgid "Choose how to respond to the partner."
 msgstr "请选择如何回应合作伙伴。"
 
+#: data/help/minigame_tutorials.json
+msgid "Choose how you want to help."
+msgstr "选你想怎么帮忙。"
+
 #: data/story/chapters.json
 msgid "Choose how your founder story continues"
 msgstr "决定接下来的创业人生"
@@ -5990,6 +6054,46 @@ msgstr "请选择同一控股公司旗下的两家子公司，并确认库存与
 msgid "Choose the actual product category. Correcting a held parcel means duty plus a penalty; documents halve the fine but add 2 days. Withdrawal restores goods, not freight."
 msgstr "请选实际商品种类。更正被扣包裹须付关税与罚款；补文档可将罚款减半，但多等 2 天。撤回会收回商品，运费不退还。"
 
+#: data/help/minigame_tutorials.json
+msgid "Choose the answer matching this brief."
+msgstr "选符合这份需求的答案。"
+
+#: data/help/minigame_tutorials.json
+msgid "Choose the client’s preferred slogan."
+msgstr "选客户喜欢的标语。"
+
+#: data/help/minigame_tutorials.json
+msgid "Choose the client’s preferred tone."
+msgstr "选客户喜欢的语气。"
+
+#: data/help/minigame_tutorials.json
+msgid "Choose the client’s preferred visual."
+msgstr "选客户喜欢的视觉。"
+
+#: data/help/minigame_tutorials.json
+msgid "Choose the correct total for this basket."
+msgstr "选这篮商品的正确总额。"
+
+#: data/help/minigame_tutorials.json
+msgid "Choose the cup size on the order."
+msgstr "选订单上的杯子大小。"
+
+#: data/help/minigame_tutorials.json
+msgid "Choose the decision that fits the form."
+msgstr "选适合这份表单的处理方式。"
+
+#: data/help/minigame_tutorials.json
+msgid "Choose the drink on the order."
+msgstr "选订单上的饮料。"
+
+#: data/help/minigame_tutorials.json
+msgid "Choose the espresso shots on the order."
+msgstr "选订单上的浓缩咖啡份数。"
+
+#: data/help/minigame_tutorials.json
+msgid "Choose the label matching this customer."
+msgstr "选这位客人的标签。"
+
 #: data/story/goals.json
 msgid "Choose the mentor ending and hold five actual advisory sessions."
 msgstr "选择导师结局，实际完成五次辅导。"
@@ -5997,6 +6101,10 @@ msgstr "选择导师结局，实际完成五次辅导。"
 #: scripts/world/actions.gd:26 scripts/world/actions.gd:75
 msgid "Choose the mentor ending first."
 msgstr "先选择退居导师的结局。"
+
+#: data/help/minigame_tutorials.json
+msgid "Choose the milk on the order."
+msgstr "选订单上的牛奶。"
 
 #: data/help/help.json
 msgid "Choose the name carefully: it goes on your sign and your invoices."
@@ -6009,6 +6117,10 @@ msgstr "选择下一代，或让同一角色展开新人生。"
 #: data/story/chapters.json
 msgid "Choose the tariff code that matches your actual product"
 msgstr "选择符合实际商品的税则分类"
+
+#: data/help/minigame_tutorials.json
+msgid "Choose the welcome that fits this visitor."
+msgstr "选适合这位访客的接待方式。"
 
 #: data/help/glossary.json
 msgid "Choose thirty days of notice or pay one month to leave today. Deposits remain your asset, not income; stock and incoming orders must fit."
@@ -6254,7 +6366,7 @@ msgstr "课程时间表"
 msgid "Classes take one hour. Occasional business introductions offer choices with real costs and deadlines."
 msgstr "课程需一小时。偶尔遇到的商业介绍，会提供有真实成本与期限的选择。"
 
-#: scripts/ui/minigames/barista_game.gd:194
+#: scripts/ui/minigames/barista_game.gd:199
 msgid "Clean"
 msgstr "已清洁"
 
@@ -6290,17 +6402,21 @@ msgstr "良率达标"
 msgid "Clean rooms, a friendly desk and a fair price. A room nobody cleaned cannot be sold at all, so hire housekeepers before you chase more guests."
 msgstr "干净的房间、亲切的柜台、合理的价格。没人清的房间根本不能卖，所以先请房务员，再去抢更多客人。"
 
-#: scripts/ui/minigames/barista_game.gd:196
+#: scripts/ui/minigames/barista_game.gd:201
 msgid "Clean table %d"
 msgstr "清洁第 %d 桌"
 
-#: scripts/ui/minigames/barista_game.gd:227
+#: scripts/ui/minigames/barista_game.gd:232
 msgid "Clean table / counter"
 msgstr "清洁桌子／取餐台"
 
 #: data/economy/freelance.json
 msgid "Clean up the books of %s"
 msgstr "帮 %s 整理帐务"
+
+#: data/help/minigame_tutorials.json
+msgid "Clean up. That is one complete order!"
+msgstr "收拾一下，一张订单就完成了！"
 
 #: scripts/ui/modals/cafe_depth_modal.gd:73
 msgid "Cleaned today. Inspect if due, or clean again tomorrow."
@@ -6342,7 +6458,7 @@ msgstr "清空箱子"
 msgid "Clearing Crisis"
 msgstr "清算危机"
 
-#: scripts/ui/minigames/photo_shoot_game.gd:276
+#: scripts/ui/minigames/photo_shoot_game.gd:277
 msgid "Click! %d%% (%s)"
 msgstr "喀嚓！%d%%（%s）"
 
@@ -7046,6 +7162,10 @@ msgstr "请先完成此回复的条件。"
 msgid "Complete the roadshow and review the price first."
 msgstr "先完成路演，并确认发行价格。"
 
+#: data/help/minigame_tutorials.json
+msgid "Complete the task in the client’s brief."
+msgstr "完成客户需求里的这个小任务。"
+
 #: scripts/sim/phone_messages.gd:102
 msgid "Complete this message template's requirements first."
 msgstr "请先完成此消息范本的条件。"
@@ -7146,7 +7266,7 @@ msgstr "确认符合客户需求"
 msgid "Confirm loan signing"
 msgstr "确认签订贷款"
 
-#: scripts/ui/minigames/barista_game.gd:203
+#: scripts/ui/minigames/barista_game.gd:208
 msgid "Confirm order"
 msgstr "确认点单"
 
@@ -7258,7 +7378,7 @@ msgstr "货柜运费翻倍，快递加收燃油附加费。"
 msgid "Containers, customs and freight. Rent Pier 7 for stock, buy a used van from Sam, and start delivering."
 msgstr "货柜、海关和货运。租下 7 号码头放库存，向 Sam 买一台二手货车，开始送货。"
 
-#: scripts/frontend/main_menu.gd:50 scripts/ui/minigames/mini_game.gd:173 scripts/ui/modals/month_close_modal.gd:63
+#: scripts/frontend/main_menu.gd:50 scripts/ui/minigames/mini_game.gd:321 scripts/ui/modals/month_close_modal.gd:63
 msgid "Continue"
 msgstr "继续"
 
@@ -7481,6 +7601,14 @@ msgstr "笔"
 #: data/jobs/bank_teller.json
 msgid "Count cash, open accounts and watch how the bank judges small businesses."
 msgstr "点钞、开户，看银行怎么评估小型企业。"
+
+#: data/help/minigame_tutorials.json
+msgid "Count the exact amount; check the receipt."
+msgstr "金额要刚好，也要查看收据。"
+
+#: data/help/minigame_tutorials.json
+msgid "Count the money and check a refund."
+msgstr "点好钞票，再检查退款申请。"
 
 #: scripts/ui/minigames/teller_cash_game.gd:94
 msgid "Counted: %s of %s"
@@ -7718,7 +7846,7 @@ msgstr "Crumb & Co. 面包坊"
 msgid "Culture workshop"
 msgstr "文化工作坊"
 
-#: scripts/ui/minigames/barista_game.gd:211
+#: scripts/ui/minigames/barista_game.gd:216
 msgid "Cup"
 msgstr "杯子"
 
@@ -7734,7 +7862,7 @@ msgstr "目前 %d 天 · 门槛 %d 天 · 还差 %d 天"
 msgid "Current %s · required %s · gap %s"
 msgstr "目前 %s · 门槛 %s · 差额 %s"
 
-#: scripts/ui/minigames/auction_game.gd:55
+#: scripts/ui/minigames/auction_game.gd:59
 msgid "Current bid %s"
 msgstr "目前出价 %s"
 
@@ -8134,7 +8262,7 @@ msgstr "负债（已揭露）"
 msgid "Dec"
 msgstr "12月"
 
-#: scripts/ui/minigames/photo_shoot_game.gd:292
+#: scripts/ui/minigames/photo_shoot_game.gd:293
 msgid "Decent. Customers will click."
 msgstr "还不错，客人会点进来看。"
 
@@ -8365,6 +8493,10 @@ msgstr "先交付这张工单，才能开立发票。"
 #: scripts/ui/modals/freelance_modal.gd:59
 msgid "Deliver to client"
 msgstr "交付客户"
+
+#: data/help/minigame_tutorials.json
+msgid "Deliver to the place on the ticket."
+msgstr "送到单子指定的位置。"
 
 #: scripts/ui/modals/company_os.gd:603
 msgid "Deliver to:"
@@ -8746,7 +8878,7 @@ msgstr "文件夹与文件："
 msgid "Dirty tables cannot seat another guest. Waiting guests lose patience; choose who to serve first."
 msgstr "没清洁的桌子不能让新客人入座，等候的客人会失去耐心，请安排服务顺序。"
 
-#: scripts/ui/minigames/barista_game.gd:194
+#: scripts/ui/minigames/barista_game.gd:199
 msgid "Dirty — clean before seating"
 msgstr "待清洁，清洁后才能入座"
 
@@ -8978,7 +9110,7 @@ msgstr "Dr. Imani Cole：学生创业工作坊・第 3 段"
 msgid "Dr. Lin"
 msgstr "林医师"
 
-#: scripts/ui/minigames/photo_shoot_game.gd:104
+#: scripts/ui/minigames/photo_shoot_game.gd:105
 msgid "Drag the product in the frame"
 msgstr "在画面里拖动商品"
 
@@ -8986,15 +9118,19 @@ msgstr "在画面里拖动商品"
 msgid "Drag the product into the frame and zoom so it fills about a third of the picture. Keep it inside the edges."
 msgstr "把商品拖进画面，缩放到约占画面三分之一，不要超出边缘。"
 
+#: data/help/minigame_tutorials.json
+msgid "Drag the product toward the centre."
+msgstr "把商品拖向画面中央。"
+
 #: scripts/ui/modals/social_calendar_modal.gd:17
 msgid "Dress code: %s. You are wearing: %s."
 msgstr "服装规定：%s。你目前穿着：%s。"
 
-#: scripts/ui/minigames/barista_game.gd:212 scripts/ui/minigames/barista_game.gd:213
+#: scripts/ui/minigames/barista_game.gd:217 scripts/ui/minigames/barista_game.gd:218
 msgid "Drink"
 msgstr "饮品"
 
-#: scripts/ui/minigames/barista_game.gd:264 scripts/ui/minigames/barista_game.gd:265
+#: scripts/ui/minigames/barista_game.gd:269 scripts/ui/minigames/barista_game.gd:270
 msgid "Drinks served exactly right: %d / %d"
 msgstr "完全做对的饮品：%d / %d"
 
@@ -9678,7 +9814,7 @@ msgstr "托管：货到了才付钱给供应商。费用 0.6%，对方要是没�
 msgid "Escrow: you pay into a contract that holds the money. The supplier ships when they see it locked, and is paid only when your goods arrive."
 msgstr "托管：你把钱付进一份替你保管的合约。供应商看到钱锁好就出货，等你的货到了才拿到钱。"
 
-#: scripts/ui/minigames/barista_game.gd:215
+#: scripts/ui/minigames/barista_game.gd:220
 msgid "Espresso"
 msgstr "浓缩"
 
@@ -9746,6 +9882,10 @@ msgstr "活动供电"
 msgid "Events Lead"
 msgstr "活动负责人"
 
+#: data/help/minigame_tutorials.json
+msgid "Every approach trades time, cost and trust differently."
+msgstr "各种方式都有取舍，照你的想法选。"
+
 #: data/help/glossary.json
 msgid "Every binned pastry is money spent for nothing. Order for the day you expect, not the day you hope for."
 msgstr "每丢掉一个糕点，就是白花一笔钱。照你预期的生意量订货，不要照你希望的。"
@@ -9778,6 +9918,10 @@ msgstr "每个画面右上角都有「?」按钮，会说明怎么使用。金�
 msgid "Every sixty to ninety days, waste, stockouts, recent ratings and cleaning determine pass, one-day improvement closure or a fine."
 msgstr "每六十至九十天检查一次。浪费、缺货、近期评分与清洁会决定合格、停业改善一天或罚款。"
 
+#: data/help/minigame_tutorials.json
+msgid "Every stop is included. Drive the route."
+msgstr "每一站都排好了，出发吧。"
+
 #: data/world/years.json
 msgid "Everyone is raising a round. Not everyone should be."
 msgstr "人人都在募资。不是人人都该募。"
@@ -9789,6 +9933,10 @@ msgstr "国外来的东西现在都更贵、更慢。连我这边的在地货都
 #: scripts/sim/group_jobs.gd:190
 msgid "Everything is done; the client pays on closing."
 msgstr "全部完成；结案时客户付款。"
+
+#: data/help/minigame_tutorials.json
+msgid "Everything is packed. Seal the parcel."
+msgstr "都装好了，封箱吧。"
 
 #: data/regions/aurelia.json
 msgid "Everything starts here"
@@ -9806,7 +9954,7 @@ msgstr "跟描述一模一样。出货很快。"
 msgid "Excellent"
 msgstr "优良"
 
-#: scripts/ui/minigames/mini_game.gd:180
+#: scripts/ui/minigames/mini_game.gd:328
 msgid "Excellent work."
 msgstr "做得非常好。"
 
@@ -10430,6 +10578,10 @@ msgstr "请等快闪店周末结束再搬家，剩货需要先退回目前住处
 msgid "Finish the second-season epilogue before joining the city proposal."
 msgstr "先看完第二季结局，再加入城市提案。"
 
+#: data/help/minigame_tutorials.json
+msgid "Finish the sequence or confirm the client fit."
+msgstr "完成顺序，或确认是否符合客户需求。"
+
 #: data/story/chapters.json
 msgid "First Customer"
 msgstr "第一位客人"
@@ -10526,9 +10678,17 @@ msgstr "第一位不满意的客人"
 msgid "First van"
 msgstr "一号货车"
 
+#: data/help/minigame_tutorials.json
+msgid "First, confirm this guest’s order."
+msgstr "先确认这位客人的订单。"
+
 #: data/help/patch_notes.json
 msgid "First-venture deliveries and the first sale arrive quickly. Normal supply and shipping times return after the tutorial."
 msgstr "第一次创业的进货与第一笔订单会快速到达。教学结束后恢复正常供货与寄送时间。"
+
+#: data/help/minigame_tutorials.json
+msgid "Fit every item; pad, tape and label the parcel."
+msgstr "每件都放进去，再填充、贴胶带和标签。"
 
 #: scripts/ui/modals/company_os.gd:1328
 msgid "Fit out (%s)"
@@ -10686,7 +10846,7 @@ msgstr "%s 的传单和立牌"
 msgid "Flyers and a street board, per day:"
 msgstr "传单和街边立牌，每天："
 
-#: scripts/ui/minigames/photo_shoot_game.gd:107
+#: scripts/ui/minigames/photo_shoot_game.gd:108
 msgid "Focus"
 msgstr "对焦"
 
@@ -10697,6 +10857,10 @@ msgstr "跟着金色箭头前往 %s。"
 #: scripts/ui/tutorial.gd:33
 msgid "Follow the gold arrow to Bloom Coffee and walk in through the door. At the counter, press E to order."
 msgstr "跟着金色箭头走到 Bloom Coffee，从门口走进去。在柜台前按 E 点餐。"
+
+#: data/help/minigame_tutorials.json
+msgid "Follow the next highlighted character."
+msgstr "跟着下一个亮起的字符打。"
 
 #: data/regions/solterra.json
 msgid "Food"
@@ -11330,7 +11494,7 @@ msgstr "目标"
 msgid "Goals are optional. Set one aside or reconsider it later. A closed company never traps this screen."
 msgstr "目标可以自由选择，暂时搁置后也能重新考虑。公司关闭不会让画面卡住。"
 
-#: scripts/ui/minigames/auction_game.gd:61
+#: scripts/ui/minigames/auction_game.gd:65
 msgid "Going once…"
 msgstr "第一次……"
 
@@ -11338,7 +11502,7 @@ msgstr "第一次……"
 msgid "Going outside"
 msgstr "出门"
 
-#: scripts/ui/minigames/auction_game.gd:61
+#: scripts/ui/minigames/auction_game.gd:65
 msgid "Going twice…"
 msgstr "第二次……"
 
@@ -11710,7 +11874,11 @@ msgstr "为子公司的银行借款担保"
 msgid "Guaranteed demand from the entire city"
 msgstr "保证全市都有需求"
 
-#: scripts/ui/minigames/barista_game.gd:170 scripts/ui/minigames/barista_game.gd:97
+#: scripts/ui/minigames/barista_game.gd:174
+msgid "Guest %d"
+msgstr "客人 %d"
+
+#: scripts/ui/minigames/barista_game.gd:174 scripts/ui/minigames/barista_game.gd:97
 msgid "Guest %d · %d s"
 msgstr "客人 %d・剩 %d 秒"
 
@@ -11765,10 +11933,6 @@ msgstr "居家"
 #: data/../assets/buildings/buildings_meta.json
 msgid "HORIZON LABS"
 msgstr "HORIZON 实验室"
-
-#: scripts/ui/minigames/mini_game.gd:71
-msgid "HOW IT WORKS"
-msgstr "怎么玩"
 
 #: scripts/ui/minigames/parcel_sort_game.gd:9
 msgid "Haddad"
@@ -12154,7 +12318,7 @@ msgstr "反光背心、工作裤、钢头靴。仓库日专用。"
 msgid "Hidden defects unknown. Paid inspection: %s."
 msgstr "隐藏瑕疵未知。付费验车：%s。"
 
-#: scripts/ui/minigames/auction_game.gd:59
+#: scripts/ui/minigames/auction_game.gd:63
 msgid "High bidder: %s · with fee %s"
 msgstr "最高出价者：%s · 含手续费 %s"
 
@@ -12857,6 +13021,10 @@ msgstr "运送中"
 #: data/dialogue/ines_customs.json
 msgid "Include that duty in your margin. Buyers know the full price and refusals are less likely; it still does not guarantee a profit."
 msgstr "计算利润时要扣掉关税。买家知道完整价格，拒收几率较低，但不保证一定赚钱。"
+
+#: data/help/minigame_tutorials.json
+msgid "Include the buyer fee. Walking away is a valid choice."
+msgstr "记得买家手续费，不买也是好选择。"
 
 #: scripts/ui/modals/company_os.gd:1614
 msgid "Included internal media cost"
@@ -13714,7 +13882,7 @@ msgstr "只是看看。"
 msgid "Just saying hi."
 msgstr "只是来打个招呼。"
 
-#: scripts/ui/minigames/typing_game.gd:93
+#: scripts/ui/minigames/typing_game.gd:94
 msgid "Just type. (Esc leaves the session.)"
 msgstr "直接开始打字（按 Esc 离开）。"
 
@@ -13962,6 +14130,10 @@ msgstr "让车队持续出租。"
 msgid "Keep the listing and company operating for 60 days after responding. Kai reports recorded deliveries, revenue and reviews; market share is explicitly a model estimate."
 msgstr "运行策略后，公司与商品上架需持续运作 60 天。Kai 会引用实际交付、营收与评价；市占会明列为模型估算。"
 
+#: data/help/minigame_tutorials.json
+msgid "Keep the product inside the frame in soft light."
+msgstr "用柔和的光，商品留在画面里。"
+
 #: scripts/sim/city_future.gd:61
 msgid "Keep the service budget or join the civic partnership instead."
 msgstr "先备妥服务预算，也可改采城市合作。"
@@ -14194,7 +14366,7 @@ msgstr "大集团收购小品牌后，通常有更多资金持续降价。"
 msgid "Largest industrial output"
 msgstr "最大的工业产量"
 
-#: scripts/ui/minigames/auction_game.gd:61
+#: scripts/ui/minigames/auction_game.gd:65
 msgid "Last call…"
 msgstr "最后一次……"
 
@@ -14522,7 +14694,7 @@ msgstr "租约"
 msgid "Leases must be in a registered company's name."
 msgstr "租约必须用登记公司的名义签。"
 
-#: scripts/ui/minigames/mini_game.gd:108
+#: scripts/ui/minigames/mini_game.gd:241
 msgid "Leave early"
 msgstr "提早离开"
 
@@ -14746,7 +14918,7 @@ msgstr "人生回顾"
 msgid "Lift and hot water failure"
 msgstr "电梯与热水故障"
 
-#: data/character/options.json scripts/ui/minigames/photo_shoot_game.gd:91 scripts/ui/minigames/photo_shoot_game.gd:92
+#: data/character/options.json scripts/ui/minigames/photo_shoot_game.gd:92 scripts/ui/minigames/photo_shoot_game.gd:93
 msgid "Light"
 msgstr "浅色"
 
@@ -14754,7 +14926,7 @@ msgstr "浅色"
 msgid "Light down jacket, cross-body bag, shoes you can run a terminal in."
 msgstr "轻羽绒外套、斜背包，还有能在航厦里奔跑的鞋。"
 
-#: scripts/ui/minigames/photo_shoot_game.gd:91
+#: scripts/ui/minigames/photo_shoot_game.gd:92
 msgid "Lighting"
 msgstr "灯光"
 
@@ -15434,6 +15606,10 @@ msgstr "正式成立公司。或者不要。"
 msgid "Make it right"
 msgstr "把问题处理好"
 
+#: data/help/minigame_tutorials.json
+msgid "Make one drink, deliver it, then clean up."
+msgstr "做好一杯饮料、送到客人手上，再收拾干净。"
+
 #: data/story/achievements.json
 msgid "Make room"
 msgstr "留一点空间给后来的人"
@@ -15441,6 +15617,10 @@ msgstr "留一点空间给后来的人"
 #: scripts/sim/legacy_business.gd:244
 msgid "Make room for new founders"
 msgstr "陪新创办人踏出第一步"
+
+#: data/help/minigame_tutorials.json
+msgid "Make the product a little larger."
+msgstr "把商品放大一点。"
 
 #: data/economy/media.json
 msgid "Make work easier"
@@ -15481,6 +15661,10 @@ msgstr "经营清单会保留卷动位置。剧情能从被拒绝的合约与困
 #: scripts/ui/modals/job_modal.gd:54
 msgid "Manager review %d%% · next rank needs %d%%; serve and clean well to improve."
 msgstr "店长评价 %d%%・下个职级需要 %d%%，请做好服务与清洁来提升。"
+
+#: scripts/ui/minigames/mini_game.gd:185
+msgid "Manager: Let's try one order together. Take your time."
+msgstr "店长：我们一起试做一张订单，慢慢来就好。"
 
 #: data/events/automotive_recall.json
 msgid "Manufacturer recall"
@@ -15754,9 +15938,29 @@ msgstr "配对分数"
 msgid "Match score: %.0f%%"
 msgstr "配对分数：%.0f%%"
 
+#: data/help/minigame_tutorials.json
+msgid "Match the booking and avoid occupied rooms."
+msgstr "照预约名单接待，避开已有人用的房间。"
+
 #: scripts/ui/minigames/creative_pitch.gd:15
 msgid "Match the client's preferences shown above the cards. Each round is timed and the cards change places."
 msgstr "配合卡片上方显示的客户偏好。每回合限时，卡片位置也会变动。"
+
+#: data/help/minigame_tutorials.json
+msgid "Match the order. Take your time in practice."
+msgstr "照着订单做就好。练习慢慢来。"
+
+#: data/help/minigame_tutorials.json
+msgid "Match the postcode to this shelf."
+msgstr "照邮递区号选这个货架。"
+
+#: data/help/minigame_tutorials.json
+msgid "Match the postcode; quarantine damaged parcels."
+msgstr "照邮递区号分拣；破损包裹先隔离。"
+
+#: data/help/minigame_tutorials.json
+msgid "Match the preferences shown above the cards."
+msgstr "对照卡片上方的客户偏好。"
 
 #: data/help/help.json
 msgid "Match the weekly salary to keep the employee, or let them take the competing job."
@@ -16178,7 +16382,7 @@ msgstr "里程碑：%s"
 msgid "Milestones"
 msgstr "里程碑"
 
-#: data/economy/cafe.json scripts/ui/minigames/barista_game.gd:214
+#: data/economy/cafe.json scripts/ui/minigames/barista_game.gd:219
 msgid "Milk"
 msgstr "奶类"
 
@@ -17174,7 +17378,7 @@ msgstr "目前没有待确认的审计，请查看上市流程的下一步。"
 msgid "No battery"
 msgstr "不加电池"
 
-#: scripts/ui/minigames/auction_game.gd:59
+#: scripts/ui/minigames/auction_game.gd:63
 msgid "No bids yet."
 msgstr "还没有人出价。"
 
@@ -17666,7 +17870,7 @@ msgstr "状况不良"
 msgid "Not needed yet. Commercial importers need one from the Regulation Wave (Year 8)."
 msgstr "还不用。商业进口商要到监管浪潮（第 8 年）才需要。"
 
-#: data/events/elena_offer.json scripts/ui/minigames/mini_game.gd:79 scripts/ui/modals/lease_modal.gd:49 scripts/ui/modals/sleep_modal.gd:32
+#: data/events/elena_offer.json scripts/ui/minigames/mini_game.gd:198 scripts/ui/modals/lease_modal.gd:49 scripts/ui/modals/sleep_modal.gd:32
 msgid "Not now"
 msgstr "先不要"
 
@@ -17922,7 +18126,7 @@ msgstr "住房率乘以平均房价（ADR）就是房费收入。"
 msgid "Occupancy, ADR, seasons."
 msgstr "住房率、平均房价、淡旺季。"
 
-#: scripts/ui/minigames/barista_game.gd:194 scripts/ui/minigames/cowork_host_game.gd:85
+#: scripts/ui/minigames/barista_game.gd:199 scripts/ui/minigames/cowork_host_game.gd:85
 msgid "Occupied"
 msgstr "使用中"
 
@@ -18650,7 +18854,7 @@ msgstr "12 号工厂已开业。"
 msgid "Opening balance — savings"
 msgstr "期初余额——个人存款"
 
-#: scripts/ui/minigames/auction_game.gd:55
+#: scripts/ui/minigames/auction_game.gd:59
 msgid "Opening bid %s"
 msgstr "起标价 %s"
 
@@ -18750,7 +18954,7 @@ msgstr "订单 %d / %d"
 msgid "Order %d more from %s (%s)"
 msgstr "追加订购 %d 件，向 %s（%s）"
 
-#: scripts/ui/minigames/barista_game.gd:192
+#: scripts/ui/minigames/barista_game.gd:197
 msgid "Order %d · %s"
 msgstr "订单 %d・%s"
 
@@ -19258,6 +19462,10 @@ msgstr "亲手打包订单：箱子、缓冲、胶带、标签。缓冲不够会
 msgid "Pack overseas orders at your packing table. Economy and express couriers use international routes; your own van only delivers domestic parcels."
 msgstr "海外订单也在原本的包装桌打包。经济与快捷快递会走国际路线；自有货车只能配送本国包裹。"
 
+#: data/help/minigame_tutorials.json
+msgid "Pack the items safely with the right label."
+msgstr "安全装好商品，粘贴正确的标签。"
+
 #: scripts/ui/tutorial.gd:65 scripts/ui/tutorial.gd:68
 msgid "Pack the order"
 msgstr "打包订单"
@@ -19426,7 +19634,7 @@ msgstr "包裹会逐件送来。请点击行政区的箱子，或使用设置中
 msgid "Parcels out for delivery"
 msgstr "配送中的包裹"
 
-#: scripts/ui/minigames/parcel_sort_game.gd:149
+#: scripts/ui/minigames/parcel_sort_game.gd:150
 msgid "Parcels sorted correctly: %d / %d"
 msgstr "分对的包裹：%d / %d"
 
@@ -20018,7 +20226,7 @@ msgstr "选一个点子，做出第一版：自己写程序（打字），或聘
 msgid "Pick the figure to lead with for each slide. Only figures from your real books are offered, and the first slide counts most."
 msgstr "为每张投视频挑选要主打的数字。只提供你真实帐簿上的数字，而且第一张最重要。"
 
-#: scripts/ui/minigames/barista_game.gd:192 scripts/ui/minigames/barista_game.gd:222
+#: scripts/ui/minigames/barista_game.gd:197 scripts/ui/minigames/barista_game.gd:227
 msgid "Pickup counter"
 msgstr "取餐台"
 
@@ -20086,6 +20294,10 @@ msgstr "只能把面板放在空的屋顶格子上。"
 msgid "Place panels on roof cells. Shade, direction and the load limit change annual kWh and the client's payback."
 msgstr "把面板放在屋顶格子上。遮荫、方位和承重上限会改变年发电量与客户回本期。"
 
+#: data/help/minigame_tutorials.json
+msgid "Place the selected item here."
+msgstr "把选好的商品放在这里。"
+
 #: scripts/ui/minigames/pack_game.gd:133
 msgid "Placed %d/%d · damage risk %d%%"
 msgstr "已放入 %d/%d 件・破损风险 %d%%"
@@ -20101,6 +20313,10 @@ msgstr "版位条件、佣金与仍需实际订房"
 #: data/economy/freelance.json
 msgid "Plan a month of social posts for %s"
 msgstr "帮 %s 规划一个月的社群贴文"
+
+#: data/help/minigame_tutorials.json
+msgid "Plan a route visiting every stop."
+msgstr "排好包含每一站的送货路线。"
 
 #: data/economy/freelance.json
 msgid "Plan the product launch of %s"
@@ -20289,6 +20505,22 @@ msgstr "Ken（TradeLink 批发）张贴：%s。各商品有最低订购量，请
 #: scripts/ui/modals/company_os.gd:1495
 msgid "Posted runs"
 msgstr "上架的外送单"
+
+#: scripts/ui/minigames/mini_game.gd:199
+msgid "Practice again"
+msgstr "再练习一次"
+
+#: scripts/ui/minigames/mini_game.gd:476
+msgid "Practice is unavailable here. Skip to return to work."
+msgstr "这里暂时无法练习，可以跳过并回到工作。"
+
+#: scripts/ui/minigames/mini_game.gd:263
+msgid "Practice — take your time"
+msgstr "练习中，慢慢来"
+
+#: scripts/ui/minigames/mini_game.gd:190
+msgid "Practice: no timer, score or pay changes."
+msgstr "练习不计时、不计分，也不影响薪水。"
 
 #: scripts/sim/automotive.gd:180
 msgid "Pre-auction inspection"
@@ -20866,6 +21098,10 @@ msgstr "数量（最多 %d 件）"
 msgid "Quantity exceeds regional capacity or demand, or markup is outside 0–100%."
 msgstr "数量超过地区产能或需求，或加价率不在 0–100% 范围内。"
 
+#: data/help/minigame_tutorials.json
+msgid "Quantity times unit price gives the total."
+msgstr "数量乘以单价，就是总金额。"
+
 #: scripts/ui/modals/fundraising_modal.gd:314
 msgid "Quarter %d (%s): revenue %s, target %s, %s."
 msgstr "第 %d 季（%s）：营收 %s，目标 %s，%s。"
@@ -21330,6 +21566,50 @@ msgstr "查看目前三个目标；达成后会自动补上下一个。"
 msgid "Read the used-van price sheet"
 msgstr "看二手货车价目表"
 
+#: data/help/minigame_tutorials.json
+msgid "Read → bid → stop"
+msgstr "阅读 → 出价 → 停手"
+
+#: data/help/minigame_tutorials.json
+msgid "Read → choose"
+msgstr "阅读 → 选方式"
+
+#: data/help/minigame_tutorials.json
+msgid "Read → choose a shelf"
+msgstr "读单 → 选货架"
+
+#: data/help/minigame_tutorials.json
+msgid "Read → choose three cards"
+msgstr "阅读 → 选三张卡"
+
+#: data/help/minigame_tutorials.json
+msgid "Read → choose → confirm"
+msgstr "阅读 → 选择 → 确认"
+
+#: data/help/minigame_tutorials.json
+msgid "Read → choose → serve"
+msgstr "读单 → 选料 → 出杯"
+
+#: data/help/minigame_tutorials.json
+msgid "Read → count → hand over"
+msgstr "阅读 → 点钞 → 交付"
+
+#: data/help/minigame_tutorials.json
+msgid "Read → mark → decide"
+msgstr "阅读 → 标记 → 决定"
+
+#: data/help/minigame_tutorials.json
+msgid "Read → multiply → charge"
+msgstr "阅读 → 相乘 → 收款"
+
+#: data/help/minigame_tutorials.json
+msgid "Read → type"
+msgstr "阅读 → 打字"
+
+#: data/help/minigame_tutorials.json
+msgid "Read → welcome → reserve"
+msgstr "阅读 → 接待 → 预约"
+
 #: data/buildings/nexus_bank.json
 msgid "Read: 'Small Business Lending'"
 msgstr "阅读：《小型企业贷款》"
@@ -21377,6 +21657,10 @@ msgstr "可以提案"
 #: scripts/ui/modals/fundraising_modal.gd:331
 msgid "Ready to propose"
 msgstr "可以提出合作"
+
+#: scripts/ui/minigames/mini_game.gd:174
+msgid "Ready! Start work"
+msgstr "准备好了！开始上班"
 
 #: scripts/ui/modals/logistics_depth_modal.gd:24
 msgid "Ready. Assign a driver or choose a trip."
@@ -21502,7 +21786,7 @@ msgstr "柜台——座位与日票"
 msgid "Recession"
 msgstr "衰退"
 
-#: scripts/ui/minigames/barista_game.gd:207
+#: scripts/ui/minigames/barista_game.gd:212
 msgid "Recommend the selected drink"
 msgstr "推荐选取的饮品"
 
@@ -22298,6 +22582,10 @@ msgstr "预约或管理快闪周末"
 msgid "Reserve production slot"
 msgstr "预留生产时段"
 
+#: data/help/minigame_tutorials.json
+msgid "Reserve this available room."
+msgstr "预约这间空的会议室。"
+
 #: scripts/ui/minigames/cowork_host_game.gd:86
 msgid "Reserve this slot"
 msgstr "预约这个时段"
@@ -23010,7 +23298,11 @@ msgstr "玫瑰挑染"
 msgid "Rotate item"
 msgstr "旋转商品"
 
-#: scripts/ui/minigames/mini_game.gd:184
+#: data/help/minigame_tutorials.json
+msgid "Rotate this item to fit the space."
+msgstr "转一下，让商品放得下。"
+
+#: scripts/ui/minigames/mini_game.gd:332
 msgid "Rough going. Practice makes it easier."
 msgstr "有点吃力。多练习就会越来越顺。"
 
@@ -23022,7 +23314,7 @@ msgstr "这个月很难熬。冲击打到每个人。下个月还有机会。"
 msgid "Round"
 msgstr "圆形"
 
-#: scripts/ui/minigames/mini_game.gd:54
+#: scripts/ui/minigames/mini_game.gd:161
 msgid "Round %d / %d"
 msgstr "第 %d / %d 回"
 
@@ -23754,7 +24046,7 @@ msgstr "Scope_charge"
 msgid "Score"
 msgstr "得分"
 
-#: scripts/ui/minigames/mini_game.gd:119 scripts/ui/minigames/mini_game.gd:168
+#: scripts/ui/minigames/mini_game.gd:265 scripts/ui/minigames/mini_game.gd:316
 msgid "Score %d%%"
 msgstr "得分 %d%%"
 
@@ -23846,9 +24138,25 @@ msgstr "选择承销商并支付审计费，等十四天后回答三题投资人
 msgid "Select client"
 msgstr "选择客户"
 
+#: data/help/minigame_tutorials.json
+msgid "Select figures → answer"
+msgstr "选数字 → 回答"
+
 #: scripts/ui/real_estate_ui.gd:130
 msgid "Select property"
 msgstr "选择对象"
+
+#: data/help/minigame_tutorials.json
+msgid "Select stops → drive"
+msgstr "点站点 → 出发"
+
+#: data/help/minigame_tutorials.json
+msgid "Select the next item to pack."
+msgstr "选下一件要装的商品。"
+
+#: data/help/minigame_tutorials.json
+msgid "Select the next stop on this practice route."
+msgstr "选下一站，练习排出路线。"
 
 #: scripts/ui/modals/life_review_modal.gd:42
 msgid "Selected by the category weights in the legacy data, then by recency. Older records without a category keep their original text."
@@ -23974,6 +24282,10 @@ msgstr "寄一个新的（快捷）"
 msgid "Send counter-offer"
 msgstr "送出还价"
 
+#: data/help/minigame_tutorials.json
+msgid "Send each parcel to the right shelf."
+msgstr "把包裹放到正确的货架。"
+
 #: scripts/ui/tutorial.gd:69
 msgid "Send it off"
 msgstr "寄出去"
@@ -24042,7 +24354,7 @@ msgstr "分开看损益，才能知道哪个业务负担共用办公室与员工
 msgid "Separate the books"
 msgstr "把帐目分清楚"
 
-#: scripts/ui/minigames/barista_game.gd:216
+#: scripts/ui/minigames/barista_game.gd:221
 msgid "Serve"
 msgstr "出餐"
 
@@ -24110,7 +24422,7 @@ msgstr "请在租赁还车后再保养。"
 msgid "Service · %s"
 msgstr "保养 · %s"
 
-#: scripts/ui/minigames/barista_game.gd:264
+#: scripts/ui/minigames/barista_game.gd:269
 msgid "Service: %d%%"
 msgstr "服务品质：%d%%"
 
@@ -24157,6 +24469,10 @@ msgstr "用 − 和 + 调整价格，每日预估订单会跟着变：便宜卖�
 #: scripts/ui/modals/growth_modal.gd:53
 msgid "Set this goal aside"
 msgstr "先搁置这个目标"
+
+#: data/help/minigame_tutorials.json
+msgid "Set up and take a clear product photo."
+msgstr "布置一下，拍张清楚的商品照。"
 
 #: scripts/ui/minigames/photo_shoot_game.gd:39
 msgid "Set up the shot: pick a backdrop, the light and an optional styling prop."
@@ -24478,6 +24794,10 @@ msgstr "俐落短发"
 msgid "Short business stories you can accept from Opportunities on your phone."
 msgstr "在手机「机会」页接受支线，一步步认识新的生意。"
 
+#: data/help/minigame_tutorials.json
+msgid "Shorter routes use less fuel. You can undo choices."
+msgstr "每站去一次，最后回到仓库。"
+
 #: scripts/ui/modals/insolvency_modal.gd:27
 msgid "Shortfall"
 msgstr "资金缺口"
@@ -24486,15 +24806,15 @@ msgstr "资金缺口"
 msgid "Shot %d / %d"
 msgstr "第 %d / %d 张"
 
-#: scripts/ui/minigames/photo_shoot_game.gd:120
+#: scripts/ui/minigames/photo_shoot_game.gd:121
 msgid "Shot %d: %d%%  %s"
 msgstr "第 %d 张：%d%%  %s"
 
-#: scripts/ui/minigames/photo_shoot_game.gd:283
+#: scripts/ui/minigames/photo_shoot_game.gd:284
 msgid "Shot %d: %d%% (%s)"
 msgstr "第 %d 张：%d%%（%s）"
 
-#: scripts/ui/minigames/barista_game.gd:215
+#: scripts/ui/minigames/barista_game.gd:220
 msgid "Shots"
 msgstr "Shots"
 
@@ -24686,7 +25006,7 @@ msgstr "坐到办公桌——Company OS"
 msgid "Sit down at your desk and open Company OS as {company}"
 msgstr "坐到办公桌前，以 {company} 的身分打开 Company OS"
 
-#: scripts/ui/minigames/barista_game.gd:211
+#: scripts/ui/minigames/barista_game.gd:216
 msgid "Size"
 msgstr "Size"
 
@@ -24709,6 +25029,10 @@ msgstr "略过"
 #: scripts/ui/modals/industry_guide_modal.gd:20
 msgid "Skip this guide"
 msgstr "跳过这段导引"
+
+#: scripts/ui/minigames/mini_game.gd:194 scripts/ui/minigames/mini_game.gd:241
+msgid "Skip tutorial"
+msgstr "跳过教学"
 
 #: data/buildings/skyline_grand.json
 msgid "Skyline Grand"
@@ -24938,7 +25262,7 @@ msgstr "为了撑下去，把库存卖给了清仓商。"
 msgid "Sold to Dockside Motors: %s"
 msgstr "卖给 Dockside Motors：%s"
 
-#: scripts/ui/minigames/mini_game.gd:182
+#: scripts/ui/minigames/mini_game.gd:330
 msgid "Solid. A few slips."
 msgstr "不错，有几个小失误。"
 
@@ -25106,7 +25430,7 @@ msgstr "标准上架"
 msgid "Standby crews"
 msgstr "待命团队"
 
-#: scripts/ui/minigames/mini_game.gd:77
+#: scripts/ui/minigames/mini_game.gd:191
 msgid "Start"
 msgstr "开始"
 
@@ -25185,6 +25509,10 @@ msgstr "从仲介起步，再购入出租对象，最后开发 7 号地。"
 #: data/dialogue/omar_haddad_intro.json
 msgid "Start with the world map and the trade desk. Register your company and keep a cash buffer for customs delays."
 msgstr "先从世界地图与贸易柜台看起。登记公司，并留下应付海关延误的现金。"
+
+#: scripts/ui/minigames/mini_game.gd:175
+msgid "Start work"
+msgstr "开始上班"
 
 #: scripts/ui/tutorial.gd:88
 msgid "Start working"
@@ -25366,9 +25694,13 @@ msgstr "StockNextAuction"
 msgid "Stockroom"
 msgstr "Stockroom"
 
-#: scripts/ui/minigames/auction_game.gd:47
+#: scripts/ui/minigames/auction_game.gd:51
 msgid "Stop bidding"
 msgstr "停止出价"
+
+#: data/help/minigame_tutorials.json
+msgid "Stop bidding when you want to walk away."
+msgstr "想停就停，不用勉强买。"
 
 #: scripts/ui/governance_ui.gd:36
 msgid "Stop next renewal"
@@ -25490,7 +25822,7 @@ msgstr "摄影棚拍照要 %s。"
 msgid "Studios and shops share stalls. Co-brand ideas start here and become contracts only when you sign them."
 msgstr "工作室与商家共用摊位。联名点子从这里开始，签约后才成为合约。"
 
-#: scripts/ui/minigames/photo_shoot_game.gd:93
+#: scripts/ui/minigames/photo_shoot_game.gd:94
 msgid "Styling"
 msgstr "陪衬道具"
 
@@ -25730,6 +26062,10 @@ msgstr "供应链依赖"
 msgid "Support a transition delay consultation · %s"
 msgstr "参与延后转型的公开咨询 · %s"
 
+#: data/help/minigame_tutorials.json
+msgid "Support your answers with the figures in the deck."
+msgstr "用演示文稿里的数字支持你的回答。"
+
 #: scripts/ui/modals/capital_market_modal.gd:104
 msgid "Supported answers (answers)"
 msgstr "有依据的回答（题）"
@@ -25822,11 +26158,11 @@ msgstr "TOMAS"
 msgid "Tab"
 msgstr "Tab"
 
-#: scripts/ui/minigames/barista_game.gd:192 scripts/ui/minigames/barista_game.gd:222
+#: scripts/ui/minigames/barista_game.gd:197 scripts/ui/minigames/barista_game.gd:227
 msgid "Table %d"
 msgstr "第 %d 桌"
 
-#: scripts/ui/minigames/barista_game.gd:194
+#: scripts/ui/minigames/barista_game.gd:199
 msgid "Table %d: %s"
 msgstr "第 %d 桌：%s"
 
@@ -25902,6 +26238,10 @@ msgstr "上电池课程 · %s"
 msgid "Take the job"
 msgstr "接受这份工作"
 
+#: data/help/minigame_tutorials.json
+msgid "Take the photo. Practice has no timing pressure."
+msgstr "拍一张！练习不用赶时间。"
+
 #: data/events/shipment_lost.json
 msgid "Take the refund"
 msgstr "接受退款"
@@ -25957,6 +26297,18 @@ msgstr "Tanaka"
 #: scripts/ui/minigames/pack_game.gd:117
 msgid "Tape seam %d"
 msgstr "贴第 %d 条接缝"
+
+#: data/help/minigame_tutorials.json
+msgid "Tape the first seam."
+msgstr "贴好第一条封口。"
+
+#: data/help/minigame_tutorials.json
+msgid "Tape the last seam."
+msgstr "贴好最后一条封口。"
+
+#: data/help/minigame_tutorials.json
+msgid "Tape the second seam."
+msgstr "贴好第二条封口。"
 
 #: scripts/ui/modals/freelance_modal.gd:30
 msgid "Target audience"
@@ -26218,7 +26570,7 @@ msgstr "这家供应商没卖这个。"
 msgid "That supplier isn't open to you yet."
 msgstr "这家供应商还不跟你往来。"
 
-#: scripts/ui/minigames/mini_game.gd:185
+#: scripts/ui/minigames/mini_game.gd:333
 msgid "That went badly. It counts for little."
 msgstr "这次不太顺利，效果有限。"
 
@@ -26390,7 +26742,7 @@ msgstr "电池已充满，请选择目的地。"
 msgid "The beginner exercise timetable now has conflicting notes. Rosa · Harbor Point Fitness wants a version that other people can check. How do you resolve the conflict?"
 msgstr "新手运动课表现在出现互相矛盾的纪录。Rosa · Harbor Point Fitness 希望其他人也能查核，该如何处理？"
 
-#: scripts/ui/minigames/photo_shoot_game.gd:284
+#: scripts/ui/minigames/photo_shoot_game.gd:285
 msgid "The best shot goes on your listing. Photo quality affects how many people buy."
 msgstr "最好的一张会放上商品页。照片品质会影响买的人数。"
 
@@ -26502,7 +26854,7 @@ msgstr "买方合约数据无效，请重新询价。"
 msgid "The buyer declined the home-currency quote. Try a new quote tomorrow or choose overseas warehousing."
 msgstr "买方拒绝本国币报价。明天可重新报价，或考虑海外仓。"
 
-#: scripts/ui/minigames/auction_game.gd:26
+#: scripts/ui/minigames/auction_game.gd:30
 msgid "The buyer fee is added to the hammer price. Hidden defects are not shown unless Jun inspected the car."
 msgstr "买方手续费加在落槌价上。除非 Jun 验过车，否则不会显示隐藏瑕疵。"
 
@@ -26729,6 +27081,10 @@ msgstr "门口人员请你离开：这场活动要求「%s」服装，而你穿�
 #: scripts/ui/modals/social_calendar_modal.gd:18
 msgid "The door will turn you away."
 msgstr "门口会把你挡在外面。"
+
+#: data/help/minigame_tutorials.json
+msgid "The drink is ready. Press Serve."
+msgstr "饮料好了，按「出杯」。"
 
 #: scripts/sim/logistics.gd:546
 msgid "The driver"
@@ -27310,6 +27666,10 @@ msgstr "投资条款书已过期。"
 msgid "The term sheet has lapsed. We can talk again after you pitch anew."
 msgstr "投资条款书已失效。重新提案后我们可以再谈。"
 
+#: data/help/minigame_tutorials.json
+msgid "The total matches. Hand over the money."
+msgstr "金额对了，把钱交给客人。"
+
 #: scripts/sim/trade_industry.gd:64
 msgid "The trade brokerage is already open."
 msgstr "贸易公司已开始营业。"
@@ -27754,6 +28114,10 @@ msgstr "这段可跳过的导引会依实际产业进度更新。先关闭导引
 msgid "This order was already fully refunded."
 msgstr "这笔订单已全额退款。"
 
+#: data/help/minigame_tutorials.json
+msgid "This parcel is damaged. Record it and quarantine it."
+msgstr "包裹破了，先登记并隔离。"
+
 #: scripts/sim/automotive.gd:286
 msgid "This part of the car is already as good as it gets."
 msgstr "这部分已经是最佳状态。"
@@ -28018,7 +28382,7 @@ msgstr "人生纪录"
 msgid "Tip: register a company before ShopLane caps you. Everyone learns that one the hard way."
 msgstr "提醒你：在 ShopLane 限制你之前先把公司登记好。每个人都是吃过亏才学会的。"
 
-#: scripts/ui/minigames/barista_game.gd:265
+#: scripts/ui/minigames/barista_game.gd:270
 msgid "Tips: %s"
 msgstr "小费：%s"
 
@@ -28446,6 +28810,14 @@ msgstr "旅行社信赖"
 msgid "Trusted contact"
 msgstr "可信赖的人脉"
 
+#: data/help/minigame_tutorials.json
+msgid "Try an approach. Practice uses no supplies or time."
+msgstr "试选一种帮忙方式。这次练习不会花钱。"
+
+#: data/help/minigame_tutorials.json
+msgid "Try one practice bid. It spends no real money."
+msgstr "试出一次价。练习不会扣真的钱。"
+
 #: data/help/help.json
 msgid "Try outfits on the preview, buy with your personal cash, and wear them now or later from your wardrobe."
 msgstr "在预览上试穿，用个人现金购买，可以马上穿，或之后从衣柜换上。"
@@ -28521,6 +28893,14 @@ msgstr "海外试销已过两周：可以调低当地售价或增加广告。目
 #: scripts/ui/minigames/typing_game.gd:48
 msgid "Type the bright lines exactly as shown (the grey ones are already written). The next character to type is highlighted."
 msgstr "照着画面打出亮色的那几行（灰色的已经写好了）。下一个要打的字符会反白标示。"
+
+#: data/help/minigame_tutorials.json
+msgid "Type the highlighted line."
+msgstr "打出亮起的那一行。"
+
+#: data/help/minigame_tutorials.json
+msgid "Type this line. Wrong keys are safe; try the highlighted key."
+msgstr "打出这行。打错也没关系，照亮起的字符再试一次。"
 
 #: scripts/ui/modals/registration_modal.gd:40
 msgid "TypeHolding"
@@ -28798,6 +29178,10 @@ msgstr "请使用文本或数字。"
 msgid "Use previous backup"
 msgstr "用上一份备份"
 
+#: data/help/minigame_tutorials.json
+msgid "Use soft window light."
+msgstr "用柔和的窗边光。"
+
 #: scripts/ui/modals/loan_modal.gd:101
 msgid "Use the Metro to Financial District, then enter Nexus Bank and go to the manager desk."
 msgstr "搭捷运到金融区，进入 Nexus Bank，前往经理桌。"
@@ -28810,6 +29194,10 @@ msgstr "用 OTA 补空房，不要拿来卖你本来就能直接卖出的夜晚�
 msgid "Use the actual company books, not revenue alone. Stock and money on the way still tie up cash."
 msgstr "请看公司的实际帐目，别只看营收。库存与在途款项都会占用现金。"
 
+#: data/help/minigame_tutorials.json
+msgid "Use the brief to support your choice."
+msgstr "照需求选，让选择有依据。"
+
 #: data/help/glossary.json data/help/help.json scripts/ui/minigames/consulting_game.gd:16
 msgid "Use the client's brief. Research, financial models, operating processes and brand strategy each need different work."
 msgstr "请依客户需求作业，市场调查、财务模型、营运流程与品牌策略各有不同工作。"
@@ -28821,6 +29209,14 @@ msgstr "采用目前客房并列出实际设施"
 #: scripts/sim/logistics_depth.gd:95
 msgid "Use the owning company with a van before this route offer expires."
 msgstr "合约到期前，请切换到持有货车的签约公司。"
+
+#: data/help/minigame_tutorials.json
+msgid "Use the receipt to decide the refund."
+msgstr "照收据决定能不能退款。"
+
+#: data/help/minigame_tutorials.json
+msgid "Use the rules and verify the caller’s reference."
+msgstr "照桌上的规则检查，也要确认来电案件编号。"
 
 #: data/story/personal/maya.json
 msgid "Use the step-free path and state the longer walk"
@@ -29081,6 +29477,10 @@ msgstr "核对订单"
 #: scripts/ui/minigames/clerk_forms_game.gd:69
 msgid "Verify reference and escalate"
 msgstr "核对案号并转交处理"
+
+#: data/help/minigame_tutorials.json
+msgid "Verify the caller’s reference before helping."
+msgstr "先确认案件编号，再协助来电的人。"
 
 #: data/milestones.json
 msgid "Version 1.0 ships"
@@ -29662,6 +30062,10 @@ msgstr "每周拨款"
 msgid "Welcome aboard! Shifts are 4 hours, any time we're open. Come by the staff door when you're ready."
 msgstr "欢迎加入！每班 4 小时，营业时间内随时可以来。准备好就从员工信道进来。"
 
+#: data/help/minigame_tutorials.json
+msgid "Welcome the visitor and reserve a free room."
+msgstr "接待访客，帮他预约空的会议室。"
+
 #: data/dialogue/sofia_account.json
 msgid "Welcome to Nexus Bank. How can I help?"
 msgstr "欢迎光临 Nexus 银行。有什么需要帮忙的？"
@@ -29954,7 +30358,7 @@ msgstr "到自由座工作——Company OS"
 msgid "Work checkout for one hour"
 msgstr "站柜台一小时"
 
-#: scripts/ui/minigames/typing_game.gd:192
+#: scripts/ui/minigames/typing_game.gd:193
 msgid "Work done this session: %.1f of %.1f hours' worth"
 msgstr "这段时间完成的工作量：%.1f / %.1f 小时"
 
@@ -30066,7 +30470,7 @@ msgstr "第 8 年：进口需要进口执照（每年 $450）。登记过的公�
 msgid "Yes"
 msgstr "是"
 
-#: scripts/ui/minigames/auction_game.gd:56 scripts/ui/phone_ui.gd:289
+#: scripts/ui/minigames/auction_game.gd:60 scripts/ui/phone_ui.gd:289
 msgid "You"
 msgstr "你"
 
@@ -30846,11 +31250,11 @@ msgstr "Zenkai 元"
 msgid "Zoning impact assessment"
 msgstr "都市计划影响评估"
 
-#: scripts/ui/minigames/photo_shoot_game.gd:95
+#: scripts/ui/minigames/photo_shoot_game.gd:96
 msgid "Zoom"
 msgstr "缩放"
 
-#: scripts/ui/minigames/photo_shoot_game.gd:265
+#: scripts/ui/minigames/photo_shoot_game.gd:266
 msgid "a bit blurry"
 msgstr "有点糊"
 
@@ -30894,7 +31298,7 @@ msgstr "Aster 小旅馆"
 msgid "automation"
 msgstr "自动化"
 
-#: scripts/ui/minigames/photo_shoot_game.gd:263
+#: scripts/ui/minigames/photo_shoot_game.gd:264
 msgid "backdrop doesn't suit it"
 msgstr "背景不适合"
 
@@ -31022,7 +31426,7 @@ msgstr "顾客"
 msgid "customs officer"
 msgstr "海关官员"
 
-#: scripts/ui/minigames/photo_shoot_game.gd:255
+#: scripts/ui/minigames/photo_shoot_game.gd:256
 msgid "cut off at the edge"
 msgstr "被边缘切到"
 
@@ -31166,7 +31570,7 @@ msgstr "团体房"
 msgid "harbor resort"
 msgstr "港湾度假村"
 
-#: scripts/ui/minigames/photo_shoot_game.gd:261
+#: scripts/ui/minigames/photo_shoot_game.gd:262
 msgid "harsh light"
 msgstr "光线太硬"
 
@@ -31286,7 +31690,7 @@ msgstr "贷款还清"
 msgid "local market"
 msgstr "本地市场"
 
-#: scripts/ui/minigames/photo_shoot_game.gd:266
+#: scripts/ui/minigames/photo_shoot_game.gd:267
 msgid "looks great"
 msgstr "看起来很棒"
 
@@ -31738,11 +32142,11 @@ msgstr "今天太晚了，不够上一个班"
 msgid "too late to make it if you leave now"
 msgstr "现在出发也赶不上截止时间"
 
-#: scripts/ui/minigames/photo_shoot_game.gd:257
+#: scripts/ui/minigames/photo_shoot_game.gd:258
 msgid "too small in the frame"
 msgstr "在画面里太小"
 
-#: scripts/ui/minigames/photo_shoot_game.gd:259
+#: scripts/ui/minigames/photo_shoot_game.gd:260
 msgid "too tight"
 msgstr "太满"
 
@@ -31990,7 +32394,7 @@ msgstr "◆ %s 需要你做决定"
 msgid "◆ You are here"
 msgstr "◆ 你在这里"
 
-#: scripts/ui/minigames/photo_shoot_game.gd:115
+#: scripts/ui/minigames/photo_shoot_game.gd:116
 msgid "◉  Shutter"
 msgstr "◉  快门"
 
@@ -32002,11 +32406,11 @@ msgstr "● %d 则新消息"
 msgid "● Open in this build"
 msgstr "● 本版本开放"
 
-#: scripts/ui/minigames/barista_game.gd:138
+#: scripts/ui/minigames/barista_game.gd:142
 msgid "✓ %s enjoyed the service."
 msgstr "✓ %s 对服务很满意。"
 
-#: scripts/ui/minigames/barista_game.gd:138
+#: scripts/ui/minigames/barista_game.gd:142
 msgid "✓ %s is happy (+%s tip)"
 msgstr "✓ %s 很满意（小费 +%s）"
 
@@ -32018,7 +32422,7 @@ msgstr "✓ 大楼已完工，请到对象管理出售或出租各户。"
 msgid "✓ Closed; recovered %s, paid %s."
 msgstr "✓ 已结案；回收 %s，支付 %s。"
 
-#: scripts/ui/minigames/barista_game.gd:114
+#: scripts/ui/minigames/barista_game.gd:114 scripts/ui/minigames/barista_game.gd:140
 msgid "✓ Delivered. Clean the table for the next guest."
 msgstr "✓ 已送餐，请清洁让下一位客人入座。"
 
@@ -32086,7 +32490,7 @@ msgstr "✓ 调查保存至 %s——请回到电脑评估售价。"
 msgid "✓ Single-class pass ready — choose a class."
 msgstr "✓ 单堂券已备妥——请选择课程。"
 
-#: scripts/ui/minigames/auction_game.gd:98
+#: scripts/ui/minigames/auction_game.gd:108
 msgid "✓ Sold to you for %s plus the buyer fee. Inspect, recondition and list it from My lot."
 msgstr "✓ 以 %s 加买方手续费卖给你。请到「我的车场」验车、整备并上架。"
 
@@ -32126,7 +32530,7 @@ msgstr "✗ %s 应该放 %s"
 msgid "✗ %s fell off the belt"
 msgstr "✗ %s 从输送带掉下去了"
 
-#: scripts/ui/minigames/barista_game.gd:251
+#: scripts/ui/minigames/barista_game.gd:256
 msgid "✗ %s gave up waiting"
 msgstr "✗ %s 等不下去走了"
 
@@ -32142,7 +32546,7 @@ msgstr "✗ 尚不能收购 — 先独立经营公司 180 天。"
 msgid "✗ Already booked. Offer a free room or another hour."
 msgstr "✗ 已有人预约，请提供其他空房或时段。"
 
-#: scripts/ui/minigames/auction_game.gd:100
+#: scripts/ui/minigames/auction_game.gd:110
 msgid "✗ Another bidder won at %s. Next step: try another lot."
 msgstr "✗ 其他买家以 %s 得标。下一步：试试其他拍卖车。"
 
@@ -32218,7 +32622,7 @@ msgstr "✗ 还没有安装案。先勘查屋顶并送出报价。"
 msgid "✗ No roof leads this week. New leads arrive every Monday."
 msgstr "✗ 本周没有屋顶客户。新客户每周一出现。"
 
-#: scripts/ui/minigames/auction_game.gd:101
+#: scripts/ui/minigames/auction_game.gd:111
 msgid "✗ No sale. Next step: check the other lots."
 msgstr "✗ 没有成交。下一步：看看其他拍卖车。"
 

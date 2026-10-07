@@ -132,6 +132,7 @@ func round_timeout() -> void:
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
+	if practice_only: return # The current highlighted control is the only practice action.
 	if phase != "play" or not (event is InputEventKey) or not event.pressed or event.echo:
 		return
 	for index in BINS.size():

@@ -322,3 +322,13 @@ Implemented: baskets reserve every SKU/quantity at one location. The packing tab
 Implemented：咖啡師同時處理三位客人，確認／推薦、製作、送至取餐台或指定桌號、清理完成才計分。髒桌可從另一張訂單清理；等待時間決定小費，實際店長評價與完成班數共同決定升職、薪資及每日兩班資格。收銀增加找零及退貨審核，共享空間接待增加會議室衝突，包裹分揀增加破損記錄／隔離，文書增加客訴處理；各環節會影響原有班次收入。
 Implemented：新接案依序訪談、報價及約定修改次數、每日跨案分配最多六小時、選擇加價或吸收追加範圍、交付及修改、驗收／折價結案。市場調查分類資料、財務模型計算、營運流程排序、品牌策略選卡各有不同操作；品質與訪談資訊影響驗收，評價影響後續案源與報價上限。只有驗收或協議折價後才開發票，依原有付款條件收款；沒有執行階段的虛構收入。舊存檔中的既有案件繼續使用原交付流程。
 Blocked：#95 尚未合併，暫沿用實際班次／接案工時與既有提早休息條件；待共用體力系統合併後串接，不建立另一套疲勞系統。範圍變更與修改為三回合資料題，不宣稱能編寫任意真實試算表或品牌文件。
+# First-time work practice (#149)
+
+Implemented: all 15 minigame classes share a guided practice copy in MiniGame, including four consulting task types.
+The first visit offers a short goal/controls/quality card and visible skip. Each step highlights one actual control;
+other task buttons are dimmed and locked. Practice pauses timing, ignores scoring, and never applies wages, ratings,
+sales or auction purchases. The ready button continues directly into the first formal shift. Header ? replays safely
+without resetting the work in progress. A newcomer is greeted by the manager at the coffee counter.
+
+Lessons live in data/help/minigame_tutorials.json; adding a minigame without lesson data fails the coverage test.
+Old saves add seen-state lazily. The work area scrolls to lower machine/packing controls; no step requires an external guide.

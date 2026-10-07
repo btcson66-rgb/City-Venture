@@ -385,6 +385,13 @@ guided first venture runs) and keeps a ? button in its header. Company OS uses `
 `typing.json`: `{saas: {<idea_id>: [[line, ...], ...], _generic: [...]}, freelance: [[line, ...], ...]}`. Code and
 spreadsheet formulas stay in English, as they would really be typed.
 
+`data/help/minigame_tutorials.json`: `{<script_basename>: {goal, controls, good, steps[{target,text,condition}]}}`.
+Targets are stable node names or contextual selectors resolved by `MinigamePracticeTargets`; conditions are `pressed`,
+`dragged` or `line_typed`. `MiniGame` runs the same actual controls in a separate untimed, unscored practice copy;
+transactional auction bids are isolated. Completion/skip lazily saves `data.minigame_tutorials_seen{<game>:bool}`
+(consulting uses `<game>:<kind>`). Legacy saves without this key automatically offer practice. No income/rating
+callback runs for practice. Header ? and the compact start card can replay it while preserving active work.
+
 ### 1.20 Staff roles — `data/economy/staff.json`
 `{payroll_weekday, payroll_hour, work_hours[start,end], employer_registration_fee, job_ad_fee, applicant_delay_hours, applicants, severance_weeks, max_staff, morale_start, roles{<id>: {...}}}`.
 A role is `{name, salary_week[min,max], needs_office, desc}` plus optional:
