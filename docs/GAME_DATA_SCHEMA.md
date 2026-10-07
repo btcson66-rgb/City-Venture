@@ -1,5 +1,17 @@
 # CITY VENTURE — Game Data Schema
 
+### Work modes (Implemented, #150)
+
+`economy/work_modes.json` tunes the optional challenge tip per correct task, normal coffee tip, one-time retry
+tip reduction, coffee bonus window in real seconds, and the quiet success sound volume in dB. MiniGame reads it
+without rewriting saved finances. Fixed task counts still determine completion; callers advance scheduled game time.
+
+Device preferences add `work_mode` (0 relaxed, 1 challenge) to the existing settings.cfg. Missing/invalid values
+fall back to 0. A start-card choice affects only that work session. No game-save keys are removed or migrated.
+Result dictionaries add `work_mode` and `challenge_tips`; tips are combined with normal tips for the existing
+work-shift Ledger posting. Timing never changes performance score, manager review, promotion or base wage.
+Practice remains untimed regardless of the default. Auction waiting is advanced manually in relaxed mode.
+
 ### Economy balance overlays
 
 `economy/balance.json` has `definitions: {products: {id: {numeric_field: value}}}`. DataDB applies these values after

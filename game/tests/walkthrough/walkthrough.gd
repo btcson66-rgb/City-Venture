@@ -9,6 +9,15 @@ var bot
 var shots_taken := {}
 var _tried := {}
 
+## Manual tours must finish the first-use lesson before sending formal-work inputs.
+func _first_work_practice() -> void:
+	await bot.wait(0.2)
+	var game := UIRoot.top_modal() as MiniGame
+	if game != null and game.practice_only:
+		await load("res://tests/walkthrough/practice_tour.gd").new(bot).lesson(game, game.tutorial_id() + "_first_use")
+	else:
+		await bot.click_named("StartGame", 3.0)
+
 
 func _init(b) -> void:
 	bot = b
@@ -1122,6 +1131,8 @@ func open_os_at(action_pred: Callable, what: String) -> void:
 
 # ------------------------------------------------------------------ flow
 func _new_game() -> void:
+	Preferences.values["work_mode"] = 0
+	bot.expect(Preferences.values["work_mode"] == 0, "new-game walkthrough uses normal relaxed work income")
 	bot.step("Main menu → New Game")
 	await bot.wait(1.5)
 	await bot.shot("main_menu")
@@ -2183,7 +2194,7 @@ func _harbor_logistics() -> void:
 	await bot.until(func(): return UIRoot.top_modal() is RouteGame, 4.0)
 	await bot.wait(0.5)
 	await bot.shot("route_game_intro")
-	await bot.click_named("StartGame", 3.0)
+	await _first_work_practice()
 	await bot.wait(0.4)
 	var g := UIRoot.top_modal() as RouteGame
 	if g == null:
@@ -2207,7 +2218,8 @@ func _harbor_logistics() -> void:
 	var paid := -Ledger.balance(be, "revenue") - rev0
 	bot.expect(paid > 60.0, "the pay was banked as revenue (%s for run %s)" % [Fmt.money(paid), jid])
 	bot.expect(Ledger.balance(be, "exp:fuel") > fuel0, "fuel was charged")
-	bot.expect(float(Logistics.history(1)[0]["score"]) > 0.99, "the best route scored 100%")
+	var history := Logistics.history(1)
+	bot.expect(not history.is_empty() and float(history[0]["score"]) > 0.99, "the best route scored 100%")
 	if UIRoot.top_modal() is CompanyOS:
 		await bot.wait(0.4)
 		await bot.shot("logistics_tab_paid")
@@ -2899,7 +2911,7 @@ func _media() -> void:
 			await bot.use_action("media_open")
 			await bot.click_named("CreativePitch_"+brief["id"])
 			await bot.wait(.4)
-			await bot.click_named("StartGame")
+			await _first_work_practice()
 			for i in 3:
 				await bot.click_named("CreativeCard_"+["slogan","visual","tone"][i]+"_"+str(int(brief["preferences"][i])))
 			await bot.shot("creative_pitch_result")
@@ -3957,7 +3969,7 @@ func _van_route_fixture() -> void:
 		var game := RouteGame.new({"id":"MapQA", "client":"Local client", "stops":rounds[index], "by":0})
 		UIRoot.open_modal(game)
 		await bot.wait(0.4)
-		await bot.click_named("StartGame", 3.0)
+		await _first_work_practice()
 		var best := Logistics.best_order(game.stops)
 		for stop in best["order"]:
 			await bot.click_named("Stop_%d" % (int(stop) + 1), 3.0)
@@ -4135,7 +4147,7 @@ func _personal_life_fixture() -> void:
 		for index in 3:
 			await bot.click_named("PersonalRequest")
 			await bot.wait(.2)
-			await bot.click_named("StartGame")
+			await _first_work_practice()
 			await bot.wait(.2)
 			var choice: String=["document","compare","scope"][index]
 			await bot.click_named("PersonalAnswer_"+choice)

@@ -1,7 +1,7 @@
 class_name BaristaGame
 extends MiniGame
 ## A shift behind Bloom Coffee's counter: read each customer's order, build the drink (cup, drink, milk, shots) and
-## serve it before their patience runs out. Correct, quick drinks earn tips.
+## serve it at your pace. Challenge time affects extra tips only.
 
 const SIZES := [["S", "Small cup"], ["M", "Medium cup"], ["L", "Large cup"]]
 const DRINKS := [["americano", "Americano"], ["latte", "Latte"], ["flat_white", "Flat white"], ["cappuccino", "Cappuccino"], ["mocha", "Mocha"]]
@@ -37,7 +37,7 @@ func _init() -> void:
 
 func intro_lines() -> Array:
 	return ["Manage the queue: confirm or recommend, make each drink, deliver to the ticket's counter or table, then clean.",
-		"Dirty tables cannot seat another guest. Waiting guests lose patience; choose who to serve first.",
+		"Guests keep waiting. Clean the table before seating the next guest.",
 		"Complete service determines tips and the manager's review. Keep cup, milk and espresso shot counts correct."]
 
 
@@ -64,13 +64,8 @@ func _select_customer(index: int) -> void:
 	selected = index
 	want = queue[index]
 	got = want["got"]
-	if _gives_up(want): round_timeout(); return
 	_layout()
 
-
-## A guest still waiting for the order, the drink or the delivery gives up; one who is only waiting for the table to be cleaned was already served.
-func _gives_up(ticket: Dictionary) -> bool:
-	return not practice_only and ticket["station"] != "clean" and float(ticket["age"]) > float(FreelanceWorkflow.cfg()["barista_patience"])
 
 func _confirm(recommend := false) -> void:
 	if want["station"] != "order": return
@@ -87,26 +82,24 @@ func _confirm(recommend := false) -> void:
 	_layout()
 
 func _process(dt: float) -> void:
-	if practice_only or phase != "play": return
+	if relaxed() or phase != "play": return
 	for index in queue.size():
 		var customer: Dictionary = queue[index]
 		customer["age"] = float(customer["age"]) + dt
 		var button := stage.find_child("Guest_%d" % index, true, false)
 		if button is Button:
-			var remaining := maxi(0, roundi(float(FreelanceWorkflow.cfg()["barista_patience"]) - float(customer["age"])))
-			button.text = I18n.t("Guest %d · %d s") % [int(customer["id"]), remaining]
-	# Every waiting guest's patience runs, not only the selected one.
-	for index in queue.size():
-		if _gives_up(queue[index]):
-			selected = index
-			want = queue[index]
-			got = want["got"]
-			round_timeout()
-			return
+			var remaining := maxi(0, roundi(float(mode_cfg()["barista_challenge_seconds"]) - float(customer["age"])))
+			button.text = I18n.t("Guest %d · bonus %d s") % [int(customer["id"]), remaining]
+	# Guests never leave. Expired timing removes only the optional challenge bonus.
+
 
 func _deliver(destination: int) -> void:
 	if want["station"] != "deliver": return
 	var correct := destination == int(want["destination"])
+	if not correct and not practice_only:
+		want["tip_retry"] = true
+		flash("Check the destination on the ticket, then try again.", false)
+		return
 	want["quality"] = float(want["quality"]) * (1.0 if correct else float(FreelanceWorkflow.cfg()["wrong_table_quality"]))
 	completed_stations["deliver"] += int(correct)
 	want["station"] = "clean"
@@ -130,16 +123,17 @@ func _clean() -> void:
 		completed_stations["clean"] += 1
 		want["cleaned"] = true
 	var quality := float(want["quality"])
+	var bonus_before := challenge_tips
 	award(quality)
 	if quality >= 1.0:
 		served_right += 1
-		var tip := float(FreelanceWorkflow.cfg()["barista_tip_fast"] if float(want["age"]) < float(FreelanceWorkflow.cfg()["barista_patience"]) * 0.5 else FreelanceWorkflow.cfg()["barista_tip_slow"])
+		var tip := float(mode_cfg()["normal_barista_tip"]) - (float(mode_cfg()["retry_tip_reduction"]) if want.get("tip_retry", false) else 0.0)
 		if not own_counter: tips += tip
 		if practice_only:
 			tips = 0.0
 			flash("✓ Delivered. Clean the table for the next guest.", true)
 		else:
-			flash(I18n.t("✓ %s enjoyed the service.") % str(want["who"]) if own_counter else I18n.t("✓ %s is happy (+%s tip)") % [str(want["who"]), Fmt.money(tip)], true)
+			flash(I18n.t("✓ %s enjoyed the service.") % str(want["who"]) if own_counter else I18n.t("✓ %s is happy (+%s tip)") % [str(want["who"]), Fmt.money(tip + challenge_tips - bonus_before)], true)
 	queue.remove_at(selected)
 	next_round()
 
@@ -171,7 +165,7 @@ func _layout() -> void:
 	layout.add_child(queue_row)
 	for index in queue.size():
 		var ticket: Dictionary = queue[index]
-		var guest_text := I18n.t("Guest %d") % int(ticket["id"]) if practice_only else I18n.t("Guest %d · %d s") % [int(ticket["id"]), maxi(0, roundi(float(FreelanceWorkflow.cfg()["barista_patience"]) - float(ticket["age"])))]
+		var guest_text := I18n.t("Guest %d") % int(ticket["id"]) if relaxed() else I18n.t("Guest %d · bonus %d s") % [int(ticket["id"]), maxi(0, roundi(float(mode_cfg()["barista_challenge_seconds"]) - float(ticket["age"])))]
 		var customer_button := UIK.button(guest_text, _select_customer.bind(index), "tab_active" if selected == index else "tab")
 		customer_button.name = "Guest_%d" % index
 		queue_row.add_child(customer_button)
@@ -246,19 +240,17 @@ func _serve() -> void:
 	var correct := 0
 	for key in ["size", "drink", "milk", "shots"]:
 		if got[key] == want[key]: correct += 1
+	if correct < 4 and not practice_only:
+		want["tip_retry"] = true
+		for key in ["size", "drink", "milk", "shots"]:
+			if got[key] != want[key]:
+				var fields := {"size": "Cup", "drink": "Drink", "milk": "Milk", "shots": "Espresso"}
+				flash(I18n.t("Check %s on the ticket, then try again.") % I18n.t(fields[key]), false)
+				return
 	want["quality"] = correct / 4.0
 	completed_stations["make"] += int(correct == 4)
 	want["station"] = "deliver"
 	_layout()
-
-func round_timeout() -> void:
-	if queue.is_empty(): return
-	flash(I18n.t("✗ %s gave up waiting") % str(want["who"]), false)
-	if int(want["destination"]) > 0 and tables[int(want["destination"])] == str(want["id"]): tables[int(want["destination"])] = ""
-	queue.remove_at(selected)
-	award(0.0)
-	next_round()
-
 
 func extra_result() -> Dictionary:
 	return {"tips": tips, "right": served_right, "stations": completed_stations, "manager_rating": score()}
@@ -267,7 +259,7 @@ func extra_result() -> Dictionary:
 func result_lines() -> Array:
 	if own_counter:
 		return [I18n.t("Drinks served exactly right: %d / %d") % [served_right, rounds], I18n.t("Service: %d%%") % int(round(score() * 100))]
-	return [I18n.t("Drinks served exactly right: %d / %d") % [served_right, rounds], I18n.t("Tips: %s") % Fmt.money(tips)]
+	return [I18n.t("Drinks served exactly right: %d / %d") % [served_right, rounds], I18n.t("Tips: %s") % Fmt.money(tips + challenge_tips)]
 
 
 ## A cup filled in layers as the drink is built.

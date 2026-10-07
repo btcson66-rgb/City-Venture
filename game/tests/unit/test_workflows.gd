@@ -225,21 +225,21 @@ func test_additional_job_stages_preserve_scores_and_conflicts() -> void:
 	runner.eq(clerk.points, 0.6, "bad complaint handling loses service portion")
 	clerk.close()
 	await runner.get_tree().process_frame
-func test_barista_every_waiting_guest_loses_patience_but_served_guest_does_not() -> void:
+func test_barista_waiting_never_removes_guests_or_quality() -> void:
 	var game := BaristaGame.new()
+	game.work_mode = 0
 	game.mark_tutorial_seen()
 	UIRoot.open_modal(game)
 	await runner.get_tree().process_frame
 	game.start()
-	var patience := float(FreelanceWorkflow.cfg()["barista_patience"])
-	runner.check(not game._gives_up({"station": "clean", "age": patience + 50.0}), "a served guest waiting for a clean table never gives up")
-	runner.check(game._gives_up({"station": "make", "age": patience + 1.0}), "a guest waiting for a drink gives up")
-	var before := game.queue.size()
-	game.selected = 0
-	game.want = game.queue[0]
-	game.queue[2]["age"] = patience + 1.0
-	game._process(0.1)
-	runner.check(game.queue.size() == before - 1 or game.round_i > 0, "an unselected guest left after waiting too long")
+	var before := game.queue.duplicate(true)
+	game._process(100000.0)
+	runner.eq(game.queue, before, "every guest waits in relaxed mode")
+	runner.eq(game.round_i, 0, "waiting does not finish a service task")
+	game.work_mode = 1
+	game._process(100000.0)
+	runner.eq(game.queue.size(), before.size(), "challenge expiration also keeps guests")
+	runner.eq(game.points, 0.0, "optional timing cannot lower quality")
 	game.close()
 	await runner.get_tree().process_frame
 func test_discount_settlement_rates_three_stars() -> void:

@@ -132,12 +132,6 @@ func _refund(approve: bool) -> void:
 	next_round()
 
 
-func round_timeout() -> void:
-	flash("✗ The customer asked for the manager", false)
-	award(0.0)
-	next_round()
-
-
 func extra_result() -> Dictionary:
 	return {"right": right}
 

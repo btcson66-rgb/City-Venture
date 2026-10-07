@@ -12,6 +12,11 @@ extends Modal
 signal finished(result: Dictionary)
 
 ## Practice uses a separate copy of the game. Closing it never reaches the real-work callback.
+## The device default is copied at construction; changing a start card affects only this session.
+var work_mode := int(Preferences.values.get("work_mode", 0))
+var challenge_tips := 0.0
+var _timed_out := false
+
 var practice_only := false
 var practice_step := 0
 var practice_target: Control
@@ -146,10 +151,11 @@ func build_round() -> void:
 	pass
 
 
-## Called when a timed round runs out (default: no points).
+## Optional timing only expires the bonus; the same task remains playable.
 func round_timeout() -> void:
-	award(0.0)
-	next_round()
+	if relaxed() or practice_only: return
+	_timed_out = true
+	flash("Bonus time is up. Keep going at your own pace.", false)
 
 
 func result_lines() -> Array:
@@ -177,6 +183,30 @@ func build() -> void:
 			footer.add_child(go)
 
 
+static func mode_cfg() -> Dictionary:
+	return DataDB.economy["work_modes"]
+
+
+func relaxed() -> bool:
+	return practice_only or work_mode == 0
+
+
+func tip_job() -> bool:
+	return self is BaristaGame and not get("own_counter") or self is ParcelSortGame or self is TellerCashGame or self is CoworkHostGame or self is ClerkFormsGame
+
+
+func challenge_time_ok() -> bool:
+	if relaxed() or _timed_out: return false
+	if self is BaristaGame:
+		return float(get("want").get("age", 0.0)) <= float(mode_cfg()["barista_challenge_seconds"])
+	return round_time <= 0.0 or _round_t < round_time
+
+
+func _choose_work_mode(index: int) -> void:
+	work_mode = clampi(index, 0, 1)
+	rebuild()
+
+
 func _build_intro() -> void:
 	var d := tutorial_data()
 	var v := UIK.vbox(5)
@@ -188,6 +218,18 @@ func _build_intro() -> void:
 	v.add_child(UIK.wrap(I18n.t(str(d.get("good", ""))), 9, Art.C_MUTED, 540))
 	if practice_only:
 		v.add_child(UIK.label("Practice: no timer, score or pay changes.", 8, Art.C_DIM))
+	if not practice_only:
+		var row := UIK.hbox(4)
+		row.add_child(UIK.label("Work mode", 9, Art.C_MUTED))
+		var mode := OptionButton.new()
+		mode.name = "WorkMode"
+		mode.custom_minimum_size.y = 24
+		mode.add_item(I18n.t("Relaxed — no timer"))
+		mode.add_item(I18n.t("Challenge — tips only" if tip_job() else "Challenge — optional clock"))
+		mode.select(work_mode)
+		mode.item_selected.connect(_choose_work_mode)
+		row.add_child(mode)
+		v.add_child(row)
 	var go := UIK.button("Begin practice" if practice_only else "Start", start, "primary", 110)
 	go.name = "StartGame"
 	if practice_only:
@@ -224,7 +266,7 @@ func _build_play() -> void:
 	_timer_bar.show_percentage = false
 	_timer_bar.max_value = 1.0
 	_timer_bar.value = 1.0
-	_timer_bar.visible = round_time > 0.0 and not practice_only
+	_timer_bar.visible = round_time > 0.0 and not relaxed()
 	top.add_child(_timer_bar)
 	if practice_only:
 		_practice_hint = UIK.wrap("", 10, Art.C_SKY, 540)
@@ -242,6 +284,7 @@ func _build_play() -> void:
 	leave.name = "LeaveGame"
 	footer.add_child(leave)
 	_round_t = 0.0
+	_timed_out = false
 	_update_status()
 	build_round()
 	if practice_only:
@@ -277,11 +320,21 @@ func score() -> float:
 func award(p: float) -> void:
 	if practice_only: return
 	points += clampf(p, 0.0, 1.0)
+	if p >= 0.99:
+		Sound.play("success", float(mode_cfg()["success_db"]))
+		if challenge_time_ok() and tip_job():
+			var bonus := float(mode_cfg()["challenge_tip_per_task"])
+			challenge_tips += bonus
+			if not self is BaristaGame:
+				flash(I18n.t("Nice! +%s tip") % Fmt.money(bonus), true)
+		elif not self is BaristaGame:
+			flash("Nice work!", true)
 
 
 func next_round() -> void:
 	round_i += 1
 	_round_t = 0.0
+	_timed_out = false
 	if round_i >= rounds:
 		if practice_only: return
 		phase = "results"
@@ -293,18 +346,18 @@ func next_round() -> void:
 
 
 func time_left() -> float:
-	return 1.0 if practice_only or round_time <= 0.0 else clampf(1.0 - _round_t / round_time, 0.0, 1.0)
+	return 1.0 if relaxed() or round_time <= 0.0 else clampf(1.0 - _round_t / round_time, 0.0, 1.0)
 
 
 func _process(delta: float) -> void:
-	if practice_only or phase != "play" or round_time <= 0.0:
+	if relaxed() or phase != "play" or round_time <= 0.0 or _timed_out:
 		return
-	_round_t += delta * PersonalLife.response_speed()
+	_round_t += delta
 	if _timer_bar != null and is_instance_valid(_timer_bar):
 		_timer_bar.value = time_left()
 	if _round_t >= round_time:
-		_round_t = 0.0
-		round_timeout()
+		_timed_out = true
+		flash("Bonus time is up. Keep going at your own pace.", false)
 
 
 func _build_results() -> void:
@@ -330,7 +383,7 @@ func verdict(s: float) -> String:
 		return "Solid. A few slips."
 	if s >= 0.25:
 		return "Rough going. Practice makes it easier."
-	return "That went badly. It counts for little."
+	return "You can try again whenever you like."
 
 
 ## Extra fields for the caller (tips earned, dev hours...).
@@ -342,6 +395,9 @@ func _finish() -> void:
 	if practice_only: return
 	var r := {"score": score()}
 	r.merge(extra_result())
+	r["tips"] = float(r.get("tips", 0.0)) + challenge_tips
+	r["work_mode"] = work_mode
+	r["challenge_tips"] = challenge_tips
 	_send(r)
 	close()
 
@@ -414,12 +470,20 @@ static func choice_row(label: String, options: Array, current: String, on_pick: 
 
 ## Flash a short line at the bottom of the panel ("✓ Correct", "✗ Wrong box"); survives the next round's rebuild.
 func flash(text: String, good: bool) -> void:
-	var l := UIK.label(I18n.t(text), 11, Art.C_GREEN if good else (Art.C_SKY if practice_only else Art.C_RED), true)   # already-translated text passes through
+	var previous := get_node_or_null("WorkFeedback")
+	if is_instance_valid(previous):
+		remove_child(previous)
+		previous.queue_free()
+	var message := I18n.t(text).trim_prefix("✗ ").strip_edges()
+	var l := UIK.label(message, 11, Art.C_GREEN if good else Art.C_SKY, true)   # already-translated text passes through
+	l.name = "WorkFeedback"
 	l.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	l.position = panel.position + Vector2(14, panel_size.y - 26)
 	l.z_index = 5
 	add_child(l)
 	var tw := l.create_tween()
+	if good and not bool(Preferences.values["reduce_motion"]):
+		tw.tween_property(l, "position:y", l.position.y - 8.0, 0.2)
 	tw.tween_property(l, "modulate:a", 0.0, 1.1).set_delay(0.5)
 	tw.tween_callback(l.queue_free)
 

@@ -12,7 +12,7 @@ func _init(client_brief: Dictionary) -> void:
 	help_key="creative_pitch"
 	icon_name="star"
 func intro_lines() -> Array:
-	return ["Build the client pitch from slogan, visual and tone cards.","Match the client's preferences shown above the cards. Each round is timed and the cards change places.","A matching card earns the point; a wrong pick or the clock running out earns nothing."]
+	return ["Build the client pitch from slogan, visual and tone cards.","Match the preferences above the cards. Take your time; the challenge clock is optional.","A matching card earns the point. Waiting never lowers your score."]
 func build_round() -> void:
 	var category: String=["slogan","visual","tone"][round_i]
 	var cards := UIK.vbox(6)

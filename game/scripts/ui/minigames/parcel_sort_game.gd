@@ -1,8 +1,7 @@
 class_name ParcelSortGame
 extends MiniGame
-## A shift on PostPoint's sorting belt: send each parcel to the right district bin before it slides off the belt.
-## Early parcels show the district; later ones only the postcode (1xxx Riverside, 2xxx Startup Hub, ...), and halfway
-## through the shift lead takes the cheat sheet away.
+## Sort a fixed number of parcels. The postcode guide stays available in relaxed mode;
+## the optional challenge clock can earn extra tips but never discards a parcel.
 
 const BINS := [["riverside", "Riverside", 1], ["startup_hub", "Startup Hub", 2], ["civic_center", "Civic Center", 3],
 	["financial", "Financial District", 4], ["shopping_street", "Shopping Street", 5]]
@@ -27,7 +26,7 @@ func _init() -> void:
 func intro_lines() -> Array:
 	return ["Parcels come down the belt one at a time. Click the district bin or use the Choice 1–5 bindings in Settings.",
 		"Postcodes tell you the district: 1xxx Riverside, 2xxx Startup Hub, 3xxx Civic Center, 4xxx Financial District, 5xxx Shopping Street.",
-		"The first parcels show the district name. Later ones only have a postcode, and halfway through the cheat sheet goes away."]
+		"The postcode guide stays on your desk in relaxed mode. Use it whenever you need."]
 
 
 func round_name() -> String:
@@ -92,13 +91,13 @@ func _layout() -> void:
 	for i in BINS.size():
 		var b: Array = BINS[i]
 		var txt := "%d  %s" % [i + 1, I18n.t(str(b[1]))]
-		if round_i < rounds / 2:
+		if relaxed() or round_i < rounds / 2:
 			txt += "\n%dxxx" % int(b[2])
 		var btn := UIK.button(txt, _drop.bind(str(b[0])), "", 110)
 		btn.custom_minimum_size = Vector2(110, 52)
 		btn.name = "Bin_" + str(b[0])
 		row.add_child(btn)
-	if round_i >= rounds / 2:
+	if not relaxed() and round_i >= rounds / 2:
 		var note := UIK.label("The shift lead took the postcode sheet. From memory now!", 7, Art.C_SKY, true)
 		note.position = Vector2(0, 190)
 		stage.add_child(note)
@@ -117,17 +116,11 @@ func _drop(bin: String) -> void:
 	if parcel.get("damaged", false) and not damage_resolved: return
 	if bin == parcel["bin"]:
 		right += 1
-		award(0.7 + 0.3 * time_left())
+		award(1.0)
 		flash("✓ " + _bin_name(bin), true)
 	else:
 		award(0.0)
 		flash(I18n.t("✗ %s belongs in %s") % [str(parcel["code"]), _bin_name(str(parcel["bin"]))], false)
-	next_round()
-
-
-func round_timeout() -> void:
-	flash(I18n.t("✗ %s fell off the belt") % str(parcel["code"]), false)
-	award(0.0)
 	next_round()
 
 

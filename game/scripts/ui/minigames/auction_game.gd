@@ -27,7 +27,7 @@ func lot() -> Dictionary:
 		return practice_lot
 	return Automotive.S()["lots"].get(lot_id, {})
 func intro_lines() -> Array:
-	return ["Bid against live bidders. Press Bid to raise; stop bidding when the price passes what the car is worth to you.", "The buyer fee is added to the hammer price. Hidden defects are not shown unless Jun inspected the car."]
+	return ["Bid at your pace. In relaxed mode, let other bidders respond when you are ready; stop whenever you want.", "The buyer fee is added to the hammer price. Hidden defects are not shown unless Jun inspected the car."]
 func build_round() -> void:
 	var box := UIK.vbox(6)
 	box.position = Vector2(10, 8)
@@ -51,6 +51,10 @@ func build_round() -> void:
 	var stop := UIK.button("Stop bidding", stop_bidding)
 	stop.name = "AuctionStop"
 	box.add_child(stop)
+	if relaxed() and not practice_only:
+		var advance := UIK.button("Let other bidders respond", tick)
+		advance.name = "AuctionAdvance"
+		box.add_child(advance)
 	refresh_labels()
 func refresh_labels() -> void:
 	var current := lot()
@@ -79,7 +83,7 @@ func stop_bidding() -> void:
 	refresh_labels()
 func _process(delta: float) -> void:
 	super._process(delta)
-	if practice_only or phase != "play" or settled or lot().is_empty(): return
+	if relaxed() or phase != "play" or settled or lot().is_empty(): return
 	elapsed += delta
 	if elapsed < float(Automotive.auction()["poll_seconds"]): return
 	elapsed = 0.0

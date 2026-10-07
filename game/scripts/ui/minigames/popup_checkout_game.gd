@@ -5,7 +5,7 @@ var correct:=0.0
 var rng:=RandomNumberGenerator.new()
 func _init() -> void:
 	super._init();title_text="Pop-up checkout";icon_name="cash";rounds=4;round_time=20;rng.seed=Clock.now()*7+11
-func intro_lines() -> Array:return ["Read the basket quantity and unit price, then choose the correct card charge.","Quick, accurate checkout improves conversion during your one-hour shift. Practice baskets do not create sales or income."]
+func intro_lines() -> Array:return ["Read the basket quantity and unit price, then choose the correct card charge.","Accurate checkout improves conversion during your one-hour shift. Waiting does not lower quality; practice creates no income."]
 func round_name() -> String:return "Customer %d / %d"
 func build_round() -> void:
 	var stocked: Array=PopupStore.active().get("prices",{}).keys()

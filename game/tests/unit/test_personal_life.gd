@@ -86,12 +86,16 @@ func test_stress_illness_two_real_choices_and_timeout_recover_without_permanent_
 	GameState.data["clock"]["minutes"]+=2
 	PersonalLife.on_hour(Clock.now(),12)
 	runner.check(not PersonalLife.ill() and float(PersonalLife.S()["stress"])<=55,"timeout automatically resolves")
-func test_fatigue_changes_response_window_and_never_directly_deducts_score() -> void:
+func test_fatigue_never_accelerates_work_clock_or_deducts_score() -> void:
 	var g := PersonalRequestGame.new(PersonalLife.stories()["maya"]["steps"][0])
 	g.phase="play";g.points=.8;g._round_t=0
+	g.work_mode=0
+	PersonalLife.S()["energy"]=0;g._process(100000)
+	runner.eq(g._round_t,0.0,"relaxed conversation never times out")
+	g.work_mode=1
 	PersonalLife.S()["energy"]=100;g._process(1);var rested := g._round_t
 	PersonalLife.S()["energy"]=0;g._round_t=0;g._process(1)
-	runner.check(g._round_t>rested,"shorter actual reaction time")
+	runner.eq(g._round_t,rested,"fatigue never makes the optional clock faster")
 	runner.eq(g.points,.8,"no direct score penalty")
 	g.free()
 func test_sleep_and_rest_restore_and_no_sleep_debt_accumulation() -> void:

@@ -142,12 +142,6 @@ func _room(slot: String) -> void:
 	next_round()
 
 
-func round_timeout() -> void:
-	flash("✗ The queue is getting long", false)
-	award(0.0)
-	next_round()
-
-
 func extra_result() -> Dictionary:
 	return {"right": right}
 

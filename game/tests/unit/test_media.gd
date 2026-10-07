@@ -235,7 +235,7 @@ func test_paused_campaign_resumes_when_funded_or_times_out() -> void:
 	runner.eq(campaign["status"],"cancelled","left unfunded too long it is closed")
 	runner.check(float(Media.S()["reputation"])<reputation,"closing it costs reputation")
 	runner.check(Ledger.check_balanced(),"timeout settlement balanced")
-func test_creative_pitch_is_timed_shows_preferences_and_has_no_default_primary() -> void:
+func test_creative_pitch_optional_clock_preserves_quality_and_shows_preferences() -> void:
 	setup()
 	var brief: Dictionary=Media.S()["briefs"].values()[0]
 	var game := CreativePitch.new(brief)
@@ -253,6 +253,9 @@ func test_creative_pitch_is_timed_shows_preferences_and_has_no_default_primary()
 	for label in game.find_children("*","Label",true,false):
 		if "Client preferences" in label.text or "客戶偏好" in label.text:shown=true
 	runner.check(shown,"the client's preferences are visible inside the minigame")
-	game.round_timeout()
-	runner.eq(game.points,0.0,"running out the clock scores nothing")
+	game.work_mode = 1
+	game._process(10000.0)
+	runner.eq(game.round_i,0,"optional clock never discards a creative choice")
+	game.choose(int(brief["preferences"][0]))
+	runner.eq(game.points,1.0,"a late matching card retains normal quality")
 	game.close()

@@ -2,7 +2,7 @@ class_name TypingGame
 extends MiniGame
 ## Do the work yourself at the keyboard: type out the code for your SaaS product, or build the spreadsheet a consulting
 ## client is paying for. The whole snippet is on screen; you type its key lines (at most MAX_LINES, one per round),
-## the rest is already written: a short burst of real typing, not a shift at the keyboard. Accuracy and speed decide
+## the rest is already written: a short burst of real typing, not a shift at the keyboard. Accuracy decides
 ## how much the session gets done (`hours` in the result: 0.5×–1.25× the session's nominal hours).
 ## Texts: data/minigames/typing.json (code and formulas stay in English, as you would really type them).
 
@@ -18,7 +18,6 @@ var li := 0                   # line being typed
 var col := 0                  # next character in it
 var errors := 0
 var typed := 0
-var _line_t := 0.0
 var _err_flash := 0.0
 var view: Control
 
@@ -46,8 +45,8 @@ func _init(mode := "saas", key := "", hours := 2.0, heading := "") -> void:
 
 func intro_lines() -> Array:
 	return ["Type the bright lines exactly as shown (the grey ones are already written). The next character to type is highlighted.",
-		"Leading spaces are filled in for you, and a run of spaces takes one press. A wrong key flashes red; just type the right one.",
-		"Accuracy and speed decide how much of the work gets done in this session.",
+		"Leading spaces are filled in for you, and a run of spaces takes one press. A wrong key gives a gentle hint; just type the right one.",
+		"Accuracy decides the work completed. Take your time.",
 		"Using a Chinese input method? Switch the keyboard to English input first."]
 
 
@@ -80,7 +79,6 @@ func build_round() -> void:
 	col = 0
 	errors = 0
 	typed = 0
-	_line_t = 0.0
 	_skip_spaces(true)
 	UIK.clear(stage)
 	var bg := card(Color8(18, 22, 32), Color8(60, 72, 100))
@@ -141,16 +139,13 @@ func _input(event: InputEvent) -> void:
 
 func _line_done() -> void:
 	var acc := float(typed) / maxf(1.0, float(typed + errors))
-	var cpm := float(typed) / maxf(0.05, _line_t / 60.0)
-	var sp := clampf(cpm / 140.0, 0.35, 1.0)
-	award(acc * (0.6 + 0.4 * sp))
+	award(acc)
 	next_round()
 
 
 func _process(delta: float) -> void:
 	super._process(delta)
 	if phase == "play":
-		_line_t += delta * PersonalLife.response_speed()
 		if _err_flash > 0.0:
 			_err_flash -= delta
 			if view != null and is_instance_valid(view):
@@ -173,7 +168,7 @@ func _draw_view() -> void:
 				if c < col:
 					colr = Color(0.45, 0.85, 0.55)
 				elif c == col:
-					view.draw_rect(Rect2(x - 1, y - 10, CHAR_W + 1, 13), Art.C_SKY if practice_only else Art.C_RED if _err_flash > 0.0 else Art.C_SKY)
+					view.draw_rect(Rect2(x - 1, y - 10, CHAR_W + 1, 13), Art.C_SKY)
 					colr = Color(0.08, 0.08, 0.1)
 				else:
 					colr = Color(0.92, 0.94, 1.0)
