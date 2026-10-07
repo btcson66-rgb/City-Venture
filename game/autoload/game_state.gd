@@ -85,6 +85,7 @@ func template(setup := {}, seed_v := 1) -> Dictionary:
 		"stats": {},
 		"npcs": {},
 		"messages": [],
+		"assistant": {"tasks": {}, "last": {}, "notices": {}, "default": true},
 		"timeline": [],
 		"reports": {"month_closes": []},
 		"world": {"year": 1, "modifiers": []},

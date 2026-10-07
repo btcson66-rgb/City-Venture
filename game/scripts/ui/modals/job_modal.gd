@@ -24,15 +24,17 @@ func build() -> void:
 	top.add_child(UIK.expand())
 	top.add_child(UIK.chip(I18n.t("YOUR JOB") if hired else I18n.t("HIRING"), Art.C_GREEN if hired else Art.C_SKY))
 	body.add_child(UIK.wrap(I18n.t(str(j.get("blurb", ""))), 8, Art.C_SKY, 400))
+	# F6: before the first shifts show only the blurb, the pay and the perk; hours and the ladder live behind "?".
+	var slim := FeatureGate.chapter() <= 3 and not hired
 	var h: Dictionary = DataDB.building(str(j["building"])).get("hours", {})
 	var days := str(h.get("days", "all"))
 	body.add_child(UIK.kv("Pay", I18n.t("$%d / hour · %s per 4-hour shift") % [int(Careers.wage(job_id)), Fmt.money(Careers.shift_pay(job_id))], Art.C_GREEN))
-	body.add_child(UIK.kv("Shifts", I18n.t("Any time %s–%s, %s · %d shift(s) a day") % [h.get("open", ""), h.get("close", ""),
+	if not slim:body.add_child(UIK.kv("Shifts", I18n.t("Any time %s–%s, %s · %d shift(s) a day") % [h.get("open", ""), h.get("close", ""),
 		I18n.t("every day") if days == "all" else I18n.t("Mon–Fri"), int(Careers.rank(job_id).get("shifts_per_day", 1))]))
 	body.add_child(UIK.kv("Perk", I18n.t(str(j.get("perk", {}).get("desc", ""))), Art.C_SKY))
 	# promotion ladder
 	var ladder := UIK.hbox(4)
-	body.add_child(ladder)
+	if not slim:body.add_child(ladder)
 	var ranks: Array = j.get("ranks", [])
 	var ri := Careers.rank_index(job_id)
 	for i in ranks.size():
@@ -45,12 +47,13 @@ func build() -> void:
 		v.add_child(UIK.label(I18n.t(str(r["title"])), 7, col, true))
 		v.add_child(UIK.label(I18n.t("$%d/h · from %d shifts") % [int(r["wage"]), int(r["shifts"])], 6, Art.C_MUTED))
 		ladder.add_child(p)
+	if slim:ladder.free()
 	body.add_child(UIK.label(I18n.t("Shifts worked: %d") % Careers.shifts(job_id), 7, Art.C_MUTED, true))
-	body.add_child(UIK.label("You do the work yourself: the better the shift goes, the more you earn (60% of the wage is guaranteed).", 7, Art.C_SKY))
+	if not slim:body.add_child(UIK.label("You do the work yourself: the better the shift goes, the more you earn (60% of the wage is guaranteed).", 7, Art.C_SKY))
 	var nr := Careers.next_rank(job_id)
 	if not nr.is_empty():
 		body.add_child(UIK.label(I18n.t("%d more shift(s) to %s") % [maxi(0, int(nr["shifts"]) - Careers.shifts(job_id)), I18n.t(str(nr["title"]))], 7, Art.C_SKY))
-	if job_id == "barista":
+	if job_id == "barista" and not slim:
 		body.add_child(UIK.label(I18n.t("No manager review yet — complete a shift.") if Careers.shifts(job_id) == 0 and not Careers.C().get("manager_ratings", {}).has(job_id) else I18n.t("Manager review %d%% · next rank needs %d%%; serve and clean well to improve.") % [roundi(Careers.manager_rating(job_id) * 100), roundi(float(nr.get("manager_rating", 0)) * 100)], 7, Art.C_SKY))
 	# actions
 	if hired:

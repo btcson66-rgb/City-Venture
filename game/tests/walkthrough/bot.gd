@@ -411,9 +411,8 @@ func click(b: Control) -> bool:
 
 
 func click_named(name: String, timeout_s := 5.0) -> bool:
-	if UIRoot.top_modal() is FeatureIntroModal and name not in ["FeaturePracticeNext","FeaturePracticeSkip"]:
-		await click_named("FeaturePracticeNext")
-		await click_named("FeaturePracticeNext")
+	# The first-use hint is non-blocking, but its card could sit over the button: dismiss it first.
+	if name not in ["FeaturePracticeNext","FeaturePracticeSkip"]:FeatureIntroModal.dismiss_all(get_tree())
 	var ok := await until(func(): return button_named(name) != null, timeout_s)
 	if not ok:
 		fail("button '%s' not found" % name)

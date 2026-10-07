@@ -12,7 +12,9 @@ static func S() -> Dictionary:
 ## One-time, data-only old-save conversion: never execute a saved financial choice.
 static func migrate(data: Dictionary) -> void:
 	var state: Dictionary = data.get("phone_messages", {"seq": 1, "agenda": []})
-	if int(state.get("version", 0)) >= 2: return
+	if int(state.get("version", 0)) >= 2:
+		normalize(data)
+		return
 	state["version"] = 2
 	state["seq"] = int(state.get("seq", 1))
 	state["agenda"] = state.get("agenda", [])
@@ -35,6 +37,7 @@ static func migrate(data: Dictionary) -> void:
 			state["seq"] += 1
 		message["category"] = category(message)
 		message["icon"] = "mail"
+	normalize(data)
 	state.erase("expiry")
 	state.erase("cooldowns")
 	state.erase("social")
@@ -44,6 +47,29 @@ static func migrate(data: Dictionary) -> void:
 			var target := {"kind":"map", "place":str(visit.get("location", "")).get_slice(":", 1)}
 			var note := {"id":"VISIT-" + str(visit.get("id", "")), "t":int(visit.get("at", 0)), "from":visit.get("npc", ""), "text":"A friend is waiting. Visit when it suits you.", "read":true, "category":"life", "icon":"people", "target":target}
 			if not data["messages"].any(func(m):return m.get("id", "") == note["id"]):data["messages"].append(note)
+
+## Runs at every load: any message from any older build gets a stable id, category and target (idempotent).
+static func normalize(data: Dictionary) -> void:
+	var state: Dictionary = data.get("phone_messages", {})
+	if not state.has("seq"): state["seq"] = 1
+	data["phone_messages"] = state
+	var taken := {}
+	for message in data.get("messages", []): taken[str(message.get("id", ""))] = true
+	for message in data.get("messages", []):
+		if not message.has("t"): message["t"] = 0
+		if not message.has("read"): message["read"] = true
+		if not message.has("target"):
+			var target := legacy_target(message)
+			if not target.is_empty(): message["target"] = target
+		strip_legacy(message)
+		if str(message.get("id", "")) == "":
+			var n := int(state["seq"])
+			while taken.has("MSG-%d" % n): n += 1
+			message["id"] = "MSG-%d" % n
+			taken[message["id"]] = true
+			state["seq"] = n + 1
+		message["category"] = category(message)
+		if not message.has("icon"): message["icon"] = "mail"
 
 static func strip_legacy(message: Dictionary) -> void:
 	for key in ["replies", "expires", "default_reply", "answered", "expired", "direction", "ctx"]:
@@ -133,6 +159,8 @@ static func destination(message: Dictionary) -> Control:
 	var target: Dictionary = message.get("target", {})
 	match str(target.get("kind", "")):
 		"company":
+			# A Go button must never land on a hidden tab.
+			FeatureGate.grant("os_" + str(target.get("tab", "overview")))
 			var screen := CompanyOS.new("notification")
 			screen.tab = str(target.get("tab", "overview"))
 			screen.sel_contract = str(target.get("id", ""))

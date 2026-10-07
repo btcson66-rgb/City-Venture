@@ -7,21 +7,39 @@ static var _busy := false
 static func cfg() -> Dictionary:return DataDB.economy["assistant"]
 static func S() -> Dictionary:
 	if not GameState.data.has("assistant"):
-		GameState.data["assistant"] = {"tasks":{},"last":{},"notices":{}}
+		# A brand-new game starts with the assistant on; loaded saves get "default": false from the migration.
+		GameState.data["assistant"] = {"tasks":{},"last":{},"notices":{},"default":true}
 	var state: Dictionary = GameState.data["assistant"]
 	for field in ["tasks","last","notices"]:
 		if not state.has(field):state[field] = {}
+	var fallback := bool(state.get("default", true))
 	for id in TASKS:
-		if not state["tasks"].has(id):state["tasks"][id] = true
+		if not state["tasks"].has(id):state["tasks"][id] = fallback
 	return state
+## Saves made before the assistant existed keep every chore manual, so no veteran's cash moves unasked.
+static func migrate(data: Dictionary) -> void:
+	if data.has("assistant"):return
+	var tasks := {}
+	for id in TASKS:tasks[id] = false
+	data["assistant"] = {"tasks":tasks,"last":{},"notices":{},"default":false,"intro_pending":true}
+## One calm explanation, posted once after such a save loads.
+static func after_load() -> void:
+	if not GameState.has_game() or not GameState.data.has("assistant"):return
+	var state: Dictionary = GameState.data["assistant"]
+	if not state.get("intro_pending", false):return
+	state.erase("intro_pending")
+	GameState.add_message("assistant",I18n.t("Meet your assistant: it can restock, pay bills and file taxes for you. Everything stays as you left it. To turn chores on, open Settings, then the Assistant page."),{"category":"work"})
 static func enabled(id: String) -> bool:
 	if testing and not GameState.flag("test_assistant_run"):return false
 	return bool(S()["tasks"].get(id, false))
 static func set_task(id: String, value: bool) -> void:
 	if TASKS.has(id):S()["tasks"][id] = value
 	if id == "fx" and GlobalMarket.live(GameState.company_id()):GlobalMarket.company()["auto_fx"] = value
-static func set_all(value: bool) -> void:
-	for id in TASKS:set_task(id,value)
+## `listed_only` flips just the chores the player can currently see (the Assistant page list).
+static func set_all(value: bool, listed_only := false) -> void:
+	for id in TASKS:
+		if listed_only and not available(str(id)):continue
+		set_task(id,value)
 static func toggle(parent: Node, id: String) -> void:
 	var button := CheckBox.new()
 	button.name = "Assistant_"+id
@@ -36,8 +54,11 @@ static func master(parent: Node) -> void:
 	var all := CheckBox.new()
 	all.name = "AssistantAll"
 	all.text = I18n.t("Let the assistant handle all chores")
-	all.button_pressed = S()["tasks"].values().all(func(v):return bool(v))
-	all.toggled.connect(func(on):set_all(on);UIRoot.top_modal().rebuild())
+	all.button_pressed = TASKS.keys().all(func(id):return not available(str(id)) or bool(S()["tasks"][id]))
+	all.toggled.connect(func(on):
+		set_all(on,true)
+		var modal = UIRoot.top_modal()
+		if modal != null:modal.rebuild())
 	parent.add_child(all)
 static func overview(parent: Node) -> void:
 	master(parent)
@@ -54,33 +75,93 @@ static func available(id: String) -> bool:
 		"maintenance":return not Assets.S()["items"].is_empty() or Logistics.has_van()
 		"customs","fx":return FeatureGate.unlocked("overseas") or TradeIndustry.is_running()
 	return false
-static func bill(entity: String, category: String, amount: float, narrative: String, source: Dictionary) -> void:
-	if bool(S()["tasks"]["bills"]):
+## Owned entities whose bills the player can see and pay.
+static func owners() -> Array:
+	return ["player"] + CompanyPortfolio.ids()
+## Records a real bill. Returns true when it was paid straight away; otherwise it waits (with a due date) as a payable.
+static func bill(entity: String, category: String, amount: float, narrative: String, source: Dictionary) -> bool:
+	if bool(S()["tasks"]["bills"]) and Ledger.cash(entity) >= amount:
 		Ledger.expense(entity,category,amount,narrative,source)
-		return
+		return true
 	var bills: Array = S().get("bills",[])
 	S()["bills"] = bills
 	Ledger.post(entity,narrative,[{"acct":"exp:"+category,"dr":amount},{"acct":"accounts_payable","cr":amount}],source)
-	bills.append({"entity":entity,"amount":amount,"narrative":narrative,"source":source.duplicate(true),"paid":false})
-static func pay_bill(index: int) -> void:
+	var due := Clock.now()+int(cfg().get("bill_due_days",7))*Clock.DAY
+	bills.append({"entity":entity,"amount":amount,"narrative":narrative,"source":source.duplicate(true),"paid":false,"due":due})
+	if bool(S()["tasks"]["bills"]):_short_notice(entity)
+	return false
+## Exactly one notification while an entity's auto-paid bills wait for cash.
+static func _short_notice(entity: String) -> void:
+	var notices: Dictionary = S().get("bill_notices",{})
+	S()["bill_notices"] = notices
+	if notices.has(entity):return
+	notices[entity] = true
+	var who := I18n.t("Your personal account") if entity == "player" else GameState.entity_name(entity)
+	GameState.add_message("assistant",I18n.t("%s does not have enough cash to pay a bill. It is waiting in Finance; add funds or pay it when you can.") % who,{"category":"work","target":{"kind":"company","tab":"finance"}})
+static func unpaid(entity := "") -> Array:
+	var result := []
+	for index in S().get("bills",[]).size():
+		var item: Dictionary = S()["bills"][index]
+		if not item["paid"] and (entity == "" or item["entity"] == entity):result.append(index)
+	return result
+static func pay_bill(index: int) -> bool:
 	var bills: Array = S().get("bills",[])
-	if index < 0 or index >= bills.size():return
+	if index < 0 or index >= bills.size():return false
 	var item: Dictionary = bills[index]
-	if item["paid"] or Ledger.cash(str(item["entity"])) < float(item["amount"]):return
+	if item["paid"] or Ledger.cash(str(item["entity"])) < float(item["amount"]):return false
 	Ledger.post(item["entity"],item["narrative"],[{"acct":"accounts_payable","dr":item["amount"]},{"acct":"cash","cr":item["amount"]}],{"type":"assistant_bill"})
 	item["paid"] = true
+	if S().get("bill_notices",{}).has(item["entity"]) and unpaid(str(item["entity"])).is_empty():S()["bill_notices"].erase(item["entity"])
 	if item.get("source",{}).get("type","")=="rent":
 		GameState.inc_stat("rent_paid")
 		for entry in Living.D()["rent_history"]:
 			if not entry.get("paid",true) and float(entry["amount"])==float(item["amount"]):
 				entry["paid"] = true
 				break
+	return true
+## Pays every bill the owning entity can afford, in order. Returns how many were paid.
+static func pay_all() -> int:
+	var paid := 0
+	for index in unpaid():
+		if pay_bill(index):paid += 1
+	return paid
+## Overdue bills collect one modest, flat late fee each (never compounding, never paid into a spiral).
+static func overdue(t: int) -> void:
+	var fee := float(cfg().get("bill_late_fee",10))
+	var charged := 0
+	for index in unpaid():
+		var item: Dictionary = S()["bills"][index]
+		if not item.has("due"):
+			item["due"] = t+int(cfg().get("bill_due_days",7))*Clock.DAY
+			continue
+		if item.get("late",false) or t <= int(item["due"]):continue
+		item["late"] = true
+		var entity := str(item["entity"])
+		if entity != "player" and not Tax.valid(entity):continue
+		Ledger.expense(entity,"late_fees",fee,I18n.t("Late bill fee"),{"type":"fee"},"cash" if Ledger.cash(entity) >= fee else "accounts_payable")
+		charged += 1
+	if charged > 0:
+		GameState.add_message("assistant",I18n.t("A bill is past its due date. A small late fee was added; pay it from Finance when you can."),{"category":"work","target":{"kind":"company","tab":"finance"}})
 static func bills_ui(parent: Node) -> void:
 	var bills: Array = S().get("bills",[])
+	var owned := owners()
+	var shown := []
 	for index in bills.size():
 		var item: Dictionary = bills[index]
-		if item["paid"] or item["entity"] not in ["player",GameState.company_id()]:continue
-		var button := UIK.button(I18n.t("Pay bill · %s") % Fmt.money(float(item["amount"])),func():pay_bill(index);UIRoot.top_modal().rebuild())
+		if not item["paid"] and item["entity"] in owned:shown.append(index)
+	if shown.size() > 1:
+		var total := 0.0
+		for index in shown:total += float(bills[index]["amount"])
+		var all := UIK.button(I18n.t("Pay all bills · %s") % Fmt.money(total),func():pay_all();UIRoot.top_modal().rebuild())
+		all.name = "AssistantPayAll"
+		all.disabled = shown.all(func(i):return Ledger.cash(str(bills[i]["entity"])) < float(bills[i]["amount"]))
+		parent.add_child(all)
+	for index in shown:
+		var item: Dictionary = bills[index]
+		var text := I18n.t("Pay bill · %s") % Fmt.money(float(item["amount"]))
+		if item.has("due"):text += " · " + I18n.t("due %s") % Clock.fmt_short(int(item["due"]))
+		if item["entity"] != "player":text += " · " + GameState.entity_name(str(item["entity"]))
+		var button := UIK.button(text,func():pay_bill(index);UIRoot.top_modal().rebuild())
 		button.name = "AssistantBill_"+str(index)
 		button.disabled = Ledger.cash(str(item["entity"])) < float(item["amount"])
 		button.tooltip_text = I18n.t(str(item["narrative"]))
@@ -97,7 +178,10 @@ static func on_hour(t: int, h: int) -> void:
 	if _busy or not GameState.has_game() or (testing and not GameState.flag("test_assistant_run")):return
 	_busy = true
 	if enabled("bills"):
-		for index in S().get("bills",[]).size():pay_bill(index)
+		for index in unpaid():pay_bill(index)
+		# Still short of cash: one calm notice per entity, never an overdraft.
+		for entity in owners():
+			if not unpaid(str(entity)).is_empty():_short_notice(str(entity))
 	if enabled("packing"):
 		_fulfil()
 		for contract in Contracts.C().values():

@@ -828,10 +828,6 @@ func popups() -> void:
 		if m is IndustryGuideModal:
 			await bot.click_named("IndustryGuideSkip")
 			continue
-		if m is FeatureIntroModal:
-			await bot.click_named("FeaturePracticeNext")
-			await bot.click_named("FeaturePracticeNext")
-			continue
 		if m is DecisionModal:
 			var inst: Dictionary = m.inst
 			await bot.shot("decision_" + str(inst["id"]))
@@ -983,11 +979,7 @@ func close_modal() -> void:
 	for attempt in range(3):
 		var m = UIRoot.top_modal()
 		if m == null: return
-		if m is FeatureIntroModal:
-			await bot.click_named("FeaturePracticeSkip")
-			await bot.wait(0.2)
-			m = UIRoot.top_modal()
-			if m == null:return
+		FeatureIntroModal.dismiss_all(UIRoot.get_tree())
 		if m is DecisionModal or m is MonthCloseModal or m is InfoModal or m is PoachModal:
 			await popups()
 			m = UIRoot.top_modal()

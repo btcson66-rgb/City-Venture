@@ -64,7 +64,8 @@ func test_hospital_runs_existing_invoice_scheduler_and_living_costs() -> void:
 	hit()
 	TrafficSafety.treat()
 	runner.eq(g["status"],"paid","existing business payment ran during admission")
-	runner.check(Ledger.balance("player","exp:living") > 0,"daily costs ran")
+	Clock.advance(7*Clock.DAY)
+	runner.check(Ledger.balance("player","exp:living") > 0,"living costs (now one weekly bill) ran")
 	runner.eq(Ledger.balance("player","accounts_receivable"),0.0,"invoice collected exactly once")
 func test_save_roundtrip_and_old_save_lazy_default() -> void:
 	runner.check(not GameState.data.has("traffic_safety"),"old state no field")

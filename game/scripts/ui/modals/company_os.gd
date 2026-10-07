@@ -152,7 +152,7 @@ func build() -> void:
 	var sc := UIK.scroll(content, Vector2(500, 160))
 	sc.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(sc)
-	var guide := UIK.button(I18n.t("First-use guide"), func():UIRoot.open_modal(FeatureIntroModal.new("os_"+tab)))
+	var guide := UIK.button(I18n.t("First-use guide"), func():FeatureIntroModal.show_in(self, "os_"+tab))
 	guide.name = "FeatureGuideReplay"
 	content.add_child(guide)
 	var chores: Array = {"operations":["restock","packing","returns"],"finance":["tax","fx","bills"],"people":["roster"],"contracts":["restock","packing"],"cafe":["cafe_supplies","hygiene","roster"],"logistics":["maintenance","roster"],"manufacturing":["maintenance","restock","packing"],"hotel":["maintenance"],"automotive":["maintenance"],"energy":["maintenance"],"international_trade":["customs"],"governance":["tax","renewals"]}.get(tab,[])
@@ -298,11 +298,13 @@ func _tab_overview() -> void:
 		alerts.append(["warning", I18n.t("Decision pending: %s") % I18n.t(DataDB.events[EventEngine.next_pending()["id"]]["presentation"].get("title", ""))])
 	var dom := int(Clock.date()["day"])
 	if dom < 14 and dom >= 9:
-		alerts.append(["home", I18n.t("Home rent %s due on the 14th.") % Fmt.money0(1250)])
+		alerts.append(["home", I18n.t("Home rent %s due on the 14th.") % Fmt.money0(Living.home_rent())])
 	if GameState.data["ecommerce"]["listings"].is_empty():
 		alerts.append(["objective", "No listings yet. Buy stock (Operations), then list it (Sales)."])
 	if alerts.is_empty():
 		alerts.append(["check", "All quiet. Go outside."])
+	# F6: early chapters show the three most useful reminders; the rest wait behind the "?" help.
+	if FeatureGate.chapter() <= 3 and alerts.size() > 3:alerts = alerts.slice(0, 3)
 	for a2 in alerts:
 		var h := UIK.hbox(4)
 		h.add_child(UIK.icon(a2[0], 12))
@@ -452,9 +454,6 @@ func _tab_sales() -> void:
 			GlobalMarketUI.sales(self, content)
 			return
 	else:sales_page = "domestic"
-	_concepts(["marketplace_fee", "payout_schedule", "ads_cpc", "price_elasticity", "product_photo"])
-
-
 	if Ecommerce.is_personal():
 		var capbar := ProgressBar.new()
 		capbar.max_value = Ecommerce.seller_cap()
@@ -512,8 +511,13 @@ func _tab_sales() -> void:
 		h2.add_child(UIK.button("Pause" if l["active"] else "Resume", func(): Ecommerce.set_active(l["id"], not l["active"]); rebuild()))
 		v.add_child(h2)
 		var margin := float(l["price"]) * 0.9 - Ecommerce.avg_cost(Ecommerce.best_location(l["product"]) if Ecommerce.best_location(l["product"]) != "" else Living.home(), l["product"]) - Ecommerce.ship_cost({"product": l["product"]}, "economy")
-		v.add_child(UIK.label(I18n.t("Market ~%s · expect ~%.1f orders/day · %d views · %d orders · in stock %d · unit margin after fee+shipping ≈ %s") % [
-			Fmt.money(float(p["ref_price"])), Ecommerce.lambda_day(l), int(l["views"]), int(l["orders"]), Ecommerce.available_anywhere(l["product"]), Fmt.money(margin)], 7, Art.C_MUTED))
+		# F6: three numbers on the card; the full breakdown sits behind the hover and the "?" help.
+		var stats := UIK.label(I18n.t("In stock %d · ~%.1f orders/day · margin ≈ %s") % [Ecommerce.available_anywhere(l["product"]), Ecommerce.lambda_day(l), Fmt.money(margin)], 7, Art.C_MUTED)
+		stats.name = "ListingStats_" + str(l["product"])
+		stats.mouse_filter = Control.MOUSE_FILTER_PASS
+		stats.tooltip_text = I18n.t("Market ~%s · expect ~%.1f orders/day · %d views · %d orders · in stock %d · unit margin after fee+shipping ≈ %s") % [
+			Fmt.money(float(p["ref_price"])), Ecommerce.lambda_day(l), int(l["views"]), int(l["orders"]), Ecommerce.available_anywhere(l["product"]), Fmt.money(margin)]
+		v.add_child(stats)
 		content.add_child(card)
 	# new listings
 	var unlisted: Array = []
@@ -777,6 +781,8 @@ func _buy(sid: String, pid: String, key: String, terms: bool) -> void:
 # ============================================================== INVENTORY
 func _tab_inventory() -> void:
 	_concepts(["avg_cost", "defect_rate"])
+	# F6: the first chapters show three numbers per product (on hand, average cost, value); the rest wait for later chapters.
+	var slim := FeatureGate.chapter() <= 3
 	for loc in Ecommerce.stock_locations():
 		_section(Ecommerce.location_name(loc))
 		var cap := Ecommerce.location_capacity(loc)
@@ -789,7 +795,7 @@ func _tab_inventory() -> void:
 		content.add_child(UIK.kv("Space", I18n.t("%d / %d units") % [used, cap], Art.C_MUTED, 7))
 		content.add_child(bar)
 		var hdr := UIK.hbox(4)
-		for c in [["Product", 150], ["On hand", 60], ["Reserved", 60], ["Avg cost", 70], ["Value", 70], ["Incoming", 60]]:
+		for c in [["Product", 150], ["On hand", 60], ["Reserved", 60], ["Avg cost", 70], ["Value", 70], ["Incoming", 60]].filter(func(c):return not slim or c[0] not in ["Reserved", "Incoming"]):
 			var l := UIK.label(c[0], 7, Art.C_DIM, true)
 			l.custom_minimum_size = Vector2(c[1], 0)
 			hdr.add_child(l)
@@ -803,15 +809,17 @@ func _tab_inventory() -> void:
 			if q == 0 and inc == 0:
 				continue
 			var row := UIK.hbox(4)
-			for c2 in [[I18n.t(DataDB.product(pid)["name"]), 150], [I18n.t("%d units") % q, 60], [I18n.t("%d units") % Ecommerce.reserved(loc, pid), 60], [Fmt.money0(Ecommerce.avg_cost(loc, pid)), 70],
-					[Fmt.money0(q * Ecommerce.avg_cost(loc, pid)), 70], [I18n.t("%d units") % inc, 60]]:
+			var cells := [[I18n.t(DataDB.product(pid)["name"]), 150], [I18n.t("%d units") % q, 60], [I18n.t("%d units") % Ecommerce.reserved(loc, pid), 60], [Fmt.money0(Ecommerce.avg_cost(loc, pid)), 70],
+					[Fmt.money0(q * Ecommerce.avg_cost(loc, pid)), 70], [I18n.t("%d units") % inc, 60]]
+			if slim:cells = [cells[0], cells[1], cells[3], cells[4]]
+			for c2 in cells:
 				var l2 := UIK.label(c2[0], 8, Art.C_WHITE)
 				l2.custom_minimum_size = Vector2(c2[1], 0)
 				row.add_child(l2)
 			content.add_child(row)
 	content.add_child(UIK.sep())
 	content.add_child(UIK.kv("Total stock value (books)", Fmt.money0(Ledger.balance(GameState.business_entity(), "inventory")), Art.C_SKY, 8, true))
-	content.add_child(UIK.wrap("Inventory is cash you can't spend. The ledger values it at average cost; a liquidator pays about 40% of that.", 7, Art.C_DIM, 480))
+	if not slim:content.add_child(UIK.wrap("Inventory is cash you can't spend. The ledger values it at average cost; a liquidator pays about 40% of that.", 7, Art.C_DIM, 480))
 
 
 # ============================================================== PEOPLE

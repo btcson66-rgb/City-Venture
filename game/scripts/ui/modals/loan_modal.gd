@@ -44,13 +44,22 @@ func build() -> void:
 			row.name = "Eligibility_" + str(requirement["id"])
 			left.add_child(row)
 			var mark := "✓" if requirement["ok"] else "✗"
-			row.add_child(UIK.wrap(mark + " " + I18n.t(requirement["label"]), 8, Art.C_GREEN if requirement["ok"] else Art.C_RED, 240))
+			# F6: two lines per requirement (verdict with the one gap number, then the next step); the full figures sit in the tooltip.
+			var gap := ""
+			var detail := ""
 			if requirement["id"] == "capacity":
-				row.add_child(UIK.wrap(I18n.t("Current %s · required %s · gap %s") % [Fmt.money0(float(requirement["value"])), Fmt.money0(float(requirement["need"])), Fmt.money0(float(requirement["gap"]))], 7, Art.C_WHITE, 240))
+				gap = I18n.t("gap %s") % Fmt.money0(float(requirement["gap"]))
+				detail = I18n.t("Current %s · required %s · gap %s") % [Fmt.money0(float(requirement["value"])), Fmt.money0(float(requirement["need"])), Fmt.money0(float(requirement["gap"]))]
 			elif requirement["id"] == "age":
-				row.add_child(UIK.wrap(I18n.t("Current %d days · required %d days · %d more days") % [int(requirement["value"]), int(requirement["need"]), int(requirement["gap"])], 7, Art.C_WHITE, 240))
+				gap = I18n.t("%d more days") % int(requirement["gap"])
+				detail = I18n.t("Current %d days · required %d days · %d more days") % [int(requirement["value"]), int(requirement["need"]), int(requirement["gap"])]
 			elif not requirement["id"] in ["company", "account", "arrears"]:
-				row.add_child(UIK.wrap(I18n.t("Current %s · required %s · gap %s") % [I18n.t("%d points") % int(requirement["value"]), I18n.t("%d points") % int(requirement["need"]), I18n.t("%d points") % int(requirement["gap"])], 7, Art.C_WHITE, 240))
+				gap = I18n.t("gap %s") % (I18n.t("%d points") % int(requirement["gap"]))
+				detail = I18n.t("Current %s · required %s · gap %s") % [I18n.t("%d points") % int(requirement["value"]), I18n.t("%d points") % int(requirement["need"]), I18n.t("%d points") % int(requirement["gap"])]
+			var head := UIK.wrap(mark + " " + I18n.t(requirement["label"]) + ((" · " + gap) if gap != "" and not requirement["ok"] else ""), 8, Art.C_GREEN if requirement["ok"] else Art.C_RED, 240)
+			head.tooltip_text = detail
+			head.mouse_filter = Control.MOUSE_FILTER_PASS
+			row.add_child(head)
 			row.add_child(UIK.wrap(requirement["hint_action"], 7, Art.C_SKY, 240))
 		left.add_child(UIK.label("WHAT YOUR BOOKS SUPPORT", 7, Art.C_DIM, true))
 		for part in Bank.lending_basis()["parts"]:

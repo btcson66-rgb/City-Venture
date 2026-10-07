@@ -265,6 +265,7 @@ func load_data(slot: int) -> bool:
 	Growth.check(true)
 	GameState.unpack_rng()
 	Clock.clear_pauses()
+	AssistantPolicy.after_load()
 	loaded.emit(slot)
 	EventBus.state_loaded.emit()
 	return true
@@ -318,6 +319,7 @@ func autosave() -> void:
 
 func _migrate(d: Dictionary) -> Dictionary:
 	# a save from an older build: add whatever sections and fields this build has that it doesn't
+	AssistantPolicy.migrate(d)   # before the template fill: a missing assistant section means a pre-assistant save
 	_fill_missing(d, GameState.template())
 	CompanyPortfolio.migrate(d)
 	# Before era-specific receipts, the generic news flag referred to the save's current era.
