@@ -78,8 +78,6 @@ func _physics_process(_delta: float) -> void:
 	if moving:
 		facing = CharacterRig.dir_from_vector(v, facing)
 		rig.set_dir(facing)
-		rig.anim_speed = 12.0 if speed > WALK_SPEED else 8.0
-	rig.set_walking(moving)
 	var before := global_position
 	move_and_slide()
 	if moving and global_position.distance_to(before) < speed * _delta * 0.25:
@@ -90,7 +88,11 @@ func _physics_process(_delta: float) -> void:
 			click_route.clear()
 	else:
 		_stuck_seconds = 0.0
-	PersonalLife.movement(global_position.distance_to(before))
+	var travelled := global_position.distance_to(before)
+	moving = travelled > 0.01
+	rig.anim_speed = clampf(travelled / maxf(_delta, 0.001) / 8.0, 0.0, 16.0)
+	rig.set_walking(moving)
+	PersonalLife.movement(travelled)
 	_update_focus()
 
 

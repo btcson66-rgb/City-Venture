@@ -225,7 +225,7 @@ func _quick_button(icon_name: String, text: String, key: String, cb: Callable) -
 
 func _fit_quick(b: Button, h: HBoxContainer) -> void:
 	h.reset_size()
-	b.custom_minimum_size = (h.get_combined_minimum_size() + Vector2(6, 4)).max(Vector2(44, 44))
+	b.custom_minimum_size = (h.get_combined_minimum_size() + Vector2(6, 4)).max(InputAccess.TARGET if InputAccess.touch_mode else Vector2(24, 18))
 
 
 func relabel() -> void:

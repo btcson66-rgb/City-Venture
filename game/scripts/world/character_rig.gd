@@ -22,7 +22,7 @@ var _frame := 0
 var _layers: Array[Sprite2D] = []
 var _shadow: Sprite2D
 var _group: CanvasGroup
-static var _outline_mat: ShaderMaterial
+var _outline_mat: ShaderMaterial
 var appearance: Dictionary = {}
 var outfit := "startup_casual"
 var expression := "neutral"
@@ -123,7 +123,7 @@ func _outline_material() -> ShaderMaterial:
 		_outline_mat.shader = load("res://shaders/char_outline.gdshader")
 	if is_inside_tree():
 		var sc := get_viewport().get_final_transform().get_scale().x
-		_outline_mat.set_shader_parameter("px_scale", maxf(1.0, roundf(sc)))
+		_outline_mat.set_shader_parameter("px_scale", maxf(1.0, sc * 0.65))
 	return _outline_mat
 
 

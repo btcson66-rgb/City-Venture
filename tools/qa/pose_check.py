@@ -112,8 +112,6 @@ def main():
             walk, wparts = compose(names, "", row, 0)
             base_skin = bare_torso(wparts, body)
             for pose, nf in POSES.items():
-                if not pose:
-                    continue
                 for f in range(nf):
                     im, parts = compose(names, pose, row, f)
                     tag = "%s/%s %s %s f%d" % (outfit, pres, pose, d, f + 1)

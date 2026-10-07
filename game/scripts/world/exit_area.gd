@@ -21,11 +21,10 @@ func setup(d: Dictionary, scene: Node) -> void:
 	var ws := scene as WorldScene
 	var side := str(d.get("direction", "E" if ws == null or float(r[0]) > ws.size_px.x / 2.0 else "W"))
 	var directions := {"N": Vector2.UP, "E": Vector2.RIGHT, "S": Vector2.DOWN, "W": Vector2.LEFT}
-	var arrows := {"N": "↑", "E": "→", "S": "↓", "W": "←"}
 	var dname := I18n.t(str(DataDB.districts.get(d["to"], {}).get("name", d["to"])))
 	var mark := ExitMarker.new()
 	mark.name = "ExitSign_" + str(d["to"])
-	mark.setup(Rect2(float(r[0]), float(r[1]), float(r[2]), float(r[3])), directions[side], str(arrows[side]) + " " + dname)
+	mark.setup(Rect2(float(r[0]), float(r[1]), float(r[2]), float(r[3])), directions[side], dname)
 	add_child(mark)
 
 

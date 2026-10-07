@@ -21,6 +21,8 @@ var _full := ""
 var active := false
 var _waiting_choice := false
 var _subtitle_elapsed := 0.0
+var content_scroll: ScrollContainer
+var dialogue_content: VBoxContainer
 
 
 func _ready() -> void:
@@ -30,12 +32,15 @@ func _ready() -> void:
 	panel = UIK.panel("ui/panel", 7)
 	panel.position = Vector2(40, 262)
 	panel.size = Vector2(560, 90)
-	panel.custom_minimum_size = Vector2(560, 90)
+	panel.custom_minimum_size = Vector2.ZERO
 	panel.mouse_filter = Control.MOUSE_FILTER_STOP
 	panel.gui_input.connect(_on_panel_input)
 	add_child(panel)
+	var outer := UIK.vbox(2)
+	panel.add_child(outer)
 	var h := UIK.hbox(8)
-	panel.add_child(h)
+	h.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	outer.add_child(h)
 	var pf := Control.new()
 	pf.custom_minimum_size = Vector2(66, 66)
 	pf.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -52,7 +57,11 @@ func _ready() -> void:
 	pf.add_child(portrait)
 	var v := UIK.vbox(2)
 	v.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	h.add_child(v)
+	dialogue_content = v
+	content_scroll = UIK.scroll(v, Vector2.ZERO)
+	content_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	content_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	h.add_child(content_scroll)
 	var nh := UIK.hbox(4)
 	v.add_child(nh)
 	phone_badge = UIK.icon("phone", 12)
@@ -60,13 +69,13 @@ func _ready() -> void:
 	name_label = UIK.title("", 11, Art.C_SKY)
 	name_label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED   # player names are never msgids
 	nh.add_child(name_label)
-	text_label = UIK.wrap("", 9, Art.C_WHITE, 440)
+	text_label = UIK.wrap("", 9, Art.C_WHITE, 0)
 	v.add_child(text_label)
 	choice_box = UIK.vbox(2)
 	v.add_child(choice_box)
 	hint = UIK.label("E / click ›", 7, Art.C_DIM)
-	hint.position = Vector2(540, 338)
-	add_child(hint)
+	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	outer.add_child(hint)
 
 
 func play(id: String, done := Callable()) -> void:
@@ -180,7 +189,19 @@ func _end() -> void:
 		cb.call()
 
 
+func _fit_dialogue() -> void:
+	var view := get_viewport_rect().size
+	var width := minf(560.0, view.x - 24.0)
+	var height := clampf(dialogue_content.get_combined_minimum_size().y + 28.0, 96.0, maxf(96.0, view.y * 0.55))
+	var target := Vector2(width, height)
+	if panel.size != target:
+		panel.size = target
+	panel.position = Vector2((view.x - panel.size.x) / 2.0, view.y - panel.size.y - 8.0)
+
+
 func _process(delta: float) -> void:
+	if visible:
+		_fit_dialogue()
 	hint.text = Preferences.key_caption("interact") + " / " + I18n.t("click") + " ›"
 	if active and not _waiting_choice and text_label.visible_characters == -1 and UIRoot.modal_layer.get_child_count() == 0:
 		var delay := float(Preferences.values["subtitle_seconds"])

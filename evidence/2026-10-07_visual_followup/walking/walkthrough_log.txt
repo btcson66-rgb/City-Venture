@@ -1,0 +1,33 @@
+   2.3s [6月1日（週日） 下午 2:00]   click [ToggleWalkingRoutes] Walking routes
+   2.9s [6月1日（週日） 下午 2:01]   ok  actual button opens walking diagram
+   3.0s [6月1日（週日） 下午 2:01]   shot 01_city_walking_connections.png
+   3.0s [6月1日（週日） 下午 2:01]   ok  Euler circuit includes every directed walking link
+   3.0s [6月1日（週日） 下午 2:01] STEP Walking riverside > startup_hub
+   7.3s [6月1日（週日） 下午 2:08]   shot 02_exit_sign_E_riverside.png
+   8.6s [6月1日（週日） 下午 2:22]   ok  actual walking transition to startup_hub
+   9.1s [6月1日（週日） 下午 2:22]   ok  arrival does not retrigger a return
+   9.1s [6月1日（週日） 下午 2:22] STEP Walking startup_hub > riverside
+  10.1s [6月1日（週日） 下午 2:24]   shot 03_exit_sign_W_startup_hub.png
+  11.2s [6月1日（週日） 下午 2:37]   ok  actual walking transition to riverside
+  11.7s [6月1日（週日） 下午 2:38]   ok  arrival does not retrigger a return
+  11.7s [6月1日（週日） 下午 2:38] STEP Walking riverside > civic_center
+  14.8s [6月1日（週日） 下午 2:43]   shot 04_exit_sign_N_riverside.png
+  15.9s [6月1日（週日） 下午 2:55]   ok  actual walking transition to civic_center
+  16.4s [6月1日（週日） 下午 2:56]   ok  arrival does not retrigger a return
+  16.4s [6月1日（週日） 下午 2:56] STEP Walking civic_center > riverside
+  17.0s [6月1日（週日） 下午 2:57]   shot 05_exit_sign_S_civic_center.png
+  18.2s [6月1日（週日） 下午 3:10]   ok  actual walking transition to riverside
+  18.7s [6月1日（週日） 下午 3:11]   ok  arrival does not retrigger a return
+  18.7s [6月1日（週日） 下午 3:11] STEP Walking riverside > financial
+  20.7s [6月1日（週日） 下午 3:23]   ok  actual walking transition to financial
+  21.2s [6月1日（週日） 下午 3:23]   ok  arrival does not retrigger a return
+  21.2s [6月1日（週日） 下午 3:23] STEP Walking financial > riverside
+  22.9s [6月1日（週日） 下午 3:35]   ok  actual walking transition to riverside
+  23.4s [6月1日（週日） 下午 3:36]   ok  arrival does not retrigger a return
+  23.4s [6月1日（週日） 下午 3:36] STEP Walking riverside > harbor
+  87.6s [6月1日（週日） 下午 3:48] FAIL could not reach (88.0, 434.0) (at (1560.912, 468.334))
+ 147.7s [6月1日（週日） 下午 3:48] FAIL could not reach (8.0, 434.0) (at (1560.912, 468.334))
+ 155.7s [6月1日（週日） 下午 3:48] FAIL actual walking transition to harbor
+ 155.7s [6月1日（週日） 下午 3:48] Actual destination: riverside
+ 155.8s [6月1日（週日） 下午 3:48]   shot 06_failed_exit_riverside_harbor.png
+ 155.8s [6月1日（週日） 下午 3:48] BOT FINISHED — 3 failure(s) · 155.8s real

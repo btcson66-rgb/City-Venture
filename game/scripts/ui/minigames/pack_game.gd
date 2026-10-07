@@ -61,6 +61,15 @@ func need_box() -> String:
 
 
 func build_round() -> void:
+	# A plain Control cannot report its children's height to the modal scroll.
+	var old_stage := stage
+	stage = UIK.vbox(4)
+	stage.name = "PackingStage"
+	stage.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	stage.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	old_stage.get_parent().add_child(stage)
+	old_stage.get_parent().move_child(stage, old_stage.get_index())
+	old_stage.queue_free()
 	box = ""
 	placements = []
 	selected = 0
@@ -91,6 +100,7 @@ func _layout() -> void:
 	UIK.clear(stage)
 	var o := _order()
 	var h := UIK.hbox(12)
+	h.name = "PackingColumns"
 	stage.add_child(h)
 	var left := UIK.vbox(4)
 	left.custom_minimum_size = Vector2(250, 0)
@@ -108,7 +118,7 @@ func _layout() -> void:
 	sv.add_child(UIK.label_tip("Grid packing and postage", "grid_packing", 8, Color8(30,30,30)))
 	left.add_child(slip)
 	var view := BoxView.new()
-	view.custom_minimum_size = Vector2(250, 150)
+	view.custom_minimum_size = Vector2(250, 112)
 	view.game = self
 	view.name = "PackingGrid"
 	left.add_child(view)
@@ -121,8 +131,9 @@ func _layout() -> void:
 	left.add_child(seam_row)
 	# steps
 	var scroll := ScrollContainer.new()
-	scroll.custom_minimum_size = Vector2(310, 210)
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.custom_minimum_size = Vector2(310, 0)
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 	h.add_child(scroll)
 	var right := UIK.vbox(5)
 	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -133,9 +144,9 @@ func _layout() -> void:
 		right.add_child(UIK.label(I18n.t("Placed %d/%d · damage risk %d%%") % [placements.size(), Packing.pieces(o).size(), roundi(Packing.damage(o, pad) * 100)], 8, Art.C_MUTED))
 	var pr := UIK.hbox(4)
 	var pl := UIK.label("2  Padding", 8, Art.C_MUTED, true)
-	pl.custom_minimum_size = Vector2(70, 0)
+	pl.custom_minimum_size = Vector2(60, 0)
 	pr.add_child(pl)
-	var pb := UIK.button("Add bubble wrap", _pad, "", 130)
+	var pb := UIK.button("Add bubble wrap", _pad, "", 115)
 	pb.name = "Pad"
 	pb.disabled = box == ""
 	pr.add_child(pb)

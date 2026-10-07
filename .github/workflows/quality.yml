@@ -52,7 +52,7 @@ jobs:
           python-version: '3.12'
       - name: Install tooling
         run: |
-          pip install opencc-python-reimplemented
+          pip install opencc-python-reimplemented pillow
           curl --fail --location --retry 3 https://github.com/godotengine/godot/releases/download/4.5.1-stable/Godot_v4.5.1-stable_linux.x86_64.zip -o /tmp/godot.zip
           unzip -q /tmp/godot.zip -d /tmp/godot
           chmod +x /tmp/godot/Godot_v4.5.1-stable_linux.x86_64
@@ -62,6 +62,9 @@ jobs:
       - name: Wiki coverage
         if: '!cancelled()'
         run: python tools/wiki_check.py
+      - name: Character pose assembly
+        if: '!cancelled()'
+        run: python tools/qa/pose_check.py
       - name: Beta audit
         if: '!cancelled()'
         run: python tools/beta_audit.py
