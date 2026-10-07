@@ -8,6 +8,7 @@ var current_failures: Array = []
 
 
 func _ready() -> void:
+	AssistantPolicy.testing = true
 	call_deferred("_run")
 
 

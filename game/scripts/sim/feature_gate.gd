@@ -27,7 +27,7 @@ static func used(id: String) -> bool:
 		"inventory", "sales":return GameState.stat("purchase_orders") > 0 or not data.get("ecommerce", {}).get("listings", {}).is_empty()
 		"contracts":return not data.get("contracts", {}).is_empty()
 		"negotiation":return data.get("contracts", {}).values().any(func(c):return c.get("history", []).size()>1)
-		"people", "recruitment":return not data.get("staff", {}).get("employees", {}).is_empty() or not data.get("staff", {}).get("applicants", []).is_empty() or not data.get("staff", {}).get("posting", {}).is_empty()
+		"people", "recruitment":return not data.get("staff", {}).get("people", {}).is_empty() or not data.get("staff", {}).get("applicants", []).is_empty() or not data.get("staff", {}).get("posting", {}).is_empty()
 		"finance":return not data.get("reports", {}).get("month_closes", []).is_empty()
 		"group":return CompanyPortfolio.ids().size()>1 or not data.get("group_jobs", {}).get("jobs", {}).is_empty()
 		"segments":return Industries.tabs().size()>2

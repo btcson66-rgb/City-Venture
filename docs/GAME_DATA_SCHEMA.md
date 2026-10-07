@@ -743,3 +743,7 @@ Old builds did not record tabs: prior Company OS/phone access is preserved conse
 contracts, stock and overseas orders also infer unlocks. Losing a business cannot retract an already viewed feature.
 One gray disabled preview per navigation surface; remaining locked nodes are absent. QA UI fixtures may set
 `debug_feature_gates_all`; actual main-story walkthrough uses real progression. Protected minigames unchanged.
+
+## Assistant chores (#154)
+
+`game/data/economy/assistant.json` tunes cash buffer, daily hour, restock threshold, packing pace/skill, ingredient target, coffee target, maintenance condition and roster weekdays. Saved `assistant.tasks` stores independent switches (default true); `assistant.bills` stores actual accrued obligations until paid. Existing automatic loan repayments and perpetual leases keep their signed terms; insurance renewal delegates only previously chosen cover, never new cover. Switches never book revenue. Operations use the existing supplier, parcel, staff, inspection, asset, tax, insurance and customs APIs.

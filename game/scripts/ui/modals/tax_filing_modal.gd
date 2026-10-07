@@ -2,6 +2,7 @@ class_name TaxFilingModal
 extends Modal
 var entity := ""
 var _primary := false
+var advanced := false
 func _init(company: String) -> void:
 	entity=company
 	title_text="Tax Filing"
@@ -9,21 +10,25 @@ func _init(company: String) -> void:
 	help_key="tax_filing"
 	panel_size=Vector2(580,340)
 func build() -> void:
+	AssistantPolicy.toggle(body,"tax")
+	var details := UIK.button("Advanced",func():advanced=not advanced;rebuild())
+	details.name="TaxAdvanced"
+	body.add_child(details)
 	_primary=false
 	if not Tax.vat_entity(entity):
 		body.add_child(UIK.wrap("✗ Register an open company first; visit City Hall's registration counter.",8,Art.C_GOLD,520))
 		return
 	body.add_child(UIK.label_tip("VAT and income tax","tax_filing",9,Art.C_WHITE,true))
-	body.add_child(UIK.label(I18n.t("VAT %.0f%% · annual company income tax %.0f%%")%[float(Tax.cfg()["vat_rate"])*100,float(Tax.cfg()["income_rate"])*100],8))
+	if advanced:body.add_child(UIK.label(I18n.t("VAT %.0f%% · annual company income tax %.0f%%")%[float(Tax.cfg()["vat_rate"])*100,float(Tax.cfg()["income_rate"])*100],8))
 	body.add_child(UIK.label(GameState.entity_name(entity),9,Art.C_WHITE,true))
 	if GameState.company_id()!="":
 		var target := "player" if entity!="player" else GameState.company_id()
 		var switch := UIK.button("Personal seller VAT" if target=="player" else "Company tax returns",_switch_entity.bind(target))
 		switch.name="TaxEntity_"+target
 		body.add_child(switch)
-	body.add_child(UIK.wrap("Customer prices include collected VAT. File every two months; annual income tax uses pretax profit after carried losses. Filing is a process, not a quiz.",8,Art.C_MUTED,520))
+	if advanced:body.add_child(UIK.wrap("Customer prices include collected VAT. File every two months; annual income tax uses pretax profit after carried losses. Filing is a process, not a quiz.",8,Art.C_MUTED,520))
 	body.add_child(UIK.label(I18n.t("Collected VAT owed %s · income tax owed %s")%[Fmt.money(maxf(0,-Ledger.balance(entity,"tax_payable"))),Fmt.money(maxf(0,-Ledger.balance(entity,"income_tax_payable")))],8))
-	body.add_child(UIK.label(I18n.t("Loss available to carry forward: %s")%Fmt.money(float(Tax.E(entity)["loss"])),8))
+	if advanced:body.add_child(UIK.label(I18n.t("Loss available to carry forward: %s")%Fmt.money(float(Tax.E(entity)["loss"])),8))
 	var returns := Tax.returns(entity)
 	if returns.is_empty():body.add_child(UIK.wrap("✓ No return due yet; the next calendar period creates it automatically.",8,Art.C_GREEN,520))
 	for r in returns:
@@ -39,7 +44,7 @@ func build() -> void:
 			var diy := UIK.button(I18n.t("File yourself · %d minutes · %.0f%% form-error chance")%[int(Tax.cfg()["diy_minutes"]),float(Tax.cfg()["diy_error_chance"])*100],_file.bind(str(r["id"]),"diy"),_style(diy_ready and not cpa_ready))
 			diy.name="FileTax_"+str(r["id"])+"_diy"
 			diy.disabled=not diy_ready
-			body.add_child(diy)
+			if advanced:body.add_child(diy)
 			var cpa := UIK.button(I18n.t("Hire accountant · %s · %d minutes · accurate filing")%[Fmt.money(cpa_fee),int(Tax.cfg()["accountant_minutes"])],_file.bind(str(r["id"]),"accountant"),_style(cpa_ready))
 			cpa.name="FileTax_"+str(r["id"])+"_accountant"
 			cpa.disabled=not cpa_ready

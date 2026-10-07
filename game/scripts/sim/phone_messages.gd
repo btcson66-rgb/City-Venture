@@ -180,6 +180,8 @@ static func contact_name(npc: String) -> String:
 	var person := DataDB.npc(npc)
 	if not person.is_empty(): return I18n.t(str(person["name"]))
 	match npc:
+		"assistant":
+			return I18n.t("Assistant")
 		"client":
 			return I18n.t("Client")
 		"landlord":

@@ -304,7 +304,7 @@ func _tasks() -> void:
 	var ch := StoryEngine.chapter_def(GameState.data["story"].get("chapter", ""))
 	if not ch.is_empty():
 		content.add_child(UIK.label(str(ch["title"]), 7, Art.C_GOLD, true))
-	for o in StoryEngine.active_objectives():
+	for o in StoryEngine.active_objectives().slice(0,3):
 		var h := UIK.hbox(3)
 		h.add_child(UIK.icon("objective" if o.get("main", false) else "star", 10))
 		h.add_child(UIK.wrap(o["text"], 7, Art.C_WHITE, 112))

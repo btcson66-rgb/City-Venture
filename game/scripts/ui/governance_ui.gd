@@ -7,8 +7,12 @@ static func render_os(owner: Node) -> void:
 	box.add_child(UIK.label_tip("Company brand","company_brand",10,Art.C_GOLD,true))
 	box.add_child(UIK.label(I18n.t("Brand: %.1f / 100 points")%Brand.score(entity)))
 	var labels := {"reviews":I18n.t("Reviews"),"news":I18n.t("News"),"crises":I18n.t("Crisis handling"),"payments":I18n.t("On-time payments"),"employees":I18n.t("Employee treatment")}
+	var components := []
 	for key in Brand.components(entity):
-		box.add_child(UIK.label(I18n.t("%s: %.1f / 100 points · weight %.0f%%")%[labels[key],float(Brand.components(entity)[key]),float(Brand.cfg()["brand_weights"][key])*100],8))
+		components.append(I18n.t("%s: %.1f / 100 points · weight %.0f%%")%[labels[key],float(Brand.components(entity)[key]),float(Brand.cfg()["brand_weights"][key])*100])
+	var detail := UIK.label("?",8,Art.C_DIM)
+	detail.tooltip_text = "\n".join(components)
+	box.add_child(detail)
 	box.add_child(UIK.wrap("Brand influences recruitment, B2B willingness and borrowing rates. Event effects fade over 90 days; paid advertising alone is not reputation.",8,Art.C_MUTED,460))
 	box.add_child(UIK.label(I18n.t("Brand loan adjustment: %+.2f percentage points")%(Brand.apr_adjustment()*100),8))
 	box.add_child(UIK.sep())

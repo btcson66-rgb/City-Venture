@@ -112,6 +112,7 @@ static func trigger(id: String, ctx := {}) -> Dictionary:
 		ctx = bind(d)   # a story action or a conversation fires the event with no context of its own
 	var inst := {"iid": "%s-%d" % [id, int(S()["fired"][id])], "id": id, "ctx": ctx, "t": Clock.now()}
 	S()["queue"].append(inst)
+	if AssistantPolicy.routine_event(inst):return inst
 	var pres: Dictionary = d.get("presentation", {})
 	if pres.get("channel", "phone") == "phone" and pres.get("speaker", "") != "":
 		var lines: Array = pres.get("lines", [])

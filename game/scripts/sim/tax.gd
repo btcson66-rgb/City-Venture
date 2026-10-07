@@ -119,7 +119,7 @@ static func get_return(entity: String,id: String) -> Dictionary:
 	return E(entity)["returns"].get(id,{}) if vat_entity(entity) else {}
 static func account(r: Dictionary) -> String: return "tax_payable" if r["kind"]=="vat" else "income_tax_payable"
 static func payable(r: Dictionary) -> float: return snappedf(float(r.get("amount",0))+float(r.get("fine",0)),.01)
-static func file(entity: String,id: String,method: String) -> Dictionary:
+static func file(entity: String,id: String,method: String, advance_time := true) -> Dictionary:
 	var r := get_return(entity,id)
 	if r.is_empty() or r["status"]!="due" or method not in ["diy","accountant"]: return {"ok":false,"error":I18n.t("Choose an unfiled return for this company.")}
 	var fee := float(cfg()["accountant_fee"]) if method=="accountant" else 0.0
@@ -131,7 +131,7 @@ static func file(entity: String,id: String,method: String) -> Dictionary:
 	r["method"]=method
 	var minutes := int(cfg()["accountant_minutes"] if method=="accountant" else cfg()["diy_minutes"])
 	Sim.schedule(Clock.now()+minutes,"gov.tax_file",{"entity":entity,"id":id})
-	Clock.advance(minutes)
+	if advance_time:Clock.advance(minutes)
 	return {"ok":true,"minutes":minutes,"fee":fee}
 
 static func correct(entity: String,id: String,method: String) -> Dictionary:

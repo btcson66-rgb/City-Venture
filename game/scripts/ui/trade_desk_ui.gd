@@ -17,6 +17,7 @@ func add_button(parent: Node,label: String,id: String,callback: Callable,main:=f
 	b.name=id;parent.add_child(b)
 	if main:primary_chosen=true
 func build() -> void:
+	AssistantPolicy.toggle(body,"customs")
 	primary_chosen=false
 	var content:=UIK.vbox(5);body.add_child(UIK.scroll(content,Vector2(570,230)))
 	if not TradeIndustry.S()["registered"]:
@@ -46,6 +47,8 @@ func build() -> void:
 		add_button(content,"Resume repeat contract" if contract["paused"] else "Pause repeat contract","TradeRepeat_"+id,TradeIndustry.pause_repeat.bind(id,not contract["paused"]),contract["paused"])
 		add_button(content,"End repeat contract","TradeEndRepeat_"+id,TradeIndustry.end_repeat.bind(id))
 	for d in TradeIndustry.S()["deals"].values():
+		if d["status"] in ["booked","customs_hold"]:
+			add_button(content,"Prepare all documents","TradeDocuments_"+str(d["id"]),_documents.bind(str(d["id"])))
 		content.add_child(UIK.sep())
 		content.add_child(UIK.wrap(str(d["id"])+" · "+status_text(str(d["status"])),9,Art.C_WHITE,560))
 		content.add_child(UIK.wrap(I18n.t("%d units · %s → %s")%[int(d["quantity"]),I18n.t(DataDB.regions[d["quote"]["origin"]]["name"]),I18n.t(DataDB.regions[d["quote"]["destination"]]["name"])],8,Art.C_WHITE,560))
@@ -88,3 +91,9 @@ static func status_text(status: String) -> String:
 		"withdrawn":return I18n.t("Cargo returned")
 		"unpaid_documents":return I18n.t("Unpaid documents expired")
 	return I18n.t("Trade closed")
+
+func _documents(id: String) -> Dictionary:
+	var deal: Dictionary = TradeIndustry.S()["deals"].get(id,{})
+	if deal.is_empty():return {"ok":false}
+	for key in deal["documents"]:TradeIndustry.set_document(id,str(key),true)
+	return TradeIndustry.set_code(id,str(TradeQuote.cfg()["goods"][deal["quote"]["product"]]["tariff_code"]))

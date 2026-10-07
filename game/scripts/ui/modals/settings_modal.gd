@@ -2,7 +2,7 @@ class_name SettingsModal
 extends Modal
 ## Changes apply immediately. A rejected key leaves the previous assignment intact.
 
-const PAGES := ["Audio", "Display", "Controls", "Accessibility", "Game"]
+const PAGES := ["Audio", "Display", "Controls", "Accessibility", "Game", "Assistant"]
 const ACTION_NAMES := {"move_left": "Move left", "move_right": "Move right", "move_up": "Move up", "move_down": "Move down",
 	"run": "Run", "interact": "Interact", "phone": "Phone", "map": "Map", "company_os_hint": "Company OS",
 	"pause": "Pause", "fast_forward": "Fast-forward", "confirm": "Confirm", "cancel": "Cancel", "bug_report": "Report a problem"}
@@ -22,6 +22,7 @@ func build() -> void:
 	var tabs := UIK.hbox(3)
 	body.add_child(tabs)
 	for index in PAGES.size():
+		if index == 5 and not GameState.has_game():continue
 		var button := UIK.button(PAGES[index], func(): capture = ""; page = index; reset_scroll = true; rebuild(), "tab_active" if index == page else "tab")
 		button.name = "SettingsPage_%d" % index
 		tabs.add_child(button)
@@ -59,10 +60,13 @@ func build() -> void:
 			_slider("notification_seconds", "Notification duration", 2, 30, 1, "s")
 			body.add_child(UIK.wrap("Choices always wait for you. Profit and loss use text and signed amounts as well as color.", 8, Art.C_MUTED, 360))
 		4:
+			if GameState.has_game():AssistantPolicy.master(body)
 			_slider("autosave_seconds", "Autosave interval", 5, 120, 5, "s")
 			_slider("default_speed", "Default game speed", 0.5, 3, 0.5, "min/s")
 			_toggle("tutorial_hints", "Tutorial hints")
 			body.add_child(UIK.wrap("Default speed applies at launch. Hold Fast-forward for twice the current speed; release to resume.", 8, Art.C_MUTED, 360))
+		5:
+			if GameState.has_game():AssistantPolicy.overview(body)
 	var done := UIK.button("Done", close, "primary")
 	done.name = "SettingsDone"
 	footer.add_child(done)

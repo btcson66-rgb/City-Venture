@@ -82,7 +82,7 @@ static func on_hour() -> void:
 		for policy in policies(entity).values():
 			if Clock.now()<int(policy["until"]):continue
 			policy["active"]=false
-			if not policy["auto"]:continue
+			if not policy["auto"] or not bool(AssistantPolicy.S()["tasks"]["renewals"]):continue
 			var fee := float(cfg()["policies"][policy["kind"]]["monthly"])
 			if Ledger.cash(entity)>=fee:
 				Ledger.expense(entity,"insurance",fee,I18n.t("Insurance renewal: %s")%Fmt.money(fee),{"type":"insurance_service","segment":"shared"})

@@ -136,7 +136,7 @@
      "id": "ch2_ship",
      "main": true,
      "goal": "Earn Your First Dollar",
-     "text": "Pack the order at your packing table, then ship it",
+     "text": "Send your first parcel (your assistant can help)",
      "complete_when": [
       "stat:orders_shipped>=1"
      ],
@@ -1201,7 +1201,7 @@
      "id": "ch13_ship",
      "main": true,
      "goal": "First order abroad",
-     "text": "Pack and send your first Northridge order with an international courier",
+     "text": "Send your first parcel abroad (your assistant can help)",
      "complete_when": [
       "flag:first_export_shipped"
      ],

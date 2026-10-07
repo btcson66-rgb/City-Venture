@@ -155,6 +155,9 @@ func build() -> void:
 	var guide := UIK.button(I18n.t("First-use guide"), func():UIRoot.open_modal(FeatureIntroModal.new("os_"+tab)))
 	guide.name = "FeatureGuideReplay"
 	content.add_child(guide)
+	var chores: Array = {"operations":["restock","packing","returns"],"finance":["tax","fx","bills"],"people":["roster"],"contracts":["restock","packing"],"cafe":["cafe_supplies","hygiene","roster"],"logistics":["maintenance","roster"],"manufacturing":["maintenance","restock","packing"],"hotel":["maintenance"],"automotive":["maintenance"],"energy":["maintenance"],"international_trade":["customs"],"governance":["tax","renewals"]}.get(tab,[])
+	for chore in chores:AssistantPolicy.toggle(content,str(chore))
+	if tab == "finance":AssistantPolicy.bills_ui(content)
 	if not Industries.render_tab(tab, self):
 		call("_tab_" + tab)
 	if not IndustryGuidance.guide(tab).is_empty():
