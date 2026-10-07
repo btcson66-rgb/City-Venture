@@ -18,3 +18,5 @@ initial/、final/、review/、verified/、accepted/、frontage-final/、frontage
 重跑用專案 Godot 4.5.1：probe.tscn 的 --followup、--frontage-only、--perf-only 與 --out=<絕對證據目錄>。單元測試 res://tests/test_runner.tscn；專項 --filter=test_visual_layout。打包/步行為 --bot=packing / --bot=map_adjacency。原圖、精確 imagegen prompts 和 crop manifest 在 docs/art_sources/reference_character_20261006/。
 
 根因與防止再犯：docs/qa/2026-10-07_art_followup.md。低階/Web/手機 GPU 未驗證，兩個上游大存檔 Decompression failed 診斷保留。主觀品質仍待玩家試玩。
+
+GitHub 交付核對：delivery_verification.json 記錄來源 ff607b44 的 6 項 CI 全部 SUCCESS、ZIP 與 exe SHA256；windows-review-manifest.json 與 windows-review-readme.txt 保存實際測試包內的版本與說明。
