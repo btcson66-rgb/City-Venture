@@ -81,6 +81,18 @@ The bot now completes first-use lessons before formal inputs (route, creative pi
 Harbor rerun is recorded separately. The earlier customer-return decision and later fixture movement also failed;
 these remain explicit full-tour gaps rather than being called no-soft-lock evidence.
 
+Corrected Harbor rerun: **0 failures**, 28 screenshots, 216.7s, real manual lesson → formal best route → invoice/fuel
+posting → save/load. English audit has one existing title-menu `0.2.1-beta` version label, no new work text.
+
+Corrected personal-life rerun: **0 failures**, 16 screenshots, 55.9s; actual requests, relationship/referral,
+recovery and save/load. English audit has the same existing version label only. These reruns verify the manual
+bot now distinguishes practice from formal work; they do not erase failures from the original full walkthrough.
+
+The original full run was stopped after more than 2.5 hours, with chapters 1–24 and the walking-route circuit
+completed, during cascading waits in the old personal-request driver. `full-walkthrough/console.log` and
+`observed_result.json` preserve the actual failures and stop status. This is an observed failure report, not the
+engine's normal completion report; full-run English audit and final fixture save/load remain unverified.
+
 Commands: `godot --headless --path game res://tests/test_runner.tscn`;
 `godot --path game --rendering-driver opengl3 --resolution 1280x720 -- --bot=work_modes --lang=zh_TW --slow-work --out=<QA>`;
 repeat with `--practice-large` for emulated touch/extra-large font, or `--lang=en`;
