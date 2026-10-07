@@ -135,7 +135,12 @@ func play_dialogue(id: String, done := Callable()) -> void:
 	dialogue.play(id, done)
 
 
+var _feature_check := 0.0
 func _process(_delta: float) -> void:
+	_feature_check += _delta
+	if _feature_check >= 1.0:
+		_feature_check = 0.0
+		FeatureGate.refresh()
 	# toasts sit at the top in the world; while a management screen is open they drop to the bottom
 	# edge so they never cover a modal's title bar
 	# toasts sit at the top in the world. With a screen open, only the newest one shows, tucked under

@@ -800,6 +800,10 @@ func popups() -> void:
 		if m is IndustryGuideModal:
 			await bot.click_named("IndustryGuideSkip")
 			continue
+		if m is FeatureIntroModal:
+			await bot.click_named("FeaturePracticeNext")
+			await bot.click_named("FeaturePracticeNext")
+			continue
 		if m is DecisionModal:
 			var inst: Dictionary = m.inst
 			await bot.shot("decision_" + str(inst["id"]))

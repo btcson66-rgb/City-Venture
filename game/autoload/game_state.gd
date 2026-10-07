@@ -37,6 +37,7 @@ func new_game(setup: Dictionary) -> bool:
 		data = {}
 		return false
 	data = template(setup, seed_v)
+	data["feature_gates"] = {"granted":["os_overview","os_finance","os_operations","app_messages","app_bank","app_tasks","app_map","app_save","app_close"],"seen":["os_overview","os_finance","os_operations","app_messages","app_bank","app_tasks","app_map","app_save","app_close"],"guided":[]}
 	data["meta"]["slot"] = slot
 	Ledger.post("player", "Opening balance — savings", [
 		{"acct": "cash", "dr": start_cash},

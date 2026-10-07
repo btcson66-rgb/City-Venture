@@ -187,6 +187,8 @@ func _audit_one(t: String, ctl: Control) -> void:
 func _run() -> void:
 	await wait(1.0)
 	match mode:
+		"feature_gates":
+			await load("res://tests/walkthrough/feature_gates_tour.gd").new(self).run()
 		"traffic_safety":
 			await load("res://tests/walkthrough/traffic_safety_tour.gd").new(self).run()
 		"workflows":
@@ -401,6 +403,9 @@ func click(b: Control) -> bool:
 
 
 func click_named(name: String, timeout_s := 5.0) -> bool:
+	if UIRoot.top_modal() is FeatureIntroModal and name not in ["FeaturePracticeNext","FeaturePracticeSkip"]:
+		await click_named("FeaturePracticeNext")
+		await click_named("FeaturePracticeNext")
 	var ok := await until(func(): return button_named(name) != null, timeout_s)
 	if not ok:
 		fail("button '%s' not found" % name)

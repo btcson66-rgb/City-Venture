@@ -65,6 +65,7 @@ func _fresh_game() -> void:
 	Clock.clear_pauses()
 	Clock.world_active = false
 	GameState.new_game({"name": "Test Founder", "seed": 12345})
+	GameState.set_flag("debug_feature_gates_all") # UI fixtures exercise business rules; gate tests opt back in.
 
 
 func check(cond: bool, msg: String) -> void:

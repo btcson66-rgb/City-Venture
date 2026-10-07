@@ -731,3 +731,15 @@ Return-event replacement requirements use `can_replace:{order}`. The predicate c
 ### Personal traffic safety (#115)
 `data.traffic_safety` is lazily initialized without changing the ledger. Fields: `injury`, `until`, `startle_until`, `cooldown`, `active_accident`, `policy_until`, `renew`, and `accidents[]`. Each accident carries a stable id, actual speed in px/s, severity, timestamp, liability, insurance-at-impact snapshot, medical bill, health claim, treatment flag, hospital days, medical debt, settlement flag and procedure due minute. The active injury references its accident independently of later glancing contacts. Historical unpaid bills/claims remain addressable by id.
 `economy/traffic_safety.json` owns new speed thresholds, braking, collision bounds, green phase, injury duration, medicine/medical fees, hospital-day range, premium/coverage, liability draw and settlement timing/share. Clock-backed lights and injury/claim deadlines survive saves. Emergency medical payables cannot be waived by saving, purchasing insurance afterward, or opening a different company. Minor medicine needs cash; emergency admission does not. Health claims cover the incurred provider invoice, never more; counterparty compensation covers only its remaining uninsured part. Driver responsibility is a pure quote hook for #94. #96 is currently unmerged; independent seven-day administrative claims do not claim to implement its legal system.
+
+## Progressive feature presentation (#151)
+
+`data/ui/feature_unlocks.json` defines each Company OS tab, internal detail and phone app gate.
+`FeatureGate.unlocked(id)` combines chapter, observed assets/activity and persistent access grants.
+`data.feature_gates = {granted[], seen[], guided[]}` records permanent access, new markers and first-use practice.
+A fresh game exposes overview, simplified finance and stock/orders; buying stock or choosing ecommerce opens Sales.
+Imports/documents open by chapter 9, overseas sales by chapter 13. Late tabs never block the simulation.
+Old builds did not record tabs: prior Company OS/phone access is preserved conservatively; existing industries,
+contracts, stock and overseas orders also infer unlocks. Losing a business cannot retract an already viewed feature.
+One gray disabled preview per navigation surface; remaining locked nodes are absent. QA UI fixtures may set
+`debug_feature_gates_all`; actual main-story walkthrough uses real progression. Protected minigames unchanged.

@@ -134,6 +134,7 @@ func _render() -> void:
 
 
 func _home() -> void:
+	FeatureGate.refresh()
 	var top := UIK.hbox(2)
 	top.add_child(UIK.label(Clock.fmt_time(), 7, Art.C_MUTED, true))
 	top.add_child(UIK.expand())
@@ -153,6 +154,7 @@ func _home() -> void:
 	if BuildingInfo.world_travel_available():
 		apps.insert(apps.size() - 1, ["world", "world", "World"])
 	for a in apps:
+		if not FeatureGate.unlocked("app_"+str(a[0])):continue
 		var b := Button.new()
 		b.custom_minimum_size = Vector2(40, 40)
 		b.icon = Art.icon(a[1])
@@ -165,6 +167,14 @@ func _home() -> void:
 		b.name = "App_" + a[0]
 		b.pressed.connect(_open_app.bind(a[0]))
 		grid.add_child(b)
+	var next := FeatureGate.preview(apps.map(func(a):return "app_"+str(a[0])))
+	if next != "":
+		var item := FeatureGate.definition(next)
+		var preview := UIK.button("🔒 " + I18n.t(str(item["label"])))
+		preview.name = "AppPreview"
+		preview.disabled = true
+		content.add_child(preview)
+		content.add_child(UIK.wrap(I18n.t(str(item["hint"])),7,Art.C_DIM,128))
 	content.add_child(grid)
 	var pend := EventEngine.pending()
 	if not pend.is_empty():
@@ -175,6 +185,8 @@ func _home() -> void:
 
 
 func _open_app(a: String) -> void:
+	if not FeatureGate.unlocked("app_"+a):return
+	FeatureGate.viewed("app_"+a)
 	match a:
 		"relationships":
 			close()
