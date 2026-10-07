@@ -144,8 +144,17 @@ func test_foreign_parcel_payout_uses_actual_receipt_and_manual_fx_90_days() -> v
 	runner.check(order.get("global_paid",false),"actual foreign receipt paid")
 	runner.eq(GlobalMarket.balance(entity,"NRD")["wallet"],0.0,"actual FX wallet converted")
 	runner.check(GameState.stat("orders_delivered")>0,"actual overseas delivery happened")
-	AssistantPolicy.set_task("fx",false)
+	var os := CompanyOS.new("home_laptop")
+	var box := VBoxContainer.new()
+	GlobalMarketUI.finance(os,box)
+	var auto := box.find_child("AutoGlobalFX",true,false) as CheckBox
+	runner.check(auto!=null,"existing finance FX checkbox remains available")
+	auto.button_pressed = false
+	AssistantPolicy.on_hour(Clock.now(),12)
+	runner.check(not AssistantPolicy.enabled("fx"),"existing finance checkbox switches the assistant off")
 	runner.check(not GlobalMarket.company()["auto_fx"],"manual FX switch disables future conversion")
+	box.free()
+	os.free()
 	runner.check(Ledger.check_balanced(),"foreign books balance after 90 days")
 
 func test_actual_pre_assistant_chapter_three_save_continues() -> void:

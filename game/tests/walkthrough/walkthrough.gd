@@ -35,6 +35,10 @@ func run() -> void:
 		await _chapters_17_to_18()
 		await _city_future_season()
 		await _summary()
+		if _arg("main-only") == "1":
+			bot.expect(AssistantPolicy.S()["tasks"].values().all(func(v):return bool(v)),"all assistant switches enabled throughout full main story")
+			await _save_load()
+			return
 		await _industry_fixtures()
 		return
 	if _arg("from")=="resume_ch10":
@@ -2559,9 +2563,11 @@ func _chapters_13_to_14(fast := false) -> void:
 		GameState.data["clock"]["minutes"] += 3 * Clock.DAY
 		GlobalMarket.payout(GameState.company_id())
 	else:
-		await pass_time_at_home(func(): return float(GlobalMarket.balance(GameState.company_id(), "NRD")["wallet"]) > 0, 40, true)
+		await pass_time_at_home(func(): return GameState.flag("first_export_converted") or float(GlobalMarket.balance(GameState.company_id(), "NRD")["wallet"]) > 0, 40, true)
 	await _home_laptop("finance")
-	await bot.click_named("ConvertGlobal_NRD")
+	if not GameState.flag("first_export_converted"):await bot.click_named("ConvertGlobal_NRD")
+	elif not UIRoot.top_modal() is ExportIncomeModal:
+		UIRoot.open_modal(ExportIncomeModal.new()) # Read the real conversion receipt; no journal or story mutation.
 	await bot.until(func(): return UIRoot.top_modal() is ExportIncomeModal, 4.0)
 	await bot.wait(4.0)
 	await bot.shot("ch13_real_income")
@@ -2848,7 +2854,11 @@ func _chapters_15_to_16(fast := false) -> void:
 	await bot.shot("ch16_distributor_offer")
 	await bot.click_named("AcceptContract")
 	if not AssistantPolicy.enabled("packing"):await bot.click_named("DeliverContract")
-	else:await pass_time_at_home(func():return Contracts.by_tag("lumina_distributor").get("status","") in ["in_transit","delivered","paid"],4,true)
+	else:
+		await close_modal()
+		await close_modal()
+		await close_modal()
+		await pass_time_at_home(func():return Contracts.by_tag("lumina_distributor").get("status","") in ["shipped","delivered","paid"],4,true)
 	var contract := Contracts.by_tag("lumina_distributor")
 	if not bot.expect(not contract.is_empty() and contract.get("status", "") == "shipped", "native signing and dispatch put goods in transit"):return
 	await bot.shot("ch16_goods_in_transit")

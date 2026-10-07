@@ -51,6 +51,9 @@ The zh_TW audit's single English item is the player-chosen company name `QUIET T
 Full suite: **935/935 passed (383.1 s)**, no SCRIPT ERROR. Afterwards a cash-warning conditional was corrected;
 all **16/16 assistant tests (48.9 s)** pass with explicit funded-no-warning and warning-once assertions.
 The corrected implementation subsequently passed the full suite again: **935/935 (386.6 s)**.
+Self-review also synchronized the existing finance FX checkbox with the saved assistant policy;
+an actual checkbox-toggle regression, hourly callback and **16/16 (48.1 s)** assistant tests pass.
+Global lifecycle tests **10/10 (6.1 s)** pass; final updated full suite **935/935 (385.4 s)**, no SCRIPT ERROR.
 Legacy manual fixtures disable assistant callbacks; assistant tests explicitly enable all switches.
 Fixtures fund operating capital as equity, never revenue. 90-day fixtures cover commerce, coffee, tax,
 insurance, contracts, manufacturing, maintenance, returns and FX/trade. They do not promise every strategy profits.
@@ -63,6 +66,9 @@ Main 1–24 with all switches ON: **RUNNING, not yet verified**. Actual new game
 continuation loads the exact played checkpoint (SHA256 in `steps.json`) after a harness-only optional SaaS
 skip/exit correction. Full failed-attempt logs are retained outside Git; no flags or ledger were fabricated
 to advance the continuation. Final chapter receipts, all-switch assertions and balance must pass before completion.
+Chapters 4–12 completed without failures; the real chapter-13 autosave continues under the updated bot.
+Harness fixes accept actual automatic FX conversion instead of waiting for a now-empty wallet, use
+Contracts' real `shipped` state and close management modals before sleeping for assistant dispatch.
 
 ## Scope / remaining work
 

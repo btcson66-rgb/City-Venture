@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="test_global" tests="10" failures="0">
+    <testcase classname="test_global" name="test_fx_seeded_walk_bounds_mean_reversion_and_history" time="0.021"></testcase>
+    <testcase classname="test_global" name="test_fx_spread_and_expiring_shock" time="0.000"></testcase>
+    <testcase classname="test_global" name="test_account_and_store_requirements_are_idempotent" time="0.001"></testcase>
+    <testcase classname="test_global" name="test_overseas_lifecycle_keeps_foreign_units_until_conversion" time="0.003"></testcase>
+    <testcase classname="test_global" name="test_automatic_conversion_and_exchange_loss" time="0.002"></testcase>
+    <testcase classname="test_global" name="test_refund_before_payout_reverses_receipt_and_stock" time="0.002"></testcase>
+    <testcase classname="test_global" name="test_paid_refund_cannot_spend_another_orders_unpaid_receipt" time="0.003"></testcase>
+    <testcase classname="test_global" name="test_price_boundaries_and_rational_profit_with_risk" time="0.002"></testcase>
+    <testcase classname="test_global" name="test_company_closure_cancels_shipments_and_foreign_receipts" time="0.003"></testcase>
+    <testcase classname="test_global" name="test_old_save_and_fx_rng_roundtrip" time="0.002"></testcase>
+  </testsuite>
+</testsuites>
