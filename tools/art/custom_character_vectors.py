@@ -115,7 +115,7 @@ def eye_pair(shape='round',expression=0,direction=0,part='eyes'):
         if expression==1:
             if part=='eyes':result+=line(f'M {x-1.8} {y+.3} Q {x} {y-1.4} {x+1.8} {y+.3}',INK,.48)
             continue
-        hh=height*.72*(1.25 if expression==3 else .85 if expression==2 else 1)
+        hh=height*.95*(1.25 if expression==3 else .85 if expression==2 else 1)
         if part=='eyes':
             result+=path(f'M {x-1.65} {y} Q {x} {y-hh*1.8} {x+1.65} {y} Q {x+1.5} {y+hh} {x} {y+hh} Q {x-1.5} {y+hh} {x-1.65} {y} Z','#f8f8fa','#44383e',.22)
             result+=line(f'M {x-1.75} {y-.15} Q {x} {y-hh*1.7} {x+1.75} {y-.15}','#392d35',.32)
@@ -124,7 +124,7 @@ def eye_pair(shape='round',expression=0,direction=0,part='eyes'):
             result+=ellipse(xx-.26,y-.5,.23,.3,'#fff')+ellipse(xx+.3,y+.48,.11,.14,'#f7f6ee')
         else:
             xx=x+(.4 if expression==2 else 0)
-            result+=ellipse(xx,y,.65,hh*.83,'url(#iris)','#555',.2)+ellipse(xx,y,.26,hh*.71,'#202020')
+            result+=ellipse(xx,y,.82,hh*.83,'url(#iris)','#555',.2)+ellipse(xx,y,.32,hh*.71,'#202020')
             result+=line(f'M {xx-.58} {y+.34} L {xx-.43} {y+.5} M {xx+.56} {y+.34} L {xx+.43} {y+.5}','#a3a3a3',.12)
     return result
 def brow(style='straight',expression=0,direction=0):
@@ -151,7 +151,7 @@ def body(pres,face,direction,tick,pose):
     sx={'masculine':8.8,'feminine':10.4,'neutral':9.6}[pres];right=32-sx
     if direction==1:sx=12;right=21
     yend=43.8
-    result=group(head(face,direction),'translate(3.2 3.8) scale(.80)')
+    result=group(head(face,direction),'translate(2.24 2.66) scale(.86)')
     if pose=='sit':result=group(result,'translate(0 3)')
     result+=path(f'M {sx+2} 20 Q 16 18.5 {right-2} 20 L {right} 32 Q 16 34 {sx} 32 Z','url(#skin)')
     for side,x in enumerate([sx-.5,right-.8]):
@@ -275,7 +275,7 @@ def build():
                 for f in range(4):
                     cell=fn(row,f,pose)
                     if name.startswith(('hair_','eyes_','iris_','brows_','mouth_','acc_glasses')):
-                        cell=group(cell,'translate(3.2 3.8) scale(.80)')
+                        cell=group(cell,'translate(2.24 2.66) scale(.86)')
                         dy=3 if pose=='sit' else 0 if name.endswith('_expressions') else bob(pose,f)
                         if name.startswith('acc_glasses') and pose in ['idle','phone','interact']:dy=0
                         cell=group(cell,f'translate(0 {dy})')

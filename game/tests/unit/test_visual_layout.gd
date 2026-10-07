@@ -78,3 +78,90 @@ func test_closed_hours_uses_compiled_chinese_daily_translation():
 	runner.check(not status["open"], "night fixture exercises closed-hours text")
 	runner.check(not str(status["reason"]).contains("daily"), "compiled Chinese catalog covers daily in runtime text")
 	I18n.set_locale("en", false)
+
+func test_menu_background_remains_static():
+	var backdrop := Backdrop.make("backdrops/menu", 0.0)
+	runner.get_tree().root.add_child(backdrop)
+	var before := backdrop._img.position
+	backdrop._process(30.0)
+	runner.check(not backdrop.is_processing() and backdrop._img.position == before, "menu backdrop has no pan or per-frame update")
+	backdrop.free()
+
+func test_roads_reach_the_exit_strip():
+	for id in DataDB.districts:
+		var district := District.new()
+		district.build(id)
+		for corridor in district.def.get("walk_corridors", []):
+			var edge := Vector2i(int(corridor[0]) / 16, 4)
+			runner.check(district.ground.get_cell_atlas_coords(edge) == district._tile_index["grass"], id + " north connector has garden terrain")
+		for g in district.def.get("ground", []):
+			if str(g["type"]) != "road": continue
+			var row := int(g["rect"][1]) + 1
+			var x := district.size_px.x / 16 - 2
+			runner.check(district.ground.get_cell_atlas_coords(Vector2i(x,row)) == district._tile_index["road"], id + " asphalt continues to the edge")
+		for ex in district.def.get("exits", []):
+			if str(ex.get("direction","")) in ["E","W"] and int(ex["rect"][1]) == 324:
+				runner.check(int(ex["rect"][1])+int(ex["rect"][3]) > 480, id + " exit includes the road, not just upper pavement")
+		district.free()
+
+func test_facade_fallbacks_do_not_overlap():
+	for id in DataDB.districts:
+		var d: Dictionary = DataDB.districts[id]
+		var facades: Array = d.get("fillers", []).duplicate()
+		for bid in d.get("buildings", []): facades.append(DataDB.buildings[bid]["exterior"])
+		facades.sort_custom(func(a,b): return float(a["x"]) < float(b["x"]))
+		var end := 0.0
+		for ex in facades:
+			var texture := Art.tex("buildings/" + District.facade(ex))
+			if texture == null: continue
+			runner.check(float(ex["x"]) >= end, id + " facade including fallback does not cover its neighbor")
+			end = float(ex["x"]) + texture.get_width()
+
+func test_skin_change_preserves_character_and_clothing_identity():
+	var original := GameState.default_appearance()
+	var source := Art.character_layers(original, "executive")
+	var portrait := Art.portrait_layers(original, "executive")
+	for skin in DataDB.character["skin_tones"]:
+		var changed := original.duplicate(true)
+		changed["skin"] = skin["id"]
+		var actual := Art.character_layers(changed, "executive")
+		var actual_portrait := Art.portrait_layers(changed, "executive")
+		for i in source.size():
+			runner.check(actual[i]["tex"] == source[i]["tex"], "skin cannot select another character's layer")
+			if source[i]["name"] != "body": runner.check(actual[i]["tint"] == source[i]["tint"], "skin cannot dye hair, eyes or clothing")
+		for i in portrait.size(): runner.check(actual_portrait[i]["tex"] == portrait[i]["tex"], "portrait identity is also independent of skin")
+
+func test_packing_stage_reports_full_content_height():
+	Help.auto = false
+	var order := {"id":"LAYOUT", "product":"phone_stand", "qty":2, "customer":"Alex Chen", "district":"Riverside", "status":"placed", "location":"riverside_studio", "price":20.0}
+	var packing := PackGame.new([order])
+	packing.theme = UIK.theme()
+	runner.get_tree().root.add_child(packing)
+	packing.start()
+	for i in 8: await runner.get_tree().process_frame
+	var columns := packing.stage.find_child("PackingColumns",true,false) as Control
+	runner.check(packing.stage is VBoxContainer, "packing children contribute their actual size to outer scroll")
+	runner.check(packing.stage.size.y >= columns.get_combined_minimum_size().y, "last packing controls are not clipped by a fixed 236px stage")
+	runner.check(packing.get_viewport_rect().encloses(packing.panel.get_global_rect()), "packing window remains bounded")
+	var seal := packing.find_child("Seal",true,false) as Button
+	runner.check(packing.get_viewport_rect().encloses(seal.get_global_rect()), "seal button remains directly visible at default desktop size")
+	packing.free()
+
+func test_shop_palette_survives_finished_art_and_arrow_fits_board():
+	var style := DataDB.character_option("outfits_shop","executive")
+	var resolved := Art._resolve_outfit("executive","characters/outfit_%s_masculine_top",{})
+	runner.check(resolved[1]["top"] == Color(style["stand_in"]["tints"]["top"]), "finished executive suit retains midnight color, not uncolored white atlas")
+	var marker := ExitMarker.new()
+	marker.setup(Rect2(2032,324,16,220),Vector2.RIGHT,"A very long localized district name")
+	runner.get_tree().root.add_child(marker)
+	for i in 3: await runner.get_tree().process_frame
+	runner.check(marker.board.encloses(Rect2(marker._label.position,marker._label.size)), "direction label stays in its own bounded slot")
+	runner.check(marker._label.get_theme_font_size("font_size") <= 6, "text is smaller than the twelve-pixel vector arrow")
+	marker.free()
+	var north_a := ExitMarker.new()
+	var north_b := ExitMarker.new()
+	north_a.setup(Rect2(1944,0,32,12),Vector2.UP,"市政中心")
+	north_b.setup(Rect2(2008,0,32,12),Vector2.UP,"金融區")
+	runner.check(not north_a.board.intersects(north_b.board), "adjacent north destination boards do not cover each other")
+	north_a.free()
+	north_b.free()

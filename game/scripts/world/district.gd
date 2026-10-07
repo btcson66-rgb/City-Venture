@@ -47,6 +47,8 @@ func build(district_id: String) -> void:
 			signal_node.position = Vector2(float(ground["rect"][0])*16-8, float(ground["rect"][1])*16)
 			add_child(signal_node)
 	_dress_corridors()
+	_extend_roads()
+	_dress_street_gaps()
 	_build_sky()
 	_add_water_sparkles()
 	# north edge: building fronts / back of the block are not walkable
@@ -294,16 +296,80 @@ func _dress_corridors() -> void:
 		var tx := int(corridor[0]) / T
 		var tw := int(corridor[2]) / T
 		var rows := int(corridor[3]) / T
+		# The north connector is a planted pocket park, not a wall of pavement
+		# stretching through the skyline. Stone paths lead to each real north exit.
+		var upper_rows := int(BASE_Y / T)
+		paint("grass", [tx, 0, tw, upper_rows])
+		for ex in def.get("exits", []):
+			if str(ex.get("direction", "")) != "N": continue
+			var path_x := int(float(ex["rect"][0]) + float(ex["rect"][2]) / 2.0) / T
+			if path_x >= tx and path_x < tx + tw:
+				paint("plaza_alt", [path_x - 1, 0, 2, upper_rows])
+		for y in [128, 240]:
+			for x in [tx * T + 16, (tx + tw) * T - 48]:
+				add_prop({"sprite":"tree_round_b", "x":x, "y":y, "solid":false})
+				add_prop({"sprite":"planter_small", "x":x+14, "y":y+16, "solid":false})
 		# Two stone borders and inset planting at the outside edge make a deliberate promenade.
-		paint("plaza_alt", [tx, 0, 1, rows])
-		paint("plaza_alt", [tx + tw - 1, 0, 1, rows])
-		for y in range(5, rows - 3, 9):
+		paint("plaza_alt", [tx, upper_rows, 1, rows-upper_rows])
+		paint("plaza_alt", [tx + tw - 1, upper_rows, 1, rows-upper_rows])
+		for y in range(upper_rows+5, rows - 3, 9):
 			# Keep the road crossing and east/west exit strip clear.
 			if y >= 19 and y <= 32:
 				continue
 			paint("grass", [tx + tw - 3, y, 2, 3])
 			add_prop({"sprite":"tree_round_b", "x":(tx + tw - 3) * T, "y":y * T})
 			add_prop({"sprite":"bollard", "x":(tx + 1) * T, "y":(y + 1) * T})
+
+
+func _extend_roads() -> void:
+	# A widened pedestrian corridor must never turn the through-road into pavement.
+	for corridor in def.get("walk_corridors", []):
+		var tx := int(corridor[0]) / T
+		var tw := int(corridor[2]) / T
+		for g in def.get("ground", []):
+			if str(g["type"]) not in ["road", "road_dash_h", "curb_top", "curb_bottom"]:
+				continue
+			var r: Array = g["rect"]
+			if int(r[0]) + int(r[2]) == tx:
+				paint(str(g["type"]), [tx, r[1], tw, r[3]], int(g.get("step", 1)))
+		# Keep designated north/south crossing lanes across the extended asphalt.
+		for g in def.get("ground", []):
+			if str(g["type"]) == "crosswalk_h" and int(g["rect"][0]) >= tx:
+				paint("crosswalk_h", g["rect"])
+
+
+func _dress_street_gaps() -> void:
+	# Static pocket gardens complete unused frontage without adding navigation obstacles.
+	var spans: Array = []
+	for bid in def.get("buildings", []):
+		var ex: Dictionary = DataDB.buildings[bid]["exterior"]
+		var texture := Art.tex("buildings/" + facade(ex))
+		if texture != null: spans.append([float(ex["x"]), float(ex["x"]) + texture.get_width()])
+	for ex in def.get("fillers", []):
+		var texture := Art.tex("buildings/" + facade(ex))
+		if texture != null: spans.append([float(ex["x"]), float(ex["x"]) + texture.get_width()])
+	spans.sort_custom(func(a, b): return a[0] < b[0])
+	var end := 12.0
+	for span in spans + [[float(def.get("walk_corridors", [[size_px.x]])[0][0]) - 16.0, float(size_px.x)]]:
+		if float(span[0]) - end >= 58.0:
+			for x in range(int(end) + 12, int(span[0]) - 24, 72):
+				add_prop({"sprite":"tree_round_b", "x":x, "y":BASE_Y - 98, "solid":false})
+				add_prop({"sprite":"planter_small", "x":x + 14, "y":BASE_Y - 16, "solid":false})
+		end = maxf(end, float(span[1]))
+	# Sparse seating pockets on broad lower plazas; preserve clear walking and crossing lanes.
+	var count := 0
+	for x in range(96, int(size_px.x) - 280, 240):
+		var cell := ground.get_cell_atlas_coords(Vector2i(x / T, 37))
+		if cell not in [_tile_index.get("plaza"), _tile_index.get("plaza_alt"), _tile_index.get("boards")]: continue
+		var crowded := false
+		for prop in def.get("props", []):
+			if Vector2(float(prop["x"]), float(prop["y"])).distance_to(Vector2(x,584)) < 82:
+				crowded = true
+		if crowded: continue
+		add_prop({"sprite":"bench", "x":x, "y":580, "solid":false})
+		add_prop({"sprite":"planter_small", "x":x+48, "y":568, "solid":false})
+		count += 1
+		if count >= 6: break
 
 
 func _build_sky() -> void:

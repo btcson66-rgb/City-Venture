@@ -1,0 +1,143 @@
+{
+	"calendar_1440_calls_ms": 2.785,
+	"completed": true,
+	"coverage": {
+		"industries": [
+			"manufacturing",
+			"real_estate",
+			"media",
+			"hotel",
+			"automotive",
+			"energy",
+			"international_trade",
+			"ecommerce"
+		],
+		"missing_industries": [],
+		"notes": [
+			"Forced orders and staff are saturation fixtures, not normal gameplay.",
+			"Coverage is measured from Industries.is_running and the company list after fixture setup.",
+			"simulation_ms is the mean cost of one minute tick (a frame at 1x); tick_p99_ms is the p99 of minute ticks incl. hourly/daily work.",
+			"Order placement/packing/courier is a player-action batch reported per order (order_ms_per_order).",
+			"Compressed bytes are the shipping (gzip) save size."
+		],
+		"playable_companies": 2
+	},
+	"engine": "4.5.1-stable (official)",
+	"errors": [],
+	"options": {
+		"days": 3,
+		"orders": 5000,
+		"out": "D:/City-Venture-visual-repair/evidence/2026-10-07_visual_followup/stress-final",
+		"profile": 0,
+		"resume": 0,
+		"save_every": 1,
+		"seed": 98001,
+		"staff": 50,
+		"textures": 1,
+		"wall_seconds": 90
+	},
+	"platform": "Windows",
+	"renderer": "gl_compatibility",
+	"samples": [
+		{
+			"balanced": true,
+			"day": 1,
+			"day_total_ms": 214.344,
+			"frame_mean_ms": 0.149278472222223,
+			"frame_p99_ms": 4.82,
+			"gzip_bytes": 147788,
+			"hour_tick_mean_ms": 6.3495,
+			"journal_entries": 2958,
+			"json_bytes": 147788,
+			"load_ms": 92.856,
+			"loaded": true,
+			"memory_bytes": 187559618,
+			"order_ms_per_order": 0.3072004,
+			"order_phases_ms": {
+				"courier_ms": 135.92,
+				"fixture_ms": 0.192,
+				"pack_ms": 812.018,
+				"place_ms": 587.769
+			},
+			"orders": 5000,
+			"orders_held": 5000,
+			"orders_ms": 1536.002,
+			"save_ms": 158.394,
+			"simulation_ms": 0.14885,
+			"staff": 50,
+			"tick_max_at_minute": 0,
+			"tick_max_ms": 36.189,
+			"tick_p99_ms": 4.819
+		},
+		{
+			"balanced": true,
+			"day": 2,
+			"day_total_ms": 282.763000000001,
+			"frame_mean_ms": 0.196827777777778,
+			"frame_p99_ms": 5.186,
+			"gzip_bytes": 260845,
+			"hour_tick_mean_ms": 8.81504166666667,
+			"journal_entries": 2968,
+			"json_bytes": 260845,
+			"load_ms": 174.78,
+			"loaded": true,
+			"memory_bytes": 236350214,
+			"order_ms_per_order": 0.314516,
+			"order_phases_ms": {
+				"courier_ms": 139.905,
+				"fixture_ms": 0.119,
+				"pack_ms": 831.305,
+				"place_ms": 601.059
+			},
+			"orders": 5000,
+			"orders_held": 10000,
+			"orders_ms": 1572.58,
+			"save_ms": 305.534,
+			"simulation_ms": 0.196363194444445,
+			"staff": 50,
+			"tick_max_at_minute": 0,
+			"tick_max_ms": 88.975,
+			"tick_p99_ms": 5.184
+		},
+		{
+			"balanced": true,
+			"day": 3,
+			"day_total_ms": 306.664,
+			"frame_mean_ms": 0.213447916666667,
+			"frame_p99_ms": 5.067,
+			"gzip_bytes": 378198,
+			"hour_tick_mean_ms": 9.13683333333333,
+			"journal_entries": 3060,
+			"json_bytes": 378198,
+			"load_ms": 252.074,
+			"loaded": true,
+			"memory_bytes": 284886158,
+			"order_ms_per_order": 0.3170802,
+			"order_phases_ms": {
+				"courier_ms": 139.299,
+				"fixture_ms": 0.15,
+				"pack_ms": 834.778,
+				"place_ms": 611.018
+			},
+			"orders": 5000,
+			"orders_held": 15000,
+			"orders_ms": 1585.401,
+			"save_ms": 436.13,
+			"simulation_ms": 0.212961111111111,
+			"staff": 50,
+			"tick_max_at_minute": 0,
+			"tick_max_ms": 98.848,
+			"tick_p99_ms": 5.066
+		}
+	],
+	"schema": 2,
+	"texture_bytes": 943718400,
+	"texture_soak": {
+		"budget_bytes": 943718400,
+		"held_bytes": 860163732,
+		"ms": 9041.187,
+		"textures_requested": 1901
+	},
+	"texture_source": "accounted",
+	"wall_ms": 16069.065
+}

@@ -11,6 +11,7 @@ func _process(_delta):
 func _ready():
 	call_deferred("run")
 func settle():
+	while SceneRouter.transitioning: await get_tree().process_frame
 	for i in 8: await get_tree().process_frame
 	await RenderingServer.frame_post_draw
 func shot(key):
@@ -27,6 +28,31 @@ func run():
 	Help.auto = false
 	I18n.init()
 	GameState.new_game({"name":"Art Review", "seed":12345})
+	if "--frontage-only" in OS.get_cmdline_user_args():
+		UIRoot._suppress_decisions = true
+		GameState.data["tutorial"] = {"v":3,"off":true,"seen":{}}
+		for id in DataDB.districts:
+			var width := int(DataDB.districts[id]["size_tiles"][0]) * 16
+			for segment in int(ceil(width / 640.0)):
+				SceneRouter._enter("district", id, "metro", "down", Vector2(mini(320+segment*640,width-320),220))
+				Clock.world_active = false
+				# Freeze review fixtures before a frontage camera lands in a north exit.
+				SceneRouter.current.player.set_physics_process(false)
+				SceneRouter.current.player.visible = false
+				for exit in SceneRouter.current.get_children():
+					if exit is ExitArea: exit.set_deferred("monitoring", false)
+				await settle()
+				UIRoot.close_all()
+				UIRoot.set_hud_visible(false)
+				for card in get_tree().get_nodes_in_group("location_card"): card.free()
+				await shot("frontage_%s_%d" % [id,segment])
+		get_tree().quit()
+		return
+	if "--followup" in OS.get_cmdline_user_args():
+		await followup()
+		write_checks()
+		get_tree().quit()
+		return
 	if "--perf-only" in OS.get_cmdline_user_args():
 		await measure_frames()
 		write_checks()
@@ -108,3 +134,85 @@ func measure_frames():
 func write_checks():
 	var f = FileAccess.open(out.path_join("checks.json"), FileAccess.WRITE)
 	f.store_string(JSON.stringify(checks, "  "))
+
+func followup():
+	SceneRouter.go_menu()
+	await shot("main_menu_static")
+	SceneRouter.go_creator()
+	await shot("creator_reference")
+	UIRoot._suppress_decisions = true
+	GameState.data["tutorial"] = {"v":3,"off":true,"seen":{}}
+	for fixture in [["riverside",Vector2(2070,440)], ["startup_hub",Vector2(1950,440)], ["financial",Vector2(1050,350)], ["luxury_heights",Vector2(1430,350)]]:
+		SceneRouter._enter("district",fixture[0],"metro","down",fixture[1])
+		Clock.world_active = false
+		for i in 20: await get_tree().process_frame
+		UIRoot.close_all()
+		for card in get_tree().get_nodes_in_group("location_card"): card.free()
+		await shot("street_"+fixture[0])
+	# Actual movement down the road, not a teleport into an exit trigger.
+	SceneRouter._enter("district","riverside","metro","right",Vector2(2110,440))
+	Clock.world_active = false
+	await settle()
+	Input.action_press("move_right")
+	for i in 180:
+		await get_tree().physics_frame
+		if SceneRouter.world_scene().scene_id == "startup_hub": break
+	Input.action_release("move_right")
+	for i in 60: await get_tree().process_frame
+	checks.append({"key":"road_end_actual_transition", "ok":SceneRouter.world_scene().scene_id == "startup_hub"})
+	await shot("road_end_after_transition")
+	UIRoot.close_all()
+	var order = {"id":"VISUAL", "product":"phone_stand", "qty":2, "customer":"Alex Chen", "district":"Riverside", "status":"placed", "location":"riverside_studio", "unit_price":20.0}
+	var pack = PackGame.new([order])
+	UIRoot.open_modal(pack)
+	await shot("packing_intro")
+	pack.start()
+	await shot("packing_play")
+	checks.append({"key":"packing_stage_height", "ok":pack.stage.size.y >= pack.stage.find_child("PackingColumns",true,false).get_combined_minimum_size().y})
+	pack._box("medium")
+	await shot("packing_box")
+	UIRoot.close_all()
+	# Shared rig contact sheet: every sold/base outfit and every player presentation.
+	SceneRouter._enter("district","shopping_street","metro","down")
+	Clock.world_active = false
+	UIRoot.set_hud_visible(false)
+	var gallery = Control.new()
+	gallery.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var background = ColorRect.new()
+	background.color = Color(0.04,0.07,0.12)
+	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	gallery.add_child(background)
+	UIRoot.add_child(gallery)
+	var outfit_ids = ["startup_casual","office_professional","home","business_suit","courier","barista","civic_staff","casual_tee","casual_jacket","executive","luxury_citywear","travel","formal_evening","logistics_site"]
+	for presentation in ["masculine","feminine","neutral"]:
+		var rigs = []
+		for index in outfit_ids.size():
+			for row in 3:
+				var rig = CharacterRig.new()
+				var app = GameState.default_appearance().duplicate(true)
+				app["presentation"] = presentation
+				gallery.add_child(rig)
+				var tint = {}
+				rig.setup(app,outfit_ids[index], tint)
+				rig.set_dir(["down","right","up"][row])
+				rig.position = Vector2(24+index*43,90+row*91)
+				rig.scale = Vector2(1.5,1.5)
+				rigs.append(rig)
+		await shot("outfits_"+presentation)
+		for rig in rigs: rig.free()
+	for index in DataDB.character["skin_tones"].size():
+		var app = GameState.default_appearance().duplicate(true)
+		app["skin"] = DataDB.character["skin_tones"][index]["id"]
+		var portrait = PortraitView.new()
+		portrait.position = Vector2(10+index*104,24)
+		portrait.size = Vector2(100,100)
+		gallery.add_child(portrait)
+		portrait.setup_character(app,"executive")
+		var rig = CharacterRig.new()
+		gallery.add_child(rig)
+		rig.setup(app,"executive")
+		rig.scale = Vector2(3,3)
+		rig.position = Vector2(60+index*104,300)
+	await shot("skin_identity")
+	gallery.free()
+	UIRoot.set_hud_visible(true)

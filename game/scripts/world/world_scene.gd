@@ -275,10 +275,29 @@ func add_prop(p: Dictionary, parent: Node = null) -> Node2D:
 		timed_props.append({"node": holder, "body": body, "show": p["show"]})
 		_apply_timed(timed_props[-1])
 	if p.has("label"):
-		var lb := UIK.world_label(str(p["label"]), 5)
-		lb.position = Vector2(2, -h + 3)
-		lb.size = Vector2(w - 4, 8)
-		holder.add_child(lb)
+		if sprite_path == "direction_sign":
+			# The decorative three-board texture is too narrow for localized district names.
+			# Reuse the bounded vector board, retaining this prop's original pole/collision anchor.
+			s.visible = false
+			var way := ExitMarker.new()
+			var caption := I18n.t(str(p["label"]))
+			var pointing := Vector2.LEFT if caption.contains("←") else Vector2.RIGHT
+			caption = caption.replace("←", "").replace("→", "").strip_edges()
+			way.setup(Rect2(), pointing, caption)
+			way.board = Rect2(w/2.0-60, -h-8, 120, 28)
+			way._label.position = way.board.position + Vector2(5 if pointing == Vector2.RIGHT else 23, 2)
+			holder.add_child(way)
+			var pole := Line2D.new()
+			pole.points = PackedVector2Array([Vector2(w/2.0,-h+20),Vector2(w/2.0,0)])
+			pole.width = 2
+			pole.default_color = Color("#34415b")
+			holder.add_child(pole)
+		else:
+			var lb := UIK.world_label(str(p["label"]), 5)
+			lb.position = Vector2(2, -h + 3)
+			lb.size = Vector2(w - 4, 8)
+			lb.clip_text = true
+			holder.add_child(lb)
 	if p.has("interact"):
 		var it: Dictionary = p["interact"]
 		add_interactable(Vector2(float(p["x"]) + w / 2.0, float(p["y"]) + h + 6), str(it["label"]), str(it["action"]), it.get("params", {}), 26.0)

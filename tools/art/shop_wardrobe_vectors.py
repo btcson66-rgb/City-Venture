@@ -66,7 +66,7 @@ def clothing(oid,pres,direction,tick,pose,part):
     oid={'executive':'business_suit','formal_evening':'business_suit','luxury_citywear':'casual_jacket','travel':'casual_jacket','logistics_site':'casual_jacket'}[oid]
     sx={'masculine':8.1,'feminine':9.7,'neutral':8.9}[pres];r=32-sx
     if direction==1:sx=11.7;r=21.6
-    b=bob(pose,tick);swing=[0,1.4,-1.4,.8][tick] if pose in ['', 'carry'] else 0
+    b=bob(pose,tick);swing=[0,2.0,0,-2.0][tick] if pose in ['', 'carry'] else 0
     yend=43.8
     gray=oid in ['business_suit','courier','casual_tee','casual_jacket']
     color='url(#cloth)' if gray else 'url(#white)' if oid=='office_professional' else 'url(#navy)' if oid!='home' else '#a7b4c8'
@@ -94,12 +94,12 @@ def clothing(oid,pres,direction,tick,pose,part):
             if direction==1:result=path('M 12 32 L 21 32 L 27 36 Q 28 37 26 39 L 23 44 L 19.5 44 L 22 38 L 13 38 Z',bottom,INK,.25)
             else:result=path(f'M {sx+2} 31 L {r-2} 31 L {r} 37 L {r-1} 44 L {r-4.2} 44 L {r-4} 38 L 16 35.5 L {sx+4} 38 L {sx+4.2} 44 L {sx+1} 44 L {sx} 37 Z',bottom,INK,.25)
         else:
-            result=path(f'M {sx+2} 31 L {r-2} 31 L {r-2+swing*.18} 44 L {r-5.1+swing*.18} 44 L 16 35 L {sx+5.1-swing*.18} 44 L {sx+2-swing*.18} 44 Z',bottom,INK,.25)
+            result=path(f'M {sx+2} 31 L {r-2} 31 L {r-2+swing*(1.25 if direction==1 else .45)} 44 L {r-5.1+swing*(1.25 if direction==1 else .45)} 44 L 16 35 L {sx+5.1-swing*(1.25 if direction==1 else .45)} 44 L {sx+2-swing*(1.25 if direction==1 else .45)} 44 Z',bottom,INK,.25)
         result+=line(f'M {sx+3} 32 Q {sx+3} 34 {sx+5} 35 M {r-3} 32 Q {r-3} 34 {r-5} 35', '#6f839f' if not gray else '#ddd',.24)
         result+=line(f'M {sx+3.3} 37 L {sx+3.7} 41.8 M {r-3.3} 37 L {r-3.7} 41.8','#53647c' if not gray else '#999',.23)
         if oid=='office_professional' and pres=='feminine' and direction!=1:result=path(f'M {sx+2} 31 L {r-2} 31 L {r} 39 Q 16 40 {sx} 39 Z','url(#navy)',INK,.25)
     elif part=='shoes':
-        xs=[sx+1.1-swing*.18,r-5.5+swing*.18] if direction!=1 else [11.4-swing*.2,17.6+swing*.2]
+        xs=[sx+1.1-swing*(1.25 if direction==1 else .45),r-5.5+swing*(1.25 if direction==1 else .45)] if direction!=1 else [12.4-swing*1.25,15.1+swing*1.25]
         if pose=='sit' and direction==1:xs=[19.1,22.3]
         for x in xs:
             result+=path(f'M {x} 43 L {x+3.5} 43 L {x+4.4} 45 Q {x+4.5} 46 {x+.1} 46 L {x-.3} 45 Z','url(#white)' if oid in ['startup_casual','home','casual_tee'] else '#2b3443',INK,.25)
@@ -145,7 +145,6 @@ def clothing(oid,pres,direction,tick,pose,part):
         box=((32-width)/2,19,width,27) if direction!=1 else (10.5,19,12.7,27)
         result=textured(result,'clothing_color' if part=='shoes' else 'clothing',garment,direction,box)
     result=group(result,f'translate(0 {b})')
-    if part=='top':result=compatibility_sleeve(garment,pres,direction,tick,pose)+result
     return result
 
 def svg(w,h,content):return f'<svg xmlns="http://www.w3.org/2000/svg" width="{w*4}" height="{h*4}" viewBox="0 0 {w} {h}">{DEFS}{content}</svg>'

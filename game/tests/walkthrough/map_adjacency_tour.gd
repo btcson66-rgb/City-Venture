@@ -51,6 +51,9 @@ func run() -> void:
 		var r: Array = ex["rect"]
 		var target := Vector2(float(r[0]) + float(r[2]) / 2, float(r[1]) + float(r[3]) / 2)
 		var side := str(ex["direction"])
+		# Wide exits include traffic lanes; this tour follows the safe upper pavement.
+		# The separate visual-repair probe exercises the actual asphalt-end transition.
+		if side in ["E", "W"] and int(r[1]) == 324: target.y = float(r[1]) + 24.0
 		var inward: Vector2 = {"N": Vector2.DOWN, "E": Vector2.LEFT, "S": Vector2.UP, "W": Vector2.RIGHT}[side]
 		await _cross_road_safely(world, target + inward * 80)
 		await bot.walk_to(target + inward * 80, 5.0, 60.0)

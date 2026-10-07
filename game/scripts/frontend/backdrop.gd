@@ -24,10 +24,15 @@ func _ready() -> void:
 	_img.texture = Art.tex(tex_path)
 	_img.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_img)
+	if period <= 0.0:
+		_img.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		_img.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		_img.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+		set_process(false)
 
 
 func _process(delta: float) -> void:
-	if _img.texture == null:
+	if _img.texture == null or period <= 0.0:
 		return
 	_t += delta
 	var over := maxf(0.0, _img.texture.get_width() - 640.0)
