@@ -38,6 +38,12 @@
    "conversation": "maya_legacy"
   },
   {
+   "when": [
+    "!flag:maya_intro_done"
+   ],
+   "conversation": "maya_intro"
+  },
+  {
    "when": [],
    "conversation": "maya_cafe"
   }

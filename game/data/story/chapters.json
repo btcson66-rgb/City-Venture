@@ -10,9 +10,9 @@
      "id": "ch1_phone",
      "main": true,
      "goal": "Arrival",
-     "text": "Check your phone (Tab)",
+     "text": "Read your notifications (Tab)",
      "complete_when": [
-      "flag:maya_intro_done"
+      "flag:notifications_read || flag:maya_intro_done"
      ],
      "target": {
       "phone": true

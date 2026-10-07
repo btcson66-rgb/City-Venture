@@ -393,7 +393,7 @@ func test_quarterly_report_milestone_and_board_intervention() -> void:
 	quarter(did)
 	runner.eq(int(deal["misses"]), 2, "second miss")
 	runner.eq(str(deal["board"]["status"]), "open", "the clause opens a board review")
-	runner.check(GameState.data["messages"].any(func(m): return str(m.get("text", "")).contains("board is calling a review")), "the investor writes to you")
+	runner.check(GameState.data["messages"].any(func(m): return m.get("target", {}).get("tab", "") == "reports"), "the investor writes to you")
 	var choices := Fundraising.board_choices(deal)
 	runner.check(choices.size() == 3, "three responses")
 	runner.eq(str(choices[2]["block"]), "", "the founder holds a majority, so the board can be overruled")
@@ -682,16 +682,16 @@ func test_partnership_missed_deliverables_end_it_and_exclusive_exit_costs_money(
 	runner.check(Ledger.check_balanced(), "books balanced")
 
 
-func test_partner_phone_reply_and_expo_bonus() -> void:
+func test_partner_notification_and_official_signature() -> void:
 	var ent := company()
 	partner_ready(ent)
 	var offered := Partnerships.propose("lumen_studio")
 	var message: Dictionary = GameState.data["messages"][-1]
-	runner.check(message["replies"].any(func(r): return r["id"] == "exclusive"), "the phone message offers both variants")
-	var reply := PhoneMessages.reply(str(message["id"]), "sign")
-	runner.check(reply["ok"], "sign from the phone")
+	runner.eq(message["target"]["tab"], "partners", "notification points to official partner screen")
+	var reply := Partnerships.respond(str(offered["id"]), "sign")
+	runner.check(reply["ok"], "sign in the official screen")
 	runner.eq(str(Partnerships.get_item(str(offered["id"]))["status"]), "active", "signed")
-	runner.check(not PhoneMessages.reply(str(message["id"]), "sign")["ok"], "answering twice is refused")
+	runner.check(not Partnerships.respond(str(offered["id"]), "sign")["ok"], "answering twice is refused")
 	runner.eq(Partnerships.expo_quality_bonus(), 0.0, "a signature alone does not help the expo bid")
 	var item := Partnerships.get_item(str(offered["id"]))
 	runner.check(Partnerships.work(str(item["id"]))["ok"], "deliver")
@@ -703,19 +703,19 @@ func test_partner_phone_reply_and_expo_bonus() -> void:
 	runner.check(ent != "", "company present")
 
 
-func test_board_phone_reply_resolves_the_review() -> void:
+func test_board_notification_and_official_review() -> void:
 	var ent := company()
 	var did := signed_angel(ent)
 	quarter(did)
 	quarter(did)
 	var message := {}
 	for m in GameState.data["messages"]:
-		if m.has("replies") and m["replies"].any(func(r): return r["id"] == "advisor"):
+		if m.get("target", {}).get("tab", "") == "reports":
 			message = m
 	runner.check(not message.is_empty(), "the review arrives as a message")
 	var cash := Ledger.cash(ent)
-	var reply := PhoneMessages.reply(str(message["id"]), "advisor")
-	runner.check(reply["ok"], "answer from the phone")
+	var reply := Fundraising.board_decide(did, "advisor")
+	runner.check(reply["ok"], "decide in the official screen")
 	runner.check(Ledger.cash(ent) < cash, "the advisor fee was paid")
 	runner.check(not Fundraising.board_decide(did, "plan")["ok"], "already decided")
 

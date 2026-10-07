@@ -29,7 +29,7 @@ msgstr ""
 msgid "  ·  DAY %d"
 msgstr ""
 
-#: autoload/ui_root.gd:377
+#: autoload/ui_root.gd:379
 msgid "  ·  Open %s–%s"
 msgstr ""
 
@@ -69,7 +69,7 @@ msgstr ""
 msgid " inc"
 msgstr ""
 
-#: scripts/sim/contracts.gd:307
+#: scripts/sim/contracts.gd:303
 msgid " late (penalty %s)"
 msgstr ""
 
@@ -297,11 +297,11 @@ msgstr ""
 msgid "%d new delivery runs are posted (Company OS → Logistics)."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:511
+#: scripts/ui/phone_ui.gd:407
 msgid "%d of %d days"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:496
+#: scripts/ui/phone_ui.gd:392
 msgid "%d of %d reached"
 msgstr ""
 
@@ -525,10 +525,6 @@ msgstr ""
 msgid "%s has a %dx liquidation preference: it is repaid first."
 msgstr ""
 
-#: scripts/sim/group_jobs.gd:68
-msgid "%s has a big order that needs several of your businesses: %s. Reward %s. Open Company OS, Group tab."
-msgstr ""
-
 #: scripts/ui/modals/poach_modal.gd:29
 msgid "%s has an offer from %s: %s per week. Respond by %s."
 msgstr ""
@@ -561,7 +557,7 @@ msgstr ""
 msgid "%s is full: %d of %d units, counting stock on the way."
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:199
+#: scripts/ui/modals/loan_modal.gd:206
 msgid "%s is in the company account. First payment in 30 days."
 msgstr ""
 
@@ -617,7 +613,7 @@ msgstr ""
 msgid "%s paid early: %s in the bank."
 msgstr ""
 
-#: scripts/sim/contracts.gd:361
+#: scripts/sim/contracts.gd:357
 msgid "%s paid invoice %s: %s"
 msgstr ""
 
@@ -917,7 +913,7 @@ msgstr ""
 msgid "%s: %s for %s. Your share %s → %s."
 msgstr ""
 
-#: scripts/sim/partnerships.gd:192
+#: scripts/sim/partnerships.gd:188
 msgid "%s: %s of job %s paid to the partner"
 msgstr ""
 
@@ -941,7 +937,7 @@ msgstr ""
 msgid "%s: audit %s home dollars, commission %s"
 msgstr ""
 
-#: scripts/sim/partnerships.gd:120
+#: scripts/sim/partnerships.gd:116
 msgid "%s: deliverable %d of %d"
 msgstr ""
 
@@ -993,11 +989,11 @@ msgstr ""
 msgid "(Order {order} — {product}, {price})"
 msgstr ""
 
-#: autoload/save_system.gd:434
+#: autoload/save_system.gd:435
 msgid "*.cvsave ; "
 msgstr ""
 
-#: autoload/save_system.gd:456
+#: autoload/save_system.gd:457
 msgid "*.cvsave,*.json ; "
 msgstr ""
 
@@ -1021,7 +1017,7 @@ msgstr ""
 msgid "+15% unit cost for 30 days. Margins shrink."
 msgstr ""
 
-#: scripts/sim/contracts.gd:182 scripts/sim/contracts.gd:213
+#: scripts/sim/contracts.gd:178 scripts/sim/contracts.gd:209
 msgid ", %d%% upfront"
 msgstr ""
 
@@ -1169,7 +1165,7 @@ msgstr ""
 msgid "A Van Driver (People tab) takes one run each workday from 9:00. Your own ecommerce parcels can go out in the van too: choose \"Own van\" at the packing table."
 msgstr ""
 
-#: autoload/save_system.gd:133 autoload/save_system.gd:400 scripts/ui/modals/save_list_modal.gd:63
+#: autoload/save_system.gd:133 autoload/save_system.gd:401 scripts/ui/modals/save_list_modal.gd:63
 msgid "A backup could not be created. Your existing save is unchanged."
 msgstr ""
 
@@ -1195,6 +1191,10 @@ msgstr ""
 
 #: data/story/chapters.json
 msgid "A better price, a longer handshake. A year to earn the rest."
+msgstr ""
+
+#: scripts/sim/fundraising.gd:685
+msgid "A board review is ready. Choose your next step in Reports."
 msgstr ""
 
 #: data/dialogue/ruiz_intro.json
@@ -1229,7 +1229,7 @@ msgstr ""
 msgid "A campaign aims for relevant reach or conversions, then reports actual measured results."
 msgstr ""
 
-#: scripts/sim/fundraising.gd:747
+#: scripts/sim/fundraising.gd:743
 msgid "A campaign is already running. Wait for its result."
 msgstr ""
 
@@ -1285,7 +1285,7 @@ msgstr ""
 msgid "A colleague"
 msgstr ""
 
-#: scripts/sim/fundraising.gd:739
+#: scripts/sim/fundraising.gd:735
 msgid "A community round needs an operating company with customers to appeal to."
 msgstr ""
 
@@ -1377,6 +1377,10 @@ msgstr ""
 msgid "A fresh start"
 msgstr ""
 
+#: scripts/sim/phone_messages.gd:45
+msgid "A friend is waiting. Visit when it suits you."
+msgstr ""
+
 #: data/help/glossary.json
 msgid "A fuller van spreads the fixed time of a trip over more parcels, so each parcel costs less to deliver."
 msgstr ""
@@ -1463,10 +1467,6 @@ msgstr ""
 
 #: data/jobs/cowork_host.json
 msgid "A member asks where to find cheap suppliers. You point them to Ken."
-msgstr ""
-
-#: data/help/glossary.json
-msgid "A missed reply must not stall a task. Review Tasks or book a new meeting from Contacts if the original action is unavailable."
 msgstr ""
 
 #: data/help/glossary.json
@@ -1809,6 +1809,10 @@ msgstr ""
 msgid "A service job pays after delivery and its payment terms. Keep cash for the work and the wait."
 msgstr ""
 
+#: scripts/sim/group_jobs.gd:68
+msgid "A shared order is ready to review."
+msgstr ""
+
 #: data/character/options.json
 msgid "A sharp three-piece in midnight wool. Pocket square included."
 msgstr ""
@@ -1985,7 +1989,7 @@ msgstr ""
 msgid "AUCTION RULES: lots sell Wednesdays 09:00–17:00. Buyer fee 5% on top of the hammer price. Hidden defects are not shown — pay Jun Ito $150 for an inspection before you bid."
 msgstr ""
 
-#: scripts/sim/contracts.gd:26 scripts/sim/contracts.gd:344 scripts/sim/contracts.gd:37 scripts/sim/fx.gd:24
+#: scripts/sim/contracts.gd:26 scripts/sim/contracts.gd:340 scripts/sim/contracts.gd:37 scripts/sim/fx.gd:24
 msgid "AUD"
 msgstr ""
 
@@ -2041,7 +2045,7 @@ msgstr ""
 msgid "Accept Kai's interview"
 msgstr ""
 
-#: scripts/sim/fundraising.gd:687 scripts/sim/fundraising.gd:696
+#: scripts/sim/fundraising.gd:692
 msgid "Accept a board-appointed advisor"
 msgstr ""
 
@@ -2069,11 +2073,11 @@ msgstr ""
 msgid "Accept group job"
 msgstr ""
 
-#: scripts/sim/group_jobs.gd:186
+#: scripts/sim/group_jobs.gd:183
 msgid "Accept it to start the clock."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:231
+#: scripts/ui/phone_ui.gd:217
 msgid "Accept opportunity"
 msgstr ""
 
@@ -2089,7 +2093,7 @@ msgstr ""
 msgid "Accept the cut and requote clients"
 msgstr ""
 
-#: scripts/sim/group_jobs.gd:120
+#: scripts/sim/group_jobs.gd:117
 msgid "Accept the group job first."
 msgstr ""
 
@@ -2099,10 +2103,6 @@ msgstr ""
 
 #: scripts/ui/modals/contacts_modal.gd:71
 msgid "Accept the referred job"
-msgstr ""
-
-#: scripts/sim/contracts.gd:40 scripts/sim/group_jobs.gd:69
-msgid "Accept this offer"
 msgstr ""
 
 #: data/events/crestline_big_offer.json
@@ -2137,7 +2137,7 @@ msgstr ""
 msgid "Accepted"
 msgstr ""
 
-#: scripts/sim/group_jobs.gd:87
+#: scripts/sim/group_jobs.gd:84
 msgid "Accepted group job: %s"
 msgstr ""
 
@@ -2145,7 +2145,7 @@ msgstr ""
 msgid "Accepted job %s: %s"
 msgstr ""
 
-#: scripts/sim/contracts.gd:144
+#: scripts/sim/contracts.gd:140
 msgid "Accepted."
 msgstr ""
 
@@ -2205,7 +2205,7 @@ msgstr ""
 msgid "Accuracy and speed decide how much of the work gets done in this session."
 msgstr ""
 
-#: scripts/ui/modals/growth_modal.gd:17 scripts/ui/modals/pause_menu.gd:28 scripts/ui/phone_ui.gd:441
+#: scripts/ui/modals/growth_modal.gd:17 scripts/ui/modals/pause_menu.gd:28 scripts/ui/phone_ui.gd:337
 msgid "Achievements"
 msgstr ""
 
@@ -2409,10 +2409,6 @@ msgstr ""
 msgid "Agency proposal"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:163 scripts/ui/phone_ui.gd:366
-msgid "Agenda"
-msgstr ""
-
 #: data/economy/workflows.json
 msgid "Aggressive technical jargon"
 msgstr ""
@@ -2473,11 +2469,15 @@ msgstr ""
 msgid "Alex Chen"
 msgstr ""
 
+#: scripts/ui/phone_ui.gd:233
+msgid "All"
+msgstr ""
+
 #: scripts/ui/minigames/route_game.gd:53
 msgid "All %d stops planned  ·  round trip %.1f km"
 msgstr ""
 
-#: autoload/save_system.gd:471
+#: autoload/save_system.gd:472
 msgid "All Files (*)"
 msgstr ""
 
@@ -2485,7 +2485,7 @@ msgstr ""
 msgid "All cost rows are in home dollars; the buyer quote is labelled with its own currency."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:454
+#: scripts/ui/phone_ui.gd:350
 msgid "All events"
 msgstr ""
 
@@ -2505,7 +2505,7 @@ msgstr ""
 msgid "All save slots are in use. Choose one for the new game. The old save is moved to a backup folder, not deleted."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:465
+#: scripts/ui/phone_ui.gd:361
 msgid "All years"
 msgstr ""
 
@@ -2927,10 +2927,6 @@ msgstr ""
 
 #: data/story/chapters.json
 msgid "Arrival"
-msgstr ""
-
-#: scripts/sim/phone_messages.gd:181
-msgid "Arrive during this meeting's time window, or book again."
 msgstr ""
 
 #: scripts/ui/modals/fitness_modal.gd:47
@@ -3541,7 +3537,7 @@ msgstr ""
 msgid "Balanced negotiation"
 msgstr ""
 
-#: data/buildings/nexus_bank.json scripts/ui/phone_ui.gd:162
+#: data/buildings/nexus_bank.json scripts/ui/phone_ui.gd:148
 msgid "Bank"
 msgstr ""
 
@@ -3673,7 +3669,7 @@ msgstr ""
 msgid "Belt tightened."
 msgstr ""
 
-#: scripts/sim/contracts.gd:213
+#: scripts/sim/contracts.gd:209
 msgid "Best we can do: %s/unit, Net %d%s."
 msgstr ""
 
@@ -3793,7 +3789,7 @@ msgstr ""
 msgid "Board capital withdrawn: %s"
 msgstr ""
 
-#: scripts/sim/fundraising.gd:729
+#: scripts/sim/fundraising.gd:725
 msgid "Board review closed: %s."
 msgstr ""
 
@@ -3805,7 +3801,7 @@ msgstr ""
 msgid "Board seat"
 msgstr ""
 
-#: scripts/sim/fundraising.gd:717
+#: scripts/sim/fundraising.gd:713
 msgid "Board-appointed advisor fee: %s"
 msgstr ""
 
@@ -3835,10 +3831,6 @@ msgstr ""
 
 #: data/dialogue/maya_intro.json
 msgid "Bold. Love it."
-msgstr ""
-
-#: scripts/ui/phone_ui.gd:372
-msgid "Book a new time from Contacts if needed."
 msgstr ""
 
 #: scripts/ui/modals/loan_modal.gd:90 scripts/ui/modals/loan_modal.gd:94
@@ -4185,7 +4177,7 @@ msgstr ""
 msgid "Build savings from wages without a company."
 msgstr ""
 
-#: scripts/sim/fundraising.gd:766
+#: scripts/sim/fundraising.gd:762
 msgid "Build the campaign page from one to three real figures."
 msgstr ""
 
@@ -4953,7 +4945,7 @@ msgstr ""
 msgid "Can't work the counter: %s."
 msgstr ""
 
-#: autoload/save_system.gd:471 autoload/sound.gd:286 scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57
+#: autoload/save_system.gd:472 autoload/sound.gd:286 scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57
 msgid "Cancel"
 msgstr ""
 
@@ -5445,10 +5437,6 @@ msgstr ""
 msgid "Check the competitor's rates"
 msgstr ""
 
-#: scripts/sim/phone_messages.gd:117
-msgid "Check the current freelance offers at a co-work desk. Each brief lists its requirements and payment terms."
-msgstr ""
-
 #: data/buildings/airport_terminal.json
 msgid "Check the departures hall"
 msgstr ""
@@ -5459,10 +5447,6 @@ msgstr ""
 
 #: data/buildings/corner_cafe_unit.json
 msgid "Check the till — Company OS"
-msgstr ""
-
-#: data/story/chapters.json
-msgid "Check your phone (Tab)"
 msgstr ""
 
 #: data/economy/staff.json
@@ -5629,15 +5613,11 @@ msgstr ""
 msgid "Choose a market strategy first."
 msgstr ""
 
-#: scripts/sim/phone_messages.gd:99
-msgid "Choose a message template."
-msgstr ""
-
 #: data/help/help.json
 msgid "Choose a next-life route, then confirm. The old game is saved first; only an empty slot may be used."
 msgstr ""
 
-#: scripts/sim/group_jobs.gd:126
+#: scripts/sim/group_jobs.gd:123
 msgid "Choose a part that is still open."
 msgstr ""
 
@@ -5693,7 +5673,7 @@ msgstr ""
 msgid "Choose a running group business and a valid media budget."
 msgstr ""
 
-#: autoload/save_system.gd:397 scripts/ui/modals/save_list_modal.gd:22
+#: autoload/save_system.gd:398 scripts/ui/modals/save_list_modal.gd:22
 msgid "Choose a save slot to replace. Its existing save will be backed up."
 msgstr ""
 
@@ -5925,11 +5905,11 @@ msgstr ""
 msgid "Choose how to help. Each approach is real work with its own time, cost and trust; the work completes either way."
 msgstr ""
 
-#: scripts/sim/fundraising.gd:724
+#: scripts/sim/fundraising.gd:720
 msgid "Choose how to respond to the board."
 msgstr ""
 
-#: scripts/sim/partnerships.gd:84
+#: scripts/sim/partnerships.gd:80
 msgid "Choose how to respond to the partner."
 msgstr ""
 
@@ -5961,7 +5941,7 @@ msgstr ""
 msgid "Choose notice to avoid the termination fee, or pay to move today."
 msgstr ""
 
-#: scripts/sim/fundraising.gd:764
+#: scripts/sim/fundraising.gd:760
 msgid "Choose one of the campaign goals and promotion budgets."
 msgstr ""
 
@@ -5971,10 +5951,6 @@ msgstr ""
 
 #: scripts/sim/fundraising.gd:351
 msgid "Choose one of the offered answers."
-msgstr ""
-
-#: scripts/sim/phone_messages.gd:63
-msgid "Choose one of this message's replies."
 msgstr ""
 
 #: data/events/rival_undercut.json
@@ -6057,7 +6033,7 @@ msgstr ""
 msgid "Chris Walsh"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:163
+#: scripts/ui/phone_ui.gd:149 scripts/ui/phone_ui.gd:233
 msgid "City"
 msgstr ""
 
@@ -6073,7 +6049,7 @@ msgstr ""
 msgid "City Fleet Refresh"
 msgstr ""
 
-#: scripts/ui/modals/city_guide_modal.gd:7 scripts/ui/phone_ui.gd:164
+#: scripts/ui/modals/city_guide_modal.gd:7 scripts/ui/phone_ui.gd:150
 msgid "City Guide"
 msgstr ""
 
@@ -6117,7 +6093,7 @@ msgstr ""
 msgid "City Marathon Weekend"
 msgstr ""
 
-#: autoload/save_system.gd:434 autoload/save_system.gd:456
+#: autoload/save_system.gd:435 autoload/save_system.gd:457
 msgid "City Venture save"
 msgstr ""
 
@@ -6149,7 +6125,7 @@ msgstr ""
 msgid "City map"
 msgstr ""
 
-#: scripts/ui/market_view.gd:33 scripts/ui/phone_ui.gd:164 scripts/ui/phone_ui.gd:532
+#: scripts/ui/market_view.gd:33 scripts/ui/phone_ui.gd:150 scripts/ui/phone_ui.gd:428
 msgid "City news"
 msgstr ""
 
@@ -6173,7 +6149,7 @@ msgstr ""
 msgid "City update: %s"
 msgstr ""
 
-#: autoload/save_system.gd:416
+#: autoload/save_system.gd:417
 msgid "CityVenture_%s_%04d-%02d-%02d.cvsave"
 msgstr ""
 
@@ -6345,7 +6321,7 @@ msgstr ""
 msgid "Click! %d%% (%s)"
 msgstr ""
 
-#: data/npcs/client.json scripts/sim/phone_messages.gd:225
+#: data/npcs/client.json scripts/sim/phone_messages.gd:184
 msgid "Client"
 msgstr ""
 
@@ -6749,19 +6725,19 @@ msgstr ""
 msgid "Community round"
 msgstr ""
 
-#: scripts/sim/fundraising.gd:812
+#: scripts/sim/fundraising.gd:808
 msgid "Community round platform fee: %s"
 msgstr ""
 
-#: scripts/sim/fundraising.gd:776
+#: scripts/sim/fundraising.gd:772
 msgid "Community round promotion: %s"
 msgstr ""
 
-#: scripts/sim/fundraising.gd:807
+#: scripts/sim/fundraising.gd:803
 msgid "Community round: %d backers"
 msgstr ""
 
-#: scripts/sim/fundraising.gd:745
+#: scripts/sim/fundraising.gd:741
 msgid "Community rounds suit online shops and media companies with real customers. Deliver an order or run a campaign first."
 msgstr ""
 
@@ -6773,7 +6749,7 @@ msgstr ""
 msgid "Compact"
 msgstr ""
 
-#: scripts/ui/modals/bank_modal.gd:82 scripts/ui/phone_ui.gd:454
+#: scripts/ui/modals/bank_modal.gd:82 scripts/ui/phone_ui.gd:350
 msgid "Company"
 msgstr ""
 
@@ -7037,16 +7013,8 @@ msgstr ""
 msgid "Complete the previous growth stage."
 msgstr ""
 
-#: scripts/sim/phone_messages.gd:66 scripts/ui/phone_ui.gd:311
-msgid "Complete the reply's requirements first."
-msgstr ""
-
 #: scripts/sim/capital_market.gd:162
 msgid "Complete the roadshow and review the price first."
-msgstr ""
-
-#: scripts/sim/phone_messages.gd:102
-msgid "Complete this message template's requirements first."
 msgstr ""
 
 #: scripts/sim/personal_life.gd:184
@@ -7161,10 +7129,6 @@ msgstr ""
 msgid "Confirm termination"
 msgstr ""
 
-#: scripts/sim/bank.gd:196
-msgid "Confirm the meeting"
-msgstr ""
-
 #: scripts/ui/modals/capital_market_modal.gd:57
 msgid "ConfirmCapitalSale"
 msgstr ""
@@ -7241,7 +7205,7 @@ msgstr ""
 msgid "Contact Omar with a live registered company first."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:909 scripts/ui/modals/contacts_modal.gd:6 scripts/ui/phone_ui.gd:163 scripts/ui/phone_ui.gd:331
+#: scripts/ui/modals/company_os.gd:909 scripts/ui/modals/contacts_modal.gd:6 scripts/ui/phone_ui.gd:350
 msgid "Contacts"
 msgstr ""
 
@@ -7297,11 +7261,11 @@ msgstr ""
 msgid "ContinueUpdatedGame"
 msgstr ""
 
-#: scripts/sim/contracts.gd:301
+#: scripts/sim/contracts.gd:297
 msgid "Contract %s delivered to %s: %d × %s @ %s"
 msgstr ""
 
-#: scripts/sim/contracts.gd:340
+#: scripts/sim/contracts.gd:336
 msgid "Contract %s is overdue. Late penalty %s applies."
 msgstr ""
 
@@ -7433,11 +7397,11 @@ msgstr ""
 msgid "Costa"
 msgstr ""
 
-#: scripts/sim/fundraising.gd:695
+#: scripts/sim/fundraising.gd:691
 msgid "Costs %d minutes. The milestone is reset lower and the investor becomes wary of future rounds."
 msgstr ""
 
-#: scripts/sim/fundraising.gd:696
+#: scripts/sim/fundraising.gd:692
 msgid "Costs %s in fees. The milestone is reset and the review closes cleanly."
 msgstr ""
 
@@ -7463,10 +7427,6 @@ msgstr ""
 
 #: scripts/world/actions.gd:320
 msgid "Could use a bit more support around here."
-msgstr ""
-
-#: data/economy/messages.json
-msgid "Could you confirm the invoice payment date?"
 msgstr ""
 
 #: scripts/sim/city_future.gd:39
@@ -7501,7 +7461,7 @@ msgstr ""
 msgid "Counter-offer: choose what to ask for. The investor grants what it can afford and refuses the rest. Counters left: %d."
 msgstr ""
 
-#: scripts/sim/contracts.gd:182
+#: scripts/sim/contracts.gd:178
 msgid "Counter: %s/unit, Net %d%s"
 msgstr ""
 
@@ -7509,7 +7469,7 @@ msgstr ""
 msgid "Counter: ask for {counter_price}"
 msgstr ""
 
-#: scripts/sim/traffic_safety.gd:190 scripts/sim/traffic_safety.gd:192
+#: scripts/sim/traffic_safety.gd:187 scripts/sim/traffic_safety.gd:189
 msgid "Counterparty medical settlement: %s"
 msgstr ""
 
@@ -7673,7 +7633,7 @@ msgstr ""
 msgid "Crestline's offer is in Company OS → Contracts: accept, counter or decline"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:454
+#: scripts/ui/phone_ui.gd:350
 msgid "Crises"
 msgstr ""
 
@@ -8049,16 +8009,8 @@ msgstr ""
 msgid "Deadline"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:299
-msgid "Deadline default: %s"
-msgstr ""
-
 #: scripts/sim/careers.gd:338
 msgid "Deadline missed: %s. Deliver soon, the fee drops."
-msgstr ""
-
-#: data/help/help.json
-msgid "Deadlines use the shown default result. Contacts can invite known people; Agenda shows the full meeting window and place. Missed meetings can be booked again."
 msgstr ""
 
 #: data/help/help.json
@@ -8069,7 +8021,7 @@ msgstr ""
 msgid "Deal with an unhappy customer (check your phone)"
 msgstr ""
 
-#: scripts/sim/contracts.gd:193 scripts/sim/growth.gd:97
+#: scripts/sim/contracts.gd:189 scripts/sim/growth.gd:97
 msgid "Deal. Send it over."
 msgstr ""
 
@@ -8173,7 +8125,7 @@ msgstr ""
 msgid "Decisions change demand, employee retention and policies. Temporary storms and event disruptions fade; paid orders and choices remain in the city legacy."
 msgstr ""
 
-#: scripts/sim/partnerships.gd:73 scripts/ui/modals/company_os.gd:992 scripts/ui/modals/fundraising_modal.gd:361
+#: scripts/ui/modals/company_os.gd:992 scripts/ui/modals/fundraising_modal.gd:361
 msgid "Decline"
 msgstr ""
 
@@ -8187,10 +8139,6 @@ msgstr ""
 
 #: scripts/ui/modals/fundraising_modal.gd:261
 msgid "Decline the term sheet"
-msgstr ""
-
-#: scripts/sim/contracts.gd:41 scripts/sim/group_jobs.gd:70
-msgid "Decline this offer"
 msgstr ""
 
 #: scripts/ui/modals/capital_market_modal.gd:55
@@ -8217,7 +8165,7 @@ msgstr ""
 msgid "DeclineTerms"
 msgstr ""
 
-#: scripts/sim/contracts.gd:163
+#: scripts/sim/contracts.gd:159
 msgid "Declined."
 msgstr ""
 
@@ -8413,7 +8361,7 @@ msgstr ""
 msgid "Delivered trades"
 msgstr ""
 
-#: scripts/sim/contracts.gd:307
+#: scripts/sim/contracts.gd:303
 msgid "Delivered%s. Invoice %s due in %d days."
 msgstr ""
 
@@ -8447,10 +8395,6 @@ msgstr ""
 
 #: scripts/sim/freelance_workflow.gd:10 scripts/ui/modals/company_os.gd:953
 msgid "Delivery"
-msgstr ""
-
-#: scripts/sim/contracts.gd:42
-msgid "Delivery in %d days; payment Net %d. Review the full contract at a Company OS terminal."
 msgstr ""
 
 #: data/events/crestline_big_offer.json
@@ -8521,7 +8465,7 @@ msgstr ""
 msgid "Deposit held"
 msgstr ""
 
-#: scripts/sim/contracts.gd:148
+#: scripts/sim/contracts.gd:144
 msgid "Deposit received from %s (%s)"
 msgstr ""
 
@@ -8737,7 +8681,7 @@ msgstr ""
 msgid "Directional evidence; collect a larger sample"
 msgstr ""
 
-#: autoload/save_system.gd:471
+#: autoload/save_system.gd:472
 msgid "Directories & Files:"
 msgstr ""
 
@@ -8863,10 +8807,6 @@ msgstr ""
 
 #: scripts/ui/modals/fundraising_modal.gd:393
 msgid "Do this deliverable"
-msgstr ""
-
-#: data/economy/messages.json
-msgid "Do you have any work briefs?"
 msgstr ""
 
 #: data/buildings/dockside_motors.json
@@ -9209,7 +9149,7 @@ msgstr ""
 msgid "Early payment discount"
 msgstr ""
 
-#: scripts/sim/contracts.gd:376
+#: scripts/sim/contracts.gd:372
 msgid "Early payment from %s (%s), %s discount"
 msgstr ""
 
@@ -9617,7 +9557,7 @@ msgstr ""
 msgid "Equipment ages. Tired rooms drag down every review until you renovate, and a renovated room is off sale while the painters work."
 msgstr ""
 
-#: scripts/sim/effects.gd:168
+#: scripts/sim/effects.gd:127
 msgid "Equity investment"
 msgstr ""
 
@@ -9717,7 +9657,7 @@ msgstr ""
 msgid "Event communication"
 msgstr ""
 
-#: scripts/sim/effects.gd:109
+#: scripts/sim/effects.gd:68
 msgid "Event cost"
 msgstr ""
 
@@ -9729,7 +9669,7 @@ msgstr ""
 msgid "Event frequency"
 msgstr ""
 
-#: scripts/sim/effects.gd:111
+#: scripts/sim/effects.gd:70
 msgid "Event income"
 msgstr ""
 
@@ -9785,7 +9725,7 @@ msgstr ""
 msgid "Everything from abroad costs more and takes longer now. Even my local stuff is up twelve percent."
 msgstr ""
 
-#: scripts/sim/group_jobs.gd:190
+#: scripts/sim/group_jobs.gd:187
 msgid "Everything is done; the client pays on closing."
 msgstr ""
 
@@ -9845,7 +9785,7 @@ msgstr ""
 msgid "Exclusive hotel management"
 msgstr ""
 
-#: scripts/sim/partnerships.gd:171
+#: scripts/sim/partnerships.gd:167
 msgid "Exclusive partnership exit fee: %s"
 msgstr ""
 
@@ -9949,7 +9889,7 @@ msgstr ""
 msgid "Export duty %s: %s"
 msgstr ""
 
-#: autoload/save_system.gd:470 scripts/ui/modals/pause_menu.gd:42 scripts/ui/modals/save_list_modal.gd:25
+#: autoload/save_system.gd:471 scripts/ui/modals/pause_menu.gd:42 scripts/ui/modals/save_list_modal.gd:25
 msgid "Export save"
 msgstr ""
 
@@ -10181,7 +10121,7 @@ msgstr ""
 msgid "Fast: +30% work output."
 msgstr ""
 
-#: autoload/save_system.gd:471
+#: autoload/save_system.gd:472
 msgid "Favorites:"
 msgstr ""
 
@@ -10257,11 +10197,11 @@ msgstr ""
 msgid "File yourself · %d minutes · %.0f%% form-error chance"
 msgstr ""
 
-#: autoload/save_system.gd:471
+#: autoload/save_system.gd:472
 msgid "File:"
 msgstr ""
 
-#: autoload/save_system.gd:486
+#: autoload/save_system.gd:487
 msgid "FileReader"
 msgstr ""
 
@@ -10287,6 +10227,10 @@ msgstr ""
 
 #: data/quests/trade_fair_week.json
 msgid "Fill a group room block"
+msgstr ""
+
+#: data/help/help.json
+msgid "Filter Work, Life or City; Mark all read clears the badge. Optional visits can be missed without a penalty."
 msgstr ""
 
 #: scripts/sim/insolvency.gd:148
@@ -10945,7 +10889,7 @@ msgstr ""
 msgid "Free recovery day · 480 minutes"
 msgstr ""
 
-#: scripts/sim/fundraising.gd:697
+#: scripts/sim/fundraising.gd:693
 msgid "Free, but the investor will not back you again and the next miss reopens the review."
 msgstr ""
 
@@ -11121,7 +11065,7 @@ msgstr ""
 msgid "Fund the assurance fee or submit the balanced bid."
 msgstr ""
 
-#: scripts/sim/partnerships.gd:143
+#: scripts/sim/partnerships.gd:139
 msgid "Fund the deliverable's supplies before working."
 msgstr ""
 
@@ -11289,6 +11233,10 @@ msgstr ""
 msgid "Global Consolidation"
 msgstr ""
 
+#: scripts/ui/phone_ui.gd:263
+msgid "Go"
+msgstr ""
+
 #: scripts/ui/tutorial.gd:42
 msgid "Go into Nexus Co-work. At reception, press E and buy a Day Pass ($15): it lets you use a desk and its computer today."
 msgstr ""
@@ -11307,14 +11255,6 @@ msgstr ""
 
 #: scripts/ui/modals/permits_modal.gd:21
 msgid "Go to the company registration counter"
-msgstr ""
-
-#: scripts/ui/phone_ui.gd:371
-msgid "Go to the meeting location during its time window. The conversation starts when you arrive."
-msgstr ""
-
-#: scripts/sim/phone_messages.gd:183
-msgid "Go to the meeting location shown in Agenda first."
 msgstr ""
 
 #: scripts/ui/automotive_ui.gd:263
@@ -11577,15 +11517,15 @@ msgstr ""
 msgid "Group interest accrued: %s"
 msgstr ""
 
-#: scripts/sim/group_jobs.gd:168
+#: scripts/sim/group_jobs.gd:165
 msgid "Group job %s closed (%s): paid %s."
 msgstr ""
 
-#: scripts/sim/group_jobs.gd:161
+#: scripts/sim/group_jobs.gd:158
 msgid "Group job %s: %s"
 msgstr ""
 
-#: scripts/sim/group_jobs.gd:169
+#: scripts/sim/group_jobs.gd:166
 msgid "Group job %s: paid %s."
 msgstr ""
 
@@ -12117,7 +12057,7 @@ msgstr ""
 msgid "Here's what your books support. Borrow what you need, not what you're offered."
 msgstr ""
 
-#: scripts/sim/contracts.gd:339
+#: scripts/sim/contracts.gd:335
 msgid "Hey — the %d %s were due today. Still coming?"
 msgstr ""
 
@@ -12609,10 +12549,6 @@ msgstr ""
 msgid "I want to register a company."
 msgstr ""
 
-#: scripts/sim/bank.gd:196
-msgid "I will book again later."
-msgstr ""
-
 #: data/dialogue/marcus_fx.json data/dialogue/omar_trade.json
 msgid "I will compare before committing cash."
 msgstr ""
@@ -12789,7 +12725,7 @@ msgstr ""
 msgid "Import prices ease as the ports catch up."
 msgstr ""
 
-#: autoload/save_system.gd:470 scripts/ui/modals/pause_menu.gd:45 scripts/ui/modals/save_list_modal.gd:13 scripts/ui/modals/save_list_modal.gd:29
+#: autoload/save_system.gd:471 scripts/ui/modals/pause_menu.gd:45 scripts/ui/modals/save_list_modal.gd:13 scripts/ui/modals/save_list_modal.gd:29
 msgid "Import save"
 msgstr ""
 
@@ -12845,7 +12781,7 @@ msgstr ""
 msgid "In the workshop"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:575 scripts/ui/phone_ui.gd:422
+#: scripts/ui/modals/company_os.gd:575 scripts/ui/phone_ui.gd:318
 msgid "In transit"
 msgstr ""
 
@@ -13369,7 +13305,7 @@ msgstr ""
 msgid "Investment in subsidiary: %s"
 msgstr ""
 
-#: scripts/sim/fundraising.gd:690
+#: scripts/sim/fundraising.gd:686
 msgid "Investor board review opened after a missed milestone."
 msgstr ""
 
@@ -13401,7 +13337,7 @@ msgstr ""
 msgid "Investors ask why revenue differs from cash."
 msgstr ""
 
-#: scripts/sim/effects.gd:167 scripts/sim/fundraising.gd:413 scripts/sim/fundraising.gd:510
+#: scripts/sim/effects.gd:126 scripts/sim/fundraising.gd:413 scripts/sim/fundraising.gd:510
 msgid "Investors buy shares in a registered company."
 msgstr ""
 
@@ -13425,11 +13361,7 @@ msgstr ""
 msgid "Invoice %s · due %s"
 msgstr ""
 
-#: scripts/sim/phone_messages.gd:106 scripts/sim/phone_messages.gd:119
-msgid "Invoice completed work before asking about payment."
-msgstr ""
-
-#: scripts/sim/contracts.gd:356
+#: scripts/sim/contracts.gd:352
 msgid "Invoice paid by %s (%s)"
 msgstr ""
 
@@ -13601,7 +13533,7 @@ msgstr ""
 msgid "Job penalties"
 msgstr ""
 
-#: scripts/sim/phone_messages.gd:229
+#: scripts/sim/phone_messages.gd:188
 msgid "Jobs Board"
 msgstr ""
 
@@ -13849,7 +13781,7 @@ msgstr ""
 msgid "Keep enough company cash for the weekend rent."
 msgstr ""
 
-#: scripts/sim/fundraising.gd:775
+#: scripts/sim/fundraising.gd:771
 msgid "Keep enough company cash to pay for the promotion."
 msgstr ""
 
@@ -14125,7 +14057,7 @@ msgstr ""
 msgid "Labour cost ratio"
 msgstr ""
 
-#: data/milestones.json scripts/sim/phone_messages.gd:227
+#: data/milestones.json scripts/sim/phone_messages.gd:186
 msgid "Landlord"
 msgstr ""
 
@@ -14509,7 +14441,7 @@ msgstr ""
 msgid "Leased %s for %s/month."
 msgstr ""
 
-#: scripts/ui/modals/lease_end_modal.gd:13 scripts/ui/phone_ui.gd:164
+#: scripts/ui/modals/lease_end_modal.gd:13 scripts/ui/phone_ui.gd:150
 msgid "Leases"
 msgstr ""
 
@@ -14523,10 +14455,6 @@ msgstr ""
 
 #: scripts/ui/modals/lease_end_modal.gd:48
 msgid "Leave immediately"
-msgstr ""
-
-#: scripts/sim/bank.gd:196
-msgid "Leave the appointment as booked."
 msgstr ""
 
 #: data/npcs/lee.json scripts/sim/staff.gd:121 scripts/ui/minigames/pack_game.gd:86
@@ -14561,7 +14489,7 @@ msgstr ""
 msgid "Left the job at %s."
 msgstr ""
 
-#: data/story/chapters.json data/world/years.json scripts/sim/legacy_business.gd:244 scripts/ui/phone_ui.gd:166
+#: data/story/chapters.json data/world/years.json scripts/sim/legacy_business.gd:244 scripts/ui/phone_ui.gd:152
 msgid "Legacy"
 msgstr ""
 
@@ -14725,11 +14653,11 @@ msgstr ""
 msgid "Licensing Officer"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:454
+#: scripts/ui/phone_ui.gd:233 scripts/ui/phone_ui.gd:350
 msgid "Life"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:438
+#: scripts/ui/phone_ui.gd:334
 msgid "Life Timeline"
 msgstr ""
 
@@ -14941,6 +14869,10 @@ msgstr ""
 msgid "Loading dock"
 msgstr ""
 
+#: scripts/sim/bank.gd:291
+msgid "Loan %s needs attention. Review it at the bank."
+msgstr ""
+
 #: scripts/sim/bank.gd:248
 msgid "Loan %s repaid in full."
 msgstr ""
@@ -14957,7 +14889,7 @@ msgstr ""
 msgid "Loan %s — monthly payment"
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:160
+#: scripts/ui/modals/loan_modal.gd:167
 msgid "Loan appointment"
 msgstr ""
 
@@ -15277,15 +15209,15 @@ msgstr ""
 msgid "Lumina distributor goods written off at closure"
 msgstr ""
 
-#: scripts/sim/contracts.gd:178
+#: scripts/sim/contracts.gd:174
 msgid "Lumina distributor invoices are paid after arrival; choose 0% upfront."
 msgstr ""
 
-#: scripts/sim/contracts.gd:351
+#: scripts/sim/contracts.gd:347
 msgid "Lumina invoice %s paid: %s"
 msgstr ""
 
-#: scripts/sim/contracts.gd:369
+#: scripts/sim/contracts.gd:365
 msgid "Lumina invoices follow their agreed settlement date; early payment is unavailable."
 msgstr ""
 
@@ -15397,7 +15329,7 @@ msgstr ""
 msgid "Main freight"
 msgstr ""
 
-#: scripts/ui/modals/growth_modal.gd:64 scripts/ui/phone_ui.gd:492
+#: scripts/ui/modals/growth_modal.gd:64 scripts/ui/phone_ui.gd:388
 msgid "Main-story achievements"
 msgstr ""
 
@@ -15649,6 +15581,10 @@ msgstr ""
 msgid "Margins shrink while the tariff eases over two months."
 msgstr ""
 
+#: scripts/ui/phone_ui.gd:239
+msgid "Mark all read"
+msgstr ""
+
 #: scripts/ui/modals/business_board.gd:69
 msgid "Mark mentor on map"
 msgstr ""
@@ -15661,7 +15597,7 @@ msgstr ""
 msgid "Market competition"
 msgstr ""
 
-#: scripts/ui/market_view.gd:8 scripts/ui/phone_ui.gd:533
+#: scripts/ui/market_view.gd:8 scripts/ui/phone_ui.gd:429
 msgid "Market conditions"
 msgstr ""
 
@@ -15981,10 +15917,6 @@ msgstr ""
 msgid "Meet people in town or at monthly city events. Contacts shows their stage, preferred gifts and next request."
 msgstr ""
 
-#: scripts/sim/phone_messages.gd:96
-msgid "Meet this contact or receive their message first."
-msgstr ""
-
 #: scripts/sim/fundraising.gd:96
 msgid "Meet this investor at a city event first."
 msgstr ""
@@ -16003,22 +15935,6 @@ msgstr ""
 
 #: scripts/sim/personal_life.gd:47
 msgid "Meet this person in town or at a city event first."
-msgstr ""
-
-#: scripts/ui/phone_ui.gd:359
-msgid "Meeting completed"
-msgstr ""
-
-#: scripts/ui/phone_ui.gd:361
-msgid "Meeting missed"
-msgstr ""
-
-#: scripts/ui/phone_ui.gd:357
-msgid "Meeting scheduled"
-msgstr ""
-
-#: scripts/sim/phone_messages.gd:174
-msgid "Meeting: %s at %s. Check Agenda; if you miss it, book again."
 msgstr ""
 
 #: scripts/sim/shop_life.gd:49
@@ -16105,10 +16021,6 @@ msgstr ""
 msgid "Meridian and Volt sell steady volume on thin margins. You need a ten-car fleet, a showroom and a deposit, and you must always keep new cars on the floor. Service tickets after the sale are where the dealership earns."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:162 scripts/ui/phone_ui.gd:248
-msgid "Messages"
-msgstr ""
-
 #: data/character/options.json
 msgid "Messy"
 msgstr ""
@@ -16169,7 +16081,7 @@ msgstr ""
 msgid "Milestone: %s"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:454
+#: scripts/ui/phone_ui.gd:350
 msgid "Milestones"
 msgstr ""
 
@@ -16337,7 +16249,7 @@ msgstr ""
 msgid "Month close"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:423
+#: scripts/ui/phone_ui.gd:319
 msgid "Month sales"
 msgstr ""
 
@@ -16681,7 +16593,7 @@ msgstr ""
 msgid "NEGOTIATION"
 msgstr ""
 
-#: autoload/ui_root.gd:394
+#: autoload/ui_root.gd:396
 msgid "NEW LOCATION"
 msgstr ""
 
@@ -16893,12 +16805,8 @@ msgstr ""
 msgid "New game setup"
 msgstr ""
 
-#: scripts/sim/group_jobs.gd:73
+#: scripts/sim/group_jobs.gd:70
 msgid "New group job: %s"
-msgstr ""
-
-#: scripts/sim/ecommerce.gd:906
-msgid "New order %s — %s — %s"
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:1339
@@ -17321,10 +17229,6 @@ msgstr ""
 msgid "No manager review yet — complete a shift."
 msgstr ""
 
-#: scripts/sim/phone_messages.gd:169
-msgid "No meeting time is currently available. Ask again later."
-msgstr ""
-
 #: scripts/ui/minigames/barista_game.gd:8
 msgid "No milk"
 msgstr ""
@@ -17341,7 +17245,7 @@ msgstr ""
 msgid "No new offers. More arrive every morning at 8:00."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:225
+#: scripts/ui/phone_ui.gd:211
 msgid "No new opportunities right now. Check again after your company grows."
 msgstr ""
 
@@ -17453,7 +17357,7 @@ msgstr ""
 msgid "No such loan."
 msgstr ""
 
-#: scripts/sim/contracts.gd:402
+#: scripts/sim/contracts.gd:398
 msgid "No supplier carries this product."
 msgstr ""
 
@@ -17609,7 +17513,7 @@ msgstr ""
 msgid "Not enough cash for the permit fee."
 msgstr ""
 
-#: scripts/sim/group_jobs.gd:130
+#: scripts/sim/group_jobs.gd:127
 msgid "Not enough cash for the subcontractor's fee."
 msgstr ""
 
@@ -17625,15 +17529,15 @@ msgstr ""
 msgid "Not enough cash. You need %s."
 msgstr ""
 
-#: scripts/sim/fundraising.gd:696
+#: scripts/sim/fundraising.gd:692
 msgid "Not enough company cash for the advisor fee."
 msgstr ""
 
-#: scripts/sim/fundraising.gd:716
+#: scripts/sim/fundraising.gd:712
 msgid "Not enough company cash for the advisor fee. Choose the recovery plan instead."
 msgstr ""
 
-#: scripts/sim/partnerships.gd:169
+#: scripts/sim/partnerships.gd:165
 msgid "Not enough company cash for the exit fee. Keep delivering until the agreement ends."
 msgstr ""
 
@@ -17645,7 +17549,7 @@ msgstr ""
 msgid "Not enough factory storage capacity."
 msgstr ""
 
-#: scripts/sim/contracts.gd:412
+#: scripts/sim/contracts.gd:408
 msgid "Not enough storage for %d more units (most free space: %d). Lease Suite 2B for 1,500 units."
 msgstr ""
 
@@ -17697,10 +17601,6 @@ msgstr ""
 msgid "Notebook"
 msgstr ""
 
-#: scripts/sim/phone_messages.gd:129
-msgid "Noted, but the invoice is still overdue. Check Company OS receivables and the payment terms."
-msgstr ""
-
 #: data/dialogue/vera_stone_intro.json
 msgid "Noted. Every guest gets the same care."
 msgstr ""
@@ -17725,7 +17625,7 @@ msgstr ""
 msgid "Nothing packed — is the stock at this location?"
 msgstr ""
 
-#: scripts/sim/contracts.gd:235
+#: scripts/sim/contracts.gd:231
 msgid "Nothing to deliver."
 msgstr ""
 
@@ -17769,7 +17669,11 @@ msgstr ""
 msgid "Notification duration"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:416
+#: data/help/glossary.json data/help/help.json scripts/ui/phone_ui.gd:148 scripts/ui/phone_ui.gd:229
+msgid "Notifications"
+msgstr ""
+
+#: scripts/ui/phone_ui.gd:312
 msgid "Notifications only.\nManage at a desk: Company OS."
 msgstr ""
 
@@ -17949,7 +17853,7 @@ msgstr ""
 msgid "Offer a retention discount"
 msgstr ""
 
-#: scripts/sim/contracts.gd:334
+#: scripts/sim/contracts.gd:330
 msgid "Offer expired."
 msgstr ""
 
@@ -17995,10 +17899,6 @@ msgstr ""
 
 #: data/buildings/okafor_lettings.json data/economy/logistics.json
 msgid "Okafor Lettings"
-msgstr ""
-
-#: scripts/sim/bank.gd:291 scripts/sim/phone_messages.gd:24 scripts/sim/phone_messages.gd:85 scripts/ui/phone_ui.gd:298
-msgid "Okay, thanks."
 msgstr ""
 
 #: data/events/supplier_price_increase.json
@@ -18121,10 +18021,6 @@ msgstr ""
 msgid "One day passes each way. Your businesses keep running. If ticket cash is short, use the video call."
 msgstr ""
 
-#: scripts/sim/bank.gd:291
-msgid "One extension granted: the retry is now in six days. Your debt and existing late fee remain due."
-msgstr ""
-
 #: data/story/goals.json
 msgid "One hundred deliveries"
 msgstr ""
@@ -18165,7 +18061,7 @@ msgstr ""
 msgid "Only 20 customers were interviewed. How should you report the result?"
 msgstr ""
 
-#: scripts/sim/contracts.gd:373
+#: scripts/sim/contracts.gd:369
 msgid "Only a delivered, unpaid invoice can be paid early."
 msgstr ""
 
@@ -18177,10 +18073,6 @@ msgstr ""
 msgid "Only an escrow order that hasn't arrived can be refunded."
 msgstr ""
 
-#: scripts/sim/group_jobs.gd:71
-msgid "Only completed job parts earn their share. Review deliverables, deadline and subcontracting fees in Company OS, Group tab."
-msgstr ""
-
 #: scripts/sim/ecommerce.gd:478
 msgid "Only delivered purchases can be returned."
 msgstr ""
@@ -18189,7 +18081,7 @@ msgstr ""
 msgid "Only figures from your real books can go in the deck."
 msgstr ""
 
-#: scripts/sim/fundraising.gd:771
+#: scripts/sim/fundraising.gd:767
 msgid "Only figures from your real books can go on the campaign page."
 msgstr ""
 
@@ -18205,7 +18097,7 @@ msgstr ""
 msgid "Only wholly founder-owned companies can enter this holding group. Other shareholders keep their rights."
 msgstr ""
 
-#: autoload/save_system.gd:471 scripts/ui/hotel_ui.gd:273 scripts/ui/modals/city_map_modal.gd:132 scripts/ui/modals/city_map_modal.gd:179
+#: autoload/save_system.gd:472 scripts/ui/hotel_ui.gd:273 scripts/ui/modals/city_map_modal.gd:132 scripts/ui/modals/city_map_modal.gd:179
 msgid "Open"
 msgstr ""
 
@@ -18257,16 +18149,16 @@ msgstr ""
 msgid "Open Matchmaker"
 msgstr ""
 
-#: scripts/ui/tutorial.gd:27
-msgid "Open Messages"
-msgstr ""
-
 #: data/help/help.json
 msgid "Open Mon–Sat 7:00–17:00. The till is banked at closing; card fees are 1.9%."
 msgstr ""
 
 #: data/story/chapters.json
 msgid "Open Northridge and save one local-currency price in Sales → Overseas"
+msgstr ""
+
+#: scripts/ui/tutorial.gd:27
+msgid "Open Notifications"
 msgstr ""
 
 #: scripts/ui/tutorial.gd:56
@@ -18311,10 +18203,6 @@ msgstr ""
 
 #: scripts/sim/energy.gd:727
 msgid "Open a charging station first."
-msgstr ""
-
-#: data/help/help.json
-msgid "Open a contact thread to reply. A reply changes the actual offer or event; acknowledgements confirm notifications only."
 msgstr ""
 
 #: data/story/achievements.json
@@ -18717,7 +18605,7 @@ msgstr ""
 msgid "Operators: 'Most balances will be restored. There is a shortfall.'"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:164 scripts/ui/phone_ui.gd:218
+#: scripts/ui/phone_ui.gd:150 scripts/ui/phone_ui.gd:204
 msgid "Opportunities"
 msgstr ""
 
@@ -18949,7 +18837,7 @@ msgstr ""
 msgid "Overlapping orders cannot share a machine; overtime costs 1.5 times normal wages."
 msgstr ""
 
-#: scripts/sim/fundraising.gd:688 scripts/sim/fundraising.gd:697
+#: scripts/sim/fundraising.gd:693
 msgid "Overrule the board with your votes"
 msgstr ""
 
@@ -19293,7 +19181,7 @@ msgstr ""
 msgid "Packed well"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:421
+#: scripts/ui/phone_ui.gd:317
 msgid "Packed, not shipped"
 msgstr ""
 
@@ -19333,7 +19221,7 @@ msgstr ""
 msgid "Paid %s for a %s purchase. Count the change."
 msgstr ""
 
-#: scripts/sim/contracts.gd:359
+#: scripts/sim/contracts.gd:355
 msgid "Paid %s."
 msgstr ""
 
@@ -19349,7 +19237,7 @@ msgstr ""
 msgid "Paid by %s. It lands around %s; the supplier ships after that. A faster rail costs its own fee."
 msgstr ""
 
-#: scripts/sim/contracts.gd:379
+#: scripts/sim/contracts.gd:375
 msgid "Paid early: %s (discount %s)."
 msgstr ""
 
@@ -19357,7 +19245,7 @@ msgstr ""
 msgid "Paid from"
 msgstr ""
 
-#: scripts/sim/traffic_safety.gd:121 scripts/sim/traffic_safety.gd:198
+#: scripts/sim/traffic_safety.gd:121 scripts/sim/traffic_safety.gd:195
 msgid "Paid medical bill: %s"
 msgstr ""
 
@@ -19473,8 +19361,12 @@ msgstr ""
 msgid "Partial refund sent."
 msgstr ""
 
-#: scripts/sim/partnerships.gd:147
+#: scripts/sim/partnerships.gd:143
 msgid "Partner deliverable supplies: %s"
+msgstr ""
+
+#: scripts/sim/partnerships.gd:70
+msgid "Partner terms are ready to review."
 msgstr ""
 
 #: scripts/ui/modals/fundraising_modal.gd:373 scripts/ui/modals/fundraising_modal.gd:385
@@ -19513,7 +19405,7 @@ msgstr ""
 msgid "Patel"
 msgstr ""
 
-#: autoload/save_system.gd:471
+#: autoload/save_system.gd:472
 msgid "Path:"
 msgstr ""
 
@@ -19621,7 +19513,7 @@ msgstr ""
 msgid "Pay notice rent and any early exit fee before leaving. Deposits return only on exit, less damage."
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:126
+#: scripts/ui/modals/loan_modal.gd:133
 msgid "Pay off"
 msgstr ""
 
@@ -19699,10 +19591,6 @@ msgstr ""
 
 #: scripts/ui/modals/tax_filing_modal.gd:32
 msgid "Payment %s · penalty %s · due %s"
-msgstr ""
-
-#: scripts/sim/phone_messages.gd:128
-msgid "Payment follows the invoice due date. Review receivables in Company OS; a reminder does not create a new payment."
 msgstr ""
 
 #: scripts/sim/ecommerce.gd:409
@@ -19825,7 +19713,7 @@ msgstr ""
 msgid "Permits & regulations"
 msgstr ""
 
-#: scripts/ui/modals/bank_modal.gd:80 scripts/ui/phone_ui.gd:377
+#: scripts/ui/modals/bank_modal.gd:80 scripts/ui/phone_ui.gd:273
 msgid "Personal"
 msgstr ""
 
@@ -19849,7 +19737,7 @@ msgstr ""
 msgid "Personal assets have real costs"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:425
+#: scripts/ui/phone_ui.gd:321
 msgid "Personal cap"
 msgstr ""
 
@@ -19953,16 +19841,8 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
-#: scripts/sim/phone_messages.gd:247
-msgid "Phone conversation completed."
-msgstr ""
-
 #: data/help/patch_notes.json
 msgid "Phone messages get real replies with deadlines and meetings; packing fits several items into one box; jobs and freelance consulting have more steps."
-msgstr ""
-
-#: data/help/help.json
-msgid "Phone replies and meetings"
 msgstr ""
 
 #: scripts/ui/minigames/photo_shoot_game.gd:32
@@ -20125,7 +20005,7 @@ msgstr ""
 msgid "Play this week's challenge"
 msgstr ""
 
-#: autoload/save_system.gd:414
+#: autoload/save_system.gd:415
 msgid "Player"
 msgstr ""
 
@@ -20345,7 +20225,7 @@ msgstr ""
 msgid "PrepareRealtyOwnership"
 msgstr ""
 
-#: scripts/sim/fundraising.gd:686 scripts/sim/fundraising.gd:695
+#: scripts/sim/fundraising.gd:691
 msgid "Present a recovery plan"
 msgstr ""
 
@@ -20537,7 +20417,7 @@ msgstr ""
 msgid "Probes what could go wrong and how you would cope."
 msgstr ""
 
-#: autoload/ui_root.gd:353
+#: autoload/ui_root.gd:355
 msgid "Problem report saved (screenshot + save + log). Send this folder to whoever invited you to test: %s"
 msgstr ""
 
@@ -21233,10 +21113,6 @@ msgstr ""
 msgid "Read Ines's customs guide"
 msgstr ""
 
-#: scripts/ui/tutorial.gd:27
-msgid "Read Maya's message"
-msgstr ""
-
 #: data/dialogue/imani_cole_intro.json
 msgid "Read a client brief before creating the slogan, visual and tone. Our students want belonging, bold colour and a playful voice. Media saturation limits repeated spending."
 msgstr ""
@@ -21323,6 +21199,18 @@ msgstr ""
 
 #: data/buildings/dockside_motors.json
 msgid "Read the used-van price sheet"
+msgstr ""
+
+#: data/help/help.json
+msgid "Read updates and use Go to open the place where a decision belongs. There are no replies or response deadlines."
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Read when you like. Only unresolved actions appear in the HUD badge."
+msgstr ""
+
+#: data/story/chapters.json
+msgid "Read your notifications (Tab)"
 msgstr ""
 
 #: data/buildings/nexus_bank.json
@@ -21481,7 +21369,7 @@ msgstr ""
 msgid "Recent transactions"
 msgstr ""
 
-#: autoload/save_system.gd:471
+#: autoload/save_system.gd:472
 msgid "Recent:"
 msgstr ""
 
@@ -21753,7 +21641,7 @@ msgstr ""
 msgid "Register a company and open its business account before raising money."
 msgstr ""
 
-#: scripts/sim/company.gd:87 scripts/sim/global_market.gd:41 scripts/sim/global_market.gd:70 scripts/ui/phone_ui.gd:311
+#: scripts/sim/company.gd:87 scripts/sim/global_market.gd:41 scripts/sim/global_market.gd:70
 msgid "Register a company at City Hall first."
 msgstr ""
 
@@ -21825,7 +21713,7 @@ msgstr ""
 msgid "Register your company at City Hall (Civic Center, take the Metro)"
 msgstr ""
 
-#: scripts/sim/contracts.gd:176
+#: scripts/sim/contracts.gd:172
 msgid "Register your company first."
 msgstr ""
 
@@ -21925,7 +21813,7 @@ msgstr ""
 msgid "Reject (click the wrong field first)"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:164
+#: scripts/ui/phone_ui.gd:150
 msgid "Relationships"
 msgstr ""
 
@@ -21993,7 +21881,7 @@ msgstr ""
 msgid "Rent"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:383
+#: scripts/ui/phone_ui.gd:279
 msgid "Rent $1,250 due the 14th"
 msgstr ""
 
@@ -22125,7 +22013,7 @@ msgstr ""
 msgid "Repairs cost real money but clients trust you."
 msgstr ""
 
-#: scripts/ui/modals/loan_modal.gd:123
+#: scripts/ui/modals/loan_modal.gd:130
 msgid "Repay %s"
 msgstr ""
 
@@ -22173,14 +22061,6 @@ msgstr ""
 msgid "Replay tutorial"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:292 scripts/ui/phone_ui.gd:51
-msgid "Reply by %s · %d minutes remaining"
-msgstr ""
-
-#: data/help/glossary.json
-msgid "Reply deadlines"
-msgstr ""
-
 #: scripts/ui/modals/settings_modal.gd:8
 msgid "Report a problem"
 msgstr ""
@@ -22221,8 +22101,8 @@ msgstr ""
 msgid "Request recorded — check the next step."
 msgstr ""
 
-#: scripts/sim/bank.gd:291
-msgid "Request three more days to pay"
+#: scripts/ui/modals/loan_modal.gd:122
+msgid "Request three more days"
 msgstr ""
 
 #: scripts/ui/modals/fundraising_modal.gd:158
@@ -22369,7 +22249,7 @@ msgstr ""
 msgid "Resources & Agriculture"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:188
+#: scripts/ui/phone_ui.gd:174
 msgid "Respond"
 msgstr ""
 
@@ -23181,7 +23061,7 @@ msgstr ""
 msgid "Run the front desk at Nexus: check in members, set up events, meet everyone."
 msgstr ""
 
-#: scripts/sim/contracts.gd:236
+#: scripts/sim/contracts.gd:232
 msgid "Run this route from the fleet console; no stock shipment is required."
 msgstr ""
 
@@ -23437,7 +23317,7 @@ msgstr ""
 msgid "Saturday and Sunday 10:00–18:00 · %s/weekend · reserve at least one day ahead · capacity %d units"
 msgstr ""
 
-#: autoload/save_system.gd:471 scripts/ui/phone_ui.gd:164
+#: autoload/save_system.gd:472 scripts/ui/phone_ui.gd:150
 msgid "Save"
 msgstr ""
 
@@ -23485,15 +23365,15 @@ msgstr ""
 msgid "Save enough company cash for the vehicle and first insurance payment."
 msgstr ""
 
-#: autoload/save_system.gd:440
+#: autoload/save_system.gd:441
 msgid "Save exported. Keep this file outside your browser."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:520
+#: scripts/ui/phone_ui.gd:416
 msgid "Save game"
 msgstr ""
 
-#: autoload/save_system.gd:521
+#: autoload/save_system.gd:522
 msgid "Save imported. Continue where you left off."
 msgstr ""
 
@@ -23501,7 +23381,7 @@ msgstr ""
 msgid "Save local price"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:521
+#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:417
 msgid "Save now"
 msgstr ""
 
@@ -23665,7 +23545,7 @@ msgstr ""
 msgid "Save this life and start the selected next life"
 msgstr ""
 
-#: autoload/save_system.gd:526
+#: autoload/save_system.gd:527
 msgid "Save transfer"
 msgstr ""
 
@@ -23677,7 +23557,7 @@ msgstr ""
 msgid "Saved %s"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:523
+#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:419
 msgid "Saved (slot %d)."
 msgstr ""
 
@@ -24365,7 +24245,7 @@ msgstr ""
 msgid "Shop roof"
 msgstr ""
 
-#: data/economy/marketplace.json data/npcs/shoplane.json scripts/sim/phone_messages.gd:231 scripts/ui/phone_ui.gd:163
+#: data/economy/marketplace.json data/npcs/shoplane.json scripts/sim/phone_messages.gd:190 scripts/ui/phone_ui.gd:149
 msgid "ShopLane"
 msgstr ""
 
@@ -24385,7 +24265,7 @@ msgstr ""
 msgid "ShopLane Global payout: %s %s"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:415
+#: scripts/ui/phone_ui.gd:311
 msgid "ShopLane Seller"
 msgstr ""
 
@@ -24433,7 +24313,7 @@ msgstr ""
 msgid "ShopLane payout received: %s"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:382
+#: scripts/ui/phone_ui.gd:278
 msgid "ShopLane pending"
 msgstr ""
 
@@ -24533,7 +24413,7 @@ msgstr ""
 msgid "Side part"
 msgstr ""
 
-#: data/help/glossary.json scripts/ui/phone_ui.gd:219
+#: data/help/glossary.json scripts/ui/phone_ui.gd:205
 msgid "Side stories"
 msgstr ""
 
@@ -24577,7 +24457,7 @@ msgstr ""
 msgid "Sign ninety-day route"
 msgstr ""
 
-#: scripts/sim/partnerships.gd:72 scripts/ui/modals/fundraising_modal.gd:360
+#: scripts/ui/modals/fundraising_modal.gd:360
 msgid "Sign the exclusive terms"
 msgstr ""
 
@@ -24587,10 +24467,6 @@ msgstr ""
 
 #: scripts/ui/modals/loan_signing_modal.gd:9
 msgid "Sign the loan"
-msgstr ""
-
-#: scripts/sim/partnerships.gd:71
-msgid "Sign the open (non-exclusive) terms"
 msgstr ""
 
 #: scripts/ui/modals/fundraising_modal.gd:359
@@ -24617,7 +24493,7 @@ msgstr ""
 msgid "Signature"
 msgstr ""
 
-#: scripts/sim/partnerships.gd:115
+#: scripts/sim/partnerships.gd:111
 msgid "Signed a %s with %s."
 msgstr ""
 
@@ -24625,7 +24501,7 @@ msgstr ""
 msgid "Signed by the applicant"
 msgstr ""
 
-#: scripts/sim/contracts.gd:152
+#: scripts/sim/contracts.gd:148
 msgid "Signed contract %s with %s: %s."
 msgstr ""
 
@@ -24969,7 +24845,7 @@ msgstr ""
 msgid "Someone must be behind the counter: hire a Barista (People tab), or work the counter yourself inside the café. Walk-outs and running out of coffee pull the rating down."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:186
+#: scripts/ui/phone_ui.gd:172
 msgid "Something"
 msgstr ""
 
@@ -24983,10 +24859,6 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "Somewhere else you can keep stock, with its own space limit. An order is packed from the place that has the goods."
-msgstr ""
-
-#: scripts/sim/phone_messages.gd:127
-msgid "Sorry for the delay: invoice %s has just been paid."
 msgstr ""
 
 #: data/events/unexpected_large_order.json
@@ -25493,7 +25365,7 @@ msgstr ""
 msgid "Subcontract %s for %s"
 msgstr ""
 
-#: scripts/sim/group_jobs.gd:131
+#: scripts/sim/group_jobs.gd:128
 msgid "Subcontractor for group job %s: %s"
 msgstr ""
 
@@ -25649,7 +25521,7 @@ msgstr ""
 msgid "Supplier delivery can fail. Premium service costs more and reduces failure risk; it does not guarantee delivery."
 msgstr ""
 
-#: scripts/sim/effects.gd:125 scripts/sim/effects.gd:28
+#: scripts/sim/effects.gd:20 scripts/sim/effects.gd:84
 msgid "Supplier doesn't carry that."
 msgstr ""
 
@@ -25969,11 +25841,11 @@ msgstr ""
 msgid "Tariff correction penalty %s: %s"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:162 scripts/ui/phone_ui.gd:395
+#: scripts/ui/phone_ui.gd:148 scripts/ui/phone_ui.gd:291
 msgid "Tasks"
 msgstr ""
 
-#: data/help/help.json scripts/ui/modals/permits_modal.gd:47 scripts/ui/modals/tax_filing_modal.gd:7 scripts/ui/phone_ui.gd:164
+#: data/help/help.json scripts/ui/modals/permits_modal.gd:47 scripts/ui/modals/tax_filing_modal.gd:7 scripts/ui/phone_ui.gd:150
 msgid "Tax Filing"
 msgstr ""
 
@@ -26135,10 +26007,6 @@ msgstr ""
 
 #: scripts/ui/modals/registration_modal.gd:28
 msgid "Thanks"
-msgstr ""
-
-#: scripts/sim/contracts.gd:41
-msgid "Thanks for letting us know. This offer is closed."
 msgstr ""
 
 #: scripts/sim/staff.gd:133
@@ -26333,7 +26201,7 @@ msgstr ""
 msgid "The agreement has ended."
 msgstr ""
 
-#: scripts/sim/partnerships.gd:223
+#: scripts/sim/partnerships.gd:219
 msgid "The agreement has run its full term. Thank you for the work."
 msgstr ""
 
@@ -26525,7 +26393,7 @@ msgstr ""
 msgid "The campaign is live."
 msgstr ""
 
-#: scripts/sim/fundraising.gd:796
+#: scripts/sim/fundraising.gd:792
 msgid "The campaign is still running. Continue operating until its stated date."
 msgstr ""
 
@@ -26629,11 +26497,11 @@ msgstr ""
 msgid "The company closed."
 msgstr ""
 
-#: scripts/sim/contracts.gd:89
+#: scripts/sim/contracts.gd:85
 msgid "The company closed. This unanswered offer was withdrawn."
 msgstr ""
 
-#: scripts/sim/contracts.gd:95
+#: scripts/sim/contracts.gd:91
 msgid "The company closed. This undelivered contract was terminated with no additional penalty."
 msgstr ""
 
@@ -26681,7 +26549,7 @@ msgstr ""
 msgid "The deck you showed"
 msgstr ""
 
-#: scripts/sim/partnerships.gd:209
+#: scripts/sim/partnerships.gd:205
 msgid "The deliverable was not finished in time and has been closed."
 msgstr ""
 
@@ -26785,7 +26653,7 @@ msgstr ""
 msgid "The factory quotation checklist now has conflicting notes. Rita Hale wants a version that other people can check. How do you resolve the conflict?"
 msgstr ""
 
-#: autoload/save_system.gd:493
+#: autoload/save_system.gd:494
 msgid "The file could not be read. Your existing save is unchanged."
 msgstr ""
 
@@ -26973,10 +26841,6 @@ msgstr ""
 msgid "The longer it is, the earlier you must reorder, or you run out and lose sales."
 msgstr ""
 
-#: scripts/sim/fundraising.gd:689
-msgid "The milestone has been missed. The board is calling a review: choose how you want to respond within %d days."
-msgstr ""
-
 #: data/help/glossary.json
 msgid "The monthly share of subscribers expected to leave your SaaS product. Features and support help them stay."
 msgstr ""
@@ -27141,14 +27005,6 @@ msgstr ""
 msgid "The repair removes most of the damage but costs money and workshop days."
 msgstr ""
 
-#: scripts/sim/phone_messages.gd:61
-msgid "The reply deadline has passed. Review the outcome in this thread."
-msgstr ""
-
-#: scripts/sim/phone_messages.gd:205
-msgid "The reply is no longer available. Review current Tasks or book a new time from Contacts."
-msgstr ""
-
 #: data/story/personal/daniel.json
 msgid "The retail buyer presentation now has conflicting notes. Daniel Wong wants a version that other people can check. How do you resolve the conflict?"
 msgstr ""
@@ -27185,7 +27041,7 @@ msgstr ""
 msgid "The same seed, rules and choices reproduce the simulation. Daily market previews do not consume the event RNG. Weekly challenges lock standard rules and save results locally."
 msgstr ""
 
-#: autoload/save_system.gd:209 autoload/save_system.gd:404
+#: autoload/save_system.gd:209 autoload/save_system.gd:405
 msgid "The save could not be written. Your existing save is unchanged."
 msgstr ""
 
@@ -27301,7 +27157,7 @@ msgstr ""
 msgid "The term sheet expired."
 msgstr ""
 
-#: scripts/sim/fundraising.gd:831
+#: scripts/sim/fundraising.gd:827
 msgid "The term sheet has lapsed. We can talk again after you pitch anew."
 msgstr ""
 
@@ -27393,7 +27249,7 @@ msgstr ""
 msgid "Theo"
 msgstr ""
 
-#: scripts/sim/partnerships.gd:139
+#: scripts/sim/partnerships.gd:135
 msgid "There is no deliverable waiting. The next one arrives on its date."
 msgstr ""
 
@@ -27457,7 +27313,7 @@ msgstr ""
 msgid "They keep it. Meh review."
 msgstr ""
 
-#: scripts/sim/contracts.gd:131
+#: scripts/sim/contracts.gd:127
 msgid "They need an invoice from a registered company."
 msgstr ""
 
@@ -27509,7 +27365,7 @@ msgstr ""
 msgid "This belongs to the current tenant. Rent this home at Okafor Lettings first."
 msgstr ""
 
-#: scripts/sim/effects.gd:40 scripts/sim/fundraising.gd:704
+#: scripts/sim/effects.gd:28 scripts/sim/fundraising.gd:700
 msgid "This board review is already closed."
 msgstr ""
 
@@ -27521,7 +27377,7 @@ msgstr ""
 msgid "This business closed — the personal chain is retired."
 msgstr ""
 
-#: scripts/sim/fundraising.gd:794
+#: scripts/sim/fundraising.gd:790
 msgid "This campaign has already finished."
 msgstr ""
 
@@ -27565,11 +27421,7 @@ msgstr ""
 msgid "This company's books are closed."
 msgstr ""
 
-#: scripts/sim/effects.gd:32 scripts/sim/phone_messages.gd:105 scripts/sim/phone_messages.gd:137 scripts/sim/phone_messages.gd:140
-msgid "This contact has no meeting location."
-msgstr ""
-
-#: scripts/sim/contracts.gd:233
+#: scripts/sim/contracts.gd:229
 msgid "This contract belongs to another company."
 msgstr ""
 
@@ -27589,7 +27441,7 @@ msgstr ""
 msgid "This furniture style is already installed. Keep it or choose another."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:528
+#: scripts/ui/phone_ui.gd:424
 msgid "This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen."
 msgstr ""
 
@@ -27601,11 +27453,11 @@ msgstr ""
 msgid "This group block has expired."
 msgstr ""
 
-#: scripts/sim/effects.gd:21 scripts/sim/effects.gd:65 scripts/sim/group_jobs.gd:80
+#: scripts/sim/group_jobs.gd:77
 msgid "This group job is no longer on offer."
 msgstr ""
 
-#: scripts/sim/group_jobs.gd:144
+#: scripts/sim/group_jobs.gd:141
 msgid "This group job is not running."
 msgstr ""
 
@@ -27645,7 +27497,7 @@ msgstr ""
 msgid "This investor will not back you again after you overruled their board."
 msgstr ""
 
-#: scripts/sim/contracts.gd:98
+#: scripts/sim/contracts.gd:94
 msgid "This invoice was sold to a collector as part of the company liquidation. The buyer will not pay the closed company again."
 msgstr ""
 
@@ -27657,7 +27509,7 @@ msgstr ""
 msgid "This is Suite 2B's desk. Talk to Tom about leasing it."
 msgstr ""
 
-#: scripts/sim/contracts.gd:129 scripts/sim/contracts.gd:174 scripts/sim/contracts.gd:231 scripts/sim/contracts.gd:371
+#: scripts/sim/contracts.gd:125 scripts/sim/contracts.gd:170 scripts/sim/contracts.gd:227 scripts/sim/contracts.gd:367
 msgid "This is a contract of a closed company."
 msgstr ""
 
@@ -27665,7 +27517,7 @@ msgstr ""
 msgid "This is a sightseeing-only location right now."
 msgstr ""
 
-#: autoload/save_system.gd:398 scripts/save_codec.gd:197
+#: autoload/save_system.gd:399 scripts/save_codec.gd:197
 msgid "This is not a City Venture save."
 msgstr ""
 
@@ -27705,14 +27557,6 @@ msgstr ""
 msgid "This market is no longer available. Review the closure and continue."
 msgstr ""
 
-#: scripts/sim/phone_messages.gd:179
-msgid "This meeting is unavailable."
-msgstr ""
-
-#: scripts/sim/phone_messages.gd:58
-msgid "This message has already been answered or is unavailable."
-msgstr ""
-
 #: scripts/ui/modals/company_os.gd:1604
 msgid "This month"
 msgstr ""
@@ -27733,7 +27577,7 @@ msgstr ""
 msgid "This offer has expired or was declined. Choose another route."
 msgstr ""
 
-#: scripts/sim/contracts.gd:127 scripts/sim/contracts.gd:172 scripts/sim/effects.gd:25 scripts/sim/effects.gd:74
+#: scripts/sim/contracts.gd:123 scripts/sim/contracts.gd:168
 msgid "This offer is no longer open."
 msgstr ""
 
@@ -27753,7 +27597,7 @@ msgstr ""
 msgid "This part of the car is already as good as it gets."
 msgstr ""
 
-#: scripts/sim/partnerships.gd:136 scripts/sim/partnerships.gd:162
+#: scripts/sim/partnerships.gd:132 scripts/sim/partnerships.gd:158
 msgid "This partnership is not active."
 msgstr ""
 
@@ -27777,7 +27621,7 @@ msgstr ""
 msgid "This property has no pending notice."
 msgstr ""
 
-#: scripts/sim/effects.gd:44 scripts/sim/partnerships.gd:88 scripts/sim/partnerships.gd:94 scripts/sim/partnerships.gd:97
+#: scripts/sim/effects.gd:32 scripts/sim/partnerships.gd:84 scripts/sim/partnerships.gd:90 scripts/sim/partnerships.gd:93
 msgid "This proposal is no longer open."
 msgstr ""
 
@@ -28001,11 +27845,7 @@ msgstr ""
 msgid "Time to finish"
 msgstr ""
 
-#: data/help/glossary.json
-msgid "Time-limited messages resolve their saved default when the deadline passes. Read the outcome in the same thread."
-msgstr ""
-
-#: scripts/ui/phone_ui.gd:163 scripts/ui/phone_ui.gd:441
+#: scripts/ui/phone_ui.gd:149 scripts/ui/phone_ui.gd:337
 msgid "Timeline"
 msgstr ""
 
@@ -28025,7 +27865,7 @@ msgstr ""
 msgid "To Startup Hub"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:575 scripts/ui/phone_ui.gd:420
+#: scripts/ui/modals/company_os.gd:575 scripts/ui/phone_ui.gd:316
 msgid "To pack"
 msgstr ""
 
@@ -28047,6 +27887,14 @@ msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1137
 msgid "Today's offers"
+msgstr ""
+
+#: scripts/sim/phone_messages.gd:96
+msgid "Today: %d new orders. Ready when you are."
+msgstr ""
+
+#: scripts/sim/ecommerce.gd:906
+msgid "Today: 1 new order. Ready when you are."
 msgstr ""
 
 #: scripts/ui/hotel_ui.gd:136
@@ -28129,7 +27977,7 @@ msgstr ""
 msgid "Too late for a shift today: the workplace closes soon. Go home and sleep (you can, after 4 PM on your first day), and work a shift tomorrow morning."
 msgstr ""
 
-#: scripts/sim/partnerships.gd:212
+#: scripts/sim/partnerships.gd:208
 msgid "Too many missed deliverables: we are ending the agreement."
 msgstr ""
 
@@ -28329,7 +28177,7 @@ msgstr ""
 msgid "Traded %s %s · internal sales %s · saved versus outside %s"
 msgstr ""
 
-#: scripts/sim/traffic_safety.gd:184
+#: scripts/sim/traffic_safety.gd:181
 msgid "Traffic claim filed. Return after seven days to collect the verified medical reimbursement."
 msgstr ""
 
@@ -28673,7 +28521,7 @@ msgstr ""
 msgid "Unknown idea."
 msgstr ""
 
-#: scripts/sim/effects.gd:36 scripts/sim/effects.gd:95
+#: scripts/sim/effects.gd:24 scripts/sim/effects.gd:54
 msgid "Unknown industry event."
 msgstr ""
 
@@ -28735,6 +28583,10 @@ msgstr ""
 
 #: scripts/ui/automotive_ui.gd:187
 msgid "Update listing"
+msgstr ""
+
+#: data/help/glossary.json
+msgid "Updates stay in the notification center. Go opens the relevant formal screen or city map."
 msgstr ""
 
 #: data/help/glossary.json
@@ -28883,6 +28735,10 @@ msgstr ""
 
 #: scripts/sim/hotel.gd:693
 msgid "VIP suite upgrade for a critic"
+msgstr ""
+
+#: scripts/sim/phone_messages.gd:120 scripts/sim/phone_messages.gd:121 scripts/sim/phone_messages.gd:45
+msgid "VISIT-"
 msgstr ""
 
 #: data/economy/workflows.json
@@ -29301,10 +29157,6 @@ msgstr ""
 msgid "Wages — %s shift at %s"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:344
-msgid "Wait %d minutes before messaging again."
-msgstr ""
-
 #: scripts/sim/energy.gd:310
 msgid "Wait for City Hall's subsidy decision before ordering materials."
 msgstr ""
@@ -29335,10 +29187,6 @@ msgstr ""
 
 #: scripts/sim/housing.gd:40 scripts/sim/personal_assets.gd:29
 msgid "Wait for the tenancy to end before moving into this home."
-msgstr ""
-
-#: scripts/sim/phone_messages.gd:101
-msgid "Wait for this contact's message cooldown to end."
 msgstr ""
 
 #: data/story/chapters.json
@@ -29541,10 +29389,6 @@ msgstr ""
 msgid "We lend to registered companies."
 msgstr ""
 
-#: scripts/sim/phone_messages.gd:210
-msgid "We missed the meeting. You can book a new time from Contacts."
-msgstr ""
-
 #: data/story/chapters.json
 msgid "We solved one trust problem and created another."
 msgstr ""
@@ -29561,11 +29405,7 @@ msgstr ""
 msgid "We want 120 insulated bottles for our members. $21 each, Net 30."
 msgstr ""
 
-#: scripts/sim/partnerships.gd:74
-msgid "We would like to work together. Our terms are ready for you to review in the partner screen."
-msgstr ""
-
-#: scripts/sim/contracts.gd:199
+#: scripts/sim/contracts.gd:195
 msgid "We'll source elsewhere. Thanks anyway."
 msgstr ""
 
@@ -29675,10 +29515,6 @@ msgstr ""
 
 #: scripts/ui/energy_ui.gd:294
 msgid "West"
-msgstr ""
-
-#: scripts/sim/contracts.gd:42 scripts/sim/group_jobs.gd:71
-msgid "What are the payment and delivery terms?"
 msgstr ""
 
 #: scripts/ui/hud.gd:179 scripts/ui/modals/settings_modal.gd:144
@@ -29913,7 +29749,7 @@ msgstr ""
 msgid "Wood desk"
 msgstr ""
 
-#: scripts/world/building_info.gd:201
+#: scripts/ui/phone_ui.gd:233 scripts/world/building_info.gd:201
 msgid "Work"
 msgstr ""
 
@@ -29931,10 +29767,6 @@ msgstr ""
 
 #: scripts/ui/tutorial.gd:85
 msgid "Work a shift"
-msgstr ""
-
-#: data/help/help.json
-msgid "Work and payment templates use current briefs and invoices. They do not promise new work or force an early payment."
 msgstr ""
 
 #: scripts/ui/modals/fundraising_modal.gd:374
@@ -30001,7 +29833,7 @@ msgstr ""
 msgid "Workshops"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:168
+#: scripts/ui/phone_ui.gd:154
 msgid "World"
 msgstr ""
 
@@ -30011,10 +29843,6 @@ msgstr ""
 
 #: scripts/ui/modals/city_map_modal.gd:144
 msgid "World map"
-msgstr ""
-
-#: data/economy/messages.json
-msgid "Would you like to meet for coffee?"
 msgstr ""
 
 #: data/economy/freelance.json
@@ -30041,7 +29869,7 @@ msgstr ""
 msgid "Yeah. Just looking."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:465 scripts/ui/phone_ui.gd:474
+#: scripts/ui/phone_ui.gd:361 scripts/ui/phone_ui.gd:370
 msgid "Year %d"
 msgstr ""
 
@@ -30061,7 +29889,7 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: scripts/ui/minigames/auction_game.gd:56 scripts/ui/phone_ui.gd:289
+#: scripts/ui/minigames/auction_game.gd:56
 msgid "You"
 msgstr ""
 
@@ -30071,10 +29899,6 @@ msgstr ""
 
 #: scripts/sim/staff.gd:92
 msgid "You already have a job ad running."
-msgstr ""
-
-#: scripts/sim/phone_messages.gd:104 scripts/sim/phone_messages.gd:170
-msgid "You already have a meeting with this contact. Review Agenda first."
 msgstr ""
 
 #: scripts/sim/careers.gd:247
@@ -30109,7 +29933,7 @@ msgstr ""
 msgid "You are %s below the large brand. Consider price carefully; better reviews and packaging can also win customers."
 msgstr ""
 
-#: scripts/sim/partnerships.gd:103
+#: scripts/sim/partnerships.gd:99
 msgid "You are bound by an exclusive agreement with %s for this kind of deal until it ends."
 msgstr ""
 
@@ -30293,7 +30117,7 @@ msgstr ""
 msgid "You met %d contacts and hired %d employees across your journey."
 msgstr ""
 
-#: scripts/sim/contracts.gd:238
+#: scripts/sim/contracts.gd:234
 msgid "You need %d in stock (have %d)."
 msgstr ""
 
@@ -30313,7 +30137,7 @@ msgstr ""
 msgid "You need a van."
 msgstr ""
 
-#: scripts/sim/fundraising.gd:697 scripts/sim/fundraising.gd:721
+#: scripts/sim/fundraising.gd:693 scripts/sim/fundraising.gd:717
 msgid "You need more than half the votes to overrule the board."
 msgstr ""
 
@@ -30553,7 +30377,7 @@ msgstr ""
 msgid "Your cash"
 msgstr ""
 
-#: scripts/sim/fundraising.gd:803
+#: scripts/sim/fundraising.gd:799
 msgid "Your community round raised %s of its %s goal, so every pledge was returned."
 msgstr ""
 
@@ -30717,10 +30541,6 @@ msgstr ""
 msgid "Your payment is stuck on the frozen bridge until about %s. Pay again by another rail to get the goods moving; the frozen money comes back when the bridge reopens."
 msgstr ""
 
-#: scripts/sim/bank.gd:291
-msgid "Your payment on loan %s bounced. We'll try again in 3 days. It's cheaper to call me before this happens."
-msgstr ""
-
 #: scripts/sim/living.gd:141
 msgid "Your personal account"
 msgstr ""
@@ -30861,7 +30681,7 @@ msgstr ""
 msgid "ads"
 msgstr ""
 
-#: scripts/sim/fundraising.gd:729
+#: scripts/sim/fundraising.gd:725
 msgid "advisor appointed"
 msgstr ""
 
@@ -30909,7 +30729,7 @@ msgstr ""
 msgid "behind the counter: %d barista(s)"
 msgstr ""
 
-#: scripts/sim/fundraising.gd:729
+#: scripts/sim/fundraising.gd:725
 msgid "board overruled"
 msgstr ""
 
@@ -31497,7 +31317,7 @@ msgstr ""
 msgid "passenger trips"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:428
+#: scripts/ui/phone_ui.gd:324
 msgid "paused: cap"
 msgstr ""
 
@@ -31537,7 +31357,7 @@ msgstr ""
 msgid "qc"
 msgstr ""
 
-#: scripts/sim/fundraising.gd:729
+#: scripts/sim/fundraising.gd:725
 msgid "recovery plan agreed"
 msgstr ""
 
@@ -31977,7 +31797,7 @@ msgstr ""
 msgid "−100 units"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:186
+#: scripts/ui/phone_ui.gd:172
 msgid "◆ %s needs a decision"
 msgstr ""
 

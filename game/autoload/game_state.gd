@@ -205,16 +205,14 @@ func add_message(from_id: String, text: String, options: Dictionary = {}) -> voi
 	text = I18n.t(text)   # a plain English line becomes the player's language; already-translated text passes through
 	var message := {"t": Clock.now(), "from": from_id, "text": text, "read": false}
 	PhoneMessages.prepare(message, options)
-	data["messages"].append(message)
-	EventBus.message_received.emit(from_id, text)
+	if options.get("timeline_only", false):
+		timeline(text, "company")
+		return
+	if PhoneMessages.append(message): EventBus.message_received.emit(from_id, text)
 
 
 func unread_messages() -> int:
-	var n := 0
-	for m in data.get("messages", []):
-		if not m.get("read", false):
-			n += 1
-	return n
+	return PhoneMessages.unread_actionable()
 
 
 func timeline(text: String, kind := "life", metadata := {}) -> void:

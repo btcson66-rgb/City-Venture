@@ -682,11 +682,7 @@ static func _report(deal: Dictionary) -> void:
 static func _open_board(deal: Dictionary, actual: float) -> void:
 	deal["board"] = {"status": "open", "opened": Clock.now(), "expires": Clock.now() + int(cfg()["board_review_days"]) * Clock.DAY, "actual": actual}
 	var did := str(deal["id"])
-	var replies: Array = [
-		{"id": "plan", "label": "Present a recovery plan", "effects": [{"op": "fund_board", "deal": did, "choice": "plan"}]},
-		{"id": "advisor", "label": "Accept a board-appointed advisor", "effects": [{"op": "fund_board", "deal": did, "choice": "advisor"}]},
-		{"id": "override", "label": "Overrule the board with your votes", "effects": [{"op": "fund_board", "deal": did, "choice": "override"}]}]
-	GameState.add_message(str(deal["investor"]), I18n.t("The milestone has been missed. The board is calling a review: choose how you want to respond within %d days.") % int(cfg()["board_review_days"]), {"replies": replies})
+	GameState.add_message(str(deal["investor"]), "A board review is ready. Choose your next step in Reports.", {"target":{"kind":"fundraising", "tab":"reports", "id":did}})
 	GameState.timeline(I18n.t("Investor board review opened after a missed milestone."), "company")
 static func board_choices(deal: Dictionary) -> Array:
 	var out: Array = []
