@@ -18,6 +18,11 @@ func run() -> void:
 	bot.expect(settings.find_child("AssistantAll",true,false).button_pressed,"all chores default on")
 	bot.expect(settings.help_key=="assistant","assistant settings have their own help card")
 	UIRoot.close_all()
+	GameState.data["tutorial"] = {"step":Tutorial._index("pack"),"seen":{},"off":false,"v":Tutorial.VERSION}
+	await bot.wait(0.4)
+	await bot.shot("assistant_packing_guide")
+	bot.expect(UIRoot.tutorial.body.text.begins_with(I18n.t("Your assistant packs and ships. Turn it off at the packing table to play.")),"packing guide explains optional manual play")
+	GameState.data["tutorial"]["off"] = true
 	var os := CompanyOS.new("home_laptop")
 	os.tab = "operations"
 	UIRoot.open_modal(os)

@@ -210,7 +210,14 @@ func is_active() -> bool:
 
 
 func current() -> Dictionary:
-	return STEPS[int(st()["step"])] if is_active() else {}
+	if not is_active():return {}
+	var step: Dictionary = STEPS[int(st()["step"])]
+	if AssistantPolicy.enabled("packing") and str(step["id"]) in ["pack","ship","dropoff","paid"]:
+		step = step.duplicate(true)
+		step["text"] = "Your assistant packs and ships. Turn it off at the packing table to play."
+		step["target"] = {}
+		step["ui"] = []
+	return step
 
 
 func skip_all() -> void:
@@ -311,6 +318,8 @@ func _track(ws: WorldScene, _delta: float) -> void:
 
 
 func step_done(s: Dictionary) -> bool:
+	# Once the chosen business has a real sale, a side job is an optional activity, not another chore.
+	if str(s.get("id","")) in ["job","shift"] and AssistantPolicy.enabled("packing") and GameState.flag("business_chosen") and GameState.stat("orders_delivered") >= 1:return true
 	var d := str(s.get("done", ""))
 	if d.begins_with("seen:"):
 		return bool(st()["seen"].get(d.substr(5), false))
@@ -414,8 +423,9 @@ var _shown_txt := ""
 func _show_step(i: int) -> void:
 	if _completing:
 		return
-	var txt := I18n.t(step_text(STEPS[i]))
-	var opening := DestinationHours.target_text(STEPS[i])
+	var s: Dictionary = current()
+	var txt := I18n.t(step_text(s))
+	var opening := DestinationHours.target_text(s)
 	if opening != "": txt += "\n" + opening
 	if _shown == i and _shown_loc == I18n.locale() and _shown_txt == txt:
 		return
@@ -424,7 +434,6 @@ func _show_step(i: int) -> void:
 	_shown_txt = txt
 	var skip := find_child("SkipTutorial", true, false) as Button
 	if skip != null: skip.text = I18n.t("Skip")
-	var s: Dictionary = STEPS[i]
 	head.text = (I18n.t("FIRST VENTURE %d/%d") % [mini(i + 1, STEPS.size()), STEPS.size()]) + "  ·  " + I18n.t(str(s["title"]))
 	body.text = txt
 	for c in keys_row.get_children():
