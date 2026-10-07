@@ -18,6 +18,7 @@ var prompt_panel: PanelContainer
 var prompt_label: Label
 var minimap: Minimap
 var phone_hint: Label
+var action_hint: Label
 var phone_btn: Button
 var quick: VBoxContainer
 var money_panel: PanelContainer
@@ -127,6 +128,11 @@ func _ready() -> void:
 	phone_hint.visible = false
 	phone_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	quick.add_child(phone_hint)
+	# F8: gold is reserved for things that need the player to act (a decision, an unpaid bill, an injury).
+	action_hint = UIK.label("", 7, Art.C_GOLD, true)
+	action_hint.visible = false
+	action_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	quick.add_child(action_hint)
 	parcels_label = UIK.label("", 7, Art.C_SKY, true)
 	parcels_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	quick.add_child(parcels_label)
@@ -272,9 +278,15 @@ func _process(_d: float) -> void:
 		co_label.add_theme_color_override("font_color", Art.C_GREEN if cc >= 1500 else (Art.C_SKY if cc >= 0 else Art.C_RED))
 	var unread := GameState.unread_messages()
 	var pending := not EventEngine.pending().is_empty()
-	phone_hint.text = ((I18n.t("● %d new") % unread) if unread > 0 else "") + ((I18n.t("   ◆ decision")) if pending else "")
+	var bills := unpaid_bill_count()
+	phone_hint.text = (I18n.t("● %d new") % unread) if unread > 0 else ""
 	phone_hint.visible = phone_hint.text != ""
-	phone_btn.modulate = Color(1, 1, 1) if unread == 0 and not pending else Color(1.0, 0.92, 0.6).lerp(Color(1, 1, 1), 0.5 + 0.5 * sin(Time.get_ticks_msec() / 180.0))
+	var needs: Array[String] = []
+	if pending: needs.append(I18n.t("◆ decision"))
+	if bills > 0: needs.append(I18n.t("● %d bill(s) due") % bills)
+	action_hint.text = "   ".join(needs)
+	action_hint.visible = action_hint.text != ""
+	phone_btn.modulate = Color(1, 1, 1) if not pending else Art.C_GOLD.lerp(Color(1, 1, 1), 0.5 + 0.5 * sin(Time.get_ticks_msec() / 180.0))
 	quick.position = Vector2(get_viewport_rect().size.x - 6 - quick.size.x, money_panel.position.y + money_panel.size.y + 3)
 	money_panel.position.x = maxf(6.0, get_viewport_rect().size.x - money_panel.size.x - 6.0)
 	minimap.get_parent().visible = not InputAccess.touch_mode or get_viewport_rect().size.x >= 600
@@ -309,14 +321,31 @@ func refresh() -> void:
 func _refresh_safety() -> void:
 	if safety_button == null or not GameState.has_game(): return
 	var ws := SceneRouter.world_scene()
-	safety_button.visible = ws != null and ws.kind == "district" and TrafficSafety.needs_attention()
+	var count := safety_count() if TrafficSafety.needs_attention() else 0
+	safety_button.visible = ws != null and ws.kind == "district" and count > 0
 	if safety_button.visible:
 		var health := TrafficSafety.S()
-		var pending := 0
-		for accident in health["accidents"]:
-			if float(accident.get("debt", 0)) > 0 or (accident.get("counterparty_fault", false) and accident.get("treated", false) and not accident.get("settled", false)): pending += 1
-		safety_button.text = I18n.t("Health · %d") % (maxi(1, pending) if health["injury"] != "none" else pending)
+		safety_button.text = I18n.t("Health · %d") % count
+		safety_button.add_theme_color_override("font_color", Art.C_GOLD)   # an injury or bill that needs the player
 		safety_button.tooltip_text = I18n.t("Injury: %s") % TrafficSafety.severity_label(str(health["injury"])) if health["injury"] != "none" else I18n.t("Medical bill or claim open")
+
+
+## Open medical bills / claims, and at least one while an injury is untreated. 0 means nothing to act on.
+static func safety_count() -> int:
+	var health := TrafficSafety.S()
+	var pending := 0
+	for accident in health["accidents"]:
+		if float(accident.get("debt", 0)) > 0 or (accident.get("counterparty_fault", false) and accident.get("treated", false) and not accident.get("settled", false)): pending += 1
+	return maxi(1, pending) if health["injury"] != "none" else pending
+
+
+## Bills the assistant has parked for the player (or their company) to pay.
+static func unpaid_bill_count() -> int:
+	if not GameState.data.has("assistant"): return 0
+	var n := 0
+	for item in AssistantPolicy.S().get("bills", []):
+		if not item["paid"] and item["entity"] in ["player", GameState.company_id()]: n += 1
+	return n
 
 
 var _hours_key := ""

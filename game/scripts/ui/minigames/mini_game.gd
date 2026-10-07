@@ -56,8 +56,18 @@ func _ready() -> void:
 	replay.name = "PracticeHelp"
 	replay.custom_minimum_size = Vector2(24, 24)
 	header.add_child(replay)
-	if not practice_only and not tutorial_seen() and MiniGames.auto < 0.0:
+	if practice_only:
+		var guard := PracticeKeyGuard.new()
+		guard.game = self
+		add_child(guard)
+	elif auto_practice_due():
 		replay_practice.call_deferred()
+
+
+## Practice is offered on its own at most once per minigame: closing it by any means marks it seen.
+## "Tutorial hints" off keeps it entirely manual (the "Practice again" and "?" buttons still work).
+func auto_practice_due() -> bool:
+	return not practice_only and not tutorial_seen() and MiniGames.auto < 0.0 and bool(Preferences.values.get("tutorial_hints", true))
 
 
 func tutorial_id() -> String:
@@ -75,6 +85,24 @@ func tutorial_seen() -> bool:
 
 func tutorial_key() -> String:
 	return tutorial_id() + ":" + str(get("kind")) if self is ConsultingGame else tutorial_id()
+
+
+## Old saves: a game the player already worked is not a first time. Job games count shifts at that job;
+## typing and consulting count freelance work. Never overrides an existing entry.
+static func backfill_tutorials_seen() -> void:
+	if not GameState.has_game(): return
+	var c: Dictionary = GameState.data.get("careers", {})
+	var shifts: Dictionary = c.get("shifts", {})
+	var seen: Dictionary = GameState.data.get("minigame_tutorials_seen", {})
+	var marks := []
+	for pair in [["barista", "barista_game"], ["parcel_sorter", "parcel_sort_game"], ["cowork_host", "cowork_host_game"], ["city_clerk", "clerk_forms_game"], ["bank_teller", "teller_cash_game"]]:
+		if int(shifts.get(pair[0], 0)) > 0: marks.append(pair[1])
+	var fl: Dictionary = c.get("freelance", {})
+	if int(fl.get("done", 0)) > 0 or not fl.get("gigs", {}).is_empty() or not c.get("daily_freelance_hours", {}).is_empty():
+		marks.append_array(["typing_game", "consulting_game:brand", "consulting_game:operations", "consulting_game:market"])
+	for m in marks:
+		if not seen.has(m): seen[m] = true
+	if not marks.is_empty(): GameState.data["minigame_tutorials_seen"] = seen
 
 
 func mark_tutorial_seen() -> void:
@@ -188,7 +216,12 @@ static func mode_cfg() -> Dictionary:
 
 
 func relaxed() -> bool:
-	return practice_only or work_mode == 0
+	return practice_only or work_mode == 0 or not has_clock()
+
+
+## Only games with a real timed element offer Challenge; the rest never pay challenge tips.
+func has_clock() -> bool:
+	return round_time > 0.0 or self is BaristaGame
 
 
 func tip_job() -> bool:
@@ -218,7 +251,7 @@ func _build_intro() -> void:
 	v.add_child(UIK.wrap(I18n.t(str(d.get("good", ""))), 9, Art.C_MUTED, 540))
 	if practice_only:
 		v.add_child(UIK.label("Practice: no timer, score or pay changes.", 8, Art.C_DIM))
-	if not practice_only:
+	if not practice_only and has_clock():
 		var row := UIK.hbox(4)
 		row.add_child(UIK.label("Work mode", 9, Art.C_MUTED))
 		var mode := OptionButton.new()
@@ -245,7 +278,7 @@ func _build_intro() -> void:
 
 
 func start() -> void:
-	if not practice_only and not tutorial_seen() and MiniGames.auto < 0.0:
+	if auto_practice_due():
 		replay_practice()
 		return
 	phase = "play"
@@ -396,7 +429,7 @@ func _finish() -> void:
 	var r := {"score": score()}
 	r.merge(extra_result())
 	r["tips"] = float(r.get("tips", 0.0)) + challenge_tips
-	r["work_mode"] = work_mode
+	r["work_mode"] = 0 if not has_clock() else work_mode
 	r["challenge_tips"] = challenge_tips
 	_send(r)
 	close()
@@ -409,6 +442,7 @@ func abort() -> void:
 
 ## The header's × leaves early too, so the caller always hears back.
 func close() -> void:
+	if practice_only: mark_tutorial_seen()   # whichever way practice ends, it is never forced again
 	_send({"aborted": true, "score": 0.0})
 	super.close()
 
@@ -500,6 +534,27 @@ class WorkLayoutDriver:
 				wanted = wanted.max(child.position + child.get_combined_minimum_size())
 		if game.stage.custom_minimum_size != wanted:
 			game.stage.custom_minimum_size = wanted
+
+
+## Practice highlights one control; every other key (pick_1..9, undo, Enter on another button) is swallowed
+## before the game's own handlers see it. Esc/pause still leaves, and typing steps accept typing.
+class PracticeKeyGuard:
+	extends Node
+	var game
+	func _input(event: InputEvent) -> void:
+		if game.practice_blocks_key(event): get_viewport().set_input_as_handled()
+
+
+func practice_blocks_key(event: InputEvent) -> bool:
+	if not practice_only or phase != "play" or not (event is InputEventKey) or not event.pressed: return false
+	if event.is_action_pressed("pause") or event.is_action_pressed("cancel"): return false
+	var steps: Array = _practice_data.get("steps", [])
+	if practice_step < steps.size() and steps[practice_step].get("condition", "") == "line_typed": return false
+	for nav in ["ui_accept", "ui_select", "confirm"]:
+		if event.is_action_pressed(nav):
+			var fo := get_viewport().gui_get_focus_owner() if is_inside_tree() else null
+			return fo == null or fo != practice_target
+	return false if event.is_action_pressed("ui_focus_next") or event.is_action_pressed("ui_focus_prev") or event.is_action_pressed("ui_up") or event.is_action_pressed("ui_down") or event.is_action_pressed("ui_left") or event.is_action_pressed("ui_right") else true
 
 
 class PracticeDriver:
