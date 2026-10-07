@@ -22,3 +22,5 @@ Experienced player: the existing Start action remains familiar; no new friction 
 The F principles are requirements for future changes, not a claim that the inherited game already satisfies them.
 
 No saved state, economy, assets or protected session files changed. All previous-save and ledger tests are run unchanged. Full new-game walkthrough is reserved for the final gameplay stack.
+
+Validation: 925/925 tests passed in 387.0s; no SCRIPT ERROR or ERROR lines. i18n 8077 msgids, zh_TW missing 0; wiki_check OK (3913 assets, 343 data ids); beta_audit 0 hits. Three project skills validate. Before and after minigame captures repeat the same six inherited tour failures.
