@@ -2131,7 +2131,9 @@ func _manufacturing() -> void:
 		Clock.advance_to(Clock.at_day_time(1, 9*60)+16*60)
 		await popups()
 	await bot.use_action("manufacturing_open")
-	await bot.click_named("Deliver_"+job)
+	# With the assistant on (the new-game default, #154) a finished order is delivered and invoiced on its own.
+	if Jobs.get_job(job)["status"] != "invoiced":
+		await bot.click_named("Deliver_"+job)
 	bot.expect(Jobs.get_job(job)["status"] == "invoiced", "first factory revenue has a completed traceable order")
 	await bot.click_named("FactoryTab_quality")
 	await bot.shot("factory_quality")
