@@ -138,7 +138,7 @@ func build() -> void:
 		body.add_child(weekly)
 	if scenario != "":
 		var definition: Dictionary = DataDB.scenarios[scenario]
-		body.add_child(UIK.wrap(I18n.t("Selected: %s · %s") % [I18n.t(str(definition["name"])), Fmt.money0(float(definition["initial"]["cash"]))], 8, Art.C_GOLD, 480))
+		body.add_child(UIK.wrap(I18n.t("Selected: %s · %s") % [I18n.t(str(definition["name"])), Fmt.money0(float(definition["initial"]["cash"]))], 8, Art.C_SKY, 480))
 		body.add_child(UIK.wrap(str(definition["goal"]), 8, Art.C_SKY, 480))
 	if challenge:
 		body.add_child(UIK.wrap("Weekly challenge uses fixed standard rules, seed and sandbox. Changing any choice starts a regular run.", 8, Art.C_SKY, 480))

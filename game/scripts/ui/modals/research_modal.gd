@@ -12,7 +12,7 @@ func build() -> void:
 	body.add_child(UIK.label_tip("Competitor research","market_research"))
 	if product=="":
 		var ids := ShopLife.products()
-		if ids.is_empty(): body.add_child(UIK.wrap("✗ Own or list a product — buy stock or create a listing first.",9,Art.C_GOLD,440))
+		if ids.is_empty(): body.add_child(UIK.wrap("✗ Own or list a product — buy stock or create a listing first.",9,Art.C_SKY,440))
 		for index in ids.size():
 			var id: String=ids[index]
 			var button := UIK.button(I18n.t("Research %s · 30 minutes; cached results are free")%I18n.t(DataDB.product(id)["name"]),inspect.bind(id),"primary" if index==0 else "")

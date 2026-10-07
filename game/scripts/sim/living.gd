@@ -29,7 +29,10 @@ static func on_hour(t: int, h: int) -> void:
 	ShopLife.on_hour(t)
 	LeaseEnd.on_hour()
 	if h == 0:
-		Ledger.expense("player", "living", daily_living(), "Food, transit & bills", {"type": "living"})
+		# One weekly bill instead of thirty small chores a month.
+		if Clock.day_index() % 7 == 0:
+			AssistantPolicy.bill("player", "living", daily_living() * 7.0, "Food, transit & bills", {"type": "living"})
+		AssistantPolicy.overdue(t)
 		for pid in D()["leases"]:
 			if Ecommerce.total_units_at(pid) > 0 or not LeaseEnd.workers(pid).is_empty():
 				LeaseEnd.record_damage(pid, float(LeaseEnd.policy(pid).get("damage_per_used_day", 0)))
@@ -58,14 +61,11 @@ static func pay_home_rent() -> void:
 	var rent := home_rent()   # rents rise with the era
 	var before := Ledger.cash("player")
 	var mname: String = Clock.month_name(int(Clock.date()["month"]))
-	Ledger.expense("player", "rent_home", rent, I18n.t("Home rent — %s (%s)") % [I18n.t(DataDB.properties[home()]["name"]),mname], {"type": "rent"})
-	D()["rent_history"].append({"t": Clock.now(), "amount": rent, "late": before < rent})
-	if before < rent:
-		Ledger.expense("player", "late_fees", float(cfg().get("late_rent_fee", 75)), "Late rent fee", {"type": "fee"})
-		GameState.add_message("landlord", I18n.t("Rent bounced. I've added the $%d late fee. Please sort it out this week.") % int(cfg().get("late_rent_fee", 75)))
-		EventBus.notify.emit("Rent paid into overdraft. Late fee charged.", "bad", "home")
-	else:
-		EventBus.notify.emit(I18n.t("Rent paid: %s") % Fmt.money0(rent), "info", "home")
+	var paid := AssistantPolicy.bill("player", "rent_home", rent, I18n.t("Home rent — %s (%s)") % [I18n.t(DataDB.properties[home()]["name"]),mname], {"type": "rent"})
+	D()["rent_history"].append({"t": Clock.now(), "amount": rent, "late": before < rent, "paid":paid})
+	# An unpaid rent waits as a bill with a due date; the bill's own late fee applies if it is ignored.
+	if not paid:return
+	EventBus.notify.emit(I18n.t("Rent paid: %s") % Fmt.money0(rent), "info", "home")
 	GameState.inc_stat("rent_paid")
 
 
@@ -78,7 +78,7 @@ static func _charge_lease(pid: String, ls: Dictionary) -> void:
 	var prop: Dictionary = DataDB.properties.get(pid, {})
 	if prop.get("kind","")=="popup":return
 	var cat := rent_category(str(prop.get("kind", "")))
-	Ledger.expense(ls["entity"], cat, float(ls["rent"]), I18n.t("%s — monthly") % I18n.t(prop.get("name", pid)), {"type": "lease", "id": pid})
+	AssistantPolicy.bill(ls["entity"], cat, float(ls["rent"]), I18n.t("%s — monthly") % I18n.t(prop.get("name", pid)), {"type": "lease", "id": pid})
 
 
 ## Sign a lease. Office: deposit + first month. Co-work desk: first month.

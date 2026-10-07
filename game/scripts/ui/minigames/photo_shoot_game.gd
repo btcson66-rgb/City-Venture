@@ -38,7 +38,7 @@ func _init(product_id := "wireless_earbuds") -> void:
 func intro_lines() -> Array:
 	return ["Set up the shot: pick a backdrop, the light and an optional styling prop.",
 		"Drag the product into the frame and zoom so it fills about a third of the picture. Keep it inside the edges.",
-		"Press the shutter when the focus needle is in the green. You get three shots; the best one goes on your listing.",
+		"Take three shots at your pace. The best one goes on your listing.",
 		"Soft light and a backdrop that suits the product sell better. Better photos, more orders."]
 
 
@@ -64,6 +64,7 @@ func build_round() -> void:
 	stage.add_child(h)
 	# viewfinder
 	frame_box = Control.new()
+	frame_box.name = "PhotoFrame"
 	frame_box.custom_minimum_size = FRAME
 	frame_box.clip_contents = true
 	frame_box.mouse_filter = Control.MOUSE_FILTER_PASS
@@ -112,6 +113,7 @@ func build_round() -> void:
 	needle_bar.draw.connect(_draw_needle)
 	fr.add_child(needle_bar)
 	c.add_child(fr)
+	fr.visible = not relaxed()
 	var shoot := UIK.button("◉  Shutter", _shoot, "primary", 150)
 	shoot.name = "Shutter"
 	c.add_child(shoot)
@@ -160,13 +162,13 @@ func _frame_input(e: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	super._process(delta)
-	_needle += delta * PersonalLife.response_speed()
+	_needle += delta if not relaxed() else 0.0
 	if needle_bar != null and is_instance_valid(needle_bar):
 		needle_bar.queue_redraw()
 
 
 func needle() -> float:
-	return 0.5 + 0.5 * sin(_needle * 2.6)
+	return 0.5 if relaxed() else 0.5 + 0.5 * sin(_needle * 2.6)
 
 
 # ------------------------------------------------------------------ drawing
@@ -269,7 +271,7 @@ func rate(focus: float) -> Dictionary:
 func _shoot() -> void:
 	if phase != "play":
 		return
-	var focus := clampf(1.0 - absf(needle() - 0.5) * 2.2, 0.0, 1.0)
+	var focus := 1.0 # Timing never lowers listing quality, even in challenge mode.
 	var r := rate(focus)
 	shots.append(r)
 	award(float(r["score"]))

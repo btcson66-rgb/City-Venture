@@ -486,6 +486,7 @@ func test_screens_build_without_errors_and_pick_one_primary() -> void:
 	var lot: Dictionary = Automotive.open_lots()[0]
 	runner.check(modal.find_child("Inspect_" + lot["id"], true, false) != null and modal.find_child("EnterAuction_" + lot["id"], true, false) != null, "lot buttons are named")
 	var game := AuctionGame.new(lot["id"])
+	game.mark_tutorial_seen()
 	UIRoot.open_modal(game)
 	await UIRoot.get_tree().process_frame
 	game.start()

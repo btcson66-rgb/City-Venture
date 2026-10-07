@@ -22,4 +22,4 @@ func _draw() -> void:
 			if i % 2 == 0:
 				draw_line(prev, pt, Color(1, 1, 1, 0.55), 1.0)
 			prev = pt
-	draw_circle(home, 4, Art.C_GOLD)
+	draw_circle(home, 4, Art.C_SKY)

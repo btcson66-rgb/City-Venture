@@ -80,16 +80,29 @@ static func on_hour() -> void:
 	for entity in S()["policies"]:
 		if not Tax.valid(str(entity)):continue
 		for policy in policies(entity).values():
-			if Clock.now()<int(policy["until"]):continue
+			var manual: bool = not bool(AssistantPolicy.S()["tasks"]["renewals"])
+			if Clock.now()<int(policy["until"]):
+				# Manual renewals get one calm heads-up before cover ends.
+				if manual and policy["auto"] and int(policy["until"])-Clock.now()<=3*Clock.DAY and int(policy.get("warned_until",-1))!=int(policy["until"]):
+					policy["warned_until"]=int(policy["until"])
+					_notify(str(entity),policy,I18n.t("%s (%s) ends in a few days. Renew it in Governance, or let the assistant renew it from Settings."))
+				continue
 			policy["active"]=false
 			if not policy["auto"]:continue
 			var fee := float(cfg()["policies"][policy["kind"]]["monthly"])
-			if Ledger.cash(entity)>=fee:
+			if not manual and Ledger.cash(entity)>=fee:
 				Ledger.expense(entity,"insurance",fee,I18n.t("Insurance renewal: %s")%Fmt.money(fee),{"type":"insurance_service","segment":"shared"})
 				policy["active"]=true
 				policy["ready"]=Clock.now()+int(cfg()["waiting_days"])*Clock.DAY if Clock.now()>int(policy["until"])+60 else Clock.now()
 				policy["until"]=Clock.now()+int(cfg()["renew_days"])*Clock.DAY
 				policy["paid"]=0.0
+			elif int(policy.get("lapsed_until",-1))!=int(policy["until"]):
+				policy["lapsed_until"]=int(policy["until"])
+				_notify(str(entity),policy,I18n.t("%s (%s) has ended. Renew it in Governance when you are ready."))
+## One quiet notification per lapse; the Go button opens Governance.
+static func _notify(entity: String,policy: Dictionary,text: String) -> void:
+	var label: String=I18n.t(str(cfg()["policies"][policy["kind"]].get("name",policy["kind"])))
+	GameState.add_message("assistant",text%[label,GameState.entity_name(entity)],{"category":"work","target":{"kind":"company","tab":"governance"}})
 static func on_company_closed(entity: String) -> void:
 	var receivable := maxf(0,Ledger.balance(entity,"insurance_receivable"))
 	if receivable>0:Ledger.post(entity,I18n.t("Insurance receivable transferred for liquidation"),[{"acct":"accounts_receivable","dr":receivable},{"acct":"insurance_receivable","cr":receivable}],{"type":"insurance_claim","segment":"shared"})

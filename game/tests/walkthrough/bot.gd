@@ -187,6 +187,16 @@ func _audit_one(t: String, ctl: Control) -> void:
 func _run() -> void:
 	await wait(1.0)
 	match mode:
+		"work_modes":
+			await load("res://tests/walkthrough/work_modes_tour.gd").new(self).run()
+		"practice":
+			await load("res://tests/walkthrough/practice_tour.gd").new(self).run()
+		"calm_info":
+			await load("res://tests/walkthrough/calm_info_tour.gd").new(self).run()
+		"assistant":
+			await load("res://tests/walkthrough/assistant_tour.gd").new(self).run()
+		"feature_gates":
+			await load("res://tests/walkthrough/feature_gates_tour.gd").new(self).run()
 		"traffic_safety":
 			await load("res://tests/walkthrough/traffic_safety_tour.gd").new(self).run()
 		"workflows":
@@ -401,6 +411,8 @@ func click(b: Control) -> bool:
 
 
 func click_named(name: String, timeout_s := 5.0) -> bool:
+	# The first-use hint is non-blocking, but its card could sit over the button: dismiss it first.
+	if name not in ["FeaturePracticeNext","FeaturePracticeSkip"]:FeatureIntroModal.dismiss_all(get_tree())
 	var ok := await until(func(): return button_named(name) != null, timeout_s)
 	if not ok:
 		fail("button '%s' not found" % name)

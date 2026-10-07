@@ -20,10 +20,10 @@ GAME = os.path.join(ROOT, "game")
 SRC = os.path.join(ROOT, "tools", "i18n")
 OUT = os.path.join(GAME, "i18n")
 
-SKIP_LINE = re.compile(r'push_warning|push_error|print\(|log_line|assert\(|get_node|find_child|has_node|'
-                       r'\.name\s*==|\.name\s*=|InputMap|load\(|preload\(|Art\.tex|Art\.icon|"--|b\.name|tooltip_text = o|'
+SKIP_LINE = re.compile(r'push_warning|push_error|print\(|log_line|assert\(|get_node|find_child|has_node|_practice_pressed\(|selector ==|'
+                       r'\.name\s*(?:==|!=)|\.name\s*=|InputMap|load\(|preload\(|Art\.tex|Art\.icon|"--|b\.name|tooltip_text = o|'
                        r'\.set_(?:stylebox|color|constant|font|font_size|icon)\(|for sb_name in|ScrollBar"\]|^\s*"done": ')
-DATA_KEYS = {"risk", "hint", "unit", "options", "audience", "budget","name", "text", "label", "detail", "outcome", "lines", "risks", "strengths", "industries", "goal", "blurb",
+DATA_KEYS = {"controls","risk", "hint", "unit", "options", "audience", "budget","name", "text", "label", "detail", "outcome", "lines", "risks", "strengths", "industries", "goal", "blurb",
              "skip_text", "audiences", "slogan", "visual", "tone",
              "pitch", "title", "archetype", "entry_requirement", "role", "outfits_planned", "accessories_planned",
              "headlines", "headlines_incident", "headlines_after", "return_reasons_defective", "return_reasons_normal", "subtitle", "category", "quality_req",
@@ -72,7 +72,7 @@ def unescape(s: str) -> str:
 def extract() -> dict:
     ids: dict[str, set] = {}
     files = [f for f in glob.glob(os.path.join(GAME, "**", "*.gd"), recursive=True)
-             if "/tests/" not in f.replace("\\", "/") and not f.endswith(("i18n.gd", "data_db.gd", "bug_report.gd"))]
+             if "/tests/" not in f.replace("\\", "/") and not f.endswith(("i18n.gd", "data_db.gd", "bug_report.gd", "minigame_practice_targets.gd"))]
     for f in sorted(files):
         rel = os.path.relpath(f, GAME).replace("\\", "/")
         for n, line in enumerate(open(f, encoding="utf-8"), 1):

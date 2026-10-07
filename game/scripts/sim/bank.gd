@@ -193,7 +193,7 @@ static func book_appointment() -> int:
 	B()["appointment"] = t
 	Sim.cancel("bank.appointment", "id", "lending")
 	Sim.schedule(t, "bank.appointment", {"id": "lending"})
-	GameState.add_message("marcus", appointment_hint(), {"replies": [{"id": "confirm", "label": "Confirm the meeting", "effects": [{"op": "phone_meeting", "npc": "marcus", "at": t}]}, {"id": "later", "label": "I will book again later.", "effects": [{"op": "phone_bank_later", "at": t}]}, {"id": "keep", "label": "Leave the appointment as booked.", "effects": []}], "expires": t + 60, "default_reply": "keep"})
+	GameState.add_message("marcus", appointment_hint(), {"target":{"kind":"map", "place":"nexus_bank"}})
 	return t
 
 
@@ -288,7 +288,7 @@ static func _payment(l: Dictionary) -> void:
 		GameState.add_message("marcus", I18n.t("%d missed payments. Loan %s is called: %s is due in full within 7 days.") % [int(l["missed"]), l["id"], Fmt.money(float(l["balance"]))])
 		EventBus.notify.emit(I18n.t("Nexus Bank called loan %s. %s due in 7 days.") % [l["id"], Fmt.money(float(l["balance"]))], "bad", "warning")
 		return
-	GameState.add_message("marcus", I18n.t("Your payment on loan %s bounced. We'll try again in 3 days. It's cheaper to call me before this happens.") % l["id"], {"expires": Clock.now() + Clock.DAY, "default_reply": "ack", "replies": [{"id": "extend", "label": "Request three more days to pay", "effects": [{"op": "phone_payment_extension", "id": l["id"]}], "outcome": "One extension granted: the retry is now in six days. Your debt and existing late fee remain due."}, {"id": "ack", "label": "Okay, thanks.", "effects": []}]})
+	GameState.add_message("marcus", I18n.t("Loan %s needs attention. Review it at the bank.") % l["id"], {"target":{"kind":"bank"}})
 	Sim.schedule(Clock.now() + 3 * Clock.DAY, "bank.payment", {"id": l["id"]})
 
 

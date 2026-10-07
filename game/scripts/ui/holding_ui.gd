@@ -12,7 +12,7 @@ static func render(os,primary: Array) -> void:
 	c.add_child(UIK.wrap("Share transfers keep book value. Internal sales are eliminated; goods markup becomes group profit only after a real outside sale. A guarantee can put the parent at risk.",8,Art.C_MUTED,450))
 	var descendants := HoldingGroups.members(parent)
 	for id in descendants:
-		c.add_child(UIK.label(("● " if id==parent else "  ↳ ")+GameState.entity_name(id)+" · "+Fmt.money0(Ledger.cash(id)),8,Art.C_GOLD))
+		c.add_child(UIK.label(("● " if id==parent else "  ↳ ")+GameState.entity_name(id)+" · "+Fmt.money0(Ledger.cash(id)),8,Art.C_SKY))
 	var free: Array = CompanyPortfolio.ids().filter(func(id):return id!=parent and HoldingGroups.owner(id)=="player")
 	for id in free:
 		action(os,c,I18n.t("Place %s into this holding group")%GameState.entity_name(id),"HoldingAdd_"+id,HoldingGroups.hold.bind(parent,id),primary,true)

@@ -60,7 +60,7 @@ func build() -> void:
 	var v := UIK.vbox(2)
 	h.add_child(v)
 	if who != "":
-		v.add_child(UIK.label(DataDB.npc(who).get("name", who.capitalize()), 8, Art.C_GOLD, true))
+		v.add_child(UIK.label(DataDB.npc(who).get("name", who.capitalize()), 8, Art.C_SKY, true))
 	for line in pres.get("lines", []):
 		v.add_child(UIK.wrap(EventEngine.fill(str(line), inst["ctx"]), 8, Art.C_WHITE, 310))
 	# new ideas in this decision get a "!" badge with a plain-language card (data/help/glossary.json)

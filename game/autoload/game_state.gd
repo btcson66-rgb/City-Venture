@@ -37,6 +37,7 @@ func new_game(setup: Dictionary) -> bool:
 		data = {}
 		return false
 	data = template(setup, seed_v)
+	data["feature_gates"] = {"granted":["os_overview","os_finance","os_operations","app_messages","app_bank","app_tasks","app_map","app_save","app_close"],"seen":["os_overview","os_finance","os_operations","app_messages","app_bank","app_tasks","app_map","app_save","app_close"],"guided":[]}
 	data["meta"]["slot"] = slot
 	Ledger.post("player", "Opening balance — savings", [
 		{"acct": "cash", "dr": start_cash},
@@ -84,6 +85,7 @@ func template(setup := {}, seed_v := 1) -> Dictionary:
 		"stats": {},
 		"npcs": {},
 		"messages": [],
+		"assistant": {"tasks": {}, "last": {}, "notices": {}, "default": true},
 		"timeline": [],
 		"reports": {"month_closes": []},
 		"world": {"year": 1, "modifiers": []},
@@ -205,16 +207,14 @@ func add_message(from_id: String, text: String, options: Dictionary = {}) -> voi
 	text = I18n.t(text)   # a plain English line becomes the player's language; already-translated text passes through
 	var message := {"t": Clock.now(), "from": from_id, "text": text, "read": false}
 	PhoneMessages.prepare(message, options)
-	data["messages"].append(message)
-	EventBus.message_received.emit(from_id, text)
+	if options.get("timeline_only", false):
+		timeline(text, "company")
+		return
+	if PhoneMessages.append(message): EventBus.message_received.emit(from_id, text)
 
 
 func unread_messages() -> int:
-	var n := 0
-	for m in data.get("messages", []):
-		if not m.get("read", false):
-			n += 1
-	return n
+	return PhoneMessages.unread_actionable()
 
 
 func timeline(text: String, kind := "life", metadata := {}) -> void:

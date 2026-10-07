@@ -149,6 +149,7 @@ func _on_hour(t: int, h: int) -> void:
 	phase=""
 
 func _single_company_hour(t: int, h: int) -> void:
+	AssistantPolicy.on_hour(t,h)
 	if h == 0:
 		_archive_orders(t)
 	OverseasPartners.on_hour()
@@ -192,6 +193,7 @@ func _archive_orders(t: int) -> void:
 
 
 func _company_hour(t: int,h: int) -> void:
+	AssistantPolicy.on_hour(t,h)
 	if h == 0:
 		_archive_orders(t)
 	OverseasPartners.on_hour()

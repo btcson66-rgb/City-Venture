@@ -10,7 +10,7 @@ func _init(id: String) -> void:
 func build() -> void:
 	var c := Legal.get_case(case_id)
 	if c.is_empty() or not Tax.valid(str(c.get("entity",""))):
-		body.add_child(UIK.wrap("✗ This company or dispute is closed; return to your current company's terminal.",8,Art.C_GOLD,500))
+		body.add_child(UIK.wrap("✗ This company or dispute is closed; return to your current company's terminal.",8,Art.C_SKY,500))
 		return
 	body.add_child(UIK.label_tip("Legal disputes","legal_disputes",9,Art.C_WHITE,true))
 	body.add_child(UIK.label(I18n.t("%s · disputed amount %s")%[c["party"],Fmt.money(float(c["amount"]))],9))

@@ -12,14 +12,14 @@ func _init(client_brief: Dictionary) -> void:
 	help_key="creative_pitch"
 	icon_name="star"
 func intro_lines() -> Array:
-	return ["Build the client pitch from slogan, visual and tone cards.","Match the client's preferences shown above the cards. Each round is timed and the cards change places.","A matching card earns the point; a wrong pick or the clock running out earns nothing."]
+	return ["Build the client pitch from slogan, visual and tone cards.","Match the preferences above the cards. Take your time; the challenge clock is optional.","A matching card earns the point. Waiting never lowers your score."]
 func build_round() -> void:
 	var category: String=["slogan","visual","tone"][round_i]
 	var cards := UIK.vbox(6)
 	cards.position=Vector2(10,8)
 	cards.size=Vector2(550,220)
 	stage.add_child(cards)
-	cards.add_child(UIK.wrap(I18n.t("%s · audience: %s")%[I18n.t(str(brief.get("client",""))),I18n.t(Media.cfg()["audiences"][int(brief["audience"])])],10,Art.C_GOLD,520))
+	cards.add_child(UIK.wrap(I18n.t("%s · audience: %s")%[I18n.t(str(brief.get("client",""))),I18n.t(Media.cfg()["audiences"][int(brief["audience"])])],10,Art.C_SKY,520))
 	var preferences: Array=brief["preferences"]
 	var wanted: Array=[]
 	for k in 3:wanted.append(I18n.t(Media.cfg()["creative_cards"][["slogan","visual","tone"][k]][int(preferences[k])]))

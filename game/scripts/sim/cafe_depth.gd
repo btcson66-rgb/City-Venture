@@ -96,12 +96,13 @@ static func record_hours(t: int,extra := 1.0) -> void:
 		row["hours"]=hours+extra
 		if extra==1.0:row["last"]=t
 		root["work_hours"][id]=row
-static func clean() -> Dictionary:
+static func clean(advance_time := true) -> Dictionary:
 	if not Cafe.ready_to_open():return {"ok":false,"error":"Open the café before cleaning."}
 	if int(Cafe.S()["cleaned"])/Clock.DAY==Clock.day_index():return {"ok":false,"error":"Already cleaned today. Keep the shop ready or clean tomorrow."}
 	var t:=Clock.now()
 	CafeDepth.record_hours(t-60,float(Cafe.cfg()["inspection"]["clean_minutes"])/60)
-	Cafe.S()["cleaned"]=t;Clock.advance(int(Cafe.cfg()["inspection"]["clean_minutes"]))
+	Cafe.S()["cleaned"]=t
+	if advance_time:Clock.advance(int(Cafe.cfg()["inspection"]["clean_minutes"]))
 	return {"ok":true}
 static func inspection_due() -> void:
 	var s:=Cafe.S()

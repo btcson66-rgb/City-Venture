@@ -31,4 +31,4 @@ func _draw() -> void:
 		draw_circle(p, 3.5 if active else 2.5, Color.WHITE if active else Color(0.6, 0.65, 0.75))
 		draw_circle(p, 2.0 if active else 1.5, Art.C_NAVY_700)
 		if d["id"] == here:
-			draw_arc(p, 6.0, 0, TAU, 16, Art.C_GOLD, 1.5)
+			draw_arc(p, 6.0, 0, TAU, 16, Art.C_SKY, 1.5)

@@ -11,7 +11,7 @@ static func S() -> Dictionary:
 	return state
 static func segment_tag() -> String:return "international_trade"
 static func entity() -> String:return str(S()["entity"])
-static func is_running() -> bool:return GameState.has_game() and bool(S()["active"])
+static func is_running() -> bool:return GameState.has_game() and bool(GameState.data.get("trade", {}).get("active", false))  # read-only: asking must not create the state
 static func valid() -> bool:return is_running() and GlobalMarket.live(entity())
 static func source(id: String) -> Dictionary:return {"type":"trade","id":id,"segment":"international_trade"}
 static func error(text: String) -> Dictionary:return {"ok":false,"error":I18n.t(text)}

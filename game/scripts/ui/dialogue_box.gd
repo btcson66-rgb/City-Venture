@@ -57,7 +57,7 @@ func _ready() -> void:
 	v.add_child(nh)
 	phone_badge = UIK.icon("phone", 12)
 	nh.add_child(phone_badge)
-	name_label = UIK.title("", 11, Art.C_GOLD)
+	name_label = UIK.title("", 11, Art.C_SKY)
 	name_label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED   # player names are never msgids
 	nh.add_child(name_label)
 	text_label = UIK.wrap("", 9, Art.C_WHITE, 440)

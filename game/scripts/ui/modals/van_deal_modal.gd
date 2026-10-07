@@ -25,10 +25,10 @@ func build() -> void:
 	var col := UIK.vbox(2)
 	col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	top.add_child(col)
-	col.add_child(UIK.title(I18n.t(str(v.get("name", "Used panel van"))), 11, Art.C_GOLD))
+	col.add_child(UIK.title(I18n.t(str(v.get("name", "Used panel van"))), 11, Art.C_SKY))
 	col.add_child(UIK.wrap(I18n.t("White, 140,000 km, a sighing gearbox and an honest engine. Parked at Pier 7 once it's yours."), 8, Art.C_MUTED, 250))
 	body.add_child(UIK.sep())
-	body.add_child(UIK.kv("Price", Fmt.money(price), Art.C_GOLD, 9, true))
+	body.add_child(UIK.kv("Price", Fmt.money(price), Art.C_SKY, 9, true))
 	var r2 := UIK.kv("Insurance, every month", Fmt.money(ins))
 	r2.add_child(UIK.tip("vehicle_insurance"))
 	body.add_child(r2)

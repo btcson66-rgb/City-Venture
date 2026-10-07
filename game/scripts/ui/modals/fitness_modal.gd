@@ -14,7 +14,7 @@ func build() -> void:
 	body.add_child(UIK.label_tip("Membership and business connections","networking"))
 	if Clock.now()<int(ShopLife.S()["paid_until"]): body.add_child(UIK.wrap(I18n.t("✓ Membership paid until %s — choose a class.")%Clock.fmt_short(int(ShopLife.S()["paid_until"])),8,Art.C_SKY,460))
 	elif bool(ShopLife.S()["single"]): body.add_child(UIK.wrap("✓ Single-class pass ready — choose a class.",8,Art.C_SKY,460))
-	else: body.add_child(UIK.wrap("✗ No class pass — buy one at Rosa's reception.",8,Art.C_GOLD,460))
+	else: body.add_child(UIK.wrap("✗ No class pass — buy one at Rosa's reception.",8,Art.C_SKY,460))
 	if desk:
 		if not bool(ShopLife.S()["membership"]):
 			var monthly := UIK.button(I18n.t("Join · %s per month")%Fmt.money(float(ShopLife.cfg()["monthly_fee"])),purchase.bind(true))

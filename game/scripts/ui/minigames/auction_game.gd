@@ -2,6 +2,7 @@ class_name AuctionGame
 extends MiniGame
 ## Live bidding against three bidders with private ceilings. Each poll tick they may raise; enough quiet
 ## ticks and the hammer falls. The sale itself is settled by Automotive, so the result is real money.
+var practice_lot := {}
 var lot_id := ""
 var elapsed := 0.0
 var stopped := false
@@ -21,9 +22,12 @@ func _init(lot: String) -> void:
 	help_key = "auction"
 	icon_name = "metro"
 func lot() -> Dictionary:
+	if practice_only:
+		if practice_lot.is_empty(): practice_lot = Automotive.S()["lots"].get(lot_id, {}).duplicate(true)
+		return practice_lot
 	return Automotive.S()["lots"].get(lot_id, {})
 func intro_lines() -> Array:
-	return ["Bid against live bidders. Press Bid to raise; stop bidding when the price passes what the car is worth to you.", "The buyer fee is added to the hammer price. Hidden defects are not shown unless Jun inspected the car."]
+	return ["Bid at your pace. In relaxed mode, let other bidders respond when you are ready; stop whenever you want.", "The buyer fee is added to the hammer price. Hidden defects are not shown unless Jun inspected the car."]
 func build_round() -> void:
 	var box := UIK.vbox(6)
 	box.position = Vector2(10, 8)
@@ -31,7 +35,7 @@ func build_round() -> void:
 	stage.add_child(box)
 	var current := lot()
 	var car: Dictionary = current["car"]
-	box.add_child(UIK.wrap(I18n.t("%s · %d years · %s km · market %s") % [I18n.t(car["name"]), int(car["age"]), Fmt._group(int(car["km"])), Fmt.money0(Automotive.true_value(car) if bool(current["inspected"]) else Automotive.visible_value(car))], 10, Art.C_GOLD, 520))
+	box.add_child(UIK.wrap(I18n.t("%s · %d years · %s km · market %s") % [I18n.t(car["name"]), int(car["age"]), Fmt._group(int(car["km"])), Fmt.money0(Automotive.true_value(car) if bool(current["inspected"]) else Automotive.visible_value(car))], 10, Art.C_SKY, 520))
 	bid_label = UIK.label("", 14, Art.C_WHITE, true)
 	bid_label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	box.add_child(bid_label)
@@ -47,6 +51,10 @@ func build_round() -> void:
 	var stop := UIK.button("Stop bidding", stop_bidding)
 	stop.name = "AuctionStop"
 	box.add_child(stop)
+	if relaxed() and not practice_only:
+		var advance := UIK.button("Let other bidders respond", tick)
+		advance.name = "AuctionAdvance"
+		box.add_child(advance)
 	refresh_labels()
 func refresh_labels() -> void:
 	var current := lot()
@@ -62,6 +70,11 @@ func refresh_labels() -> void:
 	bid_button.text = I18n.t("Bid %s") % Fmt.money0(Automotive.next_bid(current))
 	bid_button.disabled = stopped or leader == "player"
 func bid() -> void:
+	if practice_only:
+		lot()["bid"] = Automotive.next_bid(lot())
+		lot()["leader"] = "player"
+		refresh_labels()
+		return
 	var result := Automotive.auction_bid(lot_id)
 	if not result["ok"]: flash(result["error"], false)
 	refresh_labels()
@@ -70,18 +83,19 @@ func stop_bidding() -> void:
 	refresh_labels()
 func _process(delta: float) -> void:
 	super._process(delta)
-	if phase != "play" or settled or lot().is_empty(): return
+	if relaxed() or phase != "play" or settled or lot().is_empty(): return
 	elapsed += delta
 	if elapsed < float(Automotive.auction()["poll_seconds"]): return
 	elapsed = 0.0
 	tick()
 func tick() -> void:
+	if practice_only: return
 	var result := Automotive.auction_step(lot_id)
 	if result["ok"] and result["raised"] != "": flash(I18n.t("%s bids %s") % [I18n.t(result["raised"]), Fmt.money0(result["bid"])], false)
 	refresh_labels()
 	if result["ok"] and result["sold"]: settle()
 func settle() -> void:
-	if settled: return
+	if practice_only or settled: return
 	settled = true
 	outcome = Automotive.auction_hammer(lot_id)
 	var current := lot()

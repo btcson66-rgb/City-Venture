@@ -17,7 +17,7 @@ func _init(is_opening := true) -> void:
 
 func build() -> void:
 	var definition: Dictionary = Replay.S().get("scenario", {})
-	body.add_child(UIK.title(str(definition.get("name", "")), 12, Art.C_GOLD))
+	body.add_child(UIK.title(str(definition.get("name", "")), 12, Art.C_SKY))
 	body.add_child(UIK.wrap(str(definition.get("description", "")), 8, Art.C_WHITE, 410))
 	body.add_child(UIK.wrap(str(definition.get("goal", "")), 8, Art.C_SKY, 410))
 	if opening:

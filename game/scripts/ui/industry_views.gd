@@ -49,7 +49,7 @@ static func cafe(det: Control, board: Node) -> void:
 	if Cafe.leased():
 		det.add_child(UIK.label(I18n.t("✓ You run %s.") % Cafe.display_name(), 9, Art.C_GREEN, true))
 	else:
-		det.add_child(UIK.label("Old Town: metro (Loop Line), or walk west from Shopping Street.", 8, Art.C_GOLD, true))
+		det.add_child(UIK.label("Old Town: metro (Loop Line), or walk west from Shopping Street.", 8, Art.C_SKY, true))
 
 
 static func logistics(det: Control, board: Node) -> void:
@@ -57,4 +57,4 @@ static func logistics(det: Control, board: Node) -> void:
 	if Logistics.has_van():
 		det.add_child(UIK.label("✓ You run a van. Runs are in Company OS → Logistics.", 9, Art.C_GREEN, true))
 	else:
-		det.add_child(UIK.label("Harbor: metro Harbor Line (M3) from Riverside. Sam is at Dockside Motors, Mon–Sat.", 8, Art.C_GOLD, true))
+		det.add_child(UIK.label("Harbor: metro Harbor Line (M3) from Riverside. Sam is at Dockside Motors, Mon–Sat.", 8, Art.C_SKY, true))

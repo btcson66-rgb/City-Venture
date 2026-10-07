@@ -52,7 +52,7 @@ func build() -> void:
 	v.add_child(UIK.sep())
 	v.add_child(UIK.label(I18n.t(it["name"]), 10, Art.C_WHITE, true))
 	v.add_child(UIK.wrap(I18n.t(it.get("blurb", "")), 7, Art.C_MUTED, 280))
-	v.add_child(UIK.kv("Price", Fmt.money0(float(it["price"])), Art.C_GOLD))
+	v.add_child(UIK.kv("Price", Fmt.money0(float(it["price"])), Art.C_SKY))
 	v.add_child(UIK.kv("Your cash", Fmt.money0(Ledger.cash("player")), UIK.money_color(Ledger.cash("player"))))
 	footer.add_child(UIK.button("Close", close))
 	if Wardrobe.owns(sel):

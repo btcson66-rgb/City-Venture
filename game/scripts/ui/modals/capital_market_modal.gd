@@ -24,7 +24,7 @@ func build() -> void:
 	if CapitalMarket.live() and current_ipo.get("stage","")=="roadshow":
 		roadshow(box,current_ipo)
 		return
-	box.add_child(UIK.label_tip("Ownership routes", "capital_routes",10,Art.C_GOLD))
+	box.add_child(UIK.label_tip("Ownership routes", "capital_routes",10,Art.C_SKY))
 	box.add_child(UIK.wrap("NPC companies are used for this consolidation scenario. Their revenue and growth are scenario inputs, never income on your books. Acquired firms are recorded investments; their staffing remains separate from your own team.",7,Art.C_MUTED,458))
 	if not CapitalMarket.live():
 		box.add_child(UIK.wrap("✗ This company is closed or replaced. Continue with your current life.",8,Art.C_MUTED,458))
@@ -42,7 +42,7 @@ func build() -> void:
 		for report in s["quarter_reports"]:
 			box.add_child(UIK.wrap(I18n.t("Quarter: actual %s home dollars, expected %s home dollars. Share price %s home dollars per share.")%[Fmt.money(float(report["actual"])),Fmt.money(float(report["expected"])),Fmt.money(float(report["price"]))],7,Art.C_WHITE,458))
 	elif s["route"] != "acquired":
-		box.add_child(UIK.label("Acquisition proposals",9,Art.C_GOLD))
+		box.add_child(UIK.label("Acquisition proposals",9,Art.C_SKY))
 		for offer in s["offers"]:
 			action(box,I18n.t("%s offers %s home dollars")%[offer["name"],Fmt.money0(float(offer["price"]))],"SelectOffer_"+str(offer["id"]),func():selected_offer=offer["id"];rebuild())
 		if selected_offer != "":
@@ -57,7 +57,7 @@ func build() -> void:
 				action(body,"Sell founder shares to the selected buyer","ConfirmCapitalSale",func():result(CapitalMarket.sell(selected_offer)),true)
 				action(body,"Keep operating","CapitalContinue",close)
 				return
-		box.add_child(UIK.label_tip("Public listing", "ipo_process",9,Art.C_GOLD))
+		box.add_child(UIK.label_tip("Public listing", "ipo_process",9,Art.C_SKY))
 		var stage := str(ipo.get("stage",""))
 		if stage=="audit":
 			box.add_child(UIK.wrap(I18n.t("Paid audit completes at %s. A failed audit keeps its fee; you can retry after fixing the operating or compliance record.")%Clock.fmt_short(int(ipo["ready"])),7,Art.C_WHITE,458))
@@ -84,7 +84,7 @@ func build() -> void:
 				action(body,"Keep operating","CapitalContinue",close)
 				return
 		action(box,"Keep the company private","ChoosePrivateRoute",func():result(CapitalMarket.private_route()))
-	box.add_child(UIK.label_tip("Acquire and integrate", "acquisition_integration",9,Art.C_GOLD))
+	box.add_child(UIK.label_tip("Acquire and integrate", "acquisition_integration",9,Art.C_SKY))
 	for id in s["targets"]:
 		var target: Dictionary = s["targets"][id]
 		if target.has("owner"): continue
@@ -99,10 +99,10 @@ func build() -> void:
 func roadshow(box: Control,ipo: Dictionary) -> void:
 	var index := int(ipo["answers"].size())
 	var q: Dictionary = CapitalMarket.cfg()["questions"][index]
-	box.add_child(UIK.label_tip("Investor roadshow","ipo_process",10,Art.C_GOLD))
+	box.add_child(UIK.label_tip("Investor roadshow","ipo_process",10,Art.C_SKY))
 	box.add_child(UIK.kv("Investor question (round)","%d / %d"%[index+1,CapitalMarket.cfg()["questions"].size()]))
 	box.add_child(UIK.kv("Supported answers (answers)",str(int(ipo["score"]))))
-	box.add_child(UIK.wrap(q["text"],9,Art.C_GOLD,458))
+	box.add_child(UIK.wrap(q["text"],9,Art.C_SKY,458))
 	box.add_child(UIK.wrap("Answers change pricing confidence. Unsupported promises may cause investors to decline; no answer guarantees profitable future operations.",7,Art.C_MUTED,458))
 	action(box,q["good"],"RoadshowTransparent",func():result(CapitalMarket.answer(index,true)))
 	box.add_child(UIK.wrap(_effect_text(q["good_effect"]),7,Art.C_MUTED,458))

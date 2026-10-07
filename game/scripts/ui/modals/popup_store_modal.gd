@@ -13,7 +13,7 @@ func action(box: Control,text: String,id: String,fn: Callable,primary:=false) ->
 func build() -> void:
 	chosen=false
 	var box:=UIK.vbox(4);body.add_child(UIK.scroll(box,Vector2(464,265)))
-	box.add_child(UIK.label_tip("Weekend pop-up","popup_store",10,Art.C_GOLD))
+	box.add_child(UIK.label_tip("Weekend pop-up","popup_store",10,Art.C_SKY))
 	box.add_child(UIK.wrap(I18n.t("Saturday and Sunday 10:00–18:00 · %s/weekend · reserve at least one day ahead · capacity %d units")%[Fmt.money(float(PopupStore.cfg()["rent_weekend"])),int(PopupStore.cfg()["capacity"])],8,Art.C_WHITE,448))
 	var a:=PopupStore.active()
 	if a.is_empty():
@@ -38,7 +38,7 @@ func build() -> void:
 		for product in a["prices"]:
 			box.add_child(UIK.label(I18n.t(DataDB.products[product]["name"])+" · "+Fmt.money(float(a["prices"][product]))+" / "+I18n.t("unit"),8,Art.C_WHITE))
 			for delta in [-.5,.5]:action(box,I18n.t("Price %s")%Fmt.money(delta),"PopupPrice_"+product+str(delta),func():return PopupStore.set_price(product,float(a["prices"][product])+delta))
-		box.add_child(UIK.label_tip("Foot traffic","foot_traffic",9,Art.C_GOLD))
+		box.add_child(UIK.label_tip("Foot traffic","foot_traffic",9,Art.C_SKY))
 		var why:=PopupStore.owner_block()
 		box.add_child(UIK.wrap(("✓ " if why=="" else "✗ ")+I18n.t("Work the checkout now." if why=="" else why),8,Art.C_MUTED,448))
 		if why=="":
@@ -47,7 +47,7 @@ func build() -> void:
 		box.add_child(UIK.wrap(I18n.t("Weekend employee: %s per hour, paid in addition to the normal roster. Assign Saturday or Sunday in People.")%Fmt.money(float(PopupStore.cfg()["employee_hourly"])),8,Art.C_MUTED,448))
 	if not PopupStore.S()["history"].is_empty():
 		var r: Dictionary=PopupStore.S()["history"][-1]
-		box.add_child(UIK.label_tip("Channel margin","channel_margin",10,Art.C_GOLD))
+		box.add_child(UIK.label_tip("Channel margin","channel_margin",10,Art.C_SKY))
 		box.add_child(UIK.label(I18n.t("Weekend report: %d visitors · %d units sold")%[int(r["customers"]),int(r["units"])],9,Art.C_WHITE))
 		for pair in [["Sales revenue","revenue"],["Stock cost","cogs"],["Weekend rent","rent"],["Weekend wages","wages"],["Card fees","fee"],["Stock transport","move"],["Net profit","net"],["ShopLane fee estimate","shoplane_fee"],["ShopLane same-sales margin estimate","shoplane_net"]]:box.add_child(UIK.label(I18n.t(pair[0])+": "+Fmt.money(float(r[pair[1]])),8,Art.C_WHITE))
 		box.add_child(UIK.wrap("Comparison uses only the units actually sold and the current ShopLane fee rate. It assumes the same prices, excludes online shipping and returns, and never books estimated income.",8,Art.C_MUTED,448))

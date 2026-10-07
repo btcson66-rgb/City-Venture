@@ -42,7 +42,7 @@ func build() -> void:
 			ob.disabled = Ledger.cash("player") < capital
 			left.add_child(ob)
 			if ob.disabled:
-				left.add_child(UIK.wrap(I18n.t("You only have %s in personal checking. Pick a smaller amount.") % Fmt.money0(Ledger.cash("player")), 7, Art.C_GOLD, 196))
+				left.add_child(UIK.wrap(I18n.t("You only have %s in personal checking. Pick a smaller amount.") % Fmt.money0(Ledger.cash("player")), 7, Art.C_SKY, 196))
 		else:
 			left.add_child(UIK.label("Transfers", 8, Art.C_MUTED, true))
 			var th := UIK.hbox(3)
@@ -61,7 +61,7 @@ func build() -> void:
 				left.add_child(UIK.label_tip("International account", "overseas_storefront"))
 				var why := GlobalMarket.bank_block()
 				if why != "":
-					left.add_child(UIK.wrap("✗ " + I18n.t(why), 7, Art.C_GOLD, 196))
+					left.add_child(UIK.wrap("✗ " + I18n.t(why), 7, Art.C_SKY, 196))
 				var international := UIK.button(I18n.t("Open international account (%s)") % Fmt.money(float(GlobalMarket.cfg().get("bank_open_fee", 150))), func():
 					var result := GlobalMarket.open_bank()
 					if not result["ok"]:

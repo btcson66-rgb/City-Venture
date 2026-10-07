@@ -262,9 +262,11 @@ func load_data(slot: int) -> bool:
 	GameState.data["meta"]["slot"] = slot     # carry on saving where this game was loaded from
 	Contracts.reconcile_closed()             # old liquidations sold AR but left live contracts and collection schedules
 	Contracts.reconcile_tags()               # older builds could leave a story step waiting on a settled offer
+	MiniGame.backfill_tutorials_seen()       # work already done in an older save is not a first time
 	Growth.check(true)
 	GameState.unpack_rng()
 	Clock.clear_pauses()
+	AssistantPolicy.after_load()
 	loaded.emit(slot)
 	EventBus.state_loaded.emit()
 	return true
@@ -318,6 +320,7 @@ func autosave() -> void:
 
 func _migrate(d: Dictionary) -> Dictionary:
 	# a save from an older build: add whatever sections and fields this build has that it doesn't
+	AssistantPolicy.migrate(d)   # before the template fill: a missing assistant section means a pre-assistant save
 	_fill_missing(d, GameState.template())
 	CompanyPortfolio.migrate(d)
 	# Before era-specific receipts, the generic news flag referred to the save's current era.
@@ -330,6 +333,7 @@ func _migrate(d: Dictionary) -> Dictionary:
 		d["ecommerce"]["counters"][k] = int(d["ecommerce"]["counters"][k])
 	for it in d["schedule"]:
 		it["t"] = int(it["t"])
+	PhoneMessages.migrate(d)
 	return d
 
 

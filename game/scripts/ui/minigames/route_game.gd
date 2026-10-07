@@ -320,7 +320,7 @@ class RouteView:
 		draw_rect(Rect2(d - Vector2(9, 9), Vector2(18, 18)), Color8(20, 26, 44), false, 1.0)
 		draw_rect(Rect2(d - Vector2(5, 1), Vector2(10, 6)), Color8(20, 26, 44))
 		draw_colored_polygon(PackedVector2Array([d + Vector2(-6, -1), d + Vector2(0, -6), d + Vector2(6, -1)]), Color8(20, 26, 44))
-		_text(font, d + Vector2(13, 3), I18n.t(str(Logistics.map_cfg().get("depot", {}).get("name", "Depot"))), Art.C_GOLD)
+		_text(font, d + Vector2(13, 3), I18n.t(str(Logistics.map_cfg().get("depot", {}).get("name", "Depot"))), Art.C_SKY)
 		for i in game.stops.size():
 			var p := Logistics.place_pos(str(game.stops[i]))
 			var done := game.order.has(i)

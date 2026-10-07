@@ -24,14 +24,14 @@ func build() -> void:
 		var b:=UIK.button({"homes":"Housing ladder","car":"Personal car and commute","visits":"Furniture and invitations"}[id],func():tab=id;rebuild())
 		b.name="PersonalTab_"+id;nav.add_child(b)
 	var box:=UIK.vbox(4);body.add_child(UIK.scroll(box,Vector2(436,255)))
-	box.add_child(UIK.label_tip("Personal assets have real costs","personal_asset_costs",10,Art.C_GOLD))
+	box.add_child(UIK.label_tip("Personal assets have real costs","personal_asset_costs",10,Art.C_SKY))
 	if tab=="homes":
 		var homes: Array=DataDB.properties.values().filter(func(p):return p.get("owner_purchase",false))
 		homes.sort_custom(func(a,b):return int(a["tier"])<int(b["tier"]))
 		for p in homes:
 			var id: String=p["id"]
 			if not p.get("owner_purchase",false):continue
-			box.add_child(UIK.label(I18n.t(p["name"]),9,Art.C_GOLD))
+			box.add_child(UIK.label(I18n.t(p["name"]),9,Art.C_SKY))
 			box.add_child(UIK.wrap(I18n.t("Purchase %s · management %s per month · tax and maintenance additional · storage %d units · %d guests per day")%[Fmt.money(PersonalAssets.price(id)),Fmt.money(float(p["management_month"])),int(p["inventory_units"]),int(p["guests"])],8,Art.C_WHITE,420))
 			if not PersonalAssets.owned(id):
 				var available: bool=int(p["tier"])==1 or PersonalAssets.S()["homes"].values().any(func(h):return int(h["tier"])==int(p["tier"])-1)

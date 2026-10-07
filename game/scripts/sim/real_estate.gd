@@ -10,7 +10,7 @@ static func entity() -> String: return str(S()["entity"])
 static func segment_tag() -> String: return "real_estate"
 static func source(id := "") -> Dictionary: return {"type":"real_estate","segment":"real_estate","id":id}
 static func error(message: String) -> Dictionary: return {"ok":false,"error":I18n.t(message)}
-static func is_running() -> bool: return GameState.has_game() and bool(S()["active"])
+static func is_running() -> bool: return GameState.has_game() and bool(GameState.data.get("real_estate", {}).get("active", false))  # read-only: asking must not create the state
 static func valid() -> bool: return is_running() and Assets._valid_entity(entity())
 static func licence() -> bool: return Compliance.permit_valid("brokerage")
 static func start() -> Dictionary:

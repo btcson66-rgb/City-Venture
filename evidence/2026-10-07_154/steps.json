@@ -1,0 +1,15 @@
+{
+  "before": {
+    "actions": 92,
+    "packing_shipping_clicks": 12,
+    "failures": 0
+  },
+  "after": {
+    "actions": 76,
+    "packing_shipping_clicks": 0,
+    "failures": 0
+  },
+  "method": "Use/click/choose entries through actual Chapter 3 receipt; excludes travel, wait and inner minigame drag events identically. Baseline whole tour has 3 later office-exit failures; prefix has 0. After resumed later from exact played checkpoint.",
+  "checkpoint_sha256": "61c297a94f6ef8edcdb185cca8f34fd41616b294d294cbf000e8ae72d5e3fa8e",
+  "after_note": "Final new-game rendered replay after assistant-aware tutorial correction; includes the real business-loop graduation card. Original main-story checkpoint chain preserved separately."
+}

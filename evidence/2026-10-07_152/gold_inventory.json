@@ -1,0 +1,1592 @@
+[
+  {
+    "file": "game/autoload/art.gd",
+    "line": 17,
+    "classification": "Palette / world art / test / shared theme: retain (not an information badge)",
+    "source": "const C_GOLD := Color8(226, 180, 82)"
+  },
+  {
+    "file": "game/autoload/input_access.gd",
+    "line": 88,
+    "classification": "Palette / world art / test / shared theme: retain (not an information badge)",
+    "source": "control.add_theme_stylebox_override(\"focus\", UIK.flat(Color(0, 0, 0, 0), Art.C_GOLD, 2, 2))"
+  },
+  {
+    "file": "game/autoload/ui_root.gd",
+    "line": 279,
+    "classification": "Palette / world art / test / shared theme: retain (not an information badge)",
+    "source": "col = Art.C_GOLD"
+  },
+  {
+    "file": "game/autoload/ui_root.gd",
+    "line": 326,
+    "classification": "Palette / world art / test / shared theme: retain (not an information badge)",
+    "source": "gold.color = Art.C_GOLD"
+  },
+  {
+    "file": "game/autoload/ui_root.gd",
+    "line": 394,
+    "classification": "Palette / world art / test / shared theme: retain (not an information badge)",
+    "source": "v.add_child(UIK.label(\"NEW LOCATION\", 6, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/frontend/arrival_scene.gd",
+    "line": 65,
+    "classification": "Palette / world art / test / shared theme: retain (not an information badge)",
+    "source": "pv.add_child(UIK.title(Fmt.money0(float(DataDB.living().get(\"home_rent\", 1250))), 14, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/automotive_ui.gd",
+    "line": 64,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "content.add_child(UIK.wrap((\"✓ \" if ok else \"✗ \") + I18n.t(text), 8, Art.C_WHITE if ok else Art.C_GOLD, 550))"
+  },
+  {
+    "file": "game/scripts/ui/building_welcome.gd",
+    "line": 22,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "head = UIK.label(\"\", 8, Art.C_GOLD, true)"
+  },
+  {
+    "file": "game/scripts/ui/cafe_day_chart.gd",
+    "line": 18,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "draw_circle(at,1.5,Art.C_GOLD);previous=at"
+  },
+  {
+    "file": "game/scripts/ui/dialogue_box.gd",
+    "line": 60,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "name_label = UIK.title(\"\", 11, Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/energy_ui.gd",
+    "line": 57,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "func check(content: Control, ok: bool, text: String) -> void: note(content, (\"✓ \" if ok else \"✗ \") + I18n.t(text), Art.C_WHITE if ok else Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/energy_ui.gd",
+    "line": 98,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "if list.is_empty(): note(content, \"✗ No roof leads this week. New leads arrive every Monday.\", Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/energy_ui.gd",
+    "line": 112,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "note(content, \"✗ Choose a roof lead to survey first.\", Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/energy_ui.gd",
+    "line": 145,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "note(content, \"✗ Place at least one panel on the roof.\", Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/energy_ui.gd",
+    "line": 178,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "if not any: note(content, \"✗ No installs yet. Survey a roof and send a quote.\", Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/energy_ui.gd",
+    "line": 180,
+    "classification": "Current action or recovery state: retain",
+    "source": "note(content, I18n.t(\"Warranty claim from %s: %s, repair cost %s, decide within %d days\") % [I18n.t(claim[\"client\"]), I18n.t(claim[\"reason\"]), Fmt.money0(claim[\"cost\"]), maxi(0, ceili((int(claim[\"due\"]) - Clock.now()) / float(Clock.DAY)))], Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/energy_ui.gd",
+    "line": 217,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "if Energy.mod(\"subsidy\") < 1.0: note(content, \"✗ A policy cut is reducing grants; the rate recovers over time.\", Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/energy_ui.gd",
+    "line": 224,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "if why != \"\": note(content, \"✗ \" + I18n.t(why), Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/global_market_ui.gd",
+    "line": 7,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"ShopLane Global\", \"overseas_storefront\", 10, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/global_market_ui.gd",
+    "line": 24,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.wrap(\"✗ \" + I18n.t(why), 8, Art.C_GOLD, 460))"
+  },
+  {
+    "file": "game/scripts/ui/global_market_ui.gd",
+    "line": 78,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.wrap(\"Create a product listing in Domestic sales first, then set its overseas price here.\", 8, Art.C_GOLD, 460))"
+  },
+  {
+    "file": "game/scripts/ui/global_market_ui.gd",
+    "line": 90,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.title(\"Overseas payouts\", 10, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/governance_ui.gd",
+    "line": 7,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"Company brand\",\"company_brand\",10,Art.C_GOLD,true))"
+  },
+  {
+    "file": "game/scripts/ui/group_ui.gd",
+    "line": 42,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "c.add_child(UIK.label(\"✗ \" + I18n.t(\"No supply pair is running yet.\"), 8, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/group_ui.gd",
+    "line": 55,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "card.add_child(UIK.kv(I18n.t(\"Transfer price per %s\") % unit, Fmt.money(float(p[\"price\"])), Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/group_ui.gd",
+    "line": 95,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "c.add_child(UIK.kv(\"Group net revenue\", Fmt.money0(float(r[\"net_revenue\"])), Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/group_ui.gd",
+    "line": 109,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "card.add_child(UIK.label(\"%s · %s\" % [I18n.t(str(def[\"title\"])), I18n.t(str(def[\"client_name\"]))], 9, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/group_ui.gd",
+    "line": 115,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "card.add_child(UIK.label(\"%s %s: %s · %s\" % [\"✓\" if mine else \"✗\", InternalSupply.industry_name(str(part[\"industry\"])), I18n.t(str(part[\"label\"])), Fmt.money0(float(def[\"reward\"]) * float(part[\"share\"]))], 7, Art.C_GREEN if mine else Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/group_ui.gd",
+    "line": 124,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "card.add_child(UIK.label(\"%s · %s\" % [I18n.t(str(def[\"title\"])), I18n.t(\"%d days left\") % left], 9, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/group_ui.gd",
+    "line": 141,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "c.add_child(UIK.label(\"✗ \" + I18n.t(\"No group job on offer.\"), 8, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/holding_ui.gd",
+    "line": 15,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "c.add_child(UIK.label((\"● \" if id==parent else \"  ↳ \")+GameState.entity_name(id)+\" · \"+Fmt.money0(Ledger.cash(id)),8,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/hotel_ui.gd",
+    "line": 41,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "func check(content: Control,ok: bool,text: String) -> void:line(content,(\"✓ \" if ok else \"✗ \")+I18n.t(text),Art.C_GREEN if ok else Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/hotel_ui.gd",
+    "line": 115,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "var color := Art.C_PURPLE if str(row[\"event\"])!=\"\" else Art.C_GOLD if float(row[\"index\"])>=float(Hotel.cfg()[\"peak_threshold\"]) else Art.C_BLUE if float(row[\"index\"])<.9 else Art.C_MUTED"
+  },
+  {
+    "file": "game/scripts/ui/hotel_ui.gd",
+    "line": 190,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "if not Cafe.leased():line(content,\"✗ \"+I18n.t(\"Lease your corner cafe to serve breakfast from its kitchen at wholesale cost.\"),Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/hotel_ui.gd",
+    "line": 204,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "line(content,(\"✓ \" if ok else \"✗ \")+I18n.t(\"%s · condition %d%% · %s\")%[Hotel.type_name(type),roundi(cond),status],Art.C_GREEN if ok else Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/hotel_ui.gd",
+    "line": 217,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "if offers.is_empty():line(content,\"✗ \"+I18n.t(\"No group block is waiting. New offers arrive every Monday morning.\"),Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/hotel_ui.gd",
+    "line": 222,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "if conflict!=\"\":line(content,\"✗ \"+I18n.t(conflict),Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/hotel_ui.gd",
+    "line": 255,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "line(content,I18n.t(\"Day %d · %s · %.1f of 5 · weight %d\")%[int(r[\"day\"]),I18n.t(who),float(r[\"score\"]),int(r[\"w\"])],Art.C_WHITE if float(r[\"score\"])>=3.5 else Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/hud.gd",
+    "line": 78,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "goal_label = UIK.label(\"\", 7, Art.C_GOLD, true)"
+  },
+  {
+    "file": "game/scripts/ui/hud.gd",
+    "line": 126,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "phone_hint = UIK.label(\"\", 7, Art.C_GOLD, true)"
+  },
+  {
+    "file": "game/scripts/ui/hud.gd",
+    "line": 130,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "parcels_label = UIK.label(\"\", 7, Art.C_GOLD, true)"
+  },
+  {
+    "file": "game/scripts/ui/hud.gd",
+    "line": 190,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "b.add_theme_stylebox_override(\"hover\", UIK.flat(Color(0.1, 0.15, 0.26, 0.95), Art.C_GOLD, 1, 2))"
+  },
+  {
+    "file": "game/scripts/ui/hud.gd",
+    "line": 191,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "b.add_theme_stylebox_override(\"pressed\", UIK.flat(Color(0.1, 0.15, 0.26, 0.95), Art.C_GOLD, 1, 2))"
+  },
+  {
+    "file": "game/scripts/ui/hud.gd",
+    "line": 265,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "cash_label.add_theme_color_override(\"font_color\", Art.C_GREEN if pc >= 1500 else (Art.C_GOLD if pc >= 0 else Art.C_RED))"
+  },
+  {
+    "file": "game/scripts/ui/hud.gd",
+    "line": 272,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "co_label.add_theme_color_override(\"font_color\", Art.C_GREEN if cc >= 1500 else (Art.C_GOLD if cc >= 0 else Art.C_RED))"
+  },
+  {
+    "file": "game/scripts/ui/industry_views.gd",
+    "line": 52,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "det.add_child(UIK.label(\"Old Town: metro (Loop Line), or walk west from Shopping Street.\", 8, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/industry_views.gd",
+    "line": 60,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "det.add_child(UIK.label(\"Harbor: metro Harbor Line (M3) from Riverside. Sam is at Dockside Motors, Mon–Sat.\", 8, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/manufacturing_ui.gd",
+    "line": 82,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "if why != \"\": content.add_child(UIK.wrap(\"✗ \"+I18n.t(why), 9, Art.C_GOLD, 540))"
+  },
+  {
+    "file": "game/scripts/ui/manufacturing_ui.gd",
+    "line": 139,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "content.add_child(UIK.wrap(\"✗ Rent a machine in OEM orders first.\", 9, Art.C_GOLD, 540))"
+  },
+  {
+    "file": "game/scripts/ui/manufacturing_ui.gd",
+    "line": 142,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "content.add_child(UIK.wrap(\"✗ Choose an order in OEM orders first.\", 9, Art.C_GOLD, 540))"
+  },
+  {
+    "file": "game/scripts/ui/market_view.gd",
+    "line": 8,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "content.add_child(UIK.label_tip(\"Market conditions\", \"macro_cycle\", 9, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/market_view.gd",
+    "line": 18,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "content.add_child(UIK.label(str(definition.get(\"name\", industry)), 9, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/market_view.gd",
+    "line": 33,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "content.add_child(UIK.label_tip(\"City news\", \"macro_cycle\", 9, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/media_ui.gd",
+    "line": 133,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "if campaign.is_empty():content.add_child(UIK.wrap(\"✗ Select a running campaign to adjust media shares.\",8,Art.C_GOLD,550));return"
+  },
+  {
+    "file": "game/scripts/ui/media_ui.gd",
+    "line": 170,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "content.add_child(UIK.wrap(\"✗ Complete two campaigns and hire a designer and media buyer before buying Campus Radio.\",8,Art.C_GOLD,550))"
+  },
+  {
+    "file": "game/scripts/ui/minigames/auction_game.gd",
+    "line": 34,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.wrap(I18n.t(\"%s · %d years · %s km · market %s\") % [I18n.t(car[\"name\"]), int(car[\"age\"]), Fmt._group(int(car[\"km\"])), Fmt.money0(Automotive.true_value(car) if bool(current[\"inspected\"]) else Automotive.visible_value(car))], 10, Art.C_GOLD, 520))"
+  },
+  {
+    "file": "game/scripts/ui/minigames/creative_pitch.gd",
+    "line": 22,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "cards.add_child(UIK.wrap(I18n.t(\"%s · audience: %s\")%[I18n.t(str(brief.get(\"client\",\"\"))),I18n.t(Media.cfg()[\"audiences\"][int(brief[\"audience\"])])],10,Art.C_GOLD,520))"
+  },
+  {
+    "file": "game/scripts/ui/minigames/mini_game.gd",
+    "line": 74,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "row.add_child(UIK.label(\"•\", 9, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/minigames/mini_game.gd",
+    "line": 167,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "v.add_child(UIK.title(\"★\".repeat(stars) + \"☆\".repeat(3 - stars), 20, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/minigames/parcel_sort_game.gd",
+    "line": 102,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "var note := UIK.label(\"The shift lead took the postcode sheet. From memory now!\", 7, Art.C_GOLD, true)"
+  },
+  {
+    "file": "game/scripts/ui/minigames/photo_shoot_game.gd",
+    "line": 230,
+    "classification": "Current action or recovery state: retain",
+    "source": "needle_bar.draw_rect(Rect2(x - 1.5, 0, 3, 12), Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/minigames/pitch_game.gd",
+    "line": 53,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "v.add_child(UIK.wrap(I18n.t(\"Slide %d of %d: choose the figure to show.\") % [round_i + 1, deck_n], 9, Art.C_GOLD, 540))"
+  },
+  {
+    "file": "game/scripts/ui/minigames/pitch_game.gd",
+    "line": 77,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "v.add_child(UIK.wrap(\"%s: \\\"%s\\\"\" % [Fundraising.name_of(investor), I18n.t(str(q[\"text\"]))], 10, Art.C_GOLD, 540))"
+  },
+  {
+    "file": "game/scripts/ui/minigames/route_game.gd",
+    "line": 323,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "_text(font, d + Vector2(13, 3), I18n.t(str(Logistics.map_cfg().get(\"depot\", {}).get(\"name\", \"Depot\"))), Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/minigames/teller_cash_game.gd",
+    "line": 93,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "var col := Art.C_GREEN if t == amount else (Art.C_RED if t > amount else Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/minigames/typing_game.gd",
+    "line": 175,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "view.draw_rect(Rect2(x - 1, y - 10, CHAR_W + 1, 13), Art.C_RED if _err_flash > 0.0 else Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/minimap.gd",
+    "line": 32,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "draw_circle(off + n.position * sc, 2.0, Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/modals/bank_modal.gd",
+    "line": 45,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "left.add_child(UIK.wrap(I18n.t(\"You only have %s in personal checking. Pick a smaller amount.\") % Fmt.money0(Ledger.cash(\"player\")), 7, Art.C_GOLD, 196))"
+  },
+  {
+    "file": "game/scripts/ui/modals/bank_modal.gd",
+    "line": 64,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "left.add_child(UIK.wrap(\"✗ \" + I18n.t(why), 7, Art.C_GOLD, 196))"
+  },
+  {
+    "file": "game/scripts/ui/modals/business_board.gd",
+    "line": 81,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "det.add_child(UIK.wrap(\"%s %s: %s\" % [\"✓\" if row[\"ok\"] else \"✗\", I18n.t(str(row[\"label\"])), row[\"text\"]], 8, Art.C_GREEN if row[\"ok\"] else Art.C_GOLD, 300))"
+  },
+  {
+    "file": "game/scripts/ui/modals/business_board.gd",
+    "line": 111,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "card.add_theme_stylebox_override(\"panel\", UIK.flat(Color(0.06, 0.1, 0.18, 0.92), Art.C_GOLD if mine else Color(0.4, 0.5, 0.7, 0.5), 1, 3))"
+  },
+  {
+    "file": "game/scripts/ui/modals/business_board.gd",
+    "line": 118,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "hr.add_child(UIK.label(I18n.t(str(Careers.rank(id)[\"title\"])), 8, Art.C_GOLD if mine else Art.C_WHITE, true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/cafe_depth_modal.gd",
+    "line": 36,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"Second location\",\"second_location\",10,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/cafe_depth_modal.gd",
+    "line": 47,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"Seasonal menu\",\"seasonal_menu\",10,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/cafe_depth_modal.gd",
+    "line": 58,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"Labour cost ratio\",\"labor_cost_ratio\",10,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/cafe_depth_modal.gd",
+    "line": 62,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label(p[\"name\"],9,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/cafe_depth_modal.gd",
+    "line": 70,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"Health inspection\",\"health_inspection\",10,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/cafe_depth_modal.gd",
+    "line": 77,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "if not s[\"inspections\"].is_empty():box.add_child(UIK.label(I18n.t({\"pass\":\"Inspection passed\",\"improve\":\"One-day improvement closure\",\"fine\":\"Inspection fine and one-day closure\"}[s[\"inspections\"][-1][\"outcome\"]]),8,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/capital_market_modal.gd",
+    "line": 27,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"Ownership routes\", \"capital_routes\",10,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/capital_market_modal.gd",
+    "line": 45,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label(\"Acquisition proposals\",9,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/capital_market_modal.gd",
+    "line": 60,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"Public listing\", \"ipo_process\",9,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/capital_market_modal.gd",
+    "line": 87,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"Acquire and integrate\", \"acquisition_integration\",9,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/capital_market_modal.gd",
+    "line": 102,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"Investor roadshow\",\"ipo_process\",10,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/capital_market_modal.gd",
+    "line": 105,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.wrap(q[\"text\"],9,Art.C_GOLD,458))"
+  },
+  {
+    "file": "game/scripts/ui/modals/city_future_modal.gd",
+    "line": 23,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label(I18n.t(str(cards[index][\"title\"])),10,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/city_future_modal.gd",
+    "line": 42,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(I18n.t(str(definition[\"title\"])),\"city_future\",10,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/city_future_modal.gd",
+    "line": 77,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.wrap(I18n.t(\"International expo\" if CityFuture.S()[\"expo_awarded\"] else \"Local city festival\"),8,Art.C_GOLD,510))"
+  },
+  {
+    "file": "game/scripts/ui/modals/city_guide_modal.gd",
+    "line": 18,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "list.add_child(UIK.label(group[\"name\"], 9, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/city_map_modal.gd",
+    "line": 131,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "info.add_child(UIK.wrap(str(GameState.data[\"real_estate_landmark\"][\"name\"]),7,Art.C_GOLD,146))"
+  },
+  {
+    "file": "game/scripts/ui/modals/city_map_modal.gd",
+    "line": 134,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "info.add_child(UIK.label(\"You are here.\", 7, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/city_map_modal.gd",
+    "line": 157,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "b.add_theme_stylebox_override(\"normal\", UIK.flat(bg, Art.C_GOLD if selected else accent, 1, 2))"
+  },
+  {
+    "file": "game/scripts/ui/modals/city_map_modal.gd",
+    "line": 158,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "b.add_theme_stylebox_override(\"hover\", UIK.flat(Color(0.08, 0.13, 0.24, 1.0), Art.C_GOLD, 1, 2))"
+  },
+  {
+    "file": "game/scripts/ui/modals/city_map_modal.gd",
+    "line": 159,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "b.add_theme_stylebox_override(\"pressed\", UIK.flat(bg, Art.C_GOLD, 1, 2))"
+  },
+  {
+    "file": "game/scripts/ui/modals/city_map_modal.gd",
+    "line": 179,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "var s := UIK.label(sub, 6, Art.C_GOLD if sub == \"You are here\" else (Art.C_GREEN if sub == \"Open\" else Art.C_MUTED))"
+  },
+  {
+    "file": "game/scripts/ui/modals/city_map_modal.gd",
+    "line": 190,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "_pin.draw_colored_polygon(PackedVector2Array([c + Vector2(0, -5), c + Vector2(4, 0), c + Vector2(0, 5), c + Vector2(-4, 0)]), Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/modals/city_map_modal.gd",
+    "line": 216,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "graph.draw_line(route_point(DataDB.district_def_in_city(a)), route_point(DataDB.district_def_in_city(b)), Art.C_GOLD, 2.0))"
+  },
+  {
+    "file": "game/scripts/ui/modals/city_map_modal.gd",
+    "line": 221,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "var card := _label_card(Rect2(point + Vector2(-42, -10), Vector2(84, 24 if did == here else 18)), str(d[\"name\"]), \"You are here\" if did == here else \"\", str(d.get(\"icon\", \"info\")), Art.C_GOLD, did == sel, func(): sel = did; rebuild())"
+  },
+  {
+    "file": "game/scripts/ui/modals/city_map_modal.gd",
+    "line": 224,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "var legend := UIK.label(\"Gold lines: walkable district connections\", 7, Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/modals/clothing_shop_modal.gd",
+    "line": 55,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "v.add_child(UIK.kv(\"Price\", Fmt.money0(float(it[\"price\"])), Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 94,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "else:top.add_child(UIK.title(GameState.business_display_name(), 11, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 253,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "_kpi(g, \"RECEIVABLE\", Fmt.money0(ar), Art.C_GOLD, \"ShopLane + invoices\", \"accounts_receivable\")"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 254,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "_kpi(g, \"PAYABLE\", Fmt.money0(-Ledger.balance(be, \"accounts_payable\")), Art.C_GOLD, \"to suppliers\")"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 334,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "cp.add_child(UIK.kv(\"ShopLane balance (paid Mondays)\", Fmt.money0(Ledger.balance(be, \"marketplace_balance\")), Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 336,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "cp.add_child(UIK.kv(\"Invoices receivable\", Fmt.money0(Ledger.balance(be, \"accounts_receivable\")), Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 337,
+    "classification": "Current action or recovery state: retain",
+    "source": "cp.add_child(UIK.kv(\"Supplier bills payable\", Fmt.money0(-Ledger.balance(be, \"accounts_payable\")), Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 433,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "content.add_child(UIK.kv(\"ShopLane personal seller cap\", \"%s / %s\" % [Fmt.money0(Ecommerce.month_gmv()), Fmt.money0(Ecommerce.seller_cap())], Art.C_GOLD, 7))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 457,
+    "classification": "Current action or recovery state: retain",
+    "source": "h1.add_child(UIK.chip(\"LIVE\" if l[\"active\"] else (\"PAUSED · CAP\" if l.get(\"paused_reason\", \"\") == \"seller_cap\" else \"PAUSED\"), Art.C_GREEN if l[\"active\"] else Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 459,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "h1.add_child(UIK.label(I18n.t(\"%s (%d reviews)\") % [Fmt.stars(Ecommerce.rating(l)), int(l[\"rating_n\"])], 8, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 530,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "row.add_child(UIK.label(\"★\".repeat(int(o[\"review\"][\"stars\"])), 7, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 537,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "return Art.C_GOLD"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 685,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "row2.add_child(UIK.chip(I18n.t(\"ARRIVES \") + Clock.fmt_short(int(po[\"eta\"])).to_upper() if po[\"status\"] == \"in_transit\" else (\"CANCELLED\" if po[\"status\"] == \"cancelled\" else \"DELIVERED\"), Art.C_GOLD if po[\"status\"] == \"in_transit\" else (Art.C_MUTED if po[\"status\"] == \"cancelled\" else Art.C_GREEN)))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 702,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "content.add_child(UIK.label(I18n.t(\"Returned %d units · %s · %s\") % [int(r[\"qty\"]), Fmt.money0(float(r[\"refund\"])), refund_status], 7, Art.C_GREEN if r[\"status\"] == \"refunded\" else Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 839,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "Art.C_GREEN if mo >= 60 else (Art.C_GOLD if mo >= 35 else Art.C_RED), true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 856,
+    "classification": "Current action or recovery state: retain",
+    "source": "content.add_child(UIK.label(I18n.t(\"Can't hire yet: %s.\") % I18n.t(why), 8, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 1022,
+    "classification": "Current action or recovery state: retain",
+    "source": "right.add_child(UIK.label(I18n.t(\"Due %s\") % Clock.fmt_datetime(int(k[\"due\"])), 7, Art.C_GOLD if Clock.now() < int(k[\"due\"]) else Art.C_RED))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 1061,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "right.add_child(UIK.label(I18n.t(\"Invoice %s · due %s\") % [Fmt.money0(k[\"receivable\"]), Clock.fmt_short(int(k[\"pay_due\"]))], 8, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 1104,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "head.add_child(UIK.label(stars, 10, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 1164,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "content.add_child(UIK.kv(\"Invoiced, not yet paid\", Fmt.money0(owed), Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 1279,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "_kpi(g, I18n.t(\"CHURN\"), Fmt.pct(Saas.monthly_churn(), 1), Art.C_GOLD, I18n.t(\"per month\"), \"churn\")"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 1314,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "head.add_child(UIK.title(Cafe.display_name(), 11, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 1352,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "_kpi(g, I18n.t(\"RATING\"), \"★ %.1f\" % float(s[\"rating\"]), Art.C_GOLD, I18n.t(\"out of 5\"))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 1364,
+    "classification": "Current action or recovery state: retain",
+    "source": "content.add_child(UIK.wrap(\"Nobody's on staff behind the counter: the café only opens while you work it yourself (the counter, inside the café). Hire a Barista in the People tab to open every day.\", 7, Art.C_GOLD, 480))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 1432,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "grid.add_child(UIK.label(str(int(d[\"waste\"])), 7, Art.C_GOLD if int(d[\"waste\"]) > 0 else Art.C_DIM))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 1459,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "v.add_child(UIK.label(note, 7, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 1470,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "head.add_child(UIK.title(\"Logistics\", 11, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 1509,
+    "classification": "Current action or recovery state: retain",
+    "source": "top.add_child(UIK.chip(Logistics.kind_name(str(j[\"kind\"])).to_upper(), Art.C_GOLD if str(j[\"kind\"]) == \"rush\" else Art.C_SKY))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 1547,
+    "classification": "Current action or recovery state: retain",
+    "source": "content.add_child(UIK.label(I18n.t(\"Can't hire yet: %s.\") % I18n.t(dwhy), 7, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/company_os.gd",
+    "line": 1561,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "grid.add_child(UIK.label(I18n.t(\"Cancelled\") if failed else (I18n.t(\"On time\") if ok else I18n.t(\"Late\")), 7, Art.C_RED if failed else (Art.C_GREEN if ok else Art.C_GOLD), true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/contacts_modal.gd",
+    "line": 9,
+    "classification": "Current action or recovery state: retain",
+    "source": "body.add_child(UIK.wrap(\"Stress illness: take a recovery day or a shorter medical visit. Work is still possible; this expires within 3 days.\",9,Art.C_GOLD,530))"
+  },
+  {
+    "file": "game/scripts/ui/modals/fitness_modal.gd",
+    "line": 17,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "else: body.add_child(UIK.wrap(\"✗ No class pass — buy one at Rosa's reception.\",8,Art.C_GOLD,460))"
+  },
+  {
+    "file": "game/scripts/ui/modals/fundraising_modal.gd",
+    "line": 87,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.title(\"%s · %s\" % [Fundraising.name_of(id), kind], 10, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/fundraising_modal.gd",
+    "line": 129,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.title(\"%s · %s\" % [Fundraising.name_of(id), I18n.t(str(d[\"firm\"]))], 11, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/fundraising_modal.gd",
+    "line": 185,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label(\"Figures you can show (from your books)\", 9, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/fundraising_modal.gd",
+    "line": 227,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label(\"The deck you showed\", 9, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/fundraising_modal.gd",
+    "line": 266,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label(\"Ownership\", 10, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/fundraising_modal.gd",
+    "line": 268,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.kv(str(r[\"name\"]), Fmt.pct(float(r[\"share\"]), 1), Art.C_GOLD if r[\"id\"] == \"founder\" else Art.C_WHITE))"
+  },
+  {
+    "file": "game/scripts/ui/modals/fundraising_modal.gd",
+    "line": 272,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label(\"Rounds and dilution\", 10, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/fundraising_modal.gd",
+    "line": 277,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label(\"If the company were sold at its book value\", 10, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/fundraising_modal.gd",
+    "line": 293,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.title(\"%s · %s\" % [Fundraising.name_of(str(deal[\"investor\"])), Fmt.money(float(deal[\"terms\"][\"amount\"]))], 10, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/fundraising_modal.gd",
+    "line": 327,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.title(\"%s · %s\" % [Partnerships.name_of(id), Partnerships.kind_label(str(d[\"kind\"]))], 10, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/fundraising_modal.gd",
+    "line": 342,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.title(\"%s · %s\" % [Partnerships.name_of(id), Partnerships.kind_label(str(d[\"kind\"]))], 11, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/fundraising_modal.gd",
+    "line": 389,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.wrap(I18n.t(\"Exclusive until %s: you cannot sign another %s deal until then.\") % [Clock.fmt_short(int(item[\"exclusive_until\"])), Partnerships.kind_label(str(item[\"kind\"])).to_lower()], 8, Art.C_GOLD, 520))"
+  },
+  {
+    "file": "game/scripts/ui/modals/fx_risk_modal.gd",
+    "line": 62,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.wrap(\"✗ \" + I18n.t(str(q[\"error\"])), 7, Art.C_GOLD, 454))"
+  },
+  {
+    "file": "game/scripts/ui/modals/global_region_modal.gd",
+    "line": 26,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "body.add_child(UIK.wrap((\"✗ \" + I18n.t(why)) if why != \"\" else I18n.t(\"✓ Region available. Open Company OS → Sales → Overseas next.\"), 8, Art.C_GOLD if why != \"\" else Art.C_GREEN, 390))"
+  },
+  {
+    "file": "game/scripts/ui/modals/growth_modal.gd",
+    "line": 38,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label(\"✓ \" + I18n.t(str(d[\"title\"])), 10, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/growth_modal.gd",
+    "line": 46,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label(I18n.t(str(d[\"title\"])), 9, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/growth_modal.gd",
+    "line": 64,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"Main-story achievements\", \"growth_goals\", 9, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/growth_modal.gd",
+    "line": 77,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label(Clock.fmt_short(int(rows[i][\"t\"])), 7, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/home_move_modal.gd",
+    "line": 22,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"Home rent and location\",\"home_rent_vs_location\",10,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/home_move_modal.gd",
+    "line": 37,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label(I18n.t(property[\"name\"]),9,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/industry_guide_modal.gd",
+    "line": 15,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label(I18n.t(\"FIRST ORDER %d/%d\")%[int(p[\"step\"])+1,d[\"objectives\"].size()],10,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/info_modal.gd",
+    "line": 31,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "v.add_child(UIK.label(hd.substr(2) if hd.begins_with(\"# \") else I18n.t(str(l).substr(2)), 8, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/insolvency_modal.gd",
+    "line": 23,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "body.add_child(UIK.title(GameState.entity_name(ent), 12, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/insolvency_modal.gd",
+    "line": 62,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "body.add_child(UIK.title(\"Closing statement\", 12, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/job_modal.gd",
+    "line": 23,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "top.add_child(UIK.title(I18n.t(str(Careers.rank(job_id)[\"title\"])), 13, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/job_modal.gd",
+    "line": 32,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "body.add_child(UIK.kv(\"Perk\", I18n.t(str(j.get(\"perk\", {}).get(\"desc\", \"\"))), Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/job_modal.gd",
+    "line": 40,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "var col := Art.C_GOLD if i == ri else (Art.C_GREEN if i < ri else Art.C_DIM)"
+  },
+  {
+    "file": "game/scripts/ui/modals/job_modal.gd",
+    "line": 67,
+    "classification": "Current action or recovery state: retain",
+    "source": "body.add_child(UIK.label(I18n.t(\"Can't start a shift now: %s.\") % I18n.t(why), 7, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/job_modal.gd",
+    "line": 75,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "body.add_child(UIK.label(I18n.t(\"Taking this job means leaving %s.\") % I18n.t(str(Careers.job_def(cur)[\"employer\"])), 7, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/lease_end_modal.gd",
+    "line": 27,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "list.add_child(UIK.label(title, 9, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/lease_end_modal.gd",
+    "line": 46,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "list.add_child(UIK.label(I18n.t(str(LeaseEnd.policy(pid)[\"name\"])), 10, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/lease_end_modal.gd",
+    "line": 68,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "list.add_child(UIK.label(I18n.t(\"Notice ends %s\") % Clock.fmt_short(int(quote[\"due\"])), 8, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/lease_end_modal.gd",
+    "line": 74,
+    "classification": "Current action or recovery state: retain",
+    "source": "list.add_child(UIK.kv(\"Cash needed before refund\", Fmt.money(float(quote[\"total\"])), Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/lease_end_modal.gd",
+    "line": 76,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "list.add_child(UIK.wrap(\"✗ \" + str(quote[\"error\"]), 8, Art.C_GOLD, 468))"
+  },
+  {
+    "file": "game/scripts/ui/modals/lease_modal.gd",
+    "line": 25,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "body.add_child(UIK.kv(\"Monthly rent\", Fmt.money(float(p[\"monthly_rent\"])), Art.C_GOLD, 9, true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/legacy_modal.gd",
+    "line": 39,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"Market consolidation\", \"market_consolidation\", 10, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/legacy_modal.gd",
+    "line": 48,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.wrap(\"This market is no longer available. Review the closure and continue.\", 8, Art.C_GOLD, 452))"
+  },
+  {
+    "file": "game/scripts/ui/modals/legacy_modal.gd",
+    "line": 70,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.wrap((\"✓ \" + I18n.t(\"Ready to apply the response.\")) if why == \"\" else \"✗ \" + I18n.t(why), 7, Art.C_GOLD, 452))"
+  },
+  {
+    "file": "game/scripts/ui/modals/legacy_modal.gd",
+    "line": 87,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"Exit options\", \"exit_options\", 10, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/legacy_modal.gd",
+    "line": 99,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.wrap(\"✗ \" + I18n.t(why), 7, Art.C_GOLD, 452))"
+  },
+  {
+    "file": "game/scripts/ui/modals/legal_case_modal.gd",
+    "line": 13,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "body.add_child(UIK.wrap(\"✗ This company or dispute is closed; return to your current company's terminal.\",8,Art.C_GOLD,500))"
+  },
+  {
+    "file": "game/scripts/ui/modals/legal_case_modal.gd",
+    "line": 18,
+    "classification": "Current action or recovery state: retain",
+    "source": "body.add_child(UIK.wrap(I18n.t(\"✗ Unresolved; choose a route. No response by %s uses settlement automatically, including its fee and risks.\")%Clock.fmt_short(int(c[\"expires\"])),8,Art.C_GOLD,500))"
+  },
+  {
+    "file": "game/scripts/ui/modals/life_review_modal.gd",
+    "line": 38,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"Legacy archetypes\", \"legacy_archetypes\", 10, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/life_review_modal.gd",
+    "line": 41,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label(\"Five key moments\", 9, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/life_review_modal.gd",
+    "line": 45,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label(\"Recorded life statistics\", 9, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/life_review_modal.gd",
+    "line": 52,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"A separate next life\", \"next_life\", 9, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/life_review_modal.gd",
+    "line": 61,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.wrap(\"Your current game is saved first. Only an empty slot is used; companies, earned income and achievements start fresh. Continue only when ready.\", 8, Art.C_GOLD, 458))"
+  },
+  {
+    "file": "game/scripts/ui/modals/loan_modal.gd",
+    "line": 25,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "Art.C_GREEN if Bank.credit() >= 690 else (Art.C_GOLD if Bank.credit() >= 620 else Art.C_RED), true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/loan_modal.gd",
+    "line": 63,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "left.add_child(UIK.kv_tip(\"Interest (APR)\", Fmt.pct(float(o[\"apr\"]), 1), \"interest_rate\", Art.C_GOLD, 8))"
+  },
+  {
+    "file": "game/scripts/ui/modals/logistics_depth_modal.gd",
+    "line": 17,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"Vehicle condition\",\"vehicle_condition\",10,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/logistics_depth_modal.gd",
+    "line": 25,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"Preventive maintenance\",\"preventive_maintenance\",9,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/logistics_depth_modal.gd",
+    "line": 27,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"Cost per kilometre\",\"cost_per_km\",9,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/logistics_depth_modal.gd",
+    "line": 37,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"Route contract\",\"route_contract\",10,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/metro_lines.gd",
+    "line": 34,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "draw_arc(p, 6.0, 0, TAU, 16, Art.C_GOLD, 1.5)"
+  },
+  {
+    "file": "game/scripts/ui/modals/month_close_modal.gd",
+    "line": 29,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "v.add_child(UIK.label(I18n.t(str(e[\"name\"])).to_upper(), 8, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/month_close_modal.gd",
+    "line": 54,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "v.add_child(UIK.kv_tip(\"Owed to you (ShopLane + invoices)\", Fmt.money0(e[\"ar\"]), \"accounts_receivable\", Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/month_close_modal.gd",
+    "line": 55,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "v.add_child(UIK.kv(\"You owe (suppliers)\", Fmt.money0(e[\"ap\"]), Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/new_run_modal.gd",
+    "line": 141,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "body.add_child(UIK.wrap(I18n.t(\"Selected: %s · %s\") % [I18n.t(str(definition[\"name\"])), Fmt.money0(float(definition[\"initial\"][\"cash\"]))], 8, Art.C_GOLD, 480))"
+  },
+  {
+    "file": "game/scripts/ui/modals/overseas_partner_modal.gd",
+    "line": 26,
+    "classification": "Current action or recovery state: retain",
+    "source": "box.add_child(UIK.wrap(\"✗ Register a live company first. Closed-company deals cannot resume.\", 8, Art.C_GOLD, 452))"
+  },
+  {
+    "file": "game/scripts/ui/modals/overseas_partner_modal.gd",
+    "line": 56,
+    "classification": "Current action or recovery state: retain",
+    "source": "box.add_child(UIK.wrap(\"✗ Create an active product listing first. You can review this expansion after 45 days if the company cannot trade.\", 7, Art.C_GOLD, 452))"
+  },
+  {
+    "file": "game/scripts/ui/modals/permits_modal.gd",
+    "line": 43,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "v.add_child(UIK.label(\"Register the company first.\", 7, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/permits_modal.gd",
+    "line": 74,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "v.add_child(UIK.label(I18n.t(why), 7, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/permits_modal.gd",
+    "line": 98,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "r.add_child(UIK.chip(I18n.t(\"PROCESSING\"), Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/permits_modal.gd",
+    "line": 105,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "v.add_child(UIK.label(I18n.t(why), 7, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/permits_modal.gd",
+    "line": 139,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "r.add_child(UIK.chip(I18n.t(\"PROCESSING\"), Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/permits_modal.gd",
+    "line": 143,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "v.add_child(UIK.label(I18n.t(why), 7, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/personal_assets_modal.gd",
+    "line": 27,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"Personal assets have real costs\",\"personal_asset_costs\",10,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/personal_assets_modal.gd",
+    "line": 34,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label(I18n.t(p[\"name\"]),9,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/personal_drive_modal.gd",
+    "line": 16,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "body.add_child(UIK.label(I18n.t(c[\"name\"]),11,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/popup_store_modal.gd",
+    "line": 16,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"Weekend pop-up\",\"popup_store\",10,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/popup_store_modal.gd",
+    "line": 41,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"Foot traffic\",\"foot_traffic\",9,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/popup_store_modal.gd",
+    "line": 50,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "box.add_child(UIK.label_tip(\"Channel margin\",\"channel_margin\",10,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/registration_modal.gd",
+    "line": 24,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "body.add_child(UIK.title(e[\"name\"], 16, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/registration_modal.gd",
+    "line": 39,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "var type_label:=UIK.label(I18n.t(\"Holding company\") if selected_type==\"holding\" else I18n.t(\"Operating company\"),8,Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/modals/registration_modal.gd",
+    "line": 56,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "body.add_child(UIK.kv(\"Registration fee\", Fmt.money(Company.registration_fee()) + (I18n.t(\"  (staff discount)\") if Careers.has_perk(\"registration_discount\") else \"\"), Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/research_modal.gd",
+    "line": 15,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "if ids.is_empty(): body.add_child(UIK.wrap(\"✗ Own or list a product — buy stock or create a listing first.\",9,Art.C_GOLD,440))"
+  },
+  {
+    "file": "game/scripts/ui/modals/run_card_modal.gd",
+    "line": 20,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "body.add_child(UIK.title(str(definition.get(\"name\", \"\")), 12, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/save_list_modal.gd",
+    "line": 20,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "body.add_child(UIK.wrap(\"All save slots are in use. Choose one for the new game. The old save is moved to a backup folder, not deleted.\", 7, Art.C_GOLD, 396))"
+  },
+  {
+    "file": "game/scripts/ui/modals/save_list_modal.gd",
+    "line": 22,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "body.add_child(UIK.wrap(\"Choose a save slot to replace. Its existing save will be backed up.\", 7, Art.C_GOLD, 416))"
+  },
+  {
+    "file": "game/scripts/ui/modals/save_list_modal.gd",
+    "line": 43,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "var q := UIK.label(I18n.t(\"Replace %s (day %d)?\") % [str(sm.get(\"name\", \"\")), int(sm.get(\"day\", 0))], 8, Art.C_GOLD, true)"
+  },
+  {
+    "file": "game/scripts/ui/modals/save_list_modal.gd",
+    "line": 86,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "v.add_child(UIK.label(line, 7, Art.C_GOLD if here else Art.C_MUTED))"
+  },
+  {
+    "file": "game/scripts/ui/modals/settlement_modal.gd",
+    "line": 66,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "body.add_child(UIK.wrap(I18n.t(\"Paid by %s. It lands around %s; the supplier ships after that. A faster rail costs its own fee.\") % [I18n.t(str(Ecommerce.settlement_def(str(st[\"method\"]))[\"name\"])), Clock.fmt_short(int(st[\"clears\"]))], 7, Art.C_GOLD, 410))"
+  },
+  {
+    "file": "game/scripts/ui/modals/settlement_modal.gd",
+    "line": 71,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "body.add_child(UIK.label_tip(I18n.t(\"KYC check: %s and %d more hours before this payment lands (payments over %s).\") % [Fmt.money(float(kyc[\"fee\"])), int(kyc[\"hours\"]), Fmt.money0(Compliance.kyc_threshold())], \"kyc\", 7, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/settlement_modal.gd",
+    "line": 94,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "v.add_child(UIK.label(I18n.t(why), 7, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/sleep_modal.gd",
+    "line": 25,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "body.add_child(UIK.wrap(I18n.t(\"It's only %s: sleeping now skips the rest of today.\") % Clock.fmt_time(), 7, Art.C_GOLD, 310))"
+  },
+  {
+    "file": "game/scripts/ui/modals/social_calendar_modal.gd",
+    "line": 20,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "list.add_child(UIK.wrap((\"✓ \" if gate[\"ok\"] and gate[\"impression\"]!=\"poor\" else \"✗ \")+line,8,Art.C_WHITE if gate[\"ok\"] else Art.C_GOLD,475))"
+  },
+  {
+    "file": "game/scripts/ui/modals/tax_filing_modal.gd",
+    "line": 14,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "body.add_child(UIK.wrap(\"✗ Register an open company first; visit City Hall's registration counter.\",8,Art.C_GOLD,520))"
+  },
+  {
+    "file": "game/scripts/ui/modals/tax_filing_modal.gd",
+    "line": 35,
+    "classification": "Current action or recovery state: retain",
+    "source": "body.add_child(UIK.label(\"✗ Not filed; choose a filing method below.\",8,Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/tax_filing_modal.gd",
+    "line": 47,
+    "classification": "Current action or recovery state: retain",
+    "source": "if not diy_ready:body.add_child(UIK.wrap(\"✗ Insufficient company cash; visit a terminal → Finance to fund the payment.\",8,Art.C_GOLD,520))"
+  },
+  {
+    "file": "game/scripts/ui/modals/tax_filing_modal.gd",
+    "line": 49,
+    "classification": "Current action or recovery state: retain",
+    "source": "body.add_child(UIK.wrap(\"✗ Documents need correction; fix them now or automatic correction charges a fee in 7 days.\",8,Art.C_GOLD,520))"
+  },
+  {
+    "file": "game/scripts/ui/modals/trade_quote_modal.gd",
+    "line": 70,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "content.add_child(UIK.wrap(\"Compare supplier costs and buyer demand before signing a trade.\", 7, Art.C_GOLD, 520))"
+  },
+  {
+    "file": "game/scripts/ui/modals/trade_quote_modal.gd",
+    "line": 112,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "content.add_child(UIK.wrap((\"✓ \" if quote[\"competitive\"] else \"✗ \") + I18n.t(\"Compare buyer landed cost with demand before choosing a route.\"), 7, Art.C_GOLD, 520))"
+  },
+  {
+    "file": "game/scripts/ui/modals/trade_quote_modal.gd",
+    "line": 127,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "elif TradeIndustry.valid():content.add_child(UIK.wrap(\"✗ \"+I18n.t(TradeIndustry.available(quote)),8,Art.C_GOLD,520))"
+  },
+  {
+    "file": "game/scripts/ui/modals/traffic_modal.gd",
+    "line": 32,
+    "classification": "Current action or recovery state: retain",
+    "source": "line.color = Art.C_GOLD if s[\"injury\"] != \"none\" else Art.C_DIM"
+  },
+  {
+    "file": "game/scripts/ui/modals/traffic_modal.gd",
+    "line": 48,
+    "classification": "Current action or recovery state: retain",
+    "source": "if not ready: content.add_child(UIK.wrap(\"✗ \" + I18n.t(\"Add cash before buying medicine, or wait for natural recovery.\"),8,Art.C_GOLD,470))"
+  },
+  {
+    "file": "game/scripts/ui/modals/van_deal_modal.gd",
+    "line": 28,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "col.add_child(UIK.title(I18n.t(str(v.get(\"name\", \"Used panel van\"))), 11, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/van_deal_modal.gd",
+    "line": 31,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "body.add_child(UIK.kv(\"Price\", Fmt.money(price), Art.C_GOLD, 9, true))"
+  },
+  {
+    "file": "game/scripts/ui/modals/world_map_modal.gd",
+    "line": 56,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "var accent := Art.C_GOLD if home or rid == sel else Color8(90, 130, 200)"
+  },
+  {
+    "file": "game/scripts/ui/modals/world_map_modal.gd",
+    "line": 59,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "b.add_theme_stylebox_override(\"hover\", UIK.flat(Color(0.08, 0.13, 0.24, 1.0), Art.C_GOLD, 1, 2))"
+  },
+  {
+    "file": "game/scripts/ui/modals/world_map_modal.gd",
+    "line": 60,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "b.add_theme_stylebox_override(\"pressed\", UIK.flat(bg, Art.C_GOLD, 1, 2))"
+  },
+  {
+    "file": "game/scripts/ui/modals/world_map_modal.gd",
+    "line": 82,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "var tl := UIK.label(I18n.t(r[\"name\"]).to_upper(), 7, Art.C_GOLD if home else Art.C_WHITE, true)"
+  },
+  {
+    "file": "game/scripts/ui/modals/world_map_modal.gd",
+    "line": 112,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "c1.add_child(UIK.chip(\"OVERSEAS\", Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/world_map_modal.gd",
+    "line": 127,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "c3.add_child(UIK.label(\"✓\" if GlobalMarket.unlocked(sel) else \"✗ \" + I18n.t(\"Chapter 13\"), 7, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/modals/world_map_modal.gd",
+    "line": 141,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "_home.draw_colored_polygon(pts, Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/modals/world_routes.gd",
+    "line": 25,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "draw_circle(home, 4, Art.C_GOLD)"
+  },
+  {
+    "file": "game/scripts/ui/phone_ui.gd",
+    "line": 186,
+    "classification": "Protected phone scope: retain for #153",
+    "source": "var t := UIK.wrap(I18n.t(\"◆ %s needs a decision\") % I18n.t(DataDB.events[pend[0][\"id\"]].get(\"presentation\", {}).get(\"title\", \"Something\")), 7, Art.C_GOLD, 128)"
+  },
+  {
+    "file": "game/scripts/ui/phone_ui.gd",
+    "line": 292,
+    "classification": "Protected phone scope: retain for #153",
+    "source": "var deadline := UIK.wrap(I18n.t(\"Reply by %s · %d minutes remaining\") % [Clock.fmt_datetime(int(m[\"expires\"])), maxi(0, int(m[\"expires\"]) - Clock.now())], 6, Art.C_GOLD, 118)"
+  },
+  {
+    "file": "game/scripts/ui/phone_ui.gd",
+    "line": 368,
+    "classification": "Protected phone scope: retain for #153",
+    "source": "content.add_child(UIK.wrap(PhoneMessages.contact_name(str(meeting[\"npc\"])) + \" · \" + Clock.fmt_datetime(int(meeting[\"at\"])), 7, Art.C_GOLD, 122))"
+  },
+  {
+    "file": "game/scripts/ui/phone_ui.gd",
+    "line": 382,
+    "classification": "Protected phone scope: retain for #153",
+    "source": "content.add_child(UIK.kv(\"ShopLane pending\", Fmt.money0(mb), Art.C_GOLD, 7))"
+  },
+  {
+    "file": "game/scripts/ui/phone_ui.gd",
+    "line": 398,
+    "classification": "Protected phone scope: retain for #153",
+    "source": "content.add_child(UIK.label(str(ch[\"title\"]), 7, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/phone_ui.gd",
+    "line": 420,
+    "classification": "Protected phone scope: retain for #153",
+    "source": "content.add_child(UIK.kv(\"To pack\", str(placed), Art.C_GOLD if placed > 0 else Art.C_WHITE, 7, true))"
+  },
+  {
+    "file": "game/scripts/ui/phone_ui.gd",
+    "line": 425,
+    "classification": "Protected phone scope: retain for #153",
+    "source": "content.add_child(UIK.kv(\"Personal cap\", Fmt.money0(Ecommerce.seller_cap()), Art.C_GOLD, 7))"
+  },
+  {
+    "file": "game/scripts/ui/phone_ui.gd",
+    "line": 474,
+    "classification": "Protected phone scope: retain for #153",
+    "source": "content.add_child(UIK.label(I18n.t(\"Year %d\") % year, 8, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/phone_ui.gd",
+    "line": 486,
+    "classification": "Protected phone scope: retain for #153",
+    "source": "content.add_child(UIK.label((\"★ \" if milestone else \"\") + Clock.fmt_short(int(e[\"t\"])), 6, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/phone_ui.gd",
+    "line": 487,
+    "classification": "Protected phone scope: retain for #153",
+    "source": "content.add_child(UIK.wrap(str(e[\"text\"]), 7, Art.C_GOLD if milestone else Art.C_WHITE, 124))"
+  },
+  {
+    "file": "game/scripts/ui/phone_ui.gd",
+    "line": 499,
+    "classification": "Protected phone scope: retain for #153",
+    "source": "content.add_child(UIK.label(\"%s  %d/%d\" % [InternalSupply.industry_name(entry[\"id\"]), n[0], n[1]], 7, Art.C_GOLD, true))"
+  },
+  {
+    "file": "game/scripts/ui/phone_ui.gd",
+    "line": 536,
+    "classification": "Protected phone scope: retain for #153",
+    "source": "content.add_child(UIK.label(Clock.fmt_short(int(items[index][\"t\"])), 6, Art.C_GOLD))"
+  },
+  {
+    "file": "game/scripts/ui/real_estate_ui.gd",
+    "line": 93,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "content.add_child(UIK.wrap(\"✗ Own a rental and apply for the building permit at City Hall first.\",8,Art.C_GOLD,550))"
+  },
+  {
+    "file": "game/scripts/ui/real_estate_ui.gd",
+    "line": 142,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "else:content.add_child(UIK.wrap(\"✗ Select an owner mandate and a client, then arrange a viewing.\",8,Art.C_GOLD,550))"
+  },
+  {
+    "file": "game/scripts/ui/real_estate_ui.gd",
+    "line": 192,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "if int(RealEstate.S()[\"stage\"])<2 or not Compliance.permit_valid(\"building\"):content.add_child(UIK.wrap(\"✗ Own a rental and apply for the building permit at City Hall first.\",9,Art.C_GOLD,550));return"
+  },
+  {
+    "file": "game/scripts/ui/trade_desk_ui.gd",
+    "line": 23,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "content.add_child(UIK.wrap(\"✗ \"+I18n.t(\"Apply for import and export registration at Customs House first.\"),9,Art.C_GOLD,560))"
+  },
+  {
+    "file": "game/scripts/ui/trade_desk_ui.gd",
+    "line": 30,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "content.add_child(UIK.wrap(\"✗ \"+I18n.t(\"Lease Meridian Trade Desk before opening the brokerage.\"),9,Art.C_GOLD,560))"
+  },
+  {
+    "file": "game/scripts/ui/trade_desk_ui.gd",
+    "line": 45,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "if contract[\"error\"]!=\"\":content.add_child(UIK.wrap(\"✗ \"+str(contract[\"error\"]),8,Art.C_GOLD,560))"
+  },
+  {
+    "file": "game/scripts/ui/trade_desk_ui.gd",
+    "line": 58,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "else:content.add_child(UIK.wrap(\"✗ \"+str(hedge[\"error\"]),8,Art.C_GOLD,560))"
+  },
+  {
+    "file": "game/scripts/ui/trade_desk_ui.gd",
+    "line": 69,
+    "classification": "Information / decoration: neutral C_SKY",
+    "source": "content.add_child(UIK.wrap(\"✗ \"+I18n.t(TradeIndustry.document_block(d)),8,Art.C_GOLD,560))"
+  },
+  {
+    "file": "game/scripts/ui/tutorial.gd",
+    "line": 126,
+    "classification": "Current guided action: retain",
+    "source": "var sb := UIK.flat(Color(0.05, 0.08, 0.15, 0.95), Art.C_GOLD, 1, 3)"
+  },
+  {
+    "file": "game/scripts/ui/tutorial.gd",
+    "line": 140,
+    "classification": "Current guided action: retain",
+    "source": "head = UIK.label(\"\", 7, Art.C_GOLD, true)"
+  },
+  {
+    "file": "game/scripts/ui/tutorial.gd",
+    "line": 148,
+    "classification": "Current guided action: retain",
+    "source": "skip.add_theme_stylebox_override(\"hover\", UIK.flat(Color(1, 1, 1, 0.08), Art.C_GOLD, 1, 2))"
+  },
+  {
+    "file": "game/scripts/ui/tutorial.gd",
+    "line": 342,
+    "classification": "Current guided action: retain",
+    "source": "head.add_theme_color_override(\"font_color\", Art.C_GOLD)"
+  },
+  {
+    "file": "game/tests/unit/test_calm_info.gd",
+    "line": 13,
+    "classification": "Palette / world art / test / shared theme: retain (not an information badge)",
+    "source": "runner.check(tip._mark.get_theme_color(\"font_color\") != Art.C_GOLD, \"read and unread glyph is not gold\")"
+  },
+  {
+    "file": "game/tests/walkthrough/trailer.gd",
+    "line": 166,
+    "classification": "Palette / world art / test / shared theme: retain (not an information badge)",
+    "source": "card.add_theme_stylebox_override(\"panel\", UIK.flat(Color(0.03, 0.06, 0.13, 0.95), Art.C_GOLD, 1, 3))"
+  },
+  {
+    "file": "game/tests/walkthrough/trailer.gd",
+    "line": 173,
+    "classification": "Palette / world art / test / shared theme: retain (not an information badge)",
+    "source": "chip.add_theme_stylebox_override(\"panel\", UIK.flat(Art.C_GOLD, Color(0, 0, 0, 0), 0, 2))"
+  },
+  {
+    "file": "game/tests/walkthrough/trailer.gd",
+    "line": 223,
+    "classification": "Palette / world art / test / shared theme: retain (not an information badge)",
+    "source": "rule.color = Art.C_GOLD"
+  },
+  {
+    "file": "game/tests/walkthrough/trailer.gd",
+    "line": 233,
+    "classification": "Palette / world art / test / shared theme: retain (not an information badge)",
+    "source": "var gn := UIK.label(t(\"genre\"), 9, Art.C_GOLD, true)"
+  },
+  {
+    "file": "game/tests/walkthrough/trailer.gd",
+    "line": 413,
+    "classification": "Palette / world art / test / shared theme: retain (not an information badge)",
+    "source": "var st := UIK.title(\"%s  ·  v%s\" % [t(\"end\"), str(ProjectSettings.get_setting(\"application/config/version\", \"\"))], 12, Art.C_GOLD)"
+  }
+]

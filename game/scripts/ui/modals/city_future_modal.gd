@@ -20,7 +20,7 @@ func build() -> void:
 	if GameState.flag("city_future_complete"):
 		var cards: Array=CityFuture.S()["cards"];var index: int=CityFuture.S()["viewed"]
 		if index<cards.size():
-			box.add_child(UIK.label(I18n.t(str(cards[index]["title"])),10,Art.C_GOLD))
+			box.add_child(UIK.label(I18n.t(str(cards[index]["title"])),10,Art.C_SKY))
 			var keys: Dictionary={"quality":"Delivered quality", "approved":"Expo bid", "won":"Harbor tender", "rival_quality":"Rival bid quality", "cost":"Actual contribution (home dollars)", "transition":"Vehicle transition", "support":"Campaign participation", "green_probability":"Green candidate probability", "winner":"Elected mayor", "mayor":"Elected mayor", "expo":"Expo bid", "harbor_quality":"Harbor quality", "event":"Event plan", "expired":"Deadline", "policy":"Workplace policy"}
 			for key in cards[index]["result"]:
 				if key in ["people","retention_until","departed"]:continue
@@ -39,7 +39,7 @@ func build() -> void:
 		return
 	var c:=CityFuture.chapter();var num: int=c["number"]
 	var definition:=CityFuture.definition(num)
-	box.add_child(UIK.label_tip(I18n.t(str(definition["title"])),"city_future",10,Art.C_GOLD))
+	box.add_child(UIK.label_tip(I18n.t(str(definition["title"])),"city_future",10,Art.C_SKY))
 	box.add_child(UIK.kv("Time remaining",I18n.t("%d days")%maxi(0,int(ceil(float(int(c["deadline"])-Clock.now())/Clock.DAY)))))
 	if not GameState.flag("city%d_read"%num):
 		box.add_child(UIK.wrap(I18n.t(str(DataDB.dialogue[str(definition["npc"])+"_civic"]["nodes"]["start"][0]["text"])),8,Art.C_WHITE,510))
@@ -74,7 +74,7 @@ func build() -> void:
 		box.add_child(UIK.kv("Elected mayor","Mina Chen" if c["result"]["winner"]=="green" else "Daniel Ortiz"))
 		box.add_child(UIK.kv("Green candidate probability",Fmt.pct(float(c["result"]["green_probability"]))))
 	elif num==24:
-		box.add_child(UIK.wrap(I18n.t("International expo" if CityFuture.S()["expo_awarded"] else "Local city festival"),8,Art.C_GOLD,510))
+		box.add_child(UIK.wrap(I18n.t("International expo" if CityFuture.S()["expo_awarded"] else "Local city festival"),8,Art.C_SKY,510))
 
 	if Clock.now()>=int(c["review_at"]):action(box,I18n.t("Review actual deliveries and the civic result."),"city_review",func():result(CityFuture.review()),true)
 	else:action(box,I18n.t("Return to the world and wait two days for the result"),"city_wait_result",return_to_world,true)

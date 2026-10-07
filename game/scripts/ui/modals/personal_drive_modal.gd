@@ -13,7 +13,7 @@ func build() -> void:
 	if c.is_empty():footer.add_child(UIK.button("Close",close,"primary"));return
 	var from: String=c["location"]
 	var q:=PersonalAssets.trip(from,destination,int(Clock.date()["hour"]))
-	body.add_child(UIK.label(I18n.t(c["name"]),11,Art.C_GOLD))
+	body.add_child(UIK.label(I18n.t(c["name"]),11,Art.C_SKY))
 	var img:=TextureRect.new()
 	img.texture=Art.tex("city_map/aurelia_map")
 	img.expand_mode=TextureRect.EXPAND_IGNORE_SIZE

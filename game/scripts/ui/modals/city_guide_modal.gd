@@ -15,7 +15,7 @@ func build() -> void:
 	var list := UIK.vbox(5)
 	body.add_child(UIK.scroll(list, Vector2(548, 245)))
 	for group in BuildingInfo.guide_groups():
-		list.add_child(UIK.label(group["name"], 9, Art.C_GOLD, true))
+		list.add_child(UIK.label(group["name"], 9, Art.C_SKY, true))
 		if not group["open"]:
 			list.add_child(UIK.label("Not open yet", 7, Art.C_DIM))
 			continue

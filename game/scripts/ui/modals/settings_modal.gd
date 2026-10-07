@@ -2,7 +2,7 @@ class_name SettingsModal
 extends Modal
 ## Changes apply immediately. A rejected key leaves the previous assignment intact.
 
-const PAGES := ["Audio", "Display", "Controls", "Accessibility", "Game"]
+const PAGES := ["Audio", "Display", "Controls", "Accessibility", "Game", "Assistant"]
 const ACTION_NAMES := {"move_left": "Move left", "move_right": "Move right", "move_up": "Move up", "move_down": "Move down",
 	"run": "Run", "interact": "Interact", "phone": "Phone", "map": "Map", "company_os_hint": "Company OS",
 	"pause": "Pause", "fast_forward": "Fast-forward", "confirm": "Confirm", "cancel": "Cancel", "bug_report": "Report a problem"}
@@ -19,9 +19,11 @@ func _init() -> void:
 
 
 func build() -> void:
+	help_key = "assistant" if page == 5 else "settings"
 	var tabs := UIK.hbox(3)
 	body.add_child(tabs)
 	for index in PAGES.size():
+		if index == 5 and not GameState.has_game():continue
 		var button := UIK.button(PAGES[index], func(): capture = ""; page = index; reset_scroll = true; rebuild(), "tab_active" if index == page else "tab")
 		button.name = "SettingsPage_%d" % index
 		tabs.add_child(button)
@@ -59,10 +61,14 @@ func build() -> void:
 			_slider("notification_seconds", "Notification duration", 2, 30, 1, "s")
 			body.add_child(UIK.wrap("Choices always wait for you. Profit and loss use text and signed amounts as well as color.", 8, Art.C_MUTED, 360))
 		4:
+			if GameState.has_game():AssistantPolicy.master(body)
 			_slider("autosave_seconds", "Autosave interval", 5, 120, 5, "s")
-			_slider("default_speed", "Default game speed", 0.5, 3, 0.5, "min/s")
+			_slider("default_speed", "Default game speed", 0.5, 3, 0.5, I18n.t("game minutes / second"))
 			_toggle("tutorial_hints", "Tutorial hints")
+			_options("work_mode", "Default work mode", ["Relaxed", "Challenge"])
 			body.add_child(UIK.wrap("Default speed applies at launch. Hold Fast-forward for twice the current speed; release to resume.", 8, Art.C_MUTED, 360))
+		5:
+			if GameState.has_game():AssistantPolicy.overview(body)
 	var done := UIK.button("Done", close, "primary")
 	done.name = "SettingsDone"
 	footer.add_child(done)
@@ -90,11 +96,11 @@ func _slider(key: String, caption: String, low: float, high: float, step_size: f
 	slider.custom_minimum_size.x = 100
 	slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(slider)
-	var value := UIK.label(str(slider.value) + " " + unit)
+	var value := UIK.label(str(slider.value) + " " + I18n.t(unit))
 	value.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	row.add_child(value)
 	slider.value_changed.connect(func(number):
-		value.text = str(number) + " " + unit
+		value.text = str(number) + " " + I18n.t(unit)
 		_result(Preferences.set_value(key, number / multiplier, true)))
 	body.add_child(row)
 

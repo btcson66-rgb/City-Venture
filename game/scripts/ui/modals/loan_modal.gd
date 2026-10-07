@@ -22,7 +22,7 @@ func build() -> void:
 	var top := UIK.hbox(8)
 	body.add_child(top)
 	top.add_child(UIK.label(I18n.t("Credit score %d points · %s") % [Bank.credit(), I18n.t(Bank.credit_band())], 9,
-		Art.C_GREEN if Bank.credit() >= 690 else (Art.C_GOLD if Bank.credit() >= 620 else Art.C_RED), true))
+		Art.C_GREEN if Bank.credit() >= 690 else (Art.C_SKY if Bank.credit() >= 620 else Art.C_RED), true))
 	top.add_child(UIK.tip("loan_eligibility"))
 	top.add_child(UIK.tip("credit_history"))
 	top.add_child(UIK.expand())
@@ -44,13 +44,22 @@ func build() -> void:
 			row.name = "Eligibility_" + str(requirement["id"])
 			left.add_child(row)
 			var mark := "✓" if requirement["ok"] else "✗"
-			row.add_child(UIK.wrap(mark + " " + I18n.t(requirement["label"]), 8, Art.C_GREEN if requirement["ok"] else Art.C_RED, 240))
+			# F6: two lines per requirement (verdict with the one gap number, then the next step); the full figures sit in the tooltip.
+			var gap := ""
+			var detail := ""
 			if requirement["id"] == "capacity":
-				row.add_child(UIK.wrap(I18n.t("Current %s · required %s · gap %s") % [Fmt.money0(float(requirement["value"])), Fmt.money0(float(requirement["need"])), Fmt.money0(float(requirement["gap"]))], 7, Art.C_WHITE, 240))
+				gap = I18n.t("gap %s") % Fmt.money0(float(requirement["gap"]))
+				detail = I18n.t("Current %s · required %s · gap %s") % [Fmt.money0(float(requirement["value"])), Fmt.money0(float(requirement["need"])), Fmt.money0(float(requirement["gap"]))]
 			elif requirement["id"] == "age":
-				row.add_child(UIK.wrap(I18n.t("Current %d days · required %d days · %d more days") % [int(requirement["value"]), int(requirement["need"]), int(requirement["gap"])], 7, Art.C_WHITE, 240))
+				gap = I18n.t("%d more days") % int(requirement["gap"])
+				detail = I18n.t("Current %d days · required %d days · %d more days") % [int(requirement["value"]), int(requirement["need"]), int(requirement["gap"])]
 			elif not requirement["id"] in ["company", "account", "arrears"]:
-				row.add_child(UIK.wrap(I18n.t("Current %s · required %s · gap %s") % [I18n.t("%d points") % int(requirement["value"]), I18n.t("%d points") % int(requirement["need"]), I18n.t("%d points") % int(requirement["gap"])], 7, Art.C_WHITE, 240))
+				gap = I18n.t("gap %s") % (I18n.t("%d points") % int(requirement["gap"]))
+				detail = I18n.t("Current %s · required %s · gap %s") % [I18n.t("%d points") % int(requirement["value"]), I18n.t("%d points") % int(requirement["need"]), I18n.t("%d points") % int(requirement["gap"])]
+			var head := UIK.wrap(mark + " " + I18n.t(requirement["label"]) + ((" · " + gap) if gap != "" and not requirement["ok"] else ""), 8, Art.C_GREEN if requirement["ok"] else Art.C_RED, 240)
+			head.tooltip_text = detail
+			head.mouse_filter = Control.MOUSE_FILTER_PASS
+			row.add_child(head)
 			row.add_child(UIK.wrap(requirement["hint_action"], 7, Art.C_SKY, 240))
 		left.add_child(UIK.label("WHAT YOUR BOOKS SUPPORT", 7, Art.C_DIM, true))
 		for part in Bank.lending_basis()["parts"]:
@@ -60,7 +69,7 @@ func build() -> void:
 		for r in o["reasons"]:
 			left.add_child(UIK.kv(str(r[0]), Fmt.money0(float(r[1])), Art.C_WHITE if float(r[1]) >= 0 else Art.C_RED, 7))
 		left.add_child(UIK.kv("Up to", Fmt.money0(float(o["max"])), Art.C_GREEN, 9, true))
-		left.add_child(UIK.kv_tip("Interest (APR)", Fmt.pct(float(o["apr"]), 1), "interest_rate", Art.C_GOLD, 8))
+		left.add_child(UIK.kv_tip("Interest (APR)", Fmt.pct(float(o["apr"]), 1), "interest_rate", Art.C_SKY, 8))
 		var amt := _amount(o)
 		var ah := UIK.hbox(3)
 		left.add_child(ah)
@@ -118,6 +127,13 @@ func build() -> void:
 		v.add_child(UIK.kv("Balance", Fmt.money0(float(l["balance"])), Art.C_WHITE, 7))
 		v.add_child(UIK.kv("Payment", I18n.t("%s on %s") % [Fmt.money0(float(l["payment"])), Clock.fmt_date(int(l["next"]))], Art.C_MUTED, 7))
 		var lid: String = l["id"]
+		if l["status"] == "late" and not l.get("phone_extension", false):
+			var extend := UIK.button("Request three more days", func():
+				var result := Bank.request_payment_extension(lid)
+				UIRoot.toast(result.get("outcome", result.get("error", "")), "good" if result["ok"] else "bad")
+				rebuild())
+			extend.name = "LoanExtend_" + lid
+			v.add_child(extend)
 		var rh := UIK.hbox(3)
 		v.add_child(rh)
 		var r1 := UIK.button(I18n.t("Repay %s") % Fmt.money0(1000.0), func(): _repay(lid, 1000.0))

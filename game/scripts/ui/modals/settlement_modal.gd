@@ -63,12 +63,12 @@ func build() -> void:
 		if frozen_po:
 			body.add_child(UIK.wrap(I18n.t("Your payment is stuck on the frozen bridge until about %s. Pay again by another rail to get the goods moving; the frozen money comes back when the bridge reopens.") % Clock.fmt_short(Rails.frozen_until()), 7, Art.C_RED, 410))
 		else:
-			body.add_child(UIK.wrap(I18n.t("Paid by %s. It lands around %s; the supplier ships after that. A faster rail costs its own fee.") % [I18n.t(str(Ecommerce.settlement_def(str(st["method"]))["name"])), Clock.fmt_short(int(st["clears"]))], 7, Art.C_GOLD, 410))
+			body.add_child(UIK.wrap(I18n.t("Paid by %s. It lands around %s; the supplier ships after that. A faster rail costs its own fee.") % [I18n.t(str(Ecommerce.settlement_def(str(st["method"]))["name"])), Clock.fmt_short(int(st["clears"]))], 7, Art.C_SKY, 410))
 	elif World.year() < 6:
 		body.add_child(UIK.wrap("Cross-border payments are jammed. The supplier ships only once your money lands on their side.", 7, Art.C_MUTED, 410))
 	var kyc := Compliance.kyc(amount) if po_id == "" else {}
 	if not kyc.is_empty():
-		body.add_child(UIK.label_tip(I18n.t("KYC check: %s and %d more hours before this payment lands (payments over %s).") % [Fmt.money(float(kyc["fee"])), int(kyc["hours"]), Fmt.money0(Compliance.kyc_threshold())], "kyc", 7, Art.C_GOLD))
+		body.add_child(UIK.label_tip(I18n.t("KYC check: %s and %d more hours before this payment lands (payments over %s).") % [Fmt.money(float(kyc["fee"])), int(kyc["hours"]), Fmt.money0(Compliance.kyc_threshold())], "kyc", 7, Art.C_SKY))
 	var list := UIK.vbox(3)
 	for m in Ecommerce.settlement_options():
 		var id := str(m["id"])
@@ -91,7 +91,7 @@ func build() -> void:
 		v.add_child(UIK.label_tip(rec, "rail_reliability", 7, Art.C_RED if rel < 0.9 else Art.C_SKY))
 		var why := Ecommerce.settlement_block(id)
 		if why != "":
-			v.add_child(UIK.label(I18n.t(why), 7, Art.C_GOLD))
+			v.add_child(UIK.label(I18n.t(why), 7, Art.C_SKY))
 		var b := UIK.button("Pay this way" if po_id == "" else ("Reroute" if frozen_po else "Switch"), _pay.bind(id), "primary" if why == "" else "", 72)
 		b.name = "Settle_" + id
 		b.disabled = why != ""

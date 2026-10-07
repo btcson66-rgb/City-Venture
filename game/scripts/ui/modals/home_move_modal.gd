@@ -19,7 +19,7 @@ func build() -> void:
 		return
 	var box:=UIK.vbox(4)
 	body.add_child(UIK.scroll(box,Vector2(426,230)))
-	box.add_child(UIK.label_tip("Home rent and location","home_rent_vs_location",10,Art.C_GOLD))
+	box.add_child(UIK.label_tip("Home rent and location","home_rent_vs_location",10,Art.C_SKY))
 	box.add_child(UIK.wrap(I18n.t("Current home: %s · %s per month")%[I18n.t(DataDB.properties[Living.home()]["name"]),Fmt.money(Living.home_rent())],8,Art.C_WHITE,410))
 	var pending: Dictionary=Housing.S()["pending"]
 	if not pending.is_empty():
@@ -34,7 +34,7 @@ func build() -> void:
 		for pid in DataDB.properties:
 			var property: Dictionary=DataDB.properties[pid]
 			if property.get("kind","")!="home" or pid==Living.home() or property.get("owner_purchase",false):continue
-			box.add_child(UIK.label(I18n.t(property["name"]),9,Art.C_GOLD))
+			box.add_child(UIK.label(I18n.t(property["name"]),9,Art.C_SKY))
 			var deposit:=float(property["monthly_rent"])*World.rent_mult()
 			box.add_child(UIK.wrap(I18n.t("%s per month · one-month deposit %s · storage %d units · moving service %s")%[Fmt.money(deposit),Fmt.money(deposit),int(property["inventory_units"]),Fmt.money(Housing.fee())],8,Art.C_WHITE,410))
 			var why:=Housing.capacity_block(pid)

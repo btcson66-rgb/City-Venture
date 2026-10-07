@@ -61,7 +61,7 @@ func route(destination: String) -> Dictionary:
 	return {"ok":true}
 
 func check(content: Control, ok: bool, text: String) -> void:
-	content.add_child(UIK.wrap(("✓ " if ok else "✗ ") + I18n.t(text), 8, Art.C_WHITE if ok else Art.C_GOLD, 550))
+	content.add_child(UIK.wrap(("✓ " if ok else "✗ ") + I18n.t(text), 8, Art.C_WHITE if ok else Art.C_SKY, 550))
 
 func build() -> void:
 	has_primary = false

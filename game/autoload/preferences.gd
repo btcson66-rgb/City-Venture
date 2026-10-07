@@ -7,7 +7,7 @@ const AMBIENT_BUS := "Ambient"  # the one bus name Sound routes ambience through
 const DEFAULTS := {"master": 1.0, "music": 0.8, "sfx": 0.9, "ambience": 0.8,
 	"window_mode": 0, "ui_scale": 1.0, "font_size": 1, "color_mode": 0,
 	"high_detail_art": true, "reduce_motion": false, "subtitle_seconds": 0.0, "notification_seconds": 4.2,
-	"autosave_seconds": 15.0, "default_speed": 1.5, "tutorial_hints": true}
+	"autosave_seconds": 15.0, "default_speed": 1.5, "tutorial_hints": true, "work_mode": 0}
 const BINDINGS := {"move_left": [KEY_A, KEY_LEFT], "move_right": [KEY_D, KEY_RIGHT],
 	"move_up": [KEY_W, KEY_UP], "move_down": [KEY_S, KEY_DOWN], "run": [KEY_SHIFT],
 	"interact": [KEY_E, KEY_SPACE], "phone": [KEY_TAB, KEY_P], "map": [KEY_M],
@@ -78,6 +78,7 @@ func validated(key: String, value: Variant) -> Variant:
 		"master", "music", "sfx", "ambience": return clampf(float(value), 0.0, 1.0)
 		"ui_scale": return clampf(float(value), 0.8, 1.5)
 		"font_size", "color_mode": return clampi(int(value), 0, 3)
+		"work_mode": return clampi(int(value), 0, 1)
 		"window_mode": return clampi(int(value), 0, 2)
 		"subtitle_seconds": return clampf(float(value), 0.0, 30.0)
 		"notification_seconds": return clampf(float(value), 2.0, 30.0)

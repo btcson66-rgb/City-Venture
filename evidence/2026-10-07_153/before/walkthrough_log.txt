@@ -1,0 +1,32 @@
+   3.5s [6月1日（週日） 下午 2:00]   click [App_messages] 訊息 1
+   3.7s [6月1日（週日） 下午 2:00]   click [Thread_maya] Maya  (1) 6月1日 下午 2:00 真的辭了？
+   5.8s [6月1日（週日） 下午 2:00]   choose "› 嗯。"
+   8.7s [6月1日（週日） 下午 2:00]   choose "› 我要開公司。"
+  11.8s [6月1日（週日） 下午 2:00]   ok  Maya phone conversation unlocks the first chapter
+  11.8s [6月1日（週日） 下午 2:00]   ok  completed call has a saved receipt
+  12.3s [6月1日（週日） 下午 2:00]   click [App_messages] 訊息 1
+  12.6s [6月1日（週日） 下午 2:01]   shot 01_message_threads.png
+  12.6s [6月1日（週日） 下午 2:01]   click [Thread_marcus] Marcus Reed  (1) 6月1日 下午 2:00 貸款預約：6月2日（週一） 下午 1:0
+  12.9s [6月1日（週日） 下午 2:01]   shot 02_quick_replies.png
+  12.9s [6月1日（週日） 下午 2:01]   click [PhoneMessagesHelp] ?
+  13.0s [6月1日（週日） 下午 2:01]   ok  phone help card is available
+  13.1s [6月1日（週日） 下午 2:01]   shot 03_phone_help.png
+  13.1s [6月1日（週日） 下午 2:01]   click [CloseInfo] Got it
+  13.3s [6月1日（週日） 下午 2:01]   click [Reply_MSG-3_confirm] ✓ 確認約見
+  13.4s [6月1日（週日） 下午 2:01]   ok  reply creates real agenda
+  13.6s [6月1日（週日） 下午 2:01]   shot 04_reply_history.png
+  13.9s [6月1日（週日） 下午 2:01]   shot 05_meeting_agenda.png
+  14.2s [6月1日（週日） 下午 2:02]   shot 06_proactive_templates.png
+  14.7s [6月2日（週一） 下午 1:00] FAIL arrival starts appointment conversation
+  19.9s [6月2日（週一） 下午 1:08] FAIL button 'Send_marcus_coffee' not found
+  19.9s [6月2日（週一） 下午 1:08]       diag: modal=none dialogue=false phone=true
+  20.0s [6月2日（週一） 下午 1:08]       diag: Send_marcus_coffee visible=true disabled=true
+  20.0s [6月2日（週一） 下午 1:08]       diag: Send_marcus_work visible=true disabled=true
+  20.0s [6月2日（週一） 下午 1:08]       diag: Send_marcus_payment visible=true disabled=true
+  20.0s [6月2日（週一） 下午 1:08]       diag: Send_maya_coffee visible=true disabled=false
+  20.0s [6月2日（週一） 下午 1:08]       diag: Send_maya_work visible=true disabled=true
+  20.0s [6月2日（週一） 下午 1:08]       diag: Send_maya_payment visible=true disabled=true
+  20.0s [6月2日（週一） 下午 1:08] FAIL proactive invitation creates next meeting
+  20.2s [6月2日（週一） 下午 1:08] FAIL latest outgoing reply is visible without losing history
+  20.3s [6月2日（週一） 下午 1:08]   shot 07_proactive_result.png
+  20.3s [6月2日（週一） 下午 1:08] BOT FINISHED — 4 failure(s) · 20.3s real

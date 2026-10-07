@@ -1,0 +1,342 @@
+{
+  "barista_game": {
+    "goal": "Make one drink, deliver it, then clean up.",
+    "controls": "Read → choose → serve",
+    "good": "Match the order. Take your time in practice.",
+    "steps": [
+      {
+        "target": "ConfirmOrder",
+        "text": "First, confirm this guest’s order.",
+        "condition": "pressed"
+      },
+      {
+        "target": "$size",
+        "text": "Choose the cup size on the order.",
+        "condition": "pressed"
+      },
+      {
+        "target": "$drink",
+        "text": "Choose the drink on the order.",
+        "condition": "pressed"
+      },
+      {
+        "target": "$milk",
+        "text": "Choose the milk on the order.",
+        "condition": "pressed"
+      },
+      {
+        "target": "$shots",
+        "text": "Choose the espresso shots on the order.",
+        "condition": "pressed"
+      },
+      {
+        "target": "Serve",
+        "text": "The drink is ready. Press Serve.",
+        "condition": "pressed"
+      },
+      {
+        "target": "$delivery",
+        "text": "Deliver to the place on the ticket.",
+        "condition": "pressed"
+      },
+      {
+        "target": "CleanTable",
+        "text": "Clean up. That is one complete order!",
+        "condition": "pressed"
+      }
+    ]
+  },
+  "parcel_sort_game": {
+    "goal": "Send each parcel to the right shelf.",
+    "controls": "Read → choose a shelf",
+    "good": "Match the postcode; quarantine damaged parcels.",
+    "steps": [
+      {
+        "target": "$bin",
+        "text": "Match the postcode to this shelf.",
+        "condition": "pressed"
+      },
+      {
+        "target": "Damage_quarantine",
+        "text": "This parcel is damaged. Record it and quarantine it.",
+        "condition": "pressed"
+      }
+    ]
+  },
+  "clerk_forms_game": {
+    "goal": "Check the form, then help the caller.",
+    "controls": "Read → mark → decide",
+    "good": "Use the rules and verify the caller’s reference.",
+    "steps": [
+      {
+        "target": "$field",
+        "text": "Check this field against the rules.",
+        "condition": "pressed"
+      },
+      {
+        "target": "$form_decision",
+        "text": "Choose the decision that fits the form.",
+        "condition": "pressed"
+      },
+      {
+        "target": "Complaint_verify",
+        "text": "Verify the caller’s reference before helping.",
+        "condition": "pressed"
+      }
+    ]
+  },
+  "cowork_host_game": {
+    "goal": "Welcome the visitor and reserve a free room.",
+    "controls": "Read → welcome → reserve",
+    "good": "Match the booking and avoid occupied rooms.",
+    "steps": [
+      {
+        "target": "$desk",
+        "text": "Choose the welcome that fits this visitor.",
+        "condition": "pressed"
+      },
+      {
+        "target": "$room",
+        "text": "Reserve this available room.",
+        "condition": "pressed"
+      }
+    ]
+  },
+  "teller_cash_game": {
+    "goal": "Count the money and check a refund.",
+    "controls": "Read → count → hand over",
+    "good": "Count the exact amount; check the receipt.",
+    "steps": [
+      {
+        "target": "$note",
+        "text": "Add this note. Repeat until the amount matches.",
+        "condition": "pressed"
+      },
+      {
+        "target": "HandOver",
+        "text": "The total matches. Hand over the money.",
+        "condition": "pressed"
+      },
+      {
+        "target": "$refund",
+        "text": "Use the receipt to decide the refund.",
+        "condition": "pressed"
+      }
+    ]
+  },
+  "pack_game": {
+    "goal": "Pack the items safely with the right label.",
+    "controls": "Box → place → seal",
+    "good": "Fit every item; pad, tape and label the parcel.",
+    "steps": [
+      {
+        "target": "$box",
+        "text": "Choose a box that fits this order.",
+        "condition": "pressed"
+      },
+      {
+        "target": "$item",
+        "text": "Select the next item to pack.",
+        "condition": "pressed"
+      },
+      {
+        "target": "$rotation",
+        "text": "Rotate this item to fit the space.",
+        "condition": "pressed"
+      },
+      {
+        "target": "$grid",
+        "text": "Place the selected item here.",
+        "condition": "pressed"
+      },
+      {
+        "target": "Pad",
+        "text": "Add padding until it reaches the green zone.",
+        "condition": "pressed"
+      },
+      {
+        "target": "Seam_0",
+        "text": "Tape the first seam.",
+        "condition": "pressed"
+      },
+      {
+        "target": "Seam_1",
+        "text": "Tape the second seam.",
+        "condition": "pressed"
+      },
+      {
+        "target": "Seam_2",
+        "text": "Tape the last seam.",
+        "condition": "pressed"
+      },
+      {
+        "target": "$label",
+        "text": "Choose the label matching this customer.",
+        "condition": "pressed"
+      },
+      {
+        "target": "Seal",
+        "text": "Everything is packed. Seal the parcel.",
+        "condition": "pressed"
+      }
+    ]
+  },
+  "photo_shoot_game": {
+    "goal": "Set up and take a clear product photo.",
+    "controls": "Backdrop → light → frame",
+    "good": "Keep the product inside the frame in soft light.",
+    "steps": [
+      {
+        "target": "$backdrop",
+        "text": "Choose a backdrop that suits this product.",
+        "condition": "pressed"
+      },
+      {
+        "target": "Light_window",
+        "text": "Use soft window light.",
+        "condition": "pressed"
+      },
+      {
+        "target": "ZoomIn",
+        "text": "Make the product a little larger.",
+        "condition": "pressed"
+      },
+      {
+        "target": "PhotoFrame",
+        "text": "Drag the product toward the centre.",
+        "condition": "dragged"
+      },
+      {
+        "target": "Shutter",
+        "text": "Take the photo. Practice has no timing pressure.",
+        "condition": "pressed"
+      }
+    ]
+  },
+  "typing_game": {
+    "goal": "Type the highlighted line.",
+    "controls": "Read → type",
+    "good": "Follow the next highlighted character.",
+    "steps": [
+      {
+        "target": "TypingView",
+        "text": "Type this line. Wrong keys are safe; try the highlighted key.",
+        "condition": "line_typed"
+      }
+    ]
+  },
+  "consulting_game": {
+    "goal": "Complete the task in the client’s brief.",
+    "controls": "Read → choose → confirm",
+    "good": "Use the brief to support your choice.",
+    "steps": [
+      {
+        "target": "$consult",
+        "text": "Choose the answer matching this brief.",
+        "condition": "pressed"
+      },
+      {
+        "target": "$consult_followup",
+        "text": "Finish the sequence or confirm the client fit.",
+        "condition": "pressed"
+      }
+    ]
+  },
+  "creative_pitch": {
+    "goal": "Choose a slogan, visual and tone for the client.",
+    "controls": "Read → choose three cards",
+    "good": "Match the preferences shown above the cards.",
+    "steps": [
+      {
+        "target": "$creative",
+        "text": "Choose the client’s preferred slogan.",
+        "condition": "pressed"
+      },
+      {
+        "target": "$creative",
+        "text": "Choose the client’s preferred visual.",
+        "condition": "pressed"
+      },
+      {
+        "target": "$creative",
+        "text": "Choose the client’s preferred tone.",
+        "condition": "pressed"
+      }
+    ]
+  },
+  "popup_checkout_game": {
+    "goal": "Charge the correct basket total.",
+    "controls": "Read → multiply → charge",
+    "good": "Quantity times unit price gives the total.",
+    "steps": [
+      {
+        "target": "$charge",
+        "text": "Choose the correct total for this basket.",
+        "condition": "pressed"
+      }
+    ]
+  },
+  "personal_request_game": {
+    "goal": "Choose how you want to help.",
+    "controls": "Read → choose",
+    "good": "Every approach trades time, cost and trust differently.",
+    "steps": [
+      {
+        "target": "$personal",
+        "text": "Try an approach. Practice uses no supplies or time.",
+        "condition": "pressed"
+      }
+    ]
+  },
+  "route_game": {
+    "goal": "Plan a route visiting every stop.",
+    "controls": "Select stops → drive",
+    "good": "Shorter routes use less fuel. You can undo choices.",
+    "steps": [
+      {
+        "target": "$stop",
+        "text": "Select the next stop on this practice route.",
+        "condition": "pressed"
+      },
+      {
+        "target": "DriveRoute",
+        "text": "Every stop is included. Drive the route.",
+        "condition": "pressed"
+      }
+    ]
+  },
+  "pitch_game": {
+    "goal": "Build a deck from your real company figures.",
+    "controls": "Select figures → answer",
+    "good": "Support your answers with the figures in the deck.",
+    "steps": [
+      {
+        "target": "$fact",
+        "text": "Choose a figure for the practice slide.",
+        "condition": "pressed"
+      },
+      {
+        "target": "$pitch_answer",
+        "text": "Answer a question using the practice deck.",
+        "condition": "pressed"
+      }
+    ]
+  },
+  "auction_game": {
+    "goal": "Bid within your budget, or stop.",
+    "controls": "Read → bid → stop",
+    "good": "Include the buyer fee. Walking away is a valid choice.",
+    "steps": [
+      {
+        "target": "AuctionBid",
+        "text": "Try one practice bid. It spends no real money.",
+        "condition": "pressed"
+      },
+      {
+        "target": "AuctionStop",
+        "text": "Stop bidding when you want to walk away.",
+        "condition": "pressed"
+      }
+    ]
+  }
+}

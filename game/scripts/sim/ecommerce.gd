@@ -903,7 +903,7 @@ static func _h_order_place(p: Dictionary) -> void:
 	var mkey := Clock.month_key()
 	e["month_gmv"][mkey] = float(e["month_gmv"].get(mkey, 0.0)) + Packing.total(o)
 	GameState.inc_stat("orders_placed")
-	EventBus.notify.emit(I18n.t("New order %s — %s — %s") % [oid, Packing.summary(o), Fmt.money(Packing.total(o))], "good", "orders")
+	GameState.add_message("shoplane", "Today: 1 new order. Ready when you are.", {"merge":"orders_" + str(o["entity"]), "target":{"kind":"company", "tab":"operations"}})
 	EventBus.order_placed.emit(oid)
 	OverseasPartners.fulfil(o)
 	_check_cap()
@@ -1489,7 +1489,7 @@ static func payout(entity: String) -> float:
 		Ledger.post(entity, "ShopLane weekly payout", [{"acct": "cash", "dr": amt}, {"acct": "marketplace_balance", "cr": amt}], {"segment": "ecommerce", "type": "payout"})
 		GameState.inc_stat("payouts")
 		EventBus.notify.emit(I18n.t("ShopLane payout received: %s") % Fmt.money0(amt), "good", "cash")
-		GameState.add_message("shoplane", (I18n.t("Payout sent: %s to your business account.") if entity != "player" else I18n.t("Payout sent: %s to your personal account.")) % Fmt.money0(amt))
+		GameState.add_message("shoplane", (I18n.t("Payout sent: %s to your business account.") if entity != "player" else I18n.t("Payout sent: %s to your personal account.")) % Fmt.money0(amt), {"timeline_only":true})
 		if int(GameState.stat("payouts")) == 1:
 			GameState.timeline(I18n.t("First payout from ShopLane: %s.") % Fmt.money0(amt), "business")
 	elif bal < -0.01:

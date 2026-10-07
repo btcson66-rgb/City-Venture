@@ -29,6 +29,8 @@ static func set_declaration(region: String, listing: String, policy: String, cod
 		return {"ok": false, "error": "Open this storefront and save its local price first."}
 	if not policy in ["ddp", "ddu"] or not cfg().get("codes", {}).has(code):
 		return {"ok": false, "error": "Choose a delivery-duty policy and a supported tariff code."}
+	if AssistantPolicy.enabled("customs"):
+		code = code_for(str(Ecommerce.E()["listings"][listing]["product"]))
 	prefs(GameState.company_id())[region + ":" + listing] = {"policy": policy, "code": code}
 	GameState.set_flag("customs_active")
 	StoryEngine.check()
@@ -41,6 +43,7 @@ static func annotate(o: Dictionary) -> void:
 	var p: Dictionary = prefs(str(o["entity"])).get(str(o["region"]) + ":" + str(o["listing"]), {"policy": "ddu", "code": "general"})
 	o["customs"] = p.duplicate()
 	o["customs"]["expected"] = code_for(str(o["product"]))
+	if AssistantPolicy.enabled("customs"):o["customs"]["code"] = o["customs"]["expected"]
 	o["customs"]["duty_paid"] = 0.0
 
 

@@ -20,7 +20,7 @@ func build() -> void:
 		return
 	var st := Insolvency.state()
 	var ent := str(st.get("entity", ""))
-	body.add_child(UIK.title(GameState.entity_name(ent), 12, Art.C_GOLD))
+	body.add_child(UIK.title(GameState.entity_name(ent), 12, Art.C_SKY))
 	body.add_child(UIK.wrap(I18n.t("What happened: %s") % str(st.get("reason", "")), 8, Art.C_WHITE, 440))
 	body.add_child(UIK.kv("Cash in the company", Fmt.money0(Ledger.cash(ent)), UIK.money_color(Ledger.cash(ent)), 8))
 	body.add_child(UIK.kv("Owed (bank, wages, suppliers)", Fmt.money0(Insolvency.liabilities(ent)), Art.C_RED, 8))
@@ -59,7 +59,7 @@ func build() -> void:
 
 
 func _statement() -> void:
-	body.add_child(UIK.title("Closing statement", 12, Art.C_GOLD))
+	body.add_child(UIK.title("Closing statement", 12, Art.C_SKY))
 	body.add_child(UIK.kv("Stock sold to a liquidator (40% of cost)", Fmt.money0(float(report.get("stock", 0.0))), Art.C_WHITE, 8))
 	body.add_child(UIK.kv("Receivables sold (80%)", Fmt.money0(float(report.get("receivables", 0.0))), Art.C_WHITE, 8))
 	body.add_child(UIK.kv("Office deposit returned", Fmt.money0(float(report.get("deposit", 0.0))), Art.C_WHITE, 8))

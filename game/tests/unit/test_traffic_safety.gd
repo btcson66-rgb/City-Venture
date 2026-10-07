@@ -64,7 +64,8 @@ func test_hospital_runs_existing_invoice_scheduler_and_living_costs() -> void:
 	hit()
 	TrafficSafety.treat()
 	runner.eq(g["status"],"paid","existing business payment ran during admission")
-	runner.check(Ledger.balance("player","exp:living") > 0,"daily costs ran")
+	Clock.advance(7*Clock.DAY)
+	runner.check(Ledger.balance("player","exp:living") > 0,"living costs (now one weekly bill) ran")
 	runner.eq(Ledger.balance("player","accounts_receivable"),0.0,"invoice collected exactly once")
 func test_save_roundtrip_and_old_save_lazy_default() -> void:
 	runner.check(not GameState.data.has("traffic_safety"),"old state no field")
@@ -175,7 +176,7 @@ func test_settlement_credits_expense_not_income() -> void:
 	TrafficSafety.settle(false)
 	runner.eq(Ledger.balance("player","other_income"),0.0,"no income from settlement")
 	runner.check(Ledger.balance("player","exp:medical") < 35.0,"settlement reduces the medical expense")
-func test_hospital_stay_pauses_replies_meetings_and_appointment() -> void:
+func test_hospital_stay_preserves_optional_visits() -> void:
 	var t0 := Clock.now()
 	GameState.add_message("marcus","Reply soon",{"expires":t0+Clock.DAY,"default_reply":"ack"})
 	var mid: String = GameState.data["messages"].back()["id"]
@@ -187,7 +188,7 @@ func test_hospital_stay_pauses_replies_meetings_and_appointment() -> void:
 	runner.check(stay >= Clock.DAY,"admitted")
 	var m := PhoneMessages.get_message(mid)
 	runner.check(not m.has("answered"),"reply did not expire during admission")
-	runner.eq(int(m["expires"]),t0+Clock.DAY+stay,"reply deadline moved by the stay")
+	runner.check(not m.has("expires"),"notification never has a response deadline")
 	var meeting: Dictionary = PhoneMessages.S()["agenda"].back()
 	runner.eq(meeting["status"],"planned","meeting not missed")
 	runner.eq(int(meeting["at"]),t0+Clock.DAY+stay,"meeting moved by the stay")

@@ -90,7 +90,7 @@ func permits(content: Control) -> void:
 		content.add_child(UIK.label(("✓ " if granted else "✗ ")+I18n.t(title),9))
 		if granted:continue
 		if id=="building" and int(RealEstate.S()["stage"])<2:
-			content.add_child(UIK.wrap("✗ Own a rental and apply for the building permit at City Hall first.",8,Art.C_GOLD,550))
+			content.add_child(UIK.wrap("✗ Own a rental and apply for the building permit at City Hall first.",8,Art.C_SKY,550))
 			button(content,"Manage properties","PrepareRealtyOwnership",func():switch("properties");return {"ok":true},true)
 			continue
 		if pending:
@@ -139,7 +139,7 @@ func matches(content: Control) -> void:
 	content.add_child(row)
 	for choice in ["hard","balanced","soft"]:button(row,("✓ " if negotiation==choice else "")+I18n.t({"hard":"Hard negotiation","balanced":"Balanced negotiation","soft":"Soft negotiation"}[choice]),"Negotiate_"+choice,func():negotiation=choice;return {"ok":true})
 	if not m.is_empty() and not c.is_empty():button(content,I18n.t("Arrange viewing: %s · %d minutes")%[Fmt.money(RealEstate.cfg()["show_cost"]),int(RealEstate.cfg()["show_minutes"])],"ArrangeViewing",RealEstate.viewing.bind(mandate_id,client_id,negotiation),true)
-	else:content.add_child(UIK.wrap("✗ Select an owner mandate and a client, then arrange a viewing.",8,Art.C_GOLD,550))
+	else:content.add_child(UIK.wrap("✗ Select an owner mandate and a client, then arrange a viewing.",8,Art.C_SKY,550))
 func adjust(key: String,delta: float) -> Dictionary:
 	match key:
 		"rent":ratio=clampf(snappedf(ratio+delta,.01),float(RealEstate.cfg()["rent_min"]),float(RealEstate.cfg()["rent_max"]))
@@ -189,7 +189,7 @@ func development(content: Control) -> void:
 		go.name="ManageRealtyProperties"
 		content.add_child(go)
 		return
-	if int(RealEstate.S()["stage"])<2 or not Compliance.permit_valid("building"):content.add_child(UIK.wrap("✗ Own a rental and apply for the building permit at City Hall first.",9,Art.C_GOLD,550));return
+	if int(RealEstate.S()["stage"])<2 or not Compliance.permit_valid("building"):content.add_child(UIK.wrap("✗ Own a rental and apply for the building permit at City Hall first.",9,Art.C_SKY,550));return
 	content.add_child(UIK.label("Name the completed building",8))
 	var name_input := LineEdit.new()
 	name_input.name="ProjectName"

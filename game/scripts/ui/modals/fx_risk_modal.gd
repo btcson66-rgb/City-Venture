@@ -59,7 +59,7 @@ func build() -> void:
 		box.add_child(UIK.kv("Locked quote (home dollars/foreign unit)", Fmt.money(float(q["rate"])) + " / " + ccy))
 		box.add_child(UIK.kv("Fee / refundable collateral (home dollars)", Fmt.money(float(q["fee"])) + " / " + Fmt.money(float(q["collateral"]))))
 	else:
-		box.add_child(UIK.wrap("✗ " + I18n.t(str(q["error"])), 7, Art.C_GOLD, 454))
+		box.add_child(UIK.wrap("✗ " + I18n.t(str(q["error"])), 7, Art.C_SKY, 454))
 	var sign := UIK.button("Sign forward hedge", func():
 		var result := FXForward.open(ccy, notional, days)
 		if not result["ok"]:

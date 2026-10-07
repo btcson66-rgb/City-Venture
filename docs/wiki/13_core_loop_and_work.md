@@ -1,5 +1,15 @@
 # 13 遊戲主軸：創業流程、親手工作、時間
 
+## 輕鬆打工（Implemented，#150）
+
+預設輕鬆模式：客人一直等，完成固定杯數／件數就下班。遊戲內時間照班表推進，真實等待不扣分。
+咖啡做錯可以留在原單修正，最多減少一次小額小費。分揀的郵遞區號表一直可看；打字看正確率，拍照看構圖，
+不用搶快。做對有輕聲音效與小費文字動畫，做錯提示要檢查哪個步驟。
+
+開始卡片可選挑戰模式，設定的遊戲分頁可保存打工預設模式。挑戰計時只增加額外小費，超時仍可繼續，
+不降低基本薪資、評價或升遷進度。輕鬆模式保留正常咖啡小費。其他沒有受薪小費的玩法不憑空發錢；
+拍賣在輕鬆模式由玩家按「讓其他買家回應」推進競價，客人／競標者不會因玩家等待而自動結束。
+
 這一頁說明遊戲「玩什麼」。起點是 2026-09-29 的試玩回饋：
 
 - 新手教學不夠清楚，看不到箭頭。
@@ -308,6 +318,8 @@ Property, liability and interruption policies charge premiums before losses, wai
 ## Player feedback guidance (#109)
 Every barista ticket explicitly lists Single shot or Double shot, including flat white. Tutorial cards, objective text, navigation and City Guide share live opening windows. Closed destinations offer an explicit wait action; weekend closures name the actual next opening date. NPC-specific objectives use the person’s scheduled availability. Payment terms badges explain Net 0, Net 30 and Net 60, supplier cash timing, deposits/upfront, MOQ, lead time and AR/AP.
 
+Information icons use a small neutral circle/i and an unread dot, with at least a 24px input area. Hover, keyboard focus or a tap opens the same glossary; reading it stays saved. Gold is reserved for current action/recovery states, and accident notices use a thin side stripe. Reading information never changes money or unlocks.
+
 
 ## Lease exits (#110)
 Implemented: Phone → Leases, property agents/cowork desks and leased interior exits reach one termination screen. Review notice rent, early fee, damage, deposit return, moving, staff severance and unfinished-job settlement before confirming. Notice keeps access until its deadline; changed obligations retain the lease with an actionable pending exit. Move finished stock and its deliveries/orders together or liquidate unreserved stock. Factory materials have an explicit liquidation choice. Delivered invoices remain collectible. Fixed-premises production, media, energy, hotel bookings, brokerage mandates and new vehicle rentals/dealership sales stop without premises. Owned hotels and residential tenant invoices continue. Blocked: current home cannot end before #32 provides a replacement. Automotive fleet/installed equipment relocation and franchise termination remain separate existing asset/contract flows; this change pauses premises operations and does not erase owned assets.
@@ -320,3 +332,13 @@ Implemented: baskets reserve every SKU/quantity at one location. The packing tab
 Implemented：咖啡師同時處理三位客人，確認／推薦、製作、送至取餐台或指定桌號、清理完成才計分。髒桌可從另一張訂單清理；等待時間決定小費，實際店長評價與完成班數共同決定升職、薪資及每日兩班資格。收銀增加找零及退貨審核，共享空間接待增加會議室衝突，包裹分揀增加破損記錄／隔離，文書增加客訴處理；各環節會影響原有班次收入。
 Implemented：新接案依序訪談、報價及約定修改次數、每日跨案分配最多六小時、選擇加價或吸收追加範圍、交付及修改、驗收／折價結案。市場調查分類資料、財務模型計算、營運流程排序、品牌策略選卡各有不同操作；品質與訪談資訊影響驗收，評價影響後續案源與報價上限。只有驗收或協議折價後才開發票，依原有付款條件收款；沒有執行階段的虛構收入。舊存檔中的既有案件繼續使用原交付流程。
 Blocked：#95 尚未合併，暫沿用實際班次／接案工時與既有提早休息條件；待共用體力系統合併後串接，不建立另一套疲勞系統。範圍變更與修改為三回合資料題，不宣稱能編寫任意真實試算表或品牌文件。
+# First-time work practice (#149)
+
+Implemented: all 15 minigame classes share a guided practice copy in MiniGame, including four consulting task types.
+The first visit offers a short goal/controls/quality card and visible skip. Each step highlights one actual control;
+other task buttons are dimmed and locked. Practice pauses timing, ignores scoring, and never applies wages, ratings,
+sales or auction purchases. The ready button continues directly into the first formal shift. Header ? replays safely
+without resetting the work in progress. A newcomer is greeted by the manager at the coffee counter.
+
+Lessons live in data/help/minigame_tutorials.json; adding a minigame without lesson data fails the coverage test.
+Old saves add seen-state lazily. The work area scrolls to lower machine/packing controls; no step requires an external guide.

@@ -4,7 +4,7 @@ extends Modal
 ## terminal: apartment laptop, co-work hot desk, cafe table, or your office desk.
 
 const TABS := [["overview", "Overview", "company"], ["finance", "Finance", "finance"],
-	["operations", "Operations", "parcel"], ["inventory", "Inventory", "inventory"], ["people", "People", "people"],
+	["operations", "Stock and orders", "parcel"], ["inventory", "Inventory", "inventory"], ["people", "People", "people"],
 	["contracts", "Contracts", "contracts"], ["segments", "Segments", "finance"], ["group", "Group", "company"], ["market", "Market", "world"]]
 
 var terminal := "laptop"
@@ -73,6 +73,8 @@ func _tick_clock() -> void:
 
 
 func build() -> void:
+	FeatureGate.refresh()
+	if not FeatureGate.unlocked("os_"+tab):tab = "overview"
 	_primary_chosen = false
 	var where: String = {"home_laptop": "Laptop · Riverside Tower 7C", "cowork": "Hot desk · Nexus Co-work", "office": "Desk · Suite 2B",
 		"cafe": "Laptop · café table", "cafe_till": "Till · your café", "pier7": "Desk · Pier 7 yard office"}.get(terminal, terminal)
@@ -91,7 +93,7 @@ func build() -> void:
 		var previous:=UIK.button("‹",func():CompanyPortfolio.switch(str(companies[posmod(companies.find(GameState.company_id())-1,companies.size())]));tab="overview";rebuild())
 		previous.name="SwitchCompanyPrevious"
 		top.add_child(previous)
-	else:top.add_child(UIK.title(GameState.business_display_name(), 11, Art.C_GOLD))
+	else:top.add_child(UIK.title(GameState.business_display_name(), 11, Art.C_SKY))
 	top.add_child(UIK.label(where, 7, Art.C_DIM))
 	top.add_child(UIK.expand())
 	_clock_label = UIK.label(Clock.fmt_datetime(), 7, Art.C_MUTED, true)
@@ -113,12 +115,14 @@ func build() -> void:
 			shown.append([descriptor["id"], descriptor["label"], descriptor["icon"]])
 	# the café tab appears once you lease the corner unit, the logistics tab once you own a van; with all eleven the
 	# buttons get a little tighter so the column still fits the window
+	shown = shown.filter(func(t):return FeatureGate.unlocked("os_"+str(t[0])))
 	var compact := shown.size() > 10
 	for t in shown:
 		var b := UIK.button(t[1], _set_tab.bind(t[0]), "tab_active" if tab == t[0] else "tab")
 		b.icon = Art.icon(t[2])
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		b.name = "Tab_" + t[0]
+		if FeatureGate.is_new("os_"+str(t[0])):b.text = I18n.t(b.text) + " · " + I18n.t("New")
 		if compact:
 			var st := UIK.tex_box("ui/tab_active" if tab == t[0] else "ui/tab", 4, 2)
 			b.add_theme_stylebox_override("normal", st)
@@ -128,15 +132,32 @@ func build() -> void:
 			b.text = I18n.t(b.text) + " ●"
 		nav.add_child(b)
 	for descriptor in Industries.launchers():
+		if not FeatureGate.unlocked("os_"+str(descriptor["id"])):continue
 		var start := UIK.button(descriptor["start_label"], _set_tab.bind(descriptor["id"]))
 		# Preserve stable bot entry names while these are setup actions, not running-business tabs.
 		start.name = "Tab_" + str(descriptor["id"])
 		nav.add_child(start)
+	var candidates: Array = FeatureGate.definitions().filter(func(d):return str(d["id"]).begins_with("os_"))
+	var next := FeatureGate.preview(candidates.map(func(d):return d["id"]))
+	if next != "":
+		var item := FeatureGate.definition(next)
+		var preview := UIK.button("🔒 " + I18n.t(str(item["label"])))
+		preview.name = "FeaturePreview"
+		preview.disabled = true
+		nav.add_child(preview)
+		nav.add_child(UIK.wrap(I18n.t(str(item["hint"])), 7, Art.C_DIM, 95))
+	FeatureGate.viewed("os_"+tab)
 	nav.add_child(UIK.sep())
 	content = UIK.vbox(3)
 	var sc := UIK.scroll(content, Vector2(500, 160))
 	sc.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(sc)
+	var guide := UIK.button(I18n.t("First-use guide"), func():FeatureIntroModal.show_in(self, "os_"+tab))
+	guide.name = "FeatureGuideReplay"
+	content.add_child(guide)
+	var chores: Array = {"operations":["restock","packing","returns"],"finance":["tax","fx","bills"],"people":["roster"],"contracts":["restock","packing"],"cafe":["cafe_supplies","hygiene","roster"],"logistics":["maintenance","roster"],"manufacturing":["maintenance","restock","packing"],"hotel":["maintenance"],"automotive":["maintenance"],"energy":["maintenance"],"international_trade":["customs"],"governance":["tax","renewals"]}.get(tab,[])
+	for chore in chores:AssistantPolicy.toggle(content,str(chore))
+	if tab == "finance":AssistantPolicy.bills_ui(content)
 	if not Industries.render_tab(tab, self):
 		call("_tab_" + tab)
 	if not IndustryGuidance.guide(tab).is_empty():
@@ -144,11 +165,12 @@ func build() -> void:
 
 
 func _set_tab(t: String) -> void:
+	if not FeatureGate.unlocked("os_"+t):return
 	tab = t
 	reset_scroll = true   # a new tab starts at the top
 	help_key = "os_" + t   # the ? button explains the tab you're on
 	rebuild()
-	Help.show_once.call_deferred(help_key)
+	FeatureGate.guide.call_deferred("os_"+t)
 
 
 func _open_offers() -> int:
@@ -242,20 +264,21 @@ func _tab_overview() -> void:
 	var be := GameState.business_entity()
 	var cur := MonthClose.current(be)
 	var g := GridContainer.new()
-	g.columns = 4
+	g.columns = 3 if not FeatureGate.unlocked("finance_details") else 4
 	g.add_theme_constant_override("h_separation", 4)
 	g.add_theme_constant_override("v_separation", 4)
 	content.add_child(g)
 	_kpi(g, "MONTHLY REVENUE", Fmt.money0(cur["net_revenue"]), Art.C_WHITE, "month to date")
 	_kpi(g, "MONTHLY PROFIT", Fmt.money0(cur["business_profit"]), UIK.money_color(cur["business_profit"]), "business only", "cash_vs_profit")
 	_kpi(g, "CASH", Fmt.money0(Ledger.cash(be)), UIK.money_color(Ledger.cash(be)), "in the bank", "cash_vs_profit")
-	var ar := Ledger.balance(be, "marketplace_balance") + Ledger.balance(be, "accounts_receivable")
-	_kpi(g, "RECEIVABLE", Fmt.money0(ar), Art.C_GOLD, "ShopLane + invoices", "accounts_receivable")
-	_kpi(g, "PAYABLE", Fmt.money0(-Ledger.balance(be, "accounts_payable")), Art.C_GOLD, "to suppliers")
-	var staff := Staff.count()
-	_kpi(g, "PEOPLE", I18n.t("%d people") % (1 + staff), Art.C_WHITE, (I18n.t("you + %d staff") % staff) if staff > 0 else I18n.t("just you"))
-	_kpi(g, "COMPANY VALUE", Fmt.money0(Company.company_value()), Art.C_SKY, "book value")
-	_kpi(g, "ORDERS DELIVERED", I18n.t("%d orders") % int(GameState.stat("orders_delivered")), Art.C_WHITE, "all time")
+	if FeatureGate.unlocked("finance_details"):
+		var ar := Ledger.balance(be, "marketplace_balance") + Ledger.balance(be, "accounts_receivable")
+		_kpi(g, "RECEIVABLE", Fmt.money0(ar), Art.C_SKY, "ShopLane + invoices", "accounts_receivable")
+		_kpi(g, "PAYABLE", Fmt.money0(-Ledger.balance(be, "accounts_payable")), Art.C_SKY, "to suppliers")
+		var staff := Staff.count()
+		_kpi(g, "PEOPLE", I18n.t("%d people") % (1 + staff), Art.C_WHITE, (I18n.t("you + %d staff") % staff) if staff > 0 else I18n.t("just you"))
+		_kpi(g, "COMPANY VALUE", Fmt.money0(Company.company_value()), Art.C_SKY, "book value")
+		_kpi(g, "ORDERS DELIVERED", I18n.t("%d orders") % int(GameState.stat("orders_delivered")), Art.C_WHITE, "all time")
 	_section("Needs attention")
 	var alerts: Array = []
 	var to_pack := Ecommerce.orders_with(["placed"]).size()
@@ -275,11 +298,13 @@ func _tab_overview() -> void:
 		alerts.append(["warning", I18n.t("Decision pending: %s") % I18n.t(DataDB.events[EventEngine.next_pending()["id"]]["presentation"].get("title", ""))])
 	var dom := int(Clock.date()["day"])
 	if dom < 14 and dom >= 9:
-		alerts.append(["home", I18n.t("Home rent %s due on the 14th.") % Fmt.money0(1250)])
+		alerts.append(["home", I18n.t("Home rent %s due on the 14th.") % Fmt.money0(Living.home_rent())])
 	if GameState.data["ecommerce"]["listings"].is_empty():
 		alerts.append(["objective", "No listings yet. Buy stock (Operations), then list it (Sales)."])
 	if alerts.is_empty():
 		alerts.append(["check", "All quiet. Go outside."])
+	# F6: early chapters show the three most useful reminders; the rest wait behind the "?" help.
+	if FeatureGate.chapter() <= 3 and alerts.size() > 3:alerts = alerts.slice(0, 3)
 	for a2 in alerts:
 		var h := UIK.hbox(4)
 		h.add_child(UIK.icon(a2[0], 12))
@@ -300,7 +325,13 @@ func _tab_overview() -> void:
 
 # ============================================================== FINANCE
 func _tab_finance() -> void:
-	GlobalMarketUI.finance(self, content)
+	if not FeatureGate.unlocked("finance_details"):
+		var current := MonthClose.current(GameState.business_entity())
+		content.add_child(UIK.kv("Cash in bank", Fmt.money0(Ledger.cash(GameState.business_entity()))))
+		content.add_child(UIK.kv("Revenue", Fmt.money0(current["revenue"])))
+		content.add_child(UIK.kv("Business profit", Fmt.money0(current["business_profit"])))
+		return
+	if FeatureGate.unlocked("overseas"):GlobalMarketUI.finance(self, content)
 
 
 	_concepts(["gross_margin", "opex", "credit_history"])
@@ -331,9 +362,9 @@ func _tab_finance() -> void:
 	cols.add_child(cp)
 	cp.add_child(UIK.label("CASH POSITION", 7, Art.C_DIM, true))
 	cp.add_child(UIK.kv("Cash in bank", Fmt.money0(Ledger.cash(be)), UIK.money_color(Ledger.cash(be)), 9, true))
-	cp.add_child(UIK.kv("ShopLane balance (paid Mondays)", Fmt.money0(Ledger.balance(be, "marketplace_balance")), Art.C_GOLD))
+	cp.add_child(UIK.kv("ShopLane balance (paid Mondays)", Fmt.money0(Ledger.balance(be, "marketplace_balance")), Art.C_SKY))
 	cp.add_child(UIK.kv("  of which on hold (<2 days)", Fmt.money0(Ecommerce.held_amount(be)), Art.C_DIM, 7))
-	cp.add_child(UIK.kv("Invoices receivable", Fmt.money0(Ledger.balance(be, "accounts_receivable")), Art.C_GOLD))
+	cp.add_child(UIK.kv("Invoices receivable", Fmt.money0(Ledger.balance(be, "accounts_receivable")), Art.C_SKY))
 	cp.add_child(UIK.kv("Supplier bills payable", Fmt.money0(-Ledger.balance(be, "accounts_payable")), Art.C_GOLD))
 	cp.add_child(UIK.kv("Stock (at cost)", Fmt.money0(Ledger.balance(be, "inventory")), Art.C_SKY))
 	cp.add_child(UIK.kv("Stock on the way", Fmt.money0(Ledger.balance(be, "inventory_in_transit")), Art.C_SKY))
@@ -412,25 +443,24 @@ func _forecast(be: String) -> void:
 # ============================================================== SALES
 func _tab_sales() -> void:
 	_concepts(["marketplace_fee", "payout_schedule", "ads_cpc", "price_elasticity", "product_photo"])
-	var pages := UIK.hbox(4)
-	content.add_child(pages)
-	for entry in [["domestic", "Domestic"], ["overseas", "Overseas"]]:
-		var b := UIK.button(entry[1], func(): sales_page = entry[0]; rebuild(), "tab_active" if sales_page == entry[0] else "tab")
-		b.name = "SalesPage_" + entry[0]
-		pages.add_child(b)
-	if sales_page == "overseas":
-		GlobalMarketUI.sales(self, content)
-		return
-	_concepts(["marketplace_fee", "payout_schedule", "ads_cpc", "price_elasticity", "product_photo"])
-
-
+	if FeatureGate.unlocked("overseas"):
+		var pages := UIK.hbox(4)
+		content.add_child(pages)
+		for entry in [["domestic", "Domestic"], ["overseas", "Overseas"]]:
+			var b := UIK.button(entry[1], func(): sales_page = entry[0]; rebuild(), "tab_active" if sales_page == entry[0] else "tab")
+			b.name = "SalesPage_" + entry[0]
+			pages.add_child(b)
+		if sales_page == "overseas":
+			GlobalMarketUI.sales(self, content)
+			return
+	else:sales_page = "domestic"
 	if Ecommerce.is_personal():
 		var capbar := ProgressBar.new()
 		capbar.max_value = Ecommerce.seller_cap()
 		capbar.value = minf(Ecommerce.month_gmv(), Ecommerce.seller_cap())
 		capbar.show_percentage = false
 		capbar.custom_minimum_size = Vector2(480, 6)
-		content.add_child(UIK.kv("ShopLane personal seller cap", "%s / %s" % [Fmt.money0(Ecommerce.month_gmv()), Fmt.money0(Ecommerce.seller_cap())], Art.C_GOLD, 7))
+		content.add_child(UIK.kv("ShopLane personal seller cap", "%s / %s" % [Fmt.money0(Ecommerce.month_gmv()), Fmt.money0(Ecommerce.seller_cap())], Art.C_SKY, 7))
 		content.add_child(capbar)
 	_section("Listings on ShopLane (10% fee · weekly payout)")
 	var listings: Array = GameState.data["ecommerce"]["listings"].values()
@@ -456,7 +486,7 @@ func _tab_sales() -> void:
 		h1.add_child(UIK.label(p["name"], 9, Art.C_WHITE, true))
 		h1.add_child(UIK.chip("LIVE" if l["active"] else ("PAUSED · CAP" if l.get("paused_reason", "") == "seller_cap" else "PAUSED"), Art.C_GREEN if l["active"] else Art.C_GOLD))
 		h1.add_child(UIK.expand())
-		h1.add_child(UIK.label(I18n.t("%s (%d reviews)") % [Fmt.stars(Ecommerce.rating(l)), int(l["rating_n"])], 8, Art.C_GOLD))
+		h1.add_child(UIK.label(I18n.t("%s (%d reviews)") % [Fmt.stars(Ecommerce.rating(l)), int(l["rating_n"])], 8, Art.C_SKY))
 		v.add_child(h1)
 		var research: Dictionary = ShopLife.S()["research"].get(str(l["product"]), {})
 		if not research.is_empty():
@@ -481,8 +511,13 @@ func _tab_sales() -> void:
 		h2.add_child(UIK.button("Pause" if l["active"] else "Resume", func(): Ecommerce.set_active(l["id"], not l["active"]); rebuild()))
 		v.add_child(h2)
 		var margin := float(l["price"]) * 0.9 - Ecommerce.avg_cost(Ecommerce.best_location(l["product"]) if Ecommerce.best_location(l["product"]) != "" else Living.home(), l["product"]) - Ecommerce.ship_cost({"product": l["product"]}, "economy")
-		v.add_child(UIK.label(I18n.t("Market ~%s · expect ~%.1f orders/day · %d views · %d orders · in stock %d · unit margin after fee+shipping ≈ %s") % [
-			Fmt.money(float(p["ref_price"])), Ecommerce.lambda_day(l), int(l["views"]), int(l["orders"]), Ecommerce.available_anywhere(l["product"]), Fmt.money(margin)], 7, Art.C_MUTED))
+		# F6: three numbers on the card; the full breakdown sits behind the hover and the "?" help.
+		var stats := UIK.label(I18n.t("In stock %d · ~%.1f orders/day · margin ≈ %s") % [Ecommerce.available_anywhere(l["product"]), Ecommerce.lambda_day(l), Fmt.money(margin)], 7, Art.C_MUTED)
+		stats.name = "ListingStats_" + str(l["product"])
+		stats.mouse_filter = Control.MOUSE_FILTER_PASS
+		stats.tooltip_text = I18n.t("Market ~%s · expect ~%.1f orders/day · %d views · %d orders · in stock %d · unit margin after fee+shipping ≈ %s") % [
+			Fmt.money(float(p["ref_price"])), Ecommerce.lambda_day(l), int(l["views"]), int(l["orders"]), Ecommerce.available_anywhere(l["product"]), Fmt.money(margin)]
+		v.add_child(stats)
 		content.add_child(card)
 	# new listings
 	var unlisted: Array = []
@@ -527,14 +562,14 @@ func _tab_sales() -> void:
 		row.add_child(UIK.label(Fmt.money(Packing.total(o)), 7, Art.C_WHITE))
 		row.add_child(UIK.chip(status_text(str(o["status"])), _status_col(o["status"])))
 		if o.has("review"):
-			row.add_child(UIK.label("★".repeat(int(o["review"]["stars"])), 7, Art.C_GOLD))
+			row.add_child(UIK.label("★".repeat(int(o["review"]["stars"])), 7, Art.C_SKY))
 		content.add_child(row)
 
 
 func _status_col(s: String) -> Color:
 	match s:
 		"placed":
-			return Art.C_GOLD
+			return Art.C_SKY
 		"delivered", "replaced":
 			return Art.C_GREEN
 		"refunded", "refused", "disputed", "return_requested":
@@ -566,7 +601,8 @@ func _do_list(pid: String, photo: String, photo_q: float) -> void:
 
 # ============================================================== OPERATIONS
 func _tab_operations() -> void:
-	_concepts(["moq", "lead_time", "supplier_terms", "net_terms", "accounts_payable", "packaging_levy", "shipping_index", "settlement_wire", "letter_of_credit", "digital_dollars"])
+	_concepts(["moq", "lead_time"])
+	if FeatureGate.unlocked("international_documents"):_concepts(["supplier_terms", "packaging_levy", "shipping_index", "settlement_wire", "letter_of_credit", "digital_dollars"])
 	_section("Fulfilment pipeline")
 	var g := GridContainer.new()
 	g.columns = 5
@@ -611,6 +647,7 @@ func _tab_operations() -> void:
 		if not World.supplier_available(sid):
 			continue
 		var s := DataDB.supplier(sid)
+		if s.get("region", "aurelia") != "aurelia" and not FeatureGate.unlocked("international_documents"):continue
 		var card := UIK.panel("ui/card", 4)
 		var v2 := UIK.vbox(1)
 		card.add_child(v2)
@@ -682,7 +719,7 @@ func _tab_operations() -> void:
 			row2.add_child(UIK.chip(I18n.t("IN ESCROW · ARRIVES ") + Clock.fmt_short(int(po["eta"])).to_upper(), Art.C_SKY))
 			row2.add_child(UIK.tip("escrow"))
 		else:
-			row2.add_child(UIK.chip(I18n.t("ARRIVES ") + Clock.fmt_short(int(po["eta"])).to_upper() if po["status"] == "in_transit" else ("CANCELLED" if po["status"] == "cancelled" else "DELIVERED"), Art.C_GOLD if po["status"] == "in_transit" else (Art.C_MUTED if po["status"] == "cancelled" else Art.C_GREEN)))
+			row2.add_child(UIK.chip(I18n.t("ARRIVES ") + Clock.fmt_short(int(po["eta"])).to_upper() if po["status"] == "in_transit" else ("CANCELLED" if po["status"] == "cancelled" else "DELIVERED"), Art.C_SKY if po["status"] == "in_transit" else (Art.C_MUTED if po["status"] == "cancelled" else Art.C_GREEN)))
 		content.add_child(row2)
 		var cancelling: bool = po["status"] in ["in_transit", "awaiting_payment"]
 		if cancelling or po["status"] == "delivered":
@@ -699,7 +736,7 @@ func _tab_operations() -> void:
 		for r in po.get("returns", []):
 			var sold: bool = r["status"] == "sold_to_collector" or (r["status"] == "in_transit" and GameState.data["entities"].get(r["entity"], {}).has("closed"))
 			var refund_status := I18n.t("Refund sold in liquidation") if sold else (I18n.t("Refund received") if r["status"] == "refunded" else I18n.t("Refund due %s") % Clock.fmt_short(int(r["due"])))
-			content.add_child(UIK.label(I18n.t("Returned %d units · %s · %s") % [int(r["qty"]), Fmt.money0(float(r["refund"])), refund_status], 7, Art.C_GREEN if r["status"] == "refunded" else Art.C_GOLD))
+			content.add_child(UIK.label(I18n.t("Returned %d units · %s · %s") % [int(r["qty"]), Fmt.money0(float(r["refund"])), refund_status], 7, Art.C_GREEN if r["status"] == "refunded" else Art.C_SKY))
 	if older > 0:
 		content.add_child(UIK.label(I18n.t("%d older purchase orders are done: nothing left to cancel or return.") % older, 7, Art.C_DIM))
 
@@ -744,6 +781,8 @@ func _buy(sid: String, pid: String, key: String, terms: bool) -> void:
 # ============================================================== INVENTORY
 func _tab_inventory() -> void:
 	_concepts(["avg_cost", "defect_rate"])
+	# F6: the first chapters show three numbers per product (on hand, average cost, value); the rest wait for later chapters.
+	var slim := FeatureGate.chapter() <= 3
 	for loc in Ecommerce.stock_locations():
 		_section(Ecommerce.location_name(loc))
 		var cap := Ecommerce.location_capacity(loc)
@@ -756,7 +795,7 @@ func _tab_inventory() -> void:
 		content.add_child(UIK.kv("Space", I18n.t("%d / %d units") % [used, cap], Art.C_MUTED, 7))
 		content.add_child(bar)
 		var hdr := UIK.hbox(4)
-		for c in [["Product", 150], ["On hand", 60], ["Reserved", 60], ["Avg cost", 70], ["Value", 70], ["Incoming", 60]]:
+		for c in [["Product", 150], ["On hand", 60], ["Reserved", 60], ["Avg cost", 70], ["Value", 70], ["Incoming", 60]].filter(func(c):return not slim or c[0] not in ["Reserved", "Incoming"]):
 			var l := UIK.label(c[0], 7, Art.C_DIM, true)
 			l.custom_minimum_size = Vector2(c[1], 0)
 			hdr.add_child(l)
@@ -770,15 +809,17 @@ func _tab_inventory() -> void:
 			if q == 0 and inc == 0:
 				continue
 			var row := UIK.hbox(4)
-			for c2 in [[I18n.t(DataDB.product(pid)["name"]), 150], [I18n.t("%d units") % q, 60], [I18n.t("%d units") % Ecommerce.reserved(loc, pid), 60], [Fmt.money0(Ecommerce.avg_cost(loc, pid)), 70],
-					[Fmt.money0(q * Ecommerce.avg_cost(loc, pid)), 70], [I18n.t("%d units") % inc, 60]]:
+			var cells := [[I18n.t(DataDB.product(pid)["name"]), 150], [I18n.t("%d units") % q, 60], [I18n.t("%d units") % Ecommerce.reserved(loc, pid), 60], [Fmt.money0(Ecommerce.avg_cost(loc, pid)), 70],
+					[Fmt.money0(q * Ecommerce.avg_cost(loc, pid)), 70], [I18n.t("%d units") % inc, 60]]
+			if slim:cells = [cells[0], cells[1], cells[3], cells[4]]
+			for c2 in cells:
 				var l2 := UIK.label(c2[0], 8, Art.C_WHITE)
 				l2.custom_minimum_size = Vector2(c2[1], 0)
 				row.add_child(l2)
 			content.add_child(row)
 	content.add_child(UIK.sep())
 	content.add_child(UIK.kv("Total stock value (books)", Fmt.money0(Ledger.balance(GameState.business_entity(), "inventory")), Art.C_SKY, 8, true))
-	content.add_child(UIK.wrap("Inventory is cash you can't spend. The ledger values it at average cost; a liquidator pays about 40% of that.", 7, Art.C_DIM, 480))
+	if not slim:content.add_child(UIK.wrap("Inventory is cash you can't spend. The ledger values it at average cost; a liquidator pays about 40% of that.", 7, Art.C_DIM, 480))
 
 
 # ============================================================== PEOPLE
@@ -836,7 +877,7 @@ func _tab_people() -> void:
 			I18n.t(_trait_text(str(e.get("trait", "")))) if started else I18n.t("starts tomorrow 9:00")], 7, Art.C_MUTED))
 		var mo := int(e["morale"])
 		ev.add_child(UIK.label(I18n.t("Morale %d points") % mo + "  " + "■".repeat(int(mo / 10.0)) + "□".repeat(10 - int(mo / 10.0)), 7,
-			Art.C_GREEN if mo >= 60 else (Art.C_GOLD if mo >= 35 else Art.C_RED), true))
+			Art.C_GREEN if mo >= 60 else (Art.C_SKY if mo >= 35 else Art.C_RED), true))
 		var eid: String = e["id"]
 		var rb := UIK.button(I18n.t("Raise +8%"), func(): Staff.give_raise(eid); rebuild())
 		rb.name = "Raise_" + eid
@@ -848,7 +889,8 @@ func _tab_people() -> void:
 			rebuild())
 		lb.name = "LetGo_" + eid
 		rh.add_child(lb)
-	# hiring
+	# Recruitment is shown when relevant, not as a first-day warning.
+	if not FeatureGate.unlocked("recruitment"):return
 	_section("Hiring")
 	var why := Staff.hire_block()
 	var st := Staff.S()
@@ -991,28 +1033,29 @@ func _tab_contracts() -> void:
 		ab.add_child(acc)
 		ab.add_child(UIK.button("Decline", func(): Contracts.reject(k["id"]); rebuild(), "danger"))
 		right.add_child(ab)
-		right.add_child(UIK.label("COUNTER-OFFER", 7, Art.C_DIM, true))
-		var c1 := UIK.hbox(3)
-		c1.add_child(UIK.button("−", func(): counter_price = maxf(1.0, counter_price - 0.5); rebuild()))
-		c1.add_child(UIK.label(I18n.t("%s per unit") % Fmt.money(counter_price), 8, Art.C_WHITE, true))
-		c1.add_child(UIK.button("+", func(): counter_price += 0.5; rebuild()))
-		right.add_child(c1)
-		var c2 := UIK.hbox(3)
-		for t in [15, 30, 45]:
-			c2.add_child(UIK.button(I18n.t("Net %d days") % t, func(): counter_terms = t; rebuild(), "tab_active" if counter_terms == t else "tab"))
-		right.add_child(c2)
-		var c3 := UIK.hbox(3)
-		for u in [0.0, 0.3, 0.5]:
-			c3.add_child(UIK.button(I18n.t("%d%% upfront") % int(u * 100), func(): counter_up = u; rebuild(), "tab_active" if is_equal_approx(counter_up, u) else "tab"))
-		right.add_child(c3)
-		right.add_child(UIK.button("Send counter-offer", func():
-			var r := Contracts.counter(k["id"], counter_price, counter_terms, counter_up)
-			if r.get("result", "") == "agreed":
-				UIRoot.toast("They agreed to your terms. Accept to sign.", "good", "contracts")
-			elif r.get("result", "") == "withdrawn":
-				UIRoot.toast("They walked away.", "bad", "contracts")
-			counter_price = 0.0
-			rebuild()))
+		if FeatureGate.unlocked("negotiation"):
+			right.add_child(UIK.label("COUNTER-OFFER", 7, Art.C_DIM, true))
+			var c1 := UIK.hbox(3)
+			c1.add_child(UIK.button("−", func(): counter_price = maxf(1.0, counter_price - 0.5); rebuild()))
+			c1.add_child(UIK.label(I18n.t("%s per unit") % Fmt.money(counter_price), 8, Art.C_WHITE, true))
+			c1.add_child(UIK.button("+", func(): counter_price += 0.5; rebuild()))
+			right.add_child(c1)
+			var c2 := UIK.hbox(3)
+			for t in [15, 30, 45]:
+				c2.add_child(UIK.button(I18n.t("Net %d days") % t, func(): counter_terms = t; rebuild(), "tab_active" if counter_terms == t else "tab"))
+			right.add_child(c2)
+			var c3 := UIK.hbox(3)
+			for u in [0.0, 0.3, 0.5]:
+				c3.add_child(UIK.button(I18n.t("%d%% upfront") % int(u * 100), func(): counter_up = u; rebuild(), "tab_active" if is_equal_approx(counter_up, u) else "tab"))
+			right.add_child(c3)
+			right.add_child(UIK.button("Send counter-offer", func():
+				var r := Contracts.counter(k["id"], counter_price, counter_terms, counter_up)
+				if r.get("result", "") == "agreed":
+					UIRoot.toast("They agreed to your terms. Accept to sign.", "good", "contracts")
+				elif r.get("result", "") == "withdrawn":
+					UIRoot.toast("They walked away.", "bad", "contracts")
+				counter_price = 0.0
+				rebuild()))
 	elif k["status"] == "active":
 		var have := Contracts.stock_for(k)
 		right.add_child(UIK.label(I18n.t("In stock (all locations): %d / %d units needed") % [have, int(k["qty"])], 8, Art.C_GREEN if have >= int(k["qty"]) else Art.C_RED, true))
@@ -1058,7 +1101,7 @@ func _tab_contracts() -> void:
 	elif k["status"] == "shipped" and k.get("type", "") == "lumina_distributor":
 		right.add_child(UIK.wrap(I18n.t("✓ Goods in transit. Arrival: %s. Revenue is not booked yet.") % Clock.fmt_datetime(int(k["eta"])), 7, Art.C_SKY, 220))
 	elif k["status"] == "delivered":
-		right.add_child(UIK.label(I18n.t("Invoice %s · due %s") % [Fmt.money0(k["receivable"]), Clock.fmt_short(int(k["pay_due"]))], 8, Art.C_GOLD, true))
+		right.add_child(UIK.label(I18n.t("Invoice %s · due %s") % [Fmt.money0(k["receivable"]), Clock.fmt_short(int(k["pay_due"]))], 8, Art.C_SKY, true))
 		right.add_child(UIK.wrap("Revenue is booked. The cash isn't here yet.", 7, Art.C_SKY, 220))
 		if int(k["payment_terms_days"]) >= 30 and k.get("type", "") != "lumina_distributor":
 			var ep := UIK.button(I18n.t("Ask for early payment (−3%%: %s now)") % Fmt.money0(float(k["receivable"]) * 0.97), func():
@@ -1101,7 +1144,7 @@ func _tab_freelance() -> void:
 	content.add_child(head)
 	var full := roundi(Careers.rep())
 	var stars := "★".repeat(full) + "☆".repeat(5 - full)
-	head.add_child(UIK.label(stars, 10, Art.C_GOLD, true))
+	head.add_child(UIK.label(stars, 10, Art.C_SKY, true))
 	head.add_child(UIK.label(I18n.t("Reputation %.1f · rate about %s/h · %d delivered · %d late") % [Careers.rep(), Fmt.money(Careers.hourly_rate()), int(f["done"]), int(f["late"])], 7, Art.C_MUTED, true))
 	_section("In progress")
 	var act := Careers.active_gigs()
@@ -1161,7 +1204,7 @@ func _tab_freelance() -> void:
 			owed += float(g2["invoiced"])
 	if owed > 0.0:
 		content.add_child(UIK.sep())
-		content.add_child(UIK.kv("Invoiced, not yet paid", Fmt.money0(owed), Art.C_GOLD))
+		content.add_child(UIK.kv("Invoiced, not yet paid", Fmt.money0(owed), Art.C_SKY))
 
 
 ## You write the code yourself: a typing session (TypingGame) decides how much of the 2 hours got done.
@@ -1276,7 +1319,7 @@ func _tab_saas() -> void:
 	top.add_child(g)
 	_kpi(g, I18n.t("SUBSCRIBERS"), I18n.t("%d people") % int(s["subs"]), Art.C_WHITE, I18n.t("+%d / −%d last 7 days") % [Saas.last_days(7, "new"), Saas.last_days(7, "lost")])
 	_kpi(g, "MRR", Fmt.money0(Saas.mrr()), Art.C_GREEN, I18n.t("%s/month each") % Fmt.money0(float(s["price"])), "mrr")
-	_kpi(g, I18n.t("CHURN"), Fmt.pct(Saas.monthly_churn(), 1), Art.C_GOLD, I18n.t("per month"), "churn")
+	_kpi(g, I18n.t("CHURN"), Fmt.pct(Saas.monthly_churn(), 1), Art.C_SKY, I18n.t("per month"), "churn")
 	var srv := float(Saas.cfg().get("server_base_month", 40)) + float(Saas.cfg().get("server_per_user_month", 0.35)) * int(s["subs"])
 	_kpi(g, I18n.t("SERVERS"), Fmt.money0(srv), Art.C_RED, I18n.t("per month"), "server_costs")
 	content.add_child(UIK.label(I18n.t("Expected signups: %.1f/day · features shipped: %d · next feature %d / %d h") % [Saas.signup_rate(), int(s["features"]),
@@ -1311,7 +1354,7 @@ func _tab_cafe() -> void:
 	var s := Cafe.S()
 	var head := UIK.hbox(6)
 	content.add_child(head)
-	head.add_child(UIK.title(Cafe.display_name(), 11, Art.C_GOLD))
+	head.add_child(UIK.title(Cafe.display_name(), 11, Art.C_SKY))
 	head.add_child(UIK.label(I18n.t(DataDB.properties[Cafe.property_id()]["name"])+" · "+I18n.t("open Mon–Sat 7:00–17:00"), 7, Art.C_DIM))
 	var why := Cafe.open_block()
 	if why != "":
@@ -1349,7 +1392,7 @@ func _tab_cafe() -> void:
 		var td: Dictionary = s["today"] if int(s["today"].get("d", -1)) == Clock.day_index() else {}
 		_kpi(g, I18n.t("CUSTOMERS TODAY"), str(int(td.get("served", 0))), Art.C_WHITE, I18n.t("%d last 7 days") % int(Cafe.last_days(7, "served")))
 		_kpi(g, I18n.t("TILL TODAY"), Fmt.money0(float(td.get("rev", 0.0))), Art.C_GREEN, I18n.t("%s last 7 days") % Fmt.money0(Cafe.last_days(7, "rev")))
-		_kpi(g, I18n.t("RATING"), "★ %.1f" % float(s["rating"]), Art.C_GOLD, I18n.t("out of 5"))
+		_kpi(g, I18n.t("RATING"), "★ %.1f" % float(s["rating"]), Art.C_SKY, I18n.t("out of 5"))
 		_kpi(g, I18n.t("SUPPLIES"), I18n.t("%d cups") % int(s["supplies"]), Art.C_WHITE if int(s["supplies"]) > 60 else Art.C_RED,
 			I18n.t("+%d arriving") % int(s["incoming"]) if int(s["incoming"]) > 0 else "")
 		var nb := Cafe.baristas_at(Clock.now()).size()
@@ -1429,7 +1472,7 @@ func _tab_cafe() -> void:
 			grid.add_child(UIK.label(Fmt.money0(float(d["rev"])), 7, Art.C_GREEN))
 			grid.add_child(UIK.label(str(int(d["queue_lost"])), 7, Art.C_RED if int(d["queue_lost"]) > 0 else Art.C_DIM))
 			grid.add_child(UIK.label(str(int(d["stock_lost"])), 7, Art.C_RED if int(d["stock_lost"]) > 0 else Art.C_DIM))
-			grid.add_child(UIK.label(str(int(d["waste"])), 7, Art.C_GOLD if int(d["waste"]) > 0 else Art.C_DIM))
+			grid.add_child(UIK.label(str(int(d["waste"])), 7, Art.C_SKY if int(d["waste"]) > 0 else Art.C_DIM))
 	_section("Name over the door")
 	var nr := UIK.hbox(4)
 	content.add_child(nr)
@@ -1456,7 +1499,7 @@ func _cafe_step(text: String, done: bool, note: String) -> HBoxContainer:
 	r.add_child(v)
 	v.add_child(UIK.label(I18n.t(text), 8, Art.C_WHITE if not done else Art.C_MUTED, true))
 	if note != "":
-		v.add_child(UIK.label(note, 7, Art.C_GOLD))
+		v.add_child(UIK.label(note, 7, Art.C_SKY))
 	return r
 
 
@@ -1467,7 +1510,7 @@ func _tab_logistics() -> void:
 	var s := Logistics.S()
 	var head := UIK.hbox(6)
 	content.add_child(head)
-	head.add_child(UIK.title("Logistics", 11, Art.C_GOLD))
+	head.add_child(UIK.title("Logistics", 11, Art.C_SKY))
 	head.add_child(UIK.label(I18n.t("Van kept at Pier 7 · insurance %s a month · %.0f km driven") % [Fmt.money(float(Logistics.van_cfg().get("insurance_month", 165))),
 		float(s["van"].get("km", 0.0))], 7, Art.C_DIM))
 	if Logistics.has_van():
@@ -1558,7 +1601,7 @@ func _tab_logistics() -> void:
 			var ok := str(r["status"]) == "done"
 			var failed := str(r["status"]) == "failed"
 			grid.add_child(UIK.label("%s · %s" % [r["id"], I18n.t(str(r["client"]))], 7, Art.C_MUTED))
-			grid.add_child(UIK.label(I18n.t("Cancelled") if failed else (I18n.t("On time") if ok else I18n.t("Late")), 7, Art.C_RED if failed else (Art.C_GREEN if ok else Art.C_GOLD), true))
+			grid.add_child(UIK.label(I18n.t("Cancelled") if failed else (I18n.t("On time") if ok else I18n.t("Late")), 7, Art.C_RED if failed else (Art.C_GREEN if ok else Art.C_SKY), true))
 			grid.add_child(UIK.label(Fmt.money(float(r["pay"])), 7, Art.C_GREEN if not failed else Art.C_DIM))
 			grid.add_child(UIK.label("%.1f km" % float(r["km"]) if not failed else "—", 7, Art.C_WHITE))
 			grid.add_child(UIK.label("%d%%" % int(round(float(r["score"]) * 100.0)) if not failed else "—", 7, Art.C_WHITE))

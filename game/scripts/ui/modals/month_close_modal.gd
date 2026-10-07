@@ -26,7 +26,7 @@ func build() -> void:
 		var v := UIK.vbox(1)
 		v.custom_minimum_size = Vector2(240, 0)
 		cols.add_child(v)
-		v.add_child(UIK.label(I18n.t(str(e["name"])).to_upper(), 8, Art.C_GOLD, true))
+		v.add_child(UIK.label(I18n.t(str(e["name"])).to_upper(), 8, Art.C_SKY, true))
 		v.add_child(UIK.kv_tip("Revenue", Fmt.money(e["revenue"]), "revenue"))
 		v.add_child(UIK.kv("Refunds", Fmt.money(-e["refunds"]), Art.C_RED))
 		v.add_child(UIK.kv_tip("COGS", Fmt.money(-e["cogs"]), "cogs", Art.C_RED))
@@ -51,8 +51,8 @@ func build() -> void:
 		if absf(float(e.get("owner_moves", 0.0))) > 0.01:
 			v.add_child(UIK.kv("Owner money in / out", Fmt.money0(e["owner_moves"], true), Art.C_SKY))
 		v.add_child(UIK.kv_tip("Cash — end of month", Fmt.money0(e["cash_close"]), "cash_vs_profit", UIK.money_color(e["cash_close"]), 9, true))
-		v.add_child(UIK.kv_tip("Owed to you (ShopLane + invoices)", Fmt.money0(e["ar"]), "accounts_receivable", Art.C_GOLD))
-		v.add_child(UIK.kv("You owe (suppliers)", Fmt.money0(e["ap"]), Art.C_GOLD))
+		v.add_child(UIK.kv_tip("Owed to you (ShopLane + invoices)", Fmt.money0(e["ar"]), "accounts_receivable", Art.C_SKY))
+		v.add_child(UIK.kv("You owe (suppliers)", Fmt.money0(e["ap"]), Art.C_SKY))
 		v.add_child(UIK.kv("Stock at cost", Fmt.money0(e["inventory"]), Art.C_SKY))
 	var main: Dictionary = rep["entities"].values()[-1]
 	# compare profit with the cash the business itself generated (owner money in/out is not profit)

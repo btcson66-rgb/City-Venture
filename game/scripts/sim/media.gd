@@ -10,7 +10,7 @@ static func entity() -> String:return str(S()["entity"])
 static func segment_tag() -> String:return "media"
 static func source(id := "",internal := false) -> Dictionary:return {"type":"campaign","id":id,"segment":"media","internal":internal}
 static func error(text: String) -> Dictionary:return {"ok":false,"error":I18n.t(text)}
-static func is_running() -> bool:return GameState.has_game() and bool(S()["active"])
+static func is_running() -> bool:return GameState.has_game() and bool(GameState.data.get("media", {}).get("active", false))  # read-only: asking must not create the state
 static func valid() -> bool:return is_running() and Assets._valid_entity(entity()) and Living.has_lease("loft_office")
 static func start() -> Dictionary:
 	if GameState.company_id()=="" or not GameState.flag("business_account_opened") or Acquisition.sold():return error("Register a company and open its bank account first.")
