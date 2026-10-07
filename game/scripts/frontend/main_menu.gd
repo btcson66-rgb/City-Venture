@@ -8,7 +8,7 @@ func _ready() -> void:
 	size = get_viewport_rect().size
 	get_viewport().size_changed.connect(func(): size = get_viewport_rect().size)
 	theme = UIK.theme()
-	add_child(Backdrop.make("backdrops/menu"))
+	add_child(Backdrop.make("backdrops/menu", 0.0))
 	# navy wash on the left third so the title and buttons read over the street scene
 	var g := Gradient.new()
 	g.set_color(0, Color(0.035, 0.07, 0.15, 0.92))

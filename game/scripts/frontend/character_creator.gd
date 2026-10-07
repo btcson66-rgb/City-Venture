@@ -16,6 +16,7 @@ var views_rigs: Array = []
 var _scroll_content: Control
 var options_box: VBoxContainer
 var tab_box: HBoxContainer
+var option_panel: PanelContainer
 const DIRS := ["down", "right", "up", "left"]
 const EXPRS := ["neutral", "happy", "thinking", "surprised"]
 
@@ -93,8 +94,9 @@ func _ready() -> void:
 	add_child(name_edit)
 	var right := UIK.panel("ui/panel", 8)
 	right.position = Vector2(228, 40)
-	right.size = Vector2(400, 272)
-	right.custom_minimum_size = Vector2(400, 272)
+	right.size = Vector2(400, 180)
+	right.custom_minimum_size = Vector2.ZERO
+	option_panel = right
 	add_child(right)
 	var rv := UIK.vbox(5)
 	right.add_child(rv)
@@ -102,7 +104,9 @@ func _ready() -> void:
 	rv.add_child(tab_box)
 	rv.add_child(UIK.sep())
 	options_box = UIK.vbox(5)
-	rv.add_child(options_box)
+	var option_scroll := UIK.scroll(options_box, Vector2(100, 120))
+	option_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	rv.add_child(option_scroll)
 	var bottom := UIK.hbox(6)
 	bottom.position = Vector2(228, 322)
 	add_child(bottom)
@@ -119,7 +123,7 @@ func _ready() -> void:
 	scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(scroll)
 	_scroll_content = Control.new()
-	_scroll_content.custom_minimum_size = Vector2(640, 390)
+	_scroll_content.custom_minimum_size = Vector2(640, 360)
 	scroll.add_child(_scroll_content)
 	for child in children:
 		child.reparent(_scroll_content)
@@ -129,7 +133,7 @@ func _process(_delta: float) -> void:
 	size = get_viewport_rect().size
 	if _scroll_content == null:
 		return
-	var extent := Vector2(640, 390)
+	var extent := Vector2(640, 360)
 	for child in _scroll_content.get_children():
 		if child is Control and child.anchor_right == 0 and child.anchor_bottom == 0:
 			extent = extent.max(child.position + child.size + Vector2(8, 8))
@@ -141,11 +145,18 @@ func _at(c: Control, p: Vector2) -> Control:
 	return c
 
 
+func _fit_options() -> void:
+	option_panel.size = Vector2(400, clampf(options_box.get_combined_minimum_size().y + 55, 155, 272))
+
+
 func _refresh() -> void:
+	_fit_options.call_deferred()
 	for vr in views_rigs:
 		vr[0].setup(app, outfit)
 		vr[0].set_dir(vr[1])
 		vr[0].set_expression(EXPRS[expr_idx])
+		vr[0].set_walking(not bool(Preferences.values["reduce_motion"]))
+		vr[0].anim_speed = 6.0
 	portrait.setup_character(app, outfit)
 	portrait.set_expr(EXPRS[expr_idx])
 	UIK.clear(tab_box)

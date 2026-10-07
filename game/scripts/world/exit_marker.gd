@@ -1,63 +1,43 @@
 class_name ExitMarker
 extends Node2D
-## Always-visible way-out sign: a pulsing outline on the exit spot, chevrons pointing the way out and a
-## label ("EXIT" on a room's door mat, "Startup Hub →" at a street's edge). New players could not tell
-## that walking onto the mat leaves a room; this makes every exit read at a glance.
-
+## Fixed, bounded direction board. Text and vector arrow have separate slots.
 var rect := Rect2()
 var dir := Vector2.DOWN
 var text := ""
-var _t := 0.0
 var _label: Label
-
-
+var board := Rect2()
 func setup(r: Rect2, d: Vector2, t: String) -> void:
 	rect = r
 	dir = d
 	text = t
 	z_index = 5
-	_label = UIK.world_label(t, 8, Color(1.0, 0.86, 0.42))
-	_label.add_theme_font_override("font", UIK.bold_font())
-	_label.add_theme_constant_override("outline_size", 3)
-	var w := 144.0
-	_label.size = Vector2(w, 12)
-	var c := rect.get_center()
-	if dir == Vector2.DOWN:
-		_label.position = Vector2(c.x - w / 2.0, rect.position.y - 16)
+	var center := rect.get_center()
+	if dir == Vector2.RIGHT:
+		board = Rect2(rect.position.x - 128, rect.position.y - 30, 120, 22)
+	elif dir == Vector2.LEFT:
+		board = Rect2(rect.end.x + 8, rect.position.y - 30, 120, 22)
 	elif dir == Vector2.UP:
-		_label.position = Vector2(c.x - w / 2.0, rect.end.y + 48)
-	elif dir == Vector2.RIGHT:
-		_label.position = Vector2(rect.position.x - w - 4, c.y - 34)
-		_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		board = Rect2(center.x - 30, rect.end.y + 20, 60, 22)
 	else:
-		_label.position = Vector2(rect.end.x + 4, c.y - 34)
-		_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+		board = Rect2(center.x - 30, rect.position.y - 28, 60, 22)
+	_label = UIK.world_label(t, 6, Art.C_WHITE)
+	_label.add_theme_font_override("font", UIK.bold_font())
+	_label.add_theme_constant_override("outline_size", 0)
+	_label.custom_minimum_size = Vector2.ZERO
+	_label.clip_text = true
+	_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	_label.tooltip_text = t
+	board.size.y = 28
+	_label.size = Vector2(board.size.x - 28, 24)
+	_label.position = board.position + Vector2(5 if dir == Vector2.RIGHT else 23, 2)
+	_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	add_child(_label)
-
-
-func _process(delta: float) -> void:
-	_t += delta
-	queue_redraw()
-
-
 func _draw() -> void:
-	var pulse := 0.5 + 0.5 * sin(_t * 3.5)
-	var gold := Color(1.0, 0.82, 0.3)
-	if dir.y != 0:
-		draw_rect(rect.grow(1), Color(gold, 0.18 + 0.2 * pulse), true)
-		draw_rect(rect.grow(1), Color(gold, 0.55 + 0.35 * pulse), false, 1.0)
-		var c := rect.get_center()
-		for i in 2:
-			var y := (rect.position.y - 7.0 if dir.y > 0 else rect.end.y + 7.0) + dir.y * (i * 3.0 + 2.0 * pulse)
-			draw_polyline(PackedVector2Array([Vector2(c.x - 4, y), Vector2(c.x, y + dir.y * 3), Vector2(c.x + 4, y)]), Color(gold, 0.6 + 0.4 * pulse), 1.0)
-		return
-	# street edge: a column of chevrons on the road, pointing off the map
-	var cx := rect.position.x - 10.0 if dir == Vector2.RIGHT else rect.end.x + 10.0
-	var cy := rect.get_center().y
-	for row in [-1, 0, 1]:
-		var y0: float = cy + row * 26.0
-		for i in 3:
-			var ph := fmod(_t * 1.6 + i * 0.33, 1.0)
-			var x := cx + dir.x * (i * 5.0 + 3.0 * pulse)
-			var a := 0.25 + 0.6 * (1.0 - absf(ph - 0.5) * 2.0)
-			draw_polyline(PackedVector2Array([Vector2(x - dir.x * 3, y0 - 5), Vector2(x + dir.x * 2, y0), Vector2(x - dir.x * 3, y0 + 5)]), Color(gold, a), 1.5)
+	draw_rect(board, Color(0.035, 0.08, 0.14, 0.96))
+	draw_rect(board, Color(0.36, 0.57, 0.72), false, 0.7)
+	var center := board.position + Vector2(108 if dir == Vector2.RIGHT else 11, 14)
+	var angle := dir.angle()
+	var points := PackedVector2Array()
+	for p in [Vector2(-6,-2), Vector2(1,-2), Vector2(1,-5), Vector2(6,0), Vector2(1,5), Vector2(1,2), Vector2(-6,2)]:
+		points.append(center + p.rotated(angle))
+	draw_colored_polygon(points, Art.C_WHITE)

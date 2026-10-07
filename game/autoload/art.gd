@@ -289,9 +289,15 @@ func portrait_layers(app: Dictionary, outfit: String, outfit_tints := {}, npc_id
 ## outfit, so Threadline works now and the real sheets take over as soon as `probe % outfit` exists.
 ## Explicit tints win over the stand-in's. Returns [outfit, tints].
 func _resolve_outfit(outfit: String, probe: String, tints: Dictionary) -> Array:
-	if has_tex(probe % outfit):
-		return [outfit, tints]
 	var st: Dictionary = DataDB.character_option("outfits_shop", outfit).get("stand_in", {})
+	if has_tex(probe % outfit):
+		# Finished dyeable shop art retains the advertised garment palette; callers can override it.
+		var defaults := {}
+		for key in st.get("tints", {}): defaults[key] = Color(st["tints"][key])
+		if defaults.is_empty() and outfit in ["business_suit", "courier", "casual_tee", "casual_jacket"]:
+			defaults = {"top":Color("#34415b"), "bottom":Color("#34415b")}
+		defaults.merge(tints, true)
+		return [outfit, defaults]
 	if st.is_empty():
 		return [outfit, tints]
 	var t := {}

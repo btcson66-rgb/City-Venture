@@ -93,6 +93,10 @@ const STEPS := [
 ]
 
 var card: PanelContainer
+var collapsed := true
+var fold_button: Button
+var tutorial_scroll: ScrollContainer
+var tutorial_content: VBoxContainer
 var head: Label
 var body: Label
 var keys_row: HBoxContainer
@@ -133,14 +137,22 @@ func _ready() -> void:
 	card.visible = false
 	add_child(card)
 	var v := UIK.vbox(2)
-	card.add_child(v)
+	tutorial_content = v
+	tutorial_scroll = UIK.scroll(v, Vector2.ZERO)
+	card.add_child(tutorial_scroll)
 	var hr := UIK.hbox(3)
 	v.add_child(hr)
 	hr.add_child(UIK.icon("star", 9))
 	head = UIK.label("", 7, Art.C_GOLD, true)
 	head.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	head.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	head.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	head.custom_minimum_size.x = 130
 	hr.add_child(head)
+	fold_button = UIK.button("＋", _toggle_details)
+	fold_button.name = "TutorialDetails"
+	fold_button.tooltip_text = I18n.t("Help")
+	hr.add_child(fold_button)
 	var skip := UIK.button("Skip", skip_all)
 	skip.name = "SkipTutorial"
 	skip.add_theme_font_size_override("font_size", 6)
@@ -292,6 +304,7 @@ func _process(delta: float) -> void:
 	var op := UIRoot.hud.obj_panel
 	var welcome := UIRoot.hud.welcome
 	card.position = Vector2(6, welcome.position.y + welcome.size.y + 4 if welcome != null and welcome.visible else (op.position.y + op.size.y + 4) if op.visible else 42.0)
+	card.position.y = minf(card.position.y, get_viewport_rect().size.y - card.size.y - 8)
 	# the world arrow, and the coach on open screens
 	_target = _resolve(ws) if (_guide_on or _destination != "") and not blocked else {}
 	_guide.queue_redraw()
@@ -475,8 +488,16 @@ static func step_text(s: Dictionary) -> String:
 	return str(s["text"])
 
 
+func _toggle_details() -> void:
+	collapsed = not collapsed
+	_fit_card()
+
+
 func _fit_card() -> void:
-	card.reset_size()
+	body.visible = not collapsed
+	keys_row.visible = not collapsed and keys_row.get_child_count() > 0
+	fold_button.text = "＋" if collapsed else "−"
+	card.size = Vector2(214, minf(tutorial_content.get_combined_minimum_size().y + 8, get_viewport_rect().size.y * 0.38))
 
 
 # ------------------------------------------------------------------ coach: the button to press on an open screen
