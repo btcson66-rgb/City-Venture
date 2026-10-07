@@ -22,6 +22,7 @@ func test_version_filter_excludes_seen_and_future_releases() -> void:
 func test_new_game_needs_no_update_notice_and_historical_metadata_survives_load() -> void:
 	runner.check(not PatchNotes.needs_notice(GameState.data), "new game starts on current version")
 	var path := "res://tests/fixtures/saves/0.1.7-test7.cvsave"
+	DirAccess.make_dir_recursive_absolute(SaveSystem.DIR)   # run alone, no earlier test has created the save folder
 	SaveSystem._atomic_write(SaveSystem._path(6), FileAccess.get_file_as_string(path))
 	runner.check(SaveSystem.load_data(6), "historical save loads")
 	runner.eq(GameState.data["meta"]["version"], "0.1.7-test7", "load_data retains source version until notice is read")
