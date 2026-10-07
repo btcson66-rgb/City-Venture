@@ -532,9 +532,16 @@
  "settings": {
   "title": "Settings",
   "lines": [
-   "Settings apply immediately and are stored separately from your saved games.",
+   "Display, audio and key settings apply immediately and are stored separately. Assistant choices belong to the current saved game.",
    "Select an action, then press a key. Esc cancels key capture.",
    "Large text uses scrollbars. Choices always wait for you."
+  ]
+ },
+ "assistant": {
+  "title": "Assistant",
+  "lines": [
+   "Your assistant handles repetitive chores for the businesses and assets you have chosen. Supplies, wages, tax and delivery still cost real money.",
+   "Turn a chore off to handle it yourself. If cash is short, fund the company or use the original manual action; existing signed obligations remain due."
   ]
  },
  "new_run": {
@@ -628,14 +635,6 @@
    "If costs or obligations change during notice, review the pending exit. Your current home needs a replacement first."
   ]
  },
- "phone_messages": {
-  "title": "Phone replies and meetings",
-  "lines": [
-   "Open a contact thread to reply. A reply changes the actual offer or event; acknowledgements confirm notifications only.",
-   "Deadlines use the shown default result. Contacts can invite known people; Agenda shows the full meeting window and place. Missed meetings can be booked again.",
-   "Work and payment templates use current briefs and invoices. They do not promise new work or force an early payment."
-  ]
- },
  "freelance_workflow": {
   "title": "Client project",
   "lines": [
@@ -680,6 +679,20 @@
    "Pick the figure to lead with for each slide. Only figures from your real books are offered, and the first slide counts most.",
    "Then answer the investor's questions. An answer is backed only when your deck holds a figure that supports it.",
    "Different investors care about different things, and every style of answer trades valuation against the terms they ask for."
+  ]
+ },
+ "phone_messages": {
+  "title": "Notifications",
+  "lines": [
+   "Read updates and use Go to open the place where a decision belongs. There are no replies or response deadlines.",
+   "Filter Work, Life or City; Mark all read clears the badge. Optional visits can be missed without a penalty."
+  ]
+ },
+ "feature_intro": {
+  "title": "First-use guide",
+  "lines": [
+   "Practice: select the highlighted next action. Nothing is spent or changed.",
+   "That is all. Choose one action at a time; details are there whenever you want them."
   ]
  }
 }

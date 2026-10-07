@@ -5,6 +5,7 @@ extends RefCounted
 static func declaration(os: CompanyOS, box: VBoxContainer, region: String, listing: String) -> void:
 	if not GameState.flag("customs_active") or not GlobalMarket.order_allowed(region, listing):
 		return
+	AssistantPolicy.toggle(box,"customs")
 	var p: Dictionary = Customs.prefs(GameState.company_id()).get(region + ":" + listing, {"policy": "ddu", "code": "general"})
 	var row := UIK.hbox(4)
 	box.add_child(row)
@@ -16,6 +17,7 @@ static func declaration(os: CompanyOS, box: VBoxContainer, region: String, listi
 		row.add_child(b)
 		row.add_child(UIK.tip(policy))
 	box.add_child(UIK.wrap("DDP: you pay duty before shipping; fewer refusals. DDU: the buyer pays on arrival; refusals are more likely.", 7, Art.C_MUTED, 460))
+	if AssistantPolicy.enabled("customs"):return
 	var codes := OptionButton.new()
 	codes.name = "TariffCode_" + listing
 	var keys: Array = Customs.cfg().get("codes", {}).keys()

@@ -67,11 +67,7 @@ static func propose(id: String) -> Dictionary:
 	var d := def(id)
 	P()[pid] = {"id": pid, "partner": id, "kind": str(d["kind"]), "status": "offered", "created": Clock.now(), "expires": Clock.now() + int(cfg()["partner_offer_days"]) * Clock.DAY,
 		"terms": terms_for(id), "exclusive": false, "jobs": [], "issued": 0, "delivered": 0, "paid": 0, "missed": 0, "share_paid": 0.0, "revenue": 0.0}
-	var replies: Array = [
-		{"id": "sign", "label": "Sign the open (non-exclusive) terms", "effects": [{"op": "fund_partner", "id": pid, "choice": "sign"}]},
-		{"id": "exclusive", "label": "Sign the exclusive terms", "effects": [{"op": "fund_partner", "id": pid, "choice": "exclusive"}]},
-		{"id": "decline", "label": "Decline", "effects": [{"op": "fund_partner", "id": pid, "choice": "decline"}]}]
-	GameState.add_message(id, I18n.t("We would like to work together. Our terms are ready for you to review in the partner screen."), {"replies": replies, "default_reply": "decline"})
+	GameState.add_message(id, "Partner terms are ready to review.", {"target":{"kind":"fundraising", "tab":"partners", "id":pid}})
 	return {"ok": true, "id": pid}
 static func respond(pid: String, choice: String) -> Dictionary:
 	match choice:

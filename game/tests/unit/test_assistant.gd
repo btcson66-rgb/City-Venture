@@ -1,0 +1,254 @@
+extends RefCounted
+var runner
+func activate() -> void:
+	GameState.set_flag("test_assistant_run")
+	AssistantPolicy.set_all(true)
+func test_default_switches_save_and_manual_recovery() -> void:
+	runner.check(AssistantPolicy.S()["tasks"].values().all(func(v):return bool(v)), "new and legacy chores default on")
+	for id in AssistantPolicy.TASKS:
+		AssistantPolicy.set_task(id,false)
+		runner.check(not AssistantPolicy.S()["tasks"][id], "each switch can return to manual: "+id)
+	GameState.data = SaveSystem._migrate(JSON.parse_string(JSON.stringify(GameState.data)))
+	runner.check(AssistantPolicy.S()["tasks"].values().all(func(v):return not bool(v)), "manual choices survive reload")
+	AssistantPolicy.set_all(true)
+	runner.check(Ledger.check_balanced(), "changing switches never posts income")
+func test_real_ecommerce_with_all_chores_on_for_90_days() -> void:
+	Company.register("Quiet Trading", "ecommerce", "22 Founders Lane")
+	Company.open_business_account(18000)
+	GameState.data["tutorial"] = {"off":true,"v":99,"step":99,"seen":{}}
+	runner.check(Ecommerce.buy("tradelink_wholesale","water_bottle",60)["ok"], "real supplier purchase")
+	Clock.advance(3*Clock.DAY)
+	runner.check(Ecommerce.create_listing("water_bottle",18,"self")["ok"], "player chooses product and price")
+	activate()
+	for day in 90:Clock.advance(Clock.DAY)
+	runner.check(GameState.stat("orders_delivered")>10, "assistant delivers actual customer orders")
+	runner.check(GameState.stat("purchase_orders")>1 or Ecommerce.available_anywhere("water_bottle")>10, "assistant replenishes when stock is low, otherwise preserves remaining paid stock")
+	runner.check(Ledger.cash(GameState.company_id())>0, "reasonable funded shop remains solvent after 90 days")
+	runner.check(Tax.returns(GameState.company_id()).all(func(r):return (r["status"] not in ["due","correction"] or Clock.now()<=int(r["due"])) and float(r.get("fine",0))==0), "no overdue tax return")
+	runner.check(Ledger.check_balanced(), "90-day real books balance")
+	for id in AssistantPolicy.TASKS:runner.check(AssistantPolicy.enabled(id), "all switches stay enabled: "+id)
+func test_insufficient_cash_does_not_create_credit_or_inventory() -> void:
+	Company.register("Quiet Trading", "ecommerce", "Suite 2B")
+	Company.open_business_account(1000)
+	var entity := GameState.company_id()
+	runner.check(AssistantPolicy.affordable(entity,10),"funded chore is affordable")
+	runner.check(not AssistantPolicy.S()["notices"].has(entity),"funded chore does not send a cash warning")
+	runner.check(not AssistantPolicy.affordable(entity,Ledger.cash(entity)),"unfunded chore stops")
+	var message_count: int = GameState.data["messages"].size()
+	AssistantPolicy.affordable(entity,Ledger.cash(entity))
+	runner.check(GameState.data["messages"].size()==message_count,"unfunded notice is emitted only once")
+	activate()
+	var ledger: Dictionary = GameState.data["ledger"].duplicate(true)
+	AssistantPolicy.on_hour(Clock.now(),6)
+	runner.eq(GameState.data["ledger"],ledger,"no business means no made-up chores or income")
+	runner.check(not AssistantPolicy.affordable("player",Ledger.cash("player")), "optional purchase keeps buffer")
+	AssistantPolicy.set_all(false)
+	runner.check(not AssistantPolicy.enabled("packing"), "manual packing respected")
+func test_accountant_uses_actual_due_amount_without_advancing_world() -> void:
+	Company.register("Tax Assistant", "ecommerce", "22 Founders Lane")
+	Company.open_business_account(10000)
+	var entity := GameState.company_id()
+	var due := Tax._new_return(entity,"vat",100,"Assistant QA")
+	Ledger.post(entity,"QA due tax",[{"acct":"exp:compliance","dr":100},{"acct":"tax_payable","cr":100}],{"type":"test_fixture"})
+	activate()
+	var time := Clock.now()
+	var cash := Ledger.cash(entity)
+	AssistantPolicy.on_hour(time,12)
+	runner.eq(Clock.now(),time,"background work never recursively advances time")
+	runner.eq(due["status"],"processing","real filing queued")
+	runner.eq(Ledger.cash(entity),cash-100-float(Tax.cfg()["accountant_fee"]),"actual due tax and accountant fee paid")
+	AssistantPolicy.on_hour(time,12)
+	runner.eq(Ledger.cash(entity),cash-100-float(Tax.cfg()["accountant_fee"]),"no duplicate payment")
+	runner.check(Ledger.check_balanced(),"tax delegation balanced")
+
+func test_manual_bills_keep_real_obligation_then_pay_once() -> void:
+	activate()
+	AssistantPolicy.set_task("bills",false)
+	var cash := Ledger.cash("player")
+	AssistantPolicy.bill("player","living",32,"Real bill",{"type":"living"})
+	runner.eq(Ledger.cash("player"),cash,"manual bill accrues rather than pretending payment")
+	runner.eq(Ledger.balance("player","accounts_payable"),-32.0,"real obligation is retained")
+	AssistantPolicy.pay_bill(0)
+	AssistantPolicy.pay_bill(0)
+	runner.eq(Ledger.cash("player"),cash-32,"manual payment charges once")
+	runner.eq(Ledger.balance("player","accounts_payable"),0.0,"obligation cleared")
+	runner.check(Ledger.check_balanced(),"manual bills balance")
+func test_existing_cover_renews_90_days_and_manual_switch_stops_it() -> void:
+	Company.register("Cover Assistant", "ecommerce", "22 Founders Lane")
+	Company.open_business_account(20000)
+	activate()
+	var entity := GameState.company_id()
+	runner.check(Insurance.buy(entity,"property")["ok"],"player selects real cover")
+	for day in 90:Clock.advance(Clock.DAY)
+	runner.check(Insurance.policies(entity)["property"]["active"],"paid cover renewed after 90 unattended days")
+	runner.check(Ledger.cash(entity)>0,"funded premiums remain affordable")
+	AssistantPolicy.set_task("renewals",false)
+	Clock.advance(31*Clock.DAY)
+	runner.check(not Insurance.policies(entity)["property"]["active"],"manual renewal switch is respected")
+	runner.check(Ledger.check_balanced(),"real premiums balanced")
+
+func test_cafe_supplies_roster_hygiene_and_maintenance_for_90_days() -> void:
+	var fixture = load("res://tests/unit/test_cafe_depth.gd").new()
+	fixture.runner = runner
+	var entity: String = fixture.setup()
+	var person: Dictionary = fixture.hire()
+	activate()
+	for day in 90:Clock.advance(Clock.DAY)
+	runner.check(Cafe.last_days(90,"served")>100,"real customers served unattended")
+	runner.check(not CafeDepth.roster().get(person["id"],{}).is_empty(),"real worker scheduled")
+	runner.check(int(Cafe.S()["cleaned"])>=Clock.now()-Clock.DAY,"cleaned without daily clicks")
+	runner.check(not Cafe.S()["inspections"].is_empty(),"real inspections completed")
+	runner.check(Ledger.cash(entity)>0,"funded operating cafe survives 90 days")
+	runner.check(Tax.returns(entity).all(func(r):return (r["status"] not in ["due","correction"] or Clock.now()<=int(r["due"])) and float(r.get("fine",0))==0),"cafe tax not late")
+	runner.check(Ledger.check_balanced(),"cafe books balance")
+func test_trade_documents_and_letter_of_credit_remain_real_90_days() -> void:
+	var fixture = load("res://tests/unit/test_trade_execution.gd").new()
+	fixture.runner = runner
+	fixture.setup()
+	var quote: Dictionary = fixture.quote()
+	quote["payment"] = "lc"
+	# Requote rather than mutating a quoted price/fee.
+	quote = fixture.quote("lc")
+	var result := TradeIndustry.sign(quote)
+	runner.check(result["ok"],"player authorizes real trade")
+	if not result["ok"]:return
+	var deal: Dictionary = TradeIndustry.S()["deals"][result["id"]]
+	TradeIndustry.set_document(deal["id"],"packing_list",false)
+	activate()
+	for day in 90:Clock.advance(Clock.DAY)
+	runner.eq(deal["status"],"paid","real cargo and bank collection complete")
+	runner.eq(deal["lc"],"documents_accepted","real bank documents accepted")
+	runner.check(Ledger.cash(GameState.company_id())>0,"funded trade remains solvent")
+	runner.check(Ledger.check_balanced(),"trade books balance")
+
+func test_actual_operating_asset_maintenance_for_90_days() -> void:
+	Company.register("Maintenance Assistant","ecommerce","Suite 2B")
+	Company.open_business_account(20000)
+	var result := Assets.buy({"price":1000,"life_days":365,"maintenance_days":7,"maintenance_cost":50,"failure_chance":0,"segment":"ecommerce"})
+	runner.check(result["ok"],"player buys actual asset")
+	activate()
+	for day in 90:Clock.advance(Clock.DAY)
+	var asset: Dictionary = Assets.S()["items"][result["id"]]
+	runner.check(int(asset["maintenance_day"])>80,"real maintenance repeats for 90 days")
+	runner.check(Ledger.balance(GameState.company_id(),"exp:maintenance")>=500,"actual maintenance costs posted")
+	runner.check(Ledger.cash(GameState.company_id())>0,"funded maintenance remains affordable")
+	runner.check(Ledger.check_balanced(),"maintenance books balance")
+
+func test_foreign_parcel_payout_uses_actual_receipt_and_manual_fx_90_days() -> void:
+	var fixture = load("res://tests/unit/test_global.gd").new()
+	fixture.runner = runner
+	var entity: String = fixture._setup()
+	var order: Dictionary = fixture._order()
+	activate()
+	for day in 90:Clock.advance(Clock.DAY)
+	runner.check(order.get("global_paid",false),"actual foreign receipt paid")
+	runner.eq(GlobalMarket.balance(entity,"NRD")["wallet"],0.0,"actual FX wallet converted")
+	runner.check(GameState.stat("orders_delivered")>0,"actual overseas delivery happened")
+	var os := CompanyOS.new("home_laptop")
+	var box := VBoxContainer.new()
+	GlobalMarketUI.finance(os,box)
+	var auto := box.find_child("AutoGlobalFX",true,false) as CheckBox
+	runner.check(auto!=null,"existing finance FX checkbox remains available")
+	auto.button_pressed = false
+	AssistantPolicy.on_hour(Clock.now(),12)
+	runner.check(not AssistantPolicy.enabled("fx"),"existing finance checkbox switches the assistant off")
+	runner.check(not GlobalMarket.company()["auto_fx"],"manual FX switch disables future conversion")
+	box.free()
+	os.free()
+	runner.check(Ledger.check_balanced(),"foreign books balance after 90 days")
+
+func test_actual_pre_assistant_chapter_three_save_continues() -> void:
+	var text := FileAccess.get_file_as_string("res://tests/fixtures/saves/pr161-pre-assistant-ch3.json")
+	DirAccess.make_dir_recursive_absolute(SaveSystem.DIR)
+	var file := FileAccess.open(SaveSystem._path(6),FileAccess.WRITE)
+	file.store_string(text)
+	file.close()
+	runner.check(SaveSystem.load_data(6),"actual pre-assistant new-game save loads")
+	runner.check("ch3_open_for_business" in StoryEngine.St()["chapters_done"],"actual earlier progress preserved")
+	runner.check(AssistantPolicy.S()["tasks"].values().all(func(v):return bool(v)),"old saves safely receive default switches")
+	activate()
+	Clock.advance(Clock.DAY)
+	runner.check(Ledger.check_balanced(),"old save continues with actual books")
+func test_accepted_contract_restock_and_delivery_for_90_days() -> void:
+	Company.register("Contract Assistant","ecommerce","Suite 2B")
+	Company.open_business_account(20000)
+	var id := Contracts.create_offer({"buyer":"harbor_point_fitness","product":"water_bottle","qty":60,"unit_price":21.0,"payment_terms_days":30,"delivery_days":14})
+	runner.check(Contracts.accept(id)["ok"],"player authorizes actual contract")
+	activate()
+	for day in 90:Clock.advance(Clock.DAY)
+	runner.eq(Contracts.C()[id]["status"],"paid","real stock delivered and invoice paid unattended")
+	runner.check(GameState.stat("purchase_orders")>=1,"real supplier purchase backed contract")
+	runner.check(Ledger.cash(GameState.company_id())>0,"funded contract remains solvent")
+	runner.check(Ledger.check_balanced(),"contract books balance")
+func test_routine_returns_resolve_real_customer_order_and_can_be_manual() -> void:
+	var fixture = load("res://tests/unit/test_global.gd").new()
+	fixture.runner = runner
+	fixture._setup()
+	var order: Dictionary = fixture._order()
+	fixture._deliver(order)
+	order["status"] = "return_requested"
+	activate()
+	var decision := EventEngine.trigger("customer_return",{"order":order["id"]})
+	runner.eq(order["status"],"refunded","assistant refunds actual delivered parcel")
+	runner.check(not EventEngine.pending().any(func(q):return q["iid"]==decision["iid"]),"routine form does not interrupt world")
+	var second: Dictionary = fixture._order()
+	fixture._deliver(second)
+	second["status"] = "return_requested"
+	AssistantPolicy.set_task("returns",false)
+	var manual := EventEngine.trigger("customer_return",{"order":second["id"]})
+	runner.check(EventEngine.pending().any(func(q):return q["iid"]==manual["iid"]),"manual return remains a real decision")
+	EventEngine.choose(manual["iid"],"refund")
+	AssistantPolicy.set_task("returns",true)
+	for day in 90:Clock.advance(Clock.DAY)
+	runner.check(Ledger.check_balanced(),"returns and subsequent 90-day books balance")
+func test_manufacturing_only_fulfils_player_scheduled_production() -> void:
+	var fixture = load("res://tests/unit/test_manufacturing.gd").new()
+	fixture.runner = runner
+	var entity: String = fixture.setup_factory()
+	Ledger.post(entity,"QA funded operating capital",[{"acct":"cash","dr":100000},{"acct":"equity","cr":100000}],{"type":"test_fixture"})
+	Manufacturing.set_inspection(1)
+	var rfq: Dictionary = Manufacturing.S()["rfqs"].values()[0]
+	var accepted := Manufacturing.quote(str(rfq["id"]),float(rfq["min_price"]))
+	runner.check(accepted["ok"],"player chooses genuine quote")
+	if not accepted["ok"]:return
+	var start := (Clock.now()/60+1)*60+3*Clock.DAY
+	var machine := str(Manufacturing.S()["machines"][0])
+	runner.check(Manufacturing.plan(str(accepted["id"]),machine,start,16,true)["ok"],"player chooses production slot")
+	runner.check(Manufacturing.plan(str(accepted["id"]),machine,start+Clock.DAY,16,true)["ok"],"player chooses backup slot")
+	activate()
+	for day in 90:Clock.advance(Clock.DAY)
+	runner.eq(Jobs.get_job(str(accepted["id"]))["status"],"paid","paid materials produced real order and invoice collected")
+	runner.check(Ledger.cash(entity)>0,"funded factory survives 90 days")
+	runner.check(Ledger.check_balanced(),"factory books balance")
+
+func test_personal_seller_tax_is_not_abandoned_by_assistant() -> void:
+	var due := Tax._new_return("player","vat",50,"Personal VAT")
+	Ledger.post("player","Actual due VAT fixture",[{"acct":"exp:compliance","dr":50},{"acct":"tax_payable","cr":50}],{"type":"test_fixture"})
+	activate()
+	AssistantPolicy.on_hour(Clock.now(),12)
+	runner.eq(due["status"],"processing","personal seller also receives accountant filing")
+	Clock.advance(60)
+	runner.check(Ledger.check_balanced(),"personal filing books balanced")
+
+func test_fleet_assistant_waits_for_return_and_preserves_real_service_cost() -> void:
+	var fixture = load("res://tests/unit/test_automotive.gd").new()
+	fixture.runner = runner
+	var entity: String = fixture.setup(100000)
+	fixture.fleet_ready(entity,1)
+	var id: String = str(Automotive.S()["fleet"].keys()[0])
+	var asset := Automotive.fleet_item(id)
+	asset["maintenance_due"] = true
+	asset["status"] = "broken"
+	Automotive.S()["fleet"][id]["rental"] = "QA occupied vehicle"
+	activate()
+	var cash := Ledger.cash(entity)
+	AssistantPolicy._maintain()
+	runner.eq(Ledger.cash(entity),cash,"occupied car is never magically repaired")
+	Automotive.S()["fleet"][id]["rental"] = ""
+	var cost := Automotive.service_cost(id)
+	AssistantPolicy._maintain()
+	runner.eq(Ledger.cash(entity),cash-cost,"actual service labor and parts charged")
+	runner.eq(Automotive.S()["fleet"][id]["out"],Clock.day_index()+1,"one-day service downtime retained")
+	for day in 90:Clock.advance(Clock.DAY)
+	runner.check(Ledger.cash(entity)>0,"funded existing fleet operates for 90 days")
+	runner.check(Ledger.check_balanced(),"fleet books balance")

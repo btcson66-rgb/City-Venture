@@ -1,0 +1,403 @@
+{
+ "features": [
+  {
+   "id": "os_overview",
+   "label": "Overview",
+   "any": [
+    "always"
+   ],
+   "hint": ""
+  },
+  {
+   "id": "os_finance",
+   "label": "Finance",
+   "any": [
+    "always"
+   ],
+   "hint": ""
+  },
+  {
+   "id": "os_operations",
+   "label": "Stock and orders",
+   "any": [
+    "always"
+   ],
+   "hint": ""
+  },
+  {
+   "id": "os_sales",
+   "label": "Ecommerce",
+   "any": [
+    "flag:business_chosen",
+    "stat:purchase_orders>=1",
+    "has_listed"
+   ],
+   "hint": "Choose E-commerce or buy your first stock"
+  },
+  {
+   "id": "os_inventory",
+   "label": "Stock detail",
+   "any": [
+    "stat:purchase_orders>=1",
+    "used:inventory"
+   ],
+   "hint": "Buy your first stock"
+  },
+  {
+   "id": "os_people",
+   "label": "People",
+   "any": [
+    "chapter:3",
+    "used:people",
+    "used:cafe",
+    "used:logistics",
+    "used:saas",
+    "used:manufacturing"
+   ],
+   "hint": "Reach chapter 3 or open your first business"
+  },
+  {
+   "id": "os_contracts",
+   "label": "Contracts",
+   "any": [
+    "chapter:4",
+    "used:contracts"
+   ],
+   "hint": "Receive your first contract"
+  },
+  {
+   "id": "os_segments",
+   "label": "Segments",
+   "any": [
+    "chapter:6",
+    "used:segments"
+   ],
+   "hint": "Reach chapter 6 or run two industries"
+  },
+  {
+   "id": "os_group",
+   "label": "Group",
+   "any": [
+    "chapter:19",
+    "used:group"
+   ],
+   "hint": "Reach chapter 19 or own a second company"
+  },
+  {
+   "id": "os_market",
+   "label": "Market",
+   "any": [
+    "chapter:7",
+    "used:market"
+   ],
+   "hint": "Reach chapter 7"
+  },
+  {
+   "id": "os_freelance",
+   "label": "Freelance",
+   "any": [
+    "chapter:3",
+    "used:freelance"
+   ],
+   "hint": "Reach chapter 3"
+  },
+  {
+   "id": "os_saas",
+   "label": "SaaS",
+   "any": [
+    "chapter:10",
+    "used:saas"
+   ],
+   "hint": "Reach chapter 10"
+  },
+  {
+   "id": "os_popup",
+   "label": "Weekend pop-up",
+   "any": [
+    "chapter:4",
+    "used:popup"
+   ],
+   "hint": "Reach chapter 4 or open a pop-up"
+  },
+  {
+   "id": "os_cafe",
+   "label": "Cafe",
+   "any": [
+    "chapter:4",
+    "used:cafe"
+   ],
+   "hint": "Reach chapter 4 or open a cafe"
+  },
+  {
+   "id": "os_logistics",
+   "label": "Logistics",
+   "any": [
+    "chapter:5",
+    "used:logistics"
+   ],
+   "hint": "Reach chapter 5 or own a van"
+  },
+  {
+   "id": "os_manufacturing",
+   "label": "Manufacturing",
+   "any": [
+    "chapter:8",
+    "used:manufacturing"
+   ],
+   "hint": "Reach chapter 8"
+  },
+  {
+   "id": "os_real_estate",
+   "label": "Real estate",
+   "any": [
+    "chapter:11",
+    "used:real_estate"
+   ],
+   "hint": "Reach chapter 11"
+  },
+  {
+   "id": "os_media",
+   "label": "Media",
+   "any": [
+    "chapter:10",
+    "used:media"
+   ],
+   "hint": "Reach chapter 10"
+  },
+  {
+   "id": "os_hotel",
+   "label": "Hotel",
+   "any": [
+    "chapter:12",
+    "used:hotel"
+   ],
+   "hint": "Reach chapter 12"
+  },
+  {
+   "id": "os_energy",
+   "label": "Energy",
+   "any": [
+    "chapter:8",
+    "used:energy"
+   ],
+   "hint": "Reach chapter 8"
+  },
+  {
+   "id": "os_automotive",
+   "label": "Automotive",
+   "any": [
+    "chapter:12",
+    "used:automotive"
+   ],
+   "hint": "Reach chapter 12"
+  },
+  {
+   "id": "os_international_trade",
+   "label": "International trade",
+   "any": [
+    "chapter:13",
+    "used:international_trade"
+   ],
+   "hint": "Reach chapter 13"
+  },
+  {
+   "id": "os_governance",
+   "label": "Governance",
+   "any": [
+    "chapter:5",
+    "used:governance"
+   ],
+   "hint": "Reach chapter 5"
+  },
+  {
+   "id": "overseas",
+   "label": "Overseas",
+   "any": [
+    "chapter:13",
+    "used:overseas"
+   ],
+   "hint": "Reach chapter 13"
+  },
+  {
+   "id": "international_documents",
+   "label": "Trade documents",
+   "any": [
+    "chapter:9",
+    "used:overseas",
+    "used:international_trade"
+   ],
+   "hint": "Reach chapter 9 or make your first import"
+  },
+  {
+   "id": "recruitment",
+   "label": "Hiring",
+   "any": [
+    "chapter:3",
+    "used:people"
+   ],
+   "hint": "Reach chapter 3 or open your first business"
+  },
+  {
+   "id": "negotiation",
+   "label": "Negotiation",
+   "any": [
+    "chapter:5",
+    "used:negotiation"
+   ],
+   "hint": "Reach chapter 5 or negotiate a contract"
+  },
+  {
+   "id": "finance_details",
+   "label": "Detailed accounts",
+   "any": [
+    "chapter:3",
+    "used:finance"
+   ],
+   "hint": "Reach chapter 3"
+  },
+  {
+   "id": "app_messages",
+   "label": "Notifications",
+   "any": [
+    "chapter:1",
+    "used:app_messages"
+   ],
+   "hint": ""
+  },
+  {
+   "id": "app_bank",
+   "label": "Bank",
+   "any": [
+    "chapter:1",
+    "used:app_bank"
+   ],
+   "hint": ""
+  },
+  {
+   "id": "app_tasks",
+   "label": "Tasks",
+   "any": [
+    "chapter:1",
+    "used:app_tasks"
+   ],
+   "hint": ""
+  },
+  {
+   "id": "app_map",
+   "label": "City",
+   "any": [
+    "chapter:1",
+    "used:app_map"
+   ],
+   "hint": ""
+  },
+  {
+   "id": "app_save",
+   "label": "Save",
+   "any": [
+    "chapter:1",
+    "used:app_save"
+   ],
+   "hint": ""
+  },
+  {
+   "id": "app_close",
+   "label": "Close",
+   "any": [
+    "chapter:1",
+    "used:app_close"
+   ],
+   "hint": ""
+  },
+  {
+   "id": "app_timeline",
+   "label": "Timeline",
+   "any": [
+    "chapter:2",
+    "used:app_timeline"
+   ],
+   "hint": "Reach chapter 2"
+  },
+  {
+   "id": "app_shoplane",
+   "label": "ShopLane",
+   "any": [
+    "chapter:2",
+    "used:app_shoplane"
+   ],
+   "hint": "Reach chapter 2"
+  },
+  {
+   "id": "app_leases",
+   "label": "Leases",
+   "any": [
+    "chapter:3",
+    "used:app_leases"
+   ],
+   "hint": "Reach chapter 3"
+  },
+  {
+   "id": "app_relationships",
+   "label": "Relationships",
+   "any": [
+    "chapter:2",
+    "used:app_relationships"
+   ],
+   "hint": "Reach chapter 2"
+  },
+  {
+   "id": "app_tax_filing",
+   "label": "Tax Filing",
+   "any": [
+    "chapter:5",
+    "used:app_tax_filing"
+   ],
+   "hint": "Reach chapter 5"
+  },
+  {
+   "id": "app_news",
+   "label": "City news",
+   "any": [
+    "chapter:7",
+    "used:app_news"
+   ],
+   "hint": "Reach chapter 7"
+  },
+  {
+   "id": "app_guide",
+   "label": "City Guide",
+   "any": [
+    "chapter:2",
+    "used:app_guide"
+   ],
+   "hint": "Reach chapter 2"
+  },
+  {
+   "id": "app_opportunities",
+   "label": "Opportunities",
+   "any": [
+    "chapter:3",
+    "used:app_opportunities"
+   ],
+   "hint": "Reach chapter 3"
+  },
+  {
+   "id": "app_world",
+   "label": "World",
+   "any": [
+    "chapter:13",
+    "used:app_world"
+   ],
+   "hint": "Reach chapter 13"
+  },
+  {
+   "id": "app_legacy",
+   "label": "Legacy",
+   "any": [
+    "chapter:19",
+    "used:app_legacy"
+   ],
+   "hint": "Reach chapter 19"
+  }
+ ]
+}

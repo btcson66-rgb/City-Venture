@@ -25,6 +25,16 @@ func _init(b) -> void:
 
 
 func run() -> void:
+	if _arg("from") == "resume_ch3":
+		bot.step("Resume actual new-game chapter-three checkpoint; no fabricated story or cash")
+		if not bot.expect(SaveSystem.load_and_enter(1),"actual chapter-three checkpoint loaded"):return
+		bot.expect(["ch1_arrival","ch2_first_customer","ch3_open_for_business"].all(func(id):return id in StoryEngine.St()["chapters_done"]),"first three chapters have real receipts")
+		await wait_world();await popups()
+		await _careers()
+		await _month()
+		await _chapters_4_to_6()
+		await _remaining_story()
+		return
 	if _arg("from")=="resume_ch13":
 		bot.step("resume_ch13: genuine automatic checkpoint; existing cash, stock and operating history")
 		if not bot.expect(SaveSystem.load_and_enter(1),"genuine chapter13 checkpoint loaded"):return
@@ -34,6 +44,10 @@ func run() -> void:
 		await _chapters_17_to_18()
 		await _city_future_season()
 		await _summary()
+		if _arg("main-only") == "1":
+			bot.expect(AssistantPolicy.S()["tasks"].values().all(func(v):return bool(v)),"all assistant switches enabled throughout full main story")
+			await _save_load()
+			return
 		await _industry_fixtures()
 		return
 	if _arg("from")=="resume_ch10":
@@ -255,6 +269,7 @@ func run() -> void:
 	await _chapter2()
 	await _purchase_cancel()
 	await _chapter3()
+	if _arg("checkpoint3") != "":SaveSystem.save_to(_arg("checkpoint3"))
 	if _arg("capture") != "":
 		SaveSystem.save_to(_arg("capture"))
 		bot.expect(FileAccess.file_exists(_arg("capture")), "genuine chapter-three save captured")
@@ -307,6 +322,10 @@ func _after_ch9() -> void:
 	await _chapters_17_to_18()
 	await _city_future_season()
 	await _summary()
+	if _arg("main-only") == "1":
+		bot.expect(AssistantPolicy.S()["tasks"].values().all(func(v):return bool(v)), "all assistant switches enabled throughout full main story")
+		await _save_load()
+		return
 	await _industry_fixtures()
 	await load("res://tests/walkthrough/map_adjacency_tour.gd").new(bot).run()
 	await _personal_life_fixture()
@@ -809,6 +828,10 @@ func popups() -> void:
 		if m is IndustryGuideModal:
 			await bot.click_named("IndustryGuideSkip")
 			continue
+		if m is FeatureIntroModal:
+			await bot.click_named("FeaturePracticeNext")
+			await bot.click_named("FeaturePracticeNext")
+			continue
 		if m is DecisionModal:
 			var inst: Dictionary = m.inst
 			await bot.shot("decision_" + str(inst["id"]))
@@ -960,6 +983,11 @@ func close_modal() -> void:
 	for attempt in range(3):
 		var m = UIRoot.top_modal()
 		if m == null: return
+		if m is FeatureIntroModal:
+			await bot.click_named("FeaturePracticeSkip")
+			await bot.wait(0.2)
+			m = UIRoot.top_modal()
+			if m == null:return
 		if m is DecisionModal or m is MonthCloseModal or m is InfoModal or m is PoachModal:
 			await popups()
 			m = UIRoot.top_modal()
@@ -1088,6 +1116,10 @@ func pass_time_at_home(pred: Callable, max_naps := 12, sleep_only := false) -> b
 
 
 func _pack_and_ship_home() -> void:
+	if AssistantPolicy.enabled("packing"):
+		await bot.until(func():return Ecommerce.orders_with(["placed","packed"],"riverside_studio").is_empty(),120.0)
+		await once_shot("assistant_fulfilment")
+		return
 	if not in_scene("interior", "riverside_apartment"):
 		return
 	await popups()
@@ -1230,9 +1262,8 @@ func _chapter1() -> void:
 	await bot.shot("phone_home")
 	await bot.click_named("App_messages")
 	await bot.wait(0.4)
-	await bot.click_named("Thread_maya")
-	await dialogue()
-	bot.expect(GameState.flag("maya_intro_done"), "Maya conversation done")
+	bot.expect(GameState.flag("notifications_read"), "first chapter continues by reading notifications, without replying")
+	UIRoot.phone.close()
 	bot.step("Head outside")
 	await exit_building()
 	bot.expect(GameState.visited("riverside"), "visited Riverside")
@@ -1518,6 +1549,11 @@ func _careers() -> void:
 		bot.expect(int(Careers.F()["gigs"][oid]["done"]) >= 2, "put hours into a freelance gig")
 		UIRoot.top_modal().close()
 		await bot.wait(0.2)
+	if not FeatureGate.unlocked("os_saas"):
+		bot.log_line("  SaaS stays hidden until its chapter; optional career deferred")
+		await close_modal()
+		await exit_building()
+		return
 	bot.step("Careers — start a SaaS product")
 	await bot.click_named("Tab_saas")
 	await bot.wait(0.4)
@@ -1542,7 +1578,7 @@ func _month() -> void:
 		days += 1
 		await popups()
 		# restock when low, via the laptop
-		var low := Ecommerce.available_anywhere("water_bottle") < 25 or Ecommerce.available_anywhere("wireless_earbuds") < 10
+		var low := not AssistantPolicy.enabled("restock") and (Ecommerce.available_anywhere("water_bottle") < 25 or Ecommerce.available_anywhere("wireless_earbuds") < 10)
 		var offer_open: bool = GameState.data["contracts"].values().filter(func(c): return c["status"] == "offered").size() > 0
 		var active: Array = GameState.data["contracts"].values().filter(func(c): return c["status"] == "active")
 		if low or offer_open or not active.is_empty():
@@ -1550,7 +1586,7 @@ func _month() -> void:
 			var need_bottles := 0
 			for c in active:
 				need_bottles += int(c["qty"]) - Ecommerce.stock(c["location"], c["product"])
-			if low or need_bottles > 0:
+			if not AssistantPolicy.enabled("restock") and (low or need_bottles > 0):
 				await bot.click_named("Tab_operations")
 				await bot.click_named("DeliverTo_riverside_studio", 1.0)
 				for k in range(int(ceil(maxf(0, need_bottles) / 60.0))):
@@ -1690,17 +1726,21 @@ func _chapters_4_to_6() -> void:
 	await exit_building()
 	await metro_to("riverside")
 	await enter_building("riverside_apartment")
-	await _home_laptop("contracts")
-	await bot.click_named("FillContract", 3.0)
-	await bot.wait(0.5)
-	await bot.shot("contract_restock")
-	await close_modal()
-	await pass_time_at_home(func(): return Contracts.can_deliver(c["id"]), 12, true)
-	await _home_laptop("contracts")
-	await bot.click_named("DeliverContract", 3.0)
-	await bot.wait(0.6)
-	await bot.shot("big_contract_delivered")
-	await close_modal()
+	if AssistantPolicy.enabled("restock") and AssistantPolicy.enabled("packing"):
+		await pass_time_at_home(func():return GameState.flag("big_contract_delivered"),12,true)
+		await bot.shot("big_contract_assistant_delivered")
+	else:
+		await _home_laptop("contracts")
+		await bot.click_named("FillContract", 3.0)
+		await bot.wait(0.5)
+		await bot.shot("contract_restock")
+		await close_modal()
+		await pass_time_at_home(func(): return Contracts.can_deliver(c["id"]), 12, true)
+		await _home_laptop("contracts")
+		await bot.click_named("DeliverContract", 3.0)
+		await bot.wait(0.6)
+		await bot.shot("big_contract_delivered")
+		await close_modal()
 	bot.expect(GameState.flag("big_contract_delivered"), "delivered 800 lamps to Crestline")
 	await bot.wait(1.0)
 	await popups()
@@ -2535,9 +2575,11 @@ func _chapters_13_to_14(fast := false) -> void:
 		GameState.data["clock"]["minutes"] += 3 * Clock.DAY
 		GlobalMarket.payout(GameState.company_id())
 	else:
-		await pass_time_at_home(func(): return float(GlobalMarket.balance(GameState.company_id(), "NRD")["wallet"]) > 0, 40, true)
+		await pass_time_at_home(func(): return GameState.flag("first_export_converted") or float(GlobalMarket.balance(GameState.company_id(), "NRD")["wallet"]) > 0, 40, true)
 	await _home_laptop("finance")
-	await bot.click_named("ConvertGlobal_NRD")
+	if not GameState.flag("first_export_converted"):await bot.click_named("ConvertGlobal_NRD")
+	elif not UIRoot.top_modal() is ExportIncomeModal:
+		UIRoot.open_modal(ExportIncomeModal.new()) # Read the real conversion receipt; no journal or story mutation.
 	await bot.until(func(): return UIRoot.top_modal() is ExportIncomeModal, 4.0)
 	await bot.wait(4.0)
 	await bot.shot("ch13_real_income")
@@ -2572,15 +2614,16 @@ func _chapters_13_to_14(fast := false) -> void:
 	await _home_laptop("sales")
 	await bot.click_named("SalesPage_overseas")
 	await _export_row_input("ExportPolicy_ddp_" + str(listing["id"]))
-	await bot.click_named("TariffCode_" + str(listing["id"]))
-	# Sorted options start with electronics; other full-walk products choose their actual category.
-	var keys: Array = Customs.cfg()["codes"].keys()
-	keys.sort()
-	for i in keys.size():
-		await bot.key_action("ui_up")
-	for i in keys.find(Customs.code_for(str(listing["product"]))):
-		await bot.key_action("ui_down")
-	await bot.key_action("ui_accept")
+	if not AssistantPolicy.enabled("customs"):
+		await bot.click_named("TariffCode_" + str(listing["id"]))
+		# Sorted options start with electronics; other full-walk products choose their actual category.
+		var keys: Array = Customs.cfg()["codes"].keys()
+		keys.sort()
+		for i in keys.size():
+			await bot.key_action("ui_up")
+		for i in keys.find(Customs.code_for(str(listing["product"]))):
+			await bot.key_action("ui_down")
+		await bot.key_action("ui_accept")
 	await bot.wait(0.5)
 	await bot.shot("ch14_declaration")
 	await close_modal()
@@ -2822,7 +2865,12 @@ func _chapters_15_to_16(fast := false) -> void:
 		return
 	await bot.shot("ch16_distributor_offer")
 	await bot.click_named("AcceptContract")
-	await bot.click_named("DeliverContract")
+	if not AssistantPolicy.enabled("packing"):await bot.click_named("DeliverContract")
+	else:
+		await close_modal()
+		await close_modal()
+		await close_modal()
+		await pass_time_at_home(func():return Contracts.by_tag("lumina_distributor").get("status","") in ["shipped","delivered","paid"],4,true)
 	var contract := Contracts.by_tag("lumina_distributor")
 	if not bot.expect(not contract.is_empty() and contract.get("status", "") == "shipped", "native signing and dispatch put goods in transit"):return
 	await bot.shot("ch16_goods_in_transit")

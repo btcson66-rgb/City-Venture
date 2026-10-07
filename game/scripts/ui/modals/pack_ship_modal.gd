@@ -15,6 +15,7 @@ func _init(loc: String) -> void:
 
 
 func build() -> void:
+	AssistantPolicy.toggle(body,"packing")
 	var waiting := Ecommerce.orders_with(["placed"], location)
 	var packable := waiting.filter(func(o): return Ecommerce.can_pack(o, location))
 	var packed := Ecommerce.orders_with(["packed"], location)

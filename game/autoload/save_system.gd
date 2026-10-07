@@ -330,6 +330,7 @@ func _migrate(d: Dictionary) -> Dictionary:
 		d["ecommerce"]["counters"][k] = int(d["ecommerce"]["counters"][k])
 	for it in d["schedule"]:
 		it["t"] = int(it["t"])
+	PhoneMessages.migrate(d)
 	return d
 
 

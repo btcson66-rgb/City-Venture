@@ -533,23 +533,17 @@ data.bank             {credit, loans{}, seq, no_loans_until?, appointment?}
                         the reminder; meeting Marcus removes both. Missed slots stay in phone Tasks with rebooking advice.
                         Loan records keep their existing fields and repayment schedule unchanged.
 
-data.messages         [{id, t, from, text, read, direction?: incoming|outgoing, replies?, ctx?, decision?,
-                        expires?, default_reply?, answered?, expired?}]
-                        Each reply: {id, label, requires[], effects[], recommended?, keep_open?, outcome?}.
-                        Conditions and effects use EventEngine/Effects; decision references the original pending iid.
-                        Old messages receive IDs and acknowledgement replies lazily; outgoing entries are already read.
-                        Keep-open details preserve the choice. Expiry runs the data default once, or records
-                        expired_unavailable with a Tasks/Contacts next step if its underlying action cannot run.
+data.messages         [{id, t, from, text, read, category: work|life|city, icon, target?, merge?, count?}]
+                        target {kind: company|fundraising|bank|map|decision, tab?, id?, place?} opens a formal screen.
+                        Same merge key and game day share a row; only unresolved actions count toward the HUD badge.
+                        Pure transaction receipts use timeline_only, with no notification or push.
 
-data.phone_messages   {seq, agenda[{id,npc,at,until,location,conversation,status: planned|met|missed}],
-                        cooldowns{"npc:template": absolute minute}, social{npc: meeting count}, expiry{message_id: minute}}
-                        Created lazily by PhoneMessages.S; missing expiry indexes rebuild from saved messages.
-                        data/economy/messages.json defines lead/window minutes and templates {label,requires[],cooldown_minutes}.
-                        Meetings search complete NPC and building opening windows; arrival plays existing dialogue.
-                        phone_met_<npc> flags and counts are the additive relationship hook while #95 is unmerged.
-                        phone_call_<conversation> is a once-only completion receipt; Maya's opening call still gates ch1.
-                        A loan may add phone_extended and retry_at: its one extension reschedules bank.payment,
-                        preserving debt, credit consequences and paid/due fees; never posts operating income.
+data.phone_messages   {version:2, seq, agenda[{id,npc,at,until,location,conversation,status: planned|met|missed}]}
+                        One-time old-save conversion marks pending threads read and removes replies/deadlines.
+                        Only neutral set_flag defaults carry forward; saved financial choices never execute.
+                        Existing visits may trigger dialogue on arrival; missed visits have no penalty or story gate.
+                        Maya's first conversation is optional in person; ch1 requires reading notifications.
+                        Loan extension is available in the bank screen and keeps debt, existing fees and retry schedule.
 
 data.npcs.<id>         {met, relationship, convo_done[]}
 data.timeline          [{t, text, kind}]
@@ -756,3 +750,19 @@ Return-event replacement requirements use `can_replace:{order}`. The predicate c
 ### Personal traffic safety (#115)
 `data.traffic_safety` is lazily initialized without changing the ledger. Fields: `injury`, `until`, `startle_until`, `cooldown`, `active_accident`, `policy_until`, `renew`, and `accidents[]`. Each accident carries a stable id, actual speed in px/s, severity, timestamp, liability, insurance-at-impact snapshot, medical bill, health claim, treatment flag, hospital days, medical debt, settlement flag and procedure due minute. The active injury references its accident independently of later glancing contacts. Historical unpaid bills/claims remain addressable by id.
 `economy/traffic_safety.json` owns new speed thresholds, braking, collision bounds, green phase, injury duration, medicine/medical fees, hospital-day range, premium/coverage, liability draw and settlement timing/share. Clock-backed lights and injury/claim deadlines survive saves. Emergency medical payables cannot be waived by saving, purchasing insurance afterward, or opening a different company. Minor medicine needs cash; emergency admission does not. Health claims cover the incurred provider invoice, never more; counterparty compensation covers only its remaining uninsured part. Driver responsibility is a pure quote hook for #94. #96 is currently unmerged; independent seven-day administrative claims do not claim to implement its legal system.
+
+## Progressive feature presentation (#151)
+
+`data/ui/feature_unlocks.json` defines each Company OS tab, internal detail and phone app gate.
+`FeatureGate.unlocked(id)` combines chapter, observed assets/activity and persistent access grants.
+`data.feature_gates = {granted[], seen[], guided[]}` records permanent access, new markers and first-use practice.
+A fresh game exposes overview, simplified finance and stock/orders; buying stock or choosing ecommerce opens Sales.
+Imports/documents open by chapter 9, overseas sales by chapter 13. Late tabs never block the simulation.
+Old builds did not record tabs: prior Company OS/phone access is preserved conservatively; existing industries,
+contracts, stock and overseas orders also infer unlocks. Losing a business cannot retract an already viewed feature.
+One gray disabled preview per navigation surface; remaining locked nodes are absent. QA UI fixtures may set
+`debug_feature_gates_all`; actual main-story walkthrough uses real progression. Protected minigames unchanged.
+
+## Assistant chores (#154)
+
+`game/data/economy/assistant.json` tunes cash buffer, daily hour, restock threshold, packing pace/skill, ingredient target, coffee target, maintenance condition and roster weekdays. Saved `assistant.tasks` stores independent switches (default true); `assistant.bills` stores actual accrued obligations until paid. Existing automatic loan repayments and perpetual leases keep their signed terms; insurance renewal delegates only previously chosen cover, never new cover. Switches never book revenue. Operations use the existing supplier, parcel, staff, inspection, asset, tax, insurance and customs APIs.

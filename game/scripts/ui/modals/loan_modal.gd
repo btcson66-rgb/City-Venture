@@ -118,6 +118,13 @@ func build() -> void:
 		v.add_child(UIK.kv("Balance", Fmt.money0(float(l["balance"])), Art.C_WHITE, 7))
 		v.add_child(UIK.kv("Payment", I18n.t("%s on %s") % [Fmt.money0(float(l["payment"])), Clock.fmt_date(int(l["next"]))], Art.C_MUTED, 7))
 		var lid: String = l["id"]
+		if l["status"] == "late" and not l.get("phone_extension", false):
+			var extend := UIK.button("Request three more days", func():
+				var result := Bank.request_payment_extension(lid)
+				UIRoot.toast(result.get("outcome", result.get("error", "")), "good" if result["ok"] else "bad")
+				rebuild())
+			extend.name = "LoanExtend_" + lid
+			v.add_child(extend)
 		var rh := UIK.hbox(3)
 		v.add_child(rh)
 		var r1 := UIK.button(I18n.t("Repay %s") % Fmt.money0(1000.0), func(): _repay(lid, 1000.0))

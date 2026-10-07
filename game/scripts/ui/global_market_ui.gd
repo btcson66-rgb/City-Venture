@@ -96,7 +96,7 @@ static func finance(os: CompanyOS, box: VBoxContainer) -> void:
 	auto.name = "AutoGlobalFX"
 	auto.text = I18n.t("Automatically convert weekly foreign payouts")
 	auto.button_pressed = bool(GlobalMarket.company()["auto_fx"])
-	auto.toggled.connect(func(on): GlobalMarket.company()["auto_fx"] = on)
+	auto.toggled.connect(func(on): AssistantPolicy.set_task("fx", on))
 	box.add_child(auto)
 	var first := true
 	for ccy in GlobalMarket.company()["balances"]:
