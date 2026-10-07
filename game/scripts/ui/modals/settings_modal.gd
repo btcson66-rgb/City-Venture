@@ -19,6 +19,7 @@ func _init() -> void:
 
 
 func build() -> void:
+	help_key = "assistant" if page == 5 else "settings"
 	var tabs := UIK.hbox(3)
 	body.add_child(tabs)
 	for index in PAGES.size():

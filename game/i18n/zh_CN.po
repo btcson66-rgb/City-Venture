@@ -2598,7 +2598,7 @@ msgstr "校友聚会"
 msgid "Amateur-looking. It will cost you some sales; you can reshoot later."
 msgstr "看起来很业余，会少一些订单；之后可以重拍。"
 
-#: scripts/ui/modals/settings_modal.gd:31
+#: scripts/ui/modals/settings_modal.gd:32
 msgid "Ambience"
 msgstr "环境音"
 
@@ -3054,7 +3054,7 @@ msgstr "安排每天的早班或晚班。同一名员工不能同时在两家店
 msgid "Assigning a worker to one counter removes that same shift from the other counter; an empty shift stays closed unless the owner works."
 msgstr "把员工排到一家店，就会取消另一家店的同时段班次。无人值班时，除非自己顾店，否则不营业。"
 
-#: scripts/sim/phone_messages.gd:184 scripts/ui/modals/settings_modal.gd:5
+#: data/help/help.json scripts/sim/phone_messages.gd:184 scripts/ui/modals/settings_modal.gd:5
 msgid "Assistant"
 msgstr "助理"
 
@@ -3394,7 +3394,7 @@ msgstr "Automotive Meridian"
 msgid "Automotive Vale"
 msgstr "Automotive Vale"
 
-#: scripts/ui/modals/settings_modal.gd:64
+#: scripts/ui/modals/settings_modal.gd:65
 msgid "Autosave interval"
 msgstr "自动存盘间隔"
 
@@ -3794,7 +3794,7 @@ msgstr "楼下就是 Bloom Coffee。河滨区最好喝的小白咖啡。"
 msgid "Blue"
 msgstr "蓝色"
 
-#: scripts/ui/modals/settings_modal.gd:57
+#: scripts/ui/modals/settings_modal.gd:58
 msgid "Blue-yellow"
 msgstr "蓝黄色辨识"
 
@@ -3878,7 +3878,7 @@ msgstr "案子接不完"
 msgid "Bookings have dried up. You can discount or wait for the season to turn."
 msgstr "订房突然变少。你可以打折促销，或等淡季过去。"
 
-#: scripts/ui/modals/settings_modal.gd:36
+#: scripts/ui/modals/settings_modal.gd:37
 msgid "Borderless"
 msgstr "无边框"
 
@@ -5506,11 +5506,11 @@ msgstr "中文通知、招牌、联系人职称、服饰状态与教学标题已
 msgid "Chinese tutorial headings now use the bundled fallback font in browsers, preventing missing-character boxes."
 msgstr "浏览器的中文教学标题改用内附备援字体，不再出现缺字方框。"
 
-#: scripts/ui/modals/settings_modal.gd:150
+#: scripts/ui/modals/settings_modal.gd:151
 msgid "Choice %d"
 msgstr "选项 %d"
 
-#: scripts/ui/modals/settings_modal.gd:61
+#: scripts/ui/modals/settings_modal.gd:62
 msgid "Choices always wait for you. Profit and loss use text and signed amounts as well as color."
 msgstr "选项一律等你选择。盈亏除了颜色，也用文本与金额正负号表示。"
 
@@ -6686,7 +6686,7 @@ msgstr "代收税款是负债，不是营收。自行申报要花时间，且可
 msgid "Collected tenant invoices: %s"
 msgstr "收回租客欠款：%s"
 
-#: scripts/ui/modals/settings_modal.gd:57
+#: scripts/ui/modals/settings_modal.gd:58
 msgid "Color assistance"
 msgstr "色彩辅助"
 
@@ -8210,11 +8210,11 @@ msgstr "供应链深厚"
 msgid "Deeper businesses: café menus, shifts and hygiene checks; delivery contracts with two vans; weekend pop-up stores; international trade with letters of credit."
 msgstr "经营更深入：咖啡馆菜单、排班与卫生检查；双车固定配送合约；周末快闪店；以信用状进行的国际贸易。"
 
-#: scripts/ui/modals/settings_modal.gd:65
+#: scripts/ui/modals/settings_modal.gd:66
 msgid "Default game speed"
 msgstr "缺省游戏速度"
 
-#: scripts/ui/modals/settings_modal.gd:67
+#: scripts/ui/modals/settings_modal.gd:68
 msgid "Default speed applies at launch. Hold Fast-forward for twice the current speed; release to resume."
 msgstr "缺省速度于启动时套用。按住快转键以两倍速度前进，放开即恢复。"
 
@@ -8778,6 +8778,10 @@ msgstr "已出货；到货时才认列营收，之后依约收款。"
 msgid "Display"
 msgstr "显示"
 
+#: data/help/help.json
+msgid "Display, audio and key settings apply immediately and are stored separately. Assistant choices belong to the current saved game."
+msgstr "显示、音效与按键设置立即生效，另行保存。助理选择则保存在目前的游戏存盘。"
+
 #: scripts/sim/ecommerce.gd:1463
 msgid "Dispute lost on %s: −%s"
 msgstr "申诉败诉 %s：−%s"
@@ -8902,7 +8906,7 @@ msgstr "本国"
 msgid "Don't forget to eat."
 msgstr "记得吃饭。"
 
-#: scripts/ui/modals/bank_modal.gd:97 scripts/ui/modals/pack_ship_modal.gd:73 scripts/ui/modals/settings_modal.gd:70
+#: scripts/ui/modals/bank_modal.gd:97 scripts/ui/modals/pack_ship_modal.gd:73 scripts/ui/modals/settings_modal.gd:71
 msgid "Done"
 msgstr "完成"
 
@@ -9958,7 +9962,7 @@ msgstr "对外营收"
 msgid "External shareholder liquidation payable"
 msgstr "应付外部股东清算款"
 
-#: scripts/ui/modals/settings_modal.gd:38
+#: scripts/ui/modals/settings_modal.gd:39
 msgid "Extra large"
 msgstr "特大"
 
@@ -11082,7 +11086,7 @@ msgstr "货架满档"
 msgid "Full-scale plant"
 msgstr "全规模工厂"
 
-#: scripts/ui/modals/settings_modal.gd:36
+#: scripts/ui/modals/settings_modal.gd:37
 msgid "Fullscreen"
 msgstr "全屏幕"
 
@@ -12134,7 +12138,7 @@ msgstr "隐藏瑕疵未知。付费验车：%s。"
 msgid "High bidder: %s · with fee %s"
 msgstr "最高出价者：%s · 含手续费 %s"
 
-#: scripts/ui/modals/settings_modal.gd:57
+#: scripts/ui/modals/settings_modal.gd:58
 msgid "High contrast"
 msgstr "高对比"
 
@@ -12158,7 +12162,7 @@ msgstr "品质门槛高"
 msgid "High-paid talent"
 msgstr "高薪人才"
 
-#: scripts/ui/modals/settings_modal.gd:34
+#: scripts/ui/modals/settings_modal.gd:35
 msgid "High-resolution art"
 msgstr "高解析美术"
 
@@ -14138,7 +14142,7 @@ msgstr "笔电 · 河滨大楼 7C"
 msgid "Laptop · café table"
 msgstr "笔电 · 咖啡厅"
 
-#: scripts/ui/modals/settings_modal.gd:38
+#: scripts/ui/modals/settings_modal.gd:39
 msgid "Large"
 msgstr "大"
 
@@ -15722,7 +15726,7 @@ msgstr "阳刚、阴柔或中性只会改变体型，没有任何能力差异。
 msgid "Master"
 msgstr "Master"
 
-#: scripts/ui/modals/settings_modal.gd:31
+#: scripts/ui/modals/settings_modal.gd:32
 msgid "Master volume"
 msgstr "主音量"
 
@@ -15894,7 +15898,7 @@ msgstr "医疗费用：%s"
 msgid "Medical visit · %s · 90 minutes"
 msgstr "看诊・%s・90 分钟"
 
-#: scripts/ui/modals/settings_modal.gd:38
+#: scripts/ui/modals/settings_modal.gd:39
 msgid "Medium"
 msgstr "中"
 
@@ -17734,7 +17738,7 @@ msgstr "已提出退租通知，请查看进行中的通知。"
 msgid "Notice rent"
 msgstr "通知期租金"
 
-#: scripts/ui/modals/settings_modal.gd:60
+#: scripts/ui/modals/settings_modal.gd:61
 msgid "Notification duration"
 msgstr "通知停留时间"
 
@@ -17906,7 +17910,7 @@ msgstr "调表"
 msgid "Of course you are."
 msgstr "我就知道。"
 
-#: scripts/ui/modals/pause_menu.gd:68 scripts/ui/modals/pause_menu.gd:76 scripts/ui/modals/settings_modal.gd:57
+#: scripts/ui/modals/pause_menu.gd:68 scripts/ui/modals/pause_menu.gd:76 scripts/ui/modals/settings_modal.gd:58
 msgid "Off"
 msgstr "关"
 
@@ -20314,7 +20318,7 @@ msgstr "按「出价」加一口。买家会加价直到私下上限；安静几
 msgid "Press E at the staff door and start a shift. You do the work yourself: the better it goes, the more you earn. Came in late? The shift runs until closing time. Less than 2 hours left? Sleep, and work tomorrow."
 msgstr "在员工信道按 E，开始上班。工作要自己做：做得越好，赚得越多。来得晚？就上到打烊为止。离打烊不到 2 小时？先睡觉，明天再上。"
 
-#: scripts/ui/modals/settings_modal.gd:48
+#: scripts/ui/modals/settings_modal.gd:49
 msgid "Press a key. Esc cancels key capture."
 msgstr "请按下按键。Esc 可取消设置按键。"
 
@@ -21662,11 +21666,11 @@ msgstr "回收纸"
 msgid "Red"
 msgstr "红色"
 
-#: scripts/ui/modals/settings_modal.gd:57
+#: scripts/ui/modals/settings_modal.gd:58
 msgid "Red-green"
 msgstr "红绿色辨识"
 
-#: scripts/ui/modals/settings_modal.gd:58
+#: scripts/ui/modals/settings_modal.gd:59
 msgid "Reduce motion"
 msgstr "减少画面晃动"
 
@@ -22446,7 +22450,7 @@ msgstr "补货"
 msgid "Restocking fee"
 msgstr "退货手续费"
 
-#: scripts/ui/modals/settings_modal.gd:53
+#: scripts/ui/modals/settings_modal.gd:54
 msgid "Restore default keys"
 msgstr "还原缺省按键"
 
@@ -23866,7 +23870,7 @@ msgstr "分部损益"
 msgid "Segments: each business and its shared costs"
 msgstr "分部损益：各产业与共用费用"
 
-#: data/help/help.json scripts/ui/modals/settings_modal.gd:135 scripts/ui/modals/settings_modal.gd:40
+#: data/help/help.json scripts/ui/modals/settings_modal.gd:136 scripts/ui/modals/settings_modal.gd:41
 msgid "Select an action, then press a key. Esc cancels key capture."
 msgstr "选择动作后按下按键。Esc 可取消设置按键。"
 
@@ -24222,11 +24226,7 @@ msgstr "设置"
 msgid "Settings and accessibility: key remapping, larger interface text, touch and controller support; ambience and music respond to what you do."
 msgstr "设置与无障碍：按键重设、大字接口、触摸与手把支持；环境音与音乐会随你的行动变化。"
 
-#: data/help/help.json
-msgid "Settings apply immediately and are stored separately from your saved games."
-msgstr "设置立即套用，并与游戏存盘分开保存。"
-
-#: scripts/ui/modals/settings_modal.gd:82
+#: scripts/ui/modals/settings_modal.gd:83
 msgid "Settings could not be saved. Check available storage and try again."
 msgstr "设置无法保存，请检查保存空间后再试。"
 
@@ -24806,7 +24806,7 @@ msgstr "慢"
 msgid "Slow afternoon. You wipe tables and watch who comes back twice."
 msgstr "悠闲的下午。你擦着桌子，观察谁会回来第二次。"
 
-#: data/character/options.json scripts/ui/modals/settings_modal.gd:38
+#: data/character/options.json scripts/ui/modals/settings_modal.gd:39
 msgid "Small"
 msgstr "小"
 
@@ -25046,7 +25046,7 @@ msgstr "抱歉——这单我接不了。"
 msgid "Sort, scan and stack the neighbourhood's parcels. You'll see how shipping really works."
 msgstr "分拣、扫描、堆栈附近的包裹。你会看到物流实际上怎么运作。"
 
-#: scripts/ui/modals/settings_modal.gd:31
+#: scripts/ui/modals/settings_modal.gd:32
 msgid "Sound effects"
 msgstr "音效"
 
@@ -25630,7 +25630,7 @@ msgstr "补助急件申请"
 msgid "SubsidyNextLeads"
 msgstr "SubsidyNextLeads"
 
-#: scripts/ui/modals/settings_modal.gd:59
+#: scripts/ui/modals/settings_modal.gd:60
 msgid "Subtitle advance delay (0 = manual)"
 msgstr "字幕换行等待（0＝手动）"
 
@@ -26178,7 +26178,7 @@ msgstr "测试版：按 Esc →「回报问题」。"
 msgid "Test build: press F12 any time to report a problem."
 msgstr "测试版：遇到问题随时按 F12 回报。"
 
-#: scripts/ui/modals/settings_modal.gd:38
+#: scripts/ui/modals/settings_modal.gd:39
 msgid "Text size"
 msgstr "文本大小"
 
@@ -28502,6 +28502,10 @@ msgstr "练习下一步"
 msgid "Tue"
 msgstr "二"
 
+#: data/help/help.json
+msgid "Turn a chore off to handle it yourself. If cash is short, fund the company or use the original manual action; existing signed obligations remain due."
+msgstr "关闭项目就能自己处理。周转金不足时，可补入公司资金或用原有手动操作；已签契约的款项仍须支付。"
+
 #: data/story/achievements.json
 msgid "Turn down the first acquisition offer."
 msgstr "拒绝第一次收购提案。"
@@ -28518,7 +28522,7 @@ msgstr "婉拒了 Hale Group 对 %s 的收购提案。"
 msgid "Turning an empty unit into a working shop: equipment, counter and furniture."
 msgstr "把空店面变成能营业的店：设备、吧台和桌椅。"
 
-#: scripts/ui/modals/settings_modal.gd:66
+#: scripts/ui/modals/settings_modal.gd:67
 msgid "Tutorial hints"
 msgstr "教学提示"
 
@@ -28586,7 +28590,7 @@ msgstr "台风损害理赔"
 msgid "Typical"
 msgstr "一般"
 
-#: scripts/ui/modals/settings_modal.gd:37
+#: scripts/ui/modals/settings_modal.gd:38
 msgid "UI scale"
 msgstr "接口缩放"
 
@@ -28622,7 +28626,7 @@ msgstr "未交货的买方预付款退回"
 msgid "Underwriting commission: %s"
 msgstr "承销佣金：%s"
 
-#: scripts/ui/minigames/route_game.gd:82 scripts/ui/minigames/teller_cash_game.gd:99 scripts/ui/modals/settings_modal.gd:152
+#: scripts/ui/minigames/route_game.gd:82 scripts/ui/minigames/teller_cash_game.gd:99 scripts/ui/modals/settings_modal.gd:153
 msgid "Undo"
 msgstr "复原"
 
@@ -29718,7 +29722,7 @@ msgstr "跟着城市一起转型绿色。"
 msgid "West"
 msgstr "西方"
 
-#: scripts/ui/hud.gd:179 scripts/ui/modals/settings_modal.gd:148
+#: scripts/ui/hud.gd:179 scripts/ui/modals/settings_modal.gd:149
 msgid "What can I do here?"
 msgstr "这里能做什么？"
 
@@ -29878,11 +29882,11 @@ msgstr "在周三拍卖标车，然后在机场出租或转卖。"
 msgid "Window light"
 msgstr "窗边自然光"
 
-#: scripts/ui/modals/settings_modal.gd:36
+#: scripts/ui/modals/settings_modal.gd:37
 msgid "Window mode"
 msgstr "窗口模式"
 
-#: scripts/ui/modals/settings_modal.gd:36
+#: scripts/ui/modals/settings_modal.gd:37
 msgid "Windowed"
 msgstr "窗口"
 
@@ -30533,6 +30537,10 @@ msgstr "你的 Maple Court 住户"
 #: scripts/sim/cafe.gd:149
 msgid "Your application is being processed."
 msgstr "你的申请正在审核中。"
+
+#: data/help/help.json
+msgid "Your assistant handles repetitive chores for the businesses and assets you have chosen. Supplies, wages, tax and delivery still cost real money."
+msgstr "助理替你选好的事业与资产处理重复杂事。补给、工资、税款及运送仍照常付费。"
 
 #: scripts/sim/assistant_policy.gd:94
 msgid "Your assistant needs more cash for the next chore. Fund the company or handle it yourself."
@@ -32114,7 +32122,7 @@ msgstr "✓ 以 %s 加买方手续费卖给你。请到「我的车场」验车�
 msgid "✓ Storefront open. Choose local prices; unsaved prices do not take orders."
 msgstr "✓ 商店已开设；请保存当地售价，商品才会接单。"
 
-#: scripts/ui/modals/settings_modal.gd:122
+#: scripts/ui/modals/settings_modal.gd:123
 msgid "✓ Turn off"
 msgstr "✓ 关闭"
 
@@ -32322,7 +32330,7 @@ msgstr "✗ 这家公司或争议已关闭；请回到目前公司的电脑。"
 msgid "✗ This table is occupied or dirty. Serve another guest or clean it."
 msgstr "✗ 这桌有人或尚未清洁，请先服务其他客人或清洁。"
 
-#: scripts/ui/modals/settings_modal.gd:122
+#: scripts/ui/modals/settings_modal.gd:123
 msgid "✗ Turn on"
 msgstr "✗ 打开"
 
@@ -32330,7 +32338,7 @@ msgstr "✗ 打开"
 msgid "✗ Unresolved; choose a route. No response by %s uses settlement automatically, including its fee and risks."
 msgstr "✗ 尚未解决；请选择处理方式。%s 前未回应会自动采用和解，仍须支付费用并承担风险。"
 
-#: scripts/ui/modals/settings_modal.gd:139
+#: scripts/ui/modals/settings_modal.gd:140
 msgid "✗ Used by %s. Choose another key."
 msgstr "✗ 已用于「%s」，请改用其他按键。"
 

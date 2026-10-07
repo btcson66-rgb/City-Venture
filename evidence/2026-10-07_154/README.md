@@ -50,11 +50,12 @@ The zh_TW audit's single English item is the player-chosen company name `QUIET T
 
 Full suite: **935/935 passed (383.1 s)**, no SCRIPT ERROR. Afterwards a cash-warning conditional was corrected;
 all **16/16 assistant tests (48.9 s)** pass with explicit funded-no-warning and warning-once assertions.
+The corrected implementation subsequently passed the full suite again: **935/935 (386.6 s)**.
 Legacy manual fixtures disable assistant callbacks; assistant tests explicitly enable all switches.
 Fixtures fund operating capital as equity, never revenue. 90-day fixtures cover commerce, coffee, tax,
 insurance, contracts, manufacturing, maintenance, returns and FX/trade. They do not promise every strategy profits.
 
-i18n: 8083 zh_TW translations, **0 missing**. Wiki OK (3913 assets / 343 IDs), beta 0 hits,
+i18n: 8085 zh_TW translations, **0 missing** (including assistant help). Wiki OK (3913 assets / 343 IDs), beta 0 hits,
 map adjacency OK (12 districts / 20 links), whitespace clean. Desktop/compact/English UI tours: 0 failures each.
 Corrupt-save decompression tests and headless renderer shutdown leak messages are inherited diagnostics.
 

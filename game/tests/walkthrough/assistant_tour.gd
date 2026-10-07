@@ -16,6 +16,7 @@ func run() -> void:
 	await bot.wait(0.4)
 	await bot.shot("assistant_settings_new_game")
 	bot.expect(settings.find_child("AssistantAll",true,false).button_pressed,"all chores default on")
+	bot.expect(settings.help_key=="assistant","assistant settings have their own help card")
 	UIRoot.close_all()
 	var os := CompanyOS.new("home_laptop")
 	os.tab = "operations"
