@@ -133,7 +133,7 @@ func test_skin_change_preserves_character_and_clothing_identity():
 
 func test_packing_stage_reports_full_content_height():
 	Help.auto = false
-	# This fixture measures formal work, not the separate first-use lesson.
+	# This fixture measures formal-work layout, not the separate first-use lesson.
 	GameState.data["minigame_tutorials_seen"] = {"pack_game":true}
 	var order := {"id":"LAYOUT", "product":"phone_stand", "qty":2, "customer":"Alex Chen", "district":"Riverside", "status":"placed", "location":"riverside_studio", "price":20.0}
 	var packing := PackGame.new([order])
