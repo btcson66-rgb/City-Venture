@@ -16,6 +16,7 @@ var _surface: Control
 var _hold: WeakRef
 var _hold_time := 0.0
 var _dragged := false
+var _scroll_button: WeakRef
 var _multi_touch := false
 var overlay: CanvasLayer
 var interact: Button
@@ -238,12 +239,18 @@ func _input(event: InputEvent) -> void:
 			_dragged = false
 			_hold_time = 0.0
 			var control := _hit(_active_surface(), event.position)
+			var button := control
+			while button != null and not button is BaseButton: button = button.get_parent() as Control
+			_scroll_button = weakref(button) if button is BaseButton and not button.disabled else null
 			while control != null and not control is InfoTip and control.tooltip_text.is_empty():
 				control = control.get_parent() as Control
 			_hold = weakref(control) if control != null else null
 		else:
 			fingers.erase(event.index)
 			_hold = null
+			if _dragged:
+				get_viewport().set_input_as_handled()
+				_restore_scroll_button.call_deferred()
 		if fingers.size() == 2:
 			_multi_touch = true
 			_hold = null
@@ -253,6 +260,8 @@ func _input(event: InputEvent) -> void:
 		fingers[event.index] = event.position
 		if starts.has(event.index) and event.position.distance_to(starts[event.index]) > 8.0:
 			_dragged = true
+			var button: Variant = _scroll_button.get_ref() if _scroll_button != null else null
+			if is_instance_valid(button): button.disabled = true # Cancels its pending release action.
 		if fingers.size() == 2:
 			var points: Array = fingers.values()
 			var distance: float = points[0].distance_to(points[1])
@@ -263,11 +272,16 @@ func _input(event: InputEvent) -> void:
 					_scroll_at(event.position, event.relative / 2.0)
 			_pinch_distance = distance
 			_hold = null
-		# Single-finger drags belong to ScrollContainer: its deadzone cancels
-		# the pressed child button before scrolling. Handling them here lets
-		# the emulated mouse release accidentally select a drink or option.
-		if fingers.size() == 2 and _active_surface() != null:
+		else:
+			_scroll_at(event.position, event.relative)
+		if _active_surface() != null:
 			get_viewport().set_input_as_handled()
+
+
+func _restore_scroll_button() -> void:
+	var button: Variant = _scroll_button.get_ref() if _scroll_button != null else null
+	if is_instance_valid(button): button.disabled = false
+	_scroll_button = null
 
 
 func _unhandled_input(event: InputEvent) -> void:
