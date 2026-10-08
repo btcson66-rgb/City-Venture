@@ -191,6 +191,7 @@ func _ready() -> void:
 
 func _quick_button(icon_name: String, text: String, key: String, cb: Callable) -> Button:
 	var b := Button.new()
+	b.name = "HUD_" + key
 	b.focus_mode = Control.FOCUS_NONE
 	b.add_theme_stylebox_override("normal", UIK.flat(Color(0.05, 0.08, 0.15, 0.88), Color(0.45, 0.55, 0.75, 0.55), 1, 2))
 	b.add_theme_stylebox_override("hover", UIK.flat(Color(0.1, 0.15, 0.26, 0.95), Art.C_SKY, 1, 2))

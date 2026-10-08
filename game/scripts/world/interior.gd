@@ -28,6 +28,7 @@ func build(building_id: String) -> void:
 	init_nav()
 	# backdrop
 	var bg := ColorRect.new()
+	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	bg.color = Color8(10, 18, 30)
 	bg.position = Vector2(-640, -400)
 	bg.size = Vector2(size_px.x + 1280, size_px.y + 800)
@@ -150,23 +151,27 @@ func _decorate_walls(wt: int, ht: int) -> void:
 		if wall_kind == "navy_panel":
 			wc = Color8(30, 42, 68)
 		var wain := ColorRect.new()
+		wain.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		wain.color = wc
 		wain.position = Vector2(0, WALL_ROWS * T - 16)
 		wain.size = Vector2(W, 14)
 		back_layer.add_child(wain)
 		for x in range(0, W, 24):
 			var pl := ColorRect.new()
+			pl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			pl.color = wc.darkened(0.12)
 			pl.position = Vector2(x + 3, WALL_ROWS * T - 13)
 			pl.size = Vector2(maxi(0,mini(18,W-x-3)), 9)
 			back_layer.add_child(pl)
 		var tr := ColorRect.new()
+		tr.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		tr.color = wc.lightened(0.25)
 		tr.position = Vector2(0, WALL_ROWS * T - 17)
 		tr.size = Vector2(W, 1)
 		back_layer.add_child(tr)
 	# crown moulding
 	var crown := ColorRect.new()
+	crown.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	crown.color = Color(1, 1, 1, 0.18)
 	crown.position = Vector2(0, -30)
 	crown.size = Vector2(W, 1)
@@ -188,27 +193,32 @@ func _decorate_walls(wt: int, ht: int) -> void:
 	back_layer.add_child(ao)
 	# baseboard + side frame so the room reads as a diorama
 	var base := ColorRect.new()
+	base.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	base.color = Color8(60, 48, 40) if def.get("floor", "") in ["wood_warm", "wood_dark", "wood_cafe"] else Color8(90, 96, 110)
 	base.position = Vector2(0, WALL_ROWS * T - 2)
 	base.size = Vector2(wt * T, 2)
 	back_layer.add_child(base)
 	var trim := ColorRect.new()
+	trim.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	trim.color = Color(1, 1, 1, 0.12)
 	trim.position = Vector2(0, -32)
 	trim.size = Vector2(wt * T, 1)
 	back_layer.add_child(trim)
 	for side in [0, 1]:
 		var fr := ColorRect.new()
+		fr.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		fr.color = Color8(22, 30, 46)
 		fr.position = Vector2(-4 if side == 0 else wt * T, -32)
 		fr.size = Vector2(4, ht * T + 36)
 		add_child(fr)
 	var bottom := ColorRect.new()
+	bottom.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	bottom.color = Color8(22, 30, 46)
 	bottom.position = Vector2(-4, ht * T)
 	bottom.size = Vector2(wt * T / 2.0 - 16 + 4, 4)
 	add_child(bottom)
 	var bottom2 := ColorRect.new()
+	bottom2.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	bottom2.color = Color8(22, 30, 46)
 	bottom2.position = Vector2(wt * T / 2.0 + 16, ht * T)
 	bottom2.size = Vector2(wt * T / 2.0 - 16 + 4, 4)

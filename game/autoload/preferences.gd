@@ -178,7 +178,12 @@ func apply_input() -> void:
 
 
 func font_factor() -> float:
-	return [0.85, 1.0, 1.25, 1.5][int(values["font_size"])]
+	var factor: float = [0.85, 1.0, 1.25, 1.5][int(values["font_size"])]
+	if is_instance_valid(InputAccess) and InputAccess.touch_mode and DisplayServer.get_name() != "headless":
+		# 640 logical pixels on a 390px phone otherwise turn an 8px label into 5 CSS pixels.
+		var scale_x := get_viewport().get_final_transform().get_scale().x
+		factor *= maxf(1.0, 1.6 / maxf(0.1, scale_x))
+	return factor
 
 
 func _node_added(node: Node) -> void:

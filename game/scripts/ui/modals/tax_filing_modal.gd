@@ -4,6 +4,7 @@ var entity := ""
 var _primary := false
 var advanced := false
 func _init(company: String) -> void:
+	calm_profile = "tax"
 	entity=company
 	title_text="Tax Filing"
 	icon_name="finance"

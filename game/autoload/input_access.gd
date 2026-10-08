@@ -16,6 +16,7 @@ var _surface: Control
 var _hold: WeakRef
 var _hold_time := 0.0
 var _dragged := false
+var _scroll_button: WeakRef
 var _multi_touch := false
 var overlay: CanvasLayer
 var interact: Button
@@ -35,6 +36,8 @@ func _ready() -> void:
 		_prepare_id.call_deferred(node.get_instance_id()))
 	get_tree().node_removed.connect(func(_node): _dirty = true)
 	get_viewport().gui_focus_changed.connect(func(_control): _focus_moved = true)
+	get_viewport().size_changed.connect(func():
+		if touch_mode: Preferences.apply.call_deferred())
 	_prepare(get_tree().root, true)
 	_make_overlay()
 	if OS.has_feature("web"):
@@ -81,6 +84,8 @@ func _prepare(node: Node, recurse := false) -> void:
 		var control := node as Control
 		if touch_mode:
 			control.custom_minimum_size = control.custom_minimum_size.max(TARGET)
+			if control is OptionButton:
+				control.get_popup().add_theme_constant_override("v_separation", 32)
 		control.focus_mode = Control.FOCUS_ALL
 		if not control.has_meta("input_access_ready"):
 			control.set_meta("input_access_ready", true)
@@ -98,6 +103,8 @@ func _enter_touch_mode() -> void:
 		var control: Variant = reference.get_ref()
 		if is_instance_valid(control):
 			control.custom_minimum_size = control.custom_minimum_size.max(TARGET)
+			if control is OptionButton:
+				control.get_popup().add_theme_constant_override("v_separation", 32)
 			live.append(reference)
 	_targets = live
 
@@ -120,6 +127,8 @@ func _make_overlay() -> void:
 	rotate.name = "RotateDevice"
 	overlay.add_child(rotate)
 	rotate.add_child(UIK.wrap("Please rotate your device to landscape.", 14, Art.C_WHITE, 250))
+	rotate.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	(rotate.get_child(0) as Control).mouse_filter = Control.MOUSE_FILTER_IGNORE
 	rotate.visible = false
 
 
@@ -199,8 +208,8 @@ func _process(delta: float) -> void:
 	interact.visible = touch_mode and player != null and player.can_move() and player.focus != null
 	interact.position = viewport - interact.size - Vector2(12, 12)
 	var physical := DisplayServer.window_get_size()
-	rotate.visible = touch_mode and physical.y > physical.x
-	rotate.position = (viewport - rotate.size) / 2.0
+	rotate.visible = touch_mode and physical.y > physical.x and player != null and surface == null
+	rotate.position = Vector2(96 if OS.has_feature("web") else 8, viewport.y - rotate.size.y - 8)
 	if _hold != null and not _dragged:
 		_hold_time += delta
 		if _hold_time >= 0.6:
@@ -227,15 +236,22 @@ func _input(event: InputEvent) -> void:
 				_multi_touch = false
 			fingers[event.index] = event.position
 			starts[event.index] = event.position
-			_dragged = false
+			if fingers.size() == 1: _dragged = false
 			_hold_time = 0.0
 			var control := _hit(_active_surface(), event.position)
+			var button := control
+			while button != null and not button is BaseButton: button = button.get_parent() as Control
+			if fingers.size() == 1:
+				_scroll_button = weakref(button) if button is BaseButton and not button.disabled else null
 			while control != null and not control is InfoTip and control.tooltip_text.is_empty():
 				control = control.get_parent() as Control
 			_hold = weakref(control) if control != null else null
 		else:
 			fingers.erase(event.index)
 			_hold = null
+			if _dragged:
+				get_viewport().set_input_as_handled()
+				if fingers.is_empty(): _restore_scroll_button.call_deferred()
 		if fingers.size() == 2:
 			_multi_touch = true
 			_hold = null
@@ -245,6 +261,8 @@ func _input(event: InputEvent) -> void:
 		fingers[event.index] = event.position
 		if starts.has(event.index) and event.position.distance_to(starts[event.index]) > 8.0:
 			_dragged = true
+			var button: Variant = _scroll_button.get_ref() if _scroll_button != null else null
+			if is_instance_valid(button): button.disabled = true # Cancels its pending release action.
 		if fingers.size() == 2:
 			var points: Array = fingers.values()
 			var distance: float = points[0].distance_to(points[1])
@@ -261,20 +279,43 @@ func _input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 
 
+func _restore_scroll_button() -> void:
+	var button: Variant = _scroll_button.get_ref() if _scroll_button != null else null
+	if is_instance_valid(button): button.disabled = false
+	_scroll_button = null
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch and not event.pressed:
 		var start: Vector2 = starts.get(event.index, event.position)
 		starts.erase(event.index)
-		if _multi_touch or not fingers.is_empty() or _dragged or start.distance_to(event.position) > 8.0 or rotate.visible:
+		if _multi_touch or not fingers.is_empty() or _dragged or start.distance_to(event.position) > 8.0:
 			return
 		var hovered := get_viewport().gui_get_hovered_control()
 		if hovered != null and hovered.mouse_filter != Control.MOUSE_FILTER_IGNORE:
 			return
 		var player := get_tree().get_first_node_in_group("player") as Player
 		if player != null and player.can_move():
-			player.walk_to(player.get_canvas_transform().affine_inverse() * event.position)
+			_walk_touch(player, player.get_canvas_transform().affine_inverse() * event.position)
 			get_viewport().set_input_as_handled()
 
+
+## Door mats sit just inside the conservative navigation-grid clearance. Finish a
+## door tap at the mat's outer edge using normal move_and_slide, never teleport.
+func _walk_touch(player: Player, target: Vector2) -> void:
+	var world := SceneRouter.world_scene()
+	var door_goal := Vector2.INF
+	if world != null and world.kind == "district":
+		for node in world.get_children():
+			if node is DoorTrigger:
+				var collision := node.get_child(0) as CollisionShape2D
+				var shape := collision.shape as RectangleShape2D
+				var rect := Rect2(node.position + collision.position - shape.size / 2.0, shape.size)
+				if rect.grow(12).has_point(target):
+					door_goal = Vector2(rect.get_center().x, rect.end.y)
+					break
+	if player.walk_to(door_goal if door_goal != Vector2.INF else target) and door_goal != Vector2.INF:
+		player.click_route.append(door_goal)
 
 func _scroll_at(point: Vector2, relative: Vector2) -> void:
 	var surface := _active_surface()
@@ -311,6 +352,12 @@ func _zoom_map(ratio: float) -> void:
 
 
 func _hook_web() -> void:
+	# Establish touch geometry before the first tap, rather than move its target during dispatch.
+	# Only a coarse primary pointer (phone, tablet) means touch; a touchscreen laptop with a mouse keeps the desktop layout.
+	if bool(JavaScriptBridge.eval('(navigator.maxTouchPoints > 0) && (window.matchMedia(`(pointer: coarse)`).matches || !window.matchMedia(`(hover: hover)`).matches)', true)):
+		touch_mode = true
+		get_window().content_scale_aspect = Window.CONTENT_SCALE_ASPECT_EXPAND
+		Preferences.apply.call_deferred()
 	JavaScriptBridge.eval("""
 		const canvas = document.getElementById('canvas');
 		if (canvas) {

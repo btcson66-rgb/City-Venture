@@ -8,6 +8,7 @@ var ratios: Dictionary = {}
 var order_qty := 2
 
 func _init() -> void:
+	calm_profile = "automotive"
 	title_text = "Auto Desk"
 	help_key = "automotive"
 	icon_name = "metro"

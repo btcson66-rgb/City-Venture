@@ -10,6 +10,7 @@ var content: VBoxContainer
 var app := "home"
 var notification_filter := "all"
 var displayed_minute := -1
+var content_width := 132.0
 
 
 func _ready() -> void:
@@ -47,18 +48,30 @@ func open() -> void:
 	is_open = true
 	visible = true
 	var holder := get_child(0) as Control
-	holder.position.x = maxf(8.0, get_viewport_rect().size.x - 162.0)
-	screen.size.y = maxf(80.0, minf(214.0, get_viewport_rect().size.y - 54.0))
+	var available := get_viewport_rect().size
+	var touch := InputAccess.touch_mode
+	holder.size = Vector2(minf(380, available.x - 16), minf(560, available.y - 16)) if touch else Vector2(150, 250)
+	holder.position.x = maxf(8.0, available.x - holder.size.x - 12.0)
+	var frame_scale := holder.size / Vector2(150, 250)
+	screen.position = Vector2(9, 18) * frame_scale
+	screen.size = Vector2(132, 214) * frame_scale
+	content_width = screen.size.x - (14.0 if touch else 0.0)
+	frame.scale = holder.size / Vector2(150, 250)
+	var background := holder.get_child(0) as ColorRect
+	background.position = Vector2(7, 16) * frame_scale
+	background.size = Vector2(136, 218) * frame_scale
+	content.custom_minimum_size.x = content_width
+	content.size.x = content_width
 	var scroll := screen.get_child(0) as ScrollContainer
-	scroll.custom_minimum_size.y = screen.size.y
-	scroll.size.y = screen.size.y
+	scroll.custom_minimum_size = screen.size
+	scroll.size = screen.size
 	app = "home"
 	_player_pose("phone")
 	GameState.set_flag("phone_opened")
 	_render()
 	var h: Control = get_child(0)
 	h.position.y = get_viewport_rect().size.y
-	create_tween().tween_property(h, "position:y", maxf(8.0, minf(56.0, get_viewport_rect().size.y - 250.0)), 0.18)
+	create_tween().tween_property(h, "position:y", maxf(8.0, minf(56.0, available.y - holder.size.y - 8)), 0.18)
 
 
 func close() -> void:
@@ -142,7 +155,7 @@ func _home() -> void:
 	content.add_child(top)
 	content.add_child(UIK.title(GameState.data["player"]["name"], 11))
 	var grid := GridContainer.new()
-	grid.columns = 3
+	grid.columns = (1 if int(Preferences.values["font_size"]) >= 2 else 2) if InputAccess.touch_mode else 3
 	grid.add_theme_constant_override("h_separation", 4)
 	grid.add_theme_constant_override("v_separation", 4)
 	var unread := GameState.unread_messages()
@@ -268,6 +281,12 @@ func _messages() -> void:
 		line.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		line.clip_text = true
 		line.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+		if InputAccess.touch_mode:
+			line.clip_text = false
+			line.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
+			line.custom_minimum_size.x = content_width
+			line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		line.name = "NotificationText_" + str(message["id"])
 		line.tooltip_text = I18n.t(str(message["text"]))
 		row.add_child(line)
 		row.add_child(UIK.label(Clock.fmt_short(int(message["t"])), 6, Art.C_DIM))

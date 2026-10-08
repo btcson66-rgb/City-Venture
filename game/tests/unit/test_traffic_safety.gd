@@ -180,7 +180,8 @@ func test_hospital_stay_preserves_optional_visits() -> void:
 	var t0 := Clock.now()
 	GameState.add_message("marcus","Reply soon",{"expires":t0+Clock.DAY,"default_reply":"ack"})
 	var mid: String = GameState.data["messages"].back()["id"]
-	PhoneMessages.S()["agenda"].append({"id":"MEET-X","npc":"marcus","at":t0+Clock.DAY,"until":t0+Clock.DAY+60,"location":"district:civic_center","conversation":"","status":"planned"})
+	Bank.B()["appointment"] = t0 + Clock.DAY
+	Sim.schedule(t0 + Clock.DAY, "bank.appointment", {})
 	hit()
 	var days_before := Clock.now()
 	var r := TrafficSafety.treat()
@@ -189,9 +190,8 @@ func test_hospital_stay_preserves_optional_visits() -> void:
 	var m := PhoneMessages.get_message(mid)
 	runner.check(not m.has("answered"),"reply did not expire during admission")
 	runner.check(not m.has("expires"),"notification never has a response deadline")
-	var meeting: Dictionary = PhoneMessages.S()["agenda"].back()
-	runner.eq(meeting["status"],"planned","meeting not missed")
-	runner.eq(int(meeting["at"]),t0+Clock.DAY+stay,"meeting moved by the stay")
+	runner.check(PhoneMessages.S()["agenda"].is_empty(), "notifications require no appointments")
+	runner.eq(int(Bank.B()["appointment"]),t0+Clock.DAY+stay,"bank appointment moved by the stay")
 	runner.check(r["ok"],"treated")
 func test_hospital_stay_ends_before_a_chapter_deadline() -> void:
 	var deadline := Clock.now()+Clock.DAY+300

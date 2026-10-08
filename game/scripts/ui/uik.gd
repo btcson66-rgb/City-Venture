@@ -355,7 +355,24 @@ static func card(inner: Control, style := "ui/card") -> PanelContainer:
 	return p
 
 
+## Tests set this to exercise the web-touch path off the web.
+static var force_web_touch := false
+static var _graveyard: Node
 static func clear(n: Node) -> void:
 	for c in n.get_children():
 		n.remove_child(c)
+		if (force_web_touch or OS.has_feature("web")) and InputAccess.touch_mode and c is Control:
+			# Godot still queries the releasing touch's control after its pressed callback.
+			# Keep it alive in-tree (hidden, outside the container) until frame end, so the container is empty at once.
+			c.hide()
+			_retire(c)
 		c.queue_free()
+
+static func _retire(c: Control) -> void:
+	if not is_instance_valid(_graveyard):
+		_graveyard = Node.new()
+		_graveyard.name = "RetiredControls"
+		var tree := Engine.get_main_loop() as SceneTree
+		if tree == null:return
+		tree.root.add_child.call_deferred(_graveyard)
+	_graveyard.add_child(c)

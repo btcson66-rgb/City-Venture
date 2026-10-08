@@ -15,6 +15,7 @@ func _init(r: Dictionary) -> void:
 
 
 func build() -> void:
+	GameState.set_flag("monthly_report_seen")
 	var cols := UIK.hbox(10)
 	# scrolls if a language's taller line height (or more entities) would push the footer off-screen
 	var reports_scroll := UIK.scroll(cols, Vector2(500, 226))

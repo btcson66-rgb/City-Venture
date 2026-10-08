@@ -1,0 +1,84 @@
+# #166 download headroom
+
+Base: `b00bb9b75a5d651040b93b68442040edb3ee1f99` (#162/#163 merged).
+Engine: Godot 4.5.1 official Windows console, Compatibility/OpenGL3, 1280×720, zh_TW.
+Capture: `--bot=asset_size --out=<this directory>/before|after`; seed 166, default preferences,
+high-detail enabled, isolated `SaveSystem.DIR` and preferences inside the bot output.
+
+| Decimal MB | Before | After | Saved | Target / hard limit |
+|---|---:|---:|---:|---:|
+| Windows ZIP | 178.014058 | 146.789930 | 31.224128 | 165 / 180 |
+| Web PCK | 157.060356 | 126.142916 | 30.917440 | 145 / 160 |
+
+Before: standalone untouched-asset exports, ZIP reconstructed with exactly the release script's
+entries/README/ZipInfo/compression settings (see `baseline_sizes.json`). After: `bash tools/package_release.sh`.
+Local baseline binaries remain outside git. No release/upload/merge was performed.
+
+`asset_size_before.txt/json` and `asset_size_after.txt/json` list actual PCK entry sizes, folder/extension totals,
+top 50, conservative reference candidates, native/detail pairs, identical source hashes and uncompressed audio.
+Reference candidates are **NOT PROVEN UNUSED**: dynamic string construction requires manual review.
+No resources were deleted. Native/detail pairs remain because `Art.tex()` reads native dimensions and offers
+the low-detail setting. Audio already uses Ogg Vorbis; ambient players load Ogg streams, so no audio transcode
+or playback change was necessary. Character and UI textures retain lossless imports.
+
+86 import settings use lossy quality 0.92: 4× building facades, floor textures, route-map illustration.
+Native PNGs, full-resolution PNGs, dimensions, alpha, palette, UI, gameplay, save format and economy remain intact.
+The manifest records every changed import. No `company_os.gd`, industry copy or `mini_game.gd` edits.
+
+## Rendered comparisons
+
+![Ten before/after pairs](comparison.jpg)
+
+Individual full-size JPGs are under `before/screenshots/` and `after/screenshots/`.
+Samples: Riverside, Harbor, Old Town, Bloom Coffee, Nexus cowork, Pier 7 warehouse, city map, world map,
+Company OS and barista practice. Reviewed all ten pairs and the full-size Riverside facade pair:
+no obvious blur, lost sign detail or changed layout. Small differences in vehicles/portraits are live animation.
+Original PNGs are retained locally under `qa-output/166-comparison-originals/`.
+
+## Validation
+
+- Class cache: `godot --headless --path game --editor --quit`, before and after imports.
+- Package: all four platform packages produced; both targets PASS (`package.log`).
+- Final full unit suite: 982/982, 428.2s, exit 0 (`units-final.log`).
+- i18n: 8,228/8,228 zh_TW translations, missing 0; wiki: 3,913 assets / 343 IDs OK; beta audit: 0 hits.
+- Build-size boundary tests: 5/5; target +1 byte warns, hard limit +1 byte fails, missing/ambiguous files fail.
+- Post-package rendered map: 0 failures, 130 logged steps, 5 shots, 463.0s, English audit 0.
+- Post-package rendered industries: 0 failures, 388 logged steps, 74 shots, 498.0s.
+  Its 8 English-audit hits are existing generated client names and the version word `beta`; no new UI text.
+  Result JSONs, English audits and logs are committed; tour PNGs remain in local `qa-output/`.
+- Unit negative-input cases print codec errors; teardown also reports inherited RID/ObjectDB leaks.
+  These are recorded, not represented as a browser-console-zero claim.
+- Capture bot: before and after 0 failures; English audit's two hits are the QA company name `Comparison Co`.
+
+## F1–F8 / player review
+
+F1–F7 N/A to import compression; their gameplay, tutorial, accounting and save flows are guarded by the
+unchanged unit suite and rendered industry/map tours. F8 PASS for the sampled rendered appearance:
+no extra emphasis, changed typography or hit targets introduced.
+Novice perspective: the streets, first work practice and next-action buttons retain their existing appearance;
+this is a fixed-state visual review, not a new blind novice playtest.
+Experienced replay: high-detail facades and familiar Company OS geometry remain intact; the normal low-detail
+choice still exists. Physical devices, Safari and subjective reviewer acceptance are not established by #166.
+
+## Final integration verification
+
+Merged the latest Claude base (`68ba6989`) without rebasing. This brings in CI
+setup/documentation and the formal-packing fixture initialization fix. That fixture
+previously entered first-use tutorial mode and could print a script error before its
+layout assertions; the integrated suite now genuinely executes those assertions.
+No runtime game/UI/economy/asset content changes are introduced by this base update.
+
+Rebuilt class cache with `--headless --path game --editor --quit`; reran i18n/wiki/beta
+and `bash tools/package_release.sh`: **982/982 tests passed in 620.2s**, all four
+platform packages produced, exit 0, no SCRIPT ERROR/Parse Error. Known codec-negative
+and inherited teardown diagnostics remain recorded in the complete log.
+Windows ZIP remains **146,789,930 bytes** and Web PCK **126,142,916 bytes**.
+The final PCK SHA256 is `69c0a0922fa04a0694cd84c9feaf30417683b4e43a793668011be1ee51a01648`.
+Exact hashes are in `package_sizes_integrated.json`; a fresh asset report is in
+`asset_size_after_integrated.txt/json`. Since runtime assets/imports remain unchanged,
+the ten original before/after rendered pairs above still describe this final build.
+After that final package, reran both **rendered** tours at 1280x720/zh_TW:
+map adjacency **0 failures**, 130 steps / 5 shots / 463.2s, English audit 0;
+industries **0 failures**, 388 steps / 74 shots / 495.4s, English audit 8 inherited
+generated client names/version word. Fresh reports and logs are under
+`integrated-map/`, `integrated-industries/` and `*-integrated-rendered.log`.

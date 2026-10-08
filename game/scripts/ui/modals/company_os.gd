@@ -155,14 +155,19 @@ func build() -> void:
 	sc.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	sc.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	row.add_child(sc)
-	var guide := UIK.button(I18n.t("First-use guide"), func():FeatureIntroModal.show_in(self, "os_"+tab))
+	var first_industry := FeatureIntroModal.industry_for_tab(tab)
+	var guide := UIK.button(I18n.t("First-use guide"), func():FeatureIntroModal.show_in(self, "industry_"+first_industry if first_industry != "" else "os_"+tab))
 	guide.name = "FeatureGuideReplay"
 	content.add_child(guide)
-	var chores: Array = {"operations":["restock","packing","returns"],"finance":["tax","fx","bills"],"people":["roster"],"contracts":["restock","packing"],"cafe":["cafe_supplies","hygiene","roster"],"logistics":["maintenance","roster"],"manufacturing":["maintenance","restock","packing"],"hotel":["maintenance"],"automotive":["maintenance"],"energy":["maintenance"],"international_trade":["customs"],"governance":["tax","renewals"]}.get(tab,[])
+	var chores: Array = {"operations":["restock","packing","returns"],"finance":["tax","fx","bills"],"people":["roster"],"contracts":["restock","packing"],"cafe":["cafe_supplies","hygiene","roster"],"logistics":["maintenance","roster"],"manufacturing":["maintenance","restock","packing"],"hotel":["maintenance","hotel_daily"],"automotive":["maintenance","fleet_care"],"energy":["maintenance","charging_care"],"international_trade":["customs"],"governance":["tax","renewals"]}.get(tab,[])
 	for chore in chores:AssistantPolicy.toggle(content,str(chore))
 	if tab == "finance":AssistantPolicy.bills_ui(content)
 	if not Industries.render_tab(tab, self):
 		call("_tab_" + tab)
+	if tab in ["contracts", "people", "finance", "segments", "group", "market", "governance"] and (tab != "finance" or FeatureGate.unlocked("finance_details")):
+		CalmScreen.apply(self, content, tab)
+	if first_industry != "" and "industry_"+first_industry not in FeatureGate.state()["guided"]:
+		FeatureIntroModal.show_in.call_deferred(self,"industry_"+first_industry)
 	if not IndustryGuidance.guide(tab).is_empty():
 		call_deferred("_industry_guide",tab)
 
@@ -173,7 +178,7 @@ func _set_tab(t: String) -> void:
 	reset_scroll = true   # a new tab starts at the top
 	help_key = "os_" + t   # the ? button explains the tab you're on
 	rebuild()
-	FeatureGate.guide.call_deferred("os_"+t)
+	if FeatureIntroModal.industry_for_tab(t) == "":FeatureGate.guide.call_deferred("os_"+t)
 
 
 func _open_offers() -> int:
