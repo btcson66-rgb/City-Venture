@@ -280,9 +280,26 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 		var player := get_tree().get_first_node_in_group("player") as Player
 		if player != null and player.can_move():
-			player.walk_to(player.get_canvas_transform().affine_inverse() * event.position)
+			_walk_touch(player, player.get_canvas_transform().affine_inverse() * event.position)
 			get_viewport().set_input_as_handled()
 
+
+## Door mats sit just inside the conservative navigation-grid clearance. Finish a
+## door tap at the mat's outer edge using normal move_and_slide, never teleport.
+func _walk_touch(player: Player, target: Vector2) -> void:
+	var world := SceneRouter.world_scene()
+	var door_goal := Vector2.INF
+	if world != null and world.kind == "district":
+		for node in world.get_children():
+			if node is DoorTrigger:
+				var collision := node.get_child(0) as CollisionShape2D
+				var shape := collision.shape as RectangleShape2D
+				var rect := Rect2(node.position + collision.position - shape.size / 2.0, shape.size)
+				if rect.grow(12).has_point(target):
+					door_goal = Vector2(rect.get_center().x, rect.end.y)
+					break
+	if player.walk_to(door_goal if door_goal != Vector2.INF else target) and door_goal != Vector2.INF:
+		player.click_route.append(door_goal)
 
 func _scroll_at(point: Vector2, relative: Vector2) -> void:
 	var surface := _active_surface()

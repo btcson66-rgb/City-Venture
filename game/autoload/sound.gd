@@ -255,9 +255,10 @@ func _process(delta: float) -> void:
 	if level==_intensity or _headless:return
 	_intensity=level
 	if is_instance_valid(_layer_tween):_layer_tween.kill()
-	_layer_tween=create_tween().set_parallel(true)
+	_layer_tween = null
 	for i in range(2):
 		if _stems_a[i].playing:
+			if _layer_tween == null: _layer_tween = create_tween().set_parallel(true)
 			_layer_tween.tween_property(_stems_a[i],"volume_db",layer_db(i+1,level),float(cfg().get("layer_fade_seconds",.8)))
 			_trace(_stems_a[i].stream.resource_path,"Music","intensity:"+str(level))
 

@@ -136,6 +136,8 @@ func test_packing_stage_reports_full_content_height():
 	var order := {"id":"LAYOUT", "product":"phone_stand", "qty":2, "customer":"Alex Chen", "district":"Riverside", "status":"placed", "location":"riverside_studio", "price":20.0}
 	var packing := PackGame.new([order])
 	packing.theme = UIK.theme()
+	# This fixture checks the formal packing layout; first-use practice has separate tests.
+	packing.mark_tutorial_seen()
 	runner.get_tree().root.add_child(packing)
 	packing.start()
 	for i in 8: await runner.get_tree().process_frame
