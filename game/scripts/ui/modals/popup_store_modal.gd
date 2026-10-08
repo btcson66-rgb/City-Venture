@@ -2,6 +2,7 @@ class_name PopupStoreModal
 extends Modal
 var chosen:=false
 func _init() -> void:
+	industry_intro = "popup"
 	title_text="Weekend pop-up";help_key="popup_store";icon_name="shop";panel_size=Vector2(500,360);pauses_time=true
 func action(box: Control,text: String,id: String,fn: Callable,primary:=false) -> void:
 	var highlight:=primary and not chosen;chosen=chosen or highlight

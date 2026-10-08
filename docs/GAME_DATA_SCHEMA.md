@@ -1,5 +1,15 @@
 # CITY VENTURE — Game Data Schema
 
+### Legacy minigame practice (#165, Implemented)
+
+New saves set `minigame_practice_version: 1` and `minigame_practice_optional: []`.
+Saves missing the version receive six optional activity ids during migration. Existing
+`minigame_tutorials_seen` entries are never overwritten. Shipping, logistics, self-photo,
+auction, funding and pop-up histories can mark completed lessons; absent history leaves
+practice behind an explicit button rather than forcing it. Migration does not move money.
+Forecast uses Living's seven-day issue boundary (one-based Clock day index), and saved
+unpaid AssistantPolicy bill due dates; automatic payment remains on the actual issue day.
+
 ### Work modes (Implemented, #150)
 
 `economy/work_modes.json` tunes the optional challenge tip per correct task, normal coffee tip, one-time retry

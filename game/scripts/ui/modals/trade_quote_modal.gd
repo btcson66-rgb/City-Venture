@@ -15,6 +15,7 @@ var quote: Dictionary = {}
 
 
 func _init(region := "northridge") -> void:
+	calm_profile = "trade_quote"
 	destination = region
 	source = "zenkai" if region == "aurelia" else "aurelia"
 	title_text = "Trade Deal Sheet — estimate"

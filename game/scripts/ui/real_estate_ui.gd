@@ -12,6 +12,7 @@ var years := 25
 var project_name := "VENTURE TOWER"
 var has_primary := false
 func _init() -> void:
+	calm_profile = "real_estate"
 	project_name=I18n.t("VENTURE TOWER")
 	title_text="Matchmaker"
 	icon_name="home"

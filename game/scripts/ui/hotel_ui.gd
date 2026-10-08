@@ -4,6 +4,7 @@ extends Modal
 var page := "board"
 var has_primary := false
 func _init() -> void:
+	calm_profile = "hotel"
 	title_text="Rate Board"
 	help_key="hotel"
 	icon_name="sleep"

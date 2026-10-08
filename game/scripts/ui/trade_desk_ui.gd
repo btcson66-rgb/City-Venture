@@ -2,6 +2,7 @@ class_name TradeDeskUI
 extends Modal
 var primary_chosen:=false
 func _init() -> void:
+	calm_profile = "trade"
 	title_text="International Trade";icon_name="world";help_key="trade_desk";panel_size=Vector2(600,332)
 static func open() -> void:UIRoot.open_modal(TradeDeskUI.new())
 static func render(os: Node) -> void:

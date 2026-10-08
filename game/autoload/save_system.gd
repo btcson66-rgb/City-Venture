@@ -319,6 +319,10 @@ func autosave() -> void:
 
 
 func _migrate(d: Dictionary) -> Dictionary:
+	# Old games did not retain all six activity histories. Offer practice, never interrupt them.
+	if not d.has("minigame_practice_version"):
+		d["minigame_practice_optional"] = MiniGame.LEGACY_OPTIONAL.duplicate()
+		d["minigame_practice_version"] = 1
 	# a save from an older build: add whatever sections and fields this build has that it doesn't
 	AssistantPolicy.migrate(d)   # before the template fill: a missing assistant section means a pre-assistant save
 	_fill_missing(d, GameState.template())

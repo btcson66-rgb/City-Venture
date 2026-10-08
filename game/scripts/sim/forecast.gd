@@ -37,9 +37,16 @@ static func weekly(ent: String, weeks := 9) -> Dictionary:
 		while t3 < horizon:
 			flows.append([t3, -Living.home_rent(), "Home rent"])
 			t3 = _next_day_of_month(int(lv.get("rent_due_day_of_month", 14)), t3 + Clock.DAY)
-		var daily := Living.daily_living()
-		for d in weeks * 7:
-			flows.append([now + d * Clock.DAY + 12 * 60, -daily, "Living costs"])
+		var bill_at := Living.next_living_bill_at()
+		# Auto-paid on issue; manual bills have the same grace period as AssistantPolicy.bill.
+		var grace := 0 if bool(AssistantPolicy.S()["tasks"].get("bills", true)) else int(AssistantPolicy.cfg().get("bill_due_days", 7)) * Clock.DAY
+		while bill_at + grace < horizon:
+			flows.append([bill_at + grace, -Living.daily_living() * 7.0, "Living costs"])
+			bill_at += 7 * Clock.DAY
+	# Already-issued unpaid bills retain their saved due dates, including older saves.
+	for bill in AssistantPolicy.S().get("bills", []):
+		if not bill.get("paid", false) and bill.get("entity", "") == ent:
+			flows.append([maxi(now, int(bill.get("due", now))), -float(bill["amount"]), "Bills due"])
 	# loans
 	for l in Bank.loans(ent):
 		var bal := float(l["balance"])

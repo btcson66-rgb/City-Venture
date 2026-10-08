@@ -1,7 +1,7 @@
 class_name AssistantPolicy
 extends RefCounted
 ## Delegates existing transactions, never generates a sale or accepts new investments.
-const TASKS := {"restock":"Restocking","packing":"Packing and shipping","cafe_supplies":"Cafe supplies","roster":"Staff schedules","hygiene":"Cafe cleaning","tax":"Tax filing","maintenance":"Asset maintenance","customs":"Customs documents","fx":"Foreign payouts","bills":"Recurring bills","renewals":"Insurance renewals","returns":"Routine returns"}
+const TASKS := {"restock":"Restocking","packing":"Packing and shipping","cafe_supplies":"Cafe supplies","roster":"Staff schedules","hygiene":"Cafe cleaning","tax":"Tax filing","maintenance":"Asset maintenance","customs":"Customs documents","fx":"Foreign payouts","bills":"Recurring bills","renewals":"Insurance renewals","returns":"Routine returns","hotel_daily":"Hotel daily care","fleet_care":"Fleet servicing","charging_care":"Charging station care","media_delivery":"Completed media deliveries","month_close":"Monthly report summaries"}
 static var testing := false
 static var _busy := false
 static func cfg() -> Dictionary:return DataDB.economy["assistant"]
@@ -13,8 +13,11 @@ static func S() -> Dictionary:
 	for field in ["tasks","last","notices"]:
 		if not state.has(field):state[field] = {}
 	var fallback := bool(state.get("default", true))
+	if not state["tasks"].is_empty() and state["tasks"].values().all(func(value):return not bool(value)):fallback = false
 	for id in TASKS:
-		if not state["tasks"].has(id):state["tasks"][id] = fallback
+		if not state["tasks"].has(id):
+			var predecessor: String = {"fleet_care":"maintenance","charging_care":"maintenance","media_delivery":"packing","hotel_daily":"roster"}.get(id, "")
+			state["tasks"][id] = bool(state["tasks"].get(predecessor,fallback)) if predecessor != "" else fallback
 	return state
 ## Saves made before the assistant existed keep every chore manual, so no veteran's cash moves unasked.
 static func migrate(data: Dictionary) -> void:
@@ -71,6 +74,11 @@ static func available(id: String) -> bool:
 		"cafe_supplies","hygiene":return Cafe.leased()
 		"roster":return FeatureGate.unlocked("os_people")
 		"tax":return FeatureGate.unlocked("app_tax_filing")
+		"hotel_daily":return Hotel.is_running()
+		"fleet_care":return Automotive.is_running()
+		"charging_care":return Energy.is_running()
+		"media_delivery":return Media.is_running()
+		"month_close":return FeatureGate.unlocked("finance_details")
 		"renewals":return FeatureGate.unlocked("os_governance")
 		"maintenance":return not Assets.S()["items"].is_empty() or Logistics.has_van()
 		"customs","fx":return FeatureGate.unlocked("overseas") or TradeIndustry.is_running()
@@ -192,7 +200,8 @@ static func on_hour(t: int, h: int) -> void:
 	if h == int(cfg()["daily_hour"]):
 		if enabled("restock"):_restock()
 		if enabled("cafe_supplies") or enabled("roster") or enabled("hygiene"):_cafe(t)
-		if enabled("maintenance"):_maintain()
+		if enabled("maintenance") or enabled("fleet_care") or enabled("charging_care"):_maintain()
+		if enabled("hotel_daily"):_hotel_daily()
 		if enabled("restock") and Manufacturing.valid():
 			var required := 0
 			var counted := {}
@@ -240,6 +249,7 @@ static func on_hour(t: int, h: int) -> void:
 			for filing in Tax.returns(str(entity)):
 				if filing["status"] == "due" and affordable(str(entity),Tax.payable(filing)+float(Tax.cfg()["accountant_fee"])):
 					Tax.file(str(entity),str(filing["id"]),"accountant",false)
+	if enabled("media_delivery"):_media_deliveries()
 	if enabled("fx") and GlobalMarket.live(GameState.company_id()):GlobalMarket.company()["auto_fx"] = true
 	_busy = false
 static func _restock() -> void:
@@ -297,11 +307,15 @@ static func _maintain() -> void:
 	for item in Assets.S()["items"].values():
 		if item.get("entity","")!=GameState.business_entity() or not (item.get("maintenance_due",false) or item.get("status","")=="broken"):continue
 		if item.get("segment","") == "automotive" and Automotive.S()["fleet"].has(item["id"]):
+			if not enabled("fleet_care"):continue
 			# Servicing preserves the real car's return requirement and one-day downtime.
 			if str(Automotive.S()["fleet"][item["id"]]["rental"]) == "" and affordable(str(item["entity"]),Automotive.service_cost(str(item["id"]))):Automotive.service(str(item["id"]))
 			continue
+		var charger := Energy.open_stations().any(func(site):return site.get("asset", "") == item["id"])
+		if charger and not enabled("charging_care"):continue
+		if not charger and not enabled("maintenance"):continue
 		if affordable(str(item["entity"]),float(item.get("maintenance_cost",Assets.cfg().get("maintenance_cost",50)))):Assets.maintain(str(item["id"]))
-	if Logistics.has_van():
+	if enabled("maintenance") and Logistics.has_van():
 		for id in LogisticsDepth.vehicles():
 			var vehicle: Dictionary = LogisticsDepth.vehicles()[id]
 			if float(vehicle["condition"])<float(cfg()["maintenance_condition"]) and LogisticsDepth.available(str(id)) and affordable(Logistics.entity(),float(LogisticsDepth.cfg()["service_cost"])):LogisticsDepth.service(str(id))
@@ -312,3 +326,20 @@ static func routine_event(inst: Dictionary) -> bool:
 	var order: Dictionary = Ecommerce.E()["orders"].get(inst["ctx"].get("order",""),{})
 	if order.is_empty() or not affordable(str(order["entity"]),Packing.total(order)+Ecommerce.ship_cost(order,"economy")):return false
 	return EventEngine.choose(str(inst["iid"]),"refund").get("ok",false)
+
+## Reference rates and existing paid housekeeping, never perfect demand prediction or a free worker.
+static func _hotel_daily() -> void:
+	if not Hotel.is_running():return
+	for room in Hotel.S()["rooms"]:
+		Hotel.set_price(str(room),float(Hotel.cfg()["types"][room]["ref_price"]))
+	var cost := float(Hotel.cfg()["temp_capacity"])*float(Hotel.cfg()["temp_cost_room"])
+	Hotel.set_temp(affordable(Hotel.entity(),cost))
+
+## Only finish work that really exists and is complete. Campaign settlement keeps its native KPI pricing.
+static func _media_deliveries() -> void:
+	var campaigns: Dictionary = Media.S().get("campaigns",{})
+	for job in Jobs.S()["items"].values():
+		if job.get("segment", "") != "media" or job.get("entity", "") != GameState.business_entity():continue
+		if campaigns.has(job["id"]) or job.get("direction", "") == "purchase":continue
+		if job["status"] == "active" and float(job["progress"]) >= float(job["work"]):Jobs.deliver(str(job["id"]))
+		if job["status"] == "delivered":Jobs.invoice(str(job["id"]))

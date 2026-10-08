@@ -7,6 +7,7 @@ var has_primary := false
 var internal_target := "cafe"
 var internal_budget := 5000.0
 func _init() -> void:
+	calm_profile = "media"
 	title_text="Campaign Mixer"
 	help_key="media"
 	icon_name="star"

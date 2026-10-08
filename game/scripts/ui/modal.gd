@@ -11,6 +11,9 @@ var panel_size := Vector2(420, 250)
 var closable := true
 var dim_alpha := 0.55
 var help_key := ""           # data/help/help.json: shown the first time, and behind the ? button (Help)
+var calm_profile := ""
+var industry_intro := ""       # explicit ticket-owned screens only
+var calm_expanded := {}
 ## Life goes on while you use a screen (Company OS, the bank, a shop): the clock keeps running. Screens that are
 ## about stopping to read or decide (pause menu, help cards, decisions, reports, minigames that apply their own
 ## time) set this to stop it.
@@ -77,6 +80,7 @@ func _ready() -> void:
 	footer_scroll.add_child(footer)
 	outer.add_child(footer_scroll)
 	build()
+	CalmScreen.apply_modal(self)
 	_built = true
 	_fit_panel.call_deferred()
 	if help_key != "":
@@ -96,6 +100,7 @@ func rebuild() -> void:
 	UIK.clear(body)
 	UIK.clear(footer)
 	build()
+	CalmScreen.apply_modal(self)
 	_fit_panel()
 	if not keep.is_empty():
 		_restore_scroll.call_deferred(keep)

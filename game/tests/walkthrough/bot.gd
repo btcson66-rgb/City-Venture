@@ -189,6 +189,12 @@ func _run() -> void:
 	match mode:
 		"asset_size":
 			await load("res://tests/walkthrough/asset_size_tour.gd").new(self).run()
+		"calm_active":
+			await load("res://tests/walkthrough/calm_active_tour.gd").new(self).run()
+		"calm_screens":
+			await load("res://tests/walkthrough/calm_screens_tour.gd").new(self).run()
+		"cleanup":
+			await load("res://tests/walkthrough/cleanup_tour.gd").new(self).run()
 		"work_modes":
 			await load("res://tests/walkthrough/work_modes_tour.gd").new(self).run()
 		"practice":
@@ -415,6 +421,19 @@ func click(b: Control) -> bool:
 func click_named(name: String, timeout_s := 5.0) -> bool:
 	# The first-use hint is non-blocking, but its card could sit over the button: dismiss it first.
 	if name not in ["FeaturePracticeNext","FeaturePracticeSkip"]:FeatureIntroModal.dismiss_all(get_tree())
+	if button_named(name) == null and name != "CalmAdvanced":
+		var modal := UIRoot.top_modal()
+		var target := modal.find_child(name,true,false) as Control if modal != null else null
+		var details := modal.find_child("CalmDetails",true,false) as Control if modal != null else null
+		# Wait for the nested scroll layout to settle before a real click; never toggle an already open fold.
+		for attempt in 2:
+			if target == null or target.is_visible_in_tree() or details == null or details.visible:break
+			var advanced := button_named("CalmAdvanced")
+			if advanced == null:break
+			await wait(.1)
+			log_line("  reveal detail controls for [%s]" % name)
+			await click(advanced)
+			await frames(3)
 	var ok := await until(func(): return button_named(name) != null, timeout_s)
 	if not ok:
 		fail("button '%s' not found" % name)

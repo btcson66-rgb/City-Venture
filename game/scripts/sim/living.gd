@@ -1,5 +1,9 @@
 class_name Living
 extends RefCounted
+
+## Same seven-day issue boundary used by on_hour; the next bill is strictly after now.
+static func next_living_bill_at() -> int:
+	return ((Clock.day_index() / 7 + 1) * 7 - 1) * Clock.DAY
 ## Personal life costs (rent, living), leases, overdraft and solvency monitoring.
 ## Failure is never game over (Handoff §2.7): warnings + recovery options, overdraft with fees.
 
