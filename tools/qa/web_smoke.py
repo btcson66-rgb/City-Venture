@@ -7,6 +7,7 @@ import argparse
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 import json
+import hashlib
 from pathlib import Path
 import threading
 import time
@@ -287,6 +288,7 @@ def main():
     server=ThreadingHTTPServer(('127.0.0.1',0),partial(Handler,directory=str(args.export_dir.resolve())))
     threading.Thread(target=server.serve_forever,daemon=True).start()
     args.out.mkdir(parents=True,exist_ok=True)
+    export_hash = hashlib.sha256((args.export_dir/'index.pck').read_bytes()).hexdigest()
     results=[]
     with sync_playwright() as pw:
         engines=[pw.chromium]
@@ -303,7 +305,7 @@ def main():
                         name=f'{engine.name}-{viewport}-{size}-{locale}'
                         context=browser.new_context(viewport={'width':width,'height':height},device_scale_factor=1,is_mobile=True,has_touch=True)
                         flow=Flow(context.new_page(),args.out/name)
-                        result={'name':name,'viewport':[width,height],'size':size,'locale':locale,'status':'FAIL'}
+                        result={'name':name,'browser_version':browser.version,'viewport':[width,height],'size':size,'locale':locale,'status':'FAIL'}
                         try:
                             flow.run(f'http://127.0.0.1:{server.server_port}/index.html?cv_smoke=1',size=='large',locale)
                             result['status']='PASS'
@@ -317,7 +319,7 @@ def main():
                         context.close()
                         print(json.dumps(result,ensure_ascii=False),flush=True)
             browser.close()
-        report={'export':str(args.export_dir.resolve()),'webkit':'RUN' if webkit_available else 'NOT INSTALLED - Safari representative NOT VERIFIED','results':results}
+        report={'export':str(args.export_dir.resolve()),'pck_sha256':export_hash,'webkit':'RUN' if webkit_available else 'NOT INSTALLED - Safari representative NOT VERIFIED','results':results}
         (args.out/'result.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
     server.shutdown()
     return int(any(r['status']!='PASS' or r['console_errors'] for r in results))
