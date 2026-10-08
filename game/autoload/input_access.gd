@@ -353,7 +353,8 @@ func _zoom_map(ratio: float) -> void:
 
 func _hook_web() -> void:
 	# Establish touch geometry before the first tap, rather than move its target during dispatch.
-	if bool(JavaScriptBridge.eval('navigator.maxTouchPoints > 0', true)):
+	# Only a coarse primary pointer (phone, tablet) means touch; a touchscreen laptop with a mouse keeps the desktop layout.
+	if bool(JavaScriptBridge.eval('(navigator.maxTouchPoints > 0) && (window.matchMedia(`(pointer: coarse)`).matches || !window.matchMedia(`(hover: hover)`).matches)', true)):
 		touch_mode = true
 		get_window().content_scale_aspect = Window.CONTENT_SCALE_ASPECT_EXPAND
 		Preferences.apply.call_deferred()

@@ -135,3 +135,18 @@ func test_slider_changes_debounce_the_settings_write() -> void:
 	Preferences.path = old_path
 	Preferences.values = old_values
 	Preferences.apply()
+
+
+func test_clear_on_web_touch_path_empties_container_at_once() -> void:
+	var box := VBoxContainer.new()
+	runner.get_tree().root.add_child(box)
+	box.add_child(Button.new())
+	box.add_child(Label.new())
+	var was := InputAccess.touch_mode
+	InputAccess.touch_mode = true
+	UIK.force_web_touch = true
+	UIK.clear(box)
+	runner.eq(box.get_child_count(), 0, "container is empty right after clear on the web-touch path")
+	UIK.force_web_touch = false
+	InputAccess.touch_mode = was
+	box.free()
