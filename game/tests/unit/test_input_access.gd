@@ -137,7 +137,7 @@ func test_slider_changes_debounce_the_settings_write() -> void:
 	Preferences.apply()
 
 
-func test_clear_on_web_touch_path_empties_container_at_once() -> void:
+func test_clear_on_web_touch_path_keeps_released_control_in_tree_but_hidden() -> void:
 	var box := VBoxContainer.new()
 	runner.get_tree().root.add_child(box)
 	box.add_child(Button.new())
@@ -146,7 +146,7 @@ func test_clear_on_web_touch_path_empties_container_at_once() -> void:
 	InputAccess.touch_mode = true
 	UIK.force_web_touch = true
 	UIK.clear(box)
-	runner.eq(box.get_child_count(), 0, "container is empty right after clear on the web-touch path")
+	runner.check(box.get_children().all(func(c): return not c.visible and str(c.name).begins_with("Retiring_") and c.is_inside_tree()), "released controls stay in tree, hidden and renamed, until frame end")
 	UIK.force_web_touch = false
 	InputAccess.touch_mode = was
 	box.free()
