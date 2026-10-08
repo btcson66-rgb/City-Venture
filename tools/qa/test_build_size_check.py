@@ -27,7 +27,23 @@ class BuildSizeTests(unittest.TestCase):
                               capture_output=True, text=True)
 
     def test_exact_limits_pass(self):
-        self.assertEqual(self.run_check().returncode, 0)
+        result = self.run_check()
+        self.assertEqual(result.returncode, 0)
+        self.assertEqual(result.stdout.count('WARN:'), 2)
+
+    def test_targets_and_warning_band(self):
+        for path, target in [(self.web, 145_000_000), (self.zip, 165_000_000)]:
+            with path.open('r+b') as file:
+                file.truncate(target)
+        result = self.run_check()
+        self.assertEqual(result.returncode, 0)
+        self.assertEqual(result.stdout.count('PASS:'), 2)
+        for path, target in [(self.web, 145_000_000), (self.zip, 165_000_000)]:
+            with path.open('r+b') as file:
+                file.truncate(target + 1)
+        result = self.run_check()
+        self.assertEqual(result.returncode, 0)
+        self.assertEqual(result.stdout.count('WARN:'), 2)
 
     def test_one_byte_over_fails_for_each_artifact(self):
         for path, size in [(self.web, 160_000_000), (self.zip, 180_000_000)]:
