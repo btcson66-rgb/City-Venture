@@ -19,6 +19,14 @@ func _process(delta: float) -> void:
 		"scene": SceneRouter.current.get_script().get_global_name() if SceneRouter.current != null else "",
 		"locale": I18n.locale(), "font_size": Preferences.values["font_size"],
 		"touch": InputAccess.touch_mode, "phone": UIRoot.phone.is_open, "actions": []}
+	# The contextual prompt is a clickable PanelContainer, not a Button. Report
+	# visible HUD surfaces so the touch driver can choose exposed walking ground.
+	data["ground_blockers"] = []
+	for child in UIRoot.hud.get_children():
+		if child is Control and child.is_visible_in_tree() and child.mouse_filter != Control.MOUSE_FILTER_IGNORE:
+			var bounds: Rect2 = child.get_global_rect().intersection(get_viewport().get_visible_rect())
+			if bounds.has_area():
+				data["ground_blockers"].append([bounds.position.x, bounds.position.y, bounds.size.x, bounds.size.y])
 	var world := SceneRouter.world_scene()
 	if world != null:
 		data["world"] = world.scene_id

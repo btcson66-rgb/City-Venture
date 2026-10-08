@@ -75,10 +75,23 @@ class Flow:
         width,height = state['viewport']
         if y < 130 and (x < 240 or x > width-240):
             y = min(height-70,180)
-        for control in state.get('controls', []):
-            bx,by,bw,bh = control['visible']
-            if bw and bh and bx-6 <= x <= bx+bw+6 and by-6 <= y <= by+bh+6:
-                x = max(80,bx-16)
+        blockers = state.get('ground_blockers', []) + [
+            c['visible'] for c in state.get('controls', [])]
+        blockers = [r for r in blockers if r[2] > 0 and r[3] > 0]
+        def exposed(point):
+            px,py = point
+            return (20 <= px <= width-20 and 20 <= py <= height-8 and
+                    not any(bx-6 <= px <= bx+bw+6 and by-6 <= py <= by+bh+6
+                            for bx,by,bw,bh in blockers))
+        if not exposed((x,y)):
+            # Approach beside/above the HUD first. In large text the contextual
+            # prompt can cover a doorway; tapping it would reopen Company OS.
+            candidates = []
+            for bx,by,bw,bh in blockers:
+                candidates.extend([(bx-16,y),(bx+bw+16,y),(x,by-16),(x,by+bh+16)])
+            candidates = [p for p in candidates if exposed(p)]
+            assert candidates, f'No exposed walking ground near {(x,y)}'
+            x,y = min(candidates, key=lambda p: (p[0]-x)**2+(p[1]-y)**2)
         self.touch(x,y)
 
     def drag(self, rectangle, dx=0, dy=-140):
@@ -148,6 +161,22 @@ class Flow:
                 self.tap('Close')
             else:
                 break
+
+    def close_modal(self, expected):
+        # Verify the transition before walking; never assume a dispatched touch
+        # actually dismissed the window.
+        for _ in range(3):
+            if self.state().get('modal') != expected:
+                return
+            self.tap('Close')
+            try:
+                self.until(lambda state: state.get('modal') != expected,
+                           f'close {expected}', timeout=3)
+                return
+            except AssertionError:
+                if self.errors:
+                    raise
+        raise AssertionError(f'Touch close did not dismiss {expected}')
 
     def walk_action(self, action, building=None, timeout=90):
         end = time.monotonic()+timeout
@@ -269,7 +298,7 @@ class Flow:
         self.dismiss_help()
         self.until(lambda s: s.get('modal') == 'CompanyOS', 'Company OS')
         self.shot('company_os')
-        self.tap('Close')
+        self.close_modal('CompanyOS')
         self.door()
         self.door('riverside_apartment')
         self.walk_action('sleep')
