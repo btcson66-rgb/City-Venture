@@ -3,7 +3,8 @@ name: Web touch smoke
 on:
   pull_request:
   push:
-    branches: ['codex/**']
+    branches: ['claude/exciting-bardeen-y71ixv']
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -13,8 +14,49 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  web-build:
+    name: Export one verified Web build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-godot
+      - uses: actions/cache@v4
+        id: web-templates
+        with:
+          path: ~/.local/share/godot/export_templates/4.5.1.stable
+          key: godot-web-templates-${{ runner.os }}-${{ runner.arch }}-4.5.1-1998af37f138
+      - name: Install verified Web templates
+        if: steps.web-templates.outputs.cache-hit != 'true'
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 https://github.com/godotengine/godot/releases/download/4.5.1-stable/Godot_v4.5.1-stable_export_templates.tpz -o "$RUNNER_TEMP/templates.tpz"
+          echo "1998af37f1387684e2c211cdb483daf492fc64dc6b12096bddcdca25b6910c86  $RUNNER_TEMP/templates.tpz" | sha256sum --check --strict
+          template_dir="$HOME/.local/share/godot/export_templates/4.5.1.stable"
+          mkdir -p "$template_dir"
+          unzip -j -q "$RUNNER_TEMP/templates.tpz" 'templates/web*' -d "$template_dir"
+          (cd "$template_dir" && sha256sum web* > template-files.sha256)
+      - name: Verify cached template files
+        run: |
+          cd "$HOME/.local/share/godot/export_templates/4.5.1.stable"
+          sha256sum --check --strict template-files.sha256
+      - name: Rebuild class cache and export actual Web build
+        run: |
+          set -euo pipefail
+          godot --headless --path game --editor --quit 2>&1 | tee "$RUNNER_TEMP/import.log"
+          ! grep -Eq 'SCRIPT ERROR:|Parse Error:' "$RUNNER_TEMP/import.log"
+          mkdir -p build/web
+          godot --headless --path game --export-release Web "$(pwd)/build/web/index.html" 2>&1 | tee "$RUNNER_TEMP/export.log"
+          ! grep -Eq 'SCRIPT ERROR:|Parse Error:' "$RUNNER_TEMP/export.log"
+          (cd build/web && find . -maxdepth 1 -type f ! -name build.sha256 -print0 | sort -z | xargs -0 sha256sum > build.sha256)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: web-build
+          path: build/web
+          retention-days: 1
   chromium-touch:
     name: Chromium mobile and tablet touch smoke
+    needs: web-build
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     strategy:
@@ -27,23 +69,19 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install Godot and Web export templates
+          cache: pip
+          cache-dependency-path: .github/ci/web-requirements.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: web-build
+          path: build/web
+      - name: Verify shared Web build
         run: |
-          curl --fail --location --retry 3 https://github.com/godotengine/godot/releases/download/4.5.1-stable/Godot_v4.5.1-stable_linux.x86_64.zip -o /tmp/godot.zip
-          unzip -q /tmp/godot.zip -d /tmp/godot
-          chmod +x /tmp/godot/Godot_v4.5.1-stable_linux.x86_64
-          sudo ln -s /tmp/godot/Godot_v4.5.1-stable_linux.x86_64 /usr/local/bin/godot
-          curl --fail --location --retry 3 https://github.com/godotengine/godot/releases/download/4.5.1-stable/Godot_v4.5.1-stable_export_templates.tpz -o /tmp/templates.tpz
-          mkdir -p "$HOME/.local/share/godot/export_templates/4.5.1.stable"
-          unzip -j -q /tmp/templates.tpz 'templates/web*' -d "$HOME/.local/share/godot/export_templates/4.5.1.stable"
-      - name: Rebuild class cache and export actual Web build
-        run: |
-          godot --headless --path game --editor --quit
-          mkdir -p build/web
-          godot --headless --path game --export-release Web "$(pwd)/build/web/index.html"
+          cd build/web
+          sha256sum --check --strict build.sha256
       - name: Install Chromium
         run: |
-          pip install playwright==1.61.0
+          python -m pip install -r .github/ci/web-requirements.txt
           python -m playwright install --with-deps chromium
       - name: Touch smoke in Traditional Chinese and English, normal and extra-large text
         run: python tools/qa/web_smoke.py --viewports ${{ matrix.viewport }} --sizes ${{ matrix.size }} --out qa-output/web-smoke
@@ -52,4 +90,4 @@ jobs:
         with:
           name: web-touch-smoke-${{ matrix.viewport }}-${{ matrix.size }}
           path: qa-output/web-smoke
-
+          retention-days: 14
