@@ -3,6 +3,7 @@ extends Modal
 var vehicle: String="van1"
 var chosen: bool=false
 func _init() -> void:
+	industry_intro = "logistics"
 	title_text="Fleet, route contracts and maintenance";help_key="logistics_depth";icon_name="map";panel_size=Vector2(490,350);pauses_time=true
 func action(box: Control,text: String,id: String,fn: Callable,primary := false) -> void:
 	var active: bool=primary and not chosen;chosen=chosen or active

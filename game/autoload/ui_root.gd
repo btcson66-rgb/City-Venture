@@ -60,7 +60,14 @@ func _ready() -> void:
 	fade.modulate.a = 0.0
 	root.add_child(fade)
 	EventBus.notify.connect(func(t, k, i): toast(t, k, i))
-	EventBus.month_closed.connect(func(r): _pending_reports.append(r))
+	EventBus.month_closed.connect(func(r):
+		if AssistantPolicy.enabled("month_close") and GameState.flag("monthly_report_seen"):
+			GameState.timeline(I18n.t("Your monthly report is ready in Finance."), "business")
+			# Receiving the real report through the assistant must also satisfy the currency chapter's receipt.
+			var chapter: Dictionary = OverseasPartners.S()["chapters"].get("ch15_currency_swing", {})
+			var entity: String = str(chapter.get("entity", ""))
+			if not chapter.is_empty() and r.get("entities", {}).has(entity) and int(r["t1"]) > int(chapter["started"]):GameState.set_flag("fx_month_viewed")
+		else:_pending_reports.append(r))
 	EventBus.message_received.connect(_on_message)
 
 

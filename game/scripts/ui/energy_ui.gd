@@ -7,6 +7,7 @@ var district := "riverside"
 var has_primary := false
 
 func _init() -> void:
+	calm_profile = "energy"
 	title_text = "Energy Console"
 	help_key = "energy"
 	icon_name = "sun"

@@ -14,6 +14,7 @@ var crowd_page: Array = []
 
 
 func _init(start_tab := "investors") -> void:
+	calm_profile = "fundraising"
 	tab = start_tab
 	title_text = "Fundraising and partners"
 	icon_name = "finance"

@@ -9,6 +9,7 @@ var destination := ""
 
 
 func _init(property_id := "") -> void:
+	calm_profile = "lease_end"
 	pid = property_id
 	title_text = "Leases"
 	help_key = "lease_end"

@@ -4,6 +4,19 @@ extends Control
 ## the minigame practice uses) with a one-line hint. One or two steps, skippable, never pauses the clock, shown once per
 ## feature. Nothing is spent or changed. Bots dismiss it with the stable "FeaturePracticeSkip" button.
 const CARD := "FeatureIntroCard"
+static var _industry_definitions := {}
+static func industry_definitions() -> Dictionary:
+	if _industry_definitions.is_empty():_industry_definitions = DataDB._read("res://data/help/industry_intros.json")
+	return _industry_definitions
+
+static func industry_for_tab(tab: String) -> String:
+	for industry in Industries.all():
+		if industry["sim_class"].os_tab().get("id", "") == tab:return str(industry["id"])
+	return ""
+
+func industry_steps() -> Array:
+	return industry_definitions().get(feature.trim_prefix("industry_"), {}).get("steps", []) if feature.begins_with("industry_") else []
+
 var feature := ""
 var host: Control
 var step := 0
@@ -51,7 +64,7 @@ func _ready() -> void:
 	_hint = UIK.wrap("", 8, Art.C_WHITE, 190)
 	box.add_child(_hint)
 	var row := UIK.hbox(4)
-	_next = UIK.button("", _advance, "primary")
+	_next = UIK.button("", _advance, "" if feature.begins_with("industry_") else "primary")
 	_next.name = "FeaturePracticeNext"
 	_next.custom_minimum_size = Vector2(60, 28)
 	row.add_child(_next)
@@ -71,6 +84,19 @@ func _mark_guided() -> void:
 
 ## Step 0 outlines the tab itself, step 1 the first real action on it (when there is one).
 func _find_target(index: int) -> Control:
+	if not industry_steps().is_empty():
+		if index >= industry_steps().size():return null
+		var target: String = industry_steps()[index]["target"]
+		if target == "@tab":return host.find_child("Tab_"+host.tab,true,false) as Control if host is CompanyOS else null
+		if target != "@primary":return host.find_child(target, true, false) as Control
+		var controls: Node = host.content if host is CompanyOS else host
+		var fallback: Button
+		for button in controls.find_children("*", "Button", true, false):
+			if button.disabled or not button.is_visible_in_tree() or button is CheckBox:continue
+			if button.name == "FeatureGuideReplay" or button.name == "IndustryGuideReplay" or button.name == "Help" or button.name == "Close":continue
+			if fallback == null:fallback = button
+			if button.get_meta("calm_primary", false) or button.get_meta("primary_action", false):return button
+		return fallback
 	var tab_id := feature.trim_prefix("os_")
 	if index == 0:
 		var tab := host.find_child("Tab_" + tab_id, true, false) as Control
@@ -92,13 +118,21 @@ func _show_step() -> void:
 	if _target == null:
 		finish()
 		return
+	if not industry_steps().is_empty():
+		_hint.text = I18n.t(str(industry_steps()[step]["text"]))
+		if industry_steps()[step].get("label_hint",false):_hint.text = _hint.text % I18n.t(str(industry_definitions()[feature.trim_prefix("industry_")]["label"]))
+		_next.text = I18n.t("Next") if _find_target(step+1) != null else I18n.t("Got it")
+		return
 	var label := I18n.t(str(FeatureGate.definition(feature).get("label", "Overview")))
 	_hint.text = (I18n.t("This is %s. Open it any time from here.") % label) if step == 0 else I18n.t("Start with the outlined button. Nothing here is timed.")
 	_next.text = I18n.t("Next") if step == 0 and _find_target(1) != null else I18n.t("Got it")
 
 
 func _advance() -> void:
-	if step == 0 and _find_target(1) != null:
+	if not industry_steps().is_empty() and _find_target(step+1) != null:
+		step += 1
+		_show_step()
+	elif step == 0 and industry_steps().is_empty() and _find_target(1) != null:
 		step = 1
 		_show_step()
 	else:

@@ -251,6 +251,13 @@ func run() -> void:
 		await _save_load()
 		bot.expect(Ledger.check_balanced(), "ledger balanced after the harbor fixture")
 		return
+	if _arg("from") == "energy":
+		GameState.new_game({"name":"Energy Founder","seed":69001})
+		await _fast_forward_to_ch10()
+		SceneRouter._enter("interior","riverside_apartment","bed_side","")
+		await wait_world()
+		await _energy()
+		return
 	if _arg("from") == "industries":
 		await _industry_fixtures()
 		bot.expect(Ledger.check_balanced(), "ledger balanced after the industry fixtures")

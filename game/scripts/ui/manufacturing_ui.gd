@@ -14,6 +14,7 @@ var material_qty := 1000
 var has_primary := false
 
 func _init() -> void:
+	calm_profile = "manufacturing"
 	title_text = "Line Planner"
 	icon_name = "company"
 	panel_size = Vector2(600, 340)

@@ -4,6 +4,7 @@ var property: String
 var page: String="menu"
 var chosen: bool=false
 func _init(id := "corner_cafe") -> void:
+	industry_intro = "cafe"
 	property=id
 	title_text="Café menu, shifts and inspections"
 	help_key="cafe_depth"
