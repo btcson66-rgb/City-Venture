@@ -68,6 +68,19 @@ class Flow:
         self.touches += 1
         self.page.wait_for_timeout(800)
 
+    def ground_touch(self, x, y):
+        # Walk via exposed ground, as a player would, rather than tap through
+        # a fixed HUD button that happens to cover the projected doorway.
+        state = self.state()
+        width,height = state['viewport']
+        if y < 130 and (x < 240 or x > width-240):
+            y = min(height-70,180)
+        for control in state.get('controls', []):
+            bx,by,bw,bh = control['visible']
+            if bw and bh and bx-6 <= x <= bx+bw+6 and by-6 <= y <= by+bh+6:
+                x = max(80,bx-16)
+        self.touch(x,y)
+
     def drag(self, rectangle, dx=0, dy=-140):
         x, y, width, height = rectangle
         start = self.point(x + width * .5, y + height * .65)
@@ -154,7 +167,7 @@ class Flow:
                 continue
             x, y = target['point']
             width, height = state['viewport']
-            self.touch(max(80,min(width-80,x)),max(100,min(height-20,y+10)))
+            self.ground_touch(max(80,min(width-80,x)),max(100,min(height-20,y+10)))
             self.page.wait_for_timeout(800)
         raise AssertionError(f'Walking to {action} failed')
 
@@ -174,7 +187,7 @@ class Flow:
                 # An off-screen facade projects behind the fixed HUD. Approach
                 # along visible ground before tapping the actual doorway.
                 if y < 20 or x < 80 or x > width-80:
-                    self.touch(max(80,min(width-80,x)),max(min(180,height*.55),min(height-70,y+40)))
+                    self.ground_touch(max(80,min(width-80,x)),max(min(180,height*.55),min(height-70,y+40)))
                     self.page.wait_for_timeout(900)
                     continue
                 px,py = state['player']
@@ -185,7 +198,7 @@ class Flow:
                     approaching = True  # leave/re-enter the trigger after a side approach
             else:
                 target_y = y
-            self.touch(max(80,min(width-80,x)),max(20,min(height-8,target_y)))
+            self.ground_touch(max(80,min(width-80,x)),max(20,min(height-8,target_y)))
             self.page.wait_for_timeout(900)
         raise AssertionError(f'Walking through door {building} failed')
 
