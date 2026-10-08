@@ -28,8 +28,13 @@ jobs:
         run: godot --headless --path game --import
       - name: Unit tests
         run: |
+          set -euo pipefail
           mkdir -p /tmp/cv-quality
-          godot --headless --path game res://tests/test_runner.tscn -- --junit=/tmp/cv-quality/unit.xml
+          godot --headless --path game res://tests/test_runner.tscn -- --junit=/tmp/cv-quality/unit.xml 2>&1 | tee /tmp/cv-quality/unit.log
+          if grep -Eq 'SCRIPT ERROR:|Parse Error:' /tmp/cv-quality/unit.log; then
+            echo 'GDScript error: a test summary alone cannot establish success.' >&2
+            exit 1
+          fi
       - name: Performance validator tests
         run: python -m unittest discover -s tools/qa -p test_perf_check.py -v
       - uses: actions/upload-artifact@v4

@@ -36,3 +36,5 @@ Quality rerun: https://github.com/btcson66-rgb/City-Venture/actions/runs/3773110
 Map rerun: https://github.com/btcson66-rgb/City-Venture/actions/runs/37731104231
 
 F1–F8: N/A for this infrastructure-only change; no game mechanics, save migrations, Ledger rules or player UI were changed.
+
+Runtime self-review found a pre-existing packing-layout fixture that entered first-use practice instead of the packing stage and raised a GDScript error while the runner still reported PASS. The fixture now explicitly marks practice seen and retains every original layout assertion. CI captures unit.log and fails on SCRIPT ERROR or Parse Error in addition to the exit code/JUnit result. The earlier 982/982 summary alone was not accepted as final validation. Public secret scanning and push protection were enabled (free public-repository features); initial alert readback was empty.
