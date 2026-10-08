@@ -258,6 +258,7 @@ class Flow:
         self.shot('notifications')
         destination = next(c['name'] for c in self.controls() if c['name'].startswith('NotificationGo_'))
         self.tap(destination)
+        self.dismiss_help()
         self.until(lambda s: s.get('modal') == 'CityMapModal', 'notification destination')
         self.shot('notification_go')
         self.tap('Close')

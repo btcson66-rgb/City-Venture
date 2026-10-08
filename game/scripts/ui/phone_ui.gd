@@ -52,11 +52,14 @@ func open() -> void:
 	var touch := InputAccess.touch_mode
 	holder.size = Vector2(minf(380, available.x - 16), minf(560, available.y - 16)) if touch else Vector2(150, 250)
 	holder.position.x = maxf(8.0, available.x - holder.size.x - 12.0)
-	content_width = holder.size.x - 18
-	screen.size = Vector2(content_width, holder.size.y - 36)
+	var frame_scale := holder.size / Vector2(150, 250)
+	screen.position = Vector2(9, 18) * frame_scale
+	screen.size = Vector2(132, 214) * frame_scale
+	content_width = screen.size.x - (14.0 if touch else 0.0)
 	frame.scale = holder.size / Vector2(150, 250)
 	var background := holder.get_child(0) as ColorRect
-	background.size = holder.size - Vector2(14, 32)
+	background.position = Vector2(7, 16) * frame_scale
+	background.size = Vector2(136, 218) * frame_scale
 	content.custom_minimum_size.x = content_width
 	content.size.x = content_width
 	var scroll := screen.get_child(0) as ScrollContainer
@@ -152,7 +155,7 @@ func _home() -> void:
 	content.add_child(top)
 	content.add_child(UIK.title(GameState.data["player"]["name"], 11))
 	var grid := GridContainer.new()
-	grid.columns = 3
+	grid.columns = (1 if int(Preferences.values["font_size"]) >= 2 else 2) if InputAccess.touch_mode else 3
 	grid.add_theme_constant_override("h_separation", 4)
 	grid.add_theme_constant_override("v_separation", 4)
 	var unread := GameState.unread_messages()
@@ -280,7 +283,10 @@ func _messages() -> void:
 		line.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		if InputAccess.touch_mode:
 			line.clip_text = false
+			line.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
+			line.custom_minimum_size.x = content_width
 			line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		line.name = "NotificationText_" + str(message["id"])
 		line.tooltip_text = I18n.t(str(message["text"]))
 		row.add_child(line)
 		row.add_child(UIK.label(Clock.fmt_short(int(message["t"])), 6, Art.C_DIM))

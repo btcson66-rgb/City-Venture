@@ -23,6 +23,9 @@ func _check_decoration(node: Node) -> void:
 		_check_decoration(child)
 func test_touch_enters_home_using_normal_physics_and_door_trigger() -> void:
 	UIRoot.close_all()
+	UIRoot.dialogue.active = false
+	UIRoot.dialogue_queue.clear()
+	SceneRouter.transitioning = false
 	Help.auto = false
 	UIRoot.tutorial.st()["off"] = true
 	Clock.clear_pauses()
@@ -53,3 +56,20 @@ func test_locked_web_audio_does_not_start_an_empty_layer_tween() -> void:
 	Sound._audio_unlocked = old_unlocked
 	Sound._context_kind = old_context
 	Sound._intensity = old_intensity
+func test_touch_notifications_wrap_without_ellipsis_and_fit_the_painted_screen() -> void:
+	var old_touch := InputAccess.touch_mode
+	InputAccess.touch_mode = true
+	Bank.book_appointment()
+	UIRoot.phone.open()
+	UIRoot.phone._go("messages")
+	for i in 8: await runner.get_tree().process_frame
+	var message: Dictionary = GameState.data["messages"].back()
+	var label := UIRoot.phone.find_child("NotificationText_" + str(message["id"]), true, false) as Label
+	runner.check(label != null, "appointment text exists")
+	if label != null:
+		runner.eq(label.text_overrun_behavior, TextServer.OVERRUN_NO_TRIMMING, "wrapping never hides the notification")
+		runner.check(label.get_line_count() > 1 and label.size.y > 0, "real text has multiple rendered lines")
+		runner.check(label.size.x <= UIRoot.phone.screen.size.x + 1, "text width %s fits inside screen %s" % [label.size.x, UIRoot.phone.screen.size.x])
+	runner.eq(UIRoot.phone.screen.position, Vector2(9,18) * UIRoot.phone.frame.scale, "frame and content use the same inset")
+	UIRoot.phone.close()
+	InputAccess.touch_mode = old_touch
