@@ -75,10 +75,23 @@ class Flow:
         width,height = state['viewport']
         if y < 130 and (x < 240 or x > width-240):
             y = min(height-70,180)
-        for control in state.get('controls', []):
-            bx,by,bw,bh = control['visible']
-            if bw and bh and bx-6 <= x <= bx+bw+6 and by-6 <= y <= by+bh+6:
-                x = max(80,bx-16)
+        blockers = state.get('ground_blockers', []) + [
+            c['visible'] for c in state.get('controls', [])]
+        blockers = [r for r in blockers if r[2] > 0 and r[3] > 0]
+        def exposed(point):
+            px,py = point
+            return (20 <= px <= width-20 and 20 <= py <= height-8 and
+                    not any(bx-6 <= px <= bx+bw+6 and by-6 <= py <= by+bh+6
+                            for bx,by,bw,bh in blockers))
+        if not exposed((x,y)):
+            # Approach beside/above the HUD first. In large text the contextual
+            # prompt can cover a doorway; tapping it would reopen Company OS.
+            candidates = []
+            for bx,by,bw,bh in blockers:
+                candidates.extend([(bx-16,y),(bx+bw+16,y),(x,by-16),(x,by+bh+16)])
+            candidates = [p for p in candidates if exposed(p)]
+            assert candidates, f'No exposed walking ground near {(x,y)}'
+            x,y = min(candidates, key=lambda p: (p[0]-x)**2+(p[1]-y)**2)
         self.touch(x,y)
 
     def drag(self, rectangle, dx=0, dy=-140):
@@ -150,8 +163,8 @@ class Flow:
                 break
 
     def close_modal(self, expected):
-        # A rendered touch can be lost while the Web layout settles. Verify
-        # the transition before trying to walk behind the still-open window.
+        # Verify the transition before walking; never assume a dispatched touch
+        # actually dismissed the window.
         for _ in range(3):
             if self.state().get('modal') != expected:
                 return
