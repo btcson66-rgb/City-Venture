@@ -149,6 +149,22 @@ class Flow:
             else:
                 break
 
+    def close_modal(self, expected):
+        # A rendered touch can be lost while the Web layout settles. Verify
+        # the transition before trying to walk behind the still-open window.
+        for _ in range(3):
+            if self.state().get('modal') != expected:
+                return
+            self.tap('Close')
+            try:
+                self.until(lambda state: state.get('modal') != expected,
+                           f'close {expected}', timeout=3)
+                return
+            except AssertionError:
+                if self.errors:
+                    raise
+        raise AssertionError(f'Touch close did not dismiss {expected}')
+
     def walk_action(self, action, building=None, timeout=90):
         end = time.monotonic()+timeout
         while time.monotonic() < end:
@@ -269,7 +285,7 @@ class Flow:
         self.dismiss_help()
         self.until(lambda s: s.get('modal') == 'CompanyOS', 'Company OS')
         self.shot('company_os')
-        self.tap('Close')
+        self.close_modal('CompanyOS')
         self.door()
         self.door('riverside_apartment')
         self.walk_action('sleep')
