@@ -65,7 +65,7 @@ class Flow:
     def touch(self, x, y):
         self.page.touchscreen.tap(*self.point(x, y))
         self.touches += 1
-        self.page.wait_for_timeout(300)
+        self.page.wait_for_timeout(800)
 
     def drag(self, rectangle, dx=0, dy=-140):
         x, y, width, height = rectangle
@@ -86,7 +86,7 @@ class Flow:
                 function fire(type,p){const t=new Touch({identifier:1,target:canvas,clientX:p[0],clientY:p[1],pageX:p[0],pageY:p[1]});
                 canvas.dispatchEvent(new TouchEvent(type,{bubbles:true,cancelable:true,touches:type==='touchend'?[]:[t],changedTouches:[t]}));}
                 fire('touchstart',a); for(let i=1;i<=8;i++)fire('touchmove',[a[0]+(b[0]-a[0])*i/8,a[1]+(b[1]-a[1])*i/8]);fire('touchend',b);}''', [start, finish])
-        self.page.wait_for_timeout(400)
+        self.page.wait_for_timeout(700)
 
     def tap(self, name=None, text=None):
         label = name or text
@@ -95,7 +95,8 @@ class Flow:
             candidates = self.controls(name, text)
             if not candidates:
                 raise AssertionError(f'Control disappeared: {label}')
-            control = candidates[-1]
+            self.page.wait_for_timeout(250)  # let deferred font/container layout settle
+            control = self.controls(name, text)[-1]
             x, y, width, height = control['visible']
             if width >= min(control["rect"][2],44)*.95 and height >= min(control["rect"][3],44)*.95:
                 self.touch(x + width / 2, y + height / 2)
@@ -127,7 +128,7 @@ class Flow:
             else:
                 break
 
-    def walk_action(self, action, building=None, timeout=40):
+    def walk_action(self, action, building=None, timeout=90):
         end = time.monotonic()+timeout
         while time.monotonic() < end:
             self.dismiss_help()
@@ -145,8 +146,9 @@ class Flow:
             self.page.wait_for_timeout(800)
         raise AssertionError(f'Walking to {action} failed')
 
-    def door(self, building=None, timeout=40):
+    def door(self, building=None, timeout=90):
         source=self.state()['world']
+        approaching = building is not None
         end=time.monotonic()+timeout
         while time.monotonic()<end:
             self.dismiss_help()
@@ -156,7 +158,16 @@ class Flow:
                    and (building is None or d['building'] == building)]
             assert doors, f'No door {building} in {source}'
             x,y=doors[0]['point']; width,height=state['viewport']
-            self.touch(max(80,min(width-80,x)),max(20,min(height-8,y)))
+            if building is not None:
+                px,py = state['player']
+                if approaching and abs(px-x)<12 and abs(py-(y+40))<12:
+                    approaching = False
+                target_y = y+40 if approaching else y-6
+                if not approaching and abs(px-x)<16 and abs(py-y)<20:
+                    approaching = True  # leave/re-enter the trigger after a side approach
+            else:
+                target_y = y
+            self.touch(max(80,min(width-80,x)),max(20,min(height-8,target_y)))
             self.page.wait_for_timeout(900)
         raise AssertionError(f'Walking through door {building} failed')
 
@@ -213,7 +224,11 @@ class Flow:
             self.tap('ConfirmOrder')
             want=self.state()['mini']['want']
             for field in ('Size','Drink','Milk','Shots'):
-                self.tap(field+'_'+str(want[field.lower()]))
+                for attempt in range(3):
+                    self.tap(field+'_'+str(want[field.lower()]))
+                    if self.state()['mini']['want']['got'][field.lower()] == want[field.lower()]:
+                        break
+                assert self.state()['mini']['want']['got'][field.lower()] == want[field.lower()]
             self.tap('Serve'); self.tap('Deliver_'+str(int(want['destination']))); self.tap('CleanTable')
         self.shot('first_job_results')
         self.tap('FinishGame')
