@@ -173,7 +173,7 @@ class Flow:
             if building is not None:
                 # An off-screen facade projects behind the fixed HUD. Approach
                 # along visible ground before tapping the actual doorway.
-                if y < 120 or x < 80 or x > width-80:
+                if y < 20 or x < 80 or x > width-80:
                     self.touch(max(80,min(width-80,x)),max(min(180,height*.55),min(height-70,y+40)))
                     self.page.wait_for_timeout(900)
                     continue
