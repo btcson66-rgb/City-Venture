@@ -59,3 +59,26 @@ Novice perspective: the streets, first work practice and next-action buttons ret
 this is a fixed-state visual review, not a new blind novice playtest.
 Experienced replay: high-detail facades and familiar Company OS geometry remain intact; the normal low-detail
 choice still exists. Physical devices, Safari and subjective reviewer acceptance are not established by #166.
+
+## Final integration verification
+
+Merged the latest Claude base (`68ba6989`) without rebasing. This brings in CI
+setup/documentation and the formal-packing fixture initialization fix. That fixture
+previously entered first-use tutorial mode and could print a script error before its
+layout assertions; the integrated suite now genuinely executes those assertions.
+No runtime game/UI/economy/asset content changes are introduced by this base update.
+
+Rebuilt class cache with `--headless --path game --editor --quit`; reran i18n/wiki/beta
+and `bash tools/package_release.sh`: **982/982 tests passed in 620.2s**, all four
+platform packages produced, exit 0, no SCRIPT ERROR/Parse Error. Known codec-negative
+and inherited teardown diagnostics remain recorded in the complete log.
+Windows ZIP remains **146,789,930 bytes** and Web PCK **126,142,916 bytes**.
+The final PCK SHA256 is `69c0a0922fa04a0694cd84c9feaf30417683b4e43a793668011be1ee51a01648`.
+Exact hashes are in `package_sizes_integrated.json`; a fresh asset report is in
+`asset_size_after_integrated.txt/json`. Since runtime assets/imports remain unchanged,
+the ten original before/after rendered pairs above still describe this final build.
+After that final package, reran both **rendered** tours at 1280x720/zh_TW:
+map adjacency **0 failures**, 130 steps / 5 shots / 463.2s, English audit 0;
+industries **0 failures**, 388 steps / 74 shots / 495.4s, English audit 8 inherited
+generated client names/version word. Fresh reports and logs are under
+`integrated-map/`, `integrated-industries/` and `*-integrated-rendered.log`.
