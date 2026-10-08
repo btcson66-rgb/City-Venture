@@ -638,9 +638,13 @@ func practice_refresh() -> void:
 			target.pressed.connect(_practice_pressed.bind(practice_step, str(step["target"])), CONNECT_ONE_SHOT)
 		elif step.get("condition", "") == "dragged":
 			target.gui_input.connect(_practice_dragged)
-		accessibility_scroll.ensure_control_visible(target)
+		# A target can sit outside a scroll (footer buttons) or leave the tree before a deferred scroll runs (#174).
+		if accessibility_scroll.is_ancestor_of(target): accessibility_scroll.ensure_control_visible(target)
 		var work_scroll := stage.get_parent() as ScrollContainer
-		if work_scroll.is_ancestor_of(target): work_scroll.ensure_control_visible.call_deferred(target)
+		if work_scroll != null and work_scroll.is_ancestor_of(target):
+			(func() -> void:
+				if is_instance_valid(work_scroll) and is_instance_valid(target) and work_scroll.is_ancestor_of(target):
+					work_scroll.ensure_control_visible(target)).call_deferred()
 		for sc in _scrolls(stage, []):
 			if sc.is_ancestor_of(target): sc.ensure_control_visible(target)
 	_lock_practice(stage, target)
