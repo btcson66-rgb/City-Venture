@@ -39,10 +39,13 @@ Original PNGs are retained locally under `qa-output/166-comparison-originals/`.
 
 - Class cache: `godot --headless --path game --editor --quit`, before and after imports.
 - Package: all four platform packages produced; both targets PASS (`package.log`).
-- Final full unit suite: see `units-final.log`.
+- Final full unit suite: 982/982, 428.2s, exit 0 (`units-final.log`).
 - i18n: 8,228/8,228 zh_TW translations, missing 0; wiki: 3,913 assets / 343 IDs OK; beta audit: 0 hits.
 - Build-size boundary tests: 5/5; target +1 byte warns, hard limit +1 byte fails, missing/ambiguous files fail.
-- Post-package rendered map and industries: results recorded alongside this README when complete.
+- Post-package rendered map: 0 failures, 130 logged steps, 5 shots, 463.0s, English audit 0.
+- Post-package rendered industries: 0 failures, 388 logged steps, 74 shots, 498.0s.
+  Its 8 English-audit hits are existing generated client names and the version word `beta`; no new UI text.
+  Result JSONs, English audits and logs are committed; tour PNGs remain in local `qa-output/`.
 - Unit negative-input cases print codec errors; teardown also reports inherited RID/ObjectDB leaks.
   These are recorded, not represented as a browser-console-zero claim.
 - Capture bot: before and after 0 failures; English audit's two hits are the QA company name `Comparison Co`.
