@@ -73,17 +73,20 @@ func _collect(node: Node, controls: Array, popups: Array) -> void:
 		var rectangle: Rect2 = node.get_global_rect()
 		var visible: Rect2 = rectangle.intersection(get_viewport().get_visible_rect())
 		var scroll := Rect2()
+		var scrolls: Array = []
 		var parent := node.get_parent()
 		while parent != null:
 			if parent is Control and parent.clip_contents:
 				visible = visible.intersection(parent.get_global_rect())
-			if parent is ScrollContainer and scroll.size == Vector2.ZERO:
-				scroll = parent.get_global_rect()
+			if parent is ScrollContainer:
+				var bounds: Rect2 = parent.get_global_rect()
+				scrolls.append([bounds.position.x, bounds.position.y, bounds.size.x, bounds.size.y])
+				if scroll.size == Vector2.ZERO: scroll = bounds
 			parent = parent.get_parent()
 		controls.append({"name": str(node.name), "text": node.text,
 			"disabled": node.disabled if node is BaseButton else not node.editable,
 			"rect": [rectangle.position.x, rectangle.position.y, rectangle.size.x, rectangle.size.y],
-			"visible": [visible.position.x, visible.position.y, visible.size.x, visible.size.y],
+			"scrolls": scrolls, "visible": [visible.position.x, visible.position.y, visible.size.x, visible.size.y],
 			"scroll": [scroll.position.x, scroll.position.y, scroll.size.x, scroll.size.y]})
 	for child in node.get_children():
 		_collect(child, controls, popups)

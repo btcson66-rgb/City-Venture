@@ -103,6 +103,13 @@ class Flow:
                 self.touch(x + width / 2, y + height / 2)
                 return
             scroll = control['scroll']
+            viewport = self.state()['viewport']
+            for ancestor in control.get('scrolls', []):
+                if scroll[0]+scroll[2] > viewport[0] or scroll[1]+scroll[3] > viewport[1]:
+                    scroll = ancestor
+            scroll = [max(0,scroll[0]),max(0,scroll[1]),
+                      min(scroll[2],viewport[0]-max(0,scroll[0])),
+                      min(scroll[3],viewport[1]-max(0,scroll[1]))]
             if scroll[2] == 0:
                 raise AssertionError(f'Unreachable control: {label}: {control}')
             rect = control['rect']
@@ -138,9 +145,13 @@ class Flow:
                        and (building is None or a['params'].get('building') == building)]
             assert actions, f'No {action} / {building} in {state.get("world")}'
             target = actions[0]
-            if state.get('focus') == action:
-                self.tap('TouchInteract')
-                return
+            buttons = self.controls('TouchInteract')
+            if state.get('focus') == action and buttons:
+                x,y,width,height = buttons[-1]['visible']
+                self.touch(x+width/2,y+height/2)
+                if self.state().get('modal') or not self.state().get('can_move',True):
+                    return
+                continue
             x, y = target['point']
             width, height = state['viewport']
             self.touch(max(80,min(width-80,x)),max(100,min(height-20,y+10)))

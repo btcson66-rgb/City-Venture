@@ -23,6 +23,7 @@ func _check_decoration(node: Node) -> void:
 		_check_decoration(child)
 func test_touch_enters_home_using_normal_physics_and_door_trigger() -> void:
 	UIRoot.close_all()
+	UIRoot._pending_reports.clear() # Simulation suites can queue month-close screens across fresh games.
 	UIRoot.dialogue.active = false
 	UIRoot.dialogue_queue.clear()
 	SceneRouter.transitioning = false

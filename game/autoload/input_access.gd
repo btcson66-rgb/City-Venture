@@ -263,9 +263,10 @@ func _input(event: InputEvent) -> void:
 					_scroll_at(event.position, event.relative / 2.0)
 			_pinch_distance = distance
 			_hold = null
-		else:
-			_scroll_at(event.position, event.relative)
-		if _active_surface() != null:
+		# Single-finger drags belong to ScrollContainer: its deadzone cancels
+		# the pressed child button before scrolling. Handling them here lets
+		# the emulated mouse release accidentally select a drink or option.
+		if fingers.size() == 2 and _active_surface() != null:
 			get_viewport().set_input_as_handled()
 
 
