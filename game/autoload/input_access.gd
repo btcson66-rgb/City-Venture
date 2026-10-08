@@ -208,7 +208,7 @@ func _process(delta: float) -> void:
 	interact.position = viewport - interact.size - Vector2(12, 12)
 	var physical := DisplayServer.window_get_size()
 	rotate.visible = touch_mode and physical.y > physical.x and player != null and surface == null
-	rotate.position = Vector2(8, viewport.y - rotate.size.y - 8)
+	rotate.position = Vector2(96 if OS.has_feature("web") else 8, viewport.y - rotate.size.y - 8)
 	if _hold != null and not _dragged:
 		_hold_time += delta
 		if _hold_time >= 0.6:
