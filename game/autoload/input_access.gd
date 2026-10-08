@@ -236,12 +236,13 @@ func _input(event: InputEvent) -> void:
 				_multi_touch = false
 			fingers[event.index] = event.position
 			starts[event.index] = event.position
-			_dragged = false
+			if fingers.size() == 1: _dragged = false
 			_hold_time = 0.0
 			var control := _hit(_active_surface(), event.position)
 			var button := control
 			while button != null and not button is BaseButton: button = button.get_parent() as Control
-			_scroll_button = weakref(button) if button is BaseButton and not button.disabled else null
+			if fingers.size() == 1:
+				_scroll_button = weakref(button) if button is BaseButton and not button.disabled else null
 			while control != null and not control is InfoTip and control.tooltip_text.is_empty():
 				control = control.get_parent() as Control
 			_hold = weakref(control) if control != null else null
@@ -250,7 +251,7 @@ func _input(event: InputEvent) -> void:
 			_hold = null
 			if _dragged:
 				get_viewport().set_input_as_handled()
-				_restore_scroll_button.call_deferred()
+				if fingers.is_empty(): _restore_scroll_button.call_deferred()
 		if fingers.size() == 2:
 			_multi_touch = true
 			_hold = null
