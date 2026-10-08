@@ -160,14 +160,9 @@ static func hard_deadline() -> int:
 static func stay_cap_days() -> int:
 	var d := hard_deadline()
 	return 99 if d < 0 else maxi(0, (d - Clock.now() - 1) / Clock.DAY)
-## Existing visit windows and bank appointments wait for the patient.
+## Bank appointments wait for the patient; phone reply appointments were retired.
 static func shift_soft_deadlines(delta: int) -> void:
 	if delta <= 0: return
-	var pm: Dictionary = PhoneMessages.S()
-	for meeting in pm["agenda"]:
-		if meeting["status"] == "planned":
-			meeting["at"] = int(meeting["at"]) + delta
-			meeting["until"] = int(meeting["until"]) + delta
 	if int(Bank.B().get("appointment", -1)) > Clock.now():
 		Bank.B()["appointment"] = int(Bank.B()["appointment"]) + delta
 		for item in GameState.data["schedule"]:

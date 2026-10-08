@@ -11,6 +11,8 @@ extends Modal
 
 signal finished(result: Dictionary)
 
+const LEGACY_OPTIONAL := ["auction_game", "pack_game", "route_game", "photo_shoot_game", "pitch_game", "popup_checkout_game"]
+
 ## Practice uses a separate copy of the game. Closing it never reaches the real-work callback.
 ## The device default is copied at construction; changing a start card affects only this session.
 var work_mode := int(Preferences.values.get("work_mode", 0))
@@ -67,7 +69,7 @@ func _ready() -> void:
 ## Practice is offered on its own at most once per minigame: closing it by any means marks it seen.
 ## "Tutorial hints" off keeps it entirely manual (the "Practice again" and "?" buttons still work).
 func auto_practice_due() -> bool:
-	return not practice_only and not tutorial_seen() and MiniGames.auto < 0.0 and bool(Preferences.values.get("tutorial_hints", true))
+	return not practice_only and not tutorial_seen() and not tutorial_id() in GameState.data.get("minigame_practice_optional", []) and MiniGames.auto < 0.0 and bool(Preferences.values.get("tutorial_hints", true))
 
 
 func tutorial_id() -> String:
@@ -100,6 +102,19 @@ static func backfill_tutorials_seen() -> void:
 	var fl: Dictionary = c.get("freelance", {})
 	if int(fl.get("done", 0)) > 0 or not fl.get("gigs", {}).is_empty() or not c.get("daily_freelance_hours", {}).is_empty():
 		marks.append_array(["typing_game", "consulting_game:brand", "consulting_game:operations", "consulting_game:market"])
+	var automotive: Dictionary = GameState.data.get("automotive", {})
+	if int(GameState.stat("auction_wins")) > 0 or not automotive.get("stock", {}).is_empty() or automotive.get("lots", {}).values().any(func(l): return l.get("leader", "") == "player" or l.get("status", "") == "won"):
+		marks.append("auction_game")
+	var eco: Dictionary = GameState.data.get("ecommerce", {})
+	if int(GameState.stat("orders_shipped")) > 0 or eco.get("orders", {}).values().any(func(o): return o.get("status", "") in ["shipped", "delivered", "refunded", "replaced", "partial_refund"]):
+		marks.append("pack_game")
+	if not GameState.data.get("logistics", {}).get("history", []).is_empty(): marks.append("route_game")
+	if eco.get("listings", {}).values().any(func(l): return l.get("photo", "") == "self"):
+		marks.append("photo_shoot_game")
+	var funding: Dictionary = GameState.data.get("fundraising", {})
+	if not funding.get("rounds", []).is_empty() or funding.get("deals", {}).values().any(func(d): return d.has("deck_at") or not d.get("deck", []).is_empty()):
+		marks.append("pitch_game")
+	if not GameState.data.get("popup", {}).get("history", []).is_empty(): marks.append("popup_checkout_game")
 	for m in marks:
 		if not seen.has(m): seen[m] = true
 	if not marks.is_empty(): GameState.data["minigame_tutorials_seen"] = seen
@@ -271,7 +286,7 @@ func _build_intro() -> void:
 		footer.add_child(skip)
 	else:
 		footer.add_child(UIK.button("Not now", abort))
-		var replay := UIK.button("Practice again", replay_practice)
+		var replay := UIK.button("Practice again" if tutorial_seen() else "Practice once first", replay_practice)
 		replay.name = "ReplayPractice"
 		footer.add_child(replay)
 	footer.add_child(go)
@@ -536,18 +551,40 @@ class WorkLayoutDriver:
 			game.stage.custom_minimum_size = wanted
 
 
-## Practice highlights one control; every other key (pick_1..9, undo, Enter on another button) is swallowed
+## Practice highlights one control; only its matching number shortcut passes. Other shortcuts are swallowed
 ## before the game's own handlers see it. Esc/pause still leaves, and typing steps accept typing.
 class PracticeKeyGuard:
 	extends Node
 	var game
 	func _input(event: InputEvent) -> void:
+		if game.practice_shortcut(event):
+			get_viewport().set_input_as_handled()
+			return
 		if game.practice_blocks_key(event): get_viewport().set_input_as_handled()
+
+
+## Match the two games that expose numbered shortcuts to their actual named controls.
+func practice_key_target(event: InputEvent) -> String:
+	for index in 9:
+		if not event.is_action_pressed("pick_%d" % (index + 1)): continue
+		if self is ParcelSortGame and index < ParcelSortGame.BINS.size(): return "Bin_" + str(ParcelSortGame.BINS[index][0])
+		if self is RouteGame and index < get("stops").size(): return "Stop_" + str(index + 1)
+	return ""
+
+
+## Emit the highlighted button itself so its normal callback AND practice advancement run once.
+func practice_shortcut(event: InputEvent) -> bool:
+	if not practice_only or phase != "play" or not event is InputEventKey or not event.pressed or event.echo or _practice_pending: return false
+	if not is_instance_valid(practice_target) or not practice_target is BaseButton or practice_target.disabled: return false
+	if practice_key_target(event) != str(practice_target.name): return false
+	practice_target.pressed.emit()
+	return true
 
 
 func practice_blocks_key(event: InputEvent) -> bool:
 	if not practice_only or phase != "play" or not (event is InputEventKey) or not event.pressed: return false
 	if event.is_action_pressed("pause") or event.is_action_pressed("cancel"): return false
+	if is_instance_valid(practice_target) and practice_target is BaseButton and not practice_target.disabled and practice_key_target(event) == str(practice_target.name): return false
 	var steps: Array = _practice_data.get("steps", [])
 	if practice_step < steps.size() and steps[practice_step].get("condition", "") == "line_typed": return false
 	for nav in ["ui_accept", "ui_select", "confirm"]:

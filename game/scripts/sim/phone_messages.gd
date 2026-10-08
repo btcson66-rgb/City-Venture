@@ -193,17 +193,6 @@ static func on_minute(t: int) -> void:
 		if visit.get("status", "") == "planned" and t > int(visit.get("until", 0)):
 			visit["status"] = "missed" # No penalty, forced response or additional notification.
 
-static func check_arrival() -> void:
-	if not GameState.has_game() or not GameState.data.has("phone_messages") or UIRoot.is_blocking():return
-	var loc: Dictionary = GameState.data["player"].get("location", {})
-	for visit in S()["agenda"]:
-		if visit.get("status", "") != "planned" or Clock.now() < int(visit.get("at", 0)) or Clock.now() > int(visit.get("until", 0)):continue
-		if str(loc.get("kind", "")) + ":" + str(loc.get("id", "")) != visit.get("location", ""):continue
-		visit["status"] = "met"
-		var conversation := str(visit.get("conversation", ""))
-		if conversation != "":UIRoot.play_dialogue(conversation)
-		return
-
 static func contact_name(npc: String) -> String:
 	var person := DataDB.npc(npc)
 	if not person.is_empty(): return I18n.t(str(person["name"]))

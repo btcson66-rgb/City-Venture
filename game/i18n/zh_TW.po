@@ -26,7 +26,7 @@ msgstr "  其中保留中（未滿 2 天）"
 msgid "  ·  DAY %d"
 msgstr "  ·  第 %d 天"
 
-#: autoload/ui_root.gd:384
+#: autoload/ui_root.gd:383
 msgid "  ·  Open %s–%s"
 msgstr "  ·  營業 %s–%s"
 
@@ -46,7 +46,7 @@ msgstr "（本國元）"
 msgid " (late: -20%)"
 msgstr "（遲交：-20%）"
 
-#: scripts/sim/living.gd:100
+#: scripts/sim/living.gd:104
 msgid " + deposit"
 msgstr "＋押金"
 
@@ -454,7 +454,7 @@ msgstr "%s（%s）幾天後到期。可到「治理」續保，或在「設定�
 msgid "%s (%s) has ended. Renew it in Governance when you are ready."
 msgstr "%s（%s）已到期。準備好時再到「治理」續保即可。"
 
-#: autoload/game_state.gd:202
+#: autoload/game_state.gd:204
 msgid "%s (personal seller)"
 msgstr "%s（個人賣家）"
 
@@ -634,7 +634,7 @@ msgstr "%s 已支付發票 %s：%s"
 msgid "%s parked in %s · insurance %s per month · no business performance bonus"
 msgstr "%s 停在 %s・保險每月 %s・不增加事業產能"
 
-#: scripts/sim/forecast.gd:65
+#: scripts/sim/forecast.gd:72
 msgid "%s pays"
 msgstr "%s 付款"
 
@@ -874,7 +874,7 @@ msgstr "%s 倍去年獲利 %s"
 msgid "%s × last year's revenue of %s"
 msgstr "%s 倍去年營收 %s"
 
-#: scripts/sim/living.gd:81
+#: scripts/sim/living.gd:85
 msgid "%s — monthly"
 msgstr "%s——月租"
 
@@ -1002,11 +1002,11 @@ msgstr "（訂單 {order}——{product}）"
 msgid "(Order {order} — {product}, {price})"
 msgstr "（訂單 {order}——{product}，{price}）"
 
-#: autoload/save_system.gd:438
+#: autoload/save_system.gd:442
 msgid "*.cvsave ; "
 msgstr "*.cvsave ; "
 
-#: autoload/save_system.gd:460
+#: autoload/save_system.gd:464
 msgid "*.cvsave,*.json ; "
 msgstr "*.cvsave,*.json ; "
 
@@ -1178,7 +1178,7 @@ msgstr "日票（$15）今天可以使用共享座位和電腦。常來的話，
 msgid "A Van Driver (People tab) takes one run each workday from 9:00. Your own ecommerce parcels can go out in the van too: choose \"Own van\" at the packing table."
 msgstr "貨車司機（人員分頁）每個工作日 9:00 起接一趟外送。你自己的電商包裹也能用貨車送：在打包桌選「自己的貨車」。"
 
-#: autoload/save_system.gd:133 autoload/save_system.gd:404 scripts/ui/modals/save_list_modal.gd:63
+#: autoload/save_system.gd:133 autoload/save_system.gd:408 scripts/ui/modals/save_list_modal.gd:63
 msgid "A backup could not be created. Your existing save is unchanged."
 msgstr "無法建立備份。原有存檔仍完整保留。"
 
@@ -1798,7 +1798,7 @@ msgstr "住戶協會請 Maya 引薦你編寫付費迎新指南，希望保證每
 msgid "A rival cuts prices"
 msgstr "對手降價了"
 
-#: autoload/ui_root.gd:234
+#: autoload/ui_root.gd:233
 msgid "A rough shift: it doesn't count toward your next promotion."
 msgstr "這班做得不太好：不計入升職所需的班數。"
 
@@ -2362,7 +2362,7 @@ msgstr "Ade"
 msgid "Admit where a rival could beat you and how you would respond."
 msgstr "坦白說出對手可能在哪裡勝過你，以及你會如何回應。"
 
-#: scripts/sim/forecast.gd:110
+#: scripts/sim/forecast.gd:117
 msgid "Ads"
 msgstr "廣告"
 
@@ -2514,7 +2514,7 @@ msgstr "全部"
 msgid "All %d stops planned  ·  round trip %.1f km"
 msgstr "%d 個停靠點都排好了  ·  來回共 %.1f 公里"
 
-#: autoload/save_system.gd:475
+#: autoload/save_system.gd:479
 msgid "All Files (*)"
 msgstr "所有檔案 (*)"
 
@@ -3090,7 +3090,7 @@ msgstr "安排每天的早班或晚班。同一名員工不能同時在兩家店
 msgid "Assigning a worker to one counter removes that same shift from the other counter; an empty shift stays closed unless the owner works."
 msgstr "把員工排到一家店，就會取消另一家店的同時段班次。無人值班時，除非自己顧店，否則不營業。"
 
-#: data/help/help.json scripts/sim/phone_messages.gd:212 scripts/ui/modals/settings_modal.gd:5
+#: data/help/help.json scripts/sim/phone_messages.gd:201 scripts/ui/modals/settings_modal.gd:5
 msgid "Assistant"
 msgstr "助理"
 
@@ -3702,7 +3702,7 @@ msgstr "大額款項匯出前，銀行會確認付款的人是誰、收款的人
 msgid "Before the first customer"
 msgstr "迎接第一位客人之前"
 
-#: scripts/ui/minigames/mini_game.gd:266
+#: scripts/ui/minigames/mini_game.gd:281
 msgid "Begin practice"
 msgstr "開始練習"
 
@@ -3785,6 +3785,10 @@ msgstr "提單"
 #: data/help/glossary.json
 msgid "Bills are paid in cash. Plenty of profitable companies still run out of it."
 msgstr "帳單要用現金付。很多公司有賺錢，最後還是現金周轉不靈。"
+
+#: scripts/sim/forecast.gd:49
+msgid "Bills due"
+msgstr "到期帳單"
 
 #: scripts/ui/modals/company_os.gd:1469
 msgid "Binned"
@@ -3894,7 +3898,7 @@ msgstr "鮮明色彩"
 msgid "Bold. Love it."
 msgstr "有膽。我喜歡。"
 
-#: scripts/ui/minigames/mini_game.gd:186 scripts/ui/minigames/mini_game.gd:393
+#: scripts/ui/minigames/mini_game.gd:201 scripts/ui/minigames/mini_game.gd:408
 msgid "Bonus time is up. Keep going at your own pace."
 msgstr "加碼時間到了，接下來照自己的步調做就好。"
 
@@ -4086,7 +4090,7 @@ msgstr "跨鏈橋恢復：%s 入帳，你補上 %s 的差額"
 msgid "Bridge reopens with new limits; operators restore 90 cents on the dollar."
 msgstr "跨鏈橋重開並加上新限額；營運方讓餘額回復九成。"
 
-#: scripts/sim/forecast.gd:75
+#: scripts/sim/forecast.gd:82
 msgid "Bridge shortfall"
 msgstr "跨鏈橋缺口"
 
@@ -5030,7 +5034,7 @@ msgstr "現在不能上班：%s。"
 msgid "Can't work the counter: %s."
 msgstr "現在不能站吧台：%s。"
 
-#: autoload/save_system.gd:475 autoload/sound.gd:286 scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57
+#: autoload/save_system.gd:479 autoload/sound.gd:286 scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57
 msgid "Cancel"
 msgstr "取消"
 
@@ -5342,11 +5346,11 @@ msgstr "挑戰"
 msgid "Challenge score"
 msgstr "挑戰分數"
 
-#: scripts/ui/minigames/mini_game.gd:261
+#: scripts/ui/minigames/mini_game.gd:276
 msgid "Challenge — optional clock"
 msgstr "挑戰・自選計時"
 
-#: scripts/ui/minigames/mini_game.gd:261
+#: scripts/ui/minigames/mini_game.gd:276
 msgid "Challenge — tips only"
 msgstr "挑戰・只加碼小費"
 
@@ -5810,7 +5814,7 @@ msgstr "請選擇進行中的活動。"
 msgid "Choose a running group business and a valid media budget."
 msgstr "請選擇營運中的集團業務及有效媒體預算。"
 
-#: autoload/save_system.gd:401 scripts/ui/modals/save_list_modal.gd:22
+#: autoload/save_system.gd:405 scripts/ui/modals/save_list_modal.gd:22
 msgid "Choose a save slot to replace. Its existing save will be backed up."
 msgstr "選擇要覆蓋的存檔槽。原有存檔會先備份。"
 
@@ -6286,7 +6290,7 @@ msgstr "市政廳：你的食品處理執照核准了。"
 msgid "City Marathon Weekend"
 msgstr "城市馬拉松週末"
 
-#: autoload/save_system.gd:438 autoload/save_system.gd:460
+#: autoload/save_system.gd:442 autoload/save_system.gd:464
 msgid "City Venture save"
 msgstr "City Venture 存檔"
 
@@ -6342,7 +6346,7 @@ msgstr "城市社交活動：%s"
 msgid "City update: %s"
 msgstr "城市動態：%s"
 
-#: autoload/save_system.gd:420
+#: autoload/save_system.gd:424
 msgid "CityVenture_%s_%04d-%02d-%02d.cvsave"
 msgstr "CityVenture_%s_%04d-%02d-%02d.cvsave"
 
@@ -6518,7 +6522,7 @@ msgstr "清算危機"
 msgid "Click! %d%% (%s)"
 msgstr "喀嚓！%d%%（%s）"
 
-#: data/npcs/client.json scripts/sim/phone_messages.gd:214
+#: data/npcs/client.json scripts/sim/phone_messages.gd:203
 msgid "Client"
 msgstr "客戶"
 
@@ -6542,7 +6546,7 @@ msgstr "客戶配對"
 msgid "Client model: sales $120, goods $50, shipping $10. Calculate gross contribution before other expenses."
 msgstr "客戶模型：銷售 $120、商品成本 $50、運費 $10，請算其他費用前的貢獻。"
 
-#: scripts/sim/forecast.gd:79
+#: scripts/sim/forecast.gd:86
 msgid "Client payment"
 msgstr "客戶付款"
 
@@ -7426,7 +7430,7 @@ msgstr "貨櫃運費翻倍，快遞加收燃油附加費。"
 msgid "Containers, customs and freight. Rent Pier 7 for stock, buy a used van from Sam, and start delivering."
 msgstr "貨櫃、海關和貨運。租下 7 號碼頭放庫存，向 Sam 買一台二手貨車，開始送貨。"
 
-#: scripts/frontend/main_menu.gd:50 scripts/ui/minigames/mini_game.gd:407 scripts/ui/modals/month_close_modal.gd:63
+#: scripts/frontend/main_menu.gd:50 scripts/ui/minigames/mini_game.gd:422 scripts/ui/modals/month_close_modal.gd:63
 msgid "Continue"
 msgstr "繼續"
 
@@ -7682,7 +7686,7 @@ msgstr "還價：每件 %s，票期 %d 天%s"
 msgid "Counter: ask for {counter_price}"
 msgstr "還價：開價 {counter_price}"
 
-#: scripts/sim/traffic_safety.gd:187 scripts/sim/traffic_safety.gd:189
+#: scripts/sim/traffic_safety.gd:182 scripts/sim/traffic_safety.gd:184
 msgid "Counterparty medical settlement: %s"
 msgstr "肇事方醫療補償：%s"
 
@@ -8910,7 +8914,7 @@ msgstr "直訂：沒有佣金，量較少。OTA「%s」：每晚抽 %d%% 佣金�
 msgid "Directional evidence; collect a larger sample"
 msgstr "僅為方向性證據，需要更多樣本"
 
-#: autoload/save_system.gd:475
+#: autoload/save_system.gd:479
 msgid "Directories & Files:"
 msgstr "資料夾與檔案："
 
@@ -9870,7 +9874,7 @@ msgstr "房地產仲介"
 msgid "Estimated margin (home dollars)"
 msgstr "預估交易餘額（本國元）"
 
-#: scripts/sim/forecast.gd:107
+#: scripts/sim/forecast.gd:114
 msgid "Estimated sales"
 msgstr "預估銷售"
 
@@ -10006,7 +10010,7 @@ msgstr "跟描述一模一樣。出貨很快。"
 msgid "Excellent"
 msgstr "優良"
 
-#: scripts/ui/minigames/mini_game.gd:414
+#: scripts/ui/minigames/mini_game.gd:429
 msgid "Excellent work."
 msgstr "做得非常好。"
 
@@ -10150,7 +10154,7 @@ msgstr "博覽會申辦"
 msgid "Export duty %s: %s"
 msgstr "出口訂單 %s 關稅：%s"
 
-#: autoload/save_system.gd:474 scripts/ui/modals/pause_menu.gd:42 scripts/ui/modals/save_list_modal.gd:25
+#: autoload/save_system.gd:478 scripts/ui/modals/pause_menu.gd:42 scripts/ui/modals/save_list_modal.gd:25
 msgid "Export save"
 msgstr "匯出存檔"
 
@@ -10382,7 +10386,7 @@ msgstr "快轉到開門"
 msgid "Fast: +30% work output."
 msgstr "手腳快：工作產出 +30%。"
 
-#: autoload/save_system.gd:475
+#: autoload/save_system.gd:479
 msgid "Favorites:"
 msgstr "我的最愛："
 
@@ -10470,11 +10474,11 @@ msgstr "申請豁免"
 msgid "File yourself · %d minutes · %.0f%% form-error chance"
 msgstr "自行申報・%d 分鐘・表單錯誤率 %.0f%%"
 
-#: autoload/save_system.gd:475
+#: autoload/save_system.gd:479
 msgid "File:"
 msgstr "檔案："
 
-#: autoload/save_system.gd:490
+#: autoload/save_system.gd:494
 msgid "FileReader"
 msgstr "FileReader"
 
@@ -10962,7 +10966,7 @@ msgstr "食品食材"
 msgid "Food ingredients pack"
 msgstr "食品食材補貨包"
 
-#: scripts/sim/living.gd:34
+#: scripts/sim/living.gd:38
 msgid "Food, transit & bills"
 msgstr "伙食、交通與帳單"
 
@@ -11274,7 +11278,7 @@ msgstr "櫃台服務涵蓋率 %d%%（%d 位櫃台）。"
 msgid "Frozen funds"
 msgstr "凍結資金"
 
-#: scripts/sim/forecast.gd:73
+#: scripts/sim/forecast.gd:80
 msgid "Frozen funds return"
 msgstr "凍結資金返還"
 
@@ -12582,7 +12586,7 @@ msgstr "房租＋生活費"
 msgid "Home rent and location"
 msgstr "房租與地點的取捨"
 
-#: scripts/sim/living.gd:64
+#: scripts/sim/living.gd:68
 msgid "Home rent — %s (%s)"
 msgstr "住處房租——%s（%s）"
 
@@ -13030,7 +13034,7 @@ msgstr "進口執照要等監管浪潮才會實施。"
 msgid "Import prices ease as the ports catch up."
 msgstr "港口趕上進度，進口價格回穩。"
 
-#: autoload/save_system.gd:474 scripts/ui/modals/pause_menu.gd:45 scripts/ui/modals/save_list_modal.gd:13 scripts/ui/modals/save_list_modal.gd:29
+#: autoload/save_system.gd:478 scripts/ui/modals/pause_menu.gd:45 scripts/ui/modals/save_list_modal.gd:13 scripts/ui/modals/save_list_modal.gd:29
 msgid "Import save"
 msgstr "匯入存檔"
 
@@ -13854,7 +13858,7 @@ msgstr "工單收款：%s"
 msgid "Job penalties"
 msgstr "工單違約金"
 
-#: scripts/sim/phone_messages.gd:218
+#: scripts/sim/phone_messages.gd:207
 msgid "Jobs Board"
 msgstr "徵才公告"
 
@@ -14382,7 +14386,7 @@ msgstr "販售中"
 msgid "Labour cost ratio"
 msgstr "人事成本比率"
 
-#: data/milestones.json scripts/sim/phone_messages.gd:216
+#: data/milestones.json scripts/sim/phone_messages.gd:205
 msgid "Landlord"
 msgstr "房東"
 
@@ -14674,7 +14678,7 @@ msgstr "退租通知：%s・%s 到期"
 msgid "Lease signed. Welcome to Suite 2B."
 msgstr "租約已簽。歡迎來到 2B 室。"
 
-#: scripts/sim/living.gd:105
+#: scripts/sim/living.gd:109
 msgid "Lease signed: %s"
 msgstr "租約已簽：%s"
 
@@ -14762,7 +14766,7 @@ msgstr "租約——"
 msgid "LeaseAster"
 msgstr "LeaseAster"
 
-#: scripts/sim/living.gd:107
+#: scripts/sim/living.gd:111
 msgid "Leased %s for %s/month."
 msgstr "租下了%s，月租 %s。"
 
@@ -14774,7 +14778,7 @@ msgstr "租約"
 msgid "Leases must be in a registered company's name."
 msgstr "租約必須用登記公司的名義簽。"
 
-#: scripts/ui/minigames/mini_game.gd:316
+#: scripts/ui/minigames/mini_game.gd:331
 msgid "Leave early"
 msgstr "提早離開"
 
@@ -15186,7 +15190,7 @@ msgstr "先生活三十天或完成主線，再選擇退休。"
 msgid "Live thirty days without any personal or company cash account becoming negative."
 msgstr "度過三十天，期間個人與公司的現金帳戶都未透支。"
 
-#: scripts/sim/forecast.gd:42 scripts/sim/ledger.gd:33
+#: scripts/sim/forecast.gd:44 scripts/sim/ledger.gd:33
 msgid "Living costs"
 msgstr "生活費"
 
@@ -15246,7 +15250,7 @@ msgstr "貸款預約：%s。到金融區 Nexus Bank 的經理桌找 Marcus Reed�
 msgid "Loan eligibility"
 msgstr "貸款資格"
 
-#: scripts/sim/forecast.gd:49
+#: scripts/sim/forecast.gd:56
 msgid "Loan payment"
 msgstr "貸款還款"
 
@@ -15762,7 +15766,7 @@ msgstr "經營清單會保留捲動位置。劇情能從被拒絕的合約與困
 msgid "Manager review %d%% · next rank needs %d%%; serve and clean well to improve."
 msgstr "店長評價 %d%%・下個職級需要 %d%%，請做好服務與清潔來提升。"
 
-#: scripts/ui/minigames/mini_game.gd:248
+#: scripts/ui/minigames/mini_game.gd:263
 msgid "Manager: Let's try one order together. Take your time."
 msgstr "店長：我們一起試做一張訂單，慢慢來就好。"
 
@@ -16974,7 +16978,7 @@ msgstr "東北"
 msgid "NEGOTIATION"
 msgstr "議價"
 
-#: autoload/ui_root.gd:401
+#: autoload/ui_root.gd:400
 msgid "NEW LOCATION"
 msgstr "新地點"
 
@@ -17346,7 +17350,7 @@ msgstr "Nexus 銀行——企業貸款"
 msgid "Nexus Co-work"
 msgstr "Nexus 共享辦公室"
 
-#: scripts/sim/living.gd:119
+#: scripts/sim/living.gd:123
 msgid "Nexus Co-work day pass"
 msgstr "Nexus 共享辦公室日票"
 
@@ -17402,11 +17406,11 @@ msgstr "Nia Park：實習學習作品集・第 2 段"
 msgid "Nia Park: internship learning portfolio · part 3"
 msgstr "Nia Park：實習學習作品集・第 3 段"
 
-#: scripts/ui/minigames/mini_game.gd:364
+#: scripts/ui/minigames/mini_game.gd:379
 msgid "Nice work!"
 msgstr "做得好！"
 
-#: scripts/ui/minigames/mini_game.gd:362
+#: scripts/ui/minigames/mini_game.gd:377
 msgid "Nice! +%s tip"
 msgstr "做得好！小費 +%s"
 
@@ -17974,7 +17978,7 @@ msgstr "狀況不良"
 msgid "Not needed yet. Commercial importers need one from the Regulation Wave (Year 8)."
 msgstr "還不用。商業進口商要到監管浪潮（第 8 年）才需要。"
 
-#: data/events/elena_offer.json scripts/ui/minigames/mini_game.gd:273 scripts/ui/modals/lease_modal.gd:49 scripts/ui/modals/sleep_modal.gd:32
+#: data/events/elena_offer.json scripts/ui/minigames/mini_game.gd:288 scripts/ui/modals/lease_modal.gd:49 scripts/ui/modals/sleep_modal.gd:32
 msgid "Not now"
 msgstr "先不要"
 
@@ -18506,7 +18510,7 @@ msgstr "只有登記過的公司才能持有進口執照。"
 msgid "Only wholly founder-owned companies can enter this holding group. Other shareholders keep their rights."
 msgstr "只有創辦人全資持有的公司才能移入集團，其他股東的權益不會被移轉。"
 
-#: autoload/save_system.gd:475 scripts/ui/hotel_ui.gd:273 scripts/ui/modals/city_map_modal.gd:132 scripts/ui/modals/city_map_modal.gd:179
+#: autoload/save_system.gd:479 scripts/ui/hotel_ui.gd:273 scripts/ui/modals/city_map_modal.gd:132 scripts/ui/modals/city_map_modal.gd:179
 msgid "Open"
 msgstr "開啟"
 
@@ -19230,7 +19234,7 @@ msgstr "透支"
 msgid "Overdraft costs $35 a night. Nothing's over — but something has to give."
 msgstr "透支每晚要付 $35。遊戲還沒結束——但總得犧牲點什麼。"
 
-#: scripts/sim/living.gd:50
+#: scripts/sim/living.gd:54
 msgid "Overdraft fee"
 msgstr "透支手續費"
 
@@ -19510,7 +19514,7 @@ msgstr "POSTPOINT"
 msgid "PROCESSING"
 msgstr "審核中"
 
-#: autoload/ui_root.gd:236
+#: autoload/ui_root.gd:235
 msgid "PROMOTED"
 msgstr "升職了"
 
@@ -19650,7 +19654,7 @@ msgstr "提前付款：%s（折扣 %s）。"
 msgid "Paid from"
 msgstr "付款帳戶"
 
-#: scripts/sim/traffic_safety.gd:121 scripts/sim/traffic_safety.gd:195
+#: scripts/sim/traffic_safety.gd:121 scripts/sim/traffic_safety.gd:190
 msgid "Paid medical bill: %s"
 msgstr "支付醫療帳款：%s"
 
@@ -19810,7 +19814,7 @@ msgstr "糕點"
 msgid "Patel"
 msgstr "Patel"
 
-#: autoload/save_system.gd:475
+#: autoload/save_system.gd:479
 msgid "Path:"
 msgstr "路徑："
 
@@ -20426,7 +20430,7 @@ msgstr "平台手續費"
 msgid "Play this week's challenge"
 msgstr "遊玩本週挑戰"
 
-#: autoload/save_system.gd:418
+#: autoload/save_system.gd:422
 msgid "Player"
 msgstr "玩家"
 
@@ -20462,7 +20466,7 @@ msgstr "差"
 msgid "Pop-up Unit 5"
 msgstr "快閃店面 5 號"
 
-#: scripts/sim/living.gd:86
+#: scripts/sim/living.gd:90
 msgid "Pop-up Unit 5 already has a retail tenant. End that lease before opening a café."
 msgstr "Pop-up Unit 5 已有零售租約。先結束該租約，才能開咖啡店。"
 
@@ -20586,19 +20590,23 @@ msgstr "Ken（TradeLink 批發）張貼：%s。各商品有最低訂購量，請
 msgid "Posted runs"
 msgstr "上架的外送單"
 
-#: scripts/ui/minigames/mini_game.gd:274
+#: scripts/ui/minigames/mini_game.gd:289
 msgid "Practice again"
 msgstr "再練習一次"
 
-#: scripts/ui/minigames/mini_game.gd:595
+#: scripts/ui/minigames/mini_game.gd:632
 msgid "Practice is unavailable here. Skip to return to work."
 msgstr "這裡暫時無法練習，可以跳過並回到工作。"
 
-#: scripts/ui/minigames/mini_game.gd:339
+#: scripts/ui/minigames/mini_game.gd:289
+msgid "Practice once first"
+msgstr "先練習一次"
+
+#: scripts/ui/minigames/mini_game.gd:354
 msgid "Practice — take your time"
 msgstr "練習中，慢慢來"
 
-#: scripts/ui/minigames/mini_game.gd:253
+#: scripts/ui/minigames/mini_game.gd:268
 msgid "Practice: no timer, score or pay changes."
 msgstr "練習不計時、不計分，也不影響薪水。"
 
@@ -20858,7 +20866,7 @@ msgstr "Priya：共同工作空間的訪客方案・第 3 段"
 msgid "Probes what could go wrong and how you would cope."
 msgstr "追問哪裡可能出錯，以及你如何應對。"
 
-#: autoload/ui_root.gd:360
+#: autoload/ui_root.gd:359
 msgid "Problem report saved (screenshot + save + log). Send this folder to whoever invited you to test: %s"
 msgstr "已存下問題回報（截圖＋存檔＋記錄）。請把這個資料夾傳給邀請你測試的人：%s"
 
@@ -21818,7 +21826,7 @@ msgstr "可以提案"
 msgid "Ready to propose"
 msgstr "可以提出合作"
 
-#: scripts/ui/minigames/mini_game.gd:208
+#: scripts/ui/minigames/mini_game.gd:223
 msgid "Ready! Start work"
 msgstr "準備好了！開始上班"
 
@@ -21938,7 +21946,7 @@ msgstr "最近的外送單"
 msgid "Recent transactions"
 msgstr "最近交易"
 
-#: autoload/save_system.gd:475
+#: autoload/save_system.gd:479
 msgid "Recent:"
 msgstr "最近使用："
 
@@ -22398,7 +22406,7 @@ msgstr "關係帶來付費工作引薦與有用情報，本身不會提高需求
 msgid "Relaxed"
 msgstr "輕鬆"
 
-#: scripts/ui/minigames/mini_game.gd:260
+#: scripts/ui/minigames/mini_game.gd:275
 msgid "Relaxed — no timer"
 msgstr "輕鬆・不計時"
 
@@ -22486,7 +22494,7 @@ msgstr "租金包含兩天，但必須備貨並安排櫃台人員才會成交。
 msgid "Rent machine · $1,400/month"
 msgstr "租用機台 · 每月 $1,400"
 
-#: scripts/sim/living.gd:68
+#: scripts/sim/living.gd:72
 msgid "Rent paid: %s"
 msgstr "已付房租：%s"
 
@@ -23478,7 +23486,7 @@ msgstr "旋轉商品"
 msgid "Rotate this item to fit the space."
 msgstr "轉一下，讓商品放得下。"
 
-#: scripts/ui/minigames/mini_game.gd:418
+#: scripts/ui/minigames/mini_game.gd:433
 msgid "Rough going. Practice makes it easier."
 msgstr "有點吃力。多練習就會越來越順。"
 
@@ -23490,7 +23498,7 @@ msgstr "這個月很難熬。衝擊打到每個人。下個月還有機會。"
 msgid "Round"
 msgstr "圓形"
 
-#: scripts/ui/minigames/mini_game.gd:195
+#: scripts/ui/minigames/mini_game.gd:210
 msgid "Round %d / %d"
 msgstr "第 %d / %d 回"
 
@@ -23914,7 +23922,7 @@ msgstr "週六"
 msgid "Saturday and Sunday 10:00–18:00 · %s/weekend · reserve at least one day ahead · capacity %d units"
 msgstr "週六、週日 10:00–18:00 · 每週末 %s · 至少提前一天預約 · 最多 %d 件"
 
-#: autoload/save_system.gd:475 data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:151
+#: autoload/save_system.gd:479 data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:151
 msgid "Save"
 msgstr "存檔"
 
@@ -23962,7 +23970,7 @@ msgstr "先備妥足夠公司現金，再預約保養。"
 msgid "Save enough company cash for the vehicle and first insurance payment."
 msgstr "先備妥購車與首期保險所需的公司現金。"
 
-#: autoload/save_system.gd:444
+#: autoload/save_system.gd:448
 msgid "Save exported. Keep this file outside your browser."
 msgstr "存檔已匯出。請把檔案保存在瀏覽器以外的地方。"
 
@@ -23970,7 +23978,7 @@ msgstr "存檔已匯出。請把檔案保存在瀏覽器以外的地方。"
 msgid "Save game"
 msgstr "儲存遊戲"
 
-#: autoload/save_system.gd:525
+#: autoload/save_system.gd:529
 msgid "Save imported. Continue where you left off."
 msgstr "存檔已匯入，可以接著玩。"
 
@@ -24142,7 +24150,7 @@ msgstr "請先備妥車輛保障升級保費。"
 msgid "Save this life and start the selected next life"
 msgstr "保存這一局，展開選好的新人生"
 
-#: autoload/save_system.gd:530
+#: autoload/save_system.gd:534
 msgid "Save transfer"
 msgstr "存檔匯入／匯出"
 
@@ -24226,7 +24234,7 @@ msgstr "Scope_charge"
 msgid "Score"
 msgstr "得分"
 
-#: scripts/ui/minigames/mini_game.gd:341 scripts/ui/minigames/mini_game.gd:402
+#: scripts/ui/minigames/mini_game.gd:356 scripts/ui/minigames/mini_game.gd:417
 msgid "Score %d%%"
 msgstr "得分 %d%%"
 
@@ -24778,7 +24786,7 @@ msgstr "員工餐館"
 msgid "Shift Lead"
 msgstr "值班組長"
 
-#: autoload/ui_root.gd:232
+#: autoload/ui_root.gd:231
 msgid "Shift done: +%s (wages and tips)."
 msgstr "下班了：+%s（薪水加小費）。"
 
@@ -24874,7 +24882,7 @@ msgstr "店面租金"
 msgid "Shop roof"
 msgstr "店面屋頂"
 
-#: data/economy/marketplace.json data/npcs/shoplane.json data/ui/feature_unlocks.json scripts/sim/phone_messages.gd:220
+#: data/economy/marketplace.json data/npcs/shoplane.json data/ui/feature_unlocks.json scripts/sim/phone_messages.gd:209
 msgid "ShopLane"
 msgstr "ShopLane"
 
@@ -24934,7 +24942,7 @@ msgstr "ShopLane 負餘額已從信用卡扣款"
 msgid "ShopLane paused your listings: personal seller limit reached."
 msgstr "ShopLane 暫停了你的商品：已達個人賣家上限。"
 
-#: data/economy/settlement_methods.json scripts/sim/forecast.gd:83
+#: data/economy/settlement_methods.json scripts/sim/forecast.gd:90
 msgid "ShopLane payout"
 msgstr "ShopLane 撥款"
 
@@ -25214,7 +25222,7 @@ msgstr "略過"
 msgid "Skip this guide"
 msgstr "跳過這段導引"
 
-#: scripts/ui/minigames/mini_game.gd:269 scripts/ui/minigames/mini_game.gd:316
+#: scripts/ui/minigames/mini_game.gd:284 scripts/ui/minigames/mini_game.gd:331
 msgid "Skip tutorial"
 msgstr "跳過教學"
 
@@ -25446,7 +25454,7 @@ msgstr "為了撐下去，把庫存賣給了清倉商。"
 msgid "Sold to Dockside Motors: %s"
 msgstr "賣給 Dockside Motors：%s"
 
-#: scripts/ui/minigames/mini_game.gd:416
+#: scripts/ui/minigames/mini_game.gd:431
 msgid "Solid. A few slips."
 msgstr "不錯，有幾個小失誤。"
 
@@ -25614,7 +25622,7 @@ msgstr "標準上架"
 msgid "Standby crews"
 msgstr "待命團隊"
 
-#: scripts/ui/minigames/mini_game.gd:266
+#: scripts/ui/minigames/mini_game.gd:281
 msgid "Start"
 msgstr "開始"
 
@@ -25698,7 +25706,7 @@ msgstr "從框起來的按鈕開始。這裡沒有任何倒數。"
 msgid "Start with the world map and the trade desk. Register your company and keep a cash buffer for customs delays."
 msgstr "先從世界地圖與貿易櫃台看起。登記公司，並留下應付海關延誤的現金。"
 
-#: scripts/ui/minigames/mini_game.gd:209
+#: scripts/ui/minigames/mini_game.gd:224
 msgid "Start work"
 msgstr "開始上班"
 
@@ -26190,7 +26198,7 @@ msgstr "供應商沒有這個商品。"
 msgid "Supplier failed; choose a plan using the remaining deliveries."
 msgstr "供應商交付失敗；依其餘已交付服務選擇方案。"
 
-#: scripts/sim/forecast.gd:61
+#: scripts/sim/forecast.gd:68
 msgid "Supplier invoice"
 msgstr "供應商帳單"
 
@@ -27342,7 +27350,7 @@ msgstr "工廠帳本和排程已更新。"
 msgid "The factory quotation checklist now has conflicting notes. Rita Hale wants a version that other people can check. How do you resolve the conflict?"
 msgstr "工廠報價核對表現在出現互相矛盾的紀錄。Rita Hale 希望其他人也能查核，該如何處理？"
 
-#: autoload/save_system.gd:497
+#: autoload/save_system.gd:501
 msgid "The file could not be read. Your existing save is unchanged."
 msgstr "無法讀取檔案。原有存檔仍完整保留。"
 
@@ -27482,7 +27490,7 @@ msgstr "地主請你明天再來談。"
 msgid "The landlord declined. Try again tomorrow."
 msgstr "地主拒絕了。明天再試。"
 
-#: scripts/sim/living.gd:92
+#: scripts/sim/living.gd:96
 msgid "The landlord needs a registered company on the lease."
 msgstr "房東要求用登記過的公司簽租約。"
 
@@ -27738,7 +27746,7 @@ msgstr "這筆出售無法還清房貸，公司也付不起差額。請先籌措
 msgid "The same seed, rules and choices reproduce the simulation. Daily market previews do not consume the event RNG. Weekly challenges lock standard rules and save results locally."
 msgstr "相同種子、規則與選擇可重現模擬。查看每日市場不會改變事件隨機序列。每週挑戰固定標準規則，並在本機保存成績。"
 
-#: autoload/save_system.gd:209 autoload/save_system.gd:408
+#: autoload/save_system.gd:209 autoload/save_system.gd:412
 msgid "The save could not be written. Your existing save is unchanged."
 msgstr "無法寫入存檔。原有存檔仍完整保留。"
 
@@ -28222,7 +28230,7 @@ msgstr "這是已結束公司的合約。"
 msgid "This is a sightseeing-only location right now."
 msgstr "這裡目前只能參觀。"
 
-#: autoload/save_system.gd:402 scripts/save_codec.gd:197
+#: autoload/save_system.gd:406 scripts/save_codec.gd:197
 msgid "This is not a City Venture save."
 msgstr "這不是 City Venture 的存檔。"
 
@@ -28890,7 +28898,7 @@ msgstr "承租保稅倉"
 msgid "Traded %s %s · internal sales %s · saved versus outside %s"
 msgstr "已交易 %s %s · 內部銷售 %s · 相對外購省下 %s"
 
-#: scripts/sim/traffic_safety.gd:181
+#: scripts/sim/traffic_safety.gd:176
 msgid "Traffic claim filed. Return after seven days to collect the verified medical reimbursement."
 msgstr "交通理賠已申請。七天後回來領取核定醫療補償。"
 
@@ -29266,7 +29274,7 @@ msgstr "找不到這份工作。"
 msgid "Unknown property crisis."
 msgstr "未知的不動產危機。"
 
-#: scripts/sim/living.gd:89
+#: scripts/sim/living.gd:93
 msgid "Unknown property."
 msgstr "未知的物件。"
 
@@ -30550,7 +30558,7 @@ msgstr "工時計入已記錄的有薪班次、咖啡店工作、接案與軟體
 msgid "Work is relaxed by default: no countdowns, customers wait for you, and you can redo a wrong drink. Challenge mode is optional and only adds tips."
 msgstr "打工預設為輕鬆模式：沒有倒數，客人會等你，做錯的飲料可以重做。挑戰模式為選用，只會多給小費。"
 
-#: scripts/ui/minigames/mini_game.gd:256
+#: scripts/ui/minigames/mini_game.gd:271
 msgid "Work mode"
 msgstr "打工模式"
 
@@ -30686,7 +30694,7 @@ msgstr "你已經是最高出價者。"
 msgid "You already live here. Keep this lease or choose another home."
 msgstr "你已住在這裡。可以保留租約，或選擇另一間住處。"
 
-#: scripts/sim/living.gd:95
+#: scripts/sim/living.gd:99
 msgid "You already rent this."
 msgstr "你已經租了這裡。"
 
@@ -30738,7 +30746,7 @@ msgstr "做生意和打工可以同時進行。"
 msgid "You can skip this guide and continue operating. Already completed work is never repeated."
 msgstr "可以跳過導引，直接經營。已完成的步驟不必重做。"
 
-#: scripts/ui/minigames/mini_game.gd:419
+#: scripts/ui/minigames/mini_game.gd:434
 msgid "You can try again whenever you like."
 msgstr "想練習的時候，再試一次就好。"
 
@@ -30842,7 +30850,7 @@ msgstr "你摸清了蒸奶器的脾氣。Jun 讚許地點點頭。"
 msgid "You learn which box sizes the couriers hate. Useful."
 msgstr "你學到快遞員最討厭哪種尺寸的箱子。很有用。"
 
-#: autoload/ui_root.gd:219
+#: autoload/ui_root.gd:218
 msgid "You left before the shift was done. No pay, and no time lost."
 msgstr "你在班還沒結束前就離開了。沒有薪水，也沒有花掉時間。"
 
@@ -30890,7 +30898,7 @@ msgstr "這一路，你結識了 %d 位聯絡人，聘用了 %d 名員工。"
 msgid "You need %d in stock (have %d)."
 msgstr "需要 %d 件庫存（目前 %d 件）。"
 
-#: scripts/sim/living.gd:100
+#: scripts/sim/living.gd:104
 msgid "You need %s (first month%s)."
 msgstr "需要 %s（首月租金%s）。"
 
@@ -31322,7 +31330,7 @@ msgstr "你自己的包裹"
 msgid "Your payment is stuck on the frozen bridge until about %s. Pay again by another rail to get the goods moving; the frozen money comes back when the bridge reopens."
 msgstr "你的款項卡在凍結的跨鏈橋上，預計 %s 前後恢復。改用別的管道再付一次，貨才會動；凍結的錢等跨鏈橋重開後退回。"
 
-#: scripts/sim/assistant_policy.gd:99 scripts/sim/living.gd:141
+#: scripts/sim/assistant_policy.gd:99 scripts/sim/living.gd:145
 msgid "Your personal account"
 msgstr "你的個人帳戶"
 

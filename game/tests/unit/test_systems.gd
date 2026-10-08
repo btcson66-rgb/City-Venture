@@ -159,6 +159,8 @@ func test_story_chapter_one_progression() -> void:
 
 
 func test_save_load_round_trip() -> void:
+	# SaveSystem captures the live world; establish it instead of borrowing another test's scene.
+	SceneRouter._enter("district", "riverside", "", "left", Vector2(512, 360))
 	Ecommerce.buy("tradelink_wholesale", "desk_lamp", 40)
 	Clock.advance(60 * 30)
 	Ecommerce.create_listing("desk_lamp", 27.0, "studio")

@@ -21,7 +21,6 @@ func _ready() -> void:
 	layer = 10
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	# A planned meeting is checked once per game minute, not every frame.
-	Clock.minute_tick.connect(func(_t): PhoneMessages.check_arrival())
 	root = Control.new()
 	root.set_anchors_preset(Control.PRESET_FULL_RECT)
 	root.mouse_filter = Control.MOUSE_FILTER_IGNORE

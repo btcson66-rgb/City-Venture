@@ -25,7 +25,7 @@ msgstr ""
 msgid "  ·  DAY %d"
 msgstr ""
 
-#: autoload/ui_root.gd:384
+#: autoload/ui_root.gd:383
 msgid "  ·  Open %s–%s"
 msgstr ""
 
@@ -45,7 +45,7 @@ msgstr ""
 msgid " (late: -20%)"
 msgstr ""
 
-#: scripts/sim/living.gd:100
+#: scripts/sim/living.gd:104
 msgid " + deposit"
 msgstr ""
 
@@ -453,7 +453,7 @@ msgstr ""
 msgid "%s (%s) has ended. Renew it in Governance when you are ready."
 msgstr ""
 
-#: autoload/game_state.gd:202
+#: autoload/game_state.gd:204
 msgid "%s (personal seller)"
 msgstr ""
 
@@ -633,7 +633,7 @@ msgstr ""
 msgid "%s parked in %s · insurance %s per month · no business performance bonus"
 msgstr ""
 
-#: scripts/sim/forecast.gd:65
+#: scripts/sim/forecast.gd:72
 msgid "%s pays"
 msgstr ""
 
@@ -873,7 +873,7 @@ msgstr ""
 msgid "%s × last year's revenue of %s"
 msgstr ""
 
-#: scripts/sim/living.gd:81
+#: scripts/sim/living.gd:85
 msgid "%s — monthly"
 msgstr ""
 
@@ -1001,11 +1001,11 @@ msgstr ""
 msgid "(Order {order} — {product}, {price})"
 msgstr ""
 
-#: autoload/save_system.gd:438
+#: autoload/save_system.gd:442
 msgid "*.cvsave ; "
 msgstr ""
 
-#: autoload/save_system.gd:460
+#: autoload/save_system.gd:464
 msgid "*.cvsave,*.json ; "
 msgstr ""
 
@@ -1177,7 +1177,7 @@ msgstr ""
 msgid "A Van Driver (People tab) takes one run each workday from 9:00. Your own ecommerce parcels can go out in the van too: choose \"Own van\" at the packing table."
 msgstr ""
 
-#: autoload/save_system.gd:133 autoload/save_system.gd:404 scripts/ui/modals/save_list_modal.gd:63
+#: autoload/save_system.gd:133 autoload/save_system.gd:408 scripts/ui/modals/save_list_modal.gd:63
 msgid "A backup could not be created. Your existing save is unchanged."
 msgstr ""
 
@@ -1797,7 +1797,7 @@ msgstr ""
 msgid "A rival cuts prices"
 msgstr ""
 
-#: autoload/ui_root.gd:234
+#: autoload/ui_root.gd:233
 msgid "A rough shift: it doesn't count toward your next promotion."
 msgstr ""
 
@@ -2361,7 +2361,7 @@ msgstr ""
 msgid "Admit where a rival could beat you and how you would respond."
 msgstr ""
 
-#: scripts/sim/forecast.gd:110
+#: scripts/sim/forecast.gd:117
 msgid "Ads"
 msgstr ""
 
@@ -2513,7 +2513,7 @@ msgstr ""
 msgid "All %d stops planned  ·  round trip %.1f km"
 msgstr ""
 
-#: autoload/save_system.gd:475
+#: autoload/save_system.gd:479
 msgid "All Files (*)"
 msgstr ""
 
@@ -3089,7 +3089,7 @@ msgstr ""
 msgid "Assigning a worker to one counter removes that same shift from the other counter; an empty shift stays closed unless the owner works."
 msgstr ""
 
-#: data/help/help.json scripts/sim/phone_messages.gd:212 scripts/ui/modals/settings_modal.gd:5
+#: data/help/help.json scripts/sim/phone_messages.gd:201 scripts/ui/modals/settings_modal.gd:5
 msgid "Assistant"
 msgstr ""
 
@@ -3701,7 +3701,7 @@ msgstr ""
 msgid "Before the first customer"
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:266
+#: scripts/ui/minigames/mini_game.gd:281
 msgid "Begin practice"
 msgstr ""
 
@@ -3783,6 +3783,10 @@ msgstr ""
 
 #: data/help/glossary.json
 msgid "Bills are paid in cash. Plenty of profitable companies still run out of it."
+msgstr ""
+
+#: scripts/sim/forecast.gd:49
+msgid "Bills due"
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1469
@@ -3893,7 +3897,7 @@ msgstr ""
 msgid "Bold. Love it."
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:186 scripts/ui/minigames/mini_game.gd:393
+#: scripts/ui/minigames/mini_game.gd:201 scripts/ui/minigames/mini_game.gd:408
 msgid "Bonus time is up. Keep going at your own pace."
 msgstr ""
 
@@ -4085,7 +4089,7 @@ msgstr ""
 msgid "Bridge reopens with new limits; operators restore 90 cents on the dollar."
 msgstr ""
 
-#: scripts/sim/forecast.gd:75
+#: scripts/sim/forecast.gd:82
 msgid "Bridge shortfall"
 msgstr ""
 
@@ -5029,7 +5033,7 @@ msgstr ""
 msgid "Can't work the counter: %s."
 msgstr ""
 
-#: autoload/save_system.gd:475 autoload/sound.gd:286 scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57
+#: autoload/save_system.gd:479 autoload/sound.gd:286 scripts/ui/modals/loan_signing_modal.gd:19 scripts/ui/modals/metro_modal.gd:57
 msgid "Cancel"
 msgstr ""
 
@@ -5341,11 +5345,11 @@ msgstr ""
 msgid "Challenge score"
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:261
+#: scripts/ui/minigames/mini_game.gd:276
 msgid "Challenge — optional clock"
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:261
+#: scripts/ui/minigames/mini_game.gd:276
 msgid "Challenge — tips only"
 msgstr ""
 
@@ -5809,7 +5813,7 @@ msgstr ""
 msgid "Choose a running group business and a valid media budget."
 msgstr ""
 
-#: autoload/save_system.gd:401 scripts/ui/modals/save_list_modal.gd:22
+#: autoload/save_system.gd:405 scripts/ui/modals/save_list_modal.gd:22
 msgid "Choose a save slot to replace. Its existing save will be backed up."
 msgstr ""
 
@@ -6285,7 +6289,7 @@ msgstr ""
 msgid "City Marathon Weekend"
 msgstr ""
 
-#: autoload/save_system.gd:438 autoload/save_system.gd:460
+#: autoload/save_system.gd:442 autoload/save_system.gd:464
 msgid "City Venture save"
 msgstr ""
 
@@ -6341,7 +6345,7 @@ msgstr ""
 msgid "City update: %s"
 msgstr ""
 
-#: autoload/save_system.gd:420
+#: autoload/save_system.gd:424
 msgid "CityVenture_%s_%04d-%02d-%02d.cvsave"
 msgstr ""
 
@@ -6517,7 +6521,7 @@ msgstr ""
 msgid "Click! %d%% (%s)"
 msgstr ""
 
-#: data/npcs/client.json scripts/sim/phone_messages.gd:214
+#: data/npcs/client.json scripts/sim/phone_messages.gd:203
 msgid "Client"
 msgstr ""
 
@@ -6541,7 +6545,7 @@ msgstr ""
 msgid "Client model: sales $120, goods $50, shipping $10. Calculate gross contribution before other expenses."
 msgstr ""
 
-#: scripts/sim/forecast.gd:79
+#: scripts/sim/forecast.gd:86
 msgid "Client payment"
 msgstr ""
 
@@ -7425,7 +7429,7 @@ msgstr ""
 msgid "Containers, customs and freight. Rent Pier 7 for stock, buy a used van from Sam, and start delivering."
 msgstr ""
 
-#: scripts/frontend/main_menu.gd:50 scripts/ui/minigames/mini_game.gd:407 scripts/ui/modals/month_close_modal.gd:63
+#: scripts/frontend/main_menu.gd:50 scripts/ui/minigames/mini_game.gd:422 scripts/ui/modals/month_close_modal.gd:63
 msgid "Continue"
 msgstr ""
 
@@ -7681,7 +7685,7 @@ msgstr ""
 msgid "Counter: ask for {counter_price}"
 msgstr ""
 
-#: scripts/sim/traffic_safety.gd:187 scripts/sim/traffic_safety.gd:189
+#: scripts/sim/traffic_safety.gd:182 scripts/sim/traffic_safety.gd:184
 msgid "Counterparty medical settlement: %s"
 msgstr ""
 
@@ -8909,7 +8913,7 @@ msgstr ""
 msgid "Directional evidence; collect a larger sample"
 msgstr ""
 
-#: autoload/save_system.gd:475
+#: autoload/save_system.gd:479
 msgid "Directories & Files:"
 msgstr ""
 
@@ -9869,7 +9873,7 @@ msgstr ""
 msgid "Estimated margin (home dollars)"
 msgstr ""
 
-#: scripts/sim/forecast.gd:107
+#: scripts/sim/forecast.gd:114
 msgid "Estimated sales"
 msgstr ""
 
@@ -10005,7 +10009,7 @@ msgstr ""
 msgid "Excellent"
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:414
+#: scripts/ui/minigames/mini_game.gd:429
 msgid "Excellent work."
 msgstr ""
 
@@ -10149,7 +10153,7 @@ msgstr ""
 msgid "Export duty %s: %s"
 msgstr ""
 
-#: autoload/save_system.gd:474 scripts/ui/modals/pause_menu.gd:42 scripts/ui/modals/save_list_modal.gd:25
+#: autoload/save_system.gd:478 scripts/ui/modals/pause_menu.gd:42 scripts/ui/modals/save_list_modal.gd:25
 msgid "Export save"
 msgstr ""
 
@@ -10381,7 +10385,7 @@ msgstr ""
 msgid "Fast: +30% work output."
 msgstr ""
 
-#: autoload/save_system.gd:475
+#: autoload/save_system.gd:479
 msgid "Favorites:"
 msgstr ""
 
@@ -10469,11 +10473,11 @@ msgstr ""
 msgid "File yourself · %d minutes · %.0f%% form-error chance"
 msgstr ""
 
-#: autoload/save_system.gd:475
+#: autoload/save_system.gd:479
 msgid "File:"
 msgstr ""
 
-#: autoload/save_system.gd:490
+#: autoload/save_system.gd:494
 msgid "FileReader"
 msgstr ""
 
@@ -10961,7 +10965,7 @@ msgstr ""
 msgid "Food ingredients pack"
 msgstr ""
 
-#: scripts/sim/living.gd:34
+#: scripts/sim/living.gd:38
 msgid "Food, transit & bills"
 msgstr ""
 
@@ -11273,7 +11277,7 @@ msgstr ""
 msgid "Frozen funds"
 msgstr ""
 
-#: scripts/sim/forecast.gd:73
+#: scripts/sim/forecast.gd:80
 msgid "Frozen funds return"
 msgstr ""
 
@@ -12581,7 +12585,7 @@ msgstr ""
 msgid "Home rent and location"
 msgstr ""
 
-#: scripts/sim/living.gd:64
+#: scripts/sim/living.gd:68
 msgid "Home rent — %s (%s)"
 msgstr ""
 
@@ -13029,7 +13033,7 @@ msgstr ""
 msgid "Import prices ease as the ports catch up."
 msgstr ""
 
-#: autoload/save_system.gd:474 scripts/ui/modals/pause_menu.gd:45 scripts/ui/modals/save_list_modal.gd:13 scripts/ui/modals/save_list_modal.gd:29
+#: autoload/save_system.gd:478 scripts/ui/modals/pause_menu.gd:45 scripts/ui/modals/save_list_modal.gd:13 scripts/ui/modals/save_list_modal.gd:29
 msgid "Import save"
 msgstr ""
 
@@ -13853,7 +13857,7 @@ msgstr ""
 msgid "Job penalties"
 msgstr ""
 
-#: scripts/sim/phone_messages.gd:218
+#: scripts/sim/phone_messages.gd:207
 msgid "Jobs Board"
 msgstr ""
 
@@ -14381,7 +14385,7 @@ msgstr ""
 msgid "Labour cost ratio"
 msgstr ""
 
-#: data/milestones.json scripts/sim/phone_messages.gd:216
+#: data/milestones.json scripts/sim/phone_messages.gd:205
 msgid "Landlord"
 msgstr ""
 
@@ -14673,7 +14677,7 @@ msgstr ""
 msgid "Lease signed. Welcome to Suite 2B."
 msgstr ""
 
-#: scripts/sim/living.gd:105
+#: scripts/sim/living.gd:109
 msgid "Lease signed: %s"
 msgstr ""
 
@@ -14761,7 +14765,7 @@ msgstr ""
 msgid "LeaseAster"
 msgstr ""
 
-#: scripts/sim/living.gd:107
+#: scripts/sim/living.gd:111
 msgid "Leased %s for %s/month."
 msgstr ""
 
@@ -14773,7 +14777,7 @@ msgstr ""
 msgid "Leases must be in a registered company's name."
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:316
+#: scripts/ui/minigames/mini_game.gd:331
 msgid "Leave early"
 msgstr ""
 
@@ -15185,7 +15189,7 @@ msgstr ""
 msgid "Live thirty days without any personal or company cash account becoming negative."
 msgstr ""
 
-#: scripts/sim/forecast.gd:42 scripts/sim/ledger.gd:33
+#: scripts/sim/forecast.gd:44 scripts/sim/ledger.gd:33
 msgid "Living costs"
 msgstr ""
 
@@ -15245,7 +15249,7 @@ msgstr ""
 msgid "Loan eligibility"
 msgstr ""
 
-#: scripts/sim/forecast.gd:49
+#: scripts/sim/forecast.gd:56
 msgid "Loan payment"
 msgstr ""
 
@@ -15761,7 +15765,7 @@ msgstr ""
 msgid "Manager review %d%% · next rank needs %d%%; serve and clean well to improve."
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:248
+#: scripts/ui/minigames/mini_game.gd:263
 msgid "Manager: Let's try one order together. Take your time."
 msgstr ""
 
@@ -16973,7 +16977,7 @@ msgstr ""
 msgid "NEGOTIATION"
 msgstr ""
 
-#: autoload/ui_root.gd:401
+#: autoload/ui_root.gd:400
 msgid "NEW LOCATION"
 msgstr ""
 
@@ -17345,7 +17349,7 @@ msgstr ""
 msgid "Nexus Co-work"
 msgstr ""
 
-#: scripts/sim/living.gd:119
+#: scripts/sim/living.gd:123
 msgid "Nexus Co-work day pass"
 msgstr ""
 
@@ -17401,11 +17405,11 @@ msgstr ""
 msgid "Nia Park: internship learning portfolio · part 3"
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:364
+#: scripts/ui/minigames/mini_game.gd:379
 msgid "Nice work!"
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:362
+#: scripts/ui/minigames/mini_game.gd:377
 msgid "Nice! +%s tip"
 msgstr ""
 
@@ -17973,7 +17977,7 @@ msgstr ""
 msgid "Not needed yet. Commercial importers need one from the Regulation Wave (Year 8)."
 msgstr ""
 
-#: data/events/elena_offer.json scripts/ui/minigames/mini_game.gd:273 scripts/ui/modals/lease_modal.gd:49 scripts/ui/modals/sleep_modal.gd:32
+#: data/events/elena_offer.json scripts/ui/minigames/mini_game.gd:288 scripts/ui/modals/lease_modal.gd:49 scripts/ui/modals/sleep_modal.gd:32
 msgid "Not now"
 msgstr ""
 
@@ -18505,7 +18509,7 @@ msgstr ""
 msgid "Only wholly founder-owned companies can enter this holding group. Other shareholders keep their rights."
 msgstr ""
 
-#: autoload/save_system.gd:475 scripts/ui/hotel_ui.gd:273 scripts/ui/modals/city_map_modal.gd:132 scripts/ui/modals/city_map_modal.gd:179
+#: autoload/save_system.gd:479 scripts/ui/hotel_ui.gd:273 scripts/ui/modals/city_map_modal.gd:132 scripts/ui/modals/city_map_modal.gd:179
 msgid "Open"
 msgstr ""
 
@@ -19229,7 +19233,7 @@ msgstr ""
 msgid "Overdraft costs $35 a night. Nothing's over — but something has to give."
 msgstr ""
 
-#: scripts/sim/living.gd:50
+#: scripts/sim/living.gd:54
 msgid "Overdraft fee"
 msgstr ""
 
@@ -19509,7 +19513,7 @@ msgstr ""
 msgid "PROCESSING"
 msgstr ""
 
-#: autoload/ui_root.gd:236
+#: autoload/ui_root.gd:235
 msgid "PROMOTED"
 msgstr ""
 
@@ -19649,7 +19653,7 @@ msgstr ""
 msgid "Paid from"
 msgstr ""
 
-#: scripts/sim/traffic_safety.gd:121 scripts/sim/traffic_safety.gd:195
+#: scripts/sim/traffic_safety.gd:121 scripts/sim/traffic_safety.gd:190
 msgid "Paid medical bill: %s"
 msgstr ""
 
@@ -19809,7 +19813,7 @@ msgstr ""
 msgid "Patel"
 msgstr ""
 
-#: autoload/save_system.gd:475
+#: autoload/save_system.gd:479
 msgid "Path:"
 msgstr ""
 
@@ -20425,7 +20429,7 @@ msgstr ""
 msgid "Play this week's challenge"
 msgstr ""
 
-#: autoload/save_system.gd:418
+#: autoload/save_system.gd:422
 msgid "Player"
 msgstr ""
 
@@ -20461,7 +20465,7 @@ msgstr ""
 msgid "Pop-up Unit 5"
 msgstr ""
 
-#: scripts/sim/living.gd:86
+#: scripts/sim/living.gd:90
 msgid "Pop-up Unit 5 already has a retail tenant. End that lease before opening a café."
 msgstr ""
 
@@ -20585,19 +20589,23 @@ msgstr ""
 msgid "Posted runs"
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:274
+#: scripts/ui/minigames/mini_game.gd:289
 msgid "Practice again"
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:595
+#: scripts/ui/minigames/mini_game.gd:632
 msgid "Practice is unavailable here. Skip to return to work."
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:339
+#: scripts/ui/minigames/mini_game.gd:289
+msgid "Practice once first"
+msgstr ""
+
+#: scripts/ui/minigames/mini_game.gd:354
 msgid "Practice — take your time"
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:253
+#: scripts/ui/minigames/mini_game.gd:268
 msgid "Practice: no timer, score or pay changes."
 msgstr ""
 
@@ -20857,7 +20865,7 @@ msgstr ""
 msgid "Probes what could go wrong and how you would cope."
 msgstr ""
 
-#: autoload/ui_root.gd:360
+#: autoload/ui_root.gd:359
 msgid "Problem report saved (screenshot + save + log). Send this folder to whoever invited you to test: %s"
 msgstr ""
 
@@ -21817,7 +21825,7 @@ msgstr ""
 msgid "Ready to propose"
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:208
+#: scripts/ui/minigames/mini_game.gd:223
 msgid "Ready! Start work"
 msgstr ""
 
@@ -21937,7 +21945,7 @@ msgstr ""
 msgid "Recent transactions"
 msgstr ""
 
-#: autoload/save_system.gd:475
+#: autoload/save_system.gd:479
 msgid "Recent:"
 msgstr ""
 
@@ -22397,7 +22405,7 @@ msgstr ""
 msgid "Relaxed"
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:260
+#: scripts/ui/minigames/mini_game.gd:275
 msgid "Relaxed — no timer"
 msgstr ""
 
@@ -22485,7 +22493,7 @@ msgstr ""
 msgid "Rent machine · $1,400/month"
 msgstr ""
 
-#: scripts/sim/living.gd:68
+#: scripts/sim/living.gd:72
 msgid "Rent paid: %s"
 msgstr ""
 
@@ -23477,7 +23485,7 @@ msgstr ""
 msgid "Rotate this item to fit the space."
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:418
+#: scripts/ui/minigames/mini_game.gd:433
 msgid "Rough going. Practice makes it easier."
 msgstr ""
 
@@ -23489,7 +23497,7 @@ msgstr ""
 msgid "Round"
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:195
+#: scripts/ui/minigames/mini_game.gd:210
 msgid "Round %d / %d"
 msgstr ""
 
@@ -23913,7 +23921,7 @@ msgstr ""
 msgid "Saturday and Sunday 10:00–18:00 · %s/weekend · reserve at least one day ahead · capacity %d units"
 msgstr ""
 
-#: autoload/save_system.gd:475 data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:151
+#: autoload/save_system.gd:479 data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:151
 msgid "Save"
 msgstr ""
 
@@ -23961,7 +23969,7 @@ msgstr ""
 msgid "Save enough company cash for the vehicle and first insurance payment."
 msgstr ""
 
-#: autoload/save_system.gd:444
+#: autoload/save_system.gd:448
 msgid "Save exported. Keep this file outside your browser."
 msgstr ""
 
@@ -23969,7 +23977,7 @@ msgstr ""
 msgid "Save game"
 msgstr ""
 
-#: autoload/save_system.gd:525
+#: autoload/save_system.gd:529
 msgid "Save imported. Continue where you left off."
 msgstr ""
 
@@ -24141,7 +24149,7 @@ msgstr ""
 msgid "Save this life and start the selected next life"
 msgstr ""
 
-#: autoload/save_system.gd:530
+#: autoload/save_system.gd:534
 msgid "Save transfer"
 msgstr ""
 
@@ -24225,7 +24233,7 @@ msgstr ""
 msgid "Score"
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:341 scripts/ui/minigames/mini_game.gd:402
+#: scripts/ui/minigames/mini_game.gd:356 scripts/ui/minigames/mini_game.gd:417
 msgid "Score %d%%"
 msgstr ""
 
@@ -24777,7 +24785,7 @@ msgstr ""
 msgid "Shift Lead"
 msgstr ""
 
-#: autoload/ui_root.gd:232
+#: autoload/ui_root.gd:231
 msgid "Shift done: +%s (wages and tips)."
 msgstr ""
 
@@ -24873,7 +24881,7 @@ msgstr ""
 msgid "Shop roof"
 msgstr ""
 
-#: data/economy/marketplace.json data/npcs/shoplane.json data/ui/feature_unlocks.json scripts/sim/phone_messages.gd:220
+#: data/economy/marketplace.json data/npcs/shoplane.json data/ui/feature_unlocks.json scripts/sim/phone_messages.gd:209
 msgid "ShopLane"
 msgstr ""
 
@@ -24933,7 +24941,7 @@ msgstr ""
 msgid "ShopLane paused your listings: personal seller limit reached."
 msgstr ""
 
-#: data/economy/settlement_methods.json scripts/sim/forecast.gd:83
+#: data/economy/settlement_methods.json scripts/sim/forecast.gd:90
 msgid "ShopLane payout"
 msgstr ""
 
@@ -25213,7 +25221,7 @@ msgstr ""
 msgid "Skip this guide"
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:269 scripts/ui/minigames/mini_game.gd:316
+#: scripts/ui/minigames/mini_game.gd:284 scripts/ui/minigames/mini_game.gd:331
 msgid "Skip tutorial"
 msgstr ""
 
@@ -25445,7 +25453,7 @@ msgstr ""
 msgid "Sold to Dockside Motors: %s"
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:416
+#: scripts/ui/minigames/mini_game.gd:431
 msgid "Solid. A few slips."
 msgstr ""
 
@@ -25613,7 +25621,7 @@ msgstr ""
 msgid "Standby crews"
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:266
+#: scripts/ui/minigames/mini_game.gd:281
 msgid "Start"
 msgstr ""
 
@@ -25697,7 +25705,7 @@ msgstr ""
 msgid "Start with the world map and the trade desk. Register your company and keep a cash buffer for customs delays."
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:209
+#: scripts/ui/minigames/mini_game.gd:224
 msgid "Start work"
 msgstr ""
 
@@ -26189,7 +26197,7 @@ msgstr ""
 msgid "Supplier failed; choose a plan using the remaining deliveries."
 msgstr ""
 
-#: scripts/sim/forecast.gd:61
+#: scripts/sim/forecast.gd:68
 msgid "Supplier invoice"
 msgstr ""
 
@@ -27341,7 +27349,7 @@ msgstr ""
 msgid "The factory quotation checklist now has conflicting notes. Rita Hale wants a version that other people can check. How do you resolve the conflict?"
 msgstr ""
 
-#: autoload/save_system.gd:497
+#: autoload/save_system.gd:501
 msgid "The file could not be read. Your existing save is unchanged."
 msgstr ""
 
@@ -27481,7 +27489,7 @@ msgstr ""
 msgid "The landlord declined. Try again tomorrow."
 msgstr ""
 
-#: scripts/sim/living.gd:92
+#: scripts/sim/living.gd:96
 msgid "The landlord needs a registered company on the lease."
 msgstr ""
 
@@ -27737,7 +27745,7 @@ msgstr ""
 msgid "The same seed, rules and choices reproduce the simulation. Daily market previews do not consume the event RNG. Weekly challenges lock standard rules and save results locally."
 msgstr ""
 
-#: autoload/save_system.gd:209 autoload/save_system.gd:408
+#: autoload/save_system.gd:209 autoload/save_system.gd:412
 msgid "The save could not be written. Your existing save is unchanged."
 msgstr ""
 
@@ -28221,7 +28229,7 @@ msgstr ""
 msgid "This is a sightseeing-only location right now."
 msgstr ""
 
-#: autoload/save_system.gd:402 scripts/save_codec.gd:197
+#: autoload/save_system.gd:406 scripts/save_codec.gd:197
 msgid "This is not a City Venture save."
 msgstr ""
 
@@ -28889,7 +28897,7 @@ msgstr ""
 msgid "Traded %s %s · internal sales %s · saved versus outside %s"
 msgstr ""
 
-#: scripts/sim/traffic_safety.gd:181
+#: scripts/sim/traffic_safety.gd:176
 msgid "Traffic claim filed. Return after seven days to collect the verified medical reimbursement."
 msgstr ""
 
@@ -29265,7 +29273,7 @@ msgstr ""
 msgid "Unknown property crisis."
 msgstr ""
 
-#: scripts/sim/living.gd:89
+#: scripts/sim/living.gd:93
 msgid "Unknown property."
 msgstr ""
 
@@ -30549,7 +30557,7 @@ msgstr ""
 msgid "Work is relaxed by default: no countdowns, customers wait for you, and you can redo a wrong drink. Challenge mode is optional and only adds tips."
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:256
+#: scripts/ui/minigames/mini_game.gd:271
 msgid "Work mode"
 msgstr ""
 
@@ -30685,7 +30693,7 @@ msgstr ""
 msgid "You already live here. Keep this lease or choose another home."
 msgstr ""
 
-#: scripts/sim/living.gd:95
+#: scripts/sim/living.gd:99
 msgid "You already rent this."
 msgstr ""
 
@@ -30737,7 +30745,7 @@ msgstr ""
 msgid "You can skip this guide and continue operating. Already completed work is never repeated."
 msgstr ""
 
-#: scripts/ui/minigames/mini_game.gd:419
+#: scripts/ui/minigames/mini_game.gd:434
 msgid "You can try again whenever you like."
 msgstr ""
 
@@ -30841,7 +30849,7 @@ msgstr ""
 msgid "You learn which box sizes the couriers hate. Useful."
 msgstr ""
 
-#: autoload/ui_root.gd:219
+#: autoload/ui_root.gd:218
 msgid "You left before the shift was done. No pay, and no time lost."
 msgstr ""
 
@@ -30889,7 +30897,7 @@ msgstr ""
 msgid "You need %d in stock (have %d)."
 msgstr ""
 
-#: scripts/sim/living.gd:100
+#: scripts/sim/living.gd:104
 msgid "You need %s (first month%s)."
 msgstr ""
 
@@ -31321,7 +31329,7 @@ msgstr ""
 msgid "Your payment is stuck on the frozen bridge until about %s. Pay again by another rail to get the goods moving; the frozen money comes back when the bridge reopens."
 msgstr ""
 
-#: scripts/sim/assistant_policy.gd:99 scripts/sim/living.gd:141
+#: scripts/sim/assistant_policy.gd:99 scripts/sim/living.gd:145
 msgid "Your personal account"
 msgstr ""
 
