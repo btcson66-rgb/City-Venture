@@ -159,7 +159,7 @@ func build() -> void:
 	var guide := UIK.button(I18n.t("First-use guide"), func():FeatureIntroModal.show_in(self, "industry_"+first_industry if first_industry != "" else "os_"+tab))
 	guide.name = "FeatureGuideReplay"
 	content.add_child(guide)
-	var chores: Array = {"operations":["restock","packing","returns"],"finance":["tax","fx","bills"],"people":["roster"],"contracts":["restock","packing"],"cafe":["cafe_supplies","hygiene","roster"],"logistics":["maintenance","roster"],"manufacturing":["maintenance","restock","packing"],"hotel":["maintenance"],"automotive":["maintenance"],"energy":["maintenance"],"international_trade":["customs"],"governance":["tax","renewals"]}.get(tab,[])
+	var chores: Array = {"operations":["restock","packing","returns"],"finance":["tax","fx","bills"],"people":["roster"],"contracts":["restock","packing"],"cafe":["cafe_supplies","hygiene","roster"],"logistics":["maintenance","roster"],"manufacturing":["maintenance","restock","packing"],"hotel":["maintenance","hotel_daily"],"automotive":["maintenance","fleet_care"],"energy":["maintenance","charging_care"],"international_trade":["customs"],"governance":["tax","renewals"]}.get(tab,[])
 	for chore in chores:AssistantPolicy.toggle(content,str(chore))
 	if tab == "finance":AssistantPolicy.bills_ui(content)
 	if not Industries.render_tab(tab, self):

@@ -378,7 +378,7 @@ msgstr "%d 班次"
 msgid "%d stops · deliver by %s · about %s on the road"
 msgstr "%d 個停靠點 · %s 前送達 · 路上約 %s"
 
-#: scripts/ui/calm_screen.gd:118 scripts/ui/modals/company_os.gd:1002 scripts/ui/modals/company_os.gd:682 scripts/ui/modals/company_os.gd:820
+#: scripts/ui/calm_screen.gd:134 scripts/ui/modals/company_os.gd:1002 scripts/ui/modals/company_os.gd:682 scripts/ui/modals/company_os.gd:820
 msgid "%d units"
 msgstr "%d 件"
 
@@ -514,7 +514,7 @@ msgstr "%s 選了競爭者的報價。請檢查單價，再嘗試另一張詢價
 msgid "%s closed: %d customers, %s in the till."
 msgstr "%s 打烊了：%d 位客人，收銀 %s。"
 
-#: scripts/sim/assistant_policy.gd:108
+#: scripts/sim/assistant_policy.gd:110
 msgid "%s does not have enough cash to pay a bill. It is waiting in Finance; add funds or pay it when you can."
 msgstr "%s 的現金不夠繳帳單。帳單先放在「財務」裡，資金充足時再付就好。"
 
@@ -654,7 +654,7 @@ msgstr "%s 離職了。"
 msgid "%s registered as an employer."
 msgstr "%s 完成雇主登記。"
 
-#: scripts/sim/hotel.gd:628
+#: scripts/sim/hotel.gd:630
 msgid "%s renovation"
 msgstr "%s翻新"
 
@@ -1210,7 +1210,7 @@ msgstr "談成好條件"
 msgid "A better price, a longer handshake. A year to earn the rest."
 msgstr "價格更好，握手更久。剩下的一年後再賺。"
 
-#: scripts/sim/assistant_policy.gd:152
+#: scripts/sim/assistant_policy.gd:154
 msgid "A bill is past its due date. A small late fee was added; pay it from Finance when you can."
 msgstr "有一張帳單過了繳費期限，已加收少許逾期費。方便時到「財務」繳清即可。"
 
@@ -1454,7 +1454,7 @@ msgstr "需要營運中的公司及國際帳戶。"
 msgid "A local sponsored report"
 msgstr "地方贊助報導"
 
-#: scripts/sim/hotel.gd:625
+#: scripts/sim/hotel.gd:627
 msgid "A locked group block uses these rooms during the renovation."
 msgstr "已鎖定的團體房在翻新期間要用這些房間。"
 
@@ -2290,7 +2290,7 @@ msgstr "跨海而來"
 msgid "Active"
 msgstr "進行中"
 
-#: scripts/ui/calm_screen.gd:120
+#: scripts/ui/calm_screen.gd:136
 msgid "Active campaigns"
 msgstr "進行中的企劃"
 
@@ -2298,7 +2298,7 @@ msgstr "進行中的企劃"
 msgid "Active contracts cover this condition: %s still to collect."
 msgstr "有效合約已符合此條件：尚有 %s 待收款。"
 
-#: scripts/ui/calm_screen.gd:118
+#: scripts/ui/calm_screen.gd:134
 msgid "Active orders"
 msgstr "進行中的訂單"
 
@@ -2390,7 +2390,7 @@ msgstr "廣告已暫停。"
 msgid "Ads/day"
 msgstr "每日廣告"
 
-#: scripts/ui/calm_screen.gd:80 scripts/ui/modals/tax_filing_modal.gd:15
+#: scripts/ui/calm_screen.gd:86 scripts/ui/modals/tax_filing_modal.gd:15
 msgid "Advanced"
 msgstr "進階"
 
@@ -4034,7 +4034,7 @@ msgstr "選箱 → 擺放 → 封箱"
 msgid "Boxing"
 msgstr "拳擊"
 
-#: scripts/ui/calm_screen.gd:147
+#: scripts/ui/calm_screen.gd:163
 msgid "Brand"
 msgstr "品牌"
 
@@ -4398,7 +4398,7 @@ msgstr "商業貸款——Marcus Reed，平日 13:00–16:00"
 msgid "Business loss, last 12 months (disclosed)"
 msgstr "近 12 個月營業虧損（已揭露）"
 
-#: scripts/ui/calm_screen.gd:115 scripts/ui/calm_screen.gd:149 scripts/ui/modals/company_os.gd:340 scripts/ui/modals/company_os.gd:363
+#: scripts/ui/calm_screen.gd:131 scripts/ui/calm_screen.gd:165 scripts/ui/modals/company_os.gd:340 scripts/ui/modals/company_os.gd:363
 msgid "Business profit"
 msgstr "營業利潤"
 
@@ -5270,7 +5270,7 @@ msgstr "現金預測"
 msgid "Cash forecast · next 9 weeks"
 msgstr "現金預測 · 未來 9 週"
 
-#: scripts/ui/calm_screen.gd:112 scripts/ui/calm_screen.gd:136 scripts/ui/modals/company_os.gd:338 scripts/ui/modals/company_os.gd:372
+#: scripts/ui/calm_screen.gd:123 scripts/ui/calm_screen.gd:152 scripts/ui/modals/company_os.gd:338 scripts/ui/modals/company_os.gd:372
 msgid "Cash in bank"
 msgstr "銀行現金"
 
@@ -5670,7 +5670,7 @@ msgstr "選能裝下這張訂單的箱子。"
 msgid "Choose a brand you can sign."
 msgstr "請選擇可簽約的品牌。"
 
-#: scripts/sim/hotel.gd:148
+#: scripts/sim/hotel.gd:150
 msgid "Choose a breakfast option."
 msgstr "請選擇早餐方案。"
 
@@ -5818,7 +5818,7 @@ msgstr "請選擇一位合作夥伴。"
 msgid "Choose a paused campaign and fund its next media purchase."
 msgstr "請選擇暫停的活動，並備妥下一次媒體採購資金。"
 
-#: scripts/sim/hotel.gd:144
+#: scripts/sim/hotel.gd:146
 msgid "Choose a peak-day surcharge between 0% and 40%."
 msgstr "旺日加價請設在 0% 到 40% 之間。"
 
@@ -5858,11 +5858,11 @@ msgstr "選擇屋頂"
 msgid "Choose a roof or charging site. Place panels on the roof; fine tuning is optional."
 msgstr "選擇屋頂或充電站，在屋頂放上面板；微調是選用的。"
 
-#: scripts/sim/hotel.gd:130
+#: scripts/sim/hotel.gd:131
 msgid "Choose a room type and a price."
 msgstr "請選擇房型並輸入價格。"
 
-#: scripts/sim/hotel.gd:608 scripts/sim/hotel.gd:620
+#: scripts/sim/hotel.gd:610 scripts/sim/hotel.gd:622
 msgid "Choose a room type."
 msgstr "請選擇房型。"
 
@@ -5926,7 +5926,7 @@ msgstr "請選擇車場上的中古車。"
 msgid "Choose a used car that is not in the workshop."
 msgstr "請選擇不在工廠整備中的中古車。"
 
-#: scripts/sim/hotel.gd:136
+#: scripts/sim/hotel.gd:138
 msgid "Choose a valid channel mix."
 msgstr "請選擇有效的通路配置。"
 
@@ -6022,7 +6022,7 @@ msgstr "請選擇這家公司的未結爭議。"
 msgid "Choose an open district to see its location and travel routes."
 msgstr "選擇已開放街區，查看位置與交通路線。"
 
-#: scripts/sim/hotel.gd:560
+#: scripts/sim/hotel.gd:562
 msgid "Choose an open group block."
 msgstr "請選擇一筆開放中的團體房。"
 
@@ -6738,7 +6738,7 @@ msgstr "客戶：財務主管需要可核對的計算。"
 msgid "Client: use a warm, clear message supported by customer evidence."
 msgstr "客戶：請用溫暖、清楚且有客戶證據支持的訊息。"
 
-#: scripts/ui/calm_screen.gd:119
+#: scripts/ui/calm_screen.gd:135
 msgid "Clients"
 msgstr "客戶"
 
@@ -7382,7 +7382,7 @@ msgstr "完成了%s。"
 msgid "Completed Lot 7 building"
 msgstr "7 號地大樓完工"
 
-#: scripts/ui/calm_screen.gd:120
+#: scripts/ui/calm_screen.gd:136
 msgid "Completed campaigns"
 msgstr "已完成企劃"
 
@@ -7390,7 +7390,7 @@ msgstr "已完成企劃"
 msgid "Completed city projects"
 msgstr "已完成城市開發案（件）"
 
-#: scripts/ui/calm_screen.gd:129
+#: scripts/ui/calm_screen.gd:145
 msgid "Completed installs"
 msgstr "已完成安裝"
 
@@ -7398,7 +7398,7 @@ msgstr "已完成安裝"
 msgid "Completed media deliveries"
 msgstr "已完成媒體工作的交付"
 
-#: scripts/ui/calm_screen.gd:146
+#: scripts/ui/calm_screen.gd:162
 msgid "Completed rounds"
 msgstr "已完成募資輪次"
 
@@ -7994,7 +7994,7 @@ msgstr "危機"
 msgid "Crisis handling"
 msgstr "危機處理"
 
-#: scripts/sim/hotel.gd:484
+#: scripts/sim/hotel.gd:486
 msgid "Critic Vera Stone published her review: %.1f stars."
 msgstr "評論家 Vera Stone 發表了評價：%.1f 顆星。"
 
@@ -8722,7 +8722,7 @@ msgstr "已交付訂單（筆）"
 msgid "Delivered quality"
 msgstr "交付品質"
 
-#: scripts/ui/calm_screen.gd:130 scripts/ui/trade_desk_ui.gd:36
+#: scripts/ui/calm_screen.gd:146 scripts/ui/trade_desk_ui.gd:36
 msgid "Delivered trades"
 msgstr "已完成的貿易"
 
@@ -8814,7 +8814,7 @@ msgstr "3 天內需求 ×3。庫存才是瓶頸。"
 msgid "Departure wait / transit / payment (days)"
 msgstr "等候出發／運送／收款（天）"
 
-#: data/help/glossary.json scripts/ui/calm_screen.gd:140 scripts/ui/modals/lease_modal.gd:27
+#: data/help/glossary.json scripts/ui/calm_screen.gd:156 scripts/ui/modals/lease_modal.gd:27
 msgid "Deposit"
 msgstr "押金"
 
@@ -9038,7 +9038,7 @@ msgstr "直訂客沒有佣金，OTA 帶來量但抽 15% 到 18%，旅行社團�
 msgid "Direct guests pay you with no commission. The OTA takes 15% (standard) or 18% (featured) of each night and pays a weekly statement Net 30. Agency blocks give 25% off."
 msgstr "直訂客直接付款，沒有佣金。OTA 每晚抽 15%（標準）或 18%（精選），每週出帳單、30 天後付款。旅行社團體房折扣 25%。"
 
-#: scripts/sim/hotel.gd:401
+#: scripts/sim/hotel.gd:403
 msgid "Direct room revenue"
 msgstr "直訂房費收入"
 
@@ -9742,7 +9742,7 @@ msgstr "沖銷內部銷售"
 msgid "Emergency care is available even without cash. Unpaid medical bills remain payable here. Insurance must already be active when the collision happens."
 msgstr "沒有現金也能接受急救。未付醫療帳款可在此繳清。保單須於碰撞前生效。"
 
-#: scripts/sim/hotel.gd:669
+#: scripts/sim/hotel.gd:671
 msgid "Emergency repair"
 msgstr "緊急維修"
 
@@ -9946,7 +9946,7 @@ msgstr "股權投資"
 msgid "Equity is ownership, not income. Each round dilutes every existing holder in proportion."
 msgstr "股權是所有權，不是收入。每一輪都會依比例稀釋所有現有持股人。"
 
-#: scripts/ui/calm_screen.gd:145 scripts/ui/modals/fundraising_modal.gd:106
+#: scripts/ui/calm_screen.gd:161 scripts/ui/modals/fundraising_modal.gd:106
 msgid "Equity sold"
 msgstr "出讓股權"
 
@@ -10006,11 +10006,11 @@ msgstr "濃縮"
 msgid "Estate agent"
 msgstr "房地產仲介"
 
-#: scripts/ui/calm_screen.gd:128
+#: scripts/ui/calm_screen.gd:144
 msgid "Estimated annual savings"
 msgstr "預估每年節省"
 
-#: scripts/ui/calm_screen.gd:133 scripts/ui/modals/trade_quote_modal.gd:110
+#: scripts/ui/calm_screen.gd:149 scripts/ui/modals/trade_quote_modal.gd:110
 msgid "Estimated margin (home dollars)"
 msgstr "預估交易餘額（本國元）"
 
@@ -10902,7 +10902,7 @@ msgstr "一號貨車"
 msgid "First, confirm this guest’s order."
 msgstr "先確認這位客人的訂單。"
 
-#: data/help/help.json scripts/ui/calm_screen.gd:20 scripts/ui/modals/company_os.gd:159
+#: data/help/help.json scripts/ui/calm_screen.gd:23 scripts/ui/modals/company_os.gd:159
 msgid "First-use guide"
 msgstr "初次操作練習"
 
@@ -10994,7 +10994,7 @@ msgstr "五星級飯店"
 msgid "Fix a wrong order before it arrives. Settlement fees stay paid; an unpaid invoice is reduced instead of returning cash."
 msgstr "在到貨前修正買錯的進貨單。清算手續費不退還；未付發票會減少應付金額，不會退回現金。"
 
-#: scripts/sim/hotel.gd:678
+#: scripts/sim/hotel.gd:680
 msgid "Flash sale after cancellation"
 msgstr "活動取消後的限時特賣"
 
@@ -11010,7 +11010,7 @@ msgstr "車隊與車場保險"
 msgid "Fleet car sold: %s"
 msgstr "車隊車輛出售：%s"
 
-#: scripts/ui/calm_screen.gd:122
+#: scripts/ui/calm_screen.gd:138
 msgid "Fleet cars"
 msgstr "車隊車輛"
 
@@ -11946,7 +11946,7 @@ msgstr "團體住宿"
 msgid "Group advertising"
 msgstr "集團內廣告"
 
-#: scripts/sim/hotel.gd:593
+#: scripts/sim/hotel.gd:595
 msgid "Group block deposit refunded"
 msgstr "退還團體房訂金"
 
@@ -12026,7 +12026,7 @@ msgstr "集團營業利潤"
 msgid "Group profit"
 msgstr "集團損益"
 
-#: scripts/sim/hotel.gd:548
+#: scripts/sim/hotel.gd:550
 msgid "Group room block"
 msgstr "團體房"
 
@@ -12118,7 +12118,7 @@ msgstr "客人 %d"
 msgid "Guest %d · bonus %d s"
 msgstr "客人 %d・加碼剩 %d 秒"
 
-#: scripts/ui/calm_screen.gd:121
+#: scripts/ui/calm_screen.gd:137
 msgid "Guest rating"
 msgstr "房客評價"
 
@@ -12126,7 +12126,7 @@ msgstr "房客評價"
 msgid "Guest rating at least %.1f (now %.1f)."
 msgstr "住客評分至少 %.1f（目前 %.1f）。"
 
-#: scripts/sim/hotel.gd:664
+#: scripts/sim/hotel.gd:666
 msgid "Guest recovery and public reply"
 msgstr "客訴補償與公開回覆"
 
@@ -12134,7 +12134,7 @@ msgstr "客訴補償與公開回覆"
 msgid "Guest reviews"
 msgstr "住客評價"
 
-#: scripts/sim/hotel.gd:406
+#: scripts/sim/hotel.gd:408
 msgid "Guest supplies, laundry and breakfast"
 msgstr "客房耗品、洗滌與早餐"
 
@@ -12806,7 +12806,7 @@ msgstr "自由座——月租"
 msgid "Hotel"
 msgstr "旅館"
 
-#: data/businesses/hotel.json scripts/sim/hotel.gd:735 scripts/ui/hotel_ui.gd:14
+#: data/businesses/hotel.json scripts/sim/hotel.gd:737 scripts/ui/hotel_ui.gd:14
 msgid "Hotel / Tourism"
 msgstr "飯店／觀光"
 
@@ -12834,7 +12834,7 @@ msgstr "旅館日常照料"
 msgid "Hotel guests add %d rental requests a day."
 msgstr "飯店住客每日增加 %d 筆租車詢問。"
 
-#: scripts/sim/hotel.gd:412
+#: scripts/sim/hotel.gd:414
 msgid "Hotel insurance, property tax and software"
 msgstr "旅館保險、房屋稅與系統費"
 
@@ -12846,7 +12846,7 @@ msgstr "旅館經營者"
 msgid "Hotel revenue management"
 msgstr "飯店營收管理"
 
-#: scripts/sim/hotel.gd:410
+#: scripts/sim/hotel.gd:412
 msgid "Hotel utilities"
 msgstr "旅館水電瓦斯"
 
@@ -12878,7 +12878,7 @@ msgstr "房務一天可清 %.1f 間；昨晚的周轉需要 %.1f 間（沒清的
 msgid "Housekeeping capacity"
 msgstr "房務產能"
 
-#: scripts/sim/hotel.gd:685
+#: scripts/sim/hotel.gd:687
 msgid "Housekeeping settlement bonus"
 msgstr "房務員和解獎金"
 
@@ -13290,7 +13290,7 @@ msgstr "包含薪資、租金、貸款、供應商帳單、到期應收款，以
 msgid "Income tax"
 msgstr "所得稅"
 
-#: scripts/ui/calm_screen.gd:136
+#: scripts/ui/calm_screen.gd:152
 msgid "Income tax owed"
 msgstr "應繳所得稅"
 
@@ -13794,7 +13794,7 @@ msgstr "投資小型網路，爭取分階段實施 · %s"
 msgid "Invest in charging infrastructure · %s"
 msgstr "投資充電設施 · %s"
 
-#: scripts/ui/calm_screen.gd:145 scripts/ui/modals/fundraising_modal.gd:104
+#: scripts/ui/calm_screen.gd:161 scripts/ui/modals/fundraising_modal.gd:104
 msgid "Investment"
 msgstr "投資"
 
@@ -13886,7 +13886,7 @@ msgstr "已開發票，尚未收款"
 msgid "Invoices and payment reminders for freelancers."
 msgstr "給接案者的開發票與催款工具。"
 
-#: scripts/ui/calm_screen.gd:116 scripts/ui/modals/company_os.gd:375
+#: scripts/ui/calm_screen.gd:132 scripts/ui/modals/company_os.gd:375
 msgid "Invoices receivable"
 msgstr "應收發票"
 
@@ -14646,7 +14646,7 @@ msgstr "遲到"
 msgid "Late arrivals can work a shorter shift when at least 2 hours remain before closing, with pay based on hours worked."
 msgstr "離打烊至少還有 2 小時，就能上較短的班，依實際工時領薪。"
 
-#: scripts/sim/assistant_policy.gd:149
+#: scripts/sim/assistant_policy.gd:151
 msgid "Late bill fee"
 msgstr "帳單逾期費"
 
@@ -14926,7 +14926,7 @@ msgstr "租下這間咖啡店"
 msgid "Lease this café first. Each location needs its own fit-out, licence, staff and ingredients."
 msgstr "先租下這間店。各店都需要自己的裝潢、執照、人員與食材。"
 
-#: scripts/sim/hotel.gd:149
+#: scripts/sim/hotel.gd:151
 msgid "Lease your corner cafe before using its kitchen for breakfast."
 msgstr "請先承租街角咖啡店，才能用它的廚房做早餐。"
 
@@ -15018,7 +15018,7 @@ msgstr "法律爭議"
 msgid "Legal and filing costs for the %s round"
 msgstr "%s 輪的法務與申報費用"
 
-#: scripts/ui/calm_screen.gd:145 scripts/ui/modals/fundraising_modal.gd:117
+#: scripts/ui/calm_screen.gd:161 scripts/ui/modals/fundraising_modal.gd:117
 msgid "Legal and filing costs paid at signing"
 msgstr "簽約時支付的法務與申報費用"
 
@@ -15102,7 +15102,7 @@ msgstr "資遣"
 msgid "Let other bidders respond"
 msgstr "讓其他競標者回應"
 
-#: scripts/sim/assistant_policy.gd:59
+#: scripts/sim/assistant_policy.gd:61
 msgid "Let the assistant handle all chores"
 msgstr "全部雜事交給助理"
 
@@ -15110,7 +15110,7 @@ msgstr "全部雜事交給助理"
 msgid "Let the assistant handle chores: restocking, packing, bills, taxes, renewals and more. Turn each one on or off in Settings → Assistant."
 msgstr "雜事可以交給助理：補貨、包裝、帳單、報稅、續約等。可在「設定 → 助理」逐項開關。"
 
-#: scripts/sim/assistant_policy.gd:49
+#: scripts/sim/assistant_policy.gd:51
 msgid "Let the assistant handle it"
 msgstr "交給助理"
 
@@ -15506,7 +15506,7 @@ msgstr "鎖定預期外幣收入的賣出匯率，須付手續費與可退保證
 msgid "Lock in {moq} more at today's price"
 msgstr "用今天的價格再訂 {moq} 件"
 
-#: scripts/sim/hotel.gd:570
+#: scripts/sim/hotel.gd:572
 msgid "Locked a group block of %d rooms for %s."
 msgstr "已鎖定 %d 間團體房（客戶：%s）。"
 
@@ -15662,7 +15662,7 @@ msgstr "房租便宜、老店林立、石板路和鐘樓。在轉角開一家咖
 msgid "Low weekly pay, but slower production than an experienced designer."
 msgstr "每週薪資較低，但製作速度比資深設計師慢。"
 
-#: scripts/sim/hotel.gd:659
+#: scripts/sim/hotel.gd:661
 msgid "Low-season promotion"
 msgstr "淡季促銷"
 
@@ -15686,7 +15686,7 @@ msgstr "拒收機率較低，但關稅會減少利潤；定價時要把它算進
 msgid "Lower upfront cost, but unexpected charges cause more refusals and return freight."
 msgstr "先付的費用較低，但額外收費容易造成拒收，增加退貨運費。"
 
-#: scripts/ui/calm_screen.gd:115
+#: scripts/ui/calm_screen.gd:131
 msgid "Lowest projected cash"
 msgstr "預估最低現金"
 
@@ -16278,7 +16278,7 @@ msgstr "MaterialLess"
 msgid "MaterialMore"
 msgstr "MaterialMore"
 
-#: scripts/ui/calm_screen.gd:128
+#: scripts/ui/calm_screen.gd:144
 msgid "Materials"
 msgstr "材料"
 
@@ -16502,7 +16502,7 @@ msgstr "請先認識這位人物，再邀請到家裡。"
 msgid "Meet this person in town or at a city event first."
 msgstr "先在城裡或城市活動認識這個人。"
 
-#: scripts/sim/assistant_policy.gd:34
+#: scripts/sim/assistant_policy.gd:36
 msgid "Meet your assistant: it can restock, pay bills and file taxes for you. Everything stays as you left it. To turn chores on, open Settings, then the Assistant page."
 msgstr "認識你的助理：它可以幫你補貨、繳費和報稅。一切維持你原本的設定。想開啟自動處理，請到「設定」的「助理」頁面。"
 
@@ -16842,7 +16842,7 @@ msgstr "每月還款"
 msgid "Monthly recurring revenue"
 msgstr "每月經常性收入"
 
-#: scripts/ui/calm_screen.gd:140 scripts/ui/modals/lease_modal.gd:26
+#: scripts/ui/calm_screen.gd:156 scripts/ui/modals/lease_modal.gd:26
 msgid "Monthly rent"
 msgstr "月租"
 
@@ -18350,7 +18350,7 @@ msgstr "訂單 %s"
 msgid "ORDERS DELIVERED"
 msgstr "已送達訂單"
 
-#: scripts/sim/hotel.gd:512
+#: scripts/sim/hotel.gd:514
 msgid "OTA commission deducted from statement"
 msgstr "從 OTA 帳單扣除佣金"
 
@@ -18358,7 +18358,7 @@ msgstr "從 OTA 帳單扣除佣金"
 msgid "OTA listing: %s"
 msgstr "OTA 上架：%s"
 
-#: scripts/sim/hotel.gd:499
+#: scripts/sim/hotel.gd:501
 msgid "OTA room-night statement"
 msgstr "OTA 房晚對帳單"
 
@@ -18766,7 +18766,7 @@ msgstr "開啟通知中心"
 msgid "Open Operations"
 msgstr "打開「營運」"
 
-#: scripts/sim/hotel.gd:735 scripts/ui/hotel_ui.gd:16 scripts/ui/hotel_ui.gd:21
+#: scripts/sim/hotel.gd:737 scripts/ui/hotel_ui.gd:16 scripts/ui/hotel_ui.gd:21
 msgid "Open Rate Board"
 msgstr "開啟房價看板"
 
@@ -18862,7 +18862,7 @@ msgstr "請先開立公司國際帳戶。"
 msgid "Open charging stations"
 msgstr "營運中的充電站（座）"
 
-#: scripts/ui/calm_screen.gd:147
+#: scripts/ui/calm_screen.gd:163
 msgid "Open claims"
 msgstr "未結理賠"
 
@@ -18870,7 +18870,7 @@ msgstr "未結理賠"
 msgid "Open client project"
 msgstr "開啟客戶案件"
 
-#: scripts/ui/calm_screen.gd:130
+#: scripts/ui/calm_screen.gd:146
 msgid "Open deals"
 msgstr "進行中交易"
 
@@ -18902,11 +18902,11 @@ msgstr "打開我的衣櫃"
 msgid "Open now"
 msgstr "營業中"
 
-#: scripts/ui/calm_screen.gd:116
+#: scripts/ui/calm_screen.gd:132
 msgid "Open offers"
 msgstr "待選報價"
 
-#: scripts/ui/calm_screen.gd:129
+#: scripts/ui/calm_screen.gd:145
 msgid "Open stations"
 msgstr "營運中的充電站"
 
@@ -19022,7 +19022,7 @@ msgstr "開啟車隊櫃台"
 msgid "Open the group business before buying internal media."
 msgstr "請先開設集團業務，再購買內部廣告。"
 
-#: scripts/sim/hotel.gd:153 scripts/sim/hotel.gd:651
+#: scripts/sim/hotel.gd:155 scripts/sim/hotel.gd:653
 msgid "Open the hotel first."
 msgstr "請先開業旅館。"
 
@@ -19426,7 +19426,7 @@ msgstr "超賣 %d%% · 以標準房價計，每位被趕走的客人約賠 %s"
 msgid "Overbooking and peak pricing"
 msgstr "超賣與旺日加價"
 
-#: scripts/sim/hotel.gd:140
+#: scripts/sim/hotel.gd:142
 msgid "Overbooking must stay between 0% and 10%."
 msgstr "超賣比例必須在 0% 到 10% 之間。"
 
@@ -19626,7 +19626,7 @@ msgstr "自有住宅有房貸、管理、維修與稅費，請到住家資產桌
 msgid "Owned media"
 msgstr "自有媒體"
 
-#: scripts/ui/calm_screen.gd:119 scripts/ui/real_estate_ui.gd:126
+#: scripts/ui/calm_screen.gd:135 scripts/ui/real_estate_ui.gd:126
 msgid "Owner mandates"
 msgstr "屋主委託"
 
@@ -19894,7 +19894,7 @@ msgstr "面板與電池型錄"
 msgid "Panel or inverter defect"
 msgstr "面板或變流器瑕疵"
 
-#: scripts/ui/calm_screen.gd:128
+#: scripts/ui/calm_screen.gd:144
 msgid "Panels"
 msgstr "面板"
 
@@ -20086,7 +20086,7 @@ msgstr "先付 {trial_fee} 簽約費，{trial_days} 天內實際包裹運費減�
 msgid "Pay again by wire ({reroute_cost})"
 msgstr "改用電匯重新付款（{reroute_cost}）"
 
-#: scripts/sim/assistant_policy.gd:163
+#: scripts/sim/assistant_policy.gd:165
 msgid "Pay all bills · %s"
 msgstr "全部繳清 · %s"
 
@@ -20094,7 +20094,7 @@ msgstr "全部繳清 · %s"
 msgid "Pay an actual loan in full."
 msgstr "還清一筆實際借過的貸款。"
 
-#: scripts/sim/assistant_policy.gd:169
+#: scripts/sim/assistant_policy.gd:171
 msgid "Pay bill · %s"
 msgstr "繳費 · %s"
 
@@ -21702,7 +21702,7 @@ msgstr "評分 ★ %.1f：排隊太久、缺貨和價格太高都會拉低評分
 msgid "Ravi"
 msgstr "Ravi"
 
-#: scripts/ui/calm_screen.gd:118
+#: scripts/ui/calm_screen.gd:134
 msgid "Raw materials"
 msgstr "原料"
 
@@ -23066,11 +23066,11 @@ msgstr "精細工作前先休息。體力不足時可提早睡覺；工作不會
 msgid "Restaurant"
 msgstr "餐廳"
 
-#: scripts/sim/hotel.gd:418
+#: scripts/sim/hotel.gd:420
 msgid "Restaurant and bar sales"
 msgstr "餐廳與酒吧營收"
 
-#: scripts/sim/hotel.gd:419
+#: scripts/sim/hotel.gd:421
 msgid "Restaurant ingredients"
 msgstr "餐廳食材"
 
@@ -23258,7 +23258,7 @@ msgstr "退還給你"
 msgid "Returns normally have a 14-day window, 15% restocking fee, $0.60 freight per unit adjusted by the shipping index, and a 3-day refund delay. Imports accept cancellations only unless the supplier specifies otherwise."
 msgstr "通常到貨後 14 天內可退貨，收取 15% 手續費；每件運費 $0.60，依運費指數調整，3 天後退款。進口商品只接受取消，除非供應商另有規定。"
 
-#: data/help/glossary.json scripts/ui/calm_screen.gd:149 scripts/ui/modals/company_os.gd:339 scripts/ui/modals/company_os.gd:354
+#: data/help/glossary.json scripts/ui/calm_screen.gd:165 scripts/ui/modals/company_os.gd:339 scripts/ui/modals/company_os.gd:354
 msgid "Revenue"
 msgstr "營收"
 
@@ -23330,7 +23330,7 @@ msgstr "檢視實際交付與城市成果。"
 msgid "Review applicants"
 msgstr "查看應徵者"
 
-#: scripts/ui/calm_screen.gd:80
+#: scripts/ui/calm_screen.gd:86
 msgid "Review choices"
 msgstr "查看選項"
 
@@ -23678,7 +23678,7 @@ msgstr "陪伴五位創業者"
 msgid "Room prices"
 msgstr "房型價格"
 
-#: scripts/ui/calm_screen.gd:121
+#: scripts/ui/calm_screen.gd:137
 msgid "Rooms"
 msgstr "房間"
 
@@ -24258,7 +24258,7 @@ msgstr "第 %d 個存檔槽的主檔已損壞。"
 msgid "Save the Helio Supply materials cost first."
 msgstr "請先備妥 Helio Supply 的材料費。"
 
-#: scripts/sim/hotel.gd:692
+#: scripts/sim/hotel.gd:694
 msgid "Save the VIP upgrade cost first."
 msgstr "請先備好 VIP 升等的成本。"
 
@@ -24298,11 +24298,11 @@ msgstr "請先存足車商執照費。"
 msgid "Save the down payment and purchase fee personally first."
 msgstr "請先備妥個人頭期款與購屋費用。"
 
-#: scripts/sim/hotel.gd:668
+#: scripts/sim/hotel.gd:670
 msgid "Save the emergency repair cost first."
 msgstr "請先備好緊急維修費。"
 
-#: scripts/sim/hotel.gd:611
+#: scripts/sim/hotel.gd:613
 msgid "Save the equipment service cost first."
 msgstr "請先備好設備保養費。"
 
@@ -24318,7 +24318,7 @@ msgstr "請先備好擴建費用。"
 msgid "Save the first month of rent and equipment first."
 msgstr "請先備好首月租金與設備費。"
 
-#: scripts/sim/hotel.gd:677
+#: scripts/sim/hotel.gd:679
 msgid "Save the flash-sale cost first."
 msgstr "請先備好特賣費用。"
 
@@ -24326,11 +24326,11 @@ msgstr "請先備好特賣費用。"
 msgid "Save the furniture cost personally first."
 msgstr "請先備妥個人家具費用。"
 
-#: scripts/sim/hotel.gd:663
+#: scripts/sim/hotel.gd:665
 msgid "Save the guest recovery cost first."
 msgstr "請先備好客訴補償費。"
 
-#: scripts/sim/hotel.gd:684
+#: scripts/sim/hotel.gd:686
 msgid "Save the housekeeping bonus first."
 msgstr "請先備好房務獎金。"
 
@@ -24354,7 +24354,7 @@ msgstr "請先備妥面板材料費。"
 msgid "Save the premium supplier fee first."
 msgstr "請先備妥優先配額費。"
 
-#: scripts/sim/hotel.gd:658
+#: scripts/sim/hotel.gd:660
 msgid "Save the promotion cost first."
 msgstr "請先備好促銷費用。"
 
@@ -24378,11 +24378,11 @@ msgstr "請先備好鎖定費率的費用。"
 msgid "Save the reconditioning cost first."
 msgstr "請先存足整備費。"
 
-#: scripts/sim/hotel.gd:627
+#: scripts/sim/hotel.gd:629
 msgid "Save the renovation cost first."
 msgstr "請先備好翻新費用。"
 
-#: scripts/sim/energy.gd:729 scripts/sim/hotel.gd:672
+#: scripts/sim/energy.gd:729 scripts/sim/hotel.gd:674
 msgid "Save the repair cost first."
 msgstr "請先備妥修復費用。"
 
@@ -24474,7 +24474,7 @@ msgstr "安排這筆訂單"
 msgid "Scheduled"
 msgstr "已排程"
 
-#: scripts/sim/hotel.gd:673
+#: scripts/sim/hotel.gd:675
 msgid "Scheduled repair"
 msgstr "排程維修"
 
@@ -26014,7 +26014,7 @@ msgstr "開始建置充電站：%s。"
 msgid "Started freelancing as a consultant."
 msgstr "開始以顧問身份接案。"
 
-#: scripts/sim/hotel.gd:634
+#: scripts/sim/hotel.gd:636
 msgid "Started renovating the %s rooms."
 msgstr "開始翻新%s。"
 
@@ -26106,7 +26106,7 @@ msgstr "庫存（成本）"
 msgid "Stock car auctioned: %s"
 msgstr "庫存車拍賣處分：%s"
 
-#: scripts/ui/calm_screen.gd:122
+#: scripts/ui/calm_screen.gd:138
 msgid "Stock cars"
 msgstr "庫存車輛"
 
@@ -26258,7 +26258,7 @@ msgstr "壓力引起不適，請開啟聯絡人，選擇免費休養或較短的
 msgid "Stress illness: take a recovery day or a shorter medical visit. Work is still possible; this expires within 3 days."
 msgstr "壓力引起不適：休養一天，或選擇較短的付費看診。仍可工作，最晚 3 天內會自行恢復。"
 
-#: scripts/ui/calm_screen.gd:133 scripts/ui/modals/trade_quote_modal.gd:111
+#: scripts/ui/calm_screen.gd:149 scripts/ui/modals/trade_quote_modal.gd:111
 msgid "Stress margin (home dollars)"
 msgstr "壓力情境餘額（本國元）"
 
@@ -26526,7 +26526,7 @@ msgstr "材料和麵包店"
 msgid "Supply Shock"
 msgstr "供應衝擊"
 
-#: scripts/ui/calm_screen.gd:133 scripts/ui/modals/trade_quote_modal.gd:105
+#: scripts/ui/calm_screen.gd:149 scripts/ui/modals/trade_quote_modal.gd:105
 msgid "Supply cost (home dollars)"
 msgstr "進貨成本（本國元）"
 
@@ -26862,7 +26862,7 @@ msgstr "茶葉補貨包"
 msgid "Team"
 msgstr "團隊"
 
-#: scripts/ui/calm_screen.gd:117
+#: scripts/ui/calm_screen.gd:133
 msgid "Team members"
 msgstr "團隊成員"
 
@@ -26894,7 +26894,7 @@ msgstr "實習櫃員"
 msgid "Teller — business banking"
 msgstr "櫃檯——企業金融"
 
-#: scripts/sim/hotel.gd:414
+#: scripts/sim/hotel.gd:416
 msgid "Temporary cleaners"
 msgstr "臨時清潔人員"
 
@@ -27026,7 +27026,7 @@ msgstr "那筆款項沒有卡在跨鏈橋上。"
 msgid "That payment method isn't available."
 msgstr "目前不能用這種付款方式。"
 
-#: scripts/sim/hotel.gd:132
+#: scripts/sim/hotel.gd:133
 msgid "That price is outside the allowed range."
 msgstr "這個價格超出允許範圍。"
 
@@ -27038,7 +27038,7 @@ msgstr "這張進貨單已不存在。"
 msgid "That rail is frozen."
 msgstr "那個管道已凍結。"
 
-#: scripts/sim/hotel.gd:556
+#: scripts/sim/hotel.gd:558
 msgid "That room type is being renovated during the stay."
 msgstr "入住期間這個房型正在翻新。"
 
@@ -27982,7 +27982,7 @@ msgstr "公司登記文件指南現在出現互相矛盾的紀錄。Ana 希望�
 msgid "The registration fee is %s."
 msgstr "登記規費是 %s。"
 
-#: scripts/sim/hotel.gd:722 scripts/sim/hotel.gd:723
+#: scripts/sim/hotel.gd:724 scripts/sim/hotel.gd:725
 msgid "The renovated %s rooms are back on sale."
 msgstr "翻新完成的%s重新開賣。"
 
@@ -28426,7 +28426,7 @@ msgstr "這項保障已生效。"
 msgid "This customs hold is no longer active."
 msgstr "這筆海關扣留已結束。"
 
-#: scripts/sim/hotel.gd:610
+#: scripts/sim/hotel.gd:612
 msgid "This equipment needs no service today."
 msgstr "這些設備今天不需要保養。"
 
@@ -28442,7 +28442,7 @@ msgstr "這場遊戲每隔幾秒自動存到欄位 %d。新遊戲會用自己的
 msgid "This game autosaves to slot %d."
 msgstr "這場遊戲自動存在欄位 %d。"
 
-#: scripts/sim/hotel.gd:563
+#: scripts/sim/hotel.gd:565
 msgid "This group block has expired."
 msgstr "這筆團體房已過期。"
 
@@ -28530,7 +28530,7 @@ msgstr "這就是你之後登記自己公司要填的表，規則值得記住。
 msgid "This job is no longer active — check its status."
 msgstr "此工作已無法進行，請查看狀態。"
 
-#: scripts/sim/energy.gd:275 scripts/sim/freelance_workflow.gd:62 scripts/sim/hotel.gd:568 scripts/sim/jobs.gd:44
+#: scripts/sim/energy.gd:275 scripts/sim/freelance_workflow.gd:62 scripts/sim/hotel.gd:570 scripts/sim/jobs.gd:44
 msgid "This job is no longer available."
 msgstr "這張工單已無法承接。"
 
@@ -28654,7 +28654,7 @@ msgstr "這份申報不需要補正。"
 msgid "This roof survey is no longer available."
 msgstr "這個屋頂案已不可用。"
 
-#: scripts/sim/hotel.gd:622
+#: scripts/sim/hotel.gd:624
 msgid "This room type is already being renovated."
 msgstr "這個房型已經在翻新。"
 
@@ -28986,7 +28986,7 @@ msgstr "漏掉太多交付項目：我們終止這份合約。"
 msgid "Too many orders. Not enough hours."
 msgstr "訂單太多，時間不夠。"
 
-#: scripts/sim/hotel.gd:555
+#: scripts/sim/hotel.gd:557
 msgid "Too many rooms of this type are already locked for those nights."
 msgstr "那幾晚這個房型已鎖定太多房間。"
 
@@ -29542,7 +29542,7 @@ msgstr "未知的工廠危機。"
 msgid "Unknown fleet policy."
 msgstr "未知的車隊政策。"
 
-#: scripts/sim/hotel.gd:696
+#: scripts/sim/hotel.gd:698
 msgid "Unknown hotel crisis."
 msgstr "未知的旅館危機。"
 
@@ -29766,7 +29766,7 @@ msgstr "營業稅與所得稅"
 msgid "VAT is collected within customer prices and paid every two months. Company income tax applies to annual pretax profit after carried losses."
 msgstr "營業稅包含在售價內，每兩個月繳納。公司所得稅以扣抵累積虧損後的年度稅前盈餘計算。"
 
-#: scripts/ui/calm_screen.gd:136
+#: scripts/ui/calm_screen.gd:152
 msgid "VAT owed"
 msgstr "應繳營業稅"
 
@@ -29782,7 +29782,7 @@ msgstr "營業稅：%d 年・第 %d／6 期"
 msgid "VENTURE TOWER"
 msgstr "創業大樓"
 
-#: scripts/sim/hotel.gd:693
+#: scripts/sim/hotel.gd:695
 msgid "VIP suite upgrade for a critic"
 msgstr "為評論家升等 VIP 套房"
 
@@ -30282,11 +30282,11 @@ msgstr "放棄這一輪"
 msgid "Walk between neighbouring districts, or take the Metro from any station."
 msgstr "相鄰的區域可以走路，也可以從任一捷運站搭車。"
 
-#: scripts/sim/hotel.gd:579
+#: scripts/sim/hotel.gd:581
 msgid "Walk compensation for a group block"
 msgstr "團體房被迫換房的補償"
 
-#: scripts/sim/hotel.gd:413
+#: scripts/sim/hotel.gd:415
 msgid "Walk compensation for overbooked guests"
 msgstr "超賣客人的趕客補償"
 
@@ -30546,7 +30546,7 @@ msgstr "每週薪資調升"
 msgid "Weekly payouts"
 msgstr "每週撥款"
 
-#: scripts/ui/calm_screen.gd:117
+#: scripts/ui/calm_screen.gd:133
 msgid "Weekly payroll"
 msgstr "每週薪資"
 
@@ -31406,11 +31406,15 @@ msgstr "你的 Maple Court 住戶"
 msgid "Your application is being processed."
 msgstr "你的申請正在審核中。"
 
+#: scripts/sim/assistant_policy.gd:350
+msgid "Your assistant adjusted some hotel settings you had not chosen yourself."
+msgstr "助理調整了幾項你還沒親自設定的旅館選項。"
+
 #: data/help/help.json
 msgid "Your assistant handles repetitive chores for the businesses and assets you have chosen. Supplies, wages, tax and delivery still cost real money."
 msgstr "助理替你選好的事業與資產處理重複雜事。補給、工資、稅款及運送仍照常付費。"
 
-#: scripts/sim/assistant_policy.gd:183
+#: scripts/sim/assistant_policy.gd:185
 msgid "Your assistant needs more cash for the next chore. Fund the company or handle it yourself."
 msgstr "助理的下一項工作需要周轉金。可以補入公司資金，或先自己處理。"
 
@@ -31630,7 +31634,7 @@ msgstr "你自己的包裹"
 msgid "Your payment is stuck on the frozen bridge until about %s. Pay again by another rail to get the goods moving; the frozen money comes back when the bridge reopens."
 msgstr "你的款項卡在凍結的跨鏈橋上，預計 %s 前後恢復。改用別的管道再付一次，貨才會動；凍結的錢等跨鏈橋重開後退回。"
 
-#: scripts/sim/assistant_policy.gd:107 scripts/sim/living.gd:145
+#: scripts/sim/assistant_policy.gd:109 scripts/sim/living.gd:145
 msgid "Your personal account"
 msgstr "你的個人帳戶"
 
@@ -31690,7 +31694,7 @@ msgstr "得分 = 最短路線 ÷ 你的路線。路線越短，越省油、越�
 msgid "Your score is the shortest possible route divided by yours. Shorter means less fuel, less time on the road and a little more pay."
 msgstr "得分 = 最短路線 ÷ 你的路線。越短越省油、越省路上時間，報酬也多一點。"
 
-#: scripts/ui/calm_screen.gd:146
+#: scripts/ui/calm_screen.gd:162
 msgid "Your share"
 msgstr "你的持股"
 
@@ -31966,7 +31970,7 @@ msgstr "司機"
 msgid "due "
 msgstr "到期 "
 
-#: scripts/sim/assistant_policy.gd:170
+#: scripts/sim/assistant_policy.gd:172
 msgid "due %s"
 msgstr "%s 到期"
 

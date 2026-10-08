@@ -64,6 +64,13 @@ func test_manual_old_assistant_choices_stay_manual_for_new_tasks() -> void:
 	for id in ["hotel_daily","fleet_care","charging_care","media_delivery","month_close"]:
 		runner.check(not AssistantPolicy.S()["tasks"][id],"new chore respects manual save: "+id)
 
+func test_assistant_era_save_new_task_without_predecessor_stays_off() -> void:
+	var state := AssistantPolicy.S()
+	for id in state["tasks"]:state["tasks"][id]=true
+	state["tasks"].erase("month_close")
+	runner.check(not AssistantPolicy.S()["tasks"]["month_close"],"new chore with no predecessor is off in an assistant-era save")
+	runner.check(AssistantPolicy.S()["tasks"]["restock"],"existing choices are kept")
+
 func test_hotel_assistant_uses_reference_rates_and_real_cleaners() -> void:
 	var helper = load("res://tests/unit/test_hotel.gd").new()
 	helper.runner = runner
@@ -71,12 +78,17 @@ func test_hotel_assistant_uses_reference_rates_and_real_cleaners() -> void:
 	GameState.set_flag("test_assistant_run")
 	AssistantPolicy.set_all(false)
 	AssistantPolicy.set_task("hotel_daily",true)
-	Hotel.set_price("standard",180)
+	Hotel.S()["rooms"]["standard"]["price"]=180.0
+	Hotel.set_temp(false)
 	var cash := Ledger.cash(entity)
 	AssistantPolicy.on_hour(Clock.now(),int(AssistantPolicy.cfg()["daily_hour"]))
-	runner.eq(Hotel.rack_price("standard"),100,"reasonable reference price, not optimum")
+	runner.eq(Hotel.rack_price("standard"),100,"a never-set price returns to the reference price, not optimum")
 	runner.eq(Ledger.cash(entity),cash,"setting housekeeping buys no fictitious labor")
-	runner.check(Hotel.S()["temp"],"existing paid temporary cleaner option enabled")
+	Hotel.set_price("standard",150)
+	Hotel.set_temp(true)
+	AssistantPolicy.on_hour(Clock.now(),int(AssistantPolicy.cfg()["daily_hour"]))
+	runner.eq(Hotel.rack_price("standard"),150,"the player's own price is never overridden")
+	runner.check(Hotel.S()["temp"],"the assistant never switches temporary cleaners off")
 	AssistantPolicy.set_task("hotel_daily",false)
 	Hotel.set_price("standard",135)
 	AssistantPolicy.on_hour(Clock.now(),int(AssistantPolicy.cfg()["daily_hour"]))
@@ -169,8 +181,9 @@ func test_footer_commit_buttons_cannot_bypass_review() -> void:
 	await frames()
 	var sign:=modal.find_child("TradeSign",true,false) as Button
 	var details:=modal.find_child("CalmDetails",true,false) as Control
-	runner.check(not sign.is_visible_in_tree() and details.is_ancestor_of(sign),"footer signing stays beside actual terms inside review")
+	runner.check(details.is_ancestor_of(sign),"footer signing stays beside actual terms inside review")
+	runner.check(sign.is_visible_in_tree(),"a single actionable offer opens its terms and Sign button without an extra click")
 	(modal.find_child("CalmAdvanced",true,false) as Button).pressed.emit()
-	runner.check(sign.is_visible_in_tree(),"original manual signing control survives review")
+	runner.check(not sign.is_visible_in_tree(),"the player can still collapse the terms")
 	UIRoot.close_all()
 	await frames()

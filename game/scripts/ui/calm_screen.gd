@@ -3,6 +3,9 @@ extends RefCounted
 ## Opt-in disclosure for #164. Original controls and callbacks survive inside a named detail area.
 ## It never selects a deal, changes a price, posts money or supplies an answer on the player's behalf.
 static var _profiles := {}
+## Expanded detail state per tab, kept for the session (a missing key means "use the default").
+static var _expanded := {}
+static var _forecast_cache := {}
 static func profiles() -> Dictionary:
 	if _profiles.is_empty(): _profiles = DataDB._read("res://data/help/calm_screens.json")
 	return _profiles
@@ -77,23 +80,31 @@ static func apply(owner: Modal, column: Control, id: String) -> void:
 				var sunshine := str(cell.text).to_int()
 				cell.text = "■" if cell.text.begins_with("■") else ("☀" if sunshine >= 80 else "◐" if sunshine >= 50 else "☁")
 			break
+	# Exactly one actionable offer: show its terms and Accept/Sign button without an extra click.
+	if not _expanded.has(key) and details.find_children("*", "Button", true, false).filter(func(b): return not b.disabled and _requires_review(b)).size() == 1:
+		_expanded[key] = true
 	var advanced := UIK.button("Advanced" if primary != null else str(profile.get("text", "Review choices")), func():
-		owner.calm_expanded[key] = not bool(owner.calm_expanded.get(key, false))
-		details.visible = bool(owner.calm_expanded[key]), "" if primary != null else "primary")
+		_expanded[key] = not bool(_expanded.get(key, false))
+		details.visible = bool(_expanded[key]), "" if primary != null else "primary")
 	advanced.name = "CalmAdvanced"
 	advanced.set_meta("calm_primary", primary == null)
 	column.add_child(advanced)
 	column.move_child(advanced, column.get_child_count()-2)
-	details.visible = bool(owner.calm_expanded.get(key, false))
+	details.visible = bool(_expanded.get(key, false))
 	# Ensure future assistant and guidance controls have the same stable names, even when details are closed.
 	var chores: Array = profile.get("chores", [])
-	for chore in chores: AssistantPolicy.toggle(box, str(chore))
+	# Exactly one toggle per chore: adopt one the host screen already added, otherwise create it.
+	for chore in chores:
+		var existing := column.find_child("Assistant_" + str(chore), true, false)
+		if existing == null: AssistantPolicy.toggle(box, str(chore))
+		elif existing.get_parent() != box: existing.reparent(box)
 
 ## Preserve the actual terms beside actions that choose among offers or commit money.
 ## A quiet review entrance is preferable to inviting an uninformed acceptance of the first list item.
 static func _requires_review(button: Button) -> bool:
-	if RegEx.create_from_string("[0-9]").search(button.text) != null:return true
 	var id := str(button.name)
+	var lowered := id.to_lower()
+	if ["accept", "sign", "buy", "sell", "borrow"].any(func(word): return lowered.contains(word)):return true
 	if button.name == "SignTerms" or button.name == "TradeSign" or button.name == "TradeProcure" or button.name == "ArrangeViewing" or button.name == "AcceptContract":return true
 	return ["BuyProperty_", "Recruit_", "AcceptBlock_", "Quote_", "Accept_", "Mandate_", "Client_", "Develop_"].any(func(prefix):return id.begins_with(prefix))
 
@@ -112,7 +123,12 @@ static func figures(id: String, owner: Modal) -> Array:
 	var cash := ["Cash in bank", Fmt.money(Ledger.cash(entity))]
 	match id:
 		"finance":
-			return [cash, ["Business profit", Fmt.money(MonthClose.current(entity)["business_profit"])], ["Lowest projected cash", Fmt.money(Forecast.weekly(entity)["low"])]]
+			var hour := Clock.now() / 60
+			var cached: Dictionary = _forecast_cache.get(entity, {})
+			if int(cached.get("hour", -1)) != hour:
+				cached = {"hour": hour, "low": float(Forecast.weekly(entity)["low"])}
+				_forecast_cache[entity] = cached
+			return [cash, ["Business profit", Fmt.money(MonthClose.current(entity)["business_profit"])], ["Lowest projected cash", Fmt.money(float(cached["low"]))]]
 		"contracts": return [cash, ["Open offers", str(Contracts.open_list().filter(func(c): return c.get("status", "") == "offered").size())], ["Invoices receivable", Fmt.money(Ledger.balance(entity, "accounts_receivable"))]]
 		"people": return [cash, ["Team members", str(Staff.people().size())], ["Weekly payroll", Fmt.money(Staff.weekly_payroll())]]
 		"manufacturing": return [cash, ["Raw materials", I18n.t("%d units") % Manufacturing.material_units()], ["Active orders", str(Manufacturing.S()["orders"].values().filter(func(o): return o["status"] == "active").size())]]

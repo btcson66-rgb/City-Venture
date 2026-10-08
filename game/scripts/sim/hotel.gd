@@ -126,11 +126,13 @@ static func restaurant_working() -> bool:
 	return stage()>=2 and asset.get("status","")=="working"
 
 # ---------------------------------------------------------------- Rate Board settings
-static func set_price(type: String,price: float) -> Dictionary:
+## `by_player` marks the room type as a deliberate player choice, which the assistant never overrides.
+static func set_price(type: String,price: float,by_player := true) -> Dictionary:
 	if not valid() or not S()["rooms"].has(type) or not is_finite(price):return error("Choose a room type and a price.")
 	var t: Dictionary=cfg()["types"][type]
 	if price<float(t["min_price"]) or price>float(t["max_price"]):return error("That price is outside the allowed range.")
 	S()["rooms"][type]["price"]=snappedf(price,.01)
+	if by_player:S()["rooms"][type]["player_set"]=true
 	return {"ok":true}
 static func set_channels(ota_open: bool,tier: String,allot: float) -> Dictionary:
 	if not valid() or not cfg()["ota_tiers"].has(tier) or not is_finite(allot) or allot<0 or allot>1:return error("Choose a valid channel mix.")

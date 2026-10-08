@@ -14,10 +14,12 @@ static func S() -> Dictionary:
 		if not state.has(field):state[field] = {}
 	var fallback := bool(state.get("default", true))
 	if not state["tasks"].is_empty() and state["tasks"].values().all(func(value):return not bool(value)):fallback = false
+	# An assistant-era save already chose its chores: a new chore with no predecessor starts off.
+	var era_default := fallback if state["tasks"].is_empty() else false
 	for id in TASKS:
 		if not state["tasks"].has(id):
 			var predecessor: String = {"fleet_care":"maintenance","charging_care":"maintenance","media_delivery":"packing","hotel_daily":"roster"}.get(id, "")
-			state["tasks"][id] = bool(state["tasks"].get(predecessor,fallback)) if predecessor != "" else fallback
+			state["tasks"][id] = bool(state["tasks"].get(predecessor,era_default)) if predecessor != "" else era_default
 	return state
 ## Saves made before the assistant existed keep every chore manual, so no veteran's cash moves unasked.
 static func migrate(data: Dictionary) -> void:
@@ -330,10 +332,22 @@ static func routine_event(inst: Dictionary) -> bool:
 ## Reference rates and existing paid housekeeping, never perfect demand prediction or a free worker.
 static func _hotel_daily() -> void:
 	if not Hotel.is_running():return
+	var changed := false
+	# Only rooms the player never priced; a deliberate price is never touched.
 	for room in Hotel.S()["rooms"]:
-		Hotel.set_price(str(room),float(Hotel.cfg()["types"][room]["ref_price"]))
+		if bool(Hotel.S()["rooms"][room].get("player_set",false)):continue
+		var reference := float(Hotel.cfg()["types"][room]["ref_price"])
+		if not is_equal_approx(Hotel.rack_price(str(room)),reference) and Hotel.set_price(str(room),reference,false).get("ok",false):changed = true
+	# Temporary cleaners are switched on only when turnover outruns the team and the cost is covered; never switched off.
 	var cost := float(Hotel.cfg()["temp_capacity"])*float(Hotel.cfg()["temp_cost_room"])
-	Hotel.set_temp(affordable(Hotel.entity(),cost))
+	if not bool(Hotel.S()["temp"]) and Hotel.turnover_work() > Hotel.hk_capacity() and affordable(Hotel.entity(),cost):
+		Hotel.set_temp(true)
+		changed = true
+	if changed:
+		var day := Clock.day_index()
+		if int(S().get("hotel_notice_day",-1)) != day:
+			S()["hotel_notice_day"] = day
+			GameState.add_message("assistant",I18n.t("Your assistant adjusted some hotel settings you had not chosen yourself."),{"category":"work","target":{"kind":"company","tab":"hotel"}})
 
 ## Only finish work that really exists and is complete. Campaign settlement keeps its native KPI pricing.
 static func _media_deliveries() -> void:
