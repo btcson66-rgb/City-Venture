@@ -82,7 +82,7 @@ func _ready() -> void:
 	lang.add_child(UIK.icon("world", 12))
 	for l in I18n.LOCALES:
 		var code: String = l[0]
-		var b := UIK.button(l[1], func(): I18n.set_locale(code); SceneRouter.go_menu(), "tab_active" if I18n.locale().begins_with(code) else "tab")
+		var b := UIK.button(l[1], func(): I18n.set_locale(code); SceneRouter.go_menu.call_deferred(), "tab_active" if I18n.locale().begins_with(code) else "tab")
 		b.name = "Lang_" + code
 		b.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 		lang.add_child(b)

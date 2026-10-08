@@ -130,6 +130,8 @@ func _fit_panel() -> void:
 		return
 	var available := get_viewport_rect().size
 	var desired := Vector2(panel_size.x, panel_size.y if panel_size.y > 0.0 else 280.0)
+	if InputAccess.touch_mode and available.y > available.x:
+		desired.y = maxf(desired.y, minf(900.0, available.y * 0.78))
 	var target := desired.min((available - Vector2(16, 16)).max(Vector2(100, 80)))
 	if panel.size != target:
 		panel.size = target

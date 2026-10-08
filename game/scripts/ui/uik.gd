@@ -357,5 +357,11 @@ static func card(inner: Control, style := "ui/card") -> PanelContainer:
 
 static func clear(n: Node) -> void:
 	for c in n.get_children():
-		n.remove_child(c)
+		if OS.has_feature("web") and InputAccess.touch_mode and c is Control:
+			# Godot still queries the releasing touch's control after its pressed callback.
+			# Retire it in-tree until frame end, without reserving names or layout space.
+			c.hide()
+			c.name = "Retiring_%d" % c.get_instance_id()
+		else:
+			n.remove_child(c)
 		c.queue_free()

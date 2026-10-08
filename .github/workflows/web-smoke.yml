@@ -1,0 +1,55 @@
+name: Web touch smoke
+
+on:
+  pull_request:
+  push:
+    branches: ['codex/**']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: web-smoke-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  chromium-touch:
+    name: Chromium mobile and tablet touch smoke
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        viewport: [portrait, landscape, tablet]
+        size: [default, large]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Godot and Web export templates
+        run: |
+          curl --fail --location --retry 3 https://github.com/godotengine/godot/releases/download/4.5.1-stable/Godot_v4.5.1-stable_linux.x86_64.zip -o /tmp/godot.zip
+          unzip -q /tmp/godot.zip -d /tmp/godot
+          chmod +x /tmp/godot/Godot_v4.5.1-stable_linux.x86_64
+          sudo ln -s /tmp/godot/Godot_v4.5.1-stable_linux.x86_64 /usr/local/bin/godot
+          curl --fail --location --retry 3 https://github.com/godotengine/godot/releases/download/4.5.1-stable/Godot_v4.5.1-stable_export_templates.tpz -o /tmp/templates.tpz
+          mkdir -p "$HOME/.local/share/godot/export_templates/4.5.1.stable"
+          unzip -j -q /tmp/templates.tpz 'templates/web*' -d "$HOME/.local/share/godot/export_templates/4.5.1.stable"
+      - name: Rebuild class cache and export actual Web build
+        run: |
+          godot --headless --path game --editor --quit
+          mkdir -p build/web
+          godot --headless --path game --export-release Web "$(pwd)/build/web/index.html"
+      - name: Install Chromium
+        run: |
+          pip install playwright==1.61.0
+          python -m playwright install --with-deps chromium
+      - name: Touch smoke in Traditional Chinese and English, normal and extra-large text
+        run: python tools/qa/web_smoke.py --viewports ${{ matrix.viewport }} --sizes ${{ matrix.size }} --out qa-output/web-smoke
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: web-touch-smoke-${{ matrix.viewport }}-${{ matrix.size }}
+          path: qa-output/web-smoke
+

@@ -35,6 +35,8 @@ func _ready() -> void:
 		_prepare_id.call_deferred(node.get_instance_id()))
 	get_tree().node_removed.connect(func(_node): _dirty = true)
 	get_viewport().gui_focus_changed.connect(func(_control): _focus_moved = true)
+	get_viewport().size_changed.connect(func():
+		if touch_mode: Preferences.apply.call_deferred())
 	_prepare(get_tree().root, true)
 	_make_overlay()
 	if OS.has_feature("web"):
@@ -81,6 +83,8 @@ func _prepare(node: Node, recurse := false) -> void:
 		var control := node as Control
 		if touch_mode:
 			control.custom_minimum_size = control.custom_minimum_size.max(TARGET)
+			if control is OptionButton:
+				control.get_popup().add_theme_constant_override("v_separation", 32)
 		control.focus_mode = Control.FOCUS_ALL
 		if not control.has_meta("input_access_ready"):
 			control.set_meta("input_access_ready", true)
@@ -98,6 +102,8 @@ func _enter_touch_mode() -> void:
 		var control: Variant = reference.get_ref()
 		if is_instance_valid(control):
 			control.custom_minimum_size = control.custom_minimum_size.max(TARGET)
+			if control is OptionButton:
+				control.get_popup().add_theme_constant_override("v_separation", 32)
 			live.append(reference)
 	_targets = live
 
@@ -120,6 +126,8 @@ func _make_overlay() -> void:
 	rotate.name = "RotateDevice"
 	overlay.add_child(rotate)
 	rotate.add_child(UIK.wrap("Please rotate your device to landscape.", 14, Art.C_WHITE, 250))
+	rotate.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	(rotate.get_child(0) as Control).mouse_filter = Control.MOUSE_FILTER_IGNORE
 	rotate.visible = false
 
 
@@ -199,8 +207,8 @@ func _process(delta: float) -> void:
 	interact.visible = touch_mode and player != null and player.can_move() and player.focus != null
 	interact.position = viewport - interact.size - Vector2(12, 12)
 	var physical := DisplayServer.window_get_size()
-	rotate.visible = touch_mode and physical.y > physical.x
-	rotate.position = (viewport - rotate.size) / 2.0
+	rotate.visible = touch_mode and physical.y > physical.x and player != null and surface == null
+	rotate.position = Vector2(8, viewport.y - rotate.size.y - 8)
 	if _hold != null and not _dragged:
 		_hold_time += delta
 		if _hold_time >= 0.6:
@@ -265,7 +273,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch and not event.pressed:
 		var start: Vector2 = starts.get(event.index, event.position)
 		starts.erase(event.index)
-		if _multi_touch or not fingers.is_empty() or _dragged or start.distance_to(event.position) > 8.0 or rotate.visible:
+		if _multi_touch or not fingers.is_empty() or _dragged or start.distance_to(event.position) > 8.0:
 			return
 		var hovered := get_viewport().gui_get_hovered_control()
 		if hovered != null and hovered.mouse_filter != Control.MOUSE_FILTER_IGNORE:
@@ -311,6 +319,11 @@ func _zoom_map(ratio: float) -> void:
 
 
 func _hook_web() -> void:
+	# Establish touch geometry before the first tap, rather than move its target during dispatch.
+	if bool(JavaScriptBridge.eval('navigator.maxTouchPoints > 0', true)):
+		touch_mode = true
+		get_window().content_scale_aspect = Window.CONTENT_SCALE_ASPECT_EXPAND
+		Preferences.apply.call_deferred()
 	JavaScriptBridge.eval("""
 		const canvas = document.getElementById('canvas');
 		if (canvas) {

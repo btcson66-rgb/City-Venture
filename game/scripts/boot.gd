@@ -8,6 +8,9 @@ func _ready() -> void:
 
 func _start() -> void:
 	I18n.init()
+	# Browser QA can observe UI coordinates; all actions still arrive as real touch input.
+	if OS.has_feature("web") and bool(JavaScriptBridge.eval('new URLSearchParams(location.search).has("cv_smoke")', true)):
+		get_tree().root.add_child(load("res://scripts/qa/web_smoke_probe.gd").new())
 	var errs := DataDB.validate()
 	for e in errs:
 		push_error("Data: " + str(e))
