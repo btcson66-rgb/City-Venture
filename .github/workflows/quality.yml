@@ -3,7 +3,8 @@ name: Game quality
 on:
   pull_request:
   push:
-    branches: ['codex/**']
+    branches: ['claude/exciting-bardeen-y71ixv']
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -22,24 +23,25 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install Godot 4.5.1
-        run: |
-          curl --fail --location --retry 3 https://github.com/godotengine/godot/releases/download/4.5.1-stable/Godot_v4.5.1-stable_linux.x86_64.zip -o /tmp/godot.zip
-          unzip -q /tmp/godot.zip -d /tmp/godot
-          chmod +x /tmp/godot/Godot_v4.5.1-stable_linux.x86_64
-          sudo ln -s /tmp/godot/Godot_v4.5.1-stable_linux.x86_64 /usr/local/bin/godot
+      - uses: ./.github/actions/setup-godot
       - name: Import project
         run: godot --headless --path game --import
       - name: Unit tests
         run: |
+          set -euo pipefail
           mkdir -p /tmp/cv-quality
-          godot --headless --path game res://tests/test_runner.tscn -- --junit=/tmp/cv-quality/unit.xml
+          godot --headless --path game res://tests/test_runner.tscn -- --junit=/tmp/cv-quality/unit.xml 2>&1 | tee /tmp/cv-quality/unit.log
+          if grep -Eq 'SCRIPT ERROR:|Parse Error:' /tmp/cv-quality/unit.log; then
+            echo 'GDScript error: a test summary alone cannot establish success.' >&2
+            exit 1
+          fi
       - name: Performance validator tests
         run: python -m unittest discover -s tools/qa -p test_perf_check.py -v
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: unit-reports
+          retention-days: 14
           path: /tmp/cv-quality
   acceptance:
     name: Translation, wiki, beta and performance gates
@@ -50,13 +52,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install tooling
-        run: |
-          pip install opencc-python-reimplemented pillow
-          curl --fail --location --retry 3 https://github.com/godotengine/godot/releases/download/4.5.1-stable/Godot_v4.5.1-stable_linux.x86_64.zip -o /tmp/godot.zip
-          unzip -q /tmp/godot.zip -d /tmp/godot
-          chmod +x /tmp/godot/Godot_v4.5.1-stable_linux.x86_64
-          sudo ln -s /tmp/godot/Godot_v4.5.1-stable_linux.x86_64 /usr/local/bin/godot
+          cache: pip
+          cache-dependency-path: .github/ci/requirements.txt
+      - name: Install Python tooling
+        run: python -m pip install -r .github/ci/requirements.txt
+      - uses: ./.github/actions/setup-godot
       - name: Translation missing zero
         run: python tools/i18n_extract.py --check
       - name: Wiki coverage
@@ -81,4 +81,5 @@ jobs:
         if: always()
         with:
           name: stress-report
+          retention-days: 14
           path: /tmp/cv-stress/stress_result.json

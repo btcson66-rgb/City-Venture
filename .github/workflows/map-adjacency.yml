@@ -1,8 +1,18 @@
 name: Map adjacency
-on: [push, pull_request]
+on:
+  pull_request:
+  push:
+    branches: ['claude/exciting-bardeen-y71ixv']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: map-adjacency-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 jobs:
   walking-geometry:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
