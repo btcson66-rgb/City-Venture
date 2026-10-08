@@ -1,0 +1,51 @@
+i18n: 8228 msgids �P zh_TW translated 8228 �P missing 0 �P unused 407
+beta_audit: 0 hits
+map_adjacency_check: OK (12 districts, 20 links, all exits/spawns reachable)
+WARNING: Ecommerce: unknown eco.missing
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] handle (res://scripts/sim/ecommerce.gd:1608)
+       [1] dispatch (res://scripts/sim/industries.gd:72)
+       [2] test_registry_contract_dispatch_and_active_tabs (res://tests/unit/test_industries.gd:19)
+       [3] _run (res://tests/test_runner.gd:47)
+       [4] test_closed_view_checks_and_single_primary (res://tests/unit/test_hotel.gd:371)
+ERROR: Must be an ancestor of the control.
+   at: ensure_control_visible (scene/gui/scroll_container.cpp:327)
+   GDScript backtrace (most recent call first):
+       [0] practice_refresh (res://scripts/ui/minigames/mini_game.gd:604)
+       [1] _process (res://scripts/ui/minigames/mini_game.gd:564)
+WARNING: incorrect header check
+   at: decompress_dynamic (core/io/compression.cpp:344)
+   GDScript backtrace (most recent call first):
+       [0] _decode_part (res://scripts/save_codec.gd:56)
+       [1] <anonymous lambda> (res://scripts/save_codec.gd:123)
+ERROR: Decompression failed.
+   at: func_PackedByteArray_decompress_dynamic (core/variant/variant_call.cpp:844)
+   GDScript backtrace (most recent call first):
+       [0] _decode_part (res://scripts/save_codec.gd:56)
+       [1] <anonymous lambda> (res://scripts/save_codec.gd:123)
+WARNING: incorrect header check
+   at: decompress_dynamic (core/io/compression.cpp:344)
+   GDScript backtrace (most recent call first):
+       [0] _decode_part (res://scripts/save_codec.gd:56)
+       [1] <anonymous lambda> (res://scripts/save_codec.gd:123)
+ERROR: Decompression failed.
+   at: func_PackedByteArray_decompress_dynamic (core/variant/variant_call.cpp:844)
+   GDScript backtrace (most recent call first):
+       [0] _decode_part (res://scripts/save_codec.gd:56)
+       [1] <anonymous lambda> (res://scripts/save_codec.gd:123)
+WARNING: 1 RID of type "CanvasItem" was leaked.
+   at: _free_rids (servers/rendering/renderer_canvas_cull.cpp:2676)
+ERROR: 4 RID allocations of type 'PN13RendererDummy14TextureStorage12DummyTextureE' were leaked at exit.
+ERROR: 2 RID allocations of type 'PN18TextServerAdvanced22ShapedTextDataAdvancedE' were leaked at exit.
+ERROR: 1 RID allocations of type 'PN18TextServerAdvanced12FontAdvancedE' were leaked at exit.
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+   at: cleanup (core/object/object.cpp:2514)
+982/982 tests passed in 620.2s
+CityVenture-0.2.3-beta-Windows.zip        146.8 MB
+CityVenture-0.2.3-beta-Linux.zip          139.4 MB
+CityVenture-0.2.3-beta-macOS.zip          176.4 MB
+CityVenture-0.2.3-beta-Web.zip            122.3 MB
+PASS: build\web\index.pck 126142916 bytes (126.14 MB); target <= 145 MB; hard limit <= 160 MB
+PASS: dist\CityVenture-0.2.3-beta-Windows.zip 146789930 bytes (146.79 MB); target <= 165 MB; hard limit <= 180 MB
+packages -> /d/City-Venture-166-final/dist
