@@ -215,8 +215,8 @@ Each objective has `complete_when` conditions (tiny condition DSL shared with ev
   explicit `world_detail/` paths. Texture reads refresh recency; existence probes do not. Eviction releases only
   the cache reference so active scenes remain valid. All other texture categories stay permanently cached.
   Explicit `world_detail/` keys retain physical dimensions for existing world/character fitting code. World collision
-  continues reading the native alpha mask. Backgrounds and maps use lossy WebP import at quality 0.85; other art stays
-  lossless. Release presets exclude only `tests/*`; packaging enforces decimal MB ceilings through
+  continues reading the native alpha mask. Painted building, interior and route-map art uses lossy WebP import at quality 0.92 (pixel art is not
+  lossy-compressed and stays lossless). Release presets exclude only `tests/*`; packaging enforces decimal MB ceilings through
   `tools/qa/build_size_check.py`: Web `index.pck` <= 160 MB, Windows release zip <= 180 MB.
 
 - Base resolution **640×360**, `canvas_items` stretch, `keep` aspect, nearest filtering, 2D transform snapping. Default window 1280×720 (2×), and 1920×1080 renders at 3×.

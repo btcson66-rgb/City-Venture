@@ -371,8 +371,12 @@ def main():
                             result['status']='PASS'
                         except Exception as error:
                             result['failure']=str(error)
-                            flow.page.screenshot(path=str(flow.out/'failure.jpg'),type='jpeg',quality=85)
-                            (flow.out/'failure_state.json').write_text(json.dumps(flow.state(),ensure_ascii=False,indent=2),encoding='utf-8')
+                            try:
+                                flow.page.screenshot(path=str(flow.out/'failure.jpg'),type='jpeg',quality=85)
+                                (flow.out/'failure_state.json').write_text(json.dumps(flow.state(),ensure_ascii=False,indent=2),encoding='utf-8')
+                            except Exception as capture_error:
+                                # A crashed page cannot be captured; keep the original failure and go on to the next combination.
+                                result['capture_failure']=str(capture_error)
                         result.update(steps=flow.steps,console_errors=flow.errors,touches=flow.touches)
                         results.append(result)
                         (flow.out/'result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
