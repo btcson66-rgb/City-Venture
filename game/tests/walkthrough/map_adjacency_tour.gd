@@ -55,8 +55,10 @@ func run() -> void:
 		# The separate visual-repair probe exercises the actual asphalt-end transition.
 		if side in ["E", "W"] and int(r[1]) == 324: target.y = float(r[1]) + 24.0
 		var inward: Vector2 = {"N": Vector2.DOWN, "E": Vector2.LEFT, "S": Vector2.UP, "W": Vector2.RIGHT}[side]
-		await _cross_road_safely(world, target + inward * 80)
-		await bot.walk_to(target + inward * 80, 5.0, 60.0)
+		# South street gateways are just beyond the lower pavement; 80px inward would stop in a traffic lane.
+		var approach := target + inward * (32 if side == "S" and int(r[1]) == 544 else 80)
+		await _cross_road_safely(world, approach)
+		await bot.walk_to(approach, 5.0, 60.0)
 		if not screenshots.has(side):
 			await bot.shot("exit_sign_" + side + "_" + a)
 			screenshots[side] = true

@@ -2,7 +2,7 @@
  "id": "civic_center",
  "name": "Civic Center",
  "size_tiles": [
-  96,
+  84,
   44
  ],
  "music": "civic",
@@ -104,7 +104,7 @@
    "rect": [
     80,
     0,
-    16,
+    4,
     44
    ]
   },
@@ -129,9 +129,9 @@
   {
    "type": "crosswalk_h",
    "rect": [
-    82,
+    81,
     25,
-    3,
+    2,
     5
    ]
   }
@@ -1000,9 +1000,9 @@
    "id": "walk_riverside",
    "direction": "S",
    "rect": [
-    1304,
-    688,
-    48,
+    1296,
+    544,
+    32,
     16
    ],
    "to": "riverside",
@@ -1013,7 +1013,7 @@
    "id": "walk_startup_hub",
    "direction": "E",
    "rect": [
-    1520,
+    1328,
     324,
     16,
     164
@@ -1039,9 +1039,9 @@
    "id": "walk_luxury_heights",
    "direction": "N",
    "rect": [
-    1304,
-    0,
-    48,
+    1296,
+    304,
+    32,
     16
    ],
    "to": "luxury_heights",
@@ -1052,7 +1052,7 @@
    "id": "walk_airport",
    "direction": "E",
    "rect": [
-    1520,
+    1328,
     504,
     16,
     48
@@ -1076,19 +1076,19 @@
    390
   ],
   "from_riverside": [
-   1328,
-   664
+   1312.0,
+   520
   ],
   "from_startup_hub": [
-   1496,
+   1304,
    348
   ],
   "from_luxury_heights": [
-   1328,
-   40
+   1312.0,
+   348
   ],
   "from_airport": [
-   1496,
+   1304,
    390
   ]
  },
@@ -1136,7 +1136,7 @@
   [
    1280,
    0,
-   256,
+   64,
    704
   ]
  ]

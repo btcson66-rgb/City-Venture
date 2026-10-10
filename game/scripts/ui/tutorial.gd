@@ -720,8 +720,8 @@ func _route_to_district(ws: WorldScene, to: String) -> Dictionary:
 			if str(e["to"]) == hop:
 				var r: Array = e["rect"]
 				var c := Vector2(float(r[0]) + float(r[2]) / 2.0, float(r[1]) + float(r[3]) / 2.0)
-				var inward := -1.0 if float(r[0]) > ws.size_px.x / 2.0 else 1.0
-				return {"pos": c + Vector2(inward * 18.0, 0), "label": "→ " + I18n.t(str(DataDB.districts[hop]["name"]))}
+				var inward: Vector2 = {"N":Vector2.DOWN,"E":Vector2.LEFT,"S":Vector2.UP,"W":Vector2.RIGHT}[str(e["direction"])]
+				return {"pos": c + inward * 18.0, "label": I18n.t(str(DataDB.districts[hop]["name"])), "exit":true}
 	# not walkable from here: the Metro
 	var m := _interactable(ws, "metro")
 	if not m.is_empty():
@@ -761,6 +761,10 @@ func _draw_guide() -> void:
 	var ink := Color(0.1, 0.07, 0.02)
 	var font := UIK.bold_font()
 	var label := str(_target.get("label", ""))
+	# The road sign already carries the name and direction. Highlight only the current route, without a second arrow.
+	if _target.get("exit", false) and view.has_point(sp):
+		_guide.draw_arc(sp, 8.0, 0, TAU, 24, Color(gold, 0.55), 1.5)
+		return
 	if view.has_point(sp):
 		var y := sp.y - 30.0 - 6.0 * absf(sin(_t * 3.2))
 		var pulse := 0.5 + 0.5 * sin(_t * 4.0)

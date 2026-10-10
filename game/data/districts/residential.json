@@ -2,7 +2,7 @@
  "id": "residential",
  "name": "Residential",
  "size_tiles": [
-  166,
+  154,
   46
  ],
  "music": "day_city",
@@ -121,7 +121,7 @@
    "rect": [
     150,
     0,
-    16,
+    4,
     46
    ]
   },
@@ -164,9 +164,9 @@
   {
    "type": "crosswalk_h",
    "rect": [
-    152,
+    151,
     25,
-    3,
+    2,
     5
    ]
   }
@@ -191,9 +191,9 @@
    "id": "walk_shopping_street",
    "direction": "S",
    "rect": [
-    2424,
-    720,
-    48,
+    2416,
+    544,
+    32,
     16
    ],
    "to": "shopping_street",
@@ -204,7 +204,7 @@
    "id": "walk_old_town",
    "direction": "E",
    "rect": [
-    2640,
+    2448,
     324,
     16,
     220
@@ -233,12 +233,12 @@
    642
   ],
   "from_old_town": [
-   2616,
+   2424,
    348
   ],
   "from_shopping_street": [
-   2448,
-   696
+   2432.0,
+   520
   ],
   "from_industrial": [
    40,
@@ -313,7 +313,7 @@
   [
    2400,
    0,
-   256,
+   64,
    736
   ]
  ]
