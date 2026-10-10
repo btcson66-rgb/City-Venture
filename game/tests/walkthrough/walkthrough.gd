@@ -262,6 +262,9 @@ func run() -> void:
 		await _industry_fixtures()
 		bot.expect(Ledger.check_balanced(), "ledger balanced after the industry fixtures")
 		return
+	if _arg("from") == "fun_feedback":
+		await _fun_feedback()
+		return
 	if _arg("from") == "ch10":
 		# quick rerun of the last chapters: --from=ch10 (the full walkthrough never does this)
 		await _fast_forward_to_ch10()
@@ -1525,6 +1528,7 @@ func _careers() -> void:
 	else:
 		bot.log_line("  (no shift now: %s)" % why)
 	bot.step("Careers — freelance gig at a hot desk")
+	await close_modal() # optional next-shift card must not obscure the laptop
 	await open_os_at(func(n): return n.action == "open_company_os", "hot desk")
 	await bot.click_named("Tab_freelance")
 	await bot.wait(0.4)
@@ -1568,7 +1572,39 @@ func _careers() -> void:
 	await exit_building()
 
 
+## Genuine pre-change save, then real workplace inputs. Scene placement is a focused QA fixture.
+func _fun_feedback() -> void:
+	bot.step("Old played chapter-three save: active wait continues without fabricated receipts")
+	var text := FileAccess.get_file_as_string(_arg("old-save"))
+	var imported := SaveSystem.import_text(text)
+	if not bot.expect(imported.get("ok", false), "genuine old save imported"): return
+	var capture := func(_text, receipt):
+		if str(receipt).begins_with("objective:") or str(receipt).begins_with("achievement:"):
+			await bot.wait(0.4)
+			await bot.shot("celebration_" + str(receipt).replace(":", "_"))
+	EventBus.progress_moment.connect(capture)
+	bot.expect(SaveSystem.load_and_enter(int(imported["slot"])), "genuine old save entered")
+	await wait_world()
+	StoryEngine.check()
+	await bot.wait(0.1)
+	bot.expect("goal_month" in StoryEngine.St()["done"], "old waiting save reaches Chapter 4")
+	await popups()
+	await bot.shot("old_save_next_goal")
+	SceneRouter._enter("district", "startup_hub", "from_riverside", "up")
+	await wait_world()
+	await _careers()
+	await close_modal()
+	bot.expect(Ledger.check_balanced(), "old-save work and growth ledger balanced")
+	EventBus.progress_moment.disconnect(capture)
+
 func _month() -> void:
+	if "goal_month" in StoryEngine.St()["done"]:
+		bot.step("Two real products unlock Chapter 4 without waiting for month-end")
+		bot.expect(GameState.stat("listings_active") >= 2, "two actual active listings")
+		bot.expect(Ledger.check_balanced(), "early progress ledger balanced")
+		await walk_exit("riverside")
+		await enter_building("riverside_apartment")
+		return
 	bot.step("Run the company to month-end")
 	await walk_exit("riverside")
 	await enter_building("riverside_apartment")
@@ -1644,7 +1680,7 @@ func _is_weekday() -> bool:
 
 func _chapters_4_to_6() -> void:
 	await popups()
-	bot.expect(StoryEngine.St()["chapter"] == "ch4_growing_pains", "Chapter 4 started after the June close")
+	bot.expect(StoryEngine.St()["chapter"] == "ch4_growing_pains", "Chapter 4 started after the active growth goal")
 	# ---------------------------------------------------------------- chapter 4
 	bot.step("Chapter 4 — register as an employer at City Hall")
 	if not _is_weekday() or Clock.hour() >= 15:

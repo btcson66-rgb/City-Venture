@@ -241,6 +241,9 @@ func _finish_shift(job_id: String, res: Dictionary) -> void:
 	if r["promoted"]:
 		show_chapter_card(I18n.t("PROMOTED"), I18n.t(str(r["title"])))
 	SaveSystem.autosave_if_changed()
+	# An optional second paid session: return to the workplace card, never auto-start a shift.
+	if Careers.shift_block(job_id) == "":
+		open_modal(JobModal.new(job_id))
 
 
 ## Shared by the keys and the HUD quick-bar buttons.

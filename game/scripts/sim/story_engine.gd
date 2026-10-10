@@ -147,6 +147,7 @@ static func complete_objective(id: String, unavailable := false) -> void:
 			GameState.add_message("maya", d["skip_text"])
 	elif d.get("main", false):
 		EventBus.notify.emit("✓ " + fill(d.get("text", id)), "good", "check")
+		EventBus.progress_moment.emit(I18n.t("Small goal complete!"), "objective:" + id)
 	if side != "" and unavailable:
 		side_progress()[side]["skipped"] = true
 		run_actions(d.get("on_skip", []))

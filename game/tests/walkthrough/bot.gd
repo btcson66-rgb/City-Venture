@@ -28,6 +28,7 @@ var _watch_run := true
 var _last_step := ""
 var daily_results: Array = []
 var trace_daily := false
+var progress_moments: Array = []
 
 
 ## A watchdog on its own thread: when the main loop stops advancing for 20 s it prints what the simulation and the
@@ -80,6 +81,9 @@ func _ready() -> void:
 	# Automation owns its output saves and never replaces a player save when all slots are occupied.
 	SaveSystem.DIR = out_dir.path_join("saves")
 	t0 = Time.get_ticks_msec()
+	EventBus.progress_moment.connect(func(text, receipt):
+		progress_moments.append({"seconds":(Time.get_ticks_msec() - t0) / 1000.0, "receipt":receipt, "text":text, "chapter":StoryEngine.St().get("chapter", ""), "game_minute":Clock.now()})
+		log_line("PROGRESS " + receipt))
 	UIRoot.toasted.connect(func(text: String, kind: String): if kind == "bad": log_line("  toast: " + text))
 	if I18n.locale().begins_with("zh"):
 		_audit_setup()
@@ -256,6 +260,8 @@ func _daily_snapshot(day: int) -> void:
 
 
 func _finish() -> void:
+	var moments := FileAccess.open(out_dir + "/progress_moments.json", FileAccess.WRITE)
+	if moments: moments.store_string(JSON.stringify({"elapsed_seconds":(Time.get_ticks_msec() - t0) / 1000.0, "moments":progress_moments}, "  "))
 	if trace_daily:
 		_daily_snapshot(Clock.day_index())
 		var trace := FileAccess.open(out_dir + "/daily_results.json", FileAccess.WRITE)

@@ -14,6 +14,8 @@
 | [Game Dev Tycoon，開發者介紹](https://www.greenheartgames.com/) | 從小工作開始，完成作品、得到成果、解鎖下一個選擇；取消強制等月底，升遷是新頭銜與下一階工作。 |
 | [Stardew Valley，開發者介紹](https://www.stardewvalley.net/about/) | 行動累積成長、解鎖探索與新選擇；等待期間允許工作、探索或主動跳到下一件事。 |
 | [GitHub awesome-game-design](https://github.com/Roobyx/awesome-game-design) | 用設計文件、postmortem 和學習資源作研究索引；索引不是遊戲成效的實證。 |
+| [Two Point Hospital 官方入門指南](https://support.sega.com/hc/en-gb/articles/360000328457-Getting-Started) | 把短期目標與進度摘要放在持續可見的位置；新區域用成果解鎖，不讓玩家猜下一件事。 |
+| [Goal-gradient 研究，Kivetz / Urminsky / Zheng](https://www.columbia.edu/~rk566/Session4/Goal-Gradient_Illusionary_Goal_Progress.pdf) | 接近目標可促進行動；原研究是消費獎勵情境，套用遊戲是推論。只顯示真實進度，不贈送假完成格。 |
 
 Core loop：選一個小目標 → 親手做 → 看見真實成果 → 決定下一步。Session loop：第一次銷售 → 正式創業 → 第二項商品 → 招人 → 第一份大合約。Compulsion loop 在本作代表想試下一個選擇；不以錯過懲罰、付費隨機獎勵或無限簽到要求留住玩家。
 

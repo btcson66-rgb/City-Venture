@@ -33,6 +33,10 @@ var _delta := 0.0
 var welcome: BuildingWelcome
 var here_button: Button
 var safety_button: Button
+var goal_progress: ProgressBar
+var goal_count: Label
+var next_event_button: Button
+var celebration: ProgressCelebration
 
 
 func _ready() -> void:
@@ -80,6 +84,24 @@ func _ready() -> void:
 	oh.add_child(goal_label)
 	obj_label = UIK.wrap("", 8, Art.C_WHITE, 184)
 	ov.add_child(obj_label)
+	goal_progress = ProgressBar.new()
+	goal_progress.name = "ShortGoalProgress"
+	goal_progress.show_percentage = false
+	goal_progress.custom_minimum_size = Vector2(184, 4)
+	goal_progress.add_theme_stylebox_override("background", UIK.flat(Art.C_DIM))
+	goal_progress.add_theme_stylebox_override("fill", UIK.flat(Art.C_SKY))
+	ov.add_child(goal_progress)
+	goal_count = UIK.label("", 7, Art.C_SKY)
+	ov.add_child(goal_count)
+	next_event_button = UIK.button("Skip to next event", func():
+		if not UIRoot.is_blocking(): FunLoop.skip_next()
+		refresh())
+	next_event_button.name = "SkipNextEvent"
+	ov.add_child(next_event_button)
+	ov.add_child(UIK.tip("short_goals"))
+	celebration = ProgressCelebration.new()
+	add_child(celebration)
+	EventBus.progress_moment.connect(func(text, _receipt): celebration.celebrate(text))
 	# money
 	var mp := UIK.panel("ui/panel_glass", 5)
 	mp.set_anchors_preset(Control.PRESET_TOP_RIGHT)
@@ -357,6 +379,13 @@ var _hours_until := -1
 ## The opening-hours line only changes when a door opens or closes, so it is cached until that minute (or the objective changes).
 func _refresh_objective_hours() -> void:
 	var o := StoryEngine.main_objective()
+	var progress := FunLoop.progress()
+	goal_progress.max_value = float(progress.get("max", 1))
+	goal_progress.value = float(progress.get("value", 0))
+	goal_count.text = str(progress.get("text", ""))
+	var next := FunLoop.next_event()
+	next_event_button.visible = next > Clock.now()
+	if next_event_button.visible: next_event_button.tooltip_text = Clock.fmt_short(next)
 	obj_label.text = o.get("text", "")
 	var key := "%s|%s|%s" % [str(o.get("target", "")), I18n.locale(), str(Clock.day_index())]
 	if key != _hours_key or _hours_until < 0 or Clock.now() >= _hours_until:
@@ -384,7 +413,7 @@ func _on_saved(slot: int) -> void:
 func _on_cash(entity: String, delta: float) -> void:
 	if not visible or absf(delta) < 0.01:
 		return
-	var l := UIK.title(Fmt.money0(delta, true), 9, Art.C_GREEN if delta > 0 else Art.C_RED)
+	var l := UIK.title(Fmt.money(delta, true), 9, Art.C_GREEN if delta > 0 else Art.C_RED)
 	# Large property payments must stay inside the viewport as well as ordinary small cash deltas.
 	l.position = Vector2(640 - 6 - l.get_combined_minimum_size().x, 40 if entity == "player" else 62)
 	add_child(l)

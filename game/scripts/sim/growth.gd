@@ -153,7 +153,9 @@ static func record(d: Dictionary, kind: String, quiet := false) -> void:
 	if kind == "goals":
 		S()["pending"].append(id)
 		GameState.add_message("maya", I18n.t("You reached %s. Choose the next goal that fits your business; the reward is the progress you actually made.") % I18n.t(str(d["title"])))
-	if not quiet: EventBus.notify.emit(I18n.t("Reached: %s") % I18n.t(str(d["title"])), "good", "star")
+	if not quiet:
+		EventBus.notify.emit(I18n.t("Reached: %s") % I18n.t(str(d["title"])), "good", "star")
+		if kind == "achievements": EventBus.progress_moment.emit(I18n.t("First time! %s") % I18n.t(str(d["title"])), "achievement:" + id)
 
 static func check(quiet := false) -> void:
 	if not GameState.has_game(): return
