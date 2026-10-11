@@ -20,3 +20,5 @@
 | F10 | PASS：每週小費用、不追欠費；雜務交隊友，費用與訂單仍走真實帳務，升級不增加經營數值。 |
 
 畫面驗證使用 Godot 4.5.1，獨立 QA 存檔與偏好設定。中文／英文桌面及 390×844 大字觸控布局分開記錄；原生觸控布局以滑鼠輸入巡覽，不能冒充真實 Web 觸控或實體手機。#180 將另跑实际匯出的 Web 測試。
+
+2026-10-12: inherited final #182 payout guard merged. Fixed-source full suite1028/1028 PASS (520.4s). Maya lifecycle/UI is unchanged from the four0-failure native captures. The replacement final full tour D:/cv181-payout-complete is RUNNING; the previous interrupted full tour is not acceptance evidence.

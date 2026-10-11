@@ -6,7 +6,7 @@ Godot **4.5.1 f62fdbde1**, native OpenGL, QA saves/preferences isolated in each 
 
 | Gate | Result |
 |---|---|
-| Entire unit suite | 1026/1026, 466.4 seconds; no script/parse errors |
+| Entire unit suite | 1028/1028, 466.4 seconds; no script/parse errors |
 | Assistant lifecycle / existing assistant targeted tests | 37/37, 54.9 seconds |
 | zh_TW translation | 8359/8359, 0 missing |
 | wiki / beta / whitespace | OK / 0 hits / pass |
@@ -19,3 +19,5 @@ Commands: `Godot_v4.5.1-stable_win64_console.exe --path game --resolution 1280x7
 Compare `before/01_assistant_settings_new_game.jpg` (already enabled without hire) against `after/desktop-zh/04_maya_hiring_profile.jpg`, `05_maya_joins_happy.jpg`, `06_maya_player_selected_chores.jpg`, and `07_maya_next_parcel_automated.jpg`. Pause and genuine old-save states are shots09–11. Review both `game-feel-before.md` and `game-feel-after.md` for per-principle findings and inherited HUD limits.
 
 R4: only actual paid inventory/customer orders produce revenue. Joining, expansion and weekly fees post personal payroll expense; no numerical business bonus. Saved explicit dismissal is authoritative. Existing enabled predecessor choices/tier are adopted without moving cash and with seven days grace. No art/district/building/exit-area source is changed.
+
+2026-10-12: inherited final #182 payout guard merged. Fixed-source full suite1028/1028 PASS (520.4s). Maya lifecycle/UI is unchanged from the four0-failure native captures. The replacement final full tour D:/cv181-payout-complete is RUNNING; the previous interrupted full tour is not acceptance evidence.
