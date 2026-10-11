@@ -12,7 +12,7 @@ first-time achievement celebrations, two optional entry shifts, promotion after 
 three-guest entry coffee shifts, six-guest promoted shifts, customer reactions for streaks and occasional surprises.
 Existing cash float/sounds are reused with cent-accurate amounts. No combo money is created.
 
-Validation: 1016/1016 unit tests, i18n zh_TW missing 0, wiki_check OK, beta_audit 0 hits.
+Validation: 1018/1018 unit tests, i18n zh_TW missing 0, wiki_check OK, beta_audit 0 hits.
 Old active and completed wait receipts and genuine played-save continuation are covered.
 The first full rendered attempt exposed a bot-only assumption that month-end always left it at home;
 the early-unlock route now walks home before the next chapter's sleep input. Its failed run is not acceptance evidence.
@@ -24,3 +24,5 @@ Self-review and final focused feedback tour passed (0 failures, 41.2 seconds). F
 Completed: final fresh-game rendered tour, chapters 1–24 and industry tour, 0 failures. Desktop captures do not prove blind-human delight, sound perception or physical-device behavior.
 
 Before/after JPGs are actual renderer captures, quality 85. Keep this ticket below 20 MB.
+
+Follow-up from real Web QA: stale work starts refresh the job card, and accepted work freezes the payout fade so frame latency cannot erase real wages. Two new regression cases, including simulated10-second latency and exact two-hour wage accounting, pass. Final updated unit suite1018/1018 (509.7s). Previous full0-failure result predates this final fix; new D:/cv182-payout-complete tour RUNNING.
