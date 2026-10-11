@@ -18,3 +18,5 @@ Novice proxy: sees who sent a short update, taps card, reads the complete origin
 Self-review found and fixed inherited arrival toast covering the phone, an English baseline read-all timing failure in the bot, notification Go assumptions in the walkthrough, and a Web smoke six-customer assumption after the entry shift became three customers. Each failed attempt remains separate from final acceptance.
 
 Full unit suite and real exported-Web matrix are pending; no success claimed here before results arrive.
+
+Final fixed-source whole unit suite: 1032/1032 PASS in 934.2 seconds (unit.xml). No SCRIPT ERROR/Parse Error. Stderr is retained: expected corrupt-import/unknown-dispatch fixtures and headless TextServer cleanup/RID warnings are not relabelled as a clean engine log. Whole browser matrix is still pending. Final cold-export PCK SHA256: 535b60d53dffa4fe6076dc2e47922d74ca741f0a33c9ce8b8a0d77ec3ef4e49a.
