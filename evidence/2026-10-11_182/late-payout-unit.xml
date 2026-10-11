@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="test_fun_loop" tests="10" failures="0">
+    <testcase classname="test_fun_loop" name="test_old_wait_objective_keeps_id_but_uses_active_products" time="0.062"></testcase>
+    <testcase classname="test_fun_loop" name="test_already_completed_wait_receipt_is_preserved" time="0.001"></testcase>
+    <testcase classname="test_fun_loop" name="test_skip_runs_real_purchase_scheduler_and_stops_at_decision" time="0.083"></testcase>
+    <testcase classname="test_fun_loop" name="test_skip_noop_for_action_goal_and_stale_schedule" time="0.000"></testcase>
+    <testcase classname="test_fun_loop" name="test_two_entry_shifts_pay_only_real_hours" time="0.035"></testcase>
+    <testcase classname="test_fun_loop" name="test_staff_waits_expose_actual_applicant_and_weekly_payroll" time="0.028"></testcase>
+    <testcase classname="test_fun_loop" name="test_existing_medical_bill_does_not_trap_waiting_player" time="0.072"></testcase>
+    <testcase classname="test_fun_loop" name="test_genuine_pre_change_waiting_save_continues_without_new_money" time="0.033"></testcase>
+    <testcase classname="test_fun_loop" name="test_completed_late_shift_survives_render_delay_and_releases_pause" time="0.796"></testcase>
+    <testcase classname="test_fun_loop" name="test_stale_workplace_card_does_not_start_unpaid_work" time="0.049"></testcase>
+  </testsuite>
+</testsuites>
