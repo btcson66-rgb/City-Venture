@@ -12,12 +12,13 @@ first-time achievement celebrations, two optional entry shifts, promotion after 
 three-guest entry coffee shifts, six-guest promoted shifts, customer reactions for streaks and occasional surprises.
 Existing cash float/sounds are reused with cent-accurate amounts. No combo money is created.
 
-Validation: 1012/1012 unit tests, i18n zh_TW missing 0, wiki_check OK, beta_audit 0 hits.
+Validation: 1016/1016 unit tests, i18n zh_TW missing 0, wiki_check OK, beta_audit 0 hits.
 Old active and completed wait receipts and genuine played-save continuation are covered.
 The first full rendered attempt exposed a bot-only assumption that month-end always left it at home;
 the early-unlock route now walks home before the next chapter's sleep input. Its failed run is not acceptance evidence.
 
-Pending: final fresh-game 1–24 chapters plus industry tour, first 30-minute timestamp table, bilingual mobile/large-text checks,
-final source self-review. Desktop captures do not prove blind-human delight, sound perception or physical-device behavior.
+The full fresh-game tour before the final two achievement additions passed chapters 1–24, all industries, adjacency, personal and save/reload checks: 0 failures, 5656.5 seconds. A new full tour with both additions is running.
+Bilingual desktop and English extra-large touch work routes passed; inherited long job text requires scrolling.
+Pending: current-version full tour, final first-30-minute gap calculation and source review. Desktop captures do not prove blind-human delight, sound perception or physical-device behavior.
 
 Before/after JPGs are actual renderer captures, quality 85. Keep this ticket below 20 MB.

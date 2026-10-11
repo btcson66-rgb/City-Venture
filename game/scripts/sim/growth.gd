@@ -53,6 +53,9 @@ static func _scan_journal() -> void:
 static func metric(source: String) -> float:
 	var ent := GameState.company_id()
 	match source:
+		"popup_sales":
+			_scan_journal()
+			return 1.0 if _segments.get(ent, {}).has("popup") else 0.0
 		"earned_revenue":
 			_scan_journal()
 			return maxf(0, _earned)

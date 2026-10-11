@@ -106,6 +106,9 @@ func run() -> void:
 		await _industry_fixtures()
 		await load("res://tests/walkthrough/map_adjacency_tour.gd").new(bot).run()
 		return
+	if _arg("from") == "fun_feedback":
+		await _fun_feedback()
+		return
 	await _new_game()
 	if _arg("from")=="city_portfolio":
 		await _city_portfolio_fixture()
@@ -261,9 +264,6 @@ func run() -> void:
 	if _arg("from") == "industries":
 		await _industry_fixtures()
 		bot.expect(Ledger.check_balanced(), "ledger balanced after the industry fixtures")
-		return
-	if _arg("from") == "fun_feedback":
-		await _fun_feedback()
 		return
 	if _arg("from") == "ch10":
 		# quick rerun of the last chapters: --from=ch10 (the full walkthrough never does this)

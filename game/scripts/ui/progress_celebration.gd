@@ -15,7 +15,8 @@ func _ready() -> void:
 	caption.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	caption.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	caption.position = Vector2(210, 42)
+	# Keep the receipt below the global toast stack rather than behind shipment notices.
+	caption.position = Vector2(210, 100)
 	caption.size = Vector2(220, 40)
 	add_child(caption)
 	visible = false

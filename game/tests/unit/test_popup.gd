@@ -156,3 +156,17 @@ func test_balance_three_strategies_real_trades_with_low_traffic_risk() -> void:
 		results.append({"strategy":strategy,"profits":profits,"average":average})
 	PopupStore.cfg()["footfall_hour"]=original
 	print("popup_balance: "+JSON.stringify(results))
+
+func test_first_checkout_celebrates_real_sale_once_without_extra_cash() -> void:
+	ready()
+	Growth.check(true)
+	runner.check(not Growth.S()["achievements"].has("popup_first_sale"), "stock and paid rent are not a sale")
+	runner.check(PopupStore.owner_shift(.9)["ok"], "actual checkout completed")
+	var cash := Ledger.cash(GameState.company_id())
+	Growth.check()
+	runner.check(Growth.S()["achievements"].has("popup_first_sale"), "real journal sale earns receipt")
+	var count: int = GameState.data["timeline"].size()
+	Growth.check()
+	runner.eq(GameState.data["timeline"].size(), count, "repeat review never repeats celebration")
+	runner.eq(Ledger.cash(GameState.company_id()), cash, "celebration adds no money")
+	runner.check(Ledger.check_balanced(), "real checkout remains balanced")

@@ -7279,6 +7279,10 @@ msgid "Complete a fixed number of delivery trips each week for ninety days. Nego
 msgstr "九十天內，每週完成固定趟數的配送。可以議價每趟酬勞；外部客戶的未完成趟數會收取違約金。"
 
 #: data/story/achievements.json
+msgid "Complete a real checkout sale at your weekend pop-up."
+msgstr "在週末快閃店完成一次真實結帳。"
+
+#: data/story/achievements.json
 msgid "Complete a real sale."
 msgstr "完成一筆實際銷售。"
 
@@ -8390,7 +8394,7 @@ msgstr "尚未開放交易簽約。試算不會建立合約、庫存或付款。
 msgid "Deal with an unhappy customer (check your phone)"
 msgstr "處理一位不滿意的客人（看手機）"
 
-#: scripts/sim/contracts.gd:189 scripts/sim/growth.gd:97
+#: scripts/sim/contracts.gd:189 scripts/sim/growth.gd:100
 msgid "Deal. Send it over."
 msgstr "成交。寄過來吧。"
 
@@ -10910,7 +10914,7 @@ msgstr "第一個屋頂亮燈"
 msgid "First sale: %s bought %s for %s."
 msgstr "第一筆銷售：%s 買了%s，%s。"
 
-#: scripts/sim/growth.gd:158
+#: scripts/sim/growth.gd:161
 msgid "First time! %s"
 msgstr "第一次達成！%s"
 
@@ -21890,7 +21894,7 @@ msgstr "完成供應衝擊的經營回顧。"
 msgid "Reach the third factory stage."
 msgstr "升到工廠第三階段。"
 
-#: scripts/sim/growth.gd:152 scripts/sim/growth.gd:157
+#: scripts/sim/growth.gd:155 scripts/sim/growth.gd:160
 msgid "Reached: %s"
 msgstr "達成：%s"
 
@@ -22094,6 +22098,10 @@ msgstr "可以提案"
 msgid "Ready to propose"
 msgstr "可以提出合作"
 
+#: data/story/achievements.json
+msgid "Ready to welcome guests"
+msgstr "準備迎接客人"
+
 #: scripts/ui/minigames/mini_game.gd:223
 msgid "Ready! Start work"
 msgstr "準備好了！開始上班"
@@ -22193,6 +22201,10 @@ msgstr "收到 Lumina Direct 的進口貨"
 #: data/story/achievements.json
 msgid "Receive twenty-five customer reviews."
 msgstr "收到二十五則顧客評價。"
+
+#: data/story/achievements.json
+msgid "Receive your cafe's food handling licence."
+msgstr "取得咖啡館的食品許可。"
 
 #: data/ui/feature_unlocks.json
 msgid "Receive your first contract"
@@ -24466,7 +24478,7 @@ msgstr "保存這一局，展開選好的新人生"
 msgid "Save transfer"
 msgstr "存檔匯入／匯出"
 
-#: scripts/ui/hud.gd:195 scripts/ui/hud.gd:404
+#: scripts/ui/hud.gd:195 scripts/ui/hud.gd:406
 msgid "Saved"
 msgstr "已儲存"
 
@@ -24966,7 +24978,7 @@ msgstr "次輔導"
 msgid "Set a transfer price for each running pair: at cost, cost plus a markup or market price. Both businesses show the trade in Segments."
 msgstr "為每個運作中的組合設定轉撥價：依成本、成本加成或市價。兩邊事業都會在分部報表顯示這筆交易。"
 
-#: scripts/sim/growth.gd:186
+#: scripts/sim/growth.gd:189
 msgid "Set aside an optional growth goal. No completion was claimed."
 msgstr "暫時擱置一項成長目標，並未宣稱達成。"
 
@@ -25542,7 +25554,7 @@ msgstr "略過"
 msgid "Skip this guide"
 msgstr "跳過這段導引"
 
-#: scripts/ui/hud.gd:96
+#: scripts/ui/hud.gd:382 scripts/ui/hud.gd:96
 msgid "Skip to next event"
 msgstr "跳到下一件事"
 
@@ -31342,7 +31354,7 @@ msgstr "你辭掉了工作。你有一筆存款、一台筆電、一支手機—
 msgid "You raised equity rather than sales income; quarterly disclosure and board votes now limit your freedom."
 msgstr "你以股權募集資本，沒有增加銷售營收；季報義務和董事會表決也限制了你的自由。"
 
-#: scripts/sim/growth.gd:155
+#: scripts/sim/growth.gd:158
 msgid "You reached %s. Choose the next goal that fits your business; the reward is the progress you actually made."
 msgstr "你達成了「%s」。接下來挑一個適合自己的目標；真正的收穫就是你做到的進步。"
 
@@ -31613,6 +31625,10 @@ msgstr "第一杯咖啡"
 #: scripts/ui/tutorial.gd:61
 msgid "Your first order"
 msgstr "第一筆訂單"
+
+#: data/story/achievements.json
+msgid "Your first pop-up customer"
+msgstr "第一位擺攤顧客"
 
 #: scripts/ui/tutorial.gd:82
 msgid "Your first sale is done! Money comes in faster with a part-time job too. Bloom Coffee is hiring: go to its staff door, press E and take the barista job. (More jobs are on the Business Board.)"

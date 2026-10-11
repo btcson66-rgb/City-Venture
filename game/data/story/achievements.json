@@ -1,6 +1,24 @@
 {
  "achievements": [
   {
+   "id": "popup_first_sale",
+   "title": "Your first pop-up customer",
+   "metric": "popup_sales",
+   "value": 1,
+   "hint": "Complete a real checkout sale at your weekend pop-up.",
+   "unit": "condition",
+   "company": false
+  },
+  {
+   "id": "cafe_licensed",
+   "title": "Ready to welcome guests",
+   "metric": "flag:food_permit",
+   "value": 1,
+   "hint": "Receive your cafe's food handling licence.",
+   "unit": "condition",
+   "company": false
+  },
+  {
    "id": "first_money",
    "title": "The first dollar",
    "metric": "earned_revenue",

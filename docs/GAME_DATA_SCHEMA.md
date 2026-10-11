@@ -785,3 +785,5 @@ One gray disabled preview per navigation surface; remaining locked nodes are abs
 ## Assistant chores (#154)
 
 `game/data/economy/assistant.json` tunes cash buffer, daily hour, restock threshold, packing pace/skill, ingredient target, coffee target, maintenance condition and roster weekdays. Saved `assistant.tasks` stores independent switches (default true); `assistant.bills` stores actual accrued obligations until paid. Existing automatic loan repayments and perpetual leases keep their signed terms; insurance renewal delegates only previously chosen cover, never new cover. Switches never book revenue. Operations use the existing supplier, parcel, staff, inspection, asset, tax, insurance and customs APIs.
+
+#182 milestone metrics: `popup_sales` reads actual positive popup revenue journal segments; `flag:food_permit` uses the issued cafe licence. Both create one dated achievement receipt, with no monetary reward.

@@ -84,3 +84,17 @@ func test_existing_medical_bill_does_not_trap_waiting_player() -> void:
 	runner.check(FunLoop.skip_next(), "existing payable does not disable all waiting")
 	runner.check(Clock.now() > before, "actual time advances")
 	runner.check(Ledger.check_balanced(), "no free settlement or inventory")
+
+func test_genuine_pre_change_waiting_save_continues_without_new_money() -> void:
+	var text := FileAccess.get_file_as_string("res://tests/fixtures/saves/pr182-pre-fun-ch3.json")
+	runner.check(SaveSystem.validate_text(text)["ok"], "genuine pre-change envelope validates")
+	runner.check(SaveSystem._atomic_write(SaveSystem._path(19), text), "fixture copied to isolated test slot")
+	runner.check(SaveSystem.load_data(19), "real played old save loads")
+	var cash := Ledger.cash("player")
+	var company_cash := Ledger.cash(GameState.company_id())
+	StoryEngine.check()
+	runner.check("goal_month" in StoryEngine.St()["done"], "actual existing products complete old wait objective")
+	runner.eq(StoryEngine.St()["chapter"], "ch4_growing_pains", "real old save can continue")
+	runner.eq(Ledger.cash("player"), cash, "continuation adds no personal money")
+	runner.eq(Ledger.cash(GameState.company_id()), company_cash, "continuation adds no company money")
+	runner.check(Ledger.check_balanced(), "historical transactions remain balanced")
