@@ -100,6 +100,9 @@ func _audit_setup() -> void:
 			for value in tr.values():
 				for word in _word_re.search_all(str(value)):
 					_allowed[word.get_string()] = true
+	# Release version suffixes are technical identifiers, not untranslated prose.
+	for word in _word_re.search_all(str(ProjectSettings.get_setting("application/config/version", ""))):
+		_allowed[word.get_string()] = true
 	# Language self-names and configured hardware-key names deliberately keep their spelling.
 	for locale in I18n.LOCALES:
 		for word in _word_re.search_all(str(locale[1])):
