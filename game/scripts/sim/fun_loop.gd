@@ -22,7 +22,8 @@ static func next_event() -> int:
 	if not GameState.has_game(): return -1
 	var objective := StoryEngine.main_objective()
 	var id := str(objective.get("id", ""))
-	var kinds: Array = {"ch2_stock":["eco.po_arrive"], "ch2_order":["eco.order_place"], "ch2_ship":["eco.pickup"], "ch2_first_dollar":["eco.deliver"], "ch2_issue":["eco.return_request"]}.get(id, [])
+	var kinds: Array = {"ch2_stock":["eco.po_arrive"], "ch2_order":["eco.order_place"], "ch2_ship":["eco.pickup"], "ch2_first_dollar":["eco.deliver"], "ch2_issue":["eco.return_request"], "ch4_hire":["stf.applicants"], "ch5_stock":["eco.po_arrive"], "ch5_deliver":["eco.po_arrive"]}.get(id, [])
+	if id == "ch4_hire" and not Staff.S()["applicants"].is_empty(): kinds = []
 	var next := -1
 	for event in GameState.data["schedule"]:
 		if str(event["kind"]) in kinds and int(event["t"]) > Clock.now():
@@ -31,6 +32,10 @@ static func next_event() -> int:
 			if next < 0 or int(event["t"]) < next: next = int(event["t"])
 	if id == "ch2_order" and next < 0 and GameState.stat("listings_active") > 0:
 		next = Clock.now() - Clock.minute_of_day() % 60 + 60
+	if id == "ch4_payroll" and Staff.count() > 0:
+		var payroll := Clock.now() - Clock.minute_of_day() + int(Staff.cfg().get("payroll_hour", 17)) * 60
+		while payroll <= Clock.now() or Clock.weekday(payroll) != int(Staff.cfg().get("payroll_weekday", 5)): payroll += Clock.DAY
+		next = payroll
 	var target := DestinationHours.target(objective)
 	if target.has("building"):
 		var opening := DestinationHours.status(str(target["building"]), str(target.get("npc", "")))
@@ -38,13 +43,15 @@ static func next_event() -> int:
 			if next < 0 or int(opening["next"]) < next: next = int(opening["next"])
 	return next
 
-## Advance in small batches. Stop for a real decision, injury, or insolvency; all scheduler ticks still run.
+## Advance in small batches. Stop for a real decision, new accident, or insolvency; all scheduler ticks still run.
 static func skip_next() -> bool:
 	var next := next_event()
-	if next <= Clock.now() or not EventEngine.pending().is_empty() or TrafficSafety.needs_attention(): return false
+	if next <= Clock.now() or not EventEngine.pending().is_empty() or Insolvency.active(): return false
+	# An existing medical bill must not prevent time passing toward recovery or real payouts.
+	var accidents: int = TrafficSafety.S()["accidents"].size()
 	var stop := mini(next, Clock.now() + int(cfg().get("skip_limit_days", 7)) * Clock.DAY)
 	while Clock.now() < stop:
 		Clock.advance(mini(30, stop - Clock.now()))
 		StoryEngine.check()
-		if not EventEngine.pending().is_empty() or TrafficSafety.needs_attention() or Insolvency.state().get("stage", "") == "open": break
+		if not EventEngine.pending().is_empty() or TrafficSafety.S()["accidents"].size() > accidents or Insolvency.active(): break
 	return true

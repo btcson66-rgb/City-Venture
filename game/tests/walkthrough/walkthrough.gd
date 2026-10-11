@@ -1090,6 +1090,12 @@ func pass_time_at_home(pred: Callable, max_naps := 12, sleep_only := false) -> b
 		await popups()
 		if pred.call():
 			return true
+		if not UIRoot.is_blocking() and FunLoop.next_event() > Clock.now():
+			await bot.wait(0.2)
+			await bot.shot("next_event_available")
+			await bot.click_named("SkipNextEvent")
+			await bot.wait(0.3)
+			continue
 		var evening := Clock.hour() >= 19 or Clock.hour() < 5
 		if not evening and sleep_only:
 			Clock.advance(19 * 60 - Clock.minute_of_day())
@@ -1525,6 +1531,15 @@ func _careers() -> void:
 		await bot.wait(1.8)
 		var paid := Ledger.cash("player") - cash
 		bot.expect(paid >= Careers.pay_for("cowork_host", MiniGames.auto, hrs) - 0.01, "a %d-hour shift paid by how it went (%s)" % [hrs, Fmt.money(paid)])
+		if _arg("repeat") == "1":
+			await bot.shot("optional_next_shift")
+			var before_second := Ledger.cash("player")
+			await bot.click_named("WorkShift")
+			await bot.until(func(): return not (UIRoot.top_modal() is MiniGame), 5.0)
+			await bot.wait(1.8)
+			bot.expect(Careers.shifts("cowork_host") == 2 and Careers.rank_index("cowork_host") == 1, "two actual shifts earn the next title")
+			bot.expect(Ledger.cash("player") > before_second and Ledger.check_balanced(), "second real shift paid and balanced")
+			await bot.shot("second_shift_promotion")
 	else:
 		bot.log_line("  (no shift now: %s)" % why)
 	bot.step("Careers — freelance gig at a hot desk")
@@ -1579,7 +1594,8 @@ func _fun_feedback() -> void:
 	var imported := SaveSystem.import_text(text)
 	if not bot.expect(imported.get("ok", false), "genuine old save imported"): return
 	var capture := func(_text, receipt):
-		if str(receipt).begins_with("objective:") or str(receipt).begins_with("achievement:"):
+		if str(receipt).begins_with("objective:") or str(receipt).begins_with("achievement:") or str(receipt).begins_with("promotion:"):
+			while UIRoot.card_layer.get_child_count() > 0: await bot.wait(0.1)
 			await bot.wait(0.4)
 			await bot.shot("celebration_" + str(receipt).replace(":", "_"))
 	EventBus.progress_moment.connect(capture)

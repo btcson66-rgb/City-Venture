@@ -17,14 +17,14 @@ Read the issue and [engineering guide](docs/CODEX_GUIDE.md) before work. Existin
 
 Apply these principles within the current ticket; do not use them to authorize unrelated whole-system redesigns. Phone messages, Company OS tab structure and other sessions' tickets stay outside this session's scope.
 
-## Project skills (read the files even if skills are not automatically loaded)
-
 ## F9–F10
 
 - **F9 每 2–5 分鐘一定有進展**：一個小目標完成、一個獎勵、一個新東西解鎖，或一個有趣的事件。以真實遊玩時間驗證，不能用遊戲日期或來源稽核代替。
 - **F10 不用很真實**：真實感只在讓遊戲更好玩時才保留。等待、文書、扣款，能縮短就縮短。縮短等待仍跑真實交易與 Ledger，不以虛構收入換刺激。
 
 設計與研究來源見 [docs/FUN_LOOP.md](docs/FUN_LOOP.md)。
+
+## Project skills (read the files even if skills are not automatically loaded)
 
 - [.codex/skills/game-feel-review/SKILL.md](.codex/skills/game-feel-review/SKILL.md): run before and after gameplay/UI work; attach F1–F8 evidence.
 - [.codex/skills/ui-calm-polish/SKILL.md](.codex/skills/ui-calm-polish/SKILL.md): check quiet UI, typography, touch targets and localization.

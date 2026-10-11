@@ -5,6 +5,7 @@ extends Control
 var remaining := 0.0
 var elapsed := 0.0
 var caption: Label
+var pending := ""
 
 func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -20,6 +21,17 @@ func _ready() -> void:
 	visible = false
 
 func celebrate(text: String) -> void:
+	pending = text
+	# A chapter card may cover the HUD. Let its reveal finish before playing this receipt.
+	if not _can_show(): return
+	_show_pending()
+
+func _can_show() -> bool:
+	return get_parent().is_visible_in_tree() and is_instance_valid(UIRoot.card_layer) and UIRoot.card_layer.get_child_count() == 0
+
+func _show_pending() -> void:
+	var text := pending
+	pending = ""
 	caption.text = text
 	modulate.a = 1.0
 	elapsed = 0.0
@@ -28,6 +40,7 @@ func celebrate(text: String) -> void:
 	Sound.play("success", -12)
 
 func _process(delta: float) -> void:
+	if not pending.is_empty() and _can_show(): _show_pending()
 	if remaining <= 0: return
 	elapsed += delta
 	remaining -= delta

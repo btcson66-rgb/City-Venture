@@ -77,6 +77,13 @@ func _ready() -> void:
 	# Set before the title menu reads save slots; QA must not share player/unit-test saves.
 	SaveSystem.DIR = out_dir.path_join("saves")
 	SaveSystem.autosave_enabled = false
+	# Render matrix owns device preferences too; never persist QA settings to a player's profile.
+	Preferences.path = out_dir.path_join("settings.cfg")
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--qa-font="):
+			Preferences.values["font_size"] = clampi(int(arg.substr(10)), 0, 3)
+		if arg == "--qa-touch": InputAccess.touch_mode = true
+	Preferences.apply()
 	DirAccess.make_dir_recursive_absolute(out_dir + "/screenshots")
 	# Automation owns its output saves and never replaces a player save when all slots are occupied.
 	SaveSystem.DIR = out_dir.path_join("saves")

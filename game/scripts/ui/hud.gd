@@ -378,6 +378,8 @@ var _hours_until := -1
 
 ## The opening-hours line only changes when a door opens or closes, so it is cached until that minute (or the objective changes).
 func _refresh_objective_hours() -> void:
+	# HUD exists before catalogues are initialized; translate its persistent button on refresh.
+	next_event_button.text = I18n.t("Skip to next event")
 	var o := StoryEngine.main_objective()
 	var progress := FunLoop.progress()
 	goal_progress.max_value = float(progress.get("max", 1))
