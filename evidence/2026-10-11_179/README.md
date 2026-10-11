@@ -4,7 +4,7 @@ Stack: #184 → #179; parent `adbd7fcc`, source `8cb2234c6c238495119f57d3d689c43
 
 Godot 4.5.1, Compatibility OpenGL, 1280×720, zh_TW, default text, seed 179. Separate bot output/settings/save directory; camera fixture disables player collision/input while framing. Ambient cars/pedestrians use their actual movement code. Before: #178 with capture helper only; after: final #179 source. No image mocks.
 
-**Validation:** 1012/1012 tests passed in 407.1s; 40 directed walking links, 0 rendered failures; English audit 0. Targeted scenery tests 2/2; empty-lot regression 3/3; map-checker regression 9/9. Class cache rebuilt before edits and after art import. i18n 8324/8324 (0 missing), wiki 3925 assets/343 ids, beta 0 hits. Package final result recorded in delivery.json.
+**Validation:** 1012/1012 tests passed in 407.1s; 40 directed walking links, 0 rendered failures; English audit 0. Targeted scenery tests 2/2; empty-lot regression 3/3; map-checker regression 9/9. Class cache rebuilt before edits and after art import. i18n 8324/8324 (0 missing), wiki 3925 assets/343 ids, beta 0 hits. `bash tools/package_release.sh` exit 0; package suite 1012/1012 in 443.6s. Windows ZIP 147.758 MB ≤165 MB; Web PCK 127.227 MB ≤145 MB; exact bytes and SHA256 in [delivery.json](delivery.json).
 
 Before 158 unhandled lots; after 0. 96×96 pixel threshold. Trees/planters alone do not count. Upper facade gaps require complete declared landscaping plus actual props in every sampled segment; bare paving is still inspected below. Coordinates and every intentional retained area: [before](empty-before.json), [after](empty-after.json). This is an authored-map audit, not a claim that an aerial satellite view is fully occupied.
 
