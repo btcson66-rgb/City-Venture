@@ -88,6 +88,7 @@ func test_existing_medical_bill_does_not_trap_waiting_player() -> void:
 func test_genuine_pre_change_waiting_save_continues_without_new_money() -> void:
 	var text := FileAccess.get_file_as_string("res://tests/fixtures/saves/pr182-pre-fun-ch3.json")
 	runner.check(SaveSystem.validate_text(text)["ok"], "genuine pre-change envelope validates")
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(SaveSystem.DIR))
 	runner.check(SaveSystem._atomic_write(SaveSystem._path(19), text), "fixture copied to isolated test slot")
 	runner.check(SaveSystem.load_data(19), "real played old save loads")
 	var cash := Ledger.cash("player")
@@ -98,3 +99,36 @@ func test_genuine_pre_change_waiting_save_continues_without_new_money() -> void:
 	runner.eq(Ledger.cash("player"), cash, "continuation adds no personal money")
 	runner.eq(Ledger.cash(GameState.company_id()), company_cash, "continuation adds no company money")
 	runner.check(Ledger.check_balanced(), "historical transactions remain balanced")
+
+func test_completed_late_shift_survives_render_delay_and_releases_pause() -> void:
+	UIRoot.close_all()
+	Help.auto = false
+	Careers.hire("barista")
+	Clock.advance_to(Clock.at_day_time(1, 17 * 60 + 59))
+	var cash := Ledger.cash("player")
+	var expected := Careers.pay_for("barista", 1.0, 2)
+	Clock.world_active = true
+	# Start the actual settlement, then simulate a delayed render frame while the fade awaits.
+	UIRoot._finish_shift("barista", {"score":1.0})
+	Clock._process(10.0)
+	runner.eq(Clock.minute_of_day(), 17 * 60 + 59, "fade cannot cross the admitted shift cutoff")
+	await runner.get_tree().create_timer(1.0).timeout
+	runner.eq(Careers.shifts("barista"), 1, "completed real shift counts")
+	runner.eq(Ledger.cash("player") - cash, expected, "exact two-hour wages, no latency compensation money")
+	runner.check(not "work_payout" in Clock.pause_reasons(), "settlement releases its pause")
+	runner.check(Ledger.check_balanced(), "late completed work is balanced")
+	Clock.world_active = false
+	UIRoot.close_all()
+
+func test_stale_workplace_card_does_not_start_unpaid_work() -> void:
+	UIRoot.close_all()
+	Help.auto = false
+	Careers.hire("barista")
+	Clock.advance_to(Clock.at_day_time(1, 19 * 60))
+	var cash := Ledger.cash("player")
+	UIRoot.work_shift_flow("barista")
+	await runner.get_tree().process_frame
+	runner.check(UIRoot.top_modal() is JobModal, "stale card refreshes instead of playing unpaid work")
+	runner.eq(Careers.shifts("barista"), 0, "no fabricated completion")
+	runner.eq(Ledger.cash("player"), cash, "no unplayed wages")
+	UIRoot.close_all()

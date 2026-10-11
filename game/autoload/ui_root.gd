@@ -216,6 +216,12 @@ func _unhandled_input(event: InputEvent) -> void:
 ## Part-time job shift: fade out, four hours pass, wages paid, fade in with what happened.
 ## A shift is played: the job's minigame opens, and its score sets the pay (see Careers.work_shift).
 func work_shift_flow(job_id: String) -> void:
+	# A live workplace card may have crossed closing time before its button was pressed.
+	var blocked := Careers.shift_block(job_id)
+	if blocked != "":
+		toast(I18n.t(blocked), "info", "clock")
+		open_modal(JobModal.new(job_id))
+		return
 	var g := MiniGames.for_job(job_id)
 	if g == null:
 		_finish_shift(job_id, {"score": 1.0})
@@ -228,9 +234,12 @@ func work_shift_flow(job_id: String) -> void:
 
 
 func _finish_shift(job_id: String, res: Dictionary) -> void:
+	# The played work has finished; rendering latency must not invalidate its hours.
+	Clock.push_pause("work_payout")
 	await fade_out(0.35)
 	var r := Careers.work_shift(job_id, float(res.get("score", 1.0)), float(res.get("tips", 0.0)))
 	await fade_in(0.35)
+	Clock.pop_pause("work_payout")
 	if not r["ok"]:
 		toast(I18n.t(str(r["error"])), "warn", "lock")
 		return
