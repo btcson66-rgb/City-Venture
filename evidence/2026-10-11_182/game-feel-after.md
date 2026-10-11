@@ -9,7 +9,7 @@ Godot 4.5.1，實際 native 渲染。完整新遊戲路線另列結果；本檔�
 | 原則 | 結果、证據與限制 |
 |---|---|
 | F1 | PARTIAL：保留既有安全練習、重播與跳過；bot 固定品質未驗證首次手動學習。 |
-| F2 | PASS（範圍內）：接續班是可選按鈕；沒有強制接班、倒數或新增工資速度獎勵。 |
+| F2 | PARTIAL（全體）；PASS（新增範圍）：接續班是可選按鈕；沒有強制接班、倒數或新增工資速度獎勵。 |
 | F3 | PASS（範圍內）：等待按鈕只在目前目標有真實未來事件時顯示；不列未解鎖產業。 |
 | F4 | PARTIAL：HUD 保留目前一個主線；工作頁仍有完整階梯與原有次要操作。 |
 | F5 | PARTIAL：既有助理仍可處理重複雜事；未聘用就代辦是 #181 的待修問題。 |
@@ -26,3 +26,9 @@ Godot 4.5.1，實際 native 渲染。完整新遊戲路線另列結果；本檔�
 已知限制：既有 SHOPLANE/beta 和少數品牌英文被 audit 列出；新增字串的 zh_TW missing 0。沒有測量生理多巴胺、留存或宣稱每位玩家必然感到好玩。全系統 F1/F4/F6 與人類盲測仍須獨立驗證。
 
 最後 focused 舊檔＋兩班升遷：0 失敗，41.2 秒；慶祝文字移到寄件提示下方，可清楚閱讀。feedback-english-audit.json 的三個項目均為既有公司品牌名稱。全章巡覽使用相同經濟／進度邏輯；最後這個文字位置與 focused QA 入口調整另由此跑程覆蓋。
+
+最終新遊戲 rendered walkthrough：1–24 章＋全部產業、步行連接、個人系統與存讀檔，0 failures / 5969.4 秒 / 356 張截圖。前30分鐘59個進展時刻，最長空窗263.3秒。
+
+後續 #180 真實 Web 診斷發現既有職場卡片在很晚到店時可能過時，結算時因不足營業時數沒有薪資；隔日可重試。已修正：開班重查真實資格，結算淡出期間以 work_payout 暫停背景時鐘；合法兩小時工資不會因渲染延遲消失，且不發補償金。營業時段仍保留，故全體 F2 為 PARTIAL。
+
+2026-10-12 settlement fix: 10/10 focused fun-loop tests and 1018/1018 whole-suite tests in509.7s. The earlier complete tour passed before this final settlement fix; the new fixed-source full tour is RUNNING, not yet acceptance. Its first30-minute timeline will replace the old table only after actual completion.
