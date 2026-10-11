@@ -31,4 +31,7 @@ Godot 4.5.1，實際 native 渲染。完整新遊戲路線另列結果；本檔�
 
 後續 #180 真實 Web 診斷發現既有職場卡片在很晚到店時可能過時，結算時因不足營業時數沒有薪資；隔日可重試。已修正：開班重查真實資格，結算淡出期間以 work_payout 暫停背景時鐘；合法兩小時工資不會因渲染延遲消失，且不發補償金。營業時段仍保留，故全體 F2 為 PARTIAL。
 
-2026-10-12 settlement fix: 10/10 focused fun-loop tests and 1018/1018 whole-suite tests in509.7s. The earlier complete tour passed before this final settlement fix; the new fixed-source full tour is RUNNING, not yet acceptance. Its first30-minute timeline will replace the old table only after actual completion.
+
+2026-10-12 final acceptance: Final-source rendered walkthrough:0 failures, 7206.9 real seconds, 361 screenshots, 2957 steps. New-game chapters1–24, industry/adjacency/personal/save coverage; see full-result.json and full-walkthrough-log.txt. Bot proxy, not human delight or physical-device acceptance.
+
+最終完整驗證：完整新遊戲第1–24章＋產業、步行鄰接、個人生活與存读檔：**0 failures，7206.9秒，361張截圖**。full-result.json與full-walkthrough-log.txt為最終來源結果。
