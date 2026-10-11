@@ -11,6 +11,10 @@ var app := "home"
 var notification_filter := "all"
 var displayed_minute := -1
 var content_width := 132.0
+var chrome: HBoxContainer
+var selected_notification := ""
+var list_scroll := 0
+var refresh_queued := false
 
 
 func _ready() -> void:
@@ -36,35 +40,29 @@ func _ready() -> void:
 	frame.texture = Art.tex("ui/phone_frame")
 	frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	holder.add_child(frame)
-	content = UIK.vbox(3)
+	chrome = UIK.hbox(4)
+	chrome.name = "PhoneChrome"
+	screen.add_child(chrome)
+	chrome.minimum_size_changed.connect(_layout_content)
+	content = UIK.vbox(6)
 	content.size = screen.size
 	content.custom_minimum_size = Vector2(132, 0)
 	var sc := UIK.scroll(content, Vector2(132, 214))
 	sc.size = Vector2(132, 214)
+	sc.custom_minimum_size = Vector2.ZERO
 	screen.add_child(sc)
+	get_viewport().size_changed.connect(func():
+		if is_open:_fit_phone())
+	EventBus.messages_changed.connect(_messages_changed)
+	Clock.minute_tick.connect(_relative_times)
 
 
 func open() -> void:
 	is_open = true
 	visible = true
+	_fit_phone()
 	var holder := get_child(0) as Control
 	var available := get_viewport_rect().size
-	var touch := InputAccess.touch_mode
-	holder.size = Vector2(minf(380, available.x - 16), minf(560, available.y - 16)) if touch else Vector2(150, 250)
-	holder.position.x = maxf(8.0, available.x - holder.size.x - 12.0)
-	var frame_scale := holder.size / Vector2(150, 250)
-	screen.position = Vector2(9, 18) * frame_scale
-	screen.size = Vector2(132, 214) * frame_scale
-	content_width = screen.size.x - (14.0 if touch else 0.0)
-	frame.scale = holder.size / Vector2(150, 250)
-	var background := holder.get_child(0) as ColorRect
-	background.position = Vector2(7, 16) * frame_scale
-	background.size = Vector2(136, 218) * frame_scale
-	content.custom_minimum_size.x = content_width
-	content.size.x = content_width
-	var scroll := screen.get_child(0) as ScrollContainer
-	scroll.custom_minimum_size = screen.size
-	scroll.size = screen.size
 	app = "home"
 	_player_pose("phone")
 	GameState.set_flag("phone_opened")
@@ -72,6 +70,40 @@ func open() -> void:
 	var h: Control = get_child(0)
 	h.position.y = get_viewport_rect().size.y
 	create_tween().tween_property(h, "position:y", maxf(8.0, minf(56.0, available.y - holder.size.y - 8)), 0.18)
+
+
+func _scroll() -> ScrollContainer:return content.get_parent() as ScrollContainer
+
+func _fit_phone() -> void:
+	var holder := get_child(0) as Control
+	var available := get_viewport_rect().size
+	var touch := InputAccess.touch_mode
+	holder.size = Vector2(minf(620, available.x - 16), available.y - 16) if touch else Vector2(260, 330).min(available - Vector2(16, 16))
+	holder.position.x = maxf(8.0, available.x - holder.size.x - 12.0)
+	holder.position.y = maxf(8.0, minf(56.0, available.y - holder.size.y - 8))
+	var frame_scale := holder.size / Vector2(150, 250)
+	screen.position = Vector2(9, 18) * frame_scale
+	screen.size = Vector2(132, 214) * frame_scale
+	content_width = screen.size.x - 14.0
+	frame.scale = holder.size / Vector2(150, 250)
+	var background := holder.get_child(0) as ColorRect
+	background.position = Vector2(7, 16) * frame_scale
+	background.size = Vector2(136, 218) * frame_scale
+	content.custom_minimum_size.x = content_width
+	content.size.x = content_width
+	var scroll := _scroll()
+	scroll.custom_minimum_size = Vector2.ZERO
+	_layout_content()
+
+func _layout_content() -> void:
+	if not is_instance_valid(chrome) or not is_instance_valid(content):return
+	var height := maxf(44 if InputAccess.touch_mode else 24, chrome.get_combined_minimum_size().y)
+	chrome.size = Vector2(screen.size.x, height)
+	var scroll := _scroll()
+	scroll.position = Vector2(0, height + 4)
+	scroll.size = Vector2(screen.size.x, maxf(40, screen.size.y - height - 4))
+	content.custom_minimum_size.x = maxf(40, content_width)
+
 
 
 func close() -> void:
@@ -90,7 +122,9 @@ func _player_pose(p: String) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if is_open and (event.is_action_pressed("pause") or event.is_action_pressed("cancel")):
 		get_viewport().set_input_as_handled()
-		if app == "home":
+		if app == "message_detail":
+			_notifications_back()
+		elif app == "home":
 			close()
 		else:
 			_go("home")
@@ -98,35 +132,44 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _go(a: String) -> void:
 	app = a
+	selected_notification = ""
+	_scroll().scroll_vertical = 0
 	_render()
 
 
 func _header(t: String, back := true) -> void:
-	var h := UIK.hbox(3)
+	var h := UIK.hbox(4)
+	h.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	if back:
-		var b := UIK.button("‹", _go.bind("home"))
-		b.custom_minimum_size = Vector2(24, 24)
-		h.add_child(b)
-	h.add_child(UIK.title(t, 10))
-	content.add_child(h)
-	if app == "messages":
-		var tools := UIK.hbox(3)
-		tools.add_child(UIK.tip("notifications"))
-		var help := UIK.button("?", func(): Help.open("phone_messages"))
+		var button := UIK.button("‹", _notifications_back if app == "message_detail" else _go.bind("home"))
+		button.name = "NotificationsBack" if app == "message_detail" else "PhoneHomeBack"
+		button.tooltip_text = I18n.t("Back to notifications") if app == "message_detail" else I18n.t("Back")
+		button.custom_minimum_size = Vector2(24, 24)
+		h.add_child(button)
+	var title := UIK.title(t, 10)
+	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	title.clip_text = true
+	title.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	h.add_child(title)
+	if app in ["messages", "message_detail"]:
+		var help := UIK.button("?", func():Help.open("phone_messages"))
 		help.name = "PhoneMessagesHelp"
 		help.custom_minimum_size = Vector2(24, 24)
-		tools.add_child(help)
-		content.add_child(tools)
-
+		h.add_child(help)
+	chrome.add_child(h)
 
 
 func _render() -> void:
+	displayed_minute = Clock.now()
 	UIK.clear(content)
+	UIK.clear(chrome)
 	match app:
 		"home":
 			_home()
 		"messages":
 			_messages()
+		"message_detail":
+			_notification_detail()
 		"bank":
 			_bank()
 		"tasks":
@@ -144,6 +187,12 @@ func _render() -> void:
 			_news()
 		"save":
 			_save()
+	var close_button := UIK.button("×", close)
+	close_button.name = "PhoneClose"
+	close_button.tooltip_text = I18n.t("Close")
+	close_button.custom_minimum_size = Vector2(24, 24)
+	chrome.add_child(close_button)
+	_layout_content.call_deferred()
 
 
 func _home() -> void:
@@ -250,57 +299,184 @@ func _opportunities() -> void:
 		content.add_child(b)
 
 
+## Daily merged orders change the row without replaying arrival sounds for every order.
+func _messages_changed() -> void:
+	if not is_open or app not in ["messages", "message_detail"] or refresh_queued:return
+	refresh_queued = true
+	_refresh_messages.call_deferred()
+
+func _refresh_messages() -> void:
+	refresh_queued = false
+	if not is_open:return
+	if app == "messages":
+		list_scroll = _scroll().scroll_vertical
+		_render()
+		_restore_list_scroll.call_deferred()
+	elif app == "message_detail":
+		var message := PhoneMessages.read(selected_notification)
+		var label := content.find_child("NotificationFullText_" + selected_notification, true, false) as Label
+		if label != null:label.text = I18n.t(str(message.get("text", "")))
+
+func _relative_times(t: int) -> void:
+	if not is_open or app != "messages":return
+	if Clock.day_index_at(t) != Clock.day_index_at(displayed_minute):
+		_messages_changed()
+		return
+	for message in GameState.data.get("messages", []):
+		var label := content.find_child("NotificationTime_" + str(message.get("id", "")), true, false) as Label
+		if label != null:label.text = PhoneMessages.relative_time(int(message.get("t", 0)))
+	displayed_minute = t
+
 func _set_filter(value: String) -> void:
 	notification_filter = value
+	list_scroll = 0
+	_scroll().scroll_vertical = 0
 	_render()
+
+
+## Every notification has a detail page, including information with no Go destination.
+func open_notification(id: String) -> void:
+	list_scroll = _scroll().scroll_vertical
+	selected_notification = id
+	PhoneMessages.read(id)
+	app = "message_detail"
+	_scroll().scroll_vertical = 0
+	_render()
+	UIRoot.hud.refresh()
+
+
+func _notifications_back() -> void:
+	selected_notification = ""
+	app = "messages"
+	_render()
+	_restore_list_scroll.call_deferred()
+
+
+func _restore_list_scroll() -> void:
+	await get_tree().process_frame
+	if app == "messages":_scroll().scroll_vertical = list_scroll
+
+
+func _avatar(message: Dictionary, extent := 32.0) -> PortraitView:
+	var avatar := PortraitView.new()
+	avatar.custom_minimum_size = Vector2(extent, extent)
+	avatar.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	avatar.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	var sender := str(message.get("from", ""))
+	var person := DataDB.npc("maya" if sender == "assistant" else sender)
+	if not person.is_empty() and person.has("appearance"):
+		var tints := {}
+		for key in person.get("outfit_tints", {}):tints[key] = Color(person["outfit_tints"][key])
+		avatar.setup_character(person["appearance"], person.get("outfit", "casual_tee"), tints, "maya" if sender == "assistant" else sender)
+	else:avatar.setup_icon(str(message.get("icon", "mail")))
+	UIK.ignore_mouse(avatar)
+	return avatar
+
 
 func _messages() -> void:
 	_header(I18n.t("Notifications"))
 	GameState.set_flag("notifications_read")
-	var filters := GridContainer.new()
-	filters.columns = 2
+	var filters := HFlowContainer.new()
+	filters.add_theme_constant_override("h_separation", 4)
+	filters.add_theme_constant_override("v_separation", 4)
 	for option in [["all", "All"], ["work", "Work"], ["life", "Life"], ["city", "City"]]:
-		var button := UIK.button(I18n.t(option[1]), _set_filter.bind(option[0]), "tab_active" if notification_filter == option[0] else "normal")
+		var active: bool = notification_filter == option[0]
+		var button := UIK.button(I18n.t(option[1]), _set_filter.bind(option[0]))
 		button.name = "NotificationFilter_" + option[0]
 		button.custom_minimum_size.y = 24
+		button.add_theme_stylebox_override("normal", UIK.flat(Art.C_BLUE_DARK if active else Art.C_NAVY_700, Art.C_SKY if active else Art.C_NAVY_500, 1, 12))
+		button.add_theme_stylebox_override("hover", UIK.flat(Art.C_NAVY_500, Art.C_SKY, 1, 12))
+		button.add_theme_stylebox_override("pressed", UIK.flat(Art.C_BLUE_DARK, Art.C_SKY, 1, 12))
 		filters.add_child(button)
 	content.add_child(filters)
-	var all_read := UIK.button(I18n.t("Mark all read"), func():PhoneMessages.read_all();_render())
+	var all_read := UIK.button(I18n.t("Mark all read"), func():PhoneMessages.read_all();_render();UIRoot.hud.refresh())
 	all_read.name = "NotificationsReadAll"
 	all_read.custom_minimum_size.y = 24
 	content.add_child(all_read)
 	PhoneMessages.S()
-	var rows: Array = GameState.data["messages"].duplicate()
-	rows.reverse()
+	var rows: Array = GameState.data["messages"].filter(func(m):return notification_filter == "all" or PhoneMessages.category(m) == notification_filter)
+	rows.sort_custom(func(a, b):return int(a.get("t", 0)) > int(b.get("t", 0)))
+	if rows.is_empty():
+		content.add_child(UIK.icon("mail", 24))
+		content.add_child(UIK.wrap("No news right now. Go enjoy the city!", 8, Art.C_MUTED, 0))
+		return
+	var previous := -1
 	for message in rows:
-		if notification_filter != "all" and PhoneMessages.category(message) != notification_filter:continue
-		var row := UIK.vbox(2)
-		row.name = "Notification_" + str(message["id"])
-		var heading := UIK.hbox(3)
-		heading.add_child(UIK.icon(str(message.get("icon", "mail")), 10))
-		heading.add_child(UIK.label(PhoneMessages.contact_name(str(message["from"])), 7, Art.C_SKY))
-		row.add_child(heading)
-		var line := UIK.label(I18n.t(str(message["text"])).replace("\n", " "), 7, Art.C_WHITE)
-		line.custom_minimum_size.x = 118
-		line.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		line.clip_text = true
-		line.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-		if InputAccess.touch_mode:
-			line.clip_text = false
-			line.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
-			line.custom_minimum_size.x = content_width
-			line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		line.name = "NotificationText_" + str(message["id"])
-		line.tooltip_text = I18n.t(str(message["text"]))
-		row.add_child(line)
-		row.add_child(UIK.label(Clock.fmt_short(int(message["t"])), 6, Art.C_DIM))
-		if PhoneMessages.actionable(message):
-			var go := UIK.button(I18n.t("Go"), PhoneMessages.go.bind(str(message["id"])))
-			go.name = "NotificationGo_" + str(message["id"])
-			go.custom_minimum_size.y = 24
-			row.add_child(go)
-		content.add_child(row)
-		content.add_child(UIK.sep())
+		var day := Clock.day_index_at(maxi(0, int(message.get("t", 0))))
+		if day != previous:
+			content.add_child(UIK.label(PhoneMessages.group_label(int(message.get("t", 0))), 7, Art.C_SKY, true))
+			previous = day
+		content.add_child(_notification_card(message))
+
+
+func _notification_card(message: Dictionary) -> Button:
+	var id := str(message["id"])
+	var card := UIK.button("", open_notification.bind(id))
+	card.name = "Notification_" + id
+	card.tooltip_text = I18n.t("Open message")
+	card.custom_minimum_size = Vector2(0, 58)
+	var unread: bool = not bool(message.get("read", false))
+	card.add_theme_stylebox_override("normal", UIK.flat(Art.C_NAVY_700 if unread else Art.C_NAVY_800, Art.C_NAVY_500, 1, 5))
+	card.add_theme_stylebox_override("hover", UIK.flat(Art.C_NAVY_600, Art.C_SKY, 1, 5))
+	card.add_theme_stylebox_override("pressed", UIK.flat(Art.C_NAVY_500, Art.C_SKY, 1, 5))
+	var margin := MarginContainer.new()
+	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	for side in ["left", "right", "top", "bottom"]:margin.add_theme_constant_override("margin_" + side, 6)
+	card.add_child(margin)
+	var row := UIK.hbox(6)
+	margin.add_child(row)
+	row.add_child(_avatar(message, 48 if InputAccess.touch_mode else 30))
+	var words := UIK.vbox(3)
+	words.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var heading := UIK.hbox(3)
+	var title := UIK.label(I18n.t(str(message.get("title", PhoneMessages.contact_name(str(message.get("from", "")))))), 8, Art.C_WHITE if unread else Art.C_MUTED, true)
+	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	title.clip_text = true
+	title.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	title.name = "NotificationTitle_" + id
+	heading.add_child(title)
+	var time := UIK.label(PhoneMessages.relative_time(int(message.get("t", 0))), 6, Art.C_MUTED)
+	time.name = "NotificationTime_" + id
+	heading.add_child(time)
+	words.add_child(heading)
+	var line := UIK.label(I18n.t(str(message.get("text", ""))).replace("\n", " "), 7, Art.C_WHITE if unread else Art.C_MUTED)
+	line.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	line.clip_text = true
+	line.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	line.name = "NotificationText_" + id
+	words.add_child(line)
+	row.add_child(words)
+	if unread:
+		var dot := UIK.label("●", 6, Art.C_BLUE)
+		dot.name = "NotificationUnread_" + id
+		row.add_child(dot)
+	UIK.ignore_mouse(margin)
+	row.minimum_size_changed.connect(func():card.custom_minimum_size.y = maxf(58, row.get_combined_minimum_size().y + 12))
+	return card
+
+
+func _notification_detail() -> void:
+	_header(I18n.t("Message"))
+	var message := PhoneMessages.get_message(selected_notification)
+	if message.is_empty():
+		content.add_child(UIK.wrap("This message is no longer here. Go back to your notifications.", 8, Art.C_MUTED, 0))
+		return
+	var sender := UIK.hbox(6)
+	sender.add_child(_avatar(message, 48))
+	var name := UIK.wrap(PhoneMessages.contact_name(str(message.get("from", ""))), 9, Art.C_SKY, 0)
+	name.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	sender.add_child(name)
+	content.add_child(sender)
+	content.add_child(UIK.wrap(Clock.fmt_datetime(int(message.get("t", 0))), 7, Art.C_MUTED, 0))
+	content.add_child(UIK.sep())
+	var full := UIK.wrap(I18n.t(str(message.get("text", ""))), 9, Art.C_WHITE, 0)
+	full.name = "NotificationFullText_" + selected_notification
+	content.add_child(full)
+	if PhoneMessages.actionable(message):
+		var go := UIK.button(I18n.t("Go"), PhoneMessages.go.bind(selected_notification), "primary")
+		go.name = "NotificationGo_" + selected_notification
+		go.custom_minimum_size.y = 24
+		content.add_child(go)
 
 
 func _bank() -> void:

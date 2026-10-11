@@ -280,7 +280,9 @@ class Flow:
         self.shot('practice_ready')
         self.tap('StartFormalWork')
         self.until(lambda s: s.get('mini', {}).get('phase') == 'play', 'formal work')
-        for _ in range(6):
+        for _ in range(12):
+            if self.state().get('mini', {}).get('phase') == 'results': break
+            assert self.state().get('mini', {}).get('phase') == 'play'
             self.tap('ConfirmOrder')
             want=self.state()['mini']['want']
             for field in ('Size','Drink','Milk','Shots'):
@@ -290,10 +292,12 @@ class Flow:
                         break
                 assert self.state()['mini']['want']['got'][field.lower()] == want[field.lower()]
             self.tap('Serve'); self.tap('Deliver_'+str(int(want['destination']))); self.tap('CleanTable')
+        self.until(lambda s: s.get('mini', {}).get('phase') == 'results', 'formal work complete')
         self.shot('first_job_results')
         self.tap('FinishGame')
         self.until(lambda s: s.get('shifts') == 1 and s.get('cash',0)>cash, 'actual payout')
         self.shot('first_job_paid')
+        if self.state().get('modal') == 'JobModal': self.close_modal('JobModal')
         self.walk_action('open_company_os')
         self.dismiss_help()
         self.until(lambda s: s.get('modal') == 'CompanyOS', 'Company OS')
@@ -315,8 +319,16 @@ class Flow:
         self.tap('Close')
         self.tap('HUD_phone'); self.tap('App_messages')
         self.shot('notifications')
-        destination = next(c['name'] for c in self.controls() if c['name'].startswith('NotificationGo_'))
-        self.tap(destination)
+        message = next(m for m in reversed(self.state()['messages']) if m.get('target', {}).get('kind') == 'map')
+        self.tap('Notification_'+message['id'])
+        detail=self.until(lambda s: s.get('phone_app') == 'message_detail', 'notification full detail')
+        assert detail['notification_detail_text'] == message['text']
+        assert next(m for m in detail['messages'] if m['id']==message['id'])['read']
+        self.shot('notification_detail')
+        self.tap('NotificationsBack')
+        self.until(lambda s: s.get('phone_app') == 'messages', 'return to notifications')
+        self.tap('Notification_'+message['id'])
+        self.tap('NotificationGo_'+message['id'])
         self.dismiss_help()
         self.until(lambda s: s.get('modal') == 'CityMapModal', 'notification destination')
         self.shot('notification_go')

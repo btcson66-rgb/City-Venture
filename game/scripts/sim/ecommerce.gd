@@ -903,7 +903,7 @@ static func _h_order_place(p: Dictionary) -> void:
 	var mkey := Clock.month_key()
 	e["month_gmv"][mkey] = float(e["month_gmv"].get(mkey, 0.0)) + Packing.total(o)
 	GameState.inc_stat("orders_placed")
-	GameState.add_message("shoplane", "Today: 1 new order. Ready when you are.", {"merge":"orders_" + str(o["entity"]), "target":{"kind":"company", "tab":"operations"}})
+	GameState.add_message("shoplane", "Today: 1 new order. Ready when you are.", {"merge":"orders_" + str(o["entity"]), "celebrate":GameState.stat("orders_placed") == 1, "target":{"kind":"company", "tab":"operations"}})
 	EventBus.order_placed.emit(oid)
 	OverseasPartners.fulfil(o)
 	_check_cap()

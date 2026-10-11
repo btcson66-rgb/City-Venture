@@ -22,7 +22,7 @@ msgstr "  （员工折扣）"
 msgid "  of which on hold (<2 days)"
 msgstr "  其中保留中（未满 2 天）"
 
-#: scripts/ui/hud.gd:279
+#: scripts/ui/hud.gd:301
 msgid "  ·  DAY %d"
 msgstr "  ·  第 %d 天"
 
@@ -74,7 +74,7 @@ msgstr "（逾期，罚款 %s）"
 msgid " ltd"
 msgstr " ltd"
 
-#: scripts/ui/hud.gd:290
+#: scripts/ui/hud.gd:312
 msgid " today"
 msgstr " 今日"
 
@@ -250,6 +250,10 @@ msgstr "%d 位司机每个工作日 9:00 起各接一趟外送，并把运费收
 msgid "%d h %d min"
 msgstr "%d 小时 %d 分"
 
+#: scripts/sim/phone_messages.gd:161
+msgid "%d h ago"
+msgstr "%d 小时前"
+
 #: scripts/ui/modals/company_os.gd:1197
 msgid "%d h · %d days · %s"
 msgstr "%d 小时 · %d 天内 · %s"
@@ -269,6 +273,10 @@ msgstr "已达成 %d 个里程碑。到手机的「成就」查看。"
 #: scripts/sim/fmt.gd:46
 msgid "%d min"
 msgstr "%d 分钟"
+
+#: scripts/sim/phone_messages.gd:160
+msgid "%d min ago"
+msgstr "%d 分钟前"
 
 #: scripts/ui/minigames/personal_request_game.gd:25
 msgid "%d min · supplies %s · +%d trust"
@@ -298,11 +306,11 @@ msgstr "再做 %d 班升为%s"
 msgid "%d new delivery runs are posted (Company OS → Logistics)."
 msgstr "有 %d 趟新的外送单上架了（Company OS → 物流）。"
 
-#: scripts/ui/phone_ui.gd:442
+#: scripts/ui/phone_ui.gd:618
 msgid "%d of %d days"
 msgstr "%d／%d 天"
 
-#: scripts/ui/phone_ui.gd:427
+#: scripts/ui/phone_ui.gd:603
 msgid "%d of %d reached"
 msgstr "已达成 %d／%d"
 
@@ -2102,7 +2110,7 @@ msgstr "接下集团委托"
 msgid "Accept it to start the clock."
 msgstr "接单后才开始计时。"
 
-#: scripts/ui/phone_ui.gd:246
+#: scripts/ui/phone_ui.gd:295
 msgid "Accept opportunity"
 msgstr "接受机会"
 
@@ -2234,7 +2242,7 @@ msgstr "照着打正确就好，慢慢来。"
 msgid "Accurate checkout improves conversion during your one-hour shift. Waiting does not lower quality; practice creates no income."
 msgstr "一小时的班里，收对金额就有好表现。不用赶时间，练习也不会产生收入。"
 
-#: scripts/ui/modals/growth_modal.gd:17 scripts/ui/modals/pause_menu.gd:28 scripts/ui/phone_ui.gd:372
+#: scripts/ui/modals/growth_modal.gd:17 scripts/ui/modals/pause_menu.gd:28 scripts/ui/phone_ui.gd:548
 msgid "Achievements"
 msgstr "成就"
 
@@ -2446,7 +2454,7 @@ msgstr "企业结局之后，下一份提案关乎整座城市。没有经营的
 msgid "After-sales service ticket"
 msgstr "售后保养工单"
 
-#: scripts/ui/hud.gd:282
+#: scripts/ui/hud.gd:304
 msgid "Afternoon · Sunny"
 msgstr "下午 · 晴"
 
@@ -2522,7 +2530,7 @@ msgstr "Alex"
 msgid "Alex Chen"
 msgstr "Alex Chen"
 
-#: scripts/ui/phone_ui.gd:262
+#: scripts/ui/phone_ui.gd:382
 msgid "All"
 msgstr "全部"
 
@@ -2538,7 +2546,7 @@ msgstr "所有文件 (*)"
 msgid "All cost rows are in home dollars; the buyer quote is labelled with its own currency."
 msgstr "各项成本都以本国元列示；买方报价另标明使用的货币。"
 
-#: scripts/ui/phone_ui.gd:385
+#: scripts/ui/phone_ui.gd:561
 msgid "All events"
 msgstr "全部事件"
 
@@ -2562,7 +2570,7 @@ msgstr "一切平静。出去走走吧。"
 msgid "All save slots are in use. Choose one for the new game. The old save is moved to a backup folder, not deleted."
 msgstr "存盘字段都满了。选一个给新游戏用，旧存盘会移到备份文件夹，不会删掉。"
 
-#: scripts/ui/phone_ui.gd:396
+#: scripts/ui/phone_ui.gd:572
 msgid "All years"
 msgstr "全部年份"
 
@@ -3110,7 +3118,7 @@ msgstr "安排每天的早班或晚班。同一名员工不能同时在两家店
 msgid "Assigning a worker to one counter removes that same shift from the other counter; an empty shift stays closed unless the owner works."
 msgstr "把员工排到一家店，就会取消另一家店的同时段班次。无人值班时，除非自己顾店，否则不营业。"
 
-#: data/help/help.json data/ui/feature_unlocks.json scripts/ui/modals/settings_modal.gd:5 scripts/ui/phone_ui.gd:165
+#: data/help/help.json data/ui/feature_unlocks.json scripts/ui/modals/settings_modal.gd:5 scripts/ui/phone_ui.gd:214
 msgid "Assistant"
 msgstr "助理"
 
@@ -3526,7 +3534,7 @@ msgstr "跨链桥遭骇：黑客掏空数字美元管道背后的准备金。"
 msgid "BUILD  ·  LIVE  ·  CONNECT  ·  GROW"
 msgstr "创业  ·  生活  ·  链接  ·  成长"
 
-#: autoload/sound.gd:287 scripts/frontend/character_creator.gd:114 scripts/ui/modals/contacts_modal.gd:52
+#: autoload/sound.gd:287 scripts/frontend/character_creator.gd:114 scripts/ui/modals/contacts_modal.gd:52 scripts/ui/phone_ui.gd:146
 msgid "Back"
 msgstr "返回"
 
@@ -3549,6 +3557,10 @@ msgstr "约 %s 回到车场。截止时间：%s。"
 #: scripts/ui/modals/fundraising_modal.gd:139
 msgid "Back to investors"
 msgstr "回到投资人"
+
+#: scripts/ui/phone_ui.gd:146
+msgid "Back to notifications"
+msgstr "回通知列表"
 
 #: scripts/ui/modals/fundraising_modal.gd:365
 msgid "Back to partners"
@@ -3610,7 +3622,7 @@ msgstr "余额"
 msgid "Balanced negotiation"
 msgstr "中性议价"
 
-#: data/buildings/nexus_bank.json data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:162
+#: data/buildings/nexus_bank.json data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:211
 msgid "Bank"
 msgstr "银行"
 
@@ -5170,6 +5182,10 @@ msgstr "租车与展示中心"
 msgid "Card fees"
 msgstr "刷卡手续费"
 
+#: data/help/glossary.json
+msgid "Cards show a short preview. Tap to read the full original message; Go opens the relevant formal screen or city map."
+msgstr "卡片显示摘要，点开就能阅读完整原文；前往会打开正式操作画面或城市地图。"
+
 #: data/economy/media.json
 msgid "Care for every home"
 msgstr "照顾每一个家"
@@ -5234,7 +5250,7 @@ msgstr "自己拿去 PostPoint"
 msgid "Carry them to PostPoint yourself (cheaper, costs your time)"
 msgstr "自己拿去 PostPoint（比较便宜，但花你的时间）"
 
-#: scripts/ui/hud.gd:318
+#: scripts/ui/hud.gd:340
 msgid "Carrying %d parcel%s"
 msgstr "携带 %d 件包裹%s"
 
@@ -6350,7 +6366,7 @@ msgstr "选了第一门生意：电商。"
 msgid "Chris Walsh"
 msgstr "Chris Walsh"
 
-#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:163 scripts/ui/phone_ui.gd:262
+#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:212 scripts/ui/phone_ui.gd:382
 msgid "City"
 msgstr "城市"
 
@@ -6366,7 +6382,7 @@ msgstr "全市电动车普及率 %s（每年 +%s）· 营运中 %d／%d 站 · �
 msgid "City Fleet Refresh"
 msgstr "市府车队更新"
 
-#: data/ui/feature_unlocks.json scripts/ui/modals/city_guide_modal.gd:7 scripts/ui/phone_ui.gd:164
+#: data/ui/feature_unlocks.json scripts/ui/modals/city_guide_modal.gd:7 scripts/ui/phone_ui.gd:213
 msgid "City Guide"
 msgstr "城市指南"
 
@@ -6442,7 +6458,7 @@ msgstr "城市清单只显示可以使用的生意与场所；主要按钮会带
 msgid "City map"
 msgstr "城市地图"
 
-#: data/ui/feature_unlocks.json scripts/ui/market_view.gd:33 scripts/ui/phone_ui.gd:164 scripts/ui/phone_ui.gd:463
+#: data/ui/feature_unlocks.json scripts/ui/market_view.gd:33 scripts/ui/phone_ui.gd:213 scripts/ui/phone_ui.gd:639
 msgid "City news"
 msgstr "城市新闻"
 
@@ -6642,7 +6658,7 @@ msgstr "清算危机"
 msgid "Click! %d%% (%s)"
 msgstr "喀嚓！%d%%（%s）"
 
-#: data/npcs/client.json scripts/sim/phone_messages.gd:205
+#: data/npcs/client.json scripts/sim/phone_messages.gd:235
 msgid "Client"
 msgstr "客户"
 
@@ -7074,7 +7090,7 @@ msgstr "通勤族"
 msgid "Compact"
 msgstr "小型车"
 
-#: scripts/ui/modals/bank_modal.gd:82 scripts/ui/phone_ui.gd:385
+#: scripts/ui/modals/bank_modal.gd:82 scripts/ui/phone_ui.gd:561
 msgid "Company"
 msgstr "公司"
 
@@ -7578,7 +7594,7 @@ msgstr "通过视频或出差，联系 Lumina 的 Omar"
 msgid "Contact Omar with a live registered company first."
 msgstr "请先成立仍在营运的公司，再联系 Omar。"
 
-#: scripts/ui/modals/company_os.gd:959 scripts/ui/modals/contacts_modal.gd:6 scripts/ui/phone_ui.gd:385
+#: scripts/ui/modals/company_os.gd:959 scripts/ui/modals/contacts_modal.gd:6 scripts/ui/phone_ui.gd:561
 msgid "Contacts"
 msgstr "联系人"
 
@@ -8018,7 +8034,7 @@ msgstr "Crestline 的秋季灯具系列。有一层架子还空着。"
 msgid "Crestline's offer is in Company OS → Contracts: accept, counter or decline"
 msgstr "Crestline 的报价在 Company OS →「合约」：接受、还价或拒绝"
 
-#: scripts/ui/phone_ui.gd:385
+#: scripts/ui/phone_ui.gd:561
 msgid "Crises"
 msgstr "危机"
 
@@ -9550,6 +9566,10 @@ msgstr "每个阶段都用真实的车与客人：库存车可抵押贷款，租
 msgid "Earbuds, lamps, bottles, phone stands. MOQs are MOQs, don't haggle me on those."
 msgstr "耳机、台灯、水瓶、手机架。最低订购量就是最低订购量，这个别跟我杀。"
 
+#: scripts/sim/phone_messages.gd:149
+msgid "Earlier"
+msgstr "更早"
+
 #: scripts/ui/modals/fundraising_modal.gd:381
 msgid "Earlier agreement: %s. Delivered %d, paid %d, shared %s."
 msgstr "先前的合约：%s。已交付 %d、已付款 %d、已分润 %s。"
@@ -9890,7 +9910,7 @@ msgstr "终止租约"
 msgid "Energy"
 msgstr "能源"
 
-#: scripts/ui/hud.gd:277
+#: scripts/ui/hud.gd:299
 msgid "Energy %d%% · stress %d%%"
 msgstr "体力 %d%%・压力 %d%%"
 
@@ -10062,7 +10082,7 @@ msgstr "预估销售"
 msgid "Estimated unbooked sales of about %s %s are not hedgeable until they are booked."
 msgstr "约 %s %s 的预估未入帐销售，入帐前无法避险。"
 
-#: scripts/ui/hud.gd:282
+#: scripts/ui/hud.gd:304
 msgid "Evening"
 msgstr "傍晚"
 
@@ -11746,7 +11766,7 @@ msgstr "轻擦"
 msgid "Global Consolidation"
 msgstr "全球整并"
 
-#: scripts/ui/phone_ui.gd:298
+#: scripts/ui/phone_ui.gd:476
 msgid "Go"
 msgstr "前往"
 
@@ -12458,7 +12478,7 @@ msgstr "健康保险：%s／30 天"
 msgid "Health policy expired: add cash and buy a new policy."
 msgstr "健康保单已到期：补足现金后重新投保。"
 
-#: scripts/ui/hud.gd:351
+#: scripts/ui/hud.gd:373
 msgid "Health · %d"
 msgstr "健康 · %d"
 
@@ -13330,7 +13350,7 @@ msgstr "清算危机（第 5 年）期间，汇到国外的钱要好几天才到
 msgid "In the workshop"
 msgstr "整备中"
 
-#: scripts/ui/modals/company_os.gd:619 scripts/ui/phone_ui.gd:353
+#: scripts/ui/modals/company_os.gd:619 scripts/ui/phone_ui.gd:529
 msgid "In transit"
 msgstr "运送中"
 
@@ -13446,7 +13466,7 @@ msgstr "承接贷款：%s"
 msgid "Inherited property — %s"
 msgstr "继承房产 — %s"
 
-#: scripts/ui/hud.gd:353 scripts/ui/modals/traffic_modal.gd:35
+#: scripts/ui/hud.gd:375 scripts/ui/modals/traffic_modal.gd:35
 msgid "Injury: %s"
 msgstr "伤势：%s"
 
@@ -14102,7 +14122,7 @@ msgstr "工单收款：%s"
 msgid "Job penalties"
 msgstr "工单违约金"
 
-#: scripts/sim/phone_messages.gd:209
+#: scripts/sim/phone_messages.gd:239
 msgid "Jobs Board"
 msgstr "征才公告"
 
@@ -14209,6 +14229,10 @@ msgstr "June"
 #: data/dialogue/ana_register.json data/dialogue/nina_first.json
 msgid "Just looking."
 msgstr "只是看看。"
+
+#: scripts/sim/phone_messages.gd:159
+msgid "Just now"
+msgstr "刚刚"
 
 #: data/dialogue/marcus_loan.json
 msgid "Just saying hi."
@@ -14642,7 +14666,7 @@ msgstr "贩售中"
 msgid "Labour cost ratio"
 msgstr "人事成本比率"
 
-#: data/milestones.json scripts/sim/phone_messages.gd:207
+#: data/milestones.json scripts/sim/phone_messages.gd:237
 msgid "Landlord"
 msgstr "房东"
 
@@ -15030,7 +15054,7 @@ msgstr "LeaseAster"
 msgid "Leased %s for %s/month."
 msgstr "租下了%s，月租 %s。"
 
-#: data/help/calm_screens.json data/ui/feature_unlocks.json scripts/ui/modals/lease_end_modal.gd:14 scripts/ui/phone_ui.gd:164
+#: data/help/calm_screens.json data/ui/feature_unlocks.json scripts/ui/modals/lease_end_modal.gd:14 scripts/ui/phone_ui.gd:213
 msgid "Leases"
 msgstr "租约"
 
@@ -15258,11 +15282,11 @@ msgstr "执照已续期到 %s。"
 msgid "Licensing Officer"
 msgstr "执照承办员"
 
-#: scripts/ui/phone_ui.gd:262 scripts/ui/phone_ui.gd:385
+#: scripts/ui/phone_ui.gd:382 scripts/ui/phone_ui.gd:561
 msgid "Life"
 msgstr "人生"
 
-#: scripts/ui/phone_ui.gd:369
+#: scripts/ui/phone_ui.gd:545
 msgid "Life Timeline"
 msgstr "人生纪录"
 
@@ -15946,7 +15970,7 @@ msgstr "主要成本"
 msgid "Main freight"
 msgstr "主运费"
 
-#: scripts/ui/modals/growth_modal.gd:64 scripts/ui/phone_ui.gd:423
+#: scripts/ui/modals/growth_modal.gd:64 scripts/ui/phone_ui.gd:599
 msgid "Main-story achievements"
 msgstr "主线成就"
 
@@ -16058,7 +16082,7 @@ msgstr "Manufacturing Meridian"
 msgid "Manufacturing Vale"
 msgstr "Manufacturing Vale"
 
-#: scripts/ui/hud.gd:147 scripts/ui/modals/settings_modal.gd:7
+#: scripts/ui/hud.gd:166 scripts/ui/modals/settings_modal.gd:7
 msgid "Map"
 msgstr "地图"
 
@@ -16210,7 +16234,7 @@ msgstr "毛利维持，但充电的车主变少。"
 msgid "Margins shrink while the tariff eases over two months."
 msgstr "电价在两个月内逐步回落，期间毛利缩水。"
 
-#: scripts/ui/phone_ui.gd:268
+#: scripts/ui/phone_ui.gd:392
 msgid "Mark all read"
 msgstr "全部标为已读"
 
@@ -16226,7 +16250,7 @@ msgstr "市场"
 msgid "Market competition"
 msgstr "市场竞争"
 
-#: scripts/ui/market_view.gd:8 scripts/ui/phone_ui.gd:464
+#: scripts/ui/market_view.gd:8 scripts/ui/phone_ui.gd:640
 msgid "Market conditions"
 msgstr "市场状况"
 
@@ -16390,7 +16414,7 @@ msgstr "Max"
 msgid "May"
 msgstr "5月"
 
-#: data/npcs/maya.json scripts/sim/phone_messages.gd:203 scripts/ui/modals/assistant_modal.gd:31 scripts/ui/modals/company_os.gd:969
+#: data/npcs/maya.json scripts/sim/phone_messages.gd:233 scripts/ui/modals/assistant_modal.gd:31 scripts/ui/modals/company_os.gd:969
 msgid "Maya"
 msgstr "Maya"
 
@@ -16498,7 +16522,7 @@ msgstr "媒体配置"
 msgid "Media studio"
 msgstr "媒体工作室"
 
-#: scripts/ui/hud.gd:353
+#: scripts/ui/hud.gd:375
 msgid "Medical bill or claim open"
 msgstr "医疗帐款或理赔待处理"
 
@@ -16650,7 +16674,7 @@ msgstr "引路人：%s · %s"
 msgid "Mentored a founder at Nexus Co-work: %s, 1 hour."
 msgstr "在 Nexus Co-work 辅导创办人：%s，花费一小时。"
 
-#: scripts/ui/hud.gd:148 scripts/ui/modals/company_os.gd:1416
+#: scripts/ui/hud.gd:167 scripts/ui/modals/company_os.gd:1416
 msgid "Menu"
 msgstr "菜单"
 
@@ -16701,6 +16725,10 @@ msgstr "Meridian Trail 休旅车"
 #: data/dialogue/mara_quinn_intro.json
 msgid "Meridian and Volt sell steady volume on thin margins. You need a ten-car fleet, a showroom and a deposit, and you must always keep new cars on the floor. Service tickets after the sale are where the dealership earns."
 msgstr "Meridian 与 Volt 靠薄利稳定走量。你需要十辆车队、展示中心和保证金，而且展场必须随时有新车。卖车后的保养工单才是经销商真正赚钱的地方。"
+
+#: scripts/ui/phone_ui.gd:459
+msgid "Message"
+msgstr "消息"
 
 #: data/character/options.json
 msgid "Messy"
@@ -16762,7 +16790,7 @@ msgstr "里程会消耗车况。车况越低，越容易故障；故障会延误
 msgid "Milestone: %s"
 msgstr "里程碑：%s"
 
-#: scripts/ui/phone_ui.gd:385
+#: scripts/ui/phone_ui.gd:561
 msgid "Milestones"
 msgstr "里程碑"
 
@@ -16930,7 +16958,7 @@ msgstr "月结——%s"
 msgid "Month close"
 msgstr "月结"
 
-#: scripts/ui/phone_ui.gd:354
+#: scripts/ui/phone_ui.gd:530
 msgid "Month sales"
 msgstr "本月销售"
 
@@ -17026,7 +17054,7 @@ msgstr "更多合作方式"
 msgid "Moreau"
 msgstr "Moreau"
 
-#: scripts/ui/hud.gd:282
+#: scripts/ui/hud.gd:304
 msgid "Morning · Sunny"
 msgstr "早上 · 晴"
 
@@ -17502,7 +17530,7 @@ msgstr "新款节能货车"
 msgid "New face. Flat white?"
 msgstr "新面孔。来杯小白咖啡？"
 
-#: scripts/sim/feature_gate.gd:69
+#: autoload/sound.gd:305 scripts/sim/feature_gate.gd:69 scripts/ui/hud.gd:226
 msgid "New feature: %s"
 msgstr "新功能：%s"
 
@@ -17750,7 +17778,7 @@ msgstr "利基策略靠品质或品牌广告支撑涨价；规模策略则降价
 msgid "Niche reaches fewer buyers with less price sensitivity; scale trades margin and cash for volume."
 msgstr "利基市场的买家较少，也较不在意价格；规模策略用较薄的毛利与更多现金换取销量。"
 
-#: scripts/ui/hud.gd:282
+#: scripts/ui/hud.gd:304
 msgid "Night"
 msgstr "夜晚"
 
@@ -17978,9 +18006,13 @@ msgstr "不必交代样本数"
 msgid "No new offers. More arrive every morning at 8:00."
 msgstr "没有新案子。每天早上 8:00 会有新的。"
 
-#: scripts/ui/phone_ui.gd:240
+#: scripts/ui/phone_ui.gd:289
 msgid "No new opportunities right now. Check again after your company grows."
 msgstr "目前没有新机会。公司有新进展后，再来看看。"
+
+#: scripts/ui/phone_ui.gd:401
+msgid "No news right now. Go enjoy the city!"
+msgstr "目前没有新消息，去享受城市吧！"
 
 #: scripts/world/actions.gd:201
 msgid "No one's at the till."
@@ -18402,11 +18434,11 @@ msgstr "通知期租金"
 msgid "Notification duration"
 msgstr "通知停留时间"
 
-#: data/help/glossary.json data/help/help.json data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:162
+#: data/help/glossary.json data/help/help.json data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:211
 msgid "Notifications"
 msgstr "通知中心"
 
-#: scripts/ui/phone_ui.gd:347
+#: scripts/ui/phone_ui.gd:523
 msgid "Notifications only.\nManage at a desk: Company OS."
 msgstr "这里只显示通知。\n要管理请到办公桌：Company OS。"
 
@@ -19030,6 +19062,10 @@ msgstr "开立公司国际帐户"
 msgid "Open last month close (%s)"
 msgstr "查看上月结算（%s）"
 
+#: scripts/ui/phone_ui.gd:416
+msgid "Open message"
+msgstr "查看全文"
+
 #: scripts/ui/modals/social_calendar_modal.gd:22
 msgid "Open my wardrobe"
 msgstr "打开我的衣柜"
@@ -19354,7 +19390,7 @@ msgstr "营运方冻结所有跨链桥转帐约一周，追查资金去向。"
 msgid "Operators: 'Most balances will be restored. There is a shortfall.'"
 msgstr "营运方：「大部分余额会回复，但有缺口。」"
 
-#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:164 scripts/ui/phone_ui.gd:233
+#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:213 scripts/ui/phone_ui.gd:282
 msgid "Opportunities"
 msgstr "机会"
 
@@ -19830,7 +19866,7 @@ msgstr "人数"
 msgid "PERMITS & REGISTRATIONS (AURELIA)"
 msgstr "许可与登记（奥瑞莉亚）"
 
-#: scripts/ui/hud.gd:118 scripts/ui/hud.gd:255
+#: scripts/ui/hud.gd:137 scripts/ui/hud.gd:277
 msgid "PERSONAL"
 msgstr "个人"
 
@@ -19934,7 +19970,7 @@ msgstr "已打包订单 %s"
 msgid "Packed well"
 msgstr "打包得很好"
 
-#: scripts/ui/phone_ui.gd:352
+#: scripts/ui/phone_ui.gd:528
 msgid "Packed, not shipped"
 msgstr "已打包未出货"
 
@@ -20482,7 +20518,7 @@ msgstr "许可"
 msgid "Permits & regulations"
 msgstr "许可与法规"
 
-#: scripts/ui/modals/bank_modal.gd:80 scripts/ui/phone_ui.gd:308
+#: scripts/ui/modals/bank_modal.gd:80 scripts/ui/phone_ui.gd:484
 msgid "Personal"
 msgstr "个人"
 
@@ -20506,7 +20542,7 @@ msgstr "个人帐户"
 msgid "Personal assets have real costs"
 msgstr "个人资产也有持有成本"
 
-#: scripts/ui/phone_ui.gd:356
+#: scripts/ui/phone_ui.gd:532
 msgid "Personal cap"
 msgstr "个人上限"
 
@@ -20606,7 +20642,7 @@ msgstr "药局与健康保险"
 msgid "Phased transition"
 msgstr "分阶段转型"
 
-#: scripts/ui/hud.gd:145 scripts/ui/modals/settings_modal.gd:7
+#: scripts/ui/hud.gd:164 scripts/ui/modals/settings_modal.gd:7
 msgid "Phone"
 msgstr "手机"
 
@@ -22098,10 +22134,6 @@ msgstr "查看目前三个目标；达成后会自动补上下一个。"
 msgid "Read the used-van price sheet"
 msgstr "看二手货车价目表"
 
-#: data/help/help.json
-msgid "Read updates and use Go to open the place where a decision belongs. There are no replies or response deadlines."
-msgstr "查看消息，按「前往」就能到相关画面做决定。不需要回复，也没有回复期限。"
-
 #: data/help/glossary.json
 msgid "Read when you like. Only unresolved actions appear in the HUD badge."
 msgstr "有空再看就好，提醒数只计算尚待处理的事。"
@@ -22786,7 +22818,7 @@ msgstr "退件"
 msgid "Reject (click the wrong field first)"
 msgstr "退件（先点出错的字段）"
 
-#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:164
+#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:213
 msgid "Relationships"
 msgstr "人际关系"
 
@@ -22862,7 +22894,7 @@ msgstr "翻修还需 %d 天完工"
 msgid "Rent"
 msgstr "租金"
 
-#: scripts/ui/phone_ui.gd:314
+#: scripts/ui/phone_ui.gd:490
 msgid "Rent $1,250 due the 14th"
 msgstr "房租 $1,250，14 号到期"
 
@@ -23230,7 +23262,7 @@ msgstr "度假村 SPA 与泳池"
 msgid "Resources & Agriculture"
 msgstr "资源与农业"
 
-#: scripts/ui/phone_ui.gd:198
+#: scripts/ui/phone_ui.gd:247
 msgid "Respond"
 msgstr "回复"
 
@@ -24358,7 +24390,7 @@ msgstr "周六"
 msgid "Saturday and Sunday 10:00–18:00 · %s/weekend · reserve at least one day ahead · capacity %d units"
 msgstr "周六、周日 10:00–18:00 · 每周末 %s · 至少提前一天预约 · 最多 %d 件"
 
-#: autoload/save_system.gd:479 data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:164
+#: autoload/save_system.gd:479 data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:213
 msgid "Save"
 msgstr "存盘"
 
@@ -24410,7 +24442,7 @@ msgstr "先备妥购车与首期保险所需的公司现金。"
 msgid "Save exported. Keep this file outside your browser."
 msgstr "存盘已导出。请把文件保存在浏览器以外的地方。"
 
-#: scripts/ui/phone_ui.gd:451
+#: scripts/ui/phone_ui.gd:627
 msgid "Save game"
 msgstr "保存游戏"
 
@@ -24422,7 +24454,7 @@ msgstr "存盘已导入，可以接着玩。"
 msgid "Save local price"
 msgstr "保存当地售价"
 
-#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:452
+#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:628
 msgid "Save now"
 msgstr "立即存盘"
 
@@ -24590,7 +24622,7 @@ msgstr "保存这一局，展开选好的新人生"
 msgid "Save transfer"
 msgstr "存盘导入／导出"
 
-#: scripts/ui/hud.gd:195 scripts/ui/hud.gd:406
+#: scripts/ui/hud.gd:214 scripts/ui/hud.gd:428
 msgid "Saved"
 msgstr "已保存"
 
@@ -24598,7 +24630,7 @@ msgstr "已保存"
 msgid "Saved %s"
 msgstr "存于 %s"
 
-#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:454
+#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:630
 msgid "Saved (slot %d)."
 msgstr "已存盘（字段 %d）。"
 
@@ -25330,7 +25362,7 @@ msgstr "店面租金"
 msgid "Shop roof"
 msgstr "店面屋顶"
 
-#: data/economy/marketplace.json data/npcs/shoplane.json data/ui/feature_unlocks.json scripts/sim/phone_messages.gd:211
+#: data/economy/marketplace.json data/npcs/shoplane.json data/ui/feature_unlocks.json scripts/sim/phone_messages.gd:241
 msgid "ShopLane"
 msgstr "ShopLane"
 
@@ -25350,7 +25382,7 @@ msgstr "ShopLane Global 海外市集"
 msgid "ShopLane Global payout: %s %s"
 msgstr "ShopLane Global 拨款：%s %s"
 
-#: scripts/ui/phone_ui.gd:346
+#: scripts/ui/phone_ui.gd:522
 msgid "ShopLane Seller"
 msgstr "ShopLane 卖家"
 
@@ -25398,7 +25430,7 @@ msgstr "ShopLane 拨款"
 msgid "ShopLane payout received: %s"
 msgstr "收到 ShopLane 拨款：%s"
 
-#: scripts/ui/phone_ui.gd:313
+#: scripts/ui/phone_ui.gd:489
 msgid "ShopLane pending"
 msgstr "ShopLane 待拨款"
 
@@ -25502,7 +25534,7 @@ msgstr "已承租展示中心"
 msgid "Side part"
 msgstr "旁分"
 
-#: data/help/glossary.json scripts/ui/phone_ui.gd:234
+#: data/help/glossary.json scripts/ui/phone_ui.gd:283
 msgid "Side stories"
 msgstr "支线故事"
 
@@ -25670,7 +25702,7 @@ msgstr "略过"
 msgid "Skip this guide"
 msgstr "跳过这段导引"
 
-#: scripts/ui/hud.gd:382 scripts/ui/hud.gd:96
+#: scripts/ui/hud.gd:115 scripts/ui/hud.gd:404
 msgid "Skip to next event"
 msgstr "跳到下一件事"
 
@@ -25962,7 +25994,7 @@ msgstr "Northridge 有人在推荐你的商品。先看新闻、找 Marcus 了�
 msgid "Someone must be behind the counter: hire a Barista (People tab), or work the counter yourself inside the café. Walk-outs and running out of coffee pull the rating down."
 msgstr "吧台一定要有人：雇一位咖啡师（人员分页），或自己到店里站吧台。客人排队排到走掉、或咖啡材料用完，都会拉低评分。"
 
-#: scripts/ui/phone_ui.gd:196
+#: scripts/ui/phone_ui.gd:245
 msgid "Something"
 msgstr "某件事"
 
@@ -26986,6 +27018,10 @@ msgstr "小麦色"
 msgid "Tanaka"
 msgstr "Tanaka"
 
+#: data/help/help.json
+msgid "Tap a notification card to read the full message. Use Back to return to your filter; Go opens the relevant formal screen."
+msgstr "点通知卡片查看完整消息；返回时会保留筛选，前往则打开对应的正式操作画面。"
+
 #: scripts/ui/minigames/pack_game.gd:127
 msgid "Tape seam %d"
 msgstr "贴第 %d 条接缝"
@@ -27018,7 +27054,7 @@ msgstr "税则要符合商品本身；选较低的税率，不会改变商品种
 msgid "Tariff correction penalty %s: %s"
 msgstr "订单 %s 税则更正罚款：%s"
 
-#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:162 scripts/ui/phone_ui.gd:326
+#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:211 scripts/ui/phone_ui.gd:502
 msgid "Tasks"
 msgstr "任务"
 
@@ -28642,7 +28678,7 @@ msgstr "这些设备今天不需要保养。"
 msgid "This furniture style is already installed. Keep it or choose another."
 msgstr "家里已是这个风格；可保留或改选其他家具。"
 
-#: scripts/ui/phone_ui.gd:459
+#: scripts/ui/phone_ui.gd:635
 msgid "This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen."
 msgstr "这场游戏每隔几秒自动存到字段 %d。新游戏会用自己的字段；其他存盘可以在标题画面读取。"
 
@@ -28761,6 +28797,10 @@ msgstr "这个市场已无法继续经营。故事可以继续，但不算售出
 #: scripts/sim/legacy_business.gd:73 scripts/sim/legacy_business.gd:86 scripts/ui/modals/legacy_modal.gd:48
 msgid "This market is no longer available. Review the closure and continue."
 msgstr "目前无法继续经营这个市场。请检讨停业或失效原因，再往下一章走。"
+
+#: scripts/ui/phone_ui.gd:462
+msgid "This message is no longer here. Go back to your notifications."
+msgstr "这则消息已不在列表，请回通知列表继续查看。"
 
 #: scripts/ui/modals/company_os.gd:1655
 msgid "This month"
@@ -29054,7 +29094,7 @@ msgstr "剩余时间"
 msgid "Time to finish"
 msgstr "完成期限"
 
-#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:163 scripts/ui/phone_ui.gd:372
+#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:212 scripts/ui/phone_ui.gd:548
 msgid "Timeline"
 msgstr "人生纪录"
 
@@ -29074,13 +29114,17 @@ msgstr "老旧房间会拉低每则评价的清洁与价值感分数。"
 msgid "To Startup Hub"
 msgstr "前往新创园区"
 
-#: scripts/ui/modals/company_os.gd:619 scripts/ui/phone_ui.gd:351
+#: scripts/ui/modals/company_os.gd:619 scripts/ui/phone_ui.gd:527
 msgid "To pack"
 msgstr "待打包"
 
 #: scripts/ui/minigames/clerk_forms_game.gd:8
 msgid "Tobi Okafor"
 msgstr "Tobi Okafor"
+
+#: scripts/sim/phone_messages.gd:147
+msgid "Today"
+msgstr "今天"
 
 #: scripts/ui/automotive_ui.gd:289
 msgid "Today %d passengers · season factor %.2f · about %.1f rental requests a day at your prices."
@@ -29823,10 +29867,6 @@ msgid "Update listing"
 msgstr "更新上架"
 
 #: data/help/glossary.json
-msgid "Updates stay in the notification center. Go opens the relevant formal screen or city map."
-msgstr "最新消息留在通知中心；按「前往」即可打开相关画面或城市地图。"
-
-#: data/help/glossary.json
 msgid "Upfront payment"
 msgstr "预付款"
 
@@ -29858,7 +29898,7 @@ msgstr "请选择运往本国的 DDP 路线，并先取得代理权、承租保�
 msgid "Use a two-hour overtime slot"
 msgstr "在工厂加班两小时"
 
-#: scripts/ui/hud.gd:45
+#: scripts/ui/hud.gd:64
 msgid "Use crosswalks for safer crossing"
 msgstr "从斑马线过马路比较安全"
 
@@ -29994,7 +30034,7 @@ msgstr "创业大楼"
 msgid "VIP suite upgrade for a critic"
 msgstr "为评论家升等 VIP 套房"
 
-#: scripts/sim/phone_messages.gd:147 scripts/sim/phone_messages.gd:148 scripts/sim/phone_messages.gd:48
+#: scripts/sim/phone_messages.gd:177 scripts/sim/phone_messages.gd:178 scripts/sim/phone_messages.gd:48
 msgid "VISIT-"
 msgstr "VISIT-"
 
@@ -30782,7 +30822,7 @@ msgstr "跟着城市一起转型绿色。"
 msgid "West"
 msgstr "西方"
 
-#: scripts/ui/hud.gd:207 scripts/ui/modals/settings_modal.gd:150
+#: scripts/ui/hud.gd:229 scripts/ui/modals/settings_modal.gd:150
 msgid "What can I do here?"
 msgstr "这里能做什么？"
 
@@ -31014,7 +31054,7 @@ msgstr "拿到市府的绿色企业补助：%s。"
 msgid "Wood desk"
 msgstr "木头桌面"
 
-#: scripts/ui/phone_ui.gd:262 scripts/world/building_info.gd:201
+#: scripts/ui/phone_ui.gd:382 scripts/world/building_info.gd:201
 msgid "Work"
 msgstr "工作"
 
@@ -31106,7 +31146,7 @@ msgstr "厂房屋顶"
 msgid "Workshops"
 msgstr "场工作坊"
 
-#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:169
+#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:218
 msgid "World"
 msgstr "世界"
 
@@ -31142,7 +31182,7 @@ msgstr "嗯。"
 msgid "Yeah. Just looking."
 msgstr "对。先看看。"
 
-#: scripts/ui/phone_ui.gd:396 scripts/ui/phone_ui.gd:405
+#: scripts/ui/phone_ui.gd:572 scripts/ui/phone_ui.gd:581
 msgid "Year %d"
 msgstr "%d 年"
 
@@ -31161,6 +31201,10 @@ msgstr "第 8 年：进口需要进口执照（每年 $450）。登记过的公�
 #: scripts/ui/modals/fundraising_modal.gd:108
 msgid "Yes"
 msgstr "是"
+
+#: scripts/sim/phone_messages.gd:148 scripts/sim/phone_messages.gd:155
+msgid "Yesterday"
+msgstr "昨天"
 
 #: scripts/ui/minigames/auction_game.gd:64
 msgid "You"
@@ -32634,7 +32678,7 @@ msgstr "交件即付款"
 msgid "passenger trips"
 msgstr "乘客趟次"
 
-#: scripts/ui/phone_ui.gd:359
+#: scripts/ui/phone_ui.gd:535
 msgid "paused: cap"
 msgstr "暂停：已达上限"
 
@@ -33114,7 +33158,7 @@ msgstr "→ 公司 $1,000"
 msgid "−100 units"
 msgstr "−100 件"
 
-#: scripts/ui/phone_ui.gd:196
+#: scripts/ui/phone_ui.gd:245
 msgid "◆ %s needs a decision"
 msgstr "◆ %s 需要你做决定"
 
@@ -33122,7 +33166,7 @@ msgstr "◆ %s 需要你做决定"
 msgid "◆ You are here"
 msgstr "◆ 你在这里"
 
-#: scripts/ui/hud.gd:308
+#: scripts/ui/hud.gd:330
 msgid "◆ decision"
 msgstr "◆ 待决定"
 
@@ -33130,11 +33174,11 @@ msgstr "◆ 待决定"
 msgid "◉  Shutter"
 msgstr "◉  快门"
 
-#: scripts/ui/hud.gd:309
+#: scripts/ui/hud.gd:331
 msgid "● %d bill(s) due"
 msgstr "● %d 笔帐单待付"
 
-#: scripts/ui/hud.gd:305
+#: scripts/ui/hud.gd:327
 msgid "● %d new"
 msgstr "● %d 则新消息"
 

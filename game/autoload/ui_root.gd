@@ -156,7 +156,7 @@ func _process(_delta: float) -> void:
 	toast_box.position.x = maxf(8.0, (root.get_viewport_rect().size.x - toast_box.size.x) / 2.0)
 	var n := toast_box.get_child_count()
 	for i in n:
-		(toast_box.get_child(i) as Control).visible = tm == null or i == n - 1
+		(toast_box.get_child(i) as Control).visible = not (phone.is_open and phone.app in ["messages", "message_detail"]) and (tm == null or i == n - 1)
 	var ty := 8.0
 	if tm != null:
 		var th := toast_box.get_combined_minimum_size().y

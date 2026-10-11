@@ -60,7 +60,7 @@ static func offer_if_ready() -> void:
 	if hired() or not eligible() or bool(S().get("offered", false)):return
 	S()["offered"] = true
 	GameState.set_flag("assistant_offered")
-	GameState.add_message("assistant",I18n.t("Nice work on your first parcel! Want a teammate for the boxes and routine chores? I'm Maya. Hire me when you're ready; your first week is included."),{"category":"work","target":{"kind":"assistant"}})
+	GameState.add_message("assistant",I18n.t("Nice work on your first parcel! Want a teammate for the boxes and routine chores? I'm Maya. Hire me when you're ready; your first week is included."),{"category":"work","celebrate":true,"target":{"kind":"assistant"}})
 
 static func hire() -> Dictionary:
 	if hired():return {"ok":false,"error":"Maya is already on your team."}

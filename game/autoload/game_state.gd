@@ -213,6 +213,7 @@ func add_message(from_id: String, text: String, options: Dictionary = {}) -> voi
 		timeline(text, "company")
 		return
 	if PhoneMessages.append(message): EventBus.message_received.emit(from_id, text)
+	EventBus.messages_changed.emit()
 
 
 func unread_messages() -> int:

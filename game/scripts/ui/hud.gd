@@ -37,7 +37,26 @@ var goal_progress: ProgressBar
 var goal_count: Label
 var next_event_button: Button
 var celebration: ProgressCelebration
+var phone_pulse: Tween
 
+
+## Brief feedback on the actual phone button; reduced motion keeps its original geometry.
+func pulse_phone(important := false) -> void:
+	if not visible or not is_instance_valid(phone_btn):return
+	if is_instance_valid(phone_pulse):phone_pulse.kill()
+	phone_pulse = null
+	phone_btn.scale = Vector2.ONE
+	if bool(Preferences.values.get("reduce_motion", false)):return
+	var cfg: Dictionary = Sound.cfg()["notification_feedback"]
+	var extent := float(cfg["important_scale" if important else "normal_scale"])
+	phone_btn.pivot_offset = phone_btn.size / 2
+	phone_pulse = phone_btn.create_tween()
+	phone_pulse.tween_property(phone_btn, "scale", Vector2.ONE * extent, float(cfg["rise_seconds"]))
+	phone_pulse.tween_property(phone_btn, "scale", Vector2.ONE, float(cfg["fall_seconds"])).set_trans(Tween.TRANS_BACK)
+
+func _message_arrived(_from: String, _text: String) -> void:
+	refresh()
+	if not GameState.data.get("messages", []).is_empty():pulse_phone(PhoneMessages.important(GameState.data["messages"].back()))
 
 func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -201,7 +220,10 @@ func _ready() -> void:
 		if visible and Clock.world_active:
 			_refresh_objective_hours()
 			_refresh_safety())
-	EventBus.message_received.connect(func(_a, _b): refresh())
+	EventBus.message_received.connect(_message_arrived)
+	EventBus.messages_changed.connect(refresh)
+	EventBus.notify.connect(func(text, kind, _icon):
+		if kind == "info" and text.begins_with(I18n.t("New feature: %s").get_slice("%s", 0)):pulse_phone(true))
 	welcome = BuildingWelcome.new()
 	add_child(welcome)
 	here_button = _quick_button("info", "What can I do here?", "building_activities", func():

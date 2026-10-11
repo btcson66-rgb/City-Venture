@@ -1,0 +1,36 @@
+   2.3s [Tue, Jun 3 2:00 PM]   click [App_messages] Notifications 1
+   2.8s [Tue, Jun 3 2:00 PM]   ok  duplicate arrival toasts do not cover notification cards
+   2.9s [Tue, Jun 3 2:00 PM]   ok  chapter one continues without replies
+   2.9s [Tue, Jun 3 2:00 PM]   shot 01_notifications_cards_all.png
+   3.1s [Tue, Jun 3 2:00 PM]   ok  Go only appears after reading full detail
+   3.2s [Tue, Jun 3 2:00 PM]   click [NotificationFilter_life] Life
+   3.4s [Tue, Jun 3 2:01 PM]   shot 02_notifications_cards_life.png
+   3.5s [Tue, Jun 3 2:01 PM]   click [Notification_MSG-1]
+   4.0s [Tue, Jun 3 2:02 PM]   shot 03_notification_information_full_detail.png
+   4.1s [Tue, Jun 3 2:02 PM]   ok  informational card opens detail and becomes read
+   4.1s [Tue, Jun 3 2:02 PM]   ok  information needs no forced action
+   4.1s [Tue, Jun 3 2:02 PM]   click [NotificationsBack] ‹
+   4.4s [Tue, Jun 3 2:02 PM]   ok  Back retains selected filter
+   4.4s [Tue, Jun 3 2:02 PM]   click [NotificationFilter_work] Work
+   4.6s [Tue, Jun 3 2:02 PM]   shot 04_notifications_cards_work.png
+   4.6s [Tue, Jun 3 2:02 PM]   click [Notification_MSG-3]
+   5.1s [Tue, Jun 3 2:03 PM]   shot 05_notification_full_appointment_detail.png
+   5.1s [Tue, Jun 3 2:03 PM]   ok  full message retains all appointment dates and directions
+   5.2s [Tue, Jun 3 2:03 PM]   ok  opening reads the exact selected message
+   5.2s [Tue, Jun 3 2:03 PM]   click [PhoneMessagesHelp] ?
+   5.3s [Tue, Jun 3 2:03 PM]   ok  notification help available
+   5.5s [Tue, Jun 3 2:03 PM]   shot 06_notification_help.png
+   5.6s [Tue, Jun 3 2:03 PM]   click [CloseInfo] Got it
+   6.1s [Tue, Jun 3 2:03 PM]   click [NotificationsBack] ‹
+   6.4s [Tue, Jun 3 2:03 PM]   click [NotificationsReadAll] Mark all read
+   6.9s [Tue, Jun 3 2:04 PM]   ok  read-all clears actionable badge
+   7.0s [Tue, Jun 3 2:04 PM]   shot 07_notifications_cards_read.png
+   7.2s [Tue, Jun 3 2:04 PM]   click [Notification_MSG-3]
+   7.6s [Tue, Jun 3 2:05 PM]   click [NotificationGo_MSG-3] Go
+   7.9s [Tue, Jun 3 2:05 PM]   ok  detail Go opens map without confirmation
+   8.0s [Tue, Jun 3 2:05 PM]   shot 08_notification_destination.png
+   8.2s [Tue, Jun 3 2:06 PM]   click [App_messages] Notifications
+   8.5s [Tue, Jun 3 2:06 PM]   shot 09_notifications_friendly_empty.png
+   8.6s [Tue, Jun 3 2:06 PM]   ok  close remains reachable without scrolling
+   8.6s [Tue, Jun 3 2:06 PM]   ok  reading, sorting and navigation keep actual books balanced
+   8.6s [Tue, Jun 3 2:06 PM] BOT FINISHED — 0 failure(s) · 8.6s real

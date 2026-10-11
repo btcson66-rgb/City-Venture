@@ -57,7 +57,7 @@ func test_locked_web_audio_does_not_start_an_empty_layer_tween() -> void:
 	Sound._audio_unlocked = old_unlocked
 	Sound._context_kind = old_context
 	Sound._intensity = old_intensity
-func test_touch_notifications_wrap_without_ellipsis_and_fit_the_painted_screen() -> void:
+func test_touch_notification_summary_and_full_detail_fit_the_painted_screen() -> void:
 	var old_touch := InputAccess.touch_mode
 	InputAccess.touch_mode = true
 	Bank.book_appointment()
@@ -68,9 +68,55 @@ func test_touch_notifications_wrap_without_ellipsis_and_fit_the_painted_screen()
 	var label := UIRoot.phone.find_child("NotificationText_" + str(message["id"]), true, false) as Label
 	runner.check(label != null, "appointment text exists")
 	if label != null:
-		runner.eq(label.text_overrun_behavior, TextServer.OVERRUN_NO_TRIMMING, "wrapping never hides the notification")
-		runner.check(label.get_line_count() > 1 and label.size.y > 0, "real text has multiple rendered lines")
+		runner.eq(label.text_overrun_behavior, TextServer.OVERRUN_TRIM_ELLIPSIS, "card summary stays one line")
 		runner.check(label.size.x <= UIRoot.phone.screen.size.x + 1, "text width %s fits inside screen %s" % [label.size.x, UIRoot.phone.screen.size.x])
+	UIRoot.phone.open_notification(str(message["id"]))
+	for i in 8:await runner.get_tree().process_frame
+	var full := UIRoot.phone.find_child("NotificationFullText_" + str(message["id"]), true, false) as Label
+	runner.check(full != null, "selected message has complete detail")
+	if full != null:
+		runner.eq(full.text, message["text"], "full appointment preserves all text")
+		runner.check(full.get_line_count() > 1 and full.size.x <= UIRoot.phone.screen.size.x + 1, "full text wraps inside painted screen")
 	runner.eq(UIRoot.phone.screen.position, Vector2(9,18) * UIRoot.phone.frame.scale, "frame and content use the same inset")
 	UIRoot.phone.close()
 	InputAccess.touch_mode = old_touch
+
+func test_phone_arrival_reduced_motion_cancels_owned_tween() -> void:
+	var prior: bool = Preferences.values.get("reduce_motion", false)
+	UIRoot.set_hud_visible(true)
+	Preferences.values["reduce_motion"] = false
+	UIRoot.hud.pulse_phone()
+	var first: Tween = UIRoot.hud.phone_pulse
+	UIRoot.hud.pulse_phone(true)
+	runner.check(not first.is_running(), "new arrival replaces prior animation")
+	Preferences.values["reduce_motion"] = true
+	UIRoot.hud.pulse_phone()
+	runner.check(UIRoot.hud.phone_pulse == null, "reduced motion has no animation")
+	runner.eq(UIRoot.hud.phone_btn.scale, Vector2.ONE, "reduced motion restores original size")
+	Preferences.values["reduce_motion"] = prior
+	UIRoot.set_hud_visible(false)
+
+func test_notification_back_keeps_filter_scroll_and_missing_id_recovers() -> void:
+	UIRoot.phone.close()
+	for i in 20:GameState.add_message("maya", "Full informational message %d" % i)
+	var id: String = GameState.data["messages"].back()["id"]
+	var journal: Variant = GameState.data["ledger"].duplicate(true)
+	UIRoot.phone.open()
+	UIRoot.phone._go("messages")
+	UIRoot.phone._set_filter("life")
+	for i in 8:await runner.get_tree().process_frame
+	UIRoot.phone._scroll().scroll_vertical = 100
+	var saved_scroll: int = UIRoot.phone._scroll().scroll_vertical
+	UIRoot.phone.open_notification(id)
+	for i in 4:await runner.get_tree().process_frame
+	runner.check(UIRoot.phone.find_child("NotificationGo_"+id, true, false) == null, "informational detail has no forced action")
+	UIRoot.phone._notifications_back()
+	for i in 8:await runner.get_tree().process_frame
+	runner.eq(UIRoot.phone.notification_filter, "life", "back keeps selected category")
+	runner.eq(UIRoot.phone._scroll().scroll_vertical, saved_scroll, "back restores actual scroll")
+	UIRoot.phone.open_notification("removed-old-id")
+	for i in 4:await runner.get_tree().process_frame
+	runner.check(UIRoot.phone.find_child("NotificationsBack", true, false) != null, "removed message has recovery back")
+	UIRoot.phone._notifications_back()
+	runner.eq(GameState.data["ledger"], journal, "details and recovery never change journal")
+	UIRoot.phone.close()

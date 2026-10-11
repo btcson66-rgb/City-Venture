@@ -1133,6 +1133,8 @@ func _hire_maya_after_manual_shipment() -> void:
 	await bot.shot("maya_first_manual_shipment_offer")
 	var offers: Array = GameState.data["messages"].filter(func(m):return m.get("target", {}).get("kind", "") == "assistant")
 	if not bot.expect(not offers.is_empty(), "real shipment offers named teammate"):return
+	await bot.click_named("Notification_" + str(offers.back()["id"]))
+	await bot.wait(.2)
 	await bot.click_named("NotificationGo_" + str(offers.back()["id"]))
 	await bot.wait(.3)
 	await bot.shot("maya_hiring_profile")

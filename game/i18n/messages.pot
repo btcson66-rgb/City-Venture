@@ -21,7 +21,7 @@ msgstr ""
 msgid "  of which on hold (<2 days)"
 msgstr ""
 
-#: scripts/ui/hud.gd:279
+#: scripts/ui/hud.gd:301
 msgid "  ·  DAY %d"
 msgstr ""
 
@@ -73,7 +73,7 @@ msgstr ""
 msgid " ltd"
 msgstr ""
 
-#: scripts/ui/hud.gd:290
+#: scripts/ui/hud.gd:312
 msgid " today"
 msgstr ""
 
@@ -249,6 +249,10 @@ msgstr ""
 msgid "%d h %d min"
 msgstr ""
 
+#: scripts/sim/phone_messages.gd:161
+msgid "%d h ago"
+msgstr ""
+
 #: scripts/ui/modals/company_os.gd:1197
 msgid "%d h · %d days · %s"
 msgstr ""
@@ -267,6 +271,10 @@ msgstr ""
 
 #: scripts/sim/fmt.gd:46
 msgid "%d min"
+msgstr ""
+
+#: scripts/sim/phone_messages.gd:160
+msgid "%d min ago"
 msgstr ""
 
 #: scripts/ui/minigames/personal_request_game.gd:25
@@ -297,11 +305,11 @@ msgstr ""
 msgid "%d new delivery runs are posted (Company OS → Logistics)."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:442
+#: scripts/ui/phone_ui.gd:618
 msgid "%d of %d days"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:427
+#: scripts/ui/phone_ui.gd:603
 msgid "%d of %d reached"
 msgstr ""
 
@@ -2101,7 +2109,7 @@ msgstr ""
 msgid "Accept it to start the clock."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:246
+#: scripts/ui/phone_ui.gd:295
 msgid "Accept opportunity"
 msgstr ""
 
@@ -2233,7 +2241,7 @@ msgstr ""
 msgid "Accurate checkout improves conversion during your one-hour shift. Waiting does not lower quality; practice creates no income."
 msgstr ""
 
-#: scripts/ui/modals/growth_modal.gd:17 scripts/ui/modals/pause_menu.gd:28 scripts/ui/phone_ui.gd:372
+#: scripts/ui/modals/growth_modal.gd:17 scripts/ui/modals/pause_menu.gd:28 scripts/ui/phone_ui.gd:548
 msgid "Achievements"
 msgstr ""
 
@@ -2445,7 +2453,7 @@ msgstr ""
 msgid "After-sales service ticket"
 msgstr ""
 
-#: scripts/ui/hud.gd:282
+#: scripts/ui/hud.gd:304
 msgid "Afternoon · Sunny"
 msgstr ""
 
@@ -2521,7 +2529,7 @@ msgstr ""
 msgid "Alex Chen"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:262
+#: scripts/ui/phone_ui.gd:382
 msgid "All"
 msgstr ""
 
@@ -2537,7 +2545,7 @@ msgstr ""
 msgid "All cost rows are in home dollars; the buyer quote is labelled with its own currency."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:385
+#: scripts/ui/phone_ui.gd:561
 msgid "All events"
 msgstr ""
 
@@ -2561,7 +2569,7 @@ msgstr ""
 msgid "All save slots are in use. Choose one for the new game. The old save is moved to a backup folder, not deleted."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:396
+#: scripts/ui/phone_ui.gd:572
 msgid "All years"
 msgstr ""
 
@@ -3109,7 +3117,7 @@ msgstr ""
 msgid "Assigning a worker to one counter removes that same shift from the other counter; an empty shift stays closed unless the owner works."
 msgstr ""
 
-#: data/help/help.json data/ui/feature_unlocks.json scripts/ui/modals/settings_modal.gd:5 scripts/ui/phone_ui.gd:165
+#: data/help/help.json data/ui/feature_unlocks.json scripts/ui/modals/settings_modal.gd:5 scripts/ui/phone_ui.gd:214
 msgid "Assistant"
 msgstr ""
 
@@ -3525,7 +3533,7 @@ msgstr ""
 msgid "BUILD  ·  LIVE  ·  CONNECT  ·  GROW"
 msgstr ""
 
-#: autoload/sound.gd:287 scripts/frontend/character_creator.gd:114 scripts/ui/modals/contacts_modal.gd:52
+#: autoload/sound.gd:287 scripts/frontend/character_creator.gd:114 scripts/ui/modals/contacts_modal.gd:52 scripts/ui/phone_ui.gd:146
 msgid "Back"
 msgstr ""
 
@@ -3547,6 +3555,10 @@ msgstr ""
 
 #: scripts/ui/modals/fundraising_modal.gd:139
 msgid "Back to investors"
+msgstr ""
+
+#: scripts/ui/phone_ui.gd:146
+msgid "Back to notifications"
 msgstr ""
 
 #: scripts/ui/modals/fundraising_modal.gd:365
@@ -3609,7 +3621,7 @@ msgstr ""
 msgid "Balanced negotiation"
 msgstr ""
 
-#: data/buildings/nexus_bank.json data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:162
+#: data/buildings/nexus_bank.json data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:211
 msgid "Bank"
 msgstr ""
 
@@ -5169,6 +5181,10 @@ msgstr ""
 msgid "Card fees"
 msgstr ""
 
+#: data/help/glossary.json
+msgid "Cards show a short preview. Tap to read the full original message; Go opens the relevant formal screen or city map."
+msgstr ""
+
 #: data/economy/media.json
 msgid "Care for every home"
 msgstr ""
@@ -5233,7 +5249,7 @@ msgstr ""
 msgid "Carry them to PostPoint yourself (cheaper, costs your time)"
 msgstr ""
 
-#: scripts/ui/hud.gd:318
+#: scripts/ui/hud.gd:340
 msgid "Carrying %d parcel%s"
 msgstr ""
 
@@ -6349,7 +6365,7 @@ msgstr ""
 msgid "Chris Walsh"
 msgstr ""
 
-#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:163 scripts/ui/phone_ui.gd:262
+#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:212 scripts/ui/phone_ui.gd:382
 msgid "City"
 msgstr ""
 
@@ -6365,7 +6381,7 @@ msgstr ""
 msgid "City Fleet Refresh"
 msgstr ""
 
-#: data/ui/feature_unlocks.json scripts/ui/modals/city_guide_modal.gd:7 scripts/ui/phone_ui.gd:164
+#: data/ui/feature_unlocks.json scripts/ui/modals/city_guide_modal.gd:7 scripts/ui/phone_ui.gd:213
 msgid "City Guide"
 msgstr ""
 
@@ -6441,7 +6457,7 @@ msgstr ""
 msgid "City map"
 msgstr ""
 
-#: data/ui/feature_unlocks.json scripts/ui/market_view.gd:33 scripts/ui/phone_ui.gd:164 scripts/ui/phone_ui.gd:463
+#: data/ui/feature_unlocks.json scripts/ui/market_view.gd:33 scripts/ui/phone_ui.gd:213 scripts/ui/phone_ui.gd:639
 msgid "City news"
 msgstr ""
 
@@ -6641,7 +6657,7 @@ msgstr ""
 msgid "Click! %d%% (%s)"
 msgstr ""
 
-#: data/npcs/client.json scripts/sim/phone_messages.gd:205
+#: data/npcs/client.json scripts/sim/phone_messages.gd:235
 msgid "Client"
 msgstr ""
 
@@ -7073,7 +7089,7 @@ msgstr ""
 msgid "Compact"
 msgstr ""
 
-#: scripts/ui/modals/bank_modal.gd:82 scripts/ui/phone_ui.gd:385
+#: scripts/ui/modals/bank_modal.gd:82 scripts/ui/phone_ui.gd:561
 msgid "Company"
 msgstr ""
 
@@ -7577,7 +7593,7 @@ msgstr ""
 msgid "Contact Omar with a live registered company first."
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:959 scripts/ui/modals/contacts_modal.gd:6 scripts/ui/phone_ui.gd:385
+#: scripts/ui/modals/company_os.gd:959 scripts/ui/modals/contacts_modal.gd:6 scripts/ui/phone_ui.gd:561
 msgid "Contacts"
 msgstr ""
 
@@ -8017,7 +8033,7 @@ msgstr ""
 msgid "Crestline's offer is in Company OS → Contracts: accept, counter or decline"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:385
+#: scripts/ui/phone_ui.gd:561
 msgid "Crises"
 msgstr ""
 
@@ -9549,6 +9565,10 @@ msgstr ""
 msgid "Earbuds, lamps, bottles, phone stands. MOQs are MOQs, don't haggle me on those."
 msgstr ""
 
+#: scripts/sim/phone_messages.gd:149
+msgid "Earlier"
+msgstr ""
+
 #: scripts/ui/modals/fundraising_modal.gd:381
 msgid "Earlier agreement: %s. Delivered %d, paid %d, shared %s."
 msgstr ""
@@ -9889,7 +9909,7 @@ msgstr ""
 msgid "Energy"
 msgstr ""
 
-#: scripts/ui/hud.gd:277
+#: scripts/ui/hud.gd:299
 msgid "Energy %d%% · stress %d%%"
 msgstr ""
 
@@ -10061,7 +10081,7 @@ msgstr ""
 msgid "Estimated unbooked sales of about %s %s are not hedgeable until they are booked."
 msgstr ""
 
-#: scripts/ui/hud.gd:282
+#: scripts/ui/hud.gd:304
 msgid "Evening"
 msgstr ""
 
@@ -11745,7 +11765,7 @@ msgstr ""
 msgid "Global Consolidation"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:298
+#: scripts/ui/phone_ui.gd:476
 msgid "Go"
 msgstr ""
 
@@ -12457,7 +12477,7 @@ msgstr ""
 msgid "Health policy expired: add cash and buy a new policy."
 msgstr ""
 
-#: scripts/ui/hud.gd:351
+#: scripts/ui/hud.gd:373
 msgid "Health · %d"
 msgstr ""
 
@@ -13329,7 +13349,7 @@ msgstr ""
 msgid "In the workshop"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:619 scripts/ui/phone_ui.gd:353
+#: scripts/ui/modals/company_os.gd:619 scripts/ui/phone_ui.gd:529
 msgid "In transit"
 msgstr ""
 
@@ -13445,7 +13465,7 @@ msgstr ""
 msgid "Inherited property — %s"
 msgstr ""
 
-#: scripts/ui/hud.gd:353 scripts/ui/modals/traffic_modal.gd:35
+#: scripts/ui/hud.gd:375 scripts/ui/modals/traffic_modal.gd:35
 msgid "Injury: %s"
 msgstr ""
 
@@ -14101,7 +14121,7 @@ msgstr ""
 msgid "Job penalties"
 msgstr ""
 
-#: scripts/sim/phone_messages.gd:209
+#: scripts/sim/phone_messages.gd:239
 msgid "Jobs Board"
 msgstr ""
 
@@ -14207,6 +14227,10 @@ msgstr ""
 
 #: data/dialogue/ana_register.json data/dialogue/nina_first.json
 msgid "Just looking."
+msgstr ""
+
+#: scripts/sim/phone_messages.gd:159
+msgid "Just now"
 msgstr ""
 
 #: data/dialogue/marcus_loan.json
@@ -14641,7 +14665,7 @@ msgstr ""
 msgid "Labour cost ratio"
 msgstr ""
 
-#: data/milestones.json scripts/sim/phone_messages.gd:207
+#: data/milestones.json scripts/sim/phone_messages.gd:237
 msgid "Landlord"
 msgstr ""
 
@@ -15029,7 +15053,7 @@ msgstr ""
 msgid "Leased %s for %s/month."
 msgstr ""
 
-#: data/help/calm_screens.json data/ui/feature_unlocks.json scripts/ui/modals/lease_end_modal.gd:14 scripts/ui/phone_ui.gd:164
+#: data/help/calm_screens.json data/ui/feature_unlocks.json scripts/ui/modals/lease_end_modal.gd:14 scripts/ui/phone_ui.gd:213
 msgid "Leases"
 msgstr ""
 
@@ -15257,11 +15281,11 @@ msgstr ""
 msgid "Licensing Officer"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:262 scripts/ui/phone_ui.gd:385
+#: scripts/ui/phone_ui.gd:382 scripts/ui/phone_ui.gd:561
 msgid "Life"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:369
+#: scripts/ui/phone_ui.gd:545
 msgid "Life Timeline"
 msgstr ""
 
@@ -15945,7 +15969,7 @@ msgstr ""
 msgid "Main freight"
 msgstr ""
 
-#: scripts/ui/modals/growth_modal.gd:64 scripts/ui/phone_ui.gd:423
+#: scripts/ui/modals/growth_modal.gd:64 scripts/ui/phone_ui.gd:599
 msgid "Main-story achievements"
 msgstr ""
 
@@ -16057,7 +16081,7 @@ msgstr ""
 msgid "Manufacturing Vale"
 msgstr ""
 
-#: scripts/ui/hud.gd:147 scripts/ui/modals/settings_modal.gd:7
+#: scripts/ui/hud.gd:166 scripts/ui/modals/settings_modal.gd:7
 msgid "Map"
 msgstr ""
 
@@ -16209,7 +16233,7 @@ msgstr ""
 msgid "Margins shrink while the tariff eases over two months."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:268
+#: scripts/ui/phone_ui.gd:392
 msgid "Mark all read"
 msgstr ""
 
@@ -16225,7 +16249,7 @@ msgstr ""
 msgid "Market competition"
 msgstr ""
 
-#: scripts/ui/market_view.gd:8 scripts/ui/phone_ui.gd:464
+#: scripts/ui/market_view.gd:8 scripts/ui/phone_ui.gd:640
 msgid "Market conditions"
 msgstr ""
 
@@ -16389,7 +16413,7 @@ msgstr ""
 msgid "May"
 msgstr ""
 
-#: data/npcs/maya.json scripts/sim/phone_messages.gd:203 scripts/ui/modals/assistant_modal.gd:31 scripts/ui/modals/company_os.gd:969
+#: data/npcs/maya.json scripts/sim/phone_messages.gd:233 scripts/ui/modals/assistant_modal.gd:31 scripts/ui/modals/company_os.gd:969
 msgid "Maya"
 msgstr ""
 
@@ -16497,7 +16521,7 @@ msgstr ""
 msgid "Media studio"
 msgstr ""
 
-#: scripts/ui/hud.gd:353
+#: scripts/ui/hud.gd:375
 msgid "Medical bill or claim open"
 msgstr ""
 
@@ -16649,7 +16673,7 @@ msgstr ""
 msgid "Mentored a founder at Nexus Co-work: %s, 1 hour."
 msgstr ""
 
-#: scripts/ui/hud.gd:148 scripts/ui/modals/company_os.gd:1416
+#: scripts/ui/hud.gd:167 scripts/ui/modals/company_os.gd:1416
 msgid "Menu"
 msgstr ""
 
@@ -16699,6 +16723,10 @@ msgstr ""
 
 #: data/dialogue/mara_quinn_intro.json
 msgid "Meridian and Volt sell steady volume on thin margins. You need a ten-car fleet, a showroom and a deposit, and you must always keep new cars on the floor. Service tickets after the sale are where the dealership earns."
+msgstr ""
+
+#: scripts/ui/phone_ui.gd:459
+msgid "Message"
 msgstr ""
 
 #: data/character/options.json
@@ -16761,7 +16789,7 @@ msgstr ""
 msgid "Milestone: %s"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:385
+#: scripts/ui/phone_ui.gd:561
 msgid "Milestones"
 msgstr ""
 
@@ -16929,7 +16957,7 @@ msgstr ""
 msgid "Month close"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:354
+#: scripts/ui/phone_ui.gd:530
 msgid "Month sales"
 msgstr ""
 
@@ -17025,7 +17053,7 @@ msgstr ""
 msgid "Moreau"
 msgstr ""
 
-#: scripts/ui/hud.gd:282
+#: scripts/ui/hud.gd:304
 msgid "Morning · Sunny"
 msgstr ""
 
@@ -17501,7 +17529,7 @@ msgstr ""
 msgid "New face. Flat white?"
 msgstr ""
 
-#: scripts/sim/feature_gate.gd:69
+#: autoload/sound.gd:305 scripts/sim/feature_gate.gd:69 scripts/ui/hud.gd:226
 msgid "New feature: %s"
 msgstr ""
 
@@ -17749,7 +17777,7 @@ msgstr ""
 msgid "Niche reaches fewer buyers with less price sensitivity; scale trades margin and cash for volume."
 msgstr ""
 
-#: scripts/ui/hud.gd:282
+#: scripts/ui/hud.gd:304
 msgid "Night"
 msgstr ""
 
@@ -17977,8 +18005,12 @@ msgstr ""
 msgid "No new offers. More arrive every morning at 8:00."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:240
+#: scripts/ui/phone_ui.gd:289
 msgid "No new opportunities right now. Check again after your company grows."
+msgstr ""
+
+#: scripts/ui/phone_ui.gd:401
+msgid "No news right now. Go enjoy the city!"
 msgstr ""
 
 #: scripts/world/actions.gd:201
@@ -18401,11 +18433,11 @@ msgstr ""
 msgid "Notification duration"
 msgstr ""
 
-#: data/help/glossary.json data/help/help.json data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:162
+#: data/help/glossary.json data/help/help.json data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:211
 msgid "Notifications"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:347
+#: scripts/ui/phone_ui.gd:523
 msgid "Notifications only.\nManage at a desk: Company OS."
 msgstr ""
 
@@ -19029,6 +19061,10 @@ msgstr ""
 msgid "Open last month close (%s)"
 msgstr ""
 
+#: scripts/ui/phone_ui.gd:416
+msgid "Open message"
+msgstr ""
+
 #: scripts/ui/modals/social_calendar_modal.gd:22
 msgid "Open my wardrobe"
 msgstr ""
@@ -19353,7 +19389,7 @@ msgstr ""
 msgid "Operators: 'Most balances will be restored. There is a shortfall.'"
 msgstr ""
 
-#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:164 scripts/ui/phone_ui.gd:233
+#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:213 scripts/ui/phone_ui.gd:282
 msgid "Opportunities"
 msgstr ""
 
@@ -19829,7 +19865,7 @@ msgstr ""
 msgid "PERMITS & REGISTRATIONS (AURELIA)"
 msgstr ""
 
-#: scripts/ui/hud.gd:118 scripts/ui/hud.gd:255
+#: scripts/ui/hud.gd:137 scripts/ui/hud.gd:277
 msgid "PERSONAL"
 msgstr ""
 
@@ -19933,7 +19969,7 @@ msgstr ""
 msgid "Packed well"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:352
+#: scripts/ui/phone_ui.gd:528
 msgid "Packed, not shipped"
 msgstr ""
 
@@ -20481,7 +20517,7 @@ msgstr ""
 msgid "Permits & regulations"
 msgstr ""
 
-#: scripts/ui/modals/bank_modal.gd:80 scripts/ui/phone_ui.gd:308
+#: scripts/ui/modals/bank_modal.gd:80 scripts/ui/phone_ui.gd:484
 msgid "Personal"
 msgstr ""
 
@@ -20505,7 +20541,7 @@ msgstr ""
 msgid "Personal assets have real costs"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:356
+#: scripts/ui/phone_ui.gd:532
 msgid "Personal cap"
 msgstr ""
 
@@ -20605,7 +20641,7 @@ msgstr ""
 msgid "Phased transition"
 msgstr ""
 
-#: scripts/ui/hud.gd:145 scripts/ui/modals/settings_modal.gd:7
+#: scripts/ui/hud.gd:164 scripts/ui/modals/settings_modal.gd:7
 msgid "Phone"
 msgstr ""
 
@@ -22097,10 +22133,6 @@ msgstr ""
 msgid "Read the used-van price sheet"
 msgstr ""
 
-#: data/help/help.json
-msgid "Read updates and use Go to open the place where a decision belongs. There are no replies or response deadlines."
-msgstr ""
-
 #: data/help/glossary.json
 msgid "Read when you like. Only unresolved actions appear in the HUD badge."
 msgstr ""
@@ -22785,7 +22817,7 @@ msgstr ""
 msgid "Reject (click the wrong field first)"
 msgstr ""
 
-#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:164
+#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:213
 msgid "Relationships"
 msgstr ""
 
@@ -22861,7 +22893,7 @@ msgstr ""
 msgid "Rent"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:314
+#: scripts/ui/phone_ui.gd:490
 msgid "Rent $1,250 due the 14th"
 msgstr ""
 
@@ -23229,7 +23261,7 @@ msgstr ""
 msgid "Resources & Agriculture"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:198
+#: scripts/ui/phone_ui.gd:247
 msgid "Respond"
 msgstr ""
 
@@ -24357,7 +24389,7 @@ msgstr ""
 msgid "Saturday and Sunday 10:00–18:00 · %s/weekend · reserve at least one day ahead · capacity %d units"
 msgstr ""
 
-#: autoload/save_system.gd:479 data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:164
+#: autoload/save_system.gd:479 data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:213
 msgid "Save"
 msgstr ""
 
@@ -24409,7 +24441,7 @@ msgstr ""
 msgid "Save exported. Keep this file outside your browser."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:451
+#: scripts/ui/phone_ui.gd:627
 msgid "Save game"
 msgstr ""
 
@@ -24421,7 +24453,7 @@ msgstr ""
 msgid "Save local price"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:452
+#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:628
 msgid "Save now"
 msgstr ""
 
@@ -24589,7 +24621,7 @@ msgstr ""
 msgid "Save transfer"
 msgstr ""
 
-#: scripts/ui/hud.gd:195 scripts/ui/hud.gd:406
+#: scripts/ui/hud.gd:214 scripts/ui/hud.gd:428
 msgid "Saved"
 msgstr ""
 
@@ -24597,7 +24629,7 @@ msgstr ""
 msgid "Saved %s"
 msgstr ""
 
-#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:454
+#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:630
 msgid "Saved (slot %d)."
 msgstr ""
 
@@ -25329,7 +25361,7 @@ msgstr ""
 msgid "Shop roof"
 msgstr ""
 
-#: data/economy/marketplace.json data/npcs/shoplane.json data/ui/feature_unlocks.json scripts/sim/phone_messages.gd:211
+#: data/economy/marketplace.json data/npcs/shoplane.json data/ui/feature_unlocks.json scripts/sim/phone_messages.gd:241
 msgid "ShopLane"
 msgstr ""
 
@@ -25349,7 +25381,7 @@ msgstr ""
 msgid "ShopLane Global payout: %s %s"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:346
+#: scripts/ui/phone_ui.gd:522
 msgid "ShopLane Seller"
 msgstr ""
 
@@ -25397,7 +25429,7 @@ msgstr ""
 msgid "ShopLane payout received: %s"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:313
+#: scripts/ui/phone_ui.gd:489
 msgid "ShopLane pending"
 msgstr ""
 
@@ -25501,7 +25533,7 @@ msgstr ""
 msgid "Side part"
 msgstr ""
 
-#: data/help/glossary.json scripts/ui/phone_ui.gd:234
+#: data/help/glossary.json scripts/ui/phone_ui.gd:283
 msgid "Side stories"
 msgstr ""
 
@@ -25669,7 +25701,7 @@ msgstr ""
 msgid "Skip this guide"
 msgstr ""
 
-#: scripts/ui/hud.gd:382 scripts/ui/hud.gd:96
+#: scripts/ui/hud.gd:115 scripts/ui/hud.gd:404
 msgid "Skip to next event"
 msgstr ""
 
@@ -25961,7 +25993,7 @@ msgstr ""
 msgid "Someone must be behind the counter: hire a Barista (People tab), or work the counter yourself inside the café. Walk-outs and running out of coffee pull the rating down."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:196
+#: scripts/ui/phone_ui.gd:245
 msgid "Something"
 msgstr ""
 
@@ -26985,6 +27017,10 @@ msgstr ""
 msgid "Tanaka"
 msgstr ""
 
+#: data/help/help.json
+msgid "Tap a notification card to read the full message. Use Back to return to your filter; Go opens the relevant formal screen."
+msgstr ""
+
 #: scripts/ui/minigames/pack_game.gd:127
 msgid "Tape seam %d"
 msgstr ""
@@ -27017,7 +27053,7 @@ msgstr ""
 msgid "Tariff correction penalty %s: %s"
 msgstr ""
 
-#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:162 scripts/ui/phone_ui.gd:326
+#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:211 scripts/ui/phone_ui.gd:502
 msgid "Tasks"
 msgstr ""
 
@@ -28641,7 +28677,7 @@ msgstr ""
 msgid "This furniture style is already installed. Keep it or choose another."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:459
+#: scripts/ui/phone_ui.gd:635
 msgid "This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen."
 msgstr ""
 
@@ -28759,6 +28795,10 @@ msgstr ""
 
 #: scripts/sim/legacy_business.gd:73 scripts/sim/legacy_business.gd:86 scripts/ui/modals/legacy_modal.gd:48
 msgid "This market is no longer available. Review the closure and continue."
+msgstr ""
+
+#: scripts/ui/phone_ui.gd:462
+msgid "This message is no longer here. Go back to your notifications."
 msgstr ""
 
 #: scripts/ui/modals/company_os.gd:1655
@@ -29053,7 +29093,7 @@ msgstr ""
 msgid "Time to finish"
 msgstr ""
 
-#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:163 scripts/ui/phone_ui.gd:372
+#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:212 scripts/ui/phone_ui.gd:548
 msgid "Timeline"
 msgstr ""
 
@@ -29073,12 +29113,16 @@ msgstr ""
 msgid "To Startup Hub"
 msgstr ""
 
-#: scripts/ui/modals/company_os.gd:619 scripts/ui/phone_ui.gd:351
+#: scripts/ui/modals/company_os.gd:619 scripts/ui/phone_ui.gd:527
 msgid "To pack"
 msgstr ""
 
 #: scripts/ui/minigames/clerk_forms_game.gd:8
 msgid "Tobi Okafor"
+msgstr ""
+
+#: scripts/sim/phone_messages.gd:147
+msgid "Today"
 msgstr ""
 
 #: scripts/ui/automotive_ui.gd:289
@@ -29822,10 +29866,6 @@ msgid "Update listing"
 msgstr ""
 
 #: data/help/glossary.json
-msgid "Updates stay in the notification center. Go opens the relevant formal screen or city map."
-msgstr ""
-
-#: data/help/glossary.json
 msgid "Upfront payment"
 msgstr ""
 
@@ -29857,7 +29897,7 @@ msgstr ""
 msgid "Use a two-hour overtime slot"
 msgstr ""
 
-#: scripts/ui/hud.gd:45
+#: scripts/ui/hud.gd:64
 msgid "Use crosswalks for safer crossing"
 msgstr ""
 
@@ -29993,7 +30033,7 @@ msgstr ""
 msgid "VIP suite upgrade for a critic"
 msgstr ""
 
-#: scripts/sim/phone_messages.gd:147 scripts/sim/phone_messages.gd:148 scripts/sim/phone_messages.gd:48
+#: scripts/sim/phone_messages.gd:177 scripts/sim/phone_messages.gd:178 scripts/sim/phone_messages.gd:48
 msgid "VISIT-"
 msgstr ""
 
@@ -30781,7 +30821,7 @@ msgstr ""
 msgid "West"
 msgstr ""
 
-#: scripts/ui/hud.gd:207 scripts/ui/modals/settings_modal.gd:150
+#: scripts/ui/hud.gd:229 scripts/ui/modals/settings_modal.gd:150
 msgid "What can I do here?"
 msgstr ""
 
@@ -31013,7 +31053,7 @@ msgstr ""
 msgid "Wood desk"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:262 scripts/world/building_info.gd:201
+#: scripts/ui/phone_ui.gd:382 scripts/world/building_info.gd:201
 msgid "Work"
 msgstr ""
 
@@ -31105,7 +31145,7 @@ msgstr ""
 msgid "Workshops"
 msgstr ""
 
-#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:169
+#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:218
 msgid "World"
 msgstr ""
 
@@ -31141,7 +31181,7 @@ msgstr ""
 msgid "Yeah. Just looking."
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:396 scripts/ui/phone_ui.gd:405
+#: scripts/ui/phone_ui.gd:572 scripts/ui/phone_ui.gd:581
 msgid "Year %d"
 msgstr ""
 
@@ -31159,6 +31199,10 @@ msgstr ""
 
 #: scripts/ui/modals/fundraising_modal.gd:108
 msgid "Yes"
+msgstr ""
+
+#: scripts/sim/phone_messages.gd:148 scripts/sim/phone_messages.gd:155
+msgid "Yesterday"
 msgstr ""
 
 #: scripts/ui/minigames/auction_game.gd:64
@@ -32633,7 +32677,7 @@ msgstr ""
 msgid "passenger trips"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:359
+#: scripts/ui/phone_ui.gd:535
 msgid "paused: cap"
 msgstr ""
 
@@ -33113,7 +33157,7 @@ msgstr ""
 msgid "−100 units"
 msgstr ""
 
-#: scripts/ui/phone_ui.gd:196
+#: scripts/ui/phone_ui.gd:245
 msgid "◆ %s needs a decision"
 msgstr ""
 
@@ -33121,7 +33165,7 @@ msgstr ""
 msgid "◆ You are here"
 msgstr ""
 
-#: scripts/ui/hud.gd:308
+#: scripts/ui/hud.gd:330
 msgid "◆ decision"
 msgstr ""
 
@@ -33129,11 +33173,11 @@ msgstr ""
 msgid "◉  Shutter"
 msgstr ""
 
-#: scripts/ui/hud.gd:309
+#: scripts/ui/hud.gd:331
 msgid "● %d bill(s) due"
 msgstr ""
 
-#: scripts/ui/hud.gd:305
+#: scripts/ui/hud.gd:327
 msgid "● %d new"
 msgstr ""
 
