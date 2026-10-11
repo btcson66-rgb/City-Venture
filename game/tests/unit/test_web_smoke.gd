@@ -120,3 +120,18 @@ func test_notification_back_keeps_filter_scroll_and_missing_id_recovers() -> voi
 	UIRoot.phone._notifications_back()
 	runner.eq(GameState.data["ledger"], journal, "details and recovery never change journal")
 	UIRoot.phone.close()
+
+func test_open_merged_card_refreshes_content_read_state_and_badge() -> void:
+	UIRoot.phone.close()
+	GameState.add_message("shoplane", "First actual order", {"merge":"open-card-test", "target":{"kind":"company", "tab":"operations"}})
+	var id: String = GameState.data["messages"].back()["id"]
+	UIRoot.phone.open()
+	UIRoot.phone._go("messages")
+	UIRoot.phone.open_notification(id)
+	GameState.add_message("shoplane", "Second actual order", {"merge":"open-card-test", "target":{"kind":"company", "tab":"operations"}})
+	for i in 8:await runner.get_tree().process_frame
+	var full := UIRoot.phone.find_child("NotificationFullText_"+id, true, false) as Label
+	runner.eq(full.text, PhoneMessages.get_message(id)["text"], "open detail shows actual merged content")
+	runner.check(PhoneMessages.get_message(id)["read"], "visible merged content is read")
+	runner.check(not UIRoot.hud.phone_hint.visible, "badge refresh follows visible read state")
+	UIRoot.phone.close()

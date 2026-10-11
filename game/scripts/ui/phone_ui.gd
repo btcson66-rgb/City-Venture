@@ -316,6 +316,7 @@ func _refresh_messages() -> void:
 		var message := PhoneMessages.read(selected_notification)
 		var label := content.find_child("NotificationFullText_" + selected_notification, true, false) as Label
 		if label != null:label.text = I18n.t(str(message.get("text", "")))
+		UIRoot.hud.refresh()
 
 func _relative_times(t: int) -> void:
 	if not is_open or app != "messages":return
