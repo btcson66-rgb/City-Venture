@@ -354,6 +354,7 @@ def main():
     parser.add_argument('--out', type=Path, default=Path('qa-output/web-smoke'))
     parser.add_argument('--viewports', nargs='+', choices=VIEWPORTS, default=list(VIEWPORTS))
     parser.add_argument('--locales', nargs='+', default=['zh_TW','en'])
+    parser.add_argument('--browser', choices=['auto','chromium','webkit'], default='auto', help='auto checks Chromium and any installed WebKit; select an engine for CI parity or diagnosis')
     parser.add_argument('--sizes', nargs='+', choices=['default','large'], default=['default','large'])
     args=parser.parse_args()
     assert (args.export_dir/'index.pck').is_file(), 'Build the actual Web export first'
@@ -363,9 +364,13 @@ def main():
     export_hash = hashlib.sha256((args.export_dir/'index.pck').read_bytes()).hexdigest()
     results=[]
     with sync_playwright() as pw:
-        engines=[pw.chromium]
         webkit_available=Path(pw.webkit.executable_path).is_file()
-        if webkit_available: engines.append(pw.webkit)
+        if args.browser == 'webkit':
+            assert webkit_available, 'WebKit is not installed'
+            engines=[pw.webkit]
+        else:
+            engines=[pw.chromium]
+            if args.browser == 'auto' and webkit_available: engines.append(pw.webkit)
         for engine in engines:
             options={'headless':True}
             if engine.name=='chromium': options['args']=['--use-angle=swiftshader','--enable-unsafe-swiftshader']
@@ -395,7 +400,7 @@ def main():
                         context.close()
                         print(json.dumps(result,ensure_ascii=False),flush=True)
             browser.close()
-        report={'export':str(args.export_dir.resolve()),'pck_sha256':export_hash,'webkit':'RUN' if webkit_available else 'NOT INSTALLED - Safari representative NOT VERIFIED','results':results}
+        report={'export':str(args.export_dir.resolve()),'pck_sha256':export_hash,'browser_selection':args.browser,'webkit':('RUN' if args.browser in ('auto','webkit') and webkit_available else 'NOT RUN - Safari representative NOT VERIFIED'),'results':results}
         (args.out/'result.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
     server.shutdown()
     return int(any(r['status']!='PASS' or r['console_errors'] for r in results))
