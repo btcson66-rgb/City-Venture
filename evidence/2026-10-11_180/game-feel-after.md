@@ -17,8 +17,9 @@ Novice proxy: sees who sent a short update, taps card, reads the complete origin
 
 Self-review found and fixed inherited arrival toast covering the phone, an English baseline read-all timing failure in the bot, notification Go assumptions in the walkthrough, and a Web smoke six-customer assumption after the entry shift became three customers. Each failed attempt remains separate from final acceptance.
 
-Full unit suite and real exported-Web matrix are pending; no success claimed here before results arrive.
 
-2026-10-12 continuation: inherited #182 payout-latency guard and live-pruned-message recovery are included in the current game source8617946d. Final whole unit suite and replacement cold-export Chromium matrix are RUNNING; prior1032-test and535b export results are historical, not final acceptance.
 
-Final game-source whole unit suite:1035/1035 PASS in672.4s (unit.xml). No SCRIPT ERROR or Parse Error. Expected corrupt-save and headless cleanup diagnostics remain in unit-stderr.log. Cold export:4b11a457a624b6ea9c88b82caa0e5ec626a0d30358f4897ff68f9a9a1b2b7918. Real Chromium matrix remains RUNNING.
+
+Final real exported-Web touch smoke:Chromium12/12 PASS, three viewports × zh_TW/en × default/XL fonts. Actual practice, formal work, wages, full original detail, Go and IndexedDB reload; console/page/script/parse errors0 and recovered failures0. All share PCK4b11a457a624b6ea9c88b82caa0e5ec626a0d30358f4897ff68f9a9a1b2b7918. Windows WebKit diagnostic remains separate from Chromium acceptance; physical Safari/device/human delight are not verified.
+
+最終完整驗證：實際Web匯出Chromium12/12 PASS，三視窗×兩語言×兩字級；console／page／script／parse errors0、恢復失敗0。PCK4b11a457a624b6ea9c88b82caa0e5ec626a0d30358f4897ff68f9a9a1b2b7918；完整矩陣與各案結果見web/result.json、web-export-manifest.json。
