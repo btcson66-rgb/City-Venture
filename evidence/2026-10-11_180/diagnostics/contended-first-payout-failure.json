@@ -1,0 +1,58 @@
+{
+  "name": "chromium-portrait-default-zh_TW",
+  "browser_version": "149.0.7827.55",
+  "viewport": [
+    390,
+    844
+  ],
+  "size": "default",
+  "locale": "zh_TW",
+  "status": "FAIL",
+  "failure": "Timeout: actual payout",
+  "steps": [
+    {
+      "step": "title",
+      "world": null,
+      "modal": "",
+      "font_size": 1,
+      "touch": true
+    },
+    {
+      "step": "character_creator",
+      "world": null,
+      "modal": "",
+      "font_size": 1,
+      "touch": true
+    },
+    {
+      "step": "new_game",
+      "world": "riverside_apartment",
+      "modal": "",
+      "font_size": 1,
+      "touch": true
+    },
+    {
+      "step": "first_job_practice",
+      "world": "bloom_coffee",
+      "modal": "BaristaGame",
+      "font_size": 1,
+      "touch": true
+    },
+    {
+      "step": "practice_ready",
+      "world": "bloom_coffee",
+      "modal": "BaristaGame",
+      "font_size": 1,
+      "touch": true
+    },
+    {
+      "step": "first_job_results",
+      "world": "bloom_coffee",
+      "modal": "BaristaGame",
+      "font_size": 1,
+      "touch": true
+    }
+  ],
+  "console_errors": [],
+  "touches": 50
+}
