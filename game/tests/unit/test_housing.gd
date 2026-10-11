@@ -28,7 +28,9 @@ func test_immediate_move_rent_stock_deposit_first_fee_and_repeat_guards() -> voi
 	runner.check(not Housing.execute()["ok"],"already executed no repeat")
 	var cash:=Ledger.cash("player")
 	Living.pay_home_rent()
-	runner.eq(Ledger.cash("player"),cash-780,"new monthly rent")
+	runner.eq(Ledger.cash("player"),cash,"manual monthly rent waits for player payment")
+	AssistantPolicy.pay_all()
+	runner.eq(Ledger.cash("player"),cash-780,"new monthly rent paid through original bill action")
 	runner.check(Housing.fee()>0,"second move costs real service")
 	runner.check(Ledger.check_balanced(),"housing books balanced")
 func test_notice_is_real_wait_and_cancel_returns_exact_deposit_once() -> void:

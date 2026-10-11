@@ -39,7 +39,7 @@ static func weekly(ent: String, weeks := 9) -> Dictionary:
 			t3 = _next_day_of_month(int(lv.get("rent_due_day_of_month", 14)), t3 + Clock.DAY)
 		var bill_at := Living.next_living_bill_at()
 		# Auto-paid on issue; manual bills have the same grace period as AssistantPolicy.bill.
-		var grace := 0 if bool(AssistantPolicy.S()["tasks"].get("bills", true)) else int(AssistantPolicy.cfg().get("bill_due_days", 7)) * Clock.DAY
+		var grace := 0 if AssistantPolicy.permitted("bills") else int(AssistantPolicy.cfg().get("bill_due_days", 7)) * Clock.DAY
 		while bill_at + grace < horizon:
 			flows.append([bill_at + grace, -Living.daily_living() * 7.0, "Living costs"])
 			bill_at += 7 * Clock.DAY

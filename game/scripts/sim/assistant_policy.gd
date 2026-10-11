@@ -7,48 +7,132 @@ static var _busy := false
 static func cfg() -> Dictionary:return DataDB.economy["assistant"]
 static func S() -> Dictionary:
 	if not GameState.data.has("assistant"):
-		# A brand-new game starts with the assistant on; loaded saves get "default": false from the migration.
-		GameState.data["assistant"] = {"tasks":{},"last":{},"notices":{},"default":true}
+		GameState.data["assistant"] = {"hired":false,"level":1,"tasks":{},"last":{},"notices":{},"default":false}
+	if not GameState.data["assistant"].has("hired"):migrate(GameState.data)
 	var state: Dictionary = GameState.data["assistant"]
 	for field in ["tasks","last","notices"]:
 		if not state.has(field):state[field] = {}
-	var fallback := bool(state.get("default", true))
+	var fallback := bool(state.get("default", false))
 	if not state["tasks"].is_empty() and state["tasks"].values().all(func(value):return not bool(value)):fallback = false
-	# An assistant-era save already chose its chores: a new chore with no predecessor starts off.
 	var era_default := fallback if state["tasks"].is_empty() else false
 	for id in TASKS:
 		if not state["tasks"].has(id):
 			var predecessor: String = {"fleet_care":"maintenance","charging_care":"maintenance","media_delivery":"packing","hotel_daily":"roster"}.get(id, "")
 			state["tasks"][id] = bool(state["tasks"].get(predecessor,era_default)) if predecessor != "" else era_default
 	return state
-## Saves made before the assistant existed keep every chore manual, so no veteran's cash moves unasked.
+
+## Adopt existing enabled chores before the template fill. Dismissed saves already have an explicit hired field.
 static func migrate(data: Dictionary) -> void:
-	if data.has("assistant"):return
-	var tasks := {}
-	for id in TASKS:tasks[id] = false
-	data["assistant"] = {"tasks":tasks,"last":{},"notices":{},"default":false,"intro_pending":true}
-## One calm explanation, posted once after such a save loads.
+	var state: Dictionary = data.get("assistant", {})
+	if state.has("hired"):return
+	var tasks: Dictionary = state.get("tasks", {})
+	var used := tasks.values().any(func(value):return bool(value)) if not tasks.is_empty() else bool(state.get("default", false))
+	state["hired"] = used
+	state["ever_hired"] = used
+	state["level"] = 2 if used else 1
+	state["offered"] = used
+	state["paused"] = false
+	state["paid_until"] = int(data.get("clock", {}).get("minutes", 0)) + int(cfg()["week_days"]) * Clock.DAY if used else 0
+	state["intro_pending"] = used
+	state["tasks"] = tasks
+	state["default"] = bool(state.get("default", false))
+	data["assistant"] = state
+
 static func after_load() -> void:
-	if not GameState.has_game() or not GameState.data.has("assistant"):return
-	var state: Dictionary = GameState.data["assistant"]
+	if not GameState.has_game():return
+	var state := S()
 	if not state.get("intro_pending", false):return
 	state.erase("intro_pending")
-	GameState.add_message("assistant",I18n.t("Meet your assistant: it can restock, pay bills and file taxes for you. Everything stays as you left it. To turn chores on, open Settings, then the Assistant page."),{"category":"work"})
+	GameState.set_flag("assistant_offered")
+	GameState.add_message("assistant",I18n.t("It's Maya! I'm your assistant now. Your existing chores and choices are unchanged, and your first week is covered. Find me on the Assistant page."),{"category":"work","target":{"kind":"assistant"}})
+
+static func hired() -> bool:return bool(S().get("hired", false))
+static func task_unlocked(id: String) -> bool:
+	return TASKS.has(id) and hired() and (int(S().get("level", 1)) >= 2 or id in cfg()["starter_tasks"])
+## Permission also gates direct bill/insurance/FX paths, independently of the test runner's hourly suppression.
+static func permitted(id: String) -> bool:
+	return task_unlocked(id) and not bool(S().get("paused", false)) and bool(S()["tasks"].get(id, false))
 static func enabled(id: String) -> bool:
 	if testing and not GameState.flag("test_assistant_run"):return false
-	return bool(S()["tasks"].get(id, false))
+	return permitted(id)
+static func eligible() -> bool:return GameState.stat("orders_shipped") >= 1 or bool(S().get("ever_hired", false))
+static func offer_if_ready() -> void:
+	if hired() or not eligible() or bool(S().get("offered", false)):return
+	S()["offered"] = true
+	GameState.set_flag("assistant_offered")
+	GameState.add_message("assistant",I18n.t("Nice work on your first parcel! Want a teammate for the boxes and routine chores? I'm Maya. Hire me when you're ready; your first week is included."),{"category":"work","target":{"kind":"assistant"}})
+
+static func hire() -> Dictionary:
+	if hired():return {"ok":false,"error":"Maya is already on your team."}
+	if not eligible():return {"ok":false,"error":"Ship your first parcel before hiring Maya."}
+	var fee := float(cfg()["hire_fee"])
+	if Ledger.cash("player") < fee:return {"ok":false,"error":I18n.t("Keep %s in your personal account to hire Maya.") % Fmt.money(fee)}
+	Ledger.expense("player","payroll",fee,I18n.t("Maya: joining fee and first week"),{"type":"assistant_hire","npc":"maya"})
+	var first := not bool(S().get("ever_hired", false))
+	S()["hired"] = true;S()["ever_hired"] = true;S()["offered"] = true;S()["paused"] = false
+	S()["paid_until"] = Clock.now() + int(cfg()["week_days"]) * Clock.DAY
+	GameState.set_flag("assistant_offered")
+	_restore_fx()
+	if first:EventBus.progress_moment.emit(I18n.t("Maya joined your team!"),"assistant:hired")
+	return {"ok":true,"fee":fee}
+
+static func upgrade() -> Dictionary:
+	if not hired():return {"ok":false,"error":"Hire Maya before adding more chores."}
+	if int(S().get("level", 1)) >= 2:return {"ok":false,"error":"Every chore is already unlocked."}
+	var fee := float(cfg()["upgrade_fee"])
+	if Ledger.cash("player") < fee:return {"ok":false,"error":I18n.t("Keep %s in your personal account to upgrade.") % Fmt.money(fee)}
+	Ledger.expense("player","payroll",fee,I18n.t("Maya: expanded assistant service"),{"type":"assistant_upgrade","npc":"maya"})
+	S()["level"] = 2
+	EventBus.progress_moment.emit(I18n.t("More chores, more room to play!"),"assistant:upgraded")
+	return {"ok":true,"fee":fee}
+
+static func _stop_fx() -> void:
+	var restore: Array = S().get("fx_restore", [])
+	for entity in CompanyPortfolio.ids():
+		if GlobalMarket.company(str(entity)).get("auto_fx", false) and entity not in restore:restore.append(entity)
+		GlobalMarket.company(str(entity))["auto_fx"] = false
+	S()["fx_restore"] = restore
+static func _restore_fx() -> void:
+	if not permitted("fx"):return
+	for entity in S().get("fx_restore", []):
+		if GlobalMarket.live(str(entity)):GlobalMarket.company(str(entity))["auto_fx"] = true
+	S()["fx_restore"] = []
+static func dismiss() -> void:
+	_stop_fx()
+	S()["hired"] = false;S()["paused"] = false
+## A missed retainer pauses optional work, creates no debt, and resumes after one actual payment.
+static func renew_due(t: int) -> bool:
+	if not hired():return false
+	if t < int(S().get("paid_until", 0)):return not bool(S().get("paused", false))
+	var fee := float(cfg()["weekly_fee"])
+	if Ledger.cash("player") < fee:
+		if not bool(S().get("paused", false)):
+			S()["paused"] = true;_stop_fx()
+			GameState.add_message("assistant",I18n.t("I'm taking a break until the weekly fee is covered. You can handle chores yourself or add personal cash and resume from my page."),{"category":"work","target":{"kind":"assistant"}})
+		return false
+	Ledger.expense("player","payroll",fee,I18n.t("Maya: weekly assistant retainer"),{"type":"assistant_wage","npc":"maya"})
+	S()["paid_until"] = t + int(cfg()["week_days"]) * Clock.DAY
+	S()["paused"] = false
+	_restore_fx()
+	return true
 static func set_task(id: String, value: bool) -> void:
-	if TASKS.has(id):S()["tasks"][id] = value
-	if id == "fx" and GlobalMarket.live(GameState.company_id()):GlobalMarket.company()["auto_fx"] = value
+	if not TASKS.has(id) or not task_unlocked(id):return
+	S()["tasks"][id] = value
+	if id == "fx":
+		if not value:_stop_fx()
+		elif permitted("fx"):
+			_restore_fx()
+			if GlobalMarket.live(GameState.company_id()):GlobalMarket.company()["auto_fx"] = true
 ## `listed_only` flips just the chores the player can currently see (the Assistant page list).
 static func set_all(value: bool, listed_only := false) -> void:
 	for id in TASKS:
 		if listed_only and not available(str(id)):continue
 		set_task(id,value)
 static func toggle(parent: Node, id: String) -> void:
+	if not task_unlocked(id):return
 	var button := CheckBox.new()
 	button.name = "Assistant_"+id
-	button.text = I18n.t("Let the assistant handle it") + " · " + I18n.t(str(TASKS[id]))
+	button.text = I18n.t("Let Maya handle it") + " · " + I18n.t(str(TASKS[id]))
 	button.button_pressed = bool(S()["tasks"][id])
 	button.toggled.connect(func(on):
 		set_task(id,on)
@@ -56,9 +140,10 @@ static func toggle(parent: Node, id: String) -> void:
 		if modal != null:modal.rebuild())
 	parent.add_child(button)
 static func master(parent: Node) -> void:
+	if not hired():return
 	var all := CheckBox.new()
 	all.name = "AssistantAll"
-	all.text = I18n.t("Let the assistant handle all chores")
+	all.text = I18n.t("Let Maya handle all listed chores")
 	all.button_pressed = TASKS.keys().all(func(id):return not available(str(id)) or bool(S()["tasks"][id]))
 	all.toggled.connect(func(on):
 		set_all(on,true)
@@ -66,11 +151,21 @@ static func master(parent: Node) -> void:
 		if modal != null:modal.rebuild())
 	parent.add_child(all)
 static func overview(parent: Node) -> void:
+	if not hired():
+		var meet := UIK.button("Meet Maya",func():UIRoot.open_modal(AssistantModal.new()))
+		meet.name = "AssistantProfile"
+		parent.add_child(meet)
+		bills_ui(parent)
+		return
+	var profile := UIK.button("Meet Maya",func():UIRoot.open_modal(AssistantModal.new()))
+	profile.name = "AssistantProfile"
+	parent.add_child(profile)
 	master(parent)
 	for id in TASKS:
 		if available(str(id)):toggle(parent,id)
 	bills_ui(parent)
 static func available(id: String) -> bool:
+	if not task_unlocked(id):return false
 	match id:
 		"restock","packing","bills","returns":return true
 		"cafe_supplies","hygiene":return Cafe.leased()
@@ -90,7 +185,7 @@ static func owners() -> Array:
 	return ["player"] + CompanyPortfolio.ids()
 ## Records a real bill. Returns true when it was paid straight away; otherwise it waits (with a due date) as a payable.
 static func bill(entity: String, category: String, amount: float, narrative: String, source: Dictionary) -> bool:
-	if bool(S()["tasks"]["bills"]) and Ledger.cash(entity) >= amount:
+	if permitted("bills") and Ledger.cash(entity) >= amount:
 		Ledger.expense(entity,category,amount,narrative,source)
 		return true
 	var bills: Array = S().get("bills",[])
@@ -98,7 +193,7 @@ static func bill(entity: String, category: String, amount: float, narrative: Str
 	Ledger.post(entity,narrative,[{"acct":"exp:"+category,"dr":amount},{"acct":"accounts_payable","cr":amount}],source)
 	var due := Clock.now()+int(cfg().get("bill_due_days",7))*Clock.DAY
 	bills.append({"entity":entity,"amount":amount,"narrative":narrative,"source":source.duplicate(true),"paid":false,"due":due})
-	if bool(S()["tasks"]["bills"]):_short_notice(entity)
+	if permitted("bills"):_short_notice(entity)
 	return false
 ## Exactly one notification while an entity's auto-paid bills wait for cash.
 static func _short_notice(entity: String) -> void:
@@ -186,6 +281,8 @@ static func affordable(entity: String, cost: float) -> bool:
 	return ready
 static func on_hour(t: int, h: int) -> void:
 	if _busy or not GameState.has_game() or (testing and not GameState.flag("test_assistant_run")):return
+	offer_if_ready()
+	if not renew_due(t):return
 	_busy = true
 	if enabled("bills"):
 		for index in unpaid():pay_bill(index)

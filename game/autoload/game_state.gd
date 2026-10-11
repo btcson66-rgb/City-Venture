@@ -87,7 +87,7 @@ func template(setup := {}, seed_v := 1) -> Dictionary:
 		"messages": [],
 		"minigame_practice_version": 1,
 		"minigame_practice_optional": [],
-		"assistant": {"tasks": {}, "last": {}, "notices": {}, "default": true},
+		"assistant": {"hired": false, "level": 1, "tasks": {}, "last": {}, "notices": {}, "default": false},
 		"timeline": [],
 		"reports": {"month_closes": []},
 		"world": {"year": 1, "modifiers": []},

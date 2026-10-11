@@ -349,3 +349,9 @@ without resetting the work in progress. A newcomer is greeted by the manager at 
 
 Lessons live in data/help/minigame_tutorials.json; adding a minigame without lesson data fails the coverage test.
 Old saves add seen-state lazily. The work area scrolls to lower machine/packing controls; no step requires an external guide.
+
+### Maya：可選的助理隊友（#181）
+
+新遊戲先親手寄出第一件包裹，再收到 Maya 的邀請。到手機助理頁面認識她；加入費 $5 包含第一週，每週服務費 $5。聘用後自行勾選打包、補貨、帳單與退貨；可花 $25 擴充服務，其他雜務會隨事業解鎖。擴充服務不增加經營數值。
+
+個人帳戶不足時暫停幫忙，不累積欠費，原本的手動操作仍可使用。可隨時結束合作，原選項保留供再次聘用。舊存檔已啟用的助理會保留原有服務與選項，第一週免收新增費用；原本全部關閉的玩家維持手動。既有租約、貸款等義務仍有效，營收只來自真實交易。

@@ -217,7 +217,7 @@ static func payout(entity: String) -> void:
 			b["receivable"] = maxf(0.0, snappedf(available - units, 0.01))
 			b["wallet"] = snappedf(float(b["wallet"]) + units, 0.01)
 		o["global_paid"] = true
-	if company(entity)["auto_fx"]:
+	if company(entity)["auto_fx"] and AssistantPolicy.permitted("fx"):
 		for ccy in company(entity)["balances"]:
 			convert_currency(entity, str(ccy))
 

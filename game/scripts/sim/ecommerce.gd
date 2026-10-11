@@ -1256,6 +1256,7 @@ static func _ship(o: Dictionary) -> void:
 	Sim.schedule(eta, "eco.deliver", {"order": o["id"]})
 	GameState.inc_stat("orders_shipped")
 	EventBus.order_shipped.emit(o["id"])
+	AssistantPolicy.offer_if_ready()
 
 
 static func _h_deliver(p: Dictionary) -> void:

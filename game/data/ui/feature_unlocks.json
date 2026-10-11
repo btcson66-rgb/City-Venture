@@ -398,6 +398,15 @@
     "used:app_legacy"
    ],
    "hint": "Reach chapter 19"
+  },
+  {
+   "id": "app_assistant",
+   "label": "Assistant",
+   "any": [
+    "flag:assistant_offered",
+    "stat:orders_shipped>=1"
+   ],
+   "hint": "Ship your first parcel"
   }
  ]
 }

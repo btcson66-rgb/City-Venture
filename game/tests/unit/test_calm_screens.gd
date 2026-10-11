@@ -1,5 +1,12 @@
 extends RefCounted
 var runner
+func hire_fixture() -> void:
+	# Explicit existing hired contract; lifecycle fees have dedicated coverage.
+	var state := AssistantPolicy.S()
+	state["hired"] = true
+	state["level"] = 2
+	state["paid_until"] = Clock.now() + 30 * Clock.DAY
+
 func frames() -> void:
 	for i in 4:await UIRoot.get_tree().process_frame
 
@@ -76,6 +83,7 @@ func test_hotel_assistant_uses_reference_rates_and_real_cleaners() -> void:
 	helper.runner = runner
 	var entity: String = helper.setup()
 	GameState.set_flag("test_assistant_run")
+	hire_fixture()
 	AssistantPolicy.set_all(false)
 	AssistantPolicy.set_task("hotel_daily",true)
 	Hotel.S()["rooms"]["standard"]["price"]=180.0
@@ -102,6 +110,7 @@ func test_legacy_media_only_invoices_completed_agreed_work() -> void:
 	var id := Jobs.offer({"entity":entity,"client":"northstar","scope":"Actual legacy media delivery","segment":"media","price":100,"work":2,"terms":0,"due":Clock.now()+Clock.DAY})
 	runner.check(Jobs.accept(id)["ok"],"real agreed job accepted")
 	GameState.set_flag("test_assistant_run")
+	hire_fixture()
 	AssistantPolicy.set_all(false)
 	AssistantPolicy.set_task("media_delivery",true)
 	AssistantPolicy.on_hour(Clock.now(),12)
@@ -120,6 +129,7 @@ func test_monthly_delegation_preserves_real_currency_report_receipt() -> void:
 	Company.open_business_account(1000)
 	var entity := GameState.company_id()
 	GameState.set_flag("test_assistant_run")
+	hire_fixture()
 	AssistantPolicy.set_all(true)
 	GameState.set_flag("monthly_report_seen")
 	OverseasPartners.S()["chapters"]["ch15_currency_swing"]={"entity":entity,"started":Clock.now()-1}
@@ -132,6 +142,7 @@ func test_monthly_delegation_preserves_real_currency_report_receipt() -> void:
 
 func test_manual_monthly_reports_still_open() -> void:
 	GameState.set_flag("test_assistant_run")
+	hire_fixture()
 	GameState.set_flag("monthly_report_seen")
 	AssistantPolicy.set_task("month_close",false)
 	var report := {"t1":Clock.now(),"entities":{}}
@@ -158,6 +169,7 @@ func test_money_actions_keep_full_terms_beside_manual_buttons() -> void:
 	button.free()
 
 func test_new_chores_inherit_related_manual_choices_in_partial_old_saves() -> void:
+	GameState.data["assistant"] = {"tasks":{"tax":true,"maintenance":false,"packing":false},"default":true}
 	var tasks: Dictionary = AssistantPolicy.S()["tasks"]
 	tasks["maintenance"]=false
 	tasks["packing"]=false

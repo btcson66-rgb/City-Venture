@@ -784,6 +784,12 @@ One gray disabled preview per navigation surface; remaining locked nodes are abs
 
 ## Assistant chores (#154)
 
-`game/data/economy/assistant.json` tunes cash buffer, daily hour, restock threshold, packing pace/skill, ingredient target, coffee target, maintenance condition and roster weekdays. Saved `assistant.tasks` stores independent switches (default true); `assistant.bills` stores actual accrued obligations until paid. Existing automatic loan repayments and perpetual leases keep their signed terms; insurance renewal delegates only previously chosen cover, never new cover. Switches never book revenue. Operations use the existing supplier, parcel, staff, inspection, asset, tax, insurance and customs APIs.
+`game/data/economy/assistant.json` tunes cash buffer, daily hour, restock threshold, packing pace/skill, ingredient target, coffee target, maintenance condition and roster weekdays. Saved `assistant.tasks` stores independent switches (new games default false); `assistant.bills` stores actual accrued obligations until paid. Existing automatic loan repayments and perpetual leases keep their signed terms; insurance renewal delegates only previously chosen cover, never new cover. Switches never book revenue. Operations use the existing supplier, parcel, staff, inspection, asset, tax, insurance and customs APIs.
 
 #182 milestone metrics: `popup_sales` reads actual positive popup revenue journal segments; `flag:food_permit` uses the issued cafe licence. Both create one dated achievement receipt, with no monetary reward.
+
+## Hired assistant (#181)
+
+`assistant.hired`, `ever_hired`, `offered`, `level`, `paid_until`, `paused`, and `fx_restore` persist the optional Maya contract. The first actual `orders_shipped` receipt offers her once. Configured joining / weekly / expansion fees are 5 / 5 / 25; the joining fee includes seven days. Fees post personal payroll expenses and never revenue. Level 1 offers packing, restock, bills and returns; level 2 unlocks other services subject to existing business feature gates. Hiring never selects chores. Weekly short cash pauses work without arrears; personal funding permits resumption. Dismissal preserves preferences and disables owned-company auto FX.
+
+Migration runs before filling template fields: predecessor saves with enabled chores retain those exact switches, become hired at level 2 and receive seven days grace. All-off or absent predecessors remain manual. Explicit `hired=false` is authoritative, including dismissed saves with remembered true preferences. Direct billing, renewal, forecast and FX paths check hiring, tier, pause and preference permissions. Manual controls and signed obligations remain available.

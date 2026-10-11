@@ -82,7 +82,9 @@ func _ready() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--qa-font="):
 			Preferences.values["font_size"] = clampi(int(arg.substr(10)), 0, 3)
-		if arg == "--qa-touch": InputAccess.touch_mode = true
+		if arg == "--qa-touch":
+			InputAccess.touch_mode = true
+			get_window().content_scale_aspect = Window.CONTENT_SCALE_ASPECT_EXPAND
 	Preferences.apply()
 	DirAccess.make_dir_recursive_absolute(out_dir + "/screenshots")
 	# Automation owns its output saves and never replaces a player save when all slots are occupied.

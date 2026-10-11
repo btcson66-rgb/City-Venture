@@ -162,6 +162,7 @@ func _home() -> void:
 	var apps := [["messages", "mail", I18n.t("Notifications") + (" %d" % unread if unread > 0 else "")], ["bank", "bank", "Bank"], ["tasks", "tasks", "Tasks"],
 		["map", "map", "City"], ["shoplane", "orders", "ShopLane"], ["timeline", "calendar", "Timeline"],
 		["leases", "home", "Leases"], ["relationships", "people", "Relationships"], ["tax_filing", "finance", "Tax Filing"], ["news", "mail", "City news"], ["guide", "info", "City Guide"], ["opportunities", "tasks", "Opportunities"], ["save", "save", "Save"], ["close", "close", "Close"]]
+	apps.insert(apps.size() - 2, ["assistant", "people", "Assistant"])
 	if GameState.flag("consolidation_started") or GameState.flag("legacy_invited"):
 		apps.insert(apps.size() - 1, ["legacy", "company", "Legacy"])
 	if BuildingInfo.world_travel_available():
@@ -201,6 +202,9 @@ func _open_app(a: String) -> void:
 	if not FeatureGate.unlocked("app_"+a):return
 	FeatureGate.viewed("app_"+a)
 	match a:
+		"assistant":
+			close()
+			UIRoot.open_modal(AssistantModal.new())
 		"relationships":
 			close()
 			UIRoot.open_modal(ContactsModal.new())

@@ -80,6 +80,9 @@ func test_highlighted_number_key_runs_normal_callback_and_advances_once() -> voi
 		await frames()
 
 func test_weekly_forecast_matches_actual_bill_boundary_and_manual_due_dates() -> void:
+	# Already-hired legacy billing fixture; fresh manual billing has separate coverage.
+	GameState.data["assistant"] = {"tasks":{"bills":true},"default":false}
+	AssistantPolicy.migrate(GameState.data)
 	Clock.advance_to(5 * Clock.DAY + 23 * 60)
 	var cost := Living.daily_living() * 7.0
 	var forecast := Forecast.weekly("player", 2)

@@ -298,11 +298,11 @@ msgstr "再做 %d 班升为%s"
 msgid "%d new delivery runs are posted (Company OS → Logistics)."
 msgstr "有 %d 趟新的外送单上架了（Company OS → 物流）。"
 
-#: scripts/ui/phone_ui.gd:438
+#: scripts/ui/phone_ui.gd:442
 msgid "%d of %d days"
 msgstr "%d／%d 天"
 
-#: scripts/ui/phone_ui.gd:423
+#: scripts/ui/phone_ui.gd:427
 msgid "%d of %d reached"
 msgstr "已达成 %d／%d"
 
@@ -514,7 +514,7 @@ msgstr "%s 选了竞争者的报价。请检查单价，再尝试另一张询价
 msgid "%s closed: %d customers, %s in the till."
 msgstr "%s 打烊了：%d 位客人，收银 %s。"
 
-#: scripts/sim/assistant_policy.gd:110
+#: scripts/sim/assistant_policy.gd:205
 msgid "%s does not have enough cash to pay a bill. It is waiting in Finance; add funds or pay it when you can."
 msgstr "%s 的现金不够缴帐单。帐单先放在「财务」里，资金充足时再付就好。"
 
@@ -1210,7 +1210,7 @@ msgstr "谈成好条件"
 msgid "A better price, a longer handshake. A year to earn the rest."
 msgstr "价格更好，握手更久。剩下的一年后再赚。"
 
-#: scripts/sim/assistant_policy.gd:154
+#: scripts/sim/assistant_policy.gd:249
 msgid "A bill is past its due date. A small late fee was added; pay it from Finance when you can."
 msgstr "有一张帐单过了缴费期限，已加收少许逾期费。方便时到「财务」缴清即可。"
 
@@ -2102,7 +2102,7 @@ msgstr "接下集团委托"
 msgid "Accept it to start the clock."
 msgstr "接单后才开始计时。"
 
-#: scripts/ui/phone_ui.gd:242
+#: scripts/ui/phone_ui.gd:246
 msgid "Accept opportunity"
 msgstr "接受机会"
 
@@ -2234,7 +2234,7 @@ msgstr "照着打正确就好，慢慢来。"
 msgid "Accurate checkout improves conversion during your one-hour shift. Waiting does not lower quality; practice creates no income."
 msgstr "一小时的班里，收对金额就有好表现。不用赶时间，练习也不会产生收入。"
 
-#: scripts/ui/modals/growth_modal.gd:17 scripts/ui/modals/pause_menu.gd:28 scripts/ui/phone_ui.gd:368
+#: scripts/ui/modals/growth_modal.gd:17 scripts/ui/modals/pause_menu.gd:28 scripts/ui/phone_ui.gd:372
 msgid "Achievements"
 msgstr "成就"
 
@@ -2522,7 +2522,7 @@ msgstr "Alex"
 msgid "Alex Chen"
 msgstr "Alex Chen"
 
-#: scripts/ui/phone_ui.gd:258
+#: scripts/ui/phone_ui.gd:262
 msgid "All"
 msgstr "全部"
 
@@ -2538,13 +2538,17 @@ msgstr "所有文件 (*)"
 msgid "All cost rows are in home dollars; the buyer quote is labelled with its own currency."
 msgstr "各项成本都以本国元列示；买方报价另标明使用的货币。"
 
-#: scripts/ui/phone_ui.gd:381
+#: scripts/ui/phone_ui.gd:385
 msgid "All events"
 msgstr "全部事件"
 
 #: scripts/ui/minigames/clerk_forms_game.gd:33
 msgid "All good? Approve it. Something wrong? Click the wrong field first, then Reject."
 msgstr "都没问题就「核准」。有错的话，先点出错的字段，再按「退件」。"
+
+#: scripts/ui/modals/assistant_modal.gd:67
+msgid "All listed chores"
+msgstr "列出的全部杂务"
 
 #: scripts/world/actions.gd:327
 msgid "All packed. The courier comes at 16:00."
@@ -2558,7 +2562,7 @@ msgstr "一切平静。出去走走吧。"
 msgid "All save slots are in use. Choose one for the new game. The old save is moved to a backup folder, not deleted."
 msgstr "存盘字段都满了。选一个给新游戏用，旧存盘会移到备份文件夹，不会删掉。"
 
-#: scripts/ui/phone_ui.gd:392
+#: scripts/ui/phone_ui.gd:396
 msgid "All years"
 msgstr "全部年份"
 
@@ -3106,7 +3110,7 @@ msgstr "安排每天的早班或晚班。同一名员工不能同时在两家店
 msgid "Assigning a worker to one counter removes that same shift from the other counter; an empty shift stays closed unless the owner works."
 msgstr "把员工排到一家店，就会取消另一家店的同时段班次。无人值班时，除非自己顾店，否则不营业。"
 
-#: data/help/help.json scripts/sim/phone_messages.gd:201 scripts/ui/modals/settings_modal.gd:5
+#: data/help/help.json data/ui/feature_unlocks.json scripts/ui/modals/settings_modal.gd:5 scripts/ui/phone_ui.gd:165
 msgid "Assistant"
 msgstr "助理"
 
@@ -3426,7 +3430,7 @@ msgstr "自动化产线"
 msgid "Automatic filing correction: %s"
 msgstr "自动申报补正：%s"
 
-#: scripts/ui/global_market_ui.gd:97
+#: scripts/ui/global_market_ui.gd:98
 msgid "Automatically convert weekly foreign payouts"
 msgstr "每周海外拨款后自动换汇"
 
@@ -3490,7 +3494,7 @@ msgstr "航空"
 msgid "Awaiting courier"
 msgstr "等待快递"
 
-#: scripts/ui/global_market_ui.gd:104
+#: scripts/ui/global_market_ui.gd:105
 msgid "Awaiting payout (%s)"
 msgstr "待拨款（%s）"
 
@@ -4366,7 +4370,7 @@ msgstr "公司登记——奥瑞莉亚市"
 msgid "Business account opened. %s now runs on its own books."
 msgstr "企业帐户已开立。%s 从此有自己的帐本了。"
 
-#: scripts/sim/ecommerce.gd:1572
+#: scripts/sim/ecommerce.gd:1573
 msgid "Business assets contributed to %s (in kind)"
 msgstr "以实物出资给 %s"
 
@@ -4614,7 +4618,7 @@ msgstr "BuyMaterials"
 msgid "Buyer"
 msgstr "买方负担"
 
-#: scripts/sim/ecommerce.gd:1462
+#: scripts/sim/ecommerce.gd:1463
 msgid "Buyer %s opened a dispute on order %s. We refunded them and charged a $15 dispute fee."
 msgstr "买家 %s 对订单 %s 提出申诉。我们已退款给对方，并收取 $15 申诉处理费。"
 
@@ -5142,7 +5146,7 @@ msgstr "旺季周末真正的上限可能是房务产能，而不是需求。"
 msgid "Capital"
 msgstr "资金"
 
-#: scripts/sim/ecommerce.gd:1573
+#: scripts/sim/ecommerce.gd:1574
 msgid "Capital contributed in kind by founder"
 msgstr "创办人实物出资"
 
@@ -6306,6 +6310,14 @@ msgstr "请选择搬迁库存或折价出清。"
 msgid "Choose where to work next. Check the exit costs before giving notice."
 msgstr "选择下一个工作空间，退租前先看退出费用。"
 
+#: scripts/ui/modals/assistant_modal.gd:45
+msgid "Choose which chores I handle after we team up."
+msgstr "成为队友后，再选择要交给我的杂务。"
+
+#: data/help/help.json
+msgid "Choose which chores Maya handles. Expand her services when you want more help; weekly fees use personal cash. If cash is short, her chores pause without accumulating debt, and manual controls still work."
+msgstr "自行选择交给 Maya 的杂务。需要更多帮忙时再扩充服务；每周费用使用个人现金。现金不足会暂停助理工作，不累积欠费，仍可手动操作。"
+
 #: data/help/calm_screens.json
 msgid "Choose your hotel direction. Daily rates and cleaning can stay with the assistant."
 msgstr "选择旅馆方向，每日房价与清洁可以交给助理。"
@@ -6326,6 +6338,10 @@ msgstr "ChoosePrivateRoute"
 msgid "Choosing a lower-rate category does not change the goods: wrong declarations lead to duty correction and a fine."
 msgstr "选较低税率不会改变商品；申报错误须补税并付罚款。"
 
+#: scripts/ui/modals/assistant_modal.gd:60
+msgid "Chores are paused. Manual controls still work; no unpaid fees build up."
+msgstr "助理工作已暂停。你仍可手动操作，也不会累积欠费。"
+
 #: scripts/ui/modals/business_board.gd:135
 msgid "Chose a first business: ecommerce."
 msgstr "选了第一门生意：电商。"
@@ -6334,7 +6350,7 @@ msgstr "选了第一门生意：电商。"
 msgid "Chris Walsh"
 msgstr "Chris Walsh"
 
-#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:163 scripts/ui/phone_ui.gd:258
+#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:163 scripts/ui/phone_ui.gd:262
 msgid "City"
 msgstr "城市"
 
@@ -6426,7 +6442,7 @@ msgstr "城市清单只显示可以使用的生意与场所；主要按钮会带
 msgid "City map"
 msgstr "城市地图"
 
-#: data/ui/feature_unlocks.json scripts/ui/market_view.gd:33 scripts/ui/phone_ui.gd:164 scripts/ui/phone_ui.gd:459
+#: data/ui/feature_unlocks.json scripts/ui/market_view.gd:33 scripts/ui/phone_ui.gd:164 scripts/ui/phone_ui.gd:463
 msgid "City news"
 msgstr "城市新闻"
 
@@ -6626,7 +6642,7 @@ msgstr "清算危机"
 msgid "Click! %d%% (%s)"
 msgstr "喀嚓！%d%%（%s）"
 
-#: data/npcs/client.json scripts/sim/phone_messages.gd:203
+#: data/npcs/client.json scripts/sim/phone_messages.gd:205
 msgid "Client"
 msgstr "客户"
 
@@ -7058,7 +7074,7 @@ msgstr "通勤族"
 msgid "Compact"
 msgstr "小型车"
 
-#: scripts/ui/modals/bank_modal.gd:82 scripts/ui/phone_ui.gd:381
+#: scripts/ui/modals/bank_modal.gd:82 scripts/ui/phone_ui.gd:385
 msgid "Company"
 msgstr "公司"
 
@@ -7562,7 +7578,7 @@ msgstr "通过视频或出差，联系 Lumina 的 Omar"
 msgid "Contact Omar with a live registered company first."
 msgstr "请先成立仍在营运的公司，再联系 Omar。"
 
-#: scripts/ui/modals/company_os.gd:959 scripts/ui/modals/contacts_modal.gd:6 scripts/ui/phone_ui.gd:381
+#: scripts/ui/modals/company_os.gd:959 scripts/ui/modals/contacts_modal.gd:6 scripts/ui/phone_ui.gd:385
 msgid "Contacts"
 msgstr "联系人"
 
@@ -7674,7 +7690,7 @@ msgstr "转换人次"
 msgid "Convert %s %s to home cash: %s"
 msgstr "换汇 %s %s，入帐本国币：%s"
 
-#: scripts/ui/global_market_ui.gd:107
+#: scripts/ui/global_market_ui.gd:108
 msgid "Convert to home cash (%s)"
 msgstr "换导入帐（%s）"
 
@@ -8002,7 +8018,7 @@ msgstr "Crestline 的秋季灯具系列。有一层架子还空着。"
 msgid "Crestline's offer is in Company OS → Contracts: accept, counter or decline"
 msgstr "Crestline 的报价在 Company OS →「合约」：接受、还价或拒绝"
 
-#: scripts/ui/phone_ui.gd:381
+#: scripts/ui/phone_ui.gd:385
 msgid "Crises"
 msgstr "危机"
 
@@ -9106,6 +9122,14 @@ msgstr "讨论库存与现金流"
 msgid "Discuss pricing and margin"
 msgstr "讨论定价与毛利"
 
+#: scripts/ui/modals/assistant_modal.gd:90
+msgid "Dismiss Maya"
+msgstr "结束与 Maya 的合作"
+
+#: data/help/help.json
+msgid "Dismiss Maya whenever you like. Your preferences stay saved for hiring again. Existing signed business obligations remain due."
+msgstr "可以随时结束与 Maya 的合作。原选项会保留供再次聘用。已签订的事业义务仍须履行。"
+
 #: scripts/ui/modals/lease_end_modal.gd:51
 msgid "Dismiss staff"
 msgstr "资遣员工"
@@ -9130,7 +9154,7 @@ msgstr "显示"
 msgid "Display, audio and key settings apply immediately and are stored separately. Assistant choices belong to the current saved game."
 msgstr "显示、音效与按键设置立即生效，另行保存。助理选择则保存在目前的游戏存盘。"
 
-#: scripts/sim/ecommerce.gd:1463
+#: scripts/sim/ecommerce.gd:1464
 msgid "Dispute lost on %s: −%s"
 msgstr "申诉败诉 %s：−%s"
 
@@ -9242,7 +9266,7 @@ msgstr "堪用。"
 msgid "Doesn't turn on."
 msgstr "开不了机。"
 
-#: scripts/sim/ecommerce.gd:1356
+#: scripts/sim/ecommerce.gd:1357
 msgid "Doesn't work. Out of the box."
 msgstr "一拆开就不能用。"
 
@@ -9254,7 +9278,7 @@ msgstr "本国"
 msgid "Don't forget to eat."
 msgstr "记得吃饭。"
 
-#: scripts/ui/modals/bank_modal.gd:97 scripts/ui/modals/pack_ship_modal.gd:73 scripts/ui/modals/settings_modal.gd:72
+#: scripts/ui/modals/assistant_modal.gd:93 scripts/ui/modals/bank_modal.gd:97 scripts/ui/modals/pack_ship_modal.gd:73 scripts/ui/modals/settings_modal.gd:72
 msgid "Done"
 msgstr "完成"
 
@@ -9610,7 +9634,7 @@ msgstr "轻松"
 msgid "Eat"
 msgstr "吃"
 
-#: data/businesses/ecommerce.json data/help/industry_intros.json data/ui/feature_unlocks.json scripts/sim/ecommerce.gd:1628
+#: data/businesses/ecommerce.json data/help/industry_intros.json data/ui/feature_unlocks.json scripts/sim/ecommerce.gd:1629
 msgid "Ecommerce"
 msgstr "电商"
 
@@ -10093,6 +10117,10 @@ msgstr "各种方式都有取舍，照你的想法选。"
 #: data/help/glossary.json
 msgid "Every binned pastry is money spent for nothing. Order for the day you expect, not the day you hope for."
 msgstr "每丢掉一个糕点，就是白花一笔钱。照你预期的生意量订货，不要照你希望的。"
+
+#: scripts/sim/assistant_policy.gd:81 scripts/ui/modals/assistant_modal.gd:88
+msgid "Every chore is already unlocked."
+msgstr "所有服务都已解锁。"
 
 #: autoload/scene_router.gd:181
 msgid "Every day"
@@ -10886,7 +10914,7 @@ msgstr "第一张海外订单"
 msgid "First parcel out"
 msgstr "第一件包裹出货"
 
-#: scripts/sim/ecommerce.gd:1494
+#: scripts/sim/ecommerce.gd:1495
 msgid "First payout from ShopLane: %s."
 msgstr "第一笔 ShopLane 拨款：%s。"
 
@@ -10910,7 +10938,7 @@ msgstr "第一笔营收！ShopLane 每周一拨款。"
 msgid "First roof lit"
 msgstr "第一个屋顶亮灯"
 
-#: scripts/sim/ecommerce.gd:1282
+#: scripts/sim/ecommerce.gd:1283
 msgid "First sale: %s bought %s for %s."
 msgstr "第一笔销售：%s 买了%s，%s。"
 
@@ -11718,7 +11746,7 @@ msgstr "轻擦"
 msgid "Global Consolidation"
 msgstr "全球整并"
 
-#: scripts/ui/phone_ui.gd:294
+#: scripts/ui/phone_ui.gd:298
 msgid "Go"
 msgstr "前往"
 
@@ -12626,6 +12654,14 @@ msgstr "高解析美术"
 msgid "Hire"
 msgstr "聘用"
 
+#: scripts/sim/assistant_policy.gd:80
+msgid "Hire Maya before adding more chores."
+msgstr "先聘用 Maya，再扩充服务。"
+
+#: scripts/ui/modals/assistant_modal.gd:47
+msgid "Hire Maya · %s"
+msgstr "聘用 Maya · %s"
+
 #: scripts/ui/manufacturing_ui.gd:96
 msgid "Hire Tomas · $1,100/week"
 msgstr "雇用 Tomas · 每周 $1,100"
@@ -13110,6 +13146,10 @@ msgstr "我准备好了。你会拿到一个数字，还有我怎么算出来的
 msgid "I'm starting a company."
 msgstr "我要开公司。"
 
+#: scripts/sim/assistant_policy.gd:111
+msgid "I'm taking a break until the weekly fee is covered. You can handle chores yourself or add personal cash and resume from my page."
+msgstr "这周的服务费还没付，我先休息一下。你可以自己处理杂务，或补足个人帐户的现金，再到我的页面恢复服务。"
+
 #: data/dialogue/nina_first.json
 msgid "I've got a meeting that matters."
 msgstr "我有个很重要的会议。"
@@ -13290,7 +13330,7 @@ msgstr "清算危机（第 5 年）期间，汇到国外的钱要好几天才到
 msgid "In the workshop"
 msgstr "整备中"
 
-#: scripts/ui/modals/company_os.gd:619 scripts/ui/phone_ui.gd:349
+#: scripts/ui/modals/company_os.gd:619 scripts/ui/phone_ui.gd:353
 msgid "In transit"
 msgstr "运送中"
 
@@ -13990,6 +14030,10 @@ msgstr "可以送完，但有些路你开了两遍。"
 msgid "It's %s. You're not tired yet: you can sleep from 7:00 PM, or after working a shift. Waiting for something? Work a shift or tidy up the business meanwhile."
 msgstr "现在是 %s。你还不累：晚上 7 点以后，或上完一个班之后才能睡。在等什么吗？先去上个班，或整理一下生意。"
 
+#: scripts/sim/assistant_policy.gd:47
+msgid "It's Maya! I'm your assistant now. Your existing chores and choices are unchanged, and your first week is covered. Find me on the Assistant page."
+msgstr "我是 Maya！现在由我担任你的助理。原本交给我的工作与设置都会保留，第一周的费用也已包含。到助理页面就能找到我。"
+
 #: data/dialogue/daniel_big_deal.json
 msgid "It's a lot of lamps for a small company. Think about the cash, not the headline."
 msgstr "对小公司来说灯很多。想想现金，别只看总金额。"
@@ -14058,7 +14102,7 @@ msgstr "工单收款：%s"
 msgid "Job penalties"
 msgstr "工单违约金"
 
-#: scripts/sim/phone_messages.gd:207
+#: scripts/sim/phone_messages.gd:209
 msgid "Jobs Board"
 msgstr "征才公告"
 
@@ -14077,6 +14121,10 @@ msgstr "加入城市合作，由市府预算支付供应商"
 #: scripts/ui/modals/fitness_modal.gd:20
 msgid "Join · %s per month"
 msgstr "加入会员 · 每月 %s"
+
+#: scripts/ui/modals/assistant_modal.gd:46
+msgid "Join: %s · Weekly: %s · First week included"
+msgstr "加入费：%s · 每周：%s · 已含第一周"
 
 #: scripts/ui/minigames/clerk_forms_game.gd:8
 msgid "Jon Silva"
@@ -14245,6 +14293,14 @@ msgstr "卡鲁"
 #: data/economy/fx.json
 msgid "Karu Unit"
 msgstr "Karu 元"
+
+#: scripts/sim/assistant_policy.gd:69 scripts/ui/modals/assistant_modal.gd:55
+msgid "Keep %s in your personal account to hire Maya."
+msgstr "个人帐户保留 %s，就能聘用 Maya。"
+
+#: scripts/sim/assistant_policy.gd:83
+msgid "Keep %s in your personal account to upgrade."
+msgstr "个人帐户保留 %s，就能扩充服务。"
 
 #: scripts/sim/housing.gd:55
 msgid "Keep %s personally for the new deposit, moving and termination costs."
@@ -14586,7 +14642,7 @@ msgstr "贩售中"
 msgid "Labour cost ratio"
 msgstr "人事成本比率"
 
-#: data/milestones.json scripts/sim/phone_messages.gd:205
+#: data/milestones.json scripts/sim/phone_messages.gd:207
 msgid "Landlord"
 msgstr "房东"
 
@@ -14674,7 +14730,7 @@ msgstr "迟到"
 msgid "Late arrivals can work a shorter shift when at least 2 hours remain before closing, with pay based on hours worked."
 msgstr "离打烊至少还有 2 小时，就能上较短的班，依实际工时领薪。"
 
-#: scripts/sim/assistant_policy.gd:151
+#: scripts/sim/assistant_policy.gd:246
 msgid "Late bill fee"
 msgstr "帐单逾期费"
 
@@ -15122,6 +15178,14 @@ msgstr "Leo"
 msgid "Let %s go."
 msgstr "资遣了 %s。"
 
+#: scripts/sim/assistant_policy.gd:146
+msgid "Let Maya handle all listed chores"
+msgstr "把列出的杂务都交给 Maya"
+
+#: scripts/sim/assistant_policy.gd:135
+msgid "Let Maya handle it"
+msgstr "交给 Maya 处理"
+
 #: scripts/ui/modals/company_os.gd:893
 msgid "Let go"
 msgstr "资遣"
@@ -15130,17 +15194,9 @@ msgstr "资遣"
 msgid "Let other bidders respond"
 msgstr "让其他竞标者回应"
 
-#: scripts/sim/assistant_policy.gd:61
-msgid "Let the assistant handle all chores"
-msgstr "全部杂事交给助理"
-
 #: data/help/patch_notes.json
 msgid "Let the assistant handle chores: restocking, packing, bills, taxes, renewals and more. Turn each one on or off in Settings → Assistant."
 msgstr "杂事可以交给助理：补货、包装、帐单、报税、续约等。可在「设置 → 助理」逐项开关。"
-
-#: scripts/sim/assistant_policy.gd:51
-msgid "Let the assistant handle it"
-msgstr "交给助理"
 
 #: data/events/media_client.json
 msgid "Let them go and refund the advance"
@@ -15202,11 +15258,11 @@ msgstr "执照已续期到 %s。"
 msgid "Licensing Officer"
 msgstr "执照承办员"
 
-#: scripts/ui/phone_ui.gd:258 scripts/ui/phone_ui.gd:381
+#: scripts/ui/phone_ui.gd:262 scripts/ui/phone_ui.gd:385
 msgid "Life"
 msgstr "人生"
 
-#: scripts/ui/phone_ui.gd:365
+#: scripts/ui/phone_ui.gd:369
 msgid "Life Timeline"
 msgstr "人生纪录"
 
@@ -15890,7 +15946,7 @@ msgstr "主要成本"
 msgid "Main freight"
 msgstr "主运费"
 
-#: scripts/ui/modals/growth_modal.gd:64 scripts/ui/phone_ui.gd:419
+#: scripts/ui/modals/growth_modal.gd:64 scripts/ui/phone_ui.gd:423
 msgid "Main-story achievements"
 msgstr "主线成就"
 
@@ -16154,7 +16210,7 @@ msgstr "毛利维持，但充电的车主变少。"
 msgid "Margins shrink while the tariff eases over two months."
 msgstr "电价在两个月内逐步回落，期间毛利缩水。"
 
-#: scripts/ui/phone_ui.gd:264
+#: scripts/ui/phone_ui.gd:268
 msgid "Mark all read"
 msgstr "全部标为已读"
 
@@ -16170,7 +16226,7 @@ msgstr "市场"
 msgid "Market competition"
 msgstr "市场竞争"
 
-#: scripts/ui/market_view.gd:8 scripts/ui/phone_ui.gd:460
+#: scripts/ui/market_view.gd:8 scripts/ui/phone_ui.gd:464
 msgid "Market conditions"
 msgstr "市场状况"
 
@@ -16334,7 +16390,7 @@ msgstr "Max"
 msgid "May"
 msgstr "5月"
 
-#: data/npcs/maya.json scripts/ui/modals/company_os.gd:969
+#: data/npcs/maya.json scripts/sim/phone_messages.gd:203 scripts/ui/modals/assistant_modal.gd:31 scripts/ui/modals/company_os.gd:969
 msgid "Maya"
 msgstr "Maya"
 
@@ -16346,13 +16402,33 @@ msgstr "Maya 发现旧迎新指南说咖啡店晚上仍营业，但目前时刻�
 msgid "Maya helps you resume the tutorial when loading a game, and coding exercises focus on a few key lines."
 msgstr "读档后 Maya 会协助接续教学；程序练习聚焦在几行关键代码。"
 
+#: scripts/sim/assistant_policy.gd:66
+msgid "Maya is already on your team."
+msgstr "Maya 已经是你的队友了。"
+
 #: data/story/personal/maya.json
 msgid "Maya is making a welcome walk for a neighbour who uses a wheelchair. The park has a step-free path, while the shortcut has stairs. Which route belongs in the guide?"
 msgstr "Maya 正为使用轮椅的新邻居规划迎新散步。公园有无阶梯步道，捷径却有楼梯。指南应采用哪条路线？"
 
+#: scripts/sim/assistant_policy.gd:76 scripts/ui/modals/assistant_modal.gd:31
+msgid "Maya joined your team!"
+msgstr "Maya 加入你的队伍了！"
+
+#: scripts/ui/modals/assistant_modal.gd:9
+msgid "Maya · Your assistant"
+msgstr "Maya · 你的助理"
+
 #: data/events/viral_mention.json
 msgid "Maya: \"Enjoy your 15 minutes, superstar.\""
 msgstr "Maya：「好好享受你的 15 分钟成名时刻，大明星。」"
+
+#: scripts/sim/assistant_policy.gd:84
+msgid "Maya: expanded assistant service"
+msgstr "Maya：扩充助理服务"
+
+#: scripts/sim/assistant_policy.gd:70
+msgid "Maya: joining fee and first week"
+msgstr "Maya：加入费与第一周服务"
 
 #: data/story/personal/maya.json
 msgid "Maya: neighbour welcome guide · part 1"
@@ -16365,6 +16441,10 @@ msgstr "Maya：邻里迎新指南・第 2 段"
 #: data/story/personal/maya.json
 msgid "Maya: neighbour welcome guide · part 3"
 msgstr "Maya：邻里迎新指南・第 3 段"
+
+#: scripts/sim/assistant_policy.gd:113
+msgid "Maya: weekly assistant retainer"
+msgstr "Maya：每周助理服务费"
 
 #: data/dialogue/marcus_loan.json
 msgid "Maybe. Register a company, open an account with us, and give it a couple of weeks."
@@ -16482,6 +16562,10 @@ msgstr "找 Lena 讨论十二号厂房的第一张代工报价。"
 msgid "Meet Marcus Reed now"
 msgstr "现在找 Marcus Reed 洽谈"
 
+#: scripts/sim/assistant_policy.gd:155 scripts/sim/assistant_policy.gd:160 scripts/ui/modals/assistant_modal.gd:9
+msgid "Meet Maya"
+msgstr "认识 Maya"
+
 #: data/story/chapters.json
 msgid "Meet Maya at Bloom Coffee or speak by phone"
 msgstr "在 Bloom Coffee 与 Maya 见面，或以电话交谈"
@@ -16533,10 +16617,6 @@ msgstr "请先认识这位人物，再邀请到家里。"
 #: scripts/sim/personal_life.gd:47
 msgid "Meet this person in town or at a city event first."
 msgstr "先在城里或城市活动认识这个人。"
-
-#: scripts/sim/assistant_policy.gd:36
-msgid "Meet your assistant: it can restock, pay bills and file taxes for you. Everything stays as you left it. To turn chores on, open Settings, then the Assistant page."
-msgstr "认识你的助理：它可以帮你补货、缴费和报税。一切维持你原本的设置。想打开自动处理，请到「设置」的「助理」页面。"
 
 #: scripts/sim/shop_life.gd:49
 msgid "Membership already renews — choose a class."
@@ -16682,7 +16762,7 @@ msgstr "里程会消耗车况。车况越低，越容易故障；故障会延误
 msgid "Milestone: %s"
 msgstr "里程碑：%s"
 
-#: scripts/ui/phone_ui.gd:381
+#: scripts/ui/phone_ui.gd:385
 msgid "Milestones"
 msgstr "里程碑"
 
@@ -16850,7 +16930,7 @@ msgstr "月结——%s"
 msgid "Month close"
 msgstr "月结"
 
-#: scripts/ui/phone_ui.gd:350
+#: scripts/ui/phone_ui.gd:354
 msgid "Month sales"
 msgstr "本月销售"
 
@@ -16914,6 +16994,14 @@ msgstr "士气 %d 分"
 msgid "Morale drops when pay is late or work piles up."
 msgstr "薪水晚发或工作堆积时，士气会下降。"
 
+#: scripts/ui/modals/assistant_modal.gd:81
+msgid "More chores · %s"
+msgstr "扩充服务 · %s"
+
+#: scripts/sim/assistant_policy.gd:86
+msgid "More chores, more room to play!"
+msgstr "杂务交给队友，空出时间去玩！"
+
 #: data/dialogue/rafael_costa_intro.json
 msgid "More electricians mean more crew-days each day, but they are paid every week even when rain stops the work. Hire me from the console once you have the warehouse."
 msgstr "电工越多，每天的工作天越多，但下雨停工时周薪照付。租下仓库后，可以从控制台雇用我。"
@@ -16929,6 +17017,10 @@ msgstr "更多服装在购物街的 Threadline。"
 #: data/help/glossary.json
 msgid "More subscribers increase revenue and server costs together. Leave room for this bill when pricing subscriptions."
 msgstr "订户增加时，营收与服务器费用一起增加；订阅定价要留出支付这笔帐单的空间。"
+
+#: scripts/ui/modals/assistant_modal.gd:75
+msgid "More ways to team up"
+msgstr "更多合作方式"
 
 #: scripts/ui/minigames/parcel_sort_game.gd:8
 msgid "Moreau"
@@ -17430,7 +17522,7 @@ msgstr "新游戏设置"
 msgid "New group job: %s"
 msgstr "新的集团委托：%s"
 
-#: scripts/sim/ecommerce.gd:1339
+#: scripts/sim/ecommerce.gd:1340
 msgid "New review %s: %s \"%s\""
 msgstr "新评价 %s：%s「%s」"
 
@@ -17630,6 +17722,10 @@ msgstr "Nia Park：实习学习作品集・第 3 段"
 msgid "Nice streak: %d happy guests!"
 msgstr "连续成功：%d 位开心的客人！"
 
+#: scripts/sim/assistant_policy.gd:63
+msgid "Nice work on your first parcel! Want a teammate for the boxes and routine chores? I'm Maya. Hire me when you're ready; your first week is included."
+msgstr "第一件包裹出货了，做得好！想找个队友帮忙包裹和日常杂务吗？我是 Maya。准备好再聘我就行，第一周的费用已包含。"
+
 #: scripts/ui/minigames/mini_game.gd:379
 msgid "Nice work!"
 msgstr "做得好！"
@@ -17690,7 +17786,7 @@ msgstr "每月一千九，押金两个月。交屋是空的：你自己装修，
 msgid "No"
 msgstr "否"
 
-#: scripts/sim/ecommerce.gd:1407
+#: scripts/sim/ecommerce.gd:1408
 msgid "No %s in stock to send."
 msgstr "没有%s的库存可以寄。"
 
@@ -17882,7 +17978,7 @@ msgstr "不必交代样本数"
 msgid "No new offers. More arrive every morning at 8:00."
 msgstr "没有新案子。每天早上 8:00 会有新的。"
 
-#: scripts/ui/phone_ui.gd:236
+#: scripts/ui/phone_ui.gd:240
 msgid "No new opportunities right now. Check again after your company grows."
 msgstr "目前没有新机会。公司有新进展后，再来看看。"
 
@@ -18282,7 +18378,7 @@ msgstr "没有可以上线的产品。"
 msgid "Nothing to pack here: is the stock at this location?"
 msgstr "这里没有可以打包的：货在这个地点吗？"
 
-#: scripts/sim/ecommerce.gd:1382
+#: scripts/sim/ecommerce.gd:1383
 msgid "Nothing to resolve."
 msgstr "没有需要处理的事。"
 
@@ -18310,7 +18406,7 @@ msgstr "通知停留时间"
 msgid "Notifications"
 msgstr "通知中心"
 
-#: scripts/ui/phone_ui.gd:343
+#: scripts/ui/phone_ui.gd:347
 msgid "Notifications only.\nManage at a desk: Company OS."
 msgstr "这里只显示通知。\n要管理请到办公桌：Company OS。"
 
@@ -19258,7 +19354,7 @@ msgstr "营运方冻结所有跨链桥转帐约一周，追查资金去向。"
 msgid "Operators: 'Most balances will be restored. There is a shortfall.'"
 msgstr "营运方：「大部分余额会回复，但有缺口。」"
 
-#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:164 scripts/ui/phone_ui.gd:229
+#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:164 scripts/ui/phone_ui.gd:233
 msgid "Opportunities"
 msgstr "机会"
 
@@ -19506,7 +19602,7 @@ msgstr "海外交付（笔）"
 msgid "Overseas delivery %s: %s %s"
 msgstr "海外订单 %s 送达：%s %s"
 
-#: scripts/sim/ecommerce.gd:1453
+#: scripts/sim/ecommerce.gd:1454
 msgid "Overseas dispute fee"
 msgstr "海外交易争议处理费"
 
@@ -19770,6 +19866,14 @@ msgstr "打包 %d 笔订单%s（%s）"
 msgid "Pack & deliver %d units (B2B freight $40)"
 msgstr "打包并交货 %d 件（B2B 货运 $40）"
 
+#: data/story/chapters.json
+msgid "Pack and send your first parcel"
+msgstr "打包并寄出第一件包裹"
+
+#: data/story/chapters.json
+msgid "Pack and send your first parcel abroad"
+msgstr "打包并寄出第一件海外包裹"
+
 #: data/help/help.json
 msgid "Pack at your existing table and book an international courier. After delivery and the hold period, weekly payouts enter your foreign wallet."
 msgstr "在原本的包装桌打包，再预约国际快递。送达并度过保留期后，每周拨款会转入外币钱包。"
@@ -19830,7 +19934,7 @@ msgstr "已打包订单 %s"
 msgid "Packed well"
 msgstr "打包得很好"
 
-#: scripts/ui/phone_ui.gd:348
+#: scripts/ui/phone_ui.gd:352
 msgid "Packed, not shipped"
 msgstr "已打包未出货"
 
@@ -20010,7 +20114,7 @@ msgstr "兼职、商品摄影、打包、写程序与接案都有亲手操作的
 msgid "Part-time jobs: take one to earn a wage. You work the shifts yourself at the workplace (staff door, press E)."
 msgstr "「兼职工作」：选一份赚薪水。班要自己到工作地点上（员工信道按 E）。"
 
-#: scripts/sim/ecommerce.gd:1424
+#: scripts/sim/ecommerce.gd:1425
 msgid "Partial refund 30%% %s: %s"
 msgstr "部分退款 30%% %s：%s"
 
@@ -20126,7 +20230,7 @@ msgstr "先付 {trial_fee} 签约费，{trial_days} 天内实际包裹运费减�
 msgid "Pay again by wire ({reroute_cost})"
 msgstr "改用电汇重新付款（{reroute_cost}）"
 
-#: scripts/sim/assistant_policy.gd:165
+#: scripts/sim/assistant_policy.gd:260
 msgid "Pay all bills · %s"
 msgstr "全部缴清 · %s"
 
@@ -20134,7 +20238,7 @@ msgstr "全部缴清 · %s"
 msgid "Pay an actual loan in full."
 msgstr "还清一笔实际借过的贷款。"
 
-#: scripts/sim/assistant_policy.gd:171
+#: scripts/sim/assistant_policy.gd:266
 msgid "Pay bill · %s"
 msgstr "缴费 · %s"
 
@@ -20286,11 +20390,11 @@ msgstr "《支付诚信法》生效：超过 $2,500 的转帐要做 KYC 审查�
 msgid "Payments start-ups promise audits and an insurance pool."
 msgstr "支付新创承诺接受稽核，并成立保险基金。"
 
-#: scripts/sim/ecommerce.gd:1492
+#: scripts/sim/ecommerce.gd:1493
 msgid "Payout sent: %s to your business account."
 msgstr "拨款已送出：%s 导入你的公司帐户。"
 
-#: scripts/sim/ecommerce.gd:1492
+#: scripts/sim/ecommerce.gd:1493
 msgid "Payout sent: %s to your personal account."
 msgstr "拨款已送出：%s 导入你的个人帐户。"
 
@@ -20378,7 +20482,7 @@ msgstr "许可"
 msgid "Permits & regulations"
 msgstr "许可与法规"
 
-#: scripts/ui/modals/bank_modal.gd:80 scripts/ui/phone_ui.gd:304
+#: scripts/ui/modals/bank_modal.gd:80 scripts/ui/phone_ui.gd:308
 msgid "Personal"
 msgstr "个人"
 
@@ -20402,7 +20506,7 @@ msgstr "个人帐户"
 msgid "Personal assets have real costs"
 msgstr "个人资产也有持有成本"
 
-#: scripts/ui/phone_ui.gd:352
+#: scripts/ui/phone_ui.gd:356
 msgid "Personal cap"
 msgstr "个人上限"
 
@@ -20881,6 +20985,10 @@ msgstr "精密制造"
 #: data/help/glossary.json
 msgid "Preexisting health coverage"
 msgstr "事故前健康保障"
+
+#: scripts/ui/modals/assistant_modal.gd:89
+msgid "Preferences stay saved. Hiring again costs %s."
+msgstr "原本的选项会保留。再次聘用需支付 %s。"
 
 #: scripts/ui/modals/contacts_modal.gd:37
 msgid "Prefers: %s"
@@ -22074,7 +22182,7 @@ msgstr "可以运行策略了。"
 msgid "Ready to approach"
 msgstr "可以接洽"
 
-#: scripts/ui/global_market_ui.gd:105
+#: scripts/ui/global_market_ui.gd:106
 msgid "Ready to convert (%s)"
 msgstr "可换汇余额（%s）"
 
@@ -22402,7 +22510,7 @@ msgstr "更新询价试算"
 msgid "Refund"
 msgstr "退款"
 
-#: scripts/sim/ecommerce.gd:1401
+#: scripts/sim/ecommerce.gd:1402
 msgid "Refund %s: %s (return label paid)"
 msgstr "退款 %s：%s（已付退货运费）"
 
@@ -22754,7 +22862,7 @@ msgstr "翻修还需 %d 天完工"
 msgid "Rent"
 msgstr "租金"
 
-#: scripts/ui/phone_ui.gd:310
+#: scripts/ui/phone_ui.gd:314
 msgid "Rent $1,250 due the 14th"
 msgstr "房租 $1,250，14 号到期"
 
@@ -22914,7 +23022,7 @@ msgstr "要取代 %s（第 %d 天）吗？"
 msgid "Replacement on its way. {customer}: \"Oh — nice. Didn't expect that.\""
 msgstr "新品已在路上。{customer}：「喔——不错耶，没想到。」"
 
-#: scripts/sim/ecommerce.gd:1417
+#: scripts/sim/ecommerce.gd:1418
 msgid "Replacement sent %s: %s (express)"
 msgstr "已寄出替换品 %s：%s（快捷）"
 
@@ -23122,7 +23230,7 @@ msgstr "度假村 SPA 与泳池"
 msgid "Resources & Agriculture"
 msgstr "资源与农业"
 
-#: scripts/ui/phone_ui.gd:197
+#: scripts/ui/phone_ui.gd:198
 msgid "Respond"
 msgstr "回复"
 
@@ -23181,6 +23289,10 @@ msgstr "结算会记录净值、经过时间与评分，再计算挑战分数。
 #: scripts/ui/group_ui.gd:65 scripts/ui/modals/company_os.gd:519 scripts/ui/modals/pause_menu.gd:13
 msgid "Resume"
 msgstr "恢复"
+
+#: scripts/ui/modals/assistant_modal.gd:61
+msgid "Resume Maya's help"
+msgstr "恢复 Maya 的帮忙"
 
 #: scripts/ui/media_ui.gd:136
 msgid "Resume after funding the media purchase"
@@ -24134,7 +24246,7 @@ msgstr "送达时售价（奥瑞莉亚元）"
 msgid "Sale delivered %s: %d × %s @ %s"
 msgstr "销售已送达 %s：%d × %s @ %s"
 
-#: scripts/sim/ecommerce.gd:1303
+#: scripts/sim/ecommerce.gd:1304
 msgid "Sale delivered %s: %s — %s"
 msgstr "订单 %s 已送达：%s — %s"
 
@@ -24298,7 +24410,7 @@ msgstr "先备妥购车与首期保险所需的公司现金。"
 msgid "Save exported. Keep this file outside your browser."
 msgstr "存盘已导出。请把文件保存在浏览器以外的地方。"
 
-#: scripts/ui/phone_ui.gd:447
+#: scripts/ui/phone_ui.gd:451
 msgid "Save game"
 msgstr "保存游戏"
 
@@ -24310,7 +24422,7 @@ msgstr "存盘已导入，可以接着玩。"
 msgid "Save local price"
 msgstr "保存当地售价"
 
-#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:448
+#: scripts/ui/modals/pause_menu.gd:15 scripts/ui/phone_ui.gd:452
 msgid "Save now"
 msgstr "立即存盘"
 
@@ -24486,7 +24598,7 @@ msgstr "已保存"
 msgid "Saved %s"
 msgstr "存于 %s"
 
-#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:450
+#: scripts/ui/modals/pause_menu.gd:17 scripts/ui/phone_ui.gd:454
 msgid "Saved (slot %d)."
 msgstr "已存盘（字段 %d）。"
 
@@ -24842,14 +24954,6 @@ msgstr "送出还价"
 msgid "Send the damaged parcel onward"
 msgstr "直接送出破损包裹"
 
-#: data/story/chapters.json
-msgid "Send your first parcel (your assistant can help)"
-msgstr "寄出第一份包裹（助理可以帮忙）"
-
-#: data/story/chapters.json
-msgid "Send your first parcel abroad (your assistant can help)"
-msgstr "寄出第一份海外包裹（助理可以帮忙）"
-
 #: scripts/ui/modals/fundraising_modal.gd:245
 msgid "SendCounter"
 msgstr "送出还价"
@@ -25166,6 +25270,18 @@ msgstr "上市后再推出三个功能。"
 msgid "Ship to: %s"
 msgstr "寄到：%s"
 
+#: data/ui/feature_unlocks.json
+msgid "Ship your first parcel"
+msgstr "寄出第一件包裹"
+
+#: scripts/sim/assistant_policy.gd:67 scripts/ui/modals/assistant_modal.gd:54
+msgid "Ship your first parcel before hiring Maya."
+msgstr "先亲手寄出第一件包裹，就能聘用 Maya。"
+
+#: data/help/help.json
+msgid "Ship your first parcel yourself, then meet Maya on the Assistant page. Hire her for a small joining fee with the first week included."
+msgstr "先亲手寄出第一件包裹，再到助理页面认识 Maya。支付少量加入费即可聘用，费用已包含第一周。"
+
 #: data/events/shipment_lost.json
 msgid "Shipment lost at sea"
 msgstr "货柜在海上遗失"
@@ -25214,7 +25330,7 @@ msgstr "店面租金"
 msgid "Shop roof"
 msgstr "店面屋顶"
 
-#: data/economy/marketplace.json data/npcs/shoplane.json data/ui/feature_unlocks.json scripts/sim/phone_messages.gd:209
+#: data/economy/marketplace.json data/npcs/shoplane.json data/ui/feature_unlocks.json scripts/sim/phone_messages.gd:211
 msgid "ShopLane"
 msgstr "ShopLane"
 
@@ -25234,11 +25350,11 @@ msgstr "ShopLane Global 海外市集"
 msgid "ShopLane Global payout: %s %s"
 msgstr "ShopLane Global 拨款：%s %s"
 
-#: scripts/ui/phone_ui.gd:342
+#: scripts/ui/phone_ui.gd:346
 msgid "ShopLane Seller"
 msgstr "ShopLane 卖家"
 
-#: scripts/sim/ecommerce.gd:1504
+#: scripts/sim/ecommerce.gd:1505
 msgid "ShopLane ads: %s"
 msgstr "ShopLane 广告：%s"
 
@@ -25246,7 +25362,7 @@ msgstr "ShopLane 广告：%s"
 msgid "ShopLane balance (paid Mondays)"
 msgstr "ShopLane 余额（每周一拨款）"
 
-#: scripts/sim/ecommerce.gd:1458
+#: scripts/sim/ecommerce.gd:1459
 msgid "ShopLane dispute lost %s: forced refund + $15 fee"
 msgstr "ShopLane 申诉败诉 %s：强制退款＋$15 手续费"
 
@@ -25266,7 +25382,7 @@ msgstr "ShopLane 每笔销售先扣 10% 手续费，再拨款给你。"
 msgid "ShopLane marketplace: %d%% fee, weekly payouts, personal sellers capped at %s/month."
 msgstr "ShopLane 平台：抽成 %d%%，每周拨款，个人卖家每月上限 %s。"
 
-#: scripts/sim/ecommerce.gd:1496
+#: scripts/sim/ecommerce.gd:1497
 msgid "ShopLane negative balance charged to card"
 msgstr "ShopLane 负余额已从信用卡扣款"
 
@@ -25278,11 +25394,11 @@ msgstr "ShopLane 暂停了你的商品：已达个人卖家上限。"
 msgid "ShopLane payout"
 msgstr "ShopLane 拨款"
 
-#: scripts/sim/ecommerce.gd:1491
+#: scripts/sim/ecommerce.gd:1492
 msgid "ShopLane payout received: %s"
 msgstr "收到 ShopLane 拨款：%s"
 
-#: scripts/ui/phone_ui.gd:309
+#: scripts/ui/phone_ui.gd:313
 msgid "ShopLane pending"
 msgstr "ShopLane 待拨款"
 
@@ -25302,7 +25418,7 @@ msgstr "同样成交放在 ShopLane 的利润估算"
 msgid "ShopLane seller cap lifted · B2B contracts unlocked · office leases unlocked · supplier net terms unlocked"
 msgstr "解除 ShopLane 卖家上限 · 解锁 B2B 合约 · 解锁办公室租约 · 解锁供应商票期"
 
-#: scripts/sim/ecommerce.gd:1489
+#: scripts/sim/ecommerce.gd:1490
 msgid "ShopLane weekly payout"
 msgstr "ShopLane 每周拨款"
 
@@ -25386,7 +25502,7 @@ msgstr "已承租展示中心"
 msgid "Side part"
 msgstr "旁分"
 
-#: data/help/glossary.json scripts/ui/phone_ui.gd:230
+#: data/help/glossary.json scripts/ui/phone_ui.gd:234
 msgid "Side stories"
 msgstr "支线故事"
 
@@ -25778,7 +25894,7 @@ msgstr "已售出"
 msgid "Sold %d cars · profit so far %s"
 msgstr "已售 %d 辆 · 目前获利 %s"
 
-#: scripts/sim/ecommerce.gd:1542
+#: scripts/sim/ecommerce.gd:1543
 msgid "Sold %d × %s to liquidator (%d%% of cost)"
 msgstr "卖给清仓商：%d × %s（成本的 %d%%）"
 
@@ -25846,7 +25962,7 @@ msgstr "Northridge 有人在推荐你的商品。先看新闻、找 Marcus 了�
 msgid "Someone must be behind the counter: hire a Barista (People tab), or work the counter yourself inside the café. Walk-outs and running out of coffee pull the rating down."
 msgstr "吧台一定要有人：雇一位咖啡师（人员分页），或自己到店里站吧台。客人排队排到走掉、或咖啡材料用完，都会拉低评分。"
 
-#: scripts/ui/phone_ui.gd:195
+#: scripts/ui/phone_ui.gd:196
 msgid "Something"
 msgstr "某件事"
 
@@ -26902,7 +27018,7 @@ msgstr "税则要符合商品本身；选较低的税率，不会改变商品种
 msgid "Tariff correction penalty %s: %s"
 msgstr "订单 %s 税则更正罚款：%s"
 
-#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:162 scripts/ui/phone_ui.gd:322
+#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:162 scripts/ui/phone_ui.gd:326
 msgid "Tasks"
 msgstr "任务"
 
@@ -28526,7 +28642,7 @@ msgstr "这些设备今天不需要保养。"
 msgid "This furniture style is already installed. Keep it or choose another."
 msgstr "家里已是这个风格；可保留或改选其他家具。"
 
-#: scripts/ui/phone_ui.gd:455
+#: scripts/ui/phone_ui.gd:459
 msgid "This game autosaves to slot %d every few seconds. A new game gets its own slot; load other games from the title screen."
 msgstr "这场游戏每隔几秒自动存到字段 %d。新游戏会用自己的字段；其他存盘可以在标题画面读取。"
 
@@ -28938,7 +29054,7 @@ msgstr "剩余时间"
 msgid "Time to finish"
 msgstr "完成期限"
 
-#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:163 scripts/ui/phone_ui.gd:368
+#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:163 scripts/ui/phone_ui.gd:372
 msgid "Timeline"
 msgstr "人生纪录"
 
@@ -28958,7 +29074,7 @@ msgstr "老旧房间会拉低每则评价的清洁与价值感分数。"
 msgid "To Startup Hub"
 msgstr "前往新创园区"
 
-#: scripts/ui/modals/company_os.gd:619 scripts/ui/phone_ui.gd:347
+#: scripts/ui/modals/company_os.gd:619 scripts/ui/phone_ui.gd:351
 msgid "To pack"
 msgstr "待打包"
 
@@ -29410,10 +29526,6 @@ msgstr "接受物流商介绍"
 msgid "Tue"
 msgstr "二"
 
-#: data/help/help.json
-msgid "Turn a chore off to handle it yourself. If cash is short, fund the company or use the original manual action; existing signed obligations remain due."
-msgstr "关闭项目就能自己处理。周转金不足时，可补入公司资金或用原有手动操作；已签契约的款项仍须支付。"
-
 #: data/story/achievements.json
 msgid "Turn down the first acquisition offer."
 msgstr "拒绝第一次收购提案。"
@@ -29614,7 +29726,7 @@ msgstr "未知的代理商危机。"
 msgid "Unknown automotive crisis."
 msgstr "未知的汽车危机。"
 
-#: scripts/sim/customs.gd:100 scripts/sim/ecommerce.gd:1434 scripts/sim/global_market.gd:328
+#: scripts/sim/customs.gd:100 scripts/sim/ecommerce.gd:1435 scripts/sim/global_market.gd:328
 msgid "Unknown choice."
 msgstr "未知的选项。"
 
@@ -29661,6 +29773,10 @@ msgstr "未知的对象。"
 #: scripts/sim/cafe.gd:178
 msgid "Unknown supply pack."
 msgstr "没有这种材料包。"
+
+#: scripts/ui/modals/assistant_modal.gd:80
+msgid "Unlock more chores as your businesses grow. This adds services, not performance bonuses."
+msgstr "随着事业成长，解锁更多杂务服务。扩充的是服务项目，不会增加经营数值。"
 
 #: scripts/sim/manufacturing.gd:276
 msgid "Unlock your own brand and choose a valid batch."
@@ -29878,7 +29994,7 @@ msgstr "创业大楼"
 msgid "VIP suite upgrade for a critic"
 msgstr "为评论家升等 VIP 套房"
 
-#: scripts/sim/phone_messages.gd:146 scripts/sim/phone_messages.gd:147 scripts/sim/phone_messages.gd:48
+#: scripts/sim/phone_messages.gd:147 scripts/sim/phone_messages.gd:148 scripts/sim/phone_messages.gd:48
 msgid "VISIT-"
 msgstr "VISIT-"
 
@@ -30634,6 +30750,10 @@ msgstr "每周拨款"
 msgid "Weekly payroll"
 msgstr "每周薪资"
 
+#: scripts/ui/modals/assistant_modal.gd:58
+msgid "Weekly: %s · Covered until %s"
+msgstr "每周：%s · 已付至 %s"
+
 #: scripts/sim/careers.gd:83
 msgid "Welcome aboard! Shifts are 4 hours, any time we're open. Come by the staff door when you're ready."
 msgstr "欢迎加入！每班 4 小时，营业时间内随时可以来。准备好就从员工信道进来。"
@@ -30894,7 +31014,7 @@ msgstr "拿到市府的绿色企业补助：%s。"
 msgid "Wood desk"
 msgstr "木头桌面"
 
-#: scripts/ui/phone_ui.gd:258 scripts/world/building_info.gd:201
+#: scripts/ui/phone_ui.gd:262 scripts/world/building_info.gd:201
 msgid "Work"
 msgstr "工作"
 
@@ -30986,7 +31106,7 @@ msgstr "厂房屋顶"
 msgid "Workshops"
 msgstr "场工作坊"
 
-#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:168
+#: data/ui/feature_unlocks.json scripts/ui/phone_ui.gd:169
 msgid "World"
 msgstr "世界"
 
@@ -31022,7 +31142,7 @@ msgstr "嗯。"
 msgid "Yeah. Just looking."
 msgstr "对。先看看。"
 
-#: scripts/ui/phone_ui.gd:392 scripts/ui/phone_ui.gd:401
+#: scripts/ui/phone_ui.gd:396 scripts/ui/phone_ui.gd:405
 msgid "Year %d"
 msgstr "%d 年"
 
@@ -31137,6 +31257,10 @@ msgstr "现在不能这么做。"
 #: scripts/world/building_info.gd:169
 msgid "You can: %s"
 msgstr "你可以：%s"
+
+#: scripts/ui/modals/assistant_modal.gd:34
+msgid "You choose the next adventure. I'll handle the boxes."
+msgstr "下一段冒险由你决定，包裹就交给我。"
 
 #: data/legacy.json
 msgid "You connected goods, customers and places through real trades."
@@ -31490,15 +31614,11 @@ msgstr "你的 Maple Court 住户"
 msgid "Your application is being processed."
 msgstr "你的申请正在审核中。"
 
-#: scripts/sim/assistant_policy.gd:350
+#: scripts/sim/assistant_policy.gd:447
 msgid "Your assistant adjusted some hotel settings you had not chosen yourself."
 msgstr "助理调整了几项你还没亲自设置的旅馆选项。"
 
-#: data/help/help.json
-msgid "Your assistant handles repetitive chores for the businesses and assets you have chosen. Supplies, wages, tax and delivery still cost real money."
-msgstr "助理替你选好的事业与资产处理重复杂事。补给、工资、税款及运送仍照常付费。"
-
-#: scripts/sim/assistant_policy.gd:185
+#: scripts/sim/assistant_policy.gd:280
 msgid "Your assistant needs more cash for the next chore. Fund the company or handle it yourself."
 msgstr "助理的下一项工作需要周转金。可以补入公司资金，或先自己处理。"
 
@@ -31722,7 +31842,7 @@ msgstr "你自己的包裹"
 msgid "Your payment is stuck on the frozen bridge until about %s. Pay again by another rail to get the goods moving; the frozen money comes back when the bridge reopens."
 msgstr "你的款项卡在冻结的跨链桥上，预计 %s 前后恢复。改用别的管道再付一次，货才会动；冻结的钱等跨链桥重开后退回。"
 
-#: scripts/sim/assistant_policy.gd:109 scripts/sim/living.gd:145
+#: scripts/sim/assistant_policy.gd:204 scripts/sim/living.gd:145
 msgid "Your personal account"
 msgstr "你的个人帐户"
 
@@ -32058,7 +32178,7 @@ msgstr "司机"
 msgid "due "
 msgstr "到期 "
 
-#: scripts/sim/assistant_policy.gd:172
+#: scripts/sim/assistant_policy.gd:267
 msgid "due %s"
 msgstr "%s 到期"
 
@@ -32514,7 +32634,7 @@ msgstr "交件即付款"
 msgid "passenger trips"
 msgstr "乘客趟次"
 
-#: scripts/ui/phone_ui.gd:355
+#: scripts/ui/phone_ui.gd:359
 msgid "paused: cap"
 msgstr "暂停：已达上限"
 
@@ -32994,7 +33114,7 @@ msgstr "→ 公司 $1,000"
 msgid "−100 units"
 msgstr "−100 件"
 
-#: scripts/ui/phone_ui.gd:195
+#: scripts/ui/phone_ui.gd:196
 msgid "◆ %s needs a decision"
 msgstr "◆ %s 需要你做决定"
 

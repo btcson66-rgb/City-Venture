@@ -45,7 +45,7 @@ func run() -> void:
 		await _city_future_season()
 		await _summary()
 		if _arg("main-only") == "1":
-			bot.expect(AssistantPolicy.S()["tasks"].values().all(func(v):return bool(v)),"all assistant switches enabled throughout full main story")
+			bot.expect(AssistantPolicy.hired() and AssistantPolicy.TASKS.keys().all(func(id):return not AssistantPolicy.available(str(id)) or AssistantPolicy.permitted(str(id))),"player-selected available assistant chores enabled throughout main story")
 			await _save_load()
 			return
 		await _industry_fixtures()
@@ -333,7 +333,7 @@ func _after_ch9() -> void:
 	await _city_future_season()
 	await _summary()
 	if _arg("main-only") == "1":
-		bot.expect(AssistantPolicy.S()["tasks"].values().all(func(v):return bool(v)), "all assistant switches enabled throughout full main story")
+		bot.expect(AssistantPolicy.hired() and AssistantPolicy.TASKS.keys().all(func(id):return not AssistantPolicy.available(str(id)) or AssistantPolicy.permitted(str(id))), "player-selected available assistant chores enabled throughout main story")
 		await _save_load()
 		return
 	await _industry_fixtures()
@@ -834,6 +834,7 @@ func popups() -> void:
 			await bot.frames(3)
 			m = UIRoot.top_modal()
 			if m == null:
+				await _select_available_assistant_chores()
 				return
 		if m is IndustryGuideModal:
 			await bot.click_named("IndustryGuideSkip")
@@ -1123,6 +1124,45 @@ func pass_time_at_home(pred: Callable, max_naps := 12, sleep_only := false) -> b
 	return bool(pred.call())
 
 
+func _hire_maya_after_manual_shipment() -> void:
+	bot.expect(not AssistantPolicy.hired(), "first parcel was packed and sent without a hired assistant")
+	await popups()
+	UIRoot.phone.open()
+	await bot.wait(.3)
+	await bot.click_named("App_messages")
+	await bot.shot("maya_first_manual_shipment_offer")
+	var offers: Array = GameState.data["messages"].filter(func(m):return m.get("target", {}).get("kind", "") == "assistant")
+	if not bot.expect(not offers.is_empty(), "real shipment offers named teammate"):return
+	await bot.click_named("NotificationGo_" + str(offers.back()["id"]))
+	await bot.wait(.3)
+	await bot.shot("maya_hiring_profile")
+	var cash := Ledger.cash("player")
+	await bot.click_named("AssistantHire")
+	await bot.wait(.15)
+	await bot.shot("maya_joins_happy")
+	bot.expect(AssistantPolicy.hired() and absf(Ledger.cash("player") - (cash - float(AssistantPolicy.cfg()["hire_fee"]))) < .02, "real UI hire pays joining fee")
+	bot.expect(AssistantPolicy.S()["tasks"].values().all(func(v):return not bool(v)), "hiring leaves chore choices with player")
+	await bot.click_named("Assistant_packing")
+	await bot.click_named("AssistantMore")
+	await bot.click_named("AssistantUpgrade")
+	await bot.click_named("AssistantAll")
+	await bot.shot("maya_player_selected_chores")
+	await bot.click_named("AssistantDone")
+	UIRoot.phone.close()
+	bot.expect(Ledger.check_balanced(), "hire and expansion are balanced expenses, not revenue")
+
+func _select_available_assistant_chores() -> void:
+	if not AssistantPolicy.hired() or UIRoot.phone.is_open:return
+	var pending: bool = AssistantPolicy.TASKS.keys().any(func(id):return AssistantPolicy.available(str(id)) and not bool(AssistantPolicy.S()["tasks"][id]))
+	if not pending:return
+	# Explicit real input when new services appear; no invisible future chores are selected.
+	UIRoot.phone.open()
+	await bot.wait(.2)
+	await bot.click_named("App_assistant")
+	await bot.click_named("AssistantAll")
+	await bot.click_named("AssistantDone")
+	UIRoot.phone.close()
+
 func _pack_and_ship_home() -> void:
 	if AssistantPolicy.enabled("packing"):
 		await bot.until(func():return Ecommerce.orders_with(["placed","packed"],"riverside_studio").is_empty(),120.0)
@@ -1362,6 +1402,7 @@ func _chapter2() -> void:
 	bot.step("Delivery → first dollar")
 	var delivered: bool = await pass_time_at_home(func(): return GameState.stat("orders_delivered") >= 1, 12)
 	bot.expect(delivered, "first order delivered (Earn Your First Dollar)")
+	await _hire_maya_after_manual_shipment()
 	var rev := -Ledger.balance("player", "revenue")
 	bot.log_line("  revenue booked %s · ShopLane balance %s · cash %s" % [Fmt.money(rev), Fmt.money(Ledger.balance("player", "marketplace_balance")), Fmt.money(Ledger.cash("player"))])
 	await bot.shot("first_dollar")
@@ -2190,7 +2231,7 @@ func _manufacturing() -> void:
 		Clock.advance_to(Clock.at_day_time(1, 9*60)+16*60)
 		await popups()
 	await bot.use_action("manufacturing_open")
-	# With the assistant on (the new-game default, #154) a finished order is delivered and invoiced on its own.
+	# With the explicitly hired assistant on a finished order is delivered and invoiced on its own.
 	if Jobs.get_job(job)["status"] != "invoiced":
 		await bot.click_named("Deliver_"+job)
 	bot.expect(Jobs.get_job(job)["status"] == "invoiced", "first factory revenue has a completed traceable order")
@@ -2765,6 +2806,12 @@ func _fast_forward_to_ch10() -> void:
 			st["done"].append(o["id"])
 	st["chapter"] = "ch9_clearing_crisis"
 	World.set_year(5)
+	# Independent industry fixtures represent an existing enabled predecessor assistant.
+	# Main fresh-game flow above performs genuine manual shipment and paid UI hire.
+	var chores := {}
+	for id in AssistantPolicy.TASKS:chores[id] = true
+	GameState.data["assistant"] = {"tasks":chores,"default":true}
+	AssistantPolicy.migrate(GameState.data)
 	for f in ["phone_opened", "business_chosen", "met_lina", "exchange_account", "employer_registered"]:
 		GameState.set_flag(f)
 	StoryEngine.start_chapter("ch10_digital_rails")

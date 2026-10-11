@@ -92,12 +92,13 @@ static func finance(os: CompanyOS, box: VBoxContainer) -> void:
 	box.add_child(UIK.label_tip(I18n.t("Bank spread: %.1f%%") % (float(FX.cfg().get("bank_spread", 0.015)) * 100), "fx_spread"))
 	box.add_child(UIK.label_tip("Realized exchange gain / loss", "fx_gain_loss"))
 	box.add_child(UIK.kv("Realized exchange gain / loss", Fmt.money(-Ledger.balance(GameState.company_id(), "fx_gain_loss"))))
-	var auto := CheckBox.new()
-	auto.name = "AutoGlobalFX"
-	auto.text = I18n.t("Automatically convert weekly foreign payouts")
-	auto.button_pressed = bool(GlobalMarket.company()["auto_fx"])
-	auto.toggled.connect(func(on): AssistantPolicy.set_task("fx", on))
-	box.add_child(auto)
+	if AssistantPolicy.task_unlocked("fx"):
+		var auto := CheckBox.new()
+		auto.name = "AutoGlobalFX"
+		auto.text = I18n.t("Automatically convert weekly foreign payouts")
+		auto.button_pressed = bool(GlobalMarket.company()["auto_fx"])
+		auto.toggled.connect(func(on): AssistantPolicy.set_task("fx", on))
+		box.add_child(auto)
 	var first := true
 	for ccy in GlobalMarket.company()["balances"]:
 		var b := GlobalMarket.balance(GameState.company_id(), str(ccy))

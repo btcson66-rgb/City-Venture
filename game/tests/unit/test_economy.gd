@@ -186,7 +186,10 @@ func test_rent_due_day_14() -> void:
 	while Clock.day_index() < 14 or Clock.hour() < 10:
 		Clock.advance(60)
 	runner.eq(GameState.data["living"]["rent_history"].size(), 1, "rent paid on the 14th")
-	runner.check(Ledger.cash("player") < cash0 - 1250.0, "rent + living deducted")
+	runner.check(not AssistantPolicy.unpaid("player").is_empty(), "fresh manual living bills remain payable")
+	AssistantPolicy.pay_all()
+	runner.check(Ledger.cash("player") < cash0 - 1250.0, "rent and real manually paid living costs deducted")
+	runner.check(Ledger.check_balanced(), "rent and manual bills balanced")
 
 
 func test_seller_cap_pauses_until_registration() -> void:

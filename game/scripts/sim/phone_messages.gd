@@ -133,6 +133,7 @@ static func get_message(id: String) -> Dictionary:
 static func actionable(message: Dictionary) -> bool:
 	var target: Dictionary = message.get("target", {})
 	match str(target.get("kind", "")):
+		"assistant":return true
 		"decision":return EventEngine.pending().any(func(e):return e["iid"] == target.get("id", ""))
 		"company":
 			if target.get("tab", "") == "contracts":return Contracts.C().get(target.get("id", ""), {}).get("status", "") in ["offered", "active"]
@@ -170,6 +171,7 @@ static func destination(message: Dictionary) -> Control:
 			screen.selected = str(target.get("id", ""))
 			screen.partner_sel = str(target.get("id", ""))
 			return screen
+		"assistant":return AssistantModal.new()
 		"bank":return LoanModal.new(false)
 		"map":
 			var screen := CityMapModal.new(false)
@@ -198,7 +200,7 @@ static func contact_name(npc: String) -> String:
 	if not person.is_empty(): return I18n.t(str(person["name"]))
 	match npc:
 		"assistant":
-			return I18n.t("Assistant")
+			return I18n.t("Maya")
 		"client":
 			return I18n.t("Client")
 		"landlord":
