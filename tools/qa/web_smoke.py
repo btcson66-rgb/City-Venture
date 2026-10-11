@@ -32,6 +32,7 @@ class Flow:
         self.page, self.out = page, out
         out.mkdir(parents=True, exist_ok=True)
         self.steps, self.errors, self.touches = [], [], 0
+        self.recoveries = []
         page.on('console', lambda m: self.errors.append(m.text) if m.type == 'error' or 'SCRIPT ERROR:' in m.text or 'Parse Error:' in m.text else None)
         page.on('pageerror', lambda e: self.errors.append(str(e)))
 
@@ -298,13 +299,14 @@ class Flow:
             try:
                 self.until(lambda s: s.get('shifts') == 1 and s.get('cash',0)>cash, 'actual payout')
                 break
-            except AssertionError:
+            except AssertionError as payout_error:
                 state=self.state()
                 # A slow trip can leave the original workplace card stale after the
                 # two-hour closing boundary. Exercise real next-day recovery rather
                 # than setting time, accepting fake pay or hiding a console failure.
                 if self.errors or shift_attempt or state.get('modal') or state.get('shifts') != 0 or state.get('time',0)%1440 < 18*60:
                     raise
+                self.recoveries.append({'step':'late_shift_no_pay','failure':str(payout_error),'game_time':state.get('time'),'cash':state.get('cash'),'shifts':state.get('shifts')})
                 self.shot('late_shift_no_pay_recovery')
                 self.door(); self.door('riverside_apartment')
                 self.until(lambda s: s.get('time',0)%1440 >= 19*60, 'real bedtime', timeout=180)
@@ -411,7 +413,7 @@ def main():
                             except Exception as capture_error:
                                 # A crashed page cannot be captured; keep the original failure and go on to the next combination.
                                 result['capture_failure']=str(capture_error)
-                        result.update(steps=flow.steps,console_errors=flow.errors,touches=flow.touches)
+                        result.update(steps=flow.steps,console_errors=flow.errors,touches=flow.touches,recovered_failures=flow.recoveries)
                         results.append(result)
                         (flow.out/'result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
                         context.close()
