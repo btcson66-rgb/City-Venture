@@ -1,0 +1,56 @@
+chromium-portrait-large-zh_TW large_text_setting
+chromium-portrait-large-zh_TW title
+chromium-portrait-large-zh_TW character_creator
+chromium-portrait-large-zh_TW new_game
+{"name": "chromium-portrait-large-zh_TW", "browser_version": "149.0.7827.55", "viewport": [390, 844], "size": "large", "locale": "zh_TW", "status": "FAIL", "failure": "Walking through door bloom_coffee failed", "steps": [{"step": "large_text_setting", "world": null, "modal": "", "font_size": 3, "touch": true}, {"step": "title", "world": null, "modal": "", "font_size": 3, "touch": true}, {"step": "character_creator", "world": null, "modal": "", "font_size": 3, "touch": true}, {"step": "new_game", "world": "riverside_apartment", "modal": "", "font_size": 3, "touch": true}], "console_errors": [], "touches": 14}
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 51103)
+Traceback (most recent call last):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 672, in __init__
+    super().__init__(*args, **kwargs)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 766, in __init__
+    self.handle()
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 679, in do_GET
+    self.copyfile(f, self.wfile)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 878, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 204, in copyfileobj
+    fdst_write(buf)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 845, in write
+    self._sock.sendall(b)
+ConnectionResetError: [WinError 10054] ���ݥD���w�j�������@�Ӳ{�s���s�u�C
+----------------------------------------
+{"name": "chromium-landscape-large-zh_TW", "browser_version": "149.0.7827.55", "viewport": [844, 390], "size": "large", "locale": "zh_TW", "status": "FAIL", "failure": "Page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"http://127.0.0.1:50836/index.html?cv_smoke=1\", waiting until \"domcontentloaded\"\n", "steps": [], "console_errors": [], "touches": 0}
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 51104)
+Traceback (most recent call last):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 672, in __init__
+    super().__init__(*args, **kwargs)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 766, in __init__
+    self.handle()
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 679, in do_GET
+    self.copyfile(f, self.wfile)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 878, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 204, in copyfileobj
+    fdst_write(buf)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 845, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] �s�u�w�Q�z�D���W���n�餤��C
+----------------------------------------

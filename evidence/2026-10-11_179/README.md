@@ -216,3 +216,7 @@ Experienced-player fixture traversed every directed walking link after scenery c
 Self-review: retained native footprints and exact 4x detail, prevented skyline erasing planted ground, replaced automatic tree rows instead of layering them over new courts, kept street/crossing geometry intact, included water/clear promenade/connector retention coordinates, and made empty-lot regression reject fake garden declarations and trees-only lots.
 
 New art sources and exact original/cleanup prompts: [source record](../../docs/art_sources/district_completion_179/source.json). Existing trees, benches, lamps, metro, traffic and pedestrians are reused. New reading pavilions/markets are scenery, not new businesses or enterable shops. No gameplay, economy values or save keys changed; Session I protected files unchanged.
+
+## 最終補充驗證
+
+[實際匯出 Web 24 組、觸控流程、原生長等待／重試／六產業與失敗歷史](final-verification/README.md)：Chromium 12/12、console/page error 0；WebKit 12/12 因 framebuffer console error 未通過（#187）；直式 Company OS／大字 HUD 版面問題另記 #186。實體裝置與真人體驗未驗證。

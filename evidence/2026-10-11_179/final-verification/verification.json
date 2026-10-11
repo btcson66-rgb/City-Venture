@@ -1,0 +1,1536 @@
+{
+  "runtime_source": "8cb2234c6c238495119f57d3d689c4344a05e9b7",
+  "qa_fixture_source": "08f213cdb38b44c5e3941ab1fc9d998118cced6d",
+  "chromium_graphics": "zh_TW: ANGLE SwiftShader; en: --enable-gpu --use-angle=d3d11 (Quadro RTX 4000). Renderer probe confirmed both backends available; not a performance comparison.",
+  "pck_bytes": 127227328,
+  "pck_sha256": "4a8bd9340f15384c8e3abb0627b8c92ffbb33a9cd2336e7d7cdbc879b81c6efc",
+  "web_cases": 24,
+  "chromium_pass": 12,
+  "webkit_pass": 0,
+  "results": [
+    {
+      "name": "chromium-portrait-default-zh_TW",
+      "browser_version": "149.0.7827.55",
+      "viewport": [
+        390,
+        844
+      ],
+      "size": "default",
+      "locale": "zh_TW",
+      "status": "PASS",
+      "steps": [
+        {
+          "step": "title",
+          "world": null,
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "character_creator",
+          "world": null,
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "new_game",
+          "world": "riverside_apartment",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "first_job_practice",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "practice_ready",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "first_job_results",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "first_job_paid",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "company_os",
+          "world": "bloom_coffee",
+          "modal": "CompanyOS",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "notifications",
+          "world": "nexus_bank",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "notification_go",
+          "world": "nexus_bank",
+          "modal": "CityMapModal",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "saved",
+          "world": "nexus_bank",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "reload_loaded",
+          "world": "nexus_bank",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        }
+      ],
+      "console_errors": [],
+      "touches": 134
+    },
+    {
+      "name": "chromium-portrait-default-en",
+      "browser_version": "149.0.7827.55",
+      "viewport": [
+        390,
+        844
+      ],
+      "size": "default",
+      "locale": "en",
+      "status": "PASS",
+      "steps": [
+        {
+          "step": "title",
+          "world": null,
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "character_creator",
+          "world": null,
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "new_game",
+          "world": "riverside_apartment",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "first_job_practice",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "practice_ready",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "first_job_results",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "first_job_paid",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "company_os",
+          "world": "bloom_coffee",
+          "modal": "CompanyOS",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "saved",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "reload_loaded",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        }
+      ],
+      "console_errors": [],
+      "touches": 91,
+      "launch_args": [
+        "--enable-gpu",
+        "--use-angle=d3d11"
+      ]
+    },
+    {
+      "name": "chromium-portrait-large-zh_TW",
+      "browser_version": "149.0.7827.55",
+      "viewport": [
+        390,
+        844
+      ],
+      "size": "large",
+      "locale": "zh_TW",
+      "status": "PASS",
+      "steps": [
+        {
+          "step": "large_text_setting",
+          "world": null,
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "title",
+          "world": null,
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "character_creator",
+          "world": null,
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "new_game",
+          "world": "riverside_apartment",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "first_job_practice",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "practice_ready",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "first_job_results",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "first_job_paid",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "company_os",
+          "world": "bloom_coffee",
+          "modal": "CompanyOS",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "saved",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "reload_loaded",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        }
+      ],
+      "console_errors": [],
+      "touches": 90
+    },
+    {
+      "name": "chromium-portrait-large-en",
+      "browser_version": "149.0.7827.55",
+      "viewport": [
+        390,
+        844
+      ],
+      "size": "large",
+      "locale": "en",
+      "status": "PASS",
+      "steps": [
+        {
+          "step": "large_text_setting",
+          "world": null,
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "title",
+          "world": null,
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "character_creator",
+          "world": null,
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "new_game",
+          "world": "riverside_apartment",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "first_job_practice",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "practice_ready",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "first_job_results",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "first_job_paid",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "company_os",
+          "world": "bloom_coffee",
+          "modal": "CompanyOS",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "saved",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "reload_loaded",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        }
+      ],
+      "console_errors": [],
+      "touches": 95,
+      "launch_args": [
+        "--enable-gpu",
+        "--use-angle=d3d11"
+      ]
+    },
+    {
+      "name": "chromium-landscape-default-zh_TW",
+      "browser_version": "149.0.7827.55",
+      "viewport": [
+        844,
+        390
+      ],
+      "size": "default",
+      "locale": "zh_TW",
+      "status": "PASS",
+      "steps": [
+        {
+          "step": "title",
+          "world": null,
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "character_creator",
+          "world": null,
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "new_game",
+          "world": "riverside_apartment",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "first_job_practice",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "practice_ready",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "first_job_results",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "first_job_paid",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "company_os",
+          "world": "bloom_coffee",
+          "modal": "CompanyOS",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "saved",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "reload_loaded",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        }
+      ],
+      "console_errors": [],
+      "touches": 89
+    },
+    {
+      "name": "chromium-landscape-default-en",
+      "browser_version": "149.0.7827.55",
+      "viewport": [
+        844,
+        390
+      ],
+      "size": "default",
+      "locale": "en",
+      "status": "PASS",
+      "steps": [
+        {
+          "step": "title",
+          "world": null,
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "character_creator",
+          "world": null,
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "new_game",
+          "world": "riverside_apartment",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "first_job_practice",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "practice_ready",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "first_job_results",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "first_job_paid",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "company_os",
+          "world": "bloom_coffee",
+          "modal": "CompanyOS",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "saved",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "reload_loaded",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        }
+      ],
+      "console_errors": [],
+      "touches": 90,
+      "launch_args": [
+        "--enable-gpu",
+        "--use-angle=d3d11"
+      ]
+    },
+    {
+      "name": "chromium-landscape-large-zh_TW",
+      "browser_version": "149.0.7827.55",
+      "viewport": [
+        844,
+        390
+      ],
+      "size": "large",
+      "locale": "zh_TW",
+      "status": "PASS",
+      "steps": [
+        {
+          "step": "large_text_setting",
+          "world": null,
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "title",
+          "world": null,
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "character_creator",
+          "world": null,
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "new_game",
+          "world": "riverside_apartment",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "first_job_practice",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "practice_ready",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "first_job_results",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "first_job_paid",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "company_os",
+          "world": "bloom_coffee",
+          "modal": "CompanyOS",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "saved",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "reload_loaded",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        }
+      ],
+      "console_errors": [],
+      "touches": 89
+    },
+    {
+      "name": "chromium-landscape-large-en",
+      "browser_version": "149.0.7827.55",
+      "viewport": [
+        844,
+        390
+      ],
+      "size": "large",
+      "locale": "en",
+      "status": "PASS",
+      "steps": [
+        {
+          "step": "large_text_setting",
+          "world": null,
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "title",
+          "world": null,
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "character_creator",
+          "world": null,
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "new_game",
+          "world": "riverside_apartment",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "first_job_practice",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "practice_ready",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "first_job_results",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "first_job_paid",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "company_os",
+          "world": "bloom_coffee",
+          "modal": "CompanyOS",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "saved",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "reload_loaded",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        }
+      ],
+      "console_errors": [],
+      "touches": 97,
+      "launch_args": [
+        "--enable-gpu",
+        "--use-angle=d3d11"
+      ]
+    },
+    {
+      "name": "chromium-tablet-default-zh_TW",
+      "browser_version": "149.0.7827.55",
+      "viewport": [
+        1024,
+        768
+      ],
+      "size": "default",
+      "locale": "zh_TW",
+      "status": "PASS",
+      "steps": [
+        {
+          "step": "title",
+          "world": null,
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "character_creator",
+          "world": null,
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "new_game",
+          "world": "riverside_apartment",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "first_job_practice",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "practice_ready",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "first_job_results",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "first_job_paid",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "company_os",
+          "world": "bloom_coffee",
+          "modal": "CompanyOS",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "saved",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "reload_loaded",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        }
+      ],
+      "console_errors": [],
+      "touches": 89
+    },
+    {
+      "name": "chromium-tablet-default-en",
+      "browser_version": "149.0.7827.55",
+      "viewport": [
+        1024,
+        768
+      ],
+      "size": "default",
+      "locale": "en",
+      "status": "PASS",
+      "steps": [
+        {
+          "step": "title",
+          "world": null,
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "character_creator",
+          "world": null,
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "new_game",
+          "world": "riverside_apartment",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "first_job_practice",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "practice_ready",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "first_job_results",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "first_job_paid",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "company_os",
+          "world": "bloom_coffee",
+          "modal": "CompanyOS",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "saved",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        },
+        {
+          "step": "reload_loaded",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 1,
+          "touch": true
+        }
+      ],
+      "console_errors": [],
+      "touches": 91,
+      "launch_args": [
+        "--enable-gpu",
+        "--use-angle=d3d11"
+      ]
+    },
+    {
+      "name": "chromium-tablet-large-zh_TW",
+      "browser_version": "149.0.7827.55",
+      "viewport": [
+        1024,
+        768
+      ],
+      "size": "large",
+      "locale": "zh_TW",
+      "status": "PASS",
+      "steps": [
+        {
+          "step": "large_text_setting",
+          "world": null,
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "title",
+          "world": null,
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "character_creator",
+          "world": null,
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "new_game",
+          "world": "riverside_apartment",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "first_job_practice",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "practice_ready",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "first_job_results",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "first_job_paid",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "company_os",
+          "world": "bloom_coffee",
+          "modal": "CompanyOS",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "saved",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "reload_loaded",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        }
+      ],
+      "console_errors": [],
+      "touches": 91
+    },
+    {
+      "name": "chromium-tablet-large-en",
+      "browser_version": "149.0.7827.55",
+      "viewport": [
+        1024,
+        768
+      ],
+      "size": "large",
+      "locale": "en",
+      "status": "PASS",
+      "steps": [
+        {
+          "step": "large_text_setting",
+          "world": null,
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "title",
+          "world": null,
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "character_creator",
+          "world": null,
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "new_game",
+          "world": "riverside_apartment",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "first_job_practice",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "practice_ready",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "first_job_results",
+          "world": "bloom_coffee",
+          "modal": "BaristaGame",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "first_job_paid",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "company_os",
+          "world": "bloom_coffee",
+          "modal": "CompanyOS",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "saved",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        },
+        {
+          "step": "reload_loaded",
+          "world": "bloom_coffee",
+          "modal": "",
+          "font_size": 3,
+          "touch": true
+        }
+      ],
+      "console_errors": [],
+      "touches": 96,
+      "launch_args": [
+        "--enable-gpu",
+        "--use-angle=d3d11"
+      ]
+    },
+    {
+      "name": "webkit-portrait-default-zh_TW",
+      "browser_version": "26.5",
+      "viewport": [
+        390,
+        844
+      ],
+      "size": "default",
+      "locale": "zh_TW",
+      "status": "FAIL",
+      "failure": "['WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)']",
+      "steps": [],
+      "console_errors": [
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)"
+      ],
+      "touches": 1
+    },
+    {
+      "name": "webkit-portrait-default-en",
+      "browser_version": "26.5",
+      "viewport": [
+        390,
+        844
+      ],
+      "size": "default",
+      "locale": "en",
+      "status": "FAIL",
+      "failure": "['WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)']",
+      "steps": [],
+      "console_errors": [
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)"
+      ],
+      "touches": 1,
+      "launch_args": []
+    },
+    {
+      "name": "webkit-portrait-large-zh_TW",
+      "browser_version": "26.5",
+      "viewport": [
+        390,
+        844
+      ],
+      "size": "large",
+      "locale": "zh_TW",
+      "status": "FAIL",
+      "failure": "['WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)']",
+      "steps": [],
+      "console_errors": [
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)"
+      ],
+      "touches": 6
+    },
+    {
+      "name": "webkit-portrait-large-en",
+      "browser_version": "26.5",
+      "viewport": [
+        390,
+        844
+      ],
+      "size": "large",
+      "locale": "en",
+      "status": "FAIL",
+      "failure": "['WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)']",
+      "steps": [],
+      "console_errors": [
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)"
+      ],
+      "touches": 6,
+      "launch_args": []
+    },
+    {
+      "name": "webkit-landscape-default-zh_TW",
+      "browser_version": "26.5",
+      "viewport": [
+        844,
+        390
+      ],
+      "size": "default",
+      "locale": "zh_TW",
+      "status": "FAIL",
+      "failure": "['WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)']",
+      "steps": [],
+      "console_errors": [
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)"
+      ],
+      "touches": 1
+    },
+    {
+      "name": "webkit-landscape-default-en",
+      "browser_version": "26.5",
+      "viewport": [
+        844,
+        390
+      ],
+      "size": "default",
+      "locale": "en",
+      "status": "FAIL",
+      "failure": "['WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)']",
+      "steps": [],
+      "console_errors": [
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)"
+      ],
+      "touches": 1,
+      "launch_args": []
+    },
+    {
+      "name": "webkit-landscape-large-zh_TW",
+      "browser_version": "26.5",
+      "viewport": [
+        844,
+        390
+      ],
+      "size": "large",
+      "locale": "zh_TW",
+      "status": "FAIL",
+      "failure": "['WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)']",
+      "steps": [],
+      "console_errors": [
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)"
+      ],
+      "touches": 6
+    },
+    {
+      "name": "webkit-landscape-large-en",
+      "browser_version": "26.5",
+      "viewport": [
+        844,
+        390
+      ],
+      "size": "large",
+      "locale": "en",
+      "status": "FAIL",
+      "failure": "['WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)']",
+      "steps": [],
+      "console_errors": [
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)"
+      ],
+      "touches": 6,
+      "launch_args": []
+    },
+    {
+      "name": "webkit-tablet-default-zh_TW",
+      "browser_version": "26.5",
+      "viewport": [
+        1024,
+        768
+      ],
+      "size": "default",
+      "locale": "zh_TW",
+      "status": "FAIL",
+      "failure": "['WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)']",
+      "steps": [],
+      "console_errors": [
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)"
+      ],
+      "touches": 1
+    },
+    {
+      "name": "webkit-tablet-default-en",
+      "browser_version": "26.5",
+      "viewport": [
+        1024,
+        768
+      ],
+      "size": "default",
+      "locale": "en",
+      "status": "FAIL",
+      "failure": "['WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)']",
+      "steps": [],
+      "console_errors": [
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)"
+      ],
+      "touches": 1,
+      "launch_args": []
+    },
+    {
+      "name": "webkit-tablet-large-zh_TW",
+      "browser_version": "26.5",
+      "viewport": [
+        1024,
+        768
+      ],
+      "size": "large",
+      "locale": "zh_TW",
+      "status": "FAIL",
+      "failure": "['WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)']",
+      "steps": [],
+      "console_errors": [
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)"
+      ],
+      "touches": 6
+    },
+    {
+      "name": "webkit-tablet-large-en",
+      "browser_version": "26.5",
+      "viewport": [
+        1024,
+        768
+      ],
+      "size": "large",
+      "locale": "en",
+      "status": "FAIL",
+      "failure": "['WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.', 'WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)']",
+      "steps": [],
+      "console_errors": [
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image.",
+        "WebGL: INVALID_OPERATION: glBlitFramebuffer: Read and write color attachments cannot be the same image. (No more validation messages will be reported)"
+      ],
+      "touches": 6,
+      "launch_args": []
+    }
+  ],
+  "native_practice_slow": {
+    "failures": [],
+    "screenshots": 72,
+    "steps": 290
+  },
+  "native_practice_large": {
+    "failures": [],
+    "screenshots": 70,
+    "steps": 283
+  },
+  "native_industries": {
+    "failures": [],
+    "screenshots": 78,
+    "steps": 399
+  },
+  "industry_audit_review": {
+    "raw_audit_entries": 7,
+    "confirmed_untranslated_prose": 0,
+    "explanation": "Every flagged word is a configured real-estate tenant name, retained in English by the translation guide. Raw audit retained unchanged.",
+    "source": "game/data/economy/real_estate.json:tenant_names",
+    "reviewed_words": [
+      "Avery",
+      "Brooks",
+      "Casey",
+      "Ellis",
+      "Jordan"
+    ]
+  },
+  "open_issues": [
+    186,
+    187
+  ],
+  "physical_mobile_safari": "NOT VERIFIED",
+  "human_blind_novice_or_10h_replay": "NOT VERIFIED"
+}
