@@ -339,6 +339,8 @@ func _extend_roads() -> void:
 
 
 func _dress_street_gaps() -> void:
+	if def.has("public_spaces"):
+		return   # Explicit themed courts replace the old rows of automatic trees.
 	# Static pocket gardens complete unused frontage without adding navigation obstacles.
 	var spans: Array = []
 	for bid in def.get("buildings", []):
@@ -380,6 +382,9 @@ func _build_sky() -> void:
 			var passage := false
 			for c in def.get("walk_corridors", []):
 				if Rect2(float(c[0]), float(c[1]), float(c[2]), float(c[3])).has_point(point): passage = true
+			for space in def.get("public_spaces", []):
+				var r: Array = space["rect"]
+				if Rect2(float(r[0]), float(r[1]), float(r[2]), float(r[3])).has_point(point): passage = true
 			if not passage: ground.erase_cell(Vector2i(x, y))
 	sky_layer = CanvasLayer.new()
 	sky_layer.layer = -1

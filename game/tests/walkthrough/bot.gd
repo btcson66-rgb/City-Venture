@@ -189,6 +189,8 @@ func _run() -> void:
 	match mode:
 		"world_visual":
 			await load("res://tests/walkthrough/world_visual_tour.gd").new(self).run()
+		"district_completion":
+			await load("res://tests/walkthrough/district_completion_tour.gd").new(self).run()
 		"asset_size":
 			await load("res://tests/walkthrough/asset_size_tour.gd").new(self).run()
 		"calm_active":

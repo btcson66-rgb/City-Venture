@@ -124,6 +124,33 @@
     2,
     5
    ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    0,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    48,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    84,
+    34,
+    6,
+    6
+   ]
   }
  ],
  "buildings": [
@@ -1264,6 +1291,91 @@
    "if": "world_year>=4",
    "solid": false,
    "_era": true
+  },
+  {
+   "sprite": "flower_market",
+   "x": 4,
+   "y": 554,
+   "solid": [
+    8,
+    78,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 62,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 78,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "cycle_shelter",
+   "x": 772,
+   "y": 562,
+   "solid": [
+    8,
+    70,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 830,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 846,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "flower_market",
+   "x": 1348,
+   "y": 554,
+   "solid": [
+    8,
+    78,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 1406,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1422,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "bench",
+   "x": 1452,
+   "y": 232,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1444,
+   "y": 156,
+   "glow": true,
+   "solid": false
   }
  ],
  "metro": {
@@ -1395,7 +1507,7 @@
   }
  ],
  "ambient_density": {
-  "morning": 8,
+  "morning": 10,
   "afternoon": 16,
   "evening": 14,
   "night": 5
@@ -1421,5 +1533,37 @@
    64,
    704
   ]
+ ],
+ "public_spaces": [
+  {
+   "name": "Market rest court",
+   "rect": [
+    0,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Market rest court",
+   "rect": [
+    768,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Market rest court",
+   "rect": [
+    1344,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  }
  ]
 }
