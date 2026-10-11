@@ -19,6 +19,8 @@ the early-unlock route now walks home before the next chapter's sleep input. Its
 
 The full fresh-game tour before the final two achievement additions passed chapters 1–24, all industries, adjacency, personal and save/reload checks: 0 failures, 5656.5 seconds. A new full tour with both additions is running.
 Bilingual desktop and English extra-large touch work routes passed; inherited long job text requires scrolling.
-Pending: current-version full tour, final first-30-minute gap calculation and source review. Desktop captures do not prove blind-human delight, sound perception or physical-device behavior.
+First 30 minutes: 59 actual progress receipts; maximum gap 263.3 seconds; zero gaps above 300 seconds. See first-30-minutes.md.
+Self-review and final focused feedback tour passed (0 failures, 41.2 seconds). Full tour uses identical economy/progress logic; the last caption-position and focused-entry adjustments are separately covered by that focused tour.
+Pending: current full tour completion. Desktop captures do not prove blind-human delight, sound perception or physical-device behavior.
 
 Before/after JPGs are actual renderer captures, quality 85. Keep this ticket below 20 MB.
