@@ -32,7 +32,7 @@ class Flow:
         self.page, self.out = page, out
         out.mkdir(parents=True, exist_ok=True)
         self.steps, self.errors, self.touches = [], [], 0
-        page.on('console', lambda m: self.errors.append(m.text) if m.type == 'error' else None)
+        page.on('console', lambda m: self.errors.append(m.text) if m.type == 'error' or 'SCRIPT ERROR:' in m.text or 'Parse Error:' in m.text else None)
         page.on('pageerror', lambda e: self.errors.append(str(e)))
 
     def state(self):
