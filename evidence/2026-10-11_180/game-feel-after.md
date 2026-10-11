@@ -19,4 +19,6 @@ Self-review found and fixed inherited arrival toast covering the phone, an Engli
 
 Full unit suite and real exported-Web matrix are pending; no success claimed here before results arrive.
 
-Final fixed-source whole unit suite: 1032/1032 PASS in 934.2 seconds (unit.xml). No SCRIPT ERROR/Parse Error. Stderr is retained: expected corrupt-import/unknown-dispatch fixtures and headless TextServer cleanup/RID warnings are not relabelled as a clean engine log. Whole browser matrix is still pending. Final cold-export PCK SHA256: 535b60d53dffa4fe6076dc2e47922d74ca741f0a33c9ce8b8a0d77ec3ef4e49a.
+2026-10-12 continuation: inherited #182 payout-latency guard and live-pruned-message recovery are included in the current game source8617946d. Final whole unit suite and replacement cold-export Chromium matrix are RUNNING; prior1032-test and535b export results are historical, not final acceptance.
+
+Final game-source whole unit suite:1035/1035 PASS in672.4s (unit.xml). No SCRIPT ERROR or Parse Error. Expected corrupt-save and headless cleanup diagnostics remain in unit-stderr.log. Cold export:4b11a457a624b6ea9c88b82caa0e5ec626a0d30358f4897ff68f9a9a1b2b7918. Real Chromium matrix remains RUNNING.
