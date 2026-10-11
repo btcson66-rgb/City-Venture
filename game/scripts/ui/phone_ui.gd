@@ -314,6 +314,9 @@ func _refresh_messages() -> void:
 		_restore_list_scroll.call_deferred()
 	elif app == "message_detail":
 		var message := PhoneMessages.read(selected_notification)
+		if message.is_empty():
+			_render()
+			return
 		var label := content.find_child("NotificationFullText_" + selected_notification, true, false) as Label
 		if label != null:label.text = I18n.t(str(message.get("text", "")))
 		UIRoot.hud.refresh()

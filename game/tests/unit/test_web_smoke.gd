@@ -135,3 +135,20 @@ func test_open_merged_card_refreshes_content_read_state_and_badge() -> void:
 	runner.check(PhoneMessages.get_message(id)["read"], "visible merged content is read")
 	runner.check(not UIRoot.hud.phone_hint.visible, "badge refresh follows visible read state")
 	UIRoot.phone.close()
+
+func test_removed_open_message_rebuilds_friendly_recovery_without_go() -> void:
+	UIRoot.phone.close()
+	Bank.book_appointment()
+	var id: String = GameState.data["messages"].back()["id"]
+	var journal: Variant = GameState.data["ledger"].duplicate(true)
+	UIRoot.phone.open()
+	UIRoot.phone._go("messages")
+	UIRoot.phone.open_notification(id)
+	GameState.data["messages"].clear()
+	GameState.add_message("city", "New city news")
+	for i in 8:await runner.get_tree().process_frame
+	runner.check(UIRoot.phone.find_child("NotificationFullText_"+id, true, false) == null, "removed original no longer leaves a blank detail")
+	runner.check(UIRoot.phone.find_child("NotificationGo_"+id, true, false) == null, "removed destination has no stale Go")
+	runner.check(UIRoot.phone.find_child("NotificationsBack", true, false) != null, "missing detail keeps recovery back")
+	runner.eq(GameState.data["ledger"], journal, "pruned notification cannot execute money")
+	UIRoot.phone.close()
