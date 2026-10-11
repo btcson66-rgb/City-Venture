@@ -106,7 +106,7 @@
      "id": "ch2_stock",
      "main": true,
      "goal": "Earn Your First Dollar",
-     "text": "Wait for your stock to arrive: work a part-time shift meanwhile, and sleep at night",
+     "text": "Receive your stock: explore, work, or skip to the next delivery",
      "complete_when": [
       "stat:stock_received>=1"
      ]
@@ -127,7 +127,7 @@
      "id": "ch2_order",
      "main": true,
      "goal": "Earn Your First Dollar",
-     "text": "Wait for your first order",
+     "text": "Find your first customer: explore or skip to the next order",
      "complete_when": [
       "stat:orders_placed>=1"
      ]
@@ -2233,17 +2233,20 @@
   {
    "id": "goal_month",
    "main": true,
-   "goal": "Sandbox",
-   "text": "Run {company} through month-end (June 30)",
+   "goal": "Ready to grow",
+   "text": "List a second product on ShopLane to grow your company",
    "complete_when": [
-    "stat:month_closes>=1"
+    "stat:listings_active>=2"
    ],
    "on_complete": [
     {
      "do": "chapter",
      "id": "ch4_growing_pains"
     }
-   ]
+   ],
+   "target": {
+    "action": "open_company_os"
+   }
   },
   {
    "id": "goal_growth",

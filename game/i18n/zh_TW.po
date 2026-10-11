@@ -22,11 +22,11 @@ msgstr "  （員工折扣）"
 msgid "  of which on hold (<2 days)"
 msgstr "  其中保留中（未滿 2 天）"
 
-#: scripts/ui/hud.gd:257
+#: scripts/ui/hud.gd:279
 msgid "  ·  DAY %d"
 msgstr "  ·  第 %d 天"
 
-#: autoload/ui_root.gd:390
+#: autoload/ui_root.gd:393
 msgid "  ·  Open %s–%s"
 msgstr "  ·  營業 %s–%s"
 
@@ -74,7 +74,7 @@ msgstr "（逾期，罰款 %s）"
 msgid " ltd"
 msgstr " ltd"
 
-#: scripts/ui/hud.gd:268
+#: scripts/ui/hud.gd:290
 msgid " today"
 msgstr " 今日"
 
@@ -618,7 +618,7 @@ msgstr "%s 以新進業者身分開業。"
 msgid "%s owes principal %s · %s APR · next interest %s"
 msgstr "%s 應還本金 %s · 年利率 %s · 下次計息日 %s"
 
-#: scripts/sim/careers.gd:325
+#: scripts/sim/careers.gd:326
 msgid "%s paid %s."
 msgstr "%s 付款 %s。"
 
@@ -930,7 +930,7 @@ msgstr "%s：%s 換取 %s 股權。你的持股 %s → %s。"
 msgid "%s: %s of job %s paid to the partner"
 msgstr "%s：工作 %s 的 %s 付給合作夥伴"
 
-#: scripts/sim/careers.gd:306
+#: scripts/sim/careers.gd:307
 msgid "%s: It's late, so we've knocked 20%% off. Invoice for %s noted."
 msgstr "%s：遲交了，所以費用打八折。已收到 %s 的發票。"
 
@@ -938,11 +938,11 @@ msgstr "%s：遲交了，所以費用打八折。已收到 %s 的發票。"
 msgid "%s: Nobody came for our delivery, so we've booked another courier. No fee to pay, and no more work from us this month."
 msgstr "%s：一直沒人來送貨，我們已經改找別的快遞。不用付你錢，這個月也不會再找你了。"
 
-#: scripts/sim/careers.gd:305
+#: scripts/sim/careers.gd:306
 msgid "%s: Received, thanks! Invoice for %s noted."
 msgstr "%s：收到了，謝謝！已收到 %s 的發票。"
 
-#: scripts/sim/careers.gd:342
+#: scripts/sim/careers.gd:343
 msgid "%s: We had to cancel the project. We won't be paying for it."
 msgstr "%s：我們只好取消這個案子，不會付款。"
 
@@ -1365,6 +1365,10 @@ msgstr "經銷商的客戶歸他；海外倉是替你服務你的客戶。"
 #: data/story/goals.json
 msgid "A diversified business"
 msgstr "多元經營"
+
+#: scripts/ui/minigames/barista_game.gd:134
+msgid "A familiar face stops by. The whole counter cheers!"
+msgstr "熟客來店，整個櫃台都開心起來！"
 
 #: data/help/glossary.json
 msgid "A fast route that fails one time in ten can cost more than a slow one that never does. Look at the record, not just the speed."
@@ -2442,7 +2446,7 @@ msgstr "企業結局之後，下一份提案關乎整座城市。沒有經營的
 msgid "After-sales service ticket"
 msgstr "售後保養工單"
 
-#: scripts/ui/hud.gd:260
+#: scripts/ui/hud.gd:282
 msgid "Afternoon · Sunny"
 msgstr "下午 · 晴"
 
@@ -5046,7 +5050,7 @@ msgstr "沒辦法這樣做。"
 msgid "Can't hire yet: %s."
 msgstr "還不能聘人：%s。"
 
-#: scripts/ui/modals/job_modal.gd:70
+#: scripts/ui/modals/job_modal.gd:78
 msgid "Can't start a shift now: %s."
 msgstr "現在不能上班：%s。"
 
@@ -5226,7 +5230,7 @@ msgstr "自己拿去 PostPoint"
 msgid "Carry them to PostPoint yourself (cheaper, costs your time)"
 msgstr "自己拿去 PostPoint（比較便宜，但花你的時間）"
 
-#: scripts/ui/hud.gd:296
+#: scripts/ui/hud.gd:318
 msgid "Carrying %d parcel%s"
 msgstr "攜帶 %d 件包裹%s"
 
@@ -5534,7 +5538,7 @@ msgstr "越便宜註冊越多；功能和客服能留住用戶。規模越大，
 msgid "Cheaper now. Expect a lukewarm review."
 msgstr "眼前比較省。評價大概不冷不熱。"
 
-#: scripts/ui/minigames/barista_game.gd:248
+#: scripts/ui/minigames/barista_game.gd:253
 msgid "Check %s on the ticket, then try again."
 msgstr "再看一下單子上的「%s」，調整後再試一次。"
 
@@ -5582,7 +5586,7 @@ msgstr "查看對手房價"
 msgid "Check the departures hall"
 msgstr "查看出境大廳"
 
-#: scripts/ui/minigames/barista_game.gd:101
+#: scripts/ui/minigames/barista_game.gd:103
 msgid "Check the destination on the ticket, then try again."
 msgstr "再看一下單子上的送達位置，試一次就好。"
 
@@ -6526,7 +6530,7 @@ msgstr "課程時間表"
 msgid "Classes take one hour. Occasional business introductions offer choices with real costs and deadlines."
 msgstr "課程需一小時。偶爾遇到的商業介紹，會提供有真實成本與期限的選擇。"
 
-#: scripts/ui/minigames/barista_game.gd:193
+#: scripts/ui/minigames/barista_game.gd:198
 msgid "Clean"
 msgstr "已清潔"
 
@@ -6562,11 +6566,11 @@ msgstr "良率達標"
 msgid "Clean rooms, a friendly desk and a fair price. A room nobody cleaned cannot be sold at all, so hire housekeepers before you chase more guests."
 msgstr "乾淨的房間、親切的櫃台、合理的價格。沒人清的房間根本不能賣，所以先請房務員，再去搶更多客人。"
 
-#: scripts/ui/minigames/barista_game.gd:195
+#: scripts/ui/minigames/barista_game.gd:200
 msgid "Clean table %d"
 msgstr "清潔第 %d 桌"
 
-#: scripts/ui/minigames/barista_game.gd:226
+#: scripts/ui/minigames/barista_game.gd:231
 msgid "Clean table / counter"
 msgstr "清潔桌子／取餐台"
 
@@ -6650,7 +6654,7 @@ msgstr "客戶模型：銷售 $120、商品成本 $50、運費 $10，請算其�
 msgid "Client payment"
 msgstr "客戶付款"
 
-#: scripts/sim/careers.gd:322
+#: scripts/sim/careers.gd:323
 msgid "Client payment — %s"
 msgstr "客戶付款——%s"
 
@@ -7302,6 +7306,10 @@ msgstr "完成五趟貨車配送"
 msgid "Complete import and export registration."
 msgstr "完成進出口登記。"
 
+#: data/help/glossary.json
+msgid "Complete one small step at a time. Your progress comes from real actions."
+msgstr "一次完成一個小目標，每一步都是你做出來的。"
+
 #: data/scenarios/harbor_cargo.json
 msgid "Complete profitable delivery runs."
 msgstr "完成有利潤的送貨工作。"
@@ -7378,7 +7386,7 @@ msgstr "已完成"
 msgid "Completed %d/%d trips this week"
 msgstr "本週已完成 %d／%d 趟"
 
-#: scripts/sim/story_engine.gd:184
+#: scripts/sim/story_engine.gd:185
 msgid "Completed %s."
 msgstr "完成了%s。"
 
@@ -7458,7 +7466,7 @@ msgstr "確認符合客戶需求"
 msgid "Confirm loan signing"
 msgstr "確認簽訂貸款"
 
-#: scripts/ui/minigames/barista_game.gd:202
+#: scripts/ui/minigames/barista_game.gd:207
 msgid "Confirm order"
 msgstr "確認點單"
 
@@ -8034,7 +8042,7 @@ msgstr "Crumb & Co. 麵包坊"
 msgid "Culture workshop"
 msgstr "文化工作坊"
 
-#: scripts/ui/minigames/barista_game.gd:210 scripts/ui/minigames/barista_game.gd:247
+#: scripts/ui/minigames/barista_game.gd:215 scripts/ui/minigames/barista_game.gd:252
 msgid "Cup"
 msgstr "杯子"
 
@@ -8370,7 +8378,7 @@ msgstr "天"
 msgid "Deadline"
 msgstr "截止時間"
 
-#: scripts/sim/careers.gd:338
+#: scripts/sim/careers.gd:339
 msgid "Deadline missed: %s. Deliver soon, the fee drops."
 msgstr "錯過截止時間：%s。快點交件，費用會被打折。"
 
@@ -9058,7 +9066,7 @@ msgstr "僅為方向性證據，需要更多樣本"
 msgid "Directories & Files:"
 msgstr "資料夾與檔案："
 
-#: scripts/ui/minigames/barista_game.gd:193
+#: scripts/ui/minigames/barista_game.gd:198
 msgid "Dirty — clean before seating"
 msgstr "待清潔，清潔後才能入座"
 
@@ -9306,11 +9314,11 @@ msgstr "把商品拖向畫面中央。"
 msgid "Dress code: %s. You are wearing: %s."
 msgstr "服裝規定：%s。你目前穿著：%s。"
 
-#: scripts/ui/minigames/barista_game.gd:211 scripts/ui/minigames/barista_game.gd:212 scripts/ui/minigames/barista_game.gd:247
+#: scripts/ui/minigames/barista_game.gd:216 scripts/ui/minigames/barista_game.gd:217 scripts/ui/minigames/barista_game.gd:252
 msgid "Drink"
 msgstr "飲品"
 
-#: scripts/ui/minigames/barista_game.gd:261 scripts/ui/minigames/barista_game.gd:262
+#: scripts/ui/minigames/barista_game.gd:266 scripts/ui/minigames/barista_game.gd:267
 msgid "Drinks served exactly right: %d / %d"
 msgstr "完全做對的飲品：%d / %d"
 
@@ -9854,7 +9862,7 @@ msgstr "終止租約"
 msgid "Energy"
 msgstr "能源"
 
-#: scripts/ui/hud.gd:255
+#: scripts/ui/hud.gd:277
 msgid "Energy %d%% · stress %d%%"
 msgstr "體力 %d%%・壓力 %d%%"
 
@@ -10002,7 +10010,7 @@ msgstr "託管：貨到了才付錢給供應商。費用 0.6%，對方要是沒�
 msgid "Escrow: you pay into a contract that holds the money. The supplier ships when they see it locked, and is paid only when your goods arrive."
 msgstr "託管：你把錢付進一份替你保管的合約。供應商看到錢鎖好就出貨，等你的貨到了才拿到錢。"
 
-#: scripts/ui/minigames/barista_game.gd:214 scripts/ui/minigames/barista_game.gd:247
+#: scripts/ui/minigames/barista_game.gd:219 scripts/ui/minigames/barista_game.gd:252
 msgid "Espresso"
 msgstr "濃縮"
 
@@ -10026,7 +10034,7 @@ msgstr "預估銷售"
 msgid "Estimated unbooked sales of about %s %s are not hedgeable until they are booked."
 msgstr "約 %s %s 的預估未入帳銷售，入帳前無法避險。"
 
-#: scripts/ui/hud.gd:260
+#: scripts/ui/hud.gd:282
 msgid "Evening"
 msgstr "傍晚"
 
@@ -10290,7 +10298,7 @@ msgstr "說明你會發展哪條業務來撐過去。"
 msgid "Explore 10 city districts and build your company through all 12 story chapters."
 msgstr "探索 10 個街區，從第一次創業一路玩完 12 章故事。"
 
-#: scripts/sim/careers.gd:350
+#: scripts/sim/careers.gd:351
 msgid "Explore freelance consulting"
 msgstr "接案起步"
 
@@ -10722,6 +10730,10 @@ msgstr "找貨源、找買家，把貨物送過國界。"
 msgid "Find three backup suppliers for %s"
 msgstr "幫 %s 找三家備用供應商"
 
+#: data/story/chapters.json
+msgid "Find your first customer: explore or skip to the next order"
+msgstr "找到第一位客人：逛逛，或跳到下一筆訂單"
+
 #: data/milestones.json
 msgid "Finish 15 client campaigns."
 msgstr "完成 15 檔客戶宣傳活動。"
@@ -10897,6 +10909,10 @@ msgstr "第一個屋頂亮燈"
 #: scripts/sim/ecommerce.gd:1282
 msgid "First sale: %s bought %s for %s."
 msgstr "第一筆銷售：%s 買了%s，%s。"
+
+#: scripts/sim/growth.gd:158
+msgid "First time! %s"
+msgstr "第一次達成！%s"
 
 #: data/events/customer_return_first.json
 msgid "First unhappy customer"
@@ -11362,7 +11378,7 @@ msgstr "免費，但投資人不會再支持你，下次再沒達標就會重啟
 msgid "Free. {supplier} ships once the bridge reopens ({until}). The payment lands at {ratio} and you cover the {lost} gap."
 msgstr "免費。跨鏈橋重開後（{until}）{supplier} 才出貨。款項以 {ratio} 入帳，差額 {lost} 由你補。"
 
-#: data/ui/feature_unlocks.json scripts/sim/careers.gd:350
+#: data/ui/feature_unlocks.json scripts/sim/careers.gd:351
 msgid "Freelance"
 msgstr "接案"
 
@@ -12118,11 +12134,11 @@ msgstr "為子公司的銀行借款擔保"
 msgid "Guaranteed demand from the entire city"
 msgstr "保證全市都有需求"
 
-#: scripts/ui/minigames/barista_game.gd:168
+#: scripts/ui/minigames/barista_game.gd:173
 msgid "Guest %d"
 msgstr "客人 %d"
 
-#: scripts/ui/minigames/barista_game.gd:168 scripts/ui/minigames/barista_game.gd:92
+#: scripts/ui/minigames/barista_game.gd:173 scripts/ui/minigames/barista_game.gd:94
 msgid "Guest %d · bonus %d s"
 msgstr "客人 %d・加碼剩 %d 秒"
 
@@ -12410,7 +12426,7 @@ msgstr "健康保險：%s／30 天"
 msgid "Health policy expired: add cash and buy a new policy."
 msgstr "健康保單已到期：補足現金後重新投保。"
 
-#: scripts/ui/hud.gd:329
+#: scripts/ui/hud.gd:351
 msgid "Health · %d"
 msgstr "健康 · %d"
 
@@ -12662,7 +12678,7 @@ msgstr "聘用 %s 擔任%s。"
 msgid "Hired as %s at %s."
 msgstr "受聘為%s（%s）。"
 
-#: scripts/ui/modals/job_modal.gd:88
+#: scripts/ui/modals/job_modal.gd:96
 msgid "Hired! You're now a %s at %s."
 msgstr "錄取了！你現在是%s（%s）。"
 
@@ -13386,7 +13402,7 @@ msgstr "承接貸款：%s"
 msgid "Inherited property — %s"
 msgstr "繼承房產 — %s"
 
-#: scripts/ui/hud.gd:331 scripts/ui/modals/traffic_modal.gd:35
+#: scripts/ui/hud.gd:353 scripts/ui/modals/traffic_modal.gd:35
 msgid "Injury: %s"
 msgstr "傷勢：%s"
 
@@ -13874,7 +13890,7 @@ msgstr "%s 已付款（%s）"
 msgid "Invoice reduction"
 msgstr "減少應付金額"
 
-#: scripts/sim/careers.gd:291
+#: scripts/sim/careers.gd:292
 msgid "Invoice — %s"
 msgstr "發票——%s"
 
@@ -15322,6 +15338,10 @@ msgstr "先在 ShopLane 上架一項綠色商品。"
 msgid "List a product you have in stock. Shoot the photos yourself (a photo shoot you play) or pay Studio Lumen $120 for pro photos."
 msgstr "有庫存的商品才能上架。可以自己拍照（親手操作的拍攝），或付 Studio Lumen $120 拍專業照片。"
 
+#: data/story/chapters.json
+msgid "List a second product on ShopLane to grow your company"
+msgstr "在 ShopLane 上架第二項商品，讓公司成長"
+
 #: data/story/personal/ken.json
 msgid "List checked documents and the missing item"
 msgstr "列出已查核文件與缺漏項目"
@@ -15950,7 +15970,7 @@ msgstr "請安排客人順序：確認或推薦點單、製作飲品、送到指
 msgid "Management lists keep their scroll position. Story goals recover from declined contracts and difficult cash-flow months."
 msgstr "經營清單會保留捲動位置。劇情能從被拒絕的合約與困難的現金流月份接續。"
 
-#: scripts/ui/modals/job_modal.gd:57
+#: scripts/ui/modals/job_modal.gd:64
 msgid "Manager review %d%% · next rank needs %d%%; serve and clean well to improve."
 msgstr "店長評價 %d%%・下個職級需要 %d%%，請做好服務與清潔來提升。"
 
@@ -15978,7 +15998,7 @@ msgstr "Manufacturing Meridian"
 msgid "Manufacturing Vale"
 msgstr "Manufacturing Vale"
 
-#: scripts/ui/hud.gd:125 scripts/ui/modals/settings_modal.gd:7
+#: scripts/ui/hud.gd:147 scripts/ui/modals/settings_modal.gd:7
 msgid "Map"
 msgstr "地圖"
 
@@ -16394,7 +16414,7 @@ msgstr "媒體配置"
 msgid "Media studio"
 msgstr "媒體工作室"
 
-#: scripts/ui/hud.gd:331
+#: scripts/ui/hud.gd:353
 msgid "Medical bill or claim open"
 msgstr "醫療帳款或理賠待處理"
 
@@ -16546,7 +16566,7 @@ msgstr "引路人：%s · %s"
 msgid "Mentored a founder at Nexus Co-work: %s, 1 hour."
 msgstr "在 Nexus Co-work 輔導創辦人：%s，花費一小時。"
 
-#: scripts/ui/hud.gd:126 scripts/ui/modals/company_os.gd:1416
+#: scripts/ui/hud.gd:148 scripts/ui/modals/company_os.gd:1416
 msgid "Menu"
 msgstr "選單"
 
@@ -16662,7 +16682,7 @@ msgstr "里程碑：%s"
 msgid "Milestones"
 msgstr "里程碑"
 
-#: data/economy/cafe.json scripts/ui/minigames/barista_game.gd:213 scripts/ui/minigames/barista_game.gd:247
+#: data/economy/cafe.json scripts/ui/minigames/barista_game.gd:218 scripts/ui/minigames/barista_game.gd:252
 msgid "Milk"
 msgstr "奶類"
 
@@ -16910,7 +16930,7 @@ msgstr "訂戶增加時，營收與伺服器費用一起增加；訂閱定價要
 msgid "Moreau"
 msgstr "Moreau"
 
-#: scripts/ui/hud.gd:260
+#: scripts/ui/hud.gd:282
 msgid "Morning · Sunny"
 msgstr "早上 · 晴"
 
@@ -17174,7 +17194,7 @@ msgstr "東北"
 msgid "NEGOTIATION"
 msgstr "議價"
 
-#: autoload/ui_root.gd:407
+#: autoload/ui_root.gd:410
 msgid "NEW LOCATION"
 msgstr "新地點"
 
@@ -17602,6 +17622,10 @@ msgstr "Nia Park：實習學習作品集・第 2 段"
 msgid "Nia Park: internship learning portfolio · part 3"
 msgstr "Nia Park：實習學習作品集・第 3 段"
 
+#: scripts/ui/minigames/barista_game.gd:134
+msgid "Nice streak: %d happy guests!"
+msgstr "連續成功：%d 位開心的客人！"
+
 #: scripts/ui/minigames/mini_game.gd:379
 msgid "Nice work!"
 msgstr "做得好！"
@@ -17626,7 +17650,7 @@ msgstr "利基策略靠品質或品牌廣告支撐漲價；規模策略則降價
 msgid "Niche reaches fewer buyers with less price sensitivity; scale trades margin and cash for volume."
 msgstr "利基市場的買家較少，也較不在意價格；規模策略用較薄的毛利與更多現金換取銷量。"
 
-#: scripts/ui/hud.gd:260
+#: scripts/ui/hud.gd:282
 msgid "Night"
 msgstr "夜晚"
 
@@ -17834,7 +17858,7 @@ msgstr "還沒有上架商品。先進貨（營運），再上架（銷售）。
 msgid "No lost rentals, but each car may break down over the next three weeks."
 msgstr "不會損失租賃，但每輛車未來三週都可能拋錨。"
 
-#: scripts/ui/modals/job_modal.gd:57
+#: scripts/ui/modals/job_modal.gd:64
 msgid "No manager review yet — complete a shift."
 msgstr "尚無店長評價，請先完成一班工作。"
 
@@ -17958,7 +17982,7 @@ msgstr "沒有這個決定。"
 msgid "No such employee."
 msgstr "找不到這位員工。"
 
-#: scripts/sim/careers.gd:270
+#: scripts/sim/careers.gd:271
 msgid "No such gig in progress."
 msgstr "沒有這個進行中的案子。"
 
@@ -18430,7 +18454,7 @@ msgstr "住房率乘以平均房價（ADR）就是房費收入。"
 msgid "Occupancy, ADR, seasons."
 msgstr "住房率、平均房價、淡旺季。"
 
-#: scripts/ui/minigames/barista_game.gd:193 scripts/ui/minigames/cowork_host_game.gd:85
+#: scripts/ui/minigames/barista_game.gd:198 scripts/ui/minigames/cowork_host_game.gd:85
 msgid "Occupied"
 msgstr "使用中"
 
@@ -18633,6 +18657,10 @@ msgstr "去程、回程各花 1 天，生意照常運作。機票預算不足時
 #: data/story/goals.json
 msgid "One hundred deliveries"
 msgstr "一百筆交付"
+
+#: scripts/ui/modals/job_modal.gd:67
+msgid "One more shift? You choose."
+msgstr "還想再上一班嗎？由你決定。"
 
 #: data/help/glossary.json
 msgid "One score combines reviews, published news, crisis handling, on-time payments and employee treatment."
@@ -19254,7 +19282,7 @@ msgstr "訂單 %d / %d"
 msgid "Order %d more from %s (%s)"
 msgstr "追加訂購 %d 件，向 %s（%s）"
 
-#: scripts/ui/minigames/barista_game.gd:191
+#: scripts/ui/minigames/barista_game.gd:196
 msgid "Order %d · %s"
 msgstr "訂單 %d・%s"
 
@@ -19702,7 +19730,7 @@ msgstr "人數"
 msgid "PERMITS & REGISTRATIONS (AURELIA)"
 msgstr "許可與登記（奧瑞莉亞）"
 
-#: scripts/ui/hud.gd:233 scripts/ui/hud.gd:96
+#: scripts/ui/hud.gd:118 scripts/ui/hud.gd:255
 msgid "PERSONAL"
 msgstr "個人"
 
@@ -20470,7 +20498,7 @@ msgstr "藥局與健康保險"
 msgid "Phased transition"
 msgstr "分階段轉型"
 
-#: scripts/ui/hud.gd:123 scripts/ui/modals/settings_modal.gd:7
+#: scripts/ui/hud.gd:145 scripts/ui/modals/settings_modal.gd:7
 msgid "Phone"
 msgstr "手機"
 
@@ -20530,7 +20558,7 @@ msgstr "選一個點子，做出第一版：自己寫程式（打字），或聘
 msgid "Pick the figure to lead with for each slide. Only figures from your real books are offered, and the first slide counts most."
 msgstr "為每張投影片挑選要主打的數字。只提供你真實帳簿上的數字，而且第一張最重要。"
 
-#: scripts/ui/minigames/barista_game.gd:191 scripts/ui/minigames/barista_game.gd:221
+#: scripts/ui/minigames/barista_game.gd:196 scripts/ui/minigames/barista_game.gd:226
 msgid "Pickup counter"
 msgstr "取餐台"
 
@@ -21090,7 +21118,7 @@ msgstr "Priya：共同工作空間的訪客方案・第 3 段"
 msgid "Probes what could go wrong and how you would cope."
 msgstr "追問哪裡可能出錯，以及你如何應對。"
 
-#: autoload/ui_root.gd:366
+#: autoload/ui_root.gd:369
 msgid "Problem report saved (screenshot + save + log). Send this folder to whoever invited you to test: %s"
 msgstr "已存下問題回報（截圖＋存檔＋記錄）。請把這個資料夾傳給邀請你測試的人：%s"
 
@@ -21125,6 +21153,10 @@ msgstr "商品"
 #: data/help/glossary.json
 msgid "Product photos"
 msgstr "商品照片"
+
+#: scripts/sim/fun_loop.gd:12
+msgid "Products listed: %d / 2"
+msgstr "已上架商品：%d / 2"
 
 #: scripts/ui/modals/month_close_modal.gd:49
 msgid "Profit after life costs"
@@ -21178,9 +21210,13 @@ msgstr "承諾股東沒有財務風險，也不能影響公司決策。"
 msgid "Promo"
 msgstr "宣傳"
 
-#: scripts/sim/careers.gd:182
+#: scripts/sim/careers.gd:183
 msgid "Promoted to %s at %s."
 msgstr "升職為%s（%s）。"
+
+#: scripts/sim/careers.gd:182
+msgid "Promoted! %s"
+msgstr "升遷了！%s"
 
 #: scripts/ui/modals/fundraising_modal.gd:429
 msgid "Promotion"
@@ -21474,7 +21510,7 @@ msgstr "安靜的早上。你把小型企業貸款規定讀了兩遍。"
 msgid "Quit"
 msgstr "離開"
 
-#: scripts/ui/modals/job_modal.gd:71
+#: scripts/ui/modals/job_modal.gd:79
 msgid "Quit job"
 msgstr "辭職"
 
@@ -21854,7 +21890,7 @@ msgstr "完成供應衝擊的經營回顧。"
 msgid "Reach the third factory stage."
 msgstr "升到工廠第三階段。"
 
-#: scripts/sim/growth.gd:152 scripts/sim/growth.gd:156
+#: scripts/sim/growth.gd:152 scripts/sim/growth.gd:157
 msgid "Reached: %s"
 msgstr "達成：%s"
 
@@ -22038,6 +22074,10 @@ msgstr "可以接洽"
 msgid "Ready to convert (%s)"
 msgstr "可換匯餘額（%s）"
 
+#: data/story/chapters.json
+msgid "Ready to grow"
+msgstr "準備成長"
+
 #: scripts/ui/modals/company_os.gd:536
 msgid "Ready to list (you have these in hand)"
 msgstr "可上架（這些你手上有貨）"
@@ -22159,6 +22199,10 @@ msgid "Receive your first contract"
 msgstr "收到第一份合約"
 
 #: data/story/chapters.json
+msgid "Receive your stock: explore, work, or skip to the next delivery"
+msgstr "等待貨到：逛逛、打工，或跳到下一次送貨"
+
+#: data/story/chapters.json
 msgid "Received. Accounts payable will process your invoice. Net 60, as agreed."
 msgstr "收到了。應付帳款部會處理你的發票，照約定 60 天付款。"
 
@@ -22190,7 +22234,7 @@ msgstr "櫃檯——座位與日票"
 msgid "Recession"
 msgstr "衰退"
 
-#: scripts/ui/minigames/barista_game.gd:206
+#: scripts/ui/minigames/barista_game.gd:211
 msgid "Recommend the selected drink"
 msgstr "推薦選取的飲品"
 
@@ -23938,10 +23982,6 @@ msgstr "負責 Nexus 櫃台：幫會員報到、布置活動、認識所有人�
 msgid "Run this route from the fleet console; no stock shipment is required."
 msgstr "請從車隊控制台駕駛這條路線，不需要交付商品庫存。"
 
-#: data/story/chapters.json
-msgid "Run {company} through month-end (June 30)"
-msgstr "讓 {company} 撐到月底（6月30日）"
-
 #: scripts/ui/modals/fundraising_modal.gd:408
 msgid "Running until %s. Goal %s."
 msgstr "進行至 %s。目標 %s。"
@@ -24426,7 +24466,7 @@ msgstr "保存這一局，展開選好的新人生"
 msgid "Save transfer"
 msgstr "存檔匯入／匯出"
 
-#: scripts/ui/hud.gd:173 scripts/ui/hud.gd:375
+#: scripts/ui/hud.gd:195 scripts/ui/hud.gd:404
 msgid "Saved"
 msgstr "已儲存"
 
@@ -24830,7 +24870,7 @@ msgstr "分開看損益，才能知道哪個業務負擔共用辦公室與員工
 msgid "Separate the books"
 msgstr "把帳目分清楚"
 
-#: scripts/ui/minigames/barista_game.gd:215
+#: scripts/ui/minigames/barista_game.gd:220
 msgid "Serve"
 msgstr "出餐"
 
@@ -24898,7 +24938,7 @@ msgstr "請在租賃還車後再保養。"
 msgid "Service · %s"
 msgstr "保養 · %s"
 
-#: scripts/ui/minigames/barista_game.gd:261
+#: scripts/ui/minigames/barista_game.gd:266
 msgid "Service: %d%%"
 msgstr "服務品質：%d%%"
 
@@ -24926,7 +24966,7 @@ msgstr "次輔導"
 msgid "Set a transfer price for each running pair: at cost, cost plus a markup or market price. Both businesses show the trade in Segments."
 msgstr "為每個運作中的組合設定轉撥價：依成本、成本加成或市價。兩邊事業都會在分部報表顯示這筆交易。"
 
-#: scripts/sim/growth.gd:184
+#: scripts/sim/growth.gd:186
 msgid "Set aside an optional growth goal. No completion was claimed."
 msgstr "暫時擱置一項成長目標，並未宣稱達成。"
 
@@ -25290,7 +25330,7 @@ msgstr "第 %d 張：%d%%  %s"
 msgid "Shot %d: %d%% (%s)"
 msgstr "第 %d 張：%d%%（%s）"
 
-#: scripts/ui/minigames/barista_game.gd:214
+#: scripts/ui/minigames/barista_game.gd:219
 msgid "Shots"
 msgstr "Shots"
 
@@ -25478,7 +25518,7 @@ msgstr "坐到辦公桌——Company OS"
 msgid "Sit down at your desk and open Company OS as {company}"
 msgstr "坐到辦公桌前，以 {company} 的身分打開 Company OS"
 
-#: scripts/ui/minigames/barista_game.gd:210
+#: scripts/ui/minigames/barista_game.gd:215
 msgid "Size"
 msgstr "Size"
 
@@ -25501,6 +25541,14 @@ msgstr "略過"
 #: scripts/ui/modals/feature_intro_modal.gd:71 scripts/ui/modals/industry_guide_modal.gd:20
 msgid "Skip this guide"
 msgstr "跳過這段導引"
+
+#: scripts/ui/hud.gd:96
+msgid "Skip to next event"
+msgstr "跳到下一件事"
+
+#: data/help/glossary.json
+msgid "Skip to next event advances all scheduled deliveries and bills. Important decisions stop the skip; it never gives free money."
+msgstr "跳到下一件事仍會處理送貨和帳單。重要決定會停下來等你，不會憑空送錢。"
 
 #: scripts/ui/minigames/mini_game.gd:284 scripts/ui/minigames/mini_game.gd:331
 msgid "Skip tutorial"
@@ -25574,6 +25622,14 @@ msgstr "小杯"
 msgid "Small factory with three machine bays and material storage. Rent and deposit: $11,400 on signing."
 msgstr "小廠房提供三個機台位置和原料倉儲。簽約時租金加押金共 $11,400。"
 
+#: scripts/sim/story_engine.gd:150
+msgid "Small goal complete!"
+msgstr "小目標完成！"
+
+#: data/help/glossary.json
+msgid "Small goals"
+msgstr "小目標"
+
 #: scripts/ui/minigames/photo_shoot_game.gd:9
 msgid "Small plant"
 msgstr "小盆栽"
@@ -25581,6 +25637,10 @@ msgstr "小盆栽"
 #: data/dialogue/daniel_cameo.json
 msgid "Small sellers are cute. I buy by the pallet."
 msgstr "小賣家很可愛。但我是整棧板在買的。"
+
+#: scripts/sim/fun_loop.gd:18
+msgid "Small steps: %d / %d"
+msgstr "小目標：%d / %d"
 
 #: data/help/patch_notes.json
 msgid "Smaller downloads: Windows about 147 MB and the web version about 126 MB."
@@ -25910,7 +25970,7 @@ msgstr "待命團隊"
 msgid "Start"
 msgstr "開始"
 
-#: scripts/ui/modals/job_modal.gd:65
+#: scripts/ui/modals/job_modal.gd:73
 msgid "Start a %d-hour shift (up to +%s)"
 msgstr "開始 %d 小時的班（最多 +%s）"
 
@@ -26026,7 +26086,7 @@ msgstr "開始開發 SaaS 產品 %s。"
 msgid "Started building a charging station: %s."
 msgstr "開始建置充電站：%s。"
 
-#: scripts/sim/careers.gd:199
+#: scripts/sim/careers.gd:200
 msgid "Started freelancing as a consultant."
 msgstr "開始以顧問身份接案。"
 
@@ -26658,11 +26718,11 @@ msgstr "TOMAS"
 msgid "Tab"
 msgstr "Tab"
 
-#: scripts/ui/minigames/barista_game.gd:191 scripts/ui/minigames/barista_game.gd:221
+#: scripts/ui/minigames/barista_game.gd:196 scripts/ui/minigames/barista_game.gd:226
 msgid "Table %d"
 msgstr "第 %d 桌"
 
-#: scripts/ui/minigames/barista_game.gd:193
+#: scripts/ui/minigames/barista_game.gd:198
 msgid "Table %d: %s"
 msgstr "第 %d 桌：%s"
 
@@ -26734,7 +26794,7 @@ msgstr "請先上電池課程。"
 msgid "Take the battery course · %s"
 msgstr "上電池課程 · %s"
 
-#: scripts/ui/modals/job_modal.gd:79 scripts/ui/tutorial.gd:84
+#: scripts/ui/modals/job_modal.gd:87 scripts/ui/tutorial.gd:84
 msgid "Take the job"
 msgstr "接受這份工作"
 
@@ -26770,7 +26830,7 @@ msgstr "大概要 45 分鐘處理。"
 msgid "Takes your van out on one posted delivery run every workday from 9:00 and banks the pay. Drivers rarely plan the route as well as you can: expect a longer way round, and rush runs they can't reach in time."
 msgstr "每個工作日 9:00 起開你的貨車跑一趟上架的外送單，並把收入存進帳上。司機排路線通常沒有你排得好：會繞比較遠的路，趕不及的急件他們也不會接。"
 
-#: scripts/ui/modals/job_modal.gd:78
+#: scripts/ui/modals/job_modal.gd:86
 msgid "Taking this job means leaving %s."
 msgstr "接受這份工作就要離開%s。"
 
@@ -27022,7 +27082,7 @@ msgstr "就這麼簡單。一次做一個決定，想深入時再看細節。"
 msgid "That name is already registered in Aurelia."
 msgstr "這個名稱在奧瑞莉亞已經被登記了。"
 
-#: scripts/sim/careers.gd:258
+#: scripts/sim/careers.gd:259
 msgid "That offer is gone."
 msgstr "這個案子已經沒了。"
 
@@ -28874,7 +28934,7 @@ msgstr "人生紀錄"
 msgid "Tip: register a company before ShopLane caps you. Everyone learns that one the hard way."
 msgstr "提醒你：在 ShopLane 限制你之前先把公司登記好。每個人都是吃過虧才學會的。"
 
-#: scripts/ui/minigames/barista_game.gd:262
+#: scripts/ui/minigames/barista_game.gd:267
 msgid "Tips: %s"
 msgstr "小費：%s"
 
@@ -29670,7 +29730,7 @@ msgstr "請選擇運往本國的 DDP 路線，並先取得代理權、承租保�
 msgid "Use a two-hour overtime slot"
 msgstr "在工廠加班兩小時"
 
-#: scripts/ui/hud.gd:41
+#: scripts/ui/hud.gd:45
 msgid "Use crosswalks for safer crossing"
 msgstr "從斑馬線過馬路比較安全"
 
@@ -30262,14 +30322,6 @@ msgstr "等貨到並付缺貨價"
 msgid "Wait for the tenancy to end before moving into this home."
 msgstr "請等租客退租後，再搬進這間住宅。"
 
-#: data/story/chapters.json
-msgid "Wait for your first order"
-msgstr "等第一筆訂單"
-
-#: data/story/chapters.json
-msgid "Wait for your stock to arrive: work a part-time shift meanwhile, and sleep at night"
-msgstr "等貨到：這段時間去上兼職的班，晚上睡覺"
-
 #: data/events/hotel_slump.json data/events/rail_frozen.json
 msgid "Wait it out"
 msgstr "等它過去"
@@ -30598,7 +30650,7 @@ msgstr "跟著城市一起轉型綠色。"
 msgid "West"
 msgstr "西方"
 
-#: scripts/ui/hud.gd:185 scripts/ui/modals/settings_modal.gd:150
+#: scripts/ui/hud.gd:207 scripts/ui/modals/settings_modal.gd:150
 msgid "What can I do here?"
 msgstr "這裡能做什麼？"
 
@@ -30990,7 +31042,7 @@ msgstr "你（創辦人）"
 msgid "You already have a job ad running."
 msgstr "你已經有一則徵才廣告在刊登中。"
 
-#: scripts/sim/careers.gd:247
+#: scripts/sim/careers.gd:248
 msgid "You already have as many gigs as you can handle."
 msgstr "你手上的案子已經滿了。"
 
@@ -31170,7 +31222,7 @@ msgstr "你學到快遞員最討厭哪種尺寸的箱子。很有用。"
 msgid "You left before the shift was done. No pay, and no time lost."
 msgstr "你在班還沒結束前就離開了。沒有薪水，也沒有花掉時間。"
 
-#: scripts/ui/modals/job_modal.gd:73
+#: scripts/ui/modals/job_modal.gd:81
 msgid "You left the job at %s."
 msgstr "你離開了%s的工作。"
 
@@ -31386,7 +31438,7 @@ msgstr "你身上沒有包裹。"
 msgid "You're trending"
 msgstr "你爆紅了"
 
-#: scripts/sim/careers.gd:183
+#: scripts/sim/careers.gd:184
 msgid "You've earned it: you're our new %s. New rate: $%d an hour."
 msgstr "這是你應得的：你是我們新的%s。新時薪：每小時 $%d。"
 
@@ -32086,7 +32138,7 @@ msgstr "退款"
 msgid "get the food handling licence at City Hall"
 msgstr "到市政廳辦食品處理執照"
 
-#: scripts/ui/modals/job_modal.gd:63
+#: scripts/ui/modals/job_modal.gd:71
 msgid "go to the workplace to work a shift"
 msgstr "要到工作地點才能上班"
 
@@ -32934,7 +32986,7 @@ msgstr "◆ %s 需要你做決定"
 msgid "◆ You are here"
 msgstr "◆ 你在這裡"
 
-#: scripts/ui/hud.gd:286
+#: scripts/ui/hud.gd:308
 msgid "◆ decision"
 msgstr "◆ 待決定"
 
@@ -32942,11 +32994,11 @@ msgstr "◆ 待決定"
 msgid "◉  Shutter"
 msgstr "◉  快門"
 
-#: scripts/ui/hud.gd:287
+#: scripts/ui/hud.gd:309
 msgid "● %d bill(s) due"
 msgstr "● %d 筆帳單待付"
 
-#: scripts/ui/hud.gd:283
+#: scripts/ui/hud.gd:305
 msgid "● %d new"
 msgstr "● %d 則新訊息"
 
@@ -32954,11 +33006,11 @@ msgstr "● %d 則新訊息"
 msgid "● Open in this build"
 msgstr "● 本版本開放"
 
-#: scripts/ui/minigames/barista_game.gd:136
+#: scripts/ui/minigames/barista_game.gd:141
 msgid "✓ %s enjoyed the service."
 msgstr "✓ %s 對服務很滿意。"
 
-#: scripts/ui/minigames/barista_game.gd:136
+#: scripts/ui/minigames/barista_game.gd:141
 msgid "✓ %s is happy (+%s tip)"
 msgstr "✓ %s 很滿意（小費 +%s）"
 
@@ -32970,7 +33022,7 @@ msgstr "✓ 大樓已完工，請到物件管理出售或出租各戶。"
 msgid "✓ Closed; recovered %s, paid %s."
 msgstr "✓ 已結案；回收 %s，支付 %s。"
 
-#: scripts/ui/minigames/barista_game.gd:107 scripts/ui/minigames/barista_game.gd:134
+#: scripts/ui/minigames/barista_game.gd:109 scripts/ui/minigames/barista_game.gd:139
 msgid "✓ Delivered. Clean the table for the next guest."
 msgstr "✓ 已送餐，請清潔讓下一位客人入座。"
 
@@ -33102,7 +33154,7 @@ msgstr "✗ 請先到代工單選擇訂單。"
 msgid "✗ Complete two campaigns and hire a designer and media buyer before buying Campus Radio."
 msgstr "✗ 完成兩場活動，聘用設計師與媒體採購員後，再收購 校園電台。"
 
-#: scripts/ui/minigames/barista_game.gd:77
+#: scripts/ui/minigames/barista_game.gd:79
 msgid "✗ Confirm the guest's preferred drink before recommending."
 msgstr "✗ 請先確認客人喜歡的飲品，再推薦。"
 
@@ -33234,7 +33286,7 @@ msgstr "✗ 這家公司已關閉或已被新公司取代，請繼續目前的�
 msgid "✗ This company or dispute is closed; return to your current company's terminal."
 msgstr "✗ 這家公司或爭議已關閉；請回到目前公司的電腦。"
 
-#: scripts/ui/minigames/barista_game.gd:74
+#: scripts/ui/minigames/barista_game.gd:76
 msgid "✗ This table is occupied or dirty. Serve another guest or clean it."
 msgstr "✗ 這桌有人或尚未清潔，請先服務其他客人或清潔。"
 
@@ -33250,6 +33302,6 @@ msgstr "✗ 尚未解決；請選擇處理方式。%s 前未回應會自動採�
 msgid "✗ Used by %s. Choose another key."
 msgstr "✗ 已用於「%s」，請改用其他按鍵。"
 
-#: scripts/ui/minigames/barista_game.gd:107
+#: scripts/ui/minigames/barista_game.gd:109
 msgid "✗ Wrong table. Recover the order and clean up."
 msgstr "✗ 送錯桌了，請重新確認並清潔。"

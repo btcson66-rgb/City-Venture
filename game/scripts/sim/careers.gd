@@ -179,6 +179,7 @@ static func work_shift(id: String, score := 1.0, tips := 0.0) -> Dictionary:
 	var moment: String = I18n.t(str(lines[(shifts(id) - 1) % lines.size()])) if not lines.is_empty() else ""
 	var promoted := rank_index(id) > before
 	if promoted:
+		EventBus.progress_moment.emit(I18n.t("Promoted! %s") % I18n.t(str(rank(id)["title"])), "promotion:" + id)
 		GameState.timeline(I18n.t("Promoted to %s at %s.") % [I18n.t(str(rank(id)["title"])), I18n.t(str(j["employer"]))], "career")
 		GameState.add_message(str(j["boss"]), I18n.t("You've earned it: you're our new %s. New rate: $%d an hour.") % [I18n.t(str(rank(id)["title"])), int(wage(id))])
 	return {"ok": true, "pay": pay, "hours": hours, "moment": moment, "promoted": promoted, "title": str(rank(id)["title"]), "counted": counted}

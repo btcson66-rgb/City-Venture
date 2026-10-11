@@ -33,6 +33,15 @@ explicitly adds their numeric fields to a later overlay.
 
 All content lives in `game/data/` as JSON, loaded by `DataDB` at boot.
 
+### Short goals (#182)
+
+`economy/fun_loop.json` tunes bounded event skipping, early work length and celebration presentation.
+`goal_month` keeps its saved id and old completion receipt; its new condition is two active ShopLane products.
+No existing receipt or monthly report is deleted or synthesized. Goal progress reads existing chapter receipts.
+New signals are presentation only. Existing achievement receipts deduplicate first-time celebrations.
+Job rank data now permits two entry shifts and the first promotion after two qualifying shifts; wages remain
+posted only for actual hours worked. A third barista guest finishes the early shift; higher ranks serve six.
+
 Performance QA (`docs/PERFORMANCE.md`) adds no persisted gameplay keys. Ecommerce
 order reservations use a derived, disposable index rebuilt from existing orders;
 legacy saves require no new field or migration.
