@@ -25,6 +25,13 @@ func setup(d: Dictionary, scene: Node) -> void:
 	var mark := ExitMarker.new()
 	mark.name = "ExitSign_" + str(d["to"])
 	mark.setup(Rect2(float(r[0]), float(r[1]), float(r[2]), float(r[3])), directions[side], dname)
+	# Parallel north/south paths keep separate signs; stagger their boards instead of overlapping long names.
+	if ws != null and side in ["N", "S"]:
+		var peers: Array = ws.def.get("exits", []).filter(func(e): return e.get("direction", "") == side)
+		var index := peers.find(d)
+		var shift := Vector2(0, index * (32.0 if side == "N" else -84.0))
+		mark.board.position += shift
+		mark._label.position += shift
 	add_child(mark)
 
 

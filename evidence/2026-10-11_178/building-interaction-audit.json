@@ -1,0 +1,866 @@
+{
+  "buildings": 44,
+  "interactions": 126,
+  "rows": [
+    {
+      "building": "airport_terminal",
+      "action": "automotive_open",
+      "params": {
+        "page": "airport"
+      }
+    },
+    {
+      "building": "airport_terminal",
+      "action": "look",
+      "params": {
+        "icon": "info",
+        "text": "DEPARTURES: business travellers and tourists keep the hall busy. Summer and the December holidays bring the biggest crowds; the car-rental desk sits at Gateway Car Rental across the plaza."
+      }
+    },
+    {
+      "building": "aurelia_auto_auction",
+      "action": "automotive_open",
+      "params": {
+        "page": "auction"
+      }
+    },
+    {
+      "building": "aurelia_auto_auction",
+      "action": "automotive_open",
+      "params": {
+        "page": "stock"
+      }
+    },
+    {
+      "building": "aurelia_auto_auction",
+      "action": "look",
+      "params": {
+        "icon": "info",
+        "text": "AUCTION RULES: lots sell Wednesdays 09:00–17:00. Buyer fee 5% on top of the hammer price. Hidden defects are not shown — pay Jun Ito $150 for an inspection before you bid."
+      }
+    },
+    {
+      "building": "aurelia_university",
+      "action": "media_open",
+      "params": {}
+    },
+    {
+      "building": "birch_row",
+      "action": "real_estate_open",
+      "params": {}
+    },
+    {
+      "building": "bloom_coffee",
+      "action": "buy_item",
+      "params": {
+        "item": "coffee",
+        "price": 4.5,
+        "minutes": 10,
+        "npc": "jun",
+        "flag": "bought_coffee_bloom_coffee"
+      }
+    },
+    {
+      "building": "bloom_coffee",
+      "action": "read_news",
+      "params": {}
+    },
+    {
+      "building": "bloom_coffee",
+      "action": "open_company_os",
+      "params": {
+        "terminal": "cafe"
+      }
+    },
+    {
+      "building": "bloom_coffee",
+      "action": "work_shift",
+      "params": {
+        "job": "barista"
+      }
+    },
+    {
+      "building": "byte_and_bean",
+      "action": "buy_item",
+      "params": {
+        "item": "coffee",
+        "price": 5.2,
+        "minutes": 10,
+        "npc": "lee",
+        "flag": "bought_coffee_byte_and_bean"
+      }
+    },
+    {
+      "building": "byte_and_bean",
+      "action": "open_company_os",
+      "params": {
+        "terminal": "cafe"
+      }
+    },
+    {
+      "building": "campus_radio",
+      "action": "media_open",
+      "params": {}
+    },
+    {
+      "building": "cargo_terminal",
+      "action": "look",
+      "params": {
+        "icon": "info",
+        "text": "AIR CARGO: bonded freight apron. Pallets and containers from Pier 7 and the Industrial Zone are screened here before they fly. Visitors may watch the apron from the gate."
+      }
+    },
+    {
+      "building": "cargo_terminal",
+      "action": "look",
+      "params": {
+        "icon": "parcel",
+        "text": "MANIFEST: 14 pallets of electronics, 6 crates of machine parts and a pallet of coffee are waiting for the evening freighter."
+      }
+    },
+    {
+      "building": "cargo_terminal",
+      "action": "trade_open",
+      "params": {}
+    },
+    {
+      "building": "city_hall",
+      "action": "register_company",
+      "params": {}
+    },
+    {
+      "building": "city_hall",
+      "action": "take_number",
+      "params": {}
+    },
+    {
+      "building": "city_hall",
+      "action": "permits_info",
+      "params": {}
+    },
+    {
+      "building": "city_hall",
+      "action": "work_shift",
+      "params": {
+        "job": "city_clerk"
+      }
+    },
+    {
+      "building": "city_hall",
+      "action": "energy_subsidy",
+      "params": {}
+    },
+    {
+      "building": "city_hall",
+      "action": "city_future",
+      "params": {}
+    },
+    {
+      "building": "civic_clinic",
+      "action": "clinic",
+      "params": {}
+    },
+    {
+      "building": "civic_clinic",
+      "action": "health_insurance",
+      "params": {}
+    },
+    {
+      "building": "corner_cafe_unit",
+      "action": "cafe_counter",
+      "params": {}
+    },
+    {
+      "building": "corner_cafe_unit",
+      "action": "open_company_os",
+      "params": {
+        "terminal": "cafe_till",
+        "requires": "lease:corner_cafe"
+      }
+    },
+    {
+      "building": "corner_cafe_unit",
+      "action": "look",
+      "params": {
+        "icon": "shop",
+        "text": "TO LET: corner unit, fitted for a café. Ask Mr. Okafor at Okafor Lettings, three doors down.",
+        "unless_lease": "corner_cafe"
+      }
+    },
+    {
+      "building": "crestline_flagship",
+      "action": "look",
+      "params": {
+        "icon": "star",
+        "text": "Crestline's autumn lighting range. One shelf is still empty.",
+        "alt": [
+          {
+            "if": "flag:big_contract_delivered",
+            "text": "Your LED desk lamps, on Crestline's shelf. Eight hundred of them left through your door."
+          }
+        ]
+      }
+    },
+    {
+      "building": "crestline_flagship",
+      "action": "market_research",
+      "params": {}
+    },
+    {
+      "building": "customs_house",
+      "action": "customs_guide",
+      "params": {}
+    },
+    {
+      "building": "customs_house",
+      "action": "trade_open",
+      "params": {}
+    },
+    {
+      "building": "dockside_motors",
+      "action": "look",
+      "params": {
+        "icon": "info",
+        "text": "USED VANS, AS SEEN: white panel van, 140,000 km, $9,800. Insurance about $165 a month, fuel about 14 L per 100 km. Two on the lot. Ask Sam. Sam also buys used cars at 80% of their true value, paid on the spot."
+      }
+    },
+    {
+      "building": "dockside_motors",
+      "action": "automotive_open",
+      "params": {
+        "page": "stock"
+      }
+    },
+    {
+      "building": "dockside_motors",
+      "action": "personal_assets",
+      "params": {}
+    },
+    {
+      "building": "dockside_motors",
+      "action": "logistics_depth",
+      "params": {}
+    },
+    {
+      "building": "ferro_supply",
+      "action": "manufacturing_open",
+      "params": {}
+    },
+    {
+      "building": "garden_villa",
+      "action": "sleep",
+      "params": {
+        "requires": "home:garden_villa"
+      }
+    },
+    {
+      "building": "garden_villa",
+      "action": "open_company_os",
+      "params": {
+        "terminal": "home_laptop",
+        "requires": "home:garden_villa"
+      }
+    },
+    {
+      "building": "garden_villa",
+      "action": "pack_orders",
+      "params": {
+        "location": "garden_villa",
+        "requires": "home:garden_villa"
+      }
+    },
+    {
+      "building": "garden_villa",
+      "action": "look",
+      "params": {
+        "icon": "home",
+        "text": "Owned homes have mortgage payments, management, maintenance and tax. Visit the personal assets desk to compare costs or arrange a move."
+      }
+    },
+    {
+      "building": "garden_villa",
+      "action": "personal_assets",
+      "params": {
+        "requires": "home:garden_villa"
+      }
+    },
+    {
+      "building": "gateway_car_rental",
+      "action": "lease_property",
+      "params": {
+        "property": "gateway_counter",
+        "hide_if_leased": "gateway_counter"
+      }
+    },
+    {
+      "building": "gateway_car_rental",
+      "action": "lease_property",
+      "params": {
+        "property": "gateway_showroom",
+        "hide_if_leased": "gateway_showroom"
+      }
+    },
+    {
+      "building": "gateway_car_rental",
+      "action": "automotive_open",
+      "params": {
+        "page": "fleet"
+      }
+    },
+    {
+      "building": "gateway_car_rental",
+      "action": "automotive_open",
+      "params": {
+        "page": "dealer"
+      }
+    },
+    {
+      "building": "harbor_point_fitness",
+      "action": "fitness",
+      "params": {
+        "desk": true
+      }
+    },
+    {
+      "building": "harbor_point_fitness",
+      "action": "fitness",
+      "params": {
+        "desk": false
+      }
+    },
+    {
+      "building": "harlow_finch",
+      "action": "lease_property",
+      "params": {
+        "property": "realty_office",
+        "hide_if_leased": "realty_office"
+      }
+    },
+    {
+      "building": "harlow_finch",
+      "action": "real_estate_open",
+      "params": {}
+    },
+    {
+      "building": "heights_penthouse",
+      "action": "sleep",
+      "params": {
+        "requires": "home:heights_penthouse"
+      }
+    },
+    {
+      "building": "heights_penthouse",
+      "action": "open_company_os",
+      "params": {
+        "terminal": "home_laptop",
+        "requires": "home:heights_penthouse"
+      }
+    },
+    {
+      "building": "heights_penthouse",
+      "action": "pack_orders",
+      "params": {
+        "location": "heights_penthouse",
+        "requires": "home:heights_penthouse"
+      }
+    },
+    {
+      "building": "heights_penthouse",
+      "action": "look",
+      "params": {
+        "icon": "home",
+        "text": "Owned homes have mortgage payments, management, maintenance and tax. Visit the personal assets desk to compare costs or arrange a move."
+      }
+    },
+    {
+      "building": "heights_penthouse",
+      "action": "personal_assets",
+      "params": {
+        "requires": "home:heights_penthouse"
+      }
+    },
+    {
+      "building": "helio_supply",
+      "action": "energy_open",
+      "params": {}
+    },
+    {
+      "building": "helio_supply",
+      "action": "energy_open",
+      "params": {}
+    },
+    {
+      "building": "helio_warehouse",
+      "action": "lease_property",
+      "params": {
+        "property": "helio_warehouse",
+        "unless_lease": "helio_warehouse"
+      }
+    },
+    {
+      "building": "helio_warehouse",
+      "action": "energy_open",
+      "params": {}
+    },
+    {
+      "building": "kessler_precision",
+      "action": "manufacturing_open",
+      "params": {}
+    },
+    {
+      "building": "lantern_bistro",
+      "action": "buy_item",
+      "params": {
+        "item": "meal",
+        "name": "House special",
+        "price": 22.0,
+        "minutes": 50,
+        "category": "dining",
+        "flag": "ate_at_lantern_bistro"
+      }
+    },
+    {
+      "building": "lot7",
+      "action": "real_estate_open",
+      "params": {}
+    },
+    {
+      "building": "maple_court",
+      "action": "real_estate_open",
+      "params": {}
+    },
+    {
+      "building": "maple_owner_home",
+      "action": "sleep",
+      "params": {
+        "requires": "home:maple_owner_home"
+      }
+    },
+    {
+      "building": "maple_owner_home",
+      "action": "open_company_os",
+      "params": {
+        "terminal": "home_laptop",
+        "requires": "home:maple_owner_home"
+      }
+    },
+    {
+      "building": "maple_owner_home",
+      "action": "pack_orders",
+      "params": {
+        "location": "maple_owner_home",
+        "requires": "home:maple_owner_home"
+      }
+    },
+    {
+      "building": "maple_owner_home",
+      "action": "look",
+      "params": {
+        "icon": "home",
+        "text": "Owned homes have mortgage payments, management, maintenance and tax. Visit the personal assets desk to compare costs or arrange a move."
+      }
+    },
+    {
+      "building": "maple_owner_home",
+      "action": "personal_assets",
+      "params": {
+        "requires": "home:maple_owner_home"
+      }
+    },
+    {
+      "building": "meridian_trade_desk",
+      "action": "lease_property",
+      "params": {
+        "property": "meridian_trade_office"
+      }
+    },
+    {
+      "building": "meridian_trade_desk",
+      "action": "trade_open",
+      "params": {}
+    },
+    {
+      "building": "nexus_bank",
+      "action": "bank_counter",
+      "params": {}
+    },
+    {
+      "building": "nexus_bank",
+      "action": "atm",
+      "params": {}
+    },
+    {
+      "building": "nexus_bank",
+      "action": "loans_info",
+      "params": {}
+    },
+    {
+      "building": "nexus_bank",
+      "action": "work_shift",
+      "params": {
+        "job": "bank_teller"
+      }
+    },
+    {
+      "building": "nexus_bank",
+      "action": "loans_info",
+      "params": {}
+    },
+    {
+      "building": "nexus_bank",
+      "action": "real_estate_open",
+      "params": {}
+    },
+    {
+      "building": "nexus_bank",
+      "action": "trade_open",
+      "params": {}
+    },
+    {
+      "building": "nexus_cowork",
+      "action": "cowork_desk",
+      "params": {}
+    },
+    {
+      "building": "nexus_cowork",
+      "action": "open_company_os",
+      "params": {
+        "terminal": "cowork",
+        "requires": "desk_access"
+      }
+    },
+    {
+      "building": "nexus_cowork",
+      "action": "business_board",
+      "params": {}
+    },
+    {
+      "building": "nexus_cowork",
+      "action": "work_shift",
+      "params": {
+        "job": "cowork_host"
+      }
+    },
+    {
+      "building": "nexus_cowork",
+      "action": "legacy_mentor",
+      "params": {}
+    },
+    {
+      "building": "observation_deck",
+      "action": "talk",
+      "params": {
+        "npc": "owen_blake"
+      }
+    },
+    {
+      "building": "observation_deck",
+      "action": "look",
+      "params": {
+        "icon": "info",
+        "text": "Tour groups gather here before and after the evening view. Festival weekends fill every hotel in the city."
+      }
+    },
+    {
+      "building": "okafor_lettings",
+      "action": "look",
+      "params": {
+        "icon": "home",
+        "text": "Corner Café Unit, Lantern Row: $1,900/month, 2 months' deposit. Ask Mr. Okafor."
+      }
+    },
+    {
+      "building": "okafor_lettings",
+      "action": "home_letting",
+      "params": {}
+    },
+    {
+      "building": "okafor_lettings",
+      "action": "personal_assets",
+      "params": {}
+    },
+    {
+      "building": "old_town_studio",
+      "action": "sleep",
+      "params": {
+        "requires": "home:old_town_studio"
+      }
+    },
+    {
+      "building": "old_town_studio",
+      "action": "open_company_os",
+      "params": {
+        "terminal": "home_laptop",
+        "requires": "home:old_town_studio"
+      }
+    },
+    {
+      "building": "old_town_studio",
+      "action": "pack_orders",
+      "params": {
+        "location": "old_town_studio",
+        "requires": "home:old_town_studio"
+      }
+    },
+    {
+      "building": "old_town_studio",
+      "action": "look",
+      "params": {
+        "icon": "home",
+        "text": "Studio 1A: $780/month, 200 storage units. Sign a home lease at Okafor Lettings; the first move is free."
+      }
+    },
+    {
+      "building": "old_town_studio",
+      "action": "personal_assets",
+      "params": {
+        "requires": "home:old_town_studio"
+      }
+    },
+    {
+      "building": "pier7_warehouse",
+      "action": "lease_property",
+      "params": {
+        "property": "pier7_warehouse",
+        "unless_lease": "pier7_warehouse"
+      }
+    },
+    {
+      "building": "pier7_warehouse",
+      "action": "open_company_os",
+      "params": {
+        "terminal": "pier7",
+        "requires": "lease:pier7_warehouse"
+      }
+    },
+    {
+      "building": "pier7_warehouse",
+      "action": "pack_orders",
+      "params": {
+        "location": "pier7_warehouse",
+        "requires": "lease:pier7_warehouse"
+      }
+    },
+    {
+      "building": "pier7_warehouse",
+      "action": "look",
+      "params": {
+        "icon": "parcel",
+        "text": "Bay 3's loading dock: pallets come in off the trucks here. Stock you order can be delivered to this warehouse, and the packing bench by the dock packs it for the courier or your own van."
+      }
+    },
+    {
+      "building": "pier7_warehouse",
+      "action": "look",
+      "params": {
+        "icon": "inventory",
+        "text": "Racking for 5,000 units, and it is the cheapest space per unit in the city. Empty racking still costs rent.",
+        "alt": [
+          {
+            "if": "!company_registered",
+            "text": "Racking for 5,000 units. Pier 7 leases bays to registered companies only."
+          }
+        ]
+      }
+    },
+    {
+      "building": "popup_unit",
+      "action": "lease_property",
+      "params": {
+        "property": "popup_cafe"
+      }
+    },
+    {
+      "building": "popup_unit",
+      "action": "cafe_counter",
+      "params": {
+        "property": "popup_cafe",
+        "requires": "lease:popup_cafe"
+      }
+    },
+    {
+      "building": "popup_unit",
+      "action": "cafe_depth",
+      "params": {
+        "property": "popup_cafe",
+        "requires": "lease:popup_cafe"
+      }
+    },
+    {
+      "building": "popup_unit",
+      "action": "popup_store",
+      "params": {}
+    },
+    {
+      "building": "popup_unit",
+      "action": "popup_till",
+      "params": {}
+    },
+    {
+      "building": "postpoint_riverside",
+      "action": "dropoff_parcels",
+      "params": {}
+    },
+    {
+      "building": "postpoint_riverside",
+      "action": "work_shift",
+      "params": {
+        "job": "parcel_sorter"
+      }
+    },
+    {
+      "building": "riverside_apartment",
+      "action": "open_company_os",
+      "params": {
+        "terminal": "home_laptop",
+        "requires": "home:riverside_studio"
+      }
+    },
+    {
+      "building": "riverside_apartment",
+      "action": "sleep",
+      "params": {
+        "requires": "home:riverside_studio"
+      }
+    },
+    {
+      "building": "riverside_apartment",
+      "action": "change_outfit",
+      "params": {
+        "requires": "home:riverside_studio"
+      }
+    },
+    {
+      "building": "riverside_apartment",
+      "action": "pack_orders",
+      "params": {
+        "location": "riverside_studio",
+        "requires": "home:riverside_studio"
+      }
+    },
+    {
+      "building": "riverside_apartment",
+      "action": "personal_assets",
+      "params": {
+        "requires": "home:riverside_studio"
+      }
+    },
+    {
+      "building": "shift_diner",
+      "action": "buy_item",
+      "params": {
+        "item": "coffee",
+        "price": 5.2,
+        "minutes": 10,
+        "flag": "bought_coffee_shift_diner"
+      }
+    },
+    {
+      "building": "shift_diner",
+      "action": "open_company_os",
+      "params": {
+        "terminal": "cafe"
+      }
+    },
+    {
+      "building": "shift_diner",
+      "action": "manufacturing_open",
+      "params": {}
+    },
+    {
+      "building": "skyline_grand",
+      "action": "hotel_open",
+      "params": {}
+    },
+    {
+      "building": "skyline_grand",
+      "action": "look",
+      "params": {
+        "icon": "star",
+        "text": "Skyline Grand rack rates: Suites from $320, rooms from $210. They are fully booked in peak weeks, so mid-priced guests overflow to hotels like yours."
+      }
+    },
+    {
+      "building": "small_office",
+      "action": "open_company_os",
+      "params": {
+        "terminal": "office",
+        "requires": "lease:suite_2b"
+      }
+    },
+    {
+      "building": "small_office",
+      "action": "whiteboard",
+      "params": {}
+    },
+    {
+      "building": "small_office",
+      "action": "pack_orders",
+      "params": {
+        "location": "suite_2b",
+        "requires": "lease:suite_2b"
+      }
+    },
+    {
+      "building": "the_aster",
+      "action": "hotel_open",
+      "params": {}
+    },
+    {
+      "building": "the_aster",
+      "action": "look",
+      "params": {
+        "icon": "sleep",
+        "text": "Aster Inn: 7 Standard, 4 Deluxe and 1 Suite. Take it over for $150,000 or lease it for $9,000 a month."
+      }
+    },
+    {
+      "building": "the_loft",
+      "action": "lease_property",
+      "params": {
+        "property": "loft_office",
+        "hide_if_leased": "loft_office"
+      }
+    },
+    {
+      "building": "the_loft",
+      "action": "media_open",
+      "params": {}
+    },
+    {
+      "building": "threadline_apparel",
+      "action": "clothing_shop",
+      "params": {
+        "npc": "nina",
+        "first": "nina_first"
+      }
+    },
+    {
+      "building": "threadline_apparel",
+      "action": "change_outfit",
+      "params": {}
+    },
+    {
+      "building": "unit12_factory",
+      "action": "lease_property",
+      "params": {
+        "property": "unit12_factory",
+        "unless_lease": "unit12_factory"
+      }
+    },
+    {
+      "building": "unit12_factory",
+      "action": "manufacturing_open",
+      "params": {
+        "requires": "lease:unit12_factory"
+      }
+    },
+    {
+      "building": "unit12_factory",
+      "action": "manufacturing_open",
+      "params": {
+        "requires": "lease:unit12_factory"
+      }
+    }
+  ]
+}

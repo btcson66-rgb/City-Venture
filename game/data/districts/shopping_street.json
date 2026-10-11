@@ -2,7 +2,7 @@
  "id": "shopping_street",
  "name": "Shopping Street",
  "size_tiles": [
-  106,
+  94,
   44
  ],
  "music": "day_city",
@@ -103,7 +103,7 @@
    "rect": [
     90,
     0,
-    16,
+    4,
     44
    ]
   },
@@ -119,9 +119,9 @@
   {
    "type": "crosswalk_h",
    "rect": [
-    92,
+    91,
     25,
-    3,
+    2,
     5
    ]
   }
@@ -1276,7 +1276,7 @@
    "id": "walk_harbor",
    "direction": "E",
    "rect": [
-    1680,
+    1488,
     324,
     16,
     164
@@ -1289,9 +1289,9 @@
    "id": "walk_residential",
    "direction": "N",
    "rect": [
-    1464,
-    0,
-    48,
+    1456,
+    304,
+    32,
     16
    ],
    "to": "residential",
@@ -1302,7 +1302,7 @@
    "id": "walk_old_town",
    "direction": "E",
    "rect": [
-    1680,
+    1488,
     504,
     16,
     48
@@ -1335,16 +1335,16 @@
    642
   ],
   "from_old_town": [
-   1656,
+   1464,
    390
   ],
   "from_harbor": [
-   1656,
+   1464,
    348
   ],
   "from_residential": [
-   1488,
-   40
+   1472.0,
+   348
   ],
   "from_industrial": [
    40,
@@ -1418,7 +1418,7 @@
   [
    1440,
    0,
-   256,
+   64,
    704
   ]
  ]

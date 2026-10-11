@@ -54,7 +54,7 @@ func _stagger() -> void:
 
 
 func _process(delta: float) -> void:
-	if not enabled or not markers_enabled():
+	if not enabled or not BuildingInfo.action_visible(action) or not markers_enabled():
 		if _was_drawn:             # clear the chip once, then stop redrawing every frame
 			_was_drawn = false
 			queue_redraw()
@@ -65,7 +65,7 @@ func _process(delta: float) -> void:
 
 
 func _draw() -> void:
-	if not enabled or not markers_enabled():
+	if not enabled or not BuildingInfo.action_visible(action) or not markers_enabled():
 		return
 	var pl := get_tree().get_first_node_in_group("player") as Node2D
 	if pl == null:

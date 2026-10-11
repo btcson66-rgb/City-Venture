@@ -15,5 +15,8 @@ class MapChecks(unittest.TestCase):
     def test_wrong_spawn_side(self): self.broken(lambda c,d:d['startup_hub']['spawns'].__setitem__('from_riverside',[1000,400]))
     def test_blocked_corridor(self): self.broken(lambda c,d:d['university'].__setitem__('walk_corridors',[]))
     def test_exit_not_at_edge(self): self.broken(lambda c,d:d['riverside']['exits'][0]['rect'].__setitem__(0,100))
+    def test_north_gateway_not_on_street_edge(self): self.broken(lambda c,d:d['university']['exits'][1]['rect'].__setitem__(1,200))
+    def test_parallel_destinations_cannot_share_a_trigger(self):
+        self.broken(lambda c,d:d['riverside']['exits'][2].__setitem__('rect',d['riverside']['exits'][1]['rect'].copy()))
 
 if __name__=='__main__':unittest.main()
