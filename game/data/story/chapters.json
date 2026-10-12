@@ -2236,7 +2236,7 @@
    "goal": "Ready to grow",
    "text": "List a second product on ShopLane to grow your company",
    "complete_when": [
-    "stat:listings_active>=2"
+    "stat:listings_created>=2 || stat:listings_active>=2 || stat:month_closes>=1"
    ],
    "on_complete": [
     {

@@ -3,7 +3,7 @@ var runner
 
 func test_old_wait_objective_keeps_id_but_uses_active_products() -> void:
 	var objective := StoryEngine.objective_def("goal_month")
-	runner.check(not objective["complete_when"].any(func(c): return str(c).contains("month_closes")), "no month wait gate")
+	runner.check(not objective["complete_when"].any(func(c): return str(c).contains("month_closes") and not str(c).contains("||")), "no mandatory month wait gate")
 	StoryEngine.St()["active"] = ["goal_month"]
 	StoryEngine.St()["chapters_done"] = ["ch3_open_for_business"]
 	StoryEngine.St()["chapter"] = "ch3_open_for_business"
@@ -132,3 +132,29 @@ func test_stale_workplace_card_does_not_start_unpaid_work() -> void:
 	runner.eq(Careers.shifts("barista"), 0, "no fabricated completion")
 	runner.eq(Ledger.cash("player"), cash, "no unplayed wages")
 	UIRoot.close_all()
+
+func test_second_product_goal_survives_seller_cap_pausing_listings() -> void:
+	StoryEngine.St()["active"] = ["goal_month"]
+	StoryEngine.St()["chapters_done"] = ["ch3_open_for_business"]
+	StoryEngine.St()["chapter"] = "ch3_open_for_business"
+	StoryEngine.check()
+	runner.check("goal_month" not in StoryEngine.St()["done"], "goal waits with nothing listed")
+	GameState.inc_stat("listings_created", 2.0)
+	for lid in ["Lx1", "Lx2"]:
+		Ecommerce.E()["listings"][lid] = {"id": lid, "product": "water_bottle", "active": false, "paused_reason": "seller_cap"}
+	runner.eq(GameState.stat("listings_active"), 0, "cap paused every listing")
+	StoryEngine.check()
+	runner.check("goal_month" in StoryEngine.St()["done"], "two listings ever created complete the goal even when paused")
+	runner.check(Ledger.check_balanced(), "story progress does not move money")
+
+func test_skip_stops_when_an_unpaid_bill_comes_due() -> void:
+	StoryEngine.St()["active"] = ["ch2_stock"]
+	StoryEngine.St()["chapter"] = "ch2_first_customer"
+	var order := Ecommerce.buy("tradelink_wholesale", "water_bottle", 60)
+	runner.check(order["ok"], "actual inventory order")
+	var due := Clock.now() + Clock.DAY
+	AssistantPolicy.S()["bills"] = [{"entity":"player", "amount":5.0, "narrative":"Test bill", "source":{"type":"fee"}, "paid":false, "due":due}]
+	runner.check(FunLoop.skip_next(), "skip runs toward the bill")
+	runner.check(Clock.now() <= due, "skip does not run past a due bill")
+	runner.check(Clock.now() < Clock.at_day_time(Clock.day_index() + 3, 0) , "skip never exceeds three days")
+	runner.check(Ledger.check_balanced(), "skip leaves the books balanced")
