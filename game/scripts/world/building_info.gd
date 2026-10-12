@@ -62,6 +62,8 @@ static func building_available(id: String) -> bool:
 ## Forget remembered answers (data edited at run time, e.g. by tests).
 static func invalidate_availability() -> void:
 	_avail_stamp = ""
+	_visible_stamp_last = ""
+	_visible_cache.clear()
 	_avail_cache.clear()
 
 
@@ -230,10 +232,34 @@ static func record_entry(id: String) -> int:
 ## Industry desks follow the same presentation gates as their Company OS pages. Existing businesses stay accessible.
 static func action_visible(action: String) -> bool:
 	if not GameState.has_game(): return true
+	var stamp := _visible_stamp()
+	if stamp != _visible_stamp_last:
+		_visible_stamp_last = stamp
+		_visible_cache.clear()
+	if not _visible_cache.has(action):
+		_visible_cache[action] = _compute_action_visible(action)
+	return _visible_cache[action]
+
+
+static var _visible_cache: Dictionary = {}
+static var _visible_stamp_last := ""
+
+
+## Doors and the focus probe ask every frame; the answer only moves with the game minute, chapter, granted features,
+## flags (business open/close), leases or the ledger.
+static func _visible_stamp() -> String:
+	var gates: Dictionary = GameState.data.get("feature_gates", {})
+	return "%d|%d|%s|%d|%d|%d|%d" % [Clock.now(), int(GameState.data["meta"].get("created_unix", 0)),
+		str(GameState.data.get("story", {}).get("chapter", "")), gates.get("granted", []).size(), GameState.data["flags"].size(),
+		Living.D()["leases"].size(), int(GameState.data["ledger"]["seq"])]
+
+
+static func _compute_action_visible(action: String) -> bool:
 	for entry in Industries.all():
 		if entry.get("actions", {}).has(action):
 			return entry["sim_class"].is_running() or FeatureGate.unlocked("os_" + str(entry["id"]))
 	return true
+
 
 static func interactables(id: String) -> Array:
 	var out: Array=DataDB.building(id).get("interior",{}).get("interactables",[]).filter(func(it): return action_visible(str(it["action"])))
