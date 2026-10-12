@@ -40,7 +40,7 @@ func test_same_base_wage_and_review_challenge_adds_only_tips() -> void:
 		UIRoot.open_modal(game)
 		await frames()
 		game.start()
-		for i in 6:
+		for i in game.rounds:
 			game._confirm()
 			for key in ["size", "drink", "milk", "shots"]: game.got[key] = game.want[key]
 			game._serve()
@@ -53,7 +53,7 @@ func test_same_base_wage_and_review_challenge_adds_only_tips() -> void:
 	runner.eq(results[0]["review"], results[1]["review"], "same manager review/promotion quality")
 	runner.eq(Careers.pay_for("barista", results[0]["score"]), Careers.pay_for("barista", results[1]["score"]), "same normal wages")
 	runner.eq(results[0]["tips"], results[1]["tips"], "normal tips also equal")
-	runner.eq(results[0]["tips"], 12.0, "relaxed income keeps the former fast normal service level")
+	runner.eq(results[0]["tips"], float(FunLoop.cfg()["barista_early_rounds"]) * float(MiniGame.mode_cfg()["normal_barista_tip"]), "normal tips follow actual guests in the shorter entry shift")
 	runner.eq(results[0]["bonus"], 0.0, "relaxed is normal pay")
 	runner.check(results[1]["bonus"] > 0.0, "challenge earns extra tips only")
 

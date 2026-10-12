@@ -2,7 +2,7 @@
  "id": "harbor",
  "name": "Harbor",
  "size_tiles": [
-  124,
+  112,
   46
  ],
  "music": "day_city",
@@ -125,7 +125,7 @@
    "rect": [
     108,
     0,
-    16,
+    4,
     46
    ]
   },
@@ -159,10 +159,73 @@
   {
    "type": "crosswalk_h",
    "rect": [
-    110,
+    109,
     25,
-    3,
+    2,
     5
+   ]
+  },
+  {
+   "type": "grass_flowers",
+   "rect": [
+    101,
+    14,
+    7,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    101,
+    19,
+    7,
+    1
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    0,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    84,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    90,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    96,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    102,
+    34,
+    6,
+    6
    ]
   }
  ],
@@ -1643,6 +1706,158 @@
     4
    ],
    "_gen": true
+  },
+  {
+   "sprite": "flower_market",
+   "x": 1626,
+   "y": 234,
+   "solid": false
+  },
+  {
+   "sprite": "bench",
+   "x": 1694,
+   "y": 298,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1710,
+   "y": 252,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "workshop_garden",
+   "x": 4,
+   "y": 552,
+   "solid": [
+    8,
+    80,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 62,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 78,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "flower_market",
+   "x": 1348,
+   "y": 554,
+   "solid": [
+    8,
+    78,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 1406,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1422,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "workshop_garden",
+   "x": 1444,
+   "y": 552,
+   "solid": [
+    8,
+    80,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 1502,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1518,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "flower_market",
+   "x": 1540,
+   "y": 554,
+   "solid": [
+    8,
+    78,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 1598,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1614,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "workshop_garden",
+   "x": 1636,
+   "y": 552,
+   "solid": [
+    8,
+    80,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 1694,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1710,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "bench",
+   "x": 1740,
+   "y": 232,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1732,
+   "y": 156,
+   "glow": true,
+   "solid": false
   }
  ],
  "metro": {
@@ -1655,7 +1870,7 @@
    "id": "walk_riverside",
    "direction": "E",
    "rect": [
-    1968,
+    1776,
     324,
     16,
     220
@@ -1668,9 +1883,9 @@
    "id": "walk_financial",
    "direction": "N",
    "rect": [
-    1752,
-    0,
-    48,
+    1744,
+    304,
+    32,
     16
    ],
    "to": "financial",
@@ -1697,12 +1912,12 @@
    642
   ],
   "from_riverside": [
-   1944,
+   1752,
    348
   ],
   "from_financial": [
-   1776,
-   40
+   1760.0,
+   348
   ],
   "from_shopping_street": [
    40,
@@ -1753,8 +1968,8 @@
   }
  ],
  "ambient_density": {
-  "morning": 8,
-  "afternoon": 9,
+  "morning": 10,
+  "afternoon": 12,
   "evening": 5,
   "night": 2
  },
@@ -1773,8 +1988,70 @@
   [
    1728,
    0,
-   256,
+   64,
    736
   ]
+ ],
+ "public_spaces": [
+  {
+   "name": "Dockside market",
+   "rect": [
+    1622,
+    224,
+    106,
+    96
+   ],
+   "purpose": "frontage_garden"
+  },
+  {
+   "name": "Dockside market",
+   "rect": [
+    0,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Dockside market",
+   "rect": [
+    1344,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Dockside market",
+   "rect": [
+    1440,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Dockside market",
+   "rect": [
+    1536,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Dockside market",
+   "rect": [
+    1632,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  }
  ]
 }

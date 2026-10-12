@@ -65,6 +65,7 @@ static func refresh(announce := true) -> void:
 	for item in definitions():
 		if item["id"] not in st["granted"] and eligible(item):
 			st["granted"].append(item["id"])
+			BuildingInfo.invalidate_availability()
 			if announce and not str(item["id"]).begins_with("app_"):
 				EventBus.notify.emit(I18n.t("New feature: %s") % I18n.t(str(item["label"])), "info", "info")
 ## Lowest chapter that opens a feature; features opened by play alone count as earliest.
@@ -92,7 +93,9 @@ static func preview(ids: Array) -> String:
 static func grant(id: String) -> void:
 	if not GameState.has_game() or definition(id).is_empty():return
 	var st := state()
-	if id not in st["granted"]:st["granted"].append(id)
+	if id not in st["granted"]:
+		st["granted"].append(id)
+		BuildingInfo.invalidate_availability()
 static func is_new(id: String) -> bool:return id not in state()["seen"] and unlocked(id)
 static func viewed(id: String) -> void:
 	refresh(false)

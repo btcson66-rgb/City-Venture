@@ -124,7 +124,7 @@ func _update_focus() -> void:
 	if can_move():
 		var probe := global_position + _facing_vec() * 6.0
 		for n in get_tree().get_nodes_in_group("interactable"):
-			if not n.is_inside_tree() or not n.enabled:
+			if not n.is_inside_tree() or not n.enabled or not BuildingInfo.action_visible(n.action):
 				continue
 			var d: float = probe.distance_to(n.global_position)
 			if d <= n.radius and d < best_d:

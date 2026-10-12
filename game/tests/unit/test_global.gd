@@ -109,7 +109,11 @@ func test_automatic_conversion_and_exchange_loss() -> void:
 
 
 func company_auto(on: bool) -> void:
-	GlobalMarket.company()["auto_fx"] = on
+	# This FX unit fixture represents an already-hired expanded assistant; hire fees have their own lifecycle tests.
+	AssistantPolicy.S()["hired"] = true
+	AssistantPolicy.S()["level"] = 2
+	AssistantPolicy.S()["paid_until"] = Clock.now() + 30 * Clock.DAY
+	AssistantPolicy.set_task("fx", on)
 
 
 func test_refund_before_payout_reverses_receipt_and_stock() -> void:

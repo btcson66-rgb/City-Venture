@@ -19,6 +19,11 @@ func _process(delta: float) -> void:
 		"scene": SceneRouter.current.get_script().get_global_name() if SceneRouter.current != null else "",
 		"locale": I18n.locale(), "font_size": Preferences.values["font_size"],
 		"touch": InputAccess.touch_mode, "phone": UIRoot.phone.is_open, "actions": []}
+	data["phone_app"] = UIRoot.phone.app
+	data["notification_detail_text"] = ""
+	if UIRoot.phone.app == "message_detail":
+		var full := UIRoot.phone.find_child("NotificationFullText_" + UIRoot.phone.selected_notification, true, false) as Label
+		if full != null:data["notification_detail_text"] = full.text
 	# The contextual prompt is a clickable PanelContainer, not a Button. Report
 	# visible HUD surfaces so the touch driver can choose exposed walking ground.
 	data["ground_blockers"] = []

@@ -41,6 +41,9 @@ func test_tutorial_state_for_new_and_old_saves() -> void:
 	tut.free()
 
 func test_assisted_business_guide_does_not_require_an_optional_side_job() -> void:
+	# Existing enabled legacy assistant, not a fresh unhired player.
+	GameState.data["assistant"] = {"tasks":{"packing":true},"default":false}
+	AssistantPolicy.migrate(GameState.data)
 	GameState.set_flag("test_assistant_run")
 	AssistantPolicy.set_all(true)
 	var tut := Tutorial.new()

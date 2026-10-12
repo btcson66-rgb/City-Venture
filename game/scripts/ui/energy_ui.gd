@@ -8,6 +8,7 @@ var has_primary := false
 
 func _init() -> void:
 	calm_profile = "energy"
+	industry_intro = "energy"
 	title_text = "Energy Console"
 	help_key = "energy"
 	icon_name = "sun"
@@ -59,6 +60,12 @@ func check(content: Control, ok: bool, text: String) -> void: note(content, ("鉁
 
 func build() -> void:
 	has_primary = false
+	calm_profile = "energy" if Energy.is_running() else ""
+	if not Energy.is_running():
+		var startup := UIK.vbox(4)
+		body.add_child(startup)
+		prerequisites(startup)
+		return
 	var nav := UIK.hbox(4)
 	body.add_child(nav)
 	for tab in [["leads", "Roof leads"], ["survey", "Roof Survey"], ["installs", "Installs & warranty"], ["subsidy", "Subsidy desk"], ["charging", "Charging network"]]:
@@ -67,9 +74,6 @@ func build() -> void:
 		nav.add_child(choice)
 	var content := UIK.vbox(4)
 	body.add_child(UIK.scroll(content, Vector2(580, 270)))
-	if not Energy.is_running():
-		prerequisites(content)
-		return
 	content.add_child(UIK.label(I18n.t("%s 路 reputation %d%% 路 cash %s 路 weather %s 路 crew %.1f crew-days/day") % [Energy.stage_text(), roundi(float(Energy.S()["reputation"]) * 100), Fmt.money0(Ledger.cash(Energy.entity())), Energy.weather_text(), Energy.crew_capacity()], 8))
 	match page:
 		"leads": leads(content)

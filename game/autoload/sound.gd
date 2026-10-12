@@ -63,7 +63,7 @@ func _ready() -> void:
 	EventBus.notify.connect(_on_notify)
 	EventBus.cash_changed.connect(_on_cash)
 	EventBus.ledger_posted.connect(_on_ledger_audio)
-	EventBus.message_received.connect(func(_f, _t): play("phone", -4.0))
+	EventBus.message_received.connect(_message_arrived)
 	EventBus.chapter_completed.connect(func(_c): play("fanfare");set_mood("victory",10))
 	EventBus.flag_set.connect(func(flag): if str(flag).contains("upgrade") or str(flag).begins_with("stage_"):play("fanfare",-8))
 	EventBus.location_entered.connect(func(kind, _id): if kind == "interior": play("door", -6.0))
@@ -295,7 +295,16 @@ func _on_node_added(n: Node) -> void:
 		if str(n.get_script().resource_path).contains("ipo") or str(n.get("title_text")).to_lower().contains("roadshow"):set_mood("roadshow",30)
 
 
+func _message_arrived(_from: String, _text: String) -> void:
+	if not UIRoot.hud.visible or GameState.data.get("messages", []).is_empty():return
+	var important := PhoneMessages.important(GameState.data["messages"].back())
+	var feedback: Dictionary = cfg()["notification_feedback"]
+	play("success" if important else "notify", float(feedback["important_db" if important else "normal_db"]))
+
 func _on_notify(_text: String, kind: String, _icon: String) -> void:
+	if kind == "info" and _text.begins_with(I18n.t("New feature: %s").get_slice("%s", 0)):
+		play("success", float(cfg()["notification_feedback"]["important_db"]))
+		return
 	match kind:
 		"good":
 			play("success", -6.0)

@@ -37,12 +37,6 @@ func _draw() -> void:
 		var rr := Rect2((r2.position - origin) * SCALE, r2.size * SCALE)
 		if rr.intersects(Rect2(Vector2.ZERO, size)):
 			draw_rect(rr, s["color"])
-	if ws.kind == "district":
-		for ex in ws.def.get("exits", []):
-			var r: Array = ex["rect"]
-			var edge := Vector2(float(r[0]) + float(r[2]) / 2, float(r[1]) + float(r[3]) / 2)
-			var end := ((edge - origin) * SCALE).clamp(Vector2(4, 4), size - Vector2(4, 4))
-			draw_line(size / 2, end, Color(0.8, 0.7, 0.25, 0.5), 1.0)
 	for c in ws.get_tree().get_nodes_in_group("cars"):
 		var p: Vector2 = (c.position - origin) * SCALE
 		if Rect2(Vector2.ZERO, size).has_point(p):

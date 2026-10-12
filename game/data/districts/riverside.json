@@ -2,7 +2,7 @@
  "id": "riverside",
  "name": "Riverside",
  "size_tiles": [
-  136,
+  130,
   48
  ],
  "music": "day_city",
@@ -176,7 +176,7 @@
    "rect": [
     120,
     0,
-    16,
+    10,
     48
    ]
   },
@@ -205,6 +205,69 @@
     25,
     3,
     5
+   ]
+  },
+  {
+   "type": "grass_flowers",
+   "rect": [
+    113,
+    14,
+    7,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    113,
+    19,
+    7,
+    1
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    0,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    18,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    90,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    102,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    114,
+    34,
+    6,
+    6
    ]
   }
  ],
@@ -1043,19 +1106,6 @@
    "_gen": true
   },
   {
-   "sprite": "direction_sign",
-   "x": 1850,
-   "y": 308,
-   "solid": [
-    18,
-    44,
-    6,
-    4
-   ],
-   "label": "STARTUP HUB →",
-   "_gen": true
-  },
-  {
    "sprite": "digital_sign",
    "x": 1000,
    "y": 304,
@@ -1763,6 +1813,158 @@
    "wall": true,
    "solid": false,
    "_era": true
+  },
+  {
+   "sprite": "pocket_fountain",
+   "x": 1822,
+   "y": 243,
+   "solid": false
+  },
+  {
+   "sprite": "bench",
+   "x": 1886,
+   "y": 298,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1902,
+   "y": 252,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "flower_market",
+   "x": 4,
+   "y": 554,
+   "solid": [
+    8,
+    78,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 62,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 78,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "pocket_fountain",
+   "x": 292,
+   "y": 563,
+   "solid": [
+    8,
+    69,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 350,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 366,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "flower_market",
+   "x": 1444,
+   "y": 554,
+   "solid": [
+    8,
+    78,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 1502,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1518,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "pocket_fountain",
+   "x": 1636,
+   "y": 563,
+   "solid": [
+    8,
+    69,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 1694,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1710,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "flower_market",
+   "x": 1828,
+   "y": 554,
+   "solid": [
+    8,
+    78,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 1886,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1902,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "bench",
+   "x": 1932,
+   "y": 232,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1924,
+   "y": 156,
+   "glow": true,
+   "solid": false
   }
  ],
  "metro": {
@@ -1775,7 +1977,7 @@
    "id": "walk_startup_hub",
    "direction": "E",
    "rect": [
-    2160,
+    2064,
     324,
     16,
     220
@@ -1789,7 +1991,7 @@
    "direction": "N",
    "rect": [
     1944,
-    0,
+    304,
     48,
     16
    ],
@@ -1802,7 +2004,7 @@
    "direction": "N",
    "rect": [
     2008,
-    0,
+    304,
     48,
     16
    ],
@@ -1826,7 +2028,7 @@
  ],
  "spawns": {
   "from_startup_hub": [
-   2136,
+   2040,
    348
   ],
   "metro": [
@@ -1834,12 +2036,12 @@
    630
   ],
   "from_civic_center": [
-   1968,
-   40
+   1968.0,
+   348
   ],
   "from_financial": [
-   2032,
-   40
+   2032.0,
+   348
   ],
   "from_harbor": [
    40,
@@ -1895,8 +2097,70 @@
   [
    1920,
    0,
-   256,
+   160,
    768
   ]
+ ],
+ "public_spaces": [
+  {
+   "name": "Riverside garden",
+   "rect": [
+    1818,
+    224,
+    102,
+    96
+   ],
+   "purpose": "frontage_garden"
+  },
+  {
+   "name": "Riverside garden",
+   "rect": [
+    0,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Riverside garden",
+   "rect": [
+    288,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Riverside garden",
+   "rect": [
+    1440,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Riverside garden",
+   "rect": [
+    1632,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Riverside garden",
+   "rect": [
+    1824,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  }
  ]
 }

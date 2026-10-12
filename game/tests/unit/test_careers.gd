@@ -27,7 +27,7 @@ func test_hire_work_shift_and_get_paid() -> void:
 	runner.eq(Ledger.cash("player") - cash0, 68.0, "4 h × $17 paid")
 	runner.eq(-Ledger.balance("player", "wages"), 68.0, "booked as wages")
 	runner.check(Ledger.check_balanced(), "ledger balanced")
-	runner.eq(Careers.shift_block("barista"), "already worked today", "one shift a day")
+	runner.eq(Careers.shift_block("barista"), "", "optional second shift fits before closing")
 
 
 func test_shift_needs_opening_hours() -> void:

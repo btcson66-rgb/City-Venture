@@ -262,6 +262,10 @@ func test_insurance_limit_lapse_renewal_and_liquidation() -> void:
 	Clock.advance(2*Clock.DAY)
 	runner.eq(Ledger.balance(entity,"accounts_receivable"),5000.0,"cancelled insurer schedule cannot pay twice")
 	runner._fresh_game();entity=_company();Insurance.buy(entity,"property")
+	# Explicit already-hired legacy renewal service, with other chores off.
+	GameState.data["assistant"] = {"tasks":{"renewals":true},"default":false}
+	AssistantPolicy.migrate(GameState.data)
+	AssistantPolicy.S()["paid_until"] = Clock.now() + 90 * Clock.DAY
 	var p: Dictionary=Insurance.policies(entity)["property"]
 	Ledger.expense(entity,"other",Ledger.cash(entity),"Actual running costs")
 	GameState.data["clock"]["minutes"]=int(p["until"]);Insurance.on_hour()

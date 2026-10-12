@@ -2,7 +2,7 @@
  "id": "airport",
  "name": "Airport",
  "size_tiles": [
-  136,
+  124,
   46
  ],
  "music": "day_city",
@@ -121,7 +121,7 @@
    "rect": [
     120,
     0,
-    16,
+    4,
     46
    ]
   },
@@ -155,10 +155,226 @@
   {
    "type": "crosswalk_h",
    "rect": [
-    122,
+    121,
     25,
-    3,
+    2,
     5
+   ]
+  },
+  {
+   "type": "grass_flowers",
+   "rect": [
+    16,
+    14,
+    11,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    16,
+    19,
+    11,
+    1
+   ]
+  },
+  {
+   "type": "grass_flowers",
+   "rect": [
+    41,
+    14,
+    7,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    41,
+    19,
+    7,
+    1
+   ]
+  },
+  {
+   "type": "grass_flowers",
+   "rect": [
+    77,
+    14,
+    43,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    77,
+    19,
+    43,
+    1
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    0,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    6,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    12,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    18,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    24,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    30,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    36,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    42,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    48,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    54,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    60,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    66,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    84,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    90,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    96,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    102,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    108,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    114,
+    34,
+    6,
+    6
    ]
   }
  ],
@@ -169,7 +385,523 @@
   "cargo_terminal"
  ],
  "fillers": [],
- "props": [],
+ "props": [
+  {
+   "sprite": "cycle_shelter",
+   "x": 266,
+   "y": 242,
+   "solid": false
+  },
+  {
+   "sprite": "bench",
+   "x": 386,
+   "y": 298,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 402,
+   "y": 252,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "leaf_pergola",
+   "x": 664,
+   "y": 237,
+   "solid": false
+  },
+  {
+   "sprite": "bench",
+   "x": 726,
+   "y": 298,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 742,
+   "y": 252,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "cycle_shelter",
+   "x": 1244,
+   "y": 242,
+   "solid": false
+  },
+  {
+   "sprite": "leaf_pergola",
+   "x": 1372,
+   "y": 237,
+   "solid": false
+  },
+  {
+   "sprite": "cycle_shelter",
+   "x": 1500,
+   "y": 242,
+   "solid": false
+  },
+  {
+   "sprite": "leaf_pergola",
+   "x": 1628,
+   "y": 237,
+   "solid": false
+  },
+  {
+   "sprite": "cycle_shelter",
+   "x": 1756,
+   "y": 242,
+   "solid": false
+  },
+  {
+   "sprite": "bench",
+   "x": 1886,
+   "y": 298,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1902,
+   "y": 252,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "leaf_pergola",
+   "x": 4,
+   "y": 557,
+   "solid": [
+    8,
+    75,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 62,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 78,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "cycle_shelter",
+   "x": 100,
+   "y": 562,
+   "solid": [
+    8,
+    70,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 158,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 174,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "leaf_pergola",
+   "x": 196,
+   "y": 557,
+   "solid": [
+    8,
+    75,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 254,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 270,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "cycle_shelter",
+   "x": 292,
+   "y": 562,
+   "solid": [
+    8,
+    70,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 350,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 366,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "leaf_pergola",
+   "x": 388,
+   "y": 557,
+   "solid": [
+    8,
+    75,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 446,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 462,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "cycle_shelter",
+   "x": 484,
+   "y": 562,
+   "solid": [
+    8,
+    70,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 542,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 558,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "leaf_pergola",
+   "x": 580,
+   "y": 557,
+   "solid": [
+    8,
+    75,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 638,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 654,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "cycle_shelter",
+   "x": 676,
+   "y": 562,
+   "solid": [
+    8,
+    70,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 734,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 750,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "leaf_pergola",
+   "x": 772,
+   "y": 557,
+   "solid": [
+    8,
+    75,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 830,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 846,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "cycle_shelter",
+   "x": 868,
+   "y": 562,
+   "solid": [
+    8,
+    70,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 926,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 942,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "leaf_pergola",
+   "x": 964,
+   "y": 557,
+   "solid": [
+    8,
+    75,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 1022,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1038,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "cycle_shelter",
+   "x": 1060,
+   "y": 562,
+   "solid": [
+    8,
+    70,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 1118,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1134,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "leaf_pergola",
+   "x": 1348,
+   "y": 557,
+   "solid": [
+    8,
+    75,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 1406,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1422,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "cycle_shelter",
+   "x": 1444,
+   "y": 562,
+   "solid": [
+    8,
+    70,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 1502,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1518,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "leaf_pergola",
+   "x": 1540,
+   "y": 557,
+   "solid": [
+    8,
+    75,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 1598,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1614,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "cycle_shelter",
+   "x": 1636,
+   "y": 562,
+   "solid": [
+    8,
+    70,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 1694,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1710,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "leaf_pergola",
+   "x": 1732,
+   "y": 557,
+   "solid": [
+    8,
+    75,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 1790,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1806,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "bench",
+   "x": 1886,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1902,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "bench",
+   "x": 1932,
+   "y": 232,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1924,
+   "y": 156,
+   "glow": true,
+   "solid": false
+  }
+ ],
  "metro": {
   "station": "airport",
   "x": 1180,
@@ -194,9 +926,9 @@
    "id": "walk_university",
    "direction": "S",
    "rect": [
-    1944,
-    720,
-    48,
+    1936,
+    544,
+    32,
     16
    ],
    "to": "university",
@@ -214,8 +946,8 @@
    348
   ],
   "from_university": [
-   1968,
-   696
+   1952.0,
+   520
   ]
  },
  "bounds": {
@@ -262,8 +994,8 @@
   }
  ],
  "ambient_density": {
-  "morning": 8,
-  "afternoon": 9,
+  "morning": 10,
+  "afternoon": 12,
   "evening": 5,
   "night": 2
  },
@@ -282,8 +1014,220 @@
   [
    1920,
    0,
-   256,
+   64,
    736
   ]
+ ],
+ "public_spaces": [
+  {
+   "name": "Travel garden",
+   "rect": [
+    262,
+    224,
+    158,
+    96
+   ],
+   "purpose": "frontage_garden"
+  },
+  {
+   "name": "Travel garden",
+   "rect": [
+    660,
+    224,
+    100,
+    96
+   ],
+   "purpose": "frontage_garden"
+  },
+  {
+   "name": "Travel garden",
+   "rect": [
+    1240,
+    224,
+    680,
+    96
+   ],
+   "purpose": "frontage_garden"
+  },
+  {
+   "name": "Travel garden",
+   "rect": [
+    0,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Travel garden",
+   "rect": [
+    96,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Travel garden",
+   "rect": [
+    192,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Travel garden",
+   "rect": [
+    288,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Travel garden",
+   "rect": [
+    384,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Travel garden",
+   "rect": [
+    480,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Travel garden",
+   "rect": [
+    576,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Travel garden",
+   "rect": [
+    672,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Travel garden",
+   "rect": [
+    768,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Travel garden",
+   "rect": [
+    864,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Travel garden",
+   "rect": [
+    960,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Travel garden",
+   "rect": [
+    1056,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Travel garden",
+   "rect": [
+    1344,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Travel garden",
+   "rect": [
+    1440,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Travel garden",
+   "rect": [
+    1536,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Travel garden",
+   "rect": [
+    1632,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Travel garden",
+   "rect": [
+    1728,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Travel garden",
+   "rect": [
+    1824,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  }
  ]
 }

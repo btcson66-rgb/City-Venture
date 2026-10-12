@@ -1,5 +1,14 @@
 # CITY VENTURE — Game Data Schema
 
+### District public spaces (#179, Implemented)
+
+Optional `public_spaces: [{name, rect: [x,y,width,height], purpose}]` in district JSON
+describes deliberately landscaped presentation areas in design pixels. `purpose` is
+`frontage_garden` or `rest_court`. Ground remains authored separately in tile coordinates,
+and props keep their existing placement/collision schema. Upper areas retain their ground
+when the skyline clears background tiles. Existing bounds, exits, spawns and save state
+are unchanged. An explicit list replaces the legacy automatic trees/seats fallback.
+
 ### Legacy minigame practice (#165, Implemented)
 
 New saves set `minigame_practice_version: 1` and `minigame_practice_optional: []`.
@@ -32,6 +41,15 @@ The production simulation reads the current shipping table. New industry definit
 explicitly adds their numeric fields to a later overlay.
 
 All content lives in `game/data/` as JSON, loaded by `DataDB` at boot.
+
+### Short goals (#182)
+
+`economy/fun_loop.json` tunes bounded event skipping, early work length and celebration presentation.
+`goal_month` keeps its saved id and old completion receipt; its new condition is two active ShopLane products.
+No existing receipt or monthly report is deleted or synthesized. Goal progress reads existing chapter receipts.
+New signals are presentation only. Existing achievement receipts deduplicate first-time celebrations.
+Job rank data now permits two entry shifts and the first promotion after two qualifying shifts; wages remain
+posted only for actual hours worked. A third barista guest finishes the early shift; higher ranks serve six.
 
 Performance QA (`docs/PERFORMANCE.md`) adds no persisted gameplay keys. Ecommerce
 order reservations use a derived, disposable index rebuilt from existing orders;
@@ -775,4 +793,16 @@ One gray disabled preview per navigation surface; remaining locked nodes are abs
 
 ## Assistant chores (#154)
 
-`game/data/economy/assistant.json` tunes cash buffer, daily hour, restock threshold, packing pace/skill, ingredient target, coffee target, maintenance condition and roster weekdays. Saved `assistant.tasks` stores independent switches (default true); `assistant.bills` stores actual accrued obligations until paid. Existing automatic loan repayments and perpetual leases keep their signed terms; insurance renewal delegates only previously chosen cover, never new cover. Switches never book revenue. Operations use the existing supplier, parcel, staff, inspection, asset, tax, insurance and customs APIs.
+`game/data/economy/assistant.json` tunes cash buffer, daily hour, restock threshold, packing pace/skill, ingredient target, coffee target, maintenance condition and roster weekdays. Saved `assistant.tasks` stores independent switches (new games default false); `assistant.bills` stores actual accrued obligations until paid. Existing automatic loan repayments and perpetual leases keep their signed terms; insurance renewal delegates only previously chosen cover, never new cover. Switches never book revenue. Operations use the existing supplier, parcel, staff, inspection, asset, tax, insurance and customs APIs.
+
+#182 milestone metrics: `popup_sales` reads actual positive popup revenue journal segments; `flag:food_permit` uses the issued cafe licence. Both create one dated achievement receipt, with no monetary reward.
+
+## Hired assistant (#181)
+
+`assistant.hired`, `ever_hired`, `offered`, `level`, `paid_until`, `paused`, and `fx_restore` persist the optional Maya contract. The first actual `orders_shipped` receipt offers her once. Configured joining / weekly / expansion fees are 5 / 5 / 25; the joining fee includes seven days. Fees post personal payroll expenses and never revenue. Level 1 offers packing, restock, bills and returns; level 2 unlocks other services subject to existing business feature gates. Hiring never selects chores. Weekly short cash pauses work without arrears; personal funding permits resumption. Dismissal preserves preferences and disables owned-company auto FX.
+
+Migration runs before filling template fields: predecessor saves with enabled chores retain those exact switches, become hired at level 2 and receive seven days grace. All-off or absent predecessors remain manual. Explicit `hired=false` is authoritative, including dismissed saves with remembered true preferences. Direct billing, renewal, forecast and FX paths check hiring, tier, pause and preference permissions. Manual controls and signed obligations remain available.
+
+### Notification cards (#180)
+
+Messages retain stable `id`, original `text`, actual game timestamp `t`, category, read state and optional formal `target`. Optional `celebrate` marks only a real first order, promotion, completed goal or first assistant offer for a brief arrival cue; it has no accounting effect. Reading any card marks only that message read and never executes a financial choice. Daily merged events keep the same id and become unread again. Cards group by actual game calendar day; full details retain original content. Legacy reply deadlines and money effects remain stripped by the existing migration.

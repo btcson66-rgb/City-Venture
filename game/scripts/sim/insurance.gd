@@ -80,7 +80,7 @@ static func on_hour() -> void:
 	for entity in S()["policies"]:
 		if not Tax.valid(str(entity)):continue
 		for policy in policies(entity).values():
-			var manual: bool = not bool(AssistantPolicy.S()["tasks"]["renewals"])
+			var manual: bool = not AssistantPolicy.permitted("renewals")
 			if Clock.now()<int(policy["until"]):
 				# Manual renewals get one calm heads-up before cover ends.
 				if manual and policy["auto"] and int(policy["until"])-Clock.now()<=3*Clock.DAY and int(policy.get("warned_until",-1))!=int(policy["until"]):

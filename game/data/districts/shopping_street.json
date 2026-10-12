@@ -2,7 +2,7 @@
  "id": "shopping_street",
  "name": "Shopping Street",
  "size_tiles": [
-  106,
+  94,
   44
  ],
  "music": "day_city",
@@ -103,7 +103,7 @@
    "rect": [
     90,
     0,
-    16,
+    4,
     44
    ]
   },
@@ -119,10 +119,37 @@
   {
    "type": "crosswalk_h",
    "rect": [
-    92,
+    91,
     25,
-    3,
+    2,
     5
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    0,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    48,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    84,
+    34,
+    6,
+    6
    ]
   }
  ],
@@ -800,32 +827,6 @@
    "_gen": true
   },
   {
-   "sprite": "direction_sign",
-   "x": 1370,
-   "y": 308,
-   "solid": [
-    18,
-    44,
-    6,
-    4
-   ],
-   "label": "CIVIC CENTER →",
-   "_gen": true
-  },
-  {
-   "sprite": "direction_sign",
-   "x": 40,
-   "y": 308,
-   "solid": [
-    18,
-    44,
-    6,
-    4
-   ],
-   "label": "← OLD TOWN",
-   "_gen": true
-  },
-  {
    "sprite": "digital_sign",
    "x": 760,
    "y": 304,
@@ -1264,6 +1265,91 @@
    "if": "world_year>=4",
    "solid": false,
    "_era": true
+  },
+  {
+   "sprite": "flower_market",
+   "x": 4,
+   "y": 554,
+   "solid": [
+    8,
+    78,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 62,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 78,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "cycle_shelter",
+   "x": 772,
+   "y": 562,
+   "solid": [
+    8,
+    70,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 830,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 846,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "flower_market",
+   "x": 1348,
+   "y": 554,
+   "solid": [
+    8,
+    78,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 1406,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1422,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "bench",
+   "x": 1452,
+   "y": 232,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1444,
+   "y": 156,
+   "glow": true,
+   "solid": false
   }
  ],
  "metro": {
@@ -1276,7 +1362,7 @@
    "id": "walk_harbor",
    "direction": "E",
    "rect": [
-    1680,
+    1488,
     324,
     16,
     164
@@ -1289,9 +1375,9 @@
    "id": "walk_residential",
    "direction": "N",
    "rect": [
-    1464,
-    0,
-    48,
+    1456,
+    304,
+    32,
     16
    ],
    "to": "residential",
@@ -1302,7 +1388,7 @@
    "id": "walk_old_town",
    "direction": "E",
    "rect": [
-    1680,
+    1488,
     504,
     16,
     48
@@ -1335,16 +1421,16 @@
    642
   ],
   "from_old_town": [
-   1656,
+   1464,
    390
   ],
   "from_harbor": [
-   1656,
+   1464,
    348
   ],
   "from_residential": [
-   1488,
-   40
+   1472.0,
+   348
   ],
   "from_industrial": [
    40,
@@ -1395,7 +1481,7 @@
   }
  ],
  "ambient_density": {
-  "morning": 8,
+  "morning": 10,
   "afternoon": 16,
   "evening": 14,
   "night": 5
@@ -1418,8 +1504,40 @@
   [
    1440,
    0,
-   256,
+   64,
    704
   ]
+ ],
+ "public_spaces": [
+  {
+   "name": "Market rest court",
+   "rect": [
+    0,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Market rest court",
+   "rect": [
+    768,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Market rest court",
+   "rect": [
+    1344,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  }
  ]
 }

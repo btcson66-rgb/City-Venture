@@ -130,9 +130,40 @@ static func get_message(id: String) -> Dictionary:
 		if str(message.get("id", "")) == id:return message
 	return {}
 
+## Reading never accepts a saved financial choice or changes a destination.
+static func read(id: String) -> Dictionary:
+	var message := get_message(id)
+	if not message.is_empty():message["read"] = true
+	return message
+
+static func important(message: Dictionary) -> bool:return bool(message.get("celebrate", false))
+
+static func day_group(t: int, now := -1) -> int:
+	var current := Clock.now() if now < 0 else now
+	return maxi(0, Clock.day_index_at(current) - Clock.day_index_at(maxi(0, t)))
+
+static func group_label(t: int) -> String:
+	match day_group(t):
+		0:return I18n.t("Today")
+		1:return I18n.t("Yesterday")
+	return I18n.t("Earlier") + " · " + Clock.fmt_date(maxi(0, t))
+
+static func relative_time(t: int, now := -1) -> String:
+	var current := Clock.now() if now < 0 else now
+	var elapsed := maxi(0, current - maxi(0, t))
+	var days := day_group(t, current)
+	if days == 1:return I18n.t("Yesterday")
+	if days > 1:
+		var date := Clock.date_at(maxi(0, t))
+		return "%d/%d" % [int(date["month"]), int(date["day"])]
+	if elapsed == 0:return I18n.t("Just now")
+	if elapsed < 60:return I18n.t("%d min ago") % elapsed
+	return I18n.t("%d h ago") % int(elapsed / 60)
+
 static func actionable(message: Dictionary) -> bool:
 	var target: Dictionary = message.get("target", {})
 	match str(target.get("kind", "")):
+		"assistant":return true
 		"decision":return EventEngine.pending().any(func(e):return e["iid"] == target.get("id", ""))
 		"company":
 			if target.get("tab", "") == "contracts":return Contracts.C().get(target.get("id", ""), {}).get("status", "") in ["offered", "active"]
@@ -170,6 +201,7 @@ static func destination(message: Dictionary) -> Control:
 			screen.selected = str(target.get("id", ""))
 			screen.partner_sel = str(target.get("id", ""))
 			return screen
+		"assistant":return AssistantModal.new()
 		"bank":return LoanModal.new(false)
 		"map":
 			var screen := CityMapModal.new(false)
@@ -182,8 +214,12 @@ static func destination(message: Dictionary) -> Control:
 	return null
 
 static func go(id: String) -> void:
-	var message := get_message(id)
-	message["read"] = true
+	var message := read(id)
+	if message.is_empty():return
+	# The situation may have changed while the phone was open; keep it open and say so calmly.
+	if not actionable(message):
+		UIRoot.toast(I18n.t("This is already taken care of."), "info", "info")
+		return
 	var screen := destination(message)
 	UIRoot.phone.close()
 	if screen != null:UIRoot.open_modal(screen)
@@ -198,7 +234,7 @@ static func contact_name(npc: String) -> String:
 	if not person.is_empty(): return I18n.t(str(person["name"]))
 	match npc:
 		"assistant":
-			return I18n.t("Assistant")
+			return I18n.t("Maya")
 		"client":
 			return I18n.t("Client")
 		"landlord":

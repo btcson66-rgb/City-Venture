@@ -48,6 +48,7 @@ static func lock_reason(action: String, params: Dictionary) -> String:
 
 
 static func run(action: String, params: Dictionary, source: Node = null) -> void:
+	if not BuildingInfo.action_visible(action): return
 	var req: String = params.get("requires", "")
 	if req.begins_with("home:") and Living.home()!=req.substr(5):
 		UIRoot.toast("This belongs to the current tenant. Rent this home at Okafor Lettings first.","warn","home")

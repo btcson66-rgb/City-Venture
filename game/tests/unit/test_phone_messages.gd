@@ -65,3 +65,47 @@ func test_notification_save_roundtrip() -> void:
 	GameState.data = SaveSystem._migrate(JSON.parse_string(JSON.stringify(GameState.data)))
 	runner.eq(PhoneMessages.get_message(id)["category"], "city", "saved city filter")
 	runner.check(Ledger.check_balanced(), "roundtrip balanced")
+
+func test_read_any_message_preserves_original_and_money() -> void:
+	GameState.add_message("maya", "Hello — full original message, no action required.")
+	var id: String = GameState.data["messages"].back()["id"]
+	var journal: Variant = GameState.data["ledger"].duplicate(true)
+	PhoneMessages.read(id)
+	PhoneMessages.read(id)
+	PhoneMessages.read("missing-old-id")
+	runner.check(PhoneMessages.get_message(id)["read"], "non-actionable message can be read")
+	runner.eq(PhoneMessages.get_message(id)["text"], "Hello — full original message, no action required.", "original preserved")
+	runner.eq(GameState.data["ledger"], journal, "read is idempotent and never executes money effects")
+
+func test_relative_time_calendar_boundary_and_future_timestamp() -> void:
+	var midnight := 3 * Clock.DAY
+	runner.eq(PhoneMessages.day_group(midnight-1, midnight+1), 1, "midnight is yesterday after two minutes")
+	runner.eq(PhoneMessages.relative_time(midnight-1, midnight+1), I18n.t("Yesterday"), "calendar grouping agrees with time")
+	runner.eq(PhoneMessages.relative_time(midnight+100, midnight), I18n.t("Just now"), "future save clock is never negative")
+	runner.eq(PhoneMessages.relative_time(midnight+1, midnight+59), I18n.t("%d min ago") % 58, "actual game minutes")
+	runner.eq(PhoneMessages.day_group(0, midnight), 3, "older calendar days retained")
+
+func test_daily_merge_reopens_read_card_without_duplicate_arrival() -> void:
+	GameState.add_message("shoplane", "First actual order", {"merge":"card-read-test"})
+	var id: String = GameState.data["messages"].back()["id"]
+	PhoneMessages.read(id)
+	GameState.add_message("shoplane", "Second actual order", {"merge":"card-read-test"})
+	var merged := PhoneMessages.get_message(id)
+	runner.check(not merged["read"], "new real event reopens merged card")
+	runner.eq(merged["count"], 2, "same stable card includes both events")
+
+func test_go_rechecks_actionable_and_keeps_phone_open_when_stale() -> void:
+	GameState.add_message("nexus_bank", "Payment late", {"target":{"kind":"bank"}})
+	var stale: Dictionary = GameState.data["messages"].back()
+	runner.check(not PhoneMessages.actionable(stale), "no late loan: nothing left to do")
+	var seen := []
+	var listener := func(text: String, kind: String): seen.append([text, kind])
+	UIRoot.toasted.connect(listener)
+	var modals: int = UIRoot.modal_layer.get_child_count()
+	UIRoot.phone.is_open = true
+	PhoneMessages.go(str(stale["id"]))
+	UIRoot.toasted.disconnect(listener)
+	runner.check(UIRoot.phone.is_open, "phone stays open")
+	UIRoot.phone.is_open = false
+	runner.eq(UIRoot.modal_layer.get_child_count(), modals, "no screen opens")
+	runner.check(seen.size() == 1 and seen[0][1] == "info", "calm notice shown once")

@@ -52,6 +52,11 @@ def check(city,districts):
         if a not in districts:errors.append(f'{a}: missing district');continue
         d=districts[a];w,h,_=geometry(d);nx,ny,blocked=navs[a]
         exits=d.get('exits',[])
+        for i,first in enumerate(exits):
+            x,y,rw,rh=first['rect']
+            for second in exits[i+1:]:
+                sx,sy,sw,sh=second['rect']
+                if x<sx+sw and sx<x+rw and y<sy+sh and sy<y+rh:errors.append(f"{a}: exit triggers overlap ({first['to']}/{second['to']})")
         if len(exits)!=len(neighbors) or {ex['to'] for ex in exits}!=set(neighbors):errors.append(f'{a}: exits must match neighbors exactly')
         # Check reachability from the existing metro pavement, including the player clearance used by AStar.
         m=d.get('metro',{});start=(int(m.get('x',32)+40)//CELL,int(m.get('y',280)+66)//CELL)
@@ -67,7 +72,8 @@ def check(city,districts):
             if len(rows)!=1:errors.append(f'{a}>{b}: needs exactly one exit');continue
             ex=rows[0];x,y,rw,rh=ex['rect']
             if ex.get('direction')!=side:errors.append(f'{a}>{b}: wrong exit direction')
-            edges={'N':y==0,'S':y+rh==h,'W':x==0,'E':x+rw==w}
+            # North/south street gateways sit one tile beyond the pavement, avoiding empty walks to the sky/water edge.
+            edges={'N':y==0 or (y==304 and rh==16),'S':y+rh==h or (y==544 and rh==16),'W':x==0,'E':x+rw==w}
             if not edges.get(side):errors.append(f'{a}>{b}: exit is not on its matching edge')
             point=(int(x+rw/2)//CELL,int(y+rh/2)//CELL)
             if side=='E':point=(point[0]-1,point[1])
@@ -78,7 +84,11 @@ def check(city,districts):
             tw,th,_=geometry(districts[b]);tnx,tny,tblocked=navs[b];sc=(int(spawn[0])//CELL,int(spawn[1])//CELL)
             if not(0<=sc[0]<tnx and 0<=sc[1]<tny) or sc in tblocked:errors.append(f'{a}>{b}: spawn blocked/unpainted')
             opposite=OPPOSITE[side]
-            on_side={'W':spawn[0]<=80,'E':spawn[0]>=tw-80,'N':spawn[1]<=80,'S':spawn[1]>=th-80}
+            target_exit=next((r for r in districts[b].get('exits',[]) if r['to']==a),{})
+            tr=target_exit.get('rect',[0,0,0,0])
+            on_side={'W':spawn[0]<=80,'E':spawn[0]>=tw-80,
+                     'N':spawn[1]<=80 or (tr[1]==304 and tr[1]+tr[3]+16<=spawn[1]<=tr[1]+tr[3]+48),
+                     'S':spawn[1]>=th-80 or (tr[1]==544 and tr[1]-48<=spawn[1]<=tr[1]-16)}
             if not on_side[opposite]:errors.append(f'{a}>{b}: spawn must enter from {opposite}')
             if any(r['rect'][0]<=spawn[0]<=r['rect'][0]+r['rect'][2] and r['rect'][1]<=spawn[1]<=r['rect'][1]+r['rect'][3] for r in districts[b].get('exits',[])):errors.append(f'{a}>{b}: spawn retriggers an exit')
     if graph:

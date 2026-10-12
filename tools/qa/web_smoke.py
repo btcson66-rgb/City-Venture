@@ -32,7 +32,8 @@ class Flow:
         self.page, self.out = page, out
         out.mkdir(parents=True, exist_ok=True)
         self.steps, self.errors, self.touches = [], [], 0
-        page.on('console', lambda m: self.errors.append(m.text) if m.type == 'error' else None)
+        self.recoveries = []
+        page.on('console', lambda m: self.errors.append(m.text) if m.type == 'error' or 'SCRIPT ERROR:' in m.text or 'Parse Error:' in m.text else None)
         page.on('pageerror', lambda e: self.errors.append(str(e)))
 
     def state(self):
@@ -280,20 +281,42 @@ class Flow:
         self.shot('practice_ready')
         self.tap('StartFormalWork')
         self.until(lambda s: s.get('mini', {}).get('phase') == 'play', 'formal work')
-        for _ in range(6):
-            self.tap('ConfirmOrder')
-            want=self.state()['mini']['want']
-            for field in ('Size','Drink','Milk','Shots'):
-                for attempt in range(3):
-                    self.tap(field+'_'+str(want[field.lower()]))
-                    if self.state()['mini']['want']['got'][field.lower()] == want[field.lower()]:
-                        break
-                assert self.state()['mini']['want']['got'][field.lower()] == want[field.lower()]
-            self.tap('Serve'); self.tap('Deliver_'+str(int(want['destination']))); self.tap('CleanTable')
-        self.shot('first_job_results')
-        self.tap('FinishGame')
-        self.until(lambda s: s.get('shifts') == 1 and s.get('cash',0)>cash, 'actual payout')
+        for shift_attempt in range(2):
+            for _ in range(12):
+                if self.state().get('mini', {}).get('phase') == 'results': break
+                assert self.state().get('mini', {}).get('phase') == 'play'
+                self.tap('ConfirmOrder')
+                want=self.state()['mini']['want']
+                for field in ('Size','Drink','Milk','Shots'):
+                    for attempt in range(3):
+                        self.tap(field+'_'+str(want[field.lower()]))
+                        if self.state()['mini']['want']['got'][field.lower()] == want[field.lower()]: break
+                    assert self.state()['mini']['want']['got'][field.lower()] == want[field.lower()]
+                self.tap('Serve'); self.tap('Deliver_'+str(int(want['destination']))); self.tap('CleanTable')
+            self.until(lambda s: s.get('mini', {}).get('phase') == 'results', 'formal work complete')
+            self.shot('first_job_results' if shift_attempt == 0 else 'retried_job_results')
+            self.tap('FinishGame')
+            try:
+                self.until(lambda s: s.get('shifts') == 1 and s.get('cash',0)>cash, 'actual payout')
+                break
+            except AssertionError as payout_error:
+                state=self.state()
+                # A slow trip can leave the original workplace card stale after the
+                # two-hour closing boundary. Exercise real next-day recovery rather
+                # than setting time, accepting fake pay or hiding a console failure.
+                if self.errors or shift_attempt or state.get('modal') or state.get('shifts') != 0 or state.get('time',0)%1440 < 18*60:
+                    raise
+                self.recoveries.append({'step':'late_shift_no_pay','failure':str(payout_error),'game_time':state.get('time'),'cash':state.get('cash'),'shifts':state.get('shifts')})
+                self.shot('late_shift_no_pay_recovery')
+                self.door(); self.door('riverside_apartment')
+                self.until(lambda s: s.get('time',0)%1440 >= 19*60, 'real bedtime', timeout=180)
+                self.walk_action('sleep'); self.dismiss_help(); self.tap('Sleep')
+                self.until(lambda s: s.get('modal') == '', 'recovery sleep completes', timeout=40)
+                self.door(); self.door('bloom_coffee')
+                self.walk_action('work_shift'); self.dismiss_help(); self.tap('WorkShift'); self.tap('StartGame')
+                self.until(lambda s: s.get('mini', {}).get('phase') == 'play', 'retry real shift next morning')
         self.shot('first_job_paid')
+        if self.state().get('modal') == 'JobModal': self.close_modal('JobModal')
         self.walk_action('open_company_os')
         self.dismiss_help()
         self.until(lambda s: s.get('modal') == 'CompanyOS', 'Company OS')
@@ -315,8 +338,16 @@ class Flow:
         self.tap('Close')
         self.tap('HUD_phone'); self.tap('App_messages')
         self.shot('notifications')
-        destination = next(c['name'] for c in self.controls() if c['name'].startswith('NotificationGo_'))
-        self.tap(destination)
+        message = next(m for m in reversed(self.state()['messages']) if m.get('target', {}).get('kind') == 'map')
+        self.tap('Notification_'+message['id'])
+        detail=self.until(lambda s: s.get('phone_app') == 'message_detail', 'notification full detail')
+        assert detail['notification_detail_text'] == message['text']
+        assert next(m for m in detail['messages'] if m['id']==message['id'])['read']
+        self.shot('notification_detail')
+        self.tap('NotificationsBack')
+        self.until(lambda s: s.get('phone_app') == 'messages', 'return to notifications')
+        self.tap('Notification_'+message['id'])
+        self.tap('NotificationGo_'+message['id'])
         self.dismiss_help()
         self.until(lambda s: s.get('modal') == 'CityMapModal', 'notification destination')
         self.shot('notification_go')
@@ -342,6 +373,7 @@ def main():
     parser.add_argument('--out', type=Path, default=Path('qa-output/web-smoke'))
     parser.add_argument('--viewports', nargs='+', choices=VIEWPORTS, default=list(VIEWPORTS))
     parser.add_argument('--locales', nargs='+', default=['zh_TW','en'])
+    parser.add_argument('--browser', choices=['auto','chromium','webkit'], default='auto', help='auto checks Chromium and any installed WebKit; select an engine for CI parity or diagnosis')
     parser.add_argument('--sizes', nargs='+', choices=['default','large'], default=['default','large'])
     args=parser.parse_args()
     assert (args.export_dir/'index.pck').is_file(), 'Build the actual Web export first'
@@ -351,9 +383,13 @@ def main():
     export_hash = hashlib.sha256((args.export_dir/'index.pck').read_bytes()).hexdigest()
     results=[]
     with sync_playwright() as pw:
-        engines=[pw.chromium]
         webkit_available=Path(pw.webkit.executable_path).is_file()
-        if webkit_available: engines.append(pw.webkit)
+        if args.browser == 'webkit':
+            assert webkit_available, 'WebKit is not installed'
+            engines=[pw.webkit]
+        else:
+            engines=[pw.chromium]
+            if args.browser == 'auto' and webkit_available: engines.append(pw.webkit)
         for engine in engines:
             options={'headless':True}
             if engine.name=='chromium': options['args']=['--use-angle=swiftshader','--enable-unsafe-swiftshader']
@@ -377,13 +413,13 @@ def main():
                             except Exception as capture_error:
                                 # A crashed page cannot be captured; keep the original failure and go on to the next combination.
                                 result['capture_failure']=str(capture_error)
-                        result.update(steps=flow.steps,console_errors=flow.errors,touches=flow.touches)
+                        result.update(steps=flow.steps,console_errors=flow.errors,touches=flow.touches,recovered_failures=flow.recoveries)
                         results.append(result)
                         (flow.out/'result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
                         context.close()
                         print(json.dumps(result,ensure_ascii=False),flush=True)
             browser.close()
-        report={'export':str(args.export_dir.resolve()),'pck_sha256':export_hash,'webkit':'RUN' if webkit_available else 'NOT INSTALLED - Safari representative NOT VERIFIED','results':results}
+        report={'export':str(args.export_dir.resolve()),'pck_sha256':export_hash,'browser_selection':args.browser,'webkit':('RUN' if args.browser in ('auto','webkit') and webkit_available else 'NOT RUN - Safari representative NOT VERIFIED'),'results':results}
         (args.out/'result.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
     server.shutdown()
     return int(any(r['status']!='PASS' or r['console_errors'] for r in results))

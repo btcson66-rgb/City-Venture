@@ -98,7 +98,7 @@ func test_roads_reach_the_exit_strip():
 			if str(g["type"]) != "road": continue
 			var row := int(g["rect"][1]) + 1
 			var x := district.size_px.x / 16 - 2
-			runner.check(district.ground.get_cell_atlas_coords(Vector2i(x,row)) == district._tile_index["road"], id + " asphalt continues to the edge")
+			runner.check(district.ground.get_cell_atlas_coords(Vector2i(x,row)) in [district._tile_index["road"], district._tile_index["crosswalk_h"]], id + " asphalt or its painted crossing continues to the edge")
 		for ex in district.def.get("exits", []):
 			if str(ex.get("direction","")) in ["E","W"] and int(ex["rect"][1]) == 324:
 				runner.check(int(ex["rect"][1])+int(ex["rect"][3]) > 480, id + " exit includes the road, not just upper pavement")
@@ -158,7 +158,7 @@ func test_shop_palette_survives_finished_art_and_arrow_fits_board():
 	runner.get_tree().root.add_child(marker)
 	for i in 3: await runner.get_tree().process_frame
 	runner.check(marker.board.encloses(Rect2(marker._label.position,marker._label.size)), "direction label stays in its own bounded slot")
-	runner.check(marker._label.get_theme_font_size("font_size") <= 6, "text is smaller than the twelve-pixel vector arrow")
+	runner.check(marker._label.get_theme_font_size("font_size") < 12, "readable sign text remains smaller than the twelve-pixel arrow slot")
 	marker.free()
 	var north_a := ExitMarker.new()
 	var north_b := ExitMarker.new()

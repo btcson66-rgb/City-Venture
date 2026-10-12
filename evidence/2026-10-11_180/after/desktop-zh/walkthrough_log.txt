@@ -1,0 +1,36 @@
+   2.4s [6月3日（週二） 下午 2:00]   click [App_messages] 通知中心 1
+   2.9s [6月3日（週二） 下午 2:00]   ok  duplicate arrival toasts do not cover notification cards
+   3.0s [6月3日（週二） 下午 2:00]   ok  chapter one continues without replies
+   3.1s [6月3日（週二） 下午 2:00]   shot 01_notifications_cards_all.png
+   3.2s [6月3日（週二） 下午 2:00]   ok  Go only appears after reading full detail
+   3.4s [6月3日（週二） 下午 2:00]   click [NotificationFilter_life] 人生
+   3.6s [6月3日（週二） 下午 2:01]   shot 02_notifications_cards_life.png
+   3.6s [6月3日（週二） 下午 2:01]   click [Notification_MSG-1]
+   4.1s [6月3日（週二） 下午 2:01]   shot 03_notification_information_full_detail.png
+   4.2s [6月3日（週二） 下午 2:01]   ok  informational card opens detail and becomes read
+   4.2s [6月3日（週二） 下午 2:01]   ok  information needs no forced action
+   4.3s [6月3日（週二） 下午 2:01]   click [NotificationsBack] ‹
+   4.6s [6月3日（週二） 下午 2:02]   ok  Back retains selected filter
+   4.6s [6月3日（週二） 下午 2:02]   click [NotificationFilter_work] 工作
+   4.9s [6月3日（週二） 下午 2:02]   shot 04_notifications_cards_work.png
+   4.9s [6月3日（週二） 下午 2:02]   click [Notification_MSG-3]
+   5.4s [6月3日（週二） 下午 2:03]   shot 05_notification_full_appointment_detail.png
+   5.4s [6月3日（週二） 下午 2:03]   ok  full message retains all appointment dates and directions
+   5.4s [6月3日（週二） 下午 2:03]   ok  opening reads the exact selected message
+   5.5s [6月3日（週二） 下午 2:03]   click [PhoneMessagesHelp] ?
+   5.6s [6月3日（週二） 下午 2:03]   ok  notification help available
+   5.8s [6月3日（週二） 下午 2:03]   shot 06_notification_help.png
+   5.9s [6月3日（週二） 下午 2:03]   click [CloseInfo] Got it
+   6.3s [6月3日（週二） 下午 2:03]   click [NotificationsBack] ‹
+   6.6s [6月3日（週二） 下午 2:04]   click [NotificationsReadAll] 全部標為已讀
+   7.1s [6月3日（週二） 下午 2:04]   ok  read-all clears actionable badge
+   7.2s [6月3日（週二） 下午 2:04]   shot 07_notifications_cards_read.png
+   7.2s [6月3日（週二） 下午 2:04]   click [Notification_MSG-3]
+   7.6s [6月3日（週二） 下午 2:05]   click [NotificationGo_MSG-3] 前往
+   7.9s [6月3日（週二） 下午 2:05]   ok  detail Go opens map without confirmation
+   8.1s [6月3日（週二） 下午 2:05]   shot 08_notification_destination.png
+   8.2s [6月3日（週二） 下午 2:06]   click [App_messages] 通知中心
+   8.6s [6月3日（週二） 下午 2:06]   shot 09_notifications_friendly_empty.png
+   8.7s [6月3日（週二） 下午 2:06]   ok  close remains reachable without scrolling
+   8.7s [6月3日（週二） 下午 2:06]   ok  reading, sorting and navigation keep actual books balanced
+   8.7s [6月3日（週二） 下午 2:06] BOT FINISHED — 0 failure(s) · 8.7s real

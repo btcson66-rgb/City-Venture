@@ -53,10 +53,18 @@ func build() -> void:
 	var nr := Careers.next_rank(job_id)
 	if not nr.is_empty():
 		body.add_child(UIK.label(I18n.t("%d more shift(s) to %s") % [maxi(0, int(nr["shifts"]) - Careers.shifts(job_id)), I18n.t(str(nr["title"]))], 7, Art.C_SKY))
+		var progress := ProgressBar.new()
+		progress.name = "PromotionProgress"
+		progress.max_value = int(nr["shifts"])
+		progress.value = Careers.shifts(job_id)
+		progress.show_percentage = false
+		progress.custom_minimum_size = Vector2(180, 5)
+		body.add_child(progress)
 	if job_id == "barista" and not slim:
 		body.add_child(UIK.label(I18n.t("No manager review yet — complete a shift.") if Careers.shifts(job_id) == 0 and not Careers.C().get("manager_ratings", {}).has(job_id) else I18n.t("Manager review %d%% · next rank needs %d%%; serve and clean well to improve.") % [roundi(Careers.manager_rating(job_id) * 100), roundi(float(nr.get("manager_rating", 0)) * 100)], 7, Art.C_SKY))
 	# actions
 	if hired:
+		if Careers.worked_today(): body.add_child(UIK.label("One more shift? You choose.", 8, Art.C_SKY))
 		var why := Careers.shift_block(job_id)
 		var here := SceneRouter.world_scene() != null and SceneRouter.world_scene().scene_id == str(j["building"])
 		if not here:

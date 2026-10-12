@@ -29,7 +29,7 @@ func _init() -> void:
 	title_text = "Shift — Bloom Coffee counter"
 	help_key = "work_stations"
 	icon_name = "coffee"
-	rounds = 6
+	rounds = int(FunLoop.cfg().get("barista_early_rounds", 3)) if Careers.rank_index("barista") == 0 and GameState.has_game() else int(FunLoop.cfg().get("barista_advanced_rounds", 6))
 	round_time = 0.0
 	panel_size = Vector2(620, 340)
 	rng.seed = Clock.now() * 7 + 11
@@ -55,6 +55,8 @@ func build_round() -> void:
 			"destination": next_ticket % 3, "station": "order", "age": 0.0, "quality": 0.0,
 			"got": {"size": "", "drink": "", "milk": "", "shots": ""}}
 		next_ticket += 1
+		if not practice_only and rng.randf() < float(FunLoop.cfg().get("guest_surprise_chance", 0.15)):
+			ticket["surprise"] = true
 		queue.append(ticket)
 	selected = 0
 	_select_customer(0)
@@ -127,6 +129,9 @@ func _clean() -> void:
 	award(quality)
 	if quality >= 1.0:
 		served_right += 1
+		if not practice_only and (want.get("surprise", false) or served_right % int(FunLoop.cfg().get("streak_length", 3)) == 0):
+			# Delight is a customer response, never an unearned cash multiplier.
+			EventBus.progress_moment.emit(I18n.t("A familiar face stops by. The whole counter cheers!") if want.get("surprise", false) else I18n.t("Nice streak: %d happy guests!") % served_right, "work:barista")
 		var tip := float(mode_cfg()["normal_barista_tip"]) - (float(mode_cfg()["retry_tip_reduction"]) if want.get("tip_retry", false) else 0.0)
 		if not own_counter: tips += tip
 		if practice_only:

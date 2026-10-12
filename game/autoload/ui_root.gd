@@ -155,8 +155,18 @@ func _process(_delta: float) -> void:
 	var floor_y := root.get_viewport_rect().size.y - 2.0
 	toast_box.position.x = maxf(8.0, (root.get_viewport_rect().size.x - toast_box.size.x) / 2.0)
 	var n := toast_box.get_child_count()
+	var phone_reading: bool = phone.is_open and phone.app in ["messages", "message_detail"]
 	for i in n:
-		(toast_box.get_child(i) as Control).visible = tm == null or i == n - 1
+		var toast_node := toast_box.get_child(i) as Control
+		var important: bool = str(toast_node.get_meta("kind", "info")) in ["warn", "bad"]
+		toast_node.visible = (important or not phone_reading) and (tm == null or i == n - 1)
+		# A quiet toast waits out the phone instead of expiring unseen; warn/bad ones stay on screen.
+		var life = toast_node.get_meta("life", null)
+		if life is Tween and (life as Tween).is_valid():
+			if toast_node.visible:
+				(life as Tween).play()
+			else:
+				(life as Tween).pause()
 	var ty := 8.0
 	if tm != null:
 		var th := toast_box.get_combined_minimum_size().y
@@ -216,6 +226,12 @@ func _unhandled_input(event: InputEvent) -> void:
 ## Part-time job shift: fade out, four hours pass, wages paid, fade in with what happened.
 ## A shift is played: the job's minigame opens, and its score sets the pay (see Careers.work_shift).
 func work_shift_flow(job_id: String) -> void:
+	# A live workplace card may have crossed closing time before its button was pressed.
+	var blocked := Careers.shift_block(job_id)
+	if blocked != "":
+		toast(I18n.t(blocked), "info", "clock")
+		open_modal(JobModal.new(job_id))
+		return
 	var g := MiniGames.for_job(job_id)
 	if g == null:
 		_finish_shift(job_id, {"score": 1.0})
@@ -228,9 +244,12 @@ func work_shift_flow(job_id: String) -> void:
 
 
 func _finish_shift(job_id: String, res: Dictionary) -> void:
+	# The played work has finished; rendering latency must not invalidate its hours.
+	Clock.push_pause("work_payout")
 	await fade_out(0.35)
 	var r := Careers.work_shift(job_id, float(res.get("score", 1.0)), float(res.get("tips", 0.0)))
 	await fade_in(0.35)
+	Clock.pop_pause("work_payout")
 	if not r["ok"]:
 		toast(I18n.t(str(r["error"])), "warn", "lock")
 		return
@@ -241,6 +260,9 @@ func _finish_shift(job_id: String, res: Dictionary) -> void:
 	if r["promoted"]:
 		show_chapter_card(I18n.t("PROMOTED"), I18n.t(str(r["title"])))
 	SaveSystem.autosave_if_changed()
+	# An optional second paid session: return to the workplace card, never auto-start a shift.
+	if Careers.shift_block(job_id) == "":
+		open_modal(JobModal.new(job_id))
 
 
 ## Shared by the keys and the HUD quick-bar buttons.
@@ -306,7 +328,9 @@ func toast(text: String, kind := "info", icon := "info") -> void:
 		toast_box.remove_child(old)
 		old.queue_free()
 	p.modulate.a = 0.0
+	p.set_meta("kind", kind)
 	var tw := p.create_tween()
+	p.set_meta("life", tw)
 	tw.tween_property(p, "modulate:a", 1.0, 0.2)
 	tw.tween_interval(float(Preferences.values["notification_seconds"]))
 	tw.tween_property(p, "modulate:a", 0.0, 0.5)

@@ -1,0 +1,35 @@
+WARNING: Ecommerce: unknown eco.missing
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] handle (res://scripts/sim/ecommerce.gd:1609)
+       [1] dispatch (res://scripts/sim/industries.gd:72)
+       [2] test_registry_contract_dispatch_and_active_tabs (res://tests/unit/test_industries.gd:19)
+       [3] _run (res://tests/test_runner.gd:47)
+       [4] test_closed_view_checks_and_single_primary (res://tests/unit/test_hotel.gd:371)
+WARNING: incorrect header check
+   at: decompress_dynamic (core/io/compression.cpp:344)
+   GDScript backtrace (most recent call first):
+       [0] _decode_part (res://scripts/save_codec.gd:56)
+       [1] <anonymous lambda> (res://scripts/save_codec.gd:123)
+ERROR: Decompression failed.
+   at: func_PackedByteArray_decompress_dynamic (core/variant/variant_call.cpp:844)
+   GDScript backtrace (most recent call first):
+       [0] _decode_part (res://scripts/save_codec.gd:56)
+       [1] <anonymous lambda> (res://scripts/save_codec.gd:123)
+WARNING: incorrect header check
+   at: decompress_dynamic (core/io/compression.cpp:344)
+   GDScript backtrace (most recent call first):
+       [0] _decode_part (res://scripts/save_codec.gd:56)
+       [1] <anonymous lambda> (res://scripts/save_codec.gd:123)
+ERROR: Decompression failed.
+   at: func_PackedByteArray_decompress_dynamic (core/variant/variant_call.cpp:844)
+   GDScript backtrace (most recent call first):
+       [0] _decode_part (res://scripts/save_codec.gd:56)
+       [1] <anonymous lambda> (res://scripts/save_codec.gd:123)
+WARNING: 1 RID of type "CanvasItem" was leaked.
+   at: _free_rids (servers/rendering/renderer_canvas_cull.cpp:2676)
+ERROR: 4 RID allocations of type 'PN13RendererDummy14TextureStorage12DummyTextureE' were leaked at exit.
+ERROR: 2 RID allocations of type 'PN18TextServerAdvanced22ShapedTextDataAdvancedE' were leaked at exit.
+ERROR: 1 RID allocations of type 'PN18TextServerAdvanced12FontAdvancedE' were leaked at exit.
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+   at: cleanup (core/object/object.cpp:2514)

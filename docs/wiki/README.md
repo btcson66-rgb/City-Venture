@@ -83,3 +83,5 @@
 
 - 遊戲資料（`game/data/`）或美術檔（`game/assets/`）新增 id 時，同步更新對應頁面。
 - `python3 tools/wiki_check.py` 檢查每個美術檔和資料 id 都在 wiki 裡出現過。漏寫的會列出來，並回傳非 0。
+
+Notification center: tap a card for the complete original message, return to the same category, or use Go to reach its formal action screen. Today, Yesterday and earlier dates follow the game clock. Reading and marking all read never changes money. Ordinary arrivals use a quiet cue; real milestones use a brief cheer, with animation disabled by reduced-motion settings.

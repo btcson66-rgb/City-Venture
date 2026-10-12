@@ -16,6 +16,7 @@ func provide(source: String, target: float) -> void:
 		LegacyBusiness.S()["ending"] = source.substr(7)
 	else:
 		match source:
+			"popup_sales": Ledger.post(ent, "QA checkout", [{"acct":"cash", "dr":10}, {"acct":"revenue", "cr":10}], {"segment":"popup", "type":"popup_sale"})
 			"staff":
 				for i in int(target): Staff.S()["people"][str(i)] = {"id": str(i), "name":"Test colleague", "role":"packer", "wage":10, "morale":1, "started":Clock.now()}
 			"industries":
@@ -36,8 +37,8 @@ func provide(source: String, target: float) -> void:
 			"never_overdrawn": GameState.data["clock"]["minutes"] = int(target) * Clock.DAY
 			"negotiation": GameState.data["contracts"]["QA"] = {"buyer":"QA buyer", "history":[{"by":"QA buyer", "text":"Deal. Send it over."}]}
 
-func test_all_goals_and_twenty_five_achievements_have_trigger_receipts() -> void:
-	runner.eq(Growth.definitions("achievements").size(), 25, "twenty-five definitions")
+func test_all_goals_and_achievements_have_trigger_receipts() -> void:
+	runner.eq(Growth.definitions("achievements").size(), 27, "twenty-seven definitions")
 	for kind in ["goals", "achievements"]:
 		for d in Growth.definitions(kind):
 			setup()
