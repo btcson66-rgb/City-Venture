@@ -21,4 +21,7 @@
 
 畫面驗證使用 Godot 4.5.1，獨立 QA 存檔與偏好設定。中文／英文桌面及 390×844 大字觸控布局分開記錄；原生觸控布局以滑鼠輸入巡覽，不能冒充真實 Web 觸控或實體手機。#180 將另跑实际匯出的 Web 測試。
 
-2026-10-12: inherited final #182 payout guard merged. Fixed-source full suite1028/1028 PASS (520.4s). Maya lifecycle/UI is unchanged from the four0-failure native captures. The replacement final full tour D:/cv181-payout-complete is RUNNING; the previous interrupted full tour is not acceptance evidence.
+
+2026-10-12 final acceptance: Final-source rendered walkthrough:0 failures, 6925.4 real seconds, 365 screenshots, 3035 steps. New-game chapters1–24, industry/adjacency/personal/save coverage; see full-result.json and full-walkthrough-log.txt. Bot proxy, not human delight or physical-device acceptance.
+
+最終完整驗證：完整新遊戲第1–24章＋產業、步行鄰接、個人生活與存读檔：**0 failures，6925.4秒，365張截圖**。full-result.json與full-walkthrough-log.txt為最終來源結果。

@@ -1,23 +1,17 @@
-# #181 Maya hiring evidence
+# #181 最終證據
 
-Stack: #182 / Draft PR #183; target `claude/exciting-bardeen-y71ixv`.
+Godot4.5.1。證據於2026-10-11開始收集、2026-10-12完成驗證。所有截圖為實際渲染，JPEG品質85。修改前後game-feel-review詳見本資料夾。Bot／舊存檔情境是玩家代理；真人無提示初玩、十小時熟手主觀感受與實體裝置尚未驗證。
 
-Godot **4.5.1 f62fdbde1**, native OpenGL, QA saves/preferences isolated in each output folder. Before: existing assistant tour 0 failures / 3.2 seconds. After: `--bot=assistant`, seed154, explicit paid-stock / customer-order fixture plus real UI packing, courier pickup, hiring, expansion, selected automation, dismissal, retainer pause/resume and genuine played predecessor save load. These screenshots are rendered game output, not design mocks.
+新遊戲先親手完成包裝、預約快遞與實際取件，Maya才邀請加入。既有NPC頭像、個性短句與微笑／小彈跳讓聘用有可見回饋。$5含首週、每週$5、擴充服務$25均為個人帳戶真實payroll費用；聘用後玩家自行勾選代辦。
 
-| Gate | Result |
-|---|---|
-| Entire unit suite | 1028/1028, 466.4 seconds; no script/parse errors |
-| Assistant lifecycle / existing assistant targeted tests | 37/37, 54.9 seconds |
-| zh_TW translation | 8359/8359, 0 missing |
-| wiki / beta / whitespace | OK / 0 hits / pass |
-| Final desktop zh_TW / English | Each 0 failures, 1280×720 |
-| Final portrait large zh_TW / English | Each 0 failures, actual rendered 390×844, font3, touch layout |
-| Full story 1–24 + independent industries | RUNNING; no completion claimed |
+全套單元1028/1028 PASS(520.4s)，zh_TW8359/8359、missing0，wiki_check OK，beta_audit0 hits。定向助理37/37單元通過，双語1280×720與390×844大字四個原生巡覽均0failures。原生觸控布局是滑鼠bot，不冒充實體手機或Web觸控。
 
-Commands: `Godot_v4.5.1-stable_win64_console.exe --path game --resolution 1280x720 -- --bot=assistant --lang=zh_TW --out=<isolated output> --quit`; portrait adds `--resolution 390x844 --qa-touch --qa-font=3`. The QA touch entry selects the same expand aspect as Web touch initialization. Native tours still use mouse input; real Web/device touch is not established here.
+真正玩出的舊存檔保留既有選項、已使用助理採用level2與一週緩衝；全關閉／缺資料維持手動。解雇／缺款暫停／补現金恢復與下一筆實際代辦皆有測試，Ledger平衡。UI／生命週期與已截圖版本相同，最終来源另包含#182薪資截止修正。
 
-Compare `before/01_assistant_settings_new_game.jpg` (already enabled without hire) against `after/desktop-zh/04_maya_hiring_profile.jpg`, `05_maya_joins_happy.jpg`, `06_maya_player_selected_chores.jpg`, and `07_maya_next_parcel_automated.jpg`. Pause and genuine old-save states are shots09–11. Review both `game-feel-before.md` and `game-feel-after.md` for per-principle findings and inherited HUD limits.
+本次QA視窗曾被最小化，導致等待繪製截圖暫停；只還原本次視窗、不搶焦點後原巡覽繼續。最終wall time包含這段中斷。
 
-R4: only actual paid inventory/customer orders produce revenue. Joining, expansion and weekly fees post personal payroll expense; no numerical business bonus. Saved explicit dismissal is authoritative. Existing enabled predecessor choices/tier are adopted without moving cash and with seven days grace. No art/district/building/exit-area source is changed.
+完整新遊戲第1–24章＋產業、步行鄰接、個人生活與存读檔：**0 failures，6925.4秒，365張截圖**。full-result.json與full-walkthrough-log.txt為最終來源結果。
 
-2026-10-12: inherited final #182 payout guard merged. Fixed-source full suite1028/1028 PASS (520.4s). Maya lifecycle/UI is unchanged from the four0-failure native captures. The replacement final full tour D:/cv181-payout-complete is RUNNING; the previous interrupted full tour is not acceptance evidence.
+後段同步跳時的watchdog停頓與既有空圖示警告保留在完整log；這不等於效能／全域HUD已修復。渲染英語audit的既有品牌／舊UI另列，新增翻譯missing0。先前通過或中斷的巡覽不替代這份最終來源結果。
+
+沒有修改Session H指定的assets／districts／buildings／exit_area；原始使用者工作樹保留，未合併或發佈。
