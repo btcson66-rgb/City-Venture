@@ -1,5 +1,14 @@
 # CITY VENTURE — Game Data Schema
 
+### District public spaces (#179, Implemented)
+
+Optional `public_spaces: [{name, rect: [x,y,width,height], purpose}]` in district JSON
+describes deliberately landscaped presentation areas in design pixels. `purpose` is
+`frontage_garden` or `rest_court`. Ground remains authored separately in tile coordinates,
+and props keep their existing placement/collision schema. Upper areas retain their ground
+when the skyline clears background tiles. Existing bounds, exits, spawns and save state
+are unchanged. An explicit list replaces the legacy automatic trees/seats fallback.
+
 ### Legacy minigame practice (#165, Implemented)
 
 New saves set `minigame_practice_version: 1` and `minigame_practice_optional: []`.

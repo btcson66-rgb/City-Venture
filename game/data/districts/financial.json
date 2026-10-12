@@ -2,7 +2,7 @@
  "id": "financial",
  "name": "Financial District",
  "size_tiles": [
-  96,
+  90,
   44
  ],
  "music": "financial",
@@ -94,7 +94,7 @@
    "rect": [
     80,
     0,
-    16,
+    10,
     44
    ]
   },
@@ -141,6 +141,105 @@
     25,
     3,
     5
+   ]
+  },
+  {
+   "type": "grass_flowers",
+   "rect": [
+    55,
+    14,
+    8,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    55,
+    19,
+    8,
+    1
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    0,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    6,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    12,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    18,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    24,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    30,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    36,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    48,
+    34,
+    6,
+    6
+   ]
+  },
+  {
+   "type": "plaza_alt",
+   "rect": [
+    60,
+    34,
+    6,
+    6
    ]
   }
  ],
@@ -952,6 +1051,254 @@
    "if": "world_year>=4",
    "solid": false,
    "_era": true
+  },
+  {
+   "sprite": "leaf_pergola",
+   "x": 887,
+   "y": 237,
+   "solid": false
+  },
+  {
+   "sprite": "bench",
+   "x": 966,
+   "y": 298,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 982,
+   "y": 252,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "cycle_shelter",
+   "x": 4,
+   "y": 562,
+   "solid": [
+    8,
+    70,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 62,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 78,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "leaf_pergola",
+   "x": 100,
+   "y": 557,
+   "solid": [
+    8,
+    75,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 158,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 174,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "cycle_shelter",
+   "x": 196,
+   "y": 562,
+   "solid": [
+    8,
+    70,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 254,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 270,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "leaf_pergola",
+   "x": 292,
+   "y": 557,
+   "solid": [
+    8,
+    75,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 350,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 366,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "cycle_shelter",
+   "x": 388,
+   "y": 562,
+   "solid": [
+    8,
+    70,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 446,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 462,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "leaf_pergola",
+   "x": 484,
+   "y": 557,
+   "solid": [
+    8,
+    75,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 542,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 558,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "cycle_shelter",
+   "x": 580,
+   "y": 562,
+   "solid": [
+    8,
+    70,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 638,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 654,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "leaf_pergola",
+   "x": 772,
+   "y": 557,
+   "solid": [
+    8,
+    75,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 830,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 846,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "cycle_shelter",
+   "x": 964,
+   "y": 562,
+   "solid": [
+    8,
+    70,
+    72,
+    8
+   ]
+  },
+  {
+   "sprite": "bench",
+   "x": 1022,
+   "y": 618,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1038,
+   "y": 572,
+   "glow": true,
+   "solid": false
+  },
+  {
+   "sprite": "bench",
+   "x": 1292,
+   "y": 232,
+   "solid": false
+  },
+  {
+   "sprite": "lamp",
+   "x": 1284,
+   "y": 156,
+   "glow": true,
+   "solid": false
   }
  ],
  "metro": {
@@ -965,7 +1312,7 @@
    "direction": "S",
    "rect": [
     1304,
-    688,
+    544,
     48,
     16
    ],
@@ -977,7 +1324,7 @@
    "id": "walk_civic_center",
    "direction": "E",
    "rect": [
-    1520,
+    1424,
     324,
     16,
     220
@@ -991,7 +1338,7 @@
    "direction": "S",
    "rect": [
     1368,
-    688,
+    544,
     48,
     16
    ],
@@ -1004,7 +1351,7 @@
    "direction": "N",
    "rect": [
     1304,
-    0,
+    304,
     48,
     16
    ],
@@ -1028,7 +1375,7 @@
  ],
  "spawns": {
   "from_civic_center": [
-   1496,
+   1400,
    348
   ],
   "metro": [
@@ -1036,16 +1383,16 @@
    642
   ],
   "from_riverside": [
-   1328,
-   664
+   1328.0,
+   520
   ],
   "from_harbor": [
-   1392,
-   664
+   1392.0,
+   520
   ],
   "from_luxury_heights": [
-   1328,
-   40
+   1328.0,
+   348
   ],
   "from_old_town": [
    40,
@@ -1101,8 +1448,110 @@
   [
    1280,
    0,
-   256,
+   160,
    704
   ]
+ ],
+ "public_spaces": [
+  {
+   "name": "Lunch court",
+   "rect": [
+    883,
+    224,
+    117,
+    96
+   ],
+   "purpose": "frontage_garden"
+  },
+  {
+   "name": "Lunch court",
+   "rect": [
+    0,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Lunch court",
+   "rect": [
+    96,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Lunch court",
+   "rect": [
+    192,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Lunch court",
+   "rect": [
+    288,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Lunch court",
+   "rect": [
+    384,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Lunch court",
+   "rect": [
+    480,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Lunch court",
+   "rect": [
+    576,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Lunch court",
+   "rect": [
+    768,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  },
+  {
+   "name": "Lunch court",
+   "rect": [
+    960,
+    544,
+    96,
+    96
+   ],
+   "purpose": "rest_court"
+  }
  ]
 }

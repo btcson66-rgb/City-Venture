@@ -1,0 +1,56 @@
+chromium-portrait-large-en large_text_setting
+chromium-portrait-large-en title
+chromium-portrait-large-en character_creator
+{"name": "chromium-portrait-large-en", "browser_version": "149.0.7827.55", "viewport": [390, 844], "size": "large", "locale": "en", "status": "FAIL", "failure": "Timeout: new game arrival", "steps": [{"step": "large_text_setting", "world": null, "modal": "", "font_size": 3, "touch": true}, {"step": "title", "world": null, "modal": "", "font_size": 3, "touch": true}, {"step": "character_creator", "world": null, "modal": "", "font_size": 3, "touch": true}], "console_errors": [], "touches": 11}
+{"name": "chromium-landscape-large-en", "browser_version": "149.0.7827.55", "viewport": [844, 390], "size": "large", "locale": "en", "status": "FAIL", "failure": "Page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"http://127.0.0.1:50842/index.html?cv_smoke=1\", waiting until \"domcontentloaded\"\n", "capture_failure": "Page.screenshot: Timeout 30000ms exceeded.\nCall log:\n  - taking page screenshot\n  - waiting for fonts to load...\n  - fonts loaded\n", "steps": [], "console_errors": [], "touches": 0}
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 51094)
+Traceback (most recent call last):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 672, in __init__
+    super().__init__(*args, **kwargs)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 766, in __init__
+    self.handle()
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 679, in do_GET
+    self.copyfile(f, self.wfile)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 878, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 204, in copyfileobj
+    fdst_write(buf)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 845, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] �s�u�w�Q�z�D���W���n�餤��C
+----------------------------------------
+{"name": "chromium-tablet-large-en", "browser_version": "149.0.7827.55", "viewport": [1024, 768], "size": "large", "locale": "en", "status": "FAIL", "failure": "['still waiting on run dependencies:', 'dependency: wasm-instantiate', '(end of list)']", "steps": [], "console_errors": ["still waiting on run dependencies:", "dependency: wasm-instantiate", "(end of list)"], "touches": 0}
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 51095)
+Traceback (most recent call last):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 672, in __init__
+    super().__init__(*args, **kwargs)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 766, in __init__
+    self.handle()
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 679, in do_GET
+    self.copyfile(f, self.wfile)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 878, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 204, in copyfileobj
+    fdst_write(buf)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 845, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] �s�u�w�Q�z�D���W���n�餤��C
+----------------------------------------

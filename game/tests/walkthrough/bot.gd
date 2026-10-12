@@ -113,6 +113,9 @@ func _audit_setup() -> void:
 			for value in tr.values():
 				for word in _word_re.search_all(str(value)):
 					_allowed[word.get_string()] = true
+	# Release version suffixes are technical identifiers, not untranslated prose.
+	for word in _word_re.search_all(str(ProjectSettings.get_setting("application/config/version", ""))):
+		_allowed[word.get_string()] = true
 	# Language self-names and configured hardware-key names deliberately keep their spelling.
 	for locale in I18n.LOCALES:
 		for word in _word_re.search_all(str(locale[1])):
@@ -200,6 +203,10 @@ func _audit_one(t: String, ctl: Control) -> void:
 func _run() -> void:
 	await wait(1.0)
 	match mode:
+		"world_visual":
+			await load("res://tests/walkthrough/world_visual_tour.gd").new(self).run()
+		"district_completion":
+			await load("res://tests/walkthrough/district_completion_tour.gd").new(self).run()
 		"asset_size":
 			await load("res://tests/walkthrough/asset_size_tour.gd").new(self).run()
 		"calm_active":

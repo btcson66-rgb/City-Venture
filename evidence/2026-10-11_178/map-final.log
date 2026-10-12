@@ -1,0 +1,134 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 462.59 - Compatibility - Using Device: NVIDIA - Quadro RTX 4000
+
+   2.6s [6月1日（週日） 下午 2:00]   click [ToggleWalkingRoutes] Walking routes
+   3.2s [6月1日（週日） 下午 2:01]   ok  actual button opens walking diagram
+   3.3s [6月1日（週日） 下午 2:01]   shot 01_city_walking_connections.png
+   3.3s [6月1日（週日） 下午 2:01]   ok  Euler circuit includes every directed walking link
+   3.3s [6月1日（週日） 下午 2:01] STEP Walking riverside > startup_hub
+   4.0s [6月1日（週日） 下午 2:02]   shot 02_exit_sign_E_riverside.png
+   5.3s [6月1日（週日） 下午 2:16]   ok  actual walking transition to startup_hub
+   5.8s [6月1日（週日） 下午 2:17]   ok  arrival does not retrigger a return
+   5.8s [6月1日（週日） 下午 2:17] STEP Walking startup_hub > riverside
+   6.6s [6月1日（週日） 下午 2:18]   shot 03_exit_sign_W_startup_hub.png
+   7.7s [6月1日（週日） 下午 2:31]   ok  actual walking transition to riverside
+   8.2s [6月1日（週日） 下午 2:32]   ok  arrival does not retrigger a return
+   8.2s [6月1日（週日） 下午 2:32] STEP Walking riverside > civic_center
+   9.2s [6月1日（週日） 下午 2:33]   shot 04_exit_sign_N_riverside.png
+  10.3s [6月1日（週日） 下午 2:46]   ok  actual walking transition to civic_center
+  10.8s [6月1日（週日） 下午 2:47]   ok  arrival does not retrigger a return
+  10.8s [6月1日（週日） 下午 2:47] STEP Walking civic_center > riverside
+  11.0s [6月1日（週日） 下午 2:47]   shot 05_exit_sign_S_civic_center.png
+  11.7s [6月1日（週日） 下午 2:59]   ok  actual walking transition to riverside
+  12.1s [6月1日（週日） 下午 3:00]   ok  arrival does not retrigger a return
+  12.1s [6月1日（週日） 下午 3:00] STEP Walking riverside > financial
+  14.3s [6月1日（週日） 下午 3:12]   ok  actual walking transition to financial
+  14.7s [6月1日（週日） 下午 3:13]   ok  arrival does not retrigger a return
+  14.7s [6月1日（週日） 下午 3:13] STEP Walking financial > riverside
+  15.6s [6月1日（週日） 下午 3:23]   ok  actual walking transition to riverside
+  16.1s [6月1日（週日） 下午 3:24]   ok  arrival does not retrigger a return
+  16.1s [6月1日（週日） 下午 3:24] STEP Walking riverside > harbor
+  35.4s [6月1日（週日） 下午 3:59]   ok  actual walking transition to harbor
+  35.9s [6月1日（週日） 下午 4:00]   ok  arrival does not retrigger a return
+  35.9s [6月1日（週日） 下午 4:00] STEP Walking harbor > financial
+  37.6s [6月1日（週日） 下午 4:14]   ok  actual walking transition to financial
+  38.1s [6月1日（週日） 下午 4:15]   ok  arrival does not retrigger a return
+  38.1s [6月1日（週日） 下午 4:15] STEP Walking financial > civic_center
+  41.3s [6月1日（週日） 下午 4:29]   ok  actual walking transition to civic_center
+  41.8s [6月1日（週日） 下午 4:29]   ok  arrival does not retrigger a return
+  41.8s [6月1日（週日） 下午 4:29] STEP Walking civic_center > startup_hub
+  54.1s [6月1日（週日） 下午 4:59]   ok  actual walking transition to startup_hub
+  54.6s [6月1日（週日） 下午 5:00]   ok  arrival does not retrigger a return
+  54.6s [6月1日（週日） 下午 5:00] STEP Walking startup_hub > civic_center
+  62.8s [6月1日（週日） 下午 5:23]   ok  actual walking transition to civic_center
+  63.3s [6月1日（週日） 下午 5:24]   ok  arrival does not retrigger a return
+  63.3s [6月1日（週日） 下午 5:24] STEP Walking civic_center > financial
+  75.6s [6月1日（週日） 下午 5:51]   ok  actual walking transition to financial
+  76.1s [6月1日（週日） 下午 5:52]   ok  arrival does not retrigger a return
+  76.1s [6月1日（週日） 下午 5:52] STEP Walking financial > harbor
+  83.3s [6月1日（週日） 下午 6:15]   ok  actual walking transition to harbor
+  83.8s [6月1日（週日） 下午 6:15]   ok  arrival does not retrigger a return
+  83.8s [6月1日（週日） 下午 6:15] STEP Walking harbor > shopping_street
+ 100.6s [6月1日（週日） 下午 6:57]   ok  actual walking transition to shopping_street
+ 101.1s [6月1日（週日） 下午 6:58]   ok  arrival does not retrigger a return
+ 101.1s [6月1日（週日） 下午 6:58] STEP Walking shopping_street > residential
+ 102.7s [6月1日（週日） 下午 7:08]   ok  actual walking transition to residential
+ 103.2s [6月1日（週日） 下午 7:09]   ok  arrival does not retrigger a return
+ 103.2s [6月1日（週日） 下午 7:09] STEP Walking residential > shopping_street
+ 104.1s [6月1日（週日） 下午 7:18]   ok  actual walking transition to shopping_street
+ 104.6s [6月1日（週日） 下午 7:19]   ok  arrival does not retrigger a return
+ 104.6s [6月1日（週日） 下午 7:19] STEP Walking shopping_street > old_town
+ 114.4s [6月1日（週日） 下午 7:44]   ok  actual walking transition to old_town
+ 114.9s [6月1日（週日） 下午 7:44]   ok  arrival does not retrigger a return
+ 114.9s [6月1日（週日） 下午 7:44] STEP Walking old_town > financial
+ 128.3s [6月1日（週日） 下午 8:11]   ok  actual walking transition to financial
+ 128.8s [6月1日（週日） 下午 8:12]   ok  arrival does not retrigger a return
+ 128.8s [6月1日（週日） 下午 8:12] STEP Walking financial > luxury_heights
+ 141.8s [6月1日（週日） 下午 8:42]   ok  actual walking transition to luxury_heights
+ 142.3s [6月1日（週日） 下午 8:43]   ok  arrival does not retrigger a return
+ 142.3s [6月1日（週日） 下午 8:43] STEP Walking luxury_heights > civic_center
+ 143.7s [6月1日（週日） 下午 8:54]   ok  actual walking transition to civic_center
+ 144.2s [6月1日（週日） 下午 8:54]   ok  arrival does not retrigger a return
+ 144.2s [6月1日（週日） 下午 8:54] STEP Walking civic_center > airport
+ 150.4s [6月1日（週日） 下午 9:18]   ok  actual walking transition to airport
+ 150.9s [6月1日（週日） 下午 9:18]   ok  arrival does not retrigger a return
+ 150.9s [6月1日（週日） 下午 9:18] STEP Walking airport > university
+ 170.3s [6月1日（週日） 下午 9:55]   ok  actual walking transition to university
+ 170.8s [6月1日（週日） 下午 9:56]   ok  arrival does not retrigger a return
+ 170.8s [6月1日（週日） 下午 9:56] STEP Walking university > startup_hub
+ 188.7s [6月1日（週日） 下午 10:32]   ok  actual walking transition to startup_hub
+ 189.2s [6月1日（週日） 下午 10:33]   ok  arrival does not retrigger a return
+ 189.2s [6月1日（週日） 下午 10:33] STEP Walking startup_hub > university
+ 190.8s [6月1日（週日） 下午 10:44]   ok  actual walking transition to university
+ 191.3s [6月1日（週日） 下午 10:45]   ok  arrival does not retrigger a return
+ 191.3s [6月1日（週日） 下午 10:45] STEP Walking university > airport
+ 209.8s [6月1日（週日） 下午 11:21]   ok  actual walking transition to airport
+ 210.3s [6月1日（週日） 下午 11:22]   ok  arrival does not retrigger a return
+ 210.3s [6月1日（週日） 下午 11:22] STEP Walking airport > civic_center
+ 230.6s [6月2日（週一） 上午 12:06]   ok  actual walking transition to civic_center
+ 231.1s [6月2日（週一） 上午 12:07]   ok  arrival does not retrigger a return
+ 231.1s [6月2日（週一） 上午 12:07] STEP Walking civic_center > luxury_heights
+ 232.5s [6月2日（週一） 上午 12:18]   ok  actual walking transition to luxury_heights
+ 233.0s [6月2日（週一） 上午 12:19]   ok  arrival does not retrigger a return
+ 233.0s [6月2日（週一） 上午 12:19] STEP Walking luxury_heights > financial
+ 234.4s [6月2日（週一） 上午 12:31]   ok  actual walking transition to financial
+ 234.9s [6月2日（週一） 上午 12:31]   ok  arrival does not retrigger a return
+ 234.9s [6月2日（週一） 上午 12:31] STEP Walking financial > old_town
+ 247.3s [6月2日（週一） 上午 12:57]   ok  actual walking transition to old_town
+ 247.8s [6月2日（週一） 上午 12:58]   ok  arrival does not retrigger a return
+ 247.8s [6月2日（週一） 上午 12:58] STEP Walking old_town > shopping_street
+ 261.2s [6月2日（週一） 上午 1:28]   ok  actual walking transition to shopping_street
+ 261.7s [6月2日（週一） 上午 1:29]   ok  arrival does not retrigger a return
+ 261.7s [6月2日（週一） 上午 1:29] STEP Walking shopping_street > industrial
+ 275.4s [6月2日（週一） 上午 1:57]   ok  actual walking transition to industrial
+ 275.9s [6月2日（週一） 上午 1:58]   ok  arrival does not retrigger a return
+ 275.9s [6月2日（週一） 上午 1:58] STEP Walking industrial > residential
+ 283.6s [6月2日（週一） 上午 2:19]   ok  actual walking transition to residential
+ 284.1s [6月2日（週一） 上午 2:20]   ok  arrival does not retrigger a return
+ 284.1s [6月2日（週一） 上午 2:20] STEP Walking residential > old_town
+ 306.2s [6月2日（週一） 上午 3:00]   ok  actual walking transition to old_town
+ 306.7s [6月2日（週一） 上午 3:01]   ok  arrival does not retrigger a return
+ 306.7s [6月2日（週一） 上午 3:01] STEP Walking old_town > luxury_heights
+ 321.5s [6月2日（週一） 上午 3:32]   ok  actual walking transition to luxury_heights
+ 322.0s [6月2日（週一） 上午 3:33]   ok  arrival does not retrigger a return
+ 322.0s [6月2日（週一） 上午 3:33] STEP Walking luxury_heights > old_town
+ 323.7s [6月2日（週一） 上午 3:45]   ok  actual walking transition to old_town
+ 324.2s [6月2日（週一） 上午 3:45]   ok  arrival does not retrigger a return
+ 324.2s [6月2日（週一） 上午 3:45] STEP Walking old_town > residential
+ 340.8s [6月2日（週一） 上午 4:17]   ok  actual walking transition to residential
+ 341.3s [6月2日（週一） 上午 4:18]   ok  arrival does not retrigger a return
+ 341.3s [6月2日（週一） 上午 4:18] STEP Walking residential > industrial
+ 363.4s [6月2日（週一） 上午 5:01]   ok  actual walking transition to industrial
+ 363.9s [6月2日（週一） 上午 5:02]   ok  arrival does not retrigger a return
+ 363.9s [6月2日（週一） 上午 5:02] STEP Walking industrial > shopping_street
+ 365.7s [6月2日（週一） 上午 5:13]   ok  actual walking transition to shopping_street
+ 366.2s [6月2日（週一） 上午 5:13]   ok  arrival does not retrigger a return
+ 366.2s [6月2日（週一） 上午 5:13] STEP Walking shopping_street > harbor
+ 380.0s [6月2日（週一） 上午 5:51]   ok  actual walking transition to harbor
+ 380.5s [6月2日（週一） 上午 5:52]   ok  arrival does not retrigger a return
+ 380.5s [6月2日（週一） 上午 5:52] STEP Walking harbor > riverside
+ 397.1s [6月2日（週一） 上午 6:24]   ok  actual walking transition to riverside
+ 397.5s [6月2日（週一） 上午 6:24]   ok  arrival does not retrigger a return
+ 397.5s [6月2日（週一） 上午 6:24]   ok  all walking time preserves ledger
+ 397.5s [6月2日（週一） 上午 6:24] BOT FINISHED — 0 failure(s) · 397.5s real
+ 397.5s [6月2日（週一） 上午 6:24] English audit: 0 on-screen text(s) with untranslated words

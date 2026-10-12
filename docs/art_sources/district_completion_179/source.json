@@ -1,0 +1,148 @@
+{
+  "provider": "Environment image generation",
+  "original_sha256": "e4710bc6582a786972a1a09758771df35bea67fa24aba13e05ac37442627593b",
+  "final_sha256": "4ebdfe1991ae48b2a8ab35591b1063840cc1168235583f1cb609f80d1c72f7ce",
+  "style_reference": "game/assets/world_detail/buildings/brick_shops.png",
+  "style_reference_sha256": "3d0ae33d8a8fdea385c2bc8232d9e60112c9772695be615670731d22f92006fe",
+  "processing": "Alpha bounding-box extraction, Lanczos resizing to 88 design pixels and exact 4x detail; no painted geometry or synthesized objects.",
+  "sprites": [
+    {
+      "sprite": "pocket_fountain",
+      "atlas_cell": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "alpha_crop": [
+        0,
+        65,
+        512,
+        512
+      ],
+      "native": [
+        88,
+        77
+      ],
+      "detail": [
+        352,
+        308
+      ]
+    },
+    {
+      "sprite": "reading_pavilion",
+      "atlas_cell": [
+        512,
+        0,
+        512,
+        512
+      ],
+      "alpha_crop": [
+        0,
+        39,
+        512,
+        512
+      ],
+      "native": [
+        88,
+        81
+      ],
+      "detail": [
+        352,
+        324
+      ]
+    },
+    {
+      "sprite": "flower_market",
+      "atlas_cell": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "alpha_crop": [
+        0,
+        9,
+        512,
+        512
+      ],
+      "native": [
+        88,
+        86
+      ],
+      "detail": [
+        352,
+        344
+      ]
+    },
+    {
+      "sprite": "workshop_garden",
+      "atlas_cell": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "alpha_crop": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "native": [
+        88,
+        88
+      ],
+      "detail": [
+        352,
+        352
+      ]
+    },
+    {
+      "sprite": "leaf_pergola",
+      "atlas_cell": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "alpha_crop": [
+        0,
+        0,
+        512,
+        484
+      ],
+      "native": [
+        88,
+        83
+      ],
+      "detail": [
+        352,
+        332
+      ]
+    },
+    {
+      "sprite": "cycle_shelter",
+      "atlas_cell": [
+        1024,
+        512,
+        512,
+        512
+      ],
+      "alpha_crop": [
+        0,
+        0,
+        512,
+        456
+      ],
+      "native": [
+        88,
+        78
+      ],
+      "detail": [
+        352,
+        312
+      ]
+    }
+  ]
+}

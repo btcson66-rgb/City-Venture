@@ -3,6 +3,7 @@ extends RefCounted
 ## Shared, live building information for doors, welcome cards and the phone guide.
 
 const ACTION_ICONS := {
+	"manage_leases":"home",
 	"city_future":"civic",
 	"legacy_mentor": "people",
 	"customs_guide":"info", "trade_open":"world",
@@ -226,8 +227,16 @@ static func record_entry(id: String) -> int:
 	return int(visits[id])
 
 
+## Industry desks follow the same presentation gates as their Company OS pages. Existing businesses stay accessible.
+static func action_visible(action: String) -> bool:
+	if not GameState.has_game(): return true
+	for entry in Industries.all():
+		if entry.get("actions", {}).has(action):
+			return entry["sim_class"].is_running() or FeatureGate.unlocked("os_" + str(entry["id"]))
+	return true
+
 static func interactables(id: String) -> Array:
-	var out: Array=DataDB.building(id).get("interior",{}).get("interactables",[])
+	var out: Array=DataDB.building(id).get("interior",{}).get("interactables",[]).filter(func(it): return action_visible(str(it["action"])))
 	if id=="popup_unit":
 		if Living.D()["leases"].has("popup_retail"):return out.filter(func(it):return not it["action"] in ["cafe_counter","cafe_depth","lease_property"])
 		if Living.D()["leases"].has("popup_cafe"):return out.filter(func(it):return not it["action"] in ["popup_store","popup_till"])

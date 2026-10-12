@@ -480,7 +480,7 @@ func _industry_fixtures() -> void:
 	await close_modal()
 	GameState.new_game({"name":"Realty Founder","seed":65001})
 	_tried.clear()
-	await _fast_forward_to_ch10()
+	await _fast_forward_to_ch10(); FeatureGate.grant("os_real_estate") # Independent eligible-founder fixture.
 	SceneRouter._enter("interior","riverside_apartment","bed_side","")
 	await wait_world()
 	await _real_estate()
@@ -496,7 +496,7 @@ func _industry_fixtures() -> void:
 	await close_modal()
 	GameState.new_game({"name":"Hotel Founder","seed":67001})
 	_tried.clear()
-	await _fast_forward_to_ch10()
+	await _fast_forward_to_ch10(); FeatureGate.grant("os_hotel") # Independent eligible-founder fixture.
 	SceneRouter._enter("interior","riverside_apartment","bed_side","")
 	await wait_world()
 	await _hotel()
@@ -508,7 +508,7 @@ func _industry_fixtures() -> void:
 	await _energy()
 	GameState.new_game({"name":"Auto Founder","seed":68001})
 	_tried.clear()
-	await _fast_forward_to_ch10()
+	await _fast_forward_to_ch10(); FeatureGate.grant("os_automotive") # Independent eligible-founder fixture.
 	SceneRouter._enter("interior","riverside_apartment","bed_side","")
 	await wait_world()
 	await _automotive()
