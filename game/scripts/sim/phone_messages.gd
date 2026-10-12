@@ -216,6 +216,10 @@ static func destination(message: Dictionary) -> Control:
 static func go(id: String) -> void:
 	var message := read(id)
 	if message.is_empty():return
+	# The situation may have changed while the phone was open; keep it open and say so calmly.
+	if not actionable(message):
+		UIRoot.toast(I18n.t("This is already taken care of."), "info", "info")
+		return
 	var screen := destination(message)
 	UIRoot.phone.close()
 	if screen != null:UIRoot.open_modal(screen)

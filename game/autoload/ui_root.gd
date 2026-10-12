@@ -155,8 +155,18 @@ func _process(_delta: float) -> void:
 	var floor_y := root.get_viewport_rect().size.y - 2.0
 	toast_box.position.x = maxf(8.0, (root.get_viewport_rect().size.x - toast_box.size.x) / 2.0)
 	var n := toast_box.get_child_count()
+	var phone_reading: bool = phone.is_open and phone.app in ["messages", "message_detail"]
 	for i in n:
-		(toast_box.get_child(i) as Control).visible = not (phone.is_open and phone.app in ["messages", "message_detail"]) and (tm == null or i == n - 1)
+		var toast_node := toast_box.get_child(i) as Control
+		var important: bool = str(toast_node.get_meta("kind", "info")) in ["warn", "bad"]
+		toast_node.visible = (important or not phone_reading) and (tm == null or i == n - 1)
+		# A quiet toast waits out the phone instead of expiring unseen; warn/bad ones stay on screen.
+		var life = toast_node.get_meta("life", null)
+		if life is Tween and (life as Tween).is_valid():
+			if toast_node.visible:
+				(life as Tween).play()
+			else:
+				(life as Tween).pause()
 	var ty := 8.0
 	if tm != null:
 		var th := toast_box.get_combined_minimum_size().y
@@ -318,7 +328,9 @@ func toast(text: String, kind := "info", icon := "info") -> void:
 		toast_box.remove_child(old)
 		old.queue_free()
 	p.modulate.a = 0.0
+	p.set_meta("kind", kind)
 	var tw := p.create_tween()
+	p.set_meta("life", tw)
 	tw.tween_property(p, "modulate:a", 1.0, 0.2)
 	tw.tween_interval(float(Preferences.values["notification_seconds"]))
 	tw.tween_property(p, "modulate:a", 0.0, 0.5)

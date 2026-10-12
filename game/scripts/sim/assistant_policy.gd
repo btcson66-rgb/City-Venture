@@ -65,10 +65,12 @@ static func offer_if_ready() -> void:
 static func hire() -> Dictionary:
 	if hired():return {"ok":false,"error":"Maya is already on your team."}
 	if not eligible():return {"ok":false,"error":"Ship your first parcel before hiring Maya."}
-	var fee := float(cfg()["hire_fee"])
-	if Ledger.cash("player") < fee:return {"ok":false,"error":I18n.t("Keep %s in your personal account to hire Maya.") % Fmt.money(fee)}
-	Ledger.expense("player","payroll",fee,I18n.t("Maya: joining fee and first week"),{"type":"assistant_hire","npc":"maya"})
 	var first := not bool(S().get("ever_hired", false))
+	# The first week is free (the offer says so); the retainer starts after seven days. Only a later re-hire pays the joining fee.
+	var fee := 0.0 if first else float(cfg()["hire_fee"])
+	if fee > 0.0:
+		if Ledger.cash("player") < fee:return {"ok":false,"error":I18n.t("Keep %s in your personal account to hire Maya.") % Fmt.money(fee)}
+		Ledger.expense("player","payroll",fee,I18n.t("Maya: joining fee and first week"),{"type":"assistant_hire","npc":"maya"})
 	S()["hired"] = true;S()["ever_hired"] = true;S()["offered"] = true;S()["paused"] = false
 	S()["paid_until"] = Clock.now() + int(cfg()["week_days"]) * Clock.DAY
 	GameState.set_flag("assistant_offered")
