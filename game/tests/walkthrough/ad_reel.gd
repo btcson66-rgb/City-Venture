@@ -178,8 +178,10 @@ func _zoom_modal(z: float, dy := 0.0) -> void:
 	var m = UIRoot.top_modal()
 	var focus := Vector2(W / 2.0, H / 2.0)
 	if m is Modal and is_instance_valid(m.panel):
-		focus = m.panel.get_global_rect().get_center()
-	_zoom(focus + Vector2(0, dy), z)
+		var r: Rect2 = m.panel.get_global_rect()
+		focus = r.get_center()
+		z = clampf(minf(z, (W - 12.0) / maxf(r.size.x, 1.0)), 1.0, z)   # never crop the panel's sides
+	_zoom(focus + Vector2(0, dy), z, 0.03 if z > 1.05 else 0.0)
 
 
 func _unzoom() -> void:
