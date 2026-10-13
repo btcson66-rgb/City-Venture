@@ -21,6 +21,20 @@ Engine: Godot 4.5.x (project in `game/`).
   Maker, then encoded by `tools/media/make_trailer.sh`. The music is code-generated (`tools/media/make_music.py`) and is a
   placeholder until a licensed track is chosen.
 
+## Ads (≈60 s, 繁體中文, real gameplay)
+
+Three promo cuts, each as 16:9 (1280×720) and 9:16 vertical (1080×1920) in [`docs/media/ads/`](docs/media/ads/):
+
+| Cut | Angle | Files |
+|---|---|---|
+| **tycoon** 從一杯咖啡到一整片天際線 | progression: $30,000 → coffee shift → e-commerce → company → team → factory → hotel → your own tower | `ad_tycoon_zh.mp4` · `ad_tycoon_zh_vertical.mp4` |
+| **city** 這座城市，24 小時都醒著 | exploration: day-to-night, districts, people, jobs that play like mini-games, style, the city at night | `ad_city_zh.mp4` · `ad_city_zh_vertical.mp4` |
+| **choices** 每一個決定都算數 | decisions: the 800-lamp contract, hiring, bank or investor, a creative pitch, flipping a flat, a rescue from bankruptcy | `ad_choices_zh.mp4` · `ad_choices_zh_vertical.mp4` |
+
+Recorded by the ad bot (`game/tests/walkthrough/ad_reel.gd`, `--bot=ad --ad=tycoon|city|choices`) with Godot Movie
+Maker and encoded by `tools/media/make_ads.sh`. The music beds are code-generated (`tools/media/make_ad_music.py`)
+placeholders until licensed tracks are chosen. English versions: record with `--lang=en`.
+
 ## What's new in 0.1.3-test3
 
 - **Chapters 4–6:** Growing Pains (register as an employer, hire, first payroll, cash forecast), The Big Contract
