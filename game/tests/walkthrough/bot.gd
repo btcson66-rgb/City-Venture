@@ -251,6 +251,8 @@ func _run() -> void:
 			await Walkthrough.new(self).run()
 		"trailer":
 			await Trailer.new(self).run()
+		"ad":
+			await AdReel.new(self).run()
 		"screens":
 			await _screens()
 		"minigames":
