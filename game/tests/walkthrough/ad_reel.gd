@@ -38,6 +38,9 @@ const TEXT := {
 	"t_team": ["Hire a team", "招兵買馬，組一支團隊"],
 	"t_factory": ["Open a factory", "開一間工廠"],
 	"t_hotel": ["Run a boutique hotel", "經營精品旅館"],
+	"t_street": ["Rent a studio by the river", "在河畔租下第一間小套房"],
+	"t_line": ["Your own production line", "擁有自己的生產線"],
+	"t_lobby": ["Guests check in. Reviews roll in.", "客人入住，好評湧進來"],
 	"t_build": ["Then build a tower", "最後——蓋一棟大樓"],
 	"t_done": ["With your name on it", "上面寫著你的名字"],
 	"t_end": ["From one coffee to a skyline", "從一杯咖啡，到一整片天際線"],
@@ -64,6 +67,8 @@ const TEXT := {
 	"x_pitch": ["Win the client with the right idea", "用對的創意，贏下客戶"],
 	"x_reno": ["Flip a flat. Pick the style.", "買下老公寓，決定翻新風格"],
 	"x_fail": ["Went bankrupt? Not game over.", "破產了？還不是 Game Over"],
+	"x_ship": ["Can your warehouse keep up?", "訂單爆量，倉庫跟得上嗎？"],
+	"x_money": ["Where does the money come from?", "資金從哪裡來？"],
 	"x_close": ["Close the month in the black", "撐過去，月結轉虧為盈"],
 	"x_end": ["No right answer. Only your story.", "沒有標準答案，只有你的故事"],
 }
@@ -166,6 +171,15 @@ func _zoom(focus: Vector2, z: float, drift := 0.05, dur := 3.0) -> void:
 	at.call(z)
 	_ztw = black.create_tween()
 	_ztw.tween_method(at, z, z + drift, dur)
+
+
+## Push in on the top modal's panel, wherever it sits.
+func _zoom_modal(z: float, dy := 0.0) -> void:
+	var m = UIRoot.top_modal()
+	var focus := Vector2(W / 2.0, H / 2.0)
+	if m is Modal and is_instance_valid(m.panel):
+		focus = m.panel.get_global_rect().get_center()
+	_zoom(focus + Vector2(0, dy), z)
 
 
 func _unzoom() -> void:
@@ -395,12 +409,14 @@ func _walk(dir: String, secs: float, run := true) -> void:
 func _street(district: String, x: float, hour: int) -> void:
 	Clock.advance_to(Clock.next_time_of_day(hour * 60))
 	_quiet()
+	GameState.mark_visited(district)
 	SceneRouter._enter("district", district, "metro", "right", Vector2(x, 352))
 	await bot.frames(2)
 	_quiet()
 
 
 func _inside(building: String, pos := Vector2(-1, -1)) -> void:
+	GameState.mark_visited(building)
 	SceneRouter._enter("interior", building, "door", "up", pos)
 	await bot.frames(2)
 	_quiet()
@@ -435,13 +451,17 @@ func _tycoon() -> void:
 		await bot.frames(1))
 	_say("t_arrive", "bottom")
 	_money_show(0, 30000, 1.2)
-	await bot.wait(3.0)
+	await bot.wait(2.6)
+	await _cut_to(func():
+		await _street("riverside", 200, 8))
+	_say("t_street", "bottom")
+	await _walk("right", 2.8)
 	# part-time barista shift, played on camera
 	await _cut_to(func():
 		await _inside("bloom_coffee")
 		await bot.wait(0.1))
 	var b: BaristaGame = await _mg_open(BaristaGame.new())
-	_zoom(Vector2(320, 165), 1.3)
+	_zoom_modal(1.3)
 	_say("t_job", "bottom")
 	await bot.wait(0.3)
 	await _press("ConfirmOrder")
@@ -488,7 +508,7 @@ func _tycoon() -> void:
 	for i in 3:
 		orders.append({"id": "O10%d" % i, "product": ["wireless_earbuds", "desk_lamp", "water_bottle"][i], "qty": 1, "customer": "Rin Tanaka"})
 	var pk: PackGame = await _mg_open(PackGame.new(orders))
-	_zoom(Vector2(320, 165), 1.3)
+	_zoom_modal(1.3)
 	_say("t_pack", "bottom")
 	await bot.wait(0.2)
 	await _press("Box_" + pk.need_box())
@@ -543,7 +563,20 @@ func _tycoon() -> void:
 		await _street("industrial", 360, 9))
 	_say("t_factory", "bottom")
 	_money_show(126400, 482000, 1.4)
-	await _walk("right", 2.6)
+	await _walk("right", 2.4)
+	Living.lease("unit12_factory")
+	Manufacturing.start()
+	_quiet()
+	await _cut_to(func():
+		await _inside("unit12_factory")
+		_hold_world())
+	_say("t_line", "bottom")
+	await bot.wait(1.6)
+	await _cut_to(func():
+		await _modal(ManufacturingUI.new())
+		_zoom_modal(1.3))
+	await bot.wait(1.8)
+	_close_modals()
 	# hotel at night
 	_fresh("Ad Hotel", 7103)
 	Company.register("Aster Hospitality", "hotel", "The Aster")
@@ -556,7 +589,21 @@ func _tycoon() -> void:
 		await _street("luxury_heights", 220, 21))
 	_say("t_hotel", "bottom")
 	_money_show(482000, 1250000, 1.4)
-	await _walk("right", 2.8, false)
+	await _walk("right", 2.4, false)
+	Clock.advance_to(Clock.next_time_of_day(10 * 60))
+	_quiet()
+	await _cut_to(func():
+		await _inside("the_aster")
+		_hold_world())
+	_say("t_lobby", "bottom")
+	await bot.wait(1.6)
+	await _cut_to(func():
+		var hu := HotelUI.new()
+		hu.page = "board"
+		await _modal(hu)
+		_zoom_modal(1.3))
+	await bot.wait(1.8)
+	_close_modals()
 	# real estate: the construction site, then the tower
 	_fresh("Ad Tower", 7104)
 	Company.register("Harlow Development", "real_estate", "Harlow")
@@ -573,23 +620,25 @@ func _tycoon() -> void:
 	Clock.advance_to(Clock.next_time_of_day(10 * 60))
 	_quiet()
 	await _cut_to(func():
+		GameState.mark_visited("residential")
 		SceneRouter._enter("district", "residential", "metro", "", Vector2(1340, 352))
 		await bot.frames(2)
 		_hold_world())
 	_say("t_build", "bottom")
-	await bot.wait(2.2)
+	await bot.wait(2.6)
 	Clock.advance_to(int(RealEstate.S()["project"]["due"]) + Clock.DAY)
 	Clock.advance_to(Clock.next_time_of_day(19 * 60))
 	_quiet()
 	await _cut_to(func():
 		_close_modals()
+		GameState.mark_visited("residential")
 		SceneRouter._enter("district", "residential", "metro", "", Vector2(1340, 352))
 		await bot.frames(2)
 		_quiet()
 		_hold_world(), true)
 	_say("t_done", "bottom")
 	_money_show(1250000, 3600000, 1.6)
-	await bot.wait(3.2)
+	await bot.wait(3.6)
 	_money_hide()
 
 
@@ -614,7 +663,7 @@ func _city() -> void:
 	await _walk("right", 3.0)
 	# district montage
 	_clear_caption()
-	var stops := [["shopping_street", 10], ["old_town", 12], ["harbor", 15], ["university", 11], ["financial", 18]]
+	var stops := [["shopping_street", 10], ["old_town", 12], ["harbor", 15], ["airport", 13], ["university", 11], ["civic_center", 16], ["financial", 18]]
 	var first := true
 	for s in stops:
 		await _cut_to(func():
@@ -641,7 +690,7 @@ func _city() -> void:
 		await bot.frames(1))
 	await _card("c_jobs", "", 1.3)
 	var b: BaristaGame = await _mg_open(BaristaGame.new())
-	_zoom(Vector2(320, 175), 1.35)
+	_zoom_modal(1.35)
 	black.modulate.a = 0.0
 	_tag("c_barista")
 	await _press("ConfirmOrder")
@@ -653,7 +702,7 @@ func _city() -> void:
 	_mg_close(b)
 	_clear_caption()
 	var ps: ParcelSortGame = await _mg_open(ParcelSortGame.new())
-	_zoom(Vector2(320, 175), 1.35)
+	_zoom_modal(1.35)
 	_tag("c_parcel")
 	for i in 3:
 		await bot.wait(0.35)
@@ -666,7 +715,7 @@ func _city() -> void:
 	_mg_close(ps)
 	_clear_caption()
 	var tc: TellerCashGame = await _mg_open(TellerCashGame.new())
-	_zoom(Vector2(320, 175), 1.35)
+	_zoom_modal(1.35)
 	_tag("c_teller")
 	var left := tc.amount
 	for d in TellerCashGame.NOTES:
@@ -678,7 +727,7 @@ func _city() -> void:
 	_mg_close(tc)
 	_clear_caption()
 	var ph: PhotoShootGame = await _mg_open(PhotoShootGame.new("desk_lamp"))
-	_zoom(Vector2(300, 175), 1.35)
+	_zoom_modal(1.35)
 	_tag("c_photo")
 	await bot.wait(0.3)
 	await _press("Backdrop_wood")
@@ -701,10 +750,13 @@ func _city() -> void:
 		_close_modals()
 		await _street("luxury_heights", 1000, 21))
 	_say("c_night", "bottom")
-	await _walk("left", 2.4, false)
+	await _walk("left", 2.6, false)
 	await _cut_to(func():
 		await _street("university", 640, 22))
-	await bot.wait(1.8)
+	await bot.wait(2.0)
+	await _cut_to(func():
+		await _street("harbor", 500, 22))
+	await _walk("right", 2.0, false)
 	# city map
 	await _cut_to(func():
 		var map := CityMapModal.new(false)
@@ -725,14 +777,20 @@ func _choices() -> void:
 	# the big contract: Crestline's flagship, then the offer
 	await _cut_to(func():
 		await _street("financial", 300, 17))
-	await _walk("right", 1.4)
+	_say("x_money", "bottom")
+	await _walk("right", 2.6)
 	await _cut_to(func():
 		await _inside("small_office")
 		var inst := EventEngine.trigger("crestline_big_offer", {})
 		await _modal(DecisionModal.new(inst))
-		_zoom(Vector2(320, 175), 1.45))
+		_zoom_modal(1.45))
 	_say("x_contract", "bottom")
 	await bot.wait(3.2)
+	await _cut_to(func():
+		_close_modals()
+		await _street("harbor", 700, 11))
+	_say("x_ship", "bottom")
+	await _walk("right", 2.8)
 	# hiring
 	Staff.register_employer()
 	for role in ["packer", "developer", "marketer"]:
@@ -743,7 +801,7 @@ func _choices() -> void:
 		_close_modals()
 		await _modal(CompanyOS.new("office"))
 		await _press("Tab_people")
-		_zoom(Vector2(330, 150), 1.5))
+		_zoom_modal(1.5))
 	_say("x_hire", "bottom")
 	await bot.wait(2.4)
 	for i in 3:
@@ -755,22 +813,22 @@ func _choices() -> void:
 	await _cut_to(func():
 		_close_modals()
 		await _inside("small_office")
-		_zoom(Vector2(320, 200), 1.0))
+		_unzoom())
 	_say("x_team", "bottom")
 	await bot.wait(2.6)
 	# money: the bank or an investor
 	await _cut_to(func():
 		await _inside("nexus_bank"))
-	await bot.wait(1.2)
+	await bot.wait(1.8)
 	await _cut_to(func():
 		await _modal(LoanModal.new(true))
-		_zoom(Vector2(320, 170), 1.4))
+		_zoom_modal(1.4))
 	_say("x_bank", "bottom")
 	await bot.wait(2.4)
 	await _cut_to(func():
 		_close_modals()
 		await _modal(FundraisingModal.new())
-		_zoom(Vector2(320, 150), 1.4))
+		_zoom_modal(1.4))
 	_say("x_investor", "bottom")
 	await bot.wait(2.6)
 	# month close
@@ -780,7 +838,7 @@ func _choices() -> void:
 		await _inside("small_office")
 		if not reps.is_empty():
 			await _modal(MonthCloseModal.new(reps[-1]))
-		_zoom(Vector2(320, 140), 1.5), true)
+		_zoom_modal(1.5), true)
 	_say("x_close", "bottom")
 	await bot.wait(2.8)
 	# a creative pitch (media agency)
@@ -795,7 +853,7 @@ func _choices() -> void:
 	await _cut_to(func():
 		_close_modals()
 		await _street("university", 1090, 21))
-	await bot.wait(1.4)
+	await _walk("left", 2.0, false)
 	var open_briefs: Array = Media.S()["briefs"].values().filter(func(x): return x["status"] == "open")
 	if not open_briefs.is_empty():
 		var brief: Dictionary = open_briefs[0]
@@ -806,7 +864,7 @@ func _choices() -> void:
 			await _modal(creative)
 			creative.start()
 			await bot.frames(2)
-			_zoom(Vector2(320, 150), 1.4))
+			_zoom_modal(1.4))
 		_say("x_pitch", "bottom")
 		await bot.wait(0.9)
 		for i in 3:
@@ -833,7 +891,7 @@ func _choices() -> void:
 		var re := RealEstateUI.new()
 		re.page = "properties"
 		await _modal(re)
-		_zoom(Vector2(320, 150), 1.4))
+		_zoom_modal(1.4))
 	_say("x_reno", "bottom")
 	await bot.wait(2.4)
 	# a rescue, not a game over
@@ -841,13 +899,13 @@ func _choices() -> void:
 	await _cut_to(func():
 		_close_modals()
 		await _inside("small_office")
-		Insolvency.begin(GameState.company_id(), I18n.t("three payrolls in a row went unpaid"))
+		Insolvency.begin(GameState.company_id(), "連續三次發不出薪水" if zh else "three payrolls in a row went unpaid")
 		await bot.frames(3)
 		if not (UIRoot.top_modal() is InsolvencyModal):
 			await _modal(InsolvencyModal.new())
 		for c in UIRoot.toast_box.get_children():
 			c.queue_free()
-		_zoom(Vector2(320, 160), 1.4))
+		_zoom_modal(1.4))
 	_say("x_fail", "bottom")
 	await bot.wait(3.0)
 	_close_modals()
